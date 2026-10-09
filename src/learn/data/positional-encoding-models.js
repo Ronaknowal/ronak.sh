@@ -112,11 +112,16 @@ export function cachePositionRead(settings, consistent = false) {
   };
 }
 export function positionMovementForward(model, points, positions, padding = []) {
+  return positionMovementForwardWithMasks(model, points, positions, { keyExcluded: padding, poolExcluded: padding });
+}
+// Validity describes which records are real. Permission and pooling remain
+// deliberate independent choices so the lesson can expose each failure route.
+export function positionMovementForwardWithMasks(model, points, positions, { keyExcluded = [], poolExcluded = [], validity = points.map(() => true) } = {}) {
   const {
     mode,
     state_dict: weights
   } = model;
-  if (!points.length || points.length > 50 || points.some(row => row.length !== 2 || row.some(value => !Number.isFinite(value))) || positions.length !== points.length || positions.some(value => !Number.isFinite(value)) || points.every((_, i) => padding[i])) throw new Error('Use 1–50 finite point records with at least one valid point.');
+  if (!points.length || points.length > 50 || points.some(row => row.length !== 2 || row.some(value => !Number.isFinite(value))) || positions.length !== points.length || positions.some(value => !Number.isFinite(value)) || [keyExcluded,poolExcluded].some(mask=>mask.length>points.length || mask.some(value=>typeof value !== 'boolean')) || validity.length!==points.length || validity.some(value=>typeof value!=='boolean') || points.every((_,i)=>keyExcluded[i]) || points.every((_,i)=>poolExcluded[i])) throw new Error('Use 1–50 finite records, matching validity and at least one permitted key and pooled record.');
   const linear = (row, prefix) => dense(row, weights[`${prefix}.weight`], weights[`${prefix}.bias`]);
   const norm = (row, prefix) => layerNorm(row, weights[`${prefix}.weight`], weights[`${prefix}.bias`]);
   const stem = points.map(([x, y]) => linear([2 * x - 1, 2 * y - 1], 'stem'));
@@ -131,7 +136,7 @@ export function positionMovementForward(model, points, positions, padding = []) 
     const key = mode === 'rope' ? rawKey.map((row, i) => rotate(row, positions[i])) : rawKey;
     const content = query.map(row => key.map(other => dot(row, other) / Math.sqrt(12)));
     const bias = positions.map(queryPosition => positions.map(keyPosition => mode === 'alibi' ? -alibiSlopes(2)[head] * Math.abs(queryPosition - keyPosition) : 0));
-    const attention = content.map((row, i) => softmax(row.map((item, j) => padding[j] ? -Infinity : item + bias[i][j])));
+    const attention = content.map((row, i) => softmax(row.map((item, j) => keyExcluded[j] ? -Infinity : item + bias[i][j])));
     const output = attention.map(row => value[0].map((_, coordinate) => dot(row, value.map(item => item[coordinate]))));
     return {
       rawQuery,
@@ -147,7 +152,7 @@ export function positionMovementForward(model, points, positions, padding = []) 
   });
   const context = state.map((row, i) => add(row, linear([...heads[0].output[i], ...heads[1].output[i]], 'attention_output')));
   const final = context.map(row => norm(add(row, linear(linear(norm(row, 'norm_feedforward'), 'feedforward.0').map(gelu), 'feedforward.2')), 'final_norm'));
-  const valid = final.filter((_, i) => !padding[i]);
+  const valid = final.filter((_, i) => !poolExcluded[i]);
   const pooled = final[0].map((_, coordinate) => mean(valid.map(row => row[coordinate])));
   const logits = linear(pooled, 'classifier');
   return {

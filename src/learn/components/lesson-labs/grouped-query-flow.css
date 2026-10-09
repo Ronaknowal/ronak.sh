@@ -1,0 +1,29 @@
+.gqa-lesson.lesson-flow { container: gqa-lesson / inline-size; overflow-wrap: break-word; }
+.gqa-lesson.lesson-flow .gqa-flow-drawing { background: transparent; border: 0; box-shadow: none; padding: 0; margin-inline: 0; }
+.gqa-flow-scroll, .gqa-array-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+.gqa-flow-scroll:focus-visible, .gqa-array-scroll:focus-visible { outline: 2px solid #e4b752; outline-offset: 4px; }
+.gqa-lesson .neural-equation:focus-visible { outline: 2px solid #e4b752; outline-offset: 4px; }
+.gqa-lesson .neural-equation .katex-display { text-align: left; }
+.gqa-flow-scroll svg { display: block; width: 100%; height: auto; font-family: var(--font-mono, ui-monospace, monospace); }
+.gqa-flow-scroll-hint { display: block; margin-block: .6rem; color: #b9b9b9; font-size: .88rem; line-height: 1.6; }
+.gqa-flow-array { margin-block: 1.25rem; min-width: 0; }
+.gqa-flow-array > span { display: block; color: var(--gqa-role); margin-bottom: .6rem; }
+.gqa-flow-array table { width: max-content; min-width: min(100%, 24rem); border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.gqa-flow-array th, .gqa-flow-array td { padding: .55rem .8rem; text-align: right; border: 1px solid var(--gqa-role); white-space: nowrap; }
+.gqa-flow-array th { text-align: left; font-weight: 450; color: #e8e6df; }
+.gqa-flow-array td[data-sign='1'] { background: #e4b75220; }
+.gqa-flow-array td[data-sign='-1'] { background: #77cddb20; }
+.gqa-independent-scenes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
+.gqa-flow-mobile { display: none; }
+.gqa-lesson .flow-controls input[type='range'] { accent-color: #e4b752; }
+.gqa-flow-select { display: grid; gap: .35rem; max-width: 100%; color: #b9b9b9; }
+.gqa-flow-select select { width: 100%; }
+.gqa-flow-toggle { display: flex; align-items: center; gap: .6rem; color: #b9b9b9; }
+.gqa-flow-toggle input { accent-color: #e4b752; }
+.gqa-lesson .lesson-code-source__pending button { font: inherit; color: #f0cd7c; background: #161616; border: 1px solid #5a5a5a; border-radius: 4px; padding: .3rem .7rem; min-height: 2.25rem; }
+.gqa-lesson .lesson-code-source__pending button:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+@container gqa-lesson (max-width: 950px) {
+  .gqa-independent-scenes { grid-template-columns: minmax(0, 1fr); }
+  .gqa-flow-desktop { display: none; }
+  .gqa-flow-mobile { display: block; }
+}

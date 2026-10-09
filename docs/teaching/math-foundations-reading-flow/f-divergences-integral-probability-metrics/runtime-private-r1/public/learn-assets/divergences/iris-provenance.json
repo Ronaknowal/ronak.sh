@@ -1,0 +1,17 @@
+{
+  "dataset": "UCI Iris, corrected bezdekIris.data",
+  "url": "https://archive.ics.uci.edu/static/public/53/iris.zip",
+  "doi": "10.24432/C56C76",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "sourceSha256": "0fed2a99db77ec533a62dc66894d3ec6df3b58b6a8f3cf4a6b47e4086b7f97dc",
+  "features": [
+    "sepal length",
+    "sepal width",
+    "petal length",
+    "petal width"
+  ],
+  "units": "centimetres",
+  "rowCount": 150,
+  "selection": "Corrected bezdekIris.data from UCI archive; species column is excluded from fitting."
+}

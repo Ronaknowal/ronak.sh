@@ -1,0 +1,423 @@
+{
+  "status": "COMPLETE_MANUSCRIPT_PENDING_AUTHOR_AND_INDEPENDENT_REVIEW",
+  "scope": "All19 accepted manuscript sections,66 drawing placements,12 named computational routes,three additional demonstration/adaptor sources and24 solved tasks are assembled; author and DIFFERENT whole-content review still required",
+  "current": {
+    "sections": [
+      {
+        "position": 1,
+        "title": "Build one observation from positive amounts"
+      },
+      {
+        "position": 2,
+        "title": "Amount is not probability or identity"
+      },
+      {
+        "position": 3,
+        "title": "Measure the disagreement before choosing a loss"
+      },
+      {
+        "position": 4,
+        "title": "Encode a new row with the dictionary held fixed"
+      },
+      {
+        "position": 5,
+        "title": "Change one coordinate, then reuse the arithmetic"
+      },
+      {
+        "position": 6,
+        "title": "Fit both factors and decide when to stop"
+      },
+      {
+        "position": 7,
+        "title": "Explain the multiplicative route"
+      },
+      {
+        "position": 8,
+        "title": "Why the upper bound gives a safe step"
+      },
+      {
+        "position": 9,
+        "title": "Initialize without silently importing PCA centering"
+      },
+      {
+        "position": 10,
+        "title": "Use the ordinary tools deliberately"
+      },
+      {
+        "position": 11,
+        "title": "Control penalties and incomplete observations"
+      },
+      {
+        "position": 12,
+        "title": "Inspect an actual digit dictionary and contribution"
+      },
+      {
+        "position": 13,
+        "title": "Separate a representation decision from its evaluation"
+      },
+      {
+        "position": 14,
+        "title": "Decide what a factorization can identify"
+      },
+      {
+        "position": 15,
+        "title": "When anchors help recover the dictionary"
+      },
+      {
+        "position": 16,
+        "title": "Change application assumptions explicitly"
+      },
+      {
+        "position": 17,
+        "title": "Update as rows arrive"
+      },
+      {
+        "position": 18,
+        "title": "Keep extra axes and recognize what is missing"
+      },
+      {
+        "position": 19,
+        "title": "Solve changed tasks, use files and follow useful next questions"
+      }
+    ],
+    "figures": [
+      "D01",
+      "D02",
+      "D03",
+      "D04",
+      "D05",
+      "D06",
+      "D07",
+      "D08",
+      "D09",
+      "D10",
+      "D11",
+      "D12",
+      "D13",
+      "D14",
+      "D15",
+      "D16",
+      "D17",
+      "D18",
+      "D19",
+      "D20",
+      "D21",
+      "D22",
+      "D23",
+      "D24",
+      "D25",
+      "D26",
+      "D27",
+      "D28",
+      "D29",
+      "D30",
+      "D31",
+      "D32",
+      "D33",
+      "D34",
+      "D35",
+      "D36",
+      "D37",
+      "D38",
+      "D39",
+      "D40",
+      "D41",
+      "D42",
+      "D43",
+      "D44",
+      "D45",
+      "D46",
+      "D47",
+      "D48",
+      "D49",
+      "D50",
+      "D51",
+      "D52",
+      "D53",
+      "D54",
+      "D55",
+      "D56",
+      "D57",
+      "D58",
+      "D59",
+      "D60",
+      "D61",
+      "D62",
+      "D63",
+      "D64",
+      "D65",
+      "D66"
+    ],
+    "practice": [
+      {
+        "id": "A",
+        "title": "preserve the observation when normalizing"
+      },
+      {
+        "id": "B",
+        "title": "one fixed-factor multiplicative update"
+      },
+      {
+        "id": "C",
+        "title": "distinguish a useful pattern from a biological source"
+      },
+      {
+        "id": "D",
+        "title": "remove an actual saved contribution"
+      },
+      {
+        "id": "E",
+        "title": "repair representation leakage"
+      },
+      {
+        "id": "F",
+        "title": "test joint convexity numerically"
+      },
+      {
+        "id": "G",
+        "title": "change the joint gain under three losses"
+      },
+      {
+        "id": "H",
+        "title": "an unchanged multiplicative coordinate can be wrong"
+      },
+      {
+        "id": "I",
+        "title": "use the fresh coordinate"
+      },
+      {
+        "id": "J",
+        "title": "clipping least squares is not NNLS"
+      },
+      {
+        "id": "K",
+        "title": "missing is not measured zero"
+      },
+      {
+        "id": "L",
+        "title": "another joint midpoint"
+      },
+      {
+        "id": "M",
+        "title": "a feasible ambiguity beyond scale"
+      },
+      {
+        "id": "N",
+        "title": "ordinary rank can be too small"
+      },
+      {
+        "id": "O",
+        "title": "reverse a raw ranking without changing anything observed"
+      },
+      {
+        "id": "P",
+        "title": "retain the stronger sign pair"
+      },
+      {
+        "id": "Q",
+        "title": "verify the auxiliary upper bound"
+      },
+      {
+        "id": "R",
+        "title": "a product-invariant rescaling can change the penalty"
+      },
+      {
+        "id": "S",
+        "title": "preserve global IDs when choosing anchors"
+      },
+      {
+        "id": "T",
+        "title": "query with fixed IDF"
+      },
+      {
+        "id": "U",
+        "title": "old statistics versus new encoding"
+      },
+      {
+        "id": "V",
+        "title": "a rejected next fit must preserve the old query contract"
+      },
+      {
+        "id": "W",
+        "title": "refuse a changed objective masquerading as the original"
+      },
+      {
+        "id": "X",
+        "title": "distinguish an address map from lost phase"
+      }
+    ],
+    "wholeSources": [
+      {
+        "name": "nmf_arrays.py",
+        "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+      },
+      {
+        "name": "nmf_coordinate.py",
+        "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+      },
+      {
+        "name": "nmf_nnls.py",
+        "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+      },
+      {
+        "name": "nmf_multiplicative.py",
+        "sha256": "56d22f18907297f5c1239e31e98071e6bde0d33c5d2c5a1cbc9aa92546c210f9"
+      },
+      {
+        "name": "nmf_beta_mm.py",
+        "sha256": "92fa782d807217caa2edb033b22ad9ccfab207d6497a7ef0cc15cd600eb81815"
+      },
+      {
+        "name": "nmf_initialization.py",
+        "sha256": "1b6696a60871fcc092e7e5d2232f2d0d09ff19b6eb964d9b35ba3c12e87b7cde"
+      },
+      {
+        "name": "ordinary_nmf_lifecycle.py",
+        "sha256": "bcb1705c424895be7629900ba26005629c7f0701faeb41c1f31c08980218122b"
+      },
+      {
+        "name": "nmf_penalties_masks.py",
+        "sha256": "66011064d265a75292ce62978ce7aa81cdb018b3f5ed2a1717266a0de483a3dd"
+      },
+      {
+        "name": "nmf_factor_alignment.py",
+        "sha256": "6505488fa7183cb8fb656629707eb9585b4228162764dd355ce8a5f4e60d257c"
+      },
+      {
+        "name": "nmf_saved_digits.py",
+        "sha256": "ff1e4f2d5f395745e4f1b824bcb7c33d5dcb6d0bc025c7c68d717ec1c268ce14"
+      },
+      {
+        "name": "nmf_digit_comparison.py",
+        "sha256": "36ac3ce284bfa74dd5ff25124327eca5c73b1e4d28603535df78961d448c1e0e"
+      },
+      {
+        "name": "nmf_anchors.py",
+        "sha256": "2dd67d6e1784525b356d39daf580f62499756319cd742dfba74b0bb418e74b30"
+      },
+      {
+        "name": "nmf_text_spectra.py",
+        "sha256": "2fbca92d514885bcf9b1d84dfd678437d09837a8fdad8ae7b9c02cfed3513c3b"
+      },
+      {
+        "name": "nmf_online.py",
+        "sha256": "44880c6ed798d3156d8f98dcc0d24df5794057f7d5f63889919d33838180db10"
+      },
+      {
+        "name": "nmf_axis_phase.py",
+        "sha256": "d3a454899bb6bc3946bf243f00264d571b488b21e7dadd174bad520cc10eb3b5"
+      }
+    ]
+  },
+  "template": {
+    "file": "lesson-template.md",
+    "sha256": "673ce4e5d47ab153741ace47cea202ee4a8a42a3257f081dadbfedaece67132f"
+  },
+  "manuscript": {
+    "file": "lesson.md",
+    "sha256": "3907412af22650e27be5a9f1f275864e4ee3f24d35a396b2e0028dfa10b0af83",
+    "bytes": 436503
+  },
+  "composer": {
+    "file": "compose-content.mjs",
+    "sha256": "9c2adef44bedcafbc9df19839a83d9b9e820bb7032aa4d69054976a14be1c91b"
+  },
+  "composedSections": [
+    {
+      "position": 10,
+      "manuscript": "ordinary-state-authoring/section-ten.md",
+      "packet": "ordinary-state-authoring/section-ten-handoff.json",
+      "wholeSources": [
+        "ordinary-state-authoring/ordinary_nmf_lifecycle.py"
+      ],
+      "sha256": "50171e1037c56cb3cf733a2c5135afb9eb5091cf27a85d4626f2441aff30149a"
+    },
+    {
+      "position": 11,
+      "manuscript": "stdout-presentation-correction/section-eleven.md",
+      "packet": "penalties-masks-authoring/section-eleven-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_penalties_masks.py"
+      ],
+      "outputPresentationSuccessor": "stdout-presentation-correction/correction.json",
+      "sha256": "bdb950a807ae06fad1b3118184a7694d1ce95d23b75d365b5001d7d62ac18afe"
+    },
+    {
+      "position": 12,
+      "manuscript": "precision-corrections/section-twelve.md",
+      "packet": "saved-digits-authoring/section-twelve-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_factor_alignment.py",
+        "content-programs/nmf_saved_digits.py"
+      ],
+      "precisionSuccessor": "precision-corrections/correction-handoff.json",
+      "sha256": "ee7a9ad333470c5e396f6422b1b0fa148f5b61bd25254504f8c39d4f9f7df2b6"
+    },
+    {
+      "position": 13,
+      "manuscript": "representation-evaluation-authoring/section-thirteen.md",
+      "packet": "representation-evaluation-authoring/section-thirteen-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_digit_comparison.py"
+      ],
+      "sha256": "822556372bebb79c36fc862b278abd419f146c64a83efb3304416a5fc9298eb6"
+    },
+    {
+      "position": 14,
+      "manuscript": "identifiability-authoring/section-fourteen.md",
+      "packet": "identifiability-authoring/section-fourteen-handoff.json",
+      "wholeSources": [],
+      "sha256": "ec3a6043ea9627f29cc9dfdf09e3485aa6b8ca302bc91298a0bf256728ff7854"
+    },
+    {
+      "position": 15,
+      "manuscript": "anchors-authoring/section-fifteen.md",
+      "packet": "anchors-authoring/section-fifteen-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_anchors.py"
+      ],
+      "sha256": "9ec632f4e07841213af497cf8d2553f1f814d8ee9c17c89be8ce7f855db5d990"
+    },
+    {
+      "position": 16,
+      "manuscript": "precision-corrections/section-sixteen.md",
+      "packet": "text-spectra-authoring/section-sixteen-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_text_spectra.py"
+      ],
+      "precisionSuccessor": "precision-corrections/correction-handoff.json",
+      "sha256": "1bbcf017f7c2fe9f19864ae426fc5ba99519507a15821f01f4d9163089fd9517"
+    },
+    {
+      "position": 17,
+      "manuscript": "online-surrogate-authoring/section-seventeen.md",
+      "packet": "online-surrogate-authoring/section-seventeen-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_online.py"
+      ],
+      "sha256": "f18fade18b4dca3d84bd3632db9df94502ec82f8edd94b2c13e97c53f2e48d50"
+    },
+    {
+      "position": 18,
+      "manuscript": "axis-phase-authoring/section-eighteen.md",
+      "packet": "axis-phase-authoring/section-eighteen-handoff.json",
+      "wholeSources": [
+        "axis-phase-authoring/nmf_axis_phase.py"
+      ],
+      "sha256": "d894dcb2cf95e314d86448d4a6657eb9650beec44dbee54ba3a244a72880006d"
+    },
+    {
+      "position": 19,
+      "manuscript": "practice-resources-authoring/section-nineteen.md",
+      "packet": "practice-resources-authoring/section-nineteen-handoff.json",
+      "wholeSources": [],
+      "sha256": "b6b2a6dd344d1a009f69c08f9de7089a973b197fcf3466117dfe2ea5bcdc925c"
+    }
+  ],
+  "limitations": [
+    "No runtime figures or labs implemented",
+    "Author continuous reading and DIFFERENT whole-content review/content acceptance remain distinct from assembly",
+    "All19 sections are assembled; no remaining-section range is implied",
+    "Figure markers refer to the accepted drawing contracts plus explicit content-phase additions, not painted native evidence"
+  ]
+}

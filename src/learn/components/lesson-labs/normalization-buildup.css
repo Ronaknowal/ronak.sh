@@ -1,0 +1,118 @@
+/* Normalization figures read as part of the text (see lesson-flow.css): no card frame or title.
+   Vocabulary: cyan supplied, violet computed, amber learned, orange gradients,
+   thick white outline for the element being followed. */
+.normalization-lesson {
+  --norm-supplied: #7dd5e9;
+  --norm-computed: #c7a5ee;
+  --norm-learned: #e4b752;
+  --norm-gradient: #f0a57f;
+  --norm-muted: #b9b9b9;
+  --norm-line: #3a3a3a;
+}
+.normalization-buildup { color: #e2e2e2; }
+.normalization-key { margin: 0 0 .9rem; color: var(--norm-muted); font-size: .92rem; line-height: 1.7; }
+.normalization-panel-label { margin: 0 0 .35rem; color: #ededed; font-weight: 600; font-size: .92rem; line-height: 1.5; }
+.normalization-panel-note { margin: .4rem 0 0; color: var(--norm-muted); font-size: .86rem; line-height: 1.6; }
+
+/* Tags that say where a number comes from. */
+.normalization-kind { display: inline-block; padding: 0 .45rem; border: 1px solid; border-radius: 999px; font-size: .74rem; line-height: 1.6; white-space: nowrap; }
+.normalization-kind-supplied { color: var(--norm-supplied); border-color: var(--norm-supplied); }
+.normalization-kind-computed { color: var(--norm-computed); border-color: var(--norm-computed); border-style: dashed; }
+.normalization-kind-learned { color: var(--norm-learned); border-color: var(--norm-learned); }
+
+/* Layer anatomy: five stages connected by arrows. Stage boxes are operations in the drawing. */
+.normalization-network-flow { display: flex; flex-direction: column; gap: 1.6rem; margin: 0; padding: 0; list-style: none; }
+.normalization-network-stage { position: relative; display: flex; flex-direction: column; gap: .5rem; padding: .7rem; border: 1px solid #555; border-radius: 4px; min-width: 0; font-size: .9rem; overflow-wrap: break-word; }
+.normalization-network-stage + .normalization-network-stage::before { content: '↓'; position: absolute; top: -1.55rem; left: 50%; transform: translateX(-50%); color: #bdbdbd; font-size: 1.2rem; line-height: 1.5rem; }
+.normalization-stage-head { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; }
+.normalization-stage-head > strong { color: #ededed; }
+.normalization-anatomy-steps { display: grid; gap: .35rem; margin: 0; padding: .4rem 0; }
+.normalization-anatomy-steps > div { display: flex; flex-wrap: wrap; gap: .1rem .7rem; }
+.normalization-anatomy-steps dt { min-width: 8.5em; color: var(--norm-computed); }
+.normalization-anatomy-steps dd { margin: 0; font-variant-numeric: tabular-nums; }
+.normalization-network-values { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5em), 1fr)); gap: .3rem; }
+.normalization-network-values > span { display: flex; flex-direction: column; border: 1px solid #555; border-radius: 3px; padding: .25rem .4rem; }
+.normalization-network-values.is-supplied > span { border-color: var(--norm-supplied); }
+.normalization-network-values.is-computed > span { border-color: var(--norm-computed); border-style: dashed; }
+.normalization-network-values small { color: var(--norm-muted); }
+.normalization-network-values strong { color: #f1f1f1; font-variant-numeric: tabular-nums; }
+
+/* Scale drift and learned scale/shift: one box per example, identified by its letter. */
+.normalization-drift, .normalization-affine { display: grid; gap: .9rem; }
+.normalization-drift-row, .normalization-affine-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5em), 1fr)); gap: .5rem; align-items: stretch; }
+.normalization-drift-row > .normalization-drift-label, .normalization-affine-row > .normalization-drift-label { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; column-gap: .6rem; }
+.normalization-drift-label { display: flex; flex-direction: column; gap: .2rem; font-size: .9rem; min-width: 0; }
+.normalization-drift-label span { color: var(--norm-muted); }
+.normalization-drift-cell { display: flex; flex-direction: column; gap: .15rem; padding: .45rem; border: 1px solid #555; border-radius: 4px; font-size: .84rem; min-width: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.normalization-drift-row.is-flat .normalization-drift-cell { border-style: dashed; color: #c9c9c9; }
+.normalization-drift-chip { font-weight: 700; color: #f1f1f1; }
+.normalization-affine-cell { padding: .45rem; border: 1px dashed var(--norm-computed); border-radius: 4px; color: #f1f1f1; font-size: .86rem; font-variant-numeric: tabular-nums; text-align: center; align-self: center; min-width: 0; }
+.normalization-nowrap { white-space: nowrap; }
+
+/* One small layer: which cells share a group. */
+.normalization-pool-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .9rem; }
+.normalization-pool-table th, .normalization-pool-table td { padding: .3rem .4rem; border: 1px solid var(--norm-line); text-align: center; }
+.normalization-pool-table thead th { color: var(--norm-muted); font-weight: 500; }
+.normalization-pool-table .normalization-pool-hit { outline: 2px solid #f4f4f4; outline-offset: -2px; color: #fff; font-weight: 600; }
+.normalization-pool-mark { color: #f4f4f4; font-size: .7rem; }
+
+/* Four grouping rules on one tensor. Group shading only repeats the printed tag. */
+.normalization-grouping-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19em), 1fr)); gap: 1.4rem; }
+.normalization-grouping-panel { min-width: 0; }
+.normalization-grouping-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.normalization-grouping-examples > div + div { border-left: 2px dashed #6b6b6b; padding-left: .6rem; }
+.normalization-grouping-example { display: block; font-size: .8rem; color: var(--norm-muted); margin-bottom: .25rem; }
+.normalization-grouping-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem; margin-bottom: .25rem; }
+.normalization-group-cell { display: flex; flex-direction: column; align-items: center; padding: .2rem .1rem; border: 1.5px solid var(--group); border-radius: 3px; background: var(--group-soft); min-width: 0; }
+.normalization-group-cell strong { color: #f1f1f1; font-size: .9rem; }
+.normalization-group-cell small { color: #d6d6d6; font-size: .7rem; white-space: nowrap; }
+.normalization-group-0 { --group: #8e8e8e; --group-soft: #262626; }
+.normalization-group-1 { --group: #b5b5b5; --group-soft: #1b1b1b; }
+.normalization-group-2 { --group: #6f6f6f; --group-soft: #303030; }
+.normalization-group-3 { --group: #d0d0d0; --group-soft: #141414; }
+.normalization-group-striped { background: repeating-linear-gradient(135deg, var(--group-soft) 0 5px, #101010 5px 9px); border-style: dashed; }
+
+/* BatchNorm's two modes. Step boxes are operations; the selected mode's border is white. */
+.normalization-mode-panel { display: flex; flex-direction: column; gap: .35rem; min-width: 0; padding-top: .4rem; border-top: 1px solid var(--norm-line); }
+.normalization-mode-panel.is-current { border-top: 3px solid #f4f4f4; }
+.normalization-mode-name { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0 0 .3rem; color: #ededed; font-weight: 600; }
+.normalization-mode-current { padding: 0 .45rem; border: 1px solid #f4f4f4; border-radius: 999px; font-size: .74rem; font-weight: 500; }
+.normalization-mode-step { display: flex; flex-direction: column; gap: .1rem; padding: .45rem .55rem; border: 1px solid #555; border-radius: 3px; font-size: .88rem; font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
+.normalization-mode-step strong { color: #e8e8e8; font-weight: 600; }
+.normalization-mode-step.is-supplied { border-color: var(--norm-supplied); }
+.normalization-mode-step.is-computed { border-color: var(--norm-computed); border-style: dashed; }
+.normalization-mode-step.is-learned { border-color: var(--norm-learned); }
+.normalization-mode-step.is-used { outline: 3px solid #f4f4f4; outline-offset: 1px; }
+.normalization-mode-step.is-unused { border-style: dashed; color: #8a8a8a; }
+.normalization-mode-step.is-unused strong { color: #8a8a8a; text-decoration: line-through; }
+.normalization-mode-arrow { align-self: center; color: #bcbcbc; line-height: 1; }
+.normalization-mode-write { display: flex; gap: .55rem; margin-top: .5rem; padding: .5rem .55rem; border: 1px dashed #9a9a9a; border-radius: 3px; color: #d4d4d4; font-size: .86rem; font-variant-numeric: tabular-nums; }
+.normalization-mode-write > span { font-size: 1.1rem; line-height: 1.2; }
+.normalization-mode-write > div { display: flex; flex-direction: column; gap: .15rem; min-width: 0; overflow-wrap: break-word; }
+.normalization-mode-write.is-off { color: var(--norm-muted); }
+
+/* Three backward routes: every bar is a gradient contribution, drawn orange on one shared scale. */
+.normalization-paths { display: grid; gap: 1.1rem; }
+.normalization-paths-input > strong { display: block; margin-bottom: .3rem; }
+.normalization-path-row { display: flex; flex-wrap: wrap; gap: .2rem .5rem; align-items: center; font-size: .86rem; margin-bottom: .35rem; }
+.normalization-path-row > span:first-child { flex: 1 0 100%; min-width: 0; color: #d6d6d6; }
+.normalization-path-row > .normalization-path-track { flex: 1 1 8em; }
+.normalization-path-row > span:last-child { flex: 0 0 4em; text-align: right; font-variant-numeric: tabular-nums; }
+.normalization-path-track { position: relative; height: .8rem; background: #1c1c1c; }
+.normalization-path-track::after { content: ''; position: absolute; left: 50%; top: -3px; bottom: -3px; border-left: 1px solid #8a8a8a; }
+.normalization-path-track > span { position: absolute; top: 0; bottom: 0; background: var(--norm-gradient); }
+.normalization-path-total { margin-top: .25rem; font-weight: 700; border-top: 1px solid var(--norm-line); padding-top: .2rem; }
+
+/* The experiment's network, left to right; stacks when narrow. */
+.normalization-model-strip { display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; margin: 0; padding: 0; list-style: none; }
+.normalization-model-strip > li { position: relative; display: flex; flex-direction: column; gap: .1rem; flex: 1 1 8rem; padding: .45rem .6rem; border: 1px solid #555; border-radius: 4px; font-size: .86rem; min-width: 0; }
+.normalization-model-strip > li + li::before { content: '→'; position: absolute; left: -1.3rem; top: 50%; transform: translateY(-50%); color: #bcbcbc; }
+.normalization-model-strip > li span { color: var(--norm-muted); }
+.normalization-model-strip > li.is-supplied { border-color: var(--norm-supplied); }
+.normalization-model-strip > li.is-learned { border-color: var(--norm-learned); }
+.normalization-model-strip > li.is-operation { border-color: #e8e8e8; }
+@container (max-width: 40rem) {
+  .normalization-model-strip { flex-direction: column; gap: 1.4rem; }
+  .normalization-model-strip > li { flex: 0 0 auto; }
+  .normalization-model-strip > li + li::before { content: '↓'; left: 50%; top: -1.3rem; transform: translateX(-50%); }
+}

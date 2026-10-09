@@ -1,0 +1,253 @@
+{
+  "status": "PASS_NEW_N11_ANCHOR_SOURCE_AND_ONE_MAIN",
+  "inputs": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_anchors.py",
+      "bytes": 5319,
+      "sha256": "2dd67d6e1784525b356d39daf580f62499756319cd742dfba74b0bb418e74b30"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_nnls.py",
+      "bytes": 2256,
+      "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+      "bytes": 9109,
+      "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+    }
+  ],
+  "checks": [
+    {
+      "name": "default first ID0",
+      "passed": true
+    },
+    {
+      "name": "default first squared norm1",
+      "passed": true
+    },
+    {
+      "name": "independent first projected vectors",
+      "passed": true
+    },
+    {
+      "name": "default both pure IDs",
+      "passed": true
+    },
+    {
+      "name": "second squared norm1",
+      "passed": true
+    },
+    {
+      "name": "zero mapping retained",
+      "passed": true
+    },
+    {
+      "name": "fullspan residual zero",
+      "passed": true
+    },
+    {
+      "name": "input untouched",
+      "passed": true
+    },
+    {
+      "name": "dictionary readonly",
+      "passed": true
+    },
+    {
+      "name": "dictionary finite",
+      "passed": true
+    },
+    {
+      "name": "normalized_observations readonly",
+      "passed": true
+    },
+    {
+      "name": "normalized_observations finite",
+      "passed": true
+    },
+    {
+      "name": "residual readonly",
+      "passed": true
+    },
+    {
+      "name": "residual finite",
+      "passed": true
+    },
+    {
+      "name": "directions readonly",
+      "passed": true
+    },
+    {
+      "name": "directions finite",
+      "passed": true
+    },
+    {
+      "name": "first independent QR comparison",
+      "passed": true
+    },
+    {
+      "name": "full independent QR comparison",
+      "passed": true
+    },
+    {
+      "name": "global sourceIDs duplicate stable",
+      "passed": true
+    },
+    {
+      "name": "global IDs independent of physical order [4, 3, 2, 1, 0]",
+      "passed": true
+    },
+    {
+      "name": "global IDs independent of physical order [2, 0, 4, 1, 3]",
+      "passed": true
+    },
+    {
+      "name": "ties use original normalized rows not raw intensity",
+      "passed": true
+    },
+    {
+      "name": "signed residual legitimate",
+      "passed": true
+    },
+    {
+      "name": "signed independent projection",
+      "passed": true
+    },
+    {
+      "name": "residual orthogonal selected direction",
+      "passed": true
+    },
+    {
+      "name": "rank beyond features",
+      "passed": true
+    },
+    {
+      "name": "duplicate cannot supply rank",
+      "passed": true
+    },
+    {
+      "name": "allzero support refused",
+      "passed": true
+    },
+    {
+      "name": "nearparallel declared tolerance refusal",
+      "passed": true
+    },
+    {
+      "name": "above threshold directions selected",
+      "passed": true
+    },
+    {
+      "name": "negative",
+      "passed": true
+    },
+    {
+      "name": "nonfinite",
+      "passed": true
+    },
+    {
+      "name": "mass overflow",
+      "passed": true
+    },
+    {
+      "name": "duplicateIDs",
+      "passed": true
+    },
+    {
+      "name": "missingIDs",
+      "passed": true
+    },
+    {
+      "name": "boolID",
+      "passed": true
+    },
+    {
+      "name": "negativeID",
+      "passed": true
+    },
+    {
+      "name": "boolrank",
+      "passed": true
+    },
+    {
+      "name": "bad tolerance",
+      "passed": true
+    },
+    {
+      "name": "nan tolerance",
+      "passed": true
+    },
+    {
+      "name": "independent3D true anchor set",
+      "passed": true
+    },
+    {
+      "name": "3D projection versus QR",
+      "passed": true
+    },
+    {
+      "name": "3D directions orthonormal",
+      "passed": true
+    },
+    {
+      "name": "public NNLS original-unit reconstruction",
+      "passed": true
+    },
+    {
+      "name": "public NNLS normzero",
+      "passed": true
+    },
+    {
+      "name": "public NNLS zero row amounts",
+      "passed": true
+    },
+    {
+      "name": "3D source input remains original",
+      "passed": true
+    },
+    {
+      "name": "one new main exit0",
+      "passed": true
+    },
+    {
+      "name": "one new main empty stderr",
+      "passed": true
+    },
+    {
+      "name": "main retains actual values",
+      "passed": true
+    },
+    {
+      "name": "all source conserved",
+      "passed": true
+    }
+  ],
+  "main": {
+    "returncode": 0,
+    "stdout": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+      "bytes": 496,
+      "sha256": "8bc8941bab29409882962876c722b685e1ef15dbb4783b9d12c3a99c5aa457bb"
+    },
+    "stderr": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "historicalReplay": false,
+  "ordinaryPrimitives": "New reducedQR and bounded public NNLS encoding used; no NMF/PCA model fit or old numerical campaign.",
+  "tieInterpretation": "Original norms are of normalized observations supplied to selection, matching primary M after its normalization; raw observation gain does not break ties.",
+  "limits": "Finite new author witnesses only, not assumption certification/noisy recovery/native/whole-content acceptance."
+}

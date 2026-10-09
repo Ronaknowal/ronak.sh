@@ -1,17 +1,36 @@
-.normalization-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin: 20px 0; }
-.normalization-channel { margin-bottom: 18px; }
-.normalization-channel > strong { display: block; margin-bottom: 8px; }
-.normalization-channel > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.normalization-cell { padding: 8px; border: 2px solid #354a40; min-width: 0; }
-.normalization-cell.normalization-member { border-color: #e4b752; }
-.normalization-cell button { padding: 6px; width: 100%; font-size: 11px; }
-.normalization-cell label { font-size: 11px; margin-top: 7px; }
-.normalization-cell p { font-size: 12px; margin: 8px 0 0; }
-.normalization-gradient-path { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin: 22px 0; }
-.normalization-gradient-path > div { border-left: 2px solid #8fc9b5; padding: 8px 12px; line-height: 1.7; }
-.normalization-vector { max-width: 380px; }
+/* Normalization labs: visual first, controls in one row beneath (see lesson-flow.css). */
+
+/* The membership lab's tensor: each cell is a button showing its value and its normalized output. */
+.normalization-tensor { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.normalization-tensor-example { min-width: 0; }
+.normalization-tensor-example + .normalization-tensor-example { border-left: 2px dashed #6b6b6b; padding-left: .8rem; }
+.normalization-tensor-row { display: grid; grid-template-columns: 2.6rem repeat(2, minmax(0, 1fr)); gap: .3rem; align-items: center; margin-bottom: .3rem; }
+.normalization-tensor-channel { color: #b9b9b9; font-size: .8rem; }
+.lesson-flow .normalization-tensor-cell { display: flex; flex-direction: column; align-items: center; gap: .05rem; min-width: 0; padding: .3rem .2rem; font: inherit; color: #e8e8e8; background: #141414; border: 1px solid #555; border-radius: 3px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.lesson-flow .normalization-tensor-cell strong { color: #7dd5e9; font-size: .95rem; }
+.lesson-flow .normalization-tensor-cell small { color: #c7a5ee; font-size: .75rem; }
+.lesson-flow .normalization-tensor-cell.is-member { border: 2px solid #b5b5b5; background: #232323; }
+.lesson-flow .normalization-tensor-cell.is-selected { outline: 3px solid #f4f4f4; outline-offset: 1px; }
+.lesson-flow .normalization-tensor-cell.is-changed strong { text-decoration: underline; }
+.lesson-flow .normalization-tensor-cell:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+
+/* Geometry plane. */
+.normalization-vector { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
+.normalization-vector text { font-size: 13px; }
+.normalization-svg-note { fill: #b9b9b9; }
+.normalization-svg-input { fill: #7dd5e9; }
+.normalization-svg-computed { fill: #c7a5ee; }
+
+/* Dependency graph for the gradient lab. */
 .normalization-graph-scroll { max-width: 100%; overflow-x: auto; }
 .normalization-dependency-graph { display: block; width: 380px; height: 455px; margin: auto; }
-@media(max-width: 780px) { .normalization-examples { grid-template-columns: minmax(0, 1fr); } }
 
-.normalization-residual-graph { display: block; width: 100%; max-width: 340px; height: auto; margin: auto; }
+/* Pre-norm versus post-norm drawings. */
+.normalization-residual { margin: 0; min-width: 0; }
+.normalization-residual-graph { display: block; width: 100%; max-width: 320px; height: auto; margin: auto; }
+.lesson-flow .normalization-residual > figcaption { color: #ededed; font-weight: 600; margin: 0 0 .4rem; }
+
+@container (max-width: 34rem) {
+  .normalization-tensor { grid-template-columns: minmax(0, 1fr); }
+  .normalization-tensor-example + .normalization-tensor-example { border-left: 0; padding-left: 0; border-top: 2px dashed #6b6b6b; padding-top: .6rem; }
+}

@@ -2,6 +2,10 @@ import fs from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 
 const id = 'multi-head-latent-attention-mla', draft = `docs/teaching/drafts/${id}`, destination = `public/learn-assets/${id}`;
+const authoredSource=`src/learn/data/topics/${id}.jsx`;
+if (fs.existsSync(authoredSource) && fs.readFileSync(authoredSource,'utf8').includes('lesson-flow')) {
+  throw new Error('The MLA lesson is now independently authored in reading-flow mode. This historical prepared renderer must not overwrite its source or retained scientific assets.');
+}
 fs.mkdirSync(destination, { recursive: true });
 const downloads = ['author-calculations.py', 'author-results.json', 'data-provenance.md', 'forecast-model.json', 'mechanism-calculations.py', 'mechanism-fixtures.json', 'mla_sdpa_bridge.py', 'movement_libras.data', 'movement_libras.names'];
 for (const file of downloads) fs.copyFileSync(`${draft}/${file}`, `${destination}/${file}`);

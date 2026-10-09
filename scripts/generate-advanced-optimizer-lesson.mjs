@@ -1,3 +1,7 @@
+// Stop before every historical scientific writer: this revision is presentation-only.
+if (process.argv.length !== 3 || !['--check','--preview','--write-reading-flow'].includes(process.argv[2])) throw new Error('Use --check, --preview or --write-reading-flow; original scientific outputs are preserved.');
+await import('./lib/advanced-optimizer-reading-flow-renderer.mjs');
+process.exit(0);
 import fs from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id = 'advanced-optimizers-lion-sophia-prodigy-schedule-free';

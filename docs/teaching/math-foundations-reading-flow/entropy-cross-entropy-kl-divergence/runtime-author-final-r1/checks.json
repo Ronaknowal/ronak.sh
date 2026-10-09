@@ -1,0 +1,317 @@
+{
+  "status": "PASS bounded continuation",
+  "build": {
+    "path": "scratch/entropy-private-reader/production/source-bindings.json",
+    "sha256": "8267339ce92a4ac0493672b76e31dafd3d4350e7ab3ab88013ac2dd189e6d1a1"
+  },
+  "checks": [
+    {
+      "name": "actual clipboard normalized platform newlines entropy_bernoulli.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "d28fbfc365c00ff5ff8894ce49a9161b839cef6f61729320e9be3dbc31093e29",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_blocks.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "c350cc2860c8ceae9f2b0b878eb07430a804e76b37a6a64bacc9d600eb97088a",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_coin.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "3ed8990146ff30a1012b1ea8aa7082345c3370ad2109476154d6a50097c9a6e3",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_conditional.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "eb612681a243677383ce07b1d06bf698ce0ad2fc4e1abc93d8d4fdcbc2efdc90",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_continuous.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "537338dcfed092b66685f6a5637460b85d4d5a7f05af081234893b695bf4d682",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_evaluation.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "313c422d72480eef439f33e329bac70ba152bb8e25f69a4a89f62466ece8150b",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_logits.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "e3d73b3fadf53a6cfbbe380bee0d867d8c9d62085d313c6a79d012df1e09797e",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_maximum.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "0d9c5f638c424613d13ad7bad1f7189303bf05d430c163fc4407bfc4daa2c014",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_prefix.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "e4b4fb4dfc210f9918631bcbeec28425695dd950922acce1a3ad5b8470b459ec",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_support.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "92e20737d064ac3056aff6d1034ecf9bc614f06e953a64958aa3ec5b4339ae7b",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines entropy_torch.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "fdce63715bb9446d3c4607241e967d3472651001ef8fe9940cea3b350fd69f31",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines information_library.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "b990bebbf52d1d3e1e27119c5b8be436497b84d81e936dcd41b55a62de67e960",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "actual clipboard normalized platform newlines penguins_log_loss.py",
+      "pass": true,
+      "detail": {
+        "sourceSha256": "a591e009d34a1f2d088a6f274c4afbf096c7d5191611b836ac05a4b2c7f47eb0",
+        "clipboardCRLF": true
+      }
+    },
+    {
+      "name": "selected optimum gap within floating point tolerance",
+      "pass": true,
+      "detail": {
+        "gap": "4.67e-32",
+        "tolerance": 2e-14
+      }
+    },
+    {
+      "name": "390 root 16 contains document",
+      "pass": true
+    },
+    {
+      "name": "390 root 32 contains document",
+      "pass": true
+    },
+    {
+      "name": "390 root 16 contains document",
+      "pass": true
+    },
+    {
+      "name": "encoded stream precedes tree",
+      "pass": 4
+    },
+    {
+      "name": "768 root32 constrained Reader contains document",
+      "pass": true
+    },
+    {
+      "name": "enlarged drawing keyboard scroll",
+      "pass": true
+    },
+    {
+      "name": "actual enlarged SVG text preserved",
+      "pass": true,
+      "detail": 30
+    },
+    {
+      "name": "endpoint no finite eta",
+      "pass": true
+    },
+    {
+      "name": "root font restored",
+      "pass": true
+    },
+    {
+      "name": "no browser errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "images": [
+    {
+      "name": "decoder-stream-phone",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "root": "16px",
+      "contentWidth": 390,
+      "target": null
+    },
+    {
+      "name": "cross-entropy-curve-phone",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "root": "16px",
+      "contentWidth": 390,
+      "target": "Cross-entropy curve for P .8 .2, bounded below by source entropy. Endpoint costs diverge.; scroll horizontally if needed"
+    },
+    {
+      "name": "soft-target-costs-phone",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "root": "16px",
+      "contentWidth": 390,
+      "target": null
+    },
+    {
+      "name": "unequal-context-joint-phone",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "root": "16px",
+      "contentWidth": 390,
+      "target": "Joint probability rectangle splits into context rows and then outcomes, preserving area; scroll horizontally if needed"
+    },
+    {
+      "name": "unequal-context-costs-phone",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "root": "16px",
+      "contentWidth": 390,
+      "target": null
+    },
+    {
+      "name": "uniform-metre-phone",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "root": "16px",
+      "contentWidth": 390,
+      "target": "Uniform density in m. Width 0.25, density 4; highlighted middle half has probability one half.; scroll horizontally if needed"
+    },
+    {
+      "name": "uniform-centimetre-phone",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "root": "16px",
+      "contentWidth": 390,
+      "target": "Uniform density in cm. Width 25, density 0.04; highlighted middle half has probability one half.; scroll horizontally if needed"
+    },
+    {
+      "name": "base-measure-cells-phone",
+      "viewport": {
+        "width": 390,
+        "height": 1000
+      },
+      "root": "16px",
+      "contentWidth": 390,
+      "target": "Base weights one two one represented by one subslot, two middle subslots and one subslot, while retaining three outcome identities; scroll horizontally if needed"
+    },
+    {
+      "name": "or-cells-root32-left",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "root": "32px",
+      "contentWidth": 386,
+      "target": "Four equally likely fair-bit input cells; OR is zero only at A zero B zero; scroll horizontally if needed"
+    },
+    {
+      "name": "or-cells-root32-right",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "root": "32px",
+      "contentWidth": 386,
+      "target": "Four equally likely fair-bit input cells; OR is zero only at A zero B zero; scroll horizontally if needed"
+    },
+    {
+      "name": "underflow-root32-left",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "root": "32px",
+      "contentWidth": 386,
+      "target": "Log probability minus two thousand branches to direct finite loss or underflowed probability zero; scroll horizontally if needed"
+    },
+    {
+      "name": "batch-loss-join-root32-right",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "root": "32px",
+      "contentWidth": 386,
+      "target": "Each batch row points to its selected class target, then row losses join the batch mean; scroll horizontally if needed"
+    },
+    {
+      "name": "extreme-logits-root32",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "root": "32px",
+      "contentWidth": 386,
+      "target": "Three class scores each subtract the same maximum, exponentiate, and join one normalizer; scroll horizontally if needed"
+    },
+    {
+      "name": "normal-density-unit-root32",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "root": "32px",
+      "contentWidth": 386,
+      "target": "Two Gaussian densities transformed by scale 100, with a selected interval corresponding to original x from one half to one; scroll horizontally if needed"
+    },
+    {
+      "name": "maximum-entropy-endpoint-root32",
+      "viewport": {
+        "width": 768,
+        "height": 1000
+      },
+      "root": "32px",
+      "contentWidth": 386,
+      "target": "Equilateral probability simplex. Vertices are certain count outcomes; barycentric coordinates are probabilities.; scroll horizontally if needed"
+    }
+  ],
+  "errors": [],
+  "qualification": "Windows clipboard is compared after CRLF/LF normalization. Prior r1 delivery and interaction records are preserved, including exact-string roundoff and genuine old geometry failures. Native screenshots require personal reading; this receipt does not certify unobserved regions."
+}

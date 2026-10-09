@@ -1,0 +1,32 @@
+{
+  "status": "AUTHOR-READY; DIFFERENT whole-runtime review required; no implementation promotion",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-source-r1.json",
+    "sha256": "6a8dd38fe0afd9fff13b88071ac21b15c4324e56a5841bbee832137b5aaab7f5",
+    "bytes": 477777
+  },
+  "evidence": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-evidence-r1.json",
+    "sha256": "2e0aca4da615bb2e4a7c5a05e3e70065e3beba4d5c2b21f3c7c938b3a75fa8e6",
+    "bytes": 26461
+  },
+  "authorReview": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-author-review-r1.md",
+    "sha256": "dfa6574ed1f26dc24c0e8d15570710b1a99f8c0f4e9678cb4100face326c2deb",
+    "bytes": 17237
+  },
+  "acceptedContent": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-accepted-root-r3.json",
+    "sha256": "dfab564524602d1ba30fdb37b2d41e1e90f2a07c5e4d252267a704fd5e0e4ae0",
+    "bytes": 19031
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5772/",
+    "sessionId": 98664,
+    "cwd": "scratch/entropy-private-reader",
+    "command": "node ../../node_modules/vite/bin/vite.js preview --outDir production --host 127.0.0.1 --port 5772 --strictPort"
+  },
+  "phaseBoundary": "Private only; Root owns canonical integration and central state",
+  "next": "DIFFERENT review of entire frozen subject, one consolidated correction set if needed, SAME closure, then Root normal integration",
+  "scientificMainsReplayed": 0
+}

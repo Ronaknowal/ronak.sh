@@ -1,0 +1,44 @@
+{
+  "status": "REACHED_NEW_MAIN_THEN_FAILED_KL_UNDERFLOW",
+  "tool": "4d631a",
+  "exitCode": 1,
+  "preMainChecks": "All preceding assertions in the bound checker completed before its new main call; the exact check count was not persisted before failure and no successful whole receipt is claimed.",
+  "sourceAndChecker": [
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_multiplicative.py",
+        "bytes": 8409,
+        "sha256": "924bd5f0dc7208790f628e65fa4fc39ed206e293fbb1fa57b5d6bc9b5a5029a2"
+      },
+      "retained": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/multiplicative-kl-demo-correction/predecessor/nmf_multiplicative.py",
+        "bytes": 8409,
+        "sha256": "924bd5f0dc7208790f628e65fa4fc39ed206e293fbb1fa57b5d6bc9b5a5029a2"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/check-multiplicative-program.py",
+        "bytes": 8440,
+        "sha256": "20efb35b648d405feb908650747a26a3c69b068619a31e1decdffe6b0f58b8d2"
+      },
+      "retained": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/multiplicative-kl-demo-correction/predecessor/check-multiplicative-program.py",
+        "bytes": 8440,
+        "sha256": "20efb35b648d405feb908650747a26a3c69b068619a31e1decdffe6b0f58b8d2"
+      }
+    }
+  ],
+  "stdout": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/nmf_multiplicative.stdout.txt",
+    "bytes": 405,
+    "sha256": "2463a81a7757d551e9521c24e6eb58589a6b76df839efb1400a09c7262e2cf58"
+  },
+  "stderr": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/nmf_multiplicative.stderr.txt",
+    "bytes": 2229,
+    "sha256": "812c4f4afc9005c1c8cf15e0a5fa2b297e4ddb3d9368e4f7c98149e1f3dfa637"
+  },
+  "completedMainPortion": "First sweep and Frobenius scratch/library comparison completed; ordinary Frobenius reported iteration-cap warning. KL new fit refused multiplication underflow, so no KL fit/output is claimed.",
+  "correction": "Keep numerical support/refusal and all algorithmic functions unchanged. Change only the runnable KL comparison to an explicitly positive shifted X0. Execute only this changed KL branch, reusing the exact attributed completed Frobenius stream and prior pre-main assertions; do not replay old campaigns."
+}

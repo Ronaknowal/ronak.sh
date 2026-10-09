@@ -1,0 +1,966 @@
+{
+  "classification": "Exact outputs of the prescribed local examples; declared scenarios, not hardware benchmarks",
+  "stages": {
+    "request_ledger": {
+      "source_sha256": "64d30f82e773350faa6c9c709ad2877ac42422c92dc776bc11fe8898b805674e",
+      "rows": [
+        {
+          "request_id": "constructed-A",
+          "line": 1,
+          "usd": "0.004",
+          "contributions_usd": {
+            "uncached_input": "0.002",
+            "cache_creation_5m": "0.00",
+            "cache_creation_1h": "0.00",
+            "cache_read": "0.00",
+            "output": "0.002"
+          }
+        },
+        {
+          "request_id": "constructed-B",
+          "line": 2,
+          "usd": "0.00445",
+          "contributions_usd": {
+            "uncached_input": "0.0002",
+            "cache_creation_5m": "0.00225",
+            "cache_creation_1h": "0.00",
+            "cache_read": "0.00",
+            "output": "0.002"
+          }
+        },
+        {
+          "request_id": "constructed-C",
+          "line": 3,
+          "usd": "0.00229",
+          "contributions_usd": {
+            "uncached_input": "0.0002",
+            "cache_creation_5m": "0.00",
+            "cache_creation_1h": "0.00",
+            "cache_read": "0.00009",
+            "output": "0.002"
+          }
+        },
+        {
+          "total_usd": "0.01074",
+          "counts": {
+            "uncached_input": 1200,
+            "cache_creation_5m": 900,
+            "cache_creation_1h": 0,
+            "cache_read": 900,
+            "output": 600
+          }
+        },
+        {
+          "expected_usd_per_task": "0.012",
+          "success_probability": "0.96",
+          "usd_per_success": "0.0125"
+        },
+        {
+          "flagged_tasks": "22.600",
+          "retained_correct": "73.800",
+          "successes": "95.27000",
+          "usd": "0.65200",
+          "quality": "0.95270",
+          "usd_per_success": "0.006843707358035058255484412722"
+        }
+      ]
+    },
+    "work_and_memory": {
+      "source_sha256": "bc7d6a22ace4ec7a4f78ead24d101feefb5fe4537be0f1e5883eea63d86bceef",
+      "rows": [
+        {
+          "X": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              2,
+              0,
+              -1
+            ]
+          ],
+          "W": [
+            [
+              1,
+              0,
+              2
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              -1,
+              0
+            ],
+            [
+              2,
+              2,
+              1
+            ]
+          ],
+          "Y": [
+            [
+              7,
+              5,
+              -1,
+              9
+            ],
+            [
+              0,
+              -1,
+              2,
+              3
+            ]
+          ],
+          "counts": {
+            "nominal_flops": 48,
+            "compulsory_bytes": 52,
+            "arithmetic_intensity": 0.9230769230769231
+          }
+        },
+        {
+          "kv_bytes": 2147483648,
+          "kv_GiB": 2.0,
+          "capacity": {
+            "weights_fit": true,
+            "max_requests": 14,
+            "remaining_bytes": 8000000000
+          }
+        },
+        {
+          "math_seconds": 0.004,
+          "traffic_seconds": 0.02,
+          "overlap_lower_bound_seconds": 0.02
+        },
+        {
+          "math_seconds": 0.032,
+          "traffic_seconds": 0.022,
+          "overlap_lower_bound_seconds": 0.032
+        }
+      ]
+    },
+    "capacity_cost": {
+      "source_sha256": "99db3389b2ba93877955f067fde5c2962af4966099e477a6b645d5b0f750535e",
+      "rows": [
+        {
+          "reserved_usd": "6177.60",
+          "metered_usd": "686.40"
+        },
+        {
+          "charge_usd": "6177.60",
+          "output_tokens": "129600000.00",
+          "usd_per_million_output": "47.66666666666666666666666667"
+        },
+        {
+          "charge_usd": "6177.60",
+          "output_tokens": "518400000",
+          "usd_per_million_output": "11.91666666666666666666666667"
+        },
+        {
+          "charge_usd": "6177.60",
+          "output_tokens": "0",
+          "usd_per_million_output": null
+        },
+        {
+          "tasks": 0,
+          "slots": 0,
+          "capacity": 0,
+          "usd": "0.000",
+          "average_usd": null
+        },
+        {
+          "tasks": 160000,
+          "slots": 1,
+          "capacity": 180000,
+          "usd": "1520.000",
+          "average_usd": "0.0095"
+        },
+        {
+          "tasks": 180000,
+          "slots": 1,
+          "capacity": 180000,
+          "usd": "1560.000",
+          "average_usd": "0.008666666666666666666666666667"
+        },
+        {
+          "tasks": 180001,
+          "slots": 2,
+          "capacity": 360000,
+          "usd": "2760.002",
+          "average_usd": "0.01533325925967077960677996233"
+        },
+        {
+          "tasks": 200000,
+          "slots": 2,
+          "capacity": 360000,
+          "usd": "2800.000",
+          "average_usd": "0.014"
+        },
+        [
+          {
+            "slots": 1,
+            "crossover_tasks": "1.50E+5",
+            "interval_open_lower": 0,
+            "interval_closed_upper": 180000,
+            "feasible": true
+          },
+          {
+            "slots": 2,
+            "crossover_tasks": "3.00E+5",
+            "interval_open_lower": 180000,
+            "interval_closed_upper": 360000,
+            "feasible": true
+          },
+          {
+            "slots": 3,
+            "crossover_tasks": "4.50E+5",
+            "interval_open_lower": 360000,
+            "interval_closed_upper": 540000,
+            "feasible": true
+          }
+        ],
+        {
+          "one_failure_slots": 4
+        }
+      ]
+    },
+    "cache_accounting": {
+      "source_sha256": "1c1d7a83b6a02fe92b68ea2cf60124dd5f6fa8dd7937674c614c33b85f88ac42",
+      "rows": [
+        {
+          "counts": {
+            "uncached_input": 2048,
+            "cache_creation_5m": 148,
+            "cache_creation_1h": 100,
+            "cache_read": 1800,
+            "output": 503
+          },
+          "usd": "0.010076",
+          "contributions_usd": {
+            "uncached_input": "0.004096",
+            "cache_creation_5m": "0.00037",
+            "cache_creation_1h": "0.0004",
+            "cache_read": "0.00018",
+            "output": "0.00503"
+          }
+        },
+        {
+          "requests": [
+            {
+              "request": 0,
+              "start": 0,
+              "prefix": "A",
+              "hit": false,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 900,
+                "cache_creation_1h": 0,
+                "cache_read": 0,
+                "output": 200
+              },
+              "usd": "0.00445",
+              "available": 0,
+              "expires": 300
+            },
+            {
+              "request": 1,
+              "start": 120,
+              "prefix": "A",
+              "hit": true,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 0,
+                "cache_creation_1h": 0,
+                "cache_read": 900,
+                "output": 200
+              },
+              "usd": "0.00229",
+              "available": 0,
+              "expires": 420
+            },
+            {
+              "request": 2,
+              "start": 240,
+              "prefix": "A",
+              "hit": true,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 0,
+                "cache_creation_1h": 0,
+                "cache_read": 900,
+                "output": 200
+              },
+              "usd": "0.00229",
+              "available": 0,
+              "expires": 540
+            }
+          ],
+          "total_usd": "0.00903"
+        },
+        {
+          "requests": [
+            {
+              "request": 0,
+              "start": 0,
+              "prefix": "A",
+              "hit": false,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 900,
+                "cache_creation_1h": 0,
+                "cache_read": 0,
+                "output": 200
+              },
+              "usd": "0.00445",
+              "available": 0,
+              "expires": 300
+            },
+            {
+              "request": 1,
+              "start": 360,
+              "prefix": "A",
+              "hit": false,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 900,
+                "cache_creation_1h": 0,
+                "cache_read": 0,
+                "output": 200
+              },
+              "usd": "0.00445",
+              "available": 360,
+              "expires": 660
+            },
+            {
+              "request": 2,
+              "start": 720,
+              "prefix": "A",
+              "hit": false,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 900,
+                "cache_creation_1h": 0,
+                "cache_read": 0,
+                "output": 200
+              },
+              "usd": "0.00445",
+              "available": 720,
+              "expires": 1020
+            }
+          ],
+          "total_usd": "0.01335"
+        },
+        {
+          "requests": [
+            {
+              "request": 0,
+              "start": 0,
+              "prefix": "A",
+              "hit": false,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 0,
+                "cache_creation_1h": 900,
+                "cache_read": 0,
+                "output": 200
+              },
+              "usd": "0.0058",
+              "available": 0,
+              "expires": 3600
+            },
+            {
+              "request": 1,
+              "start": 360,
+              "prefix": "A",
+              "hit": true,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 0,
+                "cache_creation_1h": 0,
+                "cache_read": 900,
+                "output": 200
+              },
+              "usd": "0.00229",
+              "available": 0,
+              "expires": 3960
+            },
+            {
+              "request": 2,
+              "start": 720,
+              "prefix": "A",
+              "hit": true,
+              "counts": {
+                "uncached_input": 100,
+                "cache_creation_5m": 0,
+                "cache_creation_1h": 0,
+                "cache_read": 900,
+                "output": 200
+              },
+              "usd": "0.00229",
+              "available": 0,
+              "expires": 4320
+            }
+          ],
+          "total_usd": "0.01038"
+        },
+        {
+          "continuous_read_hit_threshold": "0.2631578947368421052631578947",
+          "minimum_integer_read_hits_after_5m_write": 1
+        }
+      ]
+    },
+    "allocation_solver": {
+      "source_sha256": "c5686d34db7d3d90b823535c7bac392b0e5d422cba3c5b78563383f3191a1ef8",
+      "rows": [
+        {
+          "demand": 7,
+          "scratch": {
+            "cells": [
+              {
+                "decision": [
+                  0,
+                  0
+                ],
+                "supply": 0,
+                "feasible": false,
+                "cost": 0
+              },
+              {
+                "decision": [
+                  0,
+                  1
+                ],
+                "supply": 2,
+                "feasible": false,
+                "cost": 4
+              },
+              {
+                "decision": [
+                  0,
+                  2
+                ],
+                "supply": 4,
+                "feasible": false,
+                "cost": 8
+              },
+              {
+                "decision": [
+                  0,
+                  3
+                ],
+                "supply": 6,
+                "feasible": false,
+                "cost": 12
+              },
+              {
+                "decision": [
+                  1,
+                  0
+                ],
+                "supply": 4,
+                "feasible": false,
+                "cost": 7
+              },
+              {
+                "decision": [
+                  1,
+                  1
+                ],
+                "supply": 6,
+                "feasible": false,
+                "cost": 11
+              },
+              {
+                "decision": [
+                  1,
+                  2
+                ],
+                "supply": 8,
+                "feasible": true,
+                "cost": 15
+              },
+              {
+                "decision": [
+                  1,
+                  3
+                ],
+                "supply": 10,
+                "feasible": false,
+                "cost": 19
+              },
+              {
+                "decision": [
+                  2,
+                  0
+                ],
+                "supply": 8,
+                "feasible": true,
+                "cost": 14
+              },
+              {
+                "decision": [
+                  2,
+                  1
+                ],
+                "supply": 10,
+                "feasible": true,
+                "cost": 18
+              },
+              {
+                "decision": [
+                  2,
+                  2
+                ],
+                "supply": 12,
+                "feasible": false,
+                "cost": 22
+              },
+              {
+                "decision": [
+                  2,
+                  3
+                ],
+                "supply": 14,
+                "feasible": false,
+                "cost": 26
+              },
+              {
+                "decision": [
+                  3,
+                  0
+                ],
+                "supply": 12,
+                "feasible": true,
+                "cost": 21
+              },
+              {
+                "decision": [
+                  3,
+                  1
+                ],
+                "supply": 14,
+                "feasible": false,
+                "cost": 25
+              },
+              {
+                "decision": [
+                  3,
+                  2
+                ],
+                "supply": 16,
+                "feasible": false,
+                "cost": 29
+              },
+              {
+                "decision": [
+                  3,
+                  3
+                ],
+                "supply": 18,
+                "feasible": false,
+                "cost": 33
+              }
+            ],
+            "optimum": {
+              "decision": [
+                2,
+                0
+              ],
+              "supply": 8,
+              "feasible": true,
+              "cost": 14
+            }
+          },
+          "scipy": {
+            "status": 0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+            "integer": true,
+            "decision": [
+              2.0,
+              0.0
+            ],
+            "cost": 14.0,
+            "mip_gap": 0.0,
+            "capacity": 8.0,
+            "used_slots": 2.0
+          }
+        },
+        {
+          "demand": 13,
+          "scratch": {
+            "cells": [
+              {
+                "decision": [
+                  0,
+                  0
+                ],
+                "supply": 0,
+                "feasible": false,
+                "cost": 0
+              },
+              {
+                "decision": [
+                  0,
+                  1
+                ],
+                "supply": 2,
+                "feasible": false,
+                "cost": 4
+              },
+              {
+                "decision": [
+                  0,
+                  2
+                ],
+                "supply": 4,
+                "feasible": false,
+                "cost": 8
+              },
+              {
+                "decision": [
+                  0,
+                  3
+                ],
+                "supply": 6,
+                "feasible": false,
+                "cost": 12
+              },
+              {
+                "decision": [
+                  1,
+                  0
+                ],
+                "supply": 4,
+                "feasible": false,
+                "cost": 7
+              },
+              {
+                "decision": [
+                  1,
+                  1
+                ],
+                "supply": 6,
+                "feasible": false,
+                "cost": 11
+              },
+              {
+                "decision": [
+                  1,
+                  2
+                ],
+                "supply": 8,
+                "feasible": false,
+                "cost": 15
+              },
+              {
+                "decision": [
+                  1,
+                  3
+                ],
+                "supply": 10,
+                "feasible": false,
+                "cost": 19
+              },
+              {
+                "decision": [
+                  2,
+                  0
+                ],
+                "supply": 8,
+                "feasible": false,
+                "cost": 14
+              },
+              {
+                "decision": [
+                  2,
+                  1
+                ],
+                "supply": 10,
+                "feasible": false,
+                "cost": 18
+              },
+              {
+                "decision": [
+                  2,
+                  2
+                ],
+                "supply": 12,
+                "feasible": false,
+                "cost": 22
+              },
+              {
+                "decision": [
+                  2,
+                  3
+                ],
+                "supply": 14,
+                "feasible": false,
+                "cost": 26
+              },
+              {
+                "decision": [
+                  3,
+                  0
+                ],
+                "supply": 12,
+                "feasible": false,
+                "cost": 21
+              },
+              {
+                "decision": [
+                  3,
+                  1
+                ],
+                "supply": 14,
+                "feasible": false,
+                "cost": 25
+              },
+              {
+                "decision": [
+                  3,
+                  2
+                ],
+                "supply": 16,
+                "feasible": false,
+                "cost": 29
+              },
+              {
+                "decision": [
+                  3,
+                  3
+                ],
+                "supply": 18,
+                "feasible": false,
+                "cost": 33
+              }
+            ],
+            "optimum": null
+          },
+          "scipy": {
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "integer": true,
+            "decision": null,
+            "cost": null,
+            "mip_gap": null
+          }
+        },
+        {
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "integer": false,
+          "decision": [
+            1.75,
+            0.0
+          ],
+          "cost": 12.25,
+          "mip_gap": null,
+          "capacity": 7.0,
+          "used_slots": 1.75
+        }
+      ]
+    },
+    "practice_answers": {
+      "source_sha256": "ef146dfb3e2325899ae790a1322ab6e5828dd3da550b4b66f664f4bb0d25be26",
+      "rows": [
+        {
+          "task": 1,
+          "usd": "0.00594"
+        },
+        {
+          "task": 2,
+          "usd": "0.00172"
+        },
+        {
+          "task": 3,
+          "requests": [
+            {
+              "request": 0,
+              "start": 0,
+              "prefix": "P",
+              "hit": false,
+              "counts": {
+                "uncached_input": 50,
+                "cache_creation_5m": 1200,
+                "cache_creation_1h": 0,
+                "cache_read": 0,
+                "output": 100
+              },
+              "usd": "0.0041",
+              "available": 0,
+              "expires": 300
+            },
+            {
+              "request": 1,
+              "start": 60,
+              "prefix": "P",
+              "hit": true,
+              "counts": {
+                "uncached_input": 50,
+                "cache_creation_5m": 0,
+                "cache_creation_1h": 0,
+                "cache_read": 1200,
+                "output": 100
+              },
+              "usd": "0.00122",
+              "available": 0,
+              "expires": 360
+            },
+            {
+              "request": 2,
+              "start": 120,
+              "prefix": "P",
+              "hit": true,
+              "counts": {
+                "uncached_input": 50,
+                "cache_creation_5m": 0,
+                "cache_creation_1h": 0,
+                "cache_read": 1200,
+                "output": 100
+              },
+              "usd": "0.00122",
+              "available": 0,
+              "expires": 420
+            }
+          ],
+          "total_usd": "0.00654",
+          "no_cache_usd": ".01050"
+        },
+        {
+          "task": 4,
+          "expected_usd_per_task": "0.026",
+          "success_probability": "0.85",
+          "usd_per_success": "0.03058823529411764705882352941"
+        },
+        {
+          "task": 5,
+          "weights_fit": true,
+          "max_requests": 4,
+          "remaining_bytes": 3000000000
+        },
+        {
+          "task": 6,
+          "bytes": 301989888,
+          "MiB": 288.0
+        },
+        {
+          "task": 7,
+          "nominal_flops": 120,
+          "compulsory_bytes": 94,
+          "arithmetic_intensity": 1.2765957446808511
+        },
+        {
+          "task": 8,
+          "math_seconds": 0.004,
+          "traffic_seconds": 0.015,
+          "overlap_lower_bound_seconds": 0.015,
+          "with_unoverlapped_stage_seconds": 0.018
+        },
+        {
+          "task": 9,
+          "metered_usd": "168.00",
+          "reserved_usd": "672.00"
+        },
+        {
+          "task": 10,
+          "charge_usd": "4",
+          "output_tokens": "115200.0",
+          "usd_per_million_output": "34.72222222222222222222222222"
+        },
+        {
+          "task": 11,
+          "stairs": [
+            {
+              "slots": 1,
+              "crossover_tasks": "7.5E+4",
+              "interval_open_lower": 0,
+              "interval_closed_upper": 60000,
+              "feasible": false
+            },
+            {
+              "slots": 2,
+              "crossover_tasks": "1.50E+5",
+              "interval_open_lower": 60000,
+              "interval_closed_upper": 120000,
+              "feasible": false
+            },
+            {
+              "slots": 3,
+              "crossover_tasks": "2.25E+5",
+              "interval_open_lower": 120000,
+              "interval_closed_upper": 180000,
+              "feasible": false
+            }
+          ]
+        },
+        {
+          "task": 12,
+          "slots": 4
+        },
+        {
+          "task": 13,
+          "scratch": {
+            "decision": [
+              2,
+              1
+            ],
+            "supply": 8,
+            "feasible": true,
+            "cost": 13
+          },
+          "ordinary": {
+            "status": 0,
+            "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+            "integer": true,
+            "decision": [
+              2.0,
+              1.0
+            ],
+            "cost": 13.0,
+            "mip_gap": 0.0,
+            "capacity": 8.0,
+            "used_slots": 3.0
+          },
+          "infeasible": {
+            "status": 2,
+            "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+            "integer": true,
+            "decision": null,
+            "cost": null,
+            "mip_gap": null
+          }
+        },
+        {
+          "task": 14,
+          "overall_quality": "0.95",
+          "hard_quality": ".5",
+          "required_each_class": ".9",
+          "cheap_route_eligible": false,
+          "cheap_usd": "0.200",
+          "hard_upgrade_conditional_quality": ".95",
+          "upgraded_usd": "0.380",
+          "upgraded_overall_quality": "0.995"
+        },
+        {
+          "task": 15,
+          "ratio_of_sums_usd_per_token": "0.0002727272727272727272727272727",
+          "mean_ratios_usd_per_token": "0.0006"
+        },
+        {
+          "task": 16,
+          "request_id": "Alice-2",
+          "step": 2,
+          "query_positions": 1,
+          "cache_positions": 18,
+          "independent_cache_bytes": 110592,
+          "matches_logical_bytes": true
+        }
+      ]
+    }
+  }
+}

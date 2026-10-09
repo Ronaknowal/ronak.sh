@@ -1,0 +1,1187 @@
+{
+  "status": "PASS",
+  "author": "/root/numerical_runtime_resume",
+  "completedAt": "2026-10-09T18:10:25.594804+00:00",
+  "scope": "Source/output conservation, compilation by AST parsing, new locally stated arithmetic, existing fixture receipt reuse. No historical main or scientific campaign replay.",
+  "script": {
+    "path": "scratch/check-fdiv-content-r1.py",
+    "sha256": "feff9da1b63defc4e9b9d88b85a7c7bca7071e40860083f5fa7434e82a577f90",
+    "bytes": 8076
+  },
+  "manuscript": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/manuscript-complete-r1.md",
+    "sha256": "ac62af55d0552f535946ae176114cea548d8069933f94bc60cc06dc762eda0d7",
+    "bytes": 113428
+  },
+  "specification": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/visual-specifications-r1.md",
+    "sha256": "f8cb443152c3ce238d158619782a99869ecb6752bf2e0d84cbadb85e8da007e9",
+    "bytes": 134029
+  },
+  "checks": [
+    {
+      "name": "Accepted input src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input src/learn/data/divergence-ipm-models.js",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/divergence-ipm-models.js",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input src/learn/data/divergence-ipm-examples.js",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/divergence-ipm-examples.js",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input src/learn/data/divergences-mechanism-program.js",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/divergences-mechanism-program.js",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input src/learn/components/lesson-labs/DivergenceIpmLabs.jsx",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/components/lesson-labs/DivergenceIpmLabs.jsx",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input src/learn/components/lesson-labs/divergence-ipm-labs.css",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/components/lesson-labs/divergence-ipm-labs.css",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input public/learn-assets/divergences/mmd-library-bridge.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/public/learn-assets/divergences/mmd-library-bridge.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input public/learn-code/eigenvalues-eigenvectors/iris-corrected.csv",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/public/learn-code/eigenvalues-eigenvectors/iris-corrected.csv",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input public/learn-code/eigenvalues-eigenvectors/iris-provenance.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/public/learn-code/eigenvalues-eigenvectors/iris-provenance.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/research-r1.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-checkpoint-r1.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-topic-r1.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-fixture-checks-r1.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/F-DIVERGENCES-IPMS-LESSON-DESIGN.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/F-DIVERGENCES-IPMS-VERIFICATION.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/evidence/math-depth-remediation-author.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/evidence/math-depth-remediation-independent.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/topic-notes/functional-analysis-rkhs.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/topic-notes/generative-adversarial-networks-gan-fundamentals.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input scratch/divergence-intake-topic-r1.mjs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input scratch/divergences-design-fixtures-r1.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input scratch/divergences-reference-gretton-figure1.jpg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input scratch/divergences-reference-embedding-figure3-1.jpg",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/checkpoint-r1.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-proposal-r2.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-fixture-checks-root-r2.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted input docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-author-reading-root-r2.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_blockwise.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_events.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_kernel.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_observers.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_original.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_permutation.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_practice.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_project.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_stress.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_support.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_variational.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source fdiv_weights.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source iris_mmd.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source kernel_means.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete source mmd-library-bridge.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_events.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_kernel.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_observers.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_original.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_permutation.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_practice.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_project.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_stress.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_support.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_variational.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output fdiv_weights.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output iris_mmd.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output kernel_means.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complete recorded output mmd-library-bridge.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved original",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved original",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved support",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved support",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved events",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved events",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved observers",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved observers",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved kernel",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved kernel",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved permutation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved permutation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved variational",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved variational",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved weights",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved weights",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved stress",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved stress",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original calculation conserved project",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original numerical stdout conserved project",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole ordinary library bytes conserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Exact function-only extraction kernel_sum",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Exact function-only extraction mmd2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "No helper main or top-level invocation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "First new execution docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.stderr",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "First new execution docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.stderr",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "First new execution docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_practice.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_practice.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_practice.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Execution binding docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_practice.stderr",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All53 placements once in order",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Fourteen final tasks in order",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "No unexpanded programme markers",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Comparison | Generator f(t), for t>0 | Result and convention |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | --- | --- | --- |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Forward KL | t ln t\u2212t+1 | KL(P\u2225Q), in nats; raw t ln t has the same ",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Reverse KL | \u2212ln t+t\u22121 | KL(Q\u2225P), in nats. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Pearson \u03c7\u00b2 | (t\u22121)\u00b2 | \u03a3(p\u2212q)\u00b2/q, directional and potentially unbound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Squared Hellinger H\u00b2 | \u00bd(\u221at\u22121)\u00b2 | \u00bd\u03a3(\u221ap\u2212\u221aq)\u00b2, between zero and one. ",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Total variation TV | \u00bd\u2223t\u22121\u2223 | \u00bd\u03a3\u2223p\u2212q\u2223, between zero and one. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Jensen\u2013Shannon JS | \u00bd[t ln(2t/(1+t))+ln(2/(1+t))] | \u00bdKL(P\u2225M)+\u00bdKL(Q\u2225M",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Allowed rules | Supremum | What is constrained |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | --- | --- | --- |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | All measurable g in [0,1] | TV | Bounded event/loss scores. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | All measurable g in [\u22121,1] | 2TV | A doubled score range. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | g(x)=ax, \u2223a\u2223\u22641 | \u2223E_PX\u2212E_QX\u2223 | A single slope. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | All 1-Lipschitz g | W\u2081 on the stated spaces with finite first moment",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Unit ball of a chosen RKHS | MMD, developed in section 6 | Feature-s",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Need | Candidate and declared choices | Deliberate stress case |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | --- | --- | --- |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Price probabilities for observed events | Forward KL/log loss with a",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Bound event or loss gaps | TV with representation and loss range | A",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Measure displacement | W\u2081 or a declared transport cost, with units a",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Compare samples without density estimation | MMD with kernel, bandwi",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | Evaluate a generator | Several held-out task checks with estimator l",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | File | Purpose and companions |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | --- | --- |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_original.py` | Positive-mass categorical calculation. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_support.py` | Extended support and six comparisons, with the t",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_events.py` | Event enumeration, classification and common maps",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_observers.py` | Sorted-prefix Lipschitz witness. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `kernel_means.py` | Early finite-law pair means and witness without ",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_kernel.py` | Full empirical and unbiased pair calculations. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_permutation.py` | Exact fixed and complete-selection reference",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `mmd-library-bridge.py` | Full ordinary blockwise, Gram and exact-te",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_blockwise.py` | Importable exact pair-sum and MMD functions, w",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_variational.py` | Exact known-law critic and discriminator ari",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_weights.py` | Importance variance and local curvature. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_stress.py` | Missing support, rare-event coverage and task cos",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_project.py` | Complete changed exact-test task. |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `iris_mmd.py` | Observed application; requires the blockwise helper ",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `fdiv_practice.py` | Four new implementation/diagnosis tasks; import",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Markdown table columns | `iris-corrected.csv`, `iris-provenance.json`, `DATA-PROVENANCE.md` |",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Point mass first-use definition",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Feature mean first-use definition",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D01",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D02",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D03",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D04",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D05",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D06",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D07",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D08",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D09",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D10",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D11",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D12",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D13",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D14",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D15",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D16",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D17",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D18",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D19",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D20",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D21",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D22",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D23",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D24",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D25",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D26",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D27",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D28",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D29",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D30",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D31",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D32",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D33",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D34",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D35",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D36",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D37",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D38",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D39",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D40",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D41",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D42",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D43",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D44",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D45",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D46",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D47",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D48",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D49",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D50",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D51",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D52",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Accepted bespoke geometry D53",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Static first penalty and delayed ratio control",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "No invalid Unicode replacement or historical mojibake",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Existing or explicitly planned route graph-fundamentals-adjacency-laplacian-connectivity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Existing or explicitly planned route optimal-transport-wasserstein-distance-sinkhorn",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Existing or explicitly planned route measure-theory-probability-spaces",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Existing or explicitly planned route hypothesis-testing-confidence-intervals",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Existing or explicitly planned route functional-analysis-rkhs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Existing or explicitly planned route generative-adversarial-networks-gan-fundamentals",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Existing or explicitly planned route entropy-cross-entropy-kl-divergence",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D03 generator height",
+      "passed": true,
+      "detail": {
+        "actual": 0.22932762888698965,
+        "shown": 0.22932763,
+        "decimalPlaces": 8
+      }
+    },
+    {
+      "name": "D03 weighted height",
+      "passed": true,
+      "detail": {
+        "actual": 0.09173105155479587,
+        "shown": 0.09173105,
+        "decimalPlaces": 8
+      }
+    },
+    {
+      "name": "D04 weighted ratio barycentre",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D05 affine rows/totals",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D08 common measure reproduces total",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D09 conditional ratio weights",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D15 binary processing and quadratic bound",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D17 exact chord scaling",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D44 tangent slope",
+      "passed": true,
+      "detail": {
+        "actual": 1.5596157879354227,
+        "shown": 1.559615788,
+        "decimalPlaces": 9
+      }
+    },
+    {
+      "name": "D44 tangent intercept",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D44 supporting line at 0.1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D44 supporting line at 0.4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D44 supporting line at 1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D44 supporting line at 1.75",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D44 supporting line at 3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "D52 independent versus identity pairing",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "valuesAndReusedEvidence": {
+    "D03 generator height": 0.22932762888698965,
+    "D03 weighted height": 0.09173105155479587,
+    "D44 tangent slope": 1.5596157879354227,
+    "reused:design-fixture-checks-r1.json": {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-fixture-checks-r1.json",
+      "sha256": "426c7a18856d25952d1882d97b937b5a0f1630da95e6d88459c51fb0409ceebd",
+      "bytes": 3407
+    },
+    "reused:design-fixture-checks-root-r2.json": {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-fixture-checks-root-r2.json",
+      "sha256": "693ad314ec06cd626f84204f18ffae079ce5488b37735d329ef004dd9abe2984",
+      "bytes": 7000
+    },
+    "reused:independent-design-checks-r1.json": {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/independent-design-checks-r1.json",
+      "sha256": "4a1d50cf01de5a9d887129833582a7ba2bdf2e6a8a2cc40651c2cbb3989562c6",
+      "bytes": 8408
+    }
+  },
+  "passed": 226,
+  "failed": 0
+}

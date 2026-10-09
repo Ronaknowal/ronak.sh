@@ -1,0 +1,1942 @@
+{
+  "schema": "manifold-normal-guarded-apply/v1",
+  "at": "2026-10-09T18:35:40.645181+00:00",
+  "author": "/root/tsne_probability_arrow_recovery",
+  "status": "CANONICAL_PUBLIC_APPLIED_ROOT_SHARED_METADATA_BUILD_NATIVE_NORMAL_PENDING",
+  "plan": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/plan.json",
+    "bytes": 65168,
+    "sha256": "e53ba3ce80a5eb204480f5119180d273e19ffaeca49769befc10e3409869f52c"
+  },
+  "planningHandoff": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/handoff.json",
+    "bytes": 4807,
+    "sha256": "2e921874c0fe980a3ef4986aecb3c073cc7c44d11f471760dad349ff4131e914"
+  },
+  "rootAuthority": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/apply-authority.json",
+    "bytes": 7878,
+    "sha256": "c4eddaed1c5c41f243726df584af1bb55e9f6119a78cb85aaab1e6efdf10c4c9"
+  },
+  "authority": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/author-ready-source.json",
+      "bytes": 137742,
+      "sha256": "ffba1af17a352530b5fb1756f2f9e7b3a8c1bed14d74dbba750e79169bc8801d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-content-amendment-and-build-release.json",
+      "bytes": 76694,
+      "sha256": "3228dea7ce08f618705aac88ffe283363f8773b55935e6983ed3d60784d5a014"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/NativeReadingObjects.jsx",
+      "bytes": 17744,
+      "sha256": "1acda558d04f5f6568690dc55f0f2e0a14552b460891fa89e3b314766d652d06"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/independent-review/source-closure.md",
+      "bytes": 8701,
+      "sha256": "44b49e5168e027f1da858d3cd56c3109b0a538753c387eca92be4997e941b302"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/root-native-continuation.json",
+      "bytes": 79842,
+      "sha256": "3f5df311c6377d2f51bda70d2be96850082c83324a5f8009f3270dcc41f01bb8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/root-control-continuation.json",
+      "bytes": 4276,
+      "sha256": "6101199c641fe0e2410c25e92c6240331c06eb1651271dbae1a739f1b9f10f91"
+    }
+  ],
+  "written": [
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldDrawing.jsx",
+        "bytes": 10431,
+        "sha256": "1e6daacdc2f0667aaa6e8cae6182847402f310f122ccc4e4157d5a26f88d3d16"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldDrawing.jsx",
+        "bytes": 10383,
+        "sha256": "87e6e474f3754addff2ec47172dd974e2d6cba00469bd68ef5aff3bd805d4e40"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldDrawing.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldObjects.jsx",
+        "bytes": 18088,
+        "sha256": "b288665beaf6a504358cf3af4a827a00d5871d5767835af0d60f8304297ccb99"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldObjects.jsx",
+        "bytes": 18087,
+        "sha256": "6d9eeb74b130a405d0858e8686cf891267cedde7fbf679e60be22ff2ed38bf76"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldObjects.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldInvestigations.jsx",
+        "bytes": 26659,
+        "sha256": "40af51ba0ffc84cf4a33c89b3c511749b3f0e668301fbde77bed0d0d5386ae26"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldInvestigations.jsx",
+        "bytes": 26607,
+        "sha256": "85ebcb0a9d3acf1c1f4242a068eb6808822e626325d2f80315dc1b1f213aa3e4"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldInvestigations.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/GeometryFigures.jsx",
+        "bytes": 38136,
+        "sha256": "e19fb403ac5fd94cf5ec65ea4a34b7152874f6e4e12c3e664f0868ec5b14cdea"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/GeometryFigures.jsx",
+        "bytes": 38129,
+        "sha256": "438ea11f4a66eb2fa1c38bfd4435edb64e88392929a791cfbb7c1409a49db4ff"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/GeometryFigures.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/AffinityFigures.jsx",
+        "bytes": 19404,
+        "sha256": "7d55558e1ca699bb7782bcb199729ac7d6a206f7dc43e567dbc36795972d4018"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/AffinityFigures.jsx",
+        "bytes": 19399,
+        "sha256": "e4b1f4ebba835d2e0774d228eefb702212b10935c6d9ad7c3e12848219f3b3f7"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/AffinityFigures.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldOperationObjects.jsx",
+        "bytes": 21245,
+        "sha256": "e1aac270f68db8dcb5d189b613aacc9eb8eb12a70652a13e20b1d94af3d5aea2"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldOperationObjects.jsx",
+        "bytes": 21243,
+        "sha256": "162dab18c777b3c12f192d29ab9f041b8e8d4e22fce5cd7eb3ae869d91284386"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldOperationObjects.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/NativeReadingObjects.jsx",
+        "bytes": 17744,
+        "sha256": "1acda558d04f5f6568690dc55f0f2e0a14552b460891fa89e3b314766d652d06"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/NativeReadingObjects.jsx",
+        "bytes": 17738,
+        "sha256": "e0f93d4d5d4e4107c7520d76ea733cf28deba8f72037a8c260c42d5252118077"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/NativeReadingObjects.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldFigures.jsx",
+        "bytes": 464,
+        "sha256": "b17d994feab9ac0096c809e4fa8da16e20bbed708aa281f6b4728b9d105137df"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldFigures.jsx",
+        "bytes": 464,
+        "sha256": "b17d994feab9ac0096c809e4fa8da16e20bbed708aa281f6b4728b9d105137df"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldFigures.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+        "bytes": 9250,
+        "sha256": "c5ba7766028d8bdde7b8009af07418f9799561b95513a48bcd5565b609d58afb"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-models.mjs",
+        "bytes": 9250,
+        "sha256": "c5ba7766028d8bdde7b8009af07418f9799561b95513a48bcd5565b609d58afb"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-models.mjs",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-geometry.mjs",
+        "bytes": 3443,
+        "sha256": "5f05fdb29982dbb214ca05a67215b40f79e46f3ad26d0246c3bc84db2e6f2f22"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-geometry.mjs",
+        "bytes": 3443,
+        "sha256": "5f05fdb29982dbb214ca05a67215b40f79e46f3ad26d0246c3bc84db2e6f2f22"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-geometry.mjs",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+        "bytes": 1098,
+        "sha256": "ddb035ee95bcfb601f5eb168af517db8b13da7b753ab028f36c80bce468e24d4"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-data.js",
+        "bytes": 1125,
+        "sha256": "e0d1656114538b66c299783c1fa6395464f856ecfa2851101bde16c42bc53c3e"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-data.js",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/PrivateFiles.jsx",
+        "bytes": 740,
+        "sha256": "9663b5c8640759251d885bfe3a1e46b98b296262c2c57b69d4e195a6b62d639e"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldFiles.jsx",
+        "bytes": 702,
+        "sha256": "ba230a6738f821b7cddcbf1894c8dbc5962b1bfba2b0ea50cebcd3763eecf05d"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldFiles.jsx",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/manifold-reader.css",
+        "bytes": 5989,
+        "sha256": "8be4ec962fe2aacf1c902007e6f147475cacb025e833f5985715dbfcd9ec546a"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-reader.css",
+        "bytes": 5989,
+        "sha256": "8be4ec962fe2aacf1c902007e6f147475cacb025e833f5985715dbfcd9ec546a"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-reader.css",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/wiring.css",
+        "bytes": 539,
+        "sha256": "9de790d566383661f6b73f7a7f821f452bfd9d508d40a6ad8376836e3546e820"
+      },
+      "written": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/wiring.css",
+        "bytes": 539,
+        "sha256": "9de790d566383661f6b73f7a7f821f452bfd9d508d40a6ad8376836e3546e820"
+      },
+      "before": {
+        "path": "src/learn/components/lesson-labs/manifold-reading-flow/wiring.css",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/manifold-lesson.jsx",
+        "bytes": 127064,
+        "sha256": "8b7ffaa4f909ea54a5f66a59cdebf23e0a145d39f74ece455b48a89b8444936b"
+      },
+      "written": {
+        "path": "src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+        "bytes": 127237,
+        "sha256": "7cc4ef01e6e30f54575330b7ac663d169ba840961e9c80563ad47f266b8d9f4a"
+      },
+      "before": {
+        "exists": true,
+        "path": "src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+        "bytes": 77151,
+        "sha256": "3820fd932aa0314695c6ece949273c1e6260df510173155629645e5a3f4381de"
+      },
+      "rollback": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/rollback/src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+        "bytes": 77151,
+        "sha256": "3820fd932aa0314695c6ece949273c1e6260df510173155629645e5a3f4381de"
+      },
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/calculated-inputs.json",
+        "bytes": 125183,
+        "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+      },
+      "written": {
+        "path": "src/learn/data/manifold-reading-flow/calculated-inputs.json",
+        "bytes": 125183,
+        "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+      },
+      "before": {
+        "path": "src/learn/data/manifold-reading-flow/calculated-inputs.json",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "written": {
+        "path": "src/learn/data/manifold-reading-flow/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "before": {
+        "path": "src/learn/data/manifold-reading-flow/digits-300.csv",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/audit_saved_neighbors.txt",
+        "bytes": 1034,
+        "sha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7"
+      },
+      "written": {
+        "path": "src/learn/data/manifold-reading-flow/audit_saved_neighbors.txt",
+        "bytes": 1034,
+        "sha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7"
+      },
+      "before": {
+        "path": "src/learn/data/manifold-reading-flow/audit_saved_neighbors.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+        "bytes": 15754,
+        "sha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d"
+      },
+      "written": {
+        "path": "src/learn/data/manifold-reading-flow/file-index.json",
+        "bytes": 15754,
+        "sha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d"
+      },
+      "before": {
+        "path": "src/learn/data/manifold-reading-flow/file-index.json",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "canonical product"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/audit_saved_neighbors.py",
+        "bytes": 4586,
+        "sha256": "21246557a18f1b495196f65a73804eebb9e956a19e7946fc7d98bfe3ceb527b0"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/audit_saved_neighbors.py",
+        "bytes": 4586,
+        "sha256": "21246557a18f1b495196f65a73804eebb9e956a19e7946fc7d98bfe3ceb527b0"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/audit_saved_neighbors.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/classical_geometry.py",
+        "bytes": 4114,
+        "sha256": "0cd7ae86ddbba606da79acbdd8d269608fd37b91256ae63db8579e4faaef42d6"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/classical_geometry.py",
+        "bytes": 4114,
+        "sha256": "0cd7ae86ddbba606da79acbdd8d269608fd37b91256ae63db8579e4faaef42d6"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/classical_geometry.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/programs/gaussian_rows.py",
+        "bytes": 3070,
+        "sha256": "22b027b6683bc6a106da83f0d478fb3c1ca700a1556242e44f423de2a9fdd63e"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/gaussian_rows.py",
+        "bytes": 3070,
+        "sha256": "22b027b6683bc6a106da83f0d478fb3c1ca700a1556242e44f423de2a9fdd63e"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/gaussian_rows.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/graph_spectrum.py",
+        "bytes": 2603,
+        "sha256": "f48eefd33c78bd4e24bbc876f0dce2fd4b435b66e37e38a78c8c6c310fee5965"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/graph_spectrum.py",
+        "bytes": 2603,
+        "sha256": "f48eefd33c78bd4e24bbc876f0dce2fd4b435b66e37e38a78c8c6c310fee5965"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/graph_spectrum.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/isomap_routes.py",
+        "bytes": 2854,
+        "sha256": "d4aa583b327c37566c120c80ae534cddef48092d808c2ab45a43816e84b5af05"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/isomap_routes.py",
+        "bytes": 2854,
+        "sha256": "d4aa583b327c37566c120c80ae534cddef48092d808c2ab45a43816e84b5af05"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/isomap_routes.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/lle_recipes.py",
+        "bytes": 3239,
+        "sha256": "ff115c9c9d62262ba8192fad62d0157c024d674256c58cedaa61e105bf17c378"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/lle_recipes.py",
+        "bytes": 3239,
+        "sha256": "ff115c9c9d62262ba8192fad62d0157c024d674256c58cedaa61e105bf17c378"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/lle_recipes.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/local_density_radius.py",
+        "bytes": 2138,
+        "sha256": "166ed917a514c08ab7e9620b475c42f78e78e70c403d081644d1afa62e24dfe1"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/local_density_radius.py",
+        "bytes": 2138,
+        "sha256": "166ed917a514c08ab7e9620b475c42f78e78e70c403d081644d1afa62e24dfe1"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/local_density_radius.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/local_tangent_patch.py",
+        "bytes": 2989,
+        "sha256": "c7eae35d006b759f42e061def70c9928242a52fc30dc34c3fb61f37e80d4453b"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/local_tangent_patch.py",
+        "bytes": 2989,
+        "sha256": "c7eae35d006b759f42e061def70c9928242a52fc30dc34c3fb61f37e80d4453b"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/local_tangent_patch.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/reference_map_routes.py",
+        "bytes": 3842,
+        "sha256": "96d065b7c9cf119002e89d3cf508f788a4918bcec38d4fa993839f570aef7ac9"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/reference_map_routes.py",
+        "bytes": 3842,
+        "sha256": "96d065b7c9cf119002e89d3cf508f788a4918bcec38d4fa993839f570aef7ac9"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/reference_map_routes.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/sampled_pair_events.py",
+        "bytes": 2473,
+        "sha256": "a6a56714b6b88cd846437b52d844a8aa01db774dc66050bdec67cca563cc57a9"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/sampled_pair_events.py",
+        "bytes": 2473,
+        "sha256": "a6a56714b6b88cd846437b52d844a8aa01db774dc66050bdec67cca563cc57a9"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/sampled_pair_events.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/compare_transforms.py",
+        "bytes": 1095,
+        "sha256": "1e6b522a310b7d4de580754e071bd0f195ebde6f38b8ba4050a94c98076608b7"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/compare_transforms.py",
+        "bytes": 1095,
+        "sha256": "1e6b522a310b7d4de580754e071bd0f195ebde6f38b8ba4050a94c98076608b7"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/compare_transforms.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/inspect_digits.py",
+        "bytes": 1243,
+        "sha256": "19973ec6d6ecf8bf74cfda89a3bedd5b223ecb33a8587a01d5173766b995d111"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/inspect_digits.py",
+        "bytes": 1243,
+        "sha256": "19973ec6d6ecf8bf74cfda89a3bedd5b223ecb33a8587a01d5173766b995d111"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/inspect_digits.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/inspect_umap.py",
+        "bytes": 1043,
+        "sha256": "21541157bdf2626cc494ce772d68638431dc9daca576f10ba88f24832bd58595"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/inspect_umap.py",
+        "bytes": 1043,
+        "sha256": "21541157bdf2626cc494ce772d68638431dc9daca576f10ba88f24832bd58595"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/inspect_umap.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/tiny_tsne.py",
+        "bytes": 1523,
+        "sha256": "b1f1660c9bb9da66aa7edb5a928a95b489da6e73c8d6d3edd4b47d9dcc3e7d53"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/tiny_tsne.py",
+        "bytes": 1523,
+        "sha256": "b1f1660c9bb9da66aa7edb5a928a95b489da6e73c8d6d3edd4b47d9dcc3e7d53"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/tiny_tsne.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/umap-mechanism.py",
+        "bytes": 6947,
+        "sha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/programs/umap-mechanism.py",
+        "bytes": 6947,
+        "sha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/programs/umap-mechanism.py",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/calculated-inputs.json",
+        "bytes": 125183,
+        "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/data/calculated-inputs.json",
+        "bytes": 125183,
+        "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/data/calculated-inputs.json",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/data-provenance.md",
+        "bytes": 6097,
+        "sha256": "b48bdb1363b8e9123b3405d231a0c40172be8cbd947ce2c21a300ea68d210f6e"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/data/data-provenance.md",
+        "bytes": 6097,
+        "sha256": "b48bdb1363b8e9123b3405d231a0c40172be8cbd947ce2c21a300ea68d210f6e"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/data/data-provenance.md",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/data/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/data/digits-300.csv",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/runtime-versions.json",
+        "bytes": 230,
+        "sha256": "6d50b51386a007ff43f7c2983cb1dab72b75958c46c6b3a299a942ab9d1b2f46"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/data/runtime-versions.json",
+        "bytes": 230,
+        "sha256": "6d50b51386a007ff43f7c2983cb1dab72b75958c46c6b3a299a942ab9d1b2f46"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/data/runtime-versions.json",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/umap-digits.csv",
+        "bytes": 30448,
+        "sha256": "57a6ec04fca5c3739a49402bb5b06a9688664c38c5b2017065dd70918e380c01"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/data/umap-digits.csv",
+        "bytes": 30448,
+        "sha256": "57a6ec04fca5c3739a49402bb5b06a9688664c38c5b2017065dd70918e380c01"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/data/umap-digits.csv",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/audit_saved_neighbors.txt",
+        "bytes": 1034,
+        "sha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/audit_saved_neighbors.txt",
+        "bytes": 1034,
+        "sha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/audit_saved_neighbors.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/classical_geometry.txt",
+        "bytes": 460,
+        "sha256": "eaebb28b62c1c3044269372513bdcffa665ae267c578d27c88207377be7f600e"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/classical_geometry.txt",
+        "bytes": 460,
+        "sha256": "eaebb28b62c1c3044269372513bdcffa665ae267c578d27c88207377be7f600e"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/classical_geometry.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/gaussian_rows.txt",
+        "bytes": 1050,
+        "sha256": "86f66f5dd88b8f6d66a5bc875464b5359f3d85aed14d0f8e1f58196430f60482"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/gaussian_rows.txt",
+        "bytes": 1050,
+        "sha256": "86f66f5dd88b8f6d66a5bc875464b5359f3d85aed14d0f8e1f58196430f60482"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/gaussian_rows.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/graph_spectrum.txt",
+        "bytes": 168,
+        "sha256": "2f0768aca4ec37081344442250d5651292aa3aac0363d935af84465ff71b3052"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/graph_spectrum.txt",
+        "bytes": 168,
+        "sha256": "2f0768aca4ec37081344442250d5651292aa3aac0363d935af84465ff71b3052"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/graph_spectrum.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/isomap_routes.txt",
+        "bytes": 478,
+        "sha256": "927a07922cc9c0fe80eed41244cf44d0151d9296333eb32b358b9a5d16288e63"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/isomap_routes.txt",
+        "bytes": 478,
+        "sha256": "927a07922cc9c0fe80eed41244cf44d0151d9296333eb32b358b9a5d16288e63"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/isomap_routes.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/lle_recipes.txt",
+        "bytes": 426,
+        "sha256": "a11bbb8992488dd8bd7e7d361709f78301c80c5f3d32e1045156d87cc6969539"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/lle_recipes.txt",
+        "bytes": 426,
+        "sha256": "a11bbb8992488dd8bd7e7d361709f78301c80c5f3d32e1045156d87cc6969539"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/lle_recipes.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/local_density_radius.txt",
+        "bytes": 294,
+        "sha256": "a818a30441964c4ca1032ad41f705e3c7b21141f32fe4aaeffafa8f2e3d71c0d"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/local_density_radius.txt",
+        "bytes": 294,
+        "sha256": "a818a30441964c4ca1032ad41f705e3c7b21141f32fe4aaeffafa8f2e3d71c0d"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/local_density_radius.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/local_tangent_patch.txt",
+        "bytes": 202,
+        "sha256": "dc02cd27e0e74b51bd9d7ca48268737aeb1945fa072a6613315a209f6dfa0893"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/local_tangent_patch.txt",
+        "bytes": 202,
+        "sha256": "dc02cd27e0e74b51bd9d7ca48268737aeb1945fa072a6613315a209f6dfa0893"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/local_tangent_patch.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/reference_map_routes.txt",
+        "bytes": 80,
+        "sha256": "721d27d5db1f4620819ff56a1c085e088408917aa1cac5be631f229431659d83"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/reference_map_routes.txt",
+        "bytes": 80,
+        "sha256": "721d27d5db1f4620819ff56a1c085e088408917aa1cac5be631f229431659d83"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/reference_map_routes.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-compare_transforms.txt",
+        "bytes": 70,
+        "sha256": "ae1d22ebf46557c88492627eb984ae4a7600070a33c43f98b6364bddefce6b04"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-compare_transforms.txt",
+        "bytes": 70,
+        "sha256": "ae1d22ebf46557c88492627eb984ae4a7600070a33c43f98b6364bddefce6b04"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-compare_transforms.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-inspect_digits.txt",
+        "bytes": 124,
+        "sha256": "f7aba164ab1607a1a75b7bb250e98ba7802e4f0c86943dfb30912d47277bad32"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-inspect_digits.txt",
+        "bytes": 124,
+        "sha256": "f7aba164ab1607a1a75b7bb250e98ba7802e4f0c86943dfb30912d47277bad32"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-inspect_digits.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-inspect_umap.txt",
+        "bytes": 38,
+        "sha256": "8e70f3d0787ca9597e3807eba7ae66966487ea7687e505581d484eb267635aa7"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-inspect_umap.txt",
+        "bytes": 38,
+        "sha256": "8e70f3d0787ca9597e3807eba7ae66966487ea7687e505581d484eb267635aa7"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-inspect_umap.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-tiny_tsne.txt",
+        "bytes": 80,
+        "sha256": "eda61654eb0ca052d4469c80532e2a5ff5a0f81f42f74602f381c0ade3095841"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-tiny_tsne.txt",
+        "bytes": 80,
+        "sha256": "eda61654eb0ca052d4469c80532e2a5ff5a0f81f42f74602f381c0ade3095841"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-tiny_tsne.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-umap-mechanism.txt",
+        "bytes": 259,
+        "sha256": "a5acbbbf1dc23667b42d1a6b9921b05669e94e5cf5e10cba18d6e2ec1194755f"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-umap-mechanism.txt",
+        "bytes": 259,
+        "sha256": "a5acbbbf1dc23667b42d1a6b9921b05669e94e5cf5e10cba18d6e2ec1194755f"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/retained-umap-mechanism.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    },
+    {
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/sampled_pair_events.txt",
+        "bytes": 323,
+        "sha256": "39ed590e69e1f9f7dafc29c762cb88728670740430c6cdede7d850cc3fc5706e"
+      },
+      "written": {
+        "path": "public/learn-assets/manifold-learning/outputs/sampled_pair_events.txt",
+        "bytes": 323,
+        "sha256": "39ed590e69e1f9f7dafc29c762cb88728670740430c6cdede7d850cc3fc5706e"
+      },
+      "before": {
+        "path": "public/learn-assets/manifold-learning/outputs/sampled_pair_events.txt",
+        "exists": false
+      },
+      "rollback": null,
+      "kind": "complete public payload"
+    }
+  ],
+  "inverses": [
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldDrawing.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldDrawing.jsx",
+        "bytes": 10431,
+        "sha256": "1e6daacdc2f0667aaa6e8cae6182847402f310f122ccc4e4157d5a26f88d3d16"
+      },
+      "inverseBytes": 10431,
+      "inverseSha256": "1e6daacdc2f0667aaa6e8cae6182847402f310f122ccc4e4157d5a26f88d3d16",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../../../../../../src/learn/components/lesson-labs/LessonFlow.jsx",
+          "after": "../LessonFlow.jsx",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldObjects.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldObjects.jsx",
+        "bytes": 18088,
+        "sha256": "b288665beaf6a504358cf3af4a827a00d5871d5767835af0d60f8304297ccb99"
+      },
+      "inverseBytes": 18088,
+      "inverseSha256": "b288665beaf6a504358cf3af4a827a00d5871d5767835af0d60f8304297ccb99",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldDrawing.jsx",
+          "after": "./ManifoldDrawing.jsx",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldInvestigations.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldInvestigations.jsx",
+        "bytes": 26659,
+        "sha256": "40af51ba0ffc84cf4a33c89b3c511749b3f0e668301fbde77bed0d0d5386ae26"
+      },
+      "inverseBytes": 26659,
+      "inverseSha256": "40af51ba0ffc84cf4a33c89b3c511749b3f0e668301fbde77bed0d0d5386ae26",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../../../../../../src/learn/components/lesson-labs/LessonFlow.jsx",
+          "after": "../LessonFlow.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldDrawing.jsx",
+          "after": "./ManifoldDrawing.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldOperationObjects.jsx",
+          "after": "./ManifoldOperationObjects.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../manifold-models.mjs",
+          "after": "./manifold-models.mjs",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../manifold-data.js",
+          "after": "./manifold-data.js",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/GeometryFigures.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/GeometryFigures.jsx",
+        "bytes": 38136,
+        "sha256": "e19fb403ac5fd94cf5ec65ea4a34b7152874f6e4e12c3e664f0868ec5b14cdea"
+      },
+      "inverseBytes": 38136,
+      "inverseSha256": "e19fb403ac5fd94cf5ec65ea4a34b7152874f6e4e12c3e664f0868ec5b14cdea",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldDrawing.jsx",
+          "after": "./ManifoldDrawing.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldInvestigations.jsx",
+          "after": "./ManifoldInvestigations.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../manifold-models.mjs",
+          "after": "./manifold-models.mjs",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../manifold-data.js",
+          "after": "./manifold-data.js",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldObjects.jsx",
+          "after": "./ManifoldObjects.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../manifold-geometry.mjs",
+          "after": "./manifold-geometry.mjs",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldOperationObjects.jsx",
+          "after": "./ManifoldOperationObjects.jsx",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/AffinityFigures.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/AffinityFigures.jsx",
+        "bytes": 19404,
+        "sha256": "7d55558e1ca699bb7782bcb199729ac7d6a206f7dc43e567dbc36795972d4018"
+      },
+      "inverseBytes": 19404,
+      "inverseSha256": "7d55558e1ca699bb7782bcb199729ac7d6a206f7dc43e567dbc36795972d4018",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldObjects.jsx",
+          "after": "./ManifoldObjects.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldOperationObjects.jsx",
+          "after": "./ManifoldOperationObjects.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldDrawing.jsx",
+          "after": "./ManifoldDrawing.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldInvestigations.jsx",
+          "after": "./ManifoldInvestigations.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../manifold-models.mjs",
+          "after": "./manifold-models.mjs",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldOperationObjects.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldOperationObjects.jsx",
+        "bytes": 21245,
+        "sha256": "e1aac270f68db8dcb5d189b613aacc9eb8eb12a70652a13e20b1d94af3d5aea2"
+      },
+      "inverseBytes": 21245,
+      "inverseSha256": "e1aac270f68db8dcb5d189b613aacc9eb8eb12a70652a13e20b1d94af3d5aea2",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldDrawing.jsx",
+          "after": "./ManifoldDrawing.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../manifold-models.mjs",
+          "after": "./manifold-models.mjs",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/NativeReadingObjects.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/NativeReadingObjects.jsx",
+        "bytes": 17744,
+        "sha256": "1acda558d04f5f6568690dc55f0f2e0a14552b460891fa89e3b314766d652d06"
+      },
+      "inverseBytes": 17744,
+      "inverseSha256": "1acda558d04f5f6568690dc55f0f2e0a14552b460891fa89e3b314766d652d06",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../../ManifoldDrawing.jsx",
+          "after": "./ManifoldDrawing.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../../ManifoldObjects.jsx",
+          "after": "./ManifoldObjects.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "Root-authorized label spacing",
+          "before": "Fit one5-NN classifier",
+          "after": "Fit one 5-NN classifier",
+          "occurrences": 1
+        },
+        {
+          "kind": "Root-authorized label spacing",
+          "before": "compare with75 held-out labels",
+          "after": "compare with 75 held-out labels",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldFigures.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldFigures.jsx",
+        "bytes": 464,
+        "sha256": "b17d994feab9ac0096c809e4fa8da16e20bbed708aa281f6b4728b9d105137df"
+      },
+      "inverseBytes": 464,
+      "inverseSha256": "b17d994feab9ac0096c809e4fa8da16e20bbed708aa281f6b4728b9d105137df",
+      "physicalSourceExact": true,
+      "transform": []
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-models.mjs",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+        "bytes": 9250,
+        "sha256": "c5ba7766028d8bdde7b8009af07418f9799561b95513a48bcd5565b609d58afb"
+      },
+      "inverseBytes": 9250,
+      "inverseSha256": "c5ba7766028d8bdde7b8009af07418f9799561b95513a48bcd5565b609d58afb",
+      "physicalSourceExact": true,
+      "transform": []
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-geometry.mjs",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-geometry.mjs",
+        "bytes": 3443,
+        "sha256": "5f05fdb29982dbb214ca05a67215b40f79e46f3ad26d0246c3bc84db2e6f2f22"
+      },
+      "inverseBytes": 3443,
+      "inverseSha256": "5f05fdb29982dbb214ca05a67215b40f79e46f3ad26d0246c3bc84db2e6f2f22",
+      "physicalSourceExact": true,
+      "transform": []
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-data.js",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+        "bytes": 1098,
+        "sha256": "ddb035ee95bcfb601f5eb168af517db8b13da7b753ab028f36c80bce468e24d4"
+      },
+      "inverseBytes": 1098,
+      "inverseSha256": "ddb035ee95bcfb601f5eb168af517db8b13da7b753ab028f36c80bce468e24d4",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../content-authoring/data/calculated-inputs.json",
+          "after": "../../../data/manifold-reading-flow/calculated-inputs.json",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../content-authoring/data/digits-300.csv?raw",
+          "after": "../../../data/manifold-reading-flow/digits-300.csv?raw",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../content-authoring/outputs/audit_saved_neighbors.txt?raw",
+          "after": "../../../data/manifold-reading-flow/audit_saved_neighbors.txt?raw",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/ManifoldFiles.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/PrivateFiles.jsx",
+        "bytes": 740,
+        "sha256": "9663b5c8640759251d885bfe3a1e46b98b296262c2c57b69d4e195a6b62d639e"
+      },
+      "inverseBytes": 740,
+      "inverseSha256": "9663b5c8640759251d885bfe3a1e46b98b296262c2c57b69d4e195a6b62d639e",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../../../../../src/learn/components/content/LessonCodeDownloads.jsx",
+          "after": "../../content/LessonCodeDownloads.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../content-authoring/review-correction/program-bundle.json",
+          "after": "../../../data/manifold-reading-flow/file-index.json",
+          "occurrences": 1
+        },
+        {
+          "kind": "public delivery URL",
+          "before": "/learn-assets/t-sne-umap-private/",
+          "after": "/learn-assets/manifold-learning/",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/manifold-reader.css",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/manifold-reader.css",
+        "bytes": 5989,
+        "sha256": "8be4ec962fe2aacf1c902007e6f147475cacb025e833f5985715dbfcd9ec546a"
+      },
+      "inverseBytes": 5989,
+      "inverseSha256": "8be4ec962fe2aacf1c902007e6f147475cacb025e833f5985715dbfcd9ec546a",
+      "physicalSourceExact": true,
+      "transform": []
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/manifold-reading-flow/wiring.css",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/wiring.css",
+        "bytes": 539,
+        "sha256": "9de790d566383661f6b73f7a7f821f452bfd9d508d40a6ad8376836e3546e820"
+      },
+      "inverseBytes": 539,
+      "inverseSha256": "9de790d566383661f6b73f7a7f821f452bfd9d508d40a6ad8376836e3546e820",
+      "physicalSourceExact": true,
+      "transform": []
+    },
+    {
+      "destination": "src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/manifold-lesson.jsx",
+        "bytes": 127064,
+        "sha256": "8b7ffaa4f909ea54a5f66a59cdebf23e0a145d39f74ece455b48a89b8444936b"
+      },
+      "inverseBytes": 127064,
+      "inverseSha256": "8b7ffaa4f909ea54a5f66a59cdebf23e0a145d39f74ece455b48a89b8444936b",
+      "physicalSourceExact": true,
+      "transform": [
+        {
+          "kind": "import relocation",
+          "before": "../../../../../../src/learn/components/content/Headings.jsx",
+          "after": "../../components/content/Headings.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../../../../../../src/learn/components/content/Prose.jsx",
+          "after": "../../components/content/Prose.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../../../../../../src/learn/components/content/Code.jsx",
+          "after": "../../components/content/Code.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../../../../../../src/learn/components/content/RemoteCodeBlock.jsx",
+          "after": "../../components/content/RemoteCodeBlock.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../../../../../../src/learn/components/content/Math.jsx",
+          "after": "../../components/content/Math.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldDrawing.jsx",
+          "after": "../../components/lesson-labs/manifold-reading-flow/ManifoldDrawing.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldFigures.jsx",
+          "after": "../../components/lesson-labs/manifold-reading-flow/ManifoldFigures.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../ManifoldInvestigations.jsx",
+          "after": "../../components/lesson-labs/manifold-reading-flow/ManifoldInvestigations.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../PrivateFiles.jsx",
+          "after": "../../components/lesson-labs/manifold-reading-flow/ManifoldFiles.jsx",
+          "occurrences": 1
+        },
+        {
+          "kind": "import relocation",
+          "before": "../manifold-reader.css",
+          "after": "../../components/lesson-labs/manifold-reading-flow/manifold-reader.css",
+          "occurrences": 1
+        },
+        {
+          "kind": "public delivery URL",
+          "before": "/learn-assets/t-sne-umap-private/",
+          "after": "/learn-assets/manifold-learning/",
+          "occurrences": 30
+        },
+        {
+          "kind": "required D30 wiring stylesheet",
+          "before": "",
+          "after": "import '../../components/lesson-labs/manifold-reading-flow/wiring.css';\n",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "destination": "src/learn/data/manifold-reading-flow/calculated-inputs.json",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/calculated-inputs.json",
+        "bytes": 125183,
+        "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+      },
+      "inverseBytes": 125183,
+      "inverseSha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884",
+      "physicalSourceExact": true,
+      "transform": []
+    },
+    {
+      "destination": "src/learn/data/manifold-reading-flow/digits-300.csv",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "inverseBytes": 46235,
+      "inverseSha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e",
+      "physicalSourceExact": true,
+      "transform": []
+    },
+    {
+      "destination": "src/learn/data/manifold-reading-flow/audit_saved_neighbors.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/audit_saved_neighbors.txt",
+        "bytes": 1034,
+        "sha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7"
+      },
+      "inverseBytes": 1034,
+      "inverseSha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7",
+      "physicalSourceExact": true,
+      "transform": []
+    },
+    {
+      "destination": "src/learn/data/manifold-reading-flow/file-index.json",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+        "bytes": 15754,
+        "sha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d"
+      },
+      "inverseBytes": 15754,
+      "inverseSha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d",
+      "physicalSourceExact": true,
+      "transform": []
+    }
+  ],
+  "legacyFilesPreserved": [
+    {
+      "path": "public/learn-assets/manifold-learning/calculated-inputs.json",
+      "bytes": 125183,
+      "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/compare_transforms.py",
+      "bytes": 1095,
+      "sha256": "1e6b522a310b7d4de580754e071bd0f195ebde6f38b8ba4050a94c98076608b7"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/data-provenance.md",
+      "bytes": 6097,
+      "sha256": "b48bdb1363b8e9123b3405d231a0c40172be8cbd947ce2c21a300ea68d210f6e"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/inspect_digits.py",
+      "bytes": 1243,
+      "sha256": "19973ec6d6ecf8bf74cfda89a3bedd5b223ecb33a8587a01d5173766b995d111"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/inspect_umap.py",
+      "bytes": 1043,
+      "sha256": "21541157bdf2626cc494ce772d68638431dc9daca576f10ba88f24832bd58595"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/runtime-versions.json",
+      "bytes": 230,
+      "sha256": "6d50b51386a007ff43f7c2983cb1dab72b75958c46c6b3a299a942ab9d1b2f46"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/tiny_tsne.py",
+      "bytes": 1523,
+      "sha256": "b1f1660c9bb9da66aa7edb5a928a95b489da6e73c8d6d3edd4b47d9dcc3e7d53"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/umap-digits.csv",
+      "bytes": 30448,
+      "sha256": "57a6ec04fca5c3739a49402bb5b06a9688664c38c5b2017065dd70918e380c01"
+    },
+    {
+      "path": "public/learn-assets/manifold-learning/umap-mechanism.py",
+      "bytes": 6947,
+      "sha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/manifold-figures.css",
+      "bytes": 9524,
+      "sha256": "57e0fdaf50c5e560a553152924ffcec51320bade25dc74db811f12f9aed2caa3"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/manifold-labs.css",
+      "bytes": 10788,
+      "sha256": "48324502ea4c5261d8c477d48c5a414fadb8d8f0d85e4b4936e6850b44fc8e63"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/manifold-lesson.css",
+      "bytes": 640,
+      "sha256": "a4413b0e23b52269c1c82a519980d583fd4f5da8d959dc21d021b4eb4db0126f"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ManifoldFigures.jsx",
+      "bytes": 38909,
+      "sha256": "f2ff89f63d895e9aae5f3ad471f79428c148df6665b6457857d8d0ba3427532e"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ManifoldLabs.jsx",
+      "bytes": 32723,
+      "sha256": "2c28d1aac162caee6e3023c85f49c2a16324cd7078a406cf85cb11e9fb9dbd7a"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ManifoldShared.jsx",
+      "bytes": 8372,
+      "sha256": "5bc8237e0c0f0657576dfcd7a5da6a06cbfedc9d67273725117ee9d74514b8e4"
+    }
+  ],
+  "loadingGuards": [
+    {
+      "planned": {
+        "path": "src/learn/data/lesson-manifest.json",
+        "bytes": 23965,
+        "sha256": "30e29cef3d8cc25ea5a10c61582997df2a9a5bac4559384089d2470a0fef3c71"
+      },
+      "beforeApply": {
+        "path": "src/learn/data/lesson-manifest.json",
+        "bytes": 23965,
+        "sha256": "30e29cef3d8cc25ea5a10c61582997df2a9a5bac4559384089d2470a0fef3c71"
+      },
+      "afterApply": {
+        "path": "src/learn/data/lesson-manifest.json",
+        "bytes": 23965,
+        "sha256": "30e29cef3d8cc25ea5a10c61582997df2a9a5bac4559384089d2470a0fef3c71"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/generated/lesson-imports.js",
+        "bytes": 27859,
+        "sha256": "c5d6d30b9ab8a878140378ef4e45d5380319ba634716edd23f78e87c4bfb905e"
+      },
+      "beforeApply": {
+        "path": "src/learn/data/generated/lesson-imports.js",
+        "bytes": 27859,
+        "sha256": "c5d6d30b9ab8a878140378ef4e45d5380319ba634716edd23f78e87c4bfb905e"
+      },
+      "afterApply": {
+        "path": "src/learn/data/generated/lesson-imports.js",
+        "bytes": 27859,
+        "sha256": "c5d6d30b9ab8a878140378ef4e45d5380319ba634716edd23f78e87c4bfb905e"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/lesson-loader.js",
+        "bytes": 1225,
+        "sha256": "1ae79c6cf23b2e1b3b3727782ca4af319bebe9b7ab619f06c7055e7da4dccf7e"
+      },
+      "beforeApply": {
+        "path": "src/learn/data/lesson-loader.js",
+        "bytes": 1225,
+        "sha256": "1ae79c6cf23b2e1b3b3727782ca4af319bebe9b7ab619f06c7055e7da4dccf7e"
+      },
+      "afterApply": {
+        "path": "src/learn/data/lesson-loader.js",
+        "bytes": 1225,
+        "sha256": "1ae79c6cf23b2e1b3b3727782ca4af319bebe9b7ab619f06c7055e7da4dccf7e"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/hooks/useTopicResource.js",
+        "bytes": 991,
+        "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+      },
+      "beforeApply": {
+        "path": "src/learn/hooks/useTopicResource.js",
+        "bytes": 991,
+        "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+      },
+      "afterApply": {
+        "path": "src/learn/hooks/useTopicResource.js",
+        "bytes": 991,
+        "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/TopicContent.jsx",
+        "bytes": 7106,
+        "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+      },
+      "beforeApply": {
+        "path": "src/learn/components/TopicContent.jsx",
+        "bytes": 7106,
+        "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+      },
+      "afterApply": {
+        "path": "src/learn/components/TopicContent.jsx",
+        "bytes": 7106,
+        "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/LessonBoundary.jsx",
+        "bytes": 992,
+        "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+      },
+      "beforeApply": {
+        "path": "src/learn/components/LessonBoundary.jsx",
+        "bytes": 992,
+        "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+      },
+      "afterApply": {
+        "path": "src/learn/components/LessonBoundary.jsx",
+        "bytes": 992,
+        "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/LessonGuide.jsx",
+        "bytes": 2925,
+        "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+      },
+      "beforeApply": {
+        "path": "src/learn/components/LessonGuide.jsx",
+        "bytes": 2925,
+        "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+      },
+      "afterApply": {
+        "path": "src/learn/components/LessonGuide.jsx",
+        "bytes": 2925,
+        "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+        "bytes": 4857,
+        "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+      },
+      "beforeApply": {
+        "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+        "bytes": 4857,
+        "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+      },
+      "afterApply": {
+        "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+        "bytes": 4857,
+        "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/content/code-downloads.js",
+        "bytes": 1709,
+        "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+      },
+      "beforeApply": {
+        "path": "src/learn/components/content/code-downloads.js",
+        "bytes": 1709,
+        "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+      },
+      "afterApply": {
+        "path": "src/learn/components/content/code-downloads.js",
+        "bytes": 1709,
+        "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942828,
+        "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+      },
+      "beforeApply": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942828,
+        "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+      },
+      "afterApply": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942828,
+        "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+        "bytes": 5583,
+        "sha256": "08b894b8f364b8347e3b2938ff5fa21e0caf5d8b60d01b9d9a75a9a743a34e53"
+      },
+      "beforeApply": {
+        "path": "src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+        "bytes": 5583,
+        "sha256": "08b894b8f364b8347e3b2938ff5fa21e0caf5d8b60d01b9d9a75a9a743a34e53"
+      },
+      "afterApply": {
+        "path": "src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+        "bytes": 5583,
+        "sha256": "08b894b8f364b8347e3b2938ff5fa21e0caf5d8b60d01b9d9a75a9a743a34e53"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "vite.config.js",
+        "bytes": 2618,
+        "sha256": "3428991f335b7e2ecbc9c3859891ab4bac571651011a52fcb7c90604d260c690"
+      },
+      "beforeApply": {
+        "path": "vite.config.js",
+        "bytes": 2618,
+        "sha256": "3428991f335b7e2ecbc9c3859891ab4bac571651011a52fcb7c90604d260c690"
+      },
+      "afterApply": {
+        "path": "vite.config.js",
+        "bytes": 2618,
+        "sha256": "3428991f335b7e2ecbc9c3859891ab4bac571651011a52fcb7c90604d260c690"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/Reader.jsx",
+        "bytes": 4433,
+        "sha256": "0c3c64561cbe7d20255f919ca3fee4ce23f2ac97d20ba7087ec92157cf9ecc6a"
+      },
+      "beforeApply": {
+        "path": "src/learn/Reader.jsx",
+        "bytes": 4433,
+        "sha256": "0c3c64561cbe7d20255f919ca3fee4ce23f2ac97d20ba7087ec92157cf9ecc6a"
+      },
+      "afterApply": {
+        "path": "src/learn/Reader.jsx",
+        "bytes": 4433,
+        "sha256": "0c3c64561cbe7d20255f919ca3fee4ce23f2ac97d20ba7087ec92157cf9ecc6a"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/app/SiteRoutes.jsx",
+        "bytes": 4396,
+        "sha256": "f266aba4798586bd8e45a61d4dcfcef748098f6e3b959595523c753f6d5983c5"
+      },
+      "beforeApply": {
+        "path": "src/app/SiteRoutes.jsx",
+        "bytes": 4396,
+        "sha256": "f266aba4798586bd8e45a61d4dcfcef748098f6e3b959595523c753f6d5983c5"
+      },
+      "afterApply": {
+        "path": "src/app/SiteRoutes.jsx",
+        "bytes": 4396,
+        "sha256": "f266aba4798586bd8e45a61d4dcfcef748098f6e3b959595523c753f6d5983c5"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "scripts/generate-learning-artifacts.mjs",
+        "bytes": 5996,
+        "sha256": "5d9ad0701a399813aca84d7eb8d3c715f49e713531c65662c2eb9d7b09bdbc36"
+      },
+      "beforeApply": {
+        "path": "scripts/generate-learning-artifacts.mjs",
+        "bytes": 5996,
+        "sha256": "5d9ad0701a399813aca84d7eb8d3c715f49e713531c65662c2eb9d7b09bdbc36"
+      },
+      "afterApply": {
+        "path": "scripts/generate-learning-artifacts.mjs",
+        "bytes": 5996,
+        "sha256": "5d9ad0701a399813aca84d7eb8d3c715f49e713531c65662c2eb9d7b09bdbc36"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/curriculum/learning-paths.js",
+        "bytes": 9661,
+        "sha256": "09e8aaf90aba674029c7fe9995810df682f3a0d3799b38bc7b056a8598e9d2ae"
+      },
+      "beforeApply": {
+        "path": "src/learn/data/curriculum/learning-paths.js",
+        "bytes": 9661,
+        "sha256": "09e8aaf90aba674029c7fe9995810df682f3a0d3799b38bc7b056a8598e9d2ae"
+      },
+      "afterApply": {
+        "path": "src/learn/data/curriculum/learning-paths.js",
+        "bytes": 9661,
+        "sha256": "09e8aaf90aba674029c7fe9995810df682f3a0d3799b38bc7b056a8598e9d2ae"
+      },
+      "unchangedDuringApply": true,
+      "exactToPlan": true
+    }
+  ],
+  "changedForeignLoadingGuards": [],
+  "scope": {
+    "sections": 13,
+    "mechanisms": 45,
+    "investigations": 12,
+    "wholeProgrammes": 15,
+    "solvedTasks": 19,
+    "payloads": 35
+  },
+  "rootMetadataDisposition": "Preserve frozen export. Root accepts selected generated readTime~100min+120minpractice and hasIntegratedGuidefalse; generator/navigation not written here.",
+  "rollbackPolicy": "Only canonical topic replacement exists now and has exact owner-local rollback bytes. New component/data/public paths must remain absent until guarded apply; record written hashes and remove only exact agent-created hashes on rollback. Preserve every legacy asset/component. Never reset foreign work.",
+  "scientificMainModelSSRReplays": 0,
+  "builds": 0,
+  "browserOperations": 0,
+  "sharedGeneratorCentralWrites": 0,
+  "phaseChanges": 0,
+  "limits": [
+    "Plan with predicted transformed hashes, not actual integrated source/build/native evidence.",
+    "Root owns phase/ledger/shared and accepts this plan before canonical/public apply.",
+    "Preserve all attributed original scientific/source/current/clipboard/native qualifications.",
+    "Actual integrated files and exact inverses are author conservation evidence, not normal build or native acceptance.",
+    "Root unconditional guide/loading/index/native verification remains pending."
+  ]
+}

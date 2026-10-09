@@ -1,0 +1,9 @@
+{
+  "session": 56640,
+  "exception": "IndexError: list index out of range in DynamicCache.update, layer_idx",
+  "boundary": "Offline corpus and 24 updates terminal; on-policy first generation prefill, zero generated batches and zero optimizer steps",
+  "cause": "Copied original blocks 0/2/4 retained attention.layer_idx 0/2/4 while config.num_hidden_layers=3 creates three cache slots",
+  "repair": "Renumber only attention cache metadata to 0/1/2. Preserve parameter tensors, original selected blocks and every training setting. Reuse completed offline stage.",
+  "preserved_program": "distillation_native.before-cache-correction.py",
+  "original_protocol_preserved": "protocol.json"
+}

@@ -1,0 +1,4992 @@
+{
+  "checkedAt": "2026-10-06T18:18:17.310Z",
+  "base": "http://127.0.0.1:4242",
+  "build": "dist-multimodal-tokenization",
+  "sourceFiles": {
+    "src/learn/data/topics/multimodal-tokenization.jsx": "ca9aae58cd88867ec2b60511115ea70db0af92847ecfecddf594e2585d4d00b8",
+    "src/learn/data/multimodal-tokenization-models.js": "d709d96540ad4c92d2838f0aa251de2ce2bad8a1e22fe0c5cf3b3d0a2d0eabd4",
+    "src/learn/components/lesson-labs/MultimodalTokenizationFlow.jsx": "3b554627c04143b098556cb4652ffd807a3c56576d953b7254e8caea9bf8d947",
+    "src/learn/components/lesson-labs/multimodal-tokenization-flow.css": "88556836086f3526d75641d878ae690d4953edb9f17b320266db9cb1118bed36",
+    "scripts/verify-multimodal-tokenization-browser.cjs": "04fedd050612012e35d513e8dfa64a1ee1dbce53aecd042cb247eaf131543c7f"
+  },
+  "buildManifestHash": "69f8d091750e2664092107916ed3a728cb18465bcff83e5707d3030c116b76fd",
+  "interactions": [
+    {
+      "question": "pixel correspondence",
+      "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/patch-edited.png"
+    },
+    {
+      "question": "nearest-code tie",
+      "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/vq-tie.png"
+    },
+    {
+      "question": "reversible audio ordering",
+      "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/audio-level-major.png"
+    },
+    {
+      "question": "missing temporal evidence",
+      "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/video-missed.png"
+    },
+    {
+      "question": "zero-duration budget",
+      "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/budget-zero.png"
+    },
+    {
+      "question": "real reconstruction comparison",
+      "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/digit-second.png"
+    }
+  ],
+  "views": [
+    {
+      "width": 1366,
+      "zoom": 1,
+      "name": "desktop",
+      "overflow": 0,
+      "figures": [
+        {
+          "name": "interface",
+          "width": 760,
+          "height": 1701.21875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "time →",
+              "fontPixels": 13,
+              "x": 23,
+              "y": 76,
+              "width": 42.171875,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-interface.png",
+          "screenshotSha256": "5264ded52203f3293adb79ac80c25d91f9d2f570a954dcf3605a09d7c1d3ce25"
+        },
+        {
+          "name": "mm-patch-projection",
+          "width": 760,
+          "height": 1050.78125,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(226, 181, 90)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-mm-patch-projection.png",
+          "screenshotSha256": "112a7ff8381883c23acd2ff305e10600fc9a4ccde9facb67088b06e4b62e5086"
+        },
+        {
+          "name": "conditioning",
+          "width": 760,
+          "height": 666.140625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "read image keys / values",
+              "fontPixels": 13,
+              "x": 24,
+              "y": 4,
+              "width": 144.29345703125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "text queries ↑ cross-attention",
+              "fontPixels": 13,
+              "x": 23,
+              "y": 100,
+              "width": 167.203125,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-conditioning.png",
+          "screenshotSha256": "6ecf7aa81ae1cfc6bd17ceeed9954735eab76763f5566d7167f5c82fa75f8801"
+        },
+        {
+          "name": "mm-quantization",
+          "width": 760,
+          "height": 498.109375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "−1.5",
+              "fontPixels": 13,
+              "x": 34,
+              "y": 270,
+              "width": 25.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 13,
+              "x": 244,
+              "y": 270,
+              "width": 18.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "x",
+              "fontPixels": 13,
+              "x": 146,
+              "y": 283,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 13,
+              "x": 3,
+              "y": 28,
+              "width": 18.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "−1.5",
+              "fontPixels": 13,
+              "x": 0,
+              "y": 251,
+              "width": 25.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "y",
+              "fontPixels": 13,
+              "x": 9,
+              "y": 138,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 0",
+              "fontPixels": 13,
+              "x": 52,
+              "y": 234,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 1",
+              "fontPixels": 13,
+              "x": 233,
+              "y": 234,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 2",
+              "fontPixels": 13,
+              "x": 52,
+              "y": 48,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 3",
+              "fontPixels": 13,
+              "x": 233,
+              "y": 48,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [
+            {
+              "code": "0",
+              "patch": null,
+              "fill": "rgb(226, 181, 90)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(96, 165, 250)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(192, 132, 252)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "3",
+              "patch": null,
+              "fill": "rgb(244, 114, 182)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-mm-quantization.png",
+          "screenshotSha256": "c8c34b80b71db5a123c4df3271e05875d7b59a4e1bb11d272c9665c18a8900ce"
+        },
+        {
+          "name": "gradients",
+          "width": 760,
+          "height": 995.640625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "encoder z = .8",
+              "fontPixels": 13,
+              "x": 24,
+              "y": 10,
+              "width": 82.75,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "decoder x̂ = 1",
+              "fontPixels": 13,
+              "x": 180,
+              "y": 10,
+              "width": 79.140625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "(1 − 0)² = 1",
+              "fontPixels": 13,
+              "x": 105.84375,
+              "y": 113,
+              "width": 64.3125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2 → decoder, encoder (STE)",
+              "fontPixels": 13,
+              "x": 55.2578125,
+              "y": 172,
+              "width": 166.1416015625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "codebook bypassed",
+              "fontPixels": 13,
+              "x": 80.171875,
+              "y": 48,
+              "width": 115.65625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "sg(z) = .8",
+              "fontPixels": 13,
+              "x": 24,
+              "y": 10,
+              "width": 54.546875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "code e = 1",
+              "fontPixels": 13,
+              "x": 180,
+              "y": 10,
+              "width": 61.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "(.8 − 1)² = .04",
+              "fontPixels": 13,
+              "x": 98.6171875,
+              "y": 113,
+              "width": 79.53173828125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "gradient .4 → codebook",
+              "fontPixels": 13,
+              "x": 68.9765625,
+              "y": 172,
+              "width": 138.5361328125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "STOP at encoder",
+              "fontPixels": 13,
+              "x": 88.0078125,
+              "y": 48,
+              "width": 100.64013671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "encoder z = .8",
+              "fontPixels": 13,
+              "x": 24,
+              "y": 10,
+              "width": 82.75,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "sg(e) = 1",
+              "fontPixels": 13,
+              "x": 180,
+              "y": 10,
+              "width": 51.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": ".25(.8 − 1)² = .01",
+              "fontPixels": 13,
+              "x": 89.578125,
+              "y": 113,
+              "width": 96.84375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "gradient −.1 → encoder",
+              "fontPixels": 13,
+              "x": 69.8828125,
+              "y": 172,
+              "width": 136.89794921875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "STOP at codebook",
+              "fontPixels": 13,
+              "x": 83.3125,
+              "y": 48,
+              "width": 109.8701171875,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-gradients.png",
+          "screenshotSha256": "074432fccc888a38024a8daf97d269cd73bbf629dc6a8597472d6a62aa5925ad"
+        },
+        {
+          "name": "mm-digit-reconstruction",
+          "width": 760,
+          "height": 484.71875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "7",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "11",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "3",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "6",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "11",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-mm-digit-reconstruction.png",
+          "screenshotSha256": "e97476ff184201628aeff654358106e140b1dac8334d33535217460e3cb90e55"
+        },
+        {
+          "name": "utilization",
+          "width": 760,
+          "height": 309.59375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "k 0",
+              "fontPixels": 13,
+              "x": 4,
+              "y": 28,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "4",
+              "fontPixels": 13,
+              "x": 250,
+              "y": 28,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 1",
+              "fontPixels": 13,
+              "x": 4,
+              "y": 68,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 13,
+              "x": 250,
+              "y": 68,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 2",
+              "fontPixels": 13,
+              "x": 4,
+              "y": 108,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 13,
+              "x": 250,
+              "y": 108,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 3",
+              "fontPixels": 13,
+              "x": 4,
+              "y": 148,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 13,
+              "x": 250,
+              "y": 148,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 13,
+              "x": 46,
+              "y": 197,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "4",
+              "fontPixels": 13,
+              "x": 229,
+              "y": 197,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "count",
+              "fontPixels": 13,
+              "x": 130,
+              "y": 197,
+              "width": 32.18994140625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 13,
+              "x": 66.3828125,
+              "y": 195,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 13,
+              "x": 32,
+              "y": 166,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1",
+              "fontPixels": 13,
+              "x": 146.3828125,
+              "y": 195,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1",
+              "fontPixels": 13,
+              "x": 32,
+              "y": 104,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 13,
+              "x": 226.3828125,
+              "y": 195,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 13,
+              "x": 32,
+              "y": 42,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k0",
+              "fontPixels": 13,
+              "x": 63.1328125,
+              "y": 166,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k1",
+              "fontPixels": 13,
+              "x": 143.1328125,
+              "y": 166,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k2",
+              "fontPixels": 13,
+              "x": 223.1328125,
+              "y": 166,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k3",
+              "fontPixels": 13,
+              "x": 63.1328125,
+              "y": 104,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k4",
+              "fontPixels": 13,
+              "x": 143.1328125,
+              "y": 104,
+              "width": 14.5,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k5",
+              "fontPixels": 13,
+              "x": 223.1328125,
+              "y": 104,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k6",
+              "fontPixels": 13,
+              "x": 63.1328125,
+              "y": 42,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k7",
+              "fontPixels": 13,
+              "x": 143.1328125,
+              "y": 42,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k8",
+              "fontPixels": 13,
+              "x": 223.1328125,
+              "y": 42,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "component index i₀",
+              "fontPixels": 13,
+              "x": 110,
+              "y": 221,
+              "width": 110.5107421875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "component index i₁ ↑",
+              "fontPixels": 13,
+              "x": 5,
+              "y": 12,
+              "width": 119.53125,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-utilization.png",
+          "screenshotSha256": "f65bdbbab3a1749970140e1bcf58eb2d9f4e8d8fa0473bad6dd5ee81ce2c4bda"
+        },
+        {
+          "name": "mm-residual",
+          "width": 760,
+          "height": 779.53125,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "−1.5",
+              "fontPixels": 13,
+              "x": 34,
+              "y": 270,
+              "width": 25.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 13,
+              "x": 244,
+              "y": 270,
+              "width": 18.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "x",
+              "fontPixels": 13,
+              "x": 146,
+              "y": 283,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 13,
+              "x": 3,
+              "y": 28,
+              "width": 18.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "−1.5",
+              "fontPixels": 13,
+              "x": 0,
+              "y": 251,
+              "width": 25.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "y",
+              "fontPixels": 13,
+              "x": 9,
+              "y": 138,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "origin",
+              "fontPixels": 13,
+              "x": 156,
+              "y": 155,
+              "width": 31.796875,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-mm-residual.png",
+          "screenshotSha256": "36f1f0062382551bb19fcf32052154b3f178a2c28fd5ce4ec19734e38c20cae9"
+        },
+        {
+          "name": "mm-audio-order",
+          "width": 760,
+          "height": 606.703125,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-mm-audio-order.png",
+          "screenshotSha256": "0502a74b1f121bd061263cc2ec1481ab1f584212e5ae06226e7958548cdb416e"
+        },
+        {
+          "name": "video-volume",
+          "width": 760,
+          "height": 1082.359375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "f1",
+              "fontPixels": 13,
+              "x": 219,
+              "y": 104,
+              "width": 11.859375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "f0",
+              "fontPixels": 13,
+              "x": 219,
+              "y": 56,
+              "width": 11.859375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "time depth 2 × height 2 × width 2",
+              "fontPixels": 13,
+              "x": 37,
+              "y": 202,
+              "width": 189.640625,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-video-volume.png",
+          "screenshotSha256": "aa93902bad11b94be7b05beae39b8fa10e46c4cbd8dd3207eb9dd5d831836845"
+        },
+        {
+          "name": "mm-video-sampling",
+          "width": 760,
+          "height": 325.296875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "0 s",
+              "fontPixels": 13,
+              "x": 21.3203125,
+              "y": 91,
+              "width": 17.84619140625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1 s",
+              "fontPixels": 13,
+              "x": 141.3203125,
+              "y": 91,
+              "width": 17.84619140625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2 s",
+              "fontPixels": 13,
+              "x": 261.3203125,
+              "y": 91,
+              "width": 17.84619140625,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-mm-video-sampling.png",
+          "screenshotSha256": "11d8843969cb3592cd5ad1e310d91bea38151518233eb6330f4c5d546c7ef087"
+        },
+        {
+          "name": "namespace",
+          "width": 760,
+          "height": 1046.890625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-namespace.png",
+          "screenshotSha256": "62d4149bc6ba8365b4ac50e893e8b8467c29d5baf1563f2d707e8714dad6bfd4"
+        },
+        {
+          "name": "mm-budget",
+          "width": 760,
+          "height": 415.671875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/desktop-mm-budget.png",
+          "screenshotSha256": "4088ef14f2e64cc8034870b773da1960128c56059ff125b213c157e1575a029b"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "zoom": 1,
+      "name": "phone",
+      "overflow": 0,
+      "figures": [
+        {
+          "name": "interface",
+          "width": 350,
+          "height": 2628.484375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "time →",
+              "fontPixels": 13,
+              "x": 23,
+              "y": 76,
+              "width": 42.171875,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-interface.png",
+          "screenshotSha256": "22ce1ca13acf37f66633c0ee7a0c1c6a580e8d11f7268062b8ea6a48c0aa160c"
+        },
+        {
+          "name": "mm-patch-projection",
+          "width": 350,
+          "height": 1437.125,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(226, 181, 90)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-mm-patch-projection.png",
+          "screenshotSha256": "86de88636e7741c57cc5a2d4fb5d1ee67b2fe2c0bcc57f0b840d16f9da2c4fd6"
+        },
+        {
+          "name": "conditioning",
+          "width": 350,
+          "height": 1083.625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "read image keys / values",
+              "fontPixels": 13,
+              "x": 24,
+              "y": 4,
+              "width": 144.29345703125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "text queries ↑ cross-attention",
+              "fontPixels": 13,
+              "x": 23,
+              "y": 100,
+              "width": 167.203125,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-conditioning.png",
+          "screenshotSha256": "e6fadb13d9a13e654e690e53da1152b9260805f9112d299ea6412f0633d041ca"
+        },
+        {
+          "name": "mm-quantization",
+          "width": 350,
+          "height": 917.5625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "−1.5",
+              "fontPixels": 13,
+              "x": 34,
+              "y": 270,
+              "width": 25.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 13,
+              "x": 244,
+              "y": 270,
+              "width": 18.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "x",
+              "fontPixels": 13,
+              "x": 146,
+              "y": 283,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 13,
+              "x": 3,
+              "y": 28,
+              "width": 18.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "−1.5",
+              "fontPixels": 13,
+              "x": 0,
+              "y": 251,
+              "width": 25.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "y",
+              "fontPixels": 13,
+              "x": 9,
+              "y": 138,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 0",
+              "fontPixels": 13,
+              "x": 52,
+              "y": 234,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 1",
+              "fontPixels": 13,
+              "x": 233,
+              "y": 234,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 2",
+              "fontPixels": 13,
+              "x": 52,
+              "y": 48,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 3",
+              "fontPixels": 13,
+              "x": 233,
+              "y": 48,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [
+            {
+              "code": "0",
+              "patch": null,
+              "fill": "rgb(226, 181, 90)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(96, 165, 250)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(192, 132, 252)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "3",
+              "patch": null,
+              "fill": "rgb(244, 114, 182)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-mm-quantization.png",
+          "screenshotSha256": "45ee92e1f5f44ffad6361a72a69ca92fdf594d687c167b60c8a2f6234ecc3f33"
+        },
+        {
+          "name": "gradients",
+          "width": 350,
+          "height": 1320.109375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "encoder z = .8",
+              "fontPixels": 13,
+              "x": 24,
+              "y": 10,
+              "width": 82.75,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "decoder x̂ = 1",
+              "fontPixels": 13,
+              "x": 180,
+              "y": 10,
+              "width": 79.140625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "(1 − 0)² = 1",
+              "fontPixels": 13,
+              "x": 105.84375,
+              "y": 113,
+              "width": 64.3125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2 → decoder, encoder (STE)",
+              "fontPixels": 13,
+              "x": 55.2578125,
+              "y": 172,
+              "width": 166.1416015625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "codebook bypassed",
+              "fontPixels": 13,
+              "x": 80.171875,
+              "y": 48,
+              "width": 115.65625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "sg(z) = .8",
+              "fontPixels": 13,
+              "x": 24,
+              "y": 10,
+              "width": 54.546875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "code e = 1",
+              "fontPixels": 13,
+              "x": 180,
+              "y": 10,
+              "width": 61.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "(.8 − 1)² = .04",
+              "fontPixels": 13,
+              "x": 98.6171875,
+              "y": 113,
+              "width": 79.53173828125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "gradient .4 → codebook",
+              "fontPixels": 13,
+              "x": 68.9765625,
+              "y": 172,
+              "width": 138.5361328125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "STOP at encoder",
+              "fontPixels": 13,
+              "x": 88.0078125,
+              "y": 48,
+              "width": 100.64013671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "encoder z = .8",
+              "fontPixels": 13,
+              "x": 24,
+              "y": 10,
+              "width": 82.75,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "sg(e) = 1",
+              "fontPixels": 13,
+              "x": 180,
+              "y": 10,
+              "width": 51.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": ".25(.8 − 1)² = .01",
+              "fontPixels": 13,
+              "x": 89.578125,
+              "y": 113,
+              "width": 96.84375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "gradient −.1 → encoder",
+              "fontPixels": 13,
+              "x": 69.8828125,
+              "y": 172,
+              "width": 136.89794921875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "STOP at codebook",
+              "fontPixels": 13,
+              "x": 83.3125,
+              "y": 48,
+              "width": 109.8701171875,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-gradients.png",
+          "screenshotSha256": "431855469b3dcb00c14ef0ba134409aa2b180e628b61e4a5a14c1a256e8806fd"
+        },
+        {
+          "name": "mm-digit-reconstruction",
+          "width": 350,
+          "height": 1315.046875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "7",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "11",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "3",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "6",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "11",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-mm-digit-reconstruction.png",
+          "screenshotSha256": "bfdd8a83763a1b67d64bcb9c055cab020f639de3b179feaa9302dd54092720c5"
+        },
+        {
+          "name": "utilization",
+          "width": 350,
+          "height": 621.1875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "k 0",
+              "fontPixels": 13,
+              "x": 4,
+              "y": 28,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "4",
+              "fontPixels": 13,
+              "x": 250,
+              "y": 28,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 1",
+              "fontPixels": 13,
+              "x": 4,
+              "y": 68,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 13,
+              "x": 250,
+              "y": 68,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 2",
+              "fontPixels": 13,
+              "x": 4,
+              "y": 108,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 13,
+              "x": 250,
+              "y": 108,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 3",
+              "fontPixels": 13,
+              "x": 4,
+              "y": 148,
+              "width": 17.359375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 13,
+              "x": 250,
+              "y": 148,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 13,
+              "x": 46,
+              "y": 197,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "4",
+              "fontPixels": 13,
+              "x": 229,
+              "y": 197,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "count",
+              "fontPixels": 13,
+              "x": 130,
+              "y": 197,
+              "width": 32.18994140625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 13,
+              "x": 66.3828125,
+              "y": 195,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 13,
+              "x": 32,
+              "y": 166,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1",
+              "fontPixels": 13,
+              "x": 146.3828125,
+              "y": 195,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1",
+              "fontPixels": 13,
+              "x": 32,
+              "y": 104,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 13,
+              "x": 226.3828125,
+              "y": 195,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 13,
+              "x": 32,
+              "y": 42,
+              "width": 7.234375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k0",
+              "fontPixels": 13,
+              "x": 63.1328125,
+              "y": 166,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k1",
+              "fontPixels": 13,
+              "x": 143.1328125,
+              "y": 166,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k2",
+              "fontPixels": 13,
+              "x": 223.1328125,
+              "y": 166,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k3",
+              "fontPixels": 13,
+              "x": 63.1328125,
+              "y": 104,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k4",
+              "fontPixels": 13,
+              "x": 143.1328125,
+              "y": 104,
+              "width": 14.5,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k5",
+              "fontPixels": 13,
+              "x": 223.1328125,
+              "y": 104,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k6",
+              "fontPixels": 13,
+              "x": 63.1328125,
+              "y": 42,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k7",
+              "fontPixels": 13,
+              "x": 143.1328125,
+              "y": 42,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k8",
+              "fontPixels": 13,
+              "x": 223.1328125,
+              "y": 42,
+              "width": 13.734375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "component index i₀",
+              "fontPixels": 13,
+              "x": 110,
+              "y": 221,
+              "width": 110.5107421875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "component index i₁ ↑",
+              "fontPixels": 13,
+              "x": 5,
+              "y": 12,
+              "width": 119.53125,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-utilization.png",
+          "screenshotSha256": "e1a3cd6d6d051ccff48475fc2d790a81b84e2d6c11bdb4cd4ee6d6272b5df413"
+        },
+        {
+          "name": "mm-residual",
+          "width": 350,
+          "height": 1225.984375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "−1.5",
+              "fontPixels": 13,
+              "x": 34,
+              "y": 270,
+              "width": 25.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 13,
+              "x": 244,
+              "y": 270,
+              "width": 18.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "x",
+              "fontPixels": 13,
+              "x": 146,
+              "y": 283,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 13,
+              "x": 3,
+              "y": 28,
+              "width": 18.078125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "−1.5",
+              "fontPixels": 13,
+              "x": 0,
+              "y": 251,
+              "width": 25.671875,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "y",
+              "fontPixels": 13,
+              "x": 9,
+              "y": 138,
+              "width": 8,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "origin",
+              "fontPixels": 13,
+              "x": 156,
+              "y": 155,
+              "width": 31.796875,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-mm-residual.png",
+          "screenshotSha256": "036a40945bd4372f43289ec087e9370d9293c368cf01f3a0c447b9a5f25f7ef9"
+        },
+        {
+          "name": "mm-audio-order",
+          "width": 350,
+          "height": 809.0625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-mm-audio-order.png",
+          "screenshotSha256": "05af9dddba168ebf101cb47683deb0341a6c9ceace09768b736761d0bf261d07"
+        },
+        {
+          "name": "video-volume",
+          "width": 350,
+          "height": 2074.828125,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "f1",
+              "fontPixels": 13,
+              "x": 219,
+              "y": 104,
+              "width": 11.859375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "f0",
+              "fontPixels": 13,
+              "x": 219,
+              "y": 56,
+              "width": 11.859375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "time depth 2 × height 2 × width 2",
+              "fontPixels": 13,
+              "x": 37,
+              "y": 202,
+              "width": 189.640625,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-video-volume.png",
+          "screenshotSha256": "069685a4ae38edae0343f32372d7da8d0455947ea5330d572d63e3a1de6236ef"
+        },
+        {
+          "name": "mm-video-sampling",
+          "width": 350,
+          "height": 413.546875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "0 s",
+              "fontPixels": 13,
+              "x": 21.3203125,
+              "y": 91,
+              "width": 17.84619140625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1 s",
+              "fontPixels": 13,
+              "x": 141.3203125,
+              "y": 91,
+              "width": 17.84619140625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2 s",
+              "fontPixels": 13,
+              "x": 261.3203125,
+              "y": 91,
+              "width": 17.84619140625,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-mm-video-sampling.png",
+          "screenshotSha256": "53d44dc582586eedb197fbdf5f5baa44d2d67ba2004076d160c187a8300e9e67"
+        },
+        {
+          "name": "namespace",
+          "width": 350,
+          "height": 1517.9375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-namespace.png",
+          "screenshotSha256": "be59b46ba5f717a2ecd4cb5952454baecb3936402c7d74e0c4ab456985ce14e9"
+        },
+        {
+          "name": "mm-budget",
+          "width": 350,
+          "height": 593.34375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/phone-mm-budget.png",
+          "screenshotSha256": "1f555083d80d08fd8eb67769e4364f23b970dc6c0ee643218cfa8b840d9b7b04"
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "zoom": 2,
+      "name": "enlarged",
+      "overflow": 0,
+      "figures": [
+        {
+          "name": "interface",
+          "width": 411.21875,
+          "height": 5599.609375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "time →",
+              "fontPixels": 17.81787109375,
+              "x": 24,
+              "y": 76.32632446289062,
+              "width": 41.29130172729492,
+              "height": 14.592090606689453,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-interface.png",
+          "screenshotSha256": "7709506d8a32cdb46aa718023357bfb98595cb648ca3c77e057ac704a757c352"
+        },
+        {
+          "name": "mm-patch-projection",
+          "width": 411.21875,
+          "height": 3034.390625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(226, 181, 90)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-mm-patch-projection.png",
+          "screenshotSha256": "2b60d805b35d96e7fcbc3c7409a1d8d06112b9a7ceb22ebddbaf9d24053a3ffd"
+        },
+        {
+          "name": "conditioning",
+          "width": 411.21875,
+          "height": 2263.0625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "read image keys / values",
+              "fontPixels": 17.818193855932204,
+              "x": 24,
+              "y": 4.3265380859375,
+              "width": 143.79649353027344,
+              "height": 14.591827392578125,
+              "inside": true
+            },
+            {
+              "text": "text queries ↑ cross-attention",
+              "fontPixels": 17.818193855932204,
+              "x": 24,
+              "y": 100.3265380859375,
+              "width": 166.18064880371094,
+              "height": 14.591827392578125,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-conditioning.png",
+          "screenshotSha256": "bd14b8ac09e4122aaccff029c31a425cfd2089dd1d300ae89615db39cd9a0f63"
+        },
+        {
+          "name": "mm-quantization",
+          "width": 411.21875,
+          "height": 1910.96875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "−1.5",
+              "fontPixels": 17.819479166666667,
+              "x": 34,
+              "y": 270.3273620605469,
+              "width": 25.719158172607422,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 17.819479166666667,
+              "x": 243.99998474121094,
+              "y": 270.3273620605469,
+              "width": 18.13140106201172,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "x",
+              "fontPixels": 17.819479166666667,
+              "x": 146.2704620361328,
+              "y": 283.3273620605469,
+              "width": 8.024925231933594,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 17.819479166666667,
+              "x": 2.999999761581421,
+              "y": 28.327381134033203,
+              "width": 18.13140106201172,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "−1.5",
+              "fontPixels": 17.819479166666667,
+              "x": 0,
+              "y": 251.32736206054688,
+              "width": 25.719154357910156,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "y",
+              "fontPixels": 17.819479166666667,
+              "x": 10,
+              "y": 138.32737731933594,
+              "width": 7.295386791229248,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "k 0",
+              "fontPixels": 17.819479166666667,
+              "x": 51.999996185302734,
+              "y": 234.32736206054688,
+              "width": 17.40633773803711,
+              "height": 14.590774536132812,
+              "inside": true
+            },
+            {
+              "text": "k 1",
+              "fontPixels": 17.819479166666667,
+              "x": 233,
+              "y": 234.32736206054688,
+              "width": 17.337936401367188,
+              "height": 14.590774536132812,
+              "inside": true
+            },
+            {
+              "text": "k 2",
+              "fontPixels": 17.819479166666667,
+              "x": 51.999996185302734,
+              "y": 48.32737731933594,
+              "width": 17.40633773803711,
+              "height": 14.590774536132812,
+              "inside": true
+            },
+            {
+              "text": "k 3",
+              "fontPixels": 17.819479166666667,
+              "x": 233,
+              "y": 48.32737731933594,
+              "width": 17.406326293945312,
+              "height": 14.590774536132812,
+              "inside": true
+            }
+          ],
+          "colourMarks": [
+            {
+              "code": "0",
+              "patch": null,
+              "fill": "rgb(226, 181, 90)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(96, 165, 250)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(192, 132, 252)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "3",
+              "patch": null,
+              "fill": "rgb(244, 114, 182)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-mm-quantization.png",
+          "screenshotSha256": "e3b23fb41c0e40721d630e1461d541b7a177c3b4e0f0eb2649cca894f09ca6b4"
+        },
+        {
+          "name": "gradients",
+          "width": 411.21875,
+          "height": 2521.609375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "encoder z = .8",
+              "fontPixels": 17.8188164893617,
+              "x": 24.000001907348633,
+              "y": 10.326947212219238,
+              "width": 82.77628326416016,
+              "height": 14.591318130493164,
+              "inside": true
+            },
+            {
+              "text": "decoder x̂ = 1",
+              "fontPixels": 17.8188164893617,
+              "x": 180,
+              "y": 10.326947212219238,
+              "width": 79.10089874267578,
+              "height": 14.591318130493164,
+              "inside": true
+            },
+            {
+              "text": "(1 − 0)² = 1",
+              "fontPixels": 17.8188164893617,
+              "x": 105.85920715332031,
+              "y": 113.32695007324219,
+              "width": 64.2815933227539,
+              "height": 14.591317176818848,
+              "inside": true
+            },
+            {
+              "text": "2 → decoder, encoder (STE)",
+              "fontPixels": 17.8188164893617,
+              "x": 55.302574157714844,
+              "y": 172.3269500732422,
+              "width": 165.43910217285156,
+              "height": 14.59130573272705,
+              "inside": true
+            },
+            {
+              "text": "codebook bypassed",
+              "fontPixels": 17.8188164893617,
+              "x": 80.2047119140625,
+              "y": 48.32694625854492,
+              "width": 115.59059143066406,
+              "height": 14.591317176818848,
+              "inside": true
+            },
+            {
+              "text": "sg(z) = .8",
+              "fontPixels": 17.8188164893617,
+              "x": 24.000001907348633,
+              "y": 10.326947212219238,
+              "width": 54.5876350402832,
+              "height": 14.591318130493164,
+              "inside": true
+            },
+            {
+              "text": "code e = 1",
+              "fontPixels": 17.8188164893617,
+              "x": 180,
+              "y": 10.326947212219238,
+              "width": 61.0555419921875,
+              "height": 14.591318130493164,
+              "inside": true
+            },
+            {
+              "text": "(.8 − 1)² = .04",
+              "fontPixels": 17.8188164893617,
+              "x": 98.63764953613281,
+              "y": 113.32695007324219,
+              "width": 78.79192352294922,
+              "height": 14.591317176818848,
+              "inside": true
+            },
+            {
+              "text": "gradient .4 → codebook",
+              "fontPixels": 17.8188164893617,
+              "x": 69.0161361694336,
+              "y": 172.3269500732422,
+              "width": 138.7665557861328,
+              "height": 14.59130573272705,
+              "inside": true
+            },
+            {
+              "text": "STOP at encoder",
+              "fontPixels": 17.8188164893617,
+              "x": 88.03614044189453,
+              "y": 48.32694625854492,
+              "width": 100.69966125488281,
+              "height": 14.591317176818848,
+              "inside": true
+            },
+            {
+              "text": "encoder z = .8",
+              "fontPixels": 17.8188164893617,
+              "x": 24.000001907348633,
+              "y": 10.326947212219238,
+              "width": 82.77628326416016,
+              "height": 14.591318130493164,
+              "inside": true
+            },
+            {
+              "text": "sg(e) = 1",
+              "fontPixels": 17.8188164893617,
+              "x": 180,
+              "y": 10.326947212219238,
+              "width": 51.639583587646484,
+              "height": 14.591318130493164,
+              "inside": true
+            },
+            {
+              "text": ".25(.8 − 1)² = .01",
+              "fontPixels": 17.8188164893617,
+              "x": 89.60356903076172,
+              "y": 113.32695007324219,
+              "width": 96.7928695678711,
+              "height": 14.591317176818848,
+              "inside": true
+            },
+            {
+              "text": "gradient −.1 → encoder",
+              "fontPixels": 17.8188164893617,
+              "x": 69.91669464111328,
+              "y": 172.3269500732422,
+              "width": 136.9394989013672,
+              "height": 14.59130573272705,
+              "inside": true
+            },
+            {
+              "text": "STOP at codebook",
+              "fontPixels": 17.8188164893617,
+              "x": 83.33956146240234,
+              "y": 48.32694625854492,
+              "width": 110.1147689819336,
+              "height": 14.591317176818848,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-gradients.png",
+          "screenshotSha256": "621e790f183e58006299ada8d335afb83e57fc5e04e2ce31364ffaafff5c9003"
+        },
+        {
+          "name": "mm-digit-reconstruction",
+          "width": 411.21875,
+          "height": 2557.109375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "7",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "11",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "3",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "6",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "11",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-mm-digit-reconstruction.png",
+          "screenshotSha256": "993686f65587c407f1a99204ef994bc1232b6db3a98321bd52110cedc040c86c"
+        },
+        {
+          "name": "utilization",
+          "width": 411.21875,
+          "height": 1128.15625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "k 0",
+              "fontPixels": 17.819094036697248,
+              "x": 4,
+              "y": 28.32712745666504,
+              "width": 17.406713485717773,
+              "height": 14.591089248657227,
+              "inside": true
+            },
+            {
+              "text": "4",
+              "fontPixels": 17.819094036697248,
+              "x": 249.27044677734375,
+              "y": 28.32712745666504,
+              "width": 8.02509880065918,
+              "height": 14.591089248657227,
+              "inside": true
+            },
+            {
+              "text": "k 1",
+              "fontPixels": 17.819094036697248,
+              "x": 4,
+              "y": 68.3271255493164,
+              "width": 17.33831787109375,
+              "height": 14.591087341308594,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 17.819094036697248,
+              "x": 250,
+              "y": 68.3271255493164,
+              "width": 7.295544624328613,
+              "height": 14.591089248657227,
+              "inside": true
+            },
+            {
+              "text": "k 2",
+              "fontPixels": 17.819094036697248,
+              "x": 4,
+              "y": 108.3271255493164,
+              "width": 17.406713485717773,
+              "height": 14.591087341308594,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 17.819094036697248,
+              "x": 250,
+              "y": 108.3271255493164,
+              "width": 7.295544624328613,
+              "height": 14.591089248657227,
+              "inside": true
+            },
+            {
+              "text": "k 3",
+              "fontPixels": 17.819094036697248,
+              "x": 4,
+              "y": 148.32711791992188,
+              "width": 17.406713485717773,
+              "height": 14.591094970703125,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 17.819094036697248,
+              "x": 250,
+              "y": 148.32711791992188,
+              "width": 7.295544624328613,
+              "height": 14.591089248657227,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 17.819094036697248,
+              "x": 46,
+              "y": 197.32711791992188,
+              "width": 7.295544624328613,
+              "height": 14.591089248657227,
+              "inside": true
+            },
+            {
+              "text": "4",
+              "fontPixels": 17.819094036697248,
+              "x": 228.27044677734375,
+              "y": 197.32711791992188,
+              "width": 8.02509880065918,
+              "height": 14.591089248657227,
+              "inside": true
+            },
+            {
+              "text": "count",
+              "fontPixels": 17.819094036697248,
+              "x": 130,
+              "y": 197.32711791992188,
+              "width": 32.55284881591797,
+              "height": 14.591089248657227,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 17.819140625,
+              "x": 66.38643646240234,
+              "y": 195.3271484375,
+              "width": 7.295525550842285,
+              "height": 14.59105110168457,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 17.819140625,
+              "x": 31.999998092651367,
+              "y": 166.3271484375,
+              "width": 7.295525550842285,
+              "height": 14.59105110168457,
+              "inside": true
+            },
+            {
+              "text": "1",
+              "fontPixels": 17.819140625,
+              "x": 146.3864288330078,
+              "y": 195.3271484375,
+              "width": 7.227129936218262,
+              "height": 14.59105110168457,
+              "inside": true
+            },
+            {
+              "text": "1",
+              "fontPixels": 17.819140625,
+              "x": 31.999998092651367,
+              "y": 104.32715606689453,
+              "width": 7.227129936218262,
+              "height": 14.59105110168457,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 17.819140625,
+              "x": 226.3864288330078,
+              "y": 195.3271484375,
+              "width": 7.295525550842285,
+              "height": 14.59105110168457,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 17.819140625,
+              "x": 31.999998092651367,
+              "y": 42.32715606689453,
+              "width": 7.295525550842285,
+              "height": 14.59105110168457,
+              "inside": true
+            },
+            {
+              "text": "k0",
+              "fontPixels": 17.819140625,
+              "x": 63.13764572143555,
+              "y": 166.3271484375,
+              "width": 13.793102264404297,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "k1",
+              "fontPixels": 17.819140625,
+              "x": 143.1376495361328,
+              "y": 166.3271484375,
+              "width": 13.724700927734375,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "k2",
+              "fontPixels": 17.819140625,
+              "x": 223.1376495361328,
+              "y": 166.3271484375,
+              "width": 13.793106079101562,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "k3",
+              "fontPixels": 17.819140625,
+              "x": 63.13764572143555,
+              "y": 104.32715606689453,
+              "width": 13.793102264404297,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "k4",
+              "fontPixels": 17.819140625,
+              "x": 143.1376495361328,
+              "y": 104.32715606689453,
+              "width": 13.793106079101562,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "k5",
+              "fontPixels": 17.819140625,
+              "x": 223.1376495361328,
+              "y": 104.32715606689453,
+              "width": 13.793106079101562,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "k6",
+              "fontPixels": 17.819140625,
+              "x": 63.13764572143555,
+              "y": 42.32715606689453,
+              "width": 13.793102264404297,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "k7",
+              "fontPixels": 17.819140625,
+              "x": 143.1376495361328,
+              "y": 42.32715606689453,
+              "width": 13.793106079101562,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "k8",
+              "fontPixels": 17.819140625,
+              "x": 223.1376495361328,
+              "y": 42.32715606689453,
+              "width": 13.793106079101562,
+              "height": 14.591049194335938,
+              "inside": true
+            },
+            {
+              "text": "component index i₀",
+              "fontPixels": 17.819140625,
+              "x": 110,
+              "y": 221.3271484375,
+              "width": 109.83381652832031,
+              "height": 14.59105110168457,
+              "inside": true
+            },
+            {
+              "text": "component index i₁ ↑",
+              "fontPixels": 17.819140625,
+              "x": 5,
+              "y": 12.327157020568848,
+              "width": 119.4642333984375,
+              "height": 14.59105110168457,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-utilization.png",
+          "screenshotSha256": "478fc58b3615b0a0aa6e1cf2cfa1dba35949998278ca9e0b079e377d41e955f5"
+        },
+        {
+          "name": "mm-residual",
+          "width": 411.21875,
+          "height": 2762.1875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "−1.5",
+              "fontPixels": 17.819479166666667,
+              "x": 34,
+              "y": 270.3273620605469,
+              "width": 25.719158172607422,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 17.819479166666667,
+              "x": 243.99998474121094,
+              "y": 270.3273620605469,
+              "width": 18.13140106201172,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "x",
+              "fontPixels": 17.819479166666667,
+              "x": 146.2704620361328,
+              "y": 283.3273620605469,
+              "width": 8.024925231933594,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 17.819479166666667,
+              "x": 2.999999761581421,
+              "y": 28.327381134033203,
+              "width": 18.13140106201172,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "−1.5",
+              "fontPixels": 17.819479166666667,
+              "x": 0,
+              "y": 251.32736206054688,
+              "width": 25.719154357910156,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "y",
+              "fontPixels": 17.819479166666667,
+              "x": 10,
+              "y": 138.32737731933594,
+              "width": 7.295386791229248,
+              "height": 14.590773582458496,
+              "inside": true
+            },
+            {
+              "text": "origin",
+              "fontPixels": 17.819479166666667,
+              "x": 156,
+              "y": 155.32737731933594,
+              "width": 31.84770965576172,
+              "height": 14.590773582458496,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-mm-residual.png",
+          "screenshotSha256": "ace9f9eff917b45842eef459db40d88c3b729e5e4ccb41d27d0116e6a6995b55"
+        },
+        {
+          "name": "mm-audio-order",
+          "width": 411.21875,
+          "height": 2499.328125,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-mm-audio-order.png",
+          "screenshotSha256": "31d9dce8249b4acbe2e301488d62e7e23292e481250ba78735d2d6c5577d0f89"
+        },
+        {
+          "name": "video-volume",
+          "width": 411.21875,
+          "height": 4039.140625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "f1",
+              "fontPixels": 17.818678977272725,
+              "x": 219.27044677734375,
+              "y": 104.32685852050781,
+              "width": 11.570556640625,
+              "height": 14.5914306640625,
+              "inside": true
+            },
+            {
+              "text": "f0",
+              "fontPixels": 17.818678977272725,
+              "x": 219.27044677734375,
+              "y": 56.32685852050781,
+              "width": 11.638946533203125,
+              "height": 14.5914306640625,
+              "inside": true
+            },
+            {
+              "text": "time depth 2 × height 2 × width 2",
+              "fontPixels": 17.818678977272725,
+              "x": 38.000003814697266,
+              "y": 202.32687377929688,
+              "width": 188.6041259765625,
+              "height": 14.5914306640625,
+              "inside": true
+            }
+          ],
+          "colourMarks": [
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            }
+          ],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-video-volume.png",
+          "screenshotSha256": "f9ec3143ad6986ee4a8b4377b0051e86afe5c9ce530df49fadadb604e8ba29fa"
+        },
+        {
+          "name": "mm-video-sampling",
+          "width": 411.21875,
+          "height": 1129.859375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "0 s",
+              "fontPixels": 17.818193855932204,
+              "x": 21.330400466918945,
+              "y": 91.3265380859375,
+              "width": 17.40398597717285,
+              "height": 14.591827392578125,
+              "inside": true
+            },
+            {
+              "text": "1 s",
+              "fontPixels": 17.818193855932204,
+              "x": 141.33041381835938,
+              "y": 91.3265380859375,
+              "width": 17.403976440429688,
+              "height": 14.591827392578125,
+              "inside": true
+            },
+            {
+              "text": "2 s",
+              "fontPixels": 17.818193855932204,
+              "x": 261.33038330078125,
+              "y": 91.3265380859375,
+              "width": 17.404022216796875,
+              "height": 14.591827392578125,
+              "inside": true
+            }
+          ],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-mm-video-sampling.png",
+          "screenshotSha256": "32e0648280a48f8d82a721f05570635d2b6dac36f6ac25470caa444105eec7f4"
+        },
+        {
+          "name": "namespace",
+          "width": 411.21875,
+          "height": 3463.640625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-namespace.png",
+          "screenshotSha256": "23bd285b8cb2f16670d4a46b7a773e1b568873b56f1141088c86578f43655828"
+        },
+        {
+          "name": "mm-budget",
+          "width": 411.21875,
+          "height": 1481.5,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [],
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-final/screenshots/enlarged-mm-budget.png",
+          "screenshotSha256": "f8eb242eed8cbf55bb6eb2b6c3a51d86b1c98497eabd7b74acf2f2b355392237"
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "zoom": 1,
+      "name": "small",
+      "overflow": 0,
+      "figures": [
+        {
+          "name": "interface",
+          "width": 280,
+          "height": 2742.015625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "time →",
+              "fontPixels": 12.132486979166666,
+              "x": 22.928495407104492,
+              "y": 76.21347045898438,
+              "width": 42.24066925048828,
+              "height": 15.001046180725098,
+              "inside": true
+            }
+          ],
+          "colourMarks": []
+        },
+        {
+          "name": "mm-patch-projection",
+          "width": 280,
+          "height": 1487.78125,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(226, 181, 90)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            }
+          ]
+        },
+        {
+          "name": "conditioning",
+          "width": 280,
+          "height": 1098.796875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "read image keys / values",
+              "fontPixels": 12.132415254237289,
+              "x": 23.999998092651367,
+              "y": 4.213393688201904,
+              "width": 143.76644897460938,
+              "height": 15.001134872436523,
+              "inside": true
+            },
+            {
+              "text": "text queries ↑ cross-attention",
+              "fontPixels": 12.132415254237289,
+              "x": 22.92848777770996,
+              "y": 100.21338653564453,
+              "width": 167.49827575683594,
+              "height": 15.001134872436523,
+              "inside": true
+            }
+          ],
+          "colourMarks": []
+        },
+        {
+          "name": "mm-quantization",
+          "width": 280,
+          "height": 996.21875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "−1.5",
+              "fontPixels": 12.133333333333333,
+              "x": 34,
+              "y": 270.21429443359375,
+              "width": 25.928518295288086,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 12.133333333333333,
+              "x": 244,
+              "y": 270.21429443359375,
+              "width": 18.33881378173828,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "x",
+              "fontPixels": 12.133333333333333,
+              "x": 145.92855834960938,
+              "y": 283.21429443359375,
+              "width": 8.571428298950195,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 12.133333333333333,
+              "x": 2.999999761581421,
+              "y": 28.214282989501953,
+              "width": 18.33881378173828,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "−1.5",
+              "fontPixels": 12.133333333333333,
+              "x": 0,
+              "y": 251.2142791748047,
+              "width": 25.928518295288086,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "y",
+              "fontPixels": 12.133333333333333,
+              "x": 8.928570747375488,
+              "y": 138.2142791748047,
+              "width": 7.583704948425293,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 0",
+              "fontPixels": 12.133333333333333,
+              "x": 51.999996185302734,
+              "y": 234.2142791748047,
+              "width": 17.61160659790039,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 1",
+              "fontPixels": 12.133333333333333,
+              "x": 233,
+              "y": 234.2142791748047,
+              "width": 17.34375,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 2",
+              "fontPixels": 12.133333333333333,
+              "x": 51.999996185302734,
+              "y": 48.21428298950195,
+              "width": 17.61160659790039,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k 3",
+              "fontPixels": 12.133333333333333,
+              "x": 233,
+              "y": 48.21428298950195,
+              "width": 17.611602783203125,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": [
+            {
+              "code": "0",
+              "patch": null,
+              "fill": "rgb(226, 181, 90)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(96, 165, 250)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(192, 132, 252)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            },
+            {
+              "code": "3",
+              "patch": null,
+              "fill": "rgb(244, 114, 182)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "",
+              "border": "rgb(221, 221, 221)",
+              "stroke": "none"
+            }
+          ]
+        },
+        {
+          "name": "gradients",
+          "width": 280,
+          "height": 1335.5,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "encoder z = .8",
+              "fontPixels": 12.132396941489361,
+              "x": 23.999998092651367,
+              "y": 10.213375091552734,
+              "width": 83.00366973876953,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "decoder x̂ = 1",
+              "fontPixels": 12.132396941489361,
+              "x": 180,
+              "y": 10.213375091552734,
+              "width": 79.1244125366211,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "(1 − 0)² = 1",
+              "fontPixels": 12.132396941489361,
+              "x": 105.84628295898438,
+              "y": 113.21337127685547,
+              "width": 64.30741882324219,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "2 → decoder, encoder (STE)",
+              "fontPixels": 12.132396941489361,
+              "x": 55.27599334716797,
+              "y": 172.21337890625,
+              "width": 165.4480438232422,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "codebook bypassed",
+              "fontPixels": 12.132396941489361,
+              "x": 80.18861389160156,
+              "y": 48.213375091552734,
+              "width": 115.89067077636719,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "sg(z) = .8",
+              "fontPixels": 12.132396941489361,
+              "x": 23.999998092651367,
+              "y": 10.213375091552734,
+              "width": 54.806617736816406,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "code e = 1",
+              "fontPixels": 12.132396941489361,
+              "x": 180,
+              "y": 10.213375091552734,
+              "width": 61.076141357421875,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "(.8 − 1)² = .04",
+              "fontPixels": 12.132396941489361,
+              "x": 98.62195587158203,
+              "y": 113.21337127685547,
+              "width": 79.01815032958984,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "gradient .4 → codebook",
+              "fontPixels": 12.132396941489361,
+              "x": 68.98799133300781,
+              "y": 172.21337890625,
+              "width": 139.01063537597656,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "STOP at encoder",
+              "fontPixels": 12.132396941489361,
+              "x": 88.02404022216797,
+              "y": 48.213375091552734,
+              "width": 100.97872161865234,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "encoder z = .8",
+              "fontPixels": 12.132396941489361,
+              "x": 23.999998092651367,
+              "y": 10.213375091552734,
+              "width": 83.00366973876953,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "sg(e) = 1",
+              "fontPixels": 12.132396941489361,
+              "x": 180,
+              "y": 10.213375091552734,
+              "width": 51.666934967041016,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": ".25(.8 − 1)² = .01",
+              "fontPixels": 12.132396941489361,
+              "x": 89.58944702148438,
+              "y": 113.21337127685547,
+              "width": 96.82109069824219,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "gradient −.1 → encoder",
+              "fontPixels": 12.132396941489361,
+              "x": 69.89205932617188,
+              "y": 172.21337890625,
+              "width": 137.22935485839844,
+              "height": 15.001157760620117,
+              "inside": true
+            },
+            {
+              "text": "STOP at codebook",
+              "fontPixels": 12.132396941489361,
+              "x": 83.3194351196289,
+              "y": 48.213375091552734,
+              "width": 110.35028839111328,
+              "height": 15.001157760620117,
+              "inside": true
+            }
+          ],
+          "colourMarks": []
+        },
+        {
+          "name": "mm-digit-reconstruction",
+          "width": 280,
+          "height": 1324.09375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": [
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "7",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "11",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "3",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "2",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "15",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "1",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(96, 165, 250)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": "6",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": "11",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(244, 114, 182)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": "10",
+              "patch": null,
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(192, 132, 252)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            }
+          ]
+        },
+        {
+          "name": "utilization",
+          "width": 280,
+          "height": 590.640625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "k 0",
+              "fontPixels": 12.132525802752294,
+              "x": 3.999999761581421,
+              "y": 28.213499069213867,
+              "width": 17.612777709960938,
+              "height": 15.000997543334961,
+              "inside": true
+            },
+            {
+              "text": "4",
+              "fontPixels": 12.132525802752294,
+              "x": 250,
+              "y": 28.213499069213867,
+              "width": 7.5004987716674805,
+              "height": 15.000997543334961,
+              "inside": true
+            },
+            {
+              "text": "k 1",
+              "fontPixels": 12.132525802752294,
+              "x": 3.999999761581421,
+              "y": 68.2135009765625,
+              "width": 17.34490394592285,
+              "height": 15.000999450683594,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 12.132525802752294,
+              "x": 250,
+              "y": 68.2135009765625,
+              "width": 7.5004987716674805,
+              "height": 15.000997543334961,
+              "inside": true
+            },
+            {
+              "text": "k 2",
+              "fontPixels": 12.132525802752294,
+              "x": 3.999999761581421,
+              "y": 108.21349334716797,
+              "width": 17.612777709960938,
+              "height": 15.000999450683594,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 12.132525802752294,
+              "x": 250,
+              "y": 108.21349334716797,
+              "width": 7.5004987716674805,
+              "height": 15.000997543334961,
+              "inside": true
+            },
+            {
+              "text": "k 3",
+              "fontPixels": 12.132525802752294,
+              "x": 3.999999761581421,
+              "y": 148.21348571777344,
+              "width": 17.612777709960938,
+              "height": 15.000991821289062,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 12.132525802752294,
+              "x": 250,
+              "y": 148.21348571777344,
+              "width": 7.5004987716674805,
+              "height": 15.000997543334961,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 12.132525802752294,
+              "x": 46,
+              "y": 197.21348571777344,
+              "width": 7.5004987716674805,
+              "height": 15.000997543334961,
+              "inside": true
+            },
+            {
+              "text": "4",
+              "fontPixels": 12.132525802752294,
+              "x": 229,
+              "y": 197.21348571777344,
+              "width": 7.5004987716674805,
+              "height": 15.000997543334961,
+              "inside": true
+            },
+            {
+              "text": "count",
+              "fontPixels": 12.132525802752294,
+              "x": 129.99998474121094,
+              "y": 197.21348571777344,
+              "width": 32.47004318237305,
+              "height": 15.000997543334961,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 12.133333333333333,
+              "x": 66.38392639160156,
+              "y": 195.2142791748047,
+              "width": 7.5,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "0",
+              "fontPixels": 12.133333333333333,
+              "x": 32,
+              "y": 166.2142791748047,
+              "width": 7.500001907348633,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1",
+              "fontPixels": 12.133333333333333,
+              "x": 146.38392639160156,
+              "y": 195.2142791748047,
+              "width": 7.232142448425293,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1",
+              "fontPixels": 12.133333333333333,
+              "x": 32,
+              "y": 104.21428680419922,
+              "width": 7.232144832611084,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 12.133333333333333,
+              "x": 226.38392639160156,
+              "y": 195.2142791748047,
+              "width": 7.5,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "2",
+              "fontPixels": 12.133333333333333,
+              "x": 32,
+              "y": 42.21428680419922,
+              "width": 7.500001907348633,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k0",
+              "fontPixels": 12.133333333333333,
+              "x": 63.12779235839844,
+              "y": 166.2142791748047,
+              "width": 14.012275695800781,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k1",
+              "fontPixels": 12.133333333333333,
+              "x": 143.12779235839844,
+              "y": 166.2142791748047,
+              "width": 13.744415283203125,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k2",
+              "fontPixels": 12.133333333333333,
+              "x": 223.12779235839844,
+              "y": 166.2142791748047,
+              "width": 14.01226806640625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k3",
+              "fontPixels": 12.133333333333333,
+              "x": 63.12779235839844,
+              "y": 104.21428680419922,
+              "width": 14.012275695800781,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k4",
+              "fontPixels": 12.133333333333333,
+              "x": 143.12779235839844,
+              "y": 104.21428680419922,
+              "width": 14.01226806640625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k5",
+              "fontPixels": 12.133333333333333,
+              "x": 223.12779235839844,
+              "y": 104.21428680419922,
+              "width": 14.01226806640625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k6",
+              "fontPixels": 12.133333333333333,
+              "x": 63.12779235839844,
+              "y": 42.21428680419922,
+              "width": 14.012275695800781,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k7",
+              "fontPixels": 12.133333333333333,
+              "x": 143.12779235839844,
+              "y": 42.21428680419922,
+              "width": 14.01226806640625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "k8",
+              "fontPixels": 12.133333333333333,
+              "x": 223.12779235839844,
+              "y": 42.21428680419922,
+              "width": 14.01226806640625,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "component index i₀",
+              "fontPixels": 12.133333333333333,
+              "x": 109.99999237060547,
+              "y": 221.21429443359375,
+              "width": 109.76736450195312,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "component index i₁ ↑",
+              "fontPixels": 12.133333333333333,
+              "x": 4.999999523162842,
+              "y": 12.214284896850586,
+              "width": 119.49776458740234,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": []
+        },
+        {
+          "name": "mm-residual",
+          "width": 280,
+          "height": 1303.6875,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "−1.5",
+              "fontPixels": 12.133333333333333,
+              "x": 34,
+              "y": 270.21429443359375,
+              "width": 25.928518295288086,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 12.133333333333333,
+              "x": 244,
+              "y": 270.21429443359375,
+              "width": 18.33881378173828,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "x",
+              "fontPixels": 12.133333333333333,
+              "x": 145.92855834960938,
+              "y": 283.21429443359375,
+              "width": 8.571428298950195,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "1.5",
+              "fontPixels": 12.133333333333333,
+              "x": 2.999999761581421,
+              "y": 28.214282989501953,
+              "width": 18.33881378173828,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "−1.5",
+              "fontPixels": 12.133333333333333,
+              "x": 0,
+              "y": 251.2142791748047,
+              "width": 25.928518295288086,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "y",
+              "fontPixels": 12.133333333333333,
+              "x": 8.928570747375488,
+              "y": 138.2142791748047,
+              "width": 7.583704948425293,
+              "height": 15,
+              "inside": true
+            },
+            {
+              "text": "origin",
+              "fontPixels": 12.133333333333333,
+              "x": 156,
+              "y": 155.2142791748047,
+              "width": 32.05864334106445,
+              "height": 15,
+              "inside": true
+            }
+          ],
+          "colourMarks": []
+        },
+        {
+          "name": "mm-audio-order",
+          "width": 280,
+          "height": 1169.375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": []
+        },
+        {
+          "name": "video-volume",
+          "width": 280,
+          "height": 2193.015625,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "f1",
+              "fontPixels": 12.133025568181818,
+              "x": 218.9285430908203,
+              "y": 104.2139892578125,
+              "width": 11.919937133789062,
+              "height": 15.000381469726562,
+              "inside": true
+            },
+            {
+              "text": "f0",
+              "fontPixels": 12.133025568181818,
+              "x": 218.9285430908203,
+              "y": 56.213985443115234,
+              "width": 12.187789916992188,
+              "height": 15.000377655029297,
+              "inside": true
+            },
+            {
+              "text": "time depth 2 × height 2 × width 2",
+              "fontPixels": 12.133025568181818,
+              "x": 36.92854309082031,
+              "y": 202.2139892578125,
+              "width": 189.92324829101562,
+              "height": 15.00037956237793,
+              "inside": true
+            }
+          ],
+          "colourMarks": [
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "A",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#e2b55a",
+              "border": "rgb(226, 181, 90)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "B",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#60a5fa",
+              "border": "rgb(96, 165, 250)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "C",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#c084fc",
+              "border": "rgb(192, 132, 252)",
+              "stroke": "none"
+            },
+            {
+              "code": null,
+              "patch": "D",
+              "fill": "rgb(0, 0, 0)",
+              "colour": "rgb(221, 221, 221)",
+              "identity": "#f472b6",
+              "border": "rgb(244, 114, 182)",
+              "stroke": "none"
+            }
+          ]
+        },
+        {
+          "name": "mm-video-sampling",
+          "width": 280,
+          "height": 480.328125,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [
+            {
+              "text": "0 s",
+              "fontPixels": 12.132415254237289,
+              "x": 21.327468872070312,
+              "y": 91.21339416503906,
+              "width": 17.34505844116211,
+              "height": 15.001136779785156,
+              "inside": true
+            },
+            {
+              "text": "1 s",
+              "fontPixels": 12.132415254237289,
+              "x": 141.3274688720703,
+              "y": 91.21339416503906,
+              "width": 17.345046997070312,
+              "height": 15.001136779785156,
+              "inside": true
+            },
+            {
+              "text": "2 s",
+              "fontPixels": 12.132415254237289,
+              "x": 261.32745361328125,
+              "y": 91.21339416503906,
+              "width": 17.345062255859375,
+              "height": 15.001136779785156,
+              "inside": true
+            }
+          ],
+          "colourMarks": []
+        },
+        {
+          "name": "namespace",
+          "width": 280,
+          "height": 1633.75,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": []
+        },
+        {
+          "name": "mm-budget",
+          "width": 280,
+          "height": 593.34375,
+          "border": "0px",
+          "background": "rgba(0, 0, 0, 0)",
+          "shadow": "none",
+          "headingCount": 0,
+          "svgText": [],
+          "colourMarks": []
+        }
+      ]
+    }
+  ],
+  "programChecks": [],
+  "anchors": [
+    {
+      "text": "1.What reaches the transformer?",
+      "href": "#1-what-reaches-the-transformer",
+      "count": 1
+    },
+    {
+      "text": "2.Turn a pixel grid into patch vectors",
+      "href": "#2-turn-a-pixel-grid-into-patch-vectors",
+      "count": 1
+    },
+    {
+      "text": "3.Connect continuous features to a language model",
+      "href": "#3-connect-continuous-features-to-a-language-model",
+      "count": 1
+    },
+    {
+      "text": "4.Give a feature a codebook address",
+      "href": "#4-give-a-feature-a-codebook-address",
+      "count": 1
+    },
+    {
+      "text": "5.Train through a discrete choice",
+      "href": "#5-train-through-a-discrete-choice",
+      "count": 1
+    },
+    {
+      "text": "6.Deeper: keep the dictionary useful",
+      "href": "#6-deeper-keep-the-dictionary-useful",
+      "count": 1
+    },
+    {
+      "text": "7.Audio: add small residual corrections",
+      "href": "#7-audio-add-small-residual-corrections",
+      "count": 1
+    },
+    {
+      "text": "8.Preserve what the audio task needs",
+      "href": "#8-preserve-what-the-audio-task-needs",
+      "count": 1
+    },
+    {
+      "text": "9.Video needs space and time",
+      "href": "#9-video-needs-space-and-time",
+      "count": 1
+    },
+    {
+      "text": "10.Pack the pieces without losing their meaning",
+      "href": "#10-pack-the-pieces-without-losing-their-meaning",
+      "count": 1
+    },
+    {
+      "text": "11.Spend positions on evidence that matters",
+      "href": "#11-spend-positions-on-evidence-that-matters",
+      "count": 1
+    },
+    {
+      "text": "—Practice: trace, change and diagnose",
+      "href": "#practice-trace-change-and-diagnose",
+      "count": 1
+    },
+    {
+      "text": "—Further learning",
+      "href": "#further-learning",
+      "count": 1
+    },
+    {
+      "text": "—Technical references",
+      "href": "#technical-references",
+      "count": 1
+    },
+    {
+      "text": "—Readiness and the next question",
+      "href": "#readiness-and-the-next-question",
+      "count": 1
+    }
+  ],
+  "passed": false,
+  "checks": 882,
+  "failure": "AssertionError [ERR_ASSERTION]: Actual copied program\n+ actual - expected\n\n+ '\"\"\"Patch vectors and an exactly matched strided convolution.\\r\\n' +\n+   '\\r\\n' +\n+   'Run: python patch_projection.py  (requires numpy and torch).\\r\\n' +\n+   'Download digits_subset.csv beside this program for its second, real-data case.\\r\\n' +\n+   'The image is HWC. Each vector flattens patch-row, patch-column, channel in\\r\\n' +\n+   'that order. Patchify is a lossless reshape/permutation; projection need not\\r\\n' +\n+   'be invertible. NumPy uses [patch, feature] @ [feature, output]; Conv2d uses\\r\\n' +\n+   '[output, channel, patch-row, patch-column], so copying weights requires a\\r\\n' +\n+   'permutation. Cost: O(HWC) patch construction, O(N * P²C * D) projection.\\r\\n' +\n+   '\"\"\"\\r\\n' +\n+   '\\r\\n' +\n+   'import json\\r\\n' +\n+   'from pathlib import Path\\r\\n' +\n+   'import numpy as np\\r\\n' +\n+   'import torch\\r\\n' +\n+   '\\r\\n' +\n+   '\\r\\n' +\n+   'def patchify(image, patch_size):\\r\\n' +\n+   '    \"\"\"Return [number_of_patches, patch_size² * channels] in row-major order.\"\"\"\\r\\n' +\n+   '    height, width, channels = image.shape\\r\\n' +\n+   '    if height % patch_size or width % patch_size:\\r\\n' +\n+   '        raise ValueError(\"Image dimensions must be divisible by patch_size\")\\r\\n' +\n+   '    return (image.reshape(height // patch_size, patch_size,\\r\\n' +\n+   '                          width // patch_size, patch_size, channels)\\r\\n' +\n+   '            .transpose(0, 2, 1, 3, 4)\\r\\n' +\n+   '            .reshape(-1, patch_size * patch_size * channels))\\r\\n' +\n+   '\\r\\n' +\n+   '\\r\\n' +\n+   'def unpatchify(patches, image_shape, patch_size):\\r\\n' +\n+   '    \"\"\"Inverse the patch ordering before any lossy projection.\"\"\"\\r\\n' +\n+   '    height, width, channels = image_shape\\r\\n' +\n+   '    return (patches.reshape(height // patch_size, width // patch_size,\\r\\n' +\n+   '                            patch_size, patch_size, channels)\\r\\n' +\n+   '            .transpose(0, 2, 1, 3, 4).reshape(image_shape))\\r\\n' +\n+   '\\r\\n' +\n+   '\\r\\n' +\n+   'def main():\\r\\n' +\n+   '    image = np.arange(4 * 6 * 2, dtype=np.float64).reshape(4, 6, 2) / 10\\r\\n' +\n+   '    patch_size, output_width = 2, 3\\r\\n' +\n+   '    patches = patchify(image, patch_size)\\r\\n' +\n+   '    weights = np.arange(patches.shape[1] * output_width, dtype=np.float64)\\r\\n' +\n+   '    weights = weights.reshape(patches.shape[1], output_width) / 100\\r\\n' +\n+   '    bias = np.array([0.1, -0.2, 0.3])\\r\\n' +\n+   '    projected = patches @ weights + bias\\r\\n' +\n+   '\\r\\n' +\n+   '    convolution = torch.nn.Conv2d(2, output_width, patch_size,\\r\\n' +\n+   '                                   stride=patch_size, bias=True).double()\\r\\n' +\n+   '    # HWC feature order -> O,C,H,W convolution kernel order.\\r\\n' +\n+   '    kernel = weights.reshape(patch_size, patch_size, 2, output_width)\\r\\n' +\n+   '    kernel = kernel.transpose(3, 2, 0, 1).copy()\\r\\n' +\n+   '    with torch.no_grad():\\r\\n' +\n+   '        convolution.weight.copy_(torch.from_numpy(kernel))\\r\\n' +\n+   '        convolution.bias.copy_(torch.from_numpy(bias))\\r\\n' +\n+   '        image_chw = torch.from_numpy(image.transpose(2, 0, 1).copy())[None]\\r\\n' +\n+   '        convolution_grid = convolution(image_chw)\\r\\n' +\n+   '    matched = convolution_grid[0].permute(1, 2, 0).reshape(-1, output_width)\\r\\n' +\n+   '    matched = matched.numpy()\\r\\n' +\n+   '    assert np.array_equal(unpatchify(patches, image.shape, patch_size), image)\\r\\n' +\n+   '    np.testing.assert_allclose(matched, projected, rtol=1e-12, atol=1e-12)\\r\\n' +\n+   '    # First retained optical digit: original pixel counts /16, one channel.\\r\\n' +\n+   '    rows = np.genfromtxt(Path(__file__).with_name(\"digits_subset.csv\"),\\r\\n' +\n+   '                        delimiter=\",\", names=True, dtype=None, encoding=\"utf8\")\\r\\n' +\n+   '    digit = np.array([rows[0][f\"p{i}\"] for i in range(64)], dtype=np.float64)\\r\\n' +\n+   '    digit = digit.reshape(8, 8, 1) / 16\\r\\n' +\n+   '    digit_patches = patchify(digit, 2)\\r\\n' +\n+   '    digit_weights = np.array([[1., 0.], [0., 1.], [1., 0.], [0., 1.]])\\r\\n' +\n+   '    digit_projected = digit_patches @ digit_weights\\r\\n' +\n+   '    digit_conv = torch.nn.Conv2d(1, 2, 2, stride=2, bias=False).double()\\r\\n' +\n+   '    with torch.no_grad():\\r\\n' +\n+   '        digit_kernel = digit_weights.reshape(2, 2, 1, 2).transpose(3, 2, 0, 1).copy()\\r\\n' +\n+   '        digit_conv.weight.copy_(torch.from_numpy(digit_kernel))\\r\\n' +\n+   '        digit_output = digit_conv(torch.from_numpy(digit.transpose(2, 0, 1).copy())[None])\\r\\n' +\n+   '    digit_matched = digit_output[0].permute(1, 2, 0).reshape(-1, 2).numpy()\\r\\n' +\n+   '    np.testing.assert_allclose(digit_matched, digit_projected, rtol=1e-12, atol=1e-12)\\r\\n' +\n+   '    assert np.array_equal(unpatchify(digit_patches, digit.shape, 2), digit)\\r\\n' +\n+   '    print(json.dumps({\\r\\n' +\n+   '        \"image_hwc\": list(image.shape), \"patches\": list(patches.shape),\\r\\n' +\n+   '        \"first_patch\": patches[0].tolist(),\\r\\n' +\n+   '        \"first_projection\": projected[0].tolist(),\\r\\n' +\n+   '        \"conv_nchw\": list(convolution_grid.shape),\\r\\n' +\n+   '        \"max_abs_difference\": float(np.abs(matched - projected).max()),\\r\\n' +\n+   '        \"unpatchify_exact\": True,\\r\\n' +\n+   '        \"real_digit\": {\\r\\n' +\n+   '            \"source_index\": int(rows[0][\"source_index\"]), \"label\": int(rows[0][\"label\"]),\\r\\n' +\n+   '            \"image_hwc\": list(digit.shape), \"patches\": list(digit_patches.shape),\\r\\n' +\n+   '            \"patch_index\": 1, \"patch_vector\": digit_patches[1].tolist(),\\r\\n' +\n+   '            \"projection\": digit_projected[1].tolist(), \"unpatchify_exact\": True,\\r\\n' +\n+   '            \"conv_max_abs_difference\": float(np.abs(digit_matched - digit_projected).max()),\\r\\n' +\n+   '        },\\r\\n' +\n+   '    }, indent=2))\\r\\n' +\n+   '\\r\\n' +\n+   '\\r\\n' +\n+   'if __name__ == \"__main__\":\\r\\n' +\n+   '    main()\\r\\n'\n- '\"\"\"Patch vectors and an exactly matched strided convolution.\\n' +\n-   '\\n' +\n-   'Run: python patch_projection.py  (requires numpy and torch).\\n' +\n-   'Download digits_subset.csv beside this program for its second, real-data case.\\n' +\n-   'The image is HWC. Each vector flattens patch-row, patch-column, channel in\\n' +\n-   'that order. Patchify is a lossless reshape/permutation; projection need not\\n' +\n-   'be invertible. NumPy uses [patch, feature] @ [feature, output]; Conv2d uses\\n' +\n-   '[output, channel, patch-row, patch-column], so copying weights requires a\\n' +\n-   'permutation. Cost: O(HWC) patch construction, O(N * P²C * D) projection.\\n' +\n-   '\"\"\"\\n' +\n-   '\\n' +\n-   'import json\\n' +\n-   'from pathlib import Path\\n' +\n-   'import numpy as np\\n' +\n-   'import torch\\n' +\n-   '\\n' +\n-   '\\n' +\n-   'def patchify(image, patch_size):\\n' +\n-   '    \"\"\"Return [number_of_patches, patch_size² * channels] in row-major order.\"\"\"\\n' +\n-   '    height, width, channels = image.shape\\n' +\n-   '    if height % patch_size or width % patch_size:\\n' +\n-   '        raise ValueError(\"Image dimensions must be divisible by patch_size\")\\n' +\n-   '    return (image.reshape(height // patch_size, patch_size,\\n' +\n-   '                          width // patch_size, patch_size, channels)\\n' +\n-   '            .transpose(0, 2, 1, 3, 4)\\n' +\n-   '            .reshape(-1, patch_size * patch_size * channels))\\n' +\n-   '\\n' +\n-   '\\n' +\n-   'def unpatchify(patches, image_shape, patch_size):\\n' +\n-   '    \"\"\"Inverse the patch ordering before any lossy projection.\"\"\"\\n' +\n-   '    height, width, channels = image_shape\\n' +\n-   '    return (patches.reshape(height // patch_size, width // patch_size,\\n' +\n-   '                            patch_size, patch_size, channels)\\n' +\n-   '            .transpose(0, 2, 1, 3, 4).reshape(image_shape))\\n' +\n-   '\\n' +\n-   '\\n' +\n-   'def main():\\n' +\n-   '    image = np.arange(4 * 6 * 2, dtype=np.float64).reshape(4, 6, 2) / 10\\n' +\n-   '    patch_size, output_width = 2, 3\\n' +\n-   '    patches = patchify(image, patch_size)\\n' +\n-   '    weights = np.arange(patches.shape[1] * output_width, dtype=np.float64)\\n' +\n-   '    weights = weights.reshape(patches.shape[1], output_width) / 100\\n' +\n-   '    bias = np.array([0.1, -0.2, 0.3])\\n' +\n-   '    projected = patches @ weights + bias\\n' +\n-   '\\n' +\n-   '    convolution = torch.nn.Conv2d(2, output_width, patch_size,\\n' +\n-   '                                   stride=patch_size, bias=True).double()\\n' +\n-   '    # HWC feature order -> O,C,H,W convolution kernel order.\\n' +\n-   '    kernel = weights.reshape(patch_size, patch_size, 2, output_width)\\n' +\n-   '    kernel = kernel.transpose(3, 2, 0, 1).copy()\\n' +\n-   '    with torch.no_grad():\\n' +\n-   '        convolution.weight.copy_(torch.from_numpy(kernel))\\n' +\n-   '        convolution.bias.copy_(torch.from_numpy(bias))\\n' +\n-   '        image_chw = torch.from_numpy(image.transpose(2, 0, 1).copy())[None]\\n' +\n-   '        convolution_grid = convolution(image_chw)\\n' +\n-   '    matched = convolution_grid[0].permute(1, 2, 0).reshape(-1, output_width)\\n' +\n-   '    matched = matched.numpy()\\n' +\n-   '    assert np.array_equal(unpatchify(patches, image.shape, patch_size), image)\\n' +\n-   '    np.testing.assert_allclose(matched, projected, rtol=1e-12, atol=1e-12)\\n' +\n-   '    # First retained optical digit: original pixel counts /16, one channel.\\n' +\n-   '    rows = np.genfromtxt(Path(__file__).with_name(\"digits_subset.csv\"),\\n' +\n-   '                        delimiter=\",\", names=True, dtype=None, encoding=\"utf8\")\\n' +\n-   '    digit = np.array([rows[0][f\"p{i}\"] for i in range(64)], dtype=np.float64)\\n' +\n-   '    digit = digit.reshape(8, 8, 1) / 16\\n' +\n-   '    digit_patches = patchify(digit, 2)\\n' +\n-   '    digit_weights = np.array([[1., 0.], [0., 1.], [1., 0.], [0., 1.]])\\n' +\n-   '    digit_projected = digit_patches @ digit_weights\\n' +\n-   '    digit_conv = torch.nn.Conv2d(1, 2, 2, stride=2, bias=False).double()\\n' +\n-   '    with torch.no_grad():\\n' +\n-   '        digit_kernel = digit_weights.reshape(2, 2, 1, 2).transpose(3, 2, 0, 1).copy()\\n' +\n-   '        digit_conv.weight.copy_(torch.from_numpy(digit_kernel))\\n' +\n-   '        digit_output = digit_conv(torch.from_numpy(digit.transpose(2, 0, 1).copy())[None])\\n' +\n-   '    digit_matched = digit_output[0].permute(1, 2, 0).reshape(-1, 2).numpy()\\n' +\n-   '    np.testing.assert_allclose(digit_matched, digit_projected, rtol=1e-12, atol=1e-12)\\n' +\n-   '    assert np.array_equal(unpatchify(digit_patches, digit.shape, 2), digit)\\n' +\n-   '    print(json.dumps({\\n' +\n-   '        \"image_hwc\": list(image.shape), \"patches\": list(patches.shape),\\n' +\n-   '        \"first_patch\": patches[0].tolist(),\\n' +\n-   '        \"first_projection\": projected[0].tolist(),\\n' +\n-   '        \"conv_nchw\": list(convolution_grid.shape),\\n' +\n-   '        \"max_abs_difference\": float(np.abs(matched - projected).max()),\\n' +\n-   '        \"unpatchify_exact\": True,\\n' +\n-   '        \"real_digit\": {\\n' +\n-   '            \"source_index\": int(rows[0][\"source_index\"]), \"label\": int(rows[0][\"label\"]),\\n' +\n-   '            \"image_hwc\": list(digit.shape), \"patches\": list(digit_patches.shape),\\n' +\n-   '            \"patch_index\": 1, \"patch_vector\": digit_patches[1].tolist(),\\n' +\n-   '            \"projection\": digit_projected[1].tolist(), \"unpatchify_exact\": True,\\n' +\n-   '            \"conv_max_abs_difference\": float(np.abs(digit_matched - digit_projected).max()),\\n' +\n-   '        },\\n' +\n-   '    }, indent=2))\\n' +\n-   '\\n' +\n-   '\\n' +\n-   'if __name__ == \"__main__\":\\n' +\n-   '    main()\\n'\n\n    at eq (C:\\Personal Projects and files\\Portfolio\\Portfolio\\scripts\\verify-multimodal-tokenization-browser.cjs:21:52)\n    at C:\\Personal Projects and files\\Portfolio\\Portfolio\\scripts\\verify-multimodal-tokenization-browser.cjs:173:7"
+}

@@ -1,0 +1,984 @@
+{
+  "selection": "one parent per class by SHA256(source ID), before model outputs",
+  "anchors": [
+    "test:9",
+    "test:308",
+    "test:69",
+    "test:367",
+    "test:444",
+    "test:1117"
+  ],
+  "rows": [
+    {
+      "id": "test:9/reverse",
+      "state": "Is it normal to have to wait over a week for my new card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        }
+      ],
+      "target": 5,
+      "label": "card_arrival",
+      "source_split": "test",
+      "source_row": 9,
+      "text_sha256": "6f78c993a75175a67ec080e1d4f539b2f815d029607aa0321bdecfa4f751567d",
+      "normal_sha256": "cab6032260b0df899be119c541676428b7a05a2e17f62557ed59965b289cbc3b",
+      "tokens": 89,
+      "parent_id": "test:9",
+      "intervention": "reverse"
+    },
+    {
+      "id": "test:9/paraphrase",
+      "state": "Is it normal to have to wait over a week for my new card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "a newly ordered card still has not reached the customer"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "the expected waiting time or speed of sending a new card"
+        },
+        {
+          "id": "card_linking",
+          "description": "connect a card the customer already owns to their account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "a bank card fails during attempted use"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a card previously in the customer possession is now lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "the customer disputes a card purchase they do not recognise"
+        }
+      ],
+      "target": 0,
+      "label": "card_arrival",
+      "source_split": "test",
+      "source_row": 9,
+      "text_sha256": "6f78c993a75175a67ec080e1d4f539b2f815d029607aa0321bdecfa4f751567d",
+      "normal_sha256": "cab6032260b0df899be119c541676428b7a05a2e17f62557ed59965b289cbc3b",
+      "tokens": 89,
+      "parent_id": "test:9",
+      "intervention": "paraphrase"
+    },
+    {
+      "id": "test:9/omit-correct",
+      "state": "Is it normal to have to wait over a week for my new card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": null,
+      "label": "card_arrival",
+      "source_split": "test",
+      "source_row": 9,
+      "text_sha256": "6f78c993a75175a67ec080e1d4f539b2f815d029607aa0321bdecfa4f751567d",
+      "normal_sha256": "cab6032260b0df899be119c541676428b7a05a2e17f62557ed59965b289cbc3b",
+      "tokens": 89,
+      "parent_id": "test:9",
+      "intervention": "omit-correct"
+    },
+    {
+      "id": "test:9/distractor",
+      "state": "Is it normal to have to wait over a week for my new card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "balance",
+          "description": "check the amount of money in the account"
+        }
+      ],
+      "target": 0,
+      "label": "card_arrival",
+      "source_split": "test",
+      "source_row": 9,
+      "text_sha256": "6f78c993a75175a67ec080e1d4f539b2f815d029607aa0321bdecfa4f751567d",
+      "normal_sha256": "cab6032260b0df899be119c541676428b7a05a2e17f62557ed59965b289cbc3b",
+      "tokens": 89,
+      "parent_id": "test:9",
+      "intervention": "distractor"
+    },
+    {
+      "id": "test:308/reverse",
+      "state": "Can I get my card expedited?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        }
+      ],
+      "target": 4,
+      "label": "card_delivery_estimate",
+      "source_split": "test",
+      "source_row": 308,
+      "text_sha256": "de33208ca93bb6d7cb1bdb2bed9eac44a54b466aff144943a6488573e00fdce5",
+      "normal_sha256": "110a11322446587b83c7bb1652b00132db772e7f4de725386fe0f6a0edece043",
+      "tokens": 81,
+      "parent_id": "test:308",
+      "intervention": "reverse"
+    },
+    {
+      "id": "test:308/paraphrase",
+      "state": "Can I get my card expedited?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "a newly ordered card still has not reached the customer"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "the expected waiting time or speed of sending a new card"
+        },
+        {
+          "id": "card_linking",
+          "description": "connect a card the customer already owns to their account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "a bank card fails during attempted use"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a card previously in the customer possession is now lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "the customer disputes a card purchase they do not recognise"
+        }
+      ],
+      "target": 1,
+      "label": "card_delivery_estimate",
+      "source_split": "test",
+      "source_row": 308,
+      "text_sha256": "de33208ca93bb6d7cb1bdb2bed9eac44a54b466aff144943a6488573e00fdce5",
+      "normal_sha256": "110a11322446587b83c7bb1652b00132db772e7f4de725386fe0f6a0edece043",
+      "tokens": 81,
+      "parent_id": "test:308",
+      "intervention": "paraphrase"
+    },
+    {
+      "id": "test:308/omit-correct",
+      "state": "Can I get my card expedited?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": null,
+      "label": "card_delivery_estimate",
+      "source_split": "test",
+      "source_row": 308,
+      "text_sha256": "de33208ca93bb6d7cb1bdb2bed9eac44a54b466aff144943a6488573e00fdce5",
+      "normal_sha256": "110a11322446587b83c7bb1652b00132db772e7f4de725386fe0f6a0edece043",
+      "tokens": 81,
+      "parent_id": "test:308",
+      "intervention": "omit-correct"
+    },
+    {
+      "id": "test:308/distractor",
+      "state": "Can I get my card expedited?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "balance",
+          "description": "check the amount of money in the account"
+        }
+      ],
+      "target": 1,
+      "label": "card_delivery_estimate",
+      "source_split": "test",
+      "source_row": 308,
+      "text_sha256": "de33208ca93bb6d7cb1bdb2bed9eac44a54b466aff144943a6488573e00fdce5",
+      "normal_sha256": "110a11322446587b83c7bb1652b00132db772e7f4de725386fe0f6a0edece043",
+      "tokens": 81,
+      "parent_id": "test:308",
+      "intervention": "distractor"
+    },
+    {
+      "id": "test:69/reverse",
+      "state": "Can you please show me where I can find the location to link my card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        }
+      ],
+      "target": 3,
+      "label": "card_linking",
+      "source_split": "test",
+      "source_row": 69,
+      "text_sha256": "eefb43a2abcb433c1504836a4a5be114d4dd3cdb63612ca032fc38b2ce472aa9",
+      "normal_sha256": "dd405a70fe5f447cb6d1b21ba82cb4eaca7f18a8c4ca535c1376a4ace733f69d",
+      "tokens": 90,
+      "parent_id": "test:69",
+      "intervention": "reverse"
+    },
+    {
+      "id": "test:69/paraphrase",
+      "state": "Can you please show me where I can find the location to link my card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "a newly ordered card still has not reached the customer"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "the expected waiting time or speed of sending a new card"
+        },
+        {
+          "id": "card_linking",
+          "description": "connect a card the customer already owns to their account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "a bank card fails during attempted use"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a card previously in the customer possession is now lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "the customer disputes a card purchase they do not recognise"
+        }
+      ],
+      "target": 2,
+      "label": "card_linking",
+      "source_split": "test",
+      "source_row": 69,
+      "text_sha256": "eefb43a2abcb433c1504836a4a5be114d4dd3cdb63612ca032fc38b2ce472aa9",
+      "normal_sha256": "dd405a70fe5f447cb6d1b21ba82cb4eaca7f18a8c4ca535c1376a4ace733f69d",
+      "tokens": 90,
+      "parent_id": "test:69",
+      "intervention": "paraphrase"
+    },
+    {
+      "id": "test:69/omit-correct",
+      "state": "Can you please show me where I can find the location to link my card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": null,
+      "label": "card_linking",
+      "source_split": "test",
+      "source_row": 69,
+      "text_sha256": "eefb43a2abcb433c1504836a4a5be114d4dd3cdb63612ca032fc38b2ce472aa9",
+      "normal_sha256": "dd405a70fe5f447cb6d1b21ba82cb4eaca7f18a8c4ca535c1376a4ace733f69d",
+      "tokens": 90,
+      "parent_id": "test:69",
+      "intervention": "omit-correct"
+    },
+    {
+      "id": "test:69/distractor",
+      "state": "Can you please show me where I can find the location to link my card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "balance",
+          "description": "check the amount of money in the account"
+        }
+      ],
+      "target": 2,
+      "label": "card_linking",
+      "source_split": "test",
+      "source_row": 69,
+      "text_sha256": "eefb43a2abcb433c1504836a4a5be114d4dd3cdb63612ca032fc38b2ce472aa9",
+      "normal_sha256": "dd405a70fe5f447cb6d1b21ba82cb4eaca7f18a8c4ca535c1376a4ace733f69d",
+      "tokens": 90,
+      "parent_id": "test:69",
+      "intervention": "distractor"
+    },
+    {
+      "id": "test:367/reverse",
+      "state": "Can you please identify the problem with my bank card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        }
+      ],
+      "target": 2,
+      "label": "card_not_working",
+      "source_split": "test",
+      "source_row": 367,
+      "text_sha256": "a59d689655cf9dcfe91c8bccd12a56a6f7c69ec2a125e6954c4628ffd968458c",
+      "normal_sha256": "ab8e054a4163342975743449de6ba18258c50765108b07ec9b42ea31c4c1ab38",
+      "tokens": 85,
+      "parent_id": "test:367",
+      "intervention": "reverse"
+    },
+    {
+      "id": "test:367/paraphrase",
+      "state": "Can you please identify the problem with my bank card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "a newly ordered card still has not reached the customer"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "the expected waiting time or speed of sending a new card"
+        },
+        {
+          "id": "card_linking",
+          "description": "connect a card the customer already owns to their account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "a bank card fails during attempted use"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a card previously in the customer possession is now lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "the customer disputes a card purchase they do not recognise"
+        }
+      ],
+      "target": 3,
+      "label": "card_not_working",
+      "source_split": "test",
+      "source_row": 367,
+      "text_sha256": "a59d689655cf9dcfe91c8bccd12a56a6f7c69ec2a125e6954c4628ffd968458c",
+      "normal_sha256": "ab8e054a4163342975743449de6ba18258c50765108b07ec9b42ea31c4c1ab38",
+      "tokens": 85,
+      "parent_id": "test:367",
+      "intervention": "paraphrase"
+    },
+    {
+      "id": "test:367/omit-correct",
+      "state": "Can you please identify the problem with my bank card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": null,
+      "label": "card_not_working",
+      "source_split": "test",
+      "source_row": 367,
+      "text_sha256": "a59d689655cf9dcfe91c8bccd12a56a6f7c69ec2a125e6954c4628ffd968458c",
+      "normal_sha256": "ab8e054a4163342975743449de6ba18258c50765108b07ec9b42ea31c4c1ab38",
+      "tokens": 85,
+      "parent_id": "test:367",
+      "intervention": "omit-correct"
+    },
+    {
+      "id": "test:367/distractor",
+      "state": "Can you please identify the problem with my bank card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "balance",
+          "description": "check the amount of money in the account"
+        }
+      ],
+      "target": 3,
+      "label": "card_not_working",
+      "source_split": "test",
+      "source_row": 367,
+      "text_sha256": "a59d689655cf9dcfe91c8bccd12a56a6f7c69ec2a125e6954c4628ffd968458c",
+      "normal_sha256": "ab8e054a4163342975743449de6ba18258c50765108b07ec9b42ea31c4c1ab38",
+      "tokens": 85,
+      "parent_id": "test:367",
+      "intervention": "distractor"
+    },
+    {
+      "id": "test:9/hindi",
+      "state": "क्या मेरे नए कार्ड के लिए एक सप्ताह से अधिक इंतज़ार करना सामान्य है?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": 0,
+      "label": "card_arrival",
+      "source_split": "test",
+      "source_row": 9,
+      "text_sha256": "6f78c993a75175a67ec080e1d4f539b2f815d029607aa0321bdecfa4f751567d",
+      "normal_sha256": "cab6032260b0df899be119c541676428b7a05a2e17f62557ed59965b289cbc3b",
+      "tokens": 89,
+      "parent_id": "test:9",
+      "intervention": "hindi",
+      "english_meaning": "Is it normal to have to wait over a week for my new card?"
+    },
+    {
+      "id": "test:308/hindi",
+      "state": "क्या मेरा कार्ड जल्दी भेजा जा सकता है?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": 1,
+      "label": "card_delivery_estimate",
+      "source_split": "test",
+      "source_row": 308,
+      "text_sha256": "de33208ca93bb6d7cb1bdb2bed9eac44a54b466aff144943a6488573e00fdce5",
+      "normal_sha256": "110a11322446587b83c7bb1652b00132db772e7f4de725386fe0f6a0edece043",
+      "tokens": 81,
+      "parent_id": "test:308",
+      "intervention": "hindi",
+      "english_meaning": "Can I get my card expedited?"
+    },
+    {
+      "id": "test:69/long-clue-front",
+      "state": "Can you please show me where I can find the location to link my card? This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. ",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": 2,
+      "label": "card_linking",
+      "source_split": "test",
+      "source_row": 69,
+      "text_sha256": "eefb43a2abcb433c1504836a4a5be114d4dd3cdb63612ca032fc38b2ce472aa9",
+      "normal_sha256": "dd405a70fe5f447cb6d1b21ba82cb4eaca7f18a8c4ca535c1376a4ace733f69d",
+      "tokens": 90,
+      "parent_id": "test:69",
+      "intervention": "long-clue-front"
+    },
+    {
+      "id": "test:69/long-clue-end",
+      "state": "This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. This sentence provides no information about the banking request. Can you please show me where I can find the location to link my card?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": 2,
+      "label": "card_linking",
+      "source_split": "test",
+      "source_row": 69,
+      "text_sha256": "eefb43a2abcb433c1504836a4a5be114d4dd3cdb63612ca032fc38b2ce472aa9",
+      "normal_sha256": "dd405a70fe5f447cb6d1b21ba82cb4eaca7f18a8c4ca535c1376a4ace733f69d",
+      "tokens": 90,
+      "parent_id": "test:69",
+      "intervention": "long-clue-end"
+    },
+    {
+      "id": "test:444/two-candidates",
+      "state": "My card is lost! What can I do?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        }
+      ],
+      "target": 0,
+      "label": "lost_or_stolen_card",
+      "source_split": "test",
+      "source_row": 444,
+      "text_sha256": "2e6feb80a4bc8b8e1cfd2e10bf6d368113c319b137760e73599c2ec52dba6671",
+      "normal_sha256": "838192ee2cc716865c38c9d1408c21e272ae3f41ad26b4b5ef3c218b81ad5df7",
+      "tokens": 83,
+      "parent_id": "test:444",
+      "intervention": "two-candidates"
+    },
+    {
+      "id": "test:1117/eight-candidates",
+      "state": "There is a fraudulent charge on my statement.",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        },
+        {
+          "id": "balance",
+          "description": "check the amount of money in the account"
+        },
+        {
+          "id": "cash_withdrawal",
+          "description": "withdraw cash from a cash machine"
+        }
+      ],
+      "target": 5,
+      "label": "card_payment_not_recognised",
+      "source_split": "test",
+      "source_row": 1117,
+      "text_sha256": "56ee1b385823a64f1c2de3c09c2df9c68096e924baa46e68bb9b28e53be0372e",
+      "normal_sha256": "ec0035b190833511a168384e44a7c864d6dd1379127a9346e93d35312f1d5b4d",
+      "tokens": 83,
+      "parent_id": "test:1117",
+      "intervention": "eight-candidates"
+    },
+    {
+      "id": "test:444/rename-ids",
+      "state": "My card is lost! What can I do?",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "candidate-0",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "candidate-1",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "candidate-2",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "candidate-3",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "candidate-4",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "candidate-5",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": 4,
+      "label": "lost_or_stolen_card",
+      "source_split": "test",
+      "source_row": 444,
+      "text_sha256": "2e6feb80a4bc8b8e1cfd2e10bf6d368113c319b137760e73599c2ec52dba6671",
+      "normal_sha256": "838192ee2cc716865c38c9d1408c21e272ae3f41ad26b4b5ef3c218b81ad5df7",
+      "tokens": 83,
+      "parent_id": "test:444",
+      "intervention": "rename-ids",
+      "identity_map": {
+        "candidate-0": "card_arrival",
+        "candidate-1": "card_delivery_estimate",
+        "candidate-2": "card_linking",
+        "candidate-3": "card_not_working",
+        "candidate-4": "lost_or_stolen_card",
+        "candidate-5": "card_payment_not_recognised"
+      }
+    },
+    {
+      "id": "test:1117/rename-ids",
+      "state": "There is a fraudulent charge on my statement.",
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "candidate-0",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "candidate-1",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "candidate-2",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "candidate-3",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "candidate-4",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "candidate-5",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ],
+      "target": 5,
+      "label": "card_payment_not_recognised",
+      "source_split": "test",
+      "source_row": 1117,
+      "text_sha256": "56ee1b385823a64f1c2de3c09c2df9c68096e924baa46e68bb9b28e53be0372e",
+      "normal_sha256": "ec0035b190833511a168384e44a7c864d6dd1379127a9346e93d35312f1d5b4d",
+      "tokens": 83,
+      "parent_id": "test:1117",
+      "intervention": "rename-ids",
+      "identity_map": {
+        "candidate-0": "card_arrival",
+        "candidate-1": "card_delivery_estimate",
+        "candidate-2": "card_linking",
+        "candidate-3": "card_not_working",
+        "candidate-4": "lost_or_stolen_card",
+        "candidate-5": "card_payment_not_recognised"
+      }
+    }
+  ],
+  "limits": "Controlled individual interventions, not population robustness measurements; Hindi is outside the pinned English model scope"
+}

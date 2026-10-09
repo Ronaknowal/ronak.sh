@@ -1,0 +1,33 @@
+# Section11 / N7: D38–D41 actual-content contracts
+
+The accepted design maps N7 only to section11 “Control penalties and incomplete observations”, not section10 (D35–D37 ordinary state). This successor fills concrete implementation/prose details without dropping the four accepted jobs or adding a generic lab grid. Main manuscript/phase ownership remains Root. No native drawing or browser acceptance is claimed.
+
+Use inline lesson-flow, actual drawn curves, factor bars/cells and local product connections, no card/banner/independent lab heading. C0 blue/C1 rose retain component identity. Observations neutral; active changed operations amber, selection white outline. Observed zero is a labelled ordinary cell; missingness is a hatch plus literal 'not observed', never the same colour treatment as a measured zero. Text/numbers and patterns supplement colour. Keep each drawing above its walkthrough, control directly below the drawing, reset and live sentence. All introduced quantities stay visible. At390px/root32 stack complete stages and retain actual values/labels; indivisible arrays may have named keyboard-focusable local scrolling but no document overflow/shrunken whole SVG.
+
+## D38 — price changes a scalar optimum
+
+Question and plain lead precede picture. Actual w-axis0…3 and cost-axis0…10, neutral data curve .5(2-w)^2, amber linear term lambda*w and distinguishable labelled total curve. Label x=2, fixed pattern1, prediction w on their marks. λ0…3 one range control, default0/changed1/endpoint3/reset0. Initial optimum2, changed1 optimum1, endpoint3 constrained optimum0 with outward slope1. Mark the nonnegative boundary, actual derivative direction and best feasible amount on total curve. No negative amount slider. Live sentence states λ, optimal amount, data cost, penalty cost and total. All costs calculated from the same selected state, not hand-authored demonstration strings.
+
+Static squared-penalty inset shows .5w² added to the same data curve, with λ1=0/λ2=1 fixed, optimum1 and two summands explicitly labelled. It is a separate comparison with fixed values, not another selector/control or a false claim linear and quadratic preferences are interchangeable. Keep plain-language 'linear price' and 'squared price' labels adjacent to their exact formulas; formal L1/L2 naming comes in manuscript walkthrough. Scalar formula uses positive curvature h²+λ2; zero curvature/no-price convention described in text. Default reset is the null penalty case, not hidden no-output.
+
+## D39 — product stays fixed, factor penalties change
+
+Original W_exact=[[2,1],[1,3],[0,2]], H0=[[1,0,1],[0,1,1]]. One first-component scale s.5…3, default1/changed2/endpoint.5/reset1. Draw W[:,C0]/s and s*H[C0,:] with literal per-cell values, C1 unchanged and both component contribution tables feeding the same reconstructionX0. Factor masses are separate rulers with named units, not one arbitrary bar scale for data and factor cost. Show W sum3/s+6 and H sum2s+2, coefficients alphaW*d=.3 and alphaH*n=.6 (alphaW.1/alphaH.2,r1,n=d3) and separate paid portions. Total .9/s+1.2s+3:5.1 at1,5.85 at2,5.4 at.5. Data error remains0 and is explicitly labelled separately from penalty.
+
+Live sentence explains invariant reconstruction and changed W/H cost. Static zero-alpha inset shows cost0 at all scales; no second mode wall. Do not imply arbitrary normalization leaves a penalized objective unchanged. No empirical timing/quality claim from this constructed exact family. All sums/costs correspond to actual retained D39 arithmetic in penalties-masks-checks.json.
+
+## D40 — mask cells decide the local Gram
+
+R0=[2,1,3], fixed H0, weights[1,1,m]. Draw observation cells and separate weight cells, component-feature pattern rows and directed contribution paths to each actual G/p cell. One m0…1 control default1/changed0/reset1; allowfraction.25 as a distinct weighted state. Include measured F2=3 even at weight0, hatched exclusion; never replace X2 by0 to simulate missingness. Current G=[[1+m,m],[m,1+m]], p=[2+3m,1+3m] shown alongside unchanged all-observed G=[[2,1],[1,2]],p=[5,4]. Trace the F2 contribution m to offdiagonal and+3m to cross entries; binary observation and fractional weighting labels differ.
+
+Include same-object square-root-weighted design A rows[[1,0],[0,1],[sqrt(m),sqrt(m)]] and target[2,1,3sqrt(m)], with arrows AᵀA→G and Aᵀb→p. This is actual array geometry and multiply/add correspondence, not boxes of sentences. At m0 the third row is crossed/hatch-excluded and productsreduce to I/[2,1]. At m.25 it is[.5,.5]/target1.5, G[[1.25,.25],[.25,1.25]],p[2.75,1.75]. Explain outputs live in one sentence. Show original row identity outside fitting cells.
+
+Static small second row with different mask makes the different-cache requirement visible; do not imply one shared unweightedG is valid. Transposed H update in text refers to newW and Mᵀ, not unchangedW. No in-browser fitting controls added to this cache question. Existing pure source independently checks weights/arrays; browser must implement exact same model.
+
+## D41 — information absent versus a zero measured value
+
+Static actual row/weight objects: both value rows[0,0,0] and fixedH0. Missing lane mask[0,0,0] hatchallfeatures, values explicitly finite placeholders; observed lane mask[1,1,1], values explicitly three measured zeros. Both amount rows[0,0] and prediction rows[0,0,0]. Missing prediction lane labelled 'chosen output; unknown measurement quality'; no accuracy-successgreen/check. Missing included numerator0/denominator0 means qualityundefined, observed numerator0/denominator3 means observed-cellMSE0. Measured zeros remain unhatched and enter residual arithmetic. Separate feature-column inset keeps those two zero-value rows but changes masks to[[0,0,0],[1,1,0]]: F2 entirely unsupported, flags[true,true,false], its Hcolumn chosen[0,0]. No data paths constrain that column. This is lack of support, not estimated physical absence. Label the inset as a changed observation pattern.
+
+No controls are needed. Related changed exercise [2,0]/H[1,1] is explained in prose: bothobserved w1 versus secondmissing w2; additionalL2λ2=1 givesw1 for maskedcase. Fixed-H public NNLS design is rooted inD40, avoiding a disconnected librarycall. Whole fitted snapshot and failed-fit atomicity remain the earlier D37 anatomy; referback byname rather than inventing duplicate cards.
+
+Phase-two verification must personally inspect actual curves/boundarymarks, default/changed/null/fractional/reset/keyboard states, colour/support correspondence, all labels and 390px/768px/root32. Current arithmetic/source checks establish none of those paints or learner comprehension.

@@ -1,0 +1,32 @@
+{
+  "schema": "independent-bounded-source-counterexample/v1",
+  "reviewer": "/root/tsne_content_review",
+  "date": "2026-10-09",
+  "executionCategory": "Elementary JavaScript arithmetic in functions isolate; target Python source read but not executed",
+  "source": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/gaussian_rows.py",
+    "authorDeclaredSha256": "7a9290f1d0583a94c7e32bb75d7b4eb0b45d26bc81fcf6329b52937f380e6955",
+    "freshIndependentHashValidation": "PENDING_DISK_FULL_112"
+  },
+  "call": {
+    "function": "solve_row",
+    "distances": [1, 2, 3],
+    "perplexity": 2,
+    "max_iter": 1
+  },
+  "lastEvaluatedBeta": 1,
+  "returnedBetaByReadControlFlow": 0.5,
+  "returnedProbabilitiesByReadControlFlow": [0.952269826123778, 0.047410722937878444, 0.0003194509383437506],
+  "probabilitiesAtReturnedBeta": [0.8055124120405226, 0.1797341135001498, 0.014753474459327466],
+  "maxAbsoluteProbabilityMismatch": 0.14675741408325538,
+  "reason": "At beta1 entropy is below log2. The loop assigns high1 then beta0.5 and falls through to returning the old p with the new beta.",
+  "codeActuallyUsedForComplementaryArithmetic": "const d=[1,2,3]; const row=b=>{const w=d.map(x=>Math.exp(-b*(x*x-1))),s=w.reduce((a,b)=>a+b,0),p=w.map(x=>x/s);return {p,h:-p.reduce((s,x)=>s+(x>0?x*Math.log(x):0),0)}}; const at1=row(1),atReturned=row(.5); const mismatch=Math.max(...at1.p.map((x,i)=>Math.abs(x-atReturned.p[i])));",
+  "historicalMainsReplayed": false,
+  "historicalFitsReplayed": false,
+  "targetCallableExecuted": false,
+  "limitations": [
+    "This is a finite source-control-flow counterexample with independently computed elementary rows, not a new Python execution receipt.",
+    "The later source correction needs a bounded actual callable test and exact predecessor conservation.",
+    "Shell startup and Node REPL kernel startup failed with disk-full os error112; no deletion or environment mutation was performed."
+  ]
+}

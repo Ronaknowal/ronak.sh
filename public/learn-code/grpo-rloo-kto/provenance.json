@@ -1,0 +1,323 @@
+{
+  "topic": "grpo-rloo-kto-advanced-preference-methods",
+  "boundary": "One finite score/enumeration stage; two scratch routes and three native routes with two updates each. Constructed parity and diagnosis are separate. No scientific stage replay.",
+  "original_protocol_sha256": "213b92c05ce8791d2867e19def786e5fb0b089b3e1584fd8cb7c8ff8dfca8375",
+  "native_continuation_inputs_sha256": "21bdb996d190fab71bf95af25bacfecde2b1d903174e60d261f2d645039fe407",
+  "rotation_convention": "A +1 positional roll assigns preceding completion y_(i-1) to prompt x_i, with wraparound. The executed code and prepared rows agree.",
+  "source_prose_erratum": "Frozen program-protocol.md said 32 inputs; authoritative prospective JSON has 25, outer original program packet 31.",
+  "data": {
+    "repository": "https://github.com/google-research-datasets/poem-sentiment",
+    "revision": "612e9a1f86799126c68f0c5d9c3f1fc28f88068f",
+    "license": "CC-BY-4.0",
+    "credit": "Emily Sheng and David Uthus (2020), Investigating Societal Biases in a Poetry Composition System"
+  },
+  "model": {
+    "base": "EleutherAI/pythia-14m",
+    "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+    "sft_weights_sha256": "8ffe40fc676d22d608b58b35af11bf467c36981dbb3ccfe373a7d574bd8251cd",
+    "weights_bundled": false
+  },
+  "bindings": [
+    {
+      "source": "scratch/grpo-research/study/finite/report.json",
+      "source_sha256": "e502932d8387d62537b362cbf886716d00f346c08ef49c50bdb8ec61d04261ab",
+      "public": "evidence/finite/report.json",
+      "public_sha256": "e502932d8387d62537b362cbf886716d00f346c08ef49c50bdb8ec61d04261ab",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/study/finite-terminal.json",
+      "source_sha256": "49c25e7a4cedf22201ca0e4288afcb2e9ab865d74bda402662ee13bc8616f065",
+      "public": "evidence/finite-terminal.json",
+      "public_sha256": "49c25e7a4cedf22201ca0e4288afcb2e9ab865d74bda402662ee13bc8616f065",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/study/scratch-grpo/report.json",
+      "source_sha256": "e1d31750a7585fa21cf6a96cfe33efd1d23338912c64caaa0e002f61b4f225dc",
+      "public": "evidence/scratch-grpo/report.json",
+      "public_sha256": "e1d31750a7585fa21cf6a96cfe33efd1d23338912c64caaa0e002f61b4f225dc",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/study/scratch-grpo-terminal.json",
+      "source_sha256": "66f187c2be4dbde0877223b66d443687f5dc842f9b9fdbea0452f441958a2fb2",
+      "public": "evidence/scratch-grpo-terminal.json",
+      "public_sha256": "66f187c2be4dbde0877223b66d443687f5dc842f9b9fdbea0452f441958a2fb2",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/study/scratch-rloo/report.json",
+      "source_sha256": "f88330ccc0ca36d503183698dc58941c834be0f6eca79d77e02e2699a5e34025",
+      "public": "evidence/scratch-rloo/report.json",
+      "public_sha256": "f88330ccc0ca36d503183698dc58941c834be0f6eca79d77e02e2699a5e34025",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/study/scratch-rloo-terminal.json",
+      "source_sha256": "3cdc14c074ccba5ee0b18ff334af76c4bc69fea37c2976fda3df5295ce4fcd2a",
+      "public": "evidence/scratch-rloo-terminal.json",
+      "public_sha256": "3cdc14c074ccba5ee0b18ff334af76c4bc69fea37c2976fda3df5295ce4fcd2a",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/native-precision-continuation/native-grpo/report.json",
+      "source_sha256": "688ace2168b0cdfed9d1829569a9cc3b4ae3dcdf6e33c60fdc4142bc286cf40e",
+      "public": "evidence/native-grpo/report.json",
+      "public_sha256": "64f078f3027e39218066bd7841aea4472c6519f0491e5e5a169ed823a5dd2608",
+      "projection": "configuration.output_dir only; measured arrays unchanged"
+    },
+    {
+      "source": "scratch/grpo-research/native-precision-continuation/native-grpo-terminal.json",
+      "source_sha256": "e7ef6498a6d2edd9f49b657a1ad605abd40bf81af65e041038b920cec9d499fa",
+      "public": "evidence/native-grpo-terminal.json",
+      "public_sha256": "e7ef6498a6d2edd9f49b657a1ad605abd40bf81af65e041038b920cec9d499fa",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/native-precision-continuation/native-rloo/report.json",
+      "source_sha256": "31e127671cc91c6d184dc771234570d67db92cfccf99d7d3eee74c03ac010aa7",
+      "public": "evidence/native-rloo/report.json",
+      "public_sha256": "a2d039a5510bca9ea1166643d4d53808d3a3e4754bb38475a22be7b9c4ec8392",
+      "projection": "configuration.output_dir only; measured arrays unchanged"
+    },
+    {
+      "source": "scratch/grpo-research/native-precision-continuation/native-rloo-terminal.json",
+      "source_sha256": "7fdbfe054ae36710060c083484c86973a32f612fad2f5f510268d4adbc931321",
+      "public": "evidence/native-rloo-terminal.json",
+      "public_sha256": "7fdbfe054ae36710060c083484c86973a32f612fad2f5f510268d4adbc931321",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/native-precision-continuation/native-kto/report.json",
+      "source_sha256": "4b732313e76e38c6bb82e80f7eb5c3e90c0179715cd8dfd2aa4f5f49d1f4d2a1",
+      "public": "evidence/native-kto/report.json",
+      "public_sha256": "7374400f18096b46c29ccccf3c4433641b6cb81d71c2220e30850d58f3b6a70b",
+      "projection": "configuration.output_dir only; measured arrays unchanged"
+    },
+    {
+      "source": "scratch/grpo-research/native-precision-continuation/native-kto-terminal.json",
+      "source_sha256": "8491c5b29e99588be1a10af36bc387afa0a5d9df073099fd833fec1f88f2405b",
+      "public": "evidence/native-kto-terminal.json",
+      "public_sha256": "8491c5b29e99588be1a10af36bc387afa0a5d9df073099fd833fec1f88f2405b",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/prospective-protocol.json",
+      "source_sha256": "213b92c05ce8791d2867e19def786e5fb0b089b3e1584fd8cb7c8ff8dfca8375",
+      "public": "evidence/prospective-protocol.json",
+      "public_sha256": "213b92c05ce8791d2867e19def786e5fb0b089b3e1584fd8cb7c8ff8dfca8375",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/program-inputs.json",
+      "source_sha256": "9ccf578d7e0561f2e36ec1e87883377b68c6d6c769cd50dcc8cda7ee39e8674d",
+      "public": "evidence/program-inputs.json",
+      "public_sha256": "9ccf578d7e0561f2e36ec1e87883377b68c6d6c769cd50dcc8cda7ee39e8674d",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/program-review-acceptance.json",
+      "source_sha256": "23c3442e74835629f32dcb4ffb7fbc2dd5b2102528f307716a50d49820c29018",
+      "public": "evidence/program-review-acceptance.json",
+      "public_sha256": "23c3442e74835629f32dcb4ffb7fbc2dd5b2102528f307716a50d49820c29018",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/mechanism-checks.json",
+      "source_sha256": "43a8a42091c4da36ab2bcc7586ea965ae71271134a7eb9ae1e328365918f0c8d",
+      "public": "evidence/mechanism-checks.json",
+      "public_sha256": "43a8a42091c4da36ab2bcc7586ea965ae71271134a7eb9ae1e328365918f0c8d",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-score-continuation/continue_native.py",
+      "source_sha256": "1ba2d721409c91e02424235141dd46982564e976b920ff5a4a1975dfcb8c8afb",
+      "public": "evidence/native-score-continuation/continue_native.py",
+      "public_sha256": "1ba2d721409c91e02424235141dd46982564e976b920ff5a4a1975dfcb8c8afb",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-score-continuation/diagnose_gradients.py",
+      "source_sha256": "09413a8e8ed9c91ddb25fa29fc95c128792c26bb070504bcf6d1f1a0e482d9a9",
+      "public": "evidence/native-score-continuation/diagnose_gradients.py",
+      "public_sha256": "09413a8e8ed9c91ddb25fa29fc95c128792c26bb070504bcf6d1f1a0e482d9a9",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-score-continuation/initial-failure.json",
+      "source_sha256": "0dfef0033946bb3d33a1064fda69f7227b93129868a57053edae1bcdcb7ae4c1",
+      "public": "evidence/native-score-continuation/initial-failure.json",
+      "public_sha256": "0dfef0033946bb3d33a1064fda69f7227b93129868a57053edae1bcdcb7ae4c1",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-score-continuation/inputs.json",
+      "source_sha256": "51d489e67d57974c7a2a16988d2b5bb3c0199dc9d228c703a95dc657bd5a3159",
+      "public": "evidence/native-score-continuation/inputs.json",
+      "public_sha256": "51d489e67d57974c7a2a16988d2b5bb3c0199dc9d228c703a95dc657bd5a3159",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-score-continuation/README.md",
+      "source_sha256": "a1016ef14a94e959e7bdb279ce2324733cfd9c1d54f462d55a03a8a7291e8b13",
+      "public": "evidence/native-score-continuation/README.md",
+      "public_sha256": "a1016ef14a94e959e7bdb279ce2324733cfd9c1d54f462d55a03a8a7291e8b13",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-score-continuation/root-acceptance.json",
+      "source_sha256": "4170dc7473ac1a10ead6e82ce697bc395d314f44300bba71af3d83b4296e1777",
+      "public": "evidence/native-score-continuation/root-acceptance.json",
+      "public_sha256": "4170dc7473ac1a10ead6e82ce697bc395d314f44300bba71af3d83b4296e1777",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-score-continuation/trl_group_training.before-mask-comparison.py",
+      "source_sha256": "82e9d098f5ec709f2689293d6763ba56d510affa88ccd72abe25772e59c84acf",
+      "public": "evidence/native-score-continuation/trl_group_training.before-mask-comparison.py",
+      "public_sha256": "82e9d098f5ec709f2689293d6763ba56d510affa88ccd72abe25772e59c84acf",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-precision-continuation/continue_native.py",
+      "source_sha256": "124d1a69a0376d58961794cc2f9f1527972d43538c5de6ec68eaa402f64bbd6a",
+      "public": "evidence/native-precision-continuation/continue_native.py",
+      "public_sha256": "124d1a69a0376d58961794cc2f9f1527972d43538c5de6ec68eaa402f64bbd6a",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-precision-continuation/inputs.json",
+      "source_sha256": "21bdb996d190fab71bf95af25bacfecde2b1d903174e60d261f2d645039fe407",
+      "public": "evidence/native-precision-continuation/inputs.json",
+      "public_sha256": "21bdb996d190fab71bf95af25bacfecde2b1d903174e60d261f2d645039fe407",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-precision-continuation/README.md",
+      "source_sha256": "bc54ab9a93ed5b25a6bb766afaf942a31ad3d9466bb8bc1ee032f5a7d5edf105",
+      "public": "evidence/native-precision-continuation/README.md",
+      "public_sha256": "bc54ab9a93ed5b25a6bb766afaf942a31ad3d9466bb8bc1ee032f5a7d5edf105",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-precision-continuation/root-acceptance.json",
+      "source_sha256": "f9582a987bb1699bb0b431aa4ffba6ae9b90ac428b8a23e93926f1d4c46a517a",
+      "public": "evidence/native-precision-continuation/root-acceptance.json",
+      "public_sha256": "f9582a987bb1699bb0b431aa4ffba6ae9b90ac428b8a23e93926f1d4c46a517a",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/native-precision-continuation/trl_group_training.before-fp64-preflight.py",
+      "source_sha256": "fcb46a2d9c14b1e524f9104c22556257b6b1001852c779f233874f38b491c5d3",
+      "public": "evidence/native-precision-continuation/trl_group_training.before-fp64-preflight.py",
+      "public_sha256": "fcb46a2d9c14b1e524f9104c22556257b6b1001852c779f233874f38b491c5d3",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/native-continuation/native-grpo-failure.json",
+      "source_sha256": "010236fb973bebce51cc0337f9ea62e82f16395f6e9ea772b542559ad0a23710",
+      "public": "evidence/native-grpo-fp32-gradient-failure.json",
+      "public_sha256": "010236fb973bebce51cc0337f9ea62e82f16395f6e9ea772b542559ad0a23710",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-1.json",
+      "source_sha256": "6da15a0a074042ddf91241890078483c9796bfe15055b635f158f3a053237757",
+      "public": "evidence/gradient-diagnosis/case-1.json",
+      "public_sha256": "6da15a0a074042ddf91241890078483c9796bfe15055b635f158f3a053237757",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-10.json",
+      "source_sha256": "8fa97a68996be8959a1e6d080a48c80a928430ae9ab60003b3060836b7b97251",
+      "public": "evidence/gradient-diagnosis/case-10.json",
+      "public_sha256": "8fa97a68996be8959a1e6d080a48c80a928430ae9ab60003b3060836b7b97251",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-11.json",
+      "source_sha256": "f99a4cc4fa58bc7fc0543c7bda7d8a12dbe5b1f5be5976013b93fb654c7787c5",
+      "public": "evidence/gradient-diagnosis/case-11.json",
+      "public_sha256": "f99a4cc4fa58bc7fc0543c7bda7d8a12dbe5b1f5be5976013b93fb654c7787c5",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-12.json",
+      "source_sha256": "46dbc5f07487174dd51941731ed76847b5eb9d29b8234c84103b08dcf8e609b4",
+      "public": "evidence/gradient-diagnosis/case-12.json",
+      "public_sha256": "46dbc5f07487174dd51941731ed76847b5eb9d29b8234c84103b08dcf8e609b4",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-2.json",
+      "source_sha256": "a91f2e2bf0b0a620716026fe4f66af9c8490095017d26c17861c9d1bd64fa966",
+      "public": "evidence/gradient-diagnosis/case-2.json",
+      "public_sha256": "a91f2e2bf0b0a620716026fe4f66af9c8490095017d26c17861c9d1bd64fa966",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-3.json",
+      "source_sha256": "ae84fe6fe5c720d19796f51df42b3834fa7b8e8b62dc87e66bcb364c3d27def1",
+      "public": "evidence/gradient-diagnosis/case-3.json",
+      "public_sha256": "ae84fe6fe5c720d19796f51df42b3834fa7b8e8b62dc87e66bcb364c3d27def1",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-4.json",
+      "source_sha256": "df613b73eaeec61447e67bed2f7b428146b9940c5371377c354f691852963721",
+      "public": "evidence/gradient-diagnosis/case-4.json",
+      "public_sha256": "df613b73eaeec61447e67bed2f7b428146b9940c5371377c354f691852963721",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-5.json",
+      "source_sha256": "4b07b62500d40594fa16cd7d5f4dc5e7b073941cd12c0aa5c2b28288e28450a3",
+      "public": "evidence/gradient-diagnosis/case-5.json",
+      "public_sha256": "4b07b62500d40594fa16cd7d5f4dc5e7b073941cd12c0aa5c2b28288e28450a3",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-6.json",
+      "source_sha256": "58d1015d987a50183e9db52234d595590b5df1072f3014d73c7e68bc075575f7",
+      "public": "evidence/gradient-diagnosis/case-6.json",
+      "public_sha256": "58d1015d987a50183e9db52234d595590b5df1072f3014d73c7e68bc075575f7",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-7.json",
+      "source_sha256": "669ede1dca01cd0c64ad28cb308e2f215c9fb7e61ad09f6f2b46aef608dc8276",
+      "public": "evidence/gradient-diagnosis/case-7.json",
+      "public_sha256": "669ede1dca01cd0c64ad28cb308e2f215c9fb7e61ad09f6f2b46aef608dc8276",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-8.json",
+      "source_sha256": "09d6be5e1aa23baa93126e4f0a6ab29549d75a0f5f4db37e57f65dd33660975d",
+      "public": "evidence/gradient-diagnosis/case-8.json",
+      "public_sha256": "09d6be5e1aa23baa93126e4f0a6ab29549d75a0f5f4db37e57f65dd33660975d",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/case-9.json",
+      "source_sha256": "a5402ea2b42cf736916529b1b3deda8b8ccb0a0bff994901766641b5b3902ace",
+      "public": "evidence/gradient-diagnosis/case-9.json",
+      "public_sha256": "a5402ea2b42cf736916529b1b3deda8b8ccb0a0bff994901766641b5b3902ace",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/gradient-diagnosis/summary.json",
+      "source_sha256": "1d1748b86d8a78d2c8e4e4d8685502c0e2d4ee4e5b7f69a319a1498be8735304",
+      "public": "evidence/gradient-diagnosis/summary.json",
+      "public_sha256": "1d1748b86d8a78d2c8e4e4d8685502c0e2d4ee4e5b7f69a319a1498be8735304",
+      "projection": "byte-exact"
+    },
+    {
+      "source": "scratch/grpo-research/practice-answers.json",
+      "source_sha256": "7edf3213ca8b13adec0f53d4bee40cf9ed9dae83393a2a314b7c054c469e79f0",
+      "public": "evidence/practice-answers.json",
+      "public_sha256": "7edf3213ca8b13adec0f53d4bee40cf9ed9dae83393a2a314b7c054c469e79f0",
+      "projection": "byte-exact"
+    }
+  ]
+}

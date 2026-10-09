@@ -1,0 +1,174 @@
+{
+  "scope": "Analytic arrays and one changed local step; no factor training fit",
+  "rankOneCompletion": [
+    [
+      1.0,
+      3.0
+    ],
+    [
+      0.3333333333333333,
+      1.0
+    ]
+  ],
+  "determinant": 0.0,
+  "orthogonalDot": 1.0,
+  "orthogonalNormSum": 2.0,
+  "rescaledP": [
+    2.0,
+    0.0
+  ],
+  "rescaledQ": [
+    0.5,
+    0.0
+  ],
+  "rescaledDot": 1.0,
+  "oldNormSum": 2.0,
+  "newNormSum": 4.25,
+  "changedGradient": [
+    -0.347,
+    0.7250000000000001,
+    0.198,
+    0.616,
+    1.3,
+    1.31
+  ],
+  "centralDifference": [
+    -0.34699999990062125,
+    0.7250000000902368,
+    0.1979999998402704,
+    0.6160000000088317,
+    1.29999999992636,
+    1.3099999999210965
+  ],
+  "differenceInfinity": 1.597296184208119e-10,
+  "differenceStep": 1e-06,
+  "after": [
+    0.23470000000000002,
+    0.3275,
+    -0.3198,
+    0.4384,
+    -0.08,
+    -0.031
+  ],
+  "beforeLoss": 0.8873000000000001,
+  "afterLoss": 0.5048380542293618,
+  "degreeCounts": {
+    "userDegree": [
+      4,
+      0
+    ],
+    "itemDegree": [
+      2,
+      2
+    ],
+    "perRecordUserCoefficients": [
+      0.8,
+      0.0
+    ],
+    "onceEntityUserCoefficients": [
+      0.2,
+      0.2
+    ]
+  },
+  "MAPLambda": 0.0625,
+  "coordinate": {
+    "available": true,
+    "numerator": 5.0,
+    "curvature": 3.0,
+    "value": 1.6666666666666667
+  },
+  "directBlock": {
+    "available": true,
+    "A": [
+      [
+        3.0,
+        1.0
+      ],
+      [
+        1.0,
+        2.0
+      ]
+    ],
+    "b": [
+      6.0,
+      2.0
+    ],
+    "p": [
+      2.0,
+      0.0
+    ],
+    "scipyP": [
+      2.0000000000000004,
+      -2.664535259100376e-16
+    ],
+    "residualInfinity": 0.0,
+    "eigenvalues": [
+      1.381966011250105,
+      3.618033988749895
+    ],
+    "tolerance": 2.5707677684393782e-14
+  },
+  "positivePenaltyEmpty": {
+    "available": true,
+    "A": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "b": [
+      0.0,
+      0.0
+    ],
+    "p": [
+      0.0,
+      0.0
+    ],
+    "scipyP": [
+      0.0,
+      0.0
+    ],
+    "residualInfinity": 0.0,
+    "eigenvalues": [
+      1.0,
+      1.0
+    ],
+    "tolerance": 7.105427357601002e-15
+  },
+  "unpenalizedEmpty": {
+    "available": false,
+    "reason": "singular or numerically non-SPD block",
+    "A": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "b": [
+      0.0,
+      0.0
+    ],
+    "eigenvalues": [
+      0.0,
+      0.0
+    ],
+    "tolerance": 7.105427357601002e-15
+  },
+  "flatCoordinate": {
+    "available": false,
+    "reason": "flat nonunique coordinate"
+  },
+  "unboundedCoordinate": {
+    "available": false,
+    "reason": "unbounded linear coordinate"
+  },
+  "cost": "score O(d); block assembly O(n*d^2), direct solve O(d^3); no inverse needed to solve one b"
+}

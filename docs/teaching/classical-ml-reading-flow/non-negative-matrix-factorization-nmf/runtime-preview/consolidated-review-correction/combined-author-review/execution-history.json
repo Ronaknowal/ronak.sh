@@ -1,0 +1,57 @@
+{
+  "schema": "nmf-combined-author-review-execution-history/v1",
+  "events": [
+    {
+      "action": "D46 source watch reported to Root",
+      "kind": "Conservative source estimate only",
+      "disposition": "Root widened700→760 viewBox and min-width, no position/data/font change; final predicted bounds saved, native pending"
+    },
+    {
+      "action": "Pixels top/bottom vertical key defect reported to Root",
+      "kind": "Actual source arithmetic",
+      "before": "F7 ArrowUp→F0 and F56 ArrowDown→F63",
+      "disposition": "Root preserved address at vertical boundaries; actual frozen handler512-case check passes, native pending"
+    },
+    {
+      "receipt": "0a747e",
+      "action": "First combined SSR check",
+      "status": "exit1",
+      "reason": "Checker looked for an operation ARIA label in stripped visible text. Fixed checker to inspect the actual HTML ARIA attribute; no product source change"
+    },
+    {
+      "receipt": "18888c",
+      "action": "Combined source and actual full SSR",
+      "status": "exit0",
+      "conditions": 855,
+      "artifacts": 81,
+      "actualHandlerCases": 512
+    },
+    {
+      "receipt": "fe991f",
+      "action": "Final combined check adds literal300-ID/60-row CSV and D46 predicted-bound correspondence",
+      "status": "exit0",
+      "conditions": 918,
+      "artifacts": 81,
+      "actualHandlerCases": 512
+    }
+  ],
+  "scientificExecutions": 0,
+  "viteBuilds": 0,
+  "native": false,
+  "compositionEncodingQualification": {
+    "physicalSource": {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/nmf-lesson.jsx",
+      "bytes": 324434,
+      "sha256": "6f22d35534dcd94694a61d60dec33e9f58d70e11b5f660bd3006bcf8b08880f1"
+    },
+    "lfEncodedSha256": "48ce2545671c6226f9993651fc25d0d8f8c9574910e1c497b42d6ae118d796e2",
+    "crlfCount": 1578,
+    "scope": "Same exact text after line-ending normalization; physical source binding is authoritative"
+  },
+  "qualificationReceipt": "c2c780 exit0",
+  "unpublishedPreflightFreeze": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/combined-author-review/preflight/author-ready-source.json",
+    "bytes": 150555,
+    "sha256": "345ddf6aa8ed7176bfa42874d27290268698034521207258fecc76d9067338d4"
+  }
+}

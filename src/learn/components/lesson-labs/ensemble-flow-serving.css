@@ -1,0 +1,61 @@
+.ensemble-serving-table {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-block: 1rem;
+  scrollbar-color: #8e7750 #17171b;
+}
+
+.ensemble-serving-table table {
+  font-size: 1rem;
+  border-collapse: collapse;
+  min-width: 50rem;
+  width: max-content;
+  max-width: none;
+}
+
+.ensemble-serving-table th,
+.ensemble-serving-table td {
+  padding: .65rem .8rem;
+  border: 1px solid #45454b;
+  text-align: left;
+  max-width: 22rem;
+}
+
+.ensemble-serving-table tbody th {
+  position: sticky;
+  left: 0;
+  background: #17171b;
+  z-index: 1;
+}
+
+.ensemble-serving-table tr[aria-current="true"] th {
+  color: #e8bb60;
+}
+
+.ensemble-serving-table caption {
+  text-align: left;
+  white-space: normal;
+  max-width: 45rem;
+  padding-block: .7rem;
+}
+
+.ensemble-serving-identity code {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.ensemble-flow-figure[data-ensemble-job="D44"] .ensemble-serving-table table {
+  min-width: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.ensemble-flow-figure[data-ensemble-job="D44"] .ensemble-serving-table th {
+  width: 34%;
+  position: static;
+  overflow-wrap: break-word;
+}
+
+.ensemble-flow-figure[data-ensemble-job="D44"] .ensemble-serving-table td {
+  width: 66%;
+}

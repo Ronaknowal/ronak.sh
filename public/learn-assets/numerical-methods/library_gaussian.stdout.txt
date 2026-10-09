@@ -1,0 +1,10 @@
+nodes: [-0.57735026919, 0.57735026919]
+weights: [1.0, 1.0]
+node difference from derived positive 1/sqrt(3): 1.110e-16
+power=0: estimate=2.000000000 exact=2.000000000 signed error=0.000000000
+power=1: estimate=0.000000000 exact=0.000000000 signed error=0.000000000
+power=2: estimate=0.666666667 exact=0.666666667 signed error=0.000000000
+power=3: estimate=0.000000000 exact=0.000000000 signed error=0.000000000
+power=4: estimate=0.222222222 exact=0.400000000 signed error=-0.177777778
+[2,4] nodes=[2.422649731, 3.577350269] radius=1; x^2 area=18.666666667 exact=18.666666667
+[1,4] nodes=[1.633974596, 3.366025404] radius=1.5; x^2 area=21.000000000 exact=21.000000000

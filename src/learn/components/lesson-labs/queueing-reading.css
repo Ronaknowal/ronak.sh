@@ -1,0 +1,71 @@
+.queue-reading { --queue-amber: #edc267; --queue-cyan: #97bfca; --queue-rose: #d6a0b7; --queue-muted: #92928f; }
+.queue-figure { margin: 2rem 0 2.5rem; padding: 0; min-width: 0; }
+.queue-figure figcaption { margin-top: .7rem; font-size: .9rem; color: #c3c0b9; line-height: 1.6; }
+.queue-drawing { width: 100%; min-width: 0; }
+.queue-drawing svg { display: block; overflow: visible; max-width: 100%; }
+.queue-drawing text { fill: #e8e5df; font-family: inherit; font-size: inherit; }
+.queue-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; align-items: start; }
+.queue-panels > * { min-width: 0; }
+.queue-legend { list-style: none; padding: 0; margin: .6rem 0; display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; font-size: .875rem; }
+.queue-legend li { display: flex; align-items: baseline; gap: .5rem; }
+.queue-controls { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: end; margin: 1rem 0 1.5rem; }
+.queue-controls > label { flex: 1 1 13rem; min-width: 0; }
+.queue-range, .queue-choice { display: flex; flex-direction: column; gap: .4rem; font-size: .95rem; }
+.queue-range input { width: 100%; margin: .5rem 0; accent-color: var(--queue-amber); min-height: 1.5rem; }
+.queue-range-ends { display: flex; justify-content: space-between; color: #afaca7; font-size: .8rem; }
+.queue-choice select, .queue-controls button { color: #eee; background: #222; border: 1px solid #65615a; border-radius: .25rem; padding: .55rem .7rem; font: inherit; max-width: 100%; }
+.queue-controls button { cursor: pointer; min-height: 2.75rem; }
+.queue-controls :focus-visible, .queue-table-scroll:focus-visible { outline: 2px solid #edc267; outline-offset: 4px; }
+.queue-reading p, .queue-figure li, .queue-figure td, .queue-figure th { overflow-wrap: break-word; }
+.queue-table-scroll { overflow-x: auto; max-width: 100%; }
+.queue-table-scroll table { border-collapse: collapse; width: 100%; font-size: .875rem; }
+.queue-table-scroll caption { text-align: left; margin-bottom: .65rem; color: #dfdcd5; }
+.queue-table-scroll td, .queue-table-scroll th { padding: .55rem .75rem; border-bottom: 1px solid #393936; text-align: left; vertical-align: top; white-space: nowrap; }
+.queue-scroll-help { font-size: .85rem; color: #c3c0b9; }
+.queue-share-strip { display: flex; height: 1.7rem; width: 100%; border: 1px solid #888; }
+.queue-share-strip > span { display: block; height: 100%; border-right: 1px solid #111; min-width: 0; }
+.queue-topology { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem; padding: 1rem 0; }
+.queue-system { border: 2px solid #bab6ab; padding: .9rem; display: flex; flex-wrap: wrap; gap: .9rem; align-items: center; position: relative; }
+.queue-system-label { width: 100%; font-size: .9rem; }
+.queue-waiting { border: 1px dashed #97bfca; padding: .65rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.queue-waiting > strong { width: 100%; font-size: .85rem; font-weight: 500; }
+.queue-token { display: inline-flex; justify-content: center; align-items: center; width: 2rem; height: 2rem; border: 2px solid currentColor; border-radius: 50%; font-weight: 600; flex-shrink: 0; }
+.queue-worker { display: flex; flex-direction: column; align-items: center; gap: .3rem; font-size: .85rem; }
+.queue-worker-slot { border: 2px solid #ded5bf; min-height: 3rem; min-width: 3.5rem; padding: .3rem; display: flex; align-items: center; justify-content: center; }
+.queue-idle { color: #b6b4ae; font-size: .85rem; }
+.queue-arrow { color: #ded5bf; font-size: 1.4rem; }
+.queue-equation { font-size: 1rem; line-height: 1.8; margin: .8rem 0; overflow-wrap: anywhere; }
+.queue-state-row { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; margin: .8rem 0; }
+.queue-state-row > .queue-token { width: auto; min-width: 2rem; padding: .2rem .4rem; }
+.queue-stage { display: inline-flex; min-height: 2rem; padding: .3rem .55rem; border-bottom: 3px solid #ded5bf; }
+.queue-stage--ahead { color: #97bfca; border-color: #97bfca; border-bottom-style: dashed; }
+.queue-stage--own { color: #edc267; border-color: #edc267; }
+.queue-matrix { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; padding: .6rem 0; max-width: 100%; text-align: center; }
+.queue-matrix span { min-width: 0; padding: .25rem 0; }
+.queue-reading .lesson-code-source__pending a { white-space: normal; overflow-wrap: anywhere; }
+.queue-reading details { margin: .9rem 0; }
+.queue-practice { margin: 2rem 0; }
+@media (max-width: 46rem) { .queue-panels { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .queue-reading * { scroll-behavior: auto; transition: none; } }
+
+.queue-worker:has(> .queue-drawing) { width: 12rem; max-width: 100%; }
+.queue-reading :not(pre) > code { overflow-wrap: anywhere; white-space: normal; }
+
+.queue-reading h2 { font-size: 1.375rem !important; }
+.queue-reading h3 { font-size: 1.25rem !important; }
+.reader-article .queue-reading .lesson-code pre { font-size: .875rem; }
+.queue-reading .lesson-table-wrap table,
+.queue-reading .lesson-table-wrap caption { font-size: .875rem !important; }
+.reader-article:has(.queue-reading) ~ .lesson-code-downloads #lesson-code-downloads-title { font-size: 1.375rem !important; }
+
+/* Q29: the shared trunk branches to parallel service positions. */
+.queue-topology-explanation { font-size: .875rem; }
+.queue-pool-branches { margin-left: 1.25rem; border-left: 2px solid #92b6c2; padding-top: .5rem; }
+.queue-pool-branch { display: flex; align-items: center; gap: .4rem; padding-block: .5rem; }
+.queue-branch-arrow { display: flex; align-items: center; width: 2rem; flex: 0 0 2rem; color: #92b6c2; }
+.queue-branch-arrow::before { content: ''; flex: 1; border-top: 2px solid currentColor; }
+.queue-split-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: 1.25rem; }
+.queue-split-path { display: flex; flex-direction: column; align-items: center; }
+.queue-split-path .queue-waiting { width: 100%; box-sizing: border-box; }
+.queue-down-arrow { font-size: 1.5rem; color: #92b6c2; }
+.queue-fast-path { display: flex; align-items: center; gap: .5rem; }

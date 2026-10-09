@@ -1,0 +1,34 @@
+{
+  "schema": "classical21-new-programme-execution/v1",
+  "at": "2026-10-09T17:30:27.671351+00:00",
+  "source": {
+    "file": "holdout_mse_identity.py",
+    "bytes": 2576,
+    "sha256": "093874803b6dcb5e0e49661ee0987d490b53977d64de712a6d99c85e2e6d68d5"
+  },
+  "python": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+  "command": [
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\content-authoring\\programmes\\holdout_mse_identity.py"
+  ],
+  "dependencies": [],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1"
+  },
+  "returncode": 0,
+  "stdout": {
+    "file": "holdout_mse_identity.py.2.stdout.txt",
+    "bytes": 309,
+    "sha256": "c60dec485c8a816a26063cf6a9631d2b7f92c414349c85a04051af281218c5bf"
+  },
+  "stderr": {
+    "file": "holdout_mse_identity.py.2.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "One new constructed educational programme; no retained science or checker execution"
+}

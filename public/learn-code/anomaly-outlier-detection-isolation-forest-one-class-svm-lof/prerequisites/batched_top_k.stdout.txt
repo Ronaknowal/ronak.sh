@@ -1,0 +1,4 @@
+Cutoff ties prefer original positions: [[0, 1], [1, 0]]
+Distances: [[1.0, 1.0], [0.707106781, 1.303840481]]
+Full stable-sort, batch-size, untied sklearn and tiny/large-scale checks passed.
+Distance workspace: b×n; output: query_count×k; no speed measurement claimed.

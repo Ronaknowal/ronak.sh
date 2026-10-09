@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 
 const id = 'positional-encodings-sinusoidal-learned-rope-alibi';
+if (!process.argv.includes('--restore-historical-prepared-source')) {
+  throw new Error('This historical generator would overwrite the reviewed reading-flow lesson. Use --restore-historical-prepared-source only for an intentional historical restoration.');
+}
 const source = `docs/teaching/drafts/${id}`, destination = `public/learn-code/${id}`;
 fs.mkdirSync(destination, { recursive: true });
 for (const file of ['author-calculations.py', 'author-results.json', 'mechanism-calculations.py', 'mechanism-fixtures.json', 'position_library_bridge.py', 'position-models.json', 'movement_libras.data', 'movement_libras.names', 'data-provenance.md']) fs.copyFileSync(`${source}/${file}`, `${destination}/${file}`);

@@ -1,0 +1,152 @@
+{
+  "status": "SOURCE_IDENTITY_ONLY_NO_SCIENTIFIC_REPLAY",
+  "createdAt": "2026-10-09T15:41:44.243Z",
+  "oldComparison": [
+    {
+      "path": "src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+      "sha256": "5e0e545b07dafdae348914e655c2b2ffe403a3d908125f73ac1910aa67663786",
+      "current": {
+        "sha256": "c969992cba3d640531a326b5eeab51ec54338ea700f4808908369e8167efeba4",
+        "bytes": 48635
+      },
+      "rawIdentical": false,
+      "lfNormalizedIdentical": false
+    },
+    {
+      "path": "src/learn/data/mutual-information-models.js",
+      "sha256": "f3c40318bf0235e545f6882f40c92c6bafdbfff622f041b493d444181cb3540a",
+      "current": {
+        "sha256": "f8f890c06a123e77fec65e5fcb2084a372c270554c225d0c53dff01becbc982c",
+        "bytes": 12597
+      },
+      "rawIdentical": false,
+      "lfNormalizedIdentical": true
+    },
+    {
+      "path": "src/learn/data/mutual-information-examples.js",
+      "sha256": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+      "current": {
+        "sha256": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+        "bytes": 18004
+      },
+      "rawIdentical": true,
+      "lfNormalizedIdentical": false
+    },
+    {
+      "path": "src/learn/components/lesson-labs/MutualInformationLabs.jsx",
+      "sha256": "dba25a9eb1bd8f15e69299c179e03636fc5ae60242ed5d381eee4daf51b03d1a",
+      "current": {
+        "sha256": "a6d53622d99005d226c5bd4a9d35c5ba24879a9bb6c03e7d278816a56175bc64",
+        "bytes": 29121
+      },
+      "rawIdentical": false,
+      "lfNormalizedIdentical": false
+    },
+    {
+      "path": "src/learn/components/lesson-labs/mutual-information-labs.css",
+      "sha256": "9c99aba160c47544cf017c572c9e950cbc2c9f261b342864569a20899555f3c9",
+      "current": {
+        "sha256": "dba421e8bc7d4d795819df22eb1e8747829e099d42d3aa65fe2d768e3b8bf120",
+        "bytes": 7038
+      },
+      "rawIdentical": false,
+      "lfNormalizedIdentical": true
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js",
+      "sha256": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05",
+      "current": {
+        "sha256": "e1fe6abb7c2ecb0205a1d808ce96e6b2a6488546382fd30da07fcf2409d9cf43",
+        "bytes": 4026
+      },
+      "rawIdentical": false,
+      "lfNormalizedIdentical": true
+    }
+  ],
+  "originalPairs": [
+    {
+      "key": "original",
+      "codeSha256": "536f5219a3703bb44e1f9e24c1fc3aa48d47752011a09fe6537146f203ac2e9e",
+      "expectedSha256": "cfdd6d84c3bdc9c3b0abb42033b541afd822044304d919679d1c8c577aa2b930",
+      "codeBytes": 422,
+      "expectedBytes": 15
+    },
+    {
+      "key": "nonlinear",
+      "codeSha256": "92424e9e56677e8349558c97f01806427cd15b62c280a52314fd1236c94bde12",
+      "expectedSha256": "f205b8b5f0e1724fdc780d968bd74181865536b171c182c29d4d157c93ff59e0",
+      "codeBytes": 1137,
+      "expectedBytes": 95
+    },
+    {
+      "key": "conditional",
+      "codeSha256": "377021b814855fe21429ea0a1cf65ccde6f92ed3a5c6a8c95246a29d09b255b3",
+      "expectedSha256": "4e8038a397a323cf5973ac85eb9faedcff64dd2002c8064de64f2ffae759d8b0",
+      "codeBytes": 1792,
+      "expectedBytes": 145
+    },
+    {
+      "key": "processing",
+      "codeSha256": "90cf6cd8e15da9d14b78989b779a2b1cbb3587c83ff1f23b096f98773c30f1c2",
+      "expectedSha256": "18dbfa786618cb18df986ddd378424b2408a5b45ec6817625425913d190e7b9b",
+      "codeBytes": 1419,
+      "expectedBytes": 75
+    },
+    {
+      "key": "representations",
+      "codeSha256": "b9e50dd34b96c5e6f2d54d76f2738c2d3fcce02f63f93bdde78d62ec61eb40dd",
+      "expectedSha256": "d145dfbcbee555fc834d3705900cbae85fb3ec4ec063f1a0f8226e8c6adde2a9",
+      "codeBytes": 1814,
+      "expectedBytes": 184
+    },
+    {
+      "key": "iteration",
+      "codeSha256": "f2131c0303bd0f76a2f8350e558b852d80adb31ce761e944793c743dbd37b11b",
+      "expectedSha256": "c86561adcafecde0ec2e649668559f6077daa0dc35dac5b7acd9da0d7f6521d9",
+      "codeBytes": 2412,
+      "expectedBytes": 326
+    },
+    {
+      "key": "bounds",
+      "codeSha256": "1a06c3ce2c329449324e07acc610392c2b50e484de886540a46035f17ec1be25",
+      "expectedSha256": "094fbb132ddda5a6b756c2b97cec4fa62f6434a117aa08634722cbd88ae0033a",
+      "codeBytes": 2280,
+      "expectedBytes": 273
+    },
+    {
+      "key": "continuous",
+      "codeSha256": "54e135317ccd2aa0eec9a6158158845eeac8e9d3db630fa258f3b160ce1df697",
+      "expectedSha256": "8e1a8e2f80da8196c5fdbb2b2fe2c85863e1efa96d516f5e194ca95187564e58",
+      "codeBytes": 720,
+      "expectedBytes": 246
+    },
+    {
+      "key": "estimation",
+      "codeSha256": "fb9f823d7692707e65327971fdfc7e99a9ea8919b85539ea3893104ccbc29be3",
+      "expectedSha256": "fde850e8fedcc3d6dcc1eb8ea7380249ea34c8336a92a4c49622660347115823",
+      "codeBytes": 1574,
+      "expectedBytes": 178
+    }
+  ],
+  "bridge": {
+    "receipt": {
+      "path": "public/learn-assets/mutual-information/mutual-information-library-bridge.py",
+      "sha256": "3a931191ff2d9729f5a8e5d970b537e825580cf36b364380325b9838a4e8fea2",
+      "stdout": "manual/library/feature nats [0.130812036, 0.130812036, 0.130812036]\nsame MI in bits 0.188721876\nduplicate rows and relabel invariants True\nindependent table nats -0.0\nunique identifier empirical MI in bits 1.0\nidentifier population relevance established False",
+      "stderr": ""
+    },
+    "current": {
+      "sha256": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+      "bytes": 2619
+    },
+    "rawIdentical": false,
+    "lfNormalizedIdentical": true,
+    "metadataOutputIdentical": true
+  },
+  "qualifications": [
+    "Nine programme object module is raw-byte identical to historical final source; original mathematical outputs remain attributed to that execution.",
+    "Models/CSS/blueprint are identical after CRLF-to-LF conversion; current lesson/lab differ beyond line endings and do not inherit fresh whole UI acceptance.",
+    "Two print-only presentation successors are planned for continuous explanatory sentence and bridge population-relevance sentence, preserving originals and exact inverse.",
+    "No current scientific main, native campaign or browser check performed."
+  ]
+}

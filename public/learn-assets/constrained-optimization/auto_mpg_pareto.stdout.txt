@@ -1,0 +1,10 @@
+UCI Auto MPG: 398 rows; year 82: 31; missing horsepower excluded: [375]
+cylinders <= 4 mpg >= 30 feasible 18 frontier [377, 381, 384, 386, 391, 395]
+selected (391, 'toyota celica gt', 32.0, 96.0)
+cylinders <= 8 mpg >= 30 feasible 19 frontier [381, 388, 391, 395]
+selected (391, 'toyota celica gt', 32.0, 96.0)
+cylinders <= 4 mpg >= 40 feasible 1 frontier [395]
+selected (395, 'vw pickup', 44.0, 52.0)
+cylinders <= 4 mpg >= 50 feasible 0 frontier []
+selected None
+Matched scratch/NumPy states: 255 invalid checks: 6

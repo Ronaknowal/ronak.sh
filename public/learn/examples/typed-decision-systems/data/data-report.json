@@ -1,0 +1,58 @@
+{
+  "revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+  "seed": 20261008,
+  "source_hashes": {
+    "train": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b",
+    "test": "d12d6e3bc4c3103966ae786dc435913c0c563dfa328f5a3646d0e62cfeeb474d"
+  },
+  "counts": {
+    "train:card_arrival:raw": 153,
+    "train:card_arrival:eligible": 153,
+    "train:card_linking:raw": 139,
+    "train:card_linking:eligible": 139,
+    "train:card_delivery_estimate:raw": 112,
+    "train:card_delivery_estimate:eligible": 112,
+    "train:card_not_working:raw": 112,
+    "train:card_not_working:eligible": 111,
+    "train:lost_or_stolen_card:raw": 82,
+    "train:lost_or_stolen_card:eligible": 82,
+    "train:card_payment_not_recognised:raw": 168,
+    "train:card_payment_not_recognised:eligible": 167,
+    "test:card_arrival:raw": 40,
+    "test:card_arrival:eligible": 40,
+    "test:card_linking:raw": 40,
+    "test:card_linking:eligible": 40,
+    "test:card_delivery_estimate:raw": 40,
+    "test:card_delivery_estimate:eligible": 40,
+    "test:card_not_working:raw": 40,
+    "test:card_not_working:eligible": 40,
+    "test:lost_or_stolen_card:raw": 40,
+    "test:lost_or_stolen_card:eligible": 40,
+    "test:card_payment_not_recognised:raw": 40,
+    "test:card_payment_not_recognised:eligible": 40
+  },
+  "removed": [
+    {
+      "id": "train:1290",
+      "label": "card_not_working",
+      "reason": "duplicate",
+      "prior_id": "train:1246",
+      "tokens": 86
+    },
+    {
+      "id": "train:3637",
+      "label": "card_payment_not_recognised",
+      "reason": "length",
+      "prior_id": null,
+      "tokens": 140
+    }
+  ],
+  "roles": {
+    "train": 240,
+    "dev": 60,
+    "calibration": 120,
+    "test": 120
+  },
+  "deduplication": "NFKC, casefold, whitespace collapse; original train precedence across all77 labels",
+  "limits": "Six preselected intents; exact text deduplication does not detect paraphrase leakage."
+}

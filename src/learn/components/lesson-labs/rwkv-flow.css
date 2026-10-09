@@ -1,0 +1,22 @@
+.rwkv-reading-flow .rwkv-flow-drawing { margin: 1.5rem 0 1.1rem; }
+.rwkv-reading-flow .rwkv-flow-scroll { overflow-x: auto; max-width: 100%; }
+.rwkv-reading-flow .rwkv-flow-drawing svg { display: block; width: min(100%, 35rem); min-width: 35rem; height: auto; margin-inline: auto; overflow: visible; }
+.rwkv-reading-flow .rwkv-flow-scroll-hint { color: #bbb; font-size: .9rem; line-height: 1.6; }
+@container (min-width: 35rem) { .rwkv-reading-flow .rwkv-flow-scroll-hint { display: none; } }
+.rwkv-reading-flow .rwkv-flow-drawing text { font-family: var(--font-mono, monospace); font-size: 12px; }
+.rwkv-reading-flow .rwkv-flow-drawing text.small { font-size: 10px; }
+.rwkv-reading-flow .rwkv-flow-drawing figcaption { color: var(--text-secondary, #bbb); font-size: .9rem; line-height: 1.6; margin-top: .7rem; }
+.rwkv-reading-flow .rwkv-flow-select { display: flex; flex-direction: column; gap: .4rem; }
+.rwkv-reading-flow .rwkv-flow-select select { min-height: max(44px, 2.75rem); max-width: 100%; background: #111; color: #ddd; border: 1px solid #666; border-radius: 2px; padding: .5rem; font: inherit; }
+.rwkv-reading-flow .flow-controls button { min-height: 44px; }
+.rwkv-reading-flow .flow-controls input { min-height: max(44px, 2.75rem); }
+.rwkv-reading-flow :is(button, select, input):focus-visible { outline: 2px solid #e4b752; outline-offset: 3px; }
+.rwkv-reading-flow .flow-lab { border: 0; background: transparent; padding: 0; }
+.rwkv-reading-flow .rwkv-flow-table { max-width: 100%; overflow: auto; }
+.rwkv-reading-flow .rwkv-flow-table table { border-collapse: collapse; min-width: 26rem; width: 100%; }
+.rwkv-reading-flow .rwkv-flow-table :is(th,td) { padding: .6rem .7rem; text-align: left; border-bottom: 1px solid #333; font-variant-numeric: tabular-nums; }
+.rwkv-reading-flow .rwkv-flow-table caption { text-align: left; margin-bottom: .5rem; color: #bbb; }
+.rwkv-reading-flow .rwkv-flow-table th { color: #e4b752; }
+.rwkv-reading-flow .rwkv-drag-point { cursor: grab; touch-action: none; }
+.rwkv-reading-flow .rwkv-flow-drawing svg :is(line,polyline,path) { vector-effect: non-scaling-stroke; }
+@media (max-width: 420px) { .rwkv-reading-flow .flow-controls { align-items: stretch; } }

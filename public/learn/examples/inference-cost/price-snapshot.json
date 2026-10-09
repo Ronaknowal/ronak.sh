@@ -1,0 +1,38 @@
+{
+  "retrieved_on": "2026-10-08",
+  "currency": "USD",
+  "classification": "First-party published quote snapshot; not a purchase, paid invoice or quality comparison",
+  "api": {
+    "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "cache_source": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+    "model": "Claude Sonnet 5.5",
+    "scope": "First-party global standard token rates",
+    "per_million_tokens": {
+      "uncached_input": "2.00",
+      "output": "10.00",
+      "cache_creation_5m": "2.50",
+      "cache_creation_1h": "4.00",
+      "cache_read": "0.10"
+    },
+    "cache_minimum_tokens": 512,
+    "categories_disjoint": true
+  },
+  "instance": {
+    "source": "https://lambda.ai/instances",
+    "sku": "1x H100 SXM",
+    "gpu_count": 1,
+    "price_per_gpu_hour": "4.29",
+    "billing_description": "By the minute; taxes additional",
+    "region_or_availability_guarantee": null,
+    "invoice_rounding_rule": null,
+    "eight_gpu_sku_per_gpu_hour": "3.99"
+  },
+  "device": {
+    "source": "https://www.nvidia.com/en-us/data-center/h100/",
+    "sku": "H100 SXM",
+    "advertised_memory_GB": 80,
+    "advertised_memory_bandwidth_TB_per_second": "3.35",
+    "advertised_bf16_tensor_TFLOPS_with_sparsity": 1979,
+    "dense_TFLOPS_inferred_from_sparse_quote": null
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "status": "WHOLE DIFFERENT DESIGN REVIEW COMPLETE — two bounded corrections required",
+  "reviewer": "/root/queue_nonconvex_resume",
+  "author": "/root",
+  "createdAt": "2026-10-09T18:48:23.784394+00:00",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/design-source-r1.json",
+    "sha256": "81255c29c6706c8a37125d48b4986c92dddc594b2dc1bf74c81f943a5fc22a37",
+    "bytes": 9400
+  },
+  "ready": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/design-author-ready-r1.json",
+    "sha256": "90a86da84282c2baf33ac5cba52dc8f5838483ace9972d311676b4cc95901fe2",
+    "bytes": 1249
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/independent-design-review-r1.md",
+    "sha256": "1a5a78eba5454f048c716e28220a5712018c1a8e7d0473a4494a60ea55443dd5",
+    "bytes": 13728
+  },
+  "sourceGuards": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/independent-design-source-guards-r1.json",
+    "sha256": "6106db1f42751aa537c9c978330afc9c7e9c5c0e8b9f63f33f8d43e3dcf57549",
+    "bytes": 10665
+  },
+  "complementaryCheck": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/independent-design-check-r1.json",
+    "sha256": "a6b0cd9a62c5098724b1e88c085a17659cbdc5335821176255b3d631bba68c3f",
+    "bytes": 4133
+  },
+  "complementaryScript": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/independent-design-check-r1.mjs",
+    "sha256": "84c0faad3e76f39b766a2f86335719a71431972a913e69a2c7ba47594c0042ba",
+    "bytes": 4930
+  },
+  "findings": [
+    {
+      "id": "IT1",
+      "priority": "P2",
+      "location": "design-r1.md D42/L10",
+      "issue": "Negative signed weak bias has no real logarithm; specify absolute magnitude plus signed readout or a signed linear ordinate.",
+      "closure": "Trace default negative value and exact zero through the chosen labelled coordinate."
+    },
+    {
+      "id": "IT2",
+      "priority": "P2",
+      "location": "design-r1.md D26/L6; existing ouLaw helper",
+      "issue": "Allowed theta=.05, eta=1.2 requires invariant variance14.4 beyond the retained initialVariance<=4 helper contract.",
+      "closure": "Declare a complete invariant-law branch/domain with common axes and boundary behavior; preserve old programme evidence."
+    }
+  ],
+  "wholeReading": [
+    "Entire proposed design and research, final changed readiness paragraph",
+    "Entire canonical lesson and all ten sections/practices/endings",
+    "Entire ito-sde-models.js; thirteen whole inline code/output objects",
+    "Entire library bridge and metadata; entire current labs and CSS",
+    "Topic brief/destination note; selected intake details",
+    "All54 drawings,14 state families,14 retained code routes,2 new programmes,16 tasks",
+    "Author62check receipt and its complete source script"
+  ],
+  "personallyOpenedReferenceImages": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/research/higham-coupled-path-reference.png",
+      "sha256": "50f695e39b5f6c164ac248042a25df6ad84758389a7bc8e3dfb40b52c9b9d526",
+      "bytes": 173675
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/research/higham-stability-reference.png",
+      "sha256": "f15b9810303c2557f9be47d57c55fc8c53907135f1b1391734b7525d9718a9ab",
+      "bytes": 82892
+    }
+  ],
+  "evidence": {
+    "identityChecks": 48,
+    "complementaryConditions": 16,
+    "complementaryPassed": 16,
+    "authorFixturesReadNotRerun": 62,
+    "oldMainsReplayed": 0,
+    "randomDraws": 0,
+    "builds": 0,
+    "nativeCampaigns": 0
+  },
+  "limits": [
+    "Design only; no content/runtime release",
+    "No observed learner study",
+    "Primary-reading limits are retained from research; reviewer did not reread every PDF",
+    "Actual responsive paint and runtime behavior remain future checks"
+  ],
+  "next": "Root makes one bounded design successor with exact inverse; SAME reviewer closes IT1–IT2 before design acceptance."
+}

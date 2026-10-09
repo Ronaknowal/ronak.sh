@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-09-28T15:45:35.880Z",
+  "cases": 100,
+  "checks": [
+    "Python indexed BPE versus JavaScript full recount: weighted merge order and complete token sequences",
+    "Zero-supported mass and normalization",
+    "UTF-8/core spelling round trips for supported alphabet",
+    "Matrix parameters/MiB/MAC/pair-count examples",
+    "All twelve displayed multilingual counts match actual recorded SentencePiece runs"
+  ],
+  "sources": {
+    "src/learn/data/multilingual-vocabulary-models.js": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9",
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "scripts/verify-multilingual-vocabulary.mjs": "14968c48a721acf94696ccb39e373f6786141ee856da558f0d0e1f2c86e3b322"
+  }
+}

@@ -1,10 +1,172 @@
-.loss-intuition-figure { margin: 1.7rem 0; padding: 1.2rem; border: 1px solid #39352c; border-radius: 6px; background: #10100f; color: #dedbd3; }
-.loss-intuition-figure h3, .loss-intuition-figure h4 { color: #edcc80; line-height: 1.5; }
-.loss-intuition-figure figcaption { margin-top: 1rem; color: #b8b4aa; font-size: .92rem; line-height: 1.7; }
-.loss-quantile-case { border-top: 1px solid #39352c; margin-top: 1rem; }
-.loss-quantile-votes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem; text-align: center; }
-.loss-quantile-votes > div { display: flex; flex-direction: column; padding: .5rem 0; border-bottom: 2px solid #b48e3e; }
-.loss-quantile-arrow { font-size: 1.5rem; color: #e4b752; }
-.loss-intuition-figure svg { display: block; width: min(100%, 400px); height: auto; }
-.loss-intuition-figure svg text { fill: #dedbd3; font: 12px ui-monospace, monospace; }
-@media (max-width: 480px) { .loss-intuition-figure { padding: .8rem; } .loss-quantile-votes { gap: .25rem; font-size: .84rem; } }
+/* Loss Functions figures in the reading flow (see lesson-flow.css): no frames, banners or
+   figure headings; the sentence before a figure introduces it. Colour vocabulary:
+   docs/teaching/deep-learning-beginner/visual-vocabulary.md. Function colours are fixed
+   across the lesson: squared error blue, absolute error violet, Huber rose, cross-entropy
+   amber, focal pink. */
+.loss-functions-lesson {
+  --lf-input: #7dd5e9;
+  --lf-param: #e4b752;
+  --lf-param-text: #f1c76c;
+  --lf-computed: #c7a5ee;
+  --lf-back: #f0a878;
+  --lf-op: #e7e4df;
+  --lf-pos: #e4b752;
+  --lf-neg: #83b4e8;
+  --lf-muted: #b9b5af;
+  --lf-rule: #34322d;
+  --lf-mse: #83b4e8;
+  --lf-mae: #c7a5ee;
+  --lf-huber: #e58f8f;
+  --lf-ce: #e4b752;
+  --lf-focal: #f2a6c9;
+}
+.lf-figure { container: lf-figure / inline-size; color: #e2dfd8; }
+.lf-figure-label { color: var(--lf-muted); font-size: .92rem; line-height: 1.6; margin: 0 0 .7rem; }
+.lf-figure-label strong { color: #ecebe6; }
+.lf-figure-note { color: var(--lf-muted); font-size: .88rem; line-height: 1.6; margin: .55rem 0 0; }
+
+/* Tags that say what kind of value a box holds. */
+.lf-tag { display: inline-block; padding: 0 .4rem; border: 1.5px solid; border-radius: 999px; font-size: .78rem; line-height: 1.5; font-weight: 600; white-space: nowrap; }
+.lf-tag-input { color: var(--lf-input); border-color: var(--lf-input); }
+.lf-tag-param { color: var(--lf-param-text); border-color: var(--lf-param); }
+.lf-tag-computed { color: var(--lf-computed); border-color: var(--lf-computed); }
+.lf-tag-back { color: var(--lf-back); border-color: var(--lf-back); border-style: dashed; }
+.lf-computed { color: var(--lf-computed); }
+.lf-pos { color: var(--lf-pos); }
+.lf-neg { color: var(--lf-neg); }
+.lf-ce { color: var(--lf-ce); }
+.lf-sq { color: var(--lf-mse); }
+
+/* Bars. */
+.lf-bar { display: inline-block; height: .8rem; border-radius: 2px; vertical-align: middle; margin-right: .5rem; flex: none; background: #8b877e; }
+.lf-bar-ce { background: var(--lf-ce); }
+.lf-bar-sq { background: var(--lf-mse); }
+.lf-bar-share { background: var(--lf-computed); }
+.lf-bar-focal { background: var(--lf-focal); }
+.lf-bar-cell { display: flex; align-items: center; min-width: 0; }
+.lf-bar-cell .lf-bar { max-width: calc(100% - 4.5rem); }
+
+/* Plots with labels on the curves. */
+.lf-plot { display: block; width: min(100%, 34rem); height: auto; overflow: visible; }
+.lf-plot-axis { stroke: #77736a; }
+.lf-plot-tick, .lf-plot-axis-label { fill: #c9c5bd; font: 14px system-ui, sans-serif; }
+.lf-plot-series, .lf-plot-point { font: 600 14px system-ui, sans-serif; paint-order: stroke; stroke: #111; stroke-width: 5px; stroke-linejoin: round; }
+
+/* Count versus loss. */
+.lf-count, .lf-penalty, .lf-softmax, .lf-focal, .lf-shares { display: grid; gap: .3rem; font-variant-numeric: tabular-nums; }
+.lf-count > div { display: grid; grid-template-columns: 4.5rem 11rem minmax(0, 1fr); gap: .75rem; align-items: center; padding: .25rem 0; border-bottom: 1px solid var(--lf-rule); }
+.lf-count-head, .lf-penalty-head, .lf-softmax-head, .lf-focal-head, .lf-shares-head { color: var(--lf-muted); font-size: .85rem; }
+.lf-yes { color: var(--lf-pos); }
+.lf-no { color: var(--lf-muted); }
+
+/* Pull balance and quantile votes. */
+.lf-pull, .lf-quantile { margin-top: .9rem; }
+.lf-pull-name { margin: 0 0 .3rem; }
+.lf-pull-name span { color: var(--lf-muted); font-size: .88rem; margin-left: .4rem; }
+.lf-pull-bars > div { display: grid; grid-template-columns: 12rem minmax(0, 1fr) 2.5rem; gap: .6rem; align-items: center; margin: .2rem 0; }
+.lf-pull-bars span { color: var(--lf-muted); font-size: .9rem; }
+.lf-pull-verdict { margin: .2rem 0 0; font-size: .92rem; }
+.lf-fn-mse .lf-bar, .lf-fn-mse .lf-fit-mark { background: var(--lf-mse); }
+.lf-fn-mae .lf-bar, .lf-fn-mae .lf-fit-mark { background: var(--lf-mae); }
+.lf-fn-huber .lf-bar, .lf-fn-huber .lf-fit-mark { background: var(--lf-huber); }
+.lf-fn-mse .lf-pull-name strong, .lf-fn-mse .lf-fit-name { color: var(--lf-mse); }
+.lf-fn-mae .lf-pull-name strong, .lf-fn-mae .lf-fit-name { color: var(--lf-mae); }
+.lf-fn-huber .lf-pull-name strong, .lf-fn-huber .lf-fit-name { color: var(--lf-huber); }
+.lf-quantile-votes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem; text-align: center; }
+.lf-quantile-votes > div { display: flex; flex-direction: column; gap: .1rem; padding: .3rem 0; border-bottom: 1px solid var(--lf-rule); }
+.lf-quantile-votes small { color: var(--lf-muted); font-size: .76rem; line-height: 1.35; }
+.lf-quantile-arrow { font-size: 1.3rem; color: var(--lf-op); }
+
+/* Probability penalty. */
+.lf-penalty > div { display: grid; grid-template-columns: 6rem minmax(0, 1fr) minmax(0, 1fr); gap: .75rem; align-items: center; padding: .3rem 0; border-bottom: 1px solid var(--lf-rule); }
+.lf-pair { display: grid; gap: .2rem; min-width: 0; }
+.lf-pair > span { display: flex; align-items: center; min-width: 0; font-size: .9rem; }
+.lf-pair b { flex: none; width: 1.7rem; font-size: .78rem; }
+.lf-pair .lf-bar { max-width: calc(100% - 6rem); }
+
+/* Softmax trace and candidate shares. */
+.lf-softmax > div { display: grid; grid-template-columns: minmax(6rem, 1.3fr) 5.5rem 6rem minmax(0, 2fr) 5.5rem; gap: .75rem; align-items: center; padding: .35rem .4rem; border-bottom: 1px solid var(--lf-rule); border-left: 3px solid transparent; }
+.lf-softmax > .lf-softmax-target, .lf-shares > .lf-shares-positive { border-left-color: var(--lf-pos); }
+.lf-softmax-target em, .lf-shares-positive em { color: var(--lf-pos); font-style: normal; font-size: .82rem; margin-left: .3rem; }
+.lf-grad { color: var(--lf-back); }
+.lf-softmax-total { color: var(--lf-muted); }
+.lf-softmax-total > span:first-child { font-style: italic; }
+.lf-softmax-result { margin: .5rem 0 0; }
+.lf-shares > div { display: grid; grid-template-columns: minmax(7rem, 1.2fr) 5.5rem 5.5rem minmax(0, 2fr); gap: .75rem; align-items: center; padding: .35rem .4rem; border-bottom: 1px solid var(--lf-rule); border-left: 3px solid transparent; }
+
+/* Focal factor. */
+.lf-focal > div { display: grid; grid-template-columns: 7rem 8rem 8rem minmax(0, 1fr); gap: .75rem; align-items: center; padding: .3rem 0; border-bottom: 1px solid var(--lf-rule); }
+.lf-focal .lf-bar-cell .lf-bar { max-width: calc(100% - 6rem); }
+.lf-crowd { margin-top: .8rem; }
+.lf-crowd p { margin: 0; line-height: 1.6; }
+
+/* Structure diagrams: values are rounded pills, operations rectangles with a white outline. */
+.lf-row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: .5rem; }
+.lf-node { display: grid; gap: .2rem; padding: .5rem .65rem; border: 1.5px solid #6b675f; border-radius: 6px; font-size: .9rem; line-height: 1.5; min-width: 0; overflow-wrap: break-word; }
+.lf-node strong { font-weight: 600; color: #ecebe6; }
+.lf-node span { color: #cfcbc2; }
+.lf-node-input { border-color: var(--lf-input); border-radius: 999px; text-align: center; }
+.lf-node-input strong { color: var(--lf-input); }
+.lf-node-computed { border-color: var(--lf-computed); border-radius: 999px; text-align: center; }
+.lf-node-computed strong { color: var(--lf-computed); }
+.lf-node-op { border: 2px solid var(--lf-op); border-radius: 4px; }
+.lf-node-small { font-size: .84rem; text-align: center; }
+.lf-node-back { margin-top: .8rem; border: 1.5px dashed var(--lf-back); }
+.lf-node-back strong { color: var(--lf-back); }
+.lf-arrows { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); text-align: center; color: #bcbcbc; font-size: 1.15rem; line-height: 1.3; margin: .1rem 0; }
+.lf-single { display: block; }
+.lf-pair-images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.lf-image-branch { display: grid; gap: .2rem; min-width: 0; }
+
+/* Candidate masks. */
+.lf-mask-wrap { overflow-x: auto; margin: .4rem 0; }
+.lf-mask { border-collapse: collapse; font-size: .85rem; width: 100%; }
+.lf-mask th, .lf-mask td { border: 1px solid #3c3a35; padding: .3rem .4rem; text-align: center; white-space: nowrap; }
+.lf-mask th { color: var(--lf-muted); font-weight: 500; }
+.lf-mask-positive { background: #3a2f14; color: #f0cd7c; font-weight: 600; }
+.lf-mask-negative { background: #17212c; color: #9cc3ee; }
+.lf-mask-self { color: #8a857a; text-decoration: line-through; }
+/* Short cell labels (pos / neg / self) are always used so the 2N × 2N table fits its column; the key spells them out and screen readers get the long words. */
+.lf-mask-long { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.lf-mask-short { display: inline; }
+.lf-mask-pair > div { min-width: 0; overflow-x: auto; }
+
+.lf-angle { display: block; width: min(100%, 24rem); height: auto; }
+.lf-angle text { fill: #dedbd3; font: 13px system-ui, sans-serif; }
+
+@container lf-figure (max-width: 36rem) {
+  .lf-count > div { grid-template-columns: 3.5rem 6.5rem minmax(0, 1fr); gap: .5rem; font-size: .9rem; }
+  .lf-pull-bars > div { grid-template-columns: minmax(0, 1fr) 2.2rem; }
+  .lf-pull-bars > div > span { grid-column: 1 / -1; }
+  .lf-penalty > div { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+  .lf-penalty-head { display: none !important; }
+  .lf-penalty > div > span:nth-child(2)::before { content: 'penalty'; color: var(--lf-muted); font-size: .8rem; }
+  .lf-penalty > div > span:nth-child(3)::before { content: 'push on the logit'; color: var(--lf-muted); font-size: .8rem; }
+  .lf-softmax > div, .lf-shares > div { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .25rem .6rem; }
+  .lf-softmax-head, .lf-shares-head { display: none !important; }
+  .lf-softmax > div > span:nth-child(2)::before, .lf-shares > div > span:nth-child(3)::before { content: 'logit '; color: var(--lf-muted); }
+  .lf-softmax > div > span:nth-child(3)::before { content: 'exp '; color: var(--lf-muted); }
+  .lf-softmax > div > span:nth-child(5)::before { content: 'gradient '; color: var(--lf-muted); }
+  .lf-shares > div > span:nth-child(2)::before { content: 'similarity '; color: var(--lf-muted); }
+  .lf-softmax-total > span:nth-child(2) { display: none; }
+  .lf-softmax-total > span:nth-child(4)::before { content: 'shares sum to '; color: var(--lf-muted); }
+  .lf-softmax .lf-bar-cell, .lf-shares .lf-bar-cell { grid-column: 1 / -1; }
+  .lf-softmax-target em, .lf-shares-positive em { display: block; margin: .1rem 0 0; }
+  .lf-focal > div { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .25rem .5rem; font-size: .9rem; }
+  .lf-focal-head { display: none !important; }
+  .lf-focal > div > span:nth-child(2)::before { content: 'CE '; color: var(--lf-muted); }
+  .lf-focal > div > span:nth-child(3)::before { content: 'factor '; color: var(--lf-muted); }
+  .lf-focal > div > span:nth-child(4) { grid-column: 1 / -1; }
+  .lf-focal > div > span:nth-child(4)::before { content: 'focal '; color: var(--lf-muted); margin-right: .4rem; }
+  .lf-quantile-votes { gap: .25rem; font-size: .84rem; }
+  .lf-pair-images { gap: .5rem; }
+  .lf-node { padding: .4rem .45rem; font-size: .84rem; }
+  .lf-mask { font-size: .78rem; }
+  .lf-mask th, .lf-mask td { padding: .25rem .3rem; }
+}
+@container lf-figure (max-width: 22rem) {
+  .lf-row, .lf-pair-images { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); }
+  .lf-arrows > span { display: none; }
+  .lf-arrows::after { content: '↓'; }
+  .lf-quantile-votes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

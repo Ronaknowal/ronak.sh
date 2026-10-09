@@ -1,0 +1,27 @@
+{
+  "createdAt": "2026-10-09T15:44:51.687744+00:00",
+  "author": "/root/queue_nonconvex_resume",
+  "scope": "Exactly two new content programmes; no preserved old main replay",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "programmes": [
+    {
+      "file": "information_library.py",
+      "sha256": "886dff961143d74ac2d2a58242ecfefdc5133933a73dbf4a37566062ff730fbc",
+      "exitCode": 0,
+      "stdout": "manual H CE KL bits [1.75, 2.625, 0.875]\nSciPy H CE KL bits [np.float64(1.75), np.float64(2.625), np.float64(0.875)]\ntruthful conditional row costs [np.float64(0.468995594), np.float64(1.0)]\ncontext / weighted / uniform [0.75, 0.25] 0.601746695 0.734497797\ncontext / weighted / uniform [0.5, 0.5] 0.734497797 0.734497797\ncontext / weighted / uniform [1.0, 0.0] 0.468995594 0.734497797\nmissing-support H CE KL (1.0, inf, inf)\nSciPy entropy of weights [2, 1] bits 0.918295834\nstrict probability input rejected True\n",
+      "stderr": "",
+      "stdoutSha256": "9644ac6bac08830fbf8810cbe19f8eea1bde49eede982415c5fdfd580635f496"
+    },
+    {
+      "file": "penguins_log_loss.py",
+      "sha256": "a591e009d34a1f2d088a6f274c4afbf096c7d5191611b836ac05a4b2c7f47eb0",
+      "exitCode": 0,
+      "stdout": "train/test rows 224 120\ntraining species counts [100, 44, 80]\ntraining island counts Biscoe [28, 0, 80]\ntraining island counts Dream [36, 44, 0]\ntraining island counts Torgersen [36, 0, 0]\ntest model / CE bits / accuracy / perplexity global 1.518341224 0.433333333 2.864614937\ntest model / CE bits / accuracy / perplexity island 0.805893591 0.7 1.748228292\ntest island / counts / H CE KL bits Biscoe [16, 0, 44] [0.836640742, 0.849730932, 0.01309019]\ntest island / counts / H CE KL bits Dream [20, 24, 0] [0.994030211, 1.011549849, 0.017519637]\ntest island / counts / H CE KL bits Torgersen [16, 0, 0] [0.0, 0.075948853, 0.075948853]\ntest weighted H CE KL bits [0.782798115, 0.805893591, 0.023095476]\n",
+      "stderr": "",
+      "stdoutSha256": "7438bb5ddca0135a87e93f2863a070d358fb8e211b48e30a8c9cda3d74bcd063"
+    }
+  ],
+  "datasetSha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+}

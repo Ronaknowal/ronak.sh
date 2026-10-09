@@ -1,0 +1,971 @@
+{
+  "schemaVersion": 1,
+  "role": "NEW once-only missing native node serialization; original drivers/streams unchanged",
+  "authorization": "Root explicit message permits narrowly scoped missing D27 fit/serialization; no old main imported",
+  "fixture": [
+    [
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.2
+    ],
+    [
+      2.0,
+      0.4
+    ],
+    [
+      10.0,
+      2.0
+    ]
+  ],
+  "rowIds": [
+    "R0",
+    "R1",
+    "R2",
+    "R3"
+  ],
+  "params": {
+    "n_estimators": 8,
+    "max_samples": 4,
+    "random_state": 17,
+    "n_jobs": 1
+  },
+  "actualSampleSize": 4,
+  "offset": -0.5,
+  "trees": [
+    {
+      "treeId": 0,
+      "featureIds": [
+        0,
+        1
+      ],
+      "nodes": [
+        {
+          "nodeId": 0,
+          "feature": 0,
+          "threshold": 5.868063781349018,
+          "left": 1,
+          "right": 4,
+          "population": 4
+        },
+        {
+          "nodeId": 1,
+          "feature": 0,
+          "threshold": 0.12838617904502256,
+          "left": 2,
+          "right": 3,
+          "population": 3
+        },
+        {
+          "nodeId": 2,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        },
+        {
+          "nodeId": 3,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 2
+        },
+        {
+          "nodeId": 4,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        }
+      ],
+      "queries": [
+        {
+          "rowId": "R0",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 1,
+          "corrected": {
+            "exact": 2.0,
+            "library": 2.0
+          }
+        },
+        {
+          "rowId": "R1",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R2",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R3",
+          "leafId": 4,
+          "visitedNodeIds": [
+            0,
+            4
+          ],
+          "depth": 1,
+          "population": 1,
+          "corrected": {
+            "exact": 1.0,
+            "library": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "treeId": 1,
+      "featureIds": [
+        0,
+        1
+      ],
+      "nodes": [
+        {
+          "nodeId": 0,
+          "feature": 0,
+          "threshold": 2.2852750319453308,
+          "left": 1,
+          "right": 4,
+          "population": 4
+        },
+        {
+          "nodeId": 1,
+          "feature": 1,
+          "threshold": 0.2311427988241018,
+          "left": 2,
+          "right": 3,
+          "population": 3
+        },
+        {
+          "nodeId": 2,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 2
+        },
+        {
+          "nodeId": 3,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        },
+        {
+          "nodeId": 4,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        }
+      ],
+      "queries": [
+        {
+          "rowId": "R0",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R1",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R2",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 1,
+          "corrected": {
+            "exact": 2.0,
+            "library": 2.0
+          }
+        },
+        {
+          "rowId": "R3",
+          "leafId": 4,
+          "visitedNodeIds": [
+            0,
+            4
+          ],
+          "depth": 1,
+          "population": 1,
+          "corrected": {
+            "exact": 1.0,
+            "library": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "treeId": 2,
+      "featureIds": [
+        0,
+        1
+      ],
+      "nodes": [
+        {
+          "nodeId": 0,
+          "feature": 0,
+          "threshold": 5.441299241707334,
+          "left": 1,
+          "right": 4,
+          "population": 4
+        },
+        {
+          "nodeId": 1,
+          "feature": 0,
+          "threshold": 1.255381255995194,
+          "left": 2,
+          "right": 3,
+          "population": 3
+        },
+        {
+          "nodeId": 2,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 2
+        },
+        {
+          "nodeId": 3,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        },
+        {
+          "nodeId": 4,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        }
+      ],
+      "queries": [
+        {
+          "rowId": "R0",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R1",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R2",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 1,
+          "corrected": {
+            "exact": 2.0,
+            "library": 2.0
+          }
+        },
+        {
+          "rowId": "R3",
+          "leafId": 4,
+          "visitedNodeIds": [
+            0,
+            4
+          ],
+          "depth": 1,
+          "population": 1,
+          "corrected": {
+            "exact": 1.0,
+            "library": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "treeId": 3,
+      "featureIds": [
+        0,
+        1
+      ],
+      "nodes": [
+        {
+          "nodeId": 0,
+          "feature": 0,
+          "threshold": 3.932356482340189,
+          "left": 1,
+          "right": 4,
+          "population": 4
+        },
+        {
+          "nodeId": 1,
+          "feature": 0,
+          "threshold": 1.8401653253660375,
+          "left": 2,
+          "right": 3,
+          "population": 3
+        },
+        {
+          "nodeId": 2,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 2
+        },
+        {
+          "nodeId": 3,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        },
+        {
+          "nodeId": 4,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        }
+      ],
+      "queries": [
+        {
+          "rowId": "R0",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R1",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R2",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 1,
+          "corrected": {
+            "exact": 2.0,
+            "library": 2.0
+          }
+        },
+        {
+          "rowId": "R3",
+          "leafId": 4,
+          "visitedNodeIds": [
+            0,
+            4
+          ],
+          "depth": 1,
+          "population": 1,
+          "corrected": {
+            "exact": 1.0,
+            "library": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "treeId": 4,
+      "featureIds": [
+        0,
+        1
+      ],
+      "nodes": [
+        {
+          "nodeId": 0,
+          "feature": 1,
+          "threshold": 0.024830320861577205,
+          "left": 1,
+          "right": 2,
+          "population": 4
+        },
+        {
+          "nodeId": 1,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        },
+        {
+          "nodeId": 2,
+          "feature": 1,
+          "threshold": 0.6125603443690013,
+          "left": 3,
+          "right": 4,
+          "population": 3
+        },
+        {
+          "nodeId": 3,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 2
+        },
+        {
+          "nodeId": 4,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        }
+      ],
+      "queries": [
+        {
+          "rowId": "R0",
+          "leafId": 1,
+          "visitedNodeIds": [
+            0,
+            1
+          ],
+          "depth": 1,
+          "population": 1,
+          "corrected": {
+            "exact": 1.0,
+            "library": 1.0
+          }
+        },
+        {
+          "rowId": "R1",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            2,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R2",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            2,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R3",
+          "leafId": 4,
+          "visitedNodeIds": [
+            0,
+            2,
+            4
+          ],
+          "depth": 2,
+          "population": 1,
+          "corrected": {
+            "exact": 2.0,
+            "library": 2.0
+          }
+        }
+      ]
+    },
+    {
+      "treeId": 5,
+      "featureIds": [
+        0,
+        1
+      ],
+      "nodes": [
+        {
+          "nodeId": 0,
+          "feature": 1,
+          "threshold": 0.4648461725864774,
+          "left": 1,
+          "right": 4,
+          "population": 4
+        },
+        {
+          "nodeId": 1,
+          "feature": 1,
+          "threshold": 0.050325033655728255,
+          "left": 2,
+          "right": 3,
+          "population": 3
+        },
+        {
+          "nodeId": 2,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        },
+        {
+          "nodeId": 3,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 2
+        },
+        {
+          "nodeId": 4,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        }
+      ],
+      "queries": [
+        {
+          "rowId": "R0",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 1,
+          "corrected": {
+            "exact": 2.0,
+            "library": 2.0
+          }
+        },
+        {
+          "rowId": "R1",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R2",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R3",
+          "leafId": 4,
+          "visitedNodeIds": [
+            0,
+            4
+          ],
+          "depth": 1,
+          "population": 1,
+          "corrected": {
+            "exact": 1.0,
+            "library": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "treeId": 6,
+      "featureIds": [
+        0,
+        1
+      ],
+      "nodes": [
+        {
+          "nodeId": 0,
+          "feature": 0,
+          "threshold": 6.622284281357324,
+          "left": 1,
+          "right": 4,
+          "population": 4
+        },
+        {
+          "nodeId": 1,
+          "feature": 1,
+          "threshold": 0.08922829467083034,
+          "left": 2,
+          "right": 3,
+          "population": 3
+        },
+        {
+          "nodeId": 2,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        },
+        {
+          "nodeId": 3,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 2
+        },
+        {
+          "nodeId": 4,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        }
+      ],
+      "queries": [
+        {
+          "rowId": "R0",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 1,
+          "corrected": {
+            "exact": 2.0,
+            "library": 2.0
+          }
+        },
+        {
+          "rowId": "R1",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R2",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R3",
+          "leafId": 4,
+          "visitedNodeIds": [
+            0,
+            4
+          ],
+          "depth": 1,
+          "population": 1,
+          "corrected": {
+            "exact": 1.0,
+            "library": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "treeId": 7,
+      "featureIds": [
+        0,
+        1
+      ],
+      "nodes": [
+        {
+          "nodeId": 0,
+          "feature": 1,
+          "threshold": 0.6729601457123459,
+          "left": 1,
+          "right": 4,
+          "population": 4
+        },
+        {
+          "nodeId": 1,
+          "feature": 0,
+          "threshold": 0.5479657680485238,
+          "left": 2,
+          "right": 3,
+          "population": 3
+        },
+        {
+          "nodeId": 2,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        },
+        {
+          "nodeId": 3,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 2
+        },
+        {
+          "nodeId": 4,
+          "feature": -2,
+          "threshold": null,
+          "left": -1,
+          "right": -1,
+          "population": 1
+        }
+      ],
+      "queries": [
+        {
+          "rowId": "R0",
+          "leafId": 2,
+          "visitedNodeIds": [
+            0,
+            1,
+            2
+          ],
+          "depth": 2,
+          "population": 1,
+          "corrected": {
+            "exact": 2.0,
+            "library": 2.0
+          }
+        },
+        {
+          "rowId": "R1",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R2",
+          "leafId": 3,
+          "visitedNodeIds": [
+            0,
+            1,
+            3
+          ],
+          "depth": 2,
+          "population": 2,
+          "corrected": {
+            "exact": 3.0,
+            "library": 3.0
+          }
+        },
+        {
+          "rowId": "R3",
+          "leafId": 4,
+          "visitedNodeIds": [
+            0,
+            4
+          ],
+          "depth": 1,
+          "population": 1,
+          "corrected": {
+            "exact": 1.0,
+            "library": 1.0
+          }
+        }
+      ]
+    }
+  ],
+  "normalizers": {
+    "exact": 2.1666666666666665,
+    "library": 1.8516559071392855
+  },
+  "summedCorrectedPaths": {
+    "exact": [
+      18.0,
+      24.0,
+      21.0,
+      9.0
+    ],
+    "library": [
+      18.0,
+      24.0,
+      21.0,
+      9.0
+    ]
+  },
+  "scores": {
+    "exact": [
+      0.48684636034871703,
+      0.3829915893339934,
+      0.43180789862093216,
+      0.6977437641059339
+    ],
+    "library": [
+      0.4307346910852297,
+      0.3252968076440812,
+      0.37432154620270625,
+      0.6563038100493016
+    ]
+  },
+  "nativeRawOrientedScores": [
+    0.4307346910852297,
+    0.3252968076440812,
+    0.37432154620270625,
+    0.6563038100493016
+  ],
+  "software": {
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1"
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "sourceSha256": "3aa616e6ed9144d32cc232ced42c53843353562e25a10145c1bf7fde09b635ef",
+  "fitCalls": 1,
+  "oldMainsStudiesRun": 0,
+  "qualifications": [
+    "Float32 query routing matches ordinary tree traversal; threshold arrays are saved at actual full precision.",
+    "Exact-harmonic rescoring uses the SAME native trees; it is not the scratch randomized forest.",
+    "Changing cost counts later does not refit or silently renormalize this serialized forest."
+  ]
+}

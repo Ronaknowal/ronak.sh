@@ -1,0 +1,110 @@
+{
+  "scope": "SAME MI1–MI3 focused current-source and native closure; private Reader, not normal integration",
+  "checks": [
+    {
+      "name": "privateFiles current identities",
+      "passed": true,
+      "detail": {
+        "count": 48,
+        "bad": []
+      }
+    },
+    {
+      "name": "sharedInputs current identities",
+      "passed": true,
+      "detail": {
+        "count": 519,
+        "bad": []
+      }
+    },
+    {
+      "name": "buildFiles current identities",
+      "passed": true,
+      "detail": {
+        "count": 580,
+        "bad": []
+      }
+    },
+    {
+      "name": "Nuisance identity and objective are visible",
+      "passed": true
+    },
+    {
+      "name": "Selected nuisance successor remains at t1",
+      "passed": true
+    },
+    {
+      "name": "Finite update reset restores signal start",
+      "passed": true
+    },
+    {
+      "name": "Changed small-noise law uses physical sigma and coordinate units",
+      "passed": true,
+      "detail": "Full closed event: 0 ≤ Z′ ≤ 10\n\n-1\n11\n● Event left endpoint: 0\n● Event right endpoint: 10\n\nAmber event interval corresponds to [0,1] before scaling. Both endpoints belong to the event.\n\nConditional law given X=1: mean 10, standard deviation 0.00023.\n\n-69\n0\n69\n0\n2.0e3\nDensity per Z′ unit\n(Z′ − 10) / 1.0e-5\n\nOne horizontal axis unit is 1.0e-5 Z′ units. Multiply the axis label by 1.0e-5, then add 10 to recover Z′. Window endpoints: 9.99931 and 10.00069; exact offsets -6.9e-4 and 6.9e-4. Density keeps probability per Z′ unit. Pink baseline = mean ± one standard deviation, a different interval.\n\nAmber area is the part of the event within this density window; its right endpoint is offset 0. The event’s left endpoint Z′=0 is outside this detail window to the left; the full event ruler above preserves it. Rescaling both endpoints and dividing density by 10 preserves the event probability."
+    }
+  ],
+  "captures": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-same-r2/nuisance-initial.jpg",
+      "sha256": "0ddffa68673c88b7bc2ba770c4e8aae6e7d71ffa985c2382131735812f0fc384"
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-same-r2/nuisance-successor.jpg",
+      "sha256": "1ef9996fe1315d71a1926063ef85a717e47d192e81967ebbb45a7aace49e03d9"
+    }
+  ],
+  "http": [
+    {
+      "url": "http://127.0.0.1:5729/assets/index-BYwQFzYQ.css",
+      "sha256": "6be13262fc1a20aaa5ddb61602d9833848bfc6ec9d33d1dc1bd612c60955859f",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/index-BYaMmI4O.js",
+      "sha256": "1dafc19c2eec4c2c0889698eded946fb2dd11b795186105d1bb709c38be4fc29",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/mutual-information-information-bottleneck-Czqpp4RW.css",
+      "sha256": "f1f95e7fa0a246751d743054f38b8fa75bab14f81732da6a3bf11a4960142f9b",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/mutual-information-information-bottleneck-aY-ASkl5.js",
+      "sha256": "e7c168736a1c3a0ea1f9badb657c59bbba7bb3f59c9d6b2ee2577f4322420c9e",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308",
+      "same": true
+    },
+    {
+      "url": "http://127.0.0.1:5729/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b",
+      "same": true
+    }
+  ],
+  "status": "FAILED",
+  "error": "locator.innerText: Error: Node is not an HTMLElement\nCall log:\n\u001b[2m  - waiting for locator('[data-mechanism=\"M42\"]').locator('.ir-density-panel').nth(1).locator('.ir-plot svg')\u001b[22m\n\n    at C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\mi-root-same-r2.cjs:27:192"
+}

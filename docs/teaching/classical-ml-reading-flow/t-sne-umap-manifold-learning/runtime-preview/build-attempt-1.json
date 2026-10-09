@@ -1,0 +1,32 @@
+{
+  "schema": "private-topic-build-attempt/v1",
+  "attempt": 1,
+  "command": "& 'C:/Users/ronak/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' 'node_modules/vite/bin/vite.js' build --config 'docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite.config.mjs' --outDir 'C:/Personal Projects and files/Portfolio/Portfolio/docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/build-private-r1'",
+  "workdir": "C:/Personal Projects and files/Portfolio/Portfolio",
+  "sourceCheckpoint": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-checkpoint.json",
+  "sourceCheckpointSha256": "1d13bda9cb7b59cb306cd40eba274753116feca728f0f8d676960b12080984ce",
+  "initialToolResult": {
+    "chunk_id": "8b6ea5",
+    "wall_time_seconds": 10.0006066,
+    "session_id": 29890,
+    "original_token_count": 1117,
+    "output": "vite v6.4.1 building for production...\ntransforming...\n[plugin vite:esbuild] src/learn/data/topics/convex-optimization.jsx: The character \">\" is not valid inside a JSX element\n142|      <Prose>A valid expression does not ensure that its constraints intersect, its cost is bounded below, or its finite best value is attained. The incompatible interval has no feasible point; minimizing −x on the whole line decreases without a lower bound; the square attains its minimum. These are separate model questions that a solver status reports numerically.</Prose>\n143|      <RunnableExample example={convexOptimizationExamples.dcpAndStatus}><Prose>In the recorded CVXPY 1.9.2 run, the square-root expression is classified as <Code>QUASICONVEX</Code> and fails <Code>is_dcp()</Code>; the norm form is <Code>CONVEX</Code> and passes. The first classification is the analyzer's result, not proof that the function lacks convexity. The two accepted optimization models then show separate failures: incompatible bounds are infeasible, and a linear cost decreasing forever is unbounded. Always inspect status before using a variable's numerical value.</Prose></RunnableExample>\n144|      <Prose>The next two examples use a margin z: a signed affine prediction for fixed features and labels. The exponential exp(z) is positive and has derivative exp(z); the natural logarithm log(t) is its inverse for t>0 and has derivative1/t. Those scalar rules, together with the chain rule, give the logistic curvature below.</Prose>\n   |                                                                                                                                                                                                                            ^\n145|      <MarginLossesFigure />\n146|      <Prose>Familiar machine-learning objectives fit these constructions. A linear predictor with squared residuals gives convex least squares. With fixed features and labels y equal to−1 or+1, the margin z=y aᵀw is affine in w. Logistic loss log(1+e⁻ᶻ) has second derivative eᶻ/(1+eᶻ)²≥0, so summing its affine compositions gives a convex training objective. The support-vector hinge loss max(0,1−z) is the maximum of two affine expressions. Adding nonnegative squared-norm or absolute-value penalties preserves convexity. Unregularized logistic fitting on separable data can still lack an attained finite minimizer; the existence question remains separate.</Prose>\n\n[plugin vite:esbuild] src/learn/data/topics/numerical-pdes-grids-finite-elements-stability.jsx: The character \">\" is not valid inside a JSX element\n233|        <NumericalPdeReadingFigure id=\"N40\" />\n234|        <NumericalPdeReadingFigure id=\"N41\" />\n235|        <Prose>For upwind transport the complex multiplier is 1−c(1−e⁻ⁱθ); for centered Euler it is 1−ic sinθ. The latter can enlarge a nonconstant mode despite conserving the constant sum. Trace the physical upstream origin against the entire region reachable by repeated discrete updates: at c>1 it lies beyond the one-cell-per-step dependency. Reaching the correct region is necessary for convergence, while the multiplier comparison shows why it is not sufficient.</Prose>\n   |                                                                                                                                                                                                                                                                                                                   ^\n236|        <Prose>The CFL domain-of-dependence requirement says that a convergent numerical method must be able to receive information from the true upstream region. It is necessary, not sufficient. Centered space plus explicit Euler has Fourier multiplier 1−i(vΔt/h)sin θ. Its magnitude squared is 1+c²sin²θ, greater than 1 for nonzero c and modes with sin θ≠0. It can satisfy a geometric CFL restriction and conserve total mass while amplifying oscillations.</Prose>\n237|        <Prose>For v&gt;0, Taylor-expand the upwind equation about a smooth solution and use uₜₜ=v²uₓₓ in the leading term. Its modified equation contains artificial diffusion νnum=v h(1−c)/2. This is an asymptotic smooth-field interpretation, not an exact new PDE satisfied by every discrete pulse. At c=1 this leading diffusion vanishes because the update shifts cell averages exactly. With v&lt;0 replace v by |v| in this diffusion coefficient.</Prose>\n\n"
+  },
+  "finalToolResult": {
+    "chunk_id": "91c5f4",
+    "wall_time_seconds": 0.0242931,
+    "exit_code": 1,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "exitCode": 1,
+  "interruptedAfterForeignBodyTransformation": true,
+  "diagnosis": "Foreign full topic bodies were transformed. Warnings themselves are preserved, not treated as the reason for failure. The author stopped the attempt; no successful build or manifest is claimed.",
+  "publicDir": false,
+  "scientificCampaignReplayed": false,
+  "nativeWindowsPersonallyViewed": [],
+  "cuaInventory": {
+    "apps": [],
+    "browsers": []
+  }
+}

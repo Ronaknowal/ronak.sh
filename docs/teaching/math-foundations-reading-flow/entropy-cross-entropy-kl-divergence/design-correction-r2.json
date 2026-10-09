@@ -1,0 +1,64 @@
+{
+  "status": "AUTHOR_CORRECTIONS_FOR_SAME_REVIEW",
+  "createdAt": "2026-10-09T15:28:39.566Z",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-source-r1.json",
+    "sha256": "68744d8da1c4599c6d70eae28d08ce3764b284eec59943003554d48fa3a27ba1",
+    "bytes": 17337
+  },
+  "successor": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-source-r2.json",
+    "sha256": "1fbfd9ca37c348df6519b77f005a47262b72c2320e79974533ae50b058c1e067",
+    "bytes": 18454
+  },
+  "findings": [
+    "ED1",
+    "ED2",
+    "ED3"
+  ],
+  "changes": [
+    {
+      "finding": "ED3",
+      "before": "in `research-r1.md` supplies",
+      "after": "in `research-r2.md` supplies"
+    },
+    {
+      "finding": "ED1",
+      "before": "E27/L5 joint rectangle → two conditional strips → weighted sum; explicit default epsilon=.1, Qtrust=.8 matches printed code. T9.",
+      "after": "E27/L5 joint rectangle → two conditional strips → weighted sum; symmetric default epsilon=.1, Qtrust=.8 matches printed code and is explicitly a weighting null case. An asymmetric preset uses context masses (.75,.25), true Y1 rows (.1,.5), and truthful Q; row costs (.4689955935892812,1) yield .6017466951919609 bits, versus wrong uniform .7344977967946407. T9."
+    },
+    {
+      "finding": "ED1",
+      "before": "| L5 conditional pricing E27 | Fair X; trueY agrees withX with.9; model agrees with.8. Joint2×2, two normalized conditionals, four weighted log costs and total. Controls actual context mass P(X=1), true flip epsilon and Qtrust. | Add context-mass edit if existing model requires small extension; preserve exact old default output. Epsilon=.5 destroys informative context; Qtruth makes excess0; unequal context frequencies check weighted average; impossible Qsupport flagged. No hidden zero-width labels. |",
+      "after": "| L5 conditional pricing E27 | Fair X; trueY agrees withX with.9; model agrees with.8. Joint2×2, two normalized conditionals, four weighted log costs and total. Two named presets: symmetric channel and unequal row costs. Symmetric controls remain context mass, common flip and model trust; asymmetric preset fixes true Y1 rows (.1,.5) and truthful Q, exposing only context mass P(X=1). | Symmetric row costs are identical: changing context frequency changes joint areas but not their weighted conditional average; label this null result. The asymmetric default context masses (.75,.25) gives joint rows (.675,.075) and (.125,.125); normalize rows before scoring. Draw each row cost beside its actual context multiplier, then products .3517466951919609 and .25 joining at .6017466951919609. A separately labelled incorrect uniform comparison gives .7344977967946407. Changing P(X=1) to.5 makes the two totals agree; changing it to0 gives .4689955935892812 with zero-context slice explicitly unavailable. Presets reset dependent values and compare like units. Preserve old symmetric output; impossible Q support remains flagged. Numeric labels remain outside zero-width cells. |"
+    },
+    {
+      "finding": "ED1",
+      "before": "| C06 `conditional` | Preserve full joint-weighted sum. C12 applies library entropy along conditional rows then context-weighted sum; row axis explicit. | §6; unequal context mass, wrong uniform context averaging. |",
+      "after": "| C06 `conditional` | Preserve the entire old symmetric joint-weighted programme/output as historical evidence. Explain its equal-row-cost null result. C12 adds the nonidentical-row ED1 fixture and compares direct joint weighting with row entropy followed by context weighting; row axis explicit. No old output is silently rewritten. | §6; unequal context mass and unequal row costs together expose wrong uniform averaging. T9 supplies a small independent implementation repair. |"
+    },
+    {
+      "finding": "ED1",
+      "before": "Same source/model fixtures asC05/C06, not a new dataset.",
+      "after": "Same source/model fixtures asC05/C06 plus the explicit ED1 asymmetric conditional fixture (.75,.25) with Y1 rows (.1,.5); print both correct context-weighted and incorrect uniform totals, then check context mass .5 and0. This is a declared finite law, not a new dataset."
+    },
+    {
+      "finding": "ED2",
+      "before": "Further learning and technical references remain separate endings.",
+      "after": "### Concrete independent implementation transfer within existing tasks (ED2)\n\nEach following prompt is visible before its optional hint and complete worked solution. These are small functions or repairs within T3/T4/T5/T9/T10/T14, not additional whole programmes or another scientific campaign. The final manuscript must include the actual solution code and explanations; this design fixes their inputs, contracts and independent checks.\n\n| Existing task | Visible independent prompt | Worked solution mechanism and changed-input evidence required |\n| --- | --- | --- |\n| T3 finite support | Implement a finite CE/KL helper that takes two normalized probability vectors without silently normalizing them. Repair code that evaluates every log before multiplying by P. Explain what happens for P=(.5,.5,0), Q=(.25,.75,0), then Q=(1,0,0). | Validate equal nonempty shape, finite nonnegative entries and sums1 within a stated tolerance. Skip P=0 before any logarithm; P>0,Q=0 returns CE/KL infinity. Otherwise accumulate CE from -P log2 Q and KL from P(log2 P-log2 Q), not unstable probability ratios. First case H=1, CE=1.207518749639422, KL=.207518749639422; second infinite. Changed P=(.5,.5,.1) is rejected as unnormalized. P=(1,0,0), Q=(1,0,0) returns zero rather than NaN. Explain why adding epsilon changes Q. |\n| T4 actual decoder | Write or repair a prefix-tree decoder for A=0,B=10,C=110,D=111. Decode101100, and diagnose11. Reject the attempted alphabet A=0,B=01 before decoding. | Insert each bit into the tree; reject traversal through a leaf and a new leaf with existing descendants, covering either insertion order. Walk bits, emit at leaves and return to root.101100 becomes BCA;11 ends at an internal node and is unfinished. Empty stream emits empty text. Invalid nonbinary input is rejected; encode/decode a changed DAB message and compare exact bits111010. Reuse the actual published Greedy tree mechanism, but require the learner to supply the local validation/loop. |\n| T5 ceiling length repair | A block routine floors -log2 P(block) and divides the lengths by n before checking prefix feasibility. Repair it for Bernoulli P(1)=1/4 at n=2 and explain what is divided by n. | Enumerate ordered block probabilities (9/16,3/16,3/16,1/16); ceiling lengths (1,3,3,4) have Kraft sum13/16 and expected length31/16 bits/block, hence31/32 bits/symbol. Floored lengths (0,2,2,4) have Kraft sum25/16>1 and cannot be a binary prefix code. Integer bit lengths belong to whole blocks; divide expected block cost only after weighting. Use exact rational power comparisons or a stated tolerance-safe ceiling so exact dyadic P=1/8 yields3, not4; n=1 fair-bit check yields1. |\n| T9 context averaging | Implement conditional_entropy(joint) from a joint table, then repair a routine that averages its normalized row entropies uniformly. Use ED1's rows (.675,.075),(.125,.125). | Derive row masses first (.75,.25), skip a zero-mass row, normalize each positive row and weight its entropy by its own mass. Row costs .4689955935892812 and1 give .6017466951919609; the wrong uniform result is .7344977967946407. Reconstruct joint cells from row mass times conditional probabilities. Changed context masses (.5,.5) with the same conditional rows give .7344977967946407, while (1,0) gives .4689955935892812. Retain the symmetric .2/.8 old task as an explicit case where a wrong equal average accidentally agrees. |\n| T10 stable log loss | Repair a three-class helper that computes softmax then takes log of the selected probability. Use logits (0,-1000,-2000), target2; then add1000 to every logit. Separately repair a wrong class axis and an unnormalized soft-target row in the library call. | Compute shifted logits z-max(z), log normalizer log(sum exp(shifted)), and loss log-normalizer-shifted[target] directly, avoiding subtraction of two huge common offsets. Both hard-label cases have finite loss2000 although the target probability underflows. For (1000,998,996), target2, loss is4.142931628499899. Validate finite logits and target index; soft targets require finite nonnegative entries summing1. Explain why feeding probabilities to a logits API changes the model and why weighted/ignored reductions need their documented denominator. |\n| T14 feasible MaxEnt slice | Implement feasible_three_count(mean,t) returning (q0,q1,q2), rejecting infeasible means or t. Repair a normalizing-only routine that changes the required mean. Use mean6/5 and both exact interval endpoints. | Solve sum q=1 and q1+2q2=mean together: q=(1-mean+t,mean-2t,t), max(0,mean-1)≤t≤mean/2 for mean in[0,2]. At6/5, t∈[1/5,3/5], endpoints (0,4/5,1/5) and(2/5,0,3/5); both sum1 and have mean6/5. Reject t=.1 and mean2.1. At mean0 or2 only the corresponding vertex remains. Original mean10/7 reproduces[3/7,5/7]; the complete solution then uses the existing KL certificate to distinguish feasibility from optimality. |\n\nFurther learning and technical references remain separate endings."
+    },
+    {
+      "finding": "ED3",
+      "before": "2.9 sufficientstatistics;2.10 Fano;2.11 informationandsecondlaw.",
+      "after": "2.9 informationandsecondlaw;2.10 sufficientstatistics;2.11 Fano."
+    },
+    {
+      "finding": "ED1",
+      "before": "Fourjointcells for fairX, flip.1. Modeltrust.8 yields weightedHcond.468996,CE.521928,excess.052933bits.",
+      "after": "Fourjointcells for fairX, flip.1. Modeltrust.8 yields weightedHcond.468996,CE.521928,excess.052933bits; equal row costs make context-frequency edits a null case. ED1 adds a truthful asymmetric law: context masses(.75,.25), Y1 rows(.1,.5), row costs(.4689955935892812,1), correct .6017466951919609 versus wrong uniform .7344977967946407 bits."
+    }
+  ],
+  "inverse": "Replace each exact after string by its before string in design/research successor, in reverse order; source files r1 untouched.",
+  "conservation": "All eleven original code/output pairs, selected canonical source, old scientific evidence, all future instructions, 41 hurdles/46 visual jobs/9 labs and fourteen practice outcome groups unchanged. Only source text for design/research successor written.",
+  "execution": "No scientific programmes, build, runtime or browser work."
+}

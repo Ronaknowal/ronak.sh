@@ -1,0 +1,107 @@
+/* Dropout structure views. Colours follow docs/teaching/deep-learning-beginner/visual-vocabulary.md:
+   cyan supplied inputs, amber learned weights, violet computed values, white-outline operations
+   (a mask gate multiplies), orange backward gradients, dimmed dashed outline with × for anything
+   a mask removed. Figures sit on the page background (lesson-flow.css). */
+.dropout-lesson { --dx-input: #7dd5e9; --dx-weight: #f1c76c; --dx-computed: #c7a5ee; --dx-gradient: #f29a5c; --dx-op: #e7e4df; --dx-off: #77736d; --dx-line: #b9b5af; }
+.dx-drawing, .dx-figure, .dx-stack-figure { container-type: inline-size; }
+.dx-svg { display: block; width: 100%; max-width: 46rem; height: auto; overflow: visible; margin: .25rem auto .75rem; }
+.dx-svg--compact { display: none; max-width: 21rem; }
+@container (max-width: 600px) {
+  .dx-svg--wide { display: none; }
+  .dx-svg--compact { display: block; }
+}
+.dx-svg text, .dx-mini text { font: 15px system-ui, sans-serif; fill: #e7e4df; }
+.dx-wire path { stroke: var(--dx-line); stroke-width: 1.7; fill: none; }
+.dx-wire text { fill: var(--dx-weight); paint-order: stroke; stroke: #111; stroke-width: 8px; stroke-linejoin: round; }
+.dx-wire--gradient text { fill: var(--dx-gradient); font-weight: 650; }
+.dx-wire.is-off path { stroke: var(--dx-off); stroke-dasharray: 6 5; }
+.dx-wire.is-off text { fill: #a9a49c; }
+.dx-node circle { fill: #111; stroke-width: 2; }
+.dx-node--input circle { stroke: var(--dx-input); }
+.dx-node--computed circle { stroke: var(--dx-computed); }
+.dx-node .dx-value { font-weight: 650; }
+.dx-node.is-off circle { stroke: var(--dx-off); stroke-dasharray: 5 4; }
+.dx-node.is-off text { fill: #8f8a83; }
+.dx-gate rect { fill: #111; stroke: var(--dx-op); stroke-width: 1.6; }
+.dx-gate text { fill: #f0ece5; font-size: 14px; }
+.dx-gate.is-off rect { stroke: var(--dx-off); stroke-dasharray: 5 4; }
+.dx-gate.is-off text { fill: #a9a49c; }
+.dx-gate.is-idle rect { stroke: var(--dx-off); }
+.dx-gate.is-idle text { fill: #d6d1c9; }
+.dx-caption { fill: #b9b5af !important; font-size: 14px !important; paint-order: stroke; stroke: #111; stroke-width: 5px; stroke-linejoin: round; }
+.dx-skip { stroke: var(--dx-line); stroke-width: 2; fill: none; }
+.dx-box rect { fill: #111; stroke: var(--dx-op); stroke-width: 1.6; }
+.dx-box.is-off rect { stroke: var(--dx-off); stroke-dasharray: 5 4; }
+.dx-box.is-off text { fill: #8f8a83; }
+.dx-sum circle { fill: #111; stroke: var(--dx-op); stroke-width: 2; }
+.dx-sum text { font-size: 22px; }
+.dx-cross circle { fill: #2a2a2a; stroke: var(--dx-off); stroke-width: 1.5; }
+.dx-cross path { stroke: #d6d1c9; stroke-width: 1.8; }
+.dx-svg--compact text { font-size: 16px; }
+.dx-svg--compact .dx-gate text { font-size: 15px; }
+
+/* Small networks: thinned networks, DropConnect, MC passes. */
+.dx-figure h5 { margin: 0 0 .4rem; font-size: .95rem; color: #eee5d3; }
+.dx-figure p { line-height: 1.65; }
+.dx-thinned { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: 1rem 1.25rem; margin: .5rem 0; }
+.dx-thinned--two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+.dx-thinned--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.dx-thinned section { min-width: 0; }
+.dx-thinned p { margin: .3rem 0 0; font-size: .92em; }
+.dx-mini { display: block; width: 100%; max-width: 13rem; height: auto; }
+.dx-mini text { font-size: 16px; }
+@container (max-width: 44rem) { .dx-thinned--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (max-width: 24rem) { .dx-thinned--four, .dx-mc-passes { grid-template-columns: minmax(0, 1fr); } }
+
+/* ReLU fork table. */
+.dx-fork { border-collapse: collapse; width: 100%; max-width: 34rem; font-variant-numeric: tabular-nums; }
+.dx-fork :is(th, td) { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #333; }
+.dx-fork thead th { color: #b9b5af; font-weight: 500; font-size: .9rem; }
+.dx-fork strong { color: var(--dx-computed); }
+
+/* Stochastic depth: one chain of blocks; each block is a button that flips its sampled bit. */
+.dx-stack { list-style: none; padding: 0; margin: .5rem 0 .75rem; display: flex; flex-wrap: nowrap; gap: .5rem 1.25rem; align-items: center; }
+.dx-stack-tile { position: relative; flex: 1 1 0; max-width: 10rem; min-width: 0; display: grid; }
+.dx-stack-tile--end { flex: 0 1 auto; }
+@container (max-width: 40rem) {
+  .dx-stack { flex-wrap: wrap; }
+  .dx-stack-tile { flex: 1 1 7rem; }
+}
+.dx-stack-tile + .dx-stack-tile::before { content: '→'; position: absolute; left: -1.15rem; top: 1.2rem; color: var(--dx-line); }
+.dx-stack-tile > button, .dx-stack-tile--end { display: grid; gap: .15rem; font: inherit; font-size: .85rem; line-height: 1.4; text-align: left; color: #e7e4df; background: transparent; border: 1px solid #555; border-radius: 6px; padding: .4rem .5rem; cursor: pointer; }
+.dx-stack-tile--end { cursor: default; align-content: center; border-color: var(--dx-input); }
+.dx-stack-tile.is-off > button { border-style: dashed; color: #a9a49c; }
+.dx-stack-tile > button:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+.dx-stack-tile svg { width: 100%; height: auto; }
+.dx-stack-tile svg text { font: 13px system-ui, sans-serif; fill: #e7e4df; }
+.dx-tile-branch { stroke: var(--dx-op); stroke-width: 2; fill: none; }
+.dx-tile-branch.is-off, .dx-tile-box.is-off { stroke: var(--dx-off); stroke-dasharray: 4 3; }
+.dx-tile-box { fill: #111; stroke: var(--dx-op); stroke-width: 1.6; }
+.dx-tile-sum { fill: #111; stroke: var(--dx-op); stroke-width: 1.5; }
+.dx-stack-path { line-height: 1.65; overflow-wrap: anywhere; color: #d8d3cb; }
+
+/* Variance shift: two vertical chains. */
+.dx-flows section, .dx-mc section { min-width: 0; }
+.dx-flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
+.dx-flow li { border: 1px solid #4a4a4a; border-radius: 6px; padding: .4rem .6rem; display: grid; gap: .15rem; position: relative; }
+.dx-flow li + li::before { content: '↓'; position: absolute; top: -1.15rem; left: 1rem; color: var(--dx-line); line-height: 1; }
+.dx-flow b { color: #eee5d3; }
+.dx-flow span { color: #c9c3ba; font-size: .9em; line-height: 1.5; }
+.dx-flow-mask { border-color: var(--dx-op) !important; }
+.dx-flow-mask.is-identity { border-style: dashed !important; border-color: var(--dx-off) !important; }
+
+/* Monte Carlo passes. */
+.dx-mc-passes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.dx-mc-passes p { margin: .2rem 0 0; font-size: .9em; }
+.dx-mc-summary { font-size: .95em; overflow-wrap: anywhere; }
+
+/* Reading-flow review closure: one-column depth chain on narrow screens, computed output tile,
+   fixed (rate 0 or 1) blocks visibly not pressable, supplied X in the input colour. */
+.dx-stack-tile--output { border-color: var(--dx-computed) !important; }
+.dx-stack-tile > button:disabled { cursor: default; opacity: .85; border-style: solid; }
+.dx-flow li.is-input { border-color: var(--dx-input); }
+@container (max-width: 40rem) {
+  .dx-stack { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 1.1rem; }
+  .dx-stack-tile { flex: 0 0 auto; max-width: 16rem; }
+  .dx-stack-tile + .dx-stack-tile::before { content: '↓'; left: 1rem; top: -1.15rem; }
+}

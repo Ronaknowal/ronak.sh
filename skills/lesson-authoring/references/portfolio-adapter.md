@@ -44,6 +44,18 @@ When a frozen receipt or source-bound packet uses a former root path, consult
 
 Full-mode work may use complete semantic production source as its content checkpoint; it need not duplicate the manuscript. Content-first work must leave published bodies, navigation and runtime untouched. A file explaining what a future agent should write is not a complete content checkpoint. Preserve prepared code, data, specs and research until consumed and retained appropriately.
 
+## Practical tooling learned in revisions
+
+- **Python:** `scratch/lesson-tools` is the tested lesson environment (NumPy, PyTorch, scikit-learn). `scratch/dl-library-tools` adds torchvision. Run Python verifiers with `-B` or `sys.dont_write_bytecode = True` when they import programs under `public/`, which Vite deploys.
+- **Browser:** Playwright is resolved through `PLAYWRIGHT_PACKAGE` (currently `C:/Users/ronak/projects/career-ops/node_modules/playwright`, Edge channel). Parallel authors build to separate `dist-<name>` directories on separate ports and stop their preview server before finishing; do not build into `dist/` while another integration check is serving it.
+- **Receipts:** a new revision writes its checks to a revision-specific receipt path. Several older verifiers rewrite frozen receipts; inspect a verifier's writes before running it, use its receipt override if it has one, and back up and byte-compare frozen receipts around reruns.
+- **Rollback:** before revising implemented lessons, copy their topic-owned sources with hashes to a protected `original/` location in the increment record.
+- **Shared files:** a lesson revision must not change shared reader components or CSS; they are bound in many other checkpoints. Record a needed shared change as a separate presentation finding. Lessons opt into shared presentation styles (for example a neutral surface or reading-flow class) through their own root class and imports.
+
+- **Reading-flow presentation (default for new and revised lessons):** give the lesson root the class `lesson-flow` and import `src/learn/components/lesson-labs/lesson-flow.css`. Build labs from `src/learn/components/lesson-labs/LessonFlow.jsx`: `FlowLab`, `FlowControls`, `FlowSlider`, `FlowChoice`, `FlowReadout`, `FlowCheck` and `flowNumber`. Use `.flow-columns-2` / `.flow-columns-3` for side-by-side panels. Each module keeps one visual vocabulary for colours, shapes, arrows and notation; the Deep Learning one is `docs/teaching/deep-learning-beginner/visual-vocabulary.md`. A module without one gets one written before its first reading-flow revision. Change a vocabulary deliberately, not lesson by lesson.
+- **Deep-research registry:** `docs/teaching/deep-research-registry.json` lists the lessons that no longer need the full deep-dive research pass. Check it before every revision. A lesson that is absent gets the full pass and is added when its revision completes.
+- **Batch running:** pilot one lesson end to end and inspect it before starting the rest in parallel. Run about six agents at once at most; ten agents running builds and browsers used up memory and ended the session twice. A stopped agent cannot be resumed, so start a fresh agent from the on-disk state. Close each finding through the reviewer who raised it. Write Markdown or code that contains backticks or backslashes with the file-editing tools, not shell heredocs or `node -e`, which corrupt them.
+
 ## Load engineering guidance when implementing or reviewing runtime
 
 Read `docs/engineering/LEARNING-CODE-STANDARD.md` for semantic filenames/variables, early import/component compatibility, explicit publication, lazy loading, real production dependency checks, browser verification and cleanup. Its sections also own:
@@ -55,6 +67,8 @@ Read `docs/engineering/LEARNING-CODE-STANDARD.md` for semantic filenames/variabl
 - **Diagram layout and SVG legibility:** inspect actual painted labels/marks, viewport/text-zoom behavior, intermediate diagram states and truthful model semantics. The whole SVG's bounds alone do not prove legibility.
 
 Use `docs/engineering/LESSON-VERIFICATION-PITFALLS.md` when planning numerical/visual verification or investigating a relevant regression. Use `docs/engineering/LEARNING-WORKSPACE.md` for learning routes/projects/discovery; `docs/engineering/REPOSITORY-STRUCTURE.md` and `SITE-ARCHITECTURE.md` in the same directory for wider ownership. `.impeccable.md` holds design context. Keep the neutral black/charcoal and amber theme; avoid unrequested green/olive decoration, browser-default grey controls and default blue links.
+
+The theme governs page surfaces and controls; labelled data marks may use the module's permitted semantic hues. Monochrome or amber-only diagrams are not a theme requirement. Apply [colour carries conceptual meaning](visuals-and-labs.md#colour-carries-conceptual-meaning) to preserve piece/group/channel/class/series correspondence without turning figures into coloured panels.
 
 Read only relevant evidence. Historical code-access/opening/ending/scientific receipts remain records of the source they examined; later presentation receipts may own newer shared files. Follow the latest selected record from the handoff/ledger. Do not rerun historical integration tools or refresh old hashes to make an instruction-only migration pass.
 

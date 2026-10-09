@@ -1,0 +1,33 @@
+.long-context-lesson.lesson-flow { container-type: inline-size; }
+.long-flow-drawing { margin: 1.5rem 0; padding: 0; min-width: 0; border: 0; background: none; }
+.long-flow-drawing > svg { display: block; width: 100%; height: auto; max-width: 30rem; overflow: visible; }
+.long-flow-drawing > svg text { font-family: var(--font-mono, monospace); }
+.long-flow-drawing figcaption { margin-top: 1rem; color: var(--text-secondary, #bcbcbc); font-size: .9rem; line-height: 1.75; }
+.long-flow-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.long-flow-three > .long-flow-drawing { margin-top: 1rem; }
+@container (max-width: 760px) { .long-flow-three { grid-template-columns: minmax(0, 1fr); } }
+.long-flow-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.long-context-lesson.lesson-flow .flow-select { display:flex; flex-direction:column; gap:.5rem; min-width:0; }
+.long-flow-weights > div { display:grid; grid-template-columns:3rem minmax(0,1fr) 4rem; gap:.75rem; align-items:center; margin:.75rem 0; }
+.long-flow-weights > div > span:nth-child(2) { height:.7rem; background:#baa1e3; }
+.long-context-lesson.lesson-flow .long-figure { border:0; padding:0; background:none; border-radius:0; }
+.long-context-lesson.lesson-flow .long-figure > figcaption { color:var(--text-secondary); font-size:.95rem; margin:0 0 1rem; }
+.long-context-lesson.lesson-flow .katex-mathml { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); clip-path:inset(50%); white-space:nowrap; }
+.long-context-lesson.lesson-flow .neural-equation { min-width:0; max-width:100%; overflow-x:auto; }
+.long-context-lesson.lesson-flow .katex-display { max-width:100%; overflow-x:auto; overflow-y:hidden; padding:.4rem 0; }
+.long-context-lesson.lesson-flow .long-result { padding:0; border:0; background:none; }
+.long-context-lesson.lesson-flow .long-trajectory-grid { grid-template-columns:minmax(0,1fr); }
+.long-context-lesson.lesson-flow .long-trajectory { border:0; background:none; padding:0; }
+.long-context-lesson.lesson-flow .long-attention-bars > div { display:flex; flex-wrap:wrap; gap:.3rem; }
+.long-context-lesson.lesson-flow .long-attention-bars button { position:relative; width:2rem; height:6.25rem; min-width:2rem; flex:0 0 2rem; padding:0; }
+.long-context-lesson.lesson-flow .long-attention-bars button i { background:#baa1e3; }
+.long-context-lesson.lesson-flow .long-attention-bars button[aria-pressed=true] { outline:2px solid #dedede; outline-offset:2px; }
+.long-context-lesson.lesson-flow .long-figure h4 { color:#dedede; font-weight:500; }
+@container(max-width:760px) { .long-context-lesson.lesson-flow .long-measured-panels,.long-context-lesson.lesson-flow .long-path-comparison,.long-flow-two { grid-template-columns:minmax(0,1fr); } }
+
+.long-context-lesson.lesson-flow .long-probabilities i { background:#baa1e3; }
+
+.long-context-lesson.lesson-flow .long-intuition-path svg polyline { stroke:#79c5d8; }
+.long-context-lesson.lesson-flow .long-intuition-path svg circle[fill="#e2b55a"] { fill:#79c5d8; }
+.long-context-lesson.lesson-flow .long-intuition-path svg circle[stroke="#e2b55a"] { stroke:#79c5d8; }
+.long-context-lesson.lesson-flow .long-measured-track i,.long-context-lesson.lesson-flow .long-cost-track i { background:#baa1e3; }

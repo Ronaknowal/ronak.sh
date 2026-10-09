@@ -1,0 +1,444 @@
+{
+  "fits": 0,
+  "neural_generation": 0,
+  "programs": {
+    "sequence_policy.py": {
+      "program_sha256": "ad8a6923fa9fd88df8dd0b23a50a59329f2a862c9612a8bd16c9b183cc4107cb",
+      "exit_code": 0,
+      "output": {
+        "trajectories": [
+          {
+            "sum": 4,
+            "answer": 12,
+            "choices": [
+              0,
+              0
+            ],
+            "probability": 0.13999999999999999,
+            "reward": 0
+          },
+          {
+            "sum": 4,
+            "answer": 15,
+            "choices": [
+              0,
+              1
+            ],
+            "probability": 0.04000000000000001,
+            "reward": 1
+          },
+          {
+            "sum": 4,
+            "answer": 18,
+            "choices": [
+              0,
+              2
+            ],
+            "probability": 0.020000000000000007,
+            "reward": 0
+          },
+          {
+            "sum": 5,
+            "answer": 12,
+            "choices": [
+              1,
+              0
+            ],
+            "probability": 0.05000000000000001,
+            "reward": 0
+          },
+          {
+            "sum": 5,
+            "answer": 15,
+            "choices": [
+              1,
+              1
+            ],
+            "probability": 0.4,
+            "reward": 1
+          },
+          {
+            "sum": 5,
+            "answer": 18,
+            "choices": [
+              1,
+              2
+            ],
+            "probability": 0.05000000000000001,
+            "reward": 0
+          },
+          {
+            "sum": 6,
+            "answer": 12,
+            "choices": [
+              2,
+              0
+            ],
+            "probability": 0.05999999999999999,
+            "reward": 0
+          },
+          {
+            "sum": 6,
+            "answer": 15,
+            "choices": [
+              2,
+              1
+            ],
+            "probability": 0.08999999999999996,
+            "reward": 1
+          },
+          {
+            "sum": 6,
+            "answer": 18,
+            "choices": [
+              2,
+              2
+            ],
+            "probability": 0.14999999999999997,
+            "reward": 0
+          }
+        ],
+        "expected_reward": 0.53,
+        "gradient": [
+          [
+            -0.066,
+            0.135,
+            -0.069
+          ],
+          [
+            -0.027999999999999997,
+            0.03200000000000001,
+            -0.004000000000000002
+          ],
+          [
+            -0.04000000000000001,
+            0.07999999999999999,
+            -0.04000000000000001
+          ],
+          [
+            -0.01799999999999999,
+            0.06299999999999997,
+            -0.04499999999999998
+          ]
+        ],
+        "updated_expected_reward": 0.5345077905446649,
+        "derivation_reward": 0.4,
+        "sampled_gradient": [
+          [
+            -0.07166999999999987,
+            0.13649999999998905,
+            -0.06483000000000146
+          ],
+          [
+            -0.027195000000000545,
+            0.03192999999999922,
+            -0.004735000000000073
+          ],
+          [
+            -0.03865500000000099,
+            0.0781600000000002,
+            -0.03950500000000094
+          ],
+          [
+            -0.019390000000000015,
+            0.06329000000000178,
+            -0.043899999999999245
+          ]
+        ],
+        "checks": {
+          "manual_autograd_finite_difference_coordinates": 24,
+          "maximum_error": 3.925776370650169e-12
+        }
+      },
+      "stderr": ""
+    },
+    "reasoning_checks.py": {
+      "program_sha256": "f6456f997be6b64bc5c6b68978306969cb80892abfdb9e0c5b7c2fdfa5c898b4",
+      "exit_code": 0,
+      "output": [
+        {
+          "text": "sum = 5; answer = 15",
+          "format_valid": true,
+          "terminated": true,
+          "sum": 5,
+          "answer": 15,
+          "sum_correct": true,
+          "product_consistent": true,
+          "answer_correct": true,
+          "derivation_correct": true,
+          "reward": 1
+        },
+        {
+          "text": "sum = 6; answer = 15",
+          "format_valid": true,
+          "terminated": true,
+          "sum": 6,
+          "answer": 15,
+          "sum_correct": false,
+          "product_consistent": false,
+          "answer_correct": true,
+          "derivation_correct": false,
+          "reward": 1
+        },
+        {
+          "text": "answer = 15",
+          "format_valid": true,
+          "terminated": true,
+          "sum": null,
+          "answer": 15,
+          "sum_correct": null,
+          "product_consistent": null,
+          "answer_correct": true,
+          "derivation_correct": false,
+          "reward": 1
+        },
+        {
+          "text": "sum = 5; answer =",
+          "format_valid": false,
+          "terminated": false,
+          "sum": null,
+          "answer": null,
+          "sum_correct": null,
+          "product_consistent": null,
+          "answer_correct": false,
+          "derivation_correct": false,
+          "reward": 0
+        },
+        {
+          "text": "sum = 5; answer = 15",
+          "format_valid": true,
+          "terminated": false,
+          "sum": 5,
+          "answer": 15,
+          "sum_correct": true,
+          "product_consistent": true,
+          "answer_correct": true,
+          "derivation_correct": true,
+          "reward": 0
+        },
+        {
+          "text": "sum = 5; answer = 16",
+          "format_valid": true,
+          "terminated": true,
+          "sum": 5,
+          "answer": 16,
+          "sum_correct": true,
+          "product_consistent": false,
+          "answer_correct": false,
+          "derivation_correct": false,
+          "reward": 0
+        }
+      ],
+      "stderr": ""
+    },
+    "reasoning_sampling.py": {
+      "program_sha256": "04f5de545c329841f7eab484275aa43e74c19a8fff52cafaa171115019dff35d",
+      "exit_code": 0,
+      "output": {
+        "full": {
+          "nodes": [
+            {
+              "original": [
+                0.2,
+                0.5,
+                0.29999999999999993
+              ],
+              "kept": [
+                1,
+                2,
+                0
+              ],
+              "retained_mass": 1.0,
+              "sampled": [
+                0.2,
+                0.5,
+                0.29999999999999993
+              ]
+            },
+            {
+              "original": [
+                0.7,
+                0.2,
+                0.10000000000000003
+              ],
+              "kept": [
+                0,
+                1,
+                2
+              ],
+              "retained_mass": 1.0,
+              "sampled": [
+                0.7,
+                0.2,
+                0.10000000000000003
+              ]
+            },
+            {
+              "original": [
+                0.10000000000000002,
+                0.8,
+                0.10000000000000002
+              ],
+              "kept": [
+                1,
+                0,
+                2
+              ],
+              "retained_mass": 1.0,
+              "sampled": [
+                0.10000000000000002,
+                0.8,
+                0.10000000000000002
+              ]
+            },
+            {
+              "original": [
+                0.2,
+                0.29999999999999993,
+                0.5
+              ],
+              "kept": [
+                2,
+                1,
+                0
+              ],
+              "retained_mass": 1.0,
+              "sampled": [
+                0.2,
+                0.29999999999999993,
+                0.5
+              ]
+            }
+          ],
+          "success_probability": 0.53
+        },
+        "nucleus": {
+          "nodes": [
+            {
+              "original": [
+                0.2,
+                0.5,
+                0.29999999999999993
+              ],
+              "kept": [
+                1
+              ],
+              "retained_mass": 0.5,
+              "sampled": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            {
+              "original": [
+                0.7,
+                0.2,
+                0.10000000000000003
+              ],
+              "kept": [
+                0
+              ],
+              "retained_mass": 0.7,
+              "sampled": [
+                1.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "original": [
+                0.10000000000000002,
+                0.8,
+                0.10000000000000002
+              ],
+              "kept": [
+                1
+              ],
+              "retained_mass": 0.8,
+              "sampled": [
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            {
+              "original": [
+                0.2,
+                0.29999999999999993,
+                0.5
+              ],
+              "kept": [
+                2
+              ],
+              "retained_mass": 0.5,
+              "sampled": [
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          ],
+          "success_probability": 1.0
+        },
+        "group_p01_G8": {
+          "all_failed": 0.4304672100000001,
+          "all_successful": 1.0000000000000005e-08,
+          "mixed": 0.5695327799999998
+        },
+        "zero_of256_one_sided95_upper": 0.011633876163163285
+      },
+      "stderr": ""
+    },
+    "reasoning_evaluate.py": {
+      "program_sha256": "4506dfa464f1a9963332ee78a743995f8b495ea00fd102da6685a317030c886d",
+      "exit_code": 0,
+      "output": {
+        "n8_c2": {
+          "1": 0.24999999999999997,
+          "2": 0.4642857142857142,
+          "4": 0.7857142857142857,
+          "8": 1.0
+        },
+        "constructed_curves": [
+          {
+            "k": 1,
+            "base": 0.19999999999999998,
+            "changed": 0.405
+          },
+          {
+            "k": 2,
+            "base": 0.36,
+            "changed": 0.48995
+          },
+          {
+            "k": 4,
+            "base": 0.5904,
+            "changed": 0.518901995
+          },
+          {
+            "k": 8,
+            "base": 0.83222784,
+            "changed": 0.53862637278604
+          },
+          {
+            "k": 16,
+            "base": 0.9718525023289344,
+            "changed": 0.5742711144492854
+          },
+          {
+            "k": 32,
+            "base": 0.9992077183748573,
+            "changed": 0.6375098320210731
+          },
+          {
+            "k": 64,
+            "base": 0.9999993722898265,
+            "changed": 0.7372017562372188
+          }
+        ]
+      },
+      "stderr": ""
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "date": "2026-09-28",
+  "torchdata": "0.11.0",
+  "torch": "2.14.0+cpu",
+  "execution": "actual sequential native CLI runs --workers0 and --workers2; no configuration changed during each restore",
+  "cases": [
+    {
+      "workers": 0,
+      "prefix": [
+        [
+          5,
+          3,
+          15
+        ],
+        [
+          11,
+          0,
+          4
+        ]
+      ],
+      "tail": [
+        [
+          13,
+          10,
+          12
+        ],
+        [
+          1,
+          7,
+          14
+        ],
+        [
+          8,
+          9,
+          6
+        ],
+        [
+          16,
+          2
+        ]
+      ],
+      "ordered_tail_match": true,
+      "unique_epoch_ids": 17
+    },
+    {
+      "workers": 2,
+      "prefix": [
+        [
+          12,
+          10,
+          8
+        ],
+        [
+          11,
+          16,
+          15
+        ]
+      ],
+      "tail": [
+        [
+          0,
+          9,
+          13
+        ],
+        [
+          6,
+          5,
+          14
+        ],
+        [
+          1,
+          4,
+          2
+        ],
+        [
+          7,
+          3
+        ]
+      ],
+      "ordered_tail_match": true,
+      "unique_epoch_ids": 17
+    }
+  ],
+  "limit": "Deterministic CPU map-style records; not random transforms, rank coordination or cross-worker-count restoration."
+}

@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "status": "ACCEPT_CORRECTED_WHOLE_PROPOSED_DESIGN_WITH_CURRENT_PREREQUISITE_DISPOSITIONS",
+  "reviewer": "/root/ica_design_independent_review",
+  "topicId": "t-sne-umap-manifold-learning",
+  "modulePosition": 17,
+  "frozenAt": "2026-10-09T07:06:27.528Z",
+  "independence": "Reviewer authored no t-SNE design, correction or content; original DIFFERENT report and SAME API closure preserved.",
+  "scope": {
+    "sections": 13,
+    "mechanismJobs": 45,
+    "liveInvestigations": 12,
+    "plannedNewCompletePrograms": 10,
+    "retainedProgramStreamPairs": 5,
+    "solvedTaskContracts": 19,
+    "meaning": "Complete proposed-design scope personally assessed; counts not teaching/execution/paint proof"
+  },
+  "input": {
+    "original": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/proposed-design-packet.json",
+      "bytes": 23274,
+      "sha256": "92aafa0d19b0a3f5fe2efd62d6b5f87f891a4e737a96c141c0dbb3dfac7c65c4"
+    },
+    "apiSuccessor": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/author-ready-packet.json",
+      "bytes": 3979,
+      "sha256": "b3d7ef244e1d763c9a8030535ebdbab76f4f9534d7a8fe6a29c4e7a596061614"
+    },
+    "effective": [
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/assessment-and-continuity.md",
+        "bytes": 15159,
+        "sha256": "73e18a04b31514450767de2916a3a81d215ab1732f37b7c6aaf1c8527af38faf"
+      },
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-programs-and-practice.md",
+        "bytes": 21435,
+        "sha256": "f8a5b6c6709814122e6bba449e211625bf141f0a0efd48798f24a108cef3770c"
+      },
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-research.md",
+        "bytes": 14732,
+        "sha256": "cab6c0afc486ba938add9faa3760050d8fcca94190afb1f80d776c50ab4c59a6"
+      },
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-proposed-design.md",
+        "bytes": 33791,
+        "sha256": "6fc084e24333b60434bb95e5c7a79df805add6da80d7c233a3011bd46c7e7435"
+      },
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/mds-contract-amendment.md",
+        "bytes": 5692,
+        "sha256": "535c4544bdbf0356b7e6a565ed9151f64f68984bd38571fc99057b3f3552f1bf"
+      }
+    ],
+    "priorDifferent": [
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/review.md",
+        "bytes": 14475,
+        "sha256": "ad229d170842fa0335f5aff496f8666ef6c1ea1fa0542e1d173a204da3b6e4f8"
+      },
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/packet.json",
+        "bytes": 29469,
+        "sha256": "67d92f9af9e95a3c3c2149fe8deef235f1a0fc77a1c9eb9d2a28ab5d41e80080"
+      }
+    ],
+    "sameClosure": [
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/same-api-closure/report.md",
+        "bytes": 3923,
+        "sha256": "aaa88b1481180c4ef1e0a5c0ae67bb6da4617b818322e6add68686b7ee85cc2d"
+      },
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/same-api-closure/packet.json",
+        "bytes": 3449,
+        "sha256": "c012f1067b977df8188de99f22ed022652e51b0964f231e09e6bd900a9cb1ef1"
+      },
+      {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/same-api-closure/observations.json",
+        "bytes": 23476,
+        "sha256": "96dd790bd59817db883f5c83422e32ce74584ded009517e501664d65579b2e3b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/review.md",
+      "bytes": 25307,
+      "sha256": "2d894a53a7dd6891644c94404886e1381011b5a567f8301864389e25bd14f030"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/source-reading.json",
+      "bytes": 45935,
+      "sha256": "1f8ba72d6661c083060a23ffa2d538781f7a5ab5343c1772fae600a1404a2ab0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/checks.json",
+      "bytes": 99310,
+      "sha256": "0e0158ebf210d9b87aeff84712cf5cbb4b01038c50a9dd99f6ca089aaced8276"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/execution.json",
+      "bytes": 1982,
+      "sha256": "acc1d525b44ad2751adf696af9c76e9157e15e379b4c6a6b44ca821e81cc55df"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/check-design.mjs",
+      "bytes": 6903,
+      "sha256": "00f1e10f16aef9781df8a805049c48dc1a500e9dcf28a3ae1a046222da6ec235"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/freeze-review.mjs",
+      "bytes": 12948,
+      "sha256": "f9bc33e7510a73626f292c13b6eb7f1a72663e47bb61b9601cef9993a92689c4"
+    }
+  ],
+  "checks": {
+    "pass": true,
+    "conditions": 169,
+    "immutableSourceGuardsCurrent": 69,
+    "pairs": 40,
+    "originalProposalInputs": 12,
+    "exactApiInverses": 3,
+    "native": "Not performed; design only",
+    "scientific": "No historical replay; direct complementary expressions only"
+  },
+  "findings": [],
+  "contextDispositions": [
+    {
+      "location": "assessment-and-continuity.md:50",
+      "decision": "Frozen KMeans pending context superseded by current normal revision6 complete receipt; actual geometry heading/old alias inspected."
+    },
+    {
+      "location": "assessment-and-continuity.md:51",
+      "decision": "GMM whole private reviewed/accepted, normal integration pending. No private implementation presented as current published dependency."
+    },
+    {
+      "location": "mds-api-proposed-design.md:115",
+      "decision": "Content wording should use amendment explicit squared-length-residual formula; no change to mathematically exact effective contract required."
+    }
+  ],
+  "notAccepted": [
+    "Any existing content-authoring manuscript/program",
+    "Content completion",
+    "Runtime implementation",
+    "Browser/paint/observed learner",
+    "Scientific reproduction",
+    "Central phase/publication promotion"
+  ],
+  "next": "Root decides whole corrected-design release with current prerequisite dispositions. Full content must fulfill the entire accepted scope and receive DIFFERENT whole content review before runtime.",
+  "ownership": "Only independent-whole-design-review/ added; all historical/foreign/shared/canonical/public/central files preserved."
+}

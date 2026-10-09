@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "new_answer_14": {
+    "p": [
+      "1/2",
+      "7/20",
+      "3/20"
+    ],
+    "q": [
+      "1/5",
+      "1/5",
+      "3/5"
+    ],
+    "first_accepted": [
+      "1/5",
+      "1/5",
+      "3/20"
+    ],
+    "first_rejection": "9/20",
+    "active_residual": [
+      "2/3",
+      "1/3",
+      "0"
+    ],
+    "second_accepted": [
+      "1/5",
+      "1/5",
+      "0"
+    ],
+    "second_rejection": "3/5",
+    "final_repair": [
+      "7/9",
+      "2/9",
+      "0"
+    ],
+    "final": [
+      "1/2",
+      "7/20",
+      "3/20"
+    ],
+    "reason": "The second proposal tests the updated residual; a further rejection normalizes the remaining deficit again."
+  },
+  "executed_source_sha256": "553c95ef431e9df2a14a287f94efa8a390e6b196aa39ce76d096dfc180fc7ce8",
+  "current_source_sha256": "34aa034e27ced517235902b47c0b95d0fec0b558ec650e87dd381db5d93daffa",
+  "scope": "Only new changed-input function evaluated with Fraction; no answers() replay or neural imports. Task16 source/prose diagnosis changed. All other scientific program hashes unchanged.",
+  "old_archive_sha256": "67a29bf0e0ec13d40f9ec60af1d3162e04c26e0c84514807465663c65f2a182e",
+  "old_projection_sha256": "210d341112b9d8649cd5347166d42b77d901c00556c798986ba537cf08d2acfb"
+}

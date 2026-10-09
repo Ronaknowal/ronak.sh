@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id = 'boltzmann-machines-restricted-boltzmann-machines-rbm';
+if (fs.readFileSync(`src/learn/data/topics/${id}.jsx`, 'utf8').includes('Reading-flow revision')) {
+  throw new Error('Historical RBM generator: current reading-flow source is maintained directly. Do not overwrite it from the older manuscript.');
+}
 const draft = `docs/teaching/drafts/${id}`,
   destination = `public/learn-code/${id}`;
 fs.mkdirSync(destination, {

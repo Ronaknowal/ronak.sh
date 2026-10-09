@@ -1,0 +1,121 @@
+{
+  "kind": "constructed causal mask and reduction checks",
+  "checks": [
+    "all genuine response targets including EOS",
+    "explicit first-response predictor",
+    "single and batched sums agree",
+    "added padding leaves genuine EOS scores intact when PAD equals EOS",
+    "unselected predictor coordinates have zero direct loss derivative",
+    "invalid or missing target rejected",
+    "invalid or missing target rejected",
+    "invalid or missing target rejected",
+    "merged boundary rejected",
+    "mean-pair and mean-target coordinate gradients",
+    "row reordering changes only output order",
+    "prompt embeddings receive response-loss gradients",
+    "first target predictor cannot see future tokens"
+  ],
+  "batch": {
+    "input_ids": [
+      [
+        1,
+        3,
+        5,
+        7,
+        2
+      ],
+      [
+        1,
+        8,
+        9,
+        2,
+        2
+      ]
+    ],
+    "attention_mask": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      [
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    ],
+    "completion_mask": [
+      [
+        false,
+        false,
+        false,
+        true,
+        true
+      ],
+      [
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    ]
+  },
+  "token_logps": [
+    [
+      -2.4627770451915927,
+      -2.7317983485574744,
+      -2.6734417493178815,
+      -1.4922601078181514
+    ],
+    [
+      -3.6303094723560663,
+      -2.2283204616210033,
+      -4.971582768621047,
+      -3.086324037772952
+    ]
+  ],
+  "response_sums": [
+    -4.165701857136033,
+    -10.830212702598118
+  ],
+  "valid": [
+    [
+      false,
+      false,
+      true,
+      true
+    ],
+    [
+      true,
+      true,
+      true,
+      false
+    ]
+  ],
+  "pair_margins": [
+    0.0,
+    1.0
+  ],
+  "pair_losses": [
+    0.9130152523999526,
+    0.18390074088833883
+  ],
+  "loss": 0.5484579966441457,
+  "shared_context": {
+    "embedding_parameter": "token.weight",
+    "prompt_embedding_gradient_norms": {
+      "1": 0.03568838805453902,
+      "3": 0.04198919796051502,
+      "5": 0.3781753119813097
+    },
+    "first_target_nll": 2.9612500832190105,
+    "first_target": 7,
+    "predictor_position": 2,
+    "target_position": 3
+  }
+}

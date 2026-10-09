@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+const owner='docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation';
+const id='feature-scaling-encoding-imputation';
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const ledgerPath='docs/teaching/lesson-delivery-progress.json';
+const registryPath='docs/teaching/deep-research-registry.json';
+const ledger=JSON.parse(fs.readFileSync(ledgerPath));
+const registry=JSON.parse(fs.readFileSync(registryPath));
+const row=ledger.topics[id];
+const registryRow=Array.isArray(registry.topics)?registry.topics.find(x=>x.id===id):registry.topics[id];
+const own=[`src/learn/data/topics/${id}.jsx`,`src/learn/data/curriculum/blueprints/${id}.js`,...['models','data','examples'].map(x=>`src/learn/data/scaling-${x}.js`),...['ScalingLabs.jsx','ScalingFigures.jsx','ScalingShared.jsx','scaling-labs.css'].map(x=>`src/learn/components/lesson-labs/${x}`),'public/learn-assets/feature-scaling/penguins.csv'];
+for(const dir of [`docs/teaching/drafts/${id}`,`docs/teaching/concept-intuition/${id}`])for(const name of fs.readdirSync(dir))if(fs.statSync(`${dir}/${name}`).isFile())own.push(`${dir}/${name}`);
+for(const p of ['docs/teaching/evidence/scaling-models.json','docs/teaching/evidence/scaling-native.json','docs/teaching/evidence/scaling-data.json','docs/teaching/evidence/scaling-browser.json','scripts/verify-scaling-models.mjs','scripts/verify-scaling-examples.py','scripts/verify-scaling-data.py','scripts/verify-scaling-browser.cjs'])if(fs.existsSync(p))own.push(p);
+const files=[...new Set(own)];
+fs.mkdirSync(`${owner}/original`,{recursive:true});
+const manifest=[];
+for(const p of files){const b=fs.readFileSync(p);const copy=`${owner}/original/${p}`;if(fs.existsSync(copy))throw Error(`Refuse overwrite ${copy}`);fs.mkdirSync(path.dirname(copy),{recursive:true});fs.writeFileSync(copy,b);manifest.push({path:p,copy,bytes:b.length,sha256:sha(b),copySha256:sha(fs.readFileSync(copy))});}
+const state={topicId:id,scope:'Selected current row and original topic-local files only; no phase mutation, execution, or scientific recertification.',ledger:{path:ledgerPath,sourceSha256:sha(fs.readFileSync(ledgerPath)),row,rowSha256:sha(Buffer.from(JSON.stringify(row)))},registry:{path:registryPath,sourceSha256:sha(fs.readFileSync(registryPath)),row:registryRow??null,rowSha256:sha(Buffer.from(JSON.stringify(registryRow??null)))},files:manifest};
+const target=`${owner}/source-conservation.json`;if(fs.existsSync(target))throw Error('Refuse overwrite conservation');fs.writeFileSync(target,JSON.stringify(state,null,2)+'\n');
+console.log(JSON.stringify({path:target,sha256:sha(fs.readFileSync(target)),files:files.length,pairsEqual:manifest.every(x=>x.sha256===x.copySha256),revision:row.revision,registry:registryRow??null},null,2));

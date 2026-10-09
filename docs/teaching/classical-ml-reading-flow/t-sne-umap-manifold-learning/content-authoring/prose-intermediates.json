@@ -1,0 +1,269 @@
+{
+  "status": "PASS_NEW_COMPLEMENTARY_PROSE_INTERMEDIATES",
+  "at": "2026-10-09T07:37:45.321Z",
+  "runtime": "v22.18.0",
+  "scriptSha256": "6b4e24566ec30a881bdd65276b02402de782f34676ef650b56e487f6826bde18",
+  "PSource": {
+    "path": "outputs/gaussian_rows.txt",
+    "sha256": "86f66f5dd88b8f6d66a5bc875464b5359f3d85aed14d0f8e1f58196430f60482",
+    "role": "already executed new row stream read only; solver not rerun"
+  },
+  "checks": [
+    {
+      "name": "D17 A negative gradient rounded value",
+      "pass": true,
+      "detail": 0.077784610824848
+    },
+    {
+      "name": "D17 A half-rate displacement rounded value",
+      "pass": true,
+      "detail": 0.038892305412424
+    },
+    {
+      "name": "D18 explicit oversized rate100 increases fixed-P cost",
+      "pass": true,
+      "detail": {
+        "initial": 0.053522402879106805,
+        "rate100": 1.3603839661390298
+      }
+    },
+    {
+      "name": "D24 r2 CE matches prose",
+      "pass": true,
+      "detail": {
+        "r": 2,
+        "nu": 0.2,
+        "attractive": 1.0058986952713127,
+        "repulsive": 0.08367883174282867,
+        "total": 1.0895775270141415
+      }
+    },
+    {
+      "name": "practice2 unmerged entropy",
+      "pass": true,
+      "detail": {
+        "entropy": 1.75,
+        "perplexity": 3.3635856610148585
+      }
+    },
+    {
+      "name": "practice2 merged entropy",
+      "pass": true,
+      "detail": {
+        "entropy": 1.5,
+        "perplexity": 2.82842712474619
+      }
+    },
+    {
+      "name": "practice5 changed map affine calculation",
+      "pass": true,
+      "detail": 4
+    },
+    {
+      "name": "practice14 changed extrapolated map",
+      "pass": true,
+      "detail": {
+        "actual": 9.999999999999998,
+        "exact": 10,
+        "tolerance": 1e-12
+      }
+    },
+    {
+      "name": "D32 decimal dense memory",
+      "pass": true,
+      "detail": [
+        800000000,
+        80000000000,
+        2000000000000
+      ]
+    }
+  ],
+  "D17": {
+    "Z": 4,
+    "rows": [
+      [
+        {
+          "from": 0,
+          "to": 1,
+          "P": 0.1575006262450747,
+          "Q": 0.125,
+          "kernel": 0.5,
+          "delta": -1,
+          "negativeGradient": 0.06500125249014937
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "P": 0.069448540287264,
+          "Q": 0.05,
+          "kernel": 0.2,
+          "delta": -2,
+          "negativeGradient": 0.031117664459622385
+        },
+        {
+          "from": 0,
+          "to": 3,
+          "P": 0.00972141156256353,
+          "Q": 0.025,
+          "kernel": 0.1,
+          "delta": -3,
+          "negativeGradient": -0.018334306124923767
+        }
+      ],
+      [
+        {
+          "from": 1,
+          "to": 0,
+          "P": 0.1575006262450747,
+          "Q": 0.125,
+          "kernel": 0.5,
+          "delta": 1,
+          "negativeGradient": -0.06500125249014937
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "P": 0.14093728475176479,
+          "Q": 0.125,
+          "kernel": 0.5,
+          "delta": -1,
+          "negativeGradient": 0.03187456950352957
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "P": 0.022197396217366924,
+          "Q": 0.05,
+          "kernel": 0.2,
+          "delta": -2,
+          "negativeGradient": -0.04448416605221293
+        }
+      ],
+      [
+        {
+          "from": 2,
+          "to": 0,
+          "P": 0.069448540287264,
+          "Q": 0.05,
+          "kernel": 0.2,
+          "delta": 2,
+          "negativeGradient": -0.031117664459622385
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "P": 0.14093728475176479,
+          "Q": 0.125,
+          "kernel": 0.5,
+          "delta": 1,
+          "negativeGradient": -0.03187456950352957
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "P": 0.10019474093596607,
+          "Q": 0.125,
+          "kernel": 0.5,
+          "delta": -1,
+          "negativeGradient": -0.049610518128067854
+        }
+      ],
+      [
+        {
+          "from": 3,
+          "to": 0,
+          "P": 0.00972141156256353,
+          "Q": 0.025,
+          "kernel": 0.1,
+          "delta": 3,
+          "negativeGradient": 0.018334306124923767
+        },
+        {
+          "from": 3,
+          "to": 1,
+          "P": 0.022197396217366924,
+          "Q": 0.05,
+          "kernel": 0.2,
+          "delta": 2,
+          "negativeGradient": 0.04448416605221293
+        },
+        {
+          "from": 3,
+          "to": 2,
+          "P": 0.10019474093596607,
+          "Q": 0.125,
+          "kernel": 0.5,
+          "delta": 1,
+          "negativeGradient": 0.049610518128067854
+        }
+      ]
+    ],
+    "force": [
+      0.077784610824848,
+      -0.07761084903883272,
+      -0.11260275209121981,
+      0.11242899030520455
+    ],
+    "halfStep": [
+      -1.461107694587576,
+      -0.5388054245194163,
+      0.44369862395439014,
+      1.5562144951526022
+    ],
+    "initialKL": 0.053522402879106805
+  },
+  "D18": {
+    "rate": 100,
+    "coordinates": [
+      6.2784610824847995,
+      -8.261084903883273,
+      -10.76027520912198,
+      12.742899030520455
+    ],
+    "KL": 1.3603839661390298
+  },
+  "D24": [
+    {
+      "r": 1,
+      "nu": 0.5,
+      "attractive": 0.4332169878499658,
+      "repulsive": 0.25993019270997947,
+      "total": 0.6931471805599453
+    },
+    {
+      "r": 2,
+      "nu": 0.2,
+      "attractive": 1.0058986952713127,
+      "repulsive": 0.08367883174282867,
+      "total": 1.0895775270141415
+    }
+  ],
+  "D34": {
+    "squaredDistances": [
+      [
+        0,
+        4,
+        25
+      ],
+      [
+        4,
+        0,
+        9
+      ],
+      [
+        25,
+        9,
+        0
+      ]
+    ],
+    "rowMeans": [
+      9.666666666666666,
+      4.333333333333333,
+      11.333333333333334
+    ],
+    "grandMean": 8.444444444444445,
+    "BAB": 0.7777777777777777
+  },
+  "scope": "Direct finite arithmetic only. No original/programme main or prior 41-check replay, no estimator calls or new scientific data.",
+  "scientificReplay": false
+}

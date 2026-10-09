@@ -1,0 +1,358 @@
+{
+  "source": "Fisher (1936), UCI Iris",
+  "doi": "https://doi.org/10.24432/C56C76",
+  "license": "CC BY 4.0",
+  "sourceSha256": "6f608b71a7317216319b4d27b4d9bc84e6abd734eda7872b71a458569e2656c0",
+  "rows": [
+    {
+      "sourceRow": 1,
+      "withinSpeciesRow": 1,
+      "sepalLengthCm": 5.1,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 2,
+      "withinSpeciesRow": 2,
+      "sepalLengthCm": 4.9,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 3,
+      "withinSpeciesRow": 3,
+      "sepalLengthCm": 4.7,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 4,
+      "withinSpeciesRow": 4,
+      "sepalLengthCm": 4.6,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 5,
+      "withinSpeciesRow": 5,
+      "sepalLengthCm": 5.0,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 6,
+      "withinSpeciesRow": 6,
+      "sepalLengthCm": 5.4,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 7,
+      "withinSpeciesRow": 7,
+      "sepalLengthCm": 4.6,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 8,
+      "withinSpeciesRow": 8,
+      "sepalLengthCm": 5.0,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 9,
+      "withinSpeciesRow": 9,
+      "sepalLengthCm": 4.4,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 10,
+      "withinSpeciesRow": 10,
+      "sepalLengthCm": 4.9,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 11,
+      "withinSpeciesRow": 11,
+      "sepalLengthCm": 5.4,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 12,
+      "withinSpeciesRow": 12,
+      "sepalLengthCm": 4.8,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 13,
+      "withinSpeciesRow": 13,
+      "sepalLengthCm": 4.8,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 14,
+      "withinSpeciesRow": 14,
+      "sepalLengthCm": 4.3,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 15,
+      "withinSpeciesRow": 15,
+      "sepalLengthCm": 5.8,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 16,
+      "withinSpeciesRow": 16,
+      "sepalLengthCm": 5.7,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 17,
+      "withinSpeciesRow": 17,
+      "sepalLengthCm": 5.4,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 18,
+      "withinSpeciesRow": 18,
+      "sepalLengthCm": 5.1,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 19,
+      "withinSpeciesRow": 19,
+      "sepalLengthCm": 5.7,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 20,
+      "withinSpeciesRow": 20,
+      "sepalLengthCm": 5.1,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 21,
+      "withinSpeciesRow": 21,
+      "sepalLengthCm": 5.4,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 22,
+      "withinSpeciesRow": 22,
+      "sepalLengthCm": 5.1,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 23,
+      "withinSpeciesRow": 23,
+      "sepalLengthCm": 4.6,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 24,
+      "withinSpeciesRow": 24,
+      "sepalLengthCm": 5.1,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 25,
+      "withinSpeciesRow": 25,
+      "sepalLengthCm": 4.8,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 26,
+      "withinSpeciesRow": 26,
+      "sepalLengthCm": 5.0,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 27,
+      "withinSpeciesRow": 27,
+      "sepalLengthCm": 5.0,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 28,
+      "withinSpeciesRow": 28,
+      "sepalLengthCm": 5.2,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 29,
+      "withinSpeciesRow": 29,
+      "sepalLengthCm": 5.2,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 30,
+      "withinSpeciesRow": 30,
+      "sepalLengthCm": 4.7,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 31,
+      "withinSpeciesRow": 31,
+      "sepalLengthCm": 4.8,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 32,
+      "withinSpeciesRow": 32,
+      "sepalLengthCm": 5.4,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 33,
+      "withinSpeciesRow": 33,
+      "sepalLengthCm": 5.2,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 34,
+      "withinSpeciesRow": 34,
+      "sepalLengthCm": 5.5,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 35,
+      "withinSpeciesRow": 35,
+      "sepalLengthCm": 4.9,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 36,
+      "withinSpeciesRow": 36,
+      "sepalLengthCm": 5.0,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 37,
+      "withinSpeciesRow": 37,
+      "sepalLengthCm": 5.5,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 38,
+      "withinSpeciesRow": 38,
+      "sepalLengthCm": 4.9,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 39,
+      "withinSpeciesRow": 39,
+      "sepalLengthCm": 4.4,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 40,
+      "withinSpeciesRow": 40,
+      "sepalLengthCm": 5.1,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 41,
+      "withinSpeciesRow": 41,
+      "sepalLengthCm": 5.0,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 42,
+      "withinSpeciesRow": 42,
+      "sepalLengthCm": 4.5,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 43,
+      "withinSpeciesRow": 43,
+      "sepalLengthCm": 4.4,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 44,
+      "withinSpeciesRow": 44,
+      "sepalLengthCm": 5.0,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 45,
+      "withinSpeciesRow": 45,
+      "sepalLengthCm": 5.1,
+      "species": "Iris-setosa",
+      "heldOut": true
+    },
+    {
+      "sourceRow": 46,
+      "withinSpeciesRow": 46,
+      "sepalLengthCm": 4.8,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 47,
+      "withinSpeciesRow": 47,
+      "sepalLengthCm": 5.1,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 48,
+      "withinSpeciesRow": 48,
+      "sepalLengthCm": 4.6,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 49,
+      "withinSpeciesRow": 49,
+      "sepalLengthCm": 5.3,
+      "species": "Iris-setosa",
+      "heldOut": false
+    },
+    {
+      "sourceRow": 50,
+      "withinSpeciesRow": 50,
+      "sepalLengthCm": 5.0,
+      "species": "Iris-setosa",
+      "heldOut": true
+    }
+  ]
+}

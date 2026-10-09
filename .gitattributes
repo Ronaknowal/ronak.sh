@@ -1,0 +1,7 @@
+# These distributed teaching datasets publish exact-byte provenance hashes.
+# Keep those hashes reproducible on both Windows and Unix checkouts.
+/public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-train.txt text eol=lf
+/public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-heldout.txt text eol=lf
+/public/learn-code/vocabulary-design-multilingual-tokenization/flores_tokenizer_sample.json text eol=lf
+# User-requested original lesson snapshots retain their exact captured bytes.
+/docs/teaching/tokenization/original/*.jsx -text

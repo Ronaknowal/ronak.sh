@@ -1,0 +1,10 @@
+{
+  "package": "trl",
+  "version": "1.14.2",
+  "documentation": "https://huggingface.co/docs/trl/cpo_trainer",
+  "sources": {
+    "cpo_trainer.py": "406dbad2507eb614368f88a59aa89a1ff5d85f5d90c2744bbc7144d35e7bf73b",
+    "cpo_config.py": "d408fde1ebfff36c5be3c6240ace3197f7796cc2cc4fc3c5dcd6fa3ff0541660"
+  },
+  "convention": "Current experimental CPOTrainer; mean log-probabilities for SimPO; absolute simpo_gamma; chosen token-mean NLL separately weighted by cpo_alpha"
+}

@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-28",
+  "kind": "author-only",
+  "topicId": "training-acceleration",
+  "environment": {
+    "datasets": "5.0.1",
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "huggingface_hub": "1.33.0",
+    "peft": "0.21.0",
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "accelerate": "1.15.0",
+    "cuda": false
+  },
+  "modelCheck": {
+    "passed": true,
+    "assertions": 68,
+    "command": "node scripts/verify-training-acceleration.mjs"
+  },
+  "nativeResults": "See README.md for exact recorded executions and numerical outputs",
+  "browser": "Author inspected parent-supplied desktop,320px and changed-state screenshots; presentation findings closed against targeted final-corrections recaptures where needed. Executed interaction/theme/code-control results belong to parent integration receipt.",
+  "independentReview": "Complete: separate independent-review.md by frameworks_annotation_modalities; no open source blocker",
+  "files": {
+    "src/learn/data/topics/training-acceleration.jsx": "bcd3379310cd8d65cf59943a1ddb45b9d1176b0480b14e27313fd92a80851521",
+    "src/learn/data/training-acceleration-models.js": "486f90cf0aa574108ef7feaf7cfb37350c90d0e98f4c21fdc247a415387e8731",
+    "src/learn/components/lesson-labs/TrainingAccelerationLabs.jsx": "7d6c49e666cd03987010b7339b20c33b1764b3d62eeb9da5e53f2484580e2f1c",
+    "src/learn/data/curriculum/blueprints/training-acceleration.js": "fe846a5abc5769f095e5f20aad4d7f9a39a2b681e4604b1f7e51f39f3d5a9008",
+    "scripts/verify-training-acceleration.mjs": "cc180d07d89fea80cbc34c36ff5d9d4825e7ccc5431864117f99531364306c89",
+    "public/learn-code/training-acceleration/accumulation_bridge.py": "63a2ac2a39aedd70411243499ed2fa7c4d4db25375be721fa422e5d30285468f",
+    "public/learn-code/training-acceleration/checkpoint_bridge.py": "7e2734735c9eb58ecd6485affc4a1ca298bd779a0a1ce3d99f5840f4636a5cae"
+  },
+  "themeCorrection": "Parent browser review found neutral wrapper lacked stylesheet import; each owned lab now imports neural-lesson-neutral.css after base lab styles. No numerical code change.",
+  "visualCorrection": "Actual screenshot review: increase group-card flex basis to reflow prose at320px; add labeled memory-segment legend. Numerical model unchanged.",
+  "remaining": "Parent final ledger and source-bound integration evidence bookkeeping only"
+}

@@ -1,0 +1,64 @@
+/* Computation circuits: circles are values, rounded rectangles are operations
+   (docs/teaching/deep-learning-beginner/visual-vocabulary.md). */
+.backprop-svg.bpc-diagram { display: block; width: 100%; max-width: 25rem; margin: .75rem auto; overflow: visible; }
+.backprop-svg.bpc-diagram text { font: 17px var(--font-mono, monospace); fill: var(--bp-paper); text-anchor: middle; }
+.bpc-diagram .bpc-node circle { fill: #151515; stroke-width: 2.2; }
+.bpc-diagram .bpc-supplied circle { stroke: var(--bpb-value); }
+.bpc-diagram .bpc-parameter circle { stroke: var(--bpb-param); }
+.bpc-diagram .bpc-computed circle { stroke: var(--bpb-computed); }
+.backprop-svg.bpc-diagram .bpc-supplied text { fill: var(--bpb-value); }
+.backprop-svg.bpc-diagram .bpc-parameter text { fill: var(--bpb-param); }
+.backprop-svg.bpc-diagram .bpc-computed text { fill: var(--bpb-computed); }
+.backprop-svg.bpc-diagram .bpc-value-text { font-size: 20px; font-weight: 600; }
+.backprop-svg.bpc-diagram .bpc-name { font-size: 15px; }
+/* Operations: white outline, operation written inside. */
+.bpc-diagram .bpc-operation rect { fill: #151515; stroke: var(--bp-paper); stroke-width: 1.8; }
+.backprop-svg.bpc-diagram .bpc-symbol { font-size: 28px; }
+.backprop-svg.bpc-diagram .bpc-operation-name { font-size: 15px; fill: var(--bp-muted); text-anchor: start; }
+.backprop-svg.bpc-diagram .bpc-readout { fill: var(--bpb-computed); text-anchor: start; }
+/* Forward wires grey; backward sensitivities orange and dashed. */
+.bpc-diagram .bpc-wire { fill: none; stroke: #9b958b; stroke-width: 2; }
+.bpc-diagram .bpc-forward-head { fill: #9b958b; }
+.bpc-diagram .bpc-reverse { fill: none; stroke: var(--bpb-sens); stroke-width: 2.4; stroke-dasharray: 6 4; }
+.bpc-diagram .bpc-back-head { fill: var(--bpb-sens); }
+.backprop-svg.bpc-diagram :is(.bpc-sens, .bpc-sens-readout, .bpc-contribution, .bpc-incoming) { fill: var(--bpb-sens); }
+.backprop-svg.bpc-diagram :is(.bpc-sens, .bpc-sens-readout) { font-size: 15px; font-weight: 700; }
+.backprop-svg.bpc-diagram .bpc-sens-readout { text-anchor: start; }
+.backprop-svg.bpc-diagram .bpc-seed { text-anchor: middle; }
+.backprop-svg.bpc-diagram .bpc-contribution { text-anchor: start; font-size: 16px; }
+.bpc-diagram .bpc-boundary { stroke: #6f6a62; stroke-dasharray: 4 6; }
+.backprop-svg.bpc-diagram .bpc-boundary-label { font-size: 14px; fill: var(--bp-muted); text-anchor: end; }
+.bpc-reading-key { font-size: .92rem; line-height: 1.7; color: var(--bp-muted); }
+.bpc-key-value { color: var(--bpb-value); font-weight: 600; }
+.bpc-key-param { color: var(--bpb-param); font-weight: 600; }
+.bpc-key-computed { color: var(--bpb-computed); font-weight: 600; }
+.bpc-key-sens { color: var(--bpb-sens); font-weight: 600; }
+/* Local-rule list: HTML text so it follows the reader's font size; no card frames. */
+.bpc-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr)); gap: 1rem 1.5rem; margin: .6rem 0; }
+.bpc-rule { min-width: 0; }
+.bpc-rule-name { margin: 0 0 .35rem; font-size: .95rem; line-height: 1.5; }
+.bpc-rule-name code { color: var(--bpb-computed); font-size: .85em; white-space: nowrap; }
+.bpc-rule dl { margin: 0; display: grid; gap: .15rem; font-size: .88rem; font-variant-numeric: tabular-nums; }
+.bpc-rule dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .1rem .6rem; border-bottom: 1px solid var(--bp-line); padding-bottom: .15rem; }
+.bpc-rule dt { color: var(--bp-muted); }
+.bpc-rule dd { margin: 0; }
+.bpc-rule-note { margin: .4rem 0 0; font-size: .85rem; line-height: 1.55; color: var(--bp-muted); }
+/* Shared-reuse graph (§2), read left to right. */
+.backprop-svg.bpc-diagram.bps-diagram { max-width: 34rem; }
+.backprop-svg.bps-diagram .bps-value-text { font-size: 17px; font-weight: 600; }
+.backprop-svg.bps-diagram .bps-op-text { font-size: 18px; }
+.backprop-svg.bps-diagram .bps-name { fill: var(--bp-muted); font-size: 14px; }
+.backprop-svg.bps-diagram .bps-sens { fill: var(--bpb-sens); font-size: 15px; font-weight: 700; }
+.backprop-svg.bps-diagram .bps-start { text-anchor: start; }
+.backprop-svg.bps-diagram .bps-slot { text-anchor: middle; }
+@media (max-width: 700px) {
+  .backprop-svg.bps-diagram .bps-name { font-size: 17px; }
+  .backprop-svg.bps-diagram .bps-sens { font-size: 18px; }
+  .backprop-svg.bps-diagram :is(.bps-value-text, .bps-op-text) { font-size: 20px; }
+}
+.backprop-svg.bps-diagram .bps-end { text-anchor: end; }
+@media (max-width: 700px) {
+  .backprop-svg.bps-diagram .bps-slot tspan { font-size: 14px; }
+}
+/* A value's backward sensitivity stays orange even inside a cyan or amber value node. */
+.backprop-svg.bpc-diagram .bpc-node .bpc-sens { fill: var(--bpb-sens); }

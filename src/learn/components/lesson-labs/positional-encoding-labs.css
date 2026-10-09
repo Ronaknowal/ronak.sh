@@ -28,3 +28,29 @@
 .position-mechanism-scroll svg { display: block; }
 .position-figure > .position-three { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
 .position-vector .neural-number-control--numeric { grid-template-columns: minmax(0, 1fr); }
+
+/* Reading-flow drawings remain unframed. Only actual numeric cells have borders. */
+.lesson-flow .position-flow-drawing { margin: 1.5rem 0; padding: 0; border: 0; background: none; }
+.lesson-flow .position-drawing-scroll { max-width: 100%; overflow-x: auto; }
+.lesson-flow .position-flow-drawing svg { display: block; width: 100%; min-width: 760px; height: auto; font-family: ui-monospace, monospace; }
+.lesson-flow .position-flow-array { margin: 1.2rem 0; min-width: 0; }
+.lesson-flow .position-flow-array > span { color: var(--position-role); display: block; margin-bottom: .5rem; line-height: 1.6; }
+.lesson-flow .position-array-scroll { max-width: 100%; overflow-x: auto; }
+.lesson-flow .position-flow-array table { border-collapse: collapse; font: inherit; }
+.lesson-flow .position-flow-array th { padding: .5rem .7rem; color: var(--position-role); font-weight: 500; text-align: left; white-space: nowrap; }
+.lesson-flow .position-flow-array td { border: 1px solid var(--position-role); padding: .5rem .7rem; min-width: 7ch; text-align: right; white-space: nowrap; }
+.lesson-flow .position-flow-array td[data-sign="1"] { background: #e4b75218; }
+.lesson-flow .position-flow-array td[data-sign="-1"] { background: #77cddb18; }
+.lesson-flow .position-flow-select { display: grid; gap: .5rem; min-width: min(100%, 12rem); flex: 1; }
+.lesson-flow .position-flow-select select { background: #101010; color: #e8e6df; border: 1px solid #e4b752; padding: .55rem .7rem; border-radius: 0; font: inherit; max-width: 100%; }
+.lesson-flow .position-flow-select select:focus-visible { outline: 2px solid #e4b752; outline-offset: 3px; }
+.lesson-flow .position-drawing-scroll:focus-visible, .lesson-flow .position-array-scroll:focus-visible { outline: 2px solid #e4b752; outline-offset: 3px; }
+.positional-encoding-lesson.lesson-flow { container-type: inline-size; container-name: position-lesson; }
+.positional-encoding-lesson.lesson-flow .katex-display { max-width: 100%; overflow-x: auto; text-align: left; }
+.positional-encoding-lesson.lesson-flow .katex-display > .katex { display: inline-block; min-width: max-content; }
+.lesson-flow .position-scroll-hint { display: block; color: #aaa69c; font-size: .8em; line-height: 1.6; margin-top: .45rem; }
+.lesson-flow .position-mobile-scene { display: none; }
+@container position-lesson (max-width: 700px) {
+  .lesson-flow .position-mobile-scene { display: block; }
+  .lesson-flow .position-desktop-scene { display: none; }
+}

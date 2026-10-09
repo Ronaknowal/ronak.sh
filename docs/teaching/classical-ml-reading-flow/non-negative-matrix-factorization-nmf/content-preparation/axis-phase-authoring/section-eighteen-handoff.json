@@ -1,0 +1,167 @@
+{
+  "status": "SECTION18_D64_D66_COMPLETE_FINITE_ANATOMY_NOT_WHOLE_TOPIC_READY",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T12:15:46.437Z",
+  "acceptedAnchor": "18-keep-extra-axes-and-recognize-what-is-missing",
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen-template.md",
+      "bytes": 12223,
+      "sha256": "37c538281fc3844a1c9b10f7c356e038c7014b5b0e08c065460524dce123e28d"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen.md",
+      "bytes": 16697,
+      "sha256": "d894dcb2cf95e314d86448d4a6657eb9650beec44dbee54ba3a244a72880006d"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\visual-specifications.md",
+      "bytes": 2439,
+      "sha256": "3cd3b7290b63e04cbbafece93e63c537b1045d955ac87d2a8baafde2fa5cdcd0"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\assemble-section.mjs",
+      "bytes": 4514,
+      "sha256": "48ddb8b5607b21b0cd048ad6426af355234d4376e0eec674aa0921b0f74c96d5"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.py",
+      "bytes": 2229,
+      "sha256": "d3a454899bb6bc3946bf243f00264d571b488b21e7dadd174bad520cc10eb3b5"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\check-anatomy.py",
+      "bytes": 3191,
+      "sha256": "11782523d74c7956f36d7093939882c55fe5537c00c4c753bfada47542a0fed4"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\axis-checks.json",
+      "bytes": 3638,
+      "sha256": "7731391b8fe247d58e5ef93685a486af307e8c37ada881978097c24cda0e7d46"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stdout.txt",
+      "bytes": 2292,
+      "sha256": "4ef80b4a363b2507bcb7f9fc5e331b44ce31645c164a2c412389622d9191cefc"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "sourceSlots": [
+    {
+      "marker": "<!-- source:nmf_axis_phase.py -->",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.py",
+      "language": "python",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.py",
+        "bytes": 2229,
+        "sha256": "d3a454899bb6bc3946bf243f00264d571b488b21e7dadd174bad520cc10eb3b5"
+      }
+    },
+    {
+      "marker": "<!-- output:nmf_axis_phase.stdout.txt -->",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stdout.txt",
+      "language": "json",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stdout.txt",
+        "bytes": 2292,
+        "sha256": "4ef80b4a363b2507bcb7f9fc5e331b44ce31645c164a2c412389622d9191cefc"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "all29 independent anatomy conditions",
+      "passed": true
+    },
+    {
+      "name": "executedsourceconserved",
+      "passed": true
+    },
+    {
+      "name": "streamconserved stdout",
+      "passed": true
+    },
+    {
+      "name": "streamconserved stderr",
+      "passed": true
+    },
+    {
+      "name": "one accepted section18",
+      "passed": true
+    },
+    {
+      "name": "D64 beforewalkthrough",
+      "passed": true
+    },
+    {
+      "name": "D65 beforewalkthrough",
+      "passed": true
+    },
+    {
+      "name": "D66 beforewalkthrough",
+      "passed": true
+    },
+    {
+      "name": "flattening not mistaken as data deletion",
+      "passed": true
+    },
+    {
+      "name": "different core honestly differentexample",
+      "passed": true
+    },
+    {
+      "name": "generaloptimizer external complete scope",
+      "passed": true
+    },
+    {
+      "name": "matrix/tensor rank not confused",
+      "passed": true
+    },
+    {
+      "name": "imaginaryunit not observationindex",
+      "passed": true
+    },
+    {
+      "name": "audio phase/stableversion boundary",
+      "passed": true
+    },
+    {
+      "name": "sparse absence not missingzero",
+      "passed": true
+    },
+    {
+      "name": "one slot <!-- source:nmf_axis_phase.py -->",
+      "passed": true
+    },
+    {
+      "name": "full literal <!-- source:nmf_axis_phase.py -->",
+      "passed": true
+    },
+    {
+      "name": "one slot <!-- output:nmf_axis_phase.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "full literal <!-- output:nmf_axis_phase.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "slotsresolved",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "focusedConditions": 29,
+    "newMain": 1,
+    "newFits": 0,
+    "fullStreamsRead": true,
+    "oldCampaignReplay": false
+  },
+  "reading": "Entire current finite program/checker/prose/spec/full2292B stdout and empty stderr read. Kolda–Bader46-page survey only targeted §2.4/§3.1/§4 definition paragraphs and formulas read; no general optimizer/full survey claim. Full short TensorLy CP/Tucker API contracts read. Current librosa STFT/Griffin–Lim relevant magnitude/phase/version passages targeted; old mistaken /generated URL returned404, corrected /api/generated returned currentdocs.",
+  "limits": "No general CP/Tucker fit or original algorithm read/implementation, audio experiment/quality/phase uniqueness guarantee, independentwhole/native acceptance.",
+  "continuation": "Root read/compose exact section18; section19 full24practice,completefileindex,annotatedreferences/furtherlearning remain. No shared main/canonical/public/runtime/phase changes."
+}

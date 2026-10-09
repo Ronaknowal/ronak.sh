@@ -1,1494 +1,1379 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
-
-const dataCurationPipelines = {
-  title: "Data Curation Pipelines (Curator Models, Quality Filtering)",
-  readTime: "38 min",
+// Generated from the complete frozen manuscript by scripts/render-curation-pipelines.mjs.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import { Math as InlineMath, MathBlock as SharedMath } from '../../components/content/Math.jsx';
+import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import CurationFigure from '../../components/lesson-labs/CurationPipelineFlow.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+import '../../components/lesson-labs/curation-pipeline-flow.css';
+const MathBlock = ({ children }) => (
+  <div className="curation-equation" role="region" tabIndex={0} aria-label="Curation relationship">
+    <SharedMath>{children}</SharedMath>
+  </div>
+);
+const Program = ({ file }) => (
+  <RemoteCodeBlock source={`/learn-code/data-curation-pipelines/${file}`} filename={file} />
+);
+export default {
+  slug: 'data-curation-pipelines-curator-models-quality-filtering',
+  title: 'Data Curation Pipelines (Curator Models, Quality Filtering)',
+  readTime: '~75 min read + programs and practice',
+  hasIntegratedGuide: true,
   content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
+    <div className="lesson-flow curation-lesson">
+      <Prose opening="summary">
+        {
+          'Choose a training document for a reason you can inspect. Trace raw text into a feature, a learned score and a retention decision; build a small real curator; then test whether the selected data helps the intended training task.'
+        }
+      </Prose>
+
+      <Prose opening="route">
+        {
+          'First pass: read sections 1–9 and 12. Sections 10–11 deepen distribution matching and combined policies. Run the eight complete programs alongside their explanations. Every reported small-study value comes from the downloadable run; the deliberately tiny examples are labelled constructed. No browser control retrains the saved classifier.'
+        }
+      </Prose>
+
+      <Prose opening="prerequisites">
+        {'Before starting, revisit '}
+        <a
+          href={
+            '/learn/path/full-curriculum/data-curation-deduplication-minhash-bloom-filters?module=large-language-models#2-separate-the-source-from-the-comparison-text'
+          }
+        >
+          {'source versus comparison text'}
+        </a>
+        {', '}
+        <a
+          href={
+            '/learn/path/full-curriculum/data-curation-deduplication-minhash-bloom-filters?module=large-language-models#8-turn-verified-pairs-into-a-retention-policy'
+          }
+        >
+          {'duplicate groups and retention'}
+        </a>
+        {', and '}
+        <a
+          href={
+            '/learn/path/full-curriculum/curriculum-learning-data-mixing-strategies?module=large-language-models#1-what-does-half-the-data-mean'
+          }
+        >
+          {'what a data share measures'}
+        </a>
+        {
+          '. The needed classifier operations are introduced here. A whitespace word, a Unicode character, a UTF-8 byte and a tokenizer token are different counting units throughout this lesson.'
+        }
+      </Prose>
+
+      <Prose opening="exploration">
+        {'Program files: '}
+        <code>{'curation_signals.py'}</code>
+        {', '}
+        <code>{'reference_selection.py'}</code>
+        {', '}
+        <code>{'linear_curator.py'}</code>
+        {', '}
+        <code>{'curation_libraries.py'}</code>
+        {', '}
+        <code>{'prepare_annotations.py'}</code>
+        {', '}
+        <code>{'run_curator_study.py'}</code>
+        {', '}
+        <code>{'neural_curator.py'}</code>
+        {', '}
+        <code>{'datatrove_quality_pipeline.py'}</code>
+        {'. Download the '}
+        <a href={'/learn-code/data-curation-pipelines/curation-pipelines.zip'}>
+          {'complete program/data bundle'}
+        </a>
+        {', including the two prerequisite helpers, '}
+        <a href={'/learn-code/data-curation-pipelines/README.md'}>{'instructions'}</a>
+        {
+          ' and saved results. The shared file index gives individual complete source and Copy/Download controls. Small calculations use Python 3.12; library-specific versions and commands accompany the programs.'
+        }
+      </Prose>
+
+      <span id="1-why-it-exists" aria-hidden="true" />
+      <span id="1-start-with-the-problem" aria-hidden="true" />
+      <H2>{'1. Follow one record into a training pool'}</H2>
 
       <Prose>
-        Deduplication is the floor. It removes redundancy — the same article scraped twice,
-        boilerplate text copy-pasted across millions of pages, near-identical documents that
-        would otherwise overweight gradient updates. But a fully deduplicated Common Crawl
-        snapshot is still mostly garbage: ad pages, login walls, auto-generated spam, low-quality
-        machine translations, thin affiliate content, SEO-farm pages with the product names
-        swapped out. Getting from a deduplicated raw dump to a corpus worth training on requires
-        a second, harder thing — distinguishing documents that are informative from documents
-        that merely exist.
+        {
+          'Removing duplicates leaves a new question: is the remaining document useful for what this model must learn? Consider four constructed records. A explains a pendulum; B lists a product; C repeats navigation links; D gives a precise conjugate-gradient statement. All four can be distinct, valid UTF-8 text. That does not make their training value equal.'
+        }
+      </Prose>
+
+      <CurationFigure id="C01" />
+
+      <Prose>
+        {
+          'The tree separates an article from a navigation element, a script and formatting. Extraction reads selected source spans into a new text field; it does not rewrite the historical HTML bytes. Record A keeps its ID, source URL, retrieval information and raw digest alongside its extractor version and derived-text digest. If a changed extractor drops the explanation but preserves the menu, later filters receive a different object even though the source URL is unchanged.'
+        }
       </Prose>
 
       <Prose>
-        Quality filtering is where the ceiling of a pretraining run gets set. Every frontier
-        model's corpus is the output of a long filtering pipeline, and the quality machinery
-        sitting at the end of that pipeline arguably matters more than any single architectural
-        decision the team made. The evidence is now concrete. Phi-1 (Gunasekar et al. 2023)
-        demonstrated that a 1.3B-parameter model trained on carefully selected "textbook-quality"
-        data could match or exceed much larger models on coding benchmarks. FineWeb-Edu (Penedo
-        et al. 2024) showed that filtering for educational value using a Llama-3-70B annotator
-        produced datasets where models trained on 1.3T tokens rivaled those trained on several
-        times as many unfiltered tokens. Sachdeva et al. 2024 showed that Ask-LLM data selection
-        consistently outperforms full-data training even when rejecting 90 percent of the original
-        dataset, converging up to 70 percent faster.
+        {'For the controlled article, reuse the complete '}
+        <a href={'/learn-code/data-curation-deduplication/curation_records.py'}>
+          {'ArticleText example'}
+        </a>
+        {' and its '}
+        <a href={'/learn-code/data-curation-deduplication/extraction_library.py'}>
+          {'ordinary extraction route'}
+        </a>
+        {
+          '. The small parser intentionally handles a supplied article structure. Arbitrary web extraction needs the ordinary extractor and inspection of its outputs. A successful HTTP request or valid JSON row does not establish successful content extraction.'
+        }
       </Prose>
 
       <Prose>
-        The mechanism is gradient economics. If 80 percent of the tokens in your corpus
-        convey near-zero information — navigation menus, spam, templated boilerplate — the
-        optimizer wastes compute reinforcing noise. Every batch is diluted. A tighter corpus
-        means every gradient step lands on signal. The same compute budget buys more learning.
-        Understanding what the filtering pipeline looks like mechanically — in stages, in code,
-        in calibrated thresholds — is what this topic covers.
+        {"Download that Python helper beside this lesson's authored "}
+        <a href={'/learn-code/data-curation-pipelines/article.html'}>{'article.html'}</a>
+        {
+          ", then run the following complete use of its parser. It prints the title and two explanatory lines, excluding navigation, script and footer. The helper's original main demonstrates a different Alice excerpt; here we reuse its class on the pendulum fixture explicitly."
+        }
       </Prose>
 
-      <Callout accent="gold">
-        Dedup removes redundancy. Quality filtering removes noise. They are not the same
-        operation. The dedup topic covers MinHash, Bloom filters, and semantic clustering.
-        This topic covers everything that happens above that layer: heuristics, perplexity
-        scoring, classifier filtering, and LLM-curator loops.
-      </Callout>
-
-      <Prose>
-        The lineage of open pipelines makes this concrete. C4 (Raffel et al. 2020) introduced
-        systematic heuristic filtering — drop documents shorter than three sentences, drop
-        documents containing certain boilerplate phrases, drop documents with anomalous
-        punctuation ratios. CCNet (Wenzek et al. 2019) added perplexity filtering: train a
-        small Kneser-Ney language model on Wikipedia and score every web document against it,
-        keeping only the lowest-perplexity fraction. RefinedWeb and FineWeb (Penedo et al.
-        2024) stacked these techniques and added neural quality classifiers trained on curated
-        seeds. FineWeb-Edu took the next step: use a powerful LLM to annotate 450K documents
-        for educational value, train a BERT-class classifier on those annotations, and filter
-        the entire 15-trillion-token corpus to 1.3T tokens of genuinely educational text. The
-        whole arc — heuristics → perplexity → classifier → LLM-curator — is the pipeline this
-        topic builds from scratch.
-      </Prose>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        Quality has no single definition. Every proxy for quality encodes a set of assumptions
-        about what text should look like, and those assumptions shape the resulting corpus in
-        ways that are not always visible until the model is evaluated downstream. The core
-        insight is that no single proxy is sufficient — and that proxies should be stacked,
-        from cheapest to most expensive, so that each stage reduces the volume that subsequent
-        stages must process.
-      </Prose>
-
-      <H3>Heuristics: fast, coarse, and almost always right</H3>
-
-      <Prose>
-        A document that is three words long, consists entirely of navigation links, or contains
-        more exclamation marks than alphabetic characters is almost certainly not useful training
-        text. These facts do not require any statistical model to check — they can be evaluated
-        with a handful of arithmetic operations per document. Heuristic filters encode implicit
-        assumptions about what coherent human writing looks like: reasonable word count, typical
-        character distributions, no evidence of templating. They run at millions of documents per
-        minute on CPU. Their job is not to find all the good documents; it is to remove the most
-        obvious garbage before anything slower touches the data.
-      </Prose>
-
-      <H3>Perplexity: how surprising is this text to a reference model?</H3>
-
-      <Prose>
-        Train a small language model on a high-quality reference corpus — Wikipedia, digitized
-        books, academic papers. Ask it to assign a probability to each document in your web
-        dump. Documents the reference model finds "surprising" are either incoherent, written in
-        a pattern the model never saw, or machine-generated in a recognizable way. Documents the
-        reference model finds "natural" are in-distribution relative to curated human writing.
-        Perplexity is the exponential of per-token cross-entropy loss: lower perplexity means
-        higher probability, means "looks like the reference." This works because written text
-        is strongly structured, and the structure that a reference model learns maps well onto
-        the concept of coherent prose.
-      </Prose>
-
-      <H3>Classifier: what does quality look like learned end-to-end?</H3>
-
-      <Prose>
-        Heuristics and perplexity are proxies. A binary classifier trained on positive examples
-        (Wikipedia, curated books) and negative examples (average web text) learns a richer
-        representation of quality in the feature space of the text itself. The classifier
-        crystallizes human curation decisions into a score that can be applied at scale.
-        The standard recipe — fine-tune a small BERT or train a fastText model — takes hours,
-        scores billions of tokens per day, and generalizes far beyond the specific heuristics
-        that motivated it.
-      </Prose>
-
-      <H3>LLM-as-curator: bootstrap a teacher's judgment into a student classifier</H3>
-
-      <Prose>
-        The frontier technique is to sample a small fraction of the corpus — a few hundred
-        thousand documents — run them through a powerful instruction-tuned LLM with a detailed
-        quality rubric, collect those annotations as labels, and train a small classifier on
-        the labels. The LLM provides quality; the small classifier provides scale. The expensive
-        model touches less than 0.1 percent of the corpus. Its judgment is amortized over
-        everything else through the classifier's generalization. The resulting pipeline is:
-        cheap heuristics → perplexity filter → quality classifier → LLM-annotated final filter.
-        Each stage passes a smaller, cleaner set to the next.
-      </Prose>
-
-      <StepTrace
-        label="pipeline intuition — cheap to expensive"
-        steps={[
-          {
-            label: "heuristics (microseconds/doc)",
-            render: () => (
-              <div>
-                <TokenStream tokens={["word count", "avg word len", "alnum ratio", "repetition"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  No model inference. Drops ~20-40% of raw crawl.
-                </div>
-              </div>
-            ),
-          },
-          {
-            label: "perplexity (small LM, ms/doc)",
-            render: () => (
-              <div>
-                <TokenStream tokens={["KenLM / unigram", "score all words", "exp(-avg log p)", "threshold"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  Reference model trained on Wikipedia/books. Drops another 30-50%.
-                </div>
-              </div>
-            ),
-          },
-          {
-            label: "classifier (BERT/fastText, ms/doc)",
-            render: () => (
-              <div>
-                <TokenStream tokens={["positive: wiki/books", "negative: raw web", "p(quality | doc)", "threshold ≥ 0.5"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  Learned proxy. Drops 20-40% of remaining docs.
-                </div>
-              </div>
-            ),
-          },
-          {
-            label: "LLM curator (large model, seconds/doc — sample only)",
-            render: () => (
-              <div>
-                <TokenStream tokens={["sample 500K docs", "LLM rates 1–5", "train fast clf on scores", "apply clf to all"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  LLM touches &lt;0.1% of corpus. Classifier generalizes to 100%.
-                </div>
-              </div>
-            ),
-          },
-        ]}
-      />
-
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Math foundation</H2>
-
-      <H3>Perplexity of a document under a reference model</H3>
-
-      <Prose>
-        Given a reference language model <Code>p_ref</Code> and a document <Code>d</Code>
-        consisting of tokens <Code>x_1, x_2, ..., x_T</Code>, the perplexity is defined as
-        the exponential of the mean negative log-likelihood per token:
-      </Prose>
-
-      <MathBlock>
-        {"\\text{perplexity}(d) = \\exp\\!\\left(-\\frac{1}{T} \\sum_{t=1}^{T} \\log p_{\\text{ref}}(x_t \\mid x_{<t})\\right)"}
-      </MathBlock>
-
-      <Prose>
-        A document that the reference model finds "natural" — every token well-predicted given
-        context — has low perplexity. A document full of rare or incoherent sequences has high
-        perplexity. Filtering by perplexity amounts to keeping the documents that the reference
-        corpus would call "expected." The key design choice is the reference: using Wikipedia
-        biases toward formal encyclopedic prose; using a domain-specific corpus biases toward
-        that domain.
-      </Prose>
-
-      <H3>Classifier scoring</H3>
-
-      <Prose>
-        A quality classifier estimates a conditional probability over two classes — quality
-        and non-quality — given the document's content. The score used for filtering is:
-      </Prose>
-
-      <MathBlock>
-        {"q(d) = P(\\text{quality} \\mid \\text{content}(d))"}
-      </MathBlock>
-
-      <Prose>
-        In practice the classifier is a logistic regression, fastText, or fine-tuned BERT
-        model. The training set is constructed by labeling curated-source documents as positive
-        and random web documents as negative. At inference time every document in the corpus
-        receives a score in <Code>[0, 1]</Code>. The pipeline keeps documents above a threshold
-        <Code>τ</Code>, where <Code>τ</Code> is tuned against a downstream evaluation set.
-      </Prose>
-
-      <H3>Per-domain thresholds and the precision-recall tradeoff</H3>
-
-      <Prose>
-        A single global threshold is rarely optimal. Different domains have different base
-        rates of quality — code repositories, academic preprints, and web news all have
-        different score distributions even when the underlying text quality is comparable.
-        The canonical approach (used in FineWeb and CCNet) is to set a per-domain threshold
-        that retains the top-<Code>k</Code> percent of each domain separately, where
-        <Code>k</Code> is tuned per domain. Formally, if <Code>Q_s</Code> is the distribution
-        of scores in domain <Code>s</Code>, the threshold is:
-      </Prose>
-
-      <MathBlock>
-        {"\\tau_s = Q_s^{-1}(1 - k)"}
-      </MathBlock>
-
-      <Prose>
-        This is the <Code>(1-k)</Code>-quantile of the domain-specific score distribution.
-        Setting <Code>k = 0.2</Code> retains the top 20 percent of each domain. The global
-        precision-recall curve is the result of sweeping <Code>τ</Code>: higher threshold
-        means higher precision (more of what passes is genuinely good) but lower recall
-        (more good documents are rejected). The right operating point depends on whether
-        the training budget is token-constrained or quality-constrained.
-      </Prose>
-
-      <H3>LLM-curator economics</H3>
-
-      <Prose>
-        Let <Code>N</Code> be the total corpus size and <Code>n</Code> be the annotation
-        sample. The cost of the LLM annotation pass is <Code>O(n)</Code> LLM inference calls.
-        The cost of training the student classifier is <Code>O(n)</Code>. The cost of applying
-        the classifier is <Code>O(N)</Code> fast forward passes. For typical values —
-        <Code>N = 500B documents</Code>, <Code>n = 500K</Code> — the LLM touches
-        <Code>n/N = 0.0001 = 0.01%</Code> of the corpus. The entire cost of quality annotation
-        is:
-      </Prose>
-
-      <MathBlock>
-        {"C_{\\text{total}} = C_{\\text{LLM}} \\cdot n + C_{\\text{clf}} \\cdot N \\quad \\text{where} \\quad C_{\\text{LLM}} \\gg C_{\\text{clf}}"}
-      </MathBlock>
-
-      <Prose>
-        Because <Code>n ≪ N</Code> and <Code>C_clf</Code> is cheap (milliseconds per document),
-        the total cost is dominated by the <Code>n</Code> LLM calls, not the <Code>N</Code>
-        classifier calls. This is what makes the approach economically viable at scale.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        Every code block below was run locally on Python 3.12 with no external dependencies
-        beyond the standard library. The outputs shown are verbatim from a single run. By the
-        end of section 4e we have a working five-stage pipeline applied to a synthetic 20-document
-        corpus, with per-stage drop rates.
-      </Prose>
-
-      <H3>4a. Heuristic filter</H3>
-
-      <Prose>
-        The heuristic filter checks four surface statistics: word count (catches empty and
-        enormous documents), average word length (catches navigation menus and code dumps),
-        alphanumeric ratio (catches symbol-heavy garbage), and word repetition density (catches
-        spam with the same word repeated). Each check is a single arithmetic operation over
-        the document string — no model inference needed.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import re, collections, math
-
-def passes_heuristics(
-    doc,
-    min_words=20,        max_words=100_000,
-    min_avg_word_len=3.0, max_avg_word_len=12.0,
-    min_alnum_ratio=0.72,
-    max_repetition_frac=0.20,
-):
-    """Return (passed: bool, reason: str)."""
-    words = doc.split()
-    n = len(words)
-
-    # 1. Word count
-    if not (min_words <= n <= max_words):
-        return False, f"word_count={n}"
-
-    # 2. Average word length
-    avg_len = sum(len(w) for w in words) / max(n, 1)
-    if not (min_avg_word_len <= avg_len <= max_avg_word_len):
-        return False, f"avg_word_len={avg_len:.2f}"
-
-    # 3. Alphanumeric ratio
-    alnum = sum(1 for c in doc if c.isalnum() or c.isspace())
-    ratio = alnum / max(len(doc), 1)
-    if ratio < min_alnum_ratio:
-        return False, f"alnum_ratio={ratio:.2f}"
-
-    # 4. Word repetition (top word > 20% of all words: spam signal)
-    wc = collections.Counter(w.lower() for w in words if len(w) > 2)
-    if wc:
-        top_word, top_count = wc.most_common(1)[0]
-        if top_count / n > max_repetition_frac:
-            return False, f"repetition:{top_word}={top_count}/{n}"
-
-    return True, "pass"
-
-# --- 20-document synthetic corpus ---
-corpus = [
-    # quality (label=1)
-    ("wiki_transformer",
-     "The transformer architecture introduced in 2017 uses self-attention to process "
-     "sequences in parallel. Each attention head learns different relationship types "
-     "between tokens, and layer normalization stabilizes training across deep networks."),
-    ("ml_pretraining",
-     "Language models transform natural language processing by learning statistical "
-     "patterns from massive corpora. The pretraining objective predicts the next token "
-     "given preceding context, enabling knowledge transfer to downstream tasks."),
-    ("scaling_research",
-     "Researchers demonstrated that scaling model parameters and training data together "
-     "produces reliable improvements on downstream tasks. Published results confirm the "
-     "scaling hypothesis holds across model families and modalities."),
-    ("data_curation",
-     "Data curation pipelines filter web-scraped text through multiple stages: heuristic "
-     "rules, perplexity thresholds, and classifier scores. Each stage removes a fraction "
-     "of documents, increasing corpus quality for pretraining."),
-    ("fine_tuning",
-     "Fine-tuning adapts pretrained neural network representations to specific tasks with "
-     "limited labeled examples. The approach leverages gradient descent to minimize "
-     "cross-entropy loss on task-specific training data."),
-    ("benchmark_eval",
-     "Our experiments on twelve benchmark evaluation tasks demonstrate consistent "
-     "improvements averaging three points over the baseline. The proposed architecture "
-     "scales favorably with compute budget following power-law relationships."),
-    ("quality_selection",
-     "Quality data selection methods have shown that training on a smaller high-quality "
-     "subset often outperforms training on the full noisy corpus. This approach reduces "
-     "compute requirements and improves final model generalization significantly."),
-    ("emergent_abilities",
-     "The study analyzed training dynamics of large language models finding that emergent "
-     "capabilities appear as sudden phase transitions. Published benchmarks document "
-     "these transitions across multiple model scales and task types."),
-    ("attention_mech",
-     "Attention mechanisms capture long-range dependencies in text that recurrent networks "
-     "struggled to model effectively. Researchers showed this enables better performance "
-     "on tasks requiring multi-step reasoning and factual retrieval."),
-    ("residual_nets",
-     "Neural network architectures benefit from residual connections that enable training "
-     "of very deep models. The method mitigates vanishing gradient problems and "
-     "accelerates convergence during optimization across many layers."),
-    # low-quality (label=0)
-    ("seo_spam",
-     "Buy cheap clicks now guaranteed best price amazing deals! Click here free offer "
-     "limited time discount visit website today money back low cost get rich quick "
-     "now available online exclusive members."),
-    ("boilerplate_nav",
-     "Copyright 2023 all rights reserved privacy policy terms conditions contact us "
-     "sitemap help about careers login register subscribe newsletter cookie consent "
-     "accessibility legal disclaimer notice."),
-    ("lorem_ipsum",
-     "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor "
-     "incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud "
-     "exercitation ullamco laboris."),
-    ("thin_product",
-     "Product Name Widget Price 9 99 Color Blue Size Medium SKU 12345 Category Home "
-     "Brand Generic Description great product buy today fast shipping available now "
-     "order before midnight."),
-    ("cta_spam",
-     "Click here for free stuff! Get amazing results guaranteed or money back! No risk "
-     "limited offer expires midnight tonight! Subscribe for exclusive deals now "
-     "available only for new members."),
-    ("nav_menu",
-     "Home Products Services About Contact Login Register Cart Checkout FAQ Support "
-     "Blog Newsletter Footer Header Navigation Menu Widget Sidebar Privacy Terms "
-     "Sitemap Cookie Disclaimer."),
-    ("seo_content",
-     "SEO optimized content guaranteed page one ranking today! Buy our premium package "
-     "click here for special discount limited time offer best price available for "
-     "everyone who signs up now."),
-    ("caps_spam",
-     "AMAZING DEAL BUY NOW FREE SHIPPING CLICK HERE BEST PRICE GUARANTEED RESULTS "
-     "VISIT NOW OFFER EXPIRES SOON limited discount available today only subscribe "
-     "and save big money fast."),
-    ("free_trial",
-     "Get your free trial today no credit card required limited time offer sign up "
-     "now cancel anytime no risk guaranteed results best product available online "
-     "for all new registered users."),
-    ("affiliate",
-     "Affiliate links: If you click and buy we earn a commission at no cost to you. "
-     "Sponsored content disclaimer required by regulations for disclosure purposes "
-     "following federal trade commission guidelines."),
-]
-labels = [1]*10 + [0]*10
-
-print("=== 4a: Heuristic Filter ===")
-after_h = []
-for name, doc, lbl in [(n, d, l) for (n,d), l in zip(corpus, labels)]:
-    passed, reason = passes_heuristics(doc)
-    status = "PASS" if passed else "FAIL"
-    if not passed:
-        print(f"  DROP {name:<20} lbl={lbl}  [{reason}]")
-    else:
-        after_h.append((name, doc, lbl))
-print(f"  Retained: {len(after_h)}/{len(corpus)}")`}
+      <CodeBlock language={'python'}>
+        {
+          "from pathlib import Path\nfrom curation_records import ArticleText\n\nparser = ArticleText()\nparser.feed(Path('article.html').read_text(encoding='utf-8'))\nprint(parser.text())"
+        }
       </CodeBlock>
 
       <Prose>
-        Running this against the 20-document corpus shows that heuristics alone catch short,
-        symbol-heavy documents but miss well-formed spam — a known limitation. The next stages
-        handle what heuristics miss.
+        {
+          'The corpus is a collection of records, but a model consumes target tokens. Before tokenization we can at least distinguish document count from bytes. In a constructed accounting example, A/B/C/D contain 20/60/10/10 bytes. What share survives when we keep A and B?'
+        }
       </Prose>
 
-      <H3>4b. Perplexity filter</H3>
+      <CurationFigure id="C02" />
 
       <Prose>
-        The perplexity filter uses a unigram language model trained on the positive-class
-        documents as a reference. In production CCNet uses a 5-gram Kneser-Ney model (via
-        KenLM); the unigram version here captures the essential mechanism: documents whose
-        vocabulary is far from the reference score high and get dropped.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def build_unigram_lm(reference_docs, smoothing=0.5):
-    """Train a unigram language model on reference_docs.
-    Returns a log-probability function."""
-    counts = collections.Counter()
-    for doc in reference_docs:
-        counts.update(doc.lower().split())
-    total = sum(counts.values())
-    V = len(counts)
-    def log_prob(word):
-        # Add-alpha smoothing
-        return math.log(
-            (counts.get(word.lower(), 0) + smoothing) /
-            (total + smoothing * V)
-        )
-    return log_prob
-
-def compute_perplexity(doc, log_prob_fn):
-    words = doc.lower().split()
-    if not words:
-        return float("inf")
-    log_sum = sum(log_prob_fn(w) for w in words)
-    return math.exp(-log_sum / len(words))
-
-# Reference LM trained on quality docs only
-reference_docs = [doc for (_, doc), lbl in zip(corpus, labels) if lbl == 1]
-lp_fn = build_unigram_lm(reference_docs)
-
-print("\\n=== 4b: Perplexity Filter ===")
-pp_scored = []
-for name, doc, lbl in [(n, d, l) for (n, d), l in zip(corpus, labels)
-                        if (n, d, l) in [(a, b, c) for a, b, c in
-                           [(n2, d2, l2) for (n2,d2), l2 in zip(corpus, labels)]]]:
-    pass  # see clean version below
-
-# Clean version:
-pp_scored = [
-    (name, doc, lbl, compute_perplexity(doc, lp_fn))
-    for (name, doc), lbl in zip(corpus, labels)
-]
-
-pp_vals = sorted(pp for *_, pp in pp_scored)
-threshold_pp = pp_vals[int(len(pp_vals) * 0.55)]  # keep bottom 55%
-
-after_pp = [(name, doc, lbl) for name, doc, lbl, pp in pp_scored if pp <= threshold_pp]
-
-print(f"  Threshold (55th pct): {threshold_pp:.1f}")
-for name, doc, lbl, pp in sorted(pp_scored, key=lambda x: x[3]):
-    keep = "KEEP" if pp <= threshold_pp else "DROP"
-    print(f"  lbl={lbl}  pp={pp:7.1f}  {keep}  {name}")
-print(f"  Retained: {len(after_pp)}/{len(corpus)}")`}
-      </CodeBlock>
-
-      <Prose>
-        With a 55th-percentile threshold, perplexity filtering correctly identifies all
-        10 quality documents as low-perplexity (they share vocabulary with the reference)
-        and drops 8 of 10 low-quality documents. The two that survive — boilerplate and
-        affiliate text — contain enough common words to score in-distribution. The classifier
-        stage handles them.
-      </Prose>
-
-      <H3>4c. Quality classifier training</H3>
-
-      <Prose>
-        The classifier is TF-IDF + logistic regression, implemented from scratch. It
-        trains on 16 documents (8 quality, 8 low-quality) and evaluates on the held-out 4.
-        This mirrors the industrial pattern: curated seeds as positives, random web as negatives,
-        small model, fast inference.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def tfidf_features(docs, vocab=None, max_features=150):
-    """Compute TF-IDF vectors. Returns (X: list of lists, vocab: list)."""
-    tokenize = lambda d: re.findall(r"[a-z]+", d.lower())
-
-    if vocab is None:
-        df = collections.Counter()
-        for d in docs:
-            df.update(set(tokenize(d)))
-        vocab = [w for w, _ in df.most_common(max_features)]
-
-    vocab_idx = {w: i for i, w in enumerate(vocab)}
-    V = len(vocab)
-    N = len(docs)
-
-    # IDF over provided docs
-    df = collections.Counter()
-    for d in docs:
-        df.update(set(tokenize(d)))
-    idf = {w: math.log((N + 1) / (df.get(w, 0) + 1)) + 1 for w in vocab}
-
-    X = []
-    for d in docs:
-        tokens = tokenize(d)
-        tf = collections.Counter(tokens)
-        total = max(len(tokens), 1)
-        vec = [0.0] * V
-        for w, idx in vocab_idx.items():
-            vec[idx] = (tf.get(w, 0) / total) * idf[w]
-        # L2 normalize
-        norm = math.sqrt(sum(x**2 for x in vec)) or 1.0
-        vec = [x / norm for x in vec]
-        X.append(vec)
-    return X, vocab
-
-def sigmoid(z):
-    return 1.0 / (1.0 + math.exp(-max(-500, min(500, z))))
-
-def logistic_train(X, y, lr=0.3, epochs=300):
-    V = len(X[0])
-    w = [0.0] * V
-    b = 0.0
-    for _ in range(epochs):
-        dw = [0.0] * V
-        db = 0.0
-        for xi, yi in zip(X, y):
-            z = sum(wi * xij for wi, xij in zip(w, xi)) + b
-            err = sigmoid(z) - yi
-            for j in range(V):
-                dw[j] += err * xi[j]
-            db += err
-        n = len(X)
-        w = [wi - lr * dwi / n for wi, dwi in zip(w, dw)]
-        b = b - lr * db / n
-    return w, b
-
-def predict_proba(x, w, b):
-    return sigmoid(sum(wi * xi for wi, xi in zip(w, x)) + b)
-
-# Train on first 8 of each class, test on last 2
-train_docs_clf   = [d for (_, d), l in zip(corpus[:8], labels[:8])] + \
-                   [d for (_, d), l in zip(corpus[10:18], labels[10:18])]
-train_labels_clf = [1]*8 + [0]*8
-
-X_train, vocab_clf = tfidf_features(train_docs_clf, max_features=150)
-w_clf, b_clf = logistic_train(X_train, train_labels_clf)
-
-test_docs_clf   = [corpus[8][1], corpus[9][1], corpus[18][1], corpus[19][1]]
-test_labels_clf = [1, 1, 0, 0]
-X_test, _ = tfidf_features(test_docs_clf, vocab=vocab_clf)
-
-print("\\n=== 4c: Quality Classifier ===")
-correct = 0
-for xi, yi, (name, _) in zip(X_test, test_labels_clf,
-                               [corpus[8], corpus[9], corpus[18], corpus[19]]):
-    prob = predict_proba(xi, w_clf, b_clf)
-    pred = 1 if prob >= 0.5 else 0
-    correct += (pred == yi)
-    print(f"  {name:<20} lbl={yi}  prob={prob:.2f}  pred={pred}  "
-          f"{'OK' if pred == yi else 'WRONG'}")
-print(f"  Held-out accuracy: {correct}/4")`}
-      </CodeBlock>
-
-      <Prose>
-        Held-out accuracy is 4/4 on this corpus. In production, the classifier is evaluated
-        on a domain-stratified held-out set, and the threshold is tuned against a downstream
-        benchmark rather than set at 0.5.
-      </Prose>
-
-      <H3>4d. LLM-as-judge curator loop</H3>
-
-      <Prose>
-        The LLM annotator is simulated by a rule-based mock that counts quality-associated
-        keywords (research, model, learning, experiment, analysis) and spam-associated keywords
-        (buy, click, free, discount, guaranteed) and returns a 1–5 score. This captures the
-        structure of the real annotation loop — sample, score, train fast classifier, apply —
-        without requiring external API calls.
-      </Prose>
-
-      <CodeBlock language="python">
-{`GOOD_KWORDS = {"research","model","learning","data","architecture","training",
-               "neural","network","analysis","study","published","experiment",
-               "results","approach","method","demonstrates","performance",
-               "benchmark","evaluation","paper"}
-BAD_KWORDS  = {"buy","cheap","click","free","discount","offer","deal","limited",
-               "guaranteed","subscribe","login","register","copyright","privacy",
-               "policy","cookie","spam","visit"}
-
-def mock_llm_rate(doc):
-    """Rule-based quality score 1-5 (simulates LLM annotator)."""
-    words = set(re.findall(r"[a-z]+", doc.lower()))
-    score_raw = len(words & GOOD_KWORDS) - len(words & BAD_KWORDS) * 2
-    return max(1, min(5, 3 + score_raw))
-
-# Step 1: sample 15 of 20 docs for LLM annotation
-sample_indices = list(range(15))
-sample_docs    = [corpus[i][1] for i in sample_indices]
-sample_labels  = [labels[i] for i in sample_indices]
-
-llm_scores = [mock_llm_rate(d) for d in sample_docs]
-llm_binary = [1 if s >= 3 else 0 for s in llm_scores]
-
-print("\\n=== 4d: LLM-as-Judge Annotation ===")
-agreement = sum(p == t for p, t in zip(llm_binary, sample_labels))
-print(f"  Mock LLM agreement with true labels: {agreement}/{len(sample_labels)}")
-
-# Step 2: train fast classifier on LLM labels
-X_llm, vocab_llm = tfidf_features(sample_docs, max_features=100)
-w_llm, b_llm = logistic_train(X_llm, llm_binary, lr=0.3, epochs=200)
-
-# Step 3: apply to the 5 holdout docs
-holdout_docs   = [corpus[i][1] for i in range(15, 20)]
-holdout_labels = [labels[i] for i in range(15, 20)]
-X_ho, _ = tfidf_features(holdout_docs, vocab=vocab_llm)
-
-kept_llm = sum(1 for xi in X_ho if predict_proba(xi, w_llm, b_llm) >= 0.5)
-print(f"  LLM-clf applied to 5 holdout docs: kept {kept_llm}/5")`}
-      </CodeBlock>
-
-      <H3>4e. Full multi-stage pipeline with drop rates</H3>
-
-      <Prose>
-        Composing all four stages: heuristics filter the full corpus first, perplexity
-        filters the survivors, the quality classifier filters what remains, and a final
-        LLM-curator stage would apply to a production corpus (simulated here on the
-        holdout portion). Each stage reports its drop rate.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Stage 1: heuristics
-after_heuristics = [
-    (name, doc, lbl)
-    for (name, doc), lbl in zip(corpus, labels)
-    if passes_heuristics(doc)[0]
-]
-
-# Stage 2: perplexity (build LM from quality docs in the heuristic-passed set)
-ref_docs = [doc for _, doc, lbl in after_heuristics if lbl == 1]
-lp = build_unigram_lm(ref_docs)
-pp_scored_2 = [(n, d, l, compute_perplexity(d, lp)) for n, d, l in after_heuristics]
-thresh_pp = sorted(pp for *_, pp in pp_scored_2)[int(len(pp_scored_2) * 0.55)]
-after_perplexity = [(n, d, l) for n, d, l, pp in pp_scored_2 if pp <= thresh_pp]
-
-# Stage 3: classifier
-X_a, _ = tfidf_features([d for _, d, _ in after_perplexity], vocab=vocab_clf)
-after_classifier = [
-    (n, d, l)
-    for (n, d, l), xi in zip(after_perplexity, X_a)
-    if predict_proba(xi, w_clf, b_clf) >= 0.45
-]
-
-print("\\n=== 4e: Full Pipeline Drop Rates ===")
-stages = [
-    ("Raw corpus",        len(corpus)),
-    ("After heuristics",  len(after_heuristics)),
-    ("After perplexity",  len(after_perplexity)),
-    ("After classifier",  len(after_classifier)),
-]
-for i, (stage, count) in enumerate(stages):
-    if i == 0:
-        print(f"  {stage:<22} {count:3}  —")
-    else:
-        prev = stages[i-1][1]
-        drop = (prev - count) / max(prev, 1) * 100
-        print(f"  {stage:<22} {count:3}  {drop:.0f}% dropped")
-
-overall = len(after_classifier) / len(corpus) * 100
-print(f"\\n  Overall retention: {len(after_classifier)}/{len(corpus)} = {overall:.0f}%")
-
-# --- Verified output (Python 3.12, no external deps) ---
-# === 4e: Full Pipeline Drop Rates ===
-#   Raw corpus              20  —
-#   After heuristics        20  0% dropped
-#   After perplexity        12  40% dropped
-#   After classifier        10  17% dropped
-#
-#   Overall retention: 10/20 = 50%`}
-      </CodeBlock>
-
-      <Prose>
-        The pipeline retains 10 of 20 documents — all 10 quality documents and none of the
-        low-quality ones (the two that survived perplexity filtering were caught by the
-        classifier). In a real pipeline on 500B documents, the same structure would reduce
-        the corpus to roughly 100B tokens of higher-quality text, consistent with published
-        numbers from FineWeb and RedPajama.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <H3>HuggingFace DataTrove</H3>
-
-      <Prose>
-        DataTrove is the open-source pipeline framework HuggingFace used to build FineWeb.
-        It implements every stage described in this topic as composable pipeline nodes:
-        URL filtering, language identification, heuristic filtering (with C4-compatible
-        rules), MinHash deduplication, and quality classification. The FineWeb recipe is
-        available as a reference implementation. Running DataTrove on a Common Crawl shard
-        requires only specifying which pipeline stages to apply and pointing it at an input
-        path.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# DataTrove example (requires: pip install datatrove)
-# This runs the FineWeb-style pipeline on a local WARC file.
-
-from datatrove.pipeline.readers import WarcReader
-from datatrove.pipeline.filters import (
-    LanguageFilter,
-    GopherQualityFilter,
-    GopherRepetitionFilter,
-    C4QualityFilter,
-)
-from datatrove.pipeline.dedup import MinhashDedupFilter
-from datatrove.pipeline.writers import JsonlWriter
-from datatrove.executor import LocalPipelineExecutor
-
-pipeline = [
-    WarcReader(data_folder="path/to/warc/", glob_pattern="*.warc.gz"),
-    LanguageFilter(languages=["en"], language_threshold=0.65),
-    GopherQualityFilter(
-        min_doc_words=50,
-        max_doc_words=100_000,
-        min_avg_word_length=3,
-        max_avg_word_length=10,
-    ),
-    GopherRepetitionFilter(),
-    C4QualityFilter(
-        filter_no_terminal_punct=True,
-        min_num_sentences=3,
-    ),
-    MinhashDedupFilter(similarity_threshold=0.7),
-    JsonlWriter(output_folder="path/to/output/"),
-]
-
-LocalPipelineExecutor(pipeline=pipeline, tasks=8).run()`}
-      </CodeBlock>
-
-      <H3>FineWeb pipeline structure</H3>
-
-      <Prose>
-        The published FineWeb pipeline runs in seven ordered stages. URL filtering against
-        a domain reputation list removes known spam domains before any document is read.
-        Language identification (using fastText's language classifier) keeps only
-        high-confidence English. MinHash deduplication with 5-gram shingles and 112 hash
-        functions removes near-duplicates. C4-style heuristic filters (sentence count,
-        word count, terminal punctuation, banned phrases) remove obvious garbage. Gopher
-        quality filters (word length distribution, symbol ratios) remove further noise.
-        A custom heuristic pass removes boilerplate patterns specific to Common Crawl.
-        Finally, for FineWeb-Edu, the educational quality classifier — a BERT-class model
-        fine-tuned on 450K Llama-3-70B annotations — scores every remaining document, and
-        documents scoring below 3 on the 0–5 scale are dropped.
+        {
+          'Keeping A and B retains two of four records but 80 of 100 bytes. The choice did not change when we switched the denominator; its description did. A “top half” selector ranks records, not token positions. After applying the actual model tokenizer, count retained training targets separately. Bytes are useful storage/input accounting, not a language-invariant proxy for model token count.'
+        }
       </Prose>
 
       <Prose>
-        The FineWeb-Edu classifier is publicly available at
-        <Code>HuggingFaceFW/fineweb-edu-classifier</Code> on the HuggingFace Hub. The
-        annotation dataset (Llama-3-70B scores for 450K documents) is at
-        <Code>HuggingFaceFW/fineweb-edu-llama3-annotations</Code>. Using the published
-        classifier for a new corpus requires only running BERT inference and applying a
-        score threshold — the annotations and training code are fully open.
+        {
+          'A pipeline therefore carries both selected data and an explanation of how it was selected. Keep the measured features, model/configuration version, score, decision reason and group identity with each ID. Later, a score regression or lost domain can be traced back to a concrete change rather than inferred from one final corpus size.'
+        }
       </Prose>
 
-      <H3>CCNet perplexity filtering</H3>
+      <span id="2-core-intuition" aria-hidden="true" />
+      <span id="2-build-the-intuition" aria-hidden="true" />
+      <H2>{'2. Measure a property before making a rule'}</H2>
 
       <Prose>
-        CCNet (Wenzek et al. 2019) is the reference pipeline for perplexity-based filtering.
-        It deduplicates by paragraph hash, identifies language with fastText, and then scores
-        every document against a 5-gram Kneser-Ney language model trained on the Wikipedia
-        dump for each of 100 languages. Documents are sorted by perplexity and split into
-        three buckets: head (low perplexity, highest quality), middle, and tail. The head
-        bucket is used for training; the tail is discarded. The released KenLM models are
-        publicly available and can be applied to any new corpus by running a single KenLM
-        query command over the input text.
+        {
+          'Record C looks repetitive. To filter it consistently, first decide what “repetitive” measures. We will normalize each line by collapsing its whitespace to single spaces, discard empty lines, preserve case and exclude newline characters from the character total. This is a stated local policy, not the only reasonable definition.'
+        }
       </Prose>
+
+      <CurationFigure id="C03" />
 
       <Prose>
-        The key implementation detail in CCNet is that perplexity is computed per-paragraph
-        rather than per-document, and the document-level score is the median of its paragraph
-        scores. This makes the filter robust to long documents that mix one good paragraph with
-        ten bad ones — a pattern common in news articles that append long comment sections or
-        boilerplate legal text. The median operation is a deliberate choice over the mean:
-        a single very high-perplexity paragraph should not cause an otherwise good document
-        to be dropped, but a document where the majority of paragraphs are incoherent should
-        be filtered regardless of a few good sentences scattered through it.
+        {'The first '}
+        <code>{'aaaa'}</code>
+        {
+          " establishes the line; only the additional occurrence counts as repeated. One of three nonempty line occurrences is additional, so duplicate-line incidence is 1/3. Four of nine eligible characters occur in that additional line, so duplicate-character share is 4/9. Extend both copies to eight a's: incidence remains 1/3, but character share becomes 8/17. A count ratio and a mass ratio answer different questions."
+        }
       </Prose>
 
-      <H3>Nemotron-CC and the diversity-quality frontier</H3>
+      <Prose>{'For normalized line counts c(l), these measurements are'}</Prose>
 
-      <Prose>
-        NVIDIA's Nemotron-CC dataset extended the LLM-curator pattern to a full 6.3-trillion-token
-        corpus, demonstrating that the approach scales beyond FineWeb's 15T input to corpora
-        that span many years of Common Crawl. The pipeline uses a classifier trained on
-        Llama-3-70B annotations that scores documents on five dimensions: educational value,
-        creative writing quality, factual accuracy, reasoning depth, and code quality. Each
-        dimension is scored separately; the final quality label is a weighted combination.
-        This multi-dimensional annotation is the current frontier of LLM-curator design: rather
-        than a single holistic score, the annotator produces a structured quality profile,
-        and the classifier learns to predict each dimension independently. Different pretraining
-        mixes can then draw on high-reasoning documents, high-educational documents, and
-        high-code documents in different proportions depending on the target model's intended
-        use case.
-      </Prose>
-
-      <H3>RedPajama and mixture-of-sources pipelines</H3>
-
-      <Prose>
-        RedPajama-v2 takes a different architectural approach: rather than a single monolithic
-        pipeline, it computes a rich set of quality signals per document and stores them
-        alongside the document rather than filtering at ingestion time. This allows downstream
-        users to define their own quality threshold and filter the corpus however they choose.
-        The signals include: the CCNet perplexity bucket (head/middle/tail), the number of
-        unique 5-grams as a diversity proxy, the fraction of lines flagged by C4 heuristics,
-        the minhash signature for near-duplicate detection, and several domain-specific
-        signals. Storing signals rather than applying fixed filters is a design philosophy
-        that acknowledges no single set of thresholds is optimal for all downstream models —
-        a research model optimizing for reasoning may want different data than a coding model
-        or a general assistant. The trade-off is storage cost (each document carries a vector
-        of quality signals) and the responsibility of threshold selection moving to the
-        downstream user rather than the corpus builder.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <StepTrace
-        label="FineWeb-style pipeline — stages and typical drop rates"
-        steps={[
+      <div className="neural-equation">
+        <MathBlock>
           {
-            label: "URL filter",
-            render: () => (
-              <div>
-                <TokenStream tokens={["domain blocklist check", "known spam TLDs", "adult content domains"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  Input: 100%.  Output: ~85%.  Drop: ~15% (blocklisted domains).
-                  Cost: O(1) hash lookup per URL.
-                </div>
-              </div>
-            ),
-          },
+            'R_{lines}=\\frac{\\sum_l(c(l)-1)}{\\sum_l c(l)},\\qquad R_{chars}=\\frac{\\sum_l(c(l)-1)|l|}{\\sum_l c(l)|l|}.'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {'The sums run over distinct nonempty normalized lines. '}
+        <code>{'|l|'}</code>
+        {
+          ' counts Python Unicode code points, not bytes or grapheme clusters. Empty eligible input makes both denominators zero; return an explicit undefined result and quarantine the extraction. Calling that text perfectly nonrepetitive because a counter defaults to zero would hide a missing input.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Now make a decision: for example, keep a nonempty document when its duplicate-character share is at most .5. This threshold turns an observed property into a chosen rule. It does not turn the property into truth about usefulness. A refrain in a poem, an API reference repeating a signature or a carefully structured exercise can fail it. A unique but incorrect paragraph can pass it.'
+        }
+      </Prose>
+
+      <Program file="curation_signals.py" />
+
+      <Prose>
+        {'Run '}
+        <code>{'python -B curation_signals.py'}</code>
+        {'. '}
+        <code>{'signals'}</code>
+        {' computes the declared measurements; '}
+        <code>{'select'}</code>
+        {' separates exact-count ranking from thresholding; '}
+        <code>{'pipeline'}</code>
+        {' records first and overlapping failures; '}
+        <code>{'metrics'}</code>
+        {
+          ' preserves undefined denominators. The main uses authored documents and supplied scores, not a trained semantic classifier. Measurement takes linear time in text size. Stable full ranking takes O(N log N); the retained list keeps its original IDs.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Character, word-length, punctuation and language signals are similarly useful only under their definitions. Before importing thresholds from another corpus, inspect its extractor, language/script and normalization. Examine rejected examples as well as retained ones. '
+        }
+        <a href={'https://huggingface.co/datasets/HuggingFaceFW/fineweb-2'}>
+          {"FineWeb2's processing and limitations"}
+        </a>
+        {
+          ' make this particularly concrete: a punctuation rule that works for prose can exclude poetry, and useful cutoffs vary across languages.'
+        }
+      </Prose>
+
+      <span id="3-math-foundation" aria-hidden="true" />
+      <span id="3-make-the-idea-precise" aria-hidden="true" />
+      <H2>{'3. Ask what a low language-model loss means'}</H2>
+
+      <Prose>
+        {
+          'Heuristics cannot recognize every meaningful explanation. Another idea is to score how unsurprising a candidate looks under a reference corpus. This has a precise interpretation: resemblance to that reference. It does not automatically measure correctness, educational usefulness or novelty.'
+        }
+      </Prose>
+
+      <CurationFigure id="C04" />
+
+      <Prose>
+        {'Our constructed reference text is '}
+        <code>{'the home the home the home energy'}</code>
+        {'. Declare ordinary vocabulary '}
+        <code>{'[the, home, pendulum, energy]'}</code>
+        {
+          ' and one unknown bucket UNK. Add one pseudo-count to each of the five possible outcomes. Seven observed words plus five pseudo-counts give denominator 12. The probabilities are 1/3,1/3,1/12,1/6,1/12 in that order. They sum to one, including the unseen pendulum and unknown bucket.'
+        }
+      </Prose>
+
+      <Prose>{'For count c(w), smoothing α>0 and finite support V including UNK,'}</Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'p(w)=\\frac{c(w)+\\alpha}{\\sum_{v\\in V}c(v)+\\alpha|V|}.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'Every unknown spelling maps to the same UNK outcome. Assigning a fresh 1/12 probability to each possible unknown spelling would not define a normalized model. With no reference observations, positive smoothing gives a uniform distribution over the declared support; it does not produce evidence that all words are equally common in the world.'
+        }
+      </Prose>
+
+      <CurationFigure id="C05" />
+
+      <Prose>
+        {
+          'For candidate words w₁…wₘ, cross-entropy is H=−(1/m)Σlog p(wᵢ); perplexity is exp(H). Natural logarithms put H in nats per word. The three occurrences in '
+        }
+        <code>{'the the the'}</code>
+        {' each contribute ln 3, so H≈1.098612 and perplexity 3. For '}
+        <code>{'pendulum energy'}</code>
+        {
+          ', the contributions are ln 12 and ln 6, so H≈2.138333 and perplexity≈8.485281. The repetitive fragment wins this low-perplexity contest. That is a property of the reference probabilities, not proof that its content is better.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The word-independent model is intentionally small enough to expose every denominator. A neural reference can condition on context and use subword tokens, but its loss still measures predictability under that model and tokenization. Comparing perplexities across different tokenizers without a common unit is particularly misleading. An empty candidate has no word-average loss; display undefined rather than a fabricated perplexity of one.'
+        }
+      </Prose>
+
+      <Program file="reference_selection.py" />
+
+      <Prose>
+        {'Run '}
+        <code>{'python -B reference_selection.py'}</code>
+        {
+          ' after installing SciPy. It fits normalized references, maps unknown words, returns individual loss contributions and compares a domain reference in section 10. It also implements seeded weighted selection without exponentiating huge log weights. Fitting is linear in reference words; scoring is linear in candidate words. Its model is an explained unigram example, not an implementation of a large neural curator.'
+        }
+      </Prose>
+
+      <H2>{'4. Turn examples into a curator'}</H2>
+
+      <Prose>
+        {
+          'The reference example suggests a different approach: specify the property we want and collect examples of it. A '
+        }
+        <strong>{'curator model'}</strong>
+        {
+          ' predicts a score used to choose training data. Its label source determines what it learns to approximate.'
+        }
+      </Prose>
+
+      <CurationFigure id="C06" />
+
+      <Prose>
+        {
+          "One route asks a model to judge educational value under a rubric. FineWeb-Edu releases integer annotations from that process. Another route labels documents according to whether they came from selected reference sources, then trains a discriminator against background web text. DCLM's reference classifier follows this broad idea. Reference membership is easier to obtain than human usefulness judgments, but source style can become a shortcut. Teacher labels can express a richer rubric, but inherit the teacher's mistakes and omissions. Neither label is interchangeable with factual truth."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'We will first learn a binary proxy: y=1 when a released educational score is at least 3, otherwise y=0. This threshold applies to the supplied integer annotation. The separate released neural regressor in section 8 uses a different score/readout contract. Do not silently apply its rounding to our binary probability.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'To see what learning changes, represent text by word features. Statistics come only from the examples used to learn the rule; after fitting they stay fixed for new examples. This is what '
+        }
+        <strong>{'training-only'}</strong>
+        {' means here.'}
+      </Prose>
+
+      <CurationFigure id="C07" />
+
+      <Prose>
+        {
+          'Document frequency df(w) counts training documents containing w, regardless of how often it repeats inside one document. With n training documents, use idf(w)=log((1+n)/(1+df(w)))+1. A word in every training document has IDF 1. A word in fewer documents has a larger factor. Multiplying raw word counts by IDF and dividing the resulting vector by its Euclidean length gives the TF-IDF feature row x. “TF” means term frequency; here it is a raw count, not a logarithm. Zero vectors remain zero.'
+        }
+      </Prose>
+
+      <Prose>
+        {'For a small constructed feature illustration, use four training texts: '}
+        <code>{'energy energy energy motion motion motion motion'}</code>
+        {', '}
+        <code>{'energy motion'}</code>
+        {', '}
+        <code>{'sale'}</code>
+        {', and '}
+        <code>{'home'}</code>
+        {
+          ". Energy and motion each occur in two of four documents, so both get IDF a=1+log(5/3). The first text's two nonzero weighted counts are [3a,4a]. Their length is 5a, leaving normalized coordinates [.6,.8]. The absent sale/home coordinates are zero. This is the origin of the two visible coordinates in the readout above; the learned study later has 1,024 coordinates."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "The vocabulary is also fixed from training. A new spelling outside it contributes no feature. This differs from section 3's UNK language model: TF-IDF is a feature representation, not a normalized probability distribution over words. A word contributes to document similarity; it need not receive probability mass."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Use those two nonzero coordinates x=[.6,.8], supplied example weights w=[.4,−.2] and bias b=.1. These weights illustrate the readout; they are not the fitted study model. The products are .24 and −.16, and z=wᵀx+b=.18. The sigmoid p=1/(1+exp(−z)) gives about .544879. Positive weight raises the score when its feature increases; negative weight lowers it, holding other coordinates fixed. TF-IDF normalization couples coordinates, so changing a word in the original text may change several coordinates at once.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "Keep the roles clear: x describes the document, w and b are learned parameters, z is an unrestricted score called a logit, and p is the model's predicted positive-label probability. Calling the last number a probability does not establish calibration; section 6 will test that interpretation."
+        }
+      </Prose>
+
+      <H2>{'5. Learn the weights and protect the question'}</H2>
+
+      <Prose>
+        {
+          'The supplied weights expose computation. Actual learning chooses weights that reduce disagreement with training labels. For one example, binary cross-entropy is −y log p−(1−y)log(1−p). It penalizes placing little probability on the observed label.'
+        }
+      </Prose>
+
+      <CurationFigure id="C08" />
+
+      <Prose>
+        {
+          'Writing p=σ(z) gives the numerically stable equivalent softplus(z)−yz, where softplus(z)=log(1+exp z). The program uses '
+        }
+        <code>{'logaddexp(0,z)'}</code>
+        {
+          ' so z=1000 does not overflow during exponentiation. Differentiate: dL/dp=−y/p+(1−y)/(1−p), and dp/dz=p(1−p). Multiplication cancels the denominators, leaving dL/dz=p−y. The weight gradient is (p−y)x and the bias gradient is p−y.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For the preceding x,w,b and a positive label y=1, the residual is about −.455121. Its negative sign asks gradient descent to increase z. For a training matrix X with n rows, average this loss and add a weight-size penalty λ||w||²/2:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
           {
-            label: "language ID",
-            render: () => (
-              <div>
-                <TokenStream tokens={["fastText lid.176", "threshold: conf ≥ 0.65", "keep English"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  Input: ~85%.  Output: ~60%.  Drop: ~30% (non-English or low-confidence).
-                  Cost: ~1 ms/doc on CPU.
-                </div>
-              </div>
-            ),
-          },
+            'J=\\frac 1n\\sum_i[\\operatorname{softplus}(z_i)-y_i z_i]+\\frac\\lambda 2\\|w\\|^2,\\quad\\nabla_wJ=\\frac{X^\\top(p-y)}n+\\lambda w,\\quad\\frac{\\partial J}{\\partial b}=\\operatorname{mean}(p-y).'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          "The intercept is deliberately unpenalized. A learning rate η applies w←w−η∇wJ and b←b−η∂J/∂b. At η=0 the parameters stay unchanged; at p=y the example's data gradient is zero, although a nonzero L2 term can still move w. Regularization is a chosen optimization constraint, not additional teacher evidence."
+        }
+      </Prose>
+
+      <Program file="linear_curator.py" />
+
+      <Prose>
+        {'Run '}
+        <code>{'python -B linear_curator.py'}</code>
+        {' with NumPy. '}
+        <code>{'Features.fit'}</code>
+        {' ranks training words by total count with lexical ties; '}
+        <code>{'transform'}</code>
+        {' freezes vocabulary/IDF and performs L2 normalization. '}
+        <code>{'objective_gradient'}</code>
+        {' exposes the stable objective and analytic derivatives. '}
+        <code>{'fit'}</code>
+        {
+          ' starts at zero and stops on the training gradient norm or an explicit step limit. It does not inspect final labels to stop.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The step-size bound uses sigmoid curvature at most 1/4. Add a constant-one column to the feature matrix so multiplying by the appended intercept adds b to every row. The squared '
+        }
+        <strong>{'Frobenius norm'}</strong>
+        {' sums the squares of all matrix entries. The squared '}
+        <strong>{'spectral norm'}</strong>
+        {
+          " is the largest squared amplification of vector length by that matrix; it is no larger than the squared Frobenius norm. Dividing the latter by the number of records gives mean squared feature-row norm plus one for the intercept column. Therefore .25(mean squared row norm+1)+λ bounds the augmented objective curvature, including the weight penalty. Taking the reciprocal of this upper bound makes the step conservative: it allows for the largest possible curvature rather than guessing a larger update from the current gradient. This is slower than a tuned second-order solver, but makes the optimizer's contract inspectable. The dense teaching matrix costs O(nV) memory; the library route keeps a sparse representation."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Where do the training rows come from? Split related records before fitting even the vocabulary.'
+        }
+      </Prose>
+
+      <CurationFigure id="C09" />
+
+      <Prose>
+        {
+          'Train learns features and weights. Tune chooses the operating threshold. Final answers the fixed assessment question once those choices are made. If two copies of one article cross the boundary, the assessment partly asks whether the model recognizes an article already seen. Grouping by exact prefix alone misses altered copies; grouping by hostname alone misses syndicated content. Our example combines host, exact and verified near-duplicate edges, then uses connected components so transitive relations stay together. An omitted semantic relationship can still leak; this procedure establishes its declared relation, not perfect independence of all web knowledge.'
+        }
+      </Prose>
+
+      <H2>{'6. Select records without confusing rank with probability'}</H2>
+
+      <Prose>
+        {
+          'Learning returns scores. It does not choose a corpus size or a cost of false removal. A threshold and an exact keep count are different policies.'
+        }
+      </Prose>
+
+      <CurationFigure id="C10" />
+
+      <Prose>
+        {
+          "Thresholding keeps every score at least τ, so tied scores cross together. Exact-k sorting uses score descending and ID ascending, then takes exactly k rows. It may split a tie according to that stated rule. A percentile specifies rank among this pool; changing the pool can change a document's percentile even if its model score is unchanged."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Compare each decision with the supplied binary label. TP means a kept positive; FP a kept negative; FN a rejected positive; TN a rejected negative. Precision=TP/(TP+FP) asks what share of the kept set is positive. Recall=TP/(TP+FN) asks what share of positives survives. F1=2TP/(2TP+FP+FN) combines them when its denominator exists. These definitions refer to the chosen label source, not all useful text in the world.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "No predicted positives makes precision undefined. With actual positives but no predicted positives, recall and F1 are zero. With no actual or predicted positives, F1 is undefined under this lesson's explicit policy. Every empty state preserves its counts. A plotting library's default zero cannot decide what an absent denominator means."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Higher thresholds reduce or preserve the kept set. They do not guarantee higher precision. Consider scores .9/.8/.7 with labels 1/0/1. Threshold .7 keeps all three, precision 2/3; threshold .8 keeps the first two, precision 1/2. The removed low-score positive makes precision worse.'
+        }
+      </Prose>
+
+      <CurationFigure id="C11" />
+
+      <Prose>
+        {
+          'Calibration asks whether records assigned similar probabilities are positive at corresponding rates. For a simple illustration, a wide bin [.5,1] containing two scores .6 and .8 with labels 1 and 0 has mean prediction .7 and positive fraction .5. Show its support of two; that small discrepancy is not a precise population estimate. The program uses five narrower bins, with their endpoints explicit. The Brier score averages (p−y)² and penalizes probability error across all records.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "A strictly increasing transform preserves ranking but can change calibration. Squaring probabilities preserves their order within [0,1], while the two scores above become .36/.64 and their cohort mean .5. That mean matches the cohort's positive fraction, but the transformed scores no longer occupy the same bin: recompute bin membership before assessing calibration. Matching one cohort mean does not prove calibrated predictions. Ranking, calibration and selection answer separate questions."
+        }
+      </Prose>
+
+      <Program file="curation_libraries.py" />
+
+      <Prose>
+        {'With '}
+        <code>{'scikit-learn==1.9.1'}</code>
+        {', run '}
+        <code>{'python -B curation_libraries.py'}</code>
+        {'. The ordinary route composes '}
+        <code>{'TfidfVectorizer'}</code>
+        {' and '}
+        <code>{'LogisticRegression'}</code>
+        {
+          " into one pipeline. A supplied deterministic vocabulary, identical tokenizer, raw term counts, smoothed IDF and L2 norm match the scratch features. For the installed lbfgs implementation, C=1/(nλ) matches mean cross-entropy plus λ||w||²/2. This conversion depends on the library's objective convention; copying C=.01 would not match λ=.01. Both routes leave the bias unpenalized."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The main checks the authored four-record fit and an exact save/reload. Load pickle only from a trusted producer; this format can execute code. For the fitted lesson model, the scratch route also offers a simple JSON vocabulary/IDF/weight representation. Matching the converged objective and predictions does not mean the two optimizers followed the same steps.'
+        }
+      </Prose>
+
+      <span id="4-from-scratch-implementation" aria-hidden="true" />
+      <span id="6-visual-walkthrough" aria-hidden="true" />
+      <H2>{'7. Fit a small real annotation experiment'}</H2>
+
+      <Prose>
+        {
+          'We now replace four authored records with released web-prefix annotations while preserving the same feature, label, score and decision meanings. The question is deliberately narrow: how well does this small classifier reproduce those teacher labels on held-out source/duplicate groups?'
+        }
+      </Prose>
+
+      <CurationFigure id="C12" />
+
+      <Prose>
+        {
+          "The collection uses twenty deterministic windows of one hundred records across the released FineWeb-Edu annotation table. It is coverage across row positions, not IID sampling of web documents. The teacher input is each record's first 1,000 characters; we verify that prefix against its recorded prompt. Labels are 1 when the released integer score is at least 3. The source text remains in local reproduction files; the public study exposes derived IDs, hashes, labels and predictions."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Related records are connected by identical nonempty hostname, exact normalized prefix or verified Jaccard similarity at least .8 over normalized three-word shingles. Near-pair search uses exact comparisons after a length-ratio bound, not approximate candidates assumed complete. Components are hashed into train/tune/final; vocabulary fitting follows that assignment. There are 1,920 groups among 2,000 records, with largest group 3. Training has 1,184 rows and 110 positives; tuning 392 and 37; final 424 and 28.'
+        }
+      </Prose>
+
+      <Program file="prepare_annotations.py" />
+
+      <Prose>
+        {'Download the exact '}
+        <a href={'/learn-code/data-curation-deduplication/curation_records.py'}>
+          {'curation_records.py'}
+        </a>
+        {' and '}
+        <a href={'/learn-code/data-curation-deduplication/lexical_dedup.py'}>
+          {'lexical_dedup.py'}
+        </a>
+        {' helpers into the program folder, or supply their directory with '}
+        <code>{'--dedup-directory'}</code>
+        {'. Run '}
+        <code>{'python -B -X utf8 prepare_annotations.py --output ./annotations'}</code>
+        {
+          '. It records the protocol before collection, caches exact API responses, checks source revision before/after, validates teacher inputs, groups records and saves the local JSONL. The rows API is not claimed to offer an atomic revision pin; retained response hashes specify what actually ran. '
+        }
+        <code>{'--local-jsonl'}</code>
+        {' permits already collected records with the documented schema.'}
+      </Prose>
+
+      <Prose>
+        {
+          'The frozen learning protocol uses at most 1,024 training words, λ=.01, zero initial parameters and gradient-norm stopping. Threshold candidates are .10,.15,…,.90. Maximize tuning F1, breaking ties toward the higher threshold. A constant baseline predicts the training positive fraction under the same grid. Final data choose neither vocabulary nor threshold.'
+        }
+      </Prose>
+
+      <Program file="run_curator_study.py" />
+
+      <Prose>
+        {'Run '}
+        <code>
+          {'python -B -X utf8 run_curator_study.py --data ./annotations --output ./curator-run'}
+        </code>
+        {
+          " with a new output directory. The driver writes versions, source hashes and the full prospective protocol before fitting, trains both routes, reloads the JSON model, saves all grid points and records the fixed final assessment. It requires the companion files rather than leaving an undefined model in a snippet. The page's controls inspect these saved results; they do not silently refit when a threshold is moved."
+        }
+      </Prose>
+
+      <CurationFigure id="C13" />
+
+      <Prose>
+        {
+          'The scratch fit converged in 777 steps. Scratch and library feature entries differ by at most about 2.22×10⁻¹⁶; predicted probabilities by about 1.88×10⁻⁸. Both choose threshold .10 from tuning. On 424 final rows they keep 71: 16 teacher positives and 55 negatives. They reject 12 positives and 341 negatives. Precision is 16/71≈.225352, recall 16/28≈.571429, and F1=32/99≈.323232. Final Brier loss is about .061299.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'This is limited discrimination, with substantial false retention and false rejection against the proxy itself. It is useful evidence about the small model, feature representation and sampled annotation task. It is not a demonstrated improvement in the language model that might later train on those retained documents.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "The constant baseline predicts 110/1,184≈.092905. That lies below the grid's lowest threshold .10, so every grid option keeps nothing; the tie rule chooses .90. Its final precision is undefined, recall/F1 zero and Brier about .062399. This exposes the grid's boundary as well as the baseline's lack of ranking ability. For context, a policy keeping all final records would have precision 28/424, recall 1 and F1=56/452. That is a direct descriptive count comparison, not a newly tuned model. Do not retrospectively change the frozen threshold grid to obtain a prettier result."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Use the saved error IDs to reload records locally and inspect why they failed. A false negative might be educational text lacking common training cues; a false positive might copy their style. Those are hypotheses to test by reading the actual record, not explanations to invent from a score. Host grouping, coverage windows and a small positive class limit generalization. A new collection or rubric is a new declared experiment.'
+        }
+      </Prose>
+
+      <H2>{'8. Use a released neural curator deliberately'}</H2>
+
+      <Prose>
+        {
+          'The linear curator combines known word features. A neural encoder can represent their context before assigning a score. That richer representation changes the model, not the need to inspect what its target means.'
+        }
+      </Prose>
+
+      <CurationFigure id="C14" />
+
+      <Prose>
+        {
+          'The released FineWeb-Edu classifier used here is a BERT sequence regressor with twelve encoder layers, twelve attention heads per layer and hidden width 768. It has 109,483,009 parameters in the loaded checkpoint. WordPiece tokenization turns text into IDs; padding lets a batch share a rectangular shape, while the attention mask identifies valid positions. The encoder makes contextual hidden rows. Its first CLS row passes through a learned dense map and tanh pooler; a scalar linear head then produces one unrestricted real value.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For final CLS vector h, the readout is u=tanh(Wpool h+bpool), then s=wheadᵀu+bhead. The actual CPU program reconstructs both operations and compares them with the loaded forward output. The generic phrase “sequence classifier” alone would not tell us this pooling rule. Another encoder could use mean pooling or a different terminal position.'
+        }
+      </Prose>
+
+      <Prose>
+        {'This checkpoint is a '}
+        <strong>{'regressor'}</strong>
+        {
+          ": its one output approximates the rubric's score scale. Softmax over one output would always give 1 and destroy the information. Sigmoid would impose a binary-probability interpretation that this head was not trained to provide. Use the checkpoint's documented score policy explicitly."
+        }
+      </Prose>
+
+      <CurationFigure id="C15" />
+
+      <Prose>
+        {'The released example clamps s to [0,5], applies Python '}
+        <code>{'round'}</code>
+        {
+          ", then compares the integer score with 3. Nearest-even rounding sends 2.5 to 2 but 2.52 to 3. Therefore raw-score threshold 3 is not equivalent to integer-score threshold 3. At other half-integers, the even-neighbor rule matters too. A browser language's default rounding can differ; implement the declared rule, including its tie cases."
+        }
+      </Prose>
+
+      <Program file="neural_curator.py" />
+
+      <Prose>
+        {'Run '}
+        <code>
           {
-            label: "deduplication (MinHash)",
-            render: () => (
-              <div>
-                <TokenStream tokens={["5-gram shingles", "112 hash functions", "LSH banding", "union-find clusters"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  Input: ~60%.  Output: ~25-40%.  Drop: 30-55% of what remains.
-                  Covered in the dedup topic; not re-explained here.
-                </div>
-              </div>
-            ),
-          },
+            'python -B -X utf8 neural_curator.py --output ./neural-result.json --cache ./model-cache'
+          }
+        </code>
+        {
+          '. The first call downloads about 0.4GB of pinned model/tokenizer assets. The program uses Transformers 5.17.0, CPU evaluation mode, no gradients, explicit 512-token truncation and batches of at most four. '
+        }
+        <code>{'--offline'}</code>
+        {' reuses the cache; '}
+        <code>{'--input-jsonl'}</code>
+        {
+          ' scores supplied full texts. Each result records characters, valid model-token count, input IDs, raw score and policy output. The first 1,000-character teacher prefix in our annotation experiment is a separate input convention; 512 model tokens do not mean 512 characters.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Observed CPU scores on the three authored paragraphs are approximately 2.992705 for the pendulum explanation, −.250806 for repeated navigation and 1.176444 for the conjugate-gradient paragraph. Their integer scores are 3,0,1; only the pendulum survives. These are actual predictions, not independently adjudicated quality measurements. The technical paragraph is a useful rejected example: the rubric/model may favor accessible explanations over terse specialist statements. Inspect that distinction against the intended training task before deciding it is the right exclusion.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'A released model evaluated on annotations used to train it is not an independent accuracy test. Our three authored inputs are a behavior inspection, not enough for a reliable population estimate either. Freeze a separate task-relevant evaluation set if choosing between curators. Keep original scores so a later threshold change can be audited without recomputing the model.'
+        }
+      </Prose>
+
+      <span id="5-production-implementation" aria-hidden="true" />
+      <H2>{'9. Audit the complete pipeline, including what it removes'}</H2>
+
+      <Prose>
+        {
+          'We have an extractor, cheap measurements, learned scores and a decision rule. Combining them introduces interactions: a later stage sees only earlier survivors, and the first recorded removal can hide other reasons.'
+        }
+      </Prose>
+
+      <CurationFigure id="C16" />
+
+      <Prose>
+        {
+          'In the constructed quality pass, the supplied scores for A/B/C/D are .85/.35/.9/.7. The repeated navigation C fails the repeated-character threshold. The catalogue B fails the score threshold. A and D remain. Those scores are deliberately supplied for the plumbing example; they are not the neural results in section 8. Loading the saved fitted linear model is an explicit alternative. Keeping model identity beside scores prevents an attractive diagram from quietly mixing different experiments.'
+        }
+      </Prose>
+
+      <CurationFigure id="C17" />
+
+      <Prose>
+        {
+          'For pure predicates P and Q evaluated on the same unchanged document, the final set is {d:P(d) and Q(d)}. Intersection is commutative. The first-failure ledger is not: a document failing both is counted under whichever stage comes first. A full inclusive audit evaluates both predicates even on removed rows; it costs work that a short-circuit production pass might skip. If you only recorded first failures, you cannot infer overlapping failure incidence afterward.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Reordering stateful operations can change the actual survivors. Suppose two duplicate records A and B have scores .4 and .8, and a duplicate policy always chooses the lexically smaller ID. Deduplicate first and A represents the group; threshold .5 then removes it, leaving nothing. Filter first and B remains; deduplication then retains B. The representative policy is part of the computation. Declaring “filters commute” without stating unchanged inputs and pure predicates would erase this difference.'
+        }
+      </Prose>
+
+      <Program file="datatrove_quality_pipeline.py" />
+
+      <Prose>
+        {'With DataTrove 0.10.1 and orjson 3.12.0, run '}
+        <code>{'python -B -X utf8 datatrove_quality_pipeline.py --output ./quality-run'}</code>
+        {'. The complete ordinary route writes two real input shards, reads them with '}
+        <code>{'JsonlReader'}</code>
+        {', applies two explicit '}
+        <code>{'BaseFilter'}</code>
+        {
+          ' subclasses, writes exclusions separately and writes survivors. It uses one worker; it does not claim distributed throughput. The actual run retains A/D and removes B/C, matching the standalone policy, with every input ID accounted for exactly once.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The ordinary reader skips empty text before filters. The program therefore quarantines it before the reader, rather than promising an empty-input filter will see it. The local inclusive audit still explains overlapping failures; separate exclusion files explain executed first removals. To apply the fitted classifier, pass '
+        }
+        <code>{'--model ./curator-run/model.json --threshold .1'}</code>
+        {
+          '. That uses the same text feature transformation and saved weights from section 7, not a new training call.'
+        }
+      </Prose>
+
+      <Prose>
+        {"For near-duplicate removal, use the preceding lesson's complete "}
+        <a href={'/learn-code/data-curation-deduplication/datatrove_pipeline.py'}>
+          {'four-stage DataTrove program'}
+        </a>
+        {
+          '. Its signature, bucket, cluster and filter stages have a precise input-order/replay contract. The quality-pass example is not a one-line substitute for them. Choose and record the order, representative rule and input identity when composing the two.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'At corpus scale, inspect retained and removed counts by source, language, time and intended subject. A high overall pass rate can hide removal of a small but important domain. Source eligibility, private information, benchmark contamination and usefulness are different properties; a high learned educational score settles none of the other decisions. Preserve those audit fields as separate evidence.'
+        }
+      </Prose>
+
+      <H2>{'10. Deeper: select for a target distribution'}</H2>
+
+      <Prose>
+        {
+          'An educational rubric is one target. Suppose instead you need a scientific-domain corpus. A phrase that is unusual on the general web can be characteristic of that domain. Comparing two references makes this difference explicit.'
+        }
+      </Prose>
+
+      <CurationFigure id="C18" />
+
+      <Prose>
+        {'Use the same finite support as section 3. The target reference '}
+        <code>{'pendulum energy pendulum energy energy'}</code>
+        {', smoothed by one, gives probabilities .1/.1/.3/.4/.1 for '}
+        <code>{'[the, home, pendulum, energy, UNK]'}</code>
+        {
+          '. For each word, log ptarget−log pgeneral measures evidence favoring the target reference. Sum those terms for the independent-word sequence model:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
           {
-            label: "heuristic filters (C4 + Gopher)",
-            render: () => (
-              <div>
-                <TokenStream tokens={["word count", "avg word len", "terminal punct", "symbol ratio", "repetition"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  Input: ~30%.  Output: ~20-25%.  Drop: ~15-25%.
-                  No inference — pure arithmetic on doc statistics.
-                </div>
-              </div>
-            ),
-          },
+            '\\log\\frac{p_T(d)}{p_G(d)}=\\sum_{i=1}^{m}\\log\\frac{p_T(w_i)}{p_G(w_i)}=m[H_G(d)-H_T(d)].'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {'For '}
+        <code>{'pendulum energy'}</code>
+        {
+          ', the terms are log 3.6 and log 2.4, total≈2.156403. Exponentiation gives a sequence density ratio 8.64. The mean log ratio is≈1.078201; exponentiating that gives a different, length-normalized score≈2.939388. Repeating the phrase doubles the total log ratio but leaves the mean unchanged. Name which quantity drives selection, especially when candidates have unequal lengths.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Identical references give zero log ratio for every nonempty candidate. An empty sequence has product probability 1 under this toy model, hence total log ratio 0; its word-average score is undefined and it should already be excluded by input policy. Different supports or zero general probability require explicit treatment; positive smoothing on the same finite support avoids that singularity in this demonstration.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Density-ratio weighting is motivated by an importance-sampling identity: where general distribution G has positive support for target distribution T, E_G[(T/G)f]=E_T[f]. This statement concerns a specified pair of distributions and their exact ratio. Estimated text models, finite samples, weight clipping and selecting without replacement alter that setting. It is a reason to investigate weighting, not a guarantee that a word-model ratio recreates a desired training distribution.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <code>{'reference_selection.py'}</code>
+        {
+          ' implements a stable weighted-without-replacement selection. For each record with log weight a, draw independent uniform u in (0,1) and give it key a−log(−log u); retain the largest k keys. This Gumbel/exponential-race construction makes successive selections proportional to remaining weights. It avoids '
+        }
+        <code>{'exp(a)'}</code>
+        {
+          ' overflow and returns distinct IDs. Adding one common constant to all log weights does not change their ordering for the same random draws. Marginal inclusion probability is generally not k times a normalized weight.'
+        }
+      </Prose>
+
+      <Prose>
+        {'This word example supplies visible assumptions. '}
+        <a href={'https://arxiv.org/abs/2302.03169'}>{'DSIR'}</a>
+        {
+          ' uses a richer feature-based data-selection method; it is not identical to the unigram implementation. Domain likelihood can still favor repeated jargon, and a narrow target reference can suppress useful background. Evaluate the selected corpus on the downstream task rather than choosing the most sophisticated-looking score formula.'
+        }
+      </Prose>
+
+      <span id="7-decision-matrix" aria-hidden="true" />
+      <span id="8-what-scales-and-what-doesn-t" aria-hidden="true" />
+      <H2>{'11. Deeper: combine scorers and budget the work'}</H2>
+
+      <Prose>
+        {
+          'Two curators can notice different properties, but their raw scores may have unrelated scales. A probability near .8, an integer educational score and a log ratio cannot be averaged meaningfully merely because all are numbers.'
+        }
+      </Prose>
+
+      <CurationFigure id="C19" />
+
+      <Prose>
+        {
+          'One explicit comparison is to rank within each scorer. For n records with distinct scores, assign rank 0 to the lowest and n−1 to the highest, then divide by n−1. For tied scores, use their average rank; our one-record convention assigns the midpoint .5, and an empty pool stays empty. These percentiles describe this candidate pool, not probabilities that documents are good. The complete '
+        }
+        <code>{'percentile_ranks'}</code>
+        {' and '}
+        <code>{'combine_curators'}</code>
+        {' functions are in '}
+        <code>{'curation_signals.py'}</code>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {
+          "Suppose scorer 1 ranks A>B>C>D, while scorer 2 ranks C>D>A>B. Keeping the top two of each yields {A,B} and {C,D}. Their union keeps all four; intersection keeps none. Taking the maximum of per-scorer percentiles at an upper threshold implements the union of their corresponding upper sets. It does not preserve the fraction retained by either scorer. Identical rankings provide a useful null: the union equals one scorer's selection."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "Nemotron-CC investigates quantile-normalized curator combinations among its data choices. The lesson here is the set operation and calibration distinction, not a universal claim that more curators are better. An OR policy can protect a specialist document one curator misses, while also admitting either curator's false positives. An AND policy can concentrate agreement while rejecting their different blind spots. Audit domains and downstream behavior, not just the total surviving mass."
+        }
+      </Prose>
+
+      <CurationFigure id="C20" />
+
+      <Prose>
+        {
+          "Cost gives another reason to combine stages. If N documents enter a cheap stage costing c₁ per document, and fraction r₁ reaches a second stage costing c₂, total work is N c₁+N r₁ c₂. For three stages the final term is N r₁ r₂ c₃, where r₂ is the conditional survival rate among stage 1 survivors. Replacing it with the second stage's unconditional pass rate assumes an independence relation that may be false."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'In a constructed work ledger, N=1,000, c₁=1, r₁=.2 and c₂=10 gives 3,000 work units. Reversing the stages with the expensive stage passing half the pool gives 10,500. This comparison assumes both predicates see unchanged documents, the same decisions and fixed per-document costs. It does not estimate GPU seconds. Full inclusive auditing requires extra evaluations beyond the short-circuit counts.'
+        }
+      </Prose>
+
+      <Prose>
+        {"The same file's "}
+        <code>{'stage_work'}</code>
+        {
+          ' function returns each incoming count and cost contribution. Fractional counts represent expected counts under an assumed retention fraction; they are not fabricated observations or silently rounded survivors. Actual pipeline counters come from the executed records in section 9.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "Distilling a teacher into a smaller curator has a separate ledger. Labelling n records costs n Cteacher; scoring N records with the student costs N Cstudent, plus the student's training cost F. Direct teacher scoring costs N Cteacher. The student route saves work when F+n Cteacher+N Cstudent<N Cteacher, subject to its prediction quality being adequate. A positive crossover requires Cteacher>Cstudent. There is no compute saving from a cheaper proxy that removes the data the downstream model needs."
+        }
+      </Prose>
+
+      <span id="9-failure-modes-and-gotchas" aria-hidden="true" />
+      <H2>{'12. Test data usefulness with the training task'}</H2>
+
+      <Prose>
+        {
+          'The local classifier predicts a teacher. The intended training model consumes the selected corpus. To connect those two questions, compare actual training runs while controlling the rest of the recipe.'
+        }
+      </Prose>
+
+      <CurationFigure id="C21" />
+
+      <Prose>
+        {
+          'Fix the architecture, initialization policy, optimizer, training-target budget and held-out evaluation. Change a declared data intervention. Record selection compute as well as training compute. If the filtered pool is smaller, decide explicitly whether to repeat it, add other sources or stop earlier. Each answers a different question.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The published DCLM v2 Table 3 gives a concrete controlled extraction comparison. At its 1B–1x scale, the specified model has 1.4B parameters and trains on 28.8B tokens. The extracted text passes the same RefinedWeb heuristic filters. The reported CORE/EXTENDED centered-evaluation scores are: WET 20.7/12.2; resiliparse 24.1/13.4; trafilatura 24.5/12.5. These are published results under that recipe, not outputs of our small curator. CORE and EXTENDED are different benchmark aggregates with chance-centered task scoring, so they should not be relabelled ordinary document accuracy. '
+        }
+        <a href={'https://arxiv.org/pdf/2406.11794v2'}>{'DCLM Tables 1 and 3, version 2'}</a>
+        {''}
+      </Prose>
+
+      <Prose>
+        {
+          "The comparison tests the extraction intervention in that pipeline. It does not prove trafilatura dominates every extractor or that its thresholds fit every language. Its different ordering on the two aggregates also illustrates why the evaluation question matters. FineWeb's extraction/filtering ablations, DCLM's fixed-recipe comparisons, Nemotron's curator combinations and FineWeb2's language-specific choices are examples of evaluated policies, not a universal leaderboard of data quality."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Now consider a constructed equal-budget example. A raw pool contains 1,000 unique training targets; filtering leaves 250. A 1,000-target training budget covers the retained pool four times if a loader cycles without replacement each pass. With uniform replacement, expected distinct retained targets are 250[1−(249/250)^1000], slightly below 250. The exposures differ even though the total processed-target count is the same. Revisit '
+        }
+        <a
+          href={
+            '/learn/path/full-curriculum/curriculum-learning-data-mixing-strategies?module=large-language-models#3-make-the-loader-obey-the-contract'
+          }
+        >
+          {'sampling and exposure'}
+        </a>
+        {' before claiming that stronger filtering has no data-volume cost.'}
+      </Prose>
+
+      <Prose>
+        {
+          'Audit failures in the evaluation too. A classifier may remove terse mathematical statements or a minority script; aggregate English scores can miss the loss. A benchmark copied into training can make an apparent data improvement uninformative. A temporally later held-out set asks a different generalization question from a random source split. Define these checks before choosing the winning policy, preserve negative results, and inspect rejected samples under the actual use case.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Curation chooses from existing material. The next lesson asks what changes when we transform or generate new material. The same distinctions remain: source provenance, target definition, diversity, learning budget and an independent evaluation question.'
+        }
+      </Prose>
+
+      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+        <span id="11-self-check-exercises" aria-hidden="true" />
+        <H2>{'13. Practice with changed records and decisions'}</H2>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Change the repeated line.'}</strong>
+            {' Normalize '}
+            <code>{'xx'}</code>
+            {', '}
+            <code>{'abcd'}</code>
+            {', '}
+            <code>{'xx'}</code>
+            {', '}
+            <code>{'xx'}</code>
+            {
+              ' under our rule. Find duplicate-line incidence and duplicate-character share. What changes if every '
+            }
+            <code>{'xx'}</code>
+            {' becomes '}
+            <code>{'zzzz'}</code>
+            {'?'}
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{'exclude the first occurrence from the duplicate numerator.'}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'two of four occurrences are additional, incidence 1/2. Their four characters are among ten total, share 2/5. Lengthening the repeated line gives eight duplicate characters among sixteen, share 1/2; incidence stays 1/2. A threshold comparing characters with lines would not be a fraction of either object.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Preserve unknown probability mass.'}</strong>
+            {' Vocabulary is '}
+            <code>{'[red, blue]'}</code>
+            {
+              ' plus UNK. Training counts are red 2, blue 0 and three unknown words; α=1. Score a candidate containing two unseen spellings.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{'the two spellings map to one outcome category.'}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'denominator 5+3=8; probabilities 3/8,1/8,4/8. Both candidate words get UNK probability 1/2, so cross-entropy ln 2 and perplexity 2. Treating each new spelling as an independent outcome with probability 1/2 would break the finite-support model as more spellings appear.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Trace IDF and a different update.'}</strong>
+            {' Three training documents are '}
+            <code>{'a a b'}</code>
+            {', '}
+            <code>{'a c'}</code>
+            {', '}
+            <code>{'b c'}</code>
+            {
+              '. Find IDF for a. Separately, a supplied feature x=[1,0], w=[0,1], b=0, y=1 uses λ=.2 and η=.1. Update w and b.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                'document frequency counts documents, not occurrences. Include the penalty on the second weight.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                "a occurs in two documents, so idf(a)=1+log(4/3). For the supplied feature, z=0 and p=.5. Data gradient is [−.5,0]; penalty adds [0,.2], giving [−.5,.2]. New w=[.05,.98] and b=.05. The second coordinate moves even though this example's second feature is zero because its weight is regularized. These supplied x values are a separate gradient fixture, not a claim about the preceding TF-IDF row."
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Resolve a score tie.'}</strong>
+            {
+              ' Scores are Z:.6, A:.6, M:.4. Compare exact k=1 with threshold .6 under ID-ascending ties.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{'an exact count can split a tied score group.'}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'exact-k selects A only; threshold keeps A and Z. Sorting alone does not establish whether the difference is meaningful. A policy must declare how ties and the target count interact.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Raise a threshold and lose precision.'}</strong>
+            {
+              ' Labels in score order are [1,1,0,1] with scores [.95,.8,.75,.7]. Compute precision/recall at thresholds .7 and .75.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{"identify the removed record's label."}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'at .7, TP 3 / FP 1 / FN 0, precision 3/4 and recall 1. At .75, TP 2 / FP 1 / FN 1, precision 2/3 and recall 2/3. A higher cutoff removed a positive while retaining the negative. Set inclusion is monotone; precision need not be.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Diagnose leaked preprocessing.'}</strong>
+            {
+              ' A team groups duplicate documents before splitting but computes vocabulary/IDF from every partition. Another team fits features on training but splits two same-host copies apart. Name each problem and repair it.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{'partitioning and fitted statistics are separate contracts.'}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'the first uses final-document distribution to choose a representation; fit vocabulary and IDF on training only, then transform frozen partitions. The second allows related records across assessment boundaries; construct the declared host/duplicate components first and assign whole groups. Neither repair proves every semantic dependency is gone. Report the relation and its residual limits.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Keep ranking while changing calibration.'}</strong>
+            {
+              ' Two records have probabilities [.8,.4] and labels [1,0]. Square the probabilities. Compare ordering and Brier loss.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{'Brier averages the squared error against the labels.'}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                "ordering is unchanged. Original Brier=(.2²+.4²)/2=.1. Squared scores [.64,.16] give (.36²+.16²)/2=.0776. The transform improves this two-record value but need not help another labelled set or preserve a threshold's retained set. It is not a universal calibration method."
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Find the student-cost crossover.'}</strong>
+            {
+              ' Teacher cost is 20 units per record, student cost 2, teacher labels 50 records and fitting costs 200 units. When does the student route cost less than direct scoring?'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{'include both labelling and fitting once.'}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                '1200+2N<20N, so N>1200/18≈66.667. For integer N, 67 is the first cheaper case under this accounting. If collection/fit costs or score quality differ, the decision changes; the arithmetic itself does not establish adequate predictions.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Preserve the retention denominator.'}</strong>
+            {
+              ' Records have byte lengths [5,15,30,50]; a selector keeps the first and fourth. Calculate record and byte retention, then explain why token retention remains unknown.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                'first count retained records, then sum their byte lengths; each numerator needs its own original total.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'two of four records gives 1/2; 55 of 100 bytes gives .55. Token retention requires running the declared tokenizer and counting its actual training targets. Unequal encoded byte widths do not establish an equal token conversion across texts.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Trace an ensemble.'}</strong>
+            {
+              ' Scorer 1 ranks A>B>C; scorer 2 ranks B>C>A. Use average-rank percentiles with no ties. Find the retained set for maximum percentile at least .75, then minimum percentile at least .5.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{"each scorer's percentiles are 0,.5,1 assigned in its rank order."}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'scorer 1 gives A:1 / B:.5 / C:0; scorer 2 gives A:0 / B:1 / C:.5. Maximum≥.75 retains A and B, the union of two top-one sets. Minimum≥.5 retains only B, the intersection of two top-two sets. Neither operation promises the same kept count as an individual scorer.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Design a useful-data comparison.'}</strong>
+            {
+              ' A filter leaves one quarter of a pool. Compare it with the unfiltered pool under a fixed processed-target budget. Name controls, repetition accounting and a possible misleading success.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                'distinguish unique targets from repeated presentations, and ask whether the evaluation measures anything used to choose the filter.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'preserve model/init policy, optimizer, total targets and evaluation; record tokenizer/packing, selected unique targets, repeated exposures and selection work. Use declared seeds/uncertainty if resources permit. Report actual relevant evaluation, not only teacher agreement. A copied benchmark or changed training budget can create a misleading improvement; a small-domain loss can disappear inside an aggregate. Several designs are defensible if their question and remaining confounders are explicit.'
+              }
+            </Prose>
+          </details>
+        </section>
+
+        <section className="neural-practice">
+          <Prose>
+            {''}
+            <strong>{'Inspect a rejected specialist paragraph.'}</strong>
+            {
+              ' The supplied neural curator gives the conjugate-gradient example integer 1. Propose an auditable response without relabelling that number as truth.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                "separate the released model's rubric from your intended training task, then choose independent evidence for changing the selection policy."
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                'retain its source text and model revision, inspect the paragraph against the intended specialist training task, and collect an independent set of comparable retained/rejected examples. A possible policy is an additional domain route or rubric revision, assessed on a new frozen evaluation and downstream training. Do not declare one paragraph proof that all filtering fails, and do not raise this one score by hand then call it model performance.'
+              }
+            </Prose>
+          </details>
+        </section>
+      </section>
+
+      <section
+        className="lesson-ending lesson-ending--further-learning"
+        data-lesson-ending="further-learning"
+        data-lesson-resource-list=""
+      >
+        <H2>{'14. Further learning'}</H2>
+
+        <ul>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2402.16827v3'}>
+              {'A Survey on Data Selection for Language Models'}
+            </a>
+            {
+              ': use its reference-distribution/task-utility taxonomy after sections 3 and 10 to compare selection goals. It is broader than one pipeline recipe.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2406.17557v1'}>{"FineWeb's full paper, version 1"}</a>
+            {
+              ': follow the extractor/filter/dedup ablations after section 9; notice that interacting stages are tested with downstream training rather than only a score histogram.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2406.11794v2'}>{'DataComp-LM'}</a>
+            {
+              ': read the fixed training/evaluation framework and curator comparisons after section 12. Its controlled settings make corpus interventions interpretable.'
+            }
+          </li>
+          <li>
+            {''}
+            <a
+              href={
+                'https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction'
+              }
+            >
+              {'scikit-learn text feature extraction'}
+            </a>
+            {
+              ': compare sparse TF-IDF tools with our dense scratch implementation. Keep the actual installed objective convention separate from a moving documentation version.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://github.com/huggingface/datatrove/blob/main/examples/fineweb.py'}>
+              {"DataTrove's FineWeb example"}
+            </a>
+            {
+              ': inspect a larger multi-stage orchestration after running the local example. Its cluster scheduler and corpus-specific defaults are additional engineering choices.'
+            }
+          </li>
+        </ul>
+      </section>
+
+      <section className="lesson-ending lesson-ending--references" data-lesson-ending="references">
+        <span id="10-primary-sources" aria-hidden="true" />
+        <H2>{'15. Technical references and reproducibility'}</H2>
+
+        <Prose>
           {
-            label: "quality classifier",
-            render: () => (
-              <div>
-                <TokenStream tokens={["positive: Wikipedia/books", "negative: raw web", "BERT/fastText score", "threshold τ per domain"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  Input: ~22%.  Output: ~15-18%.  Drop: ~20-30% of remaining.
-                  Inference cost: ~5-10 ms/doc on GPU.
-                </div>
-              </div>
-            ),
-          },
+            'The local study files provide the full collection protocol, source response digests, fit protocol, saved linear model, per-ID predictions, neural inference and ordinary pipeline results. The exact source data are the '
+          }
+          <a href={'https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu-llama3-annotations'}>
+            {'FineWeb-Edu annotations'}
+          </a>
+          {'; the released regressor is '}
+          <a
+            href={
+              'https://huggingface.co/HuggingFaceFW/fineweb-edu-classifier/tree/284663cbb2dabf9bda30d8f8cc49601251ee1631'
+            }
+          >
+            {'FineWeb-Edu classifier'}
+          </a>
           {
-            label: "LLM-curator filter (FineWeb-Edu style)",
-            render: () => (
-              <div>
-                <TokenStream tokens={["sample 450K docs", "Llama-3-70B annotates", "BERT clf on annotations", "score ≥ 3 → keep"]} />
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: colors.textSecondary, marginTop: 8 }}>
-                  Input: ~17%.  Output: ~5-8% (FineWeb-Edu retains 1.3T / 15T = ~9%).
-                  LLM touches 0.01% of corpus; clf scales to all.
-                </div>
-              </div>
-            ),
-          },
-        ]}
-      />
+            '. Treat their target definitions and dataset/model revisions as part of the calculation.'
+          }
+        </Prose>
 
-      <Prose>
-        The quality-score distribution shifts rightward at each stage. The plot below shows
-        synthetic quality-score distributions (classifier output, 0–1) at four pipeline stages
-        for a hypothetical corpus of 1,000 documents. The leftmost curve is the raw crawl;
-        each subsequent curve shows what the distribution looks like after an additional
-        filtering stage.
-      </Prose>
-
-      <Plot
-        label="quality-score distribution shift across pipeline stages"
-        xLabel="quality score (classifier output)"
-        yLabel="fraction of docs"
-        width={520}
-        height={260}
-        series={[
+        <Prose>
+          {'Primary method comparisons: '}
+          <a href={'https://arxiv.org/abs/2406.17557'}>{'FineWeb'}</a>
+          {', '}
+          <a href={'https://arxiv.org/abs/2406.11794'}>{'DCLM'}</a>
+          {', '}
+          <a href={'https://arxiv.org/abs/2402.09668'}>{'How to Train Data-Efficient LLMs'}</a>
+          {', '}
+          <a href={'https://arxiv.org/abs/2302.03169'}>{'DSIR'}</a>
+          {', and '}
+          <a href={'https://arxiv.org/abs/2412.02595v1'}>{'Nemotron-CC, version 1'}</a>
+          {'. '}
+          <a href={'https://huggingface.co/datasets/HuggingFaceFW/fineweb-2'}>
+            {"FineWeb2's card"}
+          </a>
           {
-            name: "raw crawl",
-            color: colors.textMuted,
-            points: [
-              [0.0, 0.28], [0.1, 0.20], [0.2, 0.14], [0.3, 0.10],
-              [0.4, 0.08], [0.5, 0.07], [0.6, 0.05], [0.7, 0.04],
-              [0.8, 0.02], [0.9, 0.01], [1.0, 0.01],
-            ],
-          },
+            ' documents language-specific processing and limitations. These sources support their stated mechanisms and experiments; their large-scale outcomes were not rerun by the small lesson programs.'
+          }
+        </Prose>
+      </section>
+
+      <section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+        <H2>{'16. Readiness and the next question'}</H2>
+
+        <Prose>
           {
-            name: "after heuristics",
-            color: "#60a5fa",
-            points: [
-              [0.0, 0.15], [0.1, 0.14], [0.2, 0.13], [0.3, 0.12],
-              [0.4, 0.11], [0.5, 0.10], [0.6, 0.09], [0.7, 0.07],
-              [0.8, 0.05], [0.9, 0.03], [1.0, 0.01],
-            ],
-          },
+            'You are ready to use this material when you can trace one record through extraction, measurement, score, decision and audit; explain which labels a curator predicts; reproduce its feature and gradient calculation; protect a grouped assessment; and distinguish ranking, probability calibration, retention mass and downstream usefulness. You should also be able to name a useful document a stated policy could remove and propose evidence that would justify changing the policy.'
+          }
+        </Prose>
+
+        <Prose>
+          {'Continue to '}
+          <a
+            href={
+              '/learn/path/full-curriculum/synthetic-data-generation-for-pre-training?module=large-language-models'
+            }
+          >
+            {'Synthetic Data Generation for Pre-Training'}
+          </a>
           {
-            name: "after perplexity filter",
-            color: "#c084fc",
-            points: [
-              [0.0, 0.05], [0.1, 0.06], [0.2, 0.08], [0.3, 0.10],
-              [0.4, 0.12], [0.5, 0.13], [0.6, 0.14], [0.7, 0.13],
-              [0.8, 0.11], [0.9, 0.06], [1.0, 0.02],
-            ],
-          },
-          {
-            name: "after classifier",
-            color: colors.gold,
-            points: [
-              [0.0, 0.01], [0.1, 0.01], [0.2, 0.02], [0.3, 0.04],
-              [0.4, 0.07], [0.5, 0.12], [0.6, 0.18], [0.7, 0.22],
-              [0.8, 0.20], [0.9, 0.10], [1.0, 0.03],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        The raw crawl distribution is heavily left-skewed: most documents cluster near
-        zero quality score. Each filtering stage shifts mass rightward. After the classifier
-        stage, the distribution is unimodal near 0.65–0.75 — characteristic of a corpus
-        where the easy junk has been removed but the tail of genuinely ambiguous documents
-        remains.
-      </Prose>
-
-      <Heatmap
-        label="domain pass rate × quality threshold (synthetic)"
-        rowLabels={["news", "wiki", "books", "code", "forums", "product pages", "SEO farms"]}
-        colLabels={["τ=0.3", "τ=0.4", "τ=0.5", "τ=0.6", "τ=0.7"]}
-        matrix={[
-          [0.92, 0.85, 0.74, 0.60, 0.42],
-          [0.98, 0.96, 0.91, 0.83, 0.68],
-          [0.95, 0.91, 0.85, 0.74, 0.55],
-          [0.88, 0.80, 0.68, 0.52, 0.35],
-          [0.72, 0.60, 0.47, 0.34, 0.22],
-          [0.45, 0.32, 0.22, 0.14, 0.08],
-          [0.18, 0.10, 0.05, 0.02, 0.01],
-        ]}
-        colorScale="gold"
-      />
-
-      <Prose>
-        The heatmap shows that a single global threshold treats domains very differently.
-        At <Code>τ = 0.5</Code>, Wikipedia passes 91 percent of its documents while SEO
-        farms pass only 5 percent — a reasonable gap. But code documents pass only 68
-        percent at the same threshold, and forums pass 47 percent, both likely underestimates
-        of their actual quality. Per-domain thresholds address this by calibrating the
-        threshold to the domain's baseline score distribution rather than applying a
-        one-size-fits-all cutoff.
-      </Prose>
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <H3>Stage ordering: always cheap first</H3>
-
-      <Prose>
-        The canonical order is heuristics → perplexity → classifier → LLM-curator. The reason
-        is purely economic: each stage reduces the volume that the next stage must process, and
-        later stages are more expensive per document. A pipeline that runs the LLM-curator
-        before heuristics pays LLM inference costs on the full raw crawl. A pipeline that runs
-        heuristics first pays LLM costs only on the fraction that survives heuristics — often
-        60–80 percent less data.
-      </Prose>
-
-      <H3>Global vs. per-domain thresholds</H3>
-
-      <Prose>
-        Use a global threshold when: you have a single target domain and your classifier was
-        trained on representative data from it. Use per-domain thresholds when: your corpus
-        spans multiple domains with different characteristic score distributions, or when you
-        have evidence that a global threshold is systematically under-retaining a valuable
-        domain. Per-domain thresholds require knowing the domain of each document (a URL-based
-        classifier or metadata field usually suffices) and enough data per domain to estimate
-        the quantile reliably.
-      </Prose>
-
-      <H3>Custom classifier vs. reuse published classifier</H3>
-
-      <Prose>
-        Reuse FineWeb-Edu or a similarly published classifier when your target domain overlaps
-        substantially with the web (English prose, general knowledge, educational content).
-        Train a custom classifier when: your corpus is a specialized domain (legal, medical,
-        code, scientific literature) where the published classifier's positive class is a poor
-        proxy; when you have access to genuine positive-class examples from your domain; or
-        when you have downstream eval evidence that the published classifier is miscalibrated
-        for your use case.
-      </Prose>
-
-      <H3>When to add the LLM-curator stage</H3>
-
-      <Prose>
-        Add the LLM-curator stage when: your annotation budget allows 50K–500K LLM inference
-        calls; you need a quality dimension that a binary classifier trained on existing seeds
-        cannot capture (e.g., "will this document improve reasoning?" rather than "does this
-        look like Wikipedia?"); or you are building a domain-specific corpus where no
-        published classifier exists. Skip the LLM-curator stage when: the existing classifier
-        is sufficient, annotation budget is tight, or the corpus is small enough that the
-        classifier alone is the binding constraint.
-      </Prose>
-
-      <H3>Prompt design for the LLM annotator</H3>
-
-      <Prose>
-        The annotation prompt is a first-class engineering artifact, not an afterthought.
-        The FineWeb-Edu prompt asks the LLM to rate on a 0–5 scale "how valuable this
-        document would be as educational material for a student seeking to learn about the
-        topic discussed." It includes explicit rubric definitions for each integer value:
-        0 means the document contains no educational content whatsoever; 5 means the
-        document would be appropriate as a standalone lesson. The rubric was calibrated
-        by iterating until the LLM's scores correlated well with human expert ratings on
-        a sample of 500 documents.
-      </Prose>
-
-      <Prose>
-        Two design choices in the FineWeb-Edu prompt are worth noting. First, the rubric
-        specifies grade-school and middle-school level knowledge to prevent the LLM from
-        over-weighting narrow technical papers that are educational only for domain experts
-        but not for general learners. Second, the prompt asks for a JSON-formatted response
-        with a score field and a brief rationale — the rationale is used to audit annotation
-        quality and spot-check for rubric drift across different runs. A prompt that produces
-        only a score is harder to audit; rationale is cheap to generate and provides crucial
-        diagnostic signal.
-      </Prose>
-
-      <H3>Annotation quality and inter-annotator agreement</H3>
-
-      <Prose>
-        LLM annotators are not deterministic. Running the same document through the same
-        prompt twice often produces different scores, especially for documents in the 2–4
-        range of a 0–5 scale where the boundary is genuinely ambiguous. The practical
-        mitigation is to run each sampled document through the LLM twice and keep only
-        documents where both scores agree within one point; disagreements are dropped from
-        the training set for the student classifier rather than averaged. This costs 2× the
-        annotation budget but produces a training set with lower label noise. Classifier
-        training on noisier labels is possible but requires larger sample sizes — typically
-        3–5× more annotations — to achieve the same classifier quality.
-      </Prose>
-
-      <H3>Threshold tuning: downstream eval is the only ground truth</H3>
-
-      <Prose>
-        Every threshold in the pipeline — perplexity cutoff, classifier score cutoff,
-        domain-specific quantile — should ultimately be validated against a downstream
-        evaluation set, not set analytically. The reason is that the quality metrics are
-        proxies. Perplexity under Wikipedia measures "looks like Wikipedia," not "improves
-        the model." A classifier score measures "resembles curated seeds," not "transfers
-        well to benchmark tasks." The only way to know whether a specific threshold setting
-        is correct is to train a small model on the resulting corpus and evaluate it. This
-        is expensive but necessary: teams that skip downstream validation routinely discover
-        that analytically reasonable thresholds produce corpus compositions that perform
-        worse than a less aggressive filter would have.
-      </Prose>
-
-      <Prose>
-        A practical shorthand is to use a fast small-scale proxy: train a 1B-parameter model
-        for 10B tokens on two candidate corpora produced by different thresholds and compare
-        their evaluation scores on a fixed benchmark suite. This is affordable enough to run
-        as an ablation before committing to a full pretraining run. The FineWeb paper includes
-        exactly this methodology — their threshold choices are justified by 1B-scale ablations,
-        not by intuition.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <Prose>
-        Heuristic filters scale perfectly with data volume. They are arithmetic operations
-        on document strings — no model inference, no communication — and can be parallelized
-        trivially across any number of CPU cores. A hundred-node cluster running heuristics
-        on CommonCrawl processes a full monthly snapshot in hours. The cost per document is
-        flat and negligible.
-      </Prose>
-
-      <Prose>
-        Classifier inference (BERT or fastText) scales linearly with corpus size and is
-        cheap enough in absolute terms to apply to multi-trillion-token corpora. Batched
-        BERT inference on a single A100 runs at roughly 50,000 documents per second; a
-        full-scale pipeline with 100B documents would take about 2,000 GPU-hours. Expensive
-        by local standards, but affordable in the context of a pretraining run that costs
-        orders of magnitude more.
-      </Prose>
-
-      <Prose>
-        Reference-model perplexity filtering (KenLM 5-gram) is fast — KenLM can score
-        tens of thousands of documents per second per CPU core — but requires holding a
-        large n-gram model in memory. For a 100-language CCNet-style deployment, the
-        memory footprint of the language models becomes a practical constraint. Neural
-        reference models (GPT-2 small, etc.) are slower by a factor of 10–100× compared
-        to KenLM but potentially more discriminative.
-      </Prose>
-
-      <Prose>
-        LLM-as-judge annotation does not scale to the full corpus. Running Llama-3-70B on
-        500 billion documents is not economically viable. The scaling strategy is fixed:
-        sample a small fraction, annotate with the LLM, train a classifier, apply the
-        classifier at scale. The effective throughput bottleneck is the sampling step —
-        specifically, ensuring the sample is representative of the full diversity of the
-        corpus so the classifier generalizes to domains it was not annotated on. Active
-        learning strategies (annotate the hardest examples first) can reduce the required
-        sample size by 2–5× compared to random sampling.
-      </Prose>
-
-      <Prose>
-        Typical published numbers from frontier pipelines: a raw Common Crawl snapshot for
-        a single month is roughly 3–4 billion documents. After URL filtering, language ID,
-        and dedup, roughly 500–800 million remain. After heuristic and perplexity filtering,
-        200–300 million remain. After quality classifier, 100–150 million remain. For an
-        educational-quality filter like FineWeb-Edu, a further 90 percent drop is typical —
-        retaining 10–15 million documents per monthly snapshot. Across 96 snapshots, FineWeb
-        accumulated 15 trillion tokens total, and FineWeb-Edu retained 1.3 trillion.
-      </Prose>
-
-      <Prose>
-        The scaling bottleneck for the full pipeline is not compute — it is iteration speed.
-        Each change to a filter threshold, a heuristic rule, or a classifier requires
-        re-running the affected stages on the full corpus and re-evaluating downstream.
-        A pipeline that takes two weeks to run from raw crawl to trained-corpus is one
-        where the team can do at most a few ablation iterations before a pretraining run
-        deadline. The teams with the best curation pipelines invest heavily in making the
-        pipeline fast enough to iterate on: running stages on small representative shards
-        (1–10 percent of the corpus) for rapid ablations, using incremental processing
-        where only changed documents are re-processed, and maintaining a frozen evaluation
-        harness that can score a small model in hours rather than days. The speed of the
-        iteration loop matters as much as the correctness of any single filter design.
-      </Prose>
-
-      <Prose>
-        Data quality improvements also compound differently than model scale improvements.
-        Scaling model parameters by 10× costs 10× more compute and typically yields a
-        predictable log-linear improvement on standard benchmarks. Improving data quality
-        by tightening the quality filter can produce step-function improvements on specific
-        capability dimensions — reasoning, factual recall, instruction following — because
-        the underlying mechanism is not just "more signal" but "different signal." A
-        quality-filtered corpus shifts the gradient distribution in ways that more data
-        of the same quality distribution cannot replicate. This makes data quality improvements
-        genuinely complementary to scale rather than substitutable, and it explains why the
-        Phi series could produce models that outperformed 10× larger models on coding and
-        reasoning: the signal the model was trained on was categorically different, not just
-        larger.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES AND GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>Over-filtering narrows the distribution</H3>
-
-      <Prose>
-        Push the quality threshold high enough and the resulting corpus becomes narrowly
-        homogeneous: dense with formal encyclopedic prose, thin on colloquial language,
-        technical jargon, regional dialects, code comments, and any register that does
-        not resemble the positive class the classifier was trained on. A model trained
-        exclusively on Wikipedia-like text handles encyclopedic queries fluently and
-        struggles with casual conversation, technical documentation, and the loose,
-        associative writing that makes up a large fraction of how people actually
-        communicate. The filtering succeeded at its stated goal and failed at the implicit
-        one.
-      </Prose>
-
-      <H3>Classifier bias encodes the positive class</H3>
-
-      <Prose>
-        Whatever you use as the positive class for classifier training, the classifier
-        learns to reward documents that look like it. A Wikipedia-positive classifier
-        undervalues programming documentation, legal writing, colloquial speech, and
-        any domain not well-represented in Wikipedia. An educational-value classifier
-        undervalues narrative fiction, humor, and cultural writing. These biases
-        propagate into the model's knowledge and fluency: what the corpus covered
-        fluently, the model handles fluently; what the filter removed systematically,
-        the model knows less about.
-      </Prose>
-
-      <H3>Adversarial SEO passing</H3>
-
-      <Prose>
-        High-quality-seeming surface statistics are not hard to generate. An SEO farm
-        that produces 500-word articles with proper punctuation, varied vocabulary,
-        reasonable sentence length, and no repetition can pass every heuristic filter.
-        A classifier trained on Wikipedia as positive and generic web as negative will
-        score these articles above threshold if they are styled as encyclopedia entries.
-        This is not a hypothetical — large language models are now used to produce
-        exactly this kind of text at scale. A classifier whose positive class is from
-        2019 may be calibrated against human-written spam but not LLM-generated spam
-        with equivalent surface statistics.
-      </Prose>
-
-      <H3>Evaluation contamination from overly broad filtering</H3>
-
-      <Prose>
-        Quality filtering that over-retains text from public benchmarks — questions
-        from MMLU, problems from GSM8K, passages from BoolQ — inflates evaluation
-        scores. The benchmark score no longer measures generalization; it measures
-        recall. This contamination is subtle because the text does not appear verbatim;
-        it appears as paraphrases, tutorial explanations, or forum discussions that
-        discuss the same underlying facts. A filter that rewards educational content
-        disproportionately retains educational websites that discuss exactly the topics
-        covered by knowledge and reasoning benchmarks.
-      </Prose>
-
-      <H3>Per-domain threshold transfer</H3>
-
-      <Prose>
-        Thresholds calibrated on one distribution (web English 2022) may not transfer
-        to a different distribution (web English 2025, or a different language, or a
-        different crawl source). Classifier score distributions shift when the input
-        distribution shifts. A threshold that retains the top 20 percent in 2022 may
-        retain 35 percent or 10 percent in 2025 if the crawl's composition has changed.
-        Recalibrate thresholds when the source distribution changes, not just when
-        downstream evals degrade.
-      </Prose>
-
-      <H3>Classifier era mismatch</H3>
-
-      <Prose>
-        A classifier trained on data from before large-scale LLM-generated content was
-        widespread (pre-2022) treats LLM-generated text as out-of-distribution. Depending
-        on the architecture, this may cause such text to be assigned very high quality
-        scores (the LLM produces fluent, well-structured text) or very low scores (it is
-        out-of-distribution relative to the training data). Neither outcome is correct. The
-        increasing fraction of LLM-generated text in web crawls is a known and growing
-        problem for any classifier trained before 2023.
-      </Prose>
-
-      <H3>Heuristic "looks-good" pass</H3>
-
-      <Prose>
-        Auto-generated text that mimics human writing statistics — correct word length
-        distribution, correct punctuation density, correct sentence count — can pass every
-        heuristic filter perfectly while containing zero useful information. A product
-        description generator that produces grammatically correct paragraphs of the right
-        length with appropriate punctuation will pass the C4 heuristics. Heuristics are
-        necessary but not sufficient; they eliminate the obvious junk and leave the
-        plausible-looking junk for downstream stages to handle.
-      </Prose>
-
-      <Callout accent="gold">
-        A quality classifier is a model of what quality looks like according to its
-        positive class. Filtering makes your corpus better at resembling that class —
-        and systematically worse at resembling everything else. Audit what you removed,
-        not just what you kept.
-      </Callout>
-
-      <H3>Diversity loss vs. quality gain</H3>
-
-      <Prose>
-        The most acute version of the over-filtering failure occurs in low-resource
-        languages and specialized domains. A 5 percent quality threshold for Swahili
-        applied with an English-trained classifier may drop 95 percent of all available
-        Swahili text on the web. There is no 95-percent-quality-equivalent Swahili corpus
-        waiting to replace it. The model ends up with a Swahili component trained on a
-        tiny, atypical sample. The right response is domain-specific thresholds or
-        domain-specific classifiers, but both require investment that is rarely made for
-        low-resource languages.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <H3>Penedo et al. 2024 — FineWeb (arXiv:2406.17557)</H3>
-
-      <Prose>
-        The most thoroughly documented open curation pipeline to date. Penedo et al.
-        describe the full FineWeb pipeline in ablation detail, including the deduplication
-        strategy (5-gram MinHash with 112 hash functions), the heuristic filter suite,
-        and the educational-quality scoring that produced FineWeb-Edu. The paper releases
-        the DataTrove codebase, all ablation model checkpoints, and the Llama-3-70B
-        annotation dataset. The core finding: FineWeb-Edu trained models outperform
-        models trained on larger but less-curated corpora on knowledge and reasoning
-        benchmarks, with gains largest on MMLU, ARC, and OpenBookQA. FineWeb is 15
-        trillion tokens; FineWeb-Edu is 1.3 trillion tokens (scored ≥ 3 on the 0–5
-        educational scale).
-      </Prose>
-
-      <H3>Raffel et al. 2020 — C4 / T5 (arXiv:1910.10683)</H3>
-
-      <Prose>
-        The T5 paper introduced C4 (Colossal Clean Crawled Corpus) and systematized
-        heuristic filtering as a first-class preprocessing step. The C4 filtering rules —
-        remove pages where the terminal sentence does not end in punctuation; remove pages
-        containing certain boilerplate strings; remove lines shorter than three words;
-        remove pages with fewer than five sentences — became the baseline against which
-        subsequent pipelines measured improvement. Every modern heuristic filter suite
-        either replicates these rules or is explicitly an ablation variant of them.
-      </Prose>
-
-      <H3>Wenzek et al. 2019 — CCNet (arXiv:1911.00359)</H3>
-
-      <Prose>
-        CCNet introduced perplexity-based quality filtering as a scalable pipeline
-        component. The paper trains Kneser-Ney 5-gram models (via KenLM) on Wikipedia
-        for 100 languages and uses perplexity to split every web document into head
-        (low perplexity, Wikipedia-like), middle, and tail buckets. The pipeline runs
-        paragraph-level deduplication before perplexity scoring. The released KenLM
-        models and pipeline code are still in use in modified form in RefinedWeb and
-        other industrial pipelines. The central empirical finding: head-bucket data
-        produces substantially better downstream models than full crawl data of the
-        same token count.
-      </Prose>
-
-      <H3>Gunasekar et al. 2023 — Phi-1 (arXiv:2306.11644)</H3>
-
-      <Prose>
-        "Textbooks Are All You Need" demonstrated that a 1.3B-parameter model trained
-        on 6B tokens of carefully selected "textbook-quality" web data plus 1B tokens
-        of synthetically generated textbooks and exercises achieved pass@1 accuracy of
-        50.6 percent on HumanEval — matching or exceeding models trained on 10× more
-        data. The positive class for their quality filter was explicitly educational
-        and instructional text, not Wikipedia generically. Phi-1 is the direct precursor
-        to FineWeb-Edu's framing: quality defined as educational value, not encyclopedic
-        coverage. The phi-1.5 follow-up extended this to natural language tasks.
-      </Prose>
-
-      <H3>Sachdeva et al. 2024 — How to Train Data-Efficient LLMs (arXiv:2402.09668)</H3>
-
-      <Prose>
-        Sachdeva et al. evaluated 19 data selection samplers across hundreds of tasks
-        and pretraining runs. Their Ask-LLM method uses a zero-shot instruction-tuned
-        LLM to directly assess the quality of each training example, producing a quality
-        signal that outperforms heuristic and embedding-based selectors. The central
-        finding: Ask-LLM data consistently outperforms full-data training even when
-        rejecting 90 percent of the original dataset, converging up to 70 percent faster.
-        Diversity-based methods (maximizing coverage in feature space) are the second-best
-        category. The paper provides the cleanest ablation evidence that quality-aware
-        data selection dominates quantity-based scaling at fixed compute budgets.
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — Pass rate for a five-stage pipeline</H3>
-
-      <Prose>
-        A pipeline has five independent stages with the following per-stage retention
-        rates: URL filter 85%, language ID 70%, dedup 55%, heuristics 80%, classifier
-        65%. What fraction of the original corpus reaches the end of the pipeline? If
-        the original corpus is 500 billion documents, how many documents remain? What
-        is the effective cost per retained document if the classifier costs
-        $0.00001 per document and runs on all documents that pass dedup?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — Perplexity as signal and trap</H3>
-
-      <Prose>
-        You train a perplexity filter using Wikipedia as the reference corpus. You then
-        apply it to a crawl that includes (a) high-quality programming documentation,
-        (b) academic LaTeX-formatted papers, (c) high-quality colloquial forum posts,
-        and (d) boilerplate privacy policies. Which of these would you expect to score
-        high perplexity (and therefore be dropped), and which low? For each incorrect
-        drop, describe what assumption the perplexity filter is making that fails for
-        that document type. How would you modify the reference corpus to address each
-        failure?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — Custom vs. open classifier</H3>
-
-      <Prose>
-        You are building a pretraining corpus for a medical language model. The available
-        off-the-shelf classifier is FineWeb-Edu, trained to detect general educational
-        content. Describe the likely miscalibration: which types of medical documents
-        would it over-retain, which would it under-retain, and why? Design a training
-        set for a custom medical quality classifier: what would you use as the positive
-        class, what as the negative class, and how many examples do you need? At what
-        point does retraining become worth the cost compared to using FineWeb-Edu with
-        a manually adjusted threshold?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — LLM curator for a specialized domain</H3>
-
-      <Prose>
-        You want to build an LLM-curator pipeline for a corpus of legal documents.
-        Design the annotation prompt for the teacher LLM: what rubric would you ask it
-        to apply? What is the minimum annotation sample size to train a reliable classifier,
-        assuming the legal corpus has five distinct sub-domains (contracts, case law,
-        statutes, regulatory filings, legal journalism)? How do you ensure the annotation
-        sample is domain-stratified? What failure mode occurs if you annotate only
-        contracts and apply the resulting classifier to case law?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — Diversity loss vs. threshold</H3>
-
-      <Prose>
-        You have a quality classifier that assigns scores in [0, 1]. You run it on
-        a multilingual corpus and observe that English documents have a mean score of
-        0.68 with standard deviation 0.12, while Swahili documents have a mean score
-        of 0.31 with standard deviation 0.08. You apply a global threshold of 0.5.
-        What fraction of each language passes (assume Gaussian distributions)? If
-        Swahili represents 0.5 percent of the corpus by document count, what fraction
-        of the final curated corpus is Swahili? How does this compare to the fraction
-        you would retain if you used a language-specific threshold set at the 50th
-        percentile of each language's score distribution? Describe the downstream
-        model capability implications of each choice.
-      </Prose></div></section>
+            ": selecting existing records leaves open whether a transformation or generated example can add useful training signal without reproducing the source's mistakes or narrowing its diversity."
+          }
+        </Prose>
+      </section>
     </div>
   ),
 };
-
-export default dataCurationPipelines;

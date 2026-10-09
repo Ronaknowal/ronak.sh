@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "XOR scroll instruction current",
+      "pass": true
+    },
+    {
+      "name": "XOR keyboard scroll works",
+      "pass": true
+    },
+    {
+      "name": "Y identities named on receiving endpoints",
+      "pass": true
+    },
+    {
+      "name": "Actual Y identities have several colours",
+      "pass": true
+    },
+    {
+      "name": "Final root and52figures fit 768/32",
+      "pass": true
+    },
+    {
+      "name": "Final root and52figures fit 390/16",
+      "pass": true
+    },
+    {
+      "name": "Final root and52figures fit 390/32",
+      "pass": true
+    },
+    {
+      "name": "Restored16",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "xor-enlarged.jpg",
+    "donors-enlarged.jpg",
+    "donors-paths-enlarged.jpg"
+  ]
+}

@@ -1,126 +1,30 @@
 import { useId } from 'react';
-import { NeuralNumber } from './NeuralNumberControl.jsx';
-import { NeuralTable, NeuralPlot, formatNeural } from './NeuralLessonElements.jsx';
+import { NeuralTable, formatNeural } from './NeuralLessonElements.jsx';
+import { FlowControls, FlowSlider } from './LessonFlow.jsx';
 import { convexHull } from '../../data/hopfield-memory-models.js';
-import './neural-lesson-neutral.css';
 import './hopfield-memory-labs.css';
-export const f = formatNeural;
-export const vec = x => '[' + x.map(v => f(v, 5)).join(', ') + ']';
-export function MemoryFigure({
-  title,
-  width = 620,
-  height,
-  children,
-  description
-}) {
-  return <figure className="hm-figure"><figcaption>{title}</figcaption><div className="hm-scroll" role="region" aria-label={title} tabIndex={0}><svg viewBox={`0 0 ${width} ${height}`} style={{
-        width: '100%',
-        minWidth: width
-      }} role="img" aria-label={description || title}>{children}</svg></div>{description && <p className="hm-legend">{description}</p>}</figure>;
+export const f = (value,digits=6) => formatNeural(value,digits).replaceAll('-','−');
+export const vec = values => '['+values.map(v=>f(v,5)).join(', ')+']';
+export const memoryColors={input:'#92c9e6',parameter:'#e6b854',computed:'#ba9fd1',gradient:'#e69456',neutral:'#ddd',negative:'#92c9e6'};
+export function MemoryFigure({title,width=320,height,children,description}) {
+ return <figure className="hm-figure"><div className="hm-scroll" role="region" aria-label={title} tabIndex={0}><svg viewBox={`0 0 ${width} ${height}`} style={{width:'100%',maxWidth:width}} role="img" aria-label={description||title}>{children}</svg></div>{description&&<figcaption>{description}</figcaption>}</figure>;
 }
-export function Arrow({
-  x1,
-  y1,
-  x2,
-  y2,
-  color = '#e6bb60',
-  dashed = false
-}) {
-  const angle = Math.atan2(y2 - y1, x2 - x1),
-    size = 7;
-  return <g stroke={color} fill={color}><line x1={x1} y1={y1} x2={x2} y2={y2} strokeDasharray={dashed ? '5 4' : undefined} /><path d={`M${x2},${y2}L${x2 - size * Math.cos(angle - .5)},${y2 - size * Math.sin(angle - .5)}L${x2 - size * Math.cos(angle + .5)},${y2 - size * Math.sin(angle + .5)}Z`} /></g>;
+export function Arrow({x1,y1,x2,y2,color='#888',dashed=false}) {const a=Math.atan2(y2-y1,x2-x1),size=6;return <g stroke={color} fill="none"><line x1={x1} y1={y1} x2={x2} y2={y2} strokeDasharray={dashed?'5 4':undefined}/><path d={`M${x2-size*Math.cos(a-.45)},${y2-size*Math.sin(a-.45)}L${x2},${y2}L${x2-size*Math.cos(a+.45)},${y2-size*Math.sin(a+.45)}`}/></g>;}
+export function Node({x,y,width=70,height=36,lines,color='#ddd'}) {return <g><rect x={x} y={y} width={width} height={height} rx="5" fill="#0b0b0b" stroke={color}/>{lines.map((line,i)=><text key={i} x={x+width/2} y={y+height/2+(i-(lines.length-1)/2)*16+5} textAnchor="middle">{line}</text>)}</g>;}
+export function VectorEditor({label,value,onChange,min=-2,max=2}) {return <FlowControls>{value.map((v,i)=><FlowSlider key={i} name={`${label} ${i===0?'x':'y'}`} value={v} min={min} max={max} step={.05} onChange={n=>onChange(value.map((old,j)=>i===j?n:old))}/>)}</FlowControls>;}
+export function Bits({label,value,onChange}) {return <div className="hm-bits" role="group" aria-label={label}>{value.map((v,i)=><button key={i} type="button" aria-label={`${label} coordinate${i+1}; flip ${v}`} aria-pressed={v>0} onClick={()=>onChange(value.map((old,j)=>i===j?-old:old))}>{i+1}: {v>0?'+1':'−1'}</button>)}</div>;}
+export function MemoryPlot({title,xLabel,yLabel,series,xDomain,yDomain}) {
+ const id=useId().replaceAll(':',''),rows=series.map(s=>({...s,values:s.values||s.points})),all=rows.flatMap(s=>s.values),bounds=axis=>{const lo=Math.min(...all.map(v=>v[axis])),hi=Math.max(...all.map(v=>v[axis])),pad=hi===lo?.1:(hi-lo)*.05;return [lo-pad,hi+pad];},[x0,x1]=xDomain||bounds(0),[y0,y1]=yDomain||bounds(1),x=v=>52+(v-x0)/(x1-x0)*250,y=v=>220-(v-y0)/(y1-y0)*175;
+ const wrap=text=>text.split(' ').reduce((lines,word)=>{const last=lines.length-1;if((lines[last]+' '+word).trim().length>32)lines.push(word);else lines[last]=(lines[last]+' '+word).trim();return lines;},['']);
+ return <><MemoryFigure title={title} width={340} height={343+rows.length*28} description={`${title}. Horizontal: ${xLabel}; vertical: ${yLabel}. Lines show the explicitly calculated or measured coordinates, not additional observations.`}><defs><clipPath id={id}><rect x="52" y="45" width="250" height="175"/></clipPath></defs><path d="M52 45V220H302" stroke="#777" fill="none"/><text x="20" y="20">{wrap(yLabel+' ↑').map((line,i)=><tspan key={i} x="20" dy={i?18:0}>{line}</tspan>)}</text><text x="178" y="267" textAnchor="middle">{wrap(xLabel+' →').map((line,i)=><tspan key={i} x="178" dy={i?18:0}>{line}</tspan>)}</text>{[0,.5,1].map(t=><g key={t}><text x={52+250*t} y="242" textAnchor="middle">{f(x0+(x1-x0)*t,3)}</text><text x="45" y={225-175*t} textAnchor="end">{f(y0+(y1-y0)*t,3)}</text></g>)}<g clipPath={`url(#${id})`}>{rows.map((s,i)=><polyline key={i} points={s.values.map(v=>`${x(v[0])},${y(v[1])}`).join(' ')} fill="none" stroke={s.color||memoryColors.computed} strokeWidth="2" strokeDasharray={s.dashed?'5 4':undefined}/>)}</g>{rows.map((s,i)=>{const p=s.values.at(-1),labelY=320+i*28;return <g key={i}><path d={`M${x(p[0])} ${y(p[1])}H${309+i*7}V${labelY-4}H307`} fill="none" stroke={s.color||memoryColors.computed}/><text x="301" y={labelY} textAnchor="end" fill={s.color||memoryColors.computed}>{s.shortLabel||s.label}</text></g>;})}</MemoryFigure><NeuralTable caption={`Exact coordinates: ${title}`} headers={['Series',xLabel,yLabel]} rows={rows.flatMap(s=>s.values.map(([a,b])=>[s.label,f(a,8),f(b,8)]))}/></>;
 }
-export function Node({
-  x,
-  y,
-  width = 135,
-  height = 44,
-  lines,
-  color = '#444'
-}) {
-  return <g><rect x={x} y={y} width={width} height={height} rx="4" fill="#191919" stroke={color} />{lines.map((line, i) => <text key={i} x={x + width / 2} y={y + height / 2 + (i - (lines.length - 1) / 2) * 18 + 5} textAnchor="middle">{line}</text>)}</g>;
+export function Bars({title,labels,values,reference=null,referenceLabel='Pinned',signed=false,fixedMaximum=null,color=memoryColors.computed}) {
+ const maximum=fixedMaximum??Math.max(1e-12,...values.map(Math.abs),...(reference||[]).map(Math.abs)),zero=signed?160:95,scale=(signed?110:190)/maximum,height=values.length*62+55;
+ return <MemoryFigure title={title} height={height} description={`${title}. Bars use one scale from zero to ${f(maximum)}${signed?' in either signed direction':''}. ${reference?'The white marker is '+referenceLabel+'. ':''}Exact values accompany every bar.`}>{labels.map((label,i)=>{const y=22+i*62,v=values[i]*scale;return <g key={i}><text x="20" y={y}>{label}</text><line x1={zero} y1={y+5} x2={zero} y2={y+30} stroke="#888"/><rect x={zero+Math.min(0,v)} y={y+9} width={Math.abs(v)} height="14" fill={signed?(values[i]<0?memoryColors.negative:memoryColors.parameter):color}/>{reference&&<line x1={zero+reference[i]*scale} x2={zero+reference[i]*scale} y1={y+5} y2={y+27} stroke="#fff"/>}<text x="20" y={y+46}>{f(values[i],7)}</text></g>;})}<text x="20" y={height-8}>full-scale magnitude: {f(maximum)}</text></MemoryFigure>;
 }
-export function VectorEditor({
-  label,
-  value,
-  onChange,
-  min = -2,
-  max = 2
-}) {
-  return <fieldset className="hm-vector"><legend>{label}</legend><div className="neural-controls">{value.map((v, i) => <NeuralNumber key={i} label={`${label} ${i === 0 ? 'x' : 'y'}`} value={v} min={min} max={max} range={false} onChange={x => onChange(value.map((old, j) => i === j ? x : old))} />)}</div></fieldset>;
+export function MemoryPlane({title,memories,q,read,path=[],contours=[],extent=2,selected=0,selectedMemory=-1}) {
+ const id=useId().replaceAll(':',''),limit=Math.max(extent,...memories.flat().map(Math.abs),...(q||[]).map(Math.abs),...(read||[]).map(Math.abs))*1.05,x=v=>160+v/limit*116,y=v=>153-v/limit*116,point=p=>`${x(p[0])},${y(p[1])}`,hull=convexHull(memories),labels=[...new Map(memories.map(p=>[p.join(','),p])).values()].map(p=>({point:p,names:memories.flatMap((m,i)=>m[0]===p[0]&&m[1]===p[1]?[`M${i+1}`]:[])}));
+ return <MemoryFigure title={title} height={390} description={`${title}. Equal coordinate scales; cyan circles are stored memories, white square the cue, violet diamond the next read. The grey outline is the convex hull of stored rows; every weighted read stays inside it. Grey routes trace repeated state changes; white ring marks the selected step.`}><defs><clipPath id={id}><rect x="44" y="37" width="232" height="232"/></clipPath></defs><g clipPath={`url(#${id})`}><path d="M44 153H276 M160 37V269" stroke="#777"/>{contours.map((c,i)=><path key={i} d={c.segments.map(s=>`M${point(s[0])}L${point(s[1])}`).join('')} fill="none" stroke="#555"/>)}{hull.length>1&&<polygon points={hull.map(point).join(' ')} fill="none" stroke="#aaa"/>}{path.slice(0,-1).map((p,i)=><Arrow key={i} x1={x(p[0])} y1={y(p[1])} x2={x(path[i+1][0])} y2={y(path[i+1][1])} color="#aaa"/>)}{memories.map((p,i)=><circle key={i} cx={x(p[0])} cy={y(p[1])} r={i===selectedMemory?7:5} stroke={i===selectedMemory?'white':'none'} fill={memoryColors.input}><title>Memory {i+1}: {vec(p)}</title></circle>)}{labels.map(({point:p,names},i)=><text key={i} x={Math.max(78,Math.min(238,x(p[0])))} y={Math.max(50,Math.min(254,y(p[1])-13))} textAnchor="middle" fill={memoryColors.input}>{names.join(',')}</text>)}{q&&<rect x={x(q[0])-4} y={y(q[1])-4} width="8" height="8" fill="#fff"/>}{read&&<path d={`M${x(read[0])},${y(read[1])-7}l7,7 -7,7 -7,-7Z`} fill={memoryColors.computed}/>} {path[selected]&&<circle cx={x(path[selected][0])} cy={y(path[selected][1])} r="10" fill="none" stroke="#fff"/>}</g><text x="44" y="292" textAnchor="middle">{f(-limit,2)}</text><text x="276" y="292" textAnchor="middle">{f(limit,2)}</text><text x="160" y="316" textAnchor="middle">horizontal coordinate x</text><text x="44" y="22">vertical coordinate y</text><text x="42" y="44" textAnchor="end">{f(limit,2)}</text><text x="42" y="273" textAnchor="end">{f(-limit,2)}</text><text x="20" y="344">memories: cyan · cue: white</text><text x="20" y="367">read: violet · route: grey</text></MemoryFigure>;
 }
-export function Bits({
-  label,
-  value,
-  onChange
-}) {
-  return <div><p>{label}</p><div className="hm-bits">{value.map((x, i) => <button type="button" key={i} aria-label={`${label}, coordinate ${i + 1}, ${x > 0 ? 'plus' : 'minus'} one; flip sign`} aria-pressed={x > 0} onClick={() => onChange(value.map((old, j) => i === j ? -old : old))}>{i + 1}: {x > 0 ? '+1' : '−1'}</button>)}</div></div>;
-}
-export function MemoryPlot(props) {
-  const series = props.series.map(row => ({
-      ...row,
-      values: row.values || row.points
-    })),
-    all = series.flatMap(row => row.values),
-    bounds = axis => {
-      const low = Math.min(...all.map(p => p[axis])),
-        high = Math.max(...all.map(p => p[axis])),
-        padding = high === low ? .1 : (high - low) * .04;
-      return [low - padding, high + padding];
-    };
-  return <><div className="hm-scroll" role="region" aria-label={props.title} tabIndex={0}><div className="hm-plot-size"><NeuralPlot {...props} series={series} xDomain={props.xDomain || bounds(0)} yDomain={props.yDomain || bounds(1)} /></div></div><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Exact plotted coordinates</h4><NeuralTable caption={props.title} headers={['Series', props.xLabel, props.yLabel]} rows={series.flatMap(row => row.values.map(([x, y]) => [row.label, f(x, 8), f(y, 8)]))} /></section></>;
-}
-export function Bars({
-  title,
-  labels,
-  values,
-  reference = null,
-  referenceLabel = 'Pinned',
-  signed = false,
-  fixedMaximum = null
-}) {
-  const maximum = fixedMaximum ?? Math.max(1e-12, ...values.map(Math.abs), ...(reference || []).map(Math.abs)),
-    width = 460,
-    h = labels.length * 36 + 54,
-    zero = signed ? 260 : 140,
-    scale = (signed ? 160 : 270) / maximum;
-  return <MemoryFigure title={title} width={width} height={h} description={reference ? `Filled bars: current; white line: ${referenceLabel}. Exact values are printed.` : fixedMaximum ? `Fixed class-mass scale from0 to${fixedMaximum}; exact values are printed.` : 'Each bar is proportional to its stated value; zero is the vertical reference.'}><line x1={zero} y1="10" x2={zero} y2={h - 25} stroke="#888" />{labels.map((label, i) => {
-      const y = 20 + i * 36,
-        x = values[i] * scale;
-      return <g key={i}><text x="5" y={y + 13}>{label}</text><rect x={zero + Math.min(0, x)} y={y} width={Math.abs(x)} height="17" fill={x < 0 ? '#e9979f' : '#e6bb60'} />{reference && <line x1={zero + reference[i] * scale} x2={zero + reference[i] * scale} y1={y - 3} y2={y + 21} stroke="white" strokeWidth="2" />}<text x={zero} y={y + 30} className="hm-small">{f(values[i], 6)}</text></g>;
-    })}{fixedMaximum&&<g><line x1={zero} x2={zero+270} y1={h-23} y2={h-23} stroke="#aaa"/><text x={zero} y={h-4}>0</text><text x={zero+270} y={h-4} textAnchor="end">{fixedMaximum}</text></g>}</MemoryFigure>;
-}
-export function MemoryPlane({
-  title,
-  memories,
-  q,
-  read,
-  path = [],
-  contours = [],
-  extent = 2,
-  selected = 0
-}) {
-  const id = useId().replace(/:/g, ''),
-    x = v => 180 + v / extent * 135,
-    y = v => 170 - v / extent * 135,
-    point = p => `${x(p[0])},${y(p[1])}`,
-    hull = convexHull(memories);
-  return <MemoryFigure title={title} width={360} height={370} description="Equal coordinate scales. Circles are memories; square is the cue; diamond is the next read. The hull marks possible weighted averages."><defs><clipPath id={id}><rect x="45" y="35" width="270" height="270" /></clipPath></defs><rect x="45" y="35" width="270" height="270" fill="#151515" stroke="#555" /><g clipPath={`url(#${id})`}><line x1="45" y1="170" x2="315" y2="170" stroke="#555" /><line x1="180" y1="35" x2="180" y2="305" stroke="#555" />{contours.map((c, i) => <path key={i} d={c.segments.map(s => `M${point(s[0])}L${point(s[1])}`).join('')} stroke="#465260" strokeWidth=".7" fill="none" />)}{hull.length > 1 && <polygon points={hull.map(point).join(' ')} fill={hull.length > 2 ? '#b99b3320' : 'none'} stroke="#b69a53" />}{path.length > 1 && <polyline points={path.map(point).join(' ')} fill="none" stroke="#87bdf1" strokeWidth="2" />}{path.slice(0, -1).map((p, i) => <Arrow key={i} x1={x(p[0])} y1={y(p[1])} x2={x(path[i + 1][0])} y2={y(path[i + 1][1])} color="#87bdf1" />)}{memories.map((p, i) => <g key={i}><circle cx={x(p[0])} cy={y(p[1])} r="5" fill="#e6bb60" /><text x={Math.min(290, Math.max(48, x(p[0]) + 8))} y={Math.min(298, Math.max(49, y(p[1]) - 8))}>M{i + 1}</text></g>)}{q && <rect x={x(q[0]) - 5} y={y(q[1]) - 5} width="10" height="10" fill="#87bdf1" />}{read && <path d={`M${x(read[0])},${y(read[1]) - 7}l7,7 -7,7 -7,-7Z`} fill="#e9979f" />}{path[selected] && <circle cx={x(path[selected][0])} cy={y(path[selected][1])} r="9" fill="none" stroke="white" />}</g><text x="45" y="325">−{extent}</text><text x="307" y="325">{extent}</text><text x="180" y="346" textAnchor="middle">coordinate x</text><text x="5" y="42">{extent}</text><text x="5" y="307">−{extent}</text><text x="7" y="20">y</text></MemoryFigure>;
-}
-export function PixelImage({
-  title,
-  pixels,
-  raw = false,
-  caption
-}) {
-  return <figure className="hm-image"><svg viewBox="0 0 80 80" role="img" aria-label={title}>{pixels.map((p, i) => {
-        const c = Math.round(255 * Math.max(0, Math.min(1, p / (raw ? 16 : 1))));
-        return <rect key={i} x={i % 8 * 10} y={Math.floor(i / 8) * 10} width="10" height="10" fill={`rgb(${c},${c},${c})`} />;
-      })}</svg><figcaption>{title}{caption && <><br />{caption}</>}</figcaption></figure>;
-}
-export function Values({
-  caption,
-  rows
-}) {
-  return <NeuralTable caption={caption} headers={['Quantity', 'Value']} rows={rows} />;
-}
+export function PixelImage({title,pixels,raw=false,caption}) {return <figure className="hm-image"><svg viewBox="0 0 80 80" role="img" aria-label={title}>{pixels.map((v,i)=>{const c=Math.round(255*Math.max(0,Math.min(1,v/(raw?16:1))));return <rect key={i} x={i%8*10} y={Math.floor(i/8)*10} width="10" height="10" fill={`rgb(${c},${c},${c})`}/>;})}</svg><figcaption>{title}{caption&&<><br/>{caption}</>}</figcaption></figure>;}
+export function Values({caption,rows}) {return <NeuralTable caption={caption} headers={['Quantity','Value']} rows={rows}/>;}

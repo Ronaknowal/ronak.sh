@@ -1,0 +1,21 @@
+multiplier 1.0
+raw_energy_axis_share [16.  4.] horizontal 0.8
+standardized_energy_axis_share [4. 4.] tied 0.5
+scaler_library_equal True
+tied_optimal_losses 4.0 4.0
+multiplier 2.0
+raw_energy_axis_share [16. 16.] tied 0.5
+standardized_energy_axis_share [4. 4.] tied 0.5
+scaler_library_equal True
+tied_optimal_losses 4.0 4.0
+multiplier 10.0
+raw_energy_axis_share [ 16. 400.] vertical 0.9615384615384616
+standardized_energy_axis_share [4. 4.] tied 0.5
+scaler_library_equal True
+tied_optimal_losses 4.0 4.0
+population_sample_variance [4. 1.] [5.333333 1.333333]
+constant_scale_and_mask [2. 1.] [False  True]
+query_scaled_and_restored [[1.5 2. ]] [[3. 9.]]
+weighted_loss_two_routes 12.499999999999998 12.5
+imputer_training_statistics [3.       5.333333]
+missing_query_score [[-0.]]

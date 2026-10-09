@@ -1,0 +1,7 @@
+masses [2.0, 2.0, 0.0] usable [True, True, False]
+normalized [[0.5, 0.0, 0.5], [0.0, 0.5, 0.5], [0.0, 0.0, 0.0]] compensated [[4.0, 2.0, 0.0], [2.0, 6.0, 0.0]]
+reconstruction_preserved True
+permuted_rescaled_alignment Alignment(pairs=((0, 1), (1, 0)), cost=0.0, unmatched_left=(), unmatched_right=(), unused_left=(2,), unused_right=(2,), ambiguity='no-alternative-within-tolerance', alternative_pairs=())
+duplicate_ambiguity Alignment(pairs=((0, 0), (1, 1)), cost=0.0, unmatched_left=(), unmatched_right=(), unused_left=(), unused_right=(), ambiguity='alternative-within-tolerance', alternative_pairs=((0, 1), (1, 0)))
+contributions [[4.0, 2.0, 0.0], [2.0, 6.0, 0.0]]
+C0_removed [0.0, 1.0, 1.0]

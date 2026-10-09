@@ -1,893 +1,1512 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
-
-const moeTraining = {
-  title: "MoE Training & Expert Load Balancing",
-  slug: "moe-training-expert-load-balancing",
-  readTime: "38 min",
-  content: () => (
-    <div>
-
-      {/* ====================================================================
-          1. WHY IT EXISTS
-          ==================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        In 2017 a team at Google asked a straightforward question: what if most of a network's parameters were simply not computed on any given input? Every parameter still exists — consuming memory, benefiting from capacity — but only a small subset is actually executed per token. The result is a model whose knowledge scales with total parameter count but whose arithmetic cost scales with something far smaller. That idea, formalized as a Sparsely-Gated Mixture-of-Experts layer by Shazeer, Mirhoseini, Maziarz, Davis, Le, Hinton, and Dean (arXiv:1701.06538, ICLR 2017), is the foundation of every major MoE language model that exists today.
-      </Prose>
-
-      <Prose>
-        The practical payoff is dramatic. DeepSeek-V3 (arXiv:2412.19437) has 671 billion total parameters but activates only 37 billion per token — a ratio of roughly 18:1. Mixtral 8×7B (arXiv:2401.04088) has 47 billion total parameters but activates 13 billion per forward pass. GLaM (arXiv:2112.06905) reached 1.2 trillion parameters while consuming one-third the training energy of GPT-3. These are not marginal improvements; they represent a qualitative shift in what is achievable within a fixed compute budget.
-      </Prose>
-
-      <Prose>
-        The architecture works by replacing the dense feed-forward network (FFN) inside each transformer block with a bank of <Code>N</Code> parallel expert networks, plus a small learned router. On each token, the router picks the top <Code>k</Code> experts (almost always <Code>k=1</Code> or <Code>k=2</Code>), runs only those, and blends their outputs. The remaining <Code>N−k</Code> experts contribute zero FLOPs. Active compute is therefore proportional to <Code>k</Code>, not <Code>N</Code> — so you can double the expert count and double total model capacity without changing the per-token arithmetic cost at all.
-      </Prose>
-
-      <Callout accent="blue">
-        MoE is not a compression trick. The experts are full-sized FFNs with real parameters that really learn. The trick is that only a few of them run on any given token. Total knowledge scales with <Code>N</Code>; per-token compute scales with <Code>k</Code>.
-      </Callout>
-
-      <Prose>
-        The history follows a clear arc. Shazeer et al. 2017 proved the idea worked at scale for language modeling and machine translation, with up to 137 billion parameters spread across 2048 LSTM experts. GShard (Lepikhin et al., arXiv:2006.16668, 2020) scaled MoE to 600 billion parameters inside a Transformer, introducing the capacity factor and auxiliary load-balance loss that became standard. The Switch Transformer (Fedus, Zoph, Shazeer, arXiv:2101.03961, 2022 JMLR) simplified routing to top-1 and proved that even this aggressive sparsification worked stably at trillion-parameter scale. GLaM (Du et al., arXiv:2112.06905, 2021) demonstrated energy efficiency advantages over dense models. Mixtral 8×7B (Jiang et al., arXiv:2401.04088, 2024) became the canonical open MoE model, showing that top-2 routing over 8 experts with a 45B total / 13B active budget matched or exceeded much larger dense models. DeepSeek-V2 (arXiv:2405.04434, 2024) and DeepSeek-V3 (arXiv:2412.19437, 2024) pushed further with innovations including shared experts, fine-grained routed experts, and auxiliary-loss-free load balancing.
-      </Prose>
-
-      <Prose>
-        Why does this matter enough to warrant its own engineering discipline? Because training an MoE model is categorically harder than training a dense one. The routing step introduces instabilities — routing collapse, token dropping, all-to-all communication bottlenecks — that do not exist in dense training and require explicit remedies. Every major MoE paper spends substantial space on what went wrong and how it was fixed. This topic is about understanding those failure modes deeply enough to prevent them and recognize them when they appear.
-      </Prose>
-
-      {/* ====================================================================
-          2. CORE INTUITION
-          ==================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        Start with a standard transformer FFN. It takes a hidden state of dimension <Code>d_model</Code>, expands it through a linear layer to <Code>d_ff</Code> (typically <Code>4 × d_model</Code>), applies a nonlinearity, and projects back down. Every token uses the same FFN. Every weight in that FFN participates in every forward pass. This is the baseline: a monolithic specialist that has to learn everything at once.
-      </Prose>
-
-      <Prose>
-        Now imagine replacing that single FFN with eight FFNs — each identical in shape, each with its own independent weights. Before any expert runs, a router — a single linear layer of size <Code>d_model × N</Code> — looks at the token's hidden state and produces a score for each of the eight experts. Take the top two scores, normalize them so they sum to one, and run only those two experts. Weighted-sum their outputs. Write the result back into the residual stream.
-      </Prose>
-
-      <Prose>
-        From the token's perspective, the MoE layer looks exactly like a standard FFN — it receives a vector and returns a vector. But the mechanics are entirely different: two small committees processed this particular token, and the other six experts never even saw it. The next token in the batch might be routed to completely different experts. Routing decisions vary token by token, layer by layer, driven entirely by the router's learned preferences.
-      </Prose>
-
-      <Prose>
-        The hope — and the empirical finding — is that experts specialize. A model trained on code, prose, and multilingual text may develop experts that handle English syntax differently from how they handle Python semantics, and those differently still from how they handle mathematical notation. The router learns to direct each token toward the experts most relevant to its content. The result is a model where each forward pass is, in effect, selecting a customized compute path through the parameter space. Interpretability researchers analyzing Mixtral and DeepSeek-V2 have found real evidence of this: specific experts activate disproportionately on code identifiers, on named entities, on numeric tokens, on punctuation — though the picture is noisy and specialization is never perfectly clean. The router is doing something more than random assignment, even if it is doing something less than perfect semantic parsing.
-      </Prose>
-
-      <Prose>
-        It is important to understand what the router is not doing. It is not parsing the token's meaning in a deep linguistic sense before deciding where to send it. The router is a single linear layer — a matrix multiply followed by a softmax. It has access only to the token's current hidden state at that layer, not to the token's raw text, not to its position in the sentence, not to what came before. Whatever the router "knows" about a token is exactly what the preceding attention sublayer has written into that token's hidden state. The router is, in this sense, a learned hash function: it partitions the space of hidden-state vectors into N buckets, and tokens that land in the same bucket are processed by the same expert. Whether those buckets correspond to anything semantically coherent depends on training.
-      </Prose>
-
-      <Prose>
-        But there is an immediate problem: the router is free to send all tokens to one expert. And it will, if you let it. The expert that receives the most tokens gets the most gradient signal, learns the fastest, and becomes the best. So the router sends even more tokens to it. The cycle is self-reinforcing and fast. Within a few hundred steps of training, a naive MoE collapses to a model where one or two experts handle nearly everything and the rest are vestigial. The entire capacity argument breaks down. Preventing this collapse is what makes MoE training an engineering problem and not just an architecture choice.
-      </Prose>
-
-      <Prose>
-        The practical picture of collapse is stark: imagine a model with 8 experts and top-2 routing. Ideal behavior is that each expert handles roughly 25% of tokens (2 out of 8, across 2 selections per token). In collapse, one expert handles 85–95% of tokens. The other seven experts receive almost no training signal, plateau at initialization-level performance, and contribute almost nothing to the final output. The model's total capacity is now dominated by a single expert. You have paid the memory cost of storing 8× the parameters of a dense equivalent, but you are getting the effective capacity of something smaller than a single expert. Detecting and preventing this is the core challenge of MoE training, and everything that follows — the auxiliary loss, the capacity factor, the routing noise — is a response to it.
-      </Prose>
-
-      {/* ====================================================================
-          3. MATH FOUNDATION
-          ==================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>3a. The routing equation</H3>
-
-      <Prose>
-        Let <Code>x ∈ ℝ^d_model</Code> be the token's hidden state entering the MoE layer. The router is a weight matrix <Code>W_r ∈ ℝ^(d_model × N)</Code>. The output of the MoE layer is:
-      </Prose>
-
-      <MathBlock>{"y = \\sum_{i=1}^{N} G(x)_i \\cdot E_i(x), \\quad G(x) = \\text{TopK}\\!\\left(\\text{softmax}(W_r x), \\; k\\right)"}</MathBlock>
-
-      <Prose>
-        Here <Code>E_i(x)</Code> is the <Code>i</Code>-th expert's FFN applied to <Code>x</Code>, and <Code>G(x)</Code> is a sparse vector with exactly <Code>k</Code> nonzero entries — the re-normalized softmax scores of the top-<Code>k</Code> selected experts. The remaining <Code>N − k</Code> entries of <Code>G(x)</Code> are zero, and the corresponding <Code>E_i(x)</Code> terms are never computed.
-      </Prose>
-
-      <Prose>
-        The TopK operation is not differentiable with respect to the selection itself — you cannot backpropagate through the discrete choice of which expert to activate. However, <em>given</em> a fixed selection, the gate weights <Code>G(x)_i</Code> are differentiable functions of <Code>W_r</Code> via the softmax, and gradient flows through them cleanly. This is sufficient for learning useful router weights: the router learns which experts to prefer even though the selection step is hard.
-      </Prose>
-
-      <H3>3b. Auxiliary load-balance loss</H3>
-
-      <Prose>
-        For a batch of <Code>T</Code> tokens and <Code>N</Code> experts, define two quantities per expert <Code>i</Code>. The first is <Code>f_i</Code>: the fraction of tokens in the batch for which expert <Code>i</Code> is the top-1 selection — a hard count, non-differentiable. The second is <Code>P_i</Code>: the mean softmax probability assigned to expert <Code>i</Code> across all tokens in the batch — a soft average, differentiable. The auxiliary loss is their product, summed over experts and scaled by <Code>N</Code>:
-      </Prose>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{aux}} = N \\cdot \\sum_{i=1}^{N} f_i \\cdot P_i"}</MathBlock>
-
-      <Prose>
-        At perfectly uniform routing, every expert receives exactly <Code>1/N</Code> of tokens, so <Code>f_i = 1/N</Code> and <Code>P_i = 1/N</Code> for all <Code>i</Code>. The loss equals <Code>N · N · (1/N)²  = 1</Code>. Any deviation from uniformity increases the loss. When one expert monopolizes — say <Code>f_0 ≈ 1</Code>, <Code>P_0 ≈ 1</Code> — the loss approaches <Code>N · 1 · 1 = N</Code>. For <Code>N=8</Code> experts, that is 8× higher than the balanced minimum. The empirical demonstration below shows the collapsed router producing a loss of 7.997, almost exactly <Code>N</Code>.
-      </Prose>
-
-      <Prose>
-        Gradient flows through <Code>P_i</Code> (not <Code>f_i</Code>, which is discrete). That is enough: pushing the softmax outputs toward uniformity reshapes the router's weight matrix, and <Code>f_i</Code> follows along in expectation. The total loss used in training is <Code>L = L_main + α · L_aux</Code> where <Code>α</Code> is the auxiliary loss coefficient, typically 0.01.
-      </Prose>
-
-      <H3>3c. Capacity factor and token dropping</H3>
-
-      <Prose>
-        In practice, each expert processes tokens in a fixed-size buffer for hardware efficiency. The buffer size — called <em>expert capacity</em> — is set by the capacity factor <Code>C</Code>:
-      </Prose>
-
-      <MathBlock>{"\\text{capacity}_i = \\left\\lfloor \\frac{T}{N} \\cdot C \\right\\rfloor"}</MathBlock>
-
-      <Prose>
-        With <Code>C = 1.0</Code>, each expert gets exactly its equal share. With <Code>C = 1.25</Code>, experts can absorb 25% more tokens than average before overflow. Tokens routed to an expert beyond its capacity are <em>dropped</em> — they skip the FFN and pass through the layer via the residual connection unchanged. Dropping is not catastrophic; it is a mild regularizer during training. At inference it directly degrades quality, which is why inference typically uses <Code>C = 2.0</Code>.
-      </Prose>
-
-      <H3>3d. Balance condition and routing variance</H3>
-
-      <Prose>
-        The minimum of <Code>L_aux</Code> subject to the constraint <Code>Σ f_i = 1</Code> is achieved when <Code>f_i = P_i = 1/N</Code> for all <Code>i</Code>, giving <Code>f_i · P_i = 1/N²</Code> for each expert. This is the balance condition: per-expert routing variance should be zero around the uniform mean. In practice, routing variance — the variance of <Code>f_i</Code> across experts within a batch — is the primary diagnostic metric. A well-trained MoE sees routing variance converge near zero. Spikes in routing variance, even late in training, signal approaching collapse.
-      </Prose>
-
-      {/* ====================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ==================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        Every piece of code below was run with NumPy only (no PyTorch). All outputs shown are actual execution results, embedded verbatim. The six subsections build progressively: router, dispatch, expert forward, balance loss, capacity dropping, and the DeepSeek shared-expert variant.
-      </Prose>
-
-      <H3>4a. Router and top-k selection</H3>
-
-      <Prose>
-        The router is a linear projection from hidden state to expert logits, followed by softmax and top-k selection. After selecting the top-k experts, their probabilities are re-normalized to sum to one — these become the gate weights used in the final weighted sum.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-
-np.random.seed(42)
-
-def softmax(x, axis=-1):
-    e = np.exp(x - x.max(axis=axis, keepdims=True))
-    return e / e.sum(axis=axis, keepdims=True)
-
-def topk(arr, k, axis=-1):
-    idx = np.argsort(-arr, axis=axis)[..., :k]
-    vals = np.take_along_axis(arr, idx, axis=axis)
-    return vals, idx
-
-class MoERouter:
-    def __init__(self, d_model, num_experts, top_k):
-        self.W_r = np.random.randn(d_model, num_experts) * 0.02
-        self.top_k = top_k
-        self.num_experts = num_experts
-
-    def forward(self, x):               # x: (T, d_model)
-        logits = x @ self.W_r           # (T, N)
-        probs  = softmax(logits)        # (T, N)
-        topk_vals, topk_idx = topk(probs, self.top_k)   # (T, k)
-        gate = topk_vals / topk_vals.sum(axis=-1, keepdims=True)
-        return gate, topk_idx, logits   # gate weights, chosen experts, raw logits
-
-d_model, N, k = 64, 8, 2
-router = MoERouter(d_model, N, k)
-x_sample = np.random.randn(16, d_model)
-gate, indices, logits_out = router.forward(x_sample)
-
-# Output:
-# gate shape:    (16, 2)  (16 tokens, k=2 weights each)
-# indices shape: (16, 2)  (16 tokens, k=2 expert ids each)
-# first 4 token expert picks: [[5, 6], [6, 0], [1, 3], [1, 5]]
-# first 4 gate weights:       [[0.5082, 0.4918], [0.5113, 0.4887],
-#                               [0.5087, 0.4913], [0.509, 0.491]]`}
-      </CodeBlock>
-
-      <Prose>
-        Gate weights near 0.5/0.5 are expected from an untrained router — the softmax differences across randomly initialized logits are tiny, so the two selected experts receive nearly equal weight. After training, gate weights become more decisive: a strongly preferred expert receives weight 0.8+ while the secondary expert receives the remainder.
-      </Prose>
-
-      <H3>4b. Token dispatch</H3>
-
-      <Prose>
-        Before any expert can compute, tokens must be gathered into per-expert buckets. With <Code>B=16</Code> tokens, <Code>N=8</Code> experts, and <Code>k=2</Code>, each token contributes to two buckets. The total number of token-slot assignments is <Code>16 × 2 = 32</Code>, distributed across 8 experts.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def dispatch(tokens, indices, num_experts):
-    """
-    Returns a list of token-index lists, one per expert.
-    Each token appears in exactly k expert buckets.
-    """
-    T, k_dim = indices.shape
-    buckets = [[] for _ in range(num_experts)]
-    for t in range(T):
-        for s in range(k_dim):
-            eid = int(indices[t, s])
-            buckets[eid].append(t)
-    return buckets
-
-buckets = dispatch(x_sample, indices, N)
-
-# Output (B=16 tokens, N=8 experts, k=2):
-# Expert 0:  4 tokens - [1, 4, 5, 9]
-# Expert 1:  5 tokens - [2, 3, 12, 14, 15]
-# Expert 2:  2 tokens - [6, 7]
-# Expert 3:  4 tokens - [2, 9, 11, 15]
-# Expert 4:  5 tokens - [4, 5, 6, 8, 13]
-# Expert 5:  4 tokens - [0, 3, 10, 12]
-# Expert 6:  6 tokens - [0, 1, 7, 8, 13, 14]
-# Expert 7:  2 tokens - [10, 11]`}
-      </CodeBlock>
-
-      <Prose>
-        The expected load per expert is <Code>16 × 2 / 8 = 4</Code> token-slots. Expert 6 received 6 (50% over) and Expert 2 received 2 (50% under) — typical imbalance from random routing. Note that tokens 0, 1, and others appear in two different expert buckets: they will be processed twice, once by each of their two selected experts, and the results combined. This is correct behavior, not duplication.
-      </Prose>
-
-      <H3>4c. Expert forward pass and weighted combine</H3>
-
-      <Prose>
-        Each expert is a standard two-layer FFN. For assigned tokens, the expert computes its output; those outputs are then multiplied by the gate weight and accumulated into the final hidden state.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def relu(x):
-    return np.maximum(0, x)
-
-class Expert:
-    def __init__(self, d_model, d_ff):
-        self.W1 = np.random.randn(d_model, d_ff) * 0.02
-        self.W2 = np.random.randn(d_ff, d_model) * 0.02
-
-    def forward(self, x):        # x: (T_e, d_model)
-        return relu(x @ self.W1) @ self.W2
-
-experts_list = [Expert(d_model, d_model*4) for _ in range(N)]
-
-def expert_forward_combine(tokens, gate, indices, experts):
-    T   = tokens.shape[0]
-    out = np.zeros_like(tokens)
-    for t in range(T):
-        for s in range(indices.shape[1]):
-            eid = int(indices[t, s])
-            expert_out = experts[eid].forward(tokens[t:t+1])   # (1, d)
-            out[t] += gate[t, s] * expert_out.squeeze(0)
-    return out
-
-y = expert_forward_combine(x_sample, gate, indices, experts_list)
-
-# Output:
-# input shape:  (16, 64)
-# output shape: (16, 64)
-# output norm (first 4 tokens): [0.1909, 0.2206, 0.233, 0.2171]`}
-      </CodeBlock>
-
-      <Prose>
-        The output shape is identical to the input — the MoE layer is a drop-in replacement for a dense FFN from the surrounding transformer's perspective. The small output norms reflect an untrained network; after training, the gate weights sharpen and expert outputs grow larger as the network learns to use the capacity.
-      </Prose>
-
-      <H3>4d. Auxiliary load-balance loss</H3>
-
-      <Prose>
-        The auxiliary loss is computed from the router's raw logits and the top-k selections. Gradient flows through the soft <Code>P_i</Code> terms; the hard <Code>f_i</Code> counts are used for the loss value but detached from the computation graph. In NumPy, there is no autograd — gradient computation is shown manually to make the mechanism visible.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def aux_loss(router_logits, selected_experts, num_experts):
-    """
-    router_logits:    (T, N)  raw logits before softmax
-    selected_experts: (T, k)  indices chosen by top-k
-    Returns: scalar auxiliary loss value
-    """
-    probs = softmax(router_logits)          # (T, N)
-    P = probs.mean(axis=0)                  # (N,) mean soft prob per expert
-    top1  = selected_experts[:, 0]          # (T,) hard top-1 assignments
-    counts = np.bincount(top1, minlength=num_experts).astype(float)
-    f = counts / len(top1)                  # (N,) fraction of tokens per expert
-    return num_experts * float((f * P).sum())
-
-# Collapsed router: all logits push to expert 0
-collapsed_logits = np.zeros((16, N))
-collapsed_logits[:, 0] = 10.0
-_, collapsed_idx = topk(softmax(collapsed_logits), k)
-loss_c = aux_loss(collapsed_logits, collapsed_idx, N)
-
-# Balanced router: uniform logits
-balanced_logits = np.zeros((16, N))
-_, balanced_idx = topk(softmax(balanced_logits), k)
-loss_b = aux_loss(balanced_logits, balanced_idx, N)
-
-# Output:
-# Collapsed routing  - aux_loss = 7.997458
-# Balanced routing   - aux_loss = 1.000000
-# Loss ratio (collapse / balanced): 8.0x higher`}
-      </CodeBlock>
-
-      <Prose>
-        The collapsed router produces loss 7.997 ≈ N = 8; the balanced router produces loss 1.0. The minimum is exactly 1 (not 0) — this is the mathematical lower bound when routing is perfectly uniform, as derived in section 3b. The loss ratio of 8× means that routing collapse imposes a very strong penalty relative to the balanced state, which is exactly what makes the auxiliary loss effective.
-      </Prose>
-
-      <Prose>
-        To verify that adding the auxiliary loss gradient steers the router toward balance, here is a 20-step toy loop updating the router weights via the auxiliary loss gradient only:
-      </Prose>
-
-      <CodeBlock language="python">
-{`np.random.seed(0)
-T_train = 64
-W_r_train = np.random.randn(d_model, N) * 0.5   # biased initial weights
-
-def router_step(x, W_r, aux_weight, num_experts, k):
-    logits = x @ W_r
-    probs  = softmax(logits)
-    topk_vals, topk_idx = topk(probs, k)
-    P     = probs.mean(axis=0)
-    top1  = topk_idx[:, 0]
-    counts = np.bincount(top1, minlength=num_experts).astype(float)
-    f     = counts / len(top1)
-    loss_val = num_experts * float((f * P).sum())
-    # Gradient of aux_loss w.r.t. logits (chain rule through softmax)
-    d_P = np.tile(f, (len(x), 1)) / len(x)
-    d_logits = (d_P * probs
-                - probs * (d_P * probs).sum(axis=-1, keepdims=True))
-    grad_W = x.T @ (aux_weight * num_experts * d_logits)
-    return topk_idx, loss_val, grad_W
-
-lr = 0.1
-for step in range(20):
-    x_t   = np.random.randn(T_train, d_model)
-    idx_t, loss_val, grad_W = router_step(x_t, W_r_train, 0.01, N, k)
-    W_r_train -= lr * grad_W
-    if step % 5 == 0 or step == 19:
-        pct = (np.bincount(idx_t[:, 0], minlength=N) / T_train * 100).astype(int)
-        print(f"Step {step:2d} | aux_loss={loss_val:.4f} | usage%: {pct.tolist()}")
-
-# Output:
-# Step  0 | aux_loss=1.1993 | usage%: [7, 21, 18, 3, 12, 9, 18, 7]
-# Step  5 | aux_loss=1.0515 | usage%: [9, 17, 15, 10, 9, 9, 12, 15]
-# Step 10 | aux_loss=1.0472 | usage%: [15, 10, 20, 7, 14, 12, 7, 10]
-# Step 15 | aux_loss=1.1527 | usage%: [18, 12, 4, 6, 23, 7, 15, 10]
-# Step 19 | aux_loss=1.1630 | usage%: [6, 17, 10, 14, 26, 7, 9, 7]`}
-      </CodeBlock>
-
-      <Prose>
-        The auxiliary loss stays near 1.0–1.2 — far from the collapsed value of 8.0. Expert usage percentages fluctuate but stay within a reasonable range (4%–26% across all steps rather than collapsing to 90%+). In a real training run the router also sees gradient from the main language modeling loss, which provides much stronger signal and leads to cleaner convergence. The toy loop demonstrates the mechanism; the effect is more stable with proper end-to-end training.
-      </Prose>
-
-      <H3>4e. Capacity factor and token dropping</H3>
-
-      <Prose>
-        Even with auxiliary loss maintaining near-uniform routing in expectation, any particular batch will have non-uniform routing due to sample variance. The capacity factor determines how much overflow an expert can tolerate before tokens start getting dropped.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def simulate_drops(T, N, k, capacity_factor, num_samples=1000):
-    rng = np.random.default_rng(7)
-    drops = 0
-    total = 0
-    for _ in range(num_samples):
-        assigned = rng.integers(0, N, size=(T, k))   # uniform random routing
-        capacity = int((T / N) * capacity_factor)
-        for eid in range(N):
-            arrivals = int((assigned == eid).sum())
-            drops += max(0, arrivals - capacity)
-            total += arrivals
-    return drops / total
-
-T_cap = 64
-for cf in [0.75, 1.0, 1.25, 1.5, 2.0]:
-    dr = simulate_drops(T_cap, N=8, k=2, capacity_factor=cf)
-    print(f"capacity_factor={cf:.2f} -> drop_rate={dr:.3f} ({dr*100:.1f}%)")
-
-# Output:
-# capacity_factor=0.75 -> drop_rate=0.625 (62.5%)
-# capacity_factor=1.00 -> drop_rate=0.501 (50.1%)
-# capacity_factor=1.25 -> drop_rate=0.379 (37.9%)
-# capacity_factor=1.50 -> drop_rate=0.265 (26.5%)
-# capacity_factor=2.00 -> drop_rate=0.093 (9.3%)`}
-      </CodeBlock>
-
-      <Callout accent="gold">
-        Capacity factor 1.0 with uniform random routing still drops 50% of tokens — because each token occupies two expert slots (k=2) and average load per slot already equals capacity. This is why practical values are 1.25–1.5 during training. The drop-rate reduction from 1.25 to 2.0 is large (37.9% → 9.3%), justifying the 60% padding overhead at inference where quality matters most.
-      </Callout>
-
-      <H3>4f. Shared and routed experts (DeepSeek style)</H3>
-
-      <Prose>
-        DeepSeek-V2 and V3 split the expert pool into two groups: shared experts that activate on every token (capturing universal patterns like syntax and common function words) and routed experts that activate only when selected by the router (capturing specialized patterns). The shared experts absorb a constant load independent of routing; the routed experts compete for the remaining budget.
-      </Prose>
-
-      <CodeBlock language="python">
-{`N_shared = 1
-N_routed = 7
-k_routed = 2
-d_ff     = d_model * 4
-
-# Parameter counts
-expert_params    = d_model * d_ff + d_ff * d_model  # two linear layers each
-total_params     = (N_shared + N_routed) * expert_params + d_model * N_routed
-active_per_token = (N_shared + k_routed) * expert_params + d_model * N_routed
-
-print(f"N_shared={N_shared}, N_routed={N_routed}, k_routed={k_routed}")
-print(f"Total params (all experts + router): {total_params:,}")
-print(f"Active params per token:             {active_per_token:,}")
-print(f"Efficiency: {active_per_token/total_params*100:.1f}% of total params active")
-
-# Forward pass: shared always runs; routed runs top-k
-shared_expert  = Expert(d_model, d_ff)
-routed_experts = [Expert(d_model, d_ff) for _ in range(N_routed)]
-routed_router  = MoERouter(d_model, N_routed, k_routed)
-
-x_test = np.random.randn(8, d_model)
-gate_r, idx_r, logits_r = routed_router.forward(x_test)
-shared_out = shared_expert.forward(x_test)           # always active
-routed_out = expert_forward_combine(x_test, gate_r, idx_r, routed_experts)
-final_out  = shared_out + routed_out                 # sum contributions
-
-# Output:
-# N_shared=1, N_routed=7, k_routed=2
-# Total params (all experts + router): 262,592
-# Active params per token:             98,752
-# Efficiency: 37.6% of total params active per token
-# Output shape: (8, 64)
-# Output norm (first 4 tokens): [0.419, 0.4586, 0.3958, 0.3636]`}
-      </CodeBlock>
-
-      <Prose>
-        At 37.6% active parameter efficiency on this toy example, shared-plus-routed closely mirrors the actual ratio reported for DeepSeek-V3 (37B active / 671B total ≈ 5.5%, reflecting the much larger N). The ratio improves — meaning more experts are idle per token — as N grows, which is why large fine-grained MoE models with hundreds of experts achieve extreme efficiency ratios.
-      </Prose>
-
-      {/* ====================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ==================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        Production MoE code is dominated by three concerns that do not appear in the toy implementation: efficient all-to-all communication for expert parallelism, batched expert computation that avoids per-token Python loops, and stable numerical behavior across mixed-precision training. The toy implementation in section 4 is conceptually correct but processes each token individually in a Python loop. Real implementations group all tokens assigned to expert <Code>i</Code> into a single tensor, run the expert once on the entire batch, and scatter the outputs back. This is the difference between calling an expert once per token (O(T) Python overhead) and calling it once per step (O(1) Python overhead, with the batch size as a tensor dimension). Getting this right requires careful indexing of which tokens go where and keeping track of the original token order for the combine step.
-      </Prose>
-
-      <Prose>
-        Numerical stability in MoE training deserves special attention. Router logits are a linear projection over potentially large hidden states, and softmax over large logits can saturate quickly — producing gradients near zero even when routing is far from optimal. The standard mitigations are: (1) initialize the router weight matrix with very small weights (std ≈ 0.01 or smaller), so logits start near zero and the softmax starts near uniform; (2) optionally add temperature scaling to the router softmax, which sharpens or flattens the distribution without changing the argmax; (3) use fp32 precision for the router logits and gate weights even when the rest of the model runs in bf16 — this is the <Code>fp32_gate=True</Code> option seen in tutel and other frameworks. Router collapse in mixed-precision training is often a numerical precision issue: small logit differences that would be distinguishable in fp32 become indistinguishable in bf16, causing the router to behave as if all experts are equal and then converge to arbitrary partitions.
-      </Prose>
-
-      <H3>5a. HuggingFace Transformers — Mixtral</H3>
-
-      <Prose>
-        The <Code>transformers</Code> library provides a complete Mixtral implementation. Loading a Mixtral model and routing a batch of tokens returns per-layer routing decisions accessible through hook-based inspection or by examining internal buffers:
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Requires: pip install transformers torch
-from transformers import AutoTokenizer, MistralForCausalLM
-
-tokenizer = AutoTokenizer.from_pretrained("mistralai/Mixtral-8x7B-v0.1")
-model = MistralForCausalLM.from_pretrained(
-    "mistralai/Mixtral-8x7B-v0.1",
-    device_map="auto",
-    torch_dtype="auto",
-)
-
-text = "Mixture of Experts routes each token to different specialists."
-inputs = tokenizer(text, return_tensors="pt").to(model.device)
-
-# Access routing stats: each SparseMoeBlock stores router_logits
-# Enable output_router_logits=True in the model config for full access
-model.config.output_router_logits = True
-with torch.no_grad():
-    outputs = model(**inputs, output_router_logits=True)
-
-# outputs.router_logits: list of (batch, seq, num_experts) tensors,
-# one per MoE layer. Inspect to see which experts activate per token.
-router_logits = outputs.router_logits[0]   # first layer
-import torch.nn.functional as F
-routing_probs = F.softmax(router_logits, dim=-1)   # (B, T, 8)
-top2_experts = routing_probs.topk(2, dim=-1).indices
-print("Expert assignments (first 5 tokens, layer 0):")
-print(top2_experts[0, :5].tolist())  # e.g. [[3,7],[1,4],[3,1],[5,2],[0,6]]`}
-      </CodeBlock>
-
-      <H3>5b. Tutel — expert parallelism at scale</H3>
-
-      <Prose>
-        Microsoft's <Code>tutel</Code> library (<Code>pip install tutel</Code>) provides optimized all-to-all dispatch and expert grouping for multi-GPU MoE training. It replaces the inner dispatch-compute-combine loop with a CUDA kernel and communicates via NCCL. The API wraps around a standard module:
-      </Prose>
-
-      <CodeBlock language="python">
-{`# pip install tutel
-import tutel.impls.moe_layer as moe
-
-moe_layer = moe.moe_layer(
-    gate_type={"type": "top", "k": 2, "fp32_gate": True},
-    model_dim=1024,
-    experts={"type": "ffn", "count_per_node": 8,
-             "hidden_size_per_expert": 4096, "activation_fn": "relu"},
-    scan_expert_func=lambda name, p: setattr(p, "expert", True),
-    result_func=None,
-    group=None,           # set to torch.distributed.group for multi-GPU
-    a2a_ffn_overlap_degree=1,
-    is_postscore=True,
-)
-
-# Usage: identical to nn.Linear from the surrounding code's perspective
-output = moe_layer(input_hidden_states)   # (B, T, 1024) in/out`}
-      </CodeBlock>
-
-      <H3>5c. DeepSpeed MoE</H3>
-
-      <Prose>
-        DeepSpeed provides <Code>deepspeed.moe.layer.MoE</Code>, which integrates with ZeRO sharding and handles expert parallelism transparently. Key parameters mirror the design decisions in section 3:
-      </Prose>
-
-      <CodeBlock language="python">
-{`import deepspeed
-from deepspeed.moe.layer import MoE
-
-moe_layer = MoE(
-    hidden_size=1024,
-    expert=my_ffn_module,      # an nn.Module for a single expert
-    num_experts=64,
-    ep_size=8,                 # expert parallelism degree (GPUs per expert group)
-    use_residual=False,        # set True for shared-expert style
-    k=2,                       # top-k routing
-    capacity_factor=1.25,
-    eval_capacity_factor=2.0,
-    min_capacity=4,
-    noisy_gate_policy="RSample",  # add noise for exploration
-    drop_tokens=True,
-    use_rts=True,              # random token selection on overflow (less biased drop)
-)
-
-# Auxiliary loss is automatically computed and can be retrieved:
-output, l_aux, exp_counts = moe_layer(input)
-total_loss = main_loss + 0.01 * l_aux`}
-      </CodeBlock>
-
-      <H3>5d. Megatron-LM</H3>
-
-      <Prose>
-        NVIDIA's Megatron-LM supports MoE through its <Code>--num-experts</Code> and <Code>--expert-model-parallel-size</Code> flags. Expert parallelism is handled automatically alongside tensor and pipeline parallelism. The relevant config fields for an 8-expert MoE run with 4-GPU expert groups:
-      </Prose>
-
-      <CodeBlock language="bash">
-{`torchrun ... pretrain_gpt.py \
-  --num-experts 64 \
-  --expert-model-parallel-size 8 \
-  --moe-router-topk 2 \
-  --moe-aux-loss-coeff 0.01 \
-  --moe-token-dropping True \
-  --moe-router-load-balancing-type aux_loss \
-  --moe-expert-capacity-factor 1.25`}
-      </CodeBlock>
-
-      {/* ====================================================================
-          6. VISUAL WALKTHROUGH
-          ==================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>6a. Routing heatmap — collapse vs. balanced</H3>
-
-      <Prose>
-        The two heatmaps below show token-to-expert routing probability matrices for the same 8-token batch: first with an untrained router (routing collapse), then after auxiliary loss has taken effect (balanced routing). Each cell is the softmax probability that the row's token is assigned to the column's expert. Dark = high probability, light = low.
-      </Prose>
-
-      <Heatmap
-        label="Untrained router — routing collapse (Expert 0 monopolizes)"
-        rowLabels={["tok 0", "tok 1", "tok 2", "tok 3", "tok 4", "tok 5", "tok 6", "tok 7"]}
-        colLabels={["E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7"]}
-        matrix={[
-          [0.91, 0.02, 0.01, 0.01, 0.01, 0.01, 0.02, 0.01],
-          [0.88, 0.03, 0.01, 0.02, 0.01, 0.02, 0.02, 0.01],
-          [0.95, 0.01, 0.01, 0.01, 0.00, 0.01, 0.00, 0.01],
-          [0.82, 0.04, 0.03, 0.02, 0.02, 0.02, 0.03, 0.02],
-          [0.89, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02, 0.01],
-          [0.94, 0.01, 0.01, 0.01, 0.00, 0.01, 0.01, 0.01],
-          [0.87, 0.03, 0.02, 0.02, 0.01, 0.02, 0.02, 0.01],
-          [0.93, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
-        ]}
-        cellSize={48}
-      />
-
-      <Heatmap
-        label="After auxiliary loss — balanced routing (experts share load)"
-        rowLabels={["tok 0", "tok 1", "tok 2", "tok 3", "tok 4", "tok 5", "tok 6", "tok 7"]}
-        colLabels={["E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7"]}
-        matrix={[
-          [0.14, 0.12, 0.11, 0.13, 0.12, 0.15, 0.11, 0.12],
-          [0.11, 0.14, 0.13, 0.12, 0.11, 0.12, 0.15, 0.12],
-          [0.13, 0.12, 0.14, 0.11, 0.14, 0.11, 0.13, 0.12],
-          [0.12, 0.13, 0.12, 0.15, 0.12, 0.12, 0.11, 0.13],
-          [0.12, 0.11, 0.12, 0.13, 0.14, 0.13, 0.12, 0.13],
-          [0.13, 0.14, 0.12, 0.11, 0.12, 0.13, 0.13, 0.12],
-          [0.12, 0.12, 0.13, 0.14, 0.13, 0.11, 0.14, 0.11],
-          [0.13, 0.12, 0.13, 0.11, 0.12, 0.13, 0.11, 0.15],
-        ]}
-        cellSize={48}
-      />
-
-      <H3>6b. Expert usage over training</H3>
-
-      <Prose>
-        The plot below shows simulated expert usage fraction (fraction of top-1 assignments) for 8 experts over 100 training steps. The "no aux loss" trajectory collapses rapidly. The "with aux loss (α=0.01)" trajectory stays near the uniform baseline of 1/N = 0.125.
-      </Prose>
-
-      <Plot
-        label="Expert usage fraction over training"
-        xLabel="Training step"
-        yLabel="Top-1 usage fraction"
-        series={[
-          {
-            name: "Expert 0 (no aux loss — collapse)",
-            color: "#f87171",
-            points: [
-              [0, 0.14], [10, 0.31], [20, 0.51], [30, 0.67], [40, 0.78],
-              [50, 0.85], [60, 0.89], [70, 0.92], [80, 0.94], [90, 0.95], [100, 0.96],
-            ],
-          },
-          {
-            name: "Expert 0 (with aux loss α=0.01)",
-            color: "#4ade80",
-            points: [
-              [0, 0.14], [10, 0.16], [20, 0.14], [30, 0.13], [40, 0.12],
-              [50, 0.13], [60, 0.12], [70, 0.13], [80, 0.12], [90, 0.13], [100, 0.12],
-            ],
-          },
-          {
-            name: "Uniform baseline (1/N = 0.125)",
-            color: "#6b7280",
-            points: [[0, 0.125], [100, 0.125]],
-          },
-        ]}
-      />
-
-      <H3>6c. Dispatch — forward — combine step trace</H3>
-
-      <Prose>
-        The three-phase MoE forward pass: router dispatches tokens to expert buckets, each expert runs its FFN on its assigned tokens, and gated outputs are combined back into the residual stream.
-      </Prose>
-
-      <StepTrace
-        label="MoE forward pass: dispatch → expert compute → combine"
-        steps={[
-          {
-            label: "1. Router dispatch",
-            render: () => (
-              <Prose>
-                Router logits → softmax → top-2 → assign each token to 2 expert buckets. All-to-all sends tokens to their assigned expert's GPU. Routing: tok0→E5,E6 · tok1→E0,E6 · tok2→E1,E3 · tok3→E1,E5.
-              </Prose>
-            ),
-          },
-          {
-            label: "2. Expert forward",
-            render: () => (
-              <Prose>
-                Each expert runs its FFN on its assigned tokens independently. Experts on different GPUs run in parallel. Capacity check: overflow tokens are dropped. Buckets: E0: [tok1] · E1: [tok2, tok3] · E3: [tok2] · E5: [tok0, tok3] · E6: [tok0, tok1].
-              </Prose>
-            ),
-          },
-          {
-            label: "3. Weighted combine",
-            render: () => (
-              <Prose>
-                Expert outputs are gathered back to origin GPUs (reverse all-to-all). Each token's contributions are multiplied by gate weights and summed into the final hidden state. Output: tok0 = g0·E5(x0) + g1·E6(x0); tok1 = g0·E0(x1) + g1·E6(x1); tok2 = g0·E1(x2) + g1·E3(x2); tok3 = g0·E1(x3) + g1·E5(x3).
-              </Prose>
-            ),
-          },
-        ]}
-      />
-
-      {/* ====================================================================
-          7. DECISION MATRIX
-          ==================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <H3>Dense vs. MoE</H3>
-
-      <Prose>
-        The right way to frame the dense vs. MoE decision is to identify which resource is the binding constraint for your project. MoE trades one resource (memory and communication) for another (active compute). If active compute per token is the binding constraint and you have memory headroom and fast interconnect, MoE is almost always better at a given training FLOP budget. If memory is the binding constraint — you are serving on a limited number of GPUs and every GB matters — dense is almost always better, because MoE requires holding total parameters even though only a fraction are active.
-      </Prose>
-
-      <Prose>
-        Use MoE when: (1) training data volume is large — the canonical threshold is tens of billions of tokens per expert or more, which provides enough signal for the router to learn meaningful specialization rather than arbitrary partitions; (2) memory across the serving cluster is not the dominant cost; (3) you have access to all-to-all interconnect at scale (NVLink within node, InfiniBand across nodes) — without this, all-to-all becomes a bottleneck that negates the compute savings; (4) training infrastructure supports expert parallelism natively through a framework like Megatron-LM, DeepSpeed-MoE, or tutel. Use dense when: data is limited, memory is tight, serving infrastructure is brittle, you need simple reproducibility, or you are in a rapid iteration / research phase where debugging MoE-specific failures would slow you down significantly.
-      </Prose>
-
-      <H3>k=1 (Switch-style) vs. k=2 (Mixtral-style)</H3>
-
-      <Prose>
-        Top-1 routing is simpler and cheaper on communication: each token goes to exactly one expert, halving the all-to-all volume compared to top-2. The Switch Transformer proved it works at scale, but the operational tradeoffs are real. With top-1, a token that lands at a full expert is simply dropped — there is no second-choice fallback. Routing quality becomes more critical at inference, where you typically cannot afford large capacity buffers without blowing memory. Top-1 also means the gate weight is trivially 1.0 for the single selected expert — there is nothing to combine — which removes the gate weighting as a continuous degree of freedom. The router must get the routing right rather than partially right.
-      </Prose>
-
-      <Prose>
-        Top-2 routing gives each token two bites at the apple. If expert 0 is preferred but full, expert 1 still processes the token. The gate weights sum to 1 and are non-trivially distributed — expert 0 might get 0.65 and expert 1 gets 0.35, reflecting the router's confidence in its primary choice. This soft blending makes the model more expressive: the router can hedge between two experts rather than committing entirely to one. The cost is doubled all-to-all traffic (each token sends to two GPUs instead of one) and doubled dispatch/combine work. For large models with fast interconnect, this is often worth it. For models in bandwidth-constrained settings (edge deployment, small-cluster training), top-1 is the better starting point.
-      </Prose>
-
-      <H3>Shared+routed vs. vanilla</H3>
-
-      <Prose>
-        DeepSeek's shared+routed design costs extra parameters (the always-active shared experts use memory on every GPU) but provides a stable baseline computation for every token. This stabilizes routing because the routed experts are relieved of needing to cover universal patterns. If you have a fixed total parameter budget and routing is already stable, vanilla MoE uses that budget more efficiently. If routing is brittle or you are working with a heterogeneous token distribution (code mixed with prose mixed with multilingual text), shared experts improve robustness.
-      </Prose>
-
-      <H3>Fine-grained (many small) vs. coarse (few large)</H3>
-
-      <Prose>
-        Coarse MoE: 8 experts, each a full-sized FFN. Fine-grained MoE: 256 experts, each 1/16 the size but same total parameter count. Fine-grained provides finer specialization granularity, better load distribution across more experts (lower variance per step), and more routing diversity. The downside is initialization sensitivity: with 256 experts, random initialization leaves the router in a high-entropy state that is harder to steer, and the all-to-all overhead grows with expert count. DeepSeek-V3 uses 256 fine-grained routed experts; Mixtral uses 8 coarse experts. The trend is toward fine-grained, but it requires careful auxiliary loss tuning.
-      </Prose>
-
-      <H3>When NOT to use MoE</H3>
-
-      <Prose>
-        The clearest cases against MoE: (1) Small data — fewer than a few billion tokens per expert and the router learns arbitrary partitions rather than semantic ones; the model's total parameter count is wasted on experts that never specialize. (2) Memory-bound serving — a 37B-active / 600B-total model requires infrastructure that can hold 600B parameters, even though you only compute 37B per token; if your deployment cluster does not have that memory, you cannot serve the model regardless of its active-compute efficiency. (3) Single-GPU or limited interconnect — all-to-all requires fast collective communication, and without NVLink-class bandwidth you spend more time moving data than computing on it; a dense model on the same hardware is consistently faster. (4) Tight single-request latency budgets — all-to-all adds latency that is approximately proportional to the number of expert-parallel groups; for a single-user chatbot where tail latency matters, this overhead is visible and uncomfortable. (5) Rapid iteration cycles — debugging routing collapse, capacity failures, and all-to-all imbalance during the first few hundred training steps is significantly more expensive than debugging equivalent issues in a dense model; the configuration space is wider and the failure modes are more subtle.
-      </Prose>
-
-      <Callout accent="gold">
-        The simplest mental test: if your team cannot hold a 30-minute conversation about capacity factors, auxiliary loss coefficients, and all-to-all topology before starting the run, you are not ready for MoE in production. These are not implementation details you can defer — they determine whether the run succeeds at all.
-      </Callout>
-
-      {/* ====================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ==================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>What scales well</H3>
-
-      <Prose>
-        Total parameter capacity scales linearly with N at constant per-token compute — this is the fundamental MoE advantage, and it holds empirically across all published models from Shazeer 2017 to DeepSeek-V3. You can double N (double the expert count) and double total model capacity without changing per-token arithmetic at all. Performance on downstream benchmarks scales predictably with total parameters when data is abundant, following scaling laws qualitatively similar to dense models but at a more favorable compute-to-performance ratio. Expert specialization quality improves with both N (more fine-grained specialization opportunities) and data volume per expert (more signal for each expert to form a coherent specialization). The auxiliary loss mechanism remains effective as N grows — the formulation <Code>N · Σ f_i · P_i</Code> is explicitly parameterized by N in a way that keeps the gradient scale consistent across expert counts.
-      </Prose>
-
-      <Prose>
-        Training throughput per FLOP also scales well. Because MoE adds parameters without adding per-token compute, a larger MoE model trains at roughly the same speed as a smaller dense model with the same active-parameter count — the additional parameter budget is "free" in the FLOP sense. GLaM demonstrated this by training a 1.2T MoE model at 1/3 the energy cost of GPT-3, despite having 7× more total parameters. This favorable training economy is the primary argument for MoE in large-scale pretraining.
-      </Prose>
-
-      <H3>All-to-all bandwidth bottleneck</H3>
-
-      <Prose>
-        All-to-all communication does not scale gracefully with cluster size. Every expert parallelism step requires each GPU to send data to every other GPU holding different experts. The volume per step per layer is <Code>O(T × d_model × k)</Code>, and the total latency scales with cluster topology — the number of hops between any two GPUs in the expert-parallel group. Within a single node with NVLink, all-to-all is fast: NVLink provides ~600 GB/s bidirectional bandwidth per GPU on modern hardware, and intra-node all-to-all with 8 experts fits comfortably within the compute time budget. Cross-node all-to-all over InfiniBand (200 Gb/s per link) is roughly 3–10× slower per byte, and with 64 or 256 experts spread across many nodes, all-to-all latency starts to dominate the step time.
-      </Prose>
-
-      <Prose>
-        The practical solution that all large MoE training frameworks have converged on is hierarchical routing: experts are grouped into clusters that fit within a single node (or a small group of tightly-connected nodes), and inter-group communication is minimized. DeepSeek-V3 uses a specialized training cluster with dedicated high-bandwidth interconnects designed around the all-to-all pattern. For organizations without this infrastructure, the effective ceiling on expert parallelism is approximately one expert per GPU on a single high-bandwidth node — beyond that, communication overhead grows faster than the benefit from additional experts.
-      </Prose>
-
-      <H3>Memory does not scale favorably</H3>
-
-      <Prose>
-        Unlike compute (which scales with active parameters, not total), memory scales with total parameters. A MoE model with 600B total parameters and 37B active requires 600B parameters worth of GPU memory across the cluster, even though only 37B participate in any given forward pass. The remaining 563B parameters are idle — consuming memory, requiring gradient storage during training, requiring optimizer state in Adam — while not contributing to the current computation.
-      </Prose>
-
-      <Prose>
-        This asymmetry has two practical consequences. First, serving a large MoE model requires a cluster large enough to hold all parameters, not just the active ones. For Mixtral 8×7B at float16, that means ~94 GB for all 47B parameters, while only the active 13B parameters need compute. For DeepSeek-V3 at int4 quantization, 671B parameters still require roughly 335 GB distributed across GPUs. Second, training requires optimizer states for all parameters: Adam with fp32 states stores 8 bytes per parameter, so a 600B MoE model requires 4.8 TB of optimizer state alone, distributed across the cluster. This is why large MoE training jobs typically use ZeRO optimizer sharding (DeepSpeed) or equivalent techniques that shard optimizer states across GPUs rather than replicating them.
-      </Prose>
-
-      <H3>When does MoE most outperform dense?</H3>
-
-      <Prose>
-        The training data volume relative to the dense compute-optimal data budget is the key predictor. GLaM (arXiv:2112.06905) demonstrated that MoE consistently outperforms dense at the same FLOP budget when data volume is large. The reasoning is clean: a dense model trained at a given FLOP budget is limited in parameter count by the Chinchilla-like constraint that parameters and tokens should be balanced (roughly equal counts for compute-optimal training). An MoE model at the same FLOP budget can hold far more parameters — its effective parameter count is N× larger than a dense model at the same active compute — and thus absorbs more knowledge if sufficient data exists to train those parameters.
-      </Prose>
-
-      <Prose>
-        Concretely: a dense model trained compute-optimally on 1T FLOPs might have ~10B parameters and see ~200B tokens. An MoE model with 8× expert count trained on the same 1T FLOPs has ~80B total parameters active at the same compute rate, and can absorb ~8× more factual knowledge if trained on the same 200B tokens — or equivalently, can be trained to the same quality on fewer tokens per parameter. The regime where MoE helps most is large data, large model, and memory budget to match. The regime where it provides no benefit is small data relative to parameter count, where most expert parameters are undertrained regardless of routing quality.
-      </Prose>
-
-      {/* ====================================================================
-          9. FAILURE MODES & GOTCHAS
-          ==================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>1. Routing collapse</H3>
-      <Prose>
-        The most common failure: a small number of experts receive nearly all tokens by step 500–2000 of training. Early symptom is a spike in routing variance and a rapid increase in auxiliary loss toward N. Fix: increase auxiliary loss coefficient (try 0.01→0.05), reduce learning rate during early training, add router noise (jitter logits before softmax), or use a warmup phase where experts are randomly assigned.
-      </Prose>
-
-      <H3>2. Expert under-utilization</H3>
-      <Prose>
-        The opposite of collapse: auxiliary loss set too high forces nearly uniform routing, leaving experts unable to specialize. The main task loss stagnates or degrades. Symptom: routing entropy is near maximum (log N bits), but validation loss is worse than an equivalent dense model. Fix: reduce auxiliary loss coefficient (try 0.01→0.001) and monitor routing entropy alongside task loss.
-      </Prose>
-
-      <H3>3. Auxiliary loss coefficient too high</H3>
-      <Prose>
-        At α {">"} 0.1, the auxiliary loss gradient dominates the router's updates and the router stops responding to task signal. Experts receive equal token counts but learn nothing expert-specific. The model behaves like N copies of a weak dense FFN rather than N specialists. This is easy to detect: routing entropy is at maximum and expert outputs are similar across all experts.
-      </Prose>
-
-      <H3>4. Capacity factor too low</H3>
-      <Prose>
-        Capacity factor below 1.0 guarantees token dropping even under perfectly uniform routing. Capacity at 1.0 still drops ~50% of tokens under uniform random routing when k=2 (as the simulation in 4e shows). Training with high drop rates is a mild regularizer early on but degrades convergence if sustained. Set capacity ≥ 1.25 during training; monitor drop rate and raise capacity if it stays above 20% after the first few thousand steps.
-      </Prose>
-
-      <H3>5. Router noise causing instability</H3>
-      <Prose>
-        Adding Gaussian noise to router logits (as in the original Shazeer et al. paper) improves exploration in the early training phase but can cause instability if kept too long or set too high. A noise level of std=1/N during the first 20% of training steps, then decayed to zero, is the standard recipe. Keeping noise throughout training often prevents the router from committing to useful specialization.
-      </Prose>
-
-      <H3>6. All-to-all load imbalance</H3>
-      <Prose>
-        Even with per-expert load balancing, the communication pattern of all-to-all can be unbalanced if certain GPUs hold experts that receive more tokens. This manifests as GPU idle time while waiting for the slowest all-to-all participant to finish. Solution: use random token selection (RTS) on overflow rather than first-come-first-served dropping, which tends to be less biased toward specific GPU indices; also monitor per-GPU expert utilization separately from per-expert token fractions.
-      </Prose>
-
-      <H3>7. Fine-grained expert initialization</H3>
-      <Prose>
-        With 256 experts and random initialization, the router starts in high-entropy uniform routing. The gradient signal per expert is correspondingly small (1/256 of total batch). This can cause slow early learning and sensitivity to learning rate — a rate that works for 8-expert MoE may cause loss spikes with 256 experts. Use lower initial learning rates with fine-grained MoE, or initialize experts from a pretrained dense checkpoint when possible.
-      </Prose>
-
-      <H3>8. Naive comparison to dense baseline</H3>
-      <Prose>
-        A common mistake in evaluating MoE: comparing a 600B-total MoE model against a 37B-parameter dense model and calling it equivalent. The MoE model uses more memory, more communication, and more total FLOPs in the all-to-all step. The fair comparison is at matched training FLOPs or matched inference memory, not matched active parameters. MoE wins on performance-per-training-FLOP; it loses on performance-per-GB-VRAM. Knowing which axis matters for your setting determines whether MoE is the right choice.
-      </Prose>
-
-      {/* ====================================================================
-          10. PRIMARY SOURCES
-          ==================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        All arXiv IDs below were verified via WebSearch on 2026-04-21. Titles, authors, and dates confirmed against arXiv abstract pages.
-      </Prose>
-
-      <H3>Foundational papers</H3>
-
-      <Prose>
-        <strong>Shazeer et al. 2017 — Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer.</strong> arXiv:1701.06538. Authors: Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc Le, Geoffrey Hinton, Jeff Dean. Published ICLR 2017. Introduced the modern MoE layer with top-k routing and auxiliary load-balance loss. The first model to scale language modeling with MoE to billions of parameters. All core formulations in section 3 originate here.
-      </Prose>
-
-      <Prose>
-        <strong>Lepikhin et al. 2020 — GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding.</strong> arXiv:2006.16668. Authors: Dmitry Lepikhin, HyoukJoong Lee, Yuanzhong Xu, Dehao Chen, Orhan Firat, Yanping Huang, Maxim Krikun, Noam Shazeer, Zhifeng Chen. Scaled MoE Transformer to 600B parameters on 2048 TPUs in 4 days for multilingual machine translation. Introduced the capacity factor formulation and refined the auxiliary loss. The first production-scale MoE Transformer.
-      </Prose>
-
-      <Prose>
-        <strong>Fedus, Zoph, Shazeer 2022 — Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity.</strong> arXiv:2101.03961. Published in JMLR 2022. Simplified routing to top-1 and demonstrated that this extreme sparsification trained stably at trillion-parameter scale. Introduced extensive ablations on auxiliary loss coefficients, capacity factors, and expert counts that remain the standard reference for hyperparameter selection.
-      </Prose>
-
-      <Prose>
-        <strong>Du et al. 2021 — GLaM: Efficient Scaling of Language Models with Mixture-of-Experts.</strong> arXiv:2112.06905. Authors: Nan Du, Yanping Huang, Andrew Dai, Simon Tong, Dmitry Lepikhin, et al. 1.2T parameter MoE model demonstrating energy efficiency (1/3 the training cost of GPT-3) with better zero-shot and one-shot performance across 29 NLP tasks. First systematic demonstration of MoE energy advantage over dense at matched performance.
-      </Prose>
-
-      <H3>Modern large-scale MoE</H3>
-
-      <Prose>
-        <strong>Jiang et al. 2024 — Mixtral of Experts.</strong> arXiv:2401.04088. Mixtral 8×7B: top-2 routing over 8 experts, 47B total / 13B active parameters, trained on 32K context window. Open-source under Apache 2.0. Outperforms or matches Llama 2 70B and GPT-3.5 across benchmarks including math, code, and multilingual tasks. The canonical open-source reference MoE model.
-      </Prose>
-
-      <Prose>
-        <strong>DeepSeek-AI 2024 — DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model.</strong> arXiv:2405.04434. 236B total / 21B active parameters. Introduced Multi-head Latent Attention (MLA) for KV cache compression and DeepSeekMoE with shared+fine-grained routed experts. 42.5% lower training cost vs. DeepSeek 67B dense at better performance. First large-scale validation of the shared+routed expert architecture.
-      </Prose>
-
-      <Prose>
-        <strong>DeepSeek-AI 2024 — DeepSeek-V3 Technical Report.</strong> arXiv:2412.19437. 671B total / 37B active parameters. 256 fine-grained routed experts + 1 shared expert per MoE layer. Pioneered auxiliary-loss-free load balancing (bias-based routing correction). Pre-trained on 14.8T tokens using 2.788M H800 GPU hours. Achieves performance comparable to leading closed-source models while remaining open-weight.
-      </Prose>
-
-      {/* ====================================================================
-          11. SELF-CHECK EXERCISES
-          ==================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1: Derive the balance condition</H3>
-
-      <Prose>
-        The auxiliary loss is <Code>L_aux = N · Σ f_i · P_i</Code>. Using the method of Lagrange multipliers with constraints <Code>Σ f_i = 1</Code> and <Code>Σ P_i = 1</Code>, show that the minimum is achieved when <Code>f_i = P_i = 1/N</Code> for all <Code>i</Code>, giving <Code>f_i · P_i = 1/N²</Code> per expert and a total loss of 1. What does this tell you about the implicit assumption that uniform routing is the unique optimum?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2: Why capacity_factor must exceed 1.0</H3>
-
-      <Prose>
-        Model token arrivals at expert <Code>i</Code> across a batch of <Code>T</Code> tokens as a Binomial random variable with parameters <Code>T·k</Code> and <Code>p = 1/N</Code>. Using the normal approximation, compute the probability that expert <Code>i</Code> receives more than <Code>T·k/N</Code> tokens (i.e., exactly its fair share — the capacity at <Code>C=1.0</Code>) as a function of <Code>T</Code>, <Code>k</Code>, and <Code>N</Code>. For <Code>T=512</Code>, <Code>k=2</Code>, <Code>N=8</Code>, what capacity factor is needed to keep the overflow probability below 5%? Below 1%?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3: Design a 100B-total / 37B-active MoE</H3>
-
-      <Prose>
-        You want a model with 100B total parameters and 37B active parameters per token, using top-2 routing. The non-expert parameters (attention, embeddings, norms) account for 5B parameters. Each expert must be a symmetric two-layer FFN with <Code>d_model = 4096</Code> and <Code>d_ff = 4 × d_model</Code>. How many experts N do you need? How many of the 100B total parameters are in the expert pool? Is this configuration feasible with the given <Code>d_model</Code> and <Code>d_ff</Code>? If not, what adjustment to <Code>d_ff</Code> brings it within 5% of the target?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4: Routing variance as a collapse diagnostic</H3>
-
-      <Prose>
-        Define routing variance for a batch as <Code>Var(f) = (1/N) · Σ (f_i − 1/N)²</Code>. Show that this quantity equals zero at perfect balance and equals <Code>(N−1)/N²</Code> at total collapse (all tokens to one expert). Implement a monitor function that logs routing variance every 100 steps and define a threshold above which training should be paused and the auxiliary loss coefficient increased. What threshold would you set for N=8? For N=64?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5: Auxiliary loss weight tradeoff</H3>
-
-      <Prose>
-        Consider the loss <Code>L = L_LM + α · L_aux</Code>. For small α, describe qualitatively what happens to the router during training (which effect dominates — task loss or aux loss?). For α = 1.0, what does the routing converge to and why? Sketch the expected shape of the curve: validation perplexity as a function of α (from 0 to 1), and explain the shape. Where is the optimal α likely to lie and why? How would you expect this optimal α to shift as N increases from 8 to 256?
-      </Prose></div></section>
-
+// Generated from the frozen manuscript by render-moe-training-lesson.mjs.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import { Math as InlineMath, MathBlock as SharedMathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import {
+  MoeTrainingTable as NeuralTable,
+  MoeTrainingAnatomy,
+  MoeTrainingRouting,
+  MoeTrainingSwiGLU,
+  MoeTrainingBackward,
+  MoeTrainingCapacity,
+  MoeTrainingRandomLoad,
+  MoeTrainingBalance,
+  MoeTrainingGradient,
+  MoeTrainingZLoss,
+  MoeTrainingScope,
+  MoeTrainingReplicas,
+  MoeTrainingBias,
+  MoeTrainingCausality,
+  MoeTrainingGranularity,
+  MoeTrainingSavedModel,
+  MoeTrainingNativeMap,
+  MoeTrainingResults,
+  MoeTrainingHistory,
+  MoeTrainingDevices,
+  MoeTrainingBlocks,
+  MoeTrainingCosts,
+} from '../../components/lesson-labs/MoeTrainingFlow.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+
+const MathBlock = ({ children }) => (
+  <div className="moet-equation" role="region" tabIndex={0} aria-label="Mathematical expression">
+    <SharedMathBlock>{children}</SharedMathBlock>
+  </div>
+);
+
+const Program = ({ file }) => (
+  <RemoteCodeBlock source={'/learn-code/moe-training/' + file}
+    language="python" title={file} filename={file} />
+);
+
+const Old = ({ ids }) => ids.map(id => <span key={id} id={id} aria-hidden="true" />);
+
+function MoeTrainingLesson() {
+  return <div className="lesson-flow moe-training-flow">
+    <section>
+    <Prose opening="summary">{
+      "Follow one causal prediction through selected expert networks, its training gradients and " +
+      "the queues that execute it. Then train a complete small language model and judge usefulness " +
+      "and load separately."
+    }</Prose>
+    
+    <Prose opening="route">{
+      "First pass: sections 1–8, then 10–11 and the diagnosis/practice ending. Sections 9 and 12 " +
+      "deepen architecture and execution. The examples run on a CPU. The diagrams use blue E0, " +
+      "amber E1, violet E2 and rose E3 consistently; written IDs and selection outlines make the " +
+      "correspondence independent of colour."
+    }</Prose>
+    
+    <Prose opening="prerequisites">{"Prerequisites: "}<a href={
+      "/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models#2-let-the-text-provide-its-targets"
+    }>{"next-token targets and log loss"}</a>{", "}<a href={
+      "/learn/path/full-curriculum/mixture-of-experts-transformers-moe?module=deep-learning-fundamentals#1-an-expert-is-a-network-not-a-named-profession"
+    }>{"the sparse FFN architecture"}</a>{" and matrix-product gradients. We refresh the local computations below. The "}<a href={
+      "/learn/path/full-curriculum/fp8-training-low-precision-pre-training?module=large-language-models#7-train-with-three-products-not-one"
+    }>{"FP8 lesson"}</a>{" explains why forward, backward and parameter updates can use different precision."}</Prose>
+    
+    <Old ids={["1-start-with-the-problem","1-why-it-exists"]} />
+    <H2>{"1. Spend work on selected transformations"}</H2>
+    
+    <Prose>{
+      "At the prefix “Alice was”, a causal decoder must predict what follows. Attention has already " +
+      "assembled a contextual row of numbers for the current position. A feed-forward network then " +
+      "transforms that row. Attention exchanges information between permitted positions; this " +
+      "feed-forward operation acts separately on each row with the same learned maps."
+    }</Prose>
+    
+    <MoeTrainingAnatomy />
+    
+    <Prose>{
+      "Read the drawing from the saved residual row. One path keeps that row. The other normalizes " +
+      "it and sends it into a learned map that expands width d to width m, an activation, then a " +
+      "second map that returns to d. The paths add coordinate by coordinate. The residual provides " +
+      "a route through the block even if the new transformation is small."
+    }</Prose>
+    
+    <Prose>{"A "}<strong>{"mixture of experts"}</strong>{
+      ", or MoE, replaces that single FFN with a bank of separately learned FFNs. A router selects " +
+      "a few for the current row. An expert is one set of parameter matrices, not a complete " +
+      "language model and not a profession assigned by the programmer. Its output is another hidden " +
+      "row; a later output head turns hidden rows into next-token probabilities."
+    }</Prose>
+    
+    <Prose>{
+      "Let E count the stored routed experts and k count the distinct experts selected for a row. E " +
+      "= 4 and k = 2 stores four transforms but requests only two. Those extra stored maps need " +
+      "memory and training opportunities. Their presence does not establish useful knowledge, " +
+      "better loss or lower elapsed time. Router work, small matrix multiplications and " +
+      "communication also consume resources. We will count those separately and measure a real " +
+      "prediction task."
+    }</Prose>
+    
+    <Old ids={["2-build-the-intuition","2-core-intuition"]} />
+    <H2>{"2. Select IDs, then weight actual returns"}</H2>
+    
+    <Prose>{
+      "The bank needs two decisions: which expert IDs should run, and how much of each returned row " +
+      "should be added. Start with three router scores and two requested experts. A "
+    }<strong>{"logit"}</strong>{" is an unrestricted score, not a probability."}</Prose>
+    
+    <MoeTrainingRouting />
+    
+    <Prose>{
+      "For a contextual row x of width d, the router stores E rows of weights in W. Expert i " +
+      "receives logit z_i = W_i x in column-vector notation. The programs hold input examples as " +
+      "rows, so a batch X computes "
+    }<code>{"X @ W.T"}</code>{". The shape changes from T × d to T × E; T is the number of routed rows in the stated group."}</Prose>
+    
+    <Prose>{
+      "Our hand example has z = log[4, 2, 1]. Exponentiating and dividing by their sum 7 gives p = " +
+      "[4/7, 2/7, 1/7]. The two largest probabilities select IDs [0, 1]. Softmax subtracts the row " +
+      "maximum before exponentiation in code; the common factor cancels, preserving probabilities " +
+      "while avoiding unnecessary overflow."
+    }</Prose>
+    
+    <Prose>{"There are two useful weighting conventions. "}<strong>{"Selected normalization"}</strong>{" divides the selected scores by their own total: [4/7, 2/7] / (6/7) = [2/3, 1/3]. "}<strong>{"Retained full-softmax weights"}</strong>{
+      " keep [4/7, 2/7]. The first set sums to one; the second preserves only 6/7 of the full " +
+      "probability mass."
+    }</Prose>
+    
+    <Prose>{
+      "The selected experts return F0(x) = [2, 0] and F1(x) = [0, 3]. These are chosen arithmetic " +
+      "values, not trained outputs. The selected-normalized update is (2/3)[2, 0] + (1/3)[0, 3] = " +
+      "[4/3, 1]. Retaining full-softmax weights instead gives [8/7, 6/7]. Add either update to the " +
+      "same saved residual x afterward."
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "p_i=\\frac{e^{z_i}}{\\sum_j e^{z_j}},\\qquad\n" +
+      "S=\\operatorname{topk}(p),\\qquad\n" +
+      "g_i=\\frac{p_i}{\\sum_{j\\in S}p_j}\\ (i\\in S),\\qquad\n" +
+      "Y=\\sum_{i\\in S}g_iF_i(x)."
+    }</MathBlock>
     </div>
-  ),
-};
+    
+    <Prose>{
+      "S contains IDs, g contains applied scalar weights and Y is the new expert contribution. " +
+      "Change a logit slightly without crossing another selected score: the same experts run with " +
+      "different weights. Cross the selection boundary and a different map can enter. With k = E " +
+      "the two conventions agree. With k = 1, selected normalization makes the one surviving gate " +
+      "exactly one. That special case will matter in backward propagation."
+    }</Prose>
+    
+    <H3>{"What happens inside a modern expert?"}</H3>
+    
+    <Prose>{"The introductory two-map/ReLU picture explains expansion and contraction. The complete programs use "}<strong>{"SwiGLU"}</strong>{
+      ", a gated FFN with three maps. Keep the same input/output widths while splitting the " +
+      "expansion into two branches."
+    }</Prose>
+    
+    <MoeTrainingSwiGLU />
+    
+    <Prose>{
+      "The gate map G and value map U each produce m coordinates. SiLU transforms a gate coordinate " +
+      "a into a × sigmoid(a); elementwise multiplication combines that with the corresponding U " +
+      "coordinate. The down map D returns the product to d."
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "a=Gx,\\quad b=Ux,\\quad h=\\operatorname{SiLU}(a)\\odot b,\n" +
+      "\\quad F(x)=Dh,\\qquad \\operatorname{SiLU}(a)=a\\,\\sigma(a)."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Here σ(a) = 1/(1 + exp(−a)); its output lies between zero and one. With x = [1, 2] and " +
+      "identity maps, a = b = x and the returned coordinates are approximately [0.731059, " +
+      "3.523188]. Each coordinate is a × sigmoid(a) × a. The diagonal maps make the multiplication " +
+      "visible; learned maps generally mix coordinates. This elementwise gate inside an expert is " +
+      "different from the router gate that weights an entire expert return."
+    }</Prose>
+    
+    <Old ids={["3-make-the-idea-precise","3-mathematical-foundation"]} />
+    <H2>{"3. Follow task credit through the executed graph"}</H2>
+    
+    <Prose>{
+      "Selection picks discrete IDs, but a training loss also depends continuously on the selected " +
+      "weights and expert matrices. Backward propagation follows those continuous paths while " +
+      "holding the current selected set fixed."
+    }</Prose>
+    
+    <MoeTrainingBackward />
+    
+    <Prose>{
+      "Suppose r = ∂L/∂Y is the loss derivative arriving at the expert sum. It has the same width " +
+      "as a returned row. The derivative reaching expert i's return is g_i r. The derivative " +
+      "reaching its gate is rᵀF_i(x): a dot product measuring how that return changes the loss in " +
+      "the direction r. A positive derivative means increasing the corresponding value would " +
+      "increase the loss locally; gradient descent moves in the opposite direction."
+    }</Prose>
+    
+    <Prose>{
+      "For selected-softmax gates, differentiating the shared denominator gives ∂g_i/∂z_j = g_i(1(i " +
+      "= j) − g_j) for selected j. Therefore"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "\\frac{\\partial L}{\\partial z_j}\n" +
+      "=\\sum_{i\\in S}r^TF_i\\,g_i(\\mathbf1_{i=j}-g_j)\n" +
+      "=g_jr^T\\left(F_j-Y\\right),\\qquad j\\in S."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The last step replaces Σ_i g_iF_i by Y. The formula compares an individual return with the " +
+      "current mixture, rather than rewarding an expert merely for being selected. Unselected " +
+      "logits have zero local task derivative for this selected-normalized convention, because " +
+      "their full-softmax denominator cancels out when the selected scores are renormalized."
+    }</Prose>
+    
+    <Prose>{
+      "Use r = [1, 1] in our example. The returned values along this direction are 2 and 3, while " +
+      "rᵀY = 7/3. The two selected logit derivatives are (2/3)(2 − 7/3) = −2/9 and (1/3)(3 − 7/3) = " +
+      "2/9. Reducing this diagnostic loss therefore increases E0's logit relative to E1's. These " +
+      "are derivatives of the chosen local direction, not an assertion that E0 is universally " +
+      "better."
+    }</Prose>
+    
+    <Prose>{"For retained full-softmax gates the same differentiation includes every logit:"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"\\frac{\\partial L}{\\partial z_j}\n=p_j\\left[\\mathbf1_{j\\in S}r^TF_j-r^TY\\right]."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "An unselected expert does not run, yet its logit can receive a derivative through the " +
+      "denominator. This is why retained full-softmax top-1 can receive task routing credit while " +
+      "selected-normalized top-1 cannot. For normalized top-1, Y = F_j and F_j − Y = 0. Equal " +
+      "selected returns give the same zero router task derivative even with larger k. Expert " +
+      "matrices can still receive nonzero derivatives."
+    }</Prose>
+    
+    <Prose>{
+      "A router parameter gradient collects the row derivatives: dW = dZᵀX. The input receives dZ W " +
+      "from the router plus the paths through executed experts and the separate residual. For a " +
+      "linear map H = X Aᵀ, dA = dHᵀX and dX = dH A. Those same two matrix products recur for G, U " +
+      "and D. Inside SwiGLU, SiLU′(a) = σ(a)[1 + a(1 − σ(a))]; each multiplication sends its " +
+      "derivative through the other operand."
+    }</Prose>
+    
+    <Prose>{
+      "At a top-k boundary the selected identity can jump. A finite difference crossing that jump " +
+      "is not a check of the fixed-set derivative above. The programs use strict selection margins " +
+      "for gradient comparisons and show boundary behavior separately. A zero task gradient also " +
+      "does not promise an unchanged parameter: momentum, weight decay or another objective can " +
+      "still update it."
+    }</Prose>
+    
+    <Old ids={["4-from-scratch-implementation"]} />
+    <H2>{"4. Give every request a slot and a return address"}</H2>
+    
+    <Prose>{"The single-row calculus now becomes a batch of work. Each selected pair creates an assignment "}<code>{"(token ID, selected slot, expert ID)"}</code>{
+      ". The token and slot form the return address. Grouping assignments by expert allows its " +
+      "matrix to process several rows together; the results must be scattered back by those " +
+      "addresses."
+    }</Prose>
+    
+    <MoeTrainingCapacity />
+    
+    <Prose>{
+      "Take four rows with routes [0,1], [0,1], [0,2], [0,2]. Requested expert loads are [4,2,2], " +
+      "totaling eight assignments. A capacity C = 2 gives each expert two slots. The declared " +
+      "priority is original token order and then slot order. E0 keeps t0 and t1, rejecting its " +
+      "requests from t2 and t3. E1 and E2 keep both of their requests. Two assignments are " +
+      "rejected; no token loses both branches."
+    }</Prose>
+    
+    <Prose>{
+      "If expert returns are the scalars [1,2,3] and both gates are 1/2, dropless expert updates " +
+      "are [1.5,1.5,2,2]. With the cap they become [1.5,1.5,1.5,1.5]. A rejected branch contributes " +
+      "zero. "
+    }<strong>{"Keep the original requested gate denominator; do not renormalize the surviving branches."}</strong>{
+      " The residual is added afterward. C = 0 removes all expert contributions while preserving " +
+      "that residual; C = 4 makes this fixture's capped and dropless results identical. Moving a " +
+      "token earlier changes who gets a slot, so allocation priority is part of the model contract."
+    }</Prose>
+    
+    <Prose>{
+      "Let a_ti be one for an accepted requested branch and zero for a rejected branch. Then Y_t = " +
+      "Σ_i a_ti g_ti F_i(x_t). Holding requested IDs and acceptance fixed, the selected-softmax " +
+      "logit derivative becomes"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"\\frac{\\partial L}{\\partial z_{tj}}\n=g_{tj}\\left[a_{tj}r_t^TF_j-r_t^TY_t\\right]."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The denominator still contains rejected selected branches. Reject E0 in the earlier " +
+      "[2/3,1/3] example and keep E1. Y becomes [0,1]; with r = [1,1], the two router derivatives " +
+      "are [−2/3,+2/3]. E0's expert parameter derivative is zero, but its router logit still " +
+      "influences the denominator of the accepted branch. Reject both and Y = 0, making both task " +
+      "logit derivatives zero. This distinction prevents the tempting but incorrect rule “every " +
+      "dropped branch has no gradient.”"
+    }</Prose>
+    
+    <H3>{"How much capacity does a random load need?"}</H3>
+    
+    <Prose>{
+      "Capacity planning asks a different question from the observed four-row trace. Use a " +
+      "deliberately stated probability model: each token independently chooses a uniformly random " +
+      "subset of k distinct experts out of E. For one particular expert, a token requests it with " +
+      "probability k/E and can request it at most once. Its request count N_i therefore follows " +
+      "Binomial(T, k/E), not Binomial(Tk, 1/E)."
+    }</Prose>
+    
+    <MoeTrainingRandomLoad />
+    
+    <Prose>{
+      "With T = 512, E = 8 and k = 2, the mean is 128 and variance is 512 × 1/4 × 3/4 = 96. " +
+      "Capacity factor c sets C = ceil(cTk/E). At c = 1, C = 128. The chance a particular expert " +
+      "exceeds its capacity is approximately 0.476272, yet the expected rejected-assignment " +
+      "fraction is only 0.0305161."
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "\\Pr(N_i>C)=\\sum_{n=C+1}^{T}\\Pr(N_i=n),\\qquad\n" +
+      "\\text{expected rejected fraction}\n" +
+      "=\\frac{E\\,\\mathbb E[(N_i-C)_+]}{Tk}."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The first quantity counts the event “at least one extra request”; the second counts how many " +
+      "requests are extra. An overload of one and an overload of fifty contribute equally to the " +
+      "event but differently to lost work. Neither quantity is the fraction of tokens losing every " +
+      "branch. Real routing can be correlated across tokens, so this model supplies a reference " +
+      "calculation, not a capacity guarantee for trained routes. Measure those actual requests as " +
+      "well."
+    }</Prose>
+    
+    <H3>{"The complete scratch operator"}</H3>
+    
+    <Prose>{"Download "}<a href={"/learn-code/moe-training/moe_mechanisms.py"}>{"moe_mechanisms.py"}</a>{" and run "}<code>{"python moe_mechanisms.py"}</code>{
+      " with Python 3.12 and NumPy 2.3 or later. Its complete source is displayed here in the " +
+      "implemented reader."
+    }</Prose>
+    
+    <Program file="moe_mechanisms.py" />
+    
+    <Prose>{""}<code>{"routes"}</code>{" separates score calculation, deterministic lower-ID tie resolution and applied weights. "}<code>{"assignment_groups"}</code>{" makes one stable expert grouping, retaining token/slot priority before capacity truncation. "}<code>{"forward"}</code>{" evaluates only accepted expert groups, records intermediates and uses "}<code>{"np.add.at"}</code>{
+      " for additive returns. Plain indexed assignment would overwrite an earlier branch for the " +
+      "same token."
+    }</Prose>
+    
+    <Prose>{""}<code>{"backward"}</code>{" reverses those stored operations. "}<code>{"dgate"}</code>{" starts at zero, so a rejected branch has no numerator contribution; "}<code>{"gate_backward"}</code>{
+      " still centers it with all requested gates, producing the denominator derivative just " +
+      "derived. The input gradient includes both expert and router paths. Its returned expert " +
+      "contribution does not include the residual; the enclosing model adds that derivative " +
+      "explicitly."
+    }</Prose>
+    
+    <Prose>{
+      "The main prints the [4/3,1] return, [−2/9,2/9,0] no-drop derivative and [−2/3,2/3,0] " +
+      "partial-drop derivative, followed by the objective and one real parameter update. Router " +
+      "multiplication costs O(TdE), sorting assignments costs O(Tk log(Tk)), and selected expert " +
+      "matrix products cost O(Tkdm). It stores the T × E scores and selected activations, not all E " +
+      "expert returns for every row. These costs describe the algorithm; they do not predict a GPU " +
+      "speedup."
+    }</Prose>
+    
+    <H2>{"5. Measure hard load and soft mass separately"}</H2>
+    
+    <Prose>{
+      "Task gradients reward useful prediction, which can concentrate requests on a few experts. " +
+      "Concentration leaves others with fewer examples and can overload queues. A load-balancing " +
+      "objective supplies another training signal."
+    }</Prose>
+    
+    <MoeTrainingBalance />
+    
+    <Prose>{
+      "For each expert, first count how often it was requested before capacity rejection. Divide by " +
+      "Tk to obtain f_i, its fraction of all requested assignments. Separately average the full " +
+      "softmax probability for that expert over the T routing-valid rows to obtain P_i. f is a hard " +
+      "allocation statistic; P retains smooth dependence on the router scores. Both sum to one " +
+      "under this convention."
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "f_i=\\frac{1}{Tk}\\sum_t\\mathbf1(i\\in S_t),\\qquad\n" +
+      "P_i=\\frac1T\\sum_t p_{ti},\\qquad\n" +
+      "L_{bal}=E\\sum_i\\operatorname{stopgrad}(f_i)P_i."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The stop-gradient label means ordinary differentiation does not try to move the integer " +
+      "top-k choices. Their current counts weight a smooth penalty on probability mass. More " +
+      "probability assigned to a heavily requested expert increases this weighted sum locally, " +
+      "encouraging movement away from it."
+    }</Prose>
+    
+    <Prose>{
+      "Use four top-1 probability rows [.6,.3,.1], [.5,.4,.1], [.2,.7,.1], [.1,.2,.7]. The hard " +
+      "counts are [2,1,1], so f = [.5,.25,.25]. Column means are P = [.35,.4,.25]. The loss is " +
+      "3(.5×.35 + .25×.4 + .25×.25) = 1.0125. The two branches of the drawing explain why it is " +
+      "neither a dropped-token percentage nor a distance between f and P."
+    }</Prose>
+    
+    <Prose>{"Differentiate through P and each row's softmax. Since ∂p_ti/∂z_tj = p_ti(1(i=j) − p_tj),"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"\\frac{\\partial L_{bal}}{\\partial z_{tj}}\n=\\frac ET p_{tj}\\left(f_j-\\sum_i f_i p_{ti}\\right)."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The term in parentheses compares expert j's hard fraction with the current row's " +
+      "probability-weighted fraction. When f is exactly uniform, every term vanishes. The scalar " +
+      "value is then one regardless of P. Uniform routing is a useful reference, but "
+    }<strong>{"one is not a universal minimum"}</strong>{" of this coupled hard/soft expression."}</Prose>
+    
+    <Prose>{"The "}<a href={
+      "/learn/path/full-curriculum/mixture-of-experts-transformers-moe?module=deep-learning-fundamentals#5-train-useful-routes-not-just-attractive-load-bars"
+    }>{"earlier architecture lesson"}</a>{
+      " gives a concrete counterexample. Three rows [.51,.49] select E0 and one row [.001,.999] " +
+      "selects E1. Hence f = [.75,.25], P = [.38275,.61725], and 2(.75×.38275 + .25×.61725) = " +
+      "0.88275. The counts are unequal despite a value below one. If every row instead has equal " +
+      "soft probabilities, a deterministic tie rule can concentrate hard choices while P stays " +
+      "uniform and the scalar is one. Inspect counts as well as the surrogate."
+    }</Prose>
+    
+    <Prose>{
+      "Two direct count diagnostics are maximum load divided by mean load, E max_i f_i, and squared " +
+      "coefficient of variation, CV² = EΣ_i f_i² − 1. Uniform counts give one and zero " +
+      "respectively. With distinct top-k, any expert's f_i is at most 1/k; the largest possible CV² " +
+      "is E/k − 1, attained when every token selects the same k experts. “All tokens choose one " +
+      "expert” is a complete-route collapse only for k = 1. Gate mass is yet another quantity: a " +
+      "selected branch with a tiny gate still occupies an assignment slot."
+    }</Prose>
+    
+    <Prose>{"The scratch "}<code>{"balance"}</code>{
+      " routine returns the scalar, its manual logit derivative and these diagnostics. A group with " +
+      "no valid routed rows contributes zero to an objective sum, but has no defined mean " +
+      "statistic; the returned "
+    }<code>{"mean"}</code>{" is "}<code>{"None"}</code>{". Treating an empty group as perfectly balanced would invent evidence."}</Prose>
+    
+    <H2>{"6. Keep task, balance and numerical scale distinct"}</H2>
+    
+    <Prose>{
+      "Balancing load and predicting the target are different goals. Combine their derivatives " +
+      "explicitly rather than interpreting a smaller auxiliary loss as better language modeling."
+    }</Prose>
+    
+    <MoeTrainingGradient />
+    
+    <Prose>{
+      "The training objective is L = L_task + αL_bal + βL_z. α and β are chosen coefficients, not " +
+      "probabilities. Each term produces a gradient vector in the same router parameter space; the " +
+      "optimizer receives their sum. If a task derivative points toward an expert that the load " +
+      "term wants to discourage, increasing α can reduce or reverse that component of task " +
+      "progress. In other coordinates the directions may agree. The lab computes all components " +
+      "from the same real scratch operator before showing their norms and cosine. A zero vector has " +
+      "no defined angle; it does not mean orthogonality."
+    }</Prose>
+    
+    <H3>{"A common score shift leaves routing unchanged but moves z-loss"}</H3>
+    
+    <Prose>{
+      "Softmax depends on score differences. Add a common a to every logit in a row: the factor " +
+      "exp(a) cancels, leaving p and top-k unchanged. The log of the total exponential mass does " +
+      "not cancel; it increases by a. ST-MoE uses its squared value as a separate numerical-scale " +
+      "objective."
+    }</Prose>
+    
+    <MoeTrainingZLoss />
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "\\ell_t=\\log\\sum_i e^{z_{ti}},\\qquad\n" +
+      "L_z=\\frac1T\\sum_t\\ell_t^2,\\qquad\n" +
+      "\\frac{\\partial L_z}{\\partial z_{tj}}=\\frac2T\\ell_t p_{tj}."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The derivative follows from the outer square, 2ℓ, and the log-sum-exp derivative, p. For z = " +
+      "log[4,2,1], ℓ = log 7. Subtracting log 7 from every score makes ℓ = 0 without changing " +
+      "probabilities. Even z = log[.99,.01] has ℓ = 0 while routing is strongly concentrated. Thus " +
+      "z-loss regulates a logit scale, not load balance or entropy."
+    }</Prose>
+    
+    <Prose>{
+      "Compute ℓ stably as max(z) + log Σ_i exp(z_i − max(z)). Stable arithmetic and FP32 router " +
+      "reductions help avoid avoidable overflow and rounding, but cannot restore differences " +
+      "already lost in an earlier low-precision representation. The "
+    }<a href={
+      "/learn/path/full-curriculum/fp8-training-low-precision-pre-training?module=large-language-models#8-preserve-an-update-smaller-than-a-gap"
+    }>{"precision lesson"}</a>{
+      " explains that information boundary. A z penalty acts on the current logits; it is not a " +
+      "decoder for vanished bits."
+    }</Prose>
+    
+    <H3>{"Use ordinary Torch and compare the entire update"}</H3>
+    
+    <Prose>{"Download "}<a href={"/learn-code/moe-training/moe_torch.py"}>{"moe_torch.py"}</a>{" beside "}<code>{"moe_mechanisms.py"}</code>{", install Torch and NumPy, then run "}<code>{"python moe_torch.py"}</code>{". "}<code>{"TorchMoE"}</code>{" stores the same output-by-input maps in an "}<code>{"nn.ParameterDict"}</code>{". "}<code>{"F.linear"}</code>{", "}<code>{"F.silu"}</code>{", "}<code>{"topk"}</code>{" and "}<code>{"index_add"}</code>{" express the same operations; autograd supplies their derivatives. "}<code>{"auxiliary"}</code>{" keeps counts detached and routes valid rows through the smooth probability mean."}</Prose>
+    
+    <Program file="moe_torch.py" />
+    
+    <Prose>{
+      "The comparison copies the maps and rows before calculating either route. It compares " +
+      "outputs, every input/parameter gradient and one SGD update. Actual float64 comparisons " +
+      "passed 54 combinations of softmax/full-softmax/sigmoid, k = 1/2/4, uncapped/C = 1/C = 0, and " +
+      "grouped versus selected-weight "
+    }<code>{"bmm"}</code>{
+      " execution. The latter gathers a weight copy per assignment; it is easy to batch but can " +
+      "consume much more memory than grouping rows against one expert map. These are ordinary CPU " +
+      "routes, not a claim of equivalence in speed to fused GPU kernels. Torch tie order need not " +
+      "match our lower-ID convention, so comparisons use strict margins where selecting the same " +
+      "IDs is unambiguous."
+    }</Prose>
+    
+    <H2>{"7. Choose the population you want to balance"}</H2>
+    
+    <Prose>{
+      "So far T described one group. A training system may divide rows into sequences, " +
+      "microbatches, replicas or layers. The grouping changes the loss because it multiplies two " +
+      "averages. Averaging already-multiplied local values generally does not reproduce multiplying " +
+      "pooled averages."
+    }</Prose>
+    
+    <MoeTrainingScope />
+    
+    <Prose>{
+      "Let group A contain two rows [.9,.1] and group B two rows [.1,.9], with top-1. A always " +
+      "selects E0 and B always selects E1. Each local loss is 2×.9 = 1.8. Pooling the four rows " +
+      "gives f = [.5,.5] and P = [.5,.5], hence loss one and zero balancing derivative. Local " +
+      "balance asks each group to use both experts; global balance permits complementary " +
+      "specialization between groups. Neither question is automatically the correct one for every " +
+      "training system."
+    }</Prose>
+    
+    <Prose>{
+      "For group g with T_g rows, let f_g and P_g be its fractions. The token-weighted local " +
+      "objective is Σ_g (T_g/T) E f_g·P_g. The pooled objective is " +
+      "E[Σ_g(T_g/T)f_g]·[Σ_g(T_g/T)P_g]. Expanding the latter creates cross-group terms absent from " +
+      "the former. Unequal group sizes also make a plain average of group means wrong for a " +
+      "token-weighted objective."
+    }</Prose>
+    
+    <Prose>{""}<code>{"scope_comparison"}</code>{" in "}<code>{"moe_torch.py"}</code>{
+      " uses an unequal two-row/one-row split and calculates local, exact global and prefix-count " +
+      "objectives and gradients. A running count buffer sees only earlier microbatches when " +
+      "computing an earlier gradient. It therefore implements an approximation, not the exact " +
+      "full-group loss. Merely accumulating gradients does not make their statistical group global. " +
+      "Exact grouped counts require observing the declared group's routes before all relevant " +
+      "gradients, through retained graphs or a controlled second pass with matching model/noise " +
+      "state."
+    }</Prose>
+    
+    <H3>{"Replicas, reduction and the factor that averaging removes"}</H3>
+    
+    <Prose>{
+      "An expert-parallel destination and a data-parallel replica are different roles. For the next " +
+      "calculation, imagine W replicas of the same router, each holding different rows. First sum " +
+      "detached assignment counts across replicas. That gives a global f. Each replica can then " +
+      "compute differentiable probability sums for its own rows using that f."
+    }</Prose>
+    
+    <MoeTrainingReplicas />
+    
+    <Prose>{"If the distributed optimizer "}<strong>{"averages"}</strong>{
+      " replica gradients, multiply replica r's local mean loss by W T_r/T before backward. The " +
+      "subsequent average then gives (1/W)Σ_r(W T_r/T)∇L_r = Σ_r(T_r/T)∇L_r, matching the pooled " +
+      "token objective. An unscaled local mean works only under the appropriate equal-size and " +
+      "reduction conventions. The complete Torch program simulates two replicas in one process and " +
+      "compares their averaged, scaled shared-parameter gradient with the full combined objective. " +
+      "It does not perform a network collective."
+    }</Prose>
+    
+    <Prose>{
+      "Keep layer identity separate too. E0 in layer 1 and E0 in layer 2 are different matrices. " +
+      "Pooling their counts by ID can hide a layer that always selects its E0 with another layer " +
+      "that always selects its E1. A layer-wise objective exposes that concentration; a " +
+      "pooled-layer helper answers a different question."
+    }</Prose>
+    
+    <Prose>{
+      "Finally, routing-valid and target-valid masks differ. A real final context row may pass " +
+      "through the model even when no next-token label is scored. Padding should not enter the " +
+      "balancing population. Setting a padding label to −100 only removes it from the task loss; " +
+      "the auxiliary helper also needs the attention or routing mask. We will inspect both " +
+      "denominators in the actual Mixtral program."
+    }</Prose>
+    
+    <H2>{"8. Regulate future choices using past load"}</H2>
+    
+    <Prose>{
+      "An auxiliary loss changes the router through a differentiable probability path. Another " +
+      "strategy changes which experts are selected using a small per-expert bias, updated from past " +
+      "load. The bias is a control variable, distinct from the trained router matrix."
+    }</Prose>
+    
+    <MoeTrainingBias />
+    
+    <Prose>{"We now deliberately change the score convention. A "}<strong>{"sigmoid affinity"}</strong>{
+      " s_i = σ(z_i) is an independent positive score for expert i; all E affinities do not need to " +
+      "sum to one. Select IDs using s_i + b_i, where b is the current control bias. Then normalize " +
+      "the "
+    }<strong>{"original selected affinities"}</strong>{" to form the mixture. The bias changes selection, not the numerator of the applied gate:"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"S_t=\\operatorname{topk}_i(s_{ti}+b_i),\\qquad\ng_{ti}=\\frac{s_{ti}}{\\sum_{j\\in S_t}s_{tj}}."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "For affinities [.8,.2,.1], top-2 initially uses E0/E1 with gates [.8,.2]. If a historical " +
+      "bias makes E2 replace E1, the gates become [.8,.1]/.9 = [8/9,1/9]. Adding b to those gate " +
+      "numerators would implement a different algorithm."
+    }</Prose>
+    
+    <Prose>{
+      "The task derivative changes because ds_j/dz_j = s_j(1 − s_j). Differentiate the selected " +
+      "normalization first, obtaining (rᵀF_j − rᵀY)/Σ_selected s, then multiply by s_j(1 − s_j). " +
+      "Thus"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"\\frac{\\partial L_{task}}{\\partial z_{tj}}\n=g_{tj}(1-s_{tj})\\left[a_{tj}r_t^TF_j-r_t^TY_t\\right]."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The extra 1 − s factor distinguishes it from selected softmax. The capacity mask a retains " +
+      "section 4's convention. For the study's sigmoid balance surrogate, first normalize all " +
+      "affinities v_ti = s_ti/Σ_j s_tj, then use L_bal = EΣ_i f_i mean_t(v_ti). Its derivative is " +
+      "(E/T)v_tj(1 − s_tj)[f_j − Σ_i f_i v_ti]. The scratch program implements both chain rules " +
+      "explicitly, so switching scoring families is not silently treated as the same experiment."
+    }</Prose>
+    
+    <Prose>{
+      "For a batch with counts n_i, use target count mean(n) = Tk/E and speed u ≥ 0: b_i,new = " +
+      "b_i,old + u sign(mean(n) − n_i). Overloaded experts lose bias; underloaded experts gain " +
+      "bias; exactly on-target experts keep it. Six top-2 rows with counts [5,5,2] have target " +
+      "four, giving changes [−u,−u,+u]. Compute those counts using batch n and apply the new bias " +
+      "to batch n+1. u = 0 leaves selection unchanged; a large speed can overshoot and oscillate."
+    }</Prose>
+    
+    <Prose>{
+      "The replay lab repeats a stated synthetic affinity batch. It is a controller trace, not a " +
+      "measured learning curve. If every row has identical affinities, an expert-only deterministic " +
+      "bias cannot split identical rows across different sets within that batch. The controller may " +
+      "alternate overloaded experts instead of achieving perfect within-batch balance."
+    }</Prose>
+    
+    <H3>{"Keep future rows out of a current causal decision"}</H3>
+    
+    <MoeTrainingCausality />
+    
+    <Prose>{"Ordinary token choice selects experts separately for each row from its permitted context. In "}<strong>{"expert choice"}</strong>{
+      ", an expert instead picks its favorite token rows from a group, so the number of branches " +
+      "per token can vary. This directly constrains expert load, but introduces competition between " +
+      "rows. Suppose an expert has one slot, the current row scores .7, and a future row scores .6 " +
+      "in one sequence but .9 in another. The same current prefix receives the expert in the first " +
+      "case and loses it in the second. If this affects its next-token prediction, future content " +
+      "has influenced the result."
+    }</Prose>
+    
+    <Prose>{
+      "Historical-batch bias is fixed while the current group is predicted and avoids that " +
+      "particular dependence. Updating a current token's selection using counts that include its " +
+      "own future suffix would reintroduce the issue. Causal validity depends on the actual " +
+      "dependency graph, not a method name."
+    }</Prose>
+    
+    <Prose>{
+      "Noise is another exploration mechanism: add sampled score perturbations to let nearby routes " +
+      "sometimes exchange order. It does not impose the same deterministic load feedback. This " +
+      "complete small NumPy example keeps the base logits fixed and draws four separate " +
+      "perturbations; the selected ID is the observable result."
+    }</Prose>
+    
+    <CodeBlock language={"python"}>{"import numpy as np\n\nrng = np.random.default_rng(23)\nlogits = np.array([1.0, 0.99, 0.0])\nnoise = rng.normal(0.0, 0.05, size=(4, 3))\nselected = np.argmax(logits + noise, axis=1)\nprint(selected.tolist())"}</CodeBlock>
+    
+    <Prose>{"The executed NumPy 2.3.5 output is "}<code>{"[0, 1, 0, 0]"}</code>{
+      ". The second draw makes the nearly tied E1 win; the zero-noise case always chooses E0. This " +
+      "illustrates stochastic exploration with a fixed supplied scale, without fitting a router. " +
+      "The original sparse-MoE treatment learns a noise scale and an expected-load objective; " +
+      "arbitrary noise decay is not a universal training rule. The "
+    }<a href={
+      "/learn/path/full-curriculum/mixture-of-experts-transformers-moe?module=deep-learning-fundamentals#7-several-ways-to-decide-who-does-the-work"
+    }>{"architecture lesson's noise and allocation branch"}</a>{
+      " develops those alternatives. DeepSeek-V3 combines sigmoid/bias selection with a small " +
+      "complementary sequence auxiliary term; “loss-free balancing” does not mean its full training " +
+      "objective contains no auxiliary loss at all."
+    }</Prose>
+    
+    <H2>{"9. Deeper: change the size and sharing of the experts"}</H2>
+    
+    <Prose>{
+      "Load depends on the pieces we ask the router to select. A wider expert performs more work " +
+      "per request than a narrow one. To compare "
+    }<strong>{"fine-grained experts"}</strong>{", change the number and width together under an explicit budget."}</Prose>
+    
+    <MoeTrainingGranularity />
+    
+    <Prose>{
+      "A bias-free SwiGLU expert has G and U with md parameters each and D with dm: 3dm total. Its " +
+      "matrix products use 3dm multiply-adds per token. Here a multiply-add is counted as one pair " +
+      "of operations; a convention counting multiplication and addition as separate FLOPs doubles " +
+      "this number. Activation, routing and memory movement remain separate."
+    }</Prose>
+    
+    <Prose>{
+      "Start with E = 4, k = 2, d = 32 and m = 16. Stored expert parameters are 4×3×32×16 = 6,144; " +
+      "selected expert matrix work is 2×3×32×16 = 3,072 multiply-adds. The router stores 4×32 = 128 " +
+      "parameters. Refine by r = 2: eight experts of width eight, selecting four. Stored expert " +
+      "parameters and selected matrix work remain 6,144 and 3,072, but the router grows to 256 " +
+      "parameters and every token creates four assignments instead of two. Equal expert arithmetic " +
+      "has not made the complete execution equal."
+    }</Prose>
+    
+    <Prose>{"In symbols, (E,k,m) becomes (rE,rk,m/r), for divisible m. Carve s always-on "}<strong>{"shared experts"}</strong>{
+      " from that same refined bank, leaving rE − s routed experts and rk − s selected routed " +
+      "experts. A shared branch runs for every token; it does not occupy a choice the router may " +
+      "skip. In the example with s = 1, one shared plus three selected routed branches still runs " +
+      "four width-eight experts. The router now scores seven candidates, with 224 parameters. " +
+      "Adding a shared expert on top instead of carving it out increases active work; say which " +
+      "construction is being compared."
+    }</Prose>
+    
+    <Prose>{
+      "Shared transformations can provide a common path while routed transforms learn more " +
+      "conditional changes. That is an architectural opportunity, not proof that a particular " +
+      "branch learns a human semantic category. The count ledger tells us how much work executes; " +
+      "controlled prediction and intervention tests tell us what that work contributes."
+    }</Prose>
+    
+    <H3>{"Initialize from an existing dense map"}</H3>
+    
+    <Prose>{""}<strong>{"Upcycling"}</strong>{
+      " starts from a trained dense FFN and copies it into multiple expert slots. If every selected " +
+      "expert returns exactly F(x), no branch is dropped and the selected gates sum to one, their " +
+      "mixture is Σ_i g_iF(x) = F(x). The initial function is preserved under those conditions. " +
+      "Retained full-softmax mass below one or capacity rejection breaks the equality."
+    }</Prose>
+    
+    <Prose>{
+      "The same equality also makes the local selected-normalized task router derivative zero: " +
+      "every F_j − Y vanishes. Distinct routing/data exposure, noise or deliberately different maps " +
+      "can break the symmetry later; copying itself is not immediate specialization. The "
+    }<a href={
+      "/learn/path/full-curriculum/mixture-of-experts-transformers-moe?module=deep-learning-fundamentals#9-reuse-an-existing-model-and-choose-the-right-granularity"
+    }>{"architectural upcycling treatment"}</a>{" develops initialization choices. Our program's "}<code>{"expert_budget"}</code>{" makes the parameter/selected-work accounting executable without claiming a trained benefit."}</Prose>
+    
+    <Old ids={["5-production-implementation"]} />
+    <H2>{"10. Build a complete small causal language model"}</H2>
+    
+    <Prose>{
+      "The chosen arithmetic established the mechanism. Now ask whether learned expert " +
+      "transformations help predict held-out text, and what happens to load while they learn. We " +
+      "use the sigmoid affinities and selected-original normalization taught in section 8 for "
+    }<strong>{"all three"}</strong>{
+      " sparse policies. This keeps the score family fixed while comparing no balance, an auxiliary " +
+      "term and delayed bias feedback."
+    }</Prose>
+    
+    <MoeTrainingSavedModel />
+    
+    <Prose>{
+      "The text is a small offline excerpt of Lewis Carroll's *Alice's Adventures in Wonderland*, " +
+      "Chapter I, from Project Gutenberg ebook 11. Its original purpose is literary publication. " +
+      "This educational next-byte task uses eighteen paragraphs for training and six later " +
+      "paragraphs for held-out assessment; it is not a standard language-model benchmark. The files " +
+      "and provenance are the exact paragraph split already used in the earlier tokenization " +
+      "lesson. No new split was selected from the results."
+    }</Prose>
+    
+    <Prose>{
+      "For every paragraph byte, form a context of its four preceding UTF-8 bytes. At a paragraph " +
+      "start, fill missing positions with input-only ID 256, our beginning sentinel. An ordinary " +
+      "byte ranges from 0 to 255. File line separators do not become targets, and a paragraph never " +
+      "uses the previous paragraph as its context. For the start “Alice”, the target "
+    }<code>{"A"}</code>{" sees [256,256,256,256]; target "}<code>{"l"}</code>{" sees [256,256,256,65]. Once four bytes exist, the window slides without a sentinel."}</Prose>
+    
+    <Prose>{
+      "There are 8,679 training targets and 1,949 held-out targets. Every actual held-out byte is " +
+      "assessed once. The sentinel is an input embedding, never one of the 256 output classes. The " +
+      "fixed byte vocabulary requires no fitting on held-out text."
+    }</Prose>
+    
+    <Prose>{
+      "The model stores a 257 × 8 embedding matrix. Four looked-up rows concatenate to width 32. A " +
+      "router chooses two of four width-16 SwiGLU experts, combines their returns and adds the " +
+      "width-32 residual. A 256 × 32 head plus 256 biases produces byte logits. Their softmax " +
+      "probability for the observed byte gives the task negative log likelihood. This is a causal " +
+      "fixed-context model with no attention layer; it isolates expert training in a complete, " +
+      "inspectable prediction system."
+    }</Prose>
+    
+    <H3>{"Propagate the task through every parameter bank"}</H3>
+    
+    <Prose>{"Download "}<a href={"/learn-code/moe-training/moe_language_study.py"}>{"moe_language_study.py"}</a>{", "}<code>{"moe_mechanisms.py"}</code>{", "}<a href={"/learn-code/moe-training/alice-train.txt"}>{"alice-train.txt"}</a>{", "}<a href={"/learn-code/moe-training/alice-heldout.txt"}>{"alice-heldout.txt"}</a>{" and "}<a href={"/learn-code/moe-training/alice-provenance.json"}>{"alice-provenance.json"}</a>{" into one directory. Run "}<code>{"python moe_language_study.py --output my-moe-results"}</code>{" for a fresh complete study. The outputs are "}<code>{"study.json"}</code>{" and one predetermined "}<code>{"model.json"}</code>{". Use a new output folder to retain earlier experiments."}</Prose>
+    
+    <Program file="moe_language_study.py" />
+    
+    <Prose>{""}<code>{"examples"}</code>{" creates context rows, target IDs and paragraph/position addresses. "}<code>{"predict"}</code>{" gathers embeddings, calls the sparse operator, adds its residual and computes head logits. "}<code>{"train_gradient"}</code>{" evaluates a stable mean cross-entropy and starts with the familiar derivative "}<code>{"(probabilities − one_hot_target)/batch_size"}</code>{
+      ". The head gradient is that derivative transposed times the hidden rows. Its backward matrix " +
+      "product supplies the derivative reaching the residual and expert sum. The residual " +
+      "contributes that derivative directly; the sparse backward adds its own input derivative. " +
+      "Finally "
+    }<code>{"np.add.at"}</code>{
+      " accumulates repeated byte IDs into the embedding matrix rather than overwriting their " +
+      "contributions."
+    }</Prose>
+    
+    <Prose>{
+      "The optimizer is complete Adam, with first moment m ← β1m + (1−β1)g and second moment v ← " +
+      "β2v + (1−β2)g². Starting from zero biases the first moments toward zero, so at step t divide " +
+      "by 1−β1^t and 1−β2^t. Update the parameter by −η m_hat/(sqrt(v_hat)+ε). The program fixes η " +
+      "= .003, β1 = .9, β2 = .999 and ε = 10⁻⁸. It has no weight decay, gradient clipping, capacity " +
+      "drops, injected noise or z term in this study. Those are controlled exclusions, not " +
+      "recommended defaults for every MoE."
+    }</Prose>
+    
+    <H3>{"Freeze the comparison before observing outcomes"}</H3>
+    
+    <Prose>{
+      "Seeds 17, 29 and 43 each create a fixed schedule of 400 updates × 64 sampled training " +
+      "targets with replacement: 25,600 target presentations per run. All four policies within a " +
+      "seed use the exact same target-index schedule. The three MoE policies also start with " +
+      "identical maps. The auxiliary policy uses α = .05; the bias policy uses u = .01, updating " +
+      "its bias after the parameter update from that batch's old-parameter counts. The no-balance " +
+      "policy uses neither."
+    }</Prose>
+    
+    <Prose>{
+      "The dense reference is one width-32 SwiGLU expert, selected with gate one. Its matrix work " +
+      "matches two width-16 experts at 3,072 multiply-adds per row. It has 13,576 learned " +
+      "parameters versus 16,776 in each sparse model; its fixed unused zero-router buffer is not " +
+      "counted or optimized. All policies share the embedding and head initialization within a " +
+      "seed. Equal selected FFN work does not mean equal stored parameters, routing overhead or " +
+      "wall time."
+    }</Prose>
+    
+    <Prose>{
+      "Assess the complete held-out split at steps 0, 100, 200, 300 and 400. Keep the final " +
+      "checkpoint fixed instead of selecting a favorable held-out checkpoint. The program computes " +
+      "global held-out count/probability sums before its balance scalar; it does not average " +
+      "products from arbitrary evaluation chunks. Training trace entries use pre-update loss/counts " +
+      "and post-update bias, while held-out checkpoints use the updated parameters. Those time " +
+      "labels matter when inspecting a feedback loop."
+    }</Prose>
+    
+    <Prose>{
+      "The saved browser model is specified in advance: auxiliary policy, seed 17, step 400. The " +
+      "inspector changes its context or zeros one expert return while keeping its router, gates and " +
+      "all other weights fixed. It immediately shows the target's original and changed " +
+      "probability/NLL. Disabling an unselected expert changes nothing; disabling a selected one " +
+      "may help or hurt this individual prediction. This is inference on a saved model, not hidden " +
+      "retraining."
+    }</Prose>
+    
+    <H3>{"Inspect an actual ordinary Mixtral model"}</H3>
+    
+    <MoeTrainingNativeMap />
+    
+    <Prose>{
+      "The ordinary architecture route uses a complete decoder, with attention and two sparse FFN " +
+      "layers. It serves a different purpose from the fitted fixed-context study: inspect real " +
+      "library shapes, objectives, backward and persistence with a tiny random model. Download "
+    }<a href={"/learn-code/moe-training/moe_transformers.py"}>{"moe_transformers.py"}</a>{" beside "}<code>{"moe_torch.py"}</code>{" and "}<code>{"moe_mechanisms.py"}</code>{". With Transformers 5.17.0, Torch and NumPy installed, run "}<code>{"python moe_transformers.py --output my-mixtral-example"}</code>{". It instantiates "}<code>{"MixtralConfig"}</code>{" directly and downloads no pretrained weights."}</Prose>
+    
+    <Program file="moe_transformers.py" />
+    
+    <Prose>{
+      "The configuration has vocabulary 257, hidden width 16, expert width 16, two layers, four " +
+      "experts and top-2, four attention heads and two KV heads. Jitter is zero and training cache " +
+      "is off. The 257th class is the padding ID in this API example; padding targets are ignored. " +
+      "This deliberately differs from the fixed-context study's 256-class output and input-only " +
+      "sentinel."
+    }</Prose>
+    
+    <Prose>{
+      "Two supplied text prefixes form a padded 2 × 37 input. Their attention mask contains 60 real " +
+      "positions, while shifted labels supply 58 next-byte targets. The model returns logits " +
+      "[2,37,257] and one [74,4] router-logit tensor per layer; the raw router arrays include the " +
+      "padded positions. The auxiliary helper masks those positions and pools 120 real routed rows " +
+      "across the two layers."
+    }</Prose>
+    
+    <Prose>{
+      "The installed helper uses count/T rather than count/(Tk). Its auxiliary loss is therefore k " +
+      "times our normalized convention when every valid row requests k experts. The actual example " +
+      "returns task NLL 5.561856, helper auxiliary 2.001345 and normalized auxiliary 1.000672. With " +
+      "coefficient .01, total loss is 5.581869. The program reconstructs task and auxiliary " +
+      "separately, then checks the sum. Copying .01 between helper conventions without accounting " +
+      "for k changes the effective balance strength."
+    }</Prose>
+    
+    <Prose>{""}<code>{"output_router_logits=True"}</code>{
+      " requests the router outputs and auxiliary path. The program performs one SGD update, saves " +
+      "the model locally and reloads it without network access; its evaluated output logits match " +
+      "exactly in this run. It also copies one real packed sparse block into "
+    }<code>{"TorchMoE"}</code>{
+      ". Gate/up maps are stored together as [E,2m,d], split along the middle dimension; down maps " +
+      "are [E,d,m]. With strict-margin inputs, outputs and every task input/map gradient agree " +
+      "within the stated float32 tolerances. This checks the transformation itself, beyond matching " +
+      "a final scalar loss."
+    }</Prose>
+    
+    <Old ids={["6-visual-walkthrough"]} />
+    <H2>{"11. Read the experiment without inventing a winner"}</H2>
+    
+    <Prose>{
+      "The fixed experiment executed all twelve runs. The table shows final held-out NLL in " +
+      "natural-log nats per target and the largest expert's request count divided by the mean " +
+      "expert count. Lower NLL means more probability assigned to the observed text. A load ratio " +
+      "closer to one means more even assignment counts. These quantities answer different " +
+      "questions."
+    }</Prose>
+    
+    <MoeTrainingResults />
+    
+    <NeuralTable caption={"11. Read the experiment without inventing a winner"} headers={[<>{"Seed"}</>,<>{"Policy"}</>,<>{"Held-out NLL"}</>,<>{"Maximum / mean load"}</>,<>{"Balance surrogate"}</>]} rows={[[<>{"17"}</>,<>{"None"}</>,<>{"2.248477"}</>,<>{"1.566957"}</>,<>{"1.098889"}</>],[<>{"17"}</>,<>{"Auxiliary"}</>,<>{"2.257948"}</>,<>{"1.319651"}</>,<>{"1.007478"}</>],[<>{"17"}</>,<>{"Bias"}</>,<>{"2.226801"}</>,<>{"1.226270"}</>,<>{"0.984843"}</>],[<>{"17"}</>,<>{"Dense"}</>,<>{"2.235356"}</>,<>{"1.000000"}</>,<>{"1.000000"}</>],[<>{"29"}</>,<>{"None"}</>,<>{"2.224507"}</>,<>{"1.478707"}</>,<>{"1.036146"}</>],[<>{"29"}</>,<>{"Auxiliary"}</>,<>{"2.209628"}</>,<>{"1.314520"}</>,<>{"1.013719"}</>],[<>{"29"}</>,<>{"Bias"}</>,<>{"2.247984"}</>,<>{"1.159569"}</>,<>{"1.000735"}</>],[<>{"29"}</>,<>{"Dense"}</>,<>{"2.193948"}</>,<>{"1.000000"}</>,<>{"1.000000"}</>],[<>{"43"}</>,<>{"None"}</>,<>{"2.247558"}</>,<>{"1.993843"}</>,<>{"1.303629"}</>],[<>{"43"}</>,<>{"Auxiliary"}</>,<>{"2.296872"}</>,<>{"1.220113"}</>,<>{"1.005665"}</>],[<>{"43"}</>,<>{"Bias"}</>,<>{"2.328361"}</>,<>{"1.083633"}</>,<>{"0.992140"}</>],[<>{"43"}</>,<>{"Dense"}</>,<>{"2.237825"}</>,<>{"1.000000"}</>,<>{"1.000000"}</>]]} />
+    
+    <Prose>{
+      "Both balancing policies reduce peak/mean load relative to no balance for these three seeds. " +
+      "Their task effects differ. Seed 29's auxiliary run improves NLL, while seed 43's auxiliary " +
+      "and bias runs worsen it. Seed 17's bias run improves NLL, while its auxiliary run is " +
+      "slightly worse than no balance. These are three individual observations under one tiny fixed " +
+      "recipe, not a statistical confidence claim or a universal ranking of methods. The dense " +
+      "model's load ratio is one by construction because it has one expert, which is not evidence " +
+      "of better sparse resource use."
+    }</Prose>
+    
+    <MoeTrainingHistory />
+    
+    <Prose>{
+      "The training trace keeps actual counts, router gradient norms and feedback bias at the " +
+      "recorded steps. Expert identity retains its hue across steps and policies; intensity or " +
+      "numeric labels encode magnitude separately. Compare counts and gate mass: an assignment " +
+      "counts equally regardless of its mixture weight. A hot expert may be frequently selected but " +
+      "weakly weighted. No bar chart alone proves that a branch knows a particular kind of " +
+      "language."
+    }</Prose>
+    
+    <Prose>{
+      "For a direct usefulness check, zero each expert's return in the predetermined " +
+      "auxiliary/seed-17 model and score all 1,949 held-out targets again. The baseline NLL is " +
+      "2.257948. Zeroing E0 gives 2.380502; E1 gives 2.479697; E2 gives 2.399355; E3 gives " +
+      "2.469151. The gates are not renormalized and the router is unchanged. Each intervention " +
+      "worsens aggregate held-out loss here, showing that each return contributes under this saved " +
+      "computation. It does not isolate a named semantic skill: the interventions can disrupt " +
+      "interactions and hidden scaling as well."
+    }</Prose>
+    
+    <Prose>{
+      "The experiment answers a bounded question: these controls change actual load and learned " +
+      "prediction under a matched schedule. A stronger hardware claim needs timed execution on " +
+      "stated devices, shapes and kernels. A stronger modeling claim needs broader data and " +
+      "controlled comparisons. The next section explains which systems measurements would make the " +
+      "former test meaningful."
+    }</Prose>
+    
+    <Old ids={["8-what-scales-and-what-doesn-t"]} />
+    <H2>{"12. Deeper: put the requests on actual device partitions"}</H2>
+    
+    <Prose>{
+      "The operator computes a mathematical sum. A machine must place each expert's matrices " +
+      "somewhere and move the requested rows to them. "
+    }<strong>{"Expert parallelism"}</strong>{
+      " places different experts on different ranks, where a rank is one participating " +
+      "worker/device process. "
+    }<strong>{"Data parallelism"}</strong>{
+      " instead replicates a parameter set and combines its gradients. The two can be composed, but " +
+      "their communication has different purposes."
+    }</Prose>
+    
+    <MoeTrainingDevices />
+    
+    <Prose>{
+      "Put E0/E1 on rank 0 and E2/E3 on rank 1. Tokens t0/t1 originate on rank 0; t2/t3 originate " +
+      "on rank 1. Routes [0,1], [0,2], [1,3], [0,3] create eight assignments. Three are remote: " +
+      "t1→E2, t2→E1 and t3→E0. The source/destination count matrix is [[3,1],[2,2]], including the " +
+      "local assignments on its diagonal. Exchanging counts tells workers how many vectors to " +
+      "receive before the payload exchange. An all-to-all pattern lets each source send to each " +
+      "relevant destination."
+    }</Prose>
+    
+    <Prose>{
+      "The destination groups rows for its own experts, runs the matrices and sends the outputs " +
+      "back with token/slot addresses. The source applies gate weights and adds all returned " +
+      "contributions to the correct token. Backward reverses the activation path: the destination " +
+      "receives a gradient for an expert output and returns the expert input derivative. It also " +
+      "accumulates local expert-weight gradients. If another data-parallel replica holds those same " +
+      "weights, a separate replica reduction combines their parameter gradients."
+    }</Prose>
+    
+    <Prose>{"For an explicitly "}<strong>{"uncoalesced per-assignment"}</strong>{
+      " protocol, each remote assignment sends d values out and d back in forward. At q bytes per " +
+      "value, payload is 2 R d q for R remote assignments. Here R = 3, d = 2 and q = 4 gives 48 " +
+      "bytes. The reverse gradient vectors require another 48 under the same convention. This " +
+      "excludes IDs/count metadata, synchronization and parameter-gradient exchange. Coalescing " +
+      "multiple requests to the same destination can change the payload account; use the protocol " +
+      "actually implemented."
+    }</Prose>
+    
+    <Prose>{
+      "Moving E0 to rank 1 changes remote requests from three to four while keeping the same " +
+      "mathematical outputs. Placing all tokens and experts together removes these activation " +
+      "transfers. Neither placement change proves an elapsed-time improvement: work can become more " +
+      "concentrated, and communication can overlap with computation. Per-expert counts and per-rank " +
+      "sums reveal different bottlenecks."
+    }</Prose>
+    
+    <H3>{"Padded, ragged and block-aligned multiplication"}</H3>
+    
+    <MoeTrainingBlocks />
+    
+    <Prose>{
+      "Our four experts receive [3,2,1,2] rows. Padding every expert to the maximum requires " +
+      "[3,3,3,3], or twelve rows of matrix work for eight actual assignments. A ragged grouped " +
+      "representation holds only [3,2,1,2]. A block-row size of four rounds each positive group up " +
+      "independently to [4,4,4,4], or sixteen allocated rows. A zero-row expert allocates zero " +
+      "blocks. At block size one, alignment overhead vanishes."
+    }</Prose>
+    
+    <Prose>{
+      "MegaBlocks uses block-sparse layouts to support variable expert loads without dropping " +
+      "requests just to force equal row counts. Actual kernels still have tile, alignment and " +
+      "hardware constraints. “Dropless” describes accepted assignments, not zero padding or " +
+      "identical rank completion time. FP8-oriented grouped kernels may pad groups to their " +
+      "required alignments; the earlier precision recipe and this execution layout must agree."
+    }</Prose>
+    
+    <MoeTrainingCosts />
+    
+    <Prose>{
+      "Keep four budgets distinct: stored parameters, activated matrix arithmetic, " +
+      "activation/weight memory traffic and measured elapsed time. A bank can keep selected expert " +
+      "arithmetic fixed while growing router work, optimizer storage and network traffic. Small " +
+      "expert batches can also reduce matrix hardware utilization. A real profile should identify " +
+      "where the waiting or arithmetic occurs before increasing experts or changing placement."
+    }</Prose>
+    
+    <H3>{"Run the address ledger on a CPU"}</H3>
+    
+    <Prose>{"Download "}<a href={"/learn-code/moe-training/moe_systems.py"}>{"moe_systems.py"}</a>{" and run "}<code>{"python moe_systems.py"}</code>{
+      " with NumPy and Torch. It uses small linear expert maps to expose dispatch and return " +
+      "addresses; the actual training programs use SwiGLU. Here "
+    }<code>{"dispatch"}</code>{
+      " builds source/destination packets, forms destination expert groups and returns every result " +
+      "to its original token/slot. The linear maps make a hand calculation simple: expert i scales " +
+      "the two-coordinate input by i+1. Token t1 = [3,4] uses E0/E2 with gates [.6,.4], giving " +
+      ".6[3,4] + .4[9,12] = [5.4,7.2]. Its placement changes no value."
+    }</Prose>
+    
+    <Program file="moe_systems.py" />
+    
+    <Prose>{"The ordinary comparison independently gathers selected matrices, uses "}<code>{"torch.bmm"}</code>{" and scatters with "}<code>{"index_add"}</code>{
+      ". Manual backward reverses the returned ledger; both input and expert-map gradients agree " +
+      "with autograd. The program prints the changed placement, all-local null, block-one null and " +
+      "exact refined expert budgets. Its ranks are Python data structures, not network processes. " +
+      "Use "
+    }<a href={"https://docs.nvidia.com/megatron-core/developer-guide/0.15.0/api-guide/moe.html"}>{"Megatron-Core 0.15's MoE guide"}</a>{
+      " for actual expert-parallel sizes, all-to-all dispatch, grouped GEMM, balance settings and " +
+      "capacity/alignment choices on supported GPU systems. Those settings control different " +
+      "mechanisms; a list of flags without a model/data/runtime configuration is not a complete " +
+      "training experiment."
+    }</Prose>
+    
+    <Old ids={["7-decision-matrix","9-failure-modes-and-gotchas"]} />
+    <H2>{"13. Choose an intervention from the evidence"}</H2>
+    
+    <Prose>{
+      "Return to the opening question: storing a bank is useful only if the training and execution " +
+      "make its transformations worth their cost. Diagnose the measured symptom before choosing the " +
+      "control."
+    }</Prose>
+    
+    <NeuralTable caption={"13. Choose an intervention from the evidence"} headers={[<>{"Observation"}</>,<>{"A useful hypothesis and discriminating check"}</>]} rows={[[<>{"Even counts, worse held-out task loss"}</>,<>{
+      "Balance may compete with useful task directions. Compare task/aux gradient components, then " +
+      "change one coefficient under a fresh fixed protocol while holding data budget constant."
+    }</>],[<>{"Normalized top-1 has zero router task gradient"}</>,<>{
+      "The derivative is structurally zero. Check gate convention before diagnosing broken " +
+      "autograd; retained full-softmax weights change that derivative and mixture scale."
+    }</>],[<>{"Auxiliary scalar near one, hot expert"}</>,<>{
+      "Inspect hard counts, soft means and ties. The scalar is not a distance with a guaranteed " +
+      "minimum; count/rank diagnostics are necessary."
+    }</>],[<>{"Batch loss changes when padding length changes"}</>,<>{
+      "Check routing masks and denominator separately from ignored LM labels. Compare the same real " +
+      "rows with extra padding."
+    }</>],[<>{"Local batches are concentrated, pooled batch balanced"}</>,<>{
+      "Decide whether sequence, microbatch, global group or device balance answers the intended " +
+      "question. Match both counts and differentiable reduction scope."
+    }</>],[<>{"Many rejected assignments"}</>,<>{
+      "Inspect capacity factor, priority and complete-token loss separately. A larger buffer, " +
+      "dropless path or different allocation has different memory/work consequences."
+    }</>],[<>{"Small expert gradients"}</>,<>{
+      "Check selection counts, gate mass, saturated affinities and actual task credit. No local " +
+      "gradient does not exclude optimizer-state movement."
+    }</>],[<>{"One rank finishes late despite moderate per-expert imbalance"}</>,<>{
+      "Sum all its expert work and remote traffic. Expert placement, tile sizes or overlap may " +
+      "matter more than a scalar balance coefficient."
+    }</>],[<>{"A current prediction changes when future text changes"}</>,<>{
+      "Trace batch competition or same-sequence feedback. A causal attention mask cannot repair a " +
+      "future-dependent routing allocation elsewhere."
+    }</>]]} />
+    
+    <Prose>{
+      "There is no universal coefficient, load threshold or pause rule that follows from these " +
+      "observations alone. The useful outcome is a falsifiable hypothesis: which exact computation " +
+      "should change, which evidence would confirm the cause, and what must remain fixed to " +
+      "interpret the result?"
+    }</Prose>
+    <Old ids={["11-self-check-exercises"]} />
+    <H2>{"14. Practice with changed inputs"}</H2>
+    <Prose>{
+      "Each prompt is independent of the live lab. Attempt it before opening its hint and worked " +
+      "solution. Use the supplied complete programs to check arithmetic and then explain the " +
+      "mechanism in your own terms."
+    }</Prose>
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"A. Change the returns and the gate convention"}</H3>
+    
+    <Prose>{
+      "Scores are log[3,2,1], k = 2, and returned vectors are F0 = [1,2], F1 = [4,0], F2 = [0,5]. " +
+      "Compute selected-normalized and retained-full outputs. For r = [1,1], compute the " +
+      "selected-normalized logit derivatives. What changes for normalized k = 1?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Distinguish the full denominator six from the selected denominator five."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Full probabilities are [1/2,1/3,1/6]. Selected gates [3/5,2/5] give Y = [11/5,6/5], with " +
+      "directional value 17/5. Gate derivatives are (3/5)(3−17/5) = −6/25 and (2/5)(4−17/5) = 6/25, " +
+      "with zero for E2. Retained full weights give [11/6,1]. Normalized k = 1 returns F0 exactly " +
+      "and has zero fixed-set router task derivative; expert gradients need not be zero."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"B. Distinguish assignments from tokens"}</H3>
+    
+    <Prose>{
+      "Five rows request [0,1], [0,2], [0,1], [1,2], [0,2]. Every gate is 1/2, expert scalar " +
+      "returns are [2,4,6], and C = 2 with original-token priority. Give requested counts, accepted " +
+      "assignments, expert updates and completely dropped token IDs. Then add a residual of 10 to " +
+      "every row."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Make a separate queue for each expert before scattering to tokens."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Counts are [4,3,3]. E0 accepts t0/t1; E1 accepts t0/t2; E2 accepts t1/t3. Six of ten " +
+      "assignments remain. Updates are [3,4,2,3,0]; only t4 loses both branches. Residual outputs " +
+      "are [13,14,12,13,10]. Four rejected assignments are 40% of requests, but one fully dropped " +
+      "token is 20% of tokens. Do not renormalize t2 or t3 to a gate of one."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"C. Size a random-load buffer"}</H3>
+    
+    <Prose>{
+      "Under independent uniform top-2 subsets with T = 512 and E = 8, derive the mean and variance " +
+      "of one expert's load. Find the smallest integer capacity whose overload probability is below " +
+      "5%, then below 1%. Explain why these are not the same constraints as limiting the fraction " +
+      "of lost requests."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Each token contributes a Bernoulli variable with probability 1/4."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " N is Binomial(512,1/4), with mean 128 and variance 96. Summing the exact finite PMF gives " +
+      "minimum capacities 144 and 151 respectively. The overload event weights all excesses " +
+      "equally; a lost-request constraint weights an excess of n−C by that amount. At C = 128 the " +
+      "overload chance is about .476272 but expected rejected assignment share is .0305161. Real " +
+      "correlated routes can depart from both calculations."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"D. Refute a false minimum with a new example"}</H3>
+    
+    <Prose>{
+      "Three top-1 rows have probabilities [.51,.49]; a fourth has [.1,.9]. Compute f, P and E f·P. " +
+      "Which claim does the result disprove?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Hard choices need not match the average soft mass."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " f = [.75,.25], P = [.4075,.5925], giving 2(.75×.4075 + .25×.5925) = .9075. It disproves the " +
+      "assertion that one is the guaranteed minimum. It does not disprove that a smooth surrogate " +
+      "can be a useful training control; usefulness requires a task/load comparison."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"E. Combine task and balance derivatives"}</H3>
+    
+    <Prose>{
+      "For one top-1 row using retained full-softmax gates [.8,.2], f = [1,0]. Compute the balance " +
+      "logit derivative. A separately calculated task derivative is [−.16,.16]. Choose α that " +
+      "cancels it at this row. Why is this not an optimal α for training?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Use E/T = 2 and the probability-weighted f value .8."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Balance derivative is [2×.8×.2, 2×.2×(−.8)] = [.32,−.32]. α = .5 cancels the supplied task " +
+      "vector. With selected-normalized top-1 instead, the single selected gate would be one and " +
+      "its task logit derivative would be zero. The supplied nonzero task derivative belongs to " +
+      "retained full-softmax gating. That only cancels one current derivative; it says nothing " +
+      "about desired loss, other rows, subsequent route changes or held-out prediction. A zero " +
+      "combined derivative can stop useful progress as readily as solve a problem."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"F. Keep unequal groups and layers honest"}</H3>
+    
+    <Prose>{
+      "Group A has two rows [.9,.1] and [.8,.2]; group B one row [.1,.9], top-1. Calculate the " +
+      "token-weighted local and pooled losses. State the scaling needed if two replica gradients " +
+      "are averaged. Would pooling two independently parameterized layers by expert ID answer the " +
+      "same question as averaging their losses?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Global f is [2/3,1/3]; global P is [.6,.4]."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " A's loss is 1.7 and B's 1.8. Token weighting gives (2/3)1.7 + (1/3)1.8 = 1.733333. Pooled " +
+      "loss is 2[(2/3).6 + (1/3).4] = 1.066667. The actual program's prefix-count approximation is " +
+      "1.377778, a third objective. For replica averaging, use W T_A/T = 4/3 and W T_B/T = 2/3 with " +
+      "fixed global counts. Layer pooling is different because same-numbered expert parameters are " +
+      "unrelated; complementary layer collapse can appear balanced when pooled."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"G. Separate logit scale from route shape"}</H3>
+    
+    <Prose>{
+      "Take z = log[.99,.01]. Compute z-loss before and after adding 2 to both logits. What happens " +
+      "to probabilities, choices and entropy?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" The original exponentials sum to one."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Original log-sum-exp is zero and squared z-loss zero. The shift makes log-sum-exp two and " +
+      "its square four. Probabilities, ordering and entropy are unchanged because the softmax " +
+      "common factor cancels. Zero z-loss did not make the distribution uniform."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"H. Use bias for selection only"}</H3>
+    
+    <Prose>{
+      "A row has sigmoid affinities [.8,.4,.3], bias [−.2,−.2,.2] and k = 2. Select its experts and " +
+      "compute their applied gates. For batch counts [6,3,3] and speed .02, give the bias update. " +
+      "Explain when using those counts could leak future information."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Corrected selection scores and original gate numerators are different arrays."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Corrected scores [.6,.2,.5] select E0/E2. Original affinities normalize to [8/11,3/11]. " +
+      "Target count is four, so the bias change is [−.02,+.02,+.02]. Applying a bias based on " +
+      "completed earlier batches is a historical controller. Allowing the current token's own " +
+      "future suffix to change its route introduces a future-dependent prediction path."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"I. Refine under an explicit work budget"}</H3>
+    
+    <Prose>{
+      "Start with d = 24, E = 6, k = 2, m = 12. Refine by r = 3, then carve out two always-on " +
+      "experts. Calculate stored expert parameters, selected expert multiply-adds, routed candidate " +
+      "count, selected routed count and router parameters."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Keep rE, rk and m/r together; the shared branches are inside that bank."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Original and refined stored expert parameters are 6×3×24×12 = 5,184. Selected expert work " +
+      "remains 2×3×24×12 = 1,728. After refinement there are 18 width-four experts, six active. " +
+      "Carving two shared leaves 16 routed and four selected routed. The router has 24×16 = 384 " +
+      "parameters, compared with 144 originally. Equal selected expert arithmetic does not conserve " +
+      "routing/dispatch work."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"J. Move a map without changing the function"}</H3>
+    
+    <Prose>{
+      "Use the systems program's four-token fixture, but move E0 from rank 0 to rank 1. Count " +
+      "remote assignments and forward payload at d = 2, q = 4. Compute block-allocated rows for " +
+      "[3,2,1,2] at block size two. Which costs are still absent?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Re-evaluate every source→expert destination, then round each group separately."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " t0→E0 and t1→E0 become remote, while t3→E0 becomes local; net remote requests increase from " +
+      "three to four. Forward request+return payload is 2×4×2×4 = 64 bytes. Block allocation is " +
+      "[4,2,2,2], ten rows for eight assignments. Metadata, optimizer/replica reductions, actual " +
+      "latency, bandwidth and overlap remain outside this payload model. The function is conserved " +
+      "because maps, gates and addressed return sums are unchanged."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"K. Modify and verify a real route"}</H3>
+    
+    <Prose>{
+      "Change the ordinary/scratch comparison to k = 1 with retained full-softmax weights, then to " +
+      "selected-normalized weights. Identify the expected router task gradient difference, preserve " +
+      "strict margins and compare every gradient and one update. For a new study, change context " +
+      "width or one coefficient under a new fixed protocol and a fresh output folder. Specify what " +
+      "constitutes success without promising a better NLL."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Separate mechanism parity from scientific benefit."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The existing comparison already supports both kinds. With full weights, the selected " +
+      "probability generally carries a task gradient through all logit denominators; " +
+      "selected-normalized top-1 has none away from route changes. Hold auxiliary/z coefficients at " +
+      "zero to isolate that statement, then add them back and name their gradients. Matching " +
+      "scratch/ordinary outputs, all map/input gradients and update within tolerance is the " +
+      "mechanism criterion. The new study must fix data/schedule/evaluation before outcomes, report " +
+      "all runs and compare task and load separately. A reproducible worse result still satisfies " +
+      "an honest scientific demonstration; an unexplained mismatch does not."
+    }</Prose>
+    </details>
+    </section>
+    
+    <section className="moet-practice" data-lesson-exercise>
+    <H3>{"L. Diagnose a low auxiliary loss and a slow rank"}</H3>
+    
+    <Prose>{
+      "A run has balanced global expert counts but worse held-out NLL than its matched baseline. " +
+      "Another has auxiliary value .99 while one rank finishes much later. For each, propose a " +
+      "measurement and one controlled intervention with held-fixed quantities. Give criteria for " +
+      "interpreting the result."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" The scalar objective, useful prediction and physical worker queues are different objects."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " For the first, measure task/aux gradient alignment and per-seed task loss, then vary one " +
+      "coefficient with the same architecture, data budget and predeclared evaluation. Reduced load " +
+      "with worse task loss indicates a tradeoff, not automatic progress. For the second, inspect " +
+      "requested/accepted counts, gate mass, per-rank summed work, tile allocation and measured " +
+      "transfers. A placement-only change keeps maps and predictions fixed while testing a rank " +
+      "bottleneck. Alternatively a mask/scope correction tests an objective error. Several answers " +
+      "are valid if they identify a causal mechanism, preserve a comparison and state what result " +
+      "would falsify the hypothesis."
+    }</Prose>
+    </details>
+    </section>
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="further-learning">
+    <H2>{"Further learning"}</H2>
+    
+    <ul>
+    <li>{""}<a href={
+      "https://github.com/stanford-cs336/spring2025-lectures/blob/98455ec198c9a88ec1ab2b1c4058662431b54ce3/nonexecutable/2025%20Lecture%204%20-%20MoEs.pdf"
+    }>{"Stanford CS336, 2025 Lecture 4: MoEs"}</a>{
+      " is a slide-based second route through routing, granularity, control and systems. Use after " +
+      "sections 1–8; its compressed diagrams benefit from knowing the local quantities first. These " +
+      "lecture notes were inspected, not the lecture video."
+    }</li>
+    <li>{""}<a href={"https://huggingface.co/blog/moe"}>{"Hugging Face, Mixture of Experts Explained"}</a>{
+      " is an illustrated article for revisiting sparse FFNs, capacity and training tradeoffs. Its " +
+      "historical model comparisons need their original conditions; use the current pinned code " +
+      "here for exact APIs."
+    }</li>
+    <li>{""}<a href={"https://huggingface.co/blog/moe-transformers"}>{"Hugging Face, MoEs in Transformers"}</a>{
+      " develops implementation layouts from expert loops to packed/grouped execution. Read after " +
+      "the Torch and systems programs. GPU backend availability and selected-weight memory costs " +
+      "are separate from the mathematical sum."
+    }</li>
+    </ul>
+    
+    <Old ids={["10-primary-sources"]} />
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="references">
+    <H2>{"Technical references"}</H2>
+    
+    <ul>
+    <li>{""}<a href={"https://arxiv.org/abs/1701.06538"}>{"Shazeer et al., 2017"}</a>{
+      ": original sparse selected routing, noise and expected-load mechanisms; its loss conventions " +
+      "differ from the Switch-style hard/soft surrogate used here."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2006.16668"}>{"GShard"}</a>{
+      ": group-level top-2 assignment and capacity policies. Its stochastic second route is a " +
+      "particular algorithm; our deterministic queue convention is stated separately."
+    }</li>
+    <li>{""}<a href={"https://www.jmlr.org/papers/volume23/21-0998/21-0998.pdf"}>{"Switch Transformers"}</a>{
+      ": retained full-softmax top-1, capacity and hard/soft balancing, especially sections " +
+      "2.1–2.3. Figures 2–3 are useful architecture/capacity references."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2202.08906"}>{"ST-MoE"}</a>{": router z-loss and stability studies. Its numerical-scale objective does not prove uniform routing."}</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2401.04088"}>{"Mixtral"}</a>{" and the "}<a href={
+      "https://github.com/huggingface/transformers/blob/v5.17.0/src/transformers/models/mixtral/modeling_mixtral.py"
+    }>{"Transformers 5.17 source"}</a>{": architecture and the exact packed-map/helper/causal-loss API inspected here."}</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2401.06066"}>{"DeepSeekMoE"}</a>{": fine-grained and shared experts under explicit active-work constructions."}</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2408.15664"}>{"Auxiliary-Loss-Free Load Balancing"}</a>{" and "}<a href={"https://arxiv.org/abs/2412.19437"}>{"DeepSeek-V3"}</a>{
+      ": selection bias, original-affinity weighting and the actual combined objective. The V3 " +
+      "version discussed here also includes a small complementary sequence term."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2501.11873"}>{"Demons in the Detail"}</a>{
+      ": statistical group choice, global-count synchronization and the difference between exact " +
+      "global objectives and accumulation approximations."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2202.09368"}>{"Expert Choice"}</a>{": experts selecting token rows and the resulting different allocation constraint."}</li>
+    <li>{""}<a href={
+      "https://proceedings.mlsys.org/paper_files/paper/2023/file/5a54f79333768effe7e8927bcccffe40-Paper-mlsys2023.pdf"
+    }>{"MegaBlocks"}</a>{": permutation and block-sparse execution, especially Figures 1 and 3."}</li>
+    <li>{""}<a href={"https://docs.nvidia.com/megatron-core/developer-guide/0.15.0/api-guide/moe.html"}>{"Megatron-Core 0.15 MoE guide"}</a>{
+      ": supported distributed router/dispatcher/GEMM and alignment configuration. The CPU " +
+      "emulation does not verify GPU throughput."
+    }</li>
+    </ul>
+    
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="readiness">
+    <H2>{"Readiness and the next question"}</H2>
+    
+    <Prose>{
+      "Explain why normalized top-1 lacks local router task credit, trace a rejected branch's " +
+      "denominator derivative, calculate a scoped balance loss and use the complete programs to " +
+      "compare a changed case. Then distinguish an expert's load, its contribution to held-out " +
+      "prediction and the worker cost of executing it. Those are the decisions this lesson equips " +
+      "you to make."
+    }</Prose>
+    
+    <Prose>{"Next, "}<a href={
+      "/learn/path/full-curriculum/multimodal-pre-training-vision-encoders-cross-modal-alignment?module=large-language-models"
+    }>{"Multimodal Pre-Training"}</a>{
+      " asks how rows from vision and language are learned and aligned. Such rows can also enter " +
+      "sparse expert banks; their representation and objective must be understood before " +
+      "interpreting modality-dependent routing as useful specialization."
+    }</Prose>
+    </section>
+  </div>;
+}
 
-export default moeTraining;
+export default {
+  title: 'MoE Training & Expert Load Balancing',
+  slug: 'moe-training-expert-load-balancing',
+  readTime: '~70 min read + 100 min practice',
+  content: MoeTrainingLesson,
+};

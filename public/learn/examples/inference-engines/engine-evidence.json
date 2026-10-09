@@ -1,0 +1,322 @@
+{
+  "schema": 1,
+  "as_of": "2026-10-09",
+  "scope": "Pinned primary-source evidence, not local engine execution or a ranking. Requirements must name the exact joint proposition they need. Missing claims are unknown.",
+  "sources": {
+    "vllm": {
+      "commit": "2ddde19e8e0ba1b9d06a3f9b6201f7fc915d27ab",
+      "url": "https://github.com/vllm-project/vllm/blob/2ddde19e8e0ba1b9d06a3f9b6201f7fc915d27ab/docs/design/arch_overview.md",
+      "saved_path": "research-sources/vllm-architecture.md",
+      "sha256": "75e2f3d93bd28aaec56da4663536e3f65561c29d5a2940dc9e6cbe29fe95f21e",
+      "locator": "Entrypoints; V1 Process Architecture"
+    },
+    "sglang": {
+      "commit": "d8448d2e6212920eb816390a37e7f8b40cbf0a3a",
+      "url": "https://github.com/sgl-project/sglang/blob/d8448d2e6212920eb816390a37e7f8b40cbf0a3a/docs/docs/basic_usage/send_request.mdx",
+      "saved_path": "research-sources/sglang-request.mdx",
+      "sha256": "ae6802f40831a7475aa031536e192cd2d98c221e7e6e0af04c73e7c0e9406fa4",
+      "locator": "Launch A Server; Streaming"
+    },
+    "trt-migration": {
+      "commit": "ce2e2f8b7023f385711c2395ac83e046fbcbea84",
+      "url": "https://github.com/NVIDIA/TensorRT-LLM/blob/ce2e2f8b7023f385711c2395ac83e046fbcbea84/docs/source/legacy/tensorrt-backend-removal.md",
+      "saved_path": "research-sources/trt-migration.md",
+      "sha256": "35235a39312e806effba30943179bb904b9a6cf84c309e74ab87ab673bd45213",
+      "locator": "What changed; How to migrate"
+    },
+    "trt-quick": {
+      "commit": "ce2e2f8b7023f385711c2395ac83e046fbcbea84",
+      "url": "https://github.com/NVIDIA/TensorRT-LLM/blob/ce2e2f8b7023f385711c2395ac83e046fbcbea84/docs/source/quick-start-guide.md",
+      "saved_path": "research-sources/trt-quick-start.md",
+      "sha256": "8191d20e9eba2ad2b24c494d00a61cf7b3a4f5bb4f01d88066cac686b8529a35",
+      "locator": "Deploy Online Serving; Run Offline Inference"
+    },
+    "tgi": {
+      "commit": "b4adbf2f6e2e721280bd0ea5f91d70f7d033f5ed",
+      "url": "https://github.com/huggingface/text-generation-inference/blob/b4adbf2f6e2e721280bd0ea5f91d70f7d033f5ed/README.md",
+      "saved_path": "research-sources/tgi-readme.md",
+      "sha256": "cc6b8a68200acc247cbd1d3cf5ca6c54b5b043040cc6193b58ff16afd80ee040",
+      "locator": "Maintenance notice; feature list; Hardware support"
+    },
+    "llama": {
+      "commit": "d81235049384534c167caea52b85a694f6103d14",
+      "url": "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/tools/server/README.md",
+      "saved_path": "research-sources/llama-native-server.md",
+      "sha256": "0aeee5367fd4f5b9f9c93053469729f3db14bbb85b818bcd13c185f95bc54b58",
+      "locator": "Features; POST /completion; stream"
+    },
+    "mii": {
+      "commit": "8abdd987421988a9d50d8b1dfa71ca6283a30f6c",
+      "url": "https://github.com/deepspeedai/DeepSpeed-MII/blob/8abdd987421988a9d50d8b1dfa71ca6283a30f6c/README.md",
+      "saved_path": "research-sources/mii-readme.md",
+      "sha256": "c5f5d4f5fe9fd3be2ee40d8ee208b30926b2f07c515d7ffba66bf76ef53b1135",
+      "locator": "Key Technologies; Supported Models; Non-Persistent Pipeline; Persistent Deployment"
+    }
+  },
+  "engines": [
+    {
+      "id": "vllm",
+      "name": "vLLM",
+      "claims": [
+        {
+          "proposition": "interface.http_streaming",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "vllm"
+          ],
+          "scope": "Generic documented API entrypoint; not every model/backend/precision combination",
+          "explanation": "The API process accepts HTTP requests and streams results; the engine core schedules work and owns KV management."
+        },
+        {
+          "proposition": "interface.offline_python",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "vllm"
+          ],
+          "scope": "Documented LLM entrypoint for supported configurations",
+          "explanation": "The LLM class is documented for inference without a separate model server."
+        },
+        {
+          "proposition": "route.windows_cpu_pythia14m_f16_observed",
+          "status": "unknown",
+          "basis": "unresolved",
+          "sources": [],
+          "scope": "Windows CPU, exact Pythia-14m checkpoint, F16 artifact, serving/stream endpoint and exact executable together",
+          "explanation": "No native observation for this exact joint route is part of this source-only packet. Missing observation does not establish incompatibility."
+        }
+      ]
+    },
+    {
+      "id": "sglang",
+      "name": "SGLang",
+      "claims": [
+        {
+          "proposition": "interface.http_streaming",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "sglang"
+          ],
+          "scope": "The tutorial endpoint and supported selected model; not joint-feature certification",
+          "explanation": "The request tutorial supplies a running HTTP chat endpoint and a stream=True client example."
+        },
+        {
+          "proposition": "interface.http_server",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "sglang"
+          ],
+          "scope": "Documented server entrypoint",
+          "explanation": "The pinned launch_server example exposes HTTP and OpenAPI documentation."
+        },
+        {
+          "proposition": "route.windows_cpu_pythia14m_f16_observed",
+          "status": "unknown",
+          "basis": "unresolved",
+          "sources": [],
+          "scope": "Windows CPU, exact Pythia-14m checkpoint, F16 artifact, serving/stream endpoint and exact executable together",
+          "explanation": "No native observation for this exact joint route is part of this source-only packet. Missing observation does not establish incompatibility."
+        }
+      ]
+    },
+    {
+      "id": "tensorrt-llm",
+      "name": "TensorRT-LLM",
+      "claims": [
+        {
+          "proposition": "interface.offline_python",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "trt-quick"
+          ],
+          "scope": "Documented supported-model route",
+          "explanation": "The LLM API provides a direct Python inference route."
+        },
+        {
+          "proposition": "interface.http_server",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "trt-quick"
+          ],
+          "scope": "Documented online route; streaming is not inferred from API compatibility here",
+          "explanation": "trtllm-serve exposes OpenAI-compatible request endpoints."
+        },
+        {
+          "proposition": "backend.tensorrt_available",
+          "status": "unsupported",
+          "basis": "documented",
+          "sources": [
+            "trt-migration"
+          ],
+          "scope": "Availability at this pinned revision; not a historical or future claim",
+          "explanation": "The explicit same-pin migration says the TensorRT engine backend was removed; PyTorch is the sole execution backend."
+        },
+        {
+          "proposition": "backend.pytorch_available",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "trt-migration"
+          ],
+          "scope": "Availability at the pinned revision; older architecture intro wording is superseded by explicit migration",
+          "explanation": "The migration specifies PyTorch as the default and only execution backend."
+        },
+        {
+          "proposition": "route.windows_cpu_pythia14m_f16_observed",
+          "status": "unknown",
+          "basis": "unresolved",
+          "sources": [],
+          "scope": "Windows CPU, exact Pythia-14m checkpoint, F16 artifact, serving/stream endpoint and exact executable together",
+          "explanation": "No native observation for this exact joint route is part of this source-only packet. Missing observation does not establish incompatibility."
+        }
+      ]
+    },
+    {
+      "id": "tgi",
+      "name": "Text Generation Inference",
+      "claims": [
+        {
+          "proposition": "interface.http_streaming",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "tgi"
+          ],
+          "scope": "Documented HTTP interface on a supported deployment",
+          "explanation": "The README lists SSE token streaming and shows /generate_stream."
+        },
+        {
+          "proposition": "model_family.gpt_neox_listed",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "tgi"
+          ],
+          "scope": "Family-level statement only; exact quantization/backend/model revision remains a separate requirement",
+          "explanation": "GPT-NeoX is explicitly named among supported model families."
+        },
+        {
+          "proposition": "maintenance.accepts_new_major_features",
+          "status": "unsupported",
+          "basis": "documented",
+          "sources": [
+            "tgi"
+          ],
+          "scope": "Stated maintenance policy, not usability, security or runtime compatibility",
+          "explanation": "The maintenance notice limits ongoing pull requests to minor fixes, documentation and lightweight maintenance."
+        },
+        {
+          "proposition": "route.windows_cpu_pythia14m_f16_observed",
+          "status": "unknown",
+          "basis": "unresolved",
+          "sources": [],
+          "scope": "Windows CPU, exact Pythia-14m checkpoint, F16 artifact, serving/stream endpoint and exact executable together",
+          "explanation": "No native observation for this exact joint route is part of this source-only packet. Missing observation does not establish incompatibility."
+        }
+      ]
+    },
+    {
+      "id": "llama.cpp",
+      "name": "llama.cpp",
+      "claims": [
+        {
+          "proposition": "interface.http_streaming",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "llama"
+          ],
+          "scope": "Pinned native server endpoint; token correspondence still requires inspecting actual records",
+          "explanation": "The server completion endpoint documents streaming results."
+        },
+        {
+          "proposition": "hardware.cpu_inference",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "llama"
+          ],
+          "scope": "Generic CPU route; no Windows binary/model viability is implied",
+          "explanation": "The server feature list explicitly covers CPU inference."
+        },
+        {
+          "proposition": "format.f16_supported",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "llama"
+          ],
+          "scope": "Format-level statement, not support for every architecture or converter input",
+          "explanation": "F16 inference is explicitly listed."
+        },
+        {
+          "proposition": "interface.schema_constrained_json",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "llama"
+          ],
+          "scope": "Supported schema subset and exact model route need their own checks",
+          "explanation": "The feature list includes schema-constrained JSON and grammar options are documented."
+        },
+        {
+          "proposition": "route.windows_cpu_pythia14m_f16_observed",
+          "status": "unknown",
+          "basis": "unresolved",
+          "sources": [],
+          "scope": "Windows CPU, exact Pythia-14m checkpoint, F16 artifact, serving/stream endpoint and exact executable together",
+          "explanation": "No native observation for this exact joint route is part of this source-only packet. Missing observation does not establish incompatibility."
+        }
+      ]
+    },
+    {
+      "id": "deepspeed-mii",
+      "name": "DeepSpeed-MII",
+      "claims": [
+        {
+          "proposition": "interface.offline_python",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "mii"
+          ],
+          "scope": "Documented supported-model pipeline",
+          "explanation": "A non-persistent pipeline runs within the Python script and has an explicit destroy operation."
+        },
+        {
+          "proposition": "interface.persistent_deployment",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "mii"
+          ],
+          "scope": "Deployment lifecycle; no HTTP streaming inference from this fact",
+          "explanation": "The README distinguishes persistent deployments from non-persistent pipelines."
+        },
+        {
+          "proposition": "model_family.llama_listed",
+          "status": "supported",
+          "basis": "documented",
+          "sources": [
+            "mii"
+          ],
+          "scope": "Architecture-family level only; not every model/backend/precision combination",
+          "explanation": "The supported-model table lists Llama families."
+        },
+        {
+          "proposition": "route.windows_cpu_pythia14m_f16_observed",
+          "status": "unknown",
+          "basis": "unresolved",
+          "sources": [],
+          "scope": "Windows CPU, exact Pythia-14m checkpoint, F16 artifact, serving/stream endpoint and exact executable together",
+          "explanation": "No native observation for this exact joint route is part of this source-only packet. Missing observation does not establish incompatibility."
+        }
+      ]
+    }
+  ]
+}

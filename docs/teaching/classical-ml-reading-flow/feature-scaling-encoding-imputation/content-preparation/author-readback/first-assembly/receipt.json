@@ -1,0 +1,21 @@
+{
+  "role": "Exact first full assembly before author-read corrections",
+  "bindings": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/first-assembly/lesson.md",
+      "bytes": 214699,
+      "sha256": "20eea0a2553f6fd5f70e2f8b455f2875f604b1dc0c086d1c29dd9415a029d118"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/first-assembly/visual-specifications.md",
+      "bytes": 40473,
+      "sha256": "07f769c710d9bd01c63814bb644e2fecd14a781e8086ba2682f446a8bcce11c8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/first-assembly/composition.json",
+      "bytes": 31465,
+      "sha256": "468ed3ba0f56d1a1851578c1a32a0aa5d246196595eae67cb2d20df7989875d5"
+    }
+  ],
+  "assemblyCheckFailure": "Initial includes(\"[[\") guard falsely rejected actual Python nested arrays. No manuscript was written by that failed composition; targeted directive-pattern guard then passed. This is an assembly check repair, not scientific execution."
+}

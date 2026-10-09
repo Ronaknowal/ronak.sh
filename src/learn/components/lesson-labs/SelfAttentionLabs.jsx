@@ -1,113 +1,195 @@
+import { useEffect, useMemo, useState } from 'react';
 import useLessonViewport from './useLessonViewport.js';
 import RemoteCodeBlock from '../content/RemoteCodeBlock.jsx';
-import { NeuralNumber } from './NeuralNumberControl.jsx';
-import { useEffect, useState } from 'react';
-
-import { NeuralLab, NeuralSelect, NeuralTable, NeuralPlot as BaseNeuralPlot, formatNeural as f } from './NeuralLessonElements.jsx';
-import { attentionRead, attentionTrajectory, messageDefault, multiHeadRead, mixtures, attentionStorage } from '../../data/self-attention-models.js';
-import { AttentionPathsFigure, AttentionKeyPlane, AttentionLegalEdges, AttentionDataPipeline } from './SelfAttentionFigures.jsx';
+import { FlowLab, FlowControls, FlowSlider, FlowChoice, FlowReadout, flowNumber as f } from './LessonFlow.jsx';
+import { attentionRead, attentionTrajectory, multiHeadRead, mixtures, attentionStorage } from '../../data/self-attention-models.js';
+import { AttentionMatrix, AttentionProjectionDrawing, AttentionMatchingDrawing, AttentionNormalizationDrawing, AttentionWeightDrawing, AttentionValueDrawing, AttentionLegalDrawing, AttentionHeadDrawing, AttentionBackwardDrawing, AttentionBlockDrawing, AttentionStorageDrawing, attentionFixture as fixture, attentionVector as vector } from './SelfAttentionFlowFigures.jsx';
 import './self-attention-labs.css';
-function NeuralPlot(props) {
-  return <div className="self-attention-plot-scroll" role="region" aria-label={`${props.title}; scroll horizontally if needed`} tabIndex={0}><BaseNeuralPlot {...props} /></div>;
-}
-
-
-const vector = values => `[${values.map(v => f(v)).join(', ')}]`;
-function Lane({ title, children }) {
-  return <div className="self-attention-lane"><strong>{title}</strong><div>{children}</div></div>;
-}
-function WeightRow({ weights, label }) {
-  return <figure className="attention-weight-row"><figcaption>{label} · fixed 0–1 scale</figcaption><div className="attention-bars">{weights.map((weight, i) => <div key={i}><span>{i + 1}</span><div className="attention-bar-track"><div style={{ width: `${100 * weight}%` }} /></div><output>{f(weight, 6)}</output></div>)}</div></figure>;
-}
-export function SelfAttentionFigure({ kind }) {
-  if (kind === 'roles') return <AttentionPathsFigure />;
-  if (kind === 'pipeline') return <AttentionDataPipeline />;
-  if (kind === 'worked') {
-    const data = messageDefault(), queries = [[1, 0], [0, 1], [1, 1]];
-    return <NeuralTable caption="Calculated score → weight → value mixture for each receiver" headers={['Receiver', 'Raw scores', 'Normalized weights', 'Output']} rows={queries.map((q, i) => { const r = attentionRead(q, data.keys, data.values); return [String.fromCharCode(65 + i), vector(r.raw), vector(r.weights), vector(r.output)]; })} />;
-  }
-  if (kind === 'causal') return <figure className="self-attention-figure"><figcaption>Known inputs can include themselves while predicting the next token</figcaption><NeuralTable caption="Causal dependency strip" headers={['Receiver/input', 'Legal donors', 'Target']} rows={[["0 / we", "0", "study"], ["1 / study", "0,1", "attention"], ["2 / attention", "0,1,2", "<end>"]]} /><p>Information travels donor → receiver. A future donor that contains the target makes the training problem easier for the wrong reason.</p></figure>;
+const names = ['A', 'B', 'C'];
+const matrix = (label, values, rows = names, columns = names) => <AttentionMatrix label={label} rows={rows} columns={columns} values={values} />;
+export function SelfAttentionFigure({
+  kind
+}) {
+  if (kind === 'roles') return <AttentionProjectionDrawing />;
+  if (kind === 'compare') return <AttentionMatchingDrawing />;
+  if (kind === 'normalize') return <AttentionNormalizationDrawing />;
+  if (kind === 'values') return <AttentionValueDrawing values={fixture.values} output={attentionRead([1, 0], fixture.keys, fixture.values).output} />;
+  if (kind === 'causal') return <AttentionLegalDrawing />;
   if (kind === 'heads') return <SelfAttentionHeads />;
-  if (kind === 'permutation') return <figure className="self-attention-figure"><figcaption>Reordering input rows reorders both attention axes</figcaption><Lane title="Inputs">X → P X; the same feature maps give P Q, P K and P V.</Lane><Lane title="Receiver–donor matrix">S → P S Pᵀ; every weight follows its receiver and donor identity.</Lane><Lane title="Mixture and mean">Z → P Z; mean(P Z)=mean(Z). A fixed unpermuted mask or position feature breaks this argument.</Lane></figure>;
-  if (kind === 'gradient') return <figure className="self-attention-figure"><figcaption>Why a donor's score gradient depends on its value</figcaption><NeuralTable caption="Scalar worked derivative · weights [.25,.75], values [0,4], upstream g=1" headers={['Donor', 'a', 'v − mixture', 'Value gradient', 'Score gradient']} rows={[[1, .25, -3, .25, -.75], [2, .75, 1, .75, .75]]} /><p>The mixture is 3. Increasing donor 1's score moves weight toward 0 and lowers the mixture. The score gradients sum to zero, matching common-score-shift invariance.</p></figure>;
-  if (kind === 'rank') return <figure className="self-attention-figure"><figcaption>Nonlinear row normalization can change matrix rank</figcaption><div className="self-attention-columns"><Lane title="Scores: rank 1">[0, 0]<br />[0, 1]</Lane><Lane title="Weights: rank 2">[.5, .5]<br />[.26894, .73106]</Lane></div><p>Determinant .23106 is nonzero. A narrow dot-product score factorization does not imply an equally low-rank normalized attention matrix.</p></figure>;
-  if (kind === 'entropy') return <NeuralPlot title="Uniform causal entropy has a different ceiling at each row" xLabel="legal donor count m" yLabel="entropy, nats" xDomain={[1, 17]} yDomain={[0, Math.log(17)]} series={[{ label: 'log(m), uniform maximum', color: '#e4b752', values: Array.from({ length: 17 }, (_, i) => [i + 1, Math.log(i + 1)]) }]} />;
-  if (kind === 'copy') return <NeuralTable caption="Copying loss: write the target denominator first" headers={['Targets', 'Count', 'Best expected contribution']} rows={[["Fresh random symbols", 7, "7 log(31)"], ["Separator", 1, "0 when perfectly modeled"], ["Copies", 8, "0 when perfectly copied"], ["All shifted targets", 16, "7 log(31)/16 ≈ 1.50237 nats"]]} />;
-  if (kind === 'blocks') return <figure className="self-attention-figure"><figcaption>Combine exponential mass before final division</figcaption><div className="self-attention-columns"><Lane title="Block 1: scores 0,log2">mass 3; value sum 7; local answer 7/3</Lane><Lane title="Block 2: score log4">mass 4; value sum 24; local answer 6</Lane><Lane title="Global answer">(7+24)/(3+4)=31/7. Equal block average 25/6 uses different weights.</Lane></div></figure>;
+  if (kind === 'gradient') return <AttentionBackwardDrawing />;
+  if (kind === 'blocks') return <AttentionBlockDrawing />;
+  if (kind === 'worked') {
+    const rows = fixture.queries.map(q => attentionRead(q, fixture.keys, fixture.values));
+    return <figure className="attention-flow-matrices">{matrix('receiver rows × donor columns: matches', rows.map(r => r.raw))}<span>→</span>{matrix('each receiver: normalized weights', rows.map(r => r.weights))}<span>→</span>{matrix('mixed value coordinates', rows.map(r => r.output), names, ['1', '2'])}</figure>;
+  }
+  if (kind === 'padding') return <figure className="attention-flow-matrices">{matrix('key mask: real queries cannot read dummy donors', [[1, 1, '×'], [1, 1, '×'], [1, 1, '×']], ['real query 1', 'real query 2', 'dummy query'], ['real key 1', 'real key 2', 'dummy key'])}<span>compute →</span>{matrix('pooling: dummy query output excluded', [['•', '•', 'yes'], ['•', '•', 'yes'], ['•', '•', 'no']], ['real query 1', 'real query 2', 'dummy query'], ['coordinate 1', 'coordinate 2', 'mean?'])}</figure>;
+  if (kind === 'rank') return <figure className="attention-flow-matrices">{matrix('rank-one scores', [[0, 0], [0, 1]], ['receiver 1', 'receiver 2'], ['donor 1', 'donor 2'])}<span>row softmax →</span>{matrix('rank-two weights', [[.5, .5], [1 / (1 + Math.E), Math.E / (1 + Math.E)]], ['receiver 1', 'receiver 2'], ['donor 1', 'donor 2'])}</figure>;
+  if (kind === 'permutation') return <figure className="attention-flow-matrices">{matrix('original receivers and donors', fixture.queries.map(q => attentionRead(q, fixture.keys, fixture.values).weights))}<span>reverse both axes →</span>{matrix('same physical matches, reordered', [...fixture.queries].reverse().map(q => attentionRead(q, [...fixture.keys].reverse(), [...fixture.values].reverse()).weights), [...names].reverse(), [...names].reverse())}</figure>;
+  if (kind === 'entropy') return <AttentionCurve kind="entropy" />;
+  if (kind === 'copy') return <figure className="attention-copy-drawing" aria-label="Seventeen input positions, sixteen next-token targets"><div>Position 0 is given; every later input is the previous query's target.</div><div className="attention-copy-strip">{Array.from({
+        length: 17
+      }, (_, i) => <span key={i} style={{
+        color: i < 8 ? '#77cddb' : i === 8 ? '#e4b752' : '#be9cf5'
+      }}>{i === 8 ? 'SEP' : `s${i < 8 ? i : i - 9}`}<small>position {i}</small><small>{i === 0 ? 'given' : i < 8 ? 'fresh target' : i === 8 ? 'separator' : 'copied target'}</small></span>)}</div><p>Cyan symbols are fresh, violet symbols copy the source, amber SEP separates them.</p></figure>;
+  if (kind === 'pipeline') return <AttentionPipeline />;
   return <SelfAttentionStorage />;
 }
-function ValuePlane({ values, result, baseline }) {
-  const cross = (a, b, c) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
-  const collinear = Math.abs(cross(values[0], values[1], values[2])) < 1e-10;
-  const xy = p => `${30 + (p[0] + 3) * 40},${270 - (p[1] + 3) * 40}`;
-  return <figure className="attention-value-plane"><figcaption>Value space · equal axes from −3 to 3</figcaption><svg viewBox="0 0 300 300" role="img" aria-label={`Values and their actual convex ${collinear ? 'segment' : 'triangle'}; current output ${vector(result)}, pinned output ${vector(baseline)}`}><rect x="30" y="30" width="240" height="240" fill="none" stroke="#666" /><line x1="30" x2="270" y1="150" y2="150" stroke="#555" /><line x1="150" x2="150" y1="30" y2="270" stroke="#555" />{collinear ? <polyline points={values.map(xy).join(' ')} fill="none" stroke="#a28b5b" strokeWidth="3" /> : <polygon points={values.map(xy).join(' ')} fill="#d5b46922" stroke="#b69c67" />}{values.map((p, i) => <circle key={i} cx={30 + (p[0] + 3) * 40} cy={270 - (p[1] + 3) * 40} r="6" fill="#83b4e8"><title>Value {i + 1}: {vector(p)}</title></circle>)}<circle cx={30 + (baseline[0] + 3) * 40} cy={270 - (baseline[1] + 3) * 40} r="9" stroke="#fff" strokeWidth="2" fill="none" /><circle cx={30 + (result[0] + 3) * 40} cy={270 - (result[1] + 3) * 40} r="5" fill="#e4b752" /></svg><p>Blue: donor values. Amber: current mixture. White ring: pinned mixture. {collinear ? 'The hull is a line segment.' : 'The noncollinear values form a triangle.'}</p></figure>;
-}
 export function SelfAttentionMessageLab() {
-  const [input, setInput] = useState(messageDefault), [donor, setDonor] = useState(0), [baseline, setBaseline] = useState(messageDefault);
-  const current = attentionRead(input.query, input.keys, input.values, input), pinned = attentionRead(baseline.query, baseline.keys, baseline.values, baseline);
-  const edit = (type, coordinate, value) => setInput({ ...input, [type]: type === 'query' ? input.query.map((v, i) => i === coordinate ? value : v) : input[type].map((row, j) => j !== donor ? row : row.map((v, i) => i === coordinate ? value : v)) });
-  return <NeuralLab title="Change the match or change the message" id="self-attention-message"><div className="neural-controls"><NeuralSelect label="Edit donor" value={donor} onChange={v => setDonor(Number(v))} options={[[0, 'A'], [1, 'B'], [2, 'C']]} />{['query', 'keys', 'values'].flatMap(type => [0, 1].map(coordinate => <NeuralNumber key={type + coordinate} label={`${type === 'query' ? 'Query' : type === 'keys' ? 'Selected key' : 'Selected value'} ${coordinate === 0 ? 'x' : 'y'}`} min={-3} max={3} value={type === 'query' ? input.query[coordinate] : input[type][donor][coordinate]} onChange={v => edit(type, coordinate, v)} />))}<NeuralNumber label="Temperature" min={.25} max={4} value={input.temperature} onChange={v => setInput({ ...input, temperature: v })} /><NeuralNumber label="Common score offset" min={-1000} max={1000} value={input.offset} onChange={v => setInput({ ...input, offset: v })} /></div><AttentionKeyPlane query={input.query} keys={input.keys} /><div className="self-attention-columns"><div><WeightRow weights={current.weights} label="Current donor weights" /><WeightRow weights={pinned.weights} label="Pinned donor weights" /></div><ValuePlane values={input.values} result={current.output} baseline={pinned.output} /></div><NeuralTable caption="Independent matching and contribution paths" headers={['Donor', 'Raw q·k', 'Scaled score', 'Weight', 'Weighted value']} rows={current.weights.map((p, i) => [String.fromCharCode(65 + i), f(current.raw[i]), f(current.scores[i]), f(p, 6), vector(current.contributions[i])])} /><p>Current output <strong>{vector(current.output)}</strong>; change from pinned {vector(current.output.map((v, i) => v - pinned.output[i]))}. Only keys and queries set the matching scores; editing a value moves its contribution without changing these weights.</p><div className="neural-buttons"><button onClick={() => setBaseline(structuredClone(input))}>Pin current baseline</button><button onClick={() => setInput({ ...input, offset: 1000 })}>Add common +1000</button><button onClick={() => { setInput(messageDefault()); setBaseline(messageDefault()); setDonor(0); }}>Reset message</button></div></NeuralLab>;
+  const [queryY, setQueryY] = useState(0),
+    [keyY, setKeyY] = useState(0),
+    [valueY, setValueY] = useState(1);
+  const keys = [[1, keyY], [0, 1], [1, 1]],
+    values = [[2, 0], [0, 2], [1, valueY]],
+    query = [1, queryY],
+    result = attentionRead(query, keys, values);
+  return <FlowLab id="self-attention-message" label="Separate matching from message content"><AttentionMatchingDrawing query={query} keys={keys} values={values} /><div className="attention-flow-comparison"><AttentionWeightDrawing weights={result.weights} /><AttentionValueDrawing values={values} output={result.output} /></div><FlowControls><FlowSlider name="A query coordinate 2" value={queryY} min={-2} max={2} onChange={setQueryY} /><FlowSlider name="A key coordinate 2" value={keyY} min={-2} max={2} onChange={setKeyY} /><FlowSlider name="C value coordinate 2" value={valueY} min={-2} max={3} onChange={setValueY} /></FlowControls><FlowReadout>A's weights are {vector(result.weights)}, and its mixture is <strong>{vector(result.output)}</strong>. Editing the value changes a contribution without changing the matching weights.</FlowReadout></FlowLab>;
 }
 export function SelfAttentionMaskLab() {
-  const baseValues = [[1, 0], [0, 2], [3, 1], [-2, 3]], keys = [[1, 0], [0, 1], [1, 1], [.5, -1]];
-  const [receiver, setReceiver] = useState(1), [allowed, setAllowed] = useState([true, true, false, false]), [values, setValues] = useState(baseValues), [donor, setDonor] = useState(3), [position, setPosition] = useState(2), [positions, setPositions] = useState([0, 1, 2]);
-  const current = attentionRead(keys[receiver], keys, values, { allowed }), legal = allowed.map((a, i) => a && i > receiver);
-  const reference = attentionRead([1, 1], keys.slice(0, 3), [[2, 0], [0, 2], [1, 1]], { allowed: positions.map(p => p <= position) });
-  return <NeuralLab title="Make legal access visible before normalizing" id="self-attention-mask"><div className="neural-controls"><NeuralSelect label="Receiver position" value={receiver} onChange={v => { const r = Number(v); setReceiver(r); setAllowed(keys.map((_, i) => i <= r)); }} options={keys.map((_, i) => [i, `${String.fromCharCode(65 + i)} at ${i}`])} /><NeuralSelect label="Edit donor value" value={donor} onChange={v => setDonor(Number(v))} options={keys.map((_, i) => [i, String.fromCharCode(65 + i)])} />{[0, 1].map(axis => <NeuralNumber key={axis} label={`Donor ${String.fromCharCode(65 + donor)} value ${axis === 0 ? 'x' : 'y'}`} min={-4} max={4} value={values[donor][axis]} onChange={v => setValues(values.map((row, i) => i !== donor ? row : row.map((x, j) => j === axis ? v : x)))} />)}</div><div className="attention-edges">{keys.map((_, i) => <label key={i}><input type="checkbox" checked={allowed[i]} onChange={e => setAllowed(allowed.map((v, j) => j === i ? e.target.checked : v))} />{String.fromCharCode(65 + i)} → {String.fromCharCode(65 + receiver)} {i > receiver ? '(future)' : '(available)'}</label>)}</div><AttentionLegalEdges receiver={receiver} allowed={allowed} weights={current.weights} />{current.error ? <p role="status">{current.error}</p> : <><WeightRow label="Renormalized legal donor weights" weights={current.weights} /><p>Current output <strong>{vector(current.output)}</strong>. {legal.some(Boolean) ? 'A future donor has a path to this receiver: editing it can leak target information.' : 'Every enabled edge respects this prefix: edits to future donor values leave this output unchanged.'}</p></>}<div className="neural-buttons"><button onClick={() => setAllowed(keys.map((_, i) => i <= receiver))}>Repair causal edges</button><button onClick={() => setAllowed(keys.map(() => true))}>Allow all edges</button><button onClick={() => setValues(values.map((row, i) => i === 3 ? [4, row[1]] : row))}>Change future D.x to 4</button></div><h4>A rectangular cached read needs absolute positions</h4><div className="neural-controls"><NeuralNumber label="Absolute query position" integer min={0} max={8} value={position} onChange={setPosition} />{positions.map((p, i) => <NeuralNumber key={i} label={`Cached key ${i + 1} absolute position`} integer min={0} max={8} value={p} onChange={v => setPositions(positions.map((x, j) => i === j ? v : x))} />)}</div><p>Legal row: {positions.map(p => p <= position ? 'allowed' : 'blocked').join(', ')}. {reference.error || `Output ${vector(reference.output)}. A top-left 1×3 triangle would always choose only its first column, irrespective of the query's actual position.`}</p><button onClick={() => { setReceiver(1); setAllowed([true, true, false, false]); setValues(baseValues); setDonor(3); setPosition(2); setPositions([0, 1, 2]); }}>Reset legal access</button></NeuralLab>;
+  const [future, setFuture] = useState(false),
+    [value, setValue] = useState(-2),
+    allowed = [true, true, false, future],
+    result = attentionRead([0, 1], [[1, 0], [0, 1], [1, 1], [.5, -1]], [[1, 0], [0, 2], [3, 1], [value, 3]], {
+      allowed
+    });
+  return <FlowLab id="self-attention-mask" label="Future data requires an enabled edge"><AttentionLegalDrawing receiver={1} allowed={allowed} weights={result.weights} /><FlowControls><FlowChoice label="Future D → B edge" value={future} onChange={setFuture} options={[[false, 'Blocked'], [true, 'Allowed']]} /><FlowSlider name="Future D value coordinate 1" value={value} min={-4} max={4} onChange={setValue} /></FlowControls><FlowReadout>B outputs <strong>{vector(result.output)}</strong>, with future D weight {f(result.weights[3])}. {future ? 'The future edge leaks information into B.' : 'Editing D leaves B unchanged while its edge is blocked.'}</FlowReadout></FlowLab>;
+}
+export function SelfAttentionCachedLab() {
+  const [position, setPosition] = useState(2),
+    allowed = [0, 1, 2].map(p => p <= position),
+    result = attentionRead([1, 1], fixture.keys, fixture.values, {
+      allowed
+    });
+  return <FlowLab label="Absolute query position defines the cached prefix">{matrix('one query row × cached key absolute positions', [allowed.map(v => v ? 'allowed' : 'blocked')], [`query at ${position}`], ['0', '1', '2'])}<AttentionWeightDrawing weights={result.weights} labels={['key at 0', 'key at 1', 'key at 2']} /><FlowControls><FlowSlider name="Absolute query position" min={0} max={2} step={1} value={position} onChange={setPosition} /></FlowControls><FlowReadout>The query remains [1,1], but its legal prefix ends at {position}, giving <strong>{vector(result.output)}</strong>.</FlowReadout></FlowLab>;
 }
 function SelfAttentionHeads() {
-  const identity = () => Object.fromEntries(['query', 'key', 'value', 'output'].map(name => [name, [[1, 0], [0, 1]]]));
-  const [maps, setMaps] = useState(identity), [inputs, setInputs] = useState([[1, 0], [0, 1]]), [selected, setSelected] = useState('query');
-  const one = multiHeadRead(inputs, maps, 1), two = multiHeadRead(inputs, maps, 2);
-  return <NeuralLab title="Split before the separate normalizations" id="self-attention-heads"><div className="self-attention-columns"><Lane title="One width-2 head">Q/K/V → one receiver–donor normalization → two mixed coordinates → W_O</Lane><Lane title="Two width-1 heads">Coordinate 1 → softmax 1; coordinate 2 → softmax 2; concatenate at the same position → W_O</Lane></div><div className="neural-controls"><NeuralSelect label="Projection to edit (stored output × input)" value={selected} onChange={setSelected} options={['query', 'key', 'value', 'output'].map(v => [v, v])} />{maps[selected].flatMap((row, i) => row.map((v, j) => <NeuralNumber key={`${selected}-${i}-${j}`} label={`${selected} map row ${i + 1}, column ${j + 1}`} min={-2} max={2} value={v} onChange={value => setMaps({ ...maps, [selected]: maps[selected].map((r, a) => r.map((x, b) => a === i && b === j ? value : x)) })} />))}{inputs.flatMap((row, i) => row.map((v, j) => <NeuralNumber key={`${i}-${j}`} label={`Input ${i + 1}, coordinate ${j + 1}`} min={-2} max={2} value={v} onChange={value => setInputs(inputs.map((r, a) => r.map((x, b) => a === i && b === j ? value : x)))} />))}</div><NeuralTable caption="The same four maps under two partitions" headers={['Receiver', 'One head output', 'Two heads output', 'Head1 weights', 'Head2 weights']} rows={inputs.map((_, i) => [i + 1, vector(one.output[i]), vector(two.output[i]), vector(two.headReads[0][i].weights), vector(two.headReads[1][i].weights)])} /><div className="neural-buttons"><button onClick={() => setMaps({ ...maps, value: [[0, 0], [0, 0]] })}>Zero the value map</button><button onClick={() => { setMaps(identity()); setInputs([[1, 0], [0, 1]]); setSelected('query'); }}>Reset head maps</button></div><p>The four 2×2 bias-free maps contain 16 parameters in both partitions. Their normalizations differ; with zero value maps, both outputs are zero.</p></NeuralLab>;
+  const [coordinate, setCoordinate] = useState(1),
+    [zero, setZero] = useState(false),
+    identity = [[1, 0], [0, 1]],
+    inputs = [[coordinate, 0], [0, 1]],
+    maps = {
+      query: identity,
+      key: identity,
+      value: zero ? [[0, 0], [0, 0]] : identity,
+      output: identity
+    },
+    one = multiHeadRead(inputs, maps, 1),
+    two = multiHeadRead(inputs, maps, 2);
+  return <FlowLab id="self-attention-heads" label="Head values mix separately before concatenation"><AttentionHeadDrawing one={one} two={two} inputs={inputs} /><FlowControls><FlowSlider name="Input A coordinate 1" value={coordinate} min={-2} max={2} onChange={setCoordinate} /><FlowChoice label="Value map" value={zero} onChange={setZero} options={[[false, 'Identity'], [true, 'Zero']]} /></FlowControls><FlowReadout>A's one-head output is <strong>{vector(one.output[0])}</strong>; its two-head output is <strong>{vector(two.output[0])}</strong>. Both partitions contain sixteen bias-free parameters.</FlowReadout></FlowLab>;
+}
+function AttentionCurve({
+  kind = 'probability',
+  gap = 0
+}) {
+  const entropy = kind === 'entropy',
+    derivative = kind === 'derivative',
+    curve = Array.from({
+      length: 81
+    }, (_, i) => {
+      const x = entropy ? 1 + i / 5 : -8 + i / 5,
+        p = 1 / (1 + Math.exp(-x));
+      return [x, entropy ? Math.log(x) : derivative ? p * (1 - p) : p];
+    }),
+    ymax = entropy ? Math.log(17) : derivative ? .25 : 1,
+    xmap = x => 62 + (entropy ? (x - 1) / 16 : (x + 8) / 16) * 480,
+    ymap = y => 217 - 162 * y / ymax,
+    p = 1 / (1 + Math.exp(-gap)),
+    value = derivative ? p * (1 - p) : p;
+  return <figure className="attention-flow-drawing"><svg viewBox="0 0 620 295" role="img" aria-label={entropy ? 'Uniform entropy ceiling against legal donor count' : `${derivative ? 'Derivative' : 'Probability'} against scaled score gap`}><line x1={62} x2={542} y1={217} y2={217} stroke="#aaa" /><line x1={62} x2={62} y1={55} y2={217} stroke="#aaa" /><polyline points={curve.map(([x, y]) => `${xmap(x)},${ymap(y)}`).join(' ')} stroke="#be9cf5" fill="none" strokeWidth={2} />{(entropy ? [1, 5, 9, 13, 17] : [-8, -4, 0, 4, 8]).map(x => <text key={x} x={xmap(x)} y={240} textAnchor="middle" fill="#ddd" fontSize={14}>{x}</text>)}{[0, ymax / 2, ymax].map(y => <text key={y} x={50} y={ymap(y) + 5} textAnchor="end" fill="#ddd" fontSize={14}>{f(y, 3)}</text>)}{!entropy && Math.abs(gap) <= 8 && <circle cx={xmap(gap)} cy={ymap(value)} r={6} fill="none" stroke="#fff" strokeWidth={2} />}<text x={62} y={24} fill="#ddd" fontSize={15}>{entropy ? 'uniform maximum entropy (nats)' : derivative ? 'derivative with respect to scaled gap' : 'first donor probability'}</text><text x={302} y={278} fill="#ddd" fontSize={15} textAnchor="middle">{entropy ? 'number of legal donors' : 'scaled score gap'}</text></svg></figure>;
 }
 export function SelfAttentionSensitivityLab() {
-  const [first, setFirst] = useState(2), [second, setSecond] = useState(0), [dimension, setDimension] = useState(2), [temperature, setTemperature] = useState(1);
-  const gap = (first - second) / Math.sqrt(dimension) / temperature, probability = 1 / (1 + Math.exp(-gap));
-  const curve = Array.from({ length: 81 }, (_, i) => { const x = -8 + i * .2, p = 1 / (1 + Math.exp(-x)); return [x, p]; });
-  return <NeuralLab title="Follow concentration and its local derivative together" id="self-attention-sensitivity"><div className="neural-controls"><NeuralNumber label="Raw score 1" min={-8} max={8} value={first} onChange={setFirst} /><NeuralNumber label="Raw score 2" min={-8} max={8} value={second} onChange={setSecond} /><NeuralSelect label="Per-head key width" value={dimension} onChange={v => setDimension(Number(v))} options={[1, 2, 4, 16, 64].map(v => [v, v])} /><NeuralNumber label="Score temperature" min={.25} max={4} value={temperature} onChange={setTemperature} /></div><div className="self-attention-columns"><NeuralPlot title="First donor probability" xLabel="scaled score gap" yLabel="probability" xDomain={[-8, 8]} yDomain={[0, 1]} series={[{ label: 'sigmoid(gap)', color: '#e4b752', values: curve }]} points={Math.abs(gap) <= 8 ? [{ x: gap, y: probability, label: `Current gap ${f(gap)}` }] : []} /><NeuralPlot title="Sensitivity to the scaled gap" xLabel="scaled score gap" yLabel="dp/dgap" xDomain={[-8, 8]} yDomain={[0, .25]} series={[{ label: 'p(1−p)', color: '#83b4e8', values: curve.map(([x, p]) => [x, p * (1 - p)]) }]} points={Math.abs(gap) <= 8 ? [{ x: gap, y: probability * (1 - probability), label: 'Current derivative' }] : []} /></div><p>Gap {f(gap)}{Math.abs(gap) > 8 ? ' lies outside the fixed chart window.' : '.'} Probability {f(probability, 9)}; derivative {f(probability * (1 - probability), 9)}. Saturation moves both curves toward a flat tail. This derivative is for a two-donor scaled gap.</p><button onClick={() => { setFirst(2); setSecond(0); setDimension(2); setTemperature(1); }}>Reset sensitivity</button></NeuralLab>;
+  const [raw, setRaw] = useState(2),
+    [dimension, setDimension] = useState(2),
+    [temperature, setTemperature] = useState(1),
+    gap = raw / Math.sqrt(dimension) / temperature,
+    p = 1 / (1 + Math.exp(-gap));
+  return <FlowLab id="self-attention-sensitivity" label="Scaling and temperature change concentration"><AttentionCurve gap={gap} /><AttentionCurve kind="derivative" gap={gap} /><FlowControls><FlowSlider name="Raw score gap" value={raw} min={-8} max={8} onChange={setRaw} /><FlowSlider name="Per-head key width" value={dimension} min={1} max={64} step={1} onChange={setDimension} /><FlowSlider name="Temperature" value={temperature} min={.25} max={4} onChange={setTemperature} /></FlowControls><FlowReadout>Scaled gap <strong>{f(gap)}</strong> gives first probability {f(p)} and derivative {f(p * (1 - p))} with respect to that gap. {Math.abs(gap) > 8 ? 'This point is outside the fixed chart.' : 'The white ring marks the current state.'}</FlowReadout></FlowLab>;
 }
-function ContributionBalances({ first, second }) {
-  const scale = Math.max(1e-12, ...first.map(Math.abs), ...second.map(Math.abs));
-  return <div className="attention-balances">{[first, second].map((values, index) => <figure key={index}><figcaption>Row {index ? 'B' : 'A'} contributions · shared scale ±{f(scale)}</figcaption>{values.map((value, donor) => <div className="attention-balance-row" key={donor}><span>{donor + 1}</span><div><i style={{ left: value < 0 ? `${50 + 50 * value / scale}%` : '50%', width: `${50 * Math.abs(value) / scale}%`, background: index ? '#83b4e8' : '#e0b660' }} /></div><output>{f(value)}</output></div>)}<p>Sum = {f(values.reduce((a, b) => a + b, 0))}</p></figure>)}</div>;
+export function SelfAttentionOffsetLab() {
+  const [offset, setOffset] = useState(0),
+    result = attentionRead([1, 0], fixture.keys, fixture.values, {
+      offset
+    }),
+    maximum = Math.max(...result.scores);
+  return <FlowLab label="Common score shift cancels in stable normalization">{matrix('subtract the largest receiver-row score', [result.scores, result.scores.map(s => s - maximum), result.scores.map(s => Math.exp(s - maximum)), result.weights], ['shifted scores', 'minus maximum', 'stable exponentials', 'weights'])}<FlowControls><FlowSlider name="Common score offset" min={0} max={1000} step={10} value={offset} onChange={setOffset} /></FlowControls><FlowReadout>Scores moved by {offset}; mixture remains <strong>{vector(result.output)}</strong>. {offset > 709 ? 'Direct exponentiation overflows here; shifted exponentials remain finite.' : 'The common shift cancels from each weight.'}</FlowReadout></FlowLab>;
 }
 export function SelfAttentionMixtureLab() {
-  const [first, setFirst] = useState([.6, .3, .1]), [second, setSecond] = useState([.2, .3, .5]), [values, setValues] = useState([0, 2, 4]);
-  const result = mixtures(first, second, values);
-  return <NeuralLab title="Construct two different weight rows with one mixture" id="self-attention-mixtures"><p>Edit the donor values and nonnegative weight amounts. The amounts are normalized explicitly below.</p><div className="neural-controls">{values.flatMap((v, i) => [<NeuralNumber key={`v${i}`} label={`Donor ${i + 1} value`} min={-6} max={6} value={v} onChange={value => setValues(values.map((x, j) => j === i ? value : x))} />, <NeuralNumber key={`a${i}`} label={`Row A donor ${i + 1} amount`} min={0} max={1} value={first[i]} onChange={value => setFirst(first.map((x, j) => j === i ? value : x))} />, <NeuralNumber key={`b${i}`} label={`Row B donor ${i + 1} amount`} min={0} max={1} value={second[i]} onChange={value => setSecond(second.map((x, j) => j === i ? value : x))} />])}</div>{result.error ? <p role="status">{result.error}</p> : <><ContributionBalances first={result.contributionsA} second={result.contributionsB} /><NeuralTable caption="Two weighted balances on the same values" headers={['Donor', 'Value', 'Weight A', 'Weight B', 'Product A', 'Product B']} rows={values.map((v, i) => [i + 1, v, f(result.first[i]), f(result.second[i]), f(result.contributionsA[i]), f(result.contributionsB[i])])} /><p>Mixtures: A={f(result.outputA)} and B={f(result.outputB)}; difference <strong>{f(result.outputB - result.outputA)}</strong>. Entropies {f(result.entropyA)} and {f(result.entropyB)} nats. These are constructed distributions, not a claim that both are reachable inside one trained model.</p></>}<button onClick={() => { setFirst([.6, .3, .1]); setSecond([.2, .3, .5]); setValues([0, 2, 4]); }}>Reset weighted balances</button></NeuralLab>;
+  const [first, setFirst] = useState(0),
+    [third, setThird] = useState(4),
+    result = mixtures([.6, .3, .1], [.2, .3, .5], [first, 2, third]);
+  return <FlowLab id="self-attention-mixtures" label="Different weights can yield the same value mixture"><figure className="attention-contributions">{[result.contributionsA, result.contributionsB].map((products, row) => <div key={row}><span>row {row ? 'B: [.2,.3,.5]' : 'A: [.6,.3,.1]'}</span>{products.map((v, i) => <div className="attention-contribution" key={i}><span>donor {i + 1} contribution {f(v, 3)}</span><div><i style={{
+              left: v < 0 ? `${50 + v / 6 * 50}%` : '50%',
+              width: `${Math.abs(v) / 6 * 50}%`
+            }} /></div></div>)}<span>sum {f(row ? result.outputB : result.outputA)}; signed scale −6…6</span></div>)}</figure><FlowControls><FlowSlider name="Donor 1 scalar value" min={-6} max={6} value={first} onChange={setFirst} /><FlowSlider name="Donor 3 scalar value" min={-6} max={6} value={third} onChange={setThird} /></FlowControls><FlowReadout>A outputs <strong>{f(result.outputA)}</strong>; B outputs <strong>{f(result.outputB)}</strong>; difference {f(result.outputB - result.outputA)}. Equal first and third values remove the effect of redistributing their weights.</FlowReadout></FlowLab>;
 }
 function SelfAttentionStorage() {
-  const [length, setLength] = useState(2048), [heads, setHeads] = useState(16), result = attentionStorage({ length, heads });
-  return <figure className="self-attention-figure"><figcaption>Two different stored objects · derived counts, not timing</figcaption><div className="neural-controls"><NeuralNumber label="Sequence length L" integer min={1} max={8192} value={length} onChange={setLength} /><NeuralSelect label="Heads H at fixed width 1024" value={heads} onChange={v => setHeads(Number(v))} options={[1, 2, 4, 8, 16, 32].map(v => [v, v])} /></div><Lane title="Materialized receiver × donor matrices">1×{heads}×{length}²×2 = {result.matrixBytes.toLocaleString()} bytes = {f(result.matrixBytes / 2 ** 20)} MiB</Lane><Lane title="12 per-token key/value lists">2×1×12×{length}×1024×2 = {result.cacheBytes.toLocaleString()} bytes = {f(result.cacheBytes / 2 ** 20)} MiB</Lane><p>Projection MACs {result.projectionMACs.toLocaleString()}; pair MACs {result.pairMACs.toLocaleString()}. At fixed total width, changing head count changes materialized weight storage while this KV inventory stays fixed. Two FLOPs per MAC is a separate counting convention.</p></figure>;
+  const [length, setLength] = useState(2048),
+    [heads, setHeads] = useState(16),
+    result = attentionStorage({
+      length,
+      heads
+    });
+  return <FlowLab label="Attention square and cached feature rows have different storage growth"><AttentionStorageDrawing length={length} heads={heads} {...result} /><FlowControls><FlowSlider name="Sequence length" min={64} max={8192} step={64} value={length} onChange={setLength} /><FlowChoice label="Heads at fixed width 1024" options={[[4, '4'], [8, '8'], [16, '16']]} value={heads} onChange={setHeads} /></FlowControls><FlowReadout>One weight tensor uses <strong>{f(result.matrixBytes / 2 ** 20)} MiB</strong>; twelve layers' KV cache uses <strong>{f(result.cacheBytes / 2 ** 20)} MiB</strong>. Projection products use {result.projectionMACs.toLocaleString()} multiply-accumulates, pair products {result.pairMACs.toLocaleString()}.</FlowReadout></FlowLab>;
 }
-function AttentionTrajectoryWorkspace({ data }) {
-  const [points, setPoints] = useState(() => data.points.map(p => [...p])), [valid, setValid] = useState(data.points.map(() => true)), [selected, setSelected] = useState(22), [head, setHead] = useState(0), [maskKeys, setMaskKeys] = useState(true), [maskPool, setMaskPool] = useState(true), [message, setMessage] = useState('');
-  const current = attentionTrajectory(data.state_dict, points, valid, maskKeys, maskPool), original = attentionTrajectory(data.state_dict, data.points);
-  const delta = Math.max(...current.logits.map((v, i) => Math.abs(v - original.logits[i])));
-  const reset = () => { setPoints(data.points.map(p => [...p])); setValid(data.points.map(() => true)); setSelected(22); setHead(0); setMaskKeys(true); setMaskPool(true); setMessage(''); };
-  const reorder = direction => {
-    const target = selected + direction;
-    if (target < 0 || target >= points.length) return;
-    const next = [...points], nextValid = [...valid];
-    [next[selected], next[target]] = [next[target], next[selected]];
-    [nextValid[selected], nextValid[target]] = [nextValid[target], nextValid[selected]];
-    setPoints(next); setValid(nextValid); setSelected(target);
-  };
-  return <><p>Source row 77; recorded class 4 (anticlockwise arc). Original model class {original.predicted}; current model class <strong>{current.predicted}</strong>. Edits are hypothetical coordinates. Maximum logit change {f(delta, 9)}.</p><div className="neural-controls"><NeuralNumber label="Receiver / edit point number" min={1} max={points.length} integer value={selected + 1} onChange={v => setSelected(v - 1)} /><NeuralSelect label="Inspect attention head" value={head} onChange={v => setHead(Number(v))} options={[[0, 'Head 1'], [1, 'Head 2']]} />{[0, 1].map(axis => <NeuralNumber key={axis} label={`Point ${axis === 0 ? 'x' : 'y'}`} min={0} max={1} value={points[selected][axis]} onChange={v => setPoints(points.map((p, i) => i === selected ? p.map((x, j) => j === axis ? v : x) : p))} />)}</div><div className="attention-edges"><label><input type="checkbox" checked={valid[selected]} onChange={e => { if (!e.target.checked && valid.filter(Boolean).length === 1) setMessage('Keep at least one valid point for keys and pooling.'); else { setValid(valid.map((v, i) => i === selected ? e.target.checked : v)); setMessage(''); } }} />Selected point is valid</label><label><input type="checkbox" checked={maskKeys} onChange={e => setMaskKeys(e.target.checked)} />Exclude invalid donor keys</label><label><input type="checkbox" checked={maskPool} onChange={e => setMaskPool(e.target.checked)} />Exclude invalid outputs from mean</label></div>{message && <p role="status">{message}</p>}<div className="self-attention-columns"><figure className="attention-value-plane"><figcaption>Actual coordinates · equal x/y unit scales</figcaption><svg viewBox="0 0 300 300" role="img" aria-label={`Trajectory in current order with selected point ${selected + 1}`}><rect x="24" y="24" width="252" height="252" fill="none" stroke="#666" /><polyline points={points.map(p => `${24 + 252 * p[0]},${276 - 252 * p[1]}`).join(' ')} stroke="#aaa" fill="none" />{points.map((p, i) => <circle key={i} cx={24 + 252 * p[0]} cy={276 - 252 * p[1]} r={i === selected ? 6 : 2.5} fill={valid[i] ? '#e4b752' : '#151515'} stroke="#aaa"><title>Point {i + 1}: {vector(p)}, {valid[i] ? 'valid' : 'padding'}</title></circle>)}<circle cx={24 + 252 * points[0][0]} cy={276 - 252 * points[0][1]} r="10" stroke="#fff" fill="none" /><rect x={20 + 252 * points.at(-1)[0]} y={272 - 252 * points.at(-1)[1]} width="8" height="8" stroke="#fff" fill="none" /></svg><p>Start ring, end square; hollow points are invalid. Point number follows current array order.</p></figure><div><p>Class 4: original {f(original.probabilities[3], 8)}, current {f(current.probabilities[3], 8)}.</p><p>Class 5: original {f(original.probabilities[4], 8)}, current {f(current.probabilities[4], 8)}.</p><p>Receiver {selected + 1}, head {head + 1}: entropy {f(current.heads[head][selected].entropy)} nats. Selecting a receiver changes the inspected row, not the classifier.</p></div></div><div className="neural-buttons"><button onClick={() => { setPoints([...points].reverse()); setValid([...valid].reverse()); setSelected(points.length - 1 - selected); }}>Reverse order</button><button onClick={() => reorder(-1)} disabled={selected === 0}>Move selected earlier</button><button onClick={() => reorder(1)} disabled={selected === points.length - 1}>Move selected later</button><button onClick={() => setPoints(points.map((p, i) => i === selected ? [1 - p[0], p[1]] : p))}>Reflect selected x</button><button disabled={points.length > 55} onClick={() => { setPoints([...points, ...Array.from({ length: 5 }, () => [.75, .75])]); setValid([...valid, ...Array(5).fill(false)]); }}>Add five padding points</button><button onClick={reset}>Reset trajectory</button></div><WeightRow weights={current.heads[head][selected].weights} label={`Head ${head + 1}, receiver ${selected + 1}: donor coefficients`} /><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">All class probabilities on a common 0–1 scale</h4><WeightRow weights={current.probabilities} label="Current class probabilities" /><NeuralTable caption="Original versus current probabilities" headers={['Class', 'Original', 'Current', 'Change (percentage points)']} rows={current.probabilities.map((p, i) => [i + 1, f(original.probabilities[i], 8), f(p, 8), f(100 * (p - original.probabilities[i]), 6)])} /></section><p><a href="/learn-code/self-attention-multi-head-attention/data-provenance.md">Dataset attribution, retained split and complete experiment provenance</a></p></>;
+function TrajectoryDrawing({
+  points,
+  selected = 22
+}) {
+  return <figure className="attention-flow-drawing attention-trajectory-drawing"><svg viewBox="0 0 360 360" role="img" aria-label={`Trajectory, selected point ${selected + 1}, start ring and end square`}><rect x={48} y={28} width={252} height={252} fill="none" stroke="#555" /><polyline points={points.map(p => `${48 + 252 * p[0]},${280 - 252 * p[1]}`).join(' ')} stroke="#999" fill="none" />{points.map((p, i) => <circle key={i} cx={48 + 252 * p[0]} cy={280 - 252 * p[1]} r={i === selected ? 6 : 2.5} fill="#77cddb" stroke={i === selected ? '#fff' : 'none'}><title>Point {i + 1}: {vector(p)}</title></circle>)}<circle cx={48 + 252 * points[0][0]} cy={280 - 252 * points[0][1]} r={10} stroke="#fff" fill="none" /><rect x={44 + 252 * points.at(-1)[0]} y={276 - 252 * points.at(-1)[1]} width={8} height={8} stroke="#fff" fill="none" /><text x={48} y={18} fill="#ddd" fontSize={14}>y coordinate · cyan points</text>{[0, .5, 1].map(v => <g key={v}><text x={48 + 252 * v} y={301} textAnchor="middle" fill="#ddd" fontSize={13}>{v}</text><text x={38} y={285 - 252 * v} textAnchor="end" fill="#ddd" fontSize={13}>{v}</text></g>)}<text x={175} y={322} fill="#ddd" fontSize={14} textAnchor="middle">x coordinate · selected point {selected + 1}</text><text x={175} y={350} fill="#ddd" fontSize={12} textAnchor="middle">start: white ring; end: white square</text></svg></figure>;
 }
-function SelfAttentionResource({ file, render }) {
-  const [value, setValue] = useState(null), [error, setError] = useState(''), [attempt, setAttempt] = useState(0);
-  useEffect(() => { const controller = new AbortController(); fetch(file, { signal: controller.signal }).then(r => { if (!r.ok) throw new Error(`Resource returned ${r.status}`); return file.endsWith('.json') ? r.json() : r.text(); }).then(setValue).catch(e => { if (e.name !== 'AbortError') setError(e.message); }); return () => controller.abort(); }, [file, attempt]);
-  if (error) return <p role="alert">{error} <button onClick={() => { setError(''); setAttempt(attempt + 1); }}>Retry resource</button></p>;
-  return value === null ? <p role="status">Loading this lesson's selected resource…</p> : render(value);
+function AttentionPipeline() {
+  return <figure className="attention-pipeline"><TrajectoryDrawing points={[[.2, .2], [.22, .35], [.35, .6], [.55, .7], [.7, .65], [.8, .45]]} selected={2} /><div className="attention-pipeline-grids"><AttentionMatrix label="coordinates: 45 rows × 2" rows={['point 1', 'point 2', '…']} columns={['x', 'y']} role="input" values={[[.2, .2], [.22, .35], ['…', '…']]} /><span>same learned map + tanh →</span>{matrix('features: 45 rows × 24', Array(3).fill(['•', '•', '…', '•']), ['point 1', 'point 2', '…'], ['1', '2', '…', '24'])}<span>two heads + original features →</span>{matrix('contextual features: 45 rows × 24', Array(3).fill(['•', '•', '…', '•']), ['point 1', 'point 2', '…'], ['1', '2', '…', '24'])}<span>mean over rows → 24 features → learned class map → 15 scores</span></div><p>Six points illustrate input shape; dots stand for computed features, not measured values. The live curve uses all 45 recorded points.</p></figure>;
 }
-export function SelfAttentionTrajectoryLab() {
-  const [teachingSection, ready] = useLessonViewport();
-  return <NeuralLab title="A real classifier that cannot recover visit order" id="self-attention-trajectory"><section  data-lesson-teaching="" ref={teachingSection} className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Measured trajectory and frozen model</h4>{ready && <SelfAttentionResource file="/learn-assets/self-attention-multi-head-attention/trajectory-model.json" render={data => <AttentionTrajectoryWorkspace data={data} />} />}</section></NeuralLab>;
+function TrajectoryWorkspace({
+  data,
+  kind
+}) {
+  const [selected, setSelected] = useState(22),
+    [points, setPoints] = useState(() => data.points.map(p => [...p])),
+    [reverse, setReverse] = useState(false),
+    [padding, setPadding] = useState(0),
+    [maskKeys, setMaskKeys] = useState(true),
+    [maskPool, setMaskPool] = useState(true);
+  const source = useMemo(() => kind === 'order' && reverse ? [...data.points].reverse() : kind === 'edit' ? points : data.points, [data, kind, reverse, points]),
+    input = useMemo(() => kind === 'padding' ? [...source, ...Array.from({
+      length: padding
+    }, () => [.75, .75])] : source, [kind, source, padding]),
+    valid = useMemo(() => input.map((_, i) => i < 45), [input]),
+    original = useMemo(() => attentionTrajectory(data.state_dict, data.points), [data]),
+    result = useMemo(() => attentionTrajectory(data.state_dict, input, valid, maskKeys, maskPool), [data, input, valid, maskKeys, maskPool]),
+    receiver = kind === 'order' && reverse ? 44 - selected : selected,
+    delta = Math.max(...result.logits.map((v, i) => Math.abs(v - original.logits[i])));
+  return <FlowLab id={`self-attention-trajectory-${kind}`} label={`Recorded trajectory ${kind} experiment`}><TrajectoryDrawing points={source} selected={receiver} />{kind !== 'padding' && [0, 1].map(head => <AttentionWeightDrawing key={head} weights={result.heads[head][receiver].weights} labels={input.map((_, i) => String(i + 1))} selected={receiver} label={`Head ${head + 1}, receiver ${receiver + 1}: donor coefficients`} />)}<FlowControls>{kind === 'edit' ? <><FlowSlider name="Point number" min={1} max={45} step={1} value={selected + 1} onChange={v => setSelected(v - 1)} />{[0, 1].map(axis => <FlowSlider key={axis} name={`Selected point ${axis ? 'y' : 'x'}`} min={0} max={1} step={.01} value={points[selected][axis]} onChange={v => setPoints(points.map((p, i) => i === selected ? p.map((c, j) => j === axis ? v : c) : p))} />)}</> : kind === 'order' ? <FlowChoice label="Visit order" value={reverse} onChange={setReverse} options={[[false, 'Original'], [true, 'Reverse']]} /> : <><FlowSlider name="Dummy points at (.75,.75)" min={0} max={5} step={1} value={padding} onChange={setPadding} /><FlowChoice label="Dummy keys" value={maskKeys} onChange={setMaskKeys} options={[[true, 'Exclude'], [false, 'Include']]} /><FlowChoice label="Dummy outputs in mean" value={maskPool} onChange={setMaskPool} options={[[true, 'Exclude'], [false, 'Include']]} /></>}</FlowControls><FlowReadout>The model chooses class <strong>{result.predicted}</strong>. Anticlockwise-arc probability is {f(result.probabilities[3] * 100, 3)}%, clockwise-arc probability {f(result.probabilities[4] * 100, 3)}%, and largest logit change is <strong>{f(delta, 9)}</strong>. {kind === 'order' ? 'The same physical receiver stays selected after reversal.' : kind === 'padding' ? `${padding} dummy points follow independent key and pooling masks.` : 'Selecting a point chooses the inspected rows; editing coordinates changes model input.'}</FlowReadout></FlowLab>;
+}
+function SelfAttentionResource({
+  render
+}) {
+  const [value, setValue] = useState(null),
+    [error, setError] = useState(''),
+    [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/learn-assets/self-attention-multi-head-attention/trajectory-model.json', {
+      signal: controller.signal
+    }).then(r => {
+      if (!r.ok) throw new Error(`Resource returned ${r.status}`);
+      return r.json();
+    }).then(setValue).catch(e => {
+      if (e.name !== 'AbortError') setError(e.message);
+    });
+    return () => controller.abort();
+  }, [attempt]);
+  if (error) return <p role="alert">{error} <button type="button" onClick={() => {
+      setError('');
+      setAttempt(attempt + 1);
+    }}>Retry resource</button></p>;
+  return value === null ? <p role="status">Loading recorded points and learned parameters…</p> : render(value);
+}
+export function SelfAttentionTrajectoryLab({
+  kind = 'edit'
+}) {
+  const [ref, ready] = useLessonViewport();
+  return <div ref={ref} id={kind === 'edit' ? 'self-attention-trajectory' : undefined}>{ready && <SelfAttentionResource render={data => <TrajectoryWorkspace data={data} kind={kind} />} />}</div>;
 }
 export function SelfAttentionProgram() {
-  return <>
-    <RemoteCodeBlock source={'/learn-code/self-attention-multi-head-attention/author-calculations.py'} language="python" filename={'author-calculations.py'} title={"Read the complete data, model, fitting and verification program"} />
-    <p><a href="/learn-code/self-attention-multi-head-attention/author-calculations.py" download>Download the complete program</a></p>
-  </>;
+  return <RemoteCodeBlock source="/learn-code/self-attention-multi-head-attention/author-calculations.py" language="python" filename="author-calculations.py" title="Complete data, model, fitting and verification program" />;
 }

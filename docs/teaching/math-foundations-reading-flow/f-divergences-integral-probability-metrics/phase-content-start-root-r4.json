@@ -1,0 +1,226 @@
+{
+  "beforeSelected": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "record": "docs/teaching/implementation-depth/MATH-DEPTH-REMEDIATION.md",
+    "content": {
+      "status": "complete",
+      "completedAt": "2026-09-21T20:08:19.551Z",
+      "manuscript": "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+      "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "files": {
+        "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "5e255b375e1160607cf5ec3bc450e1bdba6a97a684721162aee6c19877a43759",
+        "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+        "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+        "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+        "src/learn/data/divergences-mechanism-program.js": "7cfe381bd9046c506f566ba3299c05ffee8c5d5f539bc5e33b8e1ef84543e39e",
+        "public/learn-assets/divergences/mmd-library-bridge.py": "708274444dc59476c4ebc6d4b334c94d60a7a65f31ecad1d777415e894fac08f"
+      }
+    },
+    "implementation": {
+      "status": "complete",
+      "completedAt": "2026-09-21T20:08:19.587Z",
+      "reviewedFiles": {
+        "public/learn-assets/divergences/mmd-library-bridge.py": "708274444dc59476c4ebc6d4b334c94d60a7a65f31ecad1d777415e894fac08f",
+        "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+        "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+        "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+        "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+        "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+        "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+        "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+        "src/learn/components/lesson-labs/DivergenceIpmLabs.jsx": "788b9d56f1e7da1144f71e86e716fae634479861fa0930e956d2c69948152537",
+        "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+        "src/learn/components/lesson-labs/MechanismProgram.jsx": "347fde8eefd4ce624c0db36597d4a421412a7c70a60e4a553a708f30f4b9d920",
+        "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+        "src/learn/components/lesson-labs/divergence-ipm-labs.css": "616b50a7cfce7b315a4b410a3af652b2b34e0310b8aa492f2d7dd15efe64db96",
+        "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+        "src/learn/components/lesson-labs/mechanism-program.css": "a2758dfc67cd54052aebf4f753b08fa66a054766da862bdb9aa6fa0c54e83316",
+        "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+        "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+        "src/learn/data/divergence-ipm-models.js": "0bd0c775c7b5b27a3d90117d27e3fb615516c64151c2d5c9ff08e63245308ffe",
+        "src/learn/data/divergences-mechanism-program.js": "7cfe381bd9046c506f566ba3299c05ffee8c5d5f539bc5e33b8e1ef84543e39e",
+        "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "5e255b375e1160607cf5ec3bc450e1bdba6a97a684721162aee6c19877a43759",
+        "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+      }
+    },
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/F-DIVERGENCES-IPMS-VERIFICATION.md",
+        "legacyReview": true
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.868Z",
+          "manuscript": "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "7526c9d2895f5164061de7ce26f24b27b0534ee404455f3ee0af5353fe3a0882",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+            "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.870Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "7526c9d2895f5164061de7ce26f24b27b0534ee404455f3ee0af5353fe3a0882",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/DivergenceIpmLabs.jsx": "788b9d56f1e7da1144f71e86e716fae634479861fa0930e956d2c69948152537",
+            "src/learn/data/divergence-ipm-models.js": "0bd0c775c7b5b27a3d90117d27e3fb615516c64151c2d5c9ff08e63245308ffe",
+            "src/learn/components/lesson-labs/divergence-ipm-labs.css": "616b50a7cfce7b315a4b410a3af652b2b34e0310b8aa492f2d7dd15efe64db96",
+            "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+            "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      }
+    ],
+    "nextAction": "Scoped implementation-depth revision complete; retain source-bound evidence. User acceptance remains separate."
+  },
+  "afterSelected": {
+    "revision": 4,
+    "deliveryMode": "full",
+    "record": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-accepted-root-r2.json",
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/F-DIVERGENCES-IPMS-VERIFICATION.md",
+        "legacyReview": true
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.868Z",
+          "manuscript": "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "7526c9d2895f5164061de7ce26f24b27b0534ee404455f3ee0af5353fe3a0882",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+            "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.870Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "7526c9d2895f5164061de7ce26f24b27b0534ee404455f3ee0af5353fe3a0882",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/DivergenceIpmLabs.jsx": "788b9d56f1e7da1144f71e86e716fae634479861fa0930e956d2c69948152537",
+            "src/learn/data/divergence-ipm-models.js": "0bd0c775c7b5b27a3d90117d27e3fb615516c64151c2d5c9ff08e63245308ffe",
+            "src/learn/components/lesson-labs/divergence-ipm-labs.css": "616b50a7cfce7b315a4b410a3af652b2b34e0310b8aa492f2d7dd15efe64db96",
+            "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+            "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      },
+      {
+        "revision": 3,
+        "deliveryMode": "full",
+        "record": "docs/teaching/implementation-depth/MATH-DEPTH-REMEDIATION.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T20:08:19.551Z",
+          "manuscript": "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "5e255b375e1160607cf5ec3bc450e1bdba6a97a684721162aee6c19877a43759",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+            "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+            "src/learn/data/divergences-mechanism-program.js": "7cfe381bd9046c506f566ba3299c05ffee8c5d5f539bc5e33b8e1ef84543e39e",
+            "public/learn-assets/divergences/mmd-library-bridge.py": "708274444dc59476c4ebc6d4b334c94d60a7a65f31ecad1d777415e894fac08f"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T20:08:19.587Z",
+          "reviewedFiles": {
+            "public/learn-assets/divergences/mmd-library-bridge.py": "708274444dc59476c4ebc6d4b334c94d60a7a65f31ecad1d777415e894fac08f",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/lesson-labs/DivergenceIpmLabs.jsx": "788b9d56f1e7da1144f71e86e716fae634479861fa0930e956d2c69948152537",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/MechanismProgram.jsx": "347fde8eefd4ce624c0db36597d4a421412a7c70a60e4a553a708f30f4b9d920",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/divergence-ipm-labs.css": "616b50a7cfce7b315a4b410a3af652b2b34e0310b8aa492f2d7dd15efe64db96",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/mechanism-program.css": "a2758dfc67cd54052aebf4f753b08fa66a054766da862bdb9aa6fa0c54e83316",
+            "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+            "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+            "src/learn/data/divergence-ipm-models.js": "0bd0c775c7b5b27a3d90117d27e3fb615516c64151c2d5c9ff08e63245308ffe",
+            "src/learn/data/divergences-mechanism-program.js": "7cfe381bd9046c506f566ba3299c05ffee8c5d5f539bc5e33b8e1ef84543e39e",
+            "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "5e255b375e1160607cf5ec3bc450e1bdba6a97a684721162aee6c19877a43759",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+          }
+        },
+        "nextAction": "Scoped implementation-depth revision complete; retain source-bound evidence. User acceptance remains separate."
+      }
+    ],
+    "content": {
+      "status": "in-progress"
+    },
+    "implementation": {
+      "status": "not-started"
+    },
+    "nextAction": "Author the complete manuscript, all 53 actionable visual contracts, seven investigation families, explained complete scratch/library routes and all retained and new solved practice. DIFFERENT whole-content review precedes runtime."
+  },
+  "ledgerBefore": "ef8e4b9ade7a01830ae2fefbfbb8d44f2a8b5500a8ce04deb99800eec629d798",
+  "ledgerAfter": "7f9feba9aa8448cf9718f3487a2aa660fcdc9b7f6d0a17e3fc726c64e8d44d17",
+  "foreignRowsPreserved": 234,
+  "acceptance": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-accepted-root-r2.json",
+    "sha256": "e34c98865f2d39186ac9053e7fdf2abe0fb9300fbdef746cd48a9b52aefbc588"
+  },
+  "prewriteAttempt": "Initial expected historical revision 2 assertion found actual revision 3 and aborted before writing; historical revision 3 inspected fully and preserved."
+}

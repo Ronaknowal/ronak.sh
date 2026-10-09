@@ -1,0 +1,66 @@
+{
+  "scope": "New declared finite design arithmetic and additive design composition only",
+  "executions": [
+    {
+      "source": "design-arithmetic.py",
+      "command": "scratch/survival-tools/Scripts/python.exe -X utf8 -B docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-arithmetic.py",
+      "sourceSha256": "581f6c072d0468af186d04704f548e494156155a07218ee40800afceaa234f09",
+      "exitCode": 0,
+      "chunk": "247cc1",
+      "result": "design-arithmetic.json",
+      "limit": "Tool stdout truncated; full JSON retained. Exact supplied blocks/closed forms and two saved-row sums, no estimator fit or old main. Source reviewed and raw-pixel divisor corrected before execution."
+    },
+    {
+      "source": "saved-scale-arithmetic.py",
+      "command": "scratch/survival-tools/Scripts/python.exe -X utf8 -B docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/saved-scale-arithmetic.py",
+      "sourceSha256": "a6aa28c58a60438a5ee6190ec0a1e35c89d76a13b96b3e5a2fadc3990d14831f",
+      "exitCode": 0,
+      "chunk": "b111af",
+      "result": "saved-scale-arithmetic.json",
+      "limit": "Saved-array maximum/address/ruler calculation only, no fit. Complete printed result read."
+    },
+    {
+      "source": "practice-arithmetic.py",
+      "command": "scratch/survival-tools/Scripts/python.exe -X utf8 -B docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/practice-arithmetic.py",
+      "sourceSha256": "4ae30d23948306d7ff2e091e4e6cad120d883182251d93b0ad1bc098425bca5c",
+      "exitCode": 0,
+      "chunk": "97441c",
+      "result": "practice-arithmetic.json",
+      "limit": "Direct hand arrays/formulas only, no fits. Tool stdout truncated; full JSON retained."
+    },
+    {
+      "source": "compose-design.mjs",
+      "command": "node docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/compose-design.mjs",
+      "exitCode": 0,
+      "chunk": "c108ea",
+      "result": "reading-flow-design.md and design-composition-deltas.json",
+      "limit": "Additive literal design composition only. No original or shared source mutation."
+    }
+  ],
+  "retainedFailure": {
+    "command": "node --check docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/compose-design.mjs",
+    "chunk": "21028e",
+    "reportedCompositeToolExitCode": 0,
+    "actualNodeDiagnostic": "SyntaxError: Unexpected identifier 'visual' at compose-design.mjs line 37; doubled backslash before template backticks ended the template early",
+    "qualification": "The tool command also read source afterward and returned composite exit0; the visible Node syntax check failed. Do not relabel that diagnostic PASS or claim an unrecorded process exit code.",
+    "effect": "No composer execution, output or original mutation occurred in this syntax check.",
+    "closure": "Corrected escape and standard fileURLToPath path handling; actual node --check terminal0 chunk efec1a, followed by actual successful composition c108ea."
+  },
+  "unchangedEvidence": [
+    "partial-checkpoint.json retains original baseline/decoding/saved-contribution execution qualifications",
+    "resumed-partial-checkpoint.json retains the once foundation arithmetic execution and all pending predecessor scope",
+    "Original three sources/stdout and preserved real study remain unchanged; none replayed"
+  ],
+  "limits": {
+    "historicalFitsMainsStudiesCheckersReplayed": 0,
+    "newEstimatorFits": 0,
+    "newLibrarySolverFits": 0,
+    "newManuscript": false,
+    "newRunnableLessonPrograms": 0,
+    "runtimeBuildOrNativeChecks": false,
+    "primaryFigurePixels": "Unavailable through retained failed screenshot routes; descriptions and historical local images have distinct roles",
+    "noviceStudy": false,
+    "independentAcceptance": false,
+    "phasePromotion": false
+  }
+}

@@ -1,0 +1,17 @@
+split sizes=20/5/6; selected rank=2, penalty=0.05, validation RMSE=1.337272
+all: n=6, shrunk item RMSE=1.111143, MF RMSE=1.229386
+warm users: n=5, shrunk item RMSE=1.176590, MF RMSE=1.321735
+cold users: n=1, shrunk item RMSE=0.697143, MF RMSE=0.577423
+user 0 eligible unseen: [4, 6]
+popularity order: [4, 6]
+MF order: [6, 4]
+Release times are 0 for these seven items; changing that assumption requires request-time eligibility.
+Changed cutoff, same untouched test period:
+split sizes=18/7/6; selected rank=2, penalty=0.2, validation RMSE=1.180979
+all: n=6, shrunk item RMSE=1.111143, MF RMSE=1.128322
+warm users: n=5, shrunk item RMSE=1.176590, MF RMSE=1.198989
+cold users: n=1, shrunk item RMSE=0.697143, MF RMSE=0.671405
+user 0 eligible unseen: [4, 6]
+popularity order: [4, 6]
+MF order: [6, 4]
+Release times are 0 for these seven items; changing that assumption requires request-time eligibility.

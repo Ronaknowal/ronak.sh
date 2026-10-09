@@ -1,0 +1,412 @@
+{
+  "schema": "whole-current-content-runtime-intake/v1",
+  "author": "/root/tsne_consolidated_content_correction",
+  "at": "2026-10-09T09:24:59.754037+00:00",
+  "status": "COMPLETE_INTAKE_BEFORE_RUNTIME_IMPLEMENTATION",
+  "inputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/reading-flow-manuscript.md",
+      "bytes": 138332,
+      "sha256": "8d1c32dc7cf8de49b99fd6198671927c52196d7ac5714dd0ec90c70eebfbbec5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/visual-and-investigation-specifications.md",
+      "bytes": 45697,
+      "sha256": "07aee732555d0a30e519fa7feb1687d58837d4b232640a337b0e500de5a217b3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/content-map.json",
+      "bytes": 25152,
+      "sha256": "5fd95e3e7e82523a100d15558a813d728346916772c99fae288408ad92a3367c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/code-presentation-index.json",
+      "bytes": 19011,
+      "sha256": "c145124371947e4e6db3b0dd980099a00db64012d1a44b2688d72c8aa84bfb13"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/file-index.json",
+      "bytes": 16604,
+      "sha256": "8db1deee1ea7228840793fe60153be8b7823e4504c04c66c04e4fc6518b12b7e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+      "bytes": 15754,
+      "sha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/setup-and-files.md",
+      "bytes": 7557,
+      "sha256": "0b11d995f5822d5f5e0182db03248bbad23f8030acc0f2adcc2dd3515635d72c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/current-api-and-resource-notes.md",
+      "bytes": 5219,
+      "sha256": "f13c791133b5ca15397dc965308bed3482c5bcd5547872b7e93d94b8b8f88ed3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-reading-and-handoff.md",
+      "bytes": 12500,
+      "sha256": "382bec71a8dfddce9a95b27ed8f950322963621f11f4e6693295d33085ec975a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-ready.json",
+      "bytes": 7336,
+      "sha256": "76a3db64bd01e30fc35517701108f37d4cb23b227e6db811ffea32020104c545"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-accepted-root.json",
+      "bytes": 64231,
+      "sha256": "d66262456b882a85a7b9e17ecae91b8ef44af6c4e8edfc1f63ac314ae4b4e36c"
+    }
+  ],
+  "payloads": [
+    {
+      "destination": "programs/audit_saved_neighbors.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/audit_saved_neighbors.py",
+        "bytes": 4586,
+        "sha256": "21246557a18f1b495196f65a73804eebb9e956a19e7946fc7d98bfe3ceb527b0"
+      },
+      "role": "existing new complete source; ordinary fitting functions source-only"
+    },
+    {
+      "destination": "programs/classical_geometry.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/classical_geometry.py",
+        "bytes": 4114,
+        "sha256": "0cd7ae86ddbba606da79acbdd8d269608fd37b91256ae63db8579e4faaef42d6"
+      },
+      "role": "unchanged complete current source; scratch numeric stream belongs checked predecessor; ordinary-only return completion source-only"
+    },
+    {
+      "destination": "programs/gaussian_rows.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/programs/gaussian_rows.py",
+        "bytes": 3070,
+        "sha256": "22b027b6683bc6a106da83f0d478fb3c1ca700a1556242e44f423de2a9fdd63e"
+      },
+      "role": "corrected complete solver; scoped callable check only; saved main stream belongs to predecessor"
+    },
+    {
+      "destination": "programs/graph_spectrum.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/graph_spectrum.py",
+        "bytes": 2603,
+        "sha256": "f48eefd33c78bd4e24bbc876f0dce2fd4b435b66e37e38a78c8c6c310fee5965"
+      },
+      "role": "existing new complete source; ordinary fitting functions source-only"
+    },
+    {
+      "destination": "programs/isomap_routes.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/isomap_routes.py",
+        "bytes": 2854,
+        "sha256": "d4aa583b327c37566c120c80ae534cddef48092d808c2ab45a43816e84b5af05"
+      },
+      "role": "existing new complete source; ordinary fitting functions source-only"
+    },
+    {
+      "destination": "programs/lle_recipes.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/lle_recipes.py",
+        "bytes": 3239,
+        "sha256": "ff115c9c9d62262ba8192fad62d0157c024d674256c58cedaa61e105bf17c378"
+      },
+      "role": "existing new complete source; ordinary fitting functions source-only"
+    },
+    {
+      "destination": "programs/local_density_radius.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/local_density_radius.py",
+        "bytes": 2138,
+        "sha256": "166ed917a514c08ab7e9620b475c42f78e78e70c403d081644d1afa62e24dfe1"
+      },
+      "role": "existing new complete source; ordinary fitting functions source-only"
+    },
+    {
+      "destination": "programs/local_tangent_patch.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/local_tangent_patch.py",
+        "bytes": 2989,
+        "sha256": "c7eae35d006b759f42e061def70c9928242a52fc30dc34c3fb61f37e80d4453b"
+      },
+      "role": "existing new complete source; ordinary fitting functions source-only"
+    },
+    {
+      "destination": "programs/reference_map_routes.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/reference_map_routes.py",
+        "bytes": 3842,
+        "sha256": "96d065b7c9cf119002e89d3cf508f788a4918bcec38d4fa993839f570aef7ac9"
+      },
+      "role": "existing new complete source; ordinary fitting functions source-only"
+    },
+    {
+      "destination": "programs/sampled_pair_events.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/sampled_pair_events.py",
+        "bytes": 2473,
+        "sha256": "a6a56714b6b88cd846437b52d844a8aa01db774dc66050bdec67cca563cc57a9"
+      },
+      "role": "existing new complete source; ordinary fitting functions source-only"
+    },
+    {
+      "destination": "programs/compare_transforms.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/compare_transforms.py",
+        "bytes": 1095,
+        "sha256": "1e6b522a310b7d4de580754e071bd0f195ebde6f38b8ba4050a94c98076608b7"
+      },
+      "role": "exact original full programme copy; not rerun"
+    },
+    {
+      "destination": "programs/inspect_digits.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/inspect_digits.py",
+        "bytes": 1243,
+        "sha256": "19973ec6d6ecf8bf74cfda89a3bedd5b223ecb33a8587a01d5173766b995d111"
+      },
+      "role": "exact original full programme copy; not rerun"
+    },
+    {
+      "destination": "programs/inspect_umap.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/inspect_umap.py",
+        "bytes": 1043,
+        "sha256": "21541157bdf2626cc494ce772d68638431dc9daca576f10ba88f24832bd58595"
+      },
+      "role": "exact original full programme copy; not rerun"
+    },
+    {
+      "destination": "programs/tiny_tsne.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/tiny_tsne.py",
+        "bytes": 1523,
+        "sha256": "b1f1660c9bb9da66aa7edb5a928a95b489da6e73c8d6d3edd4b47d9dcc3e7d53"
+      },
+      "role": "exact original full programme copy; not rerun"
+    },
+    {
+      "destination": "programs/umap-mechanism.py",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/umap-mechanism.py",
+        "bytes": 6947,
+        "sha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc"
+      },
+      "role": "exact original full programme copy; not rerun"
+    },
+    {
+      "destination": "data/calculated-inputs.json",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/calculated-inputs.json",
+        "bytes": 125183,
+        "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+      },
+      "role": "exact preserved support/data copy"
+    },
+    {
+      "destination": "data/data-provenance.md",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/data-provenance.md",
+        "bytes": 6097,
+        "sha256": "b48bdb1363b8e9123b3405d231a0c40172be8cbd947ce2c21a300ea68d210f6e"
+      },
+      "role": "exact preserved support/data copy"
+    },
+    {
+      "destination": "data/digits-300.csv",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "role": "exact preserved support/data copy"
+    },
+    {
+      "destination": "data/runtime-versions.json",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/runtime-versions.json",
+        "bytes": 230,
+        "sha256": "6d50b51386a007ff43f7c2983cb1dab72b75958c46c6b3a299a942ab9d1b2f46"
+      },
+      "role": "exact preserved support/data copy"
+    },
+    {
+      "destination": "data/umap-digits.csv",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/umap-digits.csv",
+        "bytes": 30448,
+        "sha256": "57a6ec04fca5c3739a49402bb5b06a9688664c38c5b2017065dd70918e380c01"
+      },
+      "role": "exact preserved support/data copy"
+    },
+    {
+      "destination": "outputs/audit_saved_neighbors.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/audit_saved_neighbors.txt",
+        "bytes": 1034,
+        "sha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7"
+      },
+      "role": "already executed new deterministic stream; not rerun"
+    },
+    {
+      "destination": "outputs/classical_geometry.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/classical_geometry.txt",
+        "bytes": 460,
+        "sha256": "eaebb28b62c1c3044269372513bdcffa665ae267c578d27c88207377be7f600e"
+      },
+      "role": "retained checked-predecessor scratch main stream; no current ordinary-estimator execution"
+    },
+    {
+      "destination": "outputs/gaussian_rows.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/gaussian_rows.txt",
+        "bytes": 1050,
+        "sha256": "86f66f5dd88b8f6d66a5bc875464b5359f3d85aed14d0f8e1f58196430f60482"
+      },
+      "role": "retained exact predecessor main stream, not corrected-main execution"
+    },
+    {
+      "destination": "outputs/graph_spectrum.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/graph_spectrum.txt",
+        "bytes": 168,
+        "sha256": "2f0768aca4ec37081344442250d5651292aa3aac0363d935af84465ff71b3052"
+      },
+      "role": "already executed new deterministic stream; not rerun"
+    },
+    {
+      "destination": "outputs/isomap_routes.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/isomap_routes.txt",
+        "bytes": 478,
+        "sha256": "927a07922cc9c0fe80eed41244cf44d0151d9296333eb32b358b9a5d16288e63"
+      },
+      "role": "already executed new deterministic stream; not rerun"
+    },
+    {
+      "destination": "outputs/lle_recipes.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/lle_recipes.txt",
+        "bytes": 426,
+        "sha256": "a11bbb8992488dd8bd7e7d361709f78301c80c5f3d32e1045156d87cc6969539"
+      },
+      "role": "already executed new deterministic stream; not rerun"
+    },
+    {
+      "destination": "outputs/local_density_radius.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/local_density_radius.txt",
+        "bytes": 294,
+        "sha256": "a818a30441964c4ca1032ad41f705e3c7b21141f32fe4aaeffafa8f2e3d71c0d"
+      },
+      "role": "already executed new deterministic stream; not rerun"
+    },
+    {
+      "destination": "outputs/local_tangent_patch.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/local_tangent_patch.txt",
+        "bytes": 202,
+        "sha256": "dc02cd27e0e74b51bd9d7ca48268737aeb1945fa072a6613315a209f6dfa0893"
+      },
+      "role": "already executed new deterministic stream; not rerun"
+    },
+    {
+      "destination": "outputs/reference_map_routes.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/reference_map_routes.txt",
+        "bytes": 80,
+        "sha256": "721d27d5db1f4620819ff56a1c085e088408917aa1cac5be631f229431659d83"
+      },
+      "role": "already executed new deterministic stream; not rerun"
+    },
+    {
+      "destination": "outputs/retained-compare_transforms.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-compare_transforms.txt",
+        "bytes": 70,
+        "sha256": "ae1d22ebf46557c88492627eb984ae4a7600070a33c43f98b6364bddefce6b04"
+      },
+      "role": "retained stream LF display copy; source selector in original intake"
+    },
+    {
+      "destination": "outputs/retained-inspect_digits.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-inspect_digits.txt",
+        "bytes": 124,
+        "sha256": "f7aba164ab1607a1a75b7bb250e98ba7802e4f0c86943dfb30912d47277bad32"
+      },
+      "role": "retained stream LF display copy; source selector in original intake"
+    },
+    {
+      "destination": "outputs/retained-inspect_umap.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-inspect_umap.txt",
+        "bytes": 38,
+        "sha256": "8e70f3d0787ca9597e3807eba7ae66966487ea7687e505581d484eb267635aa7"
+      },
+      "role": "retained stream LF display copy; source selector in original intake"
+    },
+    {
+      "destination": "outputs/retained-tiny_tsne.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-tiny_tsne.txt",
+        "bytes": 80,
+        "sha256": "eda61654eb0ca052d4469c80532e2a5ff5a0f81f42f74602f381c0ade3095841"
+      },
+      "role": "retained stream LF display copy; source selector in original intake"
+    },
+    {
+      "destination": "outputs/retained-umap-mechanism.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-umap-mechanism.txt",
+        "bytes": 259,
+        "sha256": "a5acbbbf1dc23667b42d1a6b9921b05669e94e5cf5e10cba18d6e2ec1194755f"
+      },
+      "role": "retained stream LF display copy; source selector in original intake"
+    },
+    {
+      "destination": "outputs/sampled_pair_events.txt",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/sampled_pair_events.txt",
+        "bytes": 323,
+        "sha256": "39ed590e69e1f9f7dafc29c762cb88728670740430c6cdede7d850cc3fc5706e"
+      },
+      "role": "already executed new deterministic stream; not rerun"
+    }
+  ],
+  "reading": {
+    "manuscript": "Fresh entire current manuscript, contiguous lines1-230,231-460,461-690,691-920,921-1150,1151-1380,1381-1610,1611-end. Full15 source bodies/15 streams and19 solved tasks consumed in this continuous reading.",
+    "specifications": "All45 full drawing contracts and12 live investigations including complete L7 state protocol. Broad first output truncated D23-D31; explicit D23 and D24-D42 recovery consumed the missing ranges.",
+    "setup": "Complete setup, API/resource notes, whole author handoff, map scope/roles,35 complete payload descriptors and Root current acceptance consumed.",
+    "sources": "All35 actual payloads freshly read/hash checked;15 normalized complete Python bodies match the entire displayed manuscript. Data read/parsed as source payloads; no claim of visually examining300 separate tiles or viewing external papers/videos.",
+    "priorCorrection": "Prior affected reading does not stand in for this fresh complete current manuscript/specification intake."
+  },
+  "scope": {
+    "sections": 13,
+    "drawings": 45,
+    "labs": 12,
+    "programs": 15,
+    "streams": 15,
+    "payloads": 35,
+    "solvedTasks": 19
+  },
+  "carryforwards": [
+    "Entire shared Reader picture-first flow",
+    "L7 expanding shared domain, simultaneous step,rate0 exact no-op,last-finite retention",
+    "Explicit Gaussian/classical executed-predecessor stream roles",
+    "All original access/version/missing-fit/failure qualifications",
+    "Topic-only Vite publicDir:false and exact source middleware",
+    "No shared/public/canonical/central edits;Root owns root-start.json"
+  ],
+  "nativeWindowsPersonallyViewed": [],
+  "scienceReplayed": false,
+  "implementationStarted": false,
+  "toolLimitations": [
+    "Guessed manuscript.md and LessonFlow path absent; corrected to actual named paths.",
+    "First descriptor print used system cp1252 and stopped on epsilon; UTF-8 retry consumed current descriptors.",
+    "One broad engineering read truncated; targeted missing runtime code/layout/control ranges consumed."
+  ]
+}

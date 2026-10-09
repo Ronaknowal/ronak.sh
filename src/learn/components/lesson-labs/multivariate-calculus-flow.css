@@ -1,0 +1,19 @@
+.multivariate-lesson .mvc-figure { margin:1.75rem 0; }
+.multivariate-lesson .mvc-title { font-size:1rem; font-weight:500; margin-bottom:.65rem; color:#dedee3; }
+.multivariate-lesson .mvc-scroll { overflow:auto; max-width:100%; margin:.7rem 0; scrollbar-gutter:stable; }
+.multivariate-lesson .mvc-scroll:focus-visible { outline:2px solid #e5bb69; outline-offset:3px; }
+.multivariate-lesson .mvc-scroll svg { display:block; width:var(--mvc-width); min-width:var(--mvc-width); height:auto; overflow:visible; }
+.multivariate-lesson .mvc-scroll svg text { font-family:inherit; font-size:16px; fill:#dce1e9; paint-order:stroke; stroke:#080808; stroke-width:3px; stroke-linejoin:round; }
+.multivariate-lesson .mvc-scroll svg .mvc-axis { stroke:#647080; stroke-width:1; fill:none; }
+.multivariate-lesson .mvc-scroll svg .mvc-grid { stroke:#647080; stroke-width:1; fill:none; opacity:.4; }
+.multivariate-lesson .mvc-pair { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:1.3rem; }
+.multivariate-lesson .mvc-pair > * { min-width:0; }
+.multivariate-lesson .mvc-legend { display:flex; flex-wrap:wrap; gap:.5rem 1rem; color:#bfc6d0; font-size:.9rem; line-height:1.6; }
+.multivariate-lesson .mvc-legend span::before { content:''; display:inline-block; width:1.1rem; border-top:2px solid var(--mvc-ink); margin-right:.4rem; vertical-align:middle; }
+.multivariate-lesson .mvc-table { border-collapse:collapse; min-width:max-content; font-variant-numeric:tabular-nums; font-size:.95rem; }
+.multivariate-lesson .mvc-table caption { text-align:left; padding:.5rem 0; color:#bdc5d0; }
+.multivariate-lesson .mvc-table :is(th,td) { padding:.6rem .85rem; border-bottom:1px solid #30343b; text-align:left; white-space:nowrap; }
+.multivariate-lesson .mvc-table th { font-weight:500; }
+.multivariate-lesson .multivariate-practice { margin:1.75rem 0; }
+.multivariate-lesson .multivariate-practice summary { cursor:pointer; margin-block:.7rem; }
+@media(max-width:1100px){.multivariate-lesson .mvc-pair { grid-template-columns:minmax(0,1fr); }}

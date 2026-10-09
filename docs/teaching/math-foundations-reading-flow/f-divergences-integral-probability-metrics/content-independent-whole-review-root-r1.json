@@ -1,0 +1,39 @@
+{
+  "status": "PASS_COMPLETE_CONTENT_DIFFERENT_WHOLE_REVIEW",
+  "reviewer": "/root",
+  "authors": [
+    "/root/numerical_runtime_resume"
+  ],
+  "independentOfAuthors": true,
+  "completedAt": "2026-10-09T18:27:01.150326+00:00",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-source-r1.json",
+    "sha256": "ab9b0b29b946f6c5561fc87f4d4906c3801c3aafab6a6a8d40e2348b84304ff9"
+  },
+  "ready": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-author-ready-r1.json",
+    "sha256": "1cb55d7903952bdc9e5dd8e440416d4871ec3d945f9920d0d00368df93374194"
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-independent-whole-review-root-r1.md",
+    "sha256": "20aaa18abc07b1a22598a302204b6f7d2cad27fcbef38fcdaf856909affbcbeb"
+  },
+  "checks": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-independent-checks-root-r1.json",
+    "sha256": "46315aa008233c0bcdef3a94a423f263d60615479db1971abcfec824975d87ea"
+  },
+  "script": {
+    "path": "scratch/review-fdiv-content-root-r1.py",
+    "sha256": "afd049d4d8c69e41d9f4269a0f5cb17e934fda530c52b6de6ea631e4f5c2ee99"
+  },
+  "checkedSourceBindings": 116,
+  "boundedChecksPassed": 19,
+  "findings": [],
+  "wholeManuscriptRead": true,
+  "wholeVisualSpecificationsRead": true,
+  "allProgrammesAndPracticeRead": true,
+  "specificationReadingMethod": "Read all unique geometry/state records, full shared/lab/delivery rules and manuscript prose; checked all repeated payload correspondence without reprinting identical templates.",
+  "mainReplays": 0,
+  "builds": 0,
+  "runtimeAccepted": false
+}

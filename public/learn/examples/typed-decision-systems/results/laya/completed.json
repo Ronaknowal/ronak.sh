@@ -1,0 +1,24 @@
+{
+  "status": "completed",
+  "checkpoint_revision": "7b928d828b7b0e022f929d9bd2e44165aa270148",
+  "checkpoint_manifest_sha256": "cdf9d08d78d128d0e2d8093d8ca8a07d0734bee2c324487c1e14da737ac2812a",
+  "checkpoint_files": {
+    "rl_agent_config.json": "ae287b56bbcf5f8c4f4541ae9dfd00c914c4c48b940b8398c3058af37ba92bbd",
+    "encoder/config.json": "bf3ab80598fdccf414855a2ce80f22859e4492d06ca8a62ddd1cfb63972f8979",
+    "tokenizer/tokenizer.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30",
+    "tokenizer/tokenizer_config.json": "50044de60daaa73df97d262e15a40d4faf0160e7d742df64b377877a1320dd12",
+    "README.md": "00355613796b3f5860b0d5b20392381d26580ec242e04a1fd150c7f116858602",
+    "model.safetensors": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c"
+  },
+  "data_sha256": "fd853e3bdb9ff903f244f1bd13454b170540de0cefbcef4b5f3f953fd0194c63",
+  "shifts_sha256": "9bba4b6050cb5d464c7a9065318c741f9bc9e93e6cb1cb9a2d46c78548b69db0",
+  "program_sha256": "263b6a6014acb7b783a9dbe06167fd6b577f09cd474c3256c313fd8bf0dde736",
+  "laya_version": "0.4.0",
+  "torch_version": "2.14.0+cpu",
+  "weight_updates": 0,
+  "cohort_examples": 240,
+  "shift_examples": 24,
+  "typed_question_rows": 6,
+  "parity_extra_examples": 8,
+  "timing_examples": 43
+}

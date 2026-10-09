@@ -1,0 +1,1358 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root/ml_successor_independent_review",
+  "role": "DIFFERENT whole revision5 content review; authored none of manuscript/programmes/specifications",
+  "status": "changes-required",
+  "packet": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/whole-review-handoff.json",
+    "bytes": 5864,
+    "sha256": "9bed8c091c950fd69288404afe844861823728dc1a68e9a94350019293a42c29"
+  },
+  "manuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+    "bytes": 215385,
+    "sha256": "ee185895e6290560d24e94b87fa3a62126f86d950d7761f6b84638abd8884f95",
+    "role": "complete eleven-section continuous manuscript, all code/output and solved practice"
+  },
+  "visualSpecifications": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-specifications.md",
+    "bytes": 40722,
+    "sha256": "10bd71d406940166828d804cb3f5d756c1822b95980ef2f06011e6a73aa8c61e",
+    "role": "all41 actual-object drawings and16 immediate-result investigations; no rendered claim"
+  },
+  "scope": {
+    "literalWholeManuscriptRead": true,
+    "all16ProgrammeBodiesAndFullOutputsRead": true,
+    "optionalRAndAnswerRead": true,
+    "all26SolvedTasksRead": true,
+    "all41DrawingAnd16LabContractsRead": true,
+    "setupAndSourceRoleRead": true,
+    "renderedOrExecutedByReviewer": false
+  },
+  "conditions": 354,
+  "checks": [
+    "Exact incoming whole packet",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-specifications.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/composition.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/source-roles.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/whole-author-review.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/root-content-release.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/intake.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/new-program-execution.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/first-assembly/receipt.json",
+    "Bound docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/lesson.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/multiple_imputation_mice.R",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins.csv",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/calculated-inputs.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/scaling-native.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/source-roles.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/README.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/requirements.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/core.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/deeper.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/practice.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/ending.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-refinements.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/compose-content.mjs",
+    "All42 indexed learner assets",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/reading-flow-design.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/programmes-practice-and-resources.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+    "Bound src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+    "Bound src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js",
+    "Bound src/learn/data/scaling-models.js",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-models.js",
+    "Bound src/learn/data/scaling-data.js",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-data.js",
+    "Bound src/learn/data/scaling-examples.js",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-examples.js",
+    "Bound src/learn/components/lesson-labs/ScalingLabs.jsx",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingLabs.jsx",
+    "Bound src/learn/components/lesson-labs/ScalingFigures.jsx",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingFigures.jsx",
+    "Bound src/learn/components/lesson-labs/ScalingShared.jsx",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingShared.jsx",
+    "Bound src/learn/components/lesson-labs/scaling-labs.css",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/scaling-labs.css",
+    "Bound public/learn-assets/feature-scaling/penguins.csv",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/public/learn-assets/feature-scaling/penguins.csv",
+    "Bound docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py",
+    "Bound docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+    "Bound docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md",
+    "Bound docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+    "Bound docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+    "Bound docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+    "Bound docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+    "Bound docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+    "Bound docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+    "Bound docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+    "Bound docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md",
+    "Bound docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+    "Bound docs/teaching/evidence/scaling-models.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-models.json",
+    "Bound docs/teaching/evidence/scaling-native.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-native.json",
+    "Bound docs/teaching/evidence/scaling-data.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-data.json",
+    "Bound docs/teaching/evidence/scaling-browser.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-browser.json",
+    "Bound scripts/verify-scaling-models.mjs",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-models.mjs",
+    "Bound scripts/verify-scaling-examples.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-examples.py",
+    "Bound scripts/verify-scaling-data.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-data.py",
+    "Bound scripts/verify-scaling-browser.cjs",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-browser.cjs",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+    "Bound public/learn-assets/feature-scaling/penguins.csv",
+    "Bound docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+    "Bound docs/teaching/evidence/scaling-native.json",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_rulers.baf38f53144b2fd895b6cb51f8db7d756bb113bf2fb7b8ad47a3fc6720aabd77.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_rulers.run-1.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_rulers.run-1.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/category_policies.a887cc9897f70d51f075e4807e20701b3e4694931d2f6feacbbc1617649f56ea.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/category_policies.run-2.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/category_policies.run-2.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.5cfca0a5c018f5854095e61bcae87d96e332e66d645a3fa5814fe12306781445.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.run-3.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.run-3.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/nan_aware_donors.ad26647b42f661a4d76792559ce3f4bca5cae6bde05e77b5db890f8e11ba5e90.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/nan_aware_donors.run-4.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/nan_aware_donors.run-4.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_power_maps.f8af71f7f2b073e3b84ae21b1a25e912d023575a4c21cc57defeccdcf6241dbe.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_power_maps.run-5.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_power_maps.run-5.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_quantile_maps.81eb4e6a0c8e1cd0a85fc7eac068aa93b16a6c398f73544ae96a6518058996da.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_quantile_maps.run-6.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_quantile_maps.run-6.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_target_encoding.a54c1e2c4e6691cfd50552ff9f3eda96bb7594fa2f6f7fe3f9f009b8c4c511d2.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_target_encoding.run-7.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_target_encoding.run-7.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/bins_polynomials_cycles.39ba61d6baab82d05ed5d2120446f4331c320d08bf8420458e2eb04e1b5adc3c.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/bins_polynomials_cycles.run-8.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/bins_polynomials_cycles.run-8.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.284d5c525e111e7be5153aacdcaba898d0e90a3ac14c16624d17ed326f374b87.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-9.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-9.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/signed_feature_hashing.4b7b37b5025eb3c3d61368649d861ebdd31ab58896b98897939892302ef17db3.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/signed_feature_hashing.run-10.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/signed_feature_hashing.run-10.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/conditional_iterative_completion.7a864300d94a8412fbea2c41d89c3f924ae4c5ca4ddda8a29df7a970101afcf2.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/conditional_iterative_completion.run-11.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/conditional_iterative_completion.run-11.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/pool_scalar_analyses.41fd4831658ce37c516ef378e194abf931945b4e48281e38c9666ec4fb98368f.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/pool_scalar_analyses.run-12.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/pool_scalar_analyses.run-12.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/normal_completion_and_sensitivity.4b00570bbd9977d88f01cd449a9aa047e1c1de24532db09f4a22eaab910cd18d.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/normal_completion_and_sensitivity.run-13.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/normal_completion_and_sensitivity.run-13.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.dcf75f3de85d223767f2fc904af64350d4380de3c1fb26250cb30fdf225fbd7a.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-14.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-14.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.a142d061c947e176272dbd320bdc1f855190a3b92393a8c6bdcfe4cbc3e6f1d7.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.run-15.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.run-15.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.8371d9b75c524dd50bd7eee324881cd8261d4b61e92b3f6ce27ed2523a9d1556.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-16.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-16.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/nan_aware_donors.9405060b70a6e9cb398e25ece01f8a32221a12a8207f5259afb352de7e3a1e08.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.attempt-2.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.attempt-2.stderr.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/practice_solutions.8e872c40f4ebbfec5dc7df87d3197bd4019c58efded1c4b50f0b5e44958c3cfd.py",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.attempt-1.stdout.txt",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.attempt-1.stderr.txt",
+    "Actual18 attempts including two failures",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+    "One full source fence P1",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+    "One complete stdout fence P1",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.py",
+    "One full source fence P2",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.stdout.txt",
+    "One complete stdout fence P2",
+    "Selected successful source and stdout P2",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.py",
+    "One full source fence P3",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.stdout.txt",
+    "One complete stdout fence P3",
+    "Selected successful source and stdout P3",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.py",
+    "One full source fence P4",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.stdout.txt",
+    "One complete stdout fence P4",
+    "Selected successful source and stdout P4",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.py",
+    "One full source fence P5",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.stdout.txt",
+    "One complete stdout fence P5",
+    "Selected successful source and stdout P5",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+    "One full source fence P6",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+    "One complete stdout fence P6",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.py",
+    "One full source fence P7",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.stdout.txt",
+    "One complete stdout fence P7",
+    "Selected successful source and stdout P7",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.py",
+    "One full source fence P8",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.stdout.txt",
+    "One complete stdout fence P8",
+    "Selected successful source and stdout P8",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.py",
+    "One full source fence P9",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.stdout.txt",
+    "One complete stdout fence P9",
+    "Selected successful source and stdout P9",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.py",
+    "One full source fence P10",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stdout.txt",
+    "One complete stdout fence P10",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stderr.txt",
+    "Complete separate stderr fence P10",
+    "Selected successful source and stdout P10",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.py",
+    "One full source fence P11",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.stdout.txt",
+    "One complete stdout fence P11",
+    "Selected successful source and stdout P11",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+    "One full source fence P12",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+    "One complete stdout fence P12",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.py",
+    "One full source fence P13",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.stdout.txt",
+    "One complete stdout fence P13",
+    "Selected successful source and stdout P13",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.py",
+    "One full source fence P14",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.stdout.txt",
+    "One complete stdout fence P14",
+    "Selected successful source and stdout P14",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.py",
+    "One full source fence P15",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.stdout.txt",
+    "One complete stdout fence P15",
+    "Selected successful source and stdout P15",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.py",
+    "One full source fence P16",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.stdout.txt",
+    "One complete stdout fence P16",
+    "Selected successful source and stdout P16",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/multiple_imputation_mice.R",
+    "One full source fence optional-R",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.py",
+    "One full source fence answer",
+    "Bound docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.stdout.txt",
+    "One complete stdout fence answer",
+    "Selected successful source and stdout answer",
+    "Sixteen whole teaching programmes plus R and answers",
+    "Exact old source literal fittedStateParity",
+    "Exact old stdout literal fittedStateParity",
+    "Exact old source literal penguinExperiment",
+    "Exact old stdout literal penguinExperiment",
+    "Exact old source literal crossFitEncoding",
+    "Exact old stdout literal crossFitEncoding",
+    "Nine exact old task blocks",
+    "Every original section title preserved",
+    "One drawing placement D01",
+    "One drawing placement D02",
+    "One drawing placement D03",
+    "One drawing placement D04",
+    "One drawing placement D05",
+    "One drawing placement D06",
+    "One drawing placement D07",
+    "One drawing placement D08",
+    "One drawing placement D09",
+    "One drawing placement D10",
+    "One drawing placement D11",
+    "One drawing placement D12",
+    "One drawing placement D13",
+    "One drawing placement D14",
+    "One drawing placement D15",
+    "One drawing placement D16",
+    "One drawing placement D17",
+    "One drawing placement D18",
+    "One drawing placement D19",
+    "One drawing placement D20",
+    "One drawing placement D21",
+    "One drawing placement D22",
+    "One drawing placement D23",
+    "One drawing placement D24",
+    "One drawing placement D25",
+    "One drawing placement D26",
+    "One drawing placement D27",
+    "One drawing placement D28",
+    "One drawing placement D29",
+    "One drawing placement D30",
+    "One drawing placement D31",
+    "One drawing placement D32",
+    "One drawing placement D33",
+    "One drawing placement D34",
+    "One drawing placement D35",
+    "One drawing placement D36",
+    "One drawing placement D37",
+    "One drawing placement D38",
+    "One drawing placement D39",
+    "One drawing placement D40",
+    "One drawing placement D41",
+    "One lab placement L1",
+    "One lab placement L2",
+    "One lab placement L3",
+    "One lab placement L4",
+    "One lab placement L5",
+    "One lab placement L6",
+    "One lab placement L7",
+    "One lab placement L8",
+    "One lab placement L9",
+    "One lab placement L10",
+    "One lab placement L11a",
+    "One lab placement L11b",
+    "One lab placement L12",
+    "One lab placement L13",
+    "One lab placement L14a",
+    "One lab placement L14b",
+    "Exact historical LF relation without fitting",
+    "Actual CSV344 data rows",
+    "Independent observed column medians",
+    "Independent initialized missing-a cell",
+    "Actual owned initializer uses nanmedian",
+    "Known finding is in literal frozen prose",
+    "Independent past-only retained codes",
+    "Independent D41 supplied pooling arithmetic",
+    "Independent degree-one boundary linear continuation",
+    "Independent given spline weighted sum"
+  ],
+  "inputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/whole-review-handoff.json",
+      "bytes": 5864,
+      "sha256": "9bed8c091c950fd69288404afe844861823728dc1a68e9a94350019293a42c29"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+      "bytes": 215385,
+      "sha256": "ee185895e6290560d24e94b87fa3a62126f86d950d7761f6b84638abd8884f95"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-specifications.md",
+      "bytes": 40722,
+      "sha256": "10bd71d406940166828d804cb3f5d756c1822b95980ef2f06011e6a73aa8c61e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/composition.json",
+      "bytes": 33780,
+      "sha256": "c3816f6da872cfe6222e7d32616cff664adfc23855099936e99e715575d6c4fb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/source-roles.json",
+      "bytes": 16412,
+      "sha256": "302cf9f974721663dd799e719633f7a1a3e6fc5b2a77d75e7c0869a71ceb7b68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/whole-author-review.md",
+      "bytes": 6207,
+      "sha256": "fd7bcb32c71a0eff0e5bd3e344d1cfc9c56fc32ee1970ac73c0091361e1d2cc5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/root-content-release.json",
+      "bytes": 10573,
+      "sha256": "6b98f8133ff4770e0abe9251101b86187361a1b4a65702abf19201ae0367bb44"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/intake.json",
+      "bytes": 4847,
+      "sha256": "8c1e30df8ef8868165c8c474913271af81ffac9e6380876d837f00288a3cda58"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/new-program-execution.json",
+      "bytes": 25618,
+      "sha256": "384c7a2712fe2e9d042c5889c7d16efbe3982203c81e2ba4f169a390d5cbb781"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/first-assembly/receipt.json",
+      "bytes": 1198,
+      "sha256": "2b170f133206f271217e5ed568645bc6a4047ef597a7fdec11ae4a1f680d5008"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/lesson.md",
+      "bytes": 436503,
+      "sha256": "3907412af22650e27be5a9f1f275864e4ee3f24d35a396b2e0028dfa10b0af83"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+      "bytes": 3634,
+      "sha256": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+      "bytes": 213,
+      "sha256": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.py",
+      "bytes": 5853,
+      "sha256": "baf38f53144b2fd895b6cb51f8db7d756bb113bf2fb7b8ad47a3fc6720aabd77"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.stdout.txt",
+      "bytes": 664,
+      "sha256": "734d15306e1c4696b198fcb273ee7379b261b46188c85b8cbf02f710dc011546"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.py",
+      "bytes": 5466,
+      "sha256": "a887cc9897f70d51f075e4807e20701b3e4694931d2f6feacbbc1617649f56ea"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.stdout.txt",
+      "bytes": 521,
+      "sha256": "a8067562ddc5c4c8cf93ba0462d52b3567b5db6142c9a616a6ff7df0c77159e3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.py",
+      "bytes": 5330,
+      "sha256": "a142d061c947e176272dbd320bdc1f855190a3b92393a8c6bdcfe4cbc3e6f1d7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.stdout.txt",
+      "bytes": 392,
+      "sha256": "26c598fd98345a6f749a57e5853f35d39c89fc7ba4a22bc20bf6ec05b4a0aec1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.py",
+      "bytes": 5144,
+      "sha256": "9405060b70a6e9cb398e25ece01f8a32221a12a8207f5259afb352de7e3a1e08"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.stdout.txt",
+      "bytes": 514,
+      "sha256": "e17b036b3f66ef50d8ade7c67c5835f9d3e7abfb269c627099e94929fc6be052"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+      "bytes": 2296,
+      "sha256": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+      "bytes": 343,
+      "sha256": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.py",
+      "bytes": 6558,
+      "sha256": "f8af71f7f2b073e3b84ae21b1a25e912d023575a4c21cc57defeccdcf6241dbe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.stdout.txt",
+      "bytes": 592,
+      "sha256": "dd9d8043f236730568d5c13fcbec5cc8305871676d56eb85d92216dec3deeef5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.py",
+      "bytes": 3612,
+      "sha256": "81eb4e6a0c8e1cd0a85fc7eac068aa93b16a6c398f73544ae96a6518058996da"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.stdout.txt",
+      "bytes": 408,
+      "sha256": "d118dcf117e8d2fb13f9ba587a306840c1c12caece8bd41adce2dc2190daa635"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.py",
+      "bytes": 6049,
+      "sha256": "a54c1e2c4e6691cfd50552ff9f3eda96bb7594fa2f6f7fe3f9f009b8c4c511d2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.stdout.txt",
+      "bytes": 601,
+      "sha256": "4fb774b64a4fb35882f09be1f7238dd16aedc532a126620118b4513c4314e4a9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.py",
+      "bytes": 6190,
+      "sha256": "39ba61d6baab82d05ed5d2120446f4331c320d08bf8420458e2eb04e1b5adc3c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stdout.txt",
+      "bytes": 746,
+      "sha256": "13f56a2636b8547a295388cc2e29ea48b9c8940489e1cad6a516513a0d7e1e4f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stderr.txt",
+      "bytes": 281,
+      "sha256": "555d49608910de8ee38ca229e354f22af65b6909a7be97fb6e92fb3252e73e48"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.py",
+      "bytes": 5699,
+      "sha256": "8371d9b75c524dd50bd7eee324881cd8261d4b61e92b3f6ce27ed2523a9d1556"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.stdout.txt",
+      "bytes": 1410,
+      "sha256": "a04611a45b6e39c299fe49f82d978c9abb22711bc0fa08d547bf73e12ff77102"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+      "bytes": 789,
+      "sha256": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+      "bytes": 111,
+      "sha256": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.py",
+      "bytes": 2938,
+      "sha256": "4b7b37b5025eb3c3d61368649d861ebdd31ab58896b98897939892302ef17db3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.stdout.txt",
+      "bytes": 545,
+      "sha256": "e789277195b71f275ee7e461b6ef8967eeb47d327afc2c129bb6a2b5f6d278e3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.py",
+      "bytes": 5111,
+      "sha256": "7a864300d94a8412fbea2c41d89c3f924ae4c5ca4ddda8a29df7a970101afcf2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.stdout.txt",
+      "bytes": 2240,
+      "sha256": "23e1df2862c233b1462fccc4ebc93f168708cef124fc3ecb18495b0c48a72051"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.py",
+      "bytes": 1709,
+      "sha256": "41fd4831658ce37c516ef378e194abf931945b4e48281e38c9666ec4fb98368f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.stdout.txt",
+      "bytes": 726,
+      "sha256": "60324655cbf39591779e95a933a189d850d80e1c99eb131893f32506600fd75f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.py",
+      "bytes": 4181,
+      "sha256": "4b00570bbd9977d88f01cd449a9aa047e1c1de24532db09f4a22eaab910cd18d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.stdout.txt",
+      "bytes": 1117,
+      "sha256": "e255495971337b764427d58559d791dee3eb2a2e5f4a58796b9303e5d739c9f6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/multiple_imputation_mice.R",
+      "bytes": 1442,
+      "sha256": "252371b28843d3410971daf87b3fba1271827e632bb6c3112ff735b6b6aa198e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.py",
+      "bytes": 6513,
+      "sha256": "8e872c40f4ebbfec5dc7df87d3197bd4019c58efded1c4b50f0b5e44958c3cfd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.stdout.txt",
+      "bytes": 1552,
+      "sha256": "e287823a2eb484800b1f7f1506c4dfbb5562bf658ea04b544f56421f79da7a0e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/calculated-inputs.json",
+      "bytes": 43077,
+      "sha256": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/scaling-native.json",
+      "bytes": 2506,
+      "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/README.md",
+      "bytes": 4399,
+      "sha256": "7725fe1d35a3506a1856d9f49aa47aa6d24d4d3c6970a15b23d9e6a5a3926208"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/requirements.txt",
+      "bytes": 61,
+      "sha256": "ed9a683cbf487f4979c1deb16c27eeec981cbc6611d5cb639a40a98e77d2a6b8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/core.md",
+      "bytes": 35372,
+      "sha256": "f6a869069e7f2ff7b3b3f35d8aa3be30ccd05032148dfbab79206f7901bd844e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/deeper.md",
+      "bytes": 37249,
+      "sha256": "7ba771e1a7e757a8f8f21fb650f32dc531ea7d95a61d619b7b12ed01db0bb9ea"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/practice.md",
+      "bytes": 21277,
+      "sha256": "7e3054b2d2e9a71030406deef6d35b7b9a784049aad7670e266afdca081e01a2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/ending.md",
+      "bytes": 10041,
+      "sha256": "f1812f90293b8498c6c35dc91295f37abe228f99ea505e89921d073179739b73"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-refinements.md",
+      "bytes": 8299,
+      "sha256": "90dbe44a9401ef1ed048914e713ae98ee03a938517a7a903cbb49f7bfa9efa6c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/compose-content.mjs",
+      "bytes": 13867,
+      "sha256": "db8abd49af0fdb56c683799f85fab1e3d1d13d7cee711ba8ed84642422bd8514"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/reading-flow-design.md",
+      "bytes": 22597,
+      "sha256": "a970f6d0ec2d13b61b3947b732dc3c1768462c2c8fbb51da30f7395e430b6f8f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md",
+      "bytes": 32698,
+      "sha256": "28bac4300147805992e05c888cdfe693e2961c9a064a864f44f90091f35cd8f1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/programmes-practice-and-resources.md",
+      "bytes": 34270,
+      "sha256": "f2f792ee23becb0a9ba2d85cd87b44b80f48dd4aee5f9f8290eb14234768bc4a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+      "bytes": 26499,
+      "sha256": "f4573042f00f83f83f1830646939649dd677d57f9232015c0c71330d171560d6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md",
+      "bytes": 4298,
+      "sha256": "07efdf3876f1f91b3d86997604537268b09a4da0cd2b4d9f626e6493e5dd41fa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+      "bytes": 48017,
+      "sha256": "fb0d8e8e241f30b5870d09b547a6525d9a096beff6a3bd0f524d4c106e577ee8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py",
+      "bytes": 14176,
+      "sha256": "4235e304c0ddda0e1d5a4ab9b90300aec4e7166bc80a8070566ba47270bb9e01"
+    },
+    {
+      "path": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+      "bytes": 64405,
+      "sha256": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+      "bytes": 64405,
+      "sha256": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1"
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js",
+      "bytes": 8461,
+      "sha256": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js",
+      "bytes": 8461,
+      "sha256": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5"
+    },
+    {
+      "path": "src/learn/data/scaling-models.js",
+      "bytes": 23135,
+      "sha256": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-models.js",
+      "bytes": 23135,
+      "sha256": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c"
+    },
+    {
+      "path": "src/learn/data/scaling-data.js",
+      "bytes": 36374,
+      "sha256": "524b769fa5039fa891467142c816fb438a9a4064ff02b4c8ff81d98ead59575d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-data.js",
+      "bytes": 36374,
+      "sha256": "524b769fa5039fa891467142c816fb438a9a4064ff02b4c8ff81d98ead59575d"
+    },
+    {
+      "path": "src/learn/data/scaling-examples.js",
+      "bytes": 9142,
+      "sha256": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-examples.js",
+      "bytes": 9142,
+      "sha256": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ScalingLabs.jsx",
+      "bytes": 32684,
+      "sha256": "06b2b1f40d081504dd7e93fad631c3d1c607ad0c2ae00b284c37d015e9452bc6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingLabs.jsx",
+      "bytes": 32684,
+      "sha256": "06b2b1f40d081504dd7e93fad631c3d1c607ad0c2ae00b284c37d015e9452bc6"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ScalingFigures.jsx",
+      "bytes": 41710,
+      "sha256": "ae09f99f74e2af36b047470605ff5de9b2023d0beb00e21c0b57cac8107b793d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingFigures.jsx",
+      "bytes": 41710,
+      "sha256": "ae09f99f74e2af36b047470605ff5de9b2023d0beb00e21c0b57cac8107b793d"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ScalingShared.jsx",
+      "bytes": 10794,
+      "sha256": "99e25f52c9554f10c2ed44cb40ad080e2d8992863fdf0e200b738d64af4e7030"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingShared.jsx",
+      "bytes": 10794,
+      "sha256": "99e25f52c9554f10c2ed44cb40ad080e2d8992863fdf0e200b738d64af4e7030"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/scaling-labs.css",
+      "bytes": 10216,
+      "sha256": "02db05ed2dcd7979d2eac67b9b042181a872242f6e7f0f339facc3fd8803b644"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/scaling-labs.css",
+      "bytes": 10216,
+      "sha256": "02db05ed2dcd7979d2eac67b9b042181a872242f6e7f0f339facc3fd8803b644"
+    },
+    {
+      "path": "public/learn-assets/feature-scaling/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/public/learn-assets/feature-scaling/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py",
+      "bytes": 5239,
+      "sha256": "e6c596d17071d67fc74dc84786a983c4c18c7c9d75e9edd5af763176cc46f479"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py",
+      "bytes": 5239,
+      "sha256": "e6c596d17071d67fc74dc84786a983c4c18c7c9d75e9edd5af763176cc46f479"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+      "bytes": 43077,
+      "sha256": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+      "bytes": 43077,
+      "sha256": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md",
+      "bytes": 3321,
+      "sha256": "f8fb746affc7be2ca03bb2012a7e90b39a50bbd05e56ce3e1aaa30a575ffa3a0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md",
+      "bytes": 3321,
+      "sha256": "f8fb746affc7be2ca03bb2012a7e90b39a50bbd05e56ce3e1aaa30a575ffa3a0"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+      "bytes": 44836,
+      "sha256": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+      "bytes": 44836,
+      "sha256": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+      "bytes": 47557,
+      "sha256": "c786174702fc6f52faf21b26a61bd569824354e657a8abca7d3a017c04f128f0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+      "bytes": 47557,
+      "sha256": "c786174702fc6f52faf21b26a61bd569824354e657a8abca7d3a017c04f128f0"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+      "bytes": 17689,
+      "sha256": "ca5e17f08d3bf249610621b749846d08b3f01df4dbca95c12fb863f0078b3ef0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+      "bytes": 17689,
+      "sha256": "ca5e17f08d3bf249610621b749846d08b3f01df4dbca95c12fb863f0078b3ef0"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+      "bytes": 1621,
+      "sha256": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+      "bytes": 1621,
+      "sha256": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+      "bytes": 2058,
+      "sha256": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+      "bytes": 2058,
+      "sha256": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+      "bytes": 1453,
+      "sha256": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+      "bytes": 1453,
+      "sha256": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md",
+      "bytes": 1281,
+      "sha256": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md",
+      "bytes": 1281,
+      "sha256": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+      "bytes": 4434,
+      "sha256": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+      "bytes": 4434,
+      "sha256": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-models.json",
+      "bytes": 3847,
+      "sha256": "2675bbfe221eadbca762d2575b106767317a44f36a1cdaa03e9fc65ba3ff29e9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-models.json",
+      "bytes": 3847,
+      "sha256": "2675bbfe221eadbca762d2575b106767317a44f36a1cdaa03e9fc65ba3ff29e9"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-native.json",
+      "bytes": 2506,
+      "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-native.json",
+      "bytes": 2506,
+      "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-data.json",
+      "bytes": 1737,
+      "sha256": "79791c5b2d44f96d62f7e89785f25d15e818f1d04ca9c443ede69444ea191d56"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-data.json",
+      "bytes": 1737,
+      "sha256": "79791c5b2d44f96d62f7e89785f25d15e818f1d04ca9c443ede69444ea191d56"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-browser.json",
+      "bytes": 9643,
+      "sha256": "624a6430bfecb8cacb58aa39a008723a537b6ade074357917be56899d01e64ae"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-browser.json",
+      "bytes": 9643,
+      "sha256": "624a6430bfecb8cacb58aa39a008723a537b6ade074357917be56899d01e64ae"
+    },
+    {
+      "path": "scripts/verify-scaling-models.mjs",
+      "bytes": 34521,
+      "sha256": "76b24846ea1bbc543ae888c54d6f204529cc30ae1054efb7a554843b23d51066"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-models.mjs",
+      "bytes": 34521,
+      "sha256": "76b24846ea1bbc543ae888c54d6f204529cc30ae1054efb7a554843b23d51066"
+    },
+    {
+      "path": "scripts/verify-scaling-examples.py",
+      "bytes": 19755,
+      "sha256": "03018dc6a6612796c326b3ea0db6013866fa49265523aba5ed6f09560fa948c2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-examples.py",
+      "bytes": 19755,
+      "sha256": "03018dc6a6612796c326b3ea0db6013866fa49265523aba5ed6f09560fa948c2"
+    },
+    {
+      "path": "scripts/verify-scaling-data.py",
+      "bytes": 24069,
+      "sha256": "7f38fa835590312750c7c1b0c88f0a74f8c97b265641739c18a26ae874e103a1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-data.py",
+      "bytes": 24069,
+      "sha256": "7f38fa835590312750c7c1b0c88f0a74f8c97b265641739c18a26ae874e103a1"
+    },
+    {
+      "path": "scripts/verify-scaling-browser.cjs",
+      "bytes": 46182,
+      "sha256": "3e2809505a35f55ae5191aaef62ff0d63559b28913a551325a5d9a50d4647cab"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-browser.cjs",
+      "bytes": 46182,
+      "sha256": "3e2809505a35f55ae5191aaef62ff0d63559b28913a551325a5d9a50d4647cab"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_rulers.baf38f53144b2fd895b6cb51f8db7d756bb113bf2fb7b8ad47a3fc6720aabd77.py",
+      "bytes": 5853,
+      "sha256": "baf38f53144b2fd895b6cb51f8db7d756bb113bf2fb7b8ad47a3fc6720aabd77"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_rulers.run-1.stdout.txt",
+      "bytes": 664,
+      "sha256": "734d15306e1c4696b198fcb273ee7379b261b46188c85b8cbf02f710dc011546"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_rulers.run-1.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/category_policies.a887cc9897f70d51f075e4807e20701b3e4694931d2f6feacbbc1617649f56ea.py",
+      "bytes": 5466,
+      "sha256": "a887cc9897f70d51f075e4807e20701b3e4694931d2f6feacbbc1617649f56ea"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/category_policies.run-2.stdout.txt",
+      "bytes": 521,
+      "sha256": "a8067562ddc5c4c8cf93ba0462d52b3567b5db6142c9a616a6ff7df0c77159e3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/category_policies.run-2.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.5cfca0a5c018f5854095e61bcae87d96e332e66d645a3fa5814fe12306781445.py",
+      "bytes": 5130,
+      "sha256": "5cfca0a5c018f5854095e61bcae87d96e332e66d645a3fa5814fe12306781445"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.run-3.stdout.txt",
+      "bytes": 392,
+      "sha256": "590fef696ef30ff38f988adb43244d699acc740e60cc489173dce7e0938fad07"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.run-3.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/nan_aware_donors.ad26647b42f661a4d76792559ce3f4bca5cae6bde05e77b5db890f8e11ba5e90.py",
+      "bytes": 4641,
+      "sha256": "ad26647b42f661a4d76792559ce3f4bca5cae6bde05e77b5db890f8e11ba5e90"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/nan_aware_donors.run-4.stdout.txt",
+      "bytes": 431,
+      "sha256": "a757829c6866c4deaf0be068b6ccb3e9b7ad181daafc155101d120deb25fd53e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/nan_aware_donors.run-4.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_power_maps.f8af71f7f2b073e3b84ae21b1a25e912d023575a4c21cc57defeccdcf6241dbe.py",
+      "bytes": 6558,
+      "sha256": "f8af71f7f2b073e3b84ae21b1a25e912d023575a4c21cc57defeccdcf6241dbe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_power_maps.run-5.stdout.txt",
+      "bytes": 592,
+      "sha256": "dd9d8043f236730568d5c13fcbec5cc8305871676d56eb85d92216dec3deeef5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_power_maps.run-5.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_quantile_maps.81eb4e6a0c8e1cd0a85fc7eac068aa93b16a6c398f73544ae96a6518058996da.py",
+      "bytes": 3612,
+      "sha256": "81eb4e6a0c8e1cd0a85fc7eac068aa93b16a6c398f73544ae96a6518058996da"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_quantile_maps.run-6.stdout.txt",
+      "bytes": 408,
+      "sha256": "d118dcf117e8d2fb13f9ba587a306840c1c12caece8bd41adce2dc2190daa635"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_quantile_maps.run-6.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_target_encoding.a54c1e2c4e6691cfd50552ff9f3eda96bb7594fa2f6f7fe3f9f009b8c4c511d2.py",
+      "bytes": 6049,
+      "sha256": "a54c1e2c4e6691cfd50552ff9f3eda96bb7594fa2f6f7fe3f9f009b8c4c511d2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_target_encoding.run-7.stdout.txt",
+      "bytes": 601,
+      "sha256": "4fb774b64a4fb35882f09be1f7238dd16aedc532a126620118b4513c4314e4a9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/fitted_target_encoding.run-7.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/bins_polynomials_cycles.39ba61d6baab82d05ed5d2120446f4331c320d08bf8420458e2eb04e1b5adc3c.py",
+      "bytes": 6190,
+      "sha256": "39ba61d6baab82d05ed5d2120446f4331c320d08bf8420458e2eb04e1b5adc3c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/bins_polynomials_cycles.run-8.stdout.txt",
+      "bytes": 746,
+      "sha256": "13f56a2636b8547a295388cc2e29ea48b9c8940489e1cad6a516513a0d7e1e4f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/bins_polynomials_cycles.run-8.stderr.txt",
+      "bytes": 281,
+      "sha256": "555d49608910de8ee38ca229e354f22af65b6909a7be97fb6e92fb3252e73e48"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.284d5c525e111e7be5153aacdcaba898d0e90a3ac14c16624d17ed326f374b87.py",
+      "bytes": 5139,
+      "sha256": "284d5c525e111e7be5153aacdcaba898d0e90a3ac14c16624d17ed326f374b87"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-9.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-9.stderr.txt",
+      "bytes": 934,
+      "sha256": "495dabcf464de865828965fbce3e509c7e5134c285a6e455b6af8053d6e3fa4e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/signed_feature_hashing.4b7b37b5025eb3c3d61368649d861ebdd31ab58896b98897939892302ef17db3.py",
+      "bytes": 2938,
+      "sha256": "4b7b37b5025eb3c3d61368649d861ebdd31ab58896b98897939892302ef17db3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/signed_feature_hashing.run-10.stdout.txt",
+      "bytes": 545,
+      "sha256": "e789277195b71f275ee7e461b6ef8967eeb47d327afc2c129bb6a2b5f6d278e3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/signed_feature_hashing.run-10.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/conditional_iterative_completion.7a864300d94a8412fbea2c41d89c3f924ae4c5ca4ddda8a29df7a970101afcf2.py",
+      "bytes": 5111,
+      "sha256": "7a864300d94a8412fbea2c41d89c3f924ae4c5ca4ddda8a29df7a970101afcf2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/conditional_iterative_completion.run-11.stdout.txt",
+      "bytes": 2240,
+      "sha256": "23e1df2862c233b1462fccc4ebc93f168708cef124fc3ecb18495b0c48a72051"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/conditional_iterative_completion.run-11.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/pool_scalar_analyses.41fd4831658ce37c516ef378e194abf931945b4e48281e38c9666ec4fb98368f.py",
+      "bytes": 1709,
+      "sha256": "41fd4831658ce37c516ef378e194abf931945b4e48281e38c9666ec4fb98368f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/pool_scalar_analyses.run-12.stdout.txt",
+      "bytes": 726,
+      "sha256": "60324655cbf39591779e95a933a189d850d80e1c99eb131893f32506600fd75f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/pool_scalar_analyses.run-12.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/normal_completion_and_sensitivity.4b00570bbd9977d88f01cd449a9aa047e1c1de24532db09f4a22eaab910cd18d.py",
+      "bytes": 4181,
+      "sha256": "4b00570bbd9977d88f01cd449a9aa047e1c1de24532db09f4a22eaab910cd18d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/normal_completion_and_sensitivity.run-13.stdout.txt",
+      "bytes": 1117,
+      "sha256": "e255495971337b764427d58559d791dee3eb2a2e5f4a58796b9303e5d739c9f6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/normal_completion_and_sensitivity.run-13.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.dcf75f3de85d223767f2fc904af64350d4380de3c1fb26250cb30fdf225fbd7a.py",
+      "bytes": 5469,
+      "sha256": "dcf75f3de85d223767f2fc904af64350d4380de3c1fb26250cb30fdf225fbd7a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-14.stdout.txt",
+      "bytes": 550,
+      "sha256": "4fc936835ac98bc48efa8c4255e6a841eb3dd3591ef4416d8f9de63fb062e754"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-14.stderr.txt",
+      "bytes": 1187,
+      "sha256": "b7ee30bbf1a5f3397f25357526a2dbcd59f4a322cccc8beca8396dd338468243"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.a142d061c947e176272dbd320bdc1f855190a3b92393a8c6bdcfe4cbc3e6f1d7.py",
+      "bytes": 5330,
+      "sha256": "a142d061c947e176272dbd320bdc1f855190a3b92393a8c6bdcfe4cbc3e6f1d7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.run-15.stdout.txt",
+      "bytes": 392,
+      "sha256": "26c598fd98345a6f749a57e5853f35d39c89fc7ba4a22bc20bf6ec05b4a0aec1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/masked_simple_imputation.run-15.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.8371d9b75c524dd50bd7eee324881cd8261d4b61e92b3f6ce27ed2523a9d1556.py",
+      "bytes": 5699,
+      "sha256": "8371d9b75c524dd50bd7eee324881cd8261d4b61e92b3f6ce27ed2523a9d1556"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-16.stdout.txt",
+      "bytes": 1410,
+      "sha256": "a04611a45b6e39c299fe49f82d978c9abb22711bc0fa08d547bf73e12ff77102"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/local_spline_basis.run-16.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/nan_aware_donors.9405060b70a6e9cb398e25ece01f8a32221a12a8207f5259afb352de7e3a1e08.py",
+      "bytes": 5144,
+      "sha256": "9405060b70a6e9cb398e25ece01f8a32221a12a8207f5259afb352de7e3a1e08"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.attempt-2.stdout.txt",
+      "bytes": 514,
+      "sha256": "e17b036b3f66ef50d8ade7c67c5835f9d3e7abfb269c627099e94929fc6be052"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.attempt-2.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/execution-sources/practice_solutions.8e872c40f4ebbfec5dc7df87d3197bd4019c58efded1c4b50f0b5e44958c3cfd.py",
+      "bytes": 6513,
+      "sha256": "8e872c40f4ebbfec5dc7df87d3197bd4019c58efded1c4b50f0b5e44958c3cfd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.attempt-1.stdout.txt",
+      "bytes": 1552,
+      "sha256": "e287823a2eb484800b1f7f1506c4dfbb5562bf658ea04b544f56421f79da7a0e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.attempt-1.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "complementary": {
+    "medians": [
+      2.5,
+      6
+    ],
+    "initialized": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        2.5,
+        8
+      ],
+      [
+        5,
+        10
+      ]
+    ],
+    "chronologicalRetainedRows": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "chronologicalTargets": [
+      0,
+      0,
+      1,
+      0
+    ],
+    "chronologicalCodes": [
+      1,
+      1,
+      0.5,
+      0.5
+    ],
+    "givenD41": {
+      "Q": [
+        9,
+        10,
+        11
+      ],
+      "U": [
+        4,
+        4,
+        4
+      ],
+      "qbar": 10,
+      "B": 1,
+      "T": 5.333333333333333
+    },
+    "splineDegree1LinearRight": [
+      0,
+      -0.5,
+      1.5
+    ]
+  },
+  "limits": [
+    "Source identity corroborates personal whole reading; does not replace it",
+    "No historical or new author scientific main, fit, library test, build, browser, runtime or public/phase mutation",
+    "Existing author executions and exact retained historical source/streams reused with their own attribution",
+    "Two findings are described in whole-content-review.md; mathematical initializer blocks acceptance; reader-process wording is a bounded clarity correction"
+  ]
+}

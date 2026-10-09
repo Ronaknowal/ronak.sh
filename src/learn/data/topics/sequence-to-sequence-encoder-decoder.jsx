@@ -1,194 +1,106 @@
-// Full revision-3 manuscript preserved; long canonical source loads on demand.
+// A continuous encoder–decoder lesson; numerical assets retain their declared offline protocol.
 import { Prose, H2, H3, CodeBlock } from '../../components/content';
 import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
 import { LessonIntro } from '../../components/lesson-labs/LessonElements.jsx';
 import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
 import { ScheduledPrefixFigure } from '../../components/lesson-labs/Seq2SeqIntuitionFigures.jsx';
-import { Seq2SeqTimelines, Seq2SeqAlignmentLab, Seq2SeqBridgeLab, Seq2SeqTreeLab, Seq2SeqEvidenceFigure, Seq2SeqProgram, Seq2SeqFittedLab, seq2seqAsset } from '../../components/lesson-labs/Seq2SeqLabs.jsx';
+import { Seq2SeqEvidenceFigure, Seq2SeqProgram, seq2seqAsset } from '../../components/lesson-labs/Seq2SeqLabs.jsx';
+import { scalarBridge } from '../seq2seq-models.js';
+import { SeqAnatomyFigure, SeqLookupFigure, SeqStepFigure, SeqScalarFigure, SeqProbabilityTreeFigure, SeqPackingFigure, SeqInterfacesFigure, SeqReversalFigure, SeqSmoothingFigure, SeqStateTransferFigure, SeqRewardFigure, SeqCreditFigure, SeqGroupSplitFigure } from '../../components/lesson-labs/Seq2SeqDrawings.jsx';
+import { SeqScalarProvider, SeqTreeProvider, SeqFittedProvider, SeqShiftLab, SeqMaskLab, SeqForwardLab, SeqCreditLab, SeqTreeLab, SeqFrontierLab, SeqLengthLab, SeqFittedQueryLab, SeqFittedStateLab, SeqPrefixLab, SeqContextLab, SeqFittedBeamLab } from '../../components/lesson-labs/Seq2SeqFlowLabs.jsx';
 export default {
  title: 'Sequence-to-Sequence & Encoder-Decoder',
  readTime: '~65 min read + experiments and practice',
  hasIntegratedGuide: true,
- content: () => <div className="neural-lesson seq2seq-lesson"><LessonIntro prerequisites="Recurrent state updates and cross-entropy. Source/target tokens, shapes, context and loss normalization are refreshed before composing the model." sections={[["1-two-timelines-one-conditional-task","1. Two timelines, one conditional task"],["2-give-every-token-and-tensor-a-job","2. Give every token and tensor a job"],["3-how-the-encoder-and-decoder-communicate","3. How the encoder and decoder communicate"],["4-train-the-probability-of-the-whole-answer","4. Train the probability of the whole answer"],["5-generate-an-answer-then-search-more-than-one-route","5. Generate an answer, then search more than one route"],["6-a-real-experiment-learning-a-function-is-harder-than-remembering-pairs","6. A real experiment: learning a function is harder than remembering pairs"],["7-run-the-complete-small-model","7. Run the complete small model"],["8-diagnose-the-model-by-separating-four-questions","8. Diagnose the model by separating four questions"],["reuse-the-cell-implement-the-encoder-decoder-protocol","Reuse the cell; implement the encoder–decoder protocol"],["9-deeper-connections-and-practical-extensions","9. Deeper connections and practical extensions"],["10-practice-build-diagnose-and-change-the-problem","10. Practice: build, diagnose and change the problem"],["11-references-another-way-to-learn-and-the-next-step","11. References, another way to learn, and the next step"]]}>Read an input, learn a conditional output and inspect the difference between memorizing examples, generating an answer and finding a better route.</LessonIntro>
-<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Edit source/target shifts, bridge weights/rate, tiny probability trees, beam width and supported fitted source/prefix inputs. Show aligned timelines, dependency paths, sequence probabilities and bounded beam candidates live. Keep teacher-forced versus generated inputs explicit at every step. The labs show current results as you work; you do not enter or submit a guess. Use those comparisons to distinguish model probability from a decoding decision and identify when a prefix or alignment changes the actual task."}</Prose>
-
-<Prose>{"A handwriting classifier reads several pen positions and chooses one digit. Now change the request: read a word and generate its past tense. The input "}<code>{"walk"}</code>{" has four characters; "}<code>{"walked"}</code>{" has six. "}<code>{"eat"}</code>{" becomes "}<code>{"ate"}</code>{", so copying the input and appending a suffix is not enough. The system must decide both "}<strong>{"what comes next"}</strong>{" and "}<strong>{"when the answer is finished"}</strong>{"."}</Prose>
-
-<Prose>{"A sequence-to-sequence model learns a mapping from an ordered input to an ordered output. An "}<strong>{"encoder–decoder"}</strong>{" is one way to build it: an encoder turns the input into a learned representation; a decoder uses that representation to produce the output. Here we will build a small recurrent version, inspect its actual states, and discover why fitting the training examples does not mean it has learned a reusable spelling rule."}</Prose>
-
-<Prose opening="route">{""}<strong>{"First pass:"}</strong>{" follow sections 1–6 to understand the two networks, the shifted training targets, generation and a real experiment. Section7 supplies the complete CPU program. Use section 8 to diagnose it, then try the practice. The deeper branches in section 9 are optional on a first reading; they explain architectural variants, training objectives and production contracts."}</Prose>
-
-<Prose>{"You need the idea that a recurrent state is an updated vector and that cross-entropy rewards probability placed on the correct outcome. We refresh both below. "}<a href={"/learn/path/full-curriculum/rnns-lstms-grus?module=deep-learning-fundamentals"}>{"RNNs, LSTMs and GRUs"}</a>{" provides the full cell equations."}</Prose>
+ content: () => <div className="neural-lesson seq2seq-lesson lesson-flow"><SeqScalarProvider><SeqTreeProvider><SeqFittedProvider><LessonIntro prerequisites="Recurrent state updates and cross-entropy. Source/target tokens, shapes, context and loss normalization are refreshed before composing the model." sections={[["1-two-timelines-one-conditional-task","1. Two timelines, one conditional task"],["2-give-every-token-and-tensor-a-job","2. Give every token and tensor a job"],["3-how-the-encoder-and-decoder-communicate","3. How the encoder and decoder communicate"],["4-train-the-probability-of-the-whole-answer","4. Train the probability of the whole answer"],["5-generate-an-answer-then-search-more-than-one-route","5. Generate an answer, then search more than one route"],["6-a-real-experiment-learning-a-function-is-harder-than-remembering-pairs","6. A real experiment: learning a function is harder than remembering pairs"],["7-run-the-complete-small-model","7. Run the complete small model"],["8-diagnose-the-model-by-separating-four-questions","8. Diagnose the model by separating four questions"],["reuse-the-cell-implement-the-encoder-decoder-protocol","Reuse the cell; implement the encoder–decoder protocol"],["9-deeper-connections-and-practical-extensions","9. Deeper connections and practical extensions"],["10-practice-build-diagnose-and-change-the-problem","10. Practice: build, diagnose and change the problem"],["11-references-another-way-to-learn-and-the-next-step","11. References, another way to learn, and the next step"]]}>Read an input, learn a conditional output and inspect the difference between memorizing examples, generating an answer and finding a better route.</LessonIntro>
+<Prose>A recurrent classifier ends with one decision: which digit is this pen trace? Now ask for an answer whose length is not known in advance. Read <code>walk</code> and write <code>walked</code>, or read <code>eat</code> and write <code>ate</code>. The new problem has two parts: decide what to write next, then decide when to stop.</Prose>
 
 <H2>{"1. Two timelines, one conditional task"}</H2>
-
-<Prose>{"Imagine a language-learning tool that is given a "}<strong>{"lemma"}</strong>{", the dictionary form of a word, and a grammatical request:"}</Prose>
-
-<NeuralTable caption={"1. Two timelines, one conditional task"} headers={[<>{"Input"}</>,<>{"Requested form"}</>,<>{"Output"}</>]} rows={[[<>{""}<code>{"walk"}</code>{""}</>,<>{"past"}</>,<>{""}<code>{"walked"}</code>{""}</>],[<>{""}<code>{"try"}</code>{""}</>,<>{"past"}</>,<>{""}<code>{"tried"}</code>{""}</>],[<>{""}<code>{"make"}</code>{""}</>,<>{"present participle"}</>,<>{""}<code>{"making"}</code>{""}</>],[<>{""}<code>{"eat"}</code>{""}</>,<>{"past"}</>,<>{""}<code>{"ate"}</code>{""}</>]]} />
-
-<Prose>{"The grammatical request is part of the input. Without it, the same word could legitimately require several answers. A training example therefore includes the source information and the desired output; the network cannot infer an omitted task specification merely from being large."}</Prose>
-
-<Prose>{"Our running data example is "}<code>{"lactate + past → lactated"}</code>{", a real entry in the supplied UniMorph extract. A "}<strong>{"token"}</strong>{" is one item the network processes. In this lesson characters are tokens, and the grammatical request is a separate token:"}</Prose>
-
-<Prose>{""}<code>{"<past> → l → a → c → t → a → t → e → <eos>"}</code>{""}</Prose>
-
-<Prose>{"The encoder processes those nine source tokens. The decoder starts a different timeline:"}</Prose>
-
-<Prose>{""}<code>{"<bos> → predict l → predict a → … → predict d → predict <eos>"}</code>{""}</Prose>
-
-<Prose>{""}<code>{"<bos>"}</code>{" means “begin generating.” "}<code>{"<eos>"}</code>{" is an actual predicted outcome meaning “end the output.” The source also has its own end marker. The two end markers share an ID in our program, but occupy different sequences. Neither is a letter in the word."}</Prose>
-
-<Seq2SeqTimelines />
-
-<Prose>{"This is different from labeling every source token. A tagger might assign one label to each word; this decoder is free to output a different number of tokens. Translation, speech transcription with an autoregressive decoder, spelling normalization and generation of structured text can use the same broad input/output contract. Their token choices, valid outputs and error costs differ. A recurrent encoder–decoder is not the only architecture capable of these tasks."}</Prose>
-
-<Prose>{"An interesting practical connection is "}<strong>{"inflection for language tools"}</strong>{". A dictionary assistant may need hundreds of forms of a lemma. A general learned mapping can share patterns across examples, while a rule system can directly encode predictable changes. Neither approach makes dictionary exceptions disappear. Our experiment keeps the rule system in the comparison rather than assuming the neural network should replace it."}</Prose>
+<Prose>How can one network read four letters and another produce six? An <strong>encoder</strong> reads the input into a carried state, labelled h; its final context is labelled v. A <strong>decoder</strong> starts from that vector and writes its own sequence using states labelled s.</Prose>
+<SeqAnatomyFigure />
+<Prose>Start on the encoder side. Each cyan item is a <strong>token</strong>, one item processed at a time: the request <code>past</code>, the four letters of <code>walk</code>, and an end marker, <strong>EOS</strong>. Each GRU box is the recurrent update taught in <a href="/learn/path/full-curriculum/rnns-lstms-grus?module=deep-learning-fundamentals">RNNs, LSTMs and GRUs</a>: combine the current input with the previous state to make a new state. The violet circles are updated states, not copied letters. The encoder begins with a zero state and reuses one set of learned weights across its six updates.</Prose>
+<Prose>The final state, called the <strong>context</strong> and labelled v in the drawing, crosses to the decoder. It is a vector of 64 learned coordinates in our model; the strip draws only eight of them. It is not a prewritten English summary. The decoder begins with this vector and <strong>BOS</strong>, the begin-output token. Its first update produces a state from which a readout chooses <code>w</code>. That chosen letter becomes the next input. The right-hand lane carries state; the left-hand lane feeds back tokens. Steps 3–6 repeat the operation, and step 7 chooses output EOS.</Prose>
+<Prose>Source EOS says “the input is finished”; output EOS says “this answer is finished.” They share an ID in this small program but occur on different timelines. There are six input positions and seven output decisions here. The drawing does not connect source position 4 to output position 4: this is generation, rather than assigning one label to every input item.</Prose>
+<Prose>A <strong>sequence-to-sequence model</strong> learns a mapping between ordered inputs and ordered outputs. <strong>Encoder–decoder</strong> describes this way of organizing the computation; recurrent cells are one implementation, with Transformers and other alternatives possible. Translation, spelling normalization, structured text generation, and speech transcription with an autoregressive decoder share the broad contract, while their token choices and valid answers differ.</Prose>
+<Prose>In a language tool the dictionary form, or <strong>lemma</strong>, can require different answers: <code>try + past → tried</code>, <code>make + participle → making</code>, and <code>walk + third_person → walks</code>. The grammatical request therefore belongs in the input. A dictionary assistant may need hundreds of forms for a lemma; a learned system can share patterns, while explicit rules directly encode regular changes. Neither makes exceptions disappear.</Prose>
+<Prose>We now switch from the introductory <code>walk</code> drawing to <code>lactate + past → lactated</code>, a real record in the provided UniMorph extract, so the worked model and saved code use the same example. Its source has nine tokens: <code>past,l,a,c,t,a,t,e,EOS</code>. Its output has nine too: <code>l,a,c,t,a,t,e,d,EOS</code>. That equal count is incidental; the earlier <code>walk</code> example shows why alignment cannot be assumed.</Prose>
 
 <H2>{"2. Give every token and tensor a job"}</H2>
-
-<Prose>{"The model cannot multiply the string "}<code>{"\"a\""}</code>{" by a matrix. We assign each token an integer ID, then use an "}<strong>{"embedding table"}</strong>{": a learned row vector for each ID. Looking up row 17 does not claim that token 17 is “larger” than token 8. The number is an address."}</Prose>
-
-<Prose>{"Our vocabulary has 32 entries: 26 lowercase letters, three grammatical-request tokens, and "}<code>{"<pad>"}</code>{"/"}<code>{"<bos>"}</code>{"/"}<code>{"<eos>"}</code>{". The input contract restricts this small experiment to lowercase English spellings. A general text system must decide how it handles other scripts, case, punctuation, unknown tokens and normalization. Word, subword and byte tokenization are separate choices; encoder–decoder learning does not require BPE."}</Prose>
-
-<Prose>{""}<code>{"<pad>"}</code>{" fills unused cells when examples of different lengths share a batch. It is storage, not a requested prediction. We use two distinct mechanisms:"}</Prose>
-
-<ol start={1}><li>{""}<strong>{"Source lengths:"}</strong>{" packing tells the recurrent encoder which source positions exist. The final state corresponds to the last real source token, including its EOS."}</li><li>{""}<strong>{"Target mask:"}</strong>{" the loss ignores target PAD positions. Output EOS is real and remains in the loss."}</li></ol>
-
-<Prose>{"The decoder can emit only letters or EOS in this task. Before softmax, the program masks PAD, BOS and request-token logits to negative infinity. Their output probabilities become zero. This output-support rule is applied consistently during training and generation; it is not a late cosmetic cleanup of bad strings."}</Prose>
-
-<Prose>{"For a batch of "}<code>{"B"}</code>{" examples, longest source length "}<code>{"S"}</code>{" and longest target length "}<code>{"T"}</code>{":"}</Prose>
-
-<NeuralTable caption={"2. Give every token and tensor a job"} headers={[<>{"Object"}</>,<>{"Shape in the program"}</>,<>{"Meaning"}</>]} rows={[[<>{"Source IDs"}</>,<>{""}<code>{"B × S"}</code>{""}</>,<>{"Request, letters, EOS, then padding"}</>],[<>{"Source embeddings"}</>,<>{""}<code>{"B × S × 24"}</code>{""}</>,<>{"Learned input vectors"}</>],[<>{"Encoder final state"}</>,<>{""}<code>{"1 × B × 64"}</code>{""}</>,<>{"One GRU layer, batch, state coordinates"}</>],[<>{"Decoder input IDs"}</>,<>{""}<code>{"B × T"}</code>{""}</>,<>{"BOS followed by the known target prefix during training"}</>],[<>{"Decoder states"}</>,<>{""}<code>{"B × T × 64"}</code>{""}</>,<>{"One state for each predicted output position"}</>],[<>{"Output logits"}</>,<>{""}<code>{"B × T × 32"}</code>{""}</>,<>{"Scores before softmax; invalid outputs masked"}</>],[<>{"Target IDs"}</>,<>{""}<code>{"B × T"}</code>{""}</>,<>{"Desired letters followed by EOS, then padding"}</>]]} />
-
-<Prose>{"For target "}<code>{"ate"}</code>{" the alignment is:"}</Prose>
-
-<NeuralTable caption={"2. Give every token and tensor a job"} headers={[<>{"Prediction step"}</>,<>{"1"}</>,<>{"2"}</>,<>{"3"}</>,<>{"4"}</>]} rows={[[<>{"Decoder receives"}</>,<>{"BOS"}</>,<>{"a"}</>,<>{"t"}</>,<>{"e"}</>],[<>{"Correct output"}</>,<>{"a"}</>,<>{"t"}</>,<>{"e"}</>,<>{"EOS"}</>]]} />
-
-<Prose>{"At step 2 the decoder receives "}<code>{"a"}</code>{" because it is supposed to predict the token "}<strong>{"after"}</strong>{" "}<code>{"a"}</code>{". Feeding "}<code>{"t"}</code>{" at that same step would reveal the answer being scored. Forgetting the shift can produce an impressively small loss for the wrong task."}</Prose>
-
-<Seq2SeqAlignmentLab />
+<Prose>The encoder can now receive a token, but how does a character become numbers? A token ID selects a row from a learned <strong>embedding table</strong>.</Prose>
+<SeqLookupFigure />
+<Prose>Read the cyan <code>l</code>, follow its ID 17 to row 17, then follow the selected row to its output vector. The amber table is learned; its 32 rows correspond to 26 letters, three request tokens, PAD, BOS and EOS. Every row has 24 coordinates. The cutaway shows a few rows and columns, so the row count and coordinate count are written beside it. The integer 17 is an address, not a magnitude or an ordinal meaning of the letter.</Prose>
+<Prose>The source and output use the same letters, so this model shares its embedding table. The encoder and decoder GRUs have separate weights: the same kind of update does not mean the same parameters. Other modalities or vocabularies can use separate embeddings. Lowercase a–z is this experiment’s input contract, not a requirement of encoder–decoders; other scripts, case, punctuation, unknown tokens and normalization require deliberate choices. Word, subword and byte tokenization are separate decisions and do not require this model to use BPE.</Prose>
+<Prose>What turns the decoder state into the next letter? The readout computes one score per vocabulary entry, removes impossible output classes, then converts the allowed scores into probabilities.</Prose>
+<SeqStepFigure />
+<Prose>The left branch supplies a 24-coordinate embedding of the <em>previous</em> output token; the right supplies the 64-coordinate carried state. The GRU produces another 64-coordinate state. The learned linear readout produces 32 <strong>logits</strong>, scores before normalization. This task can emit only letters or EOS: PAD, BOS and request-token scores are set to negative infinity before <strong>softmax</strong>. They receive probability zero, while the 27 allowed probabilities sum to one. The same output support is used for training and generation.</Prose>
+<Prose>A <strong>batch</strong> stores several examples together. Write its size as <InlineMath>{"N"}</InlineMath>; the supplied program calls the same axis <code>B</code>. Let <InlineMath>{"S"}</InlineMath> be the longest stored source length and <InlineMath>{"T"}</InlineMath> the longest stored output length, including EOS. These are lengths of different timelines.</Prose>
+<NeuralTable caption="Tensor axes through the encoder–decoder" headers={['Object','Shape','Meaning']} rows={[
+['Source IDs','N × S','Request, letters, source EOS, then PAD'],['Source embeddings','N × S × 24','One learned vector per stored source token'],['Native encoder final state','1 × N × 64','One layer, batch, state coordinates'],['Decoder input IDs','N × T','BOS and previous output tokens'],['Decoder states','N × T × 64','One state per output decision'],['Output logits','N × T × 32','One score per vocabulary class'],['Target IDs','N × T','Reference letters, output EOS, then PAD']]} />
+<Prose><strong>PAD</strong> fills unused storage when lengths differ; it does not mean “finish this answer.” Source lengths tell the packed encoder where real input ends. A target mask tells the loss which output positions are real. We will calculate that mask after defining loss in section 4. An embedding’s <code>padding_idx</code> holds its PAD row gradient at zero; it does not stop a GRU’s bias or carried-state update, so source lengths still matter.</Prose>
+<Prose>Where does the reference answer go while learning? It supplies the <em>previous</em> token to the next update and the desired <em>current</em> token only to the loss, which scores a distribution against its correct outcome.</Prose>
+<SeqShiftLab />
+<Prose>The white outline marks the inspected position in both tracks. For <code>cared</code>, inputs are <code>BOS,c,a,r,e,d</code> and targets are <code>c,a,r,e,d,EOS</code>. Position 4 receives <code>r</code> and is scored against <code>e</code>. Feeding <code>e</code> at that same position reveals the answer being scored. For another concrete check, <code>ate</code> uses <code>BOS,a,t,e</code> against <code>a,t,e,EOS</code>; forgetting the shift changes the task.</Prose>
+<Prose>Change <code>cared</code> to <code>carts</code>. The first four inputs remain <code>BOS,c,a,r</code>, so their distributions stay fixed for the same model and source. The fourth target changes from <code>e</code> to <code>t</code>, so its score against the correct label can change. The fifth update now receives <code>t</code>, and its state and distribution can change. A changed reference never reruns the encoder; a changed source must.</Prose>
 
 <H2>{"3. How the encoder and decoder communicate"}</H2>
-
-<Prose>{"Let "}<InlineMath>{"x_1,\\ldots,x_S"}</InlineMath>{" be source token IDs and "}<InlineMath>{"E[x_i]"}</InlineMath>{" their embedding vectors. The encoder updates a state:"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"h_i=\\operatorname{GRU}_{enc}(E[x_i],h_{i-1}),\\qquad h_0=0."}</MathBlock></div>
-
-<Prose>{"Its final state "}<InlineMath>{"c=h_S"}</InlineMath>{" is the "}<strong>{"context"}</strong>{". In our basic architecture the decoder begins with "}<InlineMath>{"s_0=c"}</InlineMath>{":"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"s_t=\\operatorname{GRU}_{dec}(E[y_{t-1}],s_{t-1}),\\qquad y_0=\\mathrm{BOS},"}</MathBlock></div>
-
-<div className="neural-equation"><MathBlock>{"z_t=W_{out}s_t+b_{out},\\qquad p_t=\\operatorname{softmax}(z_t)."}</MathBlock></div>
-
-<Prose>{"The two GRUs have different learned parameters. “Both use a GRU” means they use the same kind of calculation, not the same weights. The embedding table happens to be shared because this task uses the same letters on both sides; separate source and target embeddings are also possible."}</Prose>
-
-<Prose>{"The decoder does not receive the raw spelling again in this version. After initialization, all source influence must travel through its evolving state. If we replace one input's context with another's while keeping the decoder and BOS fixed, it generates from that other context. This is a useful, testable meaning of “the context conditions the output.”"}</Prose>
-
-<H3>{"A small complete forward calculation"}</H3>
-
-<Prose>{"To make the numbers inspectable, temporarily replace the 64-coordinate GRUs with scalar tanh updates. This is a constructed mechanism example, not the fitted inflector:"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"h_i=\\tanh(0.7x_i+0.4h_{i-1}+0.1),\\quad h_0=0,\\quad x=[0.2,0.8]."}</MathBlock></div>
-
-<Prose>{"The first state is "}<InlineMath>{"\\tanh(0.24)=0.235496"}</InlineMath>{". The second is "}<InlineMath>{"\\tanh(0.7(0.8)+0.4(0.235496)+0.1)=0.637647"}</InlineMath>{". That second state becomes the decoder's initial state."}</Prose>
-
-<Prose>{"Use decoder update "}<InlineMath>{"s_t=\\tanh(0.6e_{t-1}+0.5s_{t-1}+0.05)"}</InlineMath>{", with BOS embedding 0.1 and token A embedding 0.4. At each step the two output scores are "}<InlineMath>{"[s_t,-s_t]"}</InlineMath>{", for A and EOS respectively."}</Prose>
-
-<NeuralTable caption={"A small complete forward calculation"} headers={[<>{"Step"}</>,<>{"Decoder input"}</>,<>{"New state"}</>,<>{"P(A)"}</>,<>{"P(EOS)"}</>,<>{"Desired output"}</>]} rows={[[<>{"1"}</>,<>{"BOS embedding 0.1"}</>,<>{"0.404338"}</>,<>{"0.691827"}</>,<>{"0.308173"}</>,<>{"A"}</>],[<>{"2"}</>,<>{"A embedding 0.4"}</>,<>{"0.455936"}</>,<>{"0.713383"}</>,<>{"0.286617"}</>,<>{"EOS"}</>]]} />
-
-<Prose>{"The model starts the answer reasonably but assigns too little probability to ending it. A state can look numerically stable while its prediction is wrong. A large norm or a smooth heatmap is not evidence of understanding."}</Prose>
-
-<Seq2SeqBridgeLab />
+<Prose>The pictures give each object a job. How can we write the same computation without hiding the state handoff? First define the symbols, then read the recurrence in timeline order.</Prose>
+<Prose><InlineMath>{"x_i"}</InlineMath> is source token ID at position <InlineMath>{"i"}</InlineMath>; <InlineMath>{"E[x_i]"}</InlineMath> is its embedding. The encoder state after that token is <InlineMath>{"h_i"}</InlineMath>, starting from <InlineMath>{"h_0=0"}</InlineMath>. For this single-example recurrence, S now denotes its real source length, including source EOS and excluding PAD; its final context is <InlineMath>{"v=h_S"}</InlineMath>. In a padded batch use each row’s own real length, not the longest stored S. We use <InlineMath>{"v"}</InlineMath> for context to keep it distinct from an LSTM cell state <InlineMath>{"c"}</InlineMath>. On the separate output timeline, <InlineMath>{"y_t"}</InlineMath> is an output token and <InlineMath>{"s_t"}</InlineMath> its decoder state; <InlineMath>{"y_0=\\mathrm{BOS}"}</InlineMath>.</Prose>
+<MathBlock>{"h_i=\\operatorname{GRU}_{enc}(E[x_i],h_{i-1}),\\qquad v=h_S,\\qquad s_0=v."}</MathBlock>
+<MathBlock>{"s_t=\\operatorname{GRU}_{dec}(E[y_{t-1}],s_{t-1}),\\qquad z_t=W_{out}s_t+b_{out},\\qquad \\widetilde z_{t,k}=\\begin{cases}z_{t,k}&k\\text{ allowed}\\\\-\\infty&k\\text{ forbidden}\\end{cases},\\qquad p_t=\\operatorname{softmax}(\\widetilde z_t)."}</MathBlock>
+<Prose><InlineMath>{"W_{out}"}</InlineMath> and <InlineMath>{"b_{out}"}</InlineMath> are readout parameters, <InlineMath>{"z_t"}</InlineMath> the raw score vector, with its masked version denoted by a tilde, and <InlineMath>{"p_t"}</InlineMath> the allowed probability vector. The decoder does not read the raw source again in this initial-state design. All its source influence travels through its evolving state. Replacing only <InlineMath>{"v"}</InlineMath> later tests that precise dependency; it does not reveal a human meaning for every coordinate.</Prose>
+<H3>A small complete forward calculation</H3>
+<Prose>Can we follow every number by hand? Temporarily replace the 64-coordinate GRUs with one-coordinate tanh updates. This constructed example teaches the same handoff, without pretending its scalars are fitted linguistic coordinates.</Prose>
+<SeqForwardLab />
+<Prose>In the encoder drawing each input is multiplied by the shared weight <InlineMath>{"w=0.7"}</InlineMath>, added to <InlineMath>{"0.4"}</InlineMath> times the old state and bias <InlineMath>{"0.1"}</InlineMath>, then passed through tanh. Inputs are <InlineMath>{"[0.2,0.8]"}</InlineMath>. The first weighted sum is <InlineMath>{"0.24"}</InlineMath>, giving <InlineMath>{"h_1=0.235496"}</InlineMath>. The second weighted sum is <InlineMath>{"0.7(0.8)+0.4(0.235496)+0.1"}</InlineMath>, giving final context <InlineMath>{"v=h_2=0.637647"}</InlineMath>.</Prose>
+<MathBlock>{"h_i=\\tanh(wx_i+0.4h_{i-1}+0.1),\\quad h_0=0,\\quad x=[0.2,0.8]."}</MathBlock>
+<Prose>In the decoder, BOS has embedding <InlineMath>{"0.1"}</InlineMath> and A has embedding <InlineMath>{"0.4"}</InlineMath>. The first update combines BOS with <InlineMath>{"v"}</InlineMath>; the second combines A with the new first decoder state. The two scores are <InlineMath>{"[s_t,-s_t]"}</InlineMath>, for A and EOS. Their softmax gives the sigmoid of <InlineMath>{"2s_t"}</InlineMath>. The factor two comes from subtracting the EOS score <InlineMath>{"-s_t"}</InlineMath> from the A score <InlineMath>{"s_t"}</InlineMath>.</Prose>
+<MathBlock>{"s_t=\\tanh(0.6e_{t-1}+0.5s_{t-1}+0.05),\\qquad p_t(A)=\\frac{e^{s_t}}{e^{s_t}+e^{-s_t}}=\\frac{1}{1+e^{-2s_t}}."}</MathBlock>
+<NeuralTable caption="Default hand calculation; reference A then EOS" headers={['Step','Previous input','New state','P(A)','P(EOS)']} rows={[[1,'BOS: .1','0.404338','0.691827','0.308173'],[2,'A: .4','0.455936','0.713383','0.286617']]} />
+<Prose>The first decision gives A reasonable probability, but the second gives EOS too little. A smooth state trajectory or a large vector norm is not evidence of a correct answer. Now define a loss that can teach the model both the letter and the stopping decision.</Prose>
 
 <H2>{"4. Train the probability of the whole answer"}</H2>
-
-<Prose>{"For a particular output "}<InlineMath>{"y_1,\\ldots,y_T"}</InlineMath>{", including its final EOS, the autoregressive model assigns:"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"P_\\theta(y\\mid x)=\\prod_{t=1}^{T}P_\\theta(y_t\\mid y_{<t},x)."}</MathBlock></div>
-
-<Prose>{"“Autoregressive” means a prediction depends on previous output tokens. The product is the probability of this entire route through the decoder. Taking negative logarithms turns the product into a sum:"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"\\mathcal L_{\\text{sequence}}=-\\sum_{t=1}^{T}\\log P_\\theta(y_t\\mid y_{<t},x)."}</MathBlock></div>
-
-<Prose>{"In the scalar example, the correct-token probabilities are 0.691827 and 0.286617. Their negative-log costs are 0.368419 and 1.249609. The mean loss is 0.809014 natural-log units, or "}<strong>{"nats"}</strong>{", per target token. EOS contributes most of the error here. Removing EOS from the targets would remove the direct lesson “finish after A.”"}</Prose>
-
-<Prose>{"Across a padded batch, our objective is the sum of valid-token costs divided by the "}<strong>{"number of valid target tokens"}</strong>{":"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"\\mathcal L=\\frac{\\sum_{b,t}m_{bt}[-\\log p_{bt}(y_{bt})]}{\\sum_{b,t}m_{bt}},\\quad\nm_{bt}=1\\ \\text{when the target is not PAD}."}</MathBlock></div>
-
-<Prose>{"This gives equal weight to valid tokens. Averaging each sequence first would give equal weight to sequences and therefore relatively more weight to tokens in short answers. Both can be deliberate objectives; changing the denominator silently changes the training problem."}</Prose>
-
-<Prose>{"For a concrete comparison, suppose one answer has two valid tokens costing 1 nat each, and another has six costing 3 nats each. The token mean is (2×1+6×3)/8=2.5. Averaging the two sequence means gives (1+3)/2=2. Under the first rule every token has weight 1/8. Under the second, each short-answer token has weight 1/4 and each long-answer token 1/12. The threefold difference is a weighting choice, not a numerical rounding effect. Padding should receive zero weight under either rule."}</Prose>
-
-<H3>{"Teacher forcing: a known prefix, not the current answer"}</H3>
-
-<Prose>{"During training we know the reference output. "}<strong>{"Teacher forcing"}</strong>{" uses its previous tokens as the decoder inputs while scoring each next token. This directly evaluates the conditional factors in the likelihood above. It is ordinary maximum-likelihood training for this model, not a trick that makes the loss invalid."}</Prose>
-
-<Prose>{"The GRU states still depend on earlier states. Providing all known input tokens permits a convenient batched call to "}<code>{"nn.GRU"}</code>{", but it does not make recurrent time steps mathematically independent. The reference token at step 5 cannot determine state5 without the recurrent history."}</Prose>
-
-<Prose>{"At inference the reference answer is unavailable. The decoder must use a chosen or sampled previous output. If it makes a mistake, subsequent states may follow a prefix poorly represented in training. This is a reason to measure complete generated answers as well as teacher-forced loss. It does not imply that every initial error causes an irreversible cascade."}</Prose>
-
-<H3>{"One gradient reaches both networks"}</H3>
-
-<Prose>{"Backpropagation starts at the output losses, passes through decoder states and the initial context, then through the encoder. In the scalar example, hold the decoder fixed and differentiate with respect to the encoder's input weight 0.7. The calculated derivative is −0.00556958. A gradient-descent step of size 0.1 changes it to 0.70055696 and reduces mean loss to 0.80901091. The change is small, but it demonstrates the important dependency: an output loss can teach the encoder how to represent its input."}</Prose>
-
-<Prose>{"The supplied calculation checks that derivative against a central finite difference. In the real model, a four-example batch gives a nonzero encoder input-weight gradient norm of 0.169993. Detaching the context gives the same forward computation but removes this decoder-to-encoder gradient path. That would defeat joint learning unless a separate encoder objective were intended."}</Prose>
-
-<section data-lesson-teaching="" className="lesson-teaching-section">
-
-<h3 className="lesson-teaching-section__title">Follow the scalar derivative through the bridge</h3>
-
-<Prose>{"For the two-token mean loss, the direct derivative at decoder step 1 is "}<InlineMath>{"p_1(A)-1"}</InlineMath>{", and at step 2 it is "}<InlineMath>{"p_2(A)"}</InlineMath>{" because EOS is correct there. Step2 also sends credit back through step 1:"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"\\frac{\\partial\\mathcal L}{\\partial s_1}\n=(p_1(A)-1)+p_2(A)\\,0.5(1-s_2^2)."}</MathBlock></div>
-
-<Prose>{"Multiply this by "}<InlineMath>{"0.5(1-s_1^2)"}</InlineMath>{" to cross the decoder-initial-state edge into context "}<InlineMath>{"c"}</InlineMath>{". The encoder input weight is reused at both source positions, giving:"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"\\frac{\\partial c}{\\partial w}\n=(1-h_2^2)\\left[x_2+0.4(1-h_1^2)x_1\\right]."}</MathBlock></div>
-
-<Prose>{"The product is −0.00556958. The first term in brackets is the direct contribution at source position 2; the second comes through the earlier encoder state. Both belong to the same parameter."}</Prose>
-
-</section>
-
-<Prose>{"Return to "}<a href={"/learn/path/full-curriculum/backpropagation-automatic-differentiation?module=deep-learning-fundamentals"}>{"Backpropagation and Automatic Differentiation"}</a>{" for the full graph mechanics. Here the new point is where the two graphs meet."}</Prose>
+<Prose>What does it mean to assign probability to an entire answer? Multiply the conditional probability at each step, including the probability of ending it.</Prose>
+<SeqProbabilityTreeFigure />
+<Prose>This new constructed example has tokens A, B, C and EOS so the full tree fits on a page. Every arrow’s number is conditional on the path above it. A has probability <InlineMath>{"0.60"}</InlineMath>; after A, EOS has conditional probability <InlineMath>{"0.51"}</InlineMath>, so the complete A,EOS route has probability <InlineMath>{"0.60\\times0.51=0.306"}</InlineMath>. B,EOS instead gets <InlineMath>{"0.40\\times0.90=0.360"}</InlineMath>. C must then end, with conditional EOS probability 1. The symbolic state labels belong to consumed prefixes; these are not fabricated 64-coordinate model states.</Prose>
+<Prose><strong>Autoregressive</strong> means each next-token distribution can depend on previous output tokens. For the particular answer <InlineMath>{"y_1,\\ldots,y_T"}</InlineMath>, including its final EOS, the probability follows the chain rule. Model parameters are denoted <InlineMath>{"\\theta"}</InlineMath>; <InlineMath>{"y_{<t}"}</InlineMath> means the output prefix before position <InlineMath>{"t"}</InlineMath>.</Prose>
+<MathBlock>{"P_\\theta(y\\mid x)=\\prod_{t=1}^{T}P_\\theta(y_t\\mid y_{<t},x),\\qquad \\mathcal L_{\\rm sequence}=-\\sum_{t=1}^{T}\\log p_t(y_t)."}</MathBlock>
+<Prose>The <strong>negative log-likelihood</strong>, or NLL, turns that product into added costs: a less probable correct token costs more. Natural logarithms give units called <strong>nats</strong>. Return to the scalar A,EOS example: costs are <InlineMath>{"0.368419"}</InlineMath> and <InlineMath>{"1.249609"}</InlineMath>, mean <InlineMath>{"0.809014"}</InlineMath> nats per valid output token. EOS contributes most of the error. Omitting its target removes the direct lesson “finish after A.”</Prose>
+<Prose>Which storage positions count? The mask puts weight 1 on real targets, including EOS, and 0 on PAD; only the ones enter the denominator.</Prose>
+<SeqMaskLab />
+<Prose>Both constructed answers have six valid targets. Adding storage cells does not add reference events. For a batch, <InlineMath>{"m_{nt}"}</InlineMath> is that binary mask at example <InlineMath>{"n"}</InlineMath> and output position <InlineMath>{"t"}</InlineMath>. Divide the total valid cost by the number of valid targets.</Prose>
+<MathBlock>{"\\mathcal L=\\frac{\\sum_{n,t}m_{nt}[-\\log p_{nt}(y_{nt})]}{\\sum_{n,t}m_{nt}},\\qquad m_{nt}=\\mathbf1[y_{nt}\\ne\\mathrm{PAD}]."}</MathBlock>
+<Prose>Equal token weighting is a choice, not the only objective. Suppose a two-token answer costs 1 nat per token and a six-token answer costs 3. Token mean is <InlineMath>{"(2\\times1+6\\times3)/8=2.5"}</InlineMath>; averaging the two sequence means gives <InlineMath>{"(1+3)/2=2"}</InlineMath>. Token weights are respectively <InlineMath>{"1/8"}</InlineMath> each, or <InlineMath>{"1/4"}</InlineMath> for a short-answer token and <InlineMath>{"1/12"}</InlineMath> for a long-answer token. Under either choice PAD has zero weight. The fitted model’s native cared/tried check measured <InlineMath>{"1.074011445"}</InlineMath> nats over 12 valid targets before and after extra padding; that is separate from the editable equal-probability illustration.</Prose>
+<H3>Teacher forcing supplies a known prefix</H3>
+<Prose>We already built shifted reference tracks in section 2. Using those known previous tokens while fitting is called <strong>teacher forcing</strong>. It directly evaluates the conditional factors of the data likelihood; it is coherent maximum-likelihood training, not a shortcut that invalidates the loss. Supplying known inputs permits one batched <code>nn.GRU</code> call, but states still depend on earlier states: later input availability does not make time steps independent.</Prose>
+<Prose>During free generation there is no reference answer, so the chosen or sampled output supplies the next input. A wrong choice can lead to a prefix weakly represented during training. This is a reason to evaluate generated answers as well as known-prefix NLL; it does not mean every first mistake is irrecoverable.</Prose>
+<H3>One gradient teaches both networks</H3>
+<Prose>How can a wrong output teach the encoder? Loss credit travels backward through the decoder’s initial state and context bridge into both uses of the shared encoder weight.</Prose>
+<SeqCreditFigure result={scalarBridge([.2,.8])} />
+<Prose>The orange dashed arrows reverse the forward dependency. At step 1 the correct class is A; at step 2 it is EOS. For two logits <InlineMath>{"[s,-s]"}</InlineMath>, the derivative of the correct-token negative log probability with respect to <InlineMath>{"s"}</InlineMath> is <InlineMath>{"2[p(A)-q]"}</InlineMath>, where <InlineMath>{"q=1"}</InlineMath> for A and <InlineMath>{"q=0"}</InlineMath> for EOS. The factor two is the score difference derived in section 3. Our loss averages two tokens, multiplying each direct derivative by <InlineMath>{"1/2"}</InlineMath>; these factors cancel.</Prose>
+<Prose>Step 2 also depends on step 1 through its carried state. The tanh derivative is <InlineMath>{"1-s_2^2"}</InlineMath> and the carried-state weight is <InlineMath>{"0.5"}</InlineMath>, so add this future contribution to the direct step-1 derivative:</Prose>
+<MathBlock>{"\\frac{\\partial\\mathcal L}{\\partial s_1}=(p_1(A)-1)+p_2(A)\\,0.5(1-s_2^2),\\qquad \\frac{\\partial\\mathcal L}{\\partial v}=\\frac{\\partial\\mathcal L}{\\partial s_1}\\,0.5(1-s_1^2)."}</MathBlock>
+<Prose>To cross the encoder, differentiate both positions using the same weight <InlineMath>{"w"}</InlineMath>. The direct second-position term is <InlineMath>{"x_2"}</InlineMath>; the earlier contribution goes through <InlineMath>{"h_1"}</InlineMath> and carried-state weight <InlineMath>{"0.4"}</InlineMath>.</Prose>
+<MathBlock>{"\\frac{\\partial v}{\\partial w}=(1-h_2^2)[x_2+0.4(1-h_1^2)x_1],\\qquad \\frac{\\partial\\mathcal L}{\\partial w}=\\frac{\\partial\\mathcal L}{\\partial v}\\frac{\\partial v}{\\partial w}=-0.00556958."}</MathBlock>
+<Prose>A gradient-descent update subtracts rate times derivative. With rate <InlineMath>{"0.1"}</InlineMath>, weight <InlineMath>{"0.7"}</InlineMath> becomes <InlineMath>{"0.70055696"}</InlineMath> and mean NLL becomes <InlineMath>{"0.80901091"}</InlineMath>. The full mechanics program checks this chain against a central finite difference. The real four-example batch has encoder input-weight gradient norm <InlineMath>{"0.169993"}</InlineMath>. <strong>Detaching</strong> the context preserves forward values but prevents decoder loss from training the encoder; that needs a deliberate separate objective rather than an accidental graph break.</Prose>
+<SeqCreditLab />
+<Prose>The earlier forward controls also change this gradient calculation, so the two investigations share one fixture. Its proposed update is a comparison, not accumulated training. Zero update rate and detached context are exact nulls for the weight change. <a href="/learn/path/full-curriculum/backpropagation-automatic-differentiation?module=deep-learning-fundamentals">Backpropagation and Automatic Differentiation</a> explains the graph mechanics; the new connection here is the bridge between two networks.</Prose>
 
 <H2>{"5. Generate an answer, then search more than one route"}</H2>
-
-<Prose>{""}<strong>{"Greedy decoding"}</strong>{" chooses the largest next-token probability. It starts from BOS, updates the state, emits one token, and feeds that token into the next step. It stops on EOS or an explicit output limit. Hitting the limit means “generation was capped,” not “the model chose to finish.”"}</Prose>
-
-<Prose>{"For our fitted seed 1 model, the training input "}<code>{"lactate + past"}</code>{" generates "}<code>{"lactated"}</code>{" and EOS. Each emitted token has a probability conditional on that particular input and generated prefix. Multiplying those probabilities does not produce “probability this spelling is linguistically correct.” It is the model's probability for that route."}</Prose>
-
-<H3>{"Why the locally best token can lose"}</H3>
-
-<Prose>{"Consider this completely specified constructed tree. First choose A with probability 0.60 or B with 0.40. After A, choose EOS with 0.51 or C with 0.49. After B, choose EOS with 0.90 or C with 0.10. After C, EOS is mandatory."}</Prose>
-
-<NeuralTable caption={"Why the locally best token can lose"} headers={[<>{"Complete answer"}</>,<>{"Product"}</>,<>{"Probability"}</>]} rows={[[<>{"A, EOS"}</>,<>{"0.60 × 0.51"}</>,<>{"0.306"}</>],[<>{"A, C, EOS"}</>,<>{"0.60 × 0.49 × 1"}</>,<>{"0.294"}</>],[<>{"B, EOS"}</>,<>{"0.40 × 0.90"}</>,<>{"0.360"}</>],[<>{"B, C, EOS"}</>,<>{"0.40 × 0.10 × 1"}</>,<>{"0.040"}</>]]} />
-
-<Prose>{"Greedy commits to A, then EOS: 0.306. The highest-probability complete answer is B, EOS: 0.360. The first decision can look best until we consider what follows it."}</Prose>
-
-<Prose>{""}<strong>{"Beam search"}</strong>{" retains several partial answers. With width 2, keep A and B after the first step. Expand each live candidate, add its next-token log probability to its accumulated log score, then retain the two highest-scoring candidates. In this tree those are B,EOS and A,EOS. A finished candidate is retained without appending more tokens."}</Prose>
-
-<Prose>{"Each candidate owns its prefix "}<strong>{"and its decoder state"}</strong>{". Reusing the state from the wrong candidate makes the next distribution wrong even if the displayed strings look right. A beam is not simply a list of alternative final words from one shared state."}</Prose>
-
-<Prose>{"Our program keeps completed and live candidates in the same width-limited list, sorts tied scores by token IDs, and stops when every retained candidate is complete or 16 generated tokens have been reached. At a cap it returns the highest-ranked remaining candidate with an explicit termination flag. Width1 matches the program's greedy algorithm under the same support, tie order and stopping convention."}</Prose>
-
-<Prose>{"The search remains approximate: a promising route can be pruned before its good continuation appears. A larger beam also optimizes the model's score more thoroughly, which need not improve the task metric when the model is wrong. The real experiment below measures the effect instead of claiming a guaranteed improvement."}</Prose>
-
-<H3>{"Length normalization changes the objective"}</H3>
-
-<Prose>{"Raw log probability is a sum of nonpositive terms. Extending a particular prefix cannot increase that raw probability. Comparing completed answers of different lengths can therefore require an explicit length policy."}</Prose>
-
-<Prose>{"One common score is:"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"\\operatorname{score}(y)=\\frac{\\log P(y\\mid x)}\n{\\left((5+L)/6\\right)^\\alpha},"}</MathBlock></div>
-
-<Prose>{"where our definition of "}<InlineMath>{"L"}</InlineMath>{" counts generated tokens including EOS and excludes BOS. This is the length term from the GNMT family of scoring rules; its separate coverage term requires attention and is not used here. The exponent is applied "}<strong>{"once"}</strong>{". It is a ranking heuristic, not a normalized probability distribution. "}<a href={"https://arxiv.org/abs/1609.08144"}>{"GNMT, section 7"}</a>{"."}</Prose>
-
-<Prose>{"For a length 3 answer with log probability−1.5 and a length 6 answer with −1.8, raw scoring prefers the shorter answer. At "}<InlineMath>{"\\alpha=1"}</InlineMath>{", their scores are −1.125 and−0.981818, so the longer answer wins. Dividing a negative number by a larger positive denominator makes it less negative. Calling this universally a penalty against long outputs reverses the actual effect."}</Prose>
-
-<Prose>{"The experiment fixes "}<InlineMath>{"\\alpha=0"}</InlineMath>{". A nonzero setting must be chosen on development data and reported with the length convention. Do not borrow a number from a translation paper as a universal spelling-model setting."}</Prose>
-
-<Seq2SeqTreeLab />
+<Prose>The likelihood tree tells us how to score a route. How should we choose one? <strong>Greedy decoding</strong> picks the largest next-token probability, feeds that choice back and repeats until EOS or an explicit output cap.</Prose>
+<SeqTreeLab />
+<Prose>At the default values, greedy chooses A first, then EOS, for probability <InlineMath>{"0.306"}</InlineMath>. The complete B,EOS path has <InlineMath>{"0.360"}</InlineMath>. The locally best first choice loses because its continuation is less likely. Changing the three conditional rows above updates their complements and all four complete products; it does not change a fitted network.</Prose>
+<Prose><strong>Beam search</strong> keeps several partial routes instead of committing to one. Its <strong>width</strong> is the maximum number retained. With width two, keep A and B, expand each live prefix by its possible next tokens, add next-token log probability to accumulated log probability, and keep the two best candidates. A finished candidate remains available without consuming more EOS tokens.</Prose>
+<SeqFrontierLab />
+<Prose>The frontier is the retained list at that step; the table makes pruning explicit. The first default frontier holds A at <InlineMath>{"0.6"}</InlineMath> and B at <InlineMath>{"0.4"}</InlineMath>; the second holds B,EOS at <InlineMath>{"0.36"}</InlineMath> and A,EOS at <InlineMath>{"0.306"}</InlineMath>. A candidate carries its prefix, score, end status and decoder state together. In the neural version, siblings emitted from one parent share that parent step’s immutable new state until their different emitted tokens are consumed next. They cannot borrow a different route’s state.</Prose>
+<Prose>Our exact contract puts live and completed candidates in the same width-limited list, breaks tied neural scores by token IDs, and stops when every retained candidate is complete or the cap is reached. Width one matches greedy under those same rules. Beam search remains approximate: pruning can discard an eventually good route. A larger beam improves search of the model’s score, not necessarily task correctness when the model is wrong.</Prose>
+<Prose>The real saved seed-one model generates <code>lactated</code> and EOS from <code>lactate + past</code>. With a cap of three it emits <code>lac</code> without EOS. The cap means “we stopped generation,” not “the model decided to finish.” A route probability is the model’s conditional probability for that string, not the probability that its spelling is linguistically correct.</Prose>
+<H3>Length normalization changes what search prefers</H3>
+<Prose>Raw log probability is a sum of nonpositive terms, so extending one prefix cannot improve its raw score. Comparing complete answers with different lengths may call for a deliberate length policy; changing the denominator can reverse their ranking.</Prose>
+<SeqLengthLab />
+<Prose>Each branch keeps its raw log probability fixed and divides by a positive length-dependent number. Let <InlineMath>{"L"}</InlineMath> count generated tokens, including EOS and excluding BOS, and let <InlineMath>{"\\alpha"}</InlineMath> be the length exponent. The displayed score uses the length term from the GNMT family:</Prose>
+<MathBlock>{"\\operatorname{score}(y)=\\frac{\\log P(y\\mid x)}{((5+L)/6)^\\alpha}."}</MathBlock>
+<Prose>The exponent is applied once. At <InlineMath>{"\\alpha=0"}</InlineMath>, length 3 with raw log score <InlineMath>{"-1.5"}</InlineMath> beats length 6 with <InlineMath>{"-1.8"}</InlineMath>. At <InlineMath>{"\\alpha=1"}</InlineMath>, scores are <InlineMath>{"-1.125"}</InlineMath> and <InlineMath>{"-0.981818"}</InlineMath>, so the longer answer wins. Dividing a negative number by a larger positive denominator makes it less negative; calling this universally a penalty against long answers gets the effect backward. It is a ranking heuristic, not a normalized probability. GNMT’s separate coverage term requires attention and is absent here (<a href="https://arxiv.org/abs/1609.08144">GNMT section 7</a>).</Prose>
+<Prose>The recorded inflection experiment fixes <InlineMath>{"\\alpha=0"}</InlineMath>. Tune a different policy on development data and report its length convention; a parameter name or translation-paper setting is not a universal spelling-model rule.</Prose>
 
 <H2>{"6. A real experiment: learning a function is harder than remembering pairs"}</H2>
 
@@ -196,6 +108,8 @@ export default {
 
 <Prose>{"The intended question is: "}<strong>{"can this model inflect a spelling absent from training?"}</strong>{" All three requests for one lemma stay together. We also group selected lemmas linked by a shared output form: "}<code>{"worke"}</code>{" and "}<code>{"work"}</code>{" share "}<code>{"worked"}</code>{" and "}<code>{"working"}</code>{". Treating their strings as unrelated would give a misleadingly clean “no overlap” report. This conservative grouping can merge genuine homographs; it is an operational split policy, not a complete linguistic identity system."}</Prose>
 
+<Prose>Which records must stay together? Link lemma variants by a shared target, then assign the whole connected group to one partition.</Prose>
+<SeqGroupSplitFigure />
 <Prose>{"The final split has 451 training lemmas/1,353 examples and 149 development lemmas/447 examples. There is no shared lemma string or target form across these partitions. No unseen final test is claimed: we inspect development outcomes to learn about the system. Future tuning would consume more development information and require a separately protected evaluation for a final performance claim."}</Prose>
 
 <Prose>{"The experiment fixes a 24-coordinate embedding, one 64-coordinate GRU encoder, one 64-coordinate GRU decoder and a 32-score output head: 37,408 trainable parameters. Each of three seeds receives 1,200 Adam updates at learning rate 0.003, batches of 64 sampled training rows, global gradient clipping at 1, teacher forcing and the same token/split rules. We show the final predeclared update, not the best-looking development checkpoint."}</Prose>
@@ -204,7 +118,9 @@ export default {
 
 <Prose>{"For generated strings, "}<strong>{"exact match"}</strong>{" requires the reference spelling and natural EOS termination. "}<strong>{"Character error rate"}</strong>{" is total Levenshtein insertions, deletions and substitutions divided by total reference characters. A rate above 1 is possible when a generator inserts many characters. Teacher-forced NLL is measured separately, including EOS and excluding PAD."}</Prose>
 
-<NeuralTable caption={"6. A real experiment: learning a function is harder than remembering pairs"} headers={[<>{"System"}</>,<>{"Training exact / 1,353"}</>,<>{"Development exact / 447"}</>,<>{"Development character error rate"}</>,<>{"Development teacher-forced NLL"}</>]} rows={[[<>{"Copy lemma"}</>,<>{"3"}</>,<>{"1"}</>,<>{"0.255014"}</>,<>{"Not a probabilistic model"}</>],[<>{"Predeclared suffix rules"}</>,<>{"1206"}</>,<>{"407"}</>,<>{"0.016332"}</>,<>{"Not a probabilistic model"}</>],[<>{"GRU encoder–decoder, seed 1"}</>,<>{"1328"}</>,<>{"53"}</>,<>{"0.434670"}</>,<>{"1.285388"}</>],[<>{"GRU encoder–decoder, seed 2"}</>,<>{"1323"}</>,<>{"41"}</>,<>{"0.439255"}</>,<>{"1.455556"}</>],[<>{"GRU encoder–decoder, seed 3"}</>,<>{"1287"}</>,<>{"52"}</>,<>{"0.422636"}</>,<>{"1.232162"}</>]]} />
+<Prose>What did the fixed protocol learn? First inspect every measured development checkpoint, then compare the final outputs and baselines. The lines connect recorded points; they do not invent intermediate training measurements.</Prose>
+<Seq2SeqEvidenceFigure />
+<NeuralTable caption={"Recorded systems under one grouped split"} headers={[<>{"System"}</>,<>{"Training exact / 1,353"}</>,<>{"Development exact / 447"}</>,<>{"Development character error rate"}</>,<>{"Development teacher-forced NLL"}</>]} rows={[[<>{"Copy lemma"}</>,<>{"3"}</>,<>{"1"}</>,<>{"0.255014"}</>,<>{"Not a probabilistic model"}</>],[<>{"Predeclared suffix rules"}</>,<>{"1206"}</>,<>{"407"}</>,<>{"0.016332"}</>,<>{"Not a probabilistic model"}</>],[<>{"GRU encoder–decoder, seed 1"}</>,<>{"1328"}</>,<>{"53"}</>,<>{"0.434670"}</>,<>{"1.285388"}</>],[<>{"GRU encoder–decoder, seed 2"}</>,<>{"1323"}</>,<>{"41"}</>,<>{"0.439255"}</>,<>{"1.455556"}</>],[<>{"GRU encoder–decoder, seed 3"}</>,<>{"1287"}</>,<>{"52"}</>,<>{"0.422636"}</>,<>{"1.232162"}</>]]} />
 
 <Prose>{"All final neural development generations ended with EOS within the limit. These are actual CPU measurements on the declared grouped split."}</Prose>
 
@@ -216,7 +132,7 @@ export default {
 
 <Prose>{"The same seed's beam 3 search returns 56/447 exact rather than greedy's 53/447; character error rate changes from 0.434670 to 0.410888. No additional training occurred. Search recovers some better-scoring routes, but it cannot supply missing linguistic knowledge or undo the large generalization gap."}</Prose>
 
-<Seq2SeqEvidenceFigure />
+
 
 <H2>{"7. Run the complete small model"}</H2>
 
@@ -232,11 +148,12 @@ export default {
 
 <Prose>{"The decoder's previous token is selected with "}<code>{"argmax"}</code>{" only during generation. The training graph uses the known target prefix and differentiable logits. We do not backpropagate through the discrete greedy choices to fit this maximum-likelihood model."}</Prose>
 
-<Prose>{"The fixed learned model also supports inference without fitting. After the first run, save this next block beside the program and JSON and run it. It loads seed1's saved parameters, asks only for the lemma and grammatical request, and prints both the string and whether EOS ended it. No reference answer is supplied to generation."}</Prose>
+<Prose>{"The fixed learned model also supports inference without fitting. After the first run, save this next block beside the program and JSON and run it. It loads seed 1's saved parameters, asks only for the lemma and grammatical request, and prints both the string and whether EOS ended it. No reference answer is supplied to generation."}</Prose>
 
-<CodeBlock language={"python"}>{"from pathlib import Path\nimport json\nimport runpy\nimport torch\n\nfolder = Path(__file__).resolve().parent\napi = runpy.run_path(str(folder / \"inflection-seq2seq.py\"))\nsaved = json.loads((folder / \"calculated-inputs.json\").read_text())\nmodel = api[\"Inflector\"]().eval()\nweights = saved[\"runs\"][0][\"weights\"]\nmodel.load_state_dict({\n    key: torch.tensor(value, dtype=torch.bool if key == \"invalid_output\" else torch.float32)\n    for key, value in weights.items()\n})\nquery = {\"lemma\": \"lactate\", \"feature\": \"past\"}\nfor limit in (3, 16):\n    result = api[\"greedy\"](model, [query], max_output=limit)[0]\n    print(limit, result[\"prediction\"], result[\"ended_with_eos\"])"}</CodeBlock>
+<Prose>This inference excerpt is also the complete downloadable <a href={seq2seqAsset + "saved-inflection.py"}>saved-inflection.py</a>; keep its program and JSON dependencies beside it.</Prose>
+<CodeBlock language={"python"} filename="saved-inflection.py" downloadUrl={seq2seqAsset + "saved-inflection.py"}>{"from pathlib import Path\nimport json\nimport runpy\nimport torch\n\nfolder = Path(__file__).resolve().parent\napi = runpy.run_path(str(folder / \"inflection-seq2seq.py\"))\nsaved = json.loads((folder / \"calculated-inputs.json\").read_text())\nmodel = api[\"Inflector\"]().eval()\nweights = saved[\"runs\"][0][\"weights\"]\nmodel.load_state_dict({\n    key: torch.tensor(value, dtype=torch.bool if key == \"invalid_output\" else torch.float32)\n    for key, value in weights.items()\n})\nquery = {\"lemma\": \"lactate\", \"feature\": \"past\"}\nfor limit in (3, 16):\n    result = api[\"greedy\"](model, [query], max_output=limit)[0]\n    print(limit, result[\"prediction\"], result[\"ended_with_eos\"])"}</CodeBlock>
 
-<Prose>{"The recorded output is "}<code>{"3 lac False"}</code>{" followed by "}<code>{"16 lactated True"}</code>{" for the worked training example. The browser investigations will similarly load one saved seed only when needed and perform bounded inference on short inputs, not train 1,200 updates in a page."}</Prose>
+<Prose>{"The recorded output is "}<code>{"3 lac False"}</code>{" followed by "}<code>{"16 lactated True"}</code>{" for the worked training example. The investigations use those fixed weights to recompute short inference traces; they do not run training in the page."}</Prose>
 
 <H2>{"8. Diagnose the model by separating four questions"}</H2>
 
@@ -248,7 +165,23 @@ export default {
 
 <Prose>{""}<strong>{"Is search failing to find a good route the model already scores well?"}</strong>{" Compare greedy and beam under a fixed model and declared scoring rule. An increase in model score with a decrease in exact match is possible. Beam size is an inference choice; training updates are a model change. Mixing them in one unexplained curve hides what caused the result."}</Prose>
 
-<Seq2SeqFittedLab />
+<Prose>What changes when the source changes? Follow freshly encoded source tokens and generated output tokens with fixed seed-one weights. This is free generation: no reference target enters it.</Prose>
+<SeqFittedQueryLab />
+<Prose>Each source edit reruns its encoder. The default development query <code>emmove + past</code> has reference <code>emmoved</code>, but the saved model generates <code>emoves</code>; changing to <code>emmode</code> gives <code>ememmis</code>. The first P(e) changes from <InlineMath>{"0.607604163"}</InlineMath> to <InlineMath>{"0.874140168"}</InlineMath>. Changing the request to participle for emmove instead gives <code>emomming</code> and first P(e) <InlineMath>{"0.812601928"}</InlineMath>. Edited inputs need not have a verified reference.</Prose>
+<Prose>Where did that decision come from? Inspect one learned coordinate across the actual recurrent trajectories, then read the full next-token probability table at that step.</Prose>
+<SeqFittedStateLab />
+<Prose>Both trajectories use a fixed vertical range from −1 to 1, which is valid for these GRU states starting in that interval. The coordinate picker exposes all 64 coordinates; the table exposes all 32 vocabulary probabilities, including the five forbidden zeros. A coordinate is not assigned a linguistic label such as “past tense.” The first state is computed before its selected output token becomes the next input.</Prose>
+<Prose>Does a changed chosen prefix affect earlier distributions? Force up to six previous choices after their probabilities have been computed, then observe the resulting continuation with the current source’s own context.</Prose>
+<SeqPrefixLab />
+<Prose>With the default query, forcing the first character to <code>a</code> gives <code>amves</code>. The first distribution is unchanged because it still receives BOS; the following P(m) changes from <InlineMath>{"0.968971867"}</InlineMath> to <InlineMath>{"0.547885999"}</InlineMath>. Replaying the same first two greedy characters is an exact continuation null. Prefix forcing does not claim the forced characters were likely.</Prose>
+<Prose>How much does the source summary influence the decoder? Keep the current query, prefix, cap and all weights fixed, and change only the vector supplied as its initial state. “Mix” interpolates toward the fixed context of lactate + past; “gain” scales the entire mixed vector.</Prose>
+<SeqContextLab />
+<Prose>The two incoming strips are cutaways of 64-coordinate contexts. The selected coordinate value and complete 64-row table below make the actual incoming and edited values inspectable. At mix zero, the edited context is gain times the current source vector. At gain one and mix zero, it is exactly the original vector. At gain zero, every coordinate is zero; at gain one and mix one it is exactly lactate’s context. Intermediate vectors are constructed interventions, not verified inputs. The baseline is always the current query with its current forced prefix and cap, so an earlier source edit cannot silently change what is being compared.</Prose>
+<MathBlock>{"v_{used}=g[(1-a)v_{query}+a v_{lactate}]."}</MathBlock>
+<Prose>Here <InlineMath>{"g"}</InlineMath> is gain and <InlineMath>{"a"}</InlineMath> the mixing fraction. With default emmove + past and no forced prefix, zero context generates <code>pled</code> and lactate context generates <code>lactated</code>. This locates a causal dependency in this fixed computation; it does not prove the small model has learned a general spelling rule.</Prose>
+<Prose>Finally separate search from those interventions. These are actual candidate-owned 64-coordinate states from a fresh own-context beam, using the current source but no forced prefix or edited initialization.</Prose>
+<SeqFittedBeamLab />
+<Prose>Each cutaway belongs to its own token prefix and raw log score. As in section 5, newly emitted siblings can share the immutable parent-step state until their different tokens enter the next update. Increasing beam width does not update any model parameter. The separate beam cap counts EOS and leaves capped candidates explicitly unfinished.</Prose>
 
 <Prose>{"A useful null experiment replaces the context with an exact copy of itself: nothing should change. Replaying an already generated prefix should recover the same continuation. Replacing it with a different source's context should use that context's information. Changing only an on-screen label should affect none of the numbers."}</Prose>
 
@@ -256,15 +189,22 @@ export default {
 
 <H2>{"Reuse the cell; implement the encoder–decoder protocol"}</H2>
 
-<Prose>{"This lesson's new program is the protocol joining two recurrent computations, not another invention of GRU. "}<a href={"/learn-code/sequence-to-sequence-encoder-decoder/sequence-mechanics.py"}>{"sequence-mechanics.py"}</a>{" opens the scalar joint derivative, manual gate trace and exact small probability-tree search. "}<a href={"/learn-code/sequence-to-sequence-encoder-decoder/inflection-seq2seq.py"}>{"inflection-seq2seq.py"}</a>{" supplies complete source batching, "}<code>{"Inflector"}</code>{", training, greedy decoding, beam search and evaluation. The "}<a href={"/learn-assets/rnns-lstms-grus/recurrent-mechanics.py"}>{"recurrent cell implementation"}</a>{" maps gate order and biases to "}<code>{"nn.GRU"}</code>{". Its "}<a href={"/learn/path/full-curriculum/rnns-lstms-grus?module=deep-learning-fundamentals"}>{"RNN, LSTM and GRU lesson"}</a>{" teaches the scratch cell and matched library route; reuse that mechanism here."}</Prose>
-
+<Prose>We have already implemented GRU’s gates in <a href="/learn/path/full-curriculum/rnns-lstms-grus?module=deep-learning-fundamentals">RNNs, LSTMs and GRUs</a>. The new from-scratch task is joining two of those differentiable recurrences with correct token shifting, length handling, shared embedding gradients and candidate ownership. We reuse the exact <a href="/learn-assets/rnns-lstms-grus/recurrent-cells.py">recurrent-cells.py</a> rather than recopying a subtly different gate convention.</Prose>
+<Prose>Where does a different-length batch get its context? Select each row’s last real source state, including source EOS; storage padding is never its context.</Prose>
+<SeqPackingFigure />
+<Prose>The cyan cells are real source positions and dashed cells are PAD storage. The lower violet cells are states after those positions; a white outline selects index length minus one in each row. The native program uses packing to skip PAD recurrence. The explicit program computes the dense history, then gathers each selected state. Because this encoder is unidirectional and causal, later PAD work cannot change earlier valid states or their gradients, but it does consume extra compute. This is a transparent small reference implementation, with no claim to beat optimized native kernels.</Prose>
+<Prose>The explicit cell takes states shaped <code>N × 64</code>; the one-layer native protocol takes <code>1 × N × 64</code>. <code>ExplicitGRU</code> removes that layer axis before the cell and adds it afterward. Both biases and PyTorch’s reset-after candidate convention remain intact. Shared embedding and linear readout are the already taught row lookup and matrix multiplication; the recurrent calculation and protocol are explicit.</Prose>
+<Prose>Save <code>explicit-inflector.py</code>, <code>recurrent-cells.py</code>, <code>inflection-seq2seq.py</code> and <code>seed-one-inference.json</code> together, then run <code>python explicit-inflector.py</code>. Its imports load those local files by name. It demonstrates teacher-forced loss/backward with a matched random model, then runs fixed saved weights source-only; it does not fit a new model. The protocol base supplies batching, output support and search already explained above. Its recurrent modules are explicit cells, not hidden calls to native GRU.</Prose>
+<Seq2SeqProgram file="explicit-inflector.py" title="Compose the differentiable scratch cells into the complete conditional protocol" />
+<Prose>The matched float64 check compares all valid encoder states, context, decoder logits, loss and gradients of all 11 trainable parameter tensors with the native model, including both recurrent biases and the shared embedding. Unsorted lengths, changed PAD cells, nonzero initial decoder state, chunks of 3 + 3 + 1, detached encoder gradients, causal target edits, capped/ended batches and width-one/two/three search are checked. The maximum observed absolute discrepancy was <InlineMath>{"8.881784197001252\\times10^{-16}"}</InlineMath>. That agreement certifies these tested equations and cases, not a latency claim. Native batch generation may continue computing hidden values for rows already ended; compare their valid active outputs and scores rather than treating those unscored later states as part of the answer.</Prose>
+<Prose>For the scalar derivative and the exact constructed search, <code>sequence-mechanics.py</code> gives separate small calculations and assertions. It checks the mechanism without requiring a trained lexicon.</Prose>
 <Seq2SeqProgram file="sequence-mechanics.py" title="Read the scalar joint derivative, manual GRU protocol and exact search checks" />
 
 <Prose>{"The ordinary implementation uses embeddings and "}<code>{"nn.GRU"}</code>{" for encoding/decoding, and explicit code for shifting targets, carrying context and deciding when to end. There is no requirement to replace this small research model with a downloaded language-model wrapper. The supplied beam function owns candidate state: token IDs, accumulated log probability, end status and decoder state must travel together. A batched decoder can share the encoder memory, but its beam-specific hidden states cannot be accidentally shared and mutated."}</Prose>
 
-<Prose>{"The hand-search tree and trained inflector answer different questions. The tree checks search arithmetic exactly; the trained model checks whether learned conditional distributions support useful outputs. Width1 beam should match greedy under the same tie/termination rule. An ended hypothesis is retained without repeatedly consuming EOS, while a hypothesis that reaches the step cap is reported as capped. Length normalization changes ranking; it is not a harmless numerical rescaling."}</Prose>
+<Prose>{"The hand-search tree and trained inflector answer different questions. The tree checks search arithmetic exactly; the trained model checks whether learned conditional distributions support useful outputs. Width 1 beam should match greedy under the same tie/termination rule. An ended hypothesis is retained without repeatedly consuming EOS, while a hypothesis that reaches the step cap is reported as capped. Length normalization changes ranking; it is not a harmless numerical rescaling."}</Prose>
 
-<Prose>{""}<strong>{"Changed-code task:"}</strong>{" add a second source to a batched decoding routine, one ending after2 tokens and another after5. Keep an explicit ended mask and original source IDs. After an example ends, preserve its final sequence and stop assigning it new scored tokens; continue the other example. Test that decoding this batch gives the same two results as separate calls in eval mode. For beam search additionally reorder decoder states with the same parent indices used to gather candidate tokens."}</Prose>
+<Prose>{""}<strong>{"Changed-code task:"}</strong>{" add a second source to a batched decoding routine, one ending after 2 tokens and another after 5. Keep an explicit ended mask and original source IDs. After an example ends, preserve its final sequence and stop assigning it new scored tokens; continue the other example. Test that decoding this batch gives the same two results as separate calls in eval mode. For beam search additionally reorder decoder states with the same parent indices used to gather candidate tokens."}</Prose>
 
 <details>
 
@@ -288,17 +228,23 @@ export default {
 
 <h3 className="lesson-teaching-section__title">Different context interfaces: GRU, LSTM, stacks and attention</h3>
 
+<Prose>What changes if the decoder needs more than one carried state? Hidden and cell memory are different paths; projections must match the receiver’s width and layer count.</Prose>
+<SeqStateTransferFigure />
 <Prose>{"Our decoder initializes from one GRU state. An LSTM has both hidden state "}<InlineMath>{"h"}</InlineMath>{" and cell state "}<InlineMath>{"c"}</InlineMath>{"; a complete handoff must say what happens to both. With several layers, state has a layer axis. A bidirectional encoder has two directional states per layer. “Pass the final hidden vector” is insufficient when the decoder expects a different shape or a missing cell state."}</Prose>
 
 <Prose>{"If encoder and decoder widths differ, a learned projection can map a concatenated encoder representation into the required decoder state. For example, two encoder directions of 64 coordinates can be concatenated into 128 and projected to a 64-coordinate decoder state. An LSTM may need separate projections for hidden and cell states. A deliberate zero initialization with a separately supplied context is another design."}</Prose>
 
+<Prose>Does source information enter once or remain available at every output step? Compare the three access paths before choosing an interface. In the attention sketch, a query means the previous decoder state used to decide what source information to read; each step has its own query and read.</Prose>
+<SeqInterfacesFigure />
 <Prose>{"Context can also be concatenated to the decoder input at every step. That repeatedly supplies the same source summary, whereas attention supplies a "}<strong>{"different weighted combination of source states"}</strong>{" for each decoding step. The next lesson derives that mechanism. The difference is access to information, not a guarantee that the weights perfectly explain language or that generation becomes factual."}</Prose>
 
 <Prose>{"The 2014 Sutskever system demonstrated large recurrent encoder–decoder translation with word vocabularies and unknown-word tokens. Its reported 34.81 BLEU result used an ensemble of five models and beam 12. Source reversal shortened some important dependency paths; it did not reverse the target language or eliminate recurrent computation. The paper actually reported good performance on long sentences in that setting, so a universal “fails after 30 words” claim would misrepresent it. "}<a href={"https://arxiv.org/abs/1409.3215"}>{"Sequence to Sequence Learning with Neural Networks"}</a>{"."}</Prose>
 
+<Prose>Can a source-order change shorten a dependency without changing the requested answer? Trace the same A→X, B→Y, C→Z alignment through both chains.</Prose>
+<SeqReversalFigure />
 <Prose>{"Use a constructed alignment A→X, B→Y, C→Z to see what reversal changes. Count state-to-state edges from the source token's encoder state to its aligned decoder output, in a single-summary recurrent chain:"}</Prose>
 
-<NeuralTable caption={"9. Deeper connections and practical extensions"} headers={[<>{"Aligned information"}</>,<>{"Encode A B C, then decode X Y Z"}</>,<>{"Encode C B A, then decode X Y Z"}</>]} rows={[[<>{"A needed for X"}</>,<>{"A→B→C→X: 3 edges"}</>,<>{"A→X: 1 edge"}</>],[<>{"B needed for Y"}</>,<>{"B→C→X→Y: 3 edges"}</>,<>{"B→A→X→Y: 3 edges"}</>],[<>{"C needed for Z"}</>,<>{"C→X→Y→Z: 3 edges"}</>,<>{"C→B→A→X→Y→Z: 5 edges"}</>]]} />
+<NeuralTable caption={"Source reversal changes individual path lengths"} headers={[<>{"Aligned information"}</>,<>{"Encode A B C, then decode X Y Z"}</>,<>{"Encode C B A, then decode X Y Z"}</>]} rows={[[<>{"A needed for X"}</>,<>{"A→B→C→X: 3 edges"}</>,<>{"A→X: 1 edge"}</>],[<>{"B needed for Y"}</>,<>{"B→C→X→Y: 3 edges"}</>,<>{"B→A→X→Y: 3 edges"}</>],[<>{"C needed for Z"}</>,<>{"C→X→Y→Z: 3 edges"}</>,<>{"C→B→A→X→Y→Z: 5 edges"}</>]]} />
 
 <Prose>{"Some early output dependencies become shorter while later ones become longer; the average in this small construction stays 3. Real language alignments are more complicated. Reversal is an ordering choice that changes credit paths, not a way to remove the source-summary bottleneck or a universal preprocessing rule."}</Prose>
 
@@ -312,12 +258,16 @@ export default {
 
 <Prose>{"Scheduled sampling mixes reference and generated previous tokens during training, typically changing the mixing probability over time. The targets can remain the original next tokens even when the prefix has changed. That means it is no longer simply evaluating the original data likelihood. The original proposal reported useful results, while an analysis of the sampling objective showed an inconsistency even in a two-symbol setting: replacing the first symbol independently can encourage prediction of the second marginal rather than the correct conditional relationship. It is not an automatic required upgrade. "}<a href={"https://arxiv.org/abs/1506.03099"}>{"Bengio et al."}</a>{", "}<a href={"https://arxiv.org/abs/1511.05101"}>{"Huszár's analysis, section 4"}</a>{"."}</Prose>
 
+<Prose>What relationship does a replaced prefix teach? The following constructed joint distributions show exactly where contradictory pairs come from.</Prose>
+<ScheduledPrefixFigure />
 <Prose>{"The replacement can change the relationship being taught. Suppose the only true two-symbol sequences are 00 and 11, equally common. The second symbol should copy the first. If the first symbol is always replaced by an independent fair generated bit while the second target is kept, all four shown-prefix/target pairs become equally common. Half the examples now tell the model to contradict the shown bit. Predicting the target marginal 50/50 is optimal for that corrupted pair distribution. The figure isolates this limiting mechanism; partial replacement and real models require their own analysis."}</Prose>
 
-<ScheduledPrefixFigure />
+
 
 <Prose>{"Sequence-level objectives can optimize a reward or risk attached to the complete answer. They introduce their own estimation, optimization and evaluation questions. Label smoothing changes target distributions at the loss; it does not itself train on the model's wrong prefixes. Keep these mechanisms distinct when interpreting an experiment."}</Prose>
 
+<Prose>What if success belongs to the whole answer? Weight a complete-answer reward by that answer’s probability rather than differentiating an argmax string.</Prose>
+<SeqRewardFigure />
 <Prose>{"For an inspectable sequence-level objective, let a tiny model choose between two complete answers A and B with probabilities .6 and .4, and assign task rewards 0 and 1. Expected reward is .4. If B's probability is a sigmoid of a logit difference, increasing that difference has reward derivative .4×.6=.24. The gradient acts on probability assigned to complete outcomes, not on a differentiable argmax string. Large output spaces cannot usually be enumerated like these two routes: sampling-based estimators or restricted candidate approximations introduce variance or bias, and the reward must actually reflect the task. Label smoothing instead redistributes a per-token training target; it does not perform this expected-reward calculation."}</Prose>
 
 </section>
@@ -326,6 +276,11 @@ export default {
 
 <h3 className="lesson-teaching-section__title">Search costs, stopping and model deployment</h3>
 
+<Prose>How should smoothing interact with a hard output mask? A forbidden class must receive no target mass; an ignored PAD position is a different kind of exclusion.</Prose>
+<SeqSmoothingFigure />
+<Prose>In the three-score illustration, two allowed logits are zero and one forbidden logit is negative infinity. Without smoothing, correct class 0 costs log 2. PyTorch’s ordinary smoothing of 0.1 mixes with a uniform distribution over all three classes: target masses are 0.933333, 0.033333, 0.033333. The impossible class gets nonzero mass, so loss is infinite. Restrict to the two allowed logits and remap target IDs before calling cross-entropy; masses become 0.95 and 0.05 and loss stays log 2. Do not form a manual zero-times-negative-infinity product, which can give NaN. This addition explains a modification; the recorded fits used smoothing zero.</Prose>
+<CodeBlock language="python" filename="allowed-support-loss-snippet.py">{"# Snippet: adapt the loss in inflection-seq2seq.py.\n# logits: (N, T, 32); target: (N, T), PAD=0.\nallowed = torch.tensor([2, *range(6, 32)], device=logits.device)\nvalid = target.ne(0)\nremap = torch.full((32,), -1, dtype=torch.long, device=target.device)\nremap[allowed] = torch.arange(27, device=target.device)\nloss = torch.nn.functional.cross_entropy(\n    logits[valid][:, allowed], remap[target[valid]],\n    label_smoothing=0.1,\n)"}</CodeBlock>
+<Prose>This downloadable block is a loss-adaptation snippet, not a standalone program. Its complete context is <a href={seq2seqAsset + "inflection-seq2seq.py"}>inflection-seq2seq.py</a>. Ignore whole PAD positions before smoothing; restrict class support inside each remaining position. Verify finite loss and finite gradients before using a different training objective (<a href="https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html">PyTorch cross-entropy documentation</a>).</Prose>
 <Prose>{"With output vocabulary size "}<InlineMath>{"V"}</InlineMath>{", limit "}<InlineMath>{"T"}</InlineMath>{" and beam width "}<InlineMath>{"K"}</InlineMath>{", exhaustive enumeration has exponentially many possible paths, whereas beam expansion considers roughly "}<InlineMath>{"KVT"}</InlineMath>{" token extensions. This count omits the cost of each neural state update, embedding lookup, projection and sorting. It is an algorithmic description, not a measured latency claim."}</Prose>
 
 <Prose>{"For raw log scores, extending a particular live path cannot improve its score. A completed candidate that already beats every live prefix cannot be beaten by descendants of those retained prefixes. This does not recover routes already pruned. Length-normalized scores need a compatible bound because their denominator changes; borrowing a raw-score stopping proof would be invalid."}</Prose>
@@ -440,7 +395,7 @@ export default {
 
 <summary>Solution</summary>
 
-<Prose>{"Distinct spellings can represent closely related variants and share targets. The report overstates what its check proves. This packet conservatively links selected lemma spellings sharing a target, keeps the connected group in one partition and records the policy. It still does not claim to have solved all linguistic alias detection."}</Prose>
+<Prose>{"Distinct spellings can represent closely related variants and share targets. The report overstates what its check proves. This extract conservatively links selected lemma spellings sharing a target, keeps the connected group in one partition and records the policy. It still does not claim to have solved all linguistic alias detection."}</Prose>
 
 </details></div>
 
@@ -506,8 +461,8 @@ export default {
 
 <section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H2>{"11. References, another way to learn, and the next step"}</H2>
 
-<ul><li>{""}<a href={"https://d2l.ai/chapter_recurrent-modern/seq2seq.html"}>{"Dive into Deep Learning 1.0.3: encoder–decoder, seq2seq and beam search"}</a>{". A useful second implementation route, especially the shifted-target and masking sections. Read the beam chapter with its exact score convention in view; increasing the denominator of a negative log score does not universally penalize longer outputs."}</li><li>{""}<a href={"https://arxiv.org/abs/1409.3215"}>{"Sutskever, Vinyals and Le 2014"}</a>{". Read section 2 for the original model contract and sections 3.2–3.3 for search and source reversal. Its large translation experiment is historical evidence, not the setup of our small character model."}</li><li>{""}<a href={"https://arxiv.org/abs/1406.1078"}>{"Cho et al. 2014: RNN Encoder–Decoder"}</a>{". A complementary formulation in which source context enters the conditional decoder. Useful after you can trace our simpler initial-state interface."}</li><li>{""}<a href={"https://www.youtube.com/watch?v=XXtpJxZBa2c"}>{"Stanford CS224N 2019, Lecture 8: Translation, Seq2Seq, Attention"}</a>{", with "}<a href={"https://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes06-NMT_seq2seq_attention.pdf"}>{"companion notes"}</a>{". A lecture-based alternative covering the motivation and the transition to attention. The basic encoder–decoder portions fit this lesson; return to the attention portion after the next one. The resource's age matters for “current standard” statements and framework code."}</li><li>{""}<a href={"https://unimorph.github.io/"}>{"UniMorph schema and data project"}</a>{", "}<a href={"https://aclanthology.org/2022.lrec-1.89/"}>{"UniMorph 4.0 paper"}</a>{", and "}<a href={"https://github.com/unimorph/eng/tree/66e0e9e8e2dcd196da081a25a48e5c1fe3d8b49b"}>{"the pinned English source"}</a>{". These explain what the real lexical records mean. The supplied extract retains source row numbers, filtering, grouping and CC BY-SA 3.0 attribution."}</li><li>{""}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html"}>{"PyTorch 2.14 CrossEntropyLoss"}</a>{". Use this to verify raw-logit input, class indices, "}<code>{"ignore_index"}</code>{" and reduction when adapting the program."}</li></ul>
+<ul><li><a href="https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html">PyTorch GRU</a> and <a href="https://docs.pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html">the official translation tutorial</a>. Compare the exact recurrent gate convention, state axes, source/target construction and the native encoder–decoder route. This lesson’s small grouped inflection experiment is separate from that tutorial’s translation data.</li><li><a href="https://d2l.ai/chapter_recurrent-modern/beam-search.html">D2L beam search</a> and <a href="https://huggingface.co/docs/transformers/en/main_classes/text_generation">Transformers generation configuration</a>. Compare the score and stop contracts rather than treating beam width, length penalty or early stopping as universal definitions.</li><li>{""}<a href={"https://d2l.ai/chapter_recurrent-modern/seq2seq.html"}>{"Dive into Deep Learning 1.0.3: encoder–decoder, seq2seq and beam search"}</a>{". A useful second implementation route, especially the shifted-target and masking sections. Read the beam chapter with its exact score convention in view; increasing the denominator of a negative log score does not universally penalize longer outputs."}</li><li>{""}<a href={"https://arxiv.org/abs/1409.3215"}>{"Sutskever, Vinyals and Le 2014"}</a>{". Read section 2 for the original model contract and sections 3.2–3.3 for search and source reversal. Its large translation experiment is historical evidence, not the setup of our small character model."}</li><li>{""}<a href={"https://arxiv.org/abs/1406.1078"}>{"Cho et al. 2014: RNN Encoder–Decoder"}</a>{". A complementary formulation in which source context enters the conditional decoder. Useful after you can trace our simpler initial-state interface."}</li><li>{""}<a href={"https://www.youtube.com/playlist?list=PLoROMvodv4rOaMFbaqxPDoLWjDaRAdP9D"}>{"Stanford CS224N Spring 2024 public lecture playlist"}</a>{", with "}<a href={"https://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes06-NMT_seq2seq_attention.pdf"}>{"companion notes"}</a>{". A lecture-based alternative covering the motivation and the transition to attention. The basic encoder–decoder portions fit this lesson; return to the attention portion after the next one. The resource's age matters for “current standard” statements and framework code."}</li><li>{""}<a href={"https://unimorph.github.io/"}>{"UniMorph schema and data project"}</a>{", "}<a href={"https://aclanthology.org/2022.lrec-1.89/"}>{"UniMorph 4.0 paper"}</a>{", and "}<a href={"https://github.com/unimorph/eng/tree/66e0e9e8e2dcd196da081a25a48e5c1fe3d8b49b"}>{"the pinned English source"}</a>{". These explain what the real lexical records mean. The supplied extract retains source row numbers, filtering, grouping and CC BY-SA 3.0 attribution."}</li><li>{""}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html"}>{"PyTorch 2.14 CrossEntropyLoss"}</a>{". Use this to verify raw-logit input, class indices, "}<code>{"ignore_index"}</code>{" and reduction when adapting the program."}</li></ul>
 
 <Prose>{"You can now connect source tokens, encoder state, decoder state, next-token probabilities, sequence loss and a complete generation procedure. Next, "}<a href={"/learn/path/full-curriculum/attention-mechanism-bahdanau-luong?module=deep-learning-fundamentals"}>{"Attention Mechanisms: Bahdanau and Luong"}</a>{" lets the decoder consult the sequence of encoder states at each output step. We will test that change on this same bounded task rather than assume it solves every failure."}</Prose></section>
- </div>,
+ </SeqFittedProvider></SeqTreeProvider></SeqScalarProvider></div>,
 };

@@ -1,0 +1,12 @@
+records / duration range (seconds): 4521 4 3025
+exact mean / second / variance: 1193369/4521 620218345/4521 1379877567584/20439441
+NumPy mean / second / variance: 263.961292 137186.097102 67510.53356
+hypothetical busy inspection residual (seconds): 259.860255
+longest selected count / count share / duration share: 453 0.100199 0.332364
+duration bins: lower-exclusive / upper-inclusive / count / count share / time share
+0 60 492 0.108825 0.014076
+60 120 887 0.196196 0.067697
+120 300 1879 0.415616 0.308015
+300 600 841 0.186021 0.293147
+600 86400 422 0.093342 0.317065
+hypothetical arrival rate (per second) / load / mean wait (seconds): 0.001894217 0.5 259.860255

@@ -1,0 +1,1176 @@
+{
+  "scope": "Once-only new pure mechanisms and saved maps. No old fit/main/study, no new ordinary estimator fit.",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "checks": [
+    {
+      "name": "row mass",
+      "actual": 0.9999999999999998,
+      "expected": 1,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "row target",
+      "actual": 2.0000000000367364,
+      "expected": 2,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "row scaling",
+      "actual": [
+        0.727177260811295,
+        0.23646217202231343,
+        0.0363605671663916
+      ],
+      "expected": [
+        0.7271772608165872,
+        0.23646217201887287,
+        0.03636056716453976
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "nearest tie target",
+      "refused": "Target lies outside the nearest-tie/count interval"
+    },
+    {
+      "name": "tie boundary",
+      "actual": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "expected": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "P total",
+      "actual": 1.0,
+      "expected": 1,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "P symmetric",
+      "actual": [
+        [
+          0.0,
+          0.1575006262450747,
+          0.069448540287264,
+          0.00972141156256353
+        ],
+        [
+          0.1575006262450747,
+          0.0,
+          0.14093728475176479,
+          0.022197396217366924
+        ],
+        [
+          0.069448540287264,
+          0.14093728475176479,
+          0.0,
+          0.10019474093596607
+        ],
+        [
+          0.00972141156256353,
+          0.022197396217366924,
+          0.10019474093596607,
+          0.0
+        ]
+      ],
+      "expected": [
+        [
+          0.0,
+          0.1575006262450747,
+          0.069448540287264,
+          0.00972141156256353
+        ],
+        [
+          0.1575006262450747,
+          0.0,
+          0.14093728475176479,
+          0.022197396217366924
+        ],
+        [
+          0.069448540287264,
+          0.14093728475176479,
+          0.0,
+          0.10019474093596607
+        ],
+        [
+          0.00972141156256353,
+          0.022197396217366924,
+          0.10019474093596607,
+          0.0
+        ]
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "P diagonal",
+      "actual": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected": 0,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "centered Gram",
+      "actual": [
+        [
+          5.444444444444444,
+          0.7777777777777777,
+          -6.222222222222222
+        ],
+        [
+          0.7777777777777777,
+          0.11111111111111072,
+          -0.8888888888888888
+        ],
+        [
+          -6.222222222222222,
+          -0.8888888888888888,
+          7.111111111111112
+        ]
+      ],
+      "expected": [
+        [
+          5.444444444444445,
+          0.7777777777777778,
+          -6.222222222222222
+        ],
+        [
+          0.7777777777777778,
+          0.1111111111111111,
+          -0.8888888888888888
+        ],
+        [
+          -6.222222222222222,
+          -0.8888888888888888,
+          7.111111111111111
+        ]
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "line spectrum",
+      "actual": [
+        12.666666666666668,
+        9.346811506443043e-16,
+        -9.346811506443043e-16
+      ],
+      "expected": [
+        12.666666666666666,
+        0.0,
+        0.0
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "classical distances",
+      "actual": [
+        [
+          0.0,
+          1.9999999999999993,
+          5.0
+        ],
+        [
+          1.9999999999999993,
+          0.0,
+          3.0000000000000013
+        ],
+        [
+          5.0,
+          3.0000000000000013,
+          0.0
+        ]
+      ],
+      "expected": [
+        [
+          0.0,
+          2.0,
+          5.0
+        ],
+        [
+          2.0,
+          0.0,
+          3.0
+        ],
+        [
+          5.0,
+          3.0,
+          0.0
+        ]
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "metric line stress",
+      "actual": 0.0,
+      "expected": 0,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "non-Euclidean triangle spectrum",
+      "actual": [
+        4.5,
+        -1.514822076166566e-16,
+        -0.833333333333333
+      ],
+      "expected": [
+        4.5,
+        0.0,
+        -0.8333333333333334
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "route SciPy radius 0.75",
+      "actual": [
+        [
+          0.0,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          0.0,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          0.0,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          0.0,
+          Infinity,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          0.0,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          0.0,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          0.0
+        ]
+      ],
+      "expected": [
+        [
+          0.0,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          0.0,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          0.0,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          0.0,
+          Infinity,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          0.0,
+          Infinity,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          0.0,
+          Infinity
+        ],
+        [
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          Infinity,
+          0.0
+        ]
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "route SciPy radius 1",
+      "actual": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        [
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0
+        ],
+        [
+          3.0,
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        [
+          4.0,
+          3.0,
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          5.0,
+          4.0,
+          3.0,
+          2.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          6.0,
+          5.0,
+          4.0,
+          3.0,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "expected": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        [
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0
+        ],
+        [
+          3.0,
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          3.0
+        ],
+        [
+          4.0,
+          3.0,
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          5.0,
+          4.0,
+          3.0,
+          2.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          6.0,
+          5.0,
+          4.0,
+          3.0,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "route SciPy radius 1.5",
+      "actual": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          2.414213562373095,
+          3.414213562373095,
+          3.82842712474619,
+          4.82842712474619
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          1.4142135623730951,
+          2.414213562373095,
+          2.8284271247461903,
+          3.8284271247461903
+        ],
+        [
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          2.414213562373095,
+          3.414213562373095
+        ],
+        [
+          2.414213562373095,
+          1.4142135623730951,
+          1.0,
+          0.0,
+          1.0,
+          1.4142135623730951,
+          2.414213562373095
+        ],
+        [
+          3.414213562373095,
+          2.414213562373095,
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          3.82842712474619,
+          2.8284271247461903,
+          2.414213562373095,
+          1.4142135623730951,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          4.82842712474619,
+          3.8284271247461903,
+          3.414213562373095,
+          2.414213562373095,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "expected": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          2.414213562373095,
+          3.414213562373095,
+          3.82842712474619,
+          4.82842712474619
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          1.4142135623730951,
+          2.414213562373095,
+          2.8284271247461903,
+          3.8284271247461903
+        ],
+        [
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          2.414213562373095,
+          3.414213562373095
+        ],
+        [
+          2.414213562373095,
+          1.4142135623730951,
+          1.0,
+          0.0,
+          1.0,
+          1.4142135623730951,
+          2.414213562373095
+        ],
+        [
+          3.414213562373095,
+          2.414213562373095,
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          3.8284271247461903,
+          2.8284271247461903,
+          2.414213562373095,
+          1.4142135623730951,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          4.82842712474619,
+          3.82842712474619,
+          3.414213562373095,
+          2.414213562373095,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "route SciPy radius 2",
+      "actual": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          2.414213562373095,
+          3.414213562373095,
+          3.0,
+          2.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          1.4142135623730951,
+          2.414213562373095,
+          2.0,
+          3.0
+        ],
+        [
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          2.414213562373095,
+          3.414213562373095
+        ],
+        [
+          2.414213562373095,
+          1.4142135623730951,
+          1.0,
+          0.0,
+          1.0,
+          1.4142135623730951,
+          2.414213562373095
+        ],
+        [
+          3.414213562373095,
+          2.414213562373095,
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          3.0,
+          2.0,
+          2.414213562373095,
+          1.4142135623730951,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          2.0,
+          3.0,
+          3.414213562373095,
+          2.414213562373095,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "expected": [
+        [
+          0.0,
+          1.0,
+          2.0,
+          2.414213562373095,
+          3.414213562373095,
+          3.0,
+          2.0
+        ],
+        [
+          1.0,
+          0.0,
+          1.0,
+          1.4142135623730951,
+          2.414213562373095,
+          2.0,
+          3.0
+        ],
+        [
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0,
+          2.414213562373095,
+          3.414213562373095
+        ],
+        [
+          2.414213562373095,
+          1.4142135623730951,
+          1.0,
+          0.0,
+          1.0,
+          1.4142135623730951,
+          2.414213562373095
+        ],
+        [
+          3.414213562373095,
+          2.414213562373095,
+          2.0,
+          1.0,
+          0.0,
+          1.0,
+          2.0
+        ],
+        [
+          3.0,
+          2.0,
+          2.414213562373095,
+          1.4142135623730951,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          2.0,
+          3.0,
+          3.414213562373095,
+          2.414213562373095,
+          2.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "U connected routes",
+      "actual": [
+        6.0,
+        4.82842712474619,
+        2.0
+      ],
+      "expected": [
+        6.0,
+        4.82842712474619,
+        2.0
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "LLE interior",
+      "actual": [
+        0.6666666666666667,
+        0.3333333333333333
+      ],
+      "expected": [
+        0.6666666666666666,
+        0.3333333333333333
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "LLE extrapolation",
+      "actual": [
+        -0.33333333333333326,
+        1.3333333333333333
+      ],
+      "expected": [
+        -0.3333333333333333,
+        1.3333333333333333
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "LLE duplicates",
+      "actual": [
+        0.5,
+        0.5
+      ],
+      "expected": [
+        0.5,
+        0.5
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "W row sums",
+      "actual": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "expected": 1,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "LLE centroid",
+      "actual": [
+        -1.3322676295501878e-16
+      ],
+      "expected": 0,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "LLE covariance",
+      "actual": [
+        [
+          1.0
+        ]
+      ],
+      "expected": [
+        [
+          1
+        ]
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "chain energy",
+      "actual": 5.0,
+      "expected": 5,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "walk two steps",
+      "actual": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "expected": [
+        0.5,
+        0.0,
+        0.5
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "generalized/symmetric spectra",
+      "actual": [
+        4.9439619065339e-17,
+        1.0,
+        1.9999999999999998
+      ],
+      "expected": [
+        4.9439619065339e-17,
+        1.0,
+        1.9999999999999998
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "flat tangent residual",
+      "actual": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected": 0,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "curvature stencil",
+      "actual": 0.2,
+      "expected": 0.2,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "zero rate events",
+      "actual": [
+        [
+          0.0
+        ],
+        [
+          0.0
+        ],
+        [
+          0.0
+        ]
+      ],
+      "expected": 0,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "positive endpoint conservation",
+      "actual": [
+        4.0
+      ],
+      "expected": [
+        4.0
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "weighted radius",
+      "actual": 3.6666666666666665,
+      "expected": 3.6666666666666665,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "radius scale",
+      "actual": 14.666666666666666,
+      "expected": 14.666666666666666,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "reference interpolation",
+      "actual": [
+        2.0
+      ],
+      "expected": [
+        2
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "saved pca R10",
+      "actual": 0.37633333333333335,
+      "expected": 0.37633333333333335,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "saved tsne-p30-s7 R10",
+      "actual": 0.7703333333333334,
+      "expected": 0.7703333333333334,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "source30 PCA common",
+      "actual": 6,
+      "expected": 6,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "source30 t-SNE common",
+      "actual": 5,
+      "expected": 5,
+      "tolerance": 1e-08
+    },
+    {
+      "name": "audit identity",
+      "actual": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "expected": [
+        1,
+        1,
+        1
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "audit permutation/translation",
+      "actual": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "expected": [
+        1,
+        1,
+        1
+      ],
+      "tolerance": 1e-08
+    },
+    {
+      "name": "audit rank domain",
+      "refused": "Use matched finite rows, unique IDs and 1 <= k < n/2"
+    }
+  ],
+  "gaussian": {
+    "conditional": [
+      [
+        0.0,
+        0.6558872697854092,
+        0.33289945467725446,
+        0.011213275537336309
+      ],
+      [
+        0.6041177401751883,
+        0.0,
+        0.3919950082893136,
+        0.003887251535498156
+      ],
+      [
+        0.22268886762085754,
+        0.7355032697248046,
+        0.0,
+        0.04180786265433779
+      ],
+      [
+        0.06655801696317193,
+        0.17369191820343724,
+        0.7597500648333908,
+        0.0
+      ]
+    ],
+    "P": [
+      [
+        0.0,
+        0.1575006262450747,
+        0.069448540287264,
+        0.00972141156256353
+      ],
+      [
+        0.1575006262450747,
+        0.0,
+        0.14093728475176479,
+        0.022197396217366924
+      ],
+      [
+        0.069448540287264,
+        0.14093728475176479,
+        0.0,
+        0.10019474093596607
+      ],
+      [
+        0.00972141156256353,
+        0.022197396217366924,
+        0.10019474093596607,
+        0.0
+      ]
+    ],
+    "states": [
+      [
+        0.08476855285698548,
+        "converged"
+      ],
+      [
+        0.14417333574965596,
+        "converged"
+      ],
+      [
+        0.23895588016603142,
+        "converged"
+      ],
+      [
+        0.07378531861468218,
+        "converged"
+      ]
+    ]
+  },
+  "triangleEigenvalues": [
+    4.5,
+    -1.514822076166566e-16,
+    -0.833333333333333
+  ],
+  "routes": [
+    Infinity,
+    6.0,
+    4.82842712474619,
+    2.0
+  ],
+  "streams": [
+    {
+      "program": "audit_saved_neighbors.py",
+      "sourceSha256": "21246557a18f1b495196f65a73804eebb9e956a19e7946fc7d98bfe3ceb527b0",
+      "output": "outputs/audit_saved_neighbors.txt",
+      "outputSha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "classical_geometry.py",
+      "sourceSha256": "8cb4a4ce6e8648ce1253b978aea5e0729ff631e60ebd2d2b6ff28439d47447a2",
+      "output": "outputs/classical_geometry.txt",
+      "outputSha256": "eaebb28b62c1c3044269372513bdcffa665ae267c578d27c88207377be7f600e",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "gaussian_rows.py",
+      "sourceSha256": "7a9290f1d0583a94c7e32bb75d7b4eb0b45d26bc81fcf6329b52937f380e6955",
+      "output": "outputs/gaussian_rows.txt",
+      "outputSha256": "86f66f5dd88b8f6d66a5bc875464b5359f3d85aed14d0f8e1f58196430f60482",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "graph_spectrum.py",
+      "sourceSha256": "f48eefd33c78bd4e24bbc876f0dce2fd4b435b66e37e38a78c8c6c310fee5965",
+      "output": "outputs/graph_spectrum.txt",
+      "outputSha256": "2f0768aca4ec37081344442250d5651292aa3aac0363d935af84465ff71b3052",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "isomap_routes.py",
+      "sourceSha256": "d4aa583b327c37566c120c80ae534cddef48092d808c2ab45a43816e84b5af05",
+      "output": "outputs/isomap_routes.txt",
+      "outputSha256": "927a07922cc9c0fe80eed41244cf44d0151d9296333eb32b358b9a5d16288e63",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "lle_recipes.py",
+      "sourceSha256": "ff115c9c9d62262ba8192fad62d0157c024d674256c58cedaa61e105bf17c378",
+      "output": "outputs/lle_recipes.txt",
+      "outputSha256": "a11bbb8992488dd8bd7e7d361709f78301c80c5f3d32e1045156d87cc6969539",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "local_density_radius.py",
+      "sourceSha256": "166ed917a514c08ab7e9620b475c42f78e78e70c403d081644d1afa62e24dfe1",
+      "output": "outputs/local_density_radius.txt",
+      "outputSha256": "a818a30441964c4ca1032ad41f705e3c7b21141f32fe4aaeffafa8f2e3d71c0d",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "local_tangent_patch.py",
+      "sourceSha256": "c7eae35d006b759f42e061def70c9928242a52fc30dc34c3fb61f37e80d4453b",
+      "output": "outputs/local_tangent_patch.txt",
+      "outputSha256": "dc02cd27e0e74b51bd9d7ca48268737aeb1945fa072a6613315a209f6dfa0893",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "reference_map_routes.py",
+      "sourceSha256": "96d065b7c9cf119002e89d3cf508f788a4918bcec38d4fa993839f570aef7ac9",
+      "output": "outputs/reference_map_routes.txt",
+      "outputSha256": "721d27d5db1f4620819ff56a1c085e088408917aa1cac5be631f229431659d83",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    },
+    {
+      "program": "sampled_pair_events.py",
+      "sourceSha256": "a6a56714b6b88cd846437b52d844a8aa01db774dc66050bdec67cca563cc57a9",
+      "output": "outputs/sampled_pair_events.txt",
+      "outputSha256": "39ed590e69e1f9f7dafc29c762cb88728670740430c6cdede7d850cc3fc5706e",
+      "exitCode": 0,
+      "role": "new deterministic scratch/saved-array example; ordinary fitting functions NOT called"
+    }
+  ]
+}

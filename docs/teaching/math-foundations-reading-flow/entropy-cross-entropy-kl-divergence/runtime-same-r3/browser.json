@@ -1,0 +1,412 @@
+{
+  "source": "9508ab0d685a9af3132ed43c9a48ab4275308ddac36b2116b2792e6b790b1db9",
+  "scope": "SAME ER1–ER3; no scientific mains",
+  "checks": [
+    {
+      "name": "ER1 invalid message feedback",
+      "pass": true
+    },
+    {
+      "name": "ER1 invalid-at-default reset",
+      "pass": true,
+      "value": "AAAABBCD"
+    },
+    {
+      "name": "ER1 unsubmitted message reset",
+      "pass": true
+    },
+    {
+      "name": "ER1 shared invalid feedback",
+      "pass": true
+    },
+    {
+      "name": "ER1 earlier shared reset clears later draft",
+      "pass": true,
+      "value": "1.4285714285714286"
+    },
+    {
+      "name": "ER1 valid mean propagates",
+      "pass": true,
+      "text": "E43 Investigate the feasible slice before choosing a criterion\n\n▲ count 2: q₂=1\n\n● count 0\nq₀=1\n■ count 1\nq₁=1\n\nCurrent q is the blue circle. The white segment contains exactly the laws satisfying the selected mean.\n\nCurrent q in count order\n\ncount 0 0\ncount 1 1\ncount 2 0\nsum q = 1\nmean = 1\nt=q₂=0\nfeasible t ∈ [0, 0.5]\nFeasible-slice fraction — stage 1: 0\nReset investigation\n\nAll three investigation positions share this state. Scrolling does not reset it; reset anywhere restores mean 10/7 and fraction 0."
+    },
+    {
+      "name": "ER1 middle shared reset restores mean",
+      "pass": true
+    },
+    {
+      "name": "ER1 weight draft family reset",
+      "pass": true,
+      "value": "4, 2, 1, 1"
+    },
+    {
+      "name": "ER3 live H CE KL aligned lengths",
+      "pass": true,
+      "text": "Source entropy and model cost. Aligned length scale: 0–2.8875 bits.\n\nH = 1.75 bits\n\nCE = 2.625 bits\n\nExcess starts at H=1.75: KL mismatch 0.875 bits.\n\n0\n2.8875 bits\n━ KL mismatch: 0.875 bits",
+      "widths": [
+        460,
+        690,
+        230
+      ],
+      "lefts": [
+        255,
+        255,
+        715
+      ]
+    },
+    {
+      "name": "ER3 Kraft contiguous .875 and1",
+      "pass": true,
+      "sizes": [
+        {
+          "width": 166.546875,
+          "left": 588.09375
+        },
+        {
+          "width": 190.34375,
+          "left": 754.640625
+        }
+      ]
+    },
+    {
+      "name": "ER3 matched code explicit zero",
+      "pass": false
+    },
+    {
+      "name": "ER2 available-width core E03",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 available-width core E08",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 available-width core E14",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 available-width core E22",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 available-width core E26",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 available-width core E29",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [],
+      "paths": [
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        }
+      ],
+      "text": [
+        "32px"
+      ]
+    },
+    {
+      "name": "ER2 available-width core E30",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [],
+      "paths": [
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        }
+      ],
+      "text": [
+        "32px"
+      ]
+    },
+    {
+      "name": "ER2 available-width core E31",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [],
+      "paths": [
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        }
+      ],
+      "text": [
+        "32px"
+      ]
+    },
+    {
+      "name": "ER2 available-width core E32",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [],
+      "paths": [
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "client": 309,
+          "scroll": 309
+        }
+      ],
+      "text": [
+        "32px"
+      ]
+    },
+    {
+      "name": "ER2 available-width core E42",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 available-width core E43",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 available-width core E44",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "client": 309,
+          "scroll": 620,
+          "svg": 620
+        }
+      ],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 available-width core E45",
+      "pass": true,
+      "figure": 309.21875,
+      "canvases": [
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "client": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "client": 309,
+          "scroll": 620,
+          "svg": 620
+        }
+      ],
+      "paths": [],
+      "text": []
+    },
+    {
+      "name": "ER2 actual SVG text enlarged",
+      "pass": false,
+      "css": 40.7323,
+      "scale": 0.6441851265822784
+    },
+    {
+      "name": "ER2 extreme class operation values",
+      "pass": true,
+      "text": "▲ Class 2\n\nScore z\n-2000\nSubtract shared maximum m=0\nz − m = -2000\nExponentiate this shifted score\n0\nFeed the shared sum S\nclass 2 contribution = 0"
+    },
+    {
+      "name": "ER3 live matched law zero",
+      "pass": true
+    },
+    {
+      "name": "ER3 support infinity no false finite total",
+      "pass": true
+    },
+    {
+      "name": "ER2 font restoration",
+      "pass": false,
+      "restored": 13.119603125
+    },
+    {
+      "name": "no browser errors",
+      "pass": true,
+      "errors": []
+    }
+  ],
+  "screens": [
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E29-supervised-desktop.jpg",
+      "sha256": "10ad0bfa80d98756eb971e4f60f8cd537ce74d45a5e4a96a5e12ae588c3952c6"
+    },
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E08-prefix-386-root32.jpg",
+      "sha256": "dc78e75aaf794e1af32e5a43929ca9175be6a8d9a93a012ad7a5c233306eb695"
+    },
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E03-product-386-root32.jpg",
+      "sha256": "8454779fbc711f5045460f7cb2064c8f81f4e3334eb7be8552f12e5d48408b40"
+    },
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E42-simplex-386-root32.jpg",
+      "sha256": "f9bd47a39f440226a58cdb1d767bbca340e7482258b45b943fe842b3abab9e4e"
+    },
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E14-gap-386-root32.jpg",
+      "sha256": "307f38361f5da0ac808eae00dc8518bbe1ae103ef823e3ef5c4c716e94db4c9d"
+    },
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E22-overhead-386-root32.jpg",
+      "sha256": "8c4049b0ef0d55903905fcff1e6838dcd75f8d5cf73e65676da34a7e30099d51"
+    },
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E29-supervised-386-root32.jpg",
+      "sha256": "465fe6476d9925e3d8bb99e13d46c15bee7aa5fe047c121f9e5a5c8e5f356b30"
+    },
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E29-prefix-386-root32.jpg",
+      "sha256": "6480ff0f08f13ead3888b9fa07ff1361121c8788cbfc9f00e8adb5f0aa8dc494"
+    },
+    {
+      "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E30-extreme-class2-386-root32.jpg",
+      "sha256": "fcdd4d078f5b075bfcff70656d5d0de28ff342c88327dc9addd831099bc1260b"
+    }
+  ]
+}

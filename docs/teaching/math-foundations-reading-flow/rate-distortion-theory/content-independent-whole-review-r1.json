@@ -1,0 +1,47 @@
+{
+  "status": "PASS_COMPLETE_CONTENT_DIFFERENT_WHOLE_REVIEW",
+  "reviewer": "/root/numerical_runtime_resume",
+  "completedAt": "2026-10-09T17:47:50.317996+00:00",
+  "authors": [
+    "/root",
+    "/root/queue_nonconvex_resume"
+  ],
+  "independentOfAuthors": true,
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-source-r1.json",
+    "sha256": "f063ee2278877ef517b301ea306c7466184b46870bff98f1a4dabb8c0026d55c",
+    "bytes": 31512
+  },
+  "ready": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-author-ready-r1.json",
+    "sha256": "4c186b4b06caf67db4f620b6386e5ca3f5fe8620ae047c08fe3eb5330622de2b",
+    "bytes": 1272
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-independent-whole-review-r1.md",
+    "sha256": "52db9a17da196591088b522f840a9f9a4a7f85421f5119be59d3f3dca4813e39",
+    "bytes": 16168
+  },
+  "checks": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-independent-checks-r1.json",
+    "sha256": "4345877ef8bea2d8fb95b53e3071e460d32b2c6b9201faada1ca8eb294084128",
+    "bytes": 8702
+  },
+  "script": {
+    "path": "scratch/review-rd28-content-independent.py",
+    "sha256": "d8a1b3144ebe4073db53fff2725f2e9e1c22b95e2ba9fafc441f73f89ad19979",
+    "bytes": 9028
+  },
+  "findings": [],
+  "checkedSourceBindings": 126,
+  "boundedChecksPassed": 55,
+  "boundedChecksFailed": 0,
+  "wholeManuscriptRead": true,
+  "wholeVisualSpecificationsRead": true,
+  "allProgrammesAndPracticeRead": true,
+  "sourceMutations": 0,
+  "mainReplays": 0,
+  "builds": 0,
+  "runtimeAccepted": false,
+  "nextAction": "Root exact content acceptance and runtime release; separate author and DIFFERENT whole runtime review remain required."
+}

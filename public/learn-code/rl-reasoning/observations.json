@@ -1,0 +1,1105 @@
+{
+  "kind": "executed observations, no scientific rerun",
+  "summary": {
+    "protocol_sha256": "07a52ccddb48398000a902665cf8b28d262a5164476b26a6ffafec4c3838e22d",
+    "parameters": 66528,
+    "fits": [
+      {
+        "seed": 17,
+        "arm": "sft",
+        "steps": 80,
+        "targets": 25600
+      },
+      {
+        "seed": 17,
+        "arm": "rl",
+        "steps": 80,
+        "targets": 25591
+      },
+      {
+        "seed": 29,
+        "arm": "sft",
+        "steps": 80,
+        "targets": 25600
+      },
+      {
+        "seed": 29,
+        "arm": "rl",
+        "steps": 80,
+        "targets": 25599
+      },
+      {
+        "seed": 43,
+        "arm": "sft",
+        "steps": 80,
+        "targets": 25600
+      },
+      {
+        "seed": 43,
+        "arm": "rl",
+        "steps": 80,
+        "targets": 25598
+      }
+    ],
+    "evaluations": [
+      {
+        "seed": 17,
+        "arm": "warm",
+        "step": 0,
+        "file": "evaluation-17-warm-0.json",
+        "nll": 2.4404592514038086,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.85,
+        "format": 0.9953125,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 17,
+        "arm": "sft",
+        "step": 20,
+        "file": "evaluation-17-sft-20.json",
+        "nll": 2.5043439865112305,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.7,
+        "format": 0.9921875,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 17,
+        "arm": "sft",
+        "step": 40,
+        "file": "evaluation-17-sft-40.json",
+        "nll": 2.500922918319702,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.925,
+        "format": 0.996875,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 17,
+        "arm": "sft",
+        "step": 60,
+        "file": "evaluation-17-sft-60.json",
+        "nll": 2.5353784561157227,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.925,
+        "format": 0.996875,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 17,
+        "arm": "sft",
+        "step": 80,
+        "file": "evaluation-17-sft-80.json",
+        "nll": 2.5603699684143066,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.925,
+        "format": 0.9984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 17,
+        "arm": "rl",
+        "step": 20,
+        "file": "evaluation-17-rl-20.json",
+        "nll": 2.394711971282959,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 1.0,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 17,
+        "arm": "rl",
+        "step": 40,
+        "file": "evaluation-17-rl-40.json",
+        "nll": 2.3412294387817383,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.925,
+        "format": 0.9953125,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 17,
+        "arm": "rl",
+        "step": 60,
+        "file": "evaluation-17-rl-60.json",
+        "nll": 2.3867430686950684,
+        "pass1": 0.0015625,
+        "passk": 0.0125,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.9984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 17,
+        "arm": "rl",
+        "step": 80,
+        "file": "evaluation-17-rl-80.json",
+        "nll": 2.3245091438293457,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 1.0,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "warm",
+        "step": 0,
+        "file": "evaluation-29-warm-0.json",
+        "nll": 2.4010918140411377,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.025,
+        "format": 0.975,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "sft",
+        "step": 20,
+        "file": "evaluation-29-sft-20.json",
+        "nll": 2.4364383220672607,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.25,
+        "format": 0.9796875,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "sft",
+        "step": 40,
+        "file": "evaluation-29-sft-40.json",
+        "nll": 2.4720985889434814,
+        "pass1": 0.0015625,
+        "passk": 0.0125,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 78.5,
+        "format": 0.9625,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "sft",
+        "step": 60,
+        "file": "evaluation-29-sft-60.json",
+        "nll": 2.510315179824829,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 78.7,
+        "format": 0.9671875,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "sft",
+        "step": 80,
+        "file": "evaluation-29-sft-80.json",
+        "nll": 2.519468307495117,
+        "pass1": 0.0015625,
+        "passk": 0.0125,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 78.425,
+        "format": 0.9640625,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "rl",
+        "step": 20,
+        "file": "evaluation-29-rl-20.json",
+        "nll": 2.4268500804901123,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.525,
+        "format": 0.9859375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "rl",
+        "step": 40,
+        "file": "evaluation-29-rl-40.json",
+        "nll": 2.4492383003234863,
+        "pass1": 0.0015625,
+        "passk": 0.0125,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 78.725,
+        "format": 0.9734375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "rl",
+        "step": 60,
+        "file": "evaluation-29-rl-60.json",
+        "nll": 2.461005687713623,
+        "pass1": 0.0015625,
+        "passk": 0.0125,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 78.875,
+        "format": 0.971875,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 29,
+        "arm": "rl",
+        "step": 80,
+        "file": "evaluation-29-rl-80.json",
+        "nll": 2.4292478561401367,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 79.525,
+        "format": 0.984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "warm",
+        "step": 0,
+        "file": "evaluation-43-warm-0.json",
+        "nll": 2.1316967010498047,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.9984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "sft",
+        "step": 20,
+        "file": "evaluation-43-sft-20.json",
+        "nll": 2.147784948348999,
+        "pass1": 0.0015625,
+        "passk": 0.0125,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.9984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "sft",
+        "step": 40,
+        "file": "evaluation-43-sft-40.json",
+        "nll": 2.179611921310425,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.9984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "sft",
+        "step": 60,
+        "file": "evaluation-43-sft-60.json",
+        "nll": 2.2200257778167725,
+        "pass1": 0.00625,
+        "passk": 0.02403846153846154,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.9984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "sft",
+        "step": 80,
+        "file": "evaluation-43-sft-80.json",
+        "nll": 2.234863758087158,
+        "pass1": 0.0015625,
+        "passk": 0.0125,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.9984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "rl",
+        "step": 20,
+        "file": "evaluation-43-rl-20.json",
+        "nll": 2.1173386573791504,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.9984375,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "rl",
+        "step": 40,
+        "file": "evaluation-43-rl-40.json",
+        "nll": 2.1156861782073975,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.996875,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "rl",
+        "step": 60,
+        "file": "evaluation-43-rl-60.json",
+        "nll": 2.0473155975341797,
+        "pass1": 0.003125,
+        "passk": 0.019166666666666665,
+        "observed_oracle": 0.025,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.996875,
+        "derivation": 0.0,
+        "eos": 1.0
+      },
+      {
+        "seed": 43,
+        "arm": "rl",
+        "step": 80,
+        "file": "evaluation-43-rl-80.json",
+        "nll": 2.11179256439209,
+        "pass1": 0.0,
+        "passk": 0.0,
+        "observed_oracle": 0.0,
+        "majority": 0.0,
+        "tokens": 80.0,
+        "format": 0.996875,
+        "derivation": 0.0,
+        "eos": 1.0
+      }
+    ],
+    "paired_family_bootstrap": [
+      {
+        "seed": 17,
+        "arm": "sft",
+        "metric": "pass1",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0,
+        "percentile95": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "seed": 17,
+        "arm": "sft",
+        "metric": "passk",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0,
+        "percentile95": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "seed": 17,
+        "arm": "rl",
+        "metric": "pass1",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0,
+        "percentile95": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "seed": 17,
+        "arm": "rl",
+        "metric": "passk",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0,
+        "percentile95": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "seed": 29,
+        "arm": "sft",
+        "metric": "pass1",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0015625,
+        "percentile95": [
+          0.0,
+          0.004687500000000001
+        ]
+      },
+      {
+        "seed": 29,
+        "arm": "sft",
+        "metric": "passk",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0125,
+        "percentile95": [
+          0.0,
+          0.037500000000000006
+        ]
+      },
+      {
+        "seed": 29,
+        "arm": "rl",
+        "metric": "pass1",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0,
+        "percentile95": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "seed": 29,
+        "arm": "rl",
+        "metric": "passk",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0,
+        "percentile95": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "seed": 43,
+        "arm": "sft",
+        "metric": "pass1",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0015625,
+        "percentile95": [
+          0.0,
+          0.004687500000000001
+        ]
+      },
+      {
+        "seed": 43,
+        "arm": "sft",
+        "metric": "passk",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0125,
+        "percentile95": [
+          0.0,
+          0.037500000000000006
+        ]
+      },
+      {
+        "seed": 43,
+        "arm": "rl",
+        "metric": "pass1",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0,
+        "percentile95": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "seed": 43,
+        "arm": "rl",
+        "metric": "passk",
+        "unit": "eight held-out families, five c-values each",
+        "difference": 0.0,
+        "percentile95": [
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "seconds": 146.66987950002658
+  },
+  "training": [
+    {
+      "seed": 17,
+      "groups": 640,
+      "mixed_groups": 69,
+      "mean_reward": 0.985546875,
+      "zero_gradient_steps": 33,
+      "warm": [
+        {
+          "step": 1,
+          "loss": 4.898230075836182,
+          "gradient_norm": 2.3567168712615967
+        },
+        {
+          "step": 100,
+          "loss": 0.29800471663475037,
+          "gradient_norm": 0.3875356614589691
+        },
+        {
+          "step": 200,
+          "loss": 0.01451697014272213,
+          "gradient_norm": 0.0465388149023056
+        },
+        {
+          "step": 300,
+          "loss": 0.00527154142037034,
+          "gradient_norm": 0.01657281070947647
+        },
+        {
+          "step": 400,
+          "loss": 0.0027006047312170267,
+          "gradient_norm": 0.008377593010663986
+        },
+        {
+          "step": 500,
+          "loss": 0.0017484392737969756,
+          "gradient_norm": 0.005172916688024998
+        }
+      ],
+      "rollout_trace": {
+        "step": 21,
+        "loss": -0.13437698781490326,
+        "gradient_norm": 0.7623388171195984,
+        "reward_mean": 0.984375,
+        "mixed_groups": 1,
+        "targets": 320,
+        "sample": {
+          "id": "2-6-4",
+          "ids": [
+            91,
+            8,
+            92,
+            32,
+            98
+          ],
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "tokens": 5,
+          "text": "sum = 8; answer = 32",
+          "format_valid": true,
+          "terminated": true,
+          "sum": 8,
+          "answer": 32,
+          "sum_correct": true,
+          "product_consistent": true,
+          "answer_correct": true,
+          "derivation_correct": true,
+          "reward": 1
+        },
+        "sample_advantage": 0.1428571343421936,
+        "sample_logps": [
+          -0.0003110878460574895,
+          -0.0015160269103944302,
+          -0.00029225845355540514,
+          -0.004121382255107164,
+          -0.00038556772051379085
+        ]
+      }
+    },
+    {
+      "seed": 29,
+      "groups": 640,
+      "mixed_groups": 54,
+      "mean_reward": 0.9876953125,
+      "zero_gradient_steps": 35,
+      "warm": [
+        {
+          "step": 1,
+          "loss": 4.563432693481445,
+          "gradient_norm": 2.353454828262329
+        },
+        {
+          "step": 100,
+          "loss": 0.4841338098049164,
+          "gradient_norm": 0.40058696269989014
+        },
+        {
+          "step": 200,
+          "loss": 0.0133195910602808,
+          "gradient_norm": 0.03391961380839348
+        },
+        {
+          "step": 300,
+          "loss": 0.0049622636288404465,
+          "gradient_norm": 0.013246303424239159
+        },
+        {
+          "step": 400,
+          "loss": 0.00208782940171659,
+          "gradient_norm": 0.005845283158123493
+        },
+        {
+          "step": 500,
+          "loss": 0.001589043764397502,
+          "gradient_norm": 0.004440083634108305
+        }
+      ],
+      "rollout_trace": {
+        "step": 3,
+        "loss": -0.09784846752882004,
+        "gradient_norm": 0.6144663691520691,
+        "reward_mean": 0.984375,
+        "mixed_groups": 1,
+        "targets": 320,
+        "sample": {
+          "id": "6-9-2",
+          "ids": [
+            91,
+            15,
+            92,
+            30,
+            98
+          ],
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "tokens": 5,
+          "text": "sum = 15; answer = 30",
+          "format_valid": true,
+          "terminated": true,
+          "sum": 15,
+          "answer": 30,
+          "sum_correct": true,
+          "product_consistent": true,
+          "answer_correct": true,
+          "derivation_correct": true,
+          "reward": 1
+        },
+        "sample_advantage": 0.1428571343421936,
+        "sample_logps": [
+          -0.0003120412293355912,
+          -0.0017794027226045728,
+          -0.000339569611242041,
+          -0.00759677030146122,
+          -0.00031394799589179456
+        ]
+      }
+    },
+    {
+      "seed": 43,
+      "groups": 640,
+      "mixed_groups": 58,
+      "mean_reward": 0.9876953125,
+      "zero_gradient_steps": 43,
+      "warm": [
+        {
+          "step": 1,
+          "loss": 4.737538814544678,
+          "gradient_norm": 2.25711727142334
+        },
+        {
+          "step": 100,
+          "loss": 0.39001530408859253,
+          "gradient_norm": 0.6270151138305664
+        },
+        {
+          "step": 200,
+          "loss": 0.021894652396440506,
+          "gradient_norm": 0.10199255496263504
+        },
+        {
+          "step": 300,
+          "loss": 0.005701050627976656,
+          "gradient_norm": 0.016701476648449898
+        },
+        {
+          "step": 400,
+          "loss": 0.003034379333257675,
+          "gradient_norm": 0.009145887568593025
+        },
+        {
+          "step": 500,
+          "loss": 0.0018981869798153639,
+          "gradient_norm": 0.005750403739511967
+        }
+      ],
+      "rollout_trace": {
+        "step": 17,
+        "loss": -0.3302168548107147,
+        "gradient_norm": 1.2773913145065308,
+        "reward_mean": 0.984375,
+        "mixed_groups": 1,
+        "targets": 320,
+        "sample": {
+          "id": "3-6-5",
+          "ids": [
+            91,
+            9,
+            92,
+            45,
+            98
+          ],
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "tokens": 5,
+          "text": "sum = 9; answer = 45",
+          "format_valid": true,
+          "terminated": true,
+          "sum": 9,
+          "answer": 45,
+          "sum_correct": true,
+          "product_consistent": true,
+          "answer_correct": true,
+          "derivation_correct": true,
+          "reward": 1
+        },
+        "sample_advantage": 0.1428571343421936,
+        "sample_logps": [
+          -0.00032026408007368445,
+          -0.0017416798509657383,
+          -0.00034421717282384634,
+          -0.007931641303002834,
+          -0.00032669928623363376
+        ]
+      }
+    }
+  ],
+  "native": {
+    "train_attempts": 16,
+    "train_questions": 4,
+    "train_rewards": 0.0,
+    "test_attempts": 32,
+    "test_questions": 8,
+    "test_rewards": 0.0,
+    "train_terminated": 2,
+    "test_terminated": 4,
+    "weights_changed": false,
+    "reload_exact": true,
+    "trainer_seconds": 29.387
+  },
+  "sources": [
+    {
+      "path": "observations/scratch/evaluation-17-rl-20.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-rl-20.json",
+      "sha256": "57e930288d4f4f4e256bdf0b1cc8605b0eb4eefe6c0d9650b7c290fc60f1df4f",
+      "bytes": 442940
+    },
+    {
+      "path": "observations/scratch/evaluation-17-rl-40.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-rl-40.json",
+      "sha256": "e8dc74b926e8ead9f1199f8a49975fefbbacd093586fdecdfa98d1325c84d197",
+      "bytes": 442921
+    },
+    {
+      "path": "observations/scratch/evaluation-17-rl-60.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-rl-60.json",
+      "sha256": "30396ce7ef9fa091e63088f525118fd7251028bc1810003887d6ba69d0eb16c3",
+      "bytes": 442980
+    },
+    {
+      "path": "observations/scratch/evaluation-17-rl-80.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-rl-80.json",
+      "sha256": "916e37c07868bbac6de1a009b6a725240722605f3510375c2e7afe2ad2952d75",
+      "bytes": 443185
+    },
+    {
+      "path": "observations/scratch/evaluation-17-sft-20.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-sft-20.json",
+      "sha256": "a1f7dbacef70386e7ed17f62c9c37072aaab3a0cc206ce59008b82676236805a",
+      "bytes": 443029
+    },
+    {
+      "path": "observations/scratch/evaluation-17-sft-40.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-sft-40.json",
+      "sha256": "f18c0849c233963e73fb7adbfa87c42e9ece04ca6f7b38ee80e37750d2c67ff2",
+      "bytes": 443087
+    },
+    {
+      "path": "observations/scratch/evaluation-17-sft-60.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-sft-60.json",
+      "sha256": "43ee9454bfd79057a78d54e199a4816534531d54f03dbbbcabbdc53b16006425",
+      "bytes": 443122
+    },
+    {
+      "path": "observations/scratch/evaluation-17-sft-80.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-sft-80.json",
+      "sha256": "e1cd622b713d6b5ceece166e7483449aea854115598fb05d76ff24f5f10b2e6a",
+      "bytes": 443062
+    },
+    {
+      "path": "observations/scratch/evaluation-17-warm-0.json",
+      "source": "scratch/rl-reasoning-study/evaluation-17-warm-0.json",
+      "sha256": "4687f6bb68962bd156df67c6b0a5e0971e3cefb50161eb5fbdde8bfa6dfde68a",
+      "bytes": 443039
+    },
+    {
+      "path": "observations/scratch/evaluation-29-rl-20.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-rl-20.json",
+      "sha256": "1ceedd7bf9b7a37d44f11a882f4cd43b0e5ee08268f94052467db0fcf9759555",
+      "bytes": 443161
+    },
+    {
+      "path": "observations/scratch/evaluation-29-rl-40.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-rl-40.json",
+      "sha256": "b71d15aa642473707ce095ac28e178088f43b1ab0643aade4e1c33b5288aad83",
+      "bytes": 442951
+    },
+    {
+      "path": "observations/scratch/evaluation-29-rl-60.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-rl-60.json",
+      "sha256": "2c3a1ffd69bcd7bf9046cc67d2d34b0d97d2be62a087076e3f58f5132564f2ad",
+      "bytes": 442880
+    },
+    {
+      "path": "observations/scratch/evaluation-29-rl-80.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-rl-80.json",
+      "sha256": "fbeec8e4f18db9062c84f37b96453e0317394f50fdfa2259cb2ee504fc79f527",
+      "bytes": 442891
+    },
+    {
+      "path": "observations/scratch/evaluation-29-sft-20.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-sft-20.json",
+      "sha256": "5f3dc5f8f7a4ca4cf3567597021ae43d95573916ed6805cbbd2717d34b258301",
+      "bytes": 442903
+    },
+    {
+      "path": "observations/scratch/evaluation-29-sft-40.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-sft-40.json",
+      "sha256": "b744e206cfc8f34b6b722115ced8a9ca0c9c2a41e2f174e49deca2d48be73b37",
+      "bytes": 442789
+    },
+    {
+      "path": "observations/scratch/evaluation-29-sft-60.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-sft-60.json",
+      "sha256": "c39d9cdd338aeb95d29a0493a436eef609a62fc649c570b33128705b4eaf58ab",
+      "bytes": 442829
+    },
+    {
+      "path": "observations/scratch/evaluation-29-sft-80.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-sft-80.json",
+      "sha256": "9b8297f1abec86eb9d389de227d9b728dcc157cbc08886ca31bb2558075c5ef4",
+      "bytes": 442755
+    },
+    {
+      "path": "observations/scratch/evaluation-29-warm-0.json",
+      "source": "scratch/rl-reasoning-study/evaluation-29-warm-0.json",
+      "sha256": "8cd6988c5a3340db4f153e49626ae50262f776c07a3425ca246a0922ae82df32",
+      "bytes": 442892
+    },
+    {
+      "path": "observations/scratch/evaluation-43-rl-20.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-rl-20.json",
+      "sha256": "2caff14a36f1ad46c6ef2dcfdcadb751f6da91b29772fb4da2030b20afa934c0",
+      "bytes": 443309
+    },
+    {
+      "path": "observations/scratch/evaluation-43-rl-40.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-rl-40.json",
+      "sha256": "a6bf537512905ac1d96702cf2776c735bd78f50844cfce5829d186c758078ea8",
+      "bytes": 443242
+    },
+    {
+      "path": "observations/scratch/evaluation-43-rl-60.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-rl-60.json",
+      "sha256": "321317d686528ff67500d9bbd69226b9b195b10d89286ddccd373cbad3086e8b",
+      "bytes": 443205
+    },
+    {
+      "path": "observations/scratch/evaluation-43-rl-80.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-rl-80.json",
+      "sha256": "02c007880610dd00ce914ae481cebbfac90e25cc7a09d72549e9c8a9f5c940f4",
+      "bytes": 443387
+    },
+    {
+      "path": "observations/scratch/evaluation-43-sft-20.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-sft-20.json",
+      "sha256": "d2efefb0b04ae5221e9740491f38daf1d8f25106c9c8290e55389ba76d81a872",
+      "bytes": 443232
+    },
+    {
+      "path": "observations/scratch/evaluation-43-sft-40.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-sft-40.json",
+      "sha256": "23188dbce7c31e62d223796622a3c62e97f0b659425cdcb86cd7455b15ad65ef",
+      "bytes": 443329
+    },
+    {
+      "path": "observations/scratch/evaluation-43-sft-60.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-sft-60.json",
+      "sha256": "4c3b0e5c3152bbd491e6aa0972f208d0facb83bf76a7351e199419c05cf1eaa9",
+      "bytes": 443293
+    },
+    {
+      "path": "observations/scratch/evaluation-43-sft-80.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-sft-80.json",
+      "sha256": "9077d2e53b3cb881597831db1e7121a5fc0044ef045ccd26776267c5937540f2",
+      "bytes": 443286
+    },
+    {
+      "path": "observations/scratch/evaluation-43-warm-0.json",
+      "source": "scratch/rl-reasoning-study/evaluation-43-warm-0.json",
+      "sha256": "f84c88b04043ae98668a32a2186c3f859d86b0f5053359957bf26e95c255f1b5",
+      "bytes": 443243
+    },
+    {
+      "path": "observations/scratch/fit-completion.json",
+      "source": "scratch/rl-reasoning-study/fit-completion.json",
+      "sha256": "70601fabf47edea3f10f94038b1da5bf842967b8a9b7d68afd212d2523c6421f",
+      "bytes": 652
+    },
+    {
+      "path": "observations/scratch/protocol.json",
+      "source": "scratch/rl-reasoning-study/protocol.json",
+      "sha256": "07a52ccddb48398000a902665cf8b28d262a5164476b26a6ffafec4c3838e22d",
+      "bytes": 35100
+    },
+    {
+      "path": "observations/scratch/seed-17/rl-history.json",
+      "source": "scratch/rl-reasoning-study/seed-17/rl-history.json",
+      "sha256": "1319791a17718d302c8961065cecc841040fc1c4ce0e9ab7f40e696f48dc4212",
+      "bytes": 73441
+    },
+    {
+      "path": "observations/scratch/seed-17/sft-history.json",
+      "source": "scratch/rl-reasoning-study/seed-17/sft-history.json",
+      "sha256": "d54f91f5d7d8047876edd4f927988185b2bfa641da1fda17f082e765ea7d7339",
+      "bytes": 10202
+    },
+    {
+      "path": "observations/scratch/seed-17/warm-history.json",
+      "source": "scratch/rl-reasoning-study/seed-17/warm-history.json",
+      "sha256": "10c5a614e894bc26291fa97b8497a893431e6a283656e83c3b9f02d1fba9c1cd",
+      "bytes": 634
+    },
+    {
+      "path": "observations/scratch/seed-29/rl-history.json",
+      "source": "scratch/rl-reasoning-study/seed-29/rl-history.json",
+      "sha256": "28f328fd6efa9f6b57a278d9c1e91c10ccb4ae72224a894866c64bf4eb1fa138",
+      "bytes": 73412
+    },
+    {
+      "path": "observations/scratch/seed-29/sft-history.json",
+      "source": "scratch/rl-reasoning-study/seed-29/sft-history.json",
+      "sha256": "fe53fddb64de0e157fe75643f4d73dfdb14541edf7988a72a3ad500ba5de8053",
+      "bytes": 10209
+    },
+    {
+      "path": "observations/scratch/seed-29/warm-history.json",
+      "source": "scratch/rl-reasoning-study/seed-29/warm-history.json",
+      "sha256": "35e5fb7bedec3004cbb23092e20ab1a4680e6c0baf4b8836b44bf09fbc16ab68",
+      "bytes": 633
+    },
+    {
+      "path": "observations/scratch/seed-43/rl-history.json",
+      "source": "scratch/rl-reasoning-study/seed-43/rl-history.json",
+      "sha256": "6215db491aa8d63455b57093679b6f639adc9e01226285b2527214e8bf675cbf",
+      "bytes": 73139
+    },
+    {
+      "path": "observations/scratch/seed-43/sft-history.json",
+      "source": "scratch/rl-reasoning-study/seed-43/sft-history.json",
+      "sha256": "d8b48f16883b41abf041bfced9d8134e9cdfca8394d066e87548790c129263e6",
+      "bytes": 10211
+    },
+    {
+      "path": "observations/scratch/seed-43/warm-history.json",
+      "source": "scratch/rl-reasoning-study/seed-43/warm-history.json",
+      "sha256": "564b92c63a6b3e12b969ba1af00cb921e420ecb2afec32d58916ce1697b5184e",
+      "bytes": 635
+    },
+    {
+      "path": "observations/scratch/summary.json",
+      "source": "scratch/rl-reasoning-study/summary.json",
+      "sha256": "a017e9ed99449599faccc16402016987e151761ee04814cc4629bfc8d10b9deb",
+      "bytes": 13037
+    },
+    {
+      "path": "observations/native/parity.json",
+      "source": "scratch/rl-reasoning-native/parity.json",
+      "sha256": "1db122793b5f23af0407bcba24dde5423ff23e50d458cf4b5330fd98d22bfc8c",
+      "bytes": 2109
+    },
+    {
+      "path": "observations/native/protocol.json",
+      "source": "scratch/rl-reasoning-native/protocol.json",
+      "sha256": "79503bffb05e5a35655d6f4fd51fe51e8a6640eb11f397bc77913b46cac7537f",
+      "bytes": 7045
+    },
+    {
+      "path": "observations/native/report.json",
+      "source": "scratch/rl-reasoning-native/report.json",
+      "sha256": "da5880c8975a767082e281802920afc97cd66ec6efc22f0660d39a3655a927d5",
+      "bytes": 225757
+    }
+  ]
+}

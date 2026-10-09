@@ -1,0 +1,101 @@
+[
+  {
+    "method": "input",
+    "seed": 17,
+    "selected_step": 200,
+    "selected_dev_nll": 0.3616234761277651,
+    "test_nll": 0.35754787923103293,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 4216
+  },
+  {
+    "method": "input",
+    "seed": 29,
+    "selected_step": 100,
+    "selected_dev_nll": 0.36837359341917103,
+    "test_nll": 0.3712204573032974,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 4216
+  },
+  {
+    "method": "input",
+    "seed": 43,
+    "selected_step": 150,
+    "selected_dev_nll": 0.35076085513920396,
+    "test_nll": 0.3499521532694646,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 4216
+  },
+  {
+    "method": "encoder-mlp",
+    "seed": 17,
+    "selected_step": 200,
+    "selected_dev_nll": 0.3620400693264246,
+    "test_nll": 0.3584637376177209,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 4216
+  },
+  {
+    "method": "encoder-mlp",
+    "seed": 29,
+    "selected_step": 100,
+    "selected_dev_nll": 0.3725266496769376,
+    "test_nll": 0.3761511768255591,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 4216
+  },
+  {
+    "method": "encoder-mlp",
+    "seed": 43,
+    "selected_step": 200,
+    "selected_dev_nll": 0.3608988270701383,
+    "test_nll": 0.3509954047384706,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 4216
+  },
+  {
+    "method": "prefix-direct",
+    "seed": 17,
+    "selected_step": 100,
+    "selected_dev_nll": 0.34711009207526705,
+    "test_nll": 0.34999958696005623,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 49272
+  },
+  {
+    "method": "prefix-direct",
+    "seed": 29,
+    "selected_step": 50,
+    "selected_dev_nll": 0.3466560129624625,
+    "test_nll": 0.35950441826188634,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 49272
+  },
+  {
+    "method": "prefix-direct",
+    "seed": 43,
+    "selected_step": 200,
+    "selected_dev_nll": 0.34356493878499433,
+    "test_nll": 0.35720898143401614,
+    "free_accuracy": 0.6634615384615384,
+    "candidate_accuracy": 0.6634615384615384,
+    "macro_f1": 0.26589595375722547,
+    "adapter_tensor_file_bytes": 49272
+  }
+]

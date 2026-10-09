@@ -1,0 +1,1 @@
+import React from 'react'; export function scenarioState(initial){const scenario=globalThis.__nmfScenario;const i=scenario.index++;return React.useState(i<scenario.values.length?scenario.values[i]:initial);}

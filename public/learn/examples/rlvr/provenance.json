@@ -1,0 +1,17 @@
+{
+  "dataset": "openai/grade-school-math GSM8K main",
+  "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+  "url": "https://github.com/openai/grade-school-math/tree/3101c7d5072418e28b9008a6636bde82a006892c",
+  "licence": "MIT; complete notice in GSM8K-LICENSE.txt",
+  "selection": "First24 train and first12 test source-order rows whose entire question UTF8 length<=240 and final #### label is integer0..99. No model outcomes used. Original fields preserved. This is a restricted numerical subset, not representative GSM8K.",
+  "source_sha256": {
+    "train": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "test": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14"
+  },
+  "proposal_sha256": "06786b9bf4e12fd1396a989c8950451b510df87c331b44d4a9efe763ac5efdf8",
+  "records_sha256": "5f5ac5e28a492d9511c80e762b3827dff3f79264eb19006e4d6e73c07ce9152d",
+  "original_fields": [
+    "question",
+    "answer"
+  ]
+}

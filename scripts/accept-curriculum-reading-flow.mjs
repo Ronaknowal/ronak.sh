@@ -1,0 +1,9 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+const hash=b=>createHash('sha256').update(b).digest('hex'),sha=p=>hash(fs.readFileSync(p));
+const root='docs/teaching/llm-architecture-training',id='curriculum-learning-data-mixing-strategies',folder=`${root}/${id}`,file=`${folder}/curriculum-data-mixing.jsx`;
+const source=fs.readFileSync(file,'utf8'),old='className="curriculum-mixing-lesson"',next='className="lesson-flow curriculum-mixing-lesson"';assert.equal(source.split(next).length-1,1);assert.equal(hash(source.replace(next,old)),'472b63c85595afd639382a6b087ac82ff6ca4cf795f871b6a0deb68d3c3f2e2b');assert.equal(sha(file),'30df7e2affc938e0c09ebf6d6ffd882f0ab50aca348cc5fbb93d25fdaf77511a');
+const review=`${folder}/runtime-review.md`;assert.ok(fs.readFileSync(review,'utf8').includes('This bounded content continuity amendment is accepted'));
+const ledgerPath='docs/teaching/lesson-delivery-progress.json',before=fs.readFileSync(ledgerPath),ledger=JSON.parse(before),entry=ledger.topics[id];assert.equal(entry.content.files[file],'472b63c85595afd639382a6b087ac82ff6ca4cf795f871b6a0deb68d3c3f2e2b');
+const receipt=`${folder}/root-reading-flow-acceptance.json`;fs.writeFileSync(receipt,JSON.stringify({at:new Date().toISOString(),accepted:true,reviewer:'root',differentReviewer:'causal_author',scope:'Exactly one root class addition; reverse substitution recovers accepted complete predecessor. Shared controls and affected whole panes independently accepted. Prose/equations/programs/science conserved.',source:file,sourceSha256:sha(file),differentReview:review,differentReviewSha256:sha(review)},null,2)+'\n',{flag:'wx'});entry.content.files[file]=sha(file);entry.content.files[receipt]=sha(receipt);
+assert.ok(fs.readFileSync(ledgerPath).equals(before));fs.writeFileSync(ledgerPath,JSON.stringify(ledger,null,2)+'\n');
+console.log('Accepted exact shared reading-flow class continuation.');

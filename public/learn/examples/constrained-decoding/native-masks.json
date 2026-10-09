@@ -1,0 +1,75 @@
+{
+  "xgrammar_version": "0.2.8",
+  "vocabulary_hex": [
+    "616263",
+    "3432",
+    "37",
+    "3378",
+    "3c454f533e"
+  ],
+  "padded_output_width": 8,
+  "rows": [
+    {
+      "action": "initial",
+      "allowed_ids": [
+        1,
+        2
+      ],
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "action": "accepted token1: 42",
+      "allowed_ids": [
+        1,
+        2,
+        4
+      ],
+      "completed": true,
+      "terminated": false
+    },
+    {
+      "action": "other request fork accepts EOS; this state is unchanged",
+      "allowed_ids": [
+        1,
+        2,
+        4
+      ],
+      "completed": true,
+      "terminated": false
+    },
+    {
+      "action": "rollback one whole token",
+      "allowed_ids": [
+        1,
+        2
+      ],
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "action": "invalid whole token3: 3x rejected without mutation",
+      "allowed_ids": [
+        1,
+        2
+      ],
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "action": "7 then EOS",
+      "allowed_ids": null,
+      "completed": true,
+      "terminated": true
+    },
+    {
+      "action": "reset",
+      "allowed_ids": [
+        1,
+        2
+      ],
+      "completed": false,
+      "terminated": false
+    }
+  ]
+}

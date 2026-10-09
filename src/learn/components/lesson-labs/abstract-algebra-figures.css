@@ -1,0 +1,92 @@
+.abstract-algebra-lesson { overflow-wrap: anywhere; }
+.abstract-algebra-lesson .aa-figure,
+.abstract-algebra-lesson .flow-lab { container: aa-diagram / inline-size; }
+.aa-figure { margin: 2rem 0; padding: 0; border: 0; background: transparent; }
+.aa-figure-title,.aa-panel-title { color: #e9be65; margin: 0 0 .75rem; }
+.aa-figure figcaption { color: #c4c9cb; margin: 1rem 0; line-height: 1.7; }
+.aa-canvas { min-width: 0; max-width: 100%; }
+.aa-svg { display: block; max-width: 100%; }
+.aa-svg .aa-text { font: 14px ui-monospace, monospace; fill: #e7edf0; }
+.aa-svg .aa-text.gold { fill: #e9be65; }
+.aa-svg .aa-text.blue { fill: #83c5ce; }
+.aa-svg .aa-text.rose { fill: #dc99ad; }
+.aa-stroke { stroke: #e9be65; stroke-width: 2; fill: none; }
+.aa-stroke.blue { stroke: #83c5ce; }
+.aa-stroke.rose { stroke: #dc99ad; }
+.aa-stroke.white { stroke: #cbd1d4; }
+.aa-stroke.dashed { stroke-dasharray: 5 4; }
+.aa-axis { stroke: #646b71; stroke-width: 1; }
+.aa-outline { fill: none; stroke: #7c868f; stroke-width: 1.5; }
+.aa-node { fill: #e9be65; stroke: #e9be65; stroke-width: 1.5; }
+.aa-node.blue { fill: #83c5ce; stroke: #83c5ce; }
+.aa-node.rose { fill: #dc99ad; stroke: #dc99ad; }
+.aa-node.white { fill: #cbd1d4; stroke: #cbd1d4; }
+.aa-node.selected { stroke: #fff; stroke-width: 4; }
+.aa-node + .aa-text { fill: #111; }
+.aa-svg .aa-text.external { fill: #e7edf0; }
+.aa-figure li.blue { color: #83c5ce; }
+.aa-figure li.rose { color: #dc99ad; }
+.aa-figure li.gold { color: #e9be65; }
+.aa-figure li.white { color: #cbd1d4; }
+.aa-table td.blue { color: #83c5ce; background: #83c5ce0c; }
+.aa-table td.gold { color: #e9be65; background: #e9be650c; }
+.aa-table td.rose { color: #dc99ad; background: #dc99ad0c; }
+.aa-compare,.aa-state-grid,.aa-route { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.aa-compare > *, .aa-state-grid > *, .aa-route > * { flex: 1 1 14rem; min-width: 0; max-width: 100%; }
+.aa-panel { min-width: 0; padding: 0; background: transparent; border: 0; }
+.aa-square { max-width: 100%; }
+.aa-addresses { list-style: none; margin: .5rem 0 1.25rem; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .4rem .75rem; }
+.aa-addresses li { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: space-between; min-width: 0; }
+.aa-addresses strong { white-space: nowrap; }
+.aa-addresses .blue { color: #83c5ce; }
+.aa-addresses .gold { color: #e9be65; }
+.aa-addresses .rose { color: #dc99ad; }
+.aa-addresses .white { color: #cbd1d4; }
+.aa-table { min-width: 0; max-width: 100%; margin: 1rem 0; }
+.aa-table-scroll { overflow: auto; max-width: 100%; max-height: 32rem; scrollbar-width: auto; }
+.aa-table-scroll:focus-visible { outline: 2px solid #e9be65; outline-offset: 4px; }
+.aa-table table { width: max-content; min-width: 100%; border-collapse: collapse; font: .875rem ui-monospace, monospace; }
+.aa-table-title { color: #c4c9cb; font: 1rem ui-monospace, monospace; margin: 0 0 .5rem; }
+.aa-table caption { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.aa-table th,.aa-table td { padding: .5rem .65rem; text-align: right; white-space: nowrap; border-bottom: 1px solid #383d40; }
+.aa-table th { color: #e9be65; }
+.aa-table th:first-child,.aa-table td:first-child { text-align: left; }
+.aa-scroll-hint { color: #b6c1c7; font-size: .875rem; margin: .5rem 0; }
+.aa-table .selected td { background: #1d2429; color: #e9be65; }
+.aa-blocks { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; }
+.aa-block { flex: 1 1 14rem; min-width: 0; }
+.aa-block.selected > p { text-decoration: underline; text-underline-offset: .3rem; color: #fff; }
+.aa-block p { margin: 0 0 .5rem; }
+.aa-elements { display: flex; gap: .5rem 1rem; flex-wrap: wrap; }
+.aa-elements .blue { color: #83c5ce; }
+.aa-elements .rose { color: #dc99ad; }
+.aa-elements .gold { color: #e9be65; }
+.aa-elements .white { color: #cbd1d4; }
+.aa-route-operation { color: #e9be65; margin: .4rem 0; }
+.aa-stage-name { color: #adb8be; }
+.aa-route-stage.active .aa-stage-name { color: #e9be65; text-decoration: underline; text-underline-offset: .3rem; }
+.aa-result { margin: .75rem 0 1.25rem; }
+.aa-result strong { color: #e9be65; white-space: nowrap; }
+.aa-controls { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,14rem),1fr)); gap: 1rem; margin: 1.25rem 0; }
+.aa-controls label { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.aa-controls select,.aa-controls input,.aa-controls button { font: inherit; color: inherit; background: #171d21; border: 1px solid #626c74; padding: .6rem; min-width: 0; max-width: 100%; }
+.aa-controls input[type=range] { width: 100%; accent-color: #e9be65; padding: .4rem 0; }
+.aa-controls output { flex: none; white-space: nowrap; color: #e9be65; }
+.aa-controls input:focus-visible,.aa-controls select:focus-visible,.aa-controls button:focus-visible { outline: 2px solid #e9be65; outline-offset: 3px; }
+.aa-buttons { display: flex; gap: .75rem; flex-wrap: wrap; margin: 1rem 0; }
+.aa-buttons button { font: inherit; color: #e9be65; background: #171d21; border: 1px solid #626c74; padding: .6rem .9rem; min-height: 44px; }
+.aa-readouts { display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin: 1rem 0; }
+.aa-readouts > div { flex: 1 1 10rem; min-width: 0; }
+.aa-readouts dt { color: #c4c9cb; }
+.aa-readouts dd { margin: .4rem 0 0; color: #e9be65; font: 1rem ui-monospace,monospace; }
+.aa-error { color: #efb1c0; }
+.abstract-algebra-lesson.lesson-flow .lesson-code pre { font-size: .875rem; }
+.abstract-algebra-lesson :not(pre) > code { font-size: .875rem !important; }
+.aa-equation { min-width: 0; max-width: 100%; margin: 1.25rem 0; }
+.aa-equation-scroll { overflow-x: auto; max-width: 100%; }
+.aa-equation-scroll:focus-visible { outline: 2px solid #e9be65; outline-offset: 4px; }
+.aa-equation-inner { width: max-content; min-width: 100%; }
+@container aa-diagram (max-width: 28rem) {
+  .aa-compare,.aa-state-grid,.aa-route { flex-direction: column; }
+  .aa-compare > *, .aa-state-grid > *, .aa-route > * { flex-basis: auto; width: 100%; }
+}

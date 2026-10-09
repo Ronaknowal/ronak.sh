@@ -1,702 +1,273 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, PatchGrid, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+import { Prose, H2, H3, Code, CodeBlock } from '../../components/content';
+import { MathBlock as SharedMathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { LessonIntro, LessonTable, Sources } from '../../components/lesson-labs/LessonElements.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+import { PairedArchive, OutputInterfaces, FeatureAnatomy, SharedDirections, PairMatrix, DirectionalReduction, ScoreGradients, BackwardRoute, CandidateClassifier, DatasetGroups, AlignmentStudy, SavedImageLab, PositiveSets, SigmoidPairs, VisualProjector, PrefixTargets, FrozenGradients, TrainingStages, LearnedQueries, QFormerObjectives, VisualMemory, DetailBudget, SupervisionReach, MixedSequence, EvaluationControls } from '../../components/lesson-labs/MultimodalPretrainingFlow.jsx';
+
+const route = '/learn/path/full-curriculum/';
+const programs = '/learn-code/multimodal-pretraining/';
+const MathBlock = ({ children }) => <div className="mmp-math" tabIndex={0} role="region" aria-label="Mathematical relationship"><SharedMathBlock>{children}</SharedMathBlock></div>;
+const Legacy = ({ id }) => <span id={id} aria-hidden="true" />;
+function Exercise({ title, children, hint, solution }) {
+  return <article className="lesson-exercise" data-lesson-exercise=""><H3>{title}</H3>{children}<details><summary>Hint</summary><Prose>{hint}</Prose></details><details><summary>Solution</summary><Prose>{solution}</Prose></details></article>;
+}
 
 const multimodalPretraining = {
-  title: "Multimodal Pre-Training (Vision Encoders, Cross-Modal Alignment)",
-  readTime: "38 min",
-  content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        Language models consume tokens. Every byte of training data, every prompt at inference time, every generated word — all of it is integers drawn from a fixed vocabulary. That constraint is architectural: the embedding table has a finite number of rows, the cross-entropy loss is defined over a discrete distribution, and sampling is only defined when you have a probability over a known set of symbols. Images do not arrive as integers. A single 224×224 RGB photograph is a tensor of 150,528 floating-point values with no natural boundaries, no universal alphabet, and no agreed-upon unit of meaning. Audio is worse: a single second at CD quality is 44,100 floating-point samples. Video multiplies that by time and space simultaneously. The question "how do we get these signals into a language model?" does not have an obvious answer, and the answer that any particular team chose in any given year tells you almost everything about how their system behaves.
-      </Prose>
-
-      <Prose>
-        The Multimodal Tokenization topic in this section covered the discretization half of the pipeline: VQ-VAE, VQ-GAN, residual vector quantization, patch projection. Those algorithms convert raw signals into token sequences. This topic covers the alignment half: once you have token sequences from multiple modalities, how do you train a model so that visual tokens and text tokens are meaningful to each other? How do you get an image of a cat and the phrase "a photo of a cat" to live close together in representation space? The history of that problem is a sequence of three architecturally distinct answers, each inheriting the failure modes of its predecessor.
-      </Prose>
-
-      <Prose>
-        The first generation is contrastive pre-training. CLIP (Radford et al., 2021; arXiv:2103.00020) trained two separate encoders — one for images, one for text — jointly on 400 million image-text pairs scraped from the web. The training signal is purely contrastive: matched pairs should be close in embedding space, mismatched pairs far apart. CLIP produces a shared embedding space with remarkable zero-shot properties, but it is a discriminative model. It cannot generate text, cannot reason over images, cannot produce a caption. It aligns. That is all.
-      </Prose>
-
-      <Prose>
-        The second generation is frozen-encoder plus projector. By 2023, powerful pretrained components were available off-the-shelf: CLIP vision encoders and instruction-tuned language models. LLaVA (Liu et al., 2023; arXiv:2304.08485) connected them with a small trainable bridge — initially a linear projection, later a two-layer MLP — that maps CLIP's output dimension into the LLM's embedding dimension. Only the bridge is trained from scratch; both towers are mostly frozen. The recipe is cheap, replicable, and widely adopted. BLIP-2 (Li et al., 2023; arXiv:2301.12597) introduced the Q-Former as a more sophisticated bridge: a small learned transformer with N fixed query tokens that cross-attend to visual features and compress them to a fixed-length sequence regardless of image resolution.
-      </Prose>
-
-      <Prose>
-        The third generation is native multimodal training. Chameleon (Meta FAIR, 2024; arXiv:2405.09818) and Gemini 1.5 (Google, 2024; arXiv:2403.05530) remove the separation entirely. Images are discretized into integer tokens and added to the model's shared vocabulary. Training is standard next-token prediction over interleaved sequences of image tokens, text tokens, audio tokens — whatever modalities are present, in whatever order they appear. There is no dedicated vision pathway, no separate vision loss, no cross-modal projection module. The transformer learns to process every modality through the same residual stream. Understanding why each generation exists — and why none of them has fully superseded the others — is the core content of this topic.
-      </Prose>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <H3>Contrastive alignment (CLIP): teach two encoders to agree</H3>
-
-      <Prose>
-        Imagine two students, one who can only read and one who can only look at pictures, both asked to describe the same concept. Contrastive pre-training is a curriculum that forces them to agree. In each training batch of N image-text pairs, the image student encodes every image into a fixed-size vector and the text student encodes every caption. The loss pushes the N matched pairs' vectors close together and pushes all N²−N mismatched pairs far apart. After enough training on enough pairs, the two students have developed a shared vocabulary of high-dimensional geometry: images of dogs cluster near text about dogs, images of beaches cluster near text about beaches, images of scientific diagrams cluster near technical language. The geometry is the alignment. Zero-shot classification falls out for free because "classify this image" becomes "find the text embedding closest to this image embedding," which requires no additional training at all.
-      </Prose>
-
-      <Prose>
-        The key intuition is that this works without any explicit labels, any explicit definition of "dog" or "beach," any curated hierarchy. The training signal is entirely implicit in the co-occurrence statistics of 400 million pairs scraped from the internet: images that appear near certain text must, on average, be related to that text. The contrastive loss is the mechanism for distilling those co-occurrence statistics into a reusable geometric structure.
-      </Prose>
-
-      <H3>Frozen encoder + projector (LLaVA): bridge two pretrained towers cheaply</H3>
-
-      <Prose>
-        Once CLIP exists, you have a pretrained vision encoder that produces meaningful image representations. Once instruction-tuned LLMs exist, you have a pretrained language model that can follow instructions. The obvious question is: can you connect them without retraining either? The LLaVA intuition is yes, via a thin learned bridge. The vision encoder speaks in its own dimensional language — CLIP's ViT-L/14 outputs 1024-dimensional vectors. The LLM speaks in a different dimensional language — LLaMA's residual stream might be 4096-dimensional. A two-layer MLP can learn to translate between them. The translation is not perfect — the vision encoder was never trained to help a generative model, and the LLM was never trained to receive visual inputs — but it is good enough for a wide range of tasks, and it costs a tiny fraction of what either pretraining run cost.
-      </Prose>
-
-      <Prose>
-        The Q-Former variant (BLIP-2) adds one more insight: you do not need to pass all visual features to the LLM. A 224×224 image with 16×16 patches produces 196 patch tokens; a 336×336 image produces 441. Passing all of them to the LLM is expensive and floods it with spatial detail it may not need. The Q-Former keeps N=32 learned query embeddings that cross-attend to all the visual features and distill them into 32 output tokens — the same count regardless of image resolution. Those 32 tokens are what the LLM receives. The Q-Former learns, during training, which 32 "questions" about the image are most useful for language generation.
-      </Prose>
-
-      <H3>Native multimodal (Chameleon/Gemini): make all tokens equal</H3>
-
-      <Prose>
-        The frozen-encoder approach inherits a structural assumption: that a vision encoder trained with one objective on one dataset can produce features a language model can usefully consume. That assumption holds well enough to ship products, but it is not obviously correct, and it has real failure modes — fine-grained spatial reasoning, precise counting, reading text in images. The native multimodal intuition is to eliminate the assumption. Discretize images into integer tokens using a VQ-GAN; add those token IDs to the shared vocabulary; train one transformer end-to-end on sequences that may contain image tokens, text tokens, or both; use the same cross-entropy loss everywhere. Now there is no assumption about what a frozen vision encoder's features mean to a language model, because there is no frozen vision encoder. There is just a transformer whose embedding table happens to contain both text subwords and image codebook entries, and whose attention mechanism treats both identically.
-      </Prose>
-
-      <Callout accent="gold">
-        Three generations, three philosophies: align two towers (CLIP), bridge two towers (LLaVA), merge into one tower (Chameleon). Each is strictly more capable than the last and strictly more expensive to train.
-      </Callout>
-
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>InfoNCE loss (CLIP)</H3>
-
-      <Prose>
-        Given a batch of <Code>N</Code> image-text pairs, let <Code>v_i ∈ ℝ^d</Code> be the ℓ2-normalised image embedding and <Code>t_i ∈ ℝ^d</Code> the ℓ2-normalised text embedding, both produced by their respective encoders. The pairwise similarity matrix is:
-      </Prose>
-
-      <MathBlock>{"S_{ij} = \\frac{v_i \\cdot t_j}{\\tau}"}</MathBlock>
-
-      <Prose>
-        where <Code>τ</Code> is a learned temperature scalar. The image-to-text loss treats each image as a query and its matched caption as the single correct key among all <Code>N</Code> captions in the batch:
-      </Prose>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{i2t}} = -\\frac{1}{N} \\sum_{i=1}^{N} \\log \\frac{\\exp(S_{ii})}{\\sum_{j=1}^{N} \\exp(S_{ij})}"}</MathBlock>
-
-      <Prose>
-        The text-to-image loss is symmetric — each caption queries across all images. The total CLIP loss is their average:
-      </Prose>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{CLIP}} = \\frac{1}{2}\\left(\\mathcal{L}_{\\text{i2t}} + \\mathcal{L}_{\\text{t2i}}\\right)"}</MathBlock>
-
-      <Prose>
-        This is the InfoNCE (Noise-Contrastive Estimation) objective with the batch providing in-batch negatives. With batch size <Code>B=32768</Code>, every image has 32,767 negatives; the contrastive signal is extremely dense. Small <Code>τ</Code> sharpens the softmax, forcing matched pairs to be much closer than any random pair. The temperature is initialised at 0.07 and learned — the model discovers the right sharpness for the data distribution.
-      </Prose>
-
-      <H3>Projector: (B, N, D_v) → (B, N, D_llm)</H3>
-
-      <Prose>
-        The LLaVA projector is a 2-layer MLP with GELU activation. Given vision features <Code>F ∈ ℝ^(B×N×D_v)</Code>:
-      </Prose>
-
-      <MathBlock>{"\\hat{F} = \\text{GELU}(F W_1 + b_1) W_2 + b_2, \\quad W_1 \\in \\mathbb{R}^{D_v \\times D_{\\text{llm}}},\\; W_2 \\in \\mathbb{R}^{D_{\\text{llm}} \\times D_{\\text{llm}}}"}</MathBlock>
-
-      <Prose>
-        The output <Code>F̂ ∈ ℝ^(B×N×D_llm)</Code> is prepended to the text token embeddings before being passed to the LLM. Nothing in the LLM architecture changes; the visual tokens are just a longer prefix. Only <Code>W1, b1, W2, b2</Code> are trained in stage 1. Stage 2 additionally updates the LLM weights (or LoRA adapters on them).
-      </Prose>
-
-      <H3>Q-Former: N learned queries cross-attending to K visual features</H3>
-
-      <Prose>
-        The Q-Former maintains a set of <Code>M</Code> learned query embeddings <Code>Q ∈ ℝ^(M×D)</Code> (typically M=32). On a forward pass, these queries cross-attend to the <Code>K</Code> frozen visual features <Code>V ∈ ℝ^(K×D_v)</Code> (K may be 196, 256, 441 — whatever the image resolution produces) through standard multi-head cross-attention:
-      </Prose>
-
-      <MathBlock>{"\\text{Attn}(Q, V) = \\text{softmax}\\!\\left(\\frac{QW_q (VW_k)^\\top}{\\sqrt{d_k}}\\right) VW_v"}</MathBlock>
-
-      <Prose>
-        The Q-Former output is always shape <Code>(M, D)</Code> regardless of how large <Code>K</Code> is — the resolution independence is the whole point. The M=32 output tokens are then projected to the LLM dimension. The Q-Former is trained with three objectives simultaneously: image-text contrastive loss, image-grounded text generation loss, and image-text matching loss. The multi-objective training teaches the queries to extract features that are simultaneously alignable with text, useful for generation, and discriminative across images.
-      </Prose>
-
-      <H3>Native multimodal: interleaved CE loss</H3>
-
-      <Prose>
-        In Chameleon-style training, the vocabulary <Code>V = V_text ∪ V_image</Code> is shared. A training sequence <Code>x = (x_1, x_2, ..., x_T)</Code> may contain tokens from either sub-vocabulary in any order. The loss is the standard causal language modeling objective applied uniformly:
-      </Prose>
-
-      <MathBlock>{"\\mathcal{L} = -\\sum_{t=1}^{T} \\log P(x_t \\mid x_{<t}; \\theta)"}</MathBlock>
-
-      <Prose>
-        There is no separate vision loss, no separate text loss, no modality-specific weights. Every token position contributes equally to the gradient, regardless of whether the token is a text subword or an image codebook entry. The model learns, purely from the data distribution, when to generate image tokens versus text tokens.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <H3>4a. CLIP contrastive loss</H3>
-
-      <Prose>
-        We implement the symmetric InfoNCE loss from scratch using only NumPy. The test uses a batch of B=8 pairs with d=64 dimensional embeddings — small enough to inspect, large enough to verify the loss decreases when matched pairs are made more similar.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-
-np.random.seed(42)
-B, d = 8, 64
-tau = 0.07
-
-# Synthetic image / text embeddings, L2-normalised
-V = np.random.randn(B, d).astype(np.float32)
-V /= np.linalg.norm(V, axis=1, keepdims=True)
-
-T = np.random.randn(B, d).astype(np.float32)
-T /= np.linalg.norm(T, axis=1, keepdims=True)
-
-# Pairwise cosine similarities scaled by temperature  (B, B)
-sim = V @ T.T / tau
-
-# Numerically-stable softmax
-def softmax(x):
-    e = np.exp(x - x.max(axis=1, keepdims=True))
-    return e / e.sum(axis=1, keepdims=True)
-
-# Cross-entropy against identity labels (diagonal is the correct pair)
-labels = np.arange(B)
-
-def cross_entropy(logits, labels):
-    probs = softmax(logits)
-    return -np.mean(np.log(probs[np.arange(len(labels)), labels] + 1e-9))
-
-L_i2t = cross_entropy(sim,   labels)   # image queries text keys
-L_t2i = cross_entropy(sim.T, labels)   # text queries image keys
-L_clip = (L_i2t + L_t2i) / 2
-
-print(f"L_image2text      = {L_i2t:.4f}")
-print(f"L_text2image      = {L_t2i:.4f}")
-print(f"L_clip (symmetric)= {L_clip:.4f}")
-print(f"sim matrix shape  : {sim.shape}")
-
-# Output:
-# L_image2text      = 3.1813
-# L_text2image      = 3.1071
-# L_clip (symmetric)= 3.1442
-# sim matrix shape  : (8, 8)`}
-      </CodeBlock>
-
-      <Prose>
-        The loss of ~3.14 with 8 random pairs is sensible: log(8) ≈ 2.08 is the theoretical maximum (uniform distribution over 8 choices), but the temperature τ=0.07 sharpens the distribution aggressively, pushing raw logits into much higher ranges and inflating the loss above log(N). In a real CLIP run with B=32768 and well-matched pairs the diagonal will dominate and the loss will drop toward zero; here it is high because the embeddings are random and carry no actual semantic signal.
-      </Prose>
-
-      <H3>4b. Patchify + linear projection</H3>
-
-      <Prose>
-        The ViT patch projection is a reshape followed by a learned linear map. A 224×224 image with 16×16 patches produces 196 tokens. This is covered in detail in the sibling Multimodal Tokenization topic; we include a compact version here for completeness and to establish the shapes used in sections 4c and 4d.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-
-H, W, C = 224, 224, 3
-P = 16                          # patch side length in pixels
-N = (H // P) * (W // P)         # = 196 patches
-d_model = 768                   # hidden dimension
-
-img = np.random.randn(H, W, C).astype(np.float32)
-
-# Reshape: (H, W, C) -> (N, P*P*C)
-patches = (
-    img.reshape(H // P, P, W // P, P, C)
-       .transpose(0, 2, 1, 3, 4)
-       .reshape(-1, P * P * C)
-)
-
-# Learned linear projection E: (P²C, d_model)
-E = np.random.randn(P * P * C, d_model).astype(np.float32) * 0.02
-z = patches @ E   # (N, d_model)
-
-print(f"image shape   : {img.shape}")
-print(f"patches shape : {patches.shape}   ({N} patches, dim {P*P*C})")
-print(f"projected z   : {z.shape}   ({N} tokens, dim {d_model})")
-
-# image shape   : (224, 224, 3)
-# patches shape : (196, 768)   (196 patches, dim 768)
-# projected z   : (196, 768)   (196 tokens, dim 768)`}
-      </CodeBlock>
-
-      <PatchGrid
-        label="ViT-style patch decomposition — 14×14 grid, 196 tokens"
-        src="https://picsum.photos/seed/multimodal-pretrain/224/224"
-        patches={14}
-        size={260}
-      />
-
-      <H3>4c. LLaVA projector + two-stage training sketch</H3>
-
-      <Prose>
-        The projector takes frozen vision features of shape (B, N_vis, D_v) and produces embeddings of shape (B, N_vis, D_llm) that the LLM can consume as a prefix. Only the projector weights have gradients in stage 1. In stage 2, the LLM weights are unfrozen (or LoRA adapters are added). The vision encoder stays frozen throughout.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-
-# Dimensions matching LLaVA-1.5 with LLaMA-2 13B
-D_v   = 1024    # CLIP ViT-L/14 output dim
-D_llm = 5120    # LLaMA-2 13B hidden dim
-N_vis = 256     # visual tokens (after CLIP: 16×16 patches = 256)
-B     = 1
-
-# ── Simulated frozen vision encoder output ──────────────────────────────
-# In real LLaVA: this comes from CLIP ViT forward pass, no grad
-vis_feats = np.random.randn(B, N_vis, D_v).astype(np.float32)
-
-# ── 2-layer MLP projector (trainable) ───────────────────────────────────
-# W1, b1, W2, b2 are the ONLY parameters updated in stage 1
-W1 = np.random.randn(D_v,   D_llm).astype(np.float32) * 0.02
-b1 = np.zeros(D_llm, dtype=np.float32)
-W2 = np.random.randn(D_llm, D_llm).astype(np.float32) * 0.02
-b2 = np.zeros(D_llm, dtype=np.float32)
-
-# Forward pass
-h    = np.maximum(vis_feats @ W1 + b1, 0)   # ReLU activation
-proj = h @ W2 + b2                            # (B, N_vis, D_llm)
-
-print(f"vision feats : {vis_feats.shape}  (frozen)")
-print(f"projected    : {proj.shape}  <- prepended to LLM input as visual prefix")
-
-# Stage-1 training note:
-#   optimizer.param_groups = [{'params': [W1, b1, W2, b2]}]
-#   vision encoder: requires_grad = False throughout
-#   LLM: requires_grad = False in stage 1, True in stage 2
-
-# vision feats : (1, 256, 1024)  (frozen)
-# projected    : (1, 256, 5120)  <- prepended to LLM input as visual prefix`}
-      </CodeBlock>
-
-      <Prose>
-        Stage 1 trains only the projector on a large corpus of image-caption pairs — typically 558K filtered CC3M pairs in the original LLaVA. The LLM receives visual tokens as a prefix and must predict the caption tokens; the projector's gradient signal comes entirely from how well the LLM can predict the caption given the projected visual prefix. This stage is fast: the frozen LLM acts as a fixed scoring function. Stage 2 unfreezes the LLM (or adds LoRA) and fine-tunes on visual instruction-following data: conversations, visual question answering, reasoning chains about images. The vision encoder stays frozen throughout both stages.
-      </Prose>
-
-      <H3>4d. Q-Former mini-demo</H3>
-
-      <Prose>
-        The Q-Former's resolution-independence property is its main selling point. Below we show that M=32 learned queries cross-attending to K=256 visual features always produce exactly 32 output tokens, regardless of K.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-
-M = 32    # number of learned queries (fixed, resolution-independent)
-K = 256   # visual features from encoder (varies with image resolution)
-D = 512   # Q-Former hidden dim
-
-# Learned query embeddings (initialised and trained, not derived from input)
-queries = np.random.randn(1, M, D).astype(np.float32) * 0.02
-
-# Frozen visual features (from CLIP or any pretrained encoder)
-vis_kv = np.random.randn(1, K, D).astype(np.float32)
-
-# Single-head cross-attention  Q = queries, K/V = vis_kv
-Wq = np.random.randn(D, D).astype(np.float32) * 0.02
-Wk = np.random.randn(D, D).astype(np.float32) * 0.02
-Wv = np.random.randn(D, D).astype(np.float32) * 0.02
-
-Q_proj = queries @ Wq           # (1, M, D)
-K_proj = vis_kv  @ Wk           # (1, K, D)
-V_proj = vis_kv  @ Wv           # (1, K, D)
-
-scale       = np.sqrt(D)
-attn_scores = np.einsum('bmd,bkd->bmk', Q_proj, K_proj) / scale  # (1, M, K)
-attn_probs  = np.exp(attn_scores - attn_scores.max(-1, keepdims=True))
-attn_probs /= attn_probs.sum(-1, keepdims=True)
-
-out = np.einsum('bmk,bkd->bmd', attn_probs, V_proj)  # (1, M, D)
-
-print(f"queries shape     : {queries.shape}")
-print(f"vis_kv shape      : {vis_kv.shape}  (K can be 196, 256, 441...)")
-print(f"attn_scores shape : {attn_scores.shape}  (M queries attend to K features)")
-print(f"Q-Former output   : {out.shape}   <- always M tokens, resolution-independent")
-
-# queries shape     : (1, 32, 512)
-# vis_kv shape      : (1, 256, 512)  (K can be 196, 256, 441...)
-# attn_scores shape : (1, 32, 256)   (M queries attend to K features)
-# Q-Former output   : (1, 32, 512)   <- always M tokens, resolution-independent`}
-      </CodeBlock>
-
-      <H3>4e. Interleaved sequence constructor</H3>
-
-      <Prose>
-        Native multimodal training uses interleaved sequences. The constructor below shows how text and image tokens are merged into a single integer sequence with boundary markers, and reports the total token count.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Special token IDs (beyond the regular vocabulary)
-IMG_START = 32000   # <img>
-IMG_END   = 32001   # </img>
-VIS_TOKENS = 256    # image codebook tokens per image (VQ-GAN compressed)
-
-# Example document: caption, then image, then follow-up text, then another image
-text1 = [101, 2023, 2003, 1037, 3319, 1997]     # "this is a photo of"
-img1  = [IMG_START] + list(range(8000, 8000 + VIS_TOKENS)) + [IMG_END]
-text2 = [2023, 2003, 1037, 5965, 6077, 102]     # "this is a golden retriever"
-img2  = [IMG_START] + list(range(9000, 9000 + VIS_TOKENS)) + [IMG_END]
-
-sequence = text1 + img1 + text2 + img2
-
-print(f"text1  tokens : {len(text1)}")
-print(f"img1   tokens : {len(img1)}  ({VIS_TOKENS} visual + 2 markers)")
-print(f"text2  tokens : {len(text2)}")
-print(f"img2   tokens : {len(img2)}  ({VIS_TOKENS} visual + 2 markers)")
-print(f"total sequence: {len(sequence)} tokens")
-print()
-print(f"layout: [text: {len(text1)}] [<img>+vis+</img>: {len(img1)}] "
-      f"[text: {len(text2)}] [<img>+vis+</img>: {len(img2)}]")
-print(f"training loss computed over all {len(sequence)} positions uniformly")
-
-# text1  tokens : 6
-# img1   tokens : 258  (256 visual + 2 markers)
-# text2  tokens : 6
-# img2   tokens : 258
-# total sequence: 528 tokens
-# layout: [text: 6] [<img>+vis+</img>: 258] [text: 6] [<img>+vis+</img>: 258]
-# training loss computed over all 528 positions uniformly`}
-      </CodeBlock>
-
-      <Prose>
-        The uniform loss across all 528 positions means the model is penalised for incorrectly predicting both text tokens and image tokens. When the model generates an image, it must correctly predict each codebook index given the preceding context — text and image alike. This is qualitatively different from the frozen-encoder approach, where the model only ever generates text; the native multimodal model is genuinely bidirectional across modalities.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        In production, CLIP and LLaVA-family models are available via HuggingFace Transformers. The CLIPModel class wraps both encoders and exposes the joint similarity computation; LlavaForConditionalGeneration handles the full frozen-encoder+projector pipeline end-to-end, including the processor that tokenises text and patchifies images into the format the model expects.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# ── CLIP: image-text similarity (zero-shot retrieval) ───────────────────
-from transformers import CLIPProcessor, CLIPModel
-from PIL import Image
-import requests, torch
-
-model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
-processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
-
-# Load any image
-url = "https://picsum.photos/seed/dog/224/224"
-image = Image.open(requests.get(url, stream=True).raw)
-
-texts = ["a photo of a dog", "a photo of a cat", "a photo of a car"]
-inputs = processor(text=texts, images=image, return_tensors="pt", padding=True)
-
-with torch.no_grad():
-    outputs = model(**inputs)
-
-logits = outputs.logits_per_image[0]       # (3,) similarities
-probs  = logits.softmax(dim=0)
-
-for t, p in zip(texts, probs):
-    print(f"  {p:.3f}  {t}")`}
-      </CodeBlock>
-
-      <CodeBlock language="python">
-{`# ── LLaVA-1.5: visual question answering ────────────────────────────────
-from transformers import LlavaForConditionalGeneration, AutoProcessor
-from PIL import Image
-import requests, torch
-
-model_id = "llava-hf/llava-1.5-7b-hf"   # requires ~14 GB VRAM
-model = LlavaForConditionalGeneration.from_pretrained(
-    model_id, torch_dtype=torch.float16, device_map="auto"
-)
-processor = AutoProcessor.from_pretrained(model_id)
-
-image = Image.open(requests.get(
-    "https://picsum.photos/seed/citystreet/512/512", stream=True
-).raw)
-
-# LLaVA's chat template: <image> marker in user turn
-conversation = [
-    {
-        "role": "user",
-        "content": [
-            {"type": "image"},
-            {"type": "text", "text": "Describe what you see in this image."},
-        ],
-    }
-]
-
-prompt = processor.apply_chat_template(conversation, add_generation_prompt=True)
-inputs = processor(images=image, text=prompt, return_tensors="pt").to(model.device)
-
-with torch.no_grad():
-    output_ids = model.generate(**inputs, max_new_tokens=128)
-
-response = processor.decode(output_ids[0][inputs["input_ids"].shape[-1]:],
-                             skip_special_tokens=True)
-print(response)`}
-      </CodeBlock>
-
-      <Prose>
-        The processor is doing significant hidden work: it runs the CLIP ViT forward pass, extracts patch features, applies the two-layer MLP projector, and constructs the token sequence with visual features prepended to the text tokens. From the LLM's perspective it receives a single tensor of shape (1, N_vis + N_text, D_llm) — it does not "know" that some tokens came from an image. The visual tokens are just a longer prefix.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>Image-text similarity matrix (CLIP setup)</H3>
-
-      <Prose>
-        The heatmap below shows a 5×5 cosine similarity matrix from a CLIP-style setup. Rows are images, columns are captions. The diagonal — matched pairs — should be warm; off-diagonal entries — mismatched pairs — should be cool. The contrastive loss pushes the matrix toward an identity-like structure over training.
-      </Prose>
-
-      <Heatmap
-        label="clip image-text cosine similarities — matched pairs on diagonal"
-        matrix={[
-          [0.91, 0.12, 0.08, 0.14, 0.06],
-          [0.11, 0.88, 0.15, 0.07, 0.09],
-          [0.09, 0.13, 0.85, 0.11, 0.07],
-          [0.07, 0.08, 0.10, 0.90, 0.12],
-          [0.05, 0.10, 0.08, 0.13, 0.87],
-        ]}
-        rowLabels={["img_0", "img_1", "img_2", "img_3", "img_4"]}
-        colLabels={["cap_0", "cap_1", "cap_2", "cap_3", "cap_4"]}
-        cellSize={44}
-        colorScale="gold"
-      />
-
-      <H3>Interleaved multimodal token stream</H3>
-
-      <Prose>
-        The token stream below shows how a native multimodal sequence looks at the token level. Yellow tokens are text subwords; purple tokens are boundary markers; blue tokens are image codebook indices. From the transformer's perspective, this is a single flat sequence of integers — there is no modal seam at the architecture level.
-      </Prose>
-
-      <TokenStream
-        label="native multimodal sequence — text + image tokens interleaved"
-        tokens={[
-          { label: "A", color: "#e2b55a" },
-          { label: " photo", color: "#e2b55a" },
-          { label: " of", color: "#e2b55a" },
-          { label: " a", color: "#e2b55a" },
-          { label: " dog:", color: "#e2b55a" },
-          { label: "<img>", color: "#c084fc" },
-          { label: "v_841", color: "#60a5fa" },
-          { label: "v_203", color: "#60a5fa" },
-          { label: "v_1190", color: "#60a5fa" },
-          { label: "v_77", color: "#60a5fa" },
-          { label: "v_512", color: "#60a5fa" },
-          { label: "v_6", color: "#60a5fa" },
-          { label: "</img>", color: "#c084fc" },
-          { label: "The", color: "#e2b55a" },
-          { label: " dog", color: "#e2b55a" },
-          { label: " is", color: "#e2b55a" },
-          { label: " brown", color: "#e2b55a" },
-          { label: ".", color: "#e2b55a" },
-        ]}
-      />
-
-      <H3>Stage-1 vs stage-2 loss curves</H3>
-
-      <Prose>
-        Stage 1 (projector-only training) shows a fast initial drop as the projector learns the coarse mapping from vision space to LLM space, then plateaus. Stage 2 (LLM unfrozen) starts from that plateau and continues dropping as the LLM adapts to interpret the visual prefix — but the gains come more slowly because the LLM has many more parameters to update.
-      </Prose>
-
-      <Plot
-        label="stage-1 vs stage-2 training loss"
-        xLabel="steps (×1k)"
-        yLabel="loss"
-        series={[
-          {
-            name: "stage-1 (projector only)",
-            color: colors.gold,
-            points: [
-              [0, 3.8], [5, 2.9], [10, 2.4], [15, 2.1], [20, 1.95],
-              [25, 1.88], [30, 1.84], [35, 1.82], [40, 1.81],
-            ],
-          },
-          {
-            name: "stage-2 (LLM unfrozen)",
-            color: "#60a5fa",
-            points: [
-              [40, 1.81], [45, 1.65], [50, 1.52], [55, 1.44], [60, 1.38],
-              [65, 1.33], [70, 1.30], [75, 1.28], [80, 1.26],
-            ],
-          },
-        ]}
-      />
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <Prose>
-        Choosing a multimodal architecture is primarily a compute budget and task fidelity decision. The three paradigms have non-overlapping sweet spots.
-      </Prose>
-
-      <Prose>
-        Use contrastive alignment (CLIP and variants) when your task is retrieval, search, or classification and you do not need to generate text. CLIP embeddings are fast to compute, easy to index with approximate nearest-neighbour search, and highly transferable across domains with no fine-tuning. The ceiling is hard: you cannot ask CLIP to explain why two images are similar or describe what is in an image. If you need generation, CLIP alone is not enough.
-      </Prose>
-
-      <Prose>
-        Use frozen-encoder plus projector (LLaVA, InstructBLIP) when your budget is limited, you need generative multimodal capability, and you can tolerate the ceiling imposed by the frozen encoder. A full LLaVA-1.5 13B training run costs on the order of a few hundred GPU-hours on A100s — feasible for an academic lab or small team. The projector stage alone can be done in tens of GPU-hours. The resulting model performs well on captioning, visual QA, and instruction following; it underperforms on tasks requiring precise spatial reasoning, small-text reading, or fine-grained attribute binding.
-      </Prose>
-
-      <Prose>
-        Use native multimodal training (Chameleon, Gemini, future architectures in this line) when you need the best-quality cross-modal reasoning, you want the model to generate in multiple modalities, and you have the compute budget for a full pre-training run. The advantages are real: no ontology mismatch between the vision encoder and the LLM, no structural bottleneck from a frozen encoder, and the ability to generate images or audio using the same sampling machinery as text. The cost is real too: training a Chameleon-7B scale model requires thousands of GPU-hours and terabytes of interleaved multimodal data.
-      </Prose>
-
-      <Callout accent="gold">
-        Rule of thumb: CLIP for retrieval; frozen+projector for low-budget generation; native multimodal when you can afford to train one and need the best cross-modal quality.
-      </Callout>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>What scales well</H3>
-
-      <Prose>
-        CLIP scales strongly with batch size. The InfoNCE loss with in-batch negatives gets a better training signal when B is larger — more negatives per positive means the model must be more discriminative. OpenAI's original CLIP used B=32768; SigLIP (Zhai et al., 2023) showed that replacing the softmax with sigmoid (so each pair is an independent binary prediction) partially decouples performance from batch size, but the batch-size effect is real and large for the standard InfoNCE formulation.
-      </Prose>
-
-      <Prose>
-        LLaVA-style systems scale well with LLM size. Replacing a 7B LLM with a 13B or 70B LLM behind the same projector improves downstream task performance substantially, and the projector requires almost no additional parameters. The vision encoder quality also matters but saturates earlier — the gap between ViT-B and ViT-L is large; the gap between ViT-L and ViT-G is smaller; beyond that the returns diminish.
-      </Prose>
-
-      <Prose>
-        Native multimodal models scale with everything simultaneously: model size, data scale, data quality, and training compute. The Gemini 1.5 report documents consistent improvements across all three axes with no obvious plateau in the studied regime. Chameleon's training instabilities at scale (documented in the paper) were addressed through careful architecture choices — QK-norm, revised layer-norm placement — suggesting that the scaling behavior is architecture-sensitive in ways that text-only models are not.
-      </Prose>
-
-      <H3>What doesn't scale</H3>
-
-      <Prose>
-        Patch token count scales quadratically with image resolution. A 224×224 image at patch size 16 gives 196 tokens; a 448×448 image gives 784 tokens; a 672×672 image gives 1,764 tokens. Feeding high-resolution images to a frozen-encoder+LLM system means the LLM must attend over a very long visual prefix, which is expensive and often hits context length limits. LLaVA-HD and LLaVA-1.6 address this by splitting high-resolution images into tiles and encoding each tile separately — a practical fix but one that increases token count further. Native multimodal systems have the same quadratic problem at the image tokenization stage.
-      </Prose>
-
-      <Prose>
-        Visual reasoning does not scale as cleanly as visual recognition. Adding more image-caption pairs or more compute improves recognition benchmarks (ImageNet, zero-shot classification) at predictable rates. It improves reasoning benchmarks (spatial QA, counting, text reading in images) at much slower rates. The current evidence suggests that reasoning capabilities require qualitatively different training signal — dense spatial annotations, chain-of-thought reasoning traces grounded in images — rather than just more of the same weakly-labelled pairs.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>1. CLIP batch-size dependence</H3>
-      <Prose>
-        The InfoNCE loss is critically sensitive to batch size in ways that most other losses are not. Halving the batch from 32K to 16K approximately halves the number of negatives per positive, significantly weakening the training signal. Small-batch CLIP training (batch sizes below 4K) often produces embeddings with poor zero-shot transfer. If your compute budget constrains batch size, consider SigLIP's sigmoid variant or using a memory bank of stored embeddings as additional negatives.
-      </Prose>
-
-      <H3>2. Projector overfitting in stage 1</H3>
-      <Prose>
-        Stage 1 trains only the projector — typically 5–20M parameters — on hundreds of thousands of image-caption pairs. This is a very small model on a moderate dataset, and projectors overfit readily if trained too long. A projector that overfits to the stage-1 captions will have learned to predict those captions rather than to map vision features to general LLM representations. The symptom is good stage-1 validation loss but poor stage-2 performance. Standard fixes: regularise the projector (weight decay, dropout), keep stage 1 short, use diverse caption data.
-      </Prose>
-
-      <H3>3. Frozen-encoder / LLM ontology mismatch</H3>
-      <Prose>
-        CLIP's vision encoder was trained to align with short, simple captions scraped from the web: "a cat," "Paris Eiffel Tower," "business meeting." The LLM was trained on rich, structured natural language including complex reasoning, technical prose, and multi-step instructions. The projector must bridge these two very different representation styles. For tasks within the CLIP training distribution (recognising common objects, matching simple descriptions) the bridge works well. For tasks that require the LLM to reason about fine-grained visual attributes — the exact shade of a color, the specific model of a car, the precise spatial relationship between objects — the projector cannot recover information that the CLIP encoder never represented richly in the first place. This is not a projector problem; it is a ceiling imposed by the frozen encoder's pretraining objective.
-      </Prose>
-
-      <H3>4. Visual hallucination</H3>
-      <Prose>
-        Multimodal models frequently generate text that is plausible but not grounded in the actual image: objects that are not present, attributes that are incorrect, relationships that are inverted. Hallucination is worse in frozen-encoder models than in native multimodal models, and worse still when the image contains unusual or rare content that the vision encoder has not seen enough of. The root cause is that the LLM's strong language prior can "fill in" details that are not in the visual prefix — it generates what is likely given the text context, not what is in the image. Mitigation strategies include instruction-following fine-tuning on datasets specifically designed to punish hallucination (LLaVA-rlhf, POVID), and inference-time techniques like visual contrastive decoding.
-      </Prose>
-
-      <H3>5. Safety filters that don't see the image</H3>
-      <Prose>
-        A common deployment mistake is applying a text-only safety filter to the text output of a multimodal model without also checking the input image. An adversarial user can provide an image containing harmful content (text embedded in an image, a visual prompt injection, NSFW imagery) whose textual description would be blocked, but the model sees the image and generates a response that references or acts on the image content. The correct architecture applies safety checks to both the image (using a separate image classifier or the multimodal model itself as a judge) and the generated text.
-      </Prose>
-
-      <H3>6. Preprocessing mismatch between train and inference</H3>
-      <Prose>
-        CLIP and ViT models are trained with specific preprocessing: exact image size (224×224 or 336×336), specific normalization constants (ImageNet mean/std: [0.485, 0.456, 0.406] / [0.229, 0.224, 0.225] or CLIP's own constants), and center-crop vs. resize-and-crop. Using the wrong preprocessing at inference — even slightly different normalization constants — can cause substantial performance degradation. Always use the processor class provided by the model's HuggingFace repository rather than writing your own preprocessing code.
-      </Prose>
-
-      <H3>7. Interleaved layout ordering artifacts</H3>
-      <Prose>
-        Native multimodal models trained on interleaved sequences develop strong priors about the typical order of modalities in their training data. If a model saw mostly text-then-image sequences during training, it will struggle with image-then-text sequences at inference. Models also develop position-in-sequence biases: an image at position 0 (the start of a conversation) is processed differently than an image at position 500 (mid-conversation), because the positional embedding distribution seen during training was non-uniform. Always check whether your inference-time layout matches the training data layout.
-      </Prose>
-
-      <H3>8. Position embeddings across modalities</H3>
-      <Prose>
-        Standard learned absolute positional embeddings do not generalise to sequence lengths longer than those seen during training. This is a problem for both the image tokenizer (higher-resolution images produce more tokens than the model was trained on) and for native multimodal models (long interleaved documents may exceed the training context length). RoPE (Rotary Position Embedding) is now standard for the LLM backbone and generalises better, but the 2D positional structure of image patches often requires separate handling. LLaVA-1.6 and related models use image-specific positional encodings that are independent of the text sequence position.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        The six papers below are the direct references for this topic. All arXiv IDs and titles are verified.
-      </Prose>
-
-      <Prose>
-        <strong>Radford et al. (2021). "Learning Transferable Visual Models From Natural Language Supervision."</strong> arXiv:2103.00020. Published ICML 2021. Introduces CLIP: 400M image-text pairs, contrastive pretraining of a vision encoder and text encoder, symmetric InfoNCE loss, temperature learned during training. Demonstrates zero-shot ImageNet classification competitive with supervised ResNets.
-      </Prose>
-
-      <Prose>
-        <strong>Dosovitskiy et al. (2021). "An Image is Worth 16×16 Words: Transformers for Image Recognition at Scale."</strong> arXiv:2010.11929. Published ICLR 2021. Introduces ViT: divide image into non-overlapping 16×16 patches, project each to d-dimensional embedding, feed sequence to standard transformer. No convolutions. Pretrained on JFT-300M, sets state-of-the-art on ImageNet and CIFAR-100.
-      </Prose>
-
-      <Prose>
-        <strong>Li et al. (2023). "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models."</strong> arXiv:2301.12597. Published ICML 2023. Introduces the Q-Former: M=32 learned queries cross-attending to frozen vision features, trained with three objectives (ITC, ITG, ITM), output 32 tokens passed to frozen LLM. Outperforms Flamingo-80B on zero-shot VQAv2 with 54x fewer trainable parameters.
-      </Prose>
-
-      <Prose>
-        <strong>Liu et al. (2023). "Visual Instruction Tuning."</strong> arXiv:2304.08485. Published NeurIPS 2023. Introduces LLaVA: GPT-4-generated visual instruction data, CLIP ViT-L/14 frozen encoder, linear projection (later 2-layer MLP in 1.5), two-stage training (projector-only then LLM fine-tune). Achieves 85.1% relative GPT-4 score on synthetic visual instruction benchmark.
-      </Prose>
-
-      <Prose>
-        <strong>Chameleon Team, Meta FAIR (2024). "Chameleon: Mixed-Modal Early-Fusion Foundation Models."</strong> arXiv:2405.09818. First large-scale demonstration of native early-fusion multimodal training: VQ-GAN image tokenizer, shared vocabulary of 65k text + 8k image tokens, single decoder-only transformer trained end-to-end on ~10T interleaved tokens. Documents training instabilities at scale and architectural fixes (QK-norm, modified layer norm).
-      </Prose>
-
-      <Prose>
-        <strong>Gemini Team, Google (2024). "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context."</strong> arXiv:2403.05530. Documents the Gemini 1.5 family: mixture-of-experts architecture, multimodal training on text, image, audio, and video, million-token context window, near-perfect recall on long-context retrieval tasks across modalities.
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — Derive the InfoNCE gradient</H3>
-      <Prose>
-        Write out the partial derivative of <Code>L_clip</Code> with respect to the image embedding <Code>v_i</Code>. Show that the gradient has two terms: a positive term pulling <Code>v_i</Code> toward its matched text embedding <Code>t_i</Code>, and a negative term pushing it away from all other text embeddings in the batch, weighted by their current similarity. What does this tell you about why large batch sizes give stronger signal?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — Why symmetric two-sided loss</H3>
-      <Prose>
-        CLIP uses both the image-to-text loss and the text-to-image loss. Imagine training with only the image-to-text loss. What failure mode would emerge? Specifically, what would happen to the text encoder's representations — would they remain well-distributed or would they collapse? Use the gradient analysis from Exercise 1 to reason about this.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — Q-Former output count independent of resolution</H3>
-      <Prose>
-        Explain in your own words why the Q-Former produces exactly M=32 output tokens regardless of whether the input image is 224×224 (196 patches) or 448×448 (784 patches). Now explain the tradeoff: what information is necessarily discarded when M=32 queries must summarise 784 visual features? Under what types of visual tasks would this compression hurt most?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — Stage-1 vs stage-2 freezing strategy</H3>
-      <Prose>
-        LLaVA trains the projector alone in stage 1, then unfreezes the LLM in stage 2. Why not skip stage 1 and start with stage 2 directly? What would happen to the projector's gradients if the LLM is also training from random initialisation of the projector? Separately, explain why the vision encoder stays frozen throughout both stages rather than being unfrozen in stage 2.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — When native multimodal is worth the cost</H3>
-      <Prose>
-        You are building a product that must (a) retrieve the most relevant image from a database given a text query, (b) generate a detailed caption for a retrieved image, and (c) edit an image by generating a modified version from a text instruction. For each of these three capabilities, identify whether contrastive alignment, frozen-encoder+projector, or native multimodal training is the minimum architecture needed. Can all three be served by a single native multimodal model, and if so, what does that cost compared to running three purpose-built models?
-      </Prose></div></section>
-    </div>
-  ),
+  title: 'Multimodal Pre-Training (Vision Encoders, Cross-Modal Alignment)',
+  readTime: '~65 min read + 100 min practice',
+  content: () => <div className="lesson-flow mmp-lesson">
+    <LessonIntro prerequisites={['Multimodal Tokenization', 'Vision Transformers', 'Causal Language Modeling', 'Cross-Attention']}>Connect pictures to language by following the actual representations, training targets and gradient paths. Build paired alignment, train a small offline model, then trace visual evidence through prefixes, learned queries, separate memory and mixed token streams.</LessonIntro>
+    <Prose opening="route"><strong>First pass:</strong> read sections 1–5, 7–8, 11 and 13 in order. Run the five supplied programs beside their explanations. The visible deeper branches in sections 6, 9–10 and 12 compare alternative objectives and interfaces. Finish with the changed problems in section 14.</Prose>
+    <Prose opening="exploration">Colours trace picture, caption, query and target identities, with written labels beside them. Hand calculations use stipulated vectors; the handwriting experiment uses real measurements and saved fitted weights. Changing a diagram shows its current consequence immediately. Selecting an experiment record does not retrain a model.</Prose>
+
+    <Legacy id="1-why-it-exists" /><Legacy id="1-start-with-the-problem" />
+    <H2>1. Give pictures and words the same task</H2>
+    <Prose>Imagine a small image archive. A visitor types “digit seven” and expects pictures of sevens near the top. The pixels and words have different formats, but they refer to the same class of object. We need a score that connects them.</Prose>
+    <PairedArchive />
+    <Prose>A training pair records an image and an associated text. Its pair ID tells us which two records were supplied together; its class label, when available, tells us which records describe the same category. These are different relationships. Two pictures of seven can share the caption “digit seven,” even though they have different source IDs.</Prose>
+    <Prose>The archive task asks for a ranking. A second task asks, “Which digit is written here?” and expects a generated sentence. A third asks for a new drawing and expects pixels. Look at the output objects before choosing a model.</Prose>
+    <OutputInterfaces />
+    <Prose>A <strong>dual encoder</strong> maps the image and text into vectors that can be compared. This supports retrieval and classification over supplied text candidates. It does not acquire an autoregressive text decoder just because one encoder reads text. A vision-language generator needs a route from visual evidence into a language model. A system that emits discrete image IDs additionally needs a decoder that turns those IDs into an image.</Prose>
+    <Prose><strong>Alignment</strong> means learning a useful relationship between representations under a stated objective. It does not mean that every coordinate has an English meaning, that every word is grounded to a pixel, or that equal vector widths imply equal semantics. The paired data, architecture and loss jointly shape what becomes useful.</Prose>
+    <Prose><a href="https://proceedings.mlr.press/v139/radford21a.html">CLIP</a> learns from image–text pairings without requiring a fixed closed list of class IDs for its web-scale objective. Pairing is still supervision: the training procedure treats some associations as positive and others as competitors. In our small experiment, we deliberately derive captions from class labels, so its supervision is more explicit.</Prose>
+
+    <Legacy id="2-core-intuition" /><Legacy id="2-build-the-intuition" />
+    <H2>2. Keep the representation you need</H2>
+    <Prose>Return to the picture-to-vector boundary from <a href={`${route}multimodal-tokenization-visual-audio-video?module=large-language-models#2-turn-a-pixel-grid-into-patch-vectors`}>Multimodal Tokenization</a>. A vision encoder can return one feature row per spatial patch, often with an additional summary token. Pooling or selecting a summary state produces one vector for the whole image. These outputs serve different jobs.</Prose>
+    <FeatureAnatomy />
+    <Prose>An 8×8 image divided into nonoverlapping 2×2 patches has 16 patch positions. Each patch initially contains four grayscale measurements. A learned patch projection changes those four numbers into a feature vector. A Transformer mixes information between positions; a final patch row can therefore contain evidence beyond its original square. Position identifies where the row started, not an exclusive receptive field.</Prose>
+    <MathBlock>{String.raw`N=(H/P)(W/P),\qquad X_{\rm spatial}\in\mathbb R^{B\times N\times d_v},\qquad x_{\rm pooled}\in\mathbb R^{B\times d_v}`}</MathBlock>
+    <Prose><Code>B</Code> is batch size, <Code>H,W</Code> are image height and width, <Code>P</Code> is patch side, and <Code>dᵥ</Code> is vision feature width. The count assumes divisible dimensions and no extra tokens. A CLS summary adds one encoder position; dropping it restores the patch count. Preprocessing may resize, crop or pad before this calculation, so use the actual processed shape.</Prose>
+    <Prose>For whole-image matching, project the pooled image and pooled text states into the same width <Code>d</Code>, then normalize each vector. In our code, PyTorch's linear weights have shape <Code>[output,input]</Code>: a row batch becomes <Code>X @ W.T + b</Code>. This is the transpose of a row-array convention that stores weights as <Code>[input,output]</Code>.</Prose>
+    <SharedDirections />
+    <Prose>The circle uses deliberately supplied two-dimensional vectors, not measured CLIP features. Image A points to <Code>(1,0)</Code>, image B to <Code>(0,1)</Code>, and image C to <Code>(−1,0)</Code>. Caption b points to <Code>(0.6,0.8)</Code>. Its dot product with A is 0.6 and with B is 0.8. After unit normalization, a dot product is cosine similarity: direction matters, not raw length.</Prose>
+    <MathBlock>{String.raw`u_i=\frac{f_I(I_i)}{\lVert f_I(I_i)\rVert_2},\quad v_j=\frac{f_T(T_j)}{\lVert f_T(T_j)\rVert_2},\quad S_{ij}=s\,u_i^\top v_j,\quad s=\exp(a)>0`}</MathBlock>
+    <Prose><Code>fᵢ</Code> and <Code>fₜ</Code> include the respective encoder and projection. The learned log scale <Code>a</Code> gives positive scale <Code>s</Code>; temperature is <Code>τ=1/s</Code>. Increasing scale sharpens a candidate softmax without rotating either vector. A zero vector has no cosine direction. Our explicit NumPy route rejects norms at or below <Code>1e−12</Code>; the Torch comparison uses only values above that threshold. Torch's epsilon fallback is a numerical convention, not a meaningful direction at zero.</Prose>
+    <Prose>A language connector may instead retain <Code>N</Code> spatial rows so that the language model can consult distributed visual evidence. A single pooled vector can lose distinctions that matter for small text or spatial relationships. Retaining patches helps preserve an interface to such evidence; it does not guarantee the encoder learned the needed detail.</Prose>
+
+    <Legacy id="3-mathematical-foundation" /><Legacy id="3-make-the-idea-precise" />
+    <H2>3. Turn pair identities into a learning signal</H2>
+    <Prose>Put the three image vectors down the rows and the three caption vectors across the columns. The diagonal is the supplied pairing. With scale 2, multiply every image–text dot product to obtain the scores below.</Prose>
+    <PairMatrix />
+    <Prose>For image A, the scores are <Code>[2,1.2,−2]</Code>. Exponentiation turns scores into positive weights; division by the row's total makes probabilities over that row's candidate captions. Its paired caption a should receive more of this mass. For caption b, instead read its column and normalize across candidate images. These two denominators are generally different.</Prose>
+    <MathBlock>{String.raw`p_{ij}^{I\to T}=\frac{e^{S_{ij}}}{\sum_k e^{S_{ik}}},\qquad p_{ij}^{T\to I}=\frac{e^{S_{ij}}}{\sum_k e^{S_{kj}}}`}</MathBlock>
+    <Prose>A probability here answers a restricted question: which candidate in this batch is the designated match? It is not the probability that the caption is true in the world. Other correct captions can be absent; some supplied captions can be incomplete or wrong. Section 6 revisits the assumption that only one diagonal cell is positive.</Prose>
+    <DirectionalReduction />
+    <MathBlock>{String.raw`\mathcal L=\frac12\left[-\frac1N\sum_{i=1}^N\log p_{ii}^{I\to T}-\frac1N\sum_{j=1}^N\log p_{jj}^{T\to I}\right]`}</MathBlock>
+    <Prose>There are <Code>N</Code> row questions and <Code>N</Code> column questions. Average each group, then give each direction half the weight. Our 3×3 fixture has loss <Code>0.269145492</Code> nats. Taking an unweighted sum of the two means doubles the loss and its gradients; dividing by <Code>N²</Code> would also change the objective.</Prose>
+    <Prose>If every score is equal, each candidate gets probability <Code>1/N</Code>, so the loss is <Code>ln N</Code>. That is an equal-score reference, not a maximum. A very large wrong score can make the correct probability arbitrarily small and its negative log arbitrarily large. With a single pair, the only candidate gets probability one in both directions, giving zero loss and no contrastive learning signal.</Prose>
+    <Prose>For numerical stability, compute <Code>logsumexp(scores) − target_score</Code>. Subtract the maximum before exponentiating; the common factor cancels. Do not add a probability epsilon and silently cap difficult examples. Jointly reordering paired rows and columns preserves the objective. Reordering captions alone without updating their targets creates a different and usually wrong pairing.</Prose>
+
+    <Legacy id="4-from-scratch-implementation" />
+    <H2>4. Follow one update into both encoders</H2>
+    <Prose>A high loss tells us the current probabilities disagree with the labels. A derivative tells us which score changes would locally reduce that loss. For one row cross-entropy, the derivative is predicted probability minus the one-hot target. Each score also participates in a column question.</Prose>
+    <ScoreGradients />
+    <MathBlock>{String.raw`G_{ij}=\frac{\partial\mathcal L}{\partial S_{ij}}=\frac{p_{ij}^{I\to T}+p_{ij}^{T\to I}-2\mathbf1[i=j]}{2N}`}</MathBlock>
+    <Prose>A diagonal derivative is nonpositive: gradient descent subtracts it, pushing that score upward. An off-diagonal derivative is nonnegative: descent pushes that score downward. Shared encoder parameters constrain which scores can move independently; the matrix describes credit at the score interface, not an instruction to edit each cell as a separate model parameter.</Prose>
+    <BackwardRoute />
+    <Prose>Collect unit image rows in <Code>U</Code>, text rows in <Code>V</Code> and score derivatives in <Code>G</Code>. Matrix multiplication sends each score's credit back to the vectors that produced it. Normalization then removes the radial component of that credit: changing length alone cannot change a normalized direction.</Prose>
+    <MathBlock>{String.raw`\frac{\partial\mathcal L}{\partial U}=sGV,\qquad \frac{\partial\mathcal L}{\partial V}=sG^\top U,\qquad \frac{\partial\mathcal L}{\partial a}=\sum_{ij}G_{ij}S_{ij}`}</MathBlock>
+    <MathBlock>{String.raw`u=x/\lVert x\rVert_2\ \Longrightarrow\ \frac{\partial\mathcal L}{\partial x}=\frac{g-u(u^\top g)}{\lVert x\rVert_2},\qquad x\ne0`}</MathBlock>
+    <Prose>In the last line, <Code>g</Code> is the derivative arriving at the unit vector <Code>u</Code>. The subtraction removes the component parallel to <Code>u</Code>. For a linear image map <Code>XWᵀ</Code>, multiply the returned raw-feature derivative by the original input rows to obtain the weight derivative. The text route is analogous. A one-way image→text loss still sends gradients through text vectors because those vectors occur in every image–text score.</Prose>
+    <RemoteCodeBlock source={`${programs}alignment_mechanisms.py`} filename="alignment_mechanisms.py" title="Full paired loss, analytic derivatives, update and matched library route" />
+    <Prose><Code>alignment_forward_backward</Code> implements both linear towers and normalization explicitly. <Code>torch_oracle</Code> copies the same arrays into <Code>F.linear</Code>, <Code>F.normalize</Code> and <Code>F.cross_entropy</Code>, then compares every gradient. The main program takes one step of size 0.05; loss changes from <Code>0.269145492</Code> to <Code>0.257707874</Code>. This is one checked local step, not a guarantee for any learning rate. A zero step leaves every parameter and score unchanged.</Prose>
+    <Prose>The final two helpers support section 6's alternative positive labels. Keep the score construction, target relation and reduction as separate functions; changing one should not accidentally change the other two. Building the <Code>N×N</Code> score matrix costs about <Code>O(N²d)</Code> operations and <Code>O(N²)</Code> score storage, in addition to both encoders.</Prose>
+
+    <Legacy id="5-production-implementation" /><Legacy id="6-visual-walkthrough" />
+    <H2>5. Train a small model, then inspect its evidence</H2>
+    <Prose>At retrieval time, encode candidate captions once. Encode a query image, compare it with those caption vectors, and rank the scores. The same construction can classify over class-name prompts. Adding a candidate can change the normalized probabilities even when every existing image–caption dot product stays fixed.</Prose>
+    <CandidateClassifier />
+    <Prose>The original CLIP paper evaluates transfer by constructing text classifiers for downstream classes without fitting a new classifier on those downstream labeled images. That usage is called zero-shot transfer under the paper's protocol. Our following model trains directly on digit-name captions, so recognizing held-out digit images is <strong>known-class generalization</strong>. A text interface alone does not make an experiment zero-shot.</Prose>
+    <H3>Fix the data and measurement before fitting</H3>
+    <Prose>The <a href="https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits">UCI optical digits dataset</a>, distributed offline with scikit-learn, contains 1,797 8×8 handwriting measurements and digit labels. Values run from 0 to 16. We divide by 16; the English captions are authored from the labels. They are not naturally collected human image descriptions.</Prose>
+    <DatasetGroups />
+    <Prose>Group exact pixel hashes before splitting. All 1,797 rows in this supplied dataset are distinct, with no conflicting labels. Select the first 100 source-index-ordered unique images per class, shuffle within each class with seed 17, then assign 60 fit, 20 development and 20 assessment images. That produces 600/200/200 balanced splits. Keep original source IDs. Writer identities are unavailable here, so do not claim writer-disjoint evaluation. Earlier lessons use the same public dataset; this is a local teaching assessment, not a new benchmark.</Prose>
+    <Prose>Every training batch selects one fit image from each class. Its ten captions are distinct, and their class order defines diagonal targets. If a batch instead contained two sevens and two identical “digit seven” captions, diagonal-only CE would ask the model to separate identical text vectors. Section 6 supplies a different objective for multiple valid matches.</Prose>
+    <Prose>The scratch image tower is <Code>64 → 64 → 32</Code>, with a tanh hidden layer. The text tower averages two learned word vectors: “digit” and the class name. Normalize both outputs and learn the positive logit scale. The only supported captions in this experiment use that small vocabulary. An unknown phrase is not silently mapped to a meaningful embedding.</Prose>
+    <RemoteCodeBlock source={`${programs}alignment_study.py`} filename="alignment_study.py" title="Complete data split, model, fitting, retrieval, controls and saved parameters" />
+    <Prose><Code>dataset</Code> owns grouping and source splits. <Code>AlignmentModel</Code> owns every learned parameter. <Code>paired_ce</Code> applies the same symmetric objective as the hand calculation; PyTorch supplies differentiation and AdamW. The sampler uses seed 23 separately from model initialization. Each loop clears gradients, computes scores/loss, backpropagates, updates parameters and bounds the log scale between 0 and <Code>ln 100</Code>, corresponding to scale 1–100.</Prose>
+    <Prose>The protocol fixes 400 updates and checkpoints 0, 50, 100, 200, 300 and 400 before fitting. AdamW uses learning rate 0.003 and weight decay 0.01. Each plotted fit loss uses the same ten fixed fit examples, making checkpoints comparable. Development and assessment metrics are recorded, but the assessment results do not select the reported final checkpoint.</Prose>
+    <AlignmentStudy />
+    <Prose>The scratch fit's fixed-example loss falls from <Code>2.367173</Code> to <Code>0.198204</Code>. Final assessment classification is <Code>188/200 = 94%</Code>; a nearest-centroid classifier fitted only on fit pixels gets <Code>185/200 = 92.5%</Code>. The class-balanced chance reference is 10%. This one run demonstrates that correspondence can be learned, while the strong cheap baseline limits any claim that this architecture is necessary.</Prose>
+    <Prose>The scratch assessment accuracy reaches 97% at the recorded step 300, then ends at 94%. Report the fixed final step; do not quietly replace it with the best assessment observation. One seed on a small digit task does not establish a general accuracy ranking.</Prose>
+    <Prose>Text→image retrieval uses all 200 assessment images as a gallery. “digit seven” has 20 relevant images, not one privileged pair ID. Precision@5 divides relevant retrieved images by five; first relevant rank records where the first correct-class image appears. The saved report retains every score, prediction, source ID and top-five row so these summaries can be inspected.</Prose>
+    <H3>Use the ordinary library interface on the same task</H3>
+    <Prose><Code>CLIPModel</Code> supplies a vision Transformer, a text Transformer and their projection heads. Our local configuration uses 8×8 single-channel images, 2×2 patches, two layers per tower, width 32, four heads and projection width 32. A tiny local tokenizer adds BOS and EOS around “digit name.” This is a randomly initialized miniature trained on our task, not an OpenAI pretrained CLIP checkpoint.</Prose>
+    <RemoteCodeBlock source={`${programs}clip_library.py`} filename="clip_library.py" title="Ordinary CLIP configuration, processor, training, loss parity and save/reload" />
+    <Prose>The processor rescales the original measurements and preserves their 8×8 geometry. It does not run the vision encoder. The model receives <Code>pixel_values</Code>, <Code>input_ids</Code> and <Code>attention_mask</Code>. With one paired image per caption, <Code>return_loss=True</Code> computes the symmetric diagonal loss. The program independently applies <Code>paired_ce</Code> to returned <Code>logits_per_image</Code> and compares the same forward pass.</Prose>
+    <Prose>The library protocol also fixes 400 steps, with learning rate 0.001 and the same data/sampler seeds. Its Transformer architecture differs from the scratch MLP, so their measured accuracies compare two declared small systems. They do not isolate the effect of replacing handwritten code with a library. The library's same-input loss comparison and save/reload comparison answer the implementation-parity questions.</Prose>
+    <Prose>The executed tiny CLIP run finishes at <Code>180/200 = 90%</Code> assessment accuracy; fixed-example loss changes from <Code>2.305284</Code> to <Code>0.413932</Code>. Both the returned-loss versus explicit-loss difference and the saved/reloaded fixture-logit difference are zero in the recorded run. This miniature configuration performs below the centroid baseline here; a familiar architecture name does not guarantee a better small-data result.</Prose>
+    <CodeBlock language="shell" filename="run_multimodal_examples.sh">{`python alignment_mechanisms.py
+python alignment_study.py --output scratch-study.json
+python clip_library.py --output library-study.json
+python visual_prefix.py
+python multimodal_interfaces.py`}</CodeBlock>
+    <Prose>Save the five files together and install the packages listed in the <a href={`${programs}README.md`} download>tested setup and data attribution</a>. Data is bundled with scikit-learn, and these examples need no model download. The program index supplies Copy and Download for the exact displayed files. The saved scratch report contains all parameters needed for the next live forward pass.</Prose>
+    <SavedImageLab />
+    <Prose>Edit a pixel and follow the changed 64-value input through both affine layers, tanh, normalization and the saved caption vectors. The browser recomputes this whole saved scratch model; it does not run a pretrained vision service or retrain. Blanking an image can still produce a confident class because biases and learned priors remain. Confidence under missing evidence is a reason to investigate, not evidence that the image contained that class.</Prose>
+
+    <H2>6. Deeper: change what counts as a match</H2>
+    <Prose>The diagonal recipe assumes exactly one designated positive per directional question. Real data can violate that assumption: two captions can both describe an image, two images can both satisfy a query, and duplicated descriptions can become false negatives.</Prose>
+    <PositiveSets />
+    <Prose>Let <Code>Pᵢ</Code> contain every valid caption for image <Code>i</Code>. One alternative rewards the total probability assigned to that set. Sum the positive exponentials in the numerator, not their scores. Construct the analogous image-positive set for each caption and average directions.</Prose>
+    <MathBlock>{String.raw`\ell_i^{\rm set}=-\log\frac{\sum_{j\in P_i}e^{S_{ij}}}{\sum_k e^{S_{ik}}}`}</MathBlock>
+    <Prose>If a row has two positive candidates, this objective can succeed by placing all mass on either one. Cross-entropy against a uniform distribution over the two positives instead rewards equal allocation and has a different optimum and minimum. If every candidate is positive, the set loss is zero. If no candidate is positive, the training example has no valid numerator; our helper rejects it rather than inventing a zero loss. Labels need a defined semantic relevance policy, not merely a duplicate detector.</Prose>
+    <SigmoidPairs />
+    <Prose><a href="https://arxiv.org/abs/2303.15343">SigLIP</a> replaces the batch softmax competition with a binary decision for each image–text pair. Write <Code>zᵢⱼ=+1</Code> for a positive and <Code>−1</Code> for a negative. Its pair logit includes a learned scale and bias; a negative initial bias can express that negatives greatly outnumber positives.</Prose>
+    <MathBlock>{String.raw`h_{ij}=s\,u_i^\top v_j+b,\qquad \mathcal L_{\rm sigmoid}=\frac1N\sum_{i,j}\log\left(1+e^{-z_{ij}h_{ij}}\right)`}</MathBlock>
+    <Prose>The original formulation sums all pair terms and divides by <Code>N</Code>, not <Code>N²</Code>. With fixed logits, changing another pair's score leaves the selected cell's logistic term unchanged, unlike a shared softmax denominator. Parameters are still shared: one encoder update can change many cells. “Independent pair terms” does not mean independently learned encoders or that batch composition never matters.</Prose>
+    <Prose><Code>sigmoid_pair_loss</Code> uses <Code>logaddexp(0,−z·h)</Code> for stable softplus. On the three-pair hand scores with bias −1, its total is <Code>0.896977198</Code>. This number is not directly comparable to the softmax loss as an accuracy score. Negative sampling, the normalizer and the learned bias all influence the training problem. Pair computations can be chunked to reduce materialized score storage; encoder cost and the number of evaluated pairs remain separate costs.</Prose>
+
+    <H2>7. Let a language model read visual evidence</H2>
+    <Prose>The image archive can rank “digit seven.” To generate “The image shows a seven,” a language model must receive a representation of the picture before predicting answer tokens. A common route projects spatial vision rows into the language model's embedding width and inserts them into its input stream.</Prose>
+    <VisualProjector />
+    <Prose>For visual states <Code>X ∈ ℝᴺ×ᵈᵥ</Code>, a linear connector returns <Code>XWᵀ+b</Code> with width <Code>dₗₘ</Code>. An MLP connector applies two linear maps with a nonlinearity between them. This changes feature channels; it does not by itself change the number of visual positions. The earlier pooled CLIP classifier and this patch-state connector consume different vision outputs.</Prose>
+    <MathBlock>{String.raw`Z=XW^\top+b\quad\text{or}\quad Z=\operatorname{GELU}(XW_1^\top+b_1)W_2^\top+b_2`}</MathBlock>
+    <Prose><a href="https://arxiv.org/abs/2304.08485">Original LLaVA</a> used a linear projection between a frozen CLIP vision encoder and a language model. <a href="https://arxiv.org/abs/2310.03744">LLaVA 1.5</a> used a two-layer GELU MLP and higher-resolution CLIP ViT-L/14 features. A 336×336 input at patch side 14 gives 24×24=576 patch rows; an encoder CLS makes 577 before selection. The usual patch-only strategy removes CLS. Specify the chosen hidden layer as well as the count; “the vision output” is ambiguous.</Prose>
+    <PrefixTargets />
+    <Prose>The drawn stream has visual vectors, prompt tokens, answer tokens and EOS. The causal attention pattern permits an answer-predicting position to read preceding visual and prompt evidence. The loss labels are separate: visual and prompt targets are ignored; answer and EOS targets are scored. Ignoring a target does not hide that position's input from attention.</Prose>
+    <MathBlock>{String.raw`\mathcal L_{\rm answer}=-\frac1{|A|}\sum_{t\in A}\log p_\theta(y_t\mid Z,\text{prompt},y_{<t}),\qquad |A|>0`}</MathBlock>
+    <Prose>In the explicit program, two visual rows and two prompt tokens occupy positions 0–3. The first answer is stored as the label at position 4, so <strong>logit position 3 predicts it</strong>. The answer's own input at position 4 predicts the next answer token or EOS. Same-length Transformers labels are shifted internally. Shifting them beforehand would apply the shift twice and train the wrong alignment.</Prose>
+    <Prose>Library processors may expand image placeholders into the required number of positions; the model computes vision states and their projections. In our offline mini-LLaVA, the program explicitly supplies 16 placeholders for 16 2×2 patch features from an 8×8 image. A different number is a shape/assignment error, not a request for automatic semantic compression.</Prose>
+
+    <H2>8. Train the bridge without cutting its gradients</H2>
+    <Prose>Pretrained language weights already encode useful text transformations. We may initially keep those weights fixed while training a connector to supply useful visual inputs. “Fixed weights” does not mean “ignore the language model during backpropagation.” The connector needs the derivative of the answer loss with respect to its output.</Prose>
+    <FrozenGradients />
+    <Prose>A scalar analogy makes the distinction visible. Let a fixed decoder multiply connector output <Code>z</Code> by a constant <Code>c</Code>. The derivative with respect to <Code>z</Code> still contains <Code>c</Code>, even though <Code>c</Code> is not updated. Detaching the decoder output removes that derivative route entirely.</Prose>
+    <MathBlock>{String.raw`\frac{\partial\mathcal L}{\partial W_P}=\frac{\partial\mathcal L}{\partial h}\frac{\partial h}{\partial Z}\frac{\partial Z}{\partial W_P}`}</MathBlock>
+    <Prose><Code>Wₚ</Code> denotes projector weights and <Code>h</Code> decoder outputs. Set decoder parameter <Code>requires_grad=False</Code> to freeze those weights while preserving derivatives to the input. Wrapping the frozen decoder forward in <Code>no_grad()</Code> breaks the middle factor. Conversely, when the vision encoder is frozen and no trainable upstream input needs its derivative, computing its feature output without gradients is valid.</Prose>
+    <TrainingStages />
+    <Prose>Original LLaVA's feature-alignment stage used 595,000 filtered image–text pairs, training the projection while freezing vision and language weights. Its instruction stage updated the projection and language model while retaining the frozen vision encoder. These are that recipe's stages, not a theorem that every vision-language system should freeze the same modules. <a href="https://arxiv.org/abs/2407.07726">PaliGemma</a> reports joint adaptation of its components and studies different connector choices.</Prose>
+    <RemoteCodeBlock source={`${programs}visual_prefix.py`} filename="visual_prefix.py" title="Explicit causal attention, answer loss, frozen-gradient update and generation" />
+    <Prose><Code>TinyDecoder</Code> exposes Q/K/V projection, the lower-triangular permission matrix, value mixing, residual paths, normalization, feedforward transformation and vocabulary logits. <Code>assemble</Code> concatenates projected feature rows with token embeddings and assigns labels. <Code>answer_loss</Code> shifts once and gathers only scored rows. If no targets remain, its mean is undefined; the caller must skip the optimizer step rather than let momentum or weight decay update parameters.</Prose>
+    <Prose>The decoder here starts randomly and stays frozen. It is a derivative fixture, not a pretrained language receiver with useful answers. One projector step changes the two-target loss from <Code>2.696484</Code> to <Code>2.696260</Code>; its first-layer gradient norm is about <Code>0.007499</Code>, and frozen decoder weights remain byte-identical. The <Code>no_grad</Code> version produces a loss with no gradient route. Its generated IDs demonstrate the autoregressive loop, not visual-language quality.</Prose>
+    <Prose>The ordinary mini-LLaVA route in the next program builds a real <Code>LlavaForConditionalGeneration</Code> with a one-layer CLIP vision encoder and a one-layer Llama decoder. It freezes everything except the multimodal projector, supplies the 16 image placeholders, checks returned loss against explicit shifted cross-entropy, backpropagates and generates three IDs. Its first answer is at input position 18 and is predicted by logit position 17. Random model quality remains outside the claim.</Prose>
+    <Prose>The executed library loss and explicit loss are both <Code>3.665634394</Code>. The projector gradient norm is about <Code>2.720619</Code>, while frozen parameters are unchanged after the step. This verifies the ordinary API contract independently of the custom decoder; it does not compare their numerical losses as if they were the same model.</Prose>
+
+    <H2>9. Deeper: ask a fixed set of learned visual questions</H2>
+    <Prose>Hundreds of visual rows can make a long prefix. A different connector uses a fixed number of learned query vectors to read the full visual grid. The query parameters are shared across images; the returned query states vary with the image. Query number 3 is not automatically “the upper-right object.”</Prose>
+    <LearnedQueries />
+    <MathBlock>{String.raw`Q=Q_0W_Q^\top,\quad K=XW_K^\top,\quad V=XW_V^\top,\quad Z=\operatorname{softmax}_{\rm row}(QK^\top/\sqrt{d}+M)V`}</MathBlock>
+    <Prose><Code>Q₀</Code> contains learned queries, while <Code>X</Code> contains image states. The permission mask <Code>M</Code> is zero at allowed entries and negative infinity at blocked entries. Two query rows reading four visual rows return two state rows regardless of whether the source has four or forty positions. Compression makes a fixed interface, not a guaranteed lossless summary.</Prose>
+    <Prose>The exact read in the drawing is one operation. <a href="https://proceedings.mlr.press/v202/li23q.html">BLIP-2's Q-Former</a> is a repeated Transformer structure: query self-attention and feedforward blocks, interleaved image cross-attention, and text processing with objective-specific access. Its paper uses 32 learned query tokens of width 768. First see those repeated blocks and the separate image reads, then compare the three masks.</Prose>
+    <QFormerObjectives />
+    <LessonTable caption="BLIP-2 stage-one objectives change information access" headers={['Objective', 'Query/text self-attention', 'What is trained']} rows={[
+      ['Image–text contrastive (ITC)', 'Query rows and text rows remain separated; queries can read images through cross-attention.', 'Match paired images/text. The paper selects maximum similarity across query outputs.'],
+      ['Image–text matching (ITM)', 'Queries and text may read each other, enabling joint evidence.', 'Classify matched versus mismatched pairs using fused outputs.'],
+      ['Image-grounded text generation (ITG)', 'Queries read queries; text reads queries and its preceding/current text positions.', 'Predict the next text token without leaking future text.'],
+    ]} />
+    <Prose>These are self-attention permissions over query/text rows. Image cross-attention is a distinct operation available to query rows. Replacing ITG's mask with ITM's bidirectional text access would leak future answer content. The same row labels and directional convention matter more than naming a matrix “multimodal.”</Prose>
+    <Prose>In BLIP-2's second stage, project query outputs into a frozen language model's embedding space. The paper distinguishes a decoder-only language model, where visual states form a soft prefix, from an encoder–decoder language model with a prefix/suffix text task. A single cross-attention call is not the full Q-Former pretraining recipe.</Prose>
+    <RemoteCodeBlock source={`${programs}multimodal_interfaces.py`} filename="multimodal_interfaces.py" title="Ordinary LLaVA, exact query/MHA bridge, objective masks, gate and mixed targets" />
+    <Prose><Code>query_read</Code> explicitly computes projected scores, a masked row softmax and the weighted value sum. <Code>query_example</Code> copies the same Q/K/V maps into <Code>nn.MultiheadAttention</Code>. Its boolean attention mask uses <Code>True = blocked</Code>, so the program inverts our <Code>True = permitted</Code> matrix. An empty permitted row is invalid. Editing a blocked donor cannot affect that query's current read; editing a permitted donor generally can.</Prose>
+    <Prose><Code>qformer_permissions</Code> implements the three query/text access patterns for changed counts. The complete multihead/cache implementation belongs to <a href={`${route}interleaved-cross-attention-architectures?module=large-language-models`}>Interleaved Cross-Attention Architectures</a>; this program owns the new objective masks and exact small operation. It does not claim to train full BLIP-2 locally.</Prose>
+
+    <H2>10. Deeper: keep images in a separate memory</H2>
+    <Prose>A visual prefix spends positions in the language model's self-attention stream. Another route keeps text positions in that stream and inserts cross-attention layers that read separate visual memory. This is the central interface distinction in <a href="https://arxiv.org/abs/2204.14198">Flamingo</a>.</Prose>
+    <VisualMemory />
+    <Prose>Flamingo's Perceiver Resampler produces a fixed set of visual latents from variable visual features; its paper uses 64 latents. The resampler's key/value route includes visual features and latent states. Inserted gated cross-attention blocks let language states read those latents between frozen language-model blocks. Vision encoding and resampling still happen even though the latents do not occupy ordinary language self-attention positions.</Prose>
+    <MathBlock>{String.raw`h'=h+\tanh(\alpha)\,\operatorname{CrossAttention}(h,Z)`}</MathBlock>
+    <Prose>At gate parameter <Code>α=0</Code>, the cross-attention residual contributes zero and the old language path is preserved at that block. The gate itself can receive a derivative. This initialization does not prove future learned blocks will ignore images or that an entire trained multimodal model equals the original language model.</Prose>
+    <Prose>For interleaved images and text, Flamingo restricts each text token's direct image attention to the last preceding image. Text after image B reads B's latents directly; earlier text after A read A. Later text can still inherit older evidence through text self-attention. A future image must not change an earlier token's current memory read.</Prose>
+    <Prose>Our small permission helper assigns last-image indices to text rows. Before the first image, the local demo explicitly skips the visual residual; it does not softmax an all-blocked row. That is the demo's defined empty-memory convention, not a claim about every library implementation. The zero-gate and forbidden-future-image changes give exact null cases.</Prose>
+    <Prose>A query-prefix system and a separate-memory system can both use learned visual queries, but the receiving language computation differs. Count where the compressed states are consumed before asserting a context-length or attention-cost advantage.</Prose>
+
+    <Legacy id="8-what-scales-and-what-doesnt" /><Legacy id="8-what-scales-and-what-doesn-t" />
+    <H2>11. Spend visual detail deliberately</H2>
+    <Prose>A model asked to read a tiny receipt character can fail before language generation starts. A resize may erase the stroke, a crop may remove it, the backbone may not preserve it, a connector may compress it away, or training may never reward distinguishing it. Adding more language parameters cannot restore pixels that were discarded.</Prose>
+    <DetailBudget />
+    <Prose>At 224×224 with patch side 14, there are 256 patches. At 336×336, there are 576: 2.25 times as many. A dense vision self-attention score count grows from <Code>256²</Code> to <Code>576²</Code>, a factor of 5.0625. That is a pair-count proxy for a specified layer, not a measured runtime multiplier. Width, layer count, kernels, feedforward work and memory scheduling also matter.</Prose>
+    <MathBlock>{String.raw`\begin{array}{ll}\text{vision self-attention:}&N^2\ \text{pairs per head/layer}\\\text{direct visual prefix:}&(T+N)^2\ \text{LM self-attention pairs}\\\text{query prefix:}&(T+M)^2\ \text{LM pairs, plus query construction}\\\text{separate memory:}&T^2+TM\ \text{schematic self/cross pairs}\end{array}`}</MathBlock>
+    <Prose><Code>T</Code> is text length, <Code>N</Code> source patch count and <Code>M</Code> compressed memory count. The last expression combines one self-attention and one cross-attention operation for explanation; actual models insert different numbers of each. Query compression does not eliminate upstream vision self-attention. A causal implementation's allowed triangular entries and the matrix a particular kernel materializes are also different counts.</Prose>
+    <SupervisionReach />
+    <Prose>Compare global and local training signals. An image–caption match can reward a whole-image representation without specifying which row should preserve a small object boundary. <a href="https://arxiv.org/abs/2502.14786">SigLIP 2</a> combines its pairwise alignment foundation with additional captioning/localization-oriented decoder training, self-distillation and masked-prediction components; its NaFlex variant handles variable aspect ratios and resolutions. These are distinct recipe choices, not evidence that every sigmoid model has the same spatial abilities.</Prose>
+    <Prose>The crop drawing changes actual visible pixels. When it removes a stroke, the correct conclusion is that the remaining input lacks that evidence. More queries cannot undo the crop. Before increasing resolution, preserve aspect ratio appropriately, check positional/processor support and measure the task that needs the detail. Our count lab rejects nondivisible dimensions unless a padding or resize policy is supplied.</Prose>
+
+    <H2>12. Deeper: predict a mixed stream of IDs</H2>
+    <Prose>So far, visual inputs have been continuous vectors. A different route quantizes images into discrete codebook IDs and places them in the same autoregressive stream as text IDs. This extends the codec boundary from <a href={`${route}multimodal-tokenization-visual-audio-video?module=large-language-models`}>Multimodal Tokenization</a>: image IDs select code vectors, and a trained image decoder reconstructs pixels.</Prose>
+    <MixedSequence />
+    <Prose>The miniature example has separate ranges for text, image codes and image boundary markers. They are constructed teaching IDs, not Chameleon's released tokenizer IDs. Every position still predicts the next ID. A text token can predict an image-start marker, an image-code token can predict another image code, and later text can condition on the image codes before it.</Prose>
+    <MathBlock>{String.raw`\mathcal L_{\rm joint}=-\frac1{|A|}\sum_{t\in A}\log p_\theta(x_{t+1}\mid x_{\le t}),\qquad x_t\in\mathcal V_{\rm text}\cup\mathcal V_{\rm image}\cup\mathcal V_{\rm special}`}</MathBlock>
+    <Prose>A joint objective scores the selected text and image-code targets. A text-only objective on the same inputs would ignore the image targets; it could teach image-conditioned answers without directly training image-code generation. The vocabulary namespace and loss mask are separate choices. Reordering image and text blocks changes what evidence is available, but a causal decoder does not become bidirectional.</Prose>
+    <Prose><a href="https://arxiv.org/abs/2405.09818">Chameleon</a> is a concrete early-fusion example. Its total vocabulary has 65,536 entries, including 8,192 image codes. Its image tokenizer maps a 512×512 image to 1,024 code positions. Do not add the image count again to the reported total. Its paper also reports that tokenizer reconstruction limits can hurt fine text/OCR, illustrating that a discrete interface has an information bottleneck before the language model.</Prose>
+    <Prose><Code>mixed_targets</Code> in the complete interface program packs a nine-position teaching sequence, shifts once and compares NumPy log-sum-exp CE with Torch CE on identical logits. The causal-model and image-codec implementations remain with their named prerequisite owners. This small target calculation is not a local Chameleon fit. Emitting image IDs would be insufficient to display a generated picture without the corresponding codebook and image decoder.</Prose>
+
+    <Legacy id="7-decision-matrix" /><Legacy id="9-failure-modes-and-gotchas" />
+    <H2>13. Decide what would count as evidence</H2>
+    <Prose>Choose an architecture by its required output and information path, then evaluate that requirement. “Multimodal” does not specify the task, and a later publication date does not create a universal capability ladder.</Prose>
+    <LessonTable caption="Five interfaces and their evidence contracts" headers={['Interface', 'Learned connection', 'Useful test']} rows={[
+      ['Dual encoder', 'Comparable image/text vectors under pair labels', 'Retrieval relevance or classification over declared candidates; score changes under changed candidates.'],
+      ['Projected visual prefix', 'Spatial vectors mapped into a causal language input', 'Answer accuracy with image swaps, text-only controls and spatial-detail cases.'],
+      ['Learned-query prefix', 'Fixed query states summarize visual rows before LM input', 'Task quality versus query count, including small details; upstream cost retained.'],
+      ['Separate visual memory', 'Text states use inserted, possibly gated cross reads', 'Image-availability masks, multi-image references and actual cross-read costs.'],
+      ['Joint discrete stream', 'Next-ID prediction includes image codes and text', 'Text/image conditional tasks plus decoded-image fidelity and tokenizer limitations.'],
+    ]} />
+    <EvaluationControls />
+    <Prose>The study's blank control keeps caption targets fixed while removing all image measurements. The shuffled control moves complete images between assessment rows while retaining the original row's target. Record how many shuffled rows still share the target class; a within-class permutation would leave this classification task almost unchanged and would be a weak image-reliance test.</Prose>
+    <Prose>In the recorded permutation, 12 of 200 moved images retain the original target class. Both fitted models get 14 of 200 shuffled rows correct and 20 of 200 blank rows correct. A shuffled model prediction can disagree with the moved image's own class, so its correct-target count need not equal 12. These outcomes are saved measurements, not a fabricated falling curve.</Prose>
+    <Prose>A changed pixel is another intervention, but it can change the true class if it alters a critical stroke. Inspect the actual image and keep that ambiguity visible. A model changing its score under an edit proves dependence on some changed input; it does not by itself prove correct reasoning or localization.</Prose>
+    <Prose>For a generated answer, also hold the question fixed, swap the image, remove the image, change irrelevant versus relevant details, and score the requested content. Fluent generic descriptions can survive image removal. High attention weight or high paired similarity does not certify factual grounding. Captions can omit details; pair labels can be noisy; shared templates can expose shortcuts.</Prose>
+    <Prose>Report preprocessing, selected feature layer, target relation, trainable parameters, output interface and evaluation denominator alongside an outcome. The local measured study supports a narrow statement about a small labeled handwriting task. It does not establish web-scale transfer, unseen-category recognition, general visual reasoning or a best multimodal architecture.</Prose>
+
+    <Legacy id="11-self-check-exercises" />
+    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+      <H2>14. Practice with changed inputs and contracts</H2>
+      <Exercise title="1. Four equally scored pairs" hint="Each row and column has probability 1/4. Keep the two directions and their reductions." solution="Both directional means are ln 4 ≈ 1.386294, and their half-weighted sum is also ln 4. The symmetric gradient of a diagonal cell is (1/4+1/4−2)/8=−3/16; an off-diagonal cell has 1/16. Raising a wrong score far above the diagonal makes its row's target probability approach zero, so ln 4 is not a maximum. The shared column questions can also worsen.">
+        <Prose>For a 4×4 all-zero score matrix, calculate both directional losses and one diagonal/off-diagonal derivative. Then make one wrong score 20 and explain why the equal-score value is not an upper bound.</Prose>
+      </Exercise>
+      <Exercise title="2. Permute the pairing" hint="Represent targets as relationships between records, not permanently diagonal positions." solution="Swapping only text columns while leaving targets diagonal changes which captions count as correct. The loss becomes 2.935812159 nats: row/column log normalizers are merely reordered, while two diagonal target scores each fall by 4, adding 8/3 to the symmetric mean. Updating row positive columns to [2,1,0] and the corresponding column targets restores 0.269145492 nats. Jointly permuting matching rows and columns retains a diagonal representation. Reordering candidates at inference should reorder scores and labels, not alter their dot products.">
+        <Prose>Swap caption columns 0 and 2 in the hand fixture. Compute the loss with unchanged diagonal labels, then write an indexed-target version that preserves the original image–caption relationships.</Prose>
+      </Exercise>
+      <Exercise title="3. Two valid captions" hint="Sum positive probability mass before taking its logarithm; uniform-positive CE averages logarithms instead." solution="For probabilities [0.6,0.3,0.1] with positives 0 and 1, the set loss is −ln(0.9)≈0.105361. Uniform-positive CE is −(ln(0.6)+ln(0.3))/2≈0.857399. Putting all mass on one positive can minimize set loss, whereas uniform-positive CE prefers an equal split. Retrieval relevance should mark both as valid. A row with no positive needs repair/exclusion under a stated policy, not a fabricated zero target.">
+        <Prose>Use probabilities <Code>[0.6,0.3,0.1]</Code> and two valid captions. Compare the set loss with uniform-positive CE. Implement a non-diagonal positive mask and define the gallery relevance labels.</Prose>
+      </Exercise>
+      <Exercise title="4. Follow a one-way gradient" hint="A text vector appears in every image row's score, even when there is no separate text→image loss." solution="For one-way mean CE, G=(Prow−I)/N and ∂L/∂V=sGᵀU. A text row receives a weighted sum of image vectors. Propagate through its normalization and text projection as before. Compare a central difference of one text-weight coordinate with this analytic derivative. Forgetting that a candidate vector participates in the denominator incorrectly deletes its negative-example gradients.">
+        <Prose>Modify the mechanism program to use only image→text CE. Derive and finite-difference-check a text-weight derivative. Explain why the text encoder can still learn.</Prose>
+      </Exercise>
+      <Exercise title="5. Duplicate an inference candidate" hint="A duplicated vector adds another exponential term without changing existing dot products." solution="Existing dot scores remain fixed. The duplicated caption receives two list entries, each with the old numerator but a larger denominator; other probabilities also fall. If entries denote the same semantic class, summing their masses is a different class decision rule. Do not interpret candidate-set normalization as newly acquired image evidence. Reordering distinct candidates preserves labeled probabilities except for a declared tie-breaking convention.">
+        <Prose>Add a second identical “digit seven” candidate to the saved classifier. Explain the unchanged scores and changed probabilities, then implement a duplicate-label policy.</Prose>
+      </Exercise>
+      <Exercise title="6. Repair three broken prefixes" hint="List input positions and label positions before reading the trainer. Distinguish frozen parameters from a detached computation." solution="With two visual rows and two prompt tokens, logit 3 predicts the first answer stored at label 4. Supply same-length labels and shift once. Freeze decoder parameters but keep the forward graph to projected inputs. Match placeholder count to the actually selected visual rows; if CLS is retained, the count changes. For an all-ignored batch, report no targets and skip the optimizer update.">
+        <Prose>A colleague shifts labels before passing them to LLaVA, wraps the frozen decoder in <Code>no_grad</Code>, and supplies 15 placeholders for 16 selected patches. Identify the first broken contract in each case and add an independent check.</Prose>
+      </Exercise>
+      <Exercise title="7. Count the right cost" hint="Compute height and width patch counts separately. Query compression acts after vision features exist." solution="280/14=20 and 420/14=30, so there are 600 patches before any CLS. A width map from dᵥ to dₗₘ changes channels, leaving 600 rows. With 80 text positions, a direct prefix gives 680 LM positions and 680²=462,400 self-attention pairs. Thirty-two query outputs give 112 LM positions and 112²=12,544 pairs. Upstream vision still has 600²=360,000 pairs per self-attention head/layer, and one query read has 32×600=19,200 query/key pairs; repeated layers add work. A nondivisible image needs an explicit crop/pad/resize policy, not fractional patch rows. These are operation proxies, not measured latency.">
+        <Prose>For a 280×420 image, patch side 14, 32 learned queries and 80 text positions, calculate direct and query-prefix counts. Explain what remains expensive and how you would handle height 281.</Prose>
+      </Exercise>
+      <Exercise title="8. Draw an ITG mask" hint="Separate the query block, query-to-text block, text-to-query block and text triangle." solution="For three queries and four text rows, queries may read the three query columns and no text columns. Each text row may read all three queries and text columns through its own position. Only queries perform the separate image cross reads. An ITM all-visible text block leaks future text into next-token prediction; the presence of visual information does not justify that leak.">
+        <Prose>Construct and test a 7×7 ITG permission matrix. Compare it with ITM, and show the image cross-attention matrix separately.</Prose>
+      </Exercise>
+      <Exercise title="9. Trace interleaved images" hint="The most recent image controls the direct memory read; older text is a different path." solution="For text before A, after A, after A again and after B, last-image indices are [−1,0,0,1]. Under the local convention the first skips visual residual; middle rows read A; the last reads B. Editing B cannot affect the earlier current reads. Later text may still receive evidence about A through earlier text states. A gate of zero nulls the corresponding cross residual even when memory values change.">
+        <Prose>Place two images around four text segments. Assign last-image indices, then specify a permitted edit, a forbidden future-image edit and a zero-gate null test.</Prose>
+      </Exercise>
+      <Exercise title="10. Select evidence, not a winner" hint="Start with the required output object and a failure case that the evaluation must detect." solution="Catalogue retrieval can use dual-encoder scores with relevance labels and hard distractors. Receipt OCR needs preserved small characters and answer-level transcription metrics under crop/resolution controls; a larger pooled classifier score is insufficient. Mixed image/text generation needs an output image vocabulary and decoder plus image and text quality checks. Several architectures may meet a task; choose using measured constraints, not a chronology ladder.">
+        <Prose>Propose data, interface, objective and evaluation for catalogue retrieval, receipt OCR and mixed picture/text generation. Give a concrete failure test for each.</Prose>
+      </Exercise>
+      <Exercise title="11. Extend the complete experiment" hint="Change one meaningful contract and preserve the source split, baseline and metric definitions." solution="One valid extension supplies two paraphrase templates per class, changes batches/positive masks so equivalent captions are not false negatives, and measures both template and held-out-image behavior. Preserve source IDs and predeclare training duration. Report fit/development/assessment roles, actual logs, class-relevance retrieval, a blank/shuffled control and two inspected errors. A new model's higher score is not enough if the candidate set or denominator changed. Reproducible, correctly scoped evidence is the completion criterion.">
+        <Prose>Change captions or the positive relation, implement the matching loss, fit one declared run and compare it with the original and centroid baseline. Supply all source IDs, code, settings, denominators and two counterexamples.</Prose>
+      </Exercise>
+    </section>
+
+    <Legacy id="10-primary-sources" />
+    <Sources alternatives={<ul>
+      <li><a href="https://cs231n.stanford.edu/slides/2025/lecture_16.pdf">Stanford CS231n, lecture 16 (2025)</a> — follow its image–language progression from CLIP to visual-language interfaces after sections 1–10. The inspected multimodal sequence provides a complementary visual treatment.</li>
+      <li><a href="https://arxiv.org/abs/2202.10936">Du et al., A Survey of Vision-Language Pre-Trained Models</a> — compare architecture, objective, dataset and downstream-task axes. Use primary papers for model-specific claims and later developments.</li>
+      <li><a href="https://huggingface.co/docs/transformers/model_doc/clip">Transformers CLIP documentation</a> and <a href="https://huggingface.co/docs/transformers/model_doc/llava">LLaVA documentation</a> — ordinary configuration, processor and forward interfaces. Our offline examples exercise the pinned local API, not downloaded pretrained quality.</li>
+    </ul>}>
+      <li><a href="https://proceedings.mlr.press/v139/radford21a.html">Radford et al., CLIP (2021)</a> — paired objective, normalized projections and zero-shot transfer protocol.</li>
+      <li><a href="https://arxiv.org/abs/2303.15343">Zhai et al., SigLIP (2023)</a> — signed pairwise logistic loss and its normalizer.</li>
+      <li><a href="https://arxiv.org/abs/2304.08485">Liu et al., Visual Instruction Tuning (2023)</a> and <a href="https://arxiv.org/abs/2310.03744">Improved Baselines with Visual Instruction Tuning (2023)</a> — original LLaVA stages and the 1.5 connector/resolution recipe.</li>
+      <li><a href="https://proceedings.mlr.press/v202/li23q.html">Li et al., BLIP-2 (2023)</a> — Q-Former architecture, three objective masks and frozen-language-model connection.</li>
+      <li><a href="https://arxiv.org/abs/2204.14198">Alayrac et al., Flamingo (2022)</a> — Perceiver Resampler, gated inserted cross-attention and interleaved image availability.</li>
+      <li><a href="https://arxiv.org/abs/2502.14786">Tschannen et al., SigLIP 2 (2025)</a> — richer visual supervision and variable-resolution/aspect-ratio processing.</li>
+      <li><a href="https://arxiv.org/abs/2407.07726">Beyer et al., PaliGemma (2024)</a> — an alternative joint-adaptation recipe and connector ablations.</li>
+      <li><a href="https://arxiv.org/abs/2405.09818">Chameleon Team, Chameleon (2024)</a> — early-fusion mixed-token autoregression and tokenizer limitations.</li>
+      <li><a href="https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits">Alpaydin and Kaynak, Optical Recognition of Handwritten Digits</a> — actual data source, CC BY 4.0. Captions are this lesson's transformations of provided labels.</li>
+    </Sources>
+    <section className="lesson-ending lesson-ending--next" data-lesson-ending="next"><H2>15. Readiness and next study</H2>
+      <Prose>Trace both pair-loss directions, propagate one derivative through normalization, reproduce the offline model and explain its limits. Then trace the first answer target through a visual prefix, distinguish freezing from detaching, draw Q-Former and image-memory permissions, and account for the decoder required by image IDs.</Prose>
+      <Prose>Next, <a href={`${route}data-curation-pipelines-curator-models-quality-filtering?module=large-language-models`}>Data Curation Pipelines</a> asks how to select and improve the examples that supply those signals. <a href={`${route}supervised-fine-tuning-sft?module=large-language-models`}>Supervised Fine-Tuning</a> is a related later continuation for answer-formatted training.</Prose>
+    </section>
+  </div>,
 };
-
 export default multimodalPretraining;

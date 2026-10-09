@@ -1,0 +1,563 @@
+{
+  "purpose": "Independent complementary runtime review, no numerical mains",
+  "source": "6a8dd38fe0afd9fff13b88071ac21b15c4324e56a5841bbee832137b5aaab7f5",
+  "checks": [
+    {
+      "name": "all figures",
+      "count": 46,
+      "ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E17",
+        "E18",
+        "E19",
+        "E20",
+        "E21",
+        "E22",
+        "E23",
+        "E24",
+        "E25",
+        "E26",
+        "E27",
+        "E28",
+        "E29",
+        "E30",
+        "E31",
+        "E32",
+        "E33",
+        "E34",
+        "E35",
+        "E36",
+        "E37",
+        "E38",
+        "E39",
+        "E40",
+        "E41",
+        "E42",
+        "E43",
+        "E44",
+        "E45",
+        "E46"
+      ]
+    },
+    {
+      "name": "E09 controls",
+      "controls": [
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "label": "Message",
+          "value": "AAAABBCD"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Apply Message",
+          "value": ""
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "label": "Codebook\nShort words for frequent A\nShort words for rare D\nTwo bits for every symbol",
+          "value": "matched"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Previous bit",
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Next bit",
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "label": "Reset investigation",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "E14 controls",
+      "controls": [
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "label": "Source weights A B C D",
+          "value": "4, 2, 1, 1"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Apply Source weights A B C D",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "label": "Model weights A B C D",
+          "value": "1, 1, 2, 4"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Apply Model weights A B C D",
+          "value": ""
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "label": "Information unit\nbits\nnats",
+          "value": "bits"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Match model to source",
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Reverse source and model",
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "label": "Reset investigation",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "E27 controls",
+      "controls": [
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "label": "Conditional example\nSymmetric noisy context\nUnequal truthful rows",
+          "value": "symmetric"
+        },
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "label": "Context probability P(X=1)",
+          "value": "0.5"
+        },
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "label": "Flip noise",
+          "value": "0.1"
+        },
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "label": "Model trust",
+          "value": "0.8"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "label": "Reset investigation",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "E30 controls",
+      "controls": [
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "label": "Class 0 logit",
+          "value": "1000"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Apply Class 0 logit",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "label": "Class 1 logit",
+          "value": "998"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Apply Class 1 logit",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "label": "Class 2 logit",
+          "value": "996"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Apply Class 2 logit",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "label": "Common logit shift",
+          "value": "0"
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "label": "Target type\nHard class index\nNormalized soft target",
+          "value": "hard"
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "label": "Target class\nClass 0\nClass 1\nClass 2",
+          "value": "2"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Inspect extreme separation",
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "label": "Reset investigation",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "E38 controls",
+      "controls": [
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "label": "Physical support width in metres",
+          "value": "0.25"
+        },
+        {
+          "tag": "SELECT",
+          "type": "select-one",
+          "label": "Comparison coordinate unit\nMetres — identity change\nCentimetres — 100 per metre",
+          "value": "100"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "label": "Reset investigation",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "E43 controls",
+      "controls": [
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "label": "Feasible-slice fraction — stage 1",
+          "value": "0"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "label": "Reset investigation",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "E44 controls",
+      "controls": [
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "label": "Feasible-slice fraction — stage 2",
+          "value": "0"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Select p*",
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "label": "Reset investigation",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "E45 controls",
+      "controls": [
+        {
+          "tag": "INPUT",
+          "type": "range",
+          "label": "Feasible-slice fraction — stage 3",
+          "value": "0"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Select p*",
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "text",
+          "label": "Required mean",
+          "value": "1.4285714285714286"
+        },
+        {
+          "tag": "BUTTON",
+          "type": "submit",
+          "label": "Apply Required mean",
+          "value": ""
+        },
+        {
+          "tag": "BUTTON",
+          "type": "button",
+          "label": "Reset investigation",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "E09 invalid",
+      "draft": "Z",
+      "alerts": [
+        "Use at most 16 uppercase A, B, C or D symbols; empty text is allowed. The drawing retains the last valid value."
+      ]
+    },
+    {
+      "name": "E09 reset invalid default",
+      "draft": "Z",
+      "alerts": [
+        "Use at most 16 uppercase A, B, C or D symbols; empty text is allowed. The drawing retains the last valid value."
+      ]
+    },
+    {
+      "name": "E43 shared reset invalid E45",
+      "draft": "2.1",
+      "alerts": [
+        "Mean: use 0 to 2. The drawing retains the last valid value."
+      ]
+    },
+    {
+      "name": "E08 geometry 390/32",
+      "geometry": {
+        "figure": 350,
+        "document": 390,
+        "viewport": 390,
+        "scroll": [
+          {
+            "client": 350,
+            "scroll": 720,
+            "textFont": "17.4933px"
+          },
+          {
+            "client": 350,
+            "scroll": 620,
+            "textFont": "20.3148px"
+          }
+        ]
+      }
+    },
+    {
+      "name": "E29 geometry 390/32",
+      "geometry": {
+        "figure": 350,
+        "document": 390,
+        "viewport": 390,
+        "scroll": [
+          {
+            "client": 350,
+            "scroll": 620,
+            "textFont": "20.3148px"
+          },
+          {
+            "client": 350,
+            "scroll": 620,
+            "textFont": "20.3148px"
+          }
+        ]
+      }
+    },
+    {
+      "name": "E30 geometry 390/32",
+      "geometry": {
+        "figure": 350,
+        "document": 390,
+        "viewport": 390,
+        "scroll": [
+          {
+            "client": 350,
+            "scroll": 620,
+            "textFont": "20.3148px"
+          }
+        ]
+      }
+    },
+    {
+      "name": "E42 geometry 390/32",
+      "geometry": {
+        "figure": 350,
+        "document": 390,
+        "viewport": 390,
+        "scroll": [
+          {
+            "client": 350,
+            "scroll": 700,
+            "textFont": "17.9931px"
+          }
+        ]
+      }
+    },
+    {
+      "name": "E08 geometry 768/32",
+      "geometry": {
+        "figure": 691.21875,
+        "document": 768,
+        "viewport": 768,
+        "scroll": [
+          {
+            "client": 691,
+            "scroll": 720,
+            "textFont": "17.4933px"
+          },
+          {
+            "client": 691,
+            "scroll": 691,
+            "textFont": "18.2217px"
+          }
+        ]
+      }
+    },
+    {
+      "name": "E29 geometry 768/32",
+      "geometry": {
+        "figure": 691.21875,
+        "document": 768,
+        "viewport": 768,
+        "scroll": [
+          {
+            "client": 691,
+            "scroll": 691,
+            "textFont": "18.2217px"
+          },
+          {
+            "client": 691,
+            "scroll": 691,
+            "textFont": "18.2217px"
+          }
+        ]
+      }
+    },
+    {
+      "name": "E30 geometry 768/32",
+      "geometry": {
+        "figure": 691.21875,
+        "document": 768,
+        "viewport": 768,
+        "scroll": [
+          {
+            "client": 691,
+            "scroll": 691,
+            "textFont": "18.2217px"
+          }
+        ]
+      }
+    },
+    {
+      "name": "E42 geometry 768/32",
+      "geometry": {
+        "figure": 691.21875,
+        "document": 768,
+        "viewport": 768,
+        "scroll": [
+          {
+            "client": 691,
+            "scroll": 700,
+            "textFont": "17.9931px"
+          }
+        ]
+      }
+    },
+    {
+      "name": "runtime page errors",
+      "errors": []
+    }
+  ],
+  "screens": [
+    {
+      "file": "E09-invalid-reset.jpg",
+      "sha256": "a9e4adad3a115b11b684fe05ae363e613b61db15f2569ffbebc1bfd2b143e0e9"
+    },
+    {
+      "file": "E14-ordinary.jpg",
+      "sha256": "0e2d97373e33a61f3caf9eaf6e6a41e08c54618b8275be75ecf80084b8a674cf"
+    },
+    {
+      "file": "E22-ordinary.jpg",
+      "sha256": "d092416ae31e9196087f5513db09c910b3d056ff08213f31723097e396816b09"
+    },
+    {
+      "file": "E29-390-root32.jpg",
+      "sha256": "413d7c1723ae221561c2150fc685c5c43ce5f9f79062e6b82270e6df0528018f"
+    },
+    {
+      "file": "E30-390-root32.jpg",
+      "sha256": "5eaa878a5d4906818fbaafe575e873be340ab0335674d2eccfbcadf349d12ec7"
+    },
+    {
+      "file": "E42-390-root32.jpg",
+      "sha256": "4b0958c06c5d3d4baf5943d082e64a821b19661a4e29857e06e9cf4cfee6d2a8"
+    },
+    {
+      "file": "E29-768-root32.jpg",
+      "sha256": "15aadf9c2362c6f56f6003044371ae9cb14d9f9225936623c36531bf63bd226b"
+    },
+    {
+      "file": "E30-768-root32.jpg",
+      "sha256": "4bf0b86e16b505a21d247f5f639eb0c82477c6cdd28aa285a6606a0d71e14684"
+    },
+    {
+      "file": "E42-768-root32.jpg",
+      "sha256": "fbab0ec6dd6b664bd35a818ffe9a3b61deac20750d4dd7fc470ec7839d9f30a3"
+    },
+    {
+      "file": "E29-390-root16.jpg",
+      "sha256": "663223d785f028ea808534b99c6cd72d16331f66fc9e280b300decaed0bd51b5"
+    }
+  ]
+}

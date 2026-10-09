@@ -1,0 +1,710 @@
+{
+  "role": "new beta-MM numerical/state checks, no old main/fit/study replay",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "checkerSha256": "50323aef97ba813f5a2d60e11e278757abea8301edb766a4817cdd7b237c13af",
+  "sources": {
+    "centered_pca.py": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055",
+    "nmf_arrays.py": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf",
+    "nmf_coordinate.py": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec",
+    "nmf_multiplicative.py": "56d22f18907297f5c1239e31e98071e6bde0d33c5d2c5a1cbc9aa92546c210f9",
+    "nmf_beta_mm.py": "92fa782d807217caa2edb033b22ad9ccfab207d6497a7ef0cc15cd600eb81815"
+  },
+  "checks": [
+    {
+      "name": "quadrature beta=0 ratio=0.25",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0 ratio=0.8",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0 ratio=1",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0 ratio=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0 ratio=1.0002",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0 ratio=2",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0 ratio=5",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.25 ratio=0.25",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.25 ratio=0.8",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.25 ratio=1",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.25 ratio=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.25 ratio=1.0002",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.25 ratio=2",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.25 ratio=5",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.75 ratio=0.25",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.75 ratio=0.8",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.75 ratio=1",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.75 ratio=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.75 ratio=1.0002",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.75 ratio=2",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=0.75 ratio=5",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1 ratio=0.25",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1 ratio=0.8",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1 ratio=1",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1 ratio=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1 ratio=1.0002",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1 ratio=2",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1 ratio=5",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1.5 ratio=0.25",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1.5 ratio=0.8",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1.5 ratio=1",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1.5 ratio=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1.5 ratio=1.0002",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1.5 ratio=2",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=1.5 ratio=5",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2 ratio=0.25",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2 ratio=0.8",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2 ratio=1",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2 ratio=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2 ratio=1.0002",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2 ratio=2",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2 ratio=5",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2.5 ratio=0.25",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2.5 ratio=0.8",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2.5 ratio=1",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2.5 ratio=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2.5 ratio=1.0002",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2.5 ratio=2",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=2.5 ratio=5",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=3 ratio=0.25",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=3 ratio=0.8",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=3 ratio=1",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=3 ratio=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=3 ratio=1.0002",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=3 ratio=2",
+      "passed": true
+    },
+    {
+      "name": "quadrature beta=3 ratio=5",
+      "passed": true
+    },
+    {
+      "name": "removable limit beta=5e-324",
+      "passed": true
+    },
+    {
+      "name": "removable limit beta=1e-100",
+      "passed": true
+    },
+    {
+      "name": "removable limit beta=1e-08",
+      "passed": true
+    },
+    {
+      "name": "removable limit beta=0.99999999",
+      "passed": true
+    },
+    {
+      "name": "removable limit beta=1.0000000000000002",
+      "passed": true
+    },
+    {
+      "name": "removable limit beta=1.00000001",
+      "passed": true
+    },
+    {
+      "name": "Frobenius is half squared norm",
+      "passed": true
+    },
+    {
+      "name": "KL agrees with public scipy.special.kl_div",
+      "passed": true
+    },
+    {
+      "name": "IS uses relative error",
+      "passed": true
+    },
+    {
+      "name": "beta0 ratio4 MM step is2",
+      "passed": true
+    },
+    {
+      "name": "beta3 ratio4 MM step is2",
+      "passed": true
+    },
+    {
+      "name": "beta1.5 exponent is1",
+      "passed": true
+    },
+    {
+      "name": "independent objective difference gradient beta=0",
+      "passed": true
+    },
+    {
+      "name": "scalar contraction and block order beta=0",
+      "passed": true
+    },
+    {
+      "name": "new12step descent beta=0",
+      "passed": true
+    },
+    {
+      "name": "fixedH encoding state beta=0",
+      "passed": true
+    },
+    {
+      "name": "encoding actual descent beta=0",
+      "passed": true
+    },
+    {
+      "name": "empty query shape beta=0",
+      "passed": true
+    },
+    {
+      "name": "feature order beta=0",
+      "passed": true
+    },
+    {
+      "name": "strict positive query beta=0",
+      "passed": true
+    },
+    {
+      "name": "gradient diagnostic finite beta=0",
+      "passed": true
+    },
+    {
+      "name": "independent objective difference gradient beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "scalar contraction and block order beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "new12step descent beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "fixedH encoding state beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "encoding actual descent beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "empty query shape beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "feature order beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "strict positive query beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "gradient diagnostic finite beta=0.5",
+      "passed": true
+    },
+    {
+      "name": "independent objective difference gradient beta=1",
+      "passed": true
+    },
+    {
+      "name": "scalar contraction and block order beta=1",
+      "passed": true
+    },
+    {
+      "name": "new12step descent beta=1",
+      "passed": true
+    },
+    {
+      "name": "fixedH encoding state beta=1",
+      "passed": true
+    },
+    {
+      "name": "encoding actual descent beta=1",
+      "passed": true
+    },
+    {
+      "name": "empty query shape beta=1",
+      "passed": true
+    },
+    {
+      "name": "feature order beta=1",
+      "passed": true
+    },
+    {
+      "name": "strict positive query beta=1",
+      "passed": true
+    },
+    {
+      "name": "gradient diagnostic finite beta=1",
+      "passed": true
+    },
+    {
+      "name": "independent objective difference gradient beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "scalar contraction and block order beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "new12step descent beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "fixedH encoding state beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "encoding actual descent beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "empty query shape beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "feature order beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "strict positive query beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "gradient diagnostic finite beta=1.5",
+      "passed": true
+    },
+    {
+      "name": "independent objective difference gradient beta=2",
+      "passed": true
+    },
+    {
+      "name": "scalar contraction and block order beta=2",
+      "passed": true
+    },
+    {
+      "name": "new12step descent beta=2",
+      "passed": true
+    },
+    {
+      "name": "fixedH encoding state beta=2",
+      "passed": true
+    },
+    {
+      "name": "encoding actual descent beta=2",
+      "passed": true
+    },
+    {
+      "name": "empty query shape beta=2",
+      "passed": true
+    },
+    {
+      "name": "feature order beta=2",
+      "passed": true
+    },
+    {
+      "name": "strict positive query beta=2",
+      "passed": true
+    },
+    {
+      "name": "gradient diagnostic finite beta=2",
+      "passed": true
+    },
+    {
+      "name": "independent objective difference gradient beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "scalar contraction and block order beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "new12step descent beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "fixedH encoding state beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "encoding actual descent beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "empty query shape beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "feature order beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "strict positive query beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "gradient diagnostic finite beta=2.5",
+      "passed": true
+    },
+    {
+      "name": "independent objective difference gradient beta=3",
+      "passed": true
+    },
+    {
+      "name": "scalar contraction and block order beta=3",
+      "passed": true
+    },
+    {
+      "name": "new12step descent beta=3",
+      "passed": true
+    },
+    {
+      "name": "fixedH encoding state beta=3",
+      "passed": true
+    },
+    {
+      "name": "encoding actual descent beta=3",
+      "passed": true
+    },
+    {
+      "name": "empty query shape beta=3",
+      "passed": true
+    },
+    {
+      "name": "feature order beta=3",
+      "passed": true
+    },
+    {
+      "name": "strict positive query beta=3",
+      "passed": true
+    },
+    {
+      "name": "gradient diagnostic finite beta=3",
+      "passed": true
+    },
+    {
+      "name": "all caller inputs conserved",
+      "passed": true
+    },
+    {
+      "name": "beta validation bool/True",
+      "passed": true
+    },
+    {
+      "name": "beta validation str/1",
+      "passed": true
+    },
+    {
+      "name": "beta validation complex/(1+0j)",
+      "passed": true
+    },
+    {
+      "name": "beta validation float/nan",
+      "passed": true
+    },
+    {
+      "name": "beta validation float/inf",
+      "passed": true
+    },
+    {
+      "name": "beta validation int/-1",
+      "passed": true
+    },
+    {
+      "name": "beta validation int/4",
+      "passed": true
+    },
+    {
+      "name": "beta validation int/10000000000000000000",
+      "passed": true
+    },
+    {
+      "name": "zero observation excluded by this route",
+      "passed": true
+    },
+    {
+      "name": "zero initial pattern excluded",
+      "passed": true
+    },
+    {
+      "name": "finite power overflow refused",
+      "passed": true
+    },
+    {
+      "name": "finite power underflow refused",
+      "passed": true
+    },
+    {
+      "name": "shape mismatch refused",
+      "passed": true
+    },
+    {
+      "name": "new proof's scalar loss and upper values",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.25 candidate=0.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.25 candidate=0.25",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.25 candidate=0.5",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.25 candidate=1.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.25 candidate=2.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.25 candidate=3.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.5 candidate=0.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.5 candidate=0.25",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.5 candidate=0.5",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.5 candidate=1.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.5 candidate=2.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=0.5 candidate=3.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=1.0 candidate=0.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=1.0 candidate=0.25",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=1.0 candidate=0.5",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=1.0 candidate=1.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=1.0 candidate=2.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=1.0 candidate=3.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=2.0 candidate=0.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=2.0 candidate=0.25",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=2.0 candidate=0.5",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=2.0 candidate=1.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=2.0 candidate=2.0",
+      "passed": true
+    },
+    {
+      "name": "new scalar bound current=2.0 candidate=3.0",
+      "passed": true
+    }
+  ],
+  "mainExecution": {
+    "returnCode": 0,
+    "stdoutSha256": "87ab2d9faf5f1e8e1874ece88664b70ec1cedab2f84c19cc43fb27a850053a55",
+    "stderrSha256": "59eb62fd771d534e6edbe2f813c7447c18eeab1a65b1de294a55771976f3134c",
+    "sourceSha256": "92fa782d807217caa2edb033b22ad9ccfab207d6497a7ef0cc15cd600eb81815",
+    "plannedScratchLibraryComparisons": 3,
+    "completedComparisons": [
+      "beta 0 gamma 0.5 scratch iteration-cap (100, 4.0940543179253895e-10, 1.43486400093095e-05)",
+      "beta 1 gamma 1 scratch stationary-tolerance (82, 4.625565310410854e-13, 6.079313524112777e-07)",
+      "beta 2 gamma 1 scratch iteration-cap (100, 2.797262337480064e-12, 2.1731613719550694e-06)"
+    ]
+  },
+  "sourcesUnchangedAfterMain": true
+}

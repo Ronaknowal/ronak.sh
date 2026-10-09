@@ -48,7 +48,6 @@ def main():
     # Unique identifiers memorize the realized sample and produce the entropy of Y.
     identifier_mi = mutual_info_classif(np.arange(len(y))[:, None], y, discrete_features=True)[0]
     print("unique identifier empirical MI in bits", round(identifier_mi / np.log(2), 6))
-    print("identifier population relevance established", False)
 
 
 if __name__ == "__main__":

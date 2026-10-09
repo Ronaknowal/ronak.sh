@@ -1,0 +1,225 @@
+{
+  "beforeSelected": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "record": "docs/teaching/implementation-depth/MATH-DEPTH-REMEDIATION.md",
+    "content": {
+      "status": "complete",
+      "completedAt": "2026-09-21T20:08:19.510Z",
+      "manuscript": "src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+      "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "files": {
+        "src/learn/data/topics/mutual-information-information-bottleneck.jsx": "626d1e5b2ac2edfa7725adb278fac3db0472f2e1f963fa2cff633987f170cb5f",
+        "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+        "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05",
+        "src/learn/data/mutual-information-examples.js": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+        "src/learn/data/mutual-information-mechanism-program.js": "97410c954dd95936f6054b4a72c1fbd2e76f587131e68f9e06d22865ce48e11a",
+        "public/learn-assets/mutual-information/mutual-information-library-bridge.py": "3a931191ff2d9729f5a8e5d970b537e825580cf36b364380325b9838a4e8fea2"
+      }
+    },
+    "implementation": {
+      "status": "complete",
+      "completedAt": "2026-09-21T20:08:19.542Z",
+      "reviewedFiles": {
+        "public/learn-assets/mutual-information/mutual-information-library-bridge.py": "3a931191ff2d9729f5a8e5d970b537e825580cf36b364380325b9838a4e8fea2",
+        "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+        "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+        "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+        "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+        "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+        "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+        "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+        "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+        "src/learn/components/lesson-labs/MechanismProgram.jsx": "347fde8eefd4ce624c0db36597d4a421412a7c70a60e4a553a708f30f4b9d920",
+        "src/learn/components/lesson-labs/MutualInformationLabs.jsx": "c38a1cba68f0de4f420ff4004fd399cf77a42e626feb90e63fe42a2bc4f8a51d",
+        "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+        "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+        "src/learn/components/lesson-labs/mechanism-program.css": "a2758dfc67cd54052aebf4f753b08fa66a054766da862bdb9aa6fa0c54e83316",
+        "src/learn/components/lesson-labs/mutual-information-labs.css": "9c99aba160c47544cf017c572c9e950cbc2c9f261b342864569a20899555f3c9",
+        "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05",
+        "src/learn/data/mutual-information-examples.js": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+        "src/learn/data/mutual-information-mechanism-program.js": "97410c954dd95936f6054b4a72c1fbd2e76f587131e68f9e06d22865ce48e11a",
+        "src/learn/data/mutual-information-models.js": "f3c40318bf0235e545f6882f40c92c6bafdbfff622f041b493d444181cb3540a",
+        "src/learn/data/topics/mutual-information-information-bottleneck.jsx": "626d1e5b2ac2edfa7725adb278fac3db0472f2e1f963fa2cff633987f170cb5f",
+        "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+      }
+    },
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/MUTUAL-INFORMATION-VERIFICATION.md",
+        "legacyReview": true
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.810Z",
+          "manuscript": "src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/mutual-information-information-bottleneck.jsx": "5e0e545b07dafdae348914e655c2b2ffe403a3d908125f73ac1910aa67663786",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05",
+            "src/learn/data/mutual-information-examples.js": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.812Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/mutual-information-information-bottleneck.jsx": "5e0e545b07dafdae348914e655c2b2ffe403a3d908125f73ac1910aa67663786",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/MutualInformationLabs.jsx": "c38a1cba68f0de4f420ff4004fd399cf77a42e626feb90e63fe42a2bc4f8a51d",
+            "src/learn/data/mutual-information-models.js": "f3c40318bf0235e545f6882f40c92c6bafdbfff622f041b493d444181cb3540a",
+            "src/learn/components/lesson-labs/mutual-information-labs.css": "9c99aba160c47544cf017c572c9e950cbc2c9f261b342864569a20899555f3c9",
+            "src/learn/data/mutual-information-examples.js": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+            "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      }
+    ],
+    "nextAction": "Scoped implementation-depth revision complete; retain source-bound evidence. User acceptance remains separate."
+  },
+  "afterSelected": {
+    "revision": 4,
+    "deliveryMode": "full",
+    "record": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-accepted-root-r2.json",
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/MUTUAL-INFORMATION-VERIFICATION.md",
+        "legacyReview": true
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.810Z",
+          "manuscript": "src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/mutual-information-information-bottleneck.jsx": "5e0e545b07dafdae348914e655c2b2ffe403a3d908125f73ac1910aa67663786",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05",
+            "src/learn/data/mutual-information-examples.js": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.812Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/mutual-information-information-bottleneck.jsx": "5e0e545b07dafdae348914e655c2b2ffe403a3d908125f73ac1910aa67663786",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/MutualInformationLabs.jsx": "c38a1cba68f0de4f420ff4004fd399cf77a42e626feb90e63fe42a2bc4f8a51d",
+            "src/learn/data/mutual-information-models.js": "f3c40318bf0235e545f6882f40c92c6bafdbfff622f041b493d444181cb3540a",
+            "src/learn/components/lesson-labs/mutual-information-labs.css": "9c99aba160c47544cf017c572c9e950cbc2c9f261b342864569a20899555f3c9",
+            "src/learn/data/mutual-information-examples.js": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+            "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      },
+      {
+        "revision": 3,
+        "deliveryMode": "full",
+        "record": "docs/teaching/implementation-depth/MATH-DEPTH-REMEDIATION.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T20:08:19.510Z",
+          "manuscript": "src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/mutual-information-information-bottleneck.jsx": "626d1e5b2ac2edfa7725adb278fac3db0472f2e1f963fa2cff633987f170cb5f",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05",
+            "src/learn/data/mutual-information-examples.js": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+            "src/learn/data/mutual-information-mechanism-program.js": "97410c954dd95936f6054b4a72c1fbd2e76f587131e68f9e06d22865ce48e11a",
+            "public/learn-assets/mutual-information/mutual-information-library-bridge.py": "3a931191ff2d9729f5a8e5d970b537e825580cf36b364380325b9838a4e8fea2"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T20:08:19.542Z",
+          "reviewedFiles": {
+            "public/learn-assets/mutual-information/mutual-information-library-bridge.py": "3a931191ff2d9729f5a8e5d970b537e825580cf36b364380325b9838a4e8fea2",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/MechanismProgram.jsx": "347fde8eefd4ce624c0db36597d4a421412a7c70a60e4a553a708f30f4b9d920",
+            "src/learn/components/lesson-labs/MutualInformationLabs.jsx": "c38a1cba68f0de4f420ff4004fd399cf77a42e626feb90e63fe42a2bc4f8a51d",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/mechanism-program.css": "a2758dfc67cd54052aebf4f753b08fa66a054766da862bdb9aa6fa0c54e83316",
+            "src/learn/components/lesson-labs/mutual-information-labs.css": "9c99aba160c47544cf017c572c9e950cbc2c9f261b342864569a20899555f3c9",
+            "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": "9ad67b0e4c345a1258cfab29ba72dd1c0cdd0c9f5a6875540aa151158b1ced05",
+            "src/learn/data/mutual-information-examples.js": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+            "src/learn/data/mutual-information-mechanism-program.js": "97410c954dd95936f6054b4a72c1fbd2e76f587131e68f9e06d22865ce48e11a",
+            "src/learn/data/mutual-information-models.js": "f3c40318bf0235e545f6882f40c92c6bafdbfff622f041b493d444181cb3540a",
+            "src/learn/data/topics/mutual-information-information-bottleneck.jsx": "626d1e5b2ac2edfa7725adb278fac3db0472f2e1f963fa2cff633987f170cb5f",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+          }
+        },
+        "nextAction": "Scoped implementation-depth revision complete; retain source-bound evidence. User acceptance remains separate."
+      }
+    ],
+    "content": {
+      "status": "in-progress"
+    },
+    "implementation": {
+      "status": "not-started"
+    },
+    "nextAction": "Complete full manuscript and specifications from independently accepted design-r2. Preserve ten routes/original science, explicit print-only successors, four bounded new programmes, staged shared L1 and independent transfer. Different entire content review precedes private runtime."
+  },
+  "ledgerBefore": "20bfaa9a2c2fd74c32bf8211cec404230ce8724c89a9578266e8eb15f2dfc555",
+  "ledgerAfter": "af6c9ac6541b3c4bf123d5eed033c6a6da2cd5c2e414055c51b104ed4d061f91",
+  "foreignRowsPreserved": 234,
+  "acceptance": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-accepted-root-r2.json",
+    "sha256": "c18467818298ddf2ed07c3168f7233a2b7093acd9046e5ae48a84712dc8acd46"
+  }
+}

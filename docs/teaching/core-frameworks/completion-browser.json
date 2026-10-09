@@ -1,0 +1,1429 @@
+{
+  "base": "http://127.0.0.1:4197",
+  "results": [
+    {
+      "id": "visualization",
+      "headings": [
+        "1. Decide which question a mark should answer",
+        "2. Build a histogram from counts, widths and area",
+        "3. A scale translates a number into a position",
+        "4. Show what the summary leaves out",
+        "5. Own the transformation, then use the plotting engine",
+        "6. Run a real question on an inspectable dataset",
+        "7. Matplotlib, seaborn and Plotly are different layers of control",
+        "8. Make the exported figure a reproducible result",
+        "9. Practice: defend the figure, not just its style",
+        "10. Carry the evidence contract into performance work",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-decide-which-question-a-mark-should-answer",
+          "text": "1.\nDecide which question a mark should answer",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-build-a-histogram-from-counts-widths-and-area",
+          "text": "2.\nBuild a histogram from counts, widths and area",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-a-scale-translates-a-number-into-a-position",
+          "text": "3.\nA scale translates a number into a position",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-show-what-the-summary-leaves-out",
+          "text": "4.\nShow what the summary leaves out",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-own-the-transformation-then-use-the-plotting-engine",
+          "text": "5.\nOwn the transformation, then use the plotting engine",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-run-a-real-question-on-an-inspectable-dataset",
+          "text": "6.\nRun a real question on an inspectable dataset",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-matplotlib-seaborn-and-plotly-are-different-layers-of-control",
+          "text": "7.\nMatplotlib, seaborn and Plotly are different layers of control",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-make-the-exported-figure-a-reproducible-result",
+          "text": "8.\nMake the exported figure a reproducible result",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-practice-defend-the-figure-not-just-its-style",
+          "text": "9.\nPractice: defend the figure, not just its style",
+          "targetCount": 1
+        },
+        {
+          "href": "#10-carry-the-evidence-contract-into-performance-work",
+          "text": "10.\nCarry the evidence contract into performance work",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "figure-0",
+          "index": 0
+        },
+        {
+          "name": "wine-distributions",
+          "index": 4
+        }
+      ],
+      "labs": [
+        {
+          "name": "visual-histogram",
+          "changedControl": true,
+          "rangeControls": 1,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "0.25",
+              "end": "8"
+            }
+          ],
+          "pointerValue": "6.25",
+          "discreteInputChecks": 0,
+          "selectControls": 2,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "visual-scales",
+          "changedControl": true,
+          "rangeControls": 1,
+          "rangeChecks": [
+            {
+              "start": "1",
+              "interior": "1.1",
+              "end": "100"
+            }
+          ],
+          "pointerValue": "76",
+          "discreteInputChecks": 0,
+          "selectControls": 0,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 3,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 2
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 2
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 2
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "gpu-accelerated-computing",
+      "headings": [
+        "1. Start with the journey of one array",
+        "2. Give every output exactly one writer",
+        "3. Implement the kernel without hiding its contract",
+        "4. Distinguish residency from fusion",
+        "5. Measure completion, not just submission",
+        "6. Choose the right level of the ecosystem",
+        "7. Diagnose before optimizing",
+        "8. Practice: explain the work and the boundary",
+        "9. Keep the boundaries explicit",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-start-with-the-journey-of-one-array",
+          "text": "1.\nStart with the journey of one array",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-give-every-output-exactly-one-writer",
+          "text": "2.\nGive every output exactly one writer",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-implement-the-kernel-without-hiding-its-contract",
+          "text": "3.\nImplement the kernel without hiding its contract",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-distinguish-residency-from-fusion",
+          "text": "4.\nDistinguish residency from fusion",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-measure-completion-not-just-submission",
+          "text": "5.\nMeasure completion, not just submission",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-choose-the-right-level-of-the-ecosystem",
+          "text": "6.\nChoose the right level of the ecosystem",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-diagnose-before-optimizing",
+          "text": "7.\nDiagnose before optimizing",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-practice-explain-the-work-and-the-boundary",
+          "text": "8.\nPractice: explain the work and the boundary",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-keep-the-boundaries-explicit",
+          "text": "9.\nKeep the boundaries explicit",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "gpu-residency",
+          "index": 0
+        }
+      ],
+      "labs": [
+        {
+          "name": "gpu-thread-ownership",
+          "changedControl": true,
+          "rangeControls": 3,
+          "rangeChecks": [
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "32"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "4"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "7"
+            }
+          ],
+          "pointerValue": "25",
+          "discreteInputChecks": 3,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "gpu-traffic-accounting",
+          "changedControl": true,
+          "rangeControls": 5,
+          "rangeChecks": [
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "1000"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "20"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "64"
+            },
+            {
+              "start": "50",
+              "interior": "100",
+              "end": "2000"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "40"
+            }
+          ],
+          "pointerValue": "767",
+          "discreteInputChecks": 2,
+          "selectControls": 2,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 2,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 1
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "vector-databases",
+      "headings": [
+        "1. Separate representation, search and storage",
+        "2. Choose what “near” means before tuning an index",
+        "3. Make approximation a visible candidate decision",
+        "4. Distinguish retrieval quality from search fidelity",
+        "5. Implement exact retrieval and ordinary database operations",
+        "6. Combine lexical evidence, vectors and reranking deliberately",
+        "7. Operate a collection as a versioned dataset",
+        "8. Practice: defend a retrieval contract",
+        "9. Connect the next layer",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-separate-representation-search-and-storage",
+          "text": "1.\nSeparate representation, search and storage",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-choose-what-near-means-before-tuning-an-index",
+          "text": "2.\nChoose what “near” means before tuning an index",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-make-approximation-a-visible-candidate-decision",
+          "text": "3.\nMake approximation a visible candidate decision",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-distinguish-retrieval-quality-from-search-fidelity",
+          "text": "4.\nDistinguish retrieval quality from search fidelity",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-implement-exact-retrieval-and-ordinary-database-operations",
+          "text": "5.\nImplement exact retrieval and ordinary database operations",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-combine-lexical-evidence-vectors-and-reranking-deliberately",
+          "text": "6.\nCombine lexical evidence, vectors and reranking deliberately",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-operate-a-collection-as-a-versioned-dataset",
+          "text": "7.\nOperate a collection as a versioned dataset",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-practice-defend-a-retrieval-contract",
+          "text": "8.\nPractice: defend a retrieval contract",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-connect-the-next-layer",
+          "text": "9.\nConnect the next layer",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "figure-0",
+          "index": 0
+        }
+      ],
+      "labs": [
+        {
+          "name": "vector-metric-filter",
+          "changedControl": true,
+          "rangeControls": 3,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "0.1",
+              "end": "5"
+            },
+            {
+              "start": "0",
+              "interior": "0.1",
+              "end": "5"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "4"
+            }
+          ],
+          "pointerValue": "3.8",
+          "discreteInputChecks": 1,
+          "selectControls": 2,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "vector-coarse-candidates",
+          "changedControl": true,
+          "rangeControls": 3,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "0.1",
+              "end": "5"
+            },
+            {
+              "start": "0",
+              "interior": "0.1",
+              "end": "5"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "3"
+            }
+          ],
+          "pointerValue": "3.8",
+          "discreteInputChecks": 1,
+          "selectControls": 0,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 1,
+      "localDownloads": 3,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 1
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "data-annotation-labeling-extended",
+      "headings": [
+        "1. Three questions that should not share one score",
+        "2. Replace one reliability number with an error mechanism",
+        "3. Learn worker error matrices with EM",
+        "4. Ask whether the inferred parameters are identifiable",
+        "5. Spend review effort without biasing the quality estimate",
+        "6. Implement aggregation and compare with Crowd-Kit",
+        "7. Build assisted labeling without losing the evidence trail",
+        "8. Practice: interrogate the evidence",
+        "9. Carry state and provenance forward",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-three-questions-that-should-not-share-one-score",
+          "text": "1.\nThree questions that should not share one score",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-replace-one-reliability-number-with-an-error-mechanism",
+          "text": "2.\nReplace one reliability number with an error mechanism",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-learn-worker-error-matrices-with-em",
+          "text": "3.\nLearn worker error matrices with EM",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-ask-whether-the-inferred-parameters-are-identifiable",
+          "text": "4.\nAsk whether the inferred parameters are identifiable",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-spend-review-effort-without-biasing-the-quality-estimate",
+          "text": "5.\nSpend review effort without biasing the quality estimate",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-implement-aggregation-and-compare-with-crowd-kit",
+          "text": "6.\nImplement aggregation and compare with Crowd-Kit",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-build-assisted-labeling-without-losing-the-evidence-trail",
+          "text": "7.\nBuild assisted labeling without losing the evidence trail",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-practice-interrogate-the-evidence",
+          "text": "8.\nPractice: interrogate the evidence",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-carry-state-and-provenance-forward",
+          "text": "9.\nCarry state and provenance forward",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "figure-0",
+          "index": 0
+        }
+      ],
+      "labs": [
+        {
+          "name": "annotation-worker-evidence",
+          "changedControl": true,
+          "rangeControls": 5,
+          "rangeChecks": [
+            {
+              "start": "0.05",
+              "interior": "0.1",
+              "end": "0.95"
+            },
+            {
+              "start": "0.05",
+              "interior": "0.1",
+              "end": "0.95"
+            },
+            {
+              "start": "0.05",
+              "interior": "0.1",
+              "end": "0.95"
+            },
+            {
+              "start": "0.05",
+              "interior": "0.1",
+              "end": "0.95"
+            },
+            {
+              "start": "0.05",
+              "interior": "0.1",
+              "end": "0.95"
+            }
+          ],
+          "pointerValue": "0.75",
+          "discreteInputChecks": 0,
+          "selectControls": 3,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "annotation-stratified-audit",
+          "changedControl": true,
+          "rangeControls": 5,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "100"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "40"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "1"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "40"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "1"
+            }
+          ],
+          "pointerValue": "76",
+          "discreteInputChecks": 5,
+          "selectControls": 0,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 1,
+      "localDownloads": 5,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 1
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm",
+      "headings": [
+        "1. A fast model call is only part of a service",
+        "2. Read the prompt once, then extend its history",
+        "3. Give growing requests flexible storage",
+        "4. Schedule pieces of work instead of entire conversations",
+        "5. Translate the mechanism into an engine configuration",
+        "6. Measure what the user experiences",
+        "7. Practice: change the workload and defend the result",
+        "8. Continue from model service to application",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-a-fast-model-call-is-only-part-of-a-service",
+          "text": "1.\nA fast model call is only part of a service",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-read-the-prompt-once-then-extend-its-history",
+          "text": "2.\nRead the prompt once, then extend its history",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-give-growing-requests-flexible-storage",
+          "text": "3.\nGive growing requests flexible storage",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-schedule-pieces-of-work-instead-of-entire-conversations",
+          "text": "4.\nSchedule pieces of work instead of entire conversations",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-translate-the-mechanism-into-an-engine-configuration",
+          "text": "5.\nTranslate the mechanism into an engine configuration",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-measure-what-the-user-experiences",
+          "text": "6.\nMeasure what the user experiences",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-practice-change-the-workload-and-defend-the-result",
+          "text": "7.\nPractice: change the workload and defend the result",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-continue-from-model-service-to-application",
+          "text": "8.\nContinue from model service to application",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "figure-0",
+          "index": 0
+        }
+      ],
+      "labs": [
+        {
+          "name": "serving-cache-pages",
+          "changedControl": true,
+          "rangeControls": 3,
+          "rangeChecks": [
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "12"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "12"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "12"
+            }
+          ],
+          "pointerValue": "9",
+          "discreteInputChecks": 3,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "serving-scheduler",
+          "changedControl": true,
+          "rangeControls": 4,
+          "rangeChecks": [
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "10"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "4"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "8"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "4"
+            }
+          ],
+          "pointerValue": "8",
+          "discreteInputChecks": 4,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 3,
+      "localDownloads": 3,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 1
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "llm-application-frameworks-langchain-llamaindex-haystack",
+      "headings": [
+        "1. The model needs the right working material",
+        "2. Preserve meaning and identity before searching",
+        "3. Find evidence with an inspectable lexical score",
+        "4. Decide what fits, and make every omission visible",
+        "5. Use libraries without hiding the boundaries",
+        "6. Improve the weakest stage with evidence",
+        "7. Practice: trace the missing evidence",
+        "8. Continue from a pipeline to a resumable workflow",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-the-model-needs-the-right-working-material",
+          "text": "1.\nThe model needs the right working material",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-preserve-meaning-and-identity-before-searching",
+          "text": "2.\nPreserve meaning and identity before searching",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-find-evidence-with-an-inspectable-lexical-score",
+          "text": "3.\nFind evidence with an inspectable lexical score",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-decide-what-fits-and-make-every-omission-visible",
+          "text": "4.\nDecide what fits, and make every omission visible",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-use-libraries-without-hiding-the-boundaries",
+          "text": "5.\nUse libraries without hiding the boundaries",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-improve-the-weakest-stage-with-evidence",
+          "text": "6.\nImprove the weakest stage with evidence",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-practice-trace-the-missing-evidence",
+          "text": "7.\nPractice: trace the missing evidence",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-continue-from-a-pipeline-to-a-resumable-workflow",
+          "text": "8.\nContinue from a pipeline to a resumable workflow",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "figure-0",
+          "index": 0
+        }
+      ],
+      "labs": [
+        {
+          "name": "evidence-retrieval",
+          "changedControl": true,
+          "rangeControls": 2,
+          "rangeChecks": [
+            {
+              "start": "0.1",
+              "interior": "0.2",
+              "end": "3"
+            },
+            {
+              "start": "0",
+              "interior": "0.05",
+              "end": "1"
+            }
+          ],
+          "pointerValue": "2.3",
+          "discreteInputChecks": 0,
+          "selectControls": 0,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "context-packing",
+          "changedControl": true,
+          "rangeControls": 4,
+          "rangeChecks": [
+            {
+              "start": "20",
+              "interior": "21",
+              "end": "140"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "40"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "60"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "4"
+            }
+          ],
+          "pointerValue": "112",
+          "discreteInputChecks": 4,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 3,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 1
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "agent-workflow-frameworks-crewai-autogen-langgraph",
+      "headings": [
+        "1. A conversation is not an execution plan",
+        "2. Give each transition a state contract",
+        "3. Save progress, then confront the crash window",
+        "4. Express the same boundaries in LangGraph",
+        "5. Choose a framework by its execution contract",
+        "6. Bound autonomy and evaluate the whole run",
+        "7. Practice: recover without guessing",
+        "8. Continue through the framework contracts",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-a-conversation-is-not-an-execution-plan",
+          "text": "1.\nA conversation is not an execution plan",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-give-each-transition-a-state-contract",
+          "text": "2.\nGive each transition a state contract",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-save-progress-then-confront-the-crash-window",
+          "text": "3.\nSave progress, then confront the crash window",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-express-the-same-boundaries-in-langgraph",
+          "text": "4.\nExpress the same boundaries in LangGraph",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-choose-a-framework-by-its-execution-contract",
+          "text": "5.\nChoose a framework by its execution contract",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-bound-autonomy-and-evaluate-the-whole-run",
+          "text": "6.\nBound autonomy and evaluate the whole run",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-practice-recover-without-guessing",
+          "text": "7.\nPractice: recover without guessing",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-continue-through-the-framework-contracts",
+          "text": "8.\nContinue through the framework contracts",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "figure-0",
+          "index": 0
+        }
+      ],
+      "labs": [
+        {
+          "name": "workflow-route",
+          "changedControl": true,
+          "rangeControls": 2,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "3"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "4"
+            }
+          ],
+          "pointerValue": "2",
+          "discreteInputChecks": 2,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "effect-replay",
+          "changedControl": true,
+          "rangeControls": 1,
+          "rangeChecks": [
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "4"
+            }
+          ],
+          "pointerValue": "3",
+          "discreteInputChecks": 1,
+          "selectControls": 2,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 2,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 1
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "tensor-shapes-autograd-graphs-device-boundaries",
+      "headings": [
+        "1. Name the axes before changing the shape",
+        "2. Broadcasting can silently change the question",
+        "3. Reduce the loss deliberately, then reverse each operation",
+        "4. A computation graph records dependencies, not storage ownership",
+        "5. Explain a missing gradient before changing flags",
+        "6. Moving values can preserve a graph; changing type can remove it",
+        "7. Debug a small contract before a large model",
+        "8. Practice: preserve meaning across a boundary",
+        "9. Carry the contract across time",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-name-the-axes-before-changing-the-shape",
+          "text": "1.\nName the axes before changing the shape",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-broadcasting-can-silently-change-the-question",
+          "text": "2.\nBroadcasting can silently change the question",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-reduce-the-loss-deliberately-then-reverse-each-operation",
+          "text": "3.\nReduce the loss deliberately, then reverse each operation",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-a-computation-graph-records-dependencies-not-storage-ownership",
+          "text": "4.\nA computation graph records dependencies, not storage ownership",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-explain-a-missing-gradient-before-changing-flags",
+          "text": "5.\nExplain a missing gradient before changing flags",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-moving-values-can-preserve-a-graph-changing-type-can-remove-it",
+          "text": "6.\nMoving values can preserve a graph; changing type can remove it",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-debug-a-small-contract-before-a-large-model",
+          "text": "7.\nDebug a small contract before a large model",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-practice-preserve-meaning-across-a-boundary",
+          "text": "8.\nPractice: preserve meaning across a boundary",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-carry-the-contract-across-time",
+          "text": "9.\nCarry the contract across time",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "tensor-axis-contract",
+          "index": 0
+        }
+      ],
+      "labs": [
+        {
+          "name": "tensor-broadcast-pairing",
+          "changedControl": true,
+          "rangeControls": 4,
+          "rangeChecks": [
+            {
+              "start": "-4",
+              "interior": "-3.75",
+              "end": "6"
+            },
+            {
+              "start": "-4",
+              "interior": "-3.75",
+              "end": "6"
+            },
+            {
+              "start": "-4",
+              "interior": "-3.75",
+              "end": "6"
+            },
+            {
+              "start": "-4",
+              "interior": "-3.75",
+              "end": "6"
+            }
+          ],
+          "pointerValue": "3.75",
+          "discreteInputChecks": 0,
+          "selectControls": 0,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "tensor-storage-gradient-boundary",
+          "changedControl": true,
+          "rangeControls": 4,
+          "rangeChecks": [
+            {
+              "start": "-3",
+              "interior": "-2.75",
+              "end": "3"
+            },
+            {
+              "start": "-3",
+              "interior": "-2.75",
+              "end": "3"
+            },
+            {
+              "start": "-3",
+              "interior": "-2.75",
+              "end": "3"
+            },
+            {
+              "start": "-12",
+              "interior": "-11.75",
+              "end": "12"
+            }
+          ],
+          "pointerValue": "1.5",
+          "discreteInputChecks": 0,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 4,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 1
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "dataset-loaders-checkpoints-exact-resume-contracts",
+      "headings": [
+        "1. Define what has to remain the same",
+        "2. A weight is only one part of the state",
+        "3. Choose a checkpoint boundary with no ambiguous work",
+        "4. Prefetch creates two different cursors",
+        "5. Implement a resumable iterator and a complete training snapshot",
+        "6. Use a stateful library loader for its supported contract",
+        "7. Extend the state inventory as the experiment grows",
+        "8. Practice: try to break the restart contract",
+        "9. A module exit criterion",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-define-what-has-to-remain-the-same",
+          "text": "1.\nDefine what has to remain the same",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-a-weight-is-only-one-part-of-the-state",
+          "text": "2.\nA weight is only one part of the state",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-choose-a-checkpoint-boundary-with-no-ambiguous-work",
+          "text": "3.\nChoose a checkpoint boundary with no ambiguous work",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-prefetch-creates-two-different-cursors",
+          "text": "4.\nPrefetch creates two different cursors",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-implement-a-resumable-iterator-and-a-complete-training-snapshot",
+          "text": "5.\nImplement a resumable iterator and a complete training snapshot",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-use-a-stateful-library-loader-for-its-supported-contract",
+          "text": "6.\nUse a stateful library loader for its supported contract",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-extend-the-state-inventory-as-the-experiment-grows",
+          "text": "7.\nExtend the state inventory as the experiment grows",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-practice-try-to-break-the-restart-contract",
+          "text": "8.\nPractice: try to break the restart contract",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-a-module-exit-criterion",
+          "text": "9.\nA module exit criterion",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "figure-1",
+          "index": 1
+        }
+      ],
+      "labs": [
+        {
+          "name": "exact-resume-state",
+          "changedControl": true,
+          "rangeControls": 2,
+          "rangeChecks": [
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "7"
+            },
+            {
+              "start": "0",
+              "interior": "0.1",
+              "end": "0.9"
+            }
+          ],
+          "pointerValue": "6",
+          "discreteInputChecks": 1,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "exact-resume-prefetch",
+          "changedControl": true,
+          "rangeControls": 2,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "5"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "3"
+            }
+          ],
+          "pointerValue": "4",
+          "discreteInputChecks": 2,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 2,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 1
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 1
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "semanticChecks": {
+    "base": "http://127.0.0.1:4197",
+    "checks": [
+      "Visualization endpoint and doubled root text size: live output, readable geometry and no page overflow",
+      "Vector cosine zero direction is undefined; a second candidate list recovers the missing true neighbor",
+      "Serving prefix maps share the same physical page; fixed admission changes B first-token wait from 1 to 4 under the same inputs",
+      "Application query preset and empty typed query update evidence; over-reserved context is explicitly infeasible",
+      "GPU one-element tail has a single writer; zero launch cost removes the overhead term without an artificial minimum",
+      "Annotation copied evidence changes posterior without new information; all abstentions restore prior; unaudited positive-mass stratum is unmeasured, zero-mass stratum allowed",
+      "Exact resume exposes omitted momentum, its zero-coefficient null case, skipped issued-only IDs and restored pending queue",
+      "Workflow rejection has no attempt/effect; after-effect replay duplicates without receipts and recovers once with receipts; one failed delivery remains pending",
+      "Tensor cross-pairing introduces another target dependency; detach preserves loss but removes the weight route, while clone preserves it and a fitted target gives zero rather than None"
+    ]
+  },
+  "notes": [
+    "All nine scopes passed on the production preview. GPU rechecked after correcting a test that misclassified continuous bandwidth/cost as whole-number counts; the author count guard fix is independently verified.",
+    "Final Workflow reader/code/download checks repeated after invalid-key guard and next-lesson link correction; its lab model did not change.",
+    "Automated 1366/768/390/320 checks complement actual author/reviewer/root visual inspection; no user study is claimed."
+  ]
+}

@@ -100,11 +100,36 @@ An early lab may prepare the intuition; another can follow a derivation to inves
 
 ### Build the reason before naming the machinery
 
+Establish the literal job before the technical taxonomy. A newcomer should be
+able to identify the input, the output and one operation on them before meeting
+a list of mechanisms or pipeline stages. Introduce a term beside the familiar
+object it names: show a word cut into pieces before calling the pieces tokens,
+and one piece mapped to a number before discussing vocabulary IDs or embeddings.
+An analogy, glossary or prerequisites link cannot replace that first complete
+operation. A primer can be brief without compressing away these missing steps.
+
+Preserve the useful visual and narrative strengths of the previous lesson during
+a correctness rewrite. Repair an isolated false claim locally; when the order or
+reasoning is inaccessible throughout, reorganize and rewrite the affected learning
+path as extensively as needed. Do not replace the explanation with caveats, API
+contracts and abstract tables. Follow one concrete
+state through each harder operation before naming or optimizing it. Put complete
+efficient programs after their central mechanisms have been explained; a short
+transparent operation or trace can bridge to the full optimized implementation.
+
 #### Apply the teaching loop at every conceptual transition
 
 Intuition is a continuing responsibility throughout a lesson, not a section completed by its opening analogy. Review every newly introduced idea the reader must reason with: a mechanism, quantity, representation, objective, assumption, algorithmic step, architecture variant, implementation choice or evaluation result. A single topic may contain many such transitions, including inside advanced branches. A familiar prerequisite can be recalled and linked; do not silently treat a new idea as familiar because it belongs under an existing heading.
 
 For each transition, establish what the reader already knows, the question or limitation that motivates the new idea, and a plain explanation of what changes. Follow the relevant entities through an inspectable example with intermediate steps and an interpreted result. Connect the prose, visual, symbols and implementation where those forms occur. Explain why the operation has that effect and what decision or further question follows it. Compare a nearby alternative or counterexample when that exposes the key distinction. Choose the amount of support the actual hurdle needs; a short local bridge may suffice for a small transition.
+
+Treat the learner's knowledge as cumulative: only an explicitly verified
+prerequisite and what the reader has already encountered are available at this
+point. A definition, formula or example appearing later cannot explain an earlier
+diagram or control. When an explanation itself introduces another unfamiliar
+idea, supply its needed bridge here or defer that detail until its foundation is
+taught. Do not disguise a new prerequisite as ordinary vocabulary. A deeper
+branch may require named prior skills, but must still teach its new reasoning.
 
 Map these transitions before and during writing in the topic design. Record the exact section or component that supplies each bridge, the existing support worth retaining, any gap, and the chosen explanation/representation. Independently review the full reading path against that map. “An intuition section exists,” a figure count, or a general introductory diagram does not close gaps later in the lesson. Name remaining gaps explicitly instead of certifying the page from its strongest example.
 
@@ -160,6 +185,84 @@ This common navigation structure does not prescribe identical content sections, 
 When the same quantity, object or partition appears by two different routes in one lesson, say so explicitly at the second appearance and explain why the routes agree or when they would not. Readers do not reliably notice that a number has recurred, and the connection is often the most valuable idea on the page.
 
 Retain useful detail, but remove repetitions that add no new understanding. Break a long explanation when its learning question changes, not at an arbitrary word count. Estimate reading separately from hands-on practice.
+
+### Keep the reading continuous
+
+A reader should never feel the lesson change subject without being told why. The
+user found revised lessons "jumpy": sections assumed ideas that had not been taught
+yet, switched examples without explanation, and did not refer back to what had just
+been learned. Write so each paragraph follows from the one before:
+
+- **Bridge every turn.** Open each section, example and branch with one or two
+  sentences that name what the reader can now do and the specific limitation or
+  question that the new material answers. Close a section by stating what was gained.
+- **Nothing before it is taught.** A term, symbol, notation, operation, lab control or
+  figure element must not appear before its explanation. If an explanation needs an
+  unfamiliar idea, teach the idea there in the flow, or reorder the sections.
+  Mentioning that something "will be explained later" does not make its use readable.
+- **Refer back explicitly.** When the explanation builds on something taught earlier
+  in the lesson or an earlier lesson, say so by name, link it, and redraw it in reduced
+  form when the reader needs to see it, rather than assuming it is remembered.
+- **Keep one running example.** Carry the same small example, values and names
+  through as many sections as possible. When a different example teaches better,
+  announce the switch, say why, and connect its objects to the old ones.
+- **Depth without detours.** Detailed and advanced material is welcome; place it
+  after the core idea of its section is complete, mark where it begins, and keep it
+  visible. The core explanation should read straight through without interruption.
+  Depth is never shortened to save length, but repetition and restated cautions are
+  removed.
+
+### Go deep on every topic, and keep every layer easy
+
+A lesson should be one a researcher finds complete and a beginner can still follow.
+Depth comes from research done before writing and from layering, not from denser prose.
+This applies to new lessons and to the first revision of any lesson not yet
+deep-researched. That includes lessons from the original curriculum rewrite, which
+followed older standards. Later revisions of a lesson that already has this coverage
+map research only what they change; see
+[revise existing lessons](workflow.md#revise-existing-lessons-throughout).
+
+**Research the topic as a specialist would before drafting.**
+
+- Read at least two independent canonical treatments: a standard textbook chapter or
+  survey, plus a strong course or lecture notes. Add the original paper for any named
+  method and the official documentation for any library behaviour taught. Note where
+  they disagree on definitions, conventions or emphasis.
+- For each concept, answer these questions in the research notes before writing:
+  - What problem forced it to exist, and what was tried before?
+  - What is the mechanism, step by step, on a small worked example?
+  - Why does it work: the derivation or argument, and its assumptions?
+  - When does it fail? Give the canonical counterexample and the symptoms seen in
+    practice.
+  - What are the alternatives and the tradeoffs between them?
+  - How do real implementations differ from the textbook version (defaults, numerics,
+    API conventions)?
+  - Where is current practice or research heading, with dated sources?
+- Collect the misconceptions learners actually hold, from course forums, Q&A sites and
+  the field's own warnings. Give the lesson a place where each one is met and corrected.
+- Turn this into a coverage map: every idea is placed in the core, a deeper branch, a
+  destination note for another lesson, or nowhere, with a reason. A skipped derivation or
+  failure mode is a recorded decision, not an omission.
+
+**Write each concept as a ladder.** Each rung is complete before the next starts, and each
+uses the reading flow (picture, walk-through, name/equation, code):
+
+1. Intuition in plain words with one concrete picture.
+2. The mechanism traced by hand on the running example, every number shown.
+3. The formal statement, with every symbol tied to the picture already drawn.
+4. The reason it works: the derivation, written step by step with no skipped algebra
+   that the reader cannot do in their head.
+5. The edges: assumptions, failure cases, a counterexample and what goes wrong in code.
+6. Practice: implementations, alternatives and, where relevant, current research.
+
+Rungs 1–3 form the core route. Rungs 4–6 may be marked deeper, but they keep the same
+standard of explanation: a deeper branch is never a compressed summary for experts.
+
+**Check both readers before handing off.** Read the draft once as a beginner: is any
+step too big, any term unexplained, any figure unread? Then read it as a specialist:
+is any important result, condition, failure mode or modern practice missing or
+misstated? Fix both. If the specialist pass finds a gap that would make the beginner
+route harder, add a bridge rather than dropping the content.
 
 ### Carry a coherent explanation across sections and topics
 

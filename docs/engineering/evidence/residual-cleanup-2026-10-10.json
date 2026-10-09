@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-10",
+  "status": "REMOVED_AND_VERIFIED",
+  "removedFiles": 15590,
+  "removedBytes": 494191789,
+  "categories": {
+    "Exact duplicate snapshots": {
+      "files": 13762,
+      "bytes": 377767858
+    },
+    "Retired prototype and one-off helpers": {
+      "files": 110,
+      "bytes": 13813235
+    },
+    "Unused research dependencies": {
+      "files": 1718,
+      "bytes": 102610696
+    }
+  },
+  "failures": [],
+  "retainedCounterpartsHashChecked": 5093,
+  "currentCheckpointPathsProtected": 12417,
+  "ledgerSha256": "3e906666254052261edecf10f3f92a07d72d75277b8435d6fb7a7b34ce14d3dd",
+  "canonicalTreesUnchanged": {
+    "src": {
+      "files": 3353,
+      "bytes": 74386711
+    },
+    "public": {
+      "files": 3394,
+      "bytes": 315755298
+    },
+    "skills": {
+      "files": 14,
+      "bytes": 268004
+    },
+    "scripts": {
+      "files": 2036,
+      "bytes": 16274019
+    }
+  },
+  "protectedHashesUnchanged": {
+    "docs/teaching/lesson-delivery-progress.json": "3e906666254052261edecf10f3f92a07d72d75277b8435d6fb7a7b34ce14d3dd",
+    "package.json": "e9549609355e34cffd31ca32d970514fea19f1cd0168592ef10ae4014702ae0a",
+    "package-lock.json": "9412d37aceefbbb6c1edcddeb65e77f6b8fca59f053bcbea38745c3c6fc05151",
+    "AGENTS.md": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+    "skills/lesson-authoring/SKILL.md": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03"
+  },
+  "handoffConsolidation": {
+    "path": "docs/teaching/math-foundations-reading-flow/README.md",
+    "beforeSha256": "ac9eabb4a300c520d3b1ed311784f61d79d0452e26cbce6b7eef5e5fc9e06a8b",
+    "afterSha256": "f30a1ab8e5f9235b9b7778e9386f37a28e35a16a339678cf8f64ce1b6ca9d645",
+    "removedPurpose": "Repeated historical progress paragraphs and obsolete agent assignments; substantive topic records and future notes retained."
+  },
+  "details": {
+    "path": "docs/engineering/evidence/residual-artifact-retirement-2026-10-10.json.gz",
+    "sha256": "ab65969314ed7b0c6cfaefe44f25680dd9ce61db46c81aff9ec278b419c2168d",
+    "bytes": 558849
+  },
+  "boundary": "No lesson implementation, phase promotion, numerical replay, preview build, Git history deletion or permission repair. Historical removed-copy paths are retired; exact byte-identical counterpart mappings record the state at cleanup time. Current checkpoint paths and unique manuscript/data/source are preserved.",
+  "afterMeasurement": {
+    "readableBytes": 3277300352,
+    "readableFiles": 70925,
+    "inaccessiblePaths": 424,
+    "linksNotFollowed": 1,
+    "groups": {
+      "AGENTS.md": 635,
+      "Portfolio/.gitattributes": 582,
+      "Portfolio/.gitignore": 1785,
+      "Portfolio/.impeccable.md": 4265,
+      "Portfolio/AGENTS.md": 3751,
+      "Portfolio/index.html": 1113,
+      "Portfolio/knowledge-map.html": 290472,
+      "Portfolio/package-lock.json": 122962,
+      "Portfolio/package.json": 829,
+      "Portfolio/README.md": 4380,
+      "Portfolio/vite.config.js": 2618,
+      "Portfolio/wrangler.jsonc": 258,
+      "Portfolio/src": 74386711,
+      "Portfolio/skills": 268004,
+      "Portfolio/scripts": 16274019,
+      "Portfolio/scratch": 463115645,
+      "Portfolio/public": 315755298,
+      "Portfolio/node_modules": 58845268,
+      "Portfolio/docs": 1581427477,
+      "Portfolio/content": 467,
+      "Portfolio/apps": 793,
+      "Portfolio/.github": 2208,
+      "Portfolio/.git": 766622824,
+      "Portfolio/.claude": 187,
+      "docs": 130267,
+      ".superpowers": 36908,
+      ".git": 301,
+      ".claude": 325
+    },
+    "scope": "Final outer-workspace readable footprint after deleting all audit temporaries; excludes unreadable paths, so is a lower bound."
+  },
+  "emptyDirectoriesRemoved": 3584,
+  "temporaryCleanupFilesRemoved": [
+    "scratch/cleanup-residual-audit.json",
+    "scratch/residual-duplicate-plan.py",
+    "scratch/residual-duplicate-plan.json",
+    "scratch/residual-extra-plan.json",
+    "scratch/execute-residual-cleanup.ps1",
+    "scratch/residual-cleanup-result.json",
+    "scratch/residual-cleanup-protected.json",
+    "scratch/residual-handoff-edit.json",
+    "scratch/verify-residual-cleanup.py"
+  ]
+}

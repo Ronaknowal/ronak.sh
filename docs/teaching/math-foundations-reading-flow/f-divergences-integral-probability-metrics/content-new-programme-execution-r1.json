@@ -1,0 +1,58 @@
+{
+  "completedAt": "2026-10-09T17:51:14.277443+00:00",
+  "scope": "First and only execution of the two genuinely new teaching programmes; no historical main replay.",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "programmes": [
+    {
+      "name": "kernel_means",
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.py",
+        "sha256": "8194c6dd13ddb103215cebeafd40640167fc3a42509281f3ac37c5a5ea88a83d",
+        "bytes": 1735
+      },
+      "stdout": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.stdout",
+        "sha256": "51ea547d40cedc69c9641d02ce9d48f6febbd1ef544360aa2debc5eadce0f2f4",
+        "bytes": 203
+      },
+      "stderr": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "exitCode": 0
+    },
+    {
+      "name": "iris_mmd",
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.py",
+        "sha256": "4b0ca177c3192e5818ee004bcc522848253752f76e0580658fed26df2c2da388",
+        "bytes": 3348
+      },
+      "stdout": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.stdout",
+        "sha256": "2677ba983a392b3116f3c8de34103ab9a44f4d5e67410fdc1ab421580979961c",
+        "bytes": 570
+      },
+      "stderr": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "exitCode": 0
+    }
+  ],
+  "helper": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_blockwise.py",
+    "sha256": "acc88a2f65b62a018985bf3ad1a51a24881d4d60ff260d4f669bfaeff682b657",
+    "bytes": 1556
+  },
+  "csv": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris-corrected.csv",
+    "sha256": "5a8853b2e82f9d021e5843af7d647339e359b25e037ec6e87e23ca9e91507821",
+    "bytes": 4759
+  }
+}

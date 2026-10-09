@@ -1,0 +1,2792 @@
+{
+  "schema": "classical21-independent-content-conservation/v1",
+  "at": "2026-10-09T18:49:12.587724+00:00",
+  "reviewer": "/root/ml_successor_independent_review",
+  "scope": "Static complement to separate entire literal reading; no programme/checker imports or scientific replay",
+  "status": "PASSED",
+  "conditionCount": 668,
+  "conditions": [
+    {
+      "name": "assigned freeze",
+      "passed": true
+    },
+    {
+      "name": "exact content-binding-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "exact lesson.md",
+      "passed": true
+    },
+    {
+      "name": "exact author-review.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/whole-content-check.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/source-role-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/root-design-acceptance-and-writing-release.json",
+      "passed": true
+    },
+    {
+      "name": "181 distinct frozen packet files",
+      "passed": true
+    },
+    {
+      "name": "exact author-review.md",
+      "passed": true
+    },
+    {
+      "name": "exact authoring-checkpoint.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/author-reading-refinements.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/check-new-programmes.py",
+      "passed": true
+    },
+    {
+      "name": "exact checks/check-whole-content.py",
+      "passed": true
+    },
+    {
+      "name": "exact checks/early-authoring-checkpoint.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-dependency-capture.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-prose-correction.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-prose-preimages/01-questions.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-prose-preimages/05-search-spaces.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-prose-preimages/07-risk-and-uncertainty.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-prose-preimages/08-adaptive-search.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-reading-placement-correction.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-reading-preimages/06-real-experiment.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-reading-preimages/07-risk-and-uncertainty.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-reading-preimages/08-adaptive-search.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/final-reading-preimages/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/first-assembled-manuscript/composition.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/first-assembled-manuscript/lesson.md",
+      "passed": true
+    },
+    {
+      "name": "exact checks/first-composition-whole-content-check.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/new-programme-semantic-check.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/outgoing-regularization-bridge.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/partial-authoring-checkpoint.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/pre-dependency-freeze-whole-content-check.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/bootstrap_the_whole_statistic.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/bootstrap_the_whole_statistic.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/bootstrap_the_whole_statistic.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/bootstrap_the_whole_statistic.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/bootstrap_the_whole_statistic.py.2.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/bootstrap_the_whole_statistic.py.2.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/discrete_adaptive_search.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/discrete_adaptive_search.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/discrete_adaptive_search.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/finite_selection_optimism.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/finite_selection_optimism.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/finite_selection_optimism.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.2.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.2.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.3.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.3.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.3.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/holdout_mse_identity.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/holdout_mse_identity.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/holdout_mse_identity.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/holdout_mse_identity.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/holdout_mse_identity.py.2.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/holdout_mse_identity.py.2.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/nested_procedure_from_indices.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/nested_procedure_from_indices.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/nested_procedure_from_indices.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/nested_procedure_from_indices.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/nested_procedure_from_indices.py.2.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/nested_procedure_from_indices.py.2.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/ordinary_halving_audit.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/ordinary_halving_audit.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/ordinary_halving_audit.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/parameter_spaces_and_sampling.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/parameter_spaces_and_sampling.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/parameter_spaces_and_sampling.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/parameter_spaces_and_sampling.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/parameter_spaces_and_sampling.py.2.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/parameter_spaces_and_sampling.py.2.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.2.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.2.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.3.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.3.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.3.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/resource_tournaments.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/resource_tournaments.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/resource_tournaments.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/resource_tournaments.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/resource_tournaments.py.2.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/resource_tournaments.py.2.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/risk_and_covariance_exact.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/risk_and_covariance_exact.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/risk_and_covariance_exact.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/search_results_and_refit.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/search_results_and_refit.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/search_results_and_refit.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/split_information_contracts.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/split_information_contracts.py.1.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/split_information_contracts.py.1.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/split_information_contracts.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/split_information_contracts.py.2.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/split_information_contracts.py.2.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact checks/redundant-fragment-retirement.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/refine-final-prose.py",
+      "passed": true
+    },
+    {
+      "name": "exact checks/refine-final-reading.py",
+      "passed": true
+    },
+    {
+      "name": "exact checks/retained-practice-rendering.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/whole-content-check-development.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/whole-content-check.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/whole-content-first-attempt.json",
+      "passed": true
+    },
+    {
+      "name": "exact checks/whole-content-second-attempt.json",
+      "passed": true
+    },
+    {
+      "name": "exact compose-manuscript.py",
+      "passed": true
+    },
+    {
+      "name": "exact composition.json",
+      "passed": true
+    },
+    {
+      "name": "exact freeze-content.py",
+      "passed": true
+    },
+    {
+      "name": "exact investigation-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "exact lesson.md",
+      "passed": true
+    },
+    {
+      "name": "exact opening.md",
+      "passed": true
+    },
+    {
+      "name": "exact prepare-file-index.py",
+      "passed": true
+    },
+    {
+      "name": "exact prepare-retained-inputs.py",
+      "passed": true
+    },
+    {
+      "name": "exact prepare-retained-practice.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/calculated-inputs.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_optuna.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_optuna.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_penguins.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_penguins.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_tiny.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_tiny.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/README.md",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/requirements-optuna.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/requirements.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/source-role-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact research-and-continuity-notes.md",
+      "passed": true
+    },
+    {
+      "name": "exact retained-inputs.json",
+      "passed": true
+    },
+    {
+      "name": "exact retained-practice-source.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact retained-practice.md",
+      "passed": true
+    },
+    {
+      "name": "exact run-new-programme.py",
+      "passed": true
+    },
+    {
+      "name": "exact sections/01-questions.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/02-folds.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/03-information.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/04-selection.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/05-search-spaces.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/06-real-experiment.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/07-risk-and-uncertainty.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/08-adaptive-search.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/09-execution-and-reporting.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/10-practice.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/11-readiness-and-resources.md",
+      "passed": true
+    },
+    {
+      "name": "exact setup-and-files.md",
+      "passed": true
+    },
+    {
+      "name": "exact visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "52 distinct payload roles",
+      "passed": true
+    },
+    {
+      "name": "15 teaching sources and one optional answer",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_tiny.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_tiny.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_penguins.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_penguins.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_optuna.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_optuna.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/calculated-inputs.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/README.md",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/requirements.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/requirements-optuna.txt",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P01",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P01",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P01",
+      "passed": true
+    },
+    {
+      "name": "old absent stderr remains absent P01",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P02",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P02",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P02",
+      "passed": true
+    },
+    {
+      "name": "old absent stderr remains absent P02",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P03",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P03",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P03",
+      "passed": true
+    },
+    {
+      "name": "old absent stderr remains absent P03",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P04",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P04",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P04",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P04",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/fold_fitted_pipeline.py.3.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P04",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P04",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P04",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P04",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P05",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P05",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P05",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P05",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/split_information_contracts.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P05",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P05",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency P05/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P05",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P05",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P06",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P06",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P06",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P06",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/finite_selection_optimism.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P06",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P06",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P06",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P06",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P07",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P07",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P07",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P07",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/nested_procedure_from_indices.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P07",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P07",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency P07/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P07",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P07",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P08",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P08",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P08",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P08",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/parameter_spaces_and_sampling.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P08",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P08",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P08",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P08",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P09",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P09",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P09",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P09",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/search_results_and_refit.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P09",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P09",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency P09/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P09",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P09",
+      "passed": true
+    },
+    {
+      "name": "nonempty diagnostics literally placed P09",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P10",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P10",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P10",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P10",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/risk_and_covariance_exact.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P10",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P10",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P10",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P10",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P11",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P11",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P11",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P11",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/bootstrap_the_whole_statistic.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P11",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P11",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency P11/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P11",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P11",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P12",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P12",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P12",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P12",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/holdout_mse_identity.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P12",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P12",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P12",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P12",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P13",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P13",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P13",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P13",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/discrete_adaptive_search.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P13",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P13",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P13",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P13",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P14",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P14",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P14",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P14",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/resource_tournaments.py.2.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P14",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P14",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P14",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P14",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source P15",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout P15",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed P15",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded P15",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/ordinary_halving_audit.py.1.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source P15",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured P15",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout P15",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr P15",
+      "passed": true
+    },
+    {
+      "name": "one complete literal source A01",
+      "passed": true
+    },
+    {
+      "name": "one complete literal stdout A01",
+      "passed": true
+    },
+    {
+      "name": "actual local dependencies indexed A01",
+      "passed": true
+    },
+    {
+      "name": "new source main guarded A01",
+      "passed": true
+    },
+    {
+      "name": "exact checks/programme-attempts/practice_answers.py.3.json",
+      "passed": true
+    },
+    {
+      "name": "attributed successful current source A01",
+      "passed": true
+    },
+    {
+      "name": "all actual imports captured A01",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency A01/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency A01/split_information_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency A01/search_results_and_refit.py",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency A01/bootstrap_the_whole_statistic.py",
+      "passed": true
+    },
+    {
+      "name": "current captured dependency A01/resource_tournaments.py",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stdout A01",
+      "passed": true
+    },
+    {
+      "name": "complete attributed raw stderr A01",
+      "passed": true
+    },
+    {
+      "name": "original full decoded code conserved cv_tiny.py",
+      "passed": true
+    },
+    {
+      "name": "original full decoded stdout conserved cv_tiny.py",
+      "passed": true
+    },
+    {
+      "name": "original full decoded code conserved cv_penguins.py",
+      "passed": true
+    },
+    {
+      "name": "original full decoded stdout conserved cv_penguins.py",
+      "passed": true
+    },
+    {
+      "name": "original full decoded code conserved cv_optuna.py",
+      "passed": true
+    },
+    {
+      "name": "original full decoded stdout conserved cv_optuna.py",
+      "passed": true
+    },
+    {
+      "name": "all ten exact raw original task blocks",
+      "passed": true
+    },
+    {
+      "name": "ten original rendered tasks contiguous once",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T01",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T02",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T03",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T04",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T05",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T06",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T07",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T08",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T09",
+      "passed": true
+    },
+    {
+      "name": "original rendered task statement/solution T10",
+      "passed": true
+    },
+    {
+      "name": "exact opening.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/01-questions.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/02-folds.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/03-information.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/04-selection.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/05-search-spaces.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/06-real-experiment.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/07-risk-and-uncertainty.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/08-adaptive-search.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/09-execution-and-reporting.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/10-practice.md",
+      "passed": true
+    },
+    {
+      "name": "exact sections/11-readiness-and-resources.md",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/bootstrap_the_whole_statistic.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/calculated-inputs.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_optuna.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_optuna.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_penguins.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_penguins.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_tiny.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/cv_tiny.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/discrete_adaptive_search.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/finite_selection_optimism.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/fold_fitted_pipeline.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/holdout_mse_identity.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/nested_procedure_from_indices.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/ordinary_halving_audit.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/parameter_spaces_and_sampling.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/practice_answers.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/README.md",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/requirements-optuna.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/requirements.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/resource_tournaments.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/risk_and_covariance_exact.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/search_results_and_refit.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/source-role-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "exact programmes/split_information_contracts.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact lesson.md",
+      "passed": true
+    },
+    {
+      "name": "complete independently reconstructed manuscript exact",
+      "passed": true
+    },
+    {
+      "name": "41 unique drawing placements",
+      "passed": true
+    },
+    {
+      "name": "pooled counts then nonlinear metric before fitted preparation",
+      "passed": true
+    },
+    {
+      "name": "41 complete named drawing contracts",
+      "passed": true
+    },
+    {
+      "name": "14 complete named investigation contracts",
+      "passed": true
+    },
+    {
+      "name": "11 complete section placements",
+      "passed": true
+    },
+    {
+      "name": "23 tasks and all 13 changed transfer tasks",
+      "passed": true
+    },
+    {
+      "name": "local compass targets resolve uniquely",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/cv_tiny.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/cv_tiny.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/cv_penguins.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/cv_penguins.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/cv_optuna.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/cv_optuna.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/fold_fitted_pipeline.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/fold_fitted_pipeline.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/fold_fitted_pipeline.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/split_information_contracts.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/split_information_contracts.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/split_information_contracts.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/finite_selection_optimism.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/finite_selection_optimism.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/finite_selection_optimism.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/nested_procedure_from_indices.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/nested_procedure_from_indices.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/nested_procedure_from_indices.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/parameter_spaces_and_sampling.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/parameter_spaces_and_sampling.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/parameter_spaces_and_sampling.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/search_results_and_refit.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/search_results_and_refit.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/search_results_and_refit.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/risk_and_covariance_exact.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/risk_and_covariance_exact.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/risk_and_covariance_exact.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/bootstrap_the_whole_statistic.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/bootstrap_the_whole_statistic.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/bootstrap_the_whole_statistic.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/holdout_mse_identity.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/holdout_mse_identity.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/holdout_mse_identity.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/discrete_adaptive_search.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/discrete_adaptive_search.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/discrete_adaptive_search.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/resource_tournaments.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/resource_tournaments.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/resource_tournaments.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/ordinary_halving_audit.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/ordinary_halving_audit.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/ordinary_halving_audit.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/practice_answers.py",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/practice_answers.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/practice_answers.py.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/calculated-inputs.json",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/README.md",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/requirements.txt",
+      "passed": true
+    },
+    {
+      "name": "one setup file role programmes/requirements-optuna.txt",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/validation-examples.js",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact src/learn/data/validation-examples.js",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/validation-models.js",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact src/learn/data/validation-models.js",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/validation-data.js",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact src/learn/data/validation-data.js",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/components/lesson-labs/ValidationLabs.jsx",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact src/learn/components/lesson-labs/ValidationLabs.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/components/lesson-labs/ValidationFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact src/learn/components/lesson-labs/ValidationFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/components/lesson-labs/ValidationShared.jsx",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact src/learn/components/lesson-labs/ValidationShared.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/components/lesson-labs/validation-labs.css",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact src/learn/components/lesson-labs/validation-labs.css",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md",
+      "passed": true
+    },
+    {
+      "name": "exact scripts/verify-validation-browser.cjs",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact scripts/verify-validation-browser.cjs",
+      "passed": true
+    },
+    {
+      "name": "exact scripts/verify-validation-data.py",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact scripts/verify-validation-data.py",
+      "passed": true
+    },
+    {
+      "name": "exact scripts/verify-validation-examples.py",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact scripts/verify-validation-examples.py",
+      "passed": true
+    },
+    {
+      "name": "exact scripts/verify-validation-models.mjs",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact scripts/verify-validation-models.mjs",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact public/learn-assets/cross-validation/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact public/learn-assets/cross-validation/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact public/learn-assets/cross-validation/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/evidence/validation-browser.json",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/evidence/validation-browser.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/evidence/validation-data.json",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/evidence/validation-data.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/evidence/validation-models.json",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/evidence/validation-models.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/evidence/validation-native.json",
+      "passed": true
+    },
+    {
+      "name": "original private snapshot exact docs/teaching/evidence/validation-native.json",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/validation-examples.js",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/validation-models.js",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/validation-data.js",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/components/lesson-labs/ValidationLabs.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/components/lesson-labs/ValidationFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/components/lesson-labs/ValidationShared.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/components/lesson-labs/validation-labs.css",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md",
+      "passed": true
+    },
+    {
+      "name": "exact scripts/verify-validation-browser.cjs",
+      "passed": true
+    },
+    {
+      "name": "exact scripts/verify-validation-data.py",
+      "passed": true
+    },
+    {
+      "name": "exact scripts/verify-validation-examples.py",
+      "passed": true
+    },
+    {
+      "name": "exact scripts/verify-validation-models.mjs",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/evidence/validation-browser.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/evidence/validation-data.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/evidence/validation-models.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/evidence/validation-native.json",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/browser-checks.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-checks.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-review.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/reading-flow-design.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/visual-and-investigation-contracts.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/programmes-practice-and-resources.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/research-and-claims.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/notes-and-resources.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-fixtures.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/author-design-review.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-arithmetic.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-density-arithmetic.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/check-design-arithmetic.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/check-design-density.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/freeze-complete-design.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/source-retention.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/partial-design-checkpoint.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/original-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/original-manifest-supplement.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/reading-flow-design.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/visual-and-investigation-contracts.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/programmes-practice-and-resources.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/visual-vocabulary.md",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/topics/regularization-l1-l2-elastic-net-dropout.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/topics/automl-neural-architecture-search-nas.jsx",
+      "passed": true
+    },
+    {
+      "name": "exact src/learn/data/curriculum/blueprints/automl-neural-architecture-search-nas.js",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-accepted-root.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/root-start.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/author-ready-design.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/independent-review/whole-design-review.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/design-policy-correction.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/policy-closure.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/policy-closure-check.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/check-policy-closure.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/check-hand-policies.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/hand-policy-check.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/arithmetic-review.md",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_tiny.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_tiny.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_penguins.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_penguins.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_optuna.py",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_optuna.py.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "retained offline source byte equality docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/penguins.csv",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "retained offline source byte equality docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/nested-experiment.json",
+      "passed": true
+    },
+    {
+      "name": "exact docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "exact public/learn-assets/cross-validation/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "retained offline source byte equality docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "P05 current captured dependency explicit",
+      "passed": true
+    },
+    {
+      "name": "attributed existing author evidence whole-content-check.json",
+      "passed": true
+    },
+    {
+      "name": "attributed existing author evidence new-programme-semantic-check.json",
+      "passed": true
+    }
+  ],
+  "target": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/author-ready-content.json",
+    "bytes": 3325,
+    "sha256": "ae93b950a3cbc85cacb9242b52d5a1b12e0d2389698ac50a2a055bb367f6371d"
+  },
+  "manifest": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/content-binding-manifest.json",
+    "bytes": 33170,
+    "sha256": "3e5b16742380f2c0bd8b9a829a416ce1e6b2361fe6020c44241762ec0e58947f"
+  },
+  "lesson": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/lesson.md",
+    "bytes": 245939,
+    "sha256": "4b6ef39187c7e6656675b9466d7c04d56bdd89b2b8cf9f683c681c2574a5a408"
+  },
+  "checker": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/independent-content-review/check-content-conservation.py",
+    "bytes": 12668,
+    "sha256": "5ba29e751d034ca72c727c1747dac546f6980fab96f6fb608894a4e206b43014"
+  },
+  "attributed_current_execution_receipts": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/fold_fitted_pipeline.py.3.json",
+      "bytes": 1178,
+      "sha256": "3d5ff61a8b0765f87938b514df08a83a72963567c094988d30cd79a8ae8f02a5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/split_information_contracts.py.2.json",
+      "bytes": 1545,
+      "sha256": "af312b91455887b18de361c55b4b862518a708409385a8cd8caeaec575416d7b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/finite_selection_optimism.py.1.json",
+      "bytes": 1198,
+      "sha256": "eefb27c99e7bdbb6c2d168fc0c439bd4b2fd5dfee4e67f5c96fc5023799b896b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/nested_procedure_from_indices.py.2.json",
+      "bytes": 1554,
+      "sha256": "1c0b3392013f15c6d00b234947d07ed46aba3f08e28d04fb262593734774a50f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/parameter_spaces_and_sampling.py.2.json",
+      "bytes": 1386,
+      "sha256": "ad87b62fba6cab0597a0fd7f64882a1bde0ab9845843e679dc32d03359e9bda0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/search_results_and_refit.py.1.json",
+      "bytes": 1536,
+      "sha256": "1eb8e3925dd4896a4c9e03750fad0dcef0b3499d7b4fc9d3152798dcbb586b9b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/risk_and_covariance_exact.py.1.json",
+      "bytes": 1197,
+      "sha256": "135706e1bcc7ad4c80f1428876227ccf2729d257ddfd0d5328a91bd8d150025e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/bootstrap_the_whole_statistic.py.2.json",
+      "bytes": 1554,
+      "sha256": "580aa78e0bc4a6f0837398c07ca82b07838c2ac1bc3804dfe08fda34016b1e49"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/holdout_mse_identity.py.2.json",
+      "bytes": 1349,
+      "sha256": "d52982a39841fc37875a659b7ea249bf7d8e6dbff30950afaa5162a6b9933a37"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/discrete_adaptive_search.py.1.json",
+      "bytes": 1366,
+      "sha256": "8aa04d896fbf13747ad13fab8f73b2e3ff73227fa3e62c3bd02776b11883174b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/resource_tournaments.py.2.json",
+      "bytes": 1350,
+      "sha256": "c1c48c4157514a817c66b743066e25b112165e43257424b71004eb5146838fd8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/ordinary_halving_audit.py.1.json",
+      "bytes": 1358,
+      "sha256": "fd9b634dcad3ed130055eb10398dba917957fd26d69f03d0c8e2e42002694fef"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/checks/programme-attempts/practice_answers.py.3.json",
+      "bytes": 2173,
+      "sha256": "d5349fe3181c0f8815f4c9c4ab00df19ac902b795b28a77af17abc758a0a6f59"
+    }
+  ],
+  "root_living_record": [
+    {
+      "frozen": {
+        "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/reading-flow-revision.md",
+        "bytes": 5787,
+        "sha256": "6a2bcc9640d2ada07c2112d054111e55e71a176210987414640b28094933a0dc",
+        "role": "retention / current continuation"
+      },
+      "current": {
+        "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/reading-flow-revision.md",
+        "bytes": 7701,
+        "sha256": "ba4be9b8d0d6bf6309975b4ab6c537c9e934fa6ee367b2fc982d602ca89d3085"
+      },
+      "role": "Root living continuation; not represented as frozen identity"
+    }
+  ],
+  "limits": [
+    "No author checker replay",
+    "No topic import, main, fit, numerical campaign, build, SSR, browser or native execution",
+    "Hash/count checks do not establish teaching quality; separate whole-content report assesses actual bodies",
+    "Author scientific/execution evidence reused with attribution, not claimed as independent execution",
+    "No learner, author, shared, canonical, public or central mutations"
+  ]
+}

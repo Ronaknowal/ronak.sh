@@ -1,0 +1,23 @@
+.engine-figure .engine-life-steps { display:flex; flex-wrap:wrap; align-items:center; gap:.7rem; }
+.engine-figure .engine-life-steps button { padding:.55rem .8rem; border:1px solid #777; background:#1d1d20; color:#eee; }
+.engine-figure .engine-life-steps button:disabled { opacity:.4; }
+.engine-figure .engine-life-inputs { display:grid; gap:.6rem; margin:1rem 0; }
+.engine-figure .engine-life-inputs>div { display:flex; gap:.35rem; flex-wrap:wrap; }
+.engine-figure .engine-life-inputs span { border:1px solid var(--entity); color:var(--entity); display:flex; flex-direction:column; align-items:center; min-width:3rem; padding:.35rem; }
+.engine-figure .engine-life-inputs .engine-life-unfed { border-style:dashed; }
+.engine-figure .engine-life-commit-flow { display:flex; flex-wrap:wrap; align-items:center; gap:.7rem; border-bottom:1px solid #666; padding-bottom:1rem; }
+.engine-figure .engine-life-commit-flow span:not([aria-hidden]) { display:flex; flex-direction:column; gap:.3rem; flex:1 1 10rem; }
+.engine-figure .engine-life-commit-flow b { color:#83d9dc; }
+.engine-figure .engine-life-read { margin:1.5rem 0; padding-left:.8rem; border-left:2px solid #999; }
+.engine-figure .engine-life-bytes { display:flex; flex-wrap:wrap; gap:.3rem; margin:.7rem 0; }
+.engine-figure .engine-life-bytes>span { display:flex; flex-direction:column; align-items:center; min-width:3rem; border:1px solid #777; padding:.25rem; line-height:1.4; }
+.engine-figure .engine-life-bytes .multibyte { color:#86c9f1; border-color:#86c9f1; background:#86c9f11a; }
+.engine-figure .engine-life-bytes small { font-size:.8em; opacity:.75; }
+.engine-figure .engine-life-decoder { display:flex; flex-direction:column; gap:.4rem; }
+.engine-figure .engine-life-decoder code,.engine-figure .engine-life-pipeline code { white-space:pre-wrap; overflow-wrap:anywhere; display:block; }
+.engine-figure .engine-life-pipeline { display:grid; gap:.45rem; }
+.engine-figure .engine-life-pipeline>div { border-left:2px solid #86c9f1; padding:.35rem .9rem; display:flex; flex-direction:column; gap:.45rem; }
+.engine-figure .engine-life-pipeline>b { margin-left:1rem; font-size:1.5rem; color:#86c9f1; }
+.engine-figure .engine-life-pipeline>div>span { color:#b9b9bb; }
+.engine-figure .engine-life-json pre { white-space:pre-wrap; overflow-wrap:anywhere; font:inherit; font-family:monospace; border-left:2px solid #c5a3ed; padding:.8rem; }
+.engine-figure .engine-life-json strong { display:block; margin:.8rem 0; }

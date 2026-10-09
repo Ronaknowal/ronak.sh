@@ -1,0 +1,21 @@
+{
+  "status": "AUTHOR_SELF_READING_CORRECTIONS_NOT_INDEPENDENT",
+  "changes": [
+    {
+      "before": "KL(P∥Q) averages P's prices; KL(Q∥P) averages Q's.",
+      "after": "KL(P∥Q) weights the log ratio by P; KL(Q∥P) weights the reversed log ratio by Q."
+    },
+    {
+      "before": "The conditional portion of `information_library.py` in section4 performs",
+      "after": "The complete `information_library.py` below performs"
+    },
+    {
+      "before": "/learn/path/full-curriculum/greedy-algorithms-exchange-arguments?module=dsa#6-merge-the-smallest-frequencies-to-build-a-prefix-code",
+      "after": "/learn/path/full-curriculum/greedy-algorithms-exchange-arguments#6-merge-small-parts-into-a-code"
+    }
+  ],
+  "additional": "E03 visual corrected to actual two/four-way probability tree; E07 visual corrected to manuscript certain-law mixture. New prose number/unit spacing improved, protected full Python and all27 original task strings byte-identical.",
+  "codeBlocks": 19,
+  "originalPracticeStrings": 27,
+  "scientificMainReplay": 0
+}

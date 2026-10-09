@@ -1,0 +1,212 @@
+{
+  "status": "PASS_SECTION10_CURRENT_SOURCE_FRAGMENTS_OUTPUT_AND_PROSE",
+  "created": "2026-10-09T11:17:34.115Z",
+  "conditions": [
+    {
+      "name": "new38 outer conditions passed",
+      "passed": true
+    },
+    {
+      "name": "once-only new lifecycle26 exited0",
+      "passed": true
+    },
+    {
+      "name": "foundation89 retained not replayed",
+      "passed": true
+    },
+    {
+      "name": "executed input conserved ordinary_nmf_lifecycle.py",
+      "passed": true
+    },
+    {
+      "name": "executed input conserved check-lifecycle.py",
+      "passed": true
+    },
+    {
+      "name": "executed input conserved foundation-program-checks.json",
+      "passed": true
+    },
+    {
+      "name": "executed input conserved nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "executed input conserved nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "executed input conserved nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "executed input conserved centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "new main stdout conserved",
+      "passed": true
+    },
+    {
+      "name": "new main stderr conserved",
+      "passed": true
+    },
+    {
+      "name": "exact transform complete method fragment",
+      "passed": true
+    },
+    {
+      "name": "exact final scratch publication fragment",
+      "passed": true
+    },
+    {
+      "name": "one accepted section10",
+      "passed": true
+    },
+    {
+      "name": "three accepted mechanism jobs",
+      "passed": true
+    },
+    {
+      "name": "D35 above walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D36 above walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D37 above walkthrough",
+      "passed": true
+    },
+    {
+      "name": "one exact slot <!-- fragment:CoordinateNMF.transform -->",
+      "passed": true
+    },
+    {
+      "name": "complete literal slot <!-- fragment:CoordinateNMF.transform -->",
+      "passed": true
+    },
+    {
+      "name": "one exact slot <!-- fragment:CoordinateNMF.publication -->",
+      "passed": true
+    },
+    {
+      "name": "complete literal slot <!-- fragment:CoordinateNMF.publication -->",
+      "passed": true
+    },
+    {
+      "name": "one exact slot <!-- source:ordinary_nmf_lifecycle.py -->",
+      "passed": true
+    },
+    {
+      "name": "complete literal slot <!-- source:ordinary_nmf_lifecycle.py -->",
+      "passed": true
+    },
+    {
+      "name": "one exact slot <!-- output:lifecycle-main.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "complete literal slot <!-- output:lifecycle-main.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "no unresolved code/output slots",
+      "passed": true
+    },
+    {
+      "name": "actual source ownership section6",
+      "passed": true
+    },
+    {
+      "name": "actual new numerical values agree",
+      "passed": true
+    },
+    {
+      "name": "all current output copied including final conditioncount",
+      "passed": true
+    },
+    {
+      "name": "no actual stderr",
+      "passed": true
+    },
+    {
+      "name": "old scratch/ordinary comparison exact retained output",
+      "passed": true
+    },
+    {
+      "name": "old Frobenius norm is square root of twice half-loss",
+      "passed": true
+    },
+    {
+      "name": "supplied query contribution identity",
+      "passed": true
+    },
+    {
+      "name": "changed exercise identity",
+      "passed": true
+    },
+    {
+      "name": "D36 controlled comparison directions",
+      "passed": true
+    },
+    {
+      "name": "current code exact public operations",
+      "passed": true
+    }
+  ],
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\ordinary_nmf_lifecycle.py",
+      "bytes": 6184,
+      "sha256": "bcb1705c424895be7629900ba26005629c7f0701faeb41c1f31c08980218122b"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+      "bytes": 9109,
+      "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\section-ten-template.md",
+      "bytes": 16193,
+      "sha256": "216e9d619ca38e7f765482f3aaa4e94b52e2d7b20ce1b2aa152a289a3b46ba2e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\section-ten.md",
+      "bytes": 23736,
+      "sha256": "50171e1037c56cb3cf733a2c5135afb9eb5091cf27a85d4626f2441aff30149a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\lifecycle-checks.json",
+      "bytes": 8014,
+      "sha256": "c073008510a905a9d338463e2a6f4fd7f6383bd49ccffbd5e5b985bb01b7dabd"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\visual-specifications.md",
+      "bytes": 5349,
+      "sha256": "e1921398cba41093984d0fc6623ea9a3c18b6ed0a5bbb23c48b5f0356f6dde51"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\README.md",
+      "bytes": 3275,
+      "sha256": "24a9ae2b567aed8824513d26c8e4c3c9a85341c85caaa1262216c0a782ce3077"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\assemble-section.mjs",
+      "bytes": 5926,
+      "sha256": "6cea9126a8b7aa9f09971951fef846c7f4f5eb4b1a52a0d7e30e6bca555f7df0"
+    }
+  ],
+  "sourceFragments": {
+    "transform": {
+      "source": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+      "body": "    def transform(self, values, *, features=None, return_diagnostics=False):\n        state = self._fitted()\n        if features is not None and feature_ids(features, state.h.shape[1]) != state.features:\n            raise ValueError(\"Query feature IDs/order differ from the fitted dictionary\")\n        w, diagnostic = encode_coordinates(values, state.h, max_iter=state.max_iter, tol=state.tol, sweeps=state.sweeps)\n        return (w, diagnostic) if return_diagnostics else w"
+    },
+    "publication": {
+      "source": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+      "body": "        candidate = CoordinateState(read_only(h), names, cap, tol, sweeps, tuple(history), status)\n        self._state = candidate  # The only publication point; failures above preserve old state.\n        return w.copy()"
+    }
+  },
+  "numericalMainReplay": false,
+  "limits": "Current composition and targeted prose/arithmetic only, no independent/native/whole-topic acceptance."
+}

@@ -1,149 +1,231 @@
+import { useEffect, useMemo, useState } from 'react';
 import useLessonViewport from './useLessonViewport.js';
 import RemoteCodeBlock from '../content/RemoteCodeBlock.jsx';
-import { useEffect, useMemo, useState } from 'react';
-import { NeuralLab, NeuralNumber, NeuralSelect, NeuralTable, formatNeural as f } from './NeuralLessonElements.jsx';
-import { channelFixture, initialSignal, channelForward, channelGradient, rankProbe, sampleStencil, samplingSupport, finiteTaps, parallelContext, savedDigitLogits, reconstructedKernel } from '../../data/depthwise-convolution-models.js';
-import './depthwise-convolutions.css';
+import { FlowLab, FlowControls, FlowSlider, FlowChoice, FlowReadout, flowNumber as f } from './LessonFlow.jsx';
+import { NeuralTable } from './NeuralLessonElements.jsx';
+import { FlowArrow, ValueStrip, ReceptiveJumpFigure } from './DepthwiseFlowFigures.jsx';
+import { channelFixture, channelForward, channelGradient, rankProbe, initialSignal, sampleStencil, samplingSupport, finiteTaps, parallelContext, savedDigitLogits, reconstructedKernel } from '../../data/depthwise-convolution-models.js';
 
 export const depthwiseAsset = '/learn-code/depthwise-separable-dilated-convolutions/';
-const copy = value => JSON.parse(JSON.stringify(value));
 const vector = values => `[${values.map(value => f(value, 4)).join(', ')}]`;
-const editIndex = (values, index, value) => values.map((old, i) => i === index ? value : old);
-
-function Values({ title, values, onChange, min = -3, max = 3, active = [] }) {
-  return <fieldset className="depthwise-values"><legend>{title}</legend><div>{values.map((value, index) => <div key={index} className={active.includes(index) ? 'depthwise-selected' : ''}><small>Index {index}</small><NeuralNumber label={`${title} ${index}`} value={value} min={min} max={max} step={.1} range={false} onChange={next => onChange(index, next)} /></div>)}</div></fieldset>;
-}
+const sg = value => (value < 0 ? `(${f(value)})` : f(value));
+const replace = (values, index, value) => values.map((previous, position) => position === index ? value : previous);
 
 export function DepthwiseChannelLab() {
-  const [state, setState] = useState(() => copy(channelFixture));
-  const [position, setPosition] = useState(0), [target, setTarget] = useState(1), [rate, setRate] = useState(.01);
-  const result = channelForward(state.inputs, state.filters, state.mixing);
-  const gradient = channelGradient(state.inputs, state.filters, state.mixing, target, rate);
-  const edit = (field, channel, index, value) => setState(previous => ({ ...previous, [field]: previous[field].map((row, c) => c === channel ? editIndex(row, index, value) : row) }));
-  return <NeuralLab id="depthwise-channels" title="Spatial work stays in its lane; pointwise mixing joins the lanes">
-    <p>Constructed two-channel signal, valid cross-correlation. Select an output to highlight the two input values each spatial filter reads. Every value below is editable.</p>
-    <NeuralSelect label="Trace output position" value={position} onChange={value => setPosition(Number(value))} options={[[0, 'Output 0'], [1, 'Output 1']]} />
-    <div className="depthwise-lanes">{['A', 'B'].map((name, channel) => <div className="depthwise-lane" key={name}><h4>Channel {name}</h4><Values title={`Input ${name}`} values={state.inputs[channel]} min={-4} max={8} active={[position, position + 1]} onChange={(index, value) => edit('inputs', channel, index, value)} /><span className="depthwise-connector">↓ spatial filter</span><Values title={`Filter ${name}`} values={state.filters[channel]} onChange={(index, value) => edit('filters', channel, index, value)} /><p>{state.filters[channel].map((weight, tap) => `${f(state.inputs[channel][position + tap])} × (${f(weight)})`).join(' + ')} = <strong>{f(result.filtered[channel][position])}</strong></p><p>Filtered strip {vector(result.filtered[channel])}</p><NeuralNumber label={`Mixing weight ${name}`} value={state.mixing[channel]} min={-3} max={3} step={.1} onChange={value => setState(previous => ({ ...previous, mixing: editIndex(previous.mixing, channel, value) }))} /><p className="depthwise-result">Contribution to output {position}: <strong>{f(result.contributions[channel][position])}</strong></p></div>)}</div>
-    <p className="depthwise-result">Add the channel contributions → output strip <strong>{vector(result.output)}</strong>. Original strip: [−3, −3]. Change from original: {vector(result.output.map(value => value + 3))}.</p>
-    <div className="neural-buttons"><button onClick={() => edit('inputs', 1, 0, 4)}>Set B[0] to 4</button><button onClick={() => setState(previous => ({ ...previous, mixing: [0, 0] }))}>Zero mixing</button><button onClick={() => { setState(copy(channelFixture)); setPosition(0); setTarget(1); setRate(.01); }}>Reset channels</button></div>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Follow one simultaneous gradient step</h4><p>The loss concerns output 0 only. These proposed weights always use the same current gradients, not gradients recomputed between parameters.</p><div className="neural-controls"><NeuralNumber label="Output 0 target" value={target} min={-3} max={3} step={.1} onChange={setTarget} /><NeuralNumber label="Gradient step size" value={rate} min={0} max={.1} step={.001} onChange={setRate} /></div><NeuralTable caption="Current derivatives and proposed step" headers={['Parameter', 'Gradient', 'After the step']} rows={[[ 'Mixing', vector(gradient.mixingGradient), vector(gradient.nextMixing)], ...gradient.filterGradient.map((row, index) => [`Filter ${index === 0 ? 'A' : 'B'}`, vector(row), vector(gradient.nextFilters[index])])]} /><p className="depthwise-result">Output {f(gradient.before)} → {f(gradient.after)}; half squared loss {f(gradient.loss)} → <strong>{f(gradient.nextLoss)}</strong>. {rate === 0 ? 'Zero rate leaves everything unchanged.' : gradient.nextLoss > gradient.loss ? 'This step overshoots; reduce its size.' : 'Compare both the derivatives and the changed loss.'}</p></section>
-  </NeuralLab>;
+  const [firstB, setFirstB] = useState(2);
+  const [mixingB, setMixingB] = useState(-1);
+  const inputs = [channelFixture.inputs[0], [firstB, 0, 1]];
+  const mixing = [2, mixingB];
+  const result = channelForward(inputs, channelFixture.filters, mixing);
+  return <FlowLab id="depthwise-channels" label="Depthwise lanes followed by pointwise mixing">
+    <div className="flow-columns-2">{['A', 'B'].map((name, channel) => <div key={name}>
+      <p className="dw-input">Input channel {name}: white outlines mark position 0's patch</p>
+      <ValueStrip values={inputs[channel]} selected={[0, 1]} indices />
+      <FlowArrow>read only this channel</FlowArrow>
+      <div className="dw-operation">Multiply each patch by <span className="dw-parameter">D_{name} = {vector(channelFixture.filters[channel])}</span>, then sum</div>
+      <p className="dw-computed">Filtered {name}: {vector(result.filtered[channel])}</p>
+      <p>{f(inputs[channel][0])} × {sg(channelFixture.filters[channel][0])} + {f(inputs[channel][1])} × {sg(channelFixture.filters[channel][1])} = {f(result.filtered[channel][0])}</p>
+      <FlowArrow>pointwise weight P_{name} = {f(mixing[channel])}</FlowArrow>
+      <p className="dw-computed">Position 0 contribution: {f(result.contributions[channel][0])}</p>
+    </div>)}</div>
+    <div className="dw-operation">Add contributions at the same position</div>
+    <p className="dw-computed">One output channel, positions 0 and 1: {vector(result.output)}</p>
+    <FlowControls><FlowSlider name="First value of channel B" value={firstB} onChange={setFirstB} min={-4} max={8} />
+      <FlowSlider name="Pointwise weight for B" value={mixingB} onChange={setMixingB} min={-3} max={3} /></FlowControls>
+    <FlowReadout>Position 0 is <strong>{f(result.output[0])}</strong>, from {f(result.contributions[0][0])} + {f(result.contributions[1][0])}; position 1 is {f(result.output[1])}. B's first value is outside position 1's patch.</FlowReadout>
+  </FlowLab>;
+}
+
+export function DepthwiseGradientLab() {
+  const [target, setTarget] = useState(1);
+  const [rate, setRate] = useState(.01);
+  const result = channelGradient(channelFixture.inputs, channelFixture.filters, channelFixture.mixing, target, rate);
+  return <FlowLab id="depthwise-gradient" label="One simultaneous gradient update">
+    <div className="flow-columns-2"><div><p className="dw-parameter">Pointwise weights [2, −1]</p>
+      <p className="dw-gradient">Derivative {vector(result.mixingGradient)}</p>
+      <p className="dw-parameter">After step: {vector(result.nextMixing)}</p></div>
+      <div>{result.filterGradient.map((values, index) => <div key={index}><p className="dw-parameter">Spatial filter {index ? 'B' : 'A'}</p>
+        <p className="dw-gradient">Derivative {vector(values)}</p><p className="dw-parameter">After step: {vector(result.nextFilters[index])}</p></div>)}</div></div>
+    <FlowControls><FlowSlider name="Desired output (target)" value={target} onChange={setTarget} min={-3} max={3} />
+      <FlowSlider name="Simultaneous step size" value={rate} onChange={setRate} min={0} max={.1} step={.001} /></FlowControls>
+    <FlowReadout>Output −3 becomes <strong>{f(result.after)}</strong>; half squared loss {f(result.loss)} becomes <strong>{f(result.nextLoss)}</strong>. {rate === 0 ? 'A zero step changes no weights.' : result.nextLoss > result.loss ? 'The step overshoots: reduce its size.' : 'All new weights use derivatives from the same starting state.'}</FlowReadout>
+  </FlowLab>;
 }
 
 export function DepthwiseRankLab() {
-  const [filters, setFilters] = useState([[1, 0]]), [mixing, setMixing] = useState([[1], [0]]), [dependent, setDependent] = useState(false);
-  const result = rankProbe(filters, mixing, dependent);
-  const reset = () => { setFilters([[1, 0]]); setMixing([[1], [0]]); setDependent(false); };
-  return <NeuralLab id="depthwise-rank" title="Can one spatial pattern recover two independent coordinates?">
-    <p>The target is the identity operation: output each patch unchanged. Change the actual factor coefficients and inspect both probes at once. A second filter adds an independent spatial pattern.</p>
-    <div className="neural-two"><div>{filters.map((row, component) => <Values key={component} title={`Spatial pattern ${component + 1}`} values={row} onChange={(tap, value) => setFilters(previous => previous.map((items, index) => index === component ? editIndex(items, tap, value) : items))} />)}</div><div>{mixing.map((row, output) => <Values key={output} title={`Output ${output + 1} mixing`} values={row} onChange={(component, value) => setMixing(previous => previous.map((items, index) => index === output ? editIndex(items, component, value) : items))} />)}</div></div>
-    <NeuralTable caption="Effective spatial kernel: mixing × patterns" headers={['Output', 'First input coefficient', 'Second input coefficient']} rows={result.kernel.map((row, index) => [index + 1, ...row.map(value => f(value))])} />
-    <NeuralTable caption="Every probe stays visible" headers={['Patch = target', 'Actual output', 'Output − target']} rows={result.probes.map((probe, index) => [vector(probe), vector(result.outputs[index]), vector(result.residuals[index])])} />
-    <p className="depthwise-result">Maximum absolute residual: <strong>{f(result.error)}</strong>. {dependent ? 'These repeated probes only test one direction. Matching them does not establish identity.' : filters.length === 1 ? 'One shared pattern has rank at most one; the two independent identity probes cannot both match.' : result.error <= 1e-9 ? 'Both independent probes match. Your two-pattern factorization implements identity.' : 'Two patterns have enough capacity; their current coefficients still need adjustment.'}</p>
-    <div className="neural-buttons"><button disabled={filters.length === 2} onClick={() => { setFilters(previous => [...previous, [0, 0]]); setMixing(previous => previous.map(row => [...row, 0])); }}>Add a second spatial filter</button><button onClick={() => setDependent(value => !value)}>{dependent ? 'Restore independent probes' : 'Repeat the first probe'}</button><button onClick={reset}>Reset rank experiment</button></div>
-  </NeuralLab>;
+  const [secondTap, setSecondTap] = useState(0);
+  const [secondRoute, setSecondRoute] = useState(0);
+  const result = rankProbe([[1, secondTap], [0, 1]], [[1, 0], [0, secondRoute]]);
+  return <FlowLab id="depthwise-rank" label="Independent spatial patterns and rank">
+    <div className="flow-columns-2"><div><p className="dw-parameter">First pattern D₁ = [1, {f(secondTap)}]</p><p className="dw-parameter">Second pattern D₂ = [0, 1]</p></div>
+      <div><p className="dw-parameter">Output 1 mixing = [1, 0]</p><p className="dw-parameter">Output 2 mixing = [0, {f(secondRoute)}]</p></div></div>
+    <FlowArrow>each output's effective filter is a sum of shared patterns</FlowArrow>
+    <p className="dw-parameter">Effective kernel: [[1, {f(secondTap)}], [0, {f(secondRoute)}]]</p>
+    <div className="flow-columns-2">{result.probes.map((probe, index) => <div key={index}>
+      <p className="dw-input">Independent probe {index + 1}: {vector(probe)}</p>
+      <div className="dw-operation">Apply effective kernel</div><p className="dw-computed">Output {vector(result.outputs[index])}</p>
+      <p>Required unchanged patch: {vector(probe)}</p>
+    </div>)}</div>
+    <FlowControls><FlowSlider name="First pattern's second tap" value={secondTap} onChange={setSecondTap} min={-2} max={2} />
+      <FlowSlider name="Second pattern's output weight" value={secondRoute} onChange={setSecondRoute} min={-2} max={2} /></FlowControls>
+    <FlowReadout>The current kernel has rank <strong>{secondRoute === 0 ? 1 : 2}</strong>, with maximum probe error <strong>{f(result.error)}</strong>. Two filters are always allocated (multiplier 2); a zero second-route weight reduces the current rank, but does not reclaim that allocation.</FlowReadout>
+  </FlowLab>;
 }
 
 export function DepthwiseStencilLab() {
-  const [signal, setSignal] = useState([...initialSignal]), [weights, setWeights] = useState([1, 1, 1]), [center, setCenter] = useState(4), [dilation, setDilation] = useState(2);
-  const current = sampleStencil(signal, center, dilation, weights);
-  return <NeuralLab id="depthwise-stencil" title="Move the taps, then change what they read">
-    <p>Three weighted taps read a nine-cell signal. Cell labels are zero-based indices; padded cells contribute zero. Outlined cells are sampled, even if their weight is zero.</p>
-    <div className="neural-controls"><NeuralNumber label="Stencil center index" value={center} min={0} max={8} step={1} integer onChange={setCenter} /><NeuralNumber label="Stencil dilation" value={dilation} min={1} max={8} step={1} integer onChange={setDilation} /></div>
-    <Values title="Signal" values={signal} min={-5} max={20} active={current.terms.map(term => term.index)} onChange={(index, value) => setSignal(previous => editIndex(previous, index, value))} />
-    <Values title="Tap weight" values={weights} min={-2} max={2} onChange={(index, value) => setWeights(previous => editIndex(previous, index, value))} />
-    <div className="depthwise-taps">{current.terms.map(term => <div key={term.index} className={term.padded ? 'is-padding' : ''}><small>{term.padded ? 'Padding at' : 'Signal index'} {term.index}</small><strong>{f(term.value)} × {f(term.weight)}</strong><span>contribution {f(term.product)}</span></div>)}</div>
-    <p className="depthwise-result">Sum <strong>{f(current.sum)}</strong>; change from original center 4, dilation 2, unit weights: {f(current.sum - 15)}. Tap span {2 * dilation + 1}, learned taps 3.</p>
-    <div className="neural-buttons"><button onClick={() => setSignal(previous => editIndex(previous, 6, 20))}>Set signal[6] to 20</button><button onClick={() => setSignal(previous => editIndex(previous, 5, 20))}>Set signal[5] to 20</button><button onClick={() => setWeights([0, 0, 0])}>Zero tap weights</button><button onClick={() => { setSignal([...initialSignal]); setWeights([1, 1, 1]); setCenter(4); setDilation(2); }}>Reset stencil</button></div>
-    <p>For the untouched ramp, dilations 1 and 2 give the same sum with different read addresses. An unvisited cell cannot change this output; a visited cell with zero weight also contributes nothing, for a different reason.</p>
-  </NeuralLab>;
+  const [dilation, setDilation] = useState(2);
+  const [center, setCenter] = useState(4);
+  const [sixthValue, setSixthValue] = useState(7);
+  const signal = replace(initialSignal, 6, sixthValue);
+  const result = sampleStencil(signal, center, dilation);
+  return <FlowLab id="depthwise-stencil" label="Dilated filter addresses and contributions">
+    <ValueStrip values={signal.map(value => f(value))} selected={result.terms.map(term => term.index)} indices />
+    <FlowArrow>three taps read center − dilation, center, center + dilation</FlowArrow>
+    <div className="flow-columns-3">{result.terms.map((term, index) => <div key={index}>
+      <p>{term.padded ? 'Zero padding' : 'Input'} at index {term.index}</p><div className="dw-operation">{f(term.value)} × <span className="dw-parameter">weight 1</span></div>
+      <p className="dw-computed">Contribution {f(term.product)}</p>
+    </div>)}</div>
+    <FlowControls><FlowSlider name="Dilation (tap spacing)" value={dilation} onChange={setDilation} min={1} max={8} step={1} />
+      <FlowSlider name="Output center index" value={center} onChange={setCenter} min={0} max={8} step={1} />
+      <FlowSlider name="Signal value at index 6" value={sixthValue} onChange={setSixthValue} min={-5} max={20} /></FlowControls>
+    <FlowReadout>Indices {result.terms.map(term => term.index).join(', ')} give sum <strong>{f(result.sum)}</strong>; three learned taps span <strong>{2 * dilation + 1}</strong> positions. {result.terms.some(term => term.index === 6) ? 'Index 6 is read, so its edit changes this sum.' : 'Index 6 is not read, so its edit leaves this sum unchanged.'}</FlowReadout>
+  </FlowLab>;
 }
 
 export function DepthwiseCoverageLab() {
-  const [rates, setRates] = useState([1, 4]), [mapRate, setMapRate] = useState(2), [position, setPosition] = useState([4, 4]);
-  const support = samplingSupport(rates), offsets = Array.from({ length: support.width }, (_, i) => i - support.bound);
-  const reachable = new Set(support.sites), taps = finiteTaps(...position, mapRate);
-  // One path rather than thousands of interactive cells for the bounded 2D lattice.
-  const latticePath = support.sites.flatMap(row => support.sites.map(column => `M${column + support.bound},${row + support.bound}h.84v.84h-.84z`)).join('');
-  return <NeuralLab id="depthwise-coverage" title="An outline can contain holes">
-    <p>Unbounded structural model: serial three-tap layers, stride one. Edit the rates to change which input offsets have a path. Reachability is separate from learned weights and active gradients.</p>
-    <div className="neural-controls">{rates.map((rate, index) => <NeuralNumber key={index} label={`Layer ${index + 1} dilation`} value={rate} min={1} max={9} step={1} integer onChange={value => setRates(previous => editIndex(previous, index, value))} />)}</div>
-    <div className="neural-buttons"><button disabled={rates.length === 4} onClick={() => setRates(previous => [...previous, 1])}>Add layer</button><button disabled={rates.length === 1} onClick={() => setRates(previous => previous.slice(0, -1))}>Remove last layer</button><button onClick={() => setRates(previous => [...previous].reverse())}>Reverse rate order</button><button onClick={() => setRates([2, 2, 2])}>Repeated even rates</button><button onClick={() => setRates([1, 2, 4])}>Gap-free schedule</button><button onClick={() => { setRates([1, 4]); setMapRate(2); setPosition([4, 4]); }}>Reset coverage</button></div>
-    <div className="depthwise-offset-scroll" tabIndex={0} role="region" aria-label="Reachable offsets at every layer; scroll horizontally"><div style={{ minWidth: Math.max(300, support.width * 24) }}>{support.layers.map((layer, index) => <div className="depthwise-offset-layer" key={index}><span>{index === 0 ? 'Output' : `After ${index} layer(s)`}</span><div style={{ gridTemplateColumns: `repeat(${support.width}, 1fr)` }}>{offsets.map(offset => <span key={offset} className={layer.includes(offset) ? 'is-reachable' : ''} title={`Offset ${offset}: ${layer.includes(offset) ? 'reachable' : 'unreachable'}`}>{index === support.layers.length - 1 ? offset : layer.includes(offset) ? '●' : '·'}</span>)}</div></div>)}</div></div>
-    <div className="neural-two"><figure className="depthwise-lattice"><figcaption>2D Cartesian coverage inside the full bounding square</figcaption><svg className="depthwise-chart" viewBox={`-.1 -.1 ${support.width + .2} ${support.width + .2}`} role="img" aria-label={`${support.sites.length ** 2} reachable sites in ${support.width ** 2} bounding sites`}><rect x="0" y="0" width={support.width} height={support.width} fill="#292929" /><path d={latticePath} fill="#e4b752" /></svg></figure><div><p className="depthwise-result">Width <strong>{support.width}</strong>; 1D sites {support.sites.length}; 2D sites <strong>{support.sites.length ** 2} / {support.width ** 2}</strong>.</p><p>Interior holes: {support.holes.length ? support.holes.join(', ') : 'none'}.</p><p>{support.holes.length ? 'Try a schedule whose shifted intervals meet. A gcd of one is not sufficient.' : 'Every offset is reachable in this geometric model.'} Reversing rates preserves this set, but need not preserve a finite nonlinear network.</p><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">All reachable offsets</h4><p>{support.sites.join(', ')}</p></section></div></div>
-    <h4>Finite-map view: how many taps actually reach data?</h4><p>Now inspect one 3×3 layer on an 8×8 map. Select a cell to move the output; outlined cells are the in-bounds tap addresses. Dilation 8 leaves only the center.</p><NeuralNumber label="Finite-map dilation" value={mapRate} min={1} max={8} step={1} integer onChange={setMapRate} />
-    <div className="neural-controls"><NeuralSelect label="Output row" value={position[0]} onChange={value => setPosition(previous => [Number(value), previous[1]])} options={Array.from({ length: 8 }, (_, index) => [index, `Row ${index}`])} /><NeuralSelect label="Output column" value={position[1]} onChange={value => setPosition(previous => [previous[0], Number(value)])} options={Array.from({ length: 8 }, (_, index) => [index, `Column ${index}`])} /></div>
-    <div className="depthwise-finite-grid">{Array.from({ length: 64 }, (_, index) => { const r = Math.floor(index / 8), c = index % 8; return <button key={index} className={taps.some(([a, b]) => a === r && b === c) ? 'depthwise-selected' : ''} aria-pressed={position[0] === r && position[1] === c} aria-label={`Output row ${r}, column ${c}; ${finiteTaps(r, c,mapRate).length} valid taps`} onClick={() => setPosition([r, c])}>{finiteTaps(r, c, mapRate).length}</button>; })}</div><p>At output ({position.join(', ')}): <strong>{taps.length} data taps</strong> and {9 - taps.length} padding taps. A wider nominal field cannot manufacture missing image data.</p>
-  </NeuralLab>;
+  const [rates, setRates] = useState([1, 2, 4]);
+  const result = samplingSupport(rates);
+  return <FlowLab id="depthwise-coverage" label="Serial dilation reachability">
+    {result.layers.map((sites, index) => <div key={index}><p>{index === 0 ? 'Start at output offset 0' : `After adding layer ${index}'s offsets −${rates[index - 1]}, 0, ${rates[index - 1]}`}</p>
+      <div className="dw-offsets">{sites.map(site => <span className="dw-reachable" key={site}>{site}</span>)}</div></div>)}
+    <p>Violet underlines mark reached offsets; crossed numbers below are holes inside the bound.</p>
+    <div className="dw-offsets">{result.holes.map(hole => <span className="dw-hole" key={hole}>{hole}</span>)}</div>
+    <FlowControls>{rates.map((rate, index) => <FlowSlider key={index} name={`Layer ${index + 1} dilation`} value={rate} onChange={value => setRates(previous => replace(previous, index, value))} min={1} max={9} step={1} />)}</FlowControls>
+    <FlowReadout>The bound has width <strong>{result.width}</strong>, but only <strong>{result.sites.length}</strong> 1D sites are reachable: {result.holes.length ? `${result.holes.length} holes remain` : 'no holes remain'}. Full 3×3 stencils in 2D reach {result.sites.length ** 2} of {result.width ** 2} bounding sites.</FlowReadout>
+  </FlowLab>;
+}
+
+export function DepthwiseBoundaryLab() {
+  const [dilation, setDilation] = useState(2);
+  const [row, setRow] = useState(4);
+  const [column, setColumn] = useState(4);
+  const taps = finiteTaps(row, column, dilation);
+  return <FlowLab id="depthwise-boundary" label="Finite map and zero-padding taps">
+    <p>8×8 input map; white outlines = read data sites, filled cell = selected output center.</p>
+    <div className="dw-lattice">{Array.from({ length: 64 }, (_, index) => {
+      const r = Math.floor(index / 8), c = index % 8;
+      return <span key={index} className={`${taps.some(([tr, tc]) => tr === r && tc === c) ? 'dw-read' : ''} ${row === r && column === c ? 'dw-center' : ''}`} aria-label={`Row ${r}, column ${c}`}>{r},{c}</span>;
+    })}</div>
+    <FlowControls><FlowSlider name="Finite-map dilation" value={dilation} onChange={setDilation} min={1} max={8} step={1} />
+      <FlowSlider name="Output row" value={row} onChange={setRow} min={0} max={7} step={1} />
+      <FlowSlider name="Output column" value={column} onChange={setColumn} min={0} max={7} step={1} /></FlowControls>
+    <FlowReadout>At ({row}, {column}), <strong>{taps.length}</strong> of nine taps read data; <strong>{9 - taps.length}</strong> multiply zero padding. Dilation 8 leaves only the center at every position.</FlowReadout>
+  </FlowLab>;
 }
 
 export function DepthwiseContextLab() {
-  const [signal, setSignal] = useState([...initialSignal]), [mixing, setMixing] = useState([0, .1, .2, .3, 1]), [rates, setRates] = useState([1, 2, 4]);
-  const result = parallelContext(signal, mixing, rates);
-  const names = ['Center only', ...rates.map(rate => `Dilation ${rate}`), 'Whole-strip mean'];
-  return <NeuralLab id="depthwise-context" title="Parallel branches keep different kinds of context">
-    <p>Constructed ASPP-style calculation. Every branch reads the same signal at center 4. Their five outputs become five channels, then projection combines them. No fitted segmentation model is implied.</p>
-    <Values title="Shared context signal" values={signal} min={-5} max={20} onChange={(index, value) => setSignal(previous => editIndex(previous, index, value))} />
-    <div className="neural-controls">{rates.map((value, index) => <NeuralNumber key={index} label={`Parallel branch ${index + 1} dilation`} value={value} min={1} max={8} step={1} integer onChange={next => setRates(previous => editIndex(previous, index, next))} />)}</div>
-    <div className="depthwise-branches">{names.map((name, index) => { const indices = index === 0 ? [4] : index === 4 ? initialSignal.map((_, i) => i) : sampleStencil(signal, 4, rates[index - 1]).terms.map(term => term.index); return <div key={index}><h4>{name}</h4><div className="depthwise-branch-reads">{signal.map((_, cell) => <span key={cell} className={indices.includes(cell) ? 'is-reachable' : ''}>{cell}</span>)}</div><p>Reads {indices.join(', ')}{indices.some(cell => cell < 0 || cell > 8) ? '; outside addresses are zero' : ''}.</p><p>Branch value <strong>{f(result.branches[index])}</strong></p><NeuralNumber label={`Projection weight ${index + 1}`} value={mixing[index]} min={-2} max={2} step={.1} onChange={value => setMixing(previous => editIndex(previous, index, value))} /><p>Contribution {f(result.contributions[index])}</p></div>; })}</div>
-    <p className="depthwise-result">Concatenated vector {vector(result.branches)} → projected output <strong>{f(result.output)}</strong>. Original output 14; change {f(result.output - 14)}.</p>
-    <div className="neural-buttons"><button onClick={() => setSignal(previous => editIndex(previous, 8, 20))}>Set far cell 8 to 20</button><button onClick={() => setSignal(previous => [previous[1], previous[0], ...previous.slice(2)])}>Swap cells 0 and 1</button><button onClick={() => setMixing([0, 0, 0, 0, 0])}>Zero projection</button><button onClick={() => { setSignal([...initialSignal]); setMixing([0, .1, .2, .3, 1]); setRates([1, 2, 4]); }}>Reset context</button></div>
-    <figure className="depthwise-architecture"><figcaption>Full-map ASPP: each arrow preserves the spatial grid</figcaption><p>One H×W×C feature map</p><div><span>1×1 → H×W×B</span><span>3×3, d6 → H×W×B</span><span>3×3, d12 → H×W×B</span><span>3×3, d18 → H×W×B</span><span>Mean → 1×1×B → broadcast H×W×B</span></div><p>Concatenate channels → H×W×5B → pointwise projection</p><small>DeepLab V3's stated rate setting at output stride 16; branches are parallel, not serial.</small></figure>
-  </NeuralLab>;
+  const [farValue, setFarValue] = useState(9);
+  const [farWeight, setFarWeight] = useState(.3);
+  const signal = replace(initialSignal, 8, farValue);
+  const mixing = [0, .1, .2, farWeight, 1];
+  const result = parallelContext(signal, mixing);
+  const names = ['Center only', 'Dilation 1', 'Dilation 2', 'Dilation 4', 'Whole-strip mean'];
+  return <FlowLab id="depthwise-context" label="Same-input parallel context and projection">
+    <ValueStrip values={signal.map(value => f(value))} indices />
+    <FlowArrow>the same strip feeds all five routes, at center 4</FlowArrow>
+    <div className="dw-context-routes">{names.map((name, index) => <div key={name}>
+      <div className="dw-operation">{name}<br />{index === 0 ? 'read 4' : index === 4 ? 'read all 9 sites' : `read ${sampleStencil(signal, 4, [1, 2, 4][index - 1]).terms.map(term => term.index).join(', ')}`}</div>
+      <p className="dw-computed">Branch value {f(result.branches[index])}</p><p className="dw-parameter">Projection weight {f(mixing[index])}</p>
+      <p className="dw-computed">Contribution {f(result.contributions[index])}</p>
+    </div>)}</div>
+    <FlowArrow>concatenate branch values, then multiply and add</FlowArrow>
+    <FlowControls><FlowSlider name="Far signal value at index 8" value={farValue} onChange={setFarValue} min={-5} max={20} />
+      <FlowSlider name="Dilation-4 projection weight" value={farWeight} onChange={setFarWeight} min={-2} max={2} step={.1} /></FlowControls>
+    <FlowReadout>Projection gives <strong>{f(result.output)}</strong> from {vector(result.branches)}. Index 8 changes only the dilation-4 and mean routes; its total influence is {f(farWeight + 1 / 9)} per unit change.</FlowReadout>
+  </FlowLab>;
 }
 
 export function DepthwiseSupportingFigure({ kind }) {
-  if (kind === 'cost') return <figure className="depthwise-architecture"><figcaption>Weights on one common scale; zero begins each bar</figcaption><p>Standard: 73,728 weights</p><div className="depthwise-budget"><span style={{ width: '100%' }} /></div><p>Separable: 576 spatial + 8,192 mixing = 8,768 weights</p><div className="depthwise-budget"><span style={{ width: `${576 / 73728 * 100}%` }} /><span className="is-mixing" style={{ width: `${8192 / 73728 * 100}%` }} /></div><p>Solid amber = spatial; outlined = pointwise mixing. Multiply weights by 196 output locations for MACs/image. The pointwise stage dominates the reduced arithmetic.</p></figure>;
-  if (kind === 'field') return <figure className="depthwise-architecture"><figcaption>Carry both the incoming span and the center spacing</figcaption><div><span>Incoming: field r = 7<br />center jump j = 2</span><span>New three-tap layer<br />dilation d = 3, stride s = 2</span><span>Outer centers: −6, 0, +6<br />each reads a seven-wide incoming field</span></div><p>Union bounds: −9 through +9 → width 19. Output centers now advance by 2×2 = 4 input positions.</p><p>The full width is 7 + 2×3×2 = 19; center spacing and field width describe different objects.</p></figure>;
-  const swish = x => x * Math.min(6, Math.max(0, x + 3)) / 6;
-  const line = Array.from({ length: 81 }, (_, i) => { const x = -4 + i / 10; return `${30 + (x + 4) * 32},${145 - swish(x) * 25}`; }).join(' ');
-  return <figure className="depthwise-architecture"><figcaption>MobileNet V2 branch: expand before downsampling, project linearly</figcaption><div><span>14×14×32<br />1×1 expansion → 14×14×192</span><span>3×3 depthwise, stride 2<br />→ 7×7×192</span><span>1×1 linear projection<br />→ 7×7×32</span></div><p>No identity addition here: the spatial shapes differ. At stride one, equal-width endpoints can connect through a skip.</p><h4>MobileNet V3 hard-swish: preserve part of the negative region</h4><svg className="depthwise-chart depthwise-swish" viewBox="0 0 320 185" role="img" aria-label="Formula-derived hard-swish curve, x from minus 4 to 4; joins at minus 3 and 3; a negative lobe lies between minus 3 and zero."><line x1="30" x2="286" y1="145" y2="145" stroke="#aaa" /><line x1="158" x2="158" y1="25" y2="165" stroke="#aaa" /><polyline fill="none" stroke="#e4b752" strokeWidth="2" points={line} />{[-3, 0, 3].map(x => <g key={x}><circle cx={30 + (x + 4) * 32} cy={145 - swish(x) * 25} r="3" fill="#e4b752" /><text x={30 + (x + 4) * 32} y="178" textAnchor="middle" fill="#ddd" fontSize="12">{x}</text></g>)}<text x="291" y="148" fill="#ddd" fontSize="12">x</text><text x="166" y="28" fill="#ddd" fontSize="12">h(x)</text></svg><p>Exact points: h(−3) = 0, h(−2) = −2/3, h(0) = 0, h(3) = 3. The middle part is quadratic; the gate alone is piecewise linear.</p></figure>;
-}
-
-function useDeferredText(file, enabled, asJson = false) {
-  const [attempt, setAttempt] = useState(0), [state, setState] = useState({ data: null, error: null });
-  useEffect(() => {
-    if (!enabled) return;
-    const controller = new AbortController();
-    setState({ data: null, error: null });
-    fetch(depthwiseAsset + file, { signal: controller.signal }).then(response => { if (!response.ok) throw new Error('The saved file could not be loaded.'); return asJson ? response.json() : response.text(); }).then(data => { if (!controller.signal.aborted) setState({ data, error: null }); }).catch(error => { if (!controller.signal.aborted) setState({ data: null, error: error.message }); });
-    return () => controller.abort();
-  }, [file, enabled, attempt, asJson]);
-  return { ...state, retry: () => setAttempt(value => value + 1) };
+  if (kind === 'field') return <ReceptiveJumpFigure />;
+  return <figure data-figure="separable-weight-budget">
+    <p className="dw-parameter">Dense: 73,728 learned weights</p><div className="dw-budget"><span style={{ width: '100%' }} /></div>
+    <p className="dw-parameter">Separable: 576 spatial + 8,192 pointwise = 8,768 learned weights</p>
+    <div className="dw-budget"><span style={{ width: `${576 / 73728 * 100}%` }} /><span className="dw-mixing" style={{ width: `${8192 / 73728 * 100}%` }} /></div>
+    <p>Both bars start at zero and use the same scale. Amber fill marks spatial weights; amber outline marks pointwise weights.</p>
+  </figure>;
 }
 
 export function DepthwiseProgram({ file, title }) {
-  return <>
-    <RemoteCodeBlock source={depthwiseAsset + file} language="python" filename={file} title={(title)} />
-    <p><a href={depthwiseAsset + file} download>Download {file}</a></p>
-  </>;
+  return <RemoteCodeBlock source={depthwiseAsset + file} language="python" filename={file} title={title} />;
 }
 
-function DigitExperiment({ runs }) {
-  const [runIndex, setRunIndex] = useState(0), [exampleIndex, setExampleIndex] = useState(0), [multiplier, setMultiplier] = useState(1), [edits, setEdits] = useState(null), [pixel, setPixel] = useState(0), [inputChannel, setInputChannel] = useState(0), [outputChannel, setOutputChannel] = useState(0), [scoreClass, setScoreClass] = useState(4);
-  const run = runs[runIndex], example = run.examples[exampleIndex], image = edits || example.input;
-  const original = useMemo(() => savedDigitLogits(run, example.input), [run, example]);
+function useDigitResource(enabled) {
+  const [attempt, setAttempt] = useState(0);
+  const [state, setState] = useState({ data: null, error: null });
+  useEffect(() => {
+    if (!enabled) return;
+    const controller = new AbortController();
+    fetch(depthwiseAsset + 'digit-inference.json', { signal: controller.signal })
+      .then(response => { if (!response.ok) throw new Error('Saved weights could not be loaded.'); return response.json(); })
+      .then(data => { if (!controller.signal.aborted) setState({ data, error: null }); })
+      .catch(error => { if (!controller.signal.aborted) setState({ data: null, error: error.message }); });
+    return () => controller.abort();
+  }, [enabled, attempt]);
+  return { ...state, retry: () => setAttempt(value => value + 1) };
+}
+
+const multiplierOptions = [1, 2, 4, 9].map(value => [value, String(value)]);
+
+function DigitExperiment({ run }) {
+  const example = run.examples.find(item => item.source_id === 299) || run.examples[0];
+  const [multiplier, setMultiplier] = useState(1);
+  const [pixel, setPixel] = useState(0);
+  const [image, setImage] = useState(example.input);
   const dense = useMemo(() => savedDigitLogits(run, image), [run, image]);
   const compressed = useMemo(() => savedDigitLogits(run, image, multiplier), [run, image, multiplier]);
-  const kernel = reconstructedKernel(run, multiplier, inputChannel, outputChannel), denseKernel = run.dense_state['spatial.weight'][outputChannel][inputChannel];
   const largest = Math.max(...dense.map(Math.abs), ...compressed.map(Math.abs), 1);
   const argmax = values => values.indexOf(Math.max(...values));
   const row = Math.floor(pixel / 8), column = pixel % 8;
-  const chooseModel = index => { setRunIndex(index); setExampleIndex(0); setEdits(null); };
-  return <><div className="neural-controls"><NeuralSelect label="Saved seed-one model" value={runIndex} onChange={value => chooseModel(Number(value))} options={runs.map((item, index) => [index, `Dilation ${item.dilation}`])} /><NeuralSelect label="Real digit specimen" value={exampleIndex} onChange={value => { setExampleIndex(Number(value)); setEdits(null); }} options={run.examples.map((item, index) => [index, `Source ${item.source_id}; original label ${item.actual}`])} /><NeuralSelect label="Retained patterns per input" value={multiplier} onChange={value => setMultiplier(Number(value))} options={[1, 2, 4, 9].map(rank => [rank, `Multiplier ${rank}`])} /></div>
-    <p>Seed 1, dilation {run.dilation}, source {example.source_id}. Original label {example.actual}; arbitrary edits may no longer depict that label. Fixed weights, live inference, no browser training.</p>
-    <div className="neural-controls"><NeuralSelect label="Image pixel row" value={row} onChange={value => setPixel(Number(value) * 8 + column)} options={Array.from({ length: 8 }, (_, index) => [index, `Row ${index}`])} /><NeuralSelect label="Image pixel column" value={column} onChange={value => setPixel(row * 8 + Number(value))} options={Array.from({ length: 8 }, (_, index) => [index, `Column ${index}`])} /></div>
-    <div className="neural-two"><figure><figcaption>Edit the normalized image; select a pixel, then move its intensity</figcaption><div className="depthwise-digit-grid">{image.flatMap((values, r) => values.map((value, c) => <button key={`${r}-${c}`} style={{ backgroundColor: `rgb(${Math.round(value * 255)},${Math.round(value * 255)},${Math.round(value * 255)})` }} aria-pressed={pixel === r * 8 + c} aria-label={`Pixel row ${r}, column ${c}, intensity ${f(value)}`} onClick={() => setPixel(r * 8 + c)} />))}</div><NeuralNumber label={`Pixel (${row}, ${column}) intensity`} value={image[row][column]} min={0} max={1} step={.0625} onChange={value => setEdits(previous => (previous || example.input).map((values, r) => r === row ? editIndex(values, column, value) : [...values]))} /><div className="neural-buttons"><button onClick={() => { setPixel(0); setEdits(image.map((values, r) => r === 0 ? editIndex(values, 0, 1) : [...values])); }}>White corner intervention</button><button onClick={() => setEdits(null)}>Restore original image</button></div></figure>
-    <div><h4>Signed class scores</h4><p>Amber solid: dense. Neutral outline: compressed. The center line is zero; negative logits extend left. Shared scale ±{f(largest, 2)}.</p><div className="depthwise-logits">{dense.map((value, index) => <div key={index}><span>{index}</span><div className="depthwise-logit-track">{[value, compressed[index]].map((score, kind) => <span key={kind} className={kind ? 'is-compressed' : 'is-dense'} style={{ left: `${50 + Math.min(0, score) / largest * 50}%`, width: `${Math.abs(score) / largest * 50}%`, top: kind ? '55%' : '8%' }} />)}</div></div>)}</div></div></div>
-    <p className="depthwise-result">Current dense class <strong>{argmax(dense)}</strong>; compressed class <strong>{argmax(compressed)}</strong>. Original-label dense logit: {f(dense[example.actual])}; change from original image {f(dense[example.actual] - original[example.actual])}.</p>
-    <NeuralSelect label="Inspect class score" value={scoreClass} onChange={value => setScoreClass(Number(value))} options={Array.from({ length: 10 }, (_, index) => [index, `Class ${index}`])} /><p>Class {scoreClass}: original-image dense logit {f(original[scoreClass])} → current {f(dense[scoreClass])}; change {f(dense[scoreClass] - original[scoreClass])}. This selector changes the view, never the model or image.</p>
-    <NeuralTable caption="Exact logits for the same current image" headers={['Class', 'Dense', 'Compressed', 'Compressed − dense']} rows={dense.map((value, index) => [index, f(value), f(compressed[index]), f(compressed[index] - value)])} />
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect an original and reconstructed spatial filter</h4><div className="neural-controls"><NeuralNumber label="Kernel input channel" value={inputChannel} min={0} max={7} step={1} integer onChange={setInputChannel} /><NeuralNumber label="Kernel output channel" value={outputChannel} min={0} max={11} step={1} integer onChange={setOutputChannel} /></div><div className="neural-two">{[denseKernel, kernel, kernel.map((values, r) => values.map((value, c) => value - denseKernel[r][c]))].map((values, index) => <figure key={index}><figcaption>{['Original kernel', 'Reconstructed P·D', 'Reconstruction − original'][index]}</figcaption><div className="depthwise-kernel-grid">{values.flat().map((value, cell) => <span key={cell} className={value < 0 ? 'is-negative' : ''}>{f(value, 4)}</span>)}</div></figure>)}</div><p>These are signed weights, not activation heatmaps. Multiplier 9 reconstructs the kernel within floating-point error but costs more MACs than the dense layer.</p></section>
-    <button onClick={() => { chooseModel(0); setMultiplier(1); setPixel(0); setInputChannel(0); setOutputChannel(0); setScoreClass(4); }}>Reset digit experiment</button>
-  </>;
+  return <FlowLab id="depthwise-digits" label="Live fixed-weight digit compression comparison">
+    <div className="flow-columns-2"><div><p className="dw-input">Source {example.source_id}, original digit {example.actual}; select a pixel (white outline)</p>
+      <div className="dw-digit-grid">{image.flatMap((values, r) => values.map((value, c) => <button key={`${r}-${c}`} type="button"
+        style={{ backgroundColor: `rgb(${value * 255}, ${value * 255}, ${value * 255})` }}
+        aria-pressed={pixel === r * 8 + c} aria-label={`Pixel ${r}, ${c}; intensity ${f(value)}`} onClick={() => setPixel(r * 8 + c)} />))}</div>
+      <p>Black = 0, white = 1; edited images need not retain the original digit label.</p></div>
+      <div><p>Signed logits: grey bar = dense model, violet bar = compressed; each row is one class. Zero is the center, shared scale ±{f(largest, 2)}.</p>
+        {dense.map((value, index) => <div className="dw-score-row" key={index}><span>{index}</span><div className="dw-score-track">{[value, compressed[index]].map((score, kind) =>
+          <span key={kind} className={kind ? 'dw-score-compressed' : 'dw-score-dense'} style={{ left: `${50 + Math.min(0, score) / largest * 50}%`, width: `${Math.abs(score) / largest * 50}%` }} />)}</div></div>)}</div></div>
+    <FlowControls><FlowChoice label="Retained patterns per input (m)" options={multiplierOptions} value={multiplier} onChange={setMultiplier} />
+      <FlowSlider name={`Pixel (${row}, ${column}) intensity`} value={image[row][column]} min={0} max={1} step={.0625}
+        onChange={value => setImage(previous => previous.map((values, r) => r === row ? replace(values, column, value) : values))} /></FlowControls>
+    <FlowReadout>Fixed seed-1, dilation-1 weights give dense class <strong>{argmax(dense)}</strong> and compressed class <strong>{argmax(compressed)}</strong>; original-label logits are {f(dense[example.actual])} and {f(compressed[example.actual])}. Changes run inference only.</FlowReadout>
+    <NeuralTable caption="Current image: exact class scores" headers={['Class', 'Dense', 'Compressed', 'Difference']} rows={dense.map((value, index) => [index, f(value, 4), f(compressed[index], 4), f(compressed[index] - value, 4)])} />
+  </FlowLab>;
 }
 
-export function DepthwiseDigitLab() {
-  const [teachingSection, ready] = useLessonViewport(), resource = useDeferredText('digit-inference.json', ready, true);
-  return <NeuralLab id="depthwise-digits" title="Inspect a real compressed model, then intervene on its input"><p>The measured six-run table above stays separate from this live view. Only the two saved seed-one models contain full weights. The saved weights load when this investigation comes into view.</p><section  data-lesson-teaching="" ref={teachingSection} className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Saved-model pixel and filter investigation</h4>{ready && (resource.error ? <p role="alert">{resource.error} <button onClick={resource.retry}>Retry model data</button></p> : resource.data ? <DigitExperiment runs={resource.data.runs} /> : <p role="status">Loading the two saved models…</p>)}</section></NeuralLab>;
+function KernelExperiment({ run }) {
+  const [input, setInput] = useState(0);
+  const [output, setOutput] = useState(0);
+  const [multiplier, setMultiplier] = useState(1);
+  const original = run.dense_state['spatial.weight'][output][input];
+  const reconstructed = reconstructedKernel(run, multiplier, input, output);
+  const grids = [original, reconstructed, original.map((values, r) => values.map((value, c) => reconstructed[r][c] - value))];
+  return <FlowLab id="depthwise-kernel" label="Independent fixed-model spatial kernel inspection">
+    <div className="flow-columns-3">{grids.map((grid, index) => <div key={index}><p>{['Original kernel', 'Reconstructed P·D', 'Reconstruction − original'][index]}</p>
+      <div className="dw-weight-grid">{grid.flat().map((value, cell) => <span key={cell} className={Math.abs(value) < .00005 ? 'dw-zero' : value < 0 ? 'dw-negative' : ''}>{f(value, 4)}</span>)}</div></div>)}</div>
+    <p>Amber positive, blue negative, neutral values rounding to zero; each cell shows a learned weight, not an activation.</p>
+    <FlowControls><FlowSlider name="Kernel input channel" value={input} onChange={setInput} min={0} max={7} step={1} />
+      <FlowSlider name="Kernel output channel" value={output} onChange={setOutput} min={0} max={11} step={1} />
+      <FlowChoice label="Retained patterns here (m)" options={multiplierOptions} value={multiplier} onChange={setMultiplier} /></FlowControls>
+    <FlowReadout>Kernel {input} → {output} has maximum entry error <strong>{f(Math.max(...grids[2].flat().map(Math.abs)))}</strong>. This is the same seed-1, dilation-1 model, with independent controls: this m does not change the digit comparison above.</FlowReadout>
+  </FlowLab>;
+}
+
+export function DepthwiseDigitLab({ kind = 'digit' }) {
+  const [anchor, ready] = useLessonViewport();
+  const resource = useDigitResource(ready);
+  const run = resource.data?.runs.find(item => item.dilation === 1);
+  return <div ref={anchor}>{resource.error ? <p role="alert">{resource.error} <button className="dw-retry" type="button" onClick={resource.retry}>Retry saved weights</button></p>
+    : run ? kind === 'kernel' ? <KernelExperiment run={run} /> : <DigitExperiment run={run} />
+      : <p role="status">Saved weights load as this investigation approaches the screen…</p>}</div>;
 }

@@ -1,0 +1,300 @@
+{
+  "status": "SECTION13_D46_D49_COMPLETE_WITH_BOUNDED_NEW_D48_STUDY_NOT_WHOLE_TOPIC_READY",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T11:52:12.454Z",
+  "acceptedAnchor": "13-separate-a-representation-decision-from-its-evaluation",
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen-template.md",
+      "bytes": 13712,
+      "sha256": "3f9296614737a8a44f0bd13bcddef686760e29e5f95ed704263e5443fbde1879"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen.md",
+      "bytes": 59217,
+      "sha256": "822556372bebb79c36fc862b278abd419f146c64a83efb3304416a5fc9298eb6"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\visual-specifications.md",
+      "bytes": 3280,
+      "sha256": "b8481a0981c1fd7f8d06330817ec7ca35c0aab5573261605b9bf0cf9f810849a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\assemble-section.mjs",
+      "bytes": 6616,
+      "sha256": "fd911de5cb068aa82dc666d76464d101e3ff8ace9787be402a5ed02d2e0adddc"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\check-new-study.py",
+      "bytes": 6267,
+      "sha256": "bb0e9c0a9241579211fa1ee49788ae791f509f49ce054cc25ebf603a0ebf0781"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\new-study-checks.json",
+      "bytes": 5680,
+      "sha256": "ebc8d79c1f9dbf0cb743ab08ba9b14ea2ef010ea25b743362a17e25634606b68"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+      "bytes": 38803,
+      "sha256": "b3ec28cea308fb5003d017f201fd47afbd7336db9bbda7c70a9c233dbcd44286"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "sourceSlots": [
+    {
+      "marker": "<!-- original-source:digitDictionary -->",
+      "language": "python",
+      "file": "nmf_digits.py",
+      "decodedFrom": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+      "decodedBodySha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989",
+      "literalBody": "import numpy as np\nfrom sklearn.decomposition import NMF, PCA\nfrom sklearn.model_selection import train_test_split\n\ndata = np.loadtxt('digits-300.csv', delimiter=',', skiprows=1)\nsource_rows, labels = data[:, 0].astype(int), data[:, 1].astype(int)\nX = data[:, 2:] / 16\ntrain, rest = train_test_split(np.arange(len(X)), test_size=.4,\n                               random_state=19, stratify=labels)\nvalidation, test = train_test_split(rest, test_size=.5,\n                                    random_state=19, stratify=labels[rest])\n\nfor k in (1, 4, 8, 16):\n    for seed in (7, 19):\n        model = NMF(n_components=k, init='random', solver='cd',\n                    random_state=seed, max_iter=2000, tol=1e-5)\n        W_train = model.fit_transform(X[train])\n        W_validation = model.transform(X[validation])\n        H = model.components_\n        train_mse = np.mean((X[train] - W_train @ H) ** 2)\n        validation_mse = np.mean((X[validation] - W_validation @ H) ** 2)\n        print(k, seed, round(train_mse, 6), round(validation_mse, 6))\n\n# A fixed eight-component comparison chosen for inspectable image panels.\nnmf = NMF(n_components=8, init='random', solver='cd', random_state=19,\n          max_iter=2000, tol=1e-5).fit(X[train])\nW_test = nmf.transform(X[test])\nnmf_reconstruction = W_test @ nmf.components_\npca = PCA(n_components=8, svd_solver='full').fit(X[train])\npca_reconstruction = pca.inverse_transform(pca.transform(X[test]))\nmean_reconstruction = np.repeat(X[train].mean(axis=0)[None, :], len(test), axis=0)\nfor name, reconstruction in [('mean', mean_reconstruction),\n                             ('PCA8', pca_reconstruction),\n                             ('NMF8', nmf_reconstruction)]:\n    print(name, round(np.mean((X[test] - reconstruction) ** 2), 6))\nprint('first held-out source row', source_rows[test[0]])\nprint('first reconstructed image')\nprint(nmf_reconstruction[0].reshape(8, 8).round(2))"
+    },
+    {
+      "marker": "<!-- original-output:digitDictionary -->",
+      "language": "text",
+      "decodedFrom": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+      "decodedBodySha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981",
+      "literalBody": "1 7 0.072144 0.072803\n1 19 0.072144 0.072803\n4 7 0.040409 0.041899\n4 19 0.040409 0.0419\n8 7 0.02475 0.025548\n8 19 0.025147 0.026315\n16 7 0.012295 0.013548\n16 19 0.012729 0.015289\nmean 0.069995\nPCA8 0.019678\nNMF8 0.025381\nfirst held-out source row 242\nfirst reconstructed image\n[[0.   0.02 0.19 0.68 0.76 0.37 0.08 0.01]\n [0.   0.06 0.5  0.78 0.87 0.53 0.14 0.  ]\n [0.   0.1  0.38 0.74 0.94 0.58 0.12 0.  ]\n [0.   0.03 0.2  0.92 0.97 0.47 0.07 0.  ]\n [0.   0.08 0.53 1.02 0.98 0.3  0.1  0.  ]\n [0.   0.12 0.72 0.89 0.81 0.26 0.18 0.  ]\n [0.   0.05 0.54 0.81 0.6  0.51 0.29 0.01]\n [0.   0.02 0.2  0.61 0.8  0.7  0.18 0.  ]]"
+    },
+    {
+      "marker": "<!-- source:nmf_digit_comparison.py -->",
+      "language": "python",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_digit_comparison.py",
+      "decodedBodySha256": "1a00c5c74dde38d1c3aaaa47ff83c4c2a832f76b4e711e311b362e6aab94c484",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_digit_comparison.py",
+        "bytes": 4275,
+        "sha256": "36ac3ce284bfa74dd5ff25124327eca5c73b1e4d28603535df78961d448c1e0e"
+      }
+    },
+    {
+      "marker": "<!-- output:nmf_digit_comparison.stdout.txt -->",
+      "language": "json",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+      "decodedBodySha256": "3c5116b47800594da15fc964e16c3b57212139d7fb015b66334406a43d291b53",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+        "bytes": 38803,
+        "sha256": "b3ec28cea308fb5003d017f201fd47afbd7336db9bbda7c70a9c233dbcd44286"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "33 independent new-study conditions retained",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved nmf-examples.js",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved nmf_digit_comparison.py",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "new full stdout conserved",
+      "passed": true
+    },
+    {
+      "name": "new full stderr conserved",
+      "passed": true
+    },
+    {
+      "name": "newstudy not historicreplay",
+      "passed": true
+    },
+    {
+      "name": "original decoded code exact historic",
+      "passed": true
+    },
+    {
+      "name": "original decoded output exact historic",
+      "passed": true
+    },
+    {
+      "name": "one accepted section13",
+      "passed": true
+    },
+    {
+      "name": "D46 before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D47 before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D48 before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D49 before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "all original candidate 1/7",
+      "passed": true
+    },
+    {
+      "name": "all original candidate 1/19",
+      "passed": true
+    },
+    {
+      "name": "all original candidate 4/7",
+      "passed": true
+    },
+    {
+      "name": "all original candidate 4/19",
+      "passed": true
+    },
+    {
+      "name": "all original candidate 8/7",
+      "passed": true
+    },
+    {
+      "name": "all original candidate 8/19",
+      "passed": true
+    },
+    {
+      "name": "all original candidate 16/7",
+      "passed": true
+    },
+    {
+      "name": "all original candidate 16/19",
+      "passed": true
+    },
+    {
+      "name": "original baseline 0.06999462363160687 retained",
+      "passed": true
+    },
+    {
+      "name": "original baseline 0.019678463136677867 retained",
+      "passed": true
+    },
+    {
+      "name": "original baseline 0.02538089143047506 retained",
+      "passed": true
+    },
+    {
+      "name": "new reserved MSE 0.06999462363160687 actual",
+      "passed": true
+    },
+    {
+      "name": "new reserved MSE 0.02416372023704315 actual",
+      "passed": true
+    },
+    {
+      "name": "new reserved MSE 0.030231907695106697 actual",
+      "passed": true
+    },
+    {
+      "name": "new row242 MSE 0.04595146273389275 actual",
+      "passed": true
+    },
+    {
+      "name": "new row242 MSE 0.021948620787064027 actual",
+      "passed": true
+    },
+    {
+      "name": "new row242 MSE 0.026957889373735507 actual",
+      "passed": true
+    },
+    {
+      "name": "new row256 MSE 0.06796480908805942 actual",
+      "passed": true
+    },
+    {
+      "name": "new row256 MSE 0.024197862895577522 actual",
+      "passed": true
+    },
+    {
+      "name": "new row256 MSE 0.03327840298161405 actual",
+      "passed": true
+    },
+    {
+      "name": "no warning/cap/iteration invented",
+      "passed": true
+    },
+    {
+      "name": "signed ruler covers allnewoutputs",
+      "passed": true
+    },
+    {
+      "name": "actual split representatives",
+      "passed": true
+    },
+    {
+      "name": "one complete slot <!-- original-source:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "literal complete <!-- original-source:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "one complete slot <!-- original-output:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "literal complete <!-- original-output:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "one complete slot <!-- source:nmf_digit_comparison.py -->",
+      "passed": true
+    },
+    {
+      "name": "literal complete <!-- source:nmf_digit_comparison.py -->",
+      "passed": true
+    },
+    {
+      "name": "one complete slot <!-- output:nmf_digit_comparison.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "literal complete <!-- output:nmf_digit_comparison.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "allsourceoutputslotsresolved",
+      "passed": true
+    },
+    {
+      "name": "different comparison roles explicit",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "newStudyConditions": 33,
+    "compositionConditions": 49,
+    "newMain": 1,
+    "newNMFfit": 1,
+    "newPCAfit": 1,
+    "fullStreamsRead": true,
+    "oldCampaignReplay": false,
+    "warnings": [],
+    "nmfCapReached": false
+  },
+  "amendment": "Retain old aggregate bars and exact old candidate table, separately label new matched mean/PCA6/NMF6 image study and its new metrics; no historical PCA8 images are fabricated.",
+  "amendmentDisposition": "Root explicitly accepted bounded proposal9Oct2026; retains old bars plus new labelled matched study without fabricating missing historical factors.",
+  "reading": "Entire current new source/checker/13template/D46–D49 specs read, all 38,803B new stdout across consecutive850/900/rest line reads and empty stderr read. Original decoded full digit source/output inspected but not run; current PCA1.9.1 centered/fullSVD/mean/inverse contracts targeted read. Original broad NMF research reused.",
+  "continuation": "Root read/compose exact full section. Sections16–19/N10/N12 complete prose/programmes and whole author/DIFFERENT review remain. No canonical/public/runtime/phase change."
+}

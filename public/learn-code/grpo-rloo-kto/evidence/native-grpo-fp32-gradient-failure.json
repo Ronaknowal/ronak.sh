@@ -1,0 +1,6 @@
+{
+  "stage": "native-grpo",
+  "status": "failed",
+  "inputs_sha256": "51d489e67d57974c7a2a16988d2b5bb3c0199dc9d228c703a95dc657bd5a3159",
+  "error": "AssertionError('Tensor-likes are not close!\\n\\nMismatched elements: 1 / 16384 (0.0%)\\nGreatest absolute difference: 3.341725096106529e-05 at index (46, 33) (up to 2e-05 allowed)\\nGreatest relative difference: 0.00455089146271348 at index (46, 33) (up to 0.0005 allowed)')"
+}

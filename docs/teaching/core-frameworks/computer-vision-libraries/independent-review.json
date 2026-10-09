@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-28",
+  "kind": "independent-source-and-learning-review",
+  "reviewer": "frameworks_functional_tracking",
+  "author": "frameworks_annotation_modalities",
+  "record": "independent-review.md",
+  "openSourceFindings": [],
+  "complementaryChecks": [
+    "128 independently derived filter perturbation assertions",
+    "all numeric examples and practice traced",
+    "native evidence and 42 crop/flip oracle cases inspected"
+  ],
+  "browser": "Parent integration scope; not certified by this source receipt",
+  "files": {
+    "src/learn/data/topics/computer-vision-libraries.jsx": "a634c2b6bb630c45454f9771b92935d9ab939d891e38b6d17522d77c810c15e7",
+    "src/learn/data/curriculum/blueprints/computer-vision-libraries.js": "0d7ab530605caad40628f9fb709fcc3ca0410706650909d1835cc6fe27d27672",
+    "src/learn/components/lesson-labs/ComputerVisionLibraryLabs.jsx": "99744d31d3be1bf74d96abf76b166c79e8f2139cc8d628296763c023338eec43",
+    "src/learn/data/vision-library-model.js": "9fb68928079d8a651c190e9559fdcfaaa1f6229ff96a45fecb5c67741e22a5c4",
+    "public/learn-code/computer-vision-libraries/vision_pipeline.py": "e5f568dc84f88eb4fa03127e5825d6a1386d332e773a5f8643a5db376e4095d1",
+    "src/learn/components/lesson-labs/framework-data-contracts.css": "bd5ad7fe52b1df6b4a0c0c7485d7f3b235192cc2307e8b195bd9734be74be1e6",
+    "scripts/verify-framework-data-contracts.mjs": "68bc00c4969b3971cfe035de963daa8ce1ea1fd0d97996269b76c7c190668c00",
+    "scripts/verify-framework-data-contracts.py": "6d09c7dfc3de7a818bda820cfdef9f13daf5219d26e7a1cefb0eae08638faf26"
+  },
+  "presentationDelta": "Reviewed shared CSS contribution-list font/line-height/marker padding correction; rendered closure belongs to parent."
+}

@@ -1,0 +1,3 @@
+export { CaseAnatomy, DistanceTrace, RetrievalLab, MetricContoursLab, UnitsLab, CosineFigure, InfluenceFigure, ClassificationLab, DuplicateFigure, RegressionLab, VoronoiFigure, AffineLab, EstimatorFigure, SelectionFigure, EvaluationFigure, EvidenceFigure } from "./CoreDrawings.jsx";
+export { KdBuildFigure, KdSearchLab, BallBoundFigure, HeapFigure, CostFigure, AnnStructureFigure, CandidateLab, VolumeLab, NuisanceFigure } from "./SearchDrawings.jsx";
+export { NoiseFigure, RiskAggregateFigure, ConsistencyFigure, GeographyFigure, JointTargetsFigure, LearnedSimilarityFigure, RadiusLab, DiagnosisFigure } from "./TheoryDrawings.jsx";

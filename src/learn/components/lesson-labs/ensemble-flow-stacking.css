@@ -1,0 +1,58 @@
+.ensemble-stacking-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.ensemble-stacking-table table {
+  min-width: 44rem;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.ensemble-stacking-table th,
+.ensemble-stacking-table td {
+  padding: .7rem .85rem;
+  border: 1px solid #414148;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.ensemble-stacking-table th:first-child {
+  position: sticky;
+  left: 0;
+  background: #111115;
+}
+
+.ensemble-stacking-table caption {
+  position: sticky;
+  left: 0;
+  width: min(32rem, calc(100vw - 4rem));
+  white-space: normal;
+  text-align: left;
+  padding-bottom: .7rem;
+}
+
+.ensemble-stacking-table tr[aria-current="true"] th,
+.ensemble-stacking-table tr[aria-current="true"] td {
+  border-top-color: #e8bb60;
+  border-bottom-color: #e8bb60;
+}
+
+.ensemble-stacking-matrix-entry {
+  flex-basis: 100%;
+}
+
+.ensemble-stacking-matrix-entry textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: .65rem;
+  font: inherit;
+  line-height: 1.65;
+  color: #ededf0;
+  background: #17171b;
+  border: 1px solid #66666f;
+  resize: vertical;
+}

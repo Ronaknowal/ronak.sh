@@ -1,0 +1,153 @@
+{
+  "status": "passed",
+  "scope": "Only inherited-object-key regression identified by independent root review",
+  "kind": "author actual model and final painted editable WordPiece check",
+  "build": {
+    "manifest": "dist-tokenization-flow/.vite/manifest.json",
+    "sha256": "1bb22b09c620e44f0317a09d3231b15ae7c10021b60f6217d6010d0624700b7c"
+  },
+  "sourceSha256": {
+    "src/learn/components/lesson-labs/token-identity-colors.js": "09e6953f642e80e54b32f28b8f02cbceb3b30099d043e8b26bcbfd693f570a69",
+    "src/learn/components/lesson-labs/token-identity-colors.css": "5e9b388e88cb88bf37caaef1ea75fce394c9b8c020155181005d219e1ede4c8d",
+    "src/learn/components/lesson-labs/SubwordStructureFigures.jsx": "7b1bc4a589d321f308f6270fa01313c08a89b5e821e6781f765f7b33327083ad",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "c4064cfca3dbc2e412d08fd76377708d725e5f8d325d9fd91a15a7cfd5c974cb",
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19"
+  },
+  "sourceChecks": [
+    {
+      "key": "constructor",
+      "result": {
+        "tokens": [
+          "constructor"
+        ],
+        "steps": [
+          {
+            "start": 0,
+            "matches": [
+              {
+                "end": 11,
+                "token": "constructor"
+              }
+            ],
+            "selected": "constructor",
+            "remaining": "constructor"
+          }
+        ],
+        "failed": false
+      },
+      "style": {
+        "--token-identity-color": "#c084fc",
+        "--token-identity-background": "#c084fc26",
+        "--token-identity-border": "#c084fcb3",
+        "color": "#c084fc",
+        "backgroundColor": "#c084fc26",
+        "borderColor": "#c084fcb3"
+      }
+    },
+    {
+      "key": "toString",
+      "result": {
+        "tokens": [
+          "toString"
+        ],
+        "steps": [
+          {
+            "start": 0,
+            "matches": [
+              {
+                "end": 8,
+                "token": "toString"
+              }
+            ],
+            "selected": "toString",
+            "remaining": "toString"
+          }
+        ],
+        "failed": false
+      },
+      "style": {
+        "--token-identity-color": "#e2b55a",
+        "--token-identity-background": "#e2b55a26",
+        "--token-identity-border": "#e2b55ab3",
+        "color": "#e2b55a",
+        "backgroundColor": "#e2b55a26",
+        "borderColor": "#e2b55ab3"
+      }
+    },
+    {
+      "key": "__proto__",
+      "result": {
+        "tokens": [
+          "__proto__"
+        ],
+        "steps": [
+          {
+            "start": 0,
+            "matches": [
+              {
+                "end": 9,
+                "token": "__proto__"
+              }
+            ],
+            "selected": "__proto__",
+            "remaining": "__proto__"
+          }
+        ],
+        "failed": false
+      },
+      "style": {
+        "--token-identity-color": "#e2b55a",
+        "--token-identity-background": "#e2b55a26",
+        "--token-identity-border": "#e2b55ab3",
+        "color": "#e2b55a",
+        "backgroundColor": "#e2b55a26",
+        "borderColor": "#e2b55ab3"
+      }
+    }
+  ],
+  "browserChecks": [
+    {
+      "key": "constructor",
+      "paint": {
+        "key": "constructor",
+        "color": "rgb(192, 132, 252)",
+        "background": "rgba(192, 132, 252, 0.15)",
+        "border": "rgba(192, 132, 252, 0.7)",
+        "identity": "#c084fc"
+      },
+      "stableAfterReentry": true,
+      "screenshot": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/prototype-key-screenshots/constructor.png"
+    },
+    {
+      "key": "toString",
+      "paint": {
+        "key": "toString",
+        "color": "rgb(226, 181, 90)",
+        "background": "rgba(226, 181, 90, 0.15)",
+        "border": "rgba(226, 181, 90, 0.7)",
+        "identity": "#e2b55a"
+      },
+      "stableAfterReentry": true,
+      "screenshot": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/prototype-key-screenshots/toString.png"
+    },
+    {
+      "key": "__proto__",
+      "paint": {
+        "key": "__proto__",
+        "color": "rgb(226, 181, 90)",
+        "background": "rgba(226, 181, 90, 0.15)",
+        "border": "rgba(226, 181, 90, 0.7)",
+        "identity": "#e2b55a"
+      },
+      "stableAfterReentry": true,
+      "screenshot": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/prototype-key-screenshots/__proto__.png"
+    }
+  ],
+  "pageErrors": [],
+  "pending": "Root final integration closure",
+  "authorPaintInspection": {
+    "status": "passed",
+    "scope": "Personally viewed only the three new prototype-key output figures at 390 px",
+    "finding": "constructor, toString and __proto__ visibly encode as the exact valid piece with matching stable input/output hues; no confirmed paint defect."
+  }
+}

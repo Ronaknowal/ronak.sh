@@ -1,6 +1,7 @@
 // Complete separately executable programs; stdout captured with the recorded runtime.
 export const convexOptimizationExamples = {
   allocationCertificate: {
+    file: "allocation_supporting_certificate.py",
     title: "Certify a feasible allocation against every point in its triangle",
     code: String.raw`import numpy as np
 
@@ -19,6 +20,7 @@ for candidate in (np.array([2.0, 1.0]), np.array([2.5, 1.5]), target):
     expected: "candidate: [2.0, 1.0] feasible: True\nobjective: 4.0 lower bound: 2.0 gap: 2.0\ncandidate: [2.5, 1.5] feasible: True\nobjective: 2.25 lower bound: 2.25 gap: 0.0\ncandidate: [4.0, 3.0] feasible: False\nobjective: 0.0 lower bound: 0.0 gap: None",
   },
   ridgeReference: {
+    file: "ridge_stationary_reference.py",
     title: "Run the original ridge fit and check its stationary equation",
     code: String.raw`import numpy as np
 
@@ -42,6 +44,7 @@ print("Hessian eigenvalues:", np.round(np.linalg.eigvalsh(hessian), 6).tolist())
     expected: "weights: [0.926829, 0.585366]\npredictions: [0.926829, 1.512195, 2.097561]\nfit error squared: 0.252826\npenalty: 0.600833\ntotal objective: 0.853659\nstationary: True\nHessian eigenvalues: [2.675445, 15.324555]",
   },
   curvatureSteps: {
+    file: "ridge_curvature_steps.py",
     title: "Separate changing the objective from choosing a stable numerical step",
     code: String.raw`import numpy as np
 
@@ -71,6 +74,7 @@ for label, X in [("full", np.array([[1., 0.], [1., 1.], [1., 2.]])),
     expected: "full ridge 0.0 curvatures [1.675445, 14.324555]\n  step*L 1.0 initial/final gaps [5.833333, 0.014845] monotone: True\n  step*L 2.1 initial/final gaps [5.833333, 1.737794] monotone: False\nfull ridge 0.5 curvatures [2.675445, 15.324555]\n  step*L 1.0 initial/final gaps [7.646341, 0.000765] monotone: True\n  step*L 2.1 initial/final gaps [7.646341, 0.327016] monotone: False\nduplicate ridge 0.0 curvatures [0.0, 12.0]\n  step*L 1.0 initial/final gaps [1.333333, 0.0] monotone: True\n  step*L 2.1 initial/final gaps [1.333333, 129.356312] monotone: False\nduplicate ridge 0.5 curvatures [1.0, 13.0]\n  step*L 1.0 initial/final gaps [3.192308, 0.048262] monotone: True\n  step*L 2.1 initial/final gaps [3.192308, 91.420564] monotone: False",
   },
   softThreshold: {
+    file: "soft_threshold_optimality.py",
     title: "Derive and check a signed proximal solution at and beyond the kink",
     code: String.raw`import numpy as np
 
@@ -94,6 +98,7 @@ print("zero penalty:", soft_threshold(inputs, 0.0).tolist())`,
     expected: "input -3.0 solution -2.0 optimality residual 0.0\ninput -1.0 solution -0.0 optimality residual 0.0\ninput -0.2 solution -0.0 optimality residual 0.0\ninput 0.0 solution 0.0 optimality residual 0.0\ninput 1.0 solution 0.0 optimality residual 0.0\ninput 3.0 solution 2.0 optimality residual 0.0\nzero penalty: [-3.0, -1.0, -0.2, 0.0, 1.0, 3.0]",
   },
   proximalLasso: {
+    file: "proximal_gradient_lasso.py",
     title: "Combine a smooth fit step with a nonsmooth penalty step",
     code: String.raw`import numpy as np
 
@@ -127,6 +132,7 @@ print("positive definite fit Hessian:", bool(np.min(np.linalg.eigvalsh(A.T @ A))
     expected: "iterations: 30\nweights: [0.966667, 0.0, 0.0]\nobjective: 0.196667\nstationarity within 1e-8: True\npositive definite fit Hessian: True",
   },
   cvxpyAllocation: {
+    file: "allocation_cvxpy_certificate.py",
     title: "Solve the same allocation and independently inspect its certificate",
     code: String.raw`import cvxpy as cp
 import numpy as np
@@ -155,6 +161,7 @@ print("matches geometric solution:", bool(np.allclose(w, [2.5, 1.5], atol=1e-8))
     expected: "DCP: True status: optimal\nallocation: [2.5, 1.5]\nobjective: 2.25\nfeasibility residual < 1e-8: True\nsupporting-plane gap < 1e-8: True\nmatches geometric solution: True",
   },
   dcpAndStatus: {
+    file: "cvxpy_dcp_and_status.py",
     title: "Keep a convexity check separate from a successful optimization result",
     code: String.raw`import cvxpy as cp
 
@@ -170,12 +177,11 @@ unbounded = cp.Problem(cp.Minimize(-2 * x))
 for name, problem in [("contradictory constraints", infeasible), ("unbounded objective", unbounded)]:
     problem.solve(solver=cp.CLARABEL)
     print(name, "DCP:", problem.is_dcp(), "status:", problem.status)
-    # Do not use a variable value merely because the expression was accepted.
-    if problem.status != cp.OPTIMAL:
-        print("  no certified finite minimizer to report")`,
-    expected: "sqrt expression: QUASICONVEX False\nnorm expression: CONVEX True\ncontradictory constraints DCP: True status: infeasible\n  no certified finite minimizer to report\nunbounded objective DCP: True status: unbounded\n  no certified finite minimizer to report",
+`,
+    expected: "sqrt expression: QUASICONVEX False\nnorm expression: CONVEX True\ncontradictory constraints DCP: True status: infeasible\nunbounded objective DCP: True status: unbounded",
   },
   robustEpigraph: {
+    file: "minimax_epigraph_calibration.py",
     title: "Choose a constant calibration that minimizes its worst absolute error",
     code: String.raw`import cvxpy as cp
 import numpy as np
@@ -201,6 +207,7 @@ print("least-squares level:", mean, "its worst error:", float(np.max(np.abs(mean
     expected: "status: optimal\nminimax level: 3.5 worst error: 2.5\nendpoint lower bound: 2.5\nbound attained within 1e-8: True\nleast-squares level: 3.0 its worst error: 3.0",
   },
   totalVariation: {
+    file: "total_variation_denoising.py",
     title: "Denoise neighboring readings while allowing a real jump",
     code: String.raw`import cvxpy as cp
 import numpy as np

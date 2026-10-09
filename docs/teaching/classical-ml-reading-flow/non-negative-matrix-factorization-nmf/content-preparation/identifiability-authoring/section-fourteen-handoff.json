@@ -1,0 +1,122 @@
+{
+  "status": "SECTION14_D50_D52_COMPLETE_SCOPED_NOT_WHOLE_TOPIC_READY",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T11:38:38.091Z",
+  "acceptedAnchor": "14-decide-what-a-factorization-can-identify",
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\section-fourteen.md",
+      "bytes": 7944,
+      "sha256": "ec3a6043ea9627f29cc9dfdf09e3485aa6b8ca302bc91298a0bf256728ff7854"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\visual-specifications.md",
+      "bytes": 2217,
+      "sha256": "01e7ecd3b7de61c15a6940a914b5e4014553c43298cd8021c789818fe0290a3e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\check-and-freeze.mjs",
+      "bytes": 3075,
+      "sha256": "50c455fadb480b5ac53fb4bb71ae06226e84b67c38fd1c7f04acc01da9c0dcb3"
+    }
+  ],
+  "checks": [
+    {
+      "name": "exact support fixture taught",
+      "passed": true
+    },
+    {
+      "name": "diagonal pair 0,1 forbidden cross",
+      "passed": true
+    },
+    {
+      "name": "diagonal pair 0,2 forbidden cross",
+      "passed": true
+    },
+    {
+      "name": "diagonal pair 0,3 forbidden cross",
+      "passed": true
+    },
+    {
+      "name": "diagonal pair 1,2 forbidden cross",
+      "passed": true
+    },
+    {
+      "name": "diagonal pair 1,3 forbidden cross",
+      "passed": true
+    },
+    {
+      "name": "diagonal pair 2,3 forbidden cross",
+      "passed": true
+    },
+    {
+      "name": "exact alternating dependence feature0",
+      "passed": true
+    },
+    {
+      "name": "exact alternating dependence feature1",
+      "passed": true
+    },
+    {
+      "name": "exact alternating dependence feature2",
+      "passed": true
+    },
+    {
+      "name": "exact alternating dependence feature3",
+      "passed": true
+    },
+    {
+      "name": "triangular minor determinant1",
+      "passed": true
+    },
+    {
+      "name": "shear exact nonnegative product 0",
+      "passed": true
+    },
+    {
+      "name": "shear exact nonnegative product 0.25",
+      "passed": true
+    },
+    {
+      "name": "shear exact nonnegative product 0.5",
+      "passed": true
+    },
+    {
+      "name": "shear exact nonnegative product 0.75",
+      "passed": true
+    },
+    {
+      "name": "shear exact nonnegative product 1",
+      "passed": true
+    },
+    {
+      "name": "D50 before explanation",
+      "passed": true
+    },
+    {
+      "name": "D51 before explanation",
+      "passed": true
+    },
+    {
+      "name": "D52 before explanation",
+      "passed": true
+    },
+    {
+      "name": "one accepted section14",
+      "passed": true
+    },
+    {
+      "name": "changed premises and ambiguity limits",
+      "passed": true
+    },
+    {
+      "name": "old foundation support reused not replayed",
+      "passed": true
+    }
+  ],
+  "checksCount": 23,
+  "newFits": 0,
+  "historicalReplay": false,
+  "reading": "Entire section14 and three specifications read; exact accepted foundation proof/source reused; fresh targeted integer/shear/placement guards only, not numerical campaign.",
+  "continuation": "Root read and compose. Section13 controlled-study disposition and sections15–19 remain; whole author and DIFFERENT review pending. No runtime/phase/public mutation."
+}

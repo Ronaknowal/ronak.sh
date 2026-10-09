@@ -1,0 +1,45 @@
+.gmm-lesson .gmm-drawing-region {
+  position: relative;
+  overflow-x: auto;
+  max-width: 100%;
+  margin-block: 1.25rem 0.5rem;
+  overscroll-behavior-inline: contain;
+}
+.gmm-lesson .gmm-drawing-region:focus-visible {
+  outline: 1px solid var(--accent, #e9b94c);
+  outline-offset: 0.25rem;
+}
+.gmm-lesson .gmm-drawing { display: block; max-width: none; }
+.gmm-lesson .gmm-quantity { min-width: 0; flex: 1 1 13rem; }
+.gmm-lesson .gmm-quantity > label { display: flex; gap: 0.5rem; align-items: baseline; flex-wrap: wrap; }
+.gmm-lesson .gmm-quantity input[type='text'] {
+  width: 6rem;
+  max-width: 100%;
+  color: inherit;
+  background: transparent;
+  border: 1px solid #555;
+  padding: 0.25rem 0.5rem;
+  font: inherit;
+}
+.gmm-lesson .gmm-input-error { color: #e9b94c; font-size: 0.9rem; overflow-wrap: anywhere; }
+.gmm-lesson select {
+  background: #151515;
+  color: inherit;
+  border: 1px solid #555;
+  font: inherit;
+  padding: 0.35rem;
+  max-width: 100%;
+}
+.gmm-lesson .gmm-font-probe { position: absolute; width: 1rem; height: 1rem; visibility: hidden; pointer-events: none; }
+.gmm-lesson .gmm-correlation-planes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem; }
+.gmm-lesson .gmm-correlation-planes > * { min-width: 0; }
+.gmm-lesson .gmm-figure-key { max-width: 44rem; }
+@media (max-width: 700px) {
+  .gmm-lesson .gmm-correlation-planes { grid-template-columns: minmax(0, 1fr); }
+}
+.gmm-measured-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-block: 1.5rem; }
+.gmm-feature-pair { display: flex; flex-wrap: wrap; gap: 1.5rem; padding-inline: .75rem; border-inline: 1px solid var(--text-muted, #85858b); }
+.gmm-role-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-block: 1.5rem; }
+.gmm-role-table th, .gmm-role-table td { text-align: left; vertical-align: top; padding: .5rem; }
+.gmm-role-table th:first-child { width: 7rem; }
+.gmm-role-table td { overflow-wrap: anywhere; }

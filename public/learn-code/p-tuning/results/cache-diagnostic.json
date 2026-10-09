@@ -1,0 +1,122 @@
+[
+  {
+    "mode": "default",
+    "attention": "sdpa",
+    "differences": [
+      {
+        "step": 0,
+        "max_difference": 6.67572021484375e-06,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          187
+        ],
+        "full_argmax": [
+          187
+        ]
+      },
+      {
+        "step": 1,
+        "max_difference": 0.001007080078125,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          187
+        ],
+        "full_argmax": [
+          187
+        ]
+      },
+      {
+        "step": 2,
+        "max_difference": 0.001316368579864502,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          18
+        ],
+        "full_argmax": [
+          18
+        ]
+      }
+    ],
+    "cache_length": 41
+  },
+  {
+    "mode": "eager",
+    "attention": "eager",
+    "differences": [
+      {
+        "step": 0,
+        "max_difference": 6.67572021484375e-06,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          187
+        ],
+        "full_argmax": [
+          187
+        ]
+      },
+      {
+        "step": 1,
+        "max_difference": 0.0009985864162445068,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          187
+        ],
+        "full_argmax": [
+          187
+        ]
+      },
+      {
+        "step": 2,
+        "max_difference": 0.0005545616149902344,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          18
+        ],
+        "full_argmax": [
+          18
+        ]
+      }
+    ],
+    "cache_length": 41
+  },
+  {
+    "mode": "double",
+    "attention": "sdpa",
+    "differences": [
+      {
+        "step": 0,
+        "max_difference": 4.767460630716869e-07,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          187
+        ],
+        "full_argmax": [
+          187
+        ]
+      },
+      {
+        "step": 1,
+        "max_difference": 6.135995960221408e-07,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          187
+        ],
+        "full_argmax": [
+          187
+        ]
+      },
+      {
+        "step": 2,
+        "max_difference": 4.7629542443416995e-07,
+        "raw_processed_difference": 0.0,
+        "native_argmax": [
+          18
+        ],
+        "full_argmax": [
+          18
+        ]
+      }
+    ],
+    "cache_length": 41
+  }
+]

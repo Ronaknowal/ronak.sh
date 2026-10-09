@@ -1,0 +1,25 @@
+{
+  "source": {
+    "title": "Alice’s Adventures in Wonderland",
+    "author": "Lewis Carroll",
+    "source": "https://www.gutenberg.org/ebooks/11",
+    "text_url": "https://www.gutenberg.org/ebooks/11.txt.utf-8",
+    "retrieved": "2026-09-28",
+    "license": "Public domain in the USA; original 1865 text. Check local copyright rules outside the USA.",
+    "selection": "Chapter I paragraphs 0–17 train, 18–23 held out, starting Alice was beginning. Paragraph internal line wraps replaced with spaces; punctuation/case preserved.",
+    "full_source_sha256": "01b38ea4c710a84bc18d0bd41271a5a1a92b94e97b2812f4dece97d4a694725e",
+    "files": {
+      "alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+      "alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db"
+    },
+    "distributed_line_endings": "LF, enforced by the repository .gitattributes for these two text files; paragraph strings are unchanged from the recorded native experiment."
+  },
+  "purpose": "Controlled deduplication audit on real prose; variants and quality ranks are constructed, not human relevance labels.",
+  "record_count": 115,
+  "split_policy": "All descendants keep the original paragraph family and split.",
+  "transformations": "Exact copy, doubled spaces, replace word 11 with curious, first third excerpt. Two constructed negation sentences and one short record.",
+  "sha256": {
+    "corpus.jsonl": "916014d39e33445aa030fc740d15c63f3207fc7f91dca4c45724aaf4aad00725",
+    "article.html": "96b575a7b9b850d3f148f5debe08671d39cc00638501120339b8289bf448a53e"
+  }
+}

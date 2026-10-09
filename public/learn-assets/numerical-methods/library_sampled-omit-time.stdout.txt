@@ -1,0 +1,20 @@
+full: rows=9 scratch=69570000 scipy=69570000 ft^3
+  panel 0: seconds=900 volume=8676000 ft^3
+  panel 1: seconds=900 volume=8716500 ft^3
+  panel 2: seconds=900 volume=8757000 ft^3
+  panel 3: seconds=900 volume=8716500 ft^3
+  panel 4: seconds=900 volume=8676000 ft^3
+  panel 5: seconds=900 volume=8676000 ft^3
+  panel 6: seconds=900 volume=8676000 ft^3
+  panel 7: seconds=900 volume=8676000 ft^3
+reduced: rows=8 scratch=69529500 scipy=69529500 ft^3
+  panel 0: seconds=900 volume=8676000 ft^3
+  panel 1: seconds=1800 volume=17433000 ft^3
+  panel 2: seconds=900 volume=8716500 ft^3
+  panel 3: seconds=900 volume=8676000 ft^3
+  panel 4: seconds=900 volume=8676000 ft^3
+  panel 5: seconds=900 volume=8676000 ft^3
+  panel 6: seconds=900 volume=8676000 ft^3
+reduced minus full=-40500 ft^3
+minute-width sum=1159500; seconds-per-minute=60
+constructed x^2: trapezoid=0.343750000 Simpson=0.333333333 exact=0.333333333

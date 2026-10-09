@@ -1,0 +1,149 @@
+{
+  "kind": "author-native-verification",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "checks": {
+    "visualization_pipeline.py": {
+      "rows": 178,
+      "edges": [
+        10.5,
+        11.0,
+        11.5,
+        12.0,
+        12.5,
+        13.0,
+        13.5,
+        14.0,
+        14.5,
+        15.0,
+        15.5
+      ],
+      "counts": [
+        0,
+        4,
+        15,
+        38,
+        29,
+        35,
+        35,
+        20,
+        2,
+        0
+      ],
+      "area": 1.0,
+      "groups": [
+        {
+          "cultivar": 0,
+          "n": 59,
+          "mean": 13.744745762711865,
+          "sample_sd": 0.46212535966129437,
+          "counts": [
+            0,
+            0,
+            0,
+            0,
+            2,
+            15,
+            23,
+            17,
+            2,
+            0
+          ],
+          "density": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.06779661016949153,
+            0.5084745762711864,
+            0.7796610169491526,
+            0.576271186440678,
+            0.06779661016949153,
+            0.0
+          ]
+        },
+        {
+          "cultivar": 1,
+          "n": 71,
+          "mean": 12.278732394366195,
+          "sample_sd": 0.5379642302964676,
+          "counts": [
+            0,
+            4,
+            15,
+            33,
+            11,
+            6,
+            2,
+            0,
+            0,
+            0
+          ],
+          "density": [
+            0.0,
+            0.11267605633802817,
+            0.4225352112676056,
+            0.9295774647887324,
+            0.30985915492957744,
+            0.16901408450704225,
+            0.056338028169014086,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "cultivar": 2,
+          "n": 48,
+          "mean": 13.153750000000002,
+          "sample_sd": 0.5302413139918747,
+          "counts": [
+            0,
+            0,
+            0,
+            5,
+            16,
+            14,
+            10,
+            3,
+            0,
+            0
+          ],
+          "density": [
+            0.0,
+            0.0,
+            0.0,
+            0.20833333333333334,
+            0.6666666666666666,
+            0.5833333333333334,
+            0.4166666666666667,
+            0.125,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "csv_sha256": "68386101f5ee41ef2a03d50bb8fe6dc5d4ac86aac31b6e987616be00a8c9c728",
+      "versions": {
+        "numpy": "2.3.5",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "visualization_library_views.py": {
+      "rows": 178,
+      "traces": 3,
+      "seaborn": "0.13.2",
+      "html_bytes": 4833258
+    }
+  },
+  "independent_histogram_cases": 40,
+  "source_files": {
+    "public/learn-code/visualization/visualization_library_views.py": "a52a72cf470c5d3ed33a9a071a029ee7938aee84aa695a8cc0985d8158e338ac",
+    "public/learn-code/visualization/visualization_pipeline.py": "02c18fea33df5209aa7e68ff9c3253f71d330dc24aa5b60c963c667f54d411c0",
+    "public/learn-assets/neural-training-diagnostics-reproducible-experiments/wine.csv": "68386101f5ee41ef2a03d50bb8fe6dc5d4ac86aac31b6e987616be00a8c9c728",
+    "src/learn/data/visualization-wine-summary.json": "bc4406fb8043662e38163aec049d1cc3c82f66633d48e12dcbeb3bb56626979b"
+  },
+  "limits": [
+    "CPU plotting and exact fixture checks; no inferential population claim.",
+    "Author program execution does not certify browser readability."
+  ]
+}

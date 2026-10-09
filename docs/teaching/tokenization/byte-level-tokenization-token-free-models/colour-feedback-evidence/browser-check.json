@@ -1,0 +1,397 @@
+{
+  "date": "2026-10-06",
+  "reviewer": "author-only",
+  "baseURL": "http://127.0.0.1:4240",
+  "checks": [
+    "Fresh revised BLT diagram, separated embedding address and 2026 bridge actually rendered",
+    "Glyph/byte and ranked-piece hue correspondence; bit/probability/causal roles and white group boundary preserved",
+    "Actual native48 ligatures/NFKC96 scalar expansion renders without colour-helper rejection",
+    "Unicode edited normalization/scientist/empty/invalid/reset states",
+    "Streaming native Home/End/intermediate, ASCII/empty, truncation and reset",
+    "Patch group cells share identity hue; selected entropy row remains white",
+    "Entropy native endpoints/0.8/equality/null/reset and actual threshold drag",
+    "Layout 1366px/1x text: no page overflow or framed teaching figures",
+    "Layout 768px/1x text: no page overflow or framed teaching figures",
+    "Layout 768px/2x text: no page overflow or framed teaching figures",
+    "Layout 390px/1x text: no page overflow or framed teaching figures",
+    "Layout 320px/1x text: no page overflow or framed teaching figures"
+  ],
+  "screenshots": [
+    {
+      "name": "unicode-nfc-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-nfc-desktop.png"
+    },
+    {
+      "name": "unicode-nfkc-expanded-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-nfkc-expanded-desktop.png"
+    },
+    {
+      "name": "unicode-nfkc-expanded-counts-phone",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-nfkc-expanded-counts-phone.png"
+    },
+    {
+      "name": "unicode-scientist-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-scientist-desktop.png"
+    },
+    {
+      "name": "unicode-invalid-length-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-invalid-length-desktop.png"
+    },
+    {
+      "name": "unicode-invalid-surrogate-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-invalid-surrogate-desktop.png"
+    },
+    {
+      "name": "stream-scalar-boundary-null-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/stream-scalar-boundary-null-desktop.png"
+    },
+    {
+      "name": "stream-split-inside-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/stream-split-inside-desktop.png"
+    },
+    {
+      "name": "stream-truncated-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/stream-truncated-desktop.png"
+    },
+    {
+      "name": "patch-space-uncertain-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/patch-space-uncertain-desktop.png"
+    },
+    {
+      "name": "patch-equality-one-patch-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/patch-equality-one-patch-desktop.png"
+    },
+    {
+      "name": "patch-threshold-zero-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/patch-threshold-zero-desktop.png"
+    },
+    {
+      "name": "text-storage-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/text-storage-1366-1x.png"
+    },
+    {
+      "name": "unicode-live-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-live-1366-1x.png"
+    },
+    {
+      "name": "utf8-packing-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/utf8-packing-1366-1x.png"
+    },
+    {
+      "name": "byte-pipeline-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-pipeline-1366-1x.png"
+    },
+    {
+      "name": "byte-normalization-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-normalization-1366-1x.png"
+    },
+    {
+      "name": "byte-merges-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-merges-1366-1x.png"
+    },
+    {
+      "name": "streaming-live-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/streaming-live-1366-1x.png"
+    },
+    {
+      "name": "byte-state-machine-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-state-machine-1366-1x.png"
+    },
+    {
+      "name": "byte-embedding-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-embedding-1366-1x.png"
+    },
+    {
+      "name": "byte-targets-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-targets-1366-1x.png"
+    },
+    {
+      "name": "byte-masks-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-masks-1366-1x.png"
+    },
+    {
+      "name": "byte-loss-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-loss-1366-1x.png"
+    },
+    {
+      "name": "architecture-byt5-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-byt5-1366-1x.png"
+    },
+    {
+      "name": "architecture-canine-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-canine-1366-1x.png"
+    },
+    {
+      "name": "architecture-charformer-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-charformer-1366-1x.png"
+    },
+    {
+      "name": "architecture-mambabyte-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-mambabyte-1366-1x.png"
+    },
+    {
+      "name": "architecture-blt-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-blt-1366-1x.png"
+    },
+    {
+      "name": "byte-uncertainty-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-uncertainty-1366-1x.png"
+    },
+    {
+      "name": "entropy-live-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/entropy-live-1366-1x.png"
+    },
+    {
+      "name": "byte-pooling-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-pooling-1366-1x.png"
+    },
+    {
+      "name": "byte-cost-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-cost-1366-1x.png"
+    },
+    {
+      "name": "byte-metric-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-metric-1366-1x.png"
+    },
+    {
+      "name": "byte-generation-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-generation-1366-1x.png"
+    },
+    {
+      "name": "text-storage-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/text-storage-768-2x.png"
+    },
+    {
+      "name": "unicode-live-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-live-768-2x.png"
+    },
+    {
+      "name": "utf8-packing-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/utf8-packing-768-2x.png"
+    },
+    {
+      "name": "byte-pipeline-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-pipeline-768-2x.png"
+    },
+    {
+      "name": "byte-normalization-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-normalization-768-2x.png"
+    },
+    {
+      "name": "byte-merges-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-merges-768-2x.png"
+    },
+    {
+      "name": "streaming-live-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/streaming-live-768-2x.png"
+    },
+    {
+      "name": "byte-state-machine-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-state-machine-768-2x.png"
+    },
+    {
+      "name": "byte-embedding-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-embedding-768-2x.png"
+    },
+    {
+      "name": "byte-targets-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-targets-768-2x.png"
+    },
+    {
+      "name": "byte-masks-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-masks-768-2x.png"
+    },
+    {
+      "name": "byte-loss-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-loss-768-2x.png"
+    },
+    {
+      "name": "architecture-byt5-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-byt5-768-2x.png"
+    },
+    {
+      "name": "architecture-canine-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-canine-768-2x.png"
+    },
+    {
+      "name": "architecture-charformer-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-charformer-768-2x.png"
+    },
+    {
+      "name": "architecture-mambabyte-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-mambabyte-768-2x.png"
+    },
+    {
+      "name": "architecture-blt-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-blt-768-2x.png"
+    },
+    {
+      "name": "byte-uncertainty-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-uncertainty-768-2x.png"
+    },
+    {
+      "name": "entropy-live-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/entropy-live-768-2x.png"
+    },
+    {
+      "name": "byte-pooling-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-pooling-768-2x.png"
+    },
+    {
+      "name": "byte-cost-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-cost-768-2x.png"
+    },
+    {
+      "name": "byte-metric-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-metric-768-2x.png"
+    },
+    {
+      "name": "byte-generation-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-generation-768-2x.png"
+    },
+    {
+      "name": "text-storage-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/text-storage-390-1x.png"
+    },
+    {
+      "name": "unicode-live-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-live-390-1x.png"
+    },
+    {
+      "name": "utf8-packing-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/utf8-packing-390-1x.png"
+    },
+    {
+      "name": "byte-pipeline-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-pipeline-390-1x.png"
+    },
+    {
+      "name": "byte-normalization-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-normalization-390-1x.png"
+    },
+    {
+      "name": "byte-merges-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-merges-390-1x.png"
+    },
+    {
+      "name": "streaming-live-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/streaming-live-390-1x.png"
+    },
+    {
+      "name": "byte-state-machine-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-state-machine-390-1x.png"
+    },
+    {
+      "name": "byte-embedding-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-embedding-390-1x.png"
+    },
+    {
+      "name": "byte-targets-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-targets-390-1x.png"
+    },
+    {
+      "name": "byte-masks-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-masks-390-1x.png"
+    },
+    {
+      "name": "byte-loss-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-loss-390-1x.png"
+    },
+    {
+      "name": "architecture-byt5-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-byt5-390-1x.png"
+    },
+    {
+      "name": "architecture-canine-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-canine-390-1x.png"
+    },
+    {
+      "name": "architecture-charformer-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-charformer-390-1x.png"
+    },
+    {
+      "name": "architecture-mambabyte-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-mambabyte-390-1x.png"
+    },
+    {
+      "name": "architecture-blt-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-blt-390-1x.png"
+    },
+    {
+      "name": "byte-uncertainty-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-uncertainty-390-1x.png"
+    },
+    {
+      "name": "entropy-live-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/entropy-live-390-1x.png"
+    },
+    {
+      "name": "byte-pooling-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-pooling-390-1x.png"
+    },
+    {
+      "name": "byte-cost-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-cost-390-1x.png"
+    },
+    {
+      "name": "byte-metric-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-metric-390-1x.png"
+    },
+    {
+      "name": "byte-generation-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-generation-390-1x.png"
+    },
+    {
+      "name": "stream-truncated-phone",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/stream-truncated-phone.png"
+    },
+    {
+      "name": "unicode-scientist-phone",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-scientist-phone.png"
+    },
+    {
+      "name": "patch-space-uncertain-phone",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/patch-space-uncertain-phone.png"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "src/learn/data/topics/byte-level-tokenization.jsx",
+      "sha256": "8b6d8b39d1aa0f2a08090747036d1527f2fc0c3db8b8baf26a33344979142e2f"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx",
+      "sha256": "a7693693fb86061f50520b6c96da0f19fc8fd272d4383672dd9b719d1b0f3c6d"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationDrawings.jsx",
+      "sha256": "18b1307fafc2ba25f48681bc1609b8cd3fffac43a15dea72b0e241e8ebaad667"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/byte-tokenization-labs.css",
+      "sha256": "f9621bb29043a4c1aca88b1fc5c979631bffefd760bbcf2febeccf2a41f62ff8"
+    },
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "scripts/verify-byte-colour-feedback-browser.cjs",
+      "sha256": "a89f038130bdeb157f62b3582f41f98c18efb59ae4c71224b0bb2ca19bc2c942"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/token-identity-colors.js",
+      "sha256": "6bdda73f6e8a02435d4b5dfbb0662a7ebab078e6af34e286e42d804ceed2b13c"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/token-identity-colors.css",
+      "sha256": "5e9b388e88cb88bf37caaef1ea75fce394c9b8c020155181005d219e1ede4c8d"
+    },
+    {
+      "path": "dist-tokenization-flow/.vite/manifest.json",
+      "sha256": "8025bc17510e0d5905bc07baebc0c3da5a55c7f171e40566017d44f4e38d9eaf"
+    }
+  ],
+  "paintInspection": "Captures are candidates until author visually opens them; record inspection separately.",
+  "limits": "Current native interaction and default rendering checks. Root owns independent full-source/paint review and final build/load integration."
+}

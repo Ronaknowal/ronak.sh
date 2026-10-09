@@ -1,0 +1,814 @@
+{
+  "author": "/root/causal_whole_review",
+  "accepted": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-accepted-root-r3.json",
+    "sha256": "716256728a34c431c27e862d593ad41325af3fac49b2bcc83ba8c51d3f3791d2"
+  },
+  "checks": [
+    {
+      "path": "src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+      "expected": "c969992cba3d640531a326b5eeab51ec54338ea700f4808908369e8167efeba4",
+      "actual": "c969992cba3d640531a326b5eeab51ec54338ea700f4808908369e8167efeba4",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/mutual-information-models.js",
+      "expected": "f8f890c06a123e77fec65e5fcb2084a372c270554c225d0c53dff01becbc982c",
+      "actual": "f8f890c06a123e77fec65e5fcb2084a372c270554c225d0c53dff01becbc982c",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/mutual-information-examples.js",
+      "expected": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+      "actual": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/mutual-information-mechanism-program.js",
+      "expected": "97410c954dd95936f6054b4a72c1fbd2e76f587131e68f9e06d22865ce48e11a",
+      "actual": "97410c954dd95936f6054b4a72c1fbd2e76f587131e68f9e06d22865ce48e11a",
+      "pass": true
+    },
+    {
+      "path": "public/learn-assets/mutual-information/mutual-information-library-bridge.py",
+      "expected": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+      "actual": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+      "pass": true
+    },
+    {
+      "path": "src/learn/components/lesson-labs/MutualInformationLabs.jsx",
+      "expected": "a6d53622d99005d226c5bd4a9d35c5ba24879a9bb6c03e7d278816a56175bc64",
+      "actual": "a6d53622d99005d226c5bd4a9d35c5ba24879a9bb6c03e7d278816a56175bc64",
+      "pass": true
+    },
+    {
+      "path": "src/learn/components/lesson-labs/mutual-information-labs.css",
+      "expected": "dba421e8bc7d4d795819df22eb1e8747829e099d42d3aa65fe2d768e3b8bf120",
+      "actual": "dba421e8bc7d4d795819df22eb1e8747829e099d42d3aa65fe2d768e3b8bf120",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js",
+      "expected": "e1fe6abb7c2ecb0205a1d808ce96e6b2a6488546382fd30da07fcf2409d9cf43",
+      "actual": "e1fe6abb7c2ecb0205a1d808ce96e6b2a6488546382fd30da07fcf2409d9cf43",
+      "pass": true
+    },
+    {
+      "path": "AGENTS.md",
+      "expected": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+      "actual": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/SKILL.md",
+      "expected": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "actual": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/workflow.md",
+      "expected": "4096cdebcadf3c94d61be0e1e534592160c64ef6529aca9754a2cdaaec6d1c3b",
+      "actual": "4096cdebcadf3c94d61be0e1e534592160c64ef6529aca9754a2cdaaec6d1c3b",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/teaching.md",
+      "expected": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "actual": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/topic-design.md",
+      "expected": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "actual": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/domain-playbook.md",
+      "expected": "43897a74d31c0c9b85748ef544a8be5b5bd220b8b2f79136f176e88190f16e04",
+      "actual": "43897a74d31c0c9b85748ef544a8be5b5bd220b8b2f79136f176e88190f16e04",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/visuals-and-labs.md",
+      "expected": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "actual": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/examples-and-code.md",
+      "expected": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "actual": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/practice-and-resources.md",
+      "expected": "b5f7a6e67c311a0ffd48dc6ee12e416aaf772b08baa9c58684c7ca0fcb817b22",
+      "actual": "b5f7a6e67c311a0ffd48dc6ee12e416aaf772b08baa9c58684c7ca0fcb817b22",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/portfolio-adapter.md",
+      "expected": "347c3ee5c5f4db818f7ab4b9d9b17ef9fd49c3c3ede5d6ea2174badd24a9173d",
+      "actual": "347c3ee5c5f4db818f7ab4b9d9b17ef9fd49c3c3ede5d6ea2174badd24a9173d",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/MUTUAL-INFORMATION-LESSON-DESIGN.md",
+      "expected": "2ff973014289d6fc9611449458a8701f989ae8e5df34aca9e03f793ce7c0b9fc",
+      "actual": "2ff973014289d6fc9611449458a8701f989ae8e5df34aca9e03f793ce7c0b9fc",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/MUTUAL-INFORMATION-VERIFICATION.md",
+      "expected": "c3e7e7ef97cd2f75b9eeb8a172583e675817eacdafd0e3fb7c28262bb984d27a",
+      "actual": "c3e7e7ef97cd2f75b9eeb8a172583e675817eacdafd0e3fb7c28262bb984d27a",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/MUTUAL-INFORMATION-INDEPENDENT-REVIEW.md",
+      "expected": "7fb788e228e84e1ee14daa41ae5fabbf229429039fa1ad3e504e89945b66f911",
+      "actual": "7fb788e228e84e1ee14daa41ae5fabbf229429039fa1ad3e504e89945b66f911",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/evidence/mutual-information-verification.json",
+      "expected": "00dbbd018187f4cf5ab84539d5103e5c66ebc04bfb7263ea81694a0481a16ccd",
+      "actual": "00dbbd018187f4cf5ab84539d5103e5c66ebc04bfb7263ea81694a0481a16ccd",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/evidence/mutual-information-independent-review.json",
+      "expected": "04ae5664653c963637984d6825e9458540361dd243b53ed5239544d9707138e6",
+      "actual": "04ae5664653c963637984d6825e9458540361dd243b53ed5239544d9707138e6",
+      "pass": true
+    },
+    {
+      "path": "scratch/mutual-information-native-verification/final-source-hashes.json",
+      "expected": "e5289a3e77214b048d017ec0274feabfa06473d37ceb0d28b758d26458eb0e34",
+      "actual": "e5289a3e77214b048d017ec0274feabfa06473d37ceb0d28b758d26458eb0e34",
+      "pass": true
+    },
+    {
+      "path": "scratch/mutual-information-native-verification/results.json",
+      "expected": "212d6ccd346ae93062de54d6e229399f0ec6fefe3df97bc798bdc62c4f8b6e1c",
+      "actual": "212d6ccd346ae93062de54d6e229399f0ec6fefe3df97bc798bdc62c4f8b6e1c",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/evidence/math-depth-remediation-author.json",
+      "expected": "379b9f88afb5211dfce980ade2bedaf20367a4e908ba6d86f678fd4e971c08f0",
+      "actual": "379b9f88afb5211dfce980ade2bedaf20367a4e908ba6d86f678fd4e971c08f0",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/evidence/math-depth-remediation-independent.json",
+      "expected": "b06e3d6888143325af61dbc893eae8700008b4661efb91acf34d7f535d1e231d",
+      "actual": "b06e3d6888143325af61dbc893eae8700008b4661efb91acf34d7f535d1e231d",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/IMPLEMENTATION-DEPTH-REVIEW.md",
+      "expected": "67da5b94c58f05745e0ca4f966dacea7761485a834295e3e43a48b0a082fc223",
+      "actual": "67da5b94c58f05745e0ca4f966dacea7761485a834295e3e43a48b0a082fc223",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/implementation-depth/FOUNDATIONS.md",
+      "expected": "0ffb3a7fcf8b02231cc3326823c720f6b9deb541370c44acc9647df0e68e4da4",
+      "actual": "0ffb3a7fcf8b02231cc3326823c720f6b9deb541370c44acc9647df0e68e4da4",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/topic-notes/contrastive-learning-simclr-moco-infonce-loss.md",
+      "expected": "b4da367337b35f169ac3dca6aedea7482acb72039d601602f3d230d919fe209f",
+      "actual": "b4da367337b35f169ac3dca6aedea7482acb72039d601602f3d230d919fe209f",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+      "expected": "57e92aed15c98bac85b3eabd17e46de7385aa1d1d4a0a27e1e095f8d82834a9d",
+      "actual": "57e92aed15c98bac85b3eabd17e46de7385aa1d1d4a0a27e1e095f8d82834a9d",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/probability-distributions-bayes-theorem.jsx",
+      "expected": "c5fdfc87e2358f3b0e2d27b9aecbf72cb5a61c8e4116491fcae1603d045dc6c0",
+      "actual": "c5fdfc87e2358f3b0e2d27b9aecbf72cb5a61c8e4116491fcae1603d045dc6c0",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/variational-inference-reading-flow-text.js",
+      "expected": "f240909e76a2732e7ae937ca45e5a72f0fb03c8a89bef3da8f4046da1c0259fc",
+      "actual": "f240909e76a2732e7ae937ca45e5a72f0fb03c8a89bef3da8f4046da1c0259fc",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/measure-reading-flow-text.js",
+      "expected": "c4104bc9f9d0d76f8acfb4f58e26a0dd24ef819983bfc9b20a671eaa98ba75a5",
+      "actual": "c4104bc9f9d0d76f8acfb4f58e26a0dd24ef819983bfc9b20a671eaa98ba75a5",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/feature-selection-importance-shap-permutation-mutual-info.jsx",
+      "expected": "ddf7f903cebdc761b831f57cd746b94592e317cfaf343b1d0f6ffda76b3c89d6",
+      "actual": "ddf7f903cebdc761b831f57cd746b94592e317cfaf343b1d0f6ffda76b3c89d6",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/rate-distortion-theory.jsx",
+      "expected": "9b05242dc7ee29a0c8e0642003f67e25561256bd56f67a8bd433c0f297e624fb",
+      "actual": "9b05242dc7ee29a0c8e0642003f67e25561256bd56f67a8bd433c0f297e624fb",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-thomas-ch2.pdf",
+      "expected": "9e0a10cce4efdb8d12d917168bf2134138d11740ba20156f636c9c2da8b520b1",
+      "actual": "9e0a10cce4efdb8d12d917168bf2134138d11740ba20156f636c9c2da8b520b1",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/penguins.csv",
+      "expected": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "actual": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r2.md",
+      "expected": "c42c7d77d5f9c44367692e29da30ee51f097b2e7273f7ee42f04d18d39367194",
+      "actual": "c42c7d77d5f9c44367692e29da30ee51f097b2e7273f7ee42f04d18d39367194",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-source-r2.json",
+      "expected": "1fbfd9ca37c348df6519b77f005a47262b72c2320e79974533ae50b058c1e067",
+      "actual": "1fbfd9ca37c348df6519b77f005a47262b72c2320e79974533ae50b058c1e067",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-accepted-root-r2.json",
+      "expected": "0c0514e3b683e2eb0d0b62cc19fa84a355ecc2014b28c476827aecfda3234d66",
+      "actual": "0c0514e3b683e2eb0d0b62cc19fa84a355ecc2014b28c476827aecfda3234d66",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r1.md",
+      "expected": "e0c8428b688c49ad32f1d79c56910d8f31a7bd667137e93397e915a8f3d2c45e",
+      "actual": "e0c8428b688c49ad32f1d79c56910d8f31a7bd667137e93397e915a8f3d2c45e",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research-r1.md",
+      "expected": "5526eced2c422084959c865c186e3976b72f02d897cf549ad36d16e1f0fba30a",
+      "actual": "5526eced2c422084959c865c186e3976b72f02d897cf549ad36d16e1f0fba30a",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/selected-intake-r1.json",
+      "expected": "236cbe04c4e060ac0bc53285e21fc89abd10790c489ab843c1fcd57376a5ba62",
+      "actual": "236cbe04c4e060ac0bc53285e21fc89abd10790c489ab843c1fcd57376a5ba62",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/historical-identity-r1.json",
+      "expected": "b9fc7d9e45205e3eb92ba997514f2e71fa7c1a8468485e4626cf7a76212c57f8",
+      "actual": "b9fc7d9e45205e3eb92ba997514f2e71fa7c1a8468485e4626cf7a76212c57f8",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/freeze-design-r1.mjs",
+      "expected": "d1e1a32e245d5eab44e1c99acd80b2f88f18b527b04a839290ba7ee329252de6",
+      "actual": "d1e1a32e245d5eab44e1c99acd80b2f88f18b527b04a839290ba7ee329252de6",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research/mit-chapter-2.pdf",
+      "expected": "97c6fcae4dd8f6a0dd87f26a570a71fb8c5c9b0361e24d774617e4079fc84a91",
+      "actual": "97c6fcae4dd8f6a0dd87f26a570a71fb8c5c9b0361e24d774617e4079fc84a91",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research/mit-binary-channel.png",
+      "expected": "94ccb9a70c57c7e446db14593f41f16d8258555a476461455dc0f31a14add092",
+      "actual": "94ccb9a70c57c7e446db14593f41f16d8258555a476461455dc0f31a14add092",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r2.md",
+      "expected": "480b8a0f8060541df60fd4603afe10a2b413cd1a9bb09d697cdeeb73e9ee953e",
+      "actual": "480b8a0f8060541df60fd4603afe10a2b413cd1a9bb09d697cdeeb73e9ee953e",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/correct-design-r2.mjs",
+      "expected": "5deebb45bd535eaa7548d2685afc83fd349c543d2c241176effbbb48f498a71e",
+      "actual": "5deebb45bd535eaa7548d2685afc83fd349c543d2c241176effbbb48f498a71e",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-complete-draft-r1.md",
+      "expected": "4d9e6e41e829dbdbb2b6d856125553a4e9be8d8d2c958c2ff52dcbb1e3ff0e58",
+      "actual": "4d9e6e41e829dbdbb2b6d856125553a4e9be8d8d2c958c2ff52dcbb1e3ff0e58",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-complete-r2.md",
+      "expected": "bcb2067bd683a22b9ec625f9df198d82744bd3ad45639ebfd73d5858574ae861",
+      "actual": "bcb2067bd683a22b9ec625f9df198d82744bd3ad45639ebfd73d5858574ae861",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-programme-inclusions-r1.json",
+      "expected": "e79722adb955b39c7ea49820a1ca8283bfa2cf2f7059f6530aca911f4eeba894",
+      "actual": "e79722adb955b39c7ea49820a1ca8283bfa2cf2f7059f6530aca911f4eeba894",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-programme-inclusions-r2.json",
+      "expected": "f86fc3596f1aa957b377d7920371a16cc310cfc742c65c758d5e5d8ed35d5928",
+      "actual": "f86fc3596f1aa957b377d7920371a16cc310cfc742c65c758d5e5d8ed35d5928",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-section-9-r1.md",
+      "expected": "db7d2e79e6e487c3a1c710b2ec5305ccd0ab95a773d791a8b718c4a56644cbfe",
+      "actual": "db7d2e79e6e487c3a1c710b2ec5305ccd0ab95a773d791a8b718c4a56644cbfe",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-sections-1-2-r1.md",
+      "expected": "f17f63d4ef2aa685a89030670ec8793adb0d4eda6dac428cf8bc54b03155c263",
+      "actual": "f17f63d4ef2aa685a89030670ec8793adb0d4eda6dac428cf8bc54b03155c263",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-sections-3-4-r1.md",
+      "expected": "3913b39c93275bf4d309f72359eb23e3289f6f13793d069a3382df7fa5f04355",
+      "actual": "3913b39c93275bf4d309f72359eb23e3289f6f13793d069a3382df7fa5f04355",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-sections-5-6-r1.md",
+      "expected": "20fbcb02c5be0cbf9690ee29e666726c7ead389225e6ce3aba472901d217b25c",
+      "actual": "20fbcb02c5be0cbf9690ee29e666726c7ead389225e6ce3aba472901d217b25c",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-sections-7-8-r1.md",
+      "expected": "a9ea6aea999f4813dc1063668f0ed70a03caacd628d3b0d736d7a5b4a1f3718d",
+      "actual": "a9ea6aea999f4813dc1063668f0ed70a03caacd628d3b0d736d7a5b4a1f3718d",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/original-practice-checkpoints.json",
+      "expected": "e6b626b978e296f37740301fc564859ebd23812b2a11f716e5b5e17f1e32f8d1",
+      "actual": "e6b626b978e296f37740301fc564859ebd23812b2a11f716e5b5e17f1e32f8d1",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/original-readable-baseline.md",
+      "expected": "0b391cb11676e9fd64da4d701be2570ffb657caffd18d86bfa9e77d71e5b2d3d",
+      "actual": "0b391cb11676e9fd64da4d701be2570ffb657caffd18d86bfa9e77d71e5b2d3d",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/finite_fano.py.display.txt",
+      "expected": "f6b7965c2e37e156c005fe3b06a94de41d6f45fa3765d0eaa3783d891f3b7436",
+      "actual": "f6b7965c2e37e156c005fe3b06a94de41d6f45fa3765d0eaa3783d891f3b7436",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/finite_ib_numpy.py.display.txt",
+      "expected": "c2ced0cc86928fdcb27dfb1e94a496c43a449d13ff4859c2477d6794240eaeef",
+      "actual": "c2ced0cc86928fdcb27dfb1e94a496c43a449d13ff4859c2477d6794240eaeef",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/gaussian_vib_step.py.display.txt",
+      "expected": "aa1de4ddef44e684b02996d87935ffbf7ce15ae6e3441961f06a03c734387da4",
+      "actual": "aa1de4ddef44e684b02996d87935ffbf7ce15ae6e3441961f06a03c734387da4",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_bounds.py.display.txt",
+      "expected": "094fbb132ddda5a6b756c2b97cec4fa62f6434a117aa08634722cbd88ae0033a",
+      "actual": "094fbb132ddda5a6b756c2b97cec4fa62f6434a117aa08634722cbd88ae0033a",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_changed_task.py.display.txt",
+      "expected": "c6f492ad92fd3fd615955a2fd298cb5de2c5c471b2af50b4e638e7ee977d3c60",
+      "actual": "c6f492ad92fd3fd615955a2fd298cb5de2c5c471b2af50b4e638e7ee977d3c60",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_conditional.py.display.txt",
+      "expected": "4e8038a397a323cf5973ac85eb9faedcff64dd2002c8064de64f2ffae759d8b0",
+      "actual": "4e8038a397a323cf5973ac85eb9faedcff64dd2002c8064de64f2ffae759d8b0",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_continuous.py.display.txt",
+      "expected": "8e1a8e2f80da8196c5fdbb2b2fe2c85863e1efa96d516f5e194ca95187564e58",
+      "actual": "8e1a8e2f80da8196c5fdbb2b2fe2c85863e1efa96d516f5e194ca95187564e58",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_continuous.py.successor-display.txt",
+      "expected": "e3aaa07c5528c19e22df3df165e11fd7c1b6f5c83e88e93e237058ae01071f6c",
+      "actual": "e3aaa07c5528c19e22df3df165e11fd7c1b6f5c83e88e93e237058ae01071f6c",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_estimation.py.display.txt",
+      "expected": "fde850e8fedcc3d6dcc1eb8ea7380249ea34c8336a92a4c49622660347115823",
+      "actual": "fde850e8fedcc3d6dcc1eb8ea7380249ea34c8336a92a4c49622660347115823",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_iteration.py.display.txt",
+      "expected": "c86561adcafecde0ec2e649668559f6077daa0dc35dac5b7acd9da0d7f6521d9",
+      "actual": "c86561adcafecde0ec2e649668559f6077daa0dc35dac5b7acd9da0d7f6521d9",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_nonlinear.py.display.txt",
+      "expected": "f205b8b5f0e1724fdc780d968bd74181865536b171c182c29d4d157c93ff59e0",
+      "actual": "f205b8b5f0e1724fdc780d968bd74181865536b171c182c29d4d157c93ff59e0",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_original.py.display.txt",
+      "expected": "cfdd6d84c3bdc9c3b0abb42033b541afd822044304d919679d1c8c577aa2b930",
+      "actual": "cfdd6d84c3bdc9c3b0abb42033b541afd822044304d919679d1c8c577aa2b930",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_processing.py.display.txt",
+      "expected": "18dbfa786618cb18df986ddd378424b2408a5b45ec6817625425913d190e7b9b",
+      "actual": "18dbfa786618cb18df986ddd378424b2408a5b45ec6817625425913d190e7b9b",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_representations.py.display.txt",
+      "expected": "d145dfbcbee555fc834d3705900cbae85fb3ec4ec063f1a0f8226e8c6adde2a9",
+      "actual": "d145dfbcbee555fc834d3705900cbae85fb3ec4ec063f1a0f8226e8c6adde2a9",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mutual-information-library-bridge.py.display.txt",
+      "expected": "c843871ac6c0756c42e59a75de4eadc72a726fdee31d232ecad9763d4f8163a8",
+      "actual": "c843871ac6c0756c42e59a75de4eadc72a726fdee31d232ecad9763d4f8163a8",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mutual-information-library-bridge.py.successor-display.txt",
+      "expected": "c127cf73ee4bfba413ac1481476526d31949a48edb15b0dfbdc1930a367d8f89",
+      "actual": "c127cf73ee4bfba413ac1481476526d31949a48edb15b0dfbdc1930a367d8f89",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/penguins_information.py.display.txt",
+      "expected": "889ace005388e1841e1ec541b7977368239e3ee3fac4affe89767750ec007937",
+      "actual": "889ace005388e1841e1ec541b7977368239e3ee3fac4affe89767750ec007937",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/practice-r1.md",
+      "expected": "0d889597361546af9529e46012c4198d11ab89b115c3f2f88770ae533167cb8f",
+      "actual": "0d889597361546af9529e46012c4198d11ab89b115c3f2f88770ae533167cb8f",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/practice-solutions.py",
+      "expected": "f3da4fcb55ea1162c73acdb7456ac1a506ca569409e4f62ccd7efb806554cf2e",
+      "actual": "f3da4fcb55ea1162c73acdb7456ac1a506ca569409e4f62ccd7efb806554cf2e",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/preserved-programmes.json",
+      "expected": "c92dc0657a13f953c293a1dc46496f4173abccb8dcb4c5b7a933daea30b9ac24",
+      "actual": "c92dc0657a13f953c293a1dc46496f4173abccb8dcb4c5b7a933daea30b9ac24",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/DATA-PROVENANCE.md",
+      "expected": "645ab84171ce641f3cfb32e185582deece93146e5ca88d9567c3c27fe40b935d",
+      "actual": "645ab84171ce641f3cfb32e185582deece93146e5ca88d9567c3c27fe40b935d",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/finite_fano.py",
+      "expected": "20d67c5a9a32f665face463c775156d2eacae974e952b43f84ea7c12edfdeb13",
+      "actual": "20d67c5a9a32f665face463c775156d2eacae974e952b43f84ea7c12edfdeb13",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/finite_ib_numpy.py",
+      "expected": "6e78c8d50f897b5886a7c6d81f74b9ba69672dfcd72c131bb6b89747df442bbc",
+      "actual": "6e78c8d50f897b5886a7c6d81f74b9ba69672dfcd72c131bb6b89747df442bbc",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/finite_ib_reference.py",
+      "expected": "f6238f5ed37a2f1ec35efd84d905e8925bb01fd29f565da6187b7d4421788fb6",
+      "actual": "f6238f5ed37a2f1ec35efd84d905e8925bb01fd29f565da6187b7d4421788fb6",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/gaussian_vib_step.py",
+      "expected": "13dcfb15989285dc6603fc664a73d9daf249928b8e9063e6c51ccb49a4899138",
+      "actual": "13dcfb15989285dc6603fc664a73d9daf249928b8e9063e6c51ccb49a4899138",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_bounds.py",
+      "expected": "1a06c3ce2c329449324e07acc610392c2b50e484de886540a46035f17ec1be25",
+      "actual": "1a06c3ce2c329449324e07acc610392c2b50e484de886540a46035f17ec1be25",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_changed_task.py",
+      "expected": "808a154ab8e30c00c15a2b469f7b19d793c854bde01e3f3843c7cb35159c40dc",
+      "actual": "808a154ab8e30c00c15a2b469f7b19d793c854bde01e3f3843c7cb35159c40dc",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_conditional.py",
+      "expected": "377021b814855fe21429ea0a1cf65ccde6f92ed3a5c6a8c95246a29d09b255b3",
+      "actual": "377021b814855fe21429ea0a1cf65ccde6f92ed3a5c6a8c95246a29d09b255b3",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_continuous.py",
+      "expected": "54e135317ccd2aa0eec9a6158158845eeac8e9d3db630fa258f3b160ce1df697",
+      "actual": "54e135317ccd2aa0eec9a6158158845eeac8e9d3db630fa258f3b160ce1df697",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_estimation.py",
+      "expected": "fb9f823d7692707e65327971fdfc7e99a9ea8919b85539ea3893104ccbc29be3",
+      "actual": "fb9f823d7692707e65327971fdfc7e99a9ea8919b85539ea3893104ccbc29be3",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_iteration.py",
+      "expected": "f2131c0303bd0f76a2f8350e558b852d80adb31ce761e944793c743dbd37b11b",
+      "actual": "f2131c0303bd0f76a2f8350e558b852d80adb31ce761e944793c743dbd37b11b",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_nonlinear.py",
+      "expected": "92424e9e56677e8349558c97f01806427cd15b62c280a52314fd1236c94bde12",
+      "actual": "92424e9e56677e8349558c97f01806427cd15b62c280a52314fd1236c94bde12",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_original.py",
+      "expected": "536f5219a3703bb44e1f9e24c1fc3aa48d47752011a09fe6537146f203ac2e9e",
+      "actual": "536f5219a3703bb44e1f9e24c1fc3aa48d47752011a09fe6537146f203ac2e9e",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_processing.py",
+      "expected": "90cf6cd8e15da9d14b78989b779a2b1cbb3587c83ff1f23b096f98773c30f1c2",
+      "actual": "90cf6cd8e15da9d14b78989b779a2b1cbb3587c83ff1f23b096f98773c30f1c2",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_representations.py",
+      "expected": "b9e50dd34b96c5e6f2d54d76f2738c2d3fcce02f63f93bdde78d62ec61eb40dd",
+      "actual": "b9e50dd34b96c5e6f2d54d76f2738c2d3fcce02f63f93bdde78d62ec61eb40dd",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mutual-information-library-bridge.py",
+      "expected": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+      "actual": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/penguins.csv",
+      "expected": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "actual": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/penguins_information.py",
+      "expected": "ca2685f9c9dfd285305413e53c3bdd466659624fc560580dca72237c11745cb0",
+      "actual": "ca2685f9c9dfd285305413e53c3bdd466659624fc560580dca72237c11745cb0",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/print-successors/mi_continuous.py",
+      "expected": "2f913522f3d57ff1deca413aa21daf84955bf005035438d891f0fb55c64aa219",
+      "actual": "2f913522f3d57ff1deca413aa21daf84955bf005035438d891f0fb55c64aa219",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/print-successors/mutual-information-library-bridge.py",
+      "expected": "f4ed35826eeafa7b6c0c4c27c0162ac57f8bd493875a71b3a80e139ac7afba21",
+      "actual": "f4ed35826eeafa7b6c0c4c27c0162ac57f8bd493875a71b3a80e139ac7afba21",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/visual-contracts-r1.json",
+      "expected": "9a08f00ab8d108dbe5c2c83c982f4d22dd99e8ffe5ebfcb6d4658bcc79b78fc9",
+      "actual": "9a08f00ab8d108dbe5c2c83c982f4d22dd99e8ffe5ebfcb6d4658bcc79b78fc9",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/visual-specifications-r1.md",
+      "expected": "d9601459a0d45ba26773ce1770959571ce6bf26fceeb1db2e3f762bebb16e626",
+      "actual": "d9601459a0d45ba26773ce1770959571ce6bf26fceeb1db2e3f762bebb16e626",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/visual-specifications-r2.md",
+      "expected": "7ed450a9f2accab433624183886cbf07b40483a96846d75b741fcaa1cd1a4d80",
+      "actual": "7ed450a9f2accab433624183886cbf07b40483a96846d75b741fcaa1cd1a4d80",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-source-r2.json",
+      "expected": "2bd0dc350ebcdcc19fa3609448f50e3fe68aaa7ecd7b9ccd289958237e5b0556",
+      "actual": "2bd0dc350ebcdcc19fa3609448f50e3fe68aaa7ecd7b9ccd289958237e5b0556",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-accepted-root-r2.json",
+      "expected": "c18467818298ddf2ed07c3168f7233a2b7093acd9046e5ae48a84712dc8acd46",
+      "actual": "c18467818298ddf2ed07c3168f7233a2b7093acd9046e5ae48a84712dc8acd46",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-author-handoff-r2.md",
+      "expected": "e6519caf17249d3f0ee44eb87fff8e4c9f106d4c16dfc9ab49653d2acbd5b7f3",
+      "actual": "e6519caf17249d3f0ee44eb87fff8e4c9f106d4c16dfc9ab49653d2acbd5b7f3",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-new-programme-execution-r1.json",
+      "expected": "3350d9bdd522590733953c4f607d87b0f78ddeae1d62f351c25914ae0b7c438b",
+      "actual": "3350d9bdd522590733953c4f607d87b0f78ddeae1d62f351c25914ae0b7c438b",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-print-only-correction-r1.json",
+      "expected": "37ad764993953deacfb172aa1129c0c63849eaf5faefed50ad749d25beac142e",
+      "actual": "37ad764993953deacfb172aa1129c0c63849eaf5faefed50ad749d25beac142e",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-self-reading-correction-r2.json",
+      "expected": "c859ae31e7fcfc86acf468d6af74f44ee921d07e00c3ad708fe255a4267776e5",
+      "actual": "c859ae31e7fcfc86acf468d6af74f44ee921d07e00c3ad708fe255a4267776e5",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-author-checks-r1.json",
+      "expected": "0b142b40dc92b5df7ef79ec3d0ff691f11efdec23ae78699548fcdac44d52696",
+      "actual": "0b142b40dc92b5df7ef79ec3d0ff691f11efdec23ae78699548fcdac44d52696",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-author-final-checks-r2.json",
+      "expected": "2142103a98308100e4aaaeece74aea7ed73b4e125c378e67bde90cb9059a4774",
+      "actual": "2142103a98308100e4aaaeece74aea7ed73b4e125c378e67bde90cb9059a4774",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/prepare-content-r1.mjs",
+      "expected": "479b7beecf1d7a563f67937da9ad2ec2d6776b9312e87b3393810d24fd86229d",
+      "actual": "479b7beecf1d7a563f67937da9ad2ec2d6776b9312e87b3393810d24fd86229d",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/run-new-content-r1.py",
+      "expected": "e0f54d78506b029c43f5986c2927315bc734afe569557f86446788af7cfc689f",
+      "actual": "e0f54d78506b029c43f5986c2927315bc734afe569557f86446788af7cfc689f",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/assemble-practice-r1.mjs",
+      "expected": "3ea86dfe81ef907b5b50e89887bd8456eb639636bc5bc22981b4ca603a44add8",
+      "actual": "3ea86dfe81ef907b5b50e89887bd8456eb639636bc5bc22981b4ca603a44add8",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/assemble-manuscript-r1.mjs",
+      "expected": "1868c9da26d7bbf40cb4ef8ab57699b9fdcfbb6a8e390634977323c6f6fcf592",
+      "actual": "1868c9da26d7bbf40cb4ef8ab57699b9fdcfbb6a8e390634977323c6f6fcf592",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/prepare-visual-specs-r1.mjs",
+      "expected": "ced93b7ed561eb3eb5202b1d7706bf50f536a556d67fd01475eb399c89eb53af",
+      "actual": "ced93b7ed561eb3eb5202b1d7706bf50f536a556d67fd01475eb399c89eb53af",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/check-content-r1.py",
+      "expected": "8ea37aafcd8ede1b7bf842551b816cf5116d7a010a7665b865446910fdedd725",
+      "actual": "8ea37aafcd8ede1b7bf842551b816cf5116d7a010a7665b865446910fdedd725",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/finish-content-r2.mjs",
+      "expected": "e26ecc82b1ddd9ae408dd914e831ad5770e52307a72e3402a190791bd1bb7e46",
+      "actual": "e26ecc82b1ddd9ae408dd914e831ad5770e52307a72e3402a190791bd1bb7e46",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/check-final-content-r2.mjs",
+      "expected": "3c3f29bc7fd9537397ada3f498788516e0ca9c2473762e1adcf955f4f19734f0",
+      "actual": "3c3f29bc7fd9537397ada3f498788516e0ca9c2473762e1adcf955f4f19734f0",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/freeze-content-r2.mjs",
+      "expected": "a025e9ebdaf6460fe55b0182ab942c6dee1a6ac282f4258e1f425bc92fe44131",
+      "actual": "a025e9ebdaf6460fe55b0182ab942c6dee1a6ac282f4258e1f425bc92fe44131",
+      "pass": true
+    },
+    {
+      "path": "scratch/mutual-information-native-verification/verified-changed-task-project.py",
+      "expected": "808a154ab8e30c00c15a2b469f7b19d793c854bde01e3f3843c7cb35159c40dc",
+      "actual": "808a154ab8e30c00c15a2b469f7b19d793c854bde01e3f3843c7cb35159c40dc",
+      "pass": true
+    },
+    {
+      "path": "scratch/mutual-information-native-verification/changed-task-project-output.txt",
+      "expected": "c6f492ad92fd3fd615955a2fd298cb5de2c5c471b2af50b4e638e7ee977d3c60",
+      "actual": "c6f492ad92fd3fd615955a2fd298cb5de2c5c471b2af50b4e638e7ee977d3c60",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-source-r2.json",
+      "expected": "a7501d3d465938378474fafe91d65815075d1525d6cf4da40743cab8be06027a",
+      "actual": "a7501d3d465938378474fafe91d65815075d1525d6cf4da40743cab8be06027a",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-independent-review-root-r2.json",
+      "expected": "c50bdc1673cac2f70b56feaecc3fcc3f0d59c01ae46be5a572dba67924d07494",
+      "actual": "c50bdc1673cac2f70b56feaecc3fcc3f0d59c01ae46be5a572dba67924d07494",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-correction-r3.json",
+      "expected": "ca9ca8bbbd32948e762ac67c343beaaeaf1a30228a7ce8748fe3ccaead21d3b3",
+      "actual": "ca9ca8bbbd32948e762ac67c343beaaeaf1a30228a7ce8748fe3ccaead21d3b3",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-author-handoff-r3.md",
+      "expected": "0ad8067c750e5f9601ae968444628f9e65fd8fd47a88728b2d0382eed6eb7597",
+      "actual": "0ad8067c750e5f9601ae968444628f9e65fd8fd47a88728b2d0382eed6eb7597",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/correct-content-r3.py",
+      "expected": "1b69ea79fa92fc046176c26c80715beb310ea3130f6dfaa7de2ad45c2c5d953d",
+      "actual": "1b69ea79fa92fc046176c26c80715beb310ea3130f6dfaa7de2ad45c2c5d953d",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/freeze-content-r3.mjs",
+      "expected": "9cbe7fd3287c69405acdc2be83554e4fd22ab04d2d98c2dd756dc0bb3f8b0475",
+      "actual": "9cbe7fd3287c69405acdc2be83554e4fd22ab04d2d98c2dd756dc0bb3f8b0475",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-complete-r3.md",
+      "expected": "910b6325af0e3dac96b934be2a3307c1d074dcfa70c1d8a8d4ab9d46913f6794",
+      "actual": "910b6325af0e3dac96b934be2a3307c1d074dcfa70c1d8a8d4ab9d46913f6794",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/visual-specifications-r3.md",
+      "expected": "e16fbfdebf753ccedc239c1fd8e1d7d6ebd6a4bb2772637b3c8f726ffb185ec3",
+      "actual": "e16fbfdebf753ccedc239c1fd8e1d7d6ebd6a4bb2772637b3c8f726ffb185ec3",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/visual-contracts-r3.json",
+      "expected": "b1ffec2d0d04bef42ae7e3772b59b0370c7f997d5e7f45d83a6f333c9430b3d9",
+      "actual": "b1ffec2d0d04bef42ae7e3772b59b0370c7f997d5e7f45d83a6f333c9430b3d9",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-source-r3.json",
+      "expected": "d41d40647bf9f5e1af97d3ac92f24ccad293109f2964a128842303338b89fdfd",
+      "actual": "d41d40647bf9f5e1af97d3ac92f24ccad293109f2964a128842303338b89fdfd",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-same-root-closure-r3.json",
+      "expected": "f7eca4f80318ccd5abd4af2f6491a49a1a6c7ae9bd86f86e694063f8982eca69",
+      "actual": "f7eca4f80318ccd5abd4af2f6491a49a1a6c7ae9bd86f86e694063f8982eca69",
+      "pass": true
+    }
+  ],
+  "stage": "Source identity intake only; full manuscript/specification reading in progress; no implementation."
+}

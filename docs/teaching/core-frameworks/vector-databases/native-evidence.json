@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-28",
+  "review": "author native execution; independent review and browser checks recorded separately",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "torch": "2.14.0+cpu",
+  "result": {
+    "indexed_rows": 120,
+    "held_out_queries": 30,
+    "qdrant_max_cosine_score_error": 6.501637273004235e-08,
+    "faiss_ivf_l2_recall_at_5": {
+      "1": 0.9733333333333333,
+      "2": 1.0,
+      "3": 1.0
+    },
+    "delete_count": 119,
+    "boundary_fixture_prefilter": [
+      "F",
+      "A"
+    ],
+    "environment_boundary": "CPU; Qdrant in-memory exact search, Faiss IVF locally; no Qdrant server/HNSW benchmark"
+  },
+  "complementary_author_checks": {
+    "exact_random_metric_mask_block_k_cases": 81,
+    "all_probe_queries": 40,
+    "invalid_and_tie_checks": 4
+  },
+  "files": {
+    "public/learn-code/vector-databases/vector_retrieval.py": "ce90958b55feb15fe875776c91f48ba93ca847620f6f8f65f232cc8948f40915"
+  }
+}

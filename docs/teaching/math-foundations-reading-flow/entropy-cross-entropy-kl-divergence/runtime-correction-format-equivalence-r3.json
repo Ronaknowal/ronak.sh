@@ -1,0 +1,30 @@
+{
+  "checks": [
+    {
+      "file": "EntropyCodingDrawings.jsx",
+      "completeJsxAstEqual": true
+    },
+    {
+      "file": "EntropyDivergenceDrawings.jsx",
+      "completeJsxAstEqual": true
+    },
+    {
+      "file": "EntropyDrawingElements.jsx",
+      "completeJsxAstEqual": true
+    },
+    {
+      "file": "EntropyMaximumDrawings.jsx",
+      "completeJsxAstEqual": true
+    },
+    {
+      "file": "EntropyPredictionDrawings.jsx",
+      "completeJsxAstEqual": true
+    },
+    {
+      "file": "EntropyProbabilityDrawings.jsx",
+      "completeJsxAstEqual": true
+    }
+  ],
+  "scope": "Conventional JSX formatting only; complete parsed syntax trees including JSX text equal after omitting location/raw-literal/comment metadata. All six checked before any source write.",
+  "priorToolFailure": "Optional transform-react-jsx plugin absent; no source had been written. No dependency installation."
+}

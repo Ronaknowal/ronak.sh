@@ -1,0 +1,7 @@
+# t-SNE, UMAP & Manifold Learning: current reading-flow revision
+
+Revision5 is in complete content preparation after Root acceptance of the entire corrected13-section design,45 mechanism jobs,12 live investigations,10 planned new complete programmes,5 retained programme/stream pairs and19 solved task contracts. [Root release](design-accepted-root.json) composes the DIFFERENT whole design assessment and SAME MDS API closure. This is not content completion or runtime acceptance.
+
+Continue the existing `content-authoring/` draft and its exact [checkpoint](content-authoring/checkpoints/draft-checkpoint.json). Finish its45 actionable visual contracts/12 taught-control investigations, setup/file/resources index, still-missing finite prose checks and whole beginner/specialist reading. Preserve passed numerical witnesses and all original scientific streams; do not replay old fits or mains. Use the five effective documents in the release, not the superseded API predecessors.
+
+KMeans geometry now has the published `2-make-the-geometry-explicit` heading and preserved old alias. GMM private acceptance does not certify its still-pending normal tables. D35 stress is the squared residual of lengths, with the explicit amendment formula. All access, version, data, output, missing-fit and optional-source qualifications remain. A DIFFERENT entire complete-content review and Root content acceptance must precede private runtime. Root alone owns shared/public/central integration.

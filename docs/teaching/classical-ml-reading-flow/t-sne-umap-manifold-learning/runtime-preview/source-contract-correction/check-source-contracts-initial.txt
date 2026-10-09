@@ -1,0 +1,188 @@
+// Focused semantic evaluation of corrected source. In-memory JSX transformation
+// and React server rendering are not browser/native evidence or a Vite build.
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+import { transformSync } from 'esbuild';
+import { parse } from '@babel/parser';
+
+const correction = path.dirname(fileURLToPath(import.meta.url));
+const owner = path.resolve(correction, '..'), app = path.resolve(owner, '../../../../..');
+const require = createRequire(path.join(app, 'package.json'));
+const React = require('react'), { renderToStaticMarkup } = require('react-dom/server');
+const cache = new Map(), results = [];
+const raw = name => fs.readFileSync(path.join(owner, name), 'utf8');
+const binding = file => {
+  const bytes = fs.readFileSync(file);
+  return { path: path.relative(app, file).replaceAll('\\', '/'), bytes: bytes.length,
+    sha256: crypto.createHash('sha256').update(bytes).digest('hex') };
+};
+function load(file) {
+  const [bare, query] = file.split('?');
+  if (query === 'raw') return fs.readFileSync(bare, 'utf8');
+  if (bare.endsWith('.json')) return JSON.parse(fs.readFileSync(bare, 'utf8'));
+  if (bare.endsWith('.css')) return {}; // No visual or layout claim from this check.
+  if (cache.has(bare)) return cache.get(bare).exports;
+  const module = { exports: {} }; cache.set(bare, module);
+  const transformed = transformSync(fs.readFileSync(bare, 'utf8'), {
+    sourcefile: bare, loader: 'jsx', format: 'cjs', jsx: 'automatic', target: 'node20',
+  }).code;
+  const localRequire = source => source.startsWith('.') ? load(path.resolve(path.dirname(bare), source)) : require(source);
+  new Function('require', 'module', 'exports', transformed)(localRequire, module, module.exports);
+  return module.exports;
+}
+const render = (Component, props = {}) => renderToStaticMarkup(React.createElement(Component, props));
+const walk = (node, visit) => {
+  if (!node || typeof node !== 'object') return;
+  visit(node);
+  for (const [key, child] of Object.entries(node)) if (!['loc', 'start', 'end'].includes(key)) {
+    if (Array.isArray(child)) child.forEach(value => walk(value, visit));
+    else if (child && typeof child === 'object') walk(child, visit);
+  }
+};
+function check(name, run) { run(); results.push({ name, pass: true }); }
+const files = JSON.parse(fs.readFileSync(path.join(correction, 'predecessor-bindings.json'), 'utf8')).files;
+check('Exact five changed predecessors and all 17 unchanged checkpoint sources conserved; every current module parses/imports resolve', () => {
+  const prior = JSON.parse(raw('build-source-harness-checkpoint-r2.json'));
+  const changed = new Set(files.map(row => row.current));
+  for (const row of files) {
+    const found = binding(path.resolve(app, row.exactPredecessor));
+    assert.equal(found.sha256, row.sha256); assert.equal(found.bytes, row.bytes);
+  }
+  for (const row of prior.currentSourceBindings) if (!changed.has(row.path)) assert.deepEqual(binding(path.resolve(app, row.path)), row);
+  for (const row of prior.currentSourceBindings.filter(row => /\.(jsx|mjs|js)$/.test(row.path))) {
+    const file = path.resolve(app, row.path), ast = parse(fs.readFileSync(file, 'utf8'), { sourceType: 'module', plugins: ['jsx'] });
+    for (const node of ast.program.body) if (node.type === 'ImportDeclaration' && node.source.value.startsWith('.')) {
+      assert.ok(fs.existsSync(path.resolve(path.dirname(file), node.source.value.split('?')[0])), `${row.path}: ${node.source.value}`);
+    }
+  }
+});
+const figures = load(path.join(owner, 'GeometryFigures.jsx'));
+const objects = load(path.join(owner, 'ManifoldObjects.jsx'));
+const labs = load(path.join(owner, 'ManifoldInvestigations.jsx'));
+const data = load(path.join(owner, 'manifold-data.js'));
+check('D01 actual 64 cell geometry/counts and selected normalized features/output row evaluate from the joined source30 record', () => {
+  const row = data.sourceRow(30), mapped = data.savedLayouts.pca.coordinates[data.digitRows.findIndex(row => row[0] === 30)];
+  assert.equal(row[4], 10); assert.equal(row[5], 14);
+  const html = render(objects.RecordTrace, { row, mapped });
+  const rectangles = [...html.matchAll(/<rect ([^>]+)>/g)].map(row => row[1]);
+  for (let feature = 0; feature < 64; feature++) {
+    const rectangle = rectangles[feature], v = row[feature + 2] / 16 * 255;
+    assert.ok(rectangle.includes(`x="${60 + feature % 8 * 30}"`));
+    assert.ok(rectangle.includes(`y="${40 + Math.floor(feature / 8) * 30}"`));
+    assert.ok(rectangle.includes(`fill="rgb(${v},${v},${v})"`));
+    if (feature === 2 || feature === 3) assert.ok(rectangle.includes('stroke-width="3"'));
+  }
+  assert.ok(html.includes('64 input columns')); assert.ok(html.includes('300 observation rows'));
+  assert.ok(html.includes('.625')); assert.ok(html.includes('.875'));
+  assert.ok(html.includes('q = 2; neither axis is a selected pixel'));
+  for (const value of mapped) assert.ok(html.includes(Number(value.toFixed(6)).toString().replace(/-/g, '−')));
+  assert.equal((render(figures.RecordAnatomy).match(/<tr>/g) || []).length, 65);
+});
+check('D05/L1–L3 initial infinity, six unit edges, cumulative0…6, excluded chord and actual predecessor arrows survive disconnected/end-of-trace states', () => {
+  const drawing = render(figures.UGraphRelaxation);
+  for (let value = 0; value <= 6; value++) assert.ok(drawing.includes(`d=${value}`));
+  assert.ok(drawing.includes('AG chord 2')); assert.ok(drawing.includes('stroke-dasharray="5 4"'));
+  assert.equal((drawing.match(/marker-end=/g) || []).length, 3);
+  assert.ok(drawing.includes('After settling C')); assert.ok(drawing.includes('∞'));
+  const initial = render(labs.GraphView);
+  assert.ok(initial.includes('Before relaxation')); assert.equal((initial.match(/<td>∞<\/td>/g) || []).length, 6);
+  const stopped = render(labs.GraphView, { radius: .75, traceCount: 7 });
+  assert.ok(stopped.includes('After settling A')); assert.ok(stopped.includes('absent'));
+  assert.equal((stopped.match(/marker-end=/g) || []).length, 0);
+  const completed = render(labs.GraphView, { traceCount: 1000 });
+  assert.ok(completed.includes('After settling G')); assert.equal((completed.match(/marker-end=/g) || []).length, 6);
+});
+check('D07 six actual mechanisms each precede their own walkthrough; shared ruler, P/Q widths, input and map edge geometries render', () => {
+  const ast = parse(raw('GeometryFigures.jsx'), { sourceType: 'module', plugins: ['jsx'] });
+  let fn; walk(ast, node => { if (node.type === 'FunctionDeclaration' && node.id.name === 'PreservationQuestions') fn = node; });
+  const returned = fn.body.body.find(node => node.type === 'ReturnStatement').argument;
+  const sequence = returned.children.filter(node => node.type === 'JSXElement').map(node => node.openingElement.name.name);
+  assert.deepEqual(sequence, Array.from({ length: 6 }, () => ['Drawing', 'p']).flat());
+  const html = render(figures.PreservationQuestions);
+  assert.equal((html.match(/<figure /g) || []).length, 6);
+  assert.ok(html.includes('P_AB 0.157501')); assert.ok(html.includes('Q_AB'));
+  assert.ok(html.includes('target union .625; ν .5'));
+  assert.ok(html.includes('stroke-width="5.150012524901494"'));
+});
+check('D32 avoided tensor has three dashed feature planes plus named n×n×D allocation scope', () => {
+  const html = render(figures.AllocationObjects);
+  assert.equal((html.match(/stroke-dasharray="5 4"/g) || []).length, 3);
+  assert.ok(html.includes('8n²D bytes')); assert.ok(html.includes('n columns · n rows · D feature planes'));
+  assert.ok(html.includes('Input/output storage is retained separately'));
+});
+check('D33 actual quadtree literal partitions root and far parent into four nonoverlapping equal children; far cell contains exactly four supplied points', () => {
+  const ast = parse(raw('GeometryFigures.jsx'), { sourceType: 'module', plugins: ['jsx'] });
+  let cells;
+  walk(ast, node => {
+    if (node.type === 'ArrayExpression' && node.elements.length === 9 && node.elements.every(e => e?.type === 'ArrayExpression' && e.elements.length === 3 && e.elements.every(v => v.type === 'NumericLiteral')))) {
+      cells = node.elements.map(e => e.elements.map(v => v.value));
+    }
+  });
+  assert.deepEqual(cells, [[0,0,8],[0,0,4],[4,0,4],[0,4,4],[4,4,4],[4,4,2],[6,4,2],[4,6,2],[6,6,2]]);
+  for (const [parent, children] of [[cells[0], cells.slice(1, 5)], [cells[4], cells.slice(5)]]) {
+    const [x, y, size] = parent;
+    assert.equal(children.reduce((area, c) => area + c[2] ** 2, 0), size ** 2);
+    assert.deepEqual(children, [[x,y,size/2],[x+size/2,y,size/2],[x,y+size/2,size/2],[x+size/2,y+size/2,size/2]]);
+  }
+  const far = [[4,4],[4,5],[5,4],[5,5]];
+  assert.ok(far.every(([x,y]) => x >= 4 && x < 6 && y >= 4 && y < 6));
+  assert.deepEqual([0,1].map(axis => far.reduce((sum,p) => sum + p[axis],0)/4), [4.5,4.5]);
+  assert.ok(render(figures.ApproximationTargets).includes('root[0,8]²'));
+});
+check('D37 signed input vectors, affine cancellation and mapped extension beyond R evaluate on their declared rulers', () => {
+  const interior = render(objects.AffineOffsets), outside = render(objects.AffineOffsets, { extrapolate: true });
+  assert.equal((interior.match(/marker-end=/g) || []).length, 2);
+  assert.equal((outside.match(/marker-end=/g) || []).length, 2);
+  assert.ok(interior.includes('(2/3)(−1) + (1/3)(2) = 0'));
+  assert.ok(outside.includes('(−1/3)(−4) + (4/3)(−1) = 0'));
+  assert.ok(Math.abs((2/3)*(-1)+(1/3)*2)<1e-15);
+  assert.ok(Math.abs((-1/3)*(-4)+(4/3)*(-1))<1e-15);
+  assert.equal((-1/3)*(-2)+(4/3)*7, 10);
+  const mapped = render(objects.MappedExtrapolation);
+  assert.equal((mapped.match(/marker-end=/g) || []).length, 1); assert.ok(mapped.includes('beyond R'));
+  assert.ok(render(figures.AffineRecipe).includes('recipe'));
+});
+check('D27/L10 use exact three-map k10 source-ID audit stream; other selections explicitly retain missing collection evidence', () => {
+  assert.deepEqual(Object.keys(data.sourceIdScores), ['pca','tsne-p30-s7','umap-n15-d01-s7']);
+  const stream = fs.readFileSync(path.resolve(owner, '../content-authoring/outputs/audit_saved_neighbors.txt'), 'utf8');
+  for (const [layout, m] of Object.entries(data.sourceIdScores)) {
+    for (const key of ['retention','trustworthiness','continuity']) assert.ok(stream.includes(`'${key}': ${m[key]}`));
+    const html = render(labs.SavedMapView, { layout });
+    assert.ok(html.includes('already-executed collection audit'));
+    assert.ok(html.includes(String(m.trustworthiness)));
+  }
+  for (const selection of [{k:5}, {layout:'tsne-p5-s7'}]) assert.ok(render(labs.SavedMapView, selection).includes('This selection has no recorded collection audit'));
+  assert.ok(render(figures.SavedLayoutsScores).includes('three already-executed k10 collection audits'));
+});
+check('Reader/science/data/program delivery and L7 current expanding-domain protocol are unchanged', () => {
+  const reader = raw('manifold-lesson.jsx');
+  assert.equal((reader.match(/<H2>/g)||[]).length,13);
+  assert.equal((reader.match(/<ManifoldFigure id=/g)||[]).length,45);
+  assert.equal((reader.match(/<ManifoldInvestigation id=/g)||[]).length,12);
+  assert.equal((reader.match(/<RemoteCodeBlock /g)||[]).length,30);
+  assert.equal((reader.match(/<summary>Worked solution<\/summary>/g)||[]).length,19);
+  const fn = text => {
+    const ast = parse(text, {sourceType:'module',plugins:['jsx']});
+    return ast.program.body.find(node => node.type === 'ExportNamedDeclaration' && node.declaration?.id?.name === 'ForceStepLab').declaration;
+  };
+  const strip = node => JSON.parse(JSON.stringify(node, (key,value) => ['start','end','loc','extra'].includes(key) ? undefined : value));
+  assert.deepEqual(strip(fn(raw('ManifoldInvestigations.jsx'))), strip(fn(fs.readFileSync(path.join(correction,'predecessors/ManifoldInvestigations.jsx'),'utf8'))));
+  const bundle = JSON.parse(fs.readFileSync(path.resolve(owner,'../content-authoring/review-correction/program-bundle.json'),'utf8'));
+  assert.equal(bundle.files.length,35);
+  for (const row of bundle.files) assert.deepEqual(binding(path.resolve(app,row.source.path)),row.source);
+});
+const report = { schema: 'private-manifold-focused-source-contract-check/v1',
+  status: 'SOURCE_SEMANTIC_PASS_BUILD_AND_NATIVE_PENDING', groups: results,
+  changedSources: files.map(row => binding(path.resolve(app,row.current))),
+  checker: binding(fileURLToPath(import.meta.url)),
+  actualCurrentSourceEvaluated: true, inMemoryJsxTransforms: true, inMemoryReactServerRendering: true,
+  viteBuildExecuted: false, originalScientificProgramsOrCampaignsReplayed: false,
+  nativeWindowsPersonallyViewed: [], screenshotsAcquired: [],
+  limitations: ['Server rendering verifies source-derived objects and text, not native layout, browser events, keyboard, focus or responsive behavior.',
+    'Port5193 session10184 still serves unchanged build-private-r2; these corrected five sources are not yet built/served.'] };
+fs.writeFileSync(path.join(correction,'source-semantic-check.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({status:report.status,groups:results.length,report:binding(path.join(correction,'source-semantic-check.json'))}));

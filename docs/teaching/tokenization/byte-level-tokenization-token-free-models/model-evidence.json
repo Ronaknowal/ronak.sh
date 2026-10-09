@@ -1,0 +1,23 @@
+{
+  "environment": {
+    "node": "v22.18.0",
+    "unicode": "16.0",
+    "icu": "77.1"
+  },
+  "checks": {
+    "unicodeFixtures": "passed",
+    "streamPartitions": 48,
+    "patchConfigurations": 128,
+    "informativeAndNullStates": "passed"
+  },
+  "sourceBindings": [
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "scripts/verify-byte-tokenization-model.mjs",
+      "sha256": "80cb5e14c2e3250e5e6a433b2b35a6b807b86d8c4d70a7d8374ac2d7f6f03846"
+    }
+  ]
+}

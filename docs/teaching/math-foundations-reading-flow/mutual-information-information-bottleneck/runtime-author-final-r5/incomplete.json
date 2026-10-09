@@ -1,0 +1,1212 @@
+{
+  "error": "Keyboard table scroll",
+  "checks": [
+    {
+      "name": "All32 panels loaded before geometry",
+      "pass": true
+    },
+    {
+      "name": "Document contained 1366/16",
+      "pass": true,
+      "detail": {
+        "width": 1366,
+        "scroll": 1366,
+        "reader": 900,
+        "figures": [
+          {
+            "id": "M01",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M02",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M03",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M04",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M05",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M06",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M07",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M08",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M09",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M10",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M11",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M12",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M13",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M14",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M15",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M16",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M17",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M18",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M19",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M20",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M21",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M22",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M23",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M24",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M25",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M26",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M27",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M28",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M29",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M30",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M31",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M32",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M33",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M34",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M35",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M36",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M37",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M38",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M39",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M40",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M41",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M42",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M43",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M44",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M45",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M46",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M47",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M48",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M49",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M50",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M51",
+            "client": 760,
+            "scroll": 760
+          },
+          {
+            "id": "M52",
+            "client": 760,
+            "scroll": 760
+          }
+        ]
+      }
+    },
+    {
+      "name": "All52 figures contained 1366/16",
+      "pass": true
+    },
+    {
+      "name": "Document contained 390/16",
+      "pass": true,
+      "detail": {
+        "width": 390,
+        "scroll": 390,
+        "reader": 390,
+        "figures": [
+          {
+            "id": "M01",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M02",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M03",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M04",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M05",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M06",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M07",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M08",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M09",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M10",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M11",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M12",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M13",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M14",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M15",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M16",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M17",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M18",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M19",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M20",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M21",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M22",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M23",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M24",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M25",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M26",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M27",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M28",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M29",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M30",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M31",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M32",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M33",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M34",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M35",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M36",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M37",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M38",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M39",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M40",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M41",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M42",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M43",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M44",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M45",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M46",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M47",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M48",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M49",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M50",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M51",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M52",
+            "client": 350,
+            "scroll": 350
+          }
+        ]
+      }
+    },
+    {
+      "name": "All52 figures contained 390/16",
+      "pass": true
+    },
+    {
+      "name": "Document contained 768/32",
+      "pass": true,
+      "detail": {
+        "width": 768,
+        "scroll": 768,
+        "reader": 386,
+        "figures": [
+          {
+            "id": "M01",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M02",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M03",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M04",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M05",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M06",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M07",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M08",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M09",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M10",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M11",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M12",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M13",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M14",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M15",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M16",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M17",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M18",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M19",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M20",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M21",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M22",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M23",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M24",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M25",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M26",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M27",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M28",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M29",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M30",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M31",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M32",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M33",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M34",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M35",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M36",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M37",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M38",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M39",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M40",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M41",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M42",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M43",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M44",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M45",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M46",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M47",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M48",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M49",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M50",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M51",
+            "client": 309,
+            "scroll": 309
+          },
+          {
+            "id": "M52",
+            "client": 309,
+            "scroll": 309
+          }
+        ]
+      }
+    },
+    {
+      "name": "All52 figures contained 768/32",
+      "pass": true
+    },
+    {
+      "name": "Document contained 390/32",
+      "pass": true,
+      "detail": {
+        "width": 390,
+        "scroll": 390,
+        "reader": 390,
+        "figures": [
+          {
+            "id": "M01",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M02",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M03",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M04",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M05",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M06",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M07",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M08",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M09",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M10",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M11",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M12",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M13",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M14",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M15",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M16",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M17",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M18",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M19",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M20",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M21",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M22",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M23",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M24",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M25",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M26",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M27",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M28",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M29",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M30",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M31",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M32",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M33",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M34",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M35",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M36",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M37",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M38",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M39",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M40",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M41",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M42",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M43",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M44",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M45",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M46",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M47",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M48",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M49",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M50",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M51",
+            "client": 350,
+            "scroll": 350
+          },
+          {
+            "id": "M52",
+            "client": 350,
+            "scroll": 350
+          }
+        ]
+      }
+    },
+    {
+      "name": "All52 figures contained 390/32",
+      "pass": true
+    },
+    {
+      "name": "Keyboard table scroll",
+      "pass": false
+    }
+  ],
+  "captures": [
+    {
+      "file": "M15-wide-700.jpg",
+      "id": "M15",
+      "offset": 700,
+      "actualTop": -660.453125
+    },
+    {
+      "file": "M21-wide-600.jpg",
+      "id": "M21",
+      "offset": 600,
+      "actualTop": -559.59375
+    },
+    {
+      "file": "M34-wide-0.jpg",
+      "id": "M34",
+      "offset": 0,
+      "actualTop": 40.15625
+    },
+    {
+      "file": "M37-wide-0.jpg",
+      "id": "M37",
+      "offset": 0,
+      "actualTop": 40.265625
+    },
+    {
+      "file": "M37-wide-950.jpg",
+      "id": "M37",
+      "offset": 950,
+      "actualTop": -909.734375
+    },
+    {
+      "file": "M38-wide-1000.jpg",
+      "id": "M38",
+      "offset": 1000,
+      "actualTop": -960.21875
+    },
+    {
+      "file": "M48-wide-0.jpg",
+      "id": "M48",
+      "offset": 0,
+      "actualTop": 39.984375
+    },
+    {
+      "file": "M09-enlarged-0.jpg",
+      "id": "M09",
+      "offset": 0,
+      "actualTop": 40.375
+    },
+    {
+      "file": "M12-enlarged-0.jpg",
+      "id": "M12",
+      "offset": 0,
+      "actualTop": 39.78125
+    },
+    {
+      "file": "M19-enlarged-0.jpg",
+      "id": "M19",
+      "offset": 0,
+      "actualTop": 39.8125
+    },
+    {
+      "file": "M28-enlarged-650.jpg",
+      "id": "M28",
+      "offset": 650,
+      "actualTop": -610.09375
+    },
+    {
+      "file": "M35-enlarged-1000.jpg",
+      "id": "M35",
+      "offset": 1000,
+      "actualTop": -959.71875
+    },
+    {
+      "file": "M37-enlarged-0.jpg",
+      "id": "M37",
+      "offset": 0,
+      "actualTop": 39.625
+    },
+    {
+      "file": "M47-enlarged-0.jpg",
+      "id": "M47",
+      "offset": 0,
+      "actualTop": 39.75
+    },
+    {
+      "file": "M49-enlarged-0.jpg",
+      "id": "M49",
+      "offset": 0,
+      "actualTop": 39.96875
+    },
+    {
+      "file": "Prose-phone-root32.jpg",
+      "id": "M10",
+      "offset": -650,
+      "actualTop": 690.1875
+    }
+  ],
+  "errors": []
+}

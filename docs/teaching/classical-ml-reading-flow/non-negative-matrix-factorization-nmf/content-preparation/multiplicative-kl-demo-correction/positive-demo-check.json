@@ -1,0 +1,40 @@
+{
+  "status": "PASS_CHANGED_KL_MAIN_ONLY",
+  "executedCommand": [
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\survival-tools\\Scripts\\python.exe",
+    "-B",
+    "nmf_multiplicative.py",
+    "--loss",
+    "kl"
+  ],
+  "exitCode": 0,
+  "source": {
+    "file": "content-programs\\nmf_multiplicative.py",
+    "bytes": 8988,
+    "sha256": "56d22f18907297f5c1239e31e98071e6bde0d33c5d2c5a1cbc9aa92546c210f9"
+  },
+  "predecessor": {
+    "file": "multiplicative-kl-demo-correction\\predecessor\\nmf_multiplicative.py",
+    "bytes": 8409,
+    "sha256": "924bd5f0dc7208790f628e65fa4fc39ed206e293fbb1fa57b5d6bc9b5a5029a2"
+  },
+  "checker": {
+    "file": "multiplicative-kl-demo-correction\\check-positive-demo.py",
+    "bytes": 2373,
+    "sha256": "a0a0bf87133be2491de7cbd0e8ae5046a6ce335c6998d2681ddd48924662e98e"
+  },
+  "stdout": {
+    "file": "multiplicative-kl-demo-correction\\positive-kl.stdout.txt",
+    "bytes": 222,
+    "sha256": "43fb77d25dc6c9bcdf8bc60de5b6eb89228990dcec35d59fa923b9c5d2360b47"
+  },
+  "stderr": {
+    "file": "multiplicative-kl-demo-correction\\positive-kl.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "outsideMainASTUnchanged": true,
+  "oldFrobeniusFitReplayed": false,
+  "oldCheckerOrHistoricalScienceReplayed": false,
+  "scope": "Current complete KL main on the explicit positive-shift fixture; prior completed Frobenius output belongs exact retained predecessor; whole default all branch was not reexecuted."
+}

@@ -1,0 +1,135 @@
+{
+  "checkedAt": "2026-10-06T16:27:09.838Z",
+  "kind": "author-only final palette-guard source/build/ID4 and Hindi-label/piece production proof; previous complete colour receipts preserved",
+  "sources": {
+    "src/learn/data/topics/vocabulary-multilingual.jsx": "0b956d5a44e44304d2a08f002aa014d03f8f2572651b93f6dfe4faddcb4fa288",
+    "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "11b062841ec5dd079d9715352ca67ebc197cc6a015cbd90b01ab4f1f8b994e04",
+    "src/learn/components/lesson-labs/multilingual-vocabulary.css": "08acb6669a27de76f5a63fc50d3017b1211d3eb326308daa5aedacf9a9d6a315",
+    "src/learn/data/multilingual-vocabulary-models.js": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9",
+    "src/learn/components/lesson-labs/token-identity-colors.js": "09e6953f642e80e54b32f28b8f02cbceb3b30099d043e8b26bcbfd693f570a69",
+    "src/learn/components/lesson-labs/token-identity-colors.css": "5e9b388e88cb88bf37caaef1ea75fce394c9b8c020155181005d219e1ede4c8d",
+    "scratch/vocabulary-color-before/verify-palette-guard-colour.cjs": "b7f5bdea12908caf2db37d5704c552bcc178f08cfc444ab9f55efb8939d92bbd",
+    "dist-tokenization-flow/.vite/manifest.json": "1bb22b09c620e44f0317a09d3231b15ae7c10021b60f6217d6010d0624700b7c"
+  },
+  "priorCompleteColourReceipt": {
+    "file": "scratch/vocabulary-color-before/color-author-browser.json",
+    "sha256": "b7df3164740dc426ac5a11657badcc572063fd4a8960e4570d0962748dc3c446"
+  },
+  "layouts": [
+    {
+      "width": 1366,
+      "enlarged": false,
+      "overflow": 0,
+      "labels": [
+        {
+          "label": "Join1",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join2",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join3",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join4",
+          "color": "rgb(96, 165, 250)"
+        }
+      ],
+      "outputPiece": {
+        "literal": "ं</w>",
+        "color": "rgb(226, 181, 90)"
+      }
+    },
+    {
+      "width": 390,
+      "enlarged": false,
+      "overflow": 0,
+      "labels": [
+        {
+          "label": "Join1",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join2",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join3",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join4",
+          "color": "rgb(96, 165, 250)"
+        }
+      ],
+      "outputPiece": {
+        "literal": "ं</w>",
+        "color": "rgb(226, 181, 90)"
+      }
+    },
+    {
+      "width": 768,
+      "enlarged": true,
+      "overflow": 0,
+      "labels": [
+        {
+          "label": "Join1",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join2",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join3",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join4",
+          "color": "rgb(96, 165, 250)"
+        }
+      ],
+      "outputPiece": {
+        "literal": "ं</w>",
+        "color": "rgb(226, 181, 90)"
+      }
+    }
+  ],
+  "paints": [
+    {
+      "file": "scratch/vocabulary-color-before/after-palette-guard-paints/cat-id4-desktop.png",
+      "sha256": "8d77deb54b32e1390d50d91d5fc7a2629f21c7107fa795806d871398930008dd"
+    },
+    {
+      "file": "scratch/vocabulary-color-before/after-palette-guard-paints/hindi-only-desktop.png",
+      "sha256": "042e59b57c682b5429651208947472dc71b82bb2a7d5c5cfe4d1b87235254d5c"
+    },
+    {
+      "file": "scratch/vocabulary-color-before/after-palette-guard-paints/hindi-only-phone.png",
+      "sha256": "f5b0499cfb60f3df285253804e744691814592476126a5d19260d1b0fc1e1595"
+    },
+    {
+      "file": "scratch/vocabulary-color-before/after-palette-guard-paints/hindi-only-enlarged.png",
+      "sha256": "62613d33eaa13fb93df320fd13119adb3c46c10eeab684630686db537511a7b9"
+    }
+  ],
+  "errors": [],
+  "lookupHues": [
+    {
+      "literal": "cat",
+      "color": "rgb(226, 181, 90)"
+    },
+    {
+      "literal": "ID 4",
+      "color": "rgb(226, 181, 90)"
+    },
+    {
+      "literal": "cat",
+      "color": "rgb(226, 181, 90)"
+    }
+  ],
+  "diagnosticCorrection": "Prior direct browser extraction already found all4 Hindi join labels blue; the initial small-screenshot interpretation was wrong. No classifier correction was retained; the blue corpus label and amber output piece intentionally encode different identities."
+}

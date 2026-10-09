@@ -1,0 +1,6 @@
+P, Q: [0.7, 0.2, 0.1] [0.4, 0.5, 0.1]
+{'KL': 0.208473, 'reverse KL': 0.234299, 'JS': 0.053923, 'H squared': 0.054622, 'chi squared': 0.405, 'TV': 0.3}
+P, Q: [1, 0] [0, 1]
+{'KL': inf, 'reverse KL': inf, 'JS': 0.693147, 'H squared': 1.0, 'chi squared': inf, 'TV': 1.0}
+JS direct / two legs: 0.693147 0.431523
+sqrt(JS) direct / two legs: 0.832555 0.929003

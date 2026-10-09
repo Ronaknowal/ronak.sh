@@ -1,0 +1,29 @@
+{
+  "scope": "Independent complete JSX syntax equivalence excluding location/literal/comment metadata; JSX text preserved",
+  "checks": [
+    {
+      "name": "EntropyCodingDrawings.jsx",
+      "pass": true
+    },
+    {
+      "name": "EntropyDivergenceDrawings.jsx",
+      "pass": true
+    },
+    {
+      "name": "EntropyDrawingElements.jsx",
+      "pass": true
+    },
+    {
+      "name": "EntropyMaximumDrawings.jsx",
+      "pass": true
+    },
+    {
+      "name": "EntropyPredictionDrawings.jsx",
+      "pass": true
+    },
+    {
+      "name": "EntropyProbabilityDrawings.jsx",
+      "pass": true
+    }
+  ]
+}

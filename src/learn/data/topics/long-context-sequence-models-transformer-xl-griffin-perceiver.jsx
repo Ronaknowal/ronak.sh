@@ -1,27 +1,29 @@
-// Generated from the active concept-intuition manuscript; revision-4 evidence remains historical.
+// Current reading-flow manuscript; prior concept-intuition revisions remain preserved.
 import { Prose, H2, H3, CodeBlock } from '../../components/content';
 import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
 import { LessonIntro } from '../../components/lesson-labs/LessonElements.jsx';
 import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
-import { MemoryCacheLab, RecurrentMemoryLab, LatentWorkspaceLab, LongContextProgram } from '../../components/lesson-labs/LongContextLabs.jsx';
+import { LongContextProgram } from '../../components/lesson-labs/LongContextLabs.jsx';
 import { LongContextTrajectoryLab } from '../../components/lesson-labs/LongContextTrajectoryLab.jsx';
-import { MemoryWorkspacesFigure, MaskedReadFigure, AttentionShapesFigure, SegmentLayersFigure, PositionAddressFigure, RetentionFigure, GriffinPathsFigure, PerceiverReadFigure, PositionAttachmentFigure, OutputQueriesFigure, CausalLatentsFigure, TrajectoryArchitectureFigure, TrajectoryEvidenceFigure, DetachedMemoryFigure, MemoryBudgetsFigure, AffineScanFigure } from '../../components/lesson-labs/LongContextFigures.jsx';
-import { EntranceMessageFigure, WeightedReadSharesFigure, SilentStepGateFigure, PathMeanCollisionFigure } from '../../components/lesson-labs/LongContextIntuitionFigures.jsx';
+import { RetentionFigure, TrajectoryEvidenceFigure, MemoryBudgetsFigure } from '../../components/lesson-labs/LongContextFigures.jsx';
+import { PathMeanCollisionFigure } from '../../components/lesson-labs/LongContextIntuitionFigures.jsx';
+import { LongContextFlowProvider, LongMemoryFlowLab, LongRecurrenceFlowLab, LongLatentFlowLab, LongCausalFlowLab, LongPositionPolicyFlowLab, LongMeasuredHistory } from '../../components/lesson-labs/LongContextFlowLabs.jsx';
+import { LongEntranceDrawing, LongMemoryObjectsDrawing, LongSegmentDrawing, LongLowerLayerDrawing, LongRetainWriteDrawing, LongLatentArraysDrawing, LongWeightedDrawing, LongShapeDrawing, LongRelativeDrawing, LongRelativeScoreDrawing, LongGateGenerationDrawing, LongGriffinBlockDrawing, LongGriffinHybridDrawing, LongClassifierRoundDrawing, LongLatentProcessDrawing, LongTaggedDrawing, LongOutputQueriesDrawing, LongTrajectoryArchitectureDrawing, LongSplitDrawing, LongDetachDrawing, LongAffineDrawing, LongPositionPolicyDrawing, LongSearchDrawing, LongAdaptationWorkflowDrawing, LongDocumentMaskDrawing, LongSoftmaxDrawing, LongResidualBlockDrawing, LongBudgetArraysDrawing } from '../../components/lesson-labs/LongContextDrawings.jsx';
 export default {
   title: 'Long-Context Sequence Models (Transformer-XL, Griffin, Perceiver)',
   readTime: '~80 min read + experiments and practice',
   hasIntegratedGuide: true,
-  content: () => <div className="neural-lesson long-context-lesson">
+  content: () => <LongContextFlowProvider><div className="neural-lesson long-context-lesson lesson-flow">
     <LessonIntro prerequisites="Basic algebra and the preceding attention lesson help. We rebuild weighted reads, stored state, queries, masks and array shapes through small examples before using them." sections={[["1-three-kinds-of-memory-are-different-objects","1. Three kinds of memory are different objects"],["2-a-small-attention-operation-you-can-calculate","2. A small attention operation you can calculate"],["3-transformer-xl-continue-across-segment-boundaries","3. Transformer-XL: continue across segment boundaries"],["4-griffin-keep-a-recurrent-summary-and-consult-nearby-detail","4. Griffin: keep a recurrent summary and consult nearby detail"],["5-perceiver-put-deep-computation-in-a-smaller-workspace","5. Perceiver: put deep computation in a smaller workspace"],["6-which-perceiver-is-allowed-to-generate-left-to-right","6. Which Perceiver is allowed to generate left to right?"],["7-run-the-mechanisms-then-try-real-movement-data","7. Run the mechanisms, then try real movement data"],["8-deeper-gradients-budgets-and-a-useful-evaluation-plan","8. Deeper: gradients, budgets and a useful evaluation plan"],["9-practice-implement-a-change-and-explain-its-effect","9. Practice: implement a change and explain its effect"],["10-references-another-way-to-learn-it","10. References & another way to learn it"]]}>A model can read a fact and still lose access to it later. Follow what each kind of memory keeps, calculate how it changes, and then build and inspect the mechanisms yourself.</LessonIntro>
 <Prose>{"A note at the beginning of a document says, “The backup entrance is on the east side.” Much later, someone asks which entrance to use. A model must carry that earlier information forward or be able to consult it again. Merely accepting the whole document as input does not tell us whether it can answer."}</Prose>
 
-<Prose>{"Imagine reading the document through a small opening that shows only the last two messages. When the question arrives, the entrance note has disappeared. Reading the visible question more carefully cannot recover the missing direction. A useful system needs a deliberate way to carry information across that boundary."}</Prose>
+<LongEntranceDrawing />
 
-<EntranceMessageFigure />
+<Prose>{"Imagine reading the document through a small opening that shows only the last two messages. When the question arrives, the entrance note has disappeared. Reading the visible question more carefully cannot recover the missing direction. A useful system needs a deliberate way to carry information across that boundary."}</Prose>
 
 <Prose>{"Look at what disappeared in the figure: the evidence, not the question. We will compare three ways of preserving useful evidence. "}<strong>{"Transformer-XL"}</strong>{" keeps earlier records available for later consultation. "}<strong>{"Griffin"}</strong>{" combines an updated summary with detailed access to the recent past. "}<strong>{"Perceiver"}</strong>{" reads a large available input into a smaller workspace where most subsequent processing happens. These are architectural choices about information flow; learning determines what each system actually preserves."}</Prose>
 
-<Prose>{"The same choice matters when a recorded hand movement must be identified as a line, curve or zigzag. Keeping only the path's average location is cheap, but it can erase its shape. Later we will train and inspect a small model on real hand trajectories, so the discussion ends with a concrete decision rather than a list of model names."}</Prose>
+<Prose>{"This choice also matters when a recorded hand movement must be identified as a line, curve or zigzag. Keeping only the path's average location is cheap, but it can erase its shape. Later we will train and inspect a small model on real hand trajectories, so the discussion ends with a concrete decision rather than a list of model names."}</Prose>
 
 <Prose>{""}<strong>{"How to read this lesson."}</strong>{" Sections 1–2 establish the memory objects and a single weighted read. Sections 3–6 explain one architecture at a time: the problem it solves, a small example, the mechanism and then the formal detail. Try each investigation after its worked example; changes appear immediately. Section 7 connects those operations to complete scratch and library programs and real data. Section 8 is a second-pass route through gradients, scaling and evaluation. Finish with the changed problems in section 9. You can take the architecture sections in separate sittings without losing the common question: "}<strong>{"what remains available when the next computation needs it?"}</strong>{""}</Prose>
 
@@ -39,9 +41,11 @@ export default {
 
 <ul><li>{""}<strong>{"Keep separate records."}</strong>{" The next question can consult different earlier positions separately. A bounded collection of such stored representations is often called a "}<strong>{"cache"}</strong>{"."}</li><li>{""}<strong>{"Update a summary."}</strong>{" Each new input modifies the same fixed-size list of numbers. This repeatedly updated list is the "}<strong>{"recurrent state"}</strong>{". A sum and a count are a simple hand-designed example; a neural state learns what to track."}</li><li>{""}<strong>{"Make a small set of working notes."}</strong>{" Keep the large input available, but collect selected information into a few working vectors. These are "}<strong>{"latents"}</strong>{": internal representations inferred for the task. A collection of them is a latent array. Further computation happens among those vectors, and they may consult the original input again."}</li></ul>
 
-<Prose>{"The figure below follows the same five inputs. In the middle arrangement, watch the state being updated: there is no separate slot from which to retrieve input 0. On the right, notice that the input bank remains available outside the smaller workspace. A latent bottleneck therefore differs from a stream that has already discarded its old inputs."}</Prose>
+<Prose>What must the next question still be able to address? Replace the message stream with five scalar records [6,1,8,2,0], so we can see exactly what is stored. The same values appear in all three arrangements.</Prose>
 
-<MemoryWorkspacesFigure />
+<LongMemoryObjectsDrawing />
+
+<Prose>{"The drawing above follows the same five inputs. In the middle arrangement, watch the state being updated: there is no separate slot from which to retrieve input 0. On the right, notice that the input bank remains available outside the smaller workspace. A latent bottleneck therefore differs from a stream that has already discarded its old inputs."}</Prose>
 
 <H3>{"“Long context” can mean four different things"}</H3>
 
@@ -59,9 +63,9 @@ export default {
 
 <Prose>{"Attention produces a task-dependent weighted mixture. For the entrance question, the current computation should give more weight to an entrance-related record than to a lunch announcement. The comparison part of a record is its "}<strong>{"key"}</strong>{"; the information it contributes is its "}<strong>{"value"}</strong>{". The request is the "}<strong>{"query"}</strong>{". Separate those roles: a record can be easy to match while carrying a small value, or hard to match while carrying a large one."}</Prose>
 
-<Prose>{"For a calculation you can follow exactly, replace word features with three scalar readings: 2, 4 and 8. Suppose the query assigns their keys relative supports of 2, 1 and 3. There are six units of support in total. The first reading receives 2/6 of the mixture, the second 1/6 and the third 3/6. Multiply each value by its share and add: (2×2 + 1×4 + 3×8)/6 = 32/6, about 5.333. Larger support means more influence on this read, not a claim that the source is more factually reliable."}</Prose>
+<LongWeightedDrawing />
 
-<WeightedReadSharesFigure />
+<Prose>{"For a calculation you can follow exactly, replace word features with three scalar readings: 2, 4 and 8. Suppose the query assigns their keys relative supports of 2, 1 and 3. There are six units of support in total. The first reading receives 2/6 of the mixture, the second 1/6 and the third 3/6. Multiply each value by its share and add: (2×2 + 1×4 + 3×8)/6 = 32/6, about 5.333. Larger support means more influence on this read, not a claim that the source is more factually reliable."}</Prose>
 
 <Prose>{"Read the figure from the shares to the contributions. The third reading owns half the mixture, so it contributes 4 to the final answer. The first two together contribute 4/3. This is the whole weighted-read mechanism. Neural attention adds a learned way to choose those shares."}</Prose>
 
@@ -69,11 +73,17 @@ export default {
 
 <Prose>{"An attention query is a vector expressing what information is requested. A learned "}<strong>{"linear projection"}</strong>{" multiplies a representation by a weight matrix to produce its query, key or value vector. The query and each key receive a comparison score. A "}<strong>{"dot product"}</strong>{" computes that score by multiplying matching coordinates and adding them; a larger result favors that key. Softmax then turns all the allowed scores into nonnegative weights summing to one."}</Prose>
 
+<Prose>A score becomes a positive support by exponentiation, written exp(score). Each support then divides by the common total. The picture traces both inputs to every division.</Prose>
+
+<LongSoftmaxDrawing />
+
 <Prose>{"Here is the same recipe in notation, one step at a time: sⱼ is a comparison score; αⱼ is that record's share of the read; o is the resulting mixture. For one query q and available pairs (kⱼ,vⱼ):"}</Prose>
+
+<Prose>{"Here dₖ counts query/key coordinates; bⱼ optionally changes a score using position; and 𝒜 contains the positions the query may use. The square-root factor controls score scale as the number of coordinates changes. For our scalar example dₖ=1, so the factor is 1. The sum sign means “add this term for every allowed record.”"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"s_j=\\frac{q^\\top k_j}{\\sqrt{d_k}}+b_j,\n\\qquad\n\\alpha_j=\\frac{\\exp(s_j)}{\\sum_{r\\in\\mathcal A}\\exp(s_r)},\n\\qquad\no=\\sum_{j\\in\\mathcal A}\\alpha_jv_j."}</MathBlock></div>
 
-<Prose>{"Here dₖ counts query/key coordinates; bⱼ optionally changes a score using position; and 𝒜 contains the positions the query may use. The square-root factor controls score scale as the number of coordinates changes. For our scalar example dₖ=1, so the factor is 1. The sum sign means “add this term for every allowed record.”"}</Prose>
+
 
 <Prose>{"We can now generate exactly the supports in the picture. Let q=1 and use keys ln 2, 0 and ln 3 with no positional bias. The natural logarithm is the inverse of exponentiation, so exp(ln 2)=2, exp(0)=1 and exp(ln 3)=3. Softmax normalizes these supports, giving the weighted read we already calculated:"}</Prose>
 
@@ -81,13 +91,15 @@ export default {
 
 <H3>{"A forbidden record gets no share at all"}</H3>
 
+<Prose>How should a read handle a future measurement it is not allowed to know? Remove that donor before assigning shares.</Prose>
+
+<LongWeightedDrawing masked />
+
 <Prose>{"Suppose the third reading has not happened yet. A prediction made now may use 2 and 4, but cannot consult the future 8. We remove the third record before assigning shares. The remaining supports total 3; the weights become 2/3 and 1/3, and the answer is 8/3. Setting the third *value* to zero while keeping its support in the denominator would instead give 4/3. That incorrect answer shows why a "}<strong>{"mask"}</strong>{" must exclude a record from the entire read, not merely erase its visible value."}</Prose>
 
-<MaskedReadFigure />
+<LongShapeDrawing />
 
-<Prose>{"For many queries, do one such read for each request. Two questions about five records require ten comparison scores and produce two answers. In a matrix, rows simply keep those questions separate. Arrange queries as Q with shape L×dₖ, keys as K with shape N×dₖ and values as V with shape N×dᵥ. QKᵀ contains L×N scores; weighting V produces L×dᵥ outputs. "}<strong>{"The number of output positions comes from the queries."}</strong>{" The shape diagram below is bookkeeping for the individual reads you just followed, not a new operation."}</Prose>
-
-<AttentionShapesFigure />
+<Prose>{"For many queries, do one such read for each request. Two questions about five records require ten comparison scores and produce two answers. In a matrix, rows simply keep those questions separate. Arrange queries as Q with shape L×dₖ, keys as K with shape N×dₖ and values as V with shape N×dᵥ. QKᵀ contains L×N scores; weighting V produces L×dᵥ outputs. "}<strong>{"The number of output positions comes from the queries."}</strong>{" The array drawing above is bookkeeping for the individual reads you just followed, not a new operation."}</Prose>
 
 <Prose>{"For next-token prediction, the representation at position i may use inputs through i and predict token i+1. A "}<strong>{"causal mask"}</strong>{" permits j≤i. For a complete-trajectory classification task, all measured points are already available before the classification is requested, so a noncausal read is appropriate. The mask follows the task's information boundary."}</Prose>
 
@@ -105,25 +117,33 @@ export default {
 
 <Prose>{"Let the five records have values [6,1,8,2,0]. Record 0 is a strong match for our question: give it relative support 9, compared with support 1 for every other record. With scalar query 1, keys [ln 9,0,0,0,0] produce exactly those supports. This constructed example isolates access to a useful record; it is not a trained text model."}</Prose>
 
+<LongSegmentDrawing />
+
 <Prose>{"Process segments [0,1], [2,3], then [4]. Follow a cache of length 2 through the boundary. After the first segment it holds records 0 and 1. After the second, keeping only the newest two replaces them with records 2 and 3. When query 4 arrives, record 0 is gone even though it was read earlier. Cache length controls what can still be consulted directly."}</Prose>
 
 <Prose>{"At the final query, compare three memory lengths:"}</Prose>
 
-<NeuralTable caption={"3.2 Follow a complete cache example"} headers={[<>{"Retained positions before the final segment"}</>,<>{"Legal values"}</>,<>{"Output"}</>]} rows={[[<>{"None, M=0"}</>,<>{"Current value 0"}</>,<>{"0"}</>],[<>{"Positions 2 and 3, M=2"}</>,<>{"8, 2, 0 with equal weights"}</>,<>{"10/3"}</>],[<>{"Positions 0–3, M=4"}</>,<>{"6, 1, 8, 2, 0 with weights proportional to 9,1,1,1,1"}</>,<>{"65/13=5"}</>]]} />
+<NeuralTable caption={"Final-query answers under three retained spans"} headers={[<>{"Retained positions before the final segment"}</>,<>{"Legal values"}</>,<>{"Output"}</>]} rows={[[<>{"None, M=0"}</>,<>{"Current value 0"}</>,<>{"0"}</>],[<>{"Positions 2 and 3, M=2"}</>,<>{"8, 2, 0 with equal weights"}</>,<>{"10/3"}</>],[<>{"Positions 0–3, M=4"}</>,<>{"6, 1, 8, 2, 0 with weights proportional to 9,1,1,1,1"}</>,<>{"65/13=5"}</>]]} />
 
 <Prose>{"The output is a soft combination, not a lookup returning exactly 6. The larger cache makes the strong matching key available again. With M=4, every query in this five-position example sees the same legal keys as the full causal calculation, so their outputs agree. This equality holds here because the projections and positions are fixed and every required key remains available."}</Prose>
 
 <Prose>{"The live record strip starts at the middle row of that comparison: memory length 2 and query position 4. Increase retained memory to 4. R0 becomes available, and the answer moves from 10/3 to 5. Notice that its stored value stayed 6; the change came from access and normalization. Next inspect query position 1, edit a later record's value, and observe the unchanged answer. These two edits separate missing history from correctly excluded future information."}</Prose>
 
-<MemoryCacheLab />
+<LongMemoryFlowLab />
+
+<Prose>The next question changes the stored information rather than the boundary. A key changes the score and its share; a value changes what that share returns. Edit a future record while inspecting an earlier query to check the causal rule. These controls keep the current L, M and query from the access investigation.</Prose>
+
+<LongMemoryFlowLab view="records" />
 
 <H3>{"3.3 Put the cache into a layered model"}</H3>
 
 <Prose>{"A neural "}<strong>{"layer"}</strong>{" turns input representations into new representations. A stack of layers repeats that transformation. The records entering one layer may therefore already contain information gathered by earlier layers. In Transformer-XL, an upper-layer read uses the lower layer's current representations together with retained lower-layer representations from the preceding segment."}</Prose>
 
-<Prose>{"In the diagram, first follow the solid forward path across the segment boundary. It answers “which values can the current computation use?” Then look at the stopped training path. Training can use those old values while treating their earlier creation as outside the current gradient calculation. This operation is called "}<strong>{"detaching"}</strong>{" or "}<code>{"stopgrad"}</code>{"; it changes credit assignment, not the value stored in memory. Section 8 calculates the difference explicitly."}</Prose>
+<Prose>Which layer supplies the stored rows? The scalar trace fixed its projections; Transformer-XL keeps earlier <em>lower-layer hidden vectors</em> and applies the current layer’s learned projections to them. Follow the actual row arrays across this boundary before introducing the notation.</Prose>
 
-<SegmentLayersFigure />
+<LongLowerLayerDrawing />
+
+<Prose>{"In the diagram, first follow the solid forward path across the segment boundary. It answers “which values can the current computation use?” Then look at the stopped training path. Training can use those old values while treating their earlier creation as outside the current gradient calculation. This operation is called "}<strong>{"detaching"}</strong>{" or "}<code>{"stopgrad"}</code>{"; it changes credit assignment, not the value stored in memory. Section 8 calculates the difference explicitly."}</Prose>
 
 <Prose>{"For layer ℓ in segment s, let Hₛ⁽ℓ⁻¹⁾ contain L current rows of width d and let Mₛ⁽ℓ⁻¹⁾ contain M retained rows of that same width. The following expression is just “put old and current donor rows together; ask questions only for the current rows”:"}</Prose>
 
@@ -135,21 +155,37 @@ export default {
 
 <Prose>{"A real multilayer Transformer-XL can pass older information through representations that were themselves contextualized. Its indirect dependency paths differ from a single layer's list of visible positions. With the paper's one-segment memory construction, crossing a segment boundary also moves through a layer, giving a depth-dependent receptive field. A finite network and cache do not imply unlimited exact recall."}</Prose>
 
+<Prose>What happens around the read? Attention returns an update to each current row. A <strong>residual</strong> adds that update to the original row, so a direct path remains. Row normalization recenters and rescales its feature coordinates; a feed-forward network then applies learned affine transforms with a nonlinear activation between them, independently at each position. The drawing below shows the parts; it changes a feature width inside the network without inventing extra time positions.</Prose>
+
+<LongResidualBlockDrawing />
+
+<Prose>Trace the two bypasses into their addition marks. The first carries the input row around attention; the second carries the intermediate row around its feature network. The drawn4→8→4 hidden expansion is an illustrative width, not a universal Transformer-XL setting. The classifier later uses24→48→24 and applies normalization before each update. Norm placement and actual widths belong to the model’s contract.</Prose>
+
 <H3>{"3.4 A reused position needs a coherent address"}</H3>
 
 <Prose>{"Imagine numbering positions within every segment as 0,1,2,3. A cached token from local position 1 and a new token at local position 1 now carry the same absolute-position label. Reusing those labels creates ambiguity about temporal relationships."}</Prose>
 
-<Prose>{"A relative position asks, “How far is this key from the query?” A query at global position 5 sees keys at positions 1 and 5 at distances 4 and 0. Shifting all three global positions by 100 preserves those distances. Resetting segment-local counters does not."}</Prose>
+<LongRelativeDrawing />
 
-<PositionAddressFigure />
+<Prose>The two rulers share an offset even though their absolute addresses change. Keep those addresses on the records when segments change; restarting every segment at zero confuses different locations. First try a simple preference −β times distance in the scalar read. This is a controlled recency fixture; the paper’s full score comes next.</Prose>
 
-<Prose>{"Keeping records creates a second engineering problem: how to tell the old “position 1” from the new “position 1.” The distance ruler above fixes the meaning of “four positions ago” across segment boundaries. For the first pass, this is the important idea. The exact Transformer-XL score below separates content matching from distance preferences."}</Prose>
+<LongMemoryFlowLab view="position" />
 
-<Prose>{"An attention "}<strong>{"head"}</strong>{" is one learned set of query/key/value projections; multiple heads can ask different questions. Transformer-XL uses separate content and relative-position projections. One head's score can be written"}</Prose>
+<Prose>Moving a complete record changes its location in this causal stream. Optional donor exclusions are stricter masks, and must leave at least one legal source. Add, remove or move a row here, then return to the access view to inspect its new boundary.</Prose>
 
-<div className="neural-equation"><MathBlock>{"s_{ij}=q_i^\\top k_j+q_i^\\top r_{i-j}\n+u^\\top k_j+v^\\top r_{i-j},"}</MathBlock></div>
+<LongMemoryFlowLab view="identity" />
 
-<Prose>{"with scaling applied according to the head implementation. The first term matches content; the second makes preferred distance depend on the current query; the third is a learned global content preference; the fourth is a learned global distance preference. Here r is the projected relative-position vector, and u and v are learned vectors. These v and r symbols are score parameters; vⱼ in section 2 denoted an attention value."}</Prose>
+<Prose>How can location affect a match in more than one way? Transformer-XL combines a content match with a relative-location match. In the drawing, q is the current query, k is one content key and r is the learned projection of the query-minus-key position row; u and v are shared learned vectors. Each dot product multiplies matching coordinates and sums them.</Prose>
+
+<LongRelativeScoreDrawing />
+
+<Prose>Follow the four branches: q·k asks whether this record matches the current content request; q·r lets this particular request prefer an offset; u·k is a shared content preference; v·r is a shared offset preference. Sum all four, then apply the single scale 1/√d, where d is the number of query/key coordinates. A current query can change its location preference; the scalar −β distance rule cannot express that full behavior.</Prose>
+
+<MathBlock>{String.raw`S_{ij}=\big(q_i^\top k_j+q_i^\top r_{i-j}+u^\top k_j+v^\top r_{i-j}\big)/\sqrt d.`}</MathBlock>
+
+<Prose>The relative rows are indexed by offsets, not by a donor’s segment-local slot. A relative-shift implementation rearranges the already computed offset-score grid into query/key alignment; it does not invent new content. The explicit implementation in section 7 constructs that alignment directly, making uneven final segments and global masks inspectable.</Prose>
+
+<Prose>An attention <strong>head</strong> is one learned set of query/key/value projections; several heads can ask different questions. In the four-term equation, the shared offset preference v is a learned score parameter; returned values vⱼ remain separate donor features.</Prose>
 
 <Prose>{"To separate the two distance terms, temporarily set both content keys to zero. Use a constructed one-coordinate head whose projected distance features are +1 for a near key and −1 for a far key, with global distance parameter v=0.5. This is a small numerical example of the score, not Transformer-XL's actual learned position features."}</Prose>
 
@@ -165,23 +201,27 @@ export default {
 
 <Prose>{"A cache grows by keeping more records. A recurrent model has another option: keep updating the same small workspace. Imagine tracking whether an important event occurred while many uninformative events pass by. A state value of .6 might represent the event's current influence. If each update retains only 80% of the previous state, the next value is .48—even when the new input is zero. Silence does not automatically mean “leave memory alone.”"}</Prose>
 
+<LongRetainWriteDrawing previous={.6} input={0} inputGate={1} retention={.8} simple />
+
 <Prose>{"Separate the two contributions to an update: "}<strong>{"keep some of the old state, then add some of the new signal"}</strong>{". Write the old state as hₜ₋₁, the incoming number as xₜ and the new state as hₜ. A simple update is"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"h_t=a h_{t-1}+b x_t."}</MathBlock></div>
 
 <Prose>{"Here a controls retention and b controls injection. Start from zero, set a=.8 and b=.6, and send one input of 1 followed by five zeros. The states are .6, .48, .384, .3072, .24576 and .196608. The first event is still influential, but repeated multiplication by .8 has weakened it. Unlike the cache, there is no separate old record to reopen."}</Prose>
 
-<Prose>{"Griffin uses learned controls called "}<strong>{"gates"}</strong>{" to change this behavior. An input gate controls the new signal; a recurrence gate controls how much old state survives. To distinguish them, keep the current input at zero. Closing its input gate does nothing: the new signal was already zero. Holding the old state requires changing retention instead."}</Prose>
+<Prose>{"Griffin uses learned controls called "}<strong>{"gates"}</strong>{" to change this behavior. An input gate, written i, controls the new signal; a recurrence gate controls how much old state survives. To distinguish them, keep the current input at zero. Closing its input gate does nothing: the new signal was already zero. Holding the old state requires changing retention instead."}</Prose>
 
-<SilentStepGateFigure />
-
-<Prose>{"In the figure, compare the first two rows before the third. The first two have different input-gate settings but identical output. Their shared .12 loss happened on the old-state path. That is the practical reason for having a separate recurrence gate."}</Prose>
+<LongRecurrenceFlowLab view="input" />
 
 <H3>{"4.2 How the two gates set the update"}</H3>
 
 <Prose>{"Griffin's "}<strong>{"real-gated linear recurrent unit"}</strong>{", or "}<strong>{"RG-LRU"}</strong>{", makes those gates depend on the current input. A sigmoid turns a learned score into a number between 0 and 1. A learned base a between 0 and 1 sets a coordinate's decay behavior; the recurrence gate rₜ changes its effective retention to aₜ=a^(c·rₜ). The scale c is 8 in the paper. With a=.8 and rₜ=1/8, retention is .8. As rₜ approaches zero, retention approaches 1."}</Prose>
 
 <Prose>{"The incoming multiplier is √(1−aₜ²). Thus keeping more old state also reduces the scale of the injected signal. With retention .8, that multiplier is √(.36)=.6. With retention approaching 1, it approaches zero. These are coupled choices, not two arbitrary coefficients that can both be turned up without consequence."}</Prose>
+
+<LongGateGenerationDrawing />
+
+<Prose>The gate drawing keeps input features separate from state features. The diagonal blocks mix groups of current input coordinates to produce gates; the state update itself multiplies each state coordinate independently. This differs from the hidden-state-dependent gates in the RNN lesson.</Prose>
 
 <Prose>{"We can now write the full vector update. A vector contains several state coordinates; the symbol ⊙ means multiply matching coordinates separately. σ is the sigmoid, W and b are learned gate weights and offsets, and iₜ is the input gate:"}</Prose>
 
@@ -191,29 +231,43 @@ export default {
 
 <Prose>{"Read the last line as two paths meeting: aₜ⊙hₜ₋₁ retains old state; √(1−aₜ²)⊙(iₜ⊙xₜ) admits new signal. The input gate iₜ controls only the signal inside that second path. The recurrence gate rₜ changes both retention and its normalization. This is the update in "}<a href={"https://arxiv.org/pdf/2402.19427"}>{"Griffin, section 2.4"}</a>{"."}</Prose>
 
-<Prose>{"With a=.8 and rₜ=1/8, the effective decay is .8. With rₜ near zero, aₜ approaches 1 and the injection multiplier approaches zero. The unit can preserve a state across an uninformative interval instead of repeatedly replacing it. In the exact limiting case rₜ=0, it holds the state unchanged. Finite sigmoid logits approach that endpoint but do not produce it exactly."}</Prose>
-
 <RetentionFigure />
 
 <Prose>{"Follow the two curves above through the zero-input interval. Both start at .6. Their later difference comes entirely from how much old state survives; no later event adds a signal. The plotted values come from the same recurrence as the live investigation below."}</Prose>
 
-<Prose>{""}<strong>{"Why the square root?"}</strong>{" It balances the scale of old and new contributions under a useful simplifying assumption. If hₜ₋₁ and the gated input each have variance 1 and are uncorrelated, the combined variance is aₜ²+(1−aₜ²)=1 when the coefficient is fixed. Learned, input-dependent signals need not satisfy those assumptions. This calculation explains the design rather than asserting every hidden coordinate has variance exactly one."}</Prose>
+<Prose><strong>Why couple the scale this way?</strong> More retention leaves less room for a fresh innovation. The variance calculation below makes that design precise, with assumptions rather than a promise that training preserves a unit-variance distribution.</Prose>
+
+<Prose>Under <em>fixed</em> coefficients and independent zero-mean old state and input, each with variance 1, the write path contributes (1−a²)i² to variance. The simple balance a²+(1−a²)=1 therefore applies when i=1, or when the already gated innovation is independently normalized to variance 1. Learned gates depend on the input: conditioning on their values can break independence and alter the input distribution. This is an explanatory design calculation, not a guarantee of conditional variance preservation in a trained model.</Prose>
 
 <Prose>{"For the six-step impulse above, use r₁=1/8 and r₂…r₆=.001. The final state is about .594668, close to the first state's .6. If we only set the later input gates to zero while leaving rₜ=1/8, the final state remains .196608. The inputs were already zero; stopping input admission did not stop the recurrence from decaying."}</Prose>
 
-<Prose>{"Try the live sequence in this order: compare the initial ordinary decay with “Near-hold after first event.” Then reset the recurrence before selecting “Close later input gates only.” The first edit changes the final state; the second does not. Next add a later nonzero event and adjust its input gate; now that gate has an incoming signal to control. The retained and injected terms show exactly where each change enters."}</Prose>
+<Prose>{"In the recurrence-gate investigation, select each event after the first and set r=.001. The final state approaches .594668384. Reset, then close those input gates in the earlier input investigation: with zero later inputs, that edit leaves .196608. The investigations share the same current sequence; the labelled circuit shows the selected event, not a newly initialized example."}</Prose>
 
-<RecurrentMemoryLab />
+<LongRecurrenceFlowLab view="retention" />
+
+<Prose>The gates do not specify the signal being admitted. Introduce a nonzero event or a negative event below; a negative write can cancel part of the old state. Then change the signed initial state while keeping the current event sequence. Neither state nor contribution is a probability.</Prose>
+
+<LongRecurrenceFlowLab view="write" />
+
+<LongRecurrenceFlowLab view="initial" />
+
+<Prose>Finally, change sequence order. A coefficient belongs to its event, so reverse the event and its gates together. Adding silence extends retention without adding a signal. The full table keeps every update and its remaining final contribution visible.</Prose>
+
+<LongRecurrenceFlowLab view="order" />
 
 <H3>{"4.3 Give the summary a nearby detailed view"}</H3>
 
 <Prose>{"The recurrence solves one problem—carrying an influence forward in bounded state—but its summary cannot expose every earlier record separately. Griffin combines it with "}<strong>{"local sliding-window attention"}</strong>{": a read that keeps nearby positions individually accessible. Recent exact detail and older compressed influence can therefore take different routes."}</Prose>
 
-<Prose>{"The published Griffin construction repeats two recurrent blocks followed by one local-attention block; the usual attention window in that study is 1,024 tokens. In the next figure, follow the state through time separately from the row of recent key/value records. An old event can affect the state without still occupying a directly readable attention slot."}</Prose>
+<LongGriffinHybridDrawing />
 
-<GriffinPathsFigure />
+<Prose>{"The published Griffin construction repeats two recurrent blocks followed by one local-attention block; the usual attention window in that study is 1,024 tokens. In the drawing above, follow each old state into its recurrent block and the updated state into its next-token storage, separately from the recent key/value rows. An old event can affect the state without still occupying a directly readable attention slot."}</Prose>
 
 <Prose>{"To connect this memory picture to the implementation, open one recurrent block. It projects each input into two branches. One branch first mixes a few recent timesteps with a "}<strong>{"causal depthwise temporal convolution"}</strong>{": each channel has its own short filter, which uses the present and past rather than the future. RG-LRU then carries that filtered signal through time. The other branch supplies a nonlinear gate. Multiplying the branches controls which processed features pass on; a final projection restores the model width."}</Prose>
+
+<Prose>What is inside either recurrent block? This cutaway follows one current row through the short temporal filter and RG-LRU on one branch, GELU on the other, then their product and a projected residual update. The four temporal slots belong to the convolution; they are not the local attention window.</Prose>
+
+<LongGriffinBlockDrawing />
 
 <Prose>{"Residual connections add a block's update to its incoming representation, normalization controls feature scale, and a gated feed-forward block transforms features at each position. These supporting pieces do not change which earlier records are directly stored. The "}<a href={"https://developers.googleblog.com/gemma-explained-recurrentgemma-architecture/"}>{"official RecurrentGemma walkthrough"}</a>{" illustrates how the branches and dimensions fit together. Its released model settings and Griffin's paper settings should be read separately; “local attention” does not imply one universal window size."}</Prose>
 
@@ -227,9 +281,9 @@ export default {
 
 <Prose>{"Sometimes the whole input is already available: an image, a recorded sound or a hand's measured path. There is no need to predict before its later elements arrive. The problem is the amount of computation needed to reason about the full collection repeatedly."}</Prose>
 
-<Prose>{"A tempting shortcut is to replace a path with its average coordinate. But consider five evenly spaced horizontal positions from 0 to 1. In path A, all heights are .5. In path B, the heights are [.5,.75,0,.75,.5]. Both average to (.5,.5), even though one is straight and the other changes direction. If a classifier receives only that average, the lost shape is unavailable to it."}</Prose>
-
 <PathMeanCollisionFigure />
+
+<Prose>{"A tempting shortcut is to replace a path with its average coordinate. But consider five evenly spaced horizontal positions from 0 to 1. In path A, all heights are .5. In path B, the heights are [.5,.75,0,.75,.5]. Both average to (.5,.5), even though one is straight and the other changes direction. If a classifier receives only that average, the lost shape is unavailable to it."}</Prose>
 
 <Prose>{"Look at the path before the center mark. Their centers agree; their geometries do not. This is the reason to learn several selective summaries rather than automatically average everything. It does not prove a particular learned model will succeed—we will test that question on real trajectories in section 7."}</Prose>
 
@@ -237,17 +291,23 @@ export default {
 
 <Prose>{"Perceiver makes a smaller working array of learned vectors called "}<strong>{"latents"}</strong>{". Think of each starting latent as a trainable request for information. Its initial numbers are model parameters shared across examples. After it reads an input, its updated numbers depend on that particular example. The model learns useful requests through the training task, not through hand-written names such as “find a curve.”"}</Prose>
 
+<Prose>Here K counts workspace rows in the drawings; the Perceiver papers also write this count as N. A batch of independent examples is a separate axis. None of these row counts is the number of feature coordinates inside one vector.</Prose>
+
 <Prose>{"Each latent asks a query of the original input records, using the attention operation from section 2. If there are N latent queries and T input records, there are N×T comparison scores and N resulting vectors. This is "}<strong>{"cross-attention"}</strong>{" because queries and donor records come from different arrays. The resulting latents can then attend to one another—"}<strong>{"self-attention"}</strong>{" within that N-row workspace—using N×N comparisons."}</Prose>
 
-<Prose>{"The next figure shows two different activities. Follow a read from the input bank into the workspace; then follow processing among the workspace vectors. The large input bank stays available. After working with the first read, updated latents can ask it another, better-informed question."}</Prose>
+<LongLatentProcessDrawing />
 
-<PerceiverReadFigure />
+<Prose>{"The drawing above shows two different activities. Follow a read from the input bank into the workspace; then follow processing among the workspace vectors. The large input bank stays available. After working with the first read, updated latents can ask it another, better-informed question."}</Prose>
 
 <Prose>{"Thus Perceiver has two kinds of depth: processing the current latents and rereading the original input. It often chooses N much smaller than T, so most deep processing happens in the smaller array. Sharing weights across repeated blocks reduces parameter duplication while still doing another computation with updated data. These choices are described in "}<a href={"https://proceedings.mlr.press/v139/jaegle21a/jaegle21a.pdf"}>{"Perceiver, section 3.1"}</a>{". They change the computation performed; they do not promise to reproduce the output of full input-to-input attention."}</Prose>
 
 <H3>{"5.3 Calculate two different summaries"}</H3>
 
 <Prose>{"Use three records tagged earlier, middle and later, with numerical position keys [−1,0,1] and values [2,6,10]. Give the first read a preference for earlier positions: relative supports 4:2:1. Give the second the opposite preference, 1:2:4. Each has seven shares in total. Their weighted summaries are"}</Prose>
+
+<LongLatentArraysDrawing />
+
+<Prose>The two question rows generate two complete weight rows. Multiply each by the same three values; the returned object has two rows, one per question. Here each returned row has a single coordinate so every contribution fits a hand calculation.</Prose>
 
 <div className="neural-equation"><MathBlock>{"z_1=(4\\cdot2+2\\cdot6+1\\cdot10)/7=30/7,\n\\quad\nz_2=(1\\cdot2+2\\cdot6+4\\cdot10)/7=54/7."}</MathBlock></div>
 
@@ -257,9 +317,17 @@ export default {
 
 <Prose>{"A uniform query gives the mean 6 for both [2,6,10] and [0,6,12]. If a later computation receives only that single mean, it cannot distinguish those two inputs. Once the inputs have collapsed to an identical representation, any deterministic downstream function must give them the same output. This is a concrete bottleneck failure, not a claim that every one-latent nonlinear model is exactly a mean."}</Prose>
 
-<Prose>{"Start the live workspace at its default opposite queries and inspect which end of the input each read emphasizes. Select “Use one uniform query” and compare the two displayed input fixtures. Their identical summaries expose the lost distinction. “Reset latents” restores the opposite queries; the arrays now give different representations. Adding workspace capacity is useful when it preserves information the task needs; the count alone is not a guarantee."}</Prose>
+<Prose>{"Change either of the two query rows and follow its weights and answer. In the later capacity investigation, use one uniform query to expose the collision, then reset the tagged fixture to restore opposite queries. All the query, value and tag investigations below share their current records. Adding rows helps only when their computed representation preserves distinctions the task needs."}</Prose>
 
-<LatentWorkspaceLab />
+<LongLatentFlowLab />
+
+<Prose>Now keep those question rows and change a record’s returned value. Array B starts at [0,6,12], which collides with A under a uniform query but differs under selective reads. Changing a value keeps its key fixed; changing a tag in the next section changes its share as well.</Prose>
+
+<LongLatentFlowLab view="records" />
+
+<Prose>A workspace may need more than one useful request. Add or remove a query row below, or choose the explicitly uniform one-row comparison. This changes the constructed read fixture, rather than resizing an already-trained model’s parameters.</Prose>
+
+<LongLatentFlowLab view="capacity" />
 
 <H3>{"5.4 Order must travel with the record"}</H3>
 
@@ -269,19 +337,27 @@ export default {
 
 <Prose>{"Perceiver supplies position features alongside input features, commonly Fourier features for spatial or temporal coordinates. A frame with its correct timestamp may be moved to another storage row without changing its meaning. Assigning that frame another timestamp changes the input. In the trajectory program, each point carries a normalized position from −1 to 1."}</Prose>
 
-<Prose>{"A Fourier feature expands a coordinate x into sine/cosine measurements at selected frequencies: for example, [x, sin(πx), cos(πx)]. At x=0 this is [0,0,1]; at x=1/2 it is [1/2,1,0]. Adding more frequencies gives the learned projections several spatial scales to combine. The original coordinate helps distinguish positions that a periodic component alone would identify. For d coordinate dimensions and K frequency pairs per coordinate, this concatenation has d(2K+1) entries. It supplies location information; it does not change the paired-permutation argument. Our small classifier uses the raw ordinal tag alone so its input representation stays transparent."}</Prose>
+<LongTaggedDrawing />
 
-<PositionAttachmentFigure />
+<Prose>Edit a tag to change where its value belongs. The separate identity investigation moves complete tag/value rows or rotates only their values. The former preserves each association; the latter creates a different input.</Prose>
+
+<LongLatentFlowLab view="tags" />
+
+<LongLatentFlowLab view="identity" />
+
+<LongTaggedDrawing fourier />
+
+<Prose>{"A Fourier feature expands a coordinate x into sine/cosine measurements at selected frequencies: for example, [x, sin(πx), cos(πx)]. At x=0 this is [0,0,1]; at x=1/2 it is [1/2,1,0]. Adding more frequencies gives the learned projections several spatial scales to combine. The original coordinate helps distinguish positions that a periodic component alone would identify. For d coordinate dimensions and K frequency pairs per coordinate, this concatenation has d(2K+1) entries. It supplies location information; it does not change the paired-permutation argument. Our small classifier uses the raw ordinal tag alone so its input representation stays transparent."}</Prose>
 
 <H3>{"5.5 Ask for outputs at the places you need them"}</H3>
 
 <Prose>{"Our path task needs one class label. Other tasks need an answer at every location—for example, the motion of each pixel between two images. The number of answers need not equal the size of the internal workspace. "}<strong>{"Perceiver IO"}</strong>{" adds an attention read on the output side: each requested output supplies a query, and the processed latent array supplies the keys and values. Original Perceiver instead aggregated its latents for tasks such as classification."}</Prose>
 
-<Prose>{"An output query might specify a pixel coordinate, a language position or a desired modality. A coordinate alone does not determine the answer; the query asks the learned decoder to extract the relevant information from the latents. In the next diagram, count the requests, then count the returned rows. Four requests produce four answer vectors even though there are only two latent donors."}</Prose>
+<LongOutputQueriesDrawing />
+
+<Prose>{"An output query might specify a pixel coordinate, a language position or a desired modality. A coordinate alone does not determine the answer; the query asks the learned decoder to extract the relevant information from the latents. In the drawing above, count the requests, then count the returned rows. Four requests produce four answer vectors even though there are only two latent donors."}</Prose>
 
 <Prose>{"If there are O output queries, the output has O rows. For example, four output-coordinate queries can request four motion vectors from the same two latent vectors. The output size is independent of the number of input rows and of the chosen number of latents. What can be accurately reconstructed still depends on the information those latents retained. "}<a href={"https://arxiv.org/pdf/2107.14795"}>{"Perceiver IO, sections 3.1–3.2"}</a>{"."}</Prose>
-
-<OutputQueriesFigure />
 
 <Prose>{"The interesting connection is that attention becomes an "}<strong>{"interface between array sizes"}</strong>{", not only a way to relate words. Input queries move information into a working representation; output queries specify what information to read from it. The later cross-attention-architectures lesson uses this perspective to connect modalities and pretrained systems."}</Prose>
 
@@ -293,11 +369,15 @@ export default {
 
 <Prose>{""}<strong>{"Perceiver AR"}</strong>{" aligns a smaller number of latents with selected final input positions. A latent corresponding to input position i may cross-attend only to positions j≤i; it predicts token i+1. Latent self-attention also uses the causal order. Both stages must preserve the information boundary."}</Prose>
 
+<LongCausalFlowLab />
+
 <Prose>{"For input positions 0,1,2,3,4, take latents aligned with positions 3 and 4. The first may read inputs 0–3 and predict token 4. The second may read inputs 0–4 and predict token 5. During latent self-attention, the first latent cannot read the second: that second latent has already seen input 4, which is the first latent's target."}</Prose>
 
-<Prose>{"In the first table below, check each latent against the inputs it is allowed to know. Then inspect the second table: the earlier latent must also be prevented from consulting the later one. Trace the displayed detour from input 4 to see why two individually plausible attention stages need coordinated masks."}</Prose>
+<Prose>{"In the cross-read grid above, check each latent against the inputs it is allowed to know. Then inspect the latent-to-latent route: the earlier latent must also be prevented from consulting the later one. Trace the displayed detour from input 4 to see why two individually plausible attention stages need coordinated masks."}</Prose>
 
-<CausalLatentsFigure />
+<Prose>The playable example uses uniform scores to isolate information access. The earlier anchor’s legal mean is 1.5; the later anchor’s mean is 2 with future value 4. If later-to-earlier mixing is opened, the earlier result becomes 1.75 even though its own cross-read mask is correct. Changing input 4 then reveals the indirect leak.</Prose>
+
+<Prose><strong>Deeper: what can an autoregressive cache remember indirectly?</strong> Perceiver AR’s Appendix E.3 notes that a reused latent may have absorbed input from a much earlier active bank. When it enters a newer latent, its influence can outlive the current direct window. Repeated activation reuse can therefore create a train/inference reach mismatch. The authors’ strategy periodically recomputes a reduced latent buffer from the active input, then grows it again. This is distinct from caching fixed input K/V and from changing the number of learned rows in our fitted classifier.</Prose>
 
 <Prose>{"The "}<a href={"https://icml.cc/media/icml-2022/Slides/17886.pdf"}>{"authors' ICML presentation slides, pages 3–10"}</a>{" build this input/query/target alignment incrementally. The "}<a href={"https://proceedings.mlr.press/v162/hawthorne22a/hawthorne22a.pdf"}>{"Perceiver AR paper"}</a>{" describes the architecture and training/inference choices. A latent bottleneck does not make every Perceiver variant a streaming recurrent model: retaining or rereading a long input and updating a fixed recurrent state are different execution contracts."}</Prose>
 
@@ -315,7 +395,7 @@ export default {
 
 <CodeBlock language={"text"}>{"python -m venv .venv\npython -m pip install numpy\npython sequence_mechanisms.py"}</CodeBlock>
 
-<Prose>{"Activate that environment before the "}<code>{"python -m pip"}</code>{" command, or use its Python executable explicitly. On Windows the executable is "}<code>{".venv\\Scripts\\python.exe"}</code>{"; on macOS/Linux it is "}<code>{".venv/bin/python"}</code>{". The author run used Python 3.12.14 and NumPy 2.3.5. The script writes "}<code>{"checked-results.json"}</code>{" beside itself."}</Prose>
+<Prose>{"Activate that environment before the "}<code>{"python -m pip"}</code>{" command, or use its Python executable explicitly. On Windows the executable is "}<code>{".venv\\Scripts\\python.exe"}</code>{"; on macOS/Linux it is "}<code>{".venv/bin/python"}</code>{". The numerical examples were checked with Python 3.12.14 and NumPy 2.3.5. The script writes "}<code>{"checked-results.json"}</code>{" beside itself."}</Prose>
 
 <Prose>{"Read the following code as five actions: compare every query with the keys; exclude forbidden records; exponentiate stable scores; divide by the total support; mix the values. The "}<code>{"@"}</code>{" operator performs matrix multiplication, and "}<code>{".T"}</code>{" swaps a matrix's rows and columns. Each row stays one question throughout:"}</Prose>
 
@@ -339,6 +419,8 @@ export default {
 
 <Prose>{"To make the experiment meaningful, give each trajectory one job. "}<strong>{"Fit"}</strong>{" rows change the model's parameters. "}<strong>{"Validation"}</strong>{" rows help choose when to stop fitting. "}<strong>{"Test"}</strong>{" rows assess the resulting choice after those decisions. A copy of the same path must not appear on both sides of that assessment; otherwise apparent recognition could partly be repetition."}</Prose>
 
+<LongSplitDrawing />
+
 <Prose>{"Before splitting, we found thirty duplicate copies of trajectories, all with matching labels. Keeping the first occurrence of each exact coordinate sequence leaves 330 distinct trajectories. Within each class, a fixed NumPy seed of 73 determines a permutation. Reserve the last four trajectories for test; use the first two-thirds, rounded down, for fitting and the rest for validation. This gives "}<strong>{"220 fit, 50 validation and 60 test trajectories"}</strong>{", with no exact coordinate sequence crossing roles. Because rows lack performer/session identifiers, this experiment cannot establish performance on a new performer or recording session."}</Prose>
 
 <Prose>{"These forty-five-point sequences are a practical CPU exercise in latent sequence processing. They let us inspect learned reads and compare ways of preserving shape. They do not measure long-context language-model performance."}</Prose>
@@ -355,9 +437,13 @@ export default {
 
 <Prose>{""}<strong>{"Then learn which information to gather."}</strong>{" The latent model appends an ordinal tag running from −1 to 1 to each coordinate pair. Each of the forty-five rows now has three numbers: x, y and order. A learned projection turns each row into 24 features. N learned latent vectors read those features, interact with each other and pass through a feed-forward block. The model repeats that read/process step once with shared weights, averages the final latents and produces fifteen "}<strong>{"logits"}</strong>{"—unrestricted numerical scores, one for each class. Softmax converts them into class probabilities. We compare N=1 and N=4 under the same protocol."}</Prose>
 
+<LongTrajectoryArchitectureDrawing />
+
 <Prose>{"Read the diagram from measured geometry to model features. The ordinal tag tells the model where a point belongs in the movement; it is neither another spatial coordinate nor a measurement of elapsed seconds. Count rows at each transition: forty-five input rows can feed one or four latents while the answer still has fifteen class scores."}</Prose>
 
-<TrajectoryArchitectureFigure />
+<Prose>Inside each processing round, follow the three full-array bypasses and the normalization feeding each update.</Prose>
+
+<LongClassifierRoundDrawing />
 
 <Prose>{"The central loop follows that diagram. "}<code>{"cross"}</code>{" reads input records; "}<code>{"self_attention"}</code>{" lets the working vectors exchange information; "}<code>{"feedforward"}</code>{" transforms each working vector's features. Each "}<code>{"latent + update"}</code>{" is a residual update, preserving a path for the current representation while adding new information:"}</Prose>
 
@@ -373,17 +459,21 @@ export default {
 
 <Prose>{"Train for eighty full-batch epochs with Adam at learning rate .005. Each run retains the epoch with lowest validation cross-entropy. Latent counts 1 and 4, seeds 11 and 29 and the training settings are declared before interpreting test results. Evaluate each selected checkpoint on test only after its validation-based selection."}</Prose>
 
-<NeuralTable caption={"7.2 A complete trainable latent classifier"} headers={[<>{"Model"}</>,<>{"Seed"}</>,<>{"Stored parameters"}</>,<>{"Selected epoch"}</>,<>{"Fit errors /220"}</>,<>{"Validation errors /50"}</>,<>{"Test errors /60"}</>]} rows={[[<>{"Mean coordinates + logistic"}</>,<>{"—"}</>,<>{"45"}</>,<>{"—"}</>,<>{"183"}</>,<>{"45"}</>,<>{"54"}</>],[<>{"Ordered coordinates + logistic"}</>,<>{"—"}</>,<>{"1,365"}</>,<>{"—"}</>,<>{"35"}</>,<>{"17"}</>,<>{"22"}</>],[<>{"One latent"}</>,<>{"11"}</>,<>{"7,815"}</>,<>{"80"}</>,<>{"95"}</>,<>{"36"}</>,<>{"32"}</>],[<>{"One latent"}</>,<>{"29"}</>,<>{"7,815"}</>,<>{"68"}</>,<>{"67"}</>,<>{"24"}</>,<>{"25"}</>],[<>{"Four latents"}</>,<>{"11"}</>,<>{"7,887"}</>,<>{"75"}</>,<>{"68"}</>,<>{"29"}</>,<>{"28"}</>],[<>{"Four latents"}</>,<>{"29"}</>,<>{"7,887"}</>,<>{"72"}</>,<>{"90"}</>,<>{"30"}</>,<>{"34"}</>]]} />
+<Prose>What did the selected checkpoints actually achieve? Compare all six recorded outcomes on the same declared roles; lower marks mean fewer errors, with separate denominators.</Prose>
+
+<TrajectoryEvidenceFigure />
+
+<NeuralTable caption={"All six selected results on the same data roles"} headers={[<>{"Model"}</>,<>{"Seed"}</>,<>{"Stored parameters"}</>,<>{"Selected epoch"}</>,<>{"Fit errors /220"}</>,<>{"Validation errors /50"}</>,<>{"Test errors /60"}</>]} rows={[[<>{"Mean coordinates + logistic"}</>,<>{"—"}</>,<>{"45"}</>,<>{"—"}</>,<>{"183"}</>,<>{"45"}</>,<>{"54"}</>],[<>{"Ordered coordinates + logistic"}</>,<>{"—"}</>,<>{"1,365"}</>,<>{"—"}</>,<>{"35"}</>,<>{"17"}</>,<>{"22"}</>],[<>{"One latent"}</>,<>{"11"}</>,<>{"7,815"}</>,<>{"80"}</>,<>{"95"}</>,<>{"36"}</>,<>{"32"}</>],[<>{"One latent"}</>,<>{"29"}</>,<>{"7,815"}</>,<>{"68"}</>,<>{"67"}</>,<>{"24"}</>,<>{"25"}</>],[<>{"Four latents"}</>,<>{"11"}</>,<>{"7,887"}</>,<>{"75"}</>,<>{"68"}</>,<>{"29"}</>,<>{"28"}</>],[<>{"Four latents"}</>,<>{"29"}</>,<>{"7,887"}</>,<>{"72"}</>,<>{"90"}</>,<>{"30"}</>,<>{"34"}</>]]} />
 
 <Prose>{"The mean baseline makes 54/60 errors: knowing a path's center is a poor substitute for its shape. The ordered linear model makes 22/60 errors, about 36.7%, and outperforms all four small latent runs here. The latent models improve on the mean baseline, but their 25–34 test errors show that having learnable selective reads is not enough to make fitting reliable on this small sample. Four latents do not consistently beat one."}</Prose>
 
 <Prose>{"This comparison is useful precisely because it separates representational possibility from achieved performance. The models are not parameter-matched; the simple ordered baseline has a helpful representation supplied directly. Two seeds show sensitivity in these runs, not a confidence interval or a universal architecture ranking. No setting was changed after seeing these outcomes."}</Prose>
 
-<TrajectoryEvidenceFigure />
-
 <Prose>{"The error plot makes two comparisons visible: changing the representation from center to ordered coordinates, and changing the latent model's seed or capacity. Read lower marks as fewer mistakes, using the printed denominators to distinguish validation from test. The disagreement among runs is part of the result."}</Prose>
 
 <Prose>{"The live workbench below uses a "}<strong>{"frozen"}</strong>{" fitted model: changing a point recomputes its output immediately, but does not retrain it. Begin with a full validation path and inspect its shape. Select a point, move it, and compare the path, class probabilities and selected latent's read weights. A large read weight means the point contributes strongly to that particular read; it is not proof that the point caused the final class decision on its own."}</Prose>
+
+<LongMeasuredHistory />
 
 <LongContextTrajectoryLab />
 
@@ -429,6 +519,22 @@ export default {
 
 </details>
 
+<H3>7.4 Own the relative read, reset rule and trainable recurrence</H3>
+
+<Prose>The original bridge caches already projected K/V. The next program implements the different lower-layer hidden-memory route drawn in section 3. Its <code>RelativeMemoryAttention.forward</code> joins detached old rows with current rows, then applies current Q/K/V and relative projections. It constructs all four score terms, masks global causal and document boundaries, computes each weight row and returns bounded detached hidden memory. Capacity 0 uses an empty slice; <code>-0</code> would mistakenly retain everything.</Prose>
+
+<Prose>The indexed route independently constructs every scalar score and value sum. The ordinary SDPA route passes the content dot product to PyTorch and adds the other three terms as an <em>already scaled</em> bias. SDPA applies 1/√d to its own content product, so scaling the bias a second time changes the operator. Boolean masks mean allowed here; dropout is 0 for this comparison. Every query must retain a legal source.</Prose>
+
+<Prose><code>InputGatedRecurrence</code> owns block-diagonal learned gate weights and both biases, stable log decay, <code>-expm1</code> injection and the nonzero incoming state. A document reset both suppresses the incoming state and sets injection scale to 1. Half-precision inputs accumulate state in float32. The ordinary differentiable square root has its mathematical backward; DeepMind’s released kernel caps an extreme square-root derivative at 1000. The explicit optional CappedSqrt implements that same forward value and slope cap; choose capped_backward=True when that training contract is required. The native RecurrentGemma package was not executed for this supplement.</Prose>
+
+<Prose>Read the gate contraction as input-coordinate i times W[i,j], summed over i, producing output-coordinate j. The independent indexed route calculates those same entries separately. The executable checks compare all current-input, nonzero-state, gate-weight, both-bias and decay gradients, then compare uneven chunks 3+3+1. A reset null checks that earlier inputs and old state cannot influence the suffix. The relative head also checks all projection/preference gradients, absence of gradient into stored past creation, global-shift invariance and future exclusion.</Prose>
+
+<CodeBlock language="text">{'python -m pip install torch\npython explicit-memory-operators.py'}</CodeBlock>
+
+<LongContextProgram file="explicit-memory-operators.py" title="Transparent relative hidden-memory attention and learned recurrent operator" />
+
+<Prose>The small <code>output_queries</code> calculation owns the Perceiver IO output read; <code>causal_latent_masks</code> owns both AR information boundaries. Together with the complete trainable classifier above, these programs expose the operators rather than replacing them with unexplained architecture imports. A full pretrained LM additionally needs tokenization, many blocks, a task head, fitting and a validated cache lifecycle.</Prose>
+
 <H2>{"8. Deeper: gradients, budgets and a useful evaluation plan"}</H2>
 
 <Prose>{"This section is a deeper route. It makes the architectures' costs and training boundaries precise after their forward mechanisms are familiar."}</Prose>
@@ -437,9 +543,9 @@ export default {
 
 <Prose>{"A detached cache illustrates two different graphs: the graph of values used in a prediction, and the graph followed by differentiation. Transformer-XL keeps an old representation in the value graph while cutting its backward connection to its earlier computation. Replacing the cache by zero changes the forward computation; detaching it does not change its forward numbers."}</Prose>
 
-<Prose>{"For a scalar example, let old state m=2w and current prediction y=w·stopgrad(m). At w=3, m=6 and y=18. The detached derivative with respect to the current w is 6. If we differentiate through the original m=2w as well, y=2w² has derivative 12. This difference explains truncated credit assignment. It does not imply the old state was ignored."}</Prose>
+<LongDetachDrawing />
 
-<DetachedMemoryFigure />
+<Prose>{"For a scalar example, let old state m=2w and current prediction y=w·stopgrad(m). At w=3, m=6 and y=18. The detached derivative with respect to the current w is 6. If we differentiate through the original m=2w as well, y=2w² has derivative 12. This difference explains truncated credit assignment. It does not imply the old state was ignored."}</Prose>
 
 <Prose>{"The same distinction matters for recurrent training. Constant inference state does not mean backpropagation stores a constant number of intermediate activations. Training may retain a sequence, recompute activations, use checkpointing or use a specialized scan. State-space and sequence-parallel lessons develop those choices."}</Prose>
 
@@ -453,9 +559,11 @@ export default {
 
 <Prose>{"If there are R separate input reads, count R·TN, not just TN. If N grows proportionally to T, the bottleneck no longer gives linear input scaling under fixed depth. The recurrent scalar/vector update is linear in sequence length for fixed state width; obtaining its input projections is additional work."}</Prose>
 
-<Prose>{"For T=4,096, a dense T×T score array contains 16,777,216 cells. With L=256 and M=128, the rectangular per-segment upper count is 16·256·384=1,572,864 cells across the sequence. Window W=128 gives at most 524,288 score slots. One read to N=32 latents plus eight latent layers gives 4,096·32+8·32²=139,264 cells. These are algebraic score counts under the stated model, not GPU timings or exact complete-model FLOPs."}</Prose>
+<LongBudgetArraysDrawing />
 
 <MemoryBudgetsFigure />
+
+<Prose>{"For T=4,096, a dense T×T score array contains 16,777,216 cells. With L=256 and M=128, the rectangular per-segment upper count is 16·256·384=1,572,864 cells across the sequence. Window W=128 gives at most 524,288 score slots. One read to N=32 latents plus eight latent layers gives 4,096·32+8·32²=139,264 cells. These are algebraic score counts under the stated model, not GPU timings or exact complete-model FLOPs."}</Prose>
 
 <Prose>{"Attention computation and persistent key/value cache size have different growth. A full multi-head KV cache for one layer, T positions, total key/value width d and b bytes per stored element uses 2Tdb bytes. With T=4,096, d=64 and b=2, that is 1,048,576 bytes, or 1 MiB. Restricting the retained window to 128 positions gives 32,768 bytes, or 32 KiB. The cache grows linearly with T; the straightforward attention score matrix has quadratic cells. Fused attention can avoid materializing that entire matrix without changing which pairs the operator compares."}</Prose>
 
@@ -463,7 +571,13 @@ export default {
 
 <H3>{"8.3 Linear recurrences can have parallel training algorithms"}</H3>
 
-<Prose>{"An update can be understood as an instruction such as “multiply the current state by .5, then add 2.” Follow it with “multiply by .8, then add 1.” Together they mean “multiply by .4, then add 2.6.” Combining the instructions first gives the same result for every starting state. That ability to combine updates is the entry point to parallel recurrence algorithms."}</Prose>
+
+
+<Prose>Can we combine update instructions before applying them to the state? The picture groups the same three time-ordered affine maps in two ways.</Prose>
+
+<LongAffineDrawing />
+
+<Prose>{"An update can be understood as an instruction such as “multiply the current state by .5, then add 1.” Follow it with “multiply by .4, then add 2.” Together they mean “multiply by .2, then add 2.4.” The pictured third update multiplies by .4 and adds 1.56, so all three together mean “multiply by .08, then add 2.52.” Combining the instructions first gives the same result for every starting state. That ability to combine updates is the entry point to parallel recurrence algorithms."}</Prose>
 
 <Prose>{"For input-dependent coefficients already computed from the input, a recurrent step is an affine map h↦a⊙h+b. Two steps compose to"}</Prose>
 
@@ -471,9 +585,43 @@ export default {
 
 <Prose>{"Composition is associative. Therefore a parallel prefix algorithm can combine these maps in a tree rather than evaluating every dependency with a serial host-language loop. This preserves the mathematical recurrence, with ordinary floating-point-order differences. It is different from making the gates depend on the previous hidden state, which would prevent precomputing those affine maps in the same way. The next state-space lesson will use this distinction repeatedly."}</Prose>
 
-<AffineScanFigure />
+<H3>8.4 Adapt position rules without confusing a longer address range with better reasoning</H3>
 
-<H3>{"8.4 Evaluate the information claim, not just input acceptance"}</H3>
+<Prose>The segment diagrams kept global addresses coherent. Rotary position encoding carries an address differently: rotate each pair of query/key coordinates by an angle determined by its position. Locally, a pair (a,b) rotated by angle φ becomes (a cosφ−b sinφ, a sinφ+b cosφ). The later Positional Encodings lesson explains and implements this complete operation; we reuse its exact frequency and rotation file here rather than defining another convention.</Prose>
+
+<LongPositionPolicyDrawing />
+
+<Prose>In the drawing each pair has its own frequency θ, in radians per position. With width 4 and base 10000, frequencies are [1,.01]. A per-pair extension factor f divides that frequency. LongRoPE also permits an unscaled initial prefix: positions n below its threshold use nθ, while later positions use nθ/f. This is a real per-position branch, not one global frequency vector. For factors [2,4] and prefix threshold 3, position 2 has angles [2,.02]; position 4 has angles [2,.01]. Equal first-pair angles at these two different positions expose why a policy must be assessed on actual model behavior.</Prose>
+
+<LongPositionPolicyFlowLab />
+
+<Prose><strong>How are useful factors chosen?</strong> A search evaluates candidate factor arrays on fixed model/data tokens, keeps the candidates with lowest measured loss, then mutates and crosses them to create the next population. A paper’s evolutionary search is an optimization procedure over a real objective, not a list of aesthetically pleasing factors. Changing the factors changes positional matches; it does not by itself prove that a model can use distant evidence.</Prose>
+
+<LongSearchDrawing />
+
+<Prose>Our complete adaptation program imports the earlier <code>original_frequencies</code>, <code>longrope_frequencies</code> and <code>rotate_adjacent</code> operators. It adds the explicit prefix branch, seeded mutation/crossover/selection and a token-loss adapter. Its executable demonstration uses a clearly labelled synthetic objective to test the algorithm, replay and domain contracts. It performs no language-model evaluation and reports no perplexity. Replace that callback with a real fixed checkpoint/tokenizer/dataset protocol and save those identities before reporting quality.</Prose>
+
+<CodeBlock language="text">{'python -m pip install numpy torch transformers==5.17.0\npython context-adaptation.py'}</CodeBlock>
+
+<LongContextProgram file="context-adaptation.py" title="Per-position rotary policy and explicit objective-driven search" />
+
+<Prose>Keep <code>rotary-frequency-rules.py</code> in the sibling Positional Encodings directory, or pass its exact path to <code>load_frequency_operators</code>. That dependency defines adjacent-pair layout and pinned library conventions. The factors here are positive; an optional monotone-factor constraint matches a search choice, not a mathematical requirement of rotation. Prefix exceptions can break a single global relative-offset identity, so test actual query/key positions across the boundary.</Prose>
+
+<Prose>What changes after a position policy has been selected? Adapt the learned model on training examples, choose settings using separate validation examples, then freeze the checkpoint for short and long assessments. Mixed-length training can keep original position rules for short examples while applying the extended rules to long examples.</Prose>
+
+<LongAdaptationWorkflowDrawing />
+
+<Prose><strong>Research progression.</strong> LongRoPE’s original study searches at intermediate lengths, fine-tunes progressively, searches again for still longer lengths and separately recovers shorter-context behavior. Its published LLaMA2 protocol used searches around 128k/256k and staged 400+600 training steps before the 2M search; those are historical study settings, not results of our CPU demonstration. LongRoPE2 uses needle-focused loss to make rare distant evidence matter in selection and mixes original short-context and extended long-context policies during training. Short documents still need their document boundaries protected. Needle retrieval, general long-document loss and short-context regression remain separate outcomes.</Prose>
+
+<Prose>How do short documents remain separate when examples share storage? Associate every token with its document ID. A token may read a donor only if the IDs agree and the donor is not in its future.</Prose>
+
+<LongDocumentMaskDrawing />
+
+<Prose>In the permission grid, B0 is later in storage than A1, but they belong to different documents, so that connection stays blocked. The explicit relative-memory code uses the same document-equality condition. Selecting which token losses to average is a separate choice: needle-focused search marks eligible target positions, whereas a document mask protects what their forward computation can know. Neither changes the vocabulary support by itself.</Prose>
+
+<Prose>The official LongRoPE release exposes evolutionary search rather than the full training workflow. Inspect the actual command before using it: the inspected example’s target is 32×1024 although its surrounding README describes a 128k search. Model weights, attention kernels, GPU capacity and tokenized evaluation records determine whether that script runs; our small rotation calculation does not substitute for them.</Prose>
+
+<H3>{"8.5 Evaluate the information claim, not just input acceptance"}</H3>
 
 <Prose>{"For the document task, construct examples with the queried fact at several distances, distractors with similar wording and multiple independent facts. Hold the question and answer format fixed. Compare short recent context, the intended long-context method, and an explicit retrieval baseline that supplies the relevant passage. Track accuracy by distance and number of competing facts, together with actual retained memory and measured latency if performance is being studied."}</Prose>
 
@@ -607,7 +755,7 @@ export default {
 
 <div className="lesson-exercise" data-lesson-exercise=""><H3>{"7. Design a meaningful trajectory ablation"}</H3>
 
-<Prose>{"Keep the supplied data roles. Compare the complete-coordinate/position permutation with a transformation that reverses the coordinate sequence but reassigns increasing positions. Predict which transformation should preserve the frozen latent model's output, then perform the comparison on one validation trajectory. Explain what a difference would establish."}</Prose>
+<Prose>{"Keep the supplied data roles. Compare the complete-coordinate/position permutation with a transformation that reverses the coordinate sequence but reassigns increasing positions. Compare which transformation should preserve the frozen latent model's output, then perform the comparison on one validation trajectory. Explain what a difference would establish."}</Prose>
 
 <details>
 
@@ -651,6 +799,12 @@ export default {
 
 <Prose>{"For a second explanation, choose the source that matches the mechanism you are trying to picture. The creator articles below offer a gentler visual route; the papers give the exact architecture. Their reported benchmarks belong to their publication settings, not a current universal ranking."}</Prose>
 
-<ul><li>{""}<a href={"https://research.google/blog/transformer-xl-unleashing-the-potential-of-attention-models/"}>{"Google Research, Transformer-XL: Unleashing the Potential of Attention Models"}</a>{", creator article. Start with its context-fragmentation example and segment-recurrence illustrations when it is unclear why a chunk boundary loses information. Then return to our five-record cache trace."}</li><li>{""}<a href={"https://arxiv.org/pdf/1901.02860"}>{"Dai and colleagues, Transformer-XL"}</a>{", research paper. Read section 3 with the segment/layer drawing beside you; appendix B is an advanced route to efficient relative-position score construction. The reported model comparisons are from the paper's 2019 setting."}</li><li>{""}<a href={"https://arxiv.org/pdf/2402.19427"}>{"De and colleagues, Griffin"}</a>{", research paper. Section 2 gives the full blocks and RG-LRU equations; appendix A discusses the gate's behavior and stable parameterization. Useful after the scalar recurrence exercise."}</li><li>{""}<a href={"https://developers.googleblog.com/en/gemma-explained-recurrentgemma-architecture/"}>{"Google Developers, RecurrentGemma architecture"}</a>{", illustrated article. A practical second tour through projections, recurrent layers and local attention. Use the paper for exact mathematical conventions and treat model-specific dimensions as the article's versioned examples."}</li><li>{""}<a href={"https://proceedings.mlr.press/v139/jaegle21a/jaegle21a.pdf"}>{"Jaegle and colleagues, Perceiver"}</a>{", canonical research paper. Section 3 explains the asymmetric read, latent processing, iterative reads and position features. Start here for the bottleneck architecture rather than an unverified implementation summary."}</li><li>{""}<a href={"https://huggingface.co/blog/perceiver"}>{"Hugging Face, Perceiver IO: a scalable, fully-attentional model that works on any modality"}</a>{", implementation-author tutorial. Its architecture illustrations and shape walkthrough help you track which array supplies queries and which supplies keys and values. The linked examples are another implementation route; they are not the program executed for this lesson's results."}</li><li>{""}<a href={"https://arxiv.org/pdf/2107.14795"}>{"Jaegle and colleagues, Perceiver IO"}</a>{", research paper. Sections 3.1–3.2 explain output queries; the optical-flow example supplies a concrete setting where the output is an array rather than one class."}</li><li>{""}<a href={"https://deepmind.google/blog/building-architectures-that-can-handle-the-worlds-data/"}>{"DeepMind, Building architectures that can handle the world's data"}</a>{", creator article with architecture illustrations and linked audiovisual demonstrations. A less algebraic route to input/latent/output roles; the demonstrations are examples from the authors' historical systems."}</li><li>{""}<a href={"https://proceedings.mlr.press/v162/hawthorne22a/hawthorne22a.pdf"}>{"Hawthorne and colleagues, Perceiver AR"}</a>{", research paper, and "}<a href={"https://icml.cc/virtual/2022/spotlight/17886"}>{"ICML 2022 spotlight with slides and a listed video"}</a>{". The inspected "}<a href={"https://icml.cc/media/icml-2022/Slides/17886.pdf"}>{"slide deck"}</a>{" builds the two causal masks step by step. The conference page lists a video; playback access was not verified for this packet. Read the slides independently of it."}</li><li>{""}<a href={"https://deepmind.google/blog/perceiver-ar-general-purpose-long-context-autoregressive-generation/"}>{"DeepMind, Perceiver AR: general-purpose, long-context autoregressive generation"}</a>{", creator explanation. Its illustrated progression from input positions to aligned latents offers another route through why a generative Perceiver needs causal information paths."}</li><li>{""}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html"}>{"PyTorch attention documentation"}</a>{", API reference for extending the explicit teaching implementation. Inspect mask semantics and dropout behavior when moving between APIs; a Boolean mask does not have the same meaning in every attention interface."}</li><li>{""}<a href={"https://archive.ics.uci.edu/dataset/181/libras%2Bmovement"}>{"UCI Libras Movement"}</a>{", original data documentation. Read the sampling, coordinate layout and recording context before modifying the real example. Attribution and the exact retained data transformation are in the supplied data record."}</li></ul></section>
-  </div>,
+<H3>Technical references</H3>
+
+<div className="lesson-resource-list"><ul><li>{""}<a href={"https://arxiv.org/pdf/1901.02860"}>{"Dai and colleagues, Transformer-XL"}</a>{", research paper. Read section 3 with the segment/layer drawing beside you; appendix B is an advanced route to efficient relative-position score construction. The reported model comparisons are from the paper's 2019 setting."}</li><li>{""}<a href={"https://arxiv.org/pdf/2402.19427"}>{"De and colleagues, Griffin"}</a>{", research paper. Section 2 gives the full blocks and RG-LRU equations; appendix A discusses the gate's behavior and stable parameterization. Useful after the scalar recurrence exercise."}</li><li>{""}<a href={"https://proceedings.mlr.press/v139/jaegle21a/jaegle21a.pdf"}>{"Jaegle and colleagues, Perceiver"}</a>{", canonical research paper. Section 3 explains the asymmetric read, latent processing, iterative reads and position features. Start here for the bottleneck architecture rather than an unverified implementation summary."}</li><li>{""}<a href={"https://arxiv.org/pdf/2107.14795"}>{"Jaegle and colleagues, Perceiver IO"}</a>{", research paper. Sections 3.1–3.2 explain output queries; the optical-flow example supplies a concrete setting where the output is an array rather than one class."}</li><li>{""}<a href={"https://proceedings.mlr.press/v162/hawthorne22a/hawthorne22a.pdf"}>{"Hawthorne and colleagues, Perceiver AR"}</a>{", research paper, and "}<a href={"https://icml.cc/virtual/2022/spotlight/17886"}>{"ICML 2022 spotlight with slides and a listed video"}</a>{". The linked "}<a href={"https://icml.cc/media/icml-2022/Slides/17886.pdf"}>{"slide deck"}</a>{" builds the two causal masks step by step. The conference page lists a video; the paper supplies the technical details if playback is unavailable. The slides are also available independently."}</li><li>{""}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html"}>{"PyTorch attention documentation"}</a>{", API reference for extending the explicit teaching implementation. Inspect mask semantics and dropout behavior when moving between APIs; a Boolean mask does not have the same meaning in every attention interface."}</li><li>{""}<a href={"https://archive.ics.uci.edu/dataset/181/libras%2Bmovement"}>{"UCI Libras Movement"}</a>{", original data documentation. Read the sampling, coordinate layout and recording context before modifying the real example. Attribution and the exact retained data transformation are in the supplied data record."}</li><li><a href="https://arxiv.org/abs/2402.13753">LongRoPE</a>, sections 3–4: dimension factors, prefix exception, progressive extension and short-context recovery; <a href="https://github.com/microsoft/LongRoPE">official search implementation</a> supplies the actual resource/API contract.</li><li><a href="https://arxiv.org/abs/2502.20082">LongRoPE2</a>, sections 2–3: needle-oriented search objective and mixed short/long policy training.</li></ul></div>
+
+<H3>Another way to learn</H3>
+
+<div className="lesson-resource-list"><ul><li>{""}<a href={"https://research.google/blog/transformer-xl-unleashing-the-potential-of-attention-models/"}>{"Google Research, Transformer-XL: Unleashing the Potential of Attention Models"}</a>{", creator article. Start with its context-fragmentation example and segment-recurrence illustrations when it is unclear why a chunk boundary loses information. Then return to our five-record cache trace."}</li><li>{""}<a href={"https://developers.googleblog.com/en/gemma-explained-recurrentgemma-architecture/"}>{"Google Developers, RecurrentGemma architecture"}</a>{", illustrated article. A practical second tour through projections, recurrent layers and local attention. Use the paper for exact mathematical conventions and treat model-specific dimensions as the article's versioned examples."}</li><li>{""}<a href={"https://huggingface.co/blog/perceiver"}>{"Hugging Face, Perceiver IO: a scalable, fully-attentional model that works on any modality"}</a>{", implementation-author tutorial. Its architecture illustrations and shape walkthrough help you track which array supplies queries and which supplies keys and values. The linked examples are another implementation route; they are not the program executed for this lesson's results."}</li><li>{""}<a href={"https://deepmind.google/blog/building-architectures-that-can-handle-the-worlds-data/"}>{"DeepMind, Building architectures that can handle the world's data"}</a>{", creator article with architecture illustrations and linked audiovisual demonstrations. A less algebraic route to input/latent/output roles; the demonstrations are examples from the authors' historical systems."}</li><li>{""}<a href={"https://deepmind.google/blog/perceiver-ar-general-purpose-long-context-autoregressive-generation/"}>{"DeepMind, Perceiver AR: general-purpose, long-context autoregressive generation"}</a>{", creator explanation. Its illustrated progression from input positions to aligned latents offers another route through why a generative Perceiver needs causal information paths."}</li><li><a href="https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html">Dive into Deep Learning: self-attention and position</a> develops the query/key/value array picture and compares interaction paths.</li><li><a href="https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf">Stanford CS224N notes</a> give another derivation of self-attention, masks and position.</li></ul></div></section>
+  </div></LongContextFlowProvider>,
 };

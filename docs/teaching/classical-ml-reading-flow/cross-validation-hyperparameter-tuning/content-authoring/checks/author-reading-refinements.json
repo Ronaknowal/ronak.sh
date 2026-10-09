@@ -1,0 +1,101 @@
+{
+  "status": "author reading in progress; no independent acceptance",
+  "changes": [
+    {
+      "file": "06-real-experiment.md",
+      "before_sha256": "c273a671b713bf417124a3173ce4d3e57fa16e0314ae56cbd414a03ad46a3b97",
+      "after_sha256": "d55ff51fbd1d3337ad3bdb449482dd54af178ac5e61271bf6bd784df7c92c010",
+      "reason": "author literal reading: picture before its dependent derivation/programme; retained scientific bytes unchanged"
+    },
+    {
+      "file": "07-risk-and-uncertainty.md",
+      "before_sha256": "3edc83e61c585033df7f2ee121810c142ace5143a100ad5b34065a01b6080d5d",
+      "after_sha256": "8683ee62ee804b6eb99231f8b509a0ccb52f40c8f74ff06e3c65887e06f01ab3",
+      "reason": "author literal reading: picture before its dependent derivation/programme; retained scientific bytes unchanged"
+    },
+    {
+      "file": "08-adaptive-search.md",
+      "before_sha256": "5e9bf46431849009f6d0ff8fd8bd8fdad4034d4c60463e76af37d58cb6b74dde",
+      "after_sha256": "dc1a22eb5efe930111c510c880b3e942681628f6b23fc5d5a6ad5791c03ff116",
+      "reason": "author literal reading: picture before its dependent derivation/programme; retained scientific bytes unchanged"
+    }
+  ],
+  "literal_text_changes": [
+    {
+      "file": "01-questions.md",
+      "old": "For a future row, draw its target as unknown until an outcome is available.",
+      "new": "The future row’s target remains unknown until an outcome is available.",
+      "reason": "Replace drawing-production instruction with learner-facing object description"
+    },
+    {
+      "file": "02-folds.md",
+      "old": "Pooled AUC also compares scores from different fitted models, creating cross-model pairs absent within each fold.",
+      "new": "Pooled area under the ROC curve (AUC), a ranking summary based on positive/negative score pairs, also compares scores from different fitted models, creating cross-model pairs absent within each fold.",
+      "reason": "Explain the acronym and local ranking operation before its caution"
+    },
+    {
+      "file": "03-information.md",
+      "old": "Inclusive availability at the decision time is an explicit convention here.",
+      "new": "Inclusive availability at the decision time is an explicit convention here. The protected target may arrive later: assessment waits for that outcome, while the prediction itself uses only information available at the decision.",
+      "reason": "Separate unknown future target from already arrived training labels"
+    },
+    {
+      "file": "06-real-experiment.md",
+      "old": "A failed cell remains failed; it is neither an accurate zero nor an invitation to average only successful folds.",
+      "new": "A failed cell remains failed; it is neither an accurate zero nor an invitation to average only successful folds. C’s supplied cost cells are known, but this selector withholds both audited means for an incomplete row; the output’s absent summaries are not zero cost or a successful score.",
+      "reason": "Align incomplete-row displayed audit with actual source and stream"
+    },
+    {
+      "file": "07-risk-and-uncertainty.md",
+      "old": "Our research read covers the retrieved July 2022 version's risk definitions and nested-MSE development, with later-version access qualified in the resources.",
+      "new": "The cited July 2022 version develops these risk definitions and the nested-MSE method; the resources identify that version and the later-version access limit.",
+      "reason": "Keep substantive source qualification without learner-facing author process"
+    },
+    {
+      "file": "08-adaptive-search.md",
+      "old": "selected selection accuracy is",
+      "new": "its selection accuracy is",
+      "reason": "Remove duplicated wording"
+    },
+    {
+      "file": "09-execution-and-reporting.md",
+      "old": "ordinary nested tuning uses O(MI+1) complete pipeline fits",
+      "new": "ordinary nested tuning uses O×(MI+1) complete pipeline fits",
+      "reason": "Distinguish outer-fold count multiplication from asymptotic big-O notation"
+    },
+    {
+      "file": "10-practice.md",
+      "old": "Freezing the previously selected candidate fails to repeat the selection operation and instead targets conditional selected-model variation.",
+      "new": "Freezing the previously selected candidate fails to repeat selection; it describes resampled refits of that fixed configuration rather than variation in the choice.",
+      "reason": "Name the computed statistic precisely without claiming a formal conditional bootstrap law"
+    },
+    {
+      "file": "10-practice.md",
+      "old": "with features and target labels available at each prediction time.",
+      "new": "with features available at prediction time and training labels available before fitting; protected outcomes can be collected later for assessment.",
+      "reason": "Do not require the future target to be known at prediction time"
+    },
+    {
+      "file": "08-adaptive-search.md",
+      "reason": "Move exact P03 source/output after D38 result walkthrough; move D40 before its schedule derivation; scientific body/streams unchanged"
+    },
+    {
+      "file": "investigation-specifications.md",
+      "old": "Show means.80/.85/incomplete, costs10/3/1, eligibleB and chosenindex1.",
+      "new": "Show mean accuracies .80/.85/incomplete and audited mean costs 10/3/absent, with C’s supplied cost cells still visible; B is eligible and chosen at index1.",
+      "reason": "Match actual incomplete-row audit, retaining known input cells"
+    }
+  ],
+  "code_refinements": [
+    {
+      "source": "bootstrap_the_whole_statistic.py",
+      "reason": "Refuse inconsistent sampling-unit identities across copies of the same source; current main stdout remains exact785690de",
+      "current_sha256": "a214cedd021304760fefd5e46c0ab5c06df83de86b274e63136a71f4302116d0"
+    },
+    {
+      "source": "resource_tournaments.py",
+      "reason": "Precompute candidate ordinal map so stated O(n_i log n_i) round sorting does not conceal repeated O(n) list.index key lookup; stdout remains exact3162d3b7",
+      "current_sha256": "abdd363cf5b7dbfb731b3155b678e47771bbe901d5ef13e793faf38c2017e1ef"
+    }
+  ]
+}

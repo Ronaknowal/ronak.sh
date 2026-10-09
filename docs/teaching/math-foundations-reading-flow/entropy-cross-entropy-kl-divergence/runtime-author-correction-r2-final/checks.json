@@ -1,0 +1,78 @@
+{
+  "checks": [
+    {
+      "name": "E08 final tree fits",
+      "pass": true
+    },
+    {
+      "name": "E09 final tree fits",
+      "pass": true
+    },
+    {
+      "name": "E10 final tree fits",
+      "pass": true
+    },
+    {
+      "name": "E21 final tree fits",
+      "pass": true
+    },
+    {
+      "name": "enlarged tree labels actual26px",
+      "pass": true
+    },
+    {
+      "name": "flow marker inset",
+      "pass": true
+    },
+    {
+      "name": "changed extreme path and finite loss",
+      "pass": true
+    },
+    {
+      "name": "exact table keyboard access",
+      "pass": true
+    },
+    {
+      "name": "cost gap nats updates",
+      "pass": true
+    },
+    {
+      "name": "zero gap exact marker",
+      "pass": true
+    },
+    {
+      "name": "768 constrained page contains",
+      "pass": true
+    },
+    {
+      "name": "390root32 page contains",
+      "pass": true
+    },
+    {
+      "name": "root restored16",
+      "pass": true
+    },
+    {
+      "name": "no pageerrors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "images": [
+    "E03-branch-390-root32",
+    "E03-copy-390-root32",
+    "E12-block-390-root32",
+    "E26-target-390-root32",
+    "E31-path-390-root32",
+    "E32-join-390-root32",
+    "E09-tree-390-root32",
+    "E42-simplex-390-root32",
+    "E21-tree-final-constrained",
+    "E30-path-final-constrained",
+    "E30-extreme-class2-constrained"
+  ],
+  "errors": [],
+  "buildBindingHash": "2ce861718af38cc0b53da5169653994d9952f2984d22199533284eb05ed5baf0",
+  "status": "PASS",
+  "scope": "Final tree label spacing and flow marker inset continuation, plus affected shared branch native inspections. Earlier159 checks apply to unchanged models/reset/cost geometry; no science rerun."
+}

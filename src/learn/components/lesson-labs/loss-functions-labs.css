@@ -1,25 +1,154 @@
-.loss-observations { display: flex; flex-wrap: wrap; gap: 8px; }
-.loss-observations button { flex: 1 1 90px; font-size: 12px; }
-.loss-observations strong { display: block; font-size: 18px; margin-top: 5px; }
-.loss-observation-locations { padding-bottom: 10px; }
-.loss-location-scale { display: flex; justify-content: space-between; margin: 18px 60px 10px 25px; font-size: 13px; }
-.loss-location-row { display: grid; grid-template-columns: 18px minmax(0, 1fr) 52px; gap: 8px; align-items: center; font-size: 13px; margin: 14px 0; }
-.loss-location-track { position: relative; height: 16px; border-bottom: 1px solid #5e7166; margin-right: 8px; }
-.loss-location-dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: #8fc9b5; top: 11px; transform: translateX(-50%); }
-.loss-location-fit { position: absolute; height: 26px; top: 3px; border-left: 2px solid #e4b752; }
-.loss-check { display: flex; gap: 10px; align-items: center; line-height: 1.7; }
-.loss-check input { width: 20px; accent-color: #e4b752; }
-.loss-confusion { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 20px 0; }
-.loss-confusion > div { padding: 12px; border: 1px solid #668678; }
-.loss-confusion strong { display: block; font-size: 26px; color: #edc566; margin-top: 8px; }
-.loss-confusion > .loss-confusion-selected { border: 2px solid #e4b752; }
-.loss-confusion-selected span { font-size: 12px; color: #f0cd7c; }
-.loss-probability-shares > div { display: grid; grid-template-columns: 120px 1fr 90px; gap: 12px; align-items: center; margin: 16px 0; }
-.loss-probability-track { height: 24px; background: #202c26; }
-.loss-probability-track span { display: block; height: 100%; }
-.loss-coordinate-board { margin: 24px 0; }
-.loss-coordinate-board .neural-chart { max-width: 380px; }
-.loss-matrix-area { display: flex; gap: 20px; align-items: flex-end; padding: 20px 0; }
-.loss-matrix-small { width: 40px; height: 40px; background: #8fc9b5; }
-.loss-matrix-large { width: 160px; height: 160px; background: #e4b752; }
-@media(max-width: 600px) { .loss-probability-shares > div { grid-template-columns: 1fr 70px; } .loss-probability-shares strong { grid-column: 1 / -1; } }
+/* Loss Functions labs and the training-loop diagram, in the reading flow. Colour tokens are
+   defined on .loss-functions-lesson in loss-intuition.css. */
+
+/* Training loop: forward stages, backward stages in reverse, update, rail back to the model. */
+.lf-value { display: inline-block; padding: .2rem .6rem; border: 1.5px solid; border-radius: 999px; font-size: .88rem; line-height: 1.45; font-variant-numeric: tabular-nums; text-align: center; }
+.lf-value-input { color: var(--lf-input); border-color: var(--lf-input); }
+.lf-value-param { color: var(--lf-param-text); border-color: var(--lf-param); }
+.lf-value-computed { color: var(--lf-computed); border-color: var(--lf-computed); }
+.lf-cycle { display: grid; grid-template-columns: 1.9rem minmax(0, 1fr); gap: .5rem; }
+.lf-rail { position: relative; border-left: 3px solid var(--lf-param); margin: 1.2rem 0 1.4rem .8rem; }
+.lf-rail-head { position: absolute; top: -.85rem; left: -.72rem; color: var(--lf-param); font-size: 1.1rem; line-height: 1; }
+.lf-rail-label { position: absolute; top: 50%; left: -.2rem; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; font-size: .75rem; color: var(--lf-param-text); background: #111; padding: 0 .3rem; }
+.lf-cycle-body { min-width: 0; }
+.lf-forward, .lf-backward { display: grid; grid-template-columns: minmax(0, 1fr) 1.3rem minmax(0, 1fr) 1.3rem minmax(0, 1fr); align-items: center; gap: .3rem; }
+.lf-stage { display: flex; flex-direction: column; align-items: center; gap: .3rem; min-width: 0; }
+.lf-stage-name { margin: 0; color: var(--lf-muted); font-size: .78rem; letter-spacing: .02em; }
+.lf-spacer { min-height: 1.9rem; }
+.lf-op { display: grid; gap: .25rem; justify-items: center; padding: .45rem .6rem; border: 2px solid var(--lf-op); border-radius: 4px; font-size: .88rem; text-align: center; overflow-wrap: break-word; }
+.lf-op > span { color: #cfcbc2; display: flex; gap: .3rem; flex-wrap: wrap; justify-content: center; }
+.lf-down { color: #bcbcbc; line-height: 1; }
+.lf-across { color: #bcbcbc; text-align: center; font-size: 1.2rem; }
+.lf-across-back { color: var(--lf-back); }
+.lf-turn { margin: .6rem 0; text-align: right; color: var(--lf-back); font-size: .86rem; }
+.lf-turn span { font-size: 1.05rem; margin-right: .3rem; }
+.lf-back-step { display: grid; gap: .25rem; padding: .5rem .6rem; border: 1.5px dashed var(--lf-back); border-radius: 4px; font-size: .86rem; min-width: 0; overflow-wrap: break-word; }
+.lf-back-step strong { color: var(--lf-back); font-variant-numeric: tabular-nums; }
+.lf-back-step span { color: #cfcbc2; }
+.lf-update-step { display: grid; gap: .4rem; padding: .5rem 0 .5rem .8rem; border-left: 3px solid var(--lf-param); font-size: .9rem; }
+.lf-update-step > span { display: flex; gap: .4rem; flex-wrap: wrap; }
+@container lf-figure (max-width: 40rem) {
+  .lf-forward { display: flex; flex-direction: column; align-items: stretch; }
+  .lf-backward { display: flex; flex-direction: column-reverse; align-items: stretch; }
+  .lf-forward > .lf-across, .lf-backward > .lf-across { transform: rotate(90deg); }
+  .lf-backward > .lf-across { transform: rotate(-90deg); }
+  .lf-spacer { display: none; }
+  .lf-turn { text-align: center; }
+}
+
+/* Regression: three rows on one fixed scale. */
+.lf-fit-rows { container: lf-figure / inline-size; }
+.lf-fit-scale { position: relative; height: 1.4rem; margin: 0 6.5rem 0 8.5rem; font-size: .8rem; color: var(--lf-muted); }
+.lf-fit-scale span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.lf-fit-scale span:last-child { transform: translateX(-80%); }
+.lf-fit-row { display: grid; grid-template-columns: 8rem minmax(0, 1fr) 6rem; gap: .5rem; align-items: center; margin: .55rem 0; }
+.lf-fit-name { font-size: .9rem; font-weight: 600; }
+.lf-fit-track { position: relative; height: 1.6rem; border-bottom: 1px solid #5d584e; }
+.lf-fit-dot { position: absolute; bottom: -.3rem; width: .6rem; height: .6rem; border-radius: 50%; background: var(--lf-input); transform: translateX(-50%); }
+.lf-fit-mark { position: absolute; top: 0; bottom: -.45rem; width: 3px; transform: translateX(-50%); }
+.lf-fit-value { font-size: .88rem; font-variant-numeric: tabular-nums; }
+.lf-readout-lines .flow-readout { margin-block: .25rem; }
+@container lf-figure (max-width: 30rem) {
+  .lf-fit-scale { margin: 0; }
+  .lf-fit-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .lf-fit-track { grid-column: 1 / -1; grid-row: 2; }
+}
+
+/* Focal: signed bars on one scale around zero. */
+.lf-signed { container: lf-figure / inline-size; }
+.lf-signed-scale { color: var(--lf-muted); font-size: .8rem; margin-bottom: 0; }
+.lf-signed-scale > div { display: flex; justify-content: space-between; gap: .5rem; }
+.lf-signed-row { display: grid; grid-template-columns: 13rem minmax(0, 1fr) 6.5rem; gap: .6rem; align-items: center; margin: .45rem 0; font-size: .9rem; }
+.lf-signed-row strong { font-variant-numeric: tabular-nums; color: var(--lf-back); text-align: right; }
+.lf-signed-track { position: relative; height: 1rem; }
+.lf-signed-zero { position: absolute; left: 50%; top: -.25rem; bottom: -.25rem; border-left: 1px solid #8a857c; }
+.lf-signed-fill { position: absolute; top: 0; bottom: 0; background: var(--lf-back); border-radius: 2px; }
+.lf-signed-net span:first-child { font-weight: 600; }
+.lf-signed-net .lf-signed-fill { background: transparent; border: 2px solid var(--lf-back); }
+@container lf-figure (max-width: 32rem) {
+  .lf-signed-scale > span { display: none; }
+  .lf-signed-scale > div { grid-column: 1 / -1; }
+  .lf-signed-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .lf-signed-track { grid-column: 1 / -1; grid-row: 2; }
+}
+
+/* Threshold strip and decisions. */
+.lf-strip { display: block; width: 100%; max-width: 40rem; height: auto; }
+.lf-strip-called { fill: rgba(228, 183, 82, .07); }
+.lf-strip-note, .lf-strip-tick { fill: #c9c5bd; font: 13px system-ui, sans-serif; }
+.lf-strip-row { fill: #ecebe6; font: 600 13px system-ui, sans-serif; }
+.lf-strip-axis { stroke: #77736a; }
+.lf-strip-threshold { stroke: #f2efe7; stroke-width: 2; stroke-dasharray: 5 4; }
+.lf-strip-dot { cursor: pointer; fill-opacity: .9; }
+.lf-strip-nine { fill: var(--lf-pos); }
+.lf-strip-other { fill: var(--lf-neg); }
+.lf-strip-selected { stroke: #fff; stroke-width: 3; }
+.lf-decision { margin-top: .6rem; }
+.lf-confusion { display: grid; gap: .25rem; font-size: .9rem; font-variant-numeric: tabular-nums; align-self: start; }
+.lf-confusion > div { display: grid; grid-template-columns: minmax(0, 6.5rem) minmax(min-content, 1fr) minmax(min-content, 1fr); gap: .5rem; padding: .3rem 0; border-bottom: 1px solid var(--lf-rule); }
+.lf-confusion [role='columnheader'], .lf-confusion [role='rowheader'] { color: var(--lf-muted); }
+.lf-cm-good { color: #ecebe6; }
+/* Readout names match their loss row colours. */
+.lesson-flow .lf-fn-mse .lf-fn-name { color: var(--lf-mse); }
+.lesson-flow .lf-fn-mae .lf-fn-name { color: var(--lf-mae); }
+.lesson-flow .lf-fn-huber .lf-fn-name { color: var(--lf-huber); }
+.lf-confusion [role='cell'] { overflow-wrap: normal; word-break: keep-all; hyphens: none; }
+.lf-cm-bad { color: var(--lf-back); }
+.lf-specimen { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: .75rem; align-items: start; }
+.lf-specimen p { margin: 0; font-size: .9rem; line-height: 1.6; }
+.lf-pixels { display: grid; grid-template-columns: repeat(8, 1fr); width: 6.5rem; aspect-ratio: 1; border: 1px solid #555; }
+.lf-pixels span { background: var(--pixel); }
+
+/* Triplet board. */
+.lf-board { display: block; width: min(100%, 27rem); height: auto; touch-action: none; }
+.lf-board-axis { stroke: #6f6a60; }
+.lf-board-tick { fill: #bdb8ad; font: 13px system-ui, sans-serif; }
+.lf-board-band { fill: none; stroke: rgba(228, 183, 82, .16); }
+.lf-board-ring { fill: none; stroke: var(--lf-pos); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.lf-board-edge { fill: none; stroke: #a59e8f; stroke-width: 1.2; stroke-dasharray: 3 4; }
+.lf-board-zone { fill: #d6d1c6; font: italic 13px system-ui, sans-serif; paint-order: stroke; stroke: #111; stroke-width: 4px; }
+.lf-board-spoke { stroke: #6b665c; stroke-dasharray: 3 4; }
+.lf-board-anchor { fill: #f2efe7; stroke: #111; stroke-width: 1.5; }
+.lf-board-positive { fill: var(--lf-pos); stroke: #111; stroke-width: 1.5; }
+.lf-board-negative { fill: var(--lf-neg); stroke: #1c2733; stroke-width: 1.5; }
+.lf-board-selected { fill: none; stroke: #fff; stroke-width: 3; }
+.lf-board-hit { fill: transparent; }
+.lf-board-handle { cursor: grab; outline: none; }
+.lf-board-handle:focus-visible .lf-board-hit { stroke: var(--flow-accent, #e4b752); stroke-width: 2; }
+.lf-board-label { font: 700 15px system-ui, sans-serif; fill: #ecebe6; paint-order: stroke; stroke: #111; stroke-width: 4px; pointer-events: none; }
+.lf-board-pull { stroke: var(--lf-pos); stroke-width: 3; }
+.lf-board-push { stroke: var(--lf-neg); stroke-width: 3; }
+.lf-board-pull-head { fill: var(--lf-pos); }
+.lf-board-push-head { fill: var(--lf-neg); }
+@media (max-width: 600px) { .lf-board-label { font-size: 18px; } .lf-board-tick, .lf-board-zone { font-size: 15px; } }
+
+/* Score-matrix sizes and reductions. */
+.lf-matrix-area { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-end; }
+.lf-matrix { border: 2px solid var(--lf-op); }
+.lf-matrix-small { width: 2.5rem; height: 2.5rem; }
+.lf-matrix-large { width: 10rem; height: 10rem; }
+.lf-tokens { display: grid; gap: .45rem; }
+.lf-tokens > div { display: grid; grid-template-columns: 11rem repeat(3, minmax(0, 1fr)); gap: .4rem; align-items: center; font-size: .88rem; }
+.lf-tokens [role='rowheader'] { color: var(--lf-muted); }
+.lf-token { display: grid; padding: .3rem .4rem; border: 1.5px solid var(--lf-computed); border-radius: 4px; color: var(--lf-computed); text-align: center; font-variant-numeric: tabular-nums; }
+.lf-token small { color: var(--lf-muted); font-size: .75rem; }
+.lf-token-pad { border-style: dashed; border-color: #6b675f; color: #8f8a80; }
+.lf-ways { list-style: none; padding: 0; margin: .9rem 0 0; display: grid; gap: .1rem; }
+.lf-ways li { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: .25rem .8rem; padding: .4rem 0; border-bottom: 1px solid var(--lf-rule); font-size: .9rem; line-height: 1.5; }
+.lf-way-value { font-variant-numeric: tabular-nums; }
+.lf-ways li > span:last-child { color: var(--lf-muted); }
+.lf-ways .lf-way-bug > span:last-child { color: var(--lf-back); }
+@container lf-figure (max-width: 34rem) {
+  .lf-ways li { grid-template-columns: minmax(0, 1fr); }
+  .lf-tokens > div { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lf-tokens [role='rowheader'] { grid-column: 1 / -1; }
+  .lf-confusion > div { grid-template-columns: minmax(0, 5.5rem) minmax(min-content, 1fr) minmax(min-content, 1fr); font-size: .85rem; }
+}
+/* On narrow screens the 600-unit strip scales down; enlarge its labels so they stay readable. */
+@media (max-width: 34rem) {
+  .lf-strip-note, .lf-strip-tick { font-size: 22px; }
+  .lf-strip-row { font-size: 21px; }
+}
+
+/* Lab blocks that sit in an unnamed flow-lab container query their own width. */
+.lf-shares, .lf-decision { container: lf-figure / inline-size; }

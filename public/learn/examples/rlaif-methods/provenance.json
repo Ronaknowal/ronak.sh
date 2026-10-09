@@ -1,0 +1,46 @@
+{
+  "kind": "Verbatim inspected dependencies and exact retained data; no fitting",
+  "files": [
+    {
+      "target": "causal_backbone.py",
+      "source": "public/learn/examples/dpo/causal_backbone.py",
+      "sha256": "b19f3abda468d411e6312d3ddf6642591f0fa261f82665f53596ebeb5fb600f5",
+      "bytes": 2496
+    },
+    {
+      "target": "response_scores.py",
+      "source": "public/learn/examples/dpo/response_scores.py",
+      "sha256": "944e25233fee30f726d2f148d4d7f98b169f636ff8d856e6fd6494effce3126e",
+      "bytes": 7740
+    },
+    {
+      "target": "records.json",
+      "source": "docs/teaching/llm-architecture-training/rlaif-ipo-orpo-emerging-alignment-methods/research/dataset/selected-data.json",
+      "sha256": "e0b29d9055b9308473826238ca5f01272d0add6563057af0377ead35f5a44877",
+      "bytes": 82037
+    },
+    {
+      "target": "selection.json",
+      "source": "docs/teaching/llm-architecture-training/rlaif-ipo-orpo-emerging-alignment-methods/research/dataset/selection.json",
+      "sha256": "575f12de57686644c9a7d9ce427b8d7ef5a65dcc6afd8254a7017e710f856e26",
+      "bytes": 85589
+    },
+    {
+      "target": "UltraFeedback-LICENSE.txt",
+      "source": "docs/teaching/llm-architecture-training/rlaif-ipo-orpo-emerging-alignment-methods/research/dataset/UltraFeedback-LICENSE.txt",
+      "sha256": "97455af89ae4ef9d0887bbd652579f3837913b646be4c8b61cb3ca4d7a8d4849",
+      "bytes": 1063
+    },
+    {
+      "target": "study-protocol.md",
+      "source": "docs/teaching/llm-architecture-training/rlaif-ipo-orpo-emerging-alignment-methods/study-protocol.md",
+      "sha256": "51d6ea4c5c681ab5da2b9ba4ae4ac28973c9f5b870cb3c28fa82936756b540f4",
+      "bytes": 9579
+    }
+  ],
+  "backbone": "Unmodified TinyLM causal classes, initially taught in Causal Language Modeling and reused in DPO.",
+  "scoring": "Unmodified shifted-gather/attention/completion-mask primitives from DPO.",
+  "data": "HuggingFaceH4/ultrafeedback_binarized, MIT. Rows API bytes retained; original scores are AI labels.",
+  "dataset_revision_for_card_and_processing": "3949bf5f8c17c394422ccfab0c31ea9c20bdeb85",
+  "row_commit_limit": "The API response does not independently establish parquet-commit equality."
+}

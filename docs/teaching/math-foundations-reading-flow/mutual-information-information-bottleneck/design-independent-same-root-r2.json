@@ -1,0 +1,18 @@
+{
+  "status": "PASS_MI1_MI2_CLOSED",
+  "reviewer": "/root",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-source-r2.json",
+    "sha256": "2bd0dc350ebcdcc19fa3609448f50e3fe68aaa7ecd7b9ccd289958237e5b0556"
+  },
+  "correction": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-correction-r2.json",
+    "sha256": "84601750f78678bbbc3354fe920c60266b6b9ef4bf7b08f227a7a559aa20a096"
+  },
+  "checks": {
+    "bindings": 52,
+    "exactFiveChangeInverse": true
+  },
+  "reading": "All five replacements personally read. The old asymmetric-frequency equal-entropy null remains, unequal row costs show actual weights and the incorrect uniform mean, and equal/zero-context checks are specified. First L1 mount is joint/conditional only; the second follows section2 product/PMI teaching. Both have explicit shared input, selection, preset and Reset semantics. T5 and all old programme science are conserved.",
+  "scope": "SAME design closure only; no scientific replay or runtime/content-completion certification."
+}

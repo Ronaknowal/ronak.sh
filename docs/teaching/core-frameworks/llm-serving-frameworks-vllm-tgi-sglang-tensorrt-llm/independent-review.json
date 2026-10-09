@@ -1,0 +1,33 @@
+{
+  "reviewer": "frameworks_functional_tracking",
+  "date": "2026-09-28",
+  "kind": "independent-source-and-concept-review",
+  "scope": "Complete manuscript, blueprint, visual/model source, all canonical programs and author design/native evidence read. Complementary invariants executed independently; no repeat of full native-library campaigns.",
+  "sources": {
+    "src/learn/data/topics/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm.jsx": "87b51bc00f21f134ae392c9e83583f2f38be52e1ad7092273cfe406facd6137f",
+    "src/learn/components/lesson-labs/ServingFrameworkLabs.jsx": "efe8b9fc40fc906abd8f1895d64fbe25cc006570730e3cd948c238fe60f0468e",
+    "src/learn/data/serving-framework-models.js": "343349079f4aa60fea01b4b0108ef2166d1e21608590118603fbced10187314c",
+    "src/learn/data/curriculum/blueprints/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm.js": "7f8e5daa6bf53008c16e12b01d8d4d5ef90dc545eae7f4a2309edb982a693abe",
+    "docs/teaching/core-frameworks/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm/design.md": "a556758faa58be3b49d3033983cf84e2c9f48ebe978bc95208bd78e527cff322",
+    "public/learn-code/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm/kv_cache_bridge.py": "8b1c85f381721547faffe6bdccd22e0602e16bc76c4c9907f68fe85ff2381809",
+    "public/learn-code/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm/serving_client.py": "e6e0c97e659c9fa1fada0aaedb1eb06f0c1b8594a8e5ca495b960c18770722e9",
+    "public/learn-code/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm/serving_scheduler.py": "7e097f1ae91d234aa156d4f81626f7aafeadc003305ce8f81f53260bf2f31935"
+  },
+  "checks": {
+    "schedule_conservation_cases": 36,
+    "physical_page_union_cases": 81
+  },
+  "resolved_findings": [],
+  "open_blockers": [],
+  "commands": [
+    "node scripts/verify-framework-execution-review.mjs"
+  ],
+  "primary_fact_checks": [
+    "https://huggingface.co/docs/text-generation-inference/en/index"
+  ],
+  "limits": [
+    "Source and executed complementary checks are independent; parent owns browser/theme/responsive/copy/download and integration verification.",
+    "Author source-bound native-library results inspected and reused; hosted generation and native GPU serving are not claimed executed.",
+    "No learner study or production concurrency guarantee is claimed."
+  ]
+}

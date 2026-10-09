@@ -1,1505 +1,2319 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
-
-const dapo = {
-  title: "DAPO (Dynamic Adaptive Policy Optimization)",
-  slug: "dapo-dynamic-adaptive-policy-optimization",
-  readTime: "~50 min",
-  content: () => (
-    <div>
-
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        GRPO is the workhorse for verifiable-reward reinforcement learning on reasoning tasks.
-        It eliminates the value model by estimating advantages from within-group reward
-        statistics, enables on-policy exploration through repeated rollout sampling, and
-        supports exact binary rewards from a deterministic verifier. These properties made it
-        the training algorithm behind DeepSeek-R1, which achieved AIME 2024 pass rates
-        competitive with OpenAI o1. But GRPO has pathologies that become acute specifically
-        when rollouts grow long — and reasoning tasks push rollouts to thousands of tokens.
-      </Prose>
-
-      <Prose>
-        The first pathology is entropy collapse. As training continues on a fixed problem
-        distribution, the policy concentrates probability mass onto a shrinking set of
-        generation patterns. Exploration vanishes. The model settles on a reasoning style
-        that earns reliable rewards and stops trying alternatives — which matters because
-        GRPO's advantage estimates only carry signal when the group of rollouts contains
-        both correct and incorrect responses. When every rollout follows the same narrow
-        pattern, the group-normalized advantage compresses toward zero and training stalls.
-        Symmetric PPO clipping accelerates this by capping how aggressively correct reasoning
-        paths can be reinforced: the model finds a valid strategy, tries to strongly reinforce
-        it, and the clip ceiling stops the update from going through at full strength.
-      </Prose>
-
-      <Prose>
-        The second pathology is length exploitation. GRPO computes advantage at the group
-        level and applies it uniformly across every token in a rollout. A correct chain of
-        thought that is 8,000 tokens long accumulates the same per-token advantage signal
-        as one that is 800 tokens, but there are ten times as many tokens pulling probability
-        up. The policy learns that verbosity and length mechanically amplify the gradient
-        in the correct direction, and response length begins to inflate as a training artifact.
-        This is not the model learning that longer reasoning helps — it is the model
-        discovering that the loss landscape rewards length itself.
-      </Prose>
-
-      <Prose>
-        The third pathology compounds with length: when rollouts extend to thousands of
-        tokens, importance ratios drift across the sequence. A single rollout-level importance
-        ratio shared across 4,000 tokens smooths over the per-token drift, producing noisy
-        gradient estimates in the later parts of a chain-of-thought. The earlier tokens
-        effectively receive more stable gradient signal than the later ones, creating
-        systematic bias in how different parts of a reasoning chain are reinforced.
-      </Prose>
-
-      <Prose>
-        DAPO — Decoupled Clip and Dynamic sAmpling Policy Optimization, introduced by
-        Qiying Yu, Zheng Zhang, and colleagues at ByteDance Seed and Tsinghua AIR
-        (arXiv:2503.14476, March 2025) — addresses all three failure modes with four
-        surgical patches applied on top of GRPO. Each patch targets one failure mode and
-        is independently removable and legible. DAPO trained on Qwen2.5-32B reached 50
-        points on AIME 2024, and the full training code, data, and configuration were
-        open-sourced alongside the paper, making it the most reproducible open recipe for
-        competition-level math reasoning at the time of publication.
-      </Prose>
-
-      <Callout accent="gold">
-        DAPO is not a new algorithm. It is four specific engineering patches on GRPO that
-        stabilize long-rollout training. The contribution is as much documentation of
-        failure modes as it is technique — each fix is independently legible and removable,
-        making it reproducible in a way that monolithic training loop changes are not.
-      </Callout>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <H3>Clip-higher: asymmetric PPO clipping</H3>
-
-      <Prose>
-        Standard PPO applies symmetric clipping: the importance ratio is bounded on both
-        sides by the same epsilon. Increasing a token's probability and decreasing it are
-        treated as equally dangerous, and the clip ceiling is equally tight in both
-        directions. For reasoning tasks, this symmetry is wrong. Correct reasoning paths
-        are rare — especially early in training when the model is still learning to chain
-        steps. When the policy stumbles onto a valid multi-step solution, it needs to
-        reinforce that path aggressively, because the same path may not reappear for
-        thousands of prompts. Capping the upward update as tightly as the downward one
-        wastes the signal from a rare correct rollout.
-      </Prose>
-
-      <Prose>
-        Clip-higher relaxes the upper bound independently of the lower bound. The lower
-        bound stays at <Code>1 - ε_low</Code> to prevent large backward steps on wrong
-        paths, which appear constantly and do not need unconstrained suppression. The upper
-        bound moves to <Code>1 + ε_high</Code> with <Code>ε_high &gt; ε_low</Code>, giving
-        correct reasoning paths more room to be reinforced when they appear. The asymmetry
-        is small in absolute terms — typical values are ε_low = 0.2 and ε_high = 0.28 —
-        but the effect on entropy maintenance is disproportionately large, because entropy
-        collapse is driven primarily by the ceiling on how strongly a correct path can be
-        reinforced per update step.
-      </Prose>
-
-      <H3>Dynamic sampling: skip uninformative groups</H3>
-
-      <Prose>
-        GRPO's group-normalized advantage has a well-known degenerate case: when every
-        rollout in a group receives the same reward, the group standard deviation is zero,
-        the advantage is identically zero for all rollouts, and the group contributes no
-        gradient. This happens in two common situations — all rollouts are wrong (the
-        problem is too hard), or all rollouts are correct (the problem is too easy). Both
-        cases waste the compute spent generating and scoring the rollouts.
-      </Prose>
-
-      <Prose>
-        Dynamic sampling's fix is direct: before accepting a group into the training batch,
-        check whether its reward distribution has nonzero variance. If not, resample up
-        to a fixed number of times. If still degenerate after resampling, drop the prompt
-        from this batch. This redirects compute toward prompts at the boundary of the
-        model's current ability — where reward variance within the group is nonzero and
-        the gradient signal is real. It is a form of online difficulty-adaptive curriculum,
-        implemented entirely in the data sampling loop without any separate difficulty
-        scoring infrastructure.
-      </Prose>
-
-      <H3>Token-level policy gradient: per-token importance ratios</H3>
-
-      <Prose>
-        Standard GRPO assigns one advantage value to an entire rollout and applies it
-        uniformly to every token. For a short rollout this is unproblematic — the
-        importance ratio drift across 200 tokens is modest and the uniform advantage is
-        a reasonable approximation. For a 4,000-token chain-of-thought, a single
-        rollout-level importance ratio shared across all tokens amplifies per-token
-        drift: tokens late in a long sequence may have drifted substantially from the
-        old policy before the update, but the gradient treats them identically to early
-        tokens. Token-level importance ratios compute the clipped surrogate at each token
-        position independently, applying each token's own current ratio rather than the
-        sequence aggregate. The rollout-level advantage is still shared (it measures
-        whether the overall response was better or worse than the group), but the scaling
-        applied at each token reflects that token's actual probability change from the
-        old to the new policy.
-      </Prose>
-
-      <H3>Overlong filtering: zero-reward for truncated responses</H3>
-
-      <Prose>
-        A rollout that hits the generation length cap without naturally concluding — the
-        model is still mid-reasoning when the sequence is cut off — receives reward zero
-        regardless of how its partial content would have been scored. The motivation is
-        direct: a truncated rollout that looks partially correct provides a misleading
-        training signal. It teaches the policy that generating up to the length limit is
-        acceptable or even rewarded, which, combined with the length-exploitation bias,
-        creates a feedback loop toward ever-longer responses that never reach a conclusion.
-        Zeroing the reward for truncated rollouts breaks the loop at its root — the policy
-        learns that only completed reasoning chains earn rewards, so length inflation stops
-        being a gradient-positive strategy.
-      </Prose>
-
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>3.1 GRPO baseline (reference)</H3>
-
-      <Prose>
-        For a prompt <Code>x</Code>, sample <Code>G</Code> responses. The group-normalized
-        advantage for response <Code>i</Code> is:
-      </Prose>
-
-      <MathBlock>{"A_i = \\frac{r_i - \\mu_G}{\\sigma_G + \\varepsilon}, \\quad \\mu_G = \\frac{1}{G}\\sum_{j=1}^G r_j, \\quad \\sigma_G = \\sqrt{\\frac{1}{G}\\sum_{j=1}^G (r_j - \\mu_G)^2}"}</MathBlock>
-
-      <Prose>
-        The standard GRPO objective with symmetric PPO clipping:
-      </Prose>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{GRPO}}(\\theta) = -\\mathbb{E}\\!\\left[\\min\\!\\left(\\rho_i A_i,\\; \\text{clip}(\\rho_i, 1{-}\\varepsilon, 1{+}\\varepsilon)\\, A_i\\right)\\right] + \\beta\\,\\mathbb{E}\\!\\left[\\mathrm{KL}(\\pi_\\theta \\| \\pi_{\\text{ref}})\\right]"}</MathBlock>
-
-      <Prose>
-        where <Code>ρ_i = π_θ(y_i|x) / π_θ_old(y_i|x)</Code> is the importance ratio and
-        <Code>ε</Code> is the symmetric clip range (typically 0.2).
-      </Prose>
-
-      <H3>3.2 Clip-higher: asymmetric clipping</H3>
-
-      <Prose>
-        DAPO decouples the clip bounds. For a positive advantage (reinforcing a correct
-        path), the ceiling is raised to <Code>ε_high</Code>. For a negative advantage
-        (suppressing a wrong path), the floor remains at <Code>ε_low</Code>:
-      </Prose>
-
-      <MathBlock>{"\\text{clip}_{\\text{DAPO}}(\\rho_i, A_i) = \\begin{cases} \\min(\\rho_i,\\; 1 + \\varepsilon_{\\text{high}}) \\cdot A_i & \\text{if } A_i \\geq 0 \\\\ \\max(\\rho_i,\\; 1 - \\varepsilon_{\\text{low}}) \\cdot A_i & \\text{if } A_i < 0 \\end{cases}"}</MathBlock>
-
-      <Prose>
-        The full clip-higher loss is:
-      </Prose>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{clip-higher}} = -\\mathbb{E}\\!\\left[\\min\\!\\left(\\rho_i A_i,\\; \\text{clip}_{\\text{DAPO}}(\\rho_i, A_i)\\right)\\right]"}</MathBlock>
-
-      <Prose>
-        Typical values are <Code>ε_low = 0.2</Code>, <Code>ε_high = 0.28</Code>. The
-        asymmetry is 40% larger on the positive side. In DeepSeek-R1's original training
-        a single ε = 0.2 was used for both directions; DAPO's ablations show that even
-        this small decoupling measurably retards entropy collapse on long-rollout tasks.
-      </Prose>
-
-      <H3>3.3 Dynamic sampling filter</H3>
-
-      <Prose>
-        A group is accepted into the training batch if and only if its reward distribution
-        has nonzero variance. The filter condition before committing a group:
-      </Prose>
-
-      <MathBlock>{"\\sigma_G = \\sqrt{\\frac{1}{G}\\sum_{j=1}^G (r_j - \\mu_G)^2} > \\delta_{\\text{filter}}"}</MathBlock>
-
-      <Prose>
-        where <Code>δ_filter</Code> is a small threshold (typically <Code>0</Code> in practice,
-        relying on floating-point nonzero detection). If the condition fails after
-        <Code>K</Code> resample attempts, the prompt is dropped for this batch.
-        The expected fraction of usable groups is:
-      </Prose>
-
-      <MathBlock>{"P(\\text{usable}) = 1 - \\left[p^G + (1-p)^G\\right]"}</MathBlock>
-
-      <Prose>
-        where <Code>p</Code> is the current policy's pass rate on the prompt and
-        <Code>G</Code> is group size. This equals zero only when <Code>p = 0</Code>
-        (all wrong) or <Code>p = 1</Code> (all correct). The filter directly targets
-        these degenerate extremes.
-      </Prose>
-
-      <H3>3.4 Token-level policy gradient</H3>
-
-      <Prose>
-        Standard GRPO computes a response-level importance ratio as the product of
-        per-token ratios:
-      </Prose>
-
-      <MathBlock>{"\\rho_i = \\frac{\\pi_\\theta(y_i \\mid x)}{\\pi_{\\theta_{\\text{old}}}(y_i \\mid x)} = \\prod_{t=1}^{T_i} \\frac{\\pi_\\theta(y_{i,t} \\mid x, y_{i,<t})}{\\pi_{\\theta_{\\text{old}}}(y_{i,t} \\mid x, y_{i,<t})}"}</MathBlock>
-
-      <Prose>
-        For long sequences, this product can be far from 1.0 even when individual
-        per-token ratios are close to 1.0, because small per-token deviations compound
-        multiplicatively. DAPO instead applies clipping at the per-token level, sharing
-        the group-level advantage <Code>A_i</Code> but using a separate importance ratio
-        at each token position <Code>t</Code>:
-      </Prose>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{token}} = -\\frac{1}{\\sum_i T_i}\\sum_{i=1}^G \\sum_{t=1}^{T_i} \\min\\!\\left(\\rho_{i,t}\\, A_i,\\; \\text{clip}_{\\text{DAPO}}(\\rho_{i,t}, A_i)\\right)"}</MathBlock>
-
-      <Prose>
-        where <Code>{"ρ_{i,t} = π_θ(y_{i,t}|x, y_{i,<t}) / π_{θ_old}(y_{i,t}|x, y_{i,<t})"}  </Code>.
-        The loss is normalized by total token count rather than by number of responses,
-        which also removes the length bias: a 4,000-token response and an 800-token
-        response with the same advantage contribute equally per token rather than the
-        longer one contributing 5× more to the gradient.
-      </Prose>
-
-      <H3>3.5 Overlong filtering</H3>
-
-      <Prose>
-        Let <Code>T_max</Code> be the generation length cap. For any rollout that hits
-        the cap — <Code>T_i = T_max</Code> with the last token not being a natural
-        end-of-sequence token — the reward is zeroed before advantage computation:
-      </Prose>
-
-      <MathBlock>{"r_i^{\\text{DAPO}} = \\begin{cases} r_i & \\text{if } T_i < T_{\\max} \\\\ 0 & \\text{if } T_i = T_{\\max} \\;(\\text{truncated}) \\end{cases}"}</MathBlock>
-
-      <Prose>
-        This modified reward is used in the group-normalized advantage calculation. The
-        effect is that a truncated rollout that happened to score high (e.g., the partial
-        output contains the correct answer prefix) gets advantage zero rather than a
-        positive advantage. The policy receives no gradient signal toward the behaviors
-        that produced the truncated response.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        All implementations below use standard Python and PyTorch. Each section is
-        self-contained and produces the outputs shown in the comments. The goal is to make
-        each DAPO fix mechanically concrete before the production library abstracts it.
-      </Prose>
-
-      <H3>4a. GRPO baseline loop</H3>
-
-      <Prose>
-        A minimal GRPO implementation on a toy task: a linear policy maps 4-dimensional
-        states to a 2-token distribution. Token 0 earns reward 1; token 1 earns reward 0.
-        Group size G=8, symmetric clipping ε=0.2. This is the starting point; subsequent
-        subsections add each DAPO patch incrementally.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn.functional as F
-
-torch.manual_seed(42)
-
-class ToyPolicy(torch.nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.w = torch.nn.Parameter(torch.randn(4, 2) * 0.1)
-
-    def logprobs(self, states):
-        return F.log_softmax(states @ self.w, dim=-1)
-
-    def sample(self, states):
-        logps = self.logprobs(states)
-        tokens = torch.distributions.Categorical(logits=logps).sample()
-        return tokens, logps.gather(1, tokens.unsqueeze(1)).squeeze(1)
-
-def reward_fn(tokens):
-    return (tokens == 0).float()  # token 0 is the "correct" reasoning token
-
-policy     = ToyPolicy()
-ref_policy = ToyPolicy()
-for p in ref_policy.parameters():
-    p.requires_grad_(False)
-
-optimizer = torch.optim.Adam(policy.parameters(), lr=1e-2)
-
-GROUP_SIZE = 8
-N_PROMPTS  = 16
-EPS        = 0.2   # symmetric clip
-BETA       = 0.04  # KL anchor coefficient
-states     = torch.randn(N_PROMPTS, 4)
-
-for epoch in range(60):
-    expanded = states.repeat_interleave(GROUP_SIZE, dim=0)
-
-    with torch.no_grad():
-        tokens, logps_old = policy.sample(expanded)
-        rewards = reward_fn(tokens)
-
-    # ── Group-normalized advantage ────────────────────────────────────────
-    r   = rewards.view(N_PROMPTS, GROUP_SIZE)
-    adv = (r - r.mean(-1, keepdim=True)) / (r.std(-1, keepdim=True) + 1e-8)
-    adv = adv.flatten()
-
-    with torch.no_grad():
-        ref_logps = ref_policy.logprobs(expanded).gather(
-            1, tokens.unsqueeze(1)).squeeze(1)
-
-    # ── 4 mini-epochs per rollout batch (PPO-style) ───────────────────────
-    for _ in range(4):
-        new_logps = policy.logprobs(expanded).gather(
-            1, tokens.unsqueeze(1)).squeeze(1)
-        ratio     = (new_logps - logps_old).exp()
-        clip_loss = -torch.min(ratio * adv,
-                               ratio.clamp(1 - EPS, 1 + EPS) * adv).mean()
-        kl_pen    = BETA * (logps_old - ref_logps).mean()
-        loss      = clip_loss + kl_pen
-        optimizer.zero_grad(); loss.backward(); optimizer.step()
-
-# Expected output:
-# Epoch  1 mean reward: 0.492
-# Epoch 30 mean reward: 0.656
-# Epoch 60 mean reward: 0.734`}
-      </CodeBlock>
-
-      <H3>4b. Patch 1 — Clip-higher (asymmetric clipping)</H3>
-
-      <Prose>
-        Adding clip-higher requires a single change to the clipping logic: separate clip
-        bounds for positive-advantage updates (reinforcing correct paths) and
-        negative-advantage updates (suppressing wrong paths). Below, the asymmetric
-        clip is added to the GRPO baseline. We also measure policy entropy over training
-        to demonstrate the entropy-preservation effect: symmetric clipping concentrates
-        the policy more aggressively because it caps how strongly a correct path can be
-        reinforced on any given update, forcing the policy to find and re-learn the same
-        path repeatedly rather than stably reinforcing it.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# ── Drop-in replacement for the clip computation in 4a ───────────────────────
-
-EPS_LOW  = 0.2   # floor: how much we can suppress wrong paths
-EPS_HIGH = 0.28  # ceiling: how aggressively we can reinforce correct paths
-
-def asymmetric_clip_loss(ratio, adv):
-    """
-    Clip-higher: raise the ceiling for positive-advantage (correct path) updates.
-    ratio: importance ratio π_θ / π_θ_old
-    adv:   group-normalized advantage (positive = correct, negative = wrong)
-    """
-    # For correct paths (positive advantage): allow larger probability increase
-    # For wrong paths (negative advantage): apply same floor as standard PPO
-    clipped = torch.where(
-        adv >= 0,
-        ratio.clamp(max=1 + EPS_HIGH) * adv,   # relaxed ceiling
-        ratio.clamp(min=1 - EPS_LOW)  * adv,   # standard floor
-    )
-    return -torch.min(ratio * adv, clipped).mean()
-
-# ── Training loop (same as 4a, clip_loss line replaced) ─────────────────────
-torch.manual_seed(42)
-policy_ch  = ToyPolicy()
-ref_policy = ToyPolicy()
-for p in ref_policy.parameters():
-    p.requires_grad_(False)
-
-optimizer_ch = torch.optim.Adam(policy_ch.parameters(), lr=1e-2)
-states       = torch.randn(N_PROMPTS, 4)
-
-entropy_log = []
-
-for epoch in range(60):
-    expanded = states.repeat_interleave(GROUP_SIZE, dim=0)
-    with torch.no_grad():
-        tokens, logps_old = policy_ch.sample(expanded)
-        rewards = reward_fn(tokens)
-
-    r   = rewards.view(N_PROMPTS, GROUP_SIZE)
-    adv = (r - r.mean(-1, keepdim=True)) / (r.std(-1, keepdim=True) + 1e-8)
-    adv = adv.flatten()
-
-    with torch.no_grad():
-        ref_logps = ref_policy.logprobs(expanded).gather(
-            1, tokens.unsqueeze(1)).squeeze(1)
-
-    for _ in range(4):
-        new_logps = policy_ch.logprobs(expanded).gather(
-            1, tokens.unsqueeze(1)).squeeze(1)
-        ratio     = (new_logps - logps_old).exp()
-        loss      = asymmetric_clip_loss(ratio, adv) + BETA * (logps_old - ref_logps).mean()
-        optimizer_ch.zero_grad(); loss.backward(); optimizer_ch.step()
-
-    with torch.no_grad():
-        lp  = policy_ch.logprobs(states)
-        ent = -(lp.exp() * lp).sum(-1).mean().item()
-        entropy_log.append(round(ent, 4))
-
-# Expected entropy trajectory (symmetric vs clip-higher):
-# Step  0:  sym=0.6931  clip-higher=0.6931  (identical start)
-# Step 20:  sym=0.3451  clip-higher=0.3822  (+10.7% higher entropy retained)
-# Step 40:  sym=0.2016  clip-higher=0.2381  (+18.1% higher entropy retained)
-# Step 59:  sym=0.1381  clip-higher=0.1703  (+23.3% higher entropy retained)
-#
-# Clip-higher retains more entropy throughout training because correct-path
-# reinforcement is stronger per update step, requiring fewer updates to
-# lock in a strategy — leaving the policy less collapsed at convergence.`}
-      </CodeBlock>
-
-      <H3>4c. Patch 2 — Dynamic sampling</H3>
-
-      <Prose>
-        Dynamic sampling adds a variance filter in the rollout collection loop. Groups
-        with zero reward variance are resampled or dropped. The code below measures how
-        many groups are informative at different training stages, demonstrating that the
-        filter redirects compute toward the boundary of the model's current ability.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn.functional as F
-
-torch.manual_seed(42)
-
-def dapo_sample(policy, state, reward_fn, group_size=8, max_resamples=3):
-    """
-    Generate a group that has nonzero reward variance, or fail after K retries.
-    Returns (tokens, logps_old, rewards, n_attempts) on success, or
-    (None, None, None, max_resamples) on degenerate group.
-    """
-    for attempt in range(max_resamples):
-        expanded = state.unsqueeze(0).expand(group_size, -1)
-        with torch.no_grad():
-            tokens, logps_old = policy.sample(expanded)
-            rewards = reward_fn(tokens)
-        if rewards.std() > 1e-6:
-            return tokens, logps_old, rewards, attempt + 1
-    return None, None, None, max_resamples  # drop this prompt
-
-# Simulate three training stages by adjusting policy concentration
-# (higher weight magnitude = more concentrated = more degenerate groups)
-class ToyPolicy(torch.nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.w = torch.nn.Parameter(torch.randn(4, 2) * 0.1)
-    def logprobs(self, states):
-        return F.log_softmax(states @ self.w, dim=-1)
-    def sample(self, states):
-        logps = self.logprobs(states)
-        tokens = torch.distributions.Categorical(logits=logps).sample()
-        return tokens, logps.gather(1, tokens.unsqueeze(1)).squeeze(1)
-
-def reward_fn(tokens):
-    return (tokens == 0).float()
-
-states = torch.randn(32, 4)
-
-stages = [
-    ("early training (random policy)",   0.0),
-    ("mid training (learning)",          0.5),
-    ("late training (near-converged)",   2.0),
-]
-
-for stage_label, weight_scale in stages:
-    torch.manual_seed(17)
-    policy = ToyPolicy()
-    with torch.no_grad():
-        if weight_scale > 0:
-            policy.w.data = torch.randn(4, 2) * weight_scale
-        else:
-            policy.w.data.zero_()
-
-    informative, dropped = 0, 0
-    for state in states:
-        tok, lp, rew, _ = dapo_sample(policy, state, reward_fn)
-        if tok is not None:
-            informative += 1
-        else:
-            dropped += 1
-
-    pct = informative / 32 * 100
-    print(f"{stage_label}: {informative}/32 informative ({pct:.0f}%), {dropped} dropped")
-
-# Expected output:
-# early training (random policy):  32/32 informative (100%), 0 dropped
-# mid training (learning):         30/32 informative (94%), 2 dropped
-# late training (near-converged):  13/32 informative (41%), 19 dropped
-#
-# Late training: 19 of 32 prompts produce degenerate groups (all-correct or
-# all-wrong). Without dynamic sampling, these groups waste 19/32 = 59% of
-# rollout compute on zero-gradient updates. Dynamic sampling drops them.`}
-      </CodeBlock>
-
-      <H3>4d. Patch 3 — Overlong filtering</H3>
-
-      <Prose>
-        Overlong filtering modifies the reward function: any rollout that hits the
-        generation length cap receives reward zero before advantage computation. The
-        code below simulates a population of rollouts with a realistic truncation rate
-        and shows how naive (unfiltered) versus DAPO (filtered) reward functions
-        differ in the gradient signal they provide.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import random
-
-random.seed(42)
-
-MAX_LEN = 12  # generation length cap
-
-def simulate_rollout(p_correct=0.55, p_stop_base=0.3):
-    """
-    Simulate a rollout where the model tends toward verbosity.
-    Returns (quality_score, length, was_truncated).
-    """
-    tokens = []
-    for t in range(MAX_LEN):
-        # Stop probability is low early (model tends to keep going)
-        p_stop = p_stop_base * (0.5 ** (MAX_LEN - t - 1))
-        if random.random() < max(0.1, p_stop) and t > 0:
-            break
-        tokens.append(1 if random.random() < p_correct else 0)
-
-    truncated     = len(tokens) == MAX_LEN
-    quality_score = sum(tokens) / max(len(tokens), 1)
-    return quality_score, len(tokens), truncated
-
-def naive_reward(quality, truncated):
-    return quality  # truncated rollouts still scored
-
-def dapo_reward(quality, truncated):
-    return 0.0 if truncated else quality  # overlong filtering
-
-rollouts = [simulate_rollout() for _ in range(1000)]
-truncated_rollouts = [(q, l) for q, l, tr in rollouts if tr]
-normal_rollouts    = [(q, l) for q, l, tr in rollouts if not tr]
-
-print(f"Normal rollouts:    {len(normal_rollouts)} ({len(normal_rollouts)/10:.0f}%)")
-print(f"Truncated rollouts: {len(truncated_rollouts)} ({len(truncated_rollouts)/10:.0f}%)")
-print()
-print(f"Normal avg quality:    {sum(q for q,l in normal_rollouts)/len(normal_rollouts):.3f}")
-print(f"Truncated avg quality: {sum(q for q,l in truncated_rollouts)/len(truncated_rollouts):.3f}")
-print()
-
-naive_avg = sum(naive_reward(q, tr) for q,l,tr in rollouts) / 1000
-dapo_avg  = sum(dapo_reward(q, tr) for q,l,tr in rollouts) / 1000
-print(f"Naive avg reward (no filtering):   {naive_avg:.4f}")
-print(f"DAPO avg reward (zero truncated):  {dapo_avg:.4f}")
-print()
-print("Truncated rollouts look higher quality than they are: the partial")
-print("content is scored without penalizing the failure to conclude.")
-print("DAPO filtering zeros them out, removing the length-inflation incentive.")
-
-# Expected output:
-# Normal rollouts:    779 (78%)
-# Truncated rollouts: 221 (22%)
-#
-# Normal avg quality:    0.529
-# Truncated avg quality: 0.554   <- appears better (partial credit illusion)
-#
-# Naive avg reward (no filtering):   0.534
-# DAPO avg reward (zero truncated):  0.412
-#
-# The truncated rollouts appear to score 0.554 quality — higher than normal
-# rollouts. Without filtering, the model receives positive gradient for
-# truncation behaviors. DAPO's zero-reward for truncation removes this signal.`}
-      </CodeBlock>
-
-      <H3>4e. Combined DAPO update loop</H3>
-
-      <Prose>
-        All four patches assembled into a single training loop. This is the DAPO
-        algorithm in full: asymmetric clipping, dynamic sampling with variance filter,
-        token-level importance ratios (approximated at rollout level in this simplified
-        implementation since the toy task uses single-token responses), and overlong
-        filtering in the reward function.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn.functional as F
-
-torch.manual_seed(42)
-
-class ToyPolicy(torch.nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.w = torch.nn.Parameter(torch.randn(4, 2) * 0.1)
-    def logprobs(self, states):
-        return F.log_softmax(states @ self.w, dim=-1)
-    def sample(self, states):
-        logps = self.logprobs(states)
-        tokens = torch.distributions.Categorical(logits=logps).sample()
-        return tokens, logps.gather(1, tokens.unsqueeze(1)).squeeze(1)
-
-def reward_fn(tokens):
-    return (tokens == 0).float()
-
-EPS_LOW, EPS_HIGH = 0.2, 0.28
-BETA              = 0.04
-GROUP_SIZE        = 8
-N_PROMPTS         = 16
-MAX_RESAMPLES     = 3
-states            = torch.randn(N_PROMPTS, 4)
-
-policy    = ToyPolicy()
-ref       = ToyPolicy()
-for p in ref.parameters(): p.requires_grad_(False)
-optimizer = torch.optim.Adam(policy.parameters(), lr=1e-2)
-
-for epoch in range(60):
-    batch_tokens, batch_logps, batch_adv, batch_ref = [], [], [], []
-    skipped = 0
-
-    for i in range(N_PROMPTS):
-        state = states[i:i+1]
-
-        # ── Patch 2: Dynamic sampling ─────────────────────────────────────
-        for attempt in range(MAX_RESAMPLES):
-            expanded = state.expand(GROUP_SIZE, -1)
-            with torch.no_grad():
-                tokens, logps_old = policy.sample(expanded)
-                rewards           = reward_fn(tokens)
-
-            # ── Patch 4: Overlong filtering (toy: truncation = length > 1) ─
-            # In production: zero reward for any token-length == MAX_LEN
-            # Here simplified: reward unchanged since responses are 1 token
-
-            if rewards.std() > 1e-6:
-                break  # found informative group
-        else:
-            skipped += 1
-            continue  # drop degenerate group
-
-        r   = rewards
-        adv = (r - r.mean()) / (r.std() + 1e-8)
-
-        with torch.no_grad():
-            ref_logps = ref.logprobs(expanded).gather(
-                1, tokens.unsqueeze(1)).squeeze(1)
-
-        batch_tokens.append(tokens)
-        batch_logps.append(logps_old)
-        batch_adv.append(adv)
-        batch_ref.append(ref_logps)
-
-    if not batch_tokens:
-        continue
-
-    tokens_all   = torch.cat(batch_tokens)
-    logps_old_all= torch.cat(batch_logps)
-    adv_all      = torch.cat(batch_adv)
-    ref_all      = torch.cat(batch_ref)
-    expanded_all = states.repeat_interleave(GROUP_SIZE, dim=0)[:len(tokens_all)]
-
-    # ── Patches 1 & 3: Asymmetric clip + token-level ratios ──────────────
-    for _ in range(4):
-        # Patch 3: per-token logprob and ratio (here single token, fully token-level)
-        new_logps = policy.logprobs(expanded_all).gather(
-            1, tokens_all.unsqueeze(1)).squeeze(1)
-        ratio     = (new_logps - logps_old_all).exp()
-
-        # Patch 1: asymmetric clip
-        clipped = torch.where(
-            adv_all >= 0,
-            ratio.clamp(max=1 + EPS_HIGH) * adv_all,
-            ratio.clamp(min=1 - EPS_LOW)  * adv_all,
-        )
-        clip_loss = -torch.min(ratio * adv_all, clipped).mean()
-        kl_pen    = BETA * (logps_old_all - ref_all).mean()
-        loss      = clip_loss + kl_pen
-        optimizer.zero_grad(); loss.backward(); optimizer.step()
-
-    if epoch % 15 == 0 or epoch == 59:
-        with torch.no_grad():
-            expanded_eval = states.repeat_interleave(GROUP_SIZE, dim=0)
-            t, _          = policy.sample(expanded_eval)
-            rwd           = reward_fn(t).mean().item()
-            lp            = policy.logprobs(states)
-            ent           = -(lp.exp() * lp).sum(-1).mean().item()
-        print(f"Epoch {epoch:3d}: reward={rwd:.3f}  entropy={ent:.3f}  dropped={skipped}")
-
-# Expected output:
-# Epoch   0: reward=0.547  entropy=0.678  dropped=0
-# Epoch  15: reward=0.664  entropy=0.481  dropped=1
-# Epoch  30: reward=0.703  entropy=0.398  dropped=3
-# Epoch  45: reward=0.734  entropy=0.341  dropped=5
-# Epoch  59: reward=0.750  entropy=0.310  dropped=6`}
-      </CodeBlock>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        DAPO's reference implementation is built on VeRL (Volcengine Reinforcement
-        Learning), ByteDance Seed's open-source distributed RL framework, available at
-        github.com/volcengine/verl. The DAPO-specific code lives in the
-        BytedTsinghua-SIA/DAPO repository, which provides training scripts, dataset
-        processing utilities, and model checkpoints for Qwen2.5-32B.
-      </Prose>
-
-      <H3>5.1 VeRL DAPO config (minimal)</H3>
-
-      <CodeBlock language="yaml">
-{`# dapo_config.yaml — minimal DAPO training configuration
-# Built on VeRL (volcengine/verl), the open-source RL framework from ByteDance Seed
-
-trainer:
-  total_epochs: 1
-  project_name: dapo_math
-
-actor_rollout_ref:
-  model:
-    path: Qwen/Qwen2.5-32B-Instruct
-  rollout:
-    temperature: 1.0
-    top_p: 1.0
-    max_new_tokens: 16384          # DAPO uses very long rollout budgets
-    n: 8                           # G=8 rollouts per prompt (group size)
-  ref:
-    log_prob_micro_batch_size: 64
-
-algorithm:
-  # DAPO Patch 1: Asymmetric clip
-  clip_ratio_low:  0.2             # ε_low  — floor on negative-advantage updates
-  clip_ratio_high: 0.28            # ε_high — ceiling on positive-advantage updates
-
-  # DAPO Patch 2: Dynamic sampling (variance filter)
-  filter_groups:
-    enable: true
-    max_resamples: 3
-
-  # DAPO Patch 3: Token-level policy gradient
-  use_token_level_loss: true
-
-  # DAPO Patch 4: Overlong reward shaping
-  overlong_reward:
-    enable: true
-    max_len: 16384                 # responses hitting this cap get reward 0
-
-  kl_ctrl:
-    kl_coef: 0.0                   # DAPO removes the explicit KL penalty;
-                                   # stability comes from clip bounds alone
-
-data:
-  train_files:
-    - data/dapo_math_17k.parquet
-  prompt_key: prompt
-  max_prompt_length: 1024`}
-      </CodeBlock>
-
-      <H3>5.2 TRL GRPOTrainer with DAPO patches</H3>
-
-      <Prose>
-        HuggingFace TRL's <Code>GRPOTrainer</Code> exposes enough hooks to implement
-        DAPO patches without forking the framework. The clip bounds can be set via
-        config, dynamic sampling requires a custom data collator, and overlong filtering
-        goes in the reward function.
-      </Prose>
-
-      <CodeBlock language="python">
-{`from trl import GRPOConfig, GRPOTrainer
-import re
-
-# ── DAPO Patch 4: Overlong filtering in the reward function ──────────────────
-MAX_NEW_TOKENS = 4096
-
-def dapo_math_reward(prompts, completions, ground_truths=None, **kwargs):
-    """
-    Math verifier with DAPO overlong filtering.
-    Truncated completions (length == MAX_NEW_TOKENS) receive reward 0.
-    """
-    rewards = []
-    for completion, gt in zip(completions, ground_truths):
-        text = completion[0]["content"] if isinstance(completion, list) else completion
-
-        # Patch 4: zero-reward for truncated responses
-        if len(text.split()) >= MAX_NEW_TOKENS * 0.95:  # heuristic truncation check
-            rewards.append(0.0)
-            continue
-
-        match = re.search(r"\\boxed\{([^}]+)\}", text)
-        if not match:
-            rewards.append(0.0)
-            continue
-        try:
-            score = 1.0 if abs(float(match.group(1)) - float(gt)) < 1e-6 else 0.0
-        except ValueError:
-            score = 0.0
-        rewards.append(score)
-    return rewards
-
-# ── DAPO config: asymmetric clip bounds ──────────────────────────────────────
-config = GRPOConfig(
-    num_generations=8,                  # G: rollouts per prompt
-    max_new_tokens=MAX_NEW_TOKENS,
-    learning_rate=1e-6,
-    per_device_train_batch_size=1,
-    gradient_accumulation_steps=4,
-    # Patch 1: asymmetric clip (TRL ≥ 0.13 exposes clip_range_ratio)
-    clip_range_ratio=0.2,               # ε_low (floor)
-    clip_range_ratio_high=0.28,         # ε_high (ceiling) — DAPO extension
-    # Patch 3: token-level loss (TRL default; verify with loss_type="token")
-    loss_type="token",
-    temperature=1.0,
-    beta=0.0,                           # DAPO removes explicit KL penalty
-    output_dir="./dapo-output",
-    bf16=True,
-    gradient_checkpointing=True,
-    use_vllm=True,
-)
-
-# Patch 2: Dynamic sampling requires filtering the dataset per-step.
-# Simplest approach: a custom reward wrapper that returns None for zero-variance groups,
-# and a data collator that retries until batch is full with informative groups.
-# VeRL handles this natively; TRL requires a thin wrapper around the trainer loop.
-
-trainer = GRPOTrainer(
-    model=model,
-    ref_model=ref_model,
-    reward_funcs=[dapo_math_reward],
-    args=config,
-    train_dataset=math_dataset,        # expects 'prompt' and 'ground_truth' columns
-    tokenizer=tokenizer,
-)
-trainer.train()`}
-      </CodeBlock>
-
-      <H3>5.3 Open-r1 DAPO integration</H3>
-
-      <Prose>
-        The open-r1 project (github.com/huggingface/open-r1) integrates DAPO patches
-        into its GRPO training script. The key diff from baseline GRPO is in the
-        loss computation and the rollout filtering logic. The overlong reward function
-        is implemented as a reward shaping wrapper that applies before group normalization.
-        The clip asymmetry is applied in the <Code>grpo_loss</Code> function by passing
-        separate <Code>eps_clip_low</Code> and <Code>eps_clip_high</Code> arguments.
-        The dynamic sampling filter runs in the data collator's <Code>__call__</Code>
-        method, which retries prompt sampling until the batch is full with nonzero-variance
-        groups or the maximum retry count is reached.
-      </Prose>
-
-      <Callout accent="blue">
-        For production DAPO training, use VeRL (BytedTsinghua-SIA/DAPO repository) rather
-        than TRL. VeRL was designed for DAPO-scale training: it handles 16k-token rollouts,
-        multi-node generation with vLLM, and the dynamic sampling filter natively. TRL's
-        GRPOTrainer requires manual patching for asymmetric clip and lacks built-in
-        dynamic sampling support as of mid-2025.
-      </Callout>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>6.1 Entropy over training: symmetric clip vs clip-higher</H3>
-
-      <Prose>
-        Clip-higher preserves more entropy throughout training. In the first 20 steps,
-        both methods collapse entropy at a similar rate; the divergence becomes clear
-        from step 20 onward, where clip-higher's relaxed ceiling allows the policy to
-        reinforce correct paths more strongly per update, avoiding the repeated
-        re-exploration that drives entropy down in the symmetric case.
-      </Prose>
-
-      <Plot
-        label="entropy over training: symmetric clip vs clip-higher"
-        xLabel="training step"
-        yLabel="policy entropy (nats)"
-        series={[
+// Deterministic projection of the accepted DAPO manuscript.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import {
+  Math as InlineMath,
+  MathBlock as SharedMathBlock,
+} from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { Local, Table as DapoTable } from '../../components/lesson-labs/DapoElements.jsx';
+import {
+  DapoEvidenceProvider,
+  AnswerPaths,
+  RewardToUpdate,
+  FrozenRollout,
+  CausalAddresses,
+  RewardRuler,
+  HomogeneousGroups,
+  SignedClip,
+  ProbabilitySimplex,
+  EntropyChange,
+  NegativeDualClip,
+  RaggedWeights,
+  LossMass,
+  WholeGroupCollector,
+  IdentityJoin,
+  MixedGroupCost,
+  AcceptedMixture,
+  TerminationMasks,
+  LengthBuffer,
+  SoftmaxGradient,
+  MicrobatchCount,
+  RecordMemory,
+  FiniteBatchDebugger,
+  ModelStructure,
+  SavedRolloutLedger,
+  NativeMechanism,
+  NativeParity,
+  ObservedOutcomes,
+  WorkAccounting,
+  IntegerParser,
+  CircleCollision,
+  PaperProgression,
+  RecipeComparison,
+  FailureTrace,
+  MetricDenominators,
+  FullTrace,
+  ComputeBudget,
+} from '../../components/lesson-labs/DapoFlow.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+const MathBlock = ({ children }) => (
+  <Local label="Mathematical relationship">
+    <SharedMathBlock>{children}</SharedMathBlock>
+  </Local>
+);
+const NeuralTable = ({ headers, rows, ...props }) => (
+  <DapoTable headers={headers} rows={rows} label={props.caption ?? 'Comparison'} />
+);
+const Program = ({ file }) => (
+  <RemoteCodeBlock
+    source={'/learn-code/dapo/' + file}
+    filename={file}
+    title={file}
+    language="python"
+  />
+);
+function DapoLesson() {
+  return (
+    <DapoEvidenceProvider>
+      <div className="lesson-flow dapo-flow">
+        <Prose>
           {
-            name: "symmetric clip (ε=0.2 both sides)",
-            color: "#f87171",
-            points: [
-              [0,  0.693], [5,  0.621], [10, 0.541], [20, 0.345],
-              [30, 0.220], [40, 0.165], [50, 0.145], [60, 0.138],
+            'A language model produces four answers to the same question. Two pass the checker and two fail. That sounds like useful training feedback. But what if all four pass? What if one answer is three times as long as another? What if the checker sees an unfinished answer because generation hit its token limit? The reward alone does not answer how much each sampled token should influence the next parameter update.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'DAPO is a recipe for handling these details in large-scale reinforcement learning for language models. Its name expands to '
+          }
+          <strong>{'Decoupled Clip and Dynamic sAmpling Policy Optimization'}</strong>
+          {
+            ". We will build its pieces from a single sampled answer, derive the loss and its gradients, implement a bounded collector and run both a local objective and an ordinary library trainer. Our small model experiment uses sentiment labels to expose the mechanics. The paper's long-reasoning results have a separate task, model and compute budget."
+          }
+        </Prose>
+
+        <Prose opening="prerequisites">
+          {''}
+          <a
+            href={
+              '/learn/path/full-curriculum/rlvr-reinforcement-learning-with-verifiable-rewards?module=large-language-models'
+            }
+          >
+            {'RLVR'}
+          </a>
+          {' establishes the terminal checker; '}
+          <a
+            href={
+              '/learn/path/full-curriculum/grpo-rloo-kto-advanced-preference-methods?module=large-language-models'
+            }
+          >
+            {'GRPO, RLOO and KTO'}
+          </a>
+          {
+            ' establishes grouped policy gradients. We refresh those objects as they enter the calculation. Follow sections 1–10 for the mechanism, 11–14 for complete implementations and observations, then 15–18 to audit a verifier and choose a recipe. The deeper branches on dual clipping and microbatch normalization remain visible after their simpler examples.'
+          }
+        </Prose>
+
+        <span id="1-why-it-exists" aria-hidden="true" />
+        <span id="1-start-with-the-problem" aria-hidden="true" />
+        <H2>{'1. Follow one answer into one update'}</H2>
+
+        <Prose>
+          {'Consider the question '}
+          <code>{'7 + 5'}</code>
+          {
+            '. A model can continue that prefix in several ways. Each answer is an ordered sequence of sampled tokens; the probability of its next token depends on the question and the tokens already emitted. We call the question a '
+          }
+          <strong>{'prompt'}</strong>
+          {' and the emitted sequence a '}
+          <strong>{'response'}</strong>
+          {'.'}
+        </Prose>
+
+        <AnswerPaths />
+
+        <Prose>
+          {
+            'The drawing uses four labelled paths. A returns a wrong number; B does not give the required numeric form; C returns 12 directly; D reaches 12 after a longer calculation. For this introductory checker, the final numeric answer determines reward: correct is +1 and incorrect or malformed is −1. Later we make the extraction rule explicit. A reward is a number returned by that contract, not an inspection of every reasoning step.'
+          }
+        </Prose>
+
+        <Prose>
+          {'Let the prompt be '}
+          <InlineMath>{'q'}</InlineMath>
+          {' and response '}
+          <InlineMath>{'i'}</InlineMath>
+          {' be '}
+          <InlineMath>{'o_i=(o_{i,1},\\ldots,o_{i,L_i})'}</InlineMath>
+          {'. Its length is '}
+          <InlineMath>{'L_i'}</InlineMath>
+          {'. A language model with parameters '}
+          <InlineMath>{'\\theta'}</InlineMath>
+          {' assigns '}
+          <InlineMath>{'\\pi_\\theta(o_{i,t}\\mid q,o_{i,<t})'}</InlineMath>
+          {' to the token at position '}
+          <InlineMath>{'t'}</InlineMath>
+          {'. The notation '}
+          <InlineMath>{'o_{i,<t}'}</InlineMath>
+          {
+            ' means the earlier response tokens. Multiplying these conditional probabilities gives the probability of that complete response, including its stop token when one is emitted.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            "We want high-reward responses to become more likely, but a sampled token does not carry an independent correctness label. The terminal reward first becomes a comparison within the group, then a coefficient in a differentiable loss. Changing the loss changes the model's future token probabilities."
+          }
+        </Prose>
+
+        <RewardToUpdate />
+
+        <Prose>
+          {
+            'The arrows in the loop represent different operations. Sampling chooses token IDs. Checking assigns rewards. Group arithmetic assigns relative coefficients. Teacher forcing recomputes the probability of each already chosen token. Differentiation follows those probabilities back to the model parameters. The checker itself need not be differentiable: its result is held fixed during the update.'
+          }
+        </Prose>
+
+        <H2>{'2. Keep the rollout policy fixed while updating'}</H2>
+
+        <Prose>
+          {
+            'The loop generates responses with one set of weights, then changes those weights. To describe that change we need two roles. The '
+          }
+          <strong>{'old policy'}</strong>
+          {' is the snapshot that generated the sampled responses. The '}
+          <strong>{'current policy'}</strong>
+          {
+            ' is the model whose parameters the optimizer is changing. At the start of a rollout they coincide; after an update they can differ.'
+          }
+        </Prose>
+
+        <FrozenRollout />
+
+        <Prose>
+          {
+            'For the stored token in the drawing, suppose its old probability was .08 and its current probability is .10. Dividing .10 by .08 gives 1.25: that action has become 25% more likely at this prefix. This '
+          }
+          <strong>{'ratio'}</strong>
+          {
+            ' measures relative change, not the current probability itself. For any stored token, the same comparison is'
+          }
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>
+            {
+              'r_{i,t}(\\theta)=\n\\frac{\\pi_\\theta(o_{i,t}\\mid q,o_{i,<t})}\n{\\pi_{\\mathrm{old}}(o_{i,t}\\mid q,o_{i,<t})}\n=\\exp\\bigl(\\ell_{i,t}(\\theta)-\\ell^{\\mathrm{old}}_{i,t}\\bigr).'
+            }
+          </MathBlock>
+        </div>
+
+        <Prose>
+          {'Here '}
+          <InlineMath>{'\\ell'}</InlineMath>
+          {
+            ' is a log probability. The same token and the same prefix appear in both numerator and denominator.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'The old log probability is a constant during all updates that reuse this rollout. Detaching the denominator prevents an unintended gradient through the sampling snapshot. Replacing it after every optimizer step would change the comparison being optimized.'
+          }
+        </Prose>
+
+        <CausalAddresses />
+
+        <Prose>
+          {"A decoder's logits at input position "}
+          <InlineMath>{'t-1'}</InlineMath>
+          {' predict target position '}
+          <InlineMath>{'t'}</InlineMath>
+          {
+            ". The target token is present in the stored tensor so it can be gathered, but the predictor's causal attention must not read that target or later tokens. Prompt positions supply context; only response targets enter this response loss. An actual end-of-sequence token, "
+          }
+          <strong>{'EOS'}</strong>
+          {
+            ', is one of those targets. A padding cell can store the same token ID without being an emitted action; its mask decides whether it counts.'
+          }
+        </Prose>
+
+        <Prose>
+          {'There is sometimes a third model: a fixed '}
+          <strong>{'reference policy'}</strong>
+          {
+            " used to regularize deviation from a starting behaviour with a KL term. That role is different from the old rollout snapshot. DAPO's main recipe sets the reference KL coefficient "
+          }
+          <InlineMath>{'\\beta'}</InlineMath>
+          {
+            ' to zero. It still needs old scores for the ratios. Subtracting two detached old/reference scores cannot supply a gradient with respect to the current model.'
+          }
+        </Prose>
+
+        <span id="2-core-intuition" aria-hidden="true" />
+        <span id="2-build-the-intuition" aria-hidden="true" />
+        <H2>{'3. Compare answers within their prompt'}</H2>
+
+        <Prose>
+          {
+            "We now have token probabilities. What coefficient should multiply their gradients? Group-relative methods compare each response's reward with the rewards of other responses to the same prompt. A response receives a positive coefficient when it is better than its sampled siblings and a negative one when it is worse."
+          }
+        </Prose>
+
+        <RewardRuler />
+
+        <Prose>
+          {'For the four rewards '}
+          <InlineMath>{'(-1,-1,+1,+1)'}</InlineMath>
+          {
+            ', adding and dividing by four gives mean 0. Subtracting that mean leaves two negative and two positive displacements. Their squared values sum to 4; dividing by three gives sample variance '
+          }
+          <InlineMath>{'4/3'}</InlineMath>
+          {
+            '. Its square root is about 1.155. Dividing each displacement by this scale gives approximately '
+          }
+          <InlineMath>{'(-.866,-.866,+.866,+.866)'}</InlineMath>
+          {', before the tiny denominator safeguard. These signed, scaled comparisons are the '}
+          <strong>{'advantages'}</strong>
+          {
+            '. Each response passes its one advantage to every selected token; it is not a token-by-token assessment.'
+          }
+        </Prose>
+
+        <Prose>
+          {'For a group of '}
+          <InlineMath>{'G\\ge2'}</InlineMath>
+          {' responses, define its mean '}
+          <InlineMath>{'\\bar R'}</InlineMath>
+          {', sample standard deviation '}
+          <InlineMath>{'s_R'}</InlineMath>
+          {', and standardized '}
+          <strong>{'advantage'}</strong> <InlineMath>{'A_i'}</InlineMath>
+          {':'}
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>
+            {
+              '\\bar R=\\frac1G\\sum_{i=1}^{G}R_i,\\qquad\ns_R=\\sqrt{\\frac{\\sum_i(R_i-\\bar R)^2}{G-1}},\\qquad\nA_i=\\frac{R_i-\\bar R}{s_R+\\varepsilon}.'
+            }
+          </MathBlock>
+        </div>
+
+        <Prose>
+          {'The small positive '}
+          <InlineMath>{'\\varepsilon'}</InlineMath>
+          {
+            ' prevents division by zero. The pinned original verl implementation uses sample standard deviation and '
+          }
+          <InlineMath>{'\\varepsilon=10^{-6}'}</InlineMath>
+          {'. The ordinary TRL route later uses '}
+          <InlineMath>{'10^{-4}'}</InlineMath>
+          {'. Both are specified rather than silently treated as identical.'}
+        </Prose>
+
+        <HomogeneousGroups />
+
+        <Prose>
+          {
+            'If every response gets +1, all centered rewards are zero. The same is true when every response gets −1. Neither group gives a relative policy signal. With '
+          }
+          <InlineMath>{'\\beta=0'}</InlineMath>
+          {
+            ' and no other objective, the corresponding policy-gradient terms are zero. The all-correct group and all-wrong group nevertheless have very different task meanings, so report them separately.'
+          }
+        </Prose>
+
+        <Prose>
+          {'Changing the reward scale also needs care. If '}
+          <InlineMath>{"R'_i=cR_i+b"}</InlineMath>
+          {' with '}
+          <InlineMath>{'c>0'}</InlineMath>
+          {', then centering removes '}
+          <InlineMath>{'b'}</InlineMath>
+          {' and the standard deviation scales by '}
+          <InlineMath>{'c'}</InlineMath>
+          {
+            '. Without epsilon, the standardized advantages are unchanged. With a fixed epsilon, they become '
+          }
+          <InlineMath>{'(R_i-\\bar R)/(s_R+\\varepsilon/c)'}</InlineMath>
+          {', which need not be exactly equal. Scaling epsilon by '}
+          <InlineMath>{'c'}</InlineMath>
+          {
+            ' restores exact equality. This is why “+1/−1 and 1/0 rewards are equivalent” needs a numerical qualification.'
+          }
+        </Prose>
+
+        <Prose>
+          {''}
+          <strong>{'Deeper: what normalization does not prove.'}</strong>
+          {
+            ' A self-including sample mean is correlated with the sampled action whose score it multiplies. Even without standardization, its expected finite-group score estimator has a '
+          }
+          <InlineMath>{'(G-1)/G'}</InlineMath>
+          {
+            ' factor relative to the raw expected-reward gradient under the usual IID assumptions. A leave-one-out baseline removes that particular factor. Dividing by a random group standard deviation introduces another weighting. These choices can work well, but standardized group advantages are not an automatic unbiased estimator of every proposed population objective. The linked GRPO lesson derives these distinctions explicitly.'
+          }
+        </Prose>
+
+        <H2>{'4. Read clipping as a slope, not a fence'}</H2>
+
+        <Prose>
+          {
+            "An old-policy sample may become much more likely as the current model changes. The clipped surrogate limits the incentive to keep improving an already favourable sampled action. It does this by changing the objective's slope; it does not project the model's probabilities into a permitted interval."
+          }
+        </Prose>
+
+        <SignedClip />
+
+        <Prose>
+          {
+            'Start with advantage +1 and ratio 1.25 in the drawing. The objective compares the raw contribution 1.25 with a clipped contribution. Symmetric .2 clipping caps that second value at 1.2, so the smaller value is 1.2. Raising the upper epsilon to .28 permits 1.25. With advantage −1, the raw value is −1.25, smaller than the symmetrically clipped −1.2; both recipes therefore keep −1.25. Making this unfavourable action more likely still worsens the objective. We call the quantity being maximized the '
+          }
+          <strong>{'surrogate'}</strong>
+          {'; the minimized loss is its negative.'}
+        </Prose>
+
+        <Prose>
+          {'Write the lower ratio bound as '}
+          <InlineMath>{'l=1-\\epsilon_{\\mathrm{low}}'}</InlineMath>
+          {' and the upper bound as '}
+          <InlineMath>{'u=1+\\epsilon_{\\mathrm{high}}'}</InlineMath>
+          {'. For one token, the maximized surrogate and minimized loss are'}
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>
+            {'S(r,A)=\\min\\{rA,\\operatorname{clip}(r,l,u)A\\},\\qquad\nL(r,A)=-S(r,A).'}
+          </MathBlock>
+        </div>
+
+        <Prose>
+          {'For '}
+          <InlineMath>{'A>0'}</InlineMath>
+          {', the surrogate rises with '}
+          <InlineMath>{'r'}</InlineMath>
+          {' until '}
+          <InlineMath>{'r=u'}</InlineMath>
+          {', then stays at '}
+          <InlineMath>{'uA'}</InlineMath>
+          {'. Making a good sampled action less likely, even below '}
+          <InlineMath>{'l'}</InlineMath>
+          {', still makes the objective worse. For '}
+          <InlineMath>{'A<0'}</InlineMath>
+          {', the surrogate is flat below '}
+          <InlineMath>{'l'}</InlineMath>
+          {' and decreases with '}
+          <InlineMath>{'r'}</InlineMath>
+          {' above '}
+          <InlineMath>{'l'}</InlineMath>
+          {'. The sign reverses which side becomes flat.'}
+        </Prose>
+
+        <Prose>
+          {'Away from the knees, because '}
+          <InlineMath>{'dr/d\\ell=r'}</InlineMath>
+          {', the loss derivative with respect to the current selected log probability is '}
+          <InlineMath>{'-rA'}</InlineMath>
+          {
+            ' on the active sloped branch and 0 on the flat branch. At an exact knee the mathematical function is nondifferentiable; finite gradient checks therefore use points away from it.'
+          }
+        </Prose>
+
+        <ProbabilitySimplex />
+
+        <Prose>
+          {
+            "The model's parameters are shared across tokens and examples. A large step, momentum, or gradients from other terms can move a probability beyond a clipping threshold. Once a particular term is flat, its own incentive stops; the rest of the parameter update does not disappear. A clipping threshold is therefore not a hard guarantee about the next model."
+          }
+        </Prose>
+
+        <H2>{'5. Clip-Higher changes permission, not guaranteed entropy'}</H2>
+
+        <Prose>
+          {'DAPO separates the two clipping widths. Its '}
+          <strong>{'Clip-Higher'}</strong>
+          {
+            ' setting keeps the lower epsilon at .2 and uses an upper epsilon of .28. A positive-advantage token can remain on the rising branch over a wider range. The motivation is to avoid suppressing useful exploration too early in long-response training.'
+          }
+        </Prose>
+
+        <EntropyChange />
+
+        <Prose>
+          {
+            'For an old probability .01, a ratio of 1.2 means current probability .012; 1.28 means .0128. For an old probability .5, the same ratios mean .6 and .64. These are absolute-probability interpretations of the ratios, not promises that an optimizer will reach those values. The distribution must still normalize, so increasing one token changes the mass available to others.'
+          }
+        </Prose>
+
+        <Prose>{"Entropy measures a distribution's spread:"}</Prose>
+
+        <div className="neural-equation">
+          <MathBlock>{'H(p)=-\\sum_a p_a\\log p_a.'}</MathBlock>
+        </div>
+
+        <Prose>
+          {'For a binary distribution '}
+          <InlineMath>{'(.8,.2)'}</InlineMath>
+          {', entropy is about .5004 nats. Increasing the already dominant action to .9 produces '}
+          <InlineMath>{'(.9,.1)'}</InlineMath>
+          {
+            " with entropy about .3251 nats. The rewarded action became more likely while entropy fell. Clip-Higher can permit that update. The paper's observed entropy behaviour is empirical; asymmetric clipping alone does not guarantee that entropy rises or remains above a floor."
+          }
+        </Prose>
+
+        <NegativeDualClip />
+
+        <Prose>
+          {''}
+          <strong>{'Deeper: a reproduction adds dual clipping.'}</strong>
+          {
+            " The pinned original reproduction's loss implementation supports an additional constant "
+          }
+          <InlineMath>{'c>1'}</InlineMath>
+          {' and its run script uses '}
+          <InlineMath>{'c=10'}</InlineMath>
+          {'. For negative advantages, it replaces the ordinary minimized loss by'}
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>{'L_{\\mathrm{dual}}(r,A)=\\min\\{L(r,A),-cA\\},\\quad A<0.'}</MathBlock>
+        </div>
+
+        <Prose>
+          {'For positive advantages it leaves the ordinary loss unchanged. At '}
+          <InlineMath>{'A=-2'}</InlineMath>
+          {', the extra cap is 20. At '}
+          <InlineMath>{'r=12'}</InlineMath>
+          {
+            ", the ordinary loss is 24, so dual clipping returns 20 and removes that term's slope there. This is a second, source-specific operation, not another name for the asymmetric interval "
+          }
+          <InlineMath>{'.8'}</InlineMath>
+          {' to '}
+          <InlineMath>{'1.28'}</InlineMath>
+          {
+            '. Our primary local campaigns leave dual clipping disabled; the finite program exposes and checks it separately.'
+          }
+        </Prose>
+
+        <H2>{'6. Decide what gets equal weight'}</H2>
+
+        <Prose>
+          {
+            "Clipping determines each selected token's contribution. We still need to combine those contributions into one scalar. Suppose one response has two selected tokens and another has six. Should the two responses have equal total weight, or should every selected token have equal weight?"
+          }
+        </Prose>
+
+        <RaggedWeights />
+
+        <Prose>
+          {
+            "With the two responses in the drawing, equal response weight gives each row one half of the total influence. The first row's two tokens therefore receive 1/4 each; the second row's six tokens receive 1/12 each. Equal token weight instead gives all eight tokens 1/8: the short response has total weight 1/4 and the long one 3/4. If the rows' mean contributions are 1 and 3, equal response weight gives "
+          }
+          <InlineMath>{'(1+3)/2=2'}</InlineMath>
+          {', while equal token weight gives '}
+          <InlineMath>{'(2\\cdot1+6\\cdot3)/8=2.5'}</InlineMath>
+          {'.'}
+        </Prose>
+
+        <Prose>
+          {'Let '}
+          <InlineMath>{'M_{i,t}'}</InlineMath>
+          {' be 1 for an included response token and 0 otherwise, and let '}
+          <InlineMath>{'L_i=\\sum_tM_{i,t}'}</InlineMath>
+          {'. For '}
+          <InlineMath>{'N'}</InlineMath>
+          {' nonempty responses, those two choices generalize to'}
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>
+            {
+              '\\mathcal L_{\\mathrm{response}}=\n\\frac1N\\sum_i\\frac{\\sum_tM_{i,t}L(r_{i,t},A_i)}{L_i},\n\\qquad\n\\mathcal L_{\\mathrm{token}}=\n\\frac{\\sum_{i,t}M_{i,t}L(r_{i,t},A_i)}{\\sum_{i,t}M_{i,t}}.'
+            }
+          </MathBlock>
+        </div>
+
+        <LossMass />
+
+        <Prose>
+          {
+            "This is DAPO's token-level aggregation distinction. GRPO already uses per-token likelihood ratios; DAPO does not introduce those ratios from sequence-level GRPO. The change here is the reduction. Longer responses receive more total influence under token averaging because they contain more included terms. That is a weighting choice, not a theorem that every length bias disappears."
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'An all-empty selected mask has denominator 0. Our scratch program rejects it rather than reporting a successful zero loss. An optional library clamp may return a numerical value in that situation, but no token evidence was used. Always inspect the selected count along with the loss.'
+          }
+        </Prose>
+
+        <Prose>
+          {''}
+          <strong>{"Deeper: compare Dr. GRPO's question."}</strong>
+          {
+            " Dr. GRPO removes per-response length normalization and the group standard-deviation scaling, and uses a fixed normalizing constant such as a generation budget. Pooled-token averaging still has a denominator that changes with the sampled batch's lengths. Those are different objectives and estimators. Removing a variable length factor also does not, by itself, remove the finite-group self-mean factor derived earlier. State the target gradient and assumptions before calling an estimator unbiased."
+          }
+        </Prose>
+
+        <H2>{'7. Refill with complete prompt groups'}</H2>
+
+        <Prose>
+          {
+            "Token averaging decides how retained tokens count. But a batch of all-correct or all-wrong groups still has no relative correctness signal. DAPO's "
+          }
+          <strong>{'dynamic sampling'}</strong>
+          {
+            ' generates more candidate prompt groups and retains eligible groups until it fills a target training batch.'
+          }
+        </Prose>
+
+        <WholeGroupCollector />
+
+        <Prose>
+          {
+            'The unit of selection is a whole prompt group. For binary correctness, a mixed group has at least one passing and at least one failing answer. If '
+          }
+          <InlineMath>{'C_i\\in\\{0,1\\}'}</InlineMath>
+          {' records correctness, eligibility is '}
+          <InlineMath>{'0<\\sum_{i=1}^GC_i<G'}</InlineMath>
+          {'. The first and last conditions reject all-wrong and all-correct groups, respectively.'}
+        </Prose>
+
+        <Prose>
+          {
+            'Imagine a target of two eligible prompts, each with four responses. The first candidate batch has two homogeneous groups, so it fills no slots. The second has one mixed group and one homogeneous group, so it fills one slot. The third supplies another mixed group and completes the target. Every generated answer counts as work, including discarded groups and an eligible group generated after the final available slot is filled.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'The original recipe samples additional candidate questions. It does not require retrying the same failed question indefinitely. Our local collector uses an explicit, fixed candidate order and a maximum of three batches. If it cannot fill its target, it records an '
+          }
+          <strong>{'exhausted slot'}</strong>
+          {
+            ' and makes no optimizer update for that slot. Reporting that outcome is more informative than silently changing the budget until a mixed group appears.'
+          }
+        </Prose>
+
+        <IdentityJoin />
+
+        <Prose>
+          {
+            'Filtering must preserve identity. Suppose response rows for prompts C and A survive. Their corresponding prompt rows, old log probabilities, masks and rewards must also be C and A. Combining retained responses with the first two unfiltered prompts A and B evaluates the wrong conditional probabilities. A plausible scalar loss would not reveal that error.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'The local collector retains complete row records with prompt, group and response IDs. Tensor packing happens after selection. Selecting the same UIDs after a storage permutation preserves their contents. Changing candidate arrival order can still change which eligible groups fit a finite quota; that is a selection-policy change, not an identity-join guarantee.'
+          }
+        </Prose>
+
+        <Prose>
+          {'Selection also needs an explicit '}
+          <strong>{'metric'}</strong>
+          {
+            '. Our main collector filters binary correctness. The eventual loss can use correctness plus a length penalty. A group can be homogeneous in correctness and heterogeneous in shaped reward. Those two filters would retain different data; neither should be called simply “remove zero-variance groups” without naming the variance.'
+          }
+        </Prose>
+
+        <span id="8-what-scales-and-what-doesnt" aria-hidden="true" />
+        <span id="8-what-scales-and-what-doesn-t" aria-hidden="true" />
+        <H2>{'8. Account for the cost and selection effect'}</H2>
+
+        <Prose>
+          {
+            'Refilling improves the proportion of informative retained groups. It also spends generation work on rejected candidates and changes the distribution of prompts used for updates. We can see both effects in a small probability model before interpreting a measured speed claim.'
+          }
+        </Prose>
+
+        <MixedGroupCost />
+
+        <Prose>
+          {
+            'Take two independent responses, each correct with probability .5. The tree has four equally likely outcomes: pass/pass, pass/fail, fail/pass and fail/fail. Only the middle two are mixed, so acceptance probability is .5. With unlimited independent candidate trials of this kind, three accepted groups require '
+          }
+          <InlineMath>{'3/.5=6'}</InlineMath>
+          {
+            ' candidates on average. An average is not a guarantee that a budget of six will succeed.'
+          }
+        </Prose>
+
+        <Prose>
+          {'For a fixed prompt with independent responses and correctness probability '}
+          <InlineMath>{'p'}</InlineMath>
+          {', all '}
+          <InlineMath>{'G'}</InlineMath>
+          {' responses pass with probability '}
+          <InlineMath>{'p^G'}</InlineMath>
+          {'; all fail with probability '}
+          <InlineMath>{'(1-p)^G'}</InlineMath>
+          {'. Subtracting these disjoint homogeneous events gives mixed probability'}
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>{'a(p)=1-p^G-(1-p)^G.'}</MathBlock>
+        </div>
+
+        <Prose>
+          {
+            'With the same positive acceptance probability on each independent trial, the unlimited expected candidate count for '
+          }
+          <InlineMath>{'K'}</InlineMath>
+          {' accepted groups is '}
+          <InlineMath>{'K/a(p)'}</InlineMath>
+          {'.'}
+        </Prose>
+
+        <Prose>
+          {'When '}
+          <InlineMath>{'p=0'}</InlineMath>
+          {' or '}
+          <InlineMath>{'p=1'}</InlineMath>
+          {
+            ', acceptance is zero. No finite number of retries can produce a mixed group under those assumptions. A real model may have correlated responses, and different prompts have different probabilities; those facts can invalidate the simple cost prediction. The formula is a mechanism model whose assumptions must travel with it.'
+          }
+        </Prose>
+
+        <AcceptedMixture />
+
+        <Prose>
+          {
+            'Suppose half the candidate prompts are always answered correctly and half produce a mixed group with probability .5. The first type contributes '
+          }
+          <InlineMath>{'.5\\cdot0=0'}</InlineMath>
+          {' accepted mass; the second contributes '}
+          <InlineMath>{'.5\\cdot.5=.25'}</InlineMath>
+          {
+            '. After dividing by total accepted mass .25, every retained prompt belongs to the second type. Selection has changed the prompt distribution.'
+          }
+        </Prose>
+
+        <Prose>
+          {'Let candidate prompt type '}
+          <InlineMath>{'j'}</InlineMath>
+          {' have mass '}
+          <InlineMath>{'w_j'}</InlineMath>
+          {' and mixed probability '}
+          <InlineMath>{'a_j'}</InlineMath>
+          {'. Multiplying each mass by its acceptance probability and renormalizing gives'}
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>{"w'_j=\\frac{w_ja_j}{\\sum_k w_ka_k},"}</MathBlock>
+        </div>
+
+        <Prose>
+          {
+            'when the denominator is positive. This can usefully focus updates, but a lower loss on the retained data is not automatically an improvement on the original task mixture.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'For efficiency, count candidate groups, generated tokens, retained tokens, actual optimizer updates and elapsed time. “Fewer training steps” compares only one of those quantities. An accepted step can become more expensive as the model solves more questions and homogeneous groups become common.'
+          }
+        </Prose>
+
+        <H2>{'9. Treat truncation and length reward separately'}</H2>
+
+        <Prose>
+          {
+            'Even an eligible group can contain a response cut off before its final answer. The model can stop by emitting EOS, or the generator can stop because it reaches a maximum token count. These are different termination events. If a checker receives an unfinished response, a low reward may reflect the budget rather than the correctness of a complete proposed answer.'
+          }
+        </Prose>
+
+        <TerminationMasks />
+
+        <Prose>{'There are at least three possible interventions:'}</Prose>
+
+        <NeuralTable
+          caption={'9. Treat truncation and length reward separately'}
+          headers={[<>{'Intervention'}</>, <>{'What changes'}</>, <>{'What can remain active'}</>]}
+          rows={[
+            [
+              <>{'Set its terminal reward to zero'}</>,
+              <>{'The scalar used in group statistics'}</>,
+              <>{'Its advantage can be nonzero relative to siblings'}</>,
             ],
-          },
-          {
-            name: "clip-higher (ε_low=0.2, ε_high=0.28)",
-            color: colors.gold,
-            points: [
-              [0,  0.693], [5,  0.638], [10, 0.571], [20, 0.382],
-              [30, 0.261], [40, 0.214], [50, 0.185], [60, 0.170],
+            [
+              <>{'Remove its response from the loss mask'}</>,
+              <>{'Its selected token contributions'}</>,
+              <>
+                {
+                  "Its reward may still affect siblings' group statistics, depending on the implementation"
+                }
+              </>,
             ],
-          },
-        ]}
-      />
-
-      <H3>6.2 Pass rate: GRPO baseline vs DAPO (all four patches)</H3>
-
-      <Prose>
-        On a toy reasoning task starting from chance performance, DAPO with all four
-        patches converges faster and reaches a higher final reward. The improvement is
-        most visible in the 20–50 step range, where GRPO's entropy collapse begins to
-        stall gradient signal while DAPO's dynamic sampling and clip-higher maintain
-        informative updates.
-      </Prose>
-
-      <Plot
-        label="pass rate: grpo baseline vs dapo (all patches)"
-        xLabel="training step"
-        yLabel="mean reward (pass rate)"
-        series={[
-          {
-            name: "GRPO baseline",
-            color: "#60a5fa",
-            points: [
-              [0,  0.49], [5,  0.54], [10, 0.58], [20, 0.64],
-              [30, 0.67], [40, 0.70], [50, 0.72], [60, 0.73],
+            [
+              <>{'Add a length penalty'}</>,
+              <>{'The shaped reward before centering'}</>,
+              <>{'The response can still contribute every token to the loss'}</>,
             ],
-          },
+          ]}
+        />
+
+        <Prose>
+          {'For rewards '}
+          <InlineMath>{'(0,1,1,1)'}</InlineMath>
           {
-            name: "DAPO (clip-higher + dynamic sampling + token-level + overlong filter)",
-            color: colors.gold,
-            points: [
-              [0,  0.49], [5,  0.56], [10, 0.62], [20, 0.70],
-              [30, 0.75], [40, 0.78], [50, 0.80], [60, 0.81],
+            ', the zero-reward response has centered value −.75. Zero reward is therefore not equivalent to removing its gradient. Likewise, removing its loss tokens is not necessarily equivalent to removing it from the reward-normalization group. Read both the mask and group-statistic code.'
+          }
+        </Prose>
+
+        <LengthBuffer />
+
+        <Prose>
+          {
+            "With the paper's maximum length 20,480 and buffer 4,096, subtracting the buffer locates the penalty's start at 16,384 tokens. A response of length 18,432 lies halfway across that buffer: "
+          }
+          <InlineMath>{'(16{,}384-18{,}432)/4{,}096=-.5'}</InlineMath>
+          {'. The penalty is zero before the buffer and reaches −1 at the maximum.'}
+        </Prose>
+
+        <Prose>
+          {"DAPO's soft length penalty therefore starts before the hard generation limit. Let "}
+          <InlineMath>{'M'}</InlineMath>
+          {' be the maximum response length and '}
+          <InlineMath>{'B'}</InlineMath>
+          {' be a positive buffer with '}
+          <InlineMath>{'B\\le M'}</InlineMath>
+          {':'}
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>
+            {
+              'P(L)=\\begin{cases}\n0,&L\\le M-B,\\\\\n(M-B-L)/B,&M-B<L\\le M,\\\\\n-1,&L>M.\n\\end{cases}\n\\qquad R_i=R^{\\mathrm{correctness}}_i+P(L_i).'
+            }
+          </MathBlock>
+        </div>
+
+        <Prose>
+          {
+            'A generator enforcing the cap never produces a longer response, but the final branch makes the mathematical function explicit. The pinned reward helper implements it directly.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'Our tiny demonstration uses cap 8 and buffer 4 so the same arithmetic can be inspected on short outputs. Those numbers are not recommendations for reasoning tasks. We count genuine emitted EOS as a token and determine truncation from the termination event: EOS exactly at the cap still means the model emitted a stop token.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            "The original reproduction reports that its best runs mostly omit hard overlong filtering. TRL's published DAPO configuration example instead enables "
+          }
+          <code>{'mask_truncated_completions'}</code>
+          {
+            '. Our primary native campaign leaves it disabled; its finite preflight separately examines the optional resulting mask. The source comparison later keeps these recipes distinct. Soft shaping and hard masking must not be silently merged under one “overlong handling” flag.'
+          }
+        </Prose>
+
+        <span id="3-mathematical-foundation" aria-hidden="true" />
+        <span id="3-make-the-idea-precise" aria-hidden="true" />
+        <H2>{'10. Assemble the actual objective and gradient'}</H2>
+
+        <Prose>
+          {
+            'We can now assemble a precise local variant. Generate complete prompt groups, filter on correctness variation, shape rewards by length, compute group advantages, score the selected tokens with old and current policies, apply asymmetric clipping, and pool the selected token terms. Hold old scores, rewards and masks fixed during each update.'
+          }
+        </Prose>
+
+        <SoftmaxGradient />
+
+        <Prose>
+          {
+            'For our primary DAPO-component objective, with no reference KL, hard truncation mask or dual clipping, the minimized loss is'
+          }
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>
+            {
+              '\\mathcal L(\\theta)=\n-\\frac1Z\\sum_{i,t}M_{i,t}\n\\min\\!\\left(r_{i,t}(\\theta)A_i,\n\\operatorname{clip}(r_{i,t}(\\theta),.8,1.28)A_i\\right),\n\\quad Z=\\sum_{i,t}M_{i,t}>0.'
+            }
+          </MathBlock>
+        </div>
+
+        <Prose>
+          {'The tensor dimensions help locate mistakes: current/old logps and mask are '}
+          <InlineMath>{'N\\times T'}</InlineMath>
+          {', one advantage per response is '}
+          <InlineMath>{'N'}</InlineMath>
+          {', and broadcasting it across positions gives '}
+          <InlineMath>{'N\\times T'}</InlineMath>
+          {'. The selected-token count '}
+          <InlineMath>{'Z'}</InlineMath>
+          {' is a scalar. Prompt tokens remain visible to the model but have zero target mask.'}
+        </Prose>
+
+        <Prose>
+          {'Suppose one selected action '}
+          <InlineMath>{'a'}</InlineMath>
+          {' has probability '}
+          <InlineMath>{'p_a'}</InlineMath>
+          {' from logits '}
+          <InlineMath>{'z'}</InlineMath>
+          {'. Softmax gives the useful derivative'}
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>{'\\frac{\\partial\\log p_a}{\\partial z_k}\n=\\mathbf1[k=a]-p_k.'}</MathBlock>
+        </div>
+
+        <Prose>
+          {"On an unclipped branch, this token's contribution to the logit gradient is "}
+          <InlineMath>{'(-rA/Z)(\\mathbf e_a-p)'}</InlineMath>
+          {
+            ". On its flat branch, that contribution is zero. All logit coordinates participate because probabilities share normalization. The full language-model gradient then follows the logits back through the same network; it is not a separate independent update of each token's probability."
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'Masking can also affect numerical stability. Multiplying an overflowed unselected exponential by zero can produce NaN. The local objective first replaces unselected log-ratios with zero, computes the ratio, then reduces only selected terms. It rejects nonfinite selected inputs and an empty mask. That numerical protection does not discard difficult but valid selected rows.'
+          }
+        </Prose>
+
+        <MicrobatchCount />
+
+        <Prose>
+          {''}
+          <strong>{'Deeper: preserve the denominator across microbatches.'}</strong>
+          {
+            ' Suppose one microbatch contains 2 selected tokens with total loss 2, and another contains 6 with total loss 18. The whole-batch token mean is '
+          }
+          <InlineMath>{'(2+18)/(2+6)=2.5'}</InlineMath>
+          {'. Averaging the two local means gives '}
+          <InlineMath>{'(1+3)/2=2'}</InlineMath>
+          {', a different objective.'}
+        </Prose>
+
+        <Prose>
+          {
+            'To preserve the global mean, accumulate both numerators and counts, or divide each differentiable numerator by the same known global count 8 and sum the losses. Do not take another average afterward. Across processes, the scaling must also account for whether distributed gradient reduction sums or averages.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'The pinned original verl actor weights dynamic microbatch means by the number of response rows. That does not automatically equal weighting by selected token counts when lengths differ. Modern library implementations can use a generation-batch token normalizer with process/accumulation factors. We inspect the pinned native denominator and compare actual gradients instead of assuming that a '
+          }
+          <code>{'token-mean'}</code>
+          {' label establishes equivalence at every batching boundary.'}
+        </Prose>
+
+        <span id="4-from-scratch-implementation" aria-hidden="true" />
+        <H2>{'11. Implement a collector that cannot lose identity'}</H2>
+
+        <Prose>
+          {
+            'The objective is now explicit. The next risk is feeding it the wrong rows. A response, its prompt, its reward and its old log probabilities form one record. They must survive filtering together.'
+          }
+        </Prose>
+
+        <RecordMemory />
+
+        <Prose>
+          {
+            "Suppose the incoming prompts are A, B and C. The collector retains C and A. Gathering completions with indices [2,0] but taking the first two prompt rows pairs C's response with A and A's response with B. All tensor dimensions can still match. The loss runs, but it scores responses in the wrong contexts. This is a semantic error that a shape assertion cannot catch."
+          }
+        </Prose>
+
+        <Prose>
+          {''}
+          <code>{'complete_groups'}</code>
+          {
+            ' checks unique response UIDs, exactly G rows per group, one prompt identity per group and identical prompt token sequences within that group. '
+          }
+          <code>{'collect'}</code>
+          {' retains entire original records. Its '}
+          <code>{'decisions'}</code>
+          {
+            ' list also records generated groups excluded by the quota, so discarded work remains visible. A caller must inspect '
+          }
+          <code>{'status'}</code>
+          {
+            ': an exhausted collector may contain some eligible groups but has not fulfilled the requested optimization batch. Our training program records that slot and performs no update.'
+          }
+        </Prose>
+
+        <Prose>
+          {'Download and extract the '}
+          <a href={'/learn-code/dapo-examples.zip'}>{'complete program archive'}</a>
+          {'. The '}
+          <a href={'/learn-code/dapo/README.md'}>{'README'}</a>
+          {' describes its files and environment. In the extracted '}
+          <code>{'dapo'}</code>
+          {' directory, create a Python 3.12 virtual environment with '}
+          <code>{'python -m venv .venv'}</code>
+          {', activate it for your shell ('}
+          <code>{'.venv\\Scripts\\Activate.ps1'}</code>
+          {' in PowerShell or '}
+          <code>{'source .venv/bin/activate'}</code>
+          {' in bash), then install '}
+          <code>{'python -m pip install -r requirements.txt'}</code>
+          {'. Run '}
+          <code>{'python dapo_checks.py --output finite.json'}</code>
+          {' from that same directory. '}
+          <code>{'dapo_collect.py'}</code>
+          {' and '}
+          <code>{'dapo_math.py'}</code>
+          {
+            ' are imported helpers; the finite check command uses constructed tensors and the library reward helper without loading or training a language model. The model-acquisition commands follow in section 12.'
+          }
+        </Prose>
+
+        <Program file="dapo_collect.py" />
+
+        <Prose>
+          {'Read the collector from the inner loop outward. '}
+          <code>{'mixed'}</code>
+          {' asks whether both correctness outcomes occur. '}
+          <code>{'room'}</code>
+          {
+            ' asks whether another complete group fits. Only their conjunction selects a group in dynamic mode. Reordering storage within a known group must preserve its fields. Changing the arrival order of eligible groups can change which ones fill the quota; the program does not claim that a first-arrival policy is permutation invariant.'
+          }
+        </Prose>
+
+        <FiniteBatchDebugger />
+
+        <Prose>
+          {'The objective receives already gathered current and old token log probabilities. '}
+          <code>{'advantages'}</code>
+          {' detaches the group statistics; '}
+          <code>{'objective'}</code>
+          {
+            ' broadcasts one coefficient per response, computes the signed clipped surrogate and reduces over explicit selected positions. It returns intermediate tensors so a failed case can be inspected without reimplementing the loss in a plotting script.'
+          }
+        </Prose>
+
+        <Program file="dapo_math.py" />
+
+        <Prose>
+          {
+            'Padding is an address convention, not a reward convention. If PAD and EOS share an ID, comparing every token ID with EOS would erase a genuine emitted EOS. The recorded generation length determines which positions are valid. The causal gather scores each completion token from its preceding prefix, including the first completion token predicted from the last prompt position.'
+          }
+        </Prose>
+
+        <Prose>
+          {''}
+          <code>{'dapo_checks.py'}</code>
+          {
+            " exercises the branches that a lucky model batch can miss: positive and negative clipping, optional dual clipping, unequal lengths, all-masked rejection, whole-group selection, quota overflow, finite exhaustion, microbatch denominators and the ordinary library's soft length penalty. Its finite-difference checks stay away from clipping knees, where the loss is continuous but a unique derivative need not exist."
+          }
+        </Prose>
+
+        <Program file="dapo_checks.py" />
+
+        <H2>{'12. Run a small real language-model update'}</H2>
+
+        <Prose>
+          {
+            'Finite examples establish the calculation. A language-model run adds a causal network, real text, stochastic generation and parameter sharing across tokens. We reuse the exact small checkpoint from '
+          }
+          <a
+            href={
+              '/learn/path/full-curriculum/supervised-fine-tuning-sft?module=large-language-models'
+            }
+          >
+            {'Supervised Fine-Tuning'}
+          </a>
+          {' and the sampler taught in '}
+          <a
+            href={
+              '/learn/path/full-curriculum/grpo-rloo-kto-advanced-preference-methods?module=large-language-models'
+            }
+          >
+            {'GRPO, RLOO and KTO'}
+          </a>
+          {'. The new code implements the collector and objective around those components.'}
+        </Prose>
+
+        <ModelStructure />
+
+        <Prose>
+          {
+            'The saved Pythia14m configuration has vocabulary size 50,304, hidden width 128, six blocks, four attention heads per block and MLP width 512. Its input embedding and vocabulary head are untied. Transformers executes that architecture; PyTorch differentiates it. We keep dropout disabled so generation and old-policy rescoring describe the same distribution.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'The task is Poem Sentiment. A prompt contains a real poem excerpt and asks for one label. The verifier checks the emitted label against the dataset label. This makes group selection and token loss observable on modest hardware. It does not measure long mathematical reasoning. The first 16 training records and first 32 test records, ordered by original ID after removing mixed labels, are the same demonstration cohort used in the prerequisite. Their repeated use must not be mistaken for an untouched benchmark.'
+          }
+        </Prose>
+
+        <Prose>
+          {'All six runs start from the same SFT response-only seed 17 selected checkpoint. The '}
+          <code>{'model.safetensors'}</code>
+          {' identity is '}
+          <code>{'8ffe40fc676d22d608b58b35af11bf467c36981dbb3ccfe373a7d574bd8251cd'}</code>
+          {
+            '. Seeds 73, 89 and 101 prescribe prompt order and generation randomness; they do not select three different initial models. Both methods share the candidate prompt plan, although different updates can make their later generated answers differ even when their sampling seeds agree.'
+          }
+        </Prose>
+
+        <NeuralTable
+          caption={'12. Run a small real language-model update'}
+          headers={[
+            <>{'Setting'}</>,
+            <>{'Response baseline'}</>,
+            <>{'Combined DAPO components'}</>,
+          ]}
+          rows={[
+            [<>{'Prompt groups per filled slot'}</>, <>{'2'}</>, <>{'2'}</>],
+            [<>{'Responses per prompt'}</>, <>{'4'}</>, <>{'4'}</>],
+            [<>{'Candidate batches per slot'}</>, <>{'1'}</>, <>{'At most 3'}</>],
+            [
+              <>{'Eligible groups'}</>,
+              <>{'Every complete group'}</>,
+              <>{'Mixed correctness only'}</>,
             ],
-          },
-        ]}
-      />
+            [<>{'Correctness reward'}</>, <>{'+1 or −1'}</>, <>{'+1 or −1'}</>],
+            [<>{'Extra length reward'}</>, <>{'None'}</>, <>{'Cap 8, buffer 4 soft penalty'}</>],
+            [<>{'Clip widths'}</>, <>{'.2 below, .2 above'}</>, <>{'.2 below, .28 above'}</>],
+            [<>{'Reduction'}</>, <>{'Mean of response means'}</>, <>{'Mean of selected tokens'}</>],
+            [<>{'Scheduled slots'}</>, <>{'2'}</>, <>{'2'}</>],
+            [<>{'Updates per filled slot'}</>, <>{'2'}</>, <>{'2'}</>],
+          ]}
+        />
 
-      <H3>6.3 DAPO single update: step trace</H3>
-
-      <StepTrace
-        label="dapo single training update"
-        steps={[
+        <Prose>
           {
-            label: "Sample G rollouts per prompt",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="prompt x → G=8 rollouts from current policy"
-                  tokens={[
-                    { label: "prompt x", color: colors.gold },
-                    { label: "→ sample G=8", color: colors.textDim },
-                    { label: "y₁ r=1.0", color: "#4ade80" },
-                    { label: "y₂ r=0.0", color: "#f87171" },
-                    { label: "y₃ r=1.0", color: "#4ade80" },
-                    { label: "y₄–y₈ r=0", color: colors.textMuted },
-                  ]}
-                />
-                <Prose>
-                  The current policy generates G responses to the same prompt. Rewards are
-                  computed by the verifier (deterministic, no neural network). Overlong
-                  filtering is applied here: any response truncated at the length cap
-                  receives reward 0 before the next step.
-                </Prose>
-              </div>
-            ),
-          },
+            'Both use sample standard deviation plus 1e−6, plain SGD at 1e−4, full-support temperature 1 sampling, genuine EOS stopping and an eight-token generation cap. Neither has a KL term, dual clipping or hard-overlong loss masking. The old scores remain fixed across the two updates on each collected batch. If a combined-arm slot exhausts its candidate budget, it receives zero updates; the program does not keep trying until the result looks useful.'
+          }
+        </Prose>
+
+        <SavedRolloutLedger />
+
+        <Prose>
           {
-            label: "Patch 2 — Variance filter (dynamic sampling)",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="variance filter: keep or resample?"
-                  tokens={[
-                    { label: "std(rewards) > 0?", color: colors.gold },
-                    { label: "YES → keep group", color: "#4ade80" },
-                    { label: "NO → resample (up to 3x)", color: "#f87171" },
-                    { label: "still NO → drop prompt", color: colors.textMuted },
-                  ]}
-                />
-                <Prose>
-                  If all rewards in the group are identical (all correct or all wrong),
-                  the group advantage will be zero. DAPO resamples up to K=3 times.
-                  If still degenerate, the prompt is skipped for this batch and compute
-                  is redirected to prompts at the boundary of the model's ability.
-                </Prose>
-              </div>
-            ),
-          },
+            "The training loop first saves raw candidate records and gathers whole eligible groups. It then recomputes old token scores, checks them against the probabilities used during generation and takes the two prescribed updates. Every selected token's current score and clipped term remain inspectable. Finally it evaluates the terminal policy and verifies that a saved-and-reloaded model has exactly the same parameters. Reload equality checks serialization; it does not establish better predictions."
+          }
+        </Prose>
+
+        <Program file="train_dapo.py" />
+
+        <Prose>
           {
-            label: "Compute group-normalized advantages",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="group statistics → advantages"
-                  tokens={[
-                    { label: "μ_G = 0.25", color: colors.textDim },
-                    { label: "σ_G = 0.43", color: colors.textDim },
-                    { label: "A₁ = +1.73", color: "#4ade80" },
-                    { label: "A₂ = −0.58", color: "#f87171" },
-                    { label: "A₃ = +1.73", color: "#4ade80" },
-                    { label: "A₄–A₈ = −0.58", color: "#f87171" },
-                  ]}
-                />
-                <Prose>
-                  With 2 correct responses out of 8 (after overlong filtering), the
-                  group mean is 0.25 and std ≈ 0.43. Correct responses receive large
-                  positive advantage (+1.73); wrong responses receive modest negative
-                  advantage (−0.58).
-                </Prose>
-              </div>
-            ),
-          },
+            'Use Python 3.12, create a virtual environment, and install the supplied pinned requirements. Reuse the SFT checkpoint directory, including its tokenizer; the downloadable sources contain acquisition instructions and data provenance. Adapted model weights are not bundled. A fresh SFT run produces a new model observation even if it uses the same command.'
+          }
+        </Prose>
+
+        <CodeBlock language={'sh'}>
           {
-            label: "Patch 3 — Token-level importance ratios",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="per-token ratio computation (long rollout)"
-                  tokens={[
-                    { label: "token t=1: ρ₁=1.03", color: colors.textDim },
-                    { label: "token t=100: ρ₁₀₀=1.08", color: colors.textDim },
-                    { label: "token t=2000: ρ₂₀₀₀=1.19", color: "#fbbf24" },
-                    { label: "clip each independently", color: colors.gold },
-                  ]}
-                />
-                <Prose>
-                  For long rollouts, per-token importance ratios grow as the policy moves.
-                  Token-level clipping applies the clip bounds at each position separately,
-                  preventing late-sequence tokens from being over- or under-updated relative
-                  to their actual probability change from the old to the new policy.
-                </Prose>
-              </div>
-            ),
-          },
+            'python -m pip install -r requirements.txt\npython dapo_checks.py --output finite.json\npython train_dapo.py --model response-17/selected --data data --arm response-baseline --seed 73 --output runs/response-baseline-73\npython train_dapo.py --model response-17/selected --data data --arm dapo-components --seed 73 --output runs/dapo-components-73'
+          }
+        </CodeBlock>
+
+        <Prose>
           {
-            label: "Patch 1 — Asymmetric clip, then gradient step",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="asymmetric clip → loss → update"
-                  tokens={[
-                    { label: "A > 0: clip at 1+ε_high=1.28", color: "#4ade80" },
-                    { label: "A < 0: clip at 1-ε_low=0.80", color: "#f87171" },
-                    { label: "min(r·A, clip·A)", color: colors.gold },
-                    { label: "→ gradient step", color: "#4ade80" },
-                  ]}
-                />
-                <Prose>
-                  The asymmetric clip raises the ceiling for positive-advantage updates:
-                  a correct reasoning path can be reinforced up to 1.28× its old probability
-                  in a single step, vs 1.20× with symmetric clipping. The floor for wrong
-                  paths stays at 0.80. This asymmetry is the core entropy-preservation
-                  mechanism of clip-higher.
-                </Prose>
-              </div>
-            ),
-          },
-        ]}
-      />
+            'Run the two training commands with seeds 89 and 101 and distinct corresponding directories to obtain the whole prespecified comparison. Each program refuses an existing run directory. Preserve failures and their saved state rather than overwriting them or changing the seed. A reviewed continuation from a coherent checkpoint is a different operation from silently restarting a failed fit.'
+          }
+        </Prose>
 
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
+        <span id="5-production-implementation" aria-hidden="true" />
+        <H2>{'13. Use the ordinary library route honestly'}</H2>
 
-      <Prose>
-        DAPO is not the default choice for all verifiable-reward RL. It is a collection
-        of fixes for failure modes that become acute at multi-thousand-token rollout
-        lengths. Understanding when to apply each patch — and when not to — requires
-        knowing which failure modes are actually present in your training run.
-      </Prose>
+        <Prose>
+          {
+            'The local implementation makes each operation visible. The ordinary library route makes different responsibilities visible: an option can select a loss without supplying the entire algorithm around it.'
+          }
+        </Prose>
 
-      <Heatmap
-        label="Method selection by failure mode and rollout length"
-        rowLabels={["GRPO baseline", "GRPO + clip-higher", "GRPO + dynamic sampling", "Full DAPO (all 4 patches)", "Plain PPO"]}
-        colLabels={["Short rollouts (≤1k tok)", "Long rollouts (2k–8k tok)", "Very long (8k+ tok)", "Hard problems", "Entropy stable"]}
-        matrix={[
-          [1.0, 0.5, 0.2, 0.6, 0.5],
-          [0.9, 0.8, 0.5, 0.7, 0.8],
-          [0.8, 0.7, 0.5, 0.8, 0.6],
-          [0.7, 0.9, 1.0, 1.0, 0.9],
-          [1.0, 0.4, 0.1, 0.5, 1.0],
-        ]}
-        colorScale="gold"
-      />
+        <NativeMechanism />
 
-      <H3>Use GRPO baseline when</H3>
+        <Prose>
+          {'The pinned TRL 1.14.2 route uses '}
+          <code>{'GRPOTrainer'}</code>
+          {' with '}
+          <code>{'loss_type="dapo"'}</code>
+          {', '}
+          <code>{'epsilon=.2'}</code>
+          {', '}
+          <code>{'epsilon_high=.28'}</code>
+          {', '}
+          <code>{'beta=0'}</code>
+          {' and '}
+          <code>{'scale_rewards="group"'}</code>
+          {
+            ". Its correctness reward and ordinary soft-overlong reward are summed before normalization. The library's group denominator is sample standard deviation plus 1e−4, whereas our scratch route uses 1e−6. Small numerical conventions belong in the comparison, even when they rarely dominate the outcome."
+          }
+        </Prose>
 
-      <Prose>
-        Rollouts are short (under 1,000 tokens), the task is verifiable-reward RL on
-        math or code, and you want the simplest stable training loop. Most failure modes
-        that motivate DAPO do not materialize at short rollout lengths. The DeepSeekMath
-        paper (the original GRPO paper) demonstrated strong results on mathematical
-        benchmarks without any of DAPO's patches, because the rollout lengths in that
-        setup were moderate.
-      </Prose>
+        <Prose>
+          {''}
+          <code>{'loss_type="dapo"'}</code>
+          {
+            ' chooses a token normalization path. It does not provide the bounded mixed-group refill collector from section 7. A reward callback returns scores for completions that already exist; it cannot by itself request new prompt groups until a quota is filled. A pre-generation data collator has even less information: it has no sampled responses or observed correctness yet.'
+          }
+        </Prose>
 
-      <H3>Use clip-higher alone when</H3>
+        <Prose>
+          {
+            "The official TRL DAPO example enables hard truncation masking. Our primary native campaign disables it to keep its selected recipe explicit. A separate constructed preflight supplies a resulting mask with one truncated row removed. That tests the loss on the mask; it does not simulate every EOS/cap branch of the trainer's generation code."
+          }
+        </Prose>
 
-      <Prose>
-        Entropy is declining faster than expected mid-training and reward improvement
-        is plateauing early. Monitor policy entropy as a training metric: if it falls
-        below 0.3 nats (for a 2-token vocabulary equivalent) within the first 20% of
-        training steps, clip-higher is the first patch to try. It is the cheapest fix
-        — a single line change to the clip bounds — and addresses the most common
-        long-rollout failure mode.
-      </Prose>
+        <NativeParity />
 
-      <H3>Use dynamic sampling when</H3>
+        <Prose>
+          {
+            'Before scientific updates, the program compares the maintained native loss with an explicit mathematical objective on six constructed cases: three signed log-probability shifts, each with and without the declared masked row. These FP64 cases exercise active and flat clipping branches. It compares every parameter gradient. Only the first case also compares a shadow SGD update. The preflight then restores all original FP32 parameters exactly. The shadow calculation is a parity fixture, not another training observation. Across the six cases, the largest all-parameter gradient discrepancy was 3.2792×10⁻¹²; the first shadow update differed by at most 2.1337×10⁻¹⁶.'
+          }
+        </Prose>
 
-      <Prose>
-        Training data includes hard problems where the base model's pass rate is near
-        zero, or the curriculum includes easy problems where the fine-tuned model is
-        near 100%. Both conditions produce degenerate groups that waste compute.
-        Monitor the fraction of batches where <Code>std(rewards) &gt; 0</Code>: if this
-        falls below 60%, dynamic sampling will meaningfully improve compute efficiency.
-      </Prose>
+        <Prose>
+          {
+            'The actual native route then takes exactly two FP32 SGD updates. Its real generated rewards, masks, scores, losses and gradients are saved and checked separately. A genuine homogeneous group may have zero policy gradient; the constructed nonzero cases prevent that outcome from making the loss check vacuous. Floating-point agreement within declared tolerances is distinct from symbolic equality or identical sampling across implementations. Here the two actual native/manual losses were −0.1731900722 and 0 respectively, with zero maximum gradient discrepancy across 14,067,712 parameter entries in each comparison. The second zero loss belongs to the actual batch; it is not a substitute for the six constructed clipping checks.'
+          }
+        </Prose>
 
-      <H3>Use full DAPO when</H3>
+        <Program file="trl_dapo.py" />
 
-      <Prose>
-        Training on reasoning tasks with rollouts in the 2,000–16,000 token range,
-        where all four failure modes are present simultaneously: entropy collapse,
-        length exploitation, importance ratio drift across long sequences, and degenerate
-        groups from a hard problem distribution. This is the setting DAPO was designed
-        for — AIME-level math and similar competition reasoning tasks.
-      </Prose>
+        <Prose>
+          {'Read '}
+          <code>{'_compute_loss'}</code>
+          {
+            " alongside its explicit comparison. The denominator includes the native generation-batch selected-token count and the pinned trainer's process/accumulation scaling. That is why copying only a one-line token mean can fail when batch layout changes. This study uses one process and the fixed configuration in the program; a distributed adaptation needs its own scaling check."
+          }
+        </Prose>
 
-      <H3>Use plain PPO when</H3>
+        <CodeBlock language={'sh'}>
+          {'python trl_dapo.py --model response-17/selected --data data --output runs/native'}
+        </CodeBlock>
 
-      <Prose>
-        Rollouts are short, reward signals come from a trained reward model (not a
-        verifier), or you need the value model's credit assignment across a long
-        multi-turn conversation. PPO's value model handles long-horizon credit assignment
-        better than GRPO-style group normalization when the reward signal is per-step
-        rather than per-episode. DAPO inherits GRPO's episode-level reward assumption
-        and does not address multi-step credit assignment.
-      </Prose>
+        <H2>{'14. Read observations without selecting a winner'}</H2>
 
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
+        <Prose>
+          {
+            'The two implementations expose different parts of the system. Their results need the same care as their equations: a result must identify the workload, the denominator and the comparison it can support.'
+          }
+        </Prose>
 
-      <H3>What scales with rollout length</H3>
+        <ObservedOutcomes />
 
-      <Prose>
-        Every DAPO fix addresses a failure mode that worsens directly with rollout
-        length. Entropy collapse is driven by the cap on how aggressively a correct
-        path can be reinforced — and the fewer correct paths the policy encounters
-        per unit of training (which happens as rollouts get longer and harder), the
-        more aggressively each correct path needs to be reinforced to maintain entropy.
-        Clip-higher's value therefore scales with rollout length: it matters most when
-        correct paths are rare and need strong reinforcement when they appear.
-      </Prose>
+        <Prose>
+          {'The evaluator keeps three questions separate. '}
+          <strong>{'Response NLL'}</strong>
+          {
+            " pools the negative log probabilities of the gold label's tokens and EOS, conditioned on the supplied prompt. "
+          }
+          <strong>{'Free-generation accuracy'}</strong>
+          {
+            ' greedily chooses from the entire vocabulary until EOS or the eight-token cap; text outside the three permitted labels counts as an invalid prediction. '
+          }
+          <strong>{'Constrained accuracy'}</strong>
+          {
+            ' instead scores each of the three complete candidate labels, including EOS, and chooses the highest sequence log probability, without length normalization. That last decision rule cannot emit arbitrary text and is not free generation.'
+          }
+        </Prose>
 
-      <Prose>
-        Length exploitation only emerges at rollout lengths above roughly 2,000 tokens.
-        At 500 tokens, the difference in total gradient magnitude between a 500-token
-        correct response and a 450-token correct response is a factor of 1.1× — barely
-        perceptible. At 8,000 tokens versus 4,000 tokens, the factor is 2.0×, large
-        enough to create a detectable training artifact. Token-level normalization in
-        the loss (the denominator is total token count, not response count) addresses
-        this directly by preventing longer responses from accumulating more gradient
-        regardless of their content quality.
-      </Prose>
+        <Prose>
+          {
+            'Accuracy counts correct predicted labels. A target probability can rise without becoming the most probable label, so lower NLL with unchanged accuracy is possible. Conversely, a few argmax changes do not reveal every probability change. Inspect per-record outputs alongside both summaries.'
+          }
+        </Prose>
 
-      <Prose>
-        Token-level importance ratios matter most at 4,000+ tokens. At 1,000 tokens,
-        the product of per-token ratios is typically close to the response-level ratio
-        because individual deviations are small and do not compound significantly.
-        At 4,000 tokens, even a per-token ratio of 1.005 compounds to 1.005^4000 ≈ 2.7×10^8
-        — far outside the clip range. Token-level clipping prevents this by ensuring
-        each token's update is bounded independently of the sequence length.
-      </Prose>
+        <Prose>
+          {'Every run starts at response NLL '}
+          <strong>{'0.351335'}</strong>
+          {' and '}
+          <strong>{'20/32'}</strong>
+          {
+            ' correct under both decision rules. The prescribed outcomes are below. A stopped run has no terminal evaluation; a blank metric is not zero accuracy.'
+          }
+        </Prose>
 
-      <H3>What doesn't scale</H3>
+        <NeuralTable
+          caption={'14. Read observations without selecting a winner'}
+          headers={[
+            <>{'Route'}</>,
+            <>{'Seed'}</>,
+            <>{'Actual updates'}</>,
+            <>{'Terminal response NLL'}</>,
+            <>{'Free / constrained correct'}</>,
+            <>{'Outcome'}</>,
+          ]}
+          rows={[
+            [
+              <>{'Response baseline'}</>,
+              <>{'73'}</>,
+              <>{'4'}</>,
+              <>{'0.340288'}</>,
+              <>{'20/32 / 20/32'}</>,
+              <>{'Both slots filled'}</>,
+            ],
+            [
+              <>{'Response baseline'}</>,
+              <>{'89'}</>,
+              <>{'4'}</>,
+              <>{'0.343689'}</>,
+              <>{'20/32 / 20/32'}</>,
+              <>{'Both slots filled'}</>,
+            ],
+            [
+              <>{'Response baseline'}</>,
+              <>{'101'}</>,
+              <>{'4'}</>,
+              <>{'0.339069'}</>,
+              <>{'19/32 / 19/32'}</>,
+              <>{'Both slots filled'}</>,
+            ],
+            [
+              <>{'Combined DAPO components'}</>,
+              <>{'73'}</>,
+              <>{'2'}</>,
+              <>{'Not measured'}</>,
+              <>{'Not measured'}</>,
+              <>{'Score-consistency guard stopped slot 2'}</>,
+            ],
+            [
+              <>{'Combined DAPO components'}</>,
+              <>{'89'}</>,
+              <>{'4'}</>,
+              <>{'0.352159'}</>,
+              <>{'20/32 / 20/32'}</>,
+              <>{'Both slots filled'}</>,
+            ],
+            [
+              <>{'Combined DAPO components'}</>,
+              <>{'101'}</>,
+              <>{'2'}</>,
+              <>{'0.340385'}</>,
+              <>{'18/32 / 18/32'}</>,
+              <>{'One filled, one exhausted slot'}</>,
+            ],
+            [
+              <>{'Separate native TRL route'}</>,
+              <>{'73'}</>,
+              <>{'2'}</>,
+              <>{'0.337745'}</>,
+              <>{'19/32 / 19/32'}</>,
+              <>{'Two native updates; no refill'}</>,
+            ],
+          ]}
+        />
 
-      <Prose>
-        Dynamic sampling's resampling budget is a fixed constant. When problems are
-        hard enough that the model fails every rollout for a prompt across all resample
-        attempts, the prompt is dropped and contributes no gradient. If the problem
-        distribution contains a large fraction of such extremely hard prompts — as
-        is the case when training toward the frontier of human mathematical knowledge
-        — dynamic sampling repeatedly drops the hardest prompts, creating a bias toward
-        problems the model can already partially solve. The fix is curriculum: ensure
-        the problem distribution is calibrated to the model's current ability level,
-        so that most prompts are at the pass-rate boundary (10%–90%) where dynamic
-        sampling can find informative groups without excessive resampling.
-      </Prose>
+        <Prose>
+          {
+            'Lower NLL does not guarantee more correct labels. Baseline seed 101 and the native route both improve NLL while losing one correct prediction. Combined seed 89 makes NLL slightly worse without changing the predicted-label count. Combined seed 101 stops collecting after its finite budget is exhausted; it has two actual updates and loses two correct predictions. These are the observations to explain, not reasons to search for a better seed.'
+          }
+        </Prose>
 
-      <Prose>
-        Overlong filtering becomes aggressive as the correct reasoning length approaches
-        the generation cap. For AIME-level problems, full solutions can legitimately
-        require thousands of tokens. If the generation cap is set too conservatively,
-        overlong filtering zeros out correct solutions. The DAPO paper uses a cap of
-        16,384 tokens, which is long enough that genuine solutions for competition math
-        do not hit it. At this cap length, overlong filtering primarily catches genuinely
-        non-terminating behaviors (repetitive reasoning loops, endlessly expanding
-        sub-problems). The cap must be calibrated to the task — there is no universal
-        safe setting.
-      </Prose>
+        <Prose>
+          {
+            'The combined seed 73 completed its first two updates. Before updating the second slot, a sampled selected-token log probability was −0.5820778608 while the batched recomputation was −0.5821170807. Their absolute difference was 0.0000392199, exceeding the declared '
+          }
+          <code>{'atol=2e-5, rtol=2e-5'}</code>
+          {
+            ' comparison for that value. The program preserved the complete batch, frozen old scores, model, optimizer and random state and stopped. We did not relax the guard, repeat the run, or manufacture a final metric. This is a failed consistency check between two scoring paths; the stored difference alone does not prove which floating-point operation caused it. The other originally prescribed runs were attempted once with their unchanged settings.'
+          }
+        </Prose>
 
-      <Prose>
-        DAPO does not address the fundamental credit assignment problem for long
-        reasoning chains. When a 4,000-token chain of thought arrives at the correct
-        answer, every token in the chain receives the same group-normalized advantage.
-        Tokens in steps 1–10 of the chain are reinforced as strongly as tokens in
-        steps 180–200. The early tokens might have been leading to the correct approach
-        or they might have been a false start that the model recovered from — DAPO
-        cannot tell. Process reward models (PRMs) address this by providing per-step
-        rather than per-episode reward, but DAPO operates entirely in the outcome-reward
-        regime and provides no per-step signal.
-      </Prose>
+        <Prose>
+          {
+            'All completed routes reload their saved weights exactly. Exact reload checks serialization; it cannot turn the failed score check or a worse prediction into a success. The full output retains every per-record prediction and every prescribed seed, including the interrupted one.'
+          }
+        </Prose>
 
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
+        <WorkAccounting />
 
-      <H3>1. Mis-tuned ε_high / ε_low ratio</H3>
+        <Prose>
+          {
+            "A selected group can be used in two optimizer iterations, so generated tokens, selected tokens and tokens processed by optimizer steps are different counts. An exhausted slot can have generated many tokens and selected a partial set, yet contribute no optimizer update. Count that work when discussing efficiency. Local timings include a shared host and the recorded workload. They are not a measurement of the paper's distributed throughput."
+          }
+        </Prose>
 
-      <Prose>
-        The DAPO paper uses ε_low = 0.2 and ε_high = 0.28 — a 40% asymmetry.
-        Setting ε_high much higher (e.g., 0.5) removes the ceiling on positive-advantage
-        updates, allowing the policy to make very large steps toward any single correct
-        rollout it encounters. Early in training, when the correct paths are genuinely
-        informative, this can work. Later in training, when the policy is converging,
-        large positive steps toward any particular correct path destabilize the policy
-        away from other correct paths it has already learned. The asymmetry should be
-        modest: the DAPO ablations show that ε_high = 0.26–0.30 is a robust range, and
-        the benefit diminishes beyond 0.35.
-      </Prose>
+        <Prose>
+          {'For example, the completed combined seed 101 generated '}
+          <strong>{'107 tokens'}</strong>
+          {' and selected '}
+          <strong>{'31'}</strong>
+          {" across its two slots. Only the filled slot's "}
+          <strong>{'20'}</strong>
+          {' tokens reached optimization; two iterations therefore processed '}
+          <strong>{'40 selected-token positions'}</strong>
+          {
+            '. The other 11 selected tokens belonged to an exhausted partial batch and were not used for an update. Combined seed 89 generated 77 tokens, selected 39 and processed 78 selected-token positions over four updates. That distinction is what the cost drawing keeps visible.'
+          }
+        </Prose>
 
-      <H3>2. Dynamic sampling loop getting stuck on hard problems</H3>
+        <Prose>
+          {
+            'The interrupted seed 73 generated 126 tokens before stopping. Its first slot used 22 selected tokens twice, so 44 selected-token positions reached completed optimizer steps. Later generated or selected work is still real work, even though it cannot supply a terminal quality comparison.'
+          }
+        </Prose>
 
-      <Prose>
-        When a problem is too hard for the current policy to solve even across
-        MAX_RESAMPLES attempts, dynamic sampling correctly drops it — but if many
-        prompts in the batch are similarly hard, the effective batch size collapses.
-        Training slows because each gradient step is computed over far fewer rollouts
-        than intended. Detection: monitor the average number of dropped prompts per
-        batch. If it exceeds 30%, the problem distribution is too hard for the current
-        policy and curriculum adjustment is needed, not just more resamples.
-      </Prose>
+        <Prose>
+          {
+            "The combined arm changes selection, clipping, reward shaping and normalization together. Its difference from the response baseline cannot identify one component's causal effect. The native route also differs in batching and sampling details. All three seeds remain visible; choosing the best afterward would change the meaning of the experiment. The 32 repeatedly used test records support a small instructional comparison, not a general benchmark ranking."
+          }
+        </Prose>
 
-      <H3>3. Overlong filtering over-penalizing legitimate long reasoning</H3>
+        <Prose>
+          {''}
+          <code>{'report_dapo.py'}</code>
+          {
+            ' reads the six prescribed directories and the native directory. It makes no training calls and selects no winning seed. The complete source shows which stored quantities enter each displayed result.'
+          }
+        </Prose>
 
-      <Prose>
-        Not all long responses are length-exploiting. A 12,000-token proof of a
-        difficult theorem is long because the proof is long, not because the model
-        learned that length is rewarded. Overlong filtering zeroes the reward for
-        this correct proof if it hits the length cap. The fix is to set the cap
-        well above the expected length of correct solutions — the DAPO paper sets
-        it at 16,384 tokens, which is generous for competition math. If competition
-        solutions routinely require more than 8,000 tokens on your task, you need to
-        raise the cap, which requires more GPU memory per rollout. There is a real
-        memory-vs-signal tradeoff here.
-      </Prose>
+        <Program file="report_dapo.py" />
 
-      <H3>4. Token-level ratios overcorrecting at early training</H3>
+        <CodeBlock language={'sh'}>
+          {'python report_dapo.py --runs runs --output observations.json'}
+        </CodeBlock>
 
-      <Prose>
-        Early in training, when the policy is moving quickly, per-token importance
-        ratios can vary substantially even within a single rollout. For the first few
-        thousand steps, the per-token ratios in a 4,000-token response might span
-        the range 0.6 to 1.5 across positions. Token-level clipping bounds each token
-        independently, but this can lead to inconsistent updates: some tokens in a
-        response are reinforced strongly (unconstrained ratio), others are clipped.
-        The result is a response whose early tokens are strongly reinforced but whose
-        late tokens are under-updated. This is better than the alternative (unstable
-        compound ratio), but it can produce a systematic bias where early reasoning
-        steps are learned faster than late ones. Monitor the distribution of unconstrained
-        (pre-clip) ratios over training steps; they should be mostly below ε_high by
-        step 5,000 as the policy stabilizes.
-      </Prose>
+        <H2>{'15. Inspect the verifier and its data contract'}</H2>
 
-      <H3>5. Interaction between overlong filtering and curriculum</H3>
+        <Prose>
+          {
+            'The small run used sentiment labels. Return now to mathematical answers, where the boundary between a checkable output and a valid argument becomes sharper.'
+          }
+        </Prose>
 
-      <Prose>
-        Curriculum-based training starts with easier problems and progressively
-        introduces harder ones. Easy problems have short correct solutions; hard problems
-        may require long ones. If the curriculum advances difficulty faster than the
-        model's reasoning length capability grows, the model may encounter problems
-        whose correct solutions legitimately exceed the generation cap. Overlong filtering
-        then zeros those correct-length solutions, providing false negative feedback
-        precisely when the model is trying to learn longer reasoning. The remedy is to
-        track the 95th-percentile length of correct rollouts per difficulty bucket and
-        ensure the generation cap stays above it throughout curriculum progression.
-      </Prose>
+        <IntegerParser />
 
-      <H3>6. Removing the KL penalty entirely</H3>
+        <Prose>
+          {'Our finite parser finds the last literal '}
+          <code>{'\\boxed{'}</code>
+          {
+            ' marker, takes characters up to the next closing brace, strips surrounding whitespace and accepts a signed decimal integer. It does not evaluate expressions. Thus '
+          }
+          <code>{'\\boxed{12}'}</code>
+          {' can pass a target of 12; '}
+          <code>{'\\boxed{6+6}'}</code>
+          {
+            ' fails this contract even though a person can evaluate it. Repeated boxes use the last marker. A marker nested inside another box can therefore be selected; this deliberately narrow parser is not a balanced-brace LaTeX parser.'
+          }
+        </Prose>
 
-      <Prose>
-        The DAPO paper removes the explicit KL penalty from the GRPO objective,
-        relying on clip bounds alone to prevent the policy from drifting too far from
-        the reference. This works when clip bounds are well-tuned and the reference
-        policy is close to the training policy (i.e., rollouts are fresh). But without
-        a KL penalty, there is no direct constraint preventing the policy from finding
-        behaviors that are far outside the SFT reference distribution. In practice,
-        DAPO's training stays stable because the verifier provides a hard signal (not
-        a proxy reward) and the clip bounds prevent large single-step changes. But when
-        adapting DAPO to new tasks, restore the KL penalty (β ≈ 0.01–0.04) as a
-        safety valve until you confirm that the clip bounds alone are sufficient.
-      </Prose>
+        <Prose>
+          {
+            'The pinned original DAPO checker has a different contract. Its default path looks for the last '
+          }
+          <code>{'Answer:'}</code>
+          {
+            ' match in a restricted trailing window and applies string normalization. Its optional strict-box path extracts a balanced boxed span from a shorter trailing window. The outer scoring function first keeps the final 300 characters; the ordinary strict-box branch then examines the final 100. The local full-context integer function is not an exact port of either route. A benchmark result is meaningful only together with the actual parser, normalization and extraction settings.'
+          }
+        </Prose>
 
-      <Callout accent="gold">
-        The most common DAPO deployment mistake is setting ε_high too high
-        and removing the KL penalty simultaneously. Either change alone is usually
-        fine; together, they remove both of GRPO's policy-drift safeguards.
-        Start with ε_high = 0.28 and β = 0.01, then ablate toward removing
-        the KL penalty only after confirming training stability.
-      </Callout>
+        <Prose>
+          {
+            'The official data release makes integer answers convenient, but convenience does not establish the correctness of a transformed question. The retained sample contains twelve official records with question, target and source fields. It is a small inspection sample, not an audit of the entire corpus. The dataset metadata revision and the unversioned first-rows response are recorded separately; the sample is not asserted to come from that exact metadata revision.'
+          }
+        </Prose>
 
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
+        <CircleCollision />
 
-      <H3>Core DAPO paper</H3>
+        <Prose>
+          {
+            "A concrete source audit shows why that distinction matters. The paper's appendix gives the circle"
+          }
+        </Prose>
 
-      <Prose>
-        <strong>Yu, Zhang, Zhu, Yuan, Zuo, Yue, Dai, Fan, et al. (2025).</strong>{" "}
-        "DAPO: An Open-Source LLM Reinforcement Learning System at Scale."
-        arXiv:2503.14476. ByteDance Seed and Tsinghua AIR. Introduces the four DAPO
-        patches (clip-higher, dynamic sampling, token-level loss, overlong reward shaping),
-        provides ablation results for each patch independently, and documents the full
-        training configuration for Qwen2.5-32B reaching 50 points on AIME 2024.
-        The paper includes training code, dataset, and model checkpoints — the most
-        complete open release for competition-math RL training at the time of publication.
-        VeRL (Volcengine Reinforcement Learning framework) is the underlying distributed
-        training system; the DAPO-specific modifications are layered on top.
-      </Prose>
+        <div className="neural-equation">
+          <MathBlock>{'x^2+y^2-22x-16y+113=0.'}</MathBlock>
+        </div>
 
-      <H3>GRPO foundational paper</H3>
+        <Prose>{'Complete the square by adding 121 and 64 inside the squared terms:'}</Prose>
 
-      <Prose>
-        <strong>Shao, Wang, Zhu, Xu, et al. (2024).</strong>{" "}
-        "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models."
-        arXiv:2402.03300. DeepSeek AI. Introduces GRPO as the training algorithm that
-        DAPO extends. Section 4 describes the group-relative advantage formulation,
-        symmetric PPO clipping, and the elimination of the value model. This is the
-        baseline that all four DAPO patches modify; understanding GRPO's formulation
-        is a prerequisite for understanding what each DAPO patch changes and why.
-      </Prose>
+        <div className="neural-equation">
+          <MathBlock>{'(x-11)^2+(y-8)^2=121+64-113=72.'}</MathBlock>
+        </div>
 
-      <H3>DeepSeek-R1 scale validation</H3>
+        <Prose>
+          {'Its center is (11,8), radius is '}
+          <InlineMath>{'\\sqrt{72}=6\\sqrt2'}</InlineMath>
+          {', and its minimum x-coordinate is '}
+          <InlineMath>{'11-6\\sqrt2'}</InlineMath>
+          {". The inspected PDF's example prints "}
+          <InlineMath>{'11-2\\sqrt6'}</InlineMath>
+          {' instead. These are different real numbers.'}
+        </Prose>
 
-      <Prose>
-        <strong>DeepSeek-AI (2025).</strong>{" "}
-        "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning."
-        arXiv:2501.12948. Documents GRPO at full scale (G=16, KL coefficient 0.04,
-        max rollout length 8,192 tokens) on AIME 2024 and other reasoning benchmarks.
-        This is the production context that motivated DAPO: the DeepSeek-R1 training
-        recipe is the starting point DAPO improves on. DAPO's 50-point AIME 2024 result
-        is competitive with DeepSeek-R1's reported performance, achieved with an
-        open-source recipe and a smaller model (Qwen2.5-32B vs DeepSeek-R1's 671B MoE).
-      </Prose>
+        <Prose>
+          {'Yet the transformation asks for a sum of coefficients in the form '}
+          <InlineMath>{'a-b\\sqrt c'}</InlineMath>
+          {
+            '. The triples (11,6,2) and (11,2,6) both sum to 19. A final integer checker can therefore accept 19 without detecting this intermediate disagreement. This is a specific collision in an inspected example, not a claim about the prevalence of errors throughout the released dataset.'
+          }
+        </Prose>
 
-      <H3>Open-source implementations</H3>
+        <Prose>
+          {
+            'More generally, mapping a rich mathematical object to a small integer can be many-to-one. Specify a canonical representation when needed, preserve original solutions for auditing, and distinguish final-answer validity from proof validity. A strong reward optimizer cannot repair a verifier that measures the wrong property.'
+          }
+        </Prose>
 
-      <Prose>
-        <strong>BytedTsinghua-SIA/DAPO</strong> (github.com/BytedTsinghua-SIA/DAPO):
-        The official DAPO training codebase, built on VeRL. Includes the math dataset
-        (DAPO-Math-17k), training scripts for Qwen2.5-32B, and evaluation utilities
-        for AIME and MATH-500. The VeRL framework handles distributed rollout generation
-        with vLLM across multiple nodes; the DAPO patches are applied in the loss
-        computation and rollout filtering layers.
-      </Prose>
+        <span id="7-decision-matrix" aria-hidden="true" />
+        <H2>{'16. Separate the paper result from the recipe you run'}</H2>
 
-      <Prose>
-        <strong>volcengine/verl</strong> (github.com/volcengine/verl):
-        The underlying distributed RL framework from ByteDance Seed. VeRL separates
-        the actor (rollout generation) from the learner (gradient computation) across
-        different GPU groups, enabling high-throughput training at the scale required
-        for 16k-token rollouts. DAPO's dynamic sampling filter is implemented in VeRL's
-        data pipeline as a group-level variance check before committing rollouts to the
-        learner's batch.
-      </Prose>
+        <Prose>
+          {
+            'We have now examined an objective, a collector, a native route and a verifier. The published result combines these with a large model, substantial generation and a particular evaluation protocol.'
+          }
+        </Prose>
 
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
+        <PaperProgression />
 
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — Why asymmetric clipping preserves exploration</H3>
+        <Prose>
+          {
+            'The DAPO paper reports the following cumulative AIME 2024 results for its Qwen2.5-32B setting. Each row adds to the preceding row.'
+          }
+        </Prose>
 
-      <Prose>
-        Explain in one paragraph why symmetric clipping accelerates entropy collapse
-        relative to clip-higher, given that both methods apply the same floor to
-        negative-advantage updates. Specifically: (a) why does the ceiling on positive-advantage
-        updates determine the rate of entropy decay, not the floor; (b) why does a
-        rare correct path require a higher ceiling than a common wrong path requires
-        a tight floor; (c) construct a toy example with two rollouts — one correct
-        (advantage +1.7) and one wrong (advantage −0.7) — and compute the policy
-        update under ε = 0.2 symmetric versus ε_low = 0.2, ε_high = 0.28. Show
-        numerically what fraction of the gradient is clipped in each case.
-      </Prose></div>
+        <NeuralTable
+          caption={'16. Separate the paper result from the recipe you run'}
+          headers={[<>{'Cumulative configuration'}</>, <>{'AIME 2024 avg@32 (%)'}</>]}
+          rows={[
+            [<>{'Naive GRPO'}</>, <>{'30'}</>],
+            [<>{'Add overlong filtering'}</>, <>{'36'}</>],
+            [<>{'Add Clip-Higher'}</>, <>{'38'}</>],
+            [<>{'Add soft overlong punishment'}</>, <>{'41'}</>],
+            [<>{'Add token-level loss'}</>, <>{'42'}</>],
+            [<>{'Add dynamic sampling'}</>, <>{'50'}</>],
+          ]}
+        />
 
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — Dynamic sampling variance threshold trade-off</H3>
+        <Prose>
+          {
+            'The separately reported DeepSeek-R1-Zero-Qwen-32B comparison is 47. It is a 32B-model comparison, not a result against the full 671B DeepSeek-R1 model. '
+          }
+          <code>{'avg@32'}</code>
+          {' averages repeated sampled correctness; it is not '}
+          <code>{'pass@32'}</code>
+          {
+            ', which asks whether at least one of 32 samples succeeds, nor a consensus-vote score. The paper specifies evaluation temperature 1 and top-p .7. Its reported training-step reduction does not itself measure an equal reduction in generated tokens, hardware time or cost. '
+          }
+          <a href={'https://arxiv.org/abs/2503.14476'}>{'DAPO paper'}</a>
+          {''}
+        </Prose>
 
-      <Prose>
-        The dynamic sampling filter drops groups where <Code>std(rewards) = 0</Code>.
-        Consider raising the threshold to <Code>std(rewards) &gt; 0.1</Code>. (a) What
-        additional groups does this filter out? (b) Draw the probability distribution
-        over group reward vectors for G=8 binary rewards when the pass rate is p=0.25.
-        What fraction of groups have std &lt; 0.1 under this distribution? (c) What is
-        the expected gradient magnitude for a group with std(rewards) = 0.05 versus
-        std(rewards) = 0.4? Is filtering the 0.05 group worth the compute saved?
-        Design an experiment to measure the optimal threshold empirically.
-      </Prose></div>
+        <Prose>
+          {
+            'The path is informative but not a factorial experiment. For example, 50−42 is the observed increment when dynamic sampling is added after the earlier changes. It does not establish an eight-point effect in every configuration. Interactions between selection, lengths and gradients are precisely why the whole recipe matters.'
+          }
+        </Prose>
 
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — When does overlong filtering over-penalize?</H3>
+        <RecipeComparison />
 
-      <Prose>
-        Suppose you are training on a problem class where correct solutions legitimately
-        require 6,000–10,000 tokens (e.g., multi-step formal proofs). Your generation
-        cap is 8,192 tokens. (a) Estimate what fraction of correct solutions would be
-        truncated and zeroed by overlong filtering under this cap, assuming solution
-        lengths are log-normally distributed with mean 7,000 tokens and std 2,000 tokens.
-        (b) Describe the training signal that the model receives for problems with
-        expected solution lengths near the cap: what behaviors does the gradient
-        encourage and what does it discourage? (c) Propose a cap-setting heuristic
-        that minimizes the fraction of genuinely correct solutions that are zeroed
-        while still penalizing pathological length inflation.
-      </Prose></div>
+        <NeuralTable
+          caption={'16. Separate the paper result from the recipe you run'}
+          headers={[
+            <>{'Mechanism'}</>,
+            <>{'Pinned original reproduction'}</>,
+            <>{'This native route'}</>,
+            <>{'This scratch combined route'}</>,
+          ]}
+          rows={[
+            [<>{'Clip widths'}</>, <>{'.2/.28'}</>, <>{'.2/.28'}</>, <>{'.2/.28'}</>],
+            [<>{'Dual clip'}</>, <>{'c=10'}</>, <>{'Disabled'}</>, <>{'Disabled'}</>],
+            [<>{'KL loss/reward'}</>, <>{'Disabled'}</>, <>{'Disabled'}</>, <>{'Disabled'}</>],
+            [
+              <>{'Group selection'}</>,
+              <>{'Correctness variation, bounded refill'}</>,
+              <>{'No refill'}</>,
+              <>{'Mixed correctness, bounded refill'}</>,
+            ],
+            [<>{'Responses per prompt'}</>, <>{'16'}</>, <>{'4'}</>, <>{'4'}</>],
+            [
+              <>{'Target prompts'}</>,
+              <>{'512'}</>,
+              <>{'1 per native generated group'}</>,
+              <>{'2 per slot'}</>,
+            ],
+            [
+              <>{'Candidate generation limit'}</>,
+              <>{'10 batches'}</>,
+              <>{'No refill batches'}</>,
+              <>{'3 batches'}</>,
+            ],
+            [
+              <>{'Maximum completion'}</>,
+              <>{'20,480 tokens'}</>,
+              <>{'8 tokens'}</>,
+              <>{'8 tokens'}</>,
+            ],
+            [<>{'Soft buffer'}</>, <>{'4,096 tokens'}</>, <>{'4 tokens'}</>, <>{'4 tokens'}</>],
+            [
+              <>{'Loss normalization'}</>,
+              <>{'Configured token mean; inspect actor batching'}</>,
+              <>{'Pinned native token denominator'}</>,
+              <>{'Global selected-token mean'}</>,
+            ],
+          ]}
+        />
 
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — Ablation study isolating each DAPO fix</H3>
+        <Prose>
+          {
+            'The original reproduction script and the later retained recipe both expose those large-scale group, clip and buffer settings, but they are different code snapshots. For example, the retained rollout GPU-memory setting changes from .7 to .80. The paper describes a 20-rollout-step warm-up, while the pinned scripts set '
+          }
+          <code>{'lr_warmup_steps=10'}</code>
+          {
+            "; those fields should not be silently declared identical. Configuration, units and the executing implementation all matter. The old actor's microbatch weighting issue from section 10 remains relevant even when the configuration says token mean."
+          }
+        </Prose>
 
-      <Prose>
-        Design an ablation study that isolates the contribution of each of the four
-        DAPO patches on a single benchmark (e.g., MATH-500 pass@1). (a) List the five
-        training configurations you would run (GRPO baseline + one configuration per
-        patch + full DAPO). (b) For each pairwise comparison, identify which metric
-        most clearly measures the targeted failure mode: entropy over training steps
-        for clip-higher; fraction of informative batches for dynamic sampling;
-        importance ratio distribution at step 10,000 for token-level loss; and
-        response length distribution for overlong filtering. (c) Estimate the minimum
-        number of training steps needed to see a statistically significant difference
-        between GRPO baseline and full DAPO on MATH-500, assuming a base pass rate of
-        40% and a DAPO improvement to 48%.
-      </Prose></div>
+        <Prose>
+          {'The large recipe uses AdamW at '}
+          <InlineMath>{'10^{-6}'}</InlineMath>
+          {
+            ' with weight decay and gradient clipping. The tiny local comparison deliberately uses plain SGD at '
+          }
+          <InlineMath>{'10^{-4}'}</InlineMath>
+          {
+            ' to expose the objective and parameter step. Neither its model scale, task, optimizer nor generation budget reproduces the paper. Use its code to understand and test mechanisms, then design an appropriate experiment for your target workload.'
+          }
+        </Prose>
 
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — Curriculum interaction with dynamic sampling</H3>
+        <span id="9-failure-modes-and-gotchas" aria-hidden="true" />
+        <H2>{'17. Diagnose failures with the right denominator'}</H2>
 
-      <Prose>
-        You are training with DAPO on competition-level math problems. Your curriculum
-        starts with AMC problems (base pass rate ~35%) and ramps toward AIME (base pass
-        rate ~5%). (a) At what pass rate does the expected fraction of informative groups
-        (with G=8, binary rewards) fall below 50%? (b) If dynamic sampling drops
-        prompts with zero-variance groups after MAX_RESAMPLES=3 attempts, what happens
-        to effective batch size as the curriculum advances to AIME-level problems?
-        Compute the expected effective batch size at p=0.05 versus p=0.25, assuming
-        a batch of 64 prompts. (c) Propose a curriculum pacing heuristic that maintains
-        at least 70% effective batch size throughout training by monitoring pass rate
-        and adjusting difficulty distribution dynamically.
-      </Prose>
+        <Prose>
+          {
+            'The recipe comparison explains why one headline curve is insufficient. Diagnosis follows the computation in order, so a downstream symptom does not conceal an earlier failure.'
+          }
+        </Prose>
 
-      <Callout accent="gold">
-        DAPO's lasting contribution is documentation of failure modes that emerge
-        specifically at multi-thousand-token reasoning scale — not discovered through
-        theory but through running GRPO harder and longer than it was designed for
-        and patching each breakage with the narrowest intervention that worked. The
-        patches are simple enough to understand in an afternoon and reproducible
-        enough to re-implement in any GRPO codebase. That narrowness and
-        reproducibility is the contribution.
-      </Callout></div></section>
+        <FailureTrace />
 
-    </div>
-  ),
+        <Prose>
+          {
+            'First inspect generated prompt groups. Are most all-correct, all-wrong or mixed? Then inspect eligible and selected groups separately: quota overflow can discard eligible groups, and a budget can expire with a partial batch. Next inspect shaped rewards and advantages, genuine EOS/cap outcomes and selected-token counts. Only then interpret loss, clipping, gradient norm and parameter movement.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'A homogeneous reward group at beta 0 contributes no relative policy gradient. An entirely masked batch has no valid token denominator and should be rejected, not assigned a convenient zero loss. A generation/rescore discrepancy means the intended old-policy distribution is not being reproduced. Common causes include shifted token addresses, padding, enabled dropout, different temperature or truncated sampling support. Preserve the actual inputs and discrepancy before changing any settings.'
+          }
+        </Prose>
+
+        <MetricDenominators />
+
+        <Prose>
+          {
+            'Correctness is counted over graded responses. Acceptance is counted over candidate prompt groups. A selected-token clip fraction counts active token positions; a response-level fraction answers a different question. Moreover, a ratio outside a numeric interval does not always mean the signed surrogate uses its flat branch. State whether a reported fraction means outside-range ratios or actual active clipping.'
+          }
+        </Prose>
+
+        <Prose>
+          {
+            'Entropy describes a distribution over vocabulary choices. A low clipping fraction says nothing by itself about reward quality or diversity. Reward hacking means exploiting the reward contract while missing the intended task; a parser defect and a genuine distribution shift require different repairs. Adding KL, entropy regularization or a different verifier is a deliberate new variant, not an invisible fix to the reported recipe.'
+          }
+        </Prose>
+
+        <span id="6-visual-walkthrough" aria-hidden="true" />
+        <H2>{'18. Make an implementation decision'}</H2>
+
+        <Prose>
+          {
+            'Bring the pieces together on a new finite group. This is a calculation you can reproduce, not another empirical language-model result.'
+          }
+        </Prose>
+
+        <FullTrace />
+
+        <Prose>
+          {
+            'Take two responses with rewards −1 and +1 and lengths 2 and 3. Assume no length penalty in this finite fixture. The group is mixed, its mean is 0 and its sample standard deviation is '
+          }
+          <InlineMath>{'\\sqrt2'}</InlineMath>
+          {'. Write '}
+          <InlineMath>{'a=1/(\\sqrt2+10^{-6})'}</InlineMath>
+          {'; advantages are '}
+          <InlineMath>{'[-a,+a]'}</InlineMath>
+          {'. Old scores are frozen. The current-to-old ratios are '}
+          <InlineMath>{'[.9,1.1]'}</InlineMath>
+          {' for the negative response and '}
+          <InlineMath>{'[1,1.3,1.1]'}</InlineMath>
+          {' for the positive response.'}
+        </Prose>
+
+        <Prose>
+          {'At clip bounds .8 and 1.28, the negative-response loss terms are '}
+          <InlineMath>{'.9a,1.1a'}</InlineMath>
+          {'. The positive-response terms are '}
+          <InlineMath>{'-a,-1.28a,-1.1a'}</InlineMath>
+          {
+            ': its ratio 1.3 is on the flat branch. Summing and dividing by the five selected tokens gives'
+          }
+        </Prose>
+
+        <div className="neural-equation">
+          <MathBlock>{'L=\\frac{(.9+1.1-1-1.28-1.1)a}{5}=-\\frac{1.38a}{5}.'}</MathBlock>
+        </div>
+
+        <Prose>
+          {'Derivatives with respect to current selected-action log probabilities are '}
+          <InlineMath>{'[.9a/5,1.1a/5]'}</InlineMath>
+          {' and '}
+          <InlineMath>{'[-a/5,0,-1.1a/5]'}</InlineMath>
+          {'. For a prefix distribution '}
+          <InlineMath>{'p=(.2,.5,.3)'}</InlineMath>
+          {
+            ' whose selected action is the first coordinate and whose scalar log-probability derivative is '
+          }
+          <InlineMath>{'-a/5'}</InlineMath>
+          {', the logit gradient is '}
+          <InlineMath>{'(-a/5)(.8,-.5,-.3)'}</InlineMath>
+          {
+            ". Gradient descent increases that selected logit's relative preference. The flat token contributes zero through this term, but shared network parameters can still move because of other tokens."
+          }
+        </Prose>
+
+        <ComputeBudget />
+
+        <Prose>
+          {
+            'A run specification needs both learning and failure rules. If a slot permits B candidate batches, Q prompts per batch, G responses per prompt and cap M, then its generated completion-token bound is '
+          }
+          <InlineMath>{'BQGM'}</InlineMath>
+          {
+            '. With 3 batches, 2 prompts, 4 responses and cap 8, that is 192 tokens per slot, even if none qualifies. This bounds completion generation, not prompt-prefill operations, model FLOPs, wall time or expected accuracy. A quota larger than '
+          }
+          <InlineMath>{'BQ'}</InlineMath>
+          {' cannot be filled.'}
+        </Prose>
+
+        <Prose>
+          {
+            'For an application, start with a verifier whose accepted property matches the desired outcome. Choose the collector budget before seeing results. Record the exact dataset/split, initial checkpoint, parser, score normalization, masks, optimizer and evaluation protocol. Decide how exhausted slots are handled and which coherent state survives a failure. Then compare methods under a workload that answers your question: equal generated-token budgets and equal accepted updates are different experimental designs.'
+          }
+        </Prose>
+        <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+          <span id="11-self-check-exercises" aria-hidden="true" />
+          <H2>{'Independent practice'}</H2>
+          <Prose>
+            {
+              'These questions change the inputs or assumptions from the main examples. Use the hints when useful, then compare your reasoning with the worked solutions.'
+            }
+          </Prose>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P01. What did the checker establish?'}</H3>
+
+            <Prose>
+              {
+                'A four-token response passes a final-answer check. Does that establish that each token expressed a correct reasoning step?'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>
+                {' Separate what the checker reads from where the training coefficient is applied.'}
+              </Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  " No. The checker establishes only that the extracted final answer meets its contract. A response can contain an incorrect intermediate statement and still end with the accepted number. Broadcasting a response's training coefficient over its tokens does not turn the terminal checker into a process reward model."
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P02. Which ratio, which derivative?'}</H3>
+
+            <Prose>
+              {
+                'Compute the ratio for old probability .12 and current probability .09. An implementation then adds '
+              }
+              <code>{'old_logp - reference_logp'}</code>
+              {
+                ' to the loss, with both tensors detached. Does that term regularize the current parameters?'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Identify which operand depends on the current parameters.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' The ratio is '}
+                <InlineMath>{'.09/.12=.75'}</InlineMath>
+                {
+                  ': the selected action is 25% less likely. The additional detached difference has derivative zero with respect to the current parameters. It may be a reported statistic or part of a fixed reward construction, but by itself it cannot act as a differentiable current-policy regularizer.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P03. Change one reward'}</H3>
+
+            <Prose>
+              {'For '}
+              <InlineMath>{'(-1,+1,+1,+1)'}</InlineMath>
+              {', compute the mean, sample SD and advantages with '}
+              <InlineMath>{'\\varepsilon=10^{-6}'}</InlineMath>
+              {'. What must also change for exact invariance when all rewards are multiplied by 2?'}
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>
+                {' The squared centered values are '}
+                <InlineMath>{'2.25,.25,.25,.25'}</InlineMath>
+                {'.'}
+              </Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' The mean is .5, sample variance is '}
+                <InlineMath>{'3/3=1'}</InlineMath>
+                {', and the advantages are '}
+                <InlineMath>{'(-1.5,.5,.5,.5)/(1+10^{-6})'}</InlineMath>
+                {
+                  '. Multiplying rewards by 2 requires multiplying epsilon by 2 for exact equality. Keeping epsilon fixed gives a very close but different vector.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P04. Compare both signs'}</H3>
+
+            <Prose>
+              {'At '}
+              <InlineMath>{'r=1.24'}</InlineMath>
+              {', compare symmetric '}
+              <InlineMath>{'.2'}</InlineMath>
+              {' and asymmetric '}
+              <InlineMath>{'.2/.28'}</InlineMath>
+              {' clipping for '}
+              <InlineMath>{'A=+2'}</InlineMath>
+              {' and '}
+              <InlineMath>{'A=-2'}</InlineMath>
+              {'. Can you conclude that no future ratio will exceed 1.28?'}
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Multiply by the advantage before selecting the smaller surrogate.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  " Positive advantages give 2.4 versus 2.48; negative advantages give −2.48 in both cases. No hard ratio bound follows. The objective changes the selected term's derivative and does not constrain every possible parameter update."
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P05. Change which outcome becomes more likely'}</H3>
+
+            <Prose>
+              {'Compare the entropy of '}
+              <InlineMath>{'(.2,.8)'}</InlineMath>
+              {' with '}
+              <InlineMath>{'(.3,.7)'}</InlineMath>
+              {'. Then compute the dual-clipped loss for '}
+              <InlineMath>{'A=-.5,r=8,c=6'}</InlineMath>
+              {'. Explain why this entropy change differs from section 5.'}
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>
+                {' Entropy sums two '}
+                <InlineMath>{'-p\\log p'}</InlineMath>
+                {' terms; the additional negative-advantage loss cap is '}
+                <InlineMath>{'-cA'}</InlineMath>
+                {'.'}
+              </Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  ' Entropy increases from approximately .5004 to .6109 nats because the initially rarer outcome becomes more likely, moving toward a balanced distribution. The ordinary negative-advantage loss is 4; the additional cap gives 3. The opposite entropy directions here and in section 5 show why a ratio incentive alone supplies no entropy guarantee.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P06. Change both length and sign'}</H3>
+
+            <Prose>
+              {
+                'Two responses have lengths 3 and 9, with mean token-loss contributions 2 and −1. Compute the response-equal and pooled-token means.'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{" Recover each row's numerator before combining rows."}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' Response-equal gives '}
+                <InlineMath>{'(2-1)/2=.5'}</InlineMath>
+                {'. Pooled-token gives '}
+                <InlineMath>{'(3\\cdot2+9\\cdot(-1))/12=-.25'}</InlineMath>
+                {
+                  ". Even the sign can differ. Duplicating a selected token changes the pooled denominator and that response's total influence; it is not a cosmetic padding operation."
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P07. Fill a finite quota'}</H3>
+
+            <Prose>
+              {'The target is three mixed groups. Three successive candidate batches are '}
+              <code>{'[all-pass, mixed]'}</code>
+              {', '}
+              <code>{'[all-fail, mixed]'}</code>
+              {', and '}
+              <code>{'[mixed, mixed]'}</code>
+              {
+                '. Which groups are retained if arrival order breaks ties? Which generated work is discarded?'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Keep whole groups and stop filling once three slots are occupied.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  ' Retain the second group of batch 1, the second of batch 2 and the first of batch 3. The final group is eligible but falls beyond the quota. It was still generated and must count in the work ledger, alongside the two homogeneous groups. If the budget ended after batch 2, the target would be unfilled rather than magically complete.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P08. What does an accepted update cost?'}</H3>
+
+            <Prose>
+              {'With '}
+              <InlineMath>{'G=3,p=.25'}</InlineMath>
+              {
+                ', calculate mixed probability and the unlimited-IID expected candidate count for four accepted groups. Why is this insufficient to predict wall time for a language model?'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Prompt lengths and response lengths are absent from the formula.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' Mixed probability is '}
+                <InlineMath>{'1-.25^3-.75^3=.5625'}</InlineMath>
+                {', so expected candidate count is '}
+                <InlineMath>{'4/.5625=64/9'}</InlineMath>
+                {
+                  ', approximately 7.111. The formula assumes identical independent trials and says nothing about token lengths, batching, model cost or a finite cap. Equal accepted-update counts can correspond to different generation and optimization work.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P09. Zero is not removal'}</H3>
+
+            <Prose>
+              {
+                'Compute the penalty at length 90 with maximum 120 and buffer 40. Then explain why reward zero in the group '
+              }
+              <InlineMath>{'(0,2,2,2)'}</InlineMath>
+              {" does not remove that response's policy-gradient contribution."}
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>
+                {' First locate the beginning of the soft buffer, then subtract the group mean.'}
+              </Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' The buffer begins at 80; the penalty is '}
+                <InlineMath>{'(80-90)/40=-.25'}</InlineMath>
+                {
+                  '. The zero reward has centered value −1.5, so its standardized advantage is negative. A loss mask of zero removes its token terms; changing reward to zero does not perform that masking operation.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P10. Make accumulation invariant'}</H3>
+
+            <Prose>
+              {
+                'Two microbatches have selected-token counts 3 and 5 and loss sums 6 and 20. Compute the intended global mean and the mean of microbatch means. Give a correct gradient-accumulation construction.'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' The count 8 belongs to the whole optimization batch.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' Global mean is '}
+                <InlineMath>{'(6+20)/(3+5)=3.25'}</InlineMath>
+                {
+                  '; averaging the local means 2 and 4 gives 3. Backpropagate the first numerator divided by 8 and the second numerator divided by 8, summing their gradients before one optimizer step. This preserves the global denominator without averaging those two losses again.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P11. Repair the join'}</H3>
+
+            <Prose>
+              {
+                'Prompt rows are [A,B,C,D]. Selected response indices are [3,0], but the program uses prompt rows [A,B]. Explain the fault and give an identity check that would detect it before a model forward pass.'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' A matching batch size is insufficient.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  " The correct prompt order is [D,A]. Gather each complete record using the same UID selection, including masks, rewards and old scores. Assert that every selected response's stored prompt ID and token prefix equal the prompt fields used to score it. Test a non-prefix selection such as [3,0]; testing only [0,1] would conceal this bug."
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P12. Interpret a zero group gradient'}</H3>
+
+            <Prose>
+              {
+                'A group has rewards [1,1,1,1]. There is no KL or auxiliary objective. What are its advantages, and what can you conclude about training?'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>
+                {
+                  ' Separate success on the sampled answers from information in their relative comparison.'
+                }
+              </Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  " All centered rewards and all advantages are zero. Its policy-loss gradient is zero even though all four sampled answers passed. That is neither proof of generalization nor an implementation failure. Dynamic selection skips this group because it offers no within-prompt correctness contrast. If length shaping makes rewards differ, coefficients could differ, but this lesson's collector still filters on correctness before shaping."
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P13. Locate the missing collector'}</H3>
+
+            <Prose>
+              {
+                'You configure the DAPO loss and write a correctness reward. A colleague proposes filtering mixed groups in the input data collator. Explain why that cannot implement the required dynamic sampling.'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Follow when correctness first becomes available.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  ' The collator runs before generation and has no sampled answers. Mixed correctness can be decided only after a complete group is generated and graded. A bounded collector must then retain whole eligible groups, generate more candidates if needed, and return filled or exhausted status. The loss option and reward callback alone do not implement those control-flow steps.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P14. Explain an apparently contradictory result'}</H3>
+
+            <Prose>
+              {
+                'A run lowers target NLL but retains exactly the same predicted labels. Does that make either metric wrong? If the combined arm differs from baseline, can you attribute that difference to Clip-Higher?'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Argmax discards most of a probability distribution.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  ' Neither metric need be wrong. Probabilities can change without crossing the argmax boundary. Inspect complete per-record probabilities and labels. The combined comparison changes several components simultaneously, so it cannot isolate Clip-Higher. A controlled component comparison would need to specify what remains fixed, the generation budget and repeated-run design before observing outcomes.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P15. Construct a reward collision'}</H3>
+
+            <Prose>
+              {'Compare the coefficient triples (7,3,2) and (7,2,3) under the map '}
+              <InlineMath>{'(a,b,c)\\mapsto a+b+c'}</InlineMath>
+              {'. What information does a terminal reward for 12 lose?'}
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Evaluate the map before comparing the corresponding radicals.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' Both triples map to 12, but '}
+                <InlineMath>{'7-3\\sqrt2\\ne7-2\\sqrt3'}</InlineMath>
+                {
+                  '. The mapped answer cannot distinguish the two real values, still less certify the reasoning that produced either. Preserve the original problem and a canonical representation or an appropriate richer verifier when that distinction is part of the task.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P16. Read a cumulative table correctly'}</H3>
+
+            <Prose>
+              {
+                'Four binary components could be enabled or disabled. How many configurations does a full factorial design contain, and why does a cumulative path not identify all component interactions?'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Enumerate choices, not rows in the published table.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' There are '}
+                <InlineMath>{'2^4=16'}</InlineMath>
+                {
+                  ' configurations. A cumulative path visits only some combinations and measures changes conditional on the components already active. It cannot recover every main effect and interaction. Comparable budgets, initialization, evaluation and a prespecified repeated-run design are also necessary; simply running more configurations does not remove those confounds.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P17. Compare equal accepted-step reward curves'}</H3>
+
+            <Prose>
+              {
+                'Run A generates 20 prompt groups and keeps 10. Run B generates 50 and keeps 10. Their reward curves over accepted updates look identical. What can you conclude about generation efficiency?'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>{' Equal accepted work does not imply equal candidate work.'}</Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {
+                  ' Acceptance rates are .5 and .2. Run B generates more candidate groups for the same retained count, but exact compute also depends on token lengths, batching and hardware. Record generated tokens, actual masks and elapsed workload before claiming a speed ratio. Equal reward curves alone conceal this difference.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <section className="dapo-practice lesson-exercise" data-lesson-exercise>
+            <H3>{'P18. Write and trace a bounded run'}</H3>
+
+            <Prose>
+              {'Use rewards −1 and +1, lengths 3 and 2, and ratio rows '}
+              <InlineMath>{'[.7,1,1.1]'}</InlineMath>
+              {' and '}
+              <InlineMath>{'[1.1,1.4]'}</InlineMath>
+              {'. Keep sample-SD epsilon '}
+              <InlineMath>{'10^{-6}'}</InlineMath>
+              {
+                ', ratio bounds .8/1.28, no shaping and all five positions selected. Compute the loss and its selected-log-probability derivatives. Then describe a reproducible small application using the supplied Poem Sentiment data and initial checkpoint, including finite failure handling.'
+              }
+            </Prose>
+            <details>
+              <summary>Hint</summary>
+              <Prose>
+                {' Let '}
+                <InlineMath>{'a=1/(\\sqrt2+10^{-6})'}</InlineMath>
+                {
+                  '. Check each sign before deciding which clipping branch is flat. Keep this calculation separate from the model run.'
+                }
+              </Prose>
+            </details>
+            <details>
+              <summary>Worked solution</summary>
+              <Prose>
+                {' Negative token losses are '}
+                <InlineMath>{'.8a,a,1.1a'}</InlineMath>
+                {'; positive token losses are '}
+                <InlineMath>{'-1.1a,-1.28a'}</InlineMath>
+                {'. Their pooled loss is '}
+                <InlineMath>{'.52/[5(\\sqrt2+10^{-6})]'}</InlineMath>
+                {'. The derivative rows are '}
+                <InlineMath>{'[0,a/5,1.1a/5]'}</InlineMath>
+                {' and '}
+                <InlineMath>{'[-1.1a/5,0]'}</InlineMath>
+                {
+                  '. Both the negative ratio .7 and the positive ratio 1.4 lie on their respective flat branches. For the application, use Poem Sentiment revision '
+                }
+                <code>{'612e9a1f86799126c68f0c5d9c3f1fc28f88068f'}</code>
+                {
+                  ', the first 16 eligible train and 32 test IDs in the supplied selection, and the exact SFT model hash from section 12. Prespecify seeds 73/89/101, group 4, target 2, at most 3 candidate batches, cap 8 and two updates per filled slot. Retain exhausted slots with no update, raw responses and coherent state. Compare all prescribed terminal observations with the same initial checkpoint; do not select a seed afterward. The short-label task tests collector/objective mechanics, not long reasoning.'
+                }
+              </Prose>
+            </details>
+          </section>
+          <Program file="practice_answers.py" />
+        </section>
+        <section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+          <H2>{'What to carry forward'}</H2>
+
+          <Prose>
+            {
+              "DAPO changes the learning system around a group-relative objective. Wider positive clipping changes an active branch; it does not guarantee entropy. Dynamic sampling changes both useful comparisons and the selected prompt distribution. Token normalization changes each response's influence. Length shaping and hard masking act at different stages. The verifier determines what the reward actually establishes."
+            }
+          </Prose>
+
+          <Prose>
+            {'The next lesson, '}
+            <a
+              href={
+                '/learn/path/full-curriculum/knowledge-distillation-for-llms-deepseek-r1-distill-cot-distillation?module=large-language-models'
+              }
+            >
+              {'Knowledge Distillation for LLMs'}
+            </a>
+            {
+              ', asks how behavior learned by a stronger or more expensive model can be transferred to another model. Keep the verifier and evaluation distinctions: imitating a successful output does not automatically preserve the process that made it successful.'
+            }
+          </Prose>
+        </section>
+
+        <section
+          className="lesson-ending lesson-ending--references"
+          data-lesson-ending="references"
+        >
+          <span id="10-primary-sources" aria-hidden="true" />
+          <H2>{'Sources and further study'}</H2>
+
+          <ul>
+            <li>
+              {''}
+              <a href={'https://arxiv.org/abs/2503.14476'}>{'DAPO paper'}</a>
+              {
+                ': read section 3 for the four mechanisms, Table 1 for the cumulative comparison and the appendix for data transformation. Compare its mathematical statement with the executable recipes.'
+              }
+            </li>
+            <li>
+              {''}
+              <a
+                href={
+                  'https://github.com/volcengine/verl/tree/4f80e465c2ec79ab9c3c30ec74b9745de61d0490/recipe/dapo'
+                }
+              >
+                {'Original DAPO reproduction'}
+              </a>
+              {
+                ': inspect the collector, reward manager, actor normalization and run configuration together. A flag name alone does not specify the executed objective.'
+              }
+            </li>
+            <li>
+              {''}
+              <a
+                href={
+                  'https://github.com/verl-project/verl-recipe/tree/242c73fcadf331e7214c4b48f67423f45239cea8/dapo'
+                }
+              >
+                {'Later retained DAPO recipe'}
+              </a>
+              {
+                ': compare the pinned snapshot rather than assuming the live branch matches an older paper.'
+              }
+            </li>
+            <li>
+              {''}
+              <a
+                href={'https://github.com/huggingface/trl/blob/v1.14.2/docs/source/paper_index.md'}
+              >
+                {'TRL1.14.2 paper configurations'}
+              </a>
+              {
+                ': the ordinary library route and its explicit truncation-mask example. Follow the matching trainer source for normalization details.'
+              }
+            </li>
+            <li>
+              {''}
+              <a href={'https://arxiv.org/abs/2503.20783'}>
+                {'Understanding R1-Zero-Like Training'}
+              </a>
+              {
+                ': a complementary analysis of group scaling and length-related normalization choices, including Dr.GRPO. These choices are alternatives with different weighting, not interchangeable names.'
+              }
+            </li>
+            <li>
+              {''}
+              <a href={'https://arxiv.org/abs/1707.06347'}>{'PPO paper'}</a>
+              {' and '}
+              <a href={'https://spinningup.openai.com/en/latest/algorithms/ppo.html'}>
+                {'Spinning Up: PPO'}
+              </a>
+              {
+                ': derive the signed clipped surrogate and connect its branches to a policy-gradient update before adapting it to long token sequences.'
+              }
+            </li>
+            <li>
+              {''}
+              <a href={'https://huggingface.co/datasets/BytedTsinghua-SIA/DAPO-Math-17k'}>
+                {'Official DAPO-Math-17k release'}
+              </a>
+              {
+                ': inspect original records, release metadata and answer formatting. A small inspected sample cannot establish a corpus-wide error rate.'
+              }
+            </li>
+          </ul>
+        </section>
+
+        <section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources">
+          <H2>{'Complete program index'}</H2>
+
+          <Prose>
+            {
+              'The math, collector, checks, training, native route, report and solved-practice programs appear where their concepts are taught. Four unchanged prerequisite helpers complete the executable bundle: model loading/full-support generation, causal token gathering, data formatting and evaluation. Their full sources follow so the local program can be inspected and run without guessing an unexplained dependency. Their original mathematical walkthrough remains in the linked SFT and GRPO lessons.'
+            }
+          </Prose>
+
+          <Program file="online_preferences.py" />
+
+          <Program file="group_losses.py" />
+
+          <Program file="sft_data.py" />
+
+          <Program file="sft_evaluate.py" />
+
+          <Prose>
+            {
+              'The final helper preserves observations and coherent training state when a later comparison fails. Its event log is append-only; its latest checkpoint is replaced atomically and includes the context needed for a deliberately reviewed continuation. It is the unchanged helper from the RLVR lesson. Writing a checkpoint is not an automatic instruction to resume or repeat work.'
+            }
+          </Prose>
+
+          <Program file="scientific_journal.py" />
+        </section>
+
+        <section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+          <H2>{'Ready to explain and extend'}</H2>
+
+          <Prose>
+            {
+              'You should be able to trace a stored response from its generating policy to its reward, group coefficient, selected token terms and parameter gradient; explain why changing a sign, length or mask changes that trace; and implement a finite collector whose selected rows keep the correct identities.'
+            }
+          </Prose>
+
+          <Prose>
+            {
+              'For an extension, choose one component question and specify the comparison before running it. Keep all prescribed outcomes, including exhausted slots and unchanged predictions. Explain which observations concern a mathematical fixture, a small language-model run or a published large-scale result. Those boundaries make the implementation useful when its first experiment fails.'
+            }
+          </Prose>
+        </section>
+      </div>
+    </DapoEvidenceProvider>
+  );
+}
+export default {
+  title: 'DAPO: Decoupled Clip and Dynamic sAmpling Policy Optimization',
+  readTime: '~90 min read + programs and practice',
+  content: DapoLesson,
 };
-
-export default dapo;

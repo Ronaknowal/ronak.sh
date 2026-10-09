@@ -1,0 +1,62 @@
+{
+  "scope": "constructed finite examples",
+  "checks": [
+    "stable masked native parity",
+    "common shift",
+    "padded event zero",
+    "soft/hard CE gradient",
+    "soft/hard CE gradient",
+    "log regret is KL",
+    "Brier regret is squared distance",
+    "invalid mask rejected",
+    "invalid mask rejected"
+  ],
+  "probabilities": [
+    [
+      0.6652409557748218,
+      0.24472847105479764,
+      0.09003057317038046
+    ],
+    [
+      0.7310585786300049,
+      0.2689414213699951,
+      0.0
+    ]
+  ],
+  "truth": [
+    0.6,
+    0.3,
+    0.1
+  ],
+  "report": [
+    0.2,
+    0.3,
+    0.5
+  ],
+  "truth_scores": {
+    "log_reward": -0.8979457248567798,
+    "brier_reward": -0.5399999999999999,
+    "spherical_reward": 0.6782329983125267,
+    "rps_loss": 0.165
+  },
+  "report_scores": {
+    "log_reward": -1.3961693068142353,
+    "brier_reward": -0.8600000000000001,
+    "spherical_reward": 0.42177569493998257,
+    "rps_loss": 0.325
+  },
+  "clipped_rare_class_reward_gain": {
+    "0.5": 4.999998125532201e-07,
+    "0.75": 4.999997813559531e-07
+  },
+  "cost_example": {
+    "risks": [
+      2.2,
+      1.9999999999999998,
+      5.3999999999999995,
+      0.9999999999999999
+    ],
+    "action": 3,
+    "tie_rule": "first action"
+  }
+}

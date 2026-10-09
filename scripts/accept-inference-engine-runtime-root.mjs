@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {parse} from '@babel/parser';
+const base='docs/teaching/llm-architecture-training/inference-engines-serving';
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const read=p=>JSON.parse(fs.readFileSync(p));
+const author=read(`${base}/runtime-inputs.json`);
+const authorFiles=Array.isArray(author.files)?Object.fromEntries(author.files.map(r=>[r.path,r.sha256])):author.files;
+assert.ok(Object.keys(authorFiles).length>100);
+for(const[p,h]of Object.entries(authorFiles))assert.equal(sha(p),h,p);
+const amendment=read(`${base}/latency-terminology-correction/accepted-root.json`);
+assert.equal(amendment.accepted,true);
+for(const[p,h]of Object.entries(amendment.files))assert.equal(sha(p),h,p);
+const files={...amendment.files,...authorFiles};
+const bind=p=>files[p]=sha(p);
+function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=`${dir}/${e.name}`;if(e.isDirectory())walk(p);else bind(p);}}
+walk(`${base}/runtime-review-root`);
+for(const p of [`${base}/runtime-inputs.json`,`${base}/runtime-author-review.md`,`${base}/latency-terminology-correction/accepted-root.json`,'scripts/accept-inference-engine-runtime-root.mjs','scripts/verify-inference-engine-delivery-root.cjs','scripts/compose-inference-engine-review-root.py'])bind(p);
+const delivery=read(`${base}/runtime-review-root/complete-code-delivery-r2/report.json`);
+assert.equal(delivery.passed,true);assert.equal(delivery.programs.length,13);
+const timelines=read(`${base}/runtime-lifecycle/browser-verified-timelines.json`);
+assert.equal(timelines.status,'PASS');bind(`${base}/runtime-lifecycle/browser-verified-timelines.json`);
+for(const r of timelines.records)for(const tile of r.tiles??[]){const p=path.relative(process.cwd(),tile.path).replaceAll('\\','/');assert.equal(sha(p),tile.sha256);bind(p);}
+const manuscript=`${base}/lesson.jsx`,source=fs.readFileSync(manuscript,'utf8');
+assert.equal(sha(manuscript),'e64952bc8c7732b2c951e561b8df160d673c0ebdd4e71948ad8f82cf0e57f035');
+const mapped=source.replaceAll('../../../../src/learn/','../../');parse(mapped,{sourceType:'module',plugins:['jsx']});
+const result={accepted:true,topicId:'inference-engines-serving',reviewer:'/root',authors:['/root/alignment_author','/root/serving_author','/root/training_author'],status:'private-runtime-accepted-production-pending',manuscript,review:`${base}/runtime-review-root/review.md`,authorReview:`${base}/runtime-author-review.md`,publishedSha256:createHash('sha256').update(mapped).digest('hex'),figures:'[data-engine-figure]',count:32,assets:'public/learn/examples/inference-engines',assetRoots:['public/learn/examples/inference-engines'],files};
+fs.writeFileSync(`${base}/runtime-acceptance.json`,JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({accepted:true,files:Object.keys(files).length,sha256:sha(`${base}/runtime-acceptance.json`),publishedSha256:result.publishedSha256}));

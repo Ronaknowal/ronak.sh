@@ -1,0 +1,95 @@
+{
+  "schema": "nmf-built-delivery-execution-history/v1",
+  "author": "/root/tsne_probability_arrow_recovery",
+  "operations": [
+    {
+      "chunk": "f9602f",
+      "session": 77330,
+      "completionChunk": "5b5a20",
+      "exit": 0,
+      "scope": "Read entire SAME closure and current config; Get-NetTCPConnection5200 returned no rows; C-drive capacity 60507746304 free bytes."
+    },
+    {
+      "chunk": "775e13",
+      "session": 51688,
+      "completionChunk": "66a9c1",
+      "exit": 0,
+      "scope": "247 exact source/input identities; capacity53305274368; second successful unused-port Get-NetTCPConnection snapshot retained."
+    },
+    {
+      "chunk": "936163",
+      "exit": 1,
+      "scope": "Original sandbox Vite attempt: 0 modules transformed, EPERM realpath preview-entry.jsx. Retained full build-output-sandbox-failure.txt and exit code."
+    },
+    {
+      "chunk": "9cc339",
+      "exit": 0,
+      "scope": "Authorized escalated identical-config Vite build: 86 modules transformed,66 artifacts; full build-output.txt retained. One completed build; no source/config edit."
+    },
+    {
+      "chunk": "cc4f4b",
+      "session": 51443,
+      "pid": 33280,
+      "scope": "Preview starts strict127.0.0.1:5200. Supplemental .NET GetActiveTcpListeners query was denied before preview launch; its emitted [] file is not a successful port query.",
+      "queryFailure": "MethodInvocationException: Exception calling GetActiveTcpListeners with 0 argument(s): Access is denied."
+    },
+    {
+      "chunk": "cc743c",
+      "exit": 1,
+      "scope": "Initial sandbox HTTP verifier denied socket WinError10013. Full delivery-check-output-sandbox-failure.txt retained. No HTTP request succeeded."
+    },
+    {
+      "chunk": "bb961e",
+      "session": 93711,
+      "completionChunk": "e1f325",
+      "exit": 1,
+      "scope": "Authorized escalated HTTP verifier first request timed out. Full delivery-check-output-first-escalated-timeout.txt retained."
+    },
+    {
+      "chunk": "a1761e",
+      "exit": 1,
+      "scope": "Read-only escalated netstat shows127.0.0.1:5200 LISTENING PID33280. Node fetch connect ETIMEDOUT; no live handle stopped."
+    },
+    {
+      "chunk": "c277e4",
+      "exit": 0,
+      "scope": "Built-source-only conservation snapshot67f1fdb9,57 compiled bindings/247 frozen inputs/66 output artifacts. No HTTP acceptance inferred."
+    },
+    {
+      "chunk": "40a085",
+      "session": 51443,
+      "scope": "Polled same live sandbox handle before targeted stop; still running."
+    },
+    {
+      "chunk": "756124",
+      "exit": 0,
+      "scope": "Escalated owner check: strict5200 listening PID33280 node.exe exact NMF config; complete selected NMF Root navigation receipt3617a2ca read."
+    },
+    {
+      "chunk": "4f6759",
+      "exit": 0,
+      "scope": "Root explicitly authorized targeted stop only own verified inaccessible PID33280; no other process stopped. Port empty immediately afterward."
+    },
+    {
+      "chunk": "a340cb",
+      "session": 51443,
+      "exit": 1,
+      "scope": "Original sandbox preview handle final completion after authorized targeted stop; not a build failure."
+    },
+    {
+      "chunk": "485897",
+      "session": 39790,
+      "scope": "Escalated identical-config preview live strict127.0.0.1:5200; no rebuild."
+    },
+    {
+      "chunk": "446c2c",
+      "exit": 0,
+      "scope": "Exact actual HTTP66 build artifacts+41 payloads; unknown payload404.57 physical compiled source identities and247 frozen input identities conserved; selected Root navigation3617a2ca composed."
+    }
+  ],
+  "sourceCheckerReplay": 0,
+  "SSRReplay": 0,
+  "scientificReplay": 0,
+  "browserOperations": 0,
+  "phaseChanges": 0
+}

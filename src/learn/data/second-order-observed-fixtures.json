@@ -1,0 +1,2549 @@
+{
+  "iris": {
+    "trace": [
+      {
+        "iteration": 0,
+        "theta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "objective": 0.6931471805599453,
+        "gradientInf": 0.23151095637674754,
+        "acceptedAlpha": 1.0
+      },
+      {
+        "iteration": 1,
+        "theta": [
+          0.5911563038553903,
+          0.18318116613727473,
+          -1.6673467983035958e-15
+        ],
+        "objective": 0.6079563626864919,
+        "gradientInf": 0.01841427933182911,
+        "acceptedAlpha": 1.0
+      },
+      {
+        "iteration": 2,
+        "theta": [
+          0.646193736642429,
+          0.2164827762206878,
+          0.0014827589744074961
+        ],
+        "objective": 0.6071943850301869,
+        "gradientInf": 0.0004153072831552945,
+        "acceptedAlpha": 1.0
+      },
+      {
+        "iteration": 3,
+        "theta": [
+          0.6474646467844872,
+          0.21736554586655735,
+          0.0014717212604951823
+        ],
+        "objective": 0.6071939648672944,
+        "gradientInf": 2.3670171211964686e-07,
+        "acceptedAlpha": 1.0
+      },
+      {
+        "iteration": 4,
+        "theta": [
+          0.6474653638534897,
+          0.21736607637171843,
+          0.001471690528406686
+        ],
+        "objective": 0.6071939648671542,
+        "gradientInf": 7.863154571907671e-14
+      }
+    ],
+    "newton": [
+      0.6474653638534897,
+      0.21736607637171843,
+      0.001471690528406686
+    ],
+    "library": [
+      0.6474653830550762,
+      0.21736606604160366,
+      0.0014716632404387408
+    ],
+    "newtonEvaluations": 9,
+    "libraryClosures": 9,
+    "mean": [
+      6.299999999999997,
+      2.8737500000000002
+    ],
+    "scale": [
+      0.6695147496508198,
+      0.3353146842892509
+    ],
+    "ids": [
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150
+    ],
+    "train": [
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    "features": [
+      [
+        7.0,
+        3.2
+      ],
+      [
+        6.4,
+        3.2
+      ],
+      [
+        6.9,
+        3.1
+      ],
+      [
+        5.5,
+        2.3
+      ],
+      [
+        6.5,
+        2.8
+      ],
+      [
+        5.7,
+        2.8
+      ],
+      [
+        6.3,
+        3.3
+      ],
+      [
+        4.9,
+        2.4
+      ],
+      [
+        6.6,
+        2.9
+      ],
+      [
+        5.2,
+        2.7
+      ],
+      [
+        5.0,
+        2.0
+      ],
+      [
+        5.9,
+        3.0
+      ],
+      [
+        6.0,
+        2.2
+      ],
+      [
+        6.1,
+        2.9
+      ],
+      [
+        5.6,
+        2.9
+      ],
+      [
+        6.7,
+        3.1
+      ],
+      [
+        5.6,
+        3.0
+      ],
+      [
+        5.8,
+        2.7
+      ],
+      [
+        6.2,
+        2.2
+      ],
+      [
+        5.6,
+        2.5
+      ],
+      [
+        5.9,
+        3.2
+      ],
+      [
+        6.1,
+        2.8
+      ],
+      [
+        6.3,
+        2.5
+      ],
+      [
+        6.1,
+        2.8
+      ],
+      [
+        6.4,
+        2.9
+      ],
+      [
+        6.6,
+        3.0
+      ],
+      [
+        6.8,
+        2.8
+      ],
+      [
+        6.7,
+        3.0
+      ],
+      [
+        6.0,
+        2.9
+      ],
+      [
+        5.7,
+        2.6
+      ],
+      [
+        5.5,
+        2.4
+      ],
+      [
+        5.5,
+        2.4
+      ],
+      [
+        5.8,
+        2.7
+      ],
+      [
+        6.0,
+        2.7
+      ],
+      [
+        5.4,
+        3.0
+      ],
+      [
+        6.0,
+        3.4
+      ],
+      [
+        6.7,
+        3.1
+      ],
+      [
+        6.3,
+        2.3
+      ],
+      [
+        5.6,
+        3.0
+      ],
+      [
+        5.5,
+        2.5
+      ],
+      [
+        5.5,
+        2.6
+      ],
+      [
+        6.1,
+        3.0
+      ],
+      [
+        5.8,
+        2.6
+      ],
+      [
+        5.0,
+        2.3
+      ],
+      [
+        5.6,
+        2.7
+      ],
+      [
+        5.7,
+        3.0
+      ],
+      [
+        5.7,
+        2.9
+      ],
+      [
+        6.2,
+        2.9
+      ],
+      [
+        5.1,
+        2.5
+      ],
+      [
+        5.7,
+        2.8
+      ],
+      [
+        6.3,
+        3.3
+      ],
+      [
+        5.8,
+        2.7
+      ],
+      [
+        7.1,
+        3.0
+      ],
+      [
+        6.3,
+        2.9
+      ],
+      [
+        6.5,
+        3.0
+      ],
+      [
+        7.6,
+        3.0
+      ],
+      [
+        4.9,
+        2.5
+      ],
+      [
+        7.3,
+        2.9
+      ],
+      [
+        6.7,
+        2.5
+      ],
+      [
+        7.2,
+        3.6
+      ],
+      [
+        6.5,
+        3.2
+      ],
+      [
+        6.4,
+        2.7
+      ],
+      [
+        6.8,
+        3.0
+      ],
+      [
+        5.7,
+        2.5
+      ],
+      [
+        5.8,
+        2.8
+      ],
+      [
+        6.4,
+        3.2
+      ],
+      [
+        6.5,
+        3.0
+      ],
+      [
+        7.7,
+        3.8
+      ],
+      [
+        7.7,
+        2.6
+      ],
+      [
+        6.0,
+        2.2
+      ],
+      [
+        6.9,
+        3.2
+      ],
+      [
+        5.6,
+        2.8
+      ],
+      [
+        7.7,
+        2.8
+      ],
+      [
+        6.3,
+        2.7
+      ],
+      [
+        6.7,
+        3.3
+      ],
+      [
+        7.2,
+        3.2
+      ],
+      [
+        6.2,
+        2.8
+      ],
+      [
+        6.1,
+        3.0
+      ],
+      [
+        6.4,
+        2.8
+      ],
+      [
+        7.2,
+        3.0
+      ],
+      [
+        7.4,
+        2.8
+      ],
+      [
+        7.9,
+        3.8
+      ],
+      [
+        6.4,
+        2.8
+      ],
+      [
+        6.3,
+        2.8
+      ],
+      [
+        6.1,
+        2.6
+      ],
+      [
+        7.7,
+        3.0
+      ],
+      [
+        6.3,
+        3.4
+      ],
+      [
+        6.4,
+        3.1
+      ],
+      [
+        6.0,
+        3.0
+      ],
+      [
+        6.9,
+        3.1
+      ],
+      [
+        6.7,
+        3.1
+      ],
+      [
+        6.9,
+        3.1
+      ],
+      [
+        5.8,
+        2.7
+      ],
+      [
+        6.8,
+        3.2
+      ],
+      [
+        6.7,
+        3.3
+      ],
+      [
+        6.7,
+        3.0
+      ],
+      [
+        6.3,
+        2.5
+      ],
+      [
+        6.5,
+        3.0
+      ],
+      [
+        6.2,
+        3.4
+      ],
+      [
+        5.9,
+        3.0
+      ]
+    ],
+    "labels": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "heldNll": 0.5313489691491258,
+    "heldCorrect": 14,
+    "versions": {
+      "numpy": "2.3.5",
+      "torch": "2.14.0+cpu"
+    }
+  },
+  "muon": {
+    "matrix": [
+      [
+        2.0,
+        1.0
+      ],
+      [
+        1.0,
+        2.0
+      ]
+    ],
+    "frames": [
+      [
+        [
+          0.6324555320336759,
+          0.31622776601683794
+        ],
+        [
+          0.31622776601683794,
+          0.6324555320336759
+        ]
+      ],
+      [
+        [
+          0.8482588463965466,
+          -0.0964131024420436
+        ],
+        [
+          -0.09641310244204382,
+          0.8482588463965466
+        ]
+      ],
+      [
+        [
+          0.9026084372119518,
+          0.14580758457407705
+        ],
+        [
+          0.14580758457407678,
+          0.9026084372119514
+        ]
+      ],
+      [
+        [
+          0.8616235918086614,
+          -0.17976712117900817
+        ],
+        [
+          -0.17976712117900817,
+          0.8616235918086623
+        ]
+      ],
+      [
+        [
+          0.9084001459750741,
+          0.22593161281079344
+        ],
+        [
+          0.22593161281079344,
+          0.9084001459750728
+        ]
+      ],
+      [
+        [
+          0.9433698409006008,
+          -0.19033638733432334
+        ],
+        [
+          -0.19033638733432356,
+          0.9433698409006013
+        ]
+      ]
+    ],
+    "singularFrames": [
+      [
+        0.9486832980505138,
+        0.316227766016838
+      ],
+      [
+        0.9446719488385903,
+        0.7518457439545029
+      ],
+      [
+        1.0484160217860286,
+        0.7568008526378747
+      ],
+      [
+        1.0413907129876698,
+        0.6818564706296538
+      ],
+      [
+        1.134331758785867,
+        0.68246853316428
+      ],
+      [
+        1.1337062282349246,
+        0.7530334535662775
+      ]
+    ],
+    "rankDeficient": [
+      [
+        0.6964364094697522,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "zero": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "libraryComparisons": [
+      {
+        "shape": [
+          2,
+          2
+        ],
+        "nesterov": false,
+        "errors": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parameter": [
+          [
+            -0.04216097295284271,
+            0.07772988826036453
+          ],
+          [
+            0.16952049732208252,
+            0.3387705683708191
+          ]
+        ],
+        "buffer": [
+          [
+            0.1884552389383316,
+            0.09958125650882721
+          ],
+          [
+            -0.08084726333618164,
+            -0.18694519996643066
+          ]
+        ]
+      },
+      {
+        "shape": [
+          2,
+          2
+        ],
+        "nesterov": true,
+        "errors": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parameter": [
+          [
+            -0.04371941089630127,
+            0.08559460937976837
+          ],
+          [
+            0.177284836769104,
+            0.33978256583213806
+          ]
+        ],
+        "buffer": [
+          [
+            0.1884552389383316,
+            0.09958125650882721
+          ],
+          [
+            -0.08084726333618164,
+            -0.18694519996643066
+          ]
+        ]
+      },
+      {
+        "shape": [
+          3,
+          2
+        ],
+        "nesterov": false,
+        "errors": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parameter": [
+          [
+            -0.022759871557354927,
+            0.06685937941074371
+          ],
+          [
+            0.17210635542869568,
+            0.35044384002685547
+          ],
+          [
+            0.4424843490123749,
+            0.48635590076446533
+          ]
+        ],
+        "buffer": [
+          [
+            0.1884552389383316,
+            0.09958125650882721
+          ],
+          [
+            -0.08084726333618164,
+            -0.18694519996643066
+          ],
+          [
+            -0.12116656452417374,
+            0.05601203441619873
+          ]
+        ]
+      },
+      {
+        "shape": [
+          3,
+          2
+        ],
+        "nesterov": true,
+        "errors": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parameter": [
+          [
+            -0.025906195864081383,
+            0.0736115500330925
+          ],
+          [
+            0.1824815720319748,
+            0.3476705551147461
+          ],
+          [
+            0.43688690662384033,
+            0.48145827651023865
+          ]
+        ],
+        "buffer": [
+          [
+            0.1884552389383316,
+            0.09958125650882721
+          ],
+          [
+            -0.08084726333618164,
+            -0.18694519996643066
+          ],
+          [
+            -0.12116656452417374,
+            0.05601203441619873
+          ]
+        ]
+      },
+      {
+        "shape": [
+          2,
+          3
+        ],
+        "nesterov": false,
+        "errors": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parameter": [
+          [
+            -0.03944084048271179,
+            0.09258925169706345,
+            0.23077112436294556
+          ],
+          [
+            0.29443302750587463,
+            0.4303687810897827,
+            0.536056399345398
+          ]
+        ],
+        "buffer": [
+          [
+            0.1884552389383316,
+            0.09958125650882721,
+            -0.08084726333618164
+          ],
+          [
+            -0.18694519996643066,
+            -0.12116656452417374,
+            0.05601203441619873
+          ]
+        ]
+      },
+      {
+        "shape": [
+          2,
+          3
+        ],
+        "nesterov": true,
+        "errors": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parameter": [
+          [
+            -0.03299959376454353,
+            0.0995529517531395,
+            0.23242680728435516
+          ],
+          [
+            0.30181053280830383,
+            0.4309917688369751,
+            0.5299646854400635
+          ]
+        ],
+        "buffer": [
+          [
+            0.1884552389383316,
+            0.09958125650882721,
+            -0.08084726333618164
+          ],
+          [
+            -0.18694519996643066,
+            -0.12116656452417374,
+            0.05601203441619873
+          ]
+        ]
+      }
+    ],
+    "versions": {
+      "numpy": "2.3.5",
+      "torch": "2.14.0+cpu"
+    }
+  },
+  "bounded": {
+    "cg": [
+      {
+        "p": [
+          -3.0,
+          -1.0
+        ],
+        "Hp": [
+          -13.0,
+          -5.0
+        ],
+        "alpha": 0.22727272727272727,
+        "d": [
+          -0.6818181818181818,
+          -0.22727272727272727
+        ],
+        "residual": [
+          -0.045454545454545414,
+          0.13636363636363624
+        ],
+        "beta": 0.002066115702479335
+      },
+      {
+        "p": [
+          -0.05165289256198342,
+          0.1342975206611569
+        ],
+        "Hp": [
+          -0.07231404958677676,
+          0.2169421487603304
+        ],
+        "alpha": 0.6285714285714286,
+        "d": [
+          -0.7142857142857142,
+          -0.1428571428571429
+        ],
+        "residual": [
+          -2.7755575615628914e-17,
+          0.0
+        ],
+        "beta": 3.7286003723336956e-32
+      }
+    ],
+    "tensor": [
+      {
+        "mode": 0,
+        "unfolding": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            5,
+            6,
+            7,
+            8
+          ]
+        ],
+        "gram": [
+          [
+            30,
+            70
+          ],
+          [
+            70,
+            174
+          ]
+        ]
+      },
+      {
+        "mode": 1,
+        "unfolding": [
+          [
+            1,
+            2,
+            5,
+            6
+          ],
+          [
+            3,
+            4,
+            7,
+            8
+          ]
+        ],
+        "gram": [
+          [
+            66,
+            94
+          ],
+          [
+            94,
+            138
+          ]
+        ]
+      },
+      {
+        "mode": 2,
+        "unfolding": [
+          [
+            1,
+            3,
+            5,
+            7
+          ],
+          [
+            2,
+            4,
+            6,
+            8
+          ]
+        ],
+        "gram": [
+          [
+            84,
+            100
+          ],
+          [
+            100,
+            120
+          ]
+        ]
+      }
+    ],
+    "irisSelectedRow": {
+      "id": 55,
+      "physical": [
+        6.5,
+        2.8
+      ],
+      "features": [
+        0.2987238146796785,
+        -0.21994264926489715,
+        1.0
+      ],
+      "theta": [
+        0.5911563038553903,
+        0.18318116613727473,
+        -1.6673467983035958e-15
+      ],
+      "products": [
+        0.17659246615962135,
+        -0.04028935097566547,
+        -1.6673467983035958e-15
+      ],
+      "logit": 0.13630311518395422,
+      "probability": 0.5340231201099355,
+      "label": 0,
+      "held": true,
+      "gradient": [
+        0.15952542356638405,
+        -0.11745445980568558,
+        0.5340231201099355
+      ],
+      "likelihoodHessian": [
+        [
+          0.02220568230210749,
+          -0.016349471834032542,
+          0.07433515913660461
+        ],
+        [
+          -0.016349471834032542,
+          0.012037694929394454,
+          -0.05473106270942636
+        ],
+        [
+          0.07433515913660461,
+          -0.05473106270942636,
+          0.2488424272979849
+        ]
+      ]
+    },
+    "muonSingleStates": [
+      {
+        "shape": [
+          2,
+          2
+        ],
+        "nesterov": true,
+        "initial": [
+          [
+            0.0,
+            0.10000000149011612
+          ],
+          [
+            0.20000000298023224,
+            0.30000001192092896
+          ]
+        ],
+        "gradient": [
+          [
+            0.4794255495071411,
+            0.9974949955940247
+          ],
+          [
+            0.5984721183776855,
+            -0.35078322887420654
+          ]
+        ],
+        "buffer": [
+          [
+            0.04794255644083023,
+            0.09974949806928635
+          ],
+          [
+            0.059847213327884674,
+            -0.035078324377536774
+          ]
+        ],
+        "blend": [
+          [
+            0.0910908654332161,
+            0.1895240694284439
+          ],
+          [
+            0.1137097179889679,
+            -0.06664882600307465
+          ]
+        ],
+        "normalizedSmallerSideBF16": [
+          [
+            0.3671875,
+            0.765625
+          ],
+          [
+            0.458984375,
+            -0.267578125
+          ]
+        ],
+        "direction": [
+          [
+            0.451171875,
+            0.9140625
+          ],
+          [
+            0.61328125,
+            -0.33984375
+          ]
+        ],
+        "afterOne": [
+          [
+            -0.009023437276482582,
+            0.08151875436306
+          ],
+          [
+            0.18733438849449158,
+            0.3061968982219696
+          ]
+        ],
+        "adjustedRate": 0.02,
+        "decayMultiplier": 0.998
+      },
+      {
+        "shape": [
+          3,
+          2
+        ],
+        "nesterov": true,
+        "initial": [
+          [
+            0.0,
+            0.10000000149011612
+          ],
+          [
+            0.20000000298023224,
+            0.30000001192092896
+          ],
+          [
+            0.4000000059604645,
+            0.5
+          ]
+        ],
+        "gradient": [
+          [
+            0.4794255495071411,
+            0.9974949955940247
+          ],
+          [
+            0.5984721183776855,
+            -0.35078322887420654
+          ],
+          [
+            -0.9775301218032837,
+            -0.7055402994155884
+          ]
+        ],
+        "buffer": [
+          [
+            0.04794255644083023,
+            0.09974949806928635
+          ],
+          [
+            0.059847213327884674,
+            -0.035078324377536774
+          ],
+          [
+            -0.09775301069021225,
+            -0.07055403292179108
+          ]
+        ],
+        "blend": [
+          [
+            0.0910908654332161,
+            0.1895240694284439
+          ],
+          [
+            0.1137097179889679,
+            -0.06664882600307465
+          ],
+          [
+            -0.18573075532913208,
+            -0.13405267894268036
+          ]
+        ],
+        "normalizedSmallerSideBF16": [
+          [
+            0.26953125,
+            0.3359375,
+            -0.55078125
+          ],
+          [
+            0.5625,
+            -0.1962890625,
+            -0.396484375
+          ]
+        ],
+        "direction": [
+          [
+            -0.039306640625,
+            0.65625
+          ],
+          [
+            0.74609375,
+            -0.6015625
+          ],
+          [
+            -0.58203125,
+            -0.1484375
+          ]
+        ],
+        "afterOne": [
+          [
+            0.0009628121624700725,
+            0.0837252289056778
+          ],
+          [
+            0.1813245266675949,
+            0.31413525342941284
+          ],
+          [
+            0.41345682740211487,
+            0.5026359558105469
+          ]
+        ],
+        "adjustedRate": 0.02449489742783178,
+        "decayMultiplier": 0.998
+      }
+    ]
+  },
+  "irisRaw": [
+    {
+      "sepal length": "5.1",
+      "sepal width": "3.5",
+      "petal length": "1.4",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.9",
+      "sepal width": "3.0",
+      "petal length": "1.4",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.7",
+      "sepal width": "3.2",
+      "petal length": "1.3",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.6",
+      "sepal width": "3.1",
+      "petal length": "1.5",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "3.6",
+      "petal length": "1.4",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.4",
+      "sepal width": "3.9",
+      "petal length": "1.7",
+      "petal width": "0.4",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.6",
+      "sepal width": "3.4",
+      "petal length": "1.4",
+      "petal width": "0.3",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "3.4",
+      "petal length": "1.5",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.4",
+      "sepal width": "2.9",
+      "petal length": "1.4",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.9",
+      "sepal width": "3.1",
+      "petal length": "1.5",
+      "petal width": "0.1",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.4",
+      "sepal width": "3.7",
+      "petal length": "1.5",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.8",
+      "sepal width": "3.4",
+      "petal length": "1.6",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.8",
+      "sepal width": "3.0",
+      "petal length": "1.4",
+      "petal width": "0.1",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.3",
+      "sepal width": "3.0",
+      "petal length": "1.1",
+      "petal width": "0.1",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.8",
+      "sepal width": "4.0",
+      "petal length": "1.2",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.7",
+      "sepal width": "4.4",
+      "petal length": "1.5",
+      "petal width": "0.4",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.4",
+      "sepal width": "3.9",
+      "petal length": "1.3",
+      "petal width": "0.4",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.1",
+      "sepal width": "3.5",
+      "petal length": "1.4",
+      "petal width": "0.3",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.7",
+      "sepal width": "3.8",
+      "petal length": "1.7",
+      "petal width": "0.3",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.1",
+      "sepal width": "3.8",
+      "petal length": "1.5",
+      "petal width": "0.3",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.4",
+      "sepal width": "3.4",
+      "petal length": "1.7",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.1",
+      "sepal width": "3.7",
+      "petal length": "1.5",
+      "petal width": "0.4",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.6",
+      "sepal width": "3.6",
+      "petal length": "1.0",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.1",
+      "sepal width": "3.3",
+      "petal length": "1.7",
+      "petal width": "0.5",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.8",
+      "sepal width": "3.4",
+      "petal length": "1.9",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "3.0",
+      "petal length": "1.6",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "3.4",
+      "petal length": "1.6",
+      "petal width": "0.4",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.2",
+      "sepal width": "3.5",
+      "petal length": "1.5",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.2",
+      "sepal width": "3.4",
+      "petal length": "1.4",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.7",
+      "sepal width": "3.2",
+      "petal length": "1.6",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.8",
+      "sepal width": "3.1",
+      "petal length": "1.6",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.4",
+      "sepal width": "3.4",
+      "petal length": "1.5",
+      "petal width": "0.4",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.2",
+      "sepal width": "4.1",
+      "petal length": "1.5",
+      "petal width": "0.1",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.5",
+      "sepal width": "4.2",
+      "petal length": "1.4",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.9",
+      "sepal width": "3.1",
+      "petal length": "1.5",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "3.2",
+      "petal length": "1.2",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.5",
+      "sepal width": "3.5",
+      "petal length": "1.3",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.9",
+      "sepal width": "3.6",
+      "petal length": "1.4",
+      "petal width": "0.1",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.4",
+      "sepal width": "3.0",
+      "petal length": "1.3",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.1",
+      "sepal width": "3.4",
+      "petal length": "1.5",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "3.5",
+      "petal length": "1.3",
+      "petal width": "0.3",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.5",
+      "sepal width": "2.3",
+      "petal length": "1.3",
+      "petal width": "0.3",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.4",
+      "sepal width": "3.2",
+      "petal length": "1.3",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "3.5",
+      "petal length": "1.6",
+      "petal width": "0.6",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.1",
+      "sepal width": "3.8",
+      "petal length": "1.9",
+      "petal width": "0.4",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.8",
+      "sepal width": "3.0",
+      "petal length": "1.4",
+      "petal width": "0.3",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.1",
+      "sepal width": "3.8",
+      "petal length": "1.6",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "4.6",
+      "sepal width": "3.2",
+      "petal length": "1.4",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.3",
+      "sepal width": "3.7",
+      "petal length": "1.5",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "3.3",
+      "petal length": "1.4",
+      "petal width": "0.2",
+      "species": "Iris-setosa"
+    },
+    {
+      "sepal length": "7.0",
+      "sepal width": "3.2",
+      "petal length": "4.7",
+      "petal width": "1.4",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.4",
+      "sepal width": "3.2",
+      "petal length": "4.5",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.9",
+      "sepal width": "3.1",
+      "petal length": "4.9",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.5",
+      "sepal width": "2.3",
+      "petal length": "4.0",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.5",
+      "sepal width": "2.8",
+      "petal length": "4.6",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.7",
+      "sepal width": "2.8",
+      "petal length": "4.5",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "3.3",
+      "petal length": "4.7",
+      "petal width": "1.6",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "4.9",
+      "sepal width": "2.4",
+      "petal length": "3.3",
+      "petal width": "1.0",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.6",
+      "sepal width": "2.9",
+      "petal length": "4.6",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.2",
+      "sepal width": "2.7",
+      "petal length": "3.9",
+      "petal width": "1.4",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "2.0",
+      "petal length": "3.5",
+      "petal width": "1.0",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.9",
+      "sepal width": "3.0",
+      "petal length": "4.2",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.0",
+      "sepal width": "2.2",
+      "petal length": "4.0",
+      "petal width": "1.0",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.1",
+      "sepal width": "2.9",
+      "petal length": "4.7",
+      "petal width": "1.4",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.6",
+      "sepal width": "2.9",
+      "petal length": "3.6",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.7",
+      "sepal width": "3.1",
+      "petal length": "4.4",
+      "petal width": "1.4",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.6",
+      "sepal width": "3.0",
+      "petal length": "4.5",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.8",
+      "sepal width": "2.7",
+      "petal length": "4.1",
+      "petal width": "1.0",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.2",
+      "sepal width": "2.2",
+      "petal length": "4.5",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.6",
+      "sepal width": "2.5",
+      "petal length": "3.9",
+      "petal width": "1.1",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.9",
+      "sepal width": "3.2",
+      "petal length": "4.8",
+      "petal width": "1.8",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.1",
+      "sepal width": "2.8",
+      "petal length": "4.0",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "2.5",
+      "petal length": "4.9",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.1",
+      "sepal width": "2.8",
+      "petal length": "4.7",
+      "petal width": "1.2",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.4",
+      "sepal width": "2.9",
+      "petal length": "4.3",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.6",
+      "sepal width": "3.0",
+      "petal length": "4.4",
+      "petal width": "1.4",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.8",
+      "sepal width": "2.8",
+      "petal length": "4.8",
+      "petal width": "1.4",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.7",
+      "sepal width": "3.0",
+      "petal length": "5.0",
+      "petal width": "1.7",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.0",
+      "sepal width": "2.9",
+      "petal length": "4.5",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.7",
+      "sepal width": "2.6",
+      "petal length": "3.5",
+      "petal width": "1.0",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.5",
+      "sepal width": "2.4",
+      "petal length": "3.8",
+      "petal width": "1.1",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.5",
+      "sepal width": "2.4",
+      "petal length": "3.7",
+      "petal width": "1.0",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.8",
+      "sepal width": "2.7",
+      "petal length": "3.9",
+      "petal width": "1.2",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.0",
+      "sepal width": "2.7",
+      "petal length": "5.1",
+      "petal width": "1.6",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.4",
+      "sepal width": "3.0",
+      "petal length": "4.5",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.0",
+      "sepal width": "3.4",
+      "petal length": "4.5",
+      "petal width": "1.6",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.7",
+      "sepal width": "3.1",
+      "petal length": "4.7",
+      "petal width": "1.5",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "2.3",
+      "petal length": "4.4",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.6",
+      "sepal width": "3.0",
+      "petal length": "4.1",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.5",
+      "sepal width": "2.5",
+      "petal length": "4.0",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.5",
+      "sepal width": "2.6",
+      "petal length": "4.4",
+      "petal width": "1.2",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.1",
+      "sepal width": "3.0",
+      "petal length": "4.6",
+      "petal width": "1.4",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.8",
+      "sepal width": "2.6",
+      "petal length": "4.0",
+      "petal width": "1.2",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.0",
+      "sepal width": "2.3",
+      "petal length": "3.3",
+      "petal width": "1.0",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.6",
+      "sepal width": "2.7",
+      "petal length": "4.2",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.7",
+      "sepal width": "3.0",
+      "petal length": "4.2",
+      "petal width": "1.2",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.7",
+      "sepal width": "2.9",
+      "petal length": "4.2",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.2",
+      "sepal width": "2.9",
+      "petal length": "4.3",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.1",
+      "sepal width": "2.5",
+      "petal length": "3.0",
+      "petal width": "1.1",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "5.7",
+      "sepal width": "2.8",
+      "petal length": "4.1",
+      "petal width": "1.3",
+      "species": "Iris-versicolor"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "3.3",
+      "petal length": "6.0",
+      "petal width": "2.5",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "5.8",
+      "sepal width": "2.7",
+      "petal length": "5.1",
+      "petal width": "1.9",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.1",
+      "sepal width": "3.0",
+      "petal length": "5.9",
+      "petal width": "2.1",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "2.9",
+      "petal length": "5.6",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.5",
+      "sepal width": "3.0",
+      "petal length": "5.8",
+      "petal width": "2.2",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.6",
+      "sepal width": "3.0",
+      "petal length": "6.6",
+      "petal width": "2.1",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "4.9",
+      "sepal width": "2.5",
+      "petal length": "4.5",
+      "petal width": "1.7",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.3",
+      "sepal width": "2.9",
+      "petal length": "6.3",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.7",
+      "sepal width": "2.5",
+      "petal length": "5.8",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.2",
+      "sepal width": "3.6",
+      "petal length": "6.1",
+      "petal width": "2.5",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.5",
+      "sepal width": "3.2",
+      "petal length": "5.1",
+      "petal width": "2.0",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.4",
+      "sepal width": "2.7",
+      "petal length": "5.3",
+      "petal width": "1.9",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.8",
+      "sepal width": "3.0",
+      "petal length": "5.5",
+      "petal width": "2.1",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "5.7",
+      "sepal width": "2.5",
+      "petal length": "5.0",
+      "petal width": "2.0",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "5.8",
+      "sepal width": "2.8",
+      "petal length": "5.1",
+      "petal width": "2.4",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.4",
+      "sepal width": "3.2",
+      "petal length": "5.3",
+      "petal width": "2.3",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.5",
+      "sepal width": "3.0",
+      "petal length": "5.5",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.7",
+      "sepal width": "3.8",
+      "petal length": "6.7",
+      "petal width": "2.2",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.7",
+      "sepal width": "2.6",
+      "petal length": "6.9",
+      "petal width": "2.3",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.0",
+      "sepal width": "2.2",
+      "petal length": "5.0",
+      "petal width": "1.5",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.9",
+      "sepal width": "3.2",
+      "petal length": "5.7",
+      "petal width": "2.3",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "5.6",
+      "sepal width": "2.8",
+      "petal length": "4.9",
+      "petal width": "2.0",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.7",
+      "sepal width": "2.8",
+      "petal length": "6.7",
+      "petal width": "2.0",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "2.7",
+      "petal length": "4.9",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.7",
+      "sepal width": "3.3",
+      "petal length": "5.7",
+      "petal width": "2.1",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.2",
+      "sepal width": "3.2",
+      "petal length": "6.0",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.2",
+      "sepal width": "2.8",
+      "petal length": "4.8",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.1",
+      "sepal width": "3.0",
+      "petal length": "4.9",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.4",
+      "sepal width": "2.8",
+      "petal length": "5.6",
+      "petal width": "2.1",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.2",
+      "sepal width": "3.0",
+      "petal length": "5.8",
+      "petal width": "1.6",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.4",
+      "sepal width": "2.8",
+      "petal length": "6.1",
+      "petal width": "1.9",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.9",
+      "sepal width": "3.8",
+      "petal length": "6.4",
+      "petal width": "2.0",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.4",
+      "sepal width": "2.8",
+      "petal length": "5.6",
+      "petal width": "2.2",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "2.8",
+      "petal length": "5.1",
+      "petal width": "1.5",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.1",
+      "sepal width": "2.6",
+      "petal length": "5.6",
+      "petal width": "1.4",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "7.7",
+      "sepal width": "3.0",
+      "petal length": "6.1",
+      "petal width": "2.3",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "3.4",
+      "petal length": "5.6",
+      "petal width": "2.4",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.4",
+      "sepal width": "3.1",
+      "petal length": "5.5",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.0",
+      "sepal width": "3.0",
+      "petal length": "4.8",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.9",
+      "sepal width": "3.1",
+      "petal length": "5.4",
+      "petal width": "2.1",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.7",
+      "sepal width": "3.1",
+      "petal length": "5.6",
+      "petal width": "2.4",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.9",
+      "sepal width": "3.1",
+      "petal length": "5.1",
+      "petal width": "2.3",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "5.8",
+      "sepal width": "2.7",
+      "petal length": "5.1",
+      "petal width": "1.9",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.8",
+      "sepal width": "3.2",
+      "petal length": "5.9",
+      "petal width": "2.3",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.7",
+      "sepal width": "3.3",
+      "petal length": "5.7",
+      "petal width": "2.5",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.7",
+      "sepal width": "3.0",
+      "petal length": "5.2",
+      "petal width": "2.3",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.3",
+      "sepal width": "2.5",
+      "petal length": "5.0",
+      "petal width": "1.9",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.5",
+      "sepal width": "3.0",
+      "petal length": "5.2",
+      "petal width": "2.0",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "6.2",
+      "sepal width": "3.4",
+      "petal length": "5.4",
+      "petal width": "2.3",
+      "species": "Iris-virginica"
+    },
+    {
+      "sepal length": "5.9",
+      "sepal width": "3.0",
+      "petal length": "5.1",
+      "petal width": "1.8",
+      "species": "Iris-virginica"
+    }
+  ]
+}

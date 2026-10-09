@@ -1,0 +1,152 @@
+{
+  "status": "Corrections required after DIFFERENT whole-runtime review",
+  "reviewer": "/root/queue_nonconvex_resume",
+  "createdUtc": "2026-10-09T18:00:27.797718+00:00",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-source-r1.json",
+    "sha256": "6a8dd38fe0afd9fff13b88071ac21b15c4324e56a5841bbee832137b5aaab7f5",
+    "bytes": 477777
+  },
+  "ready": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-ready-r1.json",
+    "sha256": "5735b72d8e4c791146409e425cc803ab66e5fb7391b21a3dbb05ef817c6f1959",
+    "bytes": 1637
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-review-r1.md",
+    "sha256": "50805a9f28aa94cd59bfea82cc4a5731a36772cce867e8e20b11d4fff954f69a",
+    "bytes": 10270
+  },
+  "findings": [
+    {
+      "id": "ER1",
+      "priority": "P2",
+      "summary": "Reset must clear unchanged default drafts and validation, including shared mounts"
+    },
+    {
+      "id": "ER2",
+      "priority": "P2",
+      "summary": "Reflow fundamental diagrams at enlarged narrow available reader widths"
+    },
+    {
+      "id": "ER3",
+      "priority": "P2",
+      "summary": "Draw aligned live KL totals and two-part coding overhead geometry"
+    }
+  ],
+  "sourceIdentityGuards": {
+    "total": 1930,
+    "passed": 1930
+  },
+  "evidence": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/browser-review.cjs",
+      "sha256": "c5fa3c2c354924a25823253fa33489eff51377b95237a698c610211e41d2a31c",
+      "bytes": 4323
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/browser-review.json",
+      "sha256": "2fe88a47a99008062c9745d609da7d93f4ddd79d3d7e86a922b5a2eda42a78d3",
+      "bytes": 12731
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/complementary-continuation.cjs",
+      "sha256": "c367b591b53df44f028ad2ee3ab8bd4ade6163ef2fda5f214bac46a4982a0e49",
+      "bytes": 3528
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/complementary-continuation.json",
+      "sha256": "953c89de88d63eb3bf5b50485dca782fbdc9f2f0701d786a69893794470ed0db",
+      "bytes": 8908
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/complementary-states-partial.json",
+      "sha256": "71280f84fe859c33d187e4b2ce7b576da4627848c416a37e555912c43aeed680",
+      "bytes": 22780
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/complementary-states.cjs",
+      "sha256": "f0d2fc1e1140ce1be38c6b07cf62849992297ef7bde4ff0bd7affe30037d95ce",
+      "bytes": 7334
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E09-invalid-reset.jpg",
+      "sha256": "a9e4adad3a115b11b684fe05ae363e613b61db15f2569ffbebc1bfd2b143e0e9",
+      "bytes": 79154
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E14-ordinary.jpg",
+      "sha256": "0e2d97373e33a61f3caf9eaf6e6a41e08c54618b8275be75ecf80084b8a674cf",
+      "bytes": 106481
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E22-ordinary.jpg",
+      "sha256": "d092416ae31e9196087f5513db09c910b3d056ff08213f31723097e396816b09",
+      "bytes": 55836
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E29-390-root16.jpg",
+      "sha256": "663223d785f028ea808534b99c6cd72d16331f66fc9e280b300decaed0bd51b5",
+      "bytes": 37706
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E29-390-root32.jpg",
+      "sha256": "413d7c1723ae221561c2150fc685c5c43ce5f9f79062e6b82270e6df0528018f",
+      "bytes": 101375
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E29-768-root32-content386.jpg",
+      "sha256": "244b56835399c4a53bd47f08e5e5c08281b4372d25dd1c222e6d2d1b6e734901",
+      "bytes": 100156
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E29-768-root32.jpg",
+      "sha256": "15aadf9c2362c6f56f6003044371ae9cb14d9f9225936623c36531bf63bd226b",
+      "bytes": 96388
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E30-390-root32.jpg",
+      "sha256": "5eaa878a5d4906818fbaafe575e873be340ab0335674d2eccfbcadf349d12ec7",
+      "bytes": 146662
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E30-768-root32.jpg",
+      "sha256": "4bf0b86e16b505a21d247f5f639eb0c82477c6cdd28aa285a6606a0d71e14684",
+      "bytes": 172401
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E42-390-root32.jpg",
+      "sha256": "4b0958c06c5d3d4baf5943d082e64a821b19661a4e29857e06e9cf4cfee6d2a8",
+      "bytes": 81092
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/E42-768-root32.jpg",
+      "sha256": "fbab0ec6dd6b664bd35a818ffe9a3b61deac20750d4dd7fc470ec7839d9f30a3",
+      "bytes": 94354
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/projection-check.cjs",
+      "sha256": "a3279d6274798513138fa1e37850eb45f5e12d17ee9e2324387aeb16c9f08c78",
+      "bytes": 1827
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/projection-check.json",
+      "sha256": "7cb73425cbccace43012f98ccb7c6414ff3e39280ffafbd3009187b46cd59182",
+      "bytes": 4412
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/rendered-reading.txt",
+      "sha256": "fed6cb00d1732f4035ff69283f5c9b8810faeea5a2b1625eb6294795f72aca82",
+      "bytes": 95101
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-r1/source-guards.json",
+      "sha256": "663c8c65564c2c3318d756dc9021ce938a8609e817428f6de296bec1adbb0534",
+      "bytes": 778114
+    }
+  ],
+  "scientificMainsReplayed": 0,
+  "subjectFilesChanged": 0,
+  "normalIntegration": "Pending Root",
+  "next": "One bounded author successor and SAME closure before Root normal integration"
+}

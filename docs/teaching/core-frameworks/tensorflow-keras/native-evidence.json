@@ -1,0 +1,70 @@
+{
+  "scope": "tensorflow-keras",
+  "kind": "author-native-verification",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "win32",
+  "executed": {
+    "tensorflow_keras_training.py": {
+      "tensorflow": "2.21.0",
+      "keras": "3.15.1",
+      "initial_loss": 5.5,
+      "after_first_update": [
+        [
+          [
+            0.5
+          ]
+        ],
+        [
+          0.10000000149011612
+        ]
+      ],
+      "after_40_updates": [
+        [
+          [
+            1.999979853630066
+          ]
+        ],
+        [
+          0.9852191209793091
+        ]
+      ],
+      "final_loss": 0.00010923681838903576,
+      "manual_tape_fit_parity": true,
+      "saved_reload_next_update_parity": true,
+      "function_trace_count": 1
+    },
+    "tensorflow_tape_diagnostics.py": {
+      "tensorflow": "2.21.0",
+      "detached_branch_gradient": 4.0,
+      "watched_tensor_gradient": 6.0,
+      "example_weighted_mean": 4.0,
+      "incorrect_batch_mean": 5.0,
+      "metric_reset": 0.0
+    },
+    "keras_custom_fit.py": {
+      "tensorflow": "2.21.0",
+      "keras": "3.15.1",
+      "normal_custom_fit_weights_match": true,
+      "weights": [
+        [
+          [
+            1.9936575889587402
+          ]
+        ],
+        [
+          0.8784233331680298
+        ]
+      ],
+      "fixture_evaluation": {
+        "loss": 0.014881473034620285,
+        "mae": 0.12157675623893738
+      }
+    }
+  },
+  "source_files": {
+    "public/learn-code/tensorflow-keras/keras_custom_fit.py": "f20565199a131684950b6b177ad10948037dd3f9b0d8c67f8641e806f8fcced9",
+    "public/learn-code/tensorflow-keras/tensorflow_keras_training.py": "09507fe5175044ed4af93b327ec626e23290bd31ac1c5a7788579247627cb189",
+    "public/learn-code/tensorflow-keras/tensorflow_tape_diagnostics.py": "1ec5d263a85ddf50f6bfa87d1c77cb3652effe8fb432c2e28e0c6f208b25b151"
+  },
+  "limits": "CPU/local execution. No browser, independent review, accelerator benchmark or remote service validation."
+}

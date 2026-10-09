@@ -1,0 +1,193 @@
+{
+  "passed": true,
+  "original_failure_sha256": "df45da07b901045ba3a4bae9e2538a25cf7198804d7c21dbbe540222448b7c7a",
+  "scope": "Only exact two-output diagnostic operands; no verifier main, neural import, model or new scientific arm.",
+  "old_rejected_B_q_equals_repaired_A_p": [
+    "1/5",
+    "1/2",
+    "3/10"
+  ],
+  "stale_target_after_B": [
+    "2/5",
+    "1/10",
+    "1/2"
+  ],
+  "correct_target_after_A": [
+    "1/5",
+    "1/2",
+    "3/10"
+  ],
+  "before": [
+    {
+      "ids": [
+        0,
+        0
+      ],
+      "mass": "1/10",
+      "decimal": 0.1
+    },
+    {
+      "ids": [
+        0,
+        1
+      ],
+      "mass": "1/4",
+      "decimal": 0.25
+    },
+    {
+      "ids": [
+        0,
+        2
+      ],
+      "mass": "3/20",
+      "decimal": 0.15
+    },
+    {
+      "ids": [
+        1,
+        0
+      ],
+      "mass": "3/25",
+      "decimal": 0.12
+    },
+    {
+      "ids": [
+        1,
+        1
+      ],
+      "mass": "3/100",
+      "decimal": 0.03
+    },
+    {
+      "ids": [
+        1,
+        2
+      ],
+      "mass": "3/20",
+      "decimal": 0.15
+    },
+    {
+      "ids": [
+        2
+      ],
+      "mass": "1/5",
+      "decimal": 0.2
+    }
+  ],
+  "reference": [
+    {
+      "ids": [
+        0,
+        0
+      ],
+      "mass": "1/10",
+      "decimal": 0.1
+    },
+    {
+      "ids": [
+        0,
+        1
+      ],
+      "mass": "1/4",
+      "decimal": 0.25
+    },
+    {
+      "ids": [
+        0,
+        2
+      ],
+      "mass": "3/20",
+      "decimal": 0.15
+    },
+    {
+      "ids": [
+        1,
+        0
+      ],
+      "mass": "3/25",
+      "decimal": 0.12
+    },
+    {
+      "ids": [
+        1,
+        1
+      ],
+      "mass": "3/100",
+      "decimal": 0.03
+    },
+    {
+      "ids": [
+        1,
+        2
+      ],
+      "mass": "3/20",
+      "decimal": 0.15
+    },
+    {
+      "ids": [
+        2
+      ],
+      "mass": "1/5",
+      "decimal": 0.2
+    }
+  ],
+  "after": [
+    {
+      "ids": [
+        0,
+        0
+      ],
+      "mass": "4/25",
+      "decimal": 0.16
+    },
+    {
+      "ids": [
+        0,
+        1
+      ],
+      "mass": "13/100",
+      "decimal": 0.13
+    },
+    {
+      "ids": [
+        0,
+        2
+      ],
+      "mass": "21/100",
+      "decimal": 0.21
+    },
+    {
+      "ids": [
+        1,
+        0
+      ],
+      "mass": "3/25",
+      "decimal": 0.12
+    },
+    {
+      "ids": [
+        1,
+        1
+      ],
+      "mass": "3/100",
+      "decimal": 0.03
+    },
+    {
+      "ids": [
+        1,
+        2
+      ],
+      "mass": "3/20",
+      "decimal": 0.15
+    },
+    {
+      "ids": [
+        2
+      ],
+      "mass": "1/5",
+      "decimal": 0.2
+    }
+  ],
+  "only_wrong_function_semantics_changed": true,
+  "protocol_sha256": "89db78881c60edc9c042a1b9a68c8f78d470a54e1634761cfbd74baafed09486"
+}

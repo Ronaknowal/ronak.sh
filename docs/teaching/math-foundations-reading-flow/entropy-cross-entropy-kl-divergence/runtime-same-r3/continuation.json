@@ -1,0 +1,46 @@
+{
+  "scope": "Resolve reviewer assertion expectations; no source change",
+  "checks": [
+    {
+      "name": "SVG labels retain established .82rem and double/restore correctly",
+      "pass": true,
+      "values": [
+        {
+          "effective": 13.119603125,
+          "root": 16
+        },
+        {
+          "effective": 26.23914183148734,
+          "root": 32
+        },
+        {
+          "effective": 13.119603125,
+          "root": 16
+        }
+      ]
+    },
+    {
+      "name": "Matched zero gap has declared zero lengths; only border strokes remain",
+      "pass": true,
+      "text": "Matched complete code: zero comparison. Aligned length scale: 0–1.925 bits.\n\nH = 1.75 bits\n\nL = 1.75 bits\n\nExcess starts at H=1.75: Mismatch KL(P‖P) 0 + Unused capacity −log₂1 0 bits.\n\n0\n1.925 bits\n━ Mismatch KL(P‖P): 0 bits\n━ Unused capacity −log₂1: 0 bits\n\nZero excess: both endpoints coincide at H. The vertical marker shows the zero-length gap.",
+      "bars": [
+        {
+          "declared": "0%",
+          "box": 2,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        },
+        {
+          "declared": "0%",
+          "box": 2,
+          "borderLeft": "1px",
+          "borderRight": "1px"
+        }
+      ]
+    }
+  ],
+  "screenshot": {
+    "file": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-same-r3\\E22-zero-native.jpg",
+    "sha256": "04a1f95f923cfa915e058c8a26cff7f109c61d45034567c4fec1ec4cb48bef71"
+  }
+}

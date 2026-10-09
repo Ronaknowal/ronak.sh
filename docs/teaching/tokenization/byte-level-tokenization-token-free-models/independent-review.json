@@ -1,0 +1,178 @@
+{
+  "topic": "byte-level-tokenization-token-free-models",
+  "date": "2026-09-28",
+  "reviewer": "subword-tokenization agent; not the byte-topic author",
+  "status": "passed",
+  "complementaryChecks": {
+    "cross_scalar_native_bpe_payloads": [
+      "c3",
+      "a9 c3",
+      "a9"
+    ],
+    "multi_chunk_bom_and_euro_trace": [
+      [
+        "",
+        2
+      ],
+      [
+        "",
+        2
+      ],
+      [
+        "﻿",
+        2
+      ],
+      [
+        "",
+        1
+      ],
+      [
+        "€!",
+        0
+      ]
+    ],
+    "incomplete_prefix_then_eof_rejections": 2,
+    "changed_batch_inputs": [
+      [
+        2,
+        68,
+        0
+      ],
+      [
+        2,
+        198,
+        172
+      ]
+    ],
+    "changed_batch_targets": [
+      [
+        68,
+        1,
+        0
+      ],
+      [
+        198,
+        172,
+        1
+      ]
+    ],
+    "valid_target_count": 5,
+    "padding_loss_delta": 0,
+    "padding_target_gradient_max": 0,
+    "appended_padding_logit_error": 0,
+    "changed_patch_means": [
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        6
+      ]
+    ],
+    "monotonic_patch_counts": [
+      5,
+      3,
+      2,
+      1
+    ],
+    "additive_position_mean_permutation_invariant": true,
+    "practice_bpb": [
+      2.8853900817779268,
+      2.596851073600134
+    ]
+  },
+  "reusedAuthorReceipts": [
+    "native-evidence.json",
+    "model-evidence.json"
+  ],
+  "learningExperience": "independent-review.md",
+  "torch": "2.14.0+cpu",
+  "sourceBindings": [
+    {
+      "path": "src/learn/data/topics/byte-level-tokenization.jsx",
+      "sha256": "f36687c91d3077c3c03edcdf23ebeb01efaf89bb3ef24bd61c9ddbacb0dbfb1b"
+    },
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx",
+      "sha256": "11e15c5e23a79d8d6fbebb3cdb334785b5aeb04ffd4c66577054372012069570"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/byte-tokenization-labs.css",
+      "sha256": "bbf01622e0055b379412501ea021c4dde9a46ef5ad08f130f842149b7c86bdb5"
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/byte-level-tokenization-token-free-models.js",
+      "sha256": "62c23256103c7ad3916e9a0399701783b1eec55e2ae241bf8250f6a65ad14698"
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/design.md",
+      "sha256": "9229c09990975dc252cb6115284dbfbb77ca22c154346cc849740370891348c0"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py",
+      "sha256": "086862e9a9fb0db1bb9a76f66e07ac2c5fb4344bd75708e46e940213932be8bf"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py",
+      "sha256": "0a25011f005042c45965cf93e4d7825d5e4d8449c9470f7519cfdd705487cd12"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_patches.py",
+      "sha256": "ca5d1ecf947365bc8147d8e89e172649165ebcc8cc89d6c9349473b0e27a148e"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py",
+      "sha256": "1fe7bbeb0376588e78ffc3dacfae1e34a845a3cef8864ab33a208b32de7e5206"
+    },
+    {
+      "path": "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py",
+      "sha256": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4"
+    },
+    {
+      "path": "scripts/review-byte-tokenization.py",
+      "sha256": "6375c01784c91fe7237cd4a45841a4b77f99b331ab506addb4e381a03cb8eae9"
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/native-evidence.json",
+      "sha256": "028e51b53f36cedb00bc9881ae2239928638e473eee2738f56dc24773a3b6006"
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/model-evidence.json",
+      "sha256": "7150f14d85224ed14bcc856c74774d7dc28a4f6252c628266839f6d2c103bc4e"
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/author-review.md",
+      "sha256": "6d67682ca32c269ec95c42e3d954003972a6b1097c197cad3e40021b689c5572"
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/author-review.json",
+      "sha256": "37637fa889c8d79cbf55ea2919224c8a6bb8abef714ce9608d06204c42a67cc9"
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/independent-review.md",
+      "sha256": "f56ee2d419b36c4aeca7e50dcb4cb7aeeca743c13631d4fe065f4b1b6c5ee2a7"
+    }
+  ],
+  "limits": "CPU contracts and scoped mechanisms; final browser/build closure belongs to root. No human learner study or trained BLT reproduction.",
+  "rootFormattingFollowup": {
+    "recordedAt": "2026-09-28T16:11:26.605Z",
+    "file": "src/learn/data/topics/byte-level-tokenization.jsx",
+    "beforeSha256": "34a14e427289023f9d43f56d68cce22a767d7dbd93135f4b664e3ae3d479b478",
+    "afterSha256": "f36687c91d3077c3c03edcdf23ebeb01efaf89bb3ef24bd61c9ddbacb0dbfb1b",
+    "assessment": "Root removed only surplus trailing blank lines flagged by git diff --check. Exact trimEnd equality was asserted. All JSX/program characters are unchanged. This is a packaging/source-identity follow-up, not a new independent scientific or browser execution; the preceding reviewer findings and execution dates remain intact.",
+    "authorReceiptIdentity": {
+      "beforeSha256": "a6f34c1eb6ac4df23311aaca752b945c5012ed46b012844cc8bf9b0db9e7bcd5",
+      "afterSha256": "37637fa889c8d79cbf55ea2919224c8a6bb8abef714ce9608d06204c42a67cc9",
+      "reason": "Same documented trailing-whitespace source-identity follow-up; original author checks unchanged."
+    }
+  }
+}

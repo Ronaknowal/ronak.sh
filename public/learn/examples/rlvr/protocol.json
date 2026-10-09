@@ -1,0 +1,109 @@
+{
+  "status": "prospective; execution requires different program/protocol review",
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "threads": 1,
+  "dtype": "float32",
+  "device": "cpu",
+  "architecture": {
+    "vocabulary": 260,
+    "context": 320,
+    "width": 24,
+    "heads": 2,
+    "layers": 1
+  },
+  "tokens": {
+    "byte_ids": [
+      0,
+      255
+    ],
+    "PAD": 256,
+    "EOS": 257,
+    "BOS": 258,
+    "SEP": 259
+  },
+  "warm": {
+    "steps": 192,
+    "batch": 6,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0
+  },
+  "study": {
+    "arms": [
+      "group-scaled-grpo",
+      "unscaled-centred-grpo",
+      "verified-sample-sft"
+    ],
+    "scheduled_steps": 48,
+    "prompts_per_step": 2,
+    "group_size": 4,
+    "max_new_tokens": 12,
+    "temperature": 1.0,
+    "top_k": 0,
+    "top_p": 1.0,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.0,
+    "epsilon": 0.2,
+    "beta": 0.02,
+    "grpo_epochs_per_rollout": 2,
+    "rsft_epochs_per_nonempty_rollout": 1,
+    "scale": "population standard deviation + 0.0001",
+    "reduction": "mean of per-response included-token means",
+    "kl": "plain sampled k3; no differentiable ratio multiplier",
+    "evaluation_steps": [
+      0,
+      16,
+      32,
+      48
+    ],
+    "evaluation_samples_per_prompt": 8
+  },
+  "flan": {
+    "checkpoint": "google/flan-t5-small",
+    "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+    "split": "test",
+    "decoding": "greedy",
+    "max_new_tokens": 64,
+    "local_files_only": true
+  },
+  "native": {
+    "seed": 19,
+    "architecture": "GPT2LMHeadModel; distinct from TinyLM",
+    "warm_steps": 64,
+    "warm_batch": 6,
+    "warm_learning_rate": 0.002,
+    "max_steps": 1,
+    "learning_rate": 0.0005,
+    "loss_type": "grpo",
+    "scale_rewards": "group",
+    "beta": 0.02,
+    "num_generations": 4,
+    "num_iterations": 1,
+    "importance_sampling_level": "token",
+    "use_bias_correction_kl": false,
+    "disable_dropout": true,
+    "mask_truncated_completions": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "max_completion_length": 12,
+    "per_device_train_batch_size": 4,
+    "gradient_accumulation_steps": 1,
+    "report_to": [],
+    "push_to_hub": false,
+    "use_cpu": true,
+    "bf16": false,
+    "fp16": false,
+    "sample_scale": "sample standard deviation + 0.0001"
+  },
+  "policy": {
+    "no_retuning": true,
+    "no_heldout_selection": true,
+    "all_failed_and_skipped_steps_retained": true,
+    "generation_full_support": true,
+    "gold_not_in_generation_prompt": true
+  }
+}

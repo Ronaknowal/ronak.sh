@@ -1,0 +1,74 @@
+{
+  "schema": "classical21-final-prose-correction/v1",
+  "scope": "Final actual reading: direct prerequisite wording, picture-first trial mass, actual bootstrap input refusal, and explicit TPE threshold/Bayes derivation. All programme/data/stream bytes unchanged.",
+  "edits": [
+    {
+      "file": "sections/01-questions.md",
+      "before": {
+        "bytes": 6146,
+        "sha256": "ebc388c9221988a60921d6741b25aa33f79a0cecfcf61474ea981b41bf86b86c"
+      },
+      "after": {
+        "bytes": 6073,
+        "sha256": "a9cb5d334b05fd4f9c0da4d75fa7ba1da6363d3121f3b7ca77d97efa53669101"
+      },
+      "exact_replacements": [
+        {
+          "old": "We will refresh the fitted-state boundary locally, so you can follow this lesson without needing an unpublished implementation of that preceding revision.",
+          "new": "We refresh the fitted-state boundary locally before using it in cross-validation."
+        }
+      ]
+    },
+    {
+      "file": "sections/05-search-spaces.md",
+      "before": {
+        "bytes": 8550,
+        "sha256": "7da26ba060b0d6075a4790301419d17ebb1b938042474e0578d80982f25169df"
+      },
+      "after": {
+        "bytes": 8637,
+        "sha256": "d8ba1384be7061fa2b070305a94627ad76078fe10481466f1ae95a79cd5a7fc5"
+      },
+      "exact_replacements": [
+        {
+          "old": "D25 placement after probability equation",
+          "new": "D25 placement after question/lead, before miss/hit derivation"
+        }
+      ]
+    },
+    {
+      "file": "sections/07-risk-and-uncertainty.md",
+      "before": {
+        "bytes": 15728,
+        "sha256": "d8c2e78a568e07415adffc2fde4b03b083367a150644bda27b89c16933d9df53"
+      },
+      "after": {
+        "bytes": 15745,
+        "sha256": "1503288dd8b4332bf580ce55b7becc2f94ee46787021676a1aea776ee0227855"
+      },
+      "exact_replacements": [
+        {
+          "old": "misaligned targets and an empty draw refuse explicitly.",
+          "new": "misaligned sampling-unit identities and an empty draw refuse explicitly."
+        }
+      ]
+    },
+    {
+      "file": "sections/08-adaptive-search.md",
+      "before": {
+        "bytes": 15357,
+        "sha256": "be074fbeb2d14c5419abeebe6e326cab010467d95eea6af52b28d1e14c9da153"
+      },
+      "after": {
+        "bytes": 15731,
+        "sha256": "3204f6ff56dd43c23f216ae0b470a7018f911de487faba892aa20e0e4c4c143b"
+      },
+      "exact_replacements": [
+        {
+          "old": "Let \u03b3 be the probability of the better region. The marginal setting density is p(x)=\u03b3l(x)+(1\u2212\u03b3)g(x). Under the paper's thresholded density factorization, the EI integral has an x-independent positive factor times",
+          "new": "Let \u03b3 be the probability of the better region. The marginal setting density is p(x)=\u03b3l(x)+(1\u2212\u03b3)g(x). Here the paper's improvement threshold is y*, rather than necessarily the best observed c used in the preceding example. Its factorization treats p(x|y) as the same l(x) throughout y<y*. Bayes' rule then gives\n\n\\[\n\\begin{aligned}\n\\operatorname{EI}_{y^*}(x)\n&=\\int_{-\\infty}^{y^*}(y^*-y)p(y\\mid x)\\,dy\\\\\n&=\\frac{l(x)}{p(x)}\\int_{-\\infty}^{y^*}(y^*-y)p(y)\\,dy.\n\\end{aligned}\n\\]\n\nFor a finite positive integral, that last factor does not depend on x. Comparing settings therefore compares"
+        }
+      ]
+    }
+  ]
+}

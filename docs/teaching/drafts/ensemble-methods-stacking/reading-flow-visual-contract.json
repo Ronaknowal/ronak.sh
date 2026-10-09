@@ -1,0 +1,377 @@
+{
+  "scope": "complete content placement and accepted actionable runtime contracts; no paint pass claimed",
+  "jobs": [
+    {
+      "id": "D01",
+      "section": 1,
+      "section_title": "Several forecasts, one outcome",
+      "manuscript_line": 11,
+      "accepted_complete_row": "| D01 \u00a71 same-query predictor graph | Query x=2 fans into a saved line (b=3,w=2:3+2\u00d72=7 hours) and an actual stump (threshold1.5,leaves6/9:query takes9). Their numeric ports feed weights .5/.5 and sum8. Later y=8.5 is physically outside inference. Which parts are fitted versus read? | Static. Draw coefficient array/multiply/add and threshold/branch/leaves, not two explanatory model boxes. Stack base branches on phone; independent scalar arithmetic. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D02",
+      "section": 1,
+      "section_title": "Several forecasts, one outcome",
+      "manuscript_line": 17,
+      "accepted_complete_row": "| D02 \u00a71 reserve evaluation rows | Six schematic case IDs split into fit A/B/C, choice D/E and final evaluation F; arrows show which labels may alter the saved rule. Why cannot later outcome enter inference? | Static exact indices, with no fitted result attributed to this tiny split. Ownership assertions and independent route read. Later real-study counts are distinct. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D03",
+      "section": 2,
+      "section_title": "Decide what to combine",
+      "manuscript_line": 27,
+      "accepted_complete_row": "| D03 \u00a72 weighted forecast | Numeric prediction points and their weighted segments feed one sum; w=[.25,.75],7/9\u21928.5 hours. How does a convex mean stay in the member interval? | Two inputs: forecast pair vector editor and weightA[0,1]. Fixed units; changed reversed/identical predictions. Native dot-product oracle, full endpoints readable. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D04",
+      "section": 2,
+      "section_title": "Decide what to combine",
+      "manuscript_line": 35,
+      "accepted_complete_row": "| D04 \u00a72 ballots versus probability mass | Three class-0/1 probability rows [.49,.51],[.49,.51],[.99,.01], class ballots and aligned averaged vector [197/300,103/300] share a class axis. Why do hard and soft disagree? | Three probability controls [0,1] step.01, default .51,.51,.01. Weight context copied from D05. Show both present answers immediately. Ties choose class0. Enumerated oracle; no fourth weight slider here. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D05",
+      "section": 2,
+      "section_title": "Decide what to combine",
+      "manuscript_line": 39,
+      "accepted_complete_row": "| D05 \u00a72 weighting the same forecasts | Three named weighted class vectors multiply by wA,wB,wC then divide by sum. How much influence does C need to change the result? | Three weight controls [0,10], defaults1 each, including old C[0,4] step.25; full precision numeric entry. Probabilities fixed to shared D04 context, clearly stated. Zero total gives explicit unavailable output. Direct arithmetic, tiny positive weights preserved. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D06",
+      "section": 2,
+      "section_title": "Decide what to combine",
+      "manuscript_line": 43,
+      "accepted_complete_row": "| D06 \u00a72 aligned classes and repeated evidence | Two actual class vectors with permuted named columns reconnect to the same identities; alongside independent three-ballot event patterns versus one copied pattern. Why does a copy not add evidence? | Two distinct static subdrawings introduced in two paragraphs, not a combined wall. Three-class permutation and .3 error examples. Enumerate event masses independently; local column pan for named vector. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D07",
+      "section": 3,
+      "section_title": "Find errors that can cancel",
+      "manuscript_line": 53,
+      "accepted_complete_row": "| D07 \u00a73 signed residual rows | Four indexed target points with A/B/blend prediction endpoints; oriented distances encode signed hours. Default A[\u22123,\u22121,2,2],B[1,1,\u22121,\u22123],w=.5. What cancels? | Weight[0,1] plus preset selector (complementary/copies/same-direction). Arbitrary vector editor in adjacent D08. At w4/9 mean loss1/3. Geometric scale includes all edited residuals; separate numeric readout for extreme/tiny values. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D08",
+      "section": 3,
+      "section_title": "Find errors that can cancel",
+      "manuscript_line": 59,
+      "accepted_complete_row": "| D08 \u00a73 squared loss and ambiguity | For the current residual rows, actual squared area contributions show weighted member error = combined error + disagreement. Why can it beat the average and lose to the best? | Two vector controls A/B, four finite residuals each within\u00b11e6; shared w read-only. Mathematically valid arbitrary values beyond presets. Exact rational fixture and independent algebra; copies/one perfect member changed cases. Areas use one scale, no fake minimum area. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D09",
+      "section": 3,
+      "section_title": "Find errors that can cancel",
+      "manuscript_line": 73,
+      "accepted_complete_row": "| D09 \u00a73 fitted two-member weight | The actual quadratic L(w) on0\u20261 shows unconstrained optimum, clipped boundary if needed, current value and baselines. How is weight learning another fit? | One w control linked D07 and fixed residual context. Data/objective and target use explained before \u201coptimal.\u201d Zero denominator shows identical outputs/all weights equally good rather than fabricatedunique optimum. Algebra oracle. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D10",
+      "section": 3,
+      "section_title": "Find errors that can cancel",
+      "manuscript_line": 79,
+      "accepted_complete_row": "| D10 \u00a73 general simplex and projection | Three coordinate weights form a triangular simplex; candidate v=[.8,.3,\u2212.1] projects to [.75,.25,0]. Draw actual coordinate planes and projection displacement; an adjacent P/residual/gradient trace explains where an optimizer's candidate comes from. Why isn't clipping/renormalizing projection? | One candidate-vector editor, introduced after the derivative. Ridge belongs to D28's actual fit, not this isolated projection question. KKT/distance oracle; true coordinate scales and local pan with unshrunk labels. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D11",
+      "section": 3,
+      "section_title": "Find errors that can cancel",
+      "manuscript_line": 113,
+      "accepted_complete_row": "| D11 \u00a73 covariance object | Several schematic repeated fit columns at one fixed x feed separate random predictions and a covariance matrix; sum entries with actual weights. Distinguish training randomness from four fixed residual rows. | Static structural picture; formula examples\u03c3\u00b24,\u03c1.25,B4\u21921.75/B20\u21921.15. No invented empirical repeated-run dots. Equation and covariance eigenvalue feasibility check. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D12",
+      "section": 3,
+      "section_title": "Find errors that can cancel",
+      "manuscript_line": 123,
+      "accepted_complete_row": "| D12 \u00a73 bias/variance/noise | One fixed conditional mean m(x), procedure expectation and new outcome show signed bias, prediction variation and independent mean-zero noise as different components. Which uncertainty can averaging affect? | Static schematic annotations, not measured distributions. Exact decomposition assumptions named; expectation/independence algebra check. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D13",
+      "section": 4,
+      "section_title": "Follow the bootstrap rows",
+      "manuscript_line": 135,
+      "accepted_complete_row": "| D13 \u00a74 replacement draws | Six source row tokens A\u2013F map to bag1 ordered draw positions A,A,C,D,D,F; physical duplicate arrows and count vector expose replacement. What does seeing A twice change? | Bag selector[0,2] and preset (repeated/allRows/smallBags). Native bincount; compact stackeddraws on phone. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D14",
+      "section": 4,
+      "section_title": "Follow the bootstrap rows",
+      "manuscript_line": 139,
+      "accepted_complete_row": "| D14 \u00a74 draw masses to fitted stump | Represented x positions, weighted targets, threshold2.5 and leaves4/3,20/3 make an actual two-leaf tree beside regression plane. What mean minimizes each bag's loss? | One draw-list editor accepts1\u202612 IDs A\u2013F, including repeats, sharing selected bag context. Fixed six source observations. Constant/all-one-row case yields one leaf. Brute midpoint/SSE oracle. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D15",
+      "section": 4,
+      "section_title": "Follow the bootstrap rows",
+      "manuscript_line": 145,
+      "accepted_complete_row": "| D15 \u00a74 OOB eligibility | A row\u00d7bag mask and actual prediction entries show excluded eligible bags. For A only bag2 contributes2; all-model answer5/3 is separately labelled. | Row selector A\u2026F plus three draw-list editors in separate selected-bag question D14, not all here. No-vote unavailable case explicit. Membership independent oracle; local matrix pan. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D16",
+      "section": 4,
+      "section_title": "Follow the bootstrap rows",
+      "manuscript_line": 151,
+      "accepted_complete_row": "| D16 \u00a74 absence law | m draws miss one designated row with q=(5/6)^m; distinct expectation and no-eligible risk separate labelled curves/marks, actual m=6 value15625/46656. | m1\u202612 and B1\u202650 in a separate new mathematical question. n fixed6; no \u201ctypical bag\u201d claim. Independent exact/binomial arithmetic; direct labels. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D17",
+      "section": 5,
+      "section_title": "Make the next fit listen to different rows",
+      "manuscript_line": 161,
+      "accepted_complete_row": "| D17 \u00a75 mechanism contrast | Actual row-to-fit branches for bagging, current loss-to-next-stump dependency for AdaBoost, and OOF matrix-to-meta fit for stacking. Which state changes next? | Static three drawings, stacked on phones, each with data objects and operation rectangles. Link GBT corrections without duplicating its engine. No performance ranking is encoded. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D18",
+      "section": 5,
+      "section_title": "Make the next fit listen to different rows",
+      "manuscript_line": 167,
+      "accepted_complete_row": "| D18 \u00a75 weighted stump | Six class marks at x=0\u20265, proportional row-mass bubbles, split1.5 and negative left polarity. E is the one initial weighted mistake. | Fixture selector mixed/perfect/contradiction and stage0\u2026available end preserve the old eight-round trace. Separate advanced round limit1\u202612. Step/back/reset; before-fit versus after-update labels. Brute threshold/polarity/tie oracle. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture",
+      "retained_inference_tie": "Original signed-adaboost/helper context: F>=0 gives +1; F<0 gives -1, including zero/no-vote. N7 is a separate implementation with zero->-1; never silently share that policy."
+    },
+    {
+      "id": "D19",
+      "section": 5,
+      "section_title": "Make the next fit listen to different rows",
+      "manuscript_line": 173,
+      "accepted_complete_row": "| D19 \u00a75 update operands | Six D values multiply by exp(\u00b1\u03b1), form unnormalized u, join the total Z=\u221a5/3, then divide into .1/.5 masses. Why is the wrong total one half? | Shared stage, no extra controls. Actual proportional marks and multiply/divide operands; first-round exact symbolic oracle. Perfect/no-edge states explicitly stop. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture",
+      "retained_inference_tie": "Original signed-adaboost/helper context: F>=0 gives +1; F<0 gives -1, including zero/no-vote. N7 is a separate implementation with zero->-1; never silently share that policy."
+    },
+    {
+      "id": "D20",
+      "section": 5,
+      "section_title": "Make the next fit listen to different rows",
+      "manuscript_line": 183,
+      "accepted_complete_row": "| D20 \u00a75 saved vote | A new scalar x visits each saved split and polarity. Contributions \u03b1h accumulate into F and then sign; training D never enters this path. | One query numeric control over\u00b11e6; round context comes from D18. Threshold, tie, perfect and no-edge queries update the present result. Independent native scalar loop. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture",
+      "retained_inference_tie": "Original signed-adaboost/helper context: F>=0 gives +1; F<0 gives -1, including zero/no-vote. N7 is a separate implementation with zero->-1; never silently share that policy."
+    },
+    {
+      "id": "D21",
+      "section": 6,
+      "section_title": "Derive the vote and its limits",
+      "manuscript_line": 193,
+      "accepted_complete_row": "| D21 \u00a76 line search | Correct mass5/6 decays, wrong mass1/6 grows and their sum has minimum \u03b1=.804719. Direct curve labels and actual cancellation at the derivative zero. | \u03b1[0,1.6] and \u03b5(0,.5) numeric controls after their quantities are introduced. \u03b5=0/.5 are explained limits with explicit special states. Closed-form Z oracle; preserve full curves and labels in a local phone pan. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture",
+      "tie_and_bound_context": "Displayed original trace retains zero->+1. The nonpositive-margin bound event includes ties independently of the chosen prediction tie. Zero vote mass leaves normalized margins unavailable. Separate N7 sweep transition explicitly names zero->-1."
+    },
+    {
+      "id": "D22",
+      "section": 6,
+      "section_title": "Derive the vote and its limits",
+      "manuscript_line": 205,
+      "accepted_complete_row": "| D22 \u00a76 product bound | Round normalizers feed a product beside the bounded training-error statement. Uniform and shrinking \u03b3 sequences expose different assumptions. | Static two supplied sequences; exact product/log calculations, no invented test curve. Perfect and no-edge conventions remain visible. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture",
+      "tie_and_bound_context": "Displayed original trace retains zero->+1. The nonpositive-margin bound event includes ties independently of the chosen prediction tie. Zero vote mass leaves normalized margins unavailable. Separate N7 sweep transition explicitly names zero->-1."
+    },
+    {
+      "id": "D23",
+      "section": 6,
+      "section_title": "Derive the vote and its limits",
+      "manuscript_line": 211,
+      "accepted_complete_row": "| D23 \u00a76 normalized margins | Six indexed yF/\u03a3\u03b1 values form an actual empirical CDF from the existing trace. Vote ties and nonpositive-margin upper-bound events are distinct. | Round selector over the retained trace; no-vote margin explicitly unavailable. Calculate counts independently after accepted preparation; do not replay old native mains. Coincident margins share a wrapped label without moving their marks. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture",
+      "tie_and_bound_context": "Displayed original trace retains zero->+1. The nonpositive-margin bound event includes ties independently of the chosen prediction tie. Zero vote mass leaves normalized margins unavailable. Separate N7 sweep transition explicitly names zero->-1."
+    },
+    {
+      "id": "D24",
+      "section": 7,
+      "section_title": "Teach a combiner with unseen-row predictions",
+      "manuscript_line": 237,
+      "accepted_complete_row": "| D24 \u00a77 meta anatomy | Six raw rows produce fold-specific predictions into a physical6\u00d72 matrix P; target column y and learned two-vector w are distinct objects. | Static complete honest matrix visible immediately. Exact retained cells and row-set oracle. Width is intrinsic, with all column names readable in a local pan. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D25",
+      "section": 7,
+      "section_title": "Teach a combiner with unseen-row predictions",
+      "manuscript_line": 252,
+      "accepted_complete_row": "| D25 \u00a77 one held fold | Held rows A,D stay outside the fit; B,C,E,F enter line/neighbor fits; actual cells A=[2,\u2212.35],D=[2,4.75] are written back to their row positions. | Completed folds0\u20263, initial1; optional inspected row A\u2026F. This partial trace alone changes, while D24/D27 complete current results stay visible. Unfilled cells are unavailable. Clone ownership and retained exact cell evidence. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D26",
+      "section": 7,
+      "section_title": "Teach a combiner with unseen-row predictions",
+      "manuscript_line": 256,
+      "accepted_complete_row": "| D26 \u00a77 memorization contrast | Honest nearest column[2,1,2,2,6,7] sits beside target-copy column[1,2,2,6,7,8] and their learned weights. Why does leaking weight become1? | Honesty selector and inspected row, fixed common fixture. Independent row exclusion; readable matrix text alternative. Low error is not labelled proof of leakage. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D27",
+      "section": 7,
+      "section_title": "Teach a combiner with unseen-row predictions",
+      "manuscript_line": 260,
+      "accepted_complete_row": "| D27 \u00a77 refit inference | Separate full-six-row base fits feed x=2.5\u2192[2,13/3]\u2192saved weight .228273\u21923.800695 hours. This is visibly different from the OOF training matrix. | Query0\u20265 at .1 slider increments plus exact numeric entry. Mode context from D26. Complete inference visible even while D25 trace is partial. Retain old evidence without a historical fit replay. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D28",
+      "section": 7,
+      "section_title": "Teach a combiner with unseen-row predictions",
+      "manuscript_line": 266,
+      "accepted_complete_row": "| D28 \u00a77 general weight fit | Real P[n,B],w[B],y[n], residual and derivative return to parameter coordinates. Simplex, nonnegative-only and unrestricted ridge have different constraints. Initial P=[[1,2,4],[3,2,1],[2,5,0]],y=[2,1,3],\u03bb=.2 supplies an explicit fresh fit. | Constraint selector, \u03bb[0,10], and one matrix/target editor supporting1\u202620 rows and2\u20265 columns, entries/targets within\u00b11e6. No base refit is implied. New complete scratch optimizer plus independent ordinary solver after acceptance. Show feasibility, objective, nonunique state and convergence failure. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D29",
+      "section": 8,
+      "section_title": "Use the actual library contract",
+      "manuscript_line": 284,
+      "accepted_complete_row": "| D29 \u00a78 typed columns | Binary probability p0 is dropped, three-class probabilities retain named columns, margin/label columns stay typed, and passthrough appends the actual raw-feature columns. | Variant selector binary/multiclass/mixed plus passthrough toggle. Actual native shape and order checks after acceptance. Unsupported missing-class margin fails explicitly. Intrinsic matrix pan. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture",
+      "output_semantics": "Reject declared multiclass pairwise OVO outputs including final estimators in pipelines; K=3 pair width equals class width and is insufficient evidence. Genuine per-class scores align by classes_; binary sign/probability/missing-class rules retained."
+    },
+    {
+      "id": "D30",
+      "section": 8,
+      "section_title": "Use the actual library contract",
+      "manuscript_line": 300,
+      "accepted_complete_row": "| D30 \u00a78 preprocessing | An excluded row cannot enter the scaler/model fit; its prediction reads that fold's saved mean/scale. A global-mean arrow shows indirect feature access. | Static legal/illegal row paths and a separate fixed-unit conversion contrast. Actual small-fixture means, pipeline-clone oracle, operation ports readable on phones. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D31",
+      "section": 8,
+      "section_title": "Use the actual library contract",
+      "manuscript_line": 306,
+      "accepted_complete_row": "| D31 \u00a78 nested selection | Global hyperparameter choice sees an inner held row's label; strict choice inside the fold sees only its training rows. Outer assessment contains the complete choice/OOF/meta workflow. | Inspect row and choice-placement controls. Current permitted/forbidden paths shown immediately. Audited fit/selection ID logs from N3; no universal \u201cleak-free\u201d badge. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D32",
+      "section": 9,
+      "section_title": "Preserve groups and time",
+      "manuscript_line": 322,
+      "accepted_complete_row": "| D32 \u00a79 forward availability | Time bands fit0\u20262\u2192predict3\u20265, then expanding prefixes; initially uncovered cells remain missing. Label availability has its own time mark. | Delay0\u20263 integer and inspected prediction block. Compute eligibility from availableAt\u2264predictionTime. Retain old uncovered prefix, no in-sample substitute. Independent mask oracle. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D33",
+      "section": 9,
+      "section_title": "Preserve groups and time",
+      "manuscript_line": 326,
+      "accepted_complete_row": "| D33 \u00a79 group exclusion | Six entities with two rows each remain whole held bands. Legal group exclusion contrasts with random-row leakage and yields complete row coverage. | One inspected group0\u20265. Independent disjoint group IDs; all identities named without relying on colour. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D34",
+      "section": 9,
+      "section_title": "Preserve groups and time",
+      "manuscript_line": 330,
+      "accepted_complete_row": "| D34 \u00a79 partition storage | Held index lists map to matrix rows; an expanding-window prefix prevents their concatenation from being a permutation of all samples. | Static actual indices and unavailable cells. Exact permutation check plus inspected official source and retained forward loop; no new API execution is claimed here. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D35",
+      "section": 9,
+      "section_title": "Preserve groups and time",
+      "manuscript_line": 336,
+      "accepted_complete_row": "| D35 \u00a79 blend ownership | Disjoint base-fit, meta-fit, validation and test bands with actual row IDs; inference keeps the fitted base states. What changes if bases are refitted? | Protocol selector kept bases/refit illustration plus scalar query0\u20265. The refit view is explicitly a changed workflow, not an automatically honest result. Complete N4/N6 after acceptance. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D36",
+      "section": 10,
+      "section_title": "Inspect probabilities and real fitted rules",
+      "manuscript_line": 348,
+      "accepted_complete_row": "| D36 \u00a710 calibration law | Four equally likely signal cases form a2\u00d72 arrangement. Forecast brackets join probability masses and true event chances: mean .25\u21920,.5\u2192.5,.75\u21921. | Static all groups visible. Independent Fraction calibration/risk oracle3/16\u21925/32. This is an exact law, not an empirical reliability curve. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D37",
+      "section": 10,
+      "section_title": "Inspect probabilities and real fitted rules",
+      "manuscript_line": 356,
+      "accepted_complete_row": "| D37 \u00a710 observed regions | Five real25\u00d725 probability fields carry all625 values, the selected grid query and72 test points. Coarse cells are identified as local approximations. | Three retained controls: model, x index0\u202624,y index0\u202624; initial stack/16/12. All3125 probabilities retained, no continuous fake query. Artifact hash/array oracle, equal physical axes, intrinsic phone pan. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D38",
+      "section": 10,
+      "section_title": "Inspect probabilities and real fitted rules",
+      "manuscript_line": 370,
+      "accepted_complete_row": "| D38 \u00a710 action cost | Named validation scores on a probability axis, a threshold and actual FP/FN contributions; separately draw the calibrator's fit boundary. | Threshold[0,1] and missed-event cost[0,10] on the new tiny fixture scores[.1,.3,.3,.9],labels[0,1,0,1]. Equality takes a positive action. Old thresholds/costs stay labelled observations. Independent cost enumeration. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D39",
+      "section": 11,
+      "section_title": "Run a complete comparison",
+      "manuscript_line": 384,
+      "accepted_complete_row": "| D39 \u00a711 fit work | B\u00d7K grid of fold fits, actual training counts, B full refits and one meta fit. Sum rows processed to explain BKn under linear row work. | B1\u202610,K2\u202610,n10\u20261000; K\u2264n and unequal fold sizes explicitly handled. Mathematical counts, not timing measurements. Independent sum of actual fold counts. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D40",
+      "section": 11,
+      "section_title": "Run a complete comparison",
+      "manuscript_line": 388,
+      "accepted_complete_row": "| D40 \u00a711 serving path | Base prediction branches with explicitly hypothetical times join a meta operation and action. Sequential24+1ms and ideal parallel15+1ms remain separate assumptions. | One latency-vector editor and execution-mode selector. Preserve1/8/15ms and20/50ms budget reasoning. Dependency-path oracle; actual concurrency and overhead can differ. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D41",
+      "section": 11,
+      "section_title": "Run a complete comparison",
+      "manuscript_line": 419,
+      "accepted_complete_row": "| D41 \u00a711 real saved forward | Thirty WDBC features enter actual saved preprocessors/bases; ordered three probabilities enter the fixed mean/combiner/link. Compare eight frozen outcomes. | Model selector and one30-value editor, finite\u00b11e6; an adjacent focused feature/value view shares this context. New complete saved-state native/browser agreement after execution. Arbitrary edits are computational queries, not automatically plausible specimens. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D42",
+      "section": 12,
+      "section_title": "Go beyond constant combination weights",
+      "manuscript_line": 431,
+      "accepted_complete_row": "| D42 \u00a712 context products | Actual[pA,pB,z]\u2192[(1\u2212z)pA,zpB] coordinates and learned slopes contrast with a context-only intercept. Products are separate real inputs. | Three controls pA,pB,z in[0,1], initial .2,.8,0; changedz=.25\u2192.35 under the retained constructed relation. Original eight-row coefficients/MSE retained; product/derivative oracle. Stack two product rows on phones. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D43",
+      "section": 12,
+      "section_title": "Go beyond constant combination weights",
+      "manuscript_line": 443,
+      "accepted_complete_row": "| D43 \u00a712 score and link | Constructed \u03b20=\u22121,\u03b2A=2,\u03b2B=.5 with probability .8 and margin2 yield score1.6 then sigmoid .832018. Typed operands explain why equal slopes need not mean averaging. | Static arithmetic, not a fitted outcome; separate actual learned N2 state when executed. Stable sigmoid oracle, labels at real multiply/sum/link ports. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    },
+    {
+      "id": "D44",
+      "section": 12,
+      "section_title": "Go beyond constant combination weights",
+      "manuscript_line": 449,
+      "accepted_complete_row": "| D44 \u00a712 whole state | Schema, class order, preprocessing arrays, base state, meta column order, weights and threshold form one bundle. A stale column permutation reaches the wrong score path. | Valid/stale-schema selector, feature context held fixed from D41. Validation fails closed with explicit last-valid identity. JSON reload/changed native query checks after execution; old map metadata stays separate. |",
+      "placement": "picture first, then the actual operand walkthrough; controls directly below the picture"
+    }
+  ],
+  "accepted_design": {
+    "path": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/reading-flow-design.md",
+    "sha256": "6ff60e637af4d38d776bb18fce5b91c6d0d35dafdc28230a260b69ec08817bde"
+  },
+  "colour_and_corrections": {
+    "path": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/reading-flow-design-amendment.md",
+    "sha256": "4cb59cc2c0175034c1940ce5dbbd3bb0ba4d5b734b46dab30419f6e9e9d50194"
+  },
+  "full_numerical_state_and_domain_contract": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/reading-flow-contracts.md",
+  "conservation": "all accepted arbitrary domains/initial values/presets/native code remain; new44 jobs do not narrow original36 owners",
+  "shared_state": "D04 probability inputs share D05 weights; D07/D08/D09 residual/weight context; D13/D14/D15 draw/member/row context; D18/D19/D20/D21/D22/D23 actual boosting trace; D24/D25/D26/D27 completed OOF versus partial trace/inference distinctions; D41/D44 whole WDBC query/bundle context",
+  "controls": "at most three substantive quantities per focused view; exact decimal/entity entry remains available; scoped Reset clears invalid draft even if parsed value equals default; live result; no learner prediction gate",
+  "native_review_deferred": "topic-only private build; full desktop1440/phone390 and320/768 at200% root text; >=16/32 actual glyph pixels; inspect informative changed/null/invalid states and real local pans"
+}

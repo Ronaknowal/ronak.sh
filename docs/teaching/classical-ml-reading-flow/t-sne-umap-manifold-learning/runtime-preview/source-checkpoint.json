@@ -1,0 +1,209 @@
+{
+  "schema": "private-runtime-source-progress/v2",
+  "status": "PARTIAL_SOURCE_GEOMETRY_REFINED_NATIVE_AND_BUILD_PENDING",
+  "at": "2026-10-09T10:19:46.767084+00:00",
+  "author": "/root/tsne_consolidated_content_correction",
+  "predecessorProgress": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-checkpoint-initial.json",
+    "bytes": 1432,
+    "sha256": "4ea0f3cb09e1abe1852155030581b2ac82775187830e3b2d06d97e54b5b8a082"
+  },
+  "wholeCurrentIntake": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/complete-content-intake.json",
+    "bytes": 20104,
+    "sha256": "12de09fb26c252a1f1dc166f1e720589610c8d868e56b37884be23bec2f83c8f"
+  },
+  "rootAcceptance": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-accepted-root.json",
+    "bytes": 64231,
+    "sha256": "d66262456b882a85a7b9e17ecae91b8ef44af6c4e8edfc1f63ac314ae4b4e36c"
+  },
+  "authorSourceReadback": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/author-source-refinement.md",
+    "bytes": 5968,
+    "sha256": "6e31e91319bece5d4dc9675107fdf065250c656f2b99b467fe011578f278e5d3"
+  },
+  "currentSourceGuard": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/refinement-final-source-check.json",
+    "bytes": 6847,
+    "sha256": "565987296c11b783a4dd8994018508ebc2eca1e53795e92144f517b6069511f9"
+  },
+  "currentSourceBindings": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/AffinityFigures.jsx",
+      "bytes": 18244,
+      "sha256": "bdefef9935ca74951f88d5d1795a362b076e5ffed0c79993b54a90bbab22e05c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-geometry-refinement.mjs",
+      "bytes": 8037,
+      "sha256": "565c562a22443434bfd052b22b5120bd589e2ea0595970f19e8a15c8cb290905"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-refinement-final-source.mjs",
+      "bytes": 5409,
+      "sha256": "404d207275329a176c64099182e57a91803388ca90f12d7abe3ef38b7594f2a4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-runtime-source.mjs",
+      "bytes": 8918,
+      "sha256": "748bec0ec19f30ef448ff22be6dcc7d407510a9d4d3753f1dc00b71c00e80ee2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/generate-reader.mjs",
+      "bytes": 7404,
+      "sha256": "b6e5e3b5033a899893bbfd772b3908c1682f050b451005b53c588533f9dd52e6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+      "bytes": 35451,
+      "sha256": "9dc79797f5fa23c9fcb6eae4bc50f0f02dda6c66cbbe0bc34177c635466bc02f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/index.html",
+      "bytes": 272,
+      "sha256": "6b7e4e39e44df32eb5ac4e18045441f1812c0e2ae8b9e6c59da0bd6844e125f4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+      "bytes": 402,
+      "sha256": "d08972295202fb57194d091a7b9649c37bd29b944777e8f72b85e7aa55a704ed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-geometry.mjs",
+      "bytes": 3443,
+      "sha256": "5f05fdb29982dbb214ca05a67215b40f79e46f3ad26d0246c3bc84db2e6f2f22"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-lesson.jsx",
+      "bytes": 124308,
+      "sha256": "14437087228af766dc00f8f572cb4abce3e1c632a80ea6ab82f786a18911c117"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+      "bytes": 7061,
+      "sha256": "dc6ecc40a8d499803610b2eade54ca49624eec9b17728f87b6f1fa067ad6edd6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-reader.css",
+      "bytes": 4690,
+      "sha256": "cdbabe22dca81d07fe19d225de92b35c01c86e4fb0760bb24da2e5b0b8622cb0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+      "bytes": 7465,
+      "sha256": "7b3a80854b817602faa2c0f56e3ee0de00ba843bf81df8daeaa4bf01663f4bb2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldFigures.jsx",
+      "bytes": 464,
+      "sha256": "b17d994feab9ac0096c809e4fa8da16e20bbed708aa281f6b4728b9d105137df"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+      "bytes": 20232,
+      "sha256": "8ed3c9314a41f383483ea2fc54ae61121225283713a12baf3eb0b7a06779e06f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+      "bytes": 9995,
+      "sha256": "18d45c5095d4048622aed696a2d21260c231626fb8ab913b4122cbf1bb398806"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-entry.jsx",
+      "bytes": 1122,
+      "sha256": "5c4171eb90643062eb8ee4c365ace26e2e256eaa2f17ebae133247d101d7dfe4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-loader.js",
+      "bytes": 198,
+      "sha256": "c8cb5c008cc405174011d5930691568ea57af3005cce2194908d25f55dd5c170"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/PrivateFiles.jsx",
+      "bytes": 740,
+      "sha256": "9663b5c8640759251d885bfe3a1e46b98b296262c2c57b69d4e195a6b62d639e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite.config.mjs",
+      "bytes": 1941,
+      "sha256": "88c1da96d3c4aa659fa3aea94da1875d33bf8cbaa46a040769883adf62f40ca0"
+    }
+  ],
+  "reusedPriorSourceCheck": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-model-check.json",
+    "bytes": 5137,
+    "sha256": "42bf2105d3950b0a0f516cb7e9a46b8642d38f051b953a3ae53a8756cceb9762"
+  },
+  "reusedTargetedGeometryCheck": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/geometry-source-check-complete.json",
+    "bytes": 3183,
+    "sha256": "131b9c6de20d217779e8a273d3e117c96171ccc736e0bac420988bfcbad8f36c"
+  },
+  "preservedEarlierGeometryReceipt": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/geometry-source-check.json",
+    "bytes": 3183,
+    "sha256": "904e4f0bbbabe5b96f06a80699bda98e9ad2264cae722e679fe2d722e93247ca"
+  },
+  "scope": {
+    "sections": 13,
+    "drawings": 45,
+    "investigations": 12,
+    "programs": 15,
+    "streams": 15,
+    "tasks": 19,
+    "payloads": 35
+  },
+  "refinedDrawings": [
+    "D04",
+    "D08",
+    "D09",
+    "D14",
+    "D25",
+    "D30",
+    "D31",
+    "D35",
+    "D38",
+    "D40",
+    "D42"
+  ],
+  "postEditContinuousReading": {
+    "manuscriptSections": [
+      2,
+      3,
+      5,
+      6,
+      8,
+      9
+    ],
+    "drawingContracts": [
+      "D04",
+      "D08",
+      "D09",
+      "D14",
+      "D25",
+      "D30",
+      "D31",
+      "D35",
+      "D38",
+      "D40",
+      "D42"
+    ],
+    "composition": "Full affected continuous sections and sources read; unchanged entire intake composed honestly, not re-labelled as fresh whole reading."
+  },
+  "remaining": [
+    "Root capacity approval before build/captures",
+    "Topic-only build and exact private payload delivery check",
+    "Entire native paint/width/keyboard/control/file/download/source/output/setup/practice review",
+    "Whole author corrections/freeze",
+    "DIFFERENT entire frozen runtime review",
+    "Root integration"
+  ],
+  "buildRun": false,
+  "previewServerStarted": false,
+  "nativeWindowsPersonallyViewed": [],
+  "nativeAcquisitions": [],
+  "scienceReplayed": false,
+  "independentOrPhaseAcceptanceClaimed": false,
+  "ownership": "Only this topic runtime-preview; root-start.json reserved and untouched"
+}

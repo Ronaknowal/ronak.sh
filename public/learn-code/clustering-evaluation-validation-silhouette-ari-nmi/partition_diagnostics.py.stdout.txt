@@ -1,0 +1,7 @@
+R refinement U [0, 0, 0, 0, 1, 1, 1, 1] V [0, 0, 1, 1, 2, 2, 3, 3]
+{'cells': [[2, 2, 0, 0], [0, 0, 2, 2]], 'row_names': [0, 1], 'column_names': [0, 1, 2, 3], 'TP': 4, 'FP': 0, 'FN': 8, 'TN': 16, 'pair_precision': 1.0, 'pair_recall': 0.3333333333333333, 'FM': 0.5773502691896258, 'purity': 1.0, 'homogeneity': 1.0, 'completeness': 0.5, 'V': 0.6666666666666666, 'matched': 4, 'unmatched_errors': 4, 'matched_accuracy': 0.5, 'VI_bits': 1.0}
+S swap U [0, 0, 0, 0, 1, 1, 1, 1] V [0, 0, 0, 1, 0, 1, 1, 1]
+{'cells': [[3, 1], [1, 3]], 'row_names': [0, 1], 'column_names': [0, 1], 'TP': 6, 'FP': 6, 'FN': 6, 'TN': 10, 'pair_precision': 0.5, 'pair_recall': 0.5, 'FM': 0.5, 'purity': 0.75, 'homogeneity': 0.18872187554086717, 'completeness': 0.18872187554086717, 'V': 0.18872187554086717, 'matched': 6, 'unmatched_errors': 2, 'matched_accuracy': 0.75, 'VI_bits': 1.6225562489182657}
+singleton U [0, 0, 0, 0, 1, 1, 1, 1] V [0, 1, 2, 3, 4, 5, 6, 7]
+{'cells': [[1, 1, 1, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 1, 1, 1]], 'row_names': [0, 1], 'column_names': [0, 1, 2, 3, 4, 5, 6, 7], 'TP': 0, 'FP': 0, 'FN': 12, 'TN': 16, 'pair_precision': None, 'pair_recall': 0.0, 'FM': 0.0, 'purity': 1.0, 'homogeneity': 1.0, 'completeness': 0.33333333333333337, 'V': 0.5, 'matched': 2, 'unmatched_errors': 6, 'matched_accuracy': 0.25, 'VI_bits': 2.0}
+ordinary diagnostics and tiny exact matching correspondence: passed

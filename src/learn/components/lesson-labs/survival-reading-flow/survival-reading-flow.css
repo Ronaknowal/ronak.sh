@@ -1,0 +1,317 @@
+.survival-reading-flow { --sv-observed: #7eb3df; --sv-computed: #b998e0; --sv-amber: #e2b55a; min-width: 0; font-family: 'Space Grotesk', sans-serif; }
+.survival-drawing { margin: 2rem 0; padding: 0; min-width: 0; color: #d7d7d7; }
+.survival-drawing figcaption, .survival-drawing p { font-size: 1rem; line-height: 1.65; overflow-wrap: break-word; }
+.survival-drawing figcaption { margin-top: 1rem; color: #bdbdbd; }
+.survival-drawing svg { display: block; max-width: 100%; }
+.survival-drawing * { box-sizing: border-box; }
+.survival-drawing .flow-controls { margin: 1rem 0; align-items: end; }
+.survival-quantity { display: grid; grid-template-columns: minmax(0, 1fr) minmax(5rem, 7rem); gap: .4rem .8rem; flex: 1 1 18rem; min-width: 0; }
+.survival-quantity > label:first-child { grid-column: 1 / -1; }
+.survival-quantity output { color: var(--sv-amber); margin-left: .4rem; }
+.survival-number-label { grid-column: 2; grid-row: 2; font-size: .85rem; }
+.survival-quantity input[type=range] { grid-row: 2 / 4; min-width: 0; width: 100%; accent-color: var(--sv-amber); }
+.survival-quantity input[type=number] { grid-column: 2; grid-row: 3; min-width: 0; width: 100%; font: inherit; background: #111; color: #eee; border: 1px solid #737373; padding: .35rem; border-radius: .2rem; }
+.survival-error { grid-column: 1 / -1; color: #e78d8d; }
+.survival-drawing button { font: inherit; background: #121212; color: var(--sv-amber); border: 1px solid #856f41; border-radius: .2rem; padding: .4rem .7rem; cursor: pointer; }
+.survival-drawing button:disabled { opacity: .5; cursor: default; }
+.survival-pump { flex: 1 1 12rem; min-width: 0; }
+.survival-pump svg { width: 12rem; height: auto; margin: auto; }
+.survival-pump p { margin: .5rem 0 .2rem; }
+.survival-pump > span { font-size: .9rem; }
+.survival-columns { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: start; }
+.survival-columns > * { flex: 1 1 16rem; min-width: 0; }
+.survival-lane { margin: .5rem 0 1.1rem; }
+.survival-lane-label { display: flex; gap: .6rem; align-items: baseline; flex-wrap: wrap; font-size: .95rem; }
+.survival-lane-label strong { color: var(--sv-observed); }
+.survival-lane-track { position: relative; height: 1.7rem; margin: 0 .45rem; }
+.survival-lane-known, .survival-lane-unknown { position: absolute; top: 50%; height: 3px; }
+.survival-lane-unknown { height: 0; border-top: 2px dashed #737373; }
+.survival-endpoint { position: absolute; top: 50%; width: .75rem; height: .75rem; transform: translate(-50%, -40%); border: 2px solid #ccc; background: #090909; border-radius: 50%; }
+.survival-endpoint--event { background: var(--sv-amber); border-color: var(--sv-amber); }
+.survival-cursor { position: absolute; top: 0; height: 100%; width: 0; border-left: 2px dotted var(--sv-amber); }
+.survival-axis { margin: 0 .45rem; }
+.survival-axis-ticks { position: relative; height: 1.8rem; font-variant-numeric: tabular-nums; }
+.survival-axis-ticks > span { position: absolute; top: 0; font-size: .9rem; }
+.survival-axis p { text-align: center; margin: .25rem 0; font-size: .9rem; }
+.survival-key, .survival-mass-key { display: flex; flex-wrap: wrap; gap: .4rem 1rem; font-size: .95rem; line-height: 1.6; }
+.survival-key > span, .survival-mass-key > span { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.survival-key i { display: inline-block; width: .6rem; height: .6rem; border: 2px solid #ccc; border-radius: 50%; }
+.survival-key i.survival-key-event { background: var(--sv-amber); border-color: var(--sv-amber); }
+.survival-mass-key i { width: .7rem; height: .7rem; display: inline-block; flex-shrink: 0; }
+.survival-amber { color: var(--sv-amber); }
+.survival-roster { display: flex; flex-wrap: wrap; gap: .8rem; }
+.survival-subject { width: 2rem; text-align: center; color: var(--sv-observed); }
+.survival-subject svg { fill: none; stroke: currentColor; stroke-width: 2; width: 2rem; height: 2.4rem; }
+.survival-subject--event { color: var(--sv-amber); }
+.survival-subject--event svg { fill: #e2b55a33; }
+.survival-risk-members p { margin: .5rem 0; }
+.survival-mass { margin: 1rem 0; min-width: 0; }
+.survival-mass p { margin: 0 0 .5rem; }
+.survival-mass-track { display: flex; width: 100%; height: 1.7rem; outline: 1px solid #656565; }
+.survival-mass-track > span { height: 100%; }
+.survival-mass-key { margin-top: .6rem; }
+.survival-plot { min-width: 0; margin: 1rem 0; }
+.survival-plot-title { margin: 0 0 1rem 2.8rem; font-size: .95rem; }
+.survival-plot-layout { display: flex; padding-top: .35rem; }
+.survival-y-ticks { position: relative; width: 2.8rem; flex-shrink: 0; }
+.survival-y-ticks > span { position: absolute; right: .5rem; transform: translateY(-50%); font-size: .85rem; }
+.survival-plot-field { position: relative; flex: 1; min-width: 0; height: 14rem; border-left: 1px solid #737373; border-bottom: 1px solid #737373; margin-right: .5rem; }
+.survival-plot-field > svg { width: 100%; height: 100%; overflow: visible; }
+.survival-gridline { stroke: #454545; stroke-width: .5; vector-effect: non-scaling-stroke; }
+.survival-plot-point { position: absolute; width: .65rem; height: .65rem; border-radius: 50%; transform: translate(-50%, -50%); }
+.survival-plot-x { margin: .55rem 0 0 2.35rem; }
+.survival-operation { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: 1rem 0; }
+.survival-operation-arrow { color: var(--sv-amber); font-size: 1.8rem; display: grid; text-align: center; }
+.survival-operation-arrow small { font-size: .85rem; color: #bbb; max-width: 9rem; }
+.survival-value { display: grid; gap: .4rem; font-size: .95rem; }
+.survival-value strong { font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.survival-number-bars { display: grid; gap: .8rem; }
+.survival-number-bars p { margin: 0 0 .3rem; }
+.survival-bar-track { background: #242424; height: 1rem; width: 100%; }
+.survival-bar-track > span { display: block; height: 100%; }
+.survival-probability-cells { display: flex; gap: .4rem; flex-wrap: wrap; }
+.survival-probability-cell { min-width: 2rem; min-height: 2.6rem; border: 2px solid var(--sv-observed); padding: .25rem; text-align: center; }
+.survival-probability-cell--event { background: #e2b55a33; border-color: var(--sv-amber); }
+.survival-reading-flow h4 { font-size: 1.1rem; margin-top: 1.5rem; }
+.survival-feature-sockets { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 1rem; margin: 1rem 0; }
+.survival-feature-sockets span { border-bottom: 2px solid var(--sv-observed); padding: .4rem; }
+.survival-forbidden { color: #e78d8d; display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; }
+.survival-forbidden > span { font-size: 2rem; }
+.survival-completion-grid { display: grid; gap: .3rem; }
+.survival-completion-grid > div { display: flex; gap: .7rem; flex-wrap: wrap; }
+.survival-fixed-value { color: var(--sv-observed); }
+.survival-hypothetical-value { color: var(--sv-computed); }
+.survival-tail-rulers { margin-top: 1rem; }
+.survival-tail-rulers > div { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin: .7rem 0; }
+.survival-broken-axis { color: var(--sv-computed); white-space: nowrap; }
+.survival-selection-forks { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-around; }
+.survival-selection-forks > div { display: grid; text-align: center; gap: .6rem; flex: 1 1 12rem; }
+.survival-selection-forks > div > span:nth-child(2) { font-size: 2rem; color: var(--sv-amber); }
+.survival-interval-track { position: relative; height: 2rem; border-bottom: 1px solid #737373; }
+.survival-interval-range { position: absolute; height: .7rem; bottom: .6rem; background: #b998e066; border-left: 2px solid var(--sv-computed); border-right: 2px solid var(--sv-computed); }
+.survival-interval-track i { position: absolute; bottom: .4rem; height: 1.1rem; width: 2px; background: var(--sv-amber); }
+.survival-area-products { display: flex; flex-wrap: wrap; gap: .8rem 1.8rem; }
+.survival-area-products > div { display: grid; gap: .25rem; font-size: .9rem; padding-bottom: .5rem; border-bottom: 2px solid #856f41; }
+.survival-pair-allocations { display: grid; grid-template-columns: repeat(auto-fit,minmax(7rem,1fr)); gap: .9rem; margin: 1rem 0; }
+.survival-pair-allocations > div { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; padding: .3rem; border-bottom: 2px solid #454545; }
+.survival-pair-allocations > div > small { flex-basis: 100%; text-align: center; font-size: .85rem; }
+.survival-pair-allocations > div.survival-pair-selected { border-color: var(--sv-amber); background: #e2b55a0d; }
+.survival-event-rosters { display: flex; flex-wrap: wrap; gap: 1rem 2rem; }
+.survival-event-rosters > * { flex: 1 1 15rem; }
+.survival-signed-axis { position: relative; width: 100%; height: 1.8rem; }
+.survival-signed-axis > i { position: absolute; left: 50%; top: 0; height: 100%; border-left: 1px solid #aaa; }
+.survival-signed-axis > span { position: absolute; top: .4rem; height: 1rem; }
+.survival-contributions > div { margin: 1.2rem 0; }
+.survival-score-rows { display: grid; gap: 1rem; margin: 1rem 0; }
+.survival-score-rows > div { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding-bottom: .5rem; border-bottom: 1px solid #333; }
+.survival-score-rows > div > strong:first-child { min-width: 1.5rem; color: var(--sv-observed); }
+.survival-balance-beam { position: relative; height: 5rem; margin: 1.5rem 0; }
+.survival-balance-axis { position: absolute; top: 1.6rem; left: 10%; width: 80%; border-top: 2px solid #aaa; }
+.survival-balance-point { position: absolute; top: 1.2rem; transform: translateX(-50%); display: grid; justify-items: center; gap: .7rem; }
+.survival-balance-point i { border-radius: 50%; width: .8rem; height: .8rem; background: var(--sv-observed); }
+.survival-balance-point strong { white-space: nowrap; font-size: .95rem; }
+.survival-balance-mean { position: absolute; top: -.3rem; transform: translateX(-50%); color: var(--sv-amber); }
+.survival-suffix-scan > div { display: grid; grid-template-columns: 5rem minmax(0,1fr); gap: .4rem 1rem; margin: .8rem 0; }
+.survival-suffix-scan > div > span { grid-column: 2; font-size: .9rem; }
+.survival-suffix-subjects { display: flex; flex-wrap: wrap; gap: .8rem; color: var(--sv-observed); }
+.survival-dp-cells { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .5rem; margin: 1rem 0; }
+.survival-dp-cells > div { display: grid; gap: .5rem; text-align: center; border-bottom: 2px solid var(--sv-computed); padding: .4rem; }
+.survival-dp-cells strong { font-size: 1.4rem; }
+.survival-dp-arrows { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-around; color: var(--sv-amber); }
+.survival-subset-moments { display: grid; grid-template-columns: repeat(auto-fit,minmax(8rem,1fr)); gap: 1rem; }
+.survival-subset-moments > div { display: grid; gap: .4rem; }
+.survival-subset-weight { height: .75rem; background: var(--sv-computed); }
+.survival-baseline-jumps { display: flex; flex-wrap: wrap; gap: 1rem 2rem; }
+.survival-baseline-jumps > div { display: grid; gap: .4rem; border-bottom: 2px solid var(--sv-computed); padding-bottom: .5rem; }
+.survival-information-matrix { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; max-width: 25rem; padding: .8rem; border-left: 2px solid var(--sv-computed); border-right: 2px solid var(--sv-computed); margin: 1rem 0; }
+.survival-information-matrix span { text-align: center; line-height: 1.8; }
+.survival-metric-pairs { display: grid; grid-template-columns: repeat(auto-fit,minmax(13rem,1fr)); gap: 1rem; margin: 1rem 0; }
+.survival-metric-pairs > div { display: grid; gap: .4rem; padding-bottom: .5rem; border-bottom: 1px solid #555; }
+.survival-probability-tree { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+.survival-probability-tree > div { flex: 1 1 12rem; display: grid; gap: .5rem; border-top: 2px solid var(--sv-computed); padding-top: .7rem; }
+.survival-fenwick-tree { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .7rem; margin: 1rem 0; }
+.survival-fenwick-tree > div { text-align: center; padding: .5rem; border-bottom: 2px solid var(--sv-computed); }
+.survival-near-ties { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin: 1rem 0; }
+.survival-near-ties > span { text-align: center; }
+.survival-near-edge { color: var(--sv-amber); }
+.survival-tree-anatomy { text-align: center; margin: 1rem 0; }
+.survival-tree-anatomy svg { width: 100%; max-width: 30rem; height: 6rem; margin: 0 auto; }
+.survival-tree-anatomy > div { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.survival-range-tree { margin: 1rem 0; }
+.survival-range-root { text-align: center; border-bottom: 2px solid var(--sv-computed); padding: .5rem; }
+.survival-range-halves { display: flex; gap: 1rem; margin: 1rem 0; }
+.survival-range-halves > span { flex: 1; text-align: center; border-bottom: 2px solid var(--sv-computed); }
+.survival-range-leaves { display: grid; grid-template-columns: repeat(auto-fit,minmax(7rem,1fr)); gap: 1rem; }
+.survival-range-leaves > div { display: grid; gap: .3rem; padding-top: .5rem; border-top: 1px solid #777; }
+.survival-bag-row { display: grid; grid-template-columns: repeat(8,minmax(0,1fr)); text-align: center; font-size: .95rem; }
+.survival-bag-row small { font-size: .8rem; }
+.survival-bag-wires { width: 100%; height: 8rem; }
+.survival-forest-anatomy { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+.survival-forest-anatomy > div { flex: 1 1 10rem; }
+.survival-forest-anatomy svg { width: 8rem; margin: auto; }
+.survival-scroll { overflow-x: auto; max-width: 100%; padding-bottom: .6rem; margin: 1rem 0; }
+.survival-scroll table { border-collapse: collapse; width: 100%; min-width: 35rem; font-size: .95rem; }
+.survival-scroll th,.survival-scroll td { padding: .65rem; border-bottom: 1px solid #444; text-align: center; }
+.survival-scroll caption { text-align: left; padding-bottom: .6rem; }
+.survival-selected-cell { outline: 1px solid var(--sv-amber); outline-offset: -2px; color: var(--sv-amber); }
+.survival-conditional-forks { display: grid; gap: 1.2rem; }
+.survival-fork-body { display: flex; flex-wrap: wrap; gap: 1rem; }
+.survival-fork-body > span { flex: 1 1 12rem; line-height: 1.9; padding-left: .75rem; }
+.survival-fork-continue { border-left: 2px solid var(--sv-observed); }
+.survival-fork-event { color: var(--sv-amber); border-left: 2px solid var(--sv-amber); }
+.survival-period-rows { display: flex; flex-wrap: wrap; gap: .75rem; margin: .75rem 0; }
+.survival-period-rows > div { display: grid; gap: .4rem; flex: 1 1 10rem; padding-bottom: .5rem; border-bottom: 2px solid var(--sv-observed); }
+.survival-period-rows .survival-unobserved-period { color: #aaa; border-bottom: 2px dashed #777; }
+.survival-probability-comparison { height: 2rem; border-bottom: 1px solid #aaa; position: relative; margin: 1rem 0; }
+.survival-probability-comparison > span { position: absolute; bottom: 0; transform: translateX(-50%); color: var(--sv-amber); }
+.survival-block-hessian { display: grid; grid-template-columns: minmax(0,3fr) minmax(0,2fr); gap: 1rem; margin: 1rem 0; }
+.survival-block-hessian > div { display: grid; justify-items: center; gap: .5rem; border: 1px solid #555; padding: .5rem; }
+.survival-matrix-three { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .4rem; width: 100%; text-align: center; }
+.survival-network { position: relative; height: 16rem; width: 100%; margin: 1rem 0; }
+.survival-network > svg { width: 100%; height: 100%; }
+.survival-network > span { position: absolute; transform: translate(-50%,-50%); font-size: .9rem; }
+.survival-network-key { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-size: .95rem; }
+.survival-network-key > span { flex: 1 1 8rem; }
+.survival-time-score-rows { display: grid; gap: 1.5rem; margin: 1rem 0; }
+.survival-time-score-rows > div { display: grid; gap: .7rem; }
+.survival-time-score-rows > div > div { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-around; padding-top: .5rem; border-top: 2px solid var(--sv-computed); }
+.survival-physical-fork { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 1rem; }
+.survival-physical-fork > div { flex: 1 1 13rem; text-align: center; }
+.survival-physical-fork > div > span { color: var(--sv-amber); font-size: 2rem; }
+.survival-bookkeeping-bracket { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; border-bottom: 2px dashed var(--sv-computed); padding: 1rem 0; }
+.survival-bookkeeping-bracket strong { flex-basis: 100%; text-align: center; }
+.survival-scan-lanes { display: flex; flex-wrap: wrap; gap: 2rem; margin: 1rem 0; }
+.survival-scan-lanes > div { flex: 1 1 16rem; display: grid; gap: .6rem; }
+.survival-scan-lanes > div > span:nth-of-type(2) { font-size: 2rem; color: var(--sv-computed); }
+.survival-invalid-mass > div { display: flex; position: relative; height: 2rem; }
+.survival-invalid-mass > div > i { position: absolute; border-left: 3px solid #eee; height: 3rem; top: -.5rem; }
+.survival-joint-cells { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .8rem; }
+.survival-joint-cells > div { display: grid; gap: .4rem; padding: .7rem; border-bottom: 2px solid var(--sv-computed); }
+.survival-joint-cells .survival-tail-cell { grid-column: 1 / -1; border-bottom-style: dashed; }
+.survival-joint-cells .survival-masked-cell { border-color: #666; border-bottom-style: dashed; color: #aaa; }
+.survival-joint-grid { margin: 1rem 0; }
+.survival-history-band { display: flex; margin: 1rem 0; }
+.survival-history-band > span { min-width: 0; line-height: 1.6; border-top: .65rem solid var(--sv-observed); padding: .6rem .5rem; }
+.survival-history-band > span:nth-child(2) { border-top-color: var(--sv-computed); }
+.survival-observation-regions > div { margin: 1rem 0; }
+.survival-observation-regions > div > div { position: relative; height: 1.6rem; border-bottom: 1px solid #aaa; }
+.survival-observation-regions > div > div > span { position: absolute; height: 1.4rem; border-left: 2px solid var(--sv-amber); background: #b998e044; }
+.survival-recurrent-band { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+.survival-recurrent-band > div { display: grid; gap: .5rem; min-width: 6rem; border-top: .7rem solid; padding-top: .5rem; }
+.survival-state-network { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 1rem; margin: 1rem 0; }
+.survival-state-network > span { border-radius: 50%; border: 2px solid var(--sv-observed); min-width: 6rem; max-width: 10rem; min-height: 6rem; display: grid; align-items: center; text-align: center; padding: .6rem; }
+.survival-state-network > strong { color: var(--sv-amber); font-size: 2rem; }
+.survival-observation-collector { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 1rem 0; }
+.survival-observation-collector > strong { flex-basis: 100%; text-align: center; }
+.survival-collector-merge { color: var(--sv-computed); font-size: 1.6rem; }
+.survival-candidate-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(12rem,1fr)); gap: 1.2rem; }
+.survival-candidate-grid > div { display: grid; gap: .5rem; border-bottom: 2px solid var(--sv-computed); padding: .6rem 0; }
+.survival-frozen-boundary { padding: .8rem 0; border-top: 2px dashed var(--sv-amber); border-bottom: 2px dashed var(--sv-amber); margin: 1rem 0; color: var(--sv-amber); }
+.survival-risk-strip { display: flex; flex-wrap: wrap; gap: 1rem; }
+.survival-risk-strip > div { flex: 1 1 10rem; display: grid; gap: .5rem; padding-bottom: .6rem; border-bottom: 1px solid #555; }
+.survival-hash { overflow-wrap: anywhere; }
+.survival-row-stack { margin: 1rem 0; }
+.survival-row-stack > div { display: flex; gap: 0; border-bottom: 1px solid #777; }
+.survival-row-stack > div > span { flex: 1; padding: .4rem; border-left: 1px solid #555; min-width: 0; font-size: .9rem; }
+.survival-computation-branches { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0; }
+.survival-computation-branches > div { flex: 1 1 16rem; min-width: 0; border-top: 2px solid var(--sv-computed); padding-top: .8rem; }
+.survival-drawing button { min-height: 2.75rem; }
+.survival-reading-flow .neural-equation { max-width: 100%; overflow-x: auto; padding: .25rem 0; }
+@media (prefers-reduced-motion: reduce) { .survival-reading-flow * { scroll-behavior: auto; } }
+
+.survival-binary-level { display: grid; gap: 1rem; }
+.survival-binary-level > div { display: grid; gap: .4rem; text-align: center; padding: .5rem; border-bottom: 2px solid var(--sv-computed); }
+.survival-binary-tree svg { width: 100%; height: 2rem; }
+.survival-state-graph > svg { width: 100%; height: 3rem; }
+.survival-state-graph > p { text-align: center; }
+
+.survival-state-graph { min-width: 32rem; }
+.survival-state-graph .survival-state-network { flex-wrap: nowrap; }
+
+.survival-binary-container { container-type: inline-size; }
+.survival-binary-level { gap: .5rem; }
+.survival-binary-level > div { min-width: 0; padding: .35rem; font-size: .9rem; overflow-wrap: break-word; }
+.survival-binary-compact { display: none; }
+.survival-binary-compact, .survival-binary-compact ul { list-style: none; margin: 0; padding: 0; }
+.survival-binary-compact ul { margin: .65rem 0 .65rem .6rem; padding-left: 1.1rem; border-left: 2px solid var(--sv-computed); }
+.survival-binary-compact li { position: relative; margin: .75rem 0; }
+.survival-binary-compact li > div { display: grid; gap: .3rem; padding: .4rem 0; }
+.survival-binary-compact ul > li::before { content: ''; position: absolute; left: -1.1rem; top: 1rem; width: 1rem; border-top: 2px solid var(--sv-computed); }
+@container (max-width: 40rem) { .survival-binary-wide { display: none; } .survival-binary-compact { display: block; } }
+.survival-network > span { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 2px solid var(--sv-observed); border-radius: 50%; background: #090909; }
+.survival-network > .survival-network-hidden { border-color: var(--sv-computed); }
+.survival-network > .survival-network-output { border-color: var(--sv-amber); }
+.survival-state-graph { position: relative; min-width: 0; width: 100%; height: 28rem; }
+.survival-state-graph > svg { width: 100%; height: 100%; }
+.survival-state-node { position: absolute; left: 36%; transform: translate(-50%,-50%); display: grid; place-items: center; text-align: center; width: 25%; min-width: 6rem; max-width: 12rem; height: 6rem; padding: .5rem; border: 2px solid var(--sv-observed); border-radius: 50%; background: #090909; }
+.survival-state-node-wide { width: 40%; min-width: 10rem; max-width: 16rem; border-color: var(--sv-computed); }
+
+.survival-reading-flow > p { overflow-wrap: anywhere; }
+
+/* Boundary drawings and connected observation-law branches. */
+.survival-boundary-inset { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #555; }
+.survival-boundary-trials { margin: 1.5rem 0; }
+.survival-scroll .survival-greenwood-table { min-width: 42rem; }
+.survival-curve-censor { position: absolute; width: 0; height: 0; color: #ddd; }
+.survival-curve-censor > i { position: absolute; height: 1rem; top: -.5rem; border-left: 2px solid currentColor; }
+.survival-curve-censor > span { position: absolute; top: .7rem; transform: translateX(-50%); white-space: nowrap; font-size: .85rem; }
+.survival-curve-censor--end > span { transform: translateX(-100%); }
+.survival-law-tree { container-type: inline-size; margin: 1.5rem 0; }
+.survival-law-tree ul { list-style: none; }
+.survival-law-root { position: relative; display: grid; gap: .45rem; text-align: center; padding-bottom: .75rem; }
+.survival-law-root::after { content: ''; position: absolute; left: 50%; top: 100%; height: .75rem; border-left: 2px solid #999; }
+.survival-law-lifetimes { position: relative; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.5rem; margin: 0; padding: 1.5rem 0 0; }
+.survival-law-lifetimes::before { content: ''; position: absolute; top: .75rem; left: calc(25% - .375rem); right: calc(25% - .375rem); border-top: 2px solid #999; }
+.survival-law-lifetimes > li { position: relative; min-width: 0; }
+.survival-law-lifetimes > li::before { content: ''; position: absolute; left: 50%; top: -.75rem; height: .75rem; border-left: 2px solid var(--law-color); }
+.survival-law-lifetime { display: grid; gap: .3rem; padding: .6rem 0; text-align: center; color: var(--law-color); border-bottom: 2px solid var(--law-color); }
+.survival-law-observations { margin: 0 0 0 .5rem; padding: .5rem 0 0 1rem; border-left: 2px solid var(--law-color); }
+.survival-law-leaf { position: relative; min-width: 0; margin: 1rem 0 2rem; }
+.survival-law-leaf::before { content: ''; position: absolute; top: .8rem; left: -1rem; width: .9rem; border-top: 2px solid var(--law-color); }
+.survival-law-observation { display: grid; gap: .35rem; }
+.survival-law-observation > strong { color: var(--law-color); }
+.survival-law-record { display: grid; gap: .6rem; margin: 1rem 0 .5rem; }
+.survival-law-record-arrow { display: grid; gap: .25rem; }
+.survival-law-record-arrow > span:first-child { color: var(--law-color); font-size: 1.7rem; }
+.survival-law-target, .survival-law-contribution { display: grid; gap: .4rem; }
+.survival-law-target > span:first-child, .survival-law-contribution > span:first-child { color: var(--law-color); font-size: 1.7rem; }
+.survival-law-operands { margin: .75rem 0; display: grid; gap: .75rem; }
+.survival-law-operands > div { display: grid; gap: .3rem; padding-bottom: .5rem; border-bottom: 1px solid #454545; }
+.survival-law-operands dd { margin: 0; font-weight: 600; }
+.survival-law-contribution { padding-bottom: .7rem; border-bottom: 2px solid var(--law-color); }
+.survival-law-tree :is(strong,span,dd,dt) { overflow-wrap: break-word; }
+@container (max-width: 34rem) {
+  .survival-law-root { text-align: left; padding-left: 1.5rem; }
+  .survival-law-root::after { left: .5rem; }
+  .survival-law-lifetimes { grid-template-columns: minmax(0,1fr); padding: 1.5rem 0 0 1.5rem; }
+  .survival-law-lifetimes::before { top: 0; bottom: 0; left: .5rem; right: auto; border-top: 0; border-left: 2px solid #999; }
+  .survival-law-lifetimes > li::before { left: -1rem; top: 1.2rem; height: 0; width: 1rem; border-left: 0; border-top: 2px solid var(--law-color); }
+  .survival-law-lifetime { text-align: left; }
+}
+
+/* Normal-reader integration: enlarged text must reflow in nested practice and
+   coefficient cells. Wide equations keep their exact notation and a local
+   scroll area; the learning compass sits outside the lesson body. */
+.survival-reading-flow { overflow-wrap: anywhere; }
+.survival-dp-cells > div { min-width: 0; }
+.survival-reading-flow .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: .3rem;
+}
+.reader-content:has(.survival-reading-flow) .lesson-compass {
+  overflow-wrap: anywhere;
+}
+
+/* N1: keep words readable at the actual figure width and enlarged font size.
+   Coefficients can stack; Fenwick node spans retain their coordinate geometry. */
+.survival-dp-cells { overflow-wrap: normal; }
+.survival-fenwick-scroll { max-width: 100%; overflow-x: auto; padding-bottom: .5rem; }
+.survival-fenwick-scroll:focus-visible { outline: 2px solid var(--sv-amber); outline-offset: -2px; }
+.survival-fenwick-scroll .survival-fenwick-tree { min-width: 32rem; overflow-wrap: normal; }
+.survival-fenwick-scroll-note { display: none; }
+@container (max-width: 32rem) {
+  .survival-dp-cells { grid-template-columns: minmax(0, 1fr); }
+  .survival-fenwick-scroll-note { display: block; }
+}

@@ -1,0 +1,30 @@
+.combinatorial-lesson { overflow-wrap: anywhere; }
+.combinatorial-lesson .co-figure { margin: 2rem 0; padding: 0; border: 0; background: transparent; min-width: 0; container-type: inline-size; }
+.co-figure-name { margin-bottom: .8rem; color: #d6dce7; font-size: .95rem; }
+.co-figure figcaption { line-height: 1.7; margin-top: .85rem; color: #c1c8d3; }
+.co-svg-scroll { max-width: 100%; overflow: auto; scrollbar-gutter: stable; margin: .8rem 0; }
+.co-svg-scroll svg { display: block; width: 100%; height: auto; }
+.co-svg-scroll text { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; }
+.co-svg-scroll:focus-visible, .co-table-scroll:focus-visible, .co-equation-window:focus-visible { outline: 2px solid #d4a46f; outline-offset: 3px; }
+.co-comparison { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.4rem; }
+.co-comparison > * { min-width: 0; }
+@container (max-width: 82rem) { .co-comparison { grid-template-columns: minmax(0,1fr); } }
+.co-scene { min-width: 0; max-width: 100%; }
+.co-array-name { margin: 1.1rem 0 .4rem; color: #d5dce8; }
+.co-window-hint { font-size: .82rem; color: #a6b2c4; margin: .3rem 0 .6rem; }
+.co-table-scroll { overflow: auto; max-width: 100%; scrollbar-gutter: stable; }
+.co-table-scroll--tall { max-height: 26rem; }
+.co-table-scroll table { border-collapse: collapse; width: max-content; min-width: 100%; font-size: .84rem; }
+.co-table-scroll caption { text-align: left; color: #c6cfdd; padding-bottom: .4rem; }
+.co-table-scroll td, .co-table-scroll th { padding: .5rem .65rem; border-bottom: 1px solid #28313e; white-space: nowrap; text-align: right; }
+.co-table-scroll td:first-child, .co-table-scroll th:first-child { text-align: left; }
+.co-table-scroll th { color: #d6dce8; font-weight: 500; }
+.co-table-scroll .co-cell-focus { color: #f3d0a7; outline: 2px solid #e5af6d; outline-offset: -2px; }
+.co-controls { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: end; margin: 1.2rem 0; }
+.co-controls label { display: flex; flex-direction: column; gap: .4rem; flex: 1 1 12rem; min-width: 0; }
+.co-controls input[type=range] { accent-color: #e6ad68; width: 100%; min-height: 2rem; }
+.co-controls select, .co-controls button { background: #141922; border: 1px solid #566377; color: #d8e1ef; padding: .55rem .65rem; border-radius: 3px; font: inherit; min-height: 2.75rem; max-width: 100%; }
+.co-controls button { cursor: pointer; }
+.co-readout { line-height: 1.7; color: #c9d2e0; margin: .8rem 0; }
+.co-equation-window { max-width: 100%; overflow-x: auto; overflow-y: hidden; margin: 1.2rem 0; padding: .2rem; }
+.co-equation-window .math-block { width: max-content; min-width: 100%; margin: .1rem 0; }

@@ -1,0 +1,48 @@
+{
+  "completedAt": "2026-10-09T16:30:29.728734+00:00",
+  "scope": "Exactly four new programmes; original full mains not executed. The array programme compares extracted exact scratch functions on the new declared matched run.",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "torch": "2.14.0+cpu",
+  "sklearn": "1.9.1",
+  "reference": {
+    "source": "mi_iteration.py",
+    "selection": "Exact complete prefix before module demonstration loop, LF-normalized",
+    "sha256": "f6238f5ed37a2f1ec35efd84d905e8925bb01fd29f565da6187b7d4421788fb6"
+  },
+  "programmes": [
+    {
+      "file": "finite_ib_numpy.py",
+      "sourceSha256": "6e78c8d50f897b5886a7c6d81f74b9ba69672dfcd72c131bb6b89747df442bbc",
+      "exitCode": 0,
+      "stdout": "informative 0 R T J F bits 0.174171458 0.095887893 -0.113492220 1.479521000\ninformative 1 R T J F bits 0.414161329 0.253675286 -0.346864527 1.246148692\ninformative 4 R T J F bits 0.944130949 0.514971942 -0.600784877 0.992228342\ninformative 40 R T J F bits 0.948950829 0.516595159 -0.600834647 0.992178572\ninformative P(Z=1|X) 0.005747954 0.005747954 0.994252046 0.994252046\nsymmetric 0 R T J F bits 0.000000000 0.000000000 0.000000000 1.593013219\nsymmetric 1 R T J F bits 0.000000000 0.000000000 0.000000000 1.593013219\nsymmetric 4 R T J F bits 0.000000000 0.000000000 0.000000000 1.593013219\nsymmetric 40 R T J F bits 0.000000000 0.000000000 0.000000000 1.593013219\nsymmetric P(Z=1|X) 0.500000000 0.500000000 0.500000000 0.500000000\nfixed-row Gibbs 0.571428571 0.428571429\nfixed-row SLSQP 0.571428570 0.428571430\nfixed-row objective nats 0.826678573\n",
+      "stderr": "",
+      "stdoutSha256": "c2ced0cc86928fdcb27dfb1e94a496c43a449d13ff4859c2477d6794240eaeef"
+    },
+    {
+      "file": "gaussian_vib_step.py",
+      "sourceSha256": "13dcfb15989285dc6603fc664a73d9daf249928b8e9063e6c51ccb49a4899138",
+      "exitCode": 0,
+      "stdout": "row 0 mu z logit CE KL -0.400000000 -1.100000000 -1.410000000 0.218447167 0.181674944\nrow 1 mu z logit CE KL -0.100000000 0.250000000 0.075000000 0.731350141 0.106674944\nrow 2 mu z logit CE KL 0.400000000 0.750000000 0.625000000 0.428700678 0.181674944\nrow 3 mu z logit CE KL 0.700000000 0.000000000 -0.200000000 0.598138869 0.346674944\nmean CE / KL / objective nats 0.494159214 0.204174944 0.534994203\nparameters a b c log_sd u v\nhand gradients 0.082918239 0.296449485 0.254536438 -0.210060264 -0.086914002 0.204124035\nTorch gradients 0.082918239 0.296449485 0.254536438 -0.210060264 -0.086914002 0.204124035\nupdated parameters 0.799170818 0.297035505 -0.402545364 -0.354574341 1.100869140 -0.202041240\nupdated fixed-noise objective nats 0.532473082\n",
+      "stderr": "",
+      "stdoutSha256": "aa1de4ddef44e684b02996d87935ffbf7ce15ae6e3441961f06a03c734387da4"
+    },
+    {
+      "file": "finite_fano.py",
+      "sourceSha256": "20d67c5a9a32f665face463c775156d2eacae974e952b43f84ea7c12edfdeb13",
+      "exitCode": 0,
+      "stdout": "binary decisions [0, 1]\nPe / H(Y|Z) / Fano upper bits 0.200000000 0.721928095 0.721928095\nthree-class decisions [0, 1]\nPe / H(Y|Z) / Fano upper bits 0.450000000 1.365957321 1.442774454\nperfect-with-empty-row decisions [0, 1, None]\nPe / H(Y|Z) / Fano upper bits 0.000000000 0.000000000 0.000000000\ntie decisions [0, 0]\nPe / H(Y|Z) / Fano upper bits 0.500000000 1.000000000 1.000000000\n",
+      "stderr": "",
+      "stdoutSha256": "f6b7965c2e37e156c005fe3b06a94de41d6f45fa3765d0eaa3783d891f3b7436"
+    },
+    {
+      "file": "penguins_information.py",
+      "sourceSha256": "ca2685f9c9dfd285305413e53c3bdd466659624fc560580dca72237c11745cb0",
+      "exitCode": 0,
+      "stdout": "all N 344 species-by-island counts [[44, 56, 52], [0, 68, 0], [124, 0, 0]]\nMI / coarsened MI / discarded bits 0.750428171 0.616057102 0.134371069\n2007 N 110 species-by-island counts [[10, 20, 20], [0, 26, 0], [34, 0, 0]]\nMI / coarsened MI / discarded bits 0.810143279 0.642801460 0.167341818\n2008 N 114 species-by-island counts [[18, 16, 16], [0, 18, 0], [46, 0, 0]]\nMI / coarsened MI / discarded bits 0.691592680 0.575635901 0.115956780\n2009 N 120 species-by-island counts [[16, 20, 16], [0, 24, 0], [44, 0, 0]]\nMI / coarsened MI / discarded bits 0.735117842 0.614120289 0.120997553\nyear counts [110, 114, 120]\nI(species;island|year) / uniform-year mean bits 0.744684498 0.745617934\n",
+      "stderr": "",
+      "stdoutSha256": "889ace005388e1841e1ec541b7977368239e3ee3fac4affe89767750ec007937"
+    }
+  ]
+}

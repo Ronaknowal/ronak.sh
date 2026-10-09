@@ -1,0 +1,48 @@
+{
+  "dataset": "coal",
+  "package": "boot",
+  "packageVersion": "1.3-32",
+  "packageLicense": "Unlimited",
+  "canonicalDocumentation": "https://stat.ethz.ch/R-manual/R-devel/library/boot/html/coal.html",
+  "records": 191,
+  "eventDefinition": "Recorded British coal-mine explosions involving ten or more fatalities; dataset dates in years, 1851 through 1962.",
+  "csvSha256": "8c8c9f98dca57efc85c8a2e6d73a19f414fcc5e6ece32b1135e95dd176e422f8",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/cran/boot/master/data/coal.rda",
+      "path": "docs/teaching/math-foundations-reading-flow/stochastic-processes-markov-chains-brownian-motion-poisson/research-sources/coal-candidate/coal.rda",
+      "sha256": "4f24c0c5712be65f91228318dc1ac42341c922fcfc9f06886ebc6ffd609f5257",
+      "bytes": 1918
+    },
+    {
+      "url": "https://raw.githubusercontent.com/vincentarelbundock/Rdatasets/master/csv/boot/coal.csv",
+      "path": "docs/teaching/math-foundations-reading-flow/stochastic-processes-markov-chains-brownian-motion-poisson/research-sources/coal-candidate/coal.csv",
+      "sha256": "8c8c9f98dca57efc85c8a2e6d73a19f414fcc5e6ece32b1135e95dd176e422f8",
+      "bytes": 4258
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cran/boot/master/man/coal.Rd",
+      "path": "docs/teaching/math-foundations-reading-flow/stochastic-processes-markov-chains-brownian-motion-poisson/research-sources/coal-candidate/coal.Rd",
+      "sha256": "f56614b1f2333712a0a95a1f8868eebcb1419cbbc4adcba0f1ccd673fa156634",
+      "bytes": 1056
+    },
+    {
+      "url": "https://raw.githubusercontent.com/cran/boot/master/DESCRIPTION",
+      "path": "docs/teaching/math-foundations-reading-flow/stochastic-processes-markov-chains-brownian-motion-poisson/research-sources/coal-candidate/DESCRIPTION",
+      "sha256": "0b681644c18745c0965e1bbb06f513f4662151a24db5f442f52edb1beb59d009",
+      "bytes": 1446
+    }
+  ],
+  "sourceQualification": "Mutable upstream URLs with frozen exact acquired bytes. All 191 CSV doubles were matched to the boot R object in coal-candidate-checks.json; equal recorded dates stay distinct records.",
+  "chosenExposure": [
+    1851,
+    1963
+  ],
+  "exposureQualification": "Explicit analysis bins, not a claim that first/last event establish complete surveillance boundaries. Descriptive calculations do not identify causal safety effects.",
+  "duplicateRowIDs": [
+    80,
+    81
+  ],
+  "packageDescription": "Package: boot\nPriority: recommended\nVersion: 1.3-32\nDate: 2025-08-29\nAuthors@R: c(person(\"Angelo\", \"Canty\", role = \"aut\",\n\t             email = \"cantya@mcmaster.ca\", \n                     comment = \"author of original code for S\"),\n             person(\"Brian\", \"Ripley\", role = c(\"aut\", \"trl\"),\n                    email = \"Brian.Ripley@R-project.org\",\n\t\t    comment = \"conversion to R, maintainer 1999--2022, author of parallel support\"),\n             person(\"Alessandra R.\", \"Brazzale\", role = c(\"ctb\", \"cre\"),\n                    email = \"brazzale@stat.unipd.it\",\n\t\t    comment = \"minor bug fixes\"))\nMaintainer: Alessandra R. Brazzale <brazzale@stat.unipd.it>\nNote: Maintainers are not available to give advice on using a package\n        they did not author.\nDescription: Functions and datasets for bootstrapping from the\n  book \"Bootstrap Methods and Their Application\" by A. C. Davison and \n  D. V. Hinkley (1997, CUP), originally written by Angelo Canty for S.\nTitle: Bootstrap Functions\nDepends: R (>= 3.0.0), graphics, stats\nSuggests: MASS, survival\nLazyData: yes\nByteCompile: yes\nLicense: Unlimited\nNeedsCompilation: no\nPackaged: 2025-08-29 10:01:31 UTC; brazzale\nAuthor: Angelo Canty [aut] (author of original code for S),\n  Brian Ripley [aut, trl] (conversion to R, maintainer 1999--2022, author\n    of parallel support),\n  Alessandra R. Brazzale [ctb, cre] (minor bug fixes)\nRepository: CRAN\nDate/Publication: 2025-08-29 13:00:08 UTC\n",
+  "datasetDocumentation": "\\name{coal}\n\\alias{coal}\n\\title{\nDates of Coal Mining Disasters \n}\n\\description{\nThe \\code{coal} data frame has 191 rows and 1 columns.\n\n\nThis data frame gives the dates of 191 explosions in coal mines which\nresulted in 10 or more fatalities.  The time span of the data is from March 15,\n1851 until March 22 1962.  \n}\n\\usage{\ncoal\n}\n\\format{\nThis data frame contains the following column:\n\n\n\\describe{\n\\item{\\code{date}}{\nThe date of the disaster.  The integer part of \\code{date} gives the year.  The day\nis represented as the fraction of the year that had elapsed on that day.\n}}}\n\\source{\nThe data were obtained from\n\n\nHand, D.J., Daly, F., Lunn, A.D., McConway, K.J. and Ostrowski, E. (1994)\n\\emph{A Handbook of Small Data Sets}, Chapman and Hall.\n}\n\\references{\nDavison, A.C. and Hinkley, D.V. (1997) \n\\emph{Bootstrap Methods and Their Application}. Cambridge University Press.\n\n\nJarrett, R.G. (1979) A note on the intervals between coal-mining disasters.\n\\emph{Biometrika}, \\bold{66}, 191-193.\n}\n\\keyword{datasets}\n% Converted by Sd2Rd version 1.15.\n"
+}

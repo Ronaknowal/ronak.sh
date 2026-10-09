@@ -1,0 +1,11 @@
+.recommender-flow-lesson .rec-history-occurrences > .rec-flow-pan {
+  max-height: 20rem;
+  overflow: auto;
+}
+
+.recommender-flow-lesson .rec-history-occurrences thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #080808;
+}

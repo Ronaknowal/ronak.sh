@@ -1,0 +1,184 @@
+{
+  "status": "PASS_NEW_PREDECLARED_RANK6_DIGIT_STUDY_ONLY",
+  "inputs": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+      "bytes": 5471,
+      "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_digit_comparison.py",
+      "bytes": 4275,
+      "sha256": "36ac3ce284bfa74dd5ff25124327eca5c73b1e4d28603535df78961d448c1e0e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_digits.py",
+      "bytes": 6991,
+      "sha256": "ff1e4f2d5f395745e4f1b824bcb7c33d5dcb6d0bc025c7c68d717ec1c268ce14"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_state.json",
+      "bytes": 69820,
+      "sha256": "46f3dc0931e3ccddc30cc3e30bbb4d3f330bc35a4dccccef33f74a63472eddd0"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    }
+  ],
+  "checks": [
+    {
+      "name": "old fixed split seed19 stratification inspected",
+      "passed": true
+    },
+    {
+      "name": "old comparison rank8 publicPCA not rank6",
+      "passed": true
+    },
+    {
+      "name": "18060 60 exact",
+      "passed": true
+    },
+    {
+      "name": "disjoint full partition",
+      "passed": true
+    },
+    {
+      "name": "saved ordered reserved IDs exact",
+      "passed": true
+    },
+    {
+      "name": "predeclared two examples in reserved",
+      "passed": true
+    },
+    {
+      "name": "source has new explicit settings",
+      "passed": true
+    },
+    {
+      "name": "once new study exit0",
+      "passed": true
+    },
+    {
+      "name": "study new rankseedrole",
+      "passed": true
+    },
+    {
+      "name": "exact train/dev/test identities output",
+      "passed": true
+    },
+    {
+      "name": "trainonlymean exact",
+      "passed": true
+    },
+    {
+      "name": "PCA/NMF shapes",
+      "passed": true
+    },
+    {
+      "name": "nonnegative NMF dictionary",
+      "passed": true
+    },
+    {
+      "name": "PCA orthonormal rows",
+      "passed": true
+    },
+    {
+      "name": "PCA top6 eigenspace eigenvalues",
+      "passed": true
+    },
+    {
+      "name": "PCA eigenvectors satisfy covariance equation",
+      "passed": true
+    },
+    {
+      "name": "PCA whole-test independent metric",
+      "passed": true
+    },
+    {
+      "name": "mean whole-test independent metric",
+      "passed": true
+    },
+    {
+      "name": "row242 observed correspondence",
+      "passed": true
+    },
+    {
+      "name": "row242 scalar NMF product",
+      "passed": true
+    },
+    {
+      "name": "row242 independent PCA projection",
+      "passed": true
+    },
+    {
+      "name": "row242 mean MSE",
+      "passed": true
+    },
+    {
+      "name": "row242 PCA6 MSE",
+      "passed": true
+    },
+    {
+      "name": "row242 NMF6 MSE",
+      "passed": true
+    },
+    {
+      "name": "row242 independent convex encoding objective",
+      "passed": true
+    },
+    {
+      "name": "row256 observed correspondence",
+      "passed": true
+    },
+    {
+      "name": "row256 scalar NMF product",
+      "passed": true
+    },
+    {
+      "name": "row256 independent PCA projection",
+      "passed": true
+    },
+    {
+      "name": "row256 mean MSE",
+      "passed": true
+    },
+    {
+      "name": "row256 PCA6 MSE",
+      "passed": true
+    },
+    {
+      "name": "row256 NMF6 MSE",
+      "passed": true
+    },
+    {
+      "name": "row256 independent convex encoding objective",
+      "passed": true
+    },
+    {
+      "name": "old inputs conserved",
+      "passed": true
+    }
+  ],
+  "main": {
+    "returncode": 0,
+    "stdout": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+      "bytes": 38803,
+      "sha256": "b3ec28cea308fb5003d017f201fd47afbd7336db9bbda7c70a9c233dbcd44286"
+    },
+    "stderr": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "newNMFfits": 1,
+    "newPCAfits": 1
+  },
+  "warnings": [],
+  "capReached": false,
+  "historicalCampaignReplay": false,
+  "D48amendment": "Retain old aggregate bars and exact old candidate table, separately label new matched mean/PCA6/NMF6 image study and its new metrics; no historical PCA8 images are fabricated.",
+  "limits": "Current author controlled study, not classification/writer generalization/timing or independent/native/whole-content acceptance."
+}

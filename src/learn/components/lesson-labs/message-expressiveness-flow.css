@@ -1,0 +1,19 @@
+.lesson-flow .mp-express-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,24rem),1fr));gap:1.3rem;align-items:start}
+.lesson-flow .mp-express-small-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1.3rem;align-items:start}
+.lesson-flow .mp-express-select{display:grid;gap:.5rem;min-width:0}
+.lesson-flow .mp-express-select select{max-width:100%;min-height:2.75rem;padding:.55rem;background:#141414;color:#eee;border:1px solid #666;border-radius:.2rem}
+.lesson-flow .mp-express-table-pan{overflow-x:auto;max-width:100%;margin-block:1rem}
+.lesson-flow .mp-express-values{width:max-content;min-width:100%;border-collapse:collapse}
+.lesson-flow .mp-express-values caption{text-align:left;color:#ddd;margin-bottom:.65rem}
+.lesson-flow .mp-express-values th,.lesson-flow .mp-express-values td{text-align:left;padding:.6rem .4rem;border-bottom:1px solid #333;white-space:nowrap}
+.lesson-flow .mp-express-emphasis{outline:2px solid #eee;outline-offset:.6rem}
+
+/* Native selects must shrink with their grid track at enlarged text. */
+.message-passing-flow-lesson .mp-express-select {
+  grid-template-columns: minmax(0, 1fr);
+}
+.message-passing-flow-lesson .mp-express-select select {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}

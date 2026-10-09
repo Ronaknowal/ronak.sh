@@ -1,0 +1,17 @@
+resolved peak
+  estimate=0.146146185386 estimated error=1.251e-12 actual model error=0.000e+00
+  evaluations=189 active intervals=5 tuple length=3
+  message: no appended diagnostic
+same peak; one subinterval permitted
+  estimate=0.149994004673 estimated error=1.720e-01 actual model error=3.848e-03
+  evaluations=21 active intervals=1 tuple length=4
+  message: The maximum number of subdivisions (1) has been achieved.
+  If increasing the limit yields no improvement it is advised to analyze 
+  the integrand in order to determine the difficulties.  If the position of a 
+  local difficulty can be determined (singularity, discontinuity) one will 
+  probably gain from splitting up the interval and calling the integrator 
+  on the subranges.  Perhaps a special-purpose integrator should be used.
+transformed endpoint integrand
+  estimate=2.000000000000 estimated error=2.220e-14 actual model error=0.000e+00
+  evaluations=21 active intervals=1 tuple length=3
+  message: no appended diagnostic

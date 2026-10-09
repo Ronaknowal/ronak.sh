@@ -1,4 +1,11 @@
 import fs from 'node:fs';
+// Explicit operations route to the current guarded authoring renderer. The preserved
+// historical writer below is never executed; bare invocation must not overwrite a revision.
+if (['--preview', '--check', '--write-reading-flow'].includes(process.argv[2])) {
+  await import('./lib/hybrid-memory-reading-flow-renderer.mjs');
+  process.exit(0);
+}
+throw new Error('Use --preview, --check or --write-reading-flow explicitly; the historical writer is retired.');
 import { parse } from '@babel/parser';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id='hybrid-ssm-transformer-architectures-jamba',source=`docs/teaching/drafts/${id}`;

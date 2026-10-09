@@ -1,0 +1,175 @@
+{
+  "status": "SAME_ER1_ER2_ER3_CLOSED_PRIVATE_RUNTIME",
+  "reviewer": "/root/queue_nonconvex_resume",
+  "createdAt": "2026-10-09T18:36:29.310209+00:00",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-source-r3.json",
+    "sha256": "9508ab0d685a9af3132ed43c9a48ab4275308ddac36b2116b2792e6b790b1db9",
+    "bytes": 303964
+  },
+  "ready": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-ready-r3.json",
+    "sha256": "c6179e8ff28b66291b34fe9cf6837d74602da07f22176dca0c83a52c607bff6a",
+    "bytes": 1977
+  },
+  "findings": [
+    {
+      "id": "ER1",
+      "status": "closed"
+    },
+    {
+      "id": "ER2",
+      "status": "closed"
+    },
+    {
+      "id": "ER3",
+      "status": "closed"
+    }
+  ],
+  "sourceIdentityChecks": 1840,
+  "independentJsxAstEquality": 6,
+  "freshBrowserObservations": 30,
+  "targetedAssertionClarifications": 2,
+  "personallyViewedNativeImages": 10,
+  "scientificMainsReplayed": 0,
+  "buildsRunByReviewer": 0,
+  "canonicalOrCentralEdits": false,
+  "evidence": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-ready-r3.json",
+      "sha256": "c6179e8ff28b66291b34fe9cf6837d74602da07f22176dca0c83a52c607bff6a",
+      "bytes": 1977
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-source-r3.json",
+      "sha256": "9508ab0d685a9af3132ed43c9a48ab4275308ddac36b2116b2792e6b790b1db9",
+      "bytes": 303964
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-evidence-r2.json",
+      "sha256": "fdbcef138699740f2845cc9a26683aec06f6da408bad07b61b9c7b8bde71c534",
+      "bytes": 11675
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-author-correction-r2.md",
+      "sha256": "520ce326562aa4384d77f86f24f9d2449eddc932a9ddb8236e592bf61bf91a66",
+      "bytes": 9209
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-content-amendment-r2.md",
+      "sha256": "6767fdc4493cb45fcaf03089f888801fd290d51934cb92a9a8828c7340576180",
+      "bytes": 3029
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-diff-r2.patch",
+      "sha256": "c2bcfebe9be525ce684fbe2b02bcdf82d83459604abac7795ff831d77e45eb06",
+      "bytes": 43428
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-format-review-r3.json",
+      "sha256": "b1f05a0f11a27237634c8949a124ca4fdedbda73fc8979a2f8eefd728556ce3b",
+      "bytes": 7561
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-independent-review-r1.json",
+      "sha256": "5a3b737fca3ebcf01264b1813ea9ff62f3b16d3f5c94f6e1858efae51731bc2e",
+      "bytes": 7262
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-review-r3.md",
+      "sha256": "c4d417c9901616c24bd05ad895295c42cee259cfb22f9ea8dd5c68463298daa5",
+      "bytes": 6381
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/browser.cjs",
+      "sha256": "ab6cbc77c268a14bea43d20c5ce12776c011cc5e46d52ea8ae8137b61ef6dcea",
+      "bytes": 8389
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/browser.json",
+      "sha256": "5ae647f6b80a1be25a7b73da6ada6ea000ebcb53eeb8ad9cbc9668fea480285e",
+      "bytes": 10683
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/continuation.cjs",
+      "sha256": "5ca3b2ac729219550896aaeffc9c41c7b76ed4c78f62c7b9735fbeb1b959056e",
+      "bytes": 2259
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/continuation.json",
+      "sha256": "ca52257267090790e78001f5e1d16e93a6e9db53d4203ad7219f0e92aa5c477f",
+      "bytes": 1573
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E03-product-386-root32.jpg",
+      "sha256": "8454779fbc711f5045460f7cb2064c8f81f4e3334eb7be8552f12e5d48408b40",
+      "bytes": 5246
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E08-prefix-386-root32.jpg",
+      "sha256": "dc78e75aaf794e1af32e5a43929ca9175be6a8d9a93a012ad7a5c233306eb695",
+      "bytes": 5637
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E14-gap-386-root32.jpg",
+      "sha256": "307f38361f5da0ac808eae00dc8518bbe1ae103ef823e3ef5c4c716e94db4c9d",
+      "bytes": 36957
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E22-overhead-386-root32.jpg",
+      "sha256": "8c4049b0ef0d55903905fcff1e6838dcd75f8d5cf73e65676da34a7e30099d51",
+      "bytes": 50743
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E22-zero-native.jpg",
+      "sha256": "04a1f95f923cfa915e058c8a26cff7f109c61d45034567c4fec1ec4cb48bef71",
+      "bytes": 27807
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E29-prefix-386-root32.jpg",
+      "sha256": "6480ff0f08f13ead3888b9fa07ff1361121c8788cbfc9f00e8adb5f0aa8dc494",
+      "bytes": 27062
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E29-supervised-386-root32.jpg",
+      "sha256": "465fe6476d9925e3d8bb99e13d46c15bee7aa5fe047c121f9e5a5c8e5f356b30",
+      "bytes": 55064
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E29-supervised-desktop.jpg",
+      "sha256": "10ad0bfa80d98756eb971e4f60f8cd537ce74d45a5e4a96a5e12ae588c3952c6",
+      "bytes": 24787
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E30-extreme-class2-386-root32.jpg",
+      "sha256": "fcdd4d078f5b075bfcff70656d5d0de28ff342c88327dc9addd831099bc1260b",
+      "bytes": 26525
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/E42-simplex-386-root32.jpg",
+      "sha256": "f9bd47a39f440226a58cdb1d767bbca340e7482258b45b943fe842b3abab9e4e",
+      "bytes": 12968
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/format-check.cjs",
+      "sha256": "3e326ab76ee3eb38780df8492069d7e4fb21f08dd16348b4a70194f40de5e3ea",
+      "bytes": 1314
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/format-check.json",
+      "sha256": "dddd4a337fe50e7750e5216ddf493b96e20ea580959e764530aba59e3ee113c9",
+      "bytes": 607
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-same-r3/source-guards.json",
+      "sha256": "a2c44c70a0284d409e5690b8c464ed950b2c81c9b7f3e535d7a2fa9b4225d7c5",
+      "bytes": 526161
+    }
+  ],
+  "limitations": [
+    "Original whole review and unchanged scientific/delivery evidence reused with exact bindings.",
+    "Normal application integration/loading remains Root-owned and pending.",
+    "Three first-pass reviewer expectation failures retained and resolved by explicit continuation."
+  ],
+  "nextAction": "Root normal source installation and source-matching verification; no automatic phase completion."
+}

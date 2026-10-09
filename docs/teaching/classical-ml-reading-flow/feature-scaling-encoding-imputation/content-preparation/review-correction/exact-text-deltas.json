@@ -1,0 +1,208 @@
+{
+  "schema": "feature20-bounded-F1-F2-delta/v1",
+  "at": "2026-10-09T15:41:26.291929+00:00",
+  "authorization": "Root adopted independent F1 plus bounded F2; no code/source-stream change or replay",
+  "predecessorHandoff": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/review-correction/reviewed-predecessor/whole-review-handoff.json",
+    "bytes": 5864,
+    "sha256": "9bed8c091c950fd69288404afe844861823728dc1a68e9a94350019293a42c29"
+  },
+  "independentWholeReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/independent-content-review/whole-content-review.md",
+    "bytes": 18121,
+    "sha256": "f79d38b66db95fe17a5d65c7d739a692a6b2f07eeb5c54f19b1ecf451ff4809d"
+  },
+  "changedSemanticFiles": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+      "before": {
+        "bytes": 215385,
+        "sha256": "ee185895e6290560d24e94b87fa3a62126f86d950d7761f6b84638abd8884f95"
+      },
+      "after": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+        "bytes": 215186,
+        "sha256": "cabb07a552c707930c01b8a9aa91dc93227fb4c1c7fd81d45220441dad3b5db5"
+      },
+      "edits": [
+        {
+          "finding": "F1-initial",
+          "byteOffsetInSequentialState": 135114,
+          "old": "Column medians initialize missing entries to 3 and 6, giving [3,6] for row 2 and [3,8] for row 3.",
+          "new": "The observed a values [1,2,3,5] have median 2.5; observed b values [2,4,8,10] have median 6. These fill row 2 as [3,6] and row 3 as [2.5,8], giving the initialized matrix [[1,2],[2,4],[3,6],[2.5,8],[5,10]]."
+        },
+        {
+          "finding": "F1-stale",
+          "byteOffsetInSequentialState": 136660,
+          "old": "Feeding stale initialized a=3 into this second regression",
+          "new": "Feeding stale initialized a=2.5 into this second regression"
+        },
+        {
+          "finding": "F1-hint",
+          "byteOffsetInSequentialState": 186167,
+          "old": "Initialize medians [3,6]; after fitting a",
+          "new": "Initialize medians [2.5,6]; after fitting a"
+        },
+        {
+          "finding": "F2-radius",
+          "byteOffsetInSequentialState": 7637,
+          "old": " The predecessor finite two-dimensional radius formula did not establish a reachable clipping defect: its bound is √2/1.35×104≈108.95 pixels, below the 124-pixel cap. The successor specification nevertheless guarantees complete uncapped-radius geometry over its declared domain.",
+          "new": " Keep the complete uncapped-radius geometry visible throughout the declared input domain."
+        },
+        {
+          "finding": "F2-category",
+          "byteOffsetInSequentialState": 21299,
+          "old": "Use a constructed vocabulary `red`, `green`, `blue`; these are category names, not instructions to paint the page green.",
+          "new": "Use the constructed category vocabulary `red`, `green`, `blue`."
+        },
+        {
+          "finding": "F2-mixed",
+          "byteOffsetInSequentialState": 60939,
+          "old": "The complete P4 mixed successor supplies the previously requested indicator and robust extension.",
+          "new": "The complete P4 preparation combines numeric coordinates, category coordinates and the original missing-value mask, with standard or robust scaling."
+        },
+        {
+          "finding": "F2-practice",
+          "byteOffsetInSequentialState": 164882,
+          "old": "Attempt the question before opening its hint or solution. T2–T6 and T8 preserve original core practices 1–6; T10,T9,T24 preserve original deeper practices 7,8,9. T7 preserves the original indicator implementation extension with a complete supported successor. The mapping makes old practice identities explicit while the appended tasks exercise new inputs. A solution explains the tempting wrong route as well as the calculation.",
+          "new": "Attempt each question before opening its hint or solution. The activity IDs T1–T26 identify tasks across the core and deeper branches. Use the fitted rules, source rows and saved state from the worked examples to reason through changed inputs. Each solution explains the tempting wrong route as well as the calculation."
+        }
+      ],
+      "inverseRecoversExactBefore": true
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/core.md",
+      "before": {
+        "bytes": 35372,
+        "sha256": "f6a869069e7f2ff7b3b3f35d8aa3be30ccd05032148dfbab79206f7901bd844e"
+      },
+      "after": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/core.md",
+        "bytes": 35172,
+        "sha256": "d80c829be761c34b9ee5eb5c753e2d12c012fe89e5b6922edc09e176ee15b51d"
+      },
+      "edits": [
+        {
+          "finding": "F2-radius",
+          "byteOffsetInSequentialState": 6855,
+          "old": " The predecessor finite two-dimensional radius formula did not establish a reachable clipping defect: its bound is √2/1.35×104≈108.95 pixels, below the 124-pixel cap. The successor specification nevertheless guarantees complete uncapped-radius geometry over its declared domain.",
+          "new": " Keep the complete uncapped-radius geometry visible throughout the declared input domain."
+        },
+        {
+          "finding": "F2-category",
+          "byteOffsetInSequentialState": 13285,
+          "old": "Use a constructed vocabulary `red`, `green`, `blue`; these are category names, not instructions to paint the page green.",
+          "new": "Use the constructed category vocabulary `red`, `green`, `blue`."
+        },
+        {
+          "finding": "F2-mixed",
+          "byteOffsetInSequentialState": 29517,
+          "old": "The complete P4 mixed successor supplies the previously requested indicator and robust extension.",
+          "new": "The complete P4 preparation combines numeric coordinates, category coordinates and the original missing-value mask, with standard or robust scaling."
+        }
+      ],
+      "inverseRecoversExactBefore": true
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/deeper.md",
+      "before": {
+        "bytes": 37249,
+        "sha256": "7ba771e1a7e757a8f8f21fb650f32dc531ea7d95a61d619b7b12ed01db0bb9ea"
+      },
+      "after": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/deeper.md",
+        "bytes": 37360,
+        "sha256": "ce379ee1226c58ddadc01dc37cac71cec9424fd99254dbc8e7182ce2f1ba1113"
+      },
+      "edits": [
+        {
+          "finding": "F1-initial",
+          "byteOffsetInSequentialState": 25274,
+          "old": "Column medians initialize missing entries to 3 and 6, giving [3,6] for row 2 and [3,8] for row 3.",
+          "new": "The observed a values [1,2,3,5] have median 2.5; observed b values [2,4,8,10] have median 6. These fill row 2 as [3,6] and row 3 as [2.5,8], giving the initialized matrix [[1,2],[2,4],[3,6],[2.5,8],[5,10]]."
+        },
+        {
+          "finding": "F1-stale",
+          "byteOffsetInSequentialState": 26715,
+          "old": "Feeding stale initialized a=3 into this second regression",
+          "new": "Feeding stale initialized a=2.5 into this second regression"
+        }
+      ],
+      "inverseRecoversExactBefore": true
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/practice.md",
+      "before": {
+        "bytes": 21277,
+        "sha256": "7e3054b2d2e9a71030406deef6d35b7b9a784049aad7670e266afdca081e01a2"
+      },
+      "after": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/practice.md",
+        "bytes": 21167,
+        "sha256": "3d8c4a899b6e8fc22eb9f0978f35193472c8fd3c5bc7a082d87c99112fe115fb"
+      },
+      "edits": [
+        {
+          "finding": "F1-hint",
+          "byteOffsetInSequentialState": 16171,
+          "old": "Initialize medians [3,6]; after fitting a",
+          "new": "Initialize medians [2.5,6]; after fitting a"
+        },
+        {
+          "finding": "F2-practice",
+          "byteOffsetInSequentialState": 74,
+          "old": "Attempt the question before opening its hint or solution. T2–T6 and T8 preserve original core practices 1–6; T10,T9,T24 preserve original deeper practices 7,8,9. T7 preserves the original indicator implementation extension with a complete supported successor. The mapping makes old practice identities explicit while the appended tasks exercise new inputs. A solution explains the tempting wrong route as well as the calculation.",
+          "new": "Attempt each question before opening its hint or solution. The activity IDs T1–T26 identify tasks across the core and deeper branches. Use the fitted rules, source rows and saved state from the worked examples to reason through changed inputs. Each solution explains the tempting wrong route as well as the calculation."
+        }
+      ],
+      "inverseRecoversExactBefore": true
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-refinements.md",
+      "before": {
+        "bytes": 8299,
+        "sha256": "90dbe44a9401ef1ed048914e713ae98ee03a938517a7a903cbb49f7bfa9efa6c"
+      },
+      "after": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-refinements.md",
+        "bytes": 8429,
+        "sha256": "8577389bf29aa0a813e503bf52f6dc0b80d5098edceb4a83e148e11b1aebbbcd"
+      },
+      "edits": [
+        {
+          "finding": "F1-D37",
+          "byteOffsetInSequentialState": 3051,
+          "old": "[3,6]. D38 first a regression uses observedrows0,1,2,4 and b[2,4,6,10],",
+          "new": "[2.5,6], from observed a[1,2,3,5] and b[2,4,8,10]. The initialized matrix is\n  [[1,2],[2,4],[3,6],[2.5,8],[5,10]]; row2 a=3 is observed. D38 first a regression uses observedrows0,1,2,4 and b[2,4,6,10],"
+        }
+      ],
+      "inverseRecoversExactBefore": true
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-specifications.md",
+      "before": {
+        "bytes": 40722,
+        "sha256": "10bd71d406940166828d804cb3f5d756c1822b95980ef2f06011e6a73aa8c61e"
+      },
+      "after": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-specifications.md",
+        "bytes": 40852,
+        "sha256": "fac6974a56a32bd052baa1bf55bd9209d70a1b55de66d298368dbd50691065bf"
+      },
+      "edits": [
+        {
+          "finding": "F1-D37",
+          "byteOffsetInSequentialState": 35474,
+          "old": "[3,6]. D38 first a regression uses observedrows0,1,2,4 and b[2,4,6,10],",
+          "new": "[2.5,6], from observed a[1,2,3,5] and b[2,4,8,10]. The initialized matrix is\n  [[1,2],[2,4],[3,6],[2.5,8],[5,10]]; row2 a=3 is observed. D38 first a regression uses observedrows0,1,2,4 and b[2,4,6,10],"
+        }
+      ],
+      "inverseRecoversExactBefore": true
+    }
+  ],
+  "preservedOriginalPractice": "All nine exact retained blocks untouched: edits only outside original blocks and new T23 hint",
+  "unchangedLearnerFileBindings": 42,
+  "unchangedWholeProgrammesAndStreams": true,
+  "deltaPolicy": "Apply edits sequentially; reverse in reverse order. Every inverse byte check passed. Exact predecessor copies preserved.",
+  "execution": "stdlib source/text/hash only; no scientific imports/mains/fits/build/native/browser"
+}

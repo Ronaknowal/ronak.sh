@@ -1,0 +1,263 @@
+{
+  "status": "Private runtime implementation in progress; no readiness claim",
+  "createdUtc": "2026-10-09T16:48:09.772771+00:00",
+  "acceptedContent": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-accepted-root-r3.json",
+    "sha256": "dfab564524602d1ba30fdb37b2d41e1e90f2a07c5e4d252267a704fd5e0e4ae0",
+    "bytes": 19031
+  },
+  "acceptedGuardCount": 98,
+  "manuscript": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/manuscript-complete-r3.md",
+    "sha256": "9c8d45747bc2decf2c998d5aa311493f3e31832872216625dca762527e0b52eb",
+    "bytes": 100772
+  },
+  "visualSpecifications": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/visual-specifications-r3.md",
+    "sha256": "9a13d22f5c6912093a408855ebf63a787d238ea4b9b9b9db89542eb7700681d0",
+    "bytes": 71795
+  },
+  "wholeRead": [
+    "Entire manuscript-complete-r3.md including13programmes and output pairs,14practice groups and6solution snippets",
+    "Entire visual-specifications-r3.md all46contracts/nineinvestigations",
+    "Entire design-r2.md and research-r2.md; r3 stagedMaxEnt and E29/E21 amendments supersede earlier design wording",
+    "Entire original entropy-information-models.js; current lesson-authoring, visuals, code and review guidance",
+    "Actual retained Cover Fig2.1 and Shannon Fig6 images"
+  ],
+  "guardResult": "All98 original accepted requiredFiles match",
+  "programmeProjection": [
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_coin.py",
+        "sha256": "3ed8990146ff30a1012b1ea8aa7082345c3370ad2109476154d6a50097c9a6e3",
+        "bytes": 154
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_coin.py.display.txt",
+        "sha256": "410ae0fe1b4a2b341e350e1318c08cd592c9311f10eda7cf1d0f79f6ff968871",
+        "bytes": 5
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_coin.py.stdout.txt",
+        "sha256": "410ae0fe1b4a2b341e350e1318c08cd592c9311f10eda7cf1d0f79f6ff968871",
+        "bytes": 5
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_prefix.py",
+        "sha256": "e4b4fb4dfc210f9918631bcbeec28425695dd950922acce1a3ad5b8470b459ec",
+        "bytes": 1252
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_prefix.py.display.txt",
+        "sha256": "7ed24ce91add735adcc4749c9ea0ebd95cb17a39770d4a5a0c2087984274a6e6",
+        "bytes": 84
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_prefix.py.stdout.txt",
+        "sha256": "7ed24ce91add735adcc4749c9ea0ebd95cb17a39770d4a5a0c2087984274a6e6",
+        "bytes": 84
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_blocks.py",
+        "sha256": "c350cc2860c8ceae9f2b0b878eb07430a804e76b37a6a64bacc9d600eb97088a",
+        "bytes": 711
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_blocks.py.display.txt",
+        "sha256": "ffacd0fb3fc0c3d635406aacd9fb55f6a93276ddd72e130ceec9e2fecda8f159",
+        "bytes": 187
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_blocks.py.stdout.txt",
+        "sha256": "ffacd0fb3fc0c3d635406aacd9fb55f6a93276ddd72e130ceec9e2fecda8f159",
+        "bytes": 187
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_bernoulli.py",
+        "sha256": "d28fbfc365c00ff5ff8894ce49a9161b839cef6f61729320e9be3dbc31093e29",
+        "bytes": 310
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_bernoulli.py.display.txt",
+        "sha256": "c9a9fd83ea6f1ee66c166c1a10ea972e9666e172c0ef769804cb516d4c01f952",
+        "bytes": 17
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_bernoulli.py.stdout.txt",
+        "sha256": "c9a9fd83ea6f1ee66c166c1a10ea972e9666e172c0ef769804cb516d4c01f952",
+        "bytes": 17
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_support.py",
+        "sha256": "92e20737d064ac3056aff6d1034ecf9bc614f06e953a64958aa3ec5b4339ae7b",
+        "bytes": 1216
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_support.py.display.txt",
+        "sha256": "af7e39604bce5380c3986b32402d49d818db40afc8a7458de4fd58e718d134cf",
+        "bytes": 68
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_support.py.stdout.txt",
+        "sha256": "af7e39604bce5380c3986b32402d49d818db40afc8a7458de4fd58e718d134cf",
+        "bytes": 68
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_conditional.py",
+        "sha256": "eb612681a243677383ce07b1d06bf698ce0ad2fc4e1abc93d8d4fdcbc2efdc90",
+        "bytes": 691
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_conditional.py.display.txt",
+        "sha256": "1b18379ecfe4cb97cb12a0ce4fa36dbf030178855a34ac999d5507405db495b5",
+        "bytes": 78
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_conditional.py.stdout.txt",
+        "sha256": "1b18379ecfe4cb97cb12a0ce4fa36dbf030178855a34ac999d5507405db495b5",
+        "bytes": 78
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/information_library.py",
+        "sha256": "b990bebbf52d1d3e1e27119c5b8be436497b84d81e936dcd41b55a62de67e960",
+        "bytes": 2829
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/information_library.py.display.txt",
+        "sha256": "20e5c8edab827c404dac0059493708ed47e4a18f26b1127a3e4f1cf2e32e9741",
+        "bytes": 453
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/information_library.py.stdout.txt",
+        "sha256": "20e5c8edab827c404dac0059493708ed47e4a18f26b1127a3e4f1cf2e32e9741",
+        "bytes": 453
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_logits.py",
+        "sha256": "e3d73b3fadf53a6cfbbe380bee0d867d8c9d62085d313c6a79d012df1e09797e",
+        "bytes": 574
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_logits.py.display.txt",
+        "sha256": "21e37cc698eb20d7de004557d64c73da21e6612afaacbd9b6e6fd023b6fa1ac9",
+        "bytes": 224
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_logits.py.stdout.txt",
+        "sha256": "21e37cc698eb20d7de004557d64c73da21e6612afaacbd9b6e6fd023b6fa1ac9",
+        "bytes": 224
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_torch.py",
+        "sha256": "fdce63715bb9446d3c4607241e967d3472651001ef8fe9940cea3b350fd69f31",
+        "bytes": 814
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_torch.py.display.txt",
+        "sha256": "56f4d49157eccb4e5e851930ad94aba07b0f2d6021351845109579eab66f2d86",
+        "bytes": 112
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_torch.py.stdout.txt",
+        "sha256": "56f4d49157eccb4e5e851930ad94aba07b0f2d6021351845109579eab66f2d86",
+        "bytes": 112
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_evaluation.py",
+        "sha256": "313c422d72480eef439f33e329bac70ba152bb8e25f69a4a89f62466ece8150b",
+        "bytes": 592
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_evaluation.py.display.txt",
+        "sha256": "707ff49fb5282a8094e7f0e35dc0d09b2f692fc74de97df9a0e4019cda7e3cd3",
+        "bytes": 201
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_evaluation.py.stdout.txt",
+        "sha256": "707ff49fb5282a8094e7f0e35dc0d09b2f692fc74de97df9a0e4019cda7e3cd3",
+        "bytes": 201
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/penguins_log_loss.py",
+        "sha256": "a591e009d34a1f2d088a6f274c4afbf096c7d5191611b836ac05a4b2c7f47eb0",
+        "bytes": 3413
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/penguins_log_loss.py.stdout.txt",
+        "sha256": "7438bb5ddca0135a87e93f2863a070d358fb8e211b48e30a8c9cda3d74bcd063",
+        "bytes": 701
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/penguins_log_loss.py.stdout.txt",
+        "sha256": "7438bb5ddca0135a87e93f2863a070d358fb8e211b48e30a8c9cda3d74bcd063",
+        "bytes": 701
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_continuous.py",
+        "sha256": "537338dcfed092b66685f6a5637460b85d4d5a7f05af081234893b695bf4d682",
+        "bytes": 796
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_continuous.py.display.txt",
+        "sha256": "5c1d7e86daef95889cf4cccf83ecff93043592dc874514e270ffda4729109a25",
+        "bytes": 200
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_continuous.py.stdout.txt",
+        "sha256": "5c1d7e86daef95889cf4cccf83ecff93043592dc874514e270ffda4729109a25",
+        "bytes": 200
+      }
+    },
+    {
+      "programme": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_maximum.py",
+        "sha256": "0d9c5f638c424613d13ad7bad1f7189303bf05d430c163fc4407bfc4daa2c014",
+        "bytes": 821
+      },
+      "recordedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_maximum.py.display.txt",
+        "sha256": "8af9735bfaddd62575504bfb361ca98f26d34bad38ef903b8a9ed84bb6e84d68",
+        "bytes": 243
+      },
+      "deployedOutput": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/public/learn-assets/entropy-information/entropy_maximum.py.stdout.txt",
+        "sha256": "8af9735bfaddd62575504bfb361ca98f26d34bad38ef903b8a9ed84bb6e84d68",
+        "bytes": 243
+      }
+    }
+  ],
+  "scientificMainsReplayed": 0,
+  "preflight": {
+    "command": "node scripts/build-curriculum-inventory.mjs --topic entropy-cross-entropy-kl-divergence --work finish",
+    "result": "Interrupted after prolonged silent global source scan; no success claimed. Current accepted Root receipt releases full private runtime; Root owns final central validator."
+  },
+  "baseline": "Existing intake-frozen-r1 and historical scientific receipts retained; no duplicate baseline archive",
+  "previewArchitecture": "Actual shared TopicContent/Guide/file-registry, source-bound module graph, only topic public assets",
+  "currentOwners": {
+    "private": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1",
+    "scopedHarness": "scratch/entropy-private-reader"
+  },
+  "next": "Implement all accepted drawings/investigations and static manuscript projection; preserve existing science; then build and author whole visual/native/delivery review before frozen DIFFERENT handoff"
+}

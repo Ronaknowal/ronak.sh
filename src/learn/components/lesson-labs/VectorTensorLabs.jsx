@@ -1,315 +1,95 @@
 import { useId, useState } from 'react';
 import { applyMatrix, dot, formatVectorNumber as number, linearMapPresets, matrixProduct, measurementTensor, parseSmallMatrix, productCell, projectVector, reduceMeasurementTensor, tensorAxisNames } from '../../data/vector-tensor-models.js';
+import { FlowLab, FlowSlider } from './LessonFlow.jsx';
+import { CompositionDrawing, MatrixDrawing } from './VectorTensorFigures.jsx';
 import './vector-tensor-labs.css';
-const pair = vector => `(${vector.map(number).join(', ')})`;
-const point = ([x, y], [lower, upper] = [-6, 6]) => {
-  const scale = 264 / (upper - lower);
-  return [38 + (x - lower) * scale, 302 - (y - lower) * scale];
-};
-function Investigation({
-  name,
-  eyebrow,
-  title,
-  children
-}) {
-  return <section className="vector-investigation" data-lab={name} aria-label={title}>
-    <p className="vector-eyebrow">{eyebrow}</p><h3>{title}</h3>{children}
-  </section>;
-}
-function CoordinatePlane({
-  label,
-  vectors = [],
-  segments = [],
-  polygon,
-  domain = [-6, 6],
-  children
-}) {
-  const markerId = useId().replaceAll(':', '');
-  const position = vector => point(vector, domain);
-  const origin = position([0, 0]);
-  const step = domain[1] - domain[0] > 8 ? 2 : 1;
-  const ticks = [];
-  for (let value = Math.ceil(domain[0] / step) * step; value <= domain[1]; value += step) ticks.push(value);
+const pair = v => `(${v.map(number).join(', ')})`;
+const point = ([x, y], [lower, upper]) => [38 + (x - lower) * 264 / (upper - lower), 302 - (y - lower) * 264 / (upper - lower)];
+function CoordinatePlane({ label, vectors = [], segments = [], polygon, domain = [-6, 6] }) {
+  const id = useId().replace(/:/g, ''), xy = v => point(v, domain), origin = xy([0, 0]);
+  const ticks = Array.from({ length: domain[1] - domain[0] + 1 }, (_, i) => domain[0] + i), labels = [];
+  for (const v of vectors) {
+    const same = labels.find(item => item.to[0] === v.to[0] && item.to[1] === v.to[1]);
+    if (same) same.label += ` / ${v.label}`; else labels.push({ ...v });
+  }
   return <svg className="vector-coordinate-plane" viewBox="0 0 340 340" role="img" aria-label={label} data-domain={domain.join(',')}>
-    <title>{label}</title>
-    <defs><marker id={markerId} markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7" fill="context-stroke" /></marker></defs>
-    {ticks.map(value => <g key={value} className="vector-grid-line">
-      <line x1={position([value, 0])[0]} y1="38" x2={position([value, 0])[0]} y2="302" />
-      <line x1="38" y1={position([0, value])[1]} x2="302" y2={position([0, value])[1]} />
-    </g>)}
+    <title>{label}</title><defs><marker id={id} markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7" fill="context-stroke" /></marker></defs>
+    {ticks.map(t => <g key={t} className="vector-grid-line"><line x1={xy([t, 0])[0]} y1="38" x2={xy([t, 0])[0]} y2="302" /><line x1="38" y1={xy([0, t])[1]} x2="302" y2={xy([0, t])[1]} /></g>)}
     <path d={`M25,${origin[1]} H318 M${origin[0]},315 V25`} className="vector-coordinate-axis" />
     <text x="317" y={origin[1] - 12}>x</text><text x={origin[0] + 11} y="29">y</text><text x={origin[0] - 16} y={origin[1] + 18}>0</text>
-    {ticks.filter(value => value !== 0).map(value => <g key={value} className="vector-tick-label"><text x={position([value, 0])[0]} y={origin[1] + 18} textAnchor="middle">{value}</text><text x={origin[0] - 17} y={position([0, value])[1] + 5} textAnchor="end">{value}</text></g>)}
-    {polygon && <polygon className="vector-unit-region" points={polygon.map(vector => position(vector).join(',')).join(' ')} />}
-    {segments.map((segment, index) => <line key={index} x1={position(segment.from)[0]} y1={position(segment.from)[1]} x2={position(segment.to)[0]} y2={position(segment.to)[1]} className={`vector-arrow ${segment.kind}`} />)}
-    {vectors.map((vector, index) => {
-      const start = position(vector.from || [0, 0]);
-      const end = position(vector.to);
-      return <g key={index}>
-        <line x1={start[0]} y1={start[1]} x2={end[0]} y2={end[1]} markerEnd={start[0] === end[0] && start[1] === end[1] ? undefined : `url(#${markerId})`} className={`vector-arrow ${vector.kind}`} />
-        <circle cx={end[0]} cy={end[1]} r={vector.kind === 'original' ? 4 : 3} className={`vector-endpoint ${vector.kind}`} />
-      </g>;
-    })}
-    {children}
+    {ticks.filter(t => t !== 0 && t % 2 === 0).map(t => <g key={t} className="vector-tick-label"><text x={xy([t, 0])[0]} y={origin[1] + 18} textAnchor="middle">{t}</text><text x={origin[0] - 17} y={xy([0, t])[1] + 5} textAnchor="end">{t}</text></g>)}
+    {polygon && <polygon className="vector-unit-region" points={polygon.map(v => xy(v).join(',')).join(' ')} />}
+    {segments.map((s, i) => <line key={i} x1={xy(s.from)[0]} y1={xy(s.from)[1]} x2={xy(s.to)[0]} y2={xy(s.to)[1]} className={`vector-arrow ${s.kind || 'residual'}`} />)}
+    {vectors.map((v, i) => { const start = xy(v.from || [0, 0]), end = xy(v.to); return <g key={i}><line x1={start[0]} y1={start[1]} x2={end[0]} y2={end[1]} className={`vector-arrow ${v.kind}`} markerEnd={start[0] === end[0] && start[1] === end[1] ? undefined : `url(#${id})`} /><circle cx={end[0]} cy={end[1]} r="3.5" className={`vector-endpoint ${v.kind}`} /></g>; })}
+    {labels.map((v, i) => { const end = xy(v.to); return <text key={i} className="vector-label-halo" x={Math.min(285, Math.max(48, end[0] + (v.dx ?? 10)))} y={Math.min(324, Math.max(25, end[1] + (v.dy ?? -12)))} textAnchor={v.anchor || 'start'}>{v.label}</text>; })}
   </svg>;
 }
-function NumericMatrix({
-  values,
-  caption,
-  selectedRow,
-  selectedColumn,
-  selectedCell,
-  onSelect,
-  sourceKeys
-}) {
-  return <div className="vector-matrix-scroll" tabIndex={0} role="region" aria-label={caption}>
-    <table className="vector-value-matrix"><caption>{caption}</caption><tbody>{values.map((row, rowIndex) => <tr key={rowIndex}>{row.map((value, columnIndex) => {
-            const selected = selectedRow === rowIndex || selectedColumn === columnIndex || selectedCell?.[0] === rowIndex && selectedCell?.[1] === columnIndex;
-            return <td key={columnIndex} className={selected ? 'is-selected' : ''} data-source={sourceKeys?.[rowIndex]?.[columnIndex]}>
-        {onSelect ? <button type="button" aria-label={`Output row ${rowIndex}, column ${columnIndex}: ${number(value)}`} aria-pressed={selected} onClick={() => onSelect(rowIndex, columnIndex)}>{number(value)}</button> : number(value)}
-      </td>;
-          })}</tr>)}</tbody></table>
-  </div>;
+function NumericMatrix({ values, caption, selectedRow, selectedColumn, selectedCell, onSelect }) {
+  return <div className="vector-matrix-scroll" tabIndex={0} role="region" aria-label={caption}><table className="vector-value-matrix"><caption>{caption}</caption><tbody>{values.map((row, i) => <tr key={i}>{row.map((value, j) => {
+    const selected = selectedRow === i || selectedColumn === j || (selectedCell?.[0] === i && selectedCell?.[1] === j);
+    return <td key={j} className={selected ? 'is-selected' : ''}>{onSelect ? <button type="button" aria-label={`Output row ${i}, column ${j}: ${number(value)}`} aria-pressed={selected} onClick={() => onSelect(i, j)}>{number(value)}</button> : number(value)}</td>;
+  })}</tr>)}</tbody></table></div>;
 }
 export function VectorCombinationFigure() {
-  return <figure className="vector-inline-figure">
-    <figcaption>Two moves become one displacement</figcaption>
-    <CoordinatePlane domain={[-2, 4]} label="Move from (0,0) to (2,1), then add (-1,2) to arrive at (1,3)." vectors={[{
-      to: [2, 1],
-      kind: 'basis-one'
-    }, {
-      from: [2, 1],
-      to: [1, 3],
-      kind: 'basis-two'
-    }, {
-      to: [1, 3],
-      kind: 'original'
-    }]} />
-    <p><span className="vector-key basis-one">Solid green: u=(2,1)</span> → <span className="vector-key basis-two">dashed blue: v=(−1,2), moved to u's tip</span> → <span className="vector-key original">gold: u+v=(1,3)</span>. The second arrow still means left one/up two; moving its tail does not change that displacement. Axes use the same distance unit and scale.</p>
-  </figure>;
+  return <figure className="vector-inline-figure" aria-label="Two displacement arrows joined head to tail"><CoordinatePlane domain={[-2, 4]} label="Move (2,1), then (-1,2), ending at (1,3)." vectors={[{ to: [2, 1], kind: 'basis-one', label: 'u=(2,1)', dy: 20 }, { from: [2, 1], to: [1, 3], kind: 'basis-two', label: 'v=(−1,2)', dx: 10 }, { to: [1, 3], kind: 'original', label: 'u+v', dx: -10, anchor: 'end' }]} /><p>First u: two east, one north. Dashed v: one west, two north from u’s tip. Total u+v=(1,3) runs from start to finish. Equal coordinate scales use metres.</p></figure>;
+}
+export function ProjectionGeometryFigure() {
+  return <figure className="vector-inline-figure" aria-label="A vector separated into an along-line point and a perpendicular remainder"><CoordinatePlane domain={[-5,5]} label="v=(3,2), line through u=(2,1), point p=(3.2,1.6), dotted remainder (-.2,.4)." vectors={[{to:[2,1],kind:'basis-two',label:'u',dx:-12,dy:22,anchor:'end'},{to:[3.2,1.6],kind:'basis-one',label:'p',dx:12,dy:10},{to:[3,2],kind:'original',label:'v',dx:0,dy:-18}]} segments={[{from:[3.2,1.6],to:[3,2]}]} /><p>The point p lies along u’s line; the dotted connector from p to v is perpendicular to it. The next calculation finds that point, rather than assuming its coordinates.</p></figure>;
 }
 export function VectorProjectionLab() {
-  const controlsId = useId();
-  const [horizontal, setHorizontal] = useState(1);
-  const [vertical, setVertical] = useState(4);
-  const [directionKey, setDirectionKey] = useState('diagonal');
-  const vector = [horizontal, vertical];
-  const direction = {
-    diagonal: [2, 1],
-    horizontal: [1, 0],
-    zero: [0, 0]
-  }[directionKey];
-  const result = projectVector(vector, direction);
-  const reset = () => {
-    setHorizontal(1);
-    setVertical(4);
-    setDirectionKey('diagonal');
-  };
-  return <Investigation name="vector-projection" eyebrow="ALONG A DIRECTION, THEN WHAT REMAINS" title="A dot product locates a projection">
-    <p>Now start with v=(1,4), which makes the perpendicular remainder easier to see. Inspect its signed contribution along u while changing it. Coordinates apply immediately. The dotted connector is v−p; set v=(3,2) to revisit the hand calculation above.</p>
-    <div className="vector-controls">
-      <label htmlFor={`${controlsId}-v-horizontal`}>v horizontal coordinate <output>{horizontal}</output><input id={`${controlsId}-v-horizontal`} aria-label="v horizontal coordinate" type="range" min="-4" max="4" step="1" value={horizontal} onChange={event => setHorizontal(Number(event.target.value))} /></label>
-      <label htmlFor={`${controlsId}-v-vertical`}>v vertical coordinate <output>{vertical}</output><input id={`${controlsId}-v-vertical`} aria-label="v vertical coordinate" type="range" min="-4" max="4" step="1" value={vertical} onChange={event => setVertical(Number(event.target.value))} /></label>
-      <label>Direction u<select value={directionKey} onChange={event => setDirectionKey(event.target.value)}><option value="diagonal">u=(2,1)</option><option value="horizontal">u=(1,0)</option><option value="zero">u=(0,0): test the boundary</option></select></label>
-    </div>
-    <div className="vector-geometric-reading"><CoordinatePlane label={`v=${pair(vector)}, direction u=${pair(direction)}${result.projection ? `, projection p=${pair(result.projection)}, residual=${pair(result.residual)}` : ', projection undefined'}`} vectors={[{
-        to: direction,
-        kind: 'basis-two'
-      }, ...(result.projection ? [{
-        to: result.projection,
-        kind: 'basis-one'
-      }] : []), {
-        to: vector,
-        kind: 'original'
-      }]} segments={result.projection ? [{
-        from: result.projection,
-        to: vector,
-        kind: 'residual'
-      }] : []} />
-      <div className="vector-result" aria-live="polite">
-        <p className="vector-key original">Gold v={pair(vector)}</p><p className="vector-key basis-two">Dashed blue u={pair(direction)}</p>
-        <p data-result="dot">v·u = {horizontal}×{direction[0]} + {vertical}×{direction[1]} = <strong>{number(result.product)}</strong></p>
-        {result.projection ? <>
-          <p>Coefficient = {number(result.product)} / {number(dot(direction, direction))} = {number(result.coefficient)}</p>
-          <p className="vector-key basis-one" data-result="projection">Solid green p = {pair(result.projection)}</p>
-          <p data-result="residual">Dotted residual v−p = {pair(result.residual)}</p>
-          <p>Residual · u = {number(dot(result.residual, direction))}</p>
-          <p>Cosine: {result.cosine === null ? 'undefined because v is zero' : number(result.cosine)}</p>
-        </> : <p role="status">There is no direction to project onto: u·u=0, so division would be undefined. The dot product is still zero.</p>}
-      </div>
-    </div>
-    <p className="vector-note">Equal coordinate scales; positions are exact calculations, displayed decimals rounded to three places. Coincident or zero arrows may overlap; the labelled coordinates remain available. A negative coefficient places p on the opposite half of u's line.</p>
-    <button type="button" onClick={reset}>Reset projection</button>
-    <details><summary>Try a changed case</summary><p>Use v=(−1,2), u=(2,1): dot=0, p=(0,0), and the entire v is perpendicular residual. Change v to (−2,−1): p=v and the coefficient is −1. Zero residual means v lies on the line, including its negative direction.</p></details>
-  </Investigation>;
+  const [horizontal, setHorizontal] = useState(3), [vertical, setVertical] = useState(2), [directionKey, setDirectionKey] = useState('diagonal');
+  const vector = [horizontal, vertical], direction = { diagonal: [2, 1], horizontal: [1, 0], zero: [0, 0] }[directionKey], result = projectVector(vector, direction);
+  return <FlowLab label="Separate a vector into along-line and perpendicular parts"><div className="vector-investigation" data-lab="vector-projection">
+    <CoordinatePlane domain={[-5, 5]} label={`v=${pair(vector)}, u=${pair(direction)}; ${result.projection ? `p=${pair(result.projection)}, remainder=${pair(result.residual)}` : 'no projection line'}`} vectors={[{ to: direction, kind: 'basis-two', label: 'u', dx: -12, dy: 22, anchor: 'end' }, ...(result.projection ? [{ to: result.projection, kind: 'basis-one', label: 'p', dx: 12, dy: 10 }] : []), { to: vector, kind: 'original', label: 'v', dx: 0, dy: -18 }]} segments={result.projection ? [{ from: result.projection, to: vector }] : []} />
+    <div className="vector-controls"><FlowSlider name="v horizontal coordinate" value={horizontal} onChange={setHorizontal} min={-4} max={4} step={.25} /><FlowSlider name="v vertical coordinate" value={vertical} onChange={setVertical} min={-4} max={4} step={.25} /><label>Direction u<select value={directionKey} onChange={e => setDirectionKey(e.target.value)}><option value="diagonal">u=(2,1)</option><option value="horizontal">u=(1,0)</option><option value="zero">u=(0,0): no direction</option></select></label></div>
+    <div className="vector-result" aria-live="polite"><p>v={pair(vector)}; dashed u={pair(direction)}; v·u={number(result.product)}.</p>{result.projection ? <><p data-result="projection">p={pair(result.projection)}, coefficient {number(result.coefficient)}; dotted remainder v−p={pair(result.residual)}.</p><p data-result="residual">Remainder · u={number(dot(result.residual, direction))}. Cosine: {result.cosine === null ? 'undefined for zero v' : number(result.cosine)}.</p></> : <p role="status">u·u=0: no projection line. Dot product remains zero.</p>}</div>
+    <button type="button" onClick={() => { setHorizontal(3); setVertical(2); setDirectionKey('diagonal'); }}>Reset projection</button>
+    <p>Try v=(−1,2): p=0, so the entire vector is perpendicular remainder. Then v=(−2,−1): p=v, on the opposite half of u’s line. Fixed [−5,5] axes keep lengths comparable; coincident endpoint names are combined without moving points.</p>
+  </div></FlowLab>;
 }
 export function LinearMapLab() {
-  const controlsId = useId();
-  const [preset, setPreset] = useState('shear');
-  const [horizontal, setHorizontal] = useState(2);
-  const [vertical, setVertical] = useState(1);
-  const matrix = linearMapPresets[preset].matrix;
-  const vector = [horizontal, vertical];
-  const output = applyMatrix(matrix, vector);
-  const first = applyMatrix(matrix, [1, 0]);
-  const second = applyMatrix(matrix, [0, 1]);
-  const contribution = first.map(value => value * horizontal);
+  const [preset, setPreset] = useState('shear'), [horizontal, setHorizontal] = useState(2), [vertical, setVertical] = useState(1);
+  const matrix = linearMapPresets[preset].matrix, vector = [horizontal, vertical], output = applyMatrix(matrix, vector), first = applyMatrix(matrix, [1, 0]), second = applyMatrix(matrix, [0, 1]), contribution = first.map(v => v * horizontal);
   const square = [[0, 0], [1, 0], [1, 1], [0, 1]];
-  const plottedCoordinates = [...vector, ...output, ...first, ...second, ...contribution, ...square.flat(), ...square.flatMap(corner => applyMatrix(matrix, corner))];
-  const domain = [Math.min(-1, Math.floor(Math.min(...plottedCoordinates)) - 1), Math.max(2, Math.ceil(Math.max(...plottedCoordinates)) + 1)];
-  const reset = () => {
-    setPreset('shear');
-    setHorizontal(2);
-    setVertical(1);
-  };
-  return <Investigation name="linear-map" eyebrow="THE COLUMNS TELL YOU WHERE UNIT STEPS GO" title="Transform a whole shape using two column images">
-    <p>Inspect the destination of x=(2,1) under the shear. Then try a map that collapses the square: can you still recover every original input? Each selection applies immediately; both plots use the same scale.</p>
-    <div className="vector-controls">
-      <label>Linear map<select value={preset} onChange={event => setPreset(event.target.value)}>{Object.entries(linearMapPresets).map(([key, value]) => <option key={key} value={key}>{value.name}</option>)}</select></label>
-      <label htmlFor={`${controlsId}-x-first`}>x first coordinate <output>{horizontal}</output><input id={`${controlsId}-x-first`} aria-label="x first coordinate" type="range" min="-3" max="3" value={horizontal} onChange={event => setHorizontal(Number(event.target.value))} /></label>
-      <label htmlFor={`${controlsId}-x-second`}>x second coordinate <output>{vertical}</output><input id={`${controlsId}-x-second`} aria-label="x second coordinate" type="range" min="-3" max="3" value={vertical} onChange={event => setVertical(Number(event.target.value))} /></label>
-    </div>
-    <div className="vector-two-planes"><div><h4>Input coordinates</h4><CoordinatePlane domain={domain} label={`Unit square and input x=${pair(vector)}`} polygon={square} vectors={[{
-          to: [1, 0],
-          kind: 'basis-one'
-        }, {
-          to: [0, 1],
-          kind: 'basis-two'
-        }, {
-          to: vector,
-          kind: 'original'
-        }]} /></div><div><h4>Output coordinates</h4><CoordinatePlane domain={domain} label={`Transformed unit square, A e1=${pair(first)}, A e2=${pair(second)}, Ax=${pair(output)}`} polygon={square.map(corner => applyMatrix(matrix, corner))} vectors={[{
-          to: first,
-          kind: 'basis-one'
-        }, {
-          to: second,
-          kind: 'basis-two'
-        }, {
-          to: output,
-          kind: 'original'
-        }]} segments={[{
-          from: [0, 0],
-          to: contribution,
-          kind: 'residual'
-        }, {
-          from: contribution,
-          to: output,
-          kind: 'residual'
-        }]} /></div></div>
-    <div className="vector-matrix-equation"><NumericMatrix values={matrix} caption="A · rows are output coordinates" /><div className="vector-result" aria-live="polite">
-      <p className="vector-key basis-one">Column 1 = A e₁ = {pair(first)}</p><p className="vector-key basis-two">Column 2 = A e₂ = {pair(second)}</p>
-      <p data-result="map-output"><strong>Ax = {horizontal}×{pair(first)} + {vertical}×{pair(second)} = {pair(output)}</strong></p>
-      <p>Row 1: {matrix[0][0]}×{horizontal} + {matrix[0][1]}×{vertical} = {number(output[0])}<br />Row 2: {matrix[1][0]}×{horizontal} + {matrix[1][1]}×{vertical} = {number(output[1])}</p>
-    </div></div>
-    <p className="vector-note">Green solid and blue dashed arrows track unit directions; gold tracks x and Ax. The shaded region is the unit square's image. Both plots share equal x/y scale and the same range; changing inputs may refit both ranges together. Dotted segments add scaled columns head to tail. Collapse to a line or point has zero shaded area; exact coordinates distinguish coincident arrows.</p>
-    <button type="button" onClick={reset}>Reset map</button>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">What does collapse discard?</h4><p>For A=[[1,1],[0,0]], both (1,0) and (0,1) become (1,0). The whole direction (1,−1) becomes zero. No operation on the output alone can recover which of these inputs you supplied. The zero map loses every direction.</p></section>
-  </Investigation>;
+  return <FlowLab label="Matrix columns transform a square and input vector"><div className="vector-investigation" data-lab="linear-map">
+    <div className="vector-two-planes"><div><p>Input · e₁=(1,0), e₂=(0,1)</p><CoordinatePlane domain={[-7, 7]} label={`Unit square and x=${pair(vector)}`} polygon={square} vectors={[{ to: [1, 0], kind: 'basis-one', label: 'e₁', dy: 22 }, { to: [0, 1], kind: 'basis-two', label: 'e₂', dx: -12, anchor: 'end' }, { to: vector, kind: 'original', label: 'x', dy: -18 }]} /></div><div><p>Output · columns c₁=Ae₁, c₂=Ae₂</p><CoordinatePlane domain={[-7, 7]} label={`Image square; columns ${pair(first)}, ${pair(second)}; Ax=${pair(output)}`} polygon={square.map(p => applyMatrix(matrix, p))} vectors={[{ to: first, kind: 'basis-one', label: 'c₁', dy: 22 }, { to: second, kind: 'basis-two', label: 'c₂', dx: -12, anchor: 'end' }, { to: output, kind: 'original', label: 'Ax', dy: -18 }]} segments={[{ from: [0, 0], to: contribution }, { from: contribution, to: output }]} /></div></div>
+    <div className="vector-controls"><label>Linear map<select value={preset} onChange={e => setPreset(e.target.value)}>{Object.entries(linearMapPresets).map(([key, value]) => <option key={key} value={key}>{value.name}</option>)}</select></label><FlowSlider name="x first coordinate" value={horizontal} onChange={setHorizontal} min={-3} max={3} step={.25} /><FlowSlider name="x second coordinate" value={vertical} onChange={setVertical} min={-3} max={3} step={.25} /></div>
+    <NumericMatrix values={matrix} caption="A · rows calculate output coordinates" /><p className="vector-result" data-result="map-output" aria-live="polite">c₁={pair(first)}, c₂={pair(second)}; <strong>Ax={horizontal}c₁+{vertical}c₂={pair(output)}</strong>. Dotted segments join the scaled columns head to tail.</p>
+    <button type="button" onClick={() => { setPreset('shear'); setHorizontal(2); setVertical(1); }}>Reset map</button><p>Both panels use fixed [−7,7] equal-scale axes. Identity preserves x; collapse keeps only x₁+x₂; zero loses both coordinates. The shaded unit-square image can collapse to a line or point.</p>
+  </div></FlowLab>;
 }
 export function MatrixProductLab() {
-  const defaults = {
-    left: [[2, 1], [0, 3], [1, 2]],
-    right: [[3, 2], [5, 4]]
-  };
-  const [leftText, setLeftText] = useState('2,1;0,3;1,2');
-  const [rightText, setRightText] = useState('3,2;5,4');
-  const [active, setActive] = useState(defaults);
-  const [selection, setSelection] = useState([0, 0]);
-  const [terms, setTerms] = useState(0);
-  const [error, setError] = useState('');
+  const defaults = { left: [[2, 1], [0, 3], [1, 2]], right: [[3, 2], [5, 4]] };
+  const [leftText, setLeftText] = useState('2,1;0,3;1,2'), [rightText, setRightText] = useState('3,2;5,4'), [active, setActive] = useState(defaults), [selection, setSelection] = useState([0, 0]), [terms, setTerms] = useState(0), [error, setError] = useState('');
   const result = productCell(active.left, active.right, selection[0], selection[1], terms);
-  const apply = event => {
-    event.preventDefault();
-    try {
-      const left = parseSmallMatrix(leftText);
-      const right = parseSmallMatrix(rightText);
-      matrixProduct(left, right);
-      setActive({
-        left,
-        right
-      });
-      setSelection([0, 0]);
-      setTerms(0);
-      setError('');
-    } catch (failure) {
-      setError(failure.message);
-    }
-  };
-  const reset = () => {
-    setLeftText('2,1;0,3;1,2');
-    setRightText('3,2;5,4');
-    setActive(defaults);
-    setSelection([0, 0]);
-    setTerms(0);
-    setError('');
-  };
-  return <Investigation name="matrix-product" eyebrow="ONE OUTPUT, ONE ROW, ONE COLUMN" title="Watch the shared index get summed away">
-    <p>Select an output cell, predict its value and add its contributions one at a time. The starting left matrix is orders×products; the right is products×resources. Indices shown here start at zero.</p>
-    <form className="vector-controls" onSubmit={apply}>
-      <label>Left matrix · commas within rows; semicolons between rows<input value={leftText} onChange={event => setLeftText(event.target.value)} /></label>
-      <label>Right matrix<input value={rightText} onChange={event => setRightText(event.target.value)} /></label>
-      <button type="submit">Apply matrices</button>
-    </form>
-    {error && <p className="vector-error" role="alert">{error} The active matrices and trace were kept.</p>}
-    <p className="vector-note">Draft text changes only after Apply matrices. Maximum 3×3, values −20…20. Custom entries are numerical examples; assign their own axis meanings before interpreting them as orders.</p>
-    <div className="vector-product-grid">
-      <NumericMatrix values={active.left} selectedRow={selection[0]} caption={`Left (${active.left.length},${active.left[0].length}) · selected row ${selection[0]}`} />
-      <span className="vector-operation-symbol">×</span>
-      <NumericMatrix values={active.right} selectedColumn={selection[1]} caption={`Right (${active.right.length},${active.right[0].length}) · selected column ${selection[1]}`} />
-      <span className="vector-operation-symbol">=</span>
-      <NumericMatrix values={result.result} selectedCell={selection} caption="Full product · select a cell to inspect" onSelect={(row, column) => {
-        setSelection([row, column]);
-        setTerms(0);
-      }} />
-    </div>
-    <ol className="vector-product-terms">{result.contributions.map(term => <li key={term.index} className={term.index < terms ? 'is-included' : ''}>k={term.index}: {number(term.left)} × {number(term.right)} = {number(term.product)} <span>{term.index < terms ? 'included' : 'not added yet'}</span></li>)}</ol>
-    <p className="vector-result" aria-live="polite" data-result="partial">Partial sum: <strong>{number(result.partial)}</strong> · {terms} of {active.right.length} contributions added. {terms === active.right.length ? 'This now equals the selected full-product cell.' : 'The full product above is the destination, not the current partial sum.'}</p>
-    <div className="vector-step-controls"><button type="button" disabled={terms === 0} onClick={() => setTerms(value => value - 1)}>Remove last term</button><button type="button" disabled={terms === active.right.length} onClick={() => setTerms(value => value + 1)}>Add next term</button><button type="button" onClick={reset}>Reset product</button></div>
-    <details><summary>Try a compatible shape with a different meaning</summary><p>Use left 1,2,3 and right 1;0;−1. The product has shape (1,1) and value −2. Elementwise multiplication cannot replace this weighted sum: it would preserve or broadcast positions instead of summing the shared three-coordinate index.</p></details>
-  </Investigation>;
+  function edit(side, text) {
+    const leftDraft = side === 'left' ? text : leftText, rightDraft = side === 'right' ? text : rightText;
+    if (side === 'left') setLeftText(text); else setRightText(text);
+    try { const left = parseSmallMatrix(leftDraft), right = parseSmallMatrix(rightDraft); matrixProduct(left, right); setActive({ left, right }); setSelection(([r, c]) => [Math.min(r, left.length - 1), Math.min(c, right[0].length - 1)]); setTerms(t => Math.min(t, right.length)); setError(''); }
+    catch (failure) { setError(failure.message); }
+  }
+  return <FlowLab label="Inspect a row-column matrix contraction"><div className="vector-investigation" data-lab="matrix-product">
+    <div className="vector-product-grid"><NumericMatrix values={active.left} selectedRow={selection[0]} caption={`Left · (${active.left.length},${active.left[0].length}), order row ${selection[0]}`} /><span className="vector-operation-symbol">×</span><NumericMatrix values={active.right} selectedColumn={selection[1]} caption={`Right · (${active.right.length},${active.right[0].length}), resource column ${selection[1]}`} /><span className="vector-operation-symbol">=</span><NumericMatrix values={result.result} selectedCell={selection} caption="Full product · select one output" onSelect={(r, c) => { setSelection([r, c]); setTerms(0); }} /></div>
+    <ol className="vector-product-terms">{result.contributions.map(term => <li key={term.index} className={term.index < terms ? 'is-included' : ''}>k={term.index}: {number(term.left)} × {number(term.right)} = {number(term.product)} · {term.index < terms ? 'added' : 'not yet in partial sum'}</li>)}</ol>
+    <div className="vector-controls"><label>Left matrix · commas within rows; semicolons between rows<input value={leftText} onChange={e => edit('left', e.target.value)} /></label><label>Right matrix<input value={rightText} onChange={e => edit('right', e.target.value)} /></label></div>
+    {error && <p className="vector-error" role="alert">{error} The drawings show the last valid matrices, not the invalid draft.</p>}
+    <p className="vector-result" aria-live="polite" data-result="partial">Partial sum: <strong>{number(result.partial)}</strong>, {terms}/{active.right.length} contributions; selected full result <strong>{number(result.result[selection[0]][selection[1]])}</strong>.</p>
+    <div className="vector-step-controls"><button type="button" disabled={terms === 0} onClick={() => setTerms(t => t - 1)}>Remove last term</button><button type="button" disabled={terms === active.right.length} onClick={() => setTerms(t => t + 1)}>Add next term</button><button type="button" onClick={() => { setLeftText('2,1;0,3;1,2'); setRightText('3,2;5,4'); setActive(defaults); setSelection([0, 0]); setTerms(0); setError(''); }}>Reset product</button></div>
+    <p>Valid edits apply immediately; maximum 3×3 and entries −20…20. Custom matrices need their own axis meanings. Try left 1,2,3 and right 1;0;−1: shape (1,1), result −2. A zero row contributes zero at every step.</p>
+  </div></FlowLab>;
 }
 export function TensorReductionLab() {
-  const [dataset, setDataset] = useState('ramp');
-  const [axis, setAxis] = useState(1);
-  const [selection, setSelection] = useState([0, 0]);
-  const tensor = measurementTensor(dataset);
-  const reduction = reduceMeasurementTensor(tensor, axis);
-  const selected = reduction.cells[selection[0]][selection[1]];
-  const sources = new Set(selected.sources.map(source => source.coordinate.join(',')));
-  const reset = () => {
-    setDataset('ramp');
-    setAxis(1);
-    setSelection([0, 0]);
-  };
-  return <Investigation name="tensor-reduction" eyebrow="HOLD THE SURVIVING INDICES FIXED" title="An average removes a named axis">
-    <p>This invented measurement array has shape (2 sessions, 2 times, 3 channels), all in the same arbitrary unit. Inspect which values contribute to the highlighted output. Changing an axis or dataset applies immediately and selects the first output cell.</p>
-    <div className="vector-controls"><label>Dataset<select value={dataset} onChange={event => {
-          setDataset(event.target.value);
-          setSelection([0, 0]);
-        }}><option value="ramp">Distinct values 0…11</option><option value="repeat">Repeat the same session</option><option value="impulse">One reading of 12, all others zero</option></select></label><label>Average over<select value={axis} onChange={event => {
-          setAxis(Number(event.target.value));
-          setSelection([0, 0]);
-        }}>{tensorAxisNames.map((name, index) => <option key={name} value={index}>axis {index}: {name}</option>)}</select></label></div>
-    <div className="vector-tensor-slices">{tensor.map((session, sessionIndex) => <div key={sessionIndex}><h4>Session {sessionIndex}</h4><p className="vector-note">rows: time 0,1 · columns: channel 0,1,2</p><table className="vector-tensor-source"><tbody>{session.map((row, time) => <tr key={time}>{row.map((value, channel) => <td key={channel} className={sources.has([sessionIndex, time, channel].join(',')) ? 'is-selected' : ''} data-coordinate={[sessionIndex, time, channel].join(',')}><strong>{value}</strong><small>({sessionIndex},{time},{channel})</small></td>)}</tr>)}</tbody></table></div>)}</div>
-    <NumericMatrix values={reduction.cells.map(row => row.map(cell => cell.mean))} selectedCell={selection} onSelect={(row, column) => setSelection([row, column])} caption={`Mean shape (${reduction.shape.join(',')}) · rows: ${reduction.axisNames[0]}, columns: ${reduction.axisNames[1]}`} />
-    <p className="vector-result" aria-live="polite" data-result="reduction">For output ({selection.join(',')}): ({selected.sources.map(source => source.value).join(' + ')}) / {selected.sources.length} = <strong>{number(selected.mean)}</strong>. Only the {tensorAxisNames[axis]} index varies.</p>
-    <p className="vector-note">Outlined source cells supply that one mean; parenthesized labels are (session,time,channel), not values. Removing the session axis combines sessions. Removing time keeps sessions separate. Removing channel mixes channels and is meaningful only if the channel-average answers your question.</p>
-    <button type="button" onClick={reset}>Reset tensor</button>
-    <details><summary>Try a changed dataset</summary><p>Choose the single reading of 12. Averaging time divides it by 2; averaging channels divides it by 3. Averaging sessions also divides it by 2, but its surviving labels are time/channel instead of session/channel. Equal output sizes do not imply equal questions.</p></details>
-  </Investigation>;
+  const [dataset, setDataset] = useState('ramp'), [axis, setAxis] = useState(1), [selection, setSelection] = useState([0, 0]);
+  const tensor = measurementTensor(dataset), reduction = reduceMeasurementTensor(tensor, axis), selected = reduction.cells[selection[0]][selection[1]], sources = new Set(selected.sources.map(s => s.coordinate.join(',')));
+  return <FlowLab label="Average one tensor axis and preserve the other two"><div className="vector-investigation" data-lab="tensor-reduction">
+    <div className="vector-tensor-slices">{tensor.map((session, s) => <div key={s}><p>Session {s} · time rows, channel columns</p><table className="vector-tensor-source"><thead><tr><th aria-label="time rows" /><th scope="col">c0</th><th scope="col">c1</th><th scope="col">c2</th></tr></thead><tbody>{session.map((row, t) => <tr key={t}><th scope="row">t{t}</th>{row.map((value, c) => <td key={c} className={sources.has([s, t, c].join(',')) ? 'is-selected' : ''} data-coordinate={[s, t, c].join(',')}><strong>{value}</strong><small>({s},{t},{c})</small></td>)}</tr>)}</tbody></table></div>)}</div>
+    <NumericMatrix values={reduction.cells.map(row => row.map(cell => cell.mean))} selectedCell={selection} onSelect={(r, c) => setSelection([r, c])} caption={`Mean shape (${reduction.shape.join(',')}) · rows ${reduction.axisNames[0]}, columns ${reduction.axisNames[1]}`} />
+    <div className="vector-controls"><label>Dataset<select value={dataset} onChange={e => { setDataset(e.target.value); setSelection([0, 0]); }}><option value="ramp">Distinct values 0…11</option><option value="repeat">Repeat the same session</option><option value="impulse">One reading of 12; others zero</option></select></label><label>Average over<select value={axis} onChange={e => { setAxis(Number(e.target.value)); setSelection([0, 0]); }}>{tensorAxisNames.map((name, i) => <option key={name} value={i}>axis {i}: {name}</option>)}</select></label></div>
+    <p className="vector-result" aria-live="polite" data-result="reduction">Output ({selection.join(',')}): ({selected.sources.map(s => s.value).join(' + ')})/{selected.sources.length}=<strong>{number(selected.mean)}</strong>. Only {tensorAxisNames[axis]} varies; {reduction.axisNames.join(' and ')} survive.</p>
+    <button type="button" onClick={() => { setDataset('ramp'); setAxis(1); setSelection([0, 0]); }}>Reset tensor</button><p>Outlined cells supply one mean; coordinates are (session,time,channel). The impulse gives 12/2 under time averaging, 12/3 under channel averaging. Session averaging also divides by 2 but preserves different indices. Repeated sessions supply a null comparison.</p>
+  </div></FlowLab>;
 }
 export function TensorReindexFigure() {
-  return <figure className="vector-inline-figure"><figcaption>Same six values, two different rearrangements</figcaption>
-    <div className="vector-reindex-grid">
-      <NumericMatrix values={[[0, 1, 2], [3, 4, 5]]} caption="Original (2,3)" />
-      <NumericMatrix values={[[0, 3], [1, 4], [2, 5]]} caption="Transpose (3,2) · swap row and column" />
-      <NumericMatrix values={[[0, 1], [2, 3], [4, 5]]} caption="C-order reshape (3,2) · regroup the row-wise sequence" />
-    </div><p>Follow value 3: (row 1,column 0) → (row 0,column 1) under transpose; → (row 1,column 1) under reshape. Both results have shape (3,2). Their coordinate meanings differ. Reshape's order here is NumPy's default C index order; it is not a claim about physical storage.</p>
-  </figure>;
+  return <figure className="vector-inline-figure" aria-label="Marker 3 followed through transpose and C-order reshape"><div className="vector-reindex-grid"><MatrixDrawing values={[[0, 1, 2], [3, 4, 5]]} label="Original (2,3) · marker (1,0)" mark={(i, j) => i === 1 && j === 0} /><MatrixDrawing values={[[0, 3], [1, 4], [2, 5]]} label="Transpose (3,2) · marker (0,1)" mark={(i, j) => i === 0 && j === 1} /><MatrixDrawing values={[[0, 1], [2, 3], [4, 5]]} label="C-order reshape (3,2) · marker (1,1)" mark={(i, j) => i === 1 && j === 1} /></div><p>The outline follows the same value 3. Reshape uses row-wise index order; this says nothing about physical storage.</p></figure>;
 }
-export function CompositionFigure() {
-  return <figure className="vector-inline-figure"><figcaption>Changing the order changes the destination</figcaption>
-    <div className="vector-composition-lanes"><p><strong>Start (1,1)</strong><span>stretch horizontal ×2 → (2,1)</span><span>quarter-turn → <strong>(−1,2)</strong></span></p><p><strong>Start (1,1)</strong><span>quarter-turn → (−1,1)</span><span>stretch horizontal ×2 → <strong>(−2,1)</strong></span></p></div>
-    <p>Both chains use the same two maps. The stretch acts along the fixed horizontal axis, so rotating before it changes which component is doubled. For column vectors, the rightmost matrix acts first.</p>
-  </figure>;
-}
+export const CompositionFigure = CompositionDrawing;

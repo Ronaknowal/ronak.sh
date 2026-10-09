@@ -1,0 +1,301 @@
+{
+  "schema": "feature20-text-size-built-comparison/v1",
+  "at": "2026-10-09T18:50:54.008676+00:00",
+  "built_module_map": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/root-native-review/text-size-preview/build-private/private-module-map.json",
+    "bytes": 10426,
+    "sha256": "9af05c659bae273a555659a74a12ef1310518a5edfd2d02ed47a71ef3b50ae4d"
+  },
+  "prior_module_map": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/build-private/private-module-map.json",
+    "bytes": 10389,
+    "sha256": "61513602c68365a5b18ff9e49b136ca9c584360d446843a71f3b4fd20222b3e8"
+  },
+  "compiled_count": 51,
+  "unchanged_count": 49,
+  "bounded_difference_count": 2,
+  "unchanged": [
+    {
+      "path": "node_modules/react/cjs/react-jsx-runtime.production.js",
+      "bytes": 976,
+      "sha256": "1e46f15002696985e80c61d47aaa30dabb03c954270a690f5f7dfbbacfa9002b"
+    },
+    {
+      "path": "node_modules/react/jsx-runtime.js",
+      "bytes": 210,
+      "sha256": "b392951a77d0a2e6a6bd017e49d768481ae5b63c4109c6c31f622cf7b2433edc"
+    },
+    {
+      "path": "node_modules/react/cjs/react.production.js",
+      "bytes": 17217,
+      "sha256": "6a3554a5287116df819640334924348287618dcdcd7124a05eb126dcbbecd5f9"
+    },
+    {
+      "path": "node_modules/react/index.js",
+      "bytes": 186,
+      "sha256": "60caffdecbdc5db3bc4ec4e83df9488345ccb271d07533b9210bf5750918d97e"
+    },
+    {
+      "path": "node_modules/scheduler/cjs/scheduler.production.js",
+      "bytes": 10181,
+      "sha256": "679adff761d31e9426604f80c0e99be44a3e6f4c6834b0218ecf0312a67c171f"
+    },
+    {
+      "path": "node_modules/scheduler/index.js",
+      "bytes": 194,
+      "sha256": "145965504d60007bc25486ab930b0367867dcd5d579ccd343c148d69349a7cfb"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom.production.js",
+      "bytes": 6655,
+      "sha256": "7a5e56724be242e34ddc14f9d0dc7fc6a32f1367ae994f02d3699b00c085eff4"
+    },
+    {
+      "path": "node_modules/react-dom/index.js",
+      "bytes": 1359,
+      "sha256": "ba1a3e33489f868371561777607e3ee5091df0f7ea3f1a10f789d6b86e4c1505"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom-client.production.js",
+      "bytes": 536016,
+      "sha256": "764ffa6adc2c9b02b4dc00f4a58ef13d050e7825898bd9e5dc808d3a3f9d4bb9"
+    },
+    {
+      "path": "node_modules/react-dom/client.js",
+      "bytes": 1373,
+      "sha256": "00e348ab3d6bc2eef908345d0bc4e008c95bcfecec060dfda5c4967953761396"
+    },
+    {
+      "path": "node_modules/react-router/dist/development/chunk-UVKPFVEO.mjs",
+      "bytes": 360344,
+      "sha256": "621b9bfd0f8b6bcd5970b75f8a67d67c5c8fc65d72931f0e9169d2246893e5b0"
+    },
+    {
+      "path": "src/learn/data/catalogue.js",
+      "bytes": 477,
+      "sha256": "639cde33208e3e71fcdb4669eafdcaa71abbff1646ae01cbf1f77e623c78d693"
+    },
+    {
+      "path": "src/learn/components/PlaceholderContent.jsx",
+      "bytes": 2665,
+      "sha256": "3e963ae06cb932213259acd5849841816be92f97a1e364b9c5912c509de624a0"
+    },
+    {
+      "path": "src/learn/styles.js",
+      "bytes": 1539,
+      "sha256": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+    },
+    {
+      "path": "src/learn/components/LevelBadge.jsx",
+      "bytes": 629,
+      "sha256": "325fd3eb0b155780333620b584b7a62315fb9647625afb18313ac9c6e16a9647"
+    },
+    {
+      "path": "src/learn/components/lesson-navigation.js",
+      "bytes": 1362,
+      "sha256": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b"
+    },
+    {
+      "path": "src/learn/components/lesson-guide.css",
+      "bytes": 2967,
+      "sha256": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2"
+    },
+    {
+      "path": "src/learn/components/LessonGuide.jsx",
+      "bytes": 2925,
+      "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+    },
+    {
+      "path": "src/learn/components/LessonOpening.jsx",
+      "bytes": 1112,
+      "sha256": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preview-loader.js",
+      "bytes": 201,
+      "sha256": "86c3dd91110be6d25b9744728dd31c780dded846a2334ad80f643affb3ba46c8"
+    },
+    {
+      "path": "src/learn/hooks/useTopicResource.js",
+      "bytes": 991,
+      "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+    },
+    {
+      "path": "src/learn/components/LessonBoundary.jsx",
+      "bytes": 992,
+      "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+    },
+    {
+      "path": "src/learn/components/topic-content.css",
+      "bytes": 2992,
+      "sha256": "8ef6856306e028433ad10d8d18cdaf37362ba9db1a17ab8fbe1e1b76d9ce4fb0"
+    },
+    {
+      "path": "src/learn/components/lesson-endings.css",
+      "bytes": 5203,
+      "sha256": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6"
+    },
+    {
+      "path": "src/learn/components/content/code-downloads.js",
+      "bytes": 1709,
+      "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+    },
+    {
+      "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+      "bytes": 4857,
+      "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+    },
+    {
+      "path": "src/learn/components/content/lesson-code.css",
+      "bytes": 4491,
+      "sha256": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283"
+    },
+    {
+      "path": "src/learn/data/projects/typed-decision-model/metadata.js",
+      "bytes": 3158,
+      "sha256": "9253c1486af2f5a083dd6ad4fafae6eb9d644caca89d22aad4d7ed39313ef1a4"
+    },
+    {
+      "path": "src/learn/data/projects/catalogue.js",
+      "bytes": 610,
+      "sha256": "7b35afa5ba219c9a535ab7c3dc81683cbaf218ae1bd73fd315e4a9bc3ca5562c"
+    },
+    {
+      "path": "src/learn/components/TopicContent.jsx",
+      "bytes": 7106,
+      "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+    },
+    {
+      "path": "src/learn/learning-base.css",
+      "bytes": 19925,
+      "sha256": "595f1446ed9d4e5f7d2710b796be26527b58e78796a34d0bcdf4ffffe0717d97"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/lesson.css",
+      "bytes": 5229,
+      "sha256": "5a4b8b35ed45ad16e8026af38e76db5d5622f77d4e560f1ab738480b39e5a6e9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preview.css",
+      "bytes": 150,
+      "sha256": "73f50de9fdd1b6f193784fd2c7b3ab8a06b194ee04cf72da5c04b9ec2dd76543"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/index.html",
+      "bytes": 297,
+      "sha256": "5820ba2e84cf18c84e591f8bf1c0d754a5757578c309ffdb9d43d8990c371d67"
+    },
+    {
+      "path": "src/learn/components/content/Headings.jsx",
+      "bytes": 1405,
+      "sha256": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f"
+    },
+    {
+      "path": "src/learn/components/content/Prose.jsx",
+      "bytes": 549,
+      "sha256": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff"
+    },
+    {
+      "path": "src/learn/components/content/Code.jsx",
+      "bytes": 3120,
+      "sha256": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e"
+    },
+    {
+      "path": "src/learn/components/content/RemoteCodeBlock.jsx",
+      "bytes": 2455,
+      "sha256": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.min.css",
+      "bytes": 23804,
+      "sha256": "23aefa0850248a16478b9f55d6b67028f74cc0b46b82b24dc22af068acaa4170"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.mjs",
+      "bytes": 597917,
+      "sha256": "e1b9ee63435797f929ceb2faf1defa4e13785d0b93f6330fa263c0dce07f2158"
+    },
+    {
+      "path": "src/learn/components/content/Math.jsx",
+      "bytes": 931,
+      "sha256": "427a466aaa33b2733c7b87cf9c2c8e2ed338a2f234764590b69fafc1b5952459"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/Drawing.jsx",
+      "bytes": 7440,
+      "sha256": "34953be48b4cbd473904992ec38925b86de409326a693e7c3a0ddcf3d8186dcb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preparation-models.mjs",
+      "bytes": 12750,
+      "sha256": "26203e2b7eb08087f756fdd6d9eec4e27f9c26da5918325caf5e8ca527b1d472"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/saved-data.js",
+      "bytes": 73696,
+      "sha256": "a67799995bd747fd7551f0698017b15d11558fe2af8f2c1e2ce78f85cc266f00"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/CoreFigures.jsx",
+      "bytes": 28623,
+      "sha256": "87f2ac8b2600eef3efaa13c94084283117a0da5b21994f9901e3b7a6c59cd11d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/DeeperFigures.jsx",
+      "bytes": 33242,
+      "sha256": "dc76bfccf798d99a264c9fa3d120eca62f90150a55f47786f7257d840399e569"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/PreparationFigures.jsx",
+      "bytes": 306,
+      "sha256": "b60ef65f5800a47905ea1cf6d976b0d1b056bda14fa66dedd69b8bdf4dd49e67"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/PreparationInvestigations.jsx",
+      "bytes": 22696,
+      "sha256": "9b801d68c9486470f298e67299bb977fdb9a583812d60dfcd04643d5e4460d06"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preparation-lesson.jsx",
+      "bytes": 144022,
+      "sha256": "047cbb27237556b6dc0fca3ef69f728f4f42242fbd435127bcca55cf004d1bac"
+    }
+  ],
+  "changed": [
+    {
+      "role": "Root authorized t-SNE metadata shared context at build",
+      "before": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942828,
+        "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+      },
+      "built": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942782,
+        "sha256": "8914a9455626731e23c50d1d8fd2412056178364293b87cf0c4c6a00d0c1b385"
+      },
+      "current_after_build": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942753,
+        "sha256": "11bd8e09909294e6fddf0cdb3d70ca47d8f9b0ce3a60042576fef04b04e4555a"
+      }
+    },
+    {
+      "role": "approved harness entry",
+      "before": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preview-entry.jsx",
+        "bytes": 1158,
+        "sha256": "622af516a322597852f1b30613d4d5ce08a1a924cf58a7a2db0d6eb234b8df8f"
+      },
+      "built": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/root-native-review/text-size-preview/preview-entry.jsx",
+        "bytes": 1779,
+        "sha256": "e04583dcbd27aeec5b6a112bc38da7ed047827edd7e405237ecd26b948e47559"
+      }
+    }
+  ],
+  "limits": [
+    "The exact post-build navigation successor still needs Root context; build retains explicitly accepted8914 shared identity",
+    "No frozen input/source rebind, rebuild or native acceptance"
+  ]
+}

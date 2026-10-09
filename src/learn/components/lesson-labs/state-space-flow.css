@@ -1,0 +1,21 @@
+.state-space-lesson.lesson-flow { container-type: inline-size; }
+.state-flow-drawing { margin: 1.75rem 0; min-width: 0; padding: 0; border: 0; background: none; }
+.state-flow-drawing > svg { display: block; width: 100%; height: auto; max-width: 26rem; }
+.state-flow-drawing > svg text { font-family: var(--font-mono, monospace); }
+.state-flow-drawing figcaption { margin-top: 1rem; color: var(--text-secondary, #bcbcbc); line-height: 1.75; }
+.state-flow-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+@container (max-width: 760px) { .state-flow-columns { grid-template-columns: minmax(0, 1fr); } }
+@container (max-width: 760px) { .state-space-lesson.lesson-flow .ssm-two { grid-template-columns: minmax(0, 1fr); } }
+@container (max-width: 760px) { .state-space-lesson.lesson-flow .ssm-three { grid-template-columns: minmax(0, 1fr); } }
+.state-space-lesson.lesson-flow .ssm-figure,
+.state-space-lesson.lesson-flow .ssm-investigation,
+.state-space-lesson.lesson-flow .ssm-result { border: 0; padding: 0; background: none; border-radius: 0; }
+.state-space-lesson.lesson-flow .state-flow-select { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.state-space-lesson.lesson-flow .state-flow-select select { min-height: max(44px, 2.75rem); width: 100%; max-width: 100%; color: #dedede; background: #151515; border: 1px solid #686868; border-radius: .2rem; padding: .5rem .75rem; font: inherit; }
+.state-space-lesson.lesson-flow .state-flow-select select:focus-visible { outline: 2px solid #e2b55a; outline-offset: 3px; }
+.state-space-lesson.lesson-flow .state-flow-select select[aria-invalid="true"] { border-color: #e99369; }
+.state-space-lesson.lesson-flow .flow-controls button { min-height: max(44px, 2.75rem); }
+.state-space-lesson.lesson-flow .flow-controls input[type="range"] { min-height: 44px; }
+.state-space-lesson.lesson-flow .neural-equation { min-width: 0; max-width: 100%; overflow-x: auto; }
+.state-space-lesson.lesson-flow .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .4rem 0; }
+.lesson-flow.state-space-lesson .ssm-prob-current { background: #baa1e3; }

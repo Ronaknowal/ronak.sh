@@ -1,0 +1,679 @@
+{
+  "status": "PASS_NEW_PENALTIES_MASKS_AND_ONCE_ONLY_MAIN",
+  "inputs": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_penalties_masks.py",
+      "bytes": 15103,
+      "sha256": "d9528c95a1bee35f23ac7922d68a95256ed5be70b4e696fe7df0b777879bec36"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+      "bytes": 9109,
+      "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\check-penalties-masks.py",
+      "bytes": 12019,
+      "sha256": "008060fd9b080628ac6ee0c9e20dd8177330a72dfbd7caf2b2942f76255d707f"
+    }
+  ],
+  "checks": [
+    {
+      "name": "D38 lambda0.0 exact boundary optimum",
+      "passed": true
+    },
+    {
+      "name": "D38 lambda0.0 stationarity",
+      "passed": true
+    },
+    {
+      "name": "D38 lambda1.0 exact boundary optimum",
+      "passed": true
+    },
+    {
+      "name": "D38 lambda1.0 stationarity",
+      "passed": true
+    },
+    {
+      "name": "D38 lambda3.0 exact boundary optimum",
+      "passed": true
+    },
+    {
+      "name": "D38 lambda3.0 stationarity",
+      "passed": true
+    },
+    {
+      "name": "D38 L2 curvature and slope",
+      "passed": true
+    },
+    {
+      "name": "dimension-scaled L1 coefficients",
+      "passed": true
+    },
+    {
+      "name": "unequal-axis mixed coefficients",
+      "passed": true
+    },
+    {
+      "name": "D39 scale1.0 product",
+      "passed": true
+    },
+    {
+      "name": "D39 scale1.0 penalty",
+      "passed": true
+    },
+    {
+      "name": "D39 scale2.0 product",
+      "passed": true
+    },
+    {
+      "name": "D39 scale2.0 penalty",
+      "passed": true
+    },
+    {
+      "name": "D39 scale0.5 product",
+      "passed": true
+    },
+    {
+      "name": "D39 scale0.5 penalty",
+      "passed": true
+    },
+    {
+      "name": "zero-alpha rescaling null",
+      "passed": true
+    },
+    {
+      "name": "D40 m1.0 weighted Gram",
+      "passed": true
+    },
+    {
+      "name": "D40 m1.0 weighted cross",
+      "passed": true
+    },
+    {
+      "name": "D40 m0.0 weighted Gram",
+      "passed": true
+    },
+    {
+      "name": "D40 m0.0 weighted cross",
+      "passed": true
+    },
+    {
+      "name": "D40 m0.25 weighted Gram",
+      "passed": true
+    },
+    {
+      "name": "D40 m0.25 weighted cross",
+      "passed": true
+    },
+    {
+      "name": "measured zero amount1",
+      "passed": true
+    },
+    {
+      "name": "missing cell amount2",
+      "passed": true
+    },
+    {
+      "name": "all-missing quality undefined",
+      "passed": true
+    },
+    {
+      "name": "independent row0 weighted Gram",
+      "passed": true
+    },
+    {
+      "name": "independent row0 cross",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row0 coordinate0",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row0 coordinate1",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row0 coordinate2",
+      "passed": true
+    },
+    {
+      "name": "independent row1 weighted Gram",
+      "passed": true
+    },
+    {
+      "name": "independent row1 cross",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row1 coordinate0",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row1 coordinate1",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row1 coordinate2",
+      "passed": true
+    },
+    {
+      "name": "independent row2 weighted Gram",
+      "passed": true
+    },
+    {
+      "name": "independent row2 cross",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row2 coordinate0",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row2 coordinate1",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row2 coordinate2",
+      "passed": true
+    },
+    {
+      "name": "independent row3 weighted Gram",
+      "passed": true
+    },
+    {
+      "name": "independent row3 cross",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row3 coordinate0",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row3 coordinate1",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row3 coordinate2",
+      "passed": true
+    },
+    {
+      "name": "independent row4 weighted Gram",
+      "passed": true
+    },
+    {
+      "name": "independent row4 cross",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row4 coordinate0",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row4 coordinate1",
+      "passed": true
+    },
+    {
+      "name": "finite-difference row4 coordinate2",
+      "passed": true
+    },
+    {
+      "name": "complete masked objective versus scalar reference",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.0 l20.2 row0",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.0 l20.2 row1",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.0 l20.2 row2",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.0 l20.2 row3",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.0 l20.2 row4",
+      "passed": true
+    },
+    {
+      "name": "fixed-H l10.0 l20.2 stationarity",
+      "passed": true
+    },
+    {
+      "name": "public augmented weighted NNLS comparison",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.15 l20.2 row0",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.15 l20.2 row1",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.15 l20.2 row2",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.15 l20.2 row3",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.15 l20.2 row4",
+      "passed": true
+    },
+    {
+      "name": "fixed-H l10.15 l20.2 stationarity",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.7 l20.6 row0",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.7 l20.6 row1",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.7 l20.6 row2",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.7 l20.6 row3",
+      "passed": true
+    },
+    {
+      "name": "active-set reference l10.7 l20.6 row4",
+      "passed": true
+    },
+    {
+      "name": "fixed-H l10.7 l20.6 stationarity",
+      "passed": true
+    },
+    {
+      "name": "fixed-H weighted cache exactly once per row",
+      "passed": true
+    },
+    {
+      "name": "every retained weighted cache only k-by-k/k",
+      "passed": true
+    },
+    {
+      "name": "unweighted all outer objectives descend",
+      "passed": true
+    },
+    {
+      "name": "unweighted input initial state unmutated",
+      "passed": true
+    },
+    {
+      "name": "unweighted cap honestly reported",
+      "passed": true
+    },
+    {
+      "name": "unweighted component property is a copy",
+      "passed": true
+    },
+    {
+      "name": "unweighted rejected fit",
+      "passed": true
+    },
+    {
+      "name": "unweighted rejected fit retains dictionary",
+      "passed": true
+    },
+    {
+      "name": "unweighted rejected fit preserves query penalties and fitted rank",
+      "passed": true
+    },
+    {
+      "name": "unweighted empty fitted query shape",
+      "passed": true
+    },
+    {
+      "name": "unweighted query feature order",
+      "passed": true
+    },
+    {
+      "name": "unweighted query wrong width",
+      "passed": true
+    },
+    {
+      "name": "all-ones all outer objectives descend",
+      "passed": true
+    },
+    {
+      "name": "all-ones input initial state unmutated",
+      "passed": true
+    },
+    {
+      "name": "all-ones cap honestly reported",
+      "passed": true
+    },
+    {
+      "name": "all-ones component property is a copy",
+      "passed": true
+    },
+    {
+      "name": "all-ones rejected fit",
+      "passed": true
+    },
+    {
+      "name": "all-ones rejected fit retains dictionary",
+      "passed": true
+    },
+    {
+      "name": "all-ones rejected fit preserves query penalties and fitted rank",
+      "passed": true
+    },
+    {
+      "name": "all-ones empty fitted query shape",
+      "passed": true
+    },
+    {
+      "name": "all-ones query feature order",
+      "passed": true
+    },
+    {
+      "name": "all-ones query wrong width",
+      "passed": true
+    },
+    {
+      "name": "mixed all outer objectives descend",
+      "passed": true
+    },
+    {
+      "name": "mixed input initial state unmutated",
+      "passed": true
+    },
+    {
+      "name": "mixed cap honestly reported",
+      "passed": true
+    },
+    {
+      "name": "all-missing training row zero convention",
+      "passed": true
+    },
+    {
+      "name": "mixed component property is a copy",
+      "passed": true
+    },
+    {
+      "name": "mixed rejected fit",
+      "passed": true
+    },
+    {
+      "name": "mixed rejected fit retains dictionary",
+      "passed": true
+    },
+    {
+      "name": "mixed rejected fit preserves query penalties and fitted rank",
+      "passed": true
+    },
+    {
+      "name": "mixed empty fitted query shape",
+      "passed": true
+    },
+    {
+      "name": "mixed query feature order",
+      "passed": true
+    },
+    {
+      "name": "mixed query wrong width",
+      "passed": true
+    },
+    {
+      "name": "unsupported dictionary columns explicitly tracked",
+      "passed": true
+    },
+    {
+      "name": "unsupported columns zero convention",
+      "passed": true
+    },
+    {
+      "name": "all-missing whole fit canonical zero state",
+      "passed": true
+    },
+    {
+      "name": "omitted cells avoid overflowing Gram products",
+      "passed": true
+    },
+    {
+      "name": "included overflowing Gram refuses",
+      "passed": true
+    },
+    {
+      "name": "negative weights",
+      "passed": true
+    },
+    {
+      "name": "wrong weight shape",
+      "passed": true
+    },
+    {
+      "name": "nonfinite weights",
+      "passed": true
+    },
+    {
+      "name": "boolean weights",
+      "passed": true
+    },
+    {
+      "name": "negative alpha",
+      "passed": true
+    },
+    {
+      "name": "ratio above one",
+      "passed": true
+    },
+    {
+      "name": "nonfinite ratio",
+      "passed": true
+    },
+    {
+      "name": "scaled coefficient overflow",
+      "passed": true
+    },
+    {
+      "name": "invalid cap",
+      "passed": true
+    },
+    {
+      "name": "negative L2",
+      "passed": true
+    },
+    {
+      "name": "missing NNLS weights",
+      "passed": true
+    }
+  ],
+  "values": {
+    "D38": {
+      "lambdas": [
+        0,
+        1,
+        3
+      ],
+      "optima": [
+        2,
+        1,
+        0
+      ],
+      "l2_one_optimum": 1.0,
+      "lambda3_boundary_slope": 1
+    },
+    "D39": [
+      {
+        "scale": 1.0,
+        "data": 0.0,
+        "w_penalty": 2.7,
+        "h_penalty": 2.4000000000000004,
+        "total": 5.1000000000000005,
+        "w_mass": 9.0,
+        "h_mass": 4.0
+      },
+      {
+        "scale": 2.0,
+        "data": 0.0,
+        "w_penalty": 2.2500000000000004,
+        "h_penalty": 3.6000000000000005,
+        "total": 5.850000000000001,
+        "w_mass": 7.5,
+        "h_mass": 6.0
+      },
+      {
+        "scale": 0.5,
+        "data": 0.0,
+        "w_penalty": 3.6000000000000005,
+        "h_penalty": 1.8000000000000003,
+        "total": 5.4,
+        "w_mass": 12.0,
+        "h_mass": 3.0
+      }
+    ],
+    "D40": [
+      {
+        "m": 1.0,
+        "gram": [
+          [
+            2.0,
+            1.0
+          ],
+          [
+            1.0,
+            2.0
+          ]
+        ],
+        "cross": [
+          5.0,
+          4.0
+        ]
+      },
+      {
+        "m": 0.0,
+        "gram": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "cross": [
+          2.0,
+          1.0
+        ]
+      },
+      {
+        "m": 0.25,
+        "gram": [
+          [
+            1.25,
+            0.25
+          ],
+          [
+            0.25,
+            1.25
+          ]
+        ],
+        "cross": [
+          2.75,
+          1.75
+        ]
+      }
+    ],
+    "D41": {
+      "observed_zero_amount": 1.0,
+      "missing_amount": 2.0,
+      "all_missing_quality": null
+    },
+    "query_cache_shapes": [
+      [
+        [
+          3,
+          3
+        ],
+        [
+          3
+        ]
+      ],
+      [
+        [
+          3,
+          3
+        ],
+        [
+          3
+        ]
+      ],
+      [
+        [
+          3,
+          3
+        ],
+        [
+          3
+        ]
+      ],
+      [
+        [
+          3,
+          3
+        ],
+        [
+          3
+        ]
+      ],
+      [
+        [
+          3,
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    ]
+  },
+  "versions": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1"
+  },
+  "limits": "New authored mechanism/state conditions only; no old fit/main or scientific campaign, no browser or independent review.",
+  "main": {
+    "returncode": 0,
+    "stdout": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\penalties-masks-main.stdout.txt",
+      "bytes": 784,
+      "sha256": "024907ee70452af2c13057d2e535ed3c02c2a78b195dd1578ed5711899ab1156"
+    },
+    "stderr": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\penalties-masks-main.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "inputs_unchanged": true
+}

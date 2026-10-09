@@ -1,0 +1,82 @@
+{
+  "schema": "classical21-same-bounded-policy-closure-handoff/v1",
+  "at": "2026-10-09T17:09:36.837822+00:00",
+  "reviewer": "/root/ml_successor_independent_review",
+  "status": "F1_F2_DESIGN_CONTRACT_CLOSED_NO_ADDITIONAL_REQUIRED_FINDING",
+  "scope": "SAME bounded correction closure; immutable DIFFERENT whole review remains the whole-design assessment",
+  "originalProposal": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/author-ready-design.json",
+    "bytes": 37052,
+    "sha256": "0b36c78f55dd683938b73bd1fd695254a5c5e0424b7a646f9e14924d57068809"
+  },
+  "originalWholeReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/independent-review/whole-design-review.md",
+    "bytes": 23441,
+    "sha256": "d0ca0d56f5e5ffcdd03878bb656ef2774b370d7fc75cf0b8f6b4b7d10ed2076f"
+  },
+  "amendment": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/design-policy-correction.md",
+    "bytes": 14564,
+    "sha256": "8fa0ea99010c807162677b833080b9777e6dde79dec7477d026499642970ed49"
+  },
+  "report": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/policy-closure.md",
+    "bytes": 9282,
+    "sha256": "faab7e8d5b372926ce2f05c50366e4d9ca3945cb1cc34ae70c962ff68f1558f0"
+  },
+  "check": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/policy-closure-check.json",
+    "bytes": 11713,
+    "sha256": "a4a6fac54f3fdf091d15ff412d9aad1d32a67b81c4d8280f7f84c3945314415e"
+  },
+  "checker": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/check-policy-closure.py",
+    "bytes": 4605,
+    "sha256": "e55ef9db2c15c2888350fe8fff26a42dc231069eac7ba7f169e15bc66e3b4f57"
+  },
+  "complementaryArithmetic": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/check-hand-policies.py",
+      "bytes": 24697,
+      "sha256": "d2f72f81fed68cdafd57e2ce3a7a3f3abc2045e243e89bbe90adf17aa160c2e1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/hand-policy-check.json",
+      "bytes": 82626,
+      "sha256": "ae91e1a34d35d598a25311c3e841a68af91e02a1d1ff9aae8cf6c3a1d08942f8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/arithmetic-review.md",
+      "bytes": 5197,
+      "sha256": "2a057415122b1f41484bc614dc4c6225d4802f0b382078f7f01ced14931736a6"
+    }
+  ],
+  "ownIdentityConditions": 88,
+  "ownExecution": {
+    "commandChunk": "e08d77",
+    "exitCode": 0,
+    "newIdentityCheckerRuns": 1,
+    "arithmeticCheckerReplay": 0
+  },
+  "complementaryArithmeticAttribution": {
+    "author": "/root/nmf_content_recovery",
+    "reportedConditions": 106,
+    "reportedNewCheckerRuns": 1,
+    "notExecutedByThisReviewer": true
+  },
+  "finalConservation": {
+    "all60OriginalProposalInputsExact": true,
+    "allReceiptInputsFreshlyExact": true,
+    "separateNMF309461ddReviewExact": true
+  },
+  "findings": {
+    "F1": "closed: defined functional, source/occurrence grouping, full traces and undefined sampling law",
+    "F2": "closed: finite startup/partition/smoothing/effective mixture/proposal and complete append trace"
+  },
+  "limits": [
+    "No new entire design campaign or blanket certificate",
+    "No retained mains, science, library fits, build, HTTP or native replay",
+    "No author, learner, canonical, shared, central, public or phase mutations",
+    "Root owns writing-release decision; future code/output/native phases remain required"
+  ]
+}

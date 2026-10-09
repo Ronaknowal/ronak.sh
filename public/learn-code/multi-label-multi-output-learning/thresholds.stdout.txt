@@ -1,0 +1,5 @@
+per-label F1 threshold [0.0, 0.0] macro 0.47619 micro 0.5
+joint micro threshold [1.01, 0.0] macro 0.333333 micro 0.6
+shared micro threshold 0.0 macro 0.47619 micro 0.5
+At t=.8 both equal .8 scores stay selected: [1, 1, 1, 0, 0, 0]
+No-positive choice: [0, 0, 0, 0, 0, 0]

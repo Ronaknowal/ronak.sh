@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id = 'sparse-linear-attention-variants';
+if (fs.existsSync(`docs/teaching/deep-learning-beginner/${id}/reading-flow-revision.md`)) {
+  throw new Error('The sparse-attention reading-flow revision owns the production lesson. This historical prepared-manuscript renderer must not overwrite it.');
+}
 const manuscript = fs.readFileSync(`docs/teaching/drafts/${id}/lesson.md`, 'utf8')
   .replaceAll('\r\n', '\n').replace(/\$([^$\n]+)\$/g, (_, math) => `\\(${math}\\)`);
 const figure = kind => `<SparseFigure kind="${kind}" />`;

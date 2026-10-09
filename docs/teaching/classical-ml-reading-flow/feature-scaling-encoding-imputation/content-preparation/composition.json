@@ -1,0 +1,680 @@
+{
+  "status": "corrected-author-ready-awaiting-same-reviewer-F1-F2-closure",
+  "manuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+    "bytes": 215186,
+    "sha256": "cabb07a552c707930c01b8a9aa91dc93227fb4c1c7fd81d45220441dad3b5db5",
+    "role": "whole manuscript; bounded F1/F2 successor to whole-reviewed predecessor"
+  },
+  "visuals": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-specifications.md",
+    "bytes": 40852,
+    "sha256": "fac6974a56a32bd052baa1bf55bd9209d70a1b55de66d298368dbd50691065bf",
+    "role": "whole specifications with corrected D37 initialization"
+  },
+  "sourceRoles": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/source-roles.json",
+    "bytes": 16412,
+    "sha256": "302cf9f974721663dd799e719633f7a1a3e6fc5b2a77d75e7c0869a71ceb7b68",
+    "role": "full source/stream/data manifest"
+  },
+  "scope": {
+    "sections": 11,
+    "drawings": 41,
+    "investigations": 16,
+    "teachingProgrammes": 16,
+    "newTeachingProgrammes": 13,
+    "retained": 3,
+    "optionalR": 1,
+    "answerFile": 1,
+    "solvedTasks": 26
+  },
+  "placement": {
+    "drawings": [
+      "D01",
+      "D02",
+      "D03",
+      "D04",
+      "D05",
+      "D06",
+      "D07",
+      "D08",
+      "D09",
+      "D10",
+      "D11",
+      "D12",
+      "D13",
+      "D14",
+      "D15",
+      "D16",
+      "D17",
+      "D18",
+      "D19",
+      "D20",
+      "D21",
+      "D22",
+      "D23",
+      "D24",
+      "D25",
+      "D26",
+      "D27",
+      "D28",
+      "D29",
+      "D30",
+      "D31",
+      "D32",
+      "D33",
+      "D34",
+      "D35",
+      "D36",
+      "D37",
+      "D38",
+      "D39",
+      "D40",
+      "D41"
+    ],
+    "labs": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "L6",
+      "L7",
+      "L8",
+      "L9",
+      "L10",
+      "L11a",
+      "L11b",
+      "L12",
+      "L13",
+      "L14a",
+      "L14b"
+    ],
+    "programmes": [
+      "P2",
+      "P3",
+      "P4",
+      "P5",
+      "P1",
+      "P6",
+      "P7",
+      "P8",
+      "P10",
+      "P11",
+      "P12",
+      "P9",
+      "P13",
+      "P14",
+      "P15",
+      "P16",
+      "optional-R",
+      "answer"
+    ],
+    "practice": [
+      {
+        "id": "T2",
+        "originalNumber": 1,
+        "exactOriginalBlock": true
+      },
+      {
+        "id": "T3",
+        "originalNumber": 2,
+        "exactOriginalBlock": true
+      },
+      {
+        "id": "T4",
+        "originalNumber": 3,
+        "exactOriginalBlock": true
+      },
+      {
+        "id": "T5",
+        "originalNumber": 4,
+        "exactOriginalBlock": true
+      },
+      {
+        "id": "T6",
+        "originalNumber": 5,
+        "exactOriginalBlock": true
+      },
+      {
+        "id": "T8",
+        "originalNumber": 6,
+        "exactOriginalBlock": true
+      },
+      {
+        "id": "T9",
+        "originalNumber": 8,
+        "exactOriginalBlock": true
+      },
+      {
+        "id": "T10",
+        "originalNumber": 7,
+        "exactOriginalBlock": true
+      },
+      {
+        "id": "T24",
+        "originalNumber": 9,
+        "exactOriginalBlock": true
+      }
+    ]
+  },
+  "checks": [
+    "Accepted design docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/reading-flow-design.md",
+    "Accepted design docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md",
+    "Accepted design docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/programmes-practice-and-resources.md",
+    "Accepted design docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+    "Accepted design docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md",
+    "Accepted design docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+    "Accepted design docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py",
+    "Protected current src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+    "Protected current src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js",
+    "Protected current src/learn/data/scaling-models.js",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-models.js",
+    "Protected current src/learn/data/scaling-data.js",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-data.js",
+    "Protected current src/learn/data/scaling-examples.js",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-examples.js",
+    "Protected current src/learn/components/lesson-labs/ScalingLabs.jsx",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingLabs.jsx",
+    "Protected current src/learn/components/lesson-labs/ScalingFigures.jsx",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingFigures.jsx",
+    "Protected current src/learn/components/lesson-labs/ScalingShared.jsx",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingShared.jsx",
+    "Protected current src/learn/components/lesson-labs/scaling-labs.css",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/scaling-labs.css",
+    "Protected current public/learn-assets/feature-scaling/penguins.csv",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/public/learn-assets/feature-scaling/penguins.csv",
+    "Protected current docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py",
+    "Protected current docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+    "Protected current docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md",
+    "Protected current docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+    "Protected current docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+    "Protected current docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+    "Protected current docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+    "Protected current docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+    "Protected current docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+    "Protected current docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+    "Protected current docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md",
+    "Protected current docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+    "Protected current docs/teaching/evidence/scaling-models.json",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-models.json",
+    "Protected current docs/teaching/evidence/scaling-native.json",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-native.json",
+    "Protected current docs/teaching/evidence/scaling-data.json",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-data.json",
+    "Protected current docs/teaching/evidence/scaling-browser.json",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-browser.json",
+    "Protected current scripts/verify-scaling-models.mjs",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-models.mjs",
+    "Protected current scripts/verify-scaling-examples.py",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-examples.py",
+    "Protected current scripts/verify-scaling-data.py",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-data.py",
+    "Protected current scripts/verify-scaling-browser.cjs",
+    "Protected original docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-browser.cjs",
+    "Retained literal docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+    "Retained literal docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+    "Retained literal docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+    "Retained literal docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+    "Retained literal docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+    "Retained literal docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+    "Actual attempt 1 source",
+    "Actual attempt 1 stdout",
+    "Actual attempt 1 stderr",
+    "Actual attempt 2 source",
+    "Actual attempt 2 stdout",
+    "Actual attempt 2 stderr",
+    "Actual attempt 3 source",
+    "Actual attempt 3 stdout",
+    "Actual attempt 3 stderr",
+    "Actual attempt 4 source",
+    "Actual attempt 4 stdout",
+    "Actual attempt 4 stderr",
+    "Actual attempt 5 source",
+    "Actual attempt 5 stdout",
+    "Actual attempt 5 stderr",
+    "Actual attempt 6 source",
+    "Actual attempt 6 stdout",
+    "Actual attempt 6 stderr",
+    "Actual attempt 7 source",
+    "Actual attempt 7 stdout",
+    "Actual attempt 7 stderr",
+    "Actual attempt 8 source",
+    "Actual attempt 8 stdout",
+    "Actual attempt 8 stderr",
+    "Actual attempt 9 source",
+    "Actual attempt 9 stdout",
+    "Actual attempt 9 stderr",
+    "Actual attempt 10 source",
+    "Actual attempt 10 stdout",
+    "Actual attempt 10 stderr",
+    "Actual attempt 11 source",
+    "Actual attempt 11 stdout",
+    "Actual attempt 11 stderr",
+    "Actual attempt 12 source",
+    "Actual attempt 12 stdout",
+    "Actual attempt 12 stderr",
+    "Actual attempt 13 source",
+    "Actual attempt 13 stdout",
+    "Actual attempt 13 stderr",
+    "Actual attempt 14 source",
+    "Actual attempt 14 stdout",
+    "Actual attempt 14 stderr",
+    "Actual attempt 15 source",
+    "Actual attempt 15 stdout",
+    "Actual attempt 15 stderr",
+    "Actual attempt 16 source",
+    "Actual attempt 16 stdout",
+    "Actual attempt 16 stderr",
+    "Actual attempt 17 source",
+    "Actual attempt 17 stdout",
+    "Actual attempt 17 stderr",
+    "Actual attempt 18 source",
+    "Actual attempt 18 stdout",
+    "Actual attempt 18 stderr",
+    "Successful current source fitted_rulers.py",
+    "Selected stdout fitted_rulers.py",
+    "Successful current source category_policies.py",
+    "Selected stdout category_policies.py",
+    "Successful current source masked_simple_imputation.py",
+    "Selected stdout masked_simple_imputation.py",
+    "Successful current source nan_aware_donors.py",
+    "Selected stdout nan_aware_donors.py",
+    "Successful current source fitted_power_maps.py",
+    "Selected stdout fitted_power_maps.py",
+    "Successful current source fitted_quantile_maps.py",
+    "Selected stdout fitted_quantile_maps.py",
+    "Successful current source fitted_target_encoding.py",
+    "Selected stdout fitted_target_encoding.py",
+    "Successful current source bins_polynomials_cycles.py",
+    "Selected stdout bins_polynomials_cycles.py",
+    "Successful current source local_spline_basis.py",
+    "Selected stdout local_spline_basis.py",
+    "Successful current source signed_feature_hashing.py",
+    "Selected stdout signed_feature_hashing.py",
+    "Successful current source conditional_iterative_completion.py",
+    "Selected stdout conditional_iterative_completion.py",
+    "Successful current source pool_scalar_analyses.py",
+    "Selected stdout pool_scalar_analyses.py",
+    "Successful current source normal_completion_and_sensitivity.py",
+    "Selected stdout normal_completion_and_sensitivity.py",
+    "Successful current source practice_solutions.py",
+    "Selected stdout practice_solutions.py",
+    "Exact CRLF/LF relation",
+    "All full drawing rows",
+    "All full investigation rows",
+    "Nine exact original task blocks",
+    "No unexpanded assembly directives",
+    "Eleven whole sections",
+    "Original eleven section identities",
+    "All twenty-six explicit task identities",
+    "Every drawing once",
+    "Every lab once",
+    "Every source once",
+    "Entire programme literal P1",
+    "Entire actual stdout P1",
+    "Entire programme literal P2",
+    "Entire actual stdout P2",
+    "Entire programme literal P3",
+    "Entire actual stdout P3",
+    "Entire programme literal P4",
+    "Entire actual stdout P4",
+    "Entire programme literal P5",
+    "Entire actual stdout P5",
+    "Entire programme literal P6",
+    "Entire actual stdout P6",
+    "Entire programme literal P7",
+    "Entire actual stdout P7",
+    "Entire programme literal P8",
+    "Entire actual stdout P8",
+    "Entire programme literal P9",
+    "Entire actual stdout P9",
+    "Entire programme literal P10",
+    "Entire actual stdout P10",
+    "Entire programme literal P11",
+    "Entire actual stdout P11",
+    "Entire programme literal P12",
+    "Entire actual stdout P12",
+    "Entire programme literal P13",
+    "Entire actual stdout P13",
+    "Entire programme literal P14",
+    "Entire actual stdout P14",
+    "Entire programme literal P15",
+    "Entire actual stdout P15",
+    "Entire programme literal P16",
+    "Entire actual stdout P16",
+    "Entire programme literal optional-R",
+    "Entire programme literal answer",
+    "Entire actual stdout answer"
+  ],
+  "fileIndex": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+      "bytes": 3634,
+      "sha256": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05",
+      "role": "exact retained whole historical programme; no replay"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+      "bytes": 213,
+      "sha256": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb",
+      "role": "exact historical stdout literal"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.py",
+      "bytes": 5853,
+      "sha256": "baf38f53144b2fd895b6cb51f8db7d756bb113bf2fb7b8ad47a3fc6720aabd77",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.stdout.txt",
+      "bytes": 664,
+      "sha256": "734d15306e1c4696b198fcb273ee7379b261b46188c85b8cbf02f710dc011546",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.py",
+      "bytes": 5466,
+      "sha256": "a887cc9897f70d51f075e4807e20701b3e4694931d2f6feacbbc1617649f56ea",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.stdout.txt",
+      "bytes": 521,
+      "sha256": "a8067562ddc5c4c8cf93ba0462d52b3567b5db6142c9a616a6ff7df0c77159e3",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.py",
+      "bytes": 5330,
+      "sha256": "a142d061c947e176272dbd320bdc1f855190a3b92393a8c6bdcfe4cbc3e6f1d7",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.stdout.txt",
+      "bytes": 392,
+      "sha256": "26c598fd98345a6f749a57e5853f35d39c89fc7ba4a22bc20bf6ec05b4a0aec1",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.py",
+      "bytes": 5144,
+      "sha256": "9405060b70a6e9cb398e25ece01f8a32221a12a8207f5259afb352de7e3a1e08",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.stdout.txt",
+      "bytes": 514,
+      "sha256": "e17b036b3f66ef50d8ade7c67c5835f9d3e7abfb269c627099e94929fc6be052",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+      "bytes": 2296,
+      "sha256": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94",
+      "role": "exact retained whole historical programme; no replay"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+      "bytes": 343,
+      "sha256": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52",
+      "role": "exact historical stdout literal"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.py",
+      "bytes": 6558,
+      "sha256": "f8af71f7f2b073e3b84ae21b1a25e912d023575a4c21cc57defeccdcf6241dbe",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.stdout.txt",
+      "bytes": 592,
+      "sha256": "dd9d8043f236730568d5c13fcbec5cc8305871676d56eb85d92216dec3deeef5",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.py",
+      "bytes": 3612,
+      "sha256": "81eb4e6a0c8e1cd0a85fc7eac068aa93b16a6c398f73544ae96a6518058996da",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.stdout.txt",
+      "bytes": 408,
+      "sha256": "d118dcf117e8d2fb13f9ba587a306840c1c12caece8bd41adce2dc2190daa635",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.py",
+      "bytes": 6049,
+      "sha256": "a54c1e2c4e6691cfd50552ff9f3eda96bb7594fa2f6f7fe3f9f009b8c4c511d2",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.stdout.txt",
+      "bytes": 601,
+      "sha256": "4fb774b64a4fb35882f09be1f7238dd16aedc532a126620118b4513c4314e4a9",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.py",
+      "bytes": 6190,
+      "sha256": "39ba61d6baab82d05ed5d2120446f4331c320d08bf8420458e2eb04e1b5adc3c",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stdout.txt",
+      "bytes": 746,
+      "sha256": "13f56a2636b8547a295388cc2e29ea48b9c8940489e1cad6a516513a0d7e1e4f",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stderr.txt",
+      "bytes": 281,
+      "sha256": "555d49608910de8ee38ca229e354f22af65b6909a7be97fb6e92fb3252e73e48",
+      "role": "exact actual diagnostic, separate from stdout"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.py",
+      "bytes": 5699,
+      "sha256": "8371d9b75c524dd50bd7eee324881cd8261d4b61e92b3f6ce27ed2523a9d1556",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.stdout.txt",
+      "bytes": 1410,
+      "sha256": "a04611a45b6e39c299fe49f82d978c9abb22711bc0fa08d547bf73e12ff77102",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+      "bytes": 789,
+      "sha256": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252",
+      "role": "exact retained whole historical programme; no replay"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+      "bytes": 111,
+      "sha256": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2",
+      "role": "exact historical stdout literal"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.py",
+      "bytes": 2938,
+      "sha256": "4b7b37b5025eb3c3d61368649d861ebdd31ab58896b98897939892302ef17db3",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.stdout.txt",
+      "bytes": 545,
+      "sha256": "e789277195b71f275ee7e461b6ef8967eeb47d327afc2c129bb6a2b5f6d278e3",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.py",
+      "bytes": 5111,
+      "sha256": "7a864300d94a8412fbea2c41d89c3f924ae4c5ca4ddda8a29df7a970101afcf2",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.stdout.txt",
+      "bytes": 2240,
+      "sha256": "23e1df2862c233b1462fccc4ebc93f168708cef124fc3ecb18495b0c48a72051",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.py",
+      "bytes": 1709,
+      "sha256": "41fd4831658ce37c516ef378e194abf931945b4e48281e38c9666ec4fb98368f",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.stdout.txt",
+      "bytes": 726,
+      "sha256": "60324655cbf39591779e95a933a189d850d80e1c99eb131893f32506600fd75f",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.py",
+      "bytes": 4181,
+      "sha256": "4b00570bbd9977d88f01cd449a9aa047e1c1de24532db09f4a22eaab910cd18d",
+      "role": "complete new constructed teaching programme"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.stdout.txt",
+      "bytes": 1117,
+      "sha256": "e255495971337b764427d58559d791dee3eb2a2e5f4a58796b9303e5d739c9f6",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/multiple_imputation_mice.R",
+      "bytes": 1442,
+      "sha256": "252371b28843d3410971daf87b3fba1271827e632bb6c3112ff735b6b6aa198e",
+      "role": "complete optional ordinary R source; unexecuted"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.py",
+      "bytes": 6513,
+      "sha256": "8e872c40f4ebbfec5dc7df87d3197bd4019c58efded1c4b50f0b5e44958c3cfd",
+      "role": "complete changed-task answer asset"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.stdout.txt",
+      "bytes": 1552,
+      "sha256": "e287823a2eb484800b1f7f1506c4dfbb5562bf658ea04b544f56421f79da7a0e",
+      "role": "exact captured new stdout bytes"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "role": "retained actual CRLF data; CC0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/calculated-inputs.json",
+      "bytes": 43077,
+      "sha256": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f",
+      "role": "retained full split/fit/prediction/transformed-row inputs"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/scaling-native.json",
+      "bytes": 2506,
+      "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea",
+      "role": "retained historical native receipt"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/source-roles.json",
+      "bytes": 16412,
+      "sha256": "302cf9f974721663dd799e719633f7a1a3e6fc5b2a77d75e7c0869a71ceb7b68",
+      "role": "exact source/stream/data roles"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/README.md",
+      "bytes": 4399,
+      "sha256": "7725fe1d35a3506a1856d9f49aa47aa6d24d4d3c6970a15b23d9e6a5a3926208",
+      "role": "complete setup, run and Copy/Download contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/requirements.txt",
+      "bytes": 61,
+      "sha256": "ed9a683cbf487f4979c1deb16c27eeec981cbc6611d5cb639a40a98e77d2a6b8",
+      "role": "actual tested direct dependency pins"
+    }
+  ],
+  "rootRelease": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/root-content-release.json",
+    "bytes": 10573,
+    "sha256": "6b98f8133ff4770e0abe9251101b86187361a1b4a65702abf19201ae0367bb44",
+    "role": "phase authority"
+  },
+  "limits": [
+    "Source conservation and counts corroborate assembly; whole reading is separately recorded",
+    "No independent whole-content/runtime/native acceptance",
+    "No unchanged historical programme replay"
+  ],
+  "authorReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/whole-author-review.md",
+    "bytes": 6207,
+    "sha256": "fd7bcb32c71a0eff0e5bd3e344d1cfc9c56fc32ee1970ac73c0091361e1d2cc5",
+    "role": "actual whole beginner and specialist author reading; different review required"
+  },
+  "authorInputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/core.md",
+      "bytes": 35172,
+      "sha256": "d80c829be761c34b9ee5eb5c753e2d12c012fe89e5b6922edc09e176ee15b51d",
+      "role": "actual complete composition input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/deeper.md",
+      "bytes": 37360,
+      "sha256": "ce379ee1226c58ddadc01dc37cac71cec9424fd99254dbc8e7182ce2f1ba1113",
+      "role": "actual complete composition input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/practice.md",
+      "bytes": 21167,
+      "sha256": "3d8c4a899b6e8fc22eb9f0978f35193472c8fd3c5bc7a082d87c99112fe115fb",
+      "role": "actual complete composition input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/sections/ending.md",
+      "bytes": 10041,
+      "sha256": "f1812f90293b8498c6c35dc91295f37abe228f99ea505e89921d073179739b73",
+      "role": "actual complete composition input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-refinements.md",
+      "bytes": 8429,
+      "sha256": "8577389bf29aa0a813e503bf52f6dc0b80d5098edceb4a83e148e11b1aebbbcd",
+      "role": "actual complete composition input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/compose-content.mjs",
+      "bytes": 13867,
+      "sha256": "db8abd49af0fdb56c683799f85fab1e3d1d13d7cee711ba8ed84642422bd8514",
+      "role": "actual complete composition input"
+    }
+  ],
+  "boundedCorrection": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/review-correction/exact-text-deltas.json",
+    "bytes": 12155,
+    "sha256": "e7ea671833bc1c048cb2a8e6bb1b7a6ceda0e9a56e55d04fa2cd504c417f5f17",
+    "role": "exact reversible F1/F2 edits, unchanged 42 learner-file bindings"
+  }
+}

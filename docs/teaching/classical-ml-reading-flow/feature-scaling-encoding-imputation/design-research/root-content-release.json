@@ -1,0 +1,146 @@
+{
+  "schema": "feature-scaling-content-release/v1",
+  "topicId": "feature-scaling-encoding-imputation",
+  "revision": 5,
+  "recordedAt": "2026-10-09T14:28:58.983Z",
+  "status": "DESIGN_ACCEPTED_CONTENT_AUTHORING_RELEASED_IMPLEMENTATION_NOT_STARTED",
+  "integrationOwner": "/root",
+  "scope": {
+    "sections": 11,
+    "outcomes": 10,
+    "drawableJobs": 41,
+    "focusedInvestigations": 16,
+    "programmeContracts": 16,
+    "retainedWholeProgrammes": 3,
+    "newCompleteProgrammesProposed": 13,
+    "practiceIdentities": 26
+  },
+  "acceptedDesign": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/reading-flow-design.md",
+      "bytes": 22597,
+      "sha256": "a970f6d0ec2d13b61b3947b732dc3c1768462c2c8fbb51da30f7395e430b6f8f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md",
+      "bytes": 32698,
+      "sha256": "28bac4300147805992e05c888cdfe693e2961c9a064a864f44f90091f35cd8f1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/programmes-practice-and-resources.md",
+      "bytes": 34270,
+      "sha256": "f2f792ee23becb0a9ba2d85cd87b44b80f48dd4aee5f9f8290eb14234768bc4a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+      "bytes": 26499,
+      "sha256": "f4573042f00f83f83f1830646939649dd677d57f9232015c0c71330d171560d6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md",
+      "bytes": 4298,
+      "sha256": "07efdf3876f1f91b3d86997604537268b09a4da0cd2b4d9f626e6493e5dd41fa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+      "bytes": 48017,
+      "sha256": "fb0d8e8e241f30b5870d09b547a6525d9a096beff6a3bd0f524d4c106e577ee8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py",
+      "bytes": 14176,
+      "sha256": "4235e304c0ddda0e1d5a4ab9b90300aec4e7166bc80a8070566ba47270bb9e01"
+    }
+  ],
+  "correctedPacket": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/author-ready-corrected-design.json",
+    "bytes": 6829,
+    "sha256": "b7ec0ad2afc457872e55254386df53476e0f8f5bed9760b55b2f50e578a56530"
+  },
+  "originalWholeReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/design-review.md",
+    "bytes": 15836,
+    "sha256": "908bcffb0695892a0f5b1d72f4eb02a70510633ee9cf5e126c6c509b57b359e6"
+  },
+  "originalWholeReviewIdentity": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/design-identities.json",
+    "bytes": 102810,
+    "sha256": "4e0e17702c2ea57191f18c8bafeb43932577ddc5002a46ed4e79b87be311c91d"
+  },
+  "successorIndependentClosure": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/successor-design-correction-check.json",
+    "bytes": 14077,
+    "sha256": "b680d7c7a88b81265911348d44ad6715a8a4588a56c2ccc49bbcc3deb522327c"
+  },
+  "successorIndependentReport": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/successor-design-correction-review.md",
+    "bytes": 4727,
+    "sha256": "e70fda457cd101268d4ad516a738cc01e6d6998b35243678cd914d0b64d20bf0"
+  },
+  "reviewAttribution": "Original different whole design review plus successor independent bounded closure of R1-R3; the successor is not the original SAME reviewer. Root reuses its prior full substantive reading of the four teaching/design contracts, verifies the exact packet and current closure bindings, and accepts the composed design. This release is not a fresh whole-content/native/scientific review.",
+  "conditions": [
+    "No prior release overwritten",
+    "No prior revision record overwritten",
+    "Selected corrected packet",
+    "Selected successor independent closure",
+    "Independent report current",
+    "All three findings closed",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/author-ready-corrected-design.json",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-ready-design.json",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/design-review.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/design-identities.json",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/reading-flow-design.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/programmes-practice-and-resources.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/author-correction-review.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/exact-design-deltas.json",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/source-checks.json",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/compose-correction.py",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/freeze-corrected-design.py",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/reading-flow-design.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/programmes-practice-and-resources.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/research-and-coverage.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/check-successor-design-correction.mjs",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/reading-flow-design.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/programmes-practice-and-resources.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py",
+    "Complete seven-source design",
+    "Required scope preserved",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/design-review.md",
+    "Current docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/design-identities.json",
+    "Expected historical revision4",
+    "Flat prior history",
+    "Every foreign topic row conserved",
+    "Entire prior selected row retained flat",
+    "Current ledger unchanged during preparation"
+  ],
+  "conditionCount": 42,
+  "priorSelectedRowSha256": "531fdd77624cc5f24a97abed5a8f30c1adc6b5195c0f79657ac371bb8ac57f6d",
+  "newSelectedRowSha256": "b5ec90adf2b7053b13f1dafe70875674caf3c94257f9dd18e27b30da45a2113c",
+  "foreignTopicRows": 234,
+  "foreignRowsConserved": true,
+  "phaseBoundary": {
+    "content": "in-progress",
+    "implementation": "not-started",
+    "canonicalPublicationUnchanged": true
+  },
+  "preservedQualifications": [
+    "Design is not manuscript/full new programme bodies/actual streams/solved learner prose/runtime acceptance",
+    "Original source/stream/version/data/access and native-evidence qualifications preserved"
+  ],
+  "limits": [
+    "Full manuscript, thirteen new whole programme bodies, full explanations/solutions and complete visual specifications remain to be written and independently reviewed.",
+    "No new scientific main, fit, build, native/browser review or user-acceptance claim.",
+    "Source identity and accepted design do not certify learner comprehension or optimal diagrams.",
+    "Original failed zero-byte closure remains preserved and untrusted; the source-bound successor receipt is used instead."
+  ],
+  "nextAction": "Write the entire eleven-section learner-facing manuscript with 41 picture-first visual contracts, 16 focused investigations, 16 complete explained programmes (three retained, thirteen new), all26 solved tasks and annotated resources from the accepted seven-source design. Preserve exact historical code/results and source qualifications. Different whole-content review is required before content completion; no runtime work yet."
+}

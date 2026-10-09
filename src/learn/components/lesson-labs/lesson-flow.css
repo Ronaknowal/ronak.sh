@@ -1,0 +1,133 @@
+/* Opt-in reading-flow presentation for lessons whose root element has class "lesson-flow".
+   Figures and labs read as part of the explanation: no card frame, filled panel, banner
+   or separate heading. Data marks inside a drawing keep their own colours and outlines.
+   Components: LessonFlow.jsx. Guidance: skills/lesson-authoring/references/visuals-and-labs.md,
+   "Figures and labs belong to the reading flow"; module vocabulary:
+   docs/teaching/deep-learning-beginner/visual-vocabulary.md. */
+
+.lesson-flow {
+  --flow-gap: 1.75rem;
+  --flow-muted: #b9b9b9;
+  --flow-accent: #e4b752;
+  --flow-value: #f3d48f;
+}
+
+/* Figures and labs sit on the page background at reading width. :where keeps these
+   defaults at zero specificity so a lesson's own figure rules can refine them. */
+:where(.lesson-flow) :where(figure, [data-figure], .neural-lab, .flow-lab) {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin-inline: 0;
+  min-width: 0;
+}
+:where(.lesson-flow) :where(.flow-lab, figure, [data-figure], .neural-lab) {
+  margin-block: var(--flow-gap);
+}
+/* A figure nested inside a lab or another figure needs no extra outer spacing. */
+:where(.lesson-flow) :where(.flow-lab, figure, [data-figure]) :where(figure, [data-figure]) {
+  margin-block: 0.75rem;
+}
+
+/* A figure is introduced by the sentence before it, not by a banner or heading. */
+.lesson-flow .neural-eyebrow { display: none; }
+
+/* Captions read as ordinary prose that follows the drawing. */
+:where(.lesson-flow) :where(figure, [data-figure]) > figcaption {
+  color: var(--flow-muted);
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-block: 0.75rem 0;
+}
+
+/* Lab controls: one compact row directly under the visual they change. */
+.lesson-flow .flow-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.75rem 1.25rem;
+  margin-block: 0.875rem 0.5rem;
+}
+.lesson-flow .flow-controls > .flow-choice { flex: 1 1 100%; }
+.lesson-flow .flow-controls :is(input, select, button) {
+  font: inherit;
+  color: #f0cd7c;
+  background: #161616;
+  border: 1px solid #5a5a5a;
+  border-radius: 4px;
+  min-height: 2.25rem;
+  padding: 0.3rem 0.7rem;
+  max-width: 100%;
+  cursor: pointer;
+}
+.lesson-flow .flow-controls button[aria-pressed='true'] {
+  border-color: var(--flow-accent);
+  background: #2c2517;
+}
+.lesson-flow .flow-controls button:disabled {
+  color: #8a857c;
+  border-color: #3d3b37;
+  cursor: not-allowed;
+}
+.lesson-flow .flow-controls :is(input, select, button):focus-visible {
+  outline: 2px solid var(--flow-accent);
+  outline-offset: 2px;
+}
+
+/* One slider with its value beside the label. */
+.lesson-flow .flow-slider {
+  display: grid;
+  gap: 0.3rem;
+  min-width: min(14rem, 100%);
+  flex: 1 1 14rem;
+  font-size: 0.9rem;
+  color: var(--flow-muted);
+}
+.lesson-flow .flow-slider > span { display: flex; justify-content: space-between; gap: 0.75rem; }
+.lesson-flow .flow-slider output { color: var(--flow-value); font-variant-numeric: tabular-nums; }
+.lesson-flow .flow-controls .flow-slider input[type='range'] {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  accent-color: var(--flow-accent);
+}
+
+/* Mutually exclusive choices as a small button group. */
+.lesson-flow .flow-choice { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.lesson-flow .flow-choice-label { color: var(--flow-muted); font-size: 0.9rem; margin-right: 0.25rem; }
+
+/* The live result: an ordinary sentence with the key numbers emphasised. */
+.lesson-flow .flow-readout {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-block: 0.5rem 0;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.lesson-flow .flow-readout strong { color: var(--flow-value); }
+.lesson-flow .flow-note { color: var(--flow-muted); font-size: 0.9rem; line-height: 1.65; margin-top: 0.5rem; }
+
+/* A short in-body check question: a sentence with its own answer disclosure. */
+.lesson-flow .flow-check { margin-block: var(--flow-gap); }
+.lesson-flow .flow-check summary { cursor: pointer; color: #f0cd7c; }
+
+/* Multi-column layouts inside a lab or figure collapse by the container's own width in rem,
+   so enlarged text stacks the columns instead of pushing the page sideways. */
+.lesson-flow :is(.flow-lab, figure, [data-figure]) { container-type: inline-size; }
+/* A nested figure (for example one item in a flex row of specimens) must size to its
+   content; as a size container it would collapse to zero width. */
+.lesson-flow :is(.flow-lab, figure, [data-figure]) :is(figure, [data-figure]) {
+  container-type: normal;
+}
+.lesson-flow .flow-columns-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; align-items: start; }
+.lesson-flow .flow-columns-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+@container (max-width: 40rem) {
+  .lesson-flow .flow-columns-2, .lesson-flow .flow-columns-3 { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-flow * { transition: none !important; animation: none !important; }
+}

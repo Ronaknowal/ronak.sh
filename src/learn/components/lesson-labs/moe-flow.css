@@ -1,0 +1,28 @@
+.moe-lesson.lesson-flow .moe-flow-scene { margin: 1.25rem 0; max-width: 100%; }
+.moe-lesson.lesson-flow .moe-flow-scroll { max-width: 100%; overflow-x: auto; padding-bottom: .5rem; scrollbar-color: #8c7546 #202024; }
+.moe-lesson.lesson-flow .moe-flow-scroll:focus-visible { outline: 2px solid #e5b55b; outline-offset: 3px; }
+.moe-lesson.lesson-flow .moe-flow-scroll-hint { font-size: 1rem; color: #b0b0b6; margin: 0 0 .7rem; }
+.moe-lesson.lesson-flow .moe-flow-svg { display: block; max-width: none; height: auto; overflow: visible; }
+.moe-lesson.lesson-flow .moe-flow-svg text { font: 16px system-ui, sans-serif; }
+.moe-lesson.lesson-flow .moe-flow-svg--compact { min-width: 21.25rem; }
+.moe-lesson.lesson-flow .moe-flow-field { display: flex; flex-wrap: wrap; gap: .4rem; flex: 1 1 12rem; min-width: 0; }
+.moe-lesson.lesson-flow .moe-flow-field > span { flex: 1 1 100%; }
+.moe-lesson.lesson-flow .moe-flow-field :is(input, select),
+.moe-lesson.lesson-flow .flow-controls :is(button, input, select) { min-height: max(44px, 2.75rem); }
+.moe-lesson.lesson-flow .moe-flow-field :is(input, select) { width: 100%; min-width: 0; padding: .5rem; background: #18181b; color: #eee; border: 1px solid #777; border-radius: 0; font: inherit; }
+.moe-lesson.lesson-flow .moe-flow-field :is(input, select):focus-visible { outline: 2px solid #e5b55b; outline-offset: 2px; }
+.moe-lesson.lesson-flow .moe-flow-field [aria-invalid=true] { border-color: #f49a62; }
+.moe-lesson.lesson-flow .moe-flow-error { color: #f49a62; font-size: 1rem; }
+.moe-lesson.lesson-flow .flow-slider output { white-space: nowrap; flex-shrink: 0; }
+.moe-lesson.lesson-flow .neural-equation { max-width: 100%; overflow-x: auto; }
+.moe-lesson.lesson-flow .katex-mathml { overflow: hidden; }
+.moe-lesson.lesson-flow .moe-flow-pixel-scroll { max-width:100%; overflow-x:auto; }
+.moe-lesson.lesson-flow .moe-flow-pixel-scroll:focus-visible { outline:2px solid #e5b55b; outline-offset:3px; }
+.moe-lesson.lesson-flow .moe-flow-pixels { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); width:28rem; min-width:calc(22rem + 14px); gap:2px; margin:1rem 0; }
+.moe-lesson.lesson-flow .moe-flow-pixels > button { aspect-ratio:1; min-width:max(44px,2.75rem); min-height:max(44px,2.75rem); padding:0; border:1px solid #777; color:#f8f8f8; text-shadow:0 1px 2px #000,1px 0 2px #000; font:inherit; }
+.moe-lesson.lesson-flow .moe-flow-pixels > button[aria-pressed=true] { outline:3px solid #fff; outline-offset:-3px; }
+.moe-lesson.lesson-flow .moe-flow-pixels > button:focus-visible { outline:3px solid #e5b55b; outline-offset:2px; }
+.moe-lesson.lesson-flow .neural-table-wrapper { overflow:auto; max-width:100%; }
+.moe-lesson.lesson-flow .neural-table { width:100%; min-width:0; }
+.moe-lesson.lesson-flow .neural-table table { width:max-content; min-width:100%; table-layout:auto; }
+.moe-lesson.lesson-flow .neural-table :is(td,th) { white-space:nowrap; word-break:normal; min-width:5rem; }

@@ -1,0 +1,22 @@
+{
+  "retrieved_utc": "2026-10-08T01:00:17.664209+00:00",
+  "requested_url": "https://archive.ics.uci.edu/static/public/519/heart%2Bfailure%2Bclinical%2Brecords.zip",
+  "resolved_url": "https://archive.ics.uci.edu/static/public/519/heart%2Bfailure%2Bclinical%2Brecords.zip",
+  "archive_member": "heart_failure_clinical_records_dataset.csv",
+  "archive_members": [
+    "heart_failure_clinical_records_dataset.csv"
+  ],
+  "archive_bytes": 12421,
+  "archive_sha256": "f0739603e2f9573ffc7d509573cbf9bcb4cc889e4eea0f35a75bec68fc9163d7",
+  "csv_bytes": 12239,
+  "csv_sha256": "9c73cea7468ff5d517801ec050fe9993da5912fce4b56f296f8df3b38dd75912",
+  "unaltered_csv": true,
+  "catalogue": "https://archive.ics.uci.edu/dataset/519/heart+failure+clinical+records",
+  "dataset_doi": "10.24432/C5Z89R",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "dataset_citation": "Heart Failure Clinical Records [Dataset]. (2020). UCI Machine Learning Repository. https://doi.org/10.24432/C5Z89R.",
+  "collector_citation": "Ahmad T, Munir A, Bhatti SH, Aftab M, Raza MA (2017). Survival analysis of heart failure patients: A case study. PLoS ONE 12(7): e0181001. https://doi.org/10.1371/journal.pone.0181001.",
+  "source_changes": "None: CSV extracted byte-for-byte from the UCI archive; only the local filename differs.",
+  "calculation_scope": "Only time (follow-up days) and DEATH_EVENT (1 observed death, 0 right censor); descriptive KM/risk counts only. No clinical predictor, tuning or causal/treatment inference."
+}

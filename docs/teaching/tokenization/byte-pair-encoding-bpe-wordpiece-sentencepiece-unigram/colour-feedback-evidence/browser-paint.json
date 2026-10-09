@@ -1,0 +1,326 @@
+{
+  "status": "passed",
+  "kind": "author isolated colour correspondence and selected fresh paint",
+  "build": {
+    "manifest": "dist-tokenization-flow/.vite/manifest.json",
+    "manifestSha256": "f159af7a286ec59543ecab2b62ac626688a5b6d65feb759f758e472cf919530d"
+  },
+  "sourceSha256": {
+    "src/learn/components/lesson-labs/SubwordStructureFigures.jsx": "7b1bc4a589d321f308f6270fa01313c08a89b5e821e6781f765f7b33327083ad",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "c4064cfca3dbc2e412d08fd76377708d725e5f8d325d9fd91a15a7cfd5c974cb",
+    "src/learn/components/lesson-labs/subword-structure-figures.css": "869942b72c85b17b3afebcdc0f3f1d17e26df2ef4c42427db12cdeff41f2d759",
+    "src/learn/components/lesson-labs/subword-tokenization-lessons.css": "c808c4d1d79d278e0bcf338a8370fd726573364d194b9278ad0ea65bde017d16",
+    "src/learn/components/lesson-labs/token-identity-colors.js": "6bdda73f6e8a02435d4b5dfbb0662a7ebab078e6af34e286e42d804ceed2b13c",
+    "src/learn/components/lesson-labs/token-identity-colors.css": "5e9b388e88cb88bf37caaef1ea75fce394c9b8c020155181005d219e1ede4c8d",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/capture-author.cjs": "3c3727fa128a0da2f651a6cb1d3e8728b39741cbcdf556ef2b266cdf2c32e792"
+  },
+  "checks": [
+    {
+      "name": "Piece → dictionary → ID correspondence",
+      "dictionary": [
+        {
+          "piece": "low",
+          "id": "7",
+          "colors": [
+            "rgb(226, 181, 90)",
+            "rgb(226, 181, 90)"
+          ]
+        },
+        {
+          "piece": "est",
+          "id": "12",
+          "colors": [
+            "rgb(244, 114, 182)",
+            "rgb(244, 114, 182)"
+          ]
+        }
+      ],
+      "ids": [
+        {
+          "id": "7",
+          "key": "low",
+          "color": "rgb(226, 181, 90)"
+        },
+        {
+          "id": "12",
+          "key": "est",
+          "color": "rgb(244, 114, 182)"
+        }
+      ]
+    },
+    {
+      "name": "Merge tree labelled nodes carry identity hue",
+      "treePaint": [
+        {
+          "key": "e",
+          "label": "e",
+          "textFill": "rgb(226, 181, 90)",
+          "nodeFill": "rgba(226, 181, 90, 0.15)",
+          "identity": "#e2b55a"
+        },
+        {
+          "key": "s",
+          "label": "s",
+          "textFill": "rgb(96, 165, 250)",
+          "nodeFill": "rgba(96, 165, 250, 0.15)",
+          "identity": "#60a5fa"
+        },
+        {
+          "key": "es",
+          "label": "es",
+          "textFill": "rgb(192, 132, 252)",
+          "nodeFill": "rgba(192, 132, 252, 0.15)",
+          "identity": "#c084fc"
+        },
+        {
+          "key": "t",
+          "label": "t",
+          "textFill": "rgb(192, 132, 252)",
+          "nodeFill": "rgba(192, 132, 252, 0.15)",
+          "identity": "#c084fc"
+        },
+        {
+          "key": "est",
+          "label": "est",
+          "textFill": "rgb(244, 114, 182)",
+          "nodeFill": "rgba(244, 114, 182, 0.15)",
+          "identity": "#f472b6"
+        },
+        {
+          "key": "</w>",
+          "label": "E",
+          "textFill": "rgb(192, 132, 252)",
+          "nodeFill": "rgba(192, 132, 252, 0.15)",
+          "identity": "#c084fc"
+        }
+      ]
+    },
+    {
+      "name": "Attached end marker preserves explicit est identity",
+      "literal": [
+        {
+          "literal": "est",
+          "color": "rgb(244, 114, 182)"
+        },
+        {
+          "literal": "12",
+          "color": "rgb(244, 114, 182)"
+        },
+        {
+          "literal": "est",
+          "color": "rgb(244, 114, 182)"
+        },
+        {
+          "literal": "est",
+          "color": "rgb(244, 114, 182)"
+        },
+        {
+          "literal": "est</w>",
+          "color": "rgb(244, 114, 182)"
+        },
+        {
+          "literal": "est</w>",
+          "color": "rgb(244, 114, 182)"
+        },
+        {
+          "literal": "est</w>",
+          "color": "rgb(244, 114, 182)"
+        }
+      ]
+    },
+    {
+      "name": "Changed BPE identity and separate white selection",
+      "outline": "rgb(244, 244, 244)"
+    },
+    {
+      "name": "Unknown and failed greedy path remain neutral",
+      "unknown": {
+        "text": "[UNK]",
+        "color": "rgb(201, 201, 201)",
+        "key": null,
+        "outline": "dashed"
+      }
+    },
+    {
+      "name": "Unigram labels keep identity across changed probability",
+      "before": [
+        {
+          "label": "ab",
+          "fill": "rgb(192, 132, 252)"
+        },
+        {
+          "label": "a",
+          "fill": "rgb(226, 181, 90)"
+        },
+        {
+          "label": "b",
+          "fill": "rgb(96, 165, 250)"
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/text-vocabulary-id-correspondence-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/weighted-corpus-first-merge-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"bpe-suffix-merge-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/bpe-suffix-merge-tree-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"saved-rank-new-word-trace\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/saved-rank-new-word-trace-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"wordpiece-two-prefix-trees\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/wordpiece-two-prefix-trees-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-shared-prefix-dp\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-shared-prefix-dp-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-forward-backward-credit-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"fixed-weight-path-removal\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/fixed-weight-path-removal-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-posterior-sampling-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-posterior-sampling-tree-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"recorded-native-pieces-space-contrast\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/recorded-native-pieces-space-contrast-1366.png"
+    },
+    {
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/text-vocabulary-id-correspondence-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/weighted-corpus-first-merge-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"bpe-suffix-merge-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/bpe-suffix-merge-tree-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"saved-rank-new-word-trace\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/saved-rank-new-word-trace-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"wordpiece-two-prefix-trees\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/wordpiece-two-prefix-trees-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-shared-prefix-dp\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-shared-prefix-dp-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-forward-backward-credit-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"fixed-weight-path-removal\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/fixed-weight-path-removal-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-posterior-sampling-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-posterior-sampling-tree-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"recorded-native-pieces-space-contrast\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/recorded-native-pieces-space-contrast-390.png"
+    },
+    {
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/text-vocabulary-id-correspondence-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/weighted-corpus-first-merge-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"bpe-suffix-merge-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/bpe-suffix-merge-tree-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"saved-rank-new-word-trace\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/saved-rank-new-word-trace-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"wordpiece-two-prefix-trees\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/wordpiece-two-prefix-trees-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-shared-prefix-dp\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-shared-prefix-dp-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-forward-backward-credit-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"fixed-weight-path-removal\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/fixed-weight-path-removal-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-posterior-sampling-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-posterior-sampling-tree-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"recorded-native-pieces-space-contrast\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/recorded-native-pieces-space-contrast-320.png"
+    },
+    {
+      "selector": "[data-lab=\"bpe-merge-trainer\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/bpe-five-merges-320.png"
+    },
+    {
+      "selector": "[data-lab=\"wordpiece-greedy-path\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/wordpiece-failed-neutral-320.png"
+    },
+    {
+      "selector": "[data-lab=\"unigram-segmentation-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-split-wins-320.png"
+    },
+    {
+      "selector": "[data-lab=\"unigram-segmentation-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-no-whole-320.png"
+    },
+    {
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/text-vocabulary-id-correspondence-768-text200.png"
+    },
+    {
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/weighted-corpus-first-merge-768-text200.png"
+    },
+    {
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/colour-feedback-evidence/screenshots/unigram-forward-backward-credit-768-text200.png"
+    }
+  ],
+  "errors": [],
+  "pending": "Root independent final colour review and shared integration closure",
+  "authorPaintInspection": {
+    "status": "passed",
+    "kind": "author-only personal screenshot inspection",
+    "viewed": [
+      "All ten distinct selected colour drawings at 390 px",
+      "Dictionary/ID correspondence, merge tree and edge credit at desktop",
+      "Changed five-merge state with white selection, neutral failed WordPiece, changed Unigram and removed whole edge at 320 px",
+      "Pruning-label gap preserved at 320 px",
+      "Dictionary/ID correspondence, weighted merge and edge-credit arithmetic at 200% root text"
+    ],
+    "finding": "Identity colours correspond visibly; white selection and neutral missing routes remain separate; no confirmed new geometry or readability defect."
+  }
+}

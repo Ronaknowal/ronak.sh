@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-06T16:26:17.606Z",
+  "passed": true,
+  "build": "dist-tokenization-flow",
+  "originalVerifier": "scripts/verify-site-build.mjs",
+  "originalVerifierSha256": "dee8997ba538179efada963127f294f92171588950ab6eacae937916d23d3b14",
+  "buildManifestSha256": "1bb22b09c620e44f0317a09d3231b15ae7c10021b60f6217d6010d0624700b7c",
+  "adaptations": [
+    "isolated build directory",
+    "original root and helper import resolution"
+  ]
+}

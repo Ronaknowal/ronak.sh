@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+const folder='docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods';
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const input=`${folder}/runtime-inputs.json`;
+assert.equal(sha(input),'ad08569813973df407ec8b5f6c6180d3d17e3186c2f9fdeb891b37d27f205465');
+const packet=JSON.parse(fs.readFileSync(input));
+const files={...packet.inputs};
+for(const[p,h]of Object.entries(files))assert.equal(sha(p),h,p);
+for(const name of ['runtime-inputs.json','runtime-review.md','runtime-root-math-checks.json'])files[`${folder}/${name}`]=sha(`${folder}/${name}`);
+files['scripts/accept-grouped-preference-runtime.mjs']=sha('scripts/accept-grouped-preference-runtime.mjs');
+fs.writeFileSync(`${folder}/runtime-acceptance.json`,JSON.stringify({at:new Date().toISOString(),accepted:true,reviewer:'root; different whole runtime and same-reviewer three-caption closure',phase:'ready-for-production-integration',topic:packet.topic,manuscript:`${folder}/manuscript.jsx`,figures:'[data-grouped-figure]',count:31,assets:'learn-code/grpo-rloo-kto',files},null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({accepted:true,guards:Object.keys(packet.inputs).length}));

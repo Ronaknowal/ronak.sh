@@ -3,6 +3,9 @@ import path from 'node:path';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 
 const id = 'grouped-query-attention-gqa-multi-query-attention-mqa';
+if (!process.argv.includes('--restore-historical-prepared-source')) {
+  throw new Error('This historical generator would overwrite the authored reading-flow lesson and frozen assets. Use --restore-historical-prepared-source only for an explicitly intended historical restoration.');
+}
 const draft = `docs/teaching/drafts/${id}`;
 const destination = `public/learn-assets/${id}`;
 fs.mkdirSync(destination, { recursive: true });

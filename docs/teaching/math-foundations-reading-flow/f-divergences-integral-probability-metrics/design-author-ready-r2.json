@@ -1,0 +1,28 @@
+{
+  "status": "READY for DIFFERENT whole-design review",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-source-r2.json",
+    "sha256": "b89100c3f4fa0b5960e36feb3519f1e94e8fc917a189ce3778b2d3d16800248c",
+    "bytes": 9218
+  },
+  "proposal": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-proposal-r2.md",
+    "sha256": "b3a06c8015a77d42647d0cd429f539debc7a3d3a25b4db328ecee1e4c2fac932",
+    "bytes": 51585
+  },
+  "authorReading": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-author-reading-root-r2.json",
+    "sha256": "521da678de472ed030a63ea62e52a634540f41e82ccbab8825664744d4663392",
+    "bytes": 12104
+  },
+  "reviewFocus": [
+    "entire reading order and coverage",
+    "all six generators before selector",
+    "U introduced only in section7",
+    "shared/independent state semantics",
+    "source-bound conservation",
+    "new empirical critic counterexample",
+    "observed-data scope and units",
+    "practice and scratch/library ownership"
+  ]
+}

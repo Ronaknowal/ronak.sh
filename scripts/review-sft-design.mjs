@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+
+const base = 'docs/teaching/llm-architecture-training/supervised-fine-tuning-sft';
+const sha = p => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const paths = ['design.md', 'research.md', 'original-assessment.md'].map(p => `${base}/${p}`);
+const bindings = Object.fromEntries(paths.map(p => [p, sha(p)]));
+const observations = [];
+const check = (name, actual, expected) => {
+  assert.deepEqual(actual, expected, name);
+  observations.push({ name, actual, expected, passed: true });
+};
+const labels = [-100, -100, -100, -100, 4, 5];
+check('Selected prediction rows after one shift', labels.slice(1).flatMap((x, i) => x === -100 ? [] : [i]), [3, 4]);
+check('Unequal microbatch global mean', (2 + 12) / (1 + 3), 3.5);
+check('Distinct mean of microbatch means', (2 / 1 + 12 / 3) / 2, 3);
+check('Genuine EOS survives positional padding despite same token ID', [1, 1, 1, 1, 1, 1, 0].map((valid, i) => valid && i >= 4 ? 0 : -100), [-100, -100, -100, -100, 0, 0, -100]);
+const segment = [0, 0, 0, 1, 1, 1, 1];
+check('Dangerous causal cross-example edge removed', 1 <= 4 && segment[1] === segment[4], false);
+check('Within-example earlier edge retained', 3 <= 4 && segment[3] === segment[4], true);
+check('Reset packed coordinates', segment.map((x, i) => i - segment.indexOf(x)), [0, 1, 2, 0, 1, 2, 3]);
+check('Boundary prediction not a within-example target', segment[2] === segment[3], false);
+const loss = -(Math.log(0.5) + Math.log(0.25)) / 2;
+assert.ok(Math.abs(loss - 1.0397207708399179) < 1e-14);
+observations.push({ name: 'Two-target mean CE', value: loss, passed: true });
+const result = { reviewer: 'root', boundary: 'Design only; no scientific fit or native trainer acceptance', bindings, observations };
+fs.writeFileSync(`${base}/design-review-checks.json`, JSON.stringify(result, null, 2) + '\n', { flag: 'wx' });
+const review = `# Different complete-design review\n\nReviewer root, 7 October 2026. **Accepted for complete content preparation**, bound to design \`${bindings[paths[0]]}\`. Neither phase is certified complete and runtime remains gated by the later complete-content review.\n\nRead the entire design (all21 jobs, fixtures, thirteen-section flow, six full-program contracts, prospective six-fit protocol, complete visual/interaction requirements and practice map), research ledger and whole-original assessment. This is a fresh design review, not a claim to have reread every line of the protected historical JSX. The original-assessment document names those original defects and preserves its source identity.\n\nThe sequence teaches checkpoint lineage, data/annotation rendering and token shift before target loss, then separates direct ignored prediction loss from context gradients. Concrete role spans, non-additive tokenization boundaries, real EOS versus padding, truncation and unequal reductions precede packing. Packing covers the dangerous earlier-example edge, local positions, boundary labels, deterministic conditions and every gradient/update rather than merely drawing a mask. Native trainer defaults are treated as a contract to inspect; the ordinary route has an actual local model/tokenizer and matched update, with no unsupported CPU accelerated-packing claim.\n\nFoundational drawings show source fields and token ownership, aligned prediction lanes, a complete gradient graph, parameter update and generation branches, multi-turn spans, batch and attention matrices, experiment lineage and confusion matrices. Their controls are tied to the demonstrated operation, with static initial explanation, immediate output and reset. Role identity colour differs explicitly from policy-series colour; selection has a separate cue. Whole browser geometry, all edited/null states and code affordances remain implementation obligations.\n\nThe study uses genuinely pretrained fixed Pythia weights and real human-labelled source rows rather than relabelling random initialization as fine-tuning. Both arms share examples/order/optimizer and report unequal target budgets. Development response NLL chooses among declared checkpoints including zero; final data neither tune nor choose the best seed. Unconstrained generation, invalid formats, constrained candidate scoring and conditional NLL remain separate. The official split and exact-duplicate audit cannot prove poem-level or pretraining separation; the design explicitly retains those limits. The one-task study cannot support general instruction-transfer claims. No fit or outcome is claimed here.\n\nComplementary primary review opened the exact [Pythia model card](https://huggingface.co/EleutherAI/pythia-14m/blob/cf967c0a9a04383db6f7b1108d86b2962634b4ac/README.md), including revision replacement, configuration, pretraining and intended research role; [original dataset repository](https://github.com/google-research-datasets/poem-sentiment); and [current SFTTrainer documentation](https://huggingface.co/docs/trl/sft_trainer), especially schema-dependent supervision. These corroborate the design decisions; the future installed native execution remains necessary. The author's canonical/primary reading is recorded separately; no independent video viewing is claimed.\n\nThe accompanying source-bound script checks nine changed/explicit shift, EOS/PAD, reduction, cross-edge, coordinate, boundary and CE conditions. These are complementary design calculations, not a substitute for future full-program execution or evidence that the planned fits have run.\n\nNo material design finding remains. Before the first fit, lock actual protocol/program hashes and complete the mechanism verification. Preserve all six outcomes and use only the declared development selection. After complete manuscript, programs, results and author reading, obtain a different whole-content review before root freezes content.\n`;
+fs.writeFileSync(`${base}/design-review.md`, review, { flag: 'wx' });
+console.log(`SFT design accepted: ${observations.length} checks; ${bindings[paths[0]]}`);

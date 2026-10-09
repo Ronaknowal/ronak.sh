@@ -1,0 +1,48 @@
+{
+  "status": "AUTHOR_CORRECTIONS_FOR_SAME_REVIEW",
+  "createdAt": "2026-10-09T15:58:00.375Z",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-source-r1.json",
+    "sha256": "13a5938bd216c709467f83ece6c0e98d98be8a048f9ca55e988e42f16c7ef767",
+    "bytes": 16445
+  },
+  "successor": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-source-r2.json",
+    "sha256": "2bd0dc350ebcdcc19fa3609448f50e3fe68aaa7ecd7b9ccd289958237e5b0556",
+    "bytes": 17409
+  },
+  "findings": [
+    "MI1",
+    "MI2"
+  ],
+  "changes": [
+    {
+      "finding": "MI2",
+      "before": "| H02 conditional slice | Existing conditional strips come after controls → select X=0 in the joint mosaic, retain .4/.1 mass, divide by .5. | M02 row area→(.8,.2) conditional strip, excluded row visibly absent. T1. | C§1 |",
+      "after": "| H02 conditional slice | Existing conditional strips come after controls → select X=0 in the joint mosaic, retain .4/.1 mass, divide by .5. | M02 row area→(.8,.2) conditional strip, excluded row visibly absent. L1 first mounting shows joint/conditional quantities only; section2 supplies its shared-state product/PMI extension after teaching those operations. T1. | C§1 |"
+    },
+    {
+      "finding": "MI1",
+      "before": "| H03 average gain | Keep H(Y)=1, H(Y|X)=.721928 and I=.278072 → link each row entropy to its actual context mass then combine. | M03 two weighted contributions and same-scale entropy/gain bracket; not .278072 accuracy. T1. | C§1 |",
+      "after": "| H03 average gain | Keep H(Y)=1, H(Y|X)=.721928 and I=.278072 → link each row entropy to its actual context mass then combine. | M03 two weighted contributions and same-scale entropy/gain bracket; not .278072 accuracy. Preserve (.45,.15;.10,.30) as an equal-row-entropy null: masses (.6,.4), both row entropies .8112781244591328. Contrast joint (.675,.075;.125,.125), masses (.75,.25), row entropies (.4689955935892812,1), weighted products (.3517466951919609,.25), total .6017466951919609 versus wrong uniform .7344977967946407 bits. T1. | C§1 |"
+    },
+    {
+      "finding": "MI1/MI2",
+      "before": "| L1 joint/conditioning M02/M06–08 | Fairbit80%agreement, full joint/product grids and selected conditional slice. Keep sourceprevalence and channelerror controls; row selection changes highlighted slice only. | Error0/.5/1 demonstrates perfect/independent/invertiblywrong; prevalence0/1 gives zero-target entropy where appropriate; zero row labelled unavailable. Add a named asymmetric joint preset from existing practice(.45,.15;.10,.30) to make context weighting visible; correctMI.181496, Hcond.811278. Switching preset resets coupled controls, no inconsistent law. |",
+      "after": "| L1 joint/conditioning M02/M03 then M06–08 | One investigation with two linked mountings. First mounting beside M02 in section1: joint cells and marginals, selected row mass, row-normalized conditional probabilities, row entropies and correctly weighted conditional total; no product-law, PMI or signed-contribution fields yet. Controls: named law preset, selected row, and source prevalence/channel error only for the binary-channel preset. Equal-row-entropy and unequal-row-entropy fixed-table presets expose row selection only, so no control silently changes their stated law. | Default fair bit has80%agreement. Error0/.5/1 demonstrates perfect/independent/invertibly wrong; zero row is labelled unavailable. Preserve original preset (.45,.15;.10,.30), masses (.6,.4), both row entropies .8112781244591328: uniform averaging accidentally agrees, despite unequal masses. Add unequal-entropy preset (.675,.075;.125,.125): masses (.75,.25), normalized rows (.9,.1) and (.5,.5), costs .4689955935892812 and1; draw multipliers .75/.25 and contributions .3517466951919609/.25 joining at .6017466951919609. Label wrong uniform comparison .7344977967946407. Second mounting follows the actual product-law and PMI teaching in section2, beside M06–08: same current joint law and selected row, plus product grid, selected-cell joint/product comparison, signed PMI and weighted contributions, and summed MI. Product grid and contributions are present immediately at this mounting, with no reveal or learner gate. Preset, row and channel controls share the same state in both mounts; a change in either updates both. Only the second mount adds selected-cell highlighting for its taught PMI operation. Switching preset sets its complete declared law and selects row0/cell00; reset in either mount restores fair80%agreement, row0/cell00, in both. Scrolling alone never resets. No separate second lab count. |"
+    },
+    {
+      "finding": "MI1",
+      "before": "| C01 original | Full finite joint, marginals, entropy, conditional andMI. Keep explicitrectangularfinitevalidation in the explained reusable helper; robustlogdifferences avoidunderflowed marginalproducts. | Exact.4/.1 law, changedasymmetricjoint; O(AB) time/marginalstorage, explicitcountsversusprobabilityinputs. T1/T3. |",
+      "after": "| C01 original | Full finite joint, marginals, entropy, conditional and MI. Preserve the exact original programme/output; a separately explained small helper/practice repair validates rectangular finite normalized inputs and uses log differences against marginal underflow. | Exact .4/.1 law and original asymmetric (.45,.15;.10,.30) retain all old results. Explicitly note the latter has equal row entropies .8112781244591328, so it cannot detect a wrong uniform mean. The independent helper check adds (.675,.075;.125,.125): actual weights (.75,.25), row entropies (.4689955935892812,1), correct .6017466951919609 versus wrong .7344977967946407. Changing only context masses to (.5,.5) with the same conditional rows gives joint (.45,.05;.25,.25) and correct .7344977967946407; (1,0) gives (.9,.1;0,0), correct .4689955935892812, skipping the unavailable zero row. O(AB) time/marginal storage; counts and probabilities remain distinct inputs. T1/T3. |"
+    },
+    {
+      "finding": "MI1",
+      "before": "| T1 joint calculation | Retainold(.45,.15;.10,.30):marginals(.6,.4),(.55,.45),MI.181496/Hcond.811278. TraceanegativePMIcell andbuildrow-weightedhelper. Do notuniformlyaverageunequalrows. |",
+      "after": "| T1 joint calculation | Retain old (.45,.15;.10,.30): marginals (.6,.4),(.55,.45), MI.181496/Hcond.811278. Trace a negative PMI cell and independently build a row-weighted helper. Explain why this is a null for uniform-averaging diagnosis: normalized rows (.75,.25) and (.25,.75) both have entropy .8112781244591328. Then repair a uniform mean using joint (.675,.075;.125,.125): derive masses (.75,.25), row probabilities (.9,.1),(.5,.5), and row entropies (.4689955935892812,1). Require visible multiplication .75×.4689955935892812+.25×1=.6017466951919609, contrasted with wrong uniform .7344977967946407. Changed masses (.5,.5), preserving those conditional rows, yield joint (.45,.05;.25,.25) and .7344977967946407; masses (1,0) yield (.9,.1;0,0), skip the zero row and return .4689955935892812. Prompt appears before optional hint/full code solution; no old programme output is replaced. |"
+    }
+  ],
+  "inverse": "Reverse exact after→before strings in reverse order; verified identical to original design-r1 bytes. Original frozen files remain unchanged.",
+  "conservation": "Only five selected design rows changed. Original nine whole programme pairs, bridge, print-only successor contracts, T5, finite IB/free-energy depth, changed40-step result, four new programme plans, colour semantics and other contracts preserved.",
+  "execution": "No science, build or runtime execution."
+}

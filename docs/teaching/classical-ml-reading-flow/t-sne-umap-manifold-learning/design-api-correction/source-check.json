@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "scope": "stdlib exact original identities/byte pairs, reversible three textual replacements and installed-source AST constructor inspection; no imports/fits",
+  "proposalGuards": 12,
+  "protectedPairs": 40,
+  "inverseExact": true,
+  "sourceEvidence": [
+    {
+      "path": "scratch/survival-tools/Lib/site-packages/sklearn/manifold/_mds.py",
+      "bytes": 31061,
+      "sha256": "1f24129dd4764f9aaee915efa14277463b69bd57cab9071470bd356811561367"
+    },
+    {
+      "path": "scratch/survival-tools/Lib/site-packages/sklearn/__init__.py",
+      "bytes": 4671,
+      "sha256": "4ca68db4b3be340b1ef586b6c6d1cbf394bf1e5c0b2a998f997f02800a50c2c9"
+    }
+  ],
+  "installedVersion": "1.9.1",
+  "constructorKeywords": [
+    "metric_mds",
+    "n_init",
+    "init",
+    "max_iter",
+    "verbose",
+    "eps",
+    "n_jobs",
+    "random_state",
+    "dissimilarity",
+    "metric",
+    "metric_params",
+    "normalized_stress"
+  ],
+  "scientificProgramsRun": 0,
+  "oldMainsOrCheckersRun": 0,
+  "browserOrBuildRun": 0,
+  "effectiveComposition": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/assessment-and-continuity.md",
+      "bytes": 15159,
+      "sha256": "73e18a04b31514450767de2916a3a81d215ab1732f37b7c6aaf1c8527af38faf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-programs-and-practice.md",
+      "bytes": 21435,
+      "sha256": "f8a5b6c6709814122e6bba449e211625bf141f0a0efd48798f24a108cef3770c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-research.md",
+      "bytes": 14732,
+      "sha256": "cab6c0afc486ba938add9faa3760050d8fcca94190afb1f80d776c50ab4c59a6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-proposed-design.md",
+      "bytes": 33791,
+      "sha256": "6fc084e24333b60434bb95e5c7a79df805add6da80d7c233a3011bd46c7e7435"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/mds-contract-amendment.md",
+      "bytes": 5692,
+      "sha256": "535c4544bdbf0356b7e6a565ed9151f64f68984bd38571fc99057b3f3552f1bf"
+    }
+  ]
+}

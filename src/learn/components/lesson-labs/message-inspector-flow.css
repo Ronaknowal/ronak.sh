@@ -1,0 +1,15 @@
+.lesson-flow .mp-inspector-select { display: flex; flex-direction: column; gap: .45rem; min-width: 0; max-width: 100%; }
+.lesson-flow .mp-inspector-select select { color: #eee; background: #111; border: 1px solid #8d7343; border-radius: .2rem; padding: .6rem; min-height: 2.75rem; max-width: 100%; font: inherit; }
+.lesson-flow .mp-inspector-select select:focus-visible { outline: 2px solid #e4b752; outline-offset: 3px; }
+.lesson-flow .mp-inspector-identity, .lesson-flow .mp-inspector-legend { overflow-wrap: anywhere; }
+.lesson-flow .mp-inspector-table-pan { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-color: #8d7343 #151515; margin-block: 1.25rem; }
+.lesson-flow .mp-inspector-table-pan:focus-visible { outline: 2px solid #e4b752; outline-offset: 4px; }
+.lesson-flow .mp-inspector-values { width: max-content; min-width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.lesson-flow .mp-inspector-values caption { text-align: left; padding-block: .5rem; max-width: 42rem; white-space: normal; }
+.lesson-flow .mp-inspector-values :is(th, td) { padding: .6rem .75rem; text-align: left; border-bottom: 1px solid #343434; white-space: nowrap; }
+.lesson-flow .mp-inspector-values th { font-weight: 500; }
+.lesson-flow .mp-inspector-values thead th { color: #e4b752; }
+.lesson-flow .mp-inspector-values tr[data-selected="true"] { outline: 1px solid #fff; outline-offset: -1px; }
+.lesson-flow .mp-inspector-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 44rem), 1fr)); gap: 1.25rem; }
+.lesson-flow .mp-inspector-state p { overflow-wrap: anywhere; }
+.lesson-flow .mp-inspector-state button:disabled { opacity: .55; cursor: not-allowed; }

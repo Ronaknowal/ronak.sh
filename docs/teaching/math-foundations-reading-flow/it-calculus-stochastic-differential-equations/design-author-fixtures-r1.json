@@ -1,0 +1,383 @@
+{
+  "status": "PASS",
+  "scope": "New compact deterministic design fixtures only. No historical programme/model main or scientific campaign replay.",
+  "checks": [
+    {
+      "name": "D01 drift-noise step",
+      "actual": 0.875,
+      "expected": 0.875,
+      "passed": true
+    },
+    {
+      "name": "D03 path 0",
+      "actual": 1.475,
+      "expected": 1.475,
+      "passed": true
+    },
+    {
+      "name": "D03 path 1",
+      "actual": 1.35,
+      "expected": 1.35,
+      "passed": true
+    },
+    {
+      "name": "D03 path 2",
+      "actual": 2.0250000000000004,
+      "expected": 2.025,
+      "passed": true
+    },
+    {
+      "name": "D03 path 3",
+      "actual": 1.7000000000000004,
+      "expected": 1.7,
+      "passed": true
+    },
+    {
+      "name": "D05 Q",
+      "actual": 1.125,
+      "expected": 1.125,
+      "passed": true
+    },
+    {
+      "name": "D05 terminal W",
+      "actual": 0.5,
+      "expected": 0.5,
+      "passed": true
+    },
+    {
+      "name": "D05 left",
+      "actual": -0.4375,
+      "expected": -0.4375,
+      "passed": true
+    },
+    {
+      "name": "D05 right",
+      "actual": 0.6875,
+      "expected": 0.6875,
+      "passed": true
+    },
+    {
+      "name": "D05 symmetric",
+      "actual": 0.125,
+      "expected": 0.125,
+      "passed": true
+    },
+    {
+      "name": "D10 limiting square identity",
+      "actual": -0.375,
+      "expected": -0.375,
+      "passed": true
+    },
+    {
+      "name": "D11 adapted energy",
+      "actual": 0.995,
+      "expected": 0.995,
+      "passed": true
+    },
+    {
+      "name": "D13 square mean",
+      "actual": 1.16,
+      "expected": 1.16,
+      "passed": true
+    },
+    {
+      "name": "D16 value",
+      "actual": -0.7069999999999999,
+      "expected": -0.707,
+      "passed": true
+    },
+    {
+      "name": "D16 zero drift",
+      "actual": 0.0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "D16 diffusion",
+      "actual": -0.03000000000000025,
+      "expected": -0.03,
+      "passed": true
+    },
+    {
+      "name": "D17 covariance diagonal -1",
+      "actual": 1.0,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D17 covariance diagonal -0.6",
+      "actual": 1.0,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D19 normalized contour -0.6",
+      "actual": 0.9999999999999998,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D17 covariance diagonal 0",
+      "actual": 1.0,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D19 normalized contour 0",
+      "actual": 0.9999999999999998,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D17 covariance diagonal 0.6",
+      "actual": 1.0,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D19 normalized contour 0.6",
+      "actual": 1.0,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D17 covariance diagonal 1",
+      "actual": 1.0,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D20 GBM",
+      "actual": 0.5488116360940265,
+      "expected": 0.5488116360940265,
+      "passed": true
+    },
+    {
+      "name": "D30 x correction",
+      "actual": 0.5,
+      "expected": 0.5,
+      "passed": true
+    },
+    {
+      "name": "D30 y correction",
+      "actual": 1.0,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D34 Euler",
+      "actual": 1.04,
+      "expected": 1.04,
+      "passed": true
+    },
+    {
+      "name": "D34 Milstein",
+      "actual": 1.03055,
+      "expected": 1.03055,
+      "passed": true
+    },
+    {
+      "name": "D36 total fine",
+      "actual": -2.7755575615628914e-17,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "D38 Euler",
+      "actual": -0.6000000000000001,
+      "expected": -0.6,
+      "passed": true
+    },
+    {
+      "name": "D38 exact exponent",
+      "actual": -1.92,
+      "expected": -1.92,
+      "passed": true
+    },
+    {
+      "name": "D39 first state",
+      "actual": 0.17,
+      "expected": 0.17,
+      "passed": true
+    },
+    {
+      "name": "D39 second state",
+      "actual": -0.11,
+      "expected": -0.11,
+      "passed": true
+    },
+    {
+      "name": "D40 bias",
+      "actual": 5.551115123125783e-17,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "D40 MSE",
+      "actual": 0.015000000000000003,
+      "expected": 0.015,
+      "passed": true
+    },
+    {
+      "name": "D40 second moment bias",
+      "actual": 0.015000000000000402,
+      "expected": 0.015,
+      "passed": true
+    },
+    {
+      "name": "D44 stability 0.5",
+      "actual": 0.75,
+      "expected": 0.75,
+      "passed": true
+    },
+    {
+      "name": "D44 stability 1",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "D44 stability 1.5",
+      "actual": 1.75,
+      "expected": 1.75,
+      "passed": true
+    },
+    {
+      "name": "D45 mean square exponent",
+      "actual": 0.5,
+      "expected": 0.5,
+      "passed": true
+    },
+    {
+      "name": "D45 path exponent",
+      "actual": -0.75,
+      "expected": -0.75,
+      "passed": true
+    },
+    {
+      "name": "D46 generator x",
+      "actual": -0.84,
+      "expected": -0.84,
+      "passed": true
+    },
+    {
+      "name": "D46 generator square",
+      "actual": -0.5359999999999996,
+      "expected": -0.536,
+      "passed": true
+    },
+    {
+      "name": "D50 tilted mean",
+      "actual": 0.27999999999999997,
+      "expected": 0.28,
+      "passed": true
+    },
+    {
+      "name": "D51 first tilted step",
+      "actual": 0.1,
+      "expected": 0.1,
+      "passed": true
+    },
+    {
+      "name": "D51 second tilted step",
+      "actual": 0.18000000000000002,
+      "expected": 0.18,
+      "passed": true
+    },
+    {
+      "name": "D52 stationary SD",
+      "actual": 0.2,
+      "expected": 0.2,
+      "passed": true
+    },
+    {
+      "name": "D53 mean",
+      "actual": 1.2130613194252668,
+      "expected": 1.2130613194252668,
+      "passed": true
+    },
+    {
+      "name": "D53 variance",
+      "actual": 0.6321205588285577,
+      "expected": 0.6321205588285577,
+      "passed": true
+    },
+    {
+      "name": "C15 midpoint",
+      "actual": 0.5,
+      "expected": 0.5,
+      "passed": true
+    },
+    {
+      "name": "T13 midpoint",
+      "actual": -0.55,
+      "expected": -0.55,
+      "passed": true
+    },
+    {
+      "name": "T13 left child",
+      "actual": -0.35000000000000003,
+      "expected": -0.35,
+      "passed": true
+    },
+    {
+      "name": "T13 right child",
+      "actual": 1.15,
+      "expected": 1.15,
+      "passed": true
+    },
+    {
+      "name": "T14 energy at T2",
+      "actual": 8.0,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "name": "old cubic energy at T2",
+      "actual": 48.0,
+      "expected": 48,
+      "passed": true
+    },
+    {
+      "name": "T15 state1",
+      "actual": 0.30000000000000004,
+      "expected": 0.3,
+      "passed": true
+    },
+    {
+      "name": "T15 state2",
+      "actual": -0.5499999999999999,
+      "expected": -0.55,
+      "passed": true
+    },
+    {
+      "name": "T16 mean",
+      "actual": 1.5,
+      "expected": 1.5,
+      "passed": true
+    },
+    {
+      "name": "T16 conditional variance",
+      "actual": 0.75,
+      "expected": 0.75,
+      "passed": true
+    },
+    {
+      "name": "T16 total variance",
+      "actual": 1.75,
+      "expected": 1.75,
+      "passed": true
+    },
+    {
+      "name": "T16 invariant variance",
+      "actual": 1.0,
+      "expected": 1,
+      "passed": true
+    }
+  ],
+  "script": {
+    "path": "scratch/freeze-ito-design-root-r1.py",
+    "sha256": "60b5a780561643ce30b9a9b7fdbfb9aa058617eb9e2a029c6b26dac412f1787a",
+    "bytes": 6019
+  }
+}

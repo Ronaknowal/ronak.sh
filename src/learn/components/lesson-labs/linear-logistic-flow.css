@@ -1,0 +1,120 @@
+.linear-logistic-lesson .regression-flow-drawing {
+  margin: 1.25rem 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.linear-logistic-lesson .regression-flow-drawing svg {
+  display: block;
+  height: auto;
+  max-width: none;
+  overflow: visible;
+}
+
+.linear-logistic-lesson .regression-flow-drawing svg text {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.linear-logistic-lesson .regression-flow-surface,
+.linear-logistic-lesson .regression-flow-plot-surface {
+  overflow-x: auto;
+  padding: .5rem .25rem;
+  scrollbar-color: var(--accent, #efbb53) #111;
+}
+
+.linear-logistic-lesson .regression-flow-surface:focus-visible,
+.linear-logistic-lesson .regression-flow-plot-surface:focus-visible {
+  outline: 2px solid var(--accent, #efbb53);
+  outline-offset: 4px;
+}
+
+.linear-logistic-lesson .regression-flow-plot-surface svg {
+  width: 100%;
+  min-width: 17.5rem;
+}
+
+.linear-logistic-lesson .regression-flow-drawing figcaption {
+  margin-top: .75rem;
+  color: var(--text-secondary, #bbb);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.linear-logistic-lesson .regression-flow-axis-label {
+  margin: .5rem 0;
+  font-size: 1rem;
+}
+
+.linear-logistic-lesson .regression-flow-axis-label--horizontal {
+  text-align: center;
+}
+
+.linear-logistic-lesson .regression-flow-grid {
+  stroke: #292b2e;
+  stroke-width: 1;
+}
+
+.linear-logistic-lesson .regression-flow-axis {
+  stroke: #93989d;
+  stroke-width: 1.5;
+}
+
+.linear-logistic-lesson .regression-flow-error-areas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.linear-logistic-lesson .regression-flow-error-areas > div {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  font-size: 1rem;
+}
+
+.linear-logistic-lesson .regression-flow-error-areas svg {
+  display: block;
+  width: 7.875rem;
+  height: 7.875rem;
+}
+
+.linear-logistic-lesson .regression-flow-select {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.linear-logistic-lesson .regression-flow-select select,
+.linear-logistic-lesson .regression-flow-actions button {
+  min-height: max(44px, 2.75rem);
+  padding: .5rem .75rem;
+  color: var(--text-primary, #eee);
+  background: #111;
+  border: 1px solid #626365;
+  border-radius: 3px;
+  font: inherit;
+}
+
+.linear-logistic-lesson .regression-flow-select select:focus-visible,
+.linear-logistic-lesson .regression-flow-actions button:focus-visible {
+  outline: 2px solid var(--accent, #efbb53);
+  outline-offset: 3px;
+}
+
+.linear-logistic-lesson .regression-flow-actions button {
+  cursor: pointer;
+}
+
+.linear-logistic-lesson .regression-flow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin: .75rem 0;
+}
+
+.linear-logistic-lesson.lesson-flow .flow-controls .flow-slider input[type="range"] {
+  min-height: max(44px, 2.75rem);
+}

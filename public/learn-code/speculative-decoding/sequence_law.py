@@ -1,0 +1,156 @@
+"""Exact rational terminal-sequence laws, including a discarded-suffix bug.
+
+python sequence_law.py
+Standard library only. Exhaustive enumeration is deliberately limited to the
+tiny conditional A/B/EOS fixture; it is a proof check, not a neural benchmark.
+"""
+
+from collections import defaultdict
+from fractions import Fraction as F
+import json
+
+EOS = 2
+
+
+def policy(prefix, draft=False):
+    if not prefix:
+        numerators = [2,6,2] if draft else [5,3,2]
+    elif prefix[-1] == 0:
+        numerators = [6,3,1] if draft else [2,5,3]
+    else:
+        numerators = [2,5,3] if draft else [4,1,5]
+    return tuple(F(n,10) for n in numerators)
+
+
+def positive_residual(p,q):
+    row = tuple(max(a-b,F(0)) for a,b in zip(p,q))
+    total = sum(row)
+    return None if not total else tuple(x/total for x in row)
+
+
+def proposal_paths(prefix, count):
+    """Joint q probability of each ordered draft path, ending at first EOS."""
+    paths = {(): F(1)}
+    for _ in range(count):
+        expanded = defaultdict(F)
+        for suffix,mass in paths.items():
+            if suffix and suffix[-1] == EOS:
+                expanded[suffix] += mass
+                continue
+            for token,probability in enumerate(policy(prefix+suffix,True)):
+                if probability:
+                    expanded[suffix+(token,)] += mass*probability
+        paths = expanded
+    return dict(paths)
+
+
+def round_law(prefix, remaining, lookahead):
+    """Enumerate accepted prefix plus repair or bonus at this actual prefix."""
+    output = defaultdict(F)
+    count = min(lookahead,remaining-1)
+    for candidates,proposal_mass in proposal_paths(prefix,count).items():
+        def verify(index, accepted, conditional_mass):
+            if accepted and accepted[-1] == EOS:
+                output[accepted] += proposal_mass*conditional_mass
+                return
+            p = policy(prefix+accepted)
+            if index == len(candidates):
+                for token,probability in enumerate(p):
+                    output[accepted+(token,)] += proposal_mass*conditional_mass*probability
+                return
+            token = candidates[index]
+            q = policy(prefix+candidates[:index],True)
+            alpha = min(F(1),p[token]/q[token])
+            if alpha:
+                verify(index+1,accepted+(token,),conditional_mass*alpha)
+            if alpha < 1:
+                repair = positive_residual(p,q)
+                assert repair is not None
+                for replacement,probability in enumerate(repair):
+                    if probability:
+                        output[accepted+(replacement,)] += proposal_mass*conditional_mass*(1-alpha)*probability
+        verify(0,(),F(1))
+    return dict(output)
+
+
+def terminal_law(horizon=3, lookahead=None):
+    """None means direct target generation; K>=0 means speculative rounds."""
+    if not isinstance(horizon,int) or not 0 <= horizon <= 5:
+        raise ValueError("Finite teaching enumeration supports horizons 0 through 5.")
+    if lookahead is not None and (not isinstance(lookahead,int) or lookahead<0):
+        raise ValueError("Lookahead must be nonnegative.")
+    terminal = defaultdict(F)
+    def expand(prefix,mass):
+        if len(prefix)==horizon or (prefix and prefix[-1]==EOS):
+            terminal[prefix] += mass
+            return
+        if lookahead is None:
+            branches = {(i,):p for i,p in enumerate(policy(prefix)) if p}
+        else:
+            branches = round_law(prefix,horizon-len(prefix),lookahead)
+        for suffix,probability in branches.items():
+            expand(prefix+suffix,mass*probability)
+    expand((),F(1))
+    return dict(terminal)
+
+
+def wrong_keep_suffix():
+    """Two-output witness: after repair, reuse the rejected-history target row.
+
+    The accepted-first branch takes its second token directly from the target,
+    isolating the rejected-prefix error. EOS stops either branch immediately.
+    """
+    p,q = policy(()),policy((),True)
+    repair = positive_residual(p,q)
+    output = defaultdict(F)
+    for proposed,q_mass in enumerate(q):
+        alpha = min(F(1),p[proposed]/q_mass)
+        if proposed == EOS:
+            output[(EOS,)] += q_mass*alpha
+        else:
+            for second,probability in enumerate(policy((proposed,))):
+                output[(proposed,second)] += q_mass*alpha*probability
+        if alpha < 1:
+            for replacement,repair_mass in enumerate(repair):
+                mass = q_mass*(1-alpha)*repair_mass
+                if not mass:
+                    continue
+                if replacement==EOS:
+                    output[(EOS,)] += mass
+                else:
+                    # Deliberately WRONG: scores conditioned on the rejected ID.
+                    # Reusing the old q row in this particular fixture would be
+                    # accidentally harmless: q(.|B) equals p(.|repaired A).
+                    for second,probability in enumerate(policy((proposed,))):
+                        output[(replacement,second)] += mass*probability
+    return dict(output)
+
+
+def serializable(law):
+    return [{"ids":list(ids),"mass":str(mass),"decimal":float(mass)}
+            for ids,mass in sorted(law.items())]
+
+
+def verify():
+    checks = []
+    for horizon in [0,1,2,3,4]:
+        expected = terminal_law(horizon)
+        assert sum(expected.values())==1
+        for lookahead in [0,1,2,3]:
+            actual = terminal_law(horizon,lookahead)
+            assert actual==expected
+            assert all(value>=0 for value in actual.values())
+            checks.append({"horizon":horizon,"lookahead":lookahead,"paths":len(actual)})
+    wrong = wrong_keep_suffix()
+    expected = terminal_law(2)
+    assert sum(wrong.values())==1 and wrong!=expected
+    witness = [{"ids":list(ids),"correct":str(expected.get(ids,F(0))),
+                "wrong":str(wrong.get(ids,F(0)))}
+               for ids in sorted(set(expected)|set(wrong))
+               if expected.get(ids,F(0))!=wrong.get(ids,F(0))]
+    return {"passed":True,"checks":checks,"horizon3":serializable(terminal_law(3)),
+            "wrong_suffix_witness":witness}
+
+
+if __name__ == "__main__":
+    print(json.dumps(verify(),indent=2))

@@ -1,0 +1,183 @@
+{
+  "status": "SECTION15_N11_D53_D56_COMPLETE_SCOPED_NOT_WHOLE_TOPIC_READY",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T11:47:29.638Z",
+  "acceptedAnchor": "15-when-anchors-help-recover-the-dictionary",
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen-template.md",
+      "bytes": 12356,
+      "sha256": "128f9e4ae612b1de227ed39a2b3a00074c631cf3a5c393396b5325e11de40789"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen.md",
+      "bytes": 18130,
+      "sha256": "9ec632f4e07841213af497cf8d2553f1f814d8ee9c17c89be8ce7f855db5d990"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\visual-specifications.md",
+      "bytes": 2553,
+      "sha256": "fbc6e7ca5d5778364d0666e7c7543bf5f3ea45bebf2ce1bbe99857b542bbd77a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\assemble-section.mjs",
+      "bytes": 4455,
+      "sha256": "718659a205af5644edc31f8b40276edf6d8d80efe04eef5d14331715de446efd"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\check-anchors.py",
+      "bytes": 6446,
+      "sha256": "0f1ad7e267d26acf30b705df2aa23e5e5a5f95590b68031f2f55fb53f2a4d2b0"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\anchor-checks.json",
+      "bytes": 7036,
+      "sha256": "9be0bf67768d850d135b52261d24bbf94e4d5a9592c92037e798fb424629fb41"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+      "bytes": 496,
+      "sha256": "8bc8941bab29409882962876c722b685e1ef15dbb4783b9d12c3a99c5aa457bb"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "sourceSlots": [
+    {
+      "marker": "<!-- source:nmf_anchors.py -->",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_anchors.py",
+      "language": "python",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_anchors.py",
+        "bytes": 5319,
+        "sha256": "2dd67d6e1784525b356d39daf580f62499756319cd742dfba74b0bb418e74b30"
+      }
+    },
+    {
+      "marker": "<!-- output:nmf_anchors.stdout.txt -->",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+      "language": "text",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+        "bytes": 496,
+        "sha256": "8bc8941bab29409882962876c722b685e1ef15dbb4783b9d12c3a99c5aa457bb"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "all51 focused conditions passed",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_anchors.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "current main stdout",
+      "passed": true
+    },
+    {
+      "name": "current main stderr",
+      "passed": true
+    },
+    {
+      "name": "one accepted section15",
+      "passed": true
+    },
+    {
+      "name": "D53 before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D54 before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D55 before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D56 before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "one slot <!-- source:nmf_anchors.py -->",
+      "passed": true
+    },
+    {
+      "name": "literal source/output <!-- source:nmf_anchors.py -->",
+      "passed": true
+    },
+    {
+      "name": "one slot <!-- output:nmf_anchors.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "literal source/output <!-- output:nmf_anchors.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "no unresolved body slots",
+      "passed": true
+    },
+    {
+      "name": "length versus squaredlength correct",
+      "passed": true
+    },
+    {
+      "name": "units and ID ties taught",
+      "passed": true
+    },
+    {
+      "name": "signed residuals not clipped",
+      "passed": true
+    },
+    {
+      "name": "exact assumptions and current research boundaries",
+      "passed": true
+    },
+    {
+      "name": "distance epsilon0.1",
+      "passed": true
+    },
+    {
+      "name": "distance epsilon0.01",
+      "passed": true
+    },
+    {
+      "name": "ordinary QR/NNLS source explicit",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "numericalConditions": 51,
+    "newMain": 1,
+    "fullStreamsRead": true,
+    "oldFitsMainsCampaignsReplayed": false,
+    "primitives": "New reducedQR and bounded public NNLS encoding used; no NMF/PCA model fit or old numerical campaign."
+  },
+  "reading": "Entire current N11 program/manuscript/D53–D56 specs and stdout/stderr read. Gillis–Vavasis primary Algorithm1/normalization/Assumptions1–2/exact Theorem1 induction passages targeted read, not whole paper/noisy proof. NumPy QR current contract targeted read (web manual2.5, installed execution2.3.5). Prior canonical treatments reused.",
+  "tieInterpretation": "Original norms are of normalized observations supplied to selection, matching primary M after its normalization; raw observation gain does not break ties.",
+  "limits": "Author source/finite numerical checks only, no independent whole content/native/noisy theorem/physical identification acceptance.",
+  "continuation": "Root compose exact literal section. Sections13 and16–19 remain in progress. No phase/public/runtime changes."
+}

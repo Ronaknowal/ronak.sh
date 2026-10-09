@@ -1,0 +1,261 @@
+{
+  "source": "6a8dd38fe0afd9fff13b88071ac21b15c4324e56a5841bbee832137b5aaab7f5",
+  "prior": "complementary-states-partial.json",
+  "corrections": [
+    {
+      "name": "Natural unit conversion",
+      "pass": true,
+      "reason": "Original reviewer string assertion did not match the actual correct precision/wording; reread recorded DOM, no state replay"
+    },
+    {
+      "name": "Zero source ignores excluded slot",
+      "pass": true,
+      "reason": "Original reviewer string assertion did not match the actual correct precision/wording; reread recorded DOM, no state replay"
+    },
+    {
+      "name": "Unequal context fixture",
+      "pass": true,
+      "reason": "Original reviewer string assertion did not match the actual correct precision/wording; reread recorded DOM, no state replay"
+    },
+    {
+      "name": "Coordinate null is physical identity",
+      "pass": true,
+      "reason": "Original reviewer string assertion did not match the actual correct precision/wording; reread recorded DOM, no state replay"
+    },
+    {
+      "name": "Bin count32 entropy5",
+      "pass": true,
+      "reason": "Original reviewer string assertion did not match the actual correct precision/wording; reread recorded DOM, no state replay"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Shared committed reset after settled effect",
+      "pass": true
+    },
+    {
+      "name": "Actual OS download bytes",
+      "pass": true,
+      "filename": "entropy_bernoulli.py"
+    }
+  ],
+  "links": [
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_coin.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_coin.py.stdout.txt"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_prefix.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_prefix.py.stdout.txt"
+    },
+    {
+      "text": "Greedy Algorithms, section6",
+      "href": "/learn/path/full-curriculum/greedy-algorithms-exchange-arguments#6-merge-small-parts-into-a-code"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_blocks.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_blocks.py.stdout.txt"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_bernoulli.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_bernoulli.py.stdout.txt"
+    },
+    {
+      "text": "Download entropy_support.py",
+      "href": "/learn-assets/entropy-information/entropy_support.py"
+    },
+    {
+      "text": "Download entropy_support.py.stdout.txt",
+      "href": "/learn-assets/entropy-information/entropy_support.py.stdout.txt"
+    },
+    {
+      "text": "complete library programme in section6",
+      "href": "#information-library-py"
+    },
+    {
+      "text": "Variational Inference",
+      "href": "/learn/path/full-curriculum/variational-inference?module=math-foundations"
+    },
+    {
+      "text": "Optimal Transport",
+      "href": "/learn/path/full-curriculum/optimal-transport-wasserstein-distance-sinkhorn?module=math-foundations"
+    },
+    {
+      "text": "f-Divergences & Integral Probability Metrics",
+      "href": "/learn/path/full-curriculum/f-divergences-integral-probability-metrics?module=math-foundations"
+    },
+    {
+      "text": "Download entropy_conditional.py",
+      "href": "/learn-assets/entropy-information/entropy_conditional.py"
+    },
+    {
+      "text": "Download entropy_conditional.py.stdout.txt",
+      "href": "/learn-assets/entropy-information/entropy_conditional.py.stdout.txt"
+    },
+    {
+      "text": "Mutual Information & Information Bottleneck",
+      "href": "/learn/path/full-curriculum/mutual-information-information-bottleneck?module=math-foundations"
+    },
+    {
+      "text": "Maximum Likelihood",
+      "href": "/learn/path/full-curriculum/maximum-likelihood-map-estimation?module=math-foundations"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/information_library.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/information_library.py.stdout.txt"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_logits.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_logits.py.stdout.txt"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_torch.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_torch.py.stdout.txt"
+    },
+    {
+      "text": "official platform instructions",
+      "href": "https://pytorch.org/get-started/locally/"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_evaluation.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_evaluation.py.stdout.txt"
+    },
+    {
+      "text": "Download penguins.csv",
+      "href": "/learn-assets/entropy-information/penguins.csv"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/penguins_log_loss.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/penguins_log_loss.py.stdout.txt"
+    },
+    {
+      "text": "Allison Horst and colleagues",
+      "href": "https://allisonhorst.github.io/palmerpenguins/"
+    },
+    {
+      "text": "Gorman, Williams and Fraser2014",
+      "href": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_continuous.py"
+    },
+    {
+      "text": "Download",
+      "href": "/learn-assets/entropy-information/entropy_continuous.py.stdout.txt"
+    },
+    {
+      "text": "Measure Theory",
+      "href": "/learn/path/full-curriculum/measure-theory-probability-spaces?module=math-foundations"
+    },
+    {
+      "text": "Exponential Families",
+      "href": "/learn/path/full-curriculum/exponential-families-sufficient-statistics?module=math-foundations"
+    },
+    {
+      "text": "Download entropy_maximum.py",
+      "href": "/learn-assets/entropy-information/entropy_maximum.py"
+    },
+    {
+      "text": "Download entropy_maximum.py.stdout.txt",
+      "href": "/learn-assets/entropy-information/entropy_maximum.py.stdout.txt"
+    },
+    {
+      "text": "Cover and Thomas, chapter2",
+      "href": "https://sites.stat.columbia.edu/liam/teaching/neurostat-spr11/papers/EM/Cover%26Thomas-Ch2.pdf"
+    },
+    {
+      "text": "MIT6.02: Overview, information and entropy",
+      "href": "https://ocw.mit.edu/courses/6-02-introduction-to-eecs-ii-digital-communication-systems-fall-2012/resources/lecture-1-overview-information-and-entropy/"
+    },
+    {
+      "text": "MIT6.441, chapter1",
+      "href": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/2243edffb30f57181ed97dcb77691580_MIT6_441S16_chapter_1.pdf"
+    },
+    {
+      "text": "The earlier Greedy Algorithms lesson",
+      "href": "/learn/path/full-curriculum/greedy-algorithms-exchange-arguments#6-merge-small-parts-into-a-code"
+    },
+    {
+      "text": "MIT6.441, chapter6",
+      "href": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/67d8e68cd8fda55366e3f9f0a9465c17_MIT6_441S16_chapter_6.pdf"
+    },
+    {
+      "text": "Shannon, A Mathematical Theory of Communication",
+      "href": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf"
+    },
+    {
+      "text": "Stanford CS229, Maximum Entropy and Exponential Families",
+      "href": "https://cs229.stanford.edu/notes-spring2019/MaxEnt.pdf"
+    },
+    {
+      "text": "SciPy entropy",
+      "href": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.entropy.html"
+    },
+    {
+      "text": "PyTorch CrossEntropyLoss",
+      "href": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html"
+    },
+    {
+      "text": "BCEWithLogitsLoss",
+      "href": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.BCEWithLogitsLoss.html"
+    },
+    {
+      "text": "Palmerpenguins documentation",
+      "href": "https://allisonhorst.github.io/palmerpenguins/"
+    },
+    {
+      "text": "Gorman, Williams and Fraser's ecological study",
+      "href": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0090081"
+    },
+    {
+      "text": "Mutual Information & Information Bottleneck",
+      "href": "/learn/path/full-curriculum/mutual-information-information-bottleneck?module=math-foundations"
+    }
+  ],
+  "stagedControls": {
+    "earlyMean": 0,
+    "earlyOptimum": 0
+  },
+  "constrainedGeometry": {
+    "figure": 309.21875,
+    "client": 309,
+    "scroll": 620
+  }
+}

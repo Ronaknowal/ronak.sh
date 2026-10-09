@@ -1,11 +1,9 @@
-// Generated from the complete prepared manuscript by scripts/generate-rbm-lesson.mjs.
+// Reading-flow revision: maintained directly; the historical prepared generator must not overwrite this lesson.
 import { Prose,H2,H3,CodeBlock } from '../../components/content';
 import {Math as InlineMath,MathBlock} from '../../components/content/Math.jsx';
 import {NeuralTable} from '../../components/lesson-labs/NeuralLessonElements.jsx';
-import {RbmEnergyLab,RbmGradientLab,RbmChainLab,RbmReconstructionLab,RbmDigitLab,RbmProgram,RbmGeneralFigure,RbmEnumerationFigure,RbmPersistenceLab,RbmStudyFigure,RbmSampleGallery,RbmFamilyFigure,RbmAisFigure,RbmLibraryLab} from '../../components/lesson-labs/RbmLabs.jsx';
-export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)',readTime:'~80 min read + experiments and practice',content:()=> <div className="neural-lesson neural-lesson-neutral rbm-lesson">
-<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Edit small-model biases/interactions, data counts, transition/sampling settings and supported retained digit states. Show normalized joint/marginal probabilities, data-model statistics, exact transition mass and sampled chain trajectories simultaneously. The labs show current results as you work; you do not enter or submit a guess. Use those comparisons to distinguish energy from normalized likelihood, reconstruction from probability and finite mixing behavior from an equilibrium claim."}</Prose>
-
+import {RbmOffsetLab,RbmConditionalLab,RbmParameterLab,RbmHiddenSumFigure,RbmEmpiricalLab,RbmHandDrawLab,RbmParticleLab,RbmMeanFigure,RbmSupportFigure,RbmEnergyLab,RbmGradientLab,RbmChainLab,RbmReconstructionLab,RbmDigitLab,RbmProgram,RbmGeneralFigure,RbmEnumerationFigure,RbmPersistenceLab,RbmStudyFigure,RbmStudyInputFigure,RbmStudyDiagnostics,RbmSampleGallery,RbmFamilyFigure,RbmAisFigure,RbmLibraryLab} from '../../components/lesson-labs/RbmLabs.jsx';
+export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)',readTime:'~80 min read + experiments and practice',content:()=> <div className="neural-lesson neural-lesson-neutral rbm-lesson lesson-flow">
 <Prose>{"Imagine learning what plausible handwritten digits look like without being told which digit each image represents. A model could assign a score to every possible image, then make images with better scores more probable. It could also use the visible half of an image to reason about the missing half."}</Prose>
 
 <Prose>{"A "}<strong>{"Boltzmann machine"}</strong>{" does this with interacting random variables. A "}<strong>{"restricted Boltzmann machine"}</strong>{", or RBM, removes particular connections so that some otherwise difficult calculations become simple. We will build a model with only three binary switches, calculate every probability, and then train a small model on real digit images. The small model is deliberately chosen so that we can check its approximate training methods against exact answers."}</Prose>
@@ -18,11 +16,17 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"A binary variable can be zero or one. For an image, it might represent whether a particular pixel is dark enough to count as ink. A configuration is the full list of those zeros and ones. We want some configurations to be common, others rare, while leaving room for uncertainty."}</Prose>
 
+<Prose>{"How can two simple switches prefer to be on together? Start with the actual objects: two binary variables joined by one learned interaction J. Zero biases mean neither individual switch has an extra preference. Increasing J rewards just their joint on-state 11. Give each pair a positive preference weight, called its unnormalized mass. Three pairs have mass 1; state 11 has mass exp(J), meaning e raised to J with e approximately 2.718. Divide by the sum of all four masses to turn these weights into probabilities. Each bar below is one complete pair’s probability. An individual switch’s on-probability adds the two pairs where that switch is on; this is called its marginal probability."}</Prose>
+
+<RbmGeneralFigure />
+
 <Prose>{"Assign a real number "}<InlineMath>{"E(s)"}</InlineMath>{" to a configuration "}<InlineMath>{"s"}</InlineMath>{". We call this its "}<strong>{"energy"}</strong>{", with lower energy meaning greater preference. In this lesson energy is a dimensionless model score, not a measured number of joules. Turn it into a probability using"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"p(s)=\\frac{e^{-E(s)}}{Z},\\qquad Z=\\sum_{s'}e^{-E(s')}."}</MathBlock></div>
 
 <Prose>{"The sum visits every allowed configuration. "}<InlineMath>{"Z"}</InlineMath>{", the "}<strong>{"partition function"}</strong>{", makes all probabilities add to one. If two energies are 0 and "}<InlineMath>{"-\\log 3"}</InlineMath>{", their unnormalized weights are 1 and 3, so their probabilities are "}<InlineMath>{"1/4"}</InlineMath>{" and "}<InlineMath>{"3/4"}</InlineMath>{". An energy difference becomes a probability ratio."}</Prose>
+
+<RbmOffsetLab />
 
 <Prose>{"Adding 100 to every energy multiplies every weight by the same "}<InlineMath>{"e^{-100}"}</InlineMath>{". It changes "}<InlineMath>{"Z"}</InlineMath>{" by that factor and leaves all probabilities unchanged. Thus an isolated energy value cannot establish how likely something is. Changing one state's energy relative to the others can."}</Prose>
 
@@ -36,21 +40,27 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"We will instead use hidden variables to create useful dependencies while imposing a simpler graph."}</Prose>
 
-<RbmGeneralFigure />
-
 <H2>{"2. What the restriction buys us"}</H2>
 
 <Prose>{"An RBM has observed "}<strong>{"visible"}</strong>{" variables "}<InlineMath>{"v_1,\\ldots,v_D"}</InlineMath>{" and unobserved "}<strong>{"hidden"}</strong>{" variables "}<InlineMath>{"h_1,\\ldots,h_H"}</InlineMath>{". Hidden variables can combine evidence from multiple pixels. They are learned latent features, not automatically digit labels or human-interpretable concepts."}</Prose>
 
-<Prose>{"Connections run between the two groups. There are no visible-to-visible or hidden-to-hidden connections. This is a "}<strong>{"bipartite"}</strong>{" graph. Our Bernoulli–Bernoulli RBM has binary variables on both sides and energy"}</Prose>
+<Prose>{"Connections run between the two groups. There are no visible-to-visible or hidden-to-hidden connections. This is a "}<strong>{"bipartite"}</strong>{" graph. Our Bernoulli–Bernoulli RBM has binary variables on both sides"}</Prose>
+
+<Prose>{"Where does the hidden variable sit? Keep our two visible switches, remove their direct wire and connect each to the same hidden switch. Call the two edge weights W₁ and W₂. A visible bias a₁ or a₂ rewards that visible switch being on; hidden bias b rewards the hidden switch. The pictured state is v=11, h=1, but it is only one of eight joint states."}</Prose>
+
+<RbmEnergyLab />
+
+<Prose>{"Read the graph before compressing it into notation. The W₁ edge contributes only when both v₁ and h are 1, and similarly for W₂. Bias contributions need only their own switch. Adding these preferences and negating them gives the energy of this one joint state. The general matrix equation below covers any number of visible and hidden switches."}</Prose>
 
 <div className="neural-equation"><MathBlock>{"E(v,h)=-a^Tv-b^Th-v^TWh."}</MathBlock></div>
 
 <Prose>{""}<InlineMath>{"W"}</InlineMath>{" is "}<InlineMath>{"D\\times H"}</InlineMath>{", "}<InlineMath>{"a"}</InlineMath>{" contains "}<InlineMath>{"D"}</InlineMath>{" visible biases, and "}<InlineMath>{"b"}</InlineMath>{" contains "}<InlineMath>{"H"}</InlineMath>{" hidden biases. These shapes are also the storage convention in the complete program. Some libraries transpose "}<InlineMath>{"W"}</InlineMath>{"; the equation, not a variable name, determines which axis means what."}</Prose>
 
-<RbmEnergyLab />
-
 <H3>{"Condition on one layer; the other separates"}</H3>
+
+<Prose>{"What changes when the visible pair is known? It rules out all other visible pairs, leaving only hidden zero or hidden one. The graph stays undirected; conditioning means holding observed values fixed, not sending a deterministic neural activation forward."}</Prose>
+
+<RbmConditionalLab />
 
 <Prose>{"Fix the visible switches. Everything involving a particular hidden switch "}<InlineMath>{"h_j"}</InlineMath>{" becomes"}</Prose>
 
@@ -86,7 +96,15 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 </details>
 
+<Prose>Can you assemble your own complete three-switch model? Now that edges, biases, conditionals and visible marginals are defined, edit any of the five parameters below, one at a time. Unlike the isolated investigations above, this workspace keeps all its edits. Inspect a joint event to separate its particular energy from the visible probability that adds both hidden alternatives. Covariance measures departure from independence here: compare p(11) with the product of the two visible on-probabilities.</Prose>
+
+<RbmParameterLab />
+
 <H2>{"3. Free energy, exact normalization and what remains difficult"}</H2>
+
+<Prose>{"The conditional picture held the visible pair fixed. Now suppose we want the probability of that pair itself. Which hidden explanation should count? Both do: the visible event does not tell us which hidden state produced it. Follow the two branches under each visible pair and add their masses before any normalization."}</Prose>
+
+<RbmHiddenSumFigure />
 
 <Prose>{"Observed data contain "}<InlineMath>{"v"}</InlineMath>{", not "}<InlineMath>{"h"}</InlineMath>{". We must add the probability of every hidden explanation, not choose the single best explanation. Define "}<strong>{"free energy"}</strong>{" by"}</Prose>
 
@@ -114,6 +132,10 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"There is a valuable exception. Instead of enumerating visible vectors, sum them out and enumerate hidden vectors:"}</Prose>
 
+<Prose>{"Can we reverse that summation? Hold a complete hidden vector fixed and sum each visible switch’s two alternatives independently. The drawing shows only three units per layer to make the wires legible; the counters below refer to the chosen complete layer sizes."}</Prose>
+
+<RbmEnumerationFigure />
+
 <div className="neural-equation"><MathBlock>{"Z=\\sum_{h\\in\\{0,1\\}^H}e^{b^Th}\n\\prod_{i=1}^{D}\\left(1+e^{a_i+(Wh)_i}\\right)."}</MathBlock></div>
 
 <Prose>{"Our experiment has 64 visible variables but only eight hidden variables. There are "}<InlineMath>{"2^8=256"}</InlineMath>{" hidden configurations. For each one, a 64-term product represents the sum over all visible configurations. We can compute an exact normalizer and exact model expectations without visiting "}<InlineMath>{"2^{64}"}</InlineMath>{" images."}</Prose>
@@ -122,9 +144,11 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"Use stable logarithmic calculations. Computing "}<code>{"log(1 + exp(z))"}</code>{" directly can overflow even when its mathematical answer is finite. "}<code>{"numpy.logaddexp(0, z)"}</code>{" evaluates softplus stably, and "}<code>{"scipy.special.logsumexp"}</code>{" handles sums of exponentials in log space. Merely replacing "}<code>{"log"}</code>{" with "}<code>{"log1p"}</code>{" does not fix overflow in an already computed "}<code>{"exp(z)"}</code>{"."}</Prose>
 
-<RbmEnumerationFigure />
-
 <H2>{"4. Learning: which co-occurrences need more probability?"}</H2>
+
+<Prose>{"The probability budget is now defined. How should it move after we observe 11? Measure how often a visible switch and the hidden switch are on together. A data expectation averages that joint-on quantity with visible values taken from observations; a model expectation averages it over the model’s own joint distribution. Compare those two amounts before changing any parameter. The starting data are all 11; the mixture slider gradually replaces them by 10. To propose an update, compute all five data-minus-model differences using the old parameters, multiply each by the learning rate, and add each result to its corresponding parameter simultaneously."}</Prose>
+
+<RbmGradientLab />
 
 <Prose>{"We want observed examples to receive more probability. For one weight, differentiating the log probability gives"}</Prose>
 
@@ -154,7 +178,9 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"Recomputing the complete distribution changes "}<InlineMath>{"\\log p(11)"}</InlineMath>{" from −0.69314718 to −0.65690173. The observation has become more probable. We checked every analytic gradient against scalar central differences; the largest discrepancy was below "}<InlineMath>{"2\\times10^{-11}"}</InlineMath>{". A bigger learning rate would not automatically preserve improvement."}</Prose>
 
-<RbmGradientLab />
+<Prose>{"The one-observation calculation extends to any empirical mixture. The next editor changes one of four nonnegative data masses at a time; their normalized fractions are the weights in the data average. It changes observations while keeping all model parameters at their original values."}</Prose>
+
+<RbmEmpiricalLab />
 
 <H3>{"Do we need to sample the positive hidden variables?"}</H3>
 
@@ -163,6 +189,12 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 <H2>{"5. Gibbs sampling, contrastive divergence and persistence"}</H2>
 
 <Prose>{"For larger RBMs, exact model expectations can be impractical. A "}<strong>{"Gibbs sampler"}</strong>{" alternates two easy draws:"}</Prose>
+
+<Prose>{"What does one alternating draw actually do? Fix visible 10. Its hidden on-probability is 0.75, but the hidden state must still be 0 or 1. A uniform number picks that state; the chosen state then determines two visible on-probabilities, and two fresh uniforms pick the next visible pair."}</Prose>
+
+<RbmHandDrawLab />
+
+<Prose>{"Follow the pictured path: compute a probability, draw a binary hidden value, compute two new probabilities, then draw two binary visible values. This is one full transition. The notation below repeats that same operation; the tilde means “drawn from,” not “equal to the mean.”"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"v^{(0)}\\ \\longrightarrow\\ h^{(0)}\\sim p(h\\mid v^{(0)})\n\\ \\longrightarrow\\ v^{(1)}\\sim p(v\\mid h^{(0)})\\ \\longrightarrow\\cdots."}</MathBlock></div>
 
@@ -174,6 +206,10 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{""}<strong>{"Contrastive divergence"}</strong>{", CD-"}<InlineMath>{"k"}</InlineMath>{", starts the chain at data, takes "}<InlineMath>{"k"}</InlineMath>{" full hidden/visible transitions, and uses the resulting visible states for an approximate negative statistic. After the final visible draw, calculate the hidden probabilities again for that statistic. Treat the sampled state as fixed when forming this update; this is not backpropagation through discrete draws."}</Prose>
 
+<Prose>{"The hand draw showed one random outcome. What would happen to an entire probability distribution after the same transition? Move its probability mass through every possible hidden and visible draw. These bars are exact summed probabilities, not counts from one trajectory. Compare them with the fixed equilibrium markers. Total variation is half the sum of absolute differences between matching probabilities; zero means the two complete distributions agree."}</Prose>
+
+<RbmChainLab />
+
 <Prose>{"We can see the approximation without Monte Carlo noise in the three-switch model. Start at 11. The hidden draw is one with probability 0.9. If it is zero, the four visible outcomes each have probability 0.25. If it is one, their probabilities are "}<InlineMath>{"[1,3,3,9]/16"}</InlineMath>{". Combining the cases gives"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"q_1=[0.08125,\\ 0.19375,\\ 0.19375,\\ 0.53125]."}</MathBlock></div>
@@ -182,9 +218,11 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <NeuralTable caption={"CD-\\(k\\): start near a data example"} headers={[<>{"Full transitions"}</>,<>{"Probability of 11"}</>,<>{"Expected weight gradient"}</>,<>{"Distance from stationary distribution*"}</>]} rows={[[<>{"0"}</>,<>{"1"}</>,<>{"0"}</>,<>{"0.5"}</>],[<>{"1"}</>,<>{"0.53125"}</>,<>{"0.2765625"}</>,<>{"0.03125"}</>],[<>{"2"}</>,<>{"0.5029296875"}</>,<>{"0.2978027344"}</>,<>{"0.0029296875"}</>],[<>{"3"}</>,<>{"0.5002746582"}</>,<>{"0.2997940063"}</>,<>{"0.0002746582"}</>]]} />
 
-<Prose>{"*Total variation distance is half the sum of absolute differences between matching state probabilities. These entries come from multiplying an exactly enumerated four-state transition matrix, with parameters held fixed. They are not measured frequencies of four individual samples, or a general promise that three steps suffice."}</Prose>
+<Prose>{"*These entries come from multiplying an exactly enumerated four-state transition matrix, with parameters held fixed. They are not measured frequencies of four individual samples, or a general promise that three steps suffice."}</Prose>
 
-<RbmChainLab />
+<Prose>{"How can a sampled path differ from those exact bars? Start a single particle at 11 and let it make binary choices. Its final state is just one draw from the evolving distribution. The recorded uniforms below let you replay each choice; changing the seed leaves the exact transition matrix untouched."}</Prose>
+
+<RbmParticleLab />
 
 <Prose>{"Finite-step CD is a biased approximation to the likelihood gradient. Its usual update also omits a term arising from the parameter dependence of the reconstructed distribution in the proposed CD objective. It need not be the gradient of any scalar objective in general; "}<a href={"https://proceedings.mlr.press/v9/sutskever10a.html"}>{"Sutskever and Tieleman, 2010"}</a>{" analyze that distinction. The successful tiny example above does not establish global convergence."}</Prose>
 
@@ -192,11 +230,17 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{""}<strong>{"Persistent contrastive divergence"}</strong>{", also called stochastic maximum likelihood in this setting, retains a collection of sampled states across parameter updates. Each minibatch supplies fresh positive statistics, while these persistent particles take more Gibbs steps for the negative statistics. They are not reset to the current data minibatch. The hope is that a chain already near the old model remains useful as parameters move. The method and its empirical motivation are described in "}<a href={"https://www.cs.cmu.edu/~bhiksha/courses/deeplearning/Fall.2016/pdfs/Tieleman.2008.pdf"}>{"Tieleman's 2008 paper"}</a>{"."}</Prose>
 
-<Prose>{"Persistence does not magically produce independent equilibrium samples. A rapidly changing model, strongly separated regions or too few particles can still produce poor estimates. CD-"}<InlineMath>{"k"}</InlineMath>{" trades additional transitions for cost; PCD changes initialization and reuse. Neither is universally better for every budget, initialization and evaluation measure."}</Prose>
+<Prose>{"What is kept at a minibatch boundary? CD starts again from the new observations; PCD keeps the particles that just finished their previous transition. In this drawing every parameter stays fixed, so editing the second minibatch isolates the starting-state rule instead of silently mixing it with a learning update."}</Prose>
 
 <RbmPersistenceLab />
 
+<Prose>{"Persistence does not magically produce independent equilibrium samples. A rapidly changing model, strongly separated regions or too few particles can still produce poor estimates. CD-"}<InlineMath>{"k"}</InlineMath>{" trades additional transitions for cost; PCD changes initialization and reuse. Neither is universally better for every budget, initialization and evaluation measure."}</Prose>
+
 <H3>{"Why a mean is not a Gibbs state"}</H3>
+
+<Prose>{"Can we avoid draws by carrying only average visible values? Compare two orders of operations: apply the hidden sigmoid to each binary state and then average, or average the states and then apply the sigmoid. The same distribution q₁ supplies both routes."}</Prose>
+
+<RbmMeanFigure />
 
 <Prose>{"After our first transition, each visible mean is 0.725. Feeding "}<InlineMath>{"[0.725,0.725]"}</InlineMath>{" through the hidden sigmoid gives approximately 0.831036. But averaging the hidden sigmoid across the actual four-state distribution gives 0.809375. The sigmoid of a mean is not generally the mean of a sigmoid."}</Prose>
 
@@ -216,29 +260,29 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"Compare a 64-parameter independent-pixel Bernoulli baseline with three training procedures for the same 64-visible, eight-hidden RBM, which has 584 parameters. The baseline's pixel probabilities are "}<InlineMath>{"(n_{\\rm on}+0.5)/(n_{\\rm fit}+1)"}</InlineMath>{". This small symmetric smoothing avoids infinite logits at always-off pixels. Initialize RBM visible biases to those logits, hidden biases to zero, and interactions to small independent normal values with standard deviation 0.01."}</Prose>
 
+<RbmStudyInputFigure />
+
 <Prose>{"Run exact likelihood-gradient ascent, sampled CD-1, and sampled PCD-1 for seeds 11, 29 and 47. Each uses 300 epochs, batch size 64 and fixed step size 0.05, without momentum, weight decay, dropout or checkpoint selection. Corresponding seeds share initial parameters and minibatch orders. PCD keeps 64 particles; the final positive minibatch has 46 examples, so positive and negative means are normalized separately. No tuning used development or assessment outcomes."}</Prose>
 
 <Prose>{"We evaluate exact "}<strong>{"negative log likelihood"}</strong>{", NLL, in natural-log units, or "}<strong>{"nats per image"}</strong>{". Lower is better. A model assigning probability "}<InlineMath>{"p"}</InlineMath>{" to an image incurs "}<InlineMath>{"-\\log p"}</InlineMath>{". The average concerns the actual binary images, not whether a nearest-looking reconstruction was produced."}</Prose>
 
-<NeuralTable caption={"Protocol before results"} headers={[<>{"Method"}</>,<>{"Seed 11 assessment NLL"}</>,<>{"Seed 29"}</>,<>{"Seed 47"}</>]} rows={[[<>{"Independent pixels"}</>,<>{"24.311674"}</>,<>{"Same fixed model"}</>,<>{"Same fixed model"}</>],[<>{"Exact gradient"}</>,<>{"20.496861"}</>,<>{"20.655667"}</>,<>{"20.531889"}</>],[<>{"CD-1"}</>,<>{"20.556534"}</>,<>{"20.682717"}</>,<>{"20.575317"}</>],[<>{"PCD-1"}</>,<>{"20.534554"}</>,<>{"20.751721"}</>,<>{"20.568239"}</>]]} />
+<Prose>{"What do the measured runs look like before we rank them? The plot follows one selected training run on fit and development data; the table keeps every final assessment outcome, including the independent baseline. Select another stored run to inspect its history without training a new model."}</Prose>
+
+<RbmStudyFigure />
+
+
 
 <Prose>{"All nine fitted RBMs improved on the independent baseline in this run. Exact-gradient training obtained the lowest assessment NLL for each matched seed, but CD-1 and PCD-1 trade places. Do not turn three seeds on 80 assessment images into a universal ranking. Nor does an exact gradient guarantee a global optimum or better generalization for every initialization."}</Prose>
 
 <Prose>{"For exact-gradient seed 11, fit/development/assessment NLLs are 19.791466, 20.650057 and 20.496861. The gap is a reason to monitor generalization, not evidence that every higher-capacity model necessarily fails. Full histories, per-image NLLs and all final weights are retained in "}<a href={"/learn-code/boltzmann-machines-restricted-boltzmann-machines-rbm/calculated-inputs.json"}>{"calculated-inputs.json"}</a>{"."}</Prose>
 
-<RbmStudyFigure />
-
-<H3>{"Complete runnable study"}</H3>
-
-<Prose>{"Save the following as "}<a href={"/learn-code/boltzmann-machines-restricted-boltzmann-machines-rbm/rbm-study.py"}>{"rbm-study.py"}</a>{", next to "}<a href={"/learn-code/boltzmann-machines-restricted-boltzmann-machines-rbm/digits-400.csv"}>{"digits-400.csv"}</a>{", and run "}<code>{"python rbm-study.py"}</code>{". It needs Python, NumPy and SciPy; the recorded execution used Python 3.12.14 and NumPy 2.3.5 on CPU. The program defines the model, preprocessing, roles, all nine fits, exact checks and completion calculations. It does not download a dataset or a pretrained model. Matrix products use batch rows, "}<InlineMath>{"W"}</InlineMath>{" stores visible-by-hidden weights, and updates are ascent because we maximize log probability."}</Prose>
-
-<RbmProgram file="rbm-study.py" />
-
-<Prose>{"The program writes its computed evidence beside itself. To reproduce the report, retain that output and the data provenance. For a new experiment, choose the split, hyperparameter search and final assessment procedure before comparing results; changing code after seeing this assessment set does not restore its independence."}</Prose>
-
 <H2>{"7. Reconstructing, sampling and completing are different tasks"}</H2>
 
 <H3>{"A convincing reconstruction can hide a poor distribution"}</H3>
+
+<Prose>{"The real study reports several quantities. Do they measure the same thing? Switch back explicitly to two constructed two-pixel models: A has two sharp joint modes, while B has independent pixels that are usually on. Trace the deterministic mean return path and compare it with the full probability budget."}</Prose>
+
+<RbmReconstructionLab />
 
 <Prose>{"Our deterministic reconstruction computes "}<InlineMath>{"\\hat v=\\sigma(a+W\\sigma(b+W^Tv))"}</InlineMath>{", with vector orientation adjusted in code. It asks how closely a two-stage mean pass returns the input. This is useful to inspect, but its mean squared error is not NLL."}</Prose>
 
@@ -246,21 +290,25 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"Model B has no interactions and both visible on-probabilities 0.9. Its reconstruction of 11 is "}<InlineMath>{"[0.9,0.9]"}</InlineMath>{", with the larger MSE 0.01. But it assigns probability 0.81 to 11, giving the "}<strong>{"better"}</strong>{" NLL 0.210721. Reconstruction measures the return journey near an input; likelihood measures how the model divides its full probability budget."}</Prose>
 
-<RbmReconstructionLab />
-
 <Prose>{"Similarly, comparing free energies from different model versions requires their different normalizers. A constant downward energy shift could make every raw score look better without changing any probability. Under the same fixed model, a data-versus-development mean free-energy gap does equal the corresponding NLL gap because the one "}<InlineMath>{"\\log Z"}</InlineMath>{" cancels. That useful diagnostic does not license comparing raw free energy across epochs as if it were normalized likelihood."}</Prose>
 
 <H3>{"Generate without showing the model an input"}</H3>
 
 <Prose>{"Ordinary Gibbs generation runs a chain and must consider burn-in and mixing. Our eight-hidden-unit model has an additional option: enumerate the exact hidden marginal, draw one of its 256 states, and independently draw visible pixels conditional on it. Repeating that process produces independent model samples, apart from pseudorandom-number implementation details, without a burn-in chain."}</Prose>
 
-<Prose>{"The saved 16 samples for every fitted model use this exact-enumeration route. They are not reconstructions of selected assessment images. Show all 16 in fixed order, including odd-looking ones. Eight hidden bits support at most 256 hidden configurations, but that does "}<strong>{"not"}</strong>{" limit the generator to 256 visible images: each hidden configuration produces a full Bernoulli distribution over pixels."}</Prose>
+<Prose>{"What does generation produce when there is no input image? Each tile below is one saved binary draw from the selected model’s distribution. Keep the same order and inspect all sixteen; these are not the prettiest outcomes selected after the fact."}</Prose>
 
 <RbmSampleGallery />
+
+<Prose>{"The saved 16 samples for every fitted model use this exact-enumeration route. They are not reconstructions of selected assessment images. Show all 16 in fixed order, including odd-looking ones. Eight hidden bits support at most 256 hidden configurations, but that does "}<strong>{"not"}</strong>{" limit the generator to 256 visible images: each hidden configuration produces a full Bernoulli distribution over pixels."}</Prose>
 
 <H3>{"Complete missing pixels without treating missing as black"}</H3>
 
 <Prose>{"Suppose the left half of an image is observed and the right half is unknown. “Unknown” is not a measured zero. Let "}<InlineMath>{"O"}</InlineMath>{" contain observed pixel indices and "}<InlineMath>{"M"}</InlineMath>{" the missing ones. For each hidden state, its log weight given the observed values is"}</Prose>
+
+<Prose>{"Return to the real 8×8 digit models. How does visible evidence constrain missing pixels? White is binary one, charcoal is zero, and hatching means unobserved regardless of its placeholder colour. The second grid is a conditional mean, while the third grid is original truth used only to score missing pixels afterward. Choose a model and source below the grids, then inspect how one pixel changes the posterior."}</Prose>
+
+<RbmDigitLab />
 
 <div className="neural-equation"><MathBlock>{"b^Th+\\sum_{i\\in O}v_i\\big(a_i+(Wh)_i\\big)\n+\\sum_{i\\in M}\\operatorname{softplus}\\big(a_i+(Wh)_i\\big)."}</MathBlock></div>
 
@@ -274,9 +322,25 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"We applied the fixed left-half mask to every assessment image. There are "}<InlineMath>{"80\\times32=2,560"}</InlineMath>{" missing pixel targets. Exact-gradient seed 11 achieved conditional-probability MSE 0.117704 versus the independent baseline's 0.132506; thresholding at 0.5 gives 2,112 versus 2,028 correct missing pixels. These are pixel-level results, not digit-classification accuracy. Other seeds and methods are retained, including PCD-1 seed 47's MSE 0.116945. A model can do well at this conditional task without winning on full-image NLL."}</Prose>
 
-<RbmDigitLab />
-
 <Prose>{"The conditional mean can look blurry because several plausible completions disagree. It is not necessarily a plausible joint sample. To see whole alternatives, sample a hidden state from the observed-data posterior and then all missing pixels conditional on it, preserving the observed pixels exactly. Uncertainty is part of the answer."}</Prose>
+
+<H3>{"Complete runnable study"}</H3>
+
+<Prose>{"Save the following as "}<a href={"/learn-code/boltzmann-machines-restricted-boltzmann-machines-rbm/rbm-study.py"}>{"rbm-study.py"}</a>{", next to "}<a href={"/learn-code/boltzmann-machines-restricted-boltzmann-machines-rbm/digits-400.csv"}>{"digits-400.csv"}</a>{", and run "}<code>{"python rbm-study.py"}</code>{". It needs Python, NumPy and SciPy; the recorded execution used Python 3.12.14 and NumPy 2.3.5 on CPU. The program defines the model, preprocessing, roles, all nine fits, exact checks and completion calculations. It does not download a dataset or a pretrained model. Matrix products use batch rows, "}<InlineMath>{"W"}</InlineMath>{" stores visible-by-hidden weights, and updates are ascent because we maximize log probability."}</Prose>
+
+<Prose>The code follows the mechanisms in the same order. <code>free_energy</code> reduces each hidden switch’s two alternatives using stable softplus. <code>hidden_distribution</code> builds the 256 hidden vectors once for each parameter state, computes their log masses and normalizes them using log-sum-exp; its visible conditional probabilities feed <code>exact_negative</code>. In that function, <code>pv.T @ (probability[:, None] * h)</code> is the model-weighted visible/hidden co-occurrence matrix. Its shape is 64×8, exactly the shape of W.</Prose>
+
+<Prose><code>positive</code> computes the matching observation-weighted statistic: <code>v.T @ ph / len(v)</code>. Batch rows remain observations, so the transpose converts visible features into the matrix’s row axis. <code>gibbs</code> compares independent uniform arrays with hidden probabilities and then visible probabilities; both returned layers are binary states. The loop uses either exact model statistics, a freshly restarted CD chain or the retained PCD particles. All three parameter assignments use the statistics computed before any assignment, keeping the update simultaneous.</Prose>
+
+<RbmProgram file="rbm-study.py" />
+
+<Prose>The completion derivation above explains <code>conditional_missing</code>. It uses only observed values in the evidence term and sums out missing values with softplus. <code>metrics</code> keeps normalized NLL and deterministic reconstruction MSE separate. These vectorized operations implement the taught probability model efficiently; they do not turn an exponential exact normalizer into a scalable large-RBM training method.</Prose>
+
+<Prose>{"The program writes its computed evidence beside itself. To reproduce the report, retain that output and the data provenance. For a new experiment, choose the split, hyperparameter search and final assessment procedure before comparing results; changing code after seeing this assessment set does not restore its independence."}</Prose>
+
+<Prose>Now compare all three taught diagnostics under one fixed protocol: NLL asks about the complete image distribution, reconstruction MSE asks about a deterministic return path, and completion MSE and correct-pixel counts ask about the fixed missing half. Edited local grids never change this saved assessment table.</Prose>
+
+<RbmStudyDiagnostics />
 
 <H2>{"8. Broader uses and deeper boundaries"}</H2>
 
@@ -290,6 +354,10 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <H3>{"Binary is a modeling choice"}</H3>
 
+<Prose>{"Does the same binary sampler make sense for a rating or a continuous measurement? First draw the possible values: a binary variable has two points, a categorical variable chooses one named category, and a Gaussian variable ranges over a line. The energy must match that support."}</Prose>
+
+<RbmSupportFigure />
+
 <Prose>{"Bernoulli variables describe binary events. One-hot categorical variables need probabilities that sum to one within each category group. Continuous measurements may use Gaussian visible variables; count data need a suitable count distribution. Changing the support requires changing the energy and conditional distributions consistently. Dividing a real value into "}<InlineMath>{"[0,1]"}</InlineMath>{" does not by itself turn its likelihood into a Bernoulli probability for that real value."}</Prose>
 
 <Prose>{"For a simple fixed-unit-variance Gaussian-visible, binary-hidden model,"}</Prose>
@@ -300,21 +368,25 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <H3>{"Stacking does not erase the model definition"}</H3>
 
+<Prose>{"What exactly changes when layers are stacked? In the three drawings, start at the bottom observed variables and follow the learned edges upward. A wire without an arrow specifies an undirected interaction; an arrow specifies the direction of a generative conditional. Different graphs define different probability models."}</Prose>
+
+<RbmFamilyFigure />
+
 <Prose>{"An RBM has one bipartite undirected layer pair. A "}<strong>{"deep belief network"}</strong>{" uses an undirected top pair with directed conditional layers below it; the original "}<a href={"https://www.cs.toronto.edu/~hinton/absps/fastnc.pdf"}>{"2006 DBN paper"}</a>{" develops layerwise initialization and subsequent learning. A "}<strong>{"deep Boltzmann machine"}</strong>{" keeps its multilayer interactions undirected and has harder hidden inference, as described in "}<a href={"https://proceedings.mlr.press/v5/salakhutdinov09a.html"}>{"Salakhutdinov and Hinton, 2009"}</a>{"."}</Prose>
 
 <Prose>{"RBMs can initialize other networks, but a stack of independently trained RBMs is not automatically the product of their joint distributions with correct normalization. A deterministic encoder fine-tuned for reconstruction becomes an autoencoder with its own objective. A classifier fine-tuned for labels is evaluated on conditional prediction. Draw the final generative graph and write its probability factorization before transferring a statement about one model to another."}</Prose>
-
-<RbmFamilyFigure />
 
 <Prose>{"These models helped develop representation-learning ideas. Their history is useful without declaring that unsupervised pretraining always helps, or that energy-based modeling has disappeared. Modern architectures, data regimes and objectives require their own evidence."}</Prose>
 
 <H3>{"Beyond exact enumeration: AIS and other objectives"}</H3>
 
+<Prose>{"What if no layer is small enough to enumerate? AIS connects an easy base distribution to the target through intermediate distributions. The picture uses a two-state constructed illustration so every mass ratio is visible; it does not report an RBM measurement. At each stage, evaluate the new-to-old mass ratio at the current state first, then make a transition that preserves the new distribution."}</Prose>
+
+<RbmAisFigure />
+
 <Prose>{"For a large RBM, "}<strong>{"annealed importance sampling"}</strong>{", AIS, can estimate a partition-function ratio by traversing intermediate distributions between a tractable base and the target. Each stage contributes a ratio of unnormalized weights, and its transition must preserve the intended intermediate distribution. The "}<a href={"https://www.cs.toronto.edu/~rsalakhu/papers/dbn_ais.pdf"}>{"2008 quantitative analysis paper"}</a>{" applies this approach to RBMs and DBNs."}</Prose>
 
 <Prose>{"Under the required support, initialization and transition assumptions, the average importance weight estimates the normalizer ratio without bias. Taking its logarithm is a nonlinear operation; a log estimate is generally biased and a particular run is not a certified lower or upper bound. Report repeats, weight variability, schedules and assumptions. Our small example avoids this estimation issue by summing exactly; it should not teach an AIS estimate as an exact NLL curve."}</Prose>
-
-<RbmAisFigure />
 
 <Prose>{"Other training criteria answer different questions. Pseudo-likelihood uses conditionals such as "}<InlineMath>{"p(v_i\\mid v_{-i})"}</InlineMath>{" and can avoid the global normalizer. Current "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.BernoulliRBM.html"}>{"scikit-learn BernoulliRBM documentation"}</a>{" identifies its training as PCD/SML and its "}<code>{"score_samples"}</code>{" result as a random-bit pseudo-likelihood estimate, not exact log likelihood. Check that metric contract before plotting a library “score” beside our NLL."}</Prose>
 
@@ -326,15 +398,19 @@ export default { title:'Boltzmann Machines & Restricted Boltzmann Machines (RBM)
 
 <Prose>{"The "}<a href={"/learn-code/boltzmann-machines-restricted-boltzmann-machines-rbm/bernoulli_rbm_bridge.py"}>{"complete bridge"}</a>{" uses scikit-learn 1.9.1. Keep it beside "}<code>{"rbm-study.py"}</code>{" and run "}<code>{"python bernoulli_rbm_bridge.py"}</code>{" in the earlier environment with "}<code>{"scikit-learn==1.9.1"}</code>{" installed. These two filenames have an actual dependency: the bridge imports the scratch free-energy and normalization functions without launching the digit experiment. The four constructed fitting patterns have frequencies 1, 2, 2 and 5; this is a compact API demonstration, not another assessment experiment."}</Prose>
 
+<Prose>{"How do the same learned interactions appear in a library? Read the two-entry matrix first. Scikit-learn stores a hidden-by-visible row; our scratch code stores the transposed visible-by-hidden column. Those are the same two weights, with their axes exchanged, not a newly trained model."}</Prose>
+
+<RbmLibraryLab />
+
 <NeuralTable caption={"Use a fitted library RBM without changing the probability question"} headers={[<>{"Equation or state"}</>,<>{"Ordinary API counterpart"}</>,<>{"Meaning that must survive"}</>]} rows={[[<>{"W with visible rows and hidden columns"}</>,<>{""}<code>{"components_.T"}</code>{""}</>,<>{"The transpose is required; the library stores hidden-by-visible weights"}</>],[<>{"a, b"}</>,<>{""}<code>{"intercept_visible_"}</code>{", "}<code>{"intercept_hidden_"}</code>{""}</>,<>{"Visible and hidden biases are not interchangeable"}</>],[<>{"σ(vW+b)"}</>,<>{""}<code>{"transform(v)"}</code>{""}</>,<>{"Hidden probabilities, not sampled binary states"}</>],[<>{"Alternating hidden/visible draws"}</>,<>{""}<code>{"gibbs(v)"}</code>{""}</>,<>{"One visible-state transition; it does not fit parameters"}</>],[<>{"Persistent negative statistics"}</>,<>{""}<code>{"fit"}</code>{"'s stochastic maximum likelihood updates"}</>,<>{"Package chain initialization, minibatches and random draws need not match our scratch trajectory"}</>],[<>{"−F(v)−log Z"}</>,<>{"Exact tiny oracle in this bridge"}</>,<>{""}<code>{"score_samples"}</code>{" instead estimates random-bit pseudo-likelihood"}</>]]} />
 
 <Prose>{"The first comparison uses "}<strong>{"identical fitted parameters and inputs"}</strong>{", not independently trained models. Then the four-state transition matrix verifies that the fitted distribution is stationary under its alternating Gibbs transition. A single call to "}<code>{"gibbs"}</code>{" is random and need not resemble that distribution on four samples. The printout deliberately keeps hidden probabilities, sampled states, pseudo-likelihood and exact log probability separately named. The API contract and orientation are documented by "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.BernoulliRBM.html"}>{"scikit-learn"}</a>{"."}</Prose>
 
 <RbmProgram file="bernoulli_rbm_bridge.py" />
 
-<Prose>{"A small authoring probe executed these assertions with scikit-learn 1.9.1: the fitted probabilities of 00,01,10,11 were approximately [0.183992, 0.246088, 0.243343, 0.326576], and the same-parameter hidden-probability and stationary-transition checks passed. These are constructed-case author checks, not independent implementation certification or a new digit benchmark. Final source/display verification and publication checks belong to implementation. The previously reported digit results remain unchanged. At batch size B, D visible variables and H hidden variables, one conditional sweep uses O(BDH) arithmetic and O(B(D+H)+DH) working/parameter storage. The tiny probability oracle costs exponentially in H; do not expand it to hundreds of hidden units just to accompany a library fit."}</Prose>
+<Prose>{"The fitted probabilities of 00, 01, 10 and 11 are approximately [0.183992, 0.246088, 0.243343, 0.326576]. Reusing exactly these parameters gives matching hidden probabilities and a stationary four-state transition distribution. At batch size N (called B in the training constants), D visible variables and H hidden variables, one conditional sweep uses O(NDH) arithmetic and O(N(D+H)+DH) working and parameter storage. Exact enumeration grows exponentially in the smaller layer; do not expand this oracle to hundreds of hidden units merely because a library can fit that many."}</Prose>
 
-<RbmLibraryLab />
+
 
 <Prose>{""}<strong>{"Take control."}</strong>{" Increase only the fitted hidden bias by log 2, recompute "}<code>{"transform"}</code>{", exact visible probabilities and the transition matrix, and inspect the changed result. Then change only the fitting seed and distinguish two claims: the matched arithmetic must still agree, but the learned parameters may differ."}</Prose>
 

@@ -1,0 +1,6 @@
+{
+  "stage": "finite",
+  "protocol_sha256": "623e9a763d554a458847d17d71593481551ac402d1c5ff0c16f7cf98380bda57",
+  "passed": false,
+  "failure": "Traceback (most recent call last):\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\speculation_study.py\", line 164, in run\n    report['result'] = {name:getattr(importlib.import_module(name),function)()\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\sequence_law.py\", line 144, in verify\n    assert sum(wrong.values())==1 and wrong!=expected\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+}

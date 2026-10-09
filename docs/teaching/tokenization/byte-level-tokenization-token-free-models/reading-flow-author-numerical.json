@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-06",
+  "reviewer": "author-only",
+  "checks": [
+    "JSX parses: src/learn/data/topics/byte-level-tokenization.jsx",
+    "JSX parses: src/learn/components/lesson-labs/ByteTokenizationLabs.jsx",
+    "JSX parses: src/learn/components/lesson-labs/ByteTokenizationDrawings.jsx",
+    "Thirteen stable numbered section titles preserved",
+    "All four canonical instructional programs retained",
+    "All six practice prompts/solutions retained byte-for-byte",
+    "Original invariant source bindings still match native-evidence.json",
+    "Original invariant source bindings still match model-evidence.json",
+    "RFC UTF-8 vectors and hex/payload arithmetic",
+    "Normalization and grapheme worked examples",
+    "Streaming informative, scalar-boundary, empty and EOF states",
+    "Teaching ID protocol, shift and five-target padded batch",
+    "Loss, entropy and all displayed worked patch states",
+    "Weighted blocks, pooling, global pairs, Vd and common-unit likelihood",
+    "Flow helpers, no lab titles/gates, real grid/bit/state representations"
+  ],
+  "reusedInvariantEvidence": [
+    "native-evidence.json",
+    "model-evidence.json"
+  ],
+  "sourceBindings": [
+    {
+      "path": "src/learn/data/topics/byte-level-tokenization.jsx",
+      "sha256": "1ff0da108be3e1f42f9279195dfe1e663eeeab9cf2b98c556182519c66317cae"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx",
+      "sha256": "31a15e92d9fb2b5c055188ce8b71a53f2e112b6433d5fc2be7d61801294dfc92"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationDrawings.jsx",
+      "sha256": "d0ec6629e95a6388a605de91374e90a659e50b38716e0cdca297cfeeefb2623b"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/byte-tokenization-labs.css",
+      "sha256": "f9621bb29043a4c1aca88b1fc5c979631bffefd760bbcf2febeccf2a41f62ff8"
+    },
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "scripts/verify-byte-reading-flow.mjs",
+      "sha256": "9f7d097cdf8526352d946654e5973be4a9ad962461b02b2636f08394604ac7d0"
+    }
+  ],
+  "limits": "Arithmetic, preservation and source/model contracts. Browser/paint, independent final review and root integration recorded separately."
+}

@@ -1,0 +1,36 @@
+{
+  "model": "google/flan-t5-small",
+  "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+  "dtype": "float32",
+  "device": "cpu",
+  "threads": 2,
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "samples_per_seed": 8,
+  "cap": 64,
+  "temperature": 0.8,
+  "top_p": 0.95,
+  "top_k": 0,
+  "batch_size": 1,
+  "candidate_counts": [
+    1,
+    4,
+    8
+  ],
+  "data_sha256": "35785096bc3ce4538ede7db0d6416e1d8b78aa3aef93e1393915f0f740409839",
+  "program_sha256": "dbd63cd0092c8bb70ce4f18c90dbd5db128cec0d86c65bcec0862d45ef00edc1",
+  "prompt_template": "Solve the problem. Give the final numeric answer after 'Answer:'.\n{question}\nAnswer:",
+  "versions": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.19.0",
+    "tokenizers": "0.23.2",
+    "sentencepiece": "0.2.1",
+    "numpy": "2.3.5"
+  },
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "scope": "12 convenience rows, numerical-answer voting, no training/CoT reproduction"
+}

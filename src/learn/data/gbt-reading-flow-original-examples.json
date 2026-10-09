@@ -1,0 +1,77 @@
+{
+  "residual-corrections": {
+    "title": "Fit three actual correction stumps",
+    "question": "Starting from the mean of six targets, what does each half-strength correction change, and how is a new row predicted?",
+    "expected": "baseline=5.000; MSE=7.333333\nround=1; cut=3.5; leaves=(-2.666667,2.666667); MSE=2.000000\nround=2; cut=3.5; leaves=(-1.333333,1.333333); MSE=0.666667\nround=3; cut=2.5; leaves=(-1.000000,0.500000); MSE=0.291667\nnew x=4.5; prediction=7.250000"
+  },
+  "recursive-regression": {
+    "title": "A complete deeper-tree ensemble",
+    "question": "Can the original 100-row regression example be reproduced with a depth-2 tree, and what predictions does its actual implementation produce?",
+    "expected": "=== Gradient Boosting from Scratch (MSE loss) ===\nRound        MSE    Mean pseudo-residual\n--------------------------------------------\n    0    11.1778                0.000000\n    1     7.0542                0.000000\n    2     4.8519                0.000000\n    3     3.4488                0.000000\n    4     2.4556                0.000000\n done     1.7821\n\nPredictions: [ 2.869  0.668 -3.851]\nTrue values:  [ 5.  0. -5.]"
+  },
+  "loss-derivatives": {
+    "title": "Differentiate the score, not the probability",
+    "question": "For a positive label with score −2, what are the loss gradient and curvature, and what does adding one score unit do?",
+    "expected": "p=0.119203; g=-0.880797; h=0.104994\nfinite differences: g=-0.880797; h=0.104994\nscore -2 plus 1: p=0.268941\nincorrect probability addition: 0.850262\nextreme wrong score loss=1000.0; correct score loss=0.0"
+  },
+  "regularized-split": {
+    "title": "Price the split and threshold the gradient",
+    "question": "When do L1 shrinkage and a new-leaf cost suppress a split of the five-row fixture?",
+    "expected": "alpha=0; gamma=0; leaves=(-0.666667,1.125000); net gain=2.677083; accept=True\nalpha=0; gamma=3; leaves=(-0.666667,1.125000); net gain=-0.322917; accept=False\nalpha=2; gamma=0; leaves=(-0.000000,0.625000); net gain=0.760417; accept=True\nalpha=0, rate=.3 update: [2.3, 2.3, 2.8375, 2.8375, 2.8375]"
+  },
+  "histogram-missing": {
+    "title": "Restrict thresholds and learn a missing route",
+    "question": "How do a coarse histogram and a changed missing-row target affect the best split?",
+    "expected": "missing target=8; fine: cut=3.5; missing->right; gain=51.482143\nmissing target=8; coarse: cut=4.5; missing->right; gain=27.523810\nmissing target=2; fine: cut=3.5; missing->left; gain=51.482143\nmissing target=2; coarse: cut=2.5; missing->left; gain=27.523810"
+  },
+  "goss-expectation": {
+    "title": "Enumerate the sampling distribution",
+    "question": "Does unbiasedly estimating the gradient sum also preserve its square? Calculate every two-of-four sample.",
+    "expected": "inclusion probability=1/2; small-row weight=2\nall estimated sums: [4, 10, 6, 0, -4, 2]\nfull sum=3; expected estimate=3\nsquare of full sum=9; expected squared estimate=86/3\nvariance of estimate=59/3"
+  },
+  "exclusive-bundles": {
+    "title": "Pack bins only when decoding is possible",
+    "question": "Which nonzero bin ranges can share one column, and what goes wrong when two features are active?",
+    "expected": "codes: [0, 2, 3, 6]\ndecoded: [[0, 0, 0], [2, 0, 0], [0, 1, 0], [0, 0, 2]]\nconflict: exact bundling requires exclusivity"
+  },
+  "ordered-categories": {
+    "title": "Encode before revealing the row's target",
+    "question": "After flipping row 3's target, which prefix encodings change and which must stay unchanged?",
+    "expected": "original prefixes: [0.5, 0.5, 0.25, 0.5, 0.75, 0.5]\nrow 3 prefix=0.250000; full-training A statistic=0.625000\nflip row 3 prefixes: [0.5, 0.5, 0.25, 0.5, 0.75, 0.166667]\nrow 3 prefix=0.250000; full-training A statistic=0.375000\nunseen category at inference: external prior=0.500000"
+  },
+  "ordered-prefix-models": {
+    "title": "Train models on earlier prefixes",
+    "question": "How can each training residual be obtained from a model that has not trained on that row? Trace two constant-learner rounds.",
+    "expected": "round=1; earlier-prefix residuals=[1.0, 3.0, 2.0, 6.0]\nprefix models: [0.0, 0.5, 1.0, 1.0, 1.5]\nround=2; earlier-prefix residuals=[1.0, 2.5, 1.0, 5.0]\nprefix models: [0.0, 1.0, 1.875, 1.75, 2.6875]\nnew-row prediction uses full-prefix model=2.687500\nAn earlier-prefix residual need not be zero; it excludes the row's own training target."
+  },
+  "xgboost-workflow": {
+    "title": "Run and preserve XGBoost's selected model",
+    "question": "How do native and sklearn prediction agree after validation selects an iteration, and how do save/reload and a monotonicity check work?",
+    "expected": "XGBoost 3.4.1 ; CPU; one thread; rows=700/150/150\nbest zero-based round=197; prediction rounds=198; stored=200\nbaseline test RMSE=126.813333\nselected validation RMSE=34.171658\nlocked-model test RMSE=33.363680; native/wrapper match=True\nsave/reload maximum prediction difference=0.0\nspecified monotone slice verified: True"
+  },
+  "lightgbm-workflow": {
+    "title": "Run LightGBM with explicit stopping",
+    "question": "How is the validation-selected iteration count used at inference, and how do split count and gain differ?",
+    "expected": "LightGBM 4.7.0 ; CPU; one thread; rows=700/150/150\nbest iteration count=157; stored trees=157\nbaseline test RMSE=126.813333\nselected validation RMSE=37.337775\nlocked-model test RMSE=35.546372\nfeature 0: split count=235; summed gain=3083143.015"
+  },
+  "catboost-workflow": {
+    "title": "Run CatBoost's explicitly Ordered regression",
+    "question": "Which trees remain after validation selects the best iteration, and what does the locked model achieve on untouched synthetic test rows?",
+    "expected": "CatBoost 1.2.10 ; CPU; Ordered; one thread; rows=700/150/150\nbest zero-based round=199; retained trees=200\nbaseline test RMSE=126.813333\nselected validation RMSE=32.928121\nlocked-model test RMSE=31.679984\nThis explicit Ordered run does not establish which library wins on other data."
+  },
+  "catboost-categories": {
+    "title": "Use categorical rows and align prediction shapes",
+    "question": "Can categorical classification handle an unseen category, and how can a broadcasting mistake silently corrupt accuracy?",
+    "expected": "raw class shape=(100,); aligned shape=(100,)\nbest zero-based round=147; retained trees=148\nlocked test accuracy=0.990000; log-loss=0.032727\nunseen-category probability is finite: True\nwrong comparison shape=(100, 100); wrong accuracy=0.501200"
+  },
+  "native-categorical-splits": {
+    "title": "Declare a categorical schema in two more libraries",
+    "question": "How can XGBoost and LightGBM use native categoricals while preserving the meaning of category labels across prediction rows?",
+    "expected": "declared category order: ['A', 'B', 'C']\nXGBoost finite predictions: True\nLightGBM finite predictions: True\ncategory=C, A, B predictions:\nXGBoost [1.0136 0.034  3.9523]\nLightGBM [1.0092 0.0231 3.9677]\nKeep the training schema; this toy does not validate arbitrary unseen-category pipelines."
+  },
+  "quantile-planning": {
+    "title": "Choose the cost of underprediction",
+    "question": "Which prediction minimizes 80th-percentile pinball loss for the constructed spare-part demand, and why need the optimum not be unique?",
+    "expected": "integer minimizers: [2, 3, 4, 5, 6, 7, 8]\nminimum total pinball loss=28/5\nmean demand=2.4; mean prediction pinball loss=5.600\nAt tau=.8, underprediction costs four times overprediction per unit.\nThe optimum is an interval here; a conditional quantile is not a calibrated prediction interval by itself."
+  }
+}

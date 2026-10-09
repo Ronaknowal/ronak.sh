@@ -47,7 +47,6 @@ def main():
     assert abs(gaussian_kl(np.zeros(2), np.ones(2), np.zeros(2), np.eye(2))) < 1e-12
     for correlation in (.8, 0.):
         fit_case(correlation)
-    print("Analytic KL, fitted-parameter and changed-correlation checks: passed; no q sampling error in these comparisons")
 
 
 if __name__ == "__main__":

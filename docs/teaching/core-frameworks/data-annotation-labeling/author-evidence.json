@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-28",
+  "kind": "author-only",
+  "author": "frameworks_annotation_modalities",
+  "topicId": "data-annotation-labeling",
+  "checks": [
+    "Complete manuscript, concept-hurdle map and visual specifications saved before runtime implementation",
+    "Semantic browser-model assertions passed; native reference comparisons passed",
+    "Six topic/lab JSX files parsed successfully",
+    "Author heuristic teaching review recorded in README"
+  ],
+  "nativeEvidence": "../computer-vision-libraries/native-evidence.json",
+  "pending": [
+    "Parent-owned production/browser final receipt and central ledger closure"
+  ],
+  "files": {
+    "src/learn/data/topics/data-annotation-labeling.jsx": "752f700d3b9cdeef574f7c2c849f939e5f58615e7e704336006f6fc83a529547",
+    "src/learn/data/curriculum/blueprints/data-annotation-labeling.js": "cebca99204a50785d53e201b0e6c221d0ae31bf4fce2e941ed560c7d06b97fac",
+    "src/learn/components/lesson-labs/DataAnnotationLabs.jsx": "3c18315acdafc649b471d7fddcd2ecda636dc9d7f282af5d2e1becf085e33da2",
+    "src/learn/data/annotation-agreement-model.js": "0bc9100fa521a2e9c60ea13634249098767cdaeeac6617f10df46cb13dfab56f",
+    "public/learn-code/data-annotation-labeling/annotation_audit.py": "dd508eeabc11ad5752e0d7dd690d8255a7d3540ca607541442da46d64c807938",
+    "public/learn-code/data-annotation-labeling/label_config.xml": "cb2159a829db8d6e11083c33670a408ee0abe00bc6c2e1c71b622bf98fb2ca86",
+    "public/learn-code/data-annotation-labeling/tasks.json": "6ea732696baaa25e322586592a73593426a40a68e4baffe22a5b72b2a3b3c04b",
+    "src/learn/components/lesson-labs/framework-data-contracts.css": "bd5ad7fe52b1df6b4a0c0c7485d7f3b235192cc2307e8b195bd9734be74be1e6",
+    "scripts/verify-framework-data-contracts.mjs": "68bc00c4969b3971cfe035de963daa8ce1ea1fd0d97996269b76c7c190668c00",
+    "scripts/verify-framework-data-contracts.py": "6d09c7dfc3de7a818bda820cfdef9f13daf5219d26e7a1cefb0eae08638faf26"
+  },
+  "corrections": [
+    "NLP code-point typography enlarged after desktop screenshot review; textarea explicitly neutral with keyboard focus. Models unchanged.",
+    "Annotation agreement counters use one pass/O(k) extra space; scoped 256-case native reference and missing/empty/main checks rerun and passed.",
+    "CV contribution list given 14px type and explicit inline-start padding after a clipped-marker finding in the 320px capture. Numerics unchanged; corrected desktop/320px/changed captures reviewed and finding closed."
+  ],
+  "independentReview": "independent-review.md",
+  "paintedAuthorReview": "Desktop, 320px and meaningful changed-state lab captures inspected; details and targeted typography closure in README.",
+  "sourceState": "Frozen: author, native, independent source and targeted painted review complete; root owns final integration receipt."
+}

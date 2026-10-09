@@ -1,0 +1,128 @@
+{
+  "anchors": [
+    {
+      "number": 1,
+      "title": "Choose a state and a clock",
+      "anchor": "choose-a-state-and-a-clock"
+    },
+    {
+      "number": 2,
+      "title": "Ask what a disturbance does",
+      "anchor": "ask-what-a-disturbance-does"
+    },
+    {
+      "number": 3,
+      "title": "Read the landscape and its basins",
+      "anchor": "read-the-landscape-and-its-basins"
+    },
+    {
+      "number": 4,
+      "title": "See time through a phase portrait",
+      "anchor": "see-time-through-a-phase-portrait"
+    },
+    {
+      "number": 5,
+      "title": "Build an attracting oscillation",
+      "anchor": "build-an-attracting-oscillation"
+    },
+    {
+      "number": 6,
+      "title": "Feed an output back into the rule",
+      "anchor": "feed-an-output-back-into-the-rule"
+    },
+    {
+      "number": 7,
+      "title": "Measure sensitivity without overclaiming",
+      "anchor": "measure-sensitivity-without-overclaiming"
+    },
+    {
+      "number": 8,
+      "title": "See why stretching and folding matter",
+      "anchor": "see-why-stretching-and-folding-matter"
+    },
+    {
+      "number": 9,
+      "title": "Keep the full state behind a projection",
+      "anchor": "keep-the-full-state-behind-a-projection"
+    },
+    {
+      "number": 10,
+      "title": "Check the dynamics of the numerical method",
+      "anchor": "check-the-dynamics-of-the-numerical-method"
+    },
+    {
+      "number": 11,
+      "title": "Transfer the reasoning and practise",
+      "anchor": "transfer-the-reasoning-and-practise"
+    }
+  ],
+  "files": [
+    "dynamics_cooling.py",
+    "dynamics_scalar.py",
+    "dynamics_transient.py",
+    "dynamics_hopf.py",
+    "dynamics_cycles.py",
+    "dynamics_original.py",
+    "dynamics_exponent.py",
+    "dynamics_tent.py",
+    "lorenz_rk4_scratch.py",
+    "dynamics_lorenz.py",
+    "dynamics_energy.py",
+    "dynamics_products.py",
+    "dynamics_practice.py"
+  ],
+  "readingRefinements": [
+    {
+      "old": "Three different promises about nearby starts",
+      "new": "Four different promises about nearby starts"
+    },
+    {
+      "old": "They were run with Python 3.12.14, NumPy 2.3.5 and SciPy 1.18.1.",
+      "new": "The eleven original programmes were run with Python 3.12.14, NumPy 2.3.5 and SciPy 1.18.1. The added vector RK4 and practice programmes were run with Python 3.12.8 and use only its standard library."
+    },
+    {
+      "old": "Select the actual r=3.83 grid column to see the window; a nearby column must not be relabeled as 3.83.",
+      "new": "Select r=3.83 to see a sampled column in the period-three window; its label identifies the parameter actually used."
+    },
+    {
+      "old": "Label the halves L and R in addition to their different colours.",
+      "new": "The L and R labels identify the halves as well as their different colours."
+    },
+    {
+      "old": "[[D38]]",
+      "new": "Zoom into the itinerary interval and locate the point that repeats the same word.\n\n[[D38]]"
+    },
+    {
+      "old": "The magnification is labeled; a two-pixel sliver must not become an apparently unchanged interval.",
+      "new": "The magnification label lets you compare the local detail with the shrinking interval on the full ruler."
+    },
+    {
+      "old": "These dense periodic points coexist with sensitive dependence; they do not mean that every orbit is periodic.",
+      "new": "The same covering argument explains sensitive dependence. Any arbitrarily small starting neighborhood contains a cylinder whose image is the entire unit interval after n steps. At that time choose an image endpoint at least 1/2 away from the reference image; its preimage is a nearby start that has separated. The fixed separation scale can therefore be reached from arbitrarily close starts. The dense periodic points do not mean that every orbit is periodic."
+    },
+    {
+      "old": "The surrounding prose carries that interpretation instead of printing an explanatory sentence from the program.",
+      "new": "That short-time agreement answers a narrower question than long-term forecast accuracy."
+    },
+    {
+      "old": "[[D52]]",
+      "new": "Now compare the shape of the original energy level with the one preserved by the update.\n\n[[D52]]"
+    },
+    {
+      "old": "The printed growing Euler energy and bounded symplectic oscillation therefore test the mechanisms just drawn, without treating either method as an exact physical path.",
+      "new": "The printed endpoint energies are consistent with the mechanisms just drawn. The time plots, rather than the endpoint list alone, reveal the symplectic energy oscillation; neither method gives an exact physical path."
+    },
+    {
+      "old": "**Check the distinction.** The symplectic run reports modified energy 0.5 at every step.",
+      "new": "**Check the distinction.** The browser’s symplectic trace reports modified energy 0.5 at every step."
+    },
+    {
+      "old": "The original eleven source/output pairs are preserved; nine purely explanatory print lines have moved into the surrounding prose. Numerical assertions, errors and all scientific output remain intact. The two added complete programmes have their own recorded executions.",
+      "new": "The recorded outputs use the declared mathematical fixtures and execution environments. Numerical assertions and input errors remain part of the complete runnable examples."
+    },
+    {
+      "old": "Each file has full source and recorded output at its teaching point. Runtime implementation must provide exact Copy, Download and output delivery using these prepared bytes; the final index links to those same assets. The downloadable output is an observation from the stated fixture, not a substitute for the mechanism or its assumptions.",
+      "new": "Each file has full source and recorded output at its teaching point. Use its source to change a fixture yourself; the recorded output describes the stated run and its assumptions."
+    }
+  ]
+}

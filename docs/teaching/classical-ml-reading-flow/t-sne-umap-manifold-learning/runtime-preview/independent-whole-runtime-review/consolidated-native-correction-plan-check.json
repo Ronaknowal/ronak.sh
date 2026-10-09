@@ -1,0 +1,735 @@
+{
+  "schemaVersion": 1,
+  "status": "complete-consolidated-correction-design-implementation-and-closure-open",
+  "reviewer": "/root/ml_successor_independent_review",
+  "at": "2026-10-09T16:17:00.203553+00:00",
+  "scope": "Source-only counterpart to both frozen Root native findings V1–V4 plus extensions; exact arithmetic for new display proposals only. No learner edits, scientific main/model execution, build, HTTP, native observation or phase promotion.",
+  "report": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/independent-whole-runtime-review/consolidated-native-correction-plan.md",
+    "bytes": 20703,
+    "sha256": "622214895b86ec650f24945e19a353fb9c9d4fc115d00ba5643f45abf8099345"
+  },
+  "inputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/independent-whole-runtime-review/root-native-reading-review.json",
+      "bytes": 26951,
+      "sha256": "19dff2c76bdfba8f93eb7aa34e7a8479ab7b41fcf89a75c73b7d3b4817ab7402"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/AffinityFigures.jsx",
+      "bytes": 18479,
+      "sha256": "f788b06f48ab1cf1830fc3bc7ee613ec0aa2da45cdbf08cfb4cf58da64201a8d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-geometry-refinement.mjs",
+      "bytes": 8037,
+      "sha256": "565c562a22443434bfd052b22b5120bd589e2ea0595970f19e8a15c8cb290905"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-harness-isolation.mjs",
+      "bytes": 4094,
+      "sha256": "4707dce16abb58c7119078caf200f2008a6ceac986325fa1ac555d9e2cdd3ce4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-private-http.mjs",
+      "bytes": 3545,
+      "sha256": "29b542bad6be28cf24cc42d1f43acdfa70ef2625887d7d64d26491a749962c73"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-refinement-final-source.mjs",
+      "bytes": 5409,
+      "sha256": "404d207275329a176c64099182e57a91803388ca90f12d7abe3ef38b7594f2a4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-runtime-source.mjs",
+      "bytes": 8918,
+      "sha256": "748bec0ec19f30ef448ff22be6dcc7d407510a9d4d3753f1dc00b71c00e80ee2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/generate-reader.mjs",
+      "bytes": 7404,
+      "sha256": "b6e5e3b5033a899893bbfd772b3908c1682f050b451005b53c588533f9dd52e6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+      "bytes": 39319,
+      "sha256": "0653febab66a69abfa4ca3c20167636dfe2bf9d8707268474b4a3794f0d318d9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/index.html",
+      "bytes": 272,
+      "sha256": "6b7e4e39e44df32eb5ac4e18045441f1812c0e2ae8b9e6c59da0bd6844e125f4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+      "bytes": 1098,
+      "sha256": "ddb035ee95bcfb601f5eb168af517db8b13da7b753ab028f36c80bce468e24d4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-geometry.mjs",
+      "bytes": 3443,
+      "sha256": "5f05fdb29982dbb214ca05a67215b40f79e46f3ad26d0246c3bc84db2e6f2f22"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-lesson.jsx",
+      "bytes": 124308,
+      "sha256": "14437087228af766dc00f8f572cb4abce3e1c632a80ea6ab82f786a18911c117"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+      "bytes": 9250,
+      "sha256": "c5ba7766028d8bdde7b8009af07418f9799561b95513a48bcd5565b609d58afb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-reader.css",
+      "bytes": 4690,
+      "sha256": "cdbabe22dca81d07fe19d225de92b35c01c86e4fb0760bb24da2e5b0b8622cb0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+      "bytes": 8447,
+      "sha256": "91be13c046661ec8b6f597f849bdae7059645fdedb57ab7dcc317f22c11c5336"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldFigures.jsx",
+      "bytes": 464,
+      "sha256": "b17d994feab9ac0096c809e4fa8da16e20bbed708aa281f6b4728b9d105137df"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+      "bytes": 25482,
+      "sha256": "f2b4662de64d17dbaa07a4aab84b1e7d580f4acb08419d05dadebe7cf001d3e7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+      "bytes": 17524,
+      "sha256": "6abb3bfb866dc4f0443d9dbef5c8c6262c0cef5160c7972becdaf279b2f0debd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-entry.jsx",
+      "bytes": 1122,
+      "sha256": "5c4171eb90643062eb8ee4c365ace26e2e256eaa2f17ebae133247d101d7dfe4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-loader.js",
+      "bytes": 198,
+      "sha256": "c8cb5c008cc405174011d5930691568ea57af3005cce2194908d25f55dd5c170"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/PrivateFiles.jsx",
+      "bytes": 740,
+      "sha256": "9663b5c8640759251d885bfe3a1e46b98b296262c2c57b69d4e195a6b62d639e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite.config.mjs",
+      "bytes": 3974,
+      "sha256": "03d2436f376e2ddb45faafa77569e60b9bebba9116e2a2190d358eab5debe89a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite-source-corrected.config.mjs",
+      "bytes": 584,
+      "sha256": "55938c27902295749bebb9e1bc01721ed3cd1f84ad06babbf5a5d8834b3380bc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/check-source-contracts.mjs",
+      "bytes": 14533,
+      "sha256": "a8f435797b4538fb9974c85da2b4b765a9c21b3c842268e23501c53e06c3348f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/check-corrected-http.mjs",
+      "bytes": 3714,
+      "sha256": "38fae1e33f1626c1927b9468e68bf6d71529449f679cea5466eb639e13fb1b86"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldOperationObjects.jsx",
+      "bytes": 18704,
+      "sha256": "e743808753dac6902af92f39dda57a4fac1a0c2aaa5b6880c1ae9cb8df34c7d9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite-review-correction.config.mjs",
+      "bytes": 606,
+      "sha256": "2703fc98cf8a7e26fb4865f0e89e93c01eb893a1fa8596019ef6bfe3a3c169f1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/check-review-corrections.mjs",
+      "bytes": 15523,
+      "sha256": "0f5aec7ac9f15fbb163896f29b65571d19a84fd914099fbcf6013e2a968e6481"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/bind-correction.py",
+      "bytes": 7180,
+      "sha256": "d96a69c8e8ee5fd50a33cd198352175c990c4a52deaacb1d123c5f15a94edb02"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/check-corrected-http.mjs",
+      "bytes": 3718,
+      "sha256": "43f144aa3c6ff1716bb61a36f2bdd1322a4c22f0f645fa98ef824115a351d1bb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/freeze-built-handoff.py",
+      "bytes": 5382,
+      "sha256": "90e1822dc4296d8e500ead12127dc887a86313d5185a26220c9558c300cd6265"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/ManifoldOperationObjects.jsx",
+      "bytes": 20424,
+      "sha256": "b4be3e35c75e93ae6bb68e6b7b5796a8104929992db8b54ab4b9ae3a9bdc6c08"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/vite.config.mjs",
+      "bytes": 1034,
+      "sha256": "b61f55ff2cf47600116755ec3a12a53e0f67251930f8ad977e0088a98575b153"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/compose-arrow-overlay.py",
+      "bytes": 2926,
+      "sha256": "58c8f04e6344baa348f3365e603a9d81d77c06e2b915bcea2f3751a760eea805"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-probability-arrows.mjs",
+      "bytes": 11200,
+      "sha256": "933f238375a8ef1c52b1d7d0269d067ecae1d55e89fa735cd7ba6187cc99f9a9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/freeze-source.py",
+      "bytes": 7753,
+      "sha256": "7312110b939c1b88778981e526a9080f2eb16cc3725b4f28fdbfce0de416b78c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/probe-prebuild.mjs",
+      "bytes": 3029,
+      "sha256": "bb00cb26a29960a82bd02a9b1c84df3c028ea33a68b98096ba4100819b9280be"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-http.mjs",
+      "bytes": 4932,
+      "sha256": "29252e443f25f6113fe28057ed1c72f9a688e09b7d80be501e91b520b1bb9599"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/freeze-built.py",
+      "bytes": 4397,
+      "sha256": "e0ac601321c765b5e37bb8bb3a23cd99f8bc4dcb3700cffad2c7614279237391"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/manifold-reader.css",
+      "bytes": 5060,
+      "sha256": "25a7954c41747468debe80dd8a89750078859cd28c7ac7f66eb8dce6f3ad375b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/vite.config.mjs",
+      "bytes": 999,
+      "sha256": "f7ea19ef8b19bc4510947789f5cb9fb360615aa2381bf30c07e965f50cee2961"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/freeze-source.py",
+      "bytes": 4666,
+      "sha256": "5cd19668355999290a2b2777091a4826297900629666463b3cba03d29f60b7ee"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/probe-prebuild.mjs",
+      "bytes": 3071,
+      "sha256": "00144fc4e89278ef501a2f1c142163ce884ada62f2d583a36dbf70bd017223b4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/check-http.mjs",
+      "bytes": 5496,
+      "sha256": "3187879bf103cc14db504876e34b42ecdf7863b62915fcf0934f91d09884e254"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/freeze-built.py",
+      "bytes": 4673,
+      "sha256": "f2a86c9f99dc83f19c814f388e7f7bcf956d641261977d93bd37deaccb538edc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/AffinityFigures.jsx",
+      "bytes": 19602,
+      "sha256": "7747310c4415076ba6ed590228b21ab71f5fb9e1179b1fc5ec58a99d9f279203"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/manifold-reader.css",
+      "bytes": 4893,
+      "sha256": "f1c1c17ca945b4d8c6d18673176b58ca4f67d62a86e765a8facd934a959d0c0c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/vite.config.mjs",
+      "bytes": 982,
+      "sha256": "f445ee9b0cf9a6f9f7333a94bf58e96dcbbf8f6f6bd08b331f4d1bed5ef8a6f8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/freeze-source.py",
+      "bytes": 7943,
+      "sha256": "687f2e9eece8f13bc279b42fbcc8d79f95496b3e3d8d8374a6dc6c43ab225574"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/probe-prebuild.mjs",
+      "bytes": 3069,
+      "sha256": "2c64d5b4efc8839d46d37a5c46c752e482e1b2e2613bfe68209fa3cf20f1d5bc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/check-http.mjs",
+      "bytes": 5732,
+      "sha256": "0c8b1f2daeed06bee977f945a348fd2691927aec5ee648101cdd52271f11f718"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/freeze-built.py",
+      "bytes": 4980,
+      "sha256": "f99f17d1585705f6787897237a720dd158daaac6c45d214a92c1614feea5d333"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/check-source-ssr.mjs",
+      "bytes": 4946,
+      "sha256": "521a8aa28ae41b407a7bf99568b6bb8112670d96e5bd52343a40f18fc98fa607"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/manifold-reader.css",
+      "bytes": 5047,
+      "sha256": "d72d2fb98f747cbd2582a4710b138d57e2edf71e14adbf75032d65f5d03ac22f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/vite.config.mjs",
+      "bytes": 1055,
+      "sha256": "db6f2fe76f0a58b52db2543342d8046d1412d64d83b2bc9a653777f83f821d0a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/prepare-successor.py",
+      "bytes": 4181,
+      "sha256": "2a8e980d967b3ed5b1625fe58ee1dbee124f88c94cfdb24b91836bb1cbb7c74d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-source.py",
+      "bytes": 5977,
+      "sha256": "04289d9d97198ba050578a3e33f97c3ed7d8e931494c4cb1b158f1c27eb031f3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/probe-prebuild.mjs",
+      "bytes": 3032,
+      "sha256": "4c5f171d064a450d3cf491ea486e6975880a119cecb308a86b979acbc8c1705a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/check-http.mjs",
+      "bytes": 5860,
+      "sha256": "dc20e9e0db9d68c637aaed13ed9792e1939b26646d8b1b7f4238858bc16149c6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-built.py",
+      "bytes": 4934,
+      "sha256": "ea71c75e7aa79867ca1da11f6a6d367a1c897795de89477fcb9aae2dfb54027e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/probe-prebuild.mjs",
+      "bytes": 3032,
+      "sha256": "4c5f171d064a450d3cf491ea486e6975880a119cecb308a86b979acbc8c1705a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/check-http.mjs",
+      "bytes": 5860,
+      "sha256": "dc20e9e0db9d68c637aaed13ed9792e1939b26646d8b1b7f4238858bc16149c6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-built.py",
+      "bytes": 4934,
+      "sha256": "ea71c75e7aa79867ca1da11f6a6d367a1c897795de89477fcb9aae2dfb54027e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/author-ready-built-source.json",
+      "bytes": 58072,
+      "sha256": "196ee467401c0e003b89f8663fe1f87efba73fecce7a0f64bfdeb4b08b6bc1cd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/independent-whole-runtime-review/review.md",
+      "bytes": 14869,
+      "sha256": "82109d5b62d81074bd382f1c40f314e4ba4d5c2882d8f43032bb61a55dae6b3d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/reading-flow-manuscript.md",
+      "bytes": 138332,
+      "sha256": "8d1c32dc7cf8de49b99fd6198671927c52196d7ac5714dd0ec90c70eebfbbec5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/visual-and-investigation-specifications.md",
+      "bytes": 45697,
+      "sha256": "07aee732555d0a30e519fa7feb1687d58837d4b232640a337b0e500de5a217b3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/independent-whole-runtime-review/root-native-reading-continuation.json",
+      "bytes": 27987,
+      "sha256": "f191f2f4239affc9931b6168b9ae3e64f01bdb3bcdbdf83ec3df1658d7709bc7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/independent-whole-runtime-review/root-native-source-counterpart-check.json",
+      "bytes": 38494,
+      "sha256": "4b3d1354681f8df6bd3c394e844efc5f19c087c7e3fb3999426ec0a3806837ff"
+    }
+  ],
+  "sourceChecks": [
+    {
+      "condition": "Root frozen partial native identity",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/AffinityFigures.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-geometry-refinement.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-harness-isolation.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-private-http.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-refinement-final-source.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-runtime-source.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/generate-reader.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/index.html",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-geometry.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-lesson.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-reader.css",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldFigures.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-entry.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-loader.js",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/PrivateFiles.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite.config.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite-source-corrected.config.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/check-source-contracts.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/check-corrected-http.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldOperationObjects.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite-review-correction.config.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/check-review-corrections.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/bind-correction.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/check-corrected-http.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/freeze-built-handoff.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/ManifoldOperationObjects.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/vite.config.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/compose-arrow-overlay.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-probability-arrows.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/freeze-source.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/probe-prebuild.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-http.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/freeze-built.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/manifold-reader.css",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/vite.config.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/freeze-source.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/probe-prebuild.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/check-http.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/freeze-built.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/AffinityFigures.jsx",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/manifold-reader.css",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/vite.config.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/freeze-source.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/probe-prebuild.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/check-http.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/freeze-built.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/check-source-ssr.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/manifold-reader.css",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/vite.config.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/prepare-successor.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-source.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/probe-prebuild.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/check-http.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-built.py",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/probe-prebuild.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/check-http.mjs",
+      "pass": true
+    },
+    {
+      "condition": "Current source conservation: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-built.py",
+      "pass": true
+    },
+    {
+      "condition": "Final 5199 build/source freeze",
+      "pass": true
+    },
+    {
+      "condition": "Preserved review/content input: runtime-preview/independent-whole-runtime-review/review.md",
+      "pass": true
+    },
+    {
+      "condition": "Preserved review/content input: content-authoring/review-correction/reading-flow-manuscript.md",
+      "pass": true
+    },
+    {
+      "condition": "Preserved review/content input: content-authoring/review-correction/visual-and-investigation-specifications.md",
+      "pass": true
+    },
+    {
+      "condition": "Plot edges precede point circles",
+      "pass": true
+    },
+    {
+      "condition": "Bars default palette starts at zero",
+      "pass": true
+    },
+    {
+      "condition": "Curve marks currently hardcoded amber",
+      "pass": true
+    },
+    {
+      "condition": "Manuscript formal statement precedes D09",
+      "pass": true
+    },
+    {
+      "condition": "Runtime formal statement precedes D09",
+      "pass": true
+    },
+    {
+      "condition": "Manuscript formal statement precedes D16",
+      "pass": true
+    },
+    {
+      "condition": "Runtime formal statement precedes D16",
+      "pass": true
+    },
+    {
+      "condition": "Manuscript formal statement precedes D20",
+      "pass": true
+    },
+    {
+      "condition": "Runtime formal statement precedes D20",
+      "pass": true
+    },
+    {
+      "condition": "Final native continuation exact identity",
+      "pass": true
+    },
+    {
+      "condition": "Both Root native receipts bind identical 63 current sources",
+      "pass": true
+    },
+    {
+      "condition": "Both Root native receipts bind identical final source freeze",
+      "pass": true
+    },
+    {
+      "condition": "Final native continuation preserves previous receipt binding",
+      "pass": true
+    },
+    {
+      "condition": "Frozen partial independent counterpart preserved",
+      "pass": true
+    },
+    {
+      "condition": "Constructed D35 positive eigenpair exact",
+      "pass": true
+    },
+    {
+      "condition": "Constructed D35 discarded eigenpair exact",
+      "pass": true
+    },
+    {
+      "condition": "Constructed D35 positive-mode lengths exact",
+      "pass": true
+    },
+    {
+      "condition": "D39 two component constants have zero Laplacian",
+      "pass": true
+    },
+    {
+      "condition": "D40 exact secant change equals retained stencil",
+      "pass": true
+    }
+  ],
+  "sourceCheckCount": 87,
+  "annotationArithmetic": {
+    "D04_patch_u_anchor_separation_svg": 35.2,
+    "D08_directed_A_C_anchor_separation_svg": 22.5,
+    "D08_identity_A_C_anchor_separation_svg": 24.545454545454547,
+    "D17_arrow_y_svg": [
+      91,
+      113.0,
+      135,
+      157.0
+    ],
+    "D17_label_baseline_svg": [
+      79,
+      101.0,
+      123,
+      145.0
+    ],
+    "limit": "Source geometry only; no measured native font-box claim."
+  },
+  "unchangedEvidence": "Original whole review, accepted source corrections and scientific/native qualifications remain version-attributed.",
+  "nextAction": "Root decides release of this consolidated set; author prepares matched source/content/spec successor, then bounded independent closure and Root affected native review."
+}

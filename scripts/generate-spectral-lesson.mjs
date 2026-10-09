@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
+if(fs.readFileSync('src/learn/data/topics/spectral-normalization-gradient-penalty.jsx','utf8').startsWith('// Reading-flow revision'))throw Error('Historical generator cannot overwrite the current reading-flow lesson or its scientific assets.');
 const id='spectral-normalization-gradient-penalty', source='docs/teaching/drafts/'+id, destination='public/learn-code/'+id;
 fs.mkdirSync(destination,{recursive:true});
 const files=['critic-regularization-study.py','sensitivity-calculations.py','calculated-inputs.json','sensitivity-results.json','digits-400.csv','data-provenance.md'];

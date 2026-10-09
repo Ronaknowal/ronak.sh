@@ -1,0 +1,550 @@
+{
+  "at": "2026-10-07T17:11:13.318332+00:00",
+  "records": 34,
+  "kept": 32,
+  "rejected": [
+    {
+      "id": "train-00-qa",
+      "source_id": "train-00",
+      "accepted": false,
+      "reasons": [
+        "fewer than 33 UTF-8 bytes"
+      ],
+      "sha256": "66fb355afb1a5efce4d5424dcc8b5f860ea03205b9bafaba8e8d96e4ffd872bb",
+      "bytes": 30
+    },
+    {
+      "id": "train-05-qa",
+      "source_id": "train-05",
+      "accepted": false,
+      "reasons": [
+        "fewer than 33 UTF-8 bytes"
+      ],
+      "sha256": "e2410a0376b7d54808308721809ea34f2970ca4351eb60bc4120282d76ed6313",
+      "bytes": 28
+    }
+  ],
+  "source_records": 17,
+  "heldout_records": 4,
+  "heldout_targets": 1862,
+  "input_truncations": 0,
+  "length_caps": [
+    "train-09-plain",
+    "train-10-plain"
+  ],
+  "generation_seconds_sum": 48.39428229998157,
+  "generator_new_tokens": 1062,
+  "raw_windows": 8092,
+  "generated_windows": 2927,
+  "pairs": [
+    {
+      "seed": 17,
+      "raw_byte_nll": 2.295572428220821,
+      "generated_byte_nll": 2.3054048748352796,
+      "generated_minus_raw": 0.00983244661445859,
+      "generated_target_fraction": 0.5102083333333334
+    },
+    {
+      "seed": 29,
+      "raw_byte_nll": 2.2529605360937763,
+      "generated_byte_nll": 2.24404211955147,
+      "generated_minus_raw": -0.008918416542306407,
+      "generated_target_fraction": 0.5027083333333333
+    },
+    {
+      "seed": 43,
+      "raw_byte_nll": 2.3390967384486925,
+      "generated_byte_nll": 2.324776021823203,
+      "generated_minus_raw": -0.014320716625489283,
+      "generated_target_fraction": 0.5008333333333334
+    }
+  ],
+  "mean_paired_difference": -0.004468895517779033,
+  "checks": [
+    "All3 seed17 saved models reproduce full heldout scores and48 fixed full256-probability inspector rows; zero updates",
+    "All9 histories, copied null weights, paired initialization,36 evaluation denominators and predeclared sampling exposure reconstructed"
+  ],
+  "manual_audit": [
+    {
+      "id": "train-00-plain",
+      "source_id": "train-00",
+      "text": "Alice, a schoolteacher and a writer, began to get tired of sitting by her sister on the bank. She had no pictures or conversations in it, “and what is the use of a book,” she thought.",
+      "note": "Invents Alice as a schoolteacher and writer; attributes the book description awkwardly to her.",
+      "selection": {
+        "id": "train-00-plain",
+        "source_id": "train-00",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "8f5066ae449e44805cec3cb599ddae2d5eb23b4c8e1ca0077ee2358a9f463833",
+        "bytes": 187
+      }
+    },
+    {
+      "id": "train-00-qa",
+      "source_id": "train-00",
+      "text": "What was Alice's sister doing?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-00-qa",
+        "source_id": "train-00",
+        "accepted": false,
+        "reasons": [
+          "fewer than 33 UTF-8 bytes"
+        ],
+        "sha256": "66fb355afb1a5efce4d5424dcc8b5f860ea03205b9bafaba8e8d96e4ffd872bb",
+        "bytes": 30
+      }
+    },
+    {
+      "id": "train-01-plain",
+      "source_id": "train-01",
+      "text": "She thought the rabbit was just a pig and would be a good dog to catch the rabbit.",
+      "note": "Invents pig/dog claims; omits the daisy-chain and hot-day source context.",
+      "selection": {
+        "id": "train-01-plain",
+        "source_id": "train-01",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "356097e3fc368a13cab774f92880f05081c557f5d7114d2e060906d220dc88c9",
+        "bytes": 82
+      }
+    },
+    {
+      "id": "train-01-qa",
+      "source_id": "train-01",
+      "text": "Why did the rabbit want to make her do this?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-01-qa",
+        "source_id": "train-01",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "694dd4774467b124bae231815c977c2cf81777b04599ec8c3ba8928d684ab2e4",
+        "bytes": 44
+      }
+    },
+    {
+      "id": "train-02-plain",
+      "source_id": "train-02",
+      "text": "They could have won an award, but Alice decided to leave. Alice was not surprised, since the Rabbit had actually spotted a rabbit with either a waistcoat-pocket or a watch in the field.",
+      "note": "Invents an award and departure; changes who observed the pocket/watch.",
+      "selection": {
+        "id": "train-02-plain",
+        "source_id": "train-02",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "4cbabd93c94b4c4258c6c7b617f53012a14e87e50b880319b06fa85fe6bade64",
+        "bytes": 185
+      }
+    },
+    {
+      "id": "train-02-qa",
+      "source_id": "train-02",
+      "text": "Why did Alice think it was so far out of her way to hear the Rabbit say to itself, “Oh dear! Oh dear! I shall be late!”?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-02-qa",
+        "source_id": "train-02",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "ec8c65c0d2e2317d51b2f4312d19398058c6c80072ead7847c1066979d32db4d",
+        "bytes": 124
+      }
+    },
+    {
+      "id": "train-03-plain",
+      "source_id": "train-03",
+      "text": "Alice was eventually able to get out of the zoo, but when she was gone, she was going to be able to go on some kind of adventure.",
+      "note": "Invents a zoo; loses the source concern about getting out of the rabbit-hole.",
+      "selection": {
+        "id": "train-03-plain",
+        "source_id": "train-03",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "c309b05ea1cc17a50bf42778285e2a52f25b8c0167c64966d3d0e888a990ec46",
+        "bytes": 129
+      }
+    },
+    {
+      "id": "train-03-qa",
+      "source_id": "train-03",
+      "text": "What did Alice put on the bed that day?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-03-qa",
+        "source_id": "train-03",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "d096df346253928eb37c24f81ad2856cbb0732092947fddd3c6d84e0f61427e0",
+        "bytes": 39
+      }
+    },
+    {
+      "id": "train-04-plain",
+      "source_id": "train-04",
+      "text": "Alice dipped quickly to the rabbit hole, and dipped suddenly down to the deep well.",
+      "note": "Retains rabbit-hole/deep-well setting, but makes Alice perform the dipping rather than the tunnel.",
+      "selection": {
+        "id": "train-04-plain",
+        "source_id": "train-04",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "a15e01cca439b1d6d71eacadc85392d7a0995a85a6199b86b6f23440b4ace2db",
+        "bytes": 83
+      }
+    },
+    {
+      "id": "train-04-qa",
+      "source_id": "train-04",
+      "text": "Why was Alice so tired and dehydrated?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-04-qa",
+        "source_id": "train-04",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "14cc8ca3ba1f10411a3cc5c3d6397602e7350e3206ec5f68f51db13cdbf5318e",
+        "bytes": 38
+      }
+    },
+    {
+      "id": "train-05-plain",
+      "source_id": "train-05",
+      "text": "She saw the jars filled with books and boxes, and it was found to be filled with books. But it was a little dark, and she found it styrily dark. So she found it labelled “OrANGE MARMALADE” to save it.",
+      "note": "Confuses cupboards/books/jar contents; loses the empty jar and concern for a person below.",
+      "selection": {
+        "id": "train-05-plain",
+        "source_id": "train-05",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "a1a44f9a0e8cab5d9a2c0eecb36ca76fe68d4821818bfd63375be9933c6780c8",
+        "bytes": 204
+      }
+    },
+    {
+      "id": "train-05-qa",
+      "source_id": "train-05",
+      "text": "What did the well look like?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-05-qa",
+        "source_id": "train-05",
+        "accepted": false,
+        "reasons": [
+          "fewer than 33 UTF-8 bytes"
+        ],
+        "sha256": "e2410a0376b7d54808308721809ea34f2970ca4351eb60bc4120282d76ed6313",
+        "bytes": 28
+      }
+    },
+    {
+      "id": "train-06-plain",
+      "source_id": "train-06",
+      "text": "If you are a woman who is not brave, you will think you will fall down stairs. You will think you will fall down stairs, but you will think you will fall down stairs and you will not think you will fall down stairs.",
+      "note": "Repetitive generic woman/stairs statements replace Alice anticipating bravery.",
+      "selection": {
+        "id": "train-06-plain",
+        "source_id": "train-06",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "fd593ffcd0246f78ae4714b745a9e31f1d48da27995bc7cecf8ffae295bde490",
+        "bytes": 215
+      }
+    },
+    {
+      "id": "train-06-qa",
+      "source_id": "train-06",
+      "text": "What does the boy believe Alice to have fallen off the top of the house?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-06-qa",
+        "source_id": "train-06",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "e031a6ecb60466ec4063b849a6b42037088759bec1bac983b1703cb649f3d86e",
+        "bytes": 72
+      }
+    },
+    {
+      "id": "train-07-plain",
+      "source_id": "train-07",
+      "text": "No, the fall had not gone. What they were doing was a great way to show off her knowledge. (And what would be the best title to say?)",
+      "note": "Retains a knowledge motif but loses her numerical distance and latitude/longitude thoughts.",
+      "selection": {
+        "id": "train-07-plain",
+        "source_id": "train-07",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "0523cde2544a8a49a39e1c7f875979e3803658083f0ea17cd29e377aabf8ba63",
+        "bytes": 133
+      }
+    },
+    {
+      "id": "train-07-qa",
+      "source_id": "train-07",
+      "text": "What kind of distance did Alice expect to take her?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-07-qa",
+        "source_id": "train-07",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "1cff43ff6e8c6d8ea3aa0166d58e8742e6d1e07574142f1841e6d0a34c6565ea",
+        "bytes": 51
+      }
+    },
+    {
+      "id": "train-08-plain",
+      "source_id": "train-08",
+      "text": "A woman who was worried she would have to ask her if she would fall right, but she wasn’t even aware of the threat. She started to make a point of asking her.",
+      "note": "Invents threat language and a generic woman; loses the falling-through-Earth question.",
+      "selection": {
+        "id": "train-08-plain",
+        "source_id": "train-08",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "6cd5e5d970a77b63a61612f91b92c56b3eb3868f4d181bd9b0e37aa8f6da5a30",
+        "bytes": 160
+      }
+    },
+    {
+      "id": "train-08-qa",
+      "source_id": "train-08",
+      "text": "What did the writer have to ask the girl to do?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-08-qa",
+        "source_id": "train-08",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "46b2f2c3cfd0617c542908d20ed46938fdb79e28e6139788e2ef3c52890f63f7",
+        "bytes": 47
+      }
+    },
+    {
+      "id": "train-09-plain",
+      "source_id": "train-09",
+      "text": "Alice began talking again. “Dinah” was the cat. “I hope they’ll remember her saucer of milk at tea-time. Dinah my dear! I wish you were down here with me!” (Dinah was the cat). “I hope you were down here with me! There are no mice in the air, I’m afraid, but you might catch a bat, and that’s very like a mouse. But do",
+      "note": "Retains Dinah/cat/milk/bat material but repeats and stops mid-sentence at the token cap.",
+      "selection": {
+        "id": "train-09-plain",
+        "source_id": "train-09",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "9a7de4c80eb8a2972fce14c045d1e2ead9bf65013622135d798432eafbdd9a3c",
+        "bytes": 334
+      }
+    },
+    {
+      "id": "train-09-qa",
+      "source_id": "train-09",
+      "text": "What does the female see as a sign of a cat’s thinning ability?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-09-qa",
+        "source_id": "train-09",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "3e60f9416bcdd9a64931dec14ced7722ed11bb2d465f46003ecaba2b8e9dc318",
+        "bytes": 65
+      }
+    },
+    {
+      "id": "train-10-plain",
+      "source_id": "train-10",
+      "text": "Alice was a bit sad, but Alice ran down the stairs, the White Rabbit was quiet. She was afraid the Rabbit would not come up, and she jumped on to her feet. Alice looked up, and was just in time to hear it say, \"Oh my ears and whiskers, how late it’s getting!\" She had no idea what it was, but the Rabbit quickly came down to see it, and Alice was on the roof.",
+      "note": "Invents stairs/roof and changes Rabbit actions; reaches length cap.",
+      "selection": {
+        "id": "train-10-plain",
+        "source_id": "train-10",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "fba4345e0b0abb133bc2098f177a8d10375d5734695dcdcfbe8195bf2ff58cff",
+        "bytes": 361
+      }
+    },
+    {
+      "id": "train-10-qa",
+      "source_id": "train-10",
+      "text": "What did the tyrant find in the dark hallway?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-10-qa",
+        "source_id": "train-10",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "134b1f235034b1f1adea8b7ce37c798e7245fc9b4b7fa31637217807765b3773",
+        "bytes": 45
+      }
+    },
+    {
+      "id": "train-11-plain",
+      "source_id": "train-11",
+      "text": "The door was locked. It was a door that would have remained locked. Alice went through the door and walked sadly down the middle.",
+      "note": "Contradicts locked doors by saying Alice went through the door.",
+      "selection": {
+        "id": "train-11-plain",
+        "source_id": "train-11",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "23c1e10e62df1f4fb3aea23239ded3dffb4a845bd9e2b8f436f2ff02fd428ee6",
+        "bytes": 129
+      }
+    },
+    {
+      "id": "train-11-qa",
+      "source_id": "train-11",
+      "text": "What kind of door was Alice not locking?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-11-qa",
+        "source_id": "train-11",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "aeffbb2f43627efa761eb7b428b6ad2a61733df6b777b00c8b8f91626aaa62b1",
+        "bytes": 40
+      }
+    },
+    {
+      "id": "train-12-plain",
+      "source_id": "train-12",
+      "text": "Alice had a table made of glass and made of concrete, so she walked around the hall, looking for a little door that could open the door, but, alas! There was nothing on it except a tiny golden key. She approached the door and tried the little golden key, and the door would not open any of them. She then took a curtain and started looking at it, the door that had a window outside.",
+      "note": "Adds concrete and a window; loses the successful little-key fit.",
+      "selection": {
+        "id": "train-12-plain",
+        "source_id": "train-12",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "5ebdb23a915cbafb5a7ba083f63229917b4247ed9a08f6fcfee8b244f73f0968",
+        "bytes": 382
+      }
+    },
+    {
+      "id": "train-12-qa",
+      "source_id": "train-12",
+      "text": "Which of the following is not a door shaped like a curtain?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-12-qa",
+        "source_id": "train-12",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "8bc907e25e8730063ff989c99ee79818637e128608e64f166b896c25b16ccb1a",
+        "bytes": 59
+      }
+    },
+    {
+      "id": "train-13-plain",
+      "source_id": "train-13",
+      "text": "Alice did not know how to close up a doorway.",
+      "note": "Very short summary loses the garden, size obstruction and telescope wish.",
+      "selection": {
+        "id": "train-13-plain",
+        "source_id": "train-13",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "936bbbaa9559a133eafe4aef372df1c761d26c74cb0411ebc9d57ad21fbd8e4d",
+        "bytes": 45
+      }
+    },
+    {
+      "id": "train-13-qa",
+      "source_id": "train-13",
+      "text": "What happened to Alice and her family?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-13-qa",
+        "source_id": "train-13",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "1054c550c961d94d37e1a06a174ce21e2fe60cea28d3bf2568ed852482d729f8",
+        "bytes": 38
+      }
+    },
+    {
+      "id": "train-14-plain",
+      "source_id": "train-14",
+      "text": "Alice was looking for a key for her son, and she went back to the table. Alice would have been a little more knowledgeable about the rules, but this time she found a bottle that looked like a paper label. Alice found a small bottle, “which certainly was not here before,” and a paper label. Alice's book of rules was not there, but a book of rules for shutting people up like telescopes.",
+      "note": "Invents a son and confuses the hoped-for rulebook with an existing book.",
+      "selection": {
+        "id": "train-14-plain",
+        "source_id": "train-14",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "8ca4f3988e0bc0c7d53df4c7fca4c5deaf9645ecc6a798830359c1b09b5e0b3b",
+        "bytes": 391
+      }
+    },
+    {
+      "id": "train-14-qa",
+      "source_id": "train-14",
+      "text": "Who was Alice looking for at the table?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-14-qa",
+        "source_id": "train-14",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "268af8a2cb88a6a066dbf0630e6db96e37d1af375e9285098bc3c8f23c67e9f0",
+        "bytes": 39
+      }
+    },
+    {
+      "id": "train-15-plain",
+      "source_id": "train-15",
+      "text": "Alice didn’t have much to drink but she didn’t want to, and she didn’t even want to be a poker player.",
+      "note": "Conflates the hot poker warning with being a poker player; loses poison-check reasoning.",
+      "selection": {
+        "id": "train-15-plain",
+        "source_id": "train-15",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "55c388ad755d0eaa53d7533a696920fd42be0b98ecc675d8ba0735781120a097",
+        "bytes": 108
+      }
+    },
+    {
+      "id": "train-15-qa",
+      "source_id": "train-15",
+      "text": "Who was reading \"Another Wild Wild\"?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-15-qa",
+        "source_id": "train-15",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "8ca05d21a78621efbc9ff8dd0f63d32f0c8cf3e55cb2eb03b15e4119cd5df747",
+        "bytes": 36
+      }
+    },
+    {
+      "id": "train-16-plain",
+      "source_id": "train-16",
+      "text": "Alice found the bottle interesting.",
+      "note": "Extremely broad impression omits the unmarked bottle, tasting and mixed flavors.",
+      "selection": {
+        "id": "train-16-plain",
+        "source_id": "train-16",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "daa5c1e50ab4c8d8ca75b3d785aee88db01edc4110feb99daada4d07f1e63a82",
+        "bytes": 35
+      }
+    },
+    {
+      "id": "train-16-qa",
+      "source_id": "train-16",
+      "text": "What did Alice like the moment she finished it off?",
+      "note": "Only a question is supplied; the requested answer is absent. Several questions also introduce unsupported premises; inspect against the retained source.",
+      "selection": {
+        "id": "train-16-qa",
+        "source_id": "train-16",
+        "accepted": true,
+        "reasons": [],
+        "sha256": "8009eb105391f452ba9a67bb5f065f399af71c1039ba7f32ab903659147e0162",
+        "bytes": 51
+      }
+    }
+  ],
+  "limitations": "Descriptive audit of this entire finite set after selection; not a calibrated semantic rate. No candidate or fit changed."
+}

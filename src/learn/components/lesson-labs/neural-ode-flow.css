@@ -1,0 +1,232 @@
+.neural-ode-flow {
+  --ode-role: #c5a5e8;
+}
+
+.neural-ode-flow .ode-flow-array {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+  margin-block: .75rem;
+}
+
+.neural-ode-flow .ode-flow-value {
+  display: grid;
+  justify-items: center;
+  gap: .4rem;
+  min-width: 5rem;
+  max-width: 100%;
+  color: var(--ode-role);
+  font-size: 1rem;
+}
+
+.neural-ode-flow .ode-flow-value strong {
+  display: grid;
+  place-content: center;
+  min-width: 4.25rem;
+  min-height: 4.25rem;
+  padding: .35rem;
+  border: 1px solid var(--ode-role);
+  border-radius: 50%;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.neural-ode-flow .ode-flow-wire {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  margin-block: .35rem;
+  color: #b9b9b9;
+}
+
+.neural-ode-flow .ode-flow-wire svg {
+  flex: 0 0 40px;
+  fill: none;
+  stroke: #858585;
+  stroke-width: 2;
+}
+
+.neural-ode-flow .ode-flow-wire--backward svg {
+  stroke: #f09a68;
+  stroke-dasharray: 4 3;
+}
+
+.neural-ode-flow .ode-flow-operation {
+  display: grid;
+  justify-items: center;
+  gap: .35rem;
+  text-align: center;
+  color: #dedede;
+  margin-block: .5rem;
+}
+
+.neural-ode-flow .ode-flow-operation > span:last-child:not(:first-child) {
+  display: grid;
+  gap: .35rem;
+}
+
+.neural-ode-flow .ode-flow-operation-symbol {
+  border: 1px solid #858585;
+  border-radius: .25rem;
+  padding: .5rem .8rem;
+  max-width: 100%;
+}
+
+.neural-ode-flow .ode-flow-split-route,
+.neural-ode-flow .ode-flow-unrolled {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.neural-ode-flow .ode-flow-matrix-scroll {
+  overflow-x: auto;
+  min-width: 0;
+  max-width: 100%;
+  margin-block: .75rem;
+  outline-offset: .25rem;
+}
+
+.neural-ode-flow .ode-flow-matrix-scroll:focus-visible {
+  outline: 2px solid #e6bb60;
+}
+
+.neural-ode-flow .ode-flow-matrix {
+  width: max-content;
+  min-width: 100%;
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: .3rem;
+  font-size: .95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.neural-ode-flow .ode-flow-matrix :is(th, td) {
+  min-width: 5rem;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.neural-ode-flow .ode-flow-matrix caption {
+  text-align: left;
+  margin-block: .5rem;
+  color: #b9b9b9;
+}
+
+.neural-ode-flow .ode-flow-matrix :is(th, td) {
+  padding: .4rem;
+  text-align: center;
+}
+
+.neural-ode-flow .ode-flow-matrix th {
+  font-weight: 400;
+}
+
+.neural-ode-flow .ode-flow-matrix td {
+  border: 1px solid var(--ode-role);
+  color: var(--ode-role);
+}
+
+.neural-ode-flow .ode-flow-scene {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 36rem;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.neural-ode-flow .ode-flow-scene :is(path, line, polyline):not([stroke-width]) {
+  stroke-width: 1.5;
+}
+
+.neural-ode-flow .ode-flow-scene :is(path, line, polyline):not([fill]) {
+  fill: none;
+}
+
+.neural-ode-flow .ode-flow-scene :is(path, line, polyline):not([stroke]) {
+  stroke: #858585;
+}
+
+.neural-ode-flow .ode-flow-scene text {
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.neural-ode-flow .ode-flow-scene text:not([fill]) {
+  fill: #dedede;
+}
+
+.neural-ode-flow .ode-flow-stage {
+  margin-block: 1.5rem;
+}
+
+.neural-ode-flow .flow-controls :is(input, button, select),
+.neural-ode-flow :is(.ode-flow-actions button, .ode-flow-retry) {
+  min-height: 44px;
+}
+
+.neural-ode-flow .ode-flow-label-route {
+  color: #79c8e8;
+}
+
+.neural-ode-flow :is(.ode-flow-select, .ode-flow-number) {
+  display: grid;
+  gap: .5rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.neural-ode-flow :is(.ode-flow-select select, .ode-flow-number input) {
+  background: #101010;
+  border: 1px solid #555;
+  border-radius: .2rem;
+  color: #e6bb60;
+  font: inherit;
+  min-height: 44px;
+  padding: .5rem .65rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.neural-ode-flow .ode-flow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-block: 1rem;
+}
+
+.neural-ode-flow :is(.ode-flow-actions button, .ode-flow-retry) {
+  background: #111;
+  color: #e6bb60;
+  border: 1px solid #67604e;
+  border-radius: .2rem;
+  padding: .5rem .75rem;
+  font: inherit;
+}
+
+.neural-ode-flow .ode-flow-actions button:disabled {
+  color: #999;
+  border-color: #444;
+  opacity: .75;
+}
+
+.neural-ode-flow :is(button, input, select):focus-visible {
+  outline: 2px solid #e6bb60;
+  outline-offset: 3px;
+}
+
+.neural-ode-flow .ode-flow-event-list {
+  padding-inline-start: 1.5rem;
+}
+
+@container (max-width: 35rem) {
+  .neural-ode-flow .ode-flow-split-route,
+  .neural-ode-flow .ode-flow-unrolled {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

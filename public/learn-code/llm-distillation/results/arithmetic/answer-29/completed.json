@@ -1,0 +1,2860 @@
+{
+  "status": "complete",
+  "arm": "answer",
+  "seed": 29,
+  "steps": 600,
+  "selected_step": 400,
+  "selected_dev_accuracy": 0.041666666666666664,
+  "selected_sha256": "ab445350b89e3ca035d440dbd959d52c3776315be45d4d5a89c65d1a534afd7c",
+  "parameters": 21408,
+  "initial_sha256": "8c90ccd581541c55e768d70f2e45b0fad7320a343e05047bb0001894d05f900d",
+  "targets": 19126,
+  "examples": 9563,
+  "unique_rows": 255,
+  "unique_parents": 128,
+  "history": [
+    {
+      "step": 0,
+      "dev": {
+        "records": 24,
+        "correct": 0,
+        "accuracy": 0.0,
+        "structural": 0,
+        "invalid": 24,
+        "eos_stopped": 0,
+        "full_trace_correct": null,
+        "mean_length": 12.0,
+        "reference": {
+          "sum_nats": 244.50862789154053,
+          "targets": 48,
+          "nll": 5.093929747740428,
+          "target_format": "answer-only",
+          "rows": [
+            {
+              "id": "3:7:1",
+              "sum_nats": 10.633775234222412,
+              "targets": 2
+            },
+            {
+              "id": "3:7:2",
+              "sum_nats": 9.961820602416992,
+              "targets": 2
+            },
+            {
+              "id": "3:7:3",
+              "sum_nats": 10.819876194000244,
+              "targets": 2
+            },
+            {
+              "id": "3:7:4",
+              "sum_nats": 10.23049259185791,
+              "targets": 2
+            },
+            {
+              "id": "1:4:1",
+              "sum_nats": 9.788885593414307,
+              "targets": 2
+            },
+            {
+              "id": "1:4:2",
+              "sum_nats": 10.666220664978027,
+              "targets": 2
+            },
+            {
+              "id": "1:4:3",
+              "sum_nats": 9.737235069274902,
+              "targets": 2
+            },
+            {
+              "id": "1:4:4",
+              "sum_nats": 9.980782985687256,
+              "targets": 2
+            },
+            {
+              "id": "1:1:1",
+              "sum_nats": 8.438597679138184,
+              "targets": 2
+            },
+            {
+              "id": "1:1:2",
+              "sum_nats": 8.879212856292725,
+              "targets": 2
+            },
+            {
+              "id": "1:1:3",
+              "sum_nats": 10.347792625427246,
+              "targets": 2
+            },
+            {
+              "id": "1:1:4",
+              "sum_nats": 8.929359912872314,
+              "targets": 2
+            },
+            {
+              "id": "4:6:1",
+              "sum_nats": 10.643385887145996,
+              "targets": 2
+            },
+            {
+              "id": "4:6:2",
+              "sum_nats": 9.941743850708008,
+              "targets": 2
+            },
+            {
+              "id": "4:6:3",
+              "sum_nats": 10.822385787963867,
+              "targets": 2
+            },
+            {
+              "id": "4:6:4",
+              "sum_nats": 10.228128433227539,
+              "targets": 2
+            },
+            {
+              "id": "6:7:1",
+              "sum_nats": 11.337191581726074,
+              "targets": 2
+            },
+            {
+              "id": "6:7:2",
+              "sum_nats": 10.348313808441162,
+              "targets": 2
+            },
+            {
+              "id": "6:7:3",
+              "sum_nats": 9.955080509185791,
+              "targets": 2
+            },
+            {
+              "id": "6:7:4",
+              "sum_nats": 10.5450119972229,
+              "targets": 2
+            },
+            {
+              "id": "5:6:1",
+              "sum_nats": 10.882787704467773,
+              "targets": 2
+            },
+            {
+              "id": "5:6:2",
+              "sum_nats": 10.386931419372559,
+              "targets": 2
+            },
+            {
+              "id": "5:6:3",
+              "sum_nats": 10.873920440673828,
+              "targets": 2
+            },
+            {
+              "id": "5:6:4",
+              "sum_nats": 10.12969446182251,
+              "targets": 2
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "parent_id": "3:7:1",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "3:7:2",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "3:7:3",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "3:7:4",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "1:4:1",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 5
+          },
+          {
+            "parent_id": "1:4:2",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "1:4:3",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 15
+          },
+          {
+            "parent_id": "1:4:4",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "1:1:1",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 2
+          },
+          {
+            "parent_id": "1:1:2",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 4
+          },
+          {
+            "parent_id": "1:1:3",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 6
+          },
+          {
+            "parent_id": "1:1:4",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 8
+          },
+          {
+            "parent_id": "4:6:1",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "4:6:2",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "4:6:3",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "4:6:4",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "6:7:1",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 13
+          },
+          {
+            "parent_id": "6:7:2",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 26
+          },
+          {
+            "parent_id": "6:7:3",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 39
+          },
+          {
+            "parent_id": "6:7:4",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 52
+          },
+          {
+            "parent_id": "5:6:1",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 11
+          },
+          {
+            "parent_id": "5:6:2",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 22
+          },
+          {
+            "parent_id": "5:6:3",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 33
+          },
+          {
+            "parent_id": "5:6:4",
+            "ids": [
+              19,
+              68,
+              77,
+              82,
+              23,
+              119,
+              27,
+              52,
+              84,
+              104,
+              93,
+              55
+            ],
+            "text": "16 65 74 79 20 product 24 49 81 101 90 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 44
+          }
+        ]
+      }
+    },
+    {
+      "step": 200,
+      "last_train_loss": 0.8605598211288452,
+      "gradient_norm_before_clip": 1.0743927955627441,
+      "dev": {
+        "records": 24,
+        "correct": 0,
+        "accuracy": 0.0,
+        "structural": 24,
+        "invalid": 0,
+        "eos_stopped": 24,
+        "full_trace_correct": null,
+        "mean_length": 2.0,
+        "reference": {
+          "sum_nats": 81.12447609193623,
+          "targets": 48,
+          "nll": 1.6900932519153382,
+          "target_format": "answer-only",
+          "rows": [
+            {
+              "id": "3:7:1",
+              "sum_nats": 2.646269948221743,
+              "targets": 2
+            },
+            {
+              "id": "3:7:2",
+              "sum_nats": 2.157801657449454,
+              "targets": 2
+            },
+            {
+              "id": "3:7:3",
+              "sum_nats": 2.851187906693667,
+              "targets": 2
+            },
+            {
+              "id": "3:7:4",
+              "sum_nats": 2.328454649541527,
+              "targets": 2
+            },
+            {
+              "id": "1:4:1",
+              "sum_nats": 2.809222654439509,
+              "targets": 2
+            },
+            {
+              "id": "1:4:2",
+              "sum_nats": 2.7677979110740125,
+              "targets": 2
+            },
+            {
+              "id": "1:4:3",
+              "sum_nats": 3.895098391920328,
+              "targets": 2
+            },
+            {
+              "id": "1:4:4",
+              "sum_nats": 1.7874293266795576,
+              "targets": 2
+            },
+            {
+              "id": "1:1:1",
+              "sum_nats": 7.915176775306463,
+              "targets": 2
+            },
+            {
+              "id": "1:1:2",
+              "sum_nats": 2.384031010325998,
+              "targets": 2
+            },
+            {
+              "id": "1:1:3",
+              "sum_nats": 1.7508308389224112,
+              "targets": 2
+            },
+            {
+              "id": "1:1:4",
+              "sum_nats": 2.7542514628730714,
+              "targets": 2
+            },
+            {
+              "id": "4:6:1",
+              "sum_nats": 2.9731755084358156,
+              "targets": 2
+            },
+            {
+              "id": "4:6:2",
+              "sum_nats": 2.536182899028063,
+              "targets": 2
+            },
+            {
+              "id": "4:6:3",
+              "sum_nats": 3.2059679413214326,
+              "targets": 2
+            },
+            {
+              "id": "4:6:4",
+              "sum_nats": 2.271161845885217,
+              "targets": 2
+            },
+            {
+              "id": "6:7:1",
+              "sum_nats": 4.810642432887107,
+              "targets": 2
+            },
+            {
+              "id": "6:7:2",
+              "sum_nats": 5.743523141369224,
+              "targets": 2
+            },
+            {
+              "id": "6:7:3",
+              "sum_nats": 5.12975009996444,
+              "targets": 2
+            },
+            {
+              "id": "6:7:4",
+              "sum_nats": 3.127102049998939,
+              "targets": 2
+            },
+            {
+              "id": "5:6:1",
+              "sum_nats": 3.391012358944863,
+              "targets": 2
+            },
+            {
+              "id": "5:6:2",
+              "sum_nats": 4.07268635975197,
+              "targets": 2
+            },
+            {
+              "id": "5:6:3",
+              "sum_nats": 3.936317006126046,
+              "targets": 2
+            },
+            {
+              "id": "5:6:4",
+              "sum_nats": 3.8794019147753716,
+              "targets": 2
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "parent_id": "3:7:1",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "3:7:2",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "3:7:3",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "3:7:4",
+            "ids": [
+              35,
+              2
+            ],
+            "text": "32 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 32,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "1:4:1",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 5
+          },
+          {
+            "parent_id": "1:4:2",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "1:4:3",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 15
+          },
+          {
+            "parent_id": "1:4:4",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "1:1:1",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 2
+          },
+          {
+            "parent_id": "1:1:2",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 4
+          },
+          {
+            "parent_id": "1:1:3",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 6
+          },
+          {
+            "parent_id": "1:1:4",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 8
+          },
+          {
+            "parent_id": "4:6:1",
+            "ids": [
+              11,
+              2
+            ],
+            "text": "8 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 8,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "4:6:2",
+            "ids": [
+              19,
+              2
+            ],
+            "text": "16 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 16,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "4:6:3",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "4:6:4",
+            "ids": [
+              35,
+              2
+            ],
+            "text": "32 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 32,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "6:7:1",
+            "ids": [
+              17,
+              2
+            ],
+            "text": "14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 13
+          },
+          {
+            "parent_id": "6:7:2",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 26
+          },
+          {
+            "parent_id": "6:7:3",
+            "ids": [
+              45,
+              2
+            ],
+            "text": "42 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 42,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 39
+          },
+          {
+            "parent_id": "6:7:4",
+            "ids": [
+              59,
+              2
+            ],
+            "text": "56 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 56,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 52
+          },
+          {
+            "parent_id": "5:6:1",
+            "ids": [
+              11,
+              2
+            ],
+            "text": "8 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 8,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 11
+          },
+          {
+            "parent_id": "5:6:2",
+            "ids": [
+              17,
+              2
+            ],
+            "text": "14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 22
+          },
+          {
+            "parent_id": "5:6:3",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 33
+          },
+          {
+            "parent_id": "5:6:4",
+            "ids": [
+              35,
+              2
+            ],
+            "text": "32 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 32,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 44
+          }
+        ]
+      },
+      "targets": 6376,
+      "examples": 3188
+    },
+    {
+      "step": 400,
+      "last_train_loss": 0.47592005133628845,
+      "gradient_norm_before_clip": 4.28883171081543,
+      "dev": {
+        "records": 24,
+        "correct": 1,
+        "accuracy": 0.041666666666666664,
+        "structural": 24,
+        "invalid": 0,
+        "eos_stopped": 24,
+        "full_trace_correct": null,
+        "mean_length": 2.0,
+        "reference": {
+          "sum_nats": 147.47075848741224,
+          "targets": 48,
+          "nll": 3.072307468487755,
+          "target_format": "answer-only",
+          "rows": [
+            {
+              "id": "3:7:1",
+              "sum_nats": 4.430944073130377,
+              "targets": 2
+            },
+            {
+              "id": "3:7:2",
+              "sum_nats": 6.097477453353349,
+              "targets": 2
+            },
+            {
+              "id": "3:7:3",
+              "sum_nats": 5.735836362757254,
+              "targets": 2
+            },
+            {
+              "id": "3:7:4",
+              "sum_nats": 5.5915079258265905,
+              "targets": 2
+            },
+            {
+              "id": "1:4:1",
+              "sum_nats": 2.26666853367351,
+              "targets": 2
+            },
+            {
+              "id": "1:4:2",
+              "sum_nats": 5.791329845553264,
+              "targets": 2
+            },
+            {
+              "id": "1:4:3",
+              "sum_nats": 5.567714620847255,
+              "targets": 2
+            },
+            {
+              "id": "1:4:4",
+              "sum_nats": 5.920284526713658,
+              "targets": 2
+            },
+            {
+              "id": "1:1:1",
+              "sum_nats": 7.895808470901102,
+              "targets": 2
+            },
+            {
+              "id": "1:1:2",
+              "sum_nats": 1.414304577454459,
+              "targets": 2
+            },
+            {
+              "id": "1:1:3",
+              "sum_nats": 1.3342553003458306,
+              "targets": 2
+            },
+            {
+              "id": "1:1:4",
+              "sum_nats": 3.7203958611935377,
+              "targets": 2
+            },
+            {
+              "id": "4:6:1",
+              "sum_nats": 8.363031145301647,
+              "targets": 2
+            },
+            {
+              "id": "4:6:2",
+              "sum_nats": 6.4994528448442,
+              "targets": 2
+            },
+            {
+              "id": "4:6:3",
+              "sum_nats": 6.059122300182935,
+              "targets": 2
+            },
+            {
+              "id": "4:6:4",
+              "sum_nats": 6.297943601151928,
+              "targets": 2
+            },
+            {
+              "id": "6:7:1",
+              "sum_nats": 6.950329710263759,
+              "targets": 2
+            },
+            {
+              "id": "6:7:2",
+              "sum_nats": 10.557298819883727,
+              "targets": 2
+            },
+            {
+              "id": "6:7:3",
+              "sum_nats": 9.356198377965484,
+              "targets": 2
+            },
+            {
+              "id": "6:7:4",
+              "sum_nats": 8.395646971417591,
+              "targets": 2
+            },
+            {
+              "id": "5:6:1",
+              "sum_nats": 6.466168883023784,
+              "targets": 2
+            },
+            {
+              "id": "5:6:2",
+              "sum_nats": 8.357190255075693,
+              "targets": 2
+            },
+            {
+              "id": "5:6:3",
+              "sum_nats": 5.5988426132826135,
+              "targets": 2
+            },
+            {
+              "id": "5:6:4",
+              "sum_nats": 8.803005413268693,
+              "targets": 2
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "parent_id": "3:7:1",
+            "ids": [
+              11,
+              2
+            ],
+            "text": "8 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 8,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "3:7:2",
+            "ids": [
+              17,
+              2
+            ],
+            "text": "14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "3:7:3",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "3:7:4",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "1:4:1",
+            "ids": [
+              7,
+              2
+            ],
+            "text": "4 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 4,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 5
+          },
+          {
+            "parent_id": "1:4:2",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "1:4:3",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 15
+          },
+          {
+            "parent_id": "1:4:4",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "1:1:1",
+            "ids": [
+              7,
+              2
+            ],
+            "text": "4 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 4,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 2
+          },
+          {
+            "parent_id": "1:1:2",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 4
+          },
+          {
+            "parent_id": "1:1:3",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": true,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 6
+          },
+          {
+            "parent_id": "1:1:4",
+            "ids": [
+              19,
+              2
+            ],
+            "text": "16 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 16,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 8
+          },
+          {
+            "parent_id": "4:6:1",
+            "ids": [
+              10,
+              2
+            ],
+            "text": "7 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 7,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "4:6:2",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "4:6:3",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "4:6:4",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "6:7:1",
+            "ids": [
+              17,
+              2
+            ],
+            "text": "14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 13
+          },
+          {
+            "parent_id": "6:7:2",
+            "ids": [
+              17,
+              2
+            ],
+            "text": "14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 26
+          },
+          {
+            "parent_id": "6:7:3",
+            "ids": [
+              45,
+              2
+            ],
+            "text": "42 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 42,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 39
+          },
+          {
+            "parent_id": "6:7:4",
+            "ids": [
+              59,
+              2
+            ],
+            "text": "56 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 56,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 52
+          },
+          {
+            "parent_id": "5:6:1",
+            "ids": [
+              10,
+              2
+            ],
+            "text": "7 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 7,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 11
+          },
+          {
+            "parent_id": "5:6:2",
+            "ids": [
+              19,
+              2
+            ],
+            "text": "16 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 16,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 22
+          },
+          {
+            "parent_id": "5:6:3",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 33
+          },
+          {
+            "parent_id": "5:6:4",
+            "ids": [
+              35,
+              2
+            ],
+            "text": "32 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 32,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 44
+          }
+        ]
+      },
+      "targets": 6374,
+      "examples": 3187
+    },
+    {
+      "step": 600,
+      "last_train_loss": 0.04965535178780556,
+      "gradient_norm_before_clip": 0.8277857899665833,
+      "dev": {
+        "records": 24,
+        "correct": 0,
+        "accuracy": 0.0,
+        "structural": 24,
+        "invalid": 0,
+        "eos_stopped": 24,
+        "full_trace_correct": null,
+        "mean_length": 2.0,
+        "reference": {
+          "sum_nats": 207.75627911073389,
+          "targets": 48,
+          "nll": 4.328255814806956,
+          "target_format": "answer-only",
+          "rows": [
+            {
+              "id": "3:7:1",
+              "sum_nats": 7.842378183326218,
+              "targets": 2
+            },
+            {
+              "id": "3:7:2",
+              "sum_nats": 9.673894341511186,
+              "targets": 2
+            },
+            {
+              "id": "3:7:3",
+              "sum_nats": 8.861909103696235,
+              "targets": 2
+            },
+            {
+              "id": "3:7:4",
+              "sum_nats": 11.11740691808518,
+              "targets": 2
+            },
+            {
+              "id": "1:4:1",
+              "sum_nats": 4.611937190464232,
+              "targets": 2
+            },
+            {
+              "id": "1:4:2",
+              "sum_nats": 9.243472145521082,
+              "targets": 2
+            },
+            {
+              "id": "1:4:3",
+              "sum_nats": 7.522989193326794,
+              "targets": 2
+            },
+            {
+              "id": "1:4:4",
+              "sum_nats": 6.779036102350801,
+              "targets": 2
+            },
+            {
+              "id": "1:1:1",
+              "sum_nats": 8.334829257510137,
+              "targets": 2
+            },
+            {
+              "id": "1:1:2",
+              "sum_nats": 4.172981999901822,
+              "targets": 2
+            },
+            {
+              "id": "1:1:3",
+              "sum_nats": 3.1533578965172637,
+              "targets": 2
+            },
+            {
+              "id": "1:1:4",
+              "sum_nats": 8.911622997780796,
+              "targets": 2
+            },
+            {
+              "id": "4:6:1",
+              "sum_nats": 11.738188317394815,
+              "targets": 2
+            },
+            {
+              "id": "4:6:2",
+              "sum_nats": 9.205228145117871,
+              "targets": 2
+            },
+            {
+              "id": "4:6:3",
+              "sum_nats": 6.721625765552744,
+              "targets": 2
+            },
+            {
+              "id": "4:6:4",
+              "sum_nats": 9.869249060226139,
+              "targets": 2
+            },
+            {
+              "id": "6:7:1",
+              "sum_nats": 7.91398208134342,
+              "targets": 2
+            },
+            {
+              "id": "6:7:2",
+              "sum_nats": 12.55663071142044,
+              "targets": 2
+            },
+            {
+              "id": "6:7:3",
+              "sum_nats": 11.073577269271482,
+              "targets": 2
+            },
+            {
+              "id": "6:7:4",
+              "sum_nats": 11.43719563644845,
+              "targets": 2
+            },
+            {
+              "id": "5:6:1",
+              "sum_nats": 7.859404071699828,
+              "targets": 2
+            },
+            {
+              "id": "5:6:2",
+              "sum_nats": 9.940753833332565,
+              "targets": 2
+            },
+            {
+              "id": "5:6:3",
+              "sum_nats": 7.188464738836046,
+              "targets": 2
+            },
+            {
+              "id": "5:6:4",
+              "sum_nats": 12.026164150098339,
+              "targets": 2
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "parent_id": "3:7:1",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "3:7:2",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "3:7:3",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "3:7:4",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "1:4:1",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 5
+          },
+          {
+            "parent_id": "1:4:2",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "1:4:3",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 15
+          },
+          {
+            "parent_id": "1:4:4",
+            "ids": [
+              15,
+              2
+            ],
+            "text": "12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "1:1:1",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 2
+          },
+          {
+            "parent_id": "1:1:2",
+            "ids": [
+              9,
+              2
+            ],
+            "text": "6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 4
+          },
+          {
+            "parent_id": "1:1:3",
+            "ids": [
+              13,
+              2
+            ],
+            "text": "10 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 10,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 6
+          },
+          {
+            "parent_id": "1:1:4",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 8
+          },
+          {
+            "parent_id": "4:6:1",
+            "ids": [
+              17,
+              2
+            ],
+            "text": "14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "4:6:2",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "4:6:3",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "4:6:4",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "6:7:1",
+            "ids": [
+              17,
+              2
+            ],
+            "text": "14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 13
+          },
+          {
+            "parent_id": "6:7:2",
+            "ids": [
+              17,
+              2
+            ],
+            "text": "14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 26
+          },
+          {
+            "parent_id": "6:7:3",
+            "ids": [
+              45,
+              2
+            ],
+            "text": "42 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 42,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 39
+          },
+          {
+            "parent_id": "6:7:4",
+            "ids": [
+              59,
+              2
+            ],
+            "text": "56 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 56,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 52
+          },
+          {
+            "parent_id": "5:6:1",
+            "ids": [
+              10,
+              2
+            ],
+            "text": "7 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 7,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 11
+          },
+          {
+            "parent_id": "5:6:2",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 22
+          },
+          {
+            "parent_id": "5:6:3",
+            "ids": [
+              27,
+              2
+            ],
+            "text": "24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 33
+          },
+          {
+            "parent_id": "5:6:4",
+            "ids": [
+              31,
+              2
+            ],
+            "text": "28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 2,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": null,
+              "product_follows_sum": null,
+              "answer_follows_product": null,
+              "all_steps_correct": null
+            },
+            "gold": 44
+          }
+        ]
+      },
+      "targets": 6376,
+      "examples": 3188
+    }
+  ],
+  "elapsed_seconds": 10.715878199989675,
+  "protocol_sha256": "eb9f03920c70601345682d5db3d59361463d72d68ee54c5b0d45cb1bc7b1837c",
+  "corpus_sha256": "6025f7312cdf071dc80245aa1f14ebbe1553011c0ff351da19cfa5decb61ad33"
+}

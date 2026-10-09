@@ -1,0 +1,72 @@
+{
+  "scope": "jax",
+  "kind": "author-native-verification",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "win32",
+  "executed": {
+    "jax_functional_training.py": {
+      "jax": "0.11.2",
+      "optax": "0.2.8",
+      "devices": [
+        "cpu:0"
+      ],
+      "initial_loss": 5.5,
+      "gradient": {
+        "b": -1.0,
+        "w": -5.0
+      },
+      "after_40_updates": {
+        "b": 0.9883274435997009,
+        "w": 2.01194167137146
+      },
+      "final_loss": 0.0002463779819663614,
+      "same_key_same_draw": true,
+      "first_draw": [
+        0.4541335105895996,
+        0.9391627907752991,
+        -0.2689431309700012,
+        -0.19085364043712616
+      ],
+      "scratch_optax_parity": true
+    },
+    "jax_transform_diagnostics.py": {
+      "jax": "0.11.2",
+      "trace_signatures": [
+        [
+          [
+            4
+          ],
+          "float32"
+        ],
+        [
+          [
+            5
+          ],
+          "float32"
+        ]
+      ],
+      "value_change_retraced": false,
+      "shape_change_retraced": true,
+      "jvp_value": 8.0,
+      "jvp_tangent": 6.0,
+      "masked_sum": 5.0,
+      "warm_seconds": [
+        1.869996776804328e-05,
+        1.5199999324977398e-05,
+        1.3699987903237343e-05,
+        1.2899981811642647e-05,
+        1.3000040780752897e-05,
+        1.2999982573091984e-05,
+        1.2399978004395962e-05,
+        1.2300035450607538e-05,
+        1.2599979527294636e-05,
+        1.2499978765845299e-05
+      ]
+    }
+  },
+  "source_files": {
+    "public/learn-code/jax/jax_functional_training.py": "2ddbec12c6f5f03e829c41a1b2bbde426f58af01967caecfe3c7372312f4d150",
+    "public/learn-code/jax/jax_transform_diagnostics.py": "ee735d5eb488a37eeb9af2766ed783b45d1a58fbe3793e6a92b423231d731f31"
+  },
+  "limits": "CPU/local execution. No browser, independent review, accelerator benchmark or remote service validation."
+}

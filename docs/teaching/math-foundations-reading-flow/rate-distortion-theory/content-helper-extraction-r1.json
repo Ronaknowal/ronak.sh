@@ -1,0 +1,47 @@
+{
+  "status": "Exact function-only extraction; no original module main executed",
+  "helper": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_scalar_helpers.py",
+    "sha256": "71ffb8010aa98cc1858b76e7fa26fa02922a22a1108fb58d655c8af49750e139",
+    "bytes": 3583
+  },
+  "functions": [
+    {
+      "original": {
+        "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/programmes/finiteOptimizer.py",
+        "sha256": "c8d39b15bbb6287d340d95cfac85fd6387d5e89d471870a98dc09ceea5d996aa",
+        "bytes": 2366
+      },
+      "function": "logsumexp",
+      "sourceSha256": "2c42bb35868aa9e988c55c6c48f893b96fca3f03c04048f9642c6e6978ff7eb0"
+    },
+    {
+      "original": {
+        "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/programmes/finiteOptimizer.py",
+        "sha256": "c8d39b15bbb6287d340d95cfac85fd6387d5e89d471870a98dc09ceea5d996aa",
+        "bytes": 2366
+      },
+      "function": "solve",
+      "sourceSha256": "f027c326f0aec39defabdde330c5689b2861a494316df7e79f32c6d1621def49"
+    },
+    {
+      "original": {
+        "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/programmes/gaussianAllocation.py",
+        "sha256": "a9ba00731d80bc87e91c8914eb44685e0c62197fc6e2b7ac93d913a26759894a",
+        "bytes": 1703
+      },
+      "function": "allocate",
+      "sourceSha256": "a5f95bd05a2bf5081770cccaf36a47d858dce2c339b7cefbe51e539c04771636"
+    }
+  ],
+  "data": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/penguins.csv",
+    "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+    "bytes": 15241
+  },
+  "originalData": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/penguins.csv",
+    "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+    "bytes": 15241
+  }
+}

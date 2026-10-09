@@ -33,11 +33,14 @@ export const eliminationPresets = {
     target: [3, 7]
   }
 };
-export function eliminationTrace(presetName = 'coupled') {
+export function eliminationTrace(presetName = 'coupled', targetOffset = 0) {
+  assertFiniteValues([targetOffset]);
+  if (Math.abs(targetOffset) > 2) throw new Error('Target offset must be between -2 and 2.');
   const preset = eliminationPresets[presetName];
   if (!preset) throw new Error('Choose an available elimination example.');
   const matrix = preset.matrix.map(row => [...row]);
   const target = [...preset.target];
+  target[1] += targetOffset;
   const upper = matrix.map(row => [...row]);
   const transformedTarget = [...target];
   const permutation = [[1, 0], [0, 1]];

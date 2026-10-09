@@ -1,0 +1,18 @@
+{
+  "schema": "feature20-http-checker-identity-correction/v1",
+  "actual_failure": "e6e1d5 exit1 after artifact HTTP checks, before first payload fetch",
+  "cause": "Payload source record contains explanatory role in addition to path/bytes/SHA; checker incorrectly compared metadata as physical identity",
+  "before": "assert bind(ROOT/row['source']['path'])==row['source'];assert fetch(row['url'],row['source'],row['role'])['cache_control']=='no-store'",
+  "after": "assert bind(ROOT/row['source']['path'])=={k:row['source'][k] for k in ['path','bytes','sha256']};assert fetch(row['url'],row['source'],row['role'])['cache_control']=='no-store'",
+  "old_script": {
+    "bytes": 2710,
+    "sha256": "9ebb29a1b85b9805c94390e99b549a454df9e88e58785761865af3cd580db297"
+  },
+  "new_script": {
+    "bytes": 2778,
+    "sha256": "ec656a324bcd09f4ea7d70551d179fa5baf9eff33bb9dc45dedcb748c5eb7c7b"
+  },
+  "limits": [
+    "No payload/source/build modification; corrected checker identity projection only"
+  ]
+}

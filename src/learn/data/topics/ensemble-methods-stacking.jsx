@@ -1,259 +1,852 @@
-import { Code, H2, H3, Prose } from '../../components/content';
-import { MathBlock } from '../../components/content/Math.jsx';
-import { Checkpoint, LessonIntro, LessonTable, Sources } from '../../components/lesson-labs/LessonElements';
-import { RunnableExample } from '../../components/lesson-labs/RunnableExample';
-import { PredictionCombinationFigure, VotingComparisonLab, ErrorCancellationLab, BootstrapOwnershipLab, AdaBoostWeightsLab, OOFOwnershipLab, TimeOwnershipFigure, CalibratedAverageFigure, ContextInteractionFigure, EnsemblePredictionLab } from '../../components/lesson-labs/EnsembleMethodsLabs.jsx';
-import { ensembleExamples } from '../ensemble-methods-examples.js';
-import { AdaBoostVoteBalanceFigure, StackTrainingServingFigure, MixedStackScoresFigure } from '../../components/lesson-labs/EnsembleIntuition.jsx';
+import { H2, H3 } from "../../components/content/Headings.jsx";
+import { Prose } from "../../components/content/Prose.jsx";
+import { NeuralTable } from "../../components/lesson-labs/NeuralLessonElements.jsx";
+import { CodeBlock } from "../../components/content/Code.jsx";
+import { EnsembleCompleteProgram, EnsembleNewtonDependency, EnsembleProgramSetup, EnsembleStudyFiles } from "../../components/lesson-labs/EnsembleFlowPrograms.jsx";
+import { SavedPredictorFigure, ReservedRowsFigure, WeightedForecastFigure, ProbabilityVoteFigure, MemberWeightFigure, ClassAlignmentFigure, CopiedErrorFigure } from "../../components/lesson-labs/EnsembleFlowCombination.jsx";
+import { ResidualRowsFigure, AmbiguityAreasFigure, TwoMemberLossFigure } from "../../components/lesson-labs/EnsembleFlowErrors.jsx";
+import { SimplexProjectionFigure, PredictionCovarianceFigure, BiasVarianceNoiseFigure, SimplexStepFigure } from "../../components/lesson-labs/EnsembleFlowGeometry.jsx";
+import { BootstrapDrawFigure, BootstrapFitFigure, BootstrapOOBFigure, BootstrapAbsenceFigure } from "../../components/lesson-labs/EnsembleFlowBootstrap.jsx";
+import { EnsembleBootstrapProvider } from "../../components/lesson-labs/EnsembleFlowBootstrapControls.jsx";
+import { EnsembleMechanismsFigure, WeightedStumpFigure, BoostingUpdateFigure, SavedBoostingVoteFigure, ExponentialLineSearchFigure, BoostingProductBoundFigure, NormalizedMarginFigure } from "../../components/lesson-labs/EnsembleFlowBoosting.jsx";
+import { EnsembleBoostingProvider } from "../../components/lesson-labs/EnsembleFlowBoostingControls.jsx";
+import { CompleteOOFMatrixFigure, HeldFoldConstructionFigure, MemorizationContrastFigure, FullRefitInferenceFigure, GeneralCombinerFitFigure } from "../../components/lesson-labs/EnsembleFlowStacking.jsx";
+import { EnsembleStackingProvider } from "../../components/lesson-labs/EnsembleFlowStackingControls.jsx";
+import { TypedMetaColumnsFigure, FoldPreprocessingFigure, NestedSelectionFigure, ForwardAvailabilityFigure, WholeGroupExclusionFigure, PartitionStorageFigure, KeptBlendStateFigure } from "../../components/lesson-labs/EnsembleFlowPermissions.jsx";
+import { ExactCalibrationLawFigure, SavedProbabilityFieldFigure, ThresholdCostFigure } from "../../components/lesson-labs/EnsembleFlowProbability.jsx";
+import { FittingWorkFigure, ServingDependencyFigure } from "../../components/lesson-labs/EnsembleFlowCosts.jsx";
+import { SavedWDBCForwardFigure, WholeSavedBundleFigure, FocusedWDBCFeatureFigure } from "../../components/lesson-labs/EnsembleFlowServing.jsx";
+import { EnsembleServingProvider } from "../../components/lesson-labs/EnsembleFlowServingControls.jsx";
+import { ContextProductFigure, TypedScoreLinkFigure } from "../../components/lesson-labs/EnsembleFlowContext.jsx";
+import { EnsembleCombinationProvider } from "../../components/lesson-labs/EnsembleFlowControls.jsx";
 
-function Example({ id, children }) {
-  const example = ensembleExamples.find(item => item.id === id);
-  return <><Prose><strong>Before running:</strong> {example.question}</Prose><RunnableExample example={{ ...example, expected: example.output }}>{children}</RunnableExample></>;
-}
-function Practice({ title, question, hint, children }) {
-  return <section className="lesson-check"><H3>{title}</H3><Prose>{question}</Prose><details><summary>Hint</summary><Prose>{hint}</Prose></details><details><summary>Explained solution</summary>{children}</details></section>;
+function EnsembleEarlyContent() {
+  return <EnsembleCombinationProvider><EnsembleBootstrapProvider><EnsembleBoostingProvider><EnsembleStackingProvider><EnsembleServingProvider><div className="lesson-pilot ensemble-lesson">
+<Prose opening="summary">{"Several fitted rules can forecast the same event. Combining them is useful when their errors leave something to cancel, and when we learn the combination without showing it the answers it is supposed to predict. We will follow the numbers through saved models, then follow the rows through fitting, selection and evaluation."}</Prose>
+
+<Prose opening="route">{"The core route passes through all thirteen sections: forecast and vote, error cancellation, bootstrap membership, one boosting update, honest combiner fitting, and saved inference. The visible deeper passages derive covariance, exponential loss, constrained optimization, nested selection, calibration and context products. You can return to those derivations after tracing the corresponding picture. The common Learning compass supplies section navigation, prerequisites and the full program index."}</Prose>
+
+<H2>{"1. Several forecasts, one outcome"}</H2>
+
+<Prose>{"Suppose we want to forecast a shipment's elapsed delivery time in hours. A "}<strong>{"feature"}</strong>{" is information available when we forecast; a "}<strong>{"target"}</strong>{" is the outcome we eventually observe. Here x is a deliberately simplified numerical shipment descriptor. The following coefficients and tree leaves are already saved. This is a small illustration, not collected shipment data."}</Prose>
+
+<SavedPredictorFigure />
+
+<Prose>{"At x=2, the saved line multiplies 2 by its slope 2 and adds its intercept 3: its forecast is 7 hours. The saved one-split tree, or "}<strong>{"stump"}</strong>{", asks whether x is below 1.5. This query takes the right branch and reads the saved leaf value 9 hours. Multiply each forecast by .5 and add: .5×7+.5×9=8 hours. The later observed delivery time 8.5 belongs beside an error calculation, outside this prediction route."}</Prose>
+
+<Prose>{"An "}<strong>{"ensemble"}</strong>{" is a collection of predictors together with a rule for combining their outputs. The line and stump are its "}<strong>{"base learners"}</strong>{" or members. Their parameters have different meanings: a slope is not a tree threshold. We combine comparable forecasts rather than averaging unrelated parameter arrays. At prediction time, a new feature row goes through the saved members and combiner; it does not supply its unknown target."}</Prose>
+
+<ReservedRowsFigure />
+
+<Prose>{"The six schematic identities A–F separate permissions. A/B/C may fit parameters, D/E may choose among already specified candidate rules, and F may assess the selected rule afterward. These roles explain what a fit can read; six rows do not produce an experimental conclusion. If we use F's outcome to improve a weight, F has become choice data and can no longer provide the same untouched assessment. Later examples use different, explicitly named row sets."}</Prose>
+
+<Prose>{"This lesson assumes the line's multiply/add and the tree's branch/leaf are familiar, but the picture refreshes both. "}<a href={"/learn/topic/linear-logistic-regression#2-make-every-residual-visible"}>{"Linear & Logistic Regression, §2"}</a>{" develops residuals; "}<a href={"/learn/topic/decision-trees-random-forests#7-build-the-mechanism-in-complete-code"}>{"Trees, §7"}</a>{" develops actual split fitting. Our new job is to understand what combining their saved outputs changes."}</Prose>
+
+<Prose>{"Explain the route without using the word “ensemble”: the feature reaches both saved rules, their forecasts are multiplied by named weights, and those products are added. Apply it at x=1: the line gives 5, the stump takes its left leaf 6, and their equal mean is 5.5. Diagnose an error: inserting the later target into either base's query input changes the task from forecasting to using its answer."}</Prose>
+
+<H2>{"2. Decide what to combine"}</H2>
+
+<WeightedForecastFigure />
+
+<Prose>{"For forecasts 7 and 9 hours, assign member A weight .25 and B weight .75. Their contributions are 1.75 and 6.75 hours; the sum is 8.5. A weight tells us how much of a comparable output enters the combination. With nonnegative weights summing to one, the combination stays between the smallest and largest member forecasts. Such weights form a "}<strong>{"convex combination"}</strong>{". Change either forecast or weight below the picture and watch the endpoints and sum together. Identical forecasts remain identical under every permitted weight."}</Prose>
+
+<Prose>{"For B members, write their forecasts f_b(x) and normalized weights w_b. The rule is f̄(x)=Σ_b w_b f_b(x), with w_b≥0 and Σ_b w_b=1. The bar names the combined forecast; it does not mean that model parameters have been averaged. Nonnegative unnormalized quantities a_b can be converted into w_b=a_b/Σ_c a_c when the total is positive. All-zero quantities define no mean. They must produce an unavailable result rather than an invented equal mean."}</Prose>
+
+<Prose>{"A classification task changes the output type. Define class 1 as “delivery exceeds the stated deadline” and class 0 as “it does not.” This event is different from elapsed hours. A probability vector has one explicitly named column per possible class and nonnegative entries summing to one. A "}<strong>{"hard vote"}</strong>{" first selects each member's most likely class and combines ballots. A "}<strong>{"soft vote"}</strong>{" first combines the aligned probability mass and then selects a class."}</Prose>
+
+<ProbabilityVoteFigure />
+
+<Prose>{"Three members assign class-1 probabilities .51,.51,.01. Their class-0 probabilities are .49,.49,.99. With equal weights, two ballots favor class 1, so the hard vote chooses 1. Soft class-1 mass is (.51+.51+.01)/3=103/300≈.343333; class-0 mass is 197/300≈.656667, so the soft vote chooses 0. The confident third forecast matters to mass, while each hard ballot contributes only its weight. Our declared tie rule selects class 0. Neither rule is universally superior; they answer different numerical questions."}</Prose>
+
+<MemberWeightFigure />
+
+<Prose>{"The separate weight view shares those same three probability rows. Edit three nonnegative member quantities and inspect their normalization. Multiplying every quantity by the same positive factor leaves the normalized weights unchanged. Making all of them zero makes both weighted results unavailable. A very small positive total still defines a combination: the implementation divides by the largest quantity first to avoid losing that domain through underflow. Weight identity follows the member through the probability and ballot views."}</Prose>
+
+<ClassAlignmentFigure />
+
+<Prose>{"Class identity follows its name, not its column position. If one member returns [silver,amber,blue] with [.1,.6,.3], the output order [amber,blue,silver] requires [.6,.3,.1]. Adding the original arrays by position would combine different events. A member fitted without one class can contribute zero probability to that named class under an explicitly declared alignment rule; a missing decision margin does not automatically have an equivalent recovery rule."}</Prose>
+
+<Prose>{"The separate copied-error picture asks why multiple ballots sometimes help. If three binary errors are independent with probability .3 each, majority error is 3(.3)²(.7)+(.3)³=.216. Three copies of one predictor have the same error indicator, so their majority error remains .3. Distinct model names do not imply independent errors. "}<a href={"/learn/topic/naive-bayes-probabilistic-classifiers#6-test-the-independence-assumption"}>{"Naive Bayes, §6"}</a>{" develops a related copied-evidence failure, although multiplying likelihood factors and averaging prediction probabilities are different operations."}</Prose>
+
+<CopiedErrorFigure />
+
+<Prose>{"The complete retained "}<code>{"combination-arithmetic"}</code>{" program computes the small identity with exact fractions. New "}<code>{"ensemble-combination-core.py"}</code>{" supplies arbitrary named-class alignment, positive-total normalization, numeric means and weighted ballots. Its functions validate the input type separately from the arithmetic. "}<code>{"align_probabilities"}</code>{" builds columns by class name; "}<code>{"convex_mean"}</code>{" multiplies a row-by-member matrix by its normalized weight vector; "}<code>{"weighted_ballot"}</code>{" accumulates each member's ballot into the named class's mass. The printed hard and soft results reproduce the picture without fitting any base model."}</Prose>
+
+<EnsembleProgramSetup />
+
+
+<H2>{"3. Find errors that can cancel"}</H2>
+
+<ResidualRowsFigure />
+
+<Prose>{"A residual is forecast minus observed target. Use a separate four-row residual illustration: member A's residuals are [−3,−1,2,2] and B's are [1,1,−1,−3]. The signs tell us which side of the target each forecast lies on. With A weight w and B weight 1−w, the combined residual on every row is w e_A+(1−w)e_B. At w=4/9 the four combined residuals are [−7/9,1/9,1/3,−7/9], whose mean square is 1/3. Looking only at the member names or separate average losses would hide this cancellation. In this connected comparison, A retains its teal identity, B its periwinkle identity and the mixture its amber identity through residuals, squares and loss curves; labels and line/mark styles also distinguish them."}</Prose>
+
+<H3>{"A finite identity before probability assumptions"}</H3>
+
+<AmbiguityAreasFigure />
+
+<Prose>{"For one target y, let f̄=Σ_b w_b f_b and define e_b=f_b−y and ē=f̄−y. A squared side length represents squared residual; every square in the picture uses the same physical scale. Zero residual has zero area. The weighted member loss is Σ_b w_b e_b². The weighted disagreement is Σ_b w_b(f_b−f̄)². Expand e_b=(f_b−f̄)+ē:"}</Prose>
+
+<Prose>{"Σ_b w_b e_b² = Σ_b w_b(f_b−f̄)² + 2 ē Σ_b w_b(f_b−f̄) + ē² Σ_b w_b."}</Prose>
+
+<Prose>{"The middle sum is zero because Σ_b w_b f_b=f̄ and Σ_b w_b=1. The final sum is one. Therefore"}</Prose>
+
+<Prose>{"ē² = Σ_b w_b e_b² − Σ_b w_b(f_b−f̄)²."}</Prose>
+
+<Prose>{"This is an exact finite identity, often called the "}<strong>{"ambiguity decomposition"}</strong>{". Average it over the same finite rows to obtain the corresponding mean-square identity. In our worked case, weighted member loss is 11/3 and weighted disagreement is 10/3, leaving combined loss 1/3. Its nonnegative disagreement term proves that a convex mean's squared loss is no greater than the weighted average member loss. It does not prove that the mean beats the best member. A perfect member averaged with a bad one can become worse."}</Prose>
+
+<Prose>{"The arbitrary residual editors preserve this identity beyond the default fixture. They share the current weight with the cancellation and loss-curve views. Changing the residuals changes both member quality and disagreement, so “increase diversity” alone is not an optimization prescription. "}<a href={"https://proceedings.neurips.cc/paper_files/paper/1994/file/b8c37e33defde51cf91e1e03e51657da-Paper.pdf"}>{"Krogh & Vedelsby, §2"}</a>{" develops the normalized squared-error relation; this lesson derives its finite version directly before discussing random training sets."}</Prose>
+
+<TwoMemberLossFigure />
+
+<Prose>{"For two residual vectors a and b, put d=a−b. The row loss is L(w)=mean((b+w d)²). Its derivative is L′(w)=2 mean(d(b+w d)); the second derivative is 2 mean(d²)≥0. When d is nonzero, the unrestricted optimum is w*=−mean(bd)/mean(d²). For a convex two-member rule, clamp that optimum to [0,1]. In the default vectors, Σ bd=−24 and Σ d²=54, giving w*=4/9. The parabola's lowest point is inside the allowed segment. If every pair of residuals is identical, d=0 and every weight gives the same loss; there is no unique optimum to label. The exact program reports that flat state explicitly."}</Prose>
+
+<H3>{"Deeper: learn several weights under a stated constraint"}</H3>
+
+<SimplexProjectionFigure />
+
+<Prose>{"With three or more members, a candidate coefficient vector can fall outside the allowed simplex. The simplex is the triangle of nonnegative weights summing to one; its corners select a single member. For v=[.8,.3,−.1], Euclidean projection subtracts the same threshold .05 from the active first two coordinates and sets the third to zero: [.75,.25,0]. Clipping and renormalizing would give [8/11,3/11,0], a different point. Projection finds the closest permitted point in squared Euclidean distance."}</Prose>
+
+<Prose>{"In general, sort v into u₁≥⋯≥u_B. For each prefix j, compute τ_j=(Σ_{i≤j}u_i−1)/j. Choose the largest prefix with u_j>τ_j and return w_b=max(v_b−τ_j,0). These coordinates satisfy nonnegativity and sum one. The active-prefix test explains why simply dividing positive coordinates by their total solves a different problem."}</Prose>
+
+<Prose>{"Let P be an n-by-B matrix of member forecasts and y the n targets for those same rows. A "}<strong>{"design matrix"}</strong>{" stores the inputs to a fitted combining rule; its columns are member outputs here. We minimize"}</Prose>
+
+<Prose>{"J(w)=||Pw−y||²/(2n)+λ||w||²/2."}</Prose>
+
+<Prose>{"The first term is half the mean squared residual. λ≥0 controls an L2 penalty on coefficients. Differentiate each row's squared residual, then sum:"}</Prose>
+
+<Prose>{"∇J=Pᵀ(Pw−y)/n+λw; H=PᵀP/n+λI."}</Prose>
+
+<Prose>{"The transpose sends row residual contributions back to their member coefficients. H is the curvature matrix, called the "}<strong>{"Hessian"}</strong>{". At λ>0 it is positive definite, making this weight objective strictly convex. That makes a fitted solution unique under our convex constraints; it makes no statement about future predictive risk."}</Prose>
+
+<Prose>{"For P=[[1,2,4],[3,2,1],[2,5,0]], y=[2,1,3] and λ=.2, begin with w=[1/3,1/3,1/3]. The three row forecasts are [7/3,2,7/3], so their residuals are [1/3,1,−2/3]. Member A's derivative contribution is (1×1/3+3×1+2×(−2/3))/3+.2/3=33/45. The corresponding B and C components are −7/45 and 38/45. A small step η=.02 gives candidate v≈[.318667,.336444,.316444]. Its sum is below one; projection adds the same .009481 to each active coordinate, giving approximately [.328148,.345926,.325926]. This is one update, not the final fitted answer. The program repeats the same multiply, sum, step and projection operations."}</Prose>
+
+<Prose>{"New "}<code>{"ensemble-combination-core.py"}</code>{" writes those operations explicitly. Starting with permitted weights, it takes a gradient step and projects it back to the specified set. Its step uses a bound on curvature: an "}<strong>{"eigendirection"}</strong>{" v of H satisfies Hv=ℓv, meaning that this direction is preserved while H scales it by ℓ, its "}<strong>{"eigenvalue"}</strong>{". Along a unit eigendirection, the quadratic objective has second derivative ℓ. For the simple H=diag(2,4), the coordinate directions have curvatures 2 and 4; the largest, L=4, bounds curvature along every unit direction. Our actual H is formed from P and the penalty, and the code computes its largest eigenvalue L before choosing η=1/L. This ties the numerical step to this fitting problem's curvature rather than a guessed learning rate."}</Prose>
+
+<SimplexStepFigure />
+
+<Prose>{"It stops when the infinity norm of the "}<strong>{"gradient mapping"}</strong>{", (w−project(w−η∇J))/η, and feasibility error are small. At a constrained optimum, the ordinary gradient need not be zero: a simplex's equality constraint can leave equal nonzero gradient coordinates. Our default simplex fit has all gradient coordinates ≈1.014807 while its gradient mapping is below 1e−10. The mapping is the appropriate stopping residual. A step limit is an explicit failure, not permission to print unfinished coefficients as fitted weights."}</Prose>
+
+<Prose>{"The independently computed ordinary route uses SciPy SLSQP with the same objective, nonnegative bounds and a sum-one equality. On P=[[1,2,4],[3,2,1],[2,5,0]], y=[2,1,3], λ=.2, the projected fit gives weights approximately [.128718226,.551469263,.319812511], forecasts [2.510906796,1.808905715,3.014782765] and J≈.194892134. Its prediction difference from SLSQP is below 8.3e−8 in this declared execution."}</Prose>
+
+<Prose>{"The same program also solves two distinct problems. Nonnegative least squares keeps w≥0 but drops the sum constraint; its weights are approximately [0,.569032888,.188049495], summing to .757082384. The ordinary "}<code>{"nnls"}</code>{" reference uses augmented rows P/√n and √λI to represent the same penalized objective. Unrestricted ridge allows negative coefficients and gives approximately [−.117114474,.627857075,.201206282]. Neither route earns the convex interval or ambiguity guarantee by borrowing the simplex's name. Duplicate member columns at λ=0 can leave weights unidentified while their combined predictions coincide; we report that possibility explicitly."}</Prose>
+
+<Prose>{"A dense objective and gradient cost O(nB); forming the Gram matrix costs O(nB²), projection costs O(B log B), and dense storage is O(nB+B²). These are arithmetic and memory counts, not measured wall-clock latency. The row-by-member and target editors later expose this same general model rather than restricting its native capability to one three-member fixture."}</Prose>
+
+<Prose>{"A deeper test asks when a best single member is already the optimal simplex combination. Let E contain the shared-row residual columns and R=EᵀE/n, so the unpenalized simplex mean-square loss is wᵀRw. At vertex e_k, moving a small amount t toward member i gives w=e_k+t(e_i−e_k). The loss derivative at t=0 is 2(R_ik−R_kk). Thus a necessary condition for that vertex to be optimal is R_ik≥R_kk for every i. It is sufficient too: every simplex displacement is a nonnegative combination of those vertex directions, and the quadratic is convex because R is a Gram matrix. These are the first-order constrained optimality, or "}<strong>{"KKT"}</strong>{", conditions in this particular geometry."}</Prose>
+
+<Prose>{"For R=[[1,2],[2,4]], member A has the smaller individual mean square 1 and cross-product 2≥1, so the best permitted mixture is A alone. Disagreement need not make a mixture better. For the valid Gram example R=[[1,−.5],[−.5,4]], the cross-product is below 1; moving away from A initially reduces loss. The two-member optimum has A weight .75 and mean square .625, below 1. With the additional ridge penalty, the corresponding gradient uses R+λI and the vertex condition changes; it cannot borrow the unpenalized criterion unchanged. These finite-row calculations illuminate "}<a href={"https://statistics.berkeley.edu/sites/default/files/tech-reports/367.pdf"}>{"Breiman's §2 analysis"}</a>{", while estimated R still provides no population guarantee."}</Prose>
+
+<H3>{"Deeper: separate uncertainty over fitting from disagreement across members"}</H3>
+
+<PredictionCovarianceFigure />
+
+<Prose>{"Now fix one query x and imagine repeatedly drawing training data and fitting the procedure. The predictions F_b(x) are random under that experiment. For any fixed weights, variance of the combination is wᵀΣw, where Σ_{bc}=Cov(F_b,F_c) is the matrix of prediction covariances. It measures how the fitted forecasts co-vary across repeated fits, not the spread of one fitted model's errors across different test rows."}</Prose>
+
+<Prose>{"For equal weights, equal member variance σ² and common pairwise correlation ρ, expand the B diagonal and B(B−1) off-diagonal terms:"}</Prose>
+
+<Prose>{"Var(B⁻¹Σ_b F_b)=σ²[1/B+(B−1)ρ/B]=σ²[ρ+(1−ρ)/B]."}</Prose>
+
+<Prose>{"At σ²=4 and ρ=.25, B=4 gives 1.75 and B=20 gives 1.15. The residual limit is σ²ρ=1 under those assumptions. At ρ=1, copying predictors gives no variance reduction. For the common-correlation matrix to be a possible covariance, −1/(B−1)≤ρ≤1 when B>1; we cannot independently keep a strongly negative ρ while increasing B indefinitely. This schematic calculation does not estimate a covariance from our four residual rows."}</Prose>
+
+<BiasVarianceNoiseFigure />
+
+<Prose>{"For an independent future target Y=f*(x)+ε with mean-zero noise and variance σ_noise², the expected squared error of a random fitted rule separates into squared bias, fitting variance and irreducible noise. Bias is the difference between the average fitted forecast and f*(x); variance is spread around that average. Averaging can reduce the latter under suitable covariance, while shared systematic errors and target noise remain. Resampling and training may also change bias, so unchanged bias is not a universal bagging promise."}</Prose>
+
+<Prose>{"A population-optimal combination can include a best single member among its choices. That is a statement about minimizing true expected risk over the declared class. Estimated finite-row weights can overfit, so their future risk need not satisfy the same inequality. "}<a href={"https://hastie.su.domains/ElemStatLearn/"}>{"ESL §8.8"}</a>{" separates combining predictors from estimating their weights. Bayesian model averaging is another distinct route: it integrates model predictions using posterior model probabilities derived from prior probabilities and data evidence. Our fitted empirical square-loss weights are not posterior probabilities merely because they sum to one."}</Prose>
+
+<Prose>{"The next mechanism creates different fitted members by changing which training rows they receive. Its accounting starts with repeated row identities, not a claim that every resampled fit helps."}</Prose>
+
+<EnsembleCompleteProgram id="combination-arithmetic" />
+<EnsembleCompleteProgram id="ensemble-combination-core" />
+
+<H2>{"4. Follow the bootstrap rows"}</H2>
+
+<Prose>{"Start a separate six-row "}<strong>{"all-training fixture"}</strong>{", again named A–F, with feature values x=[0,1,2,3,4,5] and numerical targets y=[1,2,2,6,7,8]. These invented observations check the mechanism; their reused letters do not retain the opening's fit/choice/assessment permissions. Here F is a training row, and the later OOF example keeps these six training identities. A "}<strong>{"bootstrap sample"}</strong>{" draws row identities with replacement, so it can contain repeated copies of one observation and omit another. "}<strong>{"Bagging"}</strong>{", short for bootstrap aggregating, fits a member to each such sample and combines the resulting predictions."}</Prose>
+
+<BootstrapDrawFigure />
+
+<Prose>{"The first bag draws A,A,C,D,D,F. Those six tokens have counts [2,0,1,2,0,1] against the original six identities. They are not six distinct observations. The repeated A and D tokens reach the fitted rule twice; B and E reach it zero times. Their original identities remain visible through the draw and fit, so a duplicate cannot silently disappear through set deduplication."}</Prose>
+
+<BootstrapFitFigure />
+
+<Prose>{"Fit a mean-leaf regression stump to the actual multiset. At threshold 2.5, the left targets [1,1,2] have mean 4/3 and SSE 2/3; the right targets [6,6,8] have mean 20/3 and SSE 8/3. The total squared residual sum is 10/3. Candidate splits compare the total from both children, rather than picking a visually striking boundary. A leaf's mean minimizes its own squared error because SSE(a)=SSE(ȳ)+m(a−ȳ)²; the centered residuals sum to zero. That is the same mean identity used in "}<a href={"https://ronak.sh/learn/topic/linear-logistic-regression#2-make-every-residual-visible"}>{"Linear & Logistic Regression"}</a>{"."}</Prose>
+
+<Prose>{"The draw editor admits repeated A–F identities and a changed length, rather than only the initial preset bags. The fitted threshold, leaf values and prediction must follow the current multiset. If all drawn feature values are identical, there is no legal distinct-value split: the fitted rule is one constant mean leaf. More copies can change a fitted mean or which split wins even though no original feature/target value changed."}</Prose>
+
+<BootstrapOOBFigure />
+
+<Prose>{"For a particular original row, a bag that omitted it is "}<strong>{"out of bag"}</strong>{", or OOB, for that row. The eligibility mask is row-specific. The second bag draws B,C,C,E,E,F and the third draws A,B,B,D,E,E. At A's x=0, the three fitted predictions are 4/3,2,5/3. Their all-bag average is 5/3. A appears in bags 1 and 3, so only bag 2 may supply A's OOB forecast: that answer is 2. Averaging all bags and calling it A's OOB result would include fits that used A's target."}</Prose>
+
+<Prose>{"Inspect other rows with the selector; the mask and eligible mean change together. A row with no eligible bag has no OOB forecast. It is unavailable, not zero. OOB estimates can help assess a bagged fitting procedure under appropriate row sampling, but if we repeatedly choose settings by those outcomes, they become selection evidence. Group/time dependence also requires different eligibility rules; a bootstrap of rows alone does not establish a new-entity or future-time assessment."}</Prose>
+
+<BootstrapAbsenceFigure />
+
+<Prose>{"For n original rows and m independent replacement draws, a named row is absent with probability q=(1−1/n)^m. On our n=6,m=6 sample, q=(5/6)^6=15625/46656≈.334898. Expected distinct identities are n(1−q)≈3.990612. With B independently generated bags, probability of no OOB-eligible bag for a named row is (1−q)^B. These are separate quantities: absence in one bag, expected distinct rows in one sample, and lack of an eligible forecast across bags. The live drawing changes draw count and bag count while retaining their different meanings. The familiar e⁻¹ approximation applies as n grows with m=n, not to every chosen draw length."}</Prose>
+
+<Prose>{"The retained "}<code>{"bootstrap-oob"}</code>{" program computes the tiny sampling probabilities exactly, and the original numerical helpers fit the current draw's actual multiset. "}<a href={"https://www.stat.berkeley.edu/~breiman/bagging.pdf"}>{"Breiman's Bagging Predictors"}</a>{" motivates aggregation of resampled fits through sensitivity to training-set perturbations. A small data change can alter a tree's selected branch structure substantially; averaging those changes can help. A stable procedure can change little and gain little, or even become worse. Random forests additionally randomize candidate features; "}<a href={"/learn/topic/decision-trees-random-forests#8-track-bootstrap-membership-and-out-of-bag-evidence"}>{"Trees §§8–9"}</a>{" owns that extension and its probability conventions."}</Prose>
+
+<Prose>{"Explain a duplicate's role: it is a second training contribution from the same row, not new independent evidence. Apply the OOB mask before averaging. Diagnose a row with no eligible member by keeping it unavailable and reporting which masks caused that state. Sequential fitting now changes the row contributions deliberately instead of drawing bags independently."}</Prose>
+
+<EnsembleCompleteProgram id="bootstrap-oob" />
+
+<H2>{"5. Make the next fit listen to different rows"}</H2>
+
+<EnsembleMechanismsFigure />
+
+<Prose>{"Bagging fits can run in parallel after samples are chosen. "}<strong>{"Boosting"}</strong>{" fits the next member using information from the current rule's loss, so the sequence has a dependency. "}<strong>{"Stacking"}</strong>{", which we will build in §7, constructs unseen-row member predictions and fits a second combining model. These graphs describe different fitting mechanisms, not a ranking or a measured speed comparison."}</Prose>
+
+<Prose>{"For signed binary AdaBoost, introduce a new, explicitly labeled fixture x=[0,1,2,3,4,5], y=[−1,−1,+1,+1,−1,+1]. These signs are class labels for this illustration. They are not shipment hours, and they do not reuse the WDBC class meanings introduced later. A member h_t(x) returns −1 or +1. A "}<strong>{"distribution of row weights"}</strong>{" D_t(i) assigns nonnegative mass summing to one to training row i. It determines which mistakes count most when fitting round t."}</Prose>
+
+<WeightedStumpFigure />
+
+<Prose>{"A weighted stump chooses its feature, threshold and polarity using the current masses. Evaluate a candidate by summing D_t(i) over its wrong rows. This is weighted error ε_t, not the unweighted fraction of wrong rows. With six initial weights 1/6, the first selected stump misses only the row at x=4, giving ε₁=1/6. The saved stump's branch and signed leaves are the actual classifier, while the mass row explains its fitting inputs. The displayed stage distinguishes the masses available before a fit from the updated masses produced afterward."}</Prose>
+
+<H3>{"Work the first update by hand"}</H3>
+
+<BoostingUpdateFigure />
+
+<Prose>{"AdaBoost gives this stump vote coefficient α₁=½log((1−ε₁)/ε₁)=½log 5≈.804719. For each row, form its unnormalized next mass"}</Prose>
+
+<Prose>{"u_i=D₁(i)exp(−α₁ y_i h₁(x_i))."}</Prose>
+
+<Prose>{"On a correct row, y_i h₁(x_i)=+1, so u_i=(1/6)/√5. On the wrong row it is −1, so u_i=(1/6)√5. Their sum is Z₁=√5/3≈.745356. Divide each u_i by Z₁. The five correct rows receive .1 each and the wrong row .5. The final sum is one. This means half the next distribution's mass lies on the wrong subset; it does not mean half the rows were wrong."}</Prose>
+
+<Prose>{"The next weighted fit now listens strongly to x=4. In the retained three-round trace the following errors are .2 and .1875, with coefficients .693147 and .733169. The next distributions are [.0625,.0625,.25,.25,.3125,.0625] and approximately [.166667,.166667,.153846,.153846,.192308,.166667]. They remain distributions over the same six identities. Changing a fixture or stepping the declared round limit recomputes the entire current trace; a training-stage view must never show old weights beside a new stump."}</Prose>
+
+<SavedBoostingVoteFigure />
+
+<Prose>{"Inference needs the saved stumps and their α values. At a new query, evaluate each branch, multiply the returned sign by its α, then add to obtain F(x)=Σ_t α_t h_t(x). This retained "}<code>{"signed-adaboost"}</code>{" route predicts +1 for F≥0 and −1 for F<0: an exact zero vote chooses +1, matching its original program and helper, including a no-vote state. At queries [.5,2.5,4.5], the retained three-round rule predicts [−1,+1,−1]. No training distribution D_t enters this inference graph. Row weights teach a member; vote weights combine saved member outputs. Interchanging those arrays confuses two different fits and shapes."}</Prose>
+
+<Prose>{"The complete retained "}<code>{"signed-adaboost"}</code>{" program writes exhaustive weighted-stump scoring, the update and saved inference. Its finite traces remain unchanged. "}<a href={"/learn/topic/gradient-boosted-trees-xgboost-lightgbm-catboost#1-predict-with-a-sequence-of-corrections"}>{"Gradient-Boosted Trees §1"}</a>{" connects a different sequential correction mechanism, and "}<a href={"/learn/topic/gradient-boosted-trees-xgboost-lightgbm-catboost#3-change-the-loss-without-changing-the-question"}>{"its loss discussion"}</a>{" explains why a changed loss changes the fitting signal. Signed AdaBoost's exact exponential update is derived locally next; it is not the same tree engine as squared-residual or Newton boosting."}</Prose>
+
+<EnsembleCompleteProgram id="signed-adaboost" />
+
+<H2>{"6. Derive the vote and its limits"}</H2>
+
+<H3>{"Why this logarithm appears"}</H3>
+
+<ExponentialLineSearchFigure />
+
+<Prose>{"Keep the current distribution D and a fixed signed stump h. Giving that stump coefficient α multiplies correct mass 1−ε by e⁻ᵅ and wrong mass ε by eᵅ. The sum is"}</Prose>
+
+<Prose>{"Z(α)=(1−ε)e⁻ᵅ+εeᵅ."}</Prose>
+
+<Prose>{"Differentiate: Z′=−(1−ε)e⁻ᵅ+εeᵅ. At a finite minimum, εeᵅ=(1−ε)e⁻ᵅ, so e²ᵅ=(1−ε)/ε and α*=½log((1−ε)/ε). The second derivative is Z itself, positive in the nondegenerate case. The curve shows these correct and wrong contributions and their sum before the derivative formula. Change α or ε to see which mass the candidate step increases or decreases."}</Prose>
+
+<Prose>{"At α*, Z*=2√(ε(1−ε)). For 0<ε<.5, α*>0 and Z*<1. At ε=.5, the optimum coefficient is zero and there is no positive edge. At ε=0, there is no finite minimizing α; a perfect member can dominate the earlier finite votes under the explicitly declared stopping policy. Clipping ε to a small positive number is a numerical convention, not this mathematical optimum. The original NumPy comparison uses clipping for its own finite implementation; the new signed sweep instead records a perfect dominating member separately. If a permitted hypothesis has error above .5, reversing its sign gives error 1−ε; our search checks both polarities."}</Prose>
+
+<Prose>{"The "}<strong>{"exponential training loss"}</strong>{" is L_t=(1/n)Σ_i exp(−y_i F_t(x_i)). At round t, D_t is proportional to those current exponential terms. Adding α_t h_t changes L_{t−1} by the weighted factor Z_t, giving L_t=L_{t−1}Z_t and, from F₀=0, L_T=Π_t Z_t. This identifies the normalizer's meaning beyond “make the weights sum one.” "}<a href={"https://cs229.stanford.edu/extra-notes/boosting.pdf"}>{"Duchi's boosting notes"}</a>{" derive the same coordinate-wise exponential objective and show how to implement stump search."}</Prose>
+
+<BoostingProductBoundFigure />
+
+<Prose>{"A training mistake has y_i F_T(x_i)≤0, so 1[wrong]≤exp(−y_i F_T(x_i)). Average and substitute the product to get training error≤Π_t 2√(ε_t(1−ε_t)). Writing the round's edge γ_t=.5−ε_t gives Z_t=√(1−4γ_t²)≤exp(−2γ_t²), hence training error≤exp(−2Σ_t γ_t²). If a fixed γ>0 lower-bounds every round's edge, this becomes exp(−2Tγ²). Errors merely remaining below .5 do not supply such a uniform γ: edges can shrink so that their squared sum grows slowly or stays bounded. None of these training bounds gives the same bound on future error."}</Prose>
+
+<Prose>{"A learning-rate factor ν∈(0,1] uses α=να* and changes the actual normalizer to (1−ε)e⁻ᵛᵅ*+εeᵛᵅ*. It no longer equals the optimal 2√(ε(1−ε)) unless ν=1. Shrinkage changes the path and may need more rounds; it is a hyperparameter to choose without test outcomes, not an algebraic guarantee of improved generalization. Label noise or a restricted weak learner can also frustrate the assumptions behind a sustained edge."}</Prose>
+
+<NormalizedMarginFigure />
+
+<Prose>{"The "}<strong>{"normalized margin"}</strong>{" of training row i is m_i=y_i F_T(x_i)/Σ_t α_t when that denominator is positive. It lies in [−1,1] for positive signed-vote coefficients. A positive margin supports the correct class; its magnitude measures how much signed voting mass supports that choice. The cumulative margin curve at θ counts the fraction of rows with m_i≤θ. It displays the actual finite row margins for the selected retained trace, with shared labels where values coincide. With no positive vote mass the normalized margin is unavailable, not an all-zero distribution fabricated by division."}</Prose>
+
+<Prose>{""}<a href={"https://www.schapire.net/papers/explaining-adaboost.pdf"}>{"Schapire's Explaining AdaBoost"}</a>{" uses margin distributions to expose changes after training error has already reached zero. Its historical curves are those experiments' observations; our picture uses this lesson's own saved finite trace. Generalization arguments require data and weak-hypothesis complexity assumptions as well as margins. A larger minimum margin or more rounds alone is not a universal criterion for choosing a future rule."}</Prose>
+
+<H3>{"Search the same weighted stump more efficiently"}</H3>
+
+<Prose>{"New "}<code>{"ensemble-stump-sweep.py"}</code>{" keeps a separate eight-row constructed fixture x=[−2,−1,0,0,1,2,3,4], y=[−1,−1,+1,−1,+1,+1,−1,+1]. This N7 implementation deliberately uses a different inference tie: +1 for F>0 and −1 for F≤0, so an exact zero or no-vote state chooses −1. It does not change §5/D20's retained zero→+1 rule; identify the implementation before comparing boundary predictions. The repeated x=0 rows have different labels, so an implementation cannot split them by moving a threshold between identical values. Sort each feature once with a stable row order and identify the ends of equal-value blocks. Candidate thresholds lie in distinct-value gaps, together with exterior choices representing constant signed predictions."}</Prose>
+
+<Prose>{"Maintain cumulative positive and negative mass on the left. For polarity +1, wrong mass is positive-left plus negative-right. For polarity −1 it is negative-left plus positive-right. Moving past one whole block updates these totals, so a feature's candidates can be scored in O(n) after sorting. With d features, sorting costs O(dn log n); each later round's sweep costs O(dn). The cache binds feature values, row identities and label convention. Changing only the masses can reuse it; changing its bound training context requires rebuilding it. Feature, threshold and polarity supply deterministic tie ordering, with tiny floating-sum comparisons identified separately from an exact real-arithmetic equality."}</Prose>
+
+<Prose>{"The program compares every selected round's achieved weighted minimum with an exhaustive oracle over those same threshold/polarity candidates. It updates log weights using log-sum-exp so a large finite vote does not require multiplying raw exponentials into overflow. The five new errors are [.25,.25,1/3,.375,.3], with signed α approximately [.549306,.549306,.346574,.255413,.423649]. The loss is retained as a log quantity; it is not relabeled as test performance. The changed query output contains each stump's signed contribution, their sum and the final tie policy. Its separate perfect and no-edge fixtures exercise both stopping boundaries."}</Prose>
+
+<H3>{"Binary signed votes and the ordinary library route"}</H3>
+
+<Prose>{"In the inspected scikit-learn 1.9.1 "}<code>{"AdaBoostClassifier"}</code>{", discrete SAMME stores α_API=log((1−ε)/ε)+log(K−1). At K=2 that is twice our signed coefficient. Scaling all signed coefficients by two leaves a hard-vote sign unchanged, but the API's decision-function normalization and probability mapping are distinct operations. Tree threshold equality, leaf-label ties and perfect-estimator stopping are also explicit library conventions. On the new fixture, ordinary five-round errors match the signed errors, while the query at the selected threshold 2.5 gives a different class under the library tree's branch convention. We retain that difference instead of claiming arbitrary-query parity from matching round errors."}</Prose>
+
+<Prose>{"The original "}<code>{"api-conventions"}</code>{" program reports the retained three-round library weights [1.609438,1.386294,1.466337], twice the signed values. The original complete "}<code>{"full-numpy-comparison"}</code>{" is a separate 300-row circles experiment: its 225/75 split, 50 depth-three hard-vote bags and 50 clipped-error stump boosts report .7600 and .9333 accuracy on that one test. A hard aggregation of tree classes differs from averaging current tree probability vectors. These stored outputs are preserved observations, not an instruction to rerun the fits or a claim that boosting will generally beat bagging."}</Prose>
+
+<Prose>{"Explain why α depends on weighted error rather than raw wrong-row count. Apply one multiply/sum/divide update to a changed ε and keep its before/after distributions distinct. Diagnose a promised rapid training bound when every edge is positive but tends toward zero. The next section changes the way the combining rule is learned: it needs a matrix of member predictions made without fitting each row's target."}</Prose>
+
+<EnsembleCompleteProgram id="full-numpy-comparison" />
+<EnsembleCompleteProgram id="ensemble-stump-sweep" />
+
+<H2>{"7. Teach a combiner with unseen-row predictions"}</H2>
+
+<Prose>{"An equal mean chooses weights in advance. "}<strong>{"Stacking"}</strong>{" fits a second model, often called the meta learner, using base outputs as its inputs. The danger is immediate: a base can look excellent on rows whose targets it already fitted. A combiner trained on those in-sample outputs learns from an unrealistically favorable picture of its members."}</Prose>
+
+<CompleteOOFMatrixFigure />
+
+<Prose>{"Our six A–F observations now produce a row-by-member matrix P. The two columns are a one-nearest-neighbor regression forecast and a line forecast. The completed "}<strong>{"out-of-fold"}</strong>{", or OOF, matrix is"}</Prose>
+
+<NeuralTable caption={"7. Teach a combiner with unseen-row predictions"} headers={[<>{"Row"}</>,<>{"Target"}</>,<>{"Neighbor OOF"}</>,<>{"Line OOF"}</>]} rows={[[<>{"A"}</>,<>{"1"}</>,<>{"2"}</>,<>{"−.35"}</>],[<>{"B"}</>,<>{"2"}</>,<>{"1"}</>,<>{"2"}</>],[<>{"C"}</>,<>{"2"}</>,<>{"2"}</>,<>{"4"}</>],[<>{"D"}</>,<>{"6"}</>,<>{"2"}</>,<>{"4.75"}</>],[<>{"E"}</>,<>{"7"}</>,<>{"6"}</>,<>{"6.5"}</>],[<>{"F"}</>,<>{"8"}</>,<>{"7"}</>,<>{"8.8"}</>]]} />
+
+<Prose>{"The target is beside the row to teach the combiner. It was unavailable to the base fit that generated that row's two cells. The drawing exposes the complete matrix before we trace its construction; a trace's incomplete state must not replace the independent completed result."}</Prose>
+
+<HeldFoldConstructionFigure />
+
+<Prose>{"Hold out A and D together. Fit fresh base copies only on B,C,E,F. Then read A's feature to obtain [2,−.35] and D's feature to obtain [2,4.75]. Write these forecasts into their original row positions. Repeat with held pairs B/E and C/F. Every row must receive one prediction from each base, and every prediction must have a fit that excluded that row's target. A row identity is not lost when fit order or held order changes. The construction trace can show zero, one, two or all three completed folds; its unavailable cells remain visibly unavailable."}</Prose>
+
+<MemorizationContrastFigure />
+
+<Prose>{"Fit the convex two-member weight using the completed honest P and the corresponding targets. The retained program gets neighbor weight ≈.228273. If we instead ask a full-data one-neighbor model to predict its own training features, it returns the targets [1,2,2,6,7,8]. That leaked column has zero fitted error, and the weight fit chooses it alone: weight 1. It has seen precisely the answers it is supposed to forecast. Compare the two provenance modes, rather than interpreting the leaked weight as evidence that neighbors are universally best."}</Prose>
+
+<FullRefitInferenceFigure />
+
+<Prose>{"After fitting the combiner, refit each base on all six available training rows. Preserve the already learned weight. At the new query x=2.5, the saved full neighbor returns 2 under its declared tie convention and the full line returns 13/3. The complete rule computes .228273×2+(1−.228273)×13/3≈3.800695. This is a saved inference route; neither the query's eventual target nor the partially built OOF trace is an input."}</Prose>
+
+<Prose>{"The retained "}<code>{"manual-oof"}</code>{" program contains all fold cloning, coverage checks, weight fitting, full-data refits and query inference. Its changed observed outcomes [1.5,4,7.5] yield stack MSE .055445 versus nearest MSE 1.5 on those three worked rows. That small check explains the mechanism. It is not a broad statistical guarantee. OOF members trained on fewer rows can have a different prediction distribution from the full-refit members, so the weight's transfer to refitted bases is an explicit assumption to assess."}</Prose>
+
+<GeneralCombinerFitFigure />
+
+<Prose>{"The general matrix editor extends the same combining problem beyond two members. Every row supplies B member forecasts and one target. The picture multiplies each row's B entries by the current learned coefficient vector, sums the products, forms that row's residual and sends its derivative contribution back to the B coefficients. Choose simplex, nonnegative-only or unrestricted coefficients and a ridge strength. P=[[1,2,4],[3,2,1],[2,5,0]], y=[2,1,3], λ=.2 starts the view; arbitrary finite edited rows and member columns remain supported in its declared domains. A different constraint produces a different fitted rule and does not inherit another constraint's forecast interval guarantee."}</Prose>
+
+<Prose>{"New "}<code>{"ensemble-oof-state.py"}</code>{" exposes an ensemble's row orchestration. "}<code>{"build_oof"}</code>{" accepts named base prototypes and explicit fit/held indices, validates exactly-once coverage before fitting, clones the entire estimator for every fold, builds named typed columns, and records fit and held IDs. Learned preprocessing belongs inside each cloned pipeline. "}<code>{"full_refit_state"}</code>{" separately creates bases trained on all legal training rows. "}<code>{"full_refit_columns"}</code>{" reads those saved bases for new features and checks the resulting meta-column order; it accepts no targets."}</Prose>
+
+<Prose>{"The binary meta learner uses a logistic score rather than a convex probability mean. For P with B probability columns, D=[1,P] has B+1 columns including the intercept. Its score is z=Dθ and its class-1 probability is σ(z)=1/(1+e⁻ᶻ), evaluated with a stable positive/negative-score branch. A slope's units are score per unit of its named meta-feature. Coefficients can be negative and need not sum to one."}</Prose>
+
+<Prose>{"We reuse the exact guarded "}<code>{"newton-logistic.py"}</code>{" from the published Linear & Logistic Regression code; importing its functions does not execute its old main. The local objective is mean(logaddexp(0,(1−2y)z))+λ||θ_slopes||²/2, with an unpenalized intercept. If p=σ(Dθ), its gradient is Dᵀ(p−y)/n plus the slope penalty, and its Hessian is Dᵀdiag(p(1−p))D/n plus the same penalty diagonal. Damped Newton steps solve the curvature system and reduce the objective with a checked line search. It returns only when the gradient infinity norm meets tolerance. Complete code, exact dependency identity and setup are in the common file index."}</Prose>
+
+<Prose>{"On the new 24-row constructed binary fixture, the fitted meta coefficients are printed together with actual OOF rows, coverage, fold audit, derivatives and saved query outputs. The ordinary "}<code>{"StackingClassifier"}</code>{" route uses the same base pipelines and explicit folds, with L2 logistic C=1/(nλ), matching the mean-loss penalty scaling. Its probability difference is about 1.14e−10 in this execution. This is a binary optimizer comparison. Multiclass final-estimator fitting remains the ordinary library route rather than pretending that this binary Newton routine handles a multiclass softmax."}</Prose>
+
+<Prose>{""}<a href={"https://statistics.berkeley.edu/sites/default/files/tech-reports/367.pdf"}>{"Breiman's Stacked Regressions"}</a>{" explains honest level-one predictions and nonnegative coefficient fitting. Its principal NNLS recipe does not require sum one; its later simplex analysis has that additional constraint. "}<strong>{"Stacked generalization"}</strong>{" is attributed to "}<a href={"https://doi.org/10.1016/S0893-6080(05)80023-1"}>{"Wolpert"}</a>{"; the inspected Breiman, ESL and API material supplies the concrete algorithm used here, without attributing an unread theorem to the publisher abstract."}</Prose>
+
+<Prose>{"Explain why a target may teach the combiner while being forbidden to the base that produced that same row's input. Apply the saved full-state route to a changed query. Diagnose an OOF matrix assembled from full-data predictions: row coverage alone can be perfect while provenance is wrong."}</Prose>
+
+<EnsembleCompleteProgram id="manual-oof" />
+<EnsembleCompleteProgram id="ensemble-oof-state" />
+<EnsembleNewtonDependency />
+
+<H2>{"8. Use the actual library contract"}</H2>
+
+<TypedMetaColumnsFigure />
+
+<Prose>{"The final estimator's inputs are columns with meanings, not just a mysterious rectangular array. In binary probability stacking, each member's two class probabilities sum to one. Keeping both alongside a meta intercept creates redundant information, so inspected "}<code>{"StackingClassifier"}</code>{" drops the first binary probability column. Three such bases yield three class-1 columns. In multiclass probability stacking, all K class columns are retained per member. With two three-class bases, the new fixture gives six probability columns; passthrough adds its two raw features for eight total."}</Prose>
+
+<Prose>{"The API's "}<code>{"stack_method='auto'"}</code>{" tries "}<code>{"predict_proba"}</code>{", then "}<code>{"decision_function"}</code>{", then "}<code>{"predict"}</code>{". A margin classifier can therefore contribute a signed decision score beside another member's probability. The selected column names in the mixed fixture are "}<code>{"line:P(class=1)"}</code>{", "}<code>{"margin:margin(toward class=1)"}</code>{", and two explicitly named raw feature columns. That margin is not a probability. A hard predicted label is yet another possible output; our orchestration encodes it using the declared class-index mapping and names the resulting type. Class permutations are aligned by identity throughout."}</Prose>
+
+<Prose>{"A multiclass margin column also needs a declared meaning. "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html"}>{"SVC's output contract"}</a>{" specifies that "}<code>{"decision_function_shape='ovr'"}</code>{" returns one score per class; "}<code>{"'ovo'"}</code>{" returns one score per class pair. With K=3, both have three columns because K(K−1)/2=3. Equal width therefore cannot justify naming pair scores as class scores. Our typed-column route rejects explicitly declared multiclass OVO outputs, including a pipeline's final estimator, rather than inventing a pair-to-class mapping. Supported per-class outputs are reordered by "}<code>{"classes_"}</code>{"; binary scores keep their sign toward the named second class. A missing class still fails explicitly. A custom estimator must supply a genuine per-class contract before using that alignment; shape alone is not a semantic guarantee."}</Prose>
+
+<Prose>{""}<code>{"passthrough=True"}</code>{" gives raw features to the final estimator in addition to base outputs. That permits the meta learner to learn effects beyond a pure rule on member predictions. It increases the input dimension and fitting work. It does not automatically give a linear meta learner context-dependent slopes; §12 derives the product features required for that."}</Prose>
+
+<Prose>{"In the ordinary API, "}<code>{"fit"}</code>{" generates the internal OOF predictions used for final-estimator training and also fits bases on all supplied training rows. "}<code>{"transform(X)"}</code>{" subsequently reads those full-fit bases. It does not return the earlier OOF matrix. In the new binary fixture, full-fit transform and saved OOF entries differ by as much as .208007457. Store the OOF matrix separately when you need its provenance; do not rebuild it by calling transform on the training features. The old "}<code>{"api-conventions"}</code>{" program's 8-by-2 transform is likewise the full-refit object, not its hidden meta-training matrix."}</Prose>
+
+<Prose>{"Integer or absent CV uses the API's default non-shuffled fold setup; an explicitly shuffled splitter declares a different construction. CV here builds predictions for the final estimator. It is not outer performance assessment of the whole selection-and-fitting workflow. "}<code>{"cv='prefit'"}</code>{" is another distinct path: the supplied bases remain fitted, and the final estimator trains on their predictions for the supplied rows, without OOF generation. §9 uses it legitimately with separate meta rows."}</Prose>
+
+<H3>{"Learned preprocessing is part of the fold"}</H3>
+
+<FoldPreprocessingFigure />
+
+<Prose>{"A learned scaler stores training means and scales. If we fit it globally before generating OOF columns, each held row has entered those learned statistics, even if the later base coefficients exclude its target. The legal route clones and fits the scaler inside the same base fold, then applies its saved statistics to held features. A fixed, externally defined conversion such as hours to minutes learns nothing from these rows and has different permissions. The diagram keeps those two operations visibly separate."}</Prose>
+
+<H3>{"Deeper: a held row can leak through a chosen setting"}</H3>
+
+<NestedSelectionFigure />
+
+<Prose>{"Excluding a held row from coefficient fitting is insufficient if its target helped choose the hyperparameter used by that fit. A globally chosen neighbor count, regularization strength or feature set can carry that target's information into every apparently held-out prediction. Trace both arrows: coefficient-fit rows and setting-selection labels. In the small named illustration, predicting A legally requires the entire base choice-and-fit procedure to use only its permitted B,C,E,F subset."}</Prose>
+
+<Prose>{"New "}<code>{"ensemble-nested-selection.py"}</code>{" works the full distinction on a separate twelve-row regression construction. Outer three-fold splits with seed 107 reserve assessment rows. Inside each outer fit, three OOF folds with seed 109 generate the meta matrix. Each OOF base's ridge strength is selected from [.1,1] with two inner folds, seed 113, using only that base fit's allowed rows. The line is the second base; Ridge(alpha=1) is the final estimator. Every search logs label access separately from each coefficient fit and selected refit. Assertions check both against the OOF held IDs and outer assessment IDs."}</Prose>
+
+<Prose>{"The ordinary route places "}<code>{"GridSearchCV(Pipeline(StandardScaler,Ridge))"}</code>{" inside the stack's base list. The stack clones that search inside each OOF fit; "}<code>{"cross_validate"}</code>{" surrounds the entire stack with the outer folds. Manual and ordinary outer MSEs are [.027461059,.031784566,.052058248] in this declared execution, with zero difference. One inner OOF choice selects α=1 while the others select .1; the source prints all choices rather than hiding this variation. A separately labeled global search selects .1 using all twelve labels, and its access audit rejects that setting as honest outer evidence. It contributes to none of the reported outer scores."}</Prose>
+
+<Prose>{"This is "}<strong>{"nested selection"}</strong>{": an assessment boundary encloses the complete procedure we would fit and serve, including internal setting selection. Selecting among many settings on one criterion can overfit that criterion; "}<a href={"https://jmlr.org/papers/v11/cawley10a.html"}>{"Cawley & Talbot"}</a>{" studies that problem, and the "}<a href={"https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html"}>{"official nested-CV example"}</a>{" shows the enclosing evaluation structure. Our twelve constructed rows demonstrate ownership and matched operations, not a statistical superiority claim."}</Prose>
+
+<Prose>{"A separate multiclass idea, "}<strong>{"error-correcting output codes"}</strong>{", trains binary tasks defined by a class-code matrix and decodes their outputs into an original class. Those binary columns refer to different groupings of classes; they are not several aligned forecasts of one shared class vector. "}<a href={"https://hastie.su.domains/ElemStatLearn/"}>{"ESL §16.1"}</a>{" introduces that contrast. Full code-matrix design belongs with multiclass/multi-label learning rather than silently entering this stack's probability columns."}</Prose>
+
+<EnsembleCompleteProgram id="api-conventions" />
+<EnsembleCompleteProgram id="ensemble-nested-selection" />
+
+<H2>{"9. Preserve groups and time"}</H2>
+
+<Prose>{"Random row folds assume the intended assessment units can be separated that way. If several rows belong to one person, machine or other entity, holding out one row while fitting on a sibling can reveal entity-specific information. If predictions will be made in the future, a fit on later outcomes can be impossible at the intended prediction time. The row permissions must describe the actual task."}</Prose>
+
+<ForwardAvailabilityFigure />
+
+<Prose>{"For twelve time-ordered rows, the retained expanding-window construction fits rows 0–2 to predict 3–5, then 0–5 to predict 6–8, then 0–8 to predict 9–11. The initial prefix 0–2 has no earlier training history under this protocol and remains uncovered. The selected prediction origin and label-delay control further test availability: a feature time before an origin does not make its later outcome known. A label with availability time after the fit origin cannot be used. Delaying labels can remove otherwise tempting rows from a fit."}</Prose>
+
+<WholeGroupExclusionFigure />
+
+<Prose>{"The separate six-group construction has two rows per entity. A held group excludes both rows from every base's fit and setting search. Inspect a group and follow the two identities through the mask. A row-wise split that leaves its sibling in training breaks the new-entity assessment boundary, even if every individual row has one nominal held prediction. Depending on the deployment task, time and groups can require a combined split rather than one of these simple illustrations."}</Prose>
+
+<PartitionStorageFigure />
+
+<Prose>{""}<code>{"cross_val_predict"}</code>{" requires held indices to form a partition: concatenating the held lists must include every input row exactly once. Standard expanding windows leave the earliest prefix absent, so passing those splits into a partition-based stacking API is not a way to obtain valid full OOF coverage. Write an explicit forward loop, retain its eligibility mask, and fit a combiner on covered legal rows only. The retained "}<code>{"forward-group-oof"}</code>{" program does that with visible prefix omissions and separate group-safe coverage; its reported next forward forecast is 6.546651 under its declared construction."}</Prose>
+
+<H3>{"Blending keeps a different set of fitted bases"}</H3>
+
+<KeptBlendStateFigure />
+
+<Prose>{"A disjoint "}<strong>{"holdout blend"}</strong>{" reserves separate base-fit and meta-fit rows. Fit the bases on the first block, read their predictions on the meta block, then fit the combiner there. Save those same bases for inference. Unlike OOF stacking, no training row is recycled into a later full-data base refit. Refitting those bases on the union changes the workflow and the distribution of its meta inputs; it needs a new declared comparison rather than a silent upgrade of the old measured blend."}</Prose>
+
+<Prose>{"New "}<code>{"ensemble-blend-calibrate.py"}</code>{" makes every role concrete on 96 constructed rows: 36 base-fit, 24 meta-fit, 12 calibration and 24 evaluation. Both classes occur in each disjoint role. A scaled logistic and GaussianNB are the two reused base primitives. The binary meta objective uses slope penalty .1, while the ordinary prefit stack uses C=1/(24×.1). It reads the already fitted bases on the separate meta rows and agrees with the scratch meta route on its saved query probabilities. The printed ownership IDs stay with this 36-row base state."}</Prose>
+
+<Prose>{"Calibration fits another function of the frozen whole rule's score, so it gets a separate set of rows. A base being frozen does not make its calibration targets harmless for later assessment. Likewise, choosing an action threshold uses outcomes and requires a choice boundary distinct from final evaluation. We will compute both probability quality and decisions next."}</Prose>
+
+<EnsembleCompleteProgram id="forward-group-oof" />
+<EnsembleCompleteProgram id="ensemble-blend-calibrate" />
+
+<H2>{"10. Inspect probabilities and real fitted rules"}</H2>
+
+<Prose>{"A calibrated probability .7 means that among events receiving that forecast, the event occurs with frequency .7 under the distribution being discussed. A probability is not calibrated merely because it lies in [0,1] or was returned by a method named "}<code>{"predict_proba"}</code>{". Finite grouped observations can provide evidence about calibration, with sampling uncertainty; an exact constructed probability law can demonstrate a counterexample without estimating anything."}</Prose>
+
+<ExactCalibrationLawFigure />
+
+<Prose>{"Consider four equally likely signal states. Member A and B give forecasts (.25,.25),(.25,.75),(.75,.25),(.75,.75). Their true conditional event probabilities are respectively 0,.5,.5,1. A's .25 forecast groups the first two states: their mean event chance is .25. Its .75 forecast groups the last two and has mean chance .75. B has the corresponding same property. Each member is calibrated in this exact law."}</Prose>
+
+<Prose>{"Their equal average instead groups states by forecasts .25,.5,.75. The .25 group has actual chance 0, the .5 group actual chance .5, and the .75 group actual chance 1. The mean is not calibrated. The grouped mass picture shows which states contribute to each forecast before this calculation; “equally likely” is probability mass, not a claim about four observed patients or shipments. In the retained "}<code>{"calibrated-average"}</code>{" program, each member's expected Brier risk is 3/16=.1875, while the mean's is 5/32=.15625. Improved proper-score risk and calibration are distinct properties."}</Prose>
+
+<Prose>{"Squared-error convexity still bounds a convex average's loss by the weighted member loss. For class probability vectors, convexity of −log p_true also gives −log(Σ_b w_b p_b,true)≤Σ_b w_b(−log p_b,true) when the true-class probabilities are positive. Neither statement implies calibration or superiority to the best member. Extreme wrong forecasts can have a large log loss even if their hard accuracy looks respectable."}</Prose>
+
+<SavedProbabilityFieldFigure />
+
+<Prose>{"The retained circles map shows five actual saved grids: line, tree, neighbor, soft mean and stack. All use the same x₁/x₂ coordinates, fixed class-1 color scale 0,.25,.5,.75,1 and 72 held-out marks. Hollow marks identify class 0, filled marks class 1, and the query cross marks the selected grid coordinate. Choose a model and an x/y index; the displayed number is the saved probability at that observed cell. The 25-by-25 grid has 625 probabilities per model,3125 total. It is not a continuously callable saved estimator: that historical asset contains grid observations and test marks, not complete fitted base state. A between-grid slider or retraining control would fabricate a capability the evidence does not support."}</Prose>
+
+<Prose>{"The map can reveal disagreements and extreme regions, but a view of the selected grid cell does not become an out-of-sample performance estimate. Read the retained validation/test results beside it. The common magnitude scale permits comparison between models; independently normalizing each panel's colors would hide that probability meaning. The new WDBC bundle in §11 supplies the distinct complete state needed for genuine arbitrary query computation."}</Prose>
+
+<H3>{"Fit a calibration function to the whole frozen rule"}</H3>
+
+<Prose>{"New "}<code>{"ensemble-blend-calibrate.py"}</code>{" takes the actual binary blend's saved score s on its twelve separate calibration rows. The scratch calibrator forms D=[1,s], score z=Dθ, probability σ(z), and minimizes mean hard-label log loss plus .01||θ||²/2. Here both the intercept and slope are penalized, unlike the meta learner's free intercept. The gradient is Dᵀ(p−y)/n+.01θ; the Hessian is Dᵀdiag(p(1−p))D/n+.01I. Its written Newton and damping operations return coefficients, objective, derivatives and stopping residual. A separate SciPy optimizer checks that same objective."}</Prose>
+
+<Prose>{"The ordinary public route is "}<code>{"CalibratedClassifierCV(FrozenEstimator(rule), method='sigmoid')"}</code>{" fitted on the calibration block. In inspected 1.9.1 it prefers the whole rule's "}<code>{"decision_function"}</code>{" when available, uses smoothed targets n₊+1 over n₊+2 for positives and 1/(n₋+2) for negatives, and fits its own unpenalized sigmoid convention σ(−(a s+b)). It is therefore not solving our hard-label ridge objective. The program prints both conventions and both actual coefficient sets rather than treating their expected difference as a hidden parity failure."}</Prose>
+
+<Prose>{"On the untouched 24-row constructed evaluation block, uncalibrated blend Brier/log loss are approximately .126188/.430598; scratch calibration gives .069600/.218131; the ordinary smoothed-target sigmoid gives .071600/.263518. Four fixed probability bins retain counts, mean forecast and observed event fraction; empty bins remain empty. These are outcomes of this fixed construction, not a guarantee that either calibration will improve a future distribution. Complete forecasts are visible in the saved program output."}</Prose>
+
+<ThresholdCostFigure />
+
+<Prose>{"A decision threshold is another operation. In the small score list p=[.1,.3,.3,.9], y=[0,1,0,1], act positive when p≥t. At t=.3 both equal .3 forecasts are positive: one is a true positive and the other a false positive. At t just above .3, both become negative, introducing a false negative instead. With false-positive cost 1 and chosen false-negative cost c_FN, compute FP+c_FN×FN. The two controls change threshold and the illustrative cost while the confusion counts and total follow the actual decisions. They do not refit or calibrate a probability function."}</Prose>
+
+<Prose>{""}<a href={"/learn/topic/linear-logistic-regression#7-choose-a-decision-without-refitting-the-score"}>{"Linear & Logistic Regression §7"}</a>{" develops the distinction between a score and an action. Choose thresholds on choice data and assess the frozen choice later. A calibrator has fitted parameters and its own fit rows; a threshold has a selection criterion and choice rows. Neither can borrow final test labels merely because the base model is already fixed."}</Prose>
+
+<EnsembleCompleteProgram id="calibrated-average" />
+
+<H2>{"11. Run a complete comparison"}</H2>
+
+<Prose>{"The retained complete circles comparison has 360 observations split 216/72/72 into training, validation and test. It declares line, tree and neighbor bases, equal soft voting, a stack and a prior baseline. Validation selects neighbor by log loss .133590, ahead of stack .143809. On test, neighbor log loss is .181329 versus stack .198805, while stack's Brier .055232 is below neighbor's .056927. Different losses measure different aspects of the same forecasts. The tree's .875 test accuracy coexists with log loss 2.227753; confident errors can matter strongly to probability loss."}</Prose>
+
+<Prose>{"Its cost-selected threshold is .555556, test confusion [[31,5],[0,36]] and cost 5. The complete retained "}<code>{"held-out-comparison"}</code>{" program and all candidate output lines stay accessible. The independently declared changed "}<code>{"changed-protocol"}</code>{" program uses seed 83, noise .20 and omits the tree. It still selects neighbor by validation (.271679 versus stack .301336), but test log loss reverses sharply: neighbor 1.243178, stack .329349, soft .462221. Neighbor and stack test accuracy are both .888889. Its selected threshold .333333 gives confusion [[21,15],[1,35]], cost 19. The changed test ranking is not permission to replace the already selected winner and call that same test untouched."}</Prose>
+
+<H3>{"Count the fitting and serving dependencies"}</H3>
+
+<FittingWorkFigure />
+
+<Prose>{"For B bases and K ordinary OOF folds, constructing the meta matrix needs B×K base fits, followed by B full-data refits and a final-estimator fit. With unequal folds, a row-work total counts the actual rows each fit receives: each training row appears in K−1 base folds, yielding B n(K−1) fold-training row uses plus Bn full-refit uses. Nested searches add their own fits. The count view changes B,K,n within its declared K≤n domain and distinguishes fit count from row work. It does not convert either count into elapsed seconds."}</Prose>
+
+<ServingDependencyFigure />
+
+<Prose>{"Serving one stack requires every required base output before its meta operation. Under hypothetical member latencies 1,8,15 and meta latency 1, sequential execution is 1+8+15+1=25 units; ideal parallel bases give max(1,8,15)+1=16. The budget comparison uses these declared numbers, not benchmark measurements. Real scheduling, transfer overhead and contention can change the total. A coefficient near zero does not automatically remove a base from the served rule; removal requires an explicitly changed model and evaluation boundary."}</Prose>
+
+<H3>{"One fixed real-data experiment"}</H3>
+
+<Prose>{"The new complete "}<code>{"ensemble-real-comparison.py"}</code>{" uses UCI's 569-row, 30-feature Breast Cancer Wisconsin Diagnostic data. Features describe nuclei in digitized fine-needle-aspirate images; the identifier is not a predictor. Its offline scikit-learn 1.9.1 CSV and attribution/license accompany the program. UCI reports no missing values and "}<a href={"https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic"}>{"CC BY 4.0"}</a>{". Original labels 0 malignant/1 benign are explicitly inverted so this study's positive class 1 is malignant. Those class meanings are different from the earlier late-delivery and signed fixtures."}</Prose>
+
+<Prose>{"Before fitting, the program checks CSV, matrix, transformed-label and exact split identities. Stratified seeds 83/89 give 341 training, 114 validation and 114 test rows. Training has 214 benign/127 malignant; validation 72/42 and test 71/43. These metadata checks establish row/schema roles. They do not fit or select using test outcomes. No known entity/time groups are supplied, so the declared assessment is a fixed random-row split."}</Prose>
+
+<Prose>{"Three bases have fixed settings: StandardScaler plus logistic regression C=1; raw GaussianNB with variance smoothing 1e−9; StandardScaler plus uniform 9-neighbor classification using brute search. Scalers learn inside each fit. Three training OOF folds shuffled with seed 97 feed a simplex probability blend minimizing half mean binary Brier plus ridge .01, and a binary logistic meta learner with slope penalty .1. Full-data base refits stay on 341 rows. The holdout blend uses a separate seed 101 base/meta split of those training rows: 204 fit its bases and 137 fit its logistic combiner. It keeps those 204-row bases afterward."}</Prose>
+
+<Prose>{"Eight candidates are retained: prior, line, bayes, neighbor, equal soft mean, simplex blend, OOF logistic stack and disjoint logistic blend. There is no real-data hyperparameter search or repeated-seed campaign. Validation selects minimum log loss with a candidate-ID tie rule. Then unique thresholds from {0,validation probabilities,1} minimize FP+4FN, with a tie selecting the smaller threshold and p≥t positive. The rule and threshold are serialized before test predictions and metrics are calculated."}</Prose>
+
+<NeuralTable caption={"One fixed real-data experiment"} headers={[<>{"Candidate"}</>,<>{"Validation log loss"}</>,<>{"Test log loss"}</>,<>{"Test Brier"}</>,<>{"Test accuracy at .5"}</>]} rows={[[<>{"Prior"}</>,<>{".658144"}</>,<>{".662722"}</>,<>{".234941"}</>,<>{".622807"}</>],[<>{"Line"}</>,<>{".116468"}</>,<>{".087961"}</>,<>{".024358"}</>,<>{".982456"}</>],[<>{"Bayes"}</>,<>{".657426"}</>,<>{".745263"}</>,<>{".070430"}</>,<>{".921053"}</>],[<>{"Neighbor"}</>,<>{".417226"}</>,<>{".723609"}</>,<>{".046134"}</>,<>{".938596"}</>],[<>{"Equal soft"}</>,<>{".148025"}</>,<>{".128852"}</>,<>{".037270"}</>,<>{".956140"}</>],[<>{"Simplex"}</>,<>{".127435"}</>,<>{".103117"}</>,<>{".028189"}</>,<>{".973684"}</>],[<>{"OOF stack"}</>,<>{".288538"}</>,<>{".293699"}</>,<>{".071524"}</>,<>{".947368"}</>],[<>{"Holdout blend"}</>,<>{".293417"}</>,<>{".300034"}</>,<>{".074037"}</>,<>{".929825"}</>]]} />
+
+<Prose>{"The single line is both strongest member and validation winner. The fitted simplex weights are approximately [.67801544,.11977750,.20220705] for line,bayes,neighbor. OOF logistic parameters are approximately [−1.59510685,.97390151,.85589630,.85293098], and the holdout blend parameters [−1.55497145,.98301349,.82034733,.87598533]. Their intercept/coefficients are scores, not normalized member shares. A slope penalty .1 and the actual fitted input geometry give these relatively restrained probability outputs; the complete Hessians, derivative residuals and all validation/test forecasts are retained for inspecting that fitted behavior. No outcome is hidden to make an ensemble win."}</Prose>
+
+<Prose>{"Validation chooses line threshold .29624271447535583 with cost 8. On test it gives confusion [[68,3],[2,41]] and cost 3+4×2=11. The .5 decision has confusion [[71,0],[2,41]]; the threshold's different test cost does not authorize retrospective threshold selection. These are illustrative costs and finite model-comparison outcomes, not an established decision policy for new hospitals or populations."}</Prose>
+
+<Prose>{"The test arrays preserve 26 exact-one Gaussian forecasts and 63 exact-zero/28 exact-one neighbor forecasts. For finite log loss, inspected sklearn uses float64 epsilon≈2.22e−16 when clipping probabilities. The saved forecasts themselves remain 0 or 1; clipping identifies how the loss is computed rather than quietly changing the served probability. Actual solver residuals meet their declared tolerances and the execution captured no warnings. The once-run receipt contains all fit IDs, OOF cells/coverage, dependencies, prediction arrays, all 8 confusion matrices and actual changed-query checks. There are no uncertainty intervals or repeated-seed claims from this single split."}</Prose>
+
+<SavedWDBCForwardFigure /><FocusedWDBCFeatureFigure />
+
+<Prose>{"The saved WDBC query view supports a complete edited 30-feature vector, with a focused feature control below the actual forward picture. A feature name follows its position through the saved scaler and base arrays. Logistic inference subtracts means, divides by scales, forms a weighted score and applies the sigmoid. Gaussian inference forms both class joint log scores with fitted smoothed variances, then normalizes by log-sum-exp. Neighbor inference uses the saved standardized training rows, distance ordering and nine selected original row identities. Their aligned class-1 probabilities enter the selected mean/weight/score-link operation. The selected candidate is visible alongside all eight available saved forwards."}</Prose>
+
+<Prose>{"JSON stores the needed arrays and identities; NPZ stores the full prediction evidence. Reload and five queries—including a changed feature, zero vector and ±1e6 vectors—were checked against the actual ordinary saved bases. All three portable base probability differences were zero on those checked queries. The portable neighbor convention sorts squared distance then original row ID; an arbitrary exact distance tie can differ from the library backend, and any such portable forecast is a computed query output rather than a replacement for the original measured library arrays. Restored ordinary Voting/Stacking prediction/transform methods also checked the stored combination contract without additional real-data refits. §7's constructed program separately demonstrates actual ordinary fitting."}</Prose>
+
+<Prose>{"Edited feature vectors are computations, not new measured or necessarily plausible specimens. Changing fitted parameters, a base family or preprocessing requires a new complete version and evaluation boundary. The final section examines what context-dependent weights change inside that state."}</Prose>
+
+<EnsembleCompleteProgram id="held-out-comparison" />
+<EnsembleCompleteProgram id="ensemble-real-comparison" />
+<EnsembleStudyFiles />
+
+<H2>{"12. Go beyond constant combination weights"}</H2>
+
+<H3>{"A context column does not automatically change a slope"}</H3>
+
+<ContextProductFigure />
+
+<Prose>{"Let p_A,p_B be two forecasts and z∈[0,1] a context value. A desired route is (1−z)p_A+z p_B: at z=0 use A, at z=1 use B. For p_A=.2,p_B=.8,z=.25, its products are .15 and .20 and the sum .35. The drawing exposes those products before the general formula. A linear combiner β₀+β_A p_A+β_B p_B+β_z z has constant slopes β_A and β_B. Adding z changes an additive offset; it does not let those slopes switch with z."}</Prose>
+
+<Prose>{"The retained eight-row "}<code>{"context-interactions"}</code>{" example fits plain additive columns and obtains coefficients [0,.5,.5,−0] with MSE .125. Adding the explicitly intended product columns [(1−z)p_A,z p_B] gives coefficients [1,1] and zero fitted residual for that constructed target. At the same [.2,.8] query it produces .2,.8,.35 for z=0,1,.25. This demonstrates representation, not a collected recommendation gain or future guarantee."}</Prose>
+
+<Prose>{"New "}<code>{"ensemble-context-gradients.py"}</code>{" supplies a different 12-row construction and a penalized fit. Its design is [1,(1−z)a,z b], with a=(i mod4)/3, b=((2i+1)mod5)/4, z=floor(i/4)/2 and y=.1+.7(1−z)a+1.3z b. Nine named rows fit the rule; three are held for a changed-case check. The objective is half mean squared residual plus .1 times half squared slope norm, with free intercept. Its gradient and Hessian use the design exactly as in §3, with penalty diagonal [0,.1,.1]. Rank-aware least squares makes an unregularized singular system's minimum-norm convention explicit."}</Prose>
+
+<Prose>{"The fitted coefficients are approximately [.443800441,.052026707,.528274900], design rank 3, objective .036158803. Analytic gradients and finite-difference checks are printed. Ordinary "}<code>{"PolynomialFeatures"}</code>{" constructs the candidate columns, but we select exactly a−a z and b z rather than silently adding all quadratic terms. "}<code>{"Ridge(alpha=n×.1)"}</code>{" uses the same penalty convention and matches coefficients and query forecasts. The new changed queries produce about .454206,.866420,.557259; they differ from the old exact [1,1] rule because the data and penalized fitting problem differ. They do not overwrite the original eight-row evidence."}</Prose>
+
+<Prose>{"More generally, "}<strong>{"feature-weighted linear stacking"}</strong>{" writes effective member coefficient w_b(x)=Σ_j v_bj c_j(x) for context features c_j. Then the prediction is Σ_bj v_bj c_j(x)f_b(x), linear in fitted parameters v despite products in its inputs. "}<a href={"https://arxiv.org/pdf/0911.0460"}>{"Sill et al., §2.1"}</a>{" develops that operation. Its coefficient functions need not be nonnegative or sum to one, so FWLS is not automatically a convex gate or a Bayesian posterior weighting rule. Product columns can become correlated or rank-deficient; ridge stabilizes that fitting problem but does not guarantee extrapolation or honesty. Learned context features must follow the same fold and time permissions as base predictions."}</Prose>
+
+<TypedScoreLinkFigure />
+
+<Prose>{"A binary score combiner can mix typed inputs too. With probability .8, margin 2 and coefficients [−1,2,.5], its score is −1+2×.8+.5×2=1.6 and sigmoid probability≈.832018. The input margin 2 remains a margin through its multiply, even though the final output is a probability. This is a fixed forward calculation, not a fitted performance result. Learned parameters must correspond to the same ordered columns used during training."}</Prose>
+
+<H3>{"Keep the entire serving rule together"}</H3>
+
+<WholeSavedBundleFigure />
+
+<Prose>{"A complete saved bundle includes feature names/order, class names/order, every learned scaler, base coefficients or Gaussian variances or neighbor training rows, typed meta-column order, combiner parameters, output link, chosen threshold and version/source/data identities. The diagram follows those arrays through the actual input ports. A whole-state checksum binds them together. Swapping two feature names while retaining old parameters is a stale schema, even if dimensions still match. The invalid-bundle control fails closed and explains which boundary failed; it does not keep presenting an old measured forecast as if the new schema were valid."}</Prose>
+
+<Prose>{"The native loader checks shapes, finite values, positive scales/variances, class/member/meta order and a separately bound feature-schema identity. Reloading correct state restores the same computation. Correcting a stale bundle requires restoring or recomputing the matching full state. Merely refreshing a checksum cannot establish that old arrays fit new feature meanings or inherit old evaluation results. No unsafe pickle is needed for the portable reader."}</Prose>
+
+<Prose>{"Context can be useful when recommendation reliability changes with available user/item history, but the context must exist at prediction time. A cold user with no history is different from a warm user; a product feature's explanatory label should state which available quantity it uses. Choosing suitable recommenders and evaluation units belongs to the next topic, Recommender Systems. Similarly, unanimous models can share a wrong assumption; disagreement can flag review candidates without serving as a calibrated uncertainty certificate or a complete active-learning policy."}</Prose>
+
+<Prose>{"Sparse ensembles learn a dictionary of functions or rules and penalize combination coefficients, possibly removing unused members from serving. That differs from simply averaging independent pretrained models. "}<a href={"https://hastie.su.domains/ElemStatLearn/"}>{"ESL §16.3.1"}</a>{" separates dictionary generation and post-processing; its illustrated test paths are not our selection protocol. Full rule extraction and lasso engines remain with their own model owners. "}<strong>{"Bumping"}</strong>{" uses resampled fits to search for one model instead of serving a mean, another useful mechanism contrast. "}<strong>{"Distillation"}</strong>{" fits a student to imitate an ensemble's outputs; limited student features/capacity can prevent replication. Assess a changed sparse or distilled rule against teacher and baseline on an honest new boundary, including probability quality and actual serving work. None promises a fixed accuracy loss or automatic latency win."}</Prose>
+
+<EnsembleCompleteProgram id="context-interactions" />
+<EnsembleCompleteProgram id="ensemble-context-gradients" />
+
+<section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>{"13. Practise with changed data"}</H2>
+
+<Prose>{"Work from each changed input before opening its hint or explained solution. These sixteen tasks preserve the original A–L routes and add four transfers. The full program index supplies complete code and saved stdout beside the relevant explanation; the last reporting task uses its retained independently declared reference run."}</Prose>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"A. A weighted vote and its tie"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" Three aligned class-1 probabilities are .8,.4,.3 with relative member weights 1,1,2. Calculate hard-vote share, mean probability and decisions. Then change A to .9."}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Normalize by total 4. An exact final tie chooses class 0."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"Only A votes 1, so the weighted hard share is 1/4 and the hard decision 0. The soft mean is (.8+.4+2×.3)/4=.45, also class 0. Changing A to .9 gives .475 without changing the hard ballot. A soft tie would require A=1: (1+.4+.6)/4=.5, still class 0 under the declared tie. The observed target has not been supplied, so none of these decisions establishes correctness."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"B. Fit a changed cancellation weight"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" A has residuals [−2,2] hours and B[1,1] on two permitted combination rows. Find the best convex A weight and combined MSE. Would adding B help an A with residuals [0,0]?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"The combined residuals are 1−3w and 1+w."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"Their mean square is [(1−3w)²+(1+w)²]/2=1−2w+5w². Derivative−2+10w vanishes at w=.2, inside [0,1]. Residuals are [.4,1.2], MSE .8 hours²; member MSEs are 4 and 1. If A is exact, w=1 gives zero. Forcing an equal mean with B creates .25 hours² loss. The identity bounds the weighted member average, not the best member; fitted weights still need untouched assessment."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"C. Separate correlation and copying"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" At a fixed query, four random fitted forecasts each have variance 9 and every pair correlation 1/3. Find average variance. Could their common correlation instead be−.5?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Count 4 variance terms and 12 ordered covariance terms."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"Average variance is 9[1/3+(2/3)/4]=4.5. Correlation−.5 would give 9[−.5+1.5/4]=−1.125, impossible. For B=4 the lower common-correlation bound is−1/3. This concerns a joint law over repeated fitting experiments, not a prediction correlation measured across unrelated test inputs."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"D. A smaller bag and missing votes"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" Five original rows are sampled with replacement using three draws per bag. Find one named row's absence probability, expected distinct count and probability neither of two independent bags can supply its OOB forecast."}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"First compute q=(4/5)³; a bag is ineligible when it contains the row."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"q=64/125=.512. Expected distinct count is 5(1−q)=61/25=2.44. No eligible bag has probability(1−q)²=(61/125)²=3721/15625=.238144. In that state OOB prediction is unavailable. Replacing it with the all-model fitted prediction changes the evaluated quantity and permissions."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"E. Update different weak errors"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" Compute signed AdaBoost α for ε=.3 and .45. After each optimal normalized update, what mass lies on this stump's wrong rows? What happens at .5 and 0?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Wrong mass is εeᵅ/Z, with Z=2√(ε(1−ε))."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"Coefficients are ½log(7/3)≈.423649 and ½log(11/9)≈.100335. Substitution gives wrong mass .5 in either nondegenerate case. It is half the distribution's mass, not half the rows or the accumulated ensemble's error. At .5 the coefficient is zero, with no positive edge. At zero no finite minimizing α exists; use the declared perfect-member stopping policy instead of disguising clipping as an exact optimum."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"F. A bound with shrinking edges"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" Accepted rounds have γ_t=1/[4(t+1)] for t≥1. Does the derived bound guarantee uniform exponential decrease to zero?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"The exponent is−2Σγ_t²."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"Every edge is positive but no positive constant lower-bounds them all. Σγ_t²=(1/16)Σ_{t≥1}1/(t+1)² is finite, so exp(−2Σγ_t²) tends to a positive value. This upper bound therefore does not establish convergence to zero. That absence of a guarantee is not proof that actual training error fails to improve."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"G. Repair an OOF row"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" Eight rows have held folds{A,C},{B,D},{E,G},{F,H}. A base predicts A after fitting A,B,D,E,F,G,H. What is wrong, which rows are legal, and what is the completed matrix shape for three scalar-output bases?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Exclude every destination of the held fold."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"A's target entered its own prediction. The fold's legal fit rows are B,D,E,F,G,H, excluding both A and C. Predict both held rows with those freshly fitted bases. The completed matrix is 8×3, not 6×3. Fit the combiner on all completed rows and corresponding targets, then refit bases on all 8 training rows for serving. Subsequent full-refit "}<code>{"transform"}</code>{" values are not the saved OOF matrix."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"H. Time and entity ownership"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" A machine contributes hourly rows; the task is a previously unseen machine next month. A shuffled row split holds some hours from every machine, and a globally fitted scaler precedes stacking. Identify the problems and propose an assessment boundary."}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Separate entity, time and preprocessing permissions."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"Sibling machine information crosses fit/test, later times can influence earlier fits, and the scaler learns from evaluation features. Reserve later observations from machines absent from training as the outer test. Inside outer training, generate meta predictions respecting the corresponding entity/time/label-availability restrictions and fit preprocessing only within each permitted fit. Early rows without legal predictions remain masked out of meta fitting. The exact policy must match how new machines arrive; GroupKFold alone does not enforce chronology."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"I. Calibration is not preserved by an average"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" In the fair-signal law, condition on mean forecast .75 and .5. What are the event rates? Why can the mean nevertheless have lower Brier risk?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"List signal pairs producing the same forecast."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"Mean .75 occurs only when both high signals occur, with true rate 1. Mean .5 occurs in the two cross-signal states, each with true rate .5. The .75 group is uncalibrated. The pointwise squared-loss identity still reduces loss relative to average member loss, and averaging over the exact law gives mean risk 5/32 versus member 3/16. Calibration and this proper-risk comparison answer different questions."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"J. Make context affect a slope"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" For A=4,B=10,z=.3, calculate(1−z)A+zB. Can β₀+β_A A+β_B B+γz express that target for every A,B,z?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Compare A's required coefficient at z=0 and 1."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{".7×4+.3×10=5.8. No fixed β_A can equal 1 at z=0 and 0 at z=1 for every A. Product features or suitable nonlinear structure are needed. Approximate fit on a correlated sample does not establish the all-input relation; changed rows expose the difference."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"K. Account for training and serving"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" Four bases, five folds and 1000 rows: count base fits, rows per fold fit and row processing under linear fit cost. Member serving times are 3,8,2,5 ms, meta 1 ms. Give ideal sequential and parallel totals."}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Include fold fits and final full-data refits."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"20 fold fits plus 4 full-data fits; each fold fit receives 800 rows. Row work is 20×800+4×1000=20000, plus meta fitting. Sequential serving totals 3+8+2+5+1=19 ms; ideal parallel branches plus meta max(3,8,2,5)+1=9 ms. The served collection has 4 bases and 1 meta learner, not 20 fold models. Actual overhead, batching, contention and tail latency require separate measurement."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"L. Complete a changed experimental report"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" Run the complete comparison with seed 83, noise .20 and tree omitted from both ensemble candidates. Keep declared split, validation selection and cost rules. Report baselines, selected rule, test losses and action cost; explain the limits."}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Validation chooses first. A surprising test ranking does not create permission to choose another winner."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"The complete "}<code>{"changed-protocol"}</code>{" source and its retained output are supplied. It selects neighbor by validation log loss .271679 versus stack .301336. Test losses are neighbor 1.243178, stack .329349, equal soft .462221 and prior .693147. Neighbor and stack both have test accuracy .888889, so different confidence errors explain why hard accuracy alone misses this reversal. Threshold .333333 gives confusion [[21,15],[1,35]], cost 15+4×1=19. All line and ensemble candidate outputs remain in the complete reference run rather than only the highlighted comparison."}</Prose>
+
+<Prose>{"A finite validation winner can lose on a finite test. That does not establish universal stack superiority, invalidate the test or prove calibration. Retain the result, inspect the confidently wrong cases and declare a new valid boundary for additional model choices. State changed costs or split policy before observing the new test outcomes."}</Prose>
+
+<EnsembleCompleteProgram id="changed-protocol" />
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"M. Align named classes"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" A member returns class order [silver,amber,blue] and probabilities [.1,.6,.3]. The combiner expects [amber,blue,silver]. What vector should enter it, and what goes wrong if positions are simply added?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Follow each event's name through the permutation."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"The aligned vector is [.6,.3,.1]. Amber receives its .6 even though its new column is first. Adding [.1,.6,.3] by position would call silver mass amber, amber mass blue and blue mass silver. A valid row sum cannot detect that semantic error; named schema alignment is required before combining."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"N. Project a changed coefficient vector"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" Project [.8,.3,−.1] onto the simplex. Compare with clip-and-normalize and explain why they differ."}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Test the active first two sorted coordinates and their common threshold."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"Their threshold is (.8+.3−1)/2=.05. Subtract it from the two active values and floor the third at zero, giving [.75,.25,0]. Clipping first gives [.8,.3,0], then dividing by 1.1 gives [8/11,3/11,0]. Both are permitted simplex points, but only the common-threshold point is the Euclidean closest vector. The distinct distances and derivative/KKT conditions identify the actual projection, not mere feasibility."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"O. Find indirect selection leakage"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" A base predicts held rows A/D after fitting its coefficients only on B,C,E,F. Its regularization setting was chosen using targets from all A–F. Is its OOF cell honest? Repair the procedure."}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"Trace selection-label access as well as coefficient-fit access."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"It is not honest: A and D influenced the selected setting used by their supposed held prediction. Perform setting selection within the permitted B,C,E,F subset, fit the selected rule there, then predict A/D. Repeat that complete choice-and-fit workflow for every OOF fold. If assessing the whole stack, surround all of it with an outer boundary whose labels teach none of those decisions. The nested program logs both kinds of access; a clean coefficient-fit list alone misses this fault."}</Prose>
+
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"P. Repair stale serving state"}</H3>
+
+<Prose>{""}<strong>{"Question."}</strong>{" A saved bundle's first two feature names are swapped, but scaler arrays, base parameters, meta weights and old metrics are retained. Can updating only its checksum make it a valid new measured rule?"}</Prose>
+
+<details>
+
+<summary>Hint</summary>
+
+<Prose>{"A checksum binds bytes; ask whether those bytes still mean the fitted columns."}</Prose>
+
+</details>
+
+<details>
+
+<summary>Explained solution</summary>
+
+<Prose>{"No. The arrays now read different inputs than their fitted schema specifies. Restore the correct feature order or transform every affected parameter/preprocessing mapping consistently as a declared equivalent state, with a forward correspondence check. If the transformation changes the rule rather than preserving it, fit/version/evaluate that changed workflow under a new boundary. A recomputed checksum does not establish semantic correspondence or allow borrowing old test metrics. The live saved-state view rejects the stale feature mapping and preserves explicit invalid-state feedback."}</Prose>
+
+</details></div></section>
+
+<section className="lesson-ending lesson-ending--next" data-lesson-ending="next"><H2>{"Ready to continue"}</H2>
+
+<Prose>{" You can name each contributed quantity, trace the rows that produced a fitted prediction, derive one combination/update, apply the complete saved rule to changed inputs, and distinguish a finite result from a guarantee. Next, "}<strong>{"Recommender Systems"}</strong>{" develops collaborative and content-based scores. Their different available information makes combination useful to investigate, with cold-start, time and entity boundaries kept explicit."}</Prose></section>
+
+<section className="lesson-ending lesson-ending--further-learning" data-lesson-ending="further-learning" data-lesson-resource-list=""><H2>{"Further learning"}</H2>
+
+<Prose>{"Choose an alternate explanation that matches the point you want to revisit; these supplement the local complete derivations and programs."}</Prose>
+
+<ul><li>{""}<a href={"https://youtu.be/pvZ3ZhlmDCE"}>{"Herman Kamper: Bagging"}</a>{", "}<a href={"https://youtu.be/Vixw2DOUGec"}>{"AdaBoost step by step"}</a>{" and "}<a href={"https://youtu.be/wbmuqXbUFGM"}>{"update details"}</a>{", with the "}<a href={"https://www.kamperh.com/data414/notes/17_ensemble_methods_notes.pdf"}>{"written ensemble notes"}</a>{": instructor-led alternatives for resampling and signed updates. The relevant written formulas/algorithms were inspected; the recordings were not watched. Compare his signed coefficient with our derivation, then use the separate API section for SAMME conventions."}</li><li>{""}<a href={"https://cs229.stanford.edu/extra-notes/boosting.pdf"}>{"John Duchi's CS229 boosting notes"}</a>{", §§1–3.1: a mathematical second route through exponential loss, a uniform weak edge and sorted stump fitting. Use after §§5–6; the operand trace here supplies a concrete starting point."}</li><li>{""}<a href={"https://www.stat.cmu.edu/~cshalizi/sml/21/lectures/17/lecture-17.html"}>{"Cosma Shalizi's Model Averaging lecture"}</a>{": a written alternative for output combination, disagreement and uncertainty in selecting one best-looking fit. Use after §3; its applications are distinct from this lesson's constructed shipment and measured WDBC examples."}</li></ul></section>
+
+<section className="lesson-ending lesson-ending--references" data-lesson-ending="references" data-lesson-resource-list=""><H2>{"Technical references"}</H2>
+
+<ul><li>{""}<a href={"https://hastie.su.domains/ElemStatLearn/"}>{"Hastie, Tibshirani & Friedman, The Elements of Statistical Learning"}</a>{", §8.8 and selected §§16.1/16.3.1: canonical stacking, population versus estimated weight roles, ensemble generation and post-processing. The selected pages inform our distinctions; the entire book is not a required prerequisite."}</li><li>{""}<a href={"https://www.stat.berkeley.edu/~breiman/bagging.pdf"}>{"Breiman, Bagging Predictors"}</a>{", introduction: original bootstrap aggregation and stability motivation. Its historical results are not measurements on our later examples."}</li><li>{""}<a href={"https://proceedings.neurips.cc/paper_files/paper/1994/file/b8c37e33defde51cf91e1e03e51657da-Paper.pdf"}>{"Krogh & Vedelsby, Neural Network Ensembles, Cross Validation, and Active Learning"}</a>{", §2 and Figure 1: normalized squared-error/disagreement decomposition. Our finite derivation retains its weight assumptions and separates the target from member disagreement."}</li><li>{""}<a href={"https://www.schapire.net/papers/FreundSc99.pdf"}>{"Freund & Schapire, A Short Introduction to Boosting"}</a>{", algorithm and training-error discussion; "}<a href={"https://www.schapire.net/papers/explaining-adaboost.pdf"}>{"Schapire, Explaining AdaBoost"}</a>{", algorithm and margin discussion: signed updates, weak-edge conditions and generalization qualifications. Paper experiment curves remain those papers' evidence."}</li><li>{""}<a href={"https://statistics.berkeley.edu/sites/default/files/tech-reports/367.pdf"}>{"Breiman, Stacked Regressions"}</a>{", §§1–2: honest level-one predictions and NNLS. Its main nonnegative route differs from its later sum-one analysis and our explicit penalized simplex fit."}</li><li>{""}<a href={"https://doi.org/10.1016/S0893-6080(05)80023-1"}>{"Wolpert, Stacked Generalization"}</a>{": original attribution. A complete accessible primary copy was not obtained; the local algorithm is supported by inspected Breiman/ESL/API material rather than an unseen theorem."}</li><li>{""}<a href={"https://arxiv.org/pdf/0911.0460"}>{"Sill et al., Feature-Weighted Linear Stacking"}</a>{", §§2.1–2.2 and Figure 1: context-prediction products and coefficient fitting. The local eight- and twelve-row constructions isolate representation/derivatives rather than adopting competition results."}</li><li>{""}<a href={"https://jmlr.org/papers/v11/cawley10a.html"}>{"Cawley & Talbot, On Over-fitting in Model Selection"}</a>{", abstract, and the "}<a href={"https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html"}>{"official nested-CV example"}</a>{": selection and assessment need separate boundaries. We use a declared twelve-row ownership construction, not a replay of the official Iris example."}</li><li>{"Current "}<a href={"https://scikit-learn.org/stable/modules/ensemble.html"}>{"ensemble guide"}</a>{", "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html"}>{"StackingClassifier"}</a>{", "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html"}>{"VotingClassifier"}</a>{", "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_predict.html"}>{"cross_val_predict"}</a>{" and "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html"}>{"AdaBoostClassifier"}</a>{": output methods, column handling, cloning, partition coverage and discrete SAMME. Inspected installed 1.9.1 source and the declared programs bind this lesson's conventions; future versions can change defaults."}</li><li>{""}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html"}>{"CalibratedClassifierCV"}</a>{" and "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.frozen.FrozenEstimator.html"}>{"FrozenEstimator"}</a>{": calibration of an already fitted whole rule on separate data, with the distinct sigmoid target/score convention explained in §10."}</li><li>{""}<a href={"https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic"}>{"UCI WDBC"}</a>{", "}<a href={"https://doi.org/10.24432/C5DW2B"}>{"DOI"}</a>{" and the supplied "}<code>{"DATA.md"}</code>{": dataset meaning, provenance and attribution for the once-executed study. Its label conversion and offline bytes are explicit."}</li></ul>
+
+<Prose>The complete programs and supporting downloads are collected below. Keep imported Python files in the same local directory. The real-data comparison also needs its offline CSV, declared protocol and data attribution.</Prose></section>
+  </div></EnsembleServingProvider></EnsembleStackingProvider></EnsembleBoostingProvider></EnsembleBootstrapProvider></EnsembleCombinationProvider>;
 }
 
 export default {
   title: 'Ensemble Methods & Stacking',
   readTime: '~100 min read + 2–3 hours practice',
   hasIntegratedGuide: true,
-  content: () => <div className="lesson-pilot ensemble-lesson">
-    <LessonIntro prerequisites="Review how a linear/logistic model makes predictions and how a decision tree fits a split. We explain the required error, probability, covariance and held-out-fold reasoning here. Python is optional for the visual investigations; the complete programs use NumPy and scikit-learn." sections={[
-      ['1-several-forecasts-one-outcome', 'Data, predictions and decisions'], ['2-decide-what-to-combine', 'Averages, probabilities and votes'], ['3-find-errors-that-can-cancel', 'What averaging can guarantee'], ['4-follow-the-bootstrap-rows', 'Bagging and OOB eligibility'], ['5-make-the-next-fit-listen-to-different-rows', 'A worked AdaBoost update'], ['6-derive-the-vote-and-its-limits', 'Loss, training bounds and boundaries'], ['7-teach-a-combiner-with-unseen-row-predictions', 'Stacking and OOF ownership'], ['8-use-the-actual-library-contract', 'Shapes, refits and preprocessing'], ['9-preserve-groups-and-time', 'Blending and legal evaluation'], ['10-inspect-probabilities-and-real-fitted-rules', 'Calibration and prediction regions'], ['11-run-a-complete-comparison', 'A reproducible held-out report'], ['12-go-beyond-constant-combination-weights', 'Context, costs and applications'], ['13-practise-with-changed-data', 'Independent practice and next step']
-    ]}>Three forecasting rules disagree about when a shipment will arrive. One captures a broad trend, one remembers nearby cases, and one isolates unusual conditions. Should we average them, vote, or learn whom to trust? We will trace the numbers and the training data behind each choice, including cases where the combination loses.</LessonIntro>
-
-    <H2>1. Several forecasts, one outcome</H2>
-    <Prose>An <strong>ensemble</strong> is a prediction rule assembled from several fitted rules, called base models or members. It can combine different kinds of model or repeated fits of the same kind. The essential object is the final prediction function: give it a new observation, obtain its members' outputs, then combine those outputs using a specified rule.</Prose>
-    <PredictionCombinationFigure />
-    <Prose>For shipment forecasting, one row is one shipment. Its input features might include distance, departure time and conditions known at dispatch. A regression target is actual elapsed hours; a classification target could be whether arrival exceeded a promised deadline. The target becomes known later. Combining three predictions for that shipment does not turn it into three observations, and features recorded only after arrival are not legal dispatch-time inputs.</Prose>
-    <Prose><strong>Training</strong> estimates rules from labeled rows. <strong>Inference</strong> applies the saved rules to a new row without its target. Some ensembles also train a combination rule, so they need an additional data boundary inside training. We will make that boundary explicit. Keep a simple baseline throughout: the training mean for squared-error regression, or the training class frequency for probability forecasts. Also compare with the strongest individual candidate selected without using final test outcomes.</Prose>
-    <LessonTable caption="Three different ways to build the collection" headers={['Method', 'What changes between members?', 'How they combine']} rows={[
-      ['Bagging', 'Resample training rows, then fit members independently', 'Usually average numerical predictions or class probabilities'], ['Boosting', 'Fit the next member using the current ensemble’s loss information', 'Add weighted contributions sequentially'], ['Stacking', 'Fit different base rules and collect predictions on rows they did not train on', 'Train a second model on those predictions']
-    ]} />
-    <Prose>These are mechanisms, not a ranking. A stable, well-specified linear model may gain little from bagging. A weak or noisy base can harm a vote. A flexible stack can overfit its combination data. The practical question is whether a particular combination improves the chosen prediction task enough to justify its training, serving and maintenance costs.</Prose>
-    <LessonTable caption="Reserve each data role before comparing ensembles" headers={['Role', 'What it may teach', 'What it must not be used for']} rows={[
-      ['Training rows', 'Fit base models; create internal honest predictions for a combiner', 'Report their fitted loss as deployment performance'], ['Validation rows or outer folds', 'Choose members, weights, hyperparameters and action thresholds', 'Pretend repeated selection leaves the winning score untouched'], ['Final test rows', 'Evaluate the complete frozen choice once', 'Choose a better-looking combination afterward and reuse the same score as final']
-    ]} />
-
-    <H2>2. Decide what to combine</H2>
-    <Prose>For B numerical forecasts of the same outcome, a <strong>convex average</strong> uses nonnegative weights that sum to one. Each weight says how much of the output comes from that member. Equal weighting uses 1/B. All outputs must describe the same target in the same units.</Prose>
-    <MathBlock>{String.raw`\begin{gathered}\bar f(x)=\sum_{b=1}^{B}w_b f_b(x),\\w_b\geq0,\qquad\sum_b w_b=1.\end{gathered}`}</MathBlock>
-    <Prose>With predictions 6, 10 and 14 hours and weights ½, ¼ and ¼, the answer is 3+2.5+3.5=9 hours. It lies between the smallest and largest member predictions. A general linear combiner can have an intercept or negative coefficients and need not stay inside that interval. That extra freedom changes both its interpretation and its overfitting risk.</Prose>
-    <Prose>Classification offers two distinct choices. A <strong>hard vote</strong> combines class labels. A <strong>soft vote</strong> averages class probabilities and chooses the largest resulting probability. Probability columns must refer to the same labels in the same order. Adding one model's “spam” column to another's “ordinary mail” column is not a meaningful blend.</Prose>
-    <VotingComparisonLab />
-    <Prose>In the default example, hard voting yields two delay ballots out of three. Soft voting gives (0.51+0.51+0.01)/3≈0.3433, so the ordinary equal-cost decision is on time. Neither rule is automatically correct: no outcome has been supplied. The third model might carry strong evidence, or it might be confidently wrong. Validation must assess that distinction.</Prose>
-    <Prose>A <strong>margin</strong> is a signed score such as a linear classifier's distance-related decision value. It is not a probability just because a larger number favors class 1. A combiner can learn from margins, but their scales differ across models. Nor is a mean of arbitrary margins generally comparable to a probability mean. A probability forecast, a class label, a sample weight and a model coefficient are four different objects; keep their meanings separate.</Prose>
-    <Prose>A probability average mixes alternative forecasts of the same event. It is not the Naive Bayes operation of multiplying class-conditional likelihoods for measurements under a declared joint model. Several classifiers can reuse the same inputs and training data. Multiplying their posterior probabilities because they agree can count the same evidence or prior repeatedly; a principled probabilistic fusion needs its own joint assumptions and normalization.</Prose>
-    <Checkpoint prompt="Model A reports [on time=.8, delay=.2]. Model B reports [delay=.7, on time=.3]. What is the equal mean delay probability?">
-      <Prose>Align labels first: use A's .2 and B's .7, giving .45. Averaging the first entries gives .75, which mixes different events. With ordered classes [0,1] and an argmax tie convention, an exact .5 mean chooses class 0 in this lesson; cost-sensitive decisions can use a different rule.</Prose>
-    </Checkpoint>
-
-    <H2>3. Find errors that can cancel</H2>
-    <Prose>Suppose two models miss the same arrival by −2 and +2 hours. Their mean misses by zero. If both miss by +2, their mean still misses by +2. The useful diversity is therefore connected to <strong>errors on the target task</strong>, not merely different algorithm names or visibly different outputs.</Prose>
-    <ErrorCancellationLab />
-    <H3>A finite identity, before any probability assumptions</H3>
-    <Prose>Fix one row with observed target y. Write eᵦ=fᵦ−y and ē=Σwᵦeᵦ. Expand eᵦ=(eᵦ−ē)+ē, square it and average over members. The cross term vanishes because Σwᵦ(eᵦ−ē)=0. What remains is an exact accounting identity:</Prose>
-    <MathBlock>{String.raw`\begin{gathered}\sum_b w_b e_b^2\\
-=\bar e^2+\sum_b w_b(e_b-\bar e)^2,\\
-\bar e^2=\text{mean member loss}\\
--\text{weighted disagreement}.
-\end{gathered}`}</MathBlock>
-    <Prose>The disagreement term is nonnegative, so a convex mean's squared error is no larger than the weighted average of its members' squared errors. It need not beat the <em>best</em> member: if A is exact and B is wrong by 2 hours, their mean is wrong by 1 hour. The identity also holds after averaging over a fixed set of rows. It does not turn a weight chosen on those rows into an independently tested weight.</Prose>
-    <Prose>For two residual columns aᵢ and bᵢ, the mean residual is bᵢ+w(aᵢ−bᵢ). Minimizing its mean square is a one-variable quadratic. Its derivative is proportional to Σ[bᵢ+w(aᵢ−bᵢ)](aᵢ−bᵢ). Set that derivative to zero:</Prose>
-    <MathBlock>{String.raw`w_* = \frac{\sum_i b_i(b_i-a_i)}{\sum_i(a_i-b_i)^2}.`}</MathBlock>
-    <Prose>If the denominator is positive, clamp this answer to [0,1] when requiring a convex blend. A zero denominator means the two columns are identical on these rows and every weight gives the same fit. In the default four-row investigation, w*=4/9 and MSE=1/3 hours², compared with 4.5 and 3 for the members. These are fitted values for these rows, not a guarantee about future shipments.</Prose>
-    <Prose><strong>Optional Python setup.</strong> Save each complete program in its own file and run it with <Code>python filename.py</Code>. The later programs need <Code>python -m pip install numpy scikit-learn</Code> in your virtual environment. Outputs were executed with Python 3.12.14, NumPy 2.3.5 and scikit-learn 1.9.1. The standard-library Fraction example below keeps its rational arithmetic exact.</Prose>
-    <Example id="combination-arithmetic"><Prose>The identity separates cancellation from an improved member. The final two lines change the dependence assumption while holding each member's error probability fixed.</Prose></Example>
-    <H3>What the familiar correlation formula actually means</H3>
-    <Prose>Now hold an input x fixed and imagine repeating the training experiment. The fitted predictions become random variables. If every member has variance σ² and every distinct pair has covariance ρσ², expanding the variance of their average gives B variance terms and B(B−1) covariance terms:</Prose>
-    <MathBlock>{String.raw`\begin{aligned}\operatorname{Var}(\bar f)
-&=\frac{B\sigma^2+B(B-1)\rho\sigma^2}{B^2}\\
-&=\sigma^2\left[\rho+\frac{1-\rho}{B}\right].
-\end{aligned}`}</MathBlock>
-    <Prose>With independent members, ρ=0 and variance is σ²/B. With exact copies, ρ=1 and variance is unchanged. For σ²=4, ρ=.25 and B=4, it is 1.75; with B=20 it is 1.15. More members cannot remove the shared component in this equal-covariance model. For a finite B greater than one, a valid common correlation must satisfy ρ≥−1/(B−1); you cannot hold a fixed negative correlation while letting B grow without bound.</Prose>
-    <Prose>The formula's assumptions matter. Bootstrap learners share the observed dataset, so they are not independent unconditional training experiments. A correlation computed across different test rows is also not the same random object as covariance across repeated training sets at a fixed x. Error correlations on held-out rows are useful diagnostics, but an arbitrary threshold such as “drop every model above .85 correlation” has no universal justification.</Prose>
-    <Prose>If all members have the same expected prediction, averaging preserves that expectation and hence that particular bias. But a bagging procedure changes how training data are used; its bias need not equal the bias of fitting the original learner once. For squared loss, also distinguish reducible prediction variation from fresh outcome noise: if a new outcome is m(x)+noise independent of training, with conditional mean-zero noise, expected test squared error is squared bias plus prediction variance plus the noise variance.</Prose>
-    <Prose>For independent binary errors with probability p=.3, a three-member majority is wrong with probability 3p²(1−p)+p³=.216. Three copies of the same classifier are wrong with probability .3. This elementary calculation explains why the dependence assumption cannot be omitted from a “wisdom of crowds” claim. It is not a theorem that any collection of classifiers with accuracy above 50% will improve by voting.</Prose>
-
-    <H2>4. Follow the bootstrap rows</H2>
-    <Prose><strong>Bagging</strong>, short for bootstrap aggregating, fits a base learner repeatedly to samples drawn <em>with replacement</em> from the training rows. A draw can repeat one row and omit another. Repeats act like extra weight when the learner minimizes a sum of row losses. Once fitted, the members predict a new row independently and their outputs are combined.</Prose>
-    <Prose>With n training rows and m independent uniform draws, a designated row is missed on one draw with probability 1−1/n. It is absent from the whole bag with probability q=(1−1/n)ᵐ. Summing the inclusion indicators over all rows gives expected distinct count n(1−q). For m=n and large n, q approaches e⁻¹≈.368; “about 63.2% represented” is an expectation/limit, not an exact rule for each bag.</Prose>
-    <BootstrapOwnershipLab />
-    <Prose>In bag 1 the draws are A,A,C,D,D,F. The best displayed split is x≤2.5. Its left leaf predicts (1+1+2)/3=4/3 hours; its right predicts (6+6+8)/3=20/3. A appears twice in the fit. Bag 2 did not draw A, so that fitted model may give an <strong>out-of-bag</strong>, or OOB, prediction for A. Models that saw A may still predict a genuinely new shipment, but they cannot supply A's OOB prediction.</Prose>
-    <Prose>The split candidates are midpoints between adjacent distinct x values actually present in a bag. This detail affects predictions at omitted inputs. For bag 2, the gap is between represented x=2 and x=4, so its midpoint is 3. An arbitrary threshold elsewhere in that empty gap would fit the same training rows but need not predict an omitted x=3 the same way. The visual and complete native example use the stated midpoint convention.</Prose>
-    <Example id="bootstrap-oob"><Prose>The all-model prediction for A is about 1.6667 hours, while its OOB prediction is 2 hours from bag 2 alone. Neither number is a missing-value substitute for the other. With only a few random bags, a row may have no OOB vote at all; under independent random bags that probability is (1−q)ᴮ. Increasing B reduces that particular missing-vote risk, not every source of prediction error.</Prose></Example>
-    <H3>Why unstable trees are a natural fit</H3>
-    <Prose>A small change in training rows can change a tree's first split and therefore many later predictions. Averaging different fitted trees can reduce this sensitivity. A random forest also restricts candidate features at each split, which can reduce common behavior among trees while potentially weakening an individual tree. More independent behavior is useful only alongside useful individual predictions. The earlier Decision Trees lesson develops forest splits; here the resampling and combination contracts apply more broadly.</Prose>
-    <Prose>OOB estimates reuse the training dataset, with each row scored only by its eligible members. They can be economical, but model selection by repeatedly inspecting OOB results still spends evaluation information. Data preprocessing learned from all rows before bagging can also invalidate a claim that an OOB prediction excludes every influence of that row. Fit learned preprocessing inside the resampled estimator when the desired exclusion includes it. With repeated people or time dependence, a row bootstrap may target the wrong sampling unit altogether.</Prose>
-
-    <H2>5. Make the next fit listen to different rows</H2>
-    <Prose><strong>Boosting</strong> builds a sequence. Each round fits a simple rule using information about what the current collection gets wrong. AdaBoost supplies a particularly inspectable classification mechanism: it changes how much weight each training observation receives, then adds the new classifier with a vote strength determined by its weighted error.</Prose>
-    <Prose>Use labels yᵢ∈{'{−1,+1}'} and a weak classifier hₜ(x)∈{'{−1,+1}'}. A <strong>decision stump</strong> is a tree with one split. In one dimension it predicts one label to the left of a threshold and the other to the right. A learner with no useful edge on the current weighted task is not made useful merely by calling it “weak.”</Prose>
-    <Prose>Let Dₜ(i) be nonnegative row weights summing to one. Initially every row gets 1/n. Fit the stump to minimize the total weight of its mistakes. If it misses one row of weight .5 and correctly predicts five rows of weight .1 each, its error is .5, not 1/6. The probability-like weights describe an artificial distribution over these training rows, not the probability of their labels.</Prose>
-    <AdaBoostWeightsLab />
-    <H3>Work the first update by hand</H3>
-    <Prose>The six distinct cases have inputs 0,1,2,3,4,5 and labels −,−,+,+,−,+. The first selected stump predicts −1 through x=1.5 and +1 after it. Only E is wrong, so ε=1/6. Give the stump signed vote weight α=½ log[(1−ε)/ε]=½ log 5≈.804719. Multiply a correct row's weight by e⁻ᵅ=1/√5; multiply E's by eᵅ=√5.</Prose>
-    <Prose>Call each multiplied but not yet normalized weight uᵢ. Add them to get Zₜ, then divide each by that same total. This restores weights that sum to one:</Prose>
-    <MathBlock>{String.raw`\begin{gathered}u_i=D_t(i)e^{-\alpha_t y_i h_t(x_i)},\\
-Z_t=\sum_i u_i,\\
-D_{t+1}(i)=\frac{u_i}{Z_t}.
-\end{gathered}`}</MathBlock>
-    <Prose>Here Z=(5/6)/√5+(1/6)√5=√5/3. Each correct row becomes [(1/6)/√5]/(√5/3)=1/10. E becomes [(1/6)√5]/(√5/3)=1/2. The next stump therefore has a strong incentive to fix E, even if doing so sacrifices some now-smaller rows. The targets and feature values did not change; the fitting objective did.</Prose>
-    <Prose>Accumulate the votes Fₜ(x)=Fₜ₋₁(x)+αₜhₜ(x), starting with F₀=0. The final label is the sign of F. The lab declares that a zero vote chooses +1. At inference, a new row goes through each saved threshold and contributes its signed vote; no row weights need to be computed for that new row.</Prose>
-    <Example id="signed-adaboost"><Prose>This complete one-dimensional implementation explicitly stops at a perfect learner or when no learner has error below one half. It stores the thresholds and vote weights needed to predict new inputs. It also rejects invalid labels and unsupported input scales rather than silently converting arbitrary targets into signs.</Prose></Example>
-    <Prose>“Hard” cases are not necessarily mislabeled or inherently unpredictable. A high row weight may reflect a limitation of the chosen features, an inadequate stump class, an outlier, an annotation problem or an interaction that more rounds can represent. Inspect such rows with domain knowledge. Reweighting cannot resolve identical inputs with contradictory deterministic labels; adding more influence to noise can harm generalization.</Prose>
-
-    <H2>6. Derive the vote and its limits</H2>
-    <H3>Why this logarithm appears</H3>
-    <Prose>AdaBoost's update can be derived by reducing <strong>exponential loss</strong>, exp[−yF(x)]. A correct confident vote has positive yF and low loss. A wrong confident vote has negative yF and rapidly increasing loss. For a fixed candidate h and row distribution D, separate its correct mass 1−ε from wrong mass ε. Adding αh multiplies those losses by e⁻ᵅ and eᵅ respectively.</Prose>
-    <AdaBoostVoteBalanceFigure />
-    <MathBlock>{String.raw`\begin{aligned}Z(\alpha)&=(1-\epsilon)e^{-\alpha}+\epsilon e^{\alpha},\\
-Z'(\alpha)&=-(1-\epsilon)e^{-\alpha}+\epsilon e^{\alpha},\\
-Z'(\alpha)=0&\ \Longrightarrow\ e^{2\alpha}=\frac{1-\epsilon}{\epsilon}.
-\end{aligned}`}</MathBlock>
-    <Prose>For 0&lt;ε&lt;1, this positive, strictly convex function has the unique minimizer α=½ log[(1−ε)/ε]. A positive vote requires ε&lt;½. If ε=.5, α=0 and the fit does not improve this loss. At ε=0, the infimum is approached as α grows without bound; there is no finite minimizer. Our simple implementation returns the perfect classifier, corresponding to a limiting dominant vote. This boundary policy is explicit and is not the same as every library's finite stored coefficient.</Prose>
-    <Prose>Multiplying the unnormalized row updates from round 1 through T gives Dₜ₊₁(i)=exp[−yᵢFₜ(xᵢ)]/[n∏Zₜ], because the initial weight was 1/n. Sum over i and use ΣDₜ₊₁(i)=1. Therefore the mean exponential training loss equals ∏Zₜ. Every misclassified row has yᵢFₜ≤0, hence loss at least one, so its error indicator is bounded by that loss.</Prose>
-    <Prose>Read the product as repeated proportional improvement. A factor .8 followed by .9 leaves .72 of the starting loss, not .7: the second reduction acts on what remains. A weak edge makes its factor close to one. The question for a convergence claim is therefore how much those factors can jointly shrink, not merely whether each round improves a little.</Prose>
-    <MathBlock>{String.raw`\begin{gathered}\text{training error}\leq\prod_{t=1}^{T}Z_t,\\
-Z_t=2\sqrt{\epsilon_t(1-\epsilon_t)}\\
-=\sqrt{1-4\gamma_t^2}\leq e^{-2\gamma_t^2},\\
-\gamma_t=\tfrac12-\epsilon_t.
-\end{gathered}`}</MathBlock>
-    <Prose>The last inequality follows from log(1−u)≤−u for 0≤u&lt;1. If every accepted round has a uniform edge γₜ≥γ&gt;0, training error is at most exp(−2Tγ²). Merely saying every εₜ is below .5 does not supply a uniform rate. Edges can shrink so quickly that Σγₜ² stays finite; then this bound need not approach zero. The distinction is a hypothesis in the argument, not pedantry about notation.</Prose>
-    <Prose>These statements concern the training rows and the unshrunk signed update just derived. They do not guarantee test performance, calibration or robustness. With learning-rate shrinkage η&lt;1, use α'=ηα; the actual normalizer is (1−ε)e⁻ᵅ′+εeᵅ′, not automatically 2√[ε(1−ε)]. The product identity still follows from the actual updates. Margin-based generalization analysis needs additional capacity/probability assumptions; a positive or increasing training margin alone is not a test certificate.</Prose>
-    <H3>Binary signed votes versus the current library</H3>
-    <Prose>scikit-learn 1.9.1's <Code>AdaBoostClassifier</Code> implements discrete SAMME. For K classes its stored coefficient is η·(log[(1−ε)/ε]+log(K−1)), with an admissible weak learner better than error 1−1/K. In the nondegenerate binary case at η=1, that coefficient is twice the signed α used above. SAMME multiplies only wrong rows by eᵝ before normalization; this gives the same normalized row weights as multiplying correct/wrong rows by e⁻ᵅ/eᵅ when β=2α. That equivalence does not assert identical probability mappings or identical behavior at ε=0.</Prose>
-    <Example id="api-conventions"><Prose>The first three native errors agree with the worked trace. The program also checks the stacking output-column contract that section 8 explains. Old examples passing <Code>algorithm='SAMME.R'</Code> do not describe this tested version; API names and probability conversions must be checked against the installed implementation.</Prose></Example>
-    <section className="ensemble-deeper lesson-teaching-section" data-lesson-teaching=""><h3 className="lesson-teaching-section__title">Run the full NumPy tree-and-stump comparison</h3>
-      <Prose>The following complete program implements bootstrap classification trees and binary AdaBoost, rather than delegating the fits to scikit-learn. It generates 300 noisy circle observations, uses 225 for training and 75 for testing, and applies a fixed 50-member comparison. Its finite error clipping is an implementation convention to avoid log(0); the explicit-boundary program above explains the mathematical endpoints.</Prose>
-      <Example id="full-numpy-comparison"><Prose>The measured accuracies are .7600 and .9333 on this particular generated test split. The first AdaBoost alpha is .3667; that is not the alpha for the separate six-case ε=1/6 lab. The algorithms use different base capacities here—depth-three trees versus stumps—so the comparison cannot isolate one universal causal advantage of boosting or bagging.</Prose></Example>
-    </section>
-    <Prose>Gradient boosting generalizes the “fit a correction” idea to other differentiable losses by fitting negative loss gradients. Under squared loss those corrections are residuals. Its detailed objectives, regularization and tree systems belong with the earlier Gradient Boosting topic; the explicit row-reweighting and loss derivation here provide a bridge without treating every boosting algorithm as AdaBoost.</Prose>
-
-    <H2>7. Teach a combiner with unseen-row predictions</H2>
-    <Prose>A stack treats base predictions as a new feature vector. If base A forecasts 7 hours and base B forecasts 9, the meta row is [7,9], with the original observed arrival time as target. A regression combiner might learn an intercept and slopes, or simply a constrained combination weight. A classification combiner can learn a logistic probability from base scores. The second model is called a <strong>meta-learner</strong>.</Prose>
-    <Prose>The trap is to train both levels on the bases' own fitted predictions. A one-nearest-neighbor regressor returns each training target exactly, giving a seemingly perfect meta column. On genuinely new rows it must use another row's target. The combiner trained on memorized targets therefore learns from a different prediction process than the one it will use at inference.</Prose>
-    <Prose><strong>Out-of-fold</strong> (OOF) predictions repair that specific training ownership problem. Partition training indices into K held-out groups, or folds. For one fold, fit a fresh copy of each entire base pipeline using only the other folds, predict the held-out rows, and place those predictions in their original row positions. Repeat until each eligible row has one held-out prediction per base. Only then fit the combiner to this complete matrix and the targets.</Prose>
-    <OOFOwnershipLab />
-    <Prose>For fold {'{A,D}'}, the permitted training rows are B,C,E,F. A's nearest available neighbor is B, so its prediction is 2 hours, not its own target of 1. A least-squares line fitted to B,C,E,F gives A −.35 hours and D 4.75. The negative value is a valid unconstrained line output; a real duration application may need a target transform or nonnegative model, chosen and fitted within the same protocol.</Prose>
-    <Prose>All six OOF rows produce a convex nearest-neighbor weight about .228273. In the explicitly leaking mode, the nearest column equals every target and the chosen weight becomes 1. This example establishes the mechanism of leakage; it does not imply every low training error or large validation gap proves leakage.</Prose>
-    <H3>The second fit happens before inference</H3>
-    <Prose>After learning the combiner, refit each base pipeline on all training rows. Keep the combiner trained on the OOF matrix. For a new x=2.5, the full-data nearest model gives 2, the full-data line gives 4.333333, and the stored combination gives about 3.800695 hours. Do not retrain the combiner on these bases' now-in-sample training predictions; that would undo the exclusion you just created.</Prose>
-    <StackTrainingServingFigure />
-    <Example id="manual-oof"><Prose>The complete loop uses fresh cloned estimators, asserts disjoint fit/prediction indices, and checks that every row is filled exactly once. Its new-row targets are a separate worked check. The reported .055445 versus 1.5 MSE belongs to those three chosen rows; it is not a population performance estimate.</Prose></Example>
-    <Prose>OOF bases use fewer rows than the final full-data refits. Their score distribution may differ from the final score distribution. More folds can reduce that training-size mismatch but increase work, and do not make small meta datasets immune to noise. Similar base columns can make unrestricted coefficients unstable. Regularization, constrained weights, simpler combiners and fewer redundant members are options to evaluate, rather than universal prescriptions.</Prose>
-    <Checkpoint prompt="With 225 training rows, five equally sized folds and three scalar-output bases, what is the OOF matrix shape? How many rows does each fold-specific base fit use?">
-      <Prose>The matrix is 225×3: every row receives one held-out prediction from each base. A fold-specific base fit uses 180 rows and predicts 45. Final bases are then refitted on all 225. Confusing a fold's fit size with the matrix row count would discard 45 valid meta rows or misdescribe their provenance.</Prose>
-    </Checkpoint>
-
-    <H2>8. Use the actual library contract</H2>
-    <Prose>A library can automate the loop without changing its data requirements. In the tested <Code>StackingClassifier</Code>, base estimators are fitted on all supplied training rows for future inference; <Code>cross_val_predict</Code> constructs the predictions used to fit the final estimator. The <Code>cv</Code> argument controls that internal construction. It is not an outer estimate of the whole stack's performance.</Prose>
-    <H3>What reaches the final estimator</H3>
-    <dl className="ensemble-api-contract">{[
-      ['stack_method="auto"', 'Try predict_proba, then decision_function, then predict for each base', 'Different bases can contribute different kinds of score'], ['Binary predict_proba', 'Drop the first probability column from each such base', 'p0=1−p1 is redundant; three binary probability bases give three columns'], ['Multiclass predict_proba', 'Keep the class-probability columns', 'Track their class order and the resulting feature count'], ['passthrough=True', 'Append original features to base-prediction features', 'The meta-model sees more information, with additional scaling and overfitting concerns'], ['cv="prefit"', 'Use already fitted bases; supplied rows train the combiner', 'Honesty requires separate base-fit data; the API does not create that boundary'], ['transform(X)', 'Return predictions from saved full-data base fits', 'On training X, this is not the original OOF matrix']
-    ].map(([setting, meaning, consequence]) => <div key={setting}><dt>{setting}</dt><dd>{meaning}. <strong>{consequence}.</strong></dd></div>)}</dl>
-    <Prose>The API program in section 6 pairs GaussianNB with a scaled LinearSVC. The first contributes its class-1 probability, the second a decision margin, so the transformed binary matrix has two columns. It asserts those columns against the actual saved estimators. A mixed stack does not average those incompatible quantities directly: the trained final estimator interprets them as features. Scaling or regularization at that level must also be fitted in the correct training workflow.</Prose>
-    <MixedStackScoresFigure />
-    <H3>Preprocessing is part of a model fit</H3>
-    <Prose>Suppose a scaler is fitted once on all rows before an OOF loop. A held-out row then influenced the feature mean and variance used by its base model, even though its target was excluded. Target encoding, supervised feature selection and imputation can create stronger leakage. Put each learned transformation inside the base pipeline passed into the OOF construction. Clone that whole pipeline for each fold. Deterministic transformations that learn nothing from data, such as converting meters to kilometers by a fixed factor, have a different ownership requirement.</Prose>
-    <Prose>All learned choices in an honest evaluation must fit inside its training boundary. If you use an outer fold to assess the stack, base preprocessing, hyperparameter selection, OOF construction and meta-fitting must use only that outer training part. Choosing a base family using the outer test fold and then calling only the inner OOF loop “leak-free” does not restore the evaluation. The complete comparison below uses fixed candidate specifications, internal OOF construction, a validation choice and a separate test report.</Prose>
-
-    <H2>9. Preserve groups and time</H2>
-    <Prose>A row-wise random fold answers a particular question: how well might the workflow predict another exchangeable row from the same kind of population? For repeated users or machines, adjacent rows can share information unavailable for a new entity. For future forecasting, random folds can let a base use future targets to predict earlier times. Valid training indices depend on the deployment question, not on the number of folds alone.</Prose>
-    <TimeOwnershipFigure />
-    <Prose>In a forward-only construction, each prediction block is later than its fit block. The initial training prefix has no earlier fit that can predict it. Leave those meta cells unavailable and train the combiner only on covered rows. If labels arrive after a delay, the allowed fit set must also respect label availability; a time gap may be required. A group-safe split instead excludes every row of the held-out group. These address different questions and may both be needed.</Prose>
-    <Example id="forward-group-oof"><Prose>The time example fits on rows 0–2 to predict 3–5, then expands its training prefix. Rows 0–2 never receive a forward prediction and are excluded from meta-fitting. The independent group example covers all 12 rows while keeping each two-row group wholly outside its fold's fit. Neither construction claims to solve every dependent-data problem.</Prose></Example>
-    <Prose>The tested stack's internal <Code>cross_val_predict</Code> requires its test folds to form a partition of the supplied samples. A usual expanding-window <Code>TimeSeriesSplit</Code> leaves an initial prefix uncovered, so passing it directly is not a general solution. The explicit loop above keeps the missingness and inference refits visible. Do not fill uncovered cells with predictions from a model that trained on those same rows.</Prose>
-    <H3>Blending is a simpler ownership tradeoff</H3>
-    <Prose>In a holdout <strong>blend</strong>, reserve one training subset for fitting bases and a disjoint subset for fitting the combiner from those bases' predictions. This can be easier to implement than K-fold stacking, but leaves fewer rows for each role. Keep another independent evaluation set. If you subsequently refit bases on all data, their outputs may shift relative to those used to train the combiner; that changed workflow needs evaluation. OOF stacking uses each training row as a meta target while creating its base features from other rows, at additional fitting cost.</Prose>
-    <Prose>A large cross-validation score followed by a poor test score is an alarm, not a diagnosis. Check duplicate/group/time leakage, mismatched preprocessing, distribution change, repeated tuning, small-sample variation and target definitions. Uniform-looking combination weights do not by themselves imply useless stacking either: a logistic final model applies coefficients and a nonlinear link, not necessarily a convex probability average.</Prose>
-
-    <H2>10. Inspect probabilities and real fitted rules</H2>
-    <Prose>A well-calibrated probability forecast p has event rate p among comparable cases assigned that probability. Accuracy asks whether decisions are correct. Brier loss and log loss assess probability forecasts under proper scoring rules. These properties are related, but no one is identical to the others, and averaging probabilities does not automatically preserve calibration.</Prose>
-    <CalibratedAverageFigure />
-    <Prose>Here A and B are independent fair binary signals and the true event probability given both is (A+B)/2. A forecaster knowing only A reports .25 when A=0 and .75 when A=1: averaging over unknown B verifies those rates exactly. The B forecaster is calibrated for the same reason. But their mean reports .25 only at (A,B)=(0,0), where the event chance is zero; it reports .75 only at (1,1), where the chance is one. At mean .5, the chance is .5. Thus both members are calibrated while their mean is not.</Prose>
-    <Example id="calibrated-average"><Prose>Despite that calibration defect, averaging lowers exact Brier risk from 3/16=.1875 for either member to 5/32=.15625. For a fixed binary outcome, (p−y)² is convex in p; a convex probability average cannot have Brier loss above the weighted mean member loss. Convexity of −log also gives the analogous probability-average log-loss inequality where losses are defined. Neither inequality promises calibration or a loss below the best member.</Prose></Example>
-    <Prose>Naive Bayes can be a fast, useful ensemble member, but repeated dependent evidence can make its probabilities overconfident. Another model's less extreme output might improve a mean, or the overconfident member might dominate it harmfully. Obtain calibration data from predictions produced without fitting those outcomes, calibrate the workflow you will actually serve, and evaluate that workflow independently. Do not use the final test labels to choose a probability mapping or action threshold.</Prose>
-    <EnsemblePredictionLab />
-    <Prose>The line's boundary differs from the tree's axis-aligned regions and the neighbor model's local boundary. Their probability mean smooths some extremes, but also injects the line's weak signal into a strong neighbor fit. The stack can learn a different response to those outputs. The displayed field comes from saved native fits; a smooth-looking color surface does not establish calibration, a trustworthy uncertainty interval or superior prediction.</Prose>
-
-    <H2>11. Run a complete comparison</H2>
-    <Prose>Now evaluate the entire workflow on a controlled generated task. Each row has two numeric features and a binary circle label. The split is stratified into 216 training, 72 validation and 72 test rows. Candidate specifications and random seeds are fixed before fitting: a scaled logistic model, depth-four tree, scaled nine-neighbor model, equal soft vote, OOF logistic stack and class-prior baseline. The stack uses three shuffled stratified internal folds, with each learned base transformation inside its own pipeline.</Prose>
-    <Prose>Fit candidates only on training rows, select by validation log loss, then select an action threshold on validation for the selected candidate. Finally report the frozen candidates and the selected action on test rows. The action cost here is hypothetical: each false positive costs 1 unit and each false negative costs 4. This is an explicit decision exercise, not an estimate of a real organization's financial benefit.</Prose>
-    <Example id="held-out-comparison"><Prose>Validation log loss selects the neighbor rule: .133590 versus .143809 for the stack. The test log losses are .181329 and .198805, respectively. The stack nevertheless has slightly lower test Brier loss, .055232 versus .056927, illustrating that different losses need not rank models identically. The prior baseline's log loss is .693147. These are finite measurements with specified code, data and split.</Prose></Example>
-    <H3>Read the decision report without changing the experiment</H3>
-    <Prose>The selected validation threshold is .555556. The program predicts class 1 when p≥threshold, using a declared tie rule. On its test rows, the confusion matrix has 31 true negatives, 5 false positives, no false negatives and 36 true positives. The hypothetical total cost is 5+4·0=5. This action is distinct from <Code>predict</Code>'s ordinary class argmax used for each model's reported accuracy.</Prose>
-    <Prose>If p were the correct conditional event probability and costs were known, acting positive has expected cost C_FP(1−p), while acting negative has cost C_FN p. Choose positive when p≥C_FP/(C_FP+C_FN), here .2. A finite validation-selected threshold can differ because probabilities are imperfect, validation is finite and available probability values are discrete. Selecting .555556 does not prove that .2 is mathematically wrong or that the chosen probabilities are calibrated.</Prose>
-    <Prose>The tree's test accuracy is .875 while its log loss is 2.227753. Leaf probabilities can be zero or one, so confidently wrong cases receive large log-loss penalties. The library clips probabilities for a finite numerical loss; its exact magnitude depends on the numeric contract. Inspect these cases rather than concluding that accuracy or log loss is broken. Report group or temporal slices relevant to the actual data, and use a valid uncertainty assessment if drawing population conclusions. One 72-row test set cannot settle a production decision alone.</Prose>
-
-    <H2>12. Go beyond constant combination weights</H2>
-    <H3>A context column is not automatically a context-dependent slope</H3>
-    <Prose>A linear meta-model of the form β₀+βₐpₐ+βᵦpᵦ+γz gives fixed coefficients to the base predictions. The added context z shifts the output, but does not change the slope on pₐ. To let context alter a base's weight, supply an interaction such as z·pₐ, use a suitable nonlinear combiner, or explicitly build a gating function. Each choice introduces an additional fitting and evaluation problem.</Prose>
-    <ContextInteractionFigure />
-    <Prose>Consider a constructed task with target (1−z)pₐ+zpᵦ. At z=0 it equals A; at z=1 it equals B. A plain linear model with features [1,pₐ,pᵦ,z] cannot match both slopes for all possible pₐ,pᵦ. With product features [(1−z)pₐ,zpᵦ], coefficients [1,1] express it exactly. For pₐ=.2,pᵦ=.8 and z=.25, the result is .75·.2+.25·.8=.35.</Prose>
-    <Example id="context-interactions"><Prose>The eight-row construction fits the product model exactly and leaves MSE .125 for the constant-slope model. This is a representational example, not a measured improvement on real data. Feature-weighted linear stacking develops this idea with multiple meta features and learned coefficients, which need honest base predictions and enough data to estimate interactions reliably.</Prose></Example>
-    <H3>Where this distinction becomes useful</H3>
-    <Prose>For a recommender, a content-based score can be available for a new item while a collaborative score may become informative after enough interactions. Interaction count is a plausible context feature. At recommendation time it must count only already observed interactions, not the item's eventual lifetime activity. A time- and entity-aware evaluation should distinguish new-item from familiar-item recommendations. The next Recommender Systems lesson develops the underlying score models; this lesson explains how their combination could be trained and what would invalidate its evidence.</Prose>
-    <Prose>For sensor forecasting, members can use different measured inputs—one a physical baseline, another recent local measurements. Disagreement can identify cases worth inspecting or requesting another measurement. It is not a calibrated uncertainty interval: correlated model errors can make every member confidently agree on a wrong value, and differences in scale can create disagreement without useful new information. Any abstention or acquisition policy needs its own cost and held-out evaluation.</Prose>
-    <Prose>For annotating a large unlabeled collection, a committee can nominate disputed rows for human labeling. This can spend annotation effort on decision boundaries, but may also repeatedly select noisy or out-of-distribution cases. Labels collected adaptively are not an ordinary random test set. Keep an independently sampled evaluation population and record which selection policy produced the training data.</Prose>
-    <H3>Training and serving work have different counts</H3>
-    <Prose>With B bases and K OOF folds, the usual stack performs BK fold-specific base fits, B full-data base fits and one meta fit. If n rows are equally partitioned, each fold fit uses n(K−1)/K rows. Under an illustrative linear-cost-per-row assumption, total base row processing is BK·n(K−1)/K+Bn=BKn. Real tree, kernel and neighbor costs differ, so this count is not a universal wall-clock complexity formula.</Prose>
-    <Prose>Inference ordinarily evaluates B saved base pipelines and one meta-model, not all K fold copies. Sequential latency is roughly the sum of the base latencies plus combination and overhead; parallel latency is bounded by the slowest branch plus scheduling/communication and may compete for memory or cores. Measure the actual batch size, hardware and tail latency. An extra model is worthwhile only if its marginal held-out benefit justifies the measured cost.</Prose>
-    <Prose>A simpler deployed student can be trained to imitate an ensemble's scores, a process often called distillation. The student's features and capacity may prevent it from reproducing the teacher, so no fixed “within one percent” accuracy promise follows. Compare the student, teacher and baseline under the same honest test protocol, including probability quality, latency and relevant subgroups. Keep model versions, class-column order, transformations and base/meta compatibility together when saving a stack.</Prose>
-
-    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>13. Practise with changed data</H2>
-    <Prose>Work from the changed inputs before opening a hint. Each solution explains the inference or data boundary as well as the result. The final exercise is a complete reporting task with an executed reference run; changing the seed alone is not a substitute for understanding why an outcome can reverse.</Prose>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="A. A weighted vote and its tie" question="Three aligned class-1 probabilities are .8, .4 and .3 with relative model weights 1,1,2. Calculate the hard-vote share, mean probability and decisions. Then change A to .9." hint="Normalize by total weight 4. Member labels use their individual .5 comparison; an exact final tie chooses class 0.">
-      <Prose>Only A votes 1, so hard share is 1/4 and the hard decision is 0. The mean is (.8+.4+2·.3)/4=.45, also class 0. Changing A to .9 gives .475, still class 0; it does not change the hard share. For a final soft tie, A would need 1.0: (1+.4+.6)/4=.5, with declared tie class 0. None of these decisions establishes outcome correctness.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="B. Fit a changed cancellation weight" question="On two validation rows, A has residuals [−2,2] hours and B has [1,1]. Find the best convex A weight and combined MSE. Does adding B help an A that instead has residuals [0,0]?" hint="The combined errors are 1−3w and 1+w. Expand their mean square, then differentiate.">
-      <Prose>The objective is [(1−3w)²+(1+w)²]/2=1−2w+5w². Its minimum is w=.2, inside [0,1], with residuals [.4,1.2] and MSE .8 hours². The member MSEs are 4 and 1. If A is exact, weight 1 has loss zero; forcing equal weights with B creates .25 hours² loss. Fit weights on permitted combination data and test them elsewhere.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="C. Separate correlation and copying" question="At a fixed query, four random fitted predictions each have variance 9 and every pair has correlation 1/3. Find the average variance. Could the same common correlation be −.5 for these four variables?" hint="Count four variance terms and twelve ordered covariance terms. Variance cannot be negative.">
-      <Prose>The average variance is 9[1/3+(2/3)/4]=4.5. Correlation −.5 would give 9[−.5+1.5/4]=−1.125, impossible. For B=4 the lower common-correlation bound is −1/3. This is a statement about a valid joint law across training experiments, not a correlation heatmap measured across unrelated inputs.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="D. A smaller bag and missing votes" question="Five rows are sampled uniformly with replacement using three draws per bag. Find a designated row's absence probability, expected distinct count, and probability that neither of two independent bags is eligible for that row's OOB prediction." hint="First calculate q=(4/5)³. A bag is ineligible if it includes the row.">
-      <Prose>q=64/125=.512. Expected distinct rows are 5(61/125)=61/25=2.44. Neither of two independent random bags is eligible with probability (61/125)²=3721/15625≈.238144. In that event the OOB prediction is unavailable. Substituting the all-model training prediction changes the quantity being evaluated.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="E. Update different weak errors" question="For signed AdaBoost, calculate α for ε=.3 and ε=.45. After each optimal normalized update, what total mass sits on the rows this stump got wrong? What happens at ε=.5 and ε=0?" hint="The wrong mass after the update is εeᵅ/Z; substitute Z=2√[ε(1−ε)].">
-      <Prose>The coefficients are ½log(7/3)≈.423649 and ½log(11/9)≈.100335. In either nondegenerate case, the normalized wrong mass is exactly .5. That does not say half the rows are wrong, nor that the accumulated ensemble's error becomes .5. At .5 the coefficient is zero and there is no positive edge. At zero there is no finite minimizing coefficient; use an explicitly specified stopping policy.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="F. A bound with shrinking edges" question="Suppose accepted rounds have edge γₜ=1/[4(t+1)] for t≥1. Does the training-error bound derived above guarantee a uniform exponential decrease to zero?" hint="Its exponent is −2Σγₜ². Compare the squared terms with a convergent series.">
-      <Prose>No. Every edge is positive, but there is no positive lower bound shared by all rounds. The sum is (1/16)Σₜ₌₁∞1/(t+1)², which is finite. Thus exp(−2Σγₜ²) approaches a positive number, so this upper bound does not establish convergence to zero. The actual training error might still improve; lack of a guarantee is not proof of failure.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="G. Repair an OOF row" question="Eight training rows are divided into folds {A,C}, {B,D}, {E,G}, {F,H}. A base predicts A after training on A,B,D,E,F,G,H. What is wrong, which rows are legal for that fold, and what is the complete matrix shape for three scalar-output bases?" hint="Exclude every destination in the held-out fold, not merely the other member of that fold.">
-      <Prose>The prediction trained on A's own target. The correct fit rows are B,D,E,F,G,H, excluding both A and C; predict both held-out rows with those fitted bases. The completed matrix is 8×3, not 6×3. Fit the combiner on that matrix and targets, then refit the bases on all eight for inference. A later <Code>transform</Code> of the eight rows uses full-data refits and must not be relabeled OOF.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="H. Time and entity ownership" question="A machine contributes hourly rows. You want performance on an unseen machine next month. A shuffled row split holds out some hours from every machine, then a scaler is fitted globally before stacking. Identify the problems and propose the evaluation boundary." hint="There are three separate questions: which entities, which times and which rows teach preprocessing.">
-      <Prose>The shuffled split permits information about the same machine across fit/test, future times can influence earlier fits, and the global scaler learns from evaluation rows. Choose an outer test containing later observations from machines absent from training. Within outer training, create meta predictions respecting the corresponding entity/time/label-availability constraints; fit preprocessing inside each permitted fit. Some early rows may have no valid prediction and remain excluded from meta-fitting. The exact split must match how new machines are encountered; a generic GroupKFold alone does not enforce time order.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="I. Calibration is not preserved by an average" question="In the fair-signal law, condition on mean forecast .75 and on mean forecast .5. What are the actual event rates? Why can the average nevertheless have lower Brier risk?" hint="List which signal pairs produce each mean. Then use the squared-loss averaging identity for each binary outcome.">
-      <Prose>Mean .75 occurs only at (1,1), with true rate 1. Mean .5 occurs at (0,1) or (1,0), both with rate .5. The mean is therefore not calibrated at .75. Convex averaging reduces loss relative to the average member loss pointwise, and averaging that identity over the exact law yields risk 5/32 instead of 3/16. Calibration and one proper-loss comparison are distinct properties.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="J. Make the context affect a slope" question="For base values A=4, B=10 and context z=.3, calculate (1−z)A+zB. Can β₀+βₐ A+βᵦ B+γz express this target for every A,B,z?" hint="Look at the coefficient on A when z changes from 0 to 1, not only the output at one chosen row.">
-      <Prose>The output is .7·4+.3·10=5.8. No fixed βₐ can equal both 1 at z=0 and 0 at z=1 for all A. Product features or a suitable nonlinear representation are required. A model might fit a small correlated sample approximately without representing the all-input relation; demonstrate transfer with changed rows, not only training fit.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="K. Account for training and serving" question="Use four bases, five folds and 1000 training rows. Count base fits, rows per fold fit and row processing under the stated linear-cost assumption. Base serving times are 3,8,2,5 ms and meta time is 1 ms; give ideal sequential and ideal parallel totals before overhead." hint="There are fold fits and final full-data fits. Serving ordinarily uses only the full-data models.">
-      <Prose>There are 20 fold-specific plus 4 full-data base fits, each fold fit using 800 rows. Row processing is 20·800+4·1000=20,000, plus meta fitting. Sequential serving totals 19 ms; ideal parallel branches plus meta total 9 ms. Actual overhead, resource contention, batching and tail latency can change both. There are four served base models and one meta-model, not twenty fold models.</Prose>
-    </Practice></div>
-    <div className="lesson-exercise" data-lesson-exercise=""><Practice title="L. Complete a changed experimental report" question="Run the complete comparison with seed 83, noise .20 and the tree omitted from both ensemble candidates. Keep all split seeds, validation selection and cost rules fixed. Report baselines, the selected candidate, the test losses and action cost. Decide what this does and does not show." hint="Choose by validation first. A surprising test ranking is not permission to choose a different winner on those same test outcomes.">
-      <Example id="changed-protocol"><Prose>An accepted run selects neighbor by validation log loss .271679 versus stack .301336. On test, neighbor log loss is 1.243178 while stack is .329349 and the equal soft vote .462221; the prior baseline is .693147. Neighbor and stack both have accuracy .888889, yet different confidence errors create very different log loss. The chosen threshold is .333333 and test confusion is [[21,15],[1,35]], giving cost 15+4·1=19.</Prose></Example>
-      <Prose>This shows that a validation winner can lose on a finite test set, and that probability and decision metrics tell different parts of the story. It does not establish that the stack is universally preferable, that the test is invalid or that a particular probability is calibrated. Record the result, investigate the confidently wrong cases, and use a new valid evaluation design for further model choices. If changing the cost assumptions or split policy, state them before looking at the new test outcomes.</Prose>
-    </Practice></div>
-    <Prose><strong>Ready to continue:</strong> you can name the quantity each member contributes, trace which rows produced each fitted prediction, derive one update or combination by hand, and distinguish a measured gain from a guarantee. Next, <strong>Recommender Systems</strong> develops collaborative and content-based scores. Their different information sources make combination useful to investigate, with cold-start, time and entity boundaries that must remain explicit.</Prose></section>
-
-    <Sources alternatives={<><Prose>For another explanation, choose the resource that matches your current question. These supplement the complete derivations and runnable examples here.</Prose><ul>
-      <li><a href="https://youtu.be/pvZ3ZhlmDCE" target="_blank" rel="noreferrer">Herman Kamper: Bagging</a> and <a href="https://youtu.be/Vixw2DOUGec" target="_blank" rel="noreferrer">AdaBoost step by step</a>, followed by <a href="https://youtu.be/wbmuqXbUFGM" target="_blank" rel="noreferrer">the update details</a>. Short instructor-led visual alternatives, paired with his <a href="https://www.kamperh.com/data414/notes/17_ensemble_methods_notes.pdf" target="_blank" rel="noreferrer">ensemble notes</a>. The course index and corresponding algorithm/formula notes were reviewed; the full recordings were not watched. His binary signed coefficient matches our worked derivation, while library conventions require the separate API check.</li>
-      <li><a href="https://cs229.stanford.edu/extra-notes/boosting.pdf" target="_blank" rel="noreferrer">John Duchi's CS229 boosting notes</a> give a more mathematical route through exponential loss and weak-edge assumptions. Read after sections 5–6; the local derivative and product argument supply the needed bridge.</li>
-      <li><a href="https://www.stat.cmu.edu/~cshalizi/sml/21/lectures/17/lecture-17.html" target="_blank" rel="noreferrer">Cosma Shalizi's Model Averaging lecture</a> provides a written alternative for combining predictions and understanding model-selection uncertainty. Use it to revisit why choosing one best-looking fit is itself uncertain.</li>
-    </ul></>}>
-      <li><a href="https://www.stat.berkeley.edu/~breiman/bagging.pdf" target="_blank" rel="noreferrer">Breiman, Bagging Predictors</a>: original bootstrap aggregation and learner-stability motivation. Its empirical examples are not benchmarks for the new synthetic data above.</li>
-      <li><a href="https://proceedings.neurips.cc/paper_files/paper/1994/file/b8c37e33defde51cf91e1e03e51657da-Paper.pdf" target="_blank" rel="noreferrer">Krogh and Vedelsby on ensembles and disagreement</a>: context for the squared-error decomposition derived here, with its target and weighting assumptions.</li>
-      <li><a href="https://www.schapire.net/papers/explaining-adaboost.pdf" target="_blank" rel="noreferrer">Schapire, Explaining AdaBoost</a> and <a href="https://www.schapire.net/papers/FreundSc99.pdf" target="_blank" rel="noreferrer">Freund–Schapire's introduction</a>: the signed algorithm, training-error bounds, weak-learning conditions and generalization distinctions.</li>
-      <li><a href="https://doi.org/10.1016/S0893-6080(05)80023-1" target="_blank" rel="noreferrer">Wolpert, Stacked Generalization</a>: original attribution for stacking; the current implementation contracts are checked against the accessible documentation and actual programs below.</li>
-      <li><a href="https://arxiv.org/pdf/0911.0460" target="_blank" rel="noreferrer">Sill and colleagues, Feature-Weighted Linear Stacking</a>: context-prediction products and their fitting protocol. Our eight-row example isolates the representational mechanism rather than reusing a reported competition result.</li>
-      <li><a href="https://scikit-learn.org/stable/modules/ensemble.html" target="_blank" rel="noreferrer">scikit-learn ensemble guide</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.StackingClassifier.html" target="_blank" rel="noreferrer">StackingClassifier</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_predict.html" target="_blank" rel="noreferrer">cross_val_predict</a> and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html" target="_blank" rel="noreferrer">AdaBoostClassifier</a>: API signatures, class-column handling, internal folds, full refits and discrete SAMME. Documentation and installed 1.9.1 behavior were checked on 11 September 2026; future versions may change defaults.</li>
-    </Sources>
-  </div>,
+  content: EnsembleEarlyContent
 };

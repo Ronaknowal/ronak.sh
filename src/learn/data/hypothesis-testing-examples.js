@@ -1,6 +1,7 @@
 // Complete programs executed with Python 3.12, NumPy 2.3.5 and SciPy 1.18.1.
 export const hypothesisExamples = {
   paired: {
+    file: "paired_t_library.py",
     title: "Calculate the paired estimate, t interval and test from raw timings",
     code: String.raw`import numpy as np
 from scipy import stats
@@ -42,6 +43,7 @@ critical=2.776445 CI95=[-0.322941, 4.322941]
 t=2.390457 two-sided p=0.075130`,
   },
   coverage: {
+    file: "normal_interval_coverage.py",
     title: "Repeat whole normal experiments with known and estimated spread",
     code: String.raw`import numpy as np
 from scipy import stats
@@ -59,15 +61,14 @@ for label, critical, standard_error in [
     high = means + critical * standard_error
     count = np.count_nonzero((low <= truth) & (truth <= high))
     print(f"{label}: {count}/{experiments} cover = {count / experiments:.3%}")
-    print(f"first interval: [{low[0]:.3f}, {high[0]:.3f}] ms")
-print("These finite simulation counts estimate coverage; neither must equal 95%.")`,
+    print(f"first interval: [{low[0]:.3f}, {high[0]:.3f}] ms")`,
     expected: String.raw`known sigma, z: 3813/4000 cover = 95.325%
 first interval: [95.481, 103.321] ms
 estimated sigma, t: 3809/4000 cover = 95.225%
-first interval: [96.524, 102.279] ms
-These finite simulation counts estimate coverage; neither must equal 95%.`,
+first interval: [96.524, 102.279] ms`,
   },
   tails: {
+    file: "paired_test_alternatives.py",
     title: "Change the scientific question and keep the tail and bound consistent",
     code: String.raw`import numpy as np
 from scipy import stats
@@ -83,16 +84,15 @@ shifted = d + 1
 useful = stats.ttest_1samp(shifted, popmean=1.0, alternative="greater")
 lower95 = shifted.mean() - stats.t.ppf(0.95, 4) * stats.sem(shifted)
 print(f"shifted: p for saving >1 ms = {useful.pvalue:.6f}")
-print(f"shifted: one-sided 95% lower bound = {lower95:.6f} ms")
-print("Choose this direction and threshold before inspecting the result.")`,
+print(f"shifted: one-sided 95% lower bound = {lower95:.6f} ms")`,
     expected: String.raw`two-sided: p=0.075130, CI95=[-0.322941, 4.322941]
 greater: p=0.037565, CI95=[0.216369, inf]
 less: p=0.962435, CI95=[-inf, 3.783631]
 shifted: p for saving >1 ms = 0.037565
-shifted: one-sided 95% lower bound = 1.216369 ms
-Choose this direction and threshold before inspecting the result.`,
+shifted: one-sided 95% lower bound = 1.216369 ms`,
   },
   equivalence: {
+    file: "paired_tost_equivalence.py",
     title: "Test a declared negligible-effect interval instead of accepting a point null",
     code: String.raw`import numpy as np
 from scipy import stats
@@ -123,6 +123,7 @@ CI90=[-0.445908, 0.445908], CI95=[-0.580735, 0.580735]
 equivalent within +/-0.5 ms: True`,
   },
   prediction: {
+    file: "normal_mean_prediction.py",
     title: "Compare uncertainty about a mean with uncertainty about a new observation",
     code: String.raw`import numpy as np
 from scipy import stats
@@ -144,6 +145,7 @@ n=100: mean CI=[98.040, 101.960] ms
 prediction half-width limit: 19.600 ms`,
   },
   power: {
+    file: "normal_test_power.py",
     title: "Plan an independent normal-mean test before collecting the data",
     code: String.raw`from math import ceil, sqrt
 from scipy import stats
@@ -157,15 +159,14 @@ for effect in [2.0, 0.5]:
     previous_power = stats.norm.sf(critical - effect * sqrt(n - 1) / sigma)
     assert power >= desired_power and previous_power < desired_power
     print(f"true saving={effect:.1f} ms: planned n={n}, power={power:.6f}")
-    print(f"one fewer observation: power={previous_power:.6f}")
-print("Exact for independent Normal data with known sigma and a predeclared upper-tail test.")`,
+    print(f"one fewer observation: power={previous_power:.6f}")`,
     expected: String.raw`true saving=2.0 ms: planned n=25, power=0.803765
 one fewer observation: power=0.789485
 true saving=0.5 ms: planned n=396, power=0.800278
-one fewer observation: power=0.799398
-Exact for independent Normal data with known sigma and a predeclared upper-tail test.`,
+one fewer observation: power=0.799398`,
   },
   multiplicity: {
+    file: "holm_familywise_testing.py",
     title: "Calculate family risk and execute the Holm step-down rule",
     code: String.raw`import numpy as np
 
@@ -188,16 +189,15 @@ p = np.array([0.04, 0.001, 0.8, 0.01, 0.2])
 adjusted = holm_adjust(p)
 print("original order p:", p.tolist())
 print("Holm adjusted:", np.round(adjusted, 6).tolist())
-print("reject at .05:", (adjusted < alpha).tolist())
-print("Holm controls family-wise error with valid p-values, without requiring independent tests.")`,
+print("reject at .05:", (adjusted < alpha).tolist())`,
     expected: String.raw`20 independent true nulls, raw alpha=.05: FWER=0.641514
 Bonferroni per-test threshold=0.002500
 original order p: [0.04, 0.001, 0.8, 0.01, 0.2]
 Holm adjusted: [0.12, 0.005, 0.8, 0.04, 0.4]
-reject at .05: [False, True, False, True, False]
-Holm controls family-wise error with valid p-values, without requiring independent tests.`,
+reject at .05: [False, True, False, True, False]`,
   },
   peeking: {
+    file: "fair_coin_optional_looks.py",
     title: "Enumerate every fair-coin path instead of treating repeated looks as independent",
     code: String.raw`from itertools import product
 from math import comb
@@ -224,14 +224,13 @@ for sequence in product([0, 1], repeat=maximum):
 total = 2 ** maximum
 print(f"fixed last look: {fixed_count}/{total} = {fixed_count/total:.6f}")
 print(f"stop at any first rejection: {peek_count}/{total} = {peek_count/total:.6f}")
-print("first-hit path counts by look:", first_hits)
-print("All 4096 paths are equally likely under the independent fair-coin null.")`,
+print("first-hit path counts by look:", first_hits)`,
     expected: String.raw`fixed last look: 158/4096 = 0.038574
 stop at any first rejection: 290/4096 = 0.070801
-first-hit path counts by look: [0, 0, 0, 0, 0, 128, 0, 0, 96, 0, 0, 66]
-All 4096 paths are equally likely under the independent fair-coin null.`,
+first-hit path counts by look: [0, 0, 0, 0, 0, 128, 0, 0, 96, 0, 0, 66]`,
   },
   clusters: {
+    file: "cluster_mean_variance.py",
     title: "Calculate why repeated measurements do not create independent units",
     code: String.raw`from math import sqrt
 
@@ -246,14 +245,13 @@ design_effect = 1 + (r - 1) * icc
 assert abs(actual_variance / naive_variance - design_effect) < 1e-10
 print(f"observations={n}, independent clusters={m}, ICC={icc:.3f}")
 print(f"naive SE={sqrt(naive_variance):.6f}, actual SE={sqrt(actual_variance):.6f}")
-print(f"variance ratio={design_effect:.6f}, effective n={n/design_effect:.6f}")
-print("Effective n here only matches this mean's variance; it is not a universal t degrees-of-freedom rule.")`,
+print(f"variance ratio={design_effect:.6f}, effective n={n/design_effect:.6f}")`,
     expected: String.raw`observations=10000, independent clusters=5, ICC=0.200
 naive SE=0.100000, actual SE=2.001999
-variance ratio=400.800000, effective n=24.950100
-Effective n here only matches this mean's variance; it is not a universal t degrees-of-freedom rule.`,
+variance ratio=400.800000, effective n=24.950100`,
   },
   welch: {
+    file: "welch_group_comparison.py",
     title: "Use independent-group standard errors when no meaningful pairing exists",
     code: String.raw`import numpy as np
 from scipy import stats
@@ -269,14 +267,13 @@ ci = result.confidence_interval(0.95)
 np.testing.assert_allclose(df, result.df)
 print(f"mean difference={group_a.mean()-group_b.mean():.6f}, SE={se:.6f}, df={df:.6f}")
 print(f"Welch t={result.statistic:.6f}, p={result.pvalue:.6f}")
-print(f"CI95=[{ci.low:.6f}, {ci.high:.6f}]")
-print("The Welch t reference is approximate in general, even for independent normal groups.")`,
+print(f"CI95=[{ci.low:.6f}, {ci.high:.6f}]")`,
     expected: String.raw`mean difference=1.485714, SE=1.500068, df=9.793479
 Welch t=0.990431, p=0.345802
-CI95=[-1.866224, 4.837653]
-The Welch t reference is approximate in general, even for independent normal groups.`,
+CI95=[-1.866224, 4.837653]`,
   },
   wilson: {
+    file: "binomial_interval_boundaries.py",
     title: "Invert a binomial score inequality and expose the zero-success Wald failure",
     code: String.raw`from math import sqrt
 from scipy import stats
@@ -297,16 +294,13 @@ for k, n in [(0, 10), (3, 10), (10, 10)]:
     low, high = wilson(k, n)
     oracle = stats.binomtest(k, n).proportion_ci(method="wilson")
     assert abs(low - oracle.low) < 1e-12 and abs(high - oracle.high) < 1e-12
-    print(f"{k}/{n}: Wilson95=[{low:.6f}, {high:.6f}]")
-print("The plug-in Wald interval at 0/10 is [0,0]; that is not justified certainty.")
-print("Wilson coverage is approximate; discreteness prevents uniform exact 95% coverage.")`,
+    print(f"{k}/{n}: Wilson95=[{low:.6f}, {high:.6f}]")`,
     expected: String.raw`0/10: Wilson95=[0.000000, 0.277533]
 3/10: Wilson95=[0.107791, 0.603222]
-10/10: Wilson95=[0.722467, 1.000000]
-The plug-in Wald interval at 0/10 is [0,0]; that is not justified certainty.
-Wilson coverage is approximate; discreteness prevents uniform exact 95% coverage.`,
+10/10: Wilson95=[0.722467, 1.000000]`,
   },
   signFlip: {
+    file: "paired_sign_enumeration.py",
     title: "Enumerate all 32 sign assignments under an explicit symmetry null",
     code: String.raw`from itertools import product
 import numpy as np
@@ -321,15 +315,12 @@ result = stats.permutation_test((d,), np.mean, permutation_type="samples",
                                 alternative="two-sided", n_resamples=np.inf)
 assert abs(extreme / len(sums) - result.pvalue) < 1e-12
 print(f"observed mean={observed_sum/len(d):.3f} ms")
-print(f"as-or-more-extreme assignments={extreme}/{len(sums)}, p={extreme/len(sums):.6f}")
-print("Assumption: independent sign-symmetric differences around zero, or justified random swaps under a sharp null.")
-print("A zero mean alone does not make every sign assignment equally likely.")`,
+print(f"as-or-more-extreme assignments={extreme}/{len(sums)}, p={extreme/len(sums):.6f}")`,
     expected: String.raw`observed mean=2.000 ms
-as-or-more-extreme assignments=4/32, p=0.125000
-Assumption: independent sign-symmetric differences around zero, or justified random swaps under a sharp null.
-A zero mean alone does not make every sign assignment equally likely.`,
+as-or-more-extreme assignments=4/32, p=0.125000`,
   },
   bootstrap: {
+    file: "empirical_bootstrap_enumeration.py",
     title: "Resample independent paired differences, preserving the chosen statistic",
     code: String.raw`from itertools import product
 import numpy as np
@@ -340,16 +331,13 @@ means = np.array([d[list(indices)].mean() for indices in product(range(len(d)), 
 interval = np.quantile(means, [0.025, 0.975], method="linear")
 print(f"empirical resamples={len(means)}")
 print(f"bootstrap mean={means.mean():.6f}, bootstrap SD={means.std(ddof=0):.6f}")
-print(f"percentile endpoints=[{interval[0]:.6f}, {interval[1]:.6f}]")
-print("Exact enumeration removes Monte Carlo error, not the small-sample approximation of coverage.")
-print("This empirical distribution cannot invent rare workloads missing from the original five pairs.")`,
+print(f"percentile endpoints=[{interval[0]:.6f}, {interval[1]:.6f}]")`,
     expected: String.raw`empirical resamples=3125
 bootstrap mean=2.000000, bootstrap SD=0.748331
-percentile endpoints=[0.400000, 3.200000]
-Exact enumeration removes Monte Carlo error, not the small-sample approximation of coverage.
-This empirical distribution cannot invent rare workloads missing from the original five pairs.`,
+percentile endpoints=[0.400000, 3.200000]`,
   },
   finiteCoverage: {
+    file: "binomial_count_coverage.py",
     title: "Sum binomial probabilities to evaluate actual interval coverage",
     code: String.raw`from math import sqrt
 from scipy import stats
@@ -369,8 +357,7 @@ for true_p in [0.04, 0.2, 0.5]:
     for method, limits in intervals.items():
         coverage = sum(stats.binom.pmf(k, n, true_p)
                        for k, (low, high) in enumerate(limits) if low <= true_p <= high)
-        print(f"  {method}: coverage={coverage:.6f}")
-print("This sums every possible dataset count; no estimated Monte Carlo frequency is involved.")`,
+        print(f"  {method}: coverage={coverage:.6f}")`,
     expected: String.raw`true p=0.04, n=10
   wald: coverage=0.334725
   wilson: coverage=0.941846
@@ -382,7 +369,6 @@ true p=0.20, n=10
 true p=0.50, n=10
   wald: coverage=0.890625
   wilson: coverage=0.978516
-  exact: coverage=0.978516
-This sums every possible dataset count; no estimated Monte Carlo frequency is involved.`,
+  exact: coverage=0.978516`,
   },
 };

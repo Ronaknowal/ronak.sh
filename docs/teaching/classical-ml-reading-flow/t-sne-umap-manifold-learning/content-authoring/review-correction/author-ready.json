@@ -1,0 +1,145 @@
+{
+  "schema": "consolidated-content-correction-author-ready/v1",
+  "status": "AUTHOR_READY_FOR_SAME_R1_R2_R3_CLOSURE",
+  "author": "/root/tsne_consolidated_content_correction",
+  "mode": "content-only correction",
+  "predecessor": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/author-ready.json",
+    "bytes": 6092,
+    "sha256": "1832c1bc6800da4ee0a8e1cf6008485c85bfd0d7ac59c0219cc17d69470b16a7"
+  },
+  "wholeDifferentReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review-packet-source-bound.json",
+    "bytes": 7366,
+    "sha256": "bb5f13a8ab1478b38ed9f6155effd2a746ec064923ce4e6db01fc009b6d1858a"
+  },
+  "acceptedDesign": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-accepted-root.json",
+    "bytes": 58519,
+    "sha256": "a718b0e8d1bb0de830ee9d4254c708211e3826dee91ec7a3f5e485de7fa3e83f"
+  },
+  "manuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/reading-flow-manuscript.md",
+    "bytes": 138332,
+    "sha256": "8d1c32dc7cf8de49b99fd6198671927c52196d7ac5714dd0ec90c70eebfbbec5"
+  },
+  "specifications": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/visual-and-investigation-specifications.md",
+    "bytes": 45697,
+    "sha256": "07aee732555d0a30e519fa7feb1687d58837d4b232640a337b0e500de5a217b3"
+  },
+  "contentMap": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/content-map.json",
+    "bytes": 25152,
+    "sha256": "5fd95e3e7e82523a100d15558a813d728346916772c99fae288408ad92a3367c"
+  },
+  "sourceAndStreamIndex": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/code-presentation-index.json",
+    "bytes": 19011,
+    "sha256": "c145124371947e4e6db3b0dd980099a00db64012d1a44b2688d72c8aa84bfb13"
+  },
+  "fileIndex": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/file-index.json",
+    "bytes": 16604,
+    "sha256": "8db1deee1ea7228840793fe60153be8b7823e4504c04c66c04e4fc6518b12b7e"
+  },
+  "completeProgramBundle": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+    "bytes": 15754,
+    "sha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d"
+  },
+  "assembly": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/assemble-code.py",
+    "bytes": 12501,
+    "sha256": "f0a63b0689d5d063f17211a341e50c3d6c53096bbb5e50dd48bca4a651df95de"
+  },
+  "setup": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/setup-and-files.md",
+    "bytes": 7557,
+    "sha256": "0b11d995f5822d5f5e0182db03248bbad23f8030acc0f2adcc2dd3515635d72c"
+  },
+  "apiAndResources": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/current-api-and-resource-notes.md",
+    "bytes": 5219,
+    "sha256": "f13c791133b5ca15397dc965308bed3482c5bcd5547872b7e93d94b8b8f88ed3"
+  },
+  "authorHandoff": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-reading-and-handoff.md",
+    "bytes": 12500,
+    "sha256": "382bec71a8dfddce9a95b27ed8f950322963621f11f4e6693295d33085ec975a"
+  },
+  "exactDelta": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/exact-source-delta.json",
+    "bytes": 33939,
+    "sha256": "b60aec4a68a02cc29f18e29d8508a4c20d482dda3542d600baa1e204bc2fd5f3"
+  },
+  "scopedNumericalChecks": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/gaussian-row-check.json",
+    "bytes": 4918,
+    "sha256": "9a47d19c829d71cf2f883ce27439686f4b30def8d6e6b1646b55c711bab20b72"
+  },
+  "sourceCheck": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/source-binding-check.json",
+    "bytes": 16489,
+    "sha256": "7972fcf10a8c2e4609de7b7429feea0ca02bfc01ef08cc5fc03f44a246989982"
+  },
+  "originalEvidence": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/new-mechanisms-check.json",
+      "bytes": 24479,
+      "sha256": "1074e1178a0031840638665a9749daa4220f2c22263b59c4b68273eb726f7d89"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/prose-intermediates.json",
+      "bytes": 6026,
+      "sha256": "c141c1f55434532d93c28e11a7f434e975415ca48401ee804f7e75ba0cb933cd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/contrastive-prose-arithmetic.json",
+      "bytes": 752,
+      "sha256": "f3b098ae8658099d8c26ad9eb6d23b82396c2a49f979e3bd28ffe1adc69cb42d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/author-reading-and-handoff.md",
+      "bytes": 10782,
+      "sha256": "1936ee7dd984e3e870b3b8e79c981ee856b9667d185c20ba9ba20623247369d2"
+    }
+  ],
+  "scope": {
+    "sections": 13,
+    "drawings": 45,
+    "investigations": 12,
+    "solvedTasks": 19
+  },
+  "fullPrograms": 15,
+  "fullStreams": 15,
+  "authorAddressedFindings": [
+    "R1",
+    "R2",
+    "R3"
+  ],
+  "authorAddressedAdvisories": [
+    "A1 bounded learner-voice/provenance cleanup",
+    "A2 current GMM status",
+    "A3 distinct future Reader ending roles"
+  ],
+  "reviewerFindingsAwaitingSameClosure": [
+    "R1",
+    "R2",
+    "R3"
+  ],
+  "authorNewRequiredFindings": [],
+  "wholeReadingComposition": "Existing complete author and DIFFERENT reviewer readings remain bound to exact predecessor; fresh author reading is of affected complete continuous sections, complete Gaussian source, complete affected specs/protocol/setup/API notes. No hash is called a new whole human reading.",
+  "qualifications": [
+    "Original scientific campaigns, ten mains, five fits and 41 witnesses were not replayed.",
+    "Gaussian recorded main stream remains bound to the exact preceding source; only 13 bounded current callable cases were executed.",
+    "Source routes and future L7 state contract were checked; browser/native controls and actual paint remain phase-two work.",
+    "All unmodified sources/data/streams remain exact references; no redundant whole physical bundle was created.",
+    "Source guards establish identity, not correctness or acceptance. Whole prior reading plus focused current author reading is not SAME reviewer closure."
+  ],
+  "runtimeStarted": false,
+  "independentReviewClosure": false,
+  "rootContentAcceptance": false,
+  "phasePromoted": false,
+  "next": "Original DIFFERENT reviewer /root/tsne_content_review performs SAME R1-R3 closure against this exact correction, then Root alone assesses content acceptance/private runtime release."
+}

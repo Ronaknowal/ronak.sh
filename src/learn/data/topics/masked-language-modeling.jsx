@@ -1,743 +1,204 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+import { Prose, H2, H3, Code, CodeBlock } from '../../components/content';
+import { MathBlock as SharedMathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { LessonIntro, LessonTable, Sources } from '../../components/lesson-labs/LessonElements.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+import { ContextFigure, CorruptionLab, MaskRateLab, AttentionMaskLab, EmbeddingFigure, EncoderFigure, VocabularyHeadFigure, SelectedLossLab, GradientFigure, DynamicMaskLab, TrainingFigure, TransferFigure, JointFigure, PseudoLikelihoodFigure, ObjectiveFigure } from '../../components/lesson-labs/MaskedLanguageFlow.jsx';
+
+const route = '/learn/path/full-curriculum/';
+const programs = '/learn-code/masked-language-modeling/';
+const MathBlock = ({ children }) => <div className="mlm-math" tabIndex={0} role="region" aria-label="Mathematical relationship"><SharedMathBlock>{children}</SharedMathBlock></div>;
+const Legacy = ({ id }) => <span id={id} aria-hidden="true" />;
+function Exercise({ title, children, hint, solution }) {
+  return <article className="lesson-exercise" data-lesson-exercise=""><H3>{title}</H3>{children}
+    <details><summary>Hint</summary><Prose>{hint}</Prose></details>
+    <details><summary>Solution</summary><Prose>{solution}</Prose></details>
+  </article>;
+}
 
 const maskedLanguageModeling = {
-  title: "Masked Language Modeling (BERT-style)",
-  readTime: "30 min",
-  content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        In late 2018, NLP pretraining was in an awkward middle stage. Peters et al. had shipped ELMo a few months earlier — a bidirectional LSTM trained with two independent causal objectives, one reading left-to-right and one reading right-to-left, then concatenated. Radford et al. had shipped GPT-1, a left-to-right transformer decoder. Both approaches carried the same architectural concession: the language-modeling objective — predict the next token given the past — is inherently one-directional, so any model that wants to see context from both sides has to either run two models and glue the representations together, or give up on seeing the future entirely.
-      </Prose>
-
-      <Prose>
-        That concession was the problem Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova set out to remove. Their October 2018 preprint, "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding" (arXiv:1810.04805), made one operational change with outsized consequences. Rather than predicting the next token, the model would predict <em>missing</em> tokens — 15% of the input would be hidden at random, and the model would reconstruct them from the visible 85% on both sides. Dropping the left-to-right constraint allowed every position to attend to every other position at every layer. The representation of each token integrates evidence from the entire sentence in a single forward pass rather than being assembled after the fact from two directional passes.
-      </Prose>
-
-      <Prose>
-        The consequences were immediate and benchmark-dominating. BERT-large, a 340M-parameter encoder, lifted GLUE from 72.8 to 80.5, SQuAD v1.1 F1 from 91.6 to 93.2, and MultiNLI accuracy from 82.1 to 86.7 — double-digit jumps on tasks that had been moving by tenths of a point. The whole encoder-pretraining wave — BERT, RoBERTa, DeBERTa, ELECTRA, ALBERT, XLM-R — rode on this one objective. It is the reason classification, NER, retrieval, and sentence embeddings all went through an encoder era before the decoder models caught up.
-      </Prose>
-
-      <Prose>
-        Masked language modeling has since been mostly displaced as <em>the</em> default pretraining objective by causal LM, for reasons this topic covers in section 8. But it did not vanish. The best sentence-embedding models in production in 2026 — BGE, E5, GTE, and their multilingual variants — are still MLM-pretrained encoders with contrastive fine-tuning on top. DeBERTa-v3 still leads several GLUE and SuperGLUE tasks at modest scale. The half of every RAG pipeline that turns text into vectors is, quietly, a masked language model. The objective lost the generation race; it kept the representation race.
-      </Prose>
-
-      <Prose>
-        The central tension is worth stating up front. Causal LM gets a prediction target at every position — 100% gradient coverage, streaming inference, tractable sampling, and the full likelihood as a training signal. MLM gets a prediction target at only 15% of positions — sparser supervision per example — but in exchange it gets to use both the left and right context at every layer. For tasks where what matters is a good representation of a fixed input, that trade is worth it. For tasks where what matters is producing new text, it is not. The rest of this topic is about why, exactly, that trade shakes out the way it does, and how to implement MLM well enough to see the tradeoffs at the level of a tensor rather than an abstract argument.
-      </Prose>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        Two ideas do most of the work. Neither is exotic on its own; the power comes from combining them.
-      </Prose>
-
-      <H3>2a. Bidirectional attention</H3>
-
-      <Prose>
-        In a causal transformer, the attention mask is a strict lower-triangular matrix: position <Code>t</Code> can attend to positions <Code>1..t-1</Code> and nothing else. Remove that mask and every position attends to every other position in every layer. The representation of the token at position 3 integrates information from position 7 at the same time and with the same mechanism that the representation of position 7 integrates information from position 3. The attention matrix is full, the computation is bidirectional, and the result is a per-position embedding that has already seen everything it will ever see.
-      </Prose>
-
-      <Prose>
-        The word <em>bank</em> is the standard illustration. In the sentence "she deposited money at the bank," a causal model processes <em>bank</em> before it has seen "money" or "deposited" — it has to revise the representation later, through additional layers that refer back to the earlier position via subsequent attention. A bidirectional model sees the full sentence at once, and the first layer's representation of <em>bank</em> already reflects both "deposited money" and whatever follows. Similarly, "the river bank was muddy" disambiguates <em>bank</em> via the left-context word "river," which a causal model handles naturally but a bidirectional model also handles naturally through the same mechanism. Where the two diverge is on sentences where the disambiguating evidence appears after the token in question — the common case — and there the bidirectional model is structurally advantaged.
-      </Prose>
-
-      <H3>2b. Masking as self-supervision</H3>
-
-      <Prose>
-        Causal LM turns unlabeled text into a supervised task by making the next token the label. MLM does the analogous trick sideways. Hide 15% of the input tokens; ask the model to reconstruct them from the 85% that remain visible. Every sentence in every training corpus becomes a fill-in-the-blanks puzzle the model solves with cross-entropy, and the labels come for free — they are the tokens that were hidden.
-      </Prose>
-
-      <Prose>
-        The trade-off built into this design is supervision density. Causal LM scores a prediction at every position (100% coverage), because every position has a "next token" to predict. MLM only scores predictions at the masked positions (15% coverage), because every non-masked position is evidence rather than target. That factor-of-six difference in gradient coverage is where a large part of MLM's scaling weakness comes from — same forward cost per token, fewer bits of learning signal extracted per forward pass. The tradeoff the field accepted in 2018, and walked back around 2020, is that the extra bidirectional context per masked prediction is richer than the causal prediction at every position, on <em>understanding</em> tasks. For generation, the bit-efficiency of causal LM wins.
-      </Prose>
-
-      <Prose>
-        The mental model is this: <strong>MLM turns each sentence into a small cloze-style exam, sampled at 15% of positions, graded with cross-entropy against the vocabulary.</strong> The model's job is to be good at that exam. What it learns in the process is not a distribution it can sample from autoregressively — there is no chain-rule factorization over the masked positions — but a representation of every position that has integrated evidence from every other position. That representation is what ends up being reused for everything else.
-      </Prose>
-
-      <TokenStream
-        label="bert-style masked input (15% of tokens replaced, 80/10/10 split)"
-        tokens={[
-          { label: "The", color: colors.textSecondary },
-          { label: " cat", color: colors.textSecondary },
-          { label: " [MASK]", color: "#f87171", title: "80% case: replaced with [MASK]" },
-          { label: " on", color: colors.textSecondary },
-          { label: " the", color: colors.textSecondary },
-          { label: " bird", color: colors.gold, title: "10% case: replaced with a random token (true was 'mat')" },
-          { label: " .", color: colors.textSecondary },
-        ]}
-      />
-
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Math foundation</H2>
-
-      <Prose>
-        Let <Code>x = (x₁, ..., x_N)</Code> be a sequence of tokens from a vocabulary of size <Code>V</Code>. Let <Code>M ⊂ {"{1, ..., N}"}</Code> be the set of positions selected for masking — typically <Code>|M| ≈ 0.15 · N</Code>. Let <Code>x̃</Code> be the corrupted input: at every position <Code>i ∈ M</Code>, the token <Code>xᵢ</Code> has been replaced according to the 80/10/10 rule described in section 3b. At every position <Code>i ∉ M</Code>, <Code>x̃ᵢ = xᵢ</Code>.
-      </Prose>
-
-      <H3>3a. The MLM loss</H3>
-
-      <Prose>
-        The model <Code>p_θ</Code> takes the full corrupted input <Code>x̃</Code> and produces, at every position, a distribution over the vocabulary. The training loss is the negative log-likelihood of the <em>original</em> tokens at the <em>masked</em> positions, averaged over the mask:
-      </Prose>
-
-      <MathBlock>
-        {"\\mathcal{L}_{\\text{MLM}}(\\theta) \\;=\\; -\\frac{1}{|M|} \\sum_{i \\in M} \\log p_\\theta\\!\\left( x_i \\mid \\tilde{x} \\right)"}
-      </MathBlock>
-
-      <Prose>
-        Three details in this equation do a lot of work. First, the conditioning is on <Code>x̃</Code> — the full corrupted sequence, including both masked and visible positions — not on the surrounding unmasked tokens only. The model sees the mask tokens and knows where they are; it is using that positional knowledge as part of the context. Second, the sum is over <Code>i ∈ M</Code>, not over all positions. The model produces logits everywhere (the head is applied at every position, in parallel), but the loss ignores the positions that were not masked. Using <Code>ignore_index=-100</Code> in PyTorch's <Code>cross_entropy</Code> is the standard idiom for this. Third, the normalization is <Code>1/|M|</Code>, not <Code>1/N</Code>. If you divide by the total sequence length, you end up implicitly weighting shorter masked sets more heavily (a 10-token sentence with 2 masks vs a 100-token sentence with 15 masks), which muddies the loss across batch elements of different lengths.
-      </Prose>
-
-      <Prose>
-        A useful baseline. If the model produced a uniform distribution over the vocabulary at every masked position, the expected loss would be <Code>log(V)</Code>. For BERT's 30,522-token WordPiece vocabulary, <Code>log(30522) ≈ 10.33</Code>. A well-trained BERT-base reaches roughly <Code>1.5 – 2.0</Code> on held-out English — three orders of magnitude better than uniform, which is the order of magnitude of improvement the field calls "language modeling works." Any from-scratch implementation should cross below 2.3 (<Code>log(10)</Code>) quickly on a toy corpus; if it doesn't, there is a bug in the masking or the loss.
-      </Prose>
-
-      <H3>3b. The 80/10/10 rule</H3>
-
-      <Prose>
-        Of the 15% of positions selected for masking, BERT's original recipe splits them three ways: 80% get replaced with the special <Code>[MASK]</Code> token, 10% get replaced with a uniformly random token drawn from the vocabulary, and 10% are left unchanged. All three categories are scored by the loss — the model has to predict the original token whether it sees <Code>[MASK]</Code>, a random wrong token, or the true token unchanged. The split looks arbitrary; it is not. It is the carefully calibrated fix for a train-test mismatch.
-      </Prose>
-
-      <Prose>
-        <strong>The problem.</strong> The <Code>[MASK]</Code> token appears frequently during pretraining but never appears at fine-tuning or inference time on real inputs. If the model learned that "prediction required" is perfectly correlated with "this position contains <Code>[MASK]</Code>," then its internal representations at non-<Code>[MASK]</Code> positions would not need to be good at token reconstruction — the model would know those positions are evidence, not targets, and could de-prioritize representing them well. At inference time, when <em>every</em> position is a non-<Code>[MASK]</Code> position the model needs a genuinely informative representation of, this shortcut would hurt.
-      </Prose>
-
-      <Prose>
-        <strong>The fix.</strong> The 10% random replacement and the 10% unchanged replacement together break the correlation between "saw <Code>[MASK]</Code>" and "need to predict." When 10% of the positions that look like normal tokens are actually wrong tokens that the model must correct, and another 10% look normal and are actually correct but must still be predicted as themselves, the model cannot use the surface form of a position to infer whether it will be graded there. It has to maintain a prediction-ready representation at every position it sees, which is exactly the representation fine-tuning will want. The numbers 80/10/10 are not magic — Liu et al.'s RoBERTa paper (section 4) ablated the ratios and found the exact split mattered little within ±10% — but the <em>existence</em> of non-<Code>[MASK]</Code> replacements matters substantially.
-      </Prose>
-
-      <H3>3c. MLM is not a language model</H3>
-
-      <Prose>
-        One subtlety worth naming. Causal LM factors the joint distribution over a sequence via the chain rule: <Code>p(x₁, ..., x_N) = ∏ p(xₜ | x_{"<t"})</Code>. Minimizing causal cross-entropy is equivalent to maximum-likelihood estimation of the joint. MLM has no such factorization. The quantity <Code>p_θ(xᵢ | x̃)</Code> is the model's conditional probability at one masked position given the corrupted input — and the model computes these conditionals <em>independently</em> at every masked position, as if they were unconditional on each other. They are not, obviously: the true joint over masked positions has rich structure (the two masked tokens might refer to the same entity, for instance). MLM approximates that joint by its product of marginals, which is why you cannot sample from BERT in one pass and expect a coherent completion.
-      </Prose>
-
-      <Prose>
-        This is not a bug if you are using MLM for representation learning — the objective is still a legitimate per-position classification task, and the representations it produces are excellent. It is a problem if you try to use an MLM-pretrained model for generation, which is the subject of section 8.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        The best way to build intuition is to run the smallest possible MLM end-to-end: bidirectional attention, 80/10/10 masking, masked cross-entropy, and a toy training loop that produces loss curves you can squint at. Every output comment in this section is the verbatim output of actually running the code — not a reconstruction. The entire thing is under 200 lines and trains in a few seconds on CPU.
-      </Prose>
-
-      <H3>4a. Bidirectional self-attention</H3>
-
-      <Prose>
-        Start from any causal self-attention implementation and delete exactly one line — the <Code>masked_fill</Code> that adds <Code>-inf</Code> to the upper triangle of the score matrix. What remains is bidirectional self-attention. The only other change is that padding positions still need to be masked out, because PAD tokens are not real inputs and should not receive attention from other positions.
-      </Prose>
-
-      <CodeBlock language="python">
-{`class BidirectionalSelfAttention(nn.Module):
-    def __init__(self, d, heads):
-        super().__init__()
-        self.h, self.dk = heads, d // heads
-        self.qkv = nn.Linear(d, 3 * d)
-        self.out = nn.Linear(d, d)
-
-    def forward(self, x, pad_mask):
-        B, T, d = x.shape
-        qkv = self.qkv(x).view(B, T, 3, self.h, self.dk).permute(2, 0, 3, 1, 4)
-        q, k, v = qkv[0], qkv[1], qkv[2]               # (B, h, T, dk)
-        scores = (q @ k.transpose(-2, -1)) / math.sqrt(self.dk)
-        if pad_mask is not None:
-            scores = scores.masked_fill(pad_mask[:, None, None, :], -1e9)
-        # NOTE: no causal mask. Every non-PAD position attends to every other.
-        attn = F.softmax(scores, dim=-1)
-        out = (attn @ v).transpose(1, 2).contiguous().view(B, T, d)
-        return self.out(out)`}
-      </CodeBlock>
-
-      <Prose>
-        The one-line change from causal to bidirectional is genuinely that small. The structural implication is much larger: the attention matrix is now full (every cell used, not just the lower triangle), which means the memory and compute cost of attention is <em>double</em> a causal model's at the same sequence length in the naive implementation. Flash-attention implementations collapse that factor back to one, but the fully-populated attention matrix is a real operational difference that shows up in profiling.
-      </Prose>
-
-      <H3>4b. The 80/10/10 masking function</H3>
-
-      <Prose>
-        The masking function is the single most bug-prone piece of an MLM implementation. Its job is to produce a corrupted input and a label tensor that is <Code>-100</Code> (the ignore index) at positions that should not contribute to the loss and the original token id at positions that should. There are four cases to handle: unselected (<Code>-100</Code>), selected and <Code>[MASK]</Code>-replaced (label is original token, input is <Code>[MASK]</Code>), selected and random-replaced (label is original, input is random), selected and unchanged (label is original, input is also original).
-      </Prose>
-
-      <CodeBlock language="python">
-{`def mask_tokens(x, mask_prob=0.15, vocab_size=V):
-    """
-    Returns (masked_input, labels) where labels = -100 at unmasked positions
-    (standard cross-entropy ignore_index). Implements BERT's 80/10/10 rule.
-    Never selects PAD positions.
-    """
-    labels = x.clone()
-    # select 15% of non-PAD positions for prediction
-    probs = torch.full(x.shape, mask_prob)
-    probs = probs.masked_fill(x == PAD, 0.0)
-    selected = torch.bernoulli(probs).bool()
-    labels[~selected] = -100                          # ignore unselected
-
-    # of the selected: 80% -> [MASK], 10% -> random, 10% -> unchanged
-    replace_mask = torch.bernoulli(torch.full(x.shape, 0.8)).bool() & selected
-    random_mask = (torch.bernoulli(torch.full(x.shape, 0.5)).bool()
-                   & selected & ~replace_mask)
-
-    out = x.clone()
-    out[replace_mask] = MASK
-    rand_tok = torch.randint(len(SPECIALS), vocab_size, x.shape, dtype=x.dtype)
-    out[random_mask] = rand_tok[random_mask]
-    # remaining selected positions stay unchanged in out — intentional.
-    return out, labels`}
-      </CodeBlock>
-
-      <Prose>
-        The Bernoulli-cascade trick is worth understanding. To split the selected positions 80/10/10, generate one Bernoulli draw per position at probability 0.8 to decide the <Code>[MASK]</Code> fraction, then among the <em>remaining</em> selected positions (not already chosen for <Code>[MASK]</Code>), draw again at probability 0.5 — half of the remaining 20% goes to random, the other half stays unchanged. The final fractions come out to approximately 80/10/10 in expectation. Implementing this as three separate mutually-exclusive Bernoullis is equivalent but slightly more code; the cascade is what HuggingFace's <Code>DataCollatorForLanguageModeling</Code> does internally.
-      </Prose>
-
-      <H3>4c. Training loop</H3>
-
-      <Prose>
-        The training loop is identical to a causal LM's except for two lines: it calls <Code>mask_tokens</Code> to produce the input and labels, and passes <Code>ignore_index=-100</Code> to cross-entropy so that unmasked positions do not contribute. Everything else is standard AdamW with gradient clipping.
-      </Prose>
-
-      <CodeBlock language="python">
-{`model = TinyBERT(V)                                    # 2 layers, d=64, heads=4
-opt = torch.optim.AdamW(model.parameters(), lr=1e-3)
-
-for step in range(301):
-    masked, labels = mask_tokens(X, 0.15)
-    logits = model(masked)                             # (B, T, V)
-    loss = F.cross_entropy(
-        logits.view(-1, V), labels.view(-1),
-        ignore_index=-100,
-    )
-    opt.zero_grad()
-    loss.backward()
-    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-    opt.step()`}
-      </CodeBlock>
-
-      <Prose>
-        Running this on a ten-sentence toy corpus (cat/dog/mat/floor vocabulary, ~20 token types) produces the following loss and masked-position-accuracy curve. These are the real numbers from the run used to verify this topic.
-      </Prose>
-
-      <CodeBlock language="text">
-{`step    0  loss=36.97  acc@masked=0.250   # random init: log(V) ~ 3.0, wild init
-step   30  loss=1.33   acc@masked=0.778
-step   60  loss=1.66   acc@masked=0.444
-step   90  loss=1.60   acc@masked=0.778
-step  120  loss=1.05   acc@masked=0.500
-step  150  loss=0.76   acc@masked=0.750
-step  180  loss=0.79   acc@masked=0.500
-step  210  loss=0.02   acc@masked=1.000
-step  240  loss=0.16   acc@masked=0.900
-step  270  loss=0.40   acc@masked=0.900
-step  300  loss=0.09   acc@masked=1.000`}
-      </CodeBlock>
-
-      <Prose>
-        The loss is noisy on such a small batch — a single example with three masks can flip accuracy between 0.67 and 1.0 step-over-step — but the trajectory is clear. The model crosses <Code>log(V)</Code> (roughly 3.0 for this vocabulary) by step 30 and converges to near-zero loss on the training set by step 200. The noise comes from the fact that which positions get masked changes every step (dynamic masking, à la RoBERTa), so the exam changes too.
-      </Prose>
-
-      <H3>4d. Fill-mask on held-out sentences</H3>
-
-      <Prose>
-        The test that matters is whether the model does something sensible when asked to fill a mask at a position it has not seen masked during training. The following four test sentences were not in the training corpus; the model's top-3 predictions at each masked position:
-      </Prose>
-
-      <CodeBlock language="text">
-{`'the cat sat on the [MASK]'
-    top3 -> [('mat', 1.000), ('floor', 0.000), ('dog', 0.000)]
-
-'the dog sat on the [MASK]'
-    top3 -> [('floor', 1.000), ('cat', 0.000), ('mat', 0.000)]
-
-'the [MASK] barked at the cat'
-    top3 -> [('dog', 0.989), ('mat', 0.011), ('bird', 0.000)]
-
-'a [MASK] chased a dog'
-    top3 -> [('cat', 1.000), ('a', 0.000), ('dog', 0.000)]`}
-      </CodeBlock>
-
-      <Prose>
-        Every prediction is the token the corpus statistics want. "cat sat on the" fills with "mat" because the training corpus pairs cats with mats; "dog sat on the" fills with "floor" because the corpus pairs dogs with floors. The "barked" prediction uses right-context ("at the cat") to infer that the masked position is an agent that barks at cats — a dog. This is bidirectional attention doing the work. A causal model would have filled the <Code>[MASK]</Code> at position 1 of "the [MASK] barked at the cat" using only the single preceding token "the," which is essentially uninformative; the bidirectional model gets to use every token after the mask as well.
-      </Prose>
-
-      <H3>4e. Downstream classification demo</H3>
-
-      <Prose>
-        The other half of the MLM story is what happens when you freeze the pretrained encoder and stack a task head on top. The canonical test: take the trained MLM, freeze all its weights, add a two-class linear head over the mean-pooled non-PAD positions, train only the head on a tiny labeled dataset (six sentences: three mentioning cats, three mentioning dogs). The numbers:
-      </Prose>
-
-      <CodeBlock language="text">
-{`cls step   0  loss=0.7789  acc=0.000
-cls step  10  loss=0.3806  acc=1.000
-cls step  20  loss=0.1849  acc=1.000
-cls step  30  loss=0.1019  acc=1.000
-cls step  40  loss=0.0652  acc=1.000
-cls step  50  loss=0.0469  acc=1.000`}
-      </CodeBlock>
-
-      <Prose>
-        The frozen encoder's representations separate the two classes well enough that a single linear layer trained for ten steps reaches 100% accuracy. This is the reason MLM pretraining was so useful in practice: the cost of adapting the model to a new task collapses to training one small head on a small labeled set. The encoder does the hard part during pretraining, once, on unlabeled text.
-      </Prose>
-
-      <Prose>
-        The full runnable file is 200 lines and trains in under ten seconds on a CPU. If any of the outputs above do not reproduce when you run your own version, the usual suspects are: (1) the ignore index not being set on cross-entropy, so unmasked positions are being graded as if they should predict themselves; (2) PAD positions being included in the mask selection, which corrupts loss normalization; (3) the random replacement not drawing from the full vocabulary, which biases the error distribution. Sections 9 covers these and other failure modes in more detail.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        The HuggingFace <Code>transformers</Code> library ships several MLM models with a one-line API. The most canonical is <Code>bert-base-uncased</Code>, the 110M-parameter original from Devlin et al. 2018 — 12 layers, 768 hidden, 12 heads, 30,522-token WordPiece vocabulary. The <Code>fill-mask</Code> pipeline wraps tokenization, the forward pass, and top-k decoding into a single call.
-      </Prose>
-
-      <CodeBlock language="python">
-{`from transformers import pipeline
-
-fill = pipeline("fill-mask", model="bert-base-uncased", top_k=5)
-
-for sent in [
-    "The cat sat on the [MASK].",
-    "Paris is the [MASK] of France.",
-    "She opened the [MASK] and stepped inside.",
-]:
-    print(sent)
-    for r in fill(sent):
-        print(f"  {r['token_str']!r:>10}  p={r['score']:.3f}")`}
-      </CodeBlock>
-
-      <Prose>
-        Running this against the real model (verbatim output from the run used to verify this topic):
-      </Prose>
-
-      <CodeBlock language="text">
-{`The cat sat on the [MASK].
-     'floor'  p=0.314
-       'bed'  p=0.119
-     'couch'  p=0.107
-      'sofa'  p=0.060
-    'ground'  p=0.055
-
-Paris is the [MASK] of France.
-   'capital'  p=0.997
-     'heart'  p=0.001
-    'center'  p=0.000
-    'centre'  p=0.000
-      'city'  p=0.000
-
-She opened the [MASK] and stepped inside.
-      'door'  p=0.965
-      'gate'  p=0.007
-     'doors'  p=0.006
-    'window'  p=0.002
-   'doorway'  p=0.001`}
-      </CodeBlock>
-
-      <Prose>
-        Three things are instructive here. First, the distribution at "cat sat on the [MASK]" is genuinely diffuse — BERT is uncertain in exactly the place where a sensible model should be, because cats sit on many things. A model that returned "mat" with probability 0.95 would be overfit. Second, "Paris is the [MASK] of France" is an almost-peaked distribution, 0.997 on "capital," because world knowledge strongly constrains the answer. Third, "she opened the [MASK] and stepped inside" uses the right-context phrase "stepped inside" to narrow the distribution to things one opens and walks through — door, gate, doorway — in a way that would be impossible for a strictly causal model at this position.
-      </Prose>
-
-      <Prose>
-        For programmatic use beyond fill-in-the-blank demos, the raw API is what the pipeline wraps. Below, a manual forward pass extracts the hidden state at the first masked position — this is the representation you would feed into a classification head or a retrieval index:
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-from transformers import AutoTokenizer, AutoModelForMaskedLM
-
-tok = AutoTokenizer.from_pretrained("bert-base-uncased")
-m = AutoModelForMaskedLM.from_pretrained("bert-base-uncased")
-m.eval()
-
-inputs = tok("The cat sat on the [MASK].", return_tensors="pt")
-mask_pos = (inputs.input_ids[0] == tok.mask_token_id).nonzero().item()
-
-with torch.no_grad():
-    out = m(**inputs, output_hidden_states=True)
-
-logits = out.logits[0, mask_pos]          # (V,) — over vocab at mask position
-probs  = logits.softmax(-1)
-topk = torch.topk(probs, 5)
-for tid, p in zip(topk.indices, topk.values):
-    print(f"  {tok.decode(tid)!r:>10}  p={p.item():.3f}")
-
-# hidden state at mask position — for downstream tasks, retrieval, etc.
-h_mask = out.hidden_states[-1][0, mask_pos]   # shape (768,)`}
-      </CodeBlock>
-
-      <Prose>
-        Production use beyond the vanilla fill-mask pipeline almost always looks like this. For classification, the hidden state at <Code>[CLS]</Code> (position 0, by convention) is pooled into a linear head. For sentence embeddings in retrieval, the hidden states across all tokens are mean-pooled and L2-normalized, then fed to a dense vector index (FAISS, HNSW, or a managed service). For NER, the per-position hidden states feed into a per-position label head. The MLM objective itself is rarely the inference task — it is the pretraining task that produces the hidden states every downstream head consumes.
-      </Prose>
-
-      <Prose>
-        Beyond <Code>bert-base-uncased</Code>, the encoder zoo is deep. <Code>roberta-base</Code> is the 2019 retraining of BERT with dynamic masking, no NSP objective, more data, and longer training; it beats BERT on essentially every benchmark at the same parameter count. <Code>microsoft/deberta-v3-base</Code> is the 2021 state-of-the-art for modest-scale classification, with disentangled attention and an enhanced mask decoder. <Code>FacebookAI/xlm-roberta-large</Code> is the go-to multilingual encoder, trained on 2.5TB of CommonCrawl data across 100 languages. <Code>google/electra-base-discriminator</Code> is the ELECTRA approach. In practice, for a new classification or retrieval project in 2026, the default is "take DeBERTa-v3-base and fine-tune" unless multilingual coverage is a hard requirement, in which case it's XLM-RoBERTa.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <Prose>
-        Three views of MLM in motion: the input-to-output transformation, the attention pattern that makes bidirectionality concrete, and the training curves.
-      </Prose>
-
-      <H3>6a. The input/output transformation</H3>
-
-      <Prose>
-        A single training example moves through three states: original text, masked input, reconstructed prediction. The grey tokens are unchanged, the red is the <Code>[MASK]</Code> replacement, the gold is a random-token replacement that the model must correct back, and the green tokens are the model's successful predictions at the masked positions.
-      </Prose>
-
-      <TokenStream
-        label="1. original sentence (ground truth)"
-        tokens={[
-          { label: "The", color: colors.textSecondary },
-          { label: " cat", color: colors.textSecondary },
-          { label: " sat", color: colors.textSecondary },
-          { label: " on", color: colors.textSecondary },
-          { label: " the", color: colors.textSecondary },
-          { label: " mat", color: colors.textSecondary },
-          { label: " .", color: colors.textSecondary },
-        ]}
-      />
-
-      <TokenStream
-        label="2. masked input — 80/10/10 applied at 2 positions (indices 2 and 5)"
-        tokens={[
-          { label: "The", color: colors.textSecondary },
-          { label: " cat", color: colors.textSecondary },
-          { label: " [MASK]", color: "#f87171", title: "80% case: [MASK] replacement of 'sat'" },
-          { label: " on", color: colors.textSecondary },
-          { label: " the", color: colors.textSecondary },
-          { label: " bird", color: colors.gold, title: "10% case: random-token replacement of 'mat'" },
-          { label: " .", color: colors.textSecondary },
-        ]}
-      />
-
-      <TokenStream
-        label="3. model predictions at masked positions — top-1 argmax"
-        tokens={[
-          { label: "The", color: colors.textSecondary },
-          { label: " cat", color: colors.textSecondary },
-          { label: " sat", color: colors.green, title: "model predicted 'sat' — correct" },
-          { label: " on", color: colors.textSecondary },
-          { label: " the", color: colors.textSecondary },
-          { label: " mat", color: colors.green, title: "model predicted 'mat' — correct, overriding the random 'bird'" },
-          { label: " .", color: colors.textSecondary },
-        ]}
-      />
-
-      <Prose>
-        The second panel is the crucial one for understanding the 80/10/10 rule. Position 5 was originally "mat," got randomly replaced with "bird," and the model's job is to produce "mat" anyway — to notice that "the cat sat on the bird" is statistically implausible compared to "the cat sat on the mat," and to correct accordingly. That correction is only possible if the model has learned to produce good representations at positions that look like ordinary tokens, which is exactly what the 10% random-replacement case trains it to do.
-      </Prose>
-
-      <H3>6b. Bidirectional attention pattern</H3>
-
-      <Prose>
-        The attention-weight matrix for a single head on a 7-token sentence, compared between a causal model and a bidirectional model. Values are post-softmax attention weights (rows sum to 1); darker gold means higher weight. Rows are the <em>query</em> position (where the attention is coming from), columns are the <em>key</em> position (where it is going to). The causal matrix is lower-triangular by construction — position 3 cannot attend to position 7. The bidirectional matrix is full — every cell is populated.
-      </Prose>
-
-      <Heatmap
-        label="causal attention — lower-triangular, past-only"
-        rowLabels={["the", "cat", "sat", "on", "the", "[MASK]", "."]}
-        colLabels={["the", "cat", "sat", "on", "the", "[MASK]", "."]}
-        matrix={[
-          [1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
-          [0.40, 0.60, 0.00, 0.00, 0.00, 0.00, 0.00],
-          [0.20, 0.35, 0.45, 0.00, 0.00, 0.00, 0.00],
-          [0.15, 0.25, 0.30, 0.30, 0.00, 0.00, 0.00],
-          [0.12, 0.18, 0.25, 0.20, 0.25, 0.00, 0.00],
-          [0.10, 0.20, 0.25, 0.15, 0.15, 0.15, 0.00],
-          [0.10, 0.15, 0.20, 0.15, 0.15, 0.15, 0.10],
-        ]}
-        cellSize={40}
-      />
-
-      <Heatmap
-        label="bidirectional attention — full, past-and-future"
-        rowLabels={["the", "cat", "sat", "on", "the", "[MASK]", "."]}
-        colLabels={["the", "cat", "sat", "on", "the", "[MASK]", "."]}
-        matrix={[
-          [0.15, 0.18, 0.15, 0.12, 0.15, 0.15, 0.10],
-          [0.18, 0.22, 0.17, 0.10, 0.12, 0.15, 0.06],
-          [0.10, 0.20, 0.20, 0.15, 0.10, 0.20, 0.05],
-          [0.10, 0.15, 0.20, 0.20, 0.15, 0.15, 0.05],
-          [0.12, 0.12, 0.15, 0.15, 0.20, 0.20, 0.06],
-          [0.08, 0.25, 0.22, 0.10, 0.12, 0.18, 0.05],
-          [0.10, 0.14, 0.15, 0.14, 0.15, 0.22, 0.10],
-        ]}
-        cellSize={40}
-      />
-
-      <Prose>
-        The sixth row — the <Code>[MASK]</Code> position — is the one to watch. In the causal matrix, the mask at position 5 can only attend to positions 0–5, so the prediction is conditioned on the left context "the cat sat on the" alone. In the bidirectional matrix, the mask row puts meaningful attention weight on position 1 ("cat," the subject) <em>and</em> position 6 (the period, signaling sentence end), while still attending to the rest. The prediction uses information from both sides. On the specific example in section 5, this is why BERT's top-5 predictions for "cat sat on the [MASK]" include "floor," "bed," "couch," and "ground" — tokens chosen because they are plausible objects of "sat on" <em>and</em> consistent with the sentence ending at that position.
-      </Prose>
-
-      <H3>6c. Training curves</H3>
-
-      <Prose>
-        Loss at masked positions and accuracy at masked positions over training steps for the from-scratch run in section 4. The loss curve is jagged (dynamic masking + tiny batch) but trends down through the <Code>log(V) ≈ 3.0</Code> baseline by step 30 and reaches near-zero loss by step 200. The accuracy curve mirrors it: 25% (roughly 1/V) at initialization, crossing into the high-agreement regime by step 100, reaching 100% by step 200 on the training set.
-      </Prose>
-
-      <Plot
-        label="mlm training — loss and masked-position accuracy"
-        width={520}
-        height={240}
-        xLabel="training step"
-        yLabel="loss / accuracy"
-        series={[
-          { name: "loss (masked positions)", color: colors.gold, points: [[0, 3.5], [30, 1.33], [60, 1.66], [90, 1.60], [120, 1.05], [150, 0.76], [180, 0.79], [210, 0.02], [240, 0.16], [270, 0.40], [300, 0.09]] },
-          { name: "accuracy @ masked", color: colors.green, points: [[0, 0.25], [30, 0.78], [60, 0.44], [90, 0.78], [120, 0.50], [150, 0.75], [180, 0.50], [210, 1.00], [240, 0.90], [270, 0.90], [300, 1.00]] },
-        ]}
-      />
-
-      <Prose>
-        The step-0 loss on the actual run was 36.97 because of a large random init in the tied output head — a real artifact of MLM models where the output projection shares weights with the input embedding. For plotting, the initial point is clipped to <Code>log(V) ≈ 3.5</Code>, the "uninformed" baseline; the curve from step 30 onward is the real one. On a realistic pretraining run (billions of tokens, standard BERT-base recipe), the loss drops from <Code>log(V) ≈ 10.3</Code> to below 2 in the first few hundred thousand steps and then grinds down asymptotically toward 1.5 over the remainder of training. The trajectory matters less than the fact that it is monotone at the large scale.
-      </Prose>
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <Prose>
-        MLM is one of four mainstream pretraining objectives on the menu in 2026. The choice between them is rarely close — the use case usually forces the answer.
-      </Prose>
-
-      <CodeBlock>
-{`                     MLM            Causal LM      Prefix LM      T5 span corruption
-                     (BERT)         (GPT/Llama)    (UniLM/GLM)    (T5/mT5)
-direction            bidirectional  left-only      bidir prefix,  bidirectional
-                                                   causal suffix
-gradient coverage    15% of tokens  100%           ~50%           ~15% (but spans)
-generation           no             yes            yes            yes
-classification head  linear on [CLS]  linear on last  linear        text-to-text output
-scaling behavior     plateaus       power-law      in-between     power-law
-zero-shot            weak           strong         moderate       strong (task as text)
-multilingual         mBERT, XLM-R   mT5/XGLM       -              mT5, NLLB
-sentence embeddings  strong         moderate       moderate       moderate
-long-range reasoning weak           strong         moderate       moderate
-famous users         BERT,          GPT-4, Llama,  UniLM,         T5, mT5, UL2
-                     RoBERTa,       Mistral,       GLM
-                     DeBERTa        Claude, Gemma  `}
-      </CodeBlock>
-
-      <Prose>
-        <strong>Pick MLM when</strong> you need the best-possible fixed-length representation of a fixed-length input at modest scale and low latency. Sentence classification (sentiment, topic), named-entity recognition, relation extraction, sentence embedding for retrieval or deduplication, cloze-style probing of factual knowledge, reranking in a retrieval pipeline. The encoder does its work once at ingest time and you fine-tune a small head for each new task. A DeBERTa-v3-base fine-tune for a classification task in production in 2026 still routinely outperforms zero-shotting an open-weights 7B decoder, at one-twentieth the latency and one-hundredth the cost per query.
-      </Prose>
-
-      <Prose>
-        <strong>Pick causal LM when</strong> you need to generate new text. Chat, summarization, translation, code, tool use, reasoning traces. Also when you need zero-shot or few-shot flexibility across many tasks without fine-tuning — the "model as universal interface" property that GPT-3 demonstrated. Modern frontier models are all causal. This is the default for any user-facing product where the output is text.
-      </Prose>
-
-      <Prose>
-        <strong>Pick prefix LM when</strong> you want something between the two — a bidirectional encoding of a prefix (the input prompt), then causal generation for the suffix (the output). UniLM (Dong et al. 2019) and GLM (Du et al. 2022) implement this via attention-mask tricks inside a single transformer. The appeal is that tasks like seq2seq summarization naturally split into "read the input bidirectionally" and "generate the output causally." In practice the payoff over pure causal LM has been modest at scale, and most frontier models skip this variant.
-      </Prose>
-
-      <Prose>
-        <strong>Pick T5-style span corruption when</strong> your goal is to unify every task as text-to-text. T5 corrupts contiguous <em>spans</em> of 2–3 tokens rather than single tokens, and the model learns to generate the missing spans autoregressively. This is strictly a generalization of MLM — set the span length to 1 and you recover token-level masking — and it combines the bidirectional-encoding advantage with generative flexibility. The objective is more expressive than MLM (the decoder can generate multi-token spans, handling long-range dependencies MLM can't) and more efficient at extracting supervision than single-token MLM. T5, mT5, UL2, and the Flan-T5 family all use it.
-      </Prose>
-
-      <H3>7a. Cloze-style classification</H3>
-
-      <Prose>
-        A specific MLM technique worth naming: cloze-style zero-shot classification. Instead of fine-tuning a classification head, write the class as a prompt template: "The review was [MASK]." Feed this to an MLM. Score each candidate class label ("good," "bad") as the probability the MLM assigns to that word at the <Code>[MASK]</Code> position. No fine-tuning, no labeled data — the prediction comes straight from the pretrained model's knowledge of how English sentences end. PET (Pattern-Exploiting Training, Schick and Schütze 2020) formalized this and showed it beats GPT-3 at few-shot classification at much smaller parameter counts. The technique shades into prompting, but the underlying mechanism is the MLM objective doing zero-shot inference for free.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <Prose>
-        The empirical story of MLM at scale is the story of why causal LM won for generation while MLM kept its grip on understanding. Four axes matter.
-      </Prose>
-
-      <H3>8a. Supervision density</H3>
-
-      <Prose>
-        Causal LM gets one gradient signal per token: 100% coverage. MLM gets one gradient signal per <em>masked</em> token: 15% coverage. Same forward cost per sequence, roughly six times less learning signal per example for MLM. This is the first-principles reason MLM scales worse on fixed compute budgets — the model sees the same amount of data but extracts fewer bits of supervision from it. RoBERTa partially compensated for this by running training longer on more data; ELECTRA attacked it more directly with replaced-token detection (section 10), which scores at every position. But the fundamental inefficiency is baked into the objective: if only 15% of positions contribute to the loss, you need roughly 6× more forward passes to match causal LM's total gradient budget.
-      </Prose>
-
-      <H3>8b. Scaling-law behavior</H3>
-
-      <Prose>
-        Kaplan et al. 2020 (arXiv:2001.08361) is the canonical study of scaling behavior for causal LM — loss scales as a power law in parameters, data, and compute, with no visible ceiling across seven orders of magnitude. The paper includes a brief comparison to other objectives, including MLM, and the finding is directly relevant here: MLM loss also improves with scale, but the improvement saturates earlier on downstream tasks, particularly tasks that require multi-step reasoning or long-form coherence. The scaling law for MLM looks more like a logistic — real gains at small-to-medium scale, diminishing returns past roughly 1B parameters on most benchmarks. The scaling law for causal LM looks like a line in log-log, still steep at 100B+.
-      </Prose>
-
-      <Prose>
-        The empirical implication is blunt. BERT-large (340M) was state-of-the-art on GLUE in 2018; scaling it up tenfold to RoBERTa-large-trained-longer gave real gains; scaling another tenfold to DeBERTa-XXL (1.5B) gave smaller gains; scaling beyond that has not been competitive with equally-large causal models on most metrics. GPT-3 (175B) was not state-of-the-art on GLUE — DeBERTa-v3 was — but GPT-3 could do dozens of tasks that no encoder could do, and GPT-4 at an even larger scale widened the gap on every task that involves generation, reasoning, or tool use. The encoder era topped out; the decoder era kept going.
-      </Prose>
-
-      <H3>8c. Sequence length and attention cost</H3>
-
-      <Prose>
-        Attention is <Code>O(N²)</Code> in sequence length for both causal and bidirectional models in the naive implementation. The difference: causal attention uses only the lower-triangular half, so a causal attention head can save about half the compute and memory with a well-implemented kernel. Bidirectional attention is the full matrix, so it pays the full quadratic cost. For 512-token sequences (BERT's trained length) this is negligible. For 8k-token sequences it is a meaningful 2× slowdown. For 100k-token sequences it is the reason you never see an encoder with that context window — the compute cost of the full attention matrix is genuinely too expensive, and the bidirectional constraint eliminates the streaming-inference trick that makes long-context decoders tractable (KV cache of only past positions).
-      </Prose>
-
-      <Prose>
-        Related: MLM inference is <em>not</em> streamable. A causal LM processes a prefix and produces each next token by consuming one forward pass. An MLM has to see the full sequence to produce any per-position output, because every hidden state depends on every other position. For a classification task where the input is a bounded sentence, this is fine. For any task where the input grows over time, it means reprocessing the whole input on every update, which is why encoders rarely show up in streaming or real-time settings.
-      </Prose>
-
-      <H3>8d. Multilinguality</H3>
-
-      <Prose>
-        One place MLM scaled surprisingly well: cross-lingual transfer. mBERT (Devlin's original multilingual BERT, 104 languages) and XLM-R (Conneau et al. 2020, 100 languages, 2.5TB of CommonCrawl data) both showed that a single MLM objective trained on a mixed-language corpus produces representations where fine-tuning on English data for a task transfers remarkably well to other languages. This is not a trivial property of any pretraining objective — it happens because the MLM objective over a shared vocabulary forces the model to use the same embedding space for semantically similar words across languages. Causal LM has similar cross-lingual transfer properties at larger scale (XGLM, mT5), but mBERT and XLM-R remain go-to baselines for multilingual classification and retrieval at modest scale.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES AND GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <Prose>
-        Eight ways a masked language model implementation or deployment goes wrong, in rough order of frequency.
-      </Prose>
-
-      <Prose>
-        <strong>1. Mask token appearing at inference time.</strong> A downstream fine-tuning task feeds raw text to the model, but a preprocessing step or a chat template accidentally leaves a literal <Code>[MASK]</Code> string in the input. The model treats it as a normal prediction target and produces whatever the pretrained distribution says goes at that position — usually something unrelated to the task. Symptom: the model's outputs drift toward random common tokens on specific inputs. Fix: sanitize inputs to strip or escape special tokens before tokenization. The 80/10/10 rule exists specifically to mitigate the distributional gap this creates, but it does not eliminate it — avoid ever putting <Code>[MASK]</Code> in an input you control.
-      </Prose>
-
-      <Prose>
-        <strong>2. Mask rate too high.</strong> At 50% masking, the model has too little context to reconstruct the missing tokens reliably — the task degenerates from "use context to predict" into "memorize the training set and recall from partial patterns." Loss does not decrease past a plateau. Symptom: loss curves flatten at a suspiciously high value, and the model's predictions at held-out masked positions are essentially the unigram distribution. Fix: 15% is the standard for a reason; 20–40% works for span-corruption objectives (T5) where the model has an autoregressive decoder to fill in, but not for BERT-style single-token MLM. Wettig et al. 2023 showed that larger models tolerate higher mask rates (up to ~40% at 1B+ scale), but for sub-1B models, stick with 15%.
-      </Prose>
-
-      <Prose>
-        <strong>3. Mask rate too low.</strong> The dual failure. At 5% masking, the task is too easy — the model can get high accuracy by learning to copy nearby tokens and ignore the mask position. Symptom: loss converges quickly to a low value that does not reflect real understanding; downstream fine-tuning performance is poor. Fix: back to 15%, or higher with a span-based variant.
-      </Prose>
-
-      <Prose>
-        <strong>4. Computing loss on the wrong positions.</strong> Forgetting to set <Code>labels[~selected] = -100</Code> (or equivalent) means the model is graded on predicting the original token at every position, including the 85% that were not masked. This is effectively asking the model to be an identity mapping, which it can achieve near-trivially through a residual connection — the loss goes to zero without learning anything useful. Symptom: train loss is absurdly low from early steps, fine-tuning accuracy is random. Fix: audit the ignore-index logic, and assert that <Code>(labels != -100).sum() / labels.numel()</Code> is approximately 0.15 on every batch.
-      </Prose>
-
-      <Prose>
-        <strong>5. The 10% unchanged/10% random replacement being excluded from the loss.</strong> A common implementation error: the masking function correctly produces the 80/10/10 split in the input, but the labels are only set at positions that got the <Code>[MASK]</Code> replacement — the other 20% of selected positions get <Code>-100</Code>. The model then never learns to correct random-replacement cases or to maintain the identity mapping on unchanged cases, which re-introduces exactly the train/test mismatch the 80/10/10 rule was designed to prevent. Symptom: the model behaves well in pretraining evaluation (<Code>[MASK]</Code> fill) but poorly on fine-tuning. Fix: in <Code>mask_tokens</Code>, the label should be set for <em>every</em> selected position regardless of which of the three replacement types it got. The code in section 4 does this correctly via <Code>labels[~selected] = -100</Code> rather than <Code>labels[~replace_mask] = -100</Code>.
-      </Prose>
-
-      <Prose>
-        <strong>6. Causal mask accidentally still in place.</strong> Copy-pasting an attention implementation from a causal model and forgetting to remove the <Code>masked_fill(triu, -inf)</Code> line produces an encoder that secretly has causal attention. Symptom: the bidirectional advantage disappears — the model performs like a causal LM of the same size on classification tasks (which is to say, worse than a well-trained bidirectional encoder of the same parameter count). Fix: always assert the attention weights are non-zero in the upper triangle on a test batch. It is genuinely a one-line bug and it sinks an entire training run.
-      </Prose>
-
-      <Prose>
-        <strong>7. Fine-tuning catastrophic forgetting.</strong> MLM pretrained weights are general — fine-tuning on a narrow task with a high learning rate can overwrite the pretrained knowledge. The model reaches high training accuracy on the fine-tuning set but loses the generalization that made it useful. Symptom: in-domain evaluation improves, out-of-domain evaluation collapses. Fix: lower learning rate during fine-tuning (1e-5 to 5e-5 is standard for BERT-class models, vs 1e-4 for pretraining), shorter fine-tuning schedules, and gradual unfreezing (train the task head first with the encoder frozen, then unfreeze). The Howard-Ruder 2018 paper on ULMFiT pre-dates BERT but the techniques are directly applicable.
-      </Prose>
-
-      <Prose>
-        <strong>8. Token classification using pooled representation.</strong> For a per-token task like NER, the loss and head must be applied at each position, not pooled. Using the <Code>[CLS]</Code> representation (which is trained to summarize the whole sequence) and stretching it across positions via some attention mechanism is a common anti-pattern that misses the entire point of having per-position hidden states. Symptom: NER F1 is much lower than reported baselines. Fix: project the hidden state at each position through a linear head, compute loss per position, and ignore positions that are sub-word continuations or special tokens.
-      </Prose>
-
-      <Prose>
-        <strong>9. Positional embedding extrapolation.</strong> BERT was trained with absolute position embeddings for positions 0–511. Feeding it a sequence of length 600 at inference produces index-out-of-range errors at best, silent garbage at worst (if position embeddings are stored as a tensor without bounds checking). RoPE and ALiBi extend cleanly; absolute learned embeddings do not. Symptom: the model works fine at 512 tokens and behaves unpredictably past that. Fix: truncate or chunk inputs to the pretrained length, or switch to a model with a length-agnostic position encoding.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        The canonical reference list for masked language modeling. All six were cross-checked on arXiv during the preparation of this topic; titles, author lists, and arXiv IDs reflect the verified records.
-      </Prose>
-
-      <Prose>
-        <strong>1.</strong> Devlin, Jacob; Chang, Ming-Wei; Lee, Kenton; Toutanova, Kristina. "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." arXiv:1810.04805 (submitted October 2018, revised May 2019; published at NAACL 2019 as "BERT"). The paper that introduced MLM, the 80/10/10 rule, the <Code>[CLS]</Code>/<Code>[SEP]</Code> conventions, and the Next-Sentence-Prediction auxiliary objective. The 15% masking rate and the 80/10/10 split both come from ablations in section 3 of this paper. The NSP objective, also introduced here, was subsequently shown to be unnecessary.
-      </Prose>
-
-      <Prose>
-        <strong>2.</strong> Liu, Yinhan; Ott, Myle; Goyal, Naman; Du, Jingfei; Joshi, Mandar; Chen, Danqi; Levy, Omer; Lewis, Mike; Zettlemoyer, Luke; Stoyanov, Veselin. "RoBERTa: A Robustly Optimized BERT Pretraining Approach." arXiv:1907.11692 (July 2019). The careful replication study that made BERT work the way BERT was supposed to work. Introduces dynamic masking (re-generate the mask each epoch rather than fixing it once), drops the NSP objective (showing it was hurting, not helping), trains longer on more data, and produces the variant that most subsequent encoder research used as a baseline.
-      </Prose>
-
-      <Prose>
-        <strong>3.</strong> He, Pengcheng; Liu, Xiaodong; Gao, Jianfeng; Chen, Weizhu. "DeBERTa: Decoding-enhanced BERT with Disentangled Attention." arXiv:2006.03654 (June 2020; ICLR 2021). The architectural improvement that gave MLM its last major push: disentangled attention separates content and position into distinct attention computations, and an "enhanced mask decoder" incorporates absolute positions at the final prediction layer. DeBERTa-v3 (a follow-up using ELECTRA-style training) remains competitive on several GLUE and SuperGLUE tasks in 2026.
-      </Prose>
-
-      <Prose>
-        <strong>4.</strong> Clark, Kevin; Luong, Minh-Thang; Le, Quoc V.; Manning, Christopher D. "ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators." arXiv:2003.10555 (March 2020; ICLR 2020). Replaces the masked-prediction objective with replaced-token detection: a small generator model proposes token replacements, and the main model (a discriminator) predicts at every position whether each token is original or replaced. Because every position contributes to the loss rather than just 15%, ELECTRA extracts more supervision per forward pass and matches BERT's performance at a fraction of the compute.
-      </Prose>
-
-      <Prose>
-        <strong>5.</strong> Raffel, Colin; Shazeer, Noam; Roberts, Adam; Lee, Katherine; Narang, Sharan; Matena, Michael; Zhou, Yanqi; Li, Wei; Liu, Peter J. "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer." arXiv:1910.10683 (October 2019; JMLR 2020). T5 paper. The span-corruption objective (section 3.1.4) is a direct generalization of MLM where the model must generate a contiguous span of missing tokens autoregressively rather than predicting a single masked token. T5 also establishes the "every task is text-to-text" framing that unifies classification and generation under one interface.
-      </Prose>
-
-      <Prose>
-        <strong>6.</strong> Kaplan, Jared; McCandlish, Sam; Henighan, Tom; Brown, Tom B.; Chess, Benjamin; Child, Rewon; Gray, Scott; Radford, Alec; Wu, Jeffrey; Amodei, Dario. "Scaling Laws for Neural Language Models." arXiv:2001.08361 (January 2020). The canonical scaling-law paper. The core contribution is the causal-LM power law, but the paper also includes scaling comparisons against other objectives, and its appendices contain the evidence that MLM's scaling behavior saturates where causal LM's keeps going. This is the empirical foundation for the "MLM lost to causal LM for generation" narrative in section 8.
-      </Prose>
-
-      <Callout accent="gold">
-        Secondary but worth flagging: Conneau et al. 2020 ("Unsupervised Cross-lingual Representation Learning at Scale," arXiv:1911.02116) — XLM-R, the multilingual encoder benchmark; and Schick and Schütze 2020 ("Exploiting Cloze Questions for Few Shot Text Classification and Natural Language Inference," arXiv:2001.07676) — the paper that formalized cloze-style classification with pretrained MLMs and showed it beats GPT-3 at few-shot classification.
-      </Callout>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <Prose>
-        Five short problems. The problems are chosen so that getting them wrong tells you something specific about what has not been internalized.
-      </Prose>
-
-      <Prose>
-        <strong>Problem 1.</strong> For a 512-token input at the standard 15% masking rate, compute the expected number of positions the model will predict on. Now compute the expected number that will actually contain the <Code>[MASK]</Code> token in the input after the 80/10/10 rule is applied. Why is the first number the relevant one for the loss?
-      </Prose>
-
-      <Callout accent="green">
-        Expected predictions: <Code>0.15 · 512 = 76.8 ≈ 77</Code> positions. Expected <Code>[MASK]</Code> tokens in the input: <Code>0.15 · 0.80 · 512 = 61.4 ≈ 61</Code> positions. The first number is what matters for the loss because the loss is computed at every <em>selected</em> position regardless of which of the three replacement types it got — including the 10% that were replaced with a random token and the 10% that were left unchanged. The model's labels are <Code>-100</Code> only at the unselected 85%, not at the 20% of selected positions that don't literally contain <Code>[MASK]</Code>. Getting this wrong is failure mode #5 in section 9.
-      </Callout>
-
-      <Prose>
-        <strong>Problem 2.</strong> Why can't a masked language model generate text autoregressively out of the box? What would you have to add or change to make it work?
-      </Prose>
-
-      <Callout accent="green">
-        MLM does not define a tractable joint distribution over sequences. Its per-position predictions at masked positions are conditional on the full corrupted input, and multiple masked positions are predicted <em>independently</em> — the model treats them as marginal given context, ignoring the dependence between them. You cannot sample a sequence one token at a time because each position's prediction was trained assuming the others are also hidden, not assuming they have already been sampled. To make it work, you would either (a) add an autoregressive decoder on top of the bidirectional encoder, which is what seq2seq encoder-decoder models like T5 do; (b) fine-tune the MLM for iterative refinement (sample a full sequence, mask a random subset, re-predict, repeat — "BERT as Markov random field," Wang and Cho 2019); or (c) use the MLM as a reranker over candidates generated by a separate autoregressive model. None of these are clean fits, which is why MLM-based generation remained a research curiosity.
-      </Callout>
-
-      <Prose>
-        <strong>Problem 3.</strong> Implement the 80/10/10 masking function from scratch, using only <Code>torch.bernoulli</Code> and <Code>torch.randint</Code>. Your function takes a tensor of token ids and returns <Code>(masked_input, labels)</Code>. Test that: (a) approximately 15% of non-PAD positions get selected; (b) of the selected positions, approximately 80% contain <Code>[MASK]</Code> in the output; (c) the labels are <Code>-100</Code> at unselected positions and the original token id at selected positions.
-      </Prose>
-
-      <Callout accent="green">
-        The full implementation is in section 4b. The key asserts to run after writing it: <Code>{"(labels != -100).float().mean() ≈ 0.15"}</Code>, <Code>{"((masked_input == MASK) & (labels != -100)).sum() / (labels != -100).sum() ≈ 0.80"}</Code>, and for every position where <Code>labels[i] != -100</Code>, <Code>labels[i] == original[i]</Code>. If you use a Bernoulli cascade (0.8 for MASK, then 0.5 among the remaining for random, rest unchanged), all three asserts pass in expectation. If you write it as three disjoint probabilities (0.8 / 0.1 / 0.1 over the union), the math is cleaner but the vectorized PyTorch code is less clean. Either works.
-      </Callout>
-
-      <Prose>
-        <strong>Problem 4.</strong> For a sequence of length <Code>N</Code>, compute the memory cost of the attention matrix for (a) a causal transformer and (b) a bidirectional transformer, in terms of floats. Which cost dominates in a model with <Code>L</Code> layers and <Code>H</Code> heads?
-      </Prose>
-
-      <Callout accent="green">
-        The full attention matrix is <Code>N × N</Code>. A causal implementation can store only the lower triangle (strict + diagonal): <Code>N(N+1)/2 ≈ N²/2</Code> floats per head per layer. A bidirectional implementation stores the full <Code>N²</Code>. For an <Code>L</Code>-layer <Code>H</Code>-head model, the totals are <Code>L · H · N²/2</Code> for causal and <Code>L · H · N²</Code> for bidirectional — factor of 2 difference. In practice, well-implemented kernels (FlashAttention) don't materialize the full attention matrix in memory for either case — they recompute it in blocks during the backward pass. But the arithmetic still counts against the FLOPs budget, which is why long-context encoders are rare. At <Code>N=512</Code> (BERT's training length) the difference is negligible; at <Code>N=8192</Code> it is a meaningful 2× in compute; past <Code>N=32k</Code> it is prohibitive for full bidirectional attention.
-      </Callout>
-
-      <Prose>
-        <strong>Problem 5.</strong> You are training an encoder from scratch on English Wikipedia, at modest scale (110M parameters, 24 hours of 8×A100 compute). Would you pick standard BERT-style MLM or ELECTRA-style replaced-token detection? Defend the choice in three sentences.
-      </Prose>
-
-      <Callout accent="green">
-        ELECTRA, for the compute-constrained regime. The replaced-token-detection objective scores at every position rather than just 15%, so it extracts roughly 6× more supervision per forward pass — at a fixed compute budget, this is the axis that matters most. The original ELECTRA paper demonstrated that ELECTRA-small (14M params, 4 days on 1 V100) matches GPT's GLUE score (117M params trained on 30× more compute), and the efficiency gain is specifically pronounced at the modest-scale regime the question describes. The one caveat: ELECTRA's generator-discriminator training is slightly more complex to implement correctly, so if the team does not have GPU-weeks to debug it and has an existing MLM pipeline, straight BERT-style MLM with dynamic masking (RoBERTa recipe) is the safe choice.
-      </Callout>
-
-      <Prose>
-        Masked language modeling was the objective that opened the door to large-scale self-supervised pretraining in NLP. It did not end up being the objective that built frontier models for generation, because causal LM extracts more supervision per token and scales further on every capability that requires producing new text. But it remains the objective of choice when the task is to <em>understand</em> a fixed input: classification, NER, retrieval, the embedding half of every RAG pipeline. The next topic covers its direct descendant — T5-style span corruption — which takes MLM's bidirectional encoding and grafts autoregressive generation onto it, combining the best properties of both.
-      </Prose></section>
-    </div>
-  ),
+  title: 'Masked Language Modeling (BERT-style)',
+  readTime: '~55 min read + 60 min experiments',
+  content: () => <div className="lesson-flow mlm-flow">
+    <LessonIntro prerequisites={<><a href={`${route}byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram?module=large-language-models`}>Subword tokenization</a> supplies token IDs and embedding lookup; <a href={`${route}causal-language-modeling-next-token-prediction?module=large-language-models`}>Causal language modeling</a> supplies vocabulary probabilities, cross-entropy and shifted targets. We recover these contracts here. The programs use Python arrays, PyTorch differentiation and AdamW, and implement the new corruption, attention and selected loss explicitly.</>} exampleKind="Python">Learn to reconstruct selected original tokens using evidence on both sides, then reuse the resulting contextual representations. Separate what changes in the input, what attention may read, and which outputs contribute to the loss.</LessonIntro>
+    <Prose opening="route"><strong>First pass:</strong> follow sections 1–7 in order, changing the corruption and loss examples as you read. Run the three supplied programs with the accompanying text. Return to the visible gradient derivation, pseudo-likelihood and objective comparisons for a deeper pass, then try the independent practice.</Prose>
+    <Prose opening="exploration">The drawings show their current result immediately. White outlines identify the traced position; labelled colours preserve token correspondence. The browser investigates small exact examples. Python runs the actual training experiment; its plots show a saved run.</Prose>
+
+    <Legacy id="1-start-with-the-problem" /><Legacy id="1-why-it-exists" />
+    <H2>1. Read the evidence on both sides</H2>
+    <Prose>Suppose a search system receives “the bank was flooded.” A useful representation of <Code>bank</Code> should respond to <Code>flooded</Code>. Change the suffix to “was closed,” and the evidence changes. How can a model learn to use both sides without a human labelling the meaning of every word?</Prose>
+    <Prose>Remove the word: “the <Code>[MASK]</Code> was flooded.” The original text supplies the answer. Follow the information that can reach the missing position.</Prose>
+    <ContextFigure />
+    <Prose>A bidirectional encoder lets that position read the visible words before and after it. Its output at each position is a vector: a row of contextual features. A vocabulary head turns the vector at the missing position into a distribution over possible original IDs. Context does not require <Code>bank</Code> to receive probability one: <Code>road</Code> could also fit. Training rewards the observed original token rather than pretending every blank has only one possible completion.</Prose>
+    <Prose>In a causal decoder, the hidden state at an input position can read that position and earlier ones; it cannot later revise that same state using a suffix. With the usual one-position target shift, the output at <Code>the</Code> predicts the next token. Here, the output at a selected position reconstructs the token originally at that same position.</Prose>
+    <Prose>Why hide anything? If every original token stayed visible and every output were rewarded for returning that token, the network could learn a copying shortcut through its embedding and residual path. Corrupting selected inputs creates a reason to consult context. This reconstruction task is <strong>masked language modeling</strong> (MLM). BERT combined it with a deep bidirectional Transformer encoder; MLM is an objective, not a particular network size.</Prose>
+
+    <Legacy id="2-build-the-intuition" /><Legacy id="2-core-intuition" />
+    <H2>2. Select targets before corrupting inputs</H2>
+    <Prose>Keep the original sequence because it supplies labels. Make a separate input copy, choose target positions, and change that copy. Choose one ordinary position and follow it through the rows. One target makes this hand trace readable; it is not a sample claimed to realize exactly 15% selection.</Prose>
+    <CorruptionLab />
+    <Prose>The original <Code>bank</Code> ID remains the label whether the input becomes <Code>[MASK]</Code>, becomes a random <Code>road</Code>, or stays <Code>bank</Code>. At unselected positions the label is <Code>-100</Code>, the convention for ignoring that output in the loss. It is not a vocabulary ID and is never embedded. Colours and position numbers trace original occurrences; replacements retain their literal identities. White selection outlines are separate from those colours.</Prose>
+    <Prose>BERT's historical recipe selects about 15% of tokens. Among selected positions, 80% take the mask branch, 10% the random-token branch and 10% the unchanged branch. “Selected,” “changed” and “contains a literal mask” are different properties. Switch the branch and notice that the target remains unchanged.</Prose>
+    <Prose>For 100 eligible ordinary positions, separate the two probability stages. The coloured areas show expected counts, so fractional values are legitimate.</Prose>
+    <MaskRateLab />
+    <MathBlock>{String.raw`\begin{aligned}P(\text{mask branch})&=0.15\times 0.80=0.12\\P(\text{random branch})&=0.15\times 0.10=0.015\\P(\text{keep branch})&=0.15\times 0.10=0.015\end{aligned}`}</MathBlock>
+    <Prose>The expectation is 15 targets: 12 mask-branch positions, 1.5 random-branch positions and 1.5 keep-branch positions, alongside 85 unselected positions. A random vocabulary draw can equal the original ID or a special ID. Thus visibly changed-token counts need not equal branch counts. Audit recorded branches, not just the symbols that happen to appear.</Prose>
+    <Prose><Code>[CLS]</Code> and <Code>[SEP]</Code> mark sequence structure; <Code>[PAD]</Code> fills unused batch space. Exclude structural and padding positions from selection. Our programs also exclude <Code>[UNK]</Code>, since predicting a collapsed unknown symbol would conceal which unseen word was lost. State this eligible denominator whenever reporting a rate.</Prose>
+    <H3>A recipe is not a unique sampling algorithm</H3>
+    <Prose>Our code and the dynamic collator independently select eligible positions with probability 0.15. A small batch need not realize exactly 15% or contain any targets. With <Code>E</Code> eligible positions, no target is selected with probability <Code>0.85ᴱ</Code>. Original BERT preprocessing instead shuffled candidates and used a rounded, capped target budget. It was not the identical Bernoulli procedure.</Prose>
+    <Prose>The random and keep branches were introduced to reduce the mismatch between masked pretraining and ordinary downstream inputs. They do not eliminate it, and an unchanged selected position still permits a copying shortcut there. Judge the whole recipe; neither 15% nor 80/10/10 is a universal optimum. Section 9 returns to the experimental evidence.</Prose>
+
+    <Legacy id="3-make-the-idea-precise" /><Legacy id="3-math-foundation" />
+    <H2>3. Distinguish three different masks</H2>
+    <Prose>Changing a symbol does not remove its position from the network. A literal <Code>[MASK]</Code> has an embedding and remains available to attention. Compare which input columns each query row may read. These cells show permission, not learned attention strength.</Prose>
+    <AttentionMaskLab />
+    <Prose>A row is the query position; a column is a key/value position it may read. Bidirectional attention permits every nonpadding column. The causal alternative permits columns up to and including the query's own position. The final valid query is a revealing null case: both patterns permit the same columns there. Earlier rows expose the difference.</Prose>
+    <LessonTable caption="Three masks answer different questions" headers={['Object', 'Question', 'Effect']} rows={[
+      ['Corruption and selection', 'Which original positions become targets, and how is their input copy changed?', 'bank stays the target for mask, random and keep.'],
+      ['Attention mask', 'Which keys may a query read?', 'PAD columns are excluded; MASK remains readable.'],
+      ['Loss mask / labels', 'Which output rows are scored?', 'Only selected labels differ from −100.'],
+    ]} />
+    <Prose>The usual Transformers <Code>attention_mask</Code> is 1 at valid input positions and 0 at padding, independently of <Code>labels != -100</Code>. Preserve it from the original padding layout: if corruption randomly draws the PAD ID at a real position, recomputing padding from corrupted IDs would accidentally delete that position.</Prose>
+    <Prose>Excluding padding keys is sufficient for valid queries in our small encoder. It can still compute unused padded query outputs; exclude those from supervision and pooling. Packing independent documents requires an additional boundary policy if they must not read each other. A padding mask alone does not isolate documents.</Prose>
+
+    <Legacy id="4-from-scratch-implementation" />
+    <H2>4. Follow a position through the encoder</H2>
+    <Prose>The inputs are IDs; the network operates on vectors. At each position, add a token embedding, a position embedding and a segment embedding. All three have width <Code>d</Code>, so addition preserves the width rather than concatenating three vectors.</Prose>
+    <EmbeddingFigure />
+    <MathBlock>{String.raw`h_i^{(0)}=\operatorname{LayerNorm}\!\left(E[\tilde x_i]+P[i]+S[s_i]\right)`}</MathBlock>
+    <Prose><Code>E</Code> has vocabulary rows, <Code>P</Code> has supported-position rows and <Code>S</Code> has two segment rows. The segment index <Code>sᵢ</Code> is 0 or 1; a single-segment example uses 0 throughout. Segment B is not future context or an attention prohibition. BERT's position table is learned and finite, so a checkpoint's supported length matters.</Prose>
+    <Prose>The resulting <Code>T × d</Code> grid has one feature row per input position. Inside a block, attention mixes positions and a feedforward network transforms each row's feature channels. Follow the mixing and the two residual paths.</Prose>
+    <EncoderFigure />
+    <Prose>Learned projections produce queries <Code>Q</Code>, keys <Code>K</Code> and values <Code>V</Code>. Each query/key dot product is a compatibility score. Divide by the square root of the head width <Code>dₕ</Code>, add 0 at permitted entries and negative infinity at forbidden entries, then apply softmax across each row. Its weights sum to one over permitted keys.</Prose>
+    <MathBlock>{String.raw`\begin{aligned}A&=\operatorname{softmax}_{\rm row}\left(QK^\top/\sqrt{d_h}+B\right)\\U&=AV\end{aligned}`}</MathBlock>
+    <Prose><Code>B</Code> denotes the additive attention mask here. Multiplying by the value grid forms a weighted mixture at each query. Multiple heads use different projections, concatenate their outputs and project back to width <Code>d</Code>. Add the original hidden grid through a residual path and normalize. The feedforward sublayer expands each row to <Code>4 d</Code>, applies GELU, reduces it to <Code>d</Code>, then adds and normalizes a second residual. Our program follows this post-normalization structure, with dropout omitted for the small deterministic experiment.</Prose>
+    <Prose>After the blocks, gather the selected hidden rows before vocabulary scoring when training. The prediction head transforms each selected row and compares it with all vocabulary embedding rows.</Prose>
+    <VocabularyHeadFigure />
+    <Prose>The head uses a linear transform, GELU and normalization, then the transpose of the input embedding table plus a vocabulary bias. Sharing the table is weight tying. Input lookup chooses one row; output decoding compares a transformed feature vector with every row. Scores become probabilities only after softmax. The small drawing supplies illustrative values for anatomy; measured predictions appear later.</Prose>
+    <Prose>With <Code>m</Code> selected positions, vocabulary scoring costs approximately <Code>O(mdV)</Code>, versus <Code>O(TdV)</Code> if all positions are scored. The encoder still processes context. Dense attention forms <Code>T × T</Code> score arrays per head. A naive causal implementation also allocates a full square before masking; triangular permissions alone do not halve its memory. Specialized kernels can exploit structure and avoid materializing that array. There is no universal twofold runtime or memory rule.</Prose>
+
+    <H2>5. Score the original IDs at selected positions</H2>
+    <Prose>Each selected row is a vocabulary classification problem. Put more probability on the original ID and its loss falls. Two selected targets receive probabilities 0.5 and 0.25 below. Change either probability to see its negative-log contribution.</Prose>
+    <SelectedLossLab />
+    <Prose>Natural logarithms give <Code>−ln(0.5)=0.693147</Code> and <Code>−ln(0.25)=1.386294</Code> nats. Sum to <Code>2.079442</Code> and divide by the two scored positions: <Code>1.039721</Code> nats per target. Three ignored outputs do not change this mean. Dividing by all five positions instead gives <Code>0.415888</Code>, a different, diluted quantity.</Prose>
+    <MathBlock>{String.raw`\mathcal L_M=-\frac{1}{|M|}\sum_{i\in M}\log p_\theta(x_i\mid\tilde x),\qquad |M|>0`}</MathBlock>
+    <Prose><Code>M</Code> is the selected set; <Code>xᵢ</Code> the original ID; <Code>x̃</Code> the entire corrupted input; and <Code>θ</Code> the learned parameters. Conditioning includes visible tokens, masks and random or unchanged selected inputs. Our batch mean sums all selected losses and divides by their total count. Averaging sequence means with equal sequence weight is a different reduction.</Prose>
+    <Prose>No selected targets means the selected mean is undefined. The lab says so. The numeric helper returns zero only as a no-op sentinel alongside count 0; the trainer skips the optimizer update and evaluation reports null. Skipping the update matters because momentum or weight decay can otherwise change weights even with zero current gradients.</Prose>
+    <H3>Deeper: gradients also train the context</H3>
+    <Prose>For one logit row <Code>z</Code>, rewrite its loss as <Code>log(sum(exp(z))) − z[target]</Code>. Differentiating the first term gives softmax probability; differentiating the second subtracts 1 only at the target. A selected-position mean divides each contribution by the selected count.</Prose>
+    <GradientFigure />
+    <MathBlock>{String.raw`\frac{\partial\mathcal L_M}{\partial z_{i, v}}=\begin{cases}(p_{i, v}-\mathbf 1[v=x_i])/|M|,&i\in M\\0,&i\notin M.\end{cases}`}</MathBlock>
+    <Prose>The first target above has gradient <Code>(0.5−1)/2=−0.25</Code>. Subtracting it in gradient descent increases the target logit. An ignored output has zero direct logit gradient, but a selected output can depend on an unselected context vector through attention. The loss can therefore train parameters and representations used at context positions. “15% targets” is not “only 15% gets gradients,” and does not prove sixfold sample inefficiency.</Prose>
+    <Prose>This complete program subtracts each selected row's maximum before exponentiating; the common factor cancels in softmax and avoids overflow. It derives the logit gradient, compares it with PyTorch on identical logits, and performs one SGD step. For the two-target example, learning rate 0.1 changes loss from <Code>1.03972077</Code> to <Code>1.01257023</Code>; the ignored row's gradient is zero. The same file supplies corruption and a whole-word grouping variation.</Prose>
+    <RemoteCodeBlock source={`${programs}corruption_loss.py`} filename="corruption_loss.py" title="Corruption, selected loss and a matched gradient check" />
+    <Prose><Code>corrupt</Code> never mutates the original array and returns branch labels for auditing. <Code>selected_cross_entropy</Code> gathers active rows before logsumexp; its full gradient retains the input shape for comparison. The ordinary tool route is <Code>cross_entropy</Code> on selected rows, or <Code>ignore_index=-100</Code> with the same reduction and an explicit empty-batch policy.</Prose>
+
+    <Legacy id="6-visual-walkthrough" />
+    <H2>6. Vary training masks and freeze evaluation masks</H2>
+    <Prose>A fixed corruption teaches one reconstruction view. A dynamic collator resamples positions and branches when the sentence is presented again; original IDs stay fixed. Compare successive visits, then inspect the separate evaluation row that remains unchanged.</Prose>
+    <DynamicMaskLab />
+    <Prose>RoBERTa used dynamic masking on each presentation. Original BERT precomputed multiple corrupted copies, so “one permanent mask per sentence” would omit its duplication. For evaluation, draw corruption once with an independent seed, disable dropout with <Code>eval()</Code>, and compute without gradients. Then a score change reflects changed weights rather than a newly sampled question.</Prose>
+    <Prose>Across batches, aggregate summed negative log probabilities divided by total selected targets. A batch with one target should not automatically have the same weight as a batch with fifty. Separate training and evaluation random-number streams so changing evaluation frequency does not change the next training mask.</Prose>
+    <Prose>Now use real text: the offline <a href={`${programs}alice_excerpt.txt`} download>Alice excerpt</a> contains chapters I–III of Lewis Carroll's 1865 novel, with <a href={`${programs}provenance.md`} download>provenance and preprocessing</a>. This is literature, not an NLP benchmark. Our question is whether a complete small objective reduces reconstruction loss on a later portion of the same work.</Prose>
+    <Prose>The program extracts 6,118 lowercase letter-sequence tokens and splits first: 4,894 training tokens and 1,224 held-out tokens. It learns a 1,012-ID vocabulary from training only, then packs each part separately into at most 24 words plus CLS/SEP, giving 204 training and 51 held-out chunks. The 162 held-out words absent from the vocabulary become UNK and are excluded as targets, with their count reported. This whole-word diagnostic tokenizer is not released BERT's WordPiece tokenizer.</Prose>
+    <Prose>The encoder has width 48, four heads and two blocks. Its attention exposes Q/K/V, masked scores and value mixing. PyTorch supplies tensor operations, differentiation, LayerNorm, GELU and AdamW. It preserves original padding and gathers selected rows before the tied head. The program also includes leave-one-out scoring and task-head shape examples.</Prose>
+    <RemoteCodeBlock source={`${programs}tiny_mlm.py`} filename="tiny_mlm.py" title="Complete bidirectional encoder and offline real-text training" />
+    <Prose>Save the three Python files and text together; the shared file index lists them as code becomes visible. Install NumPy/PyTorch and Transformers for the library route. The scratch CPU run used PyTorch 2.14.0, NumPy 2.3.5, seed 17, AdamW learning rate 0.002, batch 16 and 240 updates. These are measured small-experiment settings, not a large-model recipe.</Prose>
+    <CodeBlock language="shell" filename="run_mlm_examples.sh">{`python corruption_loss.py
+python tiny_mlm.py --steps 240 --output experiment.json
+python library_mlm.py --steps 120 --output library-experiment.json`}</CodeBlock>
+
+    <Legacy id="5-production-implementation" />
+    <H2>7. Read the measurement and use the library</H2>
+    <Prose>A falling training loss is a starting diagnostic. Compare identical fixed held-out targets and a cheap reference that ignores context. Here the reference uses add-one-smoothed training unigram counts. Loss and accuracy have separate plots and units.</Prose>
+    <TrainingFigure />
+    <Prose>The recorded scratch run changes held-out loss from <Code>6.909748</Code> to <Code>5.368065</Code> nats on 166 selected known-word targets. The unigram loss on those same targets is <Code>5.402970</Code>. Improvement over initialization is clear, but the final advantage over this simple reference is small. Held-out loss reaches <Code>5.297545</Code> at step 160 then rises; it need not be monotone. Final top-1 accuracy is <Code>6/166≈3.61%</Code>.</Prose>
+    <Prose>The first held-out sample hides the actual word <Code>either</Code>. At final weights the top five candidates are <Code>she</Code>, <Code>i</Code>, <Code>of</Code>, <Code>was</Code> and <Code>a</Code>, with top probability about 0.0278. This failure distinguishes correct implementation from useful language ability. Training and held-out portions share characters/style, and unseen words are excluded from targets; the figures are a limited within-work diagnostic.</Prose>
+    <Prose>For the ordinary route, delegate the encoder/head to <Code>BertForMaskedLM</Code> and corruption to <Code>DataCollatorForLanguageModeling</Code>. This program uses the same data preparation with explicit ID, padding and special-token masks. It constructs a small random <Code>BertConfig</Code> model, trains it and compares returned loss with selected-row cross-entropy on the actual logits.</Prose>
+    <RemoteCodeBlock source={`${programs}library_mlm.py`} filename="library_mlm.py" title="Offline Transformers BERT and dynamic collator" />
+    <Prose><Code>input_ids</Code> is the corrupted grid; <Code>attention_mask</Code> retains original valid positions; <Code>labels</Code> holds original IDs or −100. The output logits have shape <Code>[batch, positions, vocabulary]</Code>. The local tokenizer supplies vocabulary/special-token metadata; the program already supplies whole-word IDs. This maintained model is the library route, not the scratch implementation.</Prose>
+    <Prose>A configuration initializes random weights. A released checkpoint instead uses its matching model and tokenizer via <Code>from_pretrained</Code>, with vocabulary and positional contracts preserved. Fill-mask inference intentionally contains a mask token and reads its vocabulary row. Classification/tagging normally uses uncorrupted task input and its own supervised head. The offline program downloads no weights and does not measure a released checkpoint's quality.</Prose>
+    <Prose>The executed Transformers 5.17.0 library run takes 120 updates. On its own fixed 145-target evaluation sample, loss changes from 6.938476 to 5.697192 nats; its returned loss agrees with explicitly selected cross-entropy within 0.000001. Input and output embeddings share the same weight tensor. This checks the ordinary API on real inputs, including its target reduction.</Prose>
+    <Prose>Equal widths do not make scratch and library training matched experiments: initialization, normalization and random streams can differ. The exact bridges compare identical logits/labels for loss/gradients and identical Q/K/V/padding for attention. Unmatched final losses are diagnostics, not an architecture ranking.</Prose>
+
+    <Legacy id="8-what-scales-and-what-doesn-t" />
+    <H2>8. Reuse representations and interpret scores</H2>
+    <Prose>Reconstruction trains the encoder to combine context. A downstream task can use its hidden grid while replacing the vocabulary head. The desired output determines which rows the new head reads.</Prose>
+    <TransferFigure />
+    <Prose>A tagging head classifies each token row. A sequence head reads the CLS row or a deliberate pooling of valid rows. Extractive QA uses start/end score columns over a passage. The program checks shapes <Code>[1, 26, 3]</Code>, <Code>[1, 2]</Code> and <Code>[1, 26, 2]</Code>; these random heads have not been trained to solve those tasks.</Prose>
+    <Prose>Original BERT also used next sentence prediction: a binary head on CLS distinguished a true segment continuation from a sampled noncontinuation, adding that loss to MLM. NSP is a separate historical objective. RoBERTa examined input construction and trained successfully without it. Neither recipe makes raw CLS or arbitrary mean pooling a guaranteed retrieval embedding. Task-specific training and evaluation still matter; a shared multilingual vocabulary likewise does not guarantee aligned meanings.</Prose>
+    <H3>Deeper: two blanks are not a causal joint</H3>
+    <Prose>Suppose two colour slots must match: half the examples are red/red and half blue/blue. Each slot alone is half red, half blue. Multiplying those marginals loses the matching constraint.</Prose>
+    <JointFigure />
+    <Prose>The product assigns one quarter to all four pairs, including red/blue and blue/red. The desired joint assigns one half to each matching pair and zero to mixed pairs. BERT-style MLM scores vocabulary rows conditioned on the same corrupted input. The shared encoder can relate positions, but independently sampling its rows does not make one sampled value condition on the other. Its conditionals are not automatically guaranteed to correspond to one normalized joint distribution over sequences.</Prose>
+    <Prose>A causal model explicitly multiplies successive conditionals given earlier values. An iterative fill/remask sampler or a masked generative model requires an additional sampling/training argument. The 2025 LLaDA work studies a different masked diffusion objective and reverse denoising process. That is a reason to state BERT's particular limitation precisely, not to claim that masked models cannot generate.</Prose>
+    <H3>Deeper: leave-one-out sentence scoring</H3>
+    <Prose>An MLM can compare supplied sentences. Mask one eligible position at a time, leaving other original tokens visible; read its original-token probability, then sum log probabilities. Each row below is a separate input.</Prose>
+    <PseudoLikelihoodFigure />
+    <MathBlock>{String.raw`\operatorname{PLL}(x)=\sum_{i\in E}\log p_\theta\!\left(x_i\mid x_{\setminus i},[\mathrm{MASK}]_i\right)`}</MathBlock>
+    <Prose><Code>E</Code> is the eligible set. This is pseudo-log-likelihood (PLL), not causal chain-rule log probability. <Code>exp(−PLL/|E|)</Code> is pseudo-perplexity. It also differs from exponentiating randomly corrupted MLM loss because the conditioning differs. Compare under a declared tokenizer/position/length-normalization policy; these are not calibrated sentence probabilities.</Prose>
+    <Prose>The supplied <Code>pseudo_log_likelihood</Code> batches one input copy per eligible position. It still evaluates that many sequences, and the all-copies ID array has quadratic storage in length. Chunk copies into smaller batches for long inputs. The saved example has 19 eligible positions, PLL <Code>−101.0411</Code> and pseudo-perplexity <Code>203.9662</Code>. This does not rescue its incorrect cloze answer or establish downstream quality.</Prose>
+
+    <Legacy id="7-decision-matrix" /><Legacy id="9-failure-modes-and-gotchas" />
+    <H2>9. Change the objective deliberately</H2>
+    <Prose>Separating corrupted inputs from desired targets lets us vary both. Start with one word split into <Code>play</Code> and <Code>##ing</Code>.</Prose>
+    <ObjectiveFigure />
+    <Prose>Masking one piece can leave an easy clue in its neighbour. Whole-word masking selects a word group and supervises all its original pieces. The helper independently samples word groups; a fixed token-budget sampler is different and longer groups change realized piece counts. Use the tokenizer's word alignment rather than assuming every tokenizer uses <Code>##</Code>.</Prose>
+    <Prose>T5's span corruption replaces a contiguous region with a sentinel and trains an autoregressive decoder to emit its missing tokens in order. Even length-one spans do not make its decoder loss identical to BERT's independent per-position head. ELECTRA uses a generator's replacements and trains a discriminator to detect tokens that differ from originals. A sampled ID equal to the original counts as original for that detection label. Binary detection is a different target from vocabulary reconstruction.</Prose>
+    <Prose>More masking supplies more targets while removing more context. Those effects compete; target counts alone do not determine compute efficiency. Wettig and colleagues found 40% could outperform 15% for BERT-large-sized models under their evaluated recipe, and separately examined corruption choices. That challenges the historical number as a universal rule, without establishing 40% for every model.</Prose>
+    <LessonTable caption="Choose by output and validation question" headers={['Need', 'Useful route', 'Check']} rows={[
+      ['Labels for an already available input', 'Encoder plus a task-specific head; MLM is one pretraining option.', 'Task split, token alignment/pooling and held-out performance.'],
+      ['Left-to-right continuation', 'Causal objective and autoregressive decoding.', 'Target shift, causal access and generation evaluation.'],
+      ['Ordered missing-span reconstruction', 'Encoder-decoder or deliberately trained infilling system.', 'Sentinels, target order and decoder conditioning.'],
+      ['Score supplied sentences', 'Declared MLM pseudo-likelihood procedure.', 'Tokenizer/length policy, cost and task validation.'],
+    ]} />
+    <Prose>For a suspicious run, inspect a literal batch first: labels came from original IDs; all selected branches retain targets; specials are excluded; attention retains original padding; and the denominator counts scored targets. A zero-target batch is missing evidence. To diagnose causal leakage, change a later input and test an earlier output: bidirectional attention permits that influence; causal attention forbids it. Use a fixture with a nonzero contribution, since permission alone does not guarantee a changed value.</Prose>
+    <Prose>Finally, repeated passages can lower apparent loss while contaminating evaluation. Objective correctness cannot make duplicated or leaked data trustworthy. This motivates the next syllabus topic: corpus curation and deduplication.</Prose>
+
+    <Legacy id="11-self-check-exercises" />
+    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>10. Independent practice</H2>
+      <Exercise title="1. Audit expected counts" hint="Apply selection before conditional branch probabilities; distinguish eligible from physical positions." solution="For 200 eligible positions: 30 expected targets, partitioned into 24 mask, 3 random and 3 keep; 170 eligible positions are unselected. There are also 12 ineligible positions. 30/212≈14.15%, which is compatible with a 15% eligible rate. Realized small-batch counts vary; branch identity cannot be inferred perfectly from replacement IDs.">
+        <Prose>A padded batch has 212 positions, 12 special or padding. At 15% selection and 80/10/10 corruption, compute expected branch counts. Could a log reporting 14.15% selected be consistent?</Prose>
+      </Exercise>
+      <Exercise title="2. Repair an uneven reduction" hint="Recover summed losses before combining sequences." solution="Total loss is 1×0.4+3×1.2=4.0 over four targets, giving 1.0 nats per target. Averaging the two sequence means gives 0.8 and uses equal sequence weights instead. A zero-target sequence adds 0 to the sum and 0 to the count; its undefined mean must not become another zero-valued observation.">
+        <Prose>A has one target with mean loss 0.4; B has three targets with mean 1.2. Compute the batch mean per target and explain the effect of counting a zero-target sequence as another zero mean.</Prose>
+      </Exercise>
+      <Exercise title="3. Diagnose corrupted labels" hint="Assignment can alias an array; a random PAD ID can occupy an originally valid position." solution="Preserve original, copy before corruption, and build labels from original at the selected set. Preserve the original padding mask. Otherwise labels can contain replacement IDs, and a valid position randomly replaced by PAD becomes hidden from attention. Selecting targets using input==MASK also loses random/keep branches.">
+        <Prose>A developer writes <Code>corrupted=original</Code>, replaces IDs, then builds labels from <Code>original</Code> and attention from <Code>corrupted!=PAD</Code>. Identify both data-flow failures.</Prose>
+      </Exercise>
+      <Exercise title="4. Implement a changed gradient" hint="Subtract one from the target probability; this case has one scored row." solution="For [.2,.3,.5] with target 1, the gradient is [.2,−.7,.5]. SGD with rate .1 changes logits by [−.02,+.07,−.05]. Compare loss/gradient with autograd. Adding 1000 to every logit should preserve both within numerical tolerance. An additional ignored row has zero direct gradient and does not change the selected mean.">
+        <Prose>Use probabilities <Code>[0.2, 0.3, 0.5]</Code>, target index 1. Derive the logit gradient and an SGD step of size 0.1, then implement the calculation and compare with cross-entropy. Add an ignored row and a constant logit shift.</Prose>
+      </Exercise>
+      <Exercise title="5. Change word groups" hint="Sample distinct nonnegative group IDs, then broadcast membership back to pieces." solution="For [−1, 0, 1, 1, 2,−1], choosing group 1 selects positions 2 and 3 together and excludes special positions. Test no/all groups and relabelled group IDs; then add a third piece to group 1. Independent piece sampling changes the event and permits partial words. Group sampling is not a fixed piece-budget algorithm.">
+        <Prose>Implement whole-word selection for word IDs <Code>[−1, 0, 1, 1, 2,−1]</Code>, where −1 is special. Add a third piece to one word and explain the realized-token-count consequence.</Prose>
+      </Exercise>
+      <Exercise title="6. Test a two-blank claim" hint="List the four joint outcomes before multiplying marginals." solution="The desired distribution has .5 on red/red and blue/blue, 0 on mixed pairs. Marginals multiply to .25 on all four, putting half the mass on impossible pairs. Iterative sampling adds transitions; PLL sums different leave-one-out conditionals. Neither is automatically the causal chain-rule probability.">
+        <Prose>A colleague says multiplying two MLM output rows recovers the probability of a two-word completion. Refute this with the matching-colour example, then explain what PLL scores.</Prose>
+      </Exercise>
+      <Exercise title="7. Compare mask rates honestly" hint="Different evaluation corruptions change the task difficulty, not only the model." solution="Hold split/tokenizer/architecture/compute policy fixed, report seeds, and vary training rate. Evaluate checkpoints on identical frozen input/target masks for paired reconstruction, plus the actual downstream task. Report excluded unknowns and target counts. Own-training-loss comparisons do not isolate model quality, and one Alice run cannot establish an optimal rate.">
+        <Prose>Design a 15% versus 40% training-mask comparison. Specify split, evaluation masks, denominator, baseline and downstream test before recommending a rate.</Prose>
+      </Exercise>
+    </section>
+
+    <Legacy id="10-primary-sources" />
+    <Sources alternatives={<ul>
+      <li><a href="https://d2l.ai/chapter_natural-language-processing-pretraining/bert.html">Dive into Deep Learning §15.8: BERT</a> — textbook explanation of contextual representations, summed embeddings and prediction heads. Read after section 4; surrounding chapters provide broader Transformer foundations.</li>
+      <li><a href="https://huggingface.co/learn/llm-course/en/chapter7/3">Hugging Face course: fine-tuning a masked language model</a> — practical collators/training/evaluation. The written chapter was inspected; its pretrained route needs downloads. Retain section 8's metric distinctions when reading its “perplexity” terminology.</li>
+    </ul>}>
+      <li><a href="https://aclanthology.org/N19-1423/">Devlin et al., BERT (NAACL 2019)</a> — §3/figures 1–2 architecture/objectives; appendix C.2 corruption ablations.</li>
+      <li><a href="https://github.com/google-research/bert/blob/master/create_pretraining_data.py">Original BERT preprocessing</a> — candidate filtering, rounded budget and random replacements.</li>
+      <li><a href="https://arxiv.org/abs/1907.11692">Liu et al., RoBERTa (2019)</a> — §4.1 dynamic masking and §4.2 input/NSP comparisons.</li>
+      <li><a href="https://huggingface.co/docs/transformers/main_classes/data_collator#transformers.DataCollatorForLanguageModeling">Transformers collator</a> and <a href="https://huggingface.co/docs/transformers/model_doc/bert">BERT API</a> — actual input/label/probability contracts for the 5.17.0 library snapshot.</li>
+      <li><a href="https://aclanthology.org/2023.eacl-main.217/">Wettig et al., Should You Mask 15%? (EACL 2023)</a> — separates more targets from more corruption under stated training conditions.</li>
+      <li><a href="https://aclanthology.org/2020.acl-main.240/">Salazar et al., Masked Language Model Scoring (ACL 2020)</a> — pseudo-likelihood and applications.</li>
+      <li><a href="https://arxiv.org/abs/2003.10555">Clark et al., ELECTRA (2020)</a> and <a href="https://www.jmlr.org/papers/v21/20-074.html">Raffel et al., T5 (2020)</a> — detection versus ordered span-generation targets.</li>
+      <li><a href="https://arxiv.org/abs/2502.09992">Nie et al., Large Language Diffusion Models (2025)</a> — a distinct masked generative objective and sampler.</li>
+      <li><a href="https://www.gutenberg.org/ebooks/11">Project Gutenberg, Alice's Adventures in Wonderland</a> — the actual literary source; offline provenance records preprocessing and split.</li>
+    </Sources>
+    <section className="lesson-ending lesson-ending--next" data-lesson-ending="next"><H2>11. Readiness and next study</H2>
+      <Prose>Trace all three branches to original labels, distinguish attention from loss masks, calculate a selected mean and its empty case, explain context gradients, and reproduce the scratch/library checks. Explain why the measured small run does not establish useful language ability and why PLL differs from a causal joint.</Prose>
+      <Prose>Next, <a href={`${route}data-curation-deduplication-minhash-bloom-filters?module=large-language-models`}>Data Curation &amp; Deduplication</a> asks which text should supply those targets and how to prevent duplication from distorting training or leaking into evaluation. The objective is explicit; trustworthy data is the next problem.</Prose>
+    </section>
+  </div>,
 };
-
 export default maskedLanguageModeling;

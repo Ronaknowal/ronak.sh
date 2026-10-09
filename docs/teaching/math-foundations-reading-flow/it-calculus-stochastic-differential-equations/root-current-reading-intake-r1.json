@@ -1,0 +1,294 @@
+{
+  "status": "Partial research/intake only; Root redirected to DIFFERENT Dynamics design review",
+  "author": "/root",
+  "topic": {
+    "title": "Itô Calculus & Stochastic Differential Equations",
+    "level": "advanced",
+    "blueprint": {
+      "summary": "Explain why Brownian forcing changes integration and the chain rule, solve concrete stochastic models, and distinguish a correct model from a reliable simulation or distribution estimate.",
+      "outcomes": [
+        "Translate drift, diffusion, elapsed time and information available into a meaningful stochastic model",
+        "Derive the Brownian left-point integral and its surviving quadratic-variation correction",
+        "Use Itô's formula and covariance terms to transform scalar and small vector processes",
+        "Solve geometric Brownian and Ornstein-Uhlenbeck models and interpret paths, moments and stationary laws",
+        "Convert Itô and Stratonovich conventions without silently changing the model",
+        "State sufficient well-posedness conditions and distinguish pathwise versus distributional solution claims",
+        "Implement Euler-Maruyama and scalar Milstein on a shared Brownian noise grid",
+        "Separate strong error, weak bias, Monte Carlo uncertainty, numerical stability and boundary errors",
+        "Connect the generator with moment, forward-density and backward-expectation equations",
+        "Diagnose a changed noisy-system example and state what its evidence does and does not establish"
+      ],
+      "prerequisites": [
+        "Stochastic Processes (Markov Chains, Brownian Motion, Poisson)",
+        "Dynamical Systems Theory & Chaos",
+        "Multivariate Calculus & Gradients",
+        "Measure Theory & Probability Spaces"
+      ],
+      "sequence": [
+        "Choose a noisy state and check the time and noise units",
+        "Accumulate Brownian increments without reading the future",
+        "Construct the integral and explain the quadratic correction",
+        "Derive and use the stochastic chain and product rules",
+        "Solve multiplicative growth and distinguish mean, median and pathwise behavior",
+        "Solve mean reversion and connect paths with probability flow",
+        "Specify the calculus convention and the meaning of a solution",
+        "Trace numerical steps driven by the same Brownian path",
+        "Measure path error, distribution bias and sampling uncertainty separately",
+        "Connect generators, expectation equations and a bounded change-of-measure example",
+        "Practise changed models and prepare for broader numerical methods"
+      ],
+      "visual": {
+        "type": "Information-aware increment traces, curvature diagrams, analytic growth laws, mean-reversion probability views and coupled numerical paths",
+        "question": "Which accumulated effect survives, which information was available, and which error does this comparison actually measure?",
+        "interaction": "Inspect signed interval contributions; vary model parameters with fixed randomness; group one fine Brownian grid into coarse increments; compare model-derived moments, exact solutions and explicit numerical updates."
+      },
+      "practice": {
+        "task": "Derive changed transformations, solve and interpret growth or mean reversion, repair an anticipating or wrongly coupled simulation, and justify a numerical/distributional validation report.",
+        "success": "Noise scaling, measurability, smoothness, time units, boundary conventions and error targets are explicit; complete calculations agree with independent exact or numerical references."
+      },
+      "misconceptions": [
+        "Brownian increments are ordinary derivatives or have standard deviation equal to elapsed time",
+        "Any sample-point choice gives the same stochastic integral",
+        "An adapted integrand is automatically integrable without a measurability or moment condition",
+        "A zero-mean noise term has no effect after a curved transformation",
+        "A mean trajectory is the typical realized trajectory",
+        "Stationary OU variance means every initial distribution is stationary",
+        "Identical drift text under two calculus conventions defines the same model",
+        "Strong and weak solutions mean the same thing as strong and weak numerical convergence",
+        "Changing the step size with fresh noise measures only numerical error",
+        "Euler-Maruyama preserves positivity or converges for arbitrary coefficients",
+        "A weak-order claim applies to every discontinuous event functional",
+        "An exact sampled skeleton certifies continuous-time barrier crossings",
+        "The forward density operator and backward generator put derivatives in the same places"
+      ],
+      "sources": [
+        "https://people.maths.ox.ac.uk/fehrman/SDENotes.pdf",
+        "https://webhomes.maths.ed.ac.uk/~dhigham/Publications/P42.pdf",
+        "https://www.columbia.edu/~mh2078/MonteCarlo/MCS_SDEs_MasterSlides.pdf",
+        "https://math.nyu.edu/~goodman/teaching/StochCalc2007/notes/l7.pdf",
+        "https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/resources/lecture-18-ito-calculus/"
+      ],
+      "depth": "specialist",
+      "designRecord": "docs/teaching/ITO-CALCULUS-SDE-LESSON-DESIGN.md",
+      "reviewFocus": "Preserved original program/output; predictable/progressive and square-integrable hypotheses; partition convergence; half-variance and cross-covariance terms; convention conversion signs; strong/weak semantics; correct Brownian coupling including weighted OU noise; solver regularity and positivity; stable exact error moments; generator/PDE boundary conditions; numerical versus sampling versus modeling evidence."
+    },
+    "id": "it-calculus-stochastic-differential-equations",
+    "trackId": "math-foundations",
+    "section": "Stochastic Processes & Dynamical Systems",
+    "trackIds": [
+      "math-foundations"
+    ],
+    "prerequisiteStatus": "recorded",
+    "prerequisiteIds": [
+      "stochastic-processes-markov-chains-brownian-motion-poisson",
+      "dynamical-systems-theory-chaos",
+      "multivariate-calculus-gradients",
+      "measure-theory-probability-spaces"
+    ],
+    "designStatus": "topic-brief-ready"
+  },
+  "notes": {
+    "instruction": "Read destination notes and relevant unresolved routing notes. Reassess evidence and learner benefit; record inclusion, adaptation, rerouting, reasoned deferral or rejection. A saved proposal is not an automatic content requirement.",
+    "workflow": "docs/teaching/topic-notes/README.md",
+    "destination": {
+      "path": "docs/teaching/topic-notes/it-calculus-stochastic-differential-equations.md",
+      "exists": true,
+      "markdown": "# Authoring notes: Itô Calculus & Stochastic Differential Equations\r\n\r\nCanonical topic ID: it-calculus-stochastic-differential-equations\r\n\r\nIdentity repair, 11 September 2026: the note originally used the legacy source-file stem ito-calculus-stochastic-differential-equations. The live catalogue and lesson manifest resolve the accent-derived stable ID it-calculus-stochastic-differential-equations. No canonical destination note previously existed; this move preserves the complete existing proposal and its evidence. The published source mapping remains unchanged.\r\n\r\n## 2026-09-10 — Preserve sampled-path, quadratic-variation and conditional-bridge distinctions\r\n\r\n- Status: resolved — implemented and author-verified; independent review is tracked separately.\r\n- Origin: mathematics 33, [Stochastic Processes design](../STOCHASTIC-PROCESSES-LESSON-DESIGN.md). The origin is implemented with [author verification](../STOCHASTIC-PROCESSES-VERIFICATION.md); its final source fingerprints and actual finite/native/browser evidence are linked there.\r\n- Destination and ownership rationale: the origin supplies Brownian increments and finite observation limits. Itô owns adapted stochastic integration, the extra chain-rule term, general SDE discretization and numerical convergence.\r\n- Existing coverage inspected: current Itô source sections 2–3 state differential bookkeeping and Itô's formula; section 5 gives a GBM Euler example; sections 6/8 discuss conventions and numerical checks. It has no worked adapted-versus-look-ahead integral comparison, explicit coupled-grid experiment or between-sample crossing treatment.\r\n- Proposed treatment: connect the origin's equal deterministic partition calculation E(sum deltaW²)=T and variance 2T²/n to the second-order Taylor term. Establish the stated mode of convergence instead of applying an ordinary iid law of large numbers across a triangular array or claiming arbitrary path-dependent partitions. Distinguish square-integrable/locally defined integrals and adaptedness at an appropriate level.\r\n- Example and learning benefit: compare the left-point sum for W against a midpoint sum on the same Brownian samples, with their different limits and a clear convention. Couple fine/coarse SDE runs through shared Brownian increments to separate trajectory error from a changed random draw. The origin's conditional midpoint has mean(x+y)/2 and varianceDelta/4.\r\n- Threshold connection: constant-coefficient Brownian motion with endpoints x,y below b has conditional crossing probability exp(-2(b-x)(b-y)/(sigma²Delta)). A coarse plot can miss crossings even when its sampled Brownian values are exact. Extending a local Brownian-bridge approximation to state-dependent SDE coefficients needs a separate accuracy claim, not automatic exactness.\r\n- Prerequisites/boundaries: introduce conditioning, histories, moments and stochastic increment scaling; do not assume a chart proves nowhere differentiability. Keep model error, numerical error and sampling error distinct. Formal existence/uniqueness or solver-order assertions require their actual regularity assumptions.\r\n- Evidence: [Haugh SDE simulation slides](https://www.columbia.edu/~mh2078/MonteCarlo/MCS_SDEs_MasterSlides.pdf), conditional construction slides 23–24 and barrier discussion 28–31; [MIT reflection notes](https://ocw.mit.edu/courses/15-070j-advanced-stochastic-processes-fall-2013/aca1518a09539a09ddd37428ab0d0268_MIT15_070JF13_Lec7.pdf), sections 1–2; [MIT Stochastic Processes II notes](https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/3b97c6b0c282dd9dc024c4c7ffe3fba8_MIT18_S096F13_lecnote17.pdf), quadratic-variation motivation. Read 10 September 2026; origin executed independent moment, Gaussian-conditioning and reflection checks; its verification record states their finite limits. Do not treat every informal source convergence sentence as a sufficiently qualified theorem.\r\n- Resolution: assessed during mathematics37 design on 11 September 2026. Include the adaptedness/QV convention comparison and coupled-grid investigation; retain the exact constant-coefficient crossing qualification as a local reminder linked to the completed origin. A general nonlinear-SDE bridge correction is deferred because its error depends on a separate approximation, not the origin's exact formula. The destination is now implemented and author-verified; see the [Itô/SDE verification](../ITO-CALCULUS-SDE-VERIFICATION.md). No destination body changed in this design phase.\r\n- Origin implementation/verification: [Stochastic Processes author verification](../STOCHASTIC-PROCESSES-VERIFICATION.md). Destination author checks are complete; independent review and shared integration remain separate.\r\n\r\n\r\n## Destination implementation closure — 11 September 2026\r\n\r\nSections 1–3 now derive the information contract, finite QV identities, deterministic-partition L² bound, dyadic almost-sure scope and square-integrable integral construction. Section 7 groups the same fine Brownian increments for EM/Milstein/exact GBM; section 5 separately derives the correct weighted OU coupling. Section 10 retains the exact constant-coefficient crossing reminder and explains why a nonlinear-SDE bridge approximation needs separate validation. The proposal to use a midpoint is implemented as the explicitly defined symmetric endpoint average, avoiding ambiguity about sampling the temporal midpoint. The actual original/native, model and desktop/mobile/keyboard evidence is linked in [Itô/SDE author verification](../ITO-CALCULUS-SDE-VERIFICATION.md). The earlier design-phase status above is historical; the exact destination freeze is in its author packet. No unrelated topic or source mapping was changed.\r\n"
+    },
+    "unassigned": {
+      "path": "docs/teaching/topic-notes/UNASSIGNED.md",
+      "exists": true,
+      "markdown": "# Discoveries awaiting a teaching owner\r\n\r\nThis routing inbox records actual discoveries awaiting an owner; it is not evidence that the whole curriculum was audited or is complete.\r\n\r\n## 2026-09-10 — Establish a teaching owner for bit manipulation in interview preparation\r\n\r\nThe original search, proposal and alternatives below explain why this item was routed. They are retained as history; use the current resolution and canonical destination when deciding future work.\r\n\r\n- Status: assigned 11 September 2026 to [Arrays, Strings & Hash Maps](arrays-strings-hash-maps.md); implemented, author-verified and independently reviewed; production integration is complete. This item is retained as resolved routing history, not an unassigned obligation.\r\n- Origin: [DSA practice standard and evolving coverage map](../DSA-PRACTICE-STANDARD.md), prepared while adding practice to the first five DSA lessons.\r\n- Proposed destination and alternatives: find an existing programming/DSA owner before proposing a new topic. A scoped search of track definitions and curriculum source for bitwise, bit manipulation, bitmask and XOR found incidental numerical-reproducibility mentions, not an explicit DSA teaching home. This does not prove that no relevant sentence exists elsewhere.\r\n- Idea and learning benefit: a future interview-preparation route should teach masks as sets, bitwise versus boolean operations, width/sign and shift contracts, and the reasoning behind useful XOR identities before asking learners to memorize bit tricks. Determine which mechanisms already belong to a foundation lesson and which need a DSA extension.\r\n- Existing coverage: the later bounded source review found substantive DP section 7 mask teaching and the Fenwick lowest-bit proof. The original title/brief search was incomplete evidence of absence. Broader XOR/popcount/word interpretation and direct practice were the concrete extension gap; the Arrays branch is now implemented and independently reviewed, with production integration tracked separately in its destination note.\r\n- Proposed treatment: inspect plausible owners and prerequisites during the next relevant scoped authoring/planning task; route a full note there with examples, independently verified language behavior and curated transfer practice. Preserve stable IDs and module order. Do not insert an unexplained hard problem into the present foundation sets merely to increase breadth.\r\n- Prerequisites and boundaries: integer representation, boolean logic, sets, language-specific bit/shift semantics; distinguish Python's integer behavior from fixed-width machine integers. API/version details must be researched before authoring.\r\n- Evidence: the local curriculum search and the explicitly partial practice coverage map; no new technical implementation claim or source endorsement is made by this note.\r\n- Resolution: the existing Arrays owner is assigned a connected deeper representation branch, retaining stable title/ID/order and existing DP/Fenwick applications. No new topic is added. The earlier discovery itself made no source edit; the subsequent scoped extension has its own baseline and evidence.\r\n- Implementation/verification links: [design and authoring instructions](../BITWISE-FOUNDATIONS-EXTENSION-DESIGN.md), [destination note](arrays-strings-hash-maps.md), [author verification](../BITWISE-FOUNDATIONS-EXTENSION-VERIFICATION.md) and [closed independent review](../BITWISE-FOUNDATIONS-INDEPENDENT-REVIEW.md). The [final production integration](../evidence/dsa-math-foundations-complete-integration.json) is complete; do not implement this resolved branch again from the original proposal.\r\n\r\nAdd further unassigned discoveries using the [note format](README.md), substituting a proposed module/topic and ownership alternatives for the canonical destination. Record why each matters and what remains uncertain. Once assigned, save the full note against the receiving topic's stable ID and leave a link and disposition here. Authors review entries relevant to the current topic; they do not implement every inbox idea on each run.\r\n"
+    }
+  },
+  "ledger": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "record": "docs/teaching/implementation-depth/MATH-DEPTH-REMEDIATION.md",
+    "content": {
+      "status": "complete",
+      "completedAt": "2026-09-21T20:08:19.725Z",
+      "manuscript": "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx",
+      "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "files": {
+        "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx": "9d7dad6095992a068bc73483c0c9b4e9b6aa955d503b7b10ca66eeb00f7f8f2d",
+        "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+        "src/learn/data/curriculum/blueprints/it-calculus-stochastic-differential-equations.js": "9b829735b869871787c71d8e0ba71b19c0812466073eb4b8e2f0e073394febf6",
+        "src/learn/data/ito-sde-examples.js": "17eaeecd7a1835a2f69145995f2d93befc6e8263e9af398f79d783c90d2de477",
+        "src/learn/data/ito-calculus-mechanism-program.js": "0302396d8cfe6e45cf7a12ae267c40a5b636758417958b63eb40a82264ac9730",
+        "public/learn-assets/ito-calculus/sde-library-bridge.py": "f294f4003beeec1068aa2a3f746b895738101f4f76c8e128ae106c911c21e13f"
+      }
+    },
+    "implementation": {
+      "status": "complete",
+      "completedAt": "2026-09-21T20:08:19.762Z",
+      "reviewedFiles": {
+        "public/learn-assets/ito-calculus/sde-library-bridge.py": "f294f4003beeec1068aa2a3f746b895738101f4f76c8e128ae106c911c21e13f",
+        "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+        "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+        "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+        "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+        "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+        "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+        "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+        "src/learn/components/lesson-labs/ItoSdeLabs.jsx": "0582b4ee973b3871e70a1021b23f6f5041c442956a5898b51ba6132b54be7ac1",
+        "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+        "src/learn/components/lesson-labs/MechanismProgram.jsx": "347fde8eefd4ce624c0db36597d4a421412a7c70a60e4a553a708f30f4b9d920",
+        "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+        "src/learn/components/lesson-labs/ito-sde-labs.css": "65cc1491cfe22001e557d82e35f2dd0d2cb185f6c56278536e46c8269dc5568c",
+        "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+        "src/learn/components/lesson-labs/mechanism-program.css": "a2758dfc67cd54052aebf4f753b08fa66a054766da862bdb9aa6fa0c54e83316",
+        "src/learn/data/curriculum/blueprints/it-calculus-stochastic-differential-equations.js": "9b829735b869871787c71d8e0ba71b19c0812466073eb4b8e2f0e073394febf6",
+        "src/learn/data/ito-calculus-mechanism-program.js": "0302396d8cfe6e45cf7a12ae267c40a5b636758417958b63eb40a82264ac9730",
+        "src/learn/data/ito-sde-examples.js": "17eaeecd7a1835a2f69145995f2d93befc6e8263e9af398f79d783c90d2de477",
+        "src/learn/data/ito-sde-models.js": "ebe3d90c5c0d16910cdb2a0eb7ec0bf1a06a72913a895139cb8dfbacb7704b06",
+        "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx": "9d7dad6095992a068bc73483c0c9b4e9b6aa955d503b7b10ca66eeb00f7f8f2d",
+        "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+      }
+    },
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete",
+          "evidence": [
+            "docs/teaching/LESSON-VISUAL-LAYOUT-REVIEW.md",
+            "docs/teaching/evidence/lesson-visual-layout-review.json"
+          ]
+        },
+        "record": "docs/teaching/ITO-CALCULUS-SDE-VERIFICATION.md",
+        "legacyReview": true,
+        "nextAction": "Both phases have recorded completion; use the current user request for the next scope. Visual-layout follow-up reviewed on 14 September 2026; see docs/teaching/LESSON-VISUAL-LAYOUT-REVIEW.md for the current presentation evidence and its limits."
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:47.135Z",
+          "manuscript": "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx": "1888babc2459b65818d9aa7c1301e32d22a0f3188773b4e15ff513ceef3dc670",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/it-calculus-stochastic-differential-equations.js": "9b829735b869871787c71d8e0ba71b19c0812466073eb4b8e2f0e073394febf6",
+            "src/learn/data/ito-sde-examples.js": "17eaeecd7a1835a2f69145995f2d93befc6e8263e9af398f79d783c90d2de477"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:47.137Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx": "1888babc2459b65818d9aa7c1301e32d22a0f3188773b4e15ff513ceef3dc670",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/ItoSdeLabs.jsx": "0582b4ee973b3871e70a1021b23f6f5041c442956a5898b51ba6132b54be7ac1",
+            "src/learn/data/ito-sde-models.js": "ebe3d90c5c0d16910cdb2a0eb7ec0bf1a06a72913a895139cb8dfbacb7704b06",
+            "src/learn/components/lesson-labs/ito-sde-labs.css": "65cc1491cfe22001e557d82e35f2dd0d2cb185f6c56278536e46c8269dc5568c",
+            "src/learn/data/ito-sde-examples.js": "17eaeecd7a1835a2f69145995f2d93befc6e8263e9af398f79d783c90d2de477",
+            "src/learn/data/curriculum/blueprints/it-calculus-stochastic-differential-equations.js": "9b829735b869871787c71d8e0ba71b19c0812466073eb4b8e2f0e073394febf6"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      }
+    ],
+    "nextAction": "Scoped implementation-depth revision complete; retain source-bound evidence. User acceptance remains separate."
+  },
+  "effective": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "content": "stale",
+    "implementation": "stale",
+    "recordedContent": "complete",
+    "recordedImplementation": "complete",
+    "canFinish": false,
+    "record": "docs/teaching/implementation-depth/MATH-DEPTH-REMEDIATION.md",
+    "contentFiles": [
+      "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx",
+      "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "src/learn/data/curriculum/blueprints/it-calculus-stochastic-differential-equations.js",
+      "src/learn/data/ito-sde-examples.js",
+      "src/learn/data/ito-calculus-mechanism-program.js",
+      "public/learn-assets/ito-calculus/sde-library-bridge.py"
+    ],
+    "nextAction": "Scoped implementation-depth revision complete; retain source-bound evidence. User acceptance remains separate."
+  },
+  "personallyReadEntire": [
+    {
+      "path": "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx",
+      "sha256": "0894bde2e25b82088662818f8d53058a480e6b4ba8c2e1c048553c5029f54b66",
+      "bytes": 52021
+    },
+    {
+      "path": "src/learn/data/ito-sde-models.js",
+      "sha256": "f48f113cc9a256e421470614215e003306b372ea1d079644f45ea4ce17f8328d",
+      "bytes": 14864
+    },
+    {
+      "path": "src/learn/data/ito-sde-examples.js",
+      "sha256": "17eaeecd7a1835a2f69145995f2d93befc6e8263e9af398f79d783c90d2de477",
+      "bytes": 21519
+    },
+    {
+      "path": "src/learn/data/ito-calculus-mechanism-program.js",
+      "sha256": "0302396d8cfe6e45cf7a12ae267c40a5b636758417958b63eb40a82264ac9730",
+      "bytes": 453
+    },
+    {
+      "path": "public/learn-assets/ito-calculus/sde-library-bridge.py",
+      "sha256": "651318a295897759be7364d1ec598072d7224664cfe2ac7f7a4e96eeda79d01d",
+      "bytes": 4595
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/it-calculus-stochastic-differential-equations.js",
+      "sha256": "aaac3ed2e3ec6ba36f29ac0ca5bf3cd1a23e7729b421c35c60ff499b453e54ff",
+      "bytes": 5330
+    },
+    {
+      "path": "docs/teaching/topic-notes/it-calculus-stochastic-differential-equations.md",
+      "sha256": "7b1525e21ce8f725f7bf0f95f1f14930fb4b6e53efab6506936b3df0a248ab3e",
+      "bytes": 5782
+    }
+  ],
+  "notYetRead": [
+    "ItoSdeLabs.jsx",
+    "ito-sde-labs.css",
+    "historical design/verification/full receipts"
+  ],
+  "registryCheck": "No it-calculus or ito-calculus entry found; full deep-research pass required, not completed.",
+  "boundedPrimaryReading": [
+    {
+      "url": "https://people.maths.ox.ac.uk/fehrman/SDENotes.pdf",
+      "read": "Complete contents; opening probability/filtration material through printed p10; selected opening stochastic integration p41 and existence/uniqueness p96, incomplete sections. No full book read."
+    },
+    {
+      "url": "https://webhomes.maths.ed.ac.uk/~dhigham/Publications/P42.pdf",
+      "read": "Title/abstract, figure2 caption, stochastic integral section3 through temporal midpoint construction printed p531. This differs from the lesson symmetric endpoint convention; both distinctions must remain explicit."
+    },
+    {
+      "url": "https://docs.kidger.site/diffrax/usage/getting-started/",
+      "read": "SDE example and Euler/ControlTerm/MultiTerm/VirtualBrownianTree description; solver convention is part of the method. No library execution or recommendation decision."
+    }
+  ],
+  "preliminaryFindings": [
+    "Old mathematical depth is substantial and must be conserved: adaptedness, QV modes, isometry/local martingale, time-dependent transform, mixed covariance, GBM/OU laws and correct OU coupling, convention conversion, solution semantics, coupled EM/Milstein, exact moment errors, stability, forward/backward and constant change of measure.",
+    "Existing ordinary-library sdeint bridge is complete; do not invent missing library coverage.",
+    "Five distinct old programme pairs have explanatory-only print lines: covariance, coupling, generator, tilt and time_transform. Assess print-only successors while preserving all original numerical stdout and evidence; literal prints are not computed proof.",
+    "No simulations, mains, fits or original scientific campaigns were rerun. No source/design/content/runtime phase change."
+  ],
+  "next": "Finish whole lab/CSS and historical source-identity intake, full two-canonical/original/API research, mechanism and observed-data design, then DIFFERENT design review. This partial record does not authorize manuscript/runtime release."
+}

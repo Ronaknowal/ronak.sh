@@ -1,0 +1,24 @@
+{
+  "status": "DESIGN_ACCEPTED_FOR_COMPLETE_CONTENT_AUTHORING",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-source-r2.json",
+    "sha256": "daf31be9f999fc345a4808ff8810a60e327e44f7985367dcb2e4b2d45d07bc68"
+  },
+  "wholeReview": {
+    "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-independent-root-r1.json",
+    "sha256": "299f824a16d67976d62a7486caf06ab42d591b65306d8a310daa7d1ec25b424f"
+  },
+  "sameReview": {
+    "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-same-root-r2.json",
+    "sha256": "c72341b3dc3b93d4ca10b43d040b78768a229f1fc6f0e90d94982d8135c14003"
+  },
+  "scope": {
+    "sections": 11,
+    "visualJobs": 56,
+    "investigations": 11,
+    "retainedProgrammes": 11,
+    "newTeachingProgrammes": 1,
+    "practiceGroups": 15
+  },
+  "nextAction": "Write the complete revised manuscript and actionable visual specifications from design-r2. Preserve eleven full old programme pairs; exact print-only successors for nine, execute only the new vector RK4 teaching programme and new practice once. Independent whole-content review precedes runtime. Explicit staged-state ownership, exact fixtures and clockwise numerical oscillator convention are mandatory carryforwards."
+}

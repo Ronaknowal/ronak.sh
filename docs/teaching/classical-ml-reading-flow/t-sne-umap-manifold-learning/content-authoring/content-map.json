@@ -1,0 +1,804 @@
+{
+  "status": "COMPLETE_AUTHORED_CONTENT_MAP_FOR_DIFFERENT_REVIEW_RUNTIME_NOT_STARTED",
+  "manuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/reading-flow-manuscript.md",
+    "bytes": 136791,
+    "sha256": "d11d369ff19d23db2780356e15e172cb34dcbf5e69fcf3bf97133a283e530e56"
+  },
+  "specifications": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/visual-and-investigation-specifications.md",
+    "bytes": 42262,
+    "sha256": "b82da5c43df028a20263068707031ec13606d370a5f1ccec8d4729d47437b5e3"
+  },
+  "sections": [
+    {
+      "section": 1,
+      "heading": "Follow one picture from recorded cells to a map",
+      "manuscriptLine": 13,
+      "drawings": [
+        "D01",
+        "D02",
+        "D03"
+      ],
+      "programs": [],
+      "streams": [],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 2,
+      "heading": "A short route can be long on the surface",
+      "manuscriptLine": 37,
+      "drawings": [
+        "D04",
+        "D05",
+        "D06"
+      ],
+      "programs": [
+        "isomap_routes.py"
+      ],
+      "streams": [
+        "isomap_routes"
+      ],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 3,
+      "heading": "Name the relationship before scoring the picture",
+      "manuscriptLine": 145,
+      "drawings": [
+        "D07",
+        "D08",
+        "D09"
+      ],
+      "programs": [
+        "audit_saved_neighbors.py"
+      ],
+      "streams": [
+        "audit_saved_neighbors"
+      ],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 4,
+      "heading": "t-SNE turns each distance row into an effective neighborhood",
+      "manuscriptLine": 299,
+      "drawings": [
+        "D10",
+        "D11",
+        "D12",
+        "D13"
+      ],
+      "programs": [
+        "gaussian_rows.py"
+      ],
+      "streams": [
+        "gaussian_rows"
+      ],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 5,
+      "heading": "Give distant points room, then follow one force",
+      "manuscriptLine": 429,
+      "drawings": [
+        "D14",
+        "D15",
+        "D16",
+        "D17",
+        "D18"
+      ],
+      "programs": [],
+      "streams": [],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 6,
+      "heading": "UMAP builds local memberships and samples their edges",
+      "manuscriptLine": 482,
+      "drawings": [
+        "D19",
+        "D20",
+        "D21",
+        "D22",
+        "D23",
+        "D24",
+        "D25",
+        "D26"
+      ],
+      "programs": [
+        "umap-mechanism.py",
+        "sampled_pair_events.py",
+        "local_density_radius.py"
+      ],
+      "streams": [
+        "umapMechanism",
+        "sampled_pair_events",
+        "local_density_radius"
+      ],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 7,
+      "heading": "Compare real maps through the same records",
+      "manuscriptLine": 842,
+      "drawings": [
+        "D27",
+        "D28",
+        "D29"
+      ],
+      "programs": [
+        "inspect_digits.py",
+        "inspect_umap.py"
+      ],
+      "streams": [
+        "digitsAudit",
+        "umapFit"
+      ],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 8,
+      "heading": "Decide whether the next observation needs a fixed map",
+      "manuscriptLine": 944,
+      "drawings": [
+        "D30",
+        "D31",
+        "D32",
+        "D33"
+      ],
+      "programs": [
+        "compare_transforms.py",
+        "reference_map_routes.py"
+      ],
+      "streams": [
+        "heldoutTransform",
+        "reference_map_routes"
+      ],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 9,
+      "heading": "Deeper branch: distances, recipes, smoothness and tangent patches",
+      "manuscriptLine": 1097,
+      "drawings": [
+        "D34",
+        "D35",
+        "D36",
+        "D37",
+        "D38",
+        "D39",
+        "D40",
+        "D41",
+        "D42"
+      ],
+      "programs": [
+        "classical_geometry.py",
+        "lle_recipes.py",
+        "graph_spectrum.py",
+        "local_tangent_patch.py"
+      ],
+      "streams": [
+        "classical_geometry",
+        "lle_recipes",
+        "graph_spectrum",
+        "local_tangent_patch"
+      ],
+      "readingRole": "visible deeper teaching"
+    },
+    {
+      "section": 10,
+      "heading": "Deeper branch: derive the force and distinguish sampled objectives",
+      "manuscriptLine": 1559,
+      "drawings": [
+        "D43",
+        "D44",
+        "D45"
+      ],
+      "programs": [
+        "tiny_tsne.py"
+      ],
+      "streams": [
+        "tinyTsne"
+      ],
+      "readingRole": "visible deeper teaching"
+    },
+    {
+      "section": 11,
+      "heading": "Practice: calculate, diagnose and transfer",
+      "manuscriptLine": 1642,
+      "drawings": [],
+      "programs": [],
+      "streams": [],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 12,
+      "heading": "Further learning and technical references",
+      "manuscriptLine": 1798,
+      "drawings": [],
+      "programs": [],
+      "streams": [],
+      "readingRole": "first-pass or shared ending"
+    },
+    {
+      "section": 13,
+      "heading": "What you can now do, and what question comes next",
+      "manuscriptLine": 1816,
+      "drawings": [],
+      "programs": [],
+      "streams": [],
+      "readingRole": "first-pass or shared ending"
+    }
+  ],
+  "drawings": [
+    {
+      "id": "D01",
+      "title": "actual record anatomy",
+      "section": 1,
+      "manuscriptLine": 15,
+      "specificationLine": 19
+    },
+    {
+      "id": "D02",
+      "title": "first paired neighborhood",
+      "section": 1,
+      "manuscriptLine": 23,
+      "specificationLine": 23
+    },
+    {
+      "id": "D03",
+      "title": "projection versus jointly chosen coordinates",
+      "section": 1,
+      "manuscriptLine": 29,
+      "specificationLine": 27
+    },
+    {
+      "id": "D04",
+      "title": "ambient sheet and local patch",
+      "section": 2,
+      "manuscriptLine": 39,
+      "specificationLine": 31
+    },
+    {
+      "id": "D05",
+      "title": "actual U graph and relaxation",
+      "section": 2,
+      "manuscriptLine": 43,
+      "specificationLine": 35
+    },
+    {
+      "id": "D06",
+      "title": "connectivity versus shortcuts",
+      "section": 2,
+      "manuscriptLine": 49,
+      "specificationLine": 39
+    },
+    {
+      "id": "D07",
+      "title": "six preservation questions",
+      "section": 3,
+      "manuscriptLine": 147,
+      "specificationLine": 43
+    },
+    {
+      "id": "D08",
+      "title": "false and missing directed neighbors",
+      "section": 3,
+      "manuscriptLine": 158,
+      "specificationLine": 47
+    },
+    {
+      "id": "D09",
+      "title": "rankings before aggregate scores",
+      "section": 3,
+      "manuscriptLine": 170,
+      "specificationLine": 51
+    },
+    {
+      "id": "D10",
+      "title": "Gaussian row and sampling intervals",
+      "section": 4,
+      "manuscriptLine": 301,
+      "specificationLine": 55
+    },
+    {
+      "id": "D11",
+      "title": "entropy and feasible effective counts",
+      "section": 4,
+      "manuscriptLine": 313,
+      "specificationLine": 59
+    },
+    {
+      "id": "D12",
+      "title": "opposite conditional rows",
+      "section": 4,
+      "manuscriptLine": 321,
+      "specificationLine": 63
+    },
+    {
+      "id": "D13",
+      "title": "complete symmetric joint object",
+      "section": 4,
+      "manuscriptLine": 325,
+      "specificationLine": 67
+    },
+    {
+      "id": "D14",
+      "title": "crowding's competing neighborhoods",
+      "section": 5,
+      "manuscriptLine": 431,
+      "specificationLine": 71
+    },
+    {
+      "id": "D15",
+      "title": "pair separations and heavy-tail ruler",
+      "section": 5,
+      "manuscriptLine": 435,
+      "specificationLine": 75
+    },
+    {
+      "id": "D16",
+      "title": "global normalization from every pair",
+      "section": 5,
+      "manuscriptLine": 448,
+      "specificationLine": 79
+    },
+    {
+      "id": "D17",
+      "title": "signed force anatomy and one simultaneous step",
+      "section": 5,
+      "manuscriptLine": 460,
+      "specificationLine": 83
+    },
+    {
+      "id": "D18",
+      "title": "exaggeration and a failed finite step",
+      "section": 5,
+      "manuscriptLine": 474,
+      "specificationLine": 87
+    },
+    {
+      "id": "D19",
+      "title": "retained UMAP neighbor-array anatomy",
+      "section": 6,
+      "manuscriptLine": 486,
+      "specificationLine": 91
+    },
+    {
+      "id": "D20",
+      "title": "calibrate one complete local row",
+      "section": 6,
+      "manuscriptLine": 499,
+      "specificationLine": 95
+    },
+    {
+      "id": "D21",
+      "title": "clamping, ties and missing support",
+      "section": 6,
+      "manuscriptLine": 503,
+      "specificationLine": 99
+    },
+    {
+      "id": "D22",
+      "title": "reciprocal memberships and union",
+      "section": 6,
+      "manuscriptLine": 507,
+      "specificationLine": 103
+    },
+    {
+      "id": "D23",
+      "title": "map curve and min_dist",
+      "section": 6,
+      "manuscriptLine": 684,
+      "specificationLine": 107
+    },
+    {
+      "id": "D24",
+      "title": "complete ideal pair terms",
+      "section": 6,
+      "manuscriptLine": 688,
+      "specificationLine": 111
+    },
+    {
+      "id": "D25",
+      "title": "scheduled endpoints and actual event order",
+      "section": 6,
+      "manuscriptLine": 702,
+      "specificationLine": 115
+    },
+    {
+      "id": "D26",
+      "title": "local radius and density-aware branch",
+      "section": 6,
+      "manuscriptLine": 780,
+      "specificationLine": 119
+    },
+    {
+      "id": "D27",
+      "title": "all real saved layouts and90 scores",
+      "section": 7,
+      "manuscriptLine": 846,
+      "specificationLine": 123
+    },
+    {
+      "id": "D28",
+      "title": "unfavorable local reversal",
+      "section": 7,
+      "manuscriptLine": 932,
+      "specificationLine": 127
+    },
+    {
+      "id": "D29",
+      "title": "actual seed null and changed initialization",
+      "section": 7,
+      "manuscriptLine": 938,
+      "specificationLine": 131
+    },
+    {
+      "id": "D30",
+      "title": "train-only state and unfavorable validation",
+      "section": 8,
+      "manuscriptLine": 946,
+      "specificationLine": 135
+    },
+    {
+      "id": "D31",
+      "title": "projection, reference placement and encoder",
+      "section": 8,
+      "manuscriptLine": 988,
+      "specificationLine": 139
+    },
+    {
+      "id": "D32",
+      "title": "representations and memory",
+      "section": 8,
+      "manuscriptLine": 1087,
+      "specificationLine": 143
+    },
+    {
+      "id": "D33",
+      "title": "three approximation targets",
+      "section": 8,
+      "manuscriptLine": 1091,
+      "specificationLine": 147
+    },
+    {
+      "id": "D34",
+      "title": "measurements to centered Gram",
+      "section": 9,
+      "manuscriptLine": 1101,
+      "specificationLine": 151
+    },
+    {
+      "id": "D35",
+      "title": "eigen stretches, strain and length-residual stress",
+      "section": 9,
+      "manuscriptLine": 1118,
+      "specificationLine": 155
+    },
+    {
+      "id": "D36",
+      "title": "graph routes become coordinates",
+      "section": 9,
+      "manuscriptLine": 1246,
+      "specificationLine": 159
+    },
+    {
+      "id": "D37",
+      "title": "affine recipe and extrapolation",
+      "section": 9,
+      "manuscriptLine": 1252,
+      "specificationLine": 163
+    },
+    {
+      "id": "D38",
+      "title": "local solve, sparse recipes and excluded collapse",
+      "section": 9,
+      "manuscriptLine": 1258,
+      "specificationLine": 167
+    },
+    {
+      "id": "D39",
+      "title": "graph energy and normalization",
+      "section": 9,
+      "manuscriptLine": 1366,
+      "specificationLine": 171
+    },
+    {
+      "id": "D40",
+      "title": "tangent patches and distinct variants",
+      "section": 9,
+      "manuscriptLine": 1454,
+      "specificationLine": 175
+    },
+    {
+      "id": "D41",
+      "title": "walk distributions and time-weighted modes",
+      "section": 9,
+      "manuscriptLine": 1547,
+      "specificationLine": 179
+    },
+    {
+      "id": "D42",
+      "title": "filled complexes and projection counterexample",
+      "section": 9,
+      "manuscriptLine": 1553,
+      "specificationLine": 183
+    },
+    {
+      "id": "D43",
+      "title": "the two ordered derivatives and Z",
+      "section": 10,
+      "manuscriptLine": 1561,
+      "specificationLine": 187
+    },
+    {
+      "id": "D44",
+      "title": "retained beginning and ending",
+      "section": 10,
+      "manuscriptLine": 1574,
+      "specificationLine": 191
+    },
+    {
+      "id": "D45",
+      "title": "contrastive pair experiment and normalization",
+      "section": 10,
+      "manuscriptLine": 1634,
+      "specificationLine": 195
+    }
+  ],
+  "investigations": [
+    {
+      "id": "L1",
+      "placement": "L1, after D06",
+      "controls": "Radius ε1, range0–2.5",
+      "currentOutput": "Actual seven-node graph and A/G route recompute immediately; path and edge list beside measured geometry. A separate Step traces next settled/relaxed vertex under frozen current graph.",
+      "domainAndTransfer": "ε.75 has no path;0 genuine coincident zero edges only; reset exact U/ε1 and clears partial trace. Changing ε restarts trace. Compare connectivity with shortcut fidelity.",
+      "specificationLine": 205
+    },
+    {
+      "id": "L2",
+      "placement": "L2, after L1",
+      "controls": "D x1 and y2, ranges−1–3",
+      "currentOutput": "Fixed ε1; move only D, retain other6 IDs, rebuild graph and A/G path.",
+      "domainAndTransfer": "Disconnection remains visible, with∞/component list rather than coordinates. Nonfinite/out-of-bounds draft preserves last graph. Reset D(1,2). No endpoint/radius editors in this scene.",
+      "specificationLine": 206
+    },
+    {
+      "id": "L3",
+      "placement": "L3, after L2",
+      "controls": "Start A, end G, selectors A–G",
+      "currentOutput": "Fixed ε1 graph; selected endpoints and exact route/list/cumulative length update. Step optional traced relaxation under frozen graph.",
+      "domainAndTransfer": "Same endpoint gives length0 and path[ID]; no-path remains no-path. Reset A/G. The accepted optional third radius control is deliberately omitted because L1 already teaches it.",
+      "specificationLine": 207
+    },
+    {
+      "id": "L4",
+      "placement": "L4, after D11",
+      "controls": "Width σ1, positive range.1–3",
+      "currentOutput": "Fixed candidate distances1/2/3, raw weights, probability branches, entropy and perplexity update together.",
+      "domainAndTransfer": "Reject0/negative/nonfinite exact input; static zero/infinite limits are named separately. Common-rescaling mathematical null taught beside code. Reset1.",
+      "specificationLine": 208
+    },
+    {
+      "id": "L5",
+      "placement": "L5, after L4",
+      "controls": "Candidate B, its distance1, σ1; candidates B/C/D, distance0–6, σ.1–3",
+      "currentOutput": "Edit a **local row**, not global coordinates. Candidate selector loads its own current distance; immediate weights/probabilities/entropy for all3.",
+      "domainAndTransfer": "Zero distance to a distinct record is allowed; nearest ties remain separate events. Empty/nonfinite drafts retain previous row. Reset distances1/2/3,σ1,B. No target-perplexity control implied.",
+      "specificationLine": 209
+    },
+    {
+      "id": "L6",
+      "placement": "L6, after D16",
+      "controls": "C coordinate3, range−2–5",
+      "currentOutput": "A0/B1 fixed; complete unordered/ordered kernels,Z,Q_AB and moved C marker.",
+      "domainAndTransfer": "C=A/B is a valid coincidence, self diagonal still0. No invented split/jitter. Reset3. This is one map-normalization edit, not a fit.",
+      "specificationLine": 210
+    },
+    {
+      "id": "L7",
+      "placement": "L7, after D17",
+      "controls": "Selected A, current x−1.5, learning rate.5; IDs A–D, x−4–4, rate0–100",
+      "currentOutput": "Fixed supplied P; selected edit updates all Q/forces. Step computes all4 displacements from old Y, then recentering; shows before/after/changed KL and complete coordinates.",
+      "domainAndTransfer": "Rate0 exact null; coincident symmetric state may have zero force without optimality. A failed oversized step remains visible. Edit/Step retains coherent current state; Reset restores all4 initial Y,A,.5. No historical200-step replay.",
+      "specificationLine": 211
+    },
+    {
+      "id": "L8",
+      "placement": "L8, after D22",
+      "controls": "v_ij.5 and v_ji.25, ranges0–1",
+      "currentOutput": "Directed arrows/common-scale bars, overlap, union.625 and arithmetic mean.375 update.",
+      "domainAndTransfer": "0/1 endpoints are valid; nonfinite/out-of-domain retains last graph. Reset. Calibration-distance drawing stays separate, so arbitrary strengths are not claimed globally fitted.",
+      "specificationLine": 212
+    },
+    {
+      "id": "L9",
+      "placement": "L9, after D24",
+      "controls": "Radius r1, positive range.05–4",
+      "currentOutput": "Fixed w.625,a=b1; actual map pair,ν,two cost terms,total nats and isolated optimum√.6.",
+      "domainAndTransfer": "r0 limit has infinite absent-pair cost and is shown statically, not silently epsilon-clamped. Reset1. No graph/sigma/min_dist editors in this scene.",
+      "specificationLine": 213
+    },
+    {
+      "id": "L10",
+      "placement": "L10, after D28",
+      "controls": "SourceID30, audit k10 from5/10/20, saved map tsne-p30-s7 fromall10",
+      "currentOutput": "Current saved scatter, source tile, input/map neighbor strips and exact common/missing/new lists, local R and historical/new-convention collection scores.",
+      "domainAndTransfer": "Invalid ID preserves last valid query; duplicate coordinates keep IDs/source tie order. Never rank rounded coordinates, interpolate maps or fit on edit. Reset exact defaults. Identity is default; optional class overlay is an explanatory view toggle, not a fitting quantity.",
+      "specificationLine": 214
+    },
+    {
+      "id": "L11",
+      "placement": "L11, after D37",
+      "controls": "Mapped query i2, range−2–8",
+      "currentOutput": "Fixed mapped L0/R6 and input recipe2/3,1/3. Draw weighted contributions and squared residual(i−2)² immediately.",
+      "domainAndTransfer": "Minimum2 gives0; moving endpoints is outside this scene. Reset2. Separate static/exact input-query extrapolation drawing exposes negative weights; no second live control added.",
+      "specificationLine": 215
+    },
+    {
+      "id": "L12",
+      "placement": "L12, after D39",
+      "controls": "Middle coordinate1, range−2–5",
+      "currentOutput": "Fixed chain support/weights and endpoint0/3. Each edge difference/square and energy b²+(3−b)² appear on the same current drawing.",
+      "domainAndTransfer": "Minimum b1.5 gives4.5; ordered sum twice unordered energy. Reset1 gives5. No normalization selector before its teaching; disconnected static comparison remains separate.",
+      "specificationLine": 216
+    }
+  ],
+  "solvedPractice": [
+    {
+      "task": 1,
+      "title": "A sparsely sampled sensor corridor",
+      "manuscriptLine": 1646,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 2,
+      "title": "Merge two events before measuring effective count",
+      "manuscriptLine": 1654,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 3,
+      "title": "Repair a misleading map report",
+      "manuscriptLine": 1662,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 4,
+      "title": "Change a fuzzy edge",
+      "manuscriptLine": 1670,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 5,
+      "title": "Compare global distances with a local recipe",
+      "manuscriptLine": 1678,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 6,
+      "title": "Repair future-data evaluation",
+      "manuscriptLine": 1686,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 7,
+      "title": "Inspect an actual local reversal",
+      "manuscriptLine": 1694,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 8,
+      "title": "Modify the UMAP graph reference",
+      "manuscriptLine": 1702,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 9,
+      "title": "Whitening can switch a neighbor",
+      "manuscriptLine": 1710,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 10,
+      "title": "Diagnose a bandwidth target",
+      "manuscriptLine": 1718,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 11,
+      "title": "An unmoved pair has a changed probability",
+      "manuscriptLine": 1726,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 12,
+      "title": "Catch a double-weighted event",
+      "manuscriptLine": 1734,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 13,
+      "title": "Test whether a distance table is Euclidean",
+      "manuscriptLine": 1742,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 14,
+      "title": "Use a negative recipe deliberately",
+      "manuscriptLine": 1750,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 15,
+      "title": "Count energy and null directions",
+      "manuscriptLine": 1758,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 16,
+      "title": "Follow two diffusion steps",
+      "manuscriptLine": 1766,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 17,
+      "title": "Explain a density radius and an API boundary",
+      "manuscriptLine": 1774,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 18,
+      "title": "Preserve faces, not just a wireframe",
+      "manuscriptLine": 1782,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    },
+    {
+      "task": 19,
+      "title": "Price the next allocation",
+      "manuscriptLine": 1790,
+      "hasHint": true,
+      "hasWorkedSolution": true
+    }
+  ],
+  "completeCodeAndStreamAuthority": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/code-presentation-index.json",
+    "bytes": 16223,
+    "sha256": "14fc5e8e84425376c97570b595a6eed32b3a988480ea6281965f1b35c88e321b"
+  },
+  "completeDownloadAuthority": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/file-index.json",
+    "bytes": 12934,
+    "sha256": "e39087f6fa1e134a61a7d22fd73f96cafe7219a20e47f19fed3eb74a794a8cd3"
+  },
+  "readerFlow": {
+    "opening": "orientation, outcomes, exact prior teaching, first/deeper pass and setup link",
+    "localNavigation": "shared Reader compass and13-section index; no generic mode menu",
+    "teaching": "all explanation, deeper content and full instructional code visible; hints/solutions may disclose",
+    "ending": "19 solved tasks including actual-source-ID audit project, annotated resources, retained file roles, outcomes and next ICA relationship"
+  },
+  "limits": [
+    "Line references identify authored Markdown, not implemented or observed runtime anchors.",
+    "Original code-presentation-index retains historical DRAFT status; this exact successor map/checkpoint governs current author readiness.",
+    "Counts are structural guards; complete individual text and contracts remain the review input."
+  ]
+}

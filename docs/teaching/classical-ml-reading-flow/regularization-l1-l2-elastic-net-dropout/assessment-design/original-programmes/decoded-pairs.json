@@ -1,0 +1,54 @@
+{
+  "source": "src/learn/data/regularization-examples.js",
+  "pairs": [
+    {
+      "id": "coordinateFit",
+      "role": "programme",
+      "path": "docs/teaching/classical-ml-reading-flow/regularization-l1-l2-elastic-net-dropout/assessment-design/original-programmes/coordinateFit.py",
+      "bytes": 2243,
+      "sha256": "c9f66aaf41c7717de2fe41368855fe3a84542697ce26df115de02ebb2562c14c",
+      "originalField": "code"
+    },
+    {
+      "id": "coordinateFit",
+      "role": "retained-stdout",
+      "path": "docs/teaching/classical-ml-reading-flow/regularization-l1-l2-elastic-net-dropout/assessment-design/original-programmes/coordinateFit.stdout.txt",
+      "bytes": 79,
+      "sha256": "9af96c4d492c8551e047386f2d6ec6f30cf0d8d83695776908c19438b18e5d15",
+      "originalField": "expected"
+    },
+    {
+      "id": "airfoilComparison",
+      "role": "programme",
+      "path": "docs/teaching/classical-ml-reading-flow/regularization-l1-l2-elastic-net-dropout/assessment-design/original-programmes/airfoilComparison.py",
+      "bytes": 2557,
+      "sha256": "c1db783f029321cccd320ebda556c7f914db8df652f8cdcfe4ea0dc30bcfcbc5",
+      "originalField": "code"
+    },
+    {
+      "id": "airfoilComparison",
+      "role": "retained-stdout",
+      "path": "docs/teaching/classical-ml-reading-flow/regularization-l1-l2-elastic-net-dropout/assessment-design/original-programmes/airfoilComparison.stdout.txt",
+      "bytes": 867,
+      "sha256": "1d44778f263034aa731b29480fba08144b74f901df01d1378000ddec2d08ac3f",
+      "originalField": "expected"
+    },
+    {
+      "id": "dropoutMasks",
+      "role": "programme",
+      "path": "docs/teaching/classical-ml-reading-flow/regularization-l1-l2-elastic-net-dropout/assessment-design/original-programmes/dropoutMasks.py",
+      "bytes": 563,
+      "sha256": "267944b62beb12e03fe10e6dbc22dee3907c872547fc142ce3b857ccd3435f1a",
+      "originalField": "code"
+    },
+    {
+      "id": "dropoutMasks",
+      "role": "retained-stdout",
+      "path": "docs/teaching/classical-ml-reading-flow/regularization-l1-l2-elastic-net-dropout/assessment-design/original-programmes/dropoutMasks.stdout.txt",
+      "bytes": 88,
+      "sha256": "e62afc81a3d773486400fdbfb75d2dd51349816315e06febad72d56a71114892",
+      "originalField": "expected"
+    }
+  ],
+  "scope": "Exact decoded strings only; no programme execution or new scientific claim."
+}

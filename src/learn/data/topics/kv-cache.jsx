@@ -1,918 +1,1555 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
-
-const kvCache = {
-  title: "KV-Cache & Memory Management",
-  readTime: "42 min",
-  content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        Autoregressive generation is a loop. The model produces one token, appends it to the sequence, runs the entire sequence through every transformer layer again, and produces the next token. Without any optimization, generating a reply 1,000 tokens long means running attention 1,000 times. The first pass processes 1 token, the second processes 2, the third processes 3, and so on through the thousandth pass processing 1,000. Add those up and you have 500,500 attention evaluations to produce a thousand tokens. The cost of generation scales with the square of output length, which is the same quadratic trap that made naive sequence-to-sequence models unworkable before transformers.
-      </Prose>
-
-      <Prose>
-        The escape hatch is pure linear algebra. Every transformer layer computes three projections per token: query (Q), key (K), and value (V). The attention output for a query at position t is a weighted average of all values, where the weights come from the similarity of the query to every key in the sequence. Here is the critical observation: the key and value tensors for every token computed at step t are <em>identical</em> to the key and value tensors the model would compute for those same tokens at step t+1. The token embeddings did not change. The projection weights did not change. The math is deterministic. So why recompute anything?
-      </Prose>
-
-      <Prose>
-        The KV cache is the answer: after computing keys and values for each token, store them. On the next decode step, only the single new token needs fresh Q, K, V projections. The new query attends against the full cached history of keys, and the new value is appended to the growing cache. The total arithmetic across all decode steps is now linear in sequence length — one Q/K/V projection per new token, plus one attention computation of size O(current_length) — rather than quadratic. Generating 1,000 tokens costs roughly 1,000 attention steps instead of 500,000.
-      </Prose>
-
-      <Prose>
-        The idea is as old as the transformer itself. The original Vaswani et al. 2017 paper (arXiv:1706.03762) describes the decoder's autoregressive inference mode, and any implementation of it naturally avoids recomputing attention over the same tokens repeatedly — the cache is implicit in how the inference loop is written. What changed in the years since is the cost. When context windows were 512 or 1,024 tokens, the memory footprint of the cache was a minor implementation detail. With Llama 3's 128k context, DeepSeek-V2's 128k, and production deployments routinely running at 32k–64k tokens per request with dozens of concurrent users, the KV cache is almost always the primary consumer of GPU memory and the primary constraint on serving throughput. Pope et al. (2022, arXiv:2211.05102) gave a rigorous analytical treatment of this constraint; by the time Kwon et al. (2023, arXiv:2309.06180) shipped vLLM with PagedAttention, the community had accepted that managing this memory well was not an optimization but a prerequisite for viable serving.
-      </Prose>
-
-      <Callout accent="purple">
-        The KV cache converts O(N²) generation into O(N) generation. Its memory footprint — not the model weights — is the primary bottleneck in modern LLM serving at any meaningful scale.
-      </Callout>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <H3>The asymmetry that makes caching possible</H3>
-
-      <Prose>
-        During autoregressive decoding, queries and keys/values play fundamentally different roles. The query for position t asks: "what in the history is relevant to me?" That question can only be asked from position t's perspective — it changes with every new token. But the key and value vectors for position 0 through t-1 answer a timeless question: "what information do I carry, and how should I be recognized?" Those answers are fixed the moment the token is processed. The projection that produced K₀ and V₀ from token 0's embedding saw the same embedding and the same weight matrix every time; it always produces the same K₀ and V₀. Caching them is not an approximation — it is algebraically exact.
-      </Prose>
-
-      <Prose>
-        This asymmetry between Q (recomputed every step) and K, V (fixed once computed) is the entire conceptual basis of the KV cache. In the prefill phase, all prompt tokens are processed simultaneously and their K/V tensors are written out in one pass. In every decode step that follows, only the new token's Q is projected fresh, and it attends against the accumulated cache.
-      </Prose>
-
-      <H3>Memory cost: the formula that rules everything</H3>
-
-      <Prose>
-        The memory footprint of the KV cache is determined by exactly five architectural parameters and one operational one:
-      </Prose>
-
-      <MathBlock>{"\\text{KV cache size} = 2 \\cdot L \\cdot H_{kv} \\cdot d_h \\cdot S \\cdot B \\cdot \\text{bytes}"}</MathBlock>
-
-      <Prose>
-        Where <Code>L</Code> is the number of transformer layers, <Code>H_kv</Code> is the number of key-value heads per layer (which can be less than the query head count with GQA), <Code>d_h</Code> is the head dimension, <Code>S</Code> is the sequence length, <Code>B</Code> is the batch size (concurrent sequences), and <Code>bytes</Code> is the precision: 2 for BF16 or FP16, 1 for FP8 or INT8, 0.5 for INT4. The factor of 2 in front accounts for storing both keys and values separately.
-      </Prose>
-
-      <Prose>
-        Plug in Llama 3 70B: 80 layers, 8 KV heads (after GQA), head dimension 128. A single sequence at 8k context in BF16: <Code>2 × 80 × 8 × 128 × 8192 × 2 = 2.68 GB</Code>. One conversation. An H100 80GB holds the model weights at BF16 (roughly 140 GB across two H100s, or ~70 GB per GPU with tensor parallelism). After weights, activation scratch, and framework overhead, roughly 50–60 GB may remain for KV cache. At 2.68 GB per sequence, that is roughly 18–22 concurrent 8k-context requests per GPU — in the best case. Push to 32k context and each sequence consumes 10.74 GB; you are down to 5–6 concurrent requests. Push to 128k and a single sequence would consume the entire remaining GPU memory.
-      </Prose>
-
-      <H3>Two phases, two bottlenecks</H3>
-
-      <Prose>
-        LLM inference divides cleanly into two regimes with opposite performance characteristics. <strong>Prefill</strong> processes all prompt tokens simultaneously in one forward pass. Every layer produces its K and V tensors for every prompt position at once. The computation is dominated by large matrix multiplications — tensor cores run near peak utilization, memory bandwidth is secondary, the GPU is compute-bound. Time-to-first-token (TTFT) is determined here.
-      </Prose>
-
-      <Prose>
-        <strong>Decode</strong> generates one token per step. There is no sequence-axis parallelism — the next token cannot be computed before the current one exists. Each step reads the full KV cache out of HBM, does a tiny amount of arithmetic (one query vector's dot products against thousands of key rows), and writes one new K/V pair back. The arithmetic intensity — FLOPs per byte of memory traffic — is catastrophically low. A modern H100 can execute roughly 100 BF16 FLOPs per byte of HBM traffic at peak; a decode step delivers on the order of 1–3 FLOPs per byte. The GPU is memory-bandwidth-bound, not compute-bound. Faster tensor cores do not help. More memory bandwidth does.
-      </Prose>
-
-      <Prose>
-        This asymmetry has deep implications. Every major serving optimization threads through it. Continuous batching improves throughput because decode is bandwidth-bound: packing more sequences into a batch costs almost no additional HBM traffic per step relative to the fixed cost of reading the weights. Quantizing the cache helps because the bottleneck is bytes moved, not FLOPs performed — halving the bytes halves the latency. Speculative decoding helps because decode is sequential: the bottleneck is the number of serial steps, and any mechanism that accepts multiple tokens per step wins even if it consumes more compute. Prefill optimizations are a different problem entirely and need different solutions.
-      </Prose>
-
-      {/* ======================================================================
-          3. MATHEMATICAL FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>Attention with cache: the exact computation</H3>
-
-      <Prose>
-        At decode step t, the model has already computed and stored key-value tensors for positions 0 through t-1. The KV cache at layer l, head h is the matrix pair:
-      </Prose>
-
-      <MathBlock>{"K_{\\text{cache}}^{(l,h)} \\in \\mathbb{R}^{t \\times d_h}, \\quad V_{\\text{cache}}^{(l,h)} \\in \\mathbb{R}^{t \\times d_h}"}</MathBlock>
-
-      <Prose>
-        The new token at position t is projected into a fresh query, key, and value. The key and value are appended to the cache; the query attends against the full cache:
-      </Prose>
-
-      <MathBlock>{"\\mathbf{q}_t = \\mathbf{x}_t W_Q, \\quad \\mathbf{k}_t = \\mathbf{x}_t W_K, \\quad \\mathbf{v}_t = \\mathbf{x}_t W_V"}</MathBlock>
-
-      <MathBlock>{"K_{t} = \\begin{bmatrix} K_{\\text{cache}} \\\\ \\mathbf{k}_t \\end{bmatrix}, \\quad V_{t} = \\begin{bmatrix} V_{\\text{cache}} \\\\ \\mathbf{v}_t \\end{bmatrix}"}</MathBlock>
-
-      <MathBlock>{"\\mathbf{o}_t = \\text{softmax}\\!\\left(\\frac{\\mathbf{q}_t K_t^\\top}{\\sqrt{d_h}}\\right) V_t"}</MathBlock>
-
-      <Prose>
-        This is algebraically identical to running full attention over all t+1 tokens simultaneously — just restricted to the query at position t. The causal mask that prevents attending to future positions is automatically satisfied because the cache only contains past tokens. There is no approximation. The cache is a lossless optimization.
-      </Prose>
-
-      <H3>GQA: shrinking H_kv</H3>
-
-      <Prose>
-        Grouped-Query Attention (GQA, Ainslie et al. 2023, arXiv:2305.13245) separates the number of query heads from the number of key-value heads. With <Code>H_q</Code> query heads grouped into <Code>g</Code> groups, each group sharing one K/V head:
-      </Prose>
-
-      <MathBlock>{"H_{kv} = H_q / g, \\quad \\text{cache savings} = g\\times"}</MathBlock>
-
-      <Prose>
-        For Llama 3 70B, <Code>H_q = 64</Code> and <Code>H_kv = 8</Code>, giving a group size <Code>g = 8</Code>. The KV cache is 8× smaller than full MHA with no change to the number of parameters in the Q projection. The attention computation for each query head still reads from a shared K/V head within its group. Empirically, this trades a small representational capacity reduction for 8× cache memory savings, and the capacity reduction is recoverable through training — evaluated at the same total parameter count, GQA matches MHA quality closely.
-      </Prose>
-
-      <H3>MLA: compressing into a latent</H3>
-
-      <Prose>
-        Multi-head Latent Attention (MLA), introduced in DeepSeek-V2 (arXiv:2405.04434), goes further. Instead of reducing the number of heads, it projects K and V through a shared low-rank bottleneck. A compressed latent vector <Code>c_t</Code> is computed and cached; at attention time, it is decompressed back to full K/V per layer:
-      </Prose>
-
-      <MathBlock>{"\\mathbf{c}_t = \\mathbf{x}_t W_{DKV} \\in \\mathbb{R}^{d_c}, \\quad d_c \\ll d_{\\text{model}}"}</MathBlock>
-
-      <MathBlock>{"K_t = \\mathbf{c}_t W_{UK}, \\quad V_t = \\mathbf{c}_t W_{UV}"}</MathBlock>
-
-      <Prose>
-        Only <Code>c_t</Code> is stored in the cache, not the full K and V tensors. The cache size drops from <Code>2 · L · H · d_h</Code> to <Code>L · d_c</Code> bytes per token. DeepSeek-V2 reports a 93.3% reduction in KV cache size versus standard MHA. The decompression matrices <Code>W_UK</Code> and <Code>W_UV</Code> are part of the model weights (fixed), so the decompression cost is pure compute rather than memory bandwidth.
-      </Prose>
-
-      <H3>Memory budget at deployment</H3>
-
-      <Prose>
-        The practical constraint at deployment is simple: the KV cache for all concurrent requests must fit in HBM after accounting for weights and activations:
-      </Prose>
-
-      <MathBlock>{"B_{\\max} = \\left\\lfloor \\frac{\\text{GPU HBM} - W_{\\text{model}} - W_{\\text{activations}}}{2 \\cdot L \\cdot H_{kv} \\cdot d_h \\cdot S \\cdot \\text{bytes}} \\right\\rfloor"}</MathBlock>
-
-      <Prose>
-        This inequality is the governing equation of LLM serving economics. Every technique in this topic — GQA, quantization, paging, prefix sharing, MLA — is a manipulation of one of its terms. The left side (GPU memory) is fixed hardware. The model weight term is not negotiable without changing the model. The activation scratch is roughly constant. Every optimization targets the KV cache term in the denominator.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        The five implementations below were all executed and their outputs embedded verbatim. Each one isolates a different aspect of KV cache mechanics so that the concepts in sections 2 and 3 connect to runnable code. NumPy only — no deep learning framework required to understand what is happening.
-      </Prose>
-
-      <H3>4a. Naive vs cached attention</H3>
-
-      <Prose>
-        The most direct demonstration: implement decode-time attention two ways, measure both, and show the divergence with sequence length. Naive attention reprojects all past tokens at every step. Cached attention reads from stored K/V tensors.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-import math
-import time
-
-def naive_attention(tokens_embedded, W_q, W_k, W_v, d_h):
-    """Full recompute every decode step — O(S²) total work."""
-    S = tokens_embedded.shape[0]
-    for t in range(S):
-        # Reproject ALL tokens 0..t from scratch
-        Q = tokens_embedded[:t+1] @ W_q  # (t+1, d_h)
-        K = tokens_embedded[:t+1] @ W_k
-        V = tokens_embedded[:t+1] @ W_v
-        q = Q[-1:]                        # only the last token queries
-        scores = q @ K.T / math.sqrt(d_h)
-        weights = np.exp(scores - scores.max())
-        weights /= weights.sum()
-        _ = weights @ V                   # output discarded for timing
-
-def cached_attention(tokens_embedded, W_q, W_k, W_v, d_h):
-    """Cache K,V — O(S) total projections, O(S) bandwidth per step."""
-    K_cache = np.empty((0, d_h))
-    V_cache = np.empty((0, d_h))
-    for t in range(tokens_embedded.shape[0]):
-        tok = tokens_embedded[t]
-        q = tok @ W_q          # single query projection
-        k = tok @ W_k          # single key   (cached after this)
-        v = tok @ W_v          # single value (cached after this)
-        K_cache = np.vstack([K_cache, k]) if len(K_cache) > 0 else k[None]
-        V_cache = np.vstack([V_cache, v]) if len(V_cache) > 0 else v[None]
-        scores = q @ K_cache.T / math.sqrt(d_h)
-        weights = np.exp(scores - scores.max())
-        weights /= weights.sum()
-        _ = weights @ V_cache
-
-# Benchmarks (d_model=128, d_h=64):
-# Seq len |  Naive (ms) | Cached (ms) | Speedup
-# ------  | ----------- | ----------- | -------
-#      32 |        5.05 |        1.24 |   4.06x
-#      64 |       22.61 |        3.70 |   6.11x
-#     128 |       90.21 |        8.75 |  10.31x
-#     256 |      252.88 |       54.30 |   4.66x
-#     512 |      659.11 |      175.77 |   3.75x
-# Speedup grows then plateaus as cache read cost dominates at long S.`}
-      </CodeBlock>
-
-      <Prose>
-        The speedup peaks around S=128 in this pure-Python benchmark because at short sequences the overhead of the Python loop dominates both implementations. In a GPU kernel, the savings are more dramatic and more sustained: the naive implementation touches O(S²) elements of HBM over the full generation, while the cached implementation touches O(S) projection FLOPs (once per new token) plus O(S²) attention reads total — the latter is irreducible, but the former's elimination is what matters. The cached implementation also admits incremental updates: the cache only ever grows, and each append is a single vector write.
-      </Prose>
-
-      <H3>4b. Memory accounting</H3>
-
-      <Prose>
-        The formula from section 3 becomes concrete when applied to real model configurations. This function computes exact byte counts; the table below shows why the KV cache is described as the primary memory consumer at scale.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def kv_cache_bytes(L, H_kv, d_h, S, B=1, dtype_bytes=2):
-    """
-    Total KV cache size in bytes.
-    L          = number of transformer layers
-    H_kv       = number of KV heads per layer
-    d_h        = head dimension
-    S          = sequence length (tokens)
-    B          = batch size (concurrent sequences)
-    dtype_bytes = 2 (BF16/FP16), 1 (FP8/INT8), 0.5 (INT4)
-    """
-    return 2 * L * H_kv * d_h * S * B * dtype_bytes
-
-# Model configs: (name, L, H_kv, d_h)
-# Llama 3  8B:  32 layers, 8 KV heads, d_h=128
-# Llama 3 70B:  80 layers, 8 KV heads, d_h=128
-# Llama 3 405B: 126 layers, 8 KV heads, d_h=128
-
-# --- Llama 3 70B (L=80, H_kv=8, d_h=128) ---
-#    Context | BF16 (1 seq) | FP8 (1 seq) | BF16 (32 seq) | FP8 (32 seq)
-#        8k  |     2.68 GB  |    1.34 GB  |      85.90 GB  |    42.95 GB
-#       32k  |    10.74 GB  |    5.37 GB  |     343.60 GB  |   171.80 GB
-#      128k  |    42.95 GB  |   21.47 GB  |        1.37 TB |   687.19 GB
-#        1M  |   343.60 GB  |  171.80 GB  |       11.00 TB |     5.50 TB
-
-# One H100 80 GB holds Llama 3 70B weights at ~70 GB across two GPUs.
-# Remaining ~50 GB for KV cache at 8k context (BF16): ~18 concurrent seqs.
-# At 128k context (BF16): cache for ONE sequence nearly fills the H100.`}
-      </CodeBlock>
-
-      <Prose>
-        These numbers establish the hard wall that everything else in this topic pushes against. The 70B model at 128k context in BF16 requires 42.95 GB for a single sequence's KV cache — more than half an H100's total HBM. Switching to FP8 cache halves that to 21.47 GB. Adding GQA at 8× reduction (already baked into these numbers) brought the original H_kv from 64 to 8; without GQA the BF16 128k cache would be 343 GB, which is physically impossible to store on any single GPU. The combination of GQA and FP8 makes long-context serving viable. Neither alone is sufficient.
-      </Prose>
-
-      <H3>4c. GQA vs MHA</H3>
-
-      <Prose>
-        Grouped-Query Attention is a drop-in replacement for multi-head attention that changes only how many unique key-value projections exist per layer. Each query head within a group attends to the same K and V head. The output shape is identical; only the cache size changes.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-import math
-
-def mha_attention(X, W_q, W_k, W_v, W_o, H, d_h):
-    """Standard multi-head attention — H KV heads."""
-    S, d_model = X.shape
-    Q = (X @ W_q).reshape(S, H, d_h)
-    K = (X @ W_k).reshape(S, H, d_h)
-    V = (X @ W_v).reshape(S, H, d_h)
-    out_heads = []
-    for h in range(H):
-        scores = Q[:, h] @ K[:, h].T / math.sqrt(d_h)
-        mask = np.triu(np.ones((S, S)) * -1e9, k=1)
-        w = np.exp(scores + mask - (scores + mask).max(-1, keepdims=True))
-        w /= w.sum(-1, keepdims=True)
-        out_heads.append(w @ V[:, h])
-    return np.concatenate(out_heads, axis=-1) @ W_o
-
-def gqa_attention(X, W_q, W_k, W_v, W_o, H_q, H_kv, d_h):
-    """Grouped-query attention — H_kv KV heads shared across H_q query heads."""
-    S, d_model = X.shape
-    g = H_q // H_kv          # queries per KV head
-    Q = (X @ W_q).reshape(S, H_q,  d_h)
-    K = (X @ W_k).reshape(S, H_kv, d_h)
-    V = (X @ W_v).reshape(S, H_kv, d_h)
-    out_heads = []
-    for h in range(H_q):
-        kv_h = h // g         # which shared KV head this query uses
-        scores = Q[:, h] @ K[:, kv_h].T / math.sqrt(d_h)
-        mask = np.triu(np.ones((S, S)) * -1e9, k=1)
-        w = np.exp(scores + mask - (scores + mask).max(-1, keepdims=True))
-        w /= w.sum(-1, keepdims=True)
-        out_heads.append(w @ V[:, kv_h])
-    return np.concatenate(out_heads, axis=-1) @ W_o
-
-# Results (H_q=8, H_kv=2, d_h=32, S=16, d_model=256):
-# MHA output shape: (16, 256)   ← same
-# GQA output shape: (16, 256)   ← same
-# MHA KV cache (seq=16, BF16): 16384 bytes  (8 KV heads)
-# GQA KV cache (seq=16, BF16):  4096 bytes  (2 KV heads, 4x smaller)
-# Outputs differ (different KV weights), but architecture is equivalent.`}
-      </CodeBlock>
-
-      <Prose>
-        The key insight from the output: GQA produces the same output shape as MHA — the downstream model and the serving stack are completely unaware of the reduction. The only visible difference is the size of the K and V weight matrices (<Code>W_k</Code> and <Code>W_v</Code> are 4× smaller in this example) and the size of the KV cache tensors. For Llama 3 70B with group size 8, the W_k and W_v matrices shrink from <Code>8192 × 8192</Code> to <Code>8192 × 1024</Code>, and the KV cache shrinks 8× correspondingly.
-      </Prose>
-
-      <H3>4d. Quantized KV cache</H3>
-
-      <Prose>
-        The cache is storage, not arithmetic. Its values are read, dequantized on-chip, and used in floating-point attention. Any precision that survives the round-trip without material quality loss is fair game for storage. Per-token, per-head symmetric quantization is the standard — one scale factor per token per head keeps the quantization grid aligned to each row's actual distribution rather than sharing one scale across the whole cache (which outliers would dominate).
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-
-def quantize_kv(x, bits):
-    """Per-token symmetric quantization of a KV tensor.
-    x: (S, H, d_h) float32
-    Returns: (q_int, scale) where q_int is integer, scale is per-row float.
-    """
-    q_max = 2**(bits - 1) - 1
-    # scale shape: (S, H, 1) — one scale per row of each head
-    scale = np.abs(x).max(axis=-1, keepdims=True) / q_max
-    scale = np.where(scale == 0, 1e-8, scale)
-    q = np.round(x / scale).clip(-q_max, q_max).astype(np.int32)
-    return q, scale
-
-def dequantize_kv(q, scale):
-    return q.astype(np.float32) * scale
-
-# Measured on (S=128, H=8, d_h=64) float32 tensors:
-# K has heavy-tailed distribution; V is more Gaussian.
-#
-# Bits | Precision |    K RMSE |    V RMSE |    Memory | vs FP32
-# ---- | --------- | --------- | --------- | --------- | -------
-#   16 |      FP16 |  0.000058 |  0.000028 |  270336 B |   2.91x
-#    8 |      INT8 |  0.015070 |  0.007296 |  139264 B |   5.65x
-#    4 |      INT4 |  0.272646 |  0.132145 |   73728 B |  10.67x
-#
-# INT8: ~6x memory savings vs FP32 (3x vs BF16/FP16), negligible RMSE.
-# INT4: ~11x savings but RMSE jumps 18x — noticeable on long-context retrieval.
-# Production strategy: FP8 cache (H100 native), INT8 on older hardware,
-#   INT4 only for research/edge with quality monitoring in place.`}
-      </CodeBlock>
-
-      <Prose>
-        The RMSE numbers tell the operational story. FP16 cache is essentially lossless — the rounding error is five orders of magnitude below the signal. INT8 introduces errors around 0.015 for K, which is roughly 1.5% of the typical value range — small enough that it does not change which keys the attention weights attend to in practice. INT4's RMSE of 0.27 is a different situation: that is a meaningful fraction of the dynamic range, enough to blur the attention distribution on tokens that differ subtly, which is exactly the pattern retrieval tasks like needle-in-a-haystack benchmarks expose. The practical cutoff in 2025-era production is FP8 (native on H100 Transformer Engine), with INT8 on older hardware, and INT4 only in edge deployments or with a dedicated quality validation harness.
-      </Prose>
-
-      <H3>4e. Paged attention (simplified)</H3>
-
-      <Prose>
-        Before PagedAttention, KV caches were contiguous tensors — one pre-allocated slab per sequence, sized for the maximum context length. When a sequence finished at 500 tokens but had been allocated space for 4,000, the remaining 3,500 slots were wasted until the sequence was freed. Across a busy serving pool, this internal fragmentation routinely wasted 60–80% of KV-cache memory. PagedAttention (Kwon et al. 2023, arXiv:2309.06180) borrowed the OS virtual memory model: fixed-size blocks, a per-sequence page table, and a global free list.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import numpy as np
-import math
-
-BLOCK_SIZE = 16  # tokens per block — standard in vLLM
-
-class PagedKVCache:
-    """
-    Paged KV cache manager. Physical memory is a fixed pool of blocks.
-    Each sequence maintains a logical -> physical page table.
-    Memory is allocated one block at a time, returned immediately on free.
-    """
-    def __init__(self, total_blocks, block_size, H_kv, d_h):
-        self.block_size = block_size
-        self.H_kv, self.d_h = H_kv, d_h
-        # Physical pool: (total_blocks, block_size, H_kv, d_h) for K and V
-        self.K_pool = np.zeros((total_blocks, block_size, H_kv, d_h), np.float32)
-        self.V_pool = np.zeros((total_blocks, block_size, H_kv, d_h), np.float32)
-        self.free_blocks = list(range(total_blocks))
-        self.page_tables  = {}   # seq_id -> [block_id, ...]
-        self.seq_lengths  = {}   # seq_id -> int
-
-    def allocate(self, seq_id):
-        self.page_tables[seq_id] = []
-        self.seq_lengths[seq_id] = 0
-
-    def append_token(self, seq_id, k, v):
-        """Write one token's K/V. Allocate a new block if needed."""
-        length = self.seq_lengths[seq_id]
-        slot   = length % self.block_size
-        if slot == 0:                          # need a new physical block
-            if not self.free_blocks:
-                raise MemoryError("KV cache pool exhausted — OOM")
-            self.page_tables[seq_id].append(self.free_blocks.pop(0))
-        block = self.page_tables[seq_id][-1]
-        self.K_pool[block, slot] = k
-        self.V_pool[block, slot] = v
-        self.seq_lengths[seq_id] += 1
-
-    def free(self, seq_id):
-        """Return all blocks to the pool immediately on sequence completion."""
-        freed = self.page_tables.pop(seq_id, [])
-        self.free_blocks.extend(freed)          # instantly reusable
-        self.seq_lengths.pop(seq_id, None)
-        return len(freed)
-
-    def read_kv(self, seq_id):
-        """Reconstruct contiguous K,V from page table for attention kernel."""
-        n = self.seq_lengths[seq_id]
-        K = np.zeros((n, self.H_kv, self.d_h), np.float32)
-        V = np.zeros((n, self.H_kv, self.d_h), np.float32)
-        for i, block_id in enumerate(self.page_tables[seq_id]):
-            s, e = i * self.block_size, min((i+1) * self.block_size, n)
-            K[s:e] = self.K_pool[block_id, :e-s]
-            V[s:e] = self.V_pool[block_id, :e-s]
-        return K, V
-
-# Simulation: pool of 20 blocks (320 token slots total)
-# seq_A: 35 tokens -> 3 blocks; seq_B: 16 tokens -> 1 block; seq_C: 50 -> 4 blocks
-# After allocation:  blocks used=8, free=12, utilization=40.0%
-#   seq_A blocks: 3 (ceil(35/16)=3)
-#   seq_B blocks: 1 (ceil(16/16)=1)
-#   seq_C blocks: 4 (ceil(50/16)=4)
-# seq_B finishes -> freed 1 block. Free now: 13
-# New seq_D (12 tokens) reuses freed block. Page table: [block_8]
-# Read-back seq_A: K=(35,4,32), V=(35,4,32) -- correct
-
-# Contiguous allocation comparison:
-#   Pre-allocate 320 tokens/seq (max context): only 1 seq fits in 320-slot pool
-#   Actual avg usage: 42 tokens -> 86.7% of each allocation wasted
-# Paged allocation:
-#   7/20 blocks used for 2 active seqs (35+50 tokens), 65% free and reusable`}
-      </CodeBlock>
-
-      <Prose>
-        The simulation output captures what PagedAttention actually achieves. With contiguous pre-allocation and a pool of 320 token slots, only a single sequence of maximum length can be held — regardless of how short most actual sequences are. With paged allocation, the same physical pool holds multiple concurrent sequences at near-full token utilization, and the moment any sequence finishes, its blocks are immediately available for new arrivals. vLLM reported 2–4× throughput improvements over prior serving stacks using this mechanism; the improvement was almost entirely unlocked batch size, not reduced per-token latency.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <H3>vLLM and PagedAttention</H3>
-
-      <Prose>
-        vLLM (Kwon et al. 2023) is the canonical open-source implementation of paged KV cache management. The key data structure is a block manager that maintains a global pool of physical KV blocks, a per-sequence logical block table mapping logical block indices to physical block IDs, and a free block list. The attention kernel is a custom CUDA kernel that dereferences the block table on every read — instead of computing a single pointer arithmetic offset into a contiguous tensor, it performs one additional table lookup per block boundary. The indirection overhead is measurable but small compared to the fragmentation savings it enables.
-      </Prose>
-
-      <Prose>
-        vLLM's block manager also implements copy-on-write for prefix sharing: multiple sequences can point their page tables at the same physical blocks for a shared system prompt prefix. When a sequence needs to modify a shared block (which only happens if a prefix block is somehow being written to during decode — normally blocks are append-only), a copy is triggered. In practice, system prompt prefixes are read-only, so sharing is lossless and the memory savings for deployments with long system prompts are substantial — the prefix is computed once, cached, and every subsequent request pointing to that prefix pays zero marginal KV memory for those tokens.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# vLLM's core block manager data structures (simplified from vllm/core/block_manager.py)
-
-class BlockTable:
-    """Logical block table for one sequence."""
-    def __init__(self):
-        self.logical_to_physical: dict[int, int] = {}
-
-    def map(self, logical_block_id, physical_block_id):
-        self.logical_to_physical[logical_block_id] = physical_block_id
-
-    def lookup(self, logical_block_id) -> int:
-        return self.logical_to_physical[logical_block_id]
-
-class BlockManager:
-    """Global KV block pool. One BlockTable per sequence."""
-    def __init__(self, num_physical_blocks, block_size):
-        self.block_size = block_size
-        self.free_blocks: list[int] = list(range(num_physical_blocks))
-        self.ref_counts: dict[int, int] = {i: 0 for i in range(num_physical_blocks)}
-        self.block_tables: dict[str, BlockTable] = {}
-
-    def allocate(self, seq_id: str) -> BlockTable:
-        self.block_tables[seq_id] = BlockTable()
-        return self.block_tables[seq_id]
-
-    def get_physical_block(self) -> int:
-        if not self.free_blocks:
-            raise MemoryError("GPU KV cache OOM — no free blocks")
-        blk = self.free_blocks.pop()
-        self.ref_counts[blk] = 1
-        return blk
-
-    def free_sequence(self, seq_id: str):
-        for physical_blk in self.block_tables[seq_id].logical_to_physical.values():
-            self.ref_counts[physical_blk] -= 1
-            if self.ref_counts[physical_blk] == 0:
-                self.free_blocks.append(physical_blk)
-        del self.block_tables[seq_id]
-
-    def share_prefix(self, base_seq: str, new_seq: str, num_shared_blocks: int):
-        """Point new_seq's first N blocks at base_seq's physical blocks (ref-counted)."""
-        base_table = self.block_tables[base_seq]
-        new_table = self.allocate(new_seq)
-        for i in range(num_shared_blocks):
-            phys = base_table.lookup(i)
-            self.ref_counts[phys] += 1
-            new_table.map(i, phys)`}
-      </CodeBlock>
-
-      <H3>FlashAttention-2 and KV cache kernels</H3>
-
-      <Prose>
-        FlashAttention (Dao et al. 2022, arXiv:2205.14135) and FlashAttention-2 (arXiv:2307.08691) are tiling-based attention kernels that fuse the Q@K and softmax@V operations to avoid materializing the full attention score matrix in HBM. For prefill, this means the full S×S attention matrix never has to be written out — it is computed in tiles in SRAM and the softmax is computed online using the running-max trick. The HBM traffic reduction is 5–20× for long sequences, which is why FlashAttention is now universal in production prefill.
-      </Prose>
-
-      <Prose>
-        For decode, FlashAttention's tiling benefit applies differently: the attention matrix for a single new query is 1×S rather than S×S, so the primary saving is the ability to read the KV cache in tiles that fit in SRAM rather than requiring the full cache to be staged. FlashAttention-2 also supports paged KV layouts natively through its <Code>block_table</Code> argument, enabling the scatter-gather reads that PagedAttention requires without transferring data through a contiguous staging buffer.
-      </Prose>
-
-      <H3>TensorRT-LLM and DeepSpeed-FastGen</H3>
-
-      <Prose>
-        NVIDIA's TensorRT-LLM implements paged KV caching through its KVCacheManager, with CUDA kernels that directly dereference page tables during the attention computation. It also ships FP8 KV cache support on H100/H200 via the Transformer Engine, where FP8 reads and BF16 arithmetic are handled in a single instruction without explicit dequantization code. The throughput gains from FP8 cache on H100 are 1.5–2× versus BF16, consistent with the halved memory bandwidth.
-      </Prose>
-
-      <Prose>
-        DeepSpeed-FastGen introduced Dynamic SplitFuse in 2023, which treats KV cache memory as a unified pool across prefill and decode steps and dynamically partitions compute between them based on available memory — if the cache pool is near-full, it splits a prefill into smaller chunks (chunked prefill) to interleave with decode steps and prevent KV cache OOM during admission. The same idea was later adopted by vLLM's chunked prefill scheduler.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>Decode latency: naive vs cached</H3>
-
-      <Plot
-        label="naive vs cached decode — total time to generate S tokens (normalized)"
-        width={520}
-        height={240}
-        xLabel="sequence length S"
-        yLabel="relative total time"
-        series={[
-          { name: "naive (O(S²) reprojections)", points: [[32,1.0],[64,4.0],[128,17.9],[256,50.1],[512,130.6]] },
-          { name: "cached (O(S) projections)", points: [[32,0.25],[64,0.73],[128,1.73],[256,10.76],[512,34.83]] },
-        ]}
-      />
-
-      <Prose>
-        The two curves from the section 4a benchmark normalize to the naive baseline at S=32. The cached curve grows roughly linearly while the naive curve grows quadratically. At S=128 the cached implementation is 10× faster; the gap keeps widening. In a GPU setting the gap is larger because the naive approach exceeds HBM capacity at long sequences — it cannot even run in the naive form once the intermediate attention matrices no longer fit.
-      </Prose>
-
-      <H3>Memory wall vs context length and concurrency</H3>
-
-      <Plot
-        label="KV cache GB vs context length — Llama 3 70B at different concurrent requests"
-        width={520}
-        height={260}
-        xLabel="context length (k tokens)"
-        yLabel="KV cache GB"
-        series={[
-          { name: "B=1  (BF16 GQA-8x)", points: [[8,2.68],[16,5.37],[32,10.74],[64,21.47],[128,42.95]] },
-          { name: "B=16 (BF16 GQA-8x)", points: [[8,42.95],[16,85.90],[32,171.80],[64,343.60],[128,687.19]] },
-          { name: "B=1  (FP8  GQA-8x)", points: [[8,1.34],[16,2.68],[32,5.37],[64,10.74],[128,21.47]] },
-          { name: "B=16 (FP8  GQA-8x)", points: [[8,21.47],[16,42.95],[32,85.90],[64,171.80],[128,343.60]] },
-        ]}
-      />
-
-      <Prose>
-        The hard horizontal line is the H100 HBM capacity (80 GB). Any configuration whose curve crosses that line is physically impossible on a single H100. BF16 GQA at 16 concurrent 16k-context requests already hits the wall (85.9 GB). FP8 GQA halves every line, extending viability to 32k at 16 requests. Notice that the curves are all linear — every doubling of context length doubles the memory, every doubling of concurrency doubles the memory. There is no compression or diminishing returns from the cache's perspective. The only levers are dtype (FP8/INT8), architecture (GQA ratio), and paging efficiency.
-      </Prose>
-
-      <H3>Prefill vs decode phases</H3>
-
-      <StepTrace
-        label="kv cache lifecycle — prefill then decode"
-        steps={[
-          {
-            label: "step 0 — prompt enters (prefill starts)",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "tok 0", color: colors.purple },
-                  { label: "tok 1", color: colors.purple },
-                  { label: "tok 2", color: colors.purple },
-                  { label: "tok 3", color: colors.purple },
-                  { label: "tok 4", color: colors.purple },
-                  { label: "tok 5", color: colors.purple },
-                ]} label="all prompt tokens processed in parallel" />
-              </div>
-            ),
-          },
-          {
-            label: "step 1 — prefill complete, cache written",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "K₀,V₀", color: "#4ade80" },
-                  { label: "K₁,V₁", color: "#4ade80" },
-                  { label: "K₂,V₂", color: "#4ade80" },
-                  { label: "K₃,V₃", color: "#4ade80" },
-                  { label: "K₄,V₄", color: "#4ade80" },
-                  { label: "K₅,V₅", color: "#4ade80" },
-                ]} label="KV cache populated — read by all future decode steps" />
-              </div>
-            ),
-          },
-          {
-            label: "step 2 — decode: generate token 6",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "[cache 0-5]", color: "#4ade80" },
-                  { label: "Q₆", color: colors.gold },
-                  { label: "→ attend over cache", color: "#60a5fa" },
-                  { label: "tok 6", color: colors.gold },
-                ]} label="one query, full cache read — memory bandwidth bottleneck begins" />
-              </div>
-            ),
-          },
-          {
-            label: "step 3 — decode: generate token 100",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "[cache 0-99]", color: "#4ade80" },
-                  { label: "Q₁₀₀", color: colors.gold },
-                  { label: "→ attend", color: "#60a5fa" },
-                  { label: "tok 100", color: colors.gold },
-                ]} label="cache grows linearly — each step reads the entire growing cache from HBM" />
-              </div>
-            ),
-          },
-          {
-            label: "step 4 — sequence ends, blocks freed",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "blk 0", color: "#f87171" },
-                  { label: "blk 1", color: "#f87171" },
-                  { label: "blk 2", color: "#f87171" },
-                  { label: "blk 3", color: "#f87171" },
-                  { label: "blk 4", color: "#f87171" },
-                  { label: "blk 5", color: "#f87171" },
-                ]} label="paged: blocks returned to pool immediately — zero fragmentation waste" />
-              </div>
-            ),
-          },
-        ]}
-      />
-
-      <H3>Attention computation pattern under causal mask</H3>
-
-      <Prose>
-        The heatmap below shows which cells of the attention score matrix are computed during decode (right column) versus what a naive re-implementation would compute (entire square). Only the last row is actually needed per decode step; the causal mask zeros out the upper triangle regardless.
-      </Prose>
-
-      <Heatmap
-        label="causal attention pattern — rows=queries, cols=keys. Shaded=computed. Bright=decode step."
-        matrix={[
-          [0.9, 0,   0,   0,   0,   0,   0,   0  ],
-          [0.5, 0.9, 0,   0,   0,   0,   0,   0  ],
-          [0.3, 0.6, 0.9, 0,   0,   0,   0,   0  ],
-          [0.2, 0.4, 0.5, 0.9, 0,   0,   0,   0  ],
-          [0.1, 0.3, 0.4, 0.6, 0.9, 0,   0,   0  ],
-          [0.1, 0.2, 0.3, 0.4, 0.7, 0.9, 0,   0  ],
-          [0.1, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 0  ],
-          [0.3, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-        ]}
-        rowLabels={["Q₀","Q₁","Q₂","Q₃","Q₄","Q₅","Q₆","Q₇ (decode)"]}
-        colLabels={["K₀","K₁","K₂","K₃","K₄","K₅","K₆","K₇"]}
-        cellSize={40}
-        colorScale="gold"
-      />
-
-      <Prose>
-        The bottom row — the current decode step's query — attends to all past keys including itself. All upper-triangle cells are zero (causal mask). The KV cache means rows Q₀ through Q₆ never need to be recomputed; their K and V tensors are already in the cache. Only the bottom row's Q, K, V are newly projected; K₇ and V₇ are appended to the cache after this step.
-      </Prose>
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <CodeBlock>
-{`Technique       | When to use                          | When to skip
---------------- | ------------------------------------ | --------------------------------
-GQA (g=4-8x)    | Default for any new model training;  | If model is already trained with
-                | 4-8x cache savings, negligible        | MHA and you cannot retrain;
-                | quality loss at g<=8                  | at g>16 quality starts degrading
-                |                                      |
-MQA (g=H_q)     | Extremely memory-constrained edge;   | Almost everywhere — GQA at g=4
-                | acceptable 1-3% quality hit           | gives most of the savings at
-                |                                      | lower quality cost
-                |                                      |
-FP8 cache       | Default on H100/H200/Blackwell;      | Hardware without FP8 support;
-                | 2x savings vs BF16, near-zero loss    | if using older Ampere GPUs
-                |                                      |
-INT8 cache      | Ampere and older hardware;           | If FP8 is available — FP8 has
-                | 2x savings vs FP16, <0.1% task loss  | better numerical properties
-                |                                      |
-INT4 cache      | Edge deployment, research;           | Any task using long-context
-                | memory-critical with quality monitor  | retrieval or needle-in-haystack
-                |                                      |
-PagedAttention  | Any serving system with concurrent   | Single-request latency-only
-                | requests (>1 user); default for      | deployments where fragmentation
-                | production serving stacks             | is not an issue
-                |                                      |
-Contiguous      | Research/evaluation with batch=1;   | Production with concurrency —
-allocation      | simpler implementation               | fragmentation is fatal at scale
-                |                                      |
-MLA             | New frontier models being designed   | Inference-time optimization only;
-                | from scratch; 5-10x cache savings     | requires architecture change and
-                | with better-than-GQA quality          | pretraining from scratch
-                |                                      |
-Prefix caching  | Long system prompts repeated across  | Short or highly variable prompts;
-                | requests (>50 tokens shared);        | requires paged allocation to work
-                | requires PagedAttention first         |`}
-      </CodeBlock>
-
-      <Prose>
-        The most consequential decision is GQA vs MHA, because it is made at model architecture time and cannot be changed post-training. Every frontier model trained after 2023 ships GQA. The quantization decision is made at serving time and can be changed per deployment with quality validation. PagedAttention is the default for any production serving stack; the only reason to use contiguous allocation is implementation simplicity in research settings.
-      </Prose>
-
-      <Prose>
-        MLA is a distinct category: it is not an inference-time optimization but an architectural replacement for GQA, available only in models specifically pretrained with it (DeepSeek-V2, DeepSeek-V3 at the time of writing). The decision between MLA and GQA is made when choosing which model to deploy, not how to serve it. For teams training new frontier models, MLA is the more cache-efficient architecture if the implementation complexity is acceptable. For teams deploying existing open-weight models, GQA is what they have.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>What scales linearly (the predictable axes)</H3>
-
-      <Prose>
-        <strong>Context length (S).</strong> The KV cache is strictly linear in S — there is no compression, no sparsification, no pooling in a standard transformer. Every additional token costs exactly as much cache as the first. This linearity is what makes the memory wall so sharp: doubling context doubles memory, halving concurrency. At 1M context on Llama 3 70B in BF16, a single sequence would require 343.6 GB — impossible on any existing GPU, and possible only on a multi-GPU or CPU-offload system. This is why architectural changes like MLA and YOCO are necessary at the frontier rather than engineering tweaks.
-      </Prose>
-
-      <Prose>
-        <strong>Batch size (B).</strong> Every concurrent sequence holds its own KV cache. Batch size scales the memory footprint linearly with no sharing except for prefix caching. Ten concurrent 8k requests at 2.68 GB each consume 26.8 GB — independent of whether the requests are similar or identical in content, unless prefix caching is active. This linear scaling is what makes paged memory management essential: without it, peak memory usage is determined by the worst-case sequence length across all concurrent requests, which can be dramatically higher than the average.
-      </Prose>
-
-      <Prose>
-        <strong>Layers (L).</strong> Every layer stores its own K and V tensors. Deeper models cost proportionally more cache. The ratio of KV cache to weights grows with model depth: an 80-layer model holds proportionally more of its total memory in cache, per token, than a 32-layer model with the same parameter count.
-      </Prose>
-
-      <Prose>
-        <strong>KV heads (H_kv).</strong> This is the one architectural axis that scales linearly and is also a design variable. Full MHA with H_kv = H_q means cache scales with total query head count. GQA at group size g reduces H_kv by g×, directly reducing cache by g× with the same context and batch. This is why GQA became standard: it is the only mechanism that compresses the cache without changing context length, batch size, or precision.
-      </Prose>
-
-      <H3>What doesn't scale well (the diminishing returns)</H3>
-
-      <Prose>
-        <strong>Quantization.</strong> The savings from quantization are bounded by the number of bits. BF16 → FP8 is 2×. FP8 → INT4 is another 2×. INT4 → INT2 would be another 2×, but INT2 quality is unacceptable for most attention patterns. The total available savings from quantization alone is roughly 4× from BF16 to INT4, at the cost of increasing quality risk. There is no path to 10× savings through quantization without unacceptable degradation; beyond INT4 the error is large enough to materially change which tokens attention weights.
-      </Prose>
-
-      <Prose>
-        <strong>GQA group size.</strong> The savings from GQA are bounded by the original head count. For Llama 3 70B with 64 Q heads and 8 KV heads, the maximum GQA reduction is 64× (down to 1 KV head — MQA). But quality degrades measurably as the group size increases past roughly 8. The empirical finding from Ainslie et al. 2023 is that GQA at group sizes 4–8 essentially matches MHA quality; at group sizes above 16 the gap becomes noticeable on tasks that depend on fine-grained per-head specialization.
-      </Prose>
-
-      <Prose>
-        <strong>Paged allocation efficiency.</strong> PagedAttention nearly eliminates fragmentation but introduces its own inefficiency at large block sizes: the last block in a sequence is on average half-full (a block of 16 tokens is half-empty if the sequence length is not a multiple of 16). This internal fragmentation averages <Code>block_size / 2</Code> wasted slots per sequence — 8 slots for block_size=16. At short sequences this is a significant fraction; at long sequences it is negligible. Block size of 16 is a deliberate choice that minimizes this waste at the typical sequence lengths that dominated 2023-era deployments (256–4096 tokens).
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>Memory fragmentation with contiguous allocation</H3>
-
-      <Prose>
-        Any serving stack that allocates contiguous KV cache slabs per sequence will experience severe memory fragmentation under real traffic. Requests complete at different times and with different lengths. The freed slabs are rarely the exact size of the next incoming request. Available memory fragments into unusable chunks. The measured fragmentation in early 2023 production deployments before paging was 60–80%, meaning the GPU was capable of holding 3–5× more concurrent requests than it actually could. The symptom is requests being rejected or queued even though the GPU's theoretical memory is sufficient. The fix is PagedAttention or any equivalent paged allocator.
-      </Prose>
-
-      <H3>KV cache overflow causing OOM kills</H3>
-
-      <Prose>
-        A more dangerous failure: the serving framework does not accurately track KV cache usage across requests and allows more tokens to be generated than physically fit. The GPU runs out of memory mid-generation, the CUDA kernel raises an OOM error, and the serving process either crashes or the request fails mid-response. This is especially common when (a) the maximum context length is set too high relative to available GPU memory, (b) multiple requests simultaneously reach their maximum length, or (c) prefix sharing inflates apparent free memory because shared blocks are being reference-counted incorrectly. The fix is conservative admission control: refuse new requests when projected peak memory exceeds a safe threshold, rather than when it exceeds the physical limit.
-      </Prose>
-
-      <H3>Incorrect position embeddings after cache eviction</H3>
-
-      <Prose>
-        Some serving stacks implement cache eviction — dropping old cache entries to make room for more tokens — without correctly recomputing or adjusting position embeddings. Rotary position embeddings (RoPE, used in Llama, Mistral, DeepSeek) encode position directly into the Q and K vectors at computation time. If a cached K vector was computed at position 42 and that position's cache entry is evicted, the model cannot simply shift the remaining entries to fill the gap — the position information is baked into each K vector. Re-using a cache with evicted positions as if they were contiguous produces incorrect attention patterns, and the errors are silent: the model still generates tokens, but they reflect the wrong context. The correct approach is either never evict (accept more OOM risk) or re-prefill from scratch when eviction occurs.
-      </Prose>
-
-      <H3>Prefill/decode precision mismatch</H3>
-
-      <Prose>
-        A subtle but real production bug: the model runs prefill in BF16 (as weights are stored), writes the KV cache in FP8, and then dequantizes to BF16 for decode attention. If the FP8 quantization parameters (scale, zero-point) are computed from the BF16 prefill values but applied at decode time to different data distributions — for example, because the decode K/V values have higher dynamic range due to longer context — the dequantization produces values that are systematically off from what the model saw during training. The symptom is generation quality that degrades on longer outputs in ways not explained by the quantization error alone. The fix is to compute quantization scales dynamically per token at append time, not once at prefill.
-      </Prose>
-
-      <H3>Cache sharing across users (security)</H3>
-
-      <Prose>
-        Prefix caching is a powerful memory optimization, but it requires careful implementation of cache isolation. If two requests from different users happen to produce the same prefix hash — either legitimately (same system prompt) or adversarially — they share the same physical KV cache blocks. In a correctly implemented paged system this is fine: the blocks are read-only and the page tables provide full isolation. But if the implementation has a bug where a user can observe timing differences based on cache hits, or worse, can influence which physical block another user's request reads, the cache becomes a side-channel. Any implementation of prefix sharing must be reviewed with the same rigor as any other shared-memory security boundary.
-      </Prose>
-
-      <H3>Re-prefill cost on cache miss</H3>
-
-      <Prose>
-        When a cache entry is not available — because the request is new, because the cache was evicted, or because the serving system restarted — the prefill must be run from scratch. For a 32k-token system prompt, re-prefill can take several seconds and consumes substantial GPU compute. Systems that retry failed requests without preserving the cache state will re-prefill every retry, potentially producing a cascade where a brief GPU hiccup leads to a wave of expensive re-prefills that overload the system. The fix is to make cache state part of the checkpoint/recovery strategy, or to serve from a warm replica if cache recovery latency is unacceptable.
-      </Prose>
-
-      <H3>Page table fragmentation at long contexts</H3>
-
-      <Prose>
-        PagedAttention with a block size of 16 tokens performs well at typical deployment context lengths (256–8192 tokens). At very long contexts (128k–1M tokens), each sequence occupies thousands of physical blocks, and the page table itself becomes a meaningful memory consumer. More importantly, the attention kernel's overhead from dereferencing thousands of block table entries per step grows linearly with the number of blocks. For sequences exceeding roughly 64k tokens at block_size=16, hierarchical page tables or larger block sizes may be necessary to avoid attention kernel overhead dominating decode latency.
-      </Prose>
-
-      <H3>Dtype mismatches during cache concatenation</H3>
-
-      <Prose>
-        When the KV cache is stored in one dtype and the attention computation runs in another, every cache read involves a cast. If the cast is done at the wrong granularity (e.g., casting the entire cache tensor rather than the current block), it creates transient memory allocations proportional to the cache size on every decode step, which can trigger OOM at long contexts. The correct implementation casts one block at a time inside the attention kernel, never materializing the full dequantized cache in HBM.
-      </Prose>
-
-      <Callout accent="red">
-        Silent correctness bugs are more dangerous than OOM crashes. Position embedding mismatch after eviction, prefill/decode precision mismatch, and page table security isolation failures all produce plausible-looking but incorrect generations — they pass unit tests and look fine in demos.
-      </Callout>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        The following papers are the direct foundations of everything in this topic. Verified against arXiv in April 2026.
-      </Prose>
-
-      <CodeBlock>
-{`1. Vaswani, A., et al. (2017). "Attention Is All You Need."
-   arXiv:1706.03762
-   The original transformer paper. Autoregressive decoder inference with
-   KV caching is implicit in every decoder implementation that followed.
-   Establishes the Q/K/V projection structure that makes caching possible.
-
-2. Pope, R., et al. (2022). "Efficiently Scaling Transformer Inference."
-   arXiv:2211.05102 — Published MLSys 2023.
-   First rigorous analytical model of transformer inference efficiency.
-   Derives the prefill-vs-decode compute/memory tradeoff, introduces the
-   roofline model for LLM inference, and establishes the MQA/partitioning
-   framework for production serving.
-
-3. Ainslie, J., et al. (2023). "GQA: Training Generalized Multi-Query
-   Transformer Models from Multi-Head Checkpoints."
-   arXiv:2305.13245 — Published EMNLP 2023.
-   Introduces grouped-query attention and shows it matches MHA quality at
-   intermediate group sizes. Provides the uptraining recipe that made GQA
-   practical for deployed models. Adopted by Llama 2, Llama 3, Mistral,
-   Mixtral, Qwen, and virtually every open-weight model since mid-2023.
-
-4. Kwon, W., et al. (2023). "Efficient Memory Management for Large Language
-   Model Serving with PagedAttention."
-   arXiv:2309.06180 — Published SOSP 2023.
-   Introduces PagedAttention and vLLM. Demonstrates 2-4x throughput
-   improvement over FasterTransformer and Orca via near-elimination of
-   KV cache memory fragmentation. Establishes paged block allocation as
-   the standard for production serving.
-
-5. Dao, T., et al. (2022). "FlashAttention: Fast and Memory-Efficient Exact
-   Attention with IO-Awareness."
-   arXiv:2205.14135 — Published NeurIPS 2022.
-   IO-aware tiled attention kernel that avoids materializing the S×S
-   attention matrix in HBM. The foundation for all production attention
-   kernels. Enables efficient prefill at long context.
-
-6. Dao, T. (2023). "FlashAttention-2: Faster Attention with Better
-   Parallelism and Work Partitioning."
-   arXiv:2307.08691 — ICLR 2024.
-   Refinements to FlashAttention improving work partitioning across warps,
-   reducing non-matmul FLOPs, and adding support for paged KV layouts
-   needed for PagedAttention compatibility.
-
-7. DeepSeek-AI. (2024). "DeepSeek-V2: A Strong, Economical, and Efficient
-   Mixture-of-Experts Language Model."
-   arXiv:2405.04434
-   Introduces Multi-head Latent Attention (MLA), achieving 93.3% KV cache
-   reduction versus MHA via low-rank KV compression. First production model
-   to demonstrate that architectural KV compression can outperform GQA both
-   in memory efficiency and model quality.`}
-      </CodeBlock>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1: Compute KV cache memory for Llama 3 70B at 128k context</H3>
-
-      <Prose>
-        Using the formula from section 3: Llama 3 70B has L=80 layers, H_kv=8 KV heads, d_h=128. Compute the KV cache size in GB for a single sequence at 128k context in (a) BF16, (b) FP8, and (c) INT4. Then compute how many concurrent 128k-context sequences would fit on a single H100 80GB after accounting for the model weights (approximately 35 GB for the KV-cache portion of an H100 when the 70B model is split across two H100s in tensor-parallel configuration, leaving ~45 GB for cache).
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Your solution here.
-# Expected: BF16 ~ 42.95 GB (one seq fills the H100),
-#           FP8  ~ 21.47 GB (two seqs fit),
-#           INT4 ~ 10.74 GB (four seqs fit, with quality caveats).`}
-      </CodeBlock></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2: Derive when GQA's savings outweigh its quality loss</H3>
-
-      <Prose>
-        GQA at group size g reduces the KV cache by g× but reduces the effective KV representational capacity by g× per layer. Ainslie et al. show that quality degradation is negligible at g≤8 and measurable at g≥16. Given a serving system with a fixed memory budget M_cache, model weights W, and a requirement for at minimum B concurrent users at context length S: write the inequality that determines the minimum g required to fit the system on one GPU. For Llama 3 70B parameters, what is the minimum g for B=32 concurrent users at 8k context on an H100 80GB? Does this violate the quality threshold?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3: Why does PagedAttention use 16-token blocks specifically?</H3>
-
-      <Prose>
-        Block size is a tradeoff between internal fragmentation, attention kernel overhead, and allocator granularity. With block_size=16: (a) what is the average internal fragmentation (wasted token slots) per sequence? (b) what is the fragmentation at block_size=1 and block_size=256? (c) how does block size affect the attention kernel's memory access pattern — specifically, why do larger blocks improve GPU memory coalescing? (d) at what context length does the page table overhead itself become significant, and how does block_size affect this threshold?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4: Design a cache quantization strategy for a real deployment</H3>
-
-      <Prose>
-        You are deploying Llama 3 70B on a cluster of H100 80GB GPUs for a customer service application. The expected workload is: 64 concurrent sessions, average context 12k tokens, peak context 32k tokens, SLA requires less than 5% quality degradation on MMLU-style benchmarks. Design a quantization strategy for the KV cache that (a) fits the average workload on the fewest possible GPUs, (b) handles peak context without OOM, and (c) stays within the quality SLA. Justify each choice with the memory accounting from section 4b.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5: When does MLA beat GQA at frontier scale?</H3>
-
-      <Prose>
-        DeepSeek-V2 reports that MLA achieves 93.3% KV cache reduction versus MHA while matching or exceeding MHA quality — better than GQA on both axes. But MLA requires training a model from scratch with the MLA architecture. Given a team starting a new 100B-parameter model training run: (a) at what context length does MLA's cache advantage over GQA-8× become decisive for a 1,000-GPU H100 cluster? (b) what is the per-GPU throughput increase in tokens/second from the memory savings, assuming decode is memory-bandwidth-bound? (c) what implementation complexity does MLA add versus GQA, and what are the engineering tradeoffs that might still favor GQA for a resource-constrained team?
-      </Prose></div></section>
-
+// Generated from accepted immutable content by scripts/render-kv-cache-lesson.mjs.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import { Math as InlineMath, MathBlock as SharedMathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { Table as NeuralTable } from '../../components/lesson-labs/KvCacheShared.jsx';
+import { KvTokenLoop, KvCausalCone, KvLayerStores, KvAttentionRead, KvAppend, KvOffsetMask, KvPoisonedCapacity, KvPadding, KvDecoder } from '../../components/lesson-labs/KvCacheFoundations.jsx';
+import { KvNativeCache, KvWork, KvTimings, KvPayloadFactors, KvAllocation, KvDeviceBudget, KvGroupedHeads, KvInvalidation, KvPositionMove, KvRetention } from '../../components/lesson-labs/KvCacheMemory.jsx';
+import { KvPages, KvSharedPrefix, KvPacking, KvPrecision, KvOffload, KvLatent, KvDiagnosis } from '../../components/lesson-labs/KvCacheStorage.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+
+const MathBlock = ({ children }) => (
+  <div className="kv-equation" role="region" tabIndex={0} aria-label="Mathematical expression">
+    <SharedMathBlock>{children}</SharedMathBlock>
+  </div>
+);
+const Program = ({ file }) => (
+  <RemoteCodeBlock source={'/learn-code/kv-cache/' + file} language="python" title={file} filename={file} />
+);
+function KvCacheLesson() {
+  return <div className="lesson-flow kv-flow">
+    <section>
+    <Prose>{
+      "A decoder has just read a prompt and selected its next token. To select another, must it run " +
+      "the entire prompt through every layer again? A cache lets it keep specific intermediate " +
+      "numbers. The useful question is which numbers remain valid, how a new token reads them, and " +
+      "when their storage becomes the limit."
+    }</Prose>
+    
+    <Prose opening="route">{
+      "We will follow one attention read by hand, extend a complete decoder with cached inference, " +
+      "and use the ordinary Transformers cache APIs on real tokenized text. Then we will account " +
+      "for memory, move records through a small block pool, pack low-bit values, and inspect the " +
+      "algebra behind a latent cache. A smaller amount of arithmetic does not guarantee a faster " +
+      "call: the CPU experiment keeps the observed timings and numerical disagreements visible."
+    }</Prose>
+    
+    <Prose opening="prerequisites">{"The "}<a href={
+      "/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models"
+    }>{"causal language-modeling lesson"}</a>{" supplies the decoder we extend. The "}<a href={
+      "/learn/path/full-curriculum/grouped-query-attention-gqa-multi-query-attention-mqa?module=large-language-models"
+    }>{"grouped-query attention lesson"}</a>{
+      " supplies the projected attention operator and its preallocated cache. We refresh their " +
+      "inputs before using them. For a first pass, read sections 1–10, then 14 and the core " +
+      "practices. Sections 11–13 are visible deeper branches on paging, precision and latent state; " +
+      "the core path already explains logical positions, physical storage and validity."
+    }</Prose>
+    
+    <span id="1-why-it-exists" aria-hidden="true" />
+    <H2>{"1. Follow the token that has actually been processed"}</H2>
+    
+    <Prose>{"Imagine a vocabulary with whole-word entries "}<code>{"the"}</code>{", "}<code>{"cat"}</code>{", "}<code>{"sat"}</code>{" and "}<code>{"down"}</code>{
+      ". These are illustrative token IDs; the real tokenizer later uses different pieces. The " +
+      "prompt contains three IDs at positions 0, 1 and 2. Its final output row contains "
+    }<strong>{"logits"}</strong>{", one unnormalized score for every vocabulary item. Choosing "}<code>{"down"}</code>{" from those scores produces an ID at position 3."}</Prose>
+    
+    <KvTokenLoop />
+    
+    <Prose>{"At this instant, the decoder has processed "}<code>{"the cat sat"}</code>{". It has "}<strong>{"not"}</strong>{" processed "}<code>{"down"}</code>{
+      ". The selected ID becomes an input to the next call, which creates its intermediate states " +
+      "and produces scores for position 4. Selection and processing are separate events. This " +
+      "distinction prevents a common off-by-one error in cache lengths and memory estimates."
+    }</Prose>
+    
+    <Prose>{"Processing the known prompt together is called "}<strong>{"prefill"}</strong>{". Processing new inputs while generating a continuation is usually called "}<strong>{"decode"}</strong>{
+      ". With a prompt of length P and G selected output IDs, stopping immediately after the G-th " +
+      "selection has processed P + G − 1 IDs. The last selected ID has not been fed back. For P = 3 " +
+      "and G = 2, prefill selects "
+    }<code>{"down"}</code>{"; one more call processes "}<code>{"down"}</code>{" and selects a fifth-position ID. Four positions have cache records."}</Prose>
+    
+    <Prose>{
+      "A cache stores intermediate results of processing; it is not the output text or the model's " +
+      "learned weights. Text IDs still matter because they determine whether a stored intermediate " +
+      "result belongs to the current request."
+    }</Prose>
+    
+    <span id="2-core-intuition" aria-hidden="true" />
+    <H2>{"2. Prove why the old rows can stay"}</H2>
+    
+    <Prose>{
+      "Each attention layer makes three projections of a row's hidden state. A query, Q, determines " +
+      "what the current row asks for. A key, K, participates in matching that query to an earlier " +
+      "row. A value, V, supplies the information mixed into the result. These descriptions name " +
+      "numerical roles; the coordinates do not come with human-readable meanings such as “noun” or " +
+      "“tense.”"
+    }</Prose>
+    
+    <KvCausalCone />
+    
+    <Prose>{
+      "Why can we keep an old key and value? Start at position i in the first layer. Its input " +
+      "embedding and positional information are unchanged when a future token is appended. Causal " +
+      "attention permits it to read only positions at or before i. Those inputs are unchanged too. " +
+      "The attention output, residual addition, row-wise normalization and row-wise feed-forward " +
+      "network therefore produce the same output at i."
+    }</Prose>
+    
+    <Prose>{
+      "Now apply the same argument to the next layer. Its old input rows are unchanged because the " +
+      "preceding layer preserved them. Its causal attention reads that same old prefix, so its old " +
+      "output rows are unchanged. Induction over layers establishes "
+    }<strong>{"prefix invariance"}</strong>{": appending future inputs does not change the mathematical outputs at existing positions."}</Prose>
+    
+    <Prose>{
+      "The conditions are part of the proof. Keep the model weights, earlier token IDs, position " +
+      "rule and attention permissions fixed. Use evaluation mode so dropout does not independently " +
+      "discard different coordinates on two calls. An operation that mixes all sequence positions, " +
+      "or bidirectional attention that lets an old row read the appended token, breaks this " +
+      "argument. An edit to an earlier ID breaks the “same old inputs” step. Floating-point " +
+      "execution can also produce small differences between mathematically equivalent computations " +
+      "with different shapes; we will measure those separately from semantic correctness."
+    }</Prose>
+    
+    <KvLayerStores />
+    
+    <Prose>{"There is consequently "}<strong>{"one K/V cache per layer"}</strong>{
+      ". Layer 2's keys come from layer 2's input states; they are not copies of layer 1's keys. " +
+      "Each layer appends its own projected K and V for the new rows. Old queries are unnecessary: " +
+      "their attention reads are finished, and future rows bring their own queries. The cache also " +
+      "does not need to retain every old feed-forward activation merely to continue inference."
+    }</Prose>
+    
+    <Prose>{
+      "This is why “save the embeddings” is not a complete cache implementation. Embeddings begin " +
+      "the computation. The reusable records are the layer-specific projected keys and values, " +
+      "together with enough state to interpret their positions and validity."
+    }</Prose>
+    
+    <span id="3-mathematical-foundation" aria-hidden="true" />
+    <H2>{"3. Read three records, then append one"}</H2>
+    
+    <Prose>{
+      "Let us inspect a single head with two key coordinates and two value coordinates. The example " +
+      "is constructed for arithmetic, not extracted from trained text embeddings. Its current query " +
+      "and three stored records are"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "q=\\sqrt2[\\ln2,0],\\quad\n" +
+      "K=\\begin{bmatrix}1&0\\\\0&1\\\\1&1\\end{bmatrix},\\quad\n" +
+      "V=\\begin{bmatrix}2&0\\\\0&2\\\\1&1\\end{bmatrix}."
+    }</MathBlock>
     </div>
-  ),
+    
+    <KvAttentionRead />
+    
+    <Prose>{"Scaled dot-product attention first computes one score for each key:"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"s=\\frac{qK^\\mathsf T}{\\sqrt{d_k}}=[\\ln2,0,\\ln2],\\qquad d_k=2."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Here dₖ is the number of coordinates in each key and query. Exponentiating these scores " +
+      "gives [2, 1, 2]. Dividing by their sum gives attention weights [2/5, 1/5, 2/5]. This " +
+      "normalization is softmax. The weights specify a weighted sum of "
+    }<strong>{"value rows"}</strong>{", not a sum of keys:"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"o=\\tfrac25[2,0]+\\tfrac15[0,2]+\\tfrac25[1,1]\n=[\\tfrac65,\\tfrac45]."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Now a fourth input arrives. This constructed example gives it the same query as above, but a " +
+      "new key [−1, 0] and value [−1, 1]. Keeping the query fixed lets us isolate what the newly " +
+      "visible record changes."
+    }</Prose>
+    
+    <KvAppend />
+    
+    <Prose>{
+      "The new key's score is −ln 2, whose exponential is 1/2. The four unnormalized weights [2, 1, " +
+      "2, 1/2] sum to 11/2, giving [4/11, 2/11, 4/11, 1/11]. The output is now"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"o'=\\tfrac4{11}[2,0]+\\tfrac2{11}[0,2]\n+\\tfrac4{11}[1,1]+\\tfrac1{11}[-1,1]\n=[1,\\tfrac9{11}]."}</MathBlock>
+    </div>
+    
+    <Prose>{"The old key and value "}<strong>{"coordinates"}</strong>{" stayed fixed. Their "}<strong>{"attention weights"}</strong>{
+      " did not: the new record changed the softmax denominator. A KV cache does not cache old " +
+      "attention probabilities for reuse with a new query. Each new read still scores its query " +
+      "against all permitted stored keys and mixes their values."
+    }</Prose>
+    
+    <Prose>{
+      "The new query can also differ from the previous one, as it normally does in a language " +
+      "model. Changing it changes the scores even if every cached record is unchanged. The trace " +
+      "separates these two causes: new query coordinates and newly available records."
+    }</Prose>
+    
+    <span id="6-visual-walkthrough" aria-hidden="true" />
+    <H2>{"4. Make the mask agree with the cache offset"}</H2>
+    
+    <Prose>{
+      "The causal rule is simple when written in logical positions: a key is allowed when its " +
+      "position is no later than the query's position. After P old positions, a chunk of T new rows " +
+      "has query positions P, P + 1, …, P + T − 1. With S occupied key positions, the mask is a " +
+      "T-by-S array. It is not usually a square triangle."
+    }</Prose>
+    
+    <KvOffsetMask />
+    
+    <Prose>{
+      "For P = 3 and T = 2, the queries are at positions 3 and 4. With capacity C = 7, the full " +
+      "permission grid, where 1 means allowed, is"
+    }</Prose>
+    
+    <CodeBlock language={"text"}>{"key position       0 1 2 3 4 5 6\nquery position 3   1 1 1 1 0 0 0\nquery position 4   1 1 1 1 1 0 0"}</CodeBlock>
+    
+    <Prose>{
+      "Columns 5 and 6 are unused storage. Row 3 must also exclude the later input at position 4, " +
+      "even though the chunk computes both rows in one call. A useful general expression is"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"M_{ij}=\\text{valid}_j\\;\\land\\;(p^{\\text{key}}_j\\le p^{\\text{query}}_i)."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The subscripts i and j locate rows in the current query and stored-key arrays. Their logical " +
+      "positions p need not equal those array indices."
+    }</Prose>
+    
+    <Prose>{"PyTorch 2.14's "}<code>{"scaled_dot_product_attention"}</code>{" treats a Boolean "}<code>{"attn_mask=True"}</code>{" cell as permitted. Its non-square "}<code>{"is_causal=True"}</code>{
+      " mask uses an upper-left alignment. With one query and four keys, that particular alignment " +
+      "permits only the first key. It would return [2, 0] in our four-record example, instead of " +
+      "[1, 9/11]. Supplying the explicit position mask makes the intended operation unambiguous. Do " +
+      "not generalize this Boolean convention to every attention API; check the function being " +
+      "called."
+    }</Prose>
+    
+    <KvPoisonedCapacity />
+    
+    <Prose>{
+      "A fixed-capacity allocation can contain stale or uninitialized numbers outside the occupied " +
+      "prefix. Correctness comes from excluding them, not from assuming they are zeros. Our checks " +
+      "deliberately fill unused keys with 123 and unused values with −77. An incorrect read becomes " +
+      "visible immediately. Reset can set the occupied length to zero without clearing every " +
+      "backing byte, provided no read treats those bytes as valid records."
+    }</Prose>
+    
+    <KvPadding />
+    
+    <Prose>{
+      "Padding adds a second condition. For two left-pad slots followed by three real IDs, physical " +
+      "slots are 0 through 4, but valid logical positions can be 0, 1, 2 in slots 2, 3, 4. A mask " +
+      "rejects the pad keys, and explicit "
+    }<code>{"position_ids"}</code>{
+      " give the real tokens their intended positions. Padding and causality solve different " +
+      "problems: “this is not a token” versus “this token is still in the future.”"
+    }</Prose>
+    
+    <H3>{"Run the projected trace"}</H3>
+    
+    <Prose>{
+      "Download the complete file bundle from this lesson's file index and extract it into one " +
+      "directory. The finite programs use Python 3.12, NumPy 2.3.5 and PyTorch 2.14.0; these are " +
+      "the tested versions. In a fresh virtual environment:"
+    }</Prose>
+    
+    <CodeBlock language={"sh"}>{"python -m venv .venv"}</CodeBlock>
+    
+    <Prose>{"Activate it with "}<code>{".venv\\Scripts\\Activate.ps1"}</code>{" in PowerShell, or "}<code>{"source .venv/bin/activate"}</code>{" in a POSIX shell, then install and run:"}</Prose>
+    
+    <CodeBlock language={"sh"}>{"python -m pip install numpy==2.3.5 torch==2.14.0\npython cache_trace.py\npython cached_decoder.py"}</CodeBlock>
+    
+    <Prose>{
+      "The README lists each file, the native model setup and separate commands. These two commands " +
+      "do not download data or train a model. Keep the supplied "
+    }<code>{"grouped_attention_cache.py"}</code>{" and "}<code>{"tiny_causal_lm.py"}</code>{
+      " beside the new programs so their imports resolve. The latter contains the prerequisite's " +
+      "training entry point, but this lesson imports its "
+    }<code>{"TinyLM"}</code>{" class and does not run that entry point."}</Prose>
+    
+    <Prose>
+    <a href="/learn-code/kv-cache/kv-cache-programs.zip" download>Download the complete program bundle</a>{' · '}<a href="/learn-code/kv-cache/README.md">Setup and file guide</a>
+    </Prose>
+    <Program file="cache_trace.py" />
+    
+    <Prose>{""}<code>{"cache_trace.py"}</code>{" makes the projections concrete. Each hidden row has six constructed coordinates, "}<code>{"[qx, qy, kx, ky, vx, vy]"}</code>{
+      ". Three six-by-two selection matrices extract the three roles. This deliberately simple " +
+      "projection lets us inspect the whole path without pretending that hand-chosen vectors are " +
+      "learned embeddings. It appends the first three K/V rows, reads them, appends the fourth, and " +
+      "checks the fractions derived above."
+    }</Prose>
+    
+    <Prose>{"The ordinary PyTorch call receives those same Q, K and V arrays, the explicit position mask, and "}<code>{"dropout_p=0"}</code>{
+      ". Its result matches the NumPy read. The program also executes the incorrect upper-left " +
+      "alternative, so the [2, 0] counterexample is a computed result rather than a warning " +
+      "inferred from an API name."
+    }</Prose>
+    
+    <Program file="grouped_attention_cache.py" />
+    
+    <Prose>{"This full prerequisite program owns the vectorized attention operation. Its query shape is "}<code>{"[B, Hq, T, dk]"}</code>{": batch, query heads, new rows and key coordinates. Keys have "}<code>{"[B, Hkv, S, dk]"}</code>{"; values have "}<code>{"[B, Hkv, S, dv]"}</code>{
+      ", where dv is the value width. The grouped layout maps multiple query heads to each compact " +
+      "K/V head without requiring a full repeated K/V copy for the NumPy calculation. "
+    }<code>{"ProjectedKVCache.append"}</code>{" validates capacity before a write; "}<code>{"read"}</code>{
+      " applies logical positions and key validity. The trace uses one batch and one head to keep " +
+      "the arithmetic visible."
+    }</Prose>
+    
+    <Prose>{
+      "With four occupied rows, one head, two K coordinates, two V coordinates and eight-byte " +
+      "float64 elements, the trace holds 128 occupied payload bytes. Capacity six reserves 192 " +
+      "bytes. Neither count includes the arrays for logical positions and validity or Python object " +
+      "overhead. This distinction will become more consequential when we count a whole decoder."
+    }</Prose>
+    
+    <span id="4-from-scratch-implementation" aria-hidden="true" />
+    <H2>{"5. Cache every layer of a complete decoder"}</H2>
+    
+    <Prose>{
+      "The small projected trace establishes the attention rule. A real decoder must also preserve " +
+      "the computation around attention. We now extend the exact "
+    }<code>{"TinyLM"}</code>{
+      " class from the causal language-modeling lesson. It has learned token and position " +
+      "embeddings, pre-normalized attention and feed-forward blocks, and a final vocabulary head. " +
+      "It is intentionally small enough to inspect."
+    }</Prose>
+    
+    <KvDecoder />
+    
+    <Prose>{"Suppose the cache already holds P rows. The new chunk's input is"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"X_0=E_{\\text{token}}[\\text{ids}]+E_{\\text{position}}[P:P+T]."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The position offset matters. Reusing position embeddings 0 through T − 1 on every call would " +
+      "change the model. Within a block, normalize the new hidden rows, project Q/K/V, append only " +
+      "the new K/V, and read the occupied cache with the offset mask. Merge the head outputs, apply " +
+      "the existing output projection, and add the residual. Apply the existing second " +
+      "normalization and feed-forward network, with its residual, before moving to the next block."
+    }</Prose>
+    
+    <Prose>{
+      "We reuse the model's modules directly; there is no second set of randomly initialized " +
+      "weights to confuse the comparison. The only new persistent state is a pair of tensors per " +
+      "layer and an occupied length. The adapter reserves capacity once, writes slices in place, " +
+      "and reads up to the current end. Growing the prefix therefore avoids repeatedly " +
+      "concatenating every old K/V row in this reference implementation."
+    }</Prose>
+    
+    <Program file="tiny_causal_lm.py" />
+    
+    <Prose>{
+      "The complete prerequisite source is included so that the adapter's imports and full " +
+      "reference are inspectable. Its ordinary full forward recomputes all rows. Its separate " +
+      "text-training and cropping-generation routines are not invoked here. Cropping a prefix and " +
+      "restarting its learned absolute positions would be a changed computation, not an exact " +
+      "extension of our current cache."
+    }</Prose>
+    
+    <Program file="cached_decoder.py" />
+    
+    <Prose>{""}<code>{"CachedDecoder.__call__"}</code>{" validates the incoming IDs and capacity before touching any layer. "}<code>{"begin"}</code>{" is the old occupied length; "}<code>{"end = begin + chunk_length"}</code>{". Every layer writes "}<code>{"[begin:end]"}</code>{" into its own key/value store. The attention score matrix has T query rows and "}<code>{"end"}</code>{
+      " key columns. Broadcasting the same position mask across batch and heads does not merge " +
+      "their numerical data."
+    }</Prose>
+    
+    <Prose>{
+      "Only after all layers and the output head finish does the adapter commit the new occupied " +
+      "length. The documented atomic failure is the checked capacity error: a too-large chunk is " +
+      "rejected before a single layer is modified. This does not promise transactional recovery " +
+      "from an arbitrary device failure in the middle of a forward pass; discard or reset the state " +
+      "after such a failure."
+    }</Prose>
+    
+    <Prose>{
+      "The executed comparison uses two sequences, eight IDs each, three layers, four heads and " +
+      "width 16 in float64, a 64-bit floating-point representation. A full eight-row call, eight " +
+      "one-row calls, chunks [3, 2, 3], and chunks [2, 5, 1] all match the same full-model logits. " +
+      "The largest absolute difference is 5.55 × 10⁻¹⁶. Occupied payload is 12,288 bytes; capacity " +
+      "ten reserves 15,360 bytes. These are random fixed weights for a computation check, not a " +
+      "trained text-quality demonstration."
+    }</Prose>
+    
+    <Prose>{
+      "The test then tries to append three more rows into capacity ten. It verifies that the length " +
+      "and all cache tensors are unchanged. Finally it resets, edits an earlier token, and checks " +
+      "the new full-prefix result. A valid cache belongs to one specific history; resetting is the " +
+      "simple correct answer when that history changes. Later we will identify which prefix can be " +
+      "retained safely."
+    }</Prose>
+    
+    <Prose>{
+      "This adapter accepts equal-length, unpadded batches and stays within the learned position " +
+      "table. The projected operator already exposed padding's mask semantics; the next ordinary " +
+      "library example executes a padded native case as well. Neither route requires running a " +
+      "training loop to demonstrate cached inference."
+    }</Prose>
+    
+    <span id="5-production-implementation" aria-hidden="true" />
+    <H2>{"6. Drive an ordinary library cache on real text"}</H2>
+    
+    <Prose>{
+      "We now change from a small fixed random decoder to the public Pythia-14M checkpoint. Its six " +
+      "layers use four attention heads, hidden width 128 and partial rotary positional encoding. " +
+      "Each head has 32 key and 32 value coordinates. Unlike TinyLM's learned position lookup, " +
+      "Pythia rotates part of its Q/K coordinates according to position. The invariant is still " +
+      "“same IDs, weights, positions and permissions,” but the positional computation differs."
+    }</Prose>
+    
+    <KvNativeCache />
+    
+    <Prose>{
+      "The text is the supplied public-domain Alice passage already used in the " +
+      "causal-language-modeling example. Its provenance file records the source and text hash. Here " +
+      "it is only an inference workload. We do not fit Pythia, estimate held-out quality, or assume " +
+      "the passage was absent from its pretraining data. Tokenization uses no added special tokens " +
+      "and saves the first 104 IDs before the comparison. Prompt lengths 8, 32 and 96 leave eight " +
+      "observed continuation IDs available from the same saved sequence."
+    }</Prose>
+    
+    <Prose>{"Add the tested native dependencies and acquire the pinned model:"}</Prose>
+    
+    <CodeBlock language={"sh"}>{
+      "python -m pip install transformers==5.19.0 tokenizers==0.23.2 huggingface-hub==1.33.0 " +
+      "safetensors==0.8.0\n" +
+      "python acquire_model.py --output model-cache\n" +
+      "python native_cache.py --model model-cache"
+    }</CodeBlock>
+    
+    <Program file="acquire_model.py" />
+    
+    <Prose>{"The acquisition program reads "}<code>{"model-source-report.json"}</code>{", which names revision "}<code>{"cf967c0a9a04383db6f7b1108d86b2962634b4ac"}</code>{
+      " and the exact hashes of six files. It verifies existing files and downloads missing ones " +
+      "explicitly. The forward program loads from that directory with "
+    }<code>{"local_files_only=True"}</code>{
+      "; it does not silently substitute another checkpoint when a file is missing. The weights " +
+      "remain separate from the small lesson bundle."
+    }</Prose>
+    
+    <Program file="native_cache.py" />
+    
+    <Prose>{"The "}<code>{"forward"}</code>{" helper keeps the important arguments visible. With no cache, "}<code>{"ids"}</code>{" contains the whole prefix and "}<code>{"use_cache=False"}</code>{". With a cache, "}<code>{"ids"}</code>{" contains only new rows, "}<code>{"begin"}</code>{" is their starting offset, and "}<code>{"past_key_values"}</code>{" is the mutable cache object. "}<code>{"position_ids"}</code>{
+      " describes the new rows. The attention mask spans the entire key history, including earlier " +
+      "rows that are absent from the current "
+    }<code>{"ids"}</code>{" tensor. "}<code>{"logits_to_keep=1"}</code>{
+      " returns only the last vocabulary-score row for ordinary next-token calls; the finite chunk " +
+      "check requests every new row so it can compare all of them."
+    }</Prose>
+    
+    <Prose>{""}<code>{"DynamicCache(config=model.config)"}</code>{" grows its tensors as rows arrive. "}<code>{"StaticCache(config=model.config, max_cache_len=capacity)"}</code>{
+      " reserves a fixed sequence capacity, with tensor allocation initialized when needed. Static " +
+      "storage still changes on every append. Its stable capacity can help shape- sensitive " +
+      "execution strategies, but the eager CPU example neither compiles the model nor claims a " +
+      "compilation speedup."
+    }</Prose>
+    
+    <Prose>{
+      "The native model uses FP32, a 32-bit floating-point representation. For twelve processed " +
+      "IDs, each dynamic layer has key and value shapes "
+    }<code>{"[1, 4, 12, 32]"}</code>{
+      ". Across six layers in FP32, occupied and backing payload both equal 73,728 bytes. A static " +
+      "capacity of sixteen has shapes "
+    }<code>{"[1, 4, 16, 32]"}</code>{
+      ", so its backing payload is 98,304 bytes while only 73,728 bytes are occupied. The " +
+      "checkpoint's FP32 parameter tensors occupy 56,270,848 bytes. Parameters, cache payload, " +
+      "temporary tensors and process memory are different quantities; the program reports the first " +
+      "two rather than presenting their sum as measured resident memory."
+    }</Prose>
+    
+    <H3>{"Interpret the numerical result honestly"}</H3>
+    
+    <Prose>{
+      "The first native chunk comparison, [4, 3, 5] versus one twelve-ID forward, failed the " +
+      "predeclared FP32 criterion"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"|z_{\\text{cache}}-z_{\\text{full}}|\n\\le 2\\times10^{-4}+2\\times10^{-4}|z_{\\text{full}}|."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The dynamic maximum absolute difference was 0.002812, with 21,589 of 603,648 logit elements " +
+      "outside that criterion. Static's maximum was 0.002238, with 17,206 outside. The tolerance " +
+      "was not increased to convert those failures into a pass. The initial attempt stopped before " +
+      "timing; the continuation records the original criterion's pass/fail counts explicitly."
+    }</Prose>
+    
+    <Prose>{
+      "A bounded diagnostic repeated the same full FP32 call exactly, then promoted the same loaded " +
+      "weights to FP64. Full-call replay was identical. In FP64, dynamic and static chunk " +
+      "differences fell to approximately 3.82 × 10⁻¹⁴ and 3.91 × 10⁻¹⁴. This supports a " +
+      "floating-point explanation for this tested prefix, rather than an offset or causal-mask " +
+      "error. It does not prove that every later cache case is correct or that FP32 met the failed " +
+      "criterion."
+    }</Prose>
+    
+    <Prose>{
+      "For the three study prefixes, all six cached teacher-forced comparisons also failed that " +
+      "same tolerance. Their maximum absolute errors ranged from 0.001513 to 0.004725. " +
+      "Nevertheless, each tested highest-scoring next-token ID (argmax) matched the full reference, " +
+      "and every separately generated eight-ID greedy continuation matched its reference. At prompt " +
+      "length 32, all three routes selected "
+    }<code>{"[562, 13, 703, 369, 1335, 275, 253, 4766]"}</code>{", decoded as "}<code>{" out, she was still in the middle"}</code>{"."}</Prose>
+    
+    <Prose>{
+      "Equal selected IDs are a weaker observation than equal logit arrays. The highest and " +
+      "second-highest scores can be separated by a margin larger than the numerical perturbation. " +
+      "If a future pair is nearly tied, that protection can disappear. The saved results retain the " +
+      "top-two margins as well as the IDs; the minimum observed greedy margin across these routes " +
+      "was about 0.01189. No general guarantee follows from one set of continuations."
+    }</Prose>
+    
+    <Prose>{
+      "The native checks also reset the cache and append left-padded inputs. The two padding slots " +
+      "are masked and real-token position IDs begin at zero. All tested top choices still agree, " +
+      "but the padded FP32 comparisons fail the original logit tolerance too: maximum errors are " +
+      "about 0.003287 and 0.003402. These outcomes stay visible alongside the shape and length " +
+      "checks. A useful diagnostic distinguishes “the intended state was constructed,” “a specified " +
+      "numerical tolerance passed,” and “the observed decoding decisions matched.”"
+    }</Prose>
+    
+    <span id="8-what-scales-and-what-doesn-t" aria-hidden="true" />
+    <H2>{"7. Count saved work, then measure the actual calls"}</H2>
+    
+    <Prose>{
+      "Caching avoids recomputing old projection and feed-forward rows. It does not make reading a " +
+      "growing prefix constant-time. Trace a three-token prompt that leads to four selected " +
+      "outputs, counting the rows computed by each route."
+    }</Prose>
+    
+    <KvWork />
+    
+    <Prose>{
+      "The full route processes 3 + 4 + 5 + 6 = 18 rows; the cached route processes 3 + 1 + 1 + 1 = " +
+      "6. The first rectangle is the same prefill on both routes. Each later cached call adds just " +
+      "the previously selected token's row, while full recomputation repeats every earlier row. For " +
+      "P prompt tokens and G selected outputs, this pattern gives"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"R_{\\text{full}}=\\sum_{i=0}^{G-1}(P+i)\n=GP+\\frac{G(G-1)}2,\\qquad R_{\\text{cache}}=P+G-1."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Attention work has another unit: a legal query–key pair. In the drawing, the full causal " +
+      "triangles contain 6 + 10 + 15 + 21 = 52 pairs. Cached prefill has the first six; its later " +
+      "single-row reads contain four, five and six, for 6 + 4 + 5 + 6 = 21 pairs. Reading the " +
+      "growing prefix still costs work. In general a causal prefix of length n contains n(n + 1)/2 " +
+      "legal pairs, so"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "A_{\\text{full}}=\\sum_{i=0}^{G-1}\\frac{(P+i)(P+i+1)}2,\n" +
+      "\\qquad A_{\\text{cache}}=\\frac{P(P+1)}2+\n" +
+      "\\sum_{i=1}^{G-1}(P+i)."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "These counts explain which work disappears. They are not floating-point operation (FLOP) " +
+      "counts for the entire model: widths, heads, layers and matrix operations still matter. Nor " +
+      "does a dense implementation necessarily skip every masked upper-triangle product; “legal " +
+      "pairs” is an algorithmic comparison, not a promise about the exact kernel instruction count."
+    }</Prose>
+    
+    <Prose>{
+      "For a decode query and S stored positions, attention must still read enough K/V data to form " +
+      "scores and the weighted sum. Payload grows linearly with S, and per-step attention reading " +
+      "grows with it. Generating a long continuation therefore accumulates more than constant total " +
+      "work. Calling cache-based generation simply “O(N)” loses the growing attention read."
+    }</Prose>
+    
+    <Prose>{"At small batch sizes, moving model weights and cache data can matter as much as arithmetic. "}<strong>{"Bandwidth"}</strong>{" is bytes transferred per unit time; "}<strong>{"latency"}</strong>{
+      " is elapsed time for a stated operation. An arithmetic reduction can coexist with Python " +
+      "overhead, memory allocation, unfavorable matrix shapes or bandwidth limits. The scaling-book " +
+      "treatment analyzes those relationships for hardware models; our CPU observations answer a " +
+      "narrower local question."
+    }</Prose>
+    
+    <KvTimings />
+    
+    <Program file="cache_study.py" />
+    
+    <Prose>{
+      "The program first saves a prospective record with source hashes and exact IDs. The run " +
+      "checks those identities before loading one FP32 CPU model in evaluation mode, with eager " +
+      "attention and two Torch threads. Each arm uses "
+    }<code>{"logits_to_keep=1"}</code>{
+      ", so the vocabulary head computes one output row per call in all arms. Giving the " +
+      "full-prefix arm an unnecessary vocabulary projection for every old row would make the " +
+      "comparison unfair."
+    }</Prose>
+    
+    <Prose>{
+      "Timing uses the same observed continuation IDs for every arm: prefill followed by seven " +
+      "one-ID steps. The greedy comparison is separate because differently selected IDs could " +
+      "otherwise change the timed workload. The end-to-end timer includes cache construction, " +
+      "prefill and the seven steps; tokenization, downloads, disk writes and printing are outside " +
+      "it. Every arm/length has one warmup and five measured repetitions, rotating the arm order " +
+      "across repetitions. The saved file includes each prefill and step time, not only aggregate " +
+      "ratios."
+    }</Prose>
+    
+    <Prose>{"These are the recorded CPU end-to-end medians and ranges, in milliseconds:"}</Prose>
+    
+    <NeuralTable caption={"7. Count saved work, then measure the actual calls"} headers={[<>{"Prompt IDs"}</>,<>{"Full recomputation"}</>,<>{"Dynamic cache"}</>,<>{"Static cache"}</>]} rows={[[<>{"8"}</>,<>{"62.248 [49.009, 185.085]"}</>,<>{"49.329 [42.260, 85.987]"}</>,<>{"54.886 [50.384, 71.701]"}</>],[<>{"32"}</>,<>{"56.172 [52.811, 61.486]"}</>,<>{"42.649 [40.483, 50.866]"}</>,<>{"44.626 [42.516, 53.633]"}</>],[<>{"96"}</>,<>{"79.758 [71.136, 90.611]"}</>,<>{"46.642 [44.434, 52.105]"}</>,<>{"48.997 [43.238, 51.431]"}</>]]} />
+    
+    <Prose>{
+      "The machine identified itself as Intel64 Family 6 Model 165 Stepping 2. At length 96 the " +
+      "full/dynamic median ratio was 1.710; full/static was 1.628. Both cached medians were lower " +
+      "for all three lengths. The broad length-eight range, including a 185.085 ms full call, " +
+      "remains in the record. Five repetitions on a shared CPU are not a precise estimate of a " +
+      "universal speedup. In particular, the full length-32 median being lower than length eight " +
+      "does not establish that longer inputs are intrinsically cheaper."
+    }</Prose>
+    
+    <Prose>{
+      "All 45 observations came from one timing campaign after the recorded pre-timing numerical " +
+      "failure and its reporting correction. No repeat was discarded to produce the table. The " +
+      "result measures this eager CPU setup; it does not estimate GPU serving throughput, compiled " +
+      "static-cache behavior, or the performance of a fused attention kernel."
+    }</Prose>
+    
+    <H2>{"8. Count occupied records and reserved space separately"}</H2>
+    
+    <Prose>{
+      "We can now count memory without conflating it with elapsed time. A single stored position in " +
+      "one head contains dₖ key coordinates and dᵥ value coordinates. If each coordinate occupies b " +
+      "bytes, its payload is b(dₖ + dᵥ). Multiplying by stored heads, layers and positions gives " +
+      "the cache payload."
+    }</Prose>
+    
+    <KvPayloadFactors />
+    
+    <Prose>{"For identical layers and B equal-length requests with S positions each,"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"M_{\\text{KV}}=B\\,S\\,L\\,H_{\\text{kv}}\\,(d_k+d_v)\\,b."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Here L is layer count and Hₖᵥ is the number of stored K/V heads. If dₖ = dᵥ = d, the " +
+      "familiar factor two comes from storing both K and V: 2BSLHₖᵥdb. It is not an extra factor " +
+      "for two attention operations. When widths or head counts vary by layer, sum each layer's " +
+      "contribution instead of multiplying by one representative layer."
+    }</Prose>
+    
+    <Prose>{
+      "Pythia's FP32 example uses L = 6, Hₖᵥ = 4, dₖ = dᵥ = 32 and b = 4, so each occupied token " +
+      "contributes 6,144 bytes across all layers. After P = 96 and G = 8 selections, the cache has " +
+      "103 processed positions and 632,832 occupied bytes. Static capacity 104 reserves 638,976 " +
+      "bytes. The last selected ID explains the one-position gap; it has not yet been fed."
+    }</Prose>
+    
+    <Prose>{
+      "For a larger constructed architecture with 80 layers, 8 K/V heads, widths 128, 8,192 " +
+      "positions and two-byte elements, one request's payload is 2,684,354,560 bytes. A decimal GB " +
+      "is 10⁹ bytes, so that is 2.68435456 GB. A binary GiB is 2³⁰ bytes, so it is exactly 2.5 GiB. " +
+      "Use explicit units in capacity calculations; rounding both quantities to “GB” can hide a " +
+      "real gap."
+    }</Prose>
+    
+    <KvAllocation />
+    
+    <Prose>{
+      "Serving requests need not have equal lengths. With lengths [3, 5, 8], live payload " +
+      "corresponds to sixteen positions. A rectangular allocation with capacity eight per request " +
+      "reserves twenty-four. Blocks of four allocate 4 + 8 + 8 = 20 positions, leaving four unused " +
+      "cells in last blocks. Paging can reduce wasted reservation while still having last-block " +
+      "slack."
+    }</Prose>
+    
+    <Prose>{"For request lengths Sᵣ and block size Cᵦ, the allocated position count is"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"N_{\\text{paged}}=\\sum_r C_b\\left\\lceil\\frac{S_r}{C_b}\\right\\rceil."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Multiply it by bytes per position to obtain block payload. Block tables, reference counts, " +
+      "allocator bookkeeping and alignment are additional storage. A dynamically grown tensor may " +
+      "also incur temporary copies during append; its final "
+    }<code>{"numel × element_size"}</code>{
+      " does not measure its peak allocation. These distinctions explain why payload accounting and " +
+      "process-memory measurement answer different questions."
+    }</Prose>
+    
+    <Program file="memory_budget.py" />
+    
+    <Prose>{
+      "The complete program computes live, static and paged payload, then verifies the dimensional " +
+      "formula against actual small NumPy arrays. It accepts a separate head/key/value width for " +
+      "each layer. "
+    }<code>{"allocation"}</code>{
+      " reports slot counts as well as bytes, making an incorrect padding assumption easier to " +
+      "locate. Changing a request length to a multiple of the block size removes that request's " +
+      "final-block slack; it does not make metadata disappear."
+    }</Prose>
+    
+    <span id="7-decision-matrix" aria-hidden="true" />
+    <H2>{"9. Ask which device owns each head"}</H2>
+    
+    <Prose>{
+      "A global cache total does not automatically belong on one accelerator. A deployment may " +
+      "shard heads across devices or replicate some state. The right budget follows the actual " +
+      "ownership of each layer's K/V heads."
+    }</Prose>
+    
+    <KvDeviceBudget />
+    
+    <Prose>{
+      "If the 80-layer example splits eight K/V heads evenly over two devices, each owns four heads " +
+      "and holds 1,342,177,280 bytes per request. Their sum is the earlier 2.5 GiB. But a single " +
+      "shared K/V head can be replicated on both devices so that each device's query heads can read " +
+      "it. Dividing its global one-copy payload by two would then undercount both devices. A " +
+      "parallelism name alone does not determine the cache layout."
+    }</Prose>
+    
+    <Prose>{""}<code>{"per_device"}</code>{
+      " therefore takes explicit owned-head counts rather than silently dividing by the number of " +
+      "devices. Under a simplified fixed-shape budget, the maximum number of equal-size resident " +
+      "requests is bounded by"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "B_{\\max}=\\left\\lfloor\n" +
+      "\\frac{M_{\\text{device}}-M_{\\text{weights}}-M_{\\text{workspace}}-M_{\\text{reserve}}}\n" +
+      "{M_{\\text{KV per request on device}}}\\right\\rfloor,"
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "provided the numerator is nonnegative. A negative remainder means the proposed non-cache " +
+      "allocations already exceed the budget. Workspace may change with batch and sequence shape, " +
+      "so a fixed-workspace calculation is a stated model, not a guarantee that the resulting batch " +
+      "fits at runtime."
+    }</Prose>
+    
+    <KvGroupedHeads />
+    
+    <Prose>{
+      "Grouped-query attention reduces the number of stored K/V heads relative to query heads. With " +
+      "four query heads, ordinary multi-head attention might store four K/V heads, GQA two, and " +
+      "multi-query attention one. Their output can still contain four query-head results because " +
+      "each query reads its assigned stored head. The grouping changes the representation and " +
+      "weights; unrelated four-head and one-head models do not become output-equivalent merely " +
+      "because their output shapes match."
+    }</Prose>
+    
+    <Prose>{
+      "The GQA paper studies conversion by pooling K/V parameters and further training. That is an " +
+      "architecture/adaptation decision with measured quality tradeoffs, not a cache allocator " +
+      "option that can be switched freely on an unchanged trained MHA model. Conversely, exact " +
+      "storage reuse of a model's existing K/V does not itself intentionally change its attention " +
+      "architecture. The prerequisite grouped-attention program supplies the compact numerical " +
+      "operator; here the ownership counts show why that choice affects serving memory."
+    }</Prose>
+    
+    <H2>{"10. Preserve meaning when records move or history changes"}</H2>
+    
+    <Prose>{
+      "Memory management moves bytes. Model semantics depend on what those bytes represent. A cache " +
+      "record belongs to a particular model, prefix, layer and logical position. Its current " +
+      "address is only a storage location."
+    }</Prose>
+    
+    <KvInvalidation />
+    
+    <Prose>{
+      "If token j changes, positions before j still have the same causal inputs. Position j and its " +
+      "suffix may change, including later tokens whose IDs happen to be unchanged. At a later " +
+      "layer, a repeated token's hidden state includes attention to the edited history. “Same token " +
+      "spelling” is therefore not a sufficient cache key. The conservative simple implementation " +
+      "resets everything; an implementation that retains the prefix must truncate every layer " +
+      "consistently at j and recompute from there."
+    }</Prose>
+    
+    <Prose>{
+      "Changing weights or adapters can invalidate the entire cache. Changing a position convention " +
+      "or mask rule can do the same. A reusable prefix needs agreement on all inputs that affect " +
+      "its computation, not only a text substring. The later prefix-caching lesson develops lookup, " +
+      "sharing and lifetime policy for many requests; this section establishes the validity rule " +
+      "those policies must respect."
+    }</Prose>
+    
+    <KvPositionMove />
+    
+    <Prose>{"Consider a two-coordinate rotary example. Let"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"R(\\theta)=\\begin{bmatrix}\\cos\\theta&-\\sin\\theta\\\\\n\\sin\\theta&\\cos\\theta\\end{bmatrix}."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Rotating the base vector [1, 0] by pθ represents position p in this simplified pair. A query " +
+      "at position 3 and key at position 1 have dot product cos((3 − 1)θ). At θ = π/6 this is 1/2. " +
+      "Moving that already rotated key from one physical slot to another, while preserving its " +
+      "logical identity and permissions, leaves the dot product unchanged. Reinterpreting it as a " +
+      "key at position 0 would instead give cos(3θ) = 0."
+    }</Prose>
+    
+    <Prose>{
+      "The physical slot can therefore change without changing the position. Some implementations " +
+      "store already rotated keys; others organize rotation differently. The rule is to preserve " +
+      "the intended function, not to assume that every cache buffer has the same representation. " +
+      "Pythia's native path stores keys after its rotary operation."
+    }</Prose>
+    
+    <KvRetention />
+    
+    <Prose>{
+      "What about dropping old records? For full attention, deleting a permitted old key/value " +
+      "changes the available scores and usually the output. A cache cannot make that exact merely " +
+      "by reusing the same allocation. For an architecture whose attention is genuinely restricted " +
+      "to a sliding window, a row outside all future dependencies can be discarded under that " +
+      "architecture's position and mask rules. The window restriction, rather than the memory " +
+      "allocator, provides the justification."
+    }</Prose>
+    
+    <Prose>{
+      "StreamingLLM studies another route: keeping initial attention-sink tokens alongside a recent " +
+      "window to alter long-stream inference. Its proposed cache-relative position handling is part " +
+      "of that algorithm, not the ordinary “move the same record” operation above. It does not " +
+      "restore arbitrary recall of discarded content or establish equality with full-history " +
+      "attention. Distinguish an exact cache for a local model from an approximate retention policy " +
+      "for a full-attention model before deciding what an eviction can mean."
+    }</Prose>
+    
+    <H2>{"11. Deeper: give a sequence a block table"}</H2>
+    
+    <Prose>{
+      "An exact cache need not be contiguous in physical memory. Divide its logical sequence into " +
+      "blocks of Cᵦ positions and keep a table that maps each logical block to a physical block. " +
+      "Reading the sequence follows the table, preserving logical order even when the physical " +
+      "blocks are scattered."
+    }</Prose>
+    
+    <KvPages />
+    
+    <Prose>{"For logical position p,"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"\\text{logical block}=\\lfloor p/C_b\\rfloor,\n\\qquad \\text{offset}=p\\bmod C_b."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "At p = 9 with blocks of four, the logical block is 2 and the offset is 1. If table entry 2 " +
+      "contains physical block 7, the address is physical block 7, offset 1. Nothing here changes " +
+      "the token's logical position from 9 to 1 or 7."
+    }</Prose>
+    
+    <Prose>{
+      "A pool can give a request another block when its current tail fills. Releasing a request " +
+      "returns its blocks to the free list; their stale contents are no longer reachable through " +
+      "that request's table. A newly allocated block must receive valid writes before those cells " +
+      "are read. The table and occupied length, rather than cleared memory, define the request's " +
+      "live records."
+    }</Prose>
+    
+    <Program file="paged_storage.py" />
+    
+    <Prose>{""}<code>{"PagedStorage"}</code>{
+      " holds a fixed NumPy pool and a list of free block IDs. Appending computes the number of " +
+      "additional blocks before mutating any state. If the free list is too short, it raises an " +
+      "error with the existing sequence intact. Otherwise it pops blocks, computes vectorized " +
+      "physical addresses, and writes the new rows. "
+    }<code>{"gather"}</code>{
+      " follows the same address translation to return the logical sequence for comparison with a " +
+      "contiguous reference."
+    }</Prose>
+    
+    <Prose>{
+      "The demonstration starts with three blocks of four records. Request A writes five records " +
+      "into physical blocks 0 and 1. B writes four into block 2. A can still append three records " +
+      "in its partially used block 1. Its ninth record requires a third block, so that append fails " +
+      "while B is live. Releasing B returns block 2, after which A can append its ninth record at " +
+      "address (2, 0). The program verifies the returned sequence and the failed append's unchanged " +
+      "state."
+    }</Prose>
+    
+    <Prose>{
+      "Gathering materializes a new contiguous array and therefore costs a copy. PagedAttention's " +
+      "systems contribution includes attention kernels that follow the block organization during " +
+      "attention, rather than requiring this teaching gather on every read. The later " +
+      "continuous-batching/PagedAttention lesson develops those request and execution concerns. A " +
+      "finite allocator demonstrates addressing and lifetime; it does not establish GPU kernel " +
+      "throughput."
+    }</Prose>
+    
+    <KvSharedPrefix />
+    
+    <Prose>{
+      "Two requests with the same valid prefix could copy its blocks or share them read-only. " +
+      "Sharing saves duplicate payload until their histories diverge. Appending into a shared " +
+      "partially filled last block requires ownership rules: one request must not overwrite bytes " +
+      "another still expects. Reference counts, copy-on-write and reusable-prefix lookup are " +
+      "developed in the later prefix- caching lesson. Our allocator deliberately owns each " +
+      "request's blocks exclusively, so its "
+    }<code>{"release"}</code>{" can return them without a shared-reference check."}</Prose>
+    
+    <H2>{"12. Deeper: store fewer bits or move state to another tier"}</H2>
+    
+    <Prose>{
+      "So far each cache coordinate has used a floating-point element. Quantization stores a " +
+      "coarser code plus information for reconstructing an approximate value. It changes numerical " +
+      "values deliberately, unlike an exact move of an existing record to a different address."
+    }</Prose>
+    
+    <KvPacking />
+    
+    <Prose>{
+      "For one nonconstant group x, take offset m = min(x), maximum M and bᵩ code bits. There are " +
+      "2ᵇᵩ possible codes, so a simple affine scale is"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "s=\\frac{M-m}{2^{b_q}-1},\\quad\n" +
+      "c_i=\\operatorname{clip}\\left(\\operatorname{round}\\frac{x_i-m}{s},0,2^{b_q}-1\\right),\n" +
+      "\\quad \\widehat x_i=m+s c_i."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The scale is the step between reconstruction levels. The offset locates the lowest level. " +
+      "For a constant group, the program stores scale zero and code zero; reconstruction returns " +
+      "its offset without dividing by zero. Values in the programs are finite, moderate-range " +
+      "arrays, with metadata stored in FP32."
+    }</Prose>
+    
+    <Prose>{"A four-bit code can represent integers 0 through 15, but placing it in an "}<code>{"int32"}</code>{
+      " array still uses four bytes per element. Real storage reduction requires packing. Our " +
+      "program places the first code in a byte's low nibble and the second in its high nibble:"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"\\text{byte}=c_{2j}\\;|\\;(c_{2j+1}\\ll4)."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Thus codes [0, 15, 7, 8, 3] become uint8 bytes [240, 135, 3], where each uint8 element is " +
+      "one unsigned eight-bit integer. Five codes occupy three bytes because the final high nibble " +
+      "is unused. One FP32 scale and one FP32 offset add eight bytes, bringing this tiny group's " +
+      "total to eleven. The original five FP16 values would occupy ten. Low code precision alone " +
+      "did not save space here; group size and metadata matter."
+    }</Prose>
+    
+    <Program file="cache_precision.py" />
+    
+    <Prose>{""}<code>{"quantize_group"}</code>{" treats each supplied array as one flattened group and preserves its shape for reconstruction. "}<code>{"pack_codes"}</code>{" and "}<code>{"unpack_codes"}</code>{
+      " operate on actual uint8 buffers. The supplied checks cover every four-bit and eight-bit " +
+      "code, odd lengths, constants and changed groups. The ordinary NumPy bitwise operations are " +
+      "the implementation of packing, rather than a library call that only pretends to store a " +
+      "smaller dtype."
+    }</Prose>
+    
+    <Prose>{
+      "A practical cache quantizer must choose grouping axes and a policy for newly arriving " +
+      "records. KIVI motivates asymmetric treatment: key channels and value tokens have different " +
+      "distributions and useful grouping patterns, with a full-precision residual region for recent " +
+      "state. Our one-group example is a packing/error reference, not an implementation of KIVI's " +
+      "grouping or fused execution. The byte counter therefore shows packed groups, FP32 metadata " +
+      "and a separate full-precision residual explicitly. One example has six packed bytes, sixteen " +
+      "metadata bytes and eight residual bytes: thirty payload and metadata bytes before any " +
+      "index/shape bookkeeping."
+    }</Prose>
+    
+    <KvPrecision />
+    
+    <Prose>{
+      "Quantizing K and V affects different parts of the read. K error changes qKᵀ, which changes " +
+      "softmax weights. V error changes the vectors those weights mix. For fixed q = [0.7, −0.4] " +
+      "and the program's three two-coordinate rows, the original output is approximately [0.010215, " +
+      "0.501301]. Quantizing only K gives [0.007990, 0.501776]; only V gives [0.026956, 0.507035]; " +
+      "both give [0.024619, 0.507590]. The combined error need not equal the sum of the two " +
+      "individual absolute errors because the weighted computation changes jointly. PyTorch SDPA on " +
+      "the same reconstructed arrays checks this NumPy attention path."
+    }</Prose>
+    
+    <Prose>{
+      "If all value rows are the same vector, changing normalized attention weights cannot change " +
+      "their weighted sum. That is a useful null case for K perturbations. At the other extreme, a " +
+      "close downstream decision boundary can turn a small coordinate error into a different " +
+      "choice. The constructed group [0, 0.49, 1] reconstructs to approximately [0, 0.466667, 1] at " +
+      "four bits. Root-mean-square error (RMSE) averages the squared coordinate errors and then " +
+      "takes the square root. Here it is only 0.01347, yet a threshold of 0.48 changes the middle " +
+      "coordinate's decision. This is a sensitivity witness, not a measured language-model quality " +
+      "result. Task quality requires an appropriate task evaluation, not just reconstruction error " +
+      "or cache compression ratio."
+    }</Prose>
+    
+    <KvOffload />
+    
+    <Prose>{"Another way to reduce device-resident state is "}<strong>{"offloading"}</strong>{
+      ": keep some cache on host memory and transfer the layer state needed for computation. If a " +
+      "step must transfer M bytes over a link with effective bandwidth β bytes per second, M/β is " +
+      "the idealized transfer time before fixed latency and other overhead. With D seconds of " +
+      "compute and no overlap, the two contributions add: approximately D + M/β. With ideal " +
+      "overlap, a lower model is max(D, M/β), but dependencies, prefetch timing and memory capacity " +
+      "can prevent that overlap. State clearly whether M counts one direction or both; “send then " +
+      "return” can move twice a one-way payload."
+    }</Prose>
+    
+    <Prose>{
+      "Transformers' documented offloaded cache routes coordinate per-layer movement and " +
+      "prefetching, while quantized-cache routes require compatible backends and configuration. " +
+      "These are useful extensions once the local cache contracts are understood. This lesson's " +
+      "executed native route is CPU dynamic/static caching; we did not run GPU offload, measure " +
+      "PCIe bandwidth, or test a fused quantized backend. Consult the versioned cache documentation " +
+      "before choosing those options for a particular model/device. Their implementation and " +
+      "hardware requirements cannot be inferred from a cache class name alone."
+    }</Prose>
+    
+    <H2>{"13. Deeper: cache a latent description and absorb projections"}</H2>
+    
+    <Prose>{
+      "Reducing coordinate precision keeps the same basic state at lower resolution. A different " +
+      "architecture can instead create a smaller shared state from which keys and values are " +
+      "derived. Call that state C, a matrix with one row per cached token and d꜀ latent " +
+      "coordinates. In a content-only linear example,"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"K=CU_K,\\qquad V=CU_V."}</MathBlock>
+    </div>
+    
+    <KvLatent />
+    
+    <Prose>{
+      "Take C of shape 2-by-2, Uₖ of shape 2-by-3, Uᵥ of shape 2-by-2 and a query q of shape " +
+      "1-by-3. Expanding K gives two three-coordinate key rows; expanding V gives two " +
+      "two-coordinate value rows. But associativity lets us rearrange the content score:"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"qK^\\mathsf T=q(CU_K)^\\mathsf T\n=(qU_K^\\mathsf T)C^\\mathsf T."}</MathBlock>
+    </div>
+    
+    <Prose>{"The "}<strong>{"absorbed query"}</strong>{
+      " qUₖᵀ has two latent coordinates. It reads C directly, without storing all expanded key " +
+      "rows. If a is the one-by-two attention-weight row, the output can likewise be computed as"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"aV=a(CU_V)=(aC)U_V."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The mix aC occurs in latent coordinates and is projected once afterward. These equalities " +
+      "concern the linear content path; the same score scaling and softmax must be used on both " +
+      "routes. The program deliberately uses unscaled content scores for its tiny arithmetic " +
+      "comparison, using the same score scale on both paths."
+    }</Prose>
+    
+    <Program file="latent_cache.py" />
+    
+    <Prose>{
+      "With C = [[1, 2], [−1, 1]], Uₖ = [[1, 0, 2], [0, 1, −1]], Uᵥ = [[1, 2], [3, −1]] and q = [2, " +
+      "−1, 0.5], the expanded keys are [[1, 2, 0], [−1, 1, −3]]. Both routes produce scores [0, " +
+      "−4.5]. The absorbed query is [3, −1.5]. Softmax gives approximately [0.989013, 0.010987], " +
+      "and both outputs are [6.945065, −0.032961]. The code compares the two complete matrix paths."
+    }</Prose>
+    
+    <Prose>{
+      "Position-dependent rotation complicates absorption. In general, projecting then rotating " +
+      "does not equal rotating then projecting. For row x and projection U, "
+    }<code>{"(x @ U) @ R.T"}</code>{" and "}<code>{"(x @ R.T) @ U"}</code>{
+      " can differ. With x = [1, 2], U = [[2, 1], [0, 1]] and a π/3 rotation, the program obtains " +
+      "[−1.598076, 3.232051] versus [−2.464102, 0.633975]. At rotation zero, the identity matrix " +
+      "removes that difference. Moving a rotation through an arbitrary learned projection therefore " +
+      "requires a justification; it is not ordinary reassociation."
+    }</Prose>
+    
+    <Prose>{
+      "DeepSeek-V2's multi-head latent attention, MLA, separates a content compression path from a " +
+      "rotary positional-key branch. Its cache accounting includes both latent coordinates and the " +
+      "retained rotary-key coordinates. For the paper's example d꜀ = 512 and dᴿ = 64, that is 576 " +
+      "elements per token per layer, not just 512. Across L layers at b bytes per element the " +
+      "corresponding term is L(d꜀ + dᴿ)b per token. These are architecture-specific state " +
+      "dimensions; our small program verifies the algebra and the need to treat position " +
+      "separately, not DeepSeek's training quality or optimized inference performance."
+    }</Prose>
+    
+    <span id="9-failure-modes-and-gotchas" aria-hidden="true" />
+    <H2>{"14. Diagnose the first disagreement before optimizing"}</H2>
+    
+    <Prose>{
+      "Return to the four-record example. The NumPy cache returns [1, 9/11], but an SDPA call " +
+      "returns [2, 0]. Which change is justified? Increasing the cache capacity, switching " +
+      "precision or buying more memory would not repair this case. Inspect the permitted key cells " +
+      "first: the one-query upper-left mask allows only key zero. Replacing it with the " +
+      "logical-position mask restores the intended weighted sum."
+    }</Prose>
+    
+    <KvDiagnosis />
+    
+    <Prose>{
+      "For a complete model, compare the same weights, IDs, evaluation state and positions before " +
+      "interpreting logit differences. Inspect each layer's cache length and shape, then a short " +
+      "chunk schedule. Poison unused storage to expose an accidental read; reset after a changed " +
+      "prefix. A numerical disagreement under a fixed tolerance is evidence to investigate, not a " +
+      "reason to redefine the tolerance until it passes. Our Pythia case shows why both " +
+      "higher-precision diagnosis and discrete decoding results can help explain that evidence " +
+      "while leaving the original failure intact."
+    }</Prose>
+    
+    <Prose>{
+      "Once the function is understood, count the state actually owned by each device, including " +
+      "capacity slack and the distinction between payload and metadata. Then measure matching " +
+      "workloads and keep the slow runs too. Correctness, capacity and speed ask different " +
+      "questions; a convincing cache comparison supplies evidence for each one it claims."
+    }</Prose>
+    
+    <Prose>{"The next lesson on "}<a href={
+      "/learn/path/full-curriculum/decoding-strategies-greedy-beam-top-k-top-p-temperature?module=large-language-models"
+    }>{"decoding strategies"}</a>{
+      " starts from these vocabulary logits: greedy selection, sampling and constraints decide " +
+      "which ID is fed next. "
+    }<a href={"/learn/path/full-curriculum/continuous-batching-pagedattention?module=large-language-models"}>{"Continuous batching"}</a>{" will coordinate many live requests with different lengths, and "}<a href={"/learn/path/full-curriculum/prefix-caching-prompt-caching?module=large-language-models"}>{"prefix caching"}</a>{
+      " will decide when separate requests can share already valid state. Their policies rely on " +
+      "the same distinction established here: the logical computation must remain identifiable even " +
+      "when the physical execution and storage arrangement change."
+    }</Prose>
+    </section>
+    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+    <span id="11-self-check-exercises" aria-hidden="true" />
+    <H2>{"Practice"}</H2>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"A. Count selected IDs and processed IDs"}</H3>
+    
+    <Prose>{
+      "A prompt has four IDs. You select three more, stopping immediately after the third " +
+      "selection. List the input lengths of the emitting calls and the final cache length. Does the " +
+      "final selected ID have a K/V row?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " Prefill already emits the first selected ID. Only subsequent selections require feeding a " +
+      "previously selected ID."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The logical prefix lengths are 4, 5 and 6. Full recomputation would feed those whole " +
+      "prefixes; cached execution feeds chunks of 4, 1 and 1. The final cache has six processed " +
+      "positions, 0 through 5. The output sequence contains seven IDs, but its last ID at position " +
+      "6 has not been fed. Counting all seven as cached would include an intermediate state that " +
+      "does not exist."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"B. Keep only a causally valid prefix"}</H3>
+    
+    <Prose>{
+      "A two-layer decoder has cached five IDs. Change the ID at position 1 while leaving positions " +
+      "0, 2, 3 and 4 unchanged. Which cached positions can remain? Why is an identical ID at " +
+      "position 4 insufficient to reuse its old state?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Follow the dependency cone at each layer, not just the embedding lookup."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Position 0 remains valid in every layer. Recompute positions 1 through 4. The changed " +
+      "position affects its own projections and can affect later attention reads. At later layers, " +
+      "position 4's input state contains information from the changed earlier context even though " +
+      "its token ID is unchanged. Truncate all layer caches consistently at length one, or use the " +
+      "simpler reset-and-recompute route. Keeping layer 1 truncated while leaving layer 2's stale " +
+      "suffix available would not implement that correction."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"C. Repair a chunk mask"}</H3>
+    
+    <Prose>{
+      "There are P = 2 old positions, T = 3 new rows and capacity C = 7. Write the three-by-seven " +
+      "permission grid and explain what an upper-left triangle gets wrong."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " The new query positions are 2, 3 and 4. Two capacity columns remain unoccupied even after " +
+      "the append."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <CodeBlock language={"text"}>{"       key 0 1 2 3 4 5 6\nquery 2    1 1 1 0 0 0 0\nquery 3    1 1 1 1 0 0 0\nquery 4    1 1 1 1 1 0 0"}</CodeBlock>
+    
+    <Prose>{
+      "The upper-left triangle would allow one, two and three keys rather than three, four and " +
+      "five. Construct "
+    }<code>{"key_positions <= query_positions[:, None]"}</code>{
+      ", then combine it with occupied/padding validity. For these contiguous positions, the causal " +
+      "comparison already excludes slots 5 and 6, but explicit validity is still needed when " +
+      "physical slots and logical IDs differ or padding occurs."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"D. Reject an append before mutation"}</H3>
+    
+    <Prose>{
+      "A decoder cache has capacity six and length five. Append a two-row chunk. Implement the " +
+      "expected error and show what must remain unchanged. Then reset and reuse the same allocation " +
+      "for a two-row prompt."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Capacity validation belongs before the first layer write."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{" Compute "}<code>{"end = 5 + 2"}</code>{". Because seven exceeds six, raise before writing "}<code>{"[5:7]"}</code>{
+      " in any layer or updating the occupied length. Save each K/V tensor and length before the " +
+      "call and compare them after the caught error. "
+    }<code>{"CachedDecoder.__call__"}</code>{" contains this ordering. "}<code>{"reset()"}</code>{" sets length zero; the next two-row call writes "}<code>{"[0:2]"}</code>{
+      ", uses positions [0, 1], and reads only those two rows. Stale bytes in slots 2–5 are " +
+      "excluded. The supplied verification uses the analogous changed case length eight, capacity " +
+      "ten, append three."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"E. Control a native chunk schedule"}</H3>
+    
+    <Prose>{
+      "Use the first thirteen saved Alice IDs. Process twelve as chunks [4, 3, 5], then append the " +
+      "thirteenth. Compare every real output row with the corresponding full thirteen-ID reference. " +
+      "Specify the positions, masks, cache shapes and what a failed tolerance means."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" A cached call receives only its new IDs, but its key mask includes the whole occupied prefix. Use "}<code>{"last_only=False"}</code>{" for the row comparison."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The successive query positions are 0–3, 4–6, 7–11 and 12; the key-mask lengths are 4, 7, 12 " +
+      "and 13. Dynamic layer K and V shapes after the final append are "
+    }<code>{"[1, 4, 13, 32]"}</code>{". Static capacity sixteen keeps "}<code>{"[1, 4, 16, 32]"}</code>{
+      " backing shapes while its occupied length is thirteen. The following complete script " +
+      "composes the supplied native helper:"
+    }</Prose>
+    
+    <CodeBlock language={"python"}>{"import torch\nfrom native_cache import load_model, make_cache, forward, compare_logits, HERE\n\ntorch.set_num_threads(2)\nmodel, tokenizer = load_model(\"model-cache\")\ntext = (HERE / \"alice-train.txt\").read_text(encoding=\"utf-8\")\nids = tokenizer(text, add_special_tokens=False, return_tensors=\"pt\").input_ids[:, :13]\nreference = forward(model, ids, last_only=False)\nfor kind in (\"dynamic\", \"static\"):\n    cache = make_cache(model, kind, 16)\n    pieces, begin = [], 0\n    for end in (4, 7, 12, 13):\n        pieces.append(forward(model, ids[:, begin:end], begin, cache, last_only=False))\n        begin = end\n    result = torch.cat(pieces, dim=1)\n    print(kind, compare_logits(result, reference), int(cache.get_seq_length()))"}</CodeBlock>
+    
+    <Prose>{
+      "Do not substitute an asserted pass for the printed comparison: this new thirteen-ID " +
+      "extension is an independent exercise, not an executed row in the supplied twelve-ID " +
+      "diagnostic. Use the unchanged criterion and record its actual result on your machine. " +
+      "Shape/position agreement and unchanged argmax are separate checks; neither automatically " +
+      "passes a failed logit tolerance."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"F. Distinguish row work from attention reads"}</H3>
+    
+    <Prose>{
+      "For P = 4 and G = 3, derive full and cached projection-row counts and legal query–key pair " +
+      "counts. What happens when the same prompt yields only G = 1?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " The first output is selected from prefill. Later calls process prefixes of lengths five and " +
+      "six, or only their new row with a cache."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Full rows are 4 + 5 + 6 = 15; cached rows are 4 + 1 + 1 = 6. Full legal pairs are 10 + 15 + " +
+      "21 = 46; cached pairs are 10 + 5 + 6 = 21. For G = 1 both routes compute four rows and ten " +
+      "legal pairs. No later computation can yet be reused. Cache allocation can still cost " +
+      "something, so these work counts alone do not predict elapsed time."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"G. Count ragged payload and device ownership"}</H3>
+    
+    <Prose>{
+      "Use four layers, two K/V heads, key and value widths eight, two-byte elements, request " +
+      "lengths [5, 9] and blocks of four. Compute live and paged payload. Compare two-way head " +
+      "sharding with full replication on two devices."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" First count bytes per occupied token across all layers."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Each token uses 4 × 2 × (8 + 8) × 2 = 256 bytes. Fourteen live tokens use 3,584 bytes. The " +
+      "two requests reserve 8 and 12 block slots, so paged payload is 20 × 256 = 5,120 bytes, " +
+      "including 1,536 bytes of slack. With one of the two heads owned on each device, each stores " +
+      "1,792 live bytes and 2,560 paged bytes. With both heads replicated on each device, each " +
+      "stores the full 3,584/5,120 bytes and the physical sum across devices doubles. Metadata and " +
+      "other model/workspace allocations are additional."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"H. Move a record without changing its position"}</H3>
+    
+    <Prose>{
+      "An already rotated key at logical position 7 moves from physical slot 7 to slot 0. Explain " +
+      "when the attention result stays unchanged. Would discarding all earlier keys be equally " +
+      "harmless?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" A physical address is not an instruction to rerotate the key."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Preserve the same key/value numbers, their logical identity and the mask's permissions, and " +
+      "update the address mapping. The dot products and weighted sum then see the same records in " +
+      "logical order. Reassigning the key to logical position 0 changes the intended " +
+      "relative-position computation. Dropping other keys also changes a full-attention read unless " +
+      "those keys were already outside its architectural dependency. An exact local-window eviction " +
+      "and an approximate full-attention retention policy therefore need different justifications."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"I. Trace a full block pool"}</H3>
+    
+    <Prose>{
+      "A four-block pool uses three records per block. Starting empty, append four records to A, " +
+      "three to B and three to C, allocating the lowest free block first. Append two more to A, " +
+      "then try one more. Explain the failure and show what changes after releasing B while C " +
+      "remains live."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " A's second block initially has two unused slots. Releasing B must not invalidate C even " +
+      "though A later reuses B's physical block."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " A's table is [0, 1], B's [2] and C's [3]. A's two new records fill block 1, reaching six " +
+      "occupied records. The seventh needs another block; the free list is empty, so append fails " +
+      "with A's length/table/data unchanged. Releasing B makes block 2 free. The retry extends A to " +
+      "[0, 1, 2] and writes at physical (2, 0). A occupies seven of its nine allocated slots. C's " +
+      "table [3] and three stored records stay intact. This is a changed input for "
+    }<code>{"PagedStorage"}</code>{"; the program's original "}<code>{"demonstrate()"}</code>{" uses different lengths."}</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"J. Check whether four-bit storage actually saves bytes"}</H3>
+    
+    <Prose>{
+      "Pack codes [2, 12, 5, 9, 1, 14, 6] with the low-nibble-first convention. Include one FP32 " +
+      "scale and offset. Compare with seven FP16 values, then explain what removing the final code " +
+      "changes."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Each pair fills one byte; an odd last code still needs a full byte."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The bytes are 2 + 16 × 12 = 194, 5 + 16 × 9 = 149, 1 + 16 × 14 = 225, and 6. Four payload " +
+      "bytes plus eight metadata bytes total twelve, versus fourteen for seven FP16 values: two " +
+      "bytes saved before other metadata. Removing the last code leaves three packed bytes and " +
+      "eleven total, versus twelve FP16 bytes, saving one. Group size changes metadata amortization " +
+      "as well as which values share a quantization scale."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"K. Construct a small-error decision change"}</H3>
+    
+    <Prose>{
+      "Quantize [-1, -0.26, 1] as one four-bit affine group. A downstream rule chooses A when the " +
+      "middle coordinate exceeds -0.23. Does small RMSE preserve the choice? In a separate " +
+      "attention case every V row is [2, -1]; can changing K alone alter the output?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" The offset is -1, scale 2/15, and the middle code rounds from 5.55."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Codes are [0, 6, 15], giving reconstructed values [-1, -0.2, 1] up to floating-point " +
+      "rounding. The middle error is +0.06, and RMSE across three coordinates is 0.06/√3 ≈ " +
+      "0.034641. The original middle value fails the threshold while the reconstructed value " +
+      "passes, so the decision changes. Small average error alone cannot protect a close boundary. " +
+      "In the separate attention case, normalized weights sum to one, so the output remains [2, -1] " +
+      "for every permitted weight distribution. Neither witness measures language quality; they " +
+      "demonstrate two different sensitivity conditions."
+    }</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"L. Absorb a projection, then test a rotation"}</H3>
+    
+    <Prose>{
+      "Use C = [[2, -1], [0, 3]], Uₖ = [[1, 0, 2], [0, 1, -1]], Uᵥ = [[1, 2], [3, -1]] and q = [1, " +
+      "2, -0.5]. Compute content scores directly and through the absorbed query. For supplied " +
+      "attention weights a = [1/4, 3/4], compute aV and (aC)Uᵥ. Separately, take row x = [1, 1], " +
+      "projection P = [[2, 0], [0, 1]] and a 90-degree counterclockwise rotation R. Compare (xP)Rᵀ " +
+      "with (xRᵀ)P. Do not treat the supplied a as softmax of these scores."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " Associativity changes parentheses without swapping matrix order. For row vectors the " +
+      "rotation multiplies by Rᵀ on the right."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " C is 2×2 and Uₖ is 2×3, giving K = [[2, -1, 5], [0, 3, -3]]. The direct 1×2 scores are " +
+      "[-2.5, 7.5]. The absorbed query qUₖᵀ = [0, 2.5] gives those same scores against Cᵀ. V = " +
+      "[[-1, 5], [9, -3]], so aV = [6.5, -1]. Also aC = [0.5, 2], whose product with Uᵥ is [6.5, " +
+      "-1]. For the separate rotation, xP = [2, 1] becomes [-1, 2], whereas xRᵀ = [-1, 1] then " +
+      "projects to [-2, 1]. The unequal results show why projection and rotation cannot generally " +
+      "commute. An identity rotation would agree but cannot prove the general claim. These changed " +
+      "matrices are an algebra exercise, not a rerun of "
+    }<code>{"latent_cache.py"}</code>{"'s original fixture."}</Prose>
+    </details>
+    </section>
+    <section className="kv-practice" data-lesson-exercise>
+    <H3>{"M. Build a cached-generation diagnostic"}</H3>
+    
+    <Prose>{
+      "Using fixed TinyLM weights, generate five IDs after a four-ID prompt with prefill schedules " +
+      "[4], [1, 1, 1, 1] and [1, 3]. Compare with full-prefix greedy generation. Include an " +
+      "edited-prefix reset, an over-capacity append, payload accounting and a clearly scoped CPU " +
+      "timer. Do not train another model."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " Every prefill chunk except the final one creates logits you do not need for selection. " +
+      "After selecting the fifth output, stop before feeding it."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{" "}<code>{"generate_cached"}</code>{" in the supplied "}<code>{"cached_decoder.py"}</code>{
+      " is a complete implementation. It verifies that the chunk lengths cover the prompt, " +
+      "processes them in order, and keeps the final chunk's logits. Each iteration selects the last " +
+      "row's argmax, appends that ID to the returned history, and feeds it only when another " +
+      "selection remains. It returns generated IDs plus occupied length, payload bytes and a local " +
+      "elapsed time. The processed length is eight, while the returned history has nine IDs."
+    }</Prose>
+    
+    <Prose>{"The accompanying "}<code>{"verify()"}</code>{
+      " builds one fixed random model, computes the full greedy reference and checks all three " +
+      "schedules against it. Its earlier checks also exercise the changed prefix after reset, " +
+      "poisoned storage and atomic capacity rejection. Calling "
+    }<code>{"python cached_decoder.py"}</code>{
+      " runs the complete solution. For a larger capacity, reserved bytes can grow while the " +
+      "generated IDs remain unchanged: unused storage is not extra context. The small timer " +
+      "includes cache construction and calls on this CPU; use the separately frozen repeated study " +
+      "when drawing a timing comparison. No text-quality conclusion follows from a random-weight " +
+      "generation check."
+    }</Prose>
+    </details>
+    </section>
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="further-learning">
+    <H2>{"Further learning"}</H2>
+    
+    <ul>
+    <li>{""}<a href={"https://jax-ml.github.io/scaling-book/inference/"}>{"The Scaling Book: LLM inference"}</a>{
+      " connects prefill/decode, memory traffic and arithmetic intensity to hardware limits. Read " +
+      "it after section 7 to understand why operation counts and latency need different models; " +
+      "distinguish its hardware assumptions from this CPU run."
+    }</li>
+    <li>{""}<a href={"https://github.com/stanford-cs336/lectures/blob/main/lecture_10.py"}>{"Stanford CS336 inference lecture source"}</a>{
+      " offers another workload-first treatment of inference and cache choices. Its worked " +
+      "arithmetic is useful for practising units and bottleneck reasoning."
+    }</li>
+    <li>{""}<a href={"https://huggingface.co/docs/transformers/v5.19.0/kv_cache"}>{"Transformers 5.19 cache guide"}</a>{
+      " is the practical companion for cache implementations, model compatibility, offloading and " +
+      "quantized extensions. Use the versioned API contract before adapting the native example to a " +
+      "different runtime."
+    }</li>
+    </ul>
+    
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="references">
+    <span id="10-primary-sources" aria-hidden="true" />
+    <H2>{"Technical references"}</H2>
+    
+    <ul>
+    <li>{""}<a href={"https://arxiv.org/abs/1911.02150"}>{"Fast Transformer Decoding: One Write-Head is All You Need"}</a>{
+      " introduces multi-query attention and analyzes incremental decoding's memory traffic. It " +
+      "motivates the stored-head factor in the byte count."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2305.13245"}>{"GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints"}</a>{
+      " describes grouped-query attention and checkpoint conversion/uptraining; its reported " +
+      "quality tradeoffs are empirical, not guarantees for arbitrary models."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2309.06180"}>{"Efficient Memory Management for Large Language Model Serving with PagedAttention"}</a>{
+      " develops block-based cache management and attention execution. The finite pool here " +
+      "isolates addressing; the paper covers the serving system around it."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2402.02750"}>{"KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache"}</a>{
+      " explains asymmetric grouping and residual storage beyond the simple affine packing example " +
+      "used here."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2405.04434"}>{"DeepSeek-V2"}</a>{
+      " gives the MLA content/rotary construction and architecture-specific cache dimensions behind " +
+      "the latent-state discussion."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/abs/2309.17453"}>{"Efficient Streaming Language Models with Attention Sinks"}</a>{
+      " studies a changed retention and positional strategy for streaming. Read its assumptions " +
+      "before treating a sink/window cache as an exact full-history cache."
+    }</li>
+    <li>{""}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html"}>{"PyTorch 2.14 SDPA reference"}</a>{
+      " specifies mask alignment, Boolean permissions, dropout and numerical execution " +
+      "qualifications used in the projected trace."
+    }</li>
+    <li>{""}<a href={"https://github.com/huggingface/transformers/blob/v5.19.0/src/transformers/cache_utils.py"}>{"Transformers 5.19 cache implementation"}</a>{" and "}<a href={"https://huggingface.co/EleutherAI/pythia-14m/tree/cf967c0a9a04383db6f7b1108d86b2962634b4ac"}>{"Pythia-14M model card"}</a>{" identify the ordinary library state and immutable checkpoint used in the run."}</li>
+    </ul>
+    
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="readiness">
+    <H2>{"Readiness"}</H2>
+    
+    <Prose>{
+      "You are ready to continue when you can distinguish a selected ID from a processed cache row, " +
+      "construct a chunk's position mask, explain why every layer has separate K/V, and repair a " +
+      "failed continuation without changing the model's intended history. You should also be able " +
+      "to count live versus reserved and per-device bytes, and explain what a timing or numerical " +
+      "comparison actually establishes. Those skills let the next decoding lesson change the choice " +
+      "of token while preserving the computation that produced its scores."
+    }</Prose>
+    </section>
+  </div>;
+}
+export default {
+  title: 'KV-Cache & Memory Management',
+  slug: 'kv-cache-memory-management',
+  readTime: '~80 min read + 90 min practice', content: KvCacheLesson,
 };
-
-export default kvCache;

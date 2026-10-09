@@ -1,0 +1,355 @@
+{
+  "status": "INSTALLED_PENDING_NORMAL_INTEGRATION",
+  "acceptance": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-root-private-acceptance-r1.json",
+    "sha256": "ec85a84afa839f25b69d30a05b83c9cd8f2dcf47e92e58943506bb50265b2e17",
+    "bytes": 1552
+  },
+  "owners": [
+    {
+      "destination": "public/learn-assets/mutual-information/DATA-PROVENANCE.md",
+      "before": null,
+      "after": "645ab84171ce641f3cfb32e185582deece93146e5ca88d9567c3c27fe40b935d",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/finite_fano.py",
+      "before": null,
+      "after": "20d67c5a9a32f665face463c775156d2eacae974e952b43f84ea7c12edfdeb13",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/finite_fano.stdout.txt",
+      "before": null,
+      "after": "f6b7965c2e37e156c005fe3b06a94de41d6f45fa3765d0eaa3783d891f3b7436",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/finite_ib_numpy.py",
+      "before": null,
+      "after": "6e78c8d50f897b5886a7c6d81f74b9ba69672dfcd72c131bb6b89747df442bbc",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/finite_ib_numpy.stdout.txt",
+      "before": null,
+      "after": "c2ced0cc86928fdcb27dfb1e94a496c43a449d13ff4859c2477d6794240eaeef",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/finite_ib_reference.py",
+      "before": null,
+      "after": "f6238f5ed37a2f1ec35efd84d905e8925bb01fd29f565da6187b7d4421788fb6",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/gaussian_vib_step.py",
+      "before": null,
+      "after": "13dcfb15989285dc6603fc664a73d9daf249928b8e9063e6c51ccb49a4899138",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/gaussian_vib_step.stdout.txt",
+      "before": null,
+      "after": "aa1de4ddef44e684b02996d87935ffbf7ce15ae6e3441961f06a03c734387da4",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_bounds.py",
+      "before": null,
+      "after": "1a06c3ce2c329449324e07acc610392c2b50e484de886540a46035f17ec1be25",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_bounds.stdout.txt",
+      "before": null,
+      "after": "094fbb132ddda5a6b756c2b97cec4fa62f6434a117aa08634722cbd88ae0033a",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_changed_task.py",
+      "before": null,
+      "after": "808a154ab8e30c00c15a2b469f7b19d793c854bde01e3f3843c7cb35159c40dc",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_changed_task.stdout.txt",
+      "before": null,
+      "after": "c6f492ad92fd3fd615955a2fd298cb5de2c5c471b2af50b4e638e7ee977d3c60",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_conditional.py",
+      "before": null,
+      "after": "377021b814855fe21429ea0a1cf65ccde6f92ed3a5c6a8c95246a29d09b255b3",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_conditional.stdout.txt",
+      "before": null,
+      "after": "4e8038a397a323cf5973ac85eb9faedcff64dd2002c8064de64f2ffae759d8b0",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_continuous.py",
+      "before": null,
+      "after": "2f913522f3d57ff1deca413aa21daf84955bf005035438d891f0fb55c64aa219",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_continuous.stdout.txt",
+      "before": null,
+      "after": "e3aaa07c5528c19e22df3df165e11fd7c1b6f5c83e88e93e237058ae01071f6c",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_estimation.py",
+      "before": null,
+      "after": "fb9f823d7692707e65327971fdfc7e99a9ea8919b85539ea3893104ccbc29be3",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_estimation.stdout.txt",
+      "before": null,
+      "after": "fde850e8fedcc3d6dcc1eb8ea7380249ea34c8336a92a4c49622660347115823",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_iteration.py",
+      "before": null,
+      "after": "f2131c0303bd0f76a2f8350e558b852d80adb31ce761e944793c743dbd37b11b",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_iteration.stdout.txt",
+      "before": null,
+      "after": "c86561adcafecde0ec2e649668559f6077daa0dc35dac5b7acd9da0d7f6521d9",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_nonlinear.py",
+      "before": null,
+      "after": "92424e9e56677e8349558c97f01806427cd15b62c280a52314fd1236c94bde12",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_nonlinear.stdout.txt",
+      "before": null,
+      "after": "f205b8b5f0e1724fdc780d968bd74181865536b171c182c29d4d157c93ff59e0",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_original.py",
+      "before": null,
+      "after": "536f5219a3703bb44e1f9e24c1fc3aa48d47752011a09fe6537146f203ac2e9e",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_original.stdout.txt",
+      "before": null,
+      "after": "cfdd6d84c3bdc9c3b0abb42033b541afd822044304d919679d1c8c577aa2b930",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_processing.py",
+      "before": null,
+      "after": "90cf6cd8e15da9d14b78989b779a2b1cbb3587c83ff1f23b096f98773c30f1c2",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_processing.stdout.txt",
+      "before": null,
+      "after": "18dbfa786618cb18df986ddd378424b2408a5b45ec6817625425913d190e7b9b",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_representations.py",
+      "before": null,
+      "after": "b9e50dd34b96c5e6f2d54d76f2738c2d3fcce02f63f93bdde78d62ec61eb40dd",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mi_representations.stdout.txt",
+      "before": null,
+      "after": "d145dfbcbee555fc834d3705900cbae85fb3ec4ec063f1a0f8226e8c6adde2a9",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mutual-information-library-bridge.py",
+      "before": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+      "after": "f4ed35826eeafa7b6c0c4c27c0162ac57f8bd493875a71b3a80e139ac7afba21",
+      "changed": true,
+      "backup": {
+        "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-canonical-before-r1/public/learn-assets/mutual-information/mutual-information-library-bridge.py",
+        "sha256": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+        "bytes": 2619
+      }
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/mutual-information-library-bridge.stdout.txt",
+      "before": null,
+      "after": "c127cf73ee4bfba413ac1481476526d31949a48edb15b0dfbdc1930a367d8f89",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/penguins.csv",
+      "before": null,
+      "after": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/penguins_information.py",
+      "before": null,
+      "after": "ca2685f9c9dfd285305413e53c3bdd466659624fc560580dca72237c11745cb0",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/penguins_information.stdout.txt",
+      "before": null,
+      "after": "889ace005388e1841e1ec541b7977368239e3ee3fac4affe89767750ec007937",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/mutual-information/practice-solutions.py",
+      "before": null,
+      "after": "f3da4fcb55ea1162c73acdb7456ac1a506ca569409e4f62ccd7efb806554cf2e",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationBottleneckDrawings.jsx",
+      "before": null,
+      "after": "5e42a63e63097682762c84027e18f64ab01eaea4bea4cd015582f0b94f895799",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationEstimationDrawings.jsx",
+      "before": null,
+      "after": "e2ab10628c099204176f6851c33bc769883c31bd6ab7754ad99030116d20490b",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationFiniteDrawings.jsx",
+      "before": null,
+      "after": "e0cea7ac8c1fcb73e8ac28bf15799b61a9be197e5ec2aa149c2cd0c7753bc145",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationGeometry.jsx",
+      "before": null,
+      "after": "255c47fb100a8a51eabaf780c74385025355d941911223d267d444280e5b2458",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationReadingDrawings.jsx",
+      "before": null,
+      "after": "14f40f328506d88a31b5782f1e60c077fdb7115defd0f01597500101c30093d4",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationReadingLesson.jsx",
+      "before": null,
+      "after": "39a23fc4cc26cd41411ae2a30a2800d7cf3a61f86512d32588b63fe509114543",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationReadingPrimitives.jsx",
+      "before": null,
+      "after": "ea74388f3ff8d3773d545d2d4419e1803bd717ce53045f863e050a55c6ba8296",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationReadingState.jsx",
+      "before": null,
+      "after": "8e08d45e30a4e23d53d96de434423b3024dd54dcc71e4d336c4c5ee22ae7b114",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/InformationVariationalDrawings.jsx",
+      "before": null,
+      "after": "9c9900c1b0ec0e0f55c5eb232e498a12e593740ff428c5ea9d2728715e1ac605",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/information-reading.css",
+      "before": null,
+      "after": "437af700685e27f0776609ccef48318fce44e2243dc6ea5952e49268201c1927",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/data/information-penguin-records.json",
+      "before": null,
+      "after": "37e9a169f3297f93f1db1a396042617e60c8e7bc8fb828280801a1a2c3cb7da9",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/data/information-reading-models.js",
+      "before": null,
+      "after": "5a3159911f11edc083a33656be476db6a90e2eec2a7b8054f198c8eb8ca5e9b6",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+      "before": "c969992cba3d640531a326b5eeab51ec54338ea700f4808908369e8167efeba4",
+      "after": "14941f0ac272fae52c617ea4c4276bb38b9f5caf8e25077fa45bf6395e128637",
+      "changed": true,
+      "backup": {
+        "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-canonical-before-r1/src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+        "sha256": "c969992cba3d640531a326b5eeab51ec54338ea700f4808908369e8167efeba4",
+        "bytes": 48635
+      }
+    },
+    {
+      "destination": "src/learn/data/mutual-information-models.js",
+      "before": "f8f890c06a123e77fec65e5fcb2084a372c270554c225d0c53dff01becbc982c",
+      "after": "f8f890c06a123e77fec65e5fcb2084a372c270554c225d0c53dff01becbc982c",
+      "changed": false,
+      "backup": null
+    }
+  ],
+  "phasePromoted": false
+}

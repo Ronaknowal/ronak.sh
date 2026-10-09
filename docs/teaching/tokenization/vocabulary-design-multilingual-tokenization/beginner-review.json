@@ -1,0 +1,112 @@
+{
+  "reviewer": "/root/byte_tokenization",
+  "checkedAt": "2026-09-28T16:53:14.989Z",
+  "status": "Independent source/pedagogy review complete; current browser acceptance remains root-owned",
+  "sources": {
+    "src/learn/data/topics/vocabulary-multilingual.jsx": "ef58a0363b09da309607dfe51389e95bfa0766d71663adb93da7a23badd81b59",
+    "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "9e5baba0f2466ec9b55b3cb55fb01331945f1c9891c653b11a21e9956dd0e9ea",
+    "src/learn/components/lesson-labs/multilingual-vocabulary.css": "d3c43adda0ffaf2c5799fa532cf170a63ec2e81fbc98f374aa44845e57135385",
+    "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/beginner-review.md": "6b087b27322f8218420c7088502cbf71dd7855e7f2ed4dd966d520049eeab1ff"
+  },
+  "invariantSourcesVerified": {
+    "public/learn-code/vocabulary-design-multilingual-tokenization/flores_sample_provenance.md": "bf8f04425503a6a2e3dd92e804debf8c35a78a955b20a73d09e77da6e834de22",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/flores_tokenizer_sample.json": "3d5295ea2bebf100a0f95463f20fd0386665c84b8604fd6f65c7e9a58790a0d7",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/multilingual_sentencepiece.py": "69f3f7ad0d289c330f3a5705bbb4349d1fca7064f43b3551ac5f42fd1a1010c9",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/vocabulary_audit.py": "c3ea7bfb5219b1c166d8b7780ee99e01019592f209b50c846642739b3a7bf937",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/vocabulary_migration.py": "4f05343523f2d23dd2d5ae1f1aa872b76cf9f2ff6b99eb97db9f0b658c2060d0",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "scripts/verify-multilingual-vocabulary.py": "9302c0b7c9cf2a86ddce4719a647d0299c001ce60800b96fc80609f319278f14",
+    "src/learn/data/multilingual-vocabulary-models.js": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9",
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19",
+    "scripts/verify-multilingual-vocabulary.mjs": "14968c48a721acf94696ccb39e373f6786141ee856da558f0d0e1f2c86e3b322"
+  },
+  "findingsClosed": [
+    "Thirty passes total across collections, not thirty each",
+    "Unrestricted square versus causal triangle explicitly linked",
+    "Logits and softmax defined locally",
+    "Shared cell sizing for comparable output and attention grids"
+  ],
+  "targetedReadout": {
+    "masses": [
+      80,
+      15,
+      5
+    ],
+    "merges": 4,
+    "alpha": [
+      1,
+      0.5
+    ],
+    "catsPieceCounts": [
+      2,
+      3
+    ],
+    "hindiHomePieceCounts": [
+      3,
+      2
+    ],
+    "rationale": "Checks new prose description against current model; does not rerun scientific campaign"
+  },
+  "arithmetic": {
+    "dictionaryPieces": [
+      7,
+      3,
+      4
+    ],
+    "fertility": 1.5,
+    "splitWordFraction": 0.5,
+    "squareRootShares": [
+      0.75,
+      0.25
+    ],
+    "illustrativeTableValues": 15,
+    "outputScores": [
+      20,
+      20
+    ],
+    "unrestrictedPairs": [
+      16,
+      4
+    ],
+    "equalLogitProbabilities": [
+      0.25,
+      0.2
+    ]
+  },
+  "limits": [
+    "Heuristic novice reading assessment, no observed learner",
+    "No new native model training",
+    "No independent browser execution in this review",
+    "Root must inspect final narrow/zoom geometry and interactions"
+  ],
+  "note": "Bindings cover the reviewed runtime/manuscript and this independent report. Author progress notes may gain browser observations separately without changing the reviewed source.",
+  "supplementalReview": {
+    "checkedAt": "2026-09-28T17:06:27.847Z",
+    "previousBindings": {
+      "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "9fd73d86d9d80004663991dfcc198d36f7a2654ddcdfa70999fb860cf34907a7",
+      "src/learn/components/lesson-labs/multilingual-vocabulary.css": "6176fbba2ddae5862114a1312c0ded4ea05e0e2ae408d543576d4d64be63bbd1"
+    },
+    "findings": [
+      {
+        "finding": "Six-digit candidate vocabulary value 206000 was clipped in the exact numeric input.",
+        "change": "Scoped vocabulary control grid reserves 8rem rather than inherited6rem for the numeric field; slider keeps the remaining minmax(0,1fr) track.",
+        "assessment": "Presentation-only change is scoped to vocabulary controls. Label and error continue spanning both columns, and numeric/range inputs retain width100%, min-width0 and the same state callbacks. Final focused production capture is root-owned."
+      },
+      {
+        "finding": "A single token was described as 1 pieces in baseline/current lab captions.",
+        "change": "Both captions select singular piece only when a present token array has length1, plural otherwise.",
+        "assessment": "Null arrays retain cannot encode without a suffix. Token counts, arrays and segmentation are unchanged."
+      }
+    ],
+    "checks": [
+      "Read both changed caption expressions, scoped CSS rule and shared numeric component/grid contract",
+      "Current lab JSX parsed with Babel",
+      "Manuscript hash unchanged",
+      "All10 numerical/data/program source bindings unchanged"
+    ],
+    "limits": [
+      "Final focused production control screenshot acceptance is pending root review",
+      "No new model/numerical execution; these changes affect presentation only"
+    ]
+  }
+}

@@ -1,221 +1,418 @@
 # Advanced Optimizers: Lion, Sophia, Prodigy and Schedule-Free
 
-**Explore as you read.** Edit gradient/momentum, curvature estimate, step scale, averaging state and supported real digit input for one update. Show the exact update vector and state changes for Lion, Sophia, Prodigy and Schedule-Free, including where gradients and evaluation occur. The labs show current results as you work; you do not enter or submit a guess. Use those comparisons to choose a debugging question from sign, curvature, scale and averaging effects rather than extrapolating a universal optimizer ranking.
+The preceding [Ring Attention lesson](/learn/path/full-curriculum/ring-attention-sequence-parallelism?module=deep-learning-fundamentals) moved a model's calculation between devices while keeping its answer the same. We now ask a different question: **how should the model's numbers change when it learns?** That choice can change the whole training journey, even when the data, model and loss remain fixed.
 
+An **optimizer** is the rule that turns a gradient and stored history into the next parameter values. We will first draw exactly where that rule sits, then follow AdamW, Lion, Sophia, Prodigy and Schedule-Free through their actual calculations. Their different kinds of memory, curvature estimates, scale adaptation and averaging solve different problems. None is a universal winner.
 
-Two people can receive the same directions and make different journeys. One takes a fixed stride, another slows down on a steep slope, and another changes stride after seeing how far they have travelled. A neural-network optimizer faces a related problem: the gradient tells it how the current loss changes locally, but does not specify a safe, useful next step.
+The first example is deliberately small enough to calculate by hand. Later we explicitly move to quadratic objectives to isolate state transitions, and finally to a real handwritten-digit classifier with all its saved parameters and optimizer state. The real study, complete scratch programs, ordinary library implementations, deeper theory and independent practice remain part of the route.
 
-An **optimizer** turns gradients and stored history into changes to model parameters. Those changes affect the next prediction. An optimizer does not add attention heads, change the labels or discover information that the input lacks. Its job is to make better use of the learning signal that the model and objective provide.
+## 1. What lies between an input and the next learned prediction?
 
-The preceding [Ring Attention lesson](/learn/path/full-curriculum/ring-attention-sequence-parallelism?module=deep-learning-fundamentals) reorganized a computation across devices while preserving its mathematical result. Changing the optimizer deliberately changes the learning trajectory. A faster update kernel and fewer updates to reach useful quality are separate advantages.
+### First locate the numbers that will change
 
-**First pass:** read the update anatomy, follow one calculation for each method, then inspect the handwriting experiment and memory accounting. Try the core practice before opening the optional theory and matrix-method branches. You need derivatives, weighted averages and basic probability; each is refreshed where it enters. The [second-order methods lesson](/learn/path/full-curriculum/second-order-methods-l-bfgs-k-fac-shampoo-natural-gradient?module=math-foundations) supplies a deeper route through curvature.
+Before discussing an update, what does this small classifier actually compute? Two supplied features meet four learned weights and produce two class scores.
 
-## 1. What has to happen between a gradient and the next prediction?
+<!-- OPT_FLOW scores -->
 
-Suppose a classifier assigns only 0.6 probability to the correct handwritten digit. Its cross-entropy loss is −log(0.6). Backpropagation calculates how changing each weight would change that loss. A positive gradient component says that a small increase in that parameter raises this batch's loss; descent would move in the negative direction.
+Read the cyan input cells from top to bottom: their values are 1 and 2. A **feature** is one supplied measurement; we have chosen these simple numbers rather than a real image for this first cutaway. The amber grid contains the **weights**, the numbers learning will change. Each column belongs to one possible class. Class 0 uses weights .4 and .1; class 1 uses −.2 and .3. The connecting lines show that each input participates in both scores. The gray multiplication and addition marks describe operations; the violet output cells contain their results.
 
-That statement is local. If a slope changes rapidly, a long step can go past the useful region. A gradient from a small batch also contains sampling noise. Finally, millions of parameters can have very different scales. These are reasons to transform the gradient, rather than reasons to stop trusting calculus.
+Class 0's score is 1(.4)+2(.1)=.6. Class 1's score is 1(−.2)+2(.3)=.4. A **score**, also called a **logit**, is a model's unrestricted numerical evidence for a class. A score is not yet a probability: scores can be negative and need not sum to one. This two-feature cutaway has no bias or hidden layer. The later digit classifier will include a separately drawn bias feature.
 
-We will use θ for the parameter vector, g for the current gradient, η for a learning rate and λ for a weight-decay coefficient. A subscript t identifies an update, not an example or an epoch. Multiplication, square roots and division between equally shaped parameter arrays are elementwise unless a dot product or matrix product is written explicitly.
+Write the feature row as x=[1,2] and the weight matrix as W=[[.4,−.2],[.1,.3]]. Then the score row is z=xW=[.6,.4]. Its two entries always follow the same class order, 0 then 1. This is the weighted-sum operation introduced in [Perceptrons, Neurons & Activation Functions](/learn/path/full-curriculum/perceptrons-neurons-activation-functions?module=deep-learning-fundamentals); we have drawn it here rather than assuming the name supplies the mechanism.
 
-**Figure 1 — anatomy of an update.** Trace a real image through scores → probability → loss → gradient, then split the optimizer into history, direction, scale and parameter update. Loop the new parameters back to a new prediction. Keep the image label outside the optimizer's state boxes.
+### Turn the scores into a comparable probability allocation
 
-| Method | Central question | Information it retains |
+How much probability should each score receive? Make positive masses from the scores, then divide each mass by their shared total.
+
+<!-- OPT_FLOW probabilities -->
+
+Both score wires first subtract the same largest score, .6. They become 0 and −.2. Subtracting a common number does not change the probability allocation; it keeps the subsequent exponentials from overflowing when scores are large. The gray exp operation turns these adjusted scores into positive masses: exp(0)=1 and exp(−.2)≈.818731. The addition node makes the shared total, 1.818731. Both division paths use that same total. Their violet outputs are approximately .549834 and .450166, which sum to one.
+
+This transformation is **softmax**: p_j=exp(z_j−max(z))/Σ_k exp(z_k−max(z)). Here j identifies the class whose probability we want, while k visits every class in the denominator. The model prefers class 0, but the allocation is close. Larger score differences create more uneven allocations. Increasing both scores by the same number leaves them unchanged. [Loss Functions](/learn/path/full-curriculum/loss-functions-ce-mse-focal-contrastive-triplet?module=deep-learning-fundamentals) explains this normalization and its gradient in more depth.
+
+### A target makes the learning question precise
+
+What should improve on this example? The supplied target is class 0, so the loss penalizes assigning too little probability to that class.
+
+<!-- OPT_FLOW objective -->
+
+The target enters on its own cyan path. It is supplied information for learning; it did not help compute the model's scores or probabilities. Its one-hot form y=[1,0] means “class 0 is the desired answer.” Select p_0=.549834 and apply the negative natural logarithm. The resulting **cross-entropy loss** is L=−ln(p_0)≈.598139. Loss is a number to minimize, rather than a parameter that the optimizer can overwrite.
+
+The dashed orange return paths represent derivatives: how sensitively this loss responds to each upstream number. For this softmax/cross-entropy combination, the derivatives with respect to the scores are p−y=[−.450166,+.450166]. The first negative sign says that increasing class 0's score slightly would lower the loss. The second positive sign says that increasing class 1's score would raise it. This is the [Backpropagation & Automatic Differentiation](/learn/path/full-curriculum/backpropagation-automatic-differentiation?module=deep-learning-fundamentals) chain rule applied to the actual route we just drew.
+
+Each weight multiplies its corresponding input, so its derivative is that input times its score derivative. The complete weight **gradient**, a matrix in the same shape as W, is
+
+g=∂L/∂W=[[−.450166,+.450166],[−.900332,+.900332]].
+
+The second row has twice the magnitude because its input was 2, not because the optimizer has already chosen a larger step. A gradient component describes a local sensitivity. It is not itself an instruction about a safe distance to travel. The exact relation is g_ij=x_i(p_j−y_j), with i naming the input feature and j naming the output class.
+
+### Now the optimizer has a job
+
+Where can learning act? A descent update subtracts a scaled gradient from the actual weight grid, and the next forward pass uses that changed grid.
+
+<!-- OPT_FLOW update -->
+
+The old amber grid enters one side of the subtraction nodes. The gradient enters the other side after multiplication by a **learning rate**, η. This is the chosen scale of the update. With η=.1, subtracting the negative class-0 gradients increases its two weights; subtracting the positive class-1 gradients decreases theirs. The complete new matrix is approximately [[.445017,−.245017],[.190033,.209967]]. Send the same input through it: the new scores are [.825083,.174917], and the new class-0 probability is .657048.
+
+The rule we just used is ordinary gradient descent, W_next=W−ηg. The live control changes η while keeping this example and its initial gradient fixed. At η=0, the grid and prediction remain unchanged. Try a larger value and compare the changed weights and probability. An improvement on this one example is not evidence that this rate improves an entire dataset. A large step can cross a minimum; a minibatch gradient also contains information from only the examples in that batch.
+
+In the rest of the lesson, θ means all model parameters arranged as one mathematical vector, g means their gradient, and η means the step scale. Our small W could be flattened into θ without changing the rule. A subscript t counts optimizer updates, not examples or epochs. Equally shaped arrays multiply, divide and square element by element unless we explicitly write a dot product or matrix multiplication. These conventions make the later implementations unambiguous.
+
+### Why transform the gradient at all?
+
+The gradient supplies local slope; history and curvature can help decide how to use it. Compare what each method remembers before following its calculation.
+
+| Method | Question it addresses | Persistent information |
 | --- | --- | --- |
-| AdamW | How large is the recent signed gradient relative to its recent squared magnitude? | First and second gradient moments |
-| Lion | Which direction does a blend of history and this gradient support? | One momentum buffer |
-| Sophia | How sharply does the loss change along each parameter coordinate? | Momentum and an estimated curvature diagonal |
-| Prodigy | Can observed progress supply a useful unknown step-scale estimate? | Scaled moments, displacement statistics and initialization |
-| Schedule-Free | At which parameters should we take gradients, and which parameters should we evaluate? | A fast trajectory, an averaged trajectory and any base-method scaling state |
+| AdamW | How large is a recent signed gradient compared with recent squared magnitudes? | Signed and squared-gradient averages |
+| Lion | Which direction wins when old history meets the current gradient? | One signed momentum average |
+| Sophia | Is a coordinate's large slope accompanied by high curvature? | Momentum and an estimated curvature diagonal |
+| Prodigy | Can observed movement help adapt a shared step scale? | Scaled moments, displacement histories and initial parameters |
+| Schedule-Free | Where should gradients be taken, and which parameters should be evaluated? | Fast and averaged trajectories, plus the base method's scaling state |
 
-These questions overlap. “Adaptive,” “second-order,” “parameter-free” and “schedule-free” name different properties. None means that data selection, validation or implementation details cease to matter.
+“Adaptive,” “second-order,” “parameter-free” and “schedule-free” describe different properties. They do not remove the need for data choices, validation or a precisely identified implementation. A faster update kernel and fewer updates to useful quality are also different advantages. We begin with AdamW because its two histories make a concrete reference for the other choices.
 
-## 2. AdamW gives us a concrete reference
+## 2. AdamW: smooth direction and magnitude separately
 
-### Smooth direction and scale separately
+### Why do two histories carry different information?
 
-An exponential moving average keeps part of the old value and adds part of the new one:
+Our gradient matrix contained signs and sizes. AdamW preserves those two kinds of information in separate moving averages.
 
-mₜ = β₁mₜ₋₁ + (1−β₁)gₜ,
+<!-- OPT_FLOW adam-histories -->
 
-vₜ = β₂vₜ₋₁ + (1−β₂)gₜ².
+The signed gradient feeds the signed-history addition path. Its old history, m, retains a fraction β_1; the current gradient contributes the remaining fraction, 1−β_1. This is an **exponential moving average**: older values keep influencing later states, with successively smaller weights. The squared-history path squares the gradient before averaging it into v, with its own retention fraction β_2. Squares are nonnegative, so opposite signs cannot cancel in v as they can in m.
 
-The first buffer keeps signed information. Opposite gradients can cancel. The second stores squared magnitude, so opposite signs cannot cancel. It is a **raw second moment**, not a variance: variance would subtract the square of the mean. With β₂ different from β₁, even that subtraction needs care about the weighting scheme.
+The two recurrences are m_t=β_1m_(t−1)+(1−β_1)g_t and v_t=β_2v_(t−1)+(1−β_2)g_t². Both buffers initially contain zero. A **buffer** here is a persistent array of computed state, not another learned weight. The gradient, m and v all have the parameter array's shape. [Gradient Descent Variants](/learn/path/full-curriculum/gradient-descent-variants-sgd-adam-adagrad-rmsprop-lamb-lars?module=math-foundations) offers the wider optimizer route; both averaging paths are refreshed here.
 
-If both buffers start at zero, their early values include too much of that initial zero. For a constant gradient g, the first recurrence produces mₜ=(1−β₁ᵗ)g. Dividing by 1−β₁ᵗ corrects this initialization effect. Thus
+For a new two-coordinate example, let g=[2,−4], β_1=.9 and β_2=.999. The first history becomes [.2,−.4]; the second becomes [.004,.016]. This example isolates the optimizer, so it deliberately replaces the earlier classifier gradient. The computed v is a **raw second moment**, an average of squared gradients. It is not a variance. A variance would subtract a mean squared, and different weighting schemes require care even with that subtraction.
 
-m̂ₜ = mₜ/(1−β₁ᵗ), v̂ₜ = vₜ/(1−β₂ᵗ),
+### Why divide away the initial zero?
 
-θₜ₊₁ = (1−ηₜλ)θₜ − ηₜ m̂ₜ/(√v̂ₜ+ε).
+If a constant gradient keeps arriving, why does its moving average start too small? Some of the average's total weight still belongs to the initial zero.
 
-The small positive ε stabilizes division. Its placement outside the square root is part of this algorithm, not cosmetic notation. The [AdamW paper](https://arxiv.org/abs/1711.05101) motivates separating shrinkage from adaptive scaling; the [PyTorch 2.14 rule](https://docs.pytorch.org/docs/2.14/generated/torch.optim.AdamW.html) makes the implemented order explicit.
+<!-- OPT_FLOW adam-correction -->
 
-At the first step, take g=[2,−4], β₁=.9 and β₂=.999. Then m=[.2,−.4], v=[.004,.016], m̂=[2,−4], v̂=[4,16]. Ignoring only the tiny ε for mental arithmetic, the normalized direction is [1,−1]. The larger raw component does not produce a twice-as-large first step.
+The chronological strip tracks those contributions. Its drawn example is t=3 and β_1=.9: initial zero retains .729, while the three gradient contributions have weights .081, .09 and .1, totaling .271. After one update, m=(1−β_1)g. After two, m=(1−β_1)(1+β_1)g. After t updates, the sum of the gradient weights is 1−β_1^t, leaving β_1^t on the initial zero. Dividing by 1−β_1^t removes that initialization effect. It does not remove minibatch noise or make the gradient an unbiased estimate of every future slope.
 
-With θ=[.5,−.7], η=.03 and λ=.1, shrinkage first gives [.4985,−.6979], followed by approximately [.4685,−.6679]. Our complete float64 implementation was compared with native PyTorch AdamW for four unequal gradients, including a zero gradient; all four maximum parameter differences were zero in that run. This verifies that particular calculation, not every optimizer in this lesson.
+Thus m_hat=m_t/(1−β_1^t) and v_hat=v_t/(1−β_2^t). At our first update they equal [2,−4] and [4,16]. Adam's direction divides m_hat by sqrt(v_hat)+ε, where ε is a small positive stabilizer. Ignoring only that tiny ε for hand arithmetic, the direction is [1,−1]. The raw gradient's second coordinate was twice as large, but its first normalized update is not twice as large.
 
-**Figure 2 — two histories, one step.** Show signed-gradient bars and squared-gradient bars feeding their own averages. Expand the first step into raw and corrected values. A later impulse after 999 zero gradients produces |m̂|/√v̂≈2.51457 with these betas, before ε. Therefore the Adam direction is not universally bounded by one.
+### Two changes reach the actual parameter
 
-### Weight decay is its own change
+How does this normalized direction meet the model? AdamW applies decoupled shrinkage and the gradient-driven subtraction as separate changes.
 
-Adding λθ to the gradient is the derivative of an L2 penalty. In an adaptive optimizer, that addition also enters the moment buffers and is rescaled with the gradient. Decoupled weight decay instead directly multiplies the parameter by 1−ηλ. These operations are generally different.
+<!-- OPT_FLOW adam-update -->
 
-With no gradient contribution and constant ηλ=.01, ten shrinkage steps multiply a parameter by .99¹⁰. The product over steps, ∏ₜ(1−ηₜλ), explains why changing the learning-rate schedule changes the cumulative shrinkage even when λ is unchanged. A zero current gradient does not generally stop an optimizer with nonzero momentum.
+Read the two number lines in parameter units. The old values [.5,−.7] first multiply by 1−ηλ, with η=.03 and a **weight-decay coefficient** λ=.1. They become [.4985,−.6979]. Subtract η[1,−1] and they become approximately [.4685,−.6679]. The diagram keeps shrinkage separate from the signed gradient step; neither changes the input or target.
 
-## 3. Lion: keep a directional memory, discard the final magnitude
+The complete rule is θ_next=(1−η_tλ)θ_t−η_t m_hat/(sqrt(v_hat)+ε). The position of ε outside the square root is part of this rule. The [AdamW paper](https://arxiv.org/abs/1711.05101) explains the decoupling, and [PyTorch's versioned AdamW rule](https://docs.pytorch.org/docs/2.14/generated/torch.optim.AdamW.html) identifies the ordinary implementation contract. Our retained complete float64 scratch implementation was compared with native PyTorch over four unequal gradients, including a zero gradient; maximum parameter differences were zero in that particular run. The complete code and its scope appear later.
 
-Imagine receiving several “move left” instructions followed by one “move right.” It matters whether the new instruction is weak or strong relative to the stored history. Lion first blends those quantities, then keeps only the sign of that blend for this update:
+Why not add λθ to g instead? That is the derivative of an L2 penalty, and an adaptive optimizer would also feed it into m and v before scaling. Direct multiplication by 1−ηλ takes a separate path. Those operations generally differ, although particular simple cases can coincide.
 
-uₜ = sign(β₁mₜ₋₁ + (1−β₁)gₜ),
+### A zero gradient and a bounded direction are different claims
 
-θₜ₊₁ = (1−ηₜλ)θₜ − ηₜuₜ,
+Our first normalized direction had magnitude one. Does Adam always keep that bound? A delayed impulse exposes why its two histories cannot be treated as one common average.
 
-mₜ = β₂mₜ₋₁ + (1−β₂)gₜ.
+<!-- OPT_FLOW adam-impulse -->
 
-The direction uses the **old** momentum and β₁. The stored momentum then uses β₂. Replacing both with one average defines a different method. Lion's original defaults are β₁=.9 and β₂=.99. There is no second-moment denominator and no Adam-style bias correction in this rule. Its [official Google implementation](https://github.com/google/automl/blob/master/lion/lion_pytorch.py) is small enough to follow alongside the equations.
+After 999 zero gradients, a nonzero gradient arrives at update 1000. The signed history responds with retention .9, while the squared history responds with retention .999. With the same bias corrections, the absolute normalized direction is approximately 2.51457 before ε. This is a calculation of that history, not a measured training speed or a universal worst case. The first-step result [1,−1] did not establish a bound.
 
-For θ=.5, old m=.2, g=−1, η=.01 and λ=.2:
+A zero current gradient can also leave a nonzero m, so the gradient-driven update can continue. Separately, if the gradient contribution is absent and ηλ=.01, ten decay steps multiply a parameter by .99^10≈.904382. With varying rates, the cumulative factor is Π_t(1−η_tλ). A new rate schedule therefore changes cumulative shrinkage even when λ stays fixed. With both histories and decay zero, a zero gradient gives the true stationary case. Keep these cases distinct when debugging.
 
-1. Blend: .9(.2)+.1(−1)=.08.
-2. Direction: sign(.08)=+1, despite the current negative gradient.
-3. Parameter: .5(.998)−.01=.489.
-4. New memory: .99(.2)+.01(−1)=.188.
+## 3. Lion: keep a directional memory, then take its sign
 
-The old history wins this step. If the current gradient were negative enough to reverse the blend, the step would reverse. Gradient magnitudes are therefore still important **before** the sign and when storing history. The buffer cannot be replaced by one sign bit without changing the algorithm. A zero blend has sign zero; the gradient-driven update can be zero. Weight decay can make the total change larger or smaller than η.
+### Can old evidence outweigh the present gradient?
 
-**Figure 3 — a balance followed by a direction switch.** Put .18 and −.10 on a signed number line; their sum crosses a sign threshold at zero. Below it, show the separate .198 and −.01 memory calculation. Do not draw an arbitrary confidence meter.
+Adam used two histories and a denominator. Lion asks a smaller question first: does the blend of history and this gradient point left or right?
 
-**Investigation: when does the new evidence win?** Begin with a different weight and history, edit the actual gradient sequence, and inspect the next direction before stepping. Compare two sequences with the same signs but different magnitudes. Then set both gradient and history to zero and observe the no-decay null. The explanation should identify which blend crossed zero.
+<!-- OPT_FLOW lion-worked -->
 
-### Tuning and an interesting origin
+The worked number line places .9(.2)=.18 and .1(−1)=−.10 on the same signed scale. Their sum is .08. The **sign** operation returns +1 for a positive sum, −1 for a negative sum, and 0 for an exactly zero sum. It discards the final magnitude of .08, but only after the two magnitudes have competed. A negative present gradient did not win this time.
 
-The [Lion paper's tuning section](https://arxiv.org/html/2302.06675v4) recommends trying a learning rate roughly three to ten times smaller than its AdamW comparator, with a correspondingly larger λ to retain a similar ηλ product. That is an empirical starting range. It is not an equivalence theorem, a requirement to multiply every decay by 100, or a diagnosis of any later training failure.
+Use θ=.5, old momentum m=.2, current gradient g=−1, learning rate η=.01 and decay λ=.2. Decay changes .5 to .499; subtracting η(+1) gives .489. The lower, separate memory route uses .99(.2)+.01(−1)=.188. The direction used the old memory .2, not the newly written .188. A momentum buffer is the stored signed average, not a history of one-bit directions.
 
-The striking origin of Lion is **program search**. Candidate optimizer programs were mutated, screened on inexpensive tasks, selected on harder tasks and simplified. The two different blend coefficients survived that process. This is an application of automated discovery where the result is an inspectable algorithm. A proxy task can still favor the wrong behavior, so transfer to larger tasks and ablations remain essential. The resulting method is not a neural network secretly deciding updates at runtime.
+The two roles are explicit in the rule: u_t=sign(β_1 m_old+(1−β_1)g_t), θ_next=(1−η_tλ)θ_t−η_tu_t, and m_next=β_2 m_old+(1−β_2)g_t. Lion's original defaults are β_1=.9 and β_2=.99. There is no second-moment denominator or Adam-style bias correction in this rule. Using one coefficient or calculating the direction from the new memory would define a different algorithm. [Google's official Lion source](https://github.com/google/automl/blob/master/lion/lion_pytorch.py) makes the order inspectable.
 
-Lion can reduce persistent optimizer storage when that storage is the limiting resource. It does not halve activations, model weights or every communication collective. Its sign threshold can also make tiny numerical changes consequential near zero; precision, loss scaling and accumulation should be assessed in the actual training setup rather than reduced to “one floating-point format always works.”
+### Try the same calculation with conflicting evidence
 
-## 4. Sophia: distinguish a large gradient from high curvature
+What changes if we start from a negative history instead? The next live case uses θ=−.4, m=−.3 and a current positive gradient 2 so that the threshold becomes visible.
 
-### The shape of the slope
+<!-- OPT_FLOW lion-evidence -->
 
-For the one-dimensional bowl L(θ)=½h(θ−a)², the gradient is h(θ−a), and the second derivative is h. A large gradient may mean that we are far from a, that the bowl is sharp, or both. Dividing by h returns the displacement θ−a. With an exact quadratic and step multiplier one, Newton's update reaches a immediately.
+The old-history contribution is −.27 and the new-gradient contribution is +.20. Their sum, −.07, still has a negative sign. Increase the selected gradient from 2 to 4: its contribution becomes .40, the sum becomes .13, and the signed step reverses. Both current gradients were positive. Their magnitude was essential before the sign operation. The chronological selector inspects a real update from the sequence, whose preceding gradients have already changed the stored history. Each signed ruler shares the same zero and units; its directly printed value remains visible when two marks coincide.
 
-For many parameters, the **Hessian** H contains second derivatives. Off-diagonal entries describe coupling: changing one coordinate changes the slope in another. Storing a full matrix costs quadratic space in parameter count. Sophia estimates only the diagonal, smooths it, divides a momentum estimate by it and clips the resulting coordinate updates.
+### Where does the signed direction move the weight?
 
-**Figure 4 — bowl geometry.** Show both an axis-aligned bowl and a rotated bowl with principal curvatures 1 and 20. From the same point, compare a gradient step, a diagonal-curvature step and the full Newton solution. On the rotated bowl, retaining only the diagonal misses coupling. This is a calculated geometry example, not a model benchmark.
+The direction alone is not the complete parameter change. The same live case sends its current weight through decay and then the signed subtraction.
 
-Write ρ for the positive curvature scale in our implementation:
+<!-- OPT_FLOW lion-update -->
 
-mₜ = β₁mₜ₋₁ + (1−β₁)gₜ,
+With the fresh default rate .02 and decay .1, the first old weight −.4 shrinks to −.3992. The negative direction subtracts −.02, so the new value is −.3792. Edit the initial weight, rate or decay and follow both displacements. Changing η to zero stops parameter movement but does not stop the separate memory recurrence. Decay can make the total change larger or smaller than η; the bounded sign step is only one part of it.
 
-hₜ = β₂h_previous + (1−β₂)ĥₜ on refresh steps; otherwise keep h unchanged,
+### The memory keeps more than a sign
 
-θₜ₊₁ = (1−ηₜλ)θₜ − ηₜ clip(mₜ/max(ρhₜ,ε),−1,1).
+How does this step affect the next decision? Its gradient and old memory also meet on the second, independently weighted path.
 
-Max and clipping are coordinatewise. The estimated diagonal is refreshed less frequently than the gradient. A negative or near-zero estimate receives the ε floor, and clipping prevents it from producing an arbitrarily large gradient-driven step. This bounds each such coordinate change by η; it does not certify that the whole loss decreases.
+<!-- OPT_FLOW lion-memory -->
 
-For m=[.2,−.3,0], h=[5,.1,0] and ρ=.5, the ratios are [.08,−6,0] and the clipped direction is [.08,−1,0]. At θ=[1,2,3], η=.1 and λ=.2, the new parameters are [.972,2.06,2.94]. Only the second gradient-driven component is clipped. Decay still moves the third component.
+The fresh first update gives .99(−.3)+.01(2)=−.277. This is stored for the next update, while β_1=.9 chose the current direction. Changing β_1 changes that current balance; changing β_2 changes what later balances inherit. Both coefficients remain editable here after their roles have been taught. Compare sequences [2,2,2] and [4,4,4]: they share signs but leave different memories. Replacing this buffer by a sign bit cannot reproduce the algorithm.
 
-### Two different curvature estimators
+### Inspect the full chronology, then change its length
 
-**Sophia-H uses Hessian-vector products.** Draw a random vector u with E[uuᵀ]=I and calculate u⊙(Hu). Its expected ith entry is Hᵢᵢ, because the cross terms have zero expectation. Gaussian probes are used in the paper; independent ±1 probes also satisfy this identity.
+How do several decisions connect? The chronological strip follows every actual weight and memory from the same declared initial state.
 
-For H=[[2,3],[3,1]], the probe [1,1] returns [5,4], while [1,−1] returns [−1,−2]. Averaging the four equally likely sign probes gives exactly [2,1]. An unbiased estimator can have negative individual entries. One sample is not a proof of negative true diagonal curvature. Automatic differentiation can form Hu without constructing H explicitly.
+<!-- OPT_FLOW lion-sequence -->
 
-**Sophia-G uses model-sampled labels.** For a classification model, form its current probabilities, sample an independent label for each example, and differentiate cross-entropy using those sampled labels. Square that mean gradient and multiply by batch size B:
+Each entry supplies one gradient to the rule; append or remove an entry here, then inspect any update in the earlier views. Edits restart the calculation from the same initial state rather than quietly adding a new optimizer onto its ending state. The full table distinguishes old weight, old memory, gradient, blend, sign, decay result, new weight and new memory. Pin the entire case to compare complete inputs and results, or reset its controls and sequence together.
 
-ĥ = B ĝ², ĝ = ∇θ mean_b CE(logits_b, sampled_label_b).
+<!-- OPT_FLOW lion-actions -->
 
-The labels used to train the model remain the real labels. Sampled labels are a separate instrument for estimating curvature. Squaring the ordinary real-label gradient is not this estimator.
+For a stationary check, set initial memory to zero, every gradient to zero and decay to zero. The weight remains exactly unchanged. An exactly zero blend has sign zero; a decimal cancellation near zero can instead expose floating-point rounding. The sign threshold can make small numerical differences matter, so precision, gradient accumulation and loss scaling belong in a real implementation's assessment.
 
-Here is an exact binary example. Let the input be x=2, predicted positive-class probability p=.8, and the real label be 1. The real-label gradient is x(p−1)=−.4; its square is .16. The curvature of the logistic loss in its scalar weight is x²p(1−p)=.64. If we sample label 1 with probability .8 and label 0 with probability .2, the expected squared gradient is
+### Why this method exists, and when it helps
 
-.8(−.4)² + .2(1.6)² = .64.
+The [Lion paper](https://arxiv.org/html/2302.06675v4) describes an unusual discovery route: optimizer programs were mutated, screened on cheaper tasks, tested on harder tasks and simplified. The two blend coefficients survived that search. The result is an inspectable program, rather than a neural network secretly choosing each update. Proxy tasks can still select behavior that transfers poorly; wider evaluations and ablations matter.
 
-This exposes the key distinction without a giant neural model. For a two-example batch x=[2,1], p=[.8,.3], enumerating all four sampled-label pairs gives E[2ĝ²]=.425, the average of the two exact diagonals. Omitting B gives half that value.
+The paper suggests beginning with a learning rate roughly three to ten times smaller than its AdamW comparator and a correspondingly larger λ to retain a similar ηλ product. This is empirical tuning guidance, not an equivalence theorem or a rule to multiply every decay by 100. A smaller persistent state can help when optimizer storage limits training. It does not halve model weights, activations or gradient communication. Later we count those arrays by name rather than equating fewer buffers with a universal memory or speed improvement.
 
-**Figure 5 — two gradient lanes.** Real labels feed the training-gradient lane; independently sampled labels feed the curvature lane. Show the binary branches, their probabilities, squared gradients and weighted sum. A batch panel explains that squaring an average is not averaging squares.
+## 4. Sophia: distinguish a large slope from rapidly changing slope
 
-**Investigation: what does the label sampler estimate?** Edit input magnitudes and probabilities in a new two-example problem. Observe whether a real-label squared gradient equals the expected sampled-label result. Enumerate the small outcome space, then compare with the analytic curvature. A separate probe view lets you edit a symmetric two-by-two matrix and see positive and negative Hutchinson estimates. These are different estimators, not interchangeable presets.
+### Why can the same-sized gradient require a different step?
 
-<details>
-<summary>Deeper: what curvature does Sophia-G actually estimate?</summary>
+Lion simplified the final direction, while Adam scaled it using squared-gradient history. Neither history directly measures how quickly the slope changes as a weight moves. That change in slope is **curvature**.
 
-Let J have shape classes × parameters, the Jacobian of logits with respect to parameters, and p be the probability vector. The generalized Gauss–Newton matrix for softmax cross-entropy is
+<!-- OPT_FLOW curvature-bowls -->
 
-G = Jᵀ[diag(p)−ppᵀ]J.
+We have now switched from the two-class classifier to a declared quadratic objective so that the geometry can be inspected without data noise. Both contour panels use the same two parameter axes and start at [2,−1]. A contour joins locations with equal loss. In the axis-aligned panel the bowl's shallow and sharp directions align with the axes. In the rotated panel the whole bowl rotates by π/6, so moving either parameter also affects the slope in the other. The marked destination [0,0] minimizes both bowls. The three arrows compare a gradient step with rate .08, a diagonal-curvature step, and a full Newton step.
 
-The full Hessian additionally includes second derivatives of the logits weighted by the loss's logit derivatives. For a linear classifier those second derivatives vanish, so G equals the Hessian. For a nonlinear network they generally do not vanish. Sophia-G is unbiased for the G diagonal under the sampled-label construction; it is not generally unbiased for the full Hessian diagonal.
+First inspect one dimension. For L(θ)=½h(θ−a)², a is the minimizing location and positive h is its curvature. Its gradient is h(θ−a): the same large gradient could mean a large displacement from a, a sharp bowl, or both. The slope changes by h times the parameter change. Dividing the gradient by h recovers the displacement θ−a. Subtracting that displacement reaches a in one update on this exact quadratic. This is the simplest **Newton step**; it is a geometry example, not Sophia's complete rule.
 
-The batch factor follows because independent sampled-label gradients have mean zero. When we square their sum, expected cross-example terms vanish. With unequal example weights, correlated sampling, masks or distributed averaging, derive the normalization for the actual reduction; do not copy an unrelated `bs` default. A formula involving only probabilities and squared logits misses the parameter Jacobian and cannot be the general parameter-curvature formula.
+For several parameters, the **Hessian** H is the matrix of second derivatives. Entry H_ij says how the gradient in coordinate i changes when coordinate j moves. The off-diagonal entries describe coupling. On our axis-aligned bowl, H=diag(1,20); its diagonal captures every coupling because the other entries are zero. On the rotated bowl, those entries are nonzero. The diagonal step therefore differs from the full Newton result, even though every retained diagonal entry is exact. Keeping only the diagonal saves space but discards information.
 
-</details>
+In notation, a quadratic is L(θ)=½θᵀHθ, its gradient is Hθ, and the full Newton step subtracts H^(-1)g when that inverse exists. A diagonal approximation instead subtracts g_i/H_ii coordinate by coordinate. A general neural loss need not be quadratic or convex, and an estimated Hessian need not be positive. The [Second-Order Methods](/learn/path/full-curriculum/second-order-methods-l-bfgs-k-fac-shampoo-natural-gradient?module=math-foundations) lesson develops those conditions and alternative approximations. Here the drawing exposes exactly what a diagonal loses.
 
-### Implement the refresh at a coherent parameter state
+### How does Sophia limit a curvature-scaled update?
 
-The paper uses a batch-scaled estimate and a maximum with ε. The official Sophia-G source instead stores the unscaled squared sampled gradient and multiplies by `bs` inside its denominator, adding a small ε. Those conventions must be matched deliberately. Using both B-scaled storage and `bs=B` would apply the factor twice.
+An estimated denominator can be tiny or negative. Sophia protects the division and clips each transformed coordinate before it changes a parameter.
 
-For a neural training loop, compute a fresh forward/backward for the sampled-label estimate at the intended parameter state, clear those gradients, then compute the real-label gradient for the update. Do not reuse a freed graph or reuse pre-update logits after mutating weights. The complete classroom program avoids this ambiguity by explicitly evaluating both gradients at the same parameter array.
+<!-- OPT_FLOW sophia-coordinates -->
 
-The [Sophia paper](https://arxiv.org/html/2305.14342v4) reports improvements on its specified language-model tasks and budgets. Its result is a reason to test a faithful implementation, not a guaranteed twofold speedup on another model. Measure refresh cost, clipped fraction, validation quality and actual elapsed training time. A clipped momentum method is not automatically Lion: their histories and update rules differ.
+The three lanes begin with momentum m=[.2,−.3,0] and a smoothed diagonal estimate h=[5,.1,0]. These are supplied states for a worked update, not Hessians claimed from the previous bowl. A positive scale ρ=.5 multiplies h. The denominator takes the larger of ρh and a small positive ε; this is a **floor** that prevents nonpositive denominators. Divide momentum by the denominator. The first two ratios are .08 and −6, while zero momentum makes the third zero. The next operation **clips** each ratio to the interval [−1,1]: anything above 1 becomes 1, and anything below −1 becomes −1. The resulting direction is [.08,−1,0].
 
-## 5. Prodigy: use progress to estimate an unknown scale
+Only the middle lane reaches the clipping limit. The other two are not artificially enlarged to a full step. This protects the gradient-driven coordinate change from exceeding η in absolute value, but does not bound the complete change when decay also acts, nor guarantee a lower loss. A floor makes a bad curvature estimate numerically usable; it does not make the estimate true.
 
-A learning rate that is sensible for one parameterization can be poor for another. In convex optimization, useful step-size bounds often contain the unknown distance D from initialization to a solution. **D-adaptation** methods try to estimate a useful distance scale while learning. Prodigy changes that adaptation so the estimate can grow more effectively.
+### Follow the direction all the way into the weight
 
-The basic signal compares the current gradient with displacement from initialization. Suppose we have moved in a direction that earlier gradients supported, and the current gradient still says there is useful progress in that direction. Their agreement supplies information about the scale of the problem. Cancellation and reversal supply different information. This is not an exact oracle for the location of a neural-network optimum.
+What changes in the actual parameter vector? Apply shrinkage and then subtract the clipped direction, just as we separated both paths in AdamW.
 
-### Follow a fully specified Adam-style version
+<!-- OPT_FLOW sophia-step-scale -->
 
-We use Algorithm 4 of the [Prodigy paper](https://arxiv.org/html/2306.06101v3), without weight decay or optional bias correction. Let d start at a positive d₀; m, v, s and scalar r start at zero. Let γ be a user multiplier, and b=√β₂. At a step with current θ, g and d:
+With old θ=[1,2,3], rate η=.1 and decay λ=.2, shrinkage gives [.98,1.96,2.94]. Subtract .1[.08,−1,0] to obtain [.972,2.06,2.94]. The third parameter moves only because of decay. The live views let you edit one coordinate's m and h, then ρ, η and λ in their separate taught places; all lanes use the same current state.
 
-m_new = β₁m + (1−β₁)d g,
+The complete classroom rule averages gradients as m_t=β_1m_old+(1−β_1)g_t, averages curvature as h_t=β_2h_old+(1−β_2)h_estimate on refresh updates, and otherwise keeps h fixed. It updates θ_next=(1−ηλ)θ−η clip(m/max(ρh,ε),−1,1). Maximum, division and clipping act elementwise. Curvature refreshes can be less frequent than gradient updates, so the current gradient and its denominator need not be equally recent. The [Sophia paper](https://arxiv.org/html/2305.14342v4) specifies both the rule and the two distinct estimators we now examine.
 
-v_new = β₂v + (1−β₂)d²g²,
+<!-- OPT_FLOW sophia-actions -->
 
-r_new = b r + (1−b)γd²〈g, θ_initial−θ〉,
+### A Hessian-vector product exposes coupling without storing the Hessian
 
-s_new = b s + (1−b)γd²g,
+How could we estimate H's diagonal without constructing a huge square matrix? Multiply it by a random probe and then multiply that result elementwise by the same probe.
 
-d_estimate = r_new / ||s_new||₁,
+<!-- OPT_FLOW hessian-probe-worked -->
 
-d_next = max(d, d_estimate),
+The supplied probe is u=[1,1], and the drawn Hessian is H=[[2,3],[3,1]]. Matrix multiplication gives Hu=[5,4]. The final elementwise multiplication u⊙Hu leaves [5,4]. With u=[1,−1], Hu=[−1,2], and u⊙Hu=[−1,−2]. These are estimates of the diagonal [2,1], not two alternative true diagonals. The arrow between the two multiplications matters: multiplying matching entries of H and u is not a Hessian-vector product.
 
-θ_next = θ − γd m_new/(√v_new+dε).
+For independent random signs, each u_i is ±1 with equal probability. Its square is always 1, and different signs have E[u_i u_j]=0. Coordinate i of the estimate is H_ii u_i²+Σ_(j≠i)H_ij u_i u_j. Taking the expectation keeps H_ii and removes the other terms. This is the **Hutchinson diagonal estimator**, E[u⊙(Hu)]=diag(H). The paper uses Gaussian probes, which also satisfy E[uuᵀ]=I; independent sign probes make this small example exhaustive. An unbiased estimator has the right average over repeated draws, not necessarily the correct value on one draw.
 
-The norm ||s||₁ adds absolute coordinate values. The numerator is a scalar sum across parameters, not a per-coordinate learning rate. If its denominator is zero, keep the previous d rather than divide by zero. The parameter update shown here uses the **current d**, while d_next is for the next step. The momentum buffers themselves include d and d²; inserting d into an otherwise unchanged Adam update is not Algorithm 4.
+### One negative estimate is not a negative-curvature certificate
 
-**Figure 6 — progress accounting.** Draw initialization and current position on the parameter line. Attach the current gradient, displacement dot product, weighted cumulative numerator and denominator. Keep the old d beside this step's update and the new estimate beside the next step's state.
+Can a positive-semidefinite Hessian still give a negative sampled entry? A fresh symmetric matrix makes that possibility concrete.
 
-On the declared bowl ½(θ−3)², start θ=0 and d₀=.01, using γ=1, β₁=.9 and β₂=.999. The first parameters are .0316228, .0741064 and .1514404. The distance used for those steps is .01, .01 and .0157316. At step 7 the parameter overshoots to 7.11008; d never decreases in this rule. The trace is useful precisely because automatic scale growth does not mean monotonically improving loss.
+<!-- OPT_FLOW hessian-probe-matrix -->
 
-**Investigation: adaptation without an oracle.** Change the target, starting point and initial estimate before a fresh run. Inspect when d first increases and whether the first crossing of the target settles the trajectory. Show the entire calculated trace, including overshoots. A stationary starting point with zero gradient and zero history is a null: neither the parameter nor d changes.
+The live matrix starts at [[4,−2],[−2,1]]. Its eigenvalues, 0 and 5, are nonnegative, so it is **positive semidefinite**: every direction has uᵀHu≥0. Edit its three independent entries; symmetry means changing H_12 also changes H_21. The picture shows the full actual matrix, so those coupled entries cannot quietly diverge.
+
+<!-- OPT_FLOW hessian-probe-choice -->
+
+For u=[1,1], the elementwise estimate is [2,−1]. For u=[1,−1], it is [6,3]. The other two sign probes duplicate those outcomes. Their equal-weight average is [4,1], exactly the diagonal, even though one individual sampled entry was negative. This is different from the directional curvature uᵀHu; do not infer its sign from one coordinate of u⊙Hu. Remove off-diagonal coupling and every sign probe gives the same diagonal. Set the whole H to zero for a genuine null.
+
+<!-- OPT_FLOW hessian-probe-actions -->
+
+### Deeper: obtain Hu by differentiating the actual loss
+
+Does computing Hu require writing H first? Differentiate a scalar inner product instead, keeping the probe fixed.
+
+<!-- OPT_FLOW hessian-autograd -->
+
+The first return path differentiates the loss L into its gradient vector g. The dot-product node multiplies each g_i by supplied u_i and sums into one scalar, gᵀu. The second return path differentiates that scalar with respect to the same parameters. With a twice-differentiable scalar loss, it gives Hᵀu=Hu. Automatic differentiation must preserve the first gradient's computation graph; otherwise the second derivative has no route back. The probe is treated as constant, and each new loss evaluation uses a fresh graph.
+
+The complete supplemental [optimizer-curvature-instruments.py](optimizer-curvature-instruments.py) implements this operation with ordinary PyTorch differentiable primitives. Its finite-difference check instead evaluates fresh gradients at θ+δu and θ−δu, subtracts them and divides by 2δ. That checks the product without assembling H or using the same second-derivative route. The program handles a linear loss's zero Hessian, rejects incompatible/nonfinite probes and checks nonlinear classifiers as well as independent quadratic matrices. This is an actual CPU float64 operator study; it neither implements a GPU training kernel nor runs a Sophia-H training campaign.
+
+### Model-sampled labels measure a different object
+
+Sophia-H used second derivatives directly. Sophia-G instead draws labels from the model's current probabilities and differentiates their loss; those instrument labels must remain separate from the labels used to train.
+
+<!-- OPT_FLOW sampled-label-worked -->
+
+We now switch to a one-feature binary classifier to isolate the estimator. Its feature is x=2, its current probability for class 1 is p=.8, and its real training label is 1. Its real-label derivative in the scalar weight is x(p−1)=−.4, with square .16. That branch describes the observed residual. It does not measure the entire curvature. The other branch draws a new label: 1 with probability .8, or 0 with probability .2. Those possibilities produce derivatives −.4 and 1.6, respectively. Weight their squares by their sampling probabilities: .8(.16)+.2(2.56)=.64.
+
+The scalar logistic-loss curvature is x²p(1−p)=4(.8)(.2)=.64. The agreement comes from the **model-sampled** residual, whose expectation is zero at these fixed parameters. Squaring the ordinary true-label derivative gave .16 instead. True labels are never discarded from the training-gradient path; sampled labels are an additional curvature instrument.
+
+### Why does a batch need its size multiplier?
+
+What happens when loss is averaged across examples? Square the sampled mean gradient, then multiply by the number of independent examples.
+
+<!-- OPT_FLOW sampled-batch-worked -->
+
+For two examples, x=[2,1] and p=[.8,.3], the tree has four possible sampled-label pairs. A path's probability multiplies its two independent sampling probabilities. Each leaf first averages its two derivatives, then computes 2 times the square of that mean. The weighted sum across all four leaves is .425, which is also the mean of the two exact curvature diagonals. Omitting the factor 2 gives .2125, half the desired result.
+
+Write N for batch size and g_sample=(1/N)Σ_b g_b for the gradient of the mean sampled-label loss. At fixed parameters, independent model-sampled labels make each g_b have expectation zero, so the cross terms in E[(Σ_b g_b)²] vanish. Then E[N g_sample²]=(1/N)Σ_b E[g_b²]. The original paper and retained code use B for this same example count; here B=N. It counts examples, not classes or parameter coordinates. The independence, current model probabilities and mean-loss convention are part of the claim. A correlated label draw or stale probability vector needs a different argument.
+
+### Change the examples without changing the instrument's meaning
+
+Will real-label squares and model-sampled squares coincide on every dataset? The next case starts from different features and probabilities so we can compare them directly.
+
+<!-- OPT_FLOW sampled-example -->
+
+The fresh defaults are x=[3,1], p=[.25,.6], and real labels [1,0]. The selected example's feature and probability affect every leaf and its analytic diagonal; selecting another example only changes which one is edited. The expected batch-scaled estimate is .96375. Squaring the real-label mean gradient gives .680625, while omitting N gives .481875. These are three different calculations, each labelled as such.
+
+<!-- OPT_FLOW sampled-target -->
+
+Change only a real label: its training-gradient lane changes, while the model-sampled expectation remains fixed at the same x and p. Set both features to zero and both lanes give zero. The complete four-outcome table shows current probabilities, means, estimates and weighted contributions; no finite random sample is presented as an exact expectation.
+
+<!-- OPT_FLOW sampled-enumeration -->
+
+<!-- OPT_FLOW sampled-actions -->
+
+### Deeper: why this is Gauss–Newton curvature, not always the full Hessian
+
+Where does the model's nonlinearity enter? Separate how parameters change the logits from how logits change the loss.
+
+<!-- OPT_FLOW ggn-chain -->
+
+The learned model produces a logit vector f(θ). Its **Jacobian** J contains first derivatives of those logits: one row per class and one column per parameter. At the logit level, softmax cross-entropy has curvature C=diag(p)−ppᵀ, where diag(p) places probabilities on a matrix's diagonal and ppᵀ contains every pairwise probability product. The central branch sends parameter changes through J, through C, and back through Jᵀ. Its result G=JᵀCJ is the **generalized Gauss–Newton matrix**. Sophia-G's sampling construction estimates its diagonal.
+
+The lower branch has another contribution. A nonlinear model's logits can themselves curve with θ. Applying the chain rule twice gives H=G+Σ_j(p_j−y_j)∇²f_j(θ). The residual p_j−y_j multiplies each logit's own Hessian. In a linear softmax classifier those second derivatives are zero, so G=H. In a nonlinear network they need not be zero. Sophia-G is consequently not generally an unbiased estimator of the full loss-Hessian diagonal, even with infinitely many sampled labels.
+
+### A one-parameter counterexample keeps every term visible
+
+How large can the missing term be? Use f(θ)=θ² as the logit of class 1, a constant zero logit for class 0, and a real class-1 target.
+
+<!-- OPT_FLOW ggn-counterexample -->
+
+At θ=1, p_1=sigmoid(1)≈.731059. The first derivative of the changing logit is 2θ=2, so G=(2θ)²p_1(1−p_1)≈.786448. Its second derivative is 2. The true-label residual is p_1−1≈−.268941, so the additional curvature is 2(p_1−1)≈−.537883. Adding both gives the full loss Hessian .248565. All three are actual values at the same parameter and target; G's positive-semidefinite form did not make it equal to H.
+
+The complete HVP supplement checks this identity with a separate three-logit nonlinear example and autograd/finite differences. Across 18 quadratic and 27 nonlinear comparisons, author and independent CPU executions agreed with maximum finite-difference error 4.8345×10^−10 and chain-rule reconstruction error 4.4409×10^−16. Those checks substantiate the operator and example, not Sophia's universal training effectiveness.
+
+### Refresh at a coherent state and identify the stored convention
+
+When should both gradient paths read the model? They must use the same current parameters, with separate fresh gradient buffers.
+
+<!-- OPT_FLOW sophia-refresh -->
+
+The true-label mean loss supplies the training gradient. On a refresh update, model-sampled labels supply a separate gradient at those same parameters. Clear gradient buffers between paths so they do not add together accidentally. Multiply the sampled mean-gradient square by the actual batch size once, average it into h, then update using the saved true-label gradient. Never step the parameters between the two reads while claiming this same-state estimator.
+
+Storage conventions differ in ordinary implementations. Our classroom rule stores the batch-scaled estimate in h and floors max(ρh,ε). The pinned official Sophia source stores an unscaled square and includes batch size in its denominator; its small additive epsilon is also a different denominator convention. Passing an already scaled estimate and applying the multiplier again would double-count N. The later complete API bridge shows its explicit mapping, batch size and independent gradient paths. Larger steps, infrequent refreshes and clipping can work on some tasks and fail on others; inspect the measured loss, clipping fraction, refresh frequency and extra gradient cost rather than treating “second-order” as a guarantee.
+
+## 5. Prodigy: use observed movement to adapt a shared scale
+
+### Can progress tell us something about the size of a step?
+
+Sophia asked how sharply the slope changes. Prodigy addresses another difficulty: a useful step scale can be unknown before training begins. It keeps evidence about gradients and movement from the initial parameters, then adapts a shared positive scalar d.
+
+<!-- OPT_FLOW prodigy-displacement -->
+
+We continue with a declared scalar quadratic, L(θ)=½(θ−3)², to make the trajectory visible. The target location 3 defines the objective, so the gradient is θ−3. The initial parameter is θ_0=0. At a later update, the algorithm can compare its current parameter θ with that known initialization. The displacement θ_0−θ is an observed difference; it is not the unknown distance to the objective's optimum. The dot-product instrument receives g and this displacement, never the target location as an oracle.
+
+For many parameters, both g and displacement are vectors. Multiply corresponding entries, then sum to one scalar ⟨g,θ_0−θ⟩. This **dot product** can be positive, negative or zero. It is global: one coordinate's favorable contribution can cancel another's unfavorable contribution. The scalar d is shared by the whole parameter array, rather than estimated independently for each cell.
+
+### Why are two weighted histories needed?
+
+How does Prodigy retain that evidence? The displacement dot product feeds a scalar numerator, while the gradient feeds a vector history used to normalize it.
+
+<!-- OPT_FLOW prodigy-global -->
+
+The pictured signed dot product feeds the numerator history r. A second history s accumulates weighted gradient coordinates; these two accumulated quantities are shown in the state diagram below. Take the absolute value of each current s coordinate and sum them: ||s||_1 is its **L1 norm**. Dividing r by that norm produces a candidate scale. The max operation keeps whichever is larger: the current d or that candidate. A zero denominator retains the current d. A negative candidate also cannot force this positive, nondecreasing d downward.
+
+A small two-coordinate instrument isolates the cancellation: g=[−1,2] and displacement=[−.5,−.25] give coordinate products [.5,−.5] and dot product zero. Looking at only the first coordinate would falsely report positive global progress. Edit either coordinate after its role has been taught and follow the full sum. This vector instrument explains the scale evidence; it is not a newly trained model.
+
+### Current d and next d must take different paths
+
+Which scale changes the present parameter? The current d belongs to this update's moments and subtraction; the newly estimated d is saved for a later update.
+
+<!-- OPT_FLOW prodigy-state -->
+
+We use the Adam-style **Algorithm 4 from the Prodigy paper**, not an unnamed mixture of its practical package options. At each update, let b=sqrt(β_2). The diagram's current-d wire enters both moment paths and the current subtraction. Its other wire enters the two progress histories. The next-d wire leaves the max operation into stored state for the following update. These distinct destinations prevent an off-by-one scale change.
+
+The complete recurrences, with old states on the right, are
+
+m_next=β_1m_old+(1−β_1)d g,
+
+v_next=β_2v_old+(1−β_2)d² g²,
+
+r_next=b r_old+(1−b)γd²⟨g,θ_0−θ⟩,
+
+s_next=b s_old+(1−b)γd²g,
+
+d_next=max(d,r_next/||s_next||_1) when the norm is positive; otherwise d_next=d,
+
+θ_next=θ−γd m_next/(sqrt(v_next)+d ε).
+
+The symbol γ is the supplied rate **multiplier**, distinct from the adapting scale d. Here β_1=.9, β_2=.999 and ε=10^−8. All histories start at zero and θ_0 is retained as its own fixed array. This paper rule has no bias correction or weight decay. The numerator may be signed; replacing it by its absolute value changes the rule. Plain Adam moments do not match these scaled moments. In particular, d is accumulated into m and d² into v, not merely multiplied onto an ordinary Adam update at the end.
+
+### Follow the scale before celebrating its adaptation
+
+Does a growing scale imply steadily better loss? The whole scalar trace shows both movement and overshoot.
+
+<!-- OPT_FLOW prodigy-worked -->
+
+On the worked objective with initial θ=0, d=.01 and γ=1, the first three parameters are approximately .0316228, .0741064 and .1514404. The scale used on those updates is .01, .01 and .0157316, respectively. A retained estimate affects the following update according to the diagram's state convention. By update 7, θ≈7.11008, well past the minimizing location 3. The resulting loss increase remains in the trace; adapting the scale did not make the objective convexity a guarantee of monotone progress for this practical Adam-style recurrence.
+
+### Change the objective and starting scale
+
+What happens on a genuinely different case? The live scalar problem starts at θ=1 with target −2, d=.01 and γ=.3.
+
+<!-- OPT_FLOW prodigy-objective -->
+
+This announced switch keeps the same algorithm and makes its direction change visible. The first three parameters are .990513168, .977765462 and .962918671. Its d first increases after update 3, so that increase is used at update 4. After 12 updates it has overshot to −3.41631850. All displayed losses come from the declared current quadratic, not a fabricated convergence curve.
+
+<!-- OPT_FLOW prodigy-scale -->
+
+Increase γ to 1 at the same starting point and target. The first retained d increase now occurs after update 2, and the parameter reaches approximately −6.11008139 at update 7. The live controls keep the initial scale and multiplier distinct. A higher multiplier can alter the evidence history as well as the size of the current step.
+
+<!-- OPT_FLOW prodigy-chronology -->
+
+Inspect any update's current weight, gradient, r, ||s||_1, scaled moments, d used and d retained next. Changing the objective or initial state restarts the full chronology with zero histories; it does not continue an old trace under a new objective. Pin the complete inputs and outputs to compare cases. If a calculation becomes nonfinite, keep its last finite states and report the first failed update rather than hiding the divergence behind a cap. At initial θ equal to the target and zero history, every gradient is zero: θ and d remain unchanged.
+
+<!-- OPT_FLOW prodigy-actions -->
 
 ### What “parameter-free” leaves for the practitioner
 
-Prodigy aims to remove the need to supply a well-tuned problem-scale learning rate. It still has initialization, betas, ε, a multiplier, regularization and variant choices. The theoretical guarantees apply to the stated convex algorithms and assumptions; they are not an assertion that the Adam-style version solves every nonconvex training problem without tuning.
+Prodigy aims to reduce the need to supply a carefully tuned problem-scale rate. It still has an initial d, coefficients, ε, a multiplier and implementation choices. The paper's proofs concern the stated convex algorithms and assumptions; they do not establish that this Adam-style variant solves every nonconvex model without tuning. Our overshoot is consistent with that boundary.
 
-The [official package](https://github.com/konstmish/prodigy) recommends starting with `lr=1`, offers `d_coef`, optional bias correction and sliced adaptation statistics, and permits constant or cosine schedules. Its warmup safeguard changes the estimator normalization; it does not merely wait a fixed number of steps before allowing d to grow. Current library arithmetic also differs from the compact paper presentation in numerical rescaling and update details. Record which implementation you use before comparing trajectories.
+The [official package](https://github.com/konstmish/prodigy) recommends starting at `lr=1` and provides `d_coef`, optional bias correction, sliced adaptation statistics and constant or cosine schedules. Its warmup safeguard changes estimator normalization; it is not just a fixed waiting period before growth. Numerical rescaling and update details can also differ from compact paper arithmetic. State the exact version and variant before comparing trajectories. The complete ordinary-library bridge later checks practical API and checkpoint behavior without claiming that its path is identical to our paper Algorithm 4.
 
-A practical application is training many small models with different scales, where a full learning-rate search for every model is expensive. Architecture search and multiple objectives provide such situations. A fair study still includes the tuning compute that was actually saved, failures that required reruns and validation quality. “No sweep needed” cannot be asserted from a single favorable run.
+This can be useful when many small models or objectives have different scales, as in architecture search. Reducing a per-model rate sweep could save work. A fair experiment must still count tuning and reruns, record failures and compare validation quality; one favorable run cannot establish that a sweep was unnecessary. The real study later retains both candidate multipliers and both seeds.
 
-## 6. Schedule-Free: train and evaluate at different points
+## 6. Schedule-Free: take a gradient here, update there, evaluate the average
 
-Learning-rate schedules often assume that you know the final update count. If you plan 100,000 steps and later extend the run, the decay may already have changed your trajectory substantially. Schedule-Free offers another strategy: maintain a fast-changing sequence and an average, and evaluate the loss gradient between them.
+### Why keep more than one parameter location?
 
-Call the fast parameters z, the averaged parameters x, and the training parameters y. For the simplest SGD form, use
+Prodigy adapted a shared scale; Schedule-Free changes where the training gradient and evaluation occur. Rather than prescribing a decay endpoint for a known run length, it maintains a fast trajectory and an averaged trajectory, then reads the gradient between them.
 
-yₜ = βxₜ + (1−β)zₜ,
+<!-- OPT_FLOW averaging-points -->
 
-zₜ₊₁ = zₜ − η∇L(yₜ),
+The first number line shows three named mathematical parameter arrays as points. The **fast point z** is updated directly by the gradient. The **average x** combines earlier fast points and is the model used for evaluation. The **training point y** lies between them: y=βx+(1−β)z. With β=.9, it lies closer to x. This is parameter interpolation, not averaging the two models' output probabilities. In a nonlinear model those operations need not agree.
 
-xₜ₊₁ = (1−1/t)xₜ + (1/t)zₜ₊₁ for our one-based update index t.
+We first use the simplest mathematical SGD recurrence so we can trace every arrow without a second-moment denominator. Its coefficients and update indexing are explicit; the later AdamW/library form has additional state. Our local one-based update t averages **post-update** fast points: form y from the old x,z; calculate g=∇L(y); set z_next=z−ηg; then set x_next=(1−1/t)x+(1/t)z_next. The paper can index the same recurrence differently, so compare actual arrays rather than shifting a formula by name.
 
-At t=1 the average becomes the first updated fast point. This indexing convention averages the post-update z values. Gradients are calculated at y; validation and inference use x. Neither “always use z” nor “average predictions” describes this method.
+### Follow a gradient from its read location to its destination
 
-Take ½θ², start x=z=2, β=.9 and η=.2. Add the declared illustrative gradient perturbations [1,−1,.5,−.5]. These are arithmetic inputs, not measured training noise.
+Where does the gradient arrow start, and which point does it move? It starts at y, but its scaled value is subtracted from z.
+
+<!-- OPT_FLOW averaging-worked -->
+
+Use the quadratic ½θ², initial x=z=2, β=.9 and η=.2. To make variation explicit, add the declared gradient perturbations [1,−1,.5,−.5]; these are arithmetic inputs, not measured noise. At update 1, y=2 and g=3, so z_next=1.4. Since the first averaging coefficient is 1, x_next also becomes 1.4.
+
+At update 2, y=1.4, g=.4 and z_next=1.32. The coefficient 1/2 averages the first two post-update fast points into x_next=1.36. At update 3, the gradient is read at .9(1.36)+.1(1.32)=1.356, neither old z nor old x. Adding .5 gives g=1.856; subtracting .2g from z gives .9488, then averaging gives x=1.222933. This distinction affects all later states.
 
 | Update | Training point y | Perturbed gradient | New fast point z | New average x |
 | --- | ---: | ---: | ---: | ---: |
@@ -224,75 +421,136 @@ Take ½θ², start x=z=2, β=.9 and η=.2. Add the declared illustrative gradien
 | 3 | 1.356 | 1.856 | .9488 | 1.222933 |
 | 4 | 1.19552 | .69552 | .809696 | 1.119624 |
 
-The third gradient is evaluated at 1.356, neither 1.32 nor 1.36. That small distinction changes every later step. At the end, report the loss at x, not whichever point happens to look best.
+The final reported loss belongs at x=1.119624, not whichever point looks best. A default framework validation loop can quietly inspect the wrong representation if it never performs the optimizer's mode conversion.
 
-**Figure 7 — three named points, two kinds of arrow.** On a shared number line, connect x and z by the interpolation that forms y. A gradient arrow starts at y but updates z; the averaging arrow updates x. Show the selected row of the table beside the geometry.
+### Which past points still contribute?
 
-### Averaging does not mean exponential decay
+Is an insertion coefficient the same as its final influence? The full averaging circuit shows older points being diluted as new ones arrive.
 
-With equal weights, x after t updates is the average of those t post-update z values. Each has final coefficient 1/t. The newest value's insertion coefficient is 1/t, but older values are subsequently diluted too. It is incorrect to compare their insertion coefficients as though those were their final weights.
+<!-- OPT_FLOW averaging-history -->
 
-This is not the same as a momentum EMA, nor the same as applying a 1/t learning rate directly to the current gradient. Earlier gradients influence many later z values. The equations specify that influence; there is no universal “effective schedule” curve that makes every method identical.
+After t updates, each of the t post-update fast points has final coefficient 1/t in the equal-weight average. The newest point enters with coefficient 1/t, but subsequent averages dilute it too. Earlier insertion coefficients 1,1/2,1/3 do not remain the final weights of the first three points. After three updates those three final weights are all 1/3.
 
-**Investigation: which model are you measuring?** Use a new target and editable perturbation sequence. Inspect the training point, fast point and evaluated point after an update. Compare β=0, β=.9 and β=1 without assuming the middle choice wins on every small problem. At the exact target with zero noise, all three remain there.
+This is different from the momentum EMA used by Lion and Adam, whose past weights decay geometrically. It is also different from setting the gradient's learning rate to 1/t: each earlier gradient can influence many later fast points before averaging. The actual recurrence defines those effects; there is no universal “effective schedule” that makes all three procedures identical.
 
-### The AdamW form and the warmup weights
+### Change the problem without confusing its three points
 
-Schedule-Free AdamW replaces the SGD step with a second-moment-scaled gradient. In the base form used here there is no ordinary first-moment EMA: interpolation supplies the momentum-like behavior. Update v with g², bias-correct v, and use g/(√v̂+ε) to move z. Decay can be calculated at y, as in the paper's algorithm.
+What if the target and perturbations change? The next live case starts x=z=−1 with target 1, rate .2 and perturbations [−.5,.5,1,−1].
 
-Warmup still changes η during the opening updates. With the paper's weighting, let wₜ=ηₜ² and cₜ=wₜ/Σᵢ≤ₜwᵢ, then average with cₜ. If the first learning rates are .1,.2,.3, the three post-update z values have normalized weights [1,4,9]/14 after step 3. A plain one-third average is a different calculation. Our monotone warmup then constant rate matches this weighting; the current library's maximum-rate weighting also agrees for this schedule.
+<!-- OPT_FLOW averaging-objective -->
 
-**Figure 8 — rates and averaging coefficients are different quantities.** Place the warmup/constant rate above a separate coefficient strip. Label rate and dimensionless mixture weight explicitly. Compare against the actual cosine formula only in a separately labeled schedule panel.
+The geometry now follows a new quadratic, ½(θ−1)². After update 2, z=−.3 and x=−.4; next y=.9(−.4)+.1(−.3)=−.39. The third perturbation is +1, so its gradient is −.39−1+1=−.39. Each picture and live sentence uses this same current sequence.
 
-### The training/evaluation switch changes parameters
+<!-- OPT_FLOW averaging-mixing -->
 
-The efficient [Schedule-Free library](https://github.com/facebookresearch/schedule_free) stores only the sequences it needs and reconstructs the other. Calling `optimizer.eval()` changes the parameter buffer to x; `optimizer.train()` restores y. These calls are separate from `model.eval()` and `model.train()`, which affect such layers as dropout and BatchNorm.
+Edit β and η locally after tracing their roles. For unchanged default inputs, the final x is about −.19456 at β=.9, −.208 at β=0 and −.193 at β=1. The mathematical recurrence permits both endpoints: at β=0 gradients are read at z; at β=1 they are read at x. That does not imply that an optimized library's parameter-reconstruction formula supports both endpoints.
 
-For BatchNorm models, statistics collected at y may not match x. Recompute appropriate running statistics using training inputs at the evaluation weights, following the method's guidance. Do not use validation labels or validation examples to fit those statistics. Save checkpoints with the optimizer in its documented mode and retain optimizer state if training will resume.
+<!-- OPT_FLOW averaging-perturbation -->
 
-Validating at y is a different measurement, but it is not guaranteed to be worse on every batch. Save both values in a diagnostic; compare models at the evaluation point defined by the method. A framework's automatic scheduler or missing optimizer-mode hook can silently change the intended recipe.
+Change a selected perturbation or inspect another chronological update. A perturbation adds to the current objective gradient before the fast update; it does not teleport a parameter point. The complete table preserves every old and new state. A separate length control adds/removes a perturbation without hiding other controls inside a disclosure.
 
-<details>
-<summary>Deeper: a theorem is not a universal anytime guarantee</summary>
+<!-- OPT_FLOW averaging-length -->
 
-The Schedule-Free paper's introductory SGD bound assumes convex, Lipschitz stochastic losses with independent samples. Its displayed choice η=D/(G√T) contains the horizon T even though the practical update can run with a constant chosen rate. The broader online-to-batch result and the discussion of larger rates explain more of the connection. It would be incorrect to cite the introductory bound as proof that any constant rate converges optimally at every stopping time on a nonconvex network.
+Pin the complete case, or reset its objective, interpolation, rate, sequence and selected update together. Start at the target with all perturbations zero to check the stationary null; all three points remain there. With rate zero, the fast parameters do not move. These unchanged cases remain explicit rather than manufacturing an animation.
 
-The useful practical distinction is that an evaluation iterate exists at each update without prescribing a decay endpoint. Constant-rate SGD, alternative schedules and restart strategies also exist; Schedule-Free is not the only imaginable way to extend a run. If the data distribution changes, averaging across the full old history may be inappropriate. That is a new learning problem, not a consequence that the original stationary analysis settles.
+<!-- OPT_FLOW averaging-actions -->
 
-</details>
+### The AdamW form changes scaling and averaging weights
+
+How does the same placement idea use adaptive scaling? Schedule-Free AdamW keeps a second-moment history but, in the base form used here, no ordinary first-moment EMA.
+
+<!-- OPT_FLOW averaging-adam-route -->
+
+For the pictured first update, switch to x=y=z=2, target0, no perturbation, rate.1 and no decay. Its gradient2 squares to4; v=.004 becomes corrected v̂=4, so its scaled direction is approximately1 and the new fast point is approximately1.9. The first averaging coefficient1 makes x equal that new z. In the general rule the gradient is still evaluated at y. Squared gradients update v; its bias-corrected square root plus ε scales g before z moves. Decay can also be evaluated at y, as in the paper's algorithm. Interpolation provides the momentum-like behavior rather than the usual Adam first-moment average. These differences are algorithmic, not just names for three copies of ordinary Adam.
+
+Warmup remains possible. Under the paper's weighting, assign w_t=η_t² and insert the new fast point with c_t=w_t/Σ_(i≤t)w_i. The average now weights fast points by their rate-squared contributions rather than always equally. We next separate those physical quantities visually.
+
+<!-- OPT_FLOW averaging-weights -->
+
+Rates [.1,.2,.3] have squared weights [.01,.04,.09]. After three updates, their final normalized weights are [1,4,9]/14. Their historical insertion coefficients were instead 1,4/5 and 9/14. Each displayed update labels those different quantities explicitly; confusing them would misstate which model is evaluated. Our study's increasing warmup then constant rate agrees with the current library's maximum-rate weighting for this schedule. Arbitrary nonmonotone schedules require identifying which weighting rule an implementation actually uses.
+
+### A mode change swaps the parameter representation
+
+What does `optimizer.eval()` mean here? It makes the parameter buffer represent x, while `optimizer.train()` restores y for gradients.
+
+<!-- OPT_FLOW averaging-storage -->
+
+The literal-reference drawing shows the separate arrays. Our readable scratch class stores average x and fast z, keeps the training representation in its parameter array, and has a second-moment array. These are physical arrays to count, not a theorem that any three mathematical points require three extra buffers. The efficient library keeps the needed fast state and second moment and reconstructs representations in the main parameter buffer. Its conversion can divide by β; the mathematical endpoint examples above do not waive that implementation restriction.
+
+Optimizer mode is separate from `model.eval()` and `model.train()`, which affect layers such as Dropout and BatchNorm. Use both sets of hooks deliberately. For a BatchNorm model, running statistics gathered at y may not match evaluation at x. The method's guidance recomputes appropriate statistics from training inputs at evaluation weights, without fitting on validation inputs or labels. Save the documented representation together with optimizer state and RNG state if training will resume. The complete library bridge later checks uninterrupted versus resumed next steps, not just that a checkpoint file can be opened.
+
+The actual handwritten study retains validation measurements at both x and y. In seed 29, y happens to score lower. Evaluation at x remains the declared method, not a claim that x wins every minibatch. Do not choose whichever representation looks better only after inspecting assessment outcomes.
+
+### Deeper: a theorem needs its assumptions and its rate choice
+
+Does having an evaluation iterate at every step prove optimal convergence at any stopping time? The bound's assumptions and its chosen rate matter.
+
+<!-- OPT_FLOW averaging-theorem -->
+
+The drawing first shows convexity on the constructed objective f(θ)=½θ² restricted to [−1,1]: the mean of points−1 and1 is0, whose loss0 lies below their mean loss.5. This local example does not prove a training theorem. The Schedule-Free paper's introductory SGD bound assumes convex, Lipschitz stochastic losses with independent samples. Here convex means that a line between parameter points lies above the objective graph; Lipschitz means a finite bound G controls loss change per distance. The quantity D bounds the relevant distance to a comparator, and T is the number of updates in that bound. Its displayed rate η=D/(G sqrt(T)) contains the horizon T. The update can use a constant chosen rate, but that introductory choice is not a proof that every constant rate is optimal at every stopping time for a nonlinear neural loss.
+
+The broader online-to-batch result and the paper's larger-rate discussion explain more of the practical connection. [The Road Less Scheduled](https://arxiv.org/html/2405.15682v2) and its [official implementation](https://github.com/facebookresearch/schedule_free) distinguish those claims. Constant-rate SGD, other schedules and restarts also exist; Schedule-Free is not the only way to extend a run. Its useful practical property is an evaluation average without a prescribed decay endpoint. If the data distribution changes, averaging the full earlier history may be inappropriate. That is a different learning problem whose answer is not supplied by stationary convex analysis.
 
 ## 7. Train the same real classifier with different update rules
 
-### Fix the learning problem before comparing the optimizers
+### What does a real example contain?
 
-Our practical task is to recognize ten handwritten digits from 64 pixel features. We use 400 actual images, forty per digit, from the UCI Optical Digits data distributed through scikit-learn. These are 8×8 block-count images, not MNIST. Pixel values range from 0 to 16; divide by 16 and append a constant 1 for a bias feature.
+The previous cases isolated updates with constructed objectives. We now switch explicitly to actual handwritten-digit images, keeping one small classifier so optimizer effects are not confused with architecture changes.
 
-The model is a linear softmax classifier. Its parameter array Θ has 65 rows and 10 columns, giving 650 parameters. For a batch X, the score matrix is XΘ; a row-wise softmax produces ten probabilities per image. The loss is the mean negative log probability of the correct label. Inference chooses the largest score. This small model makes the optimizer's behavior inspectable without confusing it with architecture changes.
+<!-- OPT_FLOW study-image -->
 
-The gradient is
+Each example has an 8×8 grid of block-count intensities from the UCI Optical Digits data distributed through scikit-learn. These are not MNIST images. The raw values range from 0 to 16; darker and lighter cells represent those supplied intensities, with row/column labels and a selected pixel's raw value printed directly. Our retained extract contains 400 images, forty per digit. A source identifier connects an image to its role and saved state. Source truth is separate from the learner's temporary diagnostic target.
 
-∇ΘL = Xᵀ(P−Y)/B,
+### How does the image enter all ten score columns?
 
-where P contains predicted probabilities and Y has a one in each example's correct-label column. A pixel's gradient contribution is its intensity multiplied by a class residual. The bias row uses intensity one. For a nonlinear model, backpropagation supplies the corresponding parameter gradients; the optimizer then consumes arrays of those gradients.
+Where is the full model, rather than only a selected pixel? Flatten all 64 pixels, divide them by 16, append a constant 1 and multiply by the complete learned map.
 
-**Figure 9 — one pixel contributes to ten updates.** Select a real image pixel, follow its normalized intensity through ten weighted scores, then show its ten residual-weighted gradient contributions. Retain row/column labels and the bias row. This connects the abstract update rules to an actual prediction.
+<!-- OPT_FLOW study-model -->
 
-Use a fixed stratified split: 240 fitting images, 80 validation images and 80 assessment images. Source identities and full pixel signatures are distinct across these roles. The subset comes from the historical UCI test file, so this new classroom partition is not the official UCI train/test evaluation. Writer identities are unavailable here, and the data have appeared in earlier lessons. We use them to study mechanisms, not claim a new untouched benchmark.
+The cyan feature row now has 65 entries: 64 normalized intensities followed by the separate constant-one **bias feature**. Its learned parameter matrix Θ has 65 rows and 10 columns, so it contains 650 parameters. Each class's score sums all 65 feature–weight products. The bias row contributes its learned weight even when every pixel is zero. This is a larger version of the opening two-feature classifier, with an explicit bias and ten classes rather than two. There is no hidden activation layer in this model.
 
-We declare the experiment before fitting:
+The ten scores undergo the same stable softmax we already traced: subtract the row maximum, exponentiate, sum and divide every mass by that total. Every class probability remains visible, not just the largest one. Selecting a particular weight is a cutaway into this full computation; it never replaces the model with one pixel times one weight.
 
-- Two seeds, 11 and 29; the same initial parameter array and minibatch sequence for every method at a given seed.
-- Exactly 400 updates per candidate, batches of 64 fitting images sampled with replacement; no early stopping, augmentation or weight decay.
-- Two candidate scales per method: AdamW constant/cosine and Schedule-Free [.01,.03]; Lion [.003,.01]; Sophia-G [.01,.03]; paper-version Prodigy multipliers [.3,1]. Other method settings are those specified above.
-- Twenty-step warmup for cosine AdamW and Schedule-Free. Cosine decays to zero at update 400. Constant AdamW and the other methods use their stated constant scales.
-- Sophia-G refreshes at updates 1,11,…,391: forty additional sampled-label gradient evaluations per fit. They are computed at the same parameters as the real gradient. No full Hessian is formed.
-- Select one scale per method by **mean final validation cross-entropy across the two seeds**, then assess both selected runs. All 24 candidate curves are retained; no candidate or seed is erased because it is less flattering.
+### What learning signal belongs to a selected pixel?
 
-The two-value grids are deliberately small and method-specific. Equal numbers of candidates do not prove equally good tuning. Equal updates do not imply equal work: Sophia has extra gradient evaluations, and schedules deliberately change the update scales. There are no CPU or GPU speed measurements in this comparison.
+The model's complete probability row meets a target, and its class residuals return through the feature multiplications.
 
-**Figure 10 — selection has a boundary.** Fitting arrows reach weights; validation arrows select a declared scale; assessment arrows produce the report. Beside it, show both candidate values and both seeds. Assessment has no arrow back into the selection rule.
+<!-- OPT_FLOW study-gradient -->
 
-### Actual outcomes
+For a selected diagnostic class, the one-hot target Y has a 1 in that column and zero elsewhere. Subtract it from the full probability row P. The selected normalized pixel multiplies each residual, producing ten derivatives in that parameter row. If the pixel is zero, all ten of its weight derivatives are zero for this example. The bias derivative uses feature 1, so it need not vanish in that case. Changing a target does not change the pre-update scores or probabilities; it changes the residuals and hence the gradient.
+
+For a batch, stack the feature rows into X of shape N×65 and probabilities/targets into P,Y of shape N×10. The complete mean-loss gradient is ∇ΘL=Xᵀ(P−Y)/N. The transpose and matrix product sum each input's residual contributions across all N examples; division by N matches the mean loss. The retained programs use B for this same batch count, so B=N here. Our fitted batches have 64 examples; the live diagnostic later uses one. Nonlinear networks obtain corresponding parameter arrays through backpropagation, after which the optimizer still consumes gradients in the parameter shapes.
+
+### Which data may change parameters, choose a setting or assess it?
+
+Before reading results, follow the experiment's three separate roles. Only fitting examples supply update gradients; validation chooses a declared scale; assessment reports the chosen setting.
+
+<!-- OPT_FLOW study-roles -->
+
+The split contains 240 fitting images, 80 validation images and 80 assessment images. Source identifiers and complete pixel signatures are distinct across these roles. The arrows from fitting reach parameter updates; the arrows from validation reach scale selection; assessment produces a report without returning a tuning arrow. The subset originally came from UCI's historical test file, so this classroom partition is not the official UCI train/test benchmark. Writer identities are unavailable, and related data have appeared in earlier lessons. These boundaries make it useful mechanism evidence, not a new untouched recognition benchmark.
+
+The declared grid has two scales and two seeds for each of six recipes: constant AdamW, warmup/cosine AdamW, Lion, Sophia-G, paper Prodigy and Schedule-Free AdamW. Six recipes × two scales × two seeds give all 24 retained fits. A given seed uses the same initial parameters and minibatch sequence across recipes. Every candidate runs 400 updates, with batches of 64 fitting examples sampled with replacement, no early stopping, augmentation or decay. Seeds are 11 and 29.
+
+| Recipe | Two declared candidate scales | Other declared behavior |
+| --- | --- | --- |
+| Constant AdamW | .01, .03 | Constant supplied rate |
+| Warmup/cosine AdamW | .01, .03 | 20-update warmup; cosine reaches zero at 400 |
+| Lion | .003, .01 | Constant supplied rate; original blend coefficients |
+| Sophia-G | .01, .03 | Batch-scaled sampled estimator refreshed at 1,11,…,391 |
+| Paper Prodigy | .3, 1 | Rate multiplier γ; complete adapting-scale state |
+| Schedule-Free AdamW | .01, .03 | 20-update warmup; evaluate at averaged x |
+
+Sophia performs forty additional model-sampled gradient evaluations per fit, at the same parameters as each corresponding true-label gradient. Equal updates therefore do not mean equal gradient work. There are no CPU/GPU timing measurements in this experiment. Two candidate values per recipe are equally numerous, but not necessarily equally effective tuning grids.
+
+Select one scale per recipe by its **mean final validation cross-entropy across the two seeds**, then report both selected runs on assessment. All candidate curves and all twelve selected states remain available, including unfavorable outcomes. Do not choose a different scale after looking at assessment or erase a difficult seed.
+
+### What did the recorded curves show?
+
+Which differences belong to loss, and which to decisions? The measured histories and selected outcomes use separate, explicitly labelled quantities.
+
+<!-- OPT_FLOW study-curves -->
+
+The curve joins connect recorded loss values at their actual optimizer updates. They are not additional measurements or a smoothed claim of continuous improvement. The candidate selector keeps both scales available; the axis states whether it is linear or logarithmic. A different selected curve changes the evidence being inspected, not the browser's training state. Below, the table records assessment loss and correct decisions for the twelve chosen runs.
 
 | Selected method | Scale | Assessment cross-entropy, seeds 11 / 29 | Correct out of 80, seeds 11 / 29 |
 | --- | ---: | ---: | ---: |
@@ -303,44 +561,91 @@ The two-value grids are deliberately small and method-specific. Equal numbers of
 | Prodigy, paper Algorithm 4 | 1 | .03591 / .04906 | 79 / 79 |
 | Schedule-Free AdamW, evaluated at x | .03 | .07985 / .08085 | 79 / 80 |
 
-A constant-class baseline gets 8 of 80 correct; uniform probabilities have loss log(10)≈2.30259. Every selected model learns useful structure. The more interesting comparison is between the two metrics: AdamW gets every assessment label right here, while Sophia assigns probabilities that give a lower average cross-entropy despite one error. Classification accuracy counts decisions; cross-entropy also measures how probability was allocated.
+A constant-class decision gives 8/80 correct, and a uniform probability allocation gives loss ln(10)≈2.30259. All chosen models learned useful structure on this partition. Constant AdamW gets all these labels right, while Sophia's probabilities produce lower mean cross-entropy despite one wrong decision per seed. Accuracy counts which decision crossed a boundary; cross-entropy also cares about the probability allocation. The practice section supplies changed examples to calculate that distinction.
 
-Do not choose a universal winner from those eighty images. The validation results differ substantially: Prodigy's final losses are .41470 and .49441, while Schedule-Free's are .19111 and .19220. The small partitions expose different cases. An apparently excellent assessment number does not justify retuning on that partition.
+The eighty assessment images cannot establish a universal optimizer winner. The validation partitions also expose different cases: Prodigy's final validation losses are .41470 and .49441, while Schedule-Free's are .19111 and .19220. Good assessment values do not authorize returning to tune on that partition.
 
-The Schedule-Free diagnostic also illustrates its mode contract. For seed 11, final validation loss is .19111 at x and .19281 at y. For seed 29 it is .19220 at x and .18660 at y. The training iterate happens to score lower in the second case. We still report x because that is the method's defined evaluation model, not because it wins every comparison.
+### Inspect the state quantity that each method actually controls
 
-**Figure 11 — read the curves as evidence.** Plot actual saved fitting and validation losses against optimizer updates. Provide separate method/seed selections and a shared comparison; show both candidates in the tuning view. Keep probabilities, accuracy and loss on different labeled scales. A log-loss-axis option must say that the axis is logarithmic, and no smoothed curve may hide a measured increase.
+Do all curves called “scale” mean the same thing? Read Prodigy's retained d, Sophia's clipping fraction and Schedule-Free's representation separately.
 
-For Prodigy, a companion trace shows d rather than pretending it is exactly the AdamW learning rate. In these selected runs its final values are .07640 and .09739. For Sophia, show the actual clipped fraction; at the final update it is about .03385 and .06. Those diagnostic quantities help explain an update, but neither alone measures successful learning.
+<!-- OPT_FLOW study-state-curves -->
 
-### Reproduce and investigate
+Prodigy's final selected d values are .07640 and .09739. These are not ordinary AdamW learning rates; they enter the scaled histories and update we already traced. Sophia's final clipped fractions are about .03385 and .06, measuring how many transformed coordinate ratios exceeded the clipping limit, not how many examples were classified correctly. Schedule-Free's validation loss at x versus y is .19111 versus .19281 for seed 11 and .19220 versus .18660 for seed 29. The training representation y happens to win the second diagnostic. We still report x as the declared evaluation model.
 
-Download [the data](digits-400.csv), [the complete update rules](optimizer_rules.py) and [the complete study program](optimizer_study.py) into one directory. The [provenance](data-provenance.md) documents attribution, source identities, split construction and versions. The program needs Python and NumPy; the optional calculation checker also uses PyTorch. This packet ran with Python 3.12.14, NumPy 2.3.5 and PyTorch 2.14.0+cpu.
+As a separate calculation on the earlier source 277, setting pixel 28 (row 3, column 4) from raw 0 to 16 and retaining its class-0 target gives AdamW class-0 probability approximately .97019 before the diagnostic update and .97777 afterward. Every other pixel and all saved parameters still contribute. The following investigation switches to source 312 so that the learner can explore a fresh input; one diagnostic update alone is not evidence of improved generalization.
+
+### What happens when one actual input changes?
+
+Can the saved model expose a current learning decision without another fit? The live picture starts with source 312 and its pixel 28 changed from the recorded raw 0 to 16, using the complete saved AdamW seed11 state; all other pixels keep their recorded values.
+
+<!-- OPT_FLOW study-edit -->
+
+The fresh live case instead uses source 312. At pixel 28=16, its retained AdamW class-0 probability changes from .9959764253640799 to .9961295551626631. The difference is small, so the main probabilities stay on [0,1] and a separately labelled enlarged delta axis exposes the change honestly. Select any of the twelve snapshots or any of the 64 pixels; current inference uses the actual complete map, never an invented confidence formula.
+
+### The diagnostic target changes the objective, not source truth
+
+What changes if we choose another class to learn toward? Hold the input and initial snapshot fixed, change the temporary target and inspect all ten residuals.
+
+<!-- OPT_FLOW study-target -->
+
+The initial probabilities stay fixed because their forward route does not read the target. The gradient changes, and the optimizer's stored history can affect which after-update probabilities rise or fall. No rule forces the selected target probability to increase for every retained state and rate. Keep the source's recorded truth labelled separately; a temporary diagnostic target is not a relabelled dataset or another reported fit.
+
+### The copied optimizer state matters as much as its name
+
+Which histories enter the next update? Follow the selected coordinate through its actual current state and the complete resulting parameter array.
+
+<!-- OPT_FLOW study-coordinate -->
+
+Adam uses its current m,v and update count. Lion uses its stored signed memory. Sophia reads a smoothed curvature estimate; this one-example **linear** diagnostic refresh uses the exact expected-label diagonal, explicitly distinct from the sampled refresh in the fits. Prodigy keeps d, θ_0, m,v,s,r and the update count; attaching a fresh optimizer to old parameters would change its algorithmic state. Each coordinate display is a cutaway into the same complete 65×10 update.
+
+<!-- OPT_FLOW study-representation -->
+
+For Schedule-Free, the gradient is evaluated at y and the before/after reported inference uses x. Its interpolation and second moment remain in the copied state. Changing a displayed representation must not silently swap the method's gradient route. Cosine AdamW is already at its frozen horizon 400: its next rate is zero. At update 401, parameters and predictions stay unchanged even though internal moments can still update. Preserve that informative null instead of restarting the schedule to make something move.
+
+<!-- OPT_FLOW study-probabilities -->
+
+The complete ten-class table contains initial probabilities, after-update probabilities and signed deltas. Pin the full input, temporary target, snapshot identity, state and result to compare another case. Reset restores the declared fresh case and all current views together. A download/loading failure retains edits and offers retry; a later successful load must compute the latest input rather than overwrite it with defaults. These calculations operate on a temporary copy and never alter the frozen fit, validation or assessment evidence.
+
+<!-- OPT_FLOW study-actions -->
+
+### Build the same mechanism from complete scratch code
+
+How do the equations become an experiment we can reproduce? The complete NumPy update-rule file owns the state transitions; the study file supplies the actual model, data roles and training loop.
+
+<!-- OPT_FLOW rules-program -->
+
+`Optimizer` copies the initial float64 parameter array and allocates only the histories required by the chosen rule. Its `step` method accepts a parameter-shaped gradient and, for Sophia refreshes, a separately computed curvature estimate. The method returns diagnostics while retaining its persistent state. `evaluation_parameters()` returns x for Schedule-Free and the actual parameter array otherwise. The vectorized arithmetic is O(P) per ordinary update for P parameters; it does not construct a full P×P Hessian. The explicit class favors inspectability over fused GPU kernels or framework parameter-group features.
+
+The same file's stable softmax, gradient and metric functions implement the full linear classifier. The metrics compute cross-entropy from log-sum-exp instead of taking the logarithm of a probability that might underflow to zero. The mean-gradient reduction matches the mean loss. Preserving those conventions matters when replacing the model or increasing its batch size.
+
+<!-- OPT_FLOW study-program -->
+
+The study imports those exact update rules. It reads `digits-400.csv`, separates declared roles, generates common initial arrays/minibatches by seed, performs all 24 fits and selects scales only from validation. Its JSON snapshots retain full parameters and histories, rather than a method name plus an accuracy. This is the reusable boundary: change the experiment around a documented optimizer interface; do not copy subtly different recurrences into each training loop.
+
+To reproduce in a separate local working directory, download the data and complete programs from the file index. Create and activate an environment using its platform's normal activation command, install NumPy, then run the study:
 
 ```text
 python -m venv .venv
-```
-
-Activate that environment using its platform's normal activation command, then run:
-
-```text
 python -m pip install numpy==2.3.5
 python optimizer_study.py
 ```
 
-The program prints the twelve selected assessment records and writes all candidate histories to `study-results.json`. `fitted-optimizer-states.json` retains the selected models' full weights and optimizer state, including Schedule-Free's different iterates. The exact arithmetic/probe checker is [optimizer_calculations.py](optimizer_calculations.py); it also needs the saved study files and PyTorch. The files contain complete programs, with no missing loader, model or loss function.
+The recorded environment was Python 3.12.14, NumPy 2.3.5 and PyTorch 2.14.0+cpu. The study prints twelve selected assessment records and writes all candidate histories to `study-results.json` plus complete selected states to `fitted-optimizer-states.json`. The provenance documents attribution, source identifiers and transformations. Those output files are experiments to generate in your own working directory, not instructions to overwrite the retained site's evidence.
 
-**Investigation: one new image, one real update.** Start from a saved model and a fresh validation image. Edit a stroke pixel, choose a target label and inspect which class probabilities will increase after one diagnostic update. The actual edited pixels produce the scores and gradients. A change of label changes the gradient, while leaving the pre-update inference probabilities unchanged.
+<!-- OPT_FLOW calculations-program -->
 
-This is a temporary copy of the fitted model, not an alteration of the reported experiment. For example, changing pixel 28 of source 277 from 0 to 16 and applying one AdamW update toward its original class 0 changes its class-0 probability from .97019 to .97777. That is evidence about this edited example and copied state. It does not establish improved generalization. The Sophia diagnostic can use the exact expected-label diagonal for this linear model; label it distinctly from the sampled estimator used during fitting.
+The complete calculation program checks the worked and fresh trajectories, curvature enumeration, retained model edits and native AdamW comparison. It needs the saved study files and PyTorch as well as NumPy. The newer HVP supplement supplies an independent operator route for the deeper curvature branch:
 
-Cosine AdamW has already reached zero learning rate at update 400. Continuing its frozen schedule gives no parameter change at the next step. That is an informative control, not a reason to silently restart its schedule to produce a visible animation. Restoring the original snapshot must recover the same weights and predictions.
+<!-- OPT_FLOW curvature-program -->
+
+Its `hessian_vector` returns a numerical product from a fresh differentiable loss; `finite_difference_product` obtains a separate gradient-difference estimate. The nonlinear classifier function returns the analytic Gauss–Newton and residual contributions. Run the complete file to inspect the labelled comparisons. Its checks include arbitrary non-sign probes and an exactly zero Hessian, not just the same hand case transcribed into two functions. This supplement uses autograd as a differentiable primitive, while implementing the HVP construction and analytic decomposition explicitly; it is not importing an unexplained optimizer as its scratch solution.
 
 ### Use all four optimizer APIs, then resume the same process
 
 [optimizer_rules.py](optimizer_rules.py) owns the complete scratch update for each named method, including its persistent arrays. The real digit experiment above uses those rules. The next program provides a second capability: taking control of the ordinary optimizer objects people put into a PyTorch loop. It keeps the objective and initial weight matrix fixed across methods, but it is an eight-update API study, not a ranking of optimizer quality.
 
-Use [optimizer_library_bridge.py](optimizer_library_bridge.py) beside `optimizer_rules.py`. Its authoring targets are PyTorch 2.14.0, `prodigyopt==1.1.2` and `schedulefree==1.4.1`. Install those packages in the lesson environment. For the other two, the exact original licensed author files are provided as [lion_pytorch.py](lion_pytorch.py) and [sophia.py](sophia.py), with their [Apache license](LICENSE-lion.txt) and [MIT license](LICENSE-sophia.txt). Place them beside the bridge. Their pinned upstream sources are: [Google's pinned Lion source](https://raw.githubusercontent.com/google/automl/b21d6ced9bc9b748e1c8ab9fdebf2c44c57e63ae/lion/lion_pytorch.py) as `lion_pytorch.py`, and [the pinned Sophia source](https://raw.githubusercontent.com/Liuhong99/Sophia/2fc52f24d4bc008658111b0237a70953ada22398/sophia.py) as `sophia.py`. Preserve their license notices. These are explicit imported dependencies, not unnamed implementations the learner has to invent. Run the program with `--method lion`, `--method sophia`, `--method prodigy`, or `--method schedule_free`.
+Use [optimizer_library_bridge.py](optimizer_library_bridge.py) beside `optimizer_rules.py`. Its version targets are PyTorch 2.14.0, `prodigyopt==1.1.2` and `schedulefree==1.4.1`. Install those packages in the lesson environment. For the other two, the exact original licensed author files are provided as [lion_pytorch.py](lion_pytorch.py) and [sophia.py](sophia.py), with their [Apache license](LICENSE-lion.txt) and [MIT license](LICENSE-sophia.txt). Place them beside the bridge. Their pinned upstream sources are: [Google's pinned Lion source](https://raw.githubusercontent.com/google/automl/b21d6ced9bc9b748e1c8ab9fdebf2c44c57e63ae/lion/lion_pytorch.py) as `lion_pytorch.py`, and [the pinned Sophia source](https://raw.githubusercontent.com/Liuhong99/Sophia/2fc52f24d4bc008658111b0237a70953ada22398/sophia.py) as `sophia.py`. Preserve their license notices. These are explicit imported dependencies, not unnamed implementations the learner has to invent. Run the program with `--method lion`, `--method sophia`, `--method prodigy`, or `--method schedule_free`.
 
 The state map explains which equivalence we can legitimately claim:
 
@@ -355,129 +660,11 @@ For Sophia we refresh the estimate at the current parameters every second update
 
 Prodigy settings deliberately expose bias correction, safeguard behavior, the initial distance and statistic subsampling. This route uses full statistics (`slice_p=1`) and turns the first two options off, but still identifies its output as package behavior rather than relabeling it paper-Algorithm-4 parity. [Original Prodigy implementation](https://github.com/konstmish/prodigy). Schedule-Free 1.4.1 includes the post-1.3 warmup/decay behavior; the reference paper variant is a distinct class. Weight decay is zero in this small comparison. [Author usage and release notes](https://github.com/facebookresearch/schedule_free).
 
-```python
-"""Four actual optimizer APIs on one small fixed classification problem.
-
-Targets: torch 2.14.0, prodigyopt 1.1.2, schedulefree 1.4.1; the lesson
-pins the original Lion/Sophia source files. Choose --method explicitly.
-This is an API/state demonstration, not an optimizer quality benchmark.
-"""
-import argparse
-from copy import deepcopy
-from importlib.util import module_from_spec, spec_from_file_location
-from pathlib import Path
-import numpy as np
-import torch
-from torch.nn import functional as F
-from optimizer_rules import Optimizer
-
-
-def source_class(filename, class_name):
-    path = Path(__file__).with_name(filename)
-    spec = spec_from_file_location(path.stem, path)
-    module = module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return getattr(module, class_name)
-
-
-def make_optimizer(parameters, method):
-    if method == "lion":
-        return source_class("lion_pytorch.py", "Lion")(
-            parameters, lr=.01, betas=(.9, .99), weight_decay=0.)
-    if method == "sophia":
-        return source_class("sophia.py", "SophiaG")(
-            parameters, lr=.01, betas=(.965, .99), rho=.04, weight_decay=0.)
-    if method == "prodigy":
-        from prodigyopt import Prodigy
-        return Prodigy(parameters, lr=1., betas=(.9, .999), d0=1e-6,
-                       weight_decay=0., use_bias_correction=False,
-                       safeguard_warmup=False, slice_p=1)
-    if method == "schedule_free":
-        from schedulefree import AdamWScheduleFree
-        return AdamWScheduleFree(parameters, lr=.01, betas=(.9, .999),
-                                  weight_decay=0., warmup_steps=2, foreach=False)
-    raise ValueError(method)
-
-
-def switch(model, optimizer, method, training):
-    model.train(training)
-    if method == "schedule_free":
-        optimizer.train() if training else optimizer.eval()
-
-
-def update(model, optimizer, method, inputs, labels, step):
-    switch(model, optimizer, method, True)
-    optimizer.zero_grad(set_to_none=True)
-    if method == "sophia" and step % 2 == 0:
-        # Curvature and true-label gradients are evaluated at the same parameters.
-        logits = model(inputs)
-        fake_labels = torch.distributions.Categorical(logits=logits.detach()).sample()
-        F.cross_entropy(logits, fake_labels, reduction="mean").backward()
-        optimizer.update_hessian()   # EMA of squared mean gradient, not B*g^2
-        optimizer.zero_grad(set_to_none=True)
-    F.cross_entropy(model(inputs), labels, reduction="mean").backward()
-    if method == "sophia":
-        optimizer.step(bs=len(inputs))   # B is applied once, in Sophia's denominator
-    else:
-        optimizer.step()
-
-
-def build(method):
-    model = torch.nn.Linear(2, 3, bias=False, dtype=torch.float64)
-    with torch.no_grad():
-        model.weight.copy_(torch.tensor([[.1, -.2], [-.1, .2], [.05, -.05]]))
-    return model, make_optimizer(model.parameters(), method)
-
-
-def main(method):
-    torch.manual_seed(23)
-    inputs = torch.tensor([[1., 0.], [0., 1.], [1., 1.], [-1., 1.]], dtype=torch.float64)
-    labels = torch.tensor([0, 1, 2, 1])
-    model, optimizer = build(method)
-    reference = Optimizer(model.weight.detach().numpy(), "lion", .01) if method == "lion" else None
-    checkpoint = None
-    for step in range(8):
-        if reference is not None:
-            loss = F.cross_entropy(model(inputs), labels)
-            gradient = torch.autograd.grad(loss, model.weight)[0].detach().numpy()
-            reference.step(gradient)
-        update(model, optimizer, method, inputs, labels, step)
-        if reference is not None:
-            np.testing.assert_allclose(model.weight.detach().numpy(), reference.parameters,
-                                       atol=1e-12, rtol=1e-12)
-            np.testing.assert_allclose(optimizer.state[model.weight]["exp_avg"].numpy(),
-                                       reference.state["momentum"], atol=1e-12)
-        if step == 3:
-            switch(model, optimizer, method, False)
-            checkpoint = deepcopy({"model": model.state_dict(), "optimizer": optimizer.state_dict(),
-                                   "rng": torch.get_rng_state(), "next_step": step+1})
-    switch(model, optimizer, method, False)
-    with torch.no_grad():
-        expected_logits = model(inputs).clone()
-    resumed, resumed_optimizer = build(method)
-    resumed.load_state_dict(checkpoint["model"])
-    resumed_optimizer.load_state_dict(checkpoint["optimizer"])
-    torch.set_rng_state(checkpoint["rng"])
-    for step in range(checkpoint["next_step"], 8):
-        update(resumed, resumed_optimizer, method, inputs, labels, step)
-    switch(resumed, resumed_optimizer, method, False)
-    with torch.no_grad():
-        torch.testing.assert_close(resumed(inputs), expected_logits, rtol=1e-12, atol=1e-12)
-        print(method, "evaluation loss:", F.cross_entropy(expected_logits, labels).item())
-    print("State keys:", sorted(optimizer.state[model.weight]))
-    print("Uninterrupted/resumed evaluation maximum error:",
-          (resumed(inputs).detach()-expected_logits).abs().max().item())
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--method", choices=["lion", "sophia", "prodigy", "schedule_free"], required=True)
-    main(parser.parse_args().method)
-```
+<!-- OPT_FLOW library-program -->
 
 Each run saves model state, optimizer state, the next update index and CPU random state after update four, in the evaluation representation. It resumes from those states and checks the eighth evaluation against uninterrupted execution. The call to `optimizer.train()` then restores the training representation before computing a new gradient. Sophia's sampled labels make the random state part of the process. The code uses an in-memory checkpoint to keep the mechanism visible; the final diagnostics lesson supplies actual serialization and more complex data-order/scheduler restoration. The four routes were executed on CPU with PyTorch 2.14.0, Prodigy 1.1.2 and Schedule-Free 1.4.1, using the pinned Lion and Sophia sources above. Every uninterrupted/resumed pair had maximum final-logit difference 0. The final evaluation losses were .8761122277 (Lion), .8761122277 (Sophia), .9517085309 (Prodigy) and .9106840650 (Schedule-Free). These are the tiny bridge fixture’s eight-update outputs, separate from the measured digit study; they establish API/state behavior rather than an optimizer ranking.
 
-Updates for these dense single-model examples take O(N) optimizer arithmetic per update and method-specific O(N) persistent state, as counted next. Sophia adds a forward/backward curvature pass on refresh updates. Prodigy's adaptation adds reductions, so an equivalent distributed implementation needs globally coherent statistics. This tiny program establishes neither GPU throughput nor distributed equivalence.
+Updates for these dense single-model examples take O(P) optimizer arithmetic per update and method-specific O(P) persistent state for P parameters, as counted next. Sophia adds a forward/backward curvature pass on refresh updates. Prodigy's adaptation adds reductions, so an equivalent distributed implementation needs globally coherent statistics. This tiny program establishes neither GPU throughput nor distributed equivalence.
 
 **Take control.** Change the constructed objective to a class-weighted mean cross-entropy. Explain why passing the row count as Sophia's `bs` is no longer automatically a valid estimator correction. Separately remove only Schedule-Free's optimizer mode switch, and locate the first semantic error even if accuracy stays the same.
 
@@ -489,72 +676,100 @@ The B correction assumed B equally weighted independent sampled-label contributi
 
 ## 8. Count the resources you actually need
 
-### Persistent state is not peak training memory
+The fitted models showed different update histories, but their loss curves did not measure memory or time. Now follow the arrays that must remain available between updates. This is a separate resource calculation, with hypothetical model size and explicit storage assumptions.
 
-An array with N entries, each s bytes, occupies Ns payload bytes. When comparing state counts, first decide whether you are counting additional arrays, the current parameter buffer, master weights, gradients or temporary workspaces.
+### Which arrays persist after the gradient has been consumed?
 
-| Method / stated implementation | Additional parameter-sized arrays beyond current parameters |
+Can a smaller history make a model fit? Count complete parameter-sized arrays first, then identify who stores each one.
+
+<!-- OPT_FLOW memory-global -->
+
+Amber denotes the model's weights, orange its gradients and violet its optimizer buffers in this allocation drawing. These are distinct payloads. The hypothetical weights use BF16, two bytes per entry; the gradients use FP32, four bytes per entry. The third allocation uses the buffer count and entry width you choose. The bar's segments represent the calculated listed byte counts, not measured GPU memory or a guessed activation size.
+
+For P parameters and b bytes per entry, one full buffer contains Pb payload bytes. Two FP32 AdamW moments for 70 billion parameters therefore contain 70×10^9×2×4=560×10^9 bytes, or 560 decimal GB. One FP32 Lion moment contains 280 GB. BF16 weights separately contain 140 GB. Decimal GB divides bytes by 10^9; GiB divides by 2^30. Neither unit changes the number of saved entries.
+
+| Method / stated implementation | Additional parameter-sized arrays beyond the current parameter buffer |
 | --- | --- |
-| AdamW without AMSGrad | m and v: 2 |
-| Lion | m: 1 |
-| Sophia | m and h: 2 |
-| Prodigy paper reference here | m, v, s and initialization: 4 |
-| Schedule-Free teaching code here | x, z and v: 3 |
-| Efficient Schedule-Free base implementation | z and v: 2; the parameter buffer switches between x and y |
+| AdamW without AMSGrad | Signed history m and second moment v: 2 |
+| Lion | Signed history m: 1 |
+| Sophia | Signed history m and curvature history h: 2 |
+| Paper Prodigy reference here | m, v, displacement history s and initial parameters θ_0: 4 |
+| Literal Schedule-Free teaching code | Average x, fast point z and second moment v: 3; current y is the main buffer |
+| Efficient Schedule-Free base implementation | z and v: 2; the main buffer changes between x and y |
 
-Scalar counters are excluded from this table. Current library options can change the count: extra inner momentum, sliced adaptation statistics, factored state or a redundant reference copy must be counted explicitly. State dtype is implementation-dependent. Our NumPy experiment uses float64; a count table does not magically make its arrays float32.
+The three mathematical Schedule-Free locations are not three *additional* arrays in every implementation. The literal code keeps their roles inspectable; the compact implementation reconstructs one representation in the main parameter buffer. Scalar counters are excluded from this table. AMSGrad, optional inner momentum, sliced Prodigy statistics, master weights or a redundant reference copy need their own accounting. Our saved NumPy arrays are float64: calling a method “AdamW” does not change their dtype to FP32.
 
-For a hypothetical 70-billion-parameter model with two float32 AdamW moments, those two arrays contain 560 billion bytes, or 560 decimal GB. One float32 Lion moment contains 280 GB. Bfloat16 model weights separately contain 140 GB. These figures exclude gradients, master copies, activations and temporary storage. Dividing a global byte count by device count is justified only for the arrays actually sharded under that scheme.
+Change the parameter count, buffer count or entry width independently. The following controls recalculate these global payloads; their values do not specify activation memory.
 
-**Figure 12 — an allocation ledger.** Stack separately named weight, gradient, moment and workspace allocations, each with a dtype and ownership rule. Change the number of sharding ranks and recompute only the sharded terms. Do not represent hypothetical global storage as a measured per-device peak.
+<!-- OPT_FLOW memory-payload -->
 
-### Adafactor offers a different compression
+### Who owns the payload on one device?
 
-For an n×m weight matrix, Adafactor can store row and column statistics instead of an nm-entry second-moment array. Using row sums R and column sums C, a rank-one reconstruction has entries Ṽᵢⱼ=RᵢCⱼ/ΣᵢRᵢ. It preserves these marginals, not every individual entry.
+Does doubling the device count halve every allocation? A rank is one participant that owns arrays in the distributed calculation. An array is replicated when every rank keeps it whole, and sharded when ranks keep different portions. Doubling the rank count halves only the evenly sharded arrays.
 
-For a 4096×4096 matrix, two float32 factors hold 8192 numbers, requiring 32,768 bytes. A dense second moment holds 16,777,216 numbers, requiring 67,108,864 bytes. This is not a fixed “half a parameter array” saving: it depends strongly on shape. Vector/scalar parameters and optional first moments need separate accounting.
+<!-- OPT_FLOW memory-ownership -->
 
-The [Adafactor paper](https://proceedings.mlr.press/v80/shazeer18a.html) also discusses update clipping, changing second-moment decay and parameter-relative step sizes. Factoring the state is one part of the method. It does not inherently prove a fixed loss of accuracy or a fixed slowdown.
+Read each allocation's ownership label. With eight ranks and only optimizer buffers sharded, a rank retains the full 140 GB weight payload and 280 GB gradient payload, plus 560/8=70 GB of moment payload: 490 GB of these listed arrays. If all three allocations are evenly sharded, the sum is 980/8=122.5 GB. If all are replicated, each rank owns 980 GB. These simple counts deliberately omit padding, alignment and other allocations; they are not claims that a particular training strategy can use those exact per-rank totals.
 
-### Steps, work, traffic and elapsed time
+Activations, temporary workspaces, allocator behavior and possible master copies remain unspecified. Real peak memory requires measuring their lifetimes together. Optimizer arithmetic is usually O(P) for these elementwise rules, but Sophia's refresh adds a forward/backward pass and Prodigy's adaptation adds global reductions. A count of saved arrays alone cannot establish throughput.
 
-Imagine a hypothetical method needs 600 updates at 1.1 time units per update, while another needs 1000 at 1 unit. Total time is 660 versus 1000, a speed ratio about 1.515. Reporting “40% fewer steps” as “40% faster updates” confuses two measurements. Tuning trials and failed runs also belong in a project-cost comparison.
+### Which detail does a factored history discard?
 
-Reducing optimizer state does not automatically reduce network traffic by the same factor. Data-parallel gradient reduction communicates gradients; parameter all-gathers communicate parameter shards. Persistent moments can remain local to their owner. Prodigy's global adaptation statistic may itself require a reduction. An actual distributed implementation determines which values move, when and at what precision.
+Can two vectors stand in for a whole matrix? Inspect the original cells and the reconstruction before counting the saving.
 
-This connects directly to the previous Ring Attention discussion: bandwidth claims require a communication schedule, buffer sizes and an overlap model. A memory-count heatmap cannot establish them. For real timing, use a representative workload, warmup, synchronization appropriate to the device, repeated measurements, matched quality targets and a record of software/hardware versions.
+<!-- OPT_FLOW memory-factor-values -->
+
+Switch from the 650-parameter classifier to this explicitly constructed 2×2 second-moment matrix V=[[1,3],[5,7]]. Its row means are [2,6], column means [3,5] and global mean 4. A separable reconstruction uses Ṽ_ij=row_i×column_j/global_mean. The four reconstructed cells are [[1.5,2.5],[4.5,7.5]]. Their row and column means match V's; individual cells do not. This is a rank-one approximation to the stored second moment, not an exact factorization of every matrix.
+
+The equivalent sum notation is Ṽ_ij=R_i C_j/Σ_i R_i, with row sums R and column sums C. Do not combine a row-*mean* formula with a column-*sum* formula: the normalizing factor belongs to the convention. For an all-zero nonnegative matrix the mathematical zero reconstruction is well defined by continuity, while practical optimizer implementations use their documented floors. This local reconstruction is only Adafactor's factorization branch; it does not implement its update clipping, changing decay or parameter-relative step size.
+
+<!-- OPT_FLOW memory-factor-shape -->
+
+The violet rectangle keeps the actual n:m aspect ratio; its separators are schematic, and its dimension labels give the full count. The violet row and column strips each store one computed statistic per row or column; their orientation distinguishes the factors from the full matrix. A dense FP32 second moment uses 4nm bytes; those two factors use 4(n+m). At n=m=4096, the counts are 67,108,864 and 32,768 bytes. A one-row matrix does not automatically benefit: its two factors would store m+1 values versus m dense values. Vector/scalar parameters and optional first moments require separate decisions in the full method.
+
+<!-- OPT_FLOW memory-actions -->
+
+The [Adafactor paper](https://proceedings.mlr.press/v80/shazeer18a.html) teaches the rest of that algorithm. Count the actual implementation's state and verify quality when using it; the factor formula establishes neither a universal accuracy cost nor a universal speed advantage.
+
+### Updates, work, traffic and elapsed time answer different questions
+
+What does “fewer steps” buy? Multiply steps by measured work or time before deciding.
+
+<!-- OPT_FLOW resource-work -->
+
+This constructed comparison has one method taking 600 updates at 1.1 time units each: total 660. Another takes 1000 at 1 unit: total 1000. Their total-time ratio is 1000/660≈1.515, while the first method's individual updates are slower. The numbers are a stated arithmetic example, not recorded optimizer timing. Tuning trials, failures, preprocessing and quality targets belong in the actual project-cost comparison too.
+
+Smaller optimizer state also does not automatically mean proportionally less communication. Data-parallel gradient reduction moves gradients; parameter all-gathers move parameter shards. Moments can remain local to their owner. Prodigy's shared adaptation statistics may themselves need reductions. Return to [Ring Attention & Sequence Parallelism](/learn/path/full-curriculum/ring-attention-sequence-parallelism?module=deep-learning-fundamentals) for the distinction between buffer size, ownership, transfers and overlap. For actual timing, use a representative workload, warmup, device-appropriate synchronization, repeated measurements and recorded hardware/software versions.
 
 ## 9. Choose a method by a question you can test
 
-If optimizer state dominates memory, measure the benefit of a smaller or factored state while checking validation quality. If step-scale tuning dominates repeated experiments, compare adaptation against the total tuning budget of the baseline. If a run's endpoint is uncertain, test an evaluation strategy that remains useful at multiple stopping times. If curvature information seems promising, include its estimation cost and verify that the curvature path is actually used.
-
-This gives a practical decision table without invented suitability scores:
+We now know both the update mechanisms and the evidence their classroom experiment supplies. Choose a candidate by a diagnosed limitation, then collect evidence that could show the choice was wrong.
 
 | Observation | Candidate experiment | Evidence to collect |
 | --- | --- | --- |
-| Persistent moment arrays dominate | Lion or factored-state method | Measured peak/steady memory, matching quality, tuning budget |
-| Different coordinates behave very differently | Sophia or a suitable preconditioner | Curvature/clipping diagnostics, quality versus total work |
-| Many model scales make LR searches expensive | Prodigy with a declared implementation | Actual trials, d trace, failures and validation |
-| Useful stopping time is uncertain | Schedule-Free plus explicit evaluation modes | Quality at predefined horizons, x/y handling, normalization statistics |
-| Baseline already trains well | Keep it as a reference when testing alternatives | Same task, useful paired controls and honest tradeoffs |
+| Persistent moment arrays dominate | Lion or a factored-state method | Actual steady/peak memory, matched quality, total tuning budget |
+| Coordinates require very different scales | Sophia or a suitable preconditioner | Curvature/clipping diagnostics and quality versus total work |
+| Repeated model scales make rate searches expensive | Prodigy with its exact implementation declared | All trials, d traces, failures and validation |
+| Useful stopping time is uncertain | Schedule-Free with explicit evaluation modes | Quality at predefined horizons, x/y handling, normalization statistics |
+| The baseline already trains well | Keep it as the paired reference | Same task and batches, useful comparisons and honest tradeoffs |
 
-### Matrix geometry: a useful current extension
+### Deeper: a matrix has directions that its entries alone conceal
 
-The four methods above do not exhaust optimizer design. **Muon** transforms a matrix-valued momentum direction using an approximate orthogonalization procedure. An idealized polar factor of M=UΣVᵀ is UVᵀ: singular directions are retained while nonzero singular magnitudes are flattened. This is different from applying an entrywise sign.
+Why isn't an entrywise sign the only way to flatten scale? Compare how two actual matrix transformations act on the same vectors.
 
-For M=[[2,1],[1,2]], all entries are positive, so entrywise sign gives an all-ones rank-one matrix. The ideal polar factor is the identity because M is positive definite. One transformation acts on entries; the other acts on singular geometry. Neither calculation requires a Hessian.
+<!-- OPT_FLOW muon-polar -->
 
-**Figure 13 — entries versus singular directions.** Show the two matrices and their actions on [1,1] and [1,−1]. Label UVᵀ as the idealized polar operation, not the output of a fixed finite Newton–Schulz iteration.
+Switch to the constructed matrix M=[[2,1],[1,2]]. Its two singular directions are proportional to [1,1] and [1,−1], with singular values 3 and 1. In a singular-value decomposition M=UΣVᵀ, Σ lists these magnitudes; U and V give the associated output and input directions. The ideal polar factor UVᵀ preserves those directions while flattening the nonzero singular values to 1. Here M is symmetric positive definite, so that polar factor is the identity.
 
-[PyTorch 2.14 documents Muon](https://docs.pytorch.org/docs/2.14/generated/torch.optim.Muon.html), including finite iteration coefficients, matrix-shape requirements and learning-rate adjustment. Non-matrix parameters need a suitable companion update, and an embedding's two-dimensional shape alone does not establish that every recipe treats it like a hidden matrix. The exact recipe and parameter grouping matter. Muon is a useful connection to the matrix-preconditioning lesson, not evidence that every advanced optimizer lives outside native PyTorch.
+The other displayed transformation takes each entry's sign. All entries of M are positive, so it becomes [[1,1],[1,1]]. It sends [1,1] to [2,2] and [1,−1] to [0,0], erasing the latter direction entirely. The identity instead returns both vectors unchanged. The two plots use the same axes; concentric origin marks keep the zero vector visible. This comparison concerns matrix geometry, without taking a Hessian.
 
-### Diagnosing a changed training run
+**Muon** applies a matrix-valued momentum transformation using finite approximate orthogonalization, commonly implemented through Newton–Schulz iterations. The exact SVD polar factor drawn here is an intuition for that branch, not the claimed output of a particular finite iteration or a complete Muon implementation. [PyTorch 2.14's Muon API](https://docs.pytorch.org/docs/2.14/generated/torch.optim.Muon.html) specifies iteration coefficients, matrix-shape requirements and rate adjustment. A suitable companion update handles other parameter groups. Being two-dimensional does not by itself mean that a recipe treats embeddings like hidden weight matrices. Study the exact recipe, shapes, scaling and grouping before substituting the optimizer.
 
-Start with the actual objective and parameter changes. If loss jumps after switching optimizers, record the gradient norm, update norm, parameter norm, rate, decay and active state. Check whether the batch or reduction changed. Reusing a familiar rate may be a poor choice, but a failure at one particular update does not identify its cause by itself.
+### Diagnose the first changed operation, then design the comparison
 
-For Sophia, inspect curvature refreshes and scaling before concluding that “second-order information failed.” For Prodigy, inspect the estimator and d trace before treating a slow start as convergence. For Schedule-Free, confirm which iterate produced the reported metric. For Lion, inspect the blended direction and ηλ product. These are mechanisms that can be checked, not diagnoses based only on an optimizer's name.
+If loss jumps after switching optimizers, which observation narrows the cause? Begin with the actual objective and parameter change, rather than an optimizer's reputation.
 
-The next [Neural ODE lesson](/learn/path/full-curriculum/neural-ode-continuous-depth-models?module=deep-learning-fundamentals) considers continuous state evolution inside a model. An optimizer also generates a trajectory, but its trajectory lives in parameter space while training. The distinction between evolving model state and updating model parameters remains essential.
+Keep the batch and loss reduction visible. Record gradient norm, update norm, parameter norm, rate, decay and current state at the first problematic update. A familiar rate may be inappropriate for the new transformation; a failure at one update alone does not identify why. For Lion, inspect the signed blend and ηλ. For Sophia, inspect refresh coherence and batch scaling before blaming curvature. For Prodigy, inspect r,s,d and overshoot before calling a slow start convergence. For Schedule-Free, identify which parameter representation produced the reported metric. Use the exercises next to transfer these diagnoses to changed examples.
 
 ## 10. Practice and transfer
 
@@ -693,7 +908,15 @@ One defensible design fixes three disjoint data roles, two candidate scales and 
 
 </details>
 
-## References and other ways to learn
+## 11. Reproduce the calculations
+
+The complete programs remain visible at the mechanisms they implement. Their Copy and Download controls carry the same code; the shared Code & supporting files index at the end collects the complete code catalogue. These contextual links supply the saved data, results, attribution and licenses. The pinned upstream source files retain their original licenses.
+
+<!-- OPT_FLOW file-index -->
+
+To run the digit study, keep `optimizer_rules.py`, `optimizer_study.py` and `digits-400.csv` together in your own working directory. The study creates its own results and complete state files. The calculations then read those outputs. The library bridge needs the exact scratch rules, the pinned Lion/Sophia files and the versioned packages named above. The HVP supplement is independent of the saved digit fits. Data attribution and transformations are in the provenance document.
+
+## 12. References and other ways to learn
 
 These links support different parts of the lesson. The papers and executable local calculations carry the technical claims; external learning resources offer another presentation.
 
@@ -707,3 +930,10 @@ These links support different parts of the lesson. The papers and executable loc
 - [Shazeer and Stern: Adafactor](https://proceedings.mlr.press/v80/shazeer18a.html). Follow the factored-state mechanism beyond a memory slogan. Optional momentum and tensor shapes change storage.
 - [PyTorch 2.14 Muon](https://docs.pytorch.org/docs/2.14/generated/torch.optim.Muon.html). A current matrix-update branch; inspect parameter groups, finite iterations and scaling before adapting a recipe. This lesson did not benchmark Muon.
 - [UCI Optical Recognition of Handwritten Digits](https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits), E. Alpaydin and C. Kaynak, [dataset DOI](https://doi.org/10.24432/C50P49), CC BY 4.0. The retained extract and classroom transformations are described in [data provenance](data-provenance.md).
+
+
+## 13. What to learn next
+
+You can now locate a model's input, loss, gradient, parameter arrays and optimizer state; trace five update rules; identify their library conventions; and design a comparison whose results answer its stated question. Keep those boundaries when changing the model or hardware.
+
+The next [Neural ODEs & Continuous-Depth Models](/learn/path/full-curriculum/neural-ode-continuous-depth-models?module=deep-learning-fundamentals) lesson changes how model state evolves through depth. Our optimizer trajectories live in *parameter space during training*; a neural ODE evolves a model state during its forward computation. Both involve trajectories, but they are different objects with different derivatives and numerical decisions.

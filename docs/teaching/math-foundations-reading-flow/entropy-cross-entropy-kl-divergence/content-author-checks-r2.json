@@ -1,0 +1,885 @@
+{
+  "createdAt": "2026-10-09T16:08:57.306430+00:00",
+  "status": "PASS",
+  "scope": "Source conservation; six new independent solution snippets; direct complementary arithmetic for new fixtures and observed counts. No eleven retained mains or two new mains replayed; no build/native verification.",
+  "manuscript": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/manuscript-complete-r2.md",
+    "sha256": "f86fb033f1ff06f3fc6a0970b124c212d458c2c63c93244e6e11282c8a85414a"
+  },
+  "checkerSha256": "5c32fe64ff404d39529018d4c307304ff831a08f0d9a27f7a6a042a672f81d31",
+  "checks": [
+    {
+      "name": "coin exact retained source",
+      "pass": true
+    },
+    {
+      "name": "coin exact retained output",
+      "pass": true
+    },
+    {
+      "name": "coin whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "coin whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "bernoulli exact retained source",
+      "pass": true
+    },
+    {
+      "name": "bernoulli exact retained output",
+      "pass": true
+    },
+    {
+      "name": "bernoulli whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "bernoulli whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "prefix exact retained source",
+      "pass": true
+    },
+    {
+      "name": "prefix exact retained output",
+      "pass": true
+    },
+    {
+      "name": "prefix whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "prefix whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "blocks exact retained source",
+      "pass": true
+    },
+    {
+      "name": "blocks exact retained output",
+      "pass": true
+    },
+    {
+      "name": "blocks whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "blocks whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "support exact retained source",
+      "pass": true
+    },
+    {
+      "name": "support exact retained output",
+      "pass": true
+    },
+    {
+      "name": "support whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "support whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "conditional exact retained source",
+      "pass": true
+    },
+    {
+      "name": "conditional exact retained output",
+      "pass": true
+    },
+    {
+      "name": "conditional whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "conditional whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "logits exact retained source",
+      "pass": true
+    },
+    {
+      "name": "logits exact retained output",
+      "pass": true
+    },
+    {
+      "name": "logits whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "logits whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "torch exact retained source",
+      "pass": true
+    },
+    {
+      "name": "torch exact retained output",
+      "pass": true
+    },
+    {
+      "name": "torch whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "torch whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "evaluation exact retained source",
+      "pass": true
+    },
+    {
+      "name": "evaluation exact retained output",
+      "pass": true
+    },
+    {
+      "name": "evaluation whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "evaluation whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "continuous exact retained source",
+      "pass": true
+    },
+    {
+      "name": "continuous exact retained output",
+      "pass": true
+    },
+    {
+      "name": "continuous whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "continuous whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "maximum exact retained source",
+      "pass": true
+    },
+    {
+      "name": "maximum exact retained output",
+      "pass": true
+    },
+    {
+      "name": "maximum whole source in manuscript",
+      "pass": true
+    },
+    {
+      "name": "maximum whole output in manuscript",
+      "pass": true
+    },
+    {
+      "name": "original task1 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task1 hint",
+      "pass": true
+    },
+    {
+      "name": "original task1 solution",
+      "pass": true
+    },
+    {
+      "name": "original task2 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task2 hint",
+      "pass": true
+    },
+    {
+      "name": "original task2 solution",
+      "pass": true
+    },
+    {
+      "name": "original task3 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task3 hint",
+      "pass": true
+    },
+    {
+      "name": "original task3 solution",
+      "pass": true
+    },
+    {
+      "name": "original task4 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task4 hint",
+      "pass": true
+    },
+    {
+      "name": "original task4 solution",
+      "pass": true
+    },
+    {
+      "name": "original task5 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task5 hint",
+      "pass": true
+    },
+    {
+      "name": "original task5 solution",
+      "pass": true
+    },
+    {
+      "name": "original task6 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task6 hint",
+      "pass": true
+    },
+    {
+      "name": "original task6 solution",
+      "pass": true
+    },
+    {
+      "name": "original task7 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task7 hint",
+      "pass": true
+    },
+    {
+      "name": "original task7 solution",
+      "pass": true
+    },
+    {
+      "name": "original task8 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task8 hint",
+      "pass": true
+    },
+    {
+      "name": "original task8 solution",
+      "pass": true
+    },
+    {
+      "name": "original task9 prompt",
+      "pass": true
+    },
+    {
+      "name": "original task9 hint",
+      "pass": true
+    },
+    {
+      "name": "original task9 solution",
+      "pass": true
+    },
+    {
+      "name": "figure E01 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E02 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E03 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E04 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E05 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E06 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E07 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E08 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E09 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E10 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E11 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E12 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E13 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E14 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E15 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E16 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E17 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E18 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E19 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E20 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E21 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E22 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E23 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E24 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E25 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E26 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E27 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E28 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E29 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E30 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E31 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E32 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E33 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E34 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E35 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E36 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E37 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E38 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E39 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E40 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E41 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E42 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E43 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E44 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E45 unique",
+      "pass": true
+    },
+    {
+      "name": "figure E46 unique",
+      "pass": true
+    },
+    {
+      "name": "no programme placeholder",
+      "pass": true
+    },
+    {
+      "name": "all fourteen practice headings",
+      "pass": true
+    },
+    {
+      "name": "two earlier checkpoint discussions",
+      "pass": true
+    },
+    {
+      "name": "full SciPy after conditional definition",
+      "pass": true
+    },
+    {
+      "name": "full MaxEnt after reference-weight definition",
+      "pass": true
+    },
+    {
+      "name": "correct actual Huffman fragment",
+      "pass": true
+    },
+    {
+      "name": "real route source measure-theory-probability-spaces",
+      "pass": true
+    },
+    {
+      "name": "real route source exponential-families-sufficient-statistics",
+      "pass": true
+    },
+    {
+      "name": "real route source probability-distributions-bayes-theorem",
+      "pass": true
+    },
+    {
+      "name": "real route source algebra-functions-exponentials-logarithms",
+      "pass": true
+    },
+    {
+      "name": "real route source maximum-likelihood-map-estimation",
+      "pass": true
+    },
+    {
+      "name": "real route source optimal-transport-wasserstein-distance-sinkhorn",
+      "pass": true
+    },
+    {
+      "name": "real route source greedy-algorithms-exchange-arguments",
+      "pass": true
+    },
+    {
+      "name": "real route source variational-inference",
+      "pass": true
+    },
+    {
+      "name": "real route source mutual-information-information-bottleneck",
+      "pass": true
+    },
+    {
+      "name": "real route source f-divergences-integral-probability-metrics",
+      "pass": true
+    },
+    {
+      "name": "six independent repair snippets",
+      "pass": true
+    },
+    {
+      "name": "decoder '101100'",
+      "pass": true
+    },
+    {
+      "name": "decoder '111010'",
+      "pass": true
+    },
+    {
+      "name": "decoder '110010111'",
+      "pass": true
+    },
+    {
+      "name": "decoder ''",
+      "pass": true
+    },
+    {
+      "name": "unfinished11",
+      "pass": true
+    },
+    {
+      "name": "nonbinary",
+      "pass": true
+    },
+    {
+      "name": "prefix collision {'A': '0', 'B': '01'}",
+      "pass": true
+    },
+    {
+      "name": "prefix collision {'B': '01', 'A': '0'}",
+      "pass": true
+    },
+    {
+      "name": "prefix collision {'A': '0', 'B': '0'}",
+      "pass": true
+    },
+    {
+      "name": "support finite 0",
+      "pass": true
+    },
+    {
+      "name": "support finite 1",
+      "pass": true
+    },
+    {
+      "name": "support finite 2",
+      "pass": true
+    },
+    {
+      "name": "support infinity",
+      "pass": true
+    },
+    {
+      "name": "certain zerozero",
+      "pass": true
+    },
+    {
+      "name": "strict malformed (0.5, 0.5, 0.1)",
+      "pass": true
+    },
+    {
+      "name": "strict malformed (-1, 2)",
+      "pass": true
+    },
+    {
+      "name": "strict malformed (nan, 1)",
+      "pass": true
+    },
+    {
+      "name": "strict malformed (1,)",
+      "pass": true
+    },
+    {
+      "name": "weighted conditional ((0.675, 0.075), (0.125, 0.125))",
+      "pass": true
+    },
+    {
+      "name": "weighted conditional ((0.45, 0.05), (0.25, 0.25))",
+      "pass": true
+    },
+    {
+      "name": "weighted conditional ((0.9, 0.1), (0, 0))",
+      "pass": true
+    },
+    {
+      "name": "weighted conditional ((0.45, 0.15), (0.1, 0.3))",
+      "pass": true
+    },
+    {
+      "name": "invalid joint []",
+      "pass": true
+    },
+    {
+      "name": "invalid joint [[1], []]",
+      "pass": true
+    },
+    {
+      "name": "invalid joint [[0.5, 0.6]]",
+      "pass": true
+    },
+    {
+      "name": "invalid joint [[1, -0.1]]",
+      "pass": true
+    },
+    {
+      "name": "invalid joint [[inf]]",
+      "pass": true
+    },
+    {
+      "name": "stable target2 (0, -1000, -2000)",
+      "pass": true
+    },
+    {
+      "name": "stable target2 (1000, 0, -1000)",
+      "pass": true
+    },
+    {
+      "name": "stable target2 (1000, 998, 996)",
+      "pass": true
+    },
+    {
+      "name": "stable target2 (800, 0, -800)",
+      "pass": true
+    },
+    {
+      "name": "stable target2 (100, -700, -1500)",
+      "pass": true
+    },
+    {
+      "name": "ordinary direct loss",
+      "pass": true
+    },
+    {
+      "name": "invalid logits ((), 0)",
+      "pass": true
+    },
+    {
+      "name": "invalid logits ((nan, 0), 0)",
+      "pass": true
+    },
+    {
+      "name": "invalid logits ((0, 1), 2)",
+      "pass": true
+    },
+    {
+      "name": "invalid logits ((0, 1), 0.5)",
+      "pass": true
+    },
+    {
+      "name": "feasible 6/5 1/5",
+      "pass": true
+    },
+    {
+      "name": "feasible sum",
+      "pass": true
+    },
+    {
+      "name": "feasible mean",
+      "pass": true
+    },
+    {
+      "name": "feasible 6/5 3/5",
+      "pass": true
+    },
+    {
+      "name": "feasible sum",
+      "pass": true
+    },
+    {
+      "name": "feasible mean",
+      "pass": true
+    },
+    {
+      "name": "feasible 0 0",
+      "pass": true
+    },
+    {
+      "name": "feasible sum",
+      "pass": true
+    },
+    {
+      "name": "feasible mean",
+      "pass": true
+    },
+    {
+      "name": "feasible 2 1",
+      "pass": true
+    },
+    {
+      "name": "feasible sum",
+      "pass": true
+    },
+    {
+      "name": "feasible mean",
+      "pass": true
+    },
+    {
+      "name": "feasible 10/7 3/7",
+      "pass": true
+    },
+    {
+      "name": "feasible sum",
+      "pass": true
+    },
+    {
+      "name": "feasible mean",
+      "pass": true
+    },
+    {
+      "name": "infeasible t",
+      "pass": true
+    },
+    {
+      "name": "infeasible mean",
+      "pass": true
+    },
+    {
+      "name": "block lengths",
+      "pass": true
+    },
+    {
+      "name": "Kraft ceiling",
+      "pass": true
+    },
+    {
+      "name": "weighted block",
+      "pass": true
+    },
+    {
+      "name": "weighted symbol",
+      "pass": true
+    },
+    {
+      "name": "Kraft floor fails",
+      "pass": true
+    },
+    {
+      "name": "dyadic exact",
+      "pass": true
+    },
+    {
+      "name": "fair exact",
+      "pass": true
+    },
+    {
+      "name": "zero probability",
+      "pass": true
+    },
+    {
+      "name": "observed train/test",
+      "pass": true
+    },
+    {
+      "name": "train species",
+      "pass": true
+    },
+    {
+      "name": "test species",
+      "pass": true
+    },
+    {
+      "name": "train islands",
+      "pass": true
+    },
+    {
+      "name": "test islands",
+      "pass": true
+    },
+    {
+      "name": "global observed CE",
+      "pass": true
+    },
+    {
+      "name": "island observed CE",
+      "pass": true
+    },
+    {
+      "name": "global perplexity",
+      "pass": true
+    },
+    {
+      "name": "island perplexity",
+      "pass": true
+    },
+    {
+      "name": "observed conditionalH",
+      "pass": true
+    },
+    {
+      "name": "observed conditionalKL",
+      "pass": true
+    },
+    {
+      "name": "Biscoe lookup",
+      "pass": true
+    },
+    {
+      "name": "new alpha half",
+      "pass": true
+    },
+    {
+      "name": "new unequal contexts",
+      "pass": true
+    },
+    {
+      "name": "wrong equal contexts",
+      "pass": true
+    },
+    {
+      "name": "E13 CE",
+      "pass": true
+    },
+    {
+      "name": "E19 fixedH",
+      "pass": true
+    },
+    {
+      "name": "E37 constructed increments",
+      "pass": true
+    },
+    {
+      "name": "E37 expected4",
+      "pass": true
+    },
+    {
+      "name": "nonuniform objective",
+      "pass": true
+    },
+    {
+      "name": "uniform base-relative objective",
+      "pass": true
+    },
+    {
+      "name": "text clean programme filenames",
+      "pass": true
+    }
+  ],
+  "count": 218
+}

@@ -2,6 +2,7 @@
 export const randomizedLinearAlgebraExamples = {
   weightedColumns: {
     title: "See a successful probe and an exact cancellation",
+    file: "weighted_column_probes.py",
     code: `import numpy as np
 
 A = np.array([[3., 0., 3.], [0., 1., 1.]])
@@ -19,6 +20,7 @@ print("A is zero:", bool(np.all(A == 0)))`,
   },
   gaussianBaseline: {
     title: "Run the complete 100-by-40 randomized SVD",
+    file: "gaussian_range_svd.py",
     code: `import numpy as np
 
 def orth(Y):
@@ -61,6 +63,7 @@ print("orthonormal U:", np.allclose(U.T @ U, np.eye(5)))`,
   },
   spectrumBudget: {
     title: "Separate rank limits from the quality of the sketch",
+    file: "randomized_spectrum_budget.py",
     code: `import numpy as np
 
 def orth(Y):
@@ -109,6 +112,7 @@ for name, spectrum in spectra.items():
   },
   errorDecomposition: {
     title: "Account for both sources of reconstruction error",
+    file: "range_truncation_losses.py",
     code: `import numpy as np
 
 def orth(Y):
@@ -156,6 +160,7 @@ for name, matrix in [("rank one", np.ones((5, 3))), ("zero", np.zeros((5, 3)))]:
   },
   blockedProducts: {
     title: "Form the same two-pass sketch from row blocks",
+    file: "blocked_two_pass_products.py",
     code: `import numpy as np
 
 rng = np.random.default_rng(23)
@@ -176,6 +181,7 @@ print("input passes:", 2)`,
   },
   rowSketches: {
     title: "Judge the fitted line on all original observations",
+    file: "original_row_sketch_residuals.py",
     code: `import numpy as np
 
 x = np.array([0., 1., 2., 3., 4., 5., 6., 20.])
@@ -197,6 +203,7 @@ for name, S in sketches.items():
   },
   leverageSampling: {
     title: "Rescale nonuniform row samples so their Gram matrix is unbiased",
+    file: "leverage_rescaled_rows.py",
     code: `import numpy as np
 
 x = np.array([0., 1., 2., 3., 4., 5., 6., 20.])
@@ -220,6 +227,7 @@ print("original SSE:", f"{np.linalg.norm(A @ coefficients - b)**2:.6f}")`,
   },
   embeddingCheck: {
     title: "Test every direction in a known small residual subspace",
+    file: "residual_subspace_embedding.py",
     code: `import numpy as np
 
 rng = np.random.default_rng(5)
@@ -238,12 +246,12 @@ if epsilon < 1:
     bound = np.sqrt((1 + epsilon) / (1 - epsilon))
     print("verified-subspace bound:", f"{bound:.6f}", "holds:", bool(ratio <= bound))
 else:
-    print("this epsilon supplies no positive lower bound")
-print("checking a subspace costs work; this is an oracle, not a free certificate")`,
-    expected: "squared stretches: [0.486929, 0.74155, 1.146711]\nactual residual ratio: 1.022000\nverified-subspace bound: 1.762776 holds: True\nchecking a subspace costs work; this is an oracle, not a free certificate"
+    print("this epsilon supplies no positive lower bound")`,
+    expected: "squared stretches: [0.486929, 0.74155, 1.146711]\nactual residual ratio: 1.022000\nverified-subspace bound: 1.762776 holds: True"
   },
   traceEstimation: {
     title: "Derive an unbiased trace estimate by enumerating the signs",
+    file: "enumerated_sign_trace.py",
     code: `import itertools
 import numpy as np
 
@@ -262,6 +270,7 @@ print("running means:", (values.cumsum() / np.arange(1, 9)).round(3).tolist())`,
   },
   freshResidualProbes: {
     title: "Why validation must use fresh probes",
+    file: "fresh_residual_probes.py",
     code: `import itertools
 import numpy as np
 
@@ -280,6 +289,7 @@ print("individual probe values:", fresh_values.round(3).tolist())`,
   },
   latentStructurePractice: {
     title: "Check a new three-factor signal plus noise",
+    file: "latent_signal_sketch_practice.py",
     code: `import numpy as np
 
 def orth(Y):
@@ -317,8 +327,7 @@ print("best rank-3 relative error:", f"{np.linalg.norm(exact_s[3:]) / np.linalg.
 for p, q in [(0, 0), (5, 0), (5, 1)]:
     U, s, Vt, _, _ = randomized_svd(A, 3, p, q, np.random.default_rng(9))
     error = np.linalg.norm(A - (U*s) @ Vt) / np.linalg.norm(A)
-    print("p, q:", p, q, "relative error:", f"{error:.6f}")
-print("small observed singular directions may still contain meaningful information")`,
-    expected: "best rank-3 relative error: 0.029018\np, q: 0 0 relative error: 0.507439\np, q: 5 0 relative error: 0.036773\np, q: 5 1 relative error: 0.029018\nsmall observed singular directions may still contain meaningful information"
+    print("p, q:", p, q, "relative error:", f"{error:.6f}")`,
+    expected: "best rank-3 relative error: 0.029018\np, q: 0 0 relative error: 0.507439\np, q: 5 0 relative error: 0.036773\np, q: 5 1 relative error: 0.029018"
   }
 };

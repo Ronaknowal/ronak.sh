@@ -1,0 +1,23 @@
+saved candidate full 1 train -2.8374392739288776 validation -2.9348813779345044 AIC 520.739069307198 BIC 533.2381176588493 converged True iterations 2
+saved candidate full 2 train -2.45141736683905 validation -2.668799817608869 AIC 463.255126031029 BIC 490.75303240466195 converged True iterations 16
+saved candidate full 3 train -2.3351934494132025 validation -2.671121581431881 AIC 454.33482089437643 BIC 496.8315852899909 converged True iterations 7
+saved candidate full 4 train -1.9894419179324319 validation -3.2567488104878586 AIC 404.0995452278377 BIC 461.59516764543383 converged True iterations 198
+saved candidate tied 1 train -2.8374392739288776 validation -2.9348813779345044 AIC 520.739069307198 BIC 533.2381176588493 converged True iterations 2
+saved candidate tied 2 train -2.578660526953492 validation -2.7297286031377186 AIC 480.1588948516286 BIC 500.1573722142707 converged True iterations 4
+saved candidate tied 3 train -2.483945952736711 validation -2.741335717952299 AIC 469.11027149260804 BIC 496.60817786624096 converged True iterations 13
+saved candidate tied 4 train -2.4261654956281946 validation -2.787304712288306 AIC 464.70978921307506 BIC 499.7071245976988 converged True iterations 31
+saved candidate diag 1 train -2.837877071408679 validation -2.9396602159528853 AIC 518.8178728535622 BIC 528.8171115348833 converged True iterations 2
+saved candidate diag 2 train -2.713786310370273 validation -2.9636114626055714 AIC 506.4815358666491 BIC 528.9798228996215 converged True iterations 25
+saved candidate diag 3 train -2.6352380435622584 validation -3.2537749616508695 AIC 502.3428478412065 BIC 537.3401832258302 converged True iterations 22
+saved candidate diag 4 train -2.532802268351415 validation -2.820248255687074 AIC 493.90440830325474 BIC 541.4007920395297 converged True iterations 20
+saved candidate spherical 1 train -2.837877071408679 validation -2.9396602159528853 AIC 516.8178728535622 BIC 524.3173018645531 converged True iterations 2
+saved candidate spherical 2 train -2.753109233310528 validation -2.922017643949057 AIC 509.55966199589506 BIC 527.0583296882069 converged True iterations 70
+saved candidate spherical 3 train -2.654197021883031 validation -2.9687638211874097 AIC 499.7554639389456 BIC 527.2533703125785 converged True iterations 43
+saved candidate spherical 4 train -2.582306920332409 validation -2.925479969633843 AIC 494.81524565983364 BIC 532.3123907147876 converged True iterations 97
+saved selected ['full', 2]
+saved selected test -3.0112234685906634
+saved baseline test -2.8872488178783784
+saved test difference -0.12397465071228497
+saved test ARI 0.4334462099505079
+saved Bayesian sensitivity [{'concentration': 0.01, 'weights': [0.011766109554147355, 0.37484691453806224, 0.6132801979520509, 0.00010572085086849469, 1.0467410977083283e-06, 1.0363773244639192e-08], 'active_above_point01': 3, 'converged': True}, {'concentration': 1, 'weights': [0.011654658058646229, 0.37127737953073353, 0.6074948486339005, 0.005493675813647216, 0.0027228124159074663, 0.0013566255471650901], 'active_above_point01': 3, 'converged': True}, {'concentration': 10, 'weights': [0.011429709465857772, 0.3642662349577417, 0.5969498285922453, 0.01005173101065236, 0.009086231719607287, 0.008216264253895496], 'active_above_point01': 4, 'converged': True}]
+unlabelled query {"component_id": 0, "log_density_standardized": -4.861127656094387, "negative_log_density": 4.861127656094387, "raw_cm": [5.5, 4.2], "responsibilities": [0.9999999640076982, 3.599230175087111e-08], "standardized": [-0.32803266881677073, 2.660974020840593]}

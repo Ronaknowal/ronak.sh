@@ -1,0 +1,13 @@
+import fs from 'node:fs';import{createHash}from'node:crypto';
+const folder='docs/teaching/math-foundations-reading-flow/rate-distortion-theory',base=folder+'/content-prepared',hash=s=>createHash('sha256').update(s).digest('hex');
+const old=JSON.parse(fs.readFileSync(`${base}/preserved-programmes.json`));
+let m=['manuscript-foundations.md','manuscript-computation.md','manuscript-practice.md','manuscript-resources.md'].map(p=>fs.readFileSync(`${base}/${p}`,'utf8').trim()).join('\n\n')+'\n';
+const extra=['finite_rd_library','gaussian_rd_library','penguins_quantization'];
+const files={...old};for(const key of extra)files[key]={filename:key+'.py',source:`${base}/programmes/${key}.py`,stdout:`${base}/programmes/${key}.stdout`,role:'New once-executed full programme'};
+const inclusions=[];
+const show=(key)=>{const f=files[key],code=fs.readFileSync(f.source,'utf8'),output=fs.readFileSync(f.stdout,'utf8');inclusions.push({...f,key,sourceSha256:hash(code),stdoutSha256:hash(output)});return `File: \`${f.filename}\`\n\n\`\`\`python\n${code}${code.endsWith('\n')?'':'\n'}\`\`\`\n\nOutput:\n\n\`\`\`text\n${output.trimEnd()}\n\`\`\``;};
+m=m.replaceAll('{{CODE:finite_rd_library}}','The complete imported helper is shown first. It defines the same scalar operations without running their original demonstration loops.\n\n{{HELPER}}\n\n{{CODE:finite_rd_library}}');
+m=m.replace(/\{\{CODE:([^}]+)\}\}/g,(_,key)=>show(key));
+const helper=`${base}/programmes/rd_scalar_helpers.py`,helperCode=fs.readFileSync(helper,'utf8');m=m.replace('{{HELPER}}',()=>`File: \`rd_scalar_helpers.py\`\n\n\`\`\`python\n${helperCode}\n\`\`\``);inclusions.push({key:'helper',filename:'rd_scalar_helpers.py',source:helper,sourceSha256:hash(helperCode),role:'Exact function-only helper, no standalone output'});
+const practice=`${base}/programmes/rd_practice.py`;inclusions.push({key:'practice',filename:'rd_practice.py',source:practice,sourceSha256:hash(fs.readFileSync(practice)),stdout:`${base}/programmes/rd_practice.stdout`,stdoutSha256:hash(fs.readFileSync(`${base}/programmes/rd_practice.stdout`)),role:'New bounded independent exercise implementation and output'});
+fs.writeFileSync(`${base}/manuscript-complete-draft-r1.md`,m);fs.writeFileSync(`${base}/manuscript-programme-inclusions-r1.json`,JSON.stringify(inclusions,null,2)+'\n');console.log(JSON.stringify({bytes:Buffer.byteLength(m),programmeFiles:inclusions.length,visuals:[...m.matchAll(/\[\[D\d+\]\]/g)].length,sections:[...m.matchAll(/^## \d+\./gm)].length}));

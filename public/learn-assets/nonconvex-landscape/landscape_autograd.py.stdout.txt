@@ -1,0 +1,8 @@
+factor (0,0) loss=0.500000 gradient=[-0.0, -0.0] eigenvalues=[-1.0, 1.0]
+factor (1,1) loss=0.000000 gradient=[0.0, 0.0] eigenvalues=[0.0, 2.0]
+factor (4,0.25) loss=0.000000 gradient=[0.0, 0.0] eigenvalues=[0.0, 16.0625]
+factor (1,0.5) loss=0.125000 gradient=[-0.25, -0.5] eigenvalues=[0.25, 1.0]
+ReLU bias=-1 loss=0.500000 gradient=[0.0, 0.0]
+ReLU bias=0 loss=0.500000 gradient=[0.0, 0.0]
+ReLU bias=0.5 loss=0.125000 gradient=[-0.5, -0.5]
+kink bias slopes: left=0.000000 right=-1.000000

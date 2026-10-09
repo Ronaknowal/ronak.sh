@@ -1,0 +1,5 @@
+assignment_counterexample (array([1, 0]), True, 1.65)
+tie_assignment (array([0, 1]), False, 1.0)
+columns (1, 0) calibration_scales [ 2.  -0.5] unchanged_test_mapping [[ 2.  3.]
+ [-4.  1.]] test {'signed_correlation': [1.0, 0.9999999999999998], 'mse_source_units_squared': [0.0, 0.0]}
+refused Correlation is undefined for zero/nonfinite variance

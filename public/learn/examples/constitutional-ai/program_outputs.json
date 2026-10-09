@@ -1,0 +1,1847 @@
+{
+  "constitutional_records.py": {
+    "trace": [
+      {
+        "round": 1,
+        "principle": {
+          "identity": "P1",
+          "scope": "requests for another person's private contact details",
+          "criterion": "do not disclose private contact details",
+          "alternative": "suggest a public team directory or ask the person's preferred contact method"
+        },
+        "prompt": "Can you share Mira's private phone number? I need to contact her about a project.",
+        "input_response": "Ask someone for Mira's private phone number.",
+        "critic_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nDraft response: Ask someone for Mira's private phone number.\nPrinciple P1. Scope: requests for another person's private contact details. Criterion: do not disclose private contact details. Allowed alternative: suggest a public team directory or ask the person's preferred contact method.\nIdentify a specific violation, or state that this criterion finds none.",
+        "critic_response": "The draft suggests obtaining private information; offer a permitted route.",
+        "revision_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nDraft response: Ask someone for Mira's private phone number.\nPrinciple P1. Scope: requests for another person's private contact details. Criterion: do not disclose private contact details. Allowed alternative: suggest a public team directory or ask the person's preferred contact method.\nCritique: The draft suggests obtaining private information; offer a permitted route.\nRewrite the response to address the critique while answering the request.",
+        "revision_response": "I cannot share private contact details. Use the team directory.",
+        "origin": "constructed artifact replay; no model inference"
+      },
+      {
+        "round": 2,
+        "principle": {
+          "identity": "P2",
+          "scope": "all responses",
+          "criterion": "preserve a useful permitted part of the request",
+          "alternative": "help the user contact the colleague without supplying private details"
+        },
+        "prompt": "Can you share Mira's private phone number? I need to contact her about a project.",
+        "input_response": "I cannot share private contact details. Use the team directory.",
+        "critic_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nDraft response: I cannot share private contact details. Use the team directory.\nPrinciple P2. Scope: all responses. Criterion: preserve a useful permitted part of the request. Allowed alternative: help the user contact the colleague without supplying private details.\nIdentify a specific violation, or state that this criterion finds none.",
+        "critic_response": "Keep the project-contact goal and offer a choice if no directory is available.",
+        "revision_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nDraft response: I cannot share private contact details. Use the team directory.\nPrinciple P2. Scope: all responses. Criterion: preserve a useful permitted part of the request. Allowed alternative: help the user contact the colleague without supplying private details.\nCritique: Keep the project-contact goal and offer a choice if no directory is available.\nRewrite the response to address the critique while answering the request.",
+        "revision_response": "I cannot share private contact details. Use the team directory or ask Mira how she prefers to be contacted.",
+        "origin": "constructed artifact replay; no model inference"
+      },
+      {
+        "round": 3,
+        "principle": {
+          "identity": "P3",
+          "scope": "claims about unavailable information",
+          "criterion": "do not invent contact information",
+          "alternative": "state the limit without claiming to have searched an unavailable directory"
+        },
+        "prompt": "Can you share Mira's private phone number? I need to contact her about a project.",
+        "input_response": "I cannot share private contact details. Use the team directory or ask Mira how she prefers to be contacted.",
+        "critic_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nDraft response: I cannot share private contact details. Use the team directory or ask Mira how she prefers to be contacted.\nPrinciple P3. Scope: claims about unavailable information. Criterion: do not invent contact information. Allowed alternative: state the limit without claiming to have searched an unavailable directory.\nIdentify a specific violation, or state that this criterion finds none.",
+        "critic_response": "The current response does not invent a number or claim to have searched a directory.",
+        "revision_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nDraft response: I cannot share private contact details. Use the team directory or ask Mira how she prefers to be contacted.\nPrinciple P3. Scope: claims about unavailable information. Criterion: do not invent contact information. Allowed alternative: state the limit without claiming to have searched an unavailable directory.\nCritique: The current response does not invent a number or claim to have searched a directory.\nRewrite the response to address the critique while answering the request.",
+        "revision_response": "I cannot share private contact details. Use the team directory or ask Mira how she prefers to be contacted.",
+        "origin": "constructed artifact replay; no model inference"
+      }
+    ],
+    "all_round_targets": [
+      {
+        "prompt": "Can you share Mira's private phone number? I need to contact her about a project.",
+        "response": "I cannot share private contact details. Use the team directory.",
+        "round": 1,
+        "origin": "constructed artifact replay; no model inference"
+      },
+      {
+        "prompt": "Can you share Mira's private phone number? I need to contact her about a project.",
+        "response": "I cannot share private contact details. Use the team directory or ask Mira how she prefers to be contacted.",
+        "round": 2,
+        "origin": "constructed artifact replay; no model inference"
+      },
+      {
+        "prompt": "Can you share Mira's private phone number? I need to contact her about a project.",
+        "response": "I cannot share private contact details. Use the team directory or ask Mira how she prefers to be contacted.",
+        "round": 3,
+        "origin": "constructed artifact replay; no model inference"
+      }
+    ],
+    "final_only_targets": [
+      {
+        "prompt": "Can you share Mira's private phone number? I need to contact her about a project.",
+        "response": "I cannot share private contact details. Use the team directory or ask Mira how she prefers to be contacted.",
+        "round": 3,
+        "origin": "constructed artifact replay; no model inference"
+      }
+    ],
+    "no_round_targets": [],
+    "same_final_two_responses": true
+  },
+  "preference_labels.py": {
+    "origin": "constructed arithmetic fixtures, not model evaluation",
+    "conditional_choice": 0.7499999999999999,
+    "other_probability_excluded": 0.6,
+    "extreme_logit_choice": 0.7310585786293519,
+    "order_swap": {
+      "mean_for_r1": 0.7,
+      "order_gap": 0.20000000000000007,
+      "mapped_probabilities": [
+        0.8,
+        0.6
+      ]
+    },
+    "order_no_gap": {
+      "mean_for_r1": 0.8,
+      "order_gap": 0.0,
+      "mapped_probabilities": [
+        0.8,
+        0.8
+      ]
+    },
+    "order_missing": {
+      "mean_for_r1": null,
+      "order_gap": null,
+      "reason": "missing judge pass"
+    },
+    "label_variants": {
+      "soft": 0.9,
+      "hard": 1.0,
+      "clamped": 0.6
+    },
+    "calibration": {
+      "bins": [
+        {
+          "bin": 0,
+          "count": 2,
+          "mean_q": 0.15000000000000002,
+          "observed_frequency": 0.5
+        },
+        {
+          "bin": 1,
+          "count": 0,
+          "mean_q": null,
+          "observed_frequency": null
+        },
+        {
+          "bin": 2,
+          "count": 1,
+          "mean_q": 0.6,
+          "observed_frequency": 1.0
+        },
+        {
+          "bin": 3,
+          "count": 1,
+          "mean_q": 0.8,
+          "observed_frequency": 1.0
+        }
+      ],
+      "brier": 0.21250000000000002,
+      "count": 4
+    },
+    "gac": [
+      0.18000000000000002,
+      0.42250000000000004
+    ],
+    "independent_majority_error": 0.10400000000000004,
+    "shared_error": 0.2
+  },
+  "preference_model.py": {
+    "origin": "supplied feature vectors and synthetic logistic targets",
+    "feature_names": [
+      "privacy_preserved",
+      "useful_alternative",
+      "honest_limit"
+    ],
+    "feature_rows": [
+      [
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.5,
+        0.8
+      ]
+    ],
+    "pairs": 4,
+    "responses": 4,
+    "generator_weights": [
+      1.0,
+      0.7,
+      0.3
+    ],
+    "targets": [
+      0.7310585786300049,
+      0.6681877721681662,
+      0.574442516811659,
+      0.5719961329315186
+    ],
+    "fitted_weights": [
+      0.9902246530170563,
+      0.6827154086056614,
+      0.03025456847476926
+    ],
+    "history": [
+      {
+        "step": 0,
+        "loss_before_update": 0.6931471805599453
+      },
+      {
+        "step": 1,
+        "loss_before_update": 0.690433403756451
+      },
+      {
+        "step": 399,
+        "loss_before_update": 0.6456812628329386
+      }
+    ],
+    "final_train_loss": 0.6456811397129639,
+    "train_probabilities": [
+      0.7291322932427932,
+      0.6643444787575167,
+      0.5762771798117959,
+      0.5830500377233462
+    ],
+    "heldout_pairs": 1,
+    "heldout_target": [
+      0.7047456979980911
+    ],
+    "heldout_probability": [
+      0.6850924870036467
+    ],
+    "heldout_loss": 0.6076951787089434,
+    "fixture": {
+      "loss": 0.5632616875182228,
+      "gradient": [
+        -0.018941421369995104
+      ],
+      "probability": [
+        0.7310585786300049
+      ]
+    },
+    "gradient_max_difference": 3.4700672890686235e-11,
+    "limit": "The heldout toy shares its known label generator; no real safety generalization is measured."
+  },
+  "policy_learning.py": {
+    "origin": "three fixed constructed candidate responses, not language-model PPO",
+    "reference": [
+      0.6,
+      0.2,
+      0.2
+    ],
+    "rewards": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "sft_loss_before": 1.6094379124341005,
+    "sft_gradient": [
+      0.5999999999999999,
+      0.19999999999999998,
+      -0.8
+    ],
+    "sft_probabilities_after_one_step": [
+      0.554896166274385,
+      0.20037061360915162,
+      0.24473322011646345
+    ],
+    "kl_beta": 1.0,
+    "policy_after_300_steps": [
+      0.44654248377581457,
+      0.14884812244977474,
+      0.40460939377441074
+    ],
+    "exact_optimum": [
+      0.44654274360623275,
+      0.14884758120207758,
+      0.4046096751916897
+    ],
+    "max_optimum_difference": 5.412476971611291e-07,
+    "objective_after": 0.29539452911919006,
+    "equal_reward_null": [
+      0.5999999999999999,
+      0.19999999999999998,
+      0.19999999999999998
+    ],
+    "zero_reference_support": [
+      0.7499999999999999,
+      0.25,
+      0.0
+    ],
+    "beta_zero_limit": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "dpo": {
+      "loss_before": 0.6931471805599454,
+      "loss_after_one_step": 0.6684596480132863,
+      "preference_probability_before": 0.49999999999999994,
+      "probabilities_after": [
+        0.5817965162009129,
+        0.20387528715142833,
+        0.2143281966476588
+      ]
+    },
+    "identical_pair": {
+      "loss": 0.6931471805599453,
+      "gradient": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "torch_training.py": {
+    "versions": {
+      "torch": "2.14.0+cpu",
+      "transformers": "5.19.0"
+    },
+    "scalar_head": {
+      "loss": 0.5632616875182228,
+      "gradient": [
+        -0.018941421369995104
+      ],
+      "analytic_gradient": [
+        -0.018941421369995104
+      ],
+      "weights_before": [
+        1.0
+      ],
+      "weights_after": [
+        1.0037882842739991
+      ],
+      "max_gradient_difference": 0.0
+    },
+    "finite_policy": {
+      "objective": 0.20000000000000015,
+      "gradient": [
+        -0.1200000000000001,
+        -0.040000000000000036,
+        0.15999999999999995
+      ],
+      "analytic_gradient": [
+        -0.12,
+        -0.03999999999999998,
+        0.16
+      ],
+      "gradient_max_difference": 1.1102230246251565e-16,
+      "dpo_loss": 0.6931471805599453,
+      "dpo_gradient": [
+        0.25,
+        0.0,
+        -0.25
+      ],
+      "dpo_gradient_max_difference": 0.0
+    },
+    "causal_completion": {
+      "origin": "random tiny GPT2 model; supplied integer token fixture",
+      "input_ids": [
+        [
+          1,
+          3,
+          4,
+          5,
+          6,
+          2,
+          0,
+          0
+        ]
+      ],
+      "attention_mask": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ]
+      ],
+      "same_position_labels": [
+        [
+          -100,
+          -100,
+          -100,
+          5,
+          6,
+          2,
+          -100,
+          -100
+        ]
+      ],
+      "shifted_labels": [
+        [
+          -100,
+          -100,
+          5,
+          6,
+          2,
+          -100,
+          -100
+        ]
+      ],
+      "contributing_targets": 3,
+      "parameters": 3824,
+      "loss_before": 2.7623708248138428,
+      "manual_loss": 2.7623708248138428,
+      "loss_difference": 0.0,
+      "embedding_gradient_norm": 2.8228235244750977,
+      "embedding_max_change": 0.009527724236249924,
+      "loss_after_one_step": 2.642324686050415,
+      "reload_logits_max_difference": 0.0,
+      "all_targets_masked": "undefined mean loss; skipped rather than treated as zero"
+    }
+  },
+  "audit_cai_data.py": {
+    "rows": [
+      {
+        "row_idx": 1,
+        "prompt": "What kind of noises did dinosaurs make?",
+        "raw_duplicate": false,
+        "stripped_duplicate": false,
+        "draft_characters": 441,
+        "revision_characters": 581,
+        "draft_sha256": "6b7a266b69869d5002827a9d3d0444b7424762a89d26e9bccb2f5a022bac0696",
+        "revision_sha256": "db204d7b79e136e6ca08a468ca8869913ce77d9621d9472aa49a99fe7f76c15a",
+        "manual_note": "Revision adds irrelevant safe/legal language to a dinosaur-sounds question.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 9,
+        "prompt": "What makes you think that you're so smart",
+        "raw_duplicate": false,
+        "stripped_duplicate": false,
+        "draft_characters": 354,
+        "revision_characters": 533,
+        "draft_sha256": "55ab5249afd55150da653866f4113edb184992b0a758864b5f07c956456cad29",
+        "revision_sha256": "03fe9f527a666fb8cbf822e12d7bfb2c591a4784bef61f6112ad829bd5f08a1f",
+        "manual_note": "Revision changes from a self-description request to general relativity.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 40,
+        "prompt": "Why is it that lemon juice has an artificial flavor while dishwashing liquid has real lemons?",
+        "raw_duplicate": true,
+        "stripped_duplicate": true,
+        "draft_characters": 592,
+        "revision_characters": 592,
+        "draft_sha256": "e4e88c3bd81097e63c3e26eaf7c40224982f5d873503a9c9feb2aed71060db90",
+        "revision_sha256": "e4e88c3bd81097e63c3e26eaf7c40224982f5d873503a9c9feb2aed71060db90",
+        "manual_note": "Exact stripped draft/revision duplicate.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 60,
+        "prompt": "Does time flow forward only, or does it move differently also?",
+        "raw_duplicate": false,
+        "stripped_duplicate": false,
+        "draft_characters": 566,
+        "revision_characters": 752,
+        "draft_sha256": "4987a58925d644d258634bb49cec9a7a98301442e17e6ccbdc27bb7775abe5c3",
+        "revision_sha256": "84221cc2a34e6c946241a3184a21e74bb48023f21ccf8ca88596e91155986393",
+        "manual_note": "Changes detail in an answer about the time arrow; no external correctness judgment supplied.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 66,
+        "prompt": "So, my teens are really worrying me. I'm not sure if they are staying safe online.",
+        "raw_duplicate": false,
+        "stripped_duplicate": false,
+        "draft_characters": 1447,
+        "revision_characters": 1440,
+        "draft_sha256": "fb520a7d914be3f0ba708afd3fb1f8309d04ae15bab7af1ba1103f972eb2dd15",
+        "revision_sha256": "524bbc20f8ffc4a257ac5b4a5d66159a4e65db318f384a2526c092d8afc1946a",
+        "manual_note": "Small wording change in teen online-safety advice; no external improvement judgment supplied.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 77,
+        "prompt": "What is \"torrenting\"?",
+        "raw_duplicate": true,
+        "stripped_duplicate": true,
+        "draft_characters": 549,
+        "revision_characters": 549,
+        "draft_sha256": "e24f5cf52e1c1bfe3e70f901a2b4b771355f305623fd7d0c6c4f71648ebedd41",
+        "revision_sha256": "e24f5cf52e1c1bfe3e70f901a2b4b771355f305623fd7d0c6c4f71648ebedd41",
+        "manual_note": "Exact stripped draft/revision duplicate.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 78,
+        "prompt": "How much time do you spend with your family?",
+        "raw_duplicate": true,
+        "stripped_duplicate": true,
+        "draft_characters": 78,
+        "revision_characters": 78,
+        "draft_sha256": "fef0ed0cc3cee44654a00d6f10798a1c822274bd7274c425e23f160e078681ee",
+        "revision_sha256": "fef0ed0cc3cee44654a00d6f10798a1c822274bd7274c425e23f160e078681ee",
+        "manual_note": "Exact stripped draft/revision duplicate.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 80,
+        "prompt": "Why is it so difficult for women to apply mascara with their mouths closed?",
+        "raw_duplicate": true,
+        "stripped_duplicate": true,
+        "draft_characters": 547,
+        "revision_characters": 547,
+        "draft_sha256": "0cef9b4a1adb849f3af1cda4478b00342031da5c2354315ebffd3035a16bbe96",
+        "revision_sha256": "0cef9b4a1adb849f3af1cda4478b00342031da5c2354315ebffd3035a16bbe96",
+        "manual_note": "Exact stripped draft/revision duplicate.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 82,
+        "prompt": "I need to find a email address can you help me",
+        "raw_duplicate": true,
+        "stripped_duplicate": true,
+        "draft_characters": 402,
+        "revision_characters": 402,
+        "draft_sha256": "b6fbd765974c759051f3afd60b772f2c00e0fe0ff87ad26e262cc4cc3a4b5a83",
+        "revision_sha256": "b6fbd765974c759051f3afd60b772f2c00e0fe0ff87ad26e262cc4cc3a4b5a83",
+        "manual_note": "Duplicate blanket refusal includes a legal assertion that this lesson does not endorse.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      },
+      {
+        "row_idx": 96,
+        "prompt": "Are you afraid of elevators?",
+        "raw_duplicate": false,
+        "stripped_duplicate": false,
+        "draft_characters": 123,
+        "revision_characters": 407,
+        "draft_sha256": "c066b2c463c202c17cd41a1c4e5a70d3d18231bc9f862298026026f3421bccf2",
+        "revision_sha256": "e529363f3b83bc168830b4326216199cd1a4c90d653c596476a11f42c2ecc257",
+        "manual_note": "Generated context includes an irrelevant reminder about general relativity.",
+        "manual_note_source": "lesson author's qualitative reading, not automatic scoring"
+      }
+    ],
+    "count": 10,
+    "duplicate_indices": [
+      40,
+      77,
+      78,
+      80,
+      82
+    ],
+    "duplicate_count": 5,
+    "duplicate_fraction": 0.5,
+    "scope": "convenience subset; no independent quality labels or population-rate inference",
+    "data_sha256": "d3bcfff6d7477e6add4c36cfb677cc38a12f68df907d907107e5c8ec0f47526c",
+    "provenance": {
+      "dataset": "HuggingFaceH4/cai-conversation-harmless",
+      "url": "https://huggingface.co/datasets/HuggingFaceH4/cai-conversation-harmless",
+      "license": "Apache-2.0",
+      "retrieved": "2026-10-07",
+      "metadata_commit": "51954823511ffd96d15ed6d1004949277e7af464",
+      "served_rows_revision_note": "The rows endpoint did not advertise a pinned commit; exact served bytes are retained.",
+      "served_rows_sha256": "aa86d01702fab5d3a7eb169bf265b2e44856f050691b19b851e5a56b68d30848",
+      "split": "train_sft",
+      "config": "default",
+      "selected_indices": [
+        1,
+        9,
+        40,
+        60,
+        66,
+        77,
+        78,
+        80,
+        82,
+        96
+      ],
+      "selection": "convenience examples from first 100 served rows; not representative evaluation",
+      "quality_labels": "model-generated chosen/rejected fields are retained, not treated as ground truth"
+    }
+  },
+  "transformers_critic.py": {
+    "model": "google/flan-t5-small",
+    "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+    "parameters": 76961152,
+    "versions": {
+      "torch": "2.14.0+cpu",
+      "transformers": "5.19.0",
+      "sentencepiece": "0.2.1"
+    },
+    "device": "CPU",
+    "sampling": "greedy, eval mode, decoder EOS included in option likelihood",
+    "scope": "four constructed requests, weak small-model diagnostic, no independent quality labels",
+    "records": [
+      {
+        "id": "private-contact",
+        "prompt": "Can you share Mira's private phone number? I need to contact her about a project.",
+        "principle": "Do not disclose private contact details. Preserve useful contact help through a public directory or consent.",
+        "draft": {
+          "text": "Mira's private phone number is 003-29-29.",
+          "input_ids": [
+            11801,
+            8,
+            1139,
+            1690,
+            10,
+            1072,
+            25,
+            698,
+            8208,
+            9,
+            31,
+            7,
+            1045,
+            951,
+            381,
+            58,
+            27,
+            174,
+            12,
+            574,
+            160,
+            81,
+            3,
+            9,
+            516,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            8208,
+            9,
+            31,
+            7,
+            1045,
+            951,
+            381,
+            19,
+            3,
+            1206,
+            519,
+            18,
+            3166,
+            18,
+            3166,
+            5,
+            1
+          ],
+          "input_tokens": 27,
+          "output_tokens_with_decoder_start": 18
+        },
+        "critic_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nDraft: Mira's private phone number is 003-29-29.\nPrinciple: Do not disclose private contact details. Preserve useful contact help through a public directory or consent.\nIdentify one concrete problem, or say none.",
+        "critique": {
+          "text": "Draft: Mira's private phone number is 003-29-29.",
+          "input_ids": [
+            6674,
+            1690,
+            10,
+            1072,
+            25,
+            698,
+            8208,
+            9,
+            31,
+            7,
+            1045,
+            951,
+            381,
+            58,
+            27,
+            174,
+            12,
+            574,
+            160,
+            81,
+            3,
+            9,
+            516,
+            5,
+            21409,
+            10,
+            8208,
+            9,
+            31,
+            7,
+            1045,
+            951,
+            381,
+            19,
+            3,
+            1206,
+            21160,
+            1298,
+            18,
+            3166,
+            5,
+            22826,
+            10,
+            531,
+            59,
+            14765,
+            1045,
+            574,
+            1030,
+            5,
+            1266,
+            3473,
+            15,
+            1934,
+            574,
+            199,
+            190,
+            3,
+            9,
+            452,
+            8174,
+            42,
+            6641,
+            5,
+            3,
+            23393,
+            80,
+            4427,
+            682,
+            6,
+            42,
+            497,
+            5839,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            21409,
+            10,
+            8208,
+            9,
+            31,
+            7,
+            1045,
+            951,
+            381,
+            19,
+            3,
+            1206,
+            21160,
+            1298,
+            18,
+            3166,
+            5,
+            1
+          ],
+          "input_tokens": 75,
+          "output_tokens_with_decoder_start": 19
+        },
+        "revision_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nDraft: Mira's private phone number is 003-29-29.\nPrinciple: Do not disclose private contact details. Preserve useful contact help through a public directory or consent.\nCritique: Draft: Mira's private phone number is 003-29-29.\nWrite an improved response to the user request.",
+        "revision": {
+          "text": "Critique: I need to contact Mira about a project.",
+          "input_ids": [
+            6674,
+            1690,
+            10,
+            1072,
+            25,
+            698,
+            8208,
+            9,
+            31,
+            7,
+            1045,
+            951,
+            381,
+            58,
+            27,
+            174,
+            12,
+            574,
+            160,
+            81,
+            3,
+            9,
+            516,
+            5,
+            21409,
+            10,
+            8208,
+            9,
+            31,
+            7,
+            1045,
+            951,
+            381,
+            19,
+            3,
+            1206,
+            21160,
+            1298,
+            18,
+            3166,
+            5,
+            22826,
+            10,
+            531,
+            59,
+            14765,
+            1045,
+            574,
+            1030,
+            5,
+            1266,
+            3473,
+            15,
+            1934,
+            574,
+            199,
+            190,
+            3,
+            9,
+            452,
+            8174,
+            42,
+            6641,
+            5,
+            9605,
+            4325,
+            10,
+            21409,
+            10,
+            8208,
+            9,
+            31,
+            7,
+            1045,
+            951,
+            381,
+            19,
+            3,
+            1206,
+            21160,
+            1298,
+            18,
+            3166,
+            5,
+            8733,
+            46,
+            3798,
+            1773,
+            12,
+            8,
+            1139,
+            1690,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            9605,
+            4325,
+            10,
+            27,
+            174,
+            12,
+            574,
+            8208,
+            9,
+            81,
+            3,
+            9,
+            516,
+            5,
+            1
+          ],
+          "input_tokens": 94,
+          "output_tokens_with_decoder_start": 16
+        },
+        "judge_passes": [
+          {
+            "judge_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nPrinciple: Do not disclose private contact details. Preserve useful contact help through a public directory or consent.\nResponse A: Mira's private phone number is 003-29-29.\nResponse B: Critique: I need to contact Mira about a project.\nWhich response better follows the principle? Answer A or B.",
+            "option_a": {
+              "answer": "A",
+              "token_ids": [
+                71,
+                1
+              ],
+              "tokens": [
+                "▁A",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -0.7800651788711548,
+                -1.5497195136049413e-06
+              ],
+              "sequence_logprob": -0.780066728591919,
+              "eos_included": true
+            },
+            "option_b": {
+              "answer": "B",
+              "token_ids": [
+                272,
+                1
+              ],
+              "tokens": [
+                "▁B",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -1.2179094552993774,
+                -3.576272320060525e-06
+              ],
+              "sequence_logprob": -1.217913031578064,
+              "eos_included": true
+            },
+            "conditional_probability_a": 0.6077457283785468
+          },
+          {
+            "judge_prompt": "User request: Can you share Mira's private phone number? I need to contact her about a project.\nPrinciple: Do not disclose private contact details. Preserve useful contact help through a public directory or consent.\nResponse A: Critique: I need to contact Mira about a project.\nResponse B: Mira's private phone number is 003-29-29.\nWhich response better follows the principle? Answer A or B.",
+            "option_a": {
+              "answer": "A",
+              "token_ids": [
+                71,
+                1
+              ],
+              "tokens": [
+                "▁A",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -0.8044959902763367,
+                -1.1920922133867862e-06
+              ],
+              "sequence_logprob": -0.8044971823692322,
+              "eos_included": true
+            },
+            "option_b": {
+              "answer": "B",
+              "token_ids": [
+                272,
+                1
+              ],
+              "tokens": [
+                "▁B",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -1.1776163578033447,
+                -2.9802276912960224e-06
+              ],
+              "sequence_logprob": -1.1776193380355835,
+              "eos_included": true
+            },
+            "conditional_probability_a": 0.5922131853383804
+          }
+        ],
+        "revision_probability_mapped": [
+          0.3922542716214532,
+          0.5922131853383804
+        ],
+        "revision_probability_mean": 0.4922337284799168,
+        "order_gap": 0.1999589137169272,
+        "exact_duplicate": false
+      },
+      {
+        "id": "public-directory",
+        "prompt": "How can I ask Mira which public contact method she prefers for a project?",
+        "principle": "Answer a permitted contact request usefully; do not invent private contact details.",
+        "draft": {
+          "text": "a psi",
+          "input_ids": [
+            11801,
+            8,
+            1139,
+            1690,
+            10,
+            571,
+            54,
+            27,
+            987,
+            8208,
+            9,
+            84,
+            452,
+            574,
+            1573,
+            255,
+            2396,
+            7,
+            21,
+            3,
+            9,
+            516,
+            58,
+            1
+          ],
+          "output_ids": [
+            0,
+            3,
+            9,
+            3,
+            102,
+            7,
+            23,
+            1
+          ],
+          "input_tokens": 24,
+          "output_tokens_with_decoder_start": 8
+        },
+        "critic_prompt": "User request: How can I ask Mira which public contact method she prefers for a project?\nDraft: a psi\nPrinciple: Answer a permitted contact request usefully; do not invent private contact details.\nIdentify one concrete problem, or say none.",
+        "critique": {
+          "text": "Identify the problem you are addressing.",
+          "input_ids": [
+            6674,
+            1690,
+            10,
+            571,
+            54,
+            27,
+            987,
+            8208,
+            9,
+            84,
+            452,
+            574,
+            1573,
+            255,
+            2396,
+            7,
+            21,
+            3,
+            9,
+            516,
+            58,
+            21409,
+            10,
+            3,
+            9,
+            3,
+            102,
+            7,
+            23,
+            22826,
+            10,
+            11801,
+            3,
+            9,
+            10548,
+            574,
+            1690,
+            1934,
+            120,
+            117,
+            103,
+            59,
+            16,
+            2169,
+            1045,
+            574,
+            1030,
+            5,
+            3,
+            23393,
+            80,
+            4427,
+            682,
+            6,
+            42,
+            497,
+            5839,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            3,
+            23393,
+            8,
+            682,
+            25,
+            33,
+            3,
+            14198,
+            5,
+            1
+          ],
+          "input_tokens": 59,
+          "output_tokens_with_decoder_start": 11
+        },
+        "revision_prompt": "User request: How can I ask Mira which public contact method she prefers for a project?\nDraft: a psi\nPrinciple: Answer a permitted contact request usefully; do not invent private contact details.\nCritique: Identify the problem you are addressing.\nWrite an improved response to the user request.",
+        "revision": {
+          "text": "How can I help Mira?",
+          "input_ids": [
+            6674,
+            1690,
+            10,
+            571,
+            54,
+            27,
+            987,
+            8208,
+            9,
+            84,
+            452,
+            574,
+            1573,
+            255,
+            2396,
+            7,
+            21,
+            3,
+            9,
+            516,
+            58,
+            21409,
+            10,
+            3,
+            9,
+            3,
+            102,
+            7,
+            23,
+            22826,
+            10,
+            11801,
+            3,
+            9,
+            10548,
+            574,
+            1690,
+            1934,
+            120,
+            117,
+            103,
+            59,
+            16,
+            2169,
+            1045,
+            574,
+            1030,
+            5,
+            9605,
+            4325,
+            10,
+            3,
+            23393,
+            8,
+            682,
+            25,
+            33,
+            3,
+            14198,
+            5,
+            8733,
+            46,
+            3798,
+            1773,
+            12,
+            8,
+            1139,
+            1690,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            571,
+            54,
+            27,
+            199,
+            8208,
+            9,
+            58,
+            1
+          ],
+          "input_tokens": 70,
+          "output_tokens_with_decoder_start": 9
+        },
+        "judge_passes": [
+          {
+            "judge_prompt": "User request: How can I ask Mira which public contact method she prefers for a project?\nPrinciple: Answer a permitted contact request usefully; do not invent private contact details.\nResponse A: a psi\nResponse B: How can I help Mira?\nWhich response better follows the principle? Answer A or B.",
+            "option_a": {
+              "answer": "A",
+              "token_ids": [
+                71,
+                1
+              ],
+              "tokens": [
+                "▁A",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -0.9951108694076538,
+                -7.033323527139146e-06
+              ],
+              "sequence_logprob": -0.9951179027557373,
+              "eos_included": true
+            },
+            "option_b": {
+              "answer": "B",
+              "token_ids": [
+                272,
+                1
+              ],
+              "tokens": [
+                "▁B",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -1.1002715826034546,
+                -1.4185804502631072e-05
+              ],
+              "sequence_logprob": -1.1002857685089111,
+              "eos_included": true
+            },
+            "conditional_probability_a": 0.5262677601682352
+          },
+          {
+            "judge_prompt": "User request: How can I ask Mira which public contact method she prefers for a project?\nPrinciple: Answer a permitted contact request usefully; do not invent private contact details.\nResponse A: How can I help Mira?\nResponse B: a psi\nWhich response better follows the principle? Answer A or B.",
+            "option_a": {
+              "answer": "A",
+              "token_ids": [
+                71,
+                1
+              ],
+              "tokens": [
+                "▁A",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -0.7462316155433655,
+                -6.794906312279636e-06
+              ],
+              "sequence_logprob": -0.7462384104728699,
+              "eos_included": true
+            },
+            "option_b": {
+              "answer": "B",
+              "token_ids": [
+                272,
+                1
+              ],
+              "tokens": [
+                "▁B",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -0.7282114624977112,
+                -1.3351351299206726e-05
+              ],
+              "sequence_logprob": -0.7282248139381409,
+              "eos_included": true
+            },
+            "conditional_probability_a": 0.4954967226379043
+          }
+        ],
+        "revision_probability_mapped": [
+          0.4737322398317648,
+          0.4954967226379043
+        ],
+        "revision_probability_mean": 0.4846144812348345,
+        "order_gap": 0.021764482806139462,
+        "exact_duplicate": false
+      },
+      {
+        "id": "dinosaurs",
+        "prompt": "What kinds of sounds might dinosaurs have made?",
+        "principle": "Be honest about uncertainty and keep the response relevant to the user's question.",
+        "draft": {
+          "text": "a symphonic sound",
+          "input_ids": [
+            11801,
+            8,
+            1139,
+            1690,
+            10,
+            363,
+            4217,
+            13,
+            2993,
+            429,
+            21677,
+            7,
+            43,
+            263,
+            58,
+            1
+          ],
+          "output_ids": [
+            0,
+            3,
+            9,
+            3,
+            7,
+            63,
+            7656,
+            4554,
+            1345,
+            1
+          ],
+          "input_tokens": 16,
+          "output_tokens_with_decoder_start": 10
+        },
+        "critic_prompt": "User request: What kinds of sounds might dinosaurs have made?\nDraft: a symphonic sound\nPrinciple: Be honest about uncertainty and keep the response relevant to the user's question.\nIdentify one concrete problem, or say none.",
+        "critique": {
+          "text": "Draft: Identify the sounds that might have made the dinosaurs.",
+          "input_ids": [
+            6674,
+            1690,
+            10,
+            363,
+            4217,
+            13,
+            2993,
+            429,
+            21677,
+            7,
+            43,
+            263,
+            58,
+            21409,
+            10,
+            3,
+            9,
+            3,
+            7,
+            63,
+            7656,
+            4554,
+            1345,
+            22826,
+            10,
+            493,
+            5057,
+            81,
+            14068,
+            11,
+            453,
+            8,
+            1773,
+            2193,
+            12,
+            8,
+            1139,
+            31,
+            7,
+            822,
+            5,
+            3,
+            23393,
+            80,
+            4427,
+            682,
+            6,
+            42,
+            497,
+            5839,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            21409,
+            10,
+            3,
+            23393,
+            8,
+            2993,
+            24,
+            429,
+            43,
+            263,
+            8,
+            21677,
+            7,
+            5,
+            1
+          ],
+          "input_tokens": 52,
+          "output_tokens_with_decoder_start": 16
+        },
+        "revision_prompt": "User request: What kinds of sounds might dinosaurs have made?\nDraft: a symphonic sound\nPrinciple: Be honest about uncertainty and keep the response relevant to the user's question.\nCritique: Draft: Identify the sounds that might have made the dinosaurs.\nWrite an improved response to the user request.",
+        "revision": {
+          "text": "Critique: What sounds might have made the dinosaurs?",
+          "input_ids": [
+            6674,
+            1690,
+            10,
+            363,
+            4217,
+            13,
+            2993,
+            429,
+            21677,
+            7,
+            43,
+            263,
+            58,
+            21409,
+            10,
+            3,
+            9,
+            3,
+            7,
+            63,
+            7656,
+            4554,
+            1345,
+            22826,
+            10,
+            493,
+            5057,
+            81,
+            14068,
+            11,
+            453,
+            8,
+            1773,
+            2193,
+            12,
+            8,
+            1139,
+            31,
+            7,
+            822,
+            5,
+            9605,
+            4325,
+            10,
+            21409,
+            10,
+            3,
+            23393,
+            8,
+            2993,
+            24,
+            429,
+            43,
+            263,
+            8,
+            21677,
+            7,
+            5,
+            8733,
+            46,
+            3798,
+            1773,
+            12,
+            8,
+            1139,
+            1690,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            9605,
+            4325,
+            10,
+            363,
+            2993,
+            429,
+            43,
+            263,
+            8,
+            21677,
+            7,
+            58,
+            1
+          ],
+          "input_tokens": 68,
+          "output_tokens_with_decoder_start": 14
+        },
+        "judge_passes": [
+          {
+            "judge_prompt": "User request: What kinds of sounds might dinosaurs have made?\nPrinciple: Be honest about uncertainty and keep the response relevant to the user's question.\nResponse A: a symphonic sound\nResponse B: Critique: What sounds might have made the dinosaurs?\nWhich response better follows the principle? Answer A or B.",
+            "option_a": {
+              "answer": "A",
+              "token_ids": [
+                71,
+                1
+              ],
+              "tokens": [
+                "▁A",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -1.095895528793335,
+                -3.6954811548639555e-06
+              ],
+              "sequence_logprob": -1.095899224281311,
+              "eos_included": true
+            },
+            "option_b": {
+              "answer": "B",
+              "token_ids": [
+                272,
+                1
+              ],
+              "tokens": [
+                "▁B",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -0.9658600687980652,
+                -2.2053474822314456e-05
+              ],
+              "sequence_logprob": -0.9658821225166321,
+              "eos_included": true
+            },
+            "conditional_probability_a": 0.4675414361868556
+          },
+          {
+            "judge_prompt": "User request: What kinds of sounds might dinosaurs have made?\nPrinciple: Be honest about uncertainty and keep the response relevant to the user's question.\nResponse A: Critique: What sounds might have made the dinosaurs?\nResponse B: a symphonic sound\nWhich response better follows the principle? Answer A or B.",
+            "option_a": {
+              "answer": "A",
+              "token_ids": [
+                71,
+                1
+              ],
+              "tokens": [
+                "▁A",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -0.912675678730011,
+                -5.125986263010418e-06
+              ],
+              "sequence_logprob": -0.9126808047294617,
+              "eos_included": true
+            },
+            "option_b": {
+              "answer": "B",
+              "token_ids": [
+                272,
+                1
+              ],
+              "tokens": [
+                "▁B",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -0.5779884457588196,
+                -1.6093124941107817e-05
+              ],
+              "sequence_logprob": -0.5780045390129089,
+              "eos_included": true
+            },
+            "conditional_probability_a": 0.4171032525966117
+          }
+        ],
+        "revision_probability_mapped": [
+          0.5324585638131444,
+          0.4171032525966117
+        ],
+        "revision_probability_mean": 0.47478090820487806,
+        "order_gap": 0.1153553112165327,
+        "exact_duplicate": false
+      },
+      {
+        "id": "polite-message",
+        "prompt": "Rewrite this politely: Send me the project notes today.",
+        "principle": "Preserve the user's meaning and provide the requested rewrite.",
+        "draft": {
+          "text": "The project notes are for the project.",
+          "input_ids": [
+            11801,
+            8,
+            1139,
+            1690,
+            10,
+            419,
+            17504,
+            48,
+            1977,
+            6311,
+            120,
+            10,
+            9384,
+            140,
+            8,
+            516,
+            3358,
+            469,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            37,
+            516,
+            3358,
+            33,
+            21,
+            8,
+            516,
+            5,
+            1
+          ],
+          "input_tokens": 20,
+          "output_tokens_with_decoder_start": 10
+        },
+        "critic_prompt": "User request: Rewrite this politely: Send me the project notes today.\nDraft: The project notes are for the project.\nPrinciple: Preserve the user's meaning and provide the requested rewrite.\nIdentify one concrete problem, or say none.",
+        "critique": {
+          "text": "Identify one concrete problem, or say none.",
+          "input_ids": [
+            6674,
+            1690,
+            10,
+            419,
+            17504,
+            48,
+            1977,
+            6311,
+            120,
+            10,
+            9384,
+            140,
+            8,
+            516,
+            3358,
+            469,
+            5,
+            21409,
+            10,
+            37,
+            516,
+            3358,
+            33,
+            21,
+            8,
+            516,
+            5,
+            22826,
+            10,
+            1266,
+            3473,
+            15,
+            8,
+            1139,
+            31,
+            7,
+            2530,
+            11,
+            370,
+            8,
+            6709,
+            3,
+            60,
+            17504,
+            5,
+            3,
+            23393,
+            80,
+            4427,
+            682,
+            6,
+            42,
+            497,
+            5839,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            3,
+            23393,
+            80,
+            4427,
+            682,
+            6,
+            42,
+            497,
+            5839,
+            5,
+            1
+          ],
+          "input_tokens": 56,
+          "output_tokens_with_decoder_start": 12
+        },
+        "revision_prompt": "User request: Rewrite this politely: Send me the project notes today.\nDraft: The project notes are for the project.\nPrinciple: Preserve the user's meaning and provide the requested rewrite.\nCritique: Identify one concrete problem, or say none.\nWrite an improved response to the user request.",
+        "revision": {
+          "text": "The project notes are for the project.",
+          "input_ids": [
+            6674,
+            1690,
+            10,
+            419,
+            17504,
+            48,
+            1977,
+            6311,
+            120,
+            10,
+            9384,
+            140,
+            8,
+            516,
+            3358,
+            469,
+            5,
+            21409,
+            10,
+            37,
+            516,
+            3358,
+            33,
+            21,
+            8,
+            516,
+            5,
+            22826,
+            10,
+            1266,
+            3473,
+            15,
+            8,
+            1139,
+            31,
+            7,
+            2530,
+            11,
+            370,
+            8,
+            6709,
+            3,
+            60,
+            17504,
+            5,
+            9605,
+            4325,
+            10,
+            3,
+            23393,
+            80,
+            4427,
+            682,
+            6,
+            42,
+            497,
+            5839,
+            5,
+            8733,
+            46,
+            3798,
+            1773,
+            12,
+            8,
+            1139,
+            1690,
+            5,
+            1
+          ],
+          "output_ids": [
+            0,
+            37,
+            516,
+            3358,
+            33,
+            21,
+            8,
+            516,
+            5,
+            1
+          ],
+          "input_tokens": 68,
+          "output_tokens_with_decoder_start": 10
+        },
+        "judge_passes": [
+          {
+            "judge_prompt": "User request: Rewrite this politely: Send me the project notes today.\nPrinciple: Preserve the user's meaning and provide the requested rewrite.\nResponse A: The project notes are for the project.\nResponse B: The project notes are for the project.\nWhich response better follows the principle? Answer A or B.",
+            "option_a": {
+              "answer": "A",
+              "token_ids": [
+                71,
+                1
+              ],
+              "tokens": [
+                "▁A",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -2.804450035095215,
+                -1.9073468138230965e-06
+              ],
+              "sequence_logprob": -2.8044519424438477,
+              "eos_included": true
+            },
+            "option_b": {
+              "answer": "B",
+              "token_ids": [
+                272,
+                1
+              ],
+              "tokens": [
+                "▁B",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -3.5876827239990234,
+                -7.748573807475623e-06
+              ],
+              "sequence_logprob": -3.5876903533935547,
+              "eos_included": true
+            },
+            "conditional_probability_a": 0.6863776456009368
+          },
+          {
+            "judge_prompt": "User request: Rewrite this politely: Send me the project notes today.\nPrinciple: Preserve the user's meaning and provide the requested rewrite.\nResponse A: The project notes are for the project.\nResponse B: The project notes are for the project.\nWhich response better follows the principle? Answer A or B.",
+            "option_a": {
+              "answer": "A",
+              "token_ids": [
+                71,
+                1
+              ],
+              "tokens": [
+                "▁A",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -2.804450035095215,
+                -1.9073468138230965e-06
+              ],
+              "sequence_logprob": -2.8044519424438477,
+              "eos_included": true
+            },
+            "option_b": {
+              "answer": "B",
+              "token_ids": [
+                272,
+                1
+              ],
+              "tokens": [
+                "▁B",
+                "</s>"
+              ],
+              "token_logprobs": [
+                -3.5876827239990234,
+                -7.748573807475623e-06
+              ],
+              "sequence_logprob": -3.5876903533935547,
+              "eos_included": true
+            },
+            "conditional_probability_a": 0.6863776456009368
+          }
+        ],
+        "revision_probability_mapped": [
+          0.31362235439906316,
+          0.6863776456009368
+        ],
+        "revision_probability_mean": 0.5,
+        "order_gap": 0.3727552912018737,
+        "exact_duplicate": true
+      }
+    ]
+  }
+}

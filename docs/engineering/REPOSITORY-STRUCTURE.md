@@ -131,7 +131,29 @@ changing build output, base URL or route naming.
 
 ## Ignore rules, checks and cleanup
 
-The `.gitignore` excludes dependencies, local environments, root build/scratch
+The 10 October 2026 commit scope keeps the website, public downloadable files,
+build/deployment tooling, reusable checks, curriculum/teaching guidance, topic
+notes and prepared drafts in Git. The five completed authoring-workspace owners
+listed in `.gitignore` are local history; their top-level Markdown restart indexes
+remain versioned. Eleven explicitly unfinished Mathematics/Classical ML topic
+packets remain eligible for commits. Frozen copies, installed experiment packages,
+compiled previews and one-off review runners stay local even within those packets.
+These exclusions do not delete local work or change lesson completion states.
+Historical evidence paths in the ledger may refer to local-only records; they are
+not deployment dependencies or a promise that a fresh clone contains old campaigns.
+Create future prepared content under `docs/teaching/drafts/<topic-id>/`; explicitly
+update the scoped exceptions and repository probes if resuming a local workspace.
+
+On Windows, run `git config --local core.longpaths true` in this repository when
+using a long checkout path. This checkout has that setting enabled. Preserve the
+existing dataset-specific `.gitattributes` rules and account for configured Git
+line-ending filters when comparing the index with working files. Do not ignore an entire source/assets tree to silence a path
+error. After changing ignore policy, remove only the newly excluded files from the
+Git index (`git rm --cached`), retain their local files, and run the repository check.
+After `git add -A`, `npm run check:repository -- --staged` also verifies that every
+required current file is in the index and no excluded artifact remains tracked.
+
+The `.gitignore` excludes dependencies, local environments, scoped local authoring history, root build/scratch
 outputs and explicitly named independent-app build outputs. Root-only patterns
 are anchored: `/scratch/` must not swallow `docs/archive/scratch/` evidence. Logs
 used as published examples remain trackable; disposable logs belong in scratch.

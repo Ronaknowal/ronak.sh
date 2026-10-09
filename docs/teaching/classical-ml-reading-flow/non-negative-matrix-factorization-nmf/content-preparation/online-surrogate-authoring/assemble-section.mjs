@@ -1,0 +1,26 @@
+import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {fileURLToPath} from 'node:url';
+const directory=path.dirname(fileURLToPath(import.meta.url)),file=n=>path.resolve(directory,n),read=n=>fs.readFileSync(file(n),'utf8');
+const bind=n=>{const p=file(n),b=fs.readFileSync(p);return{path:p,bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')};};
+const checks=[];const check=(name,c)=>{checks.push({name,passed:Boolean(c)});if(!c)throw Error(name);};
+const numerical=JSON.parse(read('online-checks.json'));
+check('all86 focused conditions',numerical.checks.length===86&&numerical.checks.every(x=>x.passed));
+for(const x of numerical.inputs)check('source conserved '+path.basename(x.path),bind(x.path).sha256===x.sha256);
+for(const r of ['stdout','stderr'])check('full stream conserved '+r,bind(numerical.main[r].path).sha256===numerical.main[r].sha256);
+check('new only stream',numerical.main.newRuns===1&&numerical.main.newPublicPartialFitCalls===2&&numerical.main.newScratchPartialFitCalls===2&&!numerical.historicalStreamReplayed);
+let body=read('section-seventeen-template.md');
+check('one accepted section17',body.startsWith('## 17. Update as rows arrive')&&(body.match(/^## /gm)||[]).length===1);
+for(const[id,lead]of[['D61','The first arriving row'],['D62','The old cells remain'],['D63','The two observations remain']])check(id+' beforewalkthrough',body.indexOf('<!-- figure:'+id+' -->')>0&&body.indexOf('<!-- figure:'+id+' -->')<body.indexOf(lead));
+check('actual Gram setup cost taught',body.includes('constructs `HH.T` in `O(dk²)`'));
+check('dictionary independent constant qualified',body.includes('not a negative squared reconstruction error'));
+check('retention cannot silently refit',body.includes('not algebraically equated')&&body.includes('old statistics do not magically'));
+check('atomic and flat rows visible',body.includes('sole')===false&&body.includes('preserve the old snapshot')&&body.includes('keep that unused row'));
+check('stale/new objective visible',body.includes('2/9')&&body.includes('upper bound')&&body.includes('not their full sparse-coding algorithm'));
+const result=JSON.parse(read('nmf_online.stdout.txt'));
+check('new actual counters',result.scratch.steps.every(x=>x.diagnostic.encoding_iterations===17)&&result.ordinary_distinct_route.steps[1].steps===2&&result.ordinary_distinct_route.warnings.length===0);
+check('query rounded claims',result.ordinary_distinct_route.query_prediction[0].map(x=>x.toFixed(6)).join(',')==='1.000260,2.000260,2.999740'&&result.scratch.query_prediction[0].map(x=>x.toFixed(6)).join(',')==='1.000000,2.000000,3.000000');
+const slots=[{marker:'<!-- source:nmf_online.py -->',path:file('../content-programs/nmf_online.py'),language:'python'},{marker:'<!-- output:nmf_online.stdout.txt -->',path:file('nmf_online.stdout.txt'),language:'json'}];
+for(const slot of slots){const text=fs.readFileSync(slot.path,'utf8').trimEnd();check('one complete slot '+slot.marker,body.split(slot.marker).length===2);body=body.replace(slot.marker,'\n```'+slot.language+'\n'+text+'\n```\n');check('literal complete '+slot.marker,body.includes(text));}
+check('slots resolved',!body.includes('<!-- source:')&&!body.includes('<!-- output:'));
+fs.writeFileSync(file('section-seventeen.md'),body);
+const packet={status:'SECTION17_N12_D61_D63_COMPLETE_SCOPED_NOT_WHOLE_TOPIC_READY',author:'/root/nmf_initialization_author',created:new Date().toISOString(),acceptedAnchor:'17-update-as-rows-arrive',bindings:['section-seventeen-template.md','section-seventeen.md','visual-specifications.md','assemble-section.mjs','check-online.py','online-checks.json','nmf_online.stdout.txt','nmf_online.stderr.txt'].map(bind),sourceSlots:slots.map(x=>({...x,identity:bind(x.path)})),checks,evidence:{focusedConditions:86,newMain:1,newPublicPartialFitCalls:2,newScratchMainPartialFitCalls:2,additionalFocusedScratchNonemptyUpdates:3,additionalEmptyNoOp:1,oldCampaignReplay:false,fullStreamsRead:true},costAmendment:'Include O(d k²) N2 fixed-H Gram setup per changed dictionary, in addition to accepted O(b d k+q b k²) encode work. Actual recurrence/retained-memory/section scope preserved.',reading:numerical.research+' Entire new source/checker/prose/spec and full4228B stdout/empty stderr read.',limits:'Author scoped finite numerical/source conditions, not independent whole review/native/all-history optimum/asymptotic theorem or matching library trajectories.',continuation:'Root compose exact full section17. Section18 finite axis/phase anatomy and section19 full24tasks/fileindex/annotatedresources remain. No phase/main/public/runtime mutation.'};
+fs.writeFileSync(file('section-seventeen-handoff.json'),JSON.stringify(packet,null,2)+'\n');console.log(JSON.stringify({conditions:checks.length,manuscript:bind('section-seventeen.md'),handoff:bind('section-seventeen-handoff.json')}));

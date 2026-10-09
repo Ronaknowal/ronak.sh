@@ -1,0 +1,29 @@
+{
+  "author": "byte_tokenization",
+  "date": "2026-09-28",
+  "result": "author content/native/model and screenshot review complete",
+  "pending": "Root production screenshot refresh for final intrinsic text-zoom layout; root independent/integration acceptance",
+  "sources": {
+    "docs/teaching/tokenization/byte-level-tokenization-token-free-models/model-evidence.json": "7150f14d85224ed14bcc856c74774d7dc28a4f6252c628266839f6d2c103bc4e",
+    "docs/teaching/tokenization/byte-level-tokenization-token-free-models/native-evidence.json": "028e51b53f36cedb00bc9881ae2239928638e473eee2738f56dc24773a3b6006",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py": "086862e9a9fb0db1bb9a76f66e07ac2c5fb4344bd75708e46e940213932be8bf",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py": "0a25011f005042c45965cf93e4d7825d5e4d8449c9470f7519cfdd705487cd12",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_patches.py": "ca5d1ecf947365bc8147d8e89e172649165ebcc8cc89d6c9349473b0e27a148e",
+    "public/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py": "1fe7bbeb0376588e78ffc3dacfae1e34a845a3cef8864ab33a208b32de7e5206",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "scripts/verify-byte-tokenization-model.mjs": "80cb5e14c2e3250e5e6a433b2b35a6b807b86d8c4d70a7d8374ac2d7f6f03846",
+    "scripts/verify-byte-tokenization.py": "70453327bf11619d427aae8b7885292d3de0ee6dd74a5d3bf46f6f4cd00cb40b",
+    "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx": "11e15c5e23a79d8d6fbebb3cdb334785b5aeb04ffd4c66577054372012069570",
+    "src/learn/components/lesson-labs/byte-tokenization-labs.css": "bbf01622e0055b379412501ea021c4dde9a46ef5ad08f130f842149b7c86bdb5",
+    "src/learn/data/byte-tokenization-model.js": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11",
+    "src/learn/data/curriculum/blueprints/byte-level-tokenization-token-free-models.js": "62c23256103c7ad3916e9a0399701783b1eec55e2ae241bf8250f6a65ad14698",
+    "src/learn/data/topics/byte-level-tokenization.jsx": "f36687c91d3077c3c03edcdf23ebeb01efaf89bb3ef24bd61c9ddbacb0dbfb1b"
+  },
+  "rootFormattingFollowup": {
+    "recordedAt": "2026-09-28T16:11:26.603Z",
+    "file": "src/learn/data/topics/byte-level-tokenization.jsx",
+    "beforeSha256": "34a14e427289023f9d43f56d68cce22a767d7dbd93135f4b664e3ae3d479b478",
+    "afterSha256": "f36687c91d3077c3c03edcdf23ebeb01efaf89bb3ef24bd61c9ddbacb0dbfb1b",
+    "assessment": "Root removed only surplus trailing blank lines flagged by git diff --check. Exact trimEnd equality was asserted. All JSX/program characters are unchanged. This is a packaging/source-identity follow-up, not a new independent scientific or browser execution; the preceding reviewer findings and execution dates remain intact."
+  }
+}

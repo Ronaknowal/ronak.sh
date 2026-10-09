@@ -1,0 +1,167 @@
+{
+  "candidate_outcomes": [
+    {
+      "eligible": true,
+      "k": 2,
+      "training_counts": [
+        6,
+        12
+      ],
+      "validation_counts": [
+        2,
+        4
+      ],
+      "validation_mean_squared_distance": 0.9938849293688005,
+      "validation_silhouette": 0.5095431564169406
+    },
+    {
+      "eligible": true,
+      "k": 3,
+      "training_counts": [
+        6,
+        6,
+        6
+      ],
+      "validation_counts": [
+        2,
+        2,
+        2
+      ],
+      "validation_mean_squared_distance": 0.01108394656781752,
+      "validation_silhouette": 0.9123704772456468
+    },
+    {
+      "eligible": true,
+      "k": 4,
+      "training_counts": [
+        3,
+        6,
+        6,
+        3
+      ],
+      "validation_counts": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "validation_mean_squared_distance": 0.008626944110815075,
+      "validation_silhouette": 0.6072608338557738
+    }
+  ],
+  "evaluation": {
+    "centers_original_units": [
+      [
+        -4.0,
+        0.0
+      ],
+      [
+        4.0,
+        0.0
+      ],
+      [
+        -1.5239845312383075e-17,
+        4.0
+      ]
+    ],
+    "test_group_counts": [
+      2,
+      2,
+      2
+    ],
+    "test_labels": [
+      0,
+      0,
+      2,
+      2,
+      1,
+      1
+    ],
+    "test_mean_squared_distance": 0.0037129391968101625,
+    "training_centroid_baseline": 1.9790697532633013
+  },
+  "features": [
+    "x",
+    "y"
+  ],
+  "input_sha256": "1795acc2a4b80323918169996779b3a0804f0121c36804d1db453ac0ba5fdf20",
+  "schema": 1,
+  "selected_k": 3,
+  "settings": {
+    "algorithm": "lloyd",
+    "candidates": [
+      2,
+      3,
+      4
+    ],
+    "max_iter": 300,
+    "minimum_training_group": 2,
+    "n_init": 10,
+    "refit_after_selection": false,
+    "seed": 7,
+    "selection": "maximum eligible validation silhouette, then smaller k",
+    "tol": 0.0001
+  },
+  "split_ids": {
+    "test": [
+      "row-24",
+      "row-25",
+      "row-26",
+      "row-27",
+      "row-28",
+      "row-29"
+    ],
+    "train": [
+      "row-00",
+      "row-01",
+      "row-02",
+      "row-03",
+      "row-04",
+      "row-05",
+      "row-06",
+      "row-07",
+      "row-08",
+      "row-09",
+      "row-10",
+      "row-11",
+      "row-12",
+      "row-13",
+      "row-14",
+      "row-15",
+      "row-16",
+      "row-17"
+    ],
+    "validation": [
+      "row-18",
+      "row-19",
+      "row-20",
+      "row-21",
+      "row-22",
+      "row-23"
+    ]
+  },
+  "training_state": {
+    "centers_scaled": [
+      [
+        -1.2141669877745294,
+        -0.7044699536763468
+      ],
+      [
+        1.2141669877745294,
+        -0.7044699536763468
+      ],
+      [
+        -4.625929269271485e-18,
+        1.4089399073526938
+      ]
+    ],
+    "scaler_mean": [
+      0.0,
+      1.3333333333333333
+    ],
+    "scaler_scale": [
+      3.2944397601615565,
+      1.8926759422104522
+    ]
+  }
+}

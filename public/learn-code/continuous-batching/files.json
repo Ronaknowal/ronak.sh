@@ -1,0 +1,203 @@
+{
+  "files": [
+    {
+      "name": "README.md",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/README.md",
+      "bytes": 5993,
+      "sha256": "0bdb7f0940d36f526f605fe7373585da58c3da6e4a679fee2aff40374cb1240f"
+    },
+    {
+      "name": "acquire_model.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/acquire_model.py",
+      "bytes": 1989,
+      "sha256": "e192f6fcb1814113c4c110346efa7ecc141e73b88961e826082118a60052da79"
+    },
+    {
+      "name": "alice-heldout.txt",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/alice-heldout.txt",
+      "bytes": 1955,
+      "sha256": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db"
+    },
+    {
+      "name": "alice-provenance.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/alice-provenance.json",
+      "bytes": 979,
+      "sha256": "58047ab67319ff4ad1511508bf8f3cd96afa40ac129e070454e9203b76733741"
+    },
+    {
+      "name": "alice-train.txt",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/alice-train.txt",
+      "bytes": 8697,
+      "sha256": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed"
+    },
+    {
+      "name": "iteration_scheduler.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/iteration_scheduler.py",
+      "bytes": 6587,
+      "sha256": "949e14a72f4b8ea7ea24e973ba7929178f4e60dff037a58c11d128d66b763a20"
+    },
+    {
+      "name": "model-source-report.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/model-source-report.json",
+      "bytes": 1059,
+      "sha256": "e13a9a5010fac493941bd918af38ee9186e7618544888d7be0e0afac196f0819"
+    },
+    {
+      "name": "native_batching.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/native_batching.py",
+      "bytes": 6550,
+      "sha256": "163fa4da06033b246db940dbbf082c385573d52b061a6d3f4f216c722fe4d568"
+    },
+    {
+      "name": "native_study.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/native_study.py",
+      "bytes": 7273,
+      "sha256": "4bc5e9c24e77f339e3d7ce6f43c576381272aed6b74bd7055a1dc3cf4d1083d7"
+    },
+    {
+      "name": "packed_decoder.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/packed_decoder.py",
+      "bytes": 8763,
+      "sha256": "7f61f34fb985ee4e092df3ad986e5bcce7088540c608f93556e88dba18a8a8b6"
+    },
+    {
+      "name": "paged_attention.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/paged_attention.py",
+      "bytes": 5906,
+      "sha256": "8c16b15caadb51ab7cfa94023accc20a81c3c4a15012a268de730b755318cadc"
+    },
+    {
+      "name": "recorded/capstone-results.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/capstone-results.json",
+      "bytes": 17397,
+      "sha256": "f07604e1c4a5a5552d2fdeb2237aed1f976c6c18d5eea969488d0511e0bd93c8"
+    },
+    {
+      "name": "recorded/formatting-correspondence.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/formatting-correspondence.json",
+      "bytes": 4000,
+      "sha256": "4820bf75d140cac19def999311c91f8e37333858925a5e05c7a3ec8bebd81914"
+    },
+    {
+      "name": "recorded/iteration-results.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/iteration-results.json",
+      "bytes": 16615,
+      "sha256": "3e63422806b8705ebed5caf882c69694d0fbc4aefdf5d1ed8d9e11257b832fa2"
+    },
+    {
+      "name": "recorded/native_lifecycle.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/native_lifecycle.json",
+      "bytes": 4481,
+      "sha256": "02d213b16f4259325d6f976a475505d7c152ac1931a986a9acd2501a643bd9a6"
+    },
+    {
+      "name": "recorded/packed-decoder-results.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/packed-decoder-results.json",
+      "bytes": 9667,
+      "sha256": "a877a470f8e021a343f9c885da381f1d60c20d8811c2d5db9bdf6bbc970be4f3"
+    },
+    {
+      "name": "recorded/paged-attention-results.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/paged-attention-results.json",
+      "bytes": 13348,
+      "sha256": "960a7344984f31b81ab4f6bbdfb8ef03ffd9ff240dad062baddbda66d60b2c47"
+    },
+    {
+      "name": "recorded/programs-before-format/iteration_scheduler.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/programs-before-format/iteration_scheduler.py",
+      "bytes": 6028,
+      "sha256": "abc0a75f7e660199048b19eaac125be4caa2f7dbfb1aeba67e4109d2d4eb9a05"
+    },
+    {
+      "name": "recorded/programs-before-format/native_batching.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/programs-before-format/native_batching.py",
+      "bytes": 6244,
+      "sha256": "d074f415b262b7db8c0d01ef8dfdbec035f058aff4697b8bd7be6bea8248a03b"
+    },
+    {
+      "name": "recorded/programs-before-format/native_study.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/programs-before-format/native_study.py",
+      "bytes": 6524,
+      "sha256": "fb9668e332ed6d40facc80341d7b2683fa66a361c509938d4722863869b40e43"
+    },
+    {
+      "name": "recorded/programs-before-format/packed_decoder.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/programs-before-format/packed_decoder.py",
+      "bytes": 7642,
+      "sha256": "a782a849e805b1585b5f245c0941ec3d722b18569cd2ae993afe6f6dbb1899f5"
+    },
+    {
+      "name": "recorded/programs-before-format/paged_attention.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/programs-before-format/paged_attention.py",
+      "bytes": 5314,
+      "sha256": "cdc12cbc657c2642ed4941bcbed9e0a6ee49df64a5cb8c0020f8d14ab10e7777"
+    },
+    {
+      "name": "recorded/programs-before-format/serving_capstone.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/programs-before-format/serving_capstone.py",
+      "bytes": 3369,
+      "sha256": "5f1452ba4c9b142defe9dba0f9a13ce6d562b46ccd4dd754d1a9143d7a732d8e"
+    },
+    {
+      "name": "recorded/programs-before-format/serving_simulation.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/programs-before-format/serving_simulation.py",
+      "bytes": 11103,
+      "sha256": "45fe8d8d724e278243ace6c0693d7436654ad734cf7456978e6ccfca2d502e63"
+    },
+    {
+      "name": "recorded/programs-before-format/shared_pool.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/programs-before-format/shared_pool.py",
+      "bytes": 9753,
+      "sha256": "994e5cb9751932215bcb2acf3c88d7d33cf82c1c8f29e3650c6228c1253411ff"
+    },
+    {
+      "name": "recorded/serving-simulation-results.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/serving-simulation-results.json",
+      "bytes": 120926,
+      "sha256": "807b633c5a99f9d8772cf54fb710555925851d036000b7897c996b6d7a9ae3c1"
+    },
+    {
+      "name": "recorded/shared-pool-results.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/shared-pool-results.json",
+      "bytes": 10884,
+      "sha256": "9d9da75719292703718bcb33a1a2b6176748d8d33b66f90e4538f879f1ede96c"
+    },
+    {
+      "name": "recorded/study-protocol.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/study-protocol.json",
+      "bytes": 9065,
+      "sha256": "c37bd7cf8b8f250ae4b42be870b5038754eaa03c9d6be4bcdd53c6a1fcabf441"
+    },
+    {
+      "name": "recorded/study-results.json",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/research/study-results.json",
+      "bytes": 46915,
+      "sha256": "3b3cdc92987a52f268a4baac414c64c321b385092a27b8803a22710c48a3702c"
+    },
+    {
+      "name": "serving_capstone.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/serving_capstone.py",
+      "bytes": 3404,
+      "sha256": "2de8577164ea8613daceb2dfaa5ab22561187310e70784050a5a98ec77c88c8d"
+    },
+    {
+      "name": "serving_simulation.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/serving_simulation.py",
+      "bytes": 12838,
+      "sha256": "d94d6ed30c241589cb425d9eb350a33c7fb4d1795ab29eb4ba2db4bca9e48c6d"
+    },
+    {
+      "name": "shared_pool.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/shared_pool.py",
+      "bytes": 10194,
+      "sha256": "45653d6a06349fc79b2c37e1e33cda2d963e1777c0fe5edc52b0437357f15f46"
+    },
+    {
+      "name": "tiny_causal_lm.py",
+      "source": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/programs/tiny_causal_lm.py",
+      "bytes": 7626,
+      "sha256": "9b0fe7cd93bf672f9904fc9240fc2857838c9a51015a53942d799d916518e103"
+    }
+  ],
+  "zip_sha256": "30d13ca12cc865db5051abb2dd9a32262f24157f75398c19b308638cc1d42751"
+}

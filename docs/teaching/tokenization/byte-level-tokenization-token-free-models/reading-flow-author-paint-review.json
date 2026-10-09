@@ -1,0 +1,259 @@
+{
+  "date": "2026-10-06",
+  "reviewer": "author-only",
+  "sourceBindings": [
+    {
+      "path": "src/learn/data/topics/byte-level-tokenization.jsx",
+      "sha256": "1ff0da108be3e1f42f9279195dfe1e663eeeab9cf2b98c556182519c66317cae"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx",
+      "sha256": "31a15e92d9fb2b5c055188ce8b71a53f2e112b6433d5fc2be7d61801294dfc92"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationDrawings.jsx",
+      "sha256": "d0ec6629e95a6388a605de91374e90a659e50b38716e0cdca297cfeeefb2623b"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/byte-tokenization-labs.css",
+      "sha256": "f9621bb29043a4c1aca88b1fc5c979631bffefd760bbcf2febeccf2a41f62ff8"
+    },
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "scripts/verify-byte-reading-flow-browser.cjs",
+      "sha256": "d86b271edcc3cc33663662ae111ac3c83174efb0191229a57c04de6671b87709"
+    },
+    {
+      "path": "dist-tokenization-flow/.vite/manifest.json",
+      "sha256": "07a0114e26a7eaf4f3255902d5f229e524f3fa83012db16b5011d92ec61da74e"
+    }
+  ],
+  "coverage": "All 23 distinct default figure jobs opened at least one viewport; selected desktop, narrow and 200% text plus meaningful edited/comparison/invalid states. Every default figure captured at desktop, narrow and 200% text; not every capture was individually opened.",
+  "method": "Final shared build rerun passed nine browser groups and regenerated 81 captures. Of 35 inspected-image jobs, 32 are image-byte identical to previously opened preserved captures; three changed captures (streaming live phone, truncated stream phone and zero-threshold patches desktop) were personally reopened. No new structural, text-clipping or causal-availability finding. Coverage remains all 23 distinct default jobs plus meaningful edits/comparisons/invalid states; not every candidate is individually opened.",
+  "unchangedPaintsAlreadyOpened": [
+    "text-storage-1366-1x",
+    "utf8-packing-390-1x",
+    "byte-pipeline-390-1x",
+    "unicode-live-390-1x",
+    "byte-normalization-768-2x",
+    "byte-merges-390-1x",
+    "byte-state-machine-1366-1x",
+    "byte-targets-768-2x",
+    "byte-masks-390-1x",
+    "byte-loss-1366-1x",
+    "architecture-byt5-390-1x",
+    "architecture-canine-390-1x",
+    "architecture-charformer-1366-1x",
+    "architecture-mambabyte-390-1x",
+    "architecture-blt-390-1x",
+    "byte-uncertainty-1366-1x",
+    "entropy-live-390-1x",
+    "byte-pooling-390-1x",
+    "byte-cost-768-2x",
+    "byte-generation-390-1x",
+    "unicode-invalid-length-desktop",
+    "patch-equality-one-patch-desktop",
+    "architecture-blt-1366-1x",
+    "architecture-byt5-1366-1x",
+    "byte-embedding-390-1x",
+    "byte-metric-390-1x",
+    "unicode-invalid-surrogate-desktop",
+    "unicode-nfc-desktop",
+    "unicode-scientist-phone",
+    "patch-space-uncertain-phone",
+    "byte-embedding-768-2x",
+    "byte-metric-768-2x"
+  ],
+  "inspected": [
+    {
+      "name": "text-storage-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/text-storage-1366-1x.png",
+      "sha256": "ae5ee3ddc9d7b5be00cf732bdfd17a8a1aab30523bc98480c4a7d2da9e66c2c2"
+    },
+    {
+      "name": "utf8-packing-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/utf8-packing-390-1x.png",
+      "sha256": "6f2558299f4eb73e0c013926a2daa4c00d65772d442252bf101bb15039d7aeff"
+    },
+    {
+      "name": "byte-pipeline-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-pipeline-390-1x.png",
+      "sha256": "10b572e9d6bceeb76236e24c741e24f8b75c4217a99bb9e9f99f8b465cc1c863"
+    },
+    {
+      "name": "unicode-live-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-live-390-1x.png",
+      "sha256": "57dc7362ca103d395b24b6d7b7df459b8ed2bfaf76ae796ff1401c99f5be085e"
+    },
+    {
+      "name": "byte-normalization-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-normalization-768-2x.png",
+      "sha256": "3cc0d470c7087100a33e27324df5bb27814c81418295550f5c8f9caab0e97d83"
+    },
+    {
+      "name": "byte-merges-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-merges-390-1x.png",
+      "sha256": "a0cc94cdc1610c5d8a629b0d052e018f232b60fe0de6ff5bc7069c3da4c8b82e"
+    },
+    {
+      "name": "streaming-live-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/streaming-live-390-1x.png",
+      "sha256": "6a72df84e8f8dc4c7aa80cc8a281db5ef70a97561f88648b07d37e7bbfdd4dcf"
+    },
+    {
+      "name": "byte-state-machine-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-state-machine-1366-1x.png",
+      "sha256": "cb5bfed9681f08d2349a1246a26a56dac30eaa19b258960de5226e073506bc95"
+    },
+    {
+      "name": "byte-targets-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-targets-768-2x.png",
+      "sha256": "7fbad2a8cdb1288b2514938741855c60bbb021eafcb68dbc4811b7676053d2fd"
+    },
+    {
+      "name": "byte-masks-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-masks-390-1x.png",
+      "sha256": "6b0cecd6edcd49cc9092e43a0af2bb89b8771688e5d78736a3abd377684c4fd9"
+    },
+    {
+      "name": "byte-loss-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-loss-1366-1x.png",
+      "sha256": "348315f734053abc0169a96caa18eb873ff5d2f3593917252ebe1f51795c55ab"
+    },
+    {
+      "name": "architecture-byt5-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-byt5-390-1x.png",
+      "sha256": "d0420441f12ccfbb9824ceac8d1c55e7d0418634d47dbdb38311734a91e1d6eb"
+    },
+    {
+      "name": "architecture-canine-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-canine-390-1x.png",
+      "sha256": "38eaae0b3f89d8d20259c81524172b3a6b57e05d6fcdc06f43b8ae1586f53244"
+    },
+    {
+      "name": "architecture-charformer-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-charformer-1366-1x.png",
+      "sha256": "74f783a4545edd6740aa835e097e4e7f706c6a0de41a407f0c956708728191a9"
+    },
+    {
+      "name": "architecture-mambabyte-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-mambabyte-390-1x.png",
+      "sha256": "bfe01d680dcbdfce793e37ae9f953bafc632b10dbd39d048fcf20d8cf1f28f43"
+    },
+    {
+      "name": "architecture-blt-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-blt-390-1x.png",
+      "sha256": "286c64caa4e44379928973f5e952ac18114732bf7d3f33523735a035050f5cf2"
+    },
+    {
+      "name": "byte-uncertainty-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-uncertainty-1366-1x.png",
+      "sha256": "76c9fa97e5ee40ff7b087c5b09722eb09492073d887bdb2bc1bd1a51f01608a5"
+    },
+    {
+      "name": "entropy-live-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/entropy-live-390-1x.png",
+      "sha256": "d8b3c821da10ff6b7e95e9b1f9507a74a327aa9ebeeaebca9dac570db0f0e58d"
+    },
+    {
+      "name": "byte-pooling-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-pooling-390-1x.png",
+      "sha256": "2f3b831f8926b17e8ee145ea120b8a9ef5b48f16bc5717cc8922115a2ef00917"
+    },
+    {
+      "name": "byte-cost-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-cost-768-2x.png",
+      "sha256": "372c1afe3aba09510607d72732a6b033aefffc104b66e5d9f43ade307e9318f3"
+    },
+    {
+      "name": "byte-generation-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-generation-390-1x.png",
+      "sha256": "0beec778f2b6c187158edc4fa25bb8fc944510e9e71c32e80dd24e36340e4827"
+    },
+    {
+      "name": "unicode-invalid-length-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-invalid-length-desktop.png",
+      "sha256": "9e8d064a2e87ab0f9e66b93ad906d15e38db0bb09845f39fcadb6acba479c999"
+    },
+    {
+      "name": "stream-truncated-phone",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/stream-truncated-phone.png",
+      "sha256": "505e823c443702636132d954d7bf51e4a60dbfce14c18e04edd4400921bfbca7"
+    },
+    {
+      "name": "patch-equality-one-patch-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/patch-equality-one-patch-desktop.png",
+      "sha256": "0cff5ebcc16177a70761266745e9999b3d9def24db4c66ed8f73e95c954cdf6d"
+    },
+    {
+      "name": "patch-threshold-zero-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/patch-threshold-zero-desktop.png",
+      "sha256": "286464acf9ffb557b98e96866041ff0c2d84b34487d71e3144ef1ef5b8e1f045"
+    },
+    {
+      "name": "architecture-blt-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-blt-1366-1x.png",
+      "sha256": "13fe3c6178fbbc075b23d31f8c824e62c2b63bdab2f406f396f7bd5e6bdd0152"
+    },
+    {
+      "name": "architecture-byt5-1366-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-byt5-1366-1x.png",
+      "sha256": "bec6a1ee619d5532203546cadba2763b862d58e47fed790eed7f18953cc3e151"
+    },
+    {
+      "name": "byte-embedding-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-embedding-390-1x.png",
+      "sha256": "7f6dacd688a0ab6f7b42d3b1199f7dd837d264f1fa34246353f0f18656d39d51"
+    },
+    {
+      "name": "byte-metric-390-1x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-metric-390-1x.png",
+      "sha256": "b1adf29e1feb402e9ae020fbc819af8372466d13c5765eec120a30dd1cc26570"
+    },
+    {
+      "name": "unicode-invalid-surrogate-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-invalid-surrogate-desktop.png",
+      "sha256": "6e7efed78fc2b5a68536a13bae2c0d2869c403334ea8c5a469fc283603907345"
+    },
+    {
+      "name": "unicode-nfc-desktop",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-nfc-desktop.png",
+      "sha256": "0a2a3498578e9d9cb58de822dced4e503cd2e84f0f23e3b6b75a16509e506ccb"
+    },
+    {
+      "name": "unicode-scientist-phone",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-scientist-phone.png",
+      "sha256": "208c8c17977b280259a694ac2129a9d02b0f64900bea887d85e8557c2c9503c5"
+    },
+    {
+      "name": "patch-space-uncertain-phone",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/patch-space-uncertain-phone.png",
+      "sha256": "4f557d6874522a4385996e103385a86303c40a9db6fb9cddd8b900322203eb73"
+    },
+    {
+      "name": "byte-embedding-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-embedding-768-2x.png",
+      "sha256": "3ae62f34d2377a54add328cdd8554f65cad201f90119af0cf0194bb1c3ec66f0"
+    },
+    {
+      "name": "byte-metric-768-2x",
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-metric-768-2x.png",
+      "sha256": "f68651ff6b4d9e1b5c370cff604d8cee1b40daa405480b2ebdc064d5ac0b578d"
+    }
+  ],
+  "findings": [
+    "No unresolved structural, arithmetic, colour-role, clipping or causal-availability issue in inspected final drawings.",
+    "Embedding ID/name and metric label/NLL collisions corrected and re-inspected.",
+    "Minor 1 bytes/1 pairs plural labels remain in extreme-state labels; root accepted this as nonblocking and instructed runtime to remain frozen."
+  ],
+  "limits": "Author heuristic and paint inspection only; no actual novice session or trained-model result. Root owns independent review and final integration.",
+  "priorReceipt": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paint-review.json",
+  "reopenedOnFinalBuild": [
+    "streaming-live-390-1x",
+    "stream-truncated-phone",
+    "patch-threshold-zero-desktop"
+  ]
+}

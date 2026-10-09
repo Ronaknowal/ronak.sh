@@ -16,6 +16,8 @@ Validate mobile layouts and zoom: the controls, relevant input, visual consequen
 
 Visual polish serves comprehension: highlight the current relationship, minimize competing emphasis, keep explanations near the referenced element, and avoid a repeated wall of equally weighted boxes. Do not mistake a consistent component style for a consistent teaching experience.
 
+Review colour as an explanatory encoding using [colour carries conceptual meaning](visuals-and-labs.md#colour-carries-conceptual-meaning). Confirm that the entities being contrasted are visibly distinguishable and retain their mapping across connected views and meaningful edits. Check actual painted marks/text, separate identity from selection or state, and verify labelled scales when hue or intensity encodes quantity. A neutral theme is not a reason to erase useful colour correspondence.
+
 ## 11. Validation and definition of ready for review
 
 This section defines complete implemented-lesson readiness in phase two. At a content-only boundary, apply the research, reasoning and manuscript-completeness requirements above and explicitly defer the implementation checks; do not claim this section has passed.
@@ -39,14 +41,40 @@ Correctness review and learning-experience review are different activities and a
 2. **Cautions.** Is each important caution stated once in a clear home and referred back to, rather than repeated after every result? Does any code print a cautionary sentence?
 3. **Real question.** Does the lesson open with a concrete situation a reader can care about, and return to it with a result the reader can judge? For data methods, is there real data?
 4. **Labs as live investigations.** Does each lab show its current result immediately, with no prediction feature? Do meaningful edits update the mechanism, diagram, numbers and explanation together? Can the learner compare changes and connect them to a decision? Does at least one control act on entities beyond named presets? Was the fixture run under the offered alternatives, including the null case?
-5. **Figures.** For each quantitative figure: is the claimed feature visible at rendered size on desktop and phone? Is the baseline present? Does the caption ever apologize for the figure?
+5. **Figures.** First check [foundational visual coverage](visuals-and-labs.md#foundational-visual-coverage): can a novice point to the object's parts, distinguish inputs/parameters/computed values, follow one operation and locate the object in the larger system? Compare the actual views with the canonical teaching reference, recording concrete missing jobs or adequate alternatives. A behavior plot or table does not automatically cover anatomy or wiring. Then, for each quantitative figure: is the claimed feature visible at rendered size on desktop and phone? Is the baseline present? Does the caption ever apologize for the figure?
 6. **Connections.** Where the same result appears by two routes, is the link stated? Are the canonical reference's headline facts present or deliberately routed? Does each major section follow from an understandable question, with explicit bridges when examples, assumptions or notation change? Are earlier implementations linked precisely, the local new contribution explained, and downstream discoveries saved with their actual disposition?
 7. **Code.** In each displayed program, does the mechanism occupy most of the lines? Is validation separated and minimal?
 8. **Practice.** Do the exercises change the numbers and the context, and does at least one give the learner exact values to reproduce after an independent variation?
 9. **Screenshots.** Were informative states captured and looked at, including meaningful edited inputs, the fixture that shows the contrast, boundary/null results, and the figure at full desktop width?
 10. **Buildup throughout.** At every new conceptual transition—including middle sections, substeps, variants, code choices and deeper branches—can the reader say what question is being answered, what the entities mean, how the operation proceeds and why its result follows? Use the topic's concept map to locate actual explanations, worked intermediates and appropriate visual support. Follow complete examples in reading order without having to discover a later lab state. Record concept-level gaps and their closure, or why existing support suffices. An opening intuition section, lab counts and extra prose are not evidence that the rest of the lesson is understandable.
+11. **Reading flow and presentation.** Does each figure come before (or with) the prose that walks through it, rather than after paragraphs describing it? Do figures and labs sit on the page without card frames, banners or separate headings, so the page reads continuously? Can every part, colour and arrow be read from labels where it appears? Does each lab offer only the controls its stated question needs, placed directly under its visual? Is every section bridged from the previous one, with no term, symbol or control used before it is taught and with explicit references back to earlier material? Check against the module's visual vocabulary. Is each core figure a drawing of the objects (tensors, kernels on cells, widths, branches, matrices) rather than sentences in boxes, and is the real object and the field's canonical picture drawn at least once? Compare the figures side by side with a reference lesson at the same scale. Follow [figures and labs belong to the reading flow](visuals-and-labs.md#figures-and-labs-belong-to-the-reading-flow) and [keep the reading continuous](teaching.md#keep-the-reading-continuous).
+12. **Comprehension check.** Using only the page in reading order and the stated prerequisites, answer one explain, one apply-to-a-changed-case and one diagnose question for each major mechanism. Record where the page fails to support an answer. This approximates a novice; it does not replace observing a real learner.
+13. **Specialist depth.** Compare the lesson with its canonical treatments and coverage map. Is any standard result, derivation, assumption, failure mode, common misconception or current practice that belongs here missing, misstated or covered only in a compressed summary? Is each concept's ladder complete, from intuition through mechanism and formal statement to why it works and where it fails? Is every deeper rung still explained to the lesson's standard? See [go deep on every topic](teaching.md#go-deep-on-every-topic-and-keep-every-layer-easy).
+14. **Colour correspondence.** Can the reader follow the same piece, object, channel, class, process or series through the related representations? Are important alternatives distinguishable, selection cues separate, and numeric colour scales declared? Does the distinction survive reordering, edited inputs, reset and narrow layouts where applicable? If the encoding changes, is the change explained locally? Record a concrete trace and any lost cue; merely listing palette values is not evidence.
+
+For a revision of an existing lesson, also compare its technical claims with the previous version: list claims that were removed, weakened or newly stated, and verify each. Rewrites have repeatedly introduced false statements by dropping a necessary condition. Every check an author's record claims must point to an artifact (screenshot, receipt or command output); unsupported claims are removed from the record, not left as assertions. Browser checks include 768 px with 200% root text by default.
 
 Include an explicit inline-visual reading pass in coverage/pedagogy review: inspect introduction of structures, alternative cases and intermediate transformations, separately from checking that lab controls work. Record concrete omissions and improvements rather than reporting only a lab count. The policy above governs when an inline figure is needed; it does not create a diagram-per-section quota.
+
+In that pass, temporarily disregard the topic's test results and your own subject
+knowledge. Read only in page order: at each new noun, symbol, diagram or control,
+identify the preceding explanation that lets a novice interpret it. Follow the
+first successful example without looking ahead. Report where that breaks—even
+when an expert can infer the missing bridge. Repeat at the major middle and
+advanced transitions. When comparing revisions, explicitly retain the old
+version's useful visual/narrative scaffolding and identify any clarity lost while
+correcting its technical claims. This is a heuristic reading review unless an
+actual learner was observed; passing it does not establish universal usability.
+
+For a material break in that reading, record the exact first-use location, what
+the explanation assumes, where that knowledge is actually taught (or that it is
+missing), and the consequence for the worked example. Close it by tracing the
+revised example from its inputs through the intermediate operation to the result;
+check the connection to notation, code and a changed case where applicable.
+Putting a definition somewhere on the page does not close an ordering failure.
+If such breaks recur across sections, revisit the learning sequence rather than
+approving an introduction-only patch. Unresolved material teaching gaps block
+readiness even when the build, numerical tests and controls all pass.
 
 Check the fit of each representation as well: can a beginner identify the topic's actual entities, perform or follow its operation, and explain the visible consequence? Revise a generic layout when it hides that mechanism, and retain a repeated format when it remains the clearest fit. Confirm that quantitative figures and their adjacent conclusions match the recorded evidence category and scope.
 

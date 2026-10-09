@@ -1,0 +1,42 @@
+{
+  "status": "READY for DIFFERENT entire runtime review; not normal integration",
+  "topic": "mutual-information-information-bottleneck",
+  "author": "/root/causal_whole_review",
+  "acceptedContent": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-accepted-root-r3.json",
+    "sha256": "716256728a34c431c27e862d593ad41325af3fac49b2bcc83ba8c51d3f3791d2",
+    "bytes": 26395
+  },
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private-source-r1.json",
+    "sha256": "aaae304fb2fedd956077f3177cdcbbfa9e0b4431d084e56c069c1ee66a468db5",
+    "bytes": 421852
+  },
+  "authorReport": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-review-r1.md",
+    "sha256": "469d6b5ffa71bf83ccf4a784945ae1928e33173d8dfffeab19b2b13b293e375b",
+    "bytes": 9023
+  },
+  "evidence": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-evidence-r1.json",
+    "sha256": "17335d47efd833632e80442ceabf13f69559f68d37ff9aea1620920489419d50",
+    "bytes": 46063
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5727/learn/topic/mutual-information-information-bottleneck",
+    "session": 89205,
+    "production": "scratch/mi-private-preview/production"
+  },
+  "counts": {
+    "private": 48,
+    "install": 47,
+    "shared": 519,
+    "buildFiles": 580,
+    "mechanisms": 52,
+    "labs": 9,
+    "teachingProgrammes": 14,
+    "payloads": 34,
+    "practice": 16
+  },
+  "boundary": "Root owns canonical/shared/ledger integration; no old scientific mains replayed"
+}

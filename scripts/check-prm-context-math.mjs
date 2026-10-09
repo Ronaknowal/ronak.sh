@@ -1,0 +1,32 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import { parse } from '@babel/parser';
+import { transformSync } from 'esbuild';
+import { format } from '../scratch/lesson-format/standalone.mjs';
+import babel from '../scratch/lesson-format/plugins/babel.mjs';
+import estree from '../scratch/lesson-format/plugins/estree.mjs';
+
+const owner = 'docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm';
+const output = `${owner}/runtime-context-math-successor`;
+const component = 'src/learn/components/lesson-labs/PRMFlow.jsx';
+const hash = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const clean = (value) => Array.isArray(value) ? value.map(clean) : value && typeof value === 'object'
+  ? Object.fromEntries(Object.entries(value).filter(([key]) => !['start', 'end', 'loc', 'extra', 'leadingComments', 'trailingComments', 'innerComments'].includes(key)).map(([key, child]) => [key, clean(child)])) : value;
+const ast = (text) => parse(text, { sourceType: 'module', plugins: ['jsx'] }).program.body;
+const unformatted = fs.readFileSync(component, 'utf8');
+const formatted = await format(unformatted, { parser: 'babel', plugins: [babel, estree], singleQuote: true, printWidth: 100 });
+const compiledAST = (text) => ast(transformSync(text, { loader: 'jsx', jsx: 'automatic' }).code);
+assert.deepEqual(clean(compiledAST(unformatted)), clean(compiledAST(formatted)));
+fs.writeFileSync(component, formatted);
+const name = (node) => node.declaration?.id?.name || node.id?.name || node.declarations?.[0]?.id?.name || `import:${node.source?.value}`;
+const previous = new Map(ast(fs.readFileSync(`${output}/predecessor/PRMFlow.jsx`, 'utf8')).map((node) => [name(node), node]));
+const changes = ast(formatted).filter((node) => !previous.has(name(node)) || JSON.stringify(clean(node)) !== JSON.stringify(clean(previous.get(name(node))))).map(name);
+assert.deepEqual(changes.sort(), ['PRMBranchAnnotation', 'SourceMath', 'SourceText', 'import:../content/Math.jsx'].sort());
+const parent = JSON.parse(fs.readFileSync(`${owner}/runtime-review-successor/inputs.json`));
+const delta = Object.entries(parent.files).filter(([file, expected]) => hash(file) !== expected).map(([file, before]) => ({ path: file, before, after: hash(file) }));
+assert.deepEqual(delta.map((item) => item.path).sort(), [component, 'src/learn/components/lesson-labs/prm-flow.css'].sort());
+const accepted = JSON.parse(fs.readFileSync(`${owner}/content-acceptance.json`));
+for (const [file, expected] of Object.entries(accepted.bindings)) assert.equal(hash(file), expected);
+fs.writeFileSync(`${output}/source-checks.json`, JSON.stringify({ passed: true, fits: 0, parent: hash(`${owner}/runtime-review-successor/inputs.json`), conserved: Object.keys(parent.files).length - 2, acceptedContentConserved: Object.keys(accepted.bindings).length, formatASTEquivalent: true, changedDeclarations: changes, applicationDelta: delta, source: hash(component) }, null, 2) + '\n');
+console.log(JSON.stringify({ passed: true, conserved: Object.keys(parent.files).length - 2, changes, component: hash(component) }));

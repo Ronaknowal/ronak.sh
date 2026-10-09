@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const id='p-tuning-soft-prompt-methods', folder=`docs/teaching/llm-architecture-training/${id}`;
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const packet=`${folder}/content-inputs.json`;
+assert.equal(sha(packet),'c68da5364f422be187c65fd95df12a84b408c88d38fa39e0420c795058a196ef');
+const prepared=JSON.parse(fs.readFileSync(packet));
+assert.equal(Object.keys(prepared.inputs).length,250);
+const checks=JSON.parse(fs.readFileSync(`${folder}/content-review-checks.json`));
+assert.equal(checks.passed,true);assert.equal(checks.conditions,1649);assert.equal(checks.fits,0);
+const files={...prepared.inputs,[packet]:sha(packet)};
+for(const p of [`${folder}/content-review.md`,`${folder}/content-review-checks.json`,'scripts/review-p-tuning-content.py'])files[p]=sha(p);
+for(const[p,h]of Object.entries(files))assert.equal(sha(p),h,p);
+const manifest=`${folder}/content-root-inputs.json`;
+fs.writeFileSync(manifest,JSON.stringify({reviewer:'root',author:'training_author',acceptedAt:new Date().toISOString(),status:'accepted-different-whole-content-review',materialFindings:[],files},null,2)+'\n',{flag:'wx'});
+execFileSync(process.execPath,['scripts/checkpoint-llm-pretraining-content.mjs',id,'lesson.md','p-tuning','655418641e9dc1e04072ecdba6db4f6a71c0c9c709327150b23b2f4d794b38a5',manifest,sha(manifest)],{stdio:'inherit'});

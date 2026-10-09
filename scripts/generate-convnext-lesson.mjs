@@ -2,6 +2,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id = 'convnext-modern-cnn-designs';
+if (readFileSync(`src/learn/data/topics/${id}.jsx`, 'utf8').includes('Reading-flow revision')) {
+  throw new Error('Historical ConvNeXt generator: the current reading-flow lesson is maintained directly. Preserve it; do not regenerate from the older manuscript.');
+}
 let manuscript = readFileSync(`docs/teaching/drafts/${id}/lesson.md`, 'utf8');
 manuscript = manuscript.replace(/<details><summary>(.*?)<\/summary>(.*?)<\/details>/g, '<details>\n<summary>$1</summary>\n\n$2\n\n</details>');
 const rendered = renderPreparedLesson(manuscript, { preserveOpeningFrom: `src/learn/data/topics/${id}.jsx`,

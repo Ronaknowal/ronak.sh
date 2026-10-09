@@ -1,0 +1,16 @@
+{
+  "dataset": "Iris",
+  "creator": "Fisher, R. (1936)",
+  "publisher": "UCI Machine Learning Repository",
+  "doi": "https://doi.org/10.24432/C56C76",
+  "metadata": "https://www.archive.ics.uci.edu/dataset/53/iris",
+  "fileUrl": "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data",
+  "retrieved": "2026-10-06",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "file": "iris.data",
+  "sha256": "6f608b71a7317216319b4d27b4d9bc84e6abd734eda7872b71a458569e2656c0",
+  "changes": "None; exact official file bytes preserved. Program selects setosa sepal lengths in centimeters.",
+  "split": "Use original 1-based within-setosa row numbers divisible by 5 as held-out data: 10 held out, remaining 40 train.",
+  "limitations": "Reproducible teaching split; historical row order is not randomization and does not establish independent representative sampling. Normal distribution is a scoped approximation with negative-length support. UCI documents feature corrections in other columns; this exercise does not alter the original file."
+}

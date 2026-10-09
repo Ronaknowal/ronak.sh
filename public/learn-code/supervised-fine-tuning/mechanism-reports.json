@@ -1,0 +1,761 @@
+{
+  "objective-report.json": {
+    "sha256": "e63290d8b9036ddde70712a2b02a435ef1b22914424f5c78ddaf0c2aac498a58",
+    "report": {
+      "checks": [
+        "Uniform and hand-calculated two-target losses",
+        "All shifted logit derivatives match Torch in three reductions",
+        "Every embedding/head derivative, ignored direct loss, context credit and SGD",
+        "Stable shifted logits, zero-target and nonfinite rejection"
+      ],
+      "finite_difference_max_error": 1.480461777475517e-10,
+      "before_loss": 1.891815432870422,
+      "after_loss": 1.887540431237169,
+      "prompt_embedding_gradient": [
+        0.01905422493628704,
+        -0.030654563967995728,
+        -0.04170408926195465
+      ],
+      "updated": {
+        "embedding": [
+          [
+            -0.191198196907968,
+            0.4290441256340692,
+            0.05390067551696626
+          ],
+          [
+            -0.5629151351911712,
+            0.08879187528363128,
+            0.03122685504227757
+          ],
+          [
+            -0.08328318212335935,
+            -0.5367994422491728,
+            0.42798552097719533
+          ],
+          [
+            -0.2945441904762656,
+            0.6361196331757973,
+            -0.25980718394623464
+          ],
+          [
+            0.01256021302707348,
+            -0.018476307181606044,
+            0.0629413502565733
+          ],
+          [
+            1.057366004016792,
+            -0.1993151217882411,
+            0.8277829415784921
+          ],
+          [
+            0.24938328966996148,
+            -0.27800301641953035,
+            0.502224184354025
+          ]
+        ],
+        "head": [
+          [
+            0.255486972009107,
+            0.28989079808663354,
+            -0.39622293986200363,
+            0.15407774058165902,
+            -0.13091049913307917,
+            -0.050094474364995,
+            -0.0358429926263674
+          ],
+          [
+            0.010471753901174856,
+            0.47523338561709805,
+            0.11141190389209056,
+            -0.5551540793896745,
+            0.3795409740364322,
+            0.03020487899155007,
+            0.03753995577751074
+          ],
+          [
+            -0.5487619660102073,
+            0.11908723547043566,
+            -0.15062406320077154,
+            0.28592269367406753,
+            0.13890886054799198,
+            0.2504225480838121,
+            -0.11276227001729736
+          ]
+        ]
+      }
+    }
+  },
+  "data-program-report.json": {
+    "sha256": "5473751fc8cde31c925dba801b0443e02d8dfc068149f0cb79986409afc41803",
+    "report": {
+      "checks": [
+        "All real joint prompt prefixes",
+        "EOS/PAD positional collision",
+        "Full versus response counts",
+        "All/final assistant spans",
+        "Overlength rejection",
+        "Actual BPE merge crossing fragment boundary"
+      ],
+      "rows": 1052,
+      "maximum_length": 47,
+      "eos": 0,
+      "source": {
+        "counts": {
+          "train": {
+            "positive": 133,
+            "no impact": 555,
+            "negative": 155
+          },
+          "dev": {
+            "no impact": 69,
+            "positive": 17,
+            "negative": 19
+          },
+          "test": {
+            "no impact": 69,
+            "positive": 16,
+            "negative": 19
+          }
+        },
+        "normalized_exact_collisions": [],
+        "limitation": "No poem identifiers; exact text checks cannot establish poem-level or semantic independence."
+      },
+      "fixture": {
+        "input_ids": [
+          [
+            6,
+            1,
+            2,
+            3,
+            4,
+            0,
+            0
+          ],
+          [
+            6,
+            1,
+            2,
+            3,
+            5,
+            4,
+            0
+          ]
+        ],
+        "attention_mask": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "labels": [
+          [
+            -100,
+            -100,
+            -100,
+            -100,
+            4,
+            0,
+            -100
+          ],
+          [
+            -100,
+            -100,
+            -100,
+            -100,
+            5,
+            4,
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "batching-report.json": {
+    "sha256": "b3926d27f71bdbd6390b725a863cc2f3da14d21c9b1ac70c48f15a563c7cd66e",
+    "report": {
+      "checks": [
+        "Separate versus packed every valid logit, mean loss, all parameter gradients and SGD update",
+        "Native scaled-dot-product attention parity with explicit block mask",
+        "Ordinary causal packing and nonreset positions fail independently",
+        "Unequal-target weighted accumulation matches all gradients/update; naive mean-of-means fails"
+      ],
+      "torch": "2.14.0+cpu",
+      "target_counts": [
+        2,
+        4
+      ],
+      "loss": 2.543199837765957,
+      "all_parameter_gradient_error": 1.1102230246251565e-16,
+      "update_error": 2.7755575615628914e-17,
+      "accumulation_error": 5.551115123125783e-17,
+      "naive_accumulation_gradient_error": 0.138330382633592,
+      "cross_record_logit_error": 0.3055464283673449,
+      "nonreset_position_logit_error": 1.6694196226886968,
+      "packed_ids": [
+        [
+          1,
+          2,
+          3,
+          4,
+          0,
+          1,
+          6,
+          7,
+          8,
+          9,
+          10,
+          0
+        ]
+      ],
+      "packed_labels": [
+        [
+          -100,
+          -100,
+          -100,
+          4,
+          0,
+          -100,
+          -100,
+          -100,
+          8,
+          9,
+          10,
+          0
+        ]
+      ],
+      "packed_positions": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "allowed": [
+        [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ]
+    }
+  },
+  "evaluation-contract-successor.json": {
+    "sha256": "8f6a6fc1478b0a5169ab21d4303ca203934555d3c36cf37ec969c3bb58ecdf28",
+    "report": {
+      "checks": [
+        "Invalid-output confusion and macro-F1",
+        "Zero-denominator F1 convention",
+        "Pooled NLL invariant to unequal batch target counts and genuine EOS=PAD",
+        "Full-vocabulary greedy uses last valid positions for unequal prompts, independent EOS stops and unmapped IDs",
+        "EOS stop and valid label are distinct under the generation cap"
+      ],
+      "metrics": {
+        "gold_order": [
+          "negative",
+          "no impact",
+          "positive"
+        ],
+        "prediction_order": [
+          "negative",
+          "no impact",
+          "positive",
+          "invalid"
+        ],
+        "confusion": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "accuracy": 0.5,
+        "class_f1": [
+          0.5,
+          0.0,
+          1.0
+        ],
+        "macro_f1": 0.5,
+        "valid_label_rate": 0.75
+      },
+      "uniform": {
+        "nll_sum": 14.387371636790224,
+        "targets": 6,
+        "nll": 2.3978952727983707,
+        "records": 2,
+        "rows": [
+          {
+            "id": "a",
+            "nll_sum": 4.795790545596741,
+            "targets": 2,
+            "nll": 2.3978952727983707
+          },
+          {
+            "id": "b",
+            "nll_sum": 9.591581091193483,
+            "targets": 4,
+            "nll": 2.3978952727983707
+          }
+        ]
+      },
+      "generated_fixture": [
+        {
+          "id": "short",
+          "gold": "negative",
+          "ids": [
+            5,
+            0
+          ],
+          "text": "negative",
+          "unmapped_ids": [],
+          "prediction": "negative",
+          "eos_stopped": true
+        },
+        {
+          "id": "long",
+          "gold": "no impact",
+          "ids": [
+            6,
+            7,
+            0
+          ],
+          "text": "no impact",
+          "unmapped_ids": [],
+          "prediction": "no impact",
+          "eos_stopped": true
+        },
+        {
+          "id": "unmapped",
+          "gold": "positive",
+          "ids": [
+            14,
+            0
+          ],
+          "text": null,
+          "unmapped_ids": [
+            14
+          ],
+          "prediction": "invalid",
+          "eos_stopped": true
+        }
+      ],
+      "capped_fixture": [
+        {
+          "id": "short",
+          "gold": "negative",
+          "ids": [
+            5
+          ],
+          "text": "negative",
+          "unmapped_ids": [],
+          "prediction": "negative",
+          "eos_stopped": false
+        },
+        {
+          "id": "long",
+          "gold": "no impact",
+          "ids": [
+            6
+          ],
+          "text": "no",
+          "unmapped_ids": [],
+          "prediction": "invalid",
+          "eos_stopped": false
+        }
+      ]
+    }
+  },
+  "native-trainer-report.json": {
+    "sha256": "b947f8d840a6e481b7ca6f2faa41087406f7ffe330d546e944ebbc1a90c76580",
+    "report": {
+      "versions": {
+        "torch": "2.14.0+cpu",
+        "transformers": "5.19.0",
+        "trl": "1.14.2"
+      },
+      "checks": [
+        "Actual raw prompt/completion preparation preserves genuine EOS and ignores padding",
+        "Native/scratch shifted loss and every parameter gradient agree",
+        "Actual one-step SFTTrainer SGD equals explicit update; saved/reloaded logits exact",
+        "Text-only schema changes target count from5 to9",
+        "Actual generation-aware chat template selects all assistant content/EOS only"
+      ],
+      "batch": {
+        "input_ids": [
+          [
+            2,
+            3,
+            4,
+            5,
+            0,
+            0
+          ],
+          [
+            2,
+            3,
+            6,
+            8,
+            9,
+            0
+          ]
+        ],
+        "labels": [
+          [
+            -100,
+            -100,
+            -100,
+            5,
+            0,
+            -100
+          ],
+          [
+            -100,
+            -100,
+            -100,
+            8,
+            9,
+            0
+          ]
+        ],
+        "attention_mask": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "scratch_loss": 2.5878851413726807,
+      "native_loss": 2.5878851413726807,
+      "gradient_error": 0.0,
+      "update_error": 1.862645149230957e-09,
+      "native_train": {
+        "train_runtime": 0.0191,
+        "train_samples_per_second": 104.824,
+        "train_steps_per_second": 52.412,
+        "train_loss": 2.5878851413726807,
+        "entropy": 2.5631680488586426,
+        "mean_token_accuracy": 0.0,
+        "num_tokens": 11.0,
+        "epoch": 1.0
+      },
+      "response_targets": 5,
+      "text_targets": 9,
+      "assistant_record": {
+        "messages": [
+          {
+            "content": "blue",
+            "role": "user"
+          },
+          {
+            "content": "negative",
+            "role": "assistant"
+          },
+          {
+            "content": "red",
+            "role": "tool"
+          },
+          {
+            "content": "positive",
+            "role": "assistant"
+          }
+        ],
+        "input_ids": [
+          10,
+          4,
+          0,
+          11,
+          5,
+          0,
+          12,
+          6,
+          0,
+          11,
+          7,
+          0
+        ],
+        "labels": [
+          -100,
+          -100,
+          -100,
+          -100,
+          5,
+          0,
+          -100,
+          -100,
+          -100,
+          -100,
+          7,
+          0
+        ]
+      },
+      "assistant_selected_ids": [
+        5,
+        0,
+        7,
+        0
+      ]
+    }
+  },
+  "study-program-preflight.json": {
+    "sha256": "8f63807e0d41acaa325aa7d47d8a27da856f700bc0b29e2c91e656a7bba5eb51",
+    "report": {
+      "checks": [
+        {
+          "policy": "response",
+          "native_loss": 7.182507514953613,
+          "explicit_loss": 7.182507514953613,
+          "targets": 21,
+          "all_parameter_gradients_finite": true
+        },
+        {
+          "policy": "full",
+          "native_loss": 5.955897331237793,
+          "explicit_loss": 5.955897331237793,
+          "targets": 261,
+          "all_parameter_gradients_finite": true
+        }
+      ],
+      "plans": {
+        "17": {
+          "steps": 200,
+          "presentations": 1595,
+          "last_full_epoch_batch": 3
+        },
+        "29": {
+          "steps": 200,
+          "presentations": 1595,
+          "last_full_epoch_batch": 3
+        },
+        "43": {
+          "steps": 200,
+          "presentations": 1595,
+          "last_full_epoch_batch": 3
+        }
+      },
+      "optimizer_steps": 0,
+      "weights_unchanged": true,
+      "bindings": {
+        "public/learn-code/supervised-fine-tuning/sft_objective.py": "430cadc1885d1989490147356008e2d46bd02e5bc5e512d2b8220fe7cd5c9a45",
+        "public/learn-code/supervised-fine-tuning/sft_data.py": "a3bbbb7ff6db8b7a48f1327dc7fc0bd1313d7fb07d19041a11f4b816e87aeaab",
+        "public/learn-code/supervised-fine-tuning/sft_batching.py": "08a3db0c9dce034312dbb5ae3b6f11149b2785f0d2fc005300732d4faea970f4",
+        "public/learn-code/supervised-fine-tuning/sft_study.py": "b228fe70b136b7e2a39b141ead784a4707663f605cfa2b94128fbdcb7b7105e8",
+        "public/learn-code/supervised-fine-tuning/sft_trl.py": "87c3e8ed06d4397b43c6183a8bf81fe0056eb549c560c9479f04b6a557fd3f64",
+        "public/learn-code/supervised-fine-tuning/sft_evaluate.py": "ff392707272355cbda4bd0ca7fa24066416802e05274dc7e1880b0c29ed8216b",
+        "scripts/verify-sft-study-preflight.py": "ce638a568838d7a18edad26f58d879d319488540a7db5c6938c9740136df2171"
+      }
+    }
+  }
+}

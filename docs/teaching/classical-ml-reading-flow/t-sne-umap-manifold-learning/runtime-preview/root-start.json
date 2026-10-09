@@ -1,0 +1,497 @@
+{
+  "status": "CURRENT_CONTENT_COMPLETE_PRIVATE_IMPLEMENTATION_STARTED",
+  "at": "2026-10-09T09:26:08.798Z",
+  "topicId": "t-sne-umap-manifold-learning",
+  "revision": 5,
+  "intake": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/complete-content-intake.json",
+    "bytes": 20104,
+    "sha256": "12de09fb26c252a1f1dc166f1e720589610c8d868e56b37884be23bec2f83c8f"
+  },
+  "acceptedContent": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-accepted-root.json",
+    "bytes": 64231,
+    "sha256": "d66262456b882a85a7b9e17ecae91b8ef44af6c4e8edfc1f63ac314ae4b4e36c"
+  },
+  "checkedCurrentIntakeBindings": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/reading-flow-manuscript.md",
+      "bytes": 138332,
+      "sha256": "8d1c32dc7cf8de49b99fd6198671927c52196d7ac5714dd0ec90c70eebfbbec5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/visual-and-investigation-specifications.md",
+      "bytes": 45697,
+      "sha256": "07aee732555d0a30e519fa7feb1687d58837d4b232640a337b0e500de5a217b3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/content-map.json",
+      "bytes": 25152,
+      "sha256": "5fd95e3e7e82523a100d15558a813d728346916772c99fae288408ad92a3367c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/code-presentation-index.json",
+      "bytes": 19011,
+      "sha256": "c145124371947e4e6db3b0dd980099a00db64012d1a44b2688d72c8aa84bfb13"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/file-index.json",
+      "bytes": 16604,
+      "sha256": "8db1deee1ea7228840793fe60153be8b7823e4504c04c66c04e4fc6518b12b7e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+      "bytes": 15754,
+      "sha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/setup-and-files.md",
+      "bytes": 7557,
+      "sha256": "0b11d995f5822d5f5e0182db03248bbad23f8030acc0f2adcc2dd3515635d72c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/current-api-and-resource-notes.md",
+      "bytes": 5219,
+      "sha256": "f13c791133b5ca15397dc965308bed3482c5bcd5547872b7e93d94b8b8f88ed3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-reading-and-handoff.md",
+      "bytes": 12500,
+      "sha256": "382bec71a8dfddce9a95b27ed8f950322963621f11f4e6693295d33085ec975a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-ready.json",
+      "bytes": 7336,
+      "sha256": "76a3db64bd01e30fc35517701108f37d4cb23b227e6db811ffea32020104c545"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-accepted-root.json",
+      "bytes": 64231,
+      "sha256": "d66262456b882a85a7b9e17ecae91b8ef44af6c4e8edfc1f63ac314ae4b4e36c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/audit_saved_neighbors.py",
+      "bytes": 4586,
+      "sha256": "21246557a18f1b495196f65a73804eebb9e956a19e7946fc7d98bfe3ceb527b0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/classical_geometry.py",
+      "bytes": 4114,
+      "sha256": "0cd7ae86ddbba606da79acbdd8d269608fd37b91256ae63db8579e4faaef42d6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/programs/gaussian_rows.py",
+      "bytes": 3070,
+      "sha256": "22b027b6683bc6a106da83f0d478fb3c1ca700a1556242e44f423de2a9fdd63e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/graph_spectrum.py",
+      "bytes": 2603,
+      "sha256": "f48eefd33c78bd4e24bbc876f0dce2fd4b435b66e37e38a78c8c6c310fee5965"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/isomap_routes.py",
+      "bytes": 2854,
+      "sha256": "d4aa583b327c37566c120c80ae534cddef48092d808c2ab45a43816e84b5af05"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/lle_recipes.py",
+      "bytes": 3239,
+      "sha256": "ff115c9c9d62262ba8192fad62d0157c024d674256c58cedaa61e105bf17c378"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/local_density_radius.py",
+      "bytes": 2138,
+      "sha256": "166ed917a514c08ab7e9620b475c42f78e78e70c403d081644d1afa62e24dfe1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/local_tangent_patch.py",
+      "bytes": 2989,
+      "sha256": "c7eae35d006b759f42e061def70c9928242a52fc30dc34c3fb61f37e80d4453b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/reference_map_routes.py",
+      "bytes": 3842,
+      "sha256": "96d065b7c9cf119002e89d3cf508f788a4918bcec38d4fa993839f570aef7ac9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/sampled_pair_events.py",
+      "bytes": 2473,
+      "sha256": "a6a56714b6b88cd846437b52d844a8aa01db774dc66050bdec67cca563cc57a9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/compare_transforms.py",
+      "bytes": 1095,
+      "sha256": "1e6b522a310b7d4de580754e071bd0f195ebde6f38b8ba4050a94c98076608b7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/inspect_digits.py",
+      "bytes": 1243,
+      "sha256": "19973ec6d6ecf8bf74cfda89a3bedd5b223ecb33a8587a01d5173766b995d111"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/inspect_umap.py",
+      "bytes": 1043,
+      "sha256": "21541157bdf2626cc494ce772d68638431dc9daca576f10ba88f24832bd58595"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/tiny_tsne.py",
+      "bytes": 1523,
+      "sha256": "b1f1660c9bb9da66aa7edb5a928a95b489da6e73c8d6d3edd4b47d9dcc3e7d53"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/umap-mechanism.py",
+      "bytes": 6947,
+      "sha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/calculated-inputs.json",
+      "bytes": 125183,
+      "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/data-provenance.md",
+      "bytes": 6097,
+      "sha256": "b48bdb1363b8e9123b3405d231a0c40172be8cbd947ce2c21a300ea68d210f6e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/runtime-versions.json",
+      "bytes": 230,
+      "sha256": "6d50b51386a007ff43f7c2983cb1dab72b75958c46c6b3a299a942ab9d1b2f46"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/umap-digits.csv",
+      "bytes": 30448,
+      "sha256": "57a6ec04fca5c3739a49402bb5b06a9688664c38c5b2017065dd70918e380c01"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/audit_saved_neighbors.txt",
+      "bytes": 1034,
+      "sha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/classical_geometry.txt",
+      "bytes": 460,
+      "sha256": "eaebb28b62c1c3044269372513bdcffa665ae267c578d27c88207377be7f600e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/gaussian_rows.txt",
+      "bytes": 1050,
+      "sha256": "86f66f5dd88b8f6d66a5bc875464b5359f3d85aed14d0f8e1f58196430f60482"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/graph_spectrum.txt",
+      "bytes": 168,
+      "sha256": "2f0768aca4ec37081344442250d5651292aa3aac0363d935af84465ff71b3052"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/isomap_routes.txt",
+      "bytes": 478,
+      "sha256": "927a07922cc9c0fe80eed41244cf44d0151d9296333eb32b358b9a5d16288e63"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/lle_recipes.txt",
+      "bytes": 426,
+      "sha256": "a11bbb8992488dd8bd7e7d361709f78301c80c5f3d32e1045156d87cc6969539"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/local_density_radius.txt",
+      "bytes": 294,
+      "sha256": "a818a30441964c4ca1032ad41f705e3c7b21141f32fe4aaeffafa8f2e3d71c0d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/local_tangent_patch.txt",
+      "bytes": 202,
+      "sha256": "dc02cd27e0e74b51bd9d7ca48268737aeb1945fa072a6613315a209f6dfa0893"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/reference_map_routes.txt",
+      "bytes": 80,
+      "sha256": "721d27d5db1f4620819ff56a1c085e088408917aa1cac5be631f229431659d83"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-compare_transforms.txt",
+      "bytes": 70,
+      "sha256": "ae1d22ebf46557c88492627eb984ae4a7600070a33c43f98b6364bddefce6b04"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-inspect_digits.txt",
+      "bytes": 124,
+      "sha256": "f7aba164ab1607a1a75b7bb250e98ba7802e4f0c86943dfb30912d47277bad32"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-inspect_umap.txt",
+      "bytes": 38,
+      "sha256": "8e70f3d0787ca9597e3807eba7ae66966487ea7687e505581d484eb267635aa7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-tiny_tsne.txt",
+      "bytes": 80,
+      "sha256": "eda61654eb0ca052d4469c80532e2a5ff5a0f81f42f74602f381c0ade3095841"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-umap-mechanism.txt",
+      "bytes": 259,
+      "sha256": "a5acbbbf1dc23667b42d1a6b9921b05669e94e5cf5e10cba18d6e2ec1194755f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/sampled_pair_events.txt",
+      "bytes": 323,
+      "sha256": "39ed590e69e1f9f7dafc29c762cb88728670740430c6cdede7d850cc3fc5706e"
+    }
+  ],
+  "rootReading": "Complete intake metadata and scope/reading/qualification statements; actual46 input/payload identities checked. Author entire human intake is attributed to author, not Root.",
+  "foreignRowsUnchanged": 234,
+  "historyAndContentUnchanged": true,
+  "effectiveState": {
+    "revision": 5,
+    "deliveryMode": "full",
+    "content": "complete",
+    "implementation": "in-progress",
+    "recordedContent": "complete",
+    "recordedImplementation": "in-progress",
+    "canFinish": true,
+    "record": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/reading-flow-revision.md",
+    "contentFiles": [
+      "docs/teaching/classical-ml-reading-flow/gaussian-mixture-models-gmm-em-algorithm/publication/root-normal-integration-acceptance.json",
+      "docs/teaching/classical-ml-reading-flow/gaussian-mixture-models-gmm-em-algorithm/publication/root-private-runtime-acceptance.json",
+      "docs/teaching/classical-ml-reading-flow/k-means-hierarchical-clustering/publication/root-normal-integration-acceptance.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/assessment-and-continuity.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/catalogue-selected.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/assemble-code.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/author-reading-and-handoff.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/author-ready.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/check-new-mechanisms.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/check-contrastive-prose.cjs",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/check-prose-intermediates.cjs",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/classical-geometry-checked-predecessor.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/complete-content-source-check.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/complete-successor-prose.cjs",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/draft-checkpoint.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/draft-file-map.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/freeze-complete-content.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/freeze-draft.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/freeze-newline-assumption-predecessor.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/manuscript-draft-predecessor.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/programmes-file-map.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/programmes-written.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/prose-exact-float-assumption-predecessor.cjs",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/successor-source-delta.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/code-presentation-index.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/content-map.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/contrastive-prose-arithmetic.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/current-api-and-resource-notes.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/calculated-inputs.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/data-provenance.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/digits-300.csv",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/runtime-versions.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/umap-digits.csv",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/file-index.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/freeze-intake.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/iteration-limit-arithmetic.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review-packet-source-bound.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/same-correction-closure/check-closure.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/same-correction-closure/freeze-review.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/same-correction-closure/review-packet.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/same-correction-closure/review.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/same-correction-closure/source-and-protocol-check.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/source-binding-check.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/intake.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/new-mechanisms-check.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/audit_saved_neighbors.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/classical_geometry.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/gaussian_rows.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/graph_spectrum.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/isomap_routes.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/lle_recipes.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/local_density_radius.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/local_tangent_patch.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/reference_map_routes.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-compare_transforms.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-inspect_digits.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-inspect_umap.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-tiny_tsne.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/retained-umap-mechanism.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/sampled_pair_events.txt",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/audit_saved_neighbors.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/classical_geometry.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/gaussian_rows.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/graph_spectrum.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/isomap_routes.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/lle_recipes.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/local_density_radius.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/local_tangent_patch.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/reference_map_routes.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/sampled_pair_events.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/prose-intermediates.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/reading-flow-manuscript.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/compare_transforms.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/inspect_digits.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/inspect_umap.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/tiny_tsne.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/retained-programs/umap-mechanism.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/amend-content.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/assemble-code.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-reading-and-handoff.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-ready.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/check-gaussian-row.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/code-presentation-index.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/content-map.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/current-api-and-resource-notes.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/descriptor-role-predecessor/assemble-code.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/descriptor-role-predecessor/author-ready.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/descriptor-role-predecessor/code-presentation-index.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/descriptor-role-predecessor/content-map.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/descriptor-role-predecessor/file-index.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/descriptor-role-predecessor/program-bundle.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/descriptor-role-predecessor/retained-files.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/descriptor-role-predecessor/source-binding-check.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/exact-source-delta.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/file-index.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/freeze-source.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/gaussian-row-check.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/programs/gaussian_rows.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/reading-flow-manuscript.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/setup-and-files.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/source-binding-check.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/visual-and-investigation-specifications.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/setup-and-files.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/visual-and-investigation-specifications.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-accepted-root.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/author-ready-packet.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/compose.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/mds-contract-amendment.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/source-check.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/source-delta.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-arithmetic.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-arithmetic.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/freeze-design.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/packet.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/review.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/same-api-closure/observations.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/same-api-closure/packet.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/same-api-closure/report.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/check-design.mjs",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/checks.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/execution.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/freeze-review.mjs",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/packet.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/review.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/source-reading.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/inspect-intake.mjs",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/intake-inspection.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-programs-and-practice.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-proposed-design.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-research.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/author-checks.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/browser-checks.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/independent-checks.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/independent-review.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/review.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/calculated-inputs.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/content-calculations.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/data-provenance.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/digits-300.csv",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/lesson.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/visual-specifications.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-data.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-independent-technical-review.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-integration.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-models.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-native.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/MANIFOLD-LEARNING-LESSON-DESIGN.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/topic-notes/t-sne-umap-manifold-learning.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/calculated-inputs.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/compare_transforms.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/data-provenance.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/digits-300.csv",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/inspect_digits.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/inspect_umap.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/runtime-versions.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/tiny_tsne.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/umap-digits.csv",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/umap-mechanism.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/selected-ledger-row.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/manifold-figures.css",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/manifold-labs.css",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/manifold-lesson.css",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/ManifoldFigures.jsx",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/ManifoldLabs.jsx",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/ManifoldShared.jsx",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/manifold-data.js",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/manifold-examples.js",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/manifold-mechanism-program.js",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/manifold-models.js",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/preserve-inputs.py",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/programs-and-practice.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/proposed-design-packet.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/proposed-design.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/research.md",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/source-conservation.json",
+      "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/author-checks.json",
+      "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/browser-checks.json",
+      "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/independent-checks.json",
+      "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/independent-review.md",
+      "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/review.md",
+      "docs/teaching/drafts/t-sne-umap-manifold-learning/calculated-inputs.json",
+      "docs/teaching/drafts/t-sne-umap-manifold-learning/content-calculations.py",
+      "docs/teaching/drafts/t-sne-umap-manifold-learning/data-provenance.md",
+      "docs/teaching/drafts/t-sne-umap-manifold-learning/digits-300.csv",
+      "docs/teaching/drafts/t-sne-umap-manifold-learning/lesson.md",
+      "docs/teaching/drafts/t-sne-umap-manifold-learning/visual-specifications.md",
+      "docs/teaching/evidence/manifold-data.json",
+      "docs/teaching/evidence/manifold-independent-technical-review.md",
+      "docs/teaching/evidence/manifold-integration.json",
+      "docs/teaching/evidence/manifold-models.json",
+      "docs/teaching/evidence/manifold-native.json",
+      "docs/teaching/MANIFOLD-LEARNING-LESSON-DESIGN.md",
+      "docs/teaching/topic-notes/t-sne-umap-manifold-learning.md",
+      "public/learn-assets/manifold-learning/calculated-inputs.json",
+      "public/learn-assets/manifold-learning/compare_transforms.py",
+      "public/learn-assets/manifold-learning/data-provenance.md",
+      "public/learn-assets/manifold-learning/digits-300.csv",
+      "public/learn-assets/manifold-learning/inspect_digits.py",
+      "public/learn-assets/manifold-learning/inspect_umap.py",
+      "public/learn-assets/manifold-learning/runtime-versions.json",
+      "public/learn-assets/manifold-learning/tiny_tsne.py",
+      "public/learn-assets/manifold-learning/umap-digits.csv",
+      "public/learn-assets/manifold-learning/umap-mechanism.py",
+      "src/app/SiteRoutes.jsx",
+      "src/learn/components/content/Headings.jsx",
+      "src/learn/components/lesson-labs/manifold-figures.css",
+      "src/learn/components/lesson-labs/manifold-labs.css",
+      "src/learn/components/lesson-labs/manifold-lesson.css",
+      "src/learn/components/lesson-labs/ManifoldFigures.jsx",
+      "src/learn/components/lesson-labs/ManifoldLabs.jsx",
+      "src/learn/components/lesson-labs/ManifoldShared.jsx",
+      "src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+      "src/learn/data/curriculum/learning-paths.js",
+      "src/learn/data/generated/lesson-imports.js",
+      "src/learn/data/generated/navigation.js",
+      "src/learn/data/manifold-data.js",
+      "src/learn/data/manifold-examples.js",
+      "src/learn/data/manifold-mechanism-program.js",
+      "src/learn/data/manifold-models.js",
+      "src/learn/data/topics/clustering-evaluation-validation-silhouette-ari-nmi.jsx",
+      "src/learn/data/topics/independent-component-analysis-ica.jsx",
+      "src/learn/data/topics/k-means-hierarchical-clustering.jsx",
+      "src/learn/data/topics/pca-dimensionality-reduction.jsx",
+      "src/learn/data/topics/support-vector-machines-svm.jsx",
+      "src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-accepted-root.json",
+      "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/checkpoints/pre-content-acceptance-record.md"
+    ],
+    "nextAction": "Complete the privately authored entire13-section/45-drawing/12-investigation reader, source/output/practice/file delivery and author/model/native review, then DIFFERENT entire review and Root normal integration; preserve original scientific and execution-role qualifications."
+  },
+  "nativeOrRuntimeAcceptance": false,
+  "scienceReplayed": false
+}

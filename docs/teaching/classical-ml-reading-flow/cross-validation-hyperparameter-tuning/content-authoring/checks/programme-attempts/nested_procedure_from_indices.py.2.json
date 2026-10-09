@@ -1,0 +1,40 @@
+{
+  "schema": "classical21-new-programme-execution/v1",
+  "at": "2026-10-09T17:25:02.086770+00:00",
+  "source": {
+    "file": "nested_procedure_from_indices.py",
+    "bytes": 4433,
+    "sha256": "e45f35b38254b1918cc1e025b3e1bd9569b86e20133897d4f01e881fdc0a5593"
+  },
+  "python": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+  "command": [
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\content-authoring\\programmes\\nested_procedure_from_indices.py"
+  ],
+  "dependencies": [
+    {
+      "file": "fold_fitted_pipeline.py",
+      "bytes": 11262,
+      "sha256": "e26e2d319ed6783319e394c49b0137d8eed6d14469ec1b5ad9b431797a95ebfa"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1"
+  },
+  "returncode": 0,
+  "stdout": {
+    "file": "nested_procedure_from_indices.py.2.stdout.txt",
+    "bytes": 12386,
+    "sha256": "10c40e913918243101db406891255c5500f11551735e9aaa476a76793f8f5a12"
+  },
+  "stderr": {
+    "file": "nested_procedure_from_indices.py.2.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "One new constructed educational programme; no retained science or checker execution"
+}

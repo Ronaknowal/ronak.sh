@@ -1,0 +1,176 @@
+.ensemble-flow-figure {
+  margin: 1.6rem 0;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--learn-border, #34343b);
+  border-bottom: 1px solid var(--learn-border, #34343b);
+  min-width: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.ensemble-flow-figure figcaption {
+  margin-bottom: 1rem;
+  font-weight: 650;
+  color: var(--learn-text, #ededf0);
+}
+.ensemble-flow-pan {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: .75rem 0;
+}
+.ensemble-flow-pan svg {
+  display: block;
+  max-width: none;
+  flex-shrink: 0;
+}
+.ensemble-flow-pan svg text {
+  font-family: inherit;
+  font-size: 16px;
+}
+.ensemble-flow-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1.1rem;
+}
+.ensemble-flow-quantity {
+  min-width: 0;
+  flex: 1 1 14rem;
+  padding: .7rem;
+  border: 1px solid #44444b;
+  margin: 0;
+}
+.ensemble-flow-quantity legend {
+  padding: 0 .35rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.ensemble-flow-quantity input[type="range"] {
+  width: 100%;
+  accent-color: #e8bb60;
+}
+.ensemble-flow-quantity label {
+  display: block;
+  font-size: 1rem;
+  margin: .45rem 0;
+}
+.ensemble-flow-quantity input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font: inherit;
+  padding: .6rem;
+  color: #ededf0;
+  background: #18191d;
+  border: 1px solid #66666f;
+}
+.ensemble-flow-controls button {
+  font: inherit;
+  padding: .65rem .9rem;
+  color: #e8bb60;
+  background: #18191d;
+  border: 1px solid #806c3f;
+  cursor: pointer;
+}
+.ensemble-flow-controls > label {
+  min-width: 0;
+  flex: 1 1 14rem;
+}
+.ensemble-flow-controls select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin-top: .5rem;
+  padding: .55rem;
+  font: inherit;
+  color: #ededf0;
+  background: #18191d;
+  border: 1px solid #66666f;
+}
+.ensemble-flow-error {
+  display: block;
+  color: #efa3a3;
+  margin-top: .5rem;
+  overflow-wrap: anywhere;
+}
+.ensemble-flow-roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 1rem;
+}
+.ensemble-flow-row-tokens {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.ensemble-flow-row-tokens span {
+  border: 1px solid #92929d;
+  padding: .6rem 1rem;
+}
+.ensemble-flow-probabilities {
+  overflow-x: auto;
+}
+.ensemble-flow-probability-heading,
+.ensemble-flow-probability-row,
+.ensemble-flow-probability-summary {
+  display: grid;
+  grid-template-columns: 10rem 12rem 12rem 7rem;
+  gap: 1rem;
+  min-width: 44rem;
+  padding: .8rem .3rem;
+  align-items: center;
+}
+.ensemble-flow-probability-row {
+  border-top: 1px solid #34343b;
+}
+.ensemble-flow-probability-row > strong {
+  color: var(--member-hue);
+}
+.ensemble-flow-probability-row small {
+  display: block;
+  font-size: 1rem;
+  margin-top: .4rem;
+}
+.ensemble-flow-probability-track {
+  width: 100%;
+  height: .7rem;
+  background: #24252b;
+  border: 1px solid #61616a;
+  margin: .6rem 0;
+}
+.ensemble-flow-probability-track i {
+  display: block;
+  height: 100%;
+  background: var(--member-hue);
+}
+.ensemble-flow-probability-summary {
+  border-top: 1px solid #806c3f;
+  color: #e8bb60;
+}
+.ensemble-flow-scale {
+  min-width: 44rem;
+  margin: .6rem 0;
+}
+
+.ensemble-copied-error-tables > div {
+  min-width: 0;
+  overflow-x: auto;
+}
+.ensemble-copied-error-tables table {
+  border-collapse: collapse;
+  margin-top: .65rem;
+  width: max-content;
+}
+.ensemble-copied-error-tables th,
+.ensemble-copied-error-tables td {
+  padding: .4rem .75rem;
+  text-align: left;
+}
+.ensemble-copied-error-tables th:first-child,
+.ensemble-copied-error-tables td:first-child {
+  padding-left: 0;
+}

@@ -1,0 +1,12 @@
+data: (150, 2) seed rows: [127, 39, 8]
+SSE before update / after moving means / after reassigning / labels changed
+321.875530 / 181.504432 / 181.504432 / 0
+fixed point: True after 1 mean update(s)
+center: [-6.7791, -6.8876] size: 50
+center: [-2.663, 8.9252] size: 50
+center: [4.5952, 2.1091] size: 50
+inertia: 181.504432
+four identical rows, k=3: occupied clusters = 1
+budget of one update: fixed point = False returned labels = [0, 0, 1, 1, 1]
+start [0.0, 4.0] -> fixed point True inertia 21.166667
+start [0.0, 10.0] -> fixed point True inertia 17.0

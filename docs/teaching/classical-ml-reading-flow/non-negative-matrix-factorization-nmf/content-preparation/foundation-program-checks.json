@@ -1,0 +1,402 @@
+{
+  "role": "new content-source numerical and state checks, no browser/runtime acceptance",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "checkerSha256": "4e18f36d91196bf0a7fa4500e9d90e85f656e4d27ff54fc945dcf20bba66fb0e",
+  "sources": {
+    "centered_pca.py": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055",
+    "nmf_arrays.py": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf",
+    "nmf_coordinate.py": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec",
+    "nmf_nnls.py": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+  },
+  "checks": [
+    {
+      "name": "all unweighted metric conversions",
+      "passed": true
+    },
+    {
+      "name": "stable norm [3,4]",
+      "passed": true
+    },
+    {
+      "name": "stable norm avoids avoidable square overflow",
+      "passed": true
+    },
+    {
+      "name": "all mask cells match unweighted objective",
+      "passed": true
+    },
+    {
+      "name": "all missing has zero objective, no quality mean",
+      "passed": true
+    },
+    {
+      "name": "missing giant cell is never reconstructed",
+      "passed": true
+    },
+    {
+      "name": "measured zero differs from missing",
+      "passed": true
+    },
+    {
+      "name": "KL zero-count conventions",
+      "passed": true
+    },
+    {
+      "name": "KL independent scipy comparison scale=1e-200",
+      "passed": true
+    },
+    {
+      "name": "KL independent scipy comparison scale=1.0",
+      "passed": true
+    },
+    {
+      "name": "KL independent scipy comparison scale=1e+200",
+      "passed": true
+    },
+    {
+      "name": "KL near equality decimal oracle",
+      "passed": true
+    },
+    {
+      "name": "KL positive observation with zero rate",
+      "passed": true
+    },
+    {
+      "name": "negative observation",
+      "passed": true
+    },
+    {
+      "name": "boolean observation",
+      "passed": true
+    },
+    {
+      "name": "complex observation",
+      "passed": true
+    },
+    {
+      "name": "nonfinite observation",
+      "passed": true
+    },
+    {
+      "name": "empty quality mean",
+      "passed": true
+    },
+    {
+      "name": "scalar string is not a numeric parameter",
+      "passed": true
+    },
+    {
+      "name": "one W cyclic sweep by hand",
+      "passed": true
+    },
+    {
+      "name": "one W sweep half loss by hand",
+      "passed": true
+    },
+    {
+      "name": "one H cyclic sweep by hand",
+      "passed": true
+    },
+    {
+      "name": "one full sweep half loss by hand",
+      "passed": true
+    },
+    {
+      "name": "L2 in slope and curvature",
+      "passed": true
+    },
+    {
+      "name": "in-place integer factor must not truncate",
+      "passed": true
+    },
+    {
+      "name": "nonpositive encoding budget",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case0",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case0",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case1",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case1",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case2",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case2",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case3",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case3",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case4",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case4",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case5",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case5",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case6",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case6",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case7",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case7",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case8",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case8",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case9",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case9",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case10",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case10",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case11",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case11",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case12",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case12",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case13",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case13",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case14",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case14",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case15",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case15",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case16",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case16",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case17",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case17",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case18",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case18",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary scipy reference case19",
+      "passed": true
+    },
+    {
+      "name": "fixed dictionary KKT case19",
+      "passed": true
+    },
+    {
+      "name": "nonorthogonal cone optimum",
+      "passed": true
+    },
+    {
+      "name": "ordinary cone optimum",
+      "passed": true
+    },
+    {
+      "name": "ordinary NNLS returns norm, not half loss",
+      "passed": true
+    },
+    {
+      "name": "duplicate and flat patterns prediction",
+      "passed": true
+    },
+    {
+      "name": "flat pattern uses zero convention",
+      "passed": true
+    },
+    {
+      "name": "empty query shape",
+      "passed": true
+    },
+    {
+      "name": "empty query amounts",
+      "passed": true
+    },
+    {
+      "name": "zero query shape",
+      "passed": true
+    },
+    {
+      "name": "zero query amounts",
+      "passed": true
+    },
+    {
+      "name": "fit objective descent at every recorded sweep",
+      "passed": true
+    },
+    {
+      "name": "tiny fit reconstruction",
+      "passed": true
+    },
+    {
+      "name": "rejected next fit",
+      "passed": true
+    },
+    {
+      "name": "rejected fit preserves old factors",
+      "passed": true
+    },
+    {
+      "name": "query uses old fitted rank after changed config",
+      "passed": true
+    },
+    {
+      "name": "empty query uses old fitted rank",
+      "passed": true
+    },
+    {
+      "name": "feature order cannot silently change",
+      "passed": true
+    },
+    {
+      "name": "returned dictionary cannot mutate fitted state",
+      "passed": true
+    },
+    {
+      "name": "finite input may overflow and preserve old snapshot",
+      "passed": true
+    },
+    {
+      "name": "overflowing fit preserves old snapshot",
+      "passed": true
+    },
+    {
+      "name": "fit input remains unchanged",
+      "passed": true
+    },
+    {
+      "name": "fit input remains unchanged",
+      "passed": true
+    },
+    {
+      "name": "fit input remains unchanged",
+      "passed": true
+    },
+    {
+      "name": "ordinary alternating NNLS objective descent",
+      "passed": true
+    }
+  ],
+  "newMainExecutions": [
+    {
+      "file": "nmf_arrays.py",
+      "sourceSha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf",
+      "exitCode": 0,
+      "stdout": "nmf_arrays.stdout.txt",
+      "stdoutSha256": "a29980714874ff3c5e0f5b4b4238acf99a3e998cc36e9e49bccc8a7fec164009",
+      "stderr": "nmf_arrays.stderr.txt",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "nmf_coordinate.py",
+      "sourceSha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec",
+      "exitCode": 0,
+      "stdout": "nmf_coordinate.stdout.txt",
+      "stdoutSha256": "c9f6c935d3dbeb5754943c046637556734f20c8eb00356118b7e83c929dc468e",
+      "stderr": "nmf_coordinate.stderr.txt",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "nmf_nnls.py",
+      "sourceSha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961",
+      "exitCode": 0,
+      "stdout": "nmf_nnls.stdout.txt",
+      "stdoutSha256": "d985954fd0fd74ca4ef4ed504c7403fc0f43c0ed1db8b28dfff89f5f2b3f4051",
+      "stderr": "nmf_nnls.stderr.txt",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "historicalMainOrFitReplayed": false
+}

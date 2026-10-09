@@ -1,0 +1,403 @@
+{
+  "scope": "Direct supplied hand arrays and formulas, no fits or old mains",
+  "sourceSha256": "4ae30d23948306d7ff2e091e4e6cad120d883182251d93b0ad1bc098425bca5c",
+  "states": {
+    "A": {
+      "normalizedH": [
+        [
+          {
+            "fraction": "2/3",
+            "decimal": 0.6666666666666666
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1/3",
+            "decimal": 0.3333333333333333
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1/3",
+            "decimal": 0.3333333333333333
+          },
+          {
+            "fraction": "2/3",
+            "decimal": 0.6666666666666666
+          }
+        ]
+      ],
+      "newW": [
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        },
+        {
+          "fraction": "9",
+          "decimal": 9.0
+        }
+      ],
+      "x": [
+        2,
+        3,
+        7
+      ]
+    },
+    "B": {
+      "numerator": [
+        10,
+        7
+      ],
+      "denominator": [
+        5,
+        5
+      ],
+      "Hnew": [
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        },
+        {
+          "fraction": "7/5",
+          "decimal": 1.4
+        }
+      ],
+      "predictions": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "7/5",
+            "decimal": 1.4
+          }
+        ],
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "14/5",
+            "decimal": 2.8
+          }
+        ]
+      ],
+      "halfLoss": {
+        "fraction": "1/10",
+        "decimal": 0.1
+      }
+    },
+    "F": {
+      "midpoint": [
+        {
+          "fraction": "5/2",
+          "decimal": 2.5
+        },
+        {
+          "fraction": "5/4",
+          "decimal": 1.25
+        }
+      ],
+      "product": {
+        "fraction": "25/8",
+        "decimal": 3.125
+      },
+      "halfLoss": {
+        "fraction": "81/128",
+        "decimal": 0.6328125
+      }
+    },
+    "G": {
+      "FrobeniusMultiplier": 9.0,
+      "KLMultiplier": 3.0,
+      "ISMultiplier": 1
+    },
+    "H": {
+      "gradient": [
+        -3,
+        1
+      ],
+      "optimalH": [
+        3,
+        1
+      ]
+    },
+    "O": {
+      "W": [
+        {
+          "fraction": "2/3",
+          "decimal": 0.6666666666666666
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        }
+      ],
+      "H": [
+        [
+          {
+            "fraction": "3",
+            "decimal": 3.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "3",
+            "decimal": 3.0
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "contributionMasses": [
+        4,
+        2
+      ]
+    },
+    "P": {
+      "pairedProducts": [
+        {
+          "fraction": "9/25",
+          "decimal": 0.36
+        },
+        {
+          "fraction": "16/25",
+          "decimal": 0.64
+        }
+      ],
+      "selectedScaledProduct": {
+        "fraction": "16/5",
+        "decimal": 3.2
+      },
+      "tieProducts": [
+        {
+          "fraction": "12/25",
+          "decimal": 0.48
+        },
+        {
+          "fraction": "12/25",
+          "decimal": 0.48
+        }
+      ]
+    },
+    "Q": {
+      "a": {
+        "fraction": "1/2",
+        "decimal": 0.5
+      },
+      "minimizer": {
+        "fraction": "5/4",
+        "decimal": 1.25
+      },
+      "f": {
+        "fraction": "9/16",
+        "decimal": 0.5625
+      },
+      "q": {
+        "fraction": "9/8",
+        "decimal": 1.125
+      },
+      "gap": {
+        "fraction": "9/16",
+        "decimal": 0.5625
+      }
+    },
+    "R": {
+      "Wmass": {
+        "fraction": "15/2",
+        "decimal": 7.5
+      },
+      "Hmass": 6,
+      "penalty": {
+        "fraction": "117/20",
+        "decimal": 5.85
+      },
+      "oldPenalty": {
+        "fraction": "51/10",
+        "decimal": 5.1
+      }
+    },
+    "S": {
+      "first": 7,
+      "second": 42,
+      "residuals": {
+        "42": [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ],
+        "7": [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ],
+        "99": [
+          {
+            "fraction": "3/4",
+            "decimal": 0.75
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ],
+        "10": [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ]
+      },
+      "excludedZeroID": 6
+    },
+    "T": {
+      "counts": [
+        0,
+        1,
+        0
+      ],
+      "TFIDF": [
+        0,
+        1.2876820724517808,
+        0
+      ],
+      "OOVCounts": [
+        0,
+        0,
+        0
+      ]
+    },
+    "U": {
+      "oldPrediction": [
+        {
+          "fraction": "4",
+          "decimal": 4.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        }
+      ],
+      "freshPrediction": [
+        {
+          "fraction": "20/9",
+          "decimal": 2.2222222222222223
+        },
+        {
+          "fraction": "13/9",
+          "decimal": 1.4444444444444444
+        },
+        {
+          "fraction": "23/9",
+          "decimal": 2.5555555555555554
+        }
+      ],
+      "oldHalfLoss": 2,
+      "freshHalfLoss": {
+        "fraction": "2/9",
+        "decimal": 0.2222222222222222
+      }
+    },
+    "W": {
+      "KL_zeroObserved_prediction2": 2,
+      "positiveObserved_prediction0": "infinite/refused",
+      "IS_zeroObserved": "outside positive domain/refused"
+    },
+    "X": {
+      "tensorAddress_1_0_1": 6,
+      "unfolded_row1_col1": 6,
+      "inversePositive": [
+        {
+          "fraction": "1/2",
+          "decimal": 0.5
+        },
+        {
+          "fraction": "-1/2",
+          "decimal": -0.5
+        }
+      ],
+      "inverseNegative": [
+        {
+          "fraction": "-1/2",
+          "decimal": -0.5
+        },
+        {
+          "fraction": "1/2",
+          "decimal": 0.5
+        }
+      ]
+    },
+    "D57Counts": [
+      [
+        0,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        2,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        2
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  }
+}

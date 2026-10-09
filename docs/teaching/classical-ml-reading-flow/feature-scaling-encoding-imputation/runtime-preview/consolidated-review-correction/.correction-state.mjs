@@ -1,0 +1,1 @@
+let values=[],index=0;export function select(next){values=next;index=0;}export function useState(initial){const n=index++;return[n<values.length?values[n]:typeof initial==="function"?initial():initial,()=>{}];}

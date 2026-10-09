@@ -1,0 +1,19 @@
+torch 2.14.0+cpu
+training validation counts 120 30
+validation IDs [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150]
+train feature mean scale [5.865833, 3.055] [0.84838, 0.437769]
+train target mean cm 3.77
+train-only least-squares validation MSE cm2 0.439365
+constant first last used rate 0.2 0.2
+coefficients [1.497944, -0.570798, 0.0] validation MSE cm2 0.439365
+linear first last used rate 0.2 0.01
+coefficients [1.496231, -0.571484, 0.0] validation MSE cm2 0.439411
+warmup-cosine first last used rate 0.033333 0.01
+coefficients [1.496261, -0.571484, 0.0] validation MSE cm2 0.439409
+changing-model range probe selected pre/post half-MSE
+0 0.0001 1.583467 1.583168
+10 0.001514 1.512903 1.483114
+20 0.02291 0.438462 0.28219
+30 0.346774 0.47801 0.593172
+39 4.0 8.627822 31.671115
+range probe restores zero weights, empty optimizer state and CPU RNG True

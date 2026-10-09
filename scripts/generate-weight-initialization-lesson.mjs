@@ -2,6 +2,10 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id = 'weight-initialization-xavier-kaiming-p';
+// Revision 5 edits the production JSX directly; refuse to overwrite it with the revision-3 rendering.
+if (!readFileSync(`src/learn/data/topics/${id}.jsx`, 'utf8').startsWith('// Complete conserved prepared manuscript')) {
+  throw new Error('The lesson JSX is a later directly edited revision; this revision-3 renderer must not overwrite it.');
+}
 const assets = `public/learn-assets/${id}/`;
 const original = JSON.parse(readFileSync(`docs/teaching/drafts/${id}/calculated-inputs.json`, 'utf8'));
 const executed = JSON.parse(readFileSync(assets + 'calculated-inputs.json', 'utf8'));

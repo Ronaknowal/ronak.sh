@@ -1,148 +1,250 @@
-// Generated from the complete prepared manuscript; all original sections and worked examples retained.
-import {Prose,H2,H3,CodeBlock} from '../../components/content';
-import {Math as InlineMath,MathBlock} from '../../components/content/Math.jsx';
-import {NeuralTable} from '../../components/lesson-labs/NeuralLessonElements.jsx';
-import {OdeFixedLab,OdeAdaptiveLab,OdeGradientLab,OdeTopologyLab,OdeObservationLab} from '../../components/lesson-labs/NeuralOdeLabs.jsx';
-import {OdeInputFlowFigure,OdeDecayFigure,OdeWorkedStages,OdeAdaptiveWorkedFigure,OdeGradientWorkedFigure,OdeOrderPreservationFigure,OdeObservationWorkedFigure,OdeArchitectureFigure,OdeAdjointFigure,OdeOrderFigure,OdeDensityFigure,OdeFlowMatchingFigure,OdeStructuredFigure,OdeSolverApiFigure} from '../../components/lesson-labs/NeuralOdeDiagrams.jsx';
-import {OdeStudyFigure,OdeWorkedIrisFigure,OdeIrisLab,OdeProgram} from '../../components/lesson-labs/NeuralOdeStudy.jsx';
-export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 min read + investigations and practice',content:()=> <div className="neural-lesson neural-lesson-neutral ode-lesson">
-<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Change a field, follow the resulting trajectory, and compare numerical error with computational work. Later investigations let you alter real measurements and observation times while keeping the learned model fixed."}</Prose>
+// Generated from the complete Neural ODE manuscript; guarded authoring renderer owns this source.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
+import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
+import { LessonIntro } from '../../components/lesson-labs/LessonElements.jsx';
+import { odeFlowRoles, OdeArray, OdeWire, OdeOperation, OdeMatrix, OdeDecayStepDrawing, OdeTinyFieldDrawing, OdeFieldSolverReadoutDrawing, OdePlane, OdeRotationFieldDrawing, OdeRotationEulerDrawing, OdeRkStagesDrawing, OdeCoordinates, OdeAdaptiveEstimateDrawing, OdeAdaptiveScaleDrawing, OdeAdaptiveAttemptsDrawing, OdeStiffnessDrawing, OdeDiscreteReverseDrawing, OdeContinuousReverseDrawing, OdeObservationAdjointDrawing, OdeReverseConditioningDrawing, OdeOrderingDrawing, OdeLiftDrawing, OdeOrderNumericalDrawing, OdeParameterizationsDrawing, OdeObservationDrawing, OdeLatentDrawing, OdeEventRateDrawing, OdeDensityPatchDrawing, OdeDensityAccumulatorDrawing, OdeTraceProbeDrawing, OdeRegularizerDrawing, OdeConditionalPathsDrawing, OdeKnownCorrectionDrawing, OdeHamiltonianDrawing, OdeSolutionResidualDrawing, OdeEventResetDrawing, OdeControlledStochasticDrawing, OdeReversibleStepDrawing, OdeGradientComparisonDrawing, OdeClockSensitivityDrawing, OdeSolverClocksDrawing } from '../../components/lesson-labs/NeuralOdeFlowFigures.jsx';
+import { OdeFlowContexts, OdeSelect, OdeNumber, OdeFixtureActions, OdeFixedMatrixLab, OdeFixedInitialLab, OdeFixedResolutionLab, OdeFixedWorkLab, OdeFixedStageLab, OdeAdaptiveRatesLab, OdeAdaptiveInitialLab, OdeAdaptiveTolerancesLab, OdeAdaptiveInspectLab, OdeGradientFieldLab, OdeGradientLossLab, OdeGradientResolutionLab, OdeLiftPointsLab, OdeLiftReadoutLab, OdeObservationEventsLab, OdeObservationPropagationLab, OdeObservationAssimilationLab } from '../../components/lesson-labs/NeuralOdeFlowLabs.jsx';
+import { OdeStudyContext, OdeStudyModelLab, OdeWorkedStudyDrawing, OdeStudyFeatureLab, OdeStudySolverLab, OdeStudyTraceLab, OdeStudyFieldLab, OdeStudyProjectionLab, OdeStudyStageLab, OdeStudyReadoutLab, OdeHistoryDrawing, OdeVisibleProgram } from '../../components/lesson-labs/NeuralOdeFlowStudy.jsx';
+import '../../components/lesson-labs/neural-lesson-neutral.css';
+import '../../components/lesson-labs/lesson-flow.css';
+import '../../components/lesson-labs/neural-ode-flow.css';
+export default { title: 'Neural ODEs and Continuous-Depth Models', readTime: '~90 min read + investigations and practice', hasIntegratedGuide: true,
+  content: () => <OdeFlowContexts><OdeStudyContext><div className="neural-lesson neural-lesson-neutral lesson-flow neural-ode-flow">
+    <LessonIntro prerequisites="Weighted sums, derivatives and backpropagation; their exact prerequisite lessons are linked below, and every solver operation is introduced here.">Learn a local rule, calculate its trajectory, differentiate the executed program and test the same rule on measured data.</LessonIntro>
+<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Change a local rule, watch the resulting motion, and separate the effect of learned weights from the effect of a numerical solver. Later, edit real measurements and observation times with all fitted weights held fixed."}</Prose>
 
-<Prose>{"Imagine transforming a measurement by moving a point through a landscape of arrows. At its current location, an arrow tells the point which direction to move and how quickly. After a small move, the point encounters a new arrow. A whole journey emerges from repeatedly following this local rule."}</Prose>
+<Prose>{"Suppose you know where a point starts and how it should move at its current location. You can make a small move, ask for its new direction, and repeat. A "}<strong>{"Neural ODE"}</strong>{" replaces a fixed list of neural-network layers with a learned rule for these local changes. A numerical algorithm follows the rule; another small network reads the final state to make a decision."}</Prose>
 
-<Prose>{"A "}<strong>{"neural ordinary differential equation"}</strong>{", or Neural ODE, uses a neural network to produce those arrows. A numerical solver follows them. The resulting journey can transform features for classification, describe a hidden state between irregular observations, or move a probability distribution into another shape."}</Prose>
+<Prose>{"This lesson builds that computation one operation at a time. The network learns "}<strong>{"change per unit depth"}</strong>{". The solver adds up that change. Increasing the number of solver steps repeats the same learned rule more carefully; it does not automatically add more learned layers or weights."}</Prose>
 
-<Prose>{"This division of work is the idea to keep: "}<strong>{"the network learns the rate of change; the solver approximates the accumulated change."}</strong>{" Neither piece can be understood fully by looking at the other alone."}</Prose>
+<Prose opening="route">{""}<strong>{"First pass."}</strong>{" Read sections 1–7, use their local investigations, and do the core practice. The visible deeper branches explain density, flow matching and structured scientific dynamics after the field/solver/training distinction has been established. Follow their worked operations before returning to the formal statements."}</Prose>
 
-<OdeInputFlowFigure/>
-
-<Prose opening="route">{""}<strong>{"First pass."}</strong>{" Follow sections 1–5 to calculate a trajectory and understand how a model learns it. Section 6 trains small classifiers on real flower measurements; section 7 connects continuous state to irregular observations. Then do the core practice. The deeper branches on density models, flow matching and structured dynamics can wait until the main distinction between a field and its solution feels natural."}</Prose>
-
-<Prose>{"You need vectors, derivatives, an ordinary feedforward network and backpropagation. The "}<a href={"/learn/path/full-curriculum/ordinary-differential-equations-linear-systems?module=math-foundations"}>{"ODE and linear-systems lesson"}</a>{" provides a fuller mathematical foundation. We introduce the numerical ideas needed here as we use them."}</Prose>
+<Prose>{"The "}<a href={"/learn/path/full-curriculum/perceptrons-neurons-activation-functions?module=deep-learning-fundamentals"}>{"Perceptrons lesson"}</a>{" supplies weighted sums and activations. "}<a href={"/learn/path/full-curriculum/backpropagation-automatic-differentiation?module=deep-learning-fundamentals"}>{"Backpropagation"}</a>{" supplies the chain rule, Jacobians and vector products. "}<a href={"/learn/path/full-curriculum/residual-connections-skip-connections?module=deep-learning-fundamentals"}>{"Residual Connections"}</a>{" supplies the keep-and-add path. We refresh the operations needed here. "}<a href={"/learn/path/full-curriculum/ordinary-differential-equations-linear-systems?module=math-foundations"}>{"ODEs & Linear Systems"}</a>{" develops the underlying solution theory; no numerical-solver terminology is assumed in this lesson."}</Prose>
 
 <H2>{"1. A derivative tells you how to move"}</H2>
 
-<Prose>{"Let "}<InlineMath>{"z(t)"}</InlineMath>{" be a state: perhaps two coordinates on a plane, or a vector of hidden features. The equation"}</Prose>
+<Prose>{""}<strong>{"What changes when a rule says “decrease at twice the current value”?"}</strong>{" Start with one number, 1. The following drawing keeps the current value, its rate of change, and the finite move separate."}</Prose>
 
-<div className="neural-equation"><MathBlock>{"\\frac{dz(t)}{dt}=f_\\theta(t,z(t)),\\qquad z(0)=z_0"}</MathBlock></div>
+<OdeDecayStepDrawing />
 
-<Prose>{"specifies its rate of change and starting point. The symbol "}<InlineMath>{"\\theta"}</InlineMath>{" collects the network's learned weights. The right side returns a vector with the "}<strong>{"same shape as the state"}</strong>{". It is a velocity, not the next state itself."}</Prose>
+<Prose>{"The cyan 1 is the "}<strong>{"state"}</strong>{": the information we carry. Multiplying it by the fixed coefficient −2 produces the violet rate −2. This is a change "}<strong>{"per unit time"}</strong>{", not a replacement state. For a small interval of length 0.1, multiply that rate by 0.1 to get a proposed change of −0.2. The identity wire preserves the original 1, and the add operation gives 1−0.2=0.8."}</Prose>
 
-<Prose>{"The variable "}<InlineMath>{"t"}</InlineMath>{" needs an interpretation. For measurements recorded over hours, it may be physical time. For a classifier transforming one image or flower measurement, it is a coordinate along "}<strong>{"representation depth"}</strong>{". The flower does not grow while the solver runs."}</Prose>
+<Prose>{"At the new state, the rate would be −2(0.8)=−1.6. The decrease slows. Our first move treated the initial rate as constant throughout the interval, so it decreased too far: the exact endpoint at the same time is approximately 0.81873. The vertical segment in the drawing is "}<strong>{"numerical error"}</strong>{", not another force moving the state."}</Prose>
 
-<Prose>{"Suppose the scalar rule is "}<InlineMath>{"z'=-2z"}</InlineMath>{", initially "}<InlineMath>{"z_0=1"}</InlineMath>{". The initial derivative is −2. Over a small interval of length 0.1, a first estimate of the change is "}<InlineMath>{"0.1(-2)=-0.2"}</InlineMath>{", so the next state is approximately 0.8. Now the derivative is −1.6. The state keeps decreasing, but the decrease slows as the state approaches zero."}</Prose>
+<Prose>{"Now attach names to those operations. Write "}<InlineMath>{"z(t)"}</InlineMath>{" for the state at time "}<InlineMath>{"t"}</InlineMath>{", and "}<InlineMath>{"z'(t)"}</InlineMath>{", or "}<InlineMath>{"dz/dt"}</InlineMath>{", for its instantaneous rate. Our rule and initial value are"}</Prose>
 
-<Prose>{"The exact solution is "}<InlineMath>{"z(t)=e^{-2t}"}</InlineMath>{". At "}<InlineMath>{"t=0.1"}</InlineMath>{", it is approximately 0.81873. Our estimate 0.8 was close, but it used the initial velocity throughout an interval during which velocity changed. That is the first numerical error to understand."}</Prose>
+<div className="neural-equation"><MathBlock>{"z'(t)=-2z(t),\\qquad z(0)=1,\\qquad z(t)=e^{-2t}."}</MathBlock></div>
 
-<OdeDecayFigure/>
+<Prose>{"An "}<strong>{"initial-value problem"}</strong>{" asks for the evolving state given its starting value and rule. The exact exponential solves this particular problem. Most learned rules have no convenient closed-form trajectory, so we construct finite moves instead. The move just drawn is "}<strong>{"forward Euler"}</strong>{":"}</Prose>
 
-<Prose>{"An "}<strong>{"initial-value problem"}</strong>{" asks for a trajectory given an initial state and rule. Learning asks a different question: which rule produces useful trajectories for the examples we have? In a classifier, a readout converts the final state into scores:"}</Prose>
+<div className="neural-equation"><MathBlock>{"z_{k+1}=z_k+h f(t_k,z_k),\\qquad h=0.1."}</MathBlock></div>
+
+<Prose>{"Here "}<InlineMath>{"f"}</InlineMath>{" names the rule, "}<InlineMath>{"h"}</InlineMath>{" the interval length, and "}<InlineMath>{"k"}</InlineMath>{" the accepted-step index. The clock "}<InlineMath>{"t_k"}</InlineMath>{" and the index "}<InlineMath>{"k"}</InlineMath>{" are different: step sizes need not be equal. Euler uses one field evaluation for one accepted move. It can run backward with negative "}<InlineMath>{"h"}</InlineMath>{", but accuracy and stability still require checking."}</Prose>
+
+<Prose>{""}<strong>{"How can a neural network supply the rule?"}</strong>{" Replace the fixed multiplication by an ordinary small network that receives the current state and clock. The drawing below uses two state coordinates and two hidden units so every operation can be read."}</Prose>
+
+<OdeTinyFieldDrawing />
+
+<Prose>{"The incoming state is "}<InlineMath>{"(1,0)"}</InlineMath>{", and the clock is 0. These three supplied numbers enter two weighted sums, with a bias for each. The first uses weights "}<InlineMath>{"(1,-1,0.5)"}</InlineMath>{" and bias 0.1, giving 1.1; the second uses "}<InlineMath>{"(0.5,0.25,-0.5)"}</InlineMath>{" and bias −0.2, giving 0.3. Applying tanh gives approximately "}<InlineMath>{"(0.800499,0.291313)"}</InlineMath>{". The next weighted sums use rows "}<InlineMath>{"(0.5,-0.25)"}</InlineMath>{", "}<InlineMath>{"(-0.2,0.4)"}</InlineMath>{" and biases "}<InlineMath>{"(0.05,-0.1)"}</InlineMath>{", producing approximately "}<InlineMath>{"(0.377421,-0.143575)"}</InlineMath>{"."}</Prose>
+
+<Prose>{"Those last two numbers are a "}<strong>{"derivative vector"}</strong>{", one rate for each state coordinate. The network does not return the next state. The solver still multiplies by "}<InlineMath>{"h"}</InlineMath>{" and adds the unchanged state through the gray identity route. With "}<InlineMath>{"h=0.1"}</InlineMath>{", the next Euler state is approximately "}<InlineMath>{"(1.037742,-0.0143575)"}</InlineMath>{". This is a constructed circuit, not weights fitted to the flower dataset later in the lesson."}</Prose>
+
+<Prose>{"For a column-state convention, the operation is"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"u=\\begin{bmatrix}z\\\\t\\end{bmatrix},\\quad\nr=W_1u+b_1,\\quad q=\\tanh(r),\\quad\nf_\\theta(t,z)=W_2q+b_2."}</MathBlock></div>
+
+<Prose>{"The symbol "}<InlineMath>{"\\theta"}</InlineMath>{" collects the learned matrices and biases. The input matrix has "}<strong>{"output units as rows"}</strong>{", so its shape here is 2×3; the output matrix is 2×2. This agrees with the weight storage in PyTorch's "}<code>{"nn.Linear"}</code>{". The network's output shape matches the state shape. Adding a clock input makes the rule time-dependent, or "}<strong>{"nonautonomous"}</strong>{", even though the same weights are reused at every call."}</Prose>
+
+<Prose>{""}<strong>{"Where does the decision enter?"}</strong>{" A field, a solver and a readout have different jobs. Trace their wires before combining them into an equation."}</Prose>
+
+<OdeFieldSolverReadoutDrawing />
+
+<Prose>{"The state enters the learned field repeatedly. Each call returns a rate; solver operations accumulate it into a final state. A final weighted sum converts that state to class scores, or "}<strong>{"logits"}</strong>{", and softmax converts scores to probabilities. The supplied correct class travels directly to the loss for comparison. It is not an input to the field or solver. During inference the learned weights stay fixed; during training a gradient changes them."}</Prose>
 
 <div className="neural-equation"><MathBlock>{"z_T=\\operatorname{Solve}(f_\\theta,z_0,0,T),\\qquad\n\\text{logits}=Wz_T+b."}</MathBlock></div>
 
-<Prose>{"The loss compares those scores with labels. Training changes the field and readout; an ordinary inference solve holds their weights fixed."}</Prose>
+<Prose>{"For measurements taken over hours, "}<InlineMath>{"t"}</InlineMath>{" may be physical time. For a classifier transforming one flower measurement, "}<InlineMath>{"t"}</InlineMath>{" is "}<strong>{"representation depth"}</strong>{": a coordinate along a computation. The flower does not grow while the solver runs. A value of "}<InlineMath>{"T=1"}</InlineMath>{" is a chosen depth interval, not a botanical time measurement."}</Prose>
 
-<H3>{"Why the connection to residual networks matters"}</H3>
+<H3>{"The connection to the keep-and-add path"}</H3>
 
-<Prose>{"A residual update has the form"}</Prose>
+<Prose>{"The Euler add just drawn has the same structure as the identity route in "}<a href={"/learn/path/full-curriculum/residual-connections-skip-connections?module=deep-learning-fundamentals"}>{"Residual Connections"}</a>{": preserve the state and add a correction. A sequence of Euler moves with a shared field is a residual computation with tied weights and an explicit step size."}</Prose>
 
-<div className="neural-equation"><MathBlock>{"z_{k+1}=z_k+h f_\\theta(t_k,z_k)."}</MathBlock></div>
+<Prose>{"An arbitrary ResNet can use a different function at each layer. It is not automatically one smooth flow with one parameter set. A continuous-depth model specifies its field first; the solver chooses when and how often to evaluate it. More evaluations can reduce numerical error without increasing the learned parameter count."}</Prose>
 
-<Prose>{"This is also the forward Euler numerical method. It adds a scaled local change to the current state. If we refine the time grid while evaluating a consistently defined field, the discrete updates can approximate a continuous trajectory under the usual existence and numerical-convergence conditions."}</Prose>
+<Prose>{""}<strong>{"Deeper: why a small step helps, and what it does not prove."}</strong>{" For a twice-differentiable scalar trajectory, Taylor expansion gives "}<InlineMath>{"z(t+h)=z(t)+hz'(t)+\\frac12h^2z''(t)+O(h^3)"}</InlineMath>{". Euler discards the curvature term. Its one-step defect is therefore "}<InlineMath>{"O(h^2)"}</InlineMath>{"; under suitable smoothness and stable finite-horizon error propagation, approximately "}<InlineMath>{"1/h"}</InlineMath>{" such defects yield first-order global error "}<InlineMath>{"O(h)"}</InlineMath>{". This is an asymptotic statement, not a guarantee that any step size is stable or that smaller floating-point steps always improve the final answer. We will inspect that distinction next."}</Prose>
 
-<Prose>{"An arbitrary ResNet with unrelated weights at each layer does not automatically become a particular ODE just because it has many layers. We must define how its layer weights correspond to a function of time and what remains fixed as the grid changes."}</Prose>
-
-<Prose>{"This gives Neural ODEs a useful form of parameter sharing. Evaluating one field 16 times need not introduce 16 sets of weights. It still consumes computation. “Continuous depth” describes the mathematical model; the machine performs finitely many operations. The "}<a href={"https://arxiv.org/html/1806.07366v5"}>{"original Neural ODE paper"}</a>{" develops this connection and several applications."}</Prose>
-
-<OdeArchitectureFigure/>
+<Prose>{"The actual finite-weight affine/tanh/affine field is globally Lipschitz in its state: tanh has slope bounded by 1, and finite matrices multiply distances by finite factors. With continuous clock dependence this supports a unique solution over finite intervals. A generic locally Lipschitz field supplies local uniqueness; a solution can still blow up before the requested endpoint unless a growth or boundedness condition prevents it."}</Prose>
 
 <H2>{"2. The solver is part of the computation"}</H2>
 
-<Prose>{"A solver chooses where to evaluate the field and how to combine those evaluations. It does not learn the field's weights during a forward pass."}</Prose>
+<Prose>{"The scalar example showed why the rate changes during a step. "}<strong>{"What if the direction turns too?"}</strong>{" We now switch to a point moving around a circle, because its known trajectory exposes both angle error and radius error."}</Prose>
 
-<H3>{"Euler: one arrow per step"}</H3>
+<OdeRotationFieldDrawing />
 
-<Prose>{"With "}<InlineMath>{"h=T/N"}</InlineMath>{", Euler uses one field evaluation for each of "}<InlineMath>{"N"}</InlineMath>{" steps. Halving the step size usually reduces its global error by approximately a factor of two in the smooth, sufficiently resolved regime. That statement concerns a convergence regime, not every possible coarse step."}</Prose>
+<Prose>{"At the point "}<InlineMath>{"(x,y)"}</InlineMath>{", the rule returns "}<InlineMath>{"(-y,x)"}</InlineMath>{": rotate the position a quarter-turn to get its velocity. The arrow at "}<InlineMath>{"(1,0)"}</InlineMath>{" points upward. The arrow at "}<InlineMath>{"(0,1)"}</InlineMath>{" points left. Arrowheads show direction, and the drawing states the rate-to-length scale. These are local rates, while the separate connected path shows accumulated motion."}</Prose>
 
-<Prose>{"For the two-dimensional rotation"}</Prose>
+<div className="neural-equation"><MathBlock>{"\\begin{bmatrix}x'\\\\y'\\end{bmatrix}\n=\\begin{bmatrix}0&-1\\\\1&0\\end{bmatrix}\n\\begin{bmatrix}x\\\\y\\end{bmatrix}."}</MathBlock></div>
 
-<div className="neural-equation"><MathBlock>{"f(x,y)=(-y,x),\\qquad z(0)=(1,0),"}</MathBlock></div>
+<Prose>{"Starting at "}<InlineMath>{"(1,0)"}</InlineMath>{", the exact state is "}<InlineMath>{"(\\cos t,\\sin t)"}</InlineMath>{". The radius stays one because "}<InlineMath>{"(x^2+y^2)'=2x(-y)+2yx=0"}</InlineMath>{". We have not trained this field; its exact solution is a numerical reference for the solver."}</Prose>
 
-<Prose>{"the exact path is "}<InlineMath>{"(\\cos t,\\sin t)"}</InlineMath>{". The point turns at one radian per unit time and keeps radius one. Euler does something revealing:"}</Prose>
+<H3>{"Euler follows the first arrow throughout the interval"}</H3>
 
-<div className="neural-equation"><MathBlock>{"\\begin{bmatrix}x_{k+1}\\\\y_{k+1}\\end{bmatrix}\n=\n\\begin{bmatrix}1&-h\\\\h&1\\end{bmatrix}\n\\begin{bmatrix}x_k\\\\y_k\\end{bmatrix}."}</MathBlock></div>
+<Prose>{""}<strong>{"What does one finite move miss?"}</strong>{" The tangent move and the true turn leave the same starting point but end at different positions."}</Prose>
 
-<Prose>{"Squaring and adding gives "}<InlineMath>{"x_{k+1}^2+y_{k+1}^2=(1+h^2)(x_k^2+y_k^2)"}</InlineMath>{". Euler's point spirals outward even though the exact dynamics conserve radius. We can identify the artifact algebraically rather than blaming a learned model."}</Prose>
+<OdeRotationEulerDrawing />
 
-<H3>{"Classical RK4: sample the turn inside a step"}</H3>
+<Prose>{"Euler uses the rate at the start. For this field, "}<InlineMath>{"x_{k+1}=x_k-hy_k"}</InlineMath>{" and "}<InlineMath>{"y_{k+1}=y_k+hx_k"}</InlineMath>{". Squaring and adding cancels the two cross terms:"}</Prose>
 
-<Prose>{"Classical fourth-order Runge–Kutta evaluates four velocities:"}</Prose>
+<div className="neural-equation"><MathBlock>{"x_{k+1}^2+y_{k+1}^2=(1+h^2)(x_k^2+y_k^2)."}</MathBlock></div>
 
-<div className="neural-equation"><MathBlock>{"\\begin{aligned}\nk_1&=f(t,z),\\\\\nk_2&=f(t+h/2,z+hk_1/2),\\\\\nk_3&=f(t+h/2,z+hk_2/2),\\\\\nk_4&=f(t+h,z+hk_3),\\\\\nz_{\\rm next}&=z+\\frac h6(k_1+2k_2+2k_3+k_4).\n\\end{aligned}"}</MathBlock></div>
+<Prose>{"Thus Euler expands the squared radius at every nonzero step, although the exact circle does not. To time 1, four steps give approximately "}<InlineMath>{"(0.628906,0.937500)"}</InlineMath>{", endpoint error 0.130661 and radius 1.128906. Sixteen steps reduce the endpoint error to approximately 0.031708. This is a property of these finite updates, not evidence that the field has learned an outward force."}</Prose>
 
-<Prose>{"The middle evaluations probe where the state may be halfway through the interval. Their weighted combination cancels lower-order errors. For a sufficiently smooth, stable problem, the global error is "}<InlineMath>{"O(h^4)"}</InlineMath>{": halving "}<InlineMath>{"h"}</InlineMath>{" can reduce it by about 16, before rounding or other errors dominate. This is polynomial convergence, not exponential convergence."}</Prose>
+<H3>{"Classical RK4 probes the turn before accepting one move"}</H3>
 
-<OdeWorkedStages/>
+<Prose>{""}<strong>{"Can the solver sample directions inside the interval?"}</strong>{" Follow the four hollow tentative points and the final filled accepted point. The four probes are calculations used to make "}<strong>{"one"}</strong>{" step."}</Prose>
 
-<Prose>{"Our executed rotation calculation integrates to "}<InlineMath>{"T=1"}</InlineMath>{" in float64:"}</Prose>
+<OdeRkStagesDrawing />
 
-<NeuralTable caption={"Classical RK4: sample the turn inside a step"} headers={[<>{"Method"}</>,<>{"Steps"}</>,<>{"Field evaluations"}</>,<>{"Endpoint error, Euclidean norm"}</>]} rows={[[<>{"Euler"}</>,<>{"4"}</>,<>{"4"}</>,<>{"0.130661"}</>],[<>{"Euler"}</>,<>{"16"}</>,<>{"16"}</>,<>{"0.0317081"}</>],[<>{"Classical RK4"}</>,<>{"4"}</>,<>{"16"}</>,<>{"0.0000325318"}</>],[<>{"Classical RK4"}</>,<>{"16"}</>,<>{"64"}</>,<>{"0.000000127152"}</>]]} />
+<Prose>{"At the start "}<InlineMath>{"z_k"}</InlineMath>{", evaluate "}<InlineMath>{"k_1"}</InlineMath>{". Use half of the step along that rate to propose a second point, then evaluate "}<InlineMath>{"k_2"}</InlineMath>{" there. A third point also starts from "}<InlineMath>{"z_k"}</InlineMath>{", but uses the second rate. A fourth uses a full step along the third rate. Only after all four evaluations does the weighted sum update the accepted state. Reusing the same field at each probe reuses every learned weight."}</Prose>
 
-<Prose>{"At four RK4 steps, the radius is 0.99999327, not exactly one. A small error is still an error; RK4 is not generally a method that exactly conserves energy."}</Prose>
+<div className="neural-equation"><MathBlock>{"k_1=f(t_k,z_k),\\qquad\nk_2=f(t_k+h/2,z_k+hk_1/2),"}</MathBlock></div>
 
-<OdeFixedLab/>
+<div className="neural-equation"><MathBlock>{"k_3=f(t_k+h/2,z_k+hk_2/2),\\qquad\nk_4=f(t_k+h,z_k+hk_3),"}</MathBlock></div>
 
-<H3>{"A readable differentiable implementation"}</H3>
+<div className="neural-equation"><MathBlock>{"z_{k+1}=z_k+\\frac h6(k_1+2k_2+2k_3+k_4)."}</MathBlock></div>
 
-<Prose>{"The downloadable "}<a href={"/learn-assets/neural-ode-continuous-depth-models/neural_ode_study.py"}>{"training program"}</a>{" contains the field, integrator, models, split and complete fitting loop. This is its core classical RK4 update, expressed with tensor operations so automatic differentiation can follow every stage:"}</Prose>
+<Prose>{"For the first rotation step with "}<InlineMath>{"h=0.25"}</InlineMath>{", the rates are "}<InlineMath>{"(0,1)"}</InlineMath>{", "}<InlineMath>{"(-0.125,1)"}</InlineMath>{", "}<InlineMath>{"(-0.125,0.984375)"}</InlineMath>{", and "}<InlineMath>{"(-0.246094,0.968750)"}</InlineMath>{". The accepted endpoint is approximately "}<InlineMath>{"(0.968913,0.247396)"}</InlineMath>{". The third probe is not reached by moving forward from the second; both are formed from the step's original state. This is why joining the probe locations as if they were the accepted trajectory would be misleading."}</Prose>
 
-<CodeBlock language={"python"}>{"def rk4_step(field, time, state, step_size):\n    first = field(time, state)\n    second = field(time + step_size/2, state + step_size*first/2)\n    third = field(time + step_size/2, state + step_size*second/2)\n    fourth = field(time + step_size, state + step_size*third)\n    return state + step_size*(first + 2*second + 2*third + fourth)/6"}</CodeBlock>
+<Prose>{"Four classical RK4 steps to time 1 give endpoint error about "}<InlineMath>{"3.25\\times10^{-5}"}</InlineMath>{", with sixteen field evaluations. Four Euler steps use four evaluations. Compare both resolution and evaluation work, not only the count called “steps.” A field evaluation can itself be a costly network forward pass."}</Prose>
 
-<Prose>{"To build the trajectory, repeat this update at times "}<InlineMath>{"0,h,\\ldots,T-h"}</InlineMath>{". The complete program retains all states and uses that same expression inline. Its field concatenates the fixed depth coordinate to the state, applies a 16-unit tanh layer, and returns a derivative vector. Time is not a learnable parameter in this example; differentiating learned event times would require a different treatment."}</Prose>
+<Prose>{""}<strong>{"Deeper: a tableau records the same arithmetic."}</strong>{" A lower-triangular coefficient array specifies which earlier rates form each probe. For classical RK4 the probe clocks are "}<InlineMath>{"(0,1/2,1/2,1)h"}</InlineMath>{", the nonzero internal coefficients are "}<InlineMath>{"a_{21}=1/2,a_{32}=1/2,a_{43}=1"}</InlineMath>{", and the final weights are "}<InlineMath>{"(1,2,2,1)/6"}</InlineMath>{". This storage description will let us reverse the actual stage graph in section 4. Fourth-order convergence needs the relevant smoothness; equal order does not make different tableaus the same computation."}</Prose>
 
-<Prose>{"In a practical library, method names alone are insufficient for exact reproduction. The current "}<a href={"https://github.com/rtqichen/torchdiffeq"}>{"torchdiffeq README"}</a>{" specifies a 3/8-rule implementation for its fixed-step RK4; our displayed program uses classical RK4. Both are fourth-order methods, but their intermediate stages differ. Its callable uses the argument order (time, state), and fixed-step resolution is configured separately from the requested output times."}</Prose>
+<Prose>{""}<strong>{"Change the case."}</strong>{" The following linked investigations start from "}<InlineMath>{"(0.6,0.8)"}</InlineMath>{" and solve to 1.2, rather than copying the worked "}<InlineMath>{"(1,0),T=1"}</InlineMath>{" result. The radius is still initially one, but the starting direction and endpoint change. Every local question below edits the same complete fixture."}</Prose>
+
+<Prose>{""}<strong>{"Which part of the rule changes the local arrows?"}</strong>{" Inspect one matrix coefficient while the whole trajectory recomputes."}</Prose>
+
+<OdeFixedMatrixLab />
+
+<Prose>{"Choose a matrix entry and move its value. The changed local arrows, exact matrix-exponential path and finite path update together. A general matrix may stretch or contract; radius conservation belongs to the rotation rule above, not every field."}</Prose>
+
+<Prose>{""}<strong>{"What changes if the same rule starts elsewhere?"}</strong>{" Keep the field fixed and move one supplied coordinate."}</Prose>
+
+<OdeFixedInitialLab />
+
+<Prose>{"Choose a starting coordinate and change its value. The cyan point is a supplied state; the learned or constructed field coefficients have not changed."}</Prose>
+
+<Prose>{""}<strong>{"How much of the discrepancy comes from finite resolution?"}</strong>{" Change the endpoint or interval count against the exact reference."}</Prose>
+
+<OdeFixedResolutionLab />
+
+<Prose>{"Change depth or the number of intervals. Compare the exact endpoint with the accepted numerical endpoint, and read the reported endpoint difference when the two paths look almost identical."}</Prose>
+
+<Prose>{""}<strong>{"What does each method spend to obtain its endpoint?"}</strong>{" Compare the two already taught methods and their field-evaluation counts."}</Prose>
+
+<OdeFixedWorkLab />
+
+<Prose>{"After both methods have been taught, select the method and accepted-interval budget. The live sentence reports its rate-evaluation cost: Euler spends one call per interval, classical RK4 spends four. This is an evaluation-count comparison, not a measured wall-clock ranking."}</Prose>
+
+<Prose>{""}<strong>{"Which point is a probe, and which is an accepted state?"}</strong>{" Select the actual interval and rate evaluation separately."}</Prose>
+
+<OdeFixedStageLab />
+
+<Prose>{"Inspect one accepted step and one of its tentative probes. The probe's clock, complete state and derivative are shown separately from the accepted endpoint; later controls never reinterpret a probe as a new accepted state."}</Prose>
+
+<H3>{"Implement the move before importing a solver"}</H3>
+
+<Prose>{"The complete "}<a href={"/learn-assets/neural-ode-continuous-depth-models/neural_ode_study.py"}>{"neural_ode_study.py"}</a>{" implements this arithmetic in "}<code>{"integrate"}</code>{", using tensor operations so PyTorch can retain a differentiation graph. Its "}<code>{"trace"}</code>{" includes the initial state followed by accepted states. Its four RK variables are rates, and each tentative input carries the correct clock. The full program appears with the fitted study in section 6."}</Prose>
+
+<Prose>{"The new "}<a href={"/learn-assets/neural-ode-continuous-depth-models/ode_sensitivities.py"}>{"ode_sensitivities.py"}</a>{" makes the same stage graph explicit as a reusable "}<code>{"fixed_solve(field, initial, parameters, start, stop, intervals, method)"}</code>{" for small float64 investigations. It retains actual stage clocks, validates shape/finite inputs before returning a completed result, accepts decreasing intervals, and treats a zero-length interval as an unchanged state. It is a bounded fixed-step reference, not an adaptive production replacement. Section 4 explains every derivative route it adds."}</Prose>
 
 <H2>{"3. Adapt the steps to estimated error"}</H2>
 
-<Prose>{"Taking tiny steps everywhere can waste work. An adaptive method estimates the error in a proposed step and decides whether to accept it."}</Prose>
+<Prose>{"The fixed-step comparison asked how careful each move should be. "}<strong>{"Can a solver notice that one proposed move is too large before accepting it?"}</strong>{" It can compare two estimates made from the same starting state."}</Prose>
 
-<Prose>{"A simple teaching method combines Euler with "}<strong>{"Heun's method"}</strong>{", which averages the velocity at the beginning and the Euler-predicted endpoint:"}</Prose>
+<OdeAdaptiveEstimateDrawing />
 
-<div className="neural-equation"><MathBlock>{"z_E=z+h f(t,z),\\qquad\nz_H=z+\\frac h2\\{f(t,z)+f(t+h,z_E)\\}."}</MathBlock></div>
+<Prose>{"Start with a state and one proposed interval. Euler uses the initial rate to propose a new state. Heun evaluates another rate at that Euler proposal, averages the two rates, and makes its own proposal from the original starting state. Their difference is a computable indicator of how much the local rate turned. Neither candidate has been accepted yet."}</Prose>
 
-<Prose>{"The difference "}<InlineMath>{"z_H-z_E"}</InlineMath>{" is an error indicator. In our demonstration, coordinate "}<InlineMath>{"i"}</InlineMath>{" has scale"}</Prose>
+<div className="neural-equation"><MathBlock>{"e=z_n+h f(t_n,z_n),\\qquad\nw=z_n+\\frac h2\\{f(t_n,z_n)+f(t_n+h,e)\\}."}</MathBlock></div>
 
-<div className="neural-equation"><MathBlock>{"s_i=\\mathrm{atol}+\\mathrm{rtol}\\max(|z_i|,|z_{H,i}|),\n\\quad\nr=\\sqrt{\\frac1d\\sum_i[(z_{H,i}-z_{E,i})/s_i]^2}."}</MathBlock></div>
+<Prose>{"Here "}<InlineMath>{"e"}</InlineMath>{" names the Euler candidate and "}<InlineMath>{"w"}</InlineMath>{" the Heun candidate. The estimator uses "}<InlineMath>{"w-e"}</InlineMath>{"; it is not the unavailable difference between "}<InlineMath>{"w"}</InlineMath>{" and the exact solution. For smooth fields, Heun's local defect is of higher order than Euler's, so this embedded difference captures the lower-order candidate's leading error. Its size scales like "}<InlineMath>{"h^2"}</InlineMath>{" in the small-step regime. It is still an estimate, with possible cancellation or unrepresentative behavior outside that regime."}</Prose>
 
-<Prose>{"Accept when "}<InlineMath>{"r\\leq1"}</InlineMath>{"; otherwise retry from the same state with a smaller step. The demonstration proposes the next step using a safety factor "}<InlineMath>{"0.9r^{-1/2}"}</InlineMath>{", clamped between 0.1 and 5. The exponent reflects this embedded difference's order. It is not a universal controller for all solvers."}</Prose>
+<Prose>{""}<strong>{"How large is large when coordinates have different sizes?"}</strong>{" Divide each candidate difference by a scale expressed in the same units as that state coordinate, then combine the dimensionless errors."}</Prose>
 
-<OdeAdaptiveWorkedFigure/>
+<OdeAdaptiveScaleDrawing />
 
-<Prose>{"For the synthetic two-scale system "}<InlineMath>{"z'=\\operatorname{diag}(-1,-100)z"}</InlineMath>{", starting at "}<InlineMath>{"(1,1)"}</InlineMath>{" and ending at 0.4, our executed method uses 58 accepted and four rejected steps with relative tolerance 0.01 and absolute tolerance 0.0001. Tightening both tolerances tenfold produces 144 accepted and five rejected steps. Every attempt evaluates the field twice: 124 versus 298 evaluations."}</Prose>
+<Prose>{"The absolute allowance, "}<code>{"atol"}</code>{", supplies a floor near zero. The relative allowance, "}<code>{"rtol"}</code>{", grows with the maximum magnitude of the old state and the Heun proposal. For coordinate "}<InlineMath>{"i"}</InlineMath>{","}</Prose>
 
-<Prose>{"These are measured counts from this specified teaching solver, not a promised cost for Neural ODEs. Production methods such as Dormand–Prince use different formulas, interpolation and reuse strategies."}</Prose>
+<div className="neural-equation"><MathBlock>{"s_i=\\mathrm{atol}+\\mathrm{rtol}\\max(|z_{n,i}|,|w_i|),\\qquad\nr=\\sqrt{\\frac1d\\sum_{i=1}^d\\left(\\frac{w_i-e_i}{s_i}\\right)^2}."}</MathBlock></div>
 
-<OdeAdaptiveLab/>
+<Prose>{"The dimension "}<InlineMath>{"d"}</InlineMath>{" is the number of state coordinates. A ratio "}<InlineMath>{"r\\le1"}</InlineMath>{" accepts the Heun candidate; a larger ratio rejects the move. Averaging squared ratios is an "}<strong>{"RMS norm"}</strong>{". One large coordinate error can be diluted among many easy coordinates. A maximum norm makes a different decision. This is an error-control design choice, not proof that every final coordinate error lies below its scale."}</Prose>
+
+<Prose>{""}<strong>{"What remains after a rejected move?"}</strong>{" Follow the return arrow: the clock and accepted state remain unchanged, while the proposed next interval becomes smaller."}</Prose>
+
+<OdeAdaptiveAttemptsDrawing />
+
+<Prose>{"Each attempt spends two field evaluations here. Acceptance advances the clock and keeps the Heun state. Rejection preserves both original state and clock. This simple controller proposes a next step using"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"h_{\\mathrm{next}}=h\\,\\operatorname{clip}(0.9r^{-1/2},0.1,5)."}</MathBlock></div>
+
+<Prose>{"The factor 0.9 leaves a safety margin. The exponent "}<InlineMath>{"-1/2"}</InlineMath>{" responds to the estimator's "}<InlineMath>{"h^2"}</InlineMath>{" scaling. The bounds prevent a hundred-fold size jump from one estimate; at "}<InlineMath>{"r=0"}</InlineMath>{" the implementation chooses the upper factor 5 without dividing by zero. The final attempted interval is shortened to stop at the endpoint. Underflow or an exhausted attempt budget returns an explicit unfinished-computation error, not a fabricated successful endpoint."}</Prose>
+
+<Prose>{"For the constructed two-rate field "}<InlineMath>{"(z_1',z_2')=(-z_1,-100z_2)"}</InlineMath>{", initial "}<InlineMath>{"(1,1)"}</InlineMath>{", endpoint 0.4 and proposed first interval 0.1, the retained calculation uses "}<code>{"atol=0.01×rtol"}</code>{". At "}<code>{"rtol=0.01"}</code>{" it records 58 accepted and 4 rejected attempts, 124 field evaluations. Tightening to 0.001 records 144 accepted and 5 rejected, 298 evaluations. Those are the measured results of this particular controller and field; a more accurate endpoint is not necessarily a more accurate fitted classifier."}</Prose>
+
+<Prose>{""}<strong>{"Change the case."}</strong>{" The shared live case below starts instead from "}<InlineMath>{"(1,0.3)"}</InlineMath>{" with rates "}<InlineMath>{"(-2,-50)"}</InlineMath>{". This prevents the earlier attempt counts from being mistaken for a universal answer. Independent absolute and relative controls expose the scale formula just taught."}</Prose>
+
+<Prose>{""}<strong>{"Which rate makes this case difficult to integrate?"}</strong>{" Change one coordinate’s decay while both coordinates remain in the error test."}</Prose>
+
+<OdeAdaptiveRatesLab />
+
+<Prose>{"Edit one rate coefficient. Every later view uses this same field and starting vector."}</Prose>
+
+<Prose>{""}<strong>{"Does the starting magnitude change the controller’s work?"}</strong>{" Change one supplied coordinate while keeping its decay rule."}</Prose>
+
+<OdeAdaptiveInitialLab />
+
+<Prose>{"Edit one supplied starting coordinate. A zero coordinate with a homogeneous diagonal rule stays zero; the controller still checks the other coordinate."}</Prose>
+
+<Prose>{""}<strong>{"What changes when the absolute and relative allowances change independently?"}</strong>{" The two controls act on the scale formula just drawn."}</Prose>
+
+<OdeAdaptiveTolerancesLab />
+
+<Prose>{"Move relative and absolute allowance separately. The attempt count, scale, selected normalized error and endpoint error respond live. A locally accepted estimate is not a global accuracy guarantee."}</Prose>
+
+<Prose>{""}<strong>{"Why was a particular attempted move accepted or rejected?"}</strong>{" Select its complete candidate arithmetic and nearby history."}</Prose>
+
+<OdeAdaptiveInspectLab />
+
+<Prose>{"Select an attempt and endpoint. Every rejected attempt is retained and inspectable: the visible ledger shows a window around the selected attempt, and the selector reaches the whole history. The plotted path contains only accepted states; the separate candidate values show the proposed Euler and Heun states, their scales and normalized errors. Requested output times, accepted endpoint times and internal probe times are different things. An adaptive library can return values interpolated at requested times without stepping exactly at each one."}</Prose>
 
 <H3>{"Stiffness can hide beside a smooth trajectory"}</H3>
 
-<Prose>{"Consider "}<InlineMath>{"y'=-\\kappa(y-\\cos t)-\\sin t"}</InlineMath>{", with "}<InlineMath>{"y(0)=1"}</InlineMath>{". The exact solution is "}<InlineMath>{"\\cos t"}</InlineMath>{" for every positive "}<InlineMath>{"\\kappa"}</InlineMath>{". It looks equally smooth when "}<InlineMath>{"\\kappa=5"}</InlineMath>{" and when "}<InlineMath>{"\\kappa=1000"}</InlineMath>{"."}</Prose>
+<Prose>{"Rejections can arise from scaling or rapid variation. "}<strong>{"Why might a smooth-looking target still force very short explicit steps?"}</strong>{" Inspect a tiny perturbation that the rule damps much faster than the visible motion."}</Prose>
 
-<Prose>{"A perturbation away from that solution obeys "}<InlineMath>{"e'=-\\kappa e"}</InlineMath>{". Large "}<InlineMath>{"\\kappa"}</InlineMath>{" creates a rapidly decaying mode that can restrict an explicit solver's stable step size even when the desired solution changes slowly. That separation between fast stability constraints and slower behavior is a characteristic stiffness problem."}</Prose>
+<OdeStiffnessDrawing />
 
-<Prose>{"Our SciPy run to time one, with relative tolerance "}<InlineMath>{"10^{-6}"}</InlineMath>{" and absolute tolerance "}<InlineMath>{"10^{-9}"}</InlineMath>{", illustrates it:"}</Prose>
+<Prose>{"For "}<InlineMath>{"z'=-\\kappa z"}</InlineMath>{", a perturbation shrinks by "}<InlineMath>{"e^{-\\kappa h}"}</InlineMath>{" exactly. Euler instead multiplies it by "}<InlineMath>{"1-\\kappa h"}</InlineMath>{". This finite move amplifies perturbations when "}<InlineMath>{"|1-\\kappa h|>1"}</InlineMath>{". For positive "}<InlineMath>{"\\kappa"}</InlineMath>{", its real-negative stability interval is "}<InlineMath>{"0\\le\\kappa h\\le2"}</InlineMath>{"; the boundary may fail to damp and is not a prudent universal setting. When "}<InlineMath>{"\\kappa=0"}</InlineMath>{", this decay restriction disappears. Non-normal matrices can also transiently amplify errors despite apparently reassuring eigenvalues."}</Prose>
 
-<NeuralTable caption={"Stiffness can hide beside a smooth trajectory"} headers={[<>{""}<InlineMath>{"\\kappa"}</InlineMath>{""}</>,<>{"RK45 field evaluations"}</>,<>{"Radau field evaluations"}</>,<>{"Radau matrix factorizations"}</>]} rows={[[<>{"5"}</>,<>{"92"}</>,<>{"99"}</>,<>{"8"}</>],[<>{"1000"}</>,<>{"2162"}</>,<>{"84"}</>,<>{"16"}</>]]} />
+<Prose>{"Backward Euler uses the rate at the "}<strong>{"new"}</strong>{" state: "}<InlineMath>{"z_{n+1}=z_n-h\\kappa z_{n+1}"}</InlineMath>{". Solving that equation gives "}<InlineMath>{"z_{n+1}=z_n/(1+\\kappa h)"}</InlineMath>{", a decaying multiplier for every positive step in this scalar problem. General implicit methods must solve algebraic systems; their stability benefit has an additional computational cost."}</Prose>
 
-<Prose>{"Both solved the stated problem successfully. A field evaluation is not a unit of equal total cost across these methods: implicit Radau also solves algebraic systems. These numbers do not establish a wall-clock speedup. The "}<a href={"https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html"}>{"SciPy solver documentation"}</a>{" explains explicit/implicit choices, Jacobians and event handling."}</Prose>
+<Prose>{"The retained smoother example is "}<InlineMath>{"z'=-\\kappa(z-\\cos t)-\\sin t"}</InlineMath>{", initially1. Its exact solution is "}<InlineMath>{"\\cos t"}</InlineMath>{" for any "}<InlineMath>{"\\kappa"}</InlineMath>{". A perturbation around that smooth curve decays at rate "}<InlineMath>{"\\kappa"}</InlineMath>{", potentially constraining an explicit solver much more than the visible curve's variation. With the saved SciPy settings, the recorded calls are:"}</Prose>
 
-<Prose>{"High evaluation counts deserve diagnosis. Tight tolerances, poor coordinate scaling, nonsmooth fields and difficult transients can also increase work. “More evaluations” does not by itself prove stiffness or that an input is semantically harder."}</Prose>
+<NeuralTable caption={"Stiffness can hide beside a smooth trajectory"} headers={[<>{"κ"}</>,<>{"RK45 field calls"}</>,<>{"Radau field calls"}</>,<>{"Radau linear factorizations"}</>]} rows={[[<>{"5"}</>,<>{"92"}</>,<>{"99"}</>,<>{"8"}</>],[<>{"1000"}</>,<>{"2162"}</>,<>{"84"}</>,<>{"16"}</>]]} />
+
+<Prose>{"Both completed the declared problem. A field call is not a unit of equal total cost across methods: implicit Radau also forms/solves algebraic systems. These counts are not wall-clock speed ratios. The "}<a href={"https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html"}>{"official SciPy solver contract"}</a>{" lists its explicit RK23/RK45/DOP853 and implicit Radau/BDF choices; its method names do not include the fixed classical RK4 implemented here."}</Prose>
+
+<Prose>{"High work warrants diagnosis, not a label attached automatically. Tight tolerances, poorly scaled coordinates, nonsmooth fields and fast transients can increase calls. Smooth activations, coordinate scaling, a suitable implicit solver or a different model are alternatives depending on which cause actually appears."}</Prose>
 
 <H2>{"4. Learn through a trajectory"}</H2>
 
-<Prose>{"We now have a computation whose output depends on learned weights. A loss can differentiate that dependence in two main ways."}</Prose>
+<Prose>{"The solver has now produced a state. "}<strong>{"How does a final loss tell the learned rule what to change?"}</strong>{" Backpropagation can reverse the finite operations we executed, or we can derive sensitivities of the continuous equation first. We will name the target before comparing their answers."}</Prose>
 
 <H3>{"Differentiate the numerical program"}</H3>
+
+<OdeDiscreteReverseDrawing />
+
+<Prose>{"First inspect one Euler step of the earlier scalar rule, now treating its coefficient as a trainable parameter "}<InlineMath>{"\\theta=-0.7"}</InlineMath>{". With starting state 1.2 and interval 0.325, it reaches 0.927. For a loss after this one move, target 0.4 gives a terminal state gradient 0.527. The identity wire sends 0.527 backward directly. The field wire multiplies it by "}<InlineMath>{"h\\theta=-0.2275"}</InlineMath>{", contributing −0.1198925. Adding the two routes gives the starting-state gradient 0.4071075. The parameter route multiplies by "}<InlineMath>{"hz_0=0.39"}</InlineMath>{", giving 0.20553. These are gradients for the "}<strong>{"one-step"}</strong>{" loss, before the four-step loss below."}</Prose>
 
 <Prose>{"For fixed Euler steps, write "}<InlineMath>{"F_k=z_k+h f_\\theta(t_k,z_k)"}</InlineMath>{". Ordinary backpropagation applies the chain rule through each "}<InlineMath>{"F_k"}</InlineMath>{". With a final-state loss "}<InlineMath>{"L(z_N)"}</InlineMath>{", let "}<InlineMath>{"a_k"}</InlineMath>{" be the column vector "}<InlineMath>{"\\partial L/\\partial z_k"}</InlineMath>{". Then"}</Prose>
 
@@ -154,6 +256,10 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <H3>{"Derive a continuous adjoint"}</H3>
 
+<OdeContinuousReverseDrawing />
+
+<Prose>{"The next drawing has three coupled quantities on an actual backward clock: state, state-loss sensitivity and accumulated parameter gradient. The loss supplies the terminal sensitivity; the parameter accumulator starts at zero. Orange dashed derivative wires show transpose products, not additional forward learned layers."}</Prose>
+
 <Prose>{"Alternatively, derive sensitivity equations for the continuous model first. For a terminal loss with no direct parameter dependence and parameter-independent "}<InlineMath>{"z_0"}</InlineMath>{","}</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\frac{da}{dt}=-J_z f_\\theta(t,z(t))^\\top a(t),\n\\qquad a(T)=\\nabla_{z(T)}L,"}</MathBlock></div>
@@ -164,13 +270,11 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <Prose>{""}<strong>{"Keep the integration direction explicit."}</strong>{" A parameter accumulator "}<InlineMath>{"g"}</InlineMath>{" initialized at "}<InlineMath>{"g(T)=0"}</InlineMath>{" and integrated from "}<InlineMath>{"T"}</InlineMath>{" down to zero uses "}<InlineMath>{"g'=-J_\\theta f^\\top a"}</InlineMath>{". The negative right side combined with backward limits yields the positive forward-time integral above."}</Prose>
 
-<OdeAdjointFigure/>
+<OdeObservationAdjointDrawing />
 
 <Prose>{"For losses at several observation times, the adjoint receives a jump from each observation's loss gradient. A running integral cost also contributes a term between observations. These extensions matter in time-series training; the terminal-only formula is not the full recipe for every objective."}</Prose>
 
-<section data-lesson-teaching="" className="lesson-teaching-section">
-
-<h3 className="lesson-teaching-section__title">Deeper: why the adjoint equation cancels state sensitivity</h3>
+<H3>{"Deeper: why the adjoint equation cancels state sensitivity"}</H3>
 
 <Prose>{"Let "}<InlineMath>{"S(t)=\\partial z(t)/\\partial\\theta"}</InlineMath>{". Differentiating the state equation gives "}<InlineMath>{"S'=J_zf\\,S+J_\\theta f"}</InlineMath>{", with "}<InlineMath>{"S(0)=0"}</InlineMath>{" under our assumptions. The product rule gives"}</Prose>
 
@@ -178,11 +282,11 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <Prose>{"Integrate from zero to "}<InlineMath>{"T"}</InlineMath>{". The left endpoint vanishes; the final term is "}<InlineMath>{"\\nabla_{z(T)}L^\\top S(T)"}</InlineMath>{", precisely the chain rule for the parameter gradient. This also explains the adjoint's negative sign. Forward sensitivities store a state-by-parameter matrix; the adjoint is attractive when there are many parameters and a scalar objective."}</Prose>
 
-</section>
-
 <H3>{"The two gradients need not be equal at finite resolution"}</H3>
 
-<Prose>{"Use "}<InlineMath>{"z'=\\theta z"}</InlineMath>{", "}<InlineMath>{"z(0)=1.2"}</InlineMath>{", "}<InlineMath>{"T=1.3"}</InlineMath>{", target 0.4, and loss "}<InlineMath>{"\\frac12(z(T)-0.4)^2"}</InlineMath>{", evaluated at "}<InlineMath>{"\\theta=-0.7"}</InlineMath>{"."}</Prose>
+<OdeGradientComparisonDrawing />
+
+<Prose>{"We now extend the calculation to a loss after four steps, rather than the one-step loss above. Use "}<InlineMath>{"z'=\\theta z"}</InlineMath>{", "}<InlineMath>{"z(0)=1.2"}</InlineMath>{", "}<InlineMath>{"T=1.3"}</InlineMath>{", target 0.4, and loss "}<InlineMath>{"\\frac12(z(T)-0.4)^2"}</InlineMath>{", evaluated at "}<InlineMath>{"\\theta=-0.7"}</InlineMath>{"."}</Prose>
 
 <Prose>{"The exact state is "}<InlineMath>{"1.2e^{1.3\\theta}"}</InlineMath>{". Differentiating it gives"}</Prose>
 
@@ -192,13 +296,31 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <Prose>{"Four classical RK4 steps give 0.05213852, much closer here. A backward RK4 solve of the continuous adjoint initialized at the numerical forward endpoint gives 0.05214299. It introduces its own approximation; it is not exactly the RK4 program's reverse-mode derivative."}</Prose>
 
-<OdeGradientWorkedFigure/>
-
 <Prose>{"This is why “the gradient passed a check” needs a named reference. "}<a href={"https://arxiv.org/html/2005.13420v2"}>{"Onken and Ruthotto"}</a>{" study the distinction and solver changes in continuous models. Our scalar example is independently calculated rather than reproduced from their experiments."}</Prose>
 
-<OdeGradientLab/>
+<Prose>{""}<strong>{"Change the case."}</strong>{" The shared gradient investigation starts from "}<InlineMath>{"\\theta=0.3,z_0=0.8"}</InlineMath>{", target1 and endpoint0.7, with three steps. This is a fresh finite computation, so the earlier gradient values do not apply."}</Prose>
+
+<Prose>{""}<strong>{"How does a changed field weight affect the loss gradient?"}</strong>{" Follow the finite state and all labelled derivative references together."}</Prose>
+
+<OdeGradientFieldLab />
+
+<Prose>{"Change the rate and initial state. The finite loss, finite derivative and exact continuous comparison all use that same edited case."}</Prose>
+
+<Prose>{""}<strong>{"Can the gradient change even when the forward rule does not?"}</strong>{" Change the target or the amount of depth before the loss."}</Prose>
+
+<OdeGradientLossLab />
+
+<Prose>{"Change the target or endpoint. A change in target affects the loss derivative, even when the field and forward trajectory are unchanged."}</Prose>
+
+<Prose>{""}<strong>{"Which derivative belongs to the method we actually execute?"}</strong>{" Compare the finite program and continuous references at a chosen resolution."}</Prose>
+
+<OdeGradientResolutionLab />
+
+<Prose>{"Select the taught finite method and interval count. Its finite derivative and finite-difference check refer to the same computation. The separately labelled continuous backsolve starts from that finite endpoint and residual, so it includes forward approximation as well as its backward integration error. The exact continuous gradient is a separate reference."}</Prose>
 
 <H3>{"Why saving no forward trajectory can be fragile"}</H3>
+
+<OdeReverseConditioningDrawing />
 
 <Prose>{"The decay "}<InlineMath>{"z'=-20z"}</InlineMath>{", "}<InlineMath>{"z(0)=1"}</InlineMath>{", reaches "}<InlineMath>{"e^{-20}\\approx2.0612\\times10^{-9}"}</InlineMath>{" at time one. Reverse the exact equation from an endpoint perturbed by "}<InlineMath>{"10^{-8}"}</InlineMath>{". The recovered initial value is approximately 5.85165 instead of one: reverse evolution multiplies the perturbation by "}<InlineMath>{"e^{20}"}</InlineMath>{"."}</Prose>
 
@@ -206,19 +328,37 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <Prose>{"“Constant memory” for a backsolve usually concerns dependence on the number of internal forward steps. Parameters, parameter gradients, requested output states, batches and local network activations still occupy memory. Current "}<a href={"https://docs.kidger.site/diffrax/api/adjoints/"}>{"Diffrax adjoint documentation"}</a>{" describes checkpointed differentiation of the numerical solution and distinguishes it from approximate continuous backsolves. The correct choice depends on the objective, solver, accuracy needs and available memory."}</Prose>
 
+<H3>{"Deeper: reverse a rule that depends on the actual clock"}</H3>
+
+<Prose>{"The decay examples were autonomous: their rate had no direct clock input. "}<strong>{"What breaks if we restart the backward clock at zero for a time-dependent field?"}</strong>{" The following example evaluates "}<InlineMath>{"f(t,z)=\\theta z+t"}</InlineMath>{" at its actual stage times, including when solving backward."}</Prose>
+
+<OdeClockSensitivityDrawing />
+
+<Prose>{"The initial clock is 0.2 and the final clock 1.3. With "}<InlineMath>{"z_0=1.2,\\theta=-0.7"}</InlineMath>{", the exact state is approximately 1.184577394. The term "}<InlineMath>{"+t"}</InlineMath>{" changes the field at every probe; using a zero-based negative clock on the reverse solve would describe a different function. With "}<InlineMath>{"\\theta=0"}</InlineMath>{", the exact move from clock a to clock b is "}<InlineMath>{"z_b=z_a+(b^2-a^2)/2"}</InlineMath>{", valid in either direction."}</Prose>
+
+<Prose>{"The complete program below stores the actual Euler/classical RK4 graph. "}<code>{"tangent"}</code>{" seeds an identity matrix for initial-state sensitivity and zero columns for field-parameter sensitivity. Each probe transports those columns with the state Jacobian and adds its parameter Jacobian. "}<code>{"discrete_reverse"}</code>{" starts from the terminal loss gradient, follows the same graph backward, keeps the identity route, and accumulates every use of a shared parameter. For RK4, each stage's sensitivity also returns through the earlier slopes that formed its tentative state; multiplying only accepted endpoints would miss those paths."}</Prose>
+
+<Prose>{""}<code>{"continuous_reverse"}</code>{" instead solves the continuous state/adjoint/parameter equations from the actual final clock down to the actual initial clock. The demonstrated comparison initializes it with the exact endpoint and exact terminal-loss gradient, isolating its own integration error. Initializing it from a numerical forward endpoint would add that endpoint error too, as in the earlier scalar comparison."}</Prose>
+
+<OdeVisibleProgram file="ode_sensitivities.py" />
+
+<Prose>{""}<code>{"fixed_solve"}</code>{" validates finite one-dimensional states/parameters, positive whole interval count, supported method, field shapes and a representable step. It returns an unchanged state for equal clocks. The small-rate analytic reference uses a convergent exponential-moment series, including "}<InlineMath>{"\\theta=0"}</InlineMath>{", to avoid dividing cancellation errors by "}<InlineMath>{"\\theta^2"}</InlineMath>{" or "}<InlineMath>{"\\theta^3"}</InlineMath>{". The default two-coordinate example has one rate per coordinate; the generic tangent/reverse also accepts coupled state Jacobians and any finite parameter-vector width. It does not compute derivatives of start/stop clocks or adaptive branch decisions."}</Prose>
+
+<Prose>{"With sixteen classical RK4 intervals, the first coordinate's finite parameter gradient is approximately 0.657501713, versus exact 0.657501836 for target 0.4. Its continuous reverse with 128 intervals gives approximately 0.657501835. The close answers belong to this checked fixture; the objective labels remain necessary even when the numbers look equal. Run the file directly to print those values without changing weights, examples or evidence files. Compare a modified coupled field against finite differences of its own loss before trusting a changed Jacobian."}</Prose>
+
 <H3>{"Control an actual solver API with the same field"}</H3>
 
-<Prose>{"The mechanism owner is "}<code>{"integrate"}</code>{" in "}<a href={"/learn-assets/neural-ode-continuous-depth-models/neural_ode_study.py"}>{"neural_ode_study.py"}</a>{": it builds Euler and classical RK4 updates from tensor operations, keeping the computation graph for direct differentiation. "}<code>{"VectorField"}</code>{" and "}<code>{"DepthClassifier"}</code>{" later turn that mechanism into a learned classifier. Here we isolate the solver/library bridge on z′=a z, where both the trajectory and its derivatives are known. This avoids mistaking a similar classification score for a correct solver interface."}</Prose>
+<Prose>{"The scratch implementation is "}<code>{"integrate"}</code>{" in "}<a href={"/learn-assets/neural-ode-continuous-depth-models/neural_ode_study.py"}>{"neural_ode_study.py"}</a>{": it builds Euler and classical RK4 updates from tensor operations, keeping the computation graph for direct differentiation. "}<code>{"VectorField"}</code>{" and "}<code>{"DepthClassifier"}</code>{" later turn that mechanism into a learned classifier. Here we isolate the solver/library bridge on z′=a z, where both the trajectory and its derivatives are known. This avoids mistaking a similar classification score for a correct solver interface."}</Prose>
 
-<Prose>{"Keep "}<a href={"/learn-assets/neural-ode-continuous-depth-models/solver_library_bridge.py"}>{"solver_library_bridge.py"}</a>{" beside that program. With the earlier PyTorch environment, install "}<code>{"torchdiffeq==0.2.5"}</code>{", then run "}<code>{"python solver_library_bridge.py"}</code>{". The target for these new authored examples is PyTorch 2.14.0, CPU float64. The local bridge has now been executed with torchdiffeq 0.2.5 and PyTorch 2.14.0 on CPU float64. The fixed-step Euler endpoint and both initial-state and rate gradients match the scratch program; adaptive direct and continuous-adjoint results pass the stated analytic tolerances. The isolated replay also re-evaluated every saved classifier on its declared data roles."}</Prose>
+<Prose>{"Keep "}<a href={"/learn-assets/neural-ode-continuous-depth-models/solver_library_bridge.py"}>{"solver_library_bridge.py"}</a>{" beside that program. With the earlier PyTorch environment, install "}<code>{"torchdiffeq==0.2.5"}</code>{", then run "}<code>{"python solver_library_bridge.py"}</code>{". The downloadable bridge was executed with torchdiffeq 0.2.5 and PyTorch 2.14.0 on CPU float64. The fixed-step Euler endpoint and both initial-state and rate gradients match the scratch program; adaptive direct and continuous-adjoint results pass the stated analytic tolerances. The saved classifier outcomes retain their declared fit, validation and assessment roles."}</Prose>
+
+<OdeSolverClocksDrawing />
 
 <Prose>{""}<code>{"odeint(field, initial, times)"}</code>{" returns a tensor with requested time as its first axis. Those times request output values; an adaptive solver may take many internal steps between them. "}<code>{"method='euler', options={'step_size': 1/8}"}</code>{" gives the same eight Euler steps as our scratch route. We compare both final states and both kinds of derivative: with respect to the initial state and the field parameter. In contrast, the package's "}<code>{"rk4"}</code>{" uses the 3/8 tableau, while our scratch program uses classical RK4. Their order alone does not justify step-by-step equality. The solver choices and adjoint interface are documented in "}<a href={"https://github.com/rtqichen/torchdiffeq"}>{"the author's repository"}</a>{"."}</Prose>
 
-<OdeSolverApiFigure/>
-
 <Prose>{"For endpoint time one and loss L=½Σz(1)², exact calculus gives z(1)=exp(a)z₀, ∂L/∂z₀=exp(2a)z₀, and ∂L/∂a=exp(2a)Σz₀². The Euler solution instead uses factor (1+a/8)⁸. The adaptive direct and adjoint solves target the continuous answer within stated tolerances; we do "}<strong>{"not"}</strong>{" require them to equal the eight-step Euler answer. "}<code>{"odeint_adjoint"}</code>{" receives an "}<code>{"nn.Module"}</code>{" so its trainable field parameter can be found, and we set forward and backward tolerances explicitly."}</Prose>
 
-<section data-lesson-teaching="" className="lesson-teaching-section"><h3 className="lesson-teaching-section__title">Read the complete runnable solver-library bridge</h3><CodeBlock language={"python"}>{"\"\"\"A matched Euler program, adaptive solve, and continuous-adjoint comparison.\n\nAuthoring targets: torch 2.14.0, torchdiffeq 0.2.5. CPU float64.\nRun beside neural_ode_study.py; no fitting or dataset download occurs.\n\"\"\"\nimport torch\nfrom torch import nn\nfrom torchdiffeq import odeint, odeint_adjoint\nfrom neural_ode_study import integrate\n\n\nclass Decay(nn.Module):\n    def __init__(self, rate=-.7):\n        super().__init__()\n        self.rate = nn.Parameter(torch.tensor(rate, dtype=torch.float64))\n\n    def forward(self, time, state):\n        return self.rate * state\n\n\ndef value_and_derivatives(route):\n    field = Decay()\n    initial = torch.tensor([[1.5], [-.5]], dtype=torch.float64, requires_grad=True)\n    times = torch.tensor([0., 1.], dtype=torch.float64)\n    if route == \"scratch_euler\":\n        result = integrate(field, initial, steps=8, method=\"euler\")[-1]\n    elif route == \"library_euler\":\n        result = odeint(field, initial, times, method=\"euler\",\n                        options={\"step_size\": 1/8})[-1]\n    elif route == \"adaptive\":\n        result = odeint(field, initial, times, method=\"dopri5\", rtol=1e-9, atol=1e-11)[-1]\n    elif route == \"adjoint\":\n        result = odeint_adjoint(field, initial, times, method=\"dopri5\",\n                                rtol=1e-9, atol=1e-11, adjoint_method=\"dopri5\",\n                                adjoint_rtol=1e-9, adjoint_atol=1e-11)[-1]\n    else:\n        raise ValueError(route)\n    loss = result.square().sum()/2\n    initial_gradient, rate_gradient = torch.autograd.grad(loss, (initial, field.rate))\n    return result.detach(), initial_gradient.detach(), rate_gradient.detach()\n\n\ndef main():\n    scratch, library = [value_and_derivatives(route)\n                        for route in (\"scratch_euler\", \"library_euler\")]\n    for left, right in zip(scratch, library):\n        torch.testing.assert_close(left, right, rtol=1e-12, atol=1e-12)\n    initial = torch.tensor([[1.5], [-.5]], dtype=torch.float64)\n    factor = torch.exp(torch.tensor(-.7, dtype=torch.float64))\n    exact = (initial*factor, initial*factor.square(), initial.square().sum()*factor.square())\n    for route in (\"adaptive\", \"adjoint\"):\n        actual = value_and_derivatives(route)\n        for value, reference in zip(actual, exact):\n            torch.testing.assert_close(value, reference, rtol=2e-7, atol=2e-9)\n        print(route, \"endpoint/initial-gradient/rate-gradient:\", *actual)\n    print(\"Euler endpoint, initial gradient, rate gradient:\", *library)\n\n\nif __name__ == \"__main__\":\n    main()"}</CodeBlock></section>
+<OdeVisibleProgram file="solver_library_bridge.py" />
 
 <Prose>{"The continuous adjoint changes how derivatives are computed; it does not erase reconstruction error, intermediate saved output states, parameter gradients or library overhead. Direct differentiation through K accepted numerical steps generally retains work proportional to K, while a continuous backsolve trades recomputation and its own numerical sensitivity for less retained internal-step history. Smoothness, solver stability and state dimension still matter. The current example has no events, stochastic layers or discontinuous observation jumps; inserting those changes the problem."}</Prose>
 
@@ -230,33 +370,71 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 </details>
 
-<H2>{"5. What continuous flow can—and cannot—rearrange"}</H2>
+<H2>{"5. What can a continuous flow rearrange?"}</H2>
 
-<Prose>{"Suppose a field is continuous in time, locally Lipschitz in state, and solutions exist uniquely over the interval of interest. Starting at a specified state and time determines one trajectory. Locally Lipschitz means that, near each state, small state changes cannot cause an unbounded ratio of change in the field; it is a useful condition for uniqueness."}</Prose>
+<Prose>{"The solver can now move a representation and differentiate the loss. Can that representation implement every decision boundary we might ask for? First keep the state one-dimensional, so we can see exactly what prevents a rearrangement."}</Prose>
 
-<Prose>{"Two distinct trajectories cannot meet at the "}<strong>{"same state and same time"}</strong>{" and then have different pasts within that common interval: uniqueness applied backward would contradict their different starts. Crossing lines in a two-dimensional projection of a higher-dimensional state are not a violation. Neither is visiting the same position at different times."}</Prose>
+<OdeOrderingDrawing />
 
-<Prose>{"This has a concrete consequence in one dimension. If "}<InlineMath>{"z_A(0)<z_B(0)"}</InlineMath>{", their ordering cannot reverse along a well-defined unique flow. Reversing order would require a meeting."}</Prose>
+<Prose>{"The three cyan points start at −1, 0 and 1. They all follow the "}<strong>{"same field"}</strong>{", over the "}<strong>{"same clock interval"}</strong>{". Each track records position against time. A vertical slice through the drawing is one shared time: the middle point stays between the two outer points. The amber readout threshold labels points on one side class one and points on the other side class zero. It cannot label both outer points one and the middle point zero."}</Prose>
 
-<Prose>{"Take inputs −1, 0, 1, where the outer two belong to class one and the middle belongs to class zero. A one-dimensional unique flow followed by a single linear threshold cannot solve this arrangement. A threshold separates a line into two intervals; preserving order leaves the middle between the outer points. A nonlinear readout could change the conclusion, so the readout assumption belongs in the explanation."}</Prose>
+<Prose>{"Why can the tracks not meet and then exchange places? Suppose the field is continuous in time, locally Lipschitz in state, and its solutions exist uniquely throughout this interval. Locally Lipschitz means that, in a neighborhood, changing state a little changes the field by at most a fixed multiple of that change. These assumptions give a unique local trajectory from a specified state and clock. If two tracks met at the same state and same time, solving backward from that meeting would give a single past, contradicting their distinct starts. Changing their order would require such a meeting."}</Prose>
 
-<OdeOrderPreservationFigure/>
+<Prose>{"For a one-dimensional state, this gives"}</Prose>
 
-<H3>{"Augment the state with room to move"}</H3>
+<div className="neural-equation"><MathBlock>{"z_A(0)<z_B(0)\\quad\\Longrightarrow\\quad z_A(T)<z_B(T),"}</MathBlock></div>
 
-<Prose>{"Append a zero coordinate: "}<InlineMath>{"(x,0)"}</InlineMath>{". Now use the two-dimensional rule "}<InlineMath>{"x'=0,\\ y'=x^2"}</InlineMath>{". At depth "}<InlineMath>{"T"}</InlineMath>{", the state is "}<InlineMath>{"(x,Tx^2)"}</InlineMath>{". At "}<InlineMath>{"T=1"}</InlineMath>{", the three inputs become "}<InlineMath>{"(-1,1),(0,0),(1,1)"}</InlineMath>{". A linear readout testing "}<InlineMath>{"y>0.5"}</InlineMath>{" separates the classes."}</Prose>
+<Prose>{"provided both solutions exist uniquely throughout the common interval. The resulting state map is invertible on its image. A readout need not be invertible: it may discard coordinates or assign many states the same label. The impossibility here therefore concerns "}<strong>{"a one-dimensional unique flow followed by one linear threshold"}</strong>{". A nonlinear readout changes that question. Lines may cross in a projection of a higher-dimensional state, or revisit a position at different clocks, without two full states meeting at the same time."}</Prose>
 
-<Prose>{"No two full trajectories meet. The added coordinate gives the representation another direction in which to separate examples. It is a constructive illustration of augmentation, not a trained experiment or a proof that every augmented model learns easily. "}<a href={"https://arxiv.org/html/1904.01681v1"}>{"Augmented Neural ODEs"}</a>{" investigates this idea and its computational consequences."}</Prose>
+<H3>{"Give the representation a second direction"}</H3>
 
-<OdeTopologyLab/>
+<Prose>{"What if we preserve each input position and add a place to record its distance from the center?"}</Prose>
 
-<Prose>{"A coarse numerical method need not preserve an exact flow's properties. For "}<InlineMath>{"z'=-2z"}</InlineMath>{", one Euler step with "}<InlineMath>{"h=1"}</InlineMath>{" maps "}<InlineMath>{"z"}</InlineMath>{" to "}<InlineMath>{"-z"}</InlineMath>{", reversing order. The exact map multiplies by "}<InlineMath>{"e^{-2}>0"}</InlineMath>{" and preserves order. A discrete model that exploits a coarse solver's behavior may change substantially when evaluated with finer steps."}</Prose>
+<OdeLiftDrawing />
 
-<OdeOrderFigure/>
+<Prose>{"The drawing appends a zero coordinate to each input: (−1, 0), (0, 0), (1, 0). The horizontal derivative is zero, so each horizontal position remains unchanged. The vertical derivative is the square of that horizontal position. The outer points rise at rate one; the middle point has rate zero and stays still. At depth one, the outer points are at height one, above the amber threshold 0.5; the middle stays at height zero. The second coordinate has made a linear readout sufficient."}</Prose>
 
-<Prose>{"For finite sampled rings or point clouds, gaps can also let trajectories thread between examples. A theorem about an entire continuous region is stronger than a claim about a finite training set. Both distinctions prevent us from mistaking an attractive picture for a general impossibility result."}</Prose>
+<Prose>{"Writing the vertical coordinate as a, the entire constructed field and solution are"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"x'=0,\\qquad a'=x^2,\\qquad (x(0),a(0))=(x_0,0),\n\\qquad (x(T),a(T))=(x_0,Tx_0^2)."}</MathBlock></div>
+
+<Prose>{"This is "}<strong>{"state augmentation"}</strong>{": add coordinates before integrating, and allow the field to use them. No full trajectories meet in this example. We have constructed a solution, rather than trained one. The "}<a href={"https://arxiv.org/html/1904.01681v1"}>{"Augmented Neural ODEs paper"}</a>{" studies broader representational and computational consequences; its continuous-region topology arguments require the stated domain and continuity assumptions. They do not say every finite sampled dataset is impossible for an unaugmented flow. Gaps between sampled points can leave routes that would not exist for an entire connected region."}</Prose>
+
+<Prose>{"Now explicitly change the starting inputs to −2, 0 and 1. Their squared values are 4, 0 and 1. At T = 0.4 the heights are 1.6, 0 and 0.4: only the left point exceeds 0.5. At T = 0.7 the heights are 2.8, 0 and 0.7: both outer points exceed it. The flow can be sound while a particular depth/readout is insufficient."}</Prose>
+
+<Prose>{""}<strong>{"Where does a different starting point go in the lifted space?"}</strong>{" Move one point and follow the same constructed rule."}</Prose>
+
+<OdeLiftPointsLab />
+
+<Prose>{""}<strong>{"Is changing the decision boundary the same as changing motion?"}</strong>{" Inspect depth and readout threshold as separate operations."}</Prose>
+
+<OdeLiftReadoutLab />
+
+<Prose>{"The first controls edit a chosen starting point. The next controls change depth and the readout threshold. They share the same three points; the live labels are computed from the displayed final heights. The threshold changes decisions without changing a trajectory."}</Prose>
+
+<H3>{"A numerical map can violate an exact-flow property"}</H3>
+
+<Prose>{"Does every solver preserve that order? Return to our scalar decay field with coefficient −2, and deliberately take a very coarse interval h = 1."}</Prose>
+
+<OdeOrderNumericalDrawing />
+
+<Prose>{"Euler sends each starting value to z + (−2z) = −z: the points exchange order. The exact solution sends it to exp(−2)z, multiplying by a positive number and preserving order. Neither calculation changes the field. Euler has created a different finite map; a network trained through that map can exploit behavior absent from the exact continuous flow. Refinement checks from "}<strong>{"The solver is part of the computation"}</strong>{" distinguish those two interpretations."}</Prose>
+
+<H3>{"Deeper: where can the learned parameters live?"}</H3>
+
+<Prose>{"The tiny field in "}<strong>{"A derivative tells you how to move"}</strong>{" concatenated the clock to its state. That is one parameterization, not the definition of a Neural ODE."}</Prose>
+
+<OdeParameterizationsDrawing />
+
+<Prose>{"Read the four small routes separately. A clock input lets the same weight matrix produce different rates at the same state at different times. A piecewise route selects one field before a declared boundary and another afterward; both state segments must be joined, and the solver should respect the discontinuity. A basis route uses clock-dependent coefficients to combine a fixed set of fields. A hypernetwork route uses the clock to generate another network's weights. For example, f(t,z) = (1−t)f₀(z) + t f₁(z) blends two rates; it is not the same as integrating f₀ and f₁ separately and blending their endpoints."}</Prose>
+
+<Prose>{"A second-order system supplies a different kind of augmentation. Position q alone does not tell us how an object is moving; adding velocity v makes q' = v and v' = gθ(t,q,v) a first-order equation on the joint state (q,v). Its two channels represent position and velocity, rather than arbitrary added memory. Units and initial velocity must be specified. Extra coordinates, time dependence and richer readouts solve different restrictions; choose the one that matches the missing information."}</Prose>
+
+<Prose>{"These designs are discussed in "}<a href={"https://arxiv.org/html/2202.02435"}>{"Kidger's treatment of neural differential equations"}</a>{", especially the parameterization and augmentation sections. They still require a well-defined field, a suitable numerical method and evaluation on the actual task. More representational room does not guarantee easier optimization or better generalization."}</Prose>
 
 <H2>{"6. Train a small continuous-depth classifier on real measurements"}</H2>
+
+<Prose>{"The lift example constructed a field that solved a chosen labeling problem. Does a learned shared field contribute anything on measured data? We now switch explicitly to flowers: their four measured lengths and widths form the supplied input; their recorded species is the target."}</Prose>
 
 <Prose>{"Our data are the 150 Iris measurements distributed by UCI: sepal length, sepal width, petal length and petal width, all in centimeters, with three species labels. The "}<a href={"https://archive.ics.uci.edu/dataset/53/iris"}>{"dataset"}</a>{" is credited to R. A. Fisher and licensed CC BY 4.0. The retained "}<a href={"/learn-assets/neural-ode-continuous-depth-models/iris.csv"}>{"CSV"}</a>{" uses the corrected values documented in its "}<a href={"/learn-assets/neural-ode-continuous-depth-models/data-provenance.md"}>{"provenance"}</a>{"."}</Prose>
 
@@ -264,7 +442,7 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <H3>{"Keep the comparison interpretable"}</H3>
 
-<Prose>{"Identical four-feature rows are grouped before assigning data roles; source rows 102 and 143 are duplicates. We keep all original rows in the download but score each unique vector once. A fixed stratified split assigns 90 unique examples to fitting, 30 to validation and 29 to assessment. The fitting examples alone determine the feature means and population standard deviations."}</Prose>
+<Prose>{"Identical four-feature rows are grouped before assigning data roles; source rows 102 and 143 are duplicates. We keep all original rows in the download but score each unique vector once. A fixed stratified split assigns 90 unique examples to fitting, 30 to validation and 29 to assessment. The fitting examples alone determine the feature means and population standard deviations. Fitting changes the parameters; validation chooses a saved checkpoint without fitting on those records; assessment measures the selected model afterward. Dividing each measurement's difference from its fitting mean by its fitting standard deviation puts these inputs on comparable scales. The "}<a href={"/learn/path/full-curriculum/batch-layer-group-rms-normalization?module=deep-learning-fundamentals"}>{"Batch/Layer/Group/RMS Normalization lesson"}</a>{" explains that operation; no validation or assessment measurement contributes to these statistics."}</Prose>
 
 <Prose>{"We compare four models:"}</Prose>
 
@@ -276,27 +454,75 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <H3>{"What actually happened"}</H3>
 
+<OdeHistoryDrawing />
+
 <NeuralTable caption={"What actually happened"} headers={[<>{"Model"}</>,<>{"Assessment cross-entropy, seeds 13 / 37 / 61"}</>,<>{"Correct out of 29, same order"}</>]} rows={[[<>{"Linear"}</>,<>{"0.22045 / 0.20028 / 0.21245"}</>,<>{"28 / 28 / 28"}</>],[<>{"Residual"}</>,<>{"0.16763 / 0.10539 / 0.05133"}</>,<>{"28 / 28 / 29"}</>],[<>{"Neural ODE"}</>,<>{"0.15239 / 0.10335 / 0.06212"}</>,<>{"28 / 28 / 29"}</>],[<>{"Augmented ODE"}</>,<>{"0.04204 / 0.10549 / 0.03648"}</>,<>{"29 / 28 / 29"}</>]]} />
 
 <Prose>{"The uniform three-class predictor has cross-entropy "}<InlineMath>{"\\log3\\approx1.09861"}</InlineMath>{". A fixed class-zero choice scores 10/29. The linear model is already strong: a small reduction in classification errors cannot explain every difference in cross-entropy. Probability assigned to the true class matters even when the winning label stays unchanged."}</Prose>
 
 <Prose>{"All nonlinear runs selected update 50, while the linear runs selected update 300. Later training loss improvement therefore did not automatically mean better validation performance. There was no post-assessment search for a more impressive configuration."}</Prose>
 
-<OdeStudyFigure/>
-
 <H3>{"Follow one actual flower through the learned field"}</H3>
+
+<Prose>{"How does one measurement vector become three class probabilities? Follow this fixed source through its saved seed-37 field before editing a different flower."}</Prose>
+
+<OdeWorkedStudyDrawing />
+
+<Prose>{"The cyan centimeter values first meet the fixed fitting means and scales. Their standardized vector enters the field; four classical RK4 intervals update every hidden coordinate. The final state reaches the three-row affine readout, which produces logits. Softmax subtracts the shared maximum, exponentiates and divides by the shared sum. The recorded species would enter the loss separately, after this forward route."}</Prose>
 
 <Prose>{"For validation source row 64, the seed-37 Neural ODE assigns probabilities approximately "}<InlineMath>{"(0.01744,0.93374,0.04882)"}</InlineMath>{" in the order setosa, versicolor, virginica. Increasing its petal length by 0.6 cm while holding the other measurements fixed changes them to "}<InlineMath>{"(0.00730,0.67440,0.31830)"}</InlineMath>{". The winning label stays versicolor, but the evidence shifts substantially toward virginica."}</Prose>
 
 <Prose>{"These are full forward passes through the saved learned model, not a hand-drawn boundary. The input edit is a hypothetical measurement intervention; it does not establish a biological causal effect."}</Prose>
 
-<OdeWorkedIrisFigure/>
+<Prose>{"Now switch explicitly to fresh validation row 70 for the shared live case. The first question chooses the saved architecture, declared seed and source. Changing architecture or seed keeps all raw edits; changing the source deliberately adopts that source's measurements. The saved models cover the four architectures and all three seeds from the table above."}</Prose>
 
-<OdeIrisLab/>
+<OdeStudyModelLab />
+
+<Prose>{"What changes when a single measurement changes, with the learned rule held fixed?"}</Prose>
+
+<OdeStudyFeatureLab />
+
+<Prose>{"Edit any of the four raw centimeter values. The standardization and complete forward pass update; the probability table compares the edited input with that source's original measurements under the same weights and solver. A petal-length edit need not act monotonically or affect every seed the same way. These comparisons reveal sensitivity, not a newly verified flower label or biological causal effect."}</Prose>
+
+<Prose>{"Can a different numerical realization change the same saved model's probabilities?"}</Prose>
+
+<OdeStudySolverLab />
+
+<Prose>{"Change method, interval count or final depth. The two ODE models reuse their saved field weights. The linear and fixed residual baselines retain their own discrete architectures; the interface states that these ODE controls do not change them. Holding weights and raw input fixed makes a refinement comparison interpretable."}</Prose>
+
+<Prose>{"Where does each hidden coordinate go during this execution?"}</Prose>
+
+<OdeStudyTraceLab />
+
+<Prose>{"Every one of the four or six coordinates has its own actual clock/state trace. Inspecting an accepted index reveals the complete vector, rather than a selected projection that could hide a crossing or an added coordinate."}</Prose>
+
+<Prose>{"What does the same path look like when we choose two coordinates?"}</Prose>
+
+<OdeStudyProjectionLab />
+
+<Prose>{"Select horizontal and vertical coordinates independently. The labelled numerical axes show this projection's extents; the full coordinate traces above remain available. A crossing in this view does not establish that two full states coincide, as the uniqueness argument in "}<strong>{"What can a continuous flow rearrange?"}</strong>{" explained."}</Prose>
+
+<Prose>{"What is inside one of those field evaluations?"}</Prose>
+
+<OdeStudyFieldLab />
+
+<Prose>{"The supplied stage vector includes the actual stage clock. The stored input weight matrix has 16 output rows and five inputs for the 4D model, or seven inputs for the 6D model. Select a hidden row: multiply all its inputs by the row's weights, add its bias, then apply tanh. The drawing retains all 16 hidden outputs. Each derivative row reads all 16 of them and adds its own bias. Its matrix has four or six output rows. These are ordinary stored output-by-input matrices; the mapping widths 5→16→4 do not mean the first stored matrix is 5×16."}</Prose>
+
+<Prose>{"Which tentative input generated those rates?"}</Prose>
+
+<OdeStudyStageLab />
+
+<Prose>{"Choose an accepted interval and a rate-evaluation number. The full tentative state, clock and derivative change together; the field drawing above inspects this same evaluation. Classical RK4 uses four probes for one accepted endpoint. Euler uses one. The residual comparator instead selects its block-specific field at each of its four fixed steps."}</Prose>
+
+<Prose>{"Finally, which coordinates reach a particular class score?"}</Prose>
+
+<OdeStudyReadoutLab />
+
+<Prose>{"All final coordinates enter every saved class row. The three biases are added before softmax. Selecting a class changes inspection only, while the shared state and all three probabilities remain visible. This completes the raw-input→field→numerical-update→readout path using actual learned coefficients."}</Prose>
 
 <Prose>{"For unchanged row 64, using 4, 16 and 64 RK4 steps gives versicolor probabilities 0.9337389, 0.9335432 and 0.9335421. Four Euler steps give 0.9442828. The weights are identical; the numerical realization changed. Agreement under refinement is useful evidence that the model is behaving like its continuous formulation locally. It does not prove accuracy everywhere or improve the training data automatically."}</Prose>
 
-<Prose>{"Independent NumPy inference reproduces the saved PyTorch models' logits and traces within "}<InlineMath>{"8.9\\times10^{-16}"}</InlineMath>{" over the checked input/method/step cases. Input derivatives also agree with central differences. These author calculations support the manuscript and future interactive model."}</Prose>
+<Prose>{"Independent NumPy inference reproduces the saved PyTorch models' logits and traces within "}<InlineMath>{"8.9\\times10^{-16}"}</InlineMath>{" over the checked input/method/step cases. Input derivatives also agree with central differences. The downloadable calculations provide independent NumPy and finite-difference checks of those saved computations."}</Prose>
 
 <H3>{"Run the complete study"}</H3>
 
@@ -306,117 +532,259 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <Prose>{"It writes the complete results and selected weights. Install SciPy as well to run the separate "}<a href={"/learn-assets/neural-ode-continuous-depth-models/ode_calculations.py"}>{"calculation program"}</a>{", which imports the study's model definitions and reuses the saved weights. That second command does not train again. The "}<a href={"/learn-assets/neural-ode-continuous-depth-models/data-provenance.md"}>{"provenance"}</a>{" records the versions used here."}</Prose>
 
-<section data-lesson-teaching="" className="lesson-teaching-section">
-
-<h3 className="lesson-teaching-section__title">Complete training program: data roles, models, selection and saved weights</h3>
-
-<CodeBlock language={"python"}>{"\"\"\"Declared real Iris study: learned depth is not botanical time.\"\"\"\nfrom copy import deepcopy\nfrom pathlib import Path\nimport csv\nimport hashlib\nimport json\nimport numpy as np\nimport torch\nfrom torch import nn\n\nDIRECTORY = Path(__file__).resolve().parent\ntorch.set_num_threads(1)\ntorch.set_default_dtype(torch.float64)\n\n\ndef load_data():\n    with (DIRECTORY / \"iris.csv\").open(newline=\"\") as handle:\n        records = list(csv.DictReader(handle))\n    columns = [\"sepal_length_cm\", \"sepal_width_cm\", \"petal_length_cm\", \"petal_width_cm\"]\n    names = [\"setosa\", \"versicolor\", \"virginica\"]\n    features = np.array([[float(row[key]) for key in columns] for row in records])\n    labels = np.array([names.index(row[\"species\"]) for row in records])\n    groups = {}\n    for index, row in enumerate(features):\n        groups.setdefault(tuple(row), []).append(index)\n    for members in groups.values():\n        assert len(set(labels[members])) == 1\n    kept = np.array(sorted(members[0] for members in groups.values()))\n    roles = {key: [] for key in (\"fit\", \"validation\", \"assessment\")}\n    generator = np.random.default_rng(926)\n    for label in range(3):\n        indices = generator.permutation(kept[labels[kept] == label])\n        for key, subset in zip(roles, (indices[:30], indices[30:40], indices[40:])):\n            roles[key].extend(subset.tolist())\n    mean, scale = features[roles[\"fit\"]].mean(0), features[roles[\"fit\"]].std(0)\n    metadata = dict(columns=columns, classes=names, mean=mean.tolist(), scale=scale.tolist(),\n        roles={key: [index+1 for index in indices] for key, indices in roles.items()},\n        duplicate_groups=[[i+1 for i in group] for group in groups.values() if len(group)>1],\n        unique_count=len(kept))\n    return torch.tensor((features-mean)/scale), torch.tensor(labels), roles, metadata\n\n\nclass VectorField(nn.Module):\n    def __init__(self, dimension):\n        super().__init__()\n        self.input = nn.Linear(dimension+1, 16)\n        self.output = nn.Linear(16, dimension)\n\n    def forward(self, time, state):\n        clock = torch.full_like(state[:, :1], float(time))\n        return self.output(torch.tanh(self.input(torch.cat((state, clock), -1))))\n\n\ndef integrate(field, initial, steps=4, method=\"rk4\", endpoint=1.):\n    state = initial\n    trace = [state]\n    step_size = endpoint/steps\n    for step in range(steps):\n        time = step*step_size\n        first = field(time, state)\n        if method == \"euler\":\n            state = state + step_size*first\n        elif method == \"rk4\":\n            second = field(time+step_size/2, state+step_size*first/2)\n            third = field(time+step_size/2, state+step_size*second/2)\n            fourth = field(time+step_size, state+step_size*third)\n            state = state + step_size*(first+2*second+2*third+fourth)/6\n        else:\n            raise ValueError(method)\n        trace.append(state)\n    return torch.stack(trace)\n\n\nclass DepthClassifier(nn.Module):\n    def __init__(self, kind):\n        super().__init__()\n        self.kind = kind\n        self.dimension = 6 if kind == \"augmented_ode\" else 4\n        if kind in (\"neural_ode\", \"augmented_ode\"):\n            self.field = VectorField(self.dimension)\n        if kind == \"residual\":\n            self.blocks = nn.ModuleList([VectorField(4) for _ in range(4)])\n        self.readout = nn.Linear(self.dimension, 3)\n\n    def forward(self, inputs, steps=4, method=\"rk4\", endpoint=1., return_trace=False):\n        state = torch.cat((inputs, inputs.new_zeros((len(inputs), self.dimension-4))), -1)\n        if self.kind in (\"neural_ode\", \"augmented_ode\"):\n            trace = integrate(self.field, state, steps, method, endpoint)\n            state = trace[-1]\n        else:\n            states = [state]\n            if self.kind == \"residual\":\n                for index, block in enumerate(self.blocks):\n                    state = state + .25*block(index/4, state)\n                    states.append(state)\n            trace = torch.stack(states)\n        logits = self.readout(state)\n        return (logits, trace) if return_trace else logits\n\n\ndef evaluate(model, features, labels):\n    with torch.no_grad():\n        logits = model(features)\n    return dict(cross_entropy=float(nn.functional.cross_entropy(logits, labels)),\n                correct=int((logits.argmax(-1)==labels).sum()), count=len(labels))\n\n\ndef main():\n    features, labels, roles, metadata = load_data()\n    reports, snapshots = [], []\n    for kind in [\"linear\", \"residual\", \"neural_ode\", \"augmented_ode\"]:\n        for seed in [13, 37, 61]:\n            torch.manual_seed(seed)\n            model = DepthClassifier(kind)\n            optimizer = torch.optim.AdamW(model.parameters(), lr=.01, weight_decay=.001)\n            best_loss, selected, curves = float(\"inf\"), None, []\n            for step in range(1, 301):\n                optimizer.zero_grad(set_to_none=True)\n                loss = nn.functional.cross_entropy(model(features[roles[\"fit\"]]), labels[roles[\"fit\"]])\n                loss.backward()\n                optimizer.step()\n                if step==1 or step%25==0:\n                    fit = evaluate(model, features[roles[\"fit\"]], labels[roles[\"fit\"]])\n                    validation = evaluate(model, features[roles[\"validation\"]], labels[roles[\"validation\"]])\n                    curves.append(dict(step=step, fit=fit, validation=validation))\n                    if validation[\"cross_entropy\"] < best_loss:\n                        best_loss = validation[\"cross_entropy\"]\n                        selected = deepcopy(model.state_dict())\n                        selected_step = step\n            model.load_state_dict(selected)\n            report = dict(kind=kind, seed=seed, parameters=sum(p.numel() for p in model.parameters()),\n                selected_step=selected_step, curves=curves,\n                fit=evaluate(model,features[roles[\"fit\"]],labels[roles[\"fit\"]]),\n                validation=evaluate(model,features[roles[\"validation\"]],labels[roles[\"validation\"]]),\n                assessment=evaluate(model,features[roles[\"assessment\"]],labels[roles[\"assessment\"]]))\n            reports.append(report)\n            snapshots.append(dict(kind=kind,seed=seed,selected_step=selected_step,\n                state={key:value.tolist() for key,value in selected.items()}))\n            print(kind,seed,selected_step,report[\"assessment\"],flush=True)\n    result=dict(data=metadata, updates=300, learning_rate=.01,weight_decay=.001,\n        seeds=[13,37,61], dtype=\"float64\", torch=torch.__version__, numpy=np.__version__,\n        dataset_sha256=hashlib.sha256((DIRECTORY/\"iris.csv\").read_bytes()).hexdigest(),runs=reports)\n    (DIRECTORY/\"study-results.json\").write_text(json.dumps(result,indent=2,allow_nan=False)+\"\\n\")\n    (DIRECTORY/\"fitted-models.json\").write_text(json.dumps(snapshots,allow_nan=False)+\"\\n\")\n\n\nif __name__ == \"__main__\":\n    main()"}</CodeBlock>
+<OdeVisibleProgram file="neural_ode_study.py" />
 
 <Prose>{"Read the model definition and integrator first, then follow one fitting update. The remaining loop repeats that update under the declared selection protocol. The saved weights let you change inputs or solver resolution without rerunning the fits."}</Prose>
 
-</section>
+<H2>{"7. What happens between irregular observations?"}</H2>
 
-<H2>{"7. Irregular observations: evolving state is not new evidence"}</H2>
+<Prose>{"The classifier evolved a state from one fixed flower measurement. A sensor stream presents a different problem: information arrives at unequal times. How do we move the state between measurements without pretending that an unobserved value was measured as zero?"}</Prose>
 
-<Prose>{"Suppose a sensor reports at times 0.2, 0.9 and 1.3. A model should distinguish “nothing new was observed” from “the sensor observed zero.” A continuous hidden state gives us a way to evolve between those moments, but the ODE alone does not decide how to incorporate arriving measurements."}</Prose>
+<OdeObservationDrawing />
 
-<Prose>{"Three constructions answer different questions:"}</Prose>
+<Prose>{"The horizontal axis is clock time. A cyan marker means a measurement actually arrived. Between markers, the violet hidden state follows a decay curve. At a marker, a gray input wire feeds a weighted update and the hidden state jumps. The amber query line asks for the state at that time; it supplies no measurement and creates no jump. Measurements to its right have not become available to a causal query."}</Prose>
 
-<NeuralTable caption={"7. Irregular observations: evolving state is not new evidence"} headers={[<>{"Construction"}</>,<>{"What happens between observations?"}</>,<>{"How does a new observation affect state?"}</>]} rows={[[<>{"Plain Neural ODE"}</>,<>{"Integrate from an initial state"}</>,<>{"It does not, unless an input/update mechanism is added"}</>],[<>{"ODE-RNN"}</>,<>{"Integrate hidden state across each time gap"}</>,<>{"Apply a recurrent update at each observed time"}</>],[<>{"Latent ODE"}</>,<>{"Evolve a sampled latent initial state"}</>,<>{"An encoder infers a distribution over that initial state from a chosen observation set"}</>]]} />
+<Prose>{"Use one scalar hidden state h, initially zero. Between measurements let h' = −0.5h. At a measurement xᵢ, retain 70% of the old hidden state and add 30% of the new value:"}</Prose>
 
-<Prose>{"A time-aware ordinary RNN is also a legitimate baseline: it can receive elapsed time as an input or use a decay rule. Continuity is one modeling choice, not a prerequisite for handling irregular timestamps."}</Prose>
+<div className="neural-equation"><MathBlock>{"h_i^- = h_{i-1}^+e^{-0.5(t_i-t_{i-1})},\\qquad\nh_i^+=0.7h_i^-+0.3x_i."}</MathBlock></div>
 
-<H3>{"Work through an ODE-RNN-shaped calculation"}</H3>
+<Prose>{"The minus superscript means "}<strong>{"just before"}</strong>{" assimilation; plus means "}<strong>{"just after"}</strong>{", not negative versus positive state. The time difference determines how much decay occurs. This is a constructed "}<strong>{"ODE-RNN-shaped update"}</strong>{", with a simple weighted blend standing in for a learned recurrent update."}</Prose>
 
-<Prose>{"Use a deliberately simple hidden state: between observations, "}<InlineMath>{"h'=-0.5h"}</InlineMath>{". At an observation with value "}<InlineMath>{"x_i"}</InlineMath>{", update "}<InlineMath>{"h^+=0.7h^-+0.3x_i"}</InlineMath>{". Start at zero."}</Prose>
+<Prose>{"For times (0.2, 0.9, 1.3) and measurements (1, −0.5, 0.8), work through the displayed jumps:"}</Prose>
 
-<Prose>{"For values "}<InlineMath>{"(1,-0.5,0.8)"}</InlineMath>{" at times "}<InlineMath>{"(0.2,0.9,1.3)"}</InlineMath>{":"}</Prose>
+<ol start={1}><li>{"At time 0.2, the zero state remains zero during propagation, then receives 0.3×1 = 0.3."}</li><li>{"The gap to 0.9 is 0.7. Propagation gives 0.3 exp(−0.35) = 0.211406; assimilation gives 0.7×0.211406 + 0.3×(−0.5) = −0.002016."}</li><li>{"The gap to 1.3 is 0.4. State decays to −0.001650, then the measurement raises it to 0.238845."}</li><li>{"A query at 1.6 adds no observation. Further decay gives 0.238845 exp(−0.15) = 0.205576."}</li></ol>
 
-<ul><li>{"At 0.2, the update gives 0.3."}</li><li>{"Just before 0.9, decay gives "}<InlineMath>{"0.3e^{-0.35}=0.211406"}</InlineMath>{". The observation changes it to −0.002016."}</li><li>{"Just before 1.3, it is −0.001650. The new observation changes it to 0.238845."}</li><li>{"At a query time of 1.6, the state is "}<InlineMath>{"0.238845e^{-0.15}=0.205576"}</InlineMath>{"."}</li></ul>
+<Prose>{"Omitting the middle observation produces 0.310853 at 1.6. Observing zero there produces 0.279568. A zero observation still performs the 0.7 retention; omission removes the assimilation operation entirely. Adding more output-query times only samples the same propagation curve."}</Prose>
 
-<OdeObservationWorkedFigure/>
+<Prose>{"Now explicitly switch to times (0.1, 0.7, 1.4) and values (1, −1, 0.5). Edit the event times and values, or add/remove an event. Change the propagation rate and query clock separately from the assimilation weight. Moving the query to one excludes the last event. An empty history leaves the zero initial state unchanged. Duplicate or out-of-order times need a declared ordering/aggregation policy, so this investigation retains the last valid ordered history and explains the rejected edit."}</Prose>
 
-<Prose>{"Omitting the middle observation gives 0.310853 at 1.6. Observing zero instead gives 0.279568. The latter still applies the update's 0.7 retention. Missingness and zero are different computations."}</Prose>
+<Prose>{""}<strong>{"What information arrived, and when?"}</strong>{" Edit the ordered measurement history before changing its propagation rule."}</Prose>
 
-<OdeObservationLab/>
+<OdeObservationEventsLab />
 
-<Prose>{"The "}<a href={"https://proceedings.neurips.cc/paper_files/paper/2019/file/42a6845a557bef704ad8ac9cb4461d43-Paper.pdf"}>{"Latent ODE paper"}</a>{" combines continuous dynamics with observation-dependent inference. Its generative model samples "}<InlineMath>{"z_0"}</InlineMath>{", integrates "}<InlineMath>{"z(t)"}</InlineMath>{", and decodes observation distributions. An encoder approximates "}<InlineMath>{"q(z_0\\mid\\{t_i,x_i\\})"}</InlineMath>{"; training balances expected reconstruction log-likelihood against divergence from a prior."}</Prose>
+<Prose>{""}<strong>{"How much state survives until a query?"}</strong>{" Change decay and query time while the measurement history stays fixed."}</Prose>
 
-<Prose>{"Interpolation may condition on observations on both sides of a query. Forecasting must restrict the encoder to information available by the forecast origin. The paper also models observation timing with a Poisson process; a basic value-only model does not automatically handle informative missingness. The lesson's scalar calculation explains the mechanism without claiming to reproduce a clinical study or validate a medical system."}</Prose>
+<OdeObservationPropagationLab />
 
-<H2>{"8. Deeper branch: move density as well as points"}</H2>
+<Prose>{""}<strong>{"How much should a newly available measurement change the state?"}</strong>{" Compare mixing with omission of an update."}</Prose>
 
-<Prose>{"A normalizing flow transforms samples from a simple distribution into samples from a more useful one while tracking how density changes. Imagine stretching a small patch containing a fixed amount of probability. If its volume grows, its density must decrease."}</Prose>
+<OdeObservationAssimilationLab />
 
-<Prose>{"For a differentiable vector field and a well-defined invertible flow,"}</Prose>
+<H3>{"Infer an initial state instead of updating at every observation"}</H3>
 
-<div className="neural-equation"><MathBlock>{"\\frac{d}{dt}\\log p_t(z(t))\n=-\\nabla\\cdot f(t,z(t))\n=-\\operatorname{tr}J_zf(t,z(t))."}</MathBlock></div>
+<Prose>{"Can observations tell us a distribution over the unknown state that began the process? This changes the modeling task again."}</Prose>
 
-<Prose>{"The "}<strong>{"divergence"}</strong>{" is the sum of the field's same-coordinate derivatives. It measures instantaneous local volume expansion. The negative sign converts expansion into a density decrease."}</Prose>
+<OdeLatentDrawing />
 
-<Prose>{"For "}<InlineMath>{"f(z)=Az"}</InlineMath>{", the exact flow is "}<InlineMath>{"z(T)=e^{TA}z_0"}</InlineMath>{", and its volume multiplier is "}<InlineMath>{"\\det(e^{TA})=e^{T\\operatorname{tr}A}"}</InlineMath>{". Take"}</Prose>
+<Prose>{"Read the upper path first: the available time/value/mask triples enter an encoder, which returns a mean μ and a positive scale σ for a latent initial state. A supplied noise sample ε goes through μ + σε to produce z₀. The ODE evolves that sample, and a decoder maps its later states to distributions for the measurements. The lower paths train this system: observation likelihood rewards explaining the measured values, while a prior penalty discourages the inferred initial distribution from departing too freely from a declared prior. Missing-value masks decide which likelihood terms exist; an observed zero is still a term."}</Prose>
 
-<div className="neural-equation"><MathBlock>{"A=\\begin{bmatrix}0.2&2\\\\0.4&-0.1\\end{bmatrix},\\qquad T=2."}</MathBlock></div>
+<Prose>{"A "}<strong>{"Latent ODE"}</strong>{" is this generative construction, rather than another name for the scalar jump rule above. For one Gaussian latent coordinate, use μ = 0.4, σ = 0.6 and ε = −0.5. The sampled initial state is 0.4 + 0.6(−0.5) = 0.1. A fixed ε isolates the effect of changing μ or σ; repeatedly resampling it answers a different question about uncertainty."}</Prose>
 
-<Prose>{"The trace is 0.1. Volume multiplies by "}<InlineMath>{"e^{0.2}=1.221403"}</InlineMath>{"; density along the trajectory multiplies by "}<InlineMath>{"e^{-0.2}=0.818731"}</InlineMath>{". The off-diagonal terms change the patch's shape and trajectory even though they do not appear directly in the trace."}</Prose>
+<div className="neural-equation"><MathBlock>{"z_0=\\mu+\\sigma\\epsilon,\\quad \\epsilon\\sim\\mathcal N(0,1),\\qquad\n\\mathrm{KL}\\!\\left(\\mathcal N(\\mu,\\sigma^2)\\,\\|\\,\\mathcal N(0,1)\\right)\n=\\tfrac12(\\mu^2+\\sigma^2-1-\\log\\sigma^2)."}</MathBlock></div>
 
-<OdeDensityFigure/>
+<Prose>{"Our example's KL is 0.270826. The square penalizes a displaced mean; the variance and log-variance terms keep a posterior from freely collapsing or expanding. A decoder with mean 0.7 and observation standard deviation 0.2 assigns a measured value 0.8 log-likelihood"}</Prose>
 
-<Prose>{"A "}<strong>{"continuous normalizing flow"}</strong>{", or CNF, integrates both state and log-density. For likelihood evaluation we also need the base density and the correct direction of integration. For sampling, moving a base sample may suffice without computing its density."}</Prose>
+<div className="neural-equation"><MathBlock>{"\\log p(0.8\\mid z)=-\\tfrac12\\log(2\\pi\\,0.2^2)\n-\\frac{(0.8-0.7)^2}{2(0.2)^2}=0.565499."}</MathBlock></div>
 
-<H3>{"Estimate a trace without constructing a whole Jacobian"}</H3>
+<Prose>{"A density can exceed one, so a positive log-density is valid. These are "}<strong>{"separate constructed decoder operands"}</strong>{", not a claim that our sample 0.1 trained a decoder to output 0.7. For multiple observations, sum the available log-likelihood terms and average over latent samples. The training quantity is the evidence lower bound:"}</Prose>
 
-<Prose>{"For a random vector "}<InlineMath>{"\\epsilon"}</InlineMath>{" with mean zero and covariance identity,"}</Prose>
+<div className="neural-equation"><MathBlock>{"\\mathrm{ELBO}\n=\\mathbb E_{q(z_0\\mid\\mathcal O)}\\!\\left[\\sum_{i\\in\\text{observed}}\\log p(x_i\\mid z(t_i))\\right]\n-\\mathrm{KL}(q(z_0\\mid\\mathcal O)\\|p(z_0))."}</MathBlock></div>
 
-<div className="neural-equation"><MathBlock>{"\\mathbb E[\\epsilon^\\top J\\epsilon]=\\operatorname{tr}J."}</MathBlock></div>
+<Prose>{"Here "}<InlineMath>{"\\mathcal O"}</InlineMath>{" is the information allowed into the encoder. The "}<a href={"/learn/path/full-curriculum/vae-elbo?module=generative-models"}>{"VAE and ELBO lesson"}</a>{" develops this inference objective and its implementation; the "}<a href={"https://proceedings.neurips.cc/paper_files/paper/2019/file/42a6845a557bef704ad8ac9cb4461d43-Paper.pdf"}>{"Latent ODE paper"}</a>{" connects it to continuous trajectories and an ODE-RNN recognition network. Its encoder may integrate backward through the observed set to infer z₀. That recognition computation is not the continuous loss adjoint from "}<strong>{"Learn through a trajectory"}</strong>{"."}</Prose>
 
-<Prose>{"This follows by expanding the sum: cross-coordinate terms have zero expectation and diagonal terms have unit second moment. Jacobian-vector or vector-Jacobian products can evaluate the quadratic form without explicitly storing all "}<InlineMath>{"d^2"}</InlineMath>{" entries. "}<a href={"https://arxiv.org/html/1810.01367v2"}>{"FFJORD"}</a>{" uses this strategy in continuous density models."}</Prose>
+<Prose>{"For interpolation, the allowed observation set can contain measurements on both sides of a query. For forecasting, restrict it to information available at the forecast origin, including preprocessing and masks. A latent distribution is not automatically calibrated uncertainty; posterior approximation, noise assumptions and held-out coverage all matter. A time-aware ordinary RNN is a legitimate comparison and can receive elapsed time directly."}</Prose>
 
-<Prose>{"Our matrix above makes the randomness visible. The four equally likely sign vectors "}<InlineMath>{"(\\pm1,\\pm1)"}</InlineMath>{" produce trace estimates 2.5, −2.3, −2.3 and 2.5. Their mean is 0.1. One estimate can be far from the trace, even with the wrong sign. The estimator is useful because of its expectation and computational cost, not because every draw is exact."}</Prose>
+<H3>{"The observation times can carry information too"}</H3>
 
-<Prose>{"Keep a probe fixed over an individual integration solve so the augmented right-hand side is a consistent function for the solver. A finite-sample trace estimate and numerical integration introduce distinct errors. An unbiased ideal log-density estimate does not imply an unbiased density after exponentiation. Full maximum-likelihood training, bottleneck trace identities and model evaluation belong in the "}<a href={"/learn/path/full-curriculum/normalizing-flows-realnvp-glow-neural-ode?module=generative-models"}>{"normalizing-flows lesson"}</a>{"."}</Prose>
+<Prose>{"What if events arrive more often when the hidden condition changes? Ignoring timing may discard evidence."}</Prose>
 
-<H2>{"9. Deeper branch: learn a velocity without solving during every training example"}</H2>
+<OdeEventRateDrawing />
 
-<Prose>{"Suppose we pair a noise sample "}<InlineMath>{"x_0"}</InlineMath>{" with a data example "}<InlineMath>{"x_1"}</InlineMath>{", choose a time uniformly, and form"}</Prose>
+<Prose>{"The upper strip shows a positive event rate λ(t). The cyan ticks mark actual arrivals. Each tick contributes log λ(tᵢ); the shaded rate integral charges for the expected number of arrivals across the whole observed window. For a point process with the specified conditional intensity,"}</Prose>
 
-<div className="neural-equation"><MathBlock>{"x_t=(1-t)x_0+tx_1,\\qquad v_{\\rm target}=x_1-x_0."}</MathBlock></div>
+<div className="neural-equation"><MathBlock>{"\\log p(\\{t_i\\})=\\sum_i\\log\\lambda(t_i)-\\int_0^T\\lambda(t)\\,dt."}</MathBlock></div>
 
-<Prose>{"The chosen straight path and its velocity can be calculated directly. Train a network to predict this velocity from "}<InlineMath>{"(t,x_t)"}</InlineMath>{" using squared error. At generation time, solve "}<InlineMath>{"x'=v_\\theta(t,x)"}</InlineMath>{" from a noise sample."}</Prose>
+<Prose>{"Take rate two on [0, 0.5), rate one on [0.5, 1], and arrivals at 0.2 and 0.8. The event terms sum to log2 + log1; the integral is 2×0.5 + 1×0.5 = 1.5. The timing log-likelihood is −0.806853. A neural model can produce a positive rate from its state, for example with softplus, and integrate that rate as another accumulator. The Latent ODE paper uses a Poisson-process timing model. Value likelihood and timing likelihood are different paths in the loss; neither turns a sensor policy or observational association into a causal claim."}</Prose>
 
-<Prose>{"This is a simple endpoint-interpolation form of "}<strong>{"conditional flow matching"}</strong>{". Some formulations retain a small final noise level; their path and target velocity change correspondingly. The key computational benefit is that the ordinary regression training objective does not require integrating the learned ODE for each target. Generating a new sample still requires a solve unless an additional approximation or distillation changes that process."}</Prose>
+<H2>{"8. Deeper: how does a flow move probability density?"}</H2>
 
-<Prose>{"Why can different training paths provide useful targets at the same place? Squared-error regression learns their conditional mean velocity. Consider two synthetic pairs: "}<InlineMath>{"0\\to2"}</InlineMath>{" and "}<InlineMath>{"2\\to0"}</InlineMath>{". At time 0.5, both are at position one, but their target velocities are +2 and −2. A single model receiving only that position and time cannot return both. Its least-squares prediction is zero: mean loss four, compared with eight if it always predicts +2."}</Prose>
+<Prose>{"We have followed individual states and distributions over initial states. Suppose instead that we transform an entire population of samples. If a fixed amount of probability spreads over more space, how must its density change?"}</Prose>
 
-<OdeFlowMatchingFigure/>
+<OdeDensityPatchDrawing />
 
-<Prose>{"This local discrete example explains averaging; it is not a full smooth-density generative model. In the continuous theory, the conditional mean field transports the marginal probability path under appropriate regularity assumptions. Straight conditional training paths do not guarantee straight generated trajectories or a globally optimal transport map. "}<a href={"https://arxiv.org/html/2210.02747v2"}>{"Flow Matching for Generative Modeling"}</a>{" states that distinction explicitly."}</Prose>
+<Prose>{"The cyan square has four labelled starting corners and probability mass m. The violet parallelogram contains their transported positions at the same final clock. Its area has changed, while its mass has not. The density along a moving point is mass per local area, so an area increase means an inverse density change. The second view rotates a patch without changing its area: movement itself is not evidence of expansion."}</Prose>
 
-<Prose>{"This connection helps interpret modern generative systems without assuming that all ODE-trained models use the same loss. CNF likelihood training uses density change; flow-matching regression uses target velocities. A variational latent ODE uses reconstruction and a prior penalty. They share differential-equation machinery but optimize different objectives. Continue the generative route through "}<a href={"/learn/path/full-curriculum/rectified-flow-flow-matching?module=generative-models"}>{"Rectified Flow and Flow Matching"}</a>{"."}</Prose>
+<Prose>{"Return to a two-dimensional linear field, now explicitly choosing"}</Prose>
 
-<H2>{"10. Deeper branch: put useful structure into a learned rule"}</H2>
+<div className="neural-equation"><MathBlock>{"f(z)=Az,\\qquad A=\\begin{bmatrix}0.2&2\\\\0.4&-0.1\\end{bmatrix},\\qquad T=2."}</MathBlock></div>
 
-<Prose>{"A generic field can model many relationships, but useful restrictions can make a problem easier to learn and interpret. Start with the structure of the task."}</Prose>
+<Prose>{"The exact map is exp(TA). Its determinant is exp(T trA), with trace trA = 0.2−0.1 = 0.1. Area multiplies by exp(0.2) = 1.221403; density along the trajectory multiplies by exp(−0.2) = 0.818731. The off-diagonal entries reshape and move the patch even though they do not appear directly in the trace."}</Prose>
 
-<Prose>{""}<strong>{"Known physics plus a learned correction."}</strong>{" If a mechanistic model explains most of a process but misses one force or reaction term, write "}<InlineMath>{"z'=f_{\\rm known}(t,z)+f_\\theta(t,z)"}</InlineMath>{". The learned part need not rediscover everything. It still must be tested outside the observations used for fitting: many different fields can match one short trajectory. Fitting a trajectory is not proof that the underlying physical mechanism has been identified."}</Prose>
+<H3>{"Why the trace appears"}</H3>
 
-<Prose>{""}<strong>{"Energy-based dynamics."}</strong>{" For position "}<InlineMath>{"q"}</InlineMath>{", momentum "}<InlineMath>{"p"}</InlineMath>{" and a learned energy "}<InlineMath>{"H_\\theta(q,p)"}</InlineMath>{", Hamilton's equations use "}<InlineMath>{"q'=\\partial H/\\partial p"}</InlineMath>{", "}<InlineMath>{"p'=-\\partial H/\\partial q"}</InlineMath>{". Along the exact autonomous dynamics,"}</Prose>
+<Prose>{"What connects this picture to a general learned field?"}</Prose>
 
-<div className="neural-equation"><MathBlock>{"\\frac{dH}{dt}\n=\\frac{\\partial H}{\\partial q}^{\\!\\top}\\frac{\\partial H}{\\partial p}\n-\\frac{\\partial H}{\\partial p}^{\\!\\top}\\frac{\\partial H}{\\partial q}=0."}</MathBlock></div>
+<OdeDensityAccumulatorDrawing />
 
-<Prose>{"That cancellation is an architectural property. A numerical solver may still drift in energy; a model of a damped system may need dissipation instead of an exact conservation constraint. The earlier rotation example made the solver issue visible before this more advanced application."}</Prose>
+<Prose>{"The upper channels hold the state and return its rate f. The lower channel holds log-density and returns minus the sum of the field's same-coordinate derivatives. The solver updates both channels at the same stage clocks. The log-density channel receives the state; in the usual construction, it does not feed back into the state derivative."}</Prose>
 
-<Prose>{""}<strong>{"Learn a solution versus learn its derivative."}</strong>{" A physics-informed neural network can parameterize a solution "}<InlineMath>{"u_\\theta(t,x)"}</InlineMath>{" and penalize its equation residual at sampled points. A Neural ODE parameterizes a vector field and numerically integrates it from initial conditions. They can be combined, but one is not simply another name for the other. The "}<a href={"/learn/path/full-curriculum/physics-informed-neural-networks-pinns?module=frontier-research"}>{"PINN lesson"}</a>{" owns residual losses and boundary-condition design."}</Prose>
+<Prose>{"Let B(t) be the Jacobian of the evolving state with respect to its initial state. Differentiating the state equation gives B' = J_z f B, where J_z f is the field's state Jacobian. For a differentiable, invertible flow with the needed regularity and nonzero determinant, the determinant derivative yields"}</Prose>
 
-<Prose>{""}<strong>{"Events and interventions."}</strong>{" An event may stop integration when a state reaches a threshold. A sensor update or physical impact may change the state discontinuously. These require event/root handling or explicit jump rules; an ordinary smooth solve will not invent them. Event-time gradients can become delicate near tangencies or changes in which event occurs first. A threshold crossing also needs a detection policy: a solver that checks signs only at step boundaries can miss multiple crossings inside one step."}</Prose>
+<div className="neural-equation"><MathBlock>{"\\frac{d}{dt}\\log|\\det B|\n=\\operatorname{tr}(B^{-1}B')\n=\\operatorname{tr}(B^{-1}J_zfB)\n=\\operatorname{tr}(J_zf)."}</MathBlock></div>
 
-<Prose>{""}<strong>{"Controlled and stochastic dynamics."}</strong>{" If a stream continuously drives the state, a controlled differential equation makes that input path part of the dynamics. If uncertainty is modeled by a stochastic differential equation, the driving noise and stochastic calculus alter the solver and gradient problem. A deterministic ODE with newly sampled dropout on every field evaluation is not an automatically valid substitute for either construction."}</Prose>
+<Prose>{"Probability conservation says p_t(z(t)) |detB(t)| = p₀(z₀). Taking logs and differentiating therefore gives the "}<strong>{"instantaneous change-of-variables rule"}</strong>{":"}</Prose>
 
-<Prose>{"These applications are interesting because they change the model's assumptions, not simply because they attach a new industry name to the same diagram. The author talk in the resources offers another route into constrained dynamics; advanced applications require their own data, assumptions and evaluation."}</Prose>
+<div className="neural-equation"><MathBlock>{"\\frac{d}{dt}\\log p_t(z(t))=-\\operatorname{tr}J_zf(t,z(t))=-\\nabla\\cdot f(t,z(t))."}</MathBlock></div>
 
-<OdeStructuredFigure/>
+<Prose>{"The divergence is the diagonal sum of that Jacobian, measuring instantaneous local volume expansion. It is a state derivative, not a derivative with respect to clock time. Sampling evolves a base sample forward. Likelihood evaluation must relate the observed point back to its base density and accumulate the log-volume change in the correct direction. This distinction determines the sign and which initial density is known."}</Prose>
+
+<Prose>{"A "}<strong>{"continuous normalizing flow"}</strong>{", or CNF, integrates these joint channels. The "}<a href={"/learn/path/full-curriculum/normalizing-flows-realnvp-glow-neural-ode?module=generative-models"}>{"normalizing-flows lesson"}</a>{" teaches full density-model training, base distributions and likelihood evaluation. Here the exact linear map is our checkable implementation case."}</Prose>
+
+<H3>{"Obtain a trace without materializing every Jacobian entry"}</H3>
+
+<Prose>{"For a large state, explicitly storing all d² Jacobian entries can be expensive. Can a vector product reveal their diagonal sum?"}</Prose>
+
+<OdeTraceProbeDrawing />
+
+<Prose>{"Follow one drawn sign vector ε through the actual matrix A: multiply Aε, then dot that output with ε. For ε = (1, 1), Aε = (2.2, 0.3), giving 2.5. For ε = (1, −1), Aε = (−1.8, 0.5), giving −2.3. Both are estimates of the same trace 0.1; the off-diagonal contributions cancel only when averaged over the probe distribution."}</Prose>
+
+<Prose>{"If ε has zero mean and covariance I, expand the quadratic form:"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"\\mathbb E[\\epsilon^\\top J\\epsilon]\n=\\sum_{i,j}J_{ij}\\mathbb E[\\epsilon_i\\epsilon_j]\n=\\sum_i J_{ii}=\\operatorname{tr}J."}</MathBlock></div>
+
+<Prose>{"Independent equally likely signs satisfy those second-moment conditions. The four sign vectors in this two-dimensional example give 2.5, −2.3, −2.3, 2.5, whose mean is 0.1. A single estimate can have the wrong sign. Jacobian-vector or vector-Jacobian products compute the quadratic form without allocating the complete matrix; the earlier manual sensitivities established what these products mean. "}<a href={"https://arxiv.org/html/1810.01367v2"}>{"FFJORD"}</a>{" applies this estimator to continuous density models."}</Prose>
+
+<Prose>{"Fix the random probe throughout one solve so the right-hand side remains a consistent function for the numerical solver. Trace sampling error and integration error are different. Unbiased trace estimation does not make an exponentiated density estimate unbiased, nor guarantee that a finite adaptive solve is an unbiased log-density estimator. Reverse-time integration, floating-point conditioning and the base density still need checks."}</Prose>
+
+<H3>{"Penalize motion and Jacobian size separately"}</H3>
+
+<Prose>{"Could we encourage a learned field to take an easier route without changing its architecture?"}</Prose>
+
+<OdeRegularizerDrawing />
+
+<Prose>{"Two additional scalar channels start at zero. One accumulates squared velocity; the other accumulates squared Jacobian size. Their outputs join the task loss with declared nonnegative weights. They receive the state path, but do not become extra hidden coordinates that change its derivative."}</Prose>
+
+<div className="neural-equation"><MathBlock>{"r_v'=\\|f(t,z(t))\\|^2,\\qquad\nr_J'=\\|J_z f(t,z(t))\\|_F^2,\\qquad\nL_{\\rm total}=L_{\\rm task}+\\lambda_v r_v(T)+\\lambda_J r_J(T)."}</MathBlock></div>
+
+<Prose>{"The Frobenius norm squares "}<strong>{"every"}</strong>{" Jacobian entry, then sums. For our A it is 0.2²+2²+0.4²+(−0.1)² = 4.21. Over T = 2 its constant-Jacobian accumulator is 8.42. The trace remains 0.1: small divergence does not imply a small Jacobian, low curvature or easy integration. Squared velocity depends on the trajectory and its units. "}<a href={"https://proceedings.mlr.press/v119/finlay20a.html"}>{"Finlay and colleagues"}</a>{" study kinetic and Jacobian regularization in CNFs; this calculation explains the operands without claiming a newly trained model or a universal speedup."}</Prose>
+
+<Prose>{"The one-way dependency also matters to the controller. In a continuous adjoint, parameter-gradient quadrature receives the reconstructed state and adjoint but does not change those two derivatives. An "}<strong>{"adjoint seminorm"}</strong>{" can exclude that quadrature from the adaptive error norm, reducing work in suitable cases. It still numerically integrates the parameter gradient; exclusion is not a guarantee about its error. The "}<a href={"https://arxiv.org/abs/2009.09457"}>{"seminorm-adjoint paper"}</a>{" and official torchdiffeq options specify the trade-off. Distinguish controller norm, model regularization and task loss: each changes a different part of the computation."}</Prose>
+
+<H2>{"9. Deeper: why train a velocity without solving each training pair?"}</H2>
+
+<Prose>{"CNF likelihood training follows samples while accounting for volume change. Another route supplies training velocities directly. Where could those targets come from before the learned field is accurate?"}</Prose>
+
+<OdeConditionalPathsDrawing />
+
+<Prose>{"The cyan start x₀ is paired with an amber endpoint x₁. A clock t selects a location on the straight segment between them. Its target arrow is the endpoint difference, which is constant along that particular segment. For x₀ = 0 and x₁ = 2, the halfway location is one and the velocity is two."}</Prose>
+
+<div className="neural-equation"><MathBlock>{"x_t=(1-t)x_0+tx_1,\\qquad u_t=x_1-x_0,\\qquad\nL=\\mathbb E\\|v_\\theta(t,x_t)-u_t\\|^2."}</MathBlock></div>
+
+<Prose>{"For this endpoint-interpolation form of "}<strong>{"conditional flow matching"}</strong>{", sample a pair and a time, calculate x_t and u_t, and train a velocity regressor. Ordinary regression training does not integrate the learned ODE for each target. Generating a new sample still solves x' = vθ(t,x) from a base sample, unless a separately taught distillation or approximation changes that process. Other conditional paths retain endpoint noise or use different couplings, and therefore change these operands."}</Prose>
+
+<H3>{"Two pair paths can supply different targets at the same input"}</H3>
+
+<Prose>{"Does the learned field reproduce every paired straight segment?"}</Prose>
+
+<OdeConditionalPathsDrawing mean />
+
+<Prose>{"The second pair goes from two to zero. At t = 0.5, it also presents x = 1, but its target velocity is −2. A model receiving only (t, x) cannot distinguish the two pair identities. The arrows ±2 in the drawing belong to "}<strong>{"two conditional training paths"}</strong>{". The single violet output at their common input is their conditional mean, zero."}</Prose>
+
+<Prose>{"For an output v at that input, equally likely targets give"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"\\tfrac12(v-2)^2+\\tfrac12(v+2)^2=v^2+4."}</MathBlock></div>
+
+<Prose>{"Zero minimizes this quantity, giving mean squared loss four. Always predicting +2 gives mean loss eight. More generally, condition on the regressor input and expand a square around the conditional mean:"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"\\mathbb E[\\|v-U\\|^2\\mid t,x]\n=\\|v-\\mathbb E[U\\mid t,x]\\|^2\n+\\mathbb E[\\|U-\\mathbb E[U\\mid t,x]\\|^2\\mid t,x]."}</MathBlock></div>
+
+<Prose>{"The second term does not depend on v. The first explains why least-squares regression learns the conditional mean velocity. This local two-pair calculation is not a complete smooth-density model. Under the appropriate regularity assumptions, the population conditional-mean field transports the marginal probability path, as developed in "}<a href={"https://arxiv.org/html/2210.02747v2"}>{"Flow Matching for Generative Modeling"}</a>{"."}</Prose>
+
+<Prose>{"The drawing keeps a learned marginal field separate from the paired paths for this reason. Straight conditional paths do not guarantee straight generated trajectories or a globally optimal transport map. A coupling specifies which endpoints are paired; a field specifies the velocity available from the model's actual input."}</Prose>
+
+<Prose>{"CNF likelihood, latent-ODE reconstruction and flow-matching regression share an ODE solver but optimize different objectives. For full scratch/library implementations, couplings, schedules, generative fits and evaluation, continue to "}<a href={"/learn/path/full-curriculum/rectified-flow-flow-matching?module=generative-models"}>{"Rectified Flow and Flow Matching"}</a>{". That lesson develops the generative task beyond this mechanism comparison."}</Prose>
+
+<H2>{"10. Deeper: how can scientific structure enter the field?"}</H2>
+
+<Prose>{"The preceding objectives chose what to fit. We can also decide what the dynamics are allowed to do. Each construction below changes a specific missing assumption; keep its states and operations explicit before choosing a neural architecture."}</Prose>
+
+<H3>{"Preserve known dynamics and learn the missing correction"}</H3>
+
+<Prose>{"What if an existing physical rule explains most of the motion?"}</Prose>
+
+<OdeKnownCorrectionDrawing />
+
+<Prose>{"The same supplied state feeds two derivative routes. One computes a known rate; the other computes a learned correction. The gray add combines the "}<strong>{"rates"}</strong>{", then the solver multiplies that sum by its interval and adds it to state. For a constructed scalar case z = 1, a known decay −2z contributes −2 and a missing learned forcing contributes 0.3. The total rate is −1.7; one Euler step of size 0.1 reaches 0.83."}</Prose>
+
+<div className="neural-equation"><MathBlock>{"z'=f_{\\rm known}(t,z)+f_\\theta(t,z)."}</MathBlock></div>
+
+<Prose>{"This arrangement avoids making the learned component rediscover a known law. It does not identify the true missing physics automatically: different fields can fit the same short observed path, and hidden variables may change the apparent rule. Test new initial conditions, interventions where justified, conservation and held-out regimes. A good trajectory fit alone is insufficient evidence of mechanism identification."}</Prose>
+
+<H3>{"Learn an energy and differentiate it to obtain motion"}</H3>
+
+<Prose>{"Can we build conservation into the continuous field rather than reward it after the fact?"}</Prose>
+
+<OdeHamiltonianDrawing />
+
+<Prose>{"The two state coordinates are position q and momentum p. The energy contour through (1, 0) is the circle H = 0.5 for H(q,p) = (q²+p²)/2. Its gradient (q,p) points outward. The fixed skew operation rotates that gradient to the tangent velocity (p,−q). At (1,0), the velocity is (0,−1), moving along the contour rather than across it."}</Prose>
+
+<Prose>{"For a differentiable autonomous learned energy Hθ, "}<strong>{"Hamiltonian dynamics"}</strong>{" use"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"q'=\\nabla_p H_\\theta,\\qquad p'=-\\nabla_q H_\\theta,\n\\qquad\n\\frac{dH_\\theta}{dt}\n=\\nabla_qH_\\theta^\\top\\nabla_pH_\\theta\n-\\nabla_pH_\\theta^\\top\\nabla_qH_\\theta=0."}</MathBlock></div>
+
+<Prose>{"The cancellation concerns the exact autonomous field. Explicit Euler from (1,0) with h = 0.1 gives (1,−0.1), energy 0.505: the solver has not inherited exact conservation. A symplectic Euler ordering first sets p_new = p_old−h q_old, then q_new = q_old+h p_new, giving (0.99,−0.1), energy 0.49505. Symplectic integration preserves a geometric structure and can give better long-time behavior for suitable systems; it is not exact energy conservation at every step. A damped system also needs dissipation rather than the preceding pure conservation assumption. The "}<a href={"https://arxiv.org/abs/1906.01563"}>{"Hamiltonian Neural Networks paper"}</a>{" makes the learned-energy route explicit."}</Prose>
+
+<H3>{"Learn a solution or learn its derivative?"}</H3>
+
+<Prose>{"A Neural ODE learned a rate and integrated it. What changes if a network directly outputs the proposed solution?"}</Prose>
+
+<OdeSolutionResidualDrawing />
+
+<Prose>{"The upper route takes a clock and predicts uθ(t). Automatic differentiation produces its clock derivative; a residual subtracts the required derivative rule. The lower ODE route instead takes the current state and clock, predicts a rate, and lets a solver produce future states. For the equation u' = −u, a candidate uθ(t) = c exp(−t) has residual u' + u = 0 for "}<strong>{"every"}</strong>{" c. An initial-condition term is needed to select c = 1 when u(0) = 1. Satisfying a differential residual alone does not identify the desired solution."}</Prose>
+
+<Prose>{"A physics-informed neural network may penalize equation residuals and initial/boundary conditions at sampled coordinates. The "}<a href={"/learn/path/full-curriculum/physics-informed-neural-networks-pinns?module=frontier-research"}>{"PINN lesson"}</a>{" develops those loss and sampling choices. The two routes can be combined, but require different information, optimization and verification."}</Prose>
+
+<H3>{"Detect an event and apply an explicit jump"}</H3>
+
+<Prose>{"How should the solver handle a state reaching a boundary?"}</Prose>
+
+<OdeEventResetDrawing />
+
+<Prose>{"The state falls from one at rate −1. The event function g(z) = z reaches zero at clock one. A root finder locates that crossing within the numerical interval; a separate reset rule sets the state to 0.8 before the next segment. The reset is a specified operation, not a motion invented by the smooth field."}</Prose>
+
+<Prose>{"For z' = −α, α > 0 and z(0) = 1, the event time is τ = 1/α and its rate derivative is −1/α². More generally, differentiating g(τ,z(τ,θ),θ) = 0 gives an event-time derivative with denominator g_t + g_z f. Near a tangent contact this denominator can vanish; changes in which event occurs first can also change the derivative contract. A solver that checks only endpoint signs may miss multiple crossings inside an interval. State reset derivatives and event-time sensitivity must be included when differentiating the entire hybrid program. The ordinary smooth adjoint in "}<strong>{"Learn through a trajectory"}</strong>{" did not cover those jumps automatically."}</Prose>
+
+<H3>{"Supply a continuous input path or a noise process"}</H3>
+
+<Prose>{"An irregular sensor may drive the dynamics through a continuous interpolated input. Is that the same as repeatedly adding observations or random dropout?"}</Prose>
+
+<OdeControlledStochasticDrawing />
+
+<Prose>{"In the left route, a specified input path X supplies increments ΔX. The field multiplies them to update the state, as in dz = fθ(z) dX. For the scalar smooth path construction dz = z dX, starting at one, a positive increment ΔX = 0.2 gives an Euler increment 0.2 and state 1.2; the exact solution across that input change is exp(0.2) = 1.221403. Its dependence is on the input path, rather than elapsed time alone. A "}<strong>{"controlled differential equation"}</strong>{" also needs the interpolation and information-availability policy for X."}</Prose>
+
+<Prose>{"In the right route, a Brownian increment ΔW has variance Δt. In an Itô SDE dz = a(t,z)dt + b(t,z)dW, the drift and noise contributions are separate. For Δt = 0.1, drift zero, b = 0.5 and a constructed standard-normal draw ξ = 1, the noise increment is 0.5√0.1 = 0.158114. That one draw illustrates the scaling; it is not an expected deterministic path. The calculus convention affects derivatives and numerical methods. Follow "}<a href={"/learn/path/full-curriculum/it-calculus-stochastic-differential-equations?module=math-foundations"}>{"Itô Calculus and Stochastic Differential Equations"}</a>{" for that foundation, and "}<a href={"https://arxiv.org/html/2202.02435"}>{"Kidger's neural differential-equations treatment"}</a>{" for neural controlled/stochastic constructions."}</Prose>
+
+<Prose>{"New dropout masks on each evaluation do not automatically define either model: a solver expects a declared mathematical input/noise contract. An observation jump, a controlled increment and Brownian forcing represent different processes even when each changes state."}</Prose>
+
+<H3>{"Deeper implementation choices: reversible steps and learned corrections"}</H3>
+
+<Prose>{"The continuous backsolve could amplify reconstruction error. Can we instead reverse the "}<strong>{"executed numerical step"}</strong>{"?"}</Prose>
+
+<OdeReversibleStepDrawing />
+
+<Prose>{"The deterministic worked drawing starts with main state 1, auxiliary state 1 and rate −1. With h = 0.1, its auxiliary update gives 0.9, then averaging the old and new rates gives main state 0.905. Reversing the drawn algebra first recovers auxiliary state 1, then main state 1. The auxiliary value is a numerical variable, not another learned hidden coordinate."}</Prose>
+
+<Prose>{"A reversible integrator retains enough algebraic information to undo its own updates, unlike reconstructing an exact continuous path from a rounded final state. Reversible Heun methods exploit such coupled update equations. Algebraic reversibility does not remove floating-point error, saved requested outputs or parameter-gradient storage; it is not a universal constant-memory promise. "}<a href={"https://proceedings.neurips.cc/paper/2021/file/9ba196c7a6e89eafd0954de80fc1b224-Paper.pdf"}>{"Efficient and Accurate Gradients for Neural SDEs"}</a>{" develops reversible Heun with a declared stochastic convention and reconstructible noise. Its particular performance measurements do not transfer automatically to a deterministic classifier."}</Prose>
+
+<Prose>{"A "}<strong>{"hypersolver"}</strong>{" takes another route. It predicts a correction to a known numerical step:"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"z_{n+1}=\\Psi_h(t_n,z_n)+h^{p+1}g_\\phi(t_n,z_n,h),"}</MathBlock></div>
+
+<Prose>{"where Ψ_h is a specified order-p method and the scaling represents its local error order under the appropriate smoothness assumptions. The correction can be trained against a higher-accuracy reference. It must be tested on new states, intervals and field parameters; a learned correction for one dynamics family is not automatically a general-purpose solver. "}<a href={"https://proceedings.neurips.cc/paper/2020/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html"}>{"Hypersolvers: Toward Fast Continuous-Depth Models"}</a>{" investigates that learned numerical approximation. Neither design substitutes for defining the forward equation, gradient objective and refinement test."}</Prose>
 
 <H2>{"11. Diagnose the right layer of a problem"}</H2>
+
+<Prose>{"We have changed field, solver, loss, information boundary and state structure separately. When a result is surprising, which of those layers should we inspect first?"}</Prose>
 
 <Prose>{"A useful implementation begins with a small, deterministic field and a checkable solver. Add complexity after establishing which part of the system needs it."}</Prose>
 
@@ -430,7 +798,7 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>{"12. Practice: transfer the mechanism"}</H2>
 
-<Prose>{"Work out a prediction before opening a hint. These inputs differ from the worked calculations. Numerical answers refer to the stated finite computation or exact equation, as named."}</Prose>
+<Prose>{"Use these independently changed cases to work through the mechanism. Hints and reasoned solutions follow each question. Numerical answers refer to the stated finite computation or exact equation, as named."}</Prose>
 
 <div className="lesson-exercise" data-lesson-exercise=""><H3>{"1. A different decay"}</H3>
 
@@ -610,16 +978,47 @@ export default {title:'Neural ODEs and Continuous-Depth Models',readTime:'~90 mi
 
 <Prose>{"Declare splits, preprocessing, architectures, budgets, seeds and model-selection rules before assessment. Fit transformations only on training data and select with validation; retain all declared seeds and report actual parameter/evaluation costs. Perform solver-sensitivity checks on a specified diagnostic or validation set with fixed weights, then assess under a fixed protocol. A projection is a visualization of selected coordinates, not a proof about full-state uniqueness. State theorem assumptions and use analytic counterexamples or full-state checks for the claim actually being made."}</Prose>
 
+</details></div>
+
+<div className="lesson-exercise" data-lesson-exercise=""><H3>{"10. Implement a clock-correct sensitivity"}</H3>
+
+<Prose>{"Use the new "}<code>{"ode_sensitivities.py"}</code>{" on z′ = θz + t. Start at clock 0.2 with state 0.8, stop at 0.7, use two Euler intervals, θ = 0 and target 0.9. Calculate the finite endpoint, its initial-state and parameter loss derivatives, and the separately exact continuous answers. Then call "}<code>{"example(initial=(.8,), rates=(0,), target=(.9,), start=.2, stop=.7, intervals=2, method='euler')"}</code>{" to check your calculations. Inspect which actual stage clocks the solver stores. Why would using a zero-based reverse clock change this problem?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"The two Euler rates are the supplied clocks 0.2 and 0.45. The parameter derivative of the rate is the current state even at θ = 0. For the exact answer, integrate the clock term and the sensitivity equation separately."}</Prose>
+
+</details>
+
+<details><summary>Solution and reasoning</summary>
+
+<Prose>{"Each interval is 0.25. Euler reaches 0.8 + 0.25×0.2 = 0.85, then 0.85 + 0.25×0.45 = 0.9625. The residual is 0.0625. The initial-state derivative of this endpoint is one. The parameter sensitivity starts at zero, becomes 0.25×0.8 = 0.2, then 0.2 + 0.25×0.85 = 0.4125. Thus the finite loss derivatives are 0.0625 with respect to the initial state and 0.0625×0.4125 = 0.02578125 with respect to θ."}</Prose>
+
+<Prose>{"The exact endpoint is 0.8 + (0.7²−0.2²)/2 = 1.025, with residual 0.125. At θ = 0, its parameter sensitivity is Δz₀ + aΔ²/2 + Δ³/6 = 0.445833333, where a = 0.2 and Δ = 0.5. The exact loss derivatives are 0.125 and 0.0557291667. These differ from the finite Euler derivatives because their endpoints and sensitivities come from a different forward function. A clock restarted at zero would supply a different t term in every backward rate. Refining RK4 can check convergence; it does not make the two-interval Euler loss retrospectively continuous."}</Prose>
+
 </details>
 
 <Prose>{"You are ready to continue when you can distinguish a field from a solved trajectory, compute and compare numerical updates, name the objective behind a gradient, explain augmentation with its readout assumption, and keep observation availability separate from evaluation time. You should also be able to read an experiment's counts and numerical limits without needing every method to win."}</Prose></div></section>
 
-<section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H2>{"13. Continue and learn another way"}</H2>
+<H2>{"13. Continue and learn another way"}</H2>
 
-<Prose>{"The next topic in this module is "}<a href={"/learn/path/full-curriculum/hybrid-ssm-transformer-architectures-jamba?module=deep-learning-fundamentals"}>{"Hybrid SSM–Transformer Architectures (Jamba)"}</a>{". It returns to discrete token sequences and combines different memory operations. Our current lesson adds another distinction to that comparison: a continuous dynamical model still needs a concrete numerical execution method."}</Prose>
+<section className="lesson-ending lesson-ending--next" data-lesson-ending="next"><H3>{"What to learn next"}</H3>
 
-<Prose>{"Useful routes into the subject:"}</Prose>
+<Prose>{"The next topic in this module is "}<a href={"/learn/path/full-curriculum/hybrid-ssm-transformer-architectures-jamba?module=deep-learning-fundamentals"}>{"Hybrid SSM–Transformer Architectures (Jamba)"}</a>{". It returns to discrete token sequences and combines different memory operations. Our current lesson adds another distinction to that comparison: a continuous dynamical model still needs a concrete numerical execution method."}</Prose></section>
 
-<ul><li>{""}<a href={"https://arxiv.org/html/1806.07366v5"}>{"Neural Ordinary Differential Equations"}</a>{", Chen and colleagues. Primary introduction to learned dynamics, adjoints and applications. Read the mathematical model first; revisit memory claims with the numerical qualifications in this lesson."}</li><li>{""}<a href={"https://arxiv.org/html/2005.13420v2"}>{"Discretize-Optimize vs. Optimize-Discretize"}</a>{", Onken and Ruthotto. An intermediate numerical perspective on gradients, rediscretization and extrapolation. Its experiments are specific evidence, not universal timing ratios."}</li><li>{""}<a href={"https://arxiv.org/html/1904.01681v1"}>{"Augmented Neural ODEs"}</a>{", Dupont and colleagues. Read the one-dimensional construction and appendix uniqueness argument after section 5; the linear readout and exact-flow assumptions are essential."}</li><li>{""}<a href={"https://github.com/rtqichen/torchdiffeq"}>{"torchdiffeq"}</a>{" and its "}<a href={"https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md"}>{"FAQ"}</a>{". Practical PyTorch API and solver/adjoint guidance. Repository documentation was reviewed and the downloadable local solver bridge was executed with torchdiffeq 0.2.5; the repository’s separate official example suite was not executed. The downloadable local study is self-contained with PyTorch."}</li><li>{""}<a href={"https://docs.kidger.site/diffrax/api/adjoints/"}>{"Diffrax adjoints"}</a>{". A JAX-oriented explanation of checkpointed differentiation and continuous backsolves. Read after the scalar gradient experiment rather than starting with every API class."}</li><li>{""}<a href={"https://proceedings.neurips.cc/paper_files/paper/2019/file/42a6845a557bef704ad8ac9cb4461d43-Paper.pdf"}>{"Latent ODEs for Irregularly-Sampled Time Series"}</a>{". Primary methods for encoding observations and separating interpolation from extrapolation. Useful after the observation-jump investigation."}</li><li>{""}<a href={"https://arxiv.org/html/1810.01367v2"}>{"FFJORD"}</a>{" and "}<a href={"https://arxiv.org/html/2210.02747v2"}>{"Flow Matching"}</a>{". Two different training routes for continuous generative models. Their objectives deserve separate study, even though both generate with learned dynamics."}</li><li>{""}<a href={"https://anucvml.github.io/ddn-cvprw2020/talk2.html"}>{"Ricky T. Q. Chen's CVPR 2020 workshop talk"}</a>{". An alternate video route into constraints, physical dynamics and probabilistic models. The organizer's title, speaker and abstract were verified; the embedded recording was not watched, and no timestamp is claimed. Use the paper and checked calculations for technical details."}</li><li>{""}<a href={"/learn-assets/neural-ode-continuous-depth-models/ode_calculations.py"}>{"Author calculations"}</a>{", "}<a href={"/learn-assets/neural-ode-continuous-depth-models/calculated-inputs.json"}>{"calculated inputs and outcomes"}</a>{", "}<a href={"/learn-assets/neural-ode-continuous-depth-models/neural_ode_study.py"}>{"full training program"}</a>{", "}<a href={"/learn-assets/neural-ode-continuous-depth-models/data-provenance.md"}>{"data and provenance"}</a>{". These reproduce this lesson's small examples and fitted study offline. No external large-model checkpoint is required."}</li></ul>
-<OdeProgram file="ode_calculations.py"/></section>
-</div>};
+<section className="lesson-ending lesson-ending--references" data-lesson-ending="references"><H3>{"References and other ways to learn"}</H3>
+
+<Prose>{"Start with one numerical treatment and one neural-model treatment, then return to the primary papers for the branches you want to build."}</Prose>
+
+<ul><li>{""}<a href={"https://pkarnakov.com/am205/slides/unit3/"}>{"Harvard AM205, Unit 3: Initial-Value Problems"}</a>{". A conventional numerical route through Euler, Runge–Kutta, local/global error, adaptive estimates and stability. Start at the initial-value-problem and time-stepping slides; this is the numerical counterpart to sections 1–4."}</li><li>{""}<a href={"https://arxiv.org/html/2202.02435"}>{"On Neural Differential Equations"}</a>{", Patrick Kidger. A broad specialist treatment. Begin with the Neural ODE model and parameterization sections; use its backpropagation, numerical solver and regularization chapters after the worked gradient comparison. Its controlled/stochastic chapters extend section 10 with the needed mathematical assumptions."}</li></ul>
+
+<ul><li>{""}<a href={"https://arxiv.org/html/1806.07366v5"}>{"Neural Ordinary Differential Equations"}</a>{", Chen and colleagues. Primary introduction to learned dynamics, adjoints and applications. Read the mathematical model first; revisit memory claims with the numerical qualifications in this lesson."}</li><li>{""}<a href={"https://arxiv.org/html/2005.13420v2"}>{"Discretize-Optimize vs. Optimize-Discretize"}</a>{", Onken and Ruthotto. An intermediate numerical perspective on gradients, rediscretization and extrapolation. Its experiments are specific evidence, not universal timing ratios."}</li><li>{""}<a href={"https://arxiv.org/html/1904.01681v1"}>{"Augmented Neural ODEs"}</a>{", Dupont and colleagues. Read the one-dimensional construction and appendix uniqueness argument after section 5; the linear readout and exact-flow assumptions are essential."}</li><li>{""}<a href={"https://github.com/rtqichen/torchdiffeq"}>{"torchdiffeq"}</a>{" and its "}<a href={"https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md"}>{"FAQ"}</a>{". Practical PyTorch API and solver/adjoint guidance. Repository documentation was reviewed and the downloadable local solver bridge was executed with torchdiffeq 0.2.5; the repository’s separate official example suite was not executed. The downloadable local study is self-contained with PyTorch."}</li><li>{""}<a href={"https://docs.kidger.site/diffrax/api/adjoints/"}>{"Diffrax adjoints"}</a>{". A JAX-oriented explanation of checkpointed differentiation and continuous backsolves. Read after the scalar gradient experiment rather than starting with every API class."}</li><li>{""}<a href={"https://proceedings.neurips.cc/paper_files/paper/2019/file/42a6845a557bef704ad8ac9cb4461d43-Paper.pdf"}>{"Latent ODEs for Irregularly-Sampled Time Series"}</a>{". Primary methods for encoding observations and separating interpolation from extrapolation. Useful after the observation-jump investigation."}</li><li>{""}<a href={"https://arxiv.org/html/1810.01367v2"}>{"FFJORD"}</a>{" and "}<a href={"https://arxiv.org/html/2210.02747v2"}>{"Flow Matching"}</a>{". Two different training routes for continuous generative models. Their objectives deserve separate study, even though both generate with learned dynamics."}</li><li>{""}<a href={"https://arxiv.org/abs/1902.10298"}>{"ANODE"}</a>{", "}<a href={"https://proceedings.mlr.press/v119/finlay20a.html"}>{"regularizing CNFs"}</a>{", and "}<a href={"https://arxiv.org/abs/2009.09457"}>{"adjoint seminorms"}</a>{". Different responses to reconstruction, difficult fields and unnecessary controller work. Read them after sections 4 and 8; they change different layers and do not supply interchangeable guarantees."}</li><li>{""}<a href={"https://arxiv.org/html/1906.01563v2"}>{"Hamiltonian Neural Networks"}</a>{", "}<a href={"https://proceedings.neurips.cc/paper/2021/file/9ba196c7a6e89eafd0954de80fc1b224-Paper.pdf"}>{"Efficient and Accurate Gradients for Neural SDEs"}</a>{", and "}<a href={"https://proceedings.neurips.cc/paper/2020/hash/f1686b4badcf28d33ed632036c7ab0b8-Abstract.html"}>{"Hypersolvers"}</a>{". Primary routes into learned energy, reversible numerical updates and learned local corrections. Begin with their model/update definitions after section 10; their reported workloads and stochastic conventions need their own evaluation."}</li><li>{""}<a href={"https://anucvml.github.io/ddn-cvprw2020/talk2.html"}>{"Ricky T. Q. Chen's CVPR 2020 workshop talk"}</a>{". An alternate video route into constraints, physical dynamics and probabilistic models. The organizer's title, speaker and abstract were verified; the embedded recording was not watched, and no timestamp is claimed. Use the paper and checked calculations for technical details."}</li></ul></section>
+
+<section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H3>{"Build and reproduce"}</H3>
+
+<Prose>{"The visible complete programs above cover fixed solver/training ("}<code>{"neural_ode_study.py"}</code>{"), manual sensitivities ("}<code>{"ode_sensitivities.py"}</code>{"), the matched library route ("}<code>{"solver_library_bridge.py"}</code>{") and local calculations ("}<code>{"ode_calculations.py"}</code>{"). Keep the library bridge beside the study because it imports the already implemented "}<code>{"integrate"}</code>{"; that is deliberate scratch-code reuse. The new sensitivity program is standalone and writes no result files."}</Prose>
+
+<Prose>{""}<a href={"/learn-assets/neural-ode-continuous-depth-models/calculated-inputs.json"}>{"Calculated inputs and outcomes"}</a>{", "}<a href={"/learn-assets/neural-ode-continuous-depth-models/fitted-models.json"}>{"saved weights"}</a>{", "}<a href={"/learn-assets/neural-ode-continuous-depth-models/study-results.json"}>{"all declared fitting histories"}</a>{", "}<a href={"/learn-assets/neural-ode-continuous-depth-models/iris.csv"}>{"Iris measurements"}</a>{" and "}<a href={"/learn-assets/neural-ode-continuous-depth-models/data-provenance.md"}>{"data provenance"}</a>{" support offline reproduction. The reader's shared file index gathers the program and supporting-file links once. No external large-model checkpoint is required."}</Prose>
+
+<OdeVisibleProgram file="ode_calculations.py" /></section>
+  </div></OdeStudyContext></OdeFlowContexts> };

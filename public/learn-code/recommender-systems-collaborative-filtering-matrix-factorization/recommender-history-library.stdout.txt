@@ -1,0 +1,807 @@
+{
+  "sourceEventOrder": [
+    [
+      0,
+      0,
+      4.0
+    ],
+    [
+      0,
+      1,
+      2.0
+    ],
+    [
+      1,
+      1,
+      5.0
+    ],
+    [
+      1,
+      2,
+      1.0
+    ],
+    [
+      2,
+      0,
+      2.0
+    ],
+    [
+      2,
+      2,
+      4.0
+    ],
+    [
+      2,
+      3,
+      3.0
+    ],
+    [
+      0,
+      2,
+      3.0
+    ]
+  ],
+  "constructedFits": {
+    "scratch": 1,
+    "ordinarySVDpp": 1
+  },
+  "scratch": {
+    "initial": {
+      "P": [
+        [
+          0.055326058888873875,
+          0.02176006092194739
+        ],
+        [
+          -0.0057989987866526186,
+          -0.23189360947215656
+        ],
+        [
+          0.04314941677088505,
+          -0.21262797844508818
+        ]
+      ],
+      "Q": [
+        [
+          0.09099212170226342,
+          0.06059655730064137
+        ],
+        [
+          0.0830056648578416,
+          0.08276983437153879
+        ],
+        [
+          0.02985144698332214,
+          -0.053500141373392734
+        ],
+        [
+          -0.030706228700579593,
+          0.15080722715721342
+        ]
+      ],
+      "Y": [
+        [
+          -0.05822293778059019,
+          -0.022812380385128454
+        ],
+        [
+          -0.07245145044162855,
+          -0.05172493374907822
+        ],
+        [
+          -0.030655788195456973,
+          0.02565516458675206
+        ],
+        [
+          -0.02938560550257995,
+          -0.03547084649887684
+        ]
+      ],
+      "bu": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bi": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean": 3.0,
+      "histories": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ]
+      ],
+      "nu": [
+        3,
+        2,
+        3
+      ],
+      "ni": [
+        2,
+        2,
+        3,
+        1
+      ],
+      "tj": [
+        6,
+        5,
+        8,
+        3
+      ],
+      "initialization": {
+        "seed": 23,
+        "normalMean": 0.0,
+        "normalSD": 0.1,
+        "drawOrder": [
+          "P",
+          "Q",
+          "Y"
+        ],
+        "biases": "zero"
+      }
+    },
+    "state": {
+      "P": [
+        [
+          0.05964764429783551,
+          0.04543595155146643
+        ],
+        [
+          0.011254242855172092,
+          -0.1915141209494484
+        ],
+        [
+          0.029362450040538998,
+          -0.2417392772066132
+        ]
+      ],
+      "Q": [
+        [
+          0.0881999776648608,
+          0.1363855735015206
+        ],
+        [
+          0.05431190277026236,
+          -0.04102724959898204
+        ],
+        [
+          0.04728250101435214,
+          -0.019965864873556907
+        ],
+        [
+          -0.029937840345461476,
+          0.14529056277788271
+        ]
+      ],
+      "Y": [
+        [
+          -0.060278311811921004,
+          -0.0285262003602502
+        ],
+        [
+          -0.05494056071669462,
+          -0.012470919818402138
+        ],
+        [
+          -0.021595640615933706,
+          0.04219413708870171
+        ],
+        [
+          -0.03573997710046396,
+          -0.05485934277688217
+        ]
+      ],
+      "bu": [
+        -0.008111300433115191,
+        -5.287595816827473e-05,
+        0.039899265594241395
+      ],
+      "bi": [
+        0.0046436824410364605,
+        0.2284514155934661,
+        -0.20560901248533447,
+        0.004380541218102848
+      ],
+      "mean": 3.0,
+      "histories": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2,
+          3
+        ]
+      ],
+      "nu": [
+        3,
+        2,
+        3
+      ],
+      "ni": [
+        2,
+        2,
+        3,
+        1
+      ],
+      "tj": [
+        6,
+        5,
+        8,
+        3
+      ],
+      "initialization": {
+        "seed": 23,
+        "normalMean": 0.0,
+        "normalSD": 0.1,
+        "drawOrder": [
+          "P",
+          "Q",
+          "Y"
+        ],
+        "biases": "zero"
+      }
+    },
+    "globalObjectives": [
+      6.058689384016131,
+      5.984756750115176,
+      5.918637451961229,
+      5.8602720605903915,
+      5.814226863215741,
+      5.773520135035808,
+      5.738704127743214,
+      5.707150421041626,
+      5.6791152302352925,
+      5.654655874192119,
+      5.630210057105193
+    ],
+    "eventOrders": [
+      [
+        2,
+        3,
+        6,
+        5,
+        7,
+        0,
+        1,
+        4
+      ],
+      [
+        3,
+        6,
+        5,
+        1,
+        4,
+        0,
+        7,
+        2
+      ],
+      [
+        0,
+        1,
+        5,
+        2,
+        6,
+        4,
+        7,
+        3
+      ],
+      [
+        2,
+        4,
+        5,
+        3,
+        0,
+        7,
+        1,
+        6
+      ],
+      [
+        5,
+        6,
+        0,
+        2,
+        4,
+        7,
+        3,
+        1
+      ],
+      [
+        4,
+        2,
+        1,
+        7,
+        6,
+        5,
+        0,
+        3
+      ],
+      [
+        7,
+        0,
+        3,
+        6,
+        5,
+        1,
+        4,
+        2
+      ],
+      [
+        4,
+        5,
+        7,
+        0,
+        3,
+        2,
+        6,
+        1
+      ],
+      [
+        4,
+        0,
+        7,
+        3,
+        2,
+        5,
+        1,
+        6
+      ],
+      [
+        7,
+        3,
+        1,
+        4,
+        5,
+        6,
+        0,
+        2
+      ]
+    ],
+    "epochs": 10,
+    "rate": 0.03,
+    "penalty": 0.1,
+    "rollingLossUsedAsObjective": false
+  },
+  "scratchAllScores": [
+    [
+      3.001117459952231,
+      3.217397134690264,
+      2.7844441706070873,
+      3.003550131021897
+    ],
+    [
+      2.977556831315473,
+      3.233065466509085,
+      2.7957154587354474,
+      2.9808393998265528
+    ],
+    [
+      3.0049302920693584,
+      3.277150995063613,
+      2.8377692510528516,
+      3.0068559537553394
+    ]
+  ],
+  "ordinaryVersion": "1.1.5",
+  "ordinaryGlobalMean": 3.0,
+  "ordinaryP": [
+    [
+      0.10804902804112394,
+      -0.09741017319031163
+    ],
+    [
+      -0.16654329371511928,
+      0.20405650949259407
+    ],
+    [
+      0.0810172386568689,
+      -0.06817494004705453
+    ]
+  ],
+  "ordinaryQ": [
+    [
+      -0.02360236695336058,
+      -0.09241864255801595
+    ],
+    [
+      -0.22154295724876505,
+      0.27855038361312257
+    ],
+    [
+      0.06674182978938407,
+      -0.08042398544077414
+    ],
+    [
+      0.03152679448697769,
+      0.006237644037213108
+    ]
+  ],
+  "ordinaryY": [
+    [
+      -0.05154758138137455,
+      -0.12413821102662857
+    ],
+    [
+      0.0005990107852149491,
+      0.11982160591907923
+    ],
+    [
+      -0.17110365302985586,
+      -0.037109115431896725
+    ],
+    [
+      -0.008688309895665257,
+      0.11161969975236674
+    ]
+  ],
+  "ordinaryUserBias": [
+    -0.0059219430472322475,
+    -0.024770786706772616,
+    0.03321034053188387
+  ],
+  "ordinaryItemBias": [
+    -0.015398856811511315,
+    0.21589656037300736,
+    -0.18782389779146744,
+    -0.00373278854587116
+  ],
+  "userIDMap": {
+    "U0": 0,
+    "U1": 1,
+    "U2": 2
+  },
+  "itemIDMap": {
+    "I0": 0,
+    "I1": 1,
+    "I2": 2,
+    "I3": 3
+  },
+  "ordinaryForward": [
+    {
+      "rawUser": "U0",
+      "rawItem": "I0",
+      "innerUser": 0,
+      "innerItem": 0,
+      "historyOccurrences": [
+        0,
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.128201911084635,
+        -0.0239171509048234
+      ],
+      "manual": 2.9903677624800866,
+      "ordinary": 2.9903677624800866,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U0",
+      "rawItem": "I1",
+      "innerUser": 0,
+      "innerItem": 1,
+      "historyOccurrences": [
+        0,
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.128201911084635,
+        -0.0239171509048234
+      ],
+      "manual": 3.1806435739628696,
+      "ordinary": 3.1806435739628696,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U0",
+      "rawItem": "I2",
+      "innerUser": 0,
+      "innerItem": 2,
+      "historyOccurrences": [
+        0,
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.128201911084635,
+        -0.0239171509048234
+      ],
+      "manual": 2.8146667458180405,
+      "ordinary": 2.8146667458180405,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U0",
+      "rawItem": "I3",
+      "innerUser": 0,
+      "innerItem": 3,
+      "historyOccurrences": [
+        0,
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.128201911084635,
+        -0.0239171509048234
+      ],
+      "manual": 2.9889531159451708,
+      "ordinary": 2.9889531159451708,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U1",
+      "rawItem": "I0",
+      "innerUser": 1,
+      "innerItem": 0,
+      "historyOccurrences": [
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.12056498875497186,
+        0.05848656291231455
+      ],
+      "manual": 2.9423429171552513,
+      "ordinary": 2.9423429171552513,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U1",
+      "rawItem": "I1",
+      "innerUser": 1,
+      "innerItem": 1,
+      "historyOccurrences": [
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.12056498875497186,
+        0.05848656291231455
+      ],
+      "manual": 3.3278640651486273,
+      "ordinary": 3.3278640651486273,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U1",
+      "rawItem": "I2",
+      "innerUser": 1,
+      "innerItem": 2,
+      "historyOccurrences": [
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.12056498875497186,
+        0.05848656291231455
+      ],
+      "manual": 2.7471284231493502,
+      "ordinary": 2.7471284231493502,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U1",
+      "rawItem": "I3",
+      "innerUser": 1,
+      "innerItem": 3,
+      "historyOccurrences": [
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.12056498875497186,
+        0.05848656291231455
+      ],
+      "manual": 2.9640824711605105,
+      "ordinary": 2.9640824711605105,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U2",
+      "rawItem": "I0",
+      "innerUser": 2,
+      "innerItem": 0,
+      "historyOccurrences": [
+        0,
+        2,
+        3
+      ],
+      "historyVector": [
+        -0.1335639481797916,
+        -0.028652523638042906
+      ],
+      "manual": 3.0280003731968366,
+      "ordinary": 3.0280003731968366,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U2",
+      "rawItem": "I1",
+      "innerUser": 2,
+      "innerItem": 1,
+      "historyOccurrences": [
+        0,
+        2,
+        3
+      ],
+      "historyVector": [
+        -0.1335639481797916,
+        -0.028652523638042906
+      ],
+      "manual": 3.233776927172522,
+      "ordinary": 3.233776927172522,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U2",
+      "rawItem": "I2",
+      "innerUser": 2,
+      "innerItem": 2,
+      "historyOccurrences": [
+        0,
+        2,
+        3
+      ],
+      "historyVector": [
+        -0.1335639481797916,
+        -0.028652523638042906
+      ],
+      "manual": 2.849666629727123,
+      "ordinary": 2.849666629727123,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U2",
+      "rawItem": "I3",
+      "innerUser": 2,
+      "innerItem": 3,
+      "historyOccurrences": [
+        0,
+        2,
+        3
+      ],
+      "historyVector": [
+        -0.1335639481797916,
+        -0.028652523638042906
+      ],
+      "manual": 3.027216947422423,
+      "ordinary": 3.027216947422423,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "new-user",
+      "rawItem": "I0",
+      "innerUser": null,
+      "innerItem": 0,
+      "historyOccurrences": [],
+      "historyVector": [
+        0.0,
+        0.0
+      ],
+      "manual": 2.9846011431884887,
+      "ordinary": 2.9846011431884887,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "U0",
+      "rawItem": "new-item",
+      "innerUser": 0,
+      "innerItem": null,
+      "historyOccurrences": [
+        0,
+        1,
+        2
+      ],
+      "historyVector": [
+        -0.128201911084635,
+        -0.0239171509048234
+      ],
+      "manual": 2.994078056952768,
+      "ordinary": 2.994078056952768,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    },
+    {
+      "rawUser": "new-user",
+      "rawItem": "new-item",
+      "innerUser": null,
+      "innerItem": null,
+      "historyOccurrences": [],
+      "historyVector": [
+        0.0,
+        0.0
+      ],
+      "manual": 3.0,
+      "ordinary": 3.0,
+      "absoluteDifference": 0.0,
+      "details": {
+        "was_impossible": false
+      }
+    }
+  ],
+  "duplicateOnlyForward": {
+    "history": [
+      0,
+      1,
+      2
+    ],
+    "duplicateHistory": [
+      0,
+      1,
+      2,
+      0
+    ],
+    "uniqueVector": [
+      -0.128201911084635,
+      -0.0239171509048234
+    ],
+    "occurrenceVector": [
+      -0.136799902503695,
+      -0.08278196578303731
+    ],
+    "additionalFits": 0
+  },
+  "correspondenceLimit": "Scratch uses canonical unique history and incidence-distributed once-entity penalty. Surprise uses trainset occurrence history, local regularization and another initializer; equal hyperparameter names do not imply equal fitted scores."
+}

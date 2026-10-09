@@ -1,0 +1,40 @@
+{
+  "schema": "nmf-private-runtime-intake-reading-progress/v1",
+  "status": "PARTIAL_CONTINUOUS_READING_IMPLEMENTATION_RELEASE_PENDING",
+  "author": "/root/tsne_probability_arrow_recovery",
+  "manuscriptSha256": "3907412af22650e27be5a9f1f275864e4ee3f24d35a396b2e0028dfa10b0af83",
+  "preservedPartialIntakeSha256": "5c573a26fd90ea212a910a46f4ba856553224c810de16a463f3d411e15f95e66",
+  "actuallyReadRanges": [
+    {
+      "chunk": "8b4ea4",
+      "from": 1,
+      "through": 386
+    },
+    {
+      "chunk": "c8e108",
+      "from": 387,
+      "through": 906
+    },
+    {
+      "chunk": "cbbee7",
+      "from": 907,
+      "through": 1245
+    },
+    {
+      "chunk": "ea3448",
+      "from": 1246,
+      "through": 1644
+    },
+    {
+      "chunk": "677b71",
+      "from": 1645,
+      "through": 1951
+    }
+  ],
+  "allRangesUntruncated": true,
+  "nextUnreadLine": 1952,
+  "totalLines": 7398,
+  "fullSpecReadingComplete": false,
+  "implementationStarted": false,
+  "note": "Frozen earlier partial intake preserved. Resumed after consolidated t-SNE build and Root paint handoff; relative-math exploratory fixture awaits Root."
+}

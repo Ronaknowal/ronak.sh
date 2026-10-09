@@ -1,0 +1,265 @@
+{
+  "status": "SAME_RD1_RD2_RD3_CLOSED",
+  "reviewer": "/root/queue_nonconvex_resume",
+  "completedAt": "2026-10-09T16:25:59.342Z",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-source-r2.json",
+    "sha256": "6e6d7f0082df7324be9aaef2c99d452c71edacdb146a4f2f7baa5bc8eb19758c",
+    "bytes": 9580
+  },
+  "correction": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-correction-r2.json",
+    "sha256": "40c43b1fa8c826e809c6a227c9002953e55571b568c7334acdfc55a50f7670de",
+    "bytes": 9123
+  },
+  "priorWholeReview": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/independent-design-review-r1.json",
+    "sha256": "e0f480356d792f8d93157ba808cea75fbf14de0a2dffa4c3c7b67ce9d913a48c",
+    "bytes": 7631
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/same-design-review-r2.md",
+    "sha256": "ca4374c89a191b9f6b69ea6fd6d6289953f53629b6c5a22de7eac4e884e7426c",
+    "bytes": 1926
+  },
+  "checks": [
+    {
+      "name": "Current identity src/learn/data/topics/rate-distortion-theory.jsx",
+      "pass": true
+    },
+    {
+      "name": "Current identity src/learn/data/rate-distortion-models.js",
+      "pass": true
+    },
+    {
+      "name": "Current identity src/learn/data/rate-distortion-examples.js",
+      "pass": true
+    },
+    {
+      "name": "Current identity src/learn/components/lesson-labs/RateDistortionLabs.jsx",
+      "pass": true
+    },
+    {
+      "name": "Current identity src/learn/components/lesson-labs/rate-distortion-labs.css",
+      "pass": true
+    },
+    {
+      "name": "Current identity src/learn/data/curriculum/blueprints/rate-distortion-theory.js",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/RATE-DISTORTION-LESSON-DESIGN.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/RATE-DISTORTION-VERIFICATION.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/RATE-DISTORTION-INDEPENDENT-REVIEW.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/evidence/rate-distortion-author-review.json",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/topic-notes/sampling-aliasing-and-quantization-in-neural-recordings.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/SKILL.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-r1.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-r1.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-source-r1.json",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r2.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+      "pass": true
+    },
+    {
+      "name": "Current identity src/learn/data/topics/eigenvalues-eigenvectors.jsx",
+      "pass": true
+    },
+    {
+      "name": "Current identity public/learn-code/eigenvalues-eigenvectors/eigen_symmetric_library.py",
+      "pass": true
+    },
+    {
+      "name": "Current identity src/learn/data/topics/k-means-hierarchical-clustering.jsx",
+      "pass": true
+    },
+    {
+      "name": "Current identity public/learn-code/k-means-hierarchical-clustering/clustering_quantization.py",
+      "pass": true
+    },
+    {
+      "name": "Current identity public/learn-code/k-means-hierarchical-clustering/clustering_lloyd.py",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r2.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/penguins.csv",
+      "pass": true
+    },
+    {
+      "name": "Current identity scratch/rate-distortion-review/formatting-results.json",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/workflow.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/teaching.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/topic-design.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/domain-playbook.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/visuals-and-labs.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/examples-and-code.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/practice-and-resources.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/review.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity skills/lesson-authoring/references/portfolio-adapter.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-binary-channel-p343.png",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-thomas-ch13.pdf",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-thomas-ch13.txt",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/mit-ch23.pdf",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/mit-ch23.txt",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-r2.md",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-correction-r2.json",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/independent-design-review-r1.json",
+      "pass": true
+    },
+    {
+      "name": "Current identity docs/teaching/math-foundations-reading-flow/rate-distortion-theory/independent-design-review-r1.md",
+      "pass": true
+    },
+    {
+      "name": "Editorial append exists",
+      "pass": true
+    },
+    {
+      "name": "Unique correction inverse 0",
+      "pass": true
+    },
+    {
+      "name": "Unique correction inverse 1",
+      "pass": true
+    },
+    {
+      "name": "Unique correction inverse 2",
+      "pass": true
+    },
+    {
+      "name": "Unique correction inverse 3",
+      "pass": true
+    },
+    {
+      "name": "Unique correction inverse 4",
+      "pass": true
+    },
+    {
+      "name": "Unique correction inverse 5",
+      "pass": true
+    },
+    {
+      "name": "Unique correction inverse 6",
+      "pass": true
+    },
+    {
+      "name": "Exact original design restored after explicit CRLF to LF normalization",
+      "pass": true
+    },
+    {
+      "name": "All prior inputs conserved",
+      "pass": true
+    },
+    {
+      "name": "C03 fixed interior and T2 general owner",
+      "pass": true
+    },
+    {
+      "name": "Safe function-only source reuse",
+      "pass": true
+    },
+    {
+      "name": "Gaussian first-use mounting",
+      "pass": true
+    },
+    {
+      "name": "L8 actual budget and source row",
+      "pass": true
+    },
+    {
+      "name": "Concrete T15 payloads",
+      "pass": true
+    },
+    {
+      "name": "Concrete T15 complete bytes",
+      "pass": true
+    }
+  ],
+  "scientificMainsExecuted": 0,
+  "scope": "Changed design contracts and exact conservation only; composes original DIFFERENT whole design review. No runtime or content completion acceptance."
+}

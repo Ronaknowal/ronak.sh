@@ -1,0 +1,42 @@
+{
+  "residual-ensemble.py": {
+    "dependencies": "Python3.12 and NumPy; supplied regression-tree.py in the same folder, plus sklearn for the declared ordinary comparison.",
+    "output": "mean intercept: 5.0\nMSE at prefixes 0, 1, 2: [7.333333, 2.0, 0.666667]\nsaved query predictions: [3.0, 3.0, 7.0, 7.0]\nordinary query predictions: [3.0, 3.0, 7.0, 7.0]\nmaximum comparison difference: 0.0\n",
+    "artifact": false
+  },
+  "loss-specific-leaves.py": {
+    "dependencies": "NumPy, SciPy and sklearn. Fixedδ and native adaptive Huber objectives are explicitly different.",
+    "output": "residuals / fixed delta: [-2.0, -1.0, 10.0] 2.0\ndesired LAD / Huber change: [-1.0, -1.0, 1.0] [-2.0, -1.0, 2.0]\nsquare / absolute / fixed-Huber leaves: 2.3333333333333335 -1.0 -0.5\nachieved Huber objectives: 20.25 20.25\nresiduals / fixed delta: [-4.0, 0.0, 7.0] 2.0\ndesired LAD / Huber change: [-1.0, 0.0, 1.0] [-2.0, 0.0, 2.0]\nsquare / absolute / fixed-Huber leaves: 1.0 0.0 -0.0\nachieved Huber objectives: 18.0 18.0\nresiduals / fixed delta: [-4.0, 4.0] 1.0\ndesired LAD / Huber change: [-1.0, 1.0] [-1.0, 1.0]\nsquare / absolute / fixed-Huber leaves: 0.0 0.0 0.0\nachieved Huber objectives: 7.0 7.0\nordinary absolute_error two-tree predictions: [1.625, 1.625, 1.625, 5.375, 5.375, 5.375]\nordinary huber two-tree predictions: [2.075, 2.075, 2.075, 5.308333, 5.308333, 13.908333]\n",
+    "artifact": false
+  },
+  "newton-tree.py": {
+    "dependencies": "NumPy and XGBoost for the mapped one-tree ordinary comparison.",
+    "output": "scratch raw-margin predictions: [4.4, 4.4, 4.4, 5.6, 5.6, 5.6]\nnative raw-margin predictions: [4.400000095367432, 4.400000095367432, 4.400000095367432, 5.599999904632568, 5.599999904632568, 5.599999904632568]\nmaximum native difference: 9.536743128535363e-08\ncut / left G,H,w / right G,H,w / net gain: 3.5 (8.0, 3.0, -2.0) (-8.0, 3.0, 2.0) 16.0\nbinary mean losses at prefixes: [0.693147, 0.572818, 0.480534, 0.408507]\nbinary probabilities: [0.335358, 0.335358, 0.335358, 0.664642, 0.664642, 0.664642]\n",
+    "artifact": false
+  },
+  "histogram-operations.py": {
+    "dependencies": "NumPy; this program implements operations without a scalable native engine.",
+    "output": "missing target / allowed cuts: 8.0 [1.5, 2.5, 3.5, 4.5, 5.5]\nbin count / G / H: [1, 1, 1, 1, 1, 1] [4.428571, 4.428571, 4.428571, -3.571429, -3.571429, -3.571429] [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]\nbest cut / missing-left / gain: 3.5 False 51.482143\nmissing target / allowed cuts: 8.0 [2.5, 4.5]\nbin count / G / H: [2, 2, 2] [8.857143, 0.857143, -7.142857] [2.0, 2.0, 2.0]\nbest cut / missing-left / gain: 4.5 False 27.52381\nmissing target / allowed cuts: 2.0 [1.5, 2.5, 3.5, 4.5, 5.5]\nbin count / G / H: [1, 1, 1, 1, 1, 1] [3.571429, 3.571429, 3.571429, -4.428571, -4.428571, -4.428571] [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]\nbest cut / missing-left / gain: 3.5 True 51.482143\nmissing target / allowed cuts: 2.0 [2.5, 4.5]\nbin count / G / H: [2, 2, 2] [7.142857, -0.857143, -8.857143] [2.0, 2.0, 2.0]\nbest cut / missing-left / gain: 2.5 True 27.52381\nweighted values / grouped mass / CDF: [0.0, 1.0, 2.0, 3.0] [1.0, 1.0, 6.0, 2.0] [0.1, 0.2, 0.8, 1.0]\nsibling G / H: [2.0, -1.0, 2.0] [1.0, 1.0, 2.0]\n",
+    "artifact": false
+  },
+  "multiclass-curvature.py": {
+    "dependencies": "NumPy; full coupled curvature operations, with no promised full multiclass engine.",
+    "output": "scores / target: [0.0, 0.0, 0.0] 1\np / g: [0.33333333, 0.33333333, 0.33333333] [0.33333333, -0.66666667, 0.33333333]\nfull H: [[0.22222222, -0.11111111, -0.11111111], [-0.11111111, 0.22222222, -0.11111111], [-0.11111111, -0.11111111, 0.22222222]]\nfinite-difference max error: 4.0953074265104306e-12\ncommon-shift probability difference: 0.0\nH times ones: [0.0, 0.0, 0.0]\nscores / target: [-0.7, 0.3, 1.2] 2\np / g: [0.09611525, 0.26126834, 0.64261641] [0.09611525, 0.26126834, -0.35738359]\nfull H: [[0.08687711, -0.02511187, -0.06176524], [-0.02511187, 0.19300719, -0.16789532], [-0.06176524, -0.16789532, 0.22966056]]\nfinite-difference max error: 7.174733029913227e-12\ncommon-shift probability difference: 1.1102230246251565e-16\nH times ones: [-0.0, 0.0, -0.0]\n",
+    "artifact": false
+  },
+  "categorical-partitions.py": {
+    "dependencies": "NumPy and sklearn for the admitted response-sorted-rank comparison.",
+    "output": "category / G / H: ['A', 'B', 'C', 'D'] [5.75, -2.75, 3.75, -6.75] [2.0, 2.0, 2.0, 2.0]\nsorted subset / gain: ['A', 'C'] 22.5625\nexhaustive subset / gain: ['A', 'C'] 22.5625\nordinary tree on admissible response-sorted ranks: [0.75, 5.5, 0.75, 0.75, 5.5, 5.5, 0.75, 5.5]\ngroups / conflict graph: [[0, 1, 2]] [[0, 0, 0], [0, 0, 0], [0, 0, 0]]\noffsets / codes: [0, 2, 4] [0, 2, 3, 6]\ndecoded rows: [[0, 0, 0], [2, 0, 0], [0, 1, 0], [0, 0, 2]]\nchanged conflict groups: [[0, 2], [1]]\n",
+    "artifact": false
+  },
+  "concrete-strength-workflow.py": {
+    "dependencies": "Offline concrete-data.csv; NumPy, sklearn, joblib, XGBoost, LightGBM and CatBoost in the declared environment. Use --data and a new --output directory.",
+    "output": "{\n  \"selected_name\": \"lightgbm-depth4\",\n  \"selected_prefix\": 294,\n  \"selected_validation\": {\n    \"rmse\": 5.586519247919869,\n    \"mae\": 4.0344499079899085\n  },\n  \"selected_test\": {\n    \"rmse\": 7.058474690635583,\n    \"mae\": 5.427591561491043\n  },\n  \"first_actual_test_row\": {\n    \"csv_line\": 3,\n    \"group_id\": 425,\n    \"inputs\": [\n      540,\n      0,\n      0,\n      162,\n      2.5,\n      1055,\n      676,\n      28\n    ],\n    \"observed\": 61.89,\n    \"prediction\": 74.55308733117796,\n    \"residual\": -12.663087331177962\n  }\n}",
+    "artifact": true
+  },
+  "diagnostic-operations.py": {
+    "dependencies": "NumPy and sklearn; the supplied saved predictor performs no fitting.",
+    "output": "split counts / gains: [1, 1] [21.333333333333332, 5.333333333333333]\nsaved predictions / baseline MSE: [3.0000000000000004, 3.0000000000000004, 3.0000000000000004, 7.0, 7.0, 7.0] 0.666666666666667\nfeature / shuffled row IDs / changed predictions / MSE increase: 0 [3, 0, 5, 1, 4, 2] [5.666666666666666, 3.0000000000000004, 5.666666666666666, 4.333333333333334, 7.0, 4.333333333333334] 6.5185185185185155\nfeature / shuffled row IDs / changed predictions / MSE increase: 1 [3, 0, 5, 1, 4, 2] [4.333333333333334, 3.0000000000000004, 4.333333333333334, 5.666666666666666, 7.0, 5.666666666666666] 2.0740740740740753\nordinary one-repeat effects: [6.5185185185185155, 2.0740740740740753]\nshuffle comparison max difference: 0.0\nPDP grid / averages: [2.0, 3.5, 4.5, 7.0] [3.666666666666668, 3.666666666666668, 6.333333333333333, 6.333333333333333]\nICE rows: [[3.0000000000000004, 3.0000000000000004, 5.666666666666666, 5.666666666666666], [3.0000000000000004, 3.0000000000000004, 5.666666666666666, 5.666666666666666], [3.0000000000000004, 3.0000000000000004, 5.666666666666666, 5.666666666666666], [4.333333333333334, 4.333333333333334, 7.0, 7.0], [4.333333333333334, 4.333333333333334, 7.0, 7.0], [4.333333333333334, 4.333333333333334, 7.0, 7.0]]\nordinary PDP max difference: 0.0\nweighted p=.1 with a=9 / a=1: 0.5000000000000001 0.1\n",
+    "artifact": false
+  }
+}

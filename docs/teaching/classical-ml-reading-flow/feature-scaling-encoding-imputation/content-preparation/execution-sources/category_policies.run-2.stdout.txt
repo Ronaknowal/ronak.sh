@@ -1,0 +1,10 @@
+counts: (('@missing', 1), ('a', 4), ('b', 1)) columns: ('@missing', '@rare', 'a')
+b/new/missing/a: [[0.0, 1.0, 0.0], [0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, 1.0]]
+native rare names: ['x0_a', 'x0_infrequent_sklearn']
+native missing/new: [[0.0, 1.0], [0.0, 1.0]]
+no rare bucket, unseen: [[0.0]]
+ordinal: [0, 2, -1, -2]
+ordinary ordinal: [0.0, 2.0, -1.0, -2.0]
+full red distances: [1.4142135623730951, 1.4142135623730951]
+drop red distances: [1.0, 1.0]
+refused: use strings without reserved @ prefix, or None

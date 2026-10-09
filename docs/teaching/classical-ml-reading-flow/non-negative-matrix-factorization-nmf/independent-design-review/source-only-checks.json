@@ -1,0 +1,941 @@
+{
+  "status": "PASS_SOURCE_ONLY",
+  "source": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/finalize-review.py",
+    "bytes": 13334,
+    "sha256": "9c486d47cb9a3e39611cb8103495f7b87277943bd177f15f570e44cc969d76da"
+  },
+  "python": "3.11.7 (main, Dec  7 2023, 09:09:57)  [GCC UCRT 13.2.0 64 bit (AMD64)]",
+  "checks": [
+    {
+      "name": "117 immutable selected inputs still exact; only explicitly mutable handoff observed",
+      "pass": true,
+      "evidence": [
+        {
+          "expected": {
+            "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+            "bytes": 95470,
+            "sha256": "b6a100b71e60ca41fcce82ef7acf44f5be94f958aa8af11df0f4de63cf676961",
+            "role": "current-mutable-global-guidance-not-historical-conservation-claim"
+          },
+          "actual": {
+            "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+            "bytes": 97324,
+            "sha256": "cfb76de036508a3b0ee2dfd8b8479fc5501ff0070925fa73fa6fdb7b0fced37a"
+          }
+        }
+      ]
+    },
+    {
+      "name": "all 300 source IDs unique",
+      "pass": true,
+      "evidence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        290,
+        293,
+        294,
+        297,
+        298,
+        299,
+        300,
+        301,
+        306,
+        314,
+        320
+      ]
+    },
+    {
+      "name": "exact CSV row feature identities",
+      "pass": true,
+      "evidence": [
+        "source_row",
+        "digit",
+        "pixel_0",
+        "pixel_1",
+        "pixel_2",
+        "pixel_3",
+        "pixel_4",
+        "pixel_5",
+        "pixel_6",
+        "pixel_7",
+        "pixel_8",
+        "pixel_9",
+        "pixel_10",
+        "pixel_11",
+        "pixel_12",
+        "pixel_13",
+        "pixel_14",
+        "pixel_15",
+        "pixel_16",
+        "pixel_17",
+        "pixel_18",
+        "pixel_19",
+        "pixel_20",
+        "pixel_21",
+        "pixel_22",
+        "pixel_23",
+        "pixel_24",
+        "pixel_25",
+        "pixel_26",
+        "pixel_27",
+        "pixel_28",
+        "pixel_29",
+        "pixel_30",
+        "pixel_31",
+        "pixel_32",
+        "pixel_33",
+        "pixel_34",
+        "pixel_35",
+        "pixel_36",
+        "pixel_37",
+        "pixel_38",
+        "pixel_39",
+        "pixel_40",
+        "pixel_41",
+        "pixel_42",
+        "pixel_43",
+        "pixel_44",
+        "pixel_45",
+        "pixel_46",
+        "pixel_47",
+        "pixel_48",
+        "pixel_49",
+        "pixel_50",
+        "pixel_51",
+        "pixel_52",
+        "pixel_53",
+        "pixel_54",
+        "pixel_55",
+        "pixel_56",
+        "pixel_57",
+        "pixel_58",
+        "pixel_59",
+        "pixel_60",
+        "pixel_61",
+        "pixel_62",
+        "pixel_63"
+      ]
+    },
+    {
+      "name": "30 records per digit",
+      "pass": true,
+      "evidence": {
+        "0": 30,
+        "1": 30,
+        "2": 30,
+        "3": 30,
+        "4": 30,
+        "5": 30,
+        "6": 30,
+        "7": 30,
+        "8": 30,
+        "9": 30
+      }
+    },
+    {
+      "name": "complete saved row digit pixel mapping",
+      "pass": true,
+      "evidence": [
+        {
+          "sourceRow": 242,
+          "digit": 8,
+          "exact": true
+        },
+        {
+          "sourceRow": 256,
+          "digit": 0,
+          "exact": true
+        },
+        {
+          "sourceRow": 40,
+          "digit": 8,
+          "exact": true
+        },
+        {
+          "sourceRow": 220,
+          "digit": 9,
+          "exact": true
+        },
+        {
+          "sourceRow": 132,
+          "digit": 2,
+          "exact": true
+        },
+        {
+          "sourceRow": 97,
+          "digit": 4,
+          "exact": true
+        },
+        {
+          "sourceRow": 1,
+          "digit": 1,
+          "exact": true
+        },
+        {
+          "sourceRow": 13,
+          "digit": 3,
+          "exact": true
+        },
+        {
+          "sourceRow": 43,
+          "digit": 7,
+          "exact": true
+        },
+        {
+          "sourceRow": 180,
+          "digit": 2,
+          "exact": true
+        },
+        {
+          "sourceRow": 120,
+          "digit": 5,
+          "exact": true
+        },
+        {
+          "sourceRow": 272,
+          "digit": 6,
+          "exact": true
+        },
+        {
+          "sourceRow": 244,
+          "digit": 2,
+          "exact": true
+        },
+        {
+          "sourceRow": 202,
+          "digit": 0,
+          "exact": true
+        },
+        {
+          "sourceRow": 95,
+          "digit": 6,
+          "exact": true
+        },
+        {
+          "sourceRow": 265,
+          "digit": 9,
+          "exact": true
+        },
+        {
+          "sourceRow": 102,
+          "digit": 5,
+          "exact": true
+        },
+        {
+          "sourceRow": 221,
+          "digit": 1,
+          "exact": true
+        },
+        {
+          "sourceRow": 248,
+          "digit": 8,
+          "exact": true
+        },
+        {
+          "sourceRow": 213,
+          "digit": 3,
+          "exact": true
+        },
+        {
+          "sourceRow": 145,
+          "digit": 5,
+          "exact": true
+        },
+        {
+          "sourceRow": 74,
+          "digit": 5,
+          "exact": true
+        },
+        {
+          "sourceRow": 58,
+          "digit": 6,
+          "exact": true
+        },
+        {
+          "sourceRow": 232,
+          "digit": 6,
+          "exact": true
+        },
+        {
+          "sourceRow": 222,
+          "digit": 7,
+          "exact": true
+        },
+        {
+          "sourceRow": 7,
+          "digit": 7,
+          "exact": true
+        },
+        {
+          "sourceRow": 179,
+          "digit": 0,
+          "exact": true
+        },
+        {
+          "sourceRow": 29,
+          "digit": 9,
+          "exact": true
+        },
+        {
+          "sourceRow": 261,
+          "digit": 5,
+          "exact": true
+        },
+        {
+          "sourceRow": 60,
+          "digit": 3,
+          "exact": true
+        },
+        {
+          "sourceRow": 246,
+          "digit": 5,
+          "exact": true
+        },
+        {
+          "sourceRow": 47,
+          "digit": 1,
+          "exact": true
+        },
+        {
+          "sourceRow": 194,
+          "digit": 4,
+          "exact": true
+        },
+        {
+          "sourceRow": 107,
+          "digit": 1,
+          "exact": true
+        },
+        {
+          "sourceRow": 119,
+          "digit": 9,
+          "exact": true
+        },
+        {
+          "sourceRow": 159,
+          "digit": 9,
+          "exact": true
+        },
+        {
+          "sourceRow": 38,
+          "digit": 8,
+          "exact": true
+        },
+        {
+          "sourceRow": 259,
+          "digit": 3,
+          "exact": true
+        },
+        {
+          "sourceRow": 177,
+          "digit": 1,
+          "exact": true
+        },
+        {
+          "sourceRow": 147,
+          "digit": 7,
+          "exact": true
+        },
+        {
+          "sourceRow": 306,
+          "digit": 2,
+          "exact": true
+        },
+        {
+          "sourceRow": 59,
+          "digit": 3,
+          "exact": true
+        },
+        {
+          "sourceRow": 84,
+          "digit": 2,
+          "exact": true
+        },
+        {
+          "sourceRow": 41,
+          "digit": 4,
+          "exact": true
+        },
+        {
+          "sourceRow": 140,
+          "digit": 0,
+          "exact": true
+        },
+        {
+          "sourceRow": 8,
+          "digit": 8,
+          "exact": true
+        },
+        {
+          "sourceRow": 203,
+          "digit": 9,
+          "exact": true
+        },
+        {
+          "sourceRow": 20,
+          "digit": 0,
+          "exact": true
+        },
+        {
+          "sourceRow": 182,
+          "digit": 7,
+          "exact": true
+        },
+        {
+          "sourceRow": 26,
+          "digit": 6,
+          "exact": true
+        },
+        {
+          "sourceRow": 85,
+          "digit": 1,
+          "exact": true
+        },
+        {
+          "sourceRow": 113,
+          "digit": 2,
+          "exact": true
+        },
+        {
+          "sourceRow": 118,
+          "digit": 7,
+          "exact": true
+        },
+        {
+          "sourceRow": 127,
+          "digit": 8,
+          "exact": true
+        },
+        {
+          "sourceRow": 121,
+          "digit": 4,
+          "exact": true
+        },
+        {
+          "sourceRow": 103,
+          "digit": 3,
+          "exact": true
+        },
+        {
+          "sourceRow": 290,
+          "digit": 6,
+          "exact": true
+        },
+        {
+          "sourceRow": 185,
+          "digit": 0,
+          "exact": true
+        },
+        {
+          "sourceRow": 260,
+          "digit": 4,
+          "exact": true
+        },
+        {
+          "sourceRow": 239,
+          "digit": 4,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "name": "exact decoded original multiplicativeStep",
+      "pass": true,
+      "evidence": {
+        "key": "multiplicativeStep",
+        "file": "nmf_step.py",
+        "decodedCodeSha256": "b75511b9f0d8bacdf28a316351ac668ca7246cbe18de0c55d15f93002578c1a1",
+        "decodedStdoutSha256": "0a0e7b7ba934a3f72ed27701cdd825698bafac0b2d3269c4dcef99a37aef060a"
+      }
+    },
+    {
+      "name": "exact decoded original digitDictionary",
+      "pass": true,
+      "evidence": {
+        "key": "digitDictionary",
+        "file": "nmf_digits.py",
+        "decodedCodeSha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989",
+        "decodedStdoutSha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981"
+      }
+    },
+    {
+      "name": "exact decoded original wordPatterns",
+      "pass": true,
+      "evidence": {
+        "key": "wordPatterns",
+        "file": "nmf_words.py",
+        "decodedCodeSha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343",
+        "decodedStdoutSha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23"
+      }
+    },
+    {
+      "name": "seven complete effective contracts bound",
+      "pass": true,
+      "evidence": [
+        {
+          "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-design.md",
+          "bytes": 24261,
+          "sha256": "9730039e51e5c10083671ed45b6e8b704db4d11c697792ed588eb84d09e6ffb7"
+        },
+        {
+          "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/visual-and-investigation-contracts.md",
+          "bytes": 28778,
+          "sha256": "04955b4c5cfe88bf4d1fe2ddb3876368edb41a8198444d5011ee9422caceff15"
+        },
+        {
+          "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/programs-and-practice.md",
+          "bytes": 33329,
+          "sha256": "d501ca6df0eef4c58da45ce1da9347be58d67f753b265b584bb72331ef519e02"
+        },
+        {
+          "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/dependencies-and-anchors.md",
+          "bytes": 10861,
+          "sha256": "8d8eb4157c1eb2ccbd77a8075e3eaa33b196670779db54f6f0ba6beb6453c5a3"
+        },
+        {
+          "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/research-and-claim-disposition.md",
+          "bytes": 13336,
+          "sha256": "a00195bc864b291e4b4e62a8db52f275dbe443601377de4507f9ca2d585f4a3a"
+        },
+        {
+          "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/author-review.md",
+          "bytes": 11008,
+          "sha256": "2412a20ffb411a263640fb84489532711c90ff384286389aba50ad72c8db9629"
+        },
+        {
+          "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-revision.md",
+          "bytes": 2588,
+          "sha256": "cc04dea3f9da7598ffe82a1a74d6d2af8f346d18bcdb597eacacbb7537289044"
+        }
+      ]
+    }
+  ],
+  "completeAuthorJSONStructuralConsumption": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/author-ready.json",
+      "bytes": 5151,
+      "sha256": "b37eb34b446c2b567f1c6a57d4ce121ecc6d3b7629ea206a4a77eb90601e87b6",
+      "fullyParsedJSONKeys": [
+        "status",
+        "topic",
+        "predecessorPackets",
+        "fullContracts",
+        "sourceIdentity",
+        "checks",
+        "executionAndLimits",
+        "composition",
+        "scope",
+        "science",
+        "limits",
+        "next"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/source-identity.json",
+      "bytes": 33627,
+      "sha256": "5a66d4e7796b9a9eb856f209aa219a450de32f33c5b992a4240de48bc075ee5e",
+      "fullyParsedJSONKeys": [
+        "status",
+        "bindings",
+        "originalPairs",
+        "immutableFirstBindings",
+        "immutableResumedBindings",
+        "remoteSources",
+        "qualification"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-source-checks.json",
+      "bytes": 68170,
+      "sha256": "1f0689f5fc60f537de1a2f727bf3537fbfe98fcc5451ac1c57aa61e477e5f776",
+      "fullyParsedJSONKeys": [
+        "status",
+        "conditions",
+        "scope"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/execution-and-limitations.json",
+      "bytes": 3956,
+      "sha256": "5245cf2ede215df6551d54e12ee22336a42a8508e157e6f2f8ca691e2dc0656a",
+      "fullyParsedJSONKeys": [
+        "scope",
+        "executions",
+        "retainedFailure",
+        "unchangedEvidence",
+        "limits"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-composition-deltas.json",
+      "bytes": 11863,
+      "sha256": "926f7a0aadb886131a2bde049b92cb8326e043771ec5f9736db8b48e73bafc63",
+      "fullyParsedJSONKeys": [
+        "predecessor",
+        "successor",
+        "replacements",
+        "removedPartialBoundary",
+        "appendedText",
+        "scope"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-arithmetic.json",
+      "bytes": 46860,
+      "sha256": "fa04c779c42514521ff50cd14f0c78a8c85f132c538ddf360d86bd1a4deec973",
+      "fullyParsedJSONKeys": [
+        "scope",
+        "sourceSha256",
+        "D12",
+        "D20",
+        "D24",
+        "D25",
+        "D27",
+        "D28",
+        "D34",
+        "D36",
+        "D39",
+        "D58",
+        "D59",
+        "D63",
+        "savedDescriptive",
+        "savedInput",
+        "scientificFitsOrOriginalExecutions"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/saved-scale-arithmetic.json",
+      "bytes": 986,
+      "sha256": "1375a79c245a15623d70b469667f2e26213abe54ae09307a2c9f6267734a57a9",
+      "fullyParsedJSONKeys": [
+        "source",
+        "sourceProgramSha256",
+        "dictionaryMaximum",
+        "chosenCommonNonnegativeMaximum",
+        "selectedAddresses",
+        "fitCount",
+        "originalMainExecutions"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/practice-arithmetic.json",
+      "bytes": 7514,
+      "sha256": "7c4a9266376ddd7e969854542f6d5fcbd2e8485887c36cddbe048d8c69286b53",
+      "fullyParsedJSONKeys": [
+        "scope",
+        "sourceSha256",
+        "states"
+      ]
+    }
+  ],
+  "decodedOriginalPrograms": [
+    {
+      "key": "multiplicativeStep",
+      "file": "nmf_step.py",
+      "decodedCodeSha256": "b75511b9f0d8bacdf28a316351ac668ca7246cbe18de0c55d15f93002578c1a1",
+      "decodedStdoutSha256": "0a0e7b7ba934a3f72ed27701cdd825698bafac0b2d3269c4dcef99a37aef060a"
+    },
+    {
+      "key": "digitDictionary",
+      "file": "nmf_digits.py",
+      "decodedCodeSha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989",
+      "decodedStdoutSha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981"
+    },
+    {
+      "key": "wordPatterns",
+      "file": "nmf_words.py",
+      "decodedCodeSha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343",
+      "decodedStdoutSha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23"
+    }
+  ],
+  "fitsOrHistoricalExecutions": 0,
+  "arithmeticReplay": false
+}

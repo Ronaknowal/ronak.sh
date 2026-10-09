@@ -1,0 +1,60 @@
+{
+  "image_hwc": [
+    4,
+    6,
+    2
+  ],
+  "patches": [
+    6,
+    8
+  ],
+  "first_patch": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    1.2,
+    1.3,
+    1.4,
+    1.5
+  ],
+  "first_projection": [
+    1.048,
+    0.808,
+    1.368
+  ],
+  "conv_nchw": [
+    1,
+    3,
+    2,
+    3
+  ],
+  "max_abs_difference": 4.440892098500626e-16,
+  "unpatchify_exact": true,
+  "real_digit": {
+    "source_index": 0,
+    "label": 0,
+    "image_hwc": [
+      8,
+      8,
+      1
+    ],
+    "patches": [
+      16,
+      4
+    ],
+    "patch_index": 1,
+    "patch_vector": [
+      0.3125,
+      0.8125,
+      0.8125,
+      0.9375
+    ],
+    "projection": [
+      1.125,
+      1.75
+    ],
+    "unpatchify_exact": true,
+    "conv_max_abs_difference": 0.0
+  }
+}

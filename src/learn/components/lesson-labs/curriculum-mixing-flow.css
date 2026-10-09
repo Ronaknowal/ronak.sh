@@ -1,0 +1,43 @@
+.curriculum-mixing-lesson { --mix-blue:#70b8ff; --mix-amber:#efbc68; --mix-violet:#bd9aff; }
+.mix-figure { margin:1.7rem 0 2rem; min-width:0; }
+.mix-figure figcaption { color:#aaa; font-size:.88rem; line-height:1.65; margin-top:.85rem; }
+.mix-figure p { line-height:1.6; }
+.mix-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr)); gap:1.5rem; align-items:start; }
+.mix-grid > * { min-width:0; }
+.mix-stage-label { display:block; color:#ddd; font-size:.9rem; margin-bottom:.65rem; }
+.mix-cells { display:flex; flex-wrap:wrap; gap:.25rem; align-content:start; }
+.mix-cell { display:inline-flex; align-items:center; justify-content:center; min-width:1.7rem; height:1.8rem; padding:0 .2rem; border:1px solid currentColor; background:color-mix(in srgb,currentColor 11%,transparent); font-size:.77rem; font-variant-numeric:tabular-nums; }
+.mix-sheet { border-left:2px solid currentColor; padding:.55rem .7rem; margin:.6rem 0; background:color-mix(in srgb,currentColor 5%,transparent); }
+.mix-sheet b { display:block; font-size:.9rem; margin-bottom:.5rem; }
+.mix-ribbon { display:flex; width:100%; height:1.4rem; overflow:hidden; }
+.mix-ribbon > span { display:block; height:100%; }
+.mix-legend { display:flex; flex-wrap:wrap; gap:.7rem 1.3rem; margin:.7rem 0; font-size:.85rem; }
+.mix-legend i { display:inline-block; width:.7rem; height:.7rem; margin-right:.4rem; background:currentColor; }
+.mix-table { width:100%; border-collapse:collapse; font-size:.85rem; font-variant-numeric:tabular-nums; }
+.mix-table th,.mix-table td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid #343434; vertical-align:top; }
+.mix-table caption { text-align:left; margin-bottom:.6rem; color:#bbb; }
+.mix-scroll { overflow-x:auto; max-width:100%; padding:.15rem 0 .5rem; }
+.mix-scroll:focus-visible { outline:2px solid #efbc68; outline-offset:3px; }
+.mix-plot { width:100%; display:block; }
+.mix-plot text { font:var(--mix-svg-font,15px) ui-sans-serif,system-ui,sans-serif; fill:#ccc; }
+.mix-responsive-plot { min-width:0; }
+.mix-axis-label { text-align:center; margin:0 0 .8rem; font-size:.9rem; }
+.mix-plot .mix-small { font-size:13px; }
+.mix-bars { display:grid; gap:.8rem; }
+.mix-bar { display:grid; grid-template-columns:minmax(5rem,1fr) 2fr minmax(3.4rem,auto); align-items:center; gap:.7rem; font-size:.88rem; }
+.mix-track { height:.8rem; background:#252525; }
+.mix-track i { display:block; height:100%; }
+.mix-matrix { display:grid; gap:.2rem; width:max-content; }
+.mix-matrix span { width:2.2rem; height:2.2rem; display:grid; place-items:center; font-size:.78rem; border:1px solid #4d4d4d; font-variant-numeric:tabular-nums; }
+.mix-matrix.is-frozen { outline:1px dashed #aaa; outline-offset:.35rem; margin:.7rem; }
+.mix-connector { color:#bbb; display:block; margin:.6rem 0; font-size:1.3rem; }
+.mix-selected { outline:2px solid white; outline-offset:3px; }
+.mix-step { display:grid; grid-template-columns:2rem 1fr; gap:.5rem; margin:.55rem 0; align-items:center; }
+.mix-step > b { font-size:.8rem; color:#aaa; }
+.mix-timeline { border-left:2px solid #666; padding-left:1rem; margin:.8rem 0; }
+.mix-time-point { position:relative; padding:.5rem 0; }
+.mix-time-point::before { content:''; position:absolute; left:-1.38rem; top:.9rem; width:.6rem; height:.6rem; border-radius:50%; background:currentColor; }
+.mix-number-input { display:flex; justify-content:space-between; align-items:center; gap:.7rem; padding:.3rem 0; }
+.mix-number-input input { width:5rem; border:1px solid #666; background:#151515; color:#eee; padding:.35rem; font:inherit; }
+.mixing-math { overflow-x:auto; max-width:100%; }
+@media(max-width:600px){ .mix-grid{grid-template-columns:minmax(0,1fr)} .mix-table th,.mix-table td{padding:.5rem .3rem} .mix-bar{grid-template-columns:5rem 1fr 3.4rem} }

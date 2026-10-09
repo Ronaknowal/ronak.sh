@@ -1,0 +1,735 @@
+{
+  "schema": "nmf-actual-component-scenario-ssr/v1",
+  "checks": [
+    {
+      "id": "D02",
+      "initialStates": [
+        1,
+        1
+      ],
+      "actualResult": "1[1,0,1] + 1[0,1,1] = [1, 1, 2].",
+      "ssrBytes": 3534,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D02",
+      "initialStates": [
+        0,
+        0
+      ],
+      "actualResult": "0[1,0,1] + 0[0,1,1] = [0, 0, 0].",
+      "ssrBytes": 3415,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D06",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "R0 C0 amount 1, pattern [2, 0, 2], contribution [2,0,2]. Scale0 is outside this invertible operation.",
+      "ssrBytes": 5466,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D06",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "R0 C0 amount 4, pattern [0.5, 0, 0.5], contribution [2,0,2]. Scale0 is outside this invertible operation.",
+      "ssrBytes": 5474,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D07",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "t=0; amounts [2,1] still reconstruct [2,3,3]. At t0 the original factors return; at t1 the edited pattern zeros remain valid.",
+      "ssrBytes": 6286,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D07",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "t=1; amounts [2,3] still reconstruct [2,3,3]. At t0 the original factors return; at t1 the edited pattern zeros remain valid.",
+      "ssrBytes": 6278,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D08",
+      "initialStates": [
+        3
+      ],
+      "actualResult": "Amounts [0.666667,1]; contributions [4,2]. Largest raw amount: C1.",
+      "ssrBytes": 1533,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D09",
+      "initialStates": [
+        3
+      ],
+      "actualResult": "Prediction [3, 1, 4]; residual [-1, 0, -1]. At amount2 every residual is zero.",
+      "ssrBytes": 2574,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D09",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Prediction [2, 1, 3]; residual [0, 0, 0]. At amount2 every residual is zero.",
+      "ssrBytes": 2505,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D11",
+      "initialStates": [
+        4
+      ],
+      "actualResult": "H=[1,1]. Measured-zero optimum amount 2, half-loss 4. Omitted-bin optimum amount 4, included half-loss0; missing-bin quality unknown.",
+      "ssrBytes": 2166,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D11",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "H=[1,1]. Measured-zero optimum amount 0, half-loss 0. Omitted-bin optimum amount 0, included half-loss0; missing-bin quality unknown.",
+      "ssrBytes": 2156,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D12",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "At y1: squared 0, KL 0, IS 0. At y3: 2, 0.901388, 0.431946. Each cost is zero at y=1.",
+      "ssrBytes": 12526,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D12",
+      "initialStates": [
+        4
+      ],
+      "actualResult": "At y1: squared 4.5, KL 2.545177, IS 1.613706. At y3: 0.5, 0.150728, 0.045651. Each cost is zero at y=4.",
+      "ssrBytes": 12490,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D12",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "At y1: squared 0.125, KL 0.153426, IS 0.193147. At y3: 3.125, 1.60412, 0.958426. Each cost is zero at y=0.5.",
+      "ssrBytes": 12477,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D13",
+      "initialStates": [
+        0,
+        1
+      ],
+      "actualResult": "Amounts [0, 0.5]; prediction [0.5, 0.5]; half-loss 0.25. Hc is unchanged.",
+      "ssrBytes": 4914,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D13",
+      "initialStates": [
+        0,
+        0
+      ],
+      "actualResult": "Amounts [0, 0]; prediction [0, 0]; half-loss 0. Hc is unchanged.",
+      "ssrBytes": 4870,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D15",
+      "initialStates": [
+        1,
+        0.5
+      ],
+      "actualResult": "Amounts [0.5, 0.5]; prediction [1, 0.5]; half-loss 0. Hc is unchanged.",
+      "ssrBytes": 4946,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D15",
+      "initialStates": [
+        0,
+        0
+      ],
+      "actualResult": "Amounts [0, 0]; prediction [0, 0]; half-loss 0. Hc is unchanged.",
+      "ssrBytes": 4886,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D16",
+      "initialStates": [
+        3
+      ],
+      "actualResult": "Prediction [3, 1, 4]; half-loss 4; coordinate slope 2.",
+      "ssrBytes": 5506,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D16",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Prediction [2, 1, 3]; half-loss 3; coordinate slope 0.",
+      "ssrBytes": 5554,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D18",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "C0 updated to2. Fresh C1 slope−3; stale C1 slope−4.",
+      "ssrBytes": 3192,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D18",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Cyclic [2,2.5], loss.75; stale [2,3], loss1. Exact reference [1,3] has loss0.",
+      "ssrBytes": 3232,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D19",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "Prediction [1,1]; gradient [1, 1]. Positive C1 has a nonzero gradient; it is not stationary.",
+      "ssrBytes": 3352,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D19",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "Prediction [0,0]; gradient [0, -1]. C1 gradient−1 permits a feasible improvement.",
+      "ssrBytes": 3333,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D20",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "W block complete; H remains H0; whole-table half-loss 0.9375. Expected checkpoints6 → 15/16 → 11733/26620.",
+      "ssrBytes": 3647,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D20",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "H block complete using new W; whole-table half-loss 0.440759. Expected checkpoints6 → 15/16 → 11733/26620.",
+      "ssrBytes": 3907,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D22",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "Half-loss 0.125; projected-gradient magnitude 0.5. Nonzero projected gradient despite a possible unchanged multiplicative state.",
+      "ssrBytes": 4290,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D22",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "Half-loss 0; projected-gradient magnitude 0. Stationary exact solution.",
+      "ssrBytes": 4220,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D25",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "H-first update complete; half-loss 1.602432. Original rounded endpoints17.06 → .03944744.",
+      "ssrBytes": 5676,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D25",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "W update using new H complete; half-loss 0.039447. Original rounded endpoints17.06 → .03944744.",
+      "ssrBytes": 5821,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D26",
+      "initialStates": [
+        0.25
+      ],
+      "actualResult": "MU 0.25×2/(0.25+1)=0.4; coordinate result1. Both updates are shown from the same starting amount.",
+      "ssrBytes": 2552,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D26",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "MU 1×2/(1+1)=1; coordinate result1. Both routes remain at the optimum.",
+      "ssrBytes": 2470,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D27",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Count 2, rate2, ratio 1, allocations [1,1]. Generalized KL 0; count0 gives zero allocations and KL2.",
+      "ssrBytes": 2119,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D27",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "Count 0, rate2, ratio 0, allocations [0,0]. Generalized KL 2; count0 gives zero allocations and KL2.",
+      "ssrBytes": 2068,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D28",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "Blue f, rose q. New z=1.25; f(new)=0.5625 ≤ q(new)=1.125 ≤ q(a)=f(a)=2.25. Gap at new 0.5625.",
+      "ssrBytes": 7945,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D28",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Blue f, rose q. New z=2; f(new)=0 ≤ q(new)=0 ≤ q(a)=f(a)=0. Gap at new 0.",
+      "ssrBytes": 7895,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D28",
+      "initialStates": [
+        0.25
+      ],
+      "actualResult": "Blue f, rose q. New z=0.833333; f(new)=1.361111 ≤ q(new)=2.041667 ≤ q(a)=f(a)=3.0625. Gap at new 0.680556.",
+      "ssrBytes": 7920,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D29",
+      "initialStates": [
+        1,
+        1
+      ],
+      "actualResult": "Increment [1,1], side 0, quadratic area 0. Equal increments give area0.",
+      "ssrBytes": 2577,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D29",
+      "initialStates": [
+        -1,
+        1
+      ],
+      "actualResult": "Increment [-1,1], side 2, quadratic area 4. Equal increments give area0.",
+      "ssrBytes": 2583,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D30",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "gamma=1, MM1×4^gamma=4 versus heuristic4. Jensen shares.25/.75: mean5, φ(mean)25, weighted heights28, gap3. Log tangent is an upper bound.",
+      "ssrBytes": 11259,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D30",
+      "initialStates": [
+        3
+      ],
+      "actualResult": "gamma=0.5, MM1×4^gamma=2 versus heuristic4. Jensen shares.25/.75: mean5, φ(mean)25, weighted heights28, gap3. Log tangent is an upper bound.",
+      "ssrBytes": 11260,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D33",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "Norm products positive 0.6, negative 0; positive pair selected. At a.8 the declared positive-pair tie applies. Zero-norm endpoints are never divided.",
+      "ssrBytes": 3796,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D33",
+      "initialStates": [
+        0.8
+      ],
+      "actualResult": "Norm products positive 0.48, negative 0.48; positive pair selected. At a.8 the declared positive-pair tie applies. Zero-norm endpoints are never divided.",
+      "ssrBytes": 3841,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D33",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "Norm products positive 0, negative 0.8; negative pair selected. At a.8 the declared positive-pair tie applies. Zero-norm endpoints are never divided.",
+      "ssrBytes": 3791,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D34",
+      "initialStates": [
+        0.1
+      ],
+      "actualResult": "Initial half-loss 8.2527; after one complete update 3.652713. New H[1,0]=0.053556, W[0,1]=0.067273.",
+      "ssrBytes": 6137,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D34",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Initial half-loss 38.153002; after one complete update 12.279289. New H[1,0]=1.156484, W[0,1]=1.981035.",
+      "ssrBytes": 6132,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D36",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "Start [0.5,1]: CD loss.75; MU loss 0.0525. MU has lower loss at this selected block; neither has zero projected gradient.",
+      "ssrBytes": 5310,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D36",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Start [2,1]: CD loss.75; MU loss 1.3125. CD has lower loss at this selected block; neither has zero projected gradient.",
+      "ssrBytes": 5269,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D38",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "λ=1, best amount 1, data cost 0.5, price 1, total 1.5, total derivative 0. Blue data, amber price, rose total.",
+      "ssrBytes": 17684,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D38",
+      "initialStates": [
+        3
+      ],
+      "actualResult": "λ=3, best amount 0, data cost 2, price 0, total 2, total derivative 1. Blue data, amber price, rose total.",
+      "ssrBytes": 18126,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D39",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "W mass 7.5 ×.3=2.25; H mass 6 ×.6=3.6; total penalty 5.85. Data half-loss0.",
+      "ssrBytes": 6080,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D39",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "W mass 12 ×.3=3.6; H mass 3 ×.6=1.8; total penalty 5.4. Data half-loss0.",
+      "ssrBytes": 6081,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D40",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "m=0; offdiagonal contribution 0, each F2 cross contribution 0. A third row [0,0], target 0. F2 is excluded.",
+      "ssrBytes": 8447,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D40",
+      "initialStates": [
+        0.25
+      ],
+      "actualResult": "m=0.25; offdiagonal contribution 0.25, each F2 cross contribution 0.75. A third row [0.5,0.5], target 1.5. Fractional weighting differs from a binary observation mask.",
+      "ssrBytes": 8617,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D43",
+      "initialStates": [
+        "256",
+        "7",
+        2
+      ],
+      "actualResult": "Source256, C8: original amount 0.628002, edited amount 1.256004, contribution sum 13.789188, MSE 0.073263. No fit or other amount changes.",
+      "ssrBytes": 55483,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D43",
+      "initialStates": [
+        "242",
+        "7",
+        0
+      ],
+      "actualResult": "Source242, C8: original amount 0, edited amount 0, contribution sum 0, MSE 0.021504. This saved amount is zero; its intervention remains a genuine zero-change case.",
+      "ssrBytes": 54579,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D43",
+      "initialStates": [
+        "256",
+        "6",
+        0
+      ],
+      "actualResult": "Source256, C7: original amount 0.688493, edited amount 0, contribution sum 0, MSE 0.058804. Only the selected complete addend is removed.",
+      "ssrBytes": 54375,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D45",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "Gain 0; MSE 0.07326253831969971. Original 0.027588161548874817; removed 0.07326253831969971. Removed total intensity 6.894594.",
+      "ssrBytes": 54431,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D45",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "Gain 0.5; MSE 0.039006755741581016. Original 0.027588161548874817; removed 0.07326253831969971. Removed total intensity 3.447297.",
+      "ssrBytes": 54418,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D50",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "t=0, current amounts[2,1], complete product[2,3,3]. Third-bin equality: 2+1=3. The direction changes; the observation does not.",
+      "ssrBytes": 6382,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D50",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "t=1, current amounts[2,3], complete product[2,3,3]. Third-bin equality: 0+3=3. The direction changes; the observation does not.",
+      "ssrBytes": 6327,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D51",
+      "initialStates": [
+        "1"
+      ],
+      "actualResult": "Pair (1,1) and (2,2) requires crosscells (1,2)=1 and (2,1)=0. Forbidden zero (2,1) remains zero in the original X; no edit to observations.",
+      "ssrBytes": 6816,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D51",
+      "initialStates": [
+        "3"
+      ],
+      "actualResult": "Pair (3,3) and (0,0) requires crosscells (3,0)=1 and (0,3)=0. Forbidden zero (0,3) remains zero in the original X; no edit to observations.",
+      "ssrBytes": 6815,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D53",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "Mass 1; [0,1]/1=[0, 1]. At a0 the point is still nonzero and equals P1.",
+      "ssrBytes": 5560,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D53",
+      "initialStates": [
+        3
+      ],
+      "actualResult": "Mass 4; [3,1]/4=[0.75, 0.25]. At a0 the point is still nonzero and equals P1.",
+      "ssrBytes": 5596,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D54",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "Diamond query [0,1]. It coincides with an observed pure anchor and adds no direction.",
+      "ssrBytes": 3870,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D54",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "Diamond query [1,0]. It coincides with an observed pure anchor and adds no direction.",
+      "ssrBytes": 3872,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D55",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "After A0 projection: lengths0,1,.25,.75; squared norms0,1,.0625,.5625. A1 is next. Duplicate ID10 does not supply a new direction; zero ID6 is excluded.",
+      "ssrBytes": 9870,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D55",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "After A1 projection all residuals are zero; two independent directions are exhausted. Duplicate ID10 does not supply a new direction; zero ID6 is excluded.",
+      "ssrBytes": 9809,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D56",
+      "initialStates": [
+        0.01
+      ],
+      "actualResult": "Separation √2ε=0.014142, angle atan2(ε,1−ε)=0.010101 radians. Separation alone does not give a universal noisy recovery guarantee.",
+      "ssrBytes": 5751,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D56",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "Separation √2ε=0, angle atan2(ε,1−ε)=0 radians. Coincident patterns: independent-direction rank request refused.",
+      "ssrBytes": 5667,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D56",
+      "initialStates": [
+        1
+      ],
+      "actualResult": "Separation √2ε=1.414214, angle atan2(ε,1−ε)=1.570796 radians. Separation alone does not give a universal noisy recovery guarantee.",
+      "ssrBytes": 5691,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D58",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "Count [0, 1, 0] → weighted [0, 1.287682, 0]; training weights unchanged. Rocket planet maps to[0,1,0]; all-planet maps to zero, meaning no retained vocabulary occurrence.",
+      "ssrBytes": 6953,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D58",
+      "initialStates": [
+        4
+      ],
+      "actualResult": "Count [4, 1, 0] → weighted [6.772589, 1.287682, 0]; training weights unchanged. Rocket planet maps to[0,1,0]; all-planet maps to zero, meaning no retained vocabulary occurrence.",
+      "ssrBytes": 6985,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D59",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "Cone amounts[1, 0.5], half-loss0. Simplex amounts[0.75, 0.25], half-loss 0.1875, third-band prediction1. At gain1 normalized NNLS has loss28/9, rather than the segment optimum3.",
+      "ssrBytes": 6495,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D59",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Cone amounts[4, 2], half-loss0. Simplex amounts[1, 0], half-loss 19, third-band prediction1. At gain1 normalized NNLS has loss28/9, rather than the segment optimum3.",
+      "ssrBytes": 6407,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D62",
+      "initialStates": [
+        0
+      ],
+      "actualResult": "ρ=0. A11=4, B[1,F1]=4. Empty batch leaves A/B/H unchanged. Atρ0 an unused C0 surrogate coordinate is flat and its dictionary row is retained.",
+      "ssrBytes": 5022,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D62",
+      "initialStates": [
+        0.5
+      ],
+      "actualResult": "ρ=0.5. A11=4.5, B[1,F1]=4.5. Empty batch leaves A/B/H unchanged. Atρ0 an unused C0 surrogate coordinate is flat and its dictionary row is retained.",
+      "ssrBytes": 5117,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    },
+    {
+      "id": "D63",
+      "initialStates": [
+        2
+      ],
+      "actualResult": "Stored-code half-loss 2; fresh-code half-loss 0.222222, fresh amounts [1.111111, 1.444444]. At h1 both coincide; historical statistics remain fixed throughout.",
+      "ssrBytes": 6458,
+      "scope": "actual component SSR with test-only initial-state substitution; no native interaction"
+    }
+  ],
+  "scenarioCount": 79,
+  "interactiveFigures": 38,
+  "native": false,
+  "scientificExecutions": 0,
+  "viteBuilds": 0
+}

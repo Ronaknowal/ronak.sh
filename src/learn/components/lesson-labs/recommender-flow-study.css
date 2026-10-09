@@ -1,0 +1,27 @@
+.rec-study-timeline { width:68.75rem; max-width:none; font:18px "Space Grotesk",sans-serif; }
+.rec-study-timeline text { fill:#eee; }
+.rec-study-months { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr)); gap:1rem; margin:1.5rem 0; }
+.rec-study-months > div { min-width:0; overflow-wrap:anywhere; display:flex; flex-direction:column; border-top:2px solid #84b8ef; gap:.5rem; padding-top:1rem; }
+.rec-study-months > div:nth-child(2) { border-color:#e8b44a; }
+.rec-study-months > div:nth-child(3) { border-color:#c59bdd; }
+.rec-study-locks { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; margin:1.5rem 0; }
+[data-rec-job="D51"] .rec-flow-pan:has(table), [data-rec-job="D52"] .rec-flow-pan, [data-rec-job="D54"] .rec-flow-pan, [data-rec-job="D55"] .rec-flow-pan { max-height:26rem; overflow:auto; }
+[data-rec-job="D51"] .rec-flow-matrix thead th, [data-rec-job="D52"] .rec-flow-matrix thead th, [data-rec-job="D54"] .rec-flow-matrix thead th, [data-rec-job="D55"] .rec-flow-matrix thead th { position:sticky; top:0; z-index:2; background:#080808; }
+@media(max-width:600px) { .rec-study-months { grid-template-columns:1fr; } }
+.recommender-flow-files { font:1rem/1.75 "Space Grotesk",sans-serif; margin:2rem 0; overflow-wrap:anywhere; }
+.recommender-flow-files p, .recommender-flow-files ul { margin:1rem 0; }
+.recommender-flow-files ul { padding-left:1.5rem; }
+.recommender-flow-files li { margin:.5rem 0; }
+.recommender-flow-files code { font-size:1em; }
+.recommender-flow-files summary { cursor:pointer; }
+.rec-practice-transfer-heading { font:600 1.1rem/1.5 "Space Grotesk",sans-serif; margin:2rem 0 1rem; }
+.recommender-flow-lesson > ul, .recommender-flow-lesson > ol { font:1rem/1.75 "Space Grotesk",sans-serif; padding-left:1.5rem; margin:1.5rem 0; overflow-wrap:anywhere; }
+.recommender-flow-lesson > ul > li, .recommender-flow-lesson > ol > li { margin:.75rem 0; }
+.recommender-flow-lesson > details > summary { font:1rem/1.75 "Space Grotesk",sans-serif; cursor:pointer; margin:.5rem 0; }
+.reader-article:has(.recommender-flow-lesson) + .lesson-code-downloads { font:1rem/1.75 "Space Grotesk",sans-serif; }
+
+/* Adapt the normal reading lane to its available width and text size. */
+.reader-content:has(.recommender-flow-lesson) .lesson-compass .lesson-compass__sections {
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));
+}
+.recommender-flow-lesson p { overflow-wrap:anywhere; }

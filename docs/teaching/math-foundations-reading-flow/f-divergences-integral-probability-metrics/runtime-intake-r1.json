@@ -1,0 +1,403 @@
+{
+  "status": "Private runtime in progress; not ready for review",
+  "createdAt": "2026-10-09T18:32:17.517501+00:00",
+  "accepted": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-accepted-root-r1.json",
+    "sha256": "bf58b89680e9cbaabf7be13c37b850e7eea96cc3da936dcfe287ff810e46db55",
+    "bytes": 23895
+  },
+  "acceptedGuards": 120,
+  "assetCopies": [
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/DATA-PROVENANCE.md",
+        "sha256": "3cfdd02b246a31f3e40b6844aeaa8eceda55e7e1c67e6692baae7d7f729dd232",
+        "bytes": 1221
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/DATA-PROVENANCE.md",
+        "sha256": "3cfdd02b246a31f3e40b6844aeaa8eceda55e7e1c67e6692baae7d7f729dd232",
+        "bytes": 1221
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_blockwise.py",
+        "sha256": "acc88a2f65b62a018985bf3ad1a51a24881d4d60ff260d4f669bfaeff682b657",
+        "bytes": 1556
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_blockwise.py",
+        "sha256": "acc88a2f65b62a018985bf3ad1a51a24881d4d60ff260d4f669bfaeff682b657",
+        "bytes": 1556
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_events.py",
+        "sha256": "3260220a57b9089fb50d282020b81bcb30358abbb469ad7ae7e08387fb2621fb",
+        "bytes": 2095
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_events.py",
+        "sha256": "3260220a57b9089fb50d282020b81bcb30358abbb469ad7ae7e08387fb2621fb",
+        "bytes": 2095
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_events.stdout",
+        "sha256": "53c36ae8f5178d8b71052a454f45bed63f7ac4a6b45799ae7f6b2aef1c41caee",
+        "bytes": 208
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_events.py.stdout.txt",
+        "sha256": "53c36ae8f5178d8b71052a454f45bed63f7ac4a6b45799ae7f6b2aef1c41caee",
+        "bytes": 208
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_kernel.py",
+        "sha256": "4727d22c773f96c2fd6eb8fef2426c82286c5cd7f15088f65117767cbab3d9c3",
+        "bytes": 1582
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_kernel.py",
+        "sha256": "4727d22c773f96c2fd6eb8fef2426c82286c5cd7f15088f65117767cbab3d9c3",
+        "bytes": 1582
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_kernel.stdout",
+        "sha256": "fb9ef8d638afb0395419d283e9b0b64e3f677c8c9cae9cdf77ec208ae7711974",
+        "bytes": 279
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_kernel.py.stdout.txt",
+        "sha256": "fb9ef8d638afb0395419d283e9b0b64e3f677c8c9cae9cdf77ec208ae7711974",
+        "bytes": 279
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_observers.py",
+        "sha256": "3e3de2174553d7dc70f80ddad297439e0a6e3c9ca05ace1383daa8780b4f4843",
+        "bytes": 1070
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_observers.py",
+        "sha256": "3e3de2174553d7dc70f80ddad297439e0a6e3c9ca05ace1383daa8780b4f4843",
+        "bytes": 1070
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_observers.stdout",
+        "sha256": "58223ae35a762cb9fb682293ea2c01dc46e94e2200bf8898357c10b86ba20796",
+        "bytes": 111
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_observers.py.stdout.txt",
+        "sha256": "58223ae35a762cb9fb682293ea2c01dc46e94e2200bf8898357c10b86ba20796",
+        "bytes": 111
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_original.py",
+        "sha256": "e05334e2f8126efdd93753b249e2d8e176b4f46521f6b7a3e62b447f9e937aab",
+        "bytes": 389
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_original.py",
+        "sha256": "e05334e2f8126efdd93753b249e2d8e176b4f46521f6b7a3e62b447f9e937aab",
+        "bytes": 389
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_original.stdout",
+        "sha256": "9f450b7f02b665330ae880923f817dd83954dffa9127e4daf28788ed5c1386cd",
+        "bytes": 17
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_original.py.stdout.txt",
+        "sha256": "9f450b7f02b665330ae880923f817dd83954dffa9127e4daf28788ed5c1386cd",
+        "bytes": 17
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_permutation.py",
+        "sha256": "627336ede24478f5fc0e8190f3272736898c3461738750de754471566dbab365",
+        "bytes": 1814
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_permutation.py",
+        "sha256": "627336ede24478f5fc0e8190f3272736898c3461738750de754471566dbab365",
+        "bytes": 1814
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_permutation.stdout",
+        "sha256": "2c14a8e9a8e2ba8efee1ab210eebeff84f8a3fb268543238c8a99e3a7ab43a99",
+        "bytes": 249
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_permutation.py.stdout.txt",
+        "sha256": "2c14a8e9a8e2ba8efee1ab210eebeff84f8a3fb268543238c8a99e3a7ab43a99",
+        "bytes": 249
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_practice.py",
+        "sha256": "75f0135177b72611e2b715f9794958aa13fc2139b186c1c0b39c0a1ada3665f8",
+        "bytes": 4460
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_practice.py",
+        "sha256": "75f0135177b72611e2b715f9794958aa13fc2139b186c1c0b39c0a1ada3665f8",
+        "bytes": 4460
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_practice.stdout",
+        "sha256": "a736b28c1dbce6880ac6c1052e9226d90ef30588ddb6e7b6548953f678a6f1e3",
+        "bytes": 488
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_practice.py.stdout.txt",
+        "sha256": "a736b28c1dbce6880ac6c1052e9226d90ef30588ddb6e7b6548953f678a6f1e3",
+        "bytes": 488
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_project.py",
+        "sha256": "7dc64c368250b46d172212462c1da8979492e740532198fb894a6847221f6615",
+        "bytes": 2244
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_project.py",
+        "sha256": "7dc64c368250b46d172212462c1da8979492e740532198fb894a6847221f6615",
+        "bytes": 2244
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_project.stdout",
+        "sha256": "6a836f8eb518f6df476c4ec6f40733e98aef0ede3f74eb374d487c44cc351b35",
+        "bytes": 139
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_project.py.stdout.txt",
+        "sha256": "6a836f8eb518f6df476c4ec6f40733e98aef0ede3f74eb374d487c44cc351b35",
+        "bytes": 139
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_stress.py",
+        "sha256": "34f09406cad3bd650b5c4569301f35d8cd08ffbc8f9d86eff59a1bc2005352fa",
+        "bytes": 1661
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_stress.py",
+        "sha256": "34f09406cad3bd650b5c4569301f35d8cd08ffbc8f9d86eff59a1bc2005352fa",
+        "bytes": 1661
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_stress.stdout",
+        "sha256": "ebcec4133c5800ad38261ace0c26572793d0ab48ef79a9e6beb929a500f03f72",
+        "bytes": 257
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_stress.py.stdout.txt",
+        "sha256": "ebcec4133c5800ad38261ace0c26572793d0ab48ef79a9e6beb929a500f03f72",
+        "bytes": 257
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_support.py",
+        "sha256": "79fefb455c60258b7dacc0b192a234de35d374c7bcc59dd596a3eb3ce88d04da",
+        "bytes": 1650
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_support.py",
+        "sha256": "79fefb455c60258b7dacc0b192a234de35d374c7bcc59dd596a3eb3ce88d04da",
+        "bytes": 1650
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_support.stdout",
+        "sha256": "1aa337046a67cff639850d4158e69b1aa0417cc96f72a398dab9e36aeefa5624",
+        "bytes": 359
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_support.py.stdout.txt",
+        "sha256": "1aa337046a67cff639850d4158e69b1aa0417cc96f72a398dab9e36aeefa5624",
+        "bytes": 359
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_variational.py",
+        "sha256": "065238ce23d1750c742c4fe8d2d4cd8a26333d5d01e07f3817fb80d06a9615dc",
+        "bytes": 2018
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_variational.py",
+        "sha256": "065238ce23d1750c742c4fe8d2d4cd8a26333d5d01e07f3817fb80d06a9615dc",
+        "bytes": 2018
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_variational.stdout",
+        "sha256": "5bd133a278e547138aae9eafcc553562bce5b1c1395fab1a7a56556ee0f5e9af",
+        "bytes": 306
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_variational.py.stdout.txt",
+        "sha256": "5bd133a278e547138aae9eafcc553562bce5b1c1395fab1a7a56556ee0f5e9af",
+        "bytes": 306
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_weights.py",
+        "sha256": "f02bb054ac5ef966c4e2d2ca4ddaeb207f150e612715852dd2120fcb0f5c08e7",
+        "bytes": 2052
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_weights.py",
+        "sha256": "f02bb054ac5ef966c4e2d2ca4ddaeb207f150e612715852dd2120fcb0f5c08e7",
+        "bytes": 2052
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_weights.stdout",
+        "sha256": "f86ca3a1ad9663f41a726e9cb82989a58b10c5caa5c52839ca06746e67af6669",
+        "bytes": 460
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/fdiv_weights.py.stdout.txt",
+        "sha256": "f86ca3a1ad9663f41a726e9cb82989a58b10c5caa5c52839ca06746e67af6669",
+        "bytes": 460
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris-corrected.csv",
+        "sha256": "5a8853b2e82f9d021e5843af7d647339e359b25e037ec6e87e23ca9e91507821",
+        "bytes": 4759
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/iris-corrected.csv",
+        "sha256": "5a8853b2e82f9d021e5843af7d647339e359b25e037ec6e87e23ca9e91507821",
+        "bytes": 4759
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris-provenance.json",
+        "sha256": "1b2b81bff256cdf4dfd36f26a9374856e7923930713622b8af84004f4869c88e",
+        "bytes": 588
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/iris-provenance.json",
+        "sha256": "1b2b81bff256cdf4dfd36f26a9374856e7923930713622b8af84004f4869c88e",
+        "bytes": 588
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.py",
+        "sha256": "4b0ca177c3192e5818ee004bcc522848253752f76e0580658fed26df2c2da388",
+        "bytes": 3348
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/iris_mmd.py",
+        "sha256": "4b0ca177c3192e5818ee004bcc522848253752f76e0580658fed26df2c2da388",
+        "bytes": 3348
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/iris_mmd.stdout",
+        "sha256": "2677ba983a392b3116f3c8de34103ab9a44f4d5e67410fdc1ab421580979961c",
+        "bytes": 570
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/iris_mmd.py.stdout.txt",
+        "sha256": "2677ba983a392b3116f3c8de34103ab9a44f4d5e67410fdc1ab421580979961c",
+        "bytes": 570
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.py",
+        "sha256": "8194c6dd13ddb103215cebeafd40640167fc3a42509281f3ac37c5a5ea88a83d",
+        "bytes": 1735
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/kernel_means.py",
+        "sha256": "8194c6dd13ddb103215cebeafd40640167fc3a42509281f3ac37c5a5ea88a83d",
+        "bytes": 1735
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/kernel_means.stdout",
+        "sha256": "51ea547d40cedc69c9641d02ce9d48f6febbd1ef544360aa2debc5eadce0f2f4",
+        "bytes": 203
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/kernel_means.py.stdout.txt",
+        "sha256": "51ea547d40cedc69c9641d02ce9d48f6febbd1ef544360aa2debc5eadce0f2f4",
+        "bytes": 203
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/mmd-library-bridge.py",
+        "sha256": "0c3d906cd2edb1a5b6962ebdf41865fe2b2a34c6932804aa0a9896a8a0bbccba",
+        "bytes": 3837
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/mmd-library-bridge.py",
+        "sha256": "0c3d906cd2edb1a5b6962ebdf41865fe2b2a34c6932804aa0a9896a8a0bbccba",
+        "bytes": 3837
+      }
+    },
+    {
+      "source": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/mmd-library-bridge.stdout",
+        "sha256": "5d1ee0be361103d8c0979d1a6710e1a34449cd843512a60463b85f8b82f12373",
+        "bytes": 184
+      },
+      "asset": {
+        "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/public/learn-assets/divergences/mmd-library-bridge.py.stdout.txt",
+        "sha256": "5d1ee0be361103d8c0979d1a6710e1a34449cd843512a60463b85f8b82f12373",
+        "bytes": 184
+      }
+    }
+  ],
+  "irisProjection": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/runtime-private-r1/src/learn/data/divergences-iris-data.js",
+    "sha256": "fce59bcb07041b76ff5e1d8537869506204357608c4717a5dba21ce8d3f6b2fa",
+    "bytes": 19704
+  },
+  "rows": 150,
+  "scope": "Complete author-read accepted manuscript/specification and programme packet. No scientific main replay, new environment, canonical/shared mutation or full-public-tree copy."
+}

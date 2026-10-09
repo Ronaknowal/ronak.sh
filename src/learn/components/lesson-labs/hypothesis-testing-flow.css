@@ -1,0 +1,32 @@
+.hypothesis-lesson { container-type:inline-size; }
+.hypothesis-lesson .hf-figure,.hypothesis-lesson .hf-lab { margin:2.4rem 0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; }
+.hf-figure h3,.hf-lab h3 { margin:0 0 1rem; font-size:1.1rem; line-height:1.5; font-weight:600; }
+.hf-caption { margin:.9rem 0 0; color:var(--muted,#bcb5aa); font-size:.93rem; line-height:1.65; }
+.hf-svg-scroll { overflow-x:auto; overflow-y:hidden; padding:.25rem 0 .4rem; max-width:100%; }
+.hf-svg-scroll svg { display:block; width:100%; max-width:640px; min-width:var(--hf-drawing-width,440px); height:auto; color:#ded5bf; }
+.hf-svg-scroll svg text { fill:#ded5bf; font:15px var(--font-mono,monospace); }
+.hf-axis path { stroke:#918b80; fill:none; }
+.hf-pair { display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:start; }
+.hf-table { margin:1.1rem 0; }
+.hf-table-title { margin:0 0 .5rem; font-weight:600; line-height:1.5; overflow-wrap:anywhere; }
+.hf-table-scroll { overflow:auto; max-width:100%; }
+.hf-table table { border-collapse:collapse; min-width:max-content; width:100%; font-size:.87rem; line-height:1.5; }
+.hf-table th,.hf-table td { padding:.65rem .8rem; border-bottom:1px solid #49453f; text-align:left; white-space:nowrap; }
+.hf-table thead th { position:sticky; top:0; background:#171716; z-index:1; }
+.hf-table tbody th { font-weight:400; }
+.hf-svg-scroll:focus-visible,.hf-table-scroll:focus-visible { outline:2px solid #edc267; outline-offset:4px; }
+.hf-sr-only { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+.hf-controls { display:flex; flex-wrap:wrap; gap:1rem 1.5rem; margin:1rem 0; align-items:end; }
+.hf-controls label { display:flex; flex-direction:column; gap:.5rem; min-width:11rem; flex:1; line-height:1.45; font-size:.9rem; }
+.hf-controls input[type=range] { width:100%; min-height:2rem; accent-color:#edc267; }
+.hf-controls select,.hf-controls button,.hf-reset { min-height:2.75rem; border:1px solid #696257; background:transparent; color:inherit; padding:.5rem .7rem; border-radius:0; font:inherit; }
+.hf-controls button,.hf-reset { cursor:pointer; }
+.hf-readout { margin:1rem 0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem 1.5rem; }
+.hf-readout div { min-width:0; }
+.hf-readout dt { color:#bcb5aa; font-size:.86rem; }
+.hf-readout dd { margin:.2rem 0 0; font-size:1rem; overflow-wrap:anywhere; }
+.hf-advanced { margin:1rem 0; padding:0; border:0; min-width:0; }
+.hf-advanced legend { padding:0; font-size:.94rem; font-weight:600; }
+@container (min-width:58rem) { .hf-pair { grid-template-columns:1fr 1fr; } }
+@container (max-width:38rem) { .hf-pair { grid-template-columns:1fr; } .hf-readout { grid-template-columns:1fr; } }
+@media (max-width:500px) { .hf-controls label { min-width:100%; } }

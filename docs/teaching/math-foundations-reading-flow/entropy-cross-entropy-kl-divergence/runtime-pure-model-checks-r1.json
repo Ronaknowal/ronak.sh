@@ -1,0 +1,665 @@
+{
+  "scope": "Bounded pure runtime model arithmetic and boundaries; no programme mains, fits, external fetch or new environment.",
+  "checks": [
+    {
+      "name": "source entropy",
+      "actual": 1.75,
+      "expected": 1.75,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "mismatch CE",
+      "actual": 2.625,
+      "expected": 2.625,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "mismatch KL",
+      "actual": 0.8749999999999999,
+      "expected": 0.875,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "signed term 0",
+      "actual": 0.9999999999999999,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "signed term 1",
+      "actual": 0.24999999999999997,
+      "expected": 0.25,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "signed term 2",
+      "actual": -0.12499999999999999,
+      "expected": -0.125,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "signed term 3",
+      "actual": -0.24999999999999997,
+      "expected": -0.25,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "coin reflection 0",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "finite weighted coin boundary 0",
+      "pass": true
+    },
+    {
+      "name": "coin reflection 0.1",
+      "actual": 0.4689955935892812,
+      "expected": 0.46899559358928117,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "finite weighted coin boundary 0.1",
+      "pass": true
+    },
+    {
+      "name": "coin reflection 0.5",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "finite weighted coin boundary 0.5",
+      "pass": true
+    },
+    {
+      "name": "coin reflection 0.9",
+      "actual": 0.46899559358928117,
+      "expected": 0.46899559358928117,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "finite weighted coin boundary 0.9",
+      "pass": true
+    },
+    {
+      "name": "coin reflection 1",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "finite weighted coin boundary 1",
+      "pass": true
+    },
+    {
+      "name": "decode changed word matched",
+      "pass": true
+    },
+    {
+      "name": "empty accepted matched",
+      "pass": true
+    },
+    {
+      "name": "decode changed word reversed",
+      "pass": true
+    },
+    {
+      "name": "empty accepted reversed",
+      "pass": true
+    },
+    {
+      "name": "decode changed word fixed",
+      "pass": true
+    },
+    {
+      "name": "empty accepted fixed",
+      "pass": true
+    },
+    {
+      "name": "matched expected length",
+      "actual": 1.75,
+      "expected": 1.75,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "reversed expected length",
+      "actual": 2.625,
+      "expected": 2.625,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "support exclusion infinite",
+      "pass": true
+    },
+    {
+      "name": "zero weighted exclusion zero",
+      "pass": true
+    },
+    {
+      "name": "explicit positive smoothing finite",
+      "pass": true
+    },
+    {
+      "name": "invalid draft rejected 1e-9999",
+      "pass": true
+    },
+    {
+      "name": "invalid draft rejected NaN",
+      "pass": true
+    },
+    {
+      "name": "invalid draft rejected ",
+      "pass": true
+    },
+    {
+      "name": "invalid draft rejected Infinity",
+      "pass": true
+    },
+    {
+      "name": "invalid draft rejected 1x",
+      "pass": true
+    },
+    {
+      "name": "unequal actual weighted",
+      "actual": 0.6017466951919609,
+      "expected": 0.6017466951919609,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "wrong uniform",
+      "actual": 0.7344977967946407,
+      "expected": 0.7344977967946407,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "zero context unavailable",
+      "pass": true
+    },
+    {
+      "name": "zero context cost",
+      "actual": 0.4689955935892812,
+      "expected": 0.4689955935892812,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "symmetric frequency invariant 0",
+      "actual": 0.5219280948873624,
+      "expected": 0.5219280948873624,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "symmetric frequency invariant 0.2",
+      "actual": 0.5219280948873624,
+      "expected": 0.5219280948873624,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "symmetric frequency invariant 1",
+      "actual": 0.5219280948873624,
+      "expected": 0.5219280948873624,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "default hard loss",
+      "actual": 4.1429316284999,
+      "expected": 4.142931628499899,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "common shift invariant",
+      "actual": 4.1429316284999,
+      "expected": 4.1429316284999,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "extreme finite loss",
+      "actual": 2000,
+      "expected": 2000,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "soft target loss",
+      "actual": 750,
+      "expected": 750,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "strict soft target rejects weights",
+      "pass": true
+    },
+    {
+      "name": "bin identity cm 2",
+      "actual": 0.9999999999999996,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "middle half event 2",
+      "actual": 0.5,
+      "expected": 0.5,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "bin identity cm 4",
+      "actual": 1.9999999999999996,
+      "expected": 2,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "middle half event 4",
+      "actual": 0.5,
+      "expected": 0.5,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "bin identity cm 32",
+      "actual": 5,
+      "expected": 5,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "middle half event 32",
+      "actual": 0.5,
+      "expected": 0.5,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex total 0/0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0/0",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0/0",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 0/0.37",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0/0.37",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0/0.37",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 0/1",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0/1",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0/1",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 0.000001/0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0.000001/0",
+      "actual": 0.000001,
+      "expected": 0.000001,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0.000001/0",
+      "actual": 1.442561016115878e-12,
+      "expected": 1.442693598198491e-12,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 0.000001/0.37",
+      "actual": 0.9999999999999999,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0.000001/0.37",
+      "actual": 0.000001,
+      "expected": 0.000001,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0.000001/0.37",
+      "actual": 0.000003083932398159587,
+      "expected": 0.0000030839323981523577,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 0.000001/1",
+      "actual": 0.9999999999999999,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0.000001/1",
+      "actual": 0.000001,
+      "expected": 0.000001,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0.000001/1",
+      "actual": 0.00001018713270675756,
+      "expected": 0.000010187132706789316,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 0.75/0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0.75/0",
+      "actual": 0.75,
+      "expected": 0.75,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0.75/0",
+      "actual": 0.7052437383569422,
+      "expected": 0.7052437383569421,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 0.75/0.37",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0.75/0.37",
+      "actual": 0.75,
+      "expected": 0.75,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0.75/0.37",
+      "actual": 0.08020005683015619,
+      "expected": 0.08020005683015596,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 0.75/1",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 0.75/1",
+      "actual": 0.75,
+      "expected": 0.75,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 0.75/1",
+      "actual": 0.5620878598911101,
+      "expected": 0.5620878598911099,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1/0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1/0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1/0",
+      "actual": 1.584962500721156,
+      "expected": 1.5849625007211563,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1/0.37",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1/0.37",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1/0.37",
+      "actual": 0.2642904080340902,
+      "expected": 0.26429040803409043,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1/1",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1/1",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1/1",
+      "actual": 0.5849625007211561,
+      "expected": 0.5849625007211563,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1.4285714285714286/0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1.4285714285714286/0",
+      "actual": 1.4285714285714286,
+      "expected": 1.4285714285714286,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1.4285714285714286/0",
+      "actual": 0.39355535745192394,
+      "expected": 0.39355535745192405,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1.4285714285714286/0.37",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1.4285714285714286/0.37",
+      "actual": 1.4285714285714286,
+      "expected": 1.4285714285714286,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1.4285714285714286/0.37",
+      "actual": 0.02230469276312874,
+      "expected": 0.022304692763128752,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1.4285714285714286/1",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1.4285714285714286/1",
+      "actual": 1.4285714285714286,
+      "expected": 1.4285714285714286,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1.4285714285714286/1",
+      "actual": 0.5156629249195446,
+      "expected": 0.5156629249195446,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1.999999/0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1.999999/0",
+      "actual": 1.999999,
+      "expected": 1.999999,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1.999999/0",
+      "actual": 1.4427211832699401e-12,
+      "expected": 1.44269359796112e-12,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1.999999/0.37",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1.999999/0.37",
+      "actual": 1.999999,
+      "expected": 1.999999,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1.999999/0.37",
+      "actual": 0.0000030839323979690996,
+      "expected": 0.0000030839323979415143,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 1.999999/1",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 1.999999/1",
+      "actual": 1.999999,
+      "expected": 1.999999,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 1.999999/1",
+      "actual": 0.000010187132706038183,
+      "expected": 0.000010187132706010598,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 2/0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 2/0",
+      "actual": 2,
+      "expected": 2,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 2/0",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 2/0.37",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 2/0.37",
+      "actual": 2,
+      "expected": 2,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 2/0.37",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "simplex total 2/1",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "simplex mean 2/1",
+      "actual": 2,
+      "expected": 2,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "certificate 2/1",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 2e-9
+    },
+    {
+      "name": "observed train counts",
+      "actual": 224,
+      "expected": 224,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "observed test counts",
+      "actual": 120,
+      "expected": 120,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "retained observed score",
+      "actual": 0.8058935911545666,
+      "expected": 0.805893591,
+      "tolerance": 5e-10
+    }
+  ]
+}

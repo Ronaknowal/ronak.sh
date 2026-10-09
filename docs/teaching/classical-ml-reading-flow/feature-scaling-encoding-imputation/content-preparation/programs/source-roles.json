@@ -1,0 +1,353 @@
+{
+  "topicId": "feature-scaling-encoding-imputation",
+  "rootRelease": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/root-content-release.json",
+    "bytes": 10573,
+    "sha256": "6b98f8133ff4770e0abe9251101b86187361a1b4a65702abf19201ae0367bb44",
+    "role": "accepted revision5"
+  },
+  "retainedNative": {
+    "path": "docs/teaching/evidence/scaling-native.json",
+    "bytes": 2506,
+    "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea",
+    "role": "historical native source/stdout receipt, not rerun"
+  },
+  "data": {
+    "current": {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "role": "actual current CRLF download bytes; not freshly fitted"
+    },
+    "historicalLF": {
+      "bytes": 15241,
+      "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "role": "exact CRLF-to-LF relation to historical execution-input identity"
+    },
+    "sourceOnlyRelation": true,
+    "parsedRows": 344,
+    "savedHeldOutRows": 86
+  },
+  "programmes": [
+    {
+      "id": "P1",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+        "bytes": 3634,
+        "sha256": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05",
+        "role": "exact retained whole historical programme; no replay"
+      },
+      "executionRole": "historical retained native receipt",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+        "bytes": 213,
+        "sha256": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb",
+        "role": "exact historical stdout literal"
+      }
+    },
+    {
+      "id": "P2",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.py",
+        "bytes": 5853,
+        "sha256": "baf38f53144b2fd895b6cb51f8db7d756bb113bf2fb7b8ad47a3fc6720aabd77",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.stdout.txt",
+        "bytes": 664,
+        "sha256": "734d15306e1c4696b198fcb273ee7379b261b46188c85b8cbf02f710dc011546",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 1
+    },
+    {
+      "id": "P3",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.py",
+        "bytes": 5466,
+        "sha256": "a887cc9897f70d51f075e4807e20701b3e4694931d2f6feacbbc1617649f56ea",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.stdout.txt",
+        "bytes": 521,
+        "sha256": "a8067562ddc5c4c8cf93ba0462d52b3567b5db6142c9a616a6ff7df0c77159e3",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 2
+    },
+    {
+      "id": "P4",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.py",
+        "bytes": 5330,
+        "sha256": "a142d061c947e176272dbd320bdc1f855190a3b92393a8c6bdcfe4cbc3e6f1d7",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.stdout.txt",
+        "bytes": 392,
+        "sha256": "26c598fd98345a6f749a57e5853f35d39c89fc7ba4a22bc20bf6ec05b4a0aec1",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 15
+    },
+    {
+      "id": "P5",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.py",
+        "bytes": 5144,
+        "sha256": "9405060b70a6e9cb398e25ece01f8a32221a12a8207f5259afb352de7e3a1e08",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.stdout.txt",
+        "bytes": 514,
+        "sha256": "e17b036b3f66ef50d8ade7c67c5835f9d3e7abfb269c627099e94929fc6be052",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 17
+    },
+    {
+      "id": "P6",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+        "bytes": 2296,
+        "sha256": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94",
+        "role": "exact retained whole historical programme; no replay"
+      },
+      "executionRole": "historical retained native receipt",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+        "bytes": 343,
+        "sha256": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52",
+        "role": "exact historical stdout literal"
+      }
+    },
+    {
+      "id": "P7",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.py",
+        "bytes": 6558,
+        "sha256": "f8af71f7f2b073e3b84ae21b1a25e912d023575a4c21cc57defeccdcf6241dbe",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.stdout.txt",
+        "bytes": 592,
+        "sha256": "dd9d8043f236730568d5c13fcbec5cc8305871676d56eb85d92216dec3deeef5",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 5
+    },
+    {
+      "id": "P8",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.py",
+        "bytes": 3612,
+        "sha256": "81eb4e6a0c8e1cd0a85fc7eac068aa93b16a6c398f73544ae96a6518058996da",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.stdout.txt",
+        "bytes": 408,
+        "sha256": "d118dcf117e8d2fb13f9ba587a306840c1c12caece8bd41adce2dc2190daa635",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 6
+    },
+    {
+      "id": "P9",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.py",
+        "bytes": 6049,
+        "sha256": "a54c1e2c4e6691cfd50552ff9f3eda96bb7594fa2f6f7fe3f9f009b8c4c511d2",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.stdout.txt",
+        "bytes": 601,
+        "sha256": "4fb774b64a4fb35882f09be1f7238dd16aedc532a126620118b4513c4314e4a9",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 7
+    },
+    {
+      "id": "P10",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.py",
+        "bytes": 6190,
+        "sha256": "39ba61d6baab82d05ed5d2120446f4331c320d08bf8420458e2eb04e1b5adc3c",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stdout.txt",
+        "bytes": 746,
+        "sha256": "13f56a2636b8547a295388cc2e29ea48b9c8940489e1cad6a516513a0d7e1e4f",
+        "role": "exact captured new stdout bytes"
+      },
+      "stderr": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stderr.txt",
+        "bytes": 281,
+        "sha256": "555d49608910de8ee38ca229e354f22af65b6909a7be97fb6e92fb3252e73e48",
+        "role": "exact actual diagnostic, separate from stdout"
+      },
+      "actualRun": 8
+    },
+    {
+      "id": "P11",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.py",
+        "bytes": 5699,
+        "sha256": "8371d9b75c524dd50bd7eee324881cd8261d4b61e92b3f6ce27ed2523a9d1556",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.stdout.txt",
+        "bytes": 1410,
+        "sha256": "a04611a45b6e39c299fe49f82d978c9abb22711bc0fa08d547bf73e12ff77102",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 16
+    },
+    {
+      "id": "P12",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+        "bytes": 789,
+        "sha256": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252",
+        "role": "exact retained whole historical programme; no replay"
+      },
+      "executionRole": "historical retained native receipt",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+        "bytes": 111,
+        "sha256": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2",
+        "role": "exact historical stdout literal"
+      }
+    },
+    {
+      "id": "P13",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.py",
+        "bytes": 2938,
+        "sha256": "4b7b37b5025eb3c3d61368649d861ebdd31ab58896b98897939892302ef17db3",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.stdout.txt",
+        "bytes": 545,
+        "sha256": "e789277195b71f275ee7e461b6ef8967eeb47d327afc2c129bb6a2b5f6d278e3",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 10
+    },
+    {
+      "id": "P14",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.py",
+        "bytes": 5111,
+        "sha256": "7a864300d94a8412fbea2c41d89c3f924ae4c5ca4ddda8a29df7a970101afcf2",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.stdout.txt",
+        "bytes": 2240,
+        "sha256": "23e1df2862c233b1462fccc4ebc93f168708cef124fc3ecb18495b0c48a72051",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 11
+    },
+    {
+      "id": "P15",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.py",
+        "bytes": 1709,
+        "sha256": "41fd4831658ce37c516ef378e194abf931945b4e48281e38c9666ec4fb98368f",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.stdout.txt",
+        "bytes": 726,
+        "sha256": "60324655cbf39591779e95a933a189d850d80e1c99eb131893f32506600fd75f",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 12
+    },
+    {
+      "id": "P16",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.py",
+        "bytes": 4181,
+        "sha256": "4b00570bbd9977d88f01cd449a9aa047e1c1de24532db09f4a22eaab910cd18d",
+        "role": "complete new constructed teaching programme"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.stdout.txt",
+        "bytes": 1117,
+        "sha256": "e255495971337b764427d58559d791dee3eb2a2e5f4a58796b9303e5d739c9f6",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 13
+    },
+    {
+      "id": "optional-R",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/multiple_imputation_mice.R",
+        "bytes": 1442,
+        "sha256": "252371b28843d3410971daf87b3fba1271827e632bb6c3112ff735b6b6aa198e",
+        "role": "complete optional ordinary R source; unexecuted"
+      },
+      "executionRole": "not executed"
+    },
+    {
+      "id": "answer",
+      "source": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.py",
+        "bytes": 6513,
+        "sha256": "8e872c40f4ebbfec5dc7df87d3197bd4019c58efded1c4b50f0b5e44958c3cfd",
+        "role": "complete changed-task answer asset"
+      },
+      "executionRole": "actual new checked process",
+      "stdout": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.stdout.txt",
+        "bytes": 1552,
+        "sha256": "e287823a2eb484800b1f7f1506c4dfbb5562bf658ea04b544f56421f79da7a0e",
+        "role": "exact captured new stdout bytes"
+      },
+      "actualRun": 18
+    }
+  ],
+  "executionHistory": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/new-program-execution.json",
+    "bytes": 25618,
+    "sha256": "384c7a2712fe2e9d042c5889c7d16efbe3982203c81e2ba4f169a390d5cbb781",
+    "role": "actual source-snapshotted attempts including failures"
+  },
+  "resources": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+    "bytes": 26499,
+    "sha256": "f4573042f00f83f83f1830646939649dd677d57f9232015c0c71330d171560d6",
+    "role": "inherited exact reading/access scopes, not blanket fresh reading"
+  },
+  "limits": [
+    "No old mains/fits/science replay",
+    "No R execution claim",
+    "No rendered/native/runtime/phase acceptance",
+    "Counts and source identity do not establish teaching quality"
+  ]
+}

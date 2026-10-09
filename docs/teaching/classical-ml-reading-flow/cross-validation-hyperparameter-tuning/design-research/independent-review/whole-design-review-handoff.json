@@ -1,0 +1,46 @@
+{
+  "schema": "classical21-independent-whole-design-review-handoff/v1",
+  "at": "2026-10-09T16:52:57.156419+00:00",
+  "reviewer": "/root/ml_successor_independent_review",
+  "status": "WHOLE_DESIGN_READ_TWO_BOUNDED_REQUIRED_FINDINGS",
+  "target": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/author-ready-design.json",
+    "bytes": 37052,
+    "sha256": "0b36c78f55dd683938b73bd1fd695254a5c5e0424b7a646f9e14924d57068809"
+  },
+  "files": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/independent-review/whole-design-review.md",
+      "bytes": 23441,
+      "sha256": "d0ca0d56f5e5ffcdd03878bb656ef2774b370d7fc75cf0b8f6b4b7d10ed2076f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/independent-review/whole-design-check.json",
+      "bytes": 31430,
+      "sha256": "f0934c5bf9a4c798629efdb651157039ee0348fed89971508d2515a5896d324f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/independent-review/check-whole-design.py",
+      "bytes": 7930,
+      "sha256": "b7943a7e9b33c511c8f886de55983f767cb8172e91310c3eb591c3c56dcb8a1d"
+    }
+  ],
+  "findings": {
+    "F1": "Define bootstrap selection statistic, occurrence/source identities and inner-split/invalid-resample policy; no universal grouping repair assertion.",
+    "F2": "Specify finite SMBO startup/history/quantile-tie/smoothing/mixture/proposal policy and numeric update trace; supplied normalized D37 unchanged."
+  },
+  "checks": {
+    "actualCommand": "b5d363",
+    "exitCode": 0,
+    "sourceAndNewTargetedConditions": 119,
+    "finalFrozenInputGuards": 60
+  },
+  "readScope": "Entire composed design, 41D/14ownership groups/15programme contracts/23tasks, actual whole original 898-line lesson and 3 complete decoded source/stdout bodies, blueprint, notes and scoped continuity owners; see report for personal/reused attribution.",
+  "limits": [
+    "No author checker replay or old science/library/main execution",
+    "No learner/design/shared/central/public/canonical changes",
+    "No runtime/build/browser/native/integration/phase acceptance",
+    "No new whole neighbouring-topic or old native review"
+  ],
+  "nextAction": "Root disposition, one bounded F1/F2 correction and SAME closure before Root writing release. Preserve this freeze and NMF309461dd whole review."
+}

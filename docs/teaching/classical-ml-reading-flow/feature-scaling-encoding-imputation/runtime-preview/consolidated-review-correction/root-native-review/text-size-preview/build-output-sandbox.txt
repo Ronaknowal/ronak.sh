@@ -1,0 +1,19 @@
+vite v6.4.1 building for production...
+transforming...
+✓ 2 modules transformed.
+✗ Build failed in 191ms
+error during build:
+[vite]: Rollup failed to resolve import "react/jsx-runtime" from "C:\Personal Projects and files\Portfolio\Portfolio\docs\teaching\classical-ml-reading-flow\feature-scaling-encoding-imputation\runtime-preview\consolidated-review-correction\root-native-review\text-size-preview\preview-entry.jsx".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rollupOptions.external`
+    at viteLog (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46374:15)
+    at file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46432:18
+    at onwarn (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/@vitejs/plugin-react/dist/index.js:90:7)
+    at file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46430:7
+    at onRollupLog (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46422:5)
+    at onLog (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46072:7)
+    at file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:20981:32
+    at Object.logger [as onLog] (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:22968:9)
+    at ModuleLoader.handleInvalidResolvedId (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:21712:26)
+    at file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:21670:26

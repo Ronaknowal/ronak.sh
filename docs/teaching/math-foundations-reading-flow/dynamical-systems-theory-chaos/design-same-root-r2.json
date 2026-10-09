@@ -1,0 +1,298 @@
+{
+  "status": "PASS_SAME_DESIGN_DY1_DY2_DY3_CLOSED",
+  "reviewer": "/root",
+  "author": "/root/queue_nonconvex_resume",
+  "wholeReview": {
+    "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-independent-root-r1.json",
+    "sha256": "299f824a16d67976d62a7486caf06ab42d591b65306d8a310daa7d1ec25b424f"
+  },
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-source-r2.json",
+    "sha256": "daf31be9f999fc345a4808ff8810a60e327e44f7985367dcb2e4b2d45d07bc68"
+  },
+  "correction": {
+    "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-correction-r2.json",
+    "sha256": "d597fe73bda51e2534083411034767e4692050ad2a9570dcae2617fdb871f1b9"
+  },
+  "wholeSuccessorRead": true,
+  "exactInverse": true,
+  "researchInverse": true,
+  "sourceGuards": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+      "bytes": 3751
+    },
+    {
+      "path": "skills/lesson-authoring/SKILL.md",
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "bytes": 20953
+    },
+    {
+      "path": "skills/lesson-authoring/references/topic-design.md",
+      "sha256": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "bytes": 32018
+    },
+    {
+      "path": "skills/lesson-authoring/references/teaching.md",
+      "sha256": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "bytes": 27407
+    },
+    {
+      "path": "skills/lesson-authoring/references/visuals-and-labs.md",
+      "sha256": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "bytes": 33359
+    },
+    {
+      "path": "skills/lesson-authoring/references/examples-and-code.md",
+      "sha256": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "bytes": 15888
+    },
+    {
+      "path": "docs/teaching/DYNAMICAL-SYSTEMS-LESSON-DESIGN.md",
+      "sha256": "5296e4c944c473aa7f2e8ae164b3416e8f8db029326d713aafbc330ab2fd6892",
+      "bytes": 29789
+    },
+    {
+      "path": "docs/teaching/DYNAMICAL-SYSTEMS-VERIFICATION.md",
+      "sha256": "365190ebe932b429586942b44e54b0e579fb127643ead0a01fe456b1a0d3122e",
+      "bytes": 8338
+    },
+    {
+      "path": "src/learn/data/topics/dynamical-systems-theory-chaos.jsx",
+      "sha256": "15da3dcb0195a4b0a62b27d660aa2f2fff268bb63745378992d5b01782270301",
+      "bytes": 60541
+    },
+    {
+      "path": "src/learn/components/lesson-labs/DynamicalSystemsLabs.jsx",
+      "sha256": "3d485efefa619c5e0bc5fe9a14c9c65c28462fe39c9b223872533b82cfb1db59",
+      "bytes": 35501
+    },
+    {
+      "path": "src/learn/components/lesson-labs/dynamical-systems-labs.css",
+      "sha256": "4f1f90b5300180574a44b8194a31141f8dbd29414e5bfb12625d005b77f8d8e9",
+      "bytes": 4641
+    },
+    {
+      "path": "src/learn/data/dynamical-systems-models.js",
+      "sha256": "4cba9432e73f653d2c4090f348003473b703bd2723388340376d3b79c2d8e50d",
+      "bytes": 17064
+    },
+    {
+      "path": "src/learn/data/dynamical-systems-examples.js",
+      "sha256": "3af5b2d3e6303ea9193712b9a6786be7361ffa9373b997efc67b28bae39bbbf1",
+      "bytes": 22966
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/dynamical-systems-theory-chaos.js",
+      "sha256": "3d66e87af66ed822bad24af3341d9438d4c10759f5f0aea7cac3c02d436763d9",
+      "bytes": 4354
+    },
+    {
+      "path": "src/learn/data/topics/ordinary-differential-equations-linear-systems.jsx",
+      "sha256": "b78c6451e8e3f097475f1bab8dbf68d996e10c3dbced044d6d42efbac465cc63",
+      "bytes": 86623
+    },
+    {
+      "path": "src/learn/data/ordinary-differential-equations-examples.js",
+      "sha256": "bbaa1fbbd84b68251e1e8bb726fcc3bdfb1c02d1ba4dc21486f6b56748c5f32e",
+      "bytes": 21231
+    },
+    {
+      "path": "src/learn/data/topics/eigenvalues-eigenvectors.jsx",
+      "sha256": "821e7543441fcdded7690b593498741335c142900db5e2f25d8a93df25a9e81d",
+      "bytes": 64355
+    },
+    {
+      "path": "src/learn/data/topics/numerical-methods-finite-differences-quadrature-root-finding.jsx",
+      "sha256": "589d4092534efc3b5c1c84318762366a7148822b4a87872f0e5a1a6519c8d9d3",
+      "bytes": 250
+    },
+    {
+      "path": "src/learn/components/lesson-labs/NumericalReadingLesson.jsx",
+      "sha256": "79c640a54d99322a2c6887387956a3f3cc9b0efbd699348dea1887a336386df2",
+      "bytes": 100025
+    },
+    {
+      "path": "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx",
+      "sha256": "0894bde2e25b82088662818f8d53058a480e6b4ba8c2e1c048553c5029f54b66",
+      "bytes": 52021
+    },
+    {
+      "path": "docs/teaching/topic-notes/ordinary-differential-equations-linear-systems.md",
+      "sha256": "d1fe0b5ae708dcb2220ee93f176c57f8becdce4018c146a3f41f68c7d18ec947",
+      "bytes": 7013
+    },
+    {
+      "path": "docs/teaching/topic-notes/numerical-methods-finite-differences-quadrature-root-finding.md",
+      "sha256": "78a470cd6198c9b7ef01ba466306f139986df8473dcfa0222d81a4e6cc8ec3c7",
+      "bytes": 3156
+    },
+    {
+      "path": "docs/teaching/topic-notes/nonlinear-control-lyapunov-stability-regions-of-attraction.md",
+      "sha256": "97b1b27733b2161fa18db575a2afc86fcb27e99b4a63f64f3f4db9ff4fbea517",
+      "bytes": 1886
+    },
+    {
+      "path": "docs/teaching/topic-notes/hodgkin-huxley-leaky-integrate-and-fire-models.md",
+      "sha256": "752440fe7941e7acc728af4b7fd28ffcf9a73eea7623a7670b9dc3e017b7d2fe",
+      "bytes": 4827
+    },
+    {
+      "path": "docs/teaching/topic-notes/it-calculus-stochastic-differential-equations.md",
+      "sha256": "7b1525e21ce8f725f7bf0f95f1f14930fb4b6e53efab6506936b3df0a248ab3e",
+      "bytes": 5782
+    },
+    {
+      "path": "scratch/dynamical-systems-review/native-results.json",
+      "sha256": "3255696a8ede7f768c148455efc687a7342127bca5244073428120f808d31e32",
+      "bytes": 6233
+    },
+    {
+      "path": "scratch/dynamical-systems-review/native-independent-results.json",
+      "sha256": "d4a5b6b647d19431d8029f72ab86dcdc44a3de95ee2bb28b3760c623704522c5",
+      "bytes": 726
+    },
+    {
+      "path": "scratch/dynamical-systems-review/model-results.json",
+      "sha256": "80fcbced003953b67f40373d6c523e3ec5edf506db01f395bc14109fa1d56a82",
+      "bytes": 903
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/root-current-reading-intake.json",
+      "sha256": "a6f629ee9ff3d1fb7e2364df8349529c32d07e1c539650cca82a574515a4917e",
+      "bytes": 3003
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research-r1.md",
+      "sha256": "4c4a74d8417ab23b737420c36c00c9d766959181ed535e6f4314a1e33579a032",
+      "bytes": 19440
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-r1.md",
+      "sha256": "91b8ffa94e5d2c6cbc69308db2d16dd455940f1784d0f8bdfb19427102ed552a",
+      "bytes": 34851
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/retrieval-r1.json",
+      "sha256": "c760a7b71b0ca036f8c8a4e0e92afc8865842b9093b67c16b3c73442983f203c",
+      "bytes": 1801
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/feigenbaum-1978.pdf",
+      "sha256": "1c8b8b90207a232f5039b727b7f3fa6b5a3531876612db158d9a6778033a6844",
+      "bytes": 1200351
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/hairer-geometric-week2.pdf",
+      "sha256": "f4f15ff5124fb685870e13b36e54cbc4edc96744199b518ec12e1c5cf006f0fb",
+      "bytes": 378909
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/lorenz-1963.pdf",
+      "sha256": "35cbe8a9e3ac36f210031376989b3b838de85ca3ba0290ba44131dcfd204cc2f",
+      "bytes": 1066948
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/menon-2020.pdf",
+      "sha256": "a508f2f580cebf7d3a3bf4def89d61e5d396bc3cc61c3ed67b68502f7dcf0057",
+      "bytes": 6651570
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/romik-2012.pdf",
+      "sha256": "44cbb15102e581970bf638e4417b14a4c3cc6c0e69a363e3d412b40adebc1ea2",
+      "bytes": 2841896
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/hairer-area-reference.png",
+      "sha256": "7a8cf9038bc10d43abb215f0f664a51858dd71e57c68d16645fe422d17207209",
+      "bytes": 200250
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/menon-portrait-reference.png",
+      "sha256": "2b7e9dec97e60c28b03f4f612e25cf5e36f0c44546d06ee83213a79e2e024c6c",
+      "bytes": 72827
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/menon-section-reference.png",
+      "sha256": "26b465269b655f979f3b859207281458070136ed4499de5ea84bb0e3b8530a5a",
+      "bytes": 82708
+    }
+  ],
+  "complementaryChecks": [
+    {
+      "name": "L3 whole initial-square bound",
+      "pass_": true,
+      "detail": "u=exp(-t): |q| <= 7u-6u² <=49/24; |p|<=1, so norm <2.5 for all t>=0"
+    },
+    {
+      "name": "D05 tube crossing",
+      "pass_": true,
+      "detail": 0.9162907318741551
+    },
+    {
+      "name": "D06 positive cubic safe window",
+      "pass_": true,
+      "detail": "Window ends at4; pole8"
+    },
+    {
+      "name": "D12 compact local component",
+      "pass_": true,
+      "detail": "Boundary level1/64; inward signs + at left and - at right"
+    },
+    {
+      "name": "D21 nonzero velocity decomposition",
+      "pass_": true,
+      "detail": "r=1/2, radial rate3/8; tangential rate1"
+    },
+    {
+      "name": "D31 three consecutive actual states",
+      "pass_": true,
+      "detail": {
+        "states": [
+          "1/5",
+          "2/5",
+          "3/5",
+          "3/5"
+        ],
+        "tangent": [
+          "1/1000",
+          "3/2000",
+          "3/4000",
+          "-3/8000"
+        ]
+      }
+    },
+    {
+      "name": "D35 first integer crossing",
+      "pass_": true,
+      "detail": 19.002256148855203
+    },
+    {
+      "name": "D46 rational probe/acceptance conservation",
+      "pass_": true,
+      "detail": [
+        "46227148699073/46080000000000",
+        "89964895184854612208927/79626240000000000000000",
+        "39496647706257626554979/39813120000000000000000"
+      ]
+    },
+    {
+      "name": "D56 constructed feedback error",
+      "pass_": true,
+      "detail": [
+        "0",
+        "1/10",
+        "3/20",
+        "7/40",
+        "3/16"
+      ]
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "Design acceptance only; no manuscript or runtime accepted.",
+    "No original mains or numerical campaigns replayed.",
+    "Source geometry/colour remains subject to actual native review."
+  ]
+}

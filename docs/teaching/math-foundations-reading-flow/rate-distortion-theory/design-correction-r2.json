@@ -1,0 +1,51 @@
+{
+  "status": "RD1_RD2_RD3_AUTHOR_CORRECTION_FOR_SAME_REVIEW",
+  "author": "/root",
+  "createdAt": "2026-10-09T16:20:24.182965+00:00",
+  "before": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-r1.md",
+    "sha256": "1307faac04a2361847085e206d6515024ab23452518d301b8b11ab9c7cbcbed2"
+  },
+  "after": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-r2.md",
+    "sha256": "8a984c7d03e10da2d4425e4414cd01e26eb68c942debead556fc70e973847982"
+  },
+  "replacements": [
+    {
+      "before": "| C01originalBinary | RetainoriginalbinaryHb/curved-branchprogrammeverbatimanditsoriginaldomain. TeachpiecewiseextensioninbodyandC03; do notsilentlymakeoriginalhelpergeneral. | Standardlibrarymathisordinaryroute; logarithmsbase2,endpoint0log0. T2implementscheckedpiecewisehelper. |",
+      "after": "| C01 originalBinary | Retain the original binary Hb/curved-branch programme verbatim with its original domain. Teach the piecewise extension in prose and a complete new T2 solution helper. C03 remains a fixed interior calculation; it is not that general helper. | Standard-library math is the ordinary route; logarithms are base2 and entropy uses the endpoint limit0log0. T2 implements the checked piecewise function, including deterministic source and zero-rate constant branches. |"
+    },
+    {
+      "before": "| C03biasedChannel | Retainbackwardattaininglaw,piecewiseconstantandjoint/forwardratios. Explainrow/columnorientationandzerorowguards. | O(1)binaryformulasandmathlibraryappropriate;T3independentchangedp. |",
+      "after": "| C03 biasedChannel | Retain the exact programme/output with fixed p=.2,D=.1. It constructs the attaining backward joint law and divides its positive source rows to obtain forward errors. It does not implement general endpoint or zero-row guards. Explain its interior domain next to the full code. | The general construction and endpoint handling are taught in prose and L2 using the actual existing binaryOptimalChannel model; no general Python channel API is promised by C03. T3 independently constructs the changed interior p=.3 case. The new T2 helper owns the general piecewise rate only. |"
+    },
+    {
+      "before": "| C09newgaussian_rd_library.py | Completefrom-scratchactive-intervalallocationreusedbyexactfunctionimport; NumPymin(v,\u03b8),brentqof\u03a3min(v,\u03b8)\u2212Dordinarycasev9/1D3withspecifiedxtol/rtol. Then\u03a3[[5,4],[4,5]],numpy.linalg.eigh,ascending1/9andmatchingerrors1/2,orthogonalreconstruction,errorcovarianceandtrace. | Matchedscalar/vectorresults,Q\u1d40Q/residual/traceandrate; sign-invariantgeometry. Checkv4/1D1.5andzerocomponent; boundedtiny-budgetcaseusesretainedscratchstrategywithoutabsolute-tolerancefalseprecision. T13implementgeneralrotation,reportGaussianassumptionandMSEunits. |",
+      "after": "| C09 new gaussian_rd_library.py | Reuse an exact function-only extraction of the original C05 allocation helpers, with an AST/source identity receipt and the original whole programme retained. Do not import the old file with its module-level demonstration loop. Compare that scratch allocation with NumPy min(v,theta) and brentq for sum(min(v,theta))\u2212D, ordinary fixture v=(9,1),D=3 with explicit xtol/rtol. Then use covariance [[5,4],[4,5]], numpy.linalg.eigh, ascending eigenvalues1/9 with matching errors1/2, and reconstruct error covariance and trace. | Match scalar/vector results; check orthogonality, eigenpair residuals, trace and rate without sign-sensitive eigenvector claims. Include changed v=(4,1),D=1.5 and a zero component. Tiny budgets use the retained active-set strategy, avoiding an absolute-tolerance false result. T13 extends rotation and states the jointly Gaussian and squared-error assumptions. Extracting helper definitions must not execute any original main. |"
+    },
+    {
+      "before": "| D29 Gaussian error is a new source | Draw continuous Gaussian source density, reproduction plus independent Gaussianerror givingthe source; widths encodeactualvariance not arbitrarysymbolsize. v9,D2.25gives reproductionvariance6.75. | \u00a76; T7/T13, C. |",
+      "after": "| D29 Gaussian error is a new source | Draw normal densities against actual value coordinates: source variance v=9, independent error variance D=2.25 and reproduction variance v\u2212D=6.75. Their horizontal spreads are standard deviations 3,1.5,sqrt(6.75); normalized density heights follow those values. Label variances separately: their sum, not a sum of horizontal density widths, gives v. The backward addition node links reproduction and independent error to source. | \u00a76 foundational static drawing before the bound and forward law; T7/T13, C. |"
+    },
+    {
+      "before": "| L5 Gaussianchannel | D29/31density/backwardconstructionthenforwardconditional; editvariancev andDwithin0..v; currentrate,shrinkandconditionalwidthvisible. Selectxonanumericaxisormatchnumericinputtoseeforecastmean. | Defaultv9,D2.25,x3,\u03bc0. AtD0exactidentityand\u221erate(nonzeroGaussian);atD=vconstantmean,0rate. Variance0explicitdegeneratecase,notdivision. Comparev4atproportionalD1preservingshrink/ratebutchangingunits. Resetallfourvalues. Noquantizerperformancecurvegeneratedfromthislaw. |",
+      "after": "| L5 Gaussian channel | Keep D29 a static foundational picture at v=9,D=2.25,mu=0. Mount the complete live investigation only at D31, after the bound and forward law are taught. It starts at v=9,D=2.25,x=3,mu=0, showing rate1 bit, shrink factor.75, forward conditional mean2.25 and variance1.6875, with SD sqrt(1.6875). Edit v,D and selected x with numeric/keyboard equivalents. | One live state owns all D31 views; D29 remains the explicitly fixed worked example. Reset restores v9,D2.25,x3,mu0 and selection. Normal density coordinates/SD, not variance, determine widths. D0 gives identity and infinite rate for v>0; D=v gives constant mean/rate0; v0 is a separate degenerate branch. Changing v to4 and D to1 preserves relative shrink/rate but changes widths/units. No early shrink/rate/selected-x controls occur at D29. |"
+    },
+    {
+      "before": "| L8 costlyrareevent | D40initial0/1/3lawp.7/.2/.1; editcostmultiplierforhighsourceleveland\u03bb, inspectselectedsource'sconditionalreconstruction/rowcostandpopulationweight. CurrentBAoperatingpointcomputedfromfixedpositivestart. | Separateprevalencecontrolifusedredistributesremaining.7/.2ratioexplicitly;avoidtoo-manycontrolsbykeepingpfixedinitialview. Comparemultiplier1/10,\u03bb0,zero-costnull. Samealgorithm/budgetandstateconventionasL4,notnewhiddenoptimizer. Reset1anddeclared\u03bb. |",
+      "after": "| L8 costly rare event | Default source values0/1/3, p=(.7,.2,.1), squared-error cost, high-row multiplier1, lambda=.1, positive uniform output marginal, selected source row3. Show the state after a fixed500 BA updates, labelled with that count and its actual objective gap. Edit the high-row multiplier1\u202610 or lambda; inspect the conditional high-row cost and its probability-weighted contribution separately. | Keep p fixed. Every edit recomputes from the same uniform initialization for the same500-step budget; report the achieved gap rather than claiming tolerance convergence. The existing bounded BA model supports this budget; do not replay historical campaigns. Compare multiplier1/10 at lambda.1, lambda0 and a separate explicitly named all-zero-cost null. Reset all defaults, selected row and iteration state. L4 uses the same q/induced-r/objective timing; it need not use the same display step. |"
+    },
+    {
+      "before": "| T15newlearned-objectiveaudit | Givenfixedlatentcountsandtwocodingmodels,computeentropy/crossentropyexcessandcompletebyteoverheadseparately. Explainwhyadditivenoiseobjectiveandvariationalupperbounddonotcertifyactualcodecbytes. Fullnumericalfixtureandsolutionmustbeprovidedbeforecontentcomplete. |",
+      "after": "| T15 new learned-objective audit | For exact string AAAABBCD, counts(4,2,1,1), compare truthful Q1=(.5,.25,.125,.125) and Q2=(.125,.125,.25,.5). Use prefix codes Q1: A0/B10/C110/D111 and Q2: A110/B111/C10/D0. Calculate H1.75, CE2.625 and excess.875 bits per symbol; actual payloads have14 versus21 bits. With a four-byte original-symbol-count header and zero padding to whole bytes, complete messages contain6 versus7 bytes. The decoder knows the fixed chosen codebook by prior agreement; no transmitted model-cost claim. Explain why these payload costs and complete bytes are separate from a noisy-latent variational MI upper bound, whose random objects and prior must be specified separately. |"
+    }
+  ],
+  "append": "\n\nRevision2 editorial contract: write normal word spacing in every new learner paragraph, label and accessible description. The compressed internal rows in revision1 are not copy-ready teaching text. The complete manuscript receives a continuous beginner read-through; preserve old programme bytes and named historical qualifications.\n",
+  "exactInverse": true,
+  "scientificMainsExecuted": 0,
+  "findingsAddressed": [
+    "RD1",
+    "RD2",
+    "RD3"
+  ]
+}

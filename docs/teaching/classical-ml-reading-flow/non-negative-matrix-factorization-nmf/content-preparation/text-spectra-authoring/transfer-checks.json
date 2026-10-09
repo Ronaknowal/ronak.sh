@@ -1,0 +1,331 @@
+{
+  "status": "SCOPED_N10_NEW_TRANSFERS_ONLY",
+  "inputs": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+      "bytes": 9130,
+      "sha256": "2fbca92d514885bcf9b1d84dfd678437d09837a8fdad8ae7b9c02cfed3513c3b"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+      "bytes": 9109,
+      "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_nnls.py",
+      "bytes": 2256,
+      "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+    }
+  ],
+  "checks": [
+    {
+      "name": "ordered vocabulary",
+      "passed": true
+    },
+    {
+      "name": "hand counts",
+      "passed": true
+    },
+    {
+      "name": "hand IDF",
+      "passed": true
+    },
+    {
+      "name": "D58 count 0",
+      "passed": true
+    },
+    {
+      "name": "D58 weighting 0",
+      "passed": true
+    },
+    {
+      "name": "D58 count 1",
+      "passed": true
+    },
+    {
+      "name": "D58 weighting 1",
+      "passed": true
+    },
+    {
+      "name": "D58 count 2",
+      "passed": true
+    },
+    {
+      "name": "D58 weighting 2",
+      "passed": true
+    },
+    {
+      "name": "D58 count 3",
+      "passed": true
+    },
+    {
+      "name": "D58 weighting 3",
+      "passed": true
+    },
+    {
+      "name": "D58 count 4",
+      "passed": true
+    },
+    {
+      "name": "D58 weighting 4",
+      "passed": true
+    },
+    {
+      "name": "OOV ignored not new feature",
+      "passed": true
+    },
+    {
+      "name": "all OOV zero",
+      "passed": true
+    },
+    {
+      "name": "empty query batch shaped",
+      "passed": true
+    },
+    {
+      "name": "default tokenizer lower and minimum2",
+      "passed": true
+    },
+    {
+      "name": "empty fitted vocabulary",
+      "passed": true
+    },
+    {
+      "name": "duplicate vocabulary",
+      "passed": true
+    },
+    {
+      "name": "nonstr document",
+      "passed": true
+    },
+    {
+      "name": "dense bound",
+      "passed": true
+    },
+    {
+      "name": "fraction count for IDF",
+      "passed": true
+    },
+    {
+      "name": "negative count",
+      "passed": true
+    },
+    {
+      "name": "bad IDF shape",
+      "passed": true
+    },
+    {
+      "name": "nonfinite IDF",
+      "passed": true
+    },
+    {
+      "name": "negative IDF",
+      "passed": true
+    },
+    {
+      "name": "simplex hand amount 0.5",
+      "passed": true
+    },
+    {
+      "name": "simplex scalar loss 0.5",
+      "passed": true
+    },
+    {
+      "name": "simplex readonly 0.5",
+      "passed": true
+    },
+    {
+      "name": "cone amounts 0.5",
+      "passed": true
+    },
+    {
+      "name": "cone exact 0.5",
+      "passed": true
+    },
+    {
+      "name": "simplex hand amount 1",
+      "passed": true
+    },
+    {
+      "name": "simplex scalar loss 1",
+      "passed": true
+    },
+    {
+      "name": "simplex readonly 1",
+      "passed": true
+    },
+    {
+      "name": "cone amounts 1",
+      "passed": true
+    },
+    {
+      "name": "cone exact 1",
+      "passed": true
+    },
+    {
+      "name": "simplex hand amount 2",
+      "passed": true
+    },
+    {
+      "name": "simplex scalar loss 2",
+      "passed": true
+    },
+    {
+      "name": "simplex readonly 2",
+      "passed": true
+    },
+    {
+      "name": "cone amounts 2",
+      "passed": true
+    },
+    {
+      "name": "cone exact 2",
+      "passed": true
+    },
+    {
+      "name": "postnormalization unequal optimum",
+      "passed": true
+    },
+    {
+      "name": "opposite boundary",
+      "passed": true
+    },
+    {
+      "name": "identical dictionary explicitly nonunique",
+      "passed": true
+    },
+    {
+      "name": "rank mismatch",
+      "passed": true
+    },
+    {
+      "name": "negative query",
+      "passed": true
+    },
+    {
+      "name": "underflow distance refused",
+      "passed": true
+    },
+    {
+      "name": "overflow products refused",
+      "passed": true
+    },
+    {
+      "name": "new main exit0",
+      "passed": true
+    },
+    {
+      "name": "new main vocabulary",
+      "passed": true
+    },
+    {
+      "name": "new main IDF",
+      "passed": true
+    },
+    {
+      "name": "query counts exact",
+      "passed": true
+    },
+    {
+      "name": "scratch independent train objective",
+      "passed": true
+    },
+    {
+      "name": "scratch fixed dictionary query reconstruction",
+      "passed": true
+    },
+    {
+      "name": "scratch query NNLS objective",
+      "passed": true
+    },
+    {
+      "name": "scratch OOV null",
+      "passed": true
+    },
+    {
+      "name": "scratch finite nonnegative",
+      "passed": true
+    },
+    {
+      "name": "ordinary independent train objective",
+      "passed": true
+    },
+    {
+      "name": "ordinary fixed dictionary query reconstruction",
+      "passed": true
+    },
+    {
+      "name": "ordinary query NNLS objective",
+      "passed": true
+    },
+    {
+      "name": "ordinary OOV null",
+      "passed": true
+    },
+    {
+      "name": "ordinary finite nonnegative",
+      "passed": true
+    },
+    {
+      "name": "new public segment reference gain0.5",
+      "passed": true
+    },
+    {
+      "name": "new public segment reference gain1.0",
+      "passed": true
+    },
+    {
+      "name": "new public segment reference gain2.0",
+      "passed": true
+    },
+    {
+      "name": "input conserved nmf_text_spectra.py",
+      "passed": true
+    },
+    {
+      "name": "input conserved nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "input conserved centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "input conserved nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "input conserved nmf_nnls.py",
+      "passed": true
+    }
+  ],
+  "main": {
+    "newRuns": 1,
+    "newNMFfits": 2,
+    "newPreprocessorFits": 2,
+    "newConstrainedReferences": 3,
+    "exitCode": 0,
+    "stdout": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "bytes": 6934,
+      "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+    },
+    "stderr": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "originalWordKLFitReplayed": false,
+  "limits": "Finite tiny demonstrations and source contracts, not physical identification, large sparse benchmarking or semantic-topic certification."
+}

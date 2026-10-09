@@ -1,0 +1,36 @@
+{
+  "scope": "Retained current source guard mismatch; no completed build, no source mutation",
+  "actual_guard_execution": "0c8a06 exit1",
+  "unique_inputs": 386,
+  "exact": 385,
+  "mismatches": [
+    {
+      "frozen": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942828,
+        "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+      },
+      "current": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942782,
+        "sha256": "8914a9455626731e23c50d1d8fd2412056178364293b87cf0c4c6a00d0c1b385"
+      }
+    }
+  ],
+  "sandbox_build": {
+    "actual_execution": "a85d44 exit1",
+    "transformed_modules": 2,
+    "cause": "react/jsx-runtime cannot resolve from nested harness entry",
+    "failure_log": {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/root-native-review/text-size-preview/build-output-sandbox.txt",
+      "bytes": 2027,
+      "sha256": "94cb5ed650fb69157ebd29f44182f10e90c347673abdf5515f6975c1cad05d4c"
+    },
+    "exit_file": {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/root-native-review/text-size-preview/build-exit-sandbox.txt",
+      "bytes": 3,
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    }
+  },
+  "operator_note": "Sequential tool orchestration incorrectly continued to sandbox build after guard failure. Stopped escalation/server and reported Root; completed builds0."
+}

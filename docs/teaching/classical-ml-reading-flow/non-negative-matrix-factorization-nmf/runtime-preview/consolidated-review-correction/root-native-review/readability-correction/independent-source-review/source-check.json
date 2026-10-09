@@ -1,0 +1,162 @@
+{
+  "schema": "nmf-d46-same-independent-bounded-source/v1",
+  "reviewer": "/root/ml_successor_independent_review",
+  "scope": "Static identity, exact inverse and source assertions only; no author checker, SSR, build, HTTP, browser or science execution.",
+  "conditions": [
+    {
+      "condition": "predecessor exact456d7b64",
+      "passed": true
+    },
+    {
+      "condition": "successor exact5d98431d",
+      "passed": true
+    },
+    {
+      "condition": "unique predecessor clause './saved-data.js'",
+      "passed": true
+    },
+    {
+      "condition": "unique predecessor clause './Drawing.jsx'",
+      "passed": true
+    },
+    {
+      "condition": "unique predecessor clause './nmf-model.js'",
+      "passed": true
+    },
+    {
+      "condition": "unique predecessor clause M460 65V120H230V155H310",
+      "passed": true
+    },
+    {
+      "condition": "unique predecessor clause M460 65V245H310",
+      "passed": true
+    },
+    {
+      "condition": "entire physical successor is exactly five declared splices",
+      "passed": true
+    },
+    {
+      "condition": "unique inverse clause M460 65V205H350V216",
+      "passed": true
+    },
+    {
+      "condition": "unique inverse clause M460 65V120H350V126",
+      "passed": true
+    },
+    {
+      "condition": "unique inverse clause '../../nmf-model.js'",
+      "passed": true
+    },
+    {
+      "condition": "unique inverse clause '../../Drawing.jsx'",
+      "passed": true
+    },
+    {
+      "condition": "unique inverse clause '../../saved-data.js'",
+      "passed": true
+    },
+    {
+      "condition": "physical inverse restores entire predecessor",
+      "passed": true
+    },
+    {
+      "condition": "later same-specificity rem minimum only",
+      "passed": true
+    },
+    {
+      "condition": "predecessor dimensions preserved",
+      "passed": true
+    },
+    {
+      "condition": "default760/enlarged1520 width arithmetic",
+      "passed": true
+    },
+    {
+      "condition": "focusable named local overflow region retained",
+      "passed": true
+    },
+    {
+      "condition": "CSS loaded after original lesson and preview",
+      "passed": true
+    },
+    {
+      "condition": "text selector labelled and effect restores previous root style",
+      "passed": true
+    },
+    {
+      "condition": "private source resolver redirects only two originals",
+      "passed": true
+    },
+    {
+      "condition": "private build preserves base and avoids empty removal",
+      "passed": true
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/SavedDataFigures.jsx",
+      "bytes": 18336,
+      "sha256": "456d7b64ff39d1476d8b737a67b86d6c91fada3617a02160eb6d9053b25f11c2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/SavedDataFigures.jsx",
+      "bytes": 18348,
+      "sha256": "5d98431d02940c855417673cf50aceaeb421d3c8f4123ed14b2c17fabe753744"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/source-preparation.json",
+      "bytes": 2248,
+      "sha256": "21aba255b11ea60f19d82922ef16ad698ab5f898f31632c51754bcba81113e46"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/readability.css",
+      "bytes": 288,
+      "sha256": "25a94855cd371e380c6ebfc890b5a2d26804ef65d8bcb18ce7067f273b937811"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/preview-entry.jsx",
+      "bytes": 1722,
+      "sha256": "01ec8f2d33aae968e94abbbce2f98114395c01616bf538742240a020c2ae76d6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/vite.config.mjs",
+      "bytes": 1187,
+      "sha256": "960658298151bf864af3bd85bfa8f6c31a61022c07bea7b5ac817d4be3e3c611"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/prepare-source.mjs",
+      "bytes": 3154,
+      "sha256": "17e55527efdd611498a2352a60c27e1a6680e40eed77deb1ec0d0f5b9ac559cd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/lesson.css",
+      "bytes": 8021,
+      "sha256": "44d5194847126019e30ddbcf369c3866799ddb844bf294ffcd3d3554560ccfaa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/preview.css",
+      "bytes": 146,
+      "sha256": "9a7ac50bb5107e96a686a36917f00511a1fccab8ec21d4416aceafe13c73b962"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/Drawing.jsx",
+      "bytes": 7017,
+      "sha256": "0620bddf26f521d07ef360216265f9af4f930c04c5416945f3ba28a65d54ee8a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/vite.config.mjs",
+      "bytes": 3127,
+      "sha256": "5dac28b4fa0d82448d62d000b4263dcd7afbef3ce16a9293faf4073c027ba75e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/combined-author-review/author-ready-source.json",
+      "bytes": 151243,
+      "sha256": "03620c4d159f87479c884711931ccea69309a2b9cf4fc541fae8b6e424674c56"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/independent-combined-source-review/source-closure.md",
+      "bytes": 16667,
+      "sha256": "c0b20a01a7726063e90d88c9a40e3b4e43d995cae0a03133e0e6cbabe9380ef5"
+    }
+  ]
+}

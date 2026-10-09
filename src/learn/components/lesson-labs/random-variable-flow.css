@@ -1,0 +1,42 @@
+.rv-figure { margin: 2rem 0; min-width: 0; }
+.rv-figure figcaption { margin-top: .8rem; color: var(--learn-muted, #b5b5b5); line-height: 1.65; }
+.rv-scene { display: block; width: 100%; height: auto; overflow: visible; }
+.rv-label { fill: #ddd; font: 15px system-ui, sans-serif; }
+.rv-gold { color: #f1ba60; }
+.rv-blue { color: #7dccde; }
+.rv-rose { color: #ef9ca5; }
+.rv-label.rv-gold { fill: #f1ba60; }
+.rv-label.rv-blue { fill: #7dccde; }
+.rv-label.rv-rose { fill: #ef9ca5; }
+.rv-axis, .rv-arrow, .rv-line { fill: none; stroke: currentColor; stroke-width: 1.8; }
+.rv-axis { color: #a5a5a5; }
+.rv-grid { stroke: #454545; stroke-width: 1; }
+.rv-reference { stroke: #aaa; stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; }
+.rv-dot { fill: currentColor; stroke: currentColor; stroke-width: 1.7; }
+.rv-dot.open { fill: #181818; }
+.rv-area { fill: currentColor; fill-opacity: .17; stroke: currentColor; stroke-width: 1.5; }
+.rv-selected { stroke: #fff; stroke-width: 3; }
+.rv-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; align-items: start; }
+.rv-compare > div { min-width: 0; }
+.rv-values { display: flex; gap: .6rem 1.4rem; flex-wrap: wrap; margin-top: .65rem; line-height: 1.65; }
+.rv-values span { overflow-wrap: anywhere; }
+.rv-controls { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 1rem; align-items: end; }
+.rv-controls label { display: grid; gap: .35rem; min-width: min(100%, 11rem); flex: 1 1 11rem; }
+.rv-controls input, .rv-controls select { width: 100%; box-sizing: border-box; font: inherit; color: inherit; background: #222; accent-color: #e9b65f; }
+.rv-controls select { padding: .45rem; border: 1px solid #777; }
+.rv-controls button { color: inherit; background: transparent; padding: .5rem .9rem; border: 1px solid #777; font: inherit; }
+.rv-controls :focus-visible, .rv-scroll:focus-visible { outline: 2px solid #f1ba60; outline-offset: 4px; }
+.rv-scroll { max-width: 100%; overflow: auto; scrollbar-gutter: stable; margin: .8rem 0; }
+.rv-scroll table { border-collapse: collapse; width: 100%; white-space: nowrap; }
+.rv-scroll th, .rv-scroll td { padding: .6rem .85rem; text-align: right; border-bottom: 1px solid #454545; font-variant-numeric: tabular-nums; }
+.rv-scroll th:first-child, .rv-scroll td:first-child { text-align: left; }
+.rv-error { color: #ef9ca5; }
+@media (max-width: 850px) { .rv-compare { grid-template-columns: minmax(0, 1fr); gap: 1.3rem; } }
+@media (prefers-reduced-motion: reduce) { .rv-figure * { transition: none; } }
+
+.rv-equation-region { max-width: 100%; min-width: 0; overflow-x: auto; overscroll-behavior-inline: contain; }
+.rv-equation-region > div { width: max-content; min-width: 100%; }
+.rv-equation-region:focus-visible { outline: 2px solid #f1ba60; outline-offset: 4px; }
+.rv-equation-caption { color: #b5b5b5; line-height: 1.65; }
+
+.random-variable-lesson { overflow-wrap: anywhere; }

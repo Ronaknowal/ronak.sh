@@ -1,0 +1,41 @@
+{
+  "locked_utc": "2026-10-07T07:12:54.140163+00:00",
+  "overall_fitted": "G3",
+  "families": {
+    "R": "R3",
+    "S": "S2",
+    "I": "I2",
+    "G": "G3"
+  },
+  "best_independent": "I2",
+  "baseline_beats_fitted": false,
+  "objective": "validation mean_j RMSE_j / raw training_std_j",
+  "tie_tolerance_absolute": 1e-12,
+  "tie_rule": "global minimum then first table-order score <= minimum + tolerance",
+  "eligible_scores": {
+    "R1": 0.6012701409436407,
+    "R2": 0.5889216836023103,
+    "R3": 0.508383036024113,
+    "S1": 0.48404529738952035,
+    "S2": 0.47854045408107226,
+    "S3": 0.48422278976402267,
+    "I1": 0.5023296107186428,
+    "I2": 0.4945983493206122,
+    "I3": 0.5213228078715916,
+    "G1": 0.5554874097622262,
+    "G2": 0.4131642177018795,
+    "G3": 0.3180823622086178
+  },
+  "test_scored": false,
+  "refit": false,
+  "source": {
+    "path": "programs/energy-multioutput-study.py",
+    "bytes": 27425,
+    "sha256": "0ab0e5520b8728c7fa92ae6a0d563a7b6322a42d8ad214d657d9b330465e9b18"
+  },
+  "marker": {
+    "path": "content-evidence/energy-multioutput-execution-marker.json",
+    "bytes": 15056,
+    "sha256": "a31efab37b5a688ddefee90c9bbab4308f39c8eacd2ab86110f6d02ad50bd71d"
+  }
+}

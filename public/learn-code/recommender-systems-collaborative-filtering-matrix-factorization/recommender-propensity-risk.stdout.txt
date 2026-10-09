@@ -1,0 +1,1224 @@
+{
+  "entryRisk": {
+    "losses": [
+      {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      {
+        "exact": "4",
+        "decimal": 4.0
+      },
+      {
+        "exact": "2",
+        "decimal": 2.0
+      },
+      {
+        "exact": "3",
+        "decimal": 3.0
+      }
+    ],
+    "propensities": [
+      {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/4",
+        "decimal": 0.25
+      },
+      {
+        "exact": "1",
+        "decimal": 1.0
+      }
+    ],
+    "targetWeights": [
+      {
+        "exact": "1/4",
+        "decimal": 0.25
+      },
+      {
+        "exact": "1/4",
+        "decimal": 0.25
+      },
+      {
+        "exact": "1/4",
+        "decimal": 0.25
+      },
+      {
+        "exact": "1/4",
+        "decimal": 0.25
+      }
+    ],
+    "summary": {
+      "knownConstructionTarget": {
+        "exact": "5/2",
+        "decimal": 2.5
+      },
+      "entries": 4,
+      "enumeratedMasks": 16,
+      "positiveProbabilityMasks": 4,
+      "naiveObservedMean": {
+        "definedProbability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unconditionalExpectation": {
+          "exact": "37/16",
+          "decimal": 2.3125
+        },
+        "expectationConditionalOnDefined": {
+          "exact": "37/16",
+          "decimal": 2.3125
+        }
+      },
+      "IPS": {
+        "definedProbability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unconditionalExpectation": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "expectationConditionalOnDefined": {
+          "exact": "5/2",
+          "decimal": 2.5
+        }
+      },
+      "SNIPS": {
+        "definedProbability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unconditionalExpectation": {
+          "exact": "39/16",
+          "decimal": 2.4375
+        },
+        "expectationConditionalOnDefined": {
+          "exact": "39/16",
+          "decimal": 2.4375
+        }
+      }
+    },
+    "masks": [
+      {
+        "mask": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": null,
+        "IPS": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "SNIPS": null,
+        "SNIPSDenominator": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "IPS": {
+          "exact": "3/4",
+          "decimal": 0.75
+        },
+        "SNIPS": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1/4",
+          "decimal": 0.25
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "IPS": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "SNIPS": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "IPS": {
+          "exact": "11/4",
+          "decimal": 2.75
+        },
+        "SNIPS": {
+          "exact": "11/5",
+          "decimal": 2.2
+        },
+        "SNIPSDenominator": {
+          "exact": "5/4",
+          "decimal": 1.25
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "4",
+          "decimal": 4.0
+        },
+        "IPS": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "SNIPS": {
+          "exact": "4",
+          "decimal": 4.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1/2",
+          "decimal": 0.5
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "7/2",
+          "decimal": 3.5
+        },
+        "IPS": {
+          "exact": "11/4",
+          "decimal": 2.75
+        },
+        "SNIPS": {
+          "exact": "11/3",
+          "decimal": 3.6666666666666665
+        },
+        "SNIPSDenominator": {
+          "exact": "3/4",
+          "decimal": 0.75
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "IPS": {
+          "exact": "4",
+          "decimal": 4.0
+        },
+        "SNIPS": {
+          "exact": "8/3",
+          "decimal": 2.6666666666666665
+        },
+        "SNIPSDenominator": {
+          "exact": "3/2",
+          "decimal": 1.5
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "IPS": {
+          "exact": "19/4",
+          "decimal": 4.75
+        },
+        "SNIPS": {
+          "exact": "19/7",
+          "decimal": 2.7142857142857144
+        },
+        "SNIPSDenominator": {
+          "exact": "7/4",
+          "decimal": 1.75
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "IPS": {
+          "exact": "1/4",
+          "decimal": 0.25
+        },
+        "SNIPS": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1/4",
+          "decimal": 0.25
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "probability": {
+          "exact": "3/8",
+          "decimal": 0.375
+        },
+        "naiveObservedMean": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "IPS": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "SNIPS": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1/2",
+          "decimal": 0.5
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "3/2",
+          "decimal": 1.5
+        },
+        "IPS": {
+          "exact": "9/4",
+          "decimal": 2.25
+        },
+        "SNIPS": {
+          "exact": "9/5",
+          "decimal": 1.8
+        },
+        "SNIPSDenominator": {
+          "exact": "5/4",
+          "decimal": 1.25
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "probability": {
+          "exact": "1/8",
+          "decimal": 0.125
+        },
+        "naiveObservedMean": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "IPS": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "SNIPS": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "SNIPSDenominator": {
+          "exact": "3/2",
+          "decimal": 1.5
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "IPS": {
+          "exact": "9/4",
+          "decimal": 2.25
+        },
+        "SNIPS": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "SNIPSDenominator": {
+          "exact": "3/4",
+          "decimal": 0.75
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "probability": {
+          "exact": "3/8",
+          "decimal": 0.375
+        },
+        "naiveObservedMean": {
+          "exact": "8/3",
+          "decimal": 2.6666666666666665
+        },
+        "IPS": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "SNIPS": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "7/3",
+          "decimal": 2.3333333333333335
+        },
+        "IPS": {
+          "exact": "17/4",
+          "decimal": 4.25
+        },
+        "SNIPS": {
+          "exact": "17/7",
+          "decimal": 2.4285714285714284
+        },
+        "SNIPSDenominator": {
+          "exact": "7/4",
+          "decimal": 1.75
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "probability": {
+          "exact": "1/8",
+          "decimal": 0.125
+        },
+        "naiveObservedMean": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "IPS": {
+          "exact": "5",
+          "decimal": 5.0
+        },
+        "SNIPS": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "SNIPSDenominator": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "unsupportedTargetEntries": []
+      }
+    ]
+  },
+  "emptyPossible": {
+    "losses": [
+      {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      {
+        "exact": "4",
+        "decimal": 4.0
+      }
+    ],
+    "propensities": [
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/4",
+        "decimal": 0.25
+      }
+    ],
+    "targetWeights": [
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      }
+    ],
+    "summary": {
+      "knownConstructionTarget": {
+        "exact": "5/2",
+        "decimal": 2.5
+      },
+      "entries": 2,
+      "enumeratedMasks": 4,
+      "positiveProbabilityMasks": 4,
+      "naiveObservedMean": {
+        "definedProbability": {
+          "exact": "5/8",
+          "decimal": 0.625
+        },
+        "unconditionalExpectation": null,
+        "expectationConditionalOnDefined": {
+          "exact": "19/10",
+          "decimal": 1.9
+        }
+      },
+      "IPS": {
+        "definedProbability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unconditionalExpectation": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "expectationConditionalOnDefined": {
+          "exact": "5/2",
+          "decimal": 2.5
+        }
+      },
+      "SNIPS": {
+        "definedProbability": {
+          "exact": "5/8",
+          "decimal": 0.625
+        },
+        "unconditionalExpectation": null,
+        "expectationConditionalOnDefined": {
+          "exact": "2",
+          "decimal": 2.0
+        }
+      }
+    },
+    "masks": [
+      {
+        "mask": [
+          0,
+          0
+        ],
+        "probability": {
+          "exact": "3/8",
+          "decimal": 0.375
+        },
+        "naiveObservedMean": null,
+        "IPS": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "SNIPS": null,
+        "SNIPSDenominator": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          1
+        ],
+        "probability": {
+          "exact": "1/8",
+          "decimal": 0.125
+        },
+        "naiveObservedMean": {
+          "exact": "4",
+          "decimal": 4.0
+        },
+        "IPS": {
+          "exact": "8",
+          "decimal": 8.0
+        },
+        "SNIPS": {
+          "exact": "4",
+          "decimal": 4.0
+        },
+        "SNIPSDenominator": {
+          "exact": "2",
+          "decimal": 2.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          0
+        ],
+        "probability": {
+          "exact": "3/8",
+          "decimal": 0.375
+        },
+        "naiveObservedMean": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "IPS": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "SNIPS": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          1
+        ],
+        "probability": {
+          "exact": "1/8",
+          "decimal": 0.125
+        },
+        "naiveObservedMean": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "IPS": {
+          "exact": "9",
+          "decimal": 9.0
+        },
+        "SNIPS": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "SNIPSDenominator": {
+          "exact": "3",
+          "decimal": 3.0
+        },
+        "unsupportedTargetEntries": []
+      }
+    ]
+  },
+  "unsupportedEntry": {
+    "losses": [
+      {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      {
+        "exact": "4",
+        "decimal": 4.0
+      }
+    ],
+    "propensities": [
+      {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      {
+        "exact": "0",
+        "decimal": 0.0
+      }
+    ],
+    "targetWeights": [
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      },
+      {
+        "exact": "1/2",
+        "decimal": 0.5
+      }
+    ],
+    "summary": {
+      "knownConstructionTarget": {
+        "exact": "5/2",
+        "decimal": 2.5
+      },
+      "entries": 2,
+      "enumeratedMasks": 4,
+      "positiveProbabilityMasks": 1,
+      "naiveObservedMean": {
+        "definedProbability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unconditionalExpectation": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "expectationConditionalOnDefined": {
+          "exact": "1",
+          "decimal": 1.0
+        }
+      },
+      "IPS": {
+        "definedProbability": 0,
+        "unconditionalExpectation": null,
+        "expectationConditionalOnDefined": null
+      },
+      "SNIPS": {
+        "definedProbability": 0,
+        "unconditionalExpectation": null,
+        "expectationConditionalOnDefined": null
+      }
+    },
+    "masks": [
+      {
+        "mask": [
+          0,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": null,
+        "IPS": null,
+        "SNIPS": null,
+        "unsupportedTargetEntries": [
+          1
+        ]
+      },
+      {
+        "mask": [
+          0,
+          1
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "4",
+          "decimal": 4.0
+        },
+        "IPS": null,
+        "SNIPS": null,
+        "unsupportedTargetEntries": [
+          1
+        ]
+      },
+      {
+        "mask": [
+          1,
+          0
+        ],
+        "probability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "naiveObservedMean": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "IPS": null,
+        "SNIPS": null,
+        "unsupportedTargetEntries": [
+          1
+        ]
+      },
+      {
+        "mask": [
+          1,
+          1
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "IPS": null,
+        "SNIPS": null,
+        "unsupportedTargetEntries": [
+          1
+        ]
+      }
+    ]
+  },
+  "zeroTargetZeroObservation": {
+    "losses": [
+      {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      {
+        "exact": "4",
+        "decimal": 4.0
+      }
+    ],
+    "propensities": [
+      {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      {
+        "exact": "0",
+        "decimal": 0.0
+      }
+    ],
+    "targetWeights": [
+      {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      {
+        "exact": "0",
+        "decimal": 0.0
+      }
+    ],
+    "summary": {
+      "knownConstructionTarget": {
+        "exact": "1",
+        "decimal": 1.0
+      },
+      "entries": 2,
+      "enumeratedMasks": 4,
+      "positiveProbabilityMasks": 1,
+      "naiveObservedMean": {
+        "definedProbability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unconditionalExpectation": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "expectationConditionalOnDefined": {
+          "exact": "1",
+          "decimal": 1.0
+        }
+      },
+      "IPS": {
+        "definedProbability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unconditionalExpectation": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "expectationConditionalOnDefined": {
+          "exact": "1",
+          "decimal": 1.0
+        }
+      },
+      "SNIPS": {
+        "definedProbability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unconditionalExpectation": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "expectationConditionalOnDefined": {
+          "exact": "1",
+          "decimal": 1.0
+        }
+      }
+    },
+    "masks": [
+      {
+        "mask": [
+          0,
+          0
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": null,
+        "IPS": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "SNIPS": null,
+        "SNIPSDenominator": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          0,
+          1
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "4",
+          "decimal": 4.0
+        },
+        "IPS": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "SNIPS": null,
+        "SNIPSDenominator": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          0
+        ],
+        "probability": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "naiveObservedMean": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "IPS": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "SNIPS": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unsupportedTargetEntries": []
+      },
+      {
+        "mask": [
+          1,
+          1
+        ],
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "naiveObservedMean": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "IPS": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "SNIPS": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "SNIPSDenominator": {
+          "exact": "1",
+          "decimal": 1.0
+        },
+        "unsupportedTargetEntries": []
+      }
+    ]
+  },
+  "separateKnownPolicy": {
+    "unsupportedActions": [],
+    "paths": [
+      {
+        "action": 0,
+        "reward": 0,
+        "probability": {
+          "exact": "12/25",
+          "decimal": 0.48
+        },
+        "ratio": {
+          "exact": "5/8",
+          "decimal": 0.625
+        },
+        "weightedReward": {
+          "exact": "0",
+          "decimal": 0.0
+        }
+      },
+      {
+        "action": 0,
+        "reward": 1,
+        "probability": {
+          "exact": "8/25",
+          "decimal": 0.32
+        },
+        "ratio": {
+          "exact": "5/8",
+          "decimal": 0.625
+        },
+        "weightedReward": {
+          "exact": "5/8",
+          "decimal": 0.625
+        }
+      },
+      {
+        "action": 1,
+        "reward": 0,
+        "probability": {
+          "exact": "1/25",
+          "decimal": 0.04
+        },
+        "ratio": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "weightedReward": {
+          "exact": "0",
+          "decimal": 0.0
+        }
+      },
+      {
+        "action": 1,
+        "reward": 1,
+        "probability": {
+          "exact": "4/25",
+          "decimal": 0.16
+        },
+        "ratio": {
+          "exact": "5/2",
+          "decimal": 2.5
+        },
+        "weightedReward": {
+          "exact": "5/2",
+          "decimal": 2.5
+        }
+      }
+    ],
+    "knownConstructionTarget": {
+      "exact": "3/5",
+      "decimal": 0.6
+    },
+    "loggedExpectation": {
+      "exact": "12/25",
+      "decimal": 0.48
+    },
+    "IPSExpectation": {
+      "exact": "3/5",
+      "decimal": 0.6
+    }
+  },
+  "unsupportedPolicy": {
+    "unsupportedActions": [
+      1
+    ],
+    "paths": [
+      {
+        "action": 0,
+        "reward": 0,
+        "probability": {
+          "exact": "3/5",
+          "decimal": 0.6
+        },
+        "ratio": {
+          "exact": "1/2",
+          "decimal": 0.5
+        },
+        "weightedReward": {
+          "exact": "0",
+          "decimal": 0.0
+        }
+      },
+      {
+        "action": 0,
+        "reward": 1,
+        "probability": {
+          "exact": "2/5",
+          "decimal": 0.4
+        },
+        "ratio": {
+          "exact": "1/2",
+          "decimal": 0.5
+        },
+        "weightedReward": {
+          "exact": "1/2",
+          "decimal": 0.5
+        }
+      },
+      {
+        "action": 1,
+        "reward": 0,
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "ratio": null,
+        "weightedReward": null
+      },
+      {
+        "action": 1,
+        "reward": 1,
+        "probability": {
+          "exact": "0",
+          "decimal": 0.0
+        },
+        "ratio": null,
+        "weightedReward": null
+      }
+    ],
+    "knownConstructionTarget": {
+      "exact": "3/5",
+      "decimal": 0.6
+    },
+    "loggedExpectation": {
+      "exact": "2/5",
+      "decimal": 0.4
+    },
+    "IPSExpectation": null
+  },
+  "limits": "Supplied independent probabilities are known construction inputs. Retail absence provides neither exposure propensities nor causal identification."
+}

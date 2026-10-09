@@ -1,0 +1,725 @@
+{
+  "status": "PASS_NEW_INITIALIZER_AND_ONCE_ONLY_MAIN",
+  "checks": [
+    {
+      "name": "known singular-pair initializer W",
+      "passed": true
+    },
+    {
+      "name": "known singular-pair initializer H",
+      "passed": true
+    },
+    {
+      "name": "residual orientation X minus WH",
+      "passed": true
+    },
+    {
+      "name": "no input mutation",
+      "passed": true
+    },
+    {
+      "name": "known initializer half loss",
+      "passed": true
+    },
+    {
+      "name": "known singular equations",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.6 sign selection",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.6 retained mass",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.6 best positive-part rank-one error",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.8 sign selection",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.8 retained mass",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.8 best positive-part rank-one error",
+      "passed": true
+    },
+    {
+      "name": "D33 a=1.0 sign selection",
+      "passed": true
+    },
+    {
+      "name": "D33 a=1.0 retained mass",
+      "passed": true
+    },
+    {
+      "name": "D33 a=1.0 best positive-part rank-one error",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.0 sign selection",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.0 retained mass",
+      "passed": true
+    },
+    {
+      "name": "D33 a=0.0 best positive-part rank-one error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 0 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 0 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 0 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 0 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 1 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 1 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 1 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 1 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 2 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 2 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 2 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 2 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 3 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 3 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 3 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 3 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 4 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 4 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 4 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 4 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 5 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 5 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 5 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 5 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 6 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 6 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 6 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 6 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 7 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 7 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 7 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 7 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 8 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 8 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 8 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 8 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 9 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 9 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 9 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 9 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 10 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 10 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 10 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 10 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 11 rank-one approximation error",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 11 selected scale",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 11 joint sign-flip product",
+      "passed": true
+    },
+    {
+      "name": "random sign pair 11 nonnegative",
+      "passed": true
+    },
+    {
+      "name": "zero branch 0 finite zeros",
+      "passed": true
+    },
+    {
+      "name": "zero branch 1 finite zeros",
+      "passed": true
+    },
+    {
+      "name": "zero branch 2 finite zeros",
+      "passed": true
+    },
+    {
+      "name": "boundary shape 0",
+      "passed": true
+    },
+    {
+      "name": "boundary finite nonnegative 0",
+      "passed": true
+    },
+    {
+      "name": "boundary shape 1",
+      "passed": true
+    },
+    {
+      "name": "boundary finite nonnegative 1",
+      "passed": true
+    },
+    {
+      "name": "boundary shape 2",
+      "passed": true
+    },
+    {
+      "name": "boundary finite nonnegative 2",
+      "passed": true
+    },
+    {
+      "name": "boundary shape 3",
+      "passed": true
+    },
+    {
+      "name": "boundary finite nonnegative 3",
+      "passed": true
+    },
+    {
+      "name": "boundary shape 4",
+      "passed": true
+    },
+    {
+      "name": "boundary finite nonnegative 4",
+      "passed": true
+    },
+    {
+      "name": "stable table mean",
+      "passed": true
+    },
+    {
+      "name": "mean fill W zero slots",
+      "passed": true
+    },
+    {
+      "name": "mean fill H zero slots",
+      "passed": true
+    },
+    {
+      "name": "mean fill conserves nonzeros",
+      "passed": true
+    },
+    {
+      "name": "uniform fill seed reproducibility",
+      "passed": true
+    },
+    {
+      "name": "uniform fill range",
+      "passed": true
+    },
+    {
+      "name": "uniform fill conserves nonzeros",
+      "passed": true
+    },
+    {
+      "name": "explicit cutoff W",
+      "passed": true
+    },
+    {
+      "name": "explicit cutoff H",
+      "passed": true
+    },
+    {
+      "name": "all-zero plain stays zero",
+      "passed": true
+    },
+    {
+      "name": "all-zero mean stays zero",
+      "passed": true
+    },
+    {
+      "name": "all-zero small-random stays zero",
+      "passed": true
+    },
+    {
+      "name": "stable mean avoids overflowing raw sum",
+      "passed": true
+    },
+    {
+      "name": "overcomplete positive shape",
+      "passed": true
+    },
+    {
+      "name": "overcomplete random seed reproducibility",
+      "passed": true
+    },
+    {
+      "name": "fill 0.0 independent H-first scalar H",
+      "passed": true
+    },
+    {
+      "name": "fill 0.0 independent new-H scalar W",
+      "passed": true
+    },
+    {
+      "name": "fill 0.0 agreed initial loss",
+      "passed": true
+    },
+    {
+      "name": "fill 0.0 agreed one-sweep loss",
+      "passed": true
+    },
+    {
+      "name": "fill 0.0 one-sweep descent",
+      "passed": true
+    },
+    {
+      "name": "fill 0.1 independent H-first scalar H",
+      "passed": true
+    },
+    {
+      "name": "fill 0.1 independent new-H scalar W",
+      "passed": true
+    },
+    {
+      "name": "fill 0.1 agreed initial loss",
+      "passed": true
+    },
+    {
+      "name": "fill 0.1 agreed one-sweep loss",
+      "passed": true
+    },
+    {
+      "name": "fill 0.1 one-sweep descent",
+      "passed": true
+    },
+    {
+      "name": "fill 2.0 independent H-first scalar H",
+      "passed": true
+    },
+    {
+      "name": "fill 2.0 independent new-H scalar W",
+      "passed": true
+    },
+    {
+      "name": "fill 2.0 agreed initial loss",
+      "passed": true
+    },
+    {
+      "name": "fill 2.0 agreed one-sweep loss",
+      "passed": true
+    },
+    {
+      "name": "fill 2.0 one-sweep descent",
+      "passed": true
+    },
+    {
+      "name": "unfilled zeros locked",
+      "passed": true
+    },
+    {
+      "name": "small-fill changed H cell",
+      "passed": true
+    },
+    {
+      "name": "small-fill changed W cell",
+      "passed": true
+    },
+    {
+      "name": "large fill is not guaranteed better",
+      "passed": true
+    },
+    {
+      "name": "overcomplete NNDSVD",
+      "passed": true
+    },
+    {
+      "name": "negative input",
+      "passed": true
+    },
+    {
+      "name": "nonfinite input",
+      "passed": true
+    },
+    {
+      "name": "complex input",
+      "passed": true
+    },
+    {
+      "name": "empty rows",
+      "passed": true
+    },
+    {
+      "name": "empty features",
+      "passed": true
+    },
+    {
+      "name": "boolean rank",
+      "passed": true
+    },
+    {
+      "name": "fractional rank",
+      "passed": true
+    },
+    {
+      "name": "zero rank",
+      "passed": true
+    },
+    {
+      "name": "unknown variant",
+      "passed": true
+    },
+    {
+      "name": "negative cutoff",
+      "passed": true
+    },
+    {
+      "name": "nonfinite cutoff",
+      "passed": true
+    },
+    {
+      "name": "negative singular value",
+      "passed": true
+    },
+    {
+      "name": "nonfinite vector",
+      "passed": true
+    },
+    {
+      "name": "empty singular vector",
+      "passed": true
+    },
+    {
+      "name": "zero data positive random",
+      "passed": true
+    }
+  ],
+  "versions": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1"
+  },
+  "inputs": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_initialization.py",
+      "bytes": 6885,
+      "sha256": "1b6696a60871fcc092e7e5d2232f2d0d09ff19b6eb964d9b35ba3c12e87b7cde"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_multiplicative.py",
+      "bytes": 8988,
+      "sha256": "56d22f18907297f5c1239e31e98071e6bde0d33c5d2c5a1cbc9aa92546c210f9"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+      "bytes": 9109,
+      "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\check-initialization.py",
+      "bytes": 10963,
+      "sha256": "a67d61dba91e5b95bd94db203d8a26e6569da7b5a1701d0181586ee7794bdd4e"
+    }
+  ],
+  "sign_cases": [
+    {
+      "a": 0.6,
+      "choice": "negative",
+      "scores": [
+        0.36,
+        0.6400000000000001
+      ],
+      "retained": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          3.2000000000000006
+        ]
+      ]
+    },
+    {
+      "a": 0.8,
+      "choice": "positive",
+      "scores": [
+        0.48,
+        0.4799999999999999
+      ],
+      "retained": [
+        [
+          2.4000000000000004,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "a": 1.0,
+      "choice": "positive",
+      "scores": [
+        0.6,
+        0.0
+      ],
+      "retained": [
+        [
+          3.0000000000000004,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "a": 0.0,
+      "choice": "negative",
+      "scores": [
+        0.0,
+        0.8
+      ],
+      "retained": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          4.0
+        ]
+      ]
+    }
+  ],
+  "fill_cases": [
+    {
+      "delta": 0.0,
+      "initial_loss": 7.379999999999999,
+      "after_loss": 3.2875310469355865,
+      "w": [
+        [
+          2.857780326705856,
+          0.0
+        ],
+        [
+          1.4550380888242125,
+          2.0522439842574753
+        ]
+      ],
+      "h": [
+        [
+          2.5298221281347026,
+          1.4373989364401725
+        ],
+        [
+          0.0,
+          1.7888543819998317
+        ]
+      ]
+    },
+    {
+      "delta": 0.1,
+      "initial_loss": 8.252700103359919,
+      "after_loss": 3.6527134241460826,
+      "w": [
+        [
+          2.8665906977117555,
+          0.0672734430149865
+        ],
+        [
+          1.4605436350029766,
+          2.0625637299584834
+        ]
+      ],
+      "h": [
+        [
+          2.493869488427457,
+          1.4118872129276951
+        ],
+        [
+          0.05355590430213354,
+          1.7524208431628345
+        ]
+      ]
+    },
+    {
+      "delta": 2.0,
+      "initial_loss": 38.153002067198386,
+      "after_loss": 12.2792891053915,
+      "w": [
+        [
+          2.636896740087508,
+          1.981034877808371
+        ],
+        [
+          1.7700822243915362,
+          1.810653089047423
+        ]
+      ],
+      "h": [
+        [
+          1.5163816045813023,
+          1.0558359525298662
+        ],
+        [
+          1.1564835856610367,
+          1.0493392840763895
+        ]
+      ]
+    }
+  ],
+  "limits": "Author focused checks. No historical fits/mains, saved-data study, browser or independent whole-content acceptance.",
+  "main": {
+    "returncode": 0,
+    "stdout": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\initialization-main.stdout.txt",
+      "bytes": 875,
+      "sha256": "fc0ee263d36478e372b32b4f97d973468935691a1ced9e3595962006f9c60ef5"
+    },
+    "stderr": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\initialization-main.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "inputs_unchanged": true
+}

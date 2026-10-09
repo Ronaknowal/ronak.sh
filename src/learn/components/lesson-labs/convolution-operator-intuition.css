@@ -1,14 +1,16 @@
-.conv-op-intuition { margin: 2rem 0; padding: clamp(.8rem, 2vw, 1.35rem); border: 1px solid #494235; background: #121211; color: #ddd9d1; }
-.conv-op-intuition h4, .conv-op-intuition h5 { color: #eee5d3; margin: 0 0 .7rem; font-size: 1rem; }
-.conv-op-intuition p, .conv-op-intuition figcaption { line-height: 1.7; }
-.conv-op-intuition strong { color: #e9b949; }
-.conv-op-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
-.conv-op-panels section { border-top: 1px solid #494235; padding-top: .85rem; min-width: 0; }
-.conv-op-intuition figcaption { color: #c9beab; margin-top: 1rem; }
-.conv-op-intuition input[type="range"] { display: block; width: 100%; accent-color: #e9b949; margin: .7rem 0 1.3rem; min-height: 24px; }
-.conv-op-intuition button { color: #e9b949; background: #211d15; border: 1px solid #786333; border-radius: 3px; padding: .7rem 1rem; margin-top: 1rem; cursor: pointer; }
-.conv-op-intuition :focus-visible { outline: 2px solid #e9b949; outline-offset: 4px; }
-.conv-bin-head { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .3rem; }
-.conv-bin-head span { text-align: center; padding: .25rem; color: #b8b3aa; font-size: .85rem; border: 1px solid #34302a; }
-.conv-bin-head .conv-bin-active { border-color: #786333; color: #e9b949; background: #211d15; }
-.conv-bin-row p { margin: .8rem 0 .3rem; }
+/* Adaptive-pooling bins and BatchNorm folding: part of the reading flow (no card). */
+.conv-bin-scroll { max-width: 100%; overflow-x: auto; padding: 2px; }
+.conv-bin-grid { display: grid; grid-template-columns: 4.2rem repeat(5, minmax(3rem, 1fr)) 4rem; gap: 0.3rem; min-width: 26rem; align-items: center; }
+.conv-bin-corner { color: #a9a9a9; font-size: 0.82rem; }
+.conv-bin-input { display: grid; place-items: center; padding: 0.3rem; border: 1.5px solid #7dd5e9; border-radius: 3px; color: #e9f7fb; font-variant-numeric: tabular-nums; }
+.conv-bin-input small { color: #a9a9a9; font-size: 0.72rem; }
+.conv-bin-row { display: contents; }
+.conv-bin-name { color: #c7a5ee; font-size: 0.85rem; }
+.conv-bin-row span[aria-hidden] { min-height: 2rem; display: grid; place-items: center; border-radius: 3px; font-size: 0.82rem; }
+.conv-bin-active { border: 1px solid #8b74ad; background: rgba(199, 165, 238, 0.16); color: #e6daf7; }
+.conv-bin-off { border: 1px dashed #333; }
+.conv-bin-row strong { color: #c7a5ee; font-variant-numeric: tabular-nums; text-align: center; }
+
+.conv-fold p { line-height: 1.75; margin: 0.4rem 0; font-variant-numeric: tabular-nums; }
+.conv-fold strong { color: #f3d48f; }
+.conv-fold-label { color: #d8d8d8; font-weight: 600; font-size: 0.92rem; }

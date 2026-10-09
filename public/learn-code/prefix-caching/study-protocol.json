@@ -1,0 +1,279 @@
+{
+  "purpose": "Prefix state compatibility and finite storage mechanisms; no model quality or latency claim.",
+  "stages": [
+    "finite",
+    "tiny",
+    "native",
+    "allocator"
+  ],
+  "runs_per_stage": 1,
+  "threads": 2,
+  "device": "cpu",
+  "no_training": true,
+  "no_generation": true,
+  "no_timing": true,
+  "no_warmup": true,
+  "no_remote_api": true,
+  "no_download": true,
+  "stop_on_failure": true,
+  "tiny": {
+    "seed": 149,
+    "vocabulary": 32,
+    "context": 20,
+    "width": 16,
+    "heads": 4,
+    "layers": 2,
+    "dtype": "float64",
+    "prefix_length": 8,
+    "prompts": {
+      "A": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "B": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        13,
+        14,
+        15,
+        16
+      ],
+      "C": [
+        1,
+        2,
+        3,
+        17,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "forward_calls": 8,
+    "atol": 2e-12,
+    "rtol": 2e-12,
+    "order": "three full references A/B/C; prefix A; fork A tail; fork B tail; fresh C prefix; C tail",
+    "criteria": [
+      "all compared tail logits within fixed tolerance",
+      "A/B branch tail top1 equality",
+      "base snapshot unchanged",
+      "full A/B first eight rows exactly equal",
+      "full A/C first three rows exactly equal",
+      "parameters unchanged"
+    ]
+  },
+  "native": {
+    "model": "EleutherAI/pythia-14m",
+    "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+    "dtype": "float64",
+    "attention": "eager",
+    "token_source": {
+      "path": "public/learn-code/kv-cache/study-protocol.json",
+      "sha256": "20baa71863514516769e9090c5c183e8472ac7d682b549323b97d0575a289368",
+      "bytes": 5730
+    },
+    "text_source": {
+      "path": "public/learn-code/prefix-caching/alice-train.txt",
+      "sha256": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+      "bytes": 8697
+    },
+    "prefix_offsets": [
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        32
+      ]
+    ],
+    "tail_offsets": [
+      [
+        40,
+        48
+      ],
+      [
+        48,
+        56
+      ]
+    ],
+    "prefixes": [
+      [
+        2422,
+        547,
+        369,
+        5068,
+        281,
+        755,
+        1077,
+        11870
+      ],
+      [
+        2422,
+        547,
+        369,
+        5068,
+        281,
+        755,
+        1077,
+        11870,
+        273,
+        7063,
+        407,
+        617,
+        7586,
+        327,
+        253,
+        4310,
+        13,
+        285,
+        273,
+        1907,
+        2717,
+        281,
+        513,
+        27,
+        2378,
+        390,
+        7019,
+        703,
+        574,
+        759,
+        554,
+        264
+      ]
+    ],
+    "tails": [
+      [
+        533,
+        352,
+        574,
+        642,
+        7968,
+        390,
+        16072,
+        275
+      ],
+      [
+        352,
+        13,
+        773,
+        395,
+        752,
+        310,
+        253,
+        897
+      ]
+    ],
+    "forward_calls": 10,
+    "atol": 2e-09,
+    "rtol": 2e-09,
+    "order": "prefix length 8 then 32; each prefill once, then full reference and copied-cache suffix for tail 0 then 1",
+    "criteria": [
+      "every one of eight tail-logit rows compared",
+      "all logits within declared tolerance and top1 IDs equal",
+      "base K/V and length unchanged",
+      "branches have separate K/V storage",
+      "branch lengths exact",
+      "parameters unchanged"
+    ]
+  },
+  "allocator": {
+    "transformers": "5.19.0",
+    "dtype": "float32",
+    "layers": 2,
+    "kv_heads": 2,
+    "head_dim": 4,
+    "page_tokens": 4,
+    "allocatable_sectors": 4,
+    "reserved_trash_sectors": 2,
+    "blocks_per_sector": 1,
+    "bytes_per_page": 256,
+    "bytes_per_block": 512,
+    "backing_bytes": 3072,
+    "prompts": {
+      "A": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "B": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11,
+        12
+      ]
+    },
+    "supplied_scalar": "10000*is_value + 1000*layer + 100*position + 2*token + 10*head + feature",
+    "model_forwards": 0,
+    "sequence": [
+      "allocate A",
+      "write A both layers",
+      "mark two complete blocks",
+      "match/acquire B two blocks",
+      "allocate/write B tail both layers",
+      "observe shared backing",
+      "release A",
+      "release B",
+      "match/acquire retained C",
+      "release C",
+      "evict all inactive",
+      "return four sectors"
+    ],
+    "criteria": [
+      "exact supplied/returned K/V values",
+      "shared first eight physical indices/addresses",
+      "six logical blocks use four physical blocks",
+      "two refs on each shared block",
+      "two free plus two retained after A/B release",
+      "four free after eviction"
+    ]
+  },
+  "finite": {
+    "modules": [
+      "prefix_identity",
+      "prefix_work",
+      "prefix_store",
+      "prefix_workload",
+      "radix_prefix",
+      "prefix_routing",
+      "prefix_cost",
+      "practice"
+    ],
+    "scope": "Once per complete verify function; constructed inputs in frozen sources, no stochastic simulation."
+  },
+  "failure_retention": "Exclusive output directories; persist all completed native/Tiny operations and tensors before assertions; finite module start identifies source/operands even if verify does not return; stop without automatic retry."
+}

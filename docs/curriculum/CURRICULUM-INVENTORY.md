@@ -2,9 +2,9 @@
 
 Generated from the live catalogue by `node scripts/build-curriculum-inventory.mjs`. Scope review: 9 September 2026. Regenerate after catalogue changes; this is a status report, not teaching policy.
 
-**1461 unique topics · 29 modules · 234 registered published lessons · 639 topic-specific briefs · 10 guided paths.**
+**1461 unique topics · 29 modules · 254 registered published lessons · 659 topic-specific briefs · 10 guided paths.**
 
-**822 older topics still need individual design.** Every module has domain guidance; this does not make those older topics fully planned or fact-checked. 745 topics have recorded prerequisite reviews; the remaining edges need individual review. Linux is the user-approved teaching reference.
+**802 older topics still need individual design.** Every module has domain guidance; this does not make those older topics fully planned or fact-checked. 763 topics have recorded prerequisite reviews; the remaining edges need individual review. Linux is the user-approved teaching reference.
 
 See [the research and scope plan](LEARNING-CURRICULUM-PLAN.md), [authoring handoff](../teaching/LESSON-AUTHORING-HANDOFF.md), and [full machine-readable inventory](curriculum-inventory.json).
 
@@ -15,7 +15,7 @@ See [the research and scope plan](LEARNING-CURRICULUM-PLAN.md), [authoring hando
 | Mathematical & Statistical Foundations | 57 | 57 | 57 | 57 |
 | Classical Machine Learning | 39 | 39 | 39 | 39 |
 | Deep Learning Fundamentals & Architectures | 42 | 42 | 20 | 23 |
-| Large Language Models — Architecture, Training & Inference | 62 | 57 | 5 | 7 |
+| Large Language Models — Architecture, Training & Inference | 62 | 58 | 8 | 9 |
 | Reinforcement Learning | 33 | 0 | 2 | 3 |
 | Generative Models | 24 | 0 | 2 | 4 |
 | NLP, Computer Vision & Multimodal AI | 49 | 0 | 3 | 3 |
@@ -32,7 +32,7 @@ See [the research and scope plan](LEARNING-CURRICULUM-PLAN.md), [authoring hando
 | Meta-Learning (Learning to Learn) | 46 | 0 | 1 | 1 |
 | Quantum Computing, Information & Engineering | 106 | 0 | 59 | 106 |
 | Landmark Models & What Makes Them Notable | 22 | 0 | 1 | 1 |
-| Core Frameworks & Tool Ecosystem | 19 | 0 | 2 | 3 |
+| Core Frameworks & Tool Ecosystem | 19 | 19 | 19 | 19 |
 | Key Terminology Glossary | 89 | 1 | 0 | 0 |
 | LLM Evaluation & Assessment | 158 | 0 | 2 | 3 |
 | Programming & Scientific Computing | 17 | 17 | 17 | 17 |
@@ -46,7 +46,7 @@ Counts within modules may include shared topics. The headline counts each stable
 
 ## Delivery phases
 
-**81 current content checkpoints complete · 81 current implementations complete.**
+**184 current content checkpoints complete · 150 current implementations complete.**
 
 [The delivery ledger](../teaching/lesson-delivery-progress.json) preserves historical completion and tracks the current revision's content and implementation separately. Source changes can make a recorded completion stale; these counts do not silently approve changed versions. Publication and user acceptance remain separate. Use the topic CLI's delivery field before continuing a phase.
 
@@ -243,9 +243,9 @@ Counts within modules may include shared topics. The headline counts each stable
 
 | Topic | Level | Content | Design |
 | --- | --- | --- | --- |
-| Byte-Pair Encoding (BPE), WordPiece, SentencePiece, Unigram | foundation | published | design needed |
-| Byte-Level Tokenization & Token-Free Models | intermediate | published | design needed |
-| Vocabulary Design & Multilingual Tokenization | intermediate | published | design needed |
+| Byte-Pair Encoding (BPE), WordPiece, SentencePiece, Unigram | foundation | published | brief |
+| Byte-Level Tokenization & Token-Free Models | intermediate | published | brief |
+| Vocabulary Design & Multilingual Tokenization | intermediate | published | brief |
 | Multimodal Tokenization (Visual, Audio, Video) | advanced | published | design needed |
 | Dynamic Tokenization (ADAT, BoundlessBPE, LiteToken) | advanced | published | design needed |
 | Causal Language Modeling (Next-Token Prediction) | foundation | published | design needed |
@@ -271,7 +271,7 @@ Counts within modules may include shared topics. The headline counts each stable
 | DAPO (Dynamic Adaptive Policy Optimization) | advanced | published | design needed |
 | Knowledge Distillation for LLMs (DeepSeek-R1-Distill, CoT Distillation) | advanced | published | design needed |
 | RL for Reasoning (DeepSeek-R1 Style) | frontier | published | design needed |
-| Typed Decision Models & Calibrated Neural Decision Systems | advanced | planned | brief |
+| Typed Decision Models & Calibrated Neural Decision Systems | advanced | published | brief |
 | KV-Cache & Memory Management | intermediate | published | design needed |
 | Decoding Strategies (Greedy, Beam, Top-k, Top-p, Temperature) | intermediate | published | design needed |
 | Structured Output & Constrained Decoding (Outlines, XGrammar) | intermediate | published | design needed |
@@ -1331,25 +1331,25 @@ Counts within modules may include shared topics. The headline counts each stable
 
 | Topic | Level | Content | Design |
 | --- | --- | --- | --- |
-| PyTorch | foundation | planned | design needed |
-| JAX | foundation | planned | design needed |
-| TensorFlow & Keras | foundation | planned | design needed |
-| Experiment Tracking Tools (Weights & Biases, MLflow, Neptune) | foundation | planned | design needed |
-| Training Acceleration | intermediate | planned | design needed |
-| LLM Fine-Tuning Platforms | intermediate | planned | design needed |
-| Data Processing & Loading | foundation | planned | design needed |
-| Data Annotation & Labeling | intermediate | planned | design needed |
-| NLP Libraries | foundation | planned | design needed |
-| Computer Vision Libraries | foundation | planned | design needed |
-| Visualization | foundation | planned | design needed |
-| GPU-Accelerated Computing | foundation | planned | design needed |
-| Vector Databases | intermediate | planned | design needed |
-| Data Annotation & Labeling (Extended) | intermediate | planned | design needed |
-| LLM Serving Frameworks (vLLM, TGI, SGLang, TensorRT-LLM) | intermediate | planned | design needed |
-| LLM Application Frameworks (LangChain, LlamaIndex, Haystack) | intermediate | planned | design needed |
-| Agent & Workflow Frameworks (CrewAI, AutoGen, LangGraph) | intermediate | planned | design needed |
-| Tensor Shapes, Autograd Graphs & Device Boundaries | foundation | planned | brief |
-| Dataset Loaders, Checkpoints & Exact Resume Contracts | intermediate | planned | brief |
+| PyTorch | foundation | published | brief |
+| JAX | foundation | published | brief |
+| TensorFlow & Keras | foundation | published | brief |
+| Experiment Tracking Tools (Weights & Biases, MLflow, Neptune) | foundation | published | brief |
+| Training Acceleration | intermediate | published | brief |
+| LLM Fine-Tuning Platforms | intermediate | published | brief |
+| Data Processing & Loading | foundation | published | brief |
+| Data Annotation & Labeling | intermediate | published | brief |
+| NLP Libraries | foundation | published | brief |
+| Computer Vision Libraries | foundation | published | brief |
+| Visualization | foundation | published | brief |
+| GPU-Accelerated Computing | foundation | published | brief |
+| Vector Databases | intermediate | published | brief |
+| Data Annotation & Labeling (Extended) | intermediate | published | brief |
+| LLM Serving Frameworks (vLLM, TGI, SGLang, TensorRT-LLM) | intermediate | published | brief |
+| LLM Application Frameworks (LangChain, LlamaIndex, Haystack) | intermediate | published | brief |
+| Agent & Workflow Frameworks (CrewAI, AutoGen, LangGraph) | intermediate | published | brief |
+| Tensor Shapes, Autograd Graphs & Device Boundaries | foundation | published | brief |
+| Dataset Loaders, Checkpoints & Exact Resume Contracts | intermediate | published | brief |
 
 ### Key Terminology Glossary
 

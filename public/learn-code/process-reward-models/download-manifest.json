@@ -1,0 +1,94 @@
+{
+  "files": {
+    "data/extraction.json": {
+      "sha256": "467f0f391ec64b9b1857cf910269efd5603f24f59b14363eaf5a62381c680aa3",
+      "bytes": 16016
+    },
+    "data/test.jsonl": {
+      "sha256": "8974620a869948cc380820b6bc05a6ed18ba49e7abfa1370a4edf542d594082a",
+      "bytes": 490207
+    },
+    "data/train.jsonl": {
+      "sha256": "f29aced55f625e0bf178f36eab5c70813bdcad2baac0553907da77c1502843ee",
+      "bytes": 934983
+    },
+    "data/validation.jsonl": {
+      "sha256": "8df7842fff13dfe0dde04d5aadb5ed36af285e556e5a8f77446fd9d6c829e82a",
+      "bytes": 278335
+    },
+    "PRM800K-LICENSE.txt": {
+      "sha256": "22d61a2226e035da51c56149c3358c36d1f61716435866bc6e6fe0e54c7270db",
+      "bytes": 1062
+    },
+    "prm_classifier.py": {
+      "sha256": "3b0ce39629f329b72059ab36c2334d9d8fdc513935dbc422cb0b94062e58c63d",
+      "bytes": 7505
+    },
+    "prm_contracts.py": {
+      "sha256": "4650f27e88316efd74df90253b5bc24efc5bbed8565b8635d7c3931d68a5d5e6",
+      "bytes": 9252
+    },
+    "prm_records.py": {
+      "sha256": "3d85a9a271ce72974a039d1d35202de1ae7c2ed9bfda51480c9f44ba12812ba9",
+      "bytes": 6489
+    },
+    "prm_rollouts_rewards.py": {
+      "sha256": "4c51c7c552262345cc5346e58a49dc3360e72e9f677789cea9f92458d5246e67",
+      "bytes": 13988
+    },
+    "prm_search.py": {
+      "sha256": "1063a329842dee26a2fae0a38b4253b1adb3e15548b51ec5b856808bf6243508",
+      "bytes": 11639
+    },
+    "prm_torch.py": {
+      "sha256": "a625cd0d5b383d52add8f18eab9b78ac78d009192e843034cf600351cfc2cd8d",
+      "bytes": 4573
+    },
+    "prm_transformers.py": {
+      "sha256": "9649e13b080c708ddf07d8afcd9effb2dc29d5fdd7fca5f420df61795475b471",
+      "bytes": 8443
+    },
+    "README.md": {
+      "sha256": "897a84bca67375833afe08ab957456df87fe2c61c29b93bb46ed58451318efdf",
+      "bytes": 3658
+    },
+    "requirements.txt": {
+      "sha256": "237c6a132897f347700f3b0885ba26a8f37c7fedc9804ca571a738077c8ded6c",
+      "bytes": 130
+    },
+    "sources/phase2_test.jsonl.prefix": {
+      "sha256": "143b6e1e495f1b6ec836099f264ff5b6e35e8bc7070b2b1474f9ed992ddd1244",
+      "bytes": 2096959
+    },
+    "sources/phase2_train.jsonl.prefix": {
+      "sha256": "08f6e0728ac42b417293613d033f92092f806b369e6398a7e1a0abc12435ec07",
+      "bytes": 2093513
+    },
+    "sources/provenance.json": {
+      "sha256": "666133c92b90b67fae7e047ef8357b9894da079c252571512268c78d41e79665",
+      "bytes": 581
+    },
+    "study/model.json": {
+      "sha256": "888f0740295871f6c37dfa08fddcd5d22331d9f98963739deccc1689f90d8802",
+      "bytes": 213282
+    },
+    "study/predictions.json": {
+      "sha256": "8a1fb8dbcb51484466b098bf50db83cdd6861db6bd13bb6d268f20e119d5f207",
+      "bytes": 704569
+    },
+    "study/prospective-inputs.json": {
+      "sha256": "f39d510b2c928fcbb32665458f90242a22122d5bda6d5d7a333087e7f5ec7bb6",
+      "bytes": 3028
+    },
+    "study/results.json": {
+      "sha256": "03139444f7a5379865b379166ae0a64de276573a9a7bf85a86c6803997687e43",
+      "bytes": 11388
+    },
+    "study-protocol.md": {
+      "sha256": "18681c02acb823d88778af4309a6d1e45309097faee159cd88a43fc584b46ecb",
+      "bytes": 4574
+    }
+  },
+  "programs": 7,
+  "scope": "Exact complete sources, licensed retained data and measured outputs"
+}

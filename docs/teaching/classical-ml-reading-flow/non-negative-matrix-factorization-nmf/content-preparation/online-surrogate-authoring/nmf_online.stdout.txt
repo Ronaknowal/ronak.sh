@@ -1,0 +1,184 @@
+{
+  "scope": "New two-arrival streaming demonstration, no historical campaign replay",
+  "scratch": {
+    "steps": [
+      {
+        "arrival_amounts": [
+          [
+            2.0000000001164153,
+            0.9999999999417923
+          ]
+        ],
+        "dictionary": [
+          [
+            0.9999999999417923,
+            2.9103830453345572e-11,
+            0.9999999999708962
+          ],
+          [
+            0.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "A": [
+          [
+            4.000000000465661,
+            2.0
+          ],
+          [
+            2.0,
+            0.9999999998835847
+          ]
+        ],
+        "B": [
+          [
+            4.000000000232831,
+            2.0000000001164153,
+            6.000000000349246
+          ],
+          [
+            1.9999999998835847,
+            0.9999999999417923,
+            2.999999999825377
+          ]
+        ],
+        "diagnostic": {
+          "batches": 1,
+          "rows_seen": 1,
+          "batch_rows": 1,
+          "rho": 1.0,
+          "encoding_status": "stationary-tolerance",
+          "encoding_iterations": 17,
+          "encoding_projected_gradient": 1.7462298274040222e-10,
+          "dictionary_sweeps": 2,
+          "surrogate_before_without_constant": -7.0,
+          "surrogate_after_without_constant": -7.0,
+          "dictionary_projected_gradient": 0.0
+        }
+      },
+      {
+        "arrival_amounts": [
+          [
+            2.3283086571880334e-10,
+            1.9999999998835845
+          ]
+        ],
+        "dictionary": [
+          [
+            0.9999999999417923,
+            5.820677272827155e-12,
+            0.9999999999941793
+          ],
+          [
+            0.0,
+            1.0000000000558795,
+            0.9999999999441208
+          ]
+        ],
+        "A": [
+          [
+            4.000000000465661,
+            2.0000000004656617
+          ],
+          [
+            2.0000000004656617,
+            4.9999999994179225
+          ]
+        ],
+        "B": [
+          [
+            4.000000000232831,
+            2.000000000582077,
+            6.000000000814908
+          ],
+          [
+            1.9999999998835847,
+            4.999999999708962,
+            6.999999999592546
+          ]
+        ],
+        "diagnostic": {
+          "batches": 2,
+          "rows_seen": 2,
+          "batch_rows": 1,
+          "rho": 1.0,
+          "encoding_status": "stationary-tolerance",
+          "encoding_iterations": 17,
+          "encoding_projected_gradient": 3.4924596548080444e-10,
+          "dictionary_sweeps": 2,
+          "surrogate_before_without_constant": -11.0,
+          "surrogate_after_without_constant": -11.0,
+          "dictionary_projected_gradient": 2.6341441196183177e-11
+        }
+      }
+    ],
+    "query_amounts": [
+      [
+        1.0000000003500222,
+        1.9999999998249884
+      ]
+    ],
+    "query_diagnostic": {
+      "status": "stationary-tolerance",
+      "iterations": 17,
+      "projected_gradient": 3.492464095700143e-10
+    },
+    "query_prediction": [
+      [
+        1.0000000002918146,
+        1.9999999999425682,
+        3.0000000000574314
+      ]
+    ]
+  },
+  "ordinary_distinct_route": {
+    "steps": [
+      {
+        "steps": 1,
+        "dictionary": [
+          [
+            1.0000000105350535,
+            0.0,
+            0.9999999981187406
+          ],
+          [
+            0.0,
+            0.9999999835389796,
+            0.9999999983538981
+          ]
+        ]
+      },
+      {
+        "steps": 2,
+        "dictionary": [
+          [
+            0.9999996537996108,
+            0.0,
+            0.9999998708866715
+          ],
+          [
+            0.0,
+            1.0002228271420335,
+            0.9998332747200691
+          ]
+        ]
+      }
+    ],
+    "n_components": 2,
+    "query_amounts": [
+      [
+        1.0002600177849574,
+        1.9998138986743619
+      ]
+    ],
+    "query_prediction": [
+      [
+        1.00025967149455,
+        2.000259511490002,
+        2.999740367780353
+      ]
+    ],
+    "warnings": []
+  }
+}

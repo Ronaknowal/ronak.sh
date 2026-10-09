@@ -1,0 +1,39 @@
+{
+  "scope": "experiment-tracking-tools-weights-biases-mlflow-neptune",
+  "kind": "author-native-verification",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "win32",
+  "executed": {
+    "tracking_library_bridge.py": {
+      "mlflow": "3.16.1",
+      "wandb": "0.30.0",
+      "numpy": "2.3.5",
+      "portable_run_id": "fefc9fd551cd47d787e3bee9c79bc277",
+      "mlflow_run_id": "66d67910cc3e4dadbba746125dbdf106",
+      "wandb_offline_id": "hln3y6ie",
+      "events_per_run": 21,
+      "initial_loss": 5.5,
+      "final_loss": 0.007440724396525494,
+      "mlflow_full_history_matches": true,
+      "wandb_final_summary_matches": true,
+      "mlflow_retrieved_artifact_matches": true,
+      "artifact_sha256": "11c3417026110fc342d54a2a1828292df5b67ab285aee8b67bbf092c10a56f14",
+      "all_sdk_work_local": true
+    },
+    "store_contracts": {
+      "config_immutability": true,
+      "retry_idempotency": true,
+      "conflict_rejection": true,
+      "nonfinite_negative_rejection": true,
+      "reopen_running_run": true,
+      "terminal_write_rejection": true,
+      "captured_bytes_survive_original_overwrite": true,
+      "corrupt_export_rejection": true
+    }
+  },
+  "source_files": {
+    "public/learn-code/experiment-tracking-tools-weights-biases-mlflow-neptune/portable_run_store.py": "9bf00c470d6e83d9cf17a37add6792a35fff0b49255fb36e41d8c61e803293f8",
+    "public/learn-code/experiment-tracking-tools-weights-biases-mlflow-neptune/tracking_library_bridge.py": "b9e724ad4e467d010deff5f2b15168c0e37cb9411e2c9838dfcd02f27178146a"
+  },
+  "limits": "CPU/local execution. No browser, independent review, accelerator benchmark or remote service validation."
+}

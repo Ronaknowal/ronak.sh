@@ -1,0 +1,17 @@
+.lesson-flow .ring-flow-scenes { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,21.875rem),1fr)); gap:1.5rem; align-items:start; margin:1.5rem 0; }
+.lesson-flow .ring-flow-figure { margin:1.25rem 0; max-width:100%; }
+.lesson-flow .ring-flow-scenes .ring-flow-figure { margin:0; }
+.lesson-flow .ring-flow-figure svg { display:block; width:100%; height:auto; color:var(--text); overflow:visible; }
+.lesson-flow .ring-flow-figure svg text { font-family:var(--font-mono,monospace); font-size:13px; }
+.lesson-flow .ring-flow-figure svg text:not([fill]) { fill:#dedede; }
+.lesson-flow .ring-flow-input { display:flex; flex-direction:column; gap:.4rem; min-width:0; width:100%; }
+.lesson-flow .ring-flow-input input, .lesson-flow .ring-flow-input select { box-sizing:border-box; width:100%; max-width:100%; background:transparent; color:var(--text); border:1px solid var(--border); padding:.55rem; border-radius:3px; font:inherit; }
+.lesson-flow .ring-flow-input option { background:#111; }
+.lesson-flow .ring-flow-input [aria-invalid="true"] { border-color:#f09a68; }
+.lesson-flow .ring-flow-input small { color:#f09a68; }
+.lesson-flow .ring-flow-controls-footer { margin:.75rem 0 1.5rem; }
+.lesson-flow .ring-flow-detail { overflow-wrap:anywhere; }
+.lesson-flow .ring-flow-wide { overflow-x:auto; max-width:100%; }
+.lesson-flow .ring-flow-wide:focus-visible { outline:2px solid #e6bb60; outline-offset:3px; }
+@media (min-width:900px) { .lesson-flow .ring-flow-figure { max-width:43.75rem; } }
+@media (prefers-reduced-motion:reduce) { .lesson-flow .ring-flow-figure * { transition:none; animation:none; } }

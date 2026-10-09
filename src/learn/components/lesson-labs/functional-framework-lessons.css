@@ -1,0 +1,6 @@
+/* Long formulae scroll within these lessons rather than widening the reader. */
+.functional-framework-lesson .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "topicId": "feature-scaling-encoding-imputation",
+  "revision": 5,
+  "acceptedAt": "2026-10-09T15:51:39.755Z",
+  "status": "content-accepted-implementation-not-started",
+  "author": "/root/nmf_content_recovery",
+  "independentReviewer": "/root/ml_successor_independent_review",
+  "acceptanceOwner": "/root",
+  "manuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+    "bytes": 215186,
+    "sha256": "cabb07a552c707930c01b8a9aa91dc93227fb4c1c7fd81d45220441dad3b5db5",
+    "role": "whole manuscript; bounded F1/F2 successor to whole-reviewed predecessor"
+  },
+  "visualSpecifications": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-specifications.md",
+    "bytes": 40852,
+    "sha256": "fac6974a56a32bd052baa1bf55bd9209d70a1b55de66d298368dbd50691065bf",
+    "role": "whole specifications with corrected D37 initialization"
+  },
+  "scope": {
+    "sections": 11,
+    "drawings": 41,
+    "investigations": 16,
+    "teachingProgrammes": 16,
+    "newTeachingProgrammes": 13,
+    "retained": 3,
+    "optionalR": 1,
+    "answerFile": 1,
+    "solvedTasks": 26
+  },
+  "evidence": {
+    "wholeDifferentReview": {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/independent-content-review/whole-content-review.md",
+      "bytes": 18121,
+      "sha256": "f79d38b66db95fe17a5d65c7d739a692a6b2f07eeb5c54f19b1ecf451ff4809d"
+    },
+    "sameBoundedClosure": {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/independent-content-review/F1-F2-closure.json",
+      "bytes": 42729,
+      "sha256": "b5a44480517bdd4aff9bec4624ff1154b5c91bed0ac26900bf3b34efa60f8ef3"
+    },
+    "sameReport": {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/independent-content-review/F1-F2-closure.md",
+      "bytes": 3999,
+      "sha256": "0a1c3d79d4b2b7e0a27a4b1b181ba47f1d417f70a16de07140f96ac2c021aca0"
+    },
+    "correctedHandoff": {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/whole-review-handoff.json",
+      "bytes": 6656,
+      "sha256": "01e38167b9103f2020fb89d525fbefeb416f37c0ffc0d0122e4dd27b97b8fe75"
+    }
+  },
+  "rootReading": "Root read the complete DIFFERENT whole-content report in the preceding continuation, then the entire corrected handoff, SAME closure report and author correction readback, and actual full initialization-through-inference passage, T23 hint/solution and D37 numerical refinement. This composes attributed whole review with the bounded correction; it is not a new Root whole-manuscript reading.",
+  "dispositions": {
+    "F1": "Observed medians2.5/6 and initialized matrix now agree with existing code. Observed row2 a=3, later predictions and source/output pairs preserved.",
+    "F2": "Four adopted process-language paragraphs replaced with direct teaching while conserving mathematical conditions, nine original activities and complete ending."
+  },
+  "currentInputBindings": 72,
+  "rootSourceConditionsBeforeComposition": 481,
+  "limits": [
+    "Content acceptance only; no runtime/native/build/publication acceptance.",
+    "Optional R complete source remains unexecuted.",
+    "Original scientific results, failed attempts, prior independent review and exact predecessor packets remain authoritative in their stated roles.",
+    "No old main, fit, campaign or scientific verifier replayed."
+  ],
+  "nextAction": "Consume the entire accepted packet before private runtime authoring. Implement all41 drawing contracts,16 direct live investigations,16 explained programmes,26 solved tasks and complete file delivery. Different whole runtime review, affected corrections, actual native checks and normal integration remain required."
+}

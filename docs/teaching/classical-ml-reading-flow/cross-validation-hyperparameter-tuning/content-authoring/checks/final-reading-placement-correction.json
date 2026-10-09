@@ -1,0 +1,131 @@
+{
+  "schema": "classical21-final-reading-placement-correction/v1",
+  "scope": "Remove duplicate composition directives and one duplicate role paragraph; correct six-feature/target schema count and make declared stratification masks explicit. Programme bytes and streams unchanged.",
+  "edits": [
+    {
+      "path": "sections/06-real-experiment.md",
+      "before": {
+        "bytes": 9993,
+        "sha256": "ced44f4d47208b4c0d9bc7fdfcf6f4e77e1724a3b52555f3c0a3ec454c1d04b2"
+      },
+      "after": {
+        "bytes": 9413,
+        "sha256": "2a967b6015d84013c2aa99996d16dc17fe19927c1a566e1b40896a31377ef855"
+      },
+      "changes": [
+        {
+          "operation": "remove second placement",
+          "id": "D27",
+          "old": "<!-- Drawing D27: visual-specifications.md#d27. -->\r\n\r\n",
+          "new": ""
+        },
+        {
+          "operation": "remove first placement",
+          "id": "P02",
+          "old": "<!-- Programme P02: insert cv_penguins.py and exact retained displayed stdout here. -->\r\n\r\n",
+          "new": ""
+        },
+        {
+          "operation": "remove duplicated retained-role paragraph",
+          "old": "These are the exact retained source and displayed stdout from the original execution. The source's default outer seed is 41 and inner seed 73. All six candidates use k in {3,5,11}, standard then robust scaling in the saved enumeration. Three outer folds assess the complete six-card, three-inner-fold selector. We inspect its saved arrays in `nested-experiment.json`; none of these original fits has been repeated for this lesson.\r\n\r\n",
+          "new": ""
+        }
+      ]
+    },
+    {
+      "path": "sections/07-risk-and-uncertainty.md",
+      "before": {
+        "bytes": 15948,
+        "sha256": "5fc73c3c8d32e61c57d2db9d905e53d8662d5ae565356fd28f3c87f941d874f2"
+      },
+      "after": {
+        "bytes": 15728,
+        "sha256": "d8c2e78a568e07415adffc2fde4b03b083367a150644bda27b89c16933d9df53"
+      },
+      "changes": [
+        {
+          "operation": "remove second placement",
+          "id": "D31",
+          "old": "<!-- Drawing D31: visual-specifications.md#d31. -->\r\n\r\n",
+          "new": ""
+        },
+        {
+          "operation": "remove second placement",
+          "id": "D32",
+          "old": "<!-- Drawing D32: visual-specifications.md#d32. -->\r\n\r\n",
+          "new": ""
+        },
+        {
+          "operation": "remove second placement",
+          "id": "D34",
+          "old": "<!-- Drawing D34: visual-specifications.md#d34. -->\r\n\r\n",
+          "new": ""
+        },
+        {
+          "operation": "remove second placement",
+          "id": "D35",
+          "old": "<!-- Drawing D35: visual-specifications.md#d35. -->\r\n\r\n",
+          "new": ""
+        }
+      ]
+    },
+    {
+      "path": "sections/08-adaptive-search.md",
+      "before": {
+        "bytes": 15611,
+        "sha256": "5daaf658e2075b626e1dd09cc95b7a34e74ea976bcc18a51ae7fdfa8a8b040c9"
+      },
+      "after": {
+        "bytes": 15357,
+        "sha256": "be074fbeb2d14c5419abeebe6e326cab010467d95eea6af52b28d1e14c9da153"
+      },
+      "changes": [
+        {
+          "operation": "remove second placement",
+          "id": "D36",
+          "old": "<!-- Drawing D36: visual-specifications.md#d36. -->\r\n\r\n",
+          "new": ""
+        },
+        {
+          "operation": "remove second placement",
+          "id": "D37",
+          "old": "<!-- Drawing D37: visual-specifications.md#d37. -->\r\n\r\n",
+          "new": ""
+        },
+        {
+          "operation": "remove second placement",
+          "id": "D40",
+          "old": "<!-- Drawing D40: visual-specifications.md#d40. -->\r\n\r\n",
+          "new": ""
+        },
+        {
+          "operation": "remove first placement",
+          "id": "P03",
+          "old": "<!-- Programme P03: insert cv_optuna.py and exact retained displayed stdout here. -->\r\n\r\n",
+          "new": ""
+        }
+      ]
+    },
+    {
+      "path": "visual-specifications.md",
+      "before": {
+        "bytes": 33512,
+        "sha256": "8897bb3c3535c9d973bfe169cfdd35d014d64e803a073519fde2ad797ca0311c"
+      },
+      "after": {
+        "bytes": 33539,
+        "sha256": "a1ece3093ba701dcdd0177447b1c85b3aab7bbde268ef9945c2c7b303aa67ece"
+      },
+      "changes": [
+        {
+          "old": "horizontal seven-column schema",
+          "new": "horizontal six-column schema"
+        },
+        {
+          "old": "allocates one positive and three negatives to each of three held folds.",
+          "new": "allocates held masks [0,1,2,3], [4,5,6,7] and [8,9,10,11], one positive and three negatives to each."
+        }
+      ]
+    }
+  ]
+}

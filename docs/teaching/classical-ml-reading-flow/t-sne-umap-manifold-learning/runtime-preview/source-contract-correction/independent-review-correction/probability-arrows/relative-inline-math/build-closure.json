@@ -1,0 +1,757 @@
+{
+  "schema": "manifold-relative-inline-math-build-closure/v1",
+  "status": "PASS_ONE_ISOLATED_TOPIC_ONLY_BUILD_SOURCE_MODULE_ARTIFACT_HTTP_IDENTITY",
+  "at": "2026-10-09T15:18:27.266746+00:00",
+  "command": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-command.json",
+    "bytes": 11590,
+    "sha256": "57c559f98d875e05ba75113583574d2720db77cf7c0d1396d36e0eacf96d9c8b"
+  },
+  "prebuildProbe": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/prebuild-probe.json",
+    "bytes": 1726,
+    "sha256": "9af0ec92522fa65caa3ab2cf6fcdb47c53bb1d7378109df405d108179092e84e"
+  },
+  "sourceFreeze": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/author-ready-source.json",
+    "bytes": 55571,
+    "sha256": "dd4458906ff4ac28ca1a6e3f4e7652509f542edeac687c242e19cda90dfde3cf"
+  },
+  "sourceBindings": [
+    {
+      "path": "node_modules/react/cjs/react-jsx-runtime.production.js",
+      "bytes": 976,
+      "sha256": "1e46f15002696985e80c61d47aaa30dabb03c954270a690f5f7dfbbacfa9002b"
+    },
+    {
+      "path": "node_modules/react/jsx-runtime.js",
+      "bytes": 210,
+      "sha256": "b392951a77d0a2e6a6bd017e49d768481ae5b63c4109c6c31f622cf7b2433edc"
+    },
+    {
+      "path": "node_modules/react/cjs/react.production.js",
+      "bytes": 17217,
+      "sha256": "6a3554a5287116df819640334924348287618dcdcd7124a05eb126dcbbecd5f9"
+    },
+    {
+      "path": "node_modules/react/index.js",
+      "bytes": 186,
+      "sha256": "60caffdecbdc5db3bc4ec4e83df9488345ccb271d07533b9210bf5750918d97e"
+    },
+    {
+      "path": "node_modules/scheduler/cjs/scheduler.production.js",
+      "bytes": 10181,
+      "sha256": "679adff761d31e9426604f80c0e99be44a3e6f4c6834b0218ecf0312a67c171f"
+    },
+    {
+      "path": "node_modules/scheduler/index.js",
+      "bytes": 194,
+      "sha256": "145965504d60007bc25486ab930b0367867dcd5d579ccd343c148d69349a7cfb"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom.production.js",
+      "bytes": 6655,
+      "sha256": "7a5e56724be242e34ddc14f9d0dc7fc6a32f1367ae994f02d3699b00c085eff4"
+    },
+    {
+      "path": "node_modules/react-dom/index.js",
+      "bytes": 1359,
+      "sha256": "ba1a3e33489f868371561777607e3ee5091df0f7ea3f1a10f789d6b86e4c1505"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom-client.production.js",
+      "bytes": 536016,
+      "sha256": "764ffa6adc2c9b02b4dc00f4a58ef13d050e7825898bd9e5dc808d3a3f9d4bb9"
+    },
+    {
+      "path": "node_modules/react-dom/client.js",
+      "bytes": 1373,
+      "sha256": "00e348ab3d6bc2eef908345d0bc4e008c95bcfecec060dfda5c4967953761396"
+    },
+    {
+      "path": "node_modules/react-router/dist/development/chunk-UVKPFVEO.mjs",
+      "bytes": 360344,
+      "sha256": "621b9bfd0f8b6bcd5970b75f8a67d67c5c8fc65d72931f0e9169d2246893e5b0"
+    },
+    {
+      "path": "src/learn/data/generated/navigation.js",
+      "bytes": 942846,
+      "sha256": "fa181a95f1400250b22e75826478a285977937610e9e7efedad8696a70af460b"
+    },
+    {
+      "path": "src/learn/data/catalogue.js",
+      "bytes": 477,
+      "sha256": "639cde33208e3e71fcdb4669eafdcaa71abbff1646ae01cbf1f77e623c78d693"
+    },
+    {
+      "path": "src/learn/components/PlaceholderContent.jsx",
+      "bytes": 2665,
+      "sha256": "3e963ae06cb932213259acd5849841816be92f97a1e364b9c5912c509de624a0"
+    },
+    {
+      "path": "src/learn/styles.js",
+      "bytes": 1539,
+      "sha256": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+    },
+    {
+      "path": "src/learn/components/LevelBadge.jsx",
+      "bytes": 629,
+      "sha256": "325fd3eb0b155780333620b584b7a62315fb9647625afb18313ac9c6e16a9647"
+    },
+    {
+      "path": "src/learn/components/lesson-navigation.js",
+      "bytes": 1362,
+      "sha256": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b"
+    },
+    {
+      "path": "src/learn/components/lesson-guide.css",
+      "bytes": 2967,
+      "sha256": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2"
+    },
+    {
+      "path": "src/learn/components/LessonGuide.jsx",
+      "bytes": 2925,
+      "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+    },
+    {
+      "path": "src/learn/components/LessonOpening.jsx",
+      "bytes": 1112,
+      "sha256": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-loader.js",
+      "bytes": 198,
+      "sha256": "c8cb5c008cc405174011d5930691568ea57af3005cce2194908d25f55dd5c170"
+    },
+    {
+      "path": "src/learn/hooks/useTopicResource.js",
+      "bytes": 991,
+      "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+    },
+    {
+      "path": "src/learn/components/LessonBoundary.jsx",
+      "bytes": 992,
+      "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+    },
+    {
+      "path": "src/learn/components/topic-content.css",
+      "bytes": 2992,
+      "sha256": "8ef6856306e028433ad10d8d18cdaf37362ba9db1a17ab8fbe1e1b76d9ce4fb0"
+    },
+    {
+      "path": "src/learn/components/lesson-endings.css",
+      "bytes": 5203,
+      "sha256": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6"
+    },
+    {
+      "path": "src/learn/components/content/code-downloads.js",
+      "bytes": 1709,
+      "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+    },
+    {
+      "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+      "bytes": 4857,
+      "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+    },
+    {
+      "path": "src/learn/components/content/lesson-code.css",
+      "bytes": 4491,
+      "sha256": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283"
+    },
+    {
+      "path": "src/learn/data/projects/typed-decision-model/metadata.js",
+      "bytes": 3158,
+      "sha256": "9253c1486af2f5a083dd6ad4fafae6eb9d644caca89d22aad4d7ed39313ef1a4"
+    },
+    {
+      "path": "src/learn/data/projects/catalogue.js",
+      "bytes": 610,
+      "sha256": "7b35afa5ba219c9a535ab7c3dc81683cbaf218ae1bd73fd315e4a9bc3ca5562c"
+    },
+    {
+      "path": "src/learn/components/TopicContent.jsx",
+      "bytes": 7106,
+      "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+    },
+    {
+      "path": "src/learn/learning-base.css",
+      "bytes": 19925,
+      "sha256": "595f1446ed9d4e5f7d2710b796be26527b58e78796a34d0bcdf4ffffe0717d97"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/manifold-reader.css",
+      "bytes": 5047,
+      "sha256": "d72d2fb98f747cbd2582a4710b138d57e2edf71e14adbf75032d65f5d03ac22f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-entry.jsx",
+      "bytes": 1122,
+      "sha256": "5c4171eb90643062eb8ee4c365ace26e2e256eaa2f17ebae133247d101d7dfe4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/index.html",
+      "bytes": 272,
+      "sha256": "6b7e4e39e44df32eb5ac4e18045441f1812c0e2ae8b9e6c59da0bd6844e125f4"
+    },
+    {
+      "path": "src/learn/components/content/Headings.jsx",
+      "bytes": 1405,
+      "sha256": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f"
+    },
+    {
+      "path": "src/learn/components/content/Prose.jsx",
+      "bytes": 549,
+      "sha256": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff"
+    },
+    {
+      "path": "src/learn/components/content/Code.jsx",
+      "bytes": 3120,
+      "sha256": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e"
+    },
+    {
+      "path": "src/learn/components/content/RemoteCodeBlock.jsx",
+      "bytes": 2455,
+      "sha256": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.min.css",
+      "bytes": 23804,
+      "sha256": "23aefa0850248a16478b9f55d6b67028f74cc0b46b82b24dc22af068acaa4170"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.mjs",
+      "bytes": 597917,
+      "sha256": "e1b9ee63435797f929ceb2faf1defa4e13785d0b93f6330fa263c0dce07f2158"
+    },
+    {
+      "path": "src/learn/components/content/Math.jsx",
+      "bytes": 931,
+      "sha256": "427a466aaa33b2733c7b87cf9c2c8e2ed338a2f234764590b69fafc1b5952459"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/lesson-flow.css",
+      "bytes": 5093,
+      "sha256": "ebd046da719336c4e3f83ad0073c280ea6da5564de9bb00c80ee60ac9290b2b5"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/LessonFlow.jsx",
+      "bytes": 2572,
+      "sha256": "6ecee56b6be29529599bb05053925c752be919d8d94e0c8630c762ae5fc2e7dd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+      "bytes": 8447,
+      "sha256": "91be13c046661ec8b6f597f849bdae7059645fdedb57ab7dcc317f22c11c5336"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+      "bytes": 17524,
+      "sha256": "6abb3bfb866dc4f0443d9dbef5c8c6262c0cef5160c7972becdaf279b2f0debd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+      "bytes": 9250,
+      "sha256": "c5ba7766028d8bdde7b8009af07418f9799561b95513a48bcd5565b609d58afb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/ManifoldOperationObjects.jsx",
+      "bytes": 20424,
+      "sha256": "b4be3e35c75e93ae6bb68e6b7b5796a8104929992db8b54ab4b9ae3a9bdc6c08"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/calculated-inputs.json",
+      "bytes": 125183,
+      "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/audit_saved_neighbors.txt",
+      "bytes": 1034,
+      "sha256": "7882072ba4dc6b427fbced8853e8500346fd6a0f8c53120a7598b382b33e21a7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+      "bytes": 1098,
+      "sha256": "ddb035ee95bcfb601f5eb168af517db8b13da7b753ab028f36c80bce468e24d4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+      "bytes": 25482,
+      "sha256": "f2b4662de64d17dbaa07a4aab84b1e7d580f4acb08419d05dadebe7cf001d3e7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/AffinityFigures.jsx",
+      "bytes": 19602,
+      "sha256": "7747310c4415076ba6ed590228b21ab71f5fb9e1179b1fc5ec58a99d9f279203"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-geometry.mjs",
+      "bytes": 3443,
+      "sha256": "5f05fdb29982dbb214ca05a67215b40f79e46f3ad26d0246c3bc84db2e6f2f22"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+      "bytes": 39319,
+      "sha256": "0653febab66a69abfa4ca3c20167636dfe2bf9d8707268474b4a3794f0d318d9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldFigures.jsx",
+      "bytes": 464,
+      "sha256": "b17d994feab9ac0096c809e4fa8da16e20bbed708aa281f6b4728b9d105137df"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+      "bytes": 15754,
+      "sha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/PrivateFiles.jsx",
+      "bytes": 740,
+      "sha256": "9663b5c8640759251d885bfe3a1e46b98b296262c2c57b69d4e195a6b62d639e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-lesson.jsx",
+      "bytes": 124308,
+      "sha256": "14437087228af766dc00f8f572cb4abce3e1c632a80ea6ab82f786a18911c117"
+    }
+  ],
+  "moduleIds": [
+    "\u0000vite/modulepreload-polyfill.js",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react/jsx-runtime.js?commonjs-module",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react/cjs/react-jsx-runtime.production.js?commonjs-exports",
+    "node_modules/react/cjs/react-jsx-runtime.production.js",
+    "node_modules/react/jsx-runtime.js",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react/jsx-runtime.js?commonjs-es-import",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react/index.js?commonjs-module",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react/cjs/react.production.js?commonjs-exports",
+    "node_modules/react/cjs/react.production.js",
+    "node_modules/react/index.js",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react/index.js?commonjs-es-import",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react-dom/client.js?commonjs-module",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react-dom/cjs/react-dom-client.production.js?commonjs-exports",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/scheduler/index.js?commonjs-module",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/scheduler/cjs/scheduler.production.js?commonjs-exports",
+    "node_modules/scheduler/cjs/scheduler.production.js",
+    "node_modules/scheduler/index.js",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react-dom/index.js?commonjs-module",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react-dom/cjs/react-dom.production.js?commonjs-exports",
+    "node_modules/react-dom/cjs/react-dom.production.js",
+    "node_modules/react-dom/index.js",
+    "node_modules/react-dom/cjs/react-dom-client.production.js",
+    "node_modules/react-dom/client.js",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react-dom/client.js?commonjs-es-import",
+    "node_modules/react-router/dist/development/chunk-UVKPFVEO.mjs",
+    "\u0000C:/Personal Projects and files/Portfolio/Portfolio/node_modules/react-dom/index.js?commonjs-es-import",
+    "src/learn/data/generated/navigation.js",
+    "src/learn/data/catalogue.js",
+    "src/learn/components/PlaceholderContent.jsx",
+    "src/learn/styles.js",
+    "src/learn/components/LevelBadge.jsx",
+    "src/learn/components/lesson-navigation.js",
+    "src/learn/components/lesson-guide.css",
+    "src/learn/components/LessonGuide.jsx",
+    "src/learn/components/LessonOpening.jsx",
+    "\u0000vite/preload-helper.js",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-loader.js",
+    "src/learn/hooks/useTopicResource.js",
+    "src/learn/components/LessonBoundary.jsx",
+    "src/learn/components/topic-content.css",
+    "src/learn/components/lesson-endings.css",
+    "src/learn/components/content/code-downloads.js",
+    "src/learn/components/content/LessonCodeDownloads.jsx",
+    "src/learn/components/content/lesson-code.css",
+    "src/learn/data/projects/typed-decision-model/metadata.js",
+    "src/learn/data/projects/catalogue.js",
+    "src/learn/components/TopicContent.jsx",
+    "src/learn/learning-base.css",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/manifold-reader.css",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-entry.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/index.html",
+    "src/learn/components/content/Headings.jsx",
+    "src/learn/components/content/Prose.jsx",
+    "src/learn/components/content/Code.jsx",
+    "src/learn/components/content/RemoteCodeBlock.jsx",
+    "node_modules/katex/dist/katex.min.css",
+    "node_modules/katex/dist/katex.mjs",
+    "src/learn/components/content/Math.jsx",
+    "src/learn/components/lesson-labs/lesson-flow.css",
+    "src/learn/components/lesson-labs/LessonFlow.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/ManifoldOperationObjects.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/calculated-inputs.json",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/data/digits-300.csv?raw",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/outputs/audit_saved_neighbors.txt?raw",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/AffinityFigures.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-geometry.mjs",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldFigures.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/PrivateFiles.jsx",
+    "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-lesson.jsx"
+  ],
+  "moduleMap": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/private-module-map.json",
+    "bytes": 18538,
+    "sha256": "a00ef06b6164e2274c2f2dafef8435c18bb42cd1b4986168f60ea73eb9b2c22a"
+  },
+  "manifest": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/.vite/manifest.json",
+    "bytes": 16736,
+    "sha256": "50aaf8b50ecf95917cdacd755155ee489cb12447d687d18d511c3a1da2aeca1b"
+  },
+  "files": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/.vite/manifest.json",
+      "bytes": 16736,
+      "sha256": "50aaf8b50ecf95917cdacd755155ee489cb12447d687d18d511c3a1da2aeca1b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/index-BM4YIMnw.css",
+      "bytes": 33150,
+      "sha256": "319ba54062176232c2370b62fca141ae62c6fe98be4cc0bee88e9774a3486d77"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/index-CZH7soXf.js",
+      "bytes": 1139499,
+      "sha256": "435e44f01730c555ee5ef6eb503f5012d89c8b664cf9c5c8c3b70761be31663e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+      "bytes": 28076,
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_AMS-Regular-DMm9YOAa.woff",
+      "bytes": 33516,
+      "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_AMS-Regular-DRggAlZN.ttf",
+      "bytes": 63632,
+      "sha256": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf",
+      "bytes": 12368,
+      "sha256": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff",
+      "bytes": 7716,
+      "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2",
+      "bytes": 6912,
+      "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff",
+      "bytes": 7656,
+      "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+      "bytes": 6908,
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf",
+      "bytes": 12344,
+      "sha256": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf",
+      "bytes": 19584,
+      "sha256": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff",
+      "bytes": 13296,
+      "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2",
+      "bytes": 11348,
+      "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Fraktur-Regular-CB_wures.ttf",
+      "bytes": 19572,
+      "sha256": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2",
+      "bytes": 11316,
+      "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff",
+      "bytes": 13208,
+      "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Bold-Cx986IdX.woff2",
+      "bytes": 25324,
+      "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Bold-Jm3AIy58.woff",
+      "bytes": 29912,
+      "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Bold-waoOVXN0.ttf",
+      "bytes": 51336,
+      "sha256": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2",
+      "bytes": 16780,
+      "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf",
+      "bytes": 32968,
+      "sha256": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff",
+      "bytes": 19412,
+      "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Italic-3WenGoN9.ttf",
+      "bytes": 33580,
+      "sha256": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Italic-BMLOBm91.woff",
+      "bytes": 19676,
+      "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2",
+      "bytes": 16988,
+      "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+      "bytes": 26272,
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Regular-Dr94JaBh.woff",
+      "bytes": 30772,
+      "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Main-Regular-ypZvNtVU.ttf",
+      "bytes": 53580,
+      "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf",
+      "bytes": 31196,
+      "sha256": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2",
+      "bytes": 16400,
+      "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff",
+      "bytes": 18668,
+      "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Math-Italic-DA0__PXp.woff",
+      "bytes": 18748,
+      "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Math-Italic-flOr_0UB.ttf",
+      "bytes": 31308,
+      "sha256": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+      "bytes": 16440,
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf",
+      "bytes": 24504,
+      "sha256": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2",
+      "bytes": 12216,
+      "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff",
+      "bytes": 14408,
+      "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2",
+      "bytes": 12028,
+      "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff",
+      "bytes": 14112,
+      "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf",
+      "bytes": 22364,
+      "sha256": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf",
+      "bytes": 19436,
+      "sha256": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff",
+      "bytes": 12316,
+      "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2",
+      "bytes": 10344,
+      "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Script-Regular-C5JkGWo-.ttf",
+      "bytes": 16648,
+      "sha256": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Script-Regular-D3wIWfF6.woff2",
+      "bytes": 9644,
+      "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Script-Regular-D5yQViql.woff",
+      "bytes": 10588,
+      "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size1-Regular-C195tn64.woff",
+      "bytes": 6496,
+      "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf",
+      "bytes": 12228,
+      "sha256": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+      "bytes": 5468,
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf",
+      "bytes": 11508,
+      "sha256": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+      "bytes": 5208,
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size2-Regular-oD1tc_U0.woff",
+      "bytes": 6188,
+      "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size3-Regular-CTq5MqoE.woff",
+      "bytes": 4420,
+      "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf",
+      "bytes": 7588,
+      "sha256": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size4-Regular-BF-4gkZK.woff",
+      "bytes": 5980,
+      "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
+      "bytes": 4928,
+      "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+      "bytes": 10364,
+      "sha256": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
+      "bytes": 16028,
+      "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2",
+      "bytes": 13568,
+      "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf",
+      "bytes": 27556,
+      "sha256": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/manifold-lesson-B9oJ1bDw.js",
+      "bytes": 690130,
+      "sha256": "b96276a30e88b2c46c033ee2e8afd4c023f412b3595e4f4b7c9eb403129ef972"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/assets/manifold-lesson-BNo8c7Xp.css",
+      "bytes": 32312,
+      "sha256": "11d1509fd0ab537f8aac52d080e3ccceef62b412ff1c8d78e22b72e0d8067ecf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/index.html",
+      "bytes": 366,
+      "sha256": "f43643989c1fd5de3e0712556db189c392e9b3bd24e141c1a136464f909becca"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/build-private/private-module-map.json",
+      "bytes": 18538,
+      "sha256": "a00ef06b6164e2274c2f2dafef8435c18bb42cd1b4986168f60ea73eb9b2c22a"
+    }
+  ],
+  "fileCount": 66,
+  "totalBytes": 3003679,
+  "actualHttp": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/http-check.json",
+    "bytes": 52626,
+    "sha256": "bc6c15cca1201427e51dd1e6516af1bd9f65167634cdf26d92254eb30787721e"
+  },
+  "servedArtifacts": 65,
+  "servedPayloads": 35,
+  "publicDir": false,
+  "foreignLessonBodies": [],
+  "priorBuildFilesStillExact": 66,
+  "warningRetained": "Actual Vite chunk-size warning remains; this correction makes no performance certification.",
+  "oldScientificMainsFitsCampaignsReplayed": false,
+  "nativeOrNormalAcceptanceClaimed": false
+}

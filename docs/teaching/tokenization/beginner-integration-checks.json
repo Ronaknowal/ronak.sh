@@ -1,0 +1,299 @@
+{
+  "scope": "Beginner-intuition revision of the same three tokenization lessons; no fourth lesson authorized",
+  "revision": 2,
+  "status": "complete",
+  "completedAt": "2026-09-28T17:10:26.325Z",
+  "productionBase": "http://127.0.0.1:4197",
+  "reviewBoundary": "Full independent heuristic reading and rendered-image review, not observed novice testing. User acceptance remains separate.",
+  "teachingChanges": [
+    "Concrete input, pieces and numerical labels before terminology",
+    "Stepwise operations and successful examples before notation, failure cases and optimized programs",
+    "Local buildup throughout advanced branches",
+    "Meaningful coloured identities with literal labels and separate selection outline"
+  ],
+  "checks": [
+    {
+      "command": "scripts/verify-tokenization-teaching-examples.py",
+      "status": "passed",
+      "detail": "Actual displayed Python and Tokenizers examples executed; new weighted-merge, encoding, posterior/EM and shared-prefix DP fixtures checked"
+    },
+    {
+      "command": "node scripts/verify-learning-artifacts.mjs",
+      "status": "passed",
+      "detail": "1461 topics,29 modules,253 publication mappings,482 outlines;0 stale files"
+    },
+    {
+      "command": "node scripts/verify-content-import-boundary.mjs",
+      "status": "passed",
+      "detail": "1442 files;240 direct math imports; no transitive generic-barrel math dependency"
+    },
+    {
+      "command": "node node_modules/vite/bin/vite.js build",
+      "status": "passed",
+      "detail": "Initial complete revision33.85 seconds; final scoped control repair32.08 seconds. Existing navigation-chunk warning retained, no threshold changed"
+    },
+    {
+      "command": "node scripts/verify-site-build.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "node scripts/verify-tokenization-browser.cjs",
+      "status": "passed",
+      "detail": "All3 lessons;8 live labs;27 independent figures;1366/768/390/320 layouts;keyboard/pointer/reset,copy feedback+clipboard,canonical downloads,internal topic links and no runtime failures"
+    },
+    {
+      "command": "node scripts/verify-tokenization-interactions.cjs",
+      "status": "passed",
+      "detail": "All8 mechanism-specific changed/empty/invalid investigations and200% root-font layouts at768CSS pixels"
+    },
+    {
+      "command": "node scripts/verify-learning-load-boundaries.cjs --topics <selected3>",
+      "status": "passed",
+      "detail": "Only selected lesson body loads; hub/planned routes/navigation/error recovery checked"
+    },
+    {
+      "command": "Final vocabulary control capture and scoped load-boundary follow-up",
+      "status": "passed",
+      "detail": "A clipped six-digit field found by image review was widened within this topic; singular piece labels corrected. Both labs recaptured atdesktop320and200%font,206000/256000 inputs inspected. Final vocabulary loading and site-build checks passed. Earlier full browser images are explicitly pre-repair for these two controls; all other source/mechanism evidence remains unchanged."
+    },
+    {
+      "command": "node scripts/verify-lesson-delivery.mjs",
+      "status": "passed",
+      "detail": "199 records and phase/source-staleness guards"
+    },
+    {
+      "command": "node scripts/build-curriculum-inventory.mjs",
+      "status": "passed"
+    },
+    {
+      "command": "node scripts/verify-repository-files.mjs",
+      "status": "passed"
+    }
+  ],
+  "reusedEvidence": {
+    "reason": "Numerical engines, all10 public programs and their datasets unchanged by exact SHA256; retain earlier native/model campaigns rather than claim rerunning them. New teaching fixtures and presentation were independently checked.",
+    "sources": {
+      "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+      "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-provenance.json": "58047ab67319ff4ad1511508bf8f3cd96afa40ac129e070454e9203b76733741",
+      "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+      "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+      "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/tokenizer_libraries.py": "febb16e52cd5a0a5dec8039db1aab6cff85bcf6c3306b57bbb98300887cbdfc3",
+      "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/unigram_model.py": "5a3ea845833594ca5c7aaed1fb4d63ef92c0ed7d70d2af35436505e985b95d1d",
+      "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19",
+      "public/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py": "086862e9a9fb0db1bb9a76f66e07ac2c5fb4344bd75708e46e940213932be8bf",
+      "public/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py": "0a25011f005042c45965cf93e4d7825d5e4d8449c9470f7519cfdd705487cd12",
+      "public/learn-code/byte-level-tokenization-token-free-models/byte_patches.py": "ca5d1ecf947365bc8147d8e89e172649165ebcc8cc89d6c9349473b0e27a148e",
+      "public/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py": "1fe7bbeb0376588e78ffc3dacfae1e34a845a3cef8864ab33a208b32de7e5206",
+      "src/learn/data/byte-tokenization-model.js": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11",
+      "public/learn-code/vocabulary-design-multilingual-tokenization/flores_sample_provenance.md": "bf8f04425503a6a2e3dd92e804debf8c35a78a955b20a73d09e77da6e834de22",
+      "public/learn-code/vocabulary-design-multilingual-tokenization/flores_tokenizer_sample.json": "3d5295ea2bebf100a0f95463f20fd0386665c84b8604fd6f65c7e9a58790a0d7",
+      "public/learn-code/vocabulary-design-multilingual-tokenization/multilingual_sentencepiece.py": "69f3f7ad0d289c330f3a5705bbb4349d1fca7064f43b3551ac5f42fd1a1010c9",
+      "public/learn-code/vocabulary-design-multilingual-tokenization/vocabulary_audit.py": "c3ea7bfb5219b1c166d8b7780ee99e01019592f209b50c846642739b3a7bf937",
+      "public/learn-code/vocabulary-design-multilingual-tokenization/vocabulary_migration.py": "4f05343523f2d23dd2d5ae1f1aa872b76cf9f2ff6b99eb97db9f0b658c2060d0",
+      "src/learn/data/multilingual-vocabulary-models.js": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9"
+    },
+    "earlierReceipt": "docs/teaching/tokenization/integration-checks.json"
+  },
+  "conservation": {
+    "unchangedOtherLedgerEntries": 196,
+    "unchangedOtherLedgerEntriesSha256": "4613ddee35eb0c840aec20cc284800a3b72fd4a9fd31efb4ab10604082c9fb68",
+    "previousRevisionSha256": {
+      "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram": "51b2ed1c93f0bf5d7584d31aa99f36d3d0b4c190b86e5db3ce5f818a5fd268ec",
+      "byte-level-tokenization-token-free-models": "33cca242728f2f63803a1c5fd3e597a0f1cac5dfdd858e5d592c82729d722b9c",
+      "vocabulary-design-multilingual-tokenization": "25a702c03119eca73824c6ac46ae66ebacae611df81259a6349456fd7f5038fb"
+    },
+    "unchangedManifestSha256": "5c1f41e16c073129d5c33fe3c2b1164102b6f11c1a04bc8c5680a77e4c5f0ec4",
+    "originals": [
+      {
+        "path": "docs/teaching/tokenization/original/tokenization.jsx",
+        "sha256": "f89e1d61bf2f47923d740aceae4e712227a5f5ecfe8a1459beafa5158222f5c5",
+        "exactBytesPreserved": true
+      },
+      {
+        "path": "docs/teaching/tokenization/original/byte-level-tokenization.jsx",
+        "sha256": "6e620e6777ee5f5e3ed2b75f45dd9ecfaa6e065a17445540f80b6e4d273df29b",
+        "exactBytesPreserved": true
+      },
+      {
+        "path": "docs/teaching/tokenization/original/vocabulary-multilingual.jsx",
+        "sha256": "e5a5a7bc5a8719280eb39b8f0b6bfd7de6409e653d04ac9775e42994fda2c896",
+        "exactBytesPreserved": true
+      }
+    ]
+  },
+  "topicStates": [
+    {
+      "id": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+      "revision": 2,
+      "content": "complete",
+      "implementation": "complete"
+    },
+    {
+      "id": "byte-level-tokenization-token-free-models",
+      "revision": 2,
+      "content": "complete",
+      "implementation": "complete"
+    },
+    {
+      "id": "vocabulary-design-multilingual-tokenization",
+      "revision": 2,
+      "content": "complete",
+      "implementation": "complete"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+      "figures": 8,
+      "labs": 3,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 8
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 8
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 8
+        }
+      ]
+    },
+    {
+      "id": "byte-level-tokenization-token-free-models",
+      "figures": 8,
+      "labs": 3,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 8
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 8
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 8
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-design-multilingual-tokenization",
+      "figures": 11,
+      "labs": 2,
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 11
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 11
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 11
+        }
+      ]
+    }
+  ],
+  "sourceSha256": {
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-provenance.json": "58047ab67319ff4ad1511508bf8f3cd96afa40ac129e070454e9203b76733741",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/tokenizer_libraries.py": "febb16e52cd5a0a5dec8039db1aab6cff85bcf6c3306b57bbb98300887cbdfc3",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/unigram_model.py": "5a3ea845833594ca5c7aaed1fb4d63ef92c0ed7d70d2af35436505e985b95d1d",
+    "src/learn/data/topics/tokenization.jsx": "a68e15987a4d6cabe90b4daaaf886dc6d3fc4d49c31ad3521880f9c4b6f3adc1",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/beginner-revision.md": "07cfdf6342b8c3c8572302a922226522785e646a20d09611755fb1a72aa9e41a",
+    "src/learn/components/LessonGuide.jsx": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb",
+    "src/learn/components/LessonOpening.jsx": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348",
+    "src/learn/components/content/Callout.jsx": "810f228309aa7c3e616fcbbb87bc76e768e1ef5c599e57699a9595bee873e758",
+    "src/learn/components/content/Code.jsx": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e",
+    "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+    "src/learn/components/content/Headings.jsx": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f",
+    "src/learn/components/content/LessonCodeDownloads.jsx": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720",
+    "src/learn/components/content/Math.jsx": "427a466aaa33b2733c7b87cf9c2c8e2ed338a2f234764590b69fafc1b5952459",
+    "src/learn/components/content/Prose.jsx": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff",
+    "src/learn/components/content/RemoteCodeBlock.jsx": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290",
+    "src/learn/components/content/code-downloads.js": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d",
+    "src/learn/components/content/index.js": "c7a7e0b98f308758c789b286ad74af82d762e48b29982506ef9a1307ce947c4f",
+    "src/learn/components/content/lesson-code.css": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283",
+    "src/learn/components/lesson-labs/LessonElements.jsx": "8bb65cf49315753531a00f639d497f493c75ac964f722462cfe606f38f3854d2",
+    "src/learn/components/lesson-labs/NeuralLessonElements.jsx": "97a3e3b4bd5053a9dde53cc60485b2878700e349195a7c2e0e06c836f6e081e4",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "21e947f8a453d4deebc9855ac8e9937583dbcd285f699fd4b49dd7f2b22083c0",
+    "src/learn/components/lesson-labs/lessons.css": "83fec316b8b2c2665fba9ac98e68fbb961d90e7e6570bc416aed9f9f97369764",
+    "src/learn/components/lesson-labs/neural-lesson-elements.css": "b73cd8e309a490eed0357cdeb650218c24e7259de4a1a74856189d9699da1e63",
+    "src/learn/components/lesson-labs/neural-lesson-neutral.css": "d4273f8dee9703647c6e54762c7f0e79ccaf1d2e868a31a3f9f7a82aa2758063",
+    "src/learn/components/lesson-labs/subword-tokenization-lessons.css": "a55a6d3b8503e630f6c83d3776a4958313cd0ed43fd40867dd91bf55510cef24",
+    "src/learn/components/lesson-navigation.js": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b",
+    "src/learn/components/topic-content.css": "8ef6856306e028433ad10d8d18cdaf37362ba9db1a17ab8fbe1e1b76d9ce4fb0",
+    "src/learn/data/curriculum/blueprints/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram.js": "5bc61ad38a12ecb602fd069ccbaa01f53d51508688e0e741e5c86312b91ccfb4",
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19",
+    "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/beginner-review.md": "322034ec77601aec83654304a100f6a6e044dc30e09ad568c4efa8e901d37d21",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/beginner-review.json": "732117087869b617a8a636748bf330c68ae5ecaa23bce80bcb9c03d810f3ab7f",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/beginner-visual-review.md": "a9ea54ebaef0b1c24b3899eab431751b3f5a31ff6d382ff95009b22fb986db51",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/beginner-visual-review.json": "a1927b68e7e6f3ff0b03db71dda6b1fbd946925a35e0ddb4e1d7ef1314745deb",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py": "086862e9a9fb0db1bb9a76f66e07ac2c5fb4344bd75708e46e940213932be8bf",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py": "0a25011f005042c45965cf93e4d7825d5e4d8449c9470f7519cfdd705487cd12",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_patches.py": "ca5d1ecf947365bc8147d8e89e172649165ebcc8cc89d6c9349473b0e27a148e",
+    "public/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py": "1fe7bbeb0376588e78ffc3dacfae1e34a845a3cef8864ab33a208b32de7e5206",
+    "src/learn/data/topics/byte-level-tokenization.jsx": "822f22264b6040c743f5e43947a3f479b5ace6b7e9505eab72c4e8871eb5cd8b",
+    "docs/teaching/tokenization/byte-level-tokenization-token-free-models/beginner-revision.md": "fd7f6e4010d3aa6a99cf87a78332f008760fb8a408eb568f0032f9edcd49ec72",
+    "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx": "c5c80b077ee117d589745e77f14a57eaeb8a60b4a061fa0a5030768cebdc979d",
+    "src/learn/components/lesson-labs/byte-tokenization-labs.css": "51036aae87d935239fad27cd09c5b3ad9e91f1fc9aabbd8cc35ced994031aa1b",
+    "src/learn/data/byte-tokenization-model.js": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11",
+    "src/learn/data/curriculum/blueprints/byte-level-tokenization-token-free-models.js": "62c23256103c7ad3916e9a0399701783b1eec55e2ae241bf8250f6a65ad14698",
+    "docs/teaching/tokenization/byte-level-tokenization-token-free-models/beginner-review.md": "b41cf7949264b2a32137e06827c4af3cfaecac5fde6737b42803b2a74c296865",
+    "docs/teaching/tokenization/byte-level-tokenization-token-free-models/beginner-review.json": "6be129046ab47cd3f85928db1e480c5261628b82fc150a2297ed6898784e2b36",
+    "docs/teaching/tokenization/byte-level-tokenization-token-free-models/beginner-visual-review.md": "6396b7e8e6149f7aa92757f11a7527a64dceecb2a245b1082369c52db2d01af3",
+    "docs/teaching/tokenization/byte-level-tokenization-token-free-models/beginner-visual-review.json": "c24f4e8323936b5d866ba935f8a66ab2b6d720f586cf27544ac55d2dc7c71b58",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/flores_sample_provenance.md": "bf8f04425503a6a2e3dd92e804debf8c35a78a955b20a73d09e77da6e834de22",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/flores_tokenizer_sample.json": "3d5295ea2bebf100a0f95463f20fd0386665c84b8604fd6f65c7e9a58790a0d7",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/multilingual_sentencepiece.py": "69f3f7ad0d289c330f3a5705bbb4349d1fca7064f43b3551ac5f42fd1a1010c9",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/vocabulary_audit.py": "c3ea7bfb5219b1c166d8b7780ee99e01019592f209b50c846642739b3a7bf937",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/vocabulary_migration.py": "4f05343523f2d23dd2d5ae1f1aa872b76cf9f2ff6b99eb97db9f0b658c2060d0",
+    "src/learn/data/topics/vocabulary-multilingual.jsx": "ef58a0363b09da309607dfe51389e95bfa0766d71663adb93da7a23badd81b59",
+    "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/beginner-revision.md": "383028b6fced7212ca5526cee6e23062855eceee0084564247a29cbc76b1d32b",
+    "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "9e5baba0f2466ec9b55b3cb55fb01331945f1c9891c653b11a21e9956dd0e9ea",
+    "src/learn/components/lesson-labs/NeuralNumberControl.jsx": "b21ebb44a9baa18e87792d6a04ceb3ef13380806c4a43b65c09ec9594bbf425d",
+    "src/learn/components/lesson-labs/multilingual-vocabulary.css": "d3c43adda0ffaf2c5799fa532cf170a63ec2e81fbc98f374aa44845e57135385",
+    "src/learn/components/lesson-labs/neural-number-control.css": "add042fdb3f86e63c8ea3e0c67a12ea1bf1d3bcb3deb612193b5834ed953bc09",
+    "src/learn/data/curriculum/blueprints/vocabulary-design-multilingual-tokenization.js": "b6c698ed26f60813e8ed549ee991045a266cd8882f82c6017a064c9d91e2eca5",
+    "src/learn/data/multilingual-vocabulary-models.js": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9",
+    "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/beginner-review.md": "6b087b27322f8218420c7088502cbf71dd7855e7f2ed4dd966d520049eeab1ff",
+    "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/beginner-review.json": "a04001ee7ff5e32156ae95d11bee9e8fdfc8f5b633b8a6098d39551e903292f2",
+    "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/beginner-visual-review.md": "2f04a887fdf32a5e48e3397c290a0305c530f0b0ae930e1f073cc38818c82ca2",
+    "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/beginner-visual-review.json": "1335330b87f036fbba7414f1743b4201b488998688e021a09c6e79b296adf994",
+    "scripts/verify-tokenization-teaching-examples.py": "fccdd7d95aab43a5c7a6cb12e9fa2d4b67995c323db5f3b5e810d50f35537959",
+    "scripts/verify-tokenization-browser.cjs": "158f3507c6d47b86ce19bccbee15e8dd21983f00b8e566151aa672f2863a4ec5",
+    "scripts/verify-tokenization-interactions.cjs": "f24c888dda91824acf47aa82229ae1f957bcd9246bc0f19a311764413987c66b",
+    "scripts/verify-learning-load-boundaries.cjs": "df119905b8d3f9db16642f9886aea21ecec85b16facaa12916859dd5676199e4",
+    "skills/lesson-authoring/references/teaching.md": "5f021656a6ea3a5ada96be5d7026b643de90bf8c08c67d0564bd2cda29a5dfd8",
+    "skills/lesson-authoring/references/visuals-and-labs.md": "089b3959b3145cc803904cffef1215e4348a4da625e01be05e6bdece857fac4a",
+    "skills/lesson-authoring/references/review.md": "13b113f611c08ac40839d53d949b1c5e2fbdb198de4cb88f72576f89920e6333",
+    "docs/teaching/tokenization/beginner-build.log": "d38d4b69f74c1d03d641b903f427a5daaff7ba626e6a75009a7fff7b02f92a40",
+    "docs/teaching/tokenization/beginner-final-build.log": "50137ee4eeb0b4fc8df22aff9fd4e8c3d3283845a48a1645c98cc81cd72e8276",
+    "docs/teaching/tokenization/beginner-teaching-examples.json": "dfd353faa7e55069a796e9c7cdb89f888b286d9fd78628d0b9e41354800c3f1d",
+    "docs/teaching/tokenization/beginner-browser-checks.json": "68991125c2756e0bb96be60052411dc72155d06fd0f5a17d3cb0b86b7a300595",
+    "docs/teaching/tokenization/beginner-interaction-checks.json": "645bb45559eb3a87004c565efebe5c39beed1c47f8440a92c16e628fded0a4a2",
+    "docs/teaching/tokenization/beginner-load-boundaries.json": "0886333738530bb3ea848c7d9b5161331e7068cb4716a59bb07a0a6ef418f472",
+    "docs/teaching/tokenization/beginner-final-load-boundaries.json": "70164151361ba49e056b020b0ec455a72f956a61478b4a6c8131f3007a5b1fef",
+    "docs/teaching/tokenization/beginner-control-layout-checks.json": "4a3a9fa54b46981782f814c7bc251a1e67659d44969f600130c0108e8e62f50d",
+    "docs/teaching/tokenization/beginner-screenshots/index.json": "bf201961af0dbfb3f4e0e1ea0742271f85ac1a59133acc5d83d9328bb1ca0fae"
+  },
+  "retention": "Final desktop/narrow/changed captures retained. Redundant intermediate viewport and early development captures, local baseline copies and temporary integration scripts removed after conservation checks. Earlier frozen receipts and all user-requested original backups preserved. No unrelated work changed."
+}

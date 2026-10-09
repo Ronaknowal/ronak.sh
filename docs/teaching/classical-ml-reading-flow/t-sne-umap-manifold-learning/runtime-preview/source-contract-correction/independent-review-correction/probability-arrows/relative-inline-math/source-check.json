@@ -1,0 +1,62 @@
+{
+  "schema": "manifold-relative-inline-math-source-conservation/v1",
+  "status": "PASS_EXACT_PREFIX_PLUS_ONE_RELATIVE_FONT_RULE",
+  "at": "2026-10-09T15:13:14.446254+00:00",
+  "predecessorBuilt": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/author-ready-built-source.json",
+    "bytes": 54292,
+    "sha256": "abef1eca722fe99e1991cb8107f59db97a12264fc8af1f383faabdbf88213a0f"
+  },
+  "predecessorCss": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/manifold-reader.css",
+    "bytes": 4893,
+    "sha256": "f1c1c17ca945b4d8c6d18673176b58ca4f67d62a86e765a8facd934a959d0c0c"
+  },
+  "overlayCss": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/manifold-reader.css",
+    "bytes": 5047,
+    "sha256": "d72d2fb98f747cbd2582a4710b138d57e2edf71e14adbf75032d65f5d03ac22f"
+  },
+  "addedBytes": 154,
+  "exactAddedCss": "\n/* Preserve the default 13px inline math size and scale it with root text. */\n.manifold-reader span:has(>span.katex) { font-size: .8125rem !important; }\n",
+  "sourceRenderer": {
+    "path": "src/learn/components/content/Math.jsx",
+    "bytes": 931,
+    "sha256": "427a466aaa33b2733c7b87cf9c2c8e2ed338a2f234764590b69fafc1b5952459"
+  },
+  "lesson": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-lesson.jsx",
+    "bytes": 124308,
+    "sha256": "14437087228af766dc00f8f572cb4abce3e1c632a80ea6ab82f786a18911c117"
+  },
+  "actualInlineMathSourceOccurrences": 239,
+  "sourceOnlyWidthsClaimed": false,
+  "rootActualExploratory": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/root-live-and-reading-review.json",
+    "bytes": 7536,
+    "sha256": "6ec0a5f4cfe0b59b6c06bf3c96b0e2fb3caa7061c042cbffae28e0312d7c900c"
+  },
+  "rootExploratoryFixture": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/build-private/enlarged-relative-math-root32.html",
+    "bytes": 527,
+    "sha256": "805eb06d8e39c61d18e230a753b3010cc91f6d6a3f7ba0f9ea3dc4964753bc66"
+  },
+  "invariants": [
+    "All4893 predecessorCSS bytes exact prefix; ordinary/code wrapping and no-inline-scrollbox correction conserved.",
+    "Only direct span-to-span.katex wrappers target InlineMath; MathBlock div/katex-display unchanged.",
+    "13px at root16 and26px at root32 by exact .8125rem arithmetic; !important overrides shared inline13px without editing shared renderer.",
+    "No added layout, scroll, overflow, clipping, text shrink, formula, data, model, geometry, manuscript or science change.",
+    "All66 predecessor build artifacts and all earlier current/content/delivery source bindings exact."
+  ],
+  "inverse": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/css-inverse.patch",
+    "bytes": 441,
+    "sha256": "7466a1ce9e34cbe0448c4b5154620d86d03db59733ab8ff23f6182deae25870d"
+  },
+  "forward": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/css-delta.patch",
+    "bytes": 441,
+    "sha256": "d4c1deefe957eb4e192b884b1794f5f532ff635cb15e3fb10c008e40c02d1cb3"
+  },
+  "rootPaintStillRequiredForNewBuild": true
+}

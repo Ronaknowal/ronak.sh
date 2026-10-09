@@ -1,0 +1,41 @@
+/* Topic-owned probability marks; teaching sits directly in the lesson flow. */
+.probability-distributions-lesson { --flow-accent: #edc267; --flow-value: #edc267; overflow-wrap: anywhere; }
+.probability-drawing { display: block; width: 100%; max-width: 36rem; height: auto; overflow: visible; margin-inline: auto; }
+.probability-drawing text { fill: #ded5bf; font: 15px ui-monospace, monospace; }
+.probability-axis { fill: none; stroke: #89867e; stroke-width: 1; }
+.probability-axis text { stroke: none; fill: #ded5bf; }
+.probability-branch { fill: none; stroke: #edc267; stroke-width: 2; }
+.probability-comparison { fill: none; stroke: #97bfca; stroke-width: 2; stroke-dasharray: 6 4; }
+.probability-residual { fill: none; stroke: #ded5bf; stroke-width: 1.5; stroke-dasharray: 2 4; }
+.probability-node { fill: #191919; stroke: #ded5bf; stroke-width: 1.5; }
+.probability-marked-node { fill: #edc26720; stroke: #edc267; stroke-width: 3; }
+.probability-open-point { fill: #191919; stroke: #97bfca; stroke-width: 1.5; }
+.probability-unavailable-node { fill: none; stroke: #89867e; stroke-width: 1.5; stroke-dasharray: 2 3; }
+.probability-comparison-fill { stroke: #97bfca; stroke-dasharray: 3 3; stroke-width: 1; }
+.probability-label-halo { paint-order: stroke; stroke: #191919; stroke-width: 5; stroke-linejoin: round; }
+.lesson-flow .probability-inline-figure { margin-block: 1.5rem; }
+.probability-two { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; gap: 1.5rem; }
+.probability-two > div { min-width: 0; }
+.probability-two p { overflow-wrap: anywhere; }
+.probability-event-regions { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); margin-block: 1rem; border: 1px solid #89867e; }
+.probability-region { min-height: 7rem; padding: .65rem; border-inline-end: 1px solid #89867e; }
+.probability-region:last-child { border-inline-end: 0; }
+.probability-region > span { display: block; color: #b9b9b9; font-size: .9rem; margin-bottom: .8rem; }
+.probability-region.in-a { border-top: 3px solid #edc267; }
+.probability-region.in-b { border-bottom: 3px dashed #97bfca; }
+.probability-outcomes { display: flex; flex-wrap: wrap; gap: .55rem; }
+.probability-outcome { display: inline-grid; place-items: center; min-width: 2.1rem; min-height: 2.1rem; border: 1px solid #ded5bf; border-radius: 50%; color: #ded5bf; font-variant-numeric: tabular-nums; }
+.probability-retained { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-block: 1.25rem; }
+.probability-outcome.selected { border: 3px solid #edc267; color: #edc267; }
+.probability-outcome.comparison { border: 2px dashed #97bfca; }
+.probability-distributions-lesson .flow-controls .flow-choice { min-width: 0; }
+.probability-distributions-lesson .flow-controls button { min-width: 2.5rem; min-height: 2.75rem; }
+.probability-normal-units .lesson-table-wrap { max-width: 100%; overflow-x: auto; }
+.probability-normal-units table { width: 30rem; min-width: 30rem; table-layout: fixed; font-size: .875rem; overflow-wrap: normal; }
+.probability-normal-units th, .probability-normal-units td { white-space: nowrap; font-size: inherit; }
+.probability-normal-units th:first-child { width: 10rem; }
+.probability-normal-units th:nth-child(2), .probability-normal-units th:nth-child(3), .probability-normal-units th:nth-child(4) { width: 4rem; }
+.probability-normal-units th:last-child, .probability-normal-units td:last-child { width: 8rem; white-space: normal; }
+.probability-normal-units caption { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@container (max-width: 38rem) { .probability-two { grid-template-columns: minmax(0,1fr); } .probability-event-regions { grid-template-columns: repeat(2,minmax(0,1fr)); } .probability-region:nth-child(2) { border-inline-end: 0; } }
+@container (max-width: 19rem) { .probability-event-regions { grid-template-columns: minmax(0,1fr); } .probability-region { border-inline-end: 0; border-bottom: 1px solid #89867e; } }

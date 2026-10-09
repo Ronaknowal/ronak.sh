@@ -1,0 +1,34 @@
+{
+  "schema": "private-manifold-harness-isolation-source-check/v1",
+  "status": "PASS_SOURCE_ISOLATION_CALLBACKS_NOT_BUILD_OR_NATIVE",
+  "assertions": [
+    "Private config parses, intercepts before Vite ordinary resolution and preserves strict private settings",
+    "Foreign actual body/import-map guards fail while shared catalogue/navigation metadata remains allowed",
+    "Nineteen prior sources remain exact and the original config is preserved as exact predecessor bytes"
+  ],
+  "sourceBindings": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite.config.mjs",
+      "bytes": 3974,
+      "sha256": "03d2436f376e2ddb45faafa77569e60b9bebba9116e2a2190d358eab5debe89a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-harness-isolation.mjs",
+      "bytes": 4094,
+      "sha256": "4707dce16abb58c7119078caf200f2008a6ceac986325fa1ac555d9e2cdd3ce4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/config-before-isolation.txt",
+      "bytes": 1941,
+      "sha256": "88c1da96d3c4aa659fa3aea94da1875d33bf8cbaa46a040769883adf62f40ca0"
+    }
+  ],
+  "exactPriorCheckpoint": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-checkpoint.json",
+    "bytes": 8549,
+    "sha256": "1d13bda9cb7b59cb306cd40eba274753116feca728f0f8d676960b12080984ce"
+  },
+  "qualification": "Actual Vite installed ordering was read: pre user plugins precede vite:resolve; normal plugins follow. Source callback checks only; successor manifest verification remains required.",
+  "scientificCampaignReplayed": false,
+  "nativeWindowsPersonallyViewed": []
+}

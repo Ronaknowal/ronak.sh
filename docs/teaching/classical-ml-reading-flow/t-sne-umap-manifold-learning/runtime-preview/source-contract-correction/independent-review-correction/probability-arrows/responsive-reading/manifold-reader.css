@@ -1,0 +1,66 @@
+:root { color-scheme: dark; font-family: system-ui,sans-serif; background: #0b0b0b; color: #ddd; }
+body { margin: 0; }
+* { box-sizing: border-box; }
+.manifold-private-shell { max-width: 1080px; margin: auto; padding: 1.5rem; }
+.manifold-private-label { color: #e2b55a; font-size: .9rem; }
+.manifold-reader { --manifold-muted: #a2a4aa; min-width: 0; }
+.manifold-reader figure { margin: 1.25rem 0; }
+.manifold-scenes { display: flex; flex-wrap: wrap; align-items: start; gap: 1.5rem; }
+.manifold-scenes > * { min-width: 0; flex: 1 1 21rem; max-width: 100%; }
+.manifold-scene svg { width: 100%; max-width: 36rem; display: block; height: auto; overflow: visible; fill: #d3d5db; }
+.manifold-scene svg text { font-size: 15px; font-family: system-ui,sans-serif; }
+.manifold-axis { stroke: #81858c; stroke-width: 1; }
+.manifold-reader figcaption, .manifold-axis-label { color: #b5b6bc; line-height: 1.6; font-size: .95rem; }
+.manifold-key { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; list-style: none; padding: 0; line-height: 1.6; }
+.manifold-table { max-width: 100%; overflow-x: auto; padding-bottom: .7rem; margin: 1rem 0; }
+.manifold-table table { border-collapse: collapse; min-width: 100%; font-size: .9rem; line-height: 1.6; }
+.manifold-table caption { text-align: left; margin-bottom: .65rem; color: #ddd; }
+.manifold-table th, .manifold-table td { padding: .6rem .75rem; text-align: left; border-bottom: 1px solid #343434; vertical-align: top; }
+.manifold-table th { font-weight: 550; color: #ddd; }
+.manifold-table td { color: #bdbdbd; }
+.manifold-bar-row { margin: .7rem 0; }
+.manifold-bar-axis { height: .7rem; margin-top: .4rem; background: #292a2d; }
+.manifold-bar-axis > span { display: block; height: 100%; }
+.manifold-digits { display: flex; flex-wrap: wrap; gap: .7rem; }
+.manifold-digit { flex: 0 1 5rem !important; min-width: 4.2rem; max-width: 7rem; margin: .5rem 0 !important; }
+.manifold-digit svg { display: block; width: 100%; }
+.manifold-digit figcaption { font-size: .85rem; }
+.manifold-exact { flex: 1 1 16rem; min-width: 0; }
+.manifold-exact label { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+.manifold-exact output { overflow-wrap: anywhere; }
+.manifold-reader input, .manifold-reader select { max-width: 100%; min-width: 0; font: inherit; }
+.manifold-reader input[type=text] { width: 100%; background: #181818; border: 1px solid #707070; padding: .45rem; color: #f3f3f3; }
+.manifold-reader input[type=range] { width: 100%; accent-color: #e2b55a; }
+.manifold-reader select, .manifold-reader button { background: #202020; color: #ddd; border: 1px solid #626262; padding: .5rem .7rem; border-radius: .2rem; font: inherit; }
+.manifold-reader :focus-visible { outline: 2px solid #e2b55a; outline-offset: 3px; }
+.manifold-reader [role=alert] { color: #ffb8a5; }
+.manifold-interval { height: 1.2rem; display: flex; width: 100%; margin: 1rem 0; }
+.manifold-data-flow, .manifold-anatomy { display: flex; flex-direction: column; align-items: stretch; gap: 1.2rem; line-height: 1.8; }
+.manifold-matrix-shape, .manifold-allocation > div { display: flex; flex-direction: column; gap: .7rem; }
+.manifold-matrix-stripes { background: repeating-linear-gradient(0deg,transparent 0,transparent 1.1rem,#454545 1.1rem,#454545 1.15rem); border-left: 2px solid #a2a4aa; border-right: 2px solid #a2a4aa; padding: .9rem; text-align: center; }
+.manifold-matrix-stripes strong { display: block; color: #e2b55a; font-weight: 500; }
+.manifold-network { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.manifold-allocation { display: flex; flex-wrap: wrap; gap: 2rem; }
+.manifold-allocation > div { flex: 1 1 12rem; }
+.manifold-buffer { border-top: 1px solid #8c9099; border-bottom: 1px solid #8c9099; padding: .8rem 0; }
+.manifold-source-role { color: #a3a4aa; font-size: .9rem; line-height: 1.7; }
+.manifold-reader .neural-equation { max-width: 100%; overflow-x: auto; }
+.manifold-reader .katex { font-size: 1em; }
+.manifold-reader .katex-display { margin: 1rem 0; }
+.manifold-reader .flow-lab { border: 0; background: none; padding: 1rem 0; }
+.manifold-reader .flow-controls { flex-wrap: wrap; align-items: end; gap: 1rem; }
+@media(max-width:768px) { .manifold-scenes { display: block; } .manifold-scenes > * { margin-bottom: 1.5rem; } }
+@media(max-width:480px) { .manifold-private-shell { padding: .8rem; } .manifold-table th,.manifold-table td { padding: .5rem; } .manifold-reader .flow-controls { display: flex; flex-direction: column; align-items: stretch; } .manifold-reader .manifold-exact { flex-basis: auto; } }
+@media(prefers-reduced-motion:reduce) { .manifold-reader * { animation: none !important; transition: none !important; } }
+
+/* Bounded responsive reading: preserve mathematical tokens and existing sizes. */
+.manifold-reader p { min-width: 0; overflow-wrap: anywhere; }
+.manifold-reader p code { overflow-wrap: anywhere; }
+.manifold-reader p span:has(> .katex) {
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+  overflow: auto;
+  overflow-wrap: normal;
+  vertical-align: middle;
+}

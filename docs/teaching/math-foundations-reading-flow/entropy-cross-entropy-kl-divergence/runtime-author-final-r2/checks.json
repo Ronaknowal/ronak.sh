@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "name": "reference slices reflow to one available-width column",
+      "pass": true,
+      "width": 309
+    },
+    {
+      "name": "endpoint zero entropy and unavailable finite eta",
+      "pass": true
+    },
+    {
+      "name": "768 root32 document contains",
+      "pass": true
+    },
+    {
+      "name": "390 root32 document contains",
+      "pass": true
+    },
+    {
+      "name": "font restored",
+      "pass": true
+    }
+  ],
+  "images": [
+    "E26-desktop-final",
+    "E32-desktop-final",
+    "E31-root32-right-final",
+    "E30-root32-right-final",
+    "E40-root32-right-final",
+    "E45-reference-root32-final",
+    "E45-endpoint-root32-final",
+    "E45-endpoint-result-root32-final"
+  ],
+  "buildBindingsSha256": "df9fad6aeeee59776bcda5c3c4634564060c19d9e3fea707115d8f55b4920344",
+  "scope": "Final r7 CSS grid-only continuation from r6. Prior r6 interaction and payload checks apply unchanged; no model replay."
+}

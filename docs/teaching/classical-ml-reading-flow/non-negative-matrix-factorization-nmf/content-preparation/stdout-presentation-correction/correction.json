@@ -1,0 +1,1267 @@
+{
+  "status": "BOUNDED_COMPLETE_OUTPUT_PRESENTATION_CORRECTION_PENDING_AUTHOR_READ_AND_DIFFERENT_WHOLE_REVIEW",
+  "author": "/root/nmf_content_recovery",
+  "created": "2026-10-09T14:30:46.507Z",
+  "authority": "Root explicitly authorized bounded missing-output insertions using exact retained stdout and adjacent explanation; no scientific replay.",
+  "prior": {
+    "manuscript": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson.md",
+      "bytes": 430287,
+      "sha256": "1d828562c404a70a2372eed3a821651ab8817738124dc9e4d0880d01d66b186f"
+    },
+    "template": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson-template.md",
+      "bytes": 81056,
+      "sha256": "f4b92946790435c26a5aea1622b08f65998bb759a063c325719c29361b3b9167"
+    },
+    "composition": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\section-composition.json",
+      "bytes": 2679,
+      "sha256": "27c9274fa3f0170206d929dc24f49fe2a34c4f11cfaebe36185a833bdfdb64a7"
+    },
+    "assembly": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\partial-content-assembly.json",
+      "bytes": 11948,
+      "sha256": "b14e9ae09ba852c970ced579f75f17260ff21aa39447d7a66092daff718c09ba"
+    },
+    "handoff": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\whole-review-handoff.json",
+      "bytes": 19193,
+      "sha256": "6c2d7c22efe0a89a30d417b1a52c4c6c7b97d07e64d904c14dd92f65698932ca"
+    }
+  },
+  "current": {
+    "manuscript": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson.md",
+      "bytes": 436494,
+      "sha256": "b6f882e2405b324fa377c07d7fa38bf00b94acb77a2ccc4d8e9630d25c3af445"
+    },
+    "template": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson-template.md",
+      "bytes": 85885,
+      "sha256": "0cbefeea4b1679c007a99af42b9f63b0c088ea922085e6a7294b863786aef913"
+    },
+    "composition": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\section-composition.json",
+      "bytes": 2771,
+      "sha256": "54ffea6be93d5f0f4919adbf3296dd2170bcf26c53ec10ecc8ebdaaa7ce7ab23"
+    },
+    "assembly": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\partial-content-assembly.json",
+      "bytes": 12040,
+      "sha256": "8d094912860f24106d9ccc7e9171bf276d3f5f7129cff6c87d5f94792a00d20e"
+    }
+  },
+  "source": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\stdout-presentation-correction\\compose-output-placements.mjs",
+    "bytes": 11615,
+    "sha256": "15d60ea436529e73375cc5459e710db3170879f976e3cf4d866d8233ef94e6bd"
+  },
+  "fullBindingManifest": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\whole-composition-receipt.json",
+    "bytes": 123980,
+    "sha256": "eb551b68b3a760baca80e56cdec41c01b3d8badabea865dba5c35afdfb7b6c26"
+  },
+  "placements": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_arrays.stdout.txt",
+      "bytes": 213,
+      "sha256": "a29980714874ff3c5e0f5b4b4238acf99a3e998cc36e9e49bccc8a7fec164009"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_coordinate.stdout.txt",
+      "bytes": 525,
+      "sha256": "c9f6c935d3dbeb5754943c046637556734f20c8eb00356118b7e83c929dc468e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_nnls.stdout.txt",
+      "bytes": 277,
+      "sha256": "d985954fd0fd74ca4ef4ed504c7403fc0f43c0ed1db8b28dfff89f5f2b3f4051"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_multiplicative.stdout.txt",
+      "bytes": 405,
+      "sha256": "2463a81a7757d551e9521c24e6eb58589a6b76df839efb1400a09c7262e2cf58"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\multiplicative-kl-demo-correction\\positive-kl.stdout.txt",
+      "bytes": 222,
+      "sha256": "43fb77d25dc6c9bcdf8bc60de5b6eb89228990dcec35d59fa923b9c5d2360b47"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_beta_mm.stdout.txt",
+      "bytes": 526,
+      "sha256": "87ab2d9faf5f1e8e1874ece88664b70ec1cedab2f84c19cc43fb27a850053a55"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\initialization-main.stdout.txt",
+      "bytes": 875,
+      "sha256": "fc0ee263d36478e372b32b4f97d973468935691a1ced9e3595962006f9c60ef5"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\penalties-masks-main.stdout.txt",
+      "bytes": 784,
+      "sha256": "024907ee70452af2c13057d2e535ed3c02c2a78b195dd1578ed5711899ab1156"
+    }
+  ],
+  "sectionEleven": {
+    "original": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\section-eleven.md",
+      "bytes": 34763,
+      "sha256": "176127f2cef2adb19e89025e11e3f1c2db73c8bebb28a443447874c085084c38"
+    },
+    "successor": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\stdout-presentation-correction\\section-eleven.md",
+      "bytes": 36146,
+      "sha256": "bdb950a807ae06fad1b3118184a7694d1ce95d23b75d365b5001d7d62ac18afe"
+    },
+    "insertion": "The complete retained stdout of the penalized/masked demonstration is shown below. This execution preceded the later loss-only correction that streams the same included-cell residual calculation without copying the full mask at each diagnostic. The current source above includes that correction; its affected arithmetic/invariance checks are separate evidence, and this historical stream is not a claimed new execution of the changed full main. The two penalized totals, unsupported row, weighted query, undefined missing quality and preserved fitted state retain their original roles.\n\n```text\npenalized_scratch stationary-tolerance (385, 0.00900556233913971, 0.494261430283635, 0.5125335893635355, 1.0158005819863103, 7.801299787459352e-08)\r\npenalized_ordinary_terms {'data': 0.009005563166919542, 'w_penalty': 0.49426140215089437, 'h_penalty': 0.5125336166684864, 'total': 1.0158005819863003}\r\nmasked_fit stationary-tolerance (270, 0.002098482690384905, 0.1468598629035188, 0.14685987368315342, 0.2958182192770571, 4.7228974924398485e-08) unsupported_row [0.0, 0.0]\r\nweighted_l2_amounts [[1.7796610170284894, 0.6779661016508391]] nnls [[1.7796610169491525, 0.677966101694915]] {'status': 'stationary-tolerance', 'iterations': 10, 'projected_gradient': 1.0401918215663756e-10}\r\nmissing_quality None\r\nrejected_fit ValueError old_dictionary_equal True\r\nempty_query_shape (0, 2)\n```\n\n",
+    "beforeMarker": "For a changed-input exercise, keep the single pattern `[1,1]` and row `[2,0]`."
+  },
+  "templateDeltas": [
+    {
+      "label": "array helper full output",
+      "before": "<!-- source:nmf_arrays.py -->",
+      "after": "<!-- source:nmf_arrays.py -->\n\nThe complete recorded output of `python nmf_arrays.py` follows. The reconstruction has three equal rows because this demonstration uses unit amounts; its whole-table squared norm is 12, so the half-square is 6 and the MSE is 12/9. The final two lines separately check an observed zero under KL and included-cell weighting.\n\n```text\nreconstruction [[1.0, 1.0, 2.0], [1.0, 1.0, 2.0], [1.0, 1.0, 2.0]]\nhalf_square 6.0 squared_norm 12.0\nnorm 3.4641016151377544 mse 1.3333333333333333 rmse 1.1547005383792515\nkl_zero_count 2.0\nmasked_half_square 6.0\n```\n\n"
+    },
+    {
+      "label": "coordinate partial block becomes full output",
+      "before": "The recorded first sweep is:\n\n```text\none_sweep_w [[2.   1.  ]\n [2.   2.5 ]\n [0.5  1.75]]\none_sweep_h [[0.72727273 0.13636364 0.86363636]\n [0.         1.05950413 0.94049587]]\none_sweep_half_loss 0.4407588279489105\n```\n\n",
+      "after": "The complete recorded stdout starts with that first sweep, then shows the fitted reconstruction, stopping diagnostic, ordinary comparison and empty-query shape:\n\n```text\none_sweep_w [[2.   1.  ]\n [2.   2.5 ]\n [0.5  1.75]]\none_sweep_h [[0.72727273 0.13636364 0.86363636]\n [0.         1.05950413 0.94049587]]\none_sweep_half_loss 0.4407588279489105\nscratch_status stationary-tolerance last_diagnostic (32, 2.0802680502249785e-13, 6.978495630105192e-07)\nscratch_reconstruction [[1.9999998  0.99999985 3.00000015]\n [1.0000004  3.         4.        ]\n [0.0000004  2.00000006 1.99999994]]\nordinary_half_loss 1.4220050528421603e-14 ordinary_residual_norm 1.6864193149049023e-07\nempty_query_shape (0, 2)\n```\n\n"
+    },
+    {
+      "label": "NNLS full output",
+      "before": "<!-- source:nmf_nnls.py -->",
+      "after": "<!-- source:nmf_nnls.py -->\n\nHere is its complete recorded stdout. The signed unconstrained answer, clipped answer and reoptimized NNLS answer remain separate; the last line compares their constrained predictions with the scratch route.\n\n```text\nunconstrained [-1.0000000000000002, 1.0]\nclipped [[0.0, 1.0]] half_loss 0.5\nnnls [[0.0, 0.49999999999999994]] residual_norm [0.7071067811865472]\nscratch [[0.0, 0.5]] diagnostic {'status': 'stationary-tolerance', 'iterations': 1, 'projected_gradient': 0.0}\nsame_prediction True\n```\n\n"
+    },
+    {
+      "label": "Frobenius retained output and original failure role",
+      "before": "Those small losses are not declarations that the tolerance was reached.",
+      "after": "Those small losses are not declarations that the tolerance was reached.\n\nThis complete retained stdout belongs to the original Frobenius portion of this demonstration. Its subsequent zero-containing KL run refused numerical underflow; that failure and its diagnostic stream remain retained. The current positive shifted KL comparison is shown separately below, so this block does not claim that the changed current full main was rerun.\n\n```text\nH_first [[1.0, 0.0, 1.5], [0.0, 2.0, 1.5]]\nW_using_new_H [[1.1818181818181819, 0.7647058823529411], [1.2727272727272727, 1.411764705882353], [0.5454545454545454, 0.8235294117647058]]\none_sweep_half_loss 0.7436586691069231\nlocked_zero [0.0]\nfrobenius scratch iteration-cap (2000, 4.152819365831646e-07, 0.0012454915810381569)\nfrobenius ordinary_objective 4.135018819456024e-07\nfrobenius empty_shape (0, 2)\n```\n\n"
+    },
+    {
+      "label": "changed positive KL full output",
+      "before": "These results belong to the positive shifted table, not X0 or the recorded digit study.",
+      "after": "These results belong to the positive shifted table, not X0 or the recorded digit study.\n\nThe complete stdout of that separately executed `--loss kl` comparison is:\n\n```text\nkl_observations [[2.5, 1.25, 3.75], [1.5, 3.25, 4.75], [0.5, 2.25, 2.75]]\nkl scratch stationary-tolerance (98, 8.699385011792663e-13, 8.424620688497679e-07)\nkl ordinary_objective 7.58522071895324e-16\nkl empty_shape (0, 2)\n```\n\n"
+    },
+    {
+      "label": "beta full output",
+      "before": "<!-- source:nmf_beta_mm.py -->",
+      "after": "<!-- source:nmf_beta_mm.py -->\n\nRead the complete recorded stdout by beta value. Each branch begins from the same displayed positive observations. The `scratch` tuple reports update count, objective and projected-gradient norm; `ordinary_loss` is recomputed from the ordinary factors, and `empty_query` checks the fixed-dictionary query shape. The cap and tolerance labels are part of the result.\n\n```text\npositive_observations [[2.2, 1.4, 3.0], [1.6, 3.2, 4.0], [0.9, 2.1, 2.5]]\r\nbeta 0 gamma 0.5 scratch iteration-cap (100, 4.0940543179253895e-10, 1.43486400093095e-05)\r\nordinary_loss 2.1957538223522826e-10\r\nempty_query (0, 2)\r\nbeta 1 gamma 1 scratch stationary-tolerance (82, 4.625565310410854e-13, 6.079313524112777e-07)\r\nordinary_loss 5.242448001534579e-16\r\nempty_query (0, 2)\r\nbeta 2 gamma 1 scratch iteration-cap (100, 2.797262337480064e-12, 2.1731613719550694e-06)\r\nordinary_loss 6.424896389551792e-13\r\nempty_query (0, 2)\n```\n\n"
+    },
+    {
+      "label": "initialization full output",
+      "before": "<!-- source:nmf_initialization.py -->",
+      "after": "<!-- source:nmf_initialization.py -->\n\nThe complete recorded stdout makes the starting factors, signed residual, three explicit fills and both ordinary-tool comparisons available together. `changed_entries` prints the two formerly zero coordinates after an H-first sweep. The separate `same_W_first_factor_max_differences` comparison deliberately matches the ordinary tool's W-first order rather than comparing different update orders.\n\n```text\ninitial_w [[2.5298221281347026, 0.0], [1.897366596101028, 1.7888543819998317]]\r\ninitial_h [[2.529822128134704, 1.8973665961010275], [0.0, 1.7888543819998317]]\r\nresidual_x_minus_wh [[1.7999999999999998, -2.399999999999998], [-2.4000000000000017, -8.881784197001252e-16]]\r\nfill 0.0 initial_half_loss 7.379999999999999 one_sweep_half_loss 3.2875310469355865 changed_entries 0.0 0.0\r\nfill 0.1 initial_half_loss 8.252700103359919 one_sweep_half_loss 3.6527134241460826 changed_entries 0.05355590430213354 0.0672734430149865\r\nfill 2.0 initial_half_loss 38.153002067198386 one_sweep_half_loss 12.2792891053915 changed_entries 1.1564835856610367 1.981034877808371\r\nordinary_custom_one_sweep_half_loss 3.2875310469355843\r\nsame_W_first_factor_max_differences 0.0 4.440892098500626e-16\r\nordinary_nndsvda_iterations 10 half_loss 4.630824246410104e-16\r\novercomplete_shapes (2, 3) (3, 2)\n```\n\n"
+    },
+    {
+      "label": "section11 successor include",
+      "before": "<!-- section:penalties-masks-authoring/section-eleven.md -->",
+      "after": "<!-- section:stdout-presentation-correction/section-eleven.md -->"
+    }
+  ],
+  "originalCompositionText": "{\n  \"sections\": [\n    {\n      \"position\": 10,\n      \"manuscript\": \"ordinary-state-authoring/section-ten.md\",\n      \"packet\": \"ordinary-state-authoring/section-ten-handoff.json\",\n      \"wholeSources\": [\n        \"ordinary-state-authoring/ordinary_nmf_lifecycle.py\"\n      ]\n    },\n    {\n      \"position\": 11,\n      \"manuscript\": \"penalties-masks-authoring/section-eleven.md\",\n      \"packet\": \"penalties-masks-authoring/section-eleven-handoff.json\",\n      \"wholeSources\": [\n        \"content-programs/nmf_penalties_masks.py\"\n      ]\n    },\n    {\n      \"position\": 12,\n      \"manuscript\": \"precision-corrections/section-twelve.md\",\n      \"packet\": \"saved-digits-authoring/section-twelve-handoff.json\",\n      \"wholeSources\": [\n        \"content-programs/nmf_factor_alignment.py\",\n        \"content-programs/nmf_saved_digits.py\"\n      ],\n      \"precisionSuccessor\": \"precision-corrections/correction-handoff.json\"\n    },\n    {\n      \"position\": 13,\n      \"manuscript\": \"representation-evaluation-authoring/section-thirteen.md\",\n      \"packet\": \"representation-evaluation-authoring/section-thirteen-handoff.json\",\n      \"wholeSources\": [\n        \"content-programs/nmf_digit_comparison.py\"\n      ]\n    },\n    {\n      \"position\": 14,\n      \"manuscript\": \"identifiability-authoring/section-fourteen.md\",\n      \"packet\": \"identifiability-authoring/section-fourteen-handoff.json\",\n      \"wholeSources\": []\n    },\n    {\n      \"position\": 15,\n      \"manuscript\": \"anchors-authoring/section-fifteen.md\",\n      \"packet\": \"anchors-authoring/section-fifteen-handoff.json\",\n      \"wholeSources\": [\n        \"content-programs/nmf_anchors.py\"\n      ]\n    },\n    {\n      \"position\": 16,\n      \"manuscript\": \"precision-corrections/section-sixteen.md\",\n      \"packet\": \"text-spectra-authoring/section-sixteen-handoff.json\",\n      \"wholeSources\": [\n        \"content-programs/nmf_text_spectra.py\"\n      ],\n      \"precisionSuccessor\": \"precision-corrections/correction-handoff.json\"\n    },\n    {\n      \"position\": 17,\n      \"manuscript\": \"online-surrogate-authoring/section-seventeen.md\",\n      \"packet\": \"online-surrogate-authoring/section-seventeen-handoff.json\",\n      \"wholeSources\": [\n        \"content-programs/nmf_online.py\"\n      ]\n    },\n    {\n      \"position\": 18,\n      \"manuscript\": \"axis-phase-authoring/section-eighteen.md\",\n      \"packet\": \"axis-phase-authoring/section-eighteen-handoff.json\",\n      \"wholeSources\": [\n        \"axis-phase-authoring/nmf_axis_phase.py\"\n      ]\n    },\n    {\n      \"position\": 19,\n      \"manuscript\": \"practice-resources-authoring/section-nineteen.md\",\n      \"packet\": \"practice-resources-authoring/section-nineteen-handoff.json\",\n      \"wholeSources\": []\n    }\n  ]\n}\n",
+  "inverse": {
+    "wholePriorBytesExactlyRecoverable": true,
+    "templatePriorBytesExactlyRecoverable": true,
+    "frozenPriorHandoffUnchanged": true
+  },
+  "streamPresentation": [
+    {
+      "file": "nmf_arrays.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_coordinate.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_nnls.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_multiplicative.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_beta_mm.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "initialization-main.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "lifecycle-main.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "penalties-masks-main.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_factor_alignment.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_saved_digits.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_digit_comparison.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_anchors.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_text_spectra.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_online.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "nmf_axis_phase.stdout.txt",
+      "literalFullOccurrences": 1
+    },
+    {
+      "file": "positive-kl.stdout.txt",
+      "literalFullOccurrences": 1
+    }
+  ],
+  "endingDisposition": "Original section19 text is unchanged. Its complete-stdout delivery claim is now literally true for all16retained streams; historical versus corrected execution roles are qualified beside the relevant blocks.",
+  "conditions": [
+    {
+      "name": "no frozen correction overwrite",
+      "passed": true
+    },
+    {
+      "name": "exact recovered frozen manuscript",
+      "passed": true
+    },
+    {
+      "name": "exact compact recovered handoff",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-twelve.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\README.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\prepare-payload.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\saved-payload.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\check-interpretation.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\interpretation-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_factor_alignment.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\check-new-study.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\new-study-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_digit_comparison.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\section-fourteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\section-fourteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\check-and-freeze.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\check-anchors.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\anchor-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_anchors.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-sixteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\check-transfers.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\transfer-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\check-online.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\online-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_online.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\check-anatomy.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\axis-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\section-nineteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\section-nineteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\ending-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\check-ending.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\correction-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-twelve-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-sixteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\reading-flow-design.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\visual-and-investigation-contracts.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-correction-r1\\programs-and-practice.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\dependencies-and-anchors.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\research-and-claim-disposition.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\visual-contract-additions.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\ending-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_arrays.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_coordinate.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_nnls.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_multiplicative.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_beta_mm.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\initialization-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\lifecycle-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\penalties-masks-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\multiplicative-kl-demo-correction\\positive-kl.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "unique replacement array helper full output",
+      "passed": true
+    },
+    {
+      "name": "unique replacement coordinate partial block becomes full output",
+      "passed": true
+    },
+    {
+      "name": "unique replacement NNLS full output",
+      "passed": true
+    },
+    {
+      "name": "unique replacement Frobenius retained output and original failure role",
+      "passed": true
+    },
+    {
+      "name": "unique replacement changed positive KL full output",
+      "passed": true
+    },
+    {
+      "name": "unique replacement beta full output",
+      "passed": true
+    },
+    {
+      "name": "unique replacement initialization full output",
+      "passed": true
+    },
+    {
+      "name": "unique section11 insertion point",
+      "passed": true
+    },
+    {
+      "name": "new section11 successor absent",
+      "passed": true
+    },
+    {
+      "name": "unique replacement section11 successor include",
+      "passed": true
+    },
+    {
+      "name": "original section11 composition slot expected",
+      "passed": true
+    },
+    {
+      "name": "source-only composer exit0",
+      "passed": true
+    },
+    {
+      "name": "exact original template restored by deltas",
+      "passed": true
+    },
+    {
+      "name": "exact entire prior manuscript recoverable from output deltas",
+      "passed": true
+    },
+    {
+      "name": "original section11 unchanged",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-twelve.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\README.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\prepare-payload.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\saved-payload.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\check-interpretation.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\interpretation-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_factor_alignment.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\check-new-study.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\new-study-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_digit_comparison.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\section-fourteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\section-fourteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\check-and-freeze.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\check-anchors.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\anchor-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_anchors.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-sixteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\check-transfers.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\transfer-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\check-online.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\online-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_online.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\check-anatomy.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\axis-checks.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\section-nineteen.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\section-nineteen-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\ending-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\check-ending.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\correction-handoff.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-twelve-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-sixteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\reading-flow-design.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\visual-and-investigation-contracts.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-correction-r1\\programs-and-practice.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\dependencies-and-anchors.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\research-and-claim-disposition.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\visual-contract-additions.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\ending-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_arrays.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_coordinate.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_nnls.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_multiplicative.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_beta_mm.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\initialization-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\lifecycle-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\penalties-masks-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "retained binding after composition C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\multiplicative-kl-demo-correction\\positive-kl.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "all sixteen complete exact stdout streams displayed once",
+      "passed": true
+    },
+    {
+      "name": "nineteen sections and sixty-six placements retained",
+      "passed": true
+    },
+    {
+      "name": "frozen recovery handoff unchanged",
+      "passed": true
+    }
+  ],
+  "composerExecution": {
+    "exitCode": 0,
+    "stdout": "{\"sections\":19,\"figures\":66,\"wholeSources\":15,\"bytes\":436494,\"status\":\"COMPLETE_MANUSCRIPT_PENDING_AUTHOR_AND_INDEPENDENT_REVIEW\"}\n",
+    "stderr": "",
+    "newPythonMains": 0,
+    "newFits": 0
+  },
+  "reading": "Complete affected sections6/7/8/9/11 and their bridges must be read before successor whole-review handoff. This receipt itself proves only bounded source/delivery conservation.",
+  "phase": "Content in progress; implementation not started; Root owns central phases. No canonical/public/runtime/central edit."
+}

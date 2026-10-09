@@ -1,0 +1,22 @@
+plain work limit
+  x=0.000000 proposed=1.000000 visited=1.000000 f=1.000000 tangent
+  x=1.000000 proposed=0.000000 visited=0.000000 f=2.000000 tangent
+  x=0.000000 proposed=1.000000 visited=1.000000 f=1.000000 tangent
+  x=1.000000 proposed=0.000000 visited=0.000000 f=2.000000 tangent
+  x=0.000000 proposed=1.000000 visited=1.000000 f=1.000000 tangent
+safeguarded work limit
+  x=0.000000 proposed=1.000000 visited=-1.000000 f=3.000000 bisect
+  x=-1.000000 proposed=-4.000000 visited=-1.500000 f=1.625000 bisect
+  x=-1.500000 proposed=-1.842105 visited=-1.842105 f=-0.566701 tangent
+  x=-1.842105 proposed=-1.772827 visited=-1.772827 f=-0.026191 tangent
+  x=-1.772827 proposed=-1.769301 visited=-1.636413 f=0.890759 bisect
+scratch c=2 start=1.5: x=1.414213562 residual=4.44e-16; step small; inspect residual
+brentq x=1.414213562 flag=converged calls=9
+newton x=1.414213562 flag=converged iterations=5
+scratch c=3 start=2: x=1.732050808 residual=4.44e-16; step small; inspect residual
+brentq x=1.732050808 flag=converged calls=9
+newton x=1.732050808 flag=converged iterations=5
+scratch c=2 start=0: x=0.000000000 residual=-2.00e+00; zero derivative
+brentq x=1.414213562 flag=converged calls=9
+repeated root visits: [3.0, 2.0, 1.5] work limit
+secant first=1.333333333 final=1.414213562 residual=4.44e-16; step small; inspect residual

@@ -1,0 +1,9 @@
+arrival / remembered mass / center: 0.0 [1.0] [0.0]
+arrival / remembered mass / center: 6.0 [2.0] [3.0]
+arrival / remembered mass / center: 9.0 [3.0] [5.0]
+cached labels: [0, 0, 0, 1]
+scratch / ordinary centers: [[6.0], [20.0]] [[6.0], [20.0]]
+complete JSON state: {"schema": 1, "dimension": 1, "centers": [[6.0], [20.0]], "masses": [4.0, 1.0]}
+reload masses / centers: [4.0, 1.0] [[6.0], [20.0]]
+exact retained-batch mean squared error: 10.8
+reversed cached batch centers: [[6.0], [20.0]]

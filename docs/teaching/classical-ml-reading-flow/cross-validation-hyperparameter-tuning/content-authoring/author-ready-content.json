@@ -1,0 +1,71 @@
+{
+  "schema": "classical21-author-ready-full-content/v1",
+  "at": "2026-10-09T18:35:31.753958+00:00",
+  "status": "AUTHOR_READY_DIFFERENT_WHOLE_CONTENT_REVIEW_REQUIRED_NO_PHASE_PROMOTION",
+  "release": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/root-design-acceptance-and-writing-release.json",
+    "bytes": 33110,
+    "sha256": "cf76f6d3f142172fb72e50e14cef2df6515a0ac6fb7d0a55f35bfabaae967f93"
+  },
+  "whole_binding_manifest": {
+    "path": "content-binding-manifest.json",
+    "bytes": 33170,
+    "sha256": "3e5b16742380f2c0bd8b9a829a416ce1e6b2361fe6020c44241762ec0e58947f"
+  },
+  "lesson": {
+    "path": "lesson.md",
+    "bytes": 245939,
+    "sha256": "4b6ef39187c7e6656675b9466d7c04d56bdd89b2b8cf9f683c681c2574a5a408"
+  },
+  "author_readback": {
+    "path": "author-review.md",
+    "bytes": 7804,
+    "sha256": "cc7cdb777427406f5bcfccd33aacd132fea46beaefb54bf27a4b68bbd8c40702"
+  },
+  "current_checks": {
+    "path": "checks/whole-content-check.json",
+    "bytes": 66820,
+    "sha256": "11299642ba53efd73a320a7fbd309a1a946439a24483a783c0c0ad80ee43f6d2"
+  },
+  "learner_file_roles": {
+    "path": "programmes/source-role-manifest.json",
+    "bytes": 21887,
+    "sha256": "63f141e7b6cad4e1886018225507683d3669e3c8345bf8be86cc3d7b6cdd3268"
+  },
+  "reviewer_read_list": [
+    "lesson.md",
+    "visual-specifications.md",
+    "investigation-specifications.md",
+    "setup-and-files.md",
+    "programmes/README.md",
+    "programmes/source-role-manifest.json",
+    "retained-inputs.json",
+    "retained-practice-source.jsx",
+    "checks/retained-practice-rendering.json",
+    "research-and-continuity-notes.md",
+    "author-review.md",
+    "checks/whole-content-check.json",
+    "checks/new-programme-semantic-check.json",
+    "checks/final-dependency-capture.json"
+  ],
+  "reading_instruction": "Read the whole literal manuscript including full programmes/streams and solved practice; all 41 actual object contracts and fourteen local investigations; current file/setup/evidence roles; accepted policy/whole design review through the exact Root release. Counts/hashes are supporting evidence, not whole reading.",
+  "roles": {
+    "teaching_programmes": "15: P01/P02/P03 exact retained; P04\u2013P15 new, actually executed",
+    "answer": "A01 optional full source and actual output, separate from teaching",
+    "streams": "Three exact decoded historical stdout literals; thirteen full new stdout/stderr captures; old stderr/history unretained, never empty by inference",
+    "payloads": "52 unique payload entries plus one metadata manifest",
+    "policy": "8fa0 amendment applies P11/D34/L10/N11 and P13/L12; D37 supplied/static table remains separate"
+  },
+  "checks_scope": {
+    "fresh_source_composition_prose_conditions": 492,
+    "retained_prior_semantic_conditions": 154,
+    "freeze_identity_guards": 86
+  },
+  "next_action": "Root assigns DIFFERENT entire content review, then author closes its consolidated findings. Root alone accepts content and releases runtime.",
+  "limits": [
+    "Original author review is not independent",
+    "No actual rendered drawings/labs/Copy/Download/native/novice certification",
+    "No old programme, scientific checker, Penguins or Optuna replay",
+    "Canonical/public/shared/central/handoff untouched"
+  ]
+}

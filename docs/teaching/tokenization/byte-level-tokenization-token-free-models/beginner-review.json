@@ -1,0 +1,90 @@
+{
+  "reviewer": "multilingual_vocabulary",
+  "checkedAt": "2026-09-28T16:51:19.329Z",
+  "scope": "Complete revised byte manuscript, all figures/labs/CSS; new visual arithmetic and source invariants; root browser separate",
+  "status": "No unresolved mandatory source-review finding",
+  "sources": {
+    "src/learn/data/topics/byte-level-tokenization.jsx": "822f22264b6040c743f5e43947a3f479b5ace6b7e9505eab72c4e8871eb5cd8b",
+    "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx": "c5c80b077ee117d589745e77f14a57eaeb8a60b4a061fa0a5030768cebdc979d",
+    "src/learn/components/lesson-labs/byte-tokenization-labs.css": "51036aae87d935239fad27cd09c5b3ad9e91f1fc9aabbd8cc35ced994031aa1b"
+  },
+  "reuseBindings": [
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py",
+      "sha256": "086862e9a9fb0db1bb9a76f66e07ac2c5fb4344bd75708e46e940213932be8bf"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py",
+      "sha256": "0a25011f005042c45965cf93e4d7825d5e4d8449c9470f7519cfdd705487cd12"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_patches.py",
+      "sha256": "ca5d1ecf947365bc8147d8e89e172649165ebcc8cc89d6c9349473b0e27a148e"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py",
+      "sha256": "1fe7bbeb0376588e78ffc3dacfae1e34a845a3cef8864ab33a208b32de7e5206"
+    },
+    {
+      "path": "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py",
+      "sha256": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4"
+    },
+    {
+      "path": "scripts/verify-byte-tokenization.py",
+      "sha256": "70453327bf11619d427aae8b7885292d3de0ee6dd74a5d3bf46f6f4cd00cb40b"
+    },
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "scripts/verify-byte-tokenization-model.mjs",
+      "sha256": "80cb5e14c2e3250e5e6a433b2b35a6b807b86d8c4d70a7d8374ac2d7f6f03846"
+    }
+  ],
+  "checks": {
+    "jsxParse": "both passed",
+    "bytePayload": 233,
+    "cafeBytes": 5,
+    "entropy": [
+      1,
+      0.08079313589591124
+    ],
+    "defaultPatchLengths": [
+      3,
+      3,
+      2
+    ],
+    "changedPatchLengths": [
+      3,
+      1,
+      2,
+      2
+    ],
+    "pooling": [
+      1,
+      4.666666666666667
+    ],
+    "byteTargets": [
+      198,
+      172
+    ],
+    "bitsPerByte": 1.4426950408889634
+  },
+  "finding": {
+    "severity": "optional visual clarity",
+    "issue": "Different-sized causal grid cells weakened count comparison",
+    "resolution": "Author changed all grid tracks to16px and width max-content; largest8x8 grid149px and3x3 grid54px including3px gaps; reviewed current source delta",
+    "browser": "Root final grid rendering pending"
+  },
+  "limits": "Expert reading-path review, not a learner study. No new native training execution or browser test claimed.",
+  "layoutFollowup": {
+    "checkedAt": "2026-09-28T16:53:04.303Z",
+    "scope": "Reviewed byte-bit-pair wrapper and flex CSS: paired payload/packed bytes/hex boxes move independently of the label; internal wrapping remains possible at extreme widths. JSX parse repeated. No numerical data or engine change and no numerical rerun claimed.",
+    "before": {
+      "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx": "c5c80b077ee117d589745e77f14a57eaeb8a60b4a061fa0a5030768cebdc979d",
+      "src/learn/components/lesson-labs/byte-tokenization-labs.css": "51036aae87d935239fad27cd09c5b3ad9e91f1fc9aabbd8cc35ced994031aa1b"
+    }
+  }
+}
+

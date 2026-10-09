@@ -1,0 +1,72 @@
+.attention-lesson.lesson-flow .attention-flow-drawing,
+.attention-flow-prototype .attention-flow-drawing {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 27rem;
+  margin-inline: auto;
+  overflow: visible;
+}
+.attention-flow-drawing text {
+  font: 14px/1.4 var(--font-mono, monospace);
+}
+.attention-flow-drawing text.attention-flow-small {
+  font-size: 11px;
+}
+.attention-flow-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+.attention-lesson.lesson-flow figure[data-figure],
+.attention-flow-prototype figure[data-figure] {
+  border: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+.attention-lesson.lesson-flow figure[data-figure] > figcaption,
+.attention-flow-prototype figure[data-figure] > figcaption {
+  margin-top: .75rem;
+  line-height: 1.8;
+  color: #aaa;
+}
+.attention-flow-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.attention-flow-actions button, .attention-flow-field input, .attention-flow-field select {
+  color: #eee; background: #101010; border: 1px solid #666; border-radius: 3px;
+  padding: .5rem .75rem; font: inherit; min-height: 44px;
+}
+.attention-flow-actions button:hover { border-color: #e2b55a; color: #e2b55a; }
+.attention-flow-actions button:focus-visible, .attention-flow-field input:focus-visible,
+.attention-flow-field select:focus-visible { outline: 2px solid #e2b55a; outline-offset: 3px; }
+.attention-flow-toggle { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; }
+.attention-flow-toggle input { width: 1.2rem; height: 1.2rem; accent-color: #e2b55a; }
+.attention-flow-field { display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+.attention-flow-heatmap { display: grid; grid-template-columns: minmax(4rem, 1fr) repeat(var(--source-count), minmax(3.4rem, 1fr)); overflow-x: auto; font: .75rem/1.6 var(--font-mono, monospace); }
+.attention-flow-heatmap-row { display: contents; }
+.attention-flow-heatmap span { padding: .3rem; text-align: center; border: 1px solid #333; }
+.attention-flow-heatmap .is-selected { outline: 1px solid #eee; outline-offset: -2px; }
+.attention-flow-source-label { color: #77c8da; }
+.attention-flow-coordinate-grids { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); gap: 1.5rem; }
+.attention-flow-coordinate-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); font: .7rem/1.6 var(--font-mono, monospace); }
+.attention-flow-coordinate-grid span { color: #bc9ce7; text-align: center; padding: .35rem .1rem; border: 1px solid #666; overflow-wrap: anywhere; }
+.attention-flow-coordinate-grid .is-selected { outline: 2px solid #eee; outline-offset: -2px; }
+.attention-lesson.lesson-flow .attention-flow-heatmap { max-width: 100%; width: 100%; box-sizing: border-box; }
+.attention-lesson.lesson-flow .attention-flow-token-strip { display: flex; flex-wrap: wrap; padding: 0; gap: .4rem; list-style: none; }
+.attention-flow-token-strip li { display: grid; gap: .3rem; min-width: 2rem; padding: .4rem .6rem; border: 1px solid #bc9ce7; color: #bc9ce7; text-align: center; }
+.attention-flow-token-strip.is-input li { border-color: #77c8da; color: #77c8da; }
+.attention-flow-token-strip li.is-selected { outline: 2px solid #eee; outline-offset: -2px; }
+.attention-flow-token-strip small { color: #bbb; font-size: .75rem; }
+.attention-flow-strip-label { color: #bbb; margin-bottom: .5rem; }
+.attention-flow-padding-bars { display: grid; gap: .7rem; }
+.attention-flow-padding-bars > div { display: grid; grid-template-columns: minmax(4rem, auto) minmax(3rem, 1fr) minmax(3rem, 1fr) minmax(6rem, auto); gap: .5rem; align-items: center; font: .8rem/1.6 var(--font-mono, monospace); }
+.attention-flow-padding-bars > div > div { height: 1rem; background: #222; }
+.attention-flow-padding-bars > div > div > span { display: block; height: 100%; }
+@container recurrent-attention (max-width: 31rem) {
+  .attention-flow-padding-bars > div { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+.attention-lesson.lesson-flow .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+.attention-lesson.lesson-flow .attention-matrix-scroll { border: 0; }

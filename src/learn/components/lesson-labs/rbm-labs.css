@@ -28,3 +28,62 @@
 .rbm-lesson fieldset { min-width: 0; border: 1px solid #444; margin: 1rem 0; padding: .8rem; }
 .rbm-lesson :focus-visible { outline: 2px solid #e6b854; outline-offset: 3px; }
 @media(max-width:600px) { .rbm-figure { padding: .7rem; } .rbm-probability-row { gap: .4rem; grid-template-columns: 2rem minmax(0,1fr) 5rem; } }
+
+/* Topic opt-in: unframed objects and live investigations belong to the prose. */
+.rbm-lesson.lesson-flow .rbm-figure,
+.rbm-lesson.lesson-flow .rbm-probabilities { padding: 0; border: 0; background: none; border-radius: 0; }
+.rbm-lesson.lesson-flow .rbm-figure svg { display: block; margin-inline: auto; }
+.rbm-lesson.lesson-flow .rbm-figure svg text { fill: #eee; font: 15px ui-monospace, monospace; }
+.rbm-lesson.lesson-flow .rbm-figure figcaption,
+.rbm-lesson.lesson-flow .rbm-probabilities figcaption { color: #ccc; font-weight: 400; font-size: .9rem; margin: .7rem 0; }
+.rbm-lesson.lesson-flow .rbm-probability-track i { background: #bd9ee5; }
+.rbm-lesson.lesson-flow .rbm-probability-row { grid-template-columns: 4.5rem minmax(0,1fr) 5.5rem; }
+.rbm-lesson.lesson-flow .flow-slider output { white-space: nowrap; flex-shrink: 0; }
+.rbm-hidden-sums { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 1rem; }
+.rbm-hidden-sums figure { margin: 0; min-width: 0; }
+.rbm-hidden-sums svg { width: 100%; max-width: 280px; display: block; margin: auto; }
+.rbm-hidden-sums svg text { fill: #eee; font: 15px ui-monospace,monospace; }
+.rbm-hidden-sums p { grid-column: 1 / -1; }
+.rbm-statistics { margin: 1.2rem 0; }
+.rbm-statistics > div { margin-block: .7rem; }
+.rbm-statistic-track { height: 12px; background: #222; margin-top: 4px; }
+.rbm-statistic-track i { display: block; height: 100%; }
+.rbm-draw-path, .rbm-particle-path, .rbm-matrix-transpose { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-block: 1rem; }
+.rbm-draw-path > span, .rbm-particle-path > span { min-width: 0; }
+.rbm-particle-path small, .rbm-matrix-transpose small { display: block; color: #bbb; font-size: .8rem; }
+.rbm-binary-state { display: inline-flex; gap: 4px; }
+.rbm-binary-state b { display: grid; place-items: center; border: 1px solid #7cc8db; color: #eee; background: #7cc8db22; width: 1.7rem; height: 1.7rem; border-radius: 50%; }
+.rbm-flow-select { display: grid; gap: .4rem; min-width: 0; flex: 1 1 12rem; }
+.rbm-flow-select select { width: 100%; min-width: 0; max-width: 100%; min-height: 44px; background: #151515; color: #eee; border: 1px solid #555; padding: .5rem; }
+.rbm-matrix-transpose figure { margin: 0; flex: 1; min-width: min(100%,220px); }
+.rbm-matrix-row { display: flex; }
+.rbm-matrix-column { display: grid; max-width: 160px; }
+.rbm-matrix-row > span, .rbm-matrix-column > span { border: 1px solid #e6b854; padding: .6rem; font-variant-numeric: tabular-nums; }
+/* Generic pressed-button paint must not replace the quantitative pixel shade. */
+.rbm-lesson.lesson-flow .rbm-pixels > :is(button,span),
+.rbm-lesson.lesson-flow .rbm-pixels > button[aria-pressed="true"] { background: var(--rbm-pixel-paint); color: inherit; border: 0; padding: 0; min-height: 0; }
+.rbm-lesson.lesson-flow .rbm-pixels > button { min-height: 24px; }
+.rbm-lesson.lesson-flow .rbm-pixels > .rbm-selected { outline: 3px solid #eee; outline-offset: -3px; }
+.rbm-lesson.lesson-flow .rbm-pixels > button:focus-visible { outline: 3px solid #e6b854; outline-offset: -3px; }
+@media (max-width:600px) {
+  .rbm-lesson.lesson-flow .rbm-probability-row { grid-template-columns: 4rem minmax(0,1fr) 5rem; gap: .4rem; }
+  .rbm-lesson.lesson-flow .rbm-probability-row strong { font-size: 12px; }
+  .rbm-lesson.lesson-flow .rbm-plot-size { min-width: 0; }
+}
+
+.rbm-draw-ruler { margin: 1rem 0; }
+.rbm-draw-ruler svg { width: 100%; max-width: 280px; display: block; }
+.rbm-draw-ruler svg text { fill: #eee; font: 15px ui-monospace,monospace; }
+.rbm-support-flow, .rbm-ais-stages { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 1rem; }
+.rbm-ais-stages figure { margin: 0; }
+.rbm-ais-stages svg { display: block; width: 100%; max-width: 280px; }
+.rbm-ais-stages svg text { fill: #eee; font: 15px ui-monospace,monospace; }
+
+.rbm-measured-chart { margin: 1rem 0; }
+.rbm-measured-chart svg { width: 100%; max-width: 360px; display: block; margin: auto; }
+.rbm-measured-chart svg text, .rbm-study-input svg text { fill: #eee; font: 15px ui-monospace,monospace; }
+.rbm-study-input { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 1rem; margin: 1rem 0; }
+.rbm-study-input svg { width: 100%; max-width: 280px; }
+.rbm-study-input > figcaption { grid-column: 1 / -1; }
+.rbm-lesson.lesson-flow .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: .3rem; }
+.rbm-lesson.lesson-flow .katex-mathml { overflow: hidden; }

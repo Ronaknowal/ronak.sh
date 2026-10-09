@@ -150,3 +150,35 @@ export function logarithmState(base, exponent) {
     }))
   };
 }
+
+export function inverseSquareState(branch, output) {
+  if (!["full", "nonnegative", "nonpositive"].includes(branch)) throw new RangeError("Choose a displayed square branch.");
+  bounded(output, -4, 16, "Requested output");
+  onGrid(output, 4, "Requested output");
+  const root = output < 0 ? null : Math.sqrt(output);
+  const inputs = root === null ? [] : root === 0 ? [0]
+    : branch === "full" ? [-root, root] : [branch === "nonnegative" ? root : -root];
+  return { branch, output, inputs, hasInverse: branch !== "full" };
+}
+
+export function growthCrossingState(rate, factor) {
+  const state = growthState(rate, 0, factor);
+  const target = 100 * factor;
+  const direction = rate < 0 ? "at most" : "at least";
+  const meets = value => rate < 0 ? value <= target : value >= target;
+  // The bounded rates and factor interval imply every reachable crossing is before 23.
+  // Substitute integer observations directly rather than ceil a rounded log quotient.
+  let firstObservation = null;
+  for (let period = 0; period <= 32; period++) {
+    if (meets(100 * state.multiplier ** period)) {
+      firstObservation = period;
+      break;
+    }
+  }
+  return {
+    ...state, target, direction, firstObservation,
+    firstAmount: firstObservation === null ? null : 100 * state.multiplier ** firstObservation,
+    previousAmount: firstObservation === null || firstObservation === 0 ? null : 100 * state.multiplier ** (firstObservation - 1),
+    windowEnd: Math.max(8, Math.min(24, state.future ? Math.ceil(state.crossing) + 2 : 8)),
+  };
+}

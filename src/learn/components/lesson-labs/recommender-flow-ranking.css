@@ -1,0 +1,18 @@
+.recommender-flow-lesson .rec-ranked-occurrences > .rec-flow-pan {
+  max-height: 22rem;
+  overflow: auto;
+}
+
+.recommender-flow-lesson .rec-ranked-occurrences thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #080808;
+}
+
+.recommender-flow-lesson .rec-candidate-basket {
+  border-bottom: 1px dashed #e8b44a;
+  border-left: 1px dashed #e8b44a;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}

@@ -1,82 +1,104 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { finiteDifference, fitDefaults, lineFit, sharedSquare } from '../../data/backprop-models.js';
-import { BackpropFigure, BackpropNumber, BackpropSteps, BackpropTable, numberText as f } from './BackpropShared.jsx';
+import { numberText as f } from './BackpropShared.jsx';
+import { FlowChoice, FlowControls, FlowLab, FlowReadout, FlowSlider } from './LessonFlow.jsx';
 
+// Investigation A: the gradient is fixed by the current line; only the step length changes.
 export function BackpropFitLab() {
-  const [inputs, setInputs] = useState(fitDefaults);
-  const [resetKey, setResetKey] = useState(0);
+  const [rate, setRate] = useState(fitDefaults.rate);
+  const inputs = { ...fitDefaults, rate };
   const model = lineFit(inputs);
   const domainValues = [0, ...model.rows.flatMap(row => [row.target, row.prediction, row.nextPrediction])];
   const low = Math.min(...domainValues) - 1;
   const high = Math.max(...domainValues) + 1;
-  const px = x => 48 + (x - 0.75) * 170;
+  const px = x => 60 + (x - 0.75) * 170;
   const py = y => 228 - (y - low) / (high - low) * 200;
-  return <section className="backprop-lab" data-backprop-lab="fit" aria-labelledby="backprop-fit-title">
-    <h3 id="backprop-fit-title">Investigation A · A correct direction can be an unsafe step</h3>
-    <p>Two examples, x = (1, 2). Change a model parameter, target or learning rate. Both new parameters use the same old gradient; the proposed line and its loss update immediately.</p>
-    <p className="backprop-baseline"><strong>Starting case, kept for comparison:</strong> w = 1, b = 0, targets (1, 3), η = 0.1. MSE 0.5 → 0.17; gradients (−2, −1). These reference values stay fixed while you edit the current case.</p>
-    <div className="backprop-controls">{[
-      ['weight', 'Weight w', -3, 3], ['bias', 'Bias b', -3, 3], ['rate', 'Learning rate η', 0, 1],
-      ['target1', 'Target at x = 1', -3, 5], ['target2', 'Target at x = 2', -3, 5],
-    ].map(([key, name, min, max]) => <BackpropNumber key={key} name={name} value={inputs[key]} min={min} max={max} resetKey={resetKey}
-      onChange={value => setInputs(previous => ({ ...previous, [key]: value }))} />)}</div>
-    <div className="backprop-actions"><button type="button" onClick={() => { setInputs({ ...fitDefaults }); setResetKey(key => key + 1); }}>Reset line fit</button></div>
-    <BackpropFigure id="fit-line" title="Observed targets and simultaneous update" caption="Circles: observed targets. Solid amber: current fit. Dashed light line: proposed fit. Vertical red segments: current residuals. The horizontal scale stays fixed; the vertical range includes every current value.">
-      <svg className="backprop-svg backprop-fit-svg" viewBox="0 0 330 278" role="img" aria-label="Current and proposed fitted line at x equals 1 and 2">
-        <line x1="60" x2="300" y1="228" y2="228" className="bp-axis" />
-        <line x1="60" x2="60" y1="28" y2="228" className="bp-axis" />
-        {[low, (low + high) / 2, high].map(value => <g key={value}><line x1="60" x2="300" y1={py(value)} y2={py(value)} className="bp-grid" /><text x="55" y={py(value) + 4} textAnchor="end">{Number(value.toPrecision(3))}</text></g>)}
-        <text x="60" y="16">target / output</text>
-        <line x1={px(1)} y1={py(model.rows[0].prediction)} x2={px(2)} y2={py(model.rows[1].prediction)} className="bp-current" />
-        <line x1={px(1)} y1={py(model.rows[0].nextPrediction)} x2={px(2)} y2={py(model.rows[1].nextPrediction)} className="bp-proposed" />
-        {model.rows.map(row => <g key={row.x}><line x1={px(row.x)} x2={px(row.x)} y1={py(row.target)} y2={py(row.prediction)} className="bp-residual" /><circle cx={px(row.x)} cy={py(row.target)} r="5" className="bp-target" /><text x={px(row.x)} y="250" textAnchor="middle">x = {row.x}</text></g>)}
-      </svg>
-      <BackpropTable caption="Current residuals, gradient contributions and proposed outputs" headers={['x', 'Target', 'Current q', 'r = q − y', 'r × x', 'New q']} rows={model.rows.map(row => [row.x, f(row.target), f(row.prediction), f(row.residual), f(row.weightContribution), f(row.nextPrediction)])} />
-    </BackpropFigure>
-    <div className="backprop-result" data-fit-result data-weight={inputs.weight} data-bias={inputs.bias} data-rate={inputs.rate} data-old-loss={model.loss} data-new-loss={model.nextLoss} data-weight-gradient={model.weightGradient} data-bias-gradient={model.biasGradient}>
-      <p><strong>MSE: {f(model.loss)} → {f(model.nextLoss)} ({model.change}).</strong> Change = {f(model.delta)}.</p>
-      <p>g<sub>w</sub> = {model.rows.map(row => `(${f(row.weightContribution)})`).join(' + ')} = {f(model.weightGradient)}; g<sub>b</sub> = {model.rows.map(row => `(${f(row.biasContribution)})`).join(' + ')} = {f(model.biasGradient)}. The mean over two entries cancels the factor 2 from squaring.</p>
-      <p>w′ = {f(inputs.weight)} − {f(inputs.rate)} × ({f(model.weightGradient)}) = {f(model.nextWeight)}; b′ = {f(inputs.bias)} − {f(inputs.rate)} × ({f(model.biasGradient)}) = {f(model.nextBias)}.</p>
-      <p>{inputs.rate === 0 ? 'A zero learning rate leaves this model unchanged.' : model.weightGradient === 0 && model.biasGradient === 0 ? 'Both gradients vanish, so every proposed parameter change is zero.' : model.change === 'increased' ? 'This step overshoots: the derivative is local, and this learning rate makes the evaluated loss larger.' : model.change === 'decreased' ? 'This evaluated step lowers the loss. The gradient supplied the direction; the new forward pass established the improvement.' : 'The before/after losses agree within absolute 1e−12 plus relative 1e−10 tolerance; equal loss need not imply identical parameters.'}</p>
-    </div>
-  </section>;
+  // "after one step" stays at the end of its own dashed line. Each residual label sits right of
+  // its segment, at whichever of the segment's top, middle or bottom is furthest from that label.
+  const afterLabelY = py(model.rows[1].nextPrediction) + 4;
+  const residualLabelY = row => {
+    const top = Math.min(py(row.target), py(row.prediction)), bottom = Math.max(py(row.target), py(row.prediction));
+    return [top + 10, (top + bottom) / 2 + 4, bottom - 2].reduce((best, y) => Math.abs(y - afterLabelY) > Math.abs(best - afterLabelY) ? y : best);
+  };
+  const verdict = rate === 0
+    ? 'a zero step leaves the line where it is'
+    : model.change === 'increased' ? 'this step overshoots: the loss rises even though the direction came from a correct derivative'
+      : model.change === 'decreased' ? 'this step lowers the loss' : 'the loss is unchanged';
+  return <FlowLab id="investigation-a" label="Investigation A: one gradient-descent step on a two-point line fit">
+    <svg className="backprop-svg backprop-fit-svg" viewBox="0 0 400 278" role="img" aria-label={`Targets at x = 1 and 2, the current line and the line after one step with learning rate ${rate}`} data-fit-result data-rate={rate} data-old-loss={model.loss} data-new-loss={model.nextLoss}>
+      <line x1="60" x2="320" y1="228" y2="228" className="bp-axis" />
+      <line x1="60" x2="60" y1="28" y2="228" className="bp-axis" />
+      {[low, (low + high) / 2, high].map(value => <g key={value}><line x1="60" x2="320" y1={py(value)} y2={py(value)} className="bp-grid" /><text x="54" y={py(value) + 4} textAnchor="end">{f(Number(value.toPrecision(3)))}</text></g>)}
+      <text x="60" y="16">target or prediction q</text>
+      <line x1={px(1)} y1={py(model.rows[0].prediction)} x2={px(2)} y2={py(model.rows[1].prediction)} className="bp-current" />
+      <text x={px(1) + 12} y={py(model.rows[0].prediction) + 20} className="bp-label-current">current line</text>
+      <line x1={px(1)} y1={py(model.rows[0].nextPrediction)} x2={px(2)} y2={py(model.rows[1].nextPrediction)} className="bp-proposed" />
+      <text x={px(2) + 10} y={afterLabelY}>after one step</text>
+      {model.rows.map(row => <g key={row.x}><line x1={px(row.x)} x2={px(row.x)} y1={py(row.target)} y2={py(row.prediction)} className="bp-residual" /><circle cx={px(row.x)} cy={py(row.target)} r="5" className="bp-target" /><text x={px(row.x)} y="250" textAnchor="middle">x = {row.x}</text>{row.residual !== 0 && <text x={px(row.x) + 8} y={residualLabelY(row)} className="bp-label-residual">r = {f(row.residual)}</text>}</g>)}
+      <text x={px(2) - 10} y={py(model.rows[1].target) + 4} textAnchor="end" className="bp-label-target">target</text>
+    </svg>
+    <FlowControls><FlowSlider name="Learning rate η" value={rate} min={0} max={1} step={0.05} onChange={setRate} format={value => f(Number(value.toFixed(2)))} /></FlowControls>
+    <FlowReadout>Gradients at the current line: g<sub>w</sub> = {model.rows.map(row => `(${f(row.residual)})(${row.x})`).join(' + ')} = <strong>{f(model.weightGradient)}</strong> and g<sub>b</sub> = <strong>{f(model.biasGradient)}</strong>. The step moves w to {f(model.nextWeight)} and b to {f(model.nextBias)}, and the mean squared error goes from <strong>{f(model.loss)}</strong> to <strong>{f(model.nextLoss)}</strong>: {verdict}.</FlowReadout>
+  </FlowLab>;
 }
 
+// Shared reuse in u = x × x, L = u + c·u, read left to right. Values are circles (cyan x
+// supplied, violet computed u and L); operations are white rounded rectangles. Orange
+// numbers are backward contributions and travel against the grey arrows.
+function SharedGraphDiagram({ x, c }) {
+  const uid = `backprop-shared-${useId().replace(/:/g, '')}`;
+  const model = sharedSquare(x, c);
+  const op = (cx, cy, text, w = 46) => <g className="bpc-operation"><rect x={cx - w / 2} y={cy - 21} width={w} height="42" rx="10" /><text x={cx} y={cy + 6} className="bps-op-text">{text}</text></g>;
+  const value = (cx, cy, text, role) => <g className={`bpc-node bpc-${role}`}><circle cx={cx} cy={cy} r="24" /><text x={cx} y={cy + 6} className="bps-value-text">{text}</text></g>;
+  return <svg className="backprop-svg bpc-diagram bps-diagram" viewBox="0 0 480 244" role="img" aria-labelledby={`${uid}-d`}>
+    <desc id={`${uid}-d`}>{`x = ${f(x)} feeds both slots of a multiplication that gives u = ${f(model.square)}. u feeds the addition directly and through a multiply-by-c operation with c = ${f(c)}; the addition gives L = ${f(model.loss)}. Backward: L receives 1; u receives 1 from the direct route and ${f(c)} from the scaled route, total ${f(model.uGradient)}; each multiplication slot passes ${f(model.slotContribution)} to x, total ${f(model.gradient)}.`}</desc>
+    <defs><marker id={`${uid}-f`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" className="bpc-forward-head" /></marker><marker id={`${uid}-b`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" className="bpc-back-head" /></marker></defs>
+    <g className="bpc-wire" markerEnd={`url(#${uid}-f)`}>
+      <path d="M70 114 L106 114" /><path d="M70 136 L106 136" /><path d="M154 125 L182 125" />
+      <path d="M230 114 L314 76" /><path d="M230 138 L280 172" /><path d="M318 160 L336 94" /><path d="M364 68 L406 68" />
+    </g>
+    <g className="bpc-reverse" markerEnd={`url(#${uid}-b)`}>
+      <path d="M406 80 L368 80" /><path d="M317 82 L235 119" /><path d="M343 96 L326 158" /><path d="M284 166 L238 134" />
+      <path d="M181 135 L158 135" /><path d="M105 106 L75 106" /><path d="M105 144 L75 144" />
+    </g>
+    {value(48, 125, f(x), 'supplied')}
+    {op(130, 125, '×')}
+    {value(206, 125, f(model.square), 'computed')}
+    {op(340, 68, '+')}
+    {op(302, 190, `× ${f(c)}`, 56)}
+    {value(432, 68, f(model.loss), 'computed')}
+    <text x="48" y="92" className="bps-name">x</text>
+    <text x="206" y="168" className="bps-name">u = x × x</text>
+    <text x="476" y="112" className="bps-name bps-end">L = u + c·u</text>
+    <text x="88" y="96" className="bps-slot"><tspan className="bps-name">slot 1 </tspan><tspan className="bps-sens">{f(model.slotContribution)}</tspan></text>
+    <text x="88" y="162" className="bps-slot"><tspan className="bps-name">slot 2 </tspan><tspan className="bps-sens">{f(model.slotContribution)}</tspan></text>
+    <text x="262" y="82" className="bps-sens">1</text>
+    <text x="262" y="146" className="bps-sens">{f(c)}</text>
+    <text x="358" y="134" className="bps-sens">1</text>
+    <text x="432" y="30" className="bps-sens">∂L/∂L = 1</text>
+    <text x="190" y="194" className="bps-sens">∂L/∂u = 1 + {f(c)} = {f(model.uGradient)}</text>
+    <text x="6" y="230" className="bps-sens bps-start">∂L/∂x = {f(model.slotContribution)} + {f(model.slotContribution)} = {f(model.gradient)}</text>
+  </svg>;
+}
+
+// Investigation B: change the shared input and the reused branch's coefficient.
 export function BackpropSharedLab() {
   const [point, setPoint] = useState(3);
   const [coefficient, setCoefficient] = useState(2);
-  const [stage, setStage] = useState(0);
-  const [resetKey, setResetKey] = useState(0);
   const model = sharedSquare(point, coefficient);
-  const descriptions = [
-    'Seed the final loss sensitivity with 1. The complete derivative remains visible throughout this trace.',
-    `The direct route contributes 1 to u, and the scaled route contributes c = ${f(coefficient)}. Their total is ${f(model.uGradient)}.`,
-    `Each operand slot of x × x receives (${f(model.uGradient)}) × (${f(point)}) = ${f(model.slotContribution)}. Add both slots to get ${f(model.gradient)}.`,
-  ];
-  return <section className="backprop-lab" data-backprop-lab="shared" aria-labelledby="backprop-shared-title">
-    <h3 id="backprop-shared-title">Investigation B · One value, several paths</h3>
-    <p>Edit x and the reused-branch coefficient c in u = x × x, L = u + c × u. One x node feeds both multiply slots; one u node feeds both loss paths.</p>
-    <p className="backprop-baseline"><strong>Starting case, kept for comparison:</strong> x = 3, c = 2, u = 9, L = 27 and dL/dx = 18. Current edits below do not change this reference.</p>
-    <div className="backprop-controls"><BackpropNumber name="Shared input x" value={point} min={-3} max={3} step={0.25} onChange={setPoint} resetKey={resetKey} /><BackpropNumber name="Branch coefficient c" value={coefficient} min={-3} max={3} step={0.25} onChange={setCoefficient} resetKey={resetKey} /></div>
-    <BackpropFigure id="shared-graph" title="A shared node is not a single operand slot" caption={`${stage === 0 ? 'Arrows show forward use.' : 'Highlighted arrows now point backward as sensitivity returns; other arrows retain forward direction.'} The two curved edges between x and u are distinct operand slots, not two independent x values. The table follows sensitivity backward through both kinds of reuse.`}>
-      <svg className="backprop-svg" viewBox="0 0 360 265" role="img" aria-label="Shared x twice into square u; u reused directly and through coefficient c into loss L">
-        <defs><marker id="backprop-shared-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" /></marker></defs>
-        <g className={`bp-edges ${stage === 2 ? 'bp-active' : ''}`} markerStart={stage === 2 ? 'url(#backprop-shared-arrow)' : undefined} markerEnd={stage === 2 ? undefined : 'url(#backprop-shared-arrow)'}><path d="M 58 117 Q 95 56 137 117" /><path d="M 58 147 Q 95 208 137 147" /></g>
-        <g className={`bp-edges ${stage === 1 ? 'bp-active' : ''}`} markerStart={stage === 1 ? 'url(#backprop-shared-arrow)' : undefined} markerEnd={stage === 1 ? undefined : 'url(#backprop-shared-arrow)'}><path d="M 177 117 L 238 54" /><path d="M 178 145 L 237 207" /><path d="M 276 54 L 319 116" /><path d="M 276 207 L 319 147" /></g>
-        {[[45, 132, 'x'], [155, 132, 'u'], [256, 40, '×1'], [256, 220, '×c'], [331, 132, 'L']].map(([cx, cy, label]) => <g key={label}><circle cx={cx} cy={cy} r="23" className="bp-node" /><text x={cx} y={cy + 6} textAnchor="middle" className="bp-node-label">{label}</text></g>)}
-        <text x="97" y="75" textAnchor="middle">slot 1</text><text x="97" y="210" textAnchor="middle">slot 2</text>
-      </svg>
-      <BackpropTable caption="Forward values and reverse contributions" headers={['Node', 'Forward value', 'Incoming reverse contributions', 'Total sensitivity']} rows={[
-        ['L', f(model.loss), 'seed', '1'], ['u', f(model.square), `1 + (${f(coefficient)})`, f(model.uGradient)], ['x (one shared value)', f(point), `${f(model.slotContribution)} + ${f(model.slotContribution)}`, f(model.gradient)],
-      ]} />
-    </BackpropFigure>
-    <BackpropSteps index={stage} setIndex={setStage} count={3} name="Backward" /><p className="backprop-stage">{descriptions[stage]}</p>
-    <div className="backprop-result" data-shared-result data-x={point} data-coefficient={coefficient} data-loss={model.loss} data-gradient={model.gradient} data-stage={stage}>
-      <p><strong>L = {f(model.loss)}; dL/dx = {f(model.gradient)}.</strong> Direct loss path: 2x = {f(model.firstPath)}. Scaled loss path: 2cx = {f(model.secondPath)}. Add paths to obtain 2x(1 + c).</p>
-      <p>{coefficient === -1 ? 'The branches cancel exactly for every x: L = 0 and dL/dx = 0. Further x edits preserve both zeros.' : point === 0 ? 'At x = 0, both multiplication-slot contributions vanish for every c. This is a second null case, not a failure to update.' : 'Multiply local sensitivities along a path; add contributions across reused paths and repeated operand slots. Try a negative x and c below −1 to inspect the sign reversal.'}</p>
-    </div>
-    <button type="button" onClick={() => { setPoint(3); setCoefficient(2); setStage(0); setResetKey(key => key + 1); }}>Reset shared graph</button>
-  </section>;
+  const note = coefficient === -1
+    ? 'The two routes cancel for every x: L = 0 and its derivative is 0.'
+    : point === 0 ? 'At x = 0 each multiplication slot contributes 0 whatever c is, so the derivative is 0 although u still has two consumers.'
+      : coefficient < -1 ? 'With c below −1 the scaled route outweighs the direct one, so the derivative takes the opposite sign to 2x.'
+        : 'Multiply along each route, then add across routes and across the two multiplication slots: 2x(1 + c).';
+  return <FlowLab id="investigation-b" label="Investigation B: shared input and reused branch">
+    <SharedGraphDiagram x={point} c={coefficient} />
+    <FlowControls>
+      <FlowSlider name="Shared input x" value={point} min={-3} max={3} step={0.25} onChange={setPoint} format={f} />
+      <FlowSlider name="Branch coefficient c" value={coefficient} min={-3} max={3} step={0.25} onChange={setCoefficient} format={f} />
+    </FlowControls>
+    <FlowReadout><span data-shared-result data-x={point} data-coefficient={coefficient} data-loss={model.loss} data-gradient={model.gradient}>L = <strong>{f(model.loss)}</strong> and dL/dx = <strong>{f(model.gradient)}</strong>: the direct route contributes 2x = {f(model.firstPath)} and the scaled route 2cx = {f(model.secondPath)}. {note}</span></FlowReadout>
+  </FlowLab>;
 }
 
 function LocalFunction({ result }) {
@@ -92,48 +114,48 @@ function LocalFunction({ result }) {
   const maxY = Math.max(...samples.map(p => p.y));
   const px = x => maxX === minX ? 160 : 28 + 264 * ((x - minX) / (maxX - minX));
   const py = y => maxY === minY ? 77 : 127 - 100 * ((y - minY) / (maxY - minY));
-  return <div>
-    <p className="backprop-small">Magnified computed function over [x − h, x + h]. Both axes rescale to this local interval; the table supplies their exact coordinates.</p>
-    <svg className="backprop-svg" viewBox="0 0 320 165" role="img" aria-label="Magnified local function sampled with binary64 arithmetic">
-      <polyline points={samples.map(p => `${px(p.x)},${py(p.y)}`).join(' ')} className="bp-current" />
-      <line x1={px(result.left)} x2={px(result.right)} y1={py(result.lower)} y2={py(result.upper)} className="bp-proposed" />
-      <circle cx={px(result.left)} cy={py(result.lower)} r="5" className="bp-target" /><rect x={px(result.right) - 4} y={py(result.upper) - 4} width="8" height="8" className="bp-target" />
-      <text x="28" y="155">● x − h</text><text x="292" y="155" textAnchor="end">■ x + h</text>
-    </svg>
-  </div>;
+  return <svg className="backprop-svg" viewBox="0 0 320 168" role="img" aria-label="The computed function magnified over the interval from x minus h to x plus h, with the secant line between the two evaluated points">
+    <polyline points={samples.map(p => `${px(p.x)},${py(p.y)}`).join(' ')} className="bp-current" />
+    <line x1={px(result.left)} x2={px(result.right)} y1={py(result.lower)} y2={py(result.upper)} className="bp-proposed" />
+    <circle cx={px(result.left)} cy={py(result.lower)} r="5" className="bp-target" /><circle cx={px(result.right)} cy={py(result.upper)} r="5" className="bp-target" />
+    <text x="28" y="158" className="bp-label-target">f(x − h)</text><text x="292" y="158" textAnchor="end" className="bp-label-target">f(x + h)</text>
+    <text x="160" y="16" textAnchor="middle"><tspan className="bp-label-current">function</tspan> · secant (dashed)</text>
+  </svg>;
 }
 
+const superscript = n => String(n).replace(/-/g, '⁻').replace(/\d/g, d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
+const checkCases = {
+  sine: { kind: 'sine', point: 1, offset: 0, label: 'sin x at x = 1' },
+  linear: { kind: 'linear', point: 1, offset: 1e12, label: '10¹² + x at x = 1' },
+  square: { kind: 'square', point: 0, offset: 0, label: 'x² at x = 0' },
+};
+
+// Investigation C: one central-difference check; choose the function and the step size.
 export function BackpropDifferenceLab() {
   const [kind, setKind] = useState('sine');
-  const [point, setPoint] = useState(1);
-  const [offset, setOffset] = useState(0);
-  const [firstExponent, setFirstExponent] = useState(-3);
-  const [secondExponent, setSecondExponent] = useState(-5);
-  const [resetKey, setResetKey] = useState(0);
-  const candidates = [firstExponent, secondExponent].map(exponent => finiteDifference({ kind, point, offset, exponent }));
-  const difference = candidates[1].absoluteError - candidates[0].absoluteError;
-  const equalityTolerance = 1e-18 + 1e-12 * Math.max(candidates[0].absoluteError, candidates[1].absoluteError);
-  const comparison = Math.abs(difference) <= equalityTolerance ? 'equal to Check A’s within the stated comparison tolerance' : difference < 0 ? 'smaller than Check A’s' : 'larger than Check A’s';
-  return <section className="backprop-lab" data-backprop-lab="difference" aria-labelledby="backprop-difference-title">
-    <h3 id="backprop-difference-title">Investigation F · Inspect the numbers being subtracted</h3>
-    <p>Two simultaneous checks of the same function. Compare perturbations while holding the point and function fixed. These are current JavaScript binary64 evaluations; last bits may differ from the saved Python observations.</p>
-    <p className="backprop-baseline"><strong>Starting case, kept for comparison:</strong> sin(x) at x = 1; h<sub>A</sub> = 10⁻³ and h<sub>B</sub> = 10⁻⁵. Recorded absolute errors are approximately 9.005 × 10⁻⁸ and 1.114 × 10⁻¹¹, respectively. These reference inputs and errors stay fixed.</p>
-    <label htmlFor="backprop-function">Function to differentiate</label><select id="backprop-function" value={kind} onChange={event => setKind(event.target.value)}><option value="sine">sin(x)</option><option value="linear">C + x</option><option value="square">x²</option></select>
-    <div className="backprop-controls"><BackpropNumber name="Evaluation point x" value={point} min={-2} max={2} onChange={setPoint} resetKey={resetKey} />
-      {kind === 'linear' && <BackpropNumber name="Constant offset C" value={offset} min={0} max={1e12} step={1e6} onChange={setOffset} resetKey={resetKey} />}
-      <BackpropNumber name="Check A exponent (h = 10ᵉ)" value={firstExponent} min={-15} max={0} step={1} onChange={setFirstExponent} resetKey={resetKey} />
-      <BackpropNumber name="Check B exponent (h = 10ᵉ)" value={secondExponent} min={-15} max={0} step={1} onChange={setSecondExponent} resetKey={resetKey} /></div>
-    {kind === 'linear' && <div className="backprop-actions" aria-label="Offset starting values">{[0, 1e6, 1e12].map(value => <button type="button" key={value} onClick={() => { setOffset(value); setResetKey(key => key + 1); }}>C = {value.toExponential(0)}</button>)}</div>}
-    <div className="backprop-pair">{candidates.map((result, index) => <div key={index} className="backprop-difference-case" data-difference-case={index === 0 ? 'A' : 'B'} data-error={result.absoluteError} data-estimate={result.estimate} data-analytic={result.analytic} data-relative={result.relativeError ?? 'undefined'}>
-      <h4>Check {index === 0 ? 'A' : 'B'} · h = {f(result.step)}</h4><LocalFunction result={result} />
-      <dl className="backprop-exact">{[
-        ['x − h', result.left], ['x + h', result.right], ['f(x − h)', result.lower], ['f(x + h)', result.upper], ['Central difference', result.estimate], ['Analytic derivative', result.analytic], ['Absolute error', result.absoluteError], ['Relative error', result.relativeError ?? 'Undefined: analytic derivative is zero'],
-      ].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{String(value)}</dd></div>)}</dl>
-      {result.coordinatesCoalesce && <p>The two input coordinates round to the same binary64 number; they coincide in the graph.</p>}
-      {result.evaluationsCoalesce && <p>The two evaluated outputs are identical. Their difference is exactly zero{result.analytic === 0 ? ', matching the analytic derivative in this symmetric quadratic case.' : '; the nonzero analytic derivative is not recovered.'}</p>}
-    </div>)}</div>
-    <div className="backprop-result"><p><strong>Check B’s absolute error is {comparison}.</strong> Comparison tolerance: 10⁻¹⁸ + 10⁻¹² × the larger error; raw errors above remain unrounded.</p><p>{kind === 'linear' ? 'Changing C leaves the mathematical derivative at 1. Large offsets can erase the difference between nearby evaluations; inspect both numbers before blaming the backward rule.' : kind === 'square' && point === 0 ? 'At x = 0, symmetric quadratic samples agree and the analytic derivative is zero. Absolute error is meaningful; relative error has no denominator.' : 'A large h introduces truncation error; an extremely small h amplifies rounding and cancellation. Sweep h instead of assuming that a smaller perturbation is always better.'}</p>
-      <p>Separate nonsmooth case: at ReLU(0), central difference = 0.5 and the chosen AD rule = 0. There is no ordinary derivative at that corner.</p></div>
-    <button type="button" onClick={() => { setKind('sine'); setPoint(1); setOffset(0); setFirstExponent(-3); setSecondExponent(-5); setResetKey(key => key + 1); }}>Reset numerical checks</button>
-  </section>;
+  const [exponent, setExponent] = useState(-1);
+  const setup = checkCases[kind];
+  const result = finiteDifference({ ...setup, exponent });
+  const reading = result.evaluationsCoalesce
+    ? (result.analytic === 0
+      ? 'Both evaluations are equal and the exact derivative is 0, so the estimate is right; with a zero derivative only absolute error is meaningful.'
+      : 'The two evaluations are identical numbers, so their difference is exactly 0 and the nonzero derivative is lost to rounding. The derivative rule is not wrong; this check cannot see it.')
+    : kind === 'sine' ? (exponent === -1
+      ? 'The curve visibly bends between the two points, so the dashed secant tilts less than the curve does at x: truncation error dominates.'
+      : exponent >= -4 ? 'At this magnification the curve already looks straight, yet truncation still dominates: each 10× smaller h makes the error about 100× smaller.'
+        : exponent === -5 ? 'This is near the best step: truncation and rounding errors are about the same size.'
+          : 'Here the two evaluations agree in most of their digits, so rounding error dominates and grows as h shrinks.')
+      : kind === 'linear' ? 'The constant 10¹² already uses 13 of the roughly 16 significant digits, so the subtraction keeps only the last few: even a straight line with slope 1 gets a visibly wrong estimate.'
+        : 'The estimate matches the exact derivative here.';
+  return <FlowLab id="investigation-c" label="Investigation C: one central-difference check">
+    <LocalFunction result={result} />
+    <FlowControls>
+      <FlowChoice label="Function" options={Object.entries(checkCases).map(([key, value]) => [key, value.label])} value={kind} onChange={setKind} />
+      <FlowSlider name="Step h" value={exponent} min={-15} max={-1} step={1} onChange={setExponent} format={e => `10${superscript(e)}`} />
+    </FlowControls>
+    <dl className="backprop-exact" data-difference-case="A" data-error={result.absoluteError} data-estimate={result.estimate}>{[
+      ['f(x − h)', String(result.lower)], ['f(x + h)', String(result.upper)], ['Central difference', String(result.estimate)], ['Exact derivative', String(result.analytic)], ['Absolute error', String(result.absoluteError)],
+    ].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+    <FlowReadout>For {setup.label} with h = 10{superscript(exponent)}, the absolute error is <strong>{f(result.absoluteError)}</strong>. {reading}</FlowReadout>
+  </FlowLab>;
 }

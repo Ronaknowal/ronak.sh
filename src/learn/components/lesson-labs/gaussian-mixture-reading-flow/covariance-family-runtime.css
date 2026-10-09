@@ -1,0 +1,12 @@
+.gmm-family-lane { margin-block: 2rem 3rem; }
+.gmm-family-key { font-weight: 600; text-transform: none; }
+.gmm-family-tables { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; margin-block: 1.5rem; }
+.gmm-family-tables table { flex: 1 1 19rem; }
+.gmm-family-table-region { overflow-x: auto; margin-block: 1.25rem; max-width: 100%; }
+.gmm-family-table-region table { min-width: 40rem; }
+.gmm-family-table-region:focus-visible { outline: 2px solid #e9b94c; outline-offset: 3px; }
+.gmm-lesson table { border-collapse: collapse; margin-block: 1.5rem; width: 100%; }
+.gmm-lesson th, .gmm-lesson td { text-align: left; padding: .55rem .45rem; border-bottom: 1px solid #55555d; overflow-wrap: anywhere; }
+.gmm-lesson caption { text-align: left; font-weight: 600; margin-bottom: .75rem; }
+.gmm-lesson details { margin-block: 1.75rem; }
+.gmm-lesson pre { max-width: 100%; overflow: auto; padding-block: .75rem; font-size: .9rem; line-height: 1.65; }

@@ -6,6 +6,10 @@ const { parse } = require('@babel/parser');
 const base = process.env.PERFORMANCE_BASE_URL || 'http://127.0.0.1:4173';
 const build = JSON.parse(fs.readFileSync('dist/.vite/manifest.json', 'utf8'));
 const lessons = JSON.parse(fs.readFileSync('src/learn/data/lesson-manifest.json', 'utf8'));
+// --topics scopes lesson-specific checks; shared loading/recovery contracts still run.
+const topicFlag = process.argv.indexOf('--topics');
+const selectedLessons = topicFlag < 0 ? null : process.argv[topicFlag + 1]?.split(',').filter(Boolean);
+if (topicFlag >= 0) assert.ok(selectedLessons?.length && selectedLessons.every(id => lessons[id]), 'Supply published stable IDs after --topics');
 const python = 'python-basics-types-control-flow-functions-modules';
 const oop = 'object-oriented-programming-in-python';
 const mathematics = 'eigenvalues-eigenvectors';
@@ -111,9 +115,15 @@ const mathRendererFiles = new Set(assetNames.filter(name => name.endsWith('.js')
 const mathFontStyleFiles = new Set(assetNames.filter(name => name.endsWith('.css') && /font-family:KaTeX_/.test(fs.readFileSync(`dist/assets/${name}`, 'utf8'))).map(name => `assets/${name}`));
 assert.ok(mathRendererFiles.size > 0, 'Cannot identify the built KaTeX renderer for isolation checks');
 assert.ok(mathFontStyleFiles.size > 0, 'Cannot identify the built KaTeX font styles for isolation checks');
+// Rollup may promote a multiply referenced lazy reader to a named shared entry.
+// Resolve its manifest identity, while retaining the same strict import closure.
+const readerEntries = Object.entries(build).filter(([, entry]) => entry.name === 'Reader' && entry.isDynamicEntry);
+assert.equal(readerEntries.length, 1, 'Expected one lazy Reader entry in the production manifest');
+const readerEntry = readerEntries[0][0];
 const closure = roots => {
   const visited = new Set(), files = new Set();
   const visit = key => {
+    if (key === 'src/learn/Reader.jsx' && !build[key]) key = readerEntry;
     if (visited.has(key)) return;
     visited.add(key);
     assert.ok(build[key], `Missing manifest import ${key}`);
@@ -164,7 +174,8 @@ function lessonSourceClosure(source) {
       if (!['ImportDeclaration', 'ExportNamedDeclaration', 'ExportAllDeclaration'].includes(declaration.type)) continue;
       const specifier = declaration.source?.value;
       if (!specifier?.startsWith('.')) continue;
-      const basePath = path.resolve(path.dirname(filename), specifier);
+      // Vite query suffixes such as ?url or ?raw select a loading mode, not another file.
+      const basePath = path.resolve(path.dirname(filename), specifier.replace(/\?.*$/, ''));
       const resolved = [basePath, ...['.js', '.jsx', '.json', '.css'].map(extension => basePath + extension), path.join(basePath, 'index.js'), path.join(basePath, 'index.jsx')]
         .find(candidate => fs.existsSync(candidate) && fs.statSync(candidate).isFile());
       assert.ok(resolved, `Cannot resolve ${specifier} from ${relative}`);
@@ -209,7 +220,7 @@ function checkDsaSourceOwnership(id) {
   };
   const settled = async page => page.waitForTimeout(350);
   try {
-    for (const id of Object.keys(dsaOwnership)) {
+    for (const id of Object.keys(dsaOwnership).filter(id => !selectedLessons || selectedLessons.includes(id))) {
       const ownership = checkDsaSourceOwnership(id);
       const { context, page, requests, errors } = await fresh();
       await page.goto(route(id), { waitUntil: 'domcontentloaded' });
@@ -223,7 +234,7 @@ function checkDsaSourceOwnership(id) {
       results.push({ case: 'DSA lesson loads its own body/practice/examples/models, allowed shared controls and no math renderer', topicId: id, ...ownership, ...network });
       await context.close();
     }
-    for (const id of mathematicsLessons) {
+    for (const id of mathematicsLessons.filter(id => !selectedLessons || selectedLessons.includes(id))) {
       const sources = lessonSourceClosure(modulePath(id));
       assert.deepEqual([...sources].filter(source => source.startsWith('src/learn/data/topics/')), [modulePath(id)], `${id} imports another authored lesson`);
       assert.equal([...sources].some(source => source.startsWith('src/learn/data/practice/')), false, `${id} imports unrelated DSA practice`);
@@ -238,6 +249,24 @@ function checkDsaSourceOwnership(id) {
       assert.ok(await page.locator('.reader-complete').isEnabled());
       assert.deepEqual(errors, []);
       results.push({ case: 'reviewed mathematics lesson loads only its selected body and actual dependencies', topicId: id, sourceFiles: [...sources], ...network, ...mathDependencies });
+      await context.close();
+    }
+    for (const id of (selectedLessons || []).filter(id => !dsaOwnership[id] && !mathematicsLessons.includes(id))) {
+      const sources = lessonSourceClosure(modulePath(id));
+      assert.deepEqual([...sources].filter(source => source.startsWith('src/learn/data/topics/')), [modulePath(id)], `${id} imports another lesson body`);
+      const { context, page, requests, errors } = await fresh();
+      await page.goto(route(id), { waitUntil: 'domcontentloaded' });
+      await page.locator('.reader-article h2').first().waitFor(); await settled(page);
+      await page.waitForFunction(() => {
+        const completion = document.querySelector('.reader-complete');
+        return completion && !completion.disabled;
+      }, null, { timeout: 15000 });
+      const network = checkRequests(requests, [id]);
+      checkClosure(requests, ['src/learn/Reader.jsx', modulePath(id)]);
+      checkMathRequests(requests, sources.has('src/learn/components/content/Math.jsx'));
+      assert.ok(await page.locator('.reader-complete').isEnabled());
+      assert.deepEqual(errors, []);
+      results.push({ case: 'selected lesson loads only its body and static dependencies', topicId: id, ...network });
       await context.close();
     }
     {

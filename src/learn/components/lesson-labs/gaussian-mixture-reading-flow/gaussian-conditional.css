@@ -1,0 +1,14 @@
+.gmm-conditional-drawing { position:relative; overflow-x:auto; max-width:100%; margin-block:1rem; overscroll-behavior-inline:contain; }
+.gmm-conditional-drawing svg { display:block; max-width:none; }
+.gmm-conditional-probe { position:absolute; width:1rem; height:1rem; visibility:hidden; pointer-events:none; }
+.gmm-conditional-pan { color:#aaa8ad; font-size:.9rem; }
+.gmm-conditional-drawing:focus-visible,.gmm-conditional-table:focus-visible { outline:2px solid #e9b94c; outline-offset:4px; }
+.gmm-conditional-table { overflow-x:auto; max-width:100%; margin-block:1.5rem; }
+.gmm-conditional-table table { width:100%; border-collapse:collapse; font-size:.9rem; font-variant-numeric:tabular-nums; }
+.gmm-conditional-table caption { text-align:left; color:#aaa8ad; margin-bottom:.5rem; }
+.gmm-conditional-table td,.gmm-conditional-table th { text-align:left; padding:.55rem .75rem .55rem 0; border-bottom:1px solid #303033; vertical-align:top; min-width:7rem; overflow-wrap:anywhere; }
+.gmm-conditional-table th { font-weight:500; }
+.gmm-conditional-error { color:#e9b94c; }
+:is(#gmm-d58,#gmm-d59) .flow-controls label { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; }
+:is(#gmm-d58,#gmm-d59) .flow-controls input[type=text] { width:5rem; }
+:is(#gmm-d57,#gmm-d58,#gmm-d59) p { overflow-wrap:anywhere; }

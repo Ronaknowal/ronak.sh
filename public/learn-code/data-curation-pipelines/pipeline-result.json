@@ -1,0 +1,70 @@
+{
+  "versions": {
+    "datatrove": "0.10.1",
+    "orjson": "3.12.0"
+  },
+  "score_source": "Explicitly supplied plumbing example; not learned quality",
+  "records": [
+    {
+      "id": "A",
+      "text": "A pendulum exchanges potential and kinetic energy.\nThe period increases with its length.",
+      "score": 0.85
+    },
+    {
+      "id": "B",
+      "text": "Catalogue\nBrass pendulum\nLength 30 cm",
+      "score": 0.35
+    },
+    {
+      "id": "C",
+      "text": "Home contact subscribe\nHome contact subscribe\nHome contact subscribe",
+      "score": 0.9
+    },
+    {
+      "id": "D",
+      "text": "Conjugate gradients use A-orthogonal search directions.\nA must be symmetric positive definite.",
+      "score": 0.7
+    }
+  ],
+  "threshold": 0.5,
+  "kept": [
+    "A",
+    "D"
+  ],
+  "removed": [
+    "B",
+    "C"
+  ],
+  "quarantined": [],
+  "inclusive_audit": [
+    {
+      "id": "A",
+      "kept": true,
+      "first_failure": null,
+      "inclusive_failures": []
+    },
+    {
+      "id": "B",
+      "kept": false,
+      "first_failure": "score",
+      "inclusive_failures": [
+        "score"
+      ]
+    },
+    {
+      "id": "C",
+      "kept": false,
+      "first_failure": "repetition",
+      "inclusive_failures": [
+        "repetition"
+      ]
+    },
+    {
+      "id": "D",
+      "kept": true,
+      "first_failure": null,
+      "inclusive_failures": []
+    }
+  ],
+  "scope": "Actual local two-shard pipeline, one worker; no throughput claim"
+}

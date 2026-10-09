@@ -1,0 +1,31 @@
+{
+  "comparison": "objective/interface parity, not architecture weight parity",
+  "dtype": "torch.float32",
+  "input_shape": [
+    3,
+    10
+  ],
+  "logits_shape": [
+    3,
+    10,
+    13
+  ],
+  "value_shape": [
+    3,
+    10
+  ],
+  "valid_targets": 11,
+  "gathered_nll": 2.623677968978882,
+  "native_shifted_nll": 2.623677968978882,
+  "max_gradient_discrepancy": 0.0,
+  "policy_loss": -0.006992995738983154,
+  "value_mse": 0.1599999964237213,
+  "checks": [
+    "single internal label shift",
+    "same token mean",
+    "same-state gradients",
+    "one actual actor/value update",
+    "frozen reference",
+    "old snapshot unchanged"
+  ]
+}

@@ -1,0 +1,5 @@
+columns: ['code', 'hardware', 'energy']
+matrix: [[1, 0, 1], [0, 1, 0], [0, 0, 0]]
+decoded: [('code', 'energy'), ('hardware',), ()]
+Unrecognized labels: ['network']
+Unreviewed energy annotation stays None, not 0: [1, 0, None]

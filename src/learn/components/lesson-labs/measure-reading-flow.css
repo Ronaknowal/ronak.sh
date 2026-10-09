@@ -1,0 +1,61 @@
+.measure-reading-lesson{overflow-wrap:anywhere;}
+.mt-figure{margin:1.5rem 0 2rem;padding:0;border:0;background:transparent;container-type:inline-size;container-name:mt-figure;}
+.mt-figure figcaption{margin-top:1rem;line-height:1.7;color:var(--text-secondary,#aaa);}
+.mt-reading-region{min-width:0;max-width:100%;}
+.mt-scroll-hint{margin:.5rem 0 .75rem;line-height:1.6;color:var(--text-secondary,#aaa);}
+.mt-scene-region{overflow-x:auto;max-width:100%;scrollbar-gutter:stable;}
+.mt-scene{display:block;width:100%;height:auto;overflow:visible;}
+.mt-label{font:15px ui-monospace,SFMono-Regular,Consolas,monospace;}
+.mt-table-label{font-weight:600;line-height:1.6;margin:1rem 0 .65rem;}
+.mt-table-region{max-width:100%;overflow:auto;scrollbar-gutter:stable;}
+.mt-table-region--tall{max-height:24rem;}
+.mt-table table{width:max-content;min-width:100%;border-collapse:collapse;}
+.mt-table th,.mt-table td{padding:.6rem .8rem;white-space:nowrap;border-bottom:1px solid #333;text-align:right;font-variant-numeric:tabular-nums;}
+.mt-table th:first-child{text-align:left;}
+.mt-table thead{position:sticky;top:0;background:#171717;z-index:1;}
+.mt-scene-region:focus-visible,.mt-table-region:focus-visible{outline:2px solid #e7b54a;outline-offset:4px;}
+.mt-compare{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;align-items:start;}
+.mt-compare>*{min-width:0;}
+.measure-reading-lesson .flow-lab{container-name:mt-figure;}
+.measure-reading-lesson .flow-slider output{flex:0 0 auto;white-space:nowrap;overflow-wrap:normal;}
+.measure-reading-lesson .flow-readout strong{display:inline-block;white-space:nowrap;overflow-wrap:normal;}
+.mt-input{display:grid;gap:.5rem;line-height:1.5;}
+.mt-input input,.mt-input select{min-width:0;max-width:100%;font:inherit;color:inherit;background:#171717;border:1px solid #666;padding:.5rem;}
+.mt-manuscript-table{width:max-content;min-width:100%;border-collapse:collapse;}
+.mt-manuscript-table th,.mt-manuscript-table td{padding:.65rem .8rem;border-bottom:1px solid #333;text-align:left;max-width:32rem;}
+.mt-programme{margin:1.5rem 0 2rem;padding:0;border:0;background:transparent;}
+.mt-practice{margin:1.5rem 0;}
+.mt-practice details{margin:.8rem 0;}
+.mt-series-key{display:flex;flex-wrap:wrap;gap:.65rem 1.5rem;line-height:1.6;}
+
+.mt-responsive{position:relative;min-width:0;width:100%;}
+.mt-rem-probe{position:absolute;visibility:hidden;width:1rem;height:1rem;pointer-events:none;}
+.mt-axis-label{margin:.6rem 0;line-height:1.6;overflow-wrap:anywhere;}
+.mt-bar-row{margin:1rem 0 1.5rem;}
+.mt-bar-name{font-weight:600;margin:0 0 .4rem;}
+.mt-bar-values{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:.25rem 0;line-height:1.6;}
+.mt-local-updates p{line-height:1.7;overflow-wrap:anywhere;}
+.mt-observed-value{display:inline-block;border:1px solid currentColor;border-radius:50%;padding:.3rem .65rem;}
+.measure-reading-lesson code{font-size:.875em!important;}
+.measure-reading-lesson .lesson-code pre{font-size:.875rem;line-height:1.65;}
+.measure-reading-lesson .lesson-code pre code{font-size:1em!important;}
+
+/* Core drawings fit their current width; full tables keep their separate keyboard overflow. */
+.mt-scene-region{overflow:visible;scrollbar-gutter:auto;}
+.mt-fibres{display:grid;gap:1.5rem;}
+.mt-bit-record{margin:.5rem 0 1rem;}
+.mt-bit-record p{line-height:1.6;overflow-wrap:anywhere;}
+.mt-fibre-label{font-weight:600;line-height:1.6;}
+.mt-bit-controls{display:flex;flex-wrap:wrap;gap:.5rem;}
+.mt-conditional-cells{display:grid;gap:1.5rem;}
+.mt-conditional-cell{border-left:2px solid #888;padding-left:1rem;min-width:0;}
+.mt-conditional-cell p{line-height:1.7;}
+.mt-loss-form{display:grid;gap:.75rem;margin:1rem 0;}
+.mt-loss-form button{justify-self:start;background:#171717;color:#e7b54a;border:1px solid #777;border-radius:.2rem;padding:.5rem .8rem;font:inherit;}
+.mt-loss-form button:focus-visible{outline:2px solid #e7b54a;outline-offset:3px;}
+.mt-outcome-space{border:1px solid #888;padding:.75rem;margin:1rem 0;}
+.mt-loss-form [role=alert]{color:#d89ca9;}
+.mt-mass-scale{display:flex;gap:.75rem;align-items:center;max-width:24rem;}
+.mt-mass-scale i{flex:1;height:.75rem;background:linear-gradient(to right,#e7b54a14,#e7b54a);}
+
+.mt-series-key>span{display:flex;align-items:center;gap:.4rem;}

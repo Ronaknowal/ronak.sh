@@ -1,0 +1,65 @@
+.rlvr-flow { --rlvr-cyan:#79cbd5; --rlvr-amber:#edbc69; --rlvr-violet:#bba2ff; --rlvr-rose:#ef93ae; }
+.rlvr-flow *, .rlvr-flow *::before, .rlvr-flow *::after { box-sizing:border-box; }
+.rlvr-flow p, .rlvr-flow li { overflow-wrap:anywhere; }
+.rlvr-figure { margin:2rem 0; padding:0; min-width:0; border:0; background:none; container-type:inline-size; }
+.rlvr-figure figcaption, .rlvr-note { color:#abb0bd; font-size:.875rem; line-height:1.6; margin:.7rem 0; }
+.rlvr-scroll-wrap { min-width:0; max-width:100%; }
+.rlvr-scroll { overflow-x:auto; max-width:100%; scrollbar-color:#b4925a #202229; padding-bottom:.35rem; }
+.rlvr-scroll:focus-visible { outline:2px solid #edbc69; outline-offset:3px; }
+.rlvr-scroll-cue { font-size:.8rem; color:#c8b489; margin:.2rem 0 .5rem; }
+.rlvr-svg { display:block; max-width:none; height:auto; overflow:visible; }
+.rlvr-svg text { font-family:inherit; font-size:13px; }
+.rlvr-svg .rlvr-halo { paint-order:stroke fill; stroke:#17181d; stroke-width:6px; stroke-linejoin:round; }
+.rlvr-table { width:100%; min-width:30rem; border-collapse:collapse; line-height:1.55; font-size:.9rem; }
+.rlvr-table caption { text-align:left; color:#b4b8c6; margin:.4rem 0; }
+.rlvr-table td,.rlvr-table th { padding:.6rem .65rem; border-bottom:1px solid #30333c; text-align:left; vertical-align:top; white-space:normal; overflow-wrap:normal; }
+.rlvr-table .rlvr-hash { display:inline-block; max-width:12rem; overflow-wrap:anywhere; }
+.rlvr-table th { color:#bfc3d0; font-weight:500; }
+.rlvr-controls { display:flex; flex-wrap:wrap; gap:.9rem 1.1rem; align-items:end; margin:1rem 0; }
+.rlvr-controls label { display:grid; grid-template-columns:minmax(0,1fr); gap:.4rem; min-width:0; max-width:100%; font-size:.88rem; color:#c8cbd4; }
+.rlvr-controls input[type=range] { width:12rem; max-width:100%; accent-color:#edbc69; }
+.rlvr-controls select,.rlvr-controls input[type=text],.rlvr-controls textarea { color:#e8e9ef; background:#22242c; border:1px solid #555967; padding:.55rem .7rem; font:inherit; max-width:100%; }
+.rlvr-controls select { max-width:22rem; }
+.rlvr-controls textarea { min-height:6rem; width:28rem; line-height:1.6; }
+.rlvr-controls .rlvr-check { display:flex; align-items:center; gap:.45rem; }
+.rlvr-controls input[type=checkbox] { accent-color:#edbc69; }
+.rlvr-flow button { color:#ead4ac; background:#26242a; border:1px solid #705c40; border-radius:.25rem; font:inherit; padding:.45rem .7rem; cursor:pointer; }
+.rlvr-flow button:focus-visible,.rlvr-controls input:focus-visible,.rlvr-controls select:focus-visible,.rlvr-controls textarea:focus-visible { outline:2px solid #edbc69; outline-offset:3px; }
+.rlvr-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.2rem; }
+.rlvr-three { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+.rlvr-entity { border-left:3px solid var(--entity,#79cbd5); padding-left:.8rem; min-width:0; }
+.rlvr-entity p { margin:.35rem 0; }
+.rlvr-raw { white-space:pre-wrap; overflow-wrap:anywhere; font-family:inherit; color:#e4e5ec; line-height:1.65; margin:.5rem 0; }
+.rlvr-status { display:flex; flex-wrap:wrap; gap:.7rem; align-items:baseline; margin:.7rem 0; }
+.rlvr-status strong { color:#edbc69; font-weight:500; }
+.rlvr-bars { margin:.8rem 0; container-type:inline-size; display:grid; grid-template-columns:minmax(0,1fr) minmax(2rem,2fr) max-content; column-gap:.6rem; }
+.rlvr-bars > .rlvr-note { grid-column:1/-1; }
+.rlvr-bar-row { display:grid; grid-template-columns:subgrid; grid-column:1/-1; align-items:center; gap:.6rem; margin:.6rem 0; font-size:.87rem; }
+.rlvr-bar-row > * { min-width:0; overflow-wrap:normal; }
+.rlvr-bar-row > output { white-space:nowrap; }
+.rlvr-bar-track { position:relative; height:.8rem; background:#292c36; }
+.rlvr-bar { position:absolute; top:0; height:100%; }
+.rlvr-bar-track--signed::after { content:''; position:absolute; left:50%; top:-.2rem; bottom:-.2rem; width:1px; background:#dedfe4; }
+.rlvr-tokens { display:flex; gap:.4rem; flex-wrap:wrap; margin:.7rem 0; }
+.rlvr-flow .rlvr-token { min-width:3.9rem; padding:.4rem; display:grid; text-align:center; gap:.3rem; color:var(--entity); border:1px solid var(--entity); background:transparent; font-family:inherit; }
+.rlvr-token small { font-size:.68rem; color:#b5b9c6; }
+.rlvr-token b { font-weight:500; }
+.rlvr-flow .rlvr-selected { outline:2px solid #fff; outline-offset:2px; }
+.rlvr-grid { display:grid; gap:.35rem; max-width:100%; }
+.rlvr-cell { display:grid; place-items:center; padding:.65rem .4rem; border:1px solid #59606d; color:#e9eaf0; font-size:.9rem; min-height:2.5rem; }
+.rlvr-index { display:flex; flex-wrap:wrap; gap:.4rem; margin:1rem 0; }
+.rlvr-flow .rlvr-index button { font-size:.78rem; padding:.35rem .55rem; }
+.rlvr-hash { font-family:ui-monospace,monospace; font-size:.78rem; overflow-wrap:anywhere; color:#bbc2d0; }
+.rlvr-equation .rlvr-scroll { overflow-y:hidden; padding:.8rem 0; }
+.rlvr-practice { margin:1.5rem 0 2rem; }
+.rlvr-practice details { border:0; background:none; margin:.8rem 0; padding:.2rem 0; }
+.rlvr-practice summary { color:#edbc69; cursor:pointer; }
+.rlvr-data-view { min-height:4rem; }
+.rlvr-subsets { display:flex; flex-wrap:wrap; gap:.4rem; min-width:30rem; }
+.rlvr-subsets span { font-size:.8rem; border-bottom:2px solid; padding:.3rem .45rem; }
+@media(max-width:43rem) { .rlvr-columns,.rlvr-three { grid-template-columns:1fr; } .rlvr-controls { align-items:stretch; } .rlvr-controls label { width:100%; } .rlvr-controls select,.rlvr-controls textarea { width:100%; max-width:100%; } .rlvr-bar-row { font-size:.8rem; } }
+@container(max-width:43rem) { .rlvr-columns,.rlvr-three { grid-template-columns:1fr; } .rlvr-controls { align-items:stretch; } .rlvr-controls label { width:100%; } .rlvr-controls select,.rlvr-controls textarea { width:100%; max-width:100%; } }
+.rlvr-flow button:disabled, .rlvr-controls input:disabled { opacity:.45; cursor:not-allowed; }
+@container(max-width:20rem) { .rlvr-bars { grid-template-columns:minmax(0,1fr) max-content; } .rlvr-bar-row > :first-child { grid-column:1/-1; overflow-wrap:normal; } }
+[data-rlvr-figure="D31"] .rlvr-table th { overflow-wrap:normal; }
+[data-rlvr-figure="D31"] .rlvr-table td:first-child { min-width:7em; overflow-wrap:normal; }

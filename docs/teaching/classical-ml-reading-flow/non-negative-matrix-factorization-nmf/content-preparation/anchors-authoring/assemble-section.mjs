@@ -1,0 +1,23 @@
+import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {fileURLToPath} from 'node:url';
+const directory=path.dirname(fileURLToPath(import.meta.url)),file=n=>path.resolve(directory,n),read=n=>fs.readFileSync(file(n),'utf8');
+const bind=n=>{const p=file(n),b=fs.readFileSync(p);return{path:p,bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')};};
+const checks=[];const check=(name,condition)=>{checks.push({name,passed:Boolean(condition)});if(!condition)throw Error(name);};
+const numerical=JSON.parse(read('anchor-checks.json'));
+check('all51 focused conditions passed',numerical.checks.length===51&&numerical.checks.every(x=>x.passed));
+for(const expected of numerical.inputs)check(`source conserved ${path.basename(expected.path)}`,bind(expected.path).sha256===expected.sha256);
+for(const role of ['stdout','stderr'])check(`current main ${role}`,bind(numerical.main[role].path).sha256===numerical.main[role].sha256);
+let body=read('section-fifteen-template.md');
+check('one accepted section15',body.startsWith('## 15. When anchors help recover the dictionary')&&(body.match(/^## /gm)||[]).length===1);
+for(const[id,text]of[['D53','Here we temporarily'],['D54','The observed rows here'],['D55','At the initial step'],['D56','P0 is']])check(`${id} before walkthrough`,body.indexOf(`<!-- figure:${id} -->`)>0&&body.indexOf(`<!-- figure:${id} -->`)<body.indexOf(text));
+const slots=[{marker:'<!-- source:nmf_anchors.py -->',path:file('../content-programs/nmf_anchors.py'),language:'python'},{marker:'<!-- output:nmf_anchors.stdout.txt -->',path:file('nmf_anchors.stdout.txt'),language:'text'}];
+for(const slot of slots){const text=fs.readFileSync(slot.path,'utf8').trimEnd();check(`one slot ${slot.marker}`,body.split(slot.marker).length===2);body=body.replace(slot.marker,`\n\`\`\`${slot.language}\n${text}\n\`\`\`\n`);check(`literal source/output ${slot.marker}`,body.includes(text));}
+check('no unresolved body slots',!body.includes('<!-- source:')&&!body.includes('<!-- output:'));
+check('length versus squaredlength correct',body.includes('`0,1,0.25,0.75`')&&body.includes('`0,1,0.0625,0.5625`'));
+check('units and ID ties taught',body.includes('original normalized row')&&body.includes('physical positions in its array are 1 and 0'));
+check('signed residuals not clipped',body.includes('Clipping that negative cell would change')&&body.includes('not from these signed residuals'));
+check('exact assumptions and current research boundaries',body.includes('linearly independent')&&body.includes('its broader noisy theorem has additional conditions'));
+for(const[e,s]of[[.1,'0.141421'],[.01,'0.014142']])check(`distance epsilon${e}`,body.includes(s)&&Math.abs(Math.sqrt(2)*e-Number(s))<1e-6);
+check('ordinary QR/NNLS source explicit',body.includes('np.linalg.qr')&&body.includes('from nmf_nnls import encode_nnls'));
+fs.writeFileSync(file('section-fifteen.md'),body);
+const packet={status:'SECTION15_N11_D53_D56_COMPLETE_SCOPED_NOT_WHOLE_TOPIC_READY',author:'/root/nmf_initialization_author',created:new Date().toISOString(),acceptedAnchor:'15-when-anchors-help-recover-the-dictionary',bindings:['section-fifteen-template.md','section-fifteen.md','visual-specifications.md','assemble-section.mjs','check-anchors.py','anchor-checks.json','nmf_anchors.stdout.txt','nmf_anchors.stderr.txt'].map(bind),sourceSlots:slots.map(x=>({...x,identity:bind(x.path)})),checks,evidence:{numericalConditions:51,newMain:1,fullStreamsRead:true,oldFitsMainsCampaignsReplayed:false,primitives:numerical.ordinaryPrimitives},reading:'Entire current N11 program/manuscript/D53–D56 specs and stdout/stderr read. Gillis–Vavasis primary Algorithm1/normalization/Assumptions1–2/exact Theorem1 induction passages targeted read, not whole paper/noisy proof. NumPy QR current contract targeted read (web manual2.5, installed execution2.3.5). Prior canonical treatments reused.',tieInterpretation:numerical.tieInterpretation,limits:'Author source/finite numerical checks only, no independent whole content/native/noisy theorem/physical identification acceptance.',continuation:'Root compose exact literal section. Sections13 and16–19 remain in progress. No phase/public/runtime changes.'};
+fs.writeFileSync(file('section-fifteen-handoff.json'),JSON.stringify(packet,null,2)+'\n');console.log(JSON.stringify({checks:checks.length,manuscript:bind('section-fifteen.md'),handoff:bind('section-fifteen-handoff.json')}));

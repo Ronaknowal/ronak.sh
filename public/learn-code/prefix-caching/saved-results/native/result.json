@@ -1,0 +1,631 @@
+{
+  "stage": "native",
+  "status": "passed",
+  "source_manifest": "030f66381c3e4bca501b526082f853cfe6e20a7fc76970b0173026df5530232a",
+  "protocol_sha256": "6c301081b86e3b471cef9e935cb36e7752359f1cf619cc036f8d8081aeed56f6",
+  "observations": {
+    "calls": 10,
+    "cases": [
+      {
+        "prefix_length": 8,
+        "tail_index": 0,
+        "call": 3,
+        "prefix_ids": [
+          2422,
+          547,
+          369,
+          5068,
+          281,
+          755,
+          1077,
+          11870
+        ],
+        "tail_ids": [
+          533,
+          352,
+          574,
+          642,
+          7968,
+          390,
+          16072,
+          275
+        ],
+        "comparison": {
+          "max_absolute_error": 3.552713678800501e-14,
+          "max_relative_error": 5.193739566043536e-10,
+          "compared_elements": 402432,
+          "mismatched_elements": 0,
+          "tolerance_passed": true,
+          "top1_matches": true,
+          "atol": 2e-09,
+          "rtol": 2e-09
+        },
+        "base_unchanged": true,
+        "independent_branch_storage": true,
+        "copied_prefix_bytes": 98304,
+        "branch": {
+          "length": 16,
+          "occupied_bytes": 196608,
+          "backing_bytes": 196608,
+          "layers": [
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            }
+          ]
+        }
+      },
+      {
+        "prefix_length": 8,
+        "tail_index": 1,
+        "call": 5,
+        "prefix_ids": [
+          2422,
+          547,
+          369,
+          5068,
+          281,
+          755,
+          1077,
+          11870
+        ],
+        "tail_ids": [
+          352,
+          13,
+          773,
+          395,
+          752,
+          310,
+          253,
+          897
+        ],
+        "comparison": {
+          "max_absolute_error": 9.592326932761353e-14,
+          "max_relative_error": 3.5791055746199534e-09,
+          "compared_elements": 402432,
+          "mismatched_elements": 0,
+          "tolerance_passed": true,
+          "top1_matches": true,
+          "atol": 2e-09,
+          "rtol": 2e-09
+        },
+        "base_unchanged": true,
+        "independent_branch_storage": true,
+        "copied_prefix_bytes": 98304,
+        "branch": {
+          "length": 16,
+          "occupied_bytes": 196608,
+          "backing_bytes": 196608,
+          "layers": [
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            },
+            {
+              "keys": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                16,
+                32
+              ],
+              "occupied_bytes": 32768,
+              "backing_bytes": 32768
+            }
+          ]
+        }
+      },
+      {
+        "prefix_length": 32,
+        "tail_index": 0,
+        "call": 8,
+        "prefix_ids": [
+          2422,
+          547,
+          369,
+          5068,
+          281,
+          755,
+          1077,
+          11870,
+          273,
+          7063,
+          407,
+          617,
+          7586,
+          327,
+          253,
+          4310,
+          13,
+          285,
+          273,
+          1907,
+          2717,
+          281,
+          513,
+          27,
+          2378,
+          390,
+          7019,
+          703,
+          574,
+          759,
+          554,
+          264
+        ],
+        "tail_ids": [
+          533,
+          352,
+          574,
+          642,
+          7968,
+          390,
+          16072,
+          275
+        ],
+        "comparison": {
+          "max_absolute_error": 3.197442310920451e-14,
+          "max_relative_error": 5.225788774673371e-10,
+          "compared_elements": 402432,
+          "mismatched_elements": 0,
+          "tolerance_passed": true,
+          "top1_matches": true,
+          "atol": 2e-09,
+          "rtol": 2e-09
+        },
+        "base_unchanged": true,
+        "independent_branch_storage": true,
+        "copied_prefix_bytes": 393216,
+        "branch": {
+          "length": 40,
+          "occupied_bytes": 491520,
+          "backing_bytes": 491520,
+          "layers": [
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            }
+          ]
+        }
+      },
+      {
+        "prefix_length": 32,
+        "tail_index": 1,
+        "call": 10,
+        "prefix_ids": [
+          2422,
+          547,
+          369,
+          5068,
+          281,
+          755,
+          1077,
+          11870,
+          273,
+          7063,
+          407,
+          617,
+          7586,
+          327,
+          253,
+          4310,
+          13,
+          285,
+          273,
+          1907,
+          2717,
+          281,
+          513,
+          27,
+          2378,
+          390,
+          7019,
+          703,
+          574,
+          759,
+          554,
+          264
+        ],
+        "tail_ids": [
+          352,
+          13,
+          773,
+          395,
+          752,
+          310,
+          253,
+          897
+        ],
+        "comparison": {
+          "max_absolute_error": 2.7533531010703882e-14,
+          "max_relative_error": 1.893908678177356e-10,
+          "compared_elements": 402432,
+          "mismatched_elements": 0,
+          "tolerance_passed": true,
+          "top1_matches": true,
+          "atol": 2e-09,
+          "rtol": 2e-09
+        },
+        "base_unchanged": true,
+        "independent_branch_storage": true,
+        "copied_prefix_bytes": 393216,
+        "branch": {
+          "length": 40,
+          "occupied_bytes": 491520,
+          "backing_bytes": 491520,
+          "layers": [
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            },
+            {
+              "keys": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "values": [
+                1,
+                4,
+                40,
+                32
+              ],
+              "occupied_bytes": 81920,
+              "backing_bytes": 81920
+            }
+          ]
+        }
+      }
+    ],
+    "weights_before": "06747826359c7b9f3322cd735210f594003d31396651cede67f3da7230a855cf",
+    "weights_after": "06747826359c7b9f3322cd735210f594003d31396651cede67f3da7230a855cf",
+    "torch": "2.14.0+cpu",
+    "transformers": "5.19.0",
+    "dtype": "torch.float64",
+    "attention": "eager",
+    "tokenizer_class": "GPTNeoXTokenizer",
+    "claim": "Finite suffix-logit compatibility; no generation, speed or model-quality claim."
+  }
+}

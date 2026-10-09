@@ -1,0 +1,1538 @@
+[
+  {
+    "id": "test:9/reverse",
+    "parent_id": "test:9",
+    "target": 5,
+    "intervention": "reverse",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_delivery_estimate",
+            "probabilities": {
+              "card_payment_not_recognised": 0.002,
+              "lost_or_stolen_card": 0.0488,
+              "card_not_working": 0.0181,
+              "card_linking": 0.0007,
+              "card_delivery_estimate": 0.8527,
+              "card_arrival": 0.0776
+            },
+            "confidence": 0.6808,
+            "answer_confidence": 0.8527,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 130,
+          "output_tokens": 0,
+          "state_tokens": 15,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        -2.253048896789551,
+        0.9259824156761169,
+        -0.06350690126419067,
+        -3.3428092002868652,
+        3.78678297996521,
+        1.3898638486862183
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          130
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:9/paraphrase",
+    "parent_id": "test:9",
+    "target": 0,
+    "intervention": "paraphrase",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_arrival",
+            "probabilities": {
+              "card_arrival": 0.9735,
+              "card_delivery_estimate": 0.009,
+              "card_linking": 0.0004,
+              "card_not_working": 0.003,
+              "lost_or_stolen_card": 0.0117,
+              "card_payment_not_recognised": 0.0024
+            },
+            "confidence": 0.9131,
+            "answer_confidence": 0.9735,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 136,
+          "output_tokens": 0,
+          "state_tokens": 15,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        4.59854793548584,
+        -0.08923739194869995,
+        -3.16825008392334,
+        -1.1679506301879883,
+        0.17403735220432281,
+        -1.402451992034912
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          136
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:9/omit-correct",
+    "parent_id": "test:9",
+    "target": null,
+    "intervention": "omit-correct",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_delivery_estimate",
+            "probabilities": {
+              "card_delivery_estimate": 0.9466,
+              "card_linking": 0.0036,
+              "card_not_working": 0.015,
+              "lost_or_stolen_card": 0.0243,
+              "card_payment_not_recognised": 0.0105
+            },
+            "confidence": 0.83,
+            "answer_confidence": 0.9466,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 114,
+          "output_tokens": 0,
+          "state_tokens": 15,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        6.09216833114624,
+        -3.709766387939453,
+        -1.2028653621673584,
+        -0.3523852229118347,
+        -1.829599142074585
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          114
+        ],
+        "marker_shape": [
+          1,
+          5
+        ],
+        "widths": [
+          5
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:9/distractor",
+    "parent_id": "test:9",
+    "target": 0,
+    "intervention": "distractor",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_delivery_estimate",
+            "probabilities": {
+              "card_arrival": 0.3868,
+              "card_delivery_estimate": 0.5776,
+              "card_linking": 0.0006,
+              "card_not_working": 0.0051,
+              "lost_or_stolen_card": 0.0257,
+              "card_payment_not_recognised": 0.0026,
+              "balance": 0.0017
+            },
+            "confidence": 0.5704,
+            "answer_confidence": 0.5776,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 141,
+          "output_tokens": 0,
+          "state_tokens": 15,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        3.0562987327575684,
+        3.4572572708129883,
+        -3.3810908794403076,
+        -1.273571252822876,
+        0.3457982838153839,
+        -1.960313320159912,
+        -2.3918561935424805
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          141
+        ],
+        "marker_shape": [
+          1,
+          7
+        ],
+        "widths": [
+          7
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:308/reverse",
+    "parent_id": "test:308",
+    "target": 4,
+    "intervention": "reverse",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "lost_or_stolen_card",
+            "probabilities": {
+              "card_payment_not_recognised": 0.0236,
+              "lost_or_stolen_card": 0.497,
+              "card_not_working": 0.1407,
+              "card_linking": 0.0064,
+              "card_delivery_estimate": 0.0099,
+              "card_arrival": 0.3224
+            },
+            "confidence": 0.3555,
+            "answer_confidence": 0.497,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 123,
+          "output_tokens": 0,
+          "state_tokens": 8,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        -0.6900597810745239,
+        2.3570291996002197,
+        1.0954076051712036,
+        -1.9987213611602783,
+        -1.560742735862732,
+        1.9241873025894165
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          123
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:308/paraphrase",
+    "parent_id": "test:308",
+    "target": 1,
+    "intervention": "paraphrase",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "lost_or_stolen_card",
+            "probabilities": {
+              "card_arrival": 0.0729,
+              "card_delivery_estimate": 0.0084,
+              "card_linking": 0.0086,
+              "card_not_working": 0.0667,
+              "lost_or_stolen_card": 0.7454,
+              "card_payment_not_recognised": 0.098
+            },
+            "confidence": 0.4981,
+            "answer_confidence": 0.7454,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 129,
+          "output_tokens": 0,
+          "state_tokens": 8,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        0.3403962552547455,
+        -1.8186548948287964,
+        -1.799938440322876,
+        0.25150078535079956,
+        2.6650235652923584,
+        0.6363232135772705
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          129
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:308/omit-correct",
+    "parent_id": "test:308",
+    "target": null,
+    "intervention": "omit-correct",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "lost_or_stolen_card",
+            "probabilities": {
+              "card_arrival": 0.2923,
+              "card_linking": 0.0175,
+              "card_not_working": 0.18,
+              "lost_or_stolen_card": 0.3588,
+              "card_payment_not_recognised": 0.1513
+            },
+            "confidence": 0.1347,
+            "answer_confidence": 0.3588,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 106,
+          "output_tokens": 0,
+          "state_tokens": 8,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        1.84120512008667,
+        -3.1109986305236816,
+        0.9879509210586548,
+        2.2017807960510254,
+        0.6821940541267395
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          106
+        ],
+        "marker_shape": [
+          1,
+          5
+        ],
+        "widths": [
+          5
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:308/distractor",
+    "parent_id": "test:308",
+    "target": 1,
+    "intervention": "distractor",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "lost_or_stolen_card",
+            "probabilities": {
+              "card_arrival": 0.3122,
+              "card_delivery_estimate": 0.0065,
+              "card_linking": 0.0027,
+              "card_not_working": 0.0891,
+              "lost_or_stolen_card": 0.4183,
+              "card_payment_not_recognised": 0.0339,
+              "balance": 0.1374
+            },
+            "confidence": 0.2912,
+            "answer_confidence": 0.4183,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 134,
+          "output_tokens": 0,
+          "state_tokens": 8,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        1.8931667804718018,
+        -1.9854459762573242,
+        -2.8660266399383545,
+        0.6388907432556152,
+        2.1855263710021973,
+        -0.32749462127685547,
+        1.072103500366211
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          134
+        ],
+        "marker_shape": [
+          1,
+          7
+        ],
+        "widths": [
+          7
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:69/reverse",
+    "parent_id": "test:69",
+    "target": 3,
+    "intervention": "reverse",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_linking",
+            "probabilities": {
+              "card_payment_not_recognised": 0.0113,
+              "lost_or_stolen_card": 0.1113,
+              "card_not_working": 0.0501,
+              "card_linking": 0.7948,
+              "card_delivery_estimate": 0.0009,
+              "card_arrival": 0.0316
+            },
+            "confidence": 0.5853,
+            "answer_confidence": 0.7948,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 131,
+          "output_tokens": 0,
+          "state_tokens": 16,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        -0.7882295250892639,
+        1.4959464073181152,
+        0.6988925337791443,
+        3.462118625640869,
+        -3.3542776107788086,
+        0.23807647824287415
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          131
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:69/paraphrase",
+    "parent_id": "test:69",
+    "target": 2,
+    "intervention": "paraphrase",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_linking",
+            "probabilities": {
+              "card_arrival": 0.0135,
+              "card_delivery_estimate": 0.0029,
+              "card_linking": 0.7555,
+              "card_not_working": 0.0253,
+              "lost_or_stolen_card": 0.1862,
+              "card_payment_not_recognised": 0.0165
+            },
+            "confidence": 0.5754,
+            "answer_confidence": 0.7555,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 137,
+          "output_tokens": 0,
+          "state_tokens": 16,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        -0.8642110228538513,
+        -2.4204607009887695,
+        3.1572771072387695,
+        -0.2375388741493225,
+        1.7565385103225708,
+        -0.664965808391571
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          137
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:69/omit-correct",
+    "parent_id": "test:69",
+    "target": null,
+    "intervention": "omit-correct",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_arrival",
+            "probabilities": {
+              "card_arrival": 0.3804,
+              "card_delivery_estimate": 0.0207,
+              "card_not_working": 0.1679,
+              "lost_or_stolen_card": 0.2999,
+              "card_payment_not_recognised": 0.131
+            },
+            "confidence": 0.1456,
+            "answer_confidence": 0.3804,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 117,
+          "output_tokens": 0,
+          "state_tokens": 16,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        2.469790458679199,
+        -2.6504039764404297,
+        1.0306413173675537,
+        2.051276683807373,
+        0.5939279198646545
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          117
+        ],
+        "marker_shape": [
+          1,
+          5
+        ],
+        "widths": [
+          5
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:69/distractor",
+    "parent_id": "test:69",
+    "target": 2,
+    "intervention": "distractor",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_linking",
+            "probabilities": {
+              "card_arrival": 0.011,
+              "card_delivery_estimate": 0.0004,
+              "card_linking": 0.9473,
+              "card_not_working": 0.013,
+              "lost_or_stolen_card": 0.0151,
+              "card_payment_not_recognised": 0.0029,
+              "balance": 0.0102
+            },
+            "confidence": 0.852,
+            "answer_confidence": 0.9473,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 142,
+          "output_tokens": 0,
+          "state_tokens": 16,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        -0.06386342644691467,
+        -3.2649130821228027,
+        4.388916969299316,
+        0.10047632455825806,
+        0.2481904923915863,
+        -1.3881464004516602,
+        -0.14288777112960815
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          142
+        ],
+        "marker_shape": [
+          1,
+          7
+        ],
+        "widths": [
+          7
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:367/reverse",
+    "parent_id": "test:367",
+    "target": 2,
+    "intervention": "reverse",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_not_working",
+            "probabilities": {
+              "card_payment_not_recognised": 0.0533,
+              "lost_or_stolen_card": 0.3306,
+              "card_not_working": 0.4199,
+              "card_linking": 0.0014,
+              "card_delivery_estimate": 0.0015,
+              "card_arrival": 0.1933
+            },
+            "confidence": 0.3174,
+            "answer_confidence": 0.4199,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 126,
+          "output_tokens": 0,
+          "state_tokens": 11,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        0.3756338953971863,
+        2.2003750801086426,
+        2.439438819885254,
+        -3.2774128913879395,
+        -3.209320068359375,
+        1.663529396057129
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          126
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:367/paraphrase",
+    "parent_id": "test:367",
+    "target": 3,
+    "intervention": "paraphrase",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_not_working",
+            "probabilities": {
+              "card_arrival": 0.0181,
+              "card_delivery_estimate": 0.0017,
+              "card_linking": 0.0037,
+              "card_not_working": 0.7241,
+              "lost_or_stolen_card": 0.2206,
+              "card_payment_not_recognised": 0.0319
+            },
+            "confidence": 0.564,
+            "answer_confidence": 0.7241,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 132,
+          "output_tokens": 0,
+          "state_tokens": 11,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        -0.4974559545516968,
+        -2.8502542972564697,
+        -2.0902397632598877,
+        3.1935479640960693,
+        2.0048460960388184,
+        0.0713232010602951
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          132
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:367/omit-correct",
+    "parent_id": "test:367",
+    "target": null,
+    "intervention": "omit-correct",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_arrival",
+            "probabilities": {
+              "card_arrival": 0.4475,
+              "card_delivery_estimate": 0.0151,
+              "card_linking": 0.0154,
+              "lost_or_stolen_card": 0.3302,
+              "card_payment_not_recognised": 0.1918
+            },
+            "confidence": 0.273,
+            "answer_confidence": 0.4475,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 110,
+          "output_tokens": 0,
+          "state_tokens": 11,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        2.6045994758605957,
+        -3.3551275730133057,
+        -3.3261053562164307,
+        2.0697174072265625,
+        1.113210678100586
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          110
+        ],
+        "marker_shape": [
+          1,
+          5
+        ],
+        "widths": [
+          5
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:367/distractor",
+    "parent_id": "test:367",
+    "target": 3,
+    "intervention": "distractor",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_not_working",
+            "probabilities": {
+              "card_arrival": 0.2119,
+              "card_delivery_estimate": 0.0031,
+              "card_linking": 0.003,
+              "card_not_working": 0.4375,
+              "lost_or_stolen_card": 0.1678,
+              "card_payment_not_recognised": 0.0632,
+              "balance": 0.1134
+            },
+            "confidence": 0.2564,
+            "answer_confidence": 0.4375,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 137,
+          "output_tokens": 0,
+          "state_tokens": 11,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        1.2845085859298706,
+        -2.927399158477783,
+        -2.9732680320739746,
+        2.0092854499816895,
+        1.051182746887207,
+        0.07474243640899658,
+        0.6589781045913696
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          137
+        ],
+        "marker_shape": [
+          1,
+          7
+        ],
+        "widths": [
+          7
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:9/hindi",
+    "parent_id": "test:9",
+    "target": 0,
+    "intervention": "hindi",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_arrival",
+            "probabilities": {
+              "card_arrival": 0.5469,
+              "card_delivery_estimate": 0.0077,
+              "card_linking": 0.0034,
+              "card_not_working": 0.0706,
+              "lost_or_stolen_card": 0.2452,
+              "card_payment_not_recognised": 0.1262
+            },
+            "confidence": 0.3416,
+            "answer_confidence": 0.5469,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 181,
+          "output_tokens": 0,
+          "state_tokens": 66,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        2.140705108642578,
+        -2.1263575553894043,
+        -2.939927101135254,
+        0.09274372458457947,
+        1.3386566638946533,
+        0.6745891571044922
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          181
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:308/hindi",
+    "parent_id": "test:308",
+    "target": 1,
+    "intervention": "hindi",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_arrival",
+            "probabilities": {
+              "card_arrival": 0.8531,
+              "card_delivery_estimate": 0.0035,
+              "card_linking": 0.0011,
+              "card_not_working": 0.024,
+              "lost_or_stolen_card": 0.076,
+              "card_payment_not_recognised": 0.0423
+            },
+            "confidence": 0.6753,
+            "answer_confidence": 0.8531,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 151,
+          "output_tokens": 0,
+          "state_tokens": 36,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        3.538478374481201,
+        -1.9637922048568726,
+        -3.1304502487182617,
+        -0.031692296266555786,
+        1.120648980140686,
+        0.5341615676879883
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          151
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:69/long-clue-front",
+    "parent_id": "test:69",
+    "target": 2,
+    "intervention": "long-clue-front",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_linking",
+            "probabilities": {
+              "card_arrival": 0.0494,
+              "card_delivery_estimate": 0.0023,
+              "card_linking": 0.7132,
+              "card_not_working": 0.0705,
+              "lost_or_stolen_card": 0.1112,
+              "card_payment_not_recognised": 0.0534
+            },
+            "confidence": 0.4467,
+            "answer_confidence": 0.7132,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 512,
+          "output_tokens": 0,
+          "state_tokens": 1017,
+          "state_tokens_dropped": 620,
+          "truncated": true,
+          "truncated_questions": [
+            "intent"
+          ]
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        0.30959242582321167,
+        -2.7494845390319824,
+        2.979496717453003,
+        0.665611982345581,
+        1.1206696033477783,
+        0.3876739740371704
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          512
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:69/long-clue-end",
+    "parent_id": "test:69",
+    "target": 2,
+    "intervention": "long-clue-end",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_arrival",
+            "probabilities": {
+              "card_arrival": 0.3596,
+              "card_delivery_estimate": 0.0076,
+              "card_linking": 0.0096,
+              "card_not_working": 0.1392,
+              "lost_or_stolen_card": 0.2717,
+              "card_payment_not_recognised": 0.2123
+            },
+            "confidence": 0.2146,
+            "answer_confidence": 0.3596,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 512,
+          "output_tokens": 0,
+          "state_tokens": 1016,
+          "state_tokens_dropped": 619,
+          "truncated": true,
+          "truncated_questions": [
+            "intent"
+          ]
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        1.8239455223083496,
+        -2.0273942947387695,
+        -1.7951951026916504,
+        0.87476646900177,
+        1.5438828468322754,
+        1.2968182563781738
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          512
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:444/two-candidates",
+    "parent_id": "test:444",
+    "target": 0,
+    "intervention": "two-candidates",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "lost_or_stolen_card",
+            "probabilities": {
+              "lost_or_stolen_card": 0.9142,
+              "card_arrival": 0.0858
+            },
+            "confidence": 0.5778,
+            "answer_confidence": 0.9142,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 57,
+          "output_tokens": 0,
+          "state_tokens": 10,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        4.542144298553467,
+        0.031160056591033936
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          57
+        ],
+        "marker_shape": [
+          1,
+          2
+        ],
+        "widths": [
+          2
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:1117/eight-candidates",
+    "parent_id": "test:1117",
+    "target": 5,
+    "intervention": "eight-candidates",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "card_arrival",
+            "probabilities": {
+              "card_arrival": 0.4807,
+              "card_delivery_estimate": 0.0025,
+              "card_linking": 0.0022,
+              "card_not_working": 0.084,
+              "lost_or_stolen_card": 0.3417,
+              "card_payment_not_recognised": 0.048,
+              "balance": 0.0379,
+              "cash_withdrawal": 0.003
+            },
+            "confidence": 0.4025,
+            "answer_confidence": 0.4807,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 148,
+          "output_tokens": 0,
+          "state_tokens": 9,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        2.176536798477173,
+        -3.0810232162475586,
+        -3.231879472732544,
+        0.43250519037246704,
+        1.835188388824463,
+        -0.1279914677143097,
+        -0.3640967309474945,
+        -2.908372163772583
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          148
+        ],
+        "marker_shape": [
+          1,
+          8
+        ],
+        "widths": [
+          8
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:444/rename-ids",
+    "parent_id": "test:444",
+    "target": 4,
+    "intervention": "rename-ids",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "candidate-0",
+            "probabilities": {
+              "candidate-0": 0.6915,
+              "candidate-1": 0.0005,
+              "candidate-2": 0.0006,
+              "candidate-3": 0.0066,
+              "candidate-4": 0.2999,
+              "candidate-5": 0.0009
+            },
+            "confidence": 0.6296,
+            "answer_confidence": 0.6915,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 108,
+          "output_tokens": 0,
+          "state_tokens": 10,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        3.9739999771118164,
+        -3.3364648818969727,
+        -3.1604652404785156,
+        -0.6744952201843262,
+        3.138728141784668,
+        -2.635828971862793
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          108
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  },
+  {
+    "id": "test:1117/rename-ids",
+    "parent_id": "test:1117",
+    "target": 5,
+    "intervention": "rename-ids",
+    "native": [
+      {
+        "model": "laya-rl-agent",
+        "answers": {
+          "intent": {
+            "type": "choice",
+            "choice": "candidate-0",
+            "probabilities": {
+              "candidate-0": 0.4081,
+              "candidate-1": 0.0098,
+              "candidate-2": 0.0071,
+              "candidate-3": 0.3451,
+              "candidate-4": 0.1199,
+              "candidate-5": 0.11
+            },
+            "confidence": 0.2687,
+            "answer_confidence": 0.4081,
+            "action": {
+              "act_probability": 1.0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 107,
+          "output_tokens": 0,
+          "state_tokens": 9,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ],
+    "raw_logits": [
+      [
+        1.6985156536102295,
+        -2.0349159240722656,
+        -2.355319023132324,
+        1.530622959136963,
+        0.47358131408691406,
+        0.38767582178115845
+      ]
+    ],
+    "forward_events": [
+      {
+        "input_shape": [
+          1,
+          107
+        ],
+        "marker_shape": [
+          1,
+          6
+        ],
+        "widths": [
+          6
+        ],
+        "grad_enabled": false
+      }
+    ]
+  }
+]

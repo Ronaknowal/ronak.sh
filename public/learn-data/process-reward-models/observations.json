@@ -1,0 +1,7029 @@
+{
+  "scope": "Retained human records and fixed-study projection; UCT finite fixtures only. No fitting.",
+  "branches": [
+    {
+      "split": "train",
+      "record": 0,
+      "step": 12,
+      "question": "The first four terms in an arithmetic sequence are $x+y$, $x-y$, $xy$, and $x/y$, in that order. What is the fifth term? Express your answer as a common fraction.",
+      "prefix": [
+        "To find the fifth term, I need to identify the common difference of the arithmetic sequence and add it to the fourth term.",
+        "The common difference is the same for any consecutive pair of terms, so I can use any of them to find it.",
+        "For example, using the first and second terms, I can write $x-y = x+y + d$, where $d$ is the common difference.",
+        "Solving for $d$, I get $d = -2y$.",
+        "Using another pair of terms, such as the second and third, I can check if this value of $d$ is consistent.",
+        "I have $xy = x-y + d$, so substituting $d = -2y$, I get $xy = x-y - 2y$.",
+        "Simplifying, I get $xy = x - 3y$.",
+        "This seems like a reasonable equation, so I will assume that $d = -2y$ is correct.",
+        "Now, to find the fifth term, I need to add $d$ to the fourth term.",
+        "The fourth term is $x/y$, so the fifth term is $x/y + d = x/y - 2y$.",
+        "To express this as a common fraction, I need to find a common denominator for $x/y$ and $-2y$.",
+        "The least common denominator is $y$, so I can multiply the numerator and denominator of $-2y$ by $y$ to get $-2y^2/y$."
+      ],
+      "annotation": {
+        "completions": [
+          {
+            "text": "Therefore, the fifth term is $x/y - 2y^2/y = (x - 2y^2)/y$.\n\n# Answer\n\n(x - 2y^2)/y",
+            "rating": -1,
+            "flagged": null
+          },
+          {
+            "text": "Adding this to $x/y$, I get $(x/y) + (-2y^2/y) = (x - 2y^2)/y$.",
+            "rating": 0,
+            "flagged": false
+          },
+          {
+            "text": "Then, adding $x/y$ and $-2y^2/y$, I get $(x - 2y^2)/y$.",
+            "rating": 0,
+            "flagged": false
+          },
+          {
+            "text": "Adding $x/y$ and $-2y^2/y$, I get $(x - 2y^2)/y$.",
+            "rating": 0,
+            "flagged": false
+          },
+          {
+            "text": "Adding this to $x/y$, I get $(x/y) + (-2y^2/y) = (x-2y^2)/y$.",
+            "rating": 0,
+            "flagged": false
+          }
+        ],
+        "human_completion": null,
+        "chosen_completion": null
+      }
+    },
+    {
+      "split": "test",
+      "record": 156,
+      "step": 5,
+      "question": "Let $a$ and $b$ be positive real numbers such that $ab^2 = 5.$  Find the minimum value of $a^4 + b^8.$",
+      "prefix": [
+        "I notice that this problem involves a product of two variables ($ab^2$) and a sum of two powers ($a^4 + b^8$).",
+        "I wonder if I can use the AM-GM inequality, which says that for any non-negative numbers $x_1, x_2, \\dots, x_n,$ the arithmetic mean is greater than or equal to the geometric mean: $\\frac{x_1 + x_2 + \\dots + x_n}{n} \\geq \\sqrt[n]{x_1 x_2 \\dots x_n}.$",
+        "If I can write $a^4 + b^8$ as the arithmetic mean of some numbers, and $ab^2$ as the geometric mean of the same numbers, then I can apply the inequality and find a lower bound for $a^4 + b^8.$",
+        "I notice that $a^4 = (a^2)^2$ and $b^8 = (b^4)^2.$",
+        "This suggests that I can write $a^4 + b^8$ as the sum of two squares, which is the same as the arithmetic mean of four equal terms."
+      ],
+      "annotation": {
+        "completions": [
+          {
+            "text": "Specifically, $a^4 + b^8 = \\frac{a^4 + a^4 + b^8 + b^8}{4} = \\frac{(a^2)^2 + (a^2)^2 + (b^4)^2 + (b^4)^2}{4}.$",
+            "rating": -1,
+            "flagged": null
+          },
+          {
+            "text": "That is, $a^4 + b^8 = \\frac{(a^2)^2 + (a^2)^2 + (b^4)^2 + (b^4)^2}{4}.$",
+            "rating": -1,
+            "flagged": false
+          },
+          {
+            "text": "In other words, $a^4 + b^8 = 2(a^2)^2 + 2(b^4)^2 = 4\\left(\\frac{(a^2)^2 + (b^4)^2}{4}\\right).$",
+            "rating": -1,
+            "flagged": false
+          },
+          {
+            "text": "Specifically, $a^4 + b^8 = \\frac{1}{4}(a^2)^2 + \\frac{1}{4}(a^2)^2 + \\frac{1}{4}(b^4)^2 + \\frac{1}{4}(b^4)^2 = \\frac{a^2 + a^2 + b^4 + b^4}{4}.$",
+            "rating": -1,
+            "flagged": false
+          }
+        ],
+        "human_completion": null,
+        "chosen_completion": null
+      }
+    }
+  ],
+  "examples": {
+    "train": [
+      {
+        "problem_id": "00e9b3a4aa5168ac43931c45b78fb4301f9b6a97fa525118f0ef7506d949cfc3",
+        "question": "How many polynomials of the form $x^2 + mx + n$ are there with positive integer roots and $n = 28?$",
+        "prefix_steps": [],
+        "current_step": "To find the number of polynomials of the form $x^2 + mx + n$ with positive integer roots and $n = 28$, I need to think of all the ways I can factor 28 into two positive integers, since those will be the roots of the polynomial.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 141,
+          "step": 0,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "00e9b3a4aa5168ac43931c45b78fb4301f9b6a97fa525118f0ef7506d949cfc3",
+        "question": "How many polynomials of the form $x^2 + mx + n$ are there with positive integer roots and $n = 28?$",
+        "prefix_steps": [
+          "To find the number of polynomials of the form $x^2 + mx + n$ with positive integer roots and $n = 28$, I need to think of all the ways I can factor 28 into two positive integers, since those will be the roots of the polynomial."
+        ],
+        "current_step": "One way to do this is to list all the factors of 28 and pair them up: 1 and 28, 2 and 14, 4 and 7.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 141,
+          "step": 1,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "00e9b3a4aa5168ac43931c45b78fb4301f9b6a97fa525118f0ef7506d949cfc3",
+        "question": "How many polynomials of the form $x^2 + mx + n$ are there with positive integer roots and $n = 28?$",
+        "prefix_steps": [
+          "To find the number of polynomials of the form $x^2 + mx + n$ with positive integer roots and $n = 28$, I need to think of all the ways I can factor 28 into two positive integers, since those will be the roots of the polynomial.",
+          "One way to do this is to list all the factors of 28 and pair them up: 1 and 28, 2 and 14, 4 and 7."
+        ],
+        "current_step": "These are the only pairs of positive integers that multiply to give 28, so there are no other ways to factor 28.\n[*. So, the possible polynomials are $x^2 + 29x + 28$, $x^2 + 16x + 28$, and $x^2 + 11x + 28$.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 141,
+          "step": 2,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "00e9b3a4aa5168ac43931c45b78fb4301f9b6a97fa525118f0ef7506d949cfc3",
+        "question": "How many polynomials of the form $x^2 + mx + n$ are there with positive integer roots and $n = 28?$",
+        "prefix_steps": [
+          "To find the number of polynomials of the form $x^2 + mx + n$ with positive integer roots and $n = 28$, I need to think of all the ways I can factor 28 into two positive integers, since those will be the roots of the polynomial.",
+          "One way to do this is to list all the factors of 28 and pair them up: 1 and 28, 2 and 14, 4 and 7.",
+          "These are the only pairs of positive integers that multiply to give 28, so there are no other ways to factor 28.\n[*. So, the possible polynomials are $x^2 + 29x + 28$, $x^2 + 16x + 28$, and $x^2 + 11x + 28$."
+        ],
+        "current_step": "These are the only three polynomials that meet the given criteria, so the answer is 3.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 141,
+          "step": 3,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "00e9b3a4aa5168ac43931c45b78fb4301f9b6a97fa525118f0ef7506d949cfc3",
+        "question": "How many polynomials of the form $x^2 + mx + n$ are there with positive integer roots and $n = 28?$",
+        "prefix_steps": [
+          "To find the number of polynomials of the form $x^2 + mx + n$ with positive integer roots and $n = 28$, I need to think of all the ways I can factor 28 into two positive integers, since those will be the roots of the polynomial.",
+          "One way to do this is to list all the factors of 28 and pair them up: 1 and 28, 2 and 14, 4 and 7.",
+          "These are the only pairs of positive integers that multiply to give 28, so there are no other ways to factor 28.\n[*. So, the possible polynomials are $x^2 + 29x + 28$, $x^2 + 16x + 28$, and $x^2 + 11x + 28$.",
+          "These are the only three polynomials that meet the given criteria, so the answer is 3."
+        ],
+        "current_step": "# Answer\n\n3",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 141,
+          "step": 4,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "01e288bb07deffb423e5a43ffcac2775c5e4bde33a135c99b1d74844cd806645",
+        "question": "If $m$ and $n$ are positive integers such that $\\gcd(m,n) = 12$, then what is the smallest possible value of $\\gcd(10m,15n)$?",
+        "prefix_steps": [],
+        "current_step": "I know that the greatest common divisor (gcd) of two numbers is the largest positive integer that divides both numbers evenly.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 407,
+          "step": 0,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "01e288bb07deffb423e5a43ffcac2775c5e4bde33a135c99b1d74844cd806645",
+        "question": "If $m$ and $n$ are positive integers such that $\\gcd(m,n) = 12$, then what is the smallest possible value of $\\gcd(10m,15n)$?",
+        "prefix_steps": [
+          "I know that the greatest common divisor (gcd) of two numbers is the largest positive integer that divides both numbers evenly."
+        ],
+        "current_step": "I also know that the gcd of two numbers can be found by factoring them into prime factors and taking the product of the common factors with the lowest powers.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 407,
+          "step": 1,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "01e288bb07deffb423e5a43ffcac2775c5e4bde33a135c99b1d74844cd806645",
+        "question": "If $m$ and $n$ are positive integers such that $\\gcd(m,n) = 12$, then what is the smallest possible value of $\\gcd(10m,15n)$?",
+        "prefix_steps": [
+          "I know that the greatest common divisor (gcd) of two numbers is the largest positive integer that divides both numbers evenly.",
+          "I also know that the gcd of two numbers can be found by factoring them into prime factors and taking the product of the common factors with the lowest powers."
+        ],
+        "current_step": "For example, if $m = 2^3 \\cdot 3^2 \\cdot 5$ and $n = 2^2 \\cdot 3^4 \\cdot 7$, then $\\gcd(m,n) = 2^2 \\cdot 3^2 = 36$.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 407,
+          "step": 2,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "01e288bb07deffb423e5a43ffcac2775c5e4bde33a135c99b1d74844cd806645",
+        "question": "If $m$ and $n$ are positive integers such that $\\gcd(m,n) = 12$, then what is the smallest possible value of $\\gcd(10m,15n)$?",
+        "prefix_steps": [
+          "I know that the greatest common divisor (gcd) of two numbers is the largest positive integer that divides both numbers evenly.",
+          "I also know that the gcd of two numbers can be found by factoring them into prime factors and taking the product of the common factors with the lowest powers.",
+          "For example, if $m = 2^3 \\cdot 3^2 \\cdot 5$ and $n = 2^2 \\cdot 3^4 \\cdot 7$, then $\\gcd(m,n) = 2^2 \\cdot 3^2 = 36$."
+        ],
+        "current_step": "In this problem, I want to find the smallest possible value of $\\gcd(10m,15n)$, given that $\\gcd(m,n) = 12$.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 407,
+          "step": 3,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "01e288bb07deffb423e5a43ffcac2775c5e4bde33a135c99b1d74844cd806645",
+        "question": "If $m$ and $n$ are positive integers such that $\\gcd(m,n) = 12$, then what is the smallest possible value of $\\gcd(10m,15n)$?",
+        "prefix_steps": [
+          "I know that the greatest common divisor (gcd) of two numbers is the largest positive integer that divides both numbers evenly.",
+          "I also know that the gcd of two numbers can be found by factoring them into prime factors and taking the product of the common factors with the lowest powers.",
+          "For example, if $m = 2^3 \\cdot 3^2 \\cdot 5$ and $n = 2^2 \\cdot 3^4 \\cdot 7$, then $\\gcd(m,n) = 2^2 \\cdot 3^2 = 36$.",
+          "In this problem, I want to find the smallest possible value of $\\gcd(10m,15n)$, given that $\\gcd(m,n) = 12$."
+        ],
+        "current_step": "I can rewrite $10m$ and $15n$ as $2 \\cdot 5 \\cdot m$ and $3 \\cdot 5 \\cdot n$, respectively.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 407,
+          "step": 4,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "01e288bb07deffb423e5a43ffcac2775c5e4bde33a135c99b1d74844cd806645",
+        "question": "If $m$ and $n$ are positive integers such that $\\gcd(m,n) = 12$, then what is the smallest possible value of $\\gcd(10m,15n)$?",
+        "prefix_steps": [
+          "I know that the greatest common divisor (gcd) of two numbers is the largest positive integer that divides both numbers evenly.",
+          "I also know that the gcd of two numbers can be found by factoring them into prime factors and taking the product of the common factors with the lowest powers.",
+          "For example, if $m = 2^3 \\cdot 3^2 \\cdot 5$ and $n = 2^2 \\cdot 3^4 \\cdot 7$, then $\\gcd(m,n) = 2^2 \\cdot 3^2 = 36$.",
+          "In this problem, I want to find the smallest possible value of $\\gcd(10m,15n)$, given that $\\gcd(m,n) = 12$.",
+          "I can rewrite $10m$ and $15n$ as $2 \\cdot 5 \\cdot m$ and $3 \\cdot 5 \\cdot n$, respectively."
+        ],
+        "current_step": "Then, $\\gcd(10m,15n) = \\gcd(2 \\cdot 5 \\cdot m, 3 \\cdot 5 \\cdot n) = 5 \\cdot \\gcd(2 \\cdot m, 3 \\cdot n)$.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 407,
+          "step": 5,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "01e288bb07deffb423e5a43ffcac2775c5e4bde33a135c99b1d74844cd806645",
+        "question": "If $m$ and $n$ are positive integers such that $\\gcd(m,n) = 12$, then what is the smallest possible value of $\\gcd(10m,15n)$?",
+        "prefix_steps": [
+          "I know that the greatest common divisor (gcd) of two numbers is the largest positive integer that divides both numbers evenly.",
+          "I also know that the gcd of two numbers can be found by factoring them into prime factors and taking the product of the common factors with the lowest powers.",
+          "For example, if $m = 2^3 \\cdot 3^2 \\cdot 5$ and $n = 2^2 \\cdot 3^4 \\cdot 7$, then $\\gcd(m,n) = 2^2 \\cdot 3^2 = 36$.",
+          "In this problem, I want to find the smallest possible value of $\\gcd(10m,15n)$, given that $\\gcd(m,n) = 12$.",
+          "I can rewrite $10m$ and $15n$ as $2 \\cdot 5 \\cdot m$ and $3 \\cdot 5 \\cdot n$, respectively.",
+          "Then, $\\gcd(10m,15n) = \\gcd(2 \\cdot 5 \\cdot m, 3 \\cdot 5 \\cdot n) = 5 \\cdot \\gcd(2 \\cdot m, 3 \\cdot n)$."
+        ],
+        "current_step": "This means that the value of $\\gcd(10m,15n)$ depends on the value of $\\gcd(2 \\cdot m, 3 \\cdot n)$.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 407,
+          "step": 6,
+          "alternative": 0
+        }
+      }
+    ],
+    "validation": [
+      {
+        "problem_id": "43c93e5ad1da87363bf41a5f5c55b11f331ef6ba1adde99e1904b288f1d79b58",
+        "question": "What is the smallest positive integer $N$ such that the value $7 + (30 \\times N)$ is not a prime number?",
+        "prefix_steps": [],
+        "current_step": "To find the smallest $N$, I want to minimize the expression $7 + (30 \\times N)$ and make it composite.",
+        "upstream_rating": 0,
+        "class_id": 1,
+        "source": {
+          "split": "upstream_train",
+          "record": 205,
+          "step": 0,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "43c93e5ad1da87363bf41a5f5c55b11f331ef6ba1adde99e1904b288f1d79b58",
+        "question": "What is the smallest positive integer $N$ such that the value $7 + (30 \\times N)$ is not a prime number?",
+        "prefix_steps": [
+          "To find the smallest $N$, I want to minimize the expression $7 + (30 \\times N)$ and make it composite."
+        ],
+        "current_step": "I know that 7 is a prime number, and 30 is a multiple of 2, 3, and 5, so adding 7 to any multiple of 30 will not change its divisibility by those numbers.",
+        "upstream_rating": 0,
+        "class_id": 1,
+        "source": {
+          "split": "upstream_train",
+          "record": 205,
+          "step": 1,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "43c93e5ad1da87363bf41a5f5c55b11f331ef6ba1adde99e1904b288f1d79b58",
+        "question": "What is the smallest positive integer $N$ such that the value $7 + (30 \\times N)$ is not a prime number?",
+        "prefix_steps": [
+          "To find the smallest $N$, I want to minimize the expression $7 + (30 \\times N)$ and make it composite.",
+          "I know that 7 is a prime number, and 30 is a multiple of 2, 3, and 5, so adding 7 to any multiple of 30 will not change its divisibility by those numbers."
+        ],
+        "current_step": "That means I need to find the smallest multiple of 30 that is also divisible by some other prime factor, such as 7, 11, 13, etc.",
+        "upstream_rating": -1,
+        "class_id": 0,
+        "source": {
+          "split": "upstream_train",
+          "record": 205,
+          "step": 2,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "43c93e5ad1da87363bf41a5f5c55b11f331ef6ba1adde99e1904b288f1d79b58",
+        "question": "What is the smallest positive integer $N$ such that the value $7 + (30 \\times N)$ is not a prime number?",
+        "prefix_steps": [
+          "To find the smallest $N$, I want to minimize the expression $7 + (30 \\times N)$ and make it composite.",
+          "I know that 7 is a prime number, and 30 is a multiple of 2, 3, and 5, so adding 7 to any multiple of 30 will not change its divisibility by those numbers."
+        ],
+        "current_step": "Therefore, the expression will be composite as long as it is divisible by 2, 3, or 5.",
+        "upstream_rating": -1,
+        "class_id": 0,
+        "source": {
+          "split": "upstream_train",
+          "record": 205,
+          "step": 2,
+          "alternative": 1
+        }
+      },
+      {
+        "problem_id": "43c93e5ad1da87363bf41a5f5c55b11f331ef6ba1adde99e1904b288f1d79b58",
+        "question": "What is the smallest positive integer $N$ such that the value $7 + (30 \\times N)$ is not a prime number?",
+        "prefix_steps": [
+          "To find the smallest $N$, I want to minimize the expression $7 + (30 \\times N)$ and make it composite.",
+          "I know that 7 is a prime number, and 30 is a multiple of 2, 3, and 5, so adding 7 to any multiple of 30 will not change its divisibility by those numbers."
+        ],
+        "current_step": "Therefore, to make the expression composite, I need to find the smallest multiple of 30 that is also a multiple of 7.",
+        "upstream_rating": -1,
+        "class_id": 0,
+        "source": {
+          "split": "upstream_train",
+          "record": 205,
+          "step": 2,
+          "alternative": 2
+        }
+      },
+      {
+        "problem_id": "43c93e5ad1da87363bf41a5f5c55b11f331ef6ba1adde99e1904b288f1d79b58",
+        "question": "What is the smallest positive integer $N$ such that the value $7 + (30 \\times N)$ is not a prime number?",
+        "prefix_steps": [
+          "To find the smallest $N$, I want to minimize the expression $7 + (30 \\times N)$ and make it composite.",
+          "I know that 7 is a prime number, and 30 is a multiple of 2, 3, and 5, so adding 7 to any multiple of 30 will not change its divisibility by those numbers."
+        ],
+        "current_step": "Therefore, the expression will be composite if $N$ is a multiple of 2, 3, or 5.",
+        "upstream_rating": -1,
+        "class_id": 0,
+        "source": {
+          "split": "upstream_train",
+          "record": 205,
+          "step": 2,
+          "alternative": 3
+        }
+      },
+      {
+        "problem_id": "43c93e5ad1da87363bf41a5f5c55b11f331ef6ba1adde99e1904b288f1d79b58",
+        "question": "What is the smallest positive integer $N$ such that the value $7 + (30 \\times N)$ is not a prime number?",
+        "prefix_steps": [
+          "To find the smallest $N$, I want to minimize the expression $7 + (30 \\times N)$ and make it composite.",
+          "I know that 7 is a prime number, and 30 is a multiple of 2, 3, and 5, so adding 7 to any multiple of 30 will not change its divisibility by those numbers."
+        ],
+        "current_step": "Therefore, I want to find the smallest multiple of 30 that is also a multiple of 7, since then I can factor out 7 and get a composite number.",
+        "upstream_rating": -1,
+        "class_id": 0,
+        "source": {
+          "split": "upstream_train",
+          "record": 205,
+          "step": 2,
+          "alternative": 4
+        }
+      },
+      {
+        "problem_id": "43d78e3b8ab54d063d57ff55c0472720c288a67b50d861eeba1d4fe8f577f545",
+        "question": "Given that a rectangle with length $3x$ inches and width $x + 5$ inches has the property that its area and perimeter have equal values, what is $x$?",
+        "prefix_steps": [],
+        "current_step": "To solve this problem, I need to find a value of $x$ that makes the area and perimeter of the rectangle equal.",
+        "upstream_rating": 0,
+        "class_id": 1,
+        "source": {
+          "split": "upstream_train",
+          "record": 166,
+          "step": 0,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "43d78e3b8ab54d063d57ff55c0472720c288a67b50d861eeba1d4fe8f577f545",
+        "question": "Given that a rectangle with length $3x$ inches and width $x + 5$ inches has the property that its area and perimeter have equal values, what is $x$?",
+        "prefix_steps": [
+          "To solve this problem, I need to find a value of $x$ that makes the area and perimeter of the rectangle equal."
+        ],
+        "current_step": "I recall that the area of a rectangle is length times width, and the perimeter is 2 times the sum of length and width.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 166,
+          "step": 1,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "43d78e3b8ab54d063d57ff55c0472720c288a67b50d861eeba1d4fe8f577f545",
+        "question": "Given that a rectangle with length $3x$ inches and width $x + 5$ inches has the property that its area and perimeter have equal values, what is $x$?",
+        "prefix_steps": [
+          "To solve this problem, I need to find a value of $x$ that makes the area and perimeter of the rectangle equal.",
+          "I recall that the area of a rectangle is length times width, and the perimeter is 2 times the sum of length and width."
+        ],
+        "current_step": "So I can write two expressions for the area and perimeter, and set them equal to each other.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 166,
+          "step": 2,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "43d78e3b8ab54d063d57ff55c0472720c288a67b50d861eeba1d4fe8f577f545",
+        "question": "Given that a rectangle with length $3x$ inches and width $x + 5$ inches has the property that its area and perimeter have equal values, what is $x$?",
+        "prefix_steps": [
+          "To solve this problem, I need to find a value of $x$ that makes the area and perimeter of the rectangle equal.",
+          "I recall that the area of a rectangle is length times width, and the perimeter is 2 times the sum of length and width.",
+          "So I can write two expressions for the area and perimeter, and set them equal to each other."
+        ],
+        "current_step": "The area is $3x(x + 5)$, and the perimeter is $2(3x + x + 5)$.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 166,
+          "step": 3,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "43d78e3b8ab54d063d57ff55c0472720c288a67b50d861eeba1d4fe8f577f545",
+        "question": "Given that a rectangle with length $3x$ inches and width $x + 5$ inches has the property that its area and perimeter have equal values, what is $x$?",
+        "prefix_steps": [
+          "To solve this problem, I need to find a value of $x$ that makes the area and perimeter of the rectangle equal.",
+          "I recall that the area of a rectangle is length times width, and the perimeter is 2 times the sum of length and width.",
+          "So I can write two expressions for the area and perimeter, and set them equal to each other.",
+          "The area is $3x(x + 5)$, and the perimeter is $2(3x + x + 5)$."
+        ],
+        "current_step": "Simplifying the expressions, I get $3x^2 + 15x = 8x + 10$.\n[*  I want to bring everything to one side and factor the resulting quadratic equation.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_train",
+          "record": 166,
+          "step": 4,
+          "alternative": 0
+        }
+      }
+    ],
+    "test": [
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [],
+        "current_step": "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 0,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$"
+        ],
+        "current_step": "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 1,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices."
+        ],
+        "current_step": "I draw a diagram of the problem and label the relevant points and segments.",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 2,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments."
+        ],
+        "current_step": "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 3,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments.",
+          "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$"
+        ],
+        "current_step": "I wonder if I can find the coordinates of $G$ and $H$ in terms of $a,$ $b,$ $c,$ and $R.$",
+        "upstream_rating": 0,
+        "class_id": 1,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 4,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments.",
+          "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$",
+          "I wonder if I can find the coordinates of $G$ and $H$ in terms of $a,$ $b,$ $c,$ and $R.$"
+        ],
+        "current_step": "I recall that the coordinates of the centroid $G$ are the averages of the coordinates of the vertices $A,$ $B,$ and $C.$",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 5,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments.",
+          "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$",
+          "I wonder if I can find the coordinates of $G$ and $H$ in terms of $a,$ $b,$ $c,$ and $R.$",
+          "I recall that the coordinates of the centroid $G$ are the averages of the coordinates of the vertices $A,$ $B,$ and $C.$"
+        ],
+        "current_step": "I also recall that the coordinates of the circumcenter $O$ are the averages of the coordinates of the midpoints of the arcs opposite to the vertices $A,$ $B,$ and $C.$",
+        "upstream_rating": 0,
+        "class_id": 1,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 6,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments.",
+          "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$",
+          "I wonder if I can find the coordinates of $G$ and $H$ in terms of $a,$ $b,$ $c,$ and $R.$",
+          "I recall that the coordinates of the centroid $G$ are the averages of the coordinates of the vertices $A,$ $B,$ and $C.$",
+          "I also recall that the coordinates of the circumcenter $O$ are the averages of the coordinates of the midpoints of the arcs opposite to the vertices $A,$ $B,$ and $C.$"
+        ],
+        "current_step": "I observe that $O$ is the center of the circumcircle of triangle $ABC,$ so its distance to any vertex is equal to the circumradius $R.$",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 7,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments.",
+          "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$",
+          "I wonder if I can find the coordinates of $G$ and $H$ in terms of $a,$ $b,$ $c,$ and $R.$",
+          "I recall that the coordinates of the centroid $G$ are the averages of the coordinates of the vertices $A,$ $B,$ and $C.$",
+          "I also recall that the coordinates of the circumcenter $O$ are the averages of the coordinates of the midpoints of the arcs opposite to the vertices $A,$ $B,$ and $C.$",
+          "I observe that $O$ is the center of the circumcircle of triangle $ABC,$ so its distance to any vertex is equal to the circumradius $R.$"
+        ],
+        "current_step": "I use the distance formula to write three equations relating the coordinates of $O$ and the vertices $A,$ $B,$ and $C.$",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 8,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments.",
+          "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$",
+          "I wonder if I can find the coordinates of $G$ and $H$ in terms of $a,$ $b,$ $c,$ and $R.$",
+          "I recall that the coordinates of the centroid $G$ are the averages of the coordinates of the vertices $A,$ $B,$ and $C.$",
+          "I also recall that the coordinates of the circumcenter $O$ are the averages of the coordinates of the midpoints of the arcs opposite to the vertices $A,$ $B,$ and $C.$",
+          "I observe that $O$ is the center of the circumcircle of triangle $ABC,$ so its distance to any vertex is equal to the circumradius $R.$",
+          "I use the distance formula to write three equations relating the coordinates of $O$ and the vertices $A,$ $B,$ and $C.$"
+        ],
+        "current_step": "I solve for the coordinates of $O$ in terms of $a,$ $b,$ $c,$ and $R.$",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 9,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments.",
+          "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$",
+          "I wonder if I can find the coordinates of $G$ and $H$ in terms of $a,$ $b,$ $c,$ and $R.$",
+          "I recall that the coordinates of the centroid $G$ are the averages of the coordinates of the vertices $A,$ $B,$ and $C.$",
+          "I also recall that the coordinates of the circumcenter $O$ are the averages of the coordinates of the midpoints of the arcs opposite to the vertices $A,$ $B,$ and $C.$",
+          "I observe that $O$ is the center of the circumcircle of triangle $ABC,$ so its distance to any vertex is equal to the circumradius $R.$",
+          "I use the distance formula to write three equations relating the coordinates of $O$ and the vertices $A,$ $B,$ and $C.$",
+          "I solve for the coordinates of $O$ in terms of $a,$ $b,$ $c,$ and $R.$"
+        ],
+        "current_step": "I use the coordinates of $O$ and the vertices $A,$ $B,$ and $C$ to find the coordinates of $G.$",
+        "upstream_rating": 1,
+        "class_id": 2,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 10,
+          "alternative": 0
+        }
+      },
+      {
+        "problem_id": "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+        "question": "Let $G$ and $H$ denote the centroid and orthocenter of triangle $ABC,$ respectively.   Let $F$ be the midpoint of $\\overline{GH}.$  Express $AF^2 + BF^2 + CF^2$ in terms of the side lengths $a,$ $b,$ $c$ and circumradius $R$ of triangle $ABC.$",
+        "prefix_steps": [
+          "I recall that the centroid $G$ is the intersection of the medians of triangle $ABC,$ and that the orthocenter $H$ is the intersection of the altitudes of triangle $ABC.$",
+          "I also remember that the medians of triangle $ABC$ divide each other in the ratio $2:1,$ and that the altitudes of triangle $ABC$ meet the circumcircle of triangle $ABC$ at the midpoints of the arcs opposite to the vertices.",
+          "I draw a diagram of the problem and label the relevant points and segments.",
+          "I notice that $F$ is the midpoint of $\\overline{GH},$ so by the midpoint formula, its coordinates are the average of the coordinates of $G$ and $H.$",
+          "I wonder if I can find the coordinates of $G$ and $H$ in terms of $a,$ $b,$ $c,$ and $R.$",
+          "I recall that the coordinates of the centroid $G$ are the averages of the coordinates of the vertices $A,$ $B,$ and $C.$",
+          "I also recall that the coordinates of the circumcenter $O$ are the averages of the coordinates of the midpoints of the arcs opposite to the vertices $A,$ $B,$ and $C.$",
+          "I observe that $O$ is the center of the circumcircle of triangle $ABC,$ so its distance to any vertex is equal to the circumradius $R.$",
+          "I use the distance formula to write three equations relating the coordinates of $O$ and the vertices $A,$ $B,$ and $C.$",
+          "I solve for the coordinates of $O$ in terms of $a,$ $b,$ $c,$ and $R.$",
+          "I use the coordinates of $O$ and the vertices $A,$ $B,$ and $C$ to find the coordinates of $G.$"
+        ],
+        "current_step": "I realize that finding the coordinates of $H$ is more complicated, since I need to find the equations of the altitudes of triangle $ABC.$",
+        "upstream_rating": 0,
+        "class_id": 1,
+        "source": {
+          "split": "upstream_test",
+          "record": 1,
+          "step": 11,
+          "alternative": 0
+        }
+      }
+    ]
+  },
+  "collision": {
+    "words": [
+      "bu",
+      "bx"
+    ],
+    "bucket": 287,
+    "sign": 1
+  },
+  "extraction": {
+    "sources": {
+      "train": {
+        "path": "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/research/primary/prm800k-phase2_train.jsonl.prefix",
+        "sha256": "08f6e0728ac42b417293613d033f92092f806b369e6398a7e1a0abc12435ec07",
+        "bytes": 2093513,
+        "counts": {
+          "considered_alternatives": 4160,
+          "eligible_before_dedup": 4160,
+          "missing_chosen_continuation": 315,
+          "raw_records": 409,
+          "reject_duplicate_tuple": 39,
+          "reject_finish_record": 5,
+          "reject_initial_screen_record": 14,
+          "reject_problem_cap": 577
+        },
+        "eligible_problems": 388
+      },
+      "test": {
+        "path": "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/research/primary/prm800k-phase2_test.jsonl.prefix",
+        "sha256": "143b6e1e495f1b6ec836099f264ff5b6e35e8bc7070b2b1474f9ed992ddd1244",
+        "bytes": 2096959,
+        "counts": {
+          "considered_alternatives": 3476,
+          "eligible_before_dedup": 3476,
+          "missing_chosen_continuation": 329,
+          "raw_records": 364,
+          "reject_duplicate_tuple": 64,
+          "reject_finish_record": 21,
+          "reject_problem_cap": 2374
+        },
+        "eligible_problems": 94
+      }
+    },
+    "selected": {
+      "train": {
+        "problems": 96,
+        "examples": 918,
+        "class_counts": {
+          "0": 194,
+          "1": 137,
+          "2": 587
+        },
+        "problem_ids": [
+          "00e9b3a4aa5168ac43931c45b78fb4301f9b6a97fa525118f0ef7506d949cfc3",
+          "01e288bb07deffb423e5a43ffcac2775c5e4bde33a135c99b1d74844cd806645",
+          "03b55fabe44778ac3a9c4de391290aab1e3866e1575275dbf88e26da521619db",
+          "03e472958489394afc45f25ebac2c63d703f93ada1765ae6b1dd68903a9b678c",
+          "051725f6d6434e099500ed052f0c2055bb46576bedaf13ad2d6e05ec99d59649",
+          "067c13d604e248f93b3c8e5a0be6c0315869457c3e1588e3b67748597d3c6790",
+          "067efbf20fc7f48c30b55996dea661e6135e812465af883dc2148dc5af4cc9b2",
+          "076d730a4f749335e6c3c9ca5656e3b11e5657def51bc02701beebfb9df31545",
+          "084440c25d9eff74ab62747ee7d93ffe809c54b2a3673ccc164370d30ac89bdf",
+          "08766d1019b73dfe2c107f354b6b8687d3d65d7bd5bff675430b702d197099a9",
+          "0883daa49e43ebcfb7bfde2e0d4707a4c41b8db1d6c34b6e3ef440ab720721c6",
+          "08c20ba617999198261ad74fb51fdf27bbe824319f698c51a902788ecf0a6c2e",
+          "099685a67023caee625a5a0beb0a2f50a8bf4773eb99b21741f2b12ebdd4c716",
+          "09f21dcee9a961a1e7388f4fd4eca71ff908ff97f5cc2606e8efe1740ab78789",
+          "0b22886427d8f6001a49d8a37cbe6c258234a04495878201d08958fa4dec4343",
+          "0b8d8b6b77266785ae1c074438904c77519f3f7cc53c7549a7d494338c3d821f",
+          "0c037ef3ad95c1ac8b29579b0c31f4a8a57a56cb6d6fb83feaa69910c35bb296",
+          "0c9a8d6f180599b3a96a1382ecd5ca4a3b8d1f37df62a6d273a0fc027f1eb42f",
+          "0d4a81055a317e89c5f97f8fcba1849163e2e5b2457ea14edc1d3f4a75846be1",
+          "0dee399909cfa28471b1d0a0d50a1f79d7ea61c920cedc48fb39249f98f9ea1c",
+          "0dfc74d40a88bc22bbac75f7919a4acff034174264ba23a1d74e66bbbd665ab9",
+          "0f2da014d1e9d256763f05c2568652b17fb29ac05c5827be7e7e72cf8b45b11e",
+          "0f4c2324f601db2f6fbc2726d1873f63a1a4df94d65917bc539242f50d9ed9a6",
+          "0f99d94eef03a68385a29eb8a6dd526959dec0cef56e66e7d68c98cec36b8ad5",
+          "108a51fd9fe4ea3c0354a5e5e89b3c851664b620a7928ac449ae3b823edd8770",
+          "110a86de1b616a30eb9fe83e20879a4690ba9f5af41bd812547ee895e479d3c7",
+          "116c85c46d3d788fadde336bef7f8bd365ecbcb874517f890f55ff26dc9030ef",
+          "11711b76affbed75da0210025a166a455c8f5f06fab21f6db1d89fc532a77979",
+          "1329ed353664bbebb0d994bd5ec7eeba4ebf9e2dc716b52d037abcfad757687e",
+          "13578534cfecab5af8e0d8a19f382e01d76e11de3530eec12e29bf4de5fe90bc",
+          "156803ff5f0c3849a269e4e222eb9fa9499db4d2809caa801515991f66e30667",
+          "15832f00f41fb2909e24ef1fcc77544f989683d8c68976f953691450325c4d8e",
+          "161f5663585b769fb5e7fea1288426775c9c551cd77efe1681fb596cb231f0e0",
+          "1a425ae67c106b3bfc2c54369c2da0d809ed4c4e011490cec00002d2fcc19afe",
+          "1a6fb99a24f9723ad426ae94666165797f93d8068f24808ebca51bafea7a85b8",
+          "1ab50f93e0e041a18f4ba7caae0d22ab791c09558f57bb4d4e5f1c50e7bb3c2b",
+          "1b3ccfa8ed99c77100b0dc8c4c5ccdee1e2d7d96bfe00742af07d7d111cc0b0d",
+          "1d69b1f6ec21606cb6e09ac1d5803a8334a2641e7c2cb48012fc92f68c887de5",
+          "1da2c4ebd3795e86604bb89f164b61b94e6aa28578ea0614365c6eb08bf96753",
+          "1df7fa289d98eebf1fb17c305768c9309a90a43c47bcc6a624e219275af91472",
+          "1e28f528e0eb88ac5069c8e7beb3515bba749e08514acb4a9ae794defa75fbb0",
+          "2081d8605caa7afcfbb6ed214eac0fdbd706f177e2ebfab8ac3a71ec5f95ed6b",
+          "221d1c83112e66a8e98bf74b823dfa738a28525aeb9695ca484b08fc4a5ad30c",
+          "222a9361c953c0e9bda230d9569ca95c8a5ac3ce042bbead0b4af78bd8467cb1",
+          "223665394d055a013f70d9169c87eed77cfe62664fbbed2e43860eb75ff810fe",
+          "236c2ef42565616ab5f407c0e84323ef6fd0feeea33b4bea46c2f64eeac48892",
+          "237018cdd8d54ef375a15ae4f579e157870761c818169a8c9af8c6330291a8f0",
+          "2427c8a40ac2c4609c0dd003e21a499b5ca10a7d851f2ca28b0024a4f202b8a9",
+          "2458fcf6b63901a1a7e10da821153dab19326ccad3a1c551beac0d53948c6aff",
+          "26b10ffb34c74965804ddd2f6787e95ec2dfbddf71fc222dbab0c5ecb8cd7246",
+          "26f3b6da2026331c455402aadaa5d58f1c41291b476941035223bbebe661c7a0",
+          "2710a6efdfc851eafcca6eaa5ab569811191b52eb396482cffe8c8d8a7e862c1",
+          "2a0c479e0f54a56ae9166d1d4d68c98ecd0290e06480577d6aef0abd2d517a03",
+          "2a4601962e8ed69ee14586644083cc317ae57b1970cbd363dfd5fc6ad9238798",
+          "2c02e3f81d55141c5a0336e6945942b87102f49a104e1cbc82748740c002519f",
+          "2c46ac0e307a76b887fcce63a9ddef481d458c59817289b131c5910e93ff7fa6",
+          "2c599adf4cee505416007084fb4c14ec4b1ed974446bd9710449926c6b00a105",
+          "2d476563c8899a86feeb9a3573daaa41b22230b30f7d6ad076f0a778607b0ffe",
+          "2d635efa1c54250ecf13e5436518c7b36d421f925dba623b9ca65a7fc8dcf308",
+          "2e352a2b8b7ed93828810a39a50a34ffb0f046c8d42bb4e88570769a396a2180",
+          "2e35434fc5af4a7dae17b72b2dfa90d33432a8eeef34d1863a4f62d73f3ca006",
+          "2e46d5b2d20e473019f65061ee447d7a4a2b0005a5917da450de5e22418d19e9",
+          "2ec4e300fb2a3de0524d15500fa305b71de3c815ff1a8d2fb5303a1e03108538",
+          "3027cf08e07a7f7900c1a5ba60e9cdc8b27fc85dcf8d8ef2810e11a9178936ed",
+          "31bf5360d41e26afa98ef26bfe03bd8305dd8c2ca536f534698fd01fb7a10756",
+          "31cf2983b2e57dc2a5f539c79f7941aa2490c66d6da78eaf450fd018f8223b87",
+          "3251b2e3d600c114f3bc41dc4d28bd3a98997809d7c3eef7f1377df03e82c76a",
+          "3297ed0077b32ad2d71f7c983cde4119c6b937276d21d95505cebdae294f01e9",
+          "32fe9907dfa075620c3a9098d79d6847ce4e568698fd736b9a0a167a4bc2ae3e",
+          "345fa8e080cbf17766334c214f835d3ad14890e803a0c2bbd947c47ce7b2fdc9",
+          "34bee18aafe47760f31e2b02151ae8ea3d2c3fcbfe757ab6a251f8295fe1429b",
+          "35073b3904162ed87a57b7cbadfd4132e5cf78076634d0323899aea117e1b36f",
+          "35bf1115a60a8b4030a86fbb6cfca31d2ed2bb8ffc257435ecbdf1c3bb0349d5",
+          "36dac2b1d40dd173e3260aa8e3e6d132c48529225d0e31b65757ededdd1a7731",
+          "372bb8d485efc7af6a8f472441ff286ec3c5aa194e4f2fdcc2d7b811c9c5e0ad",
+          "38032e217718da6a874a80e439186c10204ff36adc0b023c817a3a41e070c84d",
+          "381587504aea50cf5098e15bdfe65085c9dbc6faf547d2137457ff0ee23441e4",
+          "387d6ee71e851acf67e2b67ae0d2d2ff4c3774d8d3747708cab905920b9e8315",
+          "38d5e562b49a4c9f8c9b9218475396d82317761738deb2ff1a4a6b4965c70b97",
+          "395ef4cd1065a34b4d8001fc79567f2d52701f7fb836245e0845efb75e671ee4",
+          "39946b35be4402ef18a0bd8216974ca66adda6df7fdcea18096d1c7e2e81cec1",
+          "39aed5c0443573ed15834db5d1492564f907f463742427464813ee408f773590",
+          "39b68068e280eaa9c811c13e5051882c6edf2c759070b7af9b25afbe553626b7",
+          "3a1b84854f713274095834217709faa414b7de6b5ba86eebd85f9bf11774b975",
+          "3a9de6b469f20578d79ad931800ce36f3dc17c2067a74a8f4cbf4b0ffc61feec",
+          "3b1d6e8c028be1af2f43ae396d230b018ec529e954c05b5b1a772cadaec9506e",
+          "3b75872da36356ab75ec7529b71a2bcef65ee54b76e5b36e9f60ee6da7f4d940",
+          "3bcb149257292338c649a863fc54f335cc3ea894a73398571fbde0fc3e50762a",
+          "3d452cb5a612cde8ec7d8a38480b7a351f997e50c8b3eb12d299441b49fe7e28",
+          "3e2b46af64896f689bfc28c5688c5c6f162046557f68afdaea196ecd908ba0ef",
+          "3e39532d592a988d51cd918ae352af29999141fad17e114031c6c00ef021275e",
+          "4070dfee9c6ef9f68162df5df4e7cfdd2ced6bf7847eac5619c10be0136bb7f5",
+          "408d2fce1a69b97dc4f5a335349af892d1b664ce6d7fb128e69a13e98696a5ff",
+          "411a495be0448db944cb4ac0b1d2874ed7d80f6f00ff3636cdd8e549dde51040",
+          "4289e25370c7dde69d7267fa6e31811c212a54662aea858a0db093849e95cb85",
+          "43b6eff223d438b8b69fa0430b62f58775a86923d3307bf876df63456ba34b58"
+        ]
+      },
+      "validation": {
+        "problems": 32,
+        "examples": 290,
+        "class_counts": {
+          "0": 68,
+          "1": 45,
+          "2": 177
+        },
+        "problem_ids": [
+          "43c93e5ad1da87363bf41a5f5c55b11f331ef6ba1adde99e1904b288f1d79b58",
+          "43d78e3b8ab54d063d57ff55c0472720c288a67b50d861eeba1d4fe8f577f545",
+          "441209611191074e67a84f6f318a28f637695245499d5ea9b6b82d4394ccaab9",
+          "445c4579d65e18f89585e11e42cba4a182870b472783fae0475ab11fbd2e8aa8",
+          "448956fe2c3545370e4a3a3f49a6eb7d7e52b6882e1207e4ec9cc5760b2c746e",
+          "44b969fd19936f5ac7c5da1b7637eeb9a68da1c495076c1d08baac5a3855a909",
+          "4665c255c917fcd10e9f68bd552602d0b5fcda80e99b3b86b55b18d1daca3fa1",
+          "490e859265ac8a2b6389382aaa91ca934413771521c257df4cd1cf5f048909fe",
+          "499669a938dd536c8a5ba99d1bf957876a5f121adda6c690fdb2403c4216de6c",
+          "4a3cc90d5736cb5b5845a6f74f31c3ae9e6309a766b477fc524a740c5a38fb80",
+          "4adb1ee66d2b50165c400664fe9adab20cc91d2adfa7ce7fae9c81882c37ae0d",
+          "4c3663958ace2763e85219ac6fe0150efd2ea25e3850399dff5957bd0f5114ea",
+          "4c6ac0defa0299d8e53400de8435989f6cef6297370f6664470ef617bc78514d",
+          "4e22780c981a4cd6ce374e0f96840fd05e2de05e5e7f7fd39a4434eedd99f057",
+          "4ec3a675b9e49e4081551381a6c9624f1105bc5ef2348558263e445ebce5362f",
+          "4f13d8683cd78de2409ab2bf290b5d5f93245ecc1b4935ccd0a15b5d0368e8a8",
+          "4f2966e2fc673a5266f374b4994fbbe68dc4eadc440ee5707561c9f27129a6b1",
+          "4f690e24a48748219d8a753c21317b3d5beaa090a4137157ccc4680196c6e9c2",
+          "520565345731ebbf507a5d6284caa5b402fa50dc035235fae84e19ebe3fe97d1",
+          "53279182a971456260044e4d445529afa965fd81a50105331c5082dfba2229f5",
+          "532e482dbeab4ec225ecee287721c9e4054f278583293ec34a6944d3466182ad",
+          "53667cce06b7598e1206d4109133347402e73f009fe325adaf90bc0b72d9c0b8",
+          "543a01eefa20fc6ebbbc1cde2572c7fab8e08a622d2c825278c34b54359e258e",
+          "5462b71cc509e28349831d7f03140d2d60fdd53b5d438f245f284e55ea31d960",
+          "548eb5f77f1791af5a3b1d633595eda348f5f5bb7d7f8e09a145f2da7834e0e9",
+          "54d8e271780656c921579f0c2126390da33e0325100405f07db64c7e8ae0da8c",
+          "54ea22f6305b5708ecaf9689d1f519bf0f44359b9a1374a02687fd7d787a1145",
+          "552255d4945bf96dc011b16c55a392e4e0bc23ee35cf649d745de65be67eeb11",
+          "57c05be3a658613766f69b078c66ea54078e870458e71f17eab1473a9b0ca558",
+          "580f745b4e7550678e45d0ddd832fbf460d8d23785a66df1f43b7b696cfeb55f",
+          "5819b8d64f05b49615b4dfd69c0e23f93f710588c4205b3c32fc6852b3f8deb8",
+          "5964e63f68984db043ba58dcb1336394ca53ff4e5de38aba798a31019811aaa9"
+        ]
+      },
+      "test": {
+        "problems": 48,
+        "examples": 524,
+        "class_counts": {
+          "0": 130,
+          "1": 72,
+          "2": 322
+        },
+        "problem_ids": [
+          "03fc51f68ab3f62c6c7d573eeec55059e7349b654d20ad560f04f48b36384ba9",
+          "0790911e9e3b807b006609701678e7b2685037912c745657ccfc8cb45f5712ba",
+          "07e22408c9d86bf198748e6e0ffd321d2d6b8d605ebab6f9a119cca4c7ce5785",
+          "07fa4ddbd196024a4dc5b38b1d6483f5343200695c86d27f0dceb11874d44b53",
+          "0809a483e113340db8da3c4f16443001d12ab90d03150053e819ee5539dae187",
+          "0f8a7867d1de477aed3aadc72d34fa0a6247f830111831a3d05d0456d03f87a0",
+          "0fe3ffbbc39468a6de4ff97e92442d7fc730b1e112bb25e6eae8bb4460faba63",
+          "118be303d7abffbef5a718d556a1a6bee2777e91a143c3327569b21dd859610f",
+          "199e104d517ec67e4f167c49f035776c7bdaf933e41971c80716e26979d3a9a8",
+          "1adf17066c8618a719c1eab7bb1fc185e2378c2dfc3d8a61e288e891421efb7f",
+          "1cc4b122f21a3c45599233ac8e1c1a65ad5a5ae32ebdc82c5e00ad424bc06a02",
+          "214693f141327f81cd2292dec52082821b5a7b6840fa4600b1ebe1f098560c3d",
+          "234b319021dcf2a640fe9e5bd8c2650d15b10b08b088521c23cc99fb1ededaf5",
+          "243684df7ea332aa4853d34dc7d5ccbfe6cc1500e9591fc31a146f42616298d1",
+          "245aadb1630fe0cf62b37c961b3851ae0864b32689a944dc777ffe773f751edf",
+          "24b6ac402f7f606fdcce34353e99d3bebd58adfe580fa59ce3fb2b2a7211facb",
+          "24cffc732716cb8fa513f4d53152b8b0974478515dfbfdaee2834aefa1e84e07",
+          "2aff3e3056e9e7c1682ba8a0393186fcca3607dc67ea7c331fba051aa5574f2c",
+          "2ea1f202b421671b727447ed61a726de3c0a20005cccbd5885b5c7378ab69ceb",
+          "2ff342ecbc77117f87b1f4aff13a1cb99834d470e3368003b70bfd4f550442a0",
+          "318c0805da3c6d0534176b07d52fa86c4dba1e22b72c271cb25ed6d5e5ec93dc",
+          "34c7f09e9f9467bcec5ad858be93a3696200538dd31edae9639a3650c309a540",
+          "3837a5604fc9b778b017ca7316f663cb548f618038d6c307b8c57b226c352f0e",
+          "38ee35d1633b217956844c009c994fb7cd3992673979db5b7247cd767feaa08b",
+          "3b95366916efe8e8ba6c605ccd8ee266758b391004f296e02c99209c3a13c633",
+          "3c2b62f64e03366e020b32cae2732cd93bf6cd90b5382f4b66e60a2b35c10a2a",
+          "3d1f09ed5cfd53dce0cdfa464313ae23908a90c6fb2ce32ec3d3e2ba3f403ac0",
+          "3da66fde3f4b05c5d4232e02d9844d7672151a9b24f40a2eae74a0f3af22ee13",
+          "4c4c64d72903acef3c70b3a2205b0e2830399efd5ba694f1a16fe51503eed84e",
+          "4d5b19fcef7ca372bfd584a8b548f3fe07b8deabaea321fa621ec2db340a7fd8",
+          "4e199a59d17092c6caf615db545c29151c35a94adc95e5e83e0659de6f27bf70",
+          "4e66c645d2a3df8631036d0cd802eb1230bfef6605b665e71e11a7cd85e278d2",
+          "4ecc75de961c1f8e9e1930094b9f3f89c988bbccd9ed3ab9e44d88dea5e05f65",
+          "50d8fc4d7e16382c89e0c967824011ce3ddf9e079ab5d9eb3bf5c0f4e27c6779",
+          "550b1a4c6ea77399326894f15265b5fe8dfa8c23d3697caf0dc7121081946a36",
+          "5a258a23ab23f61045f0ec3a6518bb94df2e857bad86d58dcd74e6ad987e87ed",
+          "5a3d7305670852a5c66d010fc2c78d4d0853a549bae00c633d221c1650dd5f4b",
+          "5dd40b1a11f0cd5500d311161634fc7e3e1a016449705e1beb5d7ee5313ca757",
+          "5e61c14d349078f7f8ae26e051f591575687cbcdc20809b1152e1d2a1d787857",
+          "607ec7f40a3b19a94b143d3cc7e115c53e2f19306944dc222309fec73a669da7",
+          "61b7e29cf3ce3ee98c5fb5e8a1d18b5ac193be125c4bfeb5fbe287ec847502e2",
+          "650570c0a1a8409fee85c38cfba9b25c9d2aff2c2f07af073c7adf503515f715",
+          "659b49f54a96ac02cd3f3cd3e58db24dce33f501220b7526d4dcd736ea5efb2c",
+          "661675972d2406b88dff249e061d7c62e2206fb36a3eb7e44f7ff1f7e5a46d63",
+          "6756a2e74b25f765ebfd60f72381373865d3c8f04d4c4fc9bcb3954ea2fbef1e",
+          "6caa0df05454edcc251116ec1c47679f2ac470a4f0f2543a1a9caf9915953205",
+          "71a953a6d0fff588db091a38ca0423fe728d73d164394f1638627c5c7342e3d7",
+          "728365c3cb7fa74d6b87c6b28b21a8623f6ff21624dea483f0d1dbbf91d33eb5"
+        ]
+      }
+    },
+    "source_sha256": "3d85a9a271ce72974a039d1d35202de1ae7c2ed9bfda51480c9f44ba12812ba9",
+    "fitted_models": 0,
+    "selected_files": {
+      "train": {
+        "sha256": "f29aced55f625e0bf178f36eab5c70813bdcad2baac0553907da77c1502843ee",
+        "bytes": 934983
+      },
+      "validation": {
+        "sha256": "8df7842fff13dfe0dde04d5aadb5ed36af285e556e5a8f77446fd9d6c829e82a",
+        "bytes": 278335
+      },
+      "test": {
+        "sha256": "8974620a869948cc380820b6bc05a6ed18ba49e7abfa1370a4edf542d594082a",
+        "bytes": 490207
+      }
+    }
+  },
+  "study": {
+    "seed": 23,
+    "updates": 160,
+    "learning_rate": 0.1,
+    "l2": 0.001,
+    "study_fits": 1,
+    "numpy": "2.3.5",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "source_sha256": "3b0ce39629f329b72059ab36c2334d9d8fdc513935dbc422cb0b94062e58c63d",
+    "prior": [
+      0.21172638436482086,
+      0.1498371335504886,
+      0.6384364820846905
+    ],
+    "baseline": {
+      "train": {
+        "examples": 918,
+        "accuracy": 0.6394335511982571,
+        "cross_entropy": 0.8982983939411477,
+        "brier": 0.5241944858854509,
+        "confusion": [
+          [
+            0,
+            0,
+            194
+          ],
+          [
+            0,
+            0,
+            137
+          ],
+          [
+            0,
+            0,
+            587
+          ]
+        ],
+        "class_counts": [
+          194,
+          137,
+          587
+        ]
+      },
+      "validation": {
+        "examples": 290,
+        "accuracy": 0.6103448275862069,
+        "cross_entropy": 0.9324563962812864,
+        "brier": 0.5497540081830191,
+        "confusion": [
+          [
+            0,
+            0,
+            68
+          ],
+          [
+            0,
+            0,
+            45
+          ],
+          [
+            0,
+            0,
+            177
+          ]
+        ],
+        "class_counts": [
+          68,
+          45,
+          177
+        ]
+      },
+      "test": {
+        "examples": 524,
+        "accuracy": 0.6145038167938931,
+        "cross_entropy": 0.9217228508202617,
+        "brier": 0.5440053669753638,
+        "confusion": [
+          [
+            0,
+            0,
+            130
+          ],
+          [
+            0,
+            0,
+            72
+          ],
+          [
+            0,
+            0,
+            322
+          ]
+        ],
+        "class_counts": [
+          130,
+          72,
+          322
+        ]
+      }
+    },
+    "checkpoints": [
+      {
+        "update": 0,
+        "metrics": {
+          "train": {
+            "examples": 918,
+            "accuracy": 0.3104575163398693,
+            "cross_entropy": 1.1023176105810468,
+            "brier": 0.6691090678147746,
+            "confusion": [
+              [
+                108,
+                38,
+                48
+              ],
+              [
+                63,
+                40,
+                34
+              ],
+              [
+                286,
+                164,
+                137
+              ]
+            ],
+            "class_counts": [
+              194,
+              137,
+              587
+            ]
+          },
+          "validation": {
+            "examples": 290,
+            "accuracy": 0.3413793103448276,
+            "cross_entropy": 1.0990602239546343,
+            "brier": 0.6669728148408022,
+            "confusion": [
+              [
+                34,
+                18,
+                16
+              ],
+              [
+                15,
+                23,
+                7
+              ],
+              [
+                91,
+                44,
+                42
+              ]
+            ],
+            "class_counts": [
+              68,
+              45,
+              177
+            ]
+          },
+          "test": {
+            "examples": 524,
+            "accuracy": 0.3377862595419847,
+            "cross_entropy": 1.1007043411793112,
+            "brier": 0.6680452857522321,
+            "confusion": [
+              [
+                36,
+                55,
+                39
+              ],
+              [
+                20,
+                25,
+                27
+              ],
+              [
+                114,
+                92,
+                116
+              ]
+            ],
+            "class_counts": [
+              130,
+              72,
+              322
+            ]
+          }
+        }
+      },
+      {
+        "update": 20,
+        "metrics": {
+          "train": {
+            "examples": 918,
+            "accuracy": 0.6394335511982571,
+            "cross_entropy": 0.8799983547111552,
+            "brier": 0.5158730539353737,
+            "confusion": [
+              [
+                0,
+                0,
+                194
+              ],
+              [
+                0,
+                0,
+                137
+              ],
+              [
+                0,
+                0,
+                587
+              ]
+            ],
+            "class_counts": [
+              194,
+              137,
+              587
+            ]
+          },
+          "validation": {
+            "examples": 290,
+            "accuracy": 0.6103448275862069,
+            "cross_entropy": 0.9378945302243146,
+            "brier": 0.557391464454028,
+            "confusion": [
+              [
+                0,
+                0,
+                68
+              ],
+              [
+                0,
+                0,
+                45
+              ],
+              [
+                0,
+                0,
+                177
+              ]
+            ],
+            "class_counts": [
+              68,
+              45,
+              177
+            ]
+          },
+          "test": {
+            "examples": 524,
+            "accuracy": 0.6145038167938931,
+            "cross_entropy": 0.9408871493900561,
+            "brier": 0.5579997541051673,
+            "confusion": [
+              [
+                0,
+                0,
+                130
+              ],
+              [
+                0,
+                0,
+                72
+              ],
+              [
+                0,
+                0,
+                322
+              ]
+            ],
+            "class_counts": [
+              130,
+              72,
+              322
+            ]
+          }
+        }
+      },
+      {
+        "update": 40,
+        "metrics": {
+          "train": {
+            "examples": 918,
+            "accuracy": 0.6394335511982571,
+            "cross_entropy": 0.8618647732113749,
+            "brier": 0.5043501528722765,
+            "confusion": [
+              [
+                0,
+                0,
+                194
+              ],
+              [
+                0,
+                0,
+                137
+              ],
+              [
+                0,
+                0,
+                587
+              ]
+            ],
+            "class_counts": [
+              194,
+              137,
+              587
+            ]
+          },
+          "validation": {
+            "examples": 290,
+            "accuracy": 0.6103448275862069,
+            "cross_entropy": 0.9329715056886742,
+            "brier": 0.555208826750958,
+            "confusion": [
+              [
+                0,
+                0,
+                68
+              ],
+              [
+                0,
+                0,
+                45
+              ],
+              [
+                0,
+                0,
+                177
+              ]
+            ],
+            "class_counts": [
+              68,
+              45,
+              177
+            ]
+          },
+          "test": {
+            "examples": 524,
+            "accuracy": 0.6145038167938931,
+            "cross_entropy": 0.9383685628744043,
+            "brier": 0.5566256083177793,
+            "confusion": [
+              [
+                0,
+                0,
+                130
+              ],
+              [
+                0,
+                0,
+                72
+              ],
+              [
+                0,
+                0,
+                322
+              ]
+            ],
+            "class_counts": [
+              130,
+              72,
+              322
+            ]
+          }
+        }
+      },
+      {
+        "update": 80,
+        "metrics": {
+          "train": {
+            "examples": 918,
+            "accuracy": 0.644880174291939,
+            "cross_entropy": 0.8395851998683123,
+            "brier": 0.49049844065127013,
+            "confusion": [
+              [
+                7,
+                0,
+                187
+              ],
+              [
+                0,
+                0,
+                137
+              ],
+              [
+                2,
+                0,
+                585
+              ]
+            ],
+            "class_counts": [
+              194,
+              137,
+              587
+            ]
+          },
+          "validation": {
+            "examples": 290,
+            "accuracy": 0.6103448275862069,
+            "cross_entropy": 0.931921301237129,
+            "brier": 0.5556758092240118,
+            "confusion": [
+              [
+                0,
+                0,
+                68
+              ],
+              [
+                0,
+                0,
+                45
+              ],
+              [
+                0,
+                0,
+                177
+              ]
+            ],
+            "class_counts": [
+              68,
+              45,
+              177
+            ]
+          },
+          "test": {
+            "examples": 524,
+            "accuracy": 0.6202290076335878,
+            "cross_entropy": 0.9397704709719981,
+            "brier": 0.5580552162496658,
+            "confusion": [
+              [
+                8,
+                0,
+                122
+              ],
+              [
+                1,
+                0,
+                71
+              ],
+              [
+                5,
+                0,
+                317
+              ]
+            ],
+            "class_counts": [
+              130,
+              72,
+              322
+            ]
+          }
+        }
+      },
+      {
+        "update": 160,
+        "metrics": {
+          "train": {
+            "examples": 918,
+            "accuracy": 0.6525054466230937,
+            "cross_entropy": 0.8096768989634041,
+            "brier": 0.47249907113422396,
+            "confusion": [
+              [
+                16,
+                0,
+                178
+              ],
+              [
+                1,
+                1,
+                135
+              ],
+              [
+                5,
+                0,
+                582
+              ]
+            ],
+            "class_counts": [
+              194,
+              137,
+              587
+            ]
+          },
+          "validation": {
+            "examples": 290,
+            "accuracy": 0.6068965517241379,
+            "cross_entropy": 0.9363920298914032,
+            "brier": 0.5602623661261795,
+            "confusion": [
+              [
+                0,
+                0,
+                68
+              ],
+              [
+                0,
+                0,
+                45
+              ],
+              [
+                1,
+                0,
+                176
+              ]
+            ],
+            "class_counts": [
+              68,
+              45,
+              177
+            ]
+          },
+          "test": {
+            "examples": 524,
+            "accuracy": 0.6183206106870229,
+            "cross_entropy": 0.9423845487643193,
+            "brier": 0.5599085866047288,
+            "confusion": [
+              [
+                15,
+                0,
+                115
+              ],
+              [
+                1,
+                0,
+                71
+              ],
+              [
+                12,
+                1,
+                309
+              ]
+            ],
+            "class_counts": [
+              130,
+              72,
+              322
+            ]
+          }
+        }
+      }
+    ],
+    "inputs": {
+      "train": "f29aced55f625e0bf178f36eab5c70813bdcad2baac0553907da77c1502843ee",
+      "validation": "8df7842fff13dfe0dde04d5aadb5ed36af285e556e5a8f77446fd9d6c829e82a",
+      "test": "8974620a869948cc380820b6bc05a6ed18ba49e7abfa1370a4edf542d594082a"
+    },
+    "outputs": {
+      "model.json": "888f0740295871f6c37dfa08fddcd5d22331d9f98963739deccc1689f90d8802",
+      "predictions.json": "8a1fb8dbcb51484466b098bf50db83cdd6861db6bd13bb6d268f20e119d5f207"
+    }
+  },
+  "search": {
+    "checks": [
+      "actual beam ancestry and prune counterexample",
+      "zero-depth unknown and different scorer target",
+      "fixed pool, voting, oracle and stable ties",
+      "log-invariant ranking, equivalent relative-mass voting and zero masses",
+      "UCT actual root backups and zero budget",
+      "separate localization and abstention denominators"
+    ],
+    "passed": 6,
+    "pool": [
+      {
+        "id": "A",
+        "answer": "3",
+        "steps": [
+          "2x=6",
+          "x=3"
+        ],
+        "scores": [
+          0.9,
+          0.9
+        ],
+        "correct": true
+      },
+      {
+        "id": "B",
+        "answer": "3",
+        "steps": [
+          "2x+2=8",
+          "2x=6",
+          "x=3"
+        ],
+        "scores": [
+          0.98,
+          0.95,
+          0.94
+        ],
+        "correct": true
+      },
+      {
+        "id": "C",
+        "answer": "4",
+        "steps": [
+          "2x=8",
+          "x=4"
+        ],
+        "scores": [
+          0.99,
+          0.98
+        ],
+        "correct": false
+      },
+      {
+        "id": "D",
+        "answer": "3.5",
+        "steps": [
+          "2x=7",
+          "x=3.5"
+        ],
+        "scores": [
+          0.6,
+          0.8
+        ],
+        "correct": false
+      },
+      {
+        "id": "E",
+        "answer": "4",
+        "steps": [
+          "answer 4"
+        ],
+        "scores": [
+          0.75
+        ],
+        "correct": false
+      },
+      {
+        "id": "F",
+        "answer": "3",
+        "steps": [
+          "2(x+1)=8 so x+1=4",
+          "x=3"
+        ],
+        "scores": [
+          0.9,
+          0.9
+        ],
+        "correct": true
+      }
+    ],
+    "ranked": {
+      "requested_candidates": 6,
+      "scored_candidates": 6,
+      "ordered": [
+        {
+          "id": "C",
+          "answer": "4",
+          "steps": [
+            "2x=8",
+            "x=4"
+          ],
+          "scores": [
+            0.99,
+            0.98
+          ],
+          "correct": false,
+          "score": 0.9702,
+          "index": 2
+        },
+        {
+          "id": "B",
+          "answer": "3",
+          "steps": [
+            "2x+2=8",
+            "2x=6",
+            "x=3"
+          ],
+          "scores": [
+            0.98,
+            0.95,
+            0.94
+          ],
+          "correct": true,
+          "score": 0.8751399999999999,
+          "index": 1
+        },
+        {
+          "id": "A",
+          "answer": "3",
+          "steps": [
+            "2x=6",
+            "x=3"
+          ],
+          "scores": [
+            0.9,
+            0.9
+          ],
+          "correct": true,
+          "score": 0.81,
+          "index": 0
+        },
+        {
+          "id": "F",
+          "answer": "3",
+          "steps": [
+            "2(x+1)=8 so x+1=4",
+            "x=3"
+          ],
+          "scores": [
+            0.9,
+            0.9
+          ],
+          "correct": true,
+          "score": 0.81,
+          "index": 5
+        },
+        {
+          "id": "E",
+          "answer": "4",
+          "steps": [
+            "answer 4"
+          ],
+          "scores": [
+            0.75
+          ],
+          "correct": false,
+          "score": 0.75,
+          "index": 4
+        },
+        {
+          "id": "D",
+          "answer": "3.5",
+          "steps": [
+            "2x=7",
+            "x=3.5"
+          ],
+          "scores": [
+            0.6,
+            0.8
+          ],
+          "correct": false,
+          "score": 0.48,
+          "index": 3
+        }
+      ],
+      "selected": {
+        "id": "C",
+        "answer": "4",
+        "steps": [
+          "2x=8",
+          "x=4"
+        ],
+        "scores": [
+          0.99,
+          0.98
+        ],
+        "correct": false,
+        "score": 0.9702,
+        "index": 2
+      },
+      "weighted_vote": "3",
+      "answer_weights": {
+        "3": 2.49514,
+        "4": 1.7202,
+        "3.5": 0.48
+      },
+      "vote_weight_convention": "product",
+      "oracle_any_correct": true
+    },
+    "ranked_log_product": {
+      "requested_candidates": 6,
+      "scored_candidates": 6,
+      "ordered": [
+        {
+          "id": "C",
+          "answer": "4",
+          "steps": [
+            "2x=8",
+            "x=4"
+          ],
+          "scores": [
+            0.99,
+            0.98
+          ],
+          "correct": false,
+          "score": -0.030253043171020916,
+          "index": 2
+        },
+        {
+          "id": "B",
+          "answer": "3",
+          "steps": [
+            "2x+2=8",
+            "2x=6",
+            "x=3"
+          ],
+          "scores": [
+            0.98,
+            0.95,
+            0.94
+          ],
+          "correct": true,
+          "score": -0.13337140542315756,
+          "index": 1
+        },
+        {
+          "id": "A",
+          "answer": "3",
+          "steps": [
+            "2x=6",
+            "x=3"
+          ],
+          "scores": [
+            0.9,
+            0.9
+          ],
+          "correct": true,
+          "score": -0.21072103131565256,
+          "index": 0
+        },
+        {
+          "id": "F",
+          "answer": "3",
+          "steps": [
+            "2(x+1)=8 so x+1=4",
+            "x=3"
+          ],
+          "scores": [
+            0.9,
+            0.9
+          ],
+          "correct": true,
+          "score": -0.21072103131565256,
+          "index": 5
+        },
+        {
+          "id": "E",
+          "answer": "4",
+          "steps": [
+            "answer 4"
+          ],
+          "scores": [
+            0.75
+          ],
+          "correct": false,
+          "score": -0.2876820724517809,
+          "index": 4
+        },
+        {
+          "id": "D",
+          "answer": "3.5",
+          "steps": [
+            "2x=7",
+            "x=3.5"
+          ],
+          "scores": [
+            0.6,
+            0.8
+          ],
+          "correct": false,
+          "score": -0.7339691750802004,
+          "index": 3
+        }
+      ],
+      "selected": {
+        "id": "C",
+        "answer": "4",
+        "steps": [
+          "2x=8",
+          "x=4"
+        ],
+        "scores": [
+          0.99,
+          0.98
+        ],
+        "correct": false,
+        "score": -0.030253043171020916,
+        "index": 2
+      },
+      "weighted_vote": "3",
+      "answer_weights": {
+        "3": 2.5717790146361574,
+        "4": 1.7730364873222015,
+        "3.5": 0.49474335188620905
+      },
+      "vote_weight_convention": "relative_product_mass",
+      "oracle_any_correct": true
+    },
+    "beam1": {
+      "width": 1,
+      "depth_budget": 2,
+      "score_family": "product",
+      "generated_scored_nodes": 4,
+      "layers": [
+        {
+          "depth": 1,
+          "scored": [
+            {
+              "node": "A",
+              "step": "2x=6",
+              "path": [
+                "A"
+              ],
+              "score": 0.6
+            },
+            {
+              "node": "B",
+              "step": "2x=8",
+              "path": [
+                "B"
+              ],
+              "score": 0.9
+            }
+          ],
+          "kept": [
+            "B"
+          ],
+          "pruned": [
+            "A"
+          ]
+        },
+        {
+          "depth": 2,
+          "scored": [
+            {
+              "node": "B1",
+              "step": "x=4",
+              "path": [
+                "B",
+                "B1"
+              ],
+              "score": 0.45
+            },
+            {
+              "node": "B2",
+              "step": "x=8",
+              "path": [
+                "B",
+                "B2"
+              ],
+              "score": 0.36000000000000004
+            }
+          ],
+          "kept": [
+            "B1"
+          ],
+          "pruned": [
+            "B2"
+          ]
+        }
+      ],
+      "completed": [
+        {
+          "node": "B1",
+          "path": [
+            "B",
+            "B1"
+          ],
+          "reward": 0,
+          "step": "x=4",
+          "score": 0.45
+        }
+      ],
+      "selected": {
+        "node": "B1",
+        "path": [
+          "B",
+          "B1"
+        ],
+        "reward": 0,
+        "step": "x=4",
+        "score": 0.45
+      }
+    },
+    "beam2": {
+      "width": 2,
+      "depth_budget": 2,
+      "score_family": "product",
+      "generated_scored_nodes": 6,
+      "layers": [
+        {
+          "depth": 1,
+          "scored": [
+            {
+              "node": "A",
+              "step": "2x=6",
+              "path": [
+                "A"
+              ],
+              "score": 0.6
+            },
+            {
+              "node": "B",
+              "step": "2x=8",
+              "path": [
+                "B"
+              ],
+              "score": 0.9
+            }
+          ],
+          "kept": [
+            "B",
+            "A"
+          ],
+          "pruned": []
+        },
+        {
+          "depth": 2,
+          "scored": [
+            {
+              "node": "B1",
+              "step": "x=4",
+              "path": [
+                "B",
+                "B1"
+              ],
+              "score": 0.45
+            },
+            {
+              "node": "B2",
+              "step": "x=8",
+              "path": [
+                "B",
+                "B2"
+              ],
+              "score": 0.36000000000000004
+            },
+            {
+              "node": "A1",
+              "step": "x=3",
+              "path": [
+                "A",
+                "A1"
+              ],
+              "score": 0.57
+            },
+            {
+              "node": "A2",
+              "step": "x=6",
+              "path": [
+                "A",
+                "A2"
+              ],
+              "score": 0.24
+            }
+          ],
+          "kept": [
+            "A1",
+            "B1"
+          ],
+          "pruned": [
+            "B2",
+            "A2"
+          ]
+        }
+      ],
+      "completed": [
+        {
+          "node": "A1",
+          "path": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "step": "x=3",
+          "score": 0.57
+        },
+        {
+          "node": "B1",
+          "path": [
+            "B",
+            "B1"
+          ],
+          "reward": 0,
+          "step": "x=4",
+          "score": 0.45
+        }
+      ],
+      "selected": {
+        "node": "A1",
+        "path": [
+          "A",
+          "A1"
+        ],
+        "reward": 1,
+        "step": "x=3",
+        "score": 0.57
+      }
+    },
+    "uct": {
+      "simulations": 8,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 8,
+        "A": 5,
+        "B": 2,
+        "A1": 3,
+        "A2": 1,
+        "B1": 1,
+        "B2": 0
+      },
+      "return_sums": {
+        "root": 5.0,
+        "A": 4.0,
+        "B": 0.0,
+        "A1": 3.0,
+        "A2": 0.0,
+        "B1": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    "localization": {
+      "error_cases": 4,
+      "all_correct_cases": 3,
+      "error_accuracy": 0.75,
+      "all_correct_accuracy": 0.6666666666666666,
+      "harmonic": 0.7058823529411765,
+      "unknown_targets": 0
+    },
+    "scope": "Constructed finite search fixtures; no large-model reproduction"
+  },
+  "rewards": {
+    "checks": [
+      {
+        "name": "eight actual leaves",
+        "passed": true
+      },
+      {
+        "name": "binomial mass",
+        "passed": true
+      },
+      {
+        "name": "hard-estimator bias",
+        "passed": true
+      },
+      {
+        "name": "soft mean and variance",
+        "passed": true
+      },
+      {
+        "name": "zero-budget unknown",
+        "passed": true
+      },
+      {
+        "name": "address-level consensus and missing labels",
+        "passed": true
+      },
+      {
+        "name": "complete parent averages",
+        "passed": true
+      },
+      {
+        "name": "signed progress",
+        "passed": true
+      },
+      {
+        "name": "value-progress crossover",
+        "passed": true
+      },
+      {
+        "name": "complete policy mass",
+        "passed": true
+      },
+      {
+        "name": "terminal expected reward",
+        "passed": true
+      },
+      {
+        "name": "enumerated logit gradient",
+        "passed": true
+      },
+      {
+        "name": "ordinary Torch exact expectation",
+        "passed": true
+      },
+      {
+        "name": "state baseline zero score expectation",
+        "passed": true
+      },
+      {
+        "name": "state baseline preserves expectation",
+        "passed": true
+      },
+      {
+        "name": "potential transition bonuses",
+        "passed": true
+      },
+      {
+        "name": "terminal telescope",
+        "passed": true
+      },
+      {
+        "name": "omitting terminal changes return",
+        "passed": true
+      },
+      {
+        "name": "return to go",
+        "passed": true
+      },
+      {
+        "name": "own advantage changes positive scale",
+        "passed": true
+      },
+      {
+        "name": "changed policy practice",
+        "passed": true
+      },
+      {
+        "name": "changed potential practice",
+        "passed": true
+      }
+    ],
+    "passed": 22,
+    "torch": "2.14.0+cpu",
+    "continuation_outcomes": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "estimate": {
+      "draws": 8,
+      "successes": 1,
+      "hard": 1,
+      "soft": 0.125
+    },
+    "binomial": {
+      "distribution": [
+        0.4304672100000001,
+        0.38263752000000006,
+        0.14880348000000002,
+        0.03306744000000001,
+        0.004592700000000001,
+        0.0004082400000000002,
+        2.268000000000001e-05,
+        7.200000000000003e-07,
+        1.0000000000000005e-08
+      ],
+      "hard_positive_probability": 0.5695327899999999,
+      "soft_expectation": 0.10000000000000002,
+      "soft_variance": 0.011250000000000003
+    },
+    "sampled_outcomes": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "consensus": {
+      "total": 5,
+      "retained": [
+        0,
+        2
+      ],
+      "disagree": [
+        1
+      ],
+      "unknown": [
+        3,
+        4
+      ]
+    },
+    "value_advantage": {
+      "alpha": 1.0,
+      "branches": [
+        {
+          "name": "A",
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "child_values": [
+            0.75,
+            0.85
+          ],
+          "parent_value": 0.8,
+          "selected_value": 0.75,
+          "advantage": -0.050000000000000044,
+          "score": 0.7
+        },
+        {
+          "name": "B",
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "child_values": [
+            0.4,
+            0
+          ],
+          "parent_value": 0.2,
+          "selected_value": 0.4,
+          "advantage": 0.2,
+          "score": 0.6000000000000001
+        }
+      ],
+      "crossover": 1.4
+    },
+    "policy": {
+      "q": 0.6,
+      "p_a": 0.8,
+      "p_b": 0.2,
+      "expected_return": 0.56,
+      "leaves": [
+        {
+          "branch": "A",
+          "success": 1,
+          "mass": 0.48,
+          "score_derivatives": [
+            0.4,
+            0.19999999999999996,
+            0.0
+          ],
+          "credit": [
+            1,
+            1,
+            1
+          ],
+          "expected_contribution": [
+            0.192,
+            0.09599999999999997,
+            0.0
+          ]
+        },
+        {
+          "branch": "A",
+          "success": 0,
+          "mass": 0.11999999999999997,
+          "score_derivatives": [
+            0.4,
+            -0.8,
+            0.0
+          ],
+          "credit": [
+            0,
+            0,
+            0
+          ],
+          "expected_contribution": [
+            0.0,
+            -0.0,
+            0.0
+          ]
+        },
+        {
+          "branch": "B",
+          "success": 1,
+          "mass": 0.08000000000000002,
+          "score_derivatives": [
+            -0.6,
+            0.0,
+            0.8
+          ],
+          "credit": [
+            1,
+            1,
+            1
+          ],
+          "expected_contribution": [
+            -0.04800000000000001,
+            0.0,
+            0.06400000000000002
+          ]
+        },
+        {
+          "branch": "B",
+          "success": 0,
+          "mass": 0.32000000000000006,
+          "score_derivatives": [
+            -0.6,
+            0.0,
+            -0.2
+          ],
+          "credit": [
+            0,
+            0,
+            0
+          ],
+          "expected_contribution": [
+            -0.0,
+            0.0,
+            -0.0
+          ]
+        }
+      ],
+      "gradient": [
+        0.144,
+        0.09599999999999997,
+        0.06400000000000002
+      ],
+      "baseline_score_expectation": [
+        -2.7755575615628914e-17,
+        0.0,
+        0.0
+      ]
+    },
+    "baseline_policy": {
+      "q": 0.6,
+      "p_a": 0.8,
+      "p_b": 0.2,
+      "expected_return": 0.56,
+      "leaves": [
+        {
+          "branch": "A",
+          "success": 1,
+          "mass": 0.48,
+          "score_derivatives": [
+            0.4,
+            0.19999999999999996,
+            0.0
+          ],
+          "credit": [
+            0.43999999999999995,
+            0.19999999999999996,
+            1.0
+          ],
+          "expected_contribution": [
+            0.08447999999999999,
+            0.01919999999999999,
+            0.0
+          ]
+        },
+        {
+          "branch": "A",
+          "success": 0,
+          "mass": 0.11999999999999997,
+          "score_derivatives": [
+            0.4,
+            -0.8,
+            0.0
+          ],
+          "credit": [
+            -0.56,
+            -0.8,
+            0.0
+          ],
+          "expected_contribution": [
+            -0.026879999999999994,
+            0.07679999999999998,
+            0.0
+          ]
+        },
+        {
+          "branch": "B",
+          "success": 1,
+          "mass": 0.08000000000000002,
+          "score_derivatives": [
+            -0.6,
+            0.0,
+            0.8
+          ],
+          "credit": [
+            0.43999999999999995,
+            1.0,
+            0.8
+          ],
+          "expected_contribution": [
+            -0.02112,
+            0.0,
+            0.051200000000000016
+          ]
+        },
+        {
+          "branch": "B",
+          "success": 0,
+          "mass": 0.32000000000000006,
+          "score_derivatives": [
+            -0.6,
+            0.0,
+            -0.2
+          ],
+          "credit": [
+            -0.56,
+            0.0,
+            -0.2
+          ],
+          "expected_contribution": [
+            0.10752000000000003,
+            0.0,
+            0.012800000000000004
+          ]
+        }
+      ],
+      "gradient": [
+        0.14400000000000002,
+        0.09599999999999997,
+        0.06400000000000002
+      ],
+      "baseline_score_expectation": [
+        -2.7755575615628914e-17,
+        0.0,
+        0.0
+      ]
+    },
+    "potential": {
+      "potentials": [
+        0.2,
+        0.5,
+        0.9,
+        0
+      ],
+      "gamma": 0.9,
+      "bonuses": [
+        0.25,
+        0.31000000000000005,
+        -0.9
+      ],
+      "discounted_bonuses": [
+        0.25,
+        0.2790000000000001,
+        -0.7290000000000001
+      ],
+      "sum": -0.2,
+      "telescoped": -0.2,
+      "omit_terminal_transition": 0.5290000000000001
+    },
+    "own_advantage": {
+      "outcome_gradient": 0.14400000000000002,
+      "surrogate_gradient": 0.21600000000000005,
+      "positive_scale": 1.5,
+      "frozen_advantages": [
+        0.24,
+        -0.36000000000000004
+      ]
+    },
+    "active_priority": [
+      {
+        "index": 2,
+        "entropy": 1.0549201679861442,
+        "disagreement": true,
+        "priority": 2.054920167986144
+      },
+      {
+        "index": 1,
+        "entropy": 1.0986122886681096,
+        "disagreement": false,
+        "priority": 1.0986122886681096
+      },
+      {
+        "index": 0,
+        "entropy": 0.39439769144744274,
+        "disagreement": false,
+        "priority": 0.39439769144744274
+      }
+    ],
+    "practice_policy": {
+      "q": 0.5,
+      "p_a": 0.9,
+      "p_b": 0.1,
+      "expected_return": 0.5,
+      "leaves": [
+        {
+          "branch": "A",
+          "success": 1,
+          "mass": 0.45,
+          "score_derivatives": [
+            0.5,
+            0.09999999999999998,
+            0.0
+          ],
+          "credit": [
+            1,
+            1,
+            1
+          ],
+          "expected_contribution": [
+            0.225,
+            0.04499999999999999,
+            0.0
+          ]
+        },
+        {
+          "branch": "A",
+          "success": 0,
+          "mass": 0.04999999999999999,
+          "score_derivatives": [
+            0.5,
+            -0.9,
+            0.0
+          ],
+          "credit": [
+            0,
+            0,
+            0
+          ],
+          "expected_contribution": [
+            0.0,
+            -0.0,
+            0.0
+          ]
+        },
+        {
+          "branch": "B",
+          "success": 1,
+          "mass": 0.05,
+          "score_derivatives": [
+            -0.5,
+            0.0,
+            0.9
+          ],
+          "credit": [
+            1,
+            1,
+            1
+          ],
+          "expected_contribution": [
+            -0.025,
+            0.0,
+            0.045000000000000005
+          ]
+        },
+        {
+          "branch": "B",
+          "success": 0,
+          "mass": 0.45,
+          "score_derivatives": [
+            -0.5,
+            0.0,
+            -0.1
+          ],
+          "credit": [
+            0,
+            0,
+            0
+          ],
+          "expected_contribution": [
+            -0.0,
+            0.0,
+            -0.0
+          ]
+        }
+      ],
+      "gradient": [
+        0.2,
+        0.04499999999999999,
+        0.045000000000000005
+      ],
+      "baseline_score_expectation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "scope": "Exact constructed finite mechanisms; no fitted reward or efficiency claim"
+  },
+  "contracts": {
+    "checks": [
+      {
+        "name": "stable BCE",
+        "passed": true
+      },
+      {
+        "name": "BCE logit derivative",
+        "passed": true
+      },
+      {
+        "name": "finite derivative 1",
+        "passed": true
+      },
+      {
+        "name": "finite derivative 2",
+        "passed": true
+      },
+      {
+        "name": "finite derivative 3",
+        "passed": true
+      },
+      {
+        "name": "three-class CE",
+        "passed": true
+      },
+      {
+        "name": "three-class derivative",
+        "passed": true
+      },
+      {
+        "name": "current-boundary positions",
+        "passed": true
+      },
+      {
+        "name": "position2 visibility",
+        "passed": true
+      },
+      {
+        "name": "different reduction denominators",
+        "passed": true
+      },
+      {
+        "name": "all-masked mean unknown",
+        "passed": true
+      },
+      {
+        "name": "worked invalid BCE",
+        "passed": true
+      },
+      {
+        "name": "worked BCE derivative",
+        "passed": true
+      },
+      {
+        "name": "constructed hidden map",
+        "passed": true
+      },
+      {
+        "name": "head weight gradient",
+        "passed": true
+      },
+      {
+        "name": "head bias gradient",
+        "passed": true
+      },
+      {
+        "name": "hidden gradient route",
+        "passed": true
+      },
+      {
+        "name": "earlier contextual input gradient",
+        "passed": true
+      },
+      {
+        "name": "current contextual input gradient",
+        "passed": true
+      },
+      {
+        "name": "published metric convention example",
+        "passed": true
+      },
+      {
+        "name": "unknown/empty/exact-zero contracts",
+        "passed": true
+      },
+      {
+        "name": "changed harmonic",
+        "passed": true
+      }
+    ],
+    "passed": 22,
+    "torch": "2.14.0+cpu",
+    "tokens": [
+      "Q",
+      "a",
+      "SEP",
+      "b",
+      "SEP",
+      "PAD"
+    ],
+    "labels": [
+      -100,
+      -100,
+      2,
+      -100,
+      0,
+      -100
+    ],
+    "visibility": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    ],
+    "practice": {
+      "binary_changed": {
+        "p": 0.25,
+        "target": 1,
+        "loss": 1.3862943611198906,
+        "logit_gradient": -0.75
+      },
+      "neutral_changed": {
+        "probabilities": [
+          0.1,
+          0.6,
+          0.3
+        ],
+        "acceptable": 0.9,
+        "strict_progress": 0.3,
+        "gradient": [
+          0.1,
+          -0.4,
+          0.3
+        ]
+      },
+      "product_changed": {
+        "A": 0.6400000000000001,
+        "B4": 0.6561,
+        "B5": 0.5904900000000001
+      },
+      "harmonic_changed": {
+        "error_cases": 5,
+        "all_correct_cases": 4,
+        "error_accuracy": 0.4,
+        "all_correct_accuracy": 0.75,
+        "harmonic": 0.5217391304347827,
+        "unknown_targets": 0
+      }
+    },
+    "contextual_fixture": {
+      "question_embedding": [
+        0,
+        2
+      ],
+      "current_embedding": [
+        2,
+        2
+      ],
+      "hidden": [
+        1,
+        2
+      ],
+      "head": [
+        0.4,
+        0.3
+      ],
+      "bias": 0.3862943611198906,
+      "logit": 1.3862943611198906,
+      "head_gradient": [
+        0.8,
+        1.6
+      ],
+      "hidden_gradient": [
+        0.32000000000000006,
+        0.24
+      ],
+      "question_gradient": [
+        0.16000000000000003,
+        0.12
+      ]
+    },
+    "scope": "Constructed contract checks; no training or benchmark"
+  },
+  "transformers": {
+    "checks": [
+      {
+        "name": "same-position library CE",
+        "passed": true
+      },
+      {
+        "name": "literal current boundary labels",
+        "passed": true
+      },
+      {
+        "name": "future edit cannot change earlier boundary",
+        "passed": true
+      },
+      {
+        "name": "later boundary responds to visible edit",
+        "passed": true
+      },
+      {
+        "name": "masked padding cannot change eligible logits",
+        "passed": true
+      },
+      {
+        "name": "EOS visible and PAD excluded by position",
+        "passed": true
+      },
+      {
+        "name": "earlier question embedding receives contextual gradient",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.wte.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.wpe.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.ln_1.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.ln_1.bias",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.attn.c_attn.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.attn.c_attn.bias",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.attn.c_proj.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.attn.c_proj.bias",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.ln_2.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.ln_2.bias",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.mlp.c_fc.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.mlp.c_fc.bias",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.mlp.c_proj.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.h.0.mlp.c_proj.bias",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.ln_f.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves transformer.ln_f.bias",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves classifier.weight",
+        "passed": true
+      },
+      {
+        "name": "null batch preserves classifier.bias",
+        "passed": true
+      },
+      {
+        "name": "save/reload exact logits",
+        "passed": true
+      }
+    ],
+    "passed": 26,
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "seed": 37,
+    "parameters": 14331,
+    "input_ids": [
+      [
+        81,
+        97,
+        256,
+        98,
+        256,
+        257,
+        258
+      ],
+      [
+        81,
+        99,
+        256,
+        257,
+        258,
+        258,
+        258
+      ]
+    ],
+    "attention_mask": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    ],
+    "same_position_labels": [
+      [
+        -100,
+        -100,
+        2,
+        -100,
+        0,
+        -100,
+        -100
+      ],
+      [
+        -100,
+        -100,
+        1,
+        -100,
+        -100,
+        -100,
+        -100
+      ]
+    ],
+    "eligible_targets": 3,
+    "library_mean_ce": 1.1066676378250122,
+    "manual_mean_ce": 1.1066676378250122,
+    "earlier_embedding_gradient_norm": 0.1024395301938057,
+    "boundary_probabilities": [
+      [
+        0.32504352927207947,
+        0.3458337187767029,
+        0.32912272214889526
+      ],
+      [
+        0.31780293583869934,
+        0.31528839468955994,
+        0.36690863966941833
+      ],
+      [
+        0.3247455060482025,
+        0.34564098715782166,
+        0.3296135365962982
+      ]
+    ],
+    "scientific_fits": 0,
+    "pretrained_inference_executed": false,
+    "scope": "Random small architecture/API contract; no mathematical competence"
+  },
+  "uct": [
+    {
+      "simulations": 0,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [],
+      "visits": {
+        "A": 0,
+        "B": 0
+      },
+      "return_sums": {},
+      "expanded_nodes": [],
+      "selected_root_child": null,
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 1,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 1,
+        "A": 0,
+        "B": 0
+      },
+      "return_sums": {
+        "root": 1.0
+      },
+      "expanded_nodes": [
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 2,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 2,
+        "A": 1,
+        "B": 0
+      },
+      "return_sums": {
+        "root": 2.0,
+        "A": 1.0
+      },
+      "expanded_nodes": [
+        "A",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 3,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 3,
+        "A": 1,
+        "B": 1
+      },
+      "return_sums": {
+        "root": 2.0,
+        "A": 1.0,
+        "B": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 4,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 4,
+        "A": 2,
+        "B": 1,
+        "A1": 1,
+        "A2": 0
+      },
+      "return_sums": {
+        "root": 3.0,
+        "A": 2.0,
+        "B": 0.0,
+        "A1": 1.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 5,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 5,
+        "A": 3,
+        "B": 1,
+        "A1": 1,
+        "A2": 1
+      },
+      "return_sums": {
+        "root": 3.0,
+        "A": 2.0,
+        "B": 0.0,
+        "A1": 1.0,
+        "A2": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 6,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 6,
+        "A": 3,
+        "B": 2,
+        "A1": 1,
+        "A2": 1,
+        "B1": 1,
+        "B2": 0
+      },
+      "return_sums": {
+        "root": 3.0,
+        "A": 2.0,
+        "B": 0.0,
+        "A1": 1.0,
+        "A2": 0.0,
+        "B1": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 7,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 7,
+        "A": 4,
+        "B": 2,
+        "A1": 2,
+        "A2": 1,
+        "B1": 1,
+        "B2": 0
+      },
+      "return_sums": {
+        "root": 4.0,
+        "A": 3.0,
+        "B": 0.0,
+        "A1": 2.0,
+        "A2": 0.0,
+        "B1": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 8,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 8,
+        "A": 5,
+        "B": 2,
+        "A1": 3,
+        "A2": 1,
+        "B1": 1,
+        "B2": 0
+      },
+      "return_sums": {
+        "root": 5.0,
+        "A": 4.0,
+        "B": 0.0,
+        "A1": 3.0,
+        "A2": 0.0,
+        "B1": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 9,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 9,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 9,
+            "A": 6,
+            "B": 2,
+            "A1": 4,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 6.0,
+            "A": 5.0,
+            "B": 0.0,
+            "A1": 4.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 9,
+        "A": 6,
+        "B": 2,
+        "A1": 4,
+        "A2": 1,
+        "B1": 1,
+        "B2": 0
+      },
+      "return_sums": {
+        "root": 6.0,
+        "A": 5.0,
+        "B": 0.0,
+        "A1": 4.0,
+        "A2": 0.0,
+        "B1": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 10,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 9,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 9,
+            "A": 6,
+            "B": 2,
+            "A1": 4,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 6.0,
+            "A": 5.0,
+            "B": 0.0,
+            "A1": 4.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 10,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 10,
+            "A": 7,
+            "B": 2,
+            "A1": 5,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 10,
+        "A": 7,
+        "B": 2,
+        "A1": 5,
+        "A2": 1,
+        "B1": 1,
+        "B2": 0
+      },
+      "return_sums": {
+        "root": 7.0,
+        "A": 6.0,
+        "B": 0.0,
+        "A1": 5.0,
+        "A2": 0.0,
+        "B1": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 11,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 9,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 9,
+            "A": 6,
+            "B": 2,
+            "A1": 4,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 6.0,
+            "A": 5.0,
+            "B": 0.0,
+            "A1": 4.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 10,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 10,
+            "A": 7,
+            "B": 2,
+            "A1": 5,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 11,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 11,
+            "A": 8,
+            "B": 2,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 11,
+        "A": 8,
+        "B": 2,
+        "A1": 5,
+        "A2": 2,
+        "B1": 1,
+        "B2": 0
+      },
+      "return_sums": {
+        "root": 7.0,
+        "A": 6.0,
+        "B": 0.0,
+        "A1": 5.0,
+        "A2": 0.0,
+        "B1": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 12,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 9,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 9,
+            "A": 6,
+            "B": 2,
+            "A1": 4,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 6.0,
+            "A": 5.0,
+            "B": 0.0,
+            "A1": 4.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 10,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 10,
+            "A": 7,
+            "B": 2,
+            "A1": 5,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 11,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 11,
+            "A": 8,
+            "B": 2,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 12,
+          "selection_path": [
+            "root",
+            "B",
+            "B2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 12,
+            "A": 8,
+            "B": 3,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 12,
+        "A": 8,
+        "B": 3,
+        "A1": 5,
+        "A2": 2,
+        "B1": 1,
+        "B2": 1
+      },
+      "return_sums": {
+        "root": 7.0,
+        "A": 6.0,
+        "B": 0.0,
+        "A1": 5.0,
+        "A2": 0.0,
+        "B1": 0.0,
+        "B2": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 13,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 9,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 9,
+            "A": 6,
+            "B": 2,
+            "A1": 4,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 6.0,
+            "A": 5.0,
+            "B": 0.0,
+            "A1": 4.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 10,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 10,
+            "A": 7,
+            "B": 2,
+            "A1": 5,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 11,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 11,
+            "A": 8,
+            "B": 2,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 12,
+          "selection_path": [
+            "root",
+            "B",
+            "B2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 12,
+            "A": 8,
+            "B": 3,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 13,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 13,
+            "A": 9,
+            "B": 3,
+            "A1": 6,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 8.0,
+            "A": 7.0,
+            "B": 0.0,
+            "A1": 6.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 13,
+        "A": 9,
+        "B": 3,
+        "A1": 6,
+        "A2": 2,
+        "B1": 1,
+        "B2": 1
+      },
+      "return_sums": {
+        "root": 8.0,
+        "A": 7.0,
+        "B": 0.0,
+        "A1": 6.0,
+        "A2": 0.0,
+        "B1": 0.0,
+        "B2": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 14,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 9,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 9,
+            "A": 6,
+            "B": 2,
+            "A1": 4,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 6.0,
+            "A": 5.0,
+            "B": 0.0,
+            "A1": 4.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 10,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 10,
+            "A": 7,
+            "B": 2,
+            "A1": 5,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 11,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 11,
+            "A": 8,
+            "B": 2,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 12,
+          "selection_path": [
+            "root",
+            "B",
+            "B2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 12,
+            "A": 8,
+            "B": 3,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 13,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 13,
+            "A": 9,
+            "B": 3,
+            "A1": 6,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 8.0,
+            "A": 7.0,
+            "B": 0.0,
+            "A1": 6.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 14,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 14,
+            "A": 10,
+            "B": 3,
+            "A1": 7,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 9.0,
+            "A": 8.0,
+            "B": 0.0,
+            "A1": 7.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 14,
+        "A": 10,
+        "B": 3,
+        "A1": 7,
+        "A2": 2,
+        "B1": 1,
+        "B2": 1
+      },
+      "return_sums": {
+        "root": 9.0,
+        "A": 8.0,
+        "B": 0.0,
+        "A1": 7.0,
+        "A2": 0.0,
+        "B1": 0.0,
+        "B2": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 15,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 9,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 9,
+            "A": 6,
+            "B": 2,
+            "A1": 4,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 6.0,
+            "A": 5.0,
+            "B": 0.0,
+            "A1": 4.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 10,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 10,
+            "A": 7,
+            "B": 2,
+            "A1": 5,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 11,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 11,
+            "A": 8,
+            "B": 2,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 12,
+          "selection_path": [
+            "root",
+            "B",
+            "B2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 12,
+            "A": 8,
+            "B": 3,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 13,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 13,
+            "A": 9,
+            "B": 3,
+            "A1": 6,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 8.0,
+            "A": 7.0,
+            "B": 0.0,
+            "A1": 6.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 14,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 14,
+            "A": 10,
+            "B": 3,
+            "A1": 7,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 9.0,
+            "A": 8.0,
+            "B": 0.0,
+            "A1": 7.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 15,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 15,
+            "A": 11,
+            "B": 3,
+            "A1": 8,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 10.0,
+            "A": 9.0,
+            "B": 0.0,
+            "A1": 8.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 15,
+        "A": 11,
+        "B": 3,
+        "A1": 8,
+        "A2": 2,
+        "B1": 1,
+        "B2": 1
+      },
+      "return_sums": {
+        "root": 10.0,
+        "A": 9.0,
+        "B": 0.0,
+        "A1": 8.0,
+        "A2": 0.0,
+        "B1": 0.0,
+        "B2": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    },
+    {
+      "simulations": 16,
+      "exploration": 1.4142135623730951,
+      "seed": 19,
+      "traces": [
+        {
+          "simulation": 1,
+          "selection_path": [
+            "root"
+          ],
+          "rollout": [
+            "A",
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 1
+          },
+          "return_sums_after": {
+            "root": 1.0
+          }
+        },
+        {
+          "simulation": 2,
+          "selection_path": [
+            "root",
+            "A"
+          ],
+          "rollout": [
+            "A1"
+          ],
+          "reward": 1,
+          "visits_after": {
+            "root": 2,
+            "A": 1,
+            "B": 0
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0
+          }
+        },
+        {
+          "simulation": 3,
+          "selection_path": [
+            "root",
+            "B"
+          ],
+          "rollout": [
+            "B2"
+          ],
+          "reward": 0,
+          "visits_after": {
+            "root": 3,
+            "A": 1,
+            "B": 1
+          },
+          "return_sums_after": {
+            "root": 2.0,
+            "A": 1.0,
+            "B": 0.0
+          }
+        },
+        {
+          "simulation": 4,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 4,
+            "A": 2,
+            "B": 1,
+            "A1": 1,
+            "A2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0
+          }
+        },
+        {
+          "simulation": 5,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 5,
+            "A": 3,
+            "B": 1,
+            "A1": 1,
+            "A2": 1
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0
+          }
+        },
+        {
+          "simulation": 6,
+          "selection_path": [
+            "root",
+            "B",
+            "B1"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 6,
+            "A": 3,
+            "B": 2,
+            "A1": 1,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 3.0,
+            "A": 2.0,
+            "B": 0.0,
+            "A1": 1.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 7,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 7,
+            "A": 4,
+            "B": 2,
+            "A1": 2,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 4.0,
+            "A": 3.0,
+            "B": 0.0,
+            "A1": 2.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 8,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 8,
+            "A": 5,
+            "B": 2,
+            "A1": 3,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 5.0,
+            "A": 4.0,
+            "B": 0.0,
+            "A1": 3.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 9,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 9,
+            "A": 6,
+            "B": 2,
+            "A1": 4,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 6.0,
+            "A": 5.0,
+            "B": 0.0,
+            "A1": 4.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 10,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 10,
+            "A": 7,
+            "B": 2,
+            "A1": 5,
+            "A2": 1,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 11,
+          "selection_path": [
+            "root",
+            "A",
+            "A2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 11,
+            "A": 8,
+            "B": 2,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 0
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0
+          }
+        },
+        {
+          "simulation": 12,
+          "selection_path": [
+            "root",
+            "B",
+            "B2"
+          ],
+          "rollout": [],
+          "reward": 0,
+          "visits_after": {
+            "root": 12,
+            "A": 8,
+            "B": 3,
+            "A1": 5,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 7.0,
+            "A": 6.0,
+            "B": 0.0,
+            "A1": 5.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 13,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 13,
+            "A": 9,
+            "B": 3,
+            "A1": 6,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 8.0,
+            "A": 7.0,
+            "B": 0.0,
+            "A1": 6.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 14,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 14,
+            "A": 10,
+            "B": 3,
+            "A1": 7,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 9.0,
+            "A": 8.0,
+            "B": 0.0,
+            "A1": 7.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 15,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 15,
+            "A": 11,
+            "B": 3,
+            "A1": 8,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 10.0,
+            "A": 9.0,
+            "B": 0.0,
+            "A1": 8.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        },
+        {
+          "simulation": 16,
+          "selection_path": [
+            "root",
+            "A",
+            "A1"
+          ],
+          "rollout": [],
+          "reward": 1,
+          "visits_after": {
+            "root": 16,
+            "A": 12,
+            "B": 3,
+            "A1": 9,
+            "A2": 2,
+            "B1": 1,
+            "B2": 1
+          },
+          "return_sums_after": {
+            "root": 11.0,
+            "A": 10.0,
+            "B": 0.0,
+            "A1": 9.0,
+            "A2": 0.0,
+            "B1": 0.0,
+            "B2": 0.0
+          }
+        }
+      ],
+      "visits": {
+        "root": 16,
+        "A": 12,
+        "B": 3,
+        "A1": 9,
+        "A2": 2,
+        "B1": 1,
+        "B2": 1
+      },
+      "return_sums": {
+        "root": 11.0,
+        "A": 10.0,
+        "B": 0.0,
+        "A1": 9.0,
+        "A2": 0.0,
+        "B1": 0.0,
+        "B2": 0.0
+      },
+      "expanded_nodes": [
+        "A",
+        "B",
+        "root"
+      ],
+      "selected_root_child": "A",
+      "neural_weight_updates": 0
+    }
+  ]
+}

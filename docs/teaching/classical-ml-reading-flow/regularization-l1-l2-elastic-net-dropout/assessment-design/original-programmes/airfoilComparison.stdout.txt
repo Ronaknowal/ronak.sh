@@ -1,0 +1,23 @@
+baseline mean MSE 45.072768
+OLS mean MSE 17.350268
+ridge 0.001 17.315634 [20, 20, 20]
+ridge 0.01 17.335789 [20, 20, 20]
+ridge 0.1 17.6948 [20, 20, 20]
+ridge 1 20.962663 [20, 20, 20]
+ridge 10 34.763447 [20, 20, 20]
+ridge 100 43.547835 [20, 20, 20]
+selected ridge 0.001 development CV MSE 17.315634 refit nonzero 20
+lasso 0.001 17.335409 [19, 20, 19]
+lasso 0.01 17.347152 [16, 17, 18]
+lasso 0.1 17.629206 [9, 9, 9]
+lasso 1 22.179353 [5, 4, 4]
+lasso 10 45.072768 [0, 0, 0]
+lasso 100 45.072768 [0, 0, 0]
+selected lasso 0.001 development CV MSE 17.335409 refit nonzero 20
+elastic_net 0.001 17.325484 [19, 20, 20]
+elastic_net 0.01 17.332697 [19, 18, 19]
+elastic_net 0.1 17.650934 [14, 16, 15]
+elastic_net 1 21.658337 [14, 15, 15]
+elastic_net 10 45.072768 [0, 0, 0]
+elastic_net 100 45.072768 [0, 0, 0]
+selected elastic_net 0.001 development CV MSE 17.325484 refit nonzero 20

@@ -1,0 +1,30 @@
+{
+  "reviewer": "frameworks_annotation_modalities",
+  "date": "2026-09-28",
+  "scope": "Complete source and teaching review; complementary independent guard and traffic-invariance execution. Author owns native CPU campaign; parent owns rendered checks. CUDA not available.",
+  "source_hashes": {
+    "src/learn/data/topics/gpu-accelerated-computing.jsx": "86ec81ba0edab83242091b857aa7a5f9e09a7d6ca0d8614b41fe9fd68e678a99",
+    "src/learn/data/gpu-computing-models.js": "daca6fab94e5d59d48b4812a37c7e9ed3209a0f7aa0d83e75a04c9d2673c9590",
+    "src/learn/components/lesson-labs/GpuComputingLabs.jsx": "c48bddf6090ae493e8346b8881b690b7947174a342d47023d601b555a217237e",
+    "src/learn/components/lesson-labs/gpu-computing-lessons.css": "9199deabdab4b26b48d8459b67a2a2bb0ece26cdfcd70bc2d6ae66654bcc7143",
+    "src/learn/data/curriculum/blueprints/gpu-accelerated-computing.js": "ea541bfeb95580d45d6cb717faa8a02acce01cf4af3cec8899a5f723439b2c03",
+    "public/learn-code/gpu-accelerated-computing/gpu_affine_relu.py": "6e7487559905b5c5b5c2153492902a5b3c472cb737beaa269630c804135e0e16",
+    "public/learn-code/gpu-accelerated-computing/gpu_workload_accounting.py": "7423bdbd3a09aa45c4fe74faaf3b90fc5b405375859508d76496a2924ddcdb0d"
+  },
+  "resolved_findings": [
+    "Discrete number controls accepted fractions, causing logical ownership failure; integer guards now applied.",
+    "Accounting accepted nonfinite/fractional counts; finite/integer guards now matched in JS/Python.",
+    "Finite but float32-unrepresentable scalar could overflow during cast; pre-cast representability guard added."
+  ],
+  "checks": {
+    "js_invalid_guard_cases": 7,
+    "traffic_metamorphic_cases": 9,
+    "native_float32_scalar_rejection": true,
+    "native_program_receipt_binding": "verified"
+  },
+  "open_blockers": [],
+  "limitations": [
+    "No native CUDA compilation, device parity, timing or sanitizer execution claimed.",
+    "Source review does not certify browser controls; parent owns fractional-entry browser regression."
+  ]
+}

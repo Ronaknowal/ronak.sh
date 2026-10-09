@@ -1,0 +1,68 @@
+/* Beginner figures and labs for the neuron lesson, drawn in the reading flow.
+   Value grids: amber = positive (supporting evidence, label +1, positive score);
+   blue = negative (opposing evidence, label −1, score ≤ 0). Every colour is paired
+   with a sign, label or outline. Selection: thick white ring. */
+.grid-label { font-size: .9rem; color: #e8e3d8; margin: 0 0 .4rem; }
+
+.pixel-grids { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin: 0 0 .5rem; }
+.pixel-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; max-width: 11rem; }
+.pixel-grid > * { aspect-ratio: 1; display: grid; place-items: center; font: 600 15px system-ui, sans-serif; font-variant-numeric: tabular-nums; border-radius: 4px; min-height: 0 !important; padding: 0 !important; }
+.pixel-grid > button { cursor: pointer; }
+.pixel-grid > button:focus-visible { outline: 2px solid #f3d48f; outline-offset: 2px; }
+.pixel-grid .pixel-ink, .pixel-grid .template-ink { background: #f1ead8; color: #171512; border: 2px solid #f1ead8; }
+.pixel-grid .pixel-blank, .pixel-grid .template-blank { background: #141311; color: #8f877a; border: 2px dashed #4a4439; }
+.pixel-grid .pixel-weight-positive { background: #3b2f16; color: #ffe2a0; border: 2px solid #e8c36f; }
+.pixel-grid .pixel-weight-negative { background: #18263a; color: #cfe2f7; border: 2px solid #83b4e8; }
+.pixel-grid .pixel-weight-zero { background: #1b1b1b; color: #9e968a; border: 1px solid #3a3a3a; }
+.pixel-yes { color: #ffe2a0; }
+.pixel-no { color: #a9cdf2; }
+
+.template-example-key { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; margin-bottom: 1.25rem; }
+.template-example-key > div { flex: 0 0 9rem; }
+.template-example-key p { flex: 1 1 14rem; margin: 0; line-height: 1.7; }
+.template-example-cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.template-example-grids { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: .5rem; align-items: end; }
+.template-example-grids small { display: block; margin-bottom: 4px; color: #b9b5af; font-size: .75rem; line-height: 1.3; }
+.template-example .pixel-grid { max-width: 6.5rem; }
+.template-times { color: #b9b5af; font-size: .8rem; padding-bottom: 2.5rem; }
+.template-sum { margin: .5rem 0 0; font-variant-numeric: tabular-nums; }
+
+.level-positive { fill: rgba(232, 195, 111, .2); }
+.level-negative { fill: rgba(131, 180, 232, .14); }
+.level-boundary { stroke: #f3eee2; stroke-width: 2.4; }
+.level-line { stroke: #9a958c; stroke-width: 1.4; stroke-dasharray: 6 4; }
+.level-direction { stroke: #f3d48f; stroke-width: 2.2; }
+.perceptron-chart text.level-label { fill: #efe5cf; font-weight: 600; }
+
+.target-positive { fill: #e8c36f; stroke: #fff1cc; stroke-width: 1.5; }
+.target-negative { fill: #141414; stroke: #83b4e8; stroke-width: 3; }
+.trace-current { fill: none; stroke: #ffffff; stroke-width: 3; }
+.perceptron-trace-plane { max-width: 340px; }
+
+.hidden-space-layout { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.25fr); gap: 1rem; align-items: center; }
+.hidden-space-arrow { color: #d8d3cc; font-size: .85rem; line-height: 1.6; text-align: center; }
+.hidden-space-arrow .arrow-narrow { display: none; }
+
+.nudge-cards { display: none; list-style: none; padding: 0; margin: .75rem 0; }
+.nudge-cards li { display: grid; gap: 2px; padding: .5rem 0 .5rem .75rem; margin-bottom: .5rem; border-left: 3px solid #5a5a5a; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.nudge-cards li.is-jump { border-left-color: #83b4e8; }
+.nudge-cards strong { color: #e8e3d8; }
+.nudge-cards b { color: #f3d48f; font-weight: 600; }
+
+@container (max-width: 520px) {
+  #neuron-nudge-slope .perceptron-table { display: none; }
+  #neuron-nudge-slope .nudge-cards { display: block; }
+}
+@container (max-width: 640px) {
+  .hidden-space-layout { grid-template-columns: 1fr; }
+  .hidden-space-arrow .arrow-wide { display: none; }
+  .hidden-space-arrow .arrow-narrow { display: inline; }
+  .template-example-cases { grid-template-columns: 1fr; }
+}
+@container (max-width: 560px) {
+  .pixel-grids { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pixel-grids > div:last-child { grid-column: 1 / -1; }
+}
+@container (max-width: 330px) {
+  .pixel-grids { grid-template-columns: 1fr; }
+}

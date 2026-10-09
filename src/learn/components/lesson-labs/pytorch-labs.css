@@ -1,0 +1,28 @@
+.pytorch-shape, .pytorch-state { margin: 28px 0; padding: 20px; border: 1px solid #444; background: #111; }
+.pytorch-shape figcaption, .pytorch-state figcaption, .pytorch-tensor figcaption { font-weight: 600; line-height: 1.6; margin-bottom: 14px; }
+.pytorch-shape ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; list-style: none; padding: 0; }
+.pytorch-shape li { display: grid; align-content: start; gap: 10px; position: relative; }
+.pytorch-shape li:not(:last-child)::after { content: '→'; color: #e4b752; position: absolute; right: -18px; top: 32px; }
+.pytorch-shape code { font-size: 16px; color: #e4b752; }
+.pytorch-shape span { font-size: 14px; line-height: 1.6; }
+.pytorch-state > div { border-left: 2px solid #e4b752; padding: 10px 14px; margin: 20px 0; }
+.pytorch-state ul { padding-left: 18px; }
+.pytorch-tensor { margin: 16px 0; min-width: 0; }
+.pytorch-cells { display: grid; gap: 6px; }
+.pytorch-cells > div { display: grid; gap: 6px; padding: 10px 5px; text-align: center; border: 1px solid #555; min-width: 0; background: #171717; }
+.pytorch-cells .pytorch-cell-selected { border: 2px solid #e4b752; background: #262017; }
+.pytorch-cells small { font-size: 12px; color: #bbb; }
+.pytorch-cells strong { font-size: 20px; color: #f0ce82; }
+.pytorch-residuals { display: grid; gap: 22px; margin-top: 24px; }
+.pytorch-residual-track { position: relative; height: 30px; margin: 10px 8px; }
+.pytorch-residual-track::before { content: ''; position: absolute; top: 15px; left: 0; right: 0; border-top: 1px solid #888; }
+.pytorch-residual-track span { position: absolute; top: 10px; width: 10px; height: 10px; transform: translateX(-50%); }
+.pytorch-target { background: #eee; border-radius: 50%; }
+.pytorch-residual-track .pytorch-output { border: 2px solid #e4b752; background: #111; transform: translateX(-50%) rotate(45deg); }
+.pytorch-dropout { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
+.pytorch-dropout > div { display: grid; gap: 14px; align-content: start; text-align: center; border-top: 2px solid #555; padding-top: 12px; }
+.pytorch-dropout strong { font-size: 22px; }
+.pytorch-dropout span { font-size: 13px; line-height: 1.5; }
+.pytorch-dropout .pytorch-gate { border: 1px solid #e4b752; color: #f0ce82; padding: 9px 4px; }
+@media(max-width: 650px) { .pytorch-shape ol { grid-template-columns: 1fr; gap: 24px; } .pytorch-shape li:not(:last-child)::after { content: '↓'; left: 0; right: auto; top: auto; bottom: -26px; } .pytorch-dropout { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; } }
+.pytorch-lesson .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: .3em; }

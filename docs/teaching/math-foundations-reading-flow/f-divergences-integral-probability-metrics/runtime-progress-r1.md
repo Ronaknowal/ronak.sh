@@ -1,0 +1,5 @@
+# Math29 private implementation
+
+Root accepted complete content in `content-accepted-root-r1.json` (bf58b89680e9cbaabf7be13c37b850e7eea96cc3da936dcfe287ff810e46db55). The author already read the complete current manuscript, all53 visual contracts, all programme/output pairs and the independent review. `runtime-intake-r1.json` confirms120 accepted guards and copies only32 topic assets (41,909 bytes), with an exact150-row Iris coordinate projection.
+
+Runtime is in progress, not author-ready. Topic-local model adapters and independent/staged state ownership are written; only source syntax has been checked so far. No current diagram, interaction, build or delivery acceptance is claimed. Continue all53 mechanisms, seven investigation families, complete accepted prose/programme projection and practice; perform whole author reading, bounded pure checks and actual shared-Reader desktop/phone/enlarged evidence, then freeze for DIFFERENT whole runtime review. Root owns canonical/shared/central integration. No old scientific main, fit, new environment or broad public-tree copy.

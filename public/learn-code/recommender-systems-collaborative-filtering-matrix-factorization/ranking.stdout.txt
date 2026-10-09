@@ -1,0 +1,4 @@
+order [2, 0, 4, 1, 3] K 3 {'precision': 0.333333, 'recall': 0.5, 'ndcg': 0.386853, 'reciprocal_rank': 0.5, 'average_precision': 0.25, 'fill_rate': 1.0, 'candidate_recall_ceiling': 1.0}
+order [2, 0, 4] K 3 {'precision': 0.333333, 'recall': 0.5, 'ndcg': 0.386853, 'reciprocal_rank': 0.5, 'average_precision': 0.25, 'fill_rate': 1.0, 'candidate_recall_ceiling': 0.5}
+order [0, 1] K 3 {'precision': 0.0, 'recall': None, 'ndcg': None, 'reciprocal_rank': None, 'average_precision': None, 'fill_rate': 0.666667, 'candidate_recall_ceiling': None}
+order [2, 0, 1] K 2 {'precision': 1.0, 'recall': 0.666667, 'ndcg': 1.0, 'reciprocal_rank': 1.0, 'average_precision': 1.0, 'fill_rate': 1.0, 'candidate_recall_ceiling': 0.666667}

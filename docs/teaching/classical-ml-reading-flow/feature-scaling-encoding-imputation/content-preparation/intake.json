@@ -1,0 +1,93 @@
+{
+  "topicId": "feature-scaling-encoding-imputation",
+  "status": "authoring-in-progress-not-author-ready",
+  "rootRelease": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/root-content-release.json",
+    "bytes": 10573,
+    "sha256": "6b98f8133ff4770e0abe9251101b86187361a1b4a65702abf19201ae0367bb44",
+    "role": "accepted revision5 release"
+  },
+  "designIntake": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+    "bytes": 48017,
+    "sha256": "fb0d8e8e241f30b5870d09b547a6525d9a096beff6a3bd0f524d4c106e577ee8",
+    "role": "retained full source-role manifest; all30 protected pairs checked"
+  },
+  "retained": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+      "bytes": 3634,
+      "sha256": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05",
+      "role": "exact retained entire programme literal; not replayed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+      "bytes": 213,
+      "sha256": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb",
+      "role": "exact retained entire stdout literal; historical execution"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+      "bytes": 2296,
+      "sha256": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94",
+      "role": "exact retained entire programme literal; not replayed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+      "bytes": 343,
+      "sha256": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52",
+      "role": "exact retained entire stdout literal; historical execution"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+      "bytes": 789,
+      "sha256": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252",
+      "role": "exact retained entire programme literal; not replayed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+      "bytes": 111,
+      "sha256": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2",
+      "role": "exact retained entire stdout literal; historical execution"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "public/learn-assets/feature-scaling/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "role": "unchanged retained input/history; no numerical replay"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+      "bytes": 43077,
+      "sha256": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f",
+      "role": "unchanged retained input/history; no numerical replay"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-native.json",
+      "bytes": 2506,
+      "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea",
+      "role": "unchanged retained input/history; no numerical replay"
+    }
+  ],
+  "reading": {
+    "acceptedDesign": "Entire corrected reading-flow design, programme/practice contracts, visual/lab contracts, research/coverage, author design review, source binder and selected intake semantics read. Original relative context retained.",
+    "baseline": "Entire original draft manuscript, current lesson prose (composed reads), three whole programme/stream literals. KNN actual section2 and complete units-cosine/scratch estimator, NMF actual opening/nonnegative shapes, CV actual opening/sequence read.",
+    "guidance": "Versioned skill and relevant teaching, examples/code, review, practice/resources, visuals/labs, topic-design, Classical domain and repository adapter read.",
+    "notClaimed": "No fresh whole neighboring lesson, native/reference pixel or video review; no new manuscript read yet."
+  },
+  "newEnvironment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "pandas": "3.0.1",
+    "sklearn": "1.9.1"
+  },
+  "limits": [
+    "No runtime/public/canonical/central changes",
+    "No old fits/mains/science campaigns replayed",
+    "Predecessor inventory CLI unrelated EPERM remains disclosed; direct selected source checks used",
+    "Full author read and different whole content review pending"
+  ]
+}

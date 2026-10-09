@@ -1,0 +1,8 @@
+<View>
+  <Header value="Urgent: an ongoing service-wide failure or immediate security concern. Routine: all other supported requests. Skip if evidence is insufficient."/>
+  <Text name="message" value="$text"/>
+  <Choices name="urgency" toName="message" choice="single" required="true">
+    <Choice value="Urgent"/>
+    <Choice value="Routine"/>
+  </Choices>
+</View>

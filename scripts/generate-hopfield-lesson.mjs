@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id='modern-hopfield-networks',source='docs/teaching/drafts/'+id,destination='public/learn-code/'+id;
+if (fs.readFileSync('src/learn/data/topics/'+id+'.jsx','utf8').startsWith('// Reading-flow revision')) throw Error('Reading-flow revision is directly authored; generator must not overwrite it.');
 fs.mkdirSync(destination,{recursive:true});
 // Public learner downloads, never author checks, private fixtures or draft specs.
 for(const file of ['associative_memory.py','digit_memory.py','digit-memory-fits.npz','digit-results.json','mechanism-results.json','optdigits.tra','optdigits.tes','optdigits.names','data-provenance.md'])fs.copyFileSync(source+'/'+file,destination+'/'+file);

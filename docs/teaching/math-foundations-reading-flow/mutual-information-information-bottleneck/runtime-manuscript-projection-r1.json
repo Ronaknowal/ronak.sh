@@ -1,0 +1,317 @@
+{
+  "status": "Private author implementation in progress",
+  "acceptedSha256": "716256728a34c431c27e862d593ad41325af3fac49b2bcc83ba8c51d3f3791d2",
+  "manuscriptSha256": "910b6325af0e3dac96b934be2a3307c1d074dcfa70c1d8a8d4ab9d46913f6794",
+  "figures": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "M15",
+    "M16",
+    "M17",
+    "M18",
+    "M19",
+    "M20",
+    "M21",
+    "M22",
+    "M23",
+    "M24",
+    "M25",
+    "M26",
+    "M27",
+    "M28",
+    "M29",
+    "M30",
+    "M31",
+    "M32",
+    "M33",
+    "M34",
+    "M35",
+    "M36",
+    "M37",
+    "M38",
+    "M39",
+    "M40",
+    "M41",
+    "M42",
+    "M43",
+    "M44",
+    "M45",
+    "M46",
+    "M47",
+    "M48",
+    "M49",
+    "M50",
+    "M51",
+    "M52"
+  ],
+  "payloads": [
+    {
+      "file": "mi_original.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_original.py",
+      "sha256": "536f5219a3703bb44e1f9e24c1fc3aa48d47752011a09fe6537146f203ac2e9e",
+      "role": "source"
+    },
+    {
+      "file": "mi_original.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_original.py.display.txt",
+      "sha256": "cfdd6d84c3bdc9c3b0abb42033b541afd822044304d919679d1c8c577aa2b930",
+      "role": "output"
+    },
+    {
+      "file": "mi_nonlinear.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_nonlinear.py",
+      "sha256": "92424e9e56677e8349558c97f01806427cd15b62c280a52314fd1236c94bde12",
+      "role": "source"
+    },
+    {
+      "file": "mi_nonlinear.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_nonlinear.py.display.txt",
+      "sha256": "f205b8b5f0e1724fdc780d968bd74181865536b171c182c29d4d157c93ff59e0",
+      "role": "output"
+    },
+    {
+      "file": "mi_conditional.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_conditional.py",
+      "sha256": "377021b814855fe21429ea0a1cf65ccde6f92ed3a5c6a8c95246a29d09b255b3",
+      "role": "source"
+    },
+    {
+      "file": "mi_conditional.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_conditional.py.display.txt",
+      "sha256": "4e8038a397a323cf5973ac85eb9faedcff64dd2002c8064de64f2ffae759d8b0",
+      "role": "output"
+    },
+    {
+      "file": "mi_processing.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_processing.py",
+      "sha256": "90cf6cd8e15da9d14b78989b779a2b1cbb3587c83ff1f23b096f98773c30f1c2",
+      "role": "source"
+    },
+    {
+      "file": "mi_processing.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_processing.py.display.txt",
+      "sha256": "18dbfa786618cb18df986ddd378424b2408a5b45ec6817625425913d190e7b9b",
+      "role": "output"
+    },
+    {
+      "file": "finite_fano.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/finite_fano.py",
+      "sha256": "20d67c5a9a32f665face463c775156d2eacae974e952b43f84ea7c12edfdeb13",
+      "role": "source"
+    },
+    {
+      "file": "finite_fano.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/finite_fano.py.display.txt",
+      "sha256": "f6b7965c2e37e156c005fe3b06a94de41d6f45fa3765d0eaa3783d891f3b7436",
+      "role": "output"
+    },
+    {
+      "file": "mi_representations.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_representations.py",
+      "sha256": "b9e50dd34b96c5e6f2d54d76f2738c2d3fcce02f63f93bdde78d62ec61eb40dd",
+      "role": "source"
+    },
+    {
+      "file": "mi_representations.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_representations.py.display.txt",
+      "sha256": "d145dfbcbee555fc834d3705900cbae85fb3ec4ec063f1a0f8226e8c6adde2a9",
+      "role": "output"
+    },
+    {
+      "file": "mi_iteration.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_iteration.py",
+      "sha256": "f2131c0303bd0f76a2f8350e558b852d80adb31ce761e944793c743dbd37b11b",
+      "role": "source"
+    },
+    {
+      "file": "mi_iteration.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_iteration.py.display.txt",
+      "sha256": "c86561adcafecde0ec2e649668559f6077daa0dc35dac5b7acd9da0d7f6521d9",
+      "role": "output"
+    },
+    {
+      "file": "finite_ib_reference.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/finite_ib_reference.py",
+      "sha256": "f6238f5ed37a2f1ec35efd84d905e8925bb01fd29f565da6187b7d4421788fb6",
+      "role": "source"
+    },
+    {
+      "file": "finite_ib_numpy.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/finite_ib_numpy.py",
+      "sha256": "6e78c8d50f897b5886a7c6d81f74b9ba69672dfcd72c131bb6b89747df442bbc",
+      "role": "source"
+    },
+    {
+      "file": "finite_ib_numpy.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/finite_ib_numpy.py.display.txt",
+      "sha256": "c2ced0cc86928fdcb27dfb1e94a496c43a449d13ff4859c2477d6794240eaeef",
+      "role": "output"
+    },
+    {
+      "file": "mi_bounds.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_bounds.py",
+      "sha256": "1a06c3ce2c329449324e07acc610392c2b50e484de886540a46035f17ec1be25",
+      "role": "source"
+    },
+    {
+      "file": "mi_bounds.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_bounds.py.display.txt",
+      "sha256": "094fbb132ddda5a6b756c2b97cec4fa62f6434a117aa08634722cbd88ae0033a",
+      "role": "output"
+    },
+    {
+      "file": "gaussian_vib_step.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/gaussian_vib_step.py",
+      "sha256": "13dcfb15989285dc6603fc664a73d9daf249928b8e9063e6c51ccb49a4899138",
+      "role": "source"
+    },
+    {
+      "file": "gaussian_vib_step.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/gaussian_vib_step.py.display.txt",
+      "sha256": "aa1de4ddef44e684b02996d87935ffbf7ce15ae6e3441961f06a03c734387da4",
+      "role": "output"
+    },
+    {
+      "file": "mi_continuous.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/print-successors/mi_continuous.py",
+      "sha256": "2f913522f3d57ff1deca413aa21daf84955bf005035438d891f0fb55c64aa219",
+      "role": "source"
+    },
+    {
+      "file": "mi_continuous.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_continuous.py.successor-display.txt",
+      "sha256": "e3aaa07c5528c19e22df3df165e11fd7c1b6f5c83e88e93e237058ae01071f6c",
+      "role": "output"
+    },
+    {
+      "file": "mi_estimation.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_estimation.py",
+      "sha256": "fb9f823d7692707e65327971fdfc7e99a9ea8919b85539ea3893104ccbc29be3",
+      "role": "source"
+    },
+    {
+      "file": "mi_estimation.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_estimation.py.display.txt",
+      "sha256": "fde850e8fedcc3d6dcc1eb8ea7380249ea34c8336a92a4c49622660347115823",
+      "role": "output"
+    },
+    {
+      "file": "mutual-information-library-bridge.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/print-successors/mutual-information-library-bridge.py",
+      "sha256": "f4ed35826eeafa7b6c0c4c27c0162ac57f8bd493875a71b3a80e139ac7afba21",
+      "role": "source"
+    },
+    {
+      "file": "mutual-information-library-bridge.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mutual-information-library-bridge.py.successor-display.txt",
+      "sha256": "c127cf73ee4bfba413ac1481476526d31949a48edb15b0dfbdc1930a367d8f89",
+      "role": "output"
+    },
+    {
+      "file": "penguins_information.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/penguins_information.py",
+      "sha256": "ca2685f9c9dfd285305413e53c3bdd466659624fc560580dca72237c11745cb0",
+      "role": "source"
+    },
+    {
+      "file": "penguins_information.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/penguins_information.py.display.txt",
+      "sha256": "889ace005388e1841e1ec541b7977368239e3ee3fac4affe89767750ec007937",
+      "role": "output"
+    },
+    {
+      "file": "mi_changed_task.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_changed_task.py",
+      "sha256": "808a154ab8e30c00c15a2b469f7b19d793c854bde01e3f3843c7cb35159c40dc",
+      "role": "source"
+    },
+    {
+      "file": "mi_changed_task.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_changed_task.py.display.txt",
+      "sha256": "c6f492ad92fd3fd615955a2fd298cb5de2c5c471b2af50b4e638e7ee977d3c60",
+      "role": "output"
+    },
+    {
+      "file": "practice-solutions.py",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/practice-solutions.py",
+      "sha256": "f3da4fcb55ea1162c73acdb7456ac1a506ca569409e4f62ccd7efb806554cf2e",
+      "role": "source"
+    },
+    {
+      "file": "penguins.csv",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/penguins.csv",
+      "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "role": "data"
+    },
+    {
+      "file": "DATA-PROVENANCE.md",
+      "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/DATA-PROVENANCE.md",
+      "sha256": "645ab84171ce641f3cfb32e185582deece93146e5ca88d9567c3c27fe40b935d",
+      "role": "data"
+    }
+  ],
+  "sections": [
+    [
+      "1-measure-the-value-of-an-observation",
+      "1. Measure the value of an observation"
+    ],
+    [
+      "2-compare-the-pairing-with-independence",
+      "2. Compare the pairing with independence"
+    ],
+    [
+      "3-find-information-that-single-features-miss",
+      "3. Find information that single features miss"
+    ],
+    [
+      "4-follow-information-through-a-processing-step",
+      "4. Follow information through a processing step"
+    ],
+    [
+      "5-keep-the-signal-without-the-nuisance",
+      "5. Keep the signal without the nuisance"
+    ],
+    [
+      "6-compute-a-finite-bottleneck",
+      "6. Compute a finite bottleneck"
+    ],
+    [
+      "7-distinguish-a-training-bound-from-information",
+      "7. Distinguish a training bound from information"
+    ],
+    [
+      "8-handle-continuous-values-and-measurement-noise",
+      "8. Handle continuous values and measurement noise"
+    ],
+    [
+      "9-check-what-a-sample-can-support",
+      "9. Check what a sample can support"
+    ],
+    [
+      "10-practise-and-connect-the-next-question",
+      "10. Practise and connect the next question"
+    ],
+    [
+      "further-learning",
+      "Further learning"
+    ],
+    [
+      "technical-references",
+      "Technical references"
+    ]
+  ],
+  "structuredContracts": "All text fields are exact substrings of the entirely read specification; 52 entries.",
+  "scientificMainsReplayed": 0
+}

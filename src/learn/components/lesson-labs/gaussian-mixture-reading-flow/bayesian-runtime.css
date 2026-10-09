@@ -1,0 +1,14 @@
+.gmm-bayes-objects{display:flex;flex-wrap:wrap;align-items:flex-start;gap:1.25rem;margin-block:1.75rem}
+.gmm-bayes-objects>*{flex:1 1 19rem;min-width:0;max-width:100%}
+.gmm-bayes-factor{min-width:0}
+.gmm-bayes-table-scroll{overflow-x:auto;max-width:100%;margin-block:1.5rem;overscroll-behavior-inline:contain}
+.gmm-bayes-table-scroll:focus-visible{outline:2px solid #e9b94c;outline-offset:.2rem}
+.gmm-bayes-table-scroll table{min-width:74rem}
+.gmm-bayes-table-scroll td{white-space:nowrap}
+.gmm-bayes-inline-table{max-width:100%;overflow-x:auto;margin-block:1.5rem;overscroll-behavior-inline:contain}
+.gmm-bayes-inline-table:focus-visible{outline:2px solid #e9b94c;outline-offset:.2rem}
+:is(#gmm-bayesian-parameter-plate,#gmm-dirichlet-evidence,#gmm-normal-wishart-update,#gmm-variational-assignment-bound,#gmm-finite-stick-weights,#gmm-predictive-integration,#gmm-representation-operations) p{overflow-wrap:anywhere}
+.gmm-lesson table{width:100%;border-collapse:collapse;margin-block:1.5rem}
+.gmm-lesson th,.gmm-lesson td{text-align:left;vertical-align:top;padding:.55rem .4rem;border-bottom:1px solid #55555d;overflow-wrap:anywhere}
+.gmm-lesson caption{text-align:left;font-weight:600;margin-block:.6rem}
+.gmm-lesson pre{max-width:100%;overflow:auto;font-size:.9rem;line-height:1.65;padding-block:.75rem}

@@ -1,0 +1,13 @@
+left right delta_SSE scipy_height size
+2 3 0.125000 0.500000 2
+0 1 0.250000 0.707107 2
+4 5 0.250000 0.707107 2
+6 7 7.062500 3.758324 4
+8 9 56.020833 10.584974 6
+all heights obey h² = 2Δ: True
+sum of merge costs / one-cluster SSE: 63.708333 63.708333
+count cut 2 agrees with SciPy cut_tree (ARI): 1.0
+count cut 3 agrees with SciPy cut_tree (ARI): 1.0
+count cut 4 agrees with SciPy cut_tree (ARI): 1.0
+clusters from a height cut just below / at the tied height: 5 3
+fcluster maxclust=4 returns at most 4; actual: 3

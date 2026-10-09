@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import{createHash}from'node:crypto';
+const id='synthetic-data-generation-for-pre-training',folder=`docs/teaching/llm-architecture-training/${id}`,sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const reviewer=`${folder}/runtime-review-acceptance.json`;assert.equal(sha(reviewer),'b54c7aa0f45602e41ac5c98405ebf61bb625cda76e9a671fe19a38222cd768b5');
+const decision=JSON.parse(fs.readFileSync(reviewer));assert.equal(decision.status,'accepted-for-root-normal-integration');
+const files={...JSON.parse(fs.readFileSync(`${folder}/runtime-correction-inputs.json`)).bindings,...decision.bindings,[reviewer]:sha(reviewer)};
+const ledger=JSON.parse(fs.readFileSync('docs/teaching/lesson-delivery-progress.json'));assert.equal(ledger.topics[id].content.status,'complete');Object.assign(files,ledger.topics[id].content.files);
+for(const[p,h]of Object.entries(files))assert.equal(sha(p),h,p);
+const manuscript=`${folder}/lesson.jsx`;assert.equal(sha(manuscript),'d789969dea5edd1d0f5d91b13635421dc269d6f257c14fcdb615fec3b71adc5f');
+fs.writeFileSync(`${folder}/runtime-acceptance.json`,JSON.stringify({at:new Date().toISOString(),accepted:true,reviewer:'training_author; root composed guarded closure',phase:'ready-for-production-integration',topic:id,manuscript,figures:'[data-synthetic-figure]',count:22,assets:'learn-code/synthetic-data',files,review:`${folder}/runtime-review.md`,closure:`${folder}/runtime-review-closure.md`,limits:'Whole different review and same-reviewer R1–R5 closure compose; production integration follows. ZIP is exact HTTP bytes only; individual native file downloads passed.'},null,2)+'\n',{flag:'wx'});
+console.log(`Synthetic runtime accepted: ${Object.keys(files).length} exact bindings.`);

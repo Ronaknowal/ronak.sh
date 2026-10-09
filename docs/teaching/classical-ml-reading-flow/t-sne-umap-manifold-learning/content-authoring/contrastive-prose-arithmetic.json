@@ -1,0 +1,27 @@
+{
+  "status": "PASS_NEW_D45_DECLARED_PROBABILITY_ARITHMETIC",
+  "runtime": "v22.18.0",
+  "scriptSha256": "eeb0efecf85ef18a297dc9fcda7db8f576ea09772d73e17e61386b0db03ad096",
+  "kernel": [
+    0.5,
+    0.1
+  ],
+  "normalizer": 0.6,
+  "positiveDistribution": {
+    "B": 0.8333333333333334,
+    "C": 0.16666666666666669,
+    "A": 0
+  },
+  "noiseDistribution": {
+    "A": 0.25,
+    "B": 0.25,
+    "C": 0.5
+  },
+  "equalClassPriors": true,
+  "candidateProbability": 0.8333333333333334,
+  "candidateLoss": 0.1823215567939546,
+  "binaryProbability": 0.7692307692307692,
+  "binaryLoss": 0.26236426446749117,
+  "qualification": "Declared mathematical classification experiment, not ordinary UMAP objective or new optimizer output",
+  "scientificReplay": false
+}

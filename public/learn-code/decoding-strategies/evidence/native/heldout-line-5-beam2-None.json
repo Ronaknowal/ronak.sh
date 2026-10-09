@@ -1,0 +1,2105 @@
+{
+  "ids": [
+    773,
+    42,
+    1053,
+    457,
+    85,
+    1158,
+    309,
+    457,
+    78,
+    1469,
+    281,
+    755,
+    247,
+    1652,
+    2372,
+    273,
+    247,
+    2372,
+    273,
+    247,
+    2372,
+    273,
+    247,
+    2372,
+    273,
+    247,
+    2372,
+    273,
+    247,
+    2372,
+    273,
+    247
+  ],
+  "text": " \u201cI don\u2019t think I\u2019m going to get a little bit of a bit of a bit of a bit of a bit of a bit of a",
+  "stop_reason": "cap",
+  "steps": [
+    {
+      "position": 0,
+      "parent_beam": 0,
+      "selected_id": 773,
+      "log_p": -1.8639413118362427,
+      "log_q": null,
+      "processed_transition_score": -1.8640364408493042,
+      "model_entropy": 5.538215162549679,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 773,
+          "token": " \u201c",
+          "p": 0.15504360718749516,
+          "q": null
+        },
+        {
+          "id": 285,
+          "token": " and",
+          "p": 0.06471801817379956,
+          "q": null
+        },
+        {
+          "id": 347,
+          "token": " as",
+          "p": 0.036419859920625026,
+          "q": null
+        },
+        {
+          "id": 342,
+          "token": " with",
+          "p": 0.031301976328646286,
+          "q": null
+        },
+        {
+          "id": 18727,
+          "token": " smiling",
+          "p": 0.026088811765242293,
+          "q": null
+        },
+        {
+          "id": 665,
+          "token": " who",
+          "p": 0.02184934218830767,
+          "q": null
+        },
+        {
+          "id": 17053,
+          "token": " laughing",
+          "p": 0.018732682303237654,
+          "q": null
+        },
+        {
+          "id": 2819,
+          "token": " looking",
+          "p": 0.017532797565029002,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 1,
+      "parent_beam": 0,
+      "selected_id": 42,
+      "log_p": -2.1528618335723877,
+      "log_q": null,
+      "processed_transition_score": -2.1530227661132812,
+      "model_entropy": 5.361665031511596,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 42,
+          "token": "I",
+          "p": 0.11613058514388334,
+          "q": null
+        },
+        {
+          "id": 1394,
+          "token": "You",
+          "p": 0.039439423519208955,
+          "q": null
+        },
+        {
+          "id": 4013,
+          "token": "Oh",
+          "p": 0.03230533705404238,
+          "q": null
+        },
+        {
+          "id": 1276,
+          "token": "What",
+          "p": 0.029404443530480252,
+          "q": null
+        },
+        {
+          "id": 1147,
+          "token": "It",
+          "p": 0.02782324420191363,
+          "q": null
+        },
+        {
+          "id": 1231,
+          "token": "We",
+          "p": 0.021999043512724456,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.01795021654300459,
+          "q": null
+        },
+        {
+          "id": 4967,
+          "token": "Why",
+          "p": 0.01736933224777319,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "parent_beam": 0,
+      "selected_id": 1053,
+      "log_p": -2.237183094024658,
+      "log_q": null,
+      "processed_transition_score": -2.2373409271240234,
+      "model_entropy": 3.98815449848475,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 457,
+          "token": "\u2019",
+          "p": 0.2270907192479875,
+          "q": null
+        },
+        {
+          "id": 1053,
+          "token": " don",
+          "p": 0.10674002418770868,
+          "q": null
+        },
+        {
+          "id": 1158,
+          "token": " think",
+          "p": 0.058025907419080605,
+          "q": null
+        },
+        {
+          "id": 871,
+          "token": " know",
+          "p": 0.0425322903540673,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.04043735990067763,
+          "q": null
+        },
+        {
+          "id": 476,
+          "token": " can",
+          "p": 0.038562643191580405,
+          "q": null
+        },
+        {
+          "id": 717,
+          "token": " am",
+          "p": 0.023920170672835712,
+          "q": null
+        },
+        {
+          "id": 816,
+          "token": " just",
+          "p": 0.019801736150499148,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 3,
+      "parent_beam": 1,
+      "selected_id": 457,
+      "log_p": -0.025142807513475418,
+      "log_q": null,
+      "processed_transition_score": -0.025194769725203514,
+      "model_entropy": 0.15123058477983178,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 457,
+          "token": "\u2019",
+          "p": 0.9751123068036351,
+          "q": null
+        },
+        {
+          "id": 626,
+          "token": "'t",
+          "p": 0.0201235674887408,
+          "q": null
+        },
+        {
+          "id": 6457,
+          "token": "\u00e2",
+          "p": 0.00037066312257452824,
+          "q": null
+        },
+        {
+          "id": 11679,
+          "token": "\u00b4",
+          "p": 0.00031704406282766386,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.00031083123565374274,
+          "q": null
+        },
+        {
+          "id": 570,
+          "token": "ne",
+          "p": 0.00024148947108433547,
+          "q": null
+        },
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.00021489705087791478,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.00015019124009396637,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 4,
+      "parent_beam": 1,
+      "selected_id": 85,
+      "log_p": -0.004485189449042082,
+      "log_q": null,
+      "processed_transition_score": -0.004510704427957535,
+      "model_entropy": 0.042783022804053134,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 85,
+          "token": "t",
+          "p": 0.9954962160027141,
+          "q": null
+        },
+        {
+          "id": 306,
+          "token": "ve",
+          "p": 0.00137199808302026,
+          "q": null
+        },
+        {
+          "id": 69,
+          "token": "d",
+          "p": 0.0006395266142450337,
+          "q": null
+        },
+        {
+          "id": 87,
+          "token": "v",
+          "p": 0.00035933530687423795,
+          "q": null
+        },
+        {
+          "id": 53,
+          "token": "T",
+          "p": 0.0002527916578345968,
+          "q": null
+        },
+        {
+          "id": 78,
+          "token": "m",
+          "p": 0.00023150569317136708,
+          "q": null
+        },
+        {
+          "id": 79,
+          "token": "n",
+          "p": 0.0002095540579635766,
+          "q": null
+        },
+        {
+          "id": 77,
+          "token": "l",
+          "p": 0.00016839442354784931,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 5,
+      "parent_beam": 0,
+      "selected_id": 1158,
+      "log_p": -1.7097361087799072,
+      "log_q": null,
+      "processed_transition_score": -1.7098231315612793,
+      "model_entropy": 3.323026845723984,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 871,
+          "token": " know",
+          "p": 0.25959124127617234,
+          "q": null
+        },
+        {
+          "id": 1158,
+          "token": " think",
+          "p": 0.18089443595574278,
+          "q": null
+        },
+        {
+          "id": 971,
+          "token": " want",
+          "p": 0.09304031387889658,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.05544892829459108,
+          "q": null
+        },
+        {
+          "id": 1557,
+          "token": " care",
+          "p": 0.028051685959695892,
+          "q": null
+        },
+        {
+          "id": 751,
+          "token": " like",
+          "p": 0.026337648547629575,
+          "q": null
+        },
+        {
+          "id": 2096,
+          "token": " understand",
+          "p": 0.024077820150322563,
+          "q": null
+        },
+        {
+          "id": 923,
+          "token": " see",
+          "p": 0.020945323602322957,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 6,
+      "parent_beam": 1,
+      "selected_id": 309,
+      "log_p": -1.6702708005905151,
+      "log_q": null,
+      "processed_transition_score": -1.6704257726669312,
+      "model_entropy": 3.3165017434980526,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 309,
+          "token": " I",
+          "p": 0.18816343097191862,
+          "q": null
+        },
+        {
+          "id": 368,
+          "token": " you",
+          "p": 0.12493083099005624,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.10198434195038869,
+          "q": null
+        },
+        {
+          "id": 594,
+          "token": " so",
+          "p": 0.09485049320321326,
+          "q": null
+        },
+        {
+          "id": 326,
+          "token": " that",
+          "p": 0.08938465484653231,
+          "q": null
+        },
+        {
+          "id": 359,
+          "token": " we",
+          "p": 0.06250560938835983,
+          "q": null
+        },
+        {
+          "id": 436,
+          "token": " this",
+          "p": 0.04466605864451851,
+          "q": null
+        },
+        {
+          "id": 344,
+          "token": " he",
+          "p": 0.02339056638734048,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 7,
+      "parent_beam": 1,
+      "selected_id": 457,
+      "log_p": -0.7820447683334351,
+      "log_q": null,
+      "processed_transition_score": -0.7821876406669617,
+      "model_entropy": 2.9850847920403747,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 457,
+          "token": "\u2019",
+          "p": 0.457396114836055,
+          "q": null
+        },
+        {
+          "id": 476,
+          "token": " can",
+          "p": 0.08962177459444425,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.03585744492453259,
+          "q": null
+        },
+        {
+          "id": 943,
+          "token": " should",
+          "p": 0.02912508028695774,
+          "q": null
+        },
+        {
+          "id": 812,
+          "token": " could",
+          "p": 0.028166285132454588,
+          "q": null
+        },
+        {
+          "id": 369,
+          "token": " was",
+          "p": 0.024906775133287245,
+          "q": null
+        },
+        {
+          "id": 717,
+          "token": " am",
+          "p": 0.023483793680066287,
+          "q": null
+        },
+        {
+          "id": 588,
+          "token": " will",
+          "p": 0.019274383704791346,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 8,
+      "parent_beam": 0,
+      "selected_id": 78,
+      "log_p": -0.2907138466835022,
+      "log_q": null,
+      "processed_transition_score": -0.29075440764427185,
+      "model_entropy": 0.8900913814454655,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 78,
+          "token": "m",
+          "p": 0.7476930132156209,
+          "q": null
+        },
+        {
+          "id": 69,
+          "token": "d",
+          "p": 0.14422382245606302,
+          "q": null
+        },
+        {
+          "id": 306,
+          "token": "ve",
+          "p": 0.04740473982082918,
+          "q": null
+        },
+        {
+          "id": 620,
+          "token": "ll",
+          "p": 0.04720488781818754,
+          "q": null
+        },
+        {
+          "id": 250,
+          "token": "re",
+          "p": 0.0034732905000420776,
+          "q": null
+        },
+        {
+          "id": 84,
+          "token": "s",
+          "p": 0.001494928174228563,
+          "q": null
+        },
+        {
+          "id": 72,
+          "token": "g",
+          "p": 0.001339388240925646,
+          "q": null
+        },
+        {
+          "id": 85,
+          "token": "t",
+          "p": 0.0006825552897258973,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 9,
+      "parent_beam": 0,
+      "selected_id": 1469,
+      "log_p": -1.8685028553009033,
+      "log_q": null,
+      "processed_transition_score": -1.8686065673828125,
+      "model_entropy": 4.9050160826543925,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1469,
+          "token": " going",
+          "p": 0.15433664811133993,
+          "q": null
+        },
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.06340042973615614,
+          "q": null
+        },
+        {
+          "id": 2119,
+          "token": " sure",
+          "p": 0.06185408256588712,
+          "q": null
+        },
+        {
+          "id": 594,
+          "token": " so",
+          "p": 0.03230940355677677,
+          "q": null
+        },
+        {
+          "id": 1663,
+          "token": " really",
+          "p": 0.030095233493977906,
+          "q": null
+        },
+        {
+          "id": 816,
+          "token": " just",
+          "p": 0.02705046115224475,
+          "q": null
+        },
+        {
+          "id": 987,
+          "token": " right",
+          "p": 0.024958130375546873,
+          "q": null
+        },
+        {
+          "id": 417,
+          "token": " not",
+          "p": 0.02241396721186165,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 10,
+      "parent_beam": 0,
+      "selected_id": 281,
+      "log_p": -0.08541044592857361,
+      "log_q": null,
+      "processed_transition_score": -0.08554976433515549,
+      "model_entropy": 0.6521607724809089,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 281,
+          "token": " to",
+          "p": 0.9179873283632771,
+          "q": null
+        },
+        {
+          "id": 327,
+          "token": " on",
+          "p": 0.011010102117526252,
+          "q": null
+        },
+        {
+          "id": 949,
+          "token": " through",
+          "p": 0.005740701755555939,
+          "q": null
+        },
+        {
+          "id": 562,
+          "token": " out",
+          "p": 0.004923008030615084,
+          "q": null
+        },
+        {
+          "id": 715,
+          "token": " into",
+          "p": 0.004517993876585147,
+          "q": null
+        },
+        {
+          "id": 896,
+          "token": " back",
+          "p": 0.0033624482367998055,
+          "q": null
+        },
+        {
+          "id": 323,
+          "token": " for",
+          "p": 0.0032445082055580295,
+          "q": null
+        },
+        {
+          "id": 3430,
+          "token": " wrong",
+          "p": 0.002722188660958837,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 11,
+      "parent_beam": 0,
+      "selected_id": 755,
+      "log_p": -2.740219831466675,
+      "log_q": null,
+      "processed_transition_score": -2.7403664588928223,
+      "model_entropy": 5.130306474802526,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 320,
+          "token": " be",
+          "p": 0.09980919062379646,
+          "q": null
+        },
+        {
+          "id": 755,
+          "token": " get",
+          "p": 0.0645459096070667,
+          "q": null
+        },
+        {
+          "id": 513,
+          "token": " do",
+          "p": 0.04790459486958475,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.04371478385869772,
+          "q": null
+        },
+        {
+          "id": 564,
+          "token": " go",
+          "p": 0.03720080407640058,
+          "q": null
+        },
+        {
+          "id": 1333,
+          "token": " say",
+          "p": 0.02295983480149669,
+          "q": null
+        },
+        {
+          "id": 923,
+          "token": " see",
+          "p": 0.021241059743548323,
+          "q": null
+        },
+        {
+          "id": 1056,
+          "token": " make",
+          "p": 0.016880622765315035,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 12,
+      "parent_beam": 1,
+      "selected_id": 247,
+      "log_p": -2.077626943588257,
+      "log_q": null,
+      "processed_transition_score": -2.077704906463623,
+      "model_entropy": 4.489163600995762,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.12521563243327552,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.0731710713855229,
+          "q": null
+        },
+        {
+          "id": 562,
+          "token": " out",
+          "p": 0.05622148481388214,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.049681810903578476,
+          "q": null
+        },
+        {
+          "id": 281,
+          "token": " to",
+          "p": 0.03875020929700965,
+          "q": null
+        },
+        {
+          "id": 326,
+          "token": " that",
+          "p": 0.03758529399844631,
+          "q": null
+        },
+        {
+          "id": 598,
+          "token": " up",
+          "p": 0.02910982726143591,
+          "q": null
+        },
+        {
+          "id": 368,
+          "token": " you",
+          "p": 0.029078168851833643,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 13,
+      "parent_beam": 0,
+      "selected_id": 1652,
+      "log_p": -3.150824785232544,
+      "log_q": null,
+      "processed_transition_score": -3.150947093963623,
+      "model_entropy": 6.632509524601672,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 2257,
+          "token": " lot",
+          "p": 0.0441358298034022,
+          "q": null
+        },
+        {
+          "id": 1652,
+          "token": " little",
+          "p": 0.04281109324606657,
+          "q": null
+        },
+        {
+          "id": 2372,
+          "token": " bit",
+          "p": 0.027837738326964245,
+          "q": null
+        },
+        {
+          "id": 2628,
+          "token": " job",
+          "p": 0.021120351931211447,
+          "q": null
+        },
+        {
+          "id": 1175,
+          "token": " good",
+          "p": 0.019227090134720095,
+          "q": null
+        },
+        {
+          "id": 6858,
+          "token": " baby",
+          "p": 0.019075353381234776,
+          "q": null
+        },
+        {
+          "id": 1943,
+          "token": " big",
+          "p": 0.015537493451583317,
+          "q": null
+        },
+        {
+          "id": 3935,
+          "token": " message",
+          "p": 0.013673059505415136,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 14,
+      "parent_beam": 1,
+      "selected_id": 2372,
+      "log_p": -1.8464444875717163,
+      "log_q": null,
+      "processed_transition_score": -1.8465429544448853,
+      "model_entropy": 6.0596470806475216,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 2372,
+          "token": " bit",
+          "p": 0.15777974220571223,
+          "q": null
+        },
+        {
+          "id": 625,
+          "token": " more",
+          "p": 0.053396944279346,
+          "q": null
+        },
+        {
+          "id": 3226,
+          "token": " girl",
+          "p": 0.021671482688853362,
+          "q": null
+        },
+        {
+          "id": 1512,
+          "token": " too",
+          "p": 0.015225589318219252,
+          "q": null
+        },
+        {
+          "id": 1805,
+          "token": " better",
+          "p": 0.015102910912329185,
+          "q": null
+        },
+        {
+          "id": 896,
+          "token": " back",
+          "p": 0.01269446646904948,
+          "q": null
+        },
+        {
+          "id": 562,
+          "token": " out",
+          "p": 0.01001469173639668,
+          "q": null
+        },
+        {
+          "id": 273,
+          "token": " of",
+          "p": 0.008685014255762461,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 15,
+      "parent_beam": 1,
+      "selected_id": 273,
+      "log_p": -0.9808584451675415,
+      "log_q": null,
+      "processed_transition_score": -0.980987012386322,
+      "model_entropy": 4.251885001319401,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 273,
+          "token": " of",
+          "p": 0.37493463921239806,
+          "q": null
+        },
+        {
+          "id": 562,
+          "token": " out",
+          "p": 0.06519520405353478,
+          "q": null
+        },
+        {
+          "id": 625,
+          "token": " more",
+          "p": 0.028760877495241952,
+          "q": null
+        },
+        {
+          "id": 3430,
+          "token": " wrong",
+          "p": 0.023961775927283296,
+          "q": null
+        },
+        {
+          "id": 896,
+          "token": " back",
+          "p": 0.016087850385583146,
+          "q": null
+        },
+        {
+          "id": 1512,
+          "token": " too",
+          "p": 0.015273213562844716,
+          "q": null
+        },
+        {
+          "id": 1805,
+          "token": " better",
+          "p": 0.014232969540651928,
+          "q": null
+        },
+        {
+          "id": 715,
+          "token": " into",
+          "p": 0.011263050349943446,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 16,
+      "parent_beam": 0,
+      "selected_id": 247,
+      "log_p": -1.3771586418151855,
+      "log_q": null,
+      "processed_transition_score": -1.3772348165512085,
+      "model_entropy": 5.4535453586441,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.2522722607291496,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.05313959049224904,
+          "q": null
+        },
+        {
+          "id": 271,
+          "token": " an",
+          "p": 0.03925557393934656,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.027309761702692746,
+          "q": null
+        },
+        {
+          "id": 10739,
+          "token": " shit",
+          "p": 0.02385828287390439,
+          "q": null
+        },
+        {
+          "id": 326,
+          "token": " that",
+          "p": 0.014657493277085619,
+          "q": null
+        },
+        {
+          "id": 436,
+          "token": " this",
+          "p": 0.013868888825242601,
+          "q": null
+        },
+        {
+          "id": 634,
+          "token": " your",
+          "p": 0.010473499941287616,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 17,
+      "parent_beam": 0,
+      "selected_id": 2372,
+      "log_p": -2.4061498641967773,
+      "log_q": null,
+      "processed_transition_score": -2.4062676429748535,
+      "model_entropy": 6.422894832412792,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 2372,
+          "token": " bit",
+          "p": 0.09015000933381422,
+          "q": null
+        },
+        {
+          "id": 1652,
+          "token": " little",
+          "p": 0.058163049262172986,
+          "q": null
+        },
+        {
+          "id": 2257,
+          "token": " lot",
+          "p": 0.02389181710283957,
+          "q": null
+        },
+        {
+          "id": 16391,
+          "token": " joke",
+          "p": 0.02049665052037108,
+          "q": null
+        },
+        {
+          "id": 10739,
+          "token": " shit",
+          "p": 0.013062540072837145,
+          "q": null
+        },
+        {
+          "id": 2181,
+          "token": " thing",
+          "p": 0.010493623723894329,
+          "q": null
+        },
+        {
+          "id": 6858,
+          "token": " baby",
+          "p": 0.009298803853751158,
+          "q": null
+        },
+        {
+          "id": 5772,
+          "token": " kid",
+          "p": 0.008233131279056801,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 18,
+      "parent_beam": 0,
+      "selected_id": 273,
+      "log_p": -0.7381243109703064,
+      "log_q": null,
+      "processed_transition_score": -0.7382798790931702,
+      "model_entropy": 3.407202245466323,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 273,
+          "token": " of",
+          "p": 0.47792590157887843,
+          "q": null
+        },
+        {
+          "id": 625,
+          "token": " more",
+          "p": 0.06070684066307287,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.04562895577712087,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.02431307969168604,
+          "q": null
+        },
+        {
+          "id": 670,
+          "token": " about",
+          "p": 0.02430779368519426,
+          "q": null
+        },
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.01780422366754293,
+          "q": null
+        },
+        {
+          "id": 1512,
+          "token": " too",
+          "p": 0.015690340318937842,
+          "q": null
+        },
+        {
+          "id": 1805,
+          "token": " better",
+          "p": 0.013701133207165397,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 19,
+      "parent_beam": 1,
+      "selected_id": 247,
+      "log_p": -0.6060829758644104,
+      "log_q": null,
+      "processed_transition_score": -0.6061740517616272,
+      "model_entropy": 3.7256828257956656,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.5454251271213335,
+          "q": null
+        },
+        {
+          "id": 271,
+          "token": " an",
+          "p": 0.05142056025360045,
+          "q": null
+        },
+        {
+          "id": 1633,
+          "token": " something",
+          "p": 0.013535160524629983,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.012996579293816871,
+          "q": null
+        },
+        {
+          "id": 2583,
+          "token": " money",
+          "p": 0.006666793206224577,
+          "q": null
+        },
+        {
+          "id": 10739,
+          "token": " shit",
+          "p": 0.006401867133198335,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.00591195162896083,
+          "q": null
+        },
+        {
+          "id": 794,
+          "token": " fun",
+          "p": 0.004782077230258835,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 20,
+      "parent_beam": 1,
+      "selected_id": 2372,
+      "log_p": -0.36287936568260193,
+      "log_q": null,
+      "processed_transition_score": -0.362998366355896,
+      "model_entropy": 2.0865127791790483,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 2372,
+          "token": " bit",
+          "p": 0.6955721479615193,
+          "q": null
+        },
+        {
+          "id": 1652,
+          "token": " little",
+          "p": 0.06166416292836726,
+          "q": null
+        },
+        {
+          "id": 2257,
+          "token": " lot",
+          "p": 0.04614844149040316,
+          "q": null
+        },
+        {
+          "id": 3159,
+          "token": " word",
+          "p": 0.01647300971571129,
+          "q": null
+        },
+        {
+          "id": 5313,
+          "token": " piece",
+          "p": 0.00787832494489083,
+          "q": null
+        },
+        {
+          "id": 2647,
+          "token": " matter",
+          "p": 0.005563865616756264,
+          "q": null
+        },
+        {
+          "id": 1943,
+          "token": " big",
+          "p": 0.004763112915698699,
+          "q": null
+        },
+        {
+          "id": 10551,
+          "token": " mistake",
+          "p": 0.004716086860648437,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 21,
+      "parent_beam": 1,
+      "selected_id": 273,
+      "log_p": -0.3043440580368042,
+      "log_q": null,
+      "processed_transition_score": -0.3044758439064026,
+      "model_entropy": 1.6269508811421274,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 273,
+          "token": " of",
+          "p": 0.7374929518174194,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.05647324873127968,
+          "q": null
+        },
+        {
+          "id": 625,
+          "token": " more",
+          "p": 0.03880764740899673,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.02066608987989585,
+          "q": null
+        },
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.017105395181683067,
+          "q": null
+        },
+        {
+          "id": 670,
+          "token": " about",
+          "p": 0.007880185053752431,
+          "q": null
+        },
+        {
+          "id": 1512,
+          "token": " too",
+          "p": 0.005996398157402939,
+          "q": null
+        },
+        {
+          "id": 751,
+          "token": " like",
+          "p": 0.005639286862434265,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 22,
+      "parent_beam": 1,
+      "selected_id": 247,
+      "log_p": -0.16442415118217468,
+      "log_q": null,
+      "processed_transition_score": -0.1645536869764328,
+      "model_entropy": 1.2143542403941368,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.8482540360424792,
+          "q": null
+        },
+        {
+          "id": 271,
+          "token": " an",
+          "p": 0.04340586124143843,
+          "q": null
+        },
+        {
+          "id": 1633,
+          "token": " something",
+          "p": 0.010557788798765932,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.003643792021566776,
+          "q": null
+        },
+        {
+          "id": 270,
+          "token": " b",
+          "p": 0.0029509143164506086,
+          "q": null
+        },
+        {
+          "id": 690,
+          "token": " some",
+          "p": 0.0019959517178650896,
+          "q": null
+        },
+        {
+          "id": 2583,
+          "token": " money",
+          "p": 0.0018927231032943189,
+          "q": null
+        },
+        {
+          "id": 2238,
+          "token": " kind",
+          "p": 0.0018653118137827915,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 23,
+      "parent_beam": 1,
+      "selected_id": 2372,
+      "log_p": -0.10174819082021713,
+      "log_q": null,
+      "processed_transition_score": -0.10187438130378723,
+      "model_entropy": 0.7213698685569864,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 2372,
+          "token": " bit",
+          "p": 0.9031250574534484,
+          "q": null
+        },
+        {
+          "id": 1652,
+          "token": " little",
+          "p": 0.02310086829730642,
+          "q": null
+        },
+        {
+          "id": 2257,
+          "token": " lot",
+          "p": 0.013045283459467623,
+          "q": null
+        },
+        {
+          "id": 3159,
+          "token": " word",
+          "p": 0.011488885188191095,
+          "q": null
+        },
+        {
+          "id": 5313,
+          "token": " piece",
+          "p": 0.003677868577987038,
+          "q": null
+        },
+        {
+          "id": 2647,
+          "token": " matter",
+          "p": 0.0032539734286788917,
+          "q": null
+        },
+        {
+          "id": 1943,
+          "token": " big",
+          "p": 0.0022000127468338486,
+          "q": null
+        },
+        {
+          "id": 1643,
+          "token": " few",
+          "p": 0.0011355636284108188,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 24,
+      "parent_beam": 0,
+      "selected_id": 273,
+      "log_p": -0.20028056204319,
+      "log_q": null,
+      "processed_transition_score": -0.20038866996765137,
+      "model_entropy": 1.0793631186153776,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 273,
+          "token": " of",
+          "p": 0.8183975455006823,
+          "q": null
+        },
+        {
+          "id": 625,
+          "token": " more",
+          "p": 0.04656935600814567,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.041840634764602945,
+          "q": null
+        },
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.010905729509694853,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.00859868094251221,
+          "q": null
+        },
+        {
+          "id": 3356,
+          "token": " longer",
+          "p": 0.006831976650771719,
+          "q": null
+        },
+        {
+          "id": 751,
+          "token": " like",
+          "p": 0.005814525341331715,
+          "q": null
+        },
+        {
+          "id": 1512,
+          "token": " too",
+          "p": 0.0029755352226826983,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 25,
+      "parent_beam": 0,
+      "selected_id": 247,
+      "log_p": -0.08420521765947342,
+      "log_q": null,
+      "processed_transition_score": -0.08434153348207474,
+      "model_entropy": 0.6068653472303229,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.9190978617981617,
+          "q": null
+        },
+        {
+          "id": 271,
+          "token": " an",
+          "p": 0.034226418647387756,
+          "q": null
+        },
+        {
+          "id": 1633,
+          "token": " something",
+          "p": 0.006310285629292723,
+          "q": null
+        },
+        {
+          "id": 2238,
+          "token": " kind",
+          "p": 0.002515541147746799,
+          "q": null
+        },
+        {
+          "id": 270,
+          "token": " b",
+          "p": 0.0019409142138623239,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.0012256109427342796,
+          "q": null
+        },
+        {
+          "id": 690,
+          "token": " some",
+          "p": 0.0009708704288336523,
+          "q": null
+        },
+        {
+          "id": 2929,
+          "token": " paper",
+          "p": 0.000825987428835603,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 26,
+      "parent_beam": 0,
+      "selected_id": 2372,
+      "log_p": -0.04740644618868828,
+      "log_q": null,
+      "processed_transition_score": -0.04752001911401749,
+      "model_entropy": 0.3816151334915126,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 2372,
+          "token": " bit",
+          "p": 0.9535777066387623,
+          "q": null
+        },
+        {
+          "id": 1652,
+          "token": " little",
+          "p": 0.009118186088201365,
+          "q": null
+        },
+        {
+          "id": 3159,
+          "token": " word",
+          "p": 0.007948716375709776,
+          "q": null
+        },
+        {
+          "id": 2257,
+          "token": " lot",
+          "p": 0.005391435095227124,
+          "q": null
+        },
+        {
+          "id": 5313,
+          "token": " piece",
+          "p": 0.0018392095890620898,
+          "q": null
+        },
+        {
+          "id": 2647,
+          "token": " matter",
+          "p": 0.001511248634585176,
+          "q": null
+        },
+        {
+          "id": 1943,
+          "token": " big",
+          "p": 0.0012045392803751126,
+          "q": null
+        },
+        {
+          "id": 1048,
+          "token": " long",
+          "p": 0.0006291740030087929,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 27,
+      "parent_beam": 0,
+      "selected_id": 273,
+      "log_p": -0.1332336962223053,
+      "log_q": null,
+      "processed_transition_score": -0.133323535323143,
+      "model_entropy": 0.7558377616439328,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 273,
+          "token": " of",
+          "p": 0.8751681047614217,
+          "q": null
+        },
+        {
+          "id": 625,
+          "token": " more",
+          "p": 0.044032137126532325,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.022623733248112895,
+          "q": null
+        },
+        {
+          "id": 3356,
+          "token": " longer",
+          "p": 0.006823028006268412,
+          "q": null
+        },
+        {
+          "id": 751,
+          "token": " like",
+          "p": 0.005551972708512124,
+          "q": null
+        },
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.005352714093151842,
+          "q": null
+        },
+        {
+          "id": 6927,
+          "token": " easier",
+          "p": 0.0030436636039019925,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.002675082434789005,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 28,
+      "parent_beam": 0,
+      "selected_id": 247,
+      "log_p": -0.044863954186439514,
+      "log_q": null,
+      "processed_transition_score": -0.04498841241002083,
+      "model_entropy": 0.3076436296784073,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.9559923668725043,
+          "q": null
+        },
+        {
+          "id": 271,
+          "token": " an",
+          "p": 0.02545229182495774,
+          "q": null
+        },
+        {
+          "id": 1633,
+          "token": " something",
+          "p": 0.0025254809783304025,
+          "q": null
+        },
+        {
+          "id": 2238,
+          "token": " kind",
+          "p": 0.0019185582835580916,
+          "q": null
+        },
+        {
+          "id": 270,
+          "token": " b",
+          "p": 0.0011378166026875488,
+          "q": null
+        },
+        {
+          "id": 1529,
+          "token": " another",
+          "p": 0.0005435546706539039,
+          "q": null
+        },
+        {
+          "id": 690,
+          "token": " some",
+          "p": 0.0004481763164456621,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.00043286432251404036,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 29,
+      "parent_beam": 0,
+      "selected_id": 2372,
+      "log_p": -0.03078761138021946,
+      "log_q": null,
+      "processed_transition_score": -0.03089533932507038,
+      "model_entropy": 0.2667071663106346,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 2372,
+          "token": " bit",
+          "p": 0.969562473114333,
+          "q": null
+        },
+        {
+          "id": 3159,
+          "token": " word",
+          "p": 0.0056240993682503725,
+          "q": null
+        },
+        {
+          "id": 1652,
+          "token": " little",
+          "p": 0.0052383189840630225,
+          "q": null
+        },
+        {
+          "id": 2257,
+          "token": " lot",
+          "p": 0.0032976785003486614,
+          "q": null
+        },
+        {
+          "id": 5313,
+          "token": " piece",
+          "p": 0.0011277521585523669,
+          "q": null
+        },
+        {
+          "id": 1943,
+          "token": " big",
+          "p": 0.0008246594563103108,
+          "q": null
+        },
+        {
+          "id": 2647,
+          "token": " matter",
+          "p": 0.0007487372404639157,
+          "q": null
+        },
+        {
+          "id": 20540,
+          "token": " chunk",
+          "p": 0.0004574447260928305,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 30,
+      "parent_beam": 0,
+      "selected_id": 273,
+      "log_p": -0.0862787738442421,
+      "log_q": null,
+      "processed_transition_score": -0.08635794371366501,
+      "model_entropy": 0.5293462101758912,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 273,
+          "token": " of",
+          "p": 0.9172538484220237,
+          "q": null
+        },
+        {
+          "id": 625,
+          "token": " more",
+          "p": 0.031141318894287926,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.014312763832980422,
+          "q": null
+        },
+        {
+          "id": 751,
+          "token": " like",
+          "p": 0.005137604765099553,
+          "q": null
+        },
+        {
+          "id": 3356,
+          "token": " longer",
+          "p": 0.0037895185520527954,
+          "q": null
+        },
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.0029467801538750698,
+          "q": null
+        },
+        {
+          "id": 6927,
+          "token": " easier",
+          "p": 0.0018862629701334468,
+          "q": null
+        },
+        {
+          "id": 8750,
+          "token": " bigger",
+          "p": 0.0012195877111009332,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 31,
+      "parent_beam": 0,
+      "selected_id": 247,
+      "log_p": -0.03697070851922035,
+      "log_q": null,
+      "processed_transition_score": -0.037084318697452545,
+      "model_entropy": 0.24867756717554335,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.9635791216906182,
+          "q": null
+        },
+        {
+          "id": 271,
+          "token": " an",
+          "p": 0.022804816010605623,
+          "q": null
+        },
+        {
+          "id": 2238,
+          "token": " kind",
+          "p": 0.0017382334527378954,
+          "q": null
+        },
+        {
+          "id": 1633,
+          "token": " something",
+          "p": 0.001715614932192085,
+          "q": null
+        },
+        {
+          "id": 270,
+          "token": " b",
+          "p": 0.0008766549178715634,
+          "q": null
+        },
+        {
+          "id": 1529,
+          "token": " another",
+          "p": 0.0005515784734808625,
+          "q": null
+        },
+        {
+          "id": 673,
+          "token": " time",
+          "p": 0.0003639954549721896,
+          "q": null
+        },
+        {
+          "id": 690,
+          "token": " some",
+          "p": 0.00035625015417715196,
+          "q": null
+        }
+      ]
+    }
+  ],
+  "wall_seconds": 0.33500970000750385,
+  "log_p": -30.211206083651632,
+  "log_q": null,
+  "sequence_score": -30.214759826660156,
+  "reconstructed_sequence_score": -30.21475975960493,
+  "resolved_generation_config": {
+    "max_length": null,
+    "max_new_tokens": 32,
+    "min_length": 0,
+    "min_new_tokens": 0,
+    "early_stopping": "never",
+    "max_time": null,
+    "stop_strings": null,
+    "do_sample": false,
+    "num_beams": 2,
+    "use_mtp": null,
+    "use_cache": true,
+    "cache_implementation": null,
+    "cache_config": null,
+    "max_cache_len": null,
+    "temperature": null,
+    "top_k": null,
+    "top_p": null,
+    "min_p": null,
+    "top_h": null,
+    "typical_p": null,
+    "epsilon_cutoff": null,
+    "eta_cutoff": null,
+    "repetition_penalty": 1.0,
+    "encoder_repetition_penalty": null,
+    "length_penalty": 0.0,
+    "no_repeat_ngram_size": 0,
+    "bad_words_ids": null,
+    "renormalize_logits": true,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "remove_invalid_values": null,
+    "exponential_decay_length_penalty": null,
+    "suppress_tokens": null,
+    "begin_suppress_tokens": null,
+    "sequence_bias": null,
+    "token_healing": null,
+    "guidance_scale": null,
+    "watermarking_config": null,
+    "num_return_sequences": null,
+    "output_attentions": null,
+    "output_hidden_states": null,
+    "output_scores": true,
+    "output_logits": true,
+    "return_dict_in_generate": true,
+    "pad_token_id": 0,
+    "bos_token_id": 0,
+    "eos_token_id": 0,
+    "encoder_no_repeat_ngram_size": null,
+    "decoder_start_token_id": null,
+    "is_assistant": null,
+    "num_assistant_tokens": null,
+    "num_assistant_tokens_schedule": null,
+    "assistant_confidence_threshold": null,
+    "prompt_lookup_num_tokens": null,
+    "max_matching_ngram_size": null,
+    "assistant_early_exit": null,
+    "assistant_lookbehind": null,
+    "target_lookbehind": null,
+    "assistant_ensemble_weight": null,
+    "speculation_type": null,
+    "compile_config": null,
+    "disable_compile": null,
+    "continuous_batching_config": null,
+    "low_memory": null,
+    "penalty_alpha": null,
+    "dola_layers": null,
+    "diversity_penalty": null,
+    "num_beam_groups": null,
+    "constraints": null,
+    "force_words_ids": null,
+    "prefill_chunk_size": null,
+    "_from_model_config": null,
+    "transformers_version": "5.19.0"
+  },
+  "run_id": "heldout-line-5-beam2-None",
+  "model": "pythia-14m",
+  "prompt": {
+    "id": "heldout-line-5",
+    "source": "\u201cCome, there\u2019s no use in crying like that!\u201d said Alice to herself, rather sharply; \u201cI advise you to leave off this minute!\u201d She generally gave herself very good advice, (though she very seldom followed it), and sometimes she scolded herself so severely as to bring tears into her eyes; and once she remembered trying to box her own ears for having cheated herself in a game of croquet she was playing against herself, for this curious child was very fond of pretending to be two people. \u201cBut it\u2019s no use now,\u201d thought poor Alice, \u201cto pretend to be two people! Why, there\u2019s hardly enough of me left to make _one_ respectable person!\u201d",
+    "source_sha256": "1e90712bd7d42c73c3315d8473fb9a3018538330e408c53f0ea3e4a2459d9b3d",
+    "prompt": "\u201cCome, there\u2019s no use in crying like that!\u201d said Alice to herself,"
+  },
+  "prompt_ids": [
+    1628,
+    8380,
+    13,
+    627,
+    457,
+    84,
+    642,
+    897,
+    275,
+    17800,
+    751,
+    326,
+    11602,
+    753,
+    16922,
+    281,
+    5972,
+    13
+  ],
+  "method": {
+    "name": "beam2",
+    "beam": 2
+  },
+  "seed": null
+}

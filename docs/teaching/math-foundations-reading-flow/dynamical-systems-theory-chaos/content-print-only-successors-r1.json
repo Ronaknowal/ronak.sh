@@ -1,0 +1,320 @@
+{
+  "status": "Exact original conservation and nine print-only successors; no main execution",
+  "source": {
+    "path": "src/learn/data/dynamical-systems-examples.js",
+    "sha256": "3af5b2d3e6303ea9193712b9a6786be7361ffa9373b997efc67b28bae39bbbf1",
+    "bytes": 22966
+  },
+  "changes": [
+    {
+      "name": "cooling",
+      "removedSource": "print(\"All three runs end at time 3. Their update multipliers are different.\")\n",
+      "removedOutputLine": "All three runs end at time 3. Their update multipliers are different.",
+      "line": 33,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    },
+    {
+      "name": "transient",
+      "removedSource": "print(\"A stable matrix can have transient growth in this norm.\")\n",
+      "removedOutputLine": "A stable matrix can have transient growth in this norm.",
+      "line": 31,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    },
+    {
+      "name": "hopf",
+      "removedSource": "print(\"Angles advance by 2*pi per turn; attraction of radius does not reset phase.\")\n",
+      "removedOutputLine": "Angles advance by 2*pi per turn; attraction of radius does not reset phase.",
+      "line": 36,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    },
+    {
+      "name": "cycles",
+      "removedSource": "print(\n    \"A finite tail illustrates a regime; it does not prove infinite-time aperiodicity.\"\n)\n",
+      "removedOutputLine": "A finite tail illustrates a regime; it does not prove infinite-time aperiodicity.",
+      "line": 34,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    },
+    {
+      "name": "exponent",
+      "removedSource": "print(\"The horizon is an approximation under the stated growth model, not a guarantee.\")\n",
+      "removedOutputLine": "The horizon is an approximation under the stated growth model, not a guarantee.",
+      "line": 39,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    },
+    {
+      "name": "tent",
+      "removedSource": "print(\"This invariant law is not a uniform distribution of logistic coordinates.\")\n",
+      "removedOutputLine": "This invariant law is not a uniform distribution of logistic coordinates.",
+      "line": 37,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    },
+    {
+      "name": "lorenz",
+      "removedSource": "print(\"Matching this finite trajectory does not prove a long-time chaos claim.\")\n",
+      "removedOutputLine": "Matching this finite trajectory does not prove a long-time chaos claim.",
+      "line": 60,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    },
+    {
+      "name": "energy",
+      "removedSource": "print(\"Exact oscillator E=0.5 for all times. Modified energy is a different function.\")\n",
+      "removedOutputLine": "Exact oscillator E=0.5 for all times. Modified energy is a different function.",
+      "line": 37,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    },
+    {
+      "name": "products",
+      "removedSource": "print(\n    \"The ordered product controls repeated evolution; separate eigenvalue lists lose that information.\"\n)\n",
+      "removedOutputLine": "The ordered product controls repeated evolution; separate eigenvalue lists lose that information.",
+      "line": 16,
+      "inverseSourcePass": true,
+      "inverseOutputPass": true
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_cooling.py",
+      "sha256": "998b83a482419909d2da70f306beeec28d0bbd8e3490c8c565d6642c16c7a11b",
+      "bytes": 1301
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_cooling.py.stdout.txt",
+      "sha256": "5e6696ecc80af83303e84eb07b699f9d4bec5f48b4695e602d422eeb5854631e",
+      "bytes": 215
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_cycles.py",
+      "sha256": "231ab57655d99351adaedd2d8e884ed55358b92da23ca14221a5b9e8c06d94ce",
+      "bytes": 1339
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_cycles.py.stdout.txt",
+      "sha256": "9c869f31cdfd5673fe1bd528e49842bc3f650fc8dcc095a5b1737495f8db1d90",
+      "bytes": 607
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_energy.py",
+      "sha256": "7c9ecb5b3f37ff7d3ed2c30f1f79fd76765909e0f2fb8ce2f69fa86be60270f7",
+      "bytes": 1473
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_energy.py.stdout.txt",
+      "sha256": "7a262a6582e0fcceca8058807fba3b03e4fb6b674fae2c9a5a338a1531526fe1",
+      "bytes": 383
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_exponent.py",
+      "sha256": "bc3bd268a7d4612901b976c4e78f9d81d4b25b4f27f0479fa3ceb040a3e02f02",
+      "bytes": 1384
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_exponent.py.stdout.txt",
+      "sha256": "54dcf467274db3ca4a49fbf0d743825d3190473d41006adafb76fa2ac7b55061",
+      "bytes": 309
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_hopf.py",
+      "sha256": "cae31ed1fef296318b457da6d8cb96a70e8167cf94abcfbb2a792c18fd51415b",
+      "bytes": 1524
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_hopf.py.stdout.txt",
+      "sha256": "6a99a1ddef2dede6701c0e4f3a2b407cc55cc4937dddfb7287dee25fe5e1177f",
+      "bytes": 293
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_lorenz.py",
+      "sha256": "7708830876b5cfa7bec25d7af0896575b82c0418b2dc3b957990043fe19a8afd",
+      "bytes": 1719
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_lorenz.py.stdout.txt",
+      "sha256": "903071b7a6a29e0b0e784f709739ff13ccbe545babb5395898275fce9202cd5d",
+      "bytes": 220
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_original.py",
+      "sha256": "2b254948457a07c5bca874d030667468aa3dec1f5677108d4927f67efc9e70b8",
+      "bytes": 239
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_original.py.stdout.txt",
+      "sha256": "6cac36c97deab32a7d8c10ddeda6e190f9351b33743c7057a6b686bbdb2f5b8f",
+      "bytes": 26
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_products.py",
+      "sha256": "78600abd824ebe6e9430d653f8bfc2775c348565f54424308bb0dd776d3f205e",
+      "bytes": 635
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_products.py.stdout.txt",
+      "sha256": "eab92bd78ec9cfd71ea931cbd8a78c8b20467d98da8c52078e963ed38373e2d7",
+      "bytes": 317
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_scalar.py",
+      "sha256": "27658dddb8069d3f8aaf5ec13eb8cc5ba4a0047038f07cbb0e4d8acb6ab5f945",
+      "bytes": 1173
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_scalar.py.stdout.txt",
+      "sha256": "3db0eccfc7133c476ad43706f42667424d3f5ce0a7d333b2ac55d320418d1460",
+      "bytes": 372
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_tent.py",
+      "sha256": "3b6706ec53d0b490383ebbc9b312297c04e85aa2a669f1c40c27366f0665226d",
+      "bytes": 1263
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_tent.py.stdout.txt",
+      "sha256": "46513702602fbcdc63fd601180c062a51951e3855c2555382f89066483c29704",
+      "bytes": 382
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_transient.py",
+      "sha256": "ec291b26fcdaf9db9d8ffc9ffe2be9225bfeff9ed6b6e3e8e5c273fc751c8958",
+      "bytes": 1297
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/original-programmes/dynamics_transient.py.stdout.txt",
+      "sha256": "34d645ac339b2fdbb568b341ea61fa854f309f891f59bd25586d95b9f1ce6345",
+      "bytes": 224
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_cooling.py",
+      "sha256": "0d02f1a58985b7649028cb21629b24afc17720a69cf3a5eb965e172d7613f8fb",
+      "bytes": 1222
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_cooling.py.stdout.txt",
+      "sha256": "20c9f85674c41eb91ba505abb3b9108cb45d995d59f0c0ddca71eae6c8e1c67f",
+      "bytes": 145
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_cycles.py",
+      "sha256": "e790914b7a64f62351bed307cd389958a0996ba16c46ece820a86265f5fc0318",
+      "bytes": 1242
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_cycles.py.stdout.txt",
+      "sha256": "7837b31b081a4d9f3c591fe3556a806f9d23e3a5c7309e9b9bfcdb937ea88d04",
+      "bytes": 525
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_energy.py",
+      "sha256": "f818e24c2b8523dd93134af64d283bfbecf2f8d4dd2071364300e22faf0656c1",
+      "bytes": 1385
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_energy.py.stdout.txt",
+      "sha256": "bf37937a2e07452149d473341f6f9dcc375fd91c28e235e81c48736be39e6f5a",
+      "bytes": 304
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_exponent.py",
+      "sha256": "9d24a9875be2c12595f90345456eedc6371877cfa3006069170a2cb055f482e3",
+      "bytes": 1295
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_exponent.py.stdout.txt",
+      "sha256": "f2595008a74c580059abbb1122c12bd6076fc25cf983ef2b9c98f922fb6c6ce6",
+      "bytes": 229
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_hopf.py",
+      "sha256": "943e22353d7e93e82241f6aba82510eb2a784644663f75c1036a1adfed1d8fac",
+      "bytes": 1439
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_hopf.py.stdout.txt",
+      "sha256": "93e21712808b7d0d98332588058aefc3296a42299a611b45cb4b3cf968eb5536",
+      "bytes": 217
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_lorenz.py",
+      "sha256": "b0d85072f0404e3d548ad12dc1a7a851e0c468814cd504d22f99ea84ee063346",
+      "bytes": 1638
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_lorenz.py.stdout.txt",
+      "sha256": "8df90187029a7c02c7ca4e7bda208b5ba4242b636f86ed2905a7bbd9c139bd0b",
+      "bytes": 148
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_original.py",
+      "sha256": "2b254948457a07c5bca874d030667468aa3dec1f5677108d4927f67efc9e70b8",
+      "bytes": 239
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_original.py.stdout.txt",
+      "sha256": "6cac36c97deab32a7d8c10ddeda6e190f9351b33743c7057a6b686bbdb2f5b8f",
+      "bytes": 26
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_products.py",
+      "sha256": "c23a184ed232082fb38e935955673ddd1ca4fe1e63d389301ddbbe0273a72964",
+      "bytes": 522
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_products.py.stdout.txt",
+      "sha256": "7d2bd79605f8abba0f29353ebe2d718d2ade06ce90d3b017b1890a26334ffaba",
+      "bytes": 219
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_scalar.py",
+      "sha256": "27658dddb8069d3f8aaf5ec13eb8cc5ba4a0047038f07cbb0e4d8acb6ab5f945",
+      "bytes": 1173
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_scalar.py.stdout.txt",
+      "sha256": "3db0eccfc7133c476ad43706f42667424d3f5ce0a7d333b2ac55d320418d1460",
+      "bytes": 372
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_tent.py",
+      "sha256": "e558b745ef3be6d8d72e60b5b78edcf73905191b0e8e37bdb64759a3d1b82bd5",
+      "bytes": 1180
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_tent.py.stdout.txt",
+      "sha256": "e00de61c0d924cd2accea7736b5ba1795f235b9b94e58854a0fc9686b8a65dfb",
+      "bytes": 308
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_transient.py",
+      "sha256": "bbc847c2bce3422657cb5971ff01bacbbcd8fd2676b0d9538b0d4f51e0c6d38d",
+      "bytes": 1232
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/content-prepared/programmes/dynamics_transient.py.stdout.txt",
+      "sha256": "45c1c0bd93811800046511b9a4c3aa16d242d3ed1d7a78439f00c62559b35c45",
+      "bytes": 168
+    }
+  ],
+  "unchangedProgrammes": [
+    "scalar",
+    "original"
+  ],
+  "scientificMainsReplayed": 0,
+  "proseHomesRequired": [
+    "cooling",
+    "cycles",
+    "energy",
+    "exponent",
+    "hopf",
+    "lorenz",
+    "products",
+    "tent",
+    "transient"
+  ]
+}

@@ -1,0 +1,11 @@
+.lesson-flow .mp-propagation-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr)); gap:1.35rem; align-items:start; }
+.lesson-flow .mp-propagation-pair { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,24rem),1fr)); gap:1.5rem; align-items:start; }
+.lesson-flow .mp-propagation-values { width:max-content; min-width:100%; border-collapse:collapse; margin-block:1rem; }
+.lesson-flow .mp-propagation-values caption { text-align:left; color:#ddd; margin-bottom:.6rem; }
+.lesson-flow .mp-propagation-values th,.lesson-flow .mp-propagation-values td { text-align:left; padding:.55rem .35rem; border-bottom:1px solid #303030; white-space:nowrap; overflow-wrap:normal; }
+.lesson-flow .mp-propagation-select { display:grid; gap:.5rem; min-width:0; }
+.lesson-flow .mp-propagation-select select { max-width:100%; min-height:2.75rem; padding:.55rem; color:#eee; background:#141414; border:1px solid #666; border-radius:.2rem; }
+.lesson-flow .mp-propagation-focus { outline:2px solid #eee; outline-offset:.6rem; }
+.lesson-flow .mp-propagation-legend { display:flex; flex-wrap:wrap; gap:.6rem 1.2rem; margin-block:.75rem; }
+.lesson-flow .mp-propagation-legend span { border-bottom:2px solid currentColor; }
+.lesson-flow .mp-propagation-matrix-pan { overflow-x:auto; max-width:100%; }

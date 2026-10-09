@@ -1,0 +1,33 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+const base='docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm';
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+assert.equal(sha(`${base}/design.md`),'671ee0800d49d21c6732b6004620f8929c18c78cb3a7f2f80480b24a61f0ce49');
+const packet=JSON.parse(fs.readFileSync(`${base}/design-inputs.json`));
+const checks=[];
+for(const item of packet.files){assert.equal(sha(item.path),item.sha256);checks.push({name:`Exact input ${item.path}`,passed:true});}
+const close=(name,a,b)=>{assert.ok(Math.abs(a-b)<1e-9,`${name}: ${a} vs ${b}`);checks.push({name,actual:a,expected:b,passed:true});};
+close('Boundary mean',(4+1+1+1)/4,1.75);
+close('Trajectory mean',(4+1)/2,2.5);
+close('Invalid target loss',-Math.log(1-.8),1.6094379124341003);
+close('Product rank reversal',.95**5,.7737809375);
+close('Hard-estimator positive probability',1-.9**8,.56953279);
+close('Soft-estimator variance',.1*.9/8,.01125);
+close('Two-group harmonic',2*(3/4)*(2/3)/(3/4+2/3),12/17);
+close('Changed harmonic',2*(2/5)*(3/4)/(2/5+3/4),12/23);
+close('First parent',(.75+.85)/2,.8);close('Second parent',(.4+0)/2,.2);
+close('Progress ranking crossover',(.75-.4)/(.2-(-.05)),1.4);
+close('Practice parent',.35*(2/7),.1);
+close('Practice crossover',(.6-.35)/(.25-(-.1)),5/7);
+const value=(q,a,b)=>q*a+(1-q)*b;
+close('Finite reward',value(.6,.8,.2),.56);
+const sigmoid=z=>1/(1+Math.exp(-z));
+const z=[Math.log(.6/.4),Math.log(.8/.2),Math.log(.2/.8)];
+for(let j=0;j<3;j++){const a=[...z],b=[...z];a[j]+=1e-5;b[j]-=1e-5;close(`Logit gradient ${j}`,(value(...a.map(sigmoid))-value(...b.map(sigmoid)))/2e-5,[.144,.096,.064][j]);}
+const phi=[.2,.5,.9,0],gamma=.9;
+const bonuses=phi.slice(0,-1).map((v,i)=>gamma*phi[i+1]-v);
+close('Potential telescope',bonuses.reduce((s,v,i)=>s+gamma**i*v,0),-.2);
+close('Omitting terminal changes return',bonuses.slice(0,2).reduce((s,v,i)=>s+gamma**i*v,0),.529);
+fs.writeFileSync(`${base}/design-review-checks.json`,JSON.stringify({reviewer:'root',scope:'Different whole-design reading plus independent constructed arithmetic; no fits or runtime',files:{[`${base}/design.md`]:sha(`${base}/design.md`),[`${base}/design-inputs.json`]:sha(`${base}/design-inputs.json`)},checks},null,2)+'\n',{flag:'wx'});
+console.log(`${checks.length} design checks passed`);

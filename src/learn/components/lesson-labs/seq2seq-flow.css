@@ -1,0 +1,23 @@
+.seq2seq-lesson .seq-flow-figure { margin: 1.75rem 0; padding: 0; border: 0; background: none; }
+.seq2seq-lesson .seq-flow-figure figcaption { color: var(--text-muted, #a7abb1); font-size: .94rem; line-height: 1.75; margin: .75rem 0 0; }
+.seq2seq-lesson .seq-flow-drawing { width: 100%; max-width: 26rem; height: auto; display: block; margin: 0 auto; overflow: visible; container-type: normal; }
+.seq2seq-lesson .seq-flow-drawing text { font-family: var(--font-mono, monospace); font-size: 13px; }
+.seq2seq-lesson .seq-flow-drawing text.seq-flow-small { font-size: 11px; }
+.seq2seq-lesson .seq-flow-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 2rem; align-items: start; }
+.seq2seq-lesson .seq-flow-actions { display: flex; gap: .65rem; flex-wrap: wrap; margin: .75rem 0; }
+.seq2seq-lesson .seq-flow-actions button, .seq2seq-lesson .lesson-code-source__pending button { min-height: 44px; color: var(--amber, #e7b74b); border: 1px solid #38342b; background: #121212; padding: .5rem .75rem; font: inherit; cursor: pointer; }
+.seq2seq-lesson .seq-flow-actions button:hover, .seq2seq-lesson .lesson-code-source__pending button:hover { border-color: #e7b74b; }
+.seq2seq-lesson .seq-flow-actions button:focus-visible, .seq2seq-lesson .lesson-code-source__pending button:focus-visible { outline: 2px solid #e7b74b; outline-offset: 3px; }
+.seq2seq-lesson .seq-flow-token-row { display: flex; gap: .35rem; flex-wrap: wrap; margin: .7rem 0; }
+.seq2seq-lesson .seq-flow-token { min-width: 2rem; padding: .3rem .5rem; border: 1px solid #82c5dc; color: #82c5dc; font-family: var(--font-mono, monospace); }
+.seq2seq-lesson .seq-flow-token.computed { color: #b497df; border-color: #b497df; }
+.seq2seq-lesson .seq-flow-token.selected { outline: 2px solid #fff; outline-offset: 2px; }
+.seq2seq-lesson .seq-flow-token.masked { opacity: .55; border-style: dashed; }
+.seq2seq-lesson .seq-flow-text { display: grid; gap: .35rem; min-width: min(100%, 14rem); max-width: 100%; }
+.seq2seq-lesson .seq-flow-text input, .seq2seq-lesson .seq-flow-text select { box-sizing: border-box; min-height: 44px; width: 100%; background: #0b0b0b; color: #e8e8e8; border: 1px solid #414141; font: inherit; padding: .45rem .65rem; }
+.seq2seq-lesson .seq-flow-text input:focus-visible, .seq2seq-lesson .seq-flow-text select:focus-visible { outline: 2px solid #e7b74b; outline-offset: 2px; }
+.seq2seq-lesson .seq-flow-source { min-width: 0; }
+.seq2seq-lesson .seq-flow-checkbox { display: flex; align-items: center; gap: .6rem; min-height: 44px; color: #dddfe2; }
+.seq2seq-lesson .seq-flow-checkbox input { accent-color: #e7b74b; }
+.seq2seq-lesson .katex-display { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-block: .2rem; }
+.seq2seq-lesson .seq-evidence .neural-two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }

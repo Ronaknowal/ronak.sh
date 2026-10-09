@@ -1,5 +1,6 @@
 export const matrixCalculusExamples = {
   local: {
+    file: "matrix_local_prediction.py",
     title: 'Check a local prediction against the actual change',
     code: `import numpy as np
 
@@ -24,6 +25,7 @@ remainder: [0.0001, -0.0002]
 half-step remainder: [2.5e-05, -5e-05]`,
   },
   chain: {
+    file: "matrix_chain_products.py",
     title: 'Compute forward sensitivity and reverse gradients separately',
     code: `import numpy as np
 
@@ -53,6 +55,7 @@ gradient x: [12.0, 18.0]
 same directional rate: 12.0`,
   },
   affine: {
+    file: "affine_batch_backward.py",
     title: 'Run a complete four-observation affine backward pass',
     code: `import numpy as np
 
@@ -85,6 +88,7 @@ grad X: [[0.125, 1.25, -0.5], [0.375, 0.25, 0.25], [0.375, -0.25, 0.5], [0.375, 
 shapes: (3, 2) (2,) (4, 3)`,
   },
   gradientCheck: {
+    file: "affine_gradient_check.py",
     title: 'Check an analytic gradient and expose an extra-mean bug',
     code: `import numpy as np
 
@@ -126,6 +130,7 @@ wrong extra mean: [1.25, -0.75]
 bug detected: True`,
   },
   dual: {
+    file: "dual_forward_primitives.py",
     title: 'Build a tiny forward-mode engine for addition and multiplication',
     code: `from dataclasses import dataclass
 
@@ -160,6 +165,7 @@ direction: (0.0, 1.0) values: [7.0, 6.0] Jv: [1.0, 2.0]
 direction: (1.0, -2.0) values: [7.0, 6.0] Jv: [2.0, -1.0]`,
   },
   differences: {
+    file: "derivative_decimal_checks.py",
     title: 'Use exact decimal arithmetic to separate truncation from rounding',
     code: `from decimal import Decimal, localcontext
 
@@ -185,6 +191,7 @@ kink h: 0.1 left/right/central: -1.0 1.0 0.0
 kink h: 0.0001 left/right/central: -1.0 1.0 0.0`,
   },
   square: {
+    file: "matrix_square_direction.py",
     title: 'Differentiate a matrix square without assuming commutativity',
     code: `import numpy as np
 
@@ -205,6 +212,7 @@ correct matches: True
 shortcut matches: False`,
   },
   solve: {
+    file: "implicit_solve_direction.py",
     title: 'Predict how a solved system changes when its coefficients move',
     code: `import numpy as np
 
@@ -227,6 +235,7 @@ independent check: True
 linearized equation: True`,
   },
   softmax: {
+    file: "softmax_direction_check.py",
     title: 'Explain why a common score offset disappears',
     code: `import numpy as np
 
@@ -256,6 +265,7 @@ rate sums to zero: True
 check: True`,
   },
   hessian: {
+    file: "hessian_quadratic_direction.py",
     title: 'Compare a gradient with how that gradient changes',
     code: `import numpy as np
 

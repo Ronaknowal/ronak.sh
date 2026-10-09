@@ -1,0 +1,334 @@
+{
+  "schema": "manifold-probability-arrow-source-ssr-check/v1",
+  "status": "PASS_FOCUSED_SOURCE_AND_SSR_NATIVE_PENDING",
+  "author": "/root/tsne_probability_arrow_recovery",
+  "at": "2026-10-09T14:25:18.043Z",
+  "predecessor": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/author-ready-built-source.json",
+    "bytes": 32649,
+    "sha256": "e12f386362f17c0c904130fa35976efcd36be6c7cea7d6612969729929d92e35"
+  },
+  "originalModule": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldOperationObjects.jsx",
+    "bytes": 18704,
+    "sha256": "e743808753dac6902af92f39dda57a4fac1a0c2aaa5b6880c1ae9cb8df34c7d9"
+  },
+  "overlayModule": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/ManifoldOperationObjects.jsx",
+    "bytes": 20424,
+    "sha256": "b4be3e35c75e93ae6bb68e6b7b5796a8104929992db8b54ab4b9ae3a9bdc6c08"
+  },
+  "checker": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-probability-arrows.mjs",
+    "bytes": 11200,
+    "sha256": "933f238375a8ef1c52b1d7d0269d067ecae1d55e89fa735cd7ba6187cc99f9a9"
+  },
+  "config": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/vite.config.mjs",
+    "bytes": 1034,
+    "sha256": "b61f55ff2cf47600116755ec3a12a53e0f67251930f8ad977e0088a98575b153"
+  },
+  "groups": [
+    "All31 frozen predecessor owners,11 accepted content references and35 payload sources remain exact",
+    "Only GaussianBranches adds one leading scene; its previous calculation/self scenes and every other declaration are exact",
+    "Actual SVG selection arrows: default",
+    "Actual SVG selection arrows: manuscript narrow",
+    "Actual SVG selection arrows: manuscript wide",
+    "Actual SVG selection arrows: minimum slider width",
+    "Actual SVG selection arrows: edited B farther than C",
+    "Actual SVG selection arrows: all raw underflow",
+    "Actual SVG selection arrows: nearest tie",
+    "Actual SVG selection arrows: distinct zero-distance tie",
+    "Actual SVG selection arrows: uniform zero distances",
+    "Actual SVG selection arrows: maximum slider width",
+    "Actual SVG selection arrows: identity permutation",
+    "Manuscript correspondence: nearest default B widest; sigma2 more even; zero and tiny edges uninflated",
+    "All45 figures and12 investigations still server-render with the single module overlay",
+    "Isolated config has publicDirfalse, exact overlay resolver, inherited foreign-body guard and unused successor output owner"
+  ],
+  "groupCount": 16,
+  "stateCount": 11,
+  "observed": [
+    {
+      "name": "default",
+      "distances": [
+        1,
+        2,
+        3
+      ],
+      "sigma": 1,
+      "probabilities": [
+        0.8055124120405226,
+        0.1797341135001498,
+        0.014753474459327466
+      ],
+      "strokeWidths": [
+        6.444099296324181,
+        1.4378729080011985,
+        0.11802779567461973
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 0.7529749394874884
+    },
+    {
+      "name": "manuscript narrow",
+      "distances": [
+        1,
+        2,
+        3
+      ],
+      "sigma": 0.5,
+      "probabilities": [
+        0.9975272648640293,
+        0.002472622879065752,
+        1.122569050386982e-7
+      ],
+      "strokeWidths": [
+        7.9802181189122345,
+        0.019780983032526015,
+        8.980552403095856e-7
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 0.13567076109449497
+    },
+    {
+      "name": "manuscript wide",
+      "distances": [
+        1,
+        2,
+        3
+      ],
+      "sigma": 2,
+      "probabilities": [
+        0.48657805575120294,
+        0.3344198810127577,
+        0.17900206323603945
+      ],
+      "strokeWidths": [
+        3.8926244460096235,
+        2.6753590481020617,
+        1.4320165058883156
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 1.8136800296555786
+    },
+    {
+      "name": "minimum slider width",
+      "distances": [
+        1,
+        2,
+        3
+      ],
+      "sigma": 0.1,
+      "probabilities": [
+        1,
+        7.175095973164614e-66,
+        1.9151695967141145e-174
+      ],
+      "strokeWidths": [
+        8,
+        5.7400767785316914e-65,
+        1.5321356773712916e-173
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 1.9287498479639315e-22
+    },
+    {
+      "name": "edited B farther than C",
+      "distances": [
+        4,
+        2,
+        3
+      ],
+      "sigma": 0.1,
+      "probabilities": [
+        2.650396553004612e-261,
+        1,
+        2.669190215541428e-109
+      ],
+      "strokeWidths": [
+        2.1203172424036898e-260,
+        8,
+        2.1353521724331425e-108
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 1.3838965267367769e-87
+    },
+    {
+      "name": "all raw underflow",
+      "distances": [
+        6,
+        5,
+        4
+      ],
+      "sigma": 0.1,
+      "probabilities": [
+        0,
+        3.693883068487676e-196,
+        1
+      ],
+      "strokeWidths": [
+        0,
+        2.955106454790141e-195,
+        8
+      ],
+      "visibleEdgeIds": [
+        "C",
+        "D"
+      ],
+      "rawSum": 0
+    },
+    {
+      "name": "nearest tie",
+      "distances": [
+        1,
+        1,
+        3
+      ],
+      "sigma": 0.1,
+      "probabilities": [
+        0.5,
+        0.5,
+        9.575847983570573e-175
+      ],
+      "strokeWidths": [
+        4,
+        4,
+        7.660678386856458e-174
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 3.857499695927863e-22
+    },
+    {
+      "name": "distinct zero-distance tie",
+      "distances": [
+        0,
+        0,
+        3
+      ],
+      "sigma": 0.1,
+      "probabilities": [
+        0.5,
+        0.5,
+        1.846941534243838e-196
+      ],
+      "strokeWidths": [
+        4,
+        4,
+        1.4775532273950705e-195
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 2
+    },
+    {
+      "name": "uniform zero distances",
+      "distances": [
+        0,
+        0,
+        0
+      ],
+      "sigma": 1,
+      "probabilities": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "strokeWidths": [
+        2.6666666666666665,
+        2.6666666666666665,
+        2.6666666666666665
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 3
+    },
+    {
+      "name": "maximum slider width",
+      "distances": [
+        1,
+        2,
+        3
+      ],
+      "sigma": 3,
+      "probabilities": [
+        0.4019838524875812,
+        0.3402719848318619,
+        0.2577441626805569
+      ],
+      "strokeWidths": [
+        3.2158708199006494,
+        2.722175878654895,
+        2.061953301444455
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 2.3532275315362066
+    },
+    {
+      "name": "identity permutation",
+      "distances": [
+        3,
+        1,
+        2
+      ],
+      "sigma": 1,
+      "probabilities": [
+        0.014753474459327466,
+        0.8055124120405226,
+        0.1797341135001498
+      ],
+      "strokeWidths": [
+        0.11802779567461973,
+        6.444099296324181,
+        1.4378729080011985
+      ],
+      "visibleEdgeIds": [
+        "B",
+        "C",
+        "D"
+      ],
+      "rawSum": 0.7529749394874884
+    }
+  ],
+  "originalOwnersPreserved": 31,
+  "acceptedContentPreserved": 11,
+  "payloadsPreserved": 35,
+  "nativeWindowsViewed": [],
+  "nativePaintClaimed": false,
+  "oldScienceReplayed": false,
+  "limitation": "Source/SSR checks inspect generated SVG attributes; they do not establish browser paint, interaction, responsive geometry or normal-reader integration."
+}

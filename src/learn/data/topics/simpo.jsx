@@ -1,743 +1,1189 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+import { Prose, H2, Code } from '../../../../src/learn/components/content';
+import RemoteCodeBlock from '../../../../src/learn/components/content/RemoteCodeBlock.jsx';
+import {
+  LessonIntro,
+  LessonTable,
+  Sources,
+} from '../../../../src/learn/components/lesson-labs/LessonElements.jsx';
+import {
+  MathEquation as MathBlock,
+  PairRequest,
+  ComputationRoles,
+  CausalGather,
+  TargetMasks,
+  SumToMean,
+  ProbabilityTree,
+  SegmentationAndEOS,
+  MarginPipeline,
+  SoftThreshold,
+  MarginUnits,
+  TokenCredit,
+  SharedContext,
+  RankVersusSample,
+  OrientedLinks,
+  SharedMassDrift,
+  AuxiliaryTerm,
+  ScratchLoop,
+  AblationOutcomes,
+  RecordAndSplit,
+  NativeBatch,
+  ConfigurationMap,
+  MeasuredScoreAudit,
+  GeneratedOutputs,
+  CostRoles,
+  ContradictoryLabels,
+  ObjectiveCoordinates,
+  OfflineAndRefresh,
+} from '../../../../src/learn/components/lesson-labs/SimPOFlow.jsx';
+import '../../../../src/learn/components/lesson-labs/lesson-flow.css';
+
+const root = '/learn/examples/simpo/';
+const Program = ({ file, title }) => (
+  <RemoteCodeBlock source={root + file} filename={file} title={title} />
+);
+const Anchor = ({ id }) => <span id={id} aria-hidden="true" />;
+const Exercise = ({ title, children, hint, solution }) => (
+  <div className="lesson-exercise flow-check" data-lesson-exercise>
+    <p>
+      <strong>{title}</strong> {children}
+    </p>
+    <details>
+      <summary>Hint</summary>
+      {hint}
+    </details>
+    <details>
+      <summary>Worked solution</summary>
+      {solution}
+    </details>
+  </div>
+);
 
 const simpo = {
-  title: "SimPO (Simple Preference Optimization)",
-  readTime: "28 min",
+  title: 'SimPO (Simple Preference Optimization)',
+  readTime: '~65 min read + programs and practice',
   content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
+    <div className="lesson-flow simpo-flow">
+      <LessonIntro
+        prerequisites="DPO supplies a comparison and a reference-relative loss. Causal Language Modeling supplies next-token logits; SFT supplies response-target supervision. We rebuild the exact masks and score reductions here. Logs, derivatives and a softmax distribution help."
+        exampleKind="Python + complete causal-model updates and current native CPOTrainer in SimPO mode"
+      >
+        Follow two answers from their tokens to a mean score, a desired gap and a shared model
+        update. Sections 1–6 establish the mechanism; section 7 examines policy drift. Sections 8–10
+        run complete programs and read their actual outcomes. Section 11 extends the reasoning to
+        conflicting labels and other objectives. Finish with changed cases and further learning.
+      </LessonIntro>
 
+      <Anchor id="1-why-it-exists" />
+      <Anchor id="1-start-with-the-problem" />
+      <H2>1. Keep the comparison, change the score</H2>
       <Prose>
-        DPO — covered in the previous topic — was already a dramatic simplification of the RLHF pipeline. It collapsed a four-model circus (policy, reference, reward model, value model) into a single supervised loss over preference pairs. The key residue it kept was a frozen reference model: a full copy of the SFT checkpoint, held in GPU memory throughout training, providing the log-probability baseline that anchors the policy's implicit reward estimates.
+        Ask, “Name France's capital in one word.” Candidate A says “Paris”; candidate B says “Paris
+        is the capital of France.” Both contain the relevant fact, but only A follows this requested
+        format. Suppose our comparison record selects A. The record gives us a direction for
+        learning; it does not say either answer's model probability or how much better A is.
+      </Prose>
+      <PairRequest />
+      <Prose>
+        The request branches into two whole responses, while the supplied label sits beside them.
+        Change the request to ask for a sentence and the stipulated label changes. Remove the format
+        requirement and this example alone no longer justifies the same preference. Response
+        identity stays fixed through the lesson: A is amber, B violet and a third possible response
+        C cyan. A preference method still needs comparisons that express the behavior we actually
+        want.
+      </Prose>
+      <Prose>
+        In{' '}
+        <a href="/learn/path/full-curriculum/dpo-direct-preference-optimization?module=large-language-models">
+          DPO
+        </a>
+        , each response is scored by both a trainable policy and a fixed reference. Subtracting
+        their log probabilities measures a relative change. SimPO asks whether we can train directly
+        from the policy's own response scores, while adjusting their length reduction and desired
+        gap. First locate the computations that this choice keeps and removes.
+      </Prose>
+      <ComputationRoles />
+      <Prose>
+        Both branches run through the same policy weights. The policy-only path produces two scores
+        and one comparison loss; the DPO path additionally consumes two frozen-reference scores.
+        Removing those reference computations is concrete. Removing every source of policy drift is
+        not a consequence of it. SimPO changes the scoring rule and objective; it is not DPO's
+        regularized-objective derivation with an inconvenient implementation deleted.
+      </Prose>
+      <Prose>
+        The three pieces we will build are a mean response log-probability, a positive scale β
+        called beta, and an absolute target margin γ called gamma. They need precise meanings before
+        they become configuration fields. Begin with what one response score actually sums.
       </Prose>
 
+      <Anchor id="2-core-intuition" />
+      <Anchor id="2-build-the-intuition" />
+      <H2>2. Follow one response through the model</H2>
       <Prose>
-        That residue is not free. For a 70B-parameter model in bfloat16, the reference occupies roughly 140 GB on its own. The trainable policy needs another 140 GB plus optimizer state. In practice this means DPO on a 70B model requires four to eight high-memory GPUs before accounting for activation memory — a cluster configuration that is genuinely expensive to rent and impossible to own casually. Even at 7B scale, the reference forward pass adds a second full inference call per batch, increasing wall-clock time per step by 30–50% depending on hardware.
+        A causal decoder receives a prompt followed by a supplied response. At each position it
+        predicts the next token from earlier context. Scoring a response means reading the model's
+        probability for each of those supplied next tokens. This is teacher forcing: a
+        low-probability supplied token remains in the input for later predictions, even if a sampler
+        would have chosen something else.
+      </Prose>
+      <CausalGather />
+      <Prose>
+        Follow the row containing BOS, Q, Paris and EOS. The output after Q predicts Paris; the
+        output after Paris predicts EOS, the end-of-sequence token. Each output is a vector over the
+        vocabulary. Log-softmax converts that vector into log probabilities, and gathering selects
+        the coordinate for the supplied target. The last input position has no following target
+        here. We shift logits against target IDs once, not once in each of two helpers.
+      </Prose>
+      <MathBlock>{String.raw`a_t=\log\pi_\theta(y_t\mid x,y_{<t}),\qquad s_\theta(x,y)=\sum_{t=1}^{L_y}a_t=\log\pi_\theta(y\mid x)`}</MathBlock>
+      <Prose>
+        Here x is the prompt, y the scored suffix, θ the shared model parameters, L the number of
+        genuine response targets and a the selected token log probability. The product rule for a
+        causal sequence becomes this sum after taking logs. When EOS is included, the event includes
+        termination there; omitting EOS scores a prefix event instead. These are different
+        quantities even when the visible words are identical.
+      </Prose>
+      <Prose>
+        Real batches need a second distinction. Attention describes which input positions exist as
+        context; supervision describes which next-token predictions enter this objective. A prompt
+        can be fully visible to the response while its own targets contribute no loss.
+      </Prose>
+      <TargetMasks />
+      <Prose>
+        In the attention triangle, each real response position can read the earlier prompt and
+        response. In the target row, only the response and its genuine EOS count. Right padding
+        fills the rectangular batch but contributes neither context nor targets. Toggle PAD=EOS: the
+        numerical token ID now appears both at a real stop and in padding, yet only the real stop
+        counts. A token-ID inequality cannot recover that positional distinction.
+      </Prose>
+      <MathBlock>{String.raw`m_t=\mathbf1[\text{response target at }t]\,\mathbf1[\text{real target and predictor}],\quad s=\sum_t m_t a_t,\quad L=\sum_t m_t>0`}</MathBlock>
+      <Prose>
+        The complete scorer validates a nonempty prompt and response, rejects targets in padding,
+        and rejects a target at the first input position because it has no preceding predictor. A
+        zero target count is an error, not a denominator to clamp to one. Appending padding or
+        reordering rows must preserve the corresponding scores. The
+        <a href="/learn/path/full-curriculum/supervised-fine-tuning-sft?module=large-language-models#3-choose-the-predictions-that-count">
+          {' '}
+          SFT target-mask explanation
+        </a>
+        uses the same separation between visibility and selected targets.
       </Prose>
 
+      <H2>3. Divide by what was actually scored</H2>
       <Prose>
-        In May 2024, Yu Meng, Mengzhou Xia, and Danqi Chen at Princeton posted SimPO — "Simple Preference Optimization with a Reference-Free Reward" (arXiv:2405.14734, published at NeurIPS 2024). The paper asks a precise question: is the reference model doing something irreplaceable, or is it one solution to a problem that has cheaper solutions? Their answer is that the reference model is solving two problems simultaneously — it prevents length bias in the raw log-probability signal, and it provides a soft KL anchor that keeps the policy from collapsing. SimPO addresses both problems directly, without a second model: length bias is removed by normalizing log-probabilities by sequence length, and the KL anchor is replaced by a fixed margin that the chosen response must beat the rejected one by before the loss saturates.
+        Adding another token adds another nonpositive log probability. A whole-path sum therefore
+        reflects both the probabilities of its actions and how many actions it contains. SimPO
+        changes the response score by dividing that sum by its own genuine target count. Examine an
+        example where that changes the ordering before assigning the result a meaning.
+      </Prose>
+      <SumToMean />
+      <Prose>
+        A's two contributions −0.4 and −0.6 sum to −1. B's four contributions −0.2, −0.3, −0.4 and
+        −0.3 sum to −1.2. The sum prefers A because −1 is larger. Their means are −0.5 and −0.3, so
+        the mean prefers B. B's individual actions are easier on average, although the probability
+        of the complete supplied path is lower. These stipulated terms illustrate a scoring
+        distinction; they do not imply that longer answers are better or worse.
+      </Prose>
+      <MathBlock>{String.raw`u_\theta(x,y)=\frac{s_\theta(x,y)}{L_y},\qquad \exp(u_\theta)=\left(\prod_{t=1}^{L_y}\pi_\theta(y_t\mid x,y_{<t})\right)^{1/L_y}`}</MathBlock>
+      <Prose>
+        The exponential of u is the geometric mean of the target probabilities. It is positive and
+        at most one. It is not generally the probability of a complete response. To see why, use a
+        complete probability tree, with every possible leaf and every stop transition shown.
+      </Prose>
+      <ProbabilityTree />
+      <Prose>
+        The first choice gives A probability .4, B .3 and C .3. A and C each take a forced EOS edge
+        of probability one. B splits into suffixes with probabilities .9 and .1, each then taking a
+        forced EOS edge. The completed leaf masses are .4, .27, .03 and .3, which sum to one. A's
+        two scored targets give geometric mean √.4, about .6325. B1's three targets give the cube
+        root of .27, about .6463. B1 wins the mean ranking even though A is sampled more often in
+        expectation. The forced edges contribute zero log probability but still count as targets;
+        leaving them out silently changes the mean.
+      </Prose>
+      <Prose>
+        The same issue makes tokenization and termination substantive parts of the objective. A
+        score per token uses a unit chosen by the tokenizer. It does not automatically remove
+        length-related artifacts in the comparisons, the model or the evaluation.
+      </Prose>
+      <SegmentationAndEOS />
+      <Prose>
+        Hold an event's stipulated log probability at −2. Represent it as two scored targets and the
+        mean is −1; represent it as four and the mean is −.5. This arithmetic isolates the
+        denominator. Changing a real tokenizer also changes the model's parameters and event
+        representation, so it is not a neutral deployment switch. Likewise, adding an EOS term
+        changes both the numerator and denominator. Freeze tokenizer, template, response boundary
+        and stop convention when comparing objectives.
       </Prose>
 
+      <Anchor id="3-mathematical-foundation" />
+      <Anchor id="3-make-the-idea-precise" />
+      <H2>4. Ask for a larger gap</H2>
       <Prose>
-        The empirical case was strong at time of publication. SimPO matched or exceeded DPO on AlpacaEval 2 (up to +6.4 points in win rate) and Arena-Hard (up to +7.5 points) while using a single model in the training loop. This topic covers the math behind that result, a tested from-scratch implementation, and the failure modes that matter in practice.
+        We now have one mean score for each response. The supplied comparison asks the chosen mean
+        to exceed the rejected mean. SimPO goes further: it subtracts a positive margin from the
+        scaled gap before applying a smooth logistic loss. Walk through one pair first.
+      </Prose>
+      <MarginPipeline />
+      <Prose>
+        Means −.5 and −.8 produce gap d=.3. Multiplying by β=2 gives .6; subtracting γ=.4 gives
+        logit z=.2. The loss is softplus(−.2), about .598139. Softplus is the smooth function
+        log(1+exp(v)); computing it stably avoids overflow for large v. Minimizing this loss pushes
+        z upward, which pushes the chosen-minus-rejected mean gap upward.
+      </Prose>
+      <MathBlock>{String.raw`d=u_\theta(x,y^+)-u_\theta(x,y^-),\quad z=\beta d-\gamma,\quad \ell=-\log\sigma(z)=\operatorname{softplus}(\gamma-\beta d)`}</MathBlock>
+      <Prose>
+        Superscripts + and − identify the supplied chosen and rejected suffixes; σ is the sigmoid
+        1/(1+exp(−z)). Training averages this loss over comparison records. The original paper calls
+        β times the mean an implicit reward. Here that is a policy-derived training score, not a
+        separately fitted reward model or an independently validated quality score.
+      </Prose>
+      <SoftThreshold />
+      <Prose>
+        The marked gap γ/β is where z becomes zero. At β=2 and γ=.4 this is d=.2, with loss log 2,
+        about .693147, and derivative −1. Training has not stopped there. Above it, the loss and
+        gradient decrease smoothly but remain nonzero at every finite gap. A hinge loss would
+        instead have a flat region; the comparison curve names that different choice. A larger
+        margin strengthens the gradient at a fixed current gap. A zero margin still learns.
+      </Prose>
+      <MathBlock>{String.raw`\frac{\partial\ell}{\partial d}=-\beta\sigma(\gamma-\beta d),\qquad \ell(\gamma/\beta)=\log2,\qquad \ell'(\gamma/\beta)=-\beta/2`}</MathBlock>
+      <Prose>
+        There are two legitimate margin units. The absolute margin γ is subtracted after scaling.
+        The ratio δ=γ/β specifies the desired gap in unscaled mean-log-probability units. Confusing
+        them changes the objective. This matters when moving between the original implementation's
+        gamma/beta-ratio setting and TRL's absolute <Code>simpo_gamma</Code> field.
+      </Prose>
+      <MarginUnits />
+      <Prose>
+        With β=2, γ=.4 and δ=.2 describe the same boundary. If β changes while γ stays fixed, the
+        desired gap changes. If δ stays fixed instead, γ must change with β. Even holding δ fixed
+        does not keep gradient magnitude or sharpness fixed. Beta must be positive for this
+        parameterization; at beta zero with fixed gamma, the loss is constant in d and supplies no
+        preference-learning gradient. Beta is not an explicit KL constraint in this objective.
+      </Prose>
+      <Prose>
+        To run the full mathematical program, download the
+        <a href={root + 'simpo-programs.zip'} download>
+          {' '}
+          complete SimPO archive
+        </a>{' '}
+        and extract it. The <a href={root + 'README.md'}>README</a> gives virtual-environment
+        activation commands; create it with <Code>python -m venv .venv</Code> and install
+        <Code>python -m pip install -r requirements.txt</Code>. The pinned versions are in
+        <a href={root + 'requirements.txt'}> requirements.txt</a>. Run
+        <Code>python -B simpo_algebra.py --output algebra-results.json</Code> from the extracted
+        directory. This first program uses only Python's standard library and performs no fitting.
+      </Prose>
+      <Program
+        file="simpo_algebra.py"
+        title="Complete score, margin, probability-tree and drift mathematics"
+      />
+      <Prose>
+        Read <Code>pair</Code> as the wired computation above. <Code>probability_tree</Code>
+        enumerates complete paths instead of normalizing their geometric means into a new invented
+        sampler. <Code>softplus</Code> and <Code>sigmoid</Code> avoid large positive exponentials.
+        The checks compare derivatives with finite differences, include arguments of magnitude 1000,
+        and verify that the threshold is neither zero loss nor zero gradient. Later sections explain
+        the same program's shared-logit and conflicting-label routines.
       </Prose>
 
+      <H2>5. Follow the gradient back to tokens</H2>
       <Prose>
-        The results in the paper are not marginal. On AlpacaEval 2, SimPO-trained Llama-3-8B-Instruct outperforms DPO by 6.4 percentage points in win rate against GPT-4-Turbo. On Arena-Hard — a harder benchmark that uses GPT-4 to judge pairwise completions against reference responses — the margin is 7.5 points. These improvements come despite (or because of) SimPO producing shorter, less verbose outputs than DPO, which suggests the gains reflect genuine quality improvements rather than annotator bias toward length. The ablations in the paper confirm that both the length normalization and the margin term contribute independently to performance: removing either degrades results, and neither alone achieves the full improvement.
+        A mean score is built from token contributions, so the pair derivative must pass through
+        each division. First treat selected log probabilities as separate coordinates. Then
+        reconnect those coordinates to the single shared causal model that actually generates them.
+      </Prose>
+      <TokenCredit />
+      <Prose>
+        Let w=βσ(γ−βd), which is positive. Every chosen token contribution receives coefficient
+        −w/L₊; every rejected contribution receives +w/L₋. With two chosen and four rejected
+        targets, the individual rejected coefficients are half the magnitude of the chosen
+        coefficients. The coefficients sum to −w on the chosen path and +w on the rejected path
+        before averaging across pairs. This equal path sum does not imply equal parameter-gradient
+        norms.
+      </Prose>
+      <MathBlock>{String.raw`\frac{\partial\ell}{\partial a_t^+}=-\frac{w}{L_+},\quad \frac{\partial\ell}{\partial a_t^-}=\frac{w}{L_-},\qquad \nabla_\theta\ell=-w\left(\frac1{L_+}\sum_t\nabla_\theta a_t^+-\frac1{L_-}\sum_t\nabla_\theta a_t^-\right)`}</MathBlock>
+      <Prose>
+        A log probability is itself a log-softmax coordinate. Its logit derivative is the selected
+        target's one-hot vector minus the vocabulary probability vector. Increasing one vocabulary
+        logit also changes the normalizer, and every response uses the same parameters. The formula
+        therefore does not license independently adding a constant to chosen tokens and subtracting
+        one from rejected tokens. The token Jacobians, shared contexts and optimizer determine the
+        actual parameter displacement. A batch mean adds division by the number of pairs.
+      </Prose>
+      <SharedContext />
+      <Prose>
+        The first response loss flows through its vocabulary head, causal blocks and prompt context.
+        Crossed-out prompt targets mean “do not score those predictions,” not “erase these inputs.”
+        In the complete decoder probe, the unique BOS, request and country embeddings all receive
+        nonzero gradients from the first response target alone. Recomputing its predictor on the
+        truncated prefix gives the same logits: future supplied response tokens cannot affect it.
+        This connects the target mask to the actual attention computation.
+      </Prose>
+      <Program
+        file="response_scores.py"
+        title="Complete causal sum/count scoring and mean-score pair gradients"
+      />
+      <Prose>
+        Run <Code>python -B response_scores.py --output response-scores-results.json</Code>.
+        <Code>pack</Code> records attention and completion masks separately.{' '}
+        <Code>response_scores</Code>
+        aligns logits at positions before each target, gathers their log probabilities and reduces
+        only valid response positions. <Code>pair_loss</Code> divides by each row's own positive
+        count, subtracts the chosen and rejected means, then averages pair losses. Rows must be all
+        chosen followed by all rejected; an arbitrary interleaving changes which pairs you train.
+      </Prose>
+      <Prose>
+        The ordinary Torch route uses log-softmax, gather, masks and autograd. The explicit formulas
+        provide an independent way to check it. The program also verifies genuine EOS with PAD=EOS,
+        single/batch scores, appended padding, reordered rows and malformed boundaries. These score
+        operations cost O(BTV) for vocabulary normalization plus O(BT) for gathering and reduction
+        on existing logits; the causal decoder still pays its own attention and width costs.
+        Omitting a reference pass does not remove those costs.
       </Prose>
 
-      <Callout accent="gold">
-        SimPO's paper was accepted at NeurIPS 2024. The reference implementation is at github.com/princeton-nlp/SimPO. The two prior papers it builds on are DPO (arXiv:2305.18290, Rafailov et al., NeurIPS 2023) and CPO (arXiv:2401.08417, Xu et al., 2024).
-      </Callout>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
+      <H2>6. What mean-score ranking says about generation</H2>
       <Prose>
-        The cleanest way to understand SimPO is to start from what DPO is actually computing and locate the two specific things the reference model is doing.
+        Pair training reads supplied suffixes. Generation makes a sequence of fresh choices. They
+        share a model but answer different questions. Return to the complete tree to separate the
+        response selected by mean score from the responses produced by its actual transitions.
+      </Prose>
+      <RankVersusSample />
+      <Prose>
+        Mean scoring prefers B1 over A, while the unchanged sampler reaches them with probabilities
+        .27 and .4. C and B2 remain possible even though our comparison mentions neither. A finite
+        sample may fluctuate around those probabilities; it does not turn the geometric-mean ranking
+        into a sequence distribution. Greedy decoding, temperature changes and beam length penalties
+        introduce additional decision rules. State the decoding rule when claiming that a training
+        score aligns with generation behavior.
+      </Prose>
+      <Prose>
+        There is another subtle distinction in the margin loss. A sigmoid expression resembles a
+        two-choice probability, but the two label orientations no longer complement each other when
+        each subtracts the same positive margin. Draw both orientations before interpreting it.
+      </Prose>
+      <OrientedLinks />
+      <Prose>
+        The A-chosen orientation uses σ(βd−γ); reversing the record uses σ(−βd−γ). At d=0 and
+        positive gamma, both are below one half. Their sum is below one, not one. With gamma zero
+        the complementary identity returns. The shifted logistic link supplies a useful smooth
+        training objective, but these two oriented values cannot be the two probabilities of one
+        calibrated binary human judgment. An empirical preference win rate needs actual judgments
+        under a specified evaluation, not a relabelled loss output.
+      </Prose>
+      <MathBlock>{String.raw`\sigma(\beta d-\gamma)+\sigma(-\beta d-\gamma)<1\quad(\gamma>0),\qquad \sigma(\beta d)+\sigma(-\beta d)=1`}</MathBlock>
+
+      <H2>7. A margin does not preserve the starting policy</H2>
+      <Prose>
+        Since the loss favors a gap, it can improve while both compared probabilities fall. That
+        claim is about shared parameters, not independent score coordinates. A complete three-action
+        model makes the possibility exact and lets us compute true probability drift.
+      </Prose>
+      <SharedMassDrift />
+      <Prose>
+        Give A, B and C logits θ, −θ and 10θ. At θ=0 their probabilities are all one third. The
+        one-target mean gap between A and B is 2θ because the shared log normalizer cancels. With
+        beta 1 and gamma .4, the derivative at zero is −2σ(.4), about −1.197375. One gradient
+        descent step of size .1 sets theta to .119738. The A/B gap rises to .239475, yet their
+        probabilities fall to .211650 and .166578; C grows to .621772. The strongly shared C logit
+        captures the probability mass. This is a possibility witness, not a prevalence estimate.
+      </Prose>
+      <MathBlock>{String.raw`p_\theta=\operatorname{softmax}(\theta,-\theta,10\theta),\quad d=\log p_A-\log p_B=2\theta,\quad D_{\mathrm{KL}}(p_{\mathrm{after}}\Vert p_0)=\sum_jp_j\log\frac{p_j}{1/3}`}</MathBlock>
+      <Prose>
+        All three outcomes are enumerated, so this KL is a genuine normalized-distribution
+        divergence, about .175947 nats after the step. A margin shift contains no term that fixes it
+        or bounds it globally. In
+        <a href="/learn/path/full-curriculum/rlhf-reinforcement-learning-from-human-feedback?module=large-language-models">
+          {' '}
+          RLHF
+        </a>
+        , an explicit reference-relative KL term instead assigns a cost to distributional change.
+        Those objectives can share a useful practical concern without being mathematically
+        identical.
+      </Prose>
+      <Prose>
+        One optional modification directly trains the chosen responses with negative log likelihood,
+        abbreviated NLL. It adds a chosen-likelihood gradient to the preference gradient. The choice
+        of its denominator matters when chosen responses have different lengths.
+      </Prose>
+      <AuxiliaryTerm />
+      <Prose>
+        Extend the local model to two coordinates, with logits θ+φ, −θ+φ and 10θ−2φ. At the origin
+        the preference gradient is (−1.197375, 0), while the chosen NLL gradient is (7/3, −1). NLL
+        opposes the preference direction along theta and also moves phi. With learning rate .1, NLL
+        weight .1 gives step (.096404, .01); weight 1 gives (−.113596, .1). These are vector
+        additions through shared parameters, not a promise that both objectives improve
+        simultaneously. The auxiliary weight is a new hyperparameter and does not create a hard KL
+        bound. Setting phi to zero recovers the earlier model.
+      </Prose>
+      <MathBlock>{String.raw`\mathcal L=\frac1N\sum_{i=1}^N\ell_i+\lambda\left(-\frac{\sum_i s_i^+}{\sum_i L_i^+}\right)`}</MathBlock>
+      <Prose>
+        This auxiliary NLL averages over all chosen targets in the batch. Averaging the chosen
+        response means would weight short and long responses differently. TRL's native CPO auxiliary
+        term follows the token-mean version here. Plain SimPO sets lambda to zero. The native class
+        name covers several objectives, so we will specify the actual loss and auxiliary settings
+        rather than infer them from the trainer's name.
+      </Prose>
+      <Program
+        file="objective_geometry.py"
+        title="Complete two-coordinate gradient geometry and unequal-length NLL check"
+      />
+      <Prose>
+        Run <Code>python -B objective_geometry.py --output objective-geometry-results.json</Code>.
+        The local log-softmax model lets autograd compute both gradient vectors, while central
+        finite differences check each coordinate. It then verifies the preference plus auxiliary
+        gradient on two chosen responses of lengths two and six. This is a no-fit derivative
+        investigation: the drawn step is stipulated arithmetic, not an additional empirical study.
       </Prose>
 
+      <Anchor id="4-from-scratch-implementation" />
+      <H2>8. Train a complete scratch model</H2>
       <Prose>
-        DPO's implicit reward for a response <Code>y</Code> given prompt <Code>x</Code> under policy <Code>π_θ</Code> is the log-ratio <Code>β · log(π_θ(y|x) / π_ref(y|x))</Code>. The reference model enters as the denominator: it normalizes the policy's raw log-probability so that the reward reflects how much the policy deviates from its SFT starting point, not just how likely the response is under the current weights. Without this normalization, a long response would almost always have a lower total log-probability than a short one simply because probability mass is spread over more tokens — the signal would be dominated by length, not quality.
+        Scalar examples explain the objective. A useful next test must send it through a real causal
+        decoder, share weights across contexts and actually generate tokens. We reuse the complete
+        model from
+        <a href="/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models#7-build-the-complete-causal-decoder">
+          {' '}
+          Causal Language Modeling
+        </a>
+        : token and position embeddings, masked multi-head attention, residual connections,
+        normalization, feed-forward blocks and a vocabulary head. There is no separate reward head.
       </Prose>
-
+      <ScratchLoop />
       <Prose>
-        SimPO makes a different choice for both issues. To remove length bias, it divides the total log-probability of each response by the number of tokens in that response — converting from a sum to a per-token average. This is what the reference model was implicitly doing for length: a well-calibrated SFT checkpoint assigns roughly proportional log-probability to responses of different lengths, so the ratio cancels the length effect. Dividing by <Code>|y|</Code> directly achieves the same cancellation without requiring a second model.
+        The model has 26,560 parameters, width 32, two heads, two blocks and context 16. Its
+        thirteen-token vocabulary expresses four prompts: one word or a sentence, for France or
+        Italy. Eight demonstrations show both short and long correct-capital responses under every
+        prompt. Response-only SFT therefore initializes useful language and facts without teaching
+        the format distinction perfectly. Its 120 updates reduce response-token NLL from 2.721968 to
+        .160754. The shared SFT snapshot is copied before the preference updates.
       </Prose>
-
       <Prose>
-        To replace the KL anchor, SimPO introduces a target margin <Code>γ</Code>. The loss saturates when the length-normalized log-probability of the chosen response exceeds that of the rejected response by at least <Code>γ</Code>. Below that threshold, the gradient pushes the policy to increase the gap. Above it, the loss approaches zero and the gradient vanishes. This behaves similarly to a hinge loss: it enforces a minimum separation rather than an unbounded preference. The policy cannot simply drive chosen-response log-probs to infinity — it only needs to beat the rejected response by <Code>γ</Code> per token.
+        Each prompt supplies two constructed comparisons: the requested format beats the other
+        length, and the correct capital beats a wrong-capital substitution in the same format. This
+        deliberately mixes a length-related comparison with a factual one. The actual inputs, labels
+        and masks are visible in <Code>fixture</Code>; there is no claim that a human rated these
+        pairs. The local strings use “period” as a vocabulary item and include literal EOS.
       </Prose>
-
-      <TokenStream
-        label="SimPO reward — what gets compared"
-        tokens={[
-          { label: "β · logπ(y_w|x)", color: colors.green },
-          { label: "÷ |y_w|", color: colors.green },
-          { label: "−", color: "#888" },
-          { label: "β · logπ(y_l|x)", color: "#f87171" },
-          { label: "÷ |y_l|", color: "#f87171" },
-          { label: "> γ", color: colors.gold },
+      <Program
+        file="causal_backbone.py"
+        title="Complete prerequisite causal Transformer, supplied locally"
+      />
+      <Prose>
+        In <Code>CausalAttention</Code>, query/key scores receive a lower-triangular causal mask
+        before softmax. The projected weighted values then join the residual stream. Each
+        <Code>Block</Code> applies attention and a feed-forward network around that stream;
+        <Code>TinyLM</Code> adds positions and maps the final hidden vectors to vocabulary logits.
+        Its three model classes match the prerequisite exactly. Only the local download description
+        changes. Right padding occurs after real context, so its later keys cannot affect genuine
+        earlier positions in this scratch causal route.
+      </Prose>
+      <Prose>
+        Four continuations isolate one change at a time. All start with identical SFT weights,
+        records and fresh optimizer moments, then take forty full-pair AdamW steps at learning rate
+        .001 with clipping norm 1 and no weight decay. Beta stays 2. The baseline uses means and
+        gamma .4; the alternatives remove the margin, replace means with sums, or add .1
+        chosen-token-mean NLL. Matched updates do not make their gradient geometry or compute equal.
+      </Prose>
+      <Program
+        file="scratch_simpo.py"
+        title="Complete SFT initializer and four controlled preference continuations"
+      />
+      <Prose>
+        Run{' '}
+        <Code>
+          python -B scratch_simpo.py --output my-scratch.json --workdir my-scratch-weights
+        </Code>
+        in a fresh destination. <Code>sft</Code> trains only genuine response targets. Each
+        <Code>continuation</Code> makes a deep copy, builds chosen-first pairs and passes the
+        selected reduction/margin/NLL weight to the same loss. Every tenth update saves scores and
+        generates eight samples for each prompt. The generator resets to seed 947 for each
+        method/checkpoint, draws from the full vocabulary at temperature 1 and stops at EOS or eight
+        new actions. PAD and BOS draws remain real malformed outputs, not hidden exclusions.
+      </Prose>
+      <AblationOutcomes />
+      <Prose>
+        The initial exact-format/capital criterion passes 19 of 32 samples. For mean plus margin,
+        counts at updates 0, 10, 20, 30 and 40 are 19, 17, 29, 29 and 21. Its pair loss falls from
+        .510421 to .034804, while the final sample set includes two malformed responses. The
+        zero-margin run also ends at 21; the sum ablation ends at 30 and the auxiliary-NLL variant
+        at 29. Each result belongs to this one seed, vocabulary, criterion and budget. A smaller raw
+        loss from a differently defined objective is not a common quality score.
+      </Prose>
+      <LessonTable
+        caption="Observed constructed-task outcomes; 32 samples at each checkpoint"
+        headers={[
+          'Continuation',
+          'Criterion at 0 / 10 / 20 / 30 / 40',
+          'Final mean gap',
+          'Final mean emitted targets',
+        ]}
+        rows={[
+          ['Mean, gamma .4', '19 / 17 / 29 / 29 / 21', '3.065657', '4.0625'],
+          ['Mean, gamma 0', '19 / 17 / 28 / 29 / 21', '3.004658', '4.0625'],
+          ['Sum, gamma .4', '19 / 19 / 29 / 30 / 30', '1.866774', '4.53125'],
+          ['Mean, gamma .4, NLL .1', '19 / 19 / 29 / 30 / 29', '3.082860', '4.53125'],
         ]}
       />
-
       <Prose>
-        The result is a loss function that requires exactly one forward pass per batch — through the trainable policy, on both chosen and rejected responses — and nothing else. No reference checkpoint in memory, no second inference call, no log-ratio subtraction. The training loop is structurally identical to ordinary supervised fine-tuning, with a different loss at the end.
+        One final mean-margin sample for the Italy sentence request is “Rome PAD BOS period Italy
+        period EOS.” A correct initial word and a real EOS do not satisfy the whole task. The sum
+        variant also fails on a sentence using the wrong country. All 640 literal samples and every
+        fixed comparison are in
+        <a href={root + 'results/scratch-results.json'}> scratch-results.json</a>. Inspect them
+        alongside the loss. These are training prompts, so even a perfect criterion would not
+        establish held-out generalization or a broad alignment result.
       </Prose>
 
+      <Anchor id="5-production-implementation" />
+      <H2>9. Use the current native trainer</H2>
       <Prose>
-        It is worth being precise about what SimPO is not doing. It is not saying the reference model is useless — the reference model provided real stabilization in DPO, and SimPO trades that stabilization for memory and compute efficiency. What SimPO is claiming is that the two things the reference was doing — removing length bias and anchoring the policy — can each be addressed more directly and cheaply. Length bias gets a direct fix via division; policy anchoring gets a cruder but often sufficient substitute via the fixed margin. Whether that substitution is adequate depends on your data quality and SFT checkpoint strength, which is why those two things matter more for SimPO than for DPO.
+        The scratch loop makes each operation visible. An ordinary trainer should now implement the
+        same contract on genuine comparison records. The next experiment uses a small released
+        Anthropic HH helpful-base subset with its original strings, chosen/rejected labels and MIT
+        license. A supplied preference label is evidence about that comparison, not a guarantee that
+        every statement in its response is factual.
+      </Prose>
+      <RecordAndSplit />
+      <Prose>
+        Each record separates the shared conversation prefix from its final Assistant suffixes.
+        Variants sharing the same normalized first-human turn belong to one prompt family, which
+        stays wholly in one split. The selected inputs contain 128 training pairs from 117 families
+        and 64 held-out pairs from 56 families; the family overlap is zero. A 1,028-entry WordLevel
+        vocabulary is fitted on selected training text only. Unknown held-out words map to UNK. That
+        limited vocabulary is part of this demonstration's limits, not an evaluation shortcut.
+      </Prose>
+      <Program
+        file="pair_records.py"
+        title="Complete exact-text and prompt-family audit for the released comparisons"
+      />
+      <Prose>
+        Run <Code>python -B pair_records.py</Code> to audit the supplied offline
+        <a href={root + 'records.json'}> records</a>. The optional source mode reconstructs the
+        selection from an exact-hash upstream gzip. The normal lesson route needs no network
+        download. <Code>audit</Code> verifies the reconstructed original chosen/rejected strings,
+        pair digests, unique original row IDs and disjoint prompt families. Reusing the previous
+        data allows continuity; the new model seed and score convention still make this a separate
+        experiment, not a controlled rerun of DPO's measured performance.
+      </Prose>
+      <Prose>
+        Native preparation is a scientific input. Current CPOTrainer adds a BOS token to the prompt
+        and EOS to each suffix. We independently derive those IDs and reject any whole pair
+        exceeding 192 total positions before passing text to the trainer. All 128/64 selected pairs
+        actually survive that filter. Relative to the earlier DPO inputs, the only ID change is one
+        added prompt BOS; the vocabulary and response IDs are identical.
+      </Prose>
+      <NativeBatch />
+      <Prose>
+        Chosen and rejected rows have their own full IDs, attention masks and labels. Prompt and
+        padding labels are −100; each genuine response token, including its terminal EOS, keeps its
+        ID. The native collator pads these rows, then concatenates all chosen before all rejected.
+        The first eight pairs become a 16 by 86 input array. Check the actual saved target counts,
+        not the padded width: a response mean divides by its genuine response targets alone.
+      </Prose>
+      <Prose>
+        The no-update preflight verifies every retained response row and compares the full native
+        batch with our independent packer. On the randomly initialized model, loss is .88256061 and
+        the largest parameter-gradient difference is about 8.01×10⁻⁸. The check runs again on the
+        saved SFT initializer before preference fitting: native and independent losses agree within
+        3×10⁻⁷ and all gradients within 3×10⁻⁸. A superficially similar scalar formula would not
+        establish these mask, shift and denominator agreements.
+      </Prose>
+      <ConfigurationMap />
+      <Prose>
+        Use <Code>from trl.experimental.cpo import CPOConfig, CPOTrainer</Code> with the supplied
+        TRL 1.14.2 environment. Set <Code>loss_type="simpo"</Code>, <Code>beta=2</Code> and
+        <Code>simpo_gamma=.4</Code>. Set <Code>cpo_alpha=0</Code>, <Code>alpha=0</Code> and
+        <Code>label_smoothing=0</Code> explicitly. CPO's auxiliary chosen NLL defaults to enabled;
+        AlphaPO shaping and smoothing are also separate objective choices. Experimental APIs can
+        move, so the download records both package versions and the actual inspected source hashes.
+      </Prose>
+      <Program
+        file="trl_simpo.py"
+        title="Complete native preparation, gradient parity, training, evaluation and save/reload"
+      />
+      <Prose>
+        First run <Code>python -B trl_simpo.py --prepare-only --selection my-selection.json</Code>,
+        then{' '}
+        <Code>
+          python -B trl_simpo.py --preflight-only --selection my-selection.json --workdir
+          my-preflight --output my-preflight.json
+        </Code>
+        . These commands fit no parameters. <Code>verify_preparation</Code> compares every native
+        ID/label sequence and the complete first batch. <Code>parity</Code> uses a copied model, the
+        ordinary native loss API and independent sum/count scoring, then compares every parameter
+        gradient. A tokenizer-boundary merge example shows why concatenating independently encoded
+        pieces is unsafe without checking the boundary.
+      </Prose>
+      <Prose>
+        The actual fit uses GPT2LMHeadModel from configuration: one block, width 32, two heads,
+        context 256, no dropout and 53,856 parameters. It starts from seed 53, receives forty
+        chosen-response SFT updates, then forty native SimPO updates with batch eight and constant
+        AdamW learning rate .001. CPU float32, no gradient checkpointing, no weight decay, and no
+        external reporting keep the route explicit. It downloads no pretrained language model. The
+        native trainer handles its own shuffled training batches after the response-only warm start.
+      </Prose>
+      <Prose>
+        <Code>assess</Code> independently scores every fixed held-out pair, while{' '}
+        <Code>generate</Code>
+        samples fresh suffixes. Initial and final model states plus the tokenizer are saved for
+        further no-fit checks. Reloading the final model reproduces every held-out score exactly.
+        The source has no custom trainer subclass, and the parity test consumes the native API's
+        actual return structure. Changing a configuration field is meaningful only if the tested
+        reduction and target convention continue to match it.
       </Prose>
 
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>The SimPO loss</H3>
-
+      <Anchor id="6-visual-walkthrough" />
+      <H2>10. Read measured outcomes and costs</H2>
       <Prose>
-        Given a preference dataset of triples <Code>(x, y_w, y_l)</Code> — a prompt, a preferred response, and a dispreferred response — SimPO defines the training objective as:
+        Training loss alone cannot tell us whether the learned preference transfers or whether
+        generations improve. The reserved families let us examine scores on fixed comparisons; the
+        generated outputs separately show what the model actually does. Start with all the fixed
+        pairs, including those that move against their labels.
+      </Prose>
+      <MeasuredScoreAudit />
+      <Prose>
+        Across 64 held-out pairs, mean gap increases from −.004219 to .034860, but mean SimPO
+        surrogate worsens from .969016 to 1.007681. Strict raw-gap agreement falls from 33/64 to
+        30/64; no ties occur, so half-credit tie agreement is identical here. Desired-gap
+        satisfaction increases from 13/64 to 21/64. These summaries can move in different
+        directions: an average gap, the count of positive gaps and a nonlinear loss are different
+        operations.
+      </Prose>
+      <Prose>
+        Both chosen and rejected absolute sequence log probabilities fall on every one of the 64
+        held-out pairs. Their average changes are −6.920998 and −5.986765 nats respectively. The
+        corresponding average mean-score changes are −.315298 and −.354377. Unequal lengths explain
+        why the relative movement of sums need not match that of means. This measured score
+        displacement is consistent with the possibility exposed by the earlier shared-logit example;
+        these finite supplied paths do not enumerate the whole policy or yield its full KL.
+      </Prose>
+      <Prose>
+        The native trainer's logged reward accuracy uses a strict positive unshifted score gap. It
+        does not test the positive target margin and does not give ties half credit. Our independent
+        report names all three metrics. It also avoids calling the shifted sigmoid a human-win
+        probability. A calibration or quality claim would require a separate appropriate evaluation
+        and enough relevant evidence; these fixed comparison summaries cannot supply it.
+      </Prose>
+      <GeneratedOutputs />
+      <Prose>
+        For each of the first four held-out prompts, two samples are generated before and after
+        training with seed 953, temperature 1 and a 24-action cap. All sixteen reach the cap without
+        EOS. The outputs are incoherent strings from a tiny model initialized without pretraining. A
+        rectangle-area question, for example, receives a sequence beginning “asked Movie” followed
+        by unrelated words. The complete strings, including emitted special tokens, are available in
+        the figure and
+        <a href={root + 'results/native-results.json'}> native-results.json</a>. There is no
+        measured helpfulness win rate here, and decreasing a training objective would not create
+        one.
+      </Prose>
+      <Prose>
+        SimPO's reference-free computation still offers a real engineering distinction. To assess
+        that distinction, count the operations performed by a particular implementation, including
+        whether DPO reference scores were already cached, before translating it into resource
+        claims.
+      </Prose>
+      <CostRoles />
+      <Prose>
+        Online-reference DPO evaluates policy and frozen reference on both suffixes, with backward
+        computation only through the policy. Cached-reference DPO moves the reference work to a
+        prior pass and reads saved scores during optimization. SimPO needs neither a reference
+        forward nor reference-score cache for this objective. All three still train the policy; its
+        gradients and optimizer moments do not disappear. Shared-base adapters, quantization,
+        activations, sequence lengths and distributed execution affect actual memory and latency.
+      </Prose>
+      <Prose>
+        The arithmetic view counts only its named parameter or score storage. It is not a measured
+        GPU peak or a fixed speedup. The SimPO paper reports experiments on particular pretrained
+        models, datasets and generation evaluations. Those empirical results motivate studying the
+        method; our CPU mechanism study neither reproduces nor generalizes their benchmark ranking.
+        Choose a method with held-out task evidence and operational constraints together.
+      </Prose>
+      <Program
+        file="simpo_study.py"
+        title="Complete prospective freeze, stage runner and exact-result conservation"
+      />
+      <Prose>
+        Read <a href={root + 'study-protocol.md'}>study-protocol.md</a> before starting a new fit.
+        <Code>python -B simpo_study.py --output-dir my-simpo-observations</Code> runs the four
+        declared stages with the supplied prospective freeze. The runner binds every program,
+        record, tokenizer selection, protocol and dependency version, plus the actual native CPO
+        sources. It saves commands, logs and output hashes, and reuses a completed stage only when
+        all these inputs and result bytes match. A changed study needs a separately named freeze and
+        destination, as the README explains. Failed runs remain available for diagnosis.
+      </Prose>
+      <Prose>
+        The archive contains the eight complete programs, requirements, records/license,
+        preparation, protocol, provenance and all four result files. Individual full-source
+        Copy/Download controls accompany each program. Start with algebra and masks if you only want
+        the mechanism; run the scratch study to change a controlled comparison; use the native route
+        when you want to test a real trainer against exact response scoring. Keep the fixed-pair and
+        generation questions separate whichever route you choose.
       </Prose>
 
-      <MathBlock>{"\\mathcal{L}_{\\text{SimPO}} = -\\mathbb{E}_{(x, y_w, y_l) \\sim \\mathcal{D}}\\left[\\log \\sigma\\left(\\frac{\\beta}{|y_w|}\\log \\pi_\\theta(y_w|x) - \\frac{\\beta}{|y_l|}\\log \\pi_\\theta(y_l|x) - \\gamma\\right)\\right]"}</MathBlock>
-
+      <Anchor id="7-decision-matrix" />
+      <Anchor id="8-what-scales-and-what-doesn-t" />
+      <Anchor id="8-what-scales-and-what-doesnt" />
+      <Anchor id="9-failure-modes-and-gotchas" />
+      <H2>11. Change labels or objectives deliberately</H2>
       <Prose>
-        Here <Code>|y|</Code> denotes the number of tokens in response <Code>y</Code>, <Code>β</Code> scales the overall reward (analogous to the inverse temperature in Bradley-Terry), and <Code>γ ≥ 0</Code> is the target margin. <Code>σ</Code> is the logistic sigmoid. No <Code>π_ref</Code> appears.
+        Real comparisons can conflict. Suppose the identical A/B pair appears repeatedly, with A
+        chosen a fraction q of the time. We must reverse the score gap when B is chosen. With a
+        positive margin, that is different from smoothing one fixed oriented logistic label.
+      </Prose>
+      <ContradictoryLabels />
+      <Prose>
+        Follow the two record orientations: A-wins contributes softplus(γ−βd), while B-wins
+        contributes softplus(γ+βd). Each asks its own chosen response for a positive gap. Their
+        weighted average can balance at a finite gap when both labels occur. By contrast,
+        fixed-orientation smoothing applies fractional positive and negative labels to the one logit
+        z=βd−γ; its negative-label term is softplus(βd−γ), with the opposite margin sign.
+      </Prose>
+      <MathBlock>{String.raw`R(d)=q\operatorname{softplus}(\gamma-\beta d)+(1-q)\operatorname{softplus}(\gamma+\beta d),\quad R'(d)=\beta[(1-q)\sigma(\gamma+\beta d)-q\sigma(\gamma-\beta d)]`}</MathBlock>
+      <Prose>
+        For q=.75, beta 2 and gamma .5, solving that monotone derivative gives d≈.698124. The
+        fixed-orientation smoothed objective instead minimizes at d=(γ+log(q/(1−q)))/β≈.799306. At
+        gamma zero they coincide. With q=1, the logistic objective has its infimum as d tends to
+        positive infinity; the target margin is still not a finite stopping point. Parameter
+        constraints and regularization can of course prevent a real model from realizing an
+        arbitrary score gap.
+      </Prose>
+      <MathBlock>{String.raw`S(d)=q\operatorname{softplus}(-z)+(1-q)\operatorname{softplus}(z),\quad z=\beta d-\gamma,\quad d_S^*=\frac{\gamma+\log(q/(1-q))}{\beta}\quad(0<q<1)`}</MathBlock>
+      <Prose>
+        The algebra program brackets and bisects the derivative root instead of assuming the
+        no-margin logistic optimum still applies. Its endpoint handling reports no finite minimum
+        for all-one-label data. A smoothing field in a library is a deliberate objective change; it
+        should not be described as if it literally duplicated an oppositely labelled margin record.
+      </Prose>
+      <ObjectiveCoordinates />
+      <Prose>
+        The same suffixes can enter different score coordinates. Standard DPO uses summed
+        reference-relative log probabilities. Plain SimPO uses policy means and a positive margin.
+        The displayed IPO convention puts a squared penalty around a finite target
+        reference-relative gap. CPO configurations can add chosen NLL, but the trainer can also
+        select SimPO means with that auxiliary weight set to zero. “Reference-free” is not a
+        complete definition of the loss or its denominator.
+      </Prose>
+      <MathBlock>{String.raw`\Delta_{\mathrm{ref}}=(s^+-s_{\mathrm{ref}}^+)-(s^--s_{\mathrm{ref}}^-),\quad \ell_{\mathrm{DPO}}=\operatorname{softplus}(-\beta\Delta_{\mathrm{ref}}),\quad \ell_{\mathrm{IPO}}=\left(\Delta_{\mathrm{ref}}-\frac1{2\tau}\right)^2`}</MathBlock>
+      <Prose>
+        Here tau is IPO's positive regularization parameter under this stated convention. Other
+        implementations can change length reductions, so compare their actual scores before
+        comparing hyperparameters. Even SimPO with gamma zero equals a particular DPO scalar
+        expression only under extra restrictions, such as equal candidate lengths and zero reference
+        log-score difference with an appropriate beta rescaling. Those special cases do not make the
+        general methods interchangeable or restore the original KL derivation.
+      </Prose>
+      <OfflineAndRefresh />
+      <Prose>
+        Finally, offline pairs may describe responses the current model rarely generates. Refreshing
+        candidates from the current policy changes the data distribution; obtaining new human or
+        model judgments then changes the evidence supporting their labels. Keep prompt-family
+        boundaries, candidate-generation settings, judge provenance and frozen evaluation separate.
+        A more recent dataset does not automatically have better labels, and feeding current samples
+        back into training does not by itself correct reward hacking or weak task criteria.
+      </Prose>
+      <Prose>
+        For a new task, first check whether the comparisons express its actual constraints and
+        whether response boundaries and lengths are defensible. Then choose the score, margin units,
+        auxiliary terms and reference behavior explicitly. Preserve absolute likelihood diagnostics
+        and free generations on held-out prompts. The model can optimize exactly what was
+        implemented while failing what a reader hoped the objective meant.
       </Prose>
 
-      <H3>Compare to DPO</H3>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{DPO}} = -\\mathbb{E}\\left[\\log \\sigma\\left(\\beta \\log \\frac{\\pi_\\theta(y_w|x)}{\\pi_{\\text{ref}}(y_w|x)} - \\beta \\log \\frac{\\pi_\\theta(y_l|x)}{\\pi_{\\text{ref}}(y_l|x)}\\right)\\right]"}</MathBlock>
-
-      <Prose>
-        The structural parallel is exact. DPO's implicit reward for response <Code>y</Code> is <Code>β · log(π_θ(y|x) / π_ref(y|x))</Code> — a log-ratio that anchors against the reference. SimPO's implicit reward is <Code>(β / |y|) · log π_θ(y|x)</Code> — a length-normalized log-probability with no reference anchor. Replace each DPO reward with its SimPO counterpart and subtract <Code>γ</Code>, and you recover the SimPO loss exactly.
-      </Prose>
-
-      <H3>Why length normalization removes length bias</H3>
-
-      <Prose>
-        The total log-probability of a sequence decomposes by the chain rule:
-      </Prose>
-
-      <MathBlock>{"\\log \\pi_\\theta(y|x) = \\sum_{t=1}^{|y|} \\log \\pi_\\theta(y_t \\mid x, y_{<t})"}</MathBlock>
-
-      <Prose>
-        Under a well-calibrated language model, each per-token log-probability averages to roughly the same value regardless of position. This means the sum grows approximately linearly with sequence length: a response twice as long tends to have a total log-probability roughly twice as negative. Dividing by <Code>|y|</Code> recovers the per-token average, making responses of different lengths comparable. DPO achieves the same effect implicitly — the reference model, being a calibrated LM itself, grows its log-probability at the same rate as the policy, so the ratio cancels the length dependence. SimPO makes the cancellation explicit.
-      </Prose>
-
-      <Prose>
-        The practical consequence is visible in training dynamics. DPO without length normalization exerts a systematic gradient push toward longer chosen responses: longer sequences have larger absolute log-probs, and the DPO loss maximizes this gap. The resulting length drift is well-documented — DPO-trained models reliably produce longer outputs, and since human evaluators tend to prefer longer completions, this inflates perceived quality without improving actual quality. SimPO's per-token normalization removes this lever entirely.
-      </Prose>
-
-      <H3>The role of γ</H3>
-
-      <Prose>
-        When <Code>γ = 0</Code>, the SimPO loss is a straightforward Bradley-Terry preference loss: maximize the probability that the chosen response is preferred over the rejected one. The margin <Code>γ</Code> raises the bar — the loss does not saturate until the chosen response leads by at least <Code>γ</Code> in length-normalized log-probability per unit of <Code>β</Code>. This can be interpreted as: the policy must achieve a reward gap of at least <Code>γ</Code> before it is "done" with this preference pair. Setting <Code>γ</Code> too small allows near-indistinguishable responses to satisfy the loss; setting it too large requires the policy to assign implausibly high confidence to chosen responses and may prevent learning altogether.
-      </Prose>
-
-      <Prose>
-        In the original paper, Meng et al. report <Code>γ ≈ 0.5</Code> and <Code>β ≈ 2.0–2.5</Code> as broadly effective starting points. The right values are dataset-dependent: a preference dataset with high label quality and large quality gaps tolerates higher <Code>γ</Code>; a noisier dataset with marginal preference distinctions needs a smaller one.
-      </Prose>
-
-      <H3>Implicit Bradley-Terry model</H3>
-
-      <Prose>
-        The SimPO loss is derived from the same Bradley-Terry preference model that underlies DPO. The Bradley-Terry model says the probability that response <Code>y_w</Code> is preferred over <Code>y_l</Code> given prompt <Code>x</Code> is:
-      </Prose>
-
-      <MathBlock>{"P(y_w \\succ y_l \\mid x) = \\sigma\\!\\left(r(x, y_w) - r(x, y_l)\\right)"}</MathBlock>
-
-      <Prose>
-        SimPO parameterizes the implicit reward as <Code>r(x, y) = (β / |y|) · log π_θ(y|x)</Code>. Plugging this into the Bradley-Terry model gives the preference probability that the SimPO loss is maximizing. The negative log-likelihood of this preference probability over the training dataset is exactly <Code>L_SimPO</Code> with <Code>γ = 0</Code>. The margin <Code>γ</Code> is then added as an offset that biases the preference probability: the model must be confident enough in the chosen response that the reward gap exceeds <Code>γ</Code> before the preference probability reaches 50%. This is equivalent to requiring the model to pass a threshold of confidence before counting a preference pair as resolved, which filters out ambiguous pairs from the effective gradient.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <H3>4a. Length-normalized log-probabilities</H3>
-
-      <Prose>
-        The first building block is a function that takes the logits produced by a language model on a response and returns both the total log-probability and the response length — the two quantities the SimPO loss needs. The key detail is the off-by-one: a language model predicts token <Code>t</Code> from tokens <Code>0..t-1</Code>, so the logits at position <Code>i</Code> correspond to the probability of token <Code>i+1</Code>. We slice the logits and the target ids accordingly.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn.functional as F
-
-
-def length_normalized_logp(logits, token_ids, pad_id=0):
-    """
-    Compute summed log-prob and response length for each sequence in a batch.
-
-    logits   : (B, T, V) — raw model output over the full sequence
-    token_ids: (B, T)    — token ids including the prompt prefix
-    pad_id   : int       — token id used for padding (excluded from sum/length)
-
-    Returns
-    -------
-    logp    : (B,) — sum of per-token log-probabilities over non-pad tokens
-    lengths : (B,) — number of non-pad response tokens (used as denominator)
-    """
-    # log-softmax over vocab at each position, then slice off last logit
-    log_probs = F.log_softmax(logits[:, :-1, :], dim=-1)   # (B, T-1, V)
-
-    # targets are the actual next tokens — shifted by one
-    targets = token_ids[:, 1:]                             # (B, T-1)
-
-    # gather the log-prob of each actual next token
-    token_logps = log_probs.gather(
-        -1, targets.unsqueeze(-1)
-    ).squeeze(-1)                                          # (B, T-1)
-
-    # mask out padding
-    mask = (targets != pad_id).float()
-    lengths = mask.sum(dim=-1).clamp(min=1)
-
-    return (token_logps * mask).sum(dim=-1), lengths       # (B,), (B,)`}
-      </CodeBlock>
-
-      <Prose>
-        In real training you would typically pre-compute a response mask that covers only the completion tokens (not the prompt), not just non-pad tokens. For clarity this example uses padding-based masking; the principle is identical. One implementation gotcha: if the response and prompt are concatenated into a single input sequence (as is standard in TRL's DPOTrainer), the prompt tokens need to be excluded from both the log-probability sum and the length count. Including prompt tokens inflates the length denominator and deflates the per-token reward, effectively penalizing shorter prompts with longer completions. The mask should be computed over completion token positions only.
-      </Prose>
-
-      <H3>4b. SimPO loss</H3>
-
-      <CodeBlock language="python">
-{`def simpo_loss(
-    policy_logps_chosen,   # (B,) — summed logp of chosen responses
-    policy_logps_rejected, # (B,) — summed logp of rejected responses
-    chosen_lens,           # (B,) — lengths of chosen responses
-    rejected_lens,         # (B,) — lengths of rejected responses
-    beta=2.0,
-    gamma=0.5,
-):
-    """
-    SimPO loss (Meng et al., 2024, arXiv:2405.14734).
-
-    No reference model. Length-normalized implicit rewards with a target margin.
-    """
-    # per-token average log-prob, scaled by beta
-    r_chosen   = beta * policy_logps_chosen   / chosen_lens
-    r_rejected = beta * policy_logps_rejected / rejected_lens
-
-    # loss saturates when chosen beats rejected by at least gamma
-    return -F.logsigmoid(r_chosen - r_rejected - gamma).mean()`}
-      </CodeBlock>
-
-      <Prose>
-        The backward pass flows through <Code>logsigmoid</Code> → the margin expression → into <Code>policy_logps_chosen</Code> and <Code>policy_logps_rejected</Code>, which themselves carry gradients from the model's forward pass. Nothing else requires differentiation. The reference model that DPO passes in never appears.
-      </Prose>
-
-      <H3>4c. Training loop</H3>
-
-      <Prose>
-        A complete training loop starting from an SFT checkpoint, tracking the chosen-rejected margin over time:
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader
-
-
-class TinyLM(nn.Module):
-    """Minimal language model for testing: embedding + linear head."""
-    def __init__(self, vocab=50, dim=32):
-        super().__init__()
-        self.emb  = nn.Embedding(vocab, dim)
-        self.head = nn.Linear(dim, vocab, bias=False)
-
-    def forward(self, ids):
-        return self.head(self.emb(ids))   # (B, T, V)
-
-
-def train_simpo(model, preference_data, beta=2.0, gamma=0.5,
-                lr=1e-3, steps=200):
-    """
-    preference_data: list of (ids_chosen, ids_rejected) tensors.
-    Returns list of (step, margin, loss) tuples for diagnostics.
-    """
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    history   = []
-
-    for step, (ids_w, ids_l) in enumerate(preference_data):
-        if step >= steps:
-            break
-
-        # single forward pass through the trainable policy
-        logits_w = model(ids_w)
-        logits_l = model(ids_l)
-
-        # length-normalized log-probs
-        lp_w, len_w = length_normalized_logp(logits_w, ids_w)
-        lp_l, len_l = length_normalized_logp(logits_l, ids_l)
-
-        loss = simpo_loss(lp_w, lp_l, len_w, len_l, beta, gamma)
-
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-
-        with torch.no_grad():
-            margin = (lp_w / len_w - lp_l / len_l).mean().item()
-        history.append((step, round(margin, 4), round(loss.item(), 4)))
-
-    return history
-
-
-# ── quick smoke test ───────────────────────────────────────────────────────
-torch.manual_seed(42)
-model = TinyLM()
-
-# fake preference pairs: batch of 4, sequence length 12, vocab 50
-fake_data = [
-    (torch.randint(1, 50, (4, 12)), torch.randint(1, 50, (4, 12)))
-    for _ in range(60)
-]
-
-history = train_simpo(model, fake_data, steps=40)
-
-print(f"step   0: margin={history[0][1]:+.4f}  loss={history[0][2]:.4f}")
-print(f"step  19: margin={history[19][1]:+.4f}  loss={history[19][2]:.4f}")
-print(f"step  39: margin={history[39][1]:+.4f}  loss={history[39][2]:.4f}")
-# Output:
-# step   0: margin=+0.1029  loss=1.3546
-# step  19: margin=+0.0917  loss=0.8612
-# step  39: margin=+0.0922  loss=0.7983`}
-      </CodeBlock>
-
-      <H3>4d. SimPO vs DPO — margin and length comparison</H3>
-
-      <Prose>
-        The most instructive comparison trains both methods on identical preference data and observes the trajectory of the chosen-rejected reward margin. DPO's margin is measured in raw log-probability difference (affected by length); SimPO's margin is per-token normalized. A second diagnostic tracks how average chosen-response effective log-probability changes over training — DPO tends to drift upward as the model learns to assign higher probability to longer chosen responses, while SimPO stays closer to the SFT baseline.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def dpo_loss(policy_lp_w, policy_lp_l,
-             ref_lp_w,    ref_lp_l,
-             beta=0.1):
-    """DPO loss for comparison (reference model required)."""
-    logits = beta * ((policy_lp_w - ref_lp_w) - (policy_lp_l - ref_lp_l))
-    return -F.logsigmoid(logits).mean()
-
-
-def compare_simpo_dpo(steps=50, batch=8, seq_len=12, vocab=50):
-    """
-    Train SimPO and DPO on the same sequence of batches.
-    Returns margin histories for both.
-    """
-    torch.manual_seed(0)
-
-    model_spo = TinyLM(vocab)
-    model_dpo = TinyLM(vocab)
-    ref_model = TinyLM(vocab)
-    for p in ref_model.parameters():
-        p.requires_grad_(False)   # frozen reference — never updated
-
-    opt_spo = torch.optim.Adam(model_spo.parameters(), lr=1e-3)
-    opt_dpo = torch.optim.Adam(model_dpo.parameters(), lr=1e-3)
-
-    simpo_margins, dpo_margins = [], []
-
-    for step in range(steps):
-        ids_w = torch.randint(1, vocab, (batch, seq_len))
-        ids_l = torch.randint(1, vocab, (batch, seq_len))
-
-        # ── SimPO: one forward pass ──────────────────────────────────────
-        lp_w, lw = length_normalized_logp(model_spo(ids_w), ids_w)
-        lp_l, ll = length_normalized_logp(model_spo(ids_l), ids_l)
-        loss_spo = simpo_loss(lp_w, lp_l, lw, ll)
-        opt_spo.zero_grad(); loss_spo.backward(); opt_spo.step()
-
-        # ── DPO: two forward passes (policy + reference) ─────────────────
-        plp_w, _ = length_normalized_logp(model_dpo(ids_w), ids_w)
-        plp_l, _ = length_normalized_logp(model_dpo(ids_l), ids_l)
-        with torch.no_grad():
-            rlp_w, _ = length_normalized_logp(ref_model(ids_w), ids_w)
-            rlp_l, _ = length_normalized_logp(ref_model(ids_l), ids_l)
-        loss_dpo = dpo_loss(plp_w, plp_l, rlp_w, rlp_l)
-        opt_dpo.zero_grad(); loss_dpo.backward(); opt_dpo.step()
-
-        # normalized margin for SimPO, raw margin for DPO
-        with torch.no_grad():
-            simpo_margins.append((lp_w/lw - lp_l/ll).mean().item())
-            dpo_margins.append((plp_w - plp_l).mean().item())
-
-    return simpo_margins, dpo_margins
-
-
-simpo_m, dpo_m = compare_simpo_dpo()
-print("SimPO margins (steps 0/10/20/30/40/49):",
-      [round(simpo_m[i], 4) for i in [0, 10, 20, 30, 40, 49]])
-print("DPO   margins (steps 0/10/20/30/40/49):",
-      [round(dpo_m[i], 4)   for i in [0, 10, 20, 30, 40, 49]])
-# SimPO margins: [-0.0177, 0.0493, 0.0542, 0.1239, 0.0454, -0.0201]
-# DPO   margins: [ 0.0938, 0.4339, 0.8813, -0.56, -1.2543, -2.7264]`}
-      </CodeBlock>
-
-      <Prose>
-        The DPO raw margin oscillates widely and can grow negative — a sign that the policy has drifted without a strong stabilizing anchor (in this toy example there is no real semantic structure to latch onto). SimPO's normalized margin stays in a tighter band. On real preference data with meaningful signal, both converge, but DPO's raw margin remains length-contaminated while SimPO's reflects actual per-token quality.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        At time of writing (April 2026), SimPO is not available as a first-class trainer in HuggingFace TRL. The closest built-in option is <Code>CPOTrainer</Code>, which implements Contrastive Preference Optimization (Xu et al., arXiv:2401.08417) — a related reference-free method. CPO drops the reference model and uses a contrastive NLL loss rather than the Bradley-Terry sigmoid; it is structurally similar to SimPO but lacks the length normalization and explicit margin.
-      </Prose>
-
-      <Prose>
-        The recommended production path is to subclass TRL's <Code>DPOTrainer</Code> and override the loss computation:
-      </Prose>
-
-      <CodeBlock language="python">
-{`# pip install trl>=0.8.0 transformers accelerate
-from trl import DPOTrainer, DPOConfig
-
-class SimPOTrainer(DPOTrainer):
-    """
-    SimPO trainer built on top of TRL's DPOTrainer.
-    Overrides the loss to use length-normalized rewards with a target margin.
-    No reference model is needed — pass ref_model=None.
-    """
-
-    def __init__(self, *args, gamma=0.5, **kwargs):
-        self.gamma = gamma
-        # Disable reference model internally
-        kwargs.setdefault("ref_model", None)
-        super().__init__(*args, **kwargs)
-
-    def simpo_loss(
-        self,
-        policy_chosen_logps,    # (B,) — from DPOTrainer's log_probs util
-        policy_rejected_logps,  # (B,)
-        chosen_lengths,         # (B,)
-        rejected_lengths,       # (B,)
-    ):
-        import torch.nn.functional as F
-        beta = self.beta            # inherited from DPOConfig / DPOTrainer
-        r_w = beta * policy_chosen_logps   / chosen_lengths
-        r_l = beta * policy_rejected_logps / rejected_lengths
-        return -F.logsigmoid(r_w - r_l - self.gamma).mean()
-
-    def get_batch_loss_metrics(self, model, batch, train_eval="train"):
-        # DPOTrainer's utility computes log-probs and lengths — reuse them
-        (
-            policy_chosen_logps,
-            policy_rejected_logps,
-            policy_chosen_logits,
-            policy_rejected_logits,
-            policy_chosen_lengths,
-            policy_rejected_lengths,
-        ) = self.concatenated_forward(model, batch)
-
-        loss = self.simpo_loss(
-            policy_chosen_logps,
-            policy_rejected_logps,
-            policy_chosen_lengths,
-            policy_rejected_lengths,
-        )
-
-        with torch.no_grad():
-            chosen_rewards   = self.beta * policy_chosen_logps   / policy_chosen_lengths
-            rejected_rewards = self.beta * policy_rejected_logps / policy_rejected_lengths
-            reward_acc = (chosen_rewards > rejected_rewards).float().mean()
-
-        metrics = {
-            f"{train_eval}/loss":             loss.item(),
-            f"{train_eval}/rewards/chosen":   chosen_rewards.mean().item(),
-            f"{train_eval}/rewards/rejected": rejected_rewards.mean().item(),
-            f"{train_eval}/rewards/margin":   (chosen_rewards - rejected_rewards).mean().item(),
-            f"{train_eval}/reward_accuracy":  reward_acc.item(),
+      <Anchor id="11-self-check-exercises" />
+      <H2>12. Practice with changed cases</H2>
+      <Exercise
+        title="1. A short answer can miss the task"
+        hint={<Prose>Separate the request's constraint from answer length and model score.</Prose>}
+        solution={
+          <Prose>
+            A valid pair might be A: “It is faster,” and B: “It is faster and uses less memory.” If
+            the prompt requests two reasons and both B reasons are supported, a supplied label can
+            choose B. A's brevity does not satisfy the missing second reason. Neither the label nor
+            the length tells us the policy's probability. If factual support or the meaning of
+            “reason” is unclear, resolve that criterion first. The loss optimizes a mistaken label
+            as readily as a useful one.
+          </Prose>
         }
-        return loss, metrics
+      >
+        A prompt asks for two reasons. The shorter candidate gives one. Construct a defensible
+        comparison and explain why “SimPO prefers shorter answers” is not a valid labelling rule.
+      </Exercise>
+      <Exercise
+        title="2. Keep the genuine stop when PAD equals EOS"
+        hint={
+          <Prose>
+            Write input positions, then place each predictor exactly one position earlier.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Both prompts occupy positions 0–2. A's targets 8 and 2 occupy positions 3 and 4; their
+            predictors are 2 and 3. Its position 5 is padding. B's targets 7, 9 and 2 occupy
+            positions 3–5, using predictors 2–4. A has attention mask [1, 1, 1, 1, 1, 0] and
+            completion mask [0, 0, 0, 1, 1, 0]; B has all-real attention and completion mask [0, 0,
+            0, 1, 1, 1]. Shift these masks with the targets once. Masking every ID equal to 2
+            removes both genuine stops. Counts must be two and three, not one and two.
+          </Prose>
+        }
+      >
+        Use prompt IDs [1, 4, 6], response A [8, 2] and response B [7, 9, 2]. Right-pad to six
+        positions with ID 2, also EOS. Give masks, counts and predictors; repair a scorer that
+        ignores every ID equal to 2.
+      </Exercise>
+      <Exercise
+        title="3. Name the event before choosing its score"
+        hint={<Prose>Compare sums first, then divide each by its own count.</Prose>}
+        solution={
+          <Prose>
+            Sums −2.4 and −3 prefer A because its completed-path probability exp(−2.4) is larger.
+            Means −2.4/3=−.8 and −3/5=−.6 instead prefer B. The sums are sequence log probabilities
+            under the stated target/termination convention. Exponentiated means are geometric means
+            of transition probabilities and need not sum to one across responses. A mean-score win
+            does not change which completed event had larger probability.
+          </Prose>
+        }
+      >
+        A has sum −2.4 across three targets; B has sum −3 across five. Compute both rankings and
+        identify which value is a sequence log probability.
+      </Exercise>
+      <Exercise
+        title="4. A different token unit changes the mean"
+        hint={
+          <Prose>
+            Hold the stipulated total log probability fixed only for this arithmetic comparison.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            The means are −3/2=−1.5 and −3/6=−.5 despite the same stipulated event mass exp(−3). A
+            real tokenizer swap generally changes the model and its probabilities as well as the
+            denominator. Freeze tokenizer, template and EOS when attributing an observed change to
+            the objective. If tokenization is the intended intervention, declare it explicitly and
+            evaluate a task criterion not defined only per token.
+          </Prose>
+        }
+      >
+        An event with log probability −3 is represented using two targets or six. Explain the mean
+        change and why swapping a deployed model's tokenizer is not a neutral normalization fix.
+      </Exercise>
+      <Exercise
+        title="5. Failing the desired margin still gives a finite gradient"
+        hint={<Prose>Compute z=beta times gap minus gamma before applying softplus.</Prose>}
+        solution={
+          <Prose>
+            z=3(.2)−.9=−.3. Loss is softplus(.3)=.854355 and its gap derivative is
+            −3σ(.3)=−1.723328. The desired gap is .9/3=.3, so the current pair falls below it.
+            Gradient descent still has a finite signal to increase the gap. At the desired gap, loss
+            would be log 2 and the derivative −1.5; reaching it does not stop learning.
+          </Prose>
+        }
+      >
+        For beta 3, gamma .9 and gap .2, compute logit, loss, gap derivative and desired gap. Does
+        the pair produce an update signal?
+      </Exercise>
+      <Exercise
+        title="6. Translate margin units before changing beta"
+        hint={
+          <Prose>
+            Use gamma=beta times the ratio, then hold each of the two quantities fixed separately.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Ratio .25 with beta 4 requires absolute gamma 1 in TRL. Halving beta to 2 while keeping
+            gamma 1 doubles the desired gap from .25 to .5. Keeping ratio .25 instead requires gamma
+            .5, so the desired gap stays .25. Even then, gradient scale and sharpness change with
+            beta. Passing .25 as the original absolute gamma accidentally requests gap .0625 instead
+            of .25.
+          </Prose>
+        }
+      >
+        A recipe uses gamma/beta ratio .25 and beta 4. Translate it to TRL, then compare halving
+        beta while holding gamma or the ratio fixed.
+      </Exercise>
+      <Exercise
+        title="7. Token coefficients are not parameter gradients"
+        hint={
+          <Prose>Divide the pair weight separately by the chosen and rejected target counts.</Prose>
+        }
+        solution={
+          <Prose>
+            Each chosen contribution has derivative −.8/2=−.4. Each rejected contribution has
+            derivative .8/5=.16. Their path sums are −.8 and .8; a batch mean adds division by pair
+            count. Parameter gradients additionally multiply these coefficients by the
+            log-probability Jacobians and add across shared parameters. Context and vocabulary
+            normalization mean equal coefficient sums imply neither equal gradient norms nor
+            independent probability changes.
+          </Prose>
+        }
+      >
+        A pair has weight w=.8 and chosen/rejected lengths two and five. Give every direct
+        token-score coefficient and explain what remains before an optimizer can update the model.
+      </Exercise>
+      <Exercise
+        title="8. Repair an alleged human-win probability"
+        hint={
+          <Prose>The reverse record subtracts the same positive gamma from its reversed gap.</Prose>
+        }
+        solution={
+          <Prose>
+            The logits are 2(.4)−.6=.2 and −2(.4)−.6=−1.4. Their links are approximately .549834 and
+            .197816, summing to .747650. They cannot describe complementary outcomes of one binary
+            judgment. Report shifted training links if useful; an actual win-probability claim needs
+            an appropriate evaluated probabilistic model or held-out judgments. The loss terms
+            themselves are not measured human preferences.
+          </Prose>
+        }
+      >
+        At gap .4, beta 2 and gamma .6, a report calls the two oriented sigmoid values human-win
+        probabilities. Compute them and repair the interpretation.
+      </Exercise>
+      <Exercise
+        title="9. A larger gap with a smaller chosen probability"
+        hint={
+          <Prose>
+            The shared normalizer cancels in the A/B gap but remains in each probability.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            The gap is 2θ. At zero its loss derivative is −2σ(.2)=−1.099668. A .05 step sets theta
+            to .0549834 and the gap to .1099668. Softmax of theta, minus theta and six times theta
+            gives approximately (.311305, .278887, .409808). Both A and B fall below one third
+            despite the improved gap. The third outcome gains mass through shared parameters. This
+            witness establishes possibility, not prevalence.
+          </Prose>
+        }
+      >
+        Use logits (theta, minus theta, six times theta), beta 1, gamma .2 and initial theta zero.
+        After one gradient step of size .05, does the chosen probability rise?
+      </Exercise>
+      <Exercise
+        title="10. Two NLL denominators imply different weights"
+        hint={<Prose>Reconstruct each response's sum before pooling its targets.</Prose>}
+        solution={
+          <Prose>
+            The sums are −.4 and −4.8. Token-mean NLL is (.4+4.8)/(2+6)=.65; mean-of-response-means
+            NLL is (.2+.8)/2=.5. The first weights responses by target count, while the second gives
+            each response equal weight. Current native CPO auxiliary cross entropy uses the first
+            convention. State that denominator when reproducing an auxiliary term or accumulating
+            uneven batches.
+          </Prose>
+        }
+      >
+        Two chosen responses have lengths two and six, with mean log scores −.2 and −.8. Compare the
+        two NLL reductions and identify which matches the native auxiliary term.
+      </Exercise>
+      <Exercise
+        title="11. Isolate normalization without relabelling the method"
+        hint={
+          <Prose>
+            Use one frozen initializer and one shared record/order schedule; change one loss
+            operation.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Copy the same SFT state twice; preserve tokenizer/EOS/masks, records, batch order,
+            beta/gamma, optimizer settings, update budget and evaluation prompts/seeds. Divide by
+            genuine counts in one branch only, and verify identical initial logits. Report common
+            sum/mean diagnostics plus task generations; the same beta still has different effective
+            scaling. The sum branch lacks reference-relative subtraction, so it is a reference-free
+            sum ablation, not DPO. Tuning fairness would require another declared experiment.
+          </Prose>
+        }
+      >
+        Design a normalization-only ablation. Explain the constants to preserve and why the
+        summed-score branch cannot simply be called DPO.
+      </Exercise>
+      <Exercise
+        title="12. Fix the trainer and target contract together"
+        hint={
+          <Prose>
+            Separate ratio conversion from the auxiliary weight, then inspect native IDs and labels.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Use the experimental CPO import with loss_type="simpo", beta=2, simpo_gamma=.4,
+            cpo_alpha=0, alpha=0 and label_smoothing=0. Verify prompt BOS, one response EOS and −100
+            prompt/padding labels. Count selected shifted targets from positions, not padded width.
+            Reject both members of a pair if either whole sequence exceeds the budget, before native
+            truncation. Compare native/manual loss and every parameter gradient with dropout
+            disabled before interpreting a fit.
+          </Prose>
+        }
+      >
+        A plain SimPO config uses beta 2 and desired gap .2, leaves cpo_alpha at its default, and
+        passes .2 as simpo_gamma. Repair it and specify the target/count checks it still needs.
+      </Exercise>
+      <Exercise
+        title="13. A fixed-pair success does not describe free generations"
+        hint={
+          <Prose>
+            Track absolute score movement and sample outcomes outside the supplied pair.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            A larger mean gap with both absolute probabilities falling is consistent with mass
+            moving elsewhere through shared parameters. Report sums, means, lengths and gaps without
+            calling their finite differences full-policy KL or generated-quality gains. Evaluate
+            fresh generations on held-out prompts with fixed decoding and an independent criterion.
+            Retain complete strings, stop rates and failures: other responses may have gained
+            probability without ever appearing in the pair.
+          </Prose>
+        }
+      >
+        A report shows improved mean gaps but both candidate likelihoods fall. Give a valid
+        interpretation and identify evidence needed for a generation-quality conclusion.
+      </Exercise>
+      <Exercise
+        title="14. Count a concrete reference computation"
+        hint={
+          <Prose>
+            Distinguish work moved to preprocessing from work removed from the objective.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Online-reference DPO runs policy and reference on both suffixes, with backward gradients
+            only through the policy. Cached-reference DPO computes frozen scores earlier and reads
+            them during training. SimPO removes that reference-scoring requirement but still
+            computes policy logits, gradients and optimizer state. A valid cache requires exact
+            weights, tokenizer/template, IDs/masks and pair correspondence. Activations, batch
+            shape, adapters, hardware and distributed execution still affect speed and memory, so no
+            universal performance multiplier follows from these operator roles.
+          </Prose>
+        }
+      >
+        Compare online-reference DPO, cached-reference DPO and SimPO. What disappears, what moves,
+        and why is a fixed performance multiplier unjustified?
+      </Exercise>
+      <Exercise
+        title="15. Conflicting records differ from fixed-orientation smoothing"
+        hint={<Prose>Write each actual label orientation, keeping its gamma positive.</Prose>}
+        solution={
+          <>
+            <Prose>
+              The repeated-record objective is .75 softplus(.5−2d)+.25 softplus(.5+2d), with
+              derivative 2[.25σ(.5+2d)−.75σ(.5−2d)] and root .698124. Fixed-orientation smoothing
+              instead uses .75 softplus(−z)+.25 softplus(z), z=2d−.5, with optimum (.5+log
+              3)/2≈.799306. The negative-label terms have different margin signs.
+            </Prose>
+            <Prose>
+              At gamma zero they coincide and minimize at log 3/2. With only A-wins, the
+              unconstrained infimum occurs at infinite positive gap; the desired margin is not a
+              finite optimum. The algebra program solves the derivative only for interior label
+              frequencies and names the endpoint limitation.
+            </Prose>
+          </>
+        }
+      >
+        For A-wins frequency .75, beta 2 and gamma .5, derive the objective, derivative and
+        numerical optimum. Compare fixed-orientation smoothing, gamma zero and the endpoints.
+      </Exercise>
+      <Exercise
+        title="16. Make a changed task falsifiable"
+        hint={
+          <Prose>
+            Define behavior before seeing scores or generations and preserve a shared initializer.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            One valid project adds a request for two factual clauses and changes the grammar and
+            comparisons accordingly. Freeze new data, protocol and source hashes before fitting.
+            Copy one new SFT initializer across declared variants with matched
+            records/order/schedule and retain a baseline. Define exact clause-count/fact criteria
+            independently of loss; use held-out prompt families for generalization claims and fixed
+            decoding seeds/budgets. Keep every sample and fixed-pair score change. A valid
+            conclusion is that pair loss improved while held-out task success did not. That
+            disproves the proposed gain under the declared setup; it does not justify hiding a seed
+            or retuning after inspection.
+          </Prose>
+        }
+      >
+        Design a new task and controlled experiment capable of disproving “this objective improves
+        the behavior.” Specify inputs, state reuse, metrics and retained evidence.
+      </Exercise>
 
-
-# ── usage ─────────────────────────────────────────────────────────────────────
-# from transformers import AutoModelForCausalLM, AutoTokenizer
-# from trl import DPOConfig
-#
-# model     = AutoModelForCausalLM.from_pretrained("your-sft-checkpoint")
-# tokenizer = AutoTokenizer.from_pretrained("your-sft-checkpoint")
-#
-# training_args = DPOConfig(
-#     beta=2.0,
-#     output_dir="./simpo-output",
-#     per_device_train_batch_size=4,
-#     gradient_accumulation_steps=8,
-#     learning_rate=5e-7,
-#     num_train_epochs=1,
-#     bf16=True,
-#     logging_steps=10,
-# )
-#
-# trainer = SimPOTrainer(
-#     model=model,
-#     args=training_args,
-#     train_dataset=preference_dataset,   # HuggingFace Dataset with columns:
-#                                         # prompt, chosen, rejected
-#     tokenizer=tokenizer,
-#     gamma=0.5,
-# )
-# trainer.train()`}
-      </CodeBlock>
-
-      <Prose>
-        A few production notes. First, because there is no reference model, the <Code>ref_model=None</Code> path in TRL skips the reference forward pass entirely — ensure your TRL version supports this. Second, <Code>concatenated_forward</Code> in recent TRL versions returns lengths; confirm the exact return signature against your installed version. Third, SimPO is sensitive to learning rate: values in the 5e-7 to 1e-6 range work well for instruction-tuned 7B–13B models; higher rates destabilize training faster than DPO because there is no KL anchor to slow divergence.
-      </Prose>
-
-      <Prose>
-        Logging and evaluation during training require some additional thought. With DPO, the log-ratio <Code>log(π_θ / π_ref)</Code> is a natural diagnostic: it tells you how far the policy has moved from the SFT starting point for each response. SimPO has no such ratio to log. The most useful diagnostics in production SimPO training are: the fraction of training pairs where the chosen margin exceeds <Code>γ</Code> at each step (reward accuracy), the mean and standard deviation of the margin distribution across the batch, the length distribution of model generations on a held-out eval prompt set (to verify no length drift), and the win rate on a held-out preference validation set evaluated by a separate reward model. These four metrics together give you roughly the same diagnostic coverage that DPO's log-ratio provides alone.
-      </Prose>
-
-      <Callout accent="green">
-        Memory saving in practice: on a 7B model, removing the reference forward pass reduces peak GPU memory during training by roughly 25–35% and wall-clock time per step by roughly 30%. For 70B models the savings are proportionally larger and may be the difference between fitting on available hardware or not.
-      </Callout>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>Chosen-rejected margin over training steps</H3>
-
-      <Prose>
-        The plot below shows the chosen-rejected length-normalized reward margin for SimPO versus the raw log-probability difference for DPO over 50 training steps on synthetic preference data. SimPO's margin is directly comparable to <Code>γ</Code> and tells you whether the margin target is being met. DPO's raw margin is inflated by length and is not directly meaningful as a quality measure.
-      </Prose>
-
-      <Plot
-        label="chosen − rejected reward margin over training (synthetic data)"
-        xLabel="step"
-        yLabel="margin"
-        series={[
-          {
-            name: "SimPO (normalized)",
-            color: colors.green,
-            points: [
-              [0, -0.018], [5, 0.041], [10, 0.049], [15, 0.067],
-              [20, 0.054], [25, 0.091], [30, 0.124], [35, 0.063],
-              [40, 0.045], [45, 0.012], [49, -0.020],
-            ],
-          },
-          {
-            name: "DPO (raw, length-contaminated)",
-            color: colors.gold,
-            points: [
-              [0, 0.094], [5, 0.287], [10, 0.434], [15, 0.701],
-              [20, 0.881], [25, 0.312], [30, -0.560], [35, -0.943],
-              [40, -1.254], [45, -2.105], [49, -2.726],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        SimPO's normalized margin stays in a bounded, interpretable range — a direct read on whether the policy is achieving the target gap. DPO's raw margin grows rapidly and then collapses, reflecting the policy drifting without the reference anchor's stabilizing effect. On real data with semantic structure, DPO converges reliably; this toy example exaggerates the instability. The qualitative difference — SimPO's margin is interpretable and bounded; DPO's is not — holds across scales.
-      </Prose>
-
-      <H3>Response length distribution before and after training</H3>
-
-      <Prose>
-        Length drift is SimPO's key advantage over DPO in practice. The plot below shows a schematic of response-length distributions after training, compared to the SFT baseline, based on results reported in the original paper.
-      </Prose>
-
-      <Plot
-        label="response length distribution — SFT baseline vs trained (schematic)"
-        xLabel="response length (tokens)"
-        yLabel="density"
-        series={[
-          {
-            name: "SFT baseline",
-            color: "#888",
-            points: [
-              [50, 0.02], [100, 0.08], [150, 0.18], [200, 0.26],
-              [250, 0.24], [300, 0.14], [350, 0.06], [400, 0.02],
-            ],
-          },
-          {
-            name: "SimPO (no drift)",
-            color: colors.green,
-            points: [
-              [50, 0.02], [100, 0.09], [150, 0.19], [200, 0.27],
-              [250, 0.23], [300, 0.13], [350, 0.05], [400, 0.02],
-            ],
-          },
-          {
-            name: "DPO (elongation bias)",
-            color: colors.gold,
-            points: [
-              [50, 0.01], [100, 0.04], [150, 0.10], [200, 0.18],
-              [250, 0.26], [300, 0.22], [350, 0.13], [400, 0.06],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        SimPO's post-training distribution closely tracks the SFT baseline. DPO shifts the distribution rightward — the model learns to produce longer chosen-style responses because length inflates the raw log-probability signal. This is a well-documented DPO failure mode, and it makes evaluation tricky: win rates on AlpacaEval and Arena-Hard both have annotator biases toward longer completions, so DPO's apparent gains can be partially attributable to verbosity rather than quality. SimPO's controlled length makes its win-rate improvements harder to dismiss on this basis.
-      </Prose>
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <H3>SimPO vs DPO</H3>
-
-      <Prose>
-        Use SimPO when: GPU memory is a binding constraint (no budget for a reference forward pass); your preference data is clean with clear quality gaps between chosen and rejected; you want interpretable reward margins during training; you are training at 13B+ scale where the reference doubles your memory footprint.
-      </Prose>
-
-      <Prose>
-        Use DPO when: memory is not a concern and you want the reference model's implicit KL regularization; your SFT starting point is noisy or mediocre (the reference anchor helps); you need compatibility with an established training stack that already supports DPO natively; you want the ability to compare policy versus reference log-probabilities for debugging.
-      </Prose>
-
-      <H3>SimPO vs IPO</H3>
-
-      <Prose>
-        Identity Preference Optimization (IPO, arXiv:2310.12036, Azar et al.) also removes the reference model but uses a squared loss rather than the Bradley-Terry sigmoid, directly minimizing the IPO regularized objective without the Bradley-Terry approximation. IPO is more theoretically grounded in the sense that it avoids the Bradley-Terry assumption that preference probabilities scale with reward differences. SimPO is simpler to implement and performs comparably in practice. Choose IPO if you distrust the Bradley-Terry model for your data; choose SimPO if you want direct control over the margin.
-      </Prose>
-
-      <H3>SimPO vs ORPO</H3>
-
-      <Prose>
-        ORPO (Odds Ratio Preference Optimization, arXiv:2403.07691, Hong et al.) is also reference-free and also avoids a separate reference forward pass, but it combines the SFT loss and the preference loss into a single term using the odds ratio rather than the log-ratio. ORPO does not require a separate SFT phase; SimPO assumes you start from an SFT checkpoint. Use ORPO when you want a single-stage training pipeline; use SimPO when you already have a strong SFT checkpoint and want to add preference optimization as a separate phase with explicit margin control.
-      </Prose>
-
-      <H3>SimPO vs CPO</H3>
-
-      <Prose>
-        CPO (Contrastive Preference Optimization, arXiv:2401.08417, Xu et al.) is the closest structural sibling — it is also reference-free and uses a contrastive loss over preference pairs — but it was developed for machine translation quality and uses NLL-based contrastive scoring rather than length-normalized log-probabilities with an explicit margin. CPO is available in TRL's <Code>CPOTrainer</Code>; SimPO is not. If you want an off-the-shelf reference-free trainer in TRL, start with CPO and compare against a SimPO subclass.
-      </Prose>
-
-      <H3>Summary comparison</H3>
-
-      <Prose>
-        Collapsing the decision space: if memory is not a constraint, DPO is lower-risk because the reference provides calibration you do not have to tune. If memory is a constraint and your data is clean, SimPO is the first choice — it is simpler to implement than IPO, better studied than ORPO, and has stronger empirical results than CPO on general instruction-following benchmarks. If you want a single-stage pipeline that skips SFT entirely, ORPO is worth evaluating. If you distrust the Bradley-Terry assumption for your specific preference data — for example, in domains with strong intransitive preferences (A preferred to B, B preferred to C, C preferred to A) — IPO's direct objective is more principled.
-      </Prose>
-
-      <Prose>
-        One underrated dimension of this choice is debuggability. DPO gives you the most interpretable signal during training: the log-ratio of policy to reference is a direct measure of how far the policy has moved from its SFT starting point for any given response. SimPO's per-token log-probability is less informative in isolation — you cannot tell whether a high value reflects genuine quality or the model being extremely confident in a particular response style. For research and ablation work, DPO's richer diagnostics are often worth the memory cost. For production deployments at scale where memory efficiency is a real constraint, SimPO's simpler training loop and reduced infrastructure requirements tip the balance.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <Prose>
-        SimPO's memory advantage scales with model size. At 7B parameters, dropping the reference saves roughly 14 GB in bfloat16 — meaningful but manageable. At 70B, it saves roughly 140 GB — the difference between needing 4 A100s and needing 8. At 405B scale, the reference would occupy the entirety of a single H100 node. SimPO's compute advantage scales similarly: no reference forward pass means roughly half the total FLOPs per batch attributable to inference.
-      </Prose>
-
-      <Prose>
-        Hyperparameter sensitivity does not scale favorably. The sweet spot for <Code>γ</Code> and <Code>β</Code> varies substantially across model families, SFT quality, and preference dataset distributions. Meng et al. report <Code>β = 2.0–2.5</Code> and <Code>γ = 0.3–0.5</Code> as broadly effective, but these are starting points, not universal values. DPO's single <Code>β</Code> is easier to tune because the reference model absorbs much of the variation in log-probability scale across model families; SimPO's two-parameter space requires a small grid search per setup. Budget two to four short runs for hyperparameter validation before full training.
-      </Prose>
-
-      <Prose>
-        Batch size requirements are similar to DPO. SimPO needs both chosen and rejected responses in the same batch, which typically means effective batch sizes of 32–128 preference pairs depending on response length. Gradient accumulation compensates for small per-device batches.
-      </Prose>
-
-      <Prose>
-        Data quality scales cleanly: SimPO benefits from clean preference data with large quality gaps more than DPO does, because there is no reference anchor to dampen the gradient on ambiguous pairs. The same preference dataset that works fine for DPO may produce instability in SimPO if a significant fraction of pairs have near-equal quality chosen and rejected responses. Filtering to high-confidence pairs (if you have confidence scores from a reward model) improves SimPO results substantially.
-      </Prose>
-
-      <Prose>
-        Dataset size interacts with <Code>γ</Code> in a subtle way. With a small dataset — a few thousand preference pairs — the policy can memorize the training distribution and achieve large margins on all training pairs without generalizing. This is more dangerous in SimPO than DPO because there is no KL term proportional to the policy's divergence from its starting point to slow this down. On small datasets, set <Code>γ</Code> conservatively (0.2–0.3), use more aggressive learning rate decay, and evaluate on a held-out preference set at regular intervals. With large, diverse preference datasets (hundreds of thousands of pairs), SimPO's absence of a reference anchor becomes less of a liability — the diversity of the data itself provides implicit regularization.
-      </Prose>
-
-      <Prose>
-        Multi-epoch training also behaves differently under SimPO. DPO's reference model stays fixed across epochs, so the implicit reward signal remains consistent. SimPO's reward is computed entirely from the current policy, which means that as the policy improves over multiple epochs, the per-token log-probabilities change, and the effective reward scale shifts. In practice this means SimPO often benefits from fewer training epochs than DPO — one to two epochs is common — and extended training with a constant learning rate produces diminishing returns faster than DPO does.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>1. γ too small: reward collapse</H3>
-      <Prose>
-        When <Code>γ = 0</Code> or is set very small, even a tiny advantage of the chosen response over the rejected one satisfies the loss. The model learns to maintain a minimal margin and stops improving. Symptoms: the loss drops quickly to a low value, but win rates on held-out preference data do not improve and may degrade. Fix: increase <Code>γ</Code> in increments of 0.1 until the loss converges more slowly but win rates improve.
-      </Prose>
-
-      <H3>2. γ too large: no learning</H3>
-      <Prose>
-        When <Code>γ</Code> is set unrealistically high, the model never achieves the required margin and the loss gradient remains large throughout training, pushing the policy into degenerate solutions. Symptoms: training loss does not decrease past a certain floor; generation quality degrades and outputs become repetitive or incoherent. Fix: decrease <Code>γ</Code>.
-      </Prose>
-
-      <H3>3. Length normalization hides real quality differences</H3>
-      <Prose>
-        Per-token log-probability is a proxy for quality, not a direct measure. A model that produces a short but high-confidence wrong answer will have a high per-token log-probability. Length normalization prevents length bias but does not distinguish between "high confidence about correct content" and "high confidence about fluent but incorrect content." This is a fundamental limitation of any implicit-reward approach, not unique to SimPO, but worth flagging.
-      </Prose>
-
-      <H3>4. Sensitivity to preference data distribution</H3>
-      <Prose>
-        SimPO is more sensitive to the distribution of its preference data than DPO. DPO's reference model implicitly calibrates the reward scale: the log-ratio is small when the policy and reference agree, regardless of absolute log-probability magnitudes. SimPO's length-normalized log-probability depends directly on how the policy assigns probability mass, which varies with model size, architecture, and training data. Applying SimPO hyperparameters tuned on one dataset to a different dataset with different response lengths, vocabulary, or quality distribution often requires re-tuning.
-      </Prose>
-
-      <H3>5. Drift from SFT initialization without reference anchor</H3>
-      <Prose>
-        DPO's reference model provides a continuous KL-style penalty: as the policy drifts from its SFT starting point, the log-ratios grow and the implicit reward estimates change, creating implicit pressure to stay close. SimPO has no equivalent. A model trained for too many steps, at too high a learning rate, or on a small dataset will overfit the preference signal and produce outputs that are stylistically different from the SFT baseline in undesirable ways — excessive hedging, unusual formatting, or repetitive phrasing. Conservative learning rates (5e-7 to 2e-6) and early stopping based on held-out win rate are the main mitigations.
-      </Prose>
-
-      <H3>6. Harder to debug: no reference baseline</H3>
-      <Prose>
-        One underrated advantage of DPO is diagnostic: you can compute <Code>log(π_θ / π_ref)</Code> for any response and see whether the policy has moved in the intended direction relative to the starting point. SimPO has no such baseline. If training misbehaves, you are debugging with only the policy's own log-probabilities to inspect. A practical workaround: keep the SFT checkpoint available (it is not loaded during training) and compute log-probability comparisons offline after training completes.
-      </Prose>
-
-      <H3>7. β and γ interact non-trivially</H3>
-      <Prose>
-        The effective margin seen by the loss is <Code>β · (r_chosen - r_rejected) - γ</Code>, where each reward is already scaled by <Code>β</Code>. Doubling <Code>β</Code> while keeping <Code>γ</Code> fixed effectively halves the relative importance of the margin. When tuning, treat <Code>β</Code> and <Code>γ</Code> jointly: a useful diagnostic is to monitor the fraction of training pairs where the margin condition is already satisfied at initialization — if it's above 80%, <Code>γ</Code> is probably too small for this data.
-      </Prose>
-
-      <H3>8. Distribution shift in multi-turn or chain-of-thought datasets</H3>
-      <Prose>
-        SimPO was designed and evaluated on single-turn instruction-following preference data. Multi-turn conversations and chain-of-thought responses introduce a complication: the length distribution of chosen responses varies dramatically across turns, and the per-token log-probability signal can be dominated by the early turns of a conversation where the model has high confidence. A model that scores a strong first turn followed by a weak second turn may have a higher per-token average than a model that is uniformly good across all turns. This is not a fundamental limitation — it can be addressed by computing per-segment normalization — but out-of-the-box SimPO does not handle it, and applying it naively to multi-turn data often underperforms DPO on multi-turn evaluation benchmarks even when it outperforms on single-turn ones.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        All three papers below are WebSearch-verified as of April 2026.
-      </Prose>
-
-      <Prose>
-        <strong>Meng, Xia, Chen (2024). "SimPO: Simple Preference Optimization with a Reference-Free Reward."</strong> arXiv:2405.14734. NeurIPS 2024. The primary source for all SimPO claims in this topic. Introduces the length-normalized implicit reward and the target margin, and provides comparative results on AlpacaEval 2 and Arena-Hard. Reference implementation: github.com/princeton-nlp/SimPO.
-      </Prose>
-
-      <Prose>
-        <strong>Rafailov, Sharma, Mitchell, Ermon, Manning, Finn (2023). "Direct Preference Optimization: Your Language Model is Secretly a Reward Model."</strong> arXiv:2305.18290. NeurIPS 2023. The DPO paper that SimPO directly extends. Establishes the Bradley-Terry objective for preference learning without a separate reward model and introduces the frozen reference model as a KL anchor. Understanding DPO is a prerequisite for understanding SimPO.
-      </Prose>
-
-      <Prose>
-        <strong>Xu, Sharaf, Chen, Tan, Shen, Van Durme, Murray, Kim (2024). "Contrastive Preference Optimization: Pushing the Boundaries of LLM Performance in Machine Translation."</strong> arXiv:2401.08417. The CPO paper, which is the closest structural sibling to SimPO and the basis for TRL's <Code>CPOTrainer</Code>. Useful as a reference for reference-free preference optimization in a production training stack context.
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — derive the SimPO gradient</H3>
-      <Prose>
-        Write out the gradient of <Code>L_SimPO</Code> with respect to <Code>log π_θ(y_w|x)</Code>. Show that it is proportional to <Code>(β / |y_w|) · (1 - σ(margin))</Code>, where <Code>margin = (β/|y_w|)·logπ(y_w|x) - (β/|y_l|)·logπ(y_l|x) - γ</Code>. Interpret: when does the gradient saturate to zero, and why?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — why does length normalization introduce a different bias?</H3>
-      <Prose>
-        Length normalization removes the bias toward longer sequences in absolute log-probability. But dividing by <Code>|y|</Code> introduces a different bias: it favors sequences where the model is highly confident on every token — for example, short, formulaic, high-frequency phrases. Describe a concrete scenario where SimPO's per-token normalization would cause the model to prefer a lower-quality but more confidently-scored response over a higher-quality but more uncertain one. How would you detect this in practice?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — choosing γ from dataset statistics</H3>
-      <Prose>
-        You have a preference dataset. Before training, you compute the length-normalized log-probability gap <Code>(logπ_SFT(y_w|x)/|y_w|) - (logπ_SFT(y_l|x)/|y_l|)</Code> for every pair using the SFT model. The mean gap is 0.08 and the standard deviation is 0.15. What range of <Code>γ</Code> values would you propose exploring? Justify your answer by thinking about what fraction of pairs will have the margin condition already satisfied at initialization.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — predict behavior as β → 0</H3>
-      <Prose>
-        In the SimPO loss, let <Code>β → 0</Code> while keeping <Code>γ</Code> fixed. What happens to the loss value for all training pairs? What does the gradient approach? Now let <Code>β → 0</Code> while also scaling <Code>γ → 0</Code> such that <Code>γ/β = c</Code> for some constant <Code>c</Code>. Does this recover any known objective? What does this tell you about the role of <Code>β</Code> versus <Code>γ</Code> in controlling training?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — SimPO without a margin term</H3>
-      <Prose>
-        Set <Code>γ = 0</Code> in the SimPO loss. What probabilistic model does the resulting objective correspond to? Write down the Bradley-Terry preference probability it is maximizing. Now compare to the DPO loss with <Code>γ = 0</Code>: the two losses differ only in the reward parameterization — length-normalized log-prob vs log-ratio. If you ran both for a fixed number of steps on the same data, what systematic difference in output distribution would you expect, and why?
-      </Prose></div></section>
+      <Anchor id="10-primary-sources" />
+      <Sources
+        alternatives={
+          <>
+            <Prose>
+              <a href="https://rlhfbook.com/c/08-direct-alignment">
+                RLHF Book: Direct Alignment Algorithms
+              </a>{' '}
+              places reference-relative and reference-free objectives in a common sequence. Use it
+              after the local mean/margin derivation to compare assumptions, likelihood drift and
+              the questions a preference experiment should answer.
+            </Prose>
+            <Prose>
+              <a href="https://github.com/princeton-nlp/SimPO/blob/main/README.md">
+                The authors' SimPO implementation guide
+              </a>{' '}
+              connects initialization, margin-ratio settings, data formatting and generation
+              evaluation. Treat each recipe's parameters as settings for its stated model/data;
+              translate their units before using another trainer.
+            </Prose>
+            <Prose>
+              <a href="https://huggingface.co/docs/trl/cpo_trainer">The TRL CPO trainer guide</a>{' '}
+              maps preference data to a maintained trainer. Read its loss-specific options beside
+              the source when reproducing mean reduction, auxiliary NLL or an experimental import.
+              The supplied programs use one exact tested version.
+            </Prose>
+          </>
+        }
+      >
+        <li>
+          <a href="https://arxiv.org/html/2405.14734v3">
+            Meng et al., SimPO: Simple Preference Optimization with a Reference-Free Reward
+          </a>{' '}
+          — primary score, margin objective, comparisons and ablations. Section 2 defines the core
+          loss; experimental and appendix details qualify benchmark claims.
+        </li>
+        <li>
+          <a href="https://github.com/princeton-nlp/SimPO/blob/main/scripts/simpo_trainer.py">
+            Original SimPO trainer implementation
+          </a>{' '}
+          — response normalization and original gamma/beta-ratio convention. Match target masks and
+          reductions before treating another configuration as equivalent.
+        </li>
+        <li>
+          <a href="https://github.com/huggingface/trl/blob/v1.14.2/trl/experimental/cpo/cpo_trainer.py">
+            TRL 1.14.2 CPOTrainer source
+          </a>{' '}
+          — BOS/EOS preparation, mean scores, absolute margin, chosen NLL, loss composition and
+          strict logged reward accuracy used by the native program.
+        </li>
+        <li>
+          <a href="https://arxiv.org/html/2305.18290v3">
+            Rafailov et al., Direct Preference Optimization
+          </a>{' '}
+          — reference-relative regularized-objective derivation contrasted with the policy mean
+          here. Removing a reference and changing normalization changes its assumptions.
+        </li>
+        <li>
+          <a href="https://github.com/anthropics/hh-rlhf">Anthropic HH-RLHF data and license</a> —
+          original comparison source. The archive preserves exact selected text, source row/family
+          identities, hashes and MIT license for offline reproduction.
+        </li>
+      </Sources>
+      <section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+        <H2>15. What you can now do</H2>
+        <Prose>
+          You can construct genuine causal targets, distinguish sums from means, translate margin
+          units and derive token/shared-parameter gradients. You can explain why a margin does not
+          bound drift or certify generation quality, run controlled scratch and native programs, and
+          interpret mixed held-out and generation outcomes. Next,
+          <a href="/learn/path/full-curriculum/p-tuning-soft-prompt-methods?module=large-language-models">
+            {' '}
+            P-Tuning and Prompt Tuning
+          </a>{' '}
+          changes which parameters we train rather than only the objective. Carry the exact target,
+          state and evaluation discipline into those smaller trainable interfaces.
+        </Prose>
+      </section>
     </div>
   ),
 };

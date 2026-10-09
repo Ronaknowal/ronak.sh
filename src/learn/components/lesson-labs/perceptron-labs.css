@@ -1,21 +1,100 @@
+/* Neuron lesson: labs and figures read as part of the text (see lesson-flow.css).
+   Colour vocabulary (docs/teaching/deep-learning-beginner/visual-vocabulary.md):
+   cyan supplied inputs, amber learned parameters, violet computed values,
+   white outline operations; in value grids amber positive and blue negative. */
+.perceptron-lesson { --pos: #e8c36f; --pos-fill: #3b2f16; --neg: #83b4e8; --neg-fill: #18263a; --input: #7dd5e9; --computed: #c7a5ee; --muted: #b9b5af; }
 .perceptron-lesson .katex-display { overflow-x: auto; overflow-y: hidden; padding: .3rem 0; }
-.perceptron-panel,.perceptron-figure{margin:26px 0;padding:20px;border:1px solid var(--border-color,#3a3429);border-radius:10px;background:var(--bg-elevated,#181714);color:var(--text-primary,#e9e2d5);min-width:0}
-.perceptron-panel h3,.perceptron-figure h3{margin:0 0 14px;color:#e9d5a2;font-size:18px;line-height:1.45}
-.perceptron-kind{font-size:11px!important;color:#c9ae71;text-transform:uppercase;letter-spacing:.1em;margin:0 0 8px!important}
-.perceptron-panel p,.perceptron-figure p{line-height:1.65;font-size:14px}
-.perceptron-note{color:#bdb5a5;font-size:12px!important}
-.perceptron-grid-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
-.perceptron-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}
-.perceptron-control{display:grid;grid-template-columns:minmax(0,1fr) 78px;gap:7px;align-items:center;font-size:13px}.perceptron-control>output{text-align:right;font-variant-numeric:tabular-nums}.perceptron-control input[type=range]{min-width:0;width:100%;accent-color:#e2bc67;height:30px;padding:0}.perceptron-control input[type=text]{width:100%;box-sizing:border-box}
-.perceptron-panel button,.perceptron-panel select,.perceptron-panel input[type=text],.perceptron-figure button{background:#29261f;color:#eee4d0;border:1px solid #71603e;border-radius:5px;padding:8px 10px;font:inherit;min-height:38px}.perceptron-panel button:disabled{color:#988f7c;border-color:#494236;cursor:not-allowed}.perceptron-panel button[aria-pressed=true],.perceptron-figure button[aria-pressed=true]{background:#544321;border-color:#e2bc67;color:#fff4d9}.perceptron-panel :is(button,input,select):focus-visible,.perceptron-figure button:focus-visible{outline:2px solid #f0c971;outline-offset:3px}
-.perceptron-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:14px 0}.perceptron-error{grid-column:1/-1;color:#ffb5a5;font-size:12px!important;margin:0!important}
-.perceptron-readout{padding:12px;border-left:3px solid #d7b86e;background:#252218;line-height:1.7;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.perceptron-table{overflow:auto;max-width:100%;margin:18px 0}.perceptron-table table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.5}.perceptron-table caption{text-align:left;color:#cfbb92;padding:0 0 9px}.perceptron-table th,.perceptron-table td{padding:8px;text-align:left;border-bottom:1px solid #3d372b;font-variant-numeric:tabular-nums;vertical-align:top}.perceptron-table th{color:#e5d4b2}.perceptron-table:focus-visible{outline:2px solid #e2bc67}
-.perceptron-plot{margin:0;min-width:0}.perceptron-plot figcaption{font-size:13px;font-weight:600;line-height:1.5;margin:0 0 10px;color:#d9c9a4}.perceptron-chart{display:block;width:100%;height:auto;max-width:430px;margin:auto;overflow:visible}.perceptron-chart text{fill:#d8cebb;font:12px system-ui,sans-serif}.perceptron-grid{stroke:#464036;stroke-width:1;fill:none}.perceptron-line{fill:none;stroke-width:2.2;stroke:#e8c36f;stroke-linejoin:round}.perceptron-guide{stroke:#e2d4b0;stroke-width:1;stroke-dasharray:4 4}.perceptron-dot{fill:#edcf87;stroke:#151412;stroke-width:1.5}.perceptron-line.color-0{stroke:#e8c36f}.perceptron-line.color-1{stroke:#80c6b4}.perceptron-line.color-2{stroke:#c49be2}.perceptron-line.color-3{stroke:#e99b88}.perceptron-line.color-4{stroke:#9bb9ec}.perceptron-line.color-5{stroke:#cfcea0}
-.perceptron-bar-row{display:grid;grid-template-columns:84px minmax(0,1fr) 55px;gap:8px;align-items:center;margin:12px 0;font-size:12px}.perceptron-bar-track{height:19px;position:relative;background:#24221c}.perceptron-bar-zero{position:absolute;left:50%;height:100%;width:1px;background:#a4987d}.perceptron-bar-fill{position:absolute;height:13px;top:3px;background:#e8c36f}.perceptron-bar-fill.color-1{background:#80c6b4}.perceptron-bar-fill.color-2{background:#c49be2}
-.perceptron-flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:18px 0}.perceptron-node{flex:1 1 130px;background:#26231d;border:1px solid #655638;border-radius:6px;padding:12px;line-height:1.65;font-size:13px}.perceptron-node.is-active{border-color:#f0c971;background:#393021}.perceptron-node strong{display:block;color:#e5c678}.perceptron-arrow{align-self:center;color:#c0a66e}.perceptron-legend{display:flex;flex-wrap:wrap;gap:8px 15px;font-size:12px;margin:10px 0}.perceptron-legend span:before{content:'';display:inline-block;width:17px;height:3px;background:var(--series-color);vertical-align:middle;margin-right:5px}
-.perceptron-digit{display:grid;grid-template-columns:repeat(8,1fr);aspect-ratio:1;width:160px;max-width:100%;border:1px solid #aa956d;gap:1px;background:#555}.perceptron-digit span{aspect-ratio:1}.perceptron-pixels{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px;font-size:11px;max-width:430px}.perceptron-pixels span{background:#302c22;padding:5px 2px;text-align:center}.perceptron-pixels span.first-row{outline:1px solid #d6b567}.perceptron-pixels small{display:block;color:#bbac8d;font-size:9px}.perceptron-count-track{height:18px;position:relative;background:#302b21;margin:7px 0;border:1px solid #675633}.perceptron-count-track span{position:absolute;height:100%;background:#d9b965}.perceptron-counts{display:grid;grid-template-columns:90px 1fr 55px;gap:10px;align-items:center;font-size:12px}.perceptron-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-@media(max-width:620px){.perceptron-grid-two,.perceptron-controls{grid-template-columns:1fr}.perceptron-panel,.perceptron-figure{padding:14px 10px}.perceptron-bar-row{grid-template-columns:70px minmax(0,1fr) 49px}.perceptron-node{flex-basis:100%}.perceptron-arrow{display:none}.perceptron-chart text{font-size:16px}.perceptron-table th,.perceptron-table td{padding:7px 5px}.perceptron-counts{grid-template-columns:79px 1fr 52px}}
 
-.perceptron-thumbnail{display:grid;grid-template-columns:repeat(8,1fr);width:48px;aspect-ratio:1;margin:auto auto 7px}.perceptron-thumbnail span{aspect-ratio:1}.perceptron-source-id{display:block;font-size:10px;color:#c7b797}
-@media(max-width:620px){.perceptron-table caption{max-width:calc(100vw - 68px)}}
+/* Labs and figures: spacing, controls, readouts and column collapse come from lesson-flow.css. */
+.flow-lab > p, .perceptron-lesson figure > p { line-height: 1.75; }
+.lesson-flow .perceptron-plot { margin: 0; }
+.perceptron-plot figcaption { font-size: .85rem; color: var(--muted); margin: 0 0 .35rem; }
+.perceptron-note { color: var(--muted); font-size: .9rem; line-height: 1.65; }
+
+/* Tables are a representation in their own right (task definitions, measured results). */
+.perceptron-table { overflow: auto; max-width: 100%; margin: 1rem 0; }
+.perceptron-table table { width: 100%; border-collapse: collapse; font-size: .9rem; line-height: 1.5; }
+.perceptron-table caption { text-align: left; color: var(--muted); padding: 0 0 .5rem; font-size: .9rem; }
+.perceptron-table th, .perceptron-table td { padding: .45rem .6rem; text-align: left; border-bottom: 1px solid #333; font-variant-numeric: tabular-nums; vertical-align: top; }
+.perceptron-table th { color: #e8e3d8; font-weight: 600; }
+.perceptron-table:focus-visible { outline: 2px solid #e2bc67; }
+
+/* Charts */
+.perceptron-chart { display: block; width: 100%; height: auto; max-width: 440px; margin: auto; overflow: visible; }
+.perceptron-chart text { fill: #d8d3cc; font: 12px system-ui, sans-serif; }
+.perceptron-chart text.perceptron-curve-label { font-weight: 600; }
+.perceptron-chart text.perceptron-point-label { fill: #f3d48f; font-weight: 600; }
+.perceptron-grid { stroke: #3b3b3b; stroke-width: 1; fill: none; }
+.perceptron-line { fill: none; stroke-width: 2.2; stroke: #e8c36f; stroke-linejoin: round; }
+.perceptron-guide { stroke: #d8d3cc; stroke-width: 1; stroke-dasharray: 4 4; }
+.perceptron-dot { fill: #f3d48f; stroke: #141414; stroke-width: 1.5; }
+.perceptron-line.color-0 { stroke: #e8c36f; } .perceptron-line.color-1 { stroke: #83b4e8; } .perceptron-line.color-2 { stroke: #c49be2; }
+.perceptron-line.color-3 { stroke: #e99b88; } .perceptron-line.color-4 { stroke: #d8d3cc; } .perceptron-line.color-5 { stroke: #7dd5e9; }
+.perceptron-boundary-line { stroke: #f3eee2; stroke-width: 2.4; }
+
+/* Signed bars: colour follows the sign of the value. */
+.perceptron-bar-row { display: grid; grid-template-columns: minmax(3.5rem, max-content) minmax(3rem, 1fr) minmax(2.5rem, max-content); gap: .5rem; align-items: center; margin: .6rem 0; font-size: .9rem; }
+.perceptron-bar-track { height: 1.1rem; position: relative; background: #1c1c1c; }
+.perceptron-bar-zero { position: absolute; left: 50%; height: 100%; width: 1px; background: #8f8a80; }
+.perceptron-bar-fill { position: absolute; height: .75rem; top: .175rem; }
+.perceptron-bar-fill.is-positive { background: var(--pos); }
+.perceptron-bar-fill.is-negative { background: var(--neg); }
+.perceptron-bar-row strong { font-variant-numeric: tabular-nums; text-align: right; }
+
+/* Digit images and their flattened vector. */
+.perceptron-digit { display: grid; grid-template-columns: repeat(8, 1fr); aspect-ratio: 1; width: 160px; max-width: 100%; gap: 1px; background: #555; }
+.perceptron-digit span { aspect-ratio: 1; }
+.perceptron-pixels { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 3px; font-size: .75rem; max-width: 440px; }
+.perceptron-pixels span { background: #1f1f1f; padding: 4px 2px; text-align: center; font-variant-numeric: tabular-nums; }
+.perceptron-pixels span.first-row { outline: 1px solid #d6b567; }
+.perceptron-pixels small { display: block; color: var(--muted); font-size: .6rem; }
+.perceptron-thumbnail { display: grid; grid-template-columns: repeat(8, 1fr); width: 40px; aspect-ratio: 1; margin: 0 auto 4px; }
+.perceptron-thumbnail span { aspect-ratio: 1; }
+.digit-picker button { display: grid; justify-items: center; gap: 2px; padding: .35rem .45rem !important; font-size: .8rem; }
+
+/* Measured counts on a labelled truncated axis. */
+.perceptron-counts { display: grid; grid-template-columns: 6rem minmax(0, 1fr) 3.5rem; gap: .6rem; align-items: center; font-size: .9rem; margin: .3rem 0; }
+.perceptron-count-track { height: 1rem; position: relative; border-bottom: 1px solid #555; }
+.perceptron-count-track span { position: absolute; top: .1rem; width: .8rem; height: .8rem; margin-left: -.4rem; border-radius: 50%; background: #f3d48f; }
+.perceptron-count-axis { display: grid; grid-template-columns: 6rem minmax(0, 1fr) 3.5rem; gap: .6rem; font-size: .75rem; color: var(--muted); }
+.perceptron-count-axis div { display: flex; justify-content: space-between; }
+
+.perceptron-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+@media (max-width: 620px) {
+  .perceptron-chart text { font-size: 15px; }
+  .perceptron-table th, .perceptron-table td { padding: .4rem .35rem; }
+  .perceptron-counts, .perceptron-count-axis { grid-template-columns: 4.5rem minmax(0, 1fr) 3rem; }
+  .perceptron-table caption { max-width: calc(100vw - 68px); }
+}
+
+/* SwiGLU as a structure: values (violet text), operations (white outline), learned matrices tagged. */
+.swiglu-diagram { display: grid; justify-items: center; gap: .25rem; }
+.swiglu-branches { --swiglu-gap: 1.5rem; display: grid; grid-template-columns: repeat(2, minmax(0, 15rem)); column-gap: var(--swiglu-gap); row-gap: 0; }
+.swiglu-merge, .swiglu-input { display: grid; justify-items: center; gap: .2rem; text-align: center; }
+/* One input forks into both branches; both branches run down to one join that feeds the merge. */
+.swiglu-branch { display: flex; flex-direction: column; align-items: center; gap: .2rem; text-align: center; }
+.swiglu-branch::after { content: ''; flex: 1 1 auto; min-height: .6rem; border-left: 1.5px solid #9a958c; }
+.swiglu-fork, .swiglu-join { grid-column: 1 / -1; position: relative; height: .7rem; margin-inline: calc((100% - var(--swiglu-gap)) / 4); border: 1.5px solid #9a958c; }
+.swiglu-fork { border-bottom: 0; margin-top: .6rem; }
+.swiglu-join { border-top: 0; margin-bottom: .6rem; }
+.swiglu-fork::before, .swiglu-join::after { content: ''; position: absolute; left: calc(50% - .75px); height: .6rem; border-left: 1.5px solid #9a958c; }
+.swiglu-fork::before { bottom: 100%; }
+.swiglu-join::after { top: 100%; }
+.swiglu-op { border: 1.5px solid #f3eee2; border-radius: 10px; padding: .3rem .8rem; font-size: .92rem; }
+.swiglu-op small { color: #f1c76c; margin-left: .3rem; font-size: .75rem; }
+.swiglu-value { color: #c7a5ee; font-variant-numeric: tabular-nums; font-size: .92rem; }
+.swiglu-value.is-input { color: #7dd5e9; }
+.swiglu-arrow { color: #9a958c; line-height: 1; }
+.swiglu-note { color: #b9b5af; font-size: .8rem; }
+.swiglu-diagram > figcaption { justify-self: stretch; }
+@media (max-width: 460px) { .swiglu-branches { --swiglu-gap: .6rem; grid-template-columns: repeat(2, minmax(0, 1fr)); } .swiglu-value, .swiglu-op { font-size: .8rem; } }
+/* Investigation D: below a narrow lab width (in rem, so 200% text also triggers it) the
+   four corners read as one line each instead of a table whose residual column would scroll away. */
+.xor-repair-rows { display: none; list-style: none; padding: 0; margin: .75rem 0; }
+.xor-repair-rows li { padding: .35rem 0 .35rem .75rem; margin-bottom: .35rem; border-left: 3px solid #5a5a5a; font-variant-numeric: tabular-nums; }
+.xor-repair-rows b { color: #f3d48f; font-weight: 600; }
+@container (max-width: 30rem) {
+  #perceptron-xor-lab .perceptron-table { display: none; }
+  #perceptron-xor-lab .xor-repair-rows { display: block; }
+}

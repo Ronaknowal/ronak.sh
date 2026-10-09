@@ -1,0 +1,435 @@
+{
+  "status": "ROOT_SECTION9_COMPOSED_PARTIAL_CONTENT_NOT_ACCEPTED",
+  "date": "2026-10-09T10:49:14.399Z",
+  "packet": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\section-nine-handoff.json",
+    "bytes": 7845,
+    "sha256": "c06b82f667edfe96f49353707c1b5422bc1b6fd0206fa018615b3564fb33c53e"
+  },
+  "predecessor": {
+    "status": "PARTIAL_CONTENT_IN_PROGRESS_NOT_AUTHOR_READY",
+    "scope": "Complete accepted design still requires19 sections,66 drawing specifications,12 new computational routes and24 solved tasks",
+    "current": {
+      "sections": [
+        {
+          "position": 1,
+          "title": "Build one observation from positive amounts"
+        },
+        {
+          "position": 2,
+          "title": "Amount is not probability or identity"
+        },
+        {
+          "position": 3,
+          "title": "Measure the disagreement before choosing a loss"
+        },
+        {
+          "position": 4,
+          "title": "Encode a new row with the dictionary held fixed"
+        },
+        {
+          "position": 5,
+          "title": "Change one coordinate, then reuse the arithmetic"
+        },
+        {
+          "position": 6,
+          "title": "Fit both factors and decide when to stop"
+        },
+        {
+          "position": 7,
+          "title": "Explain the multiplicative route"
+        },
+        {
+          "position": 8,
+          "title": "Why the upper bound gives a safe step"
+        }
+      ],
+      "figures": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D10",
+        "D11",
+        "D12",
+        "D13",
+        "D14",
+        "D15",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22",
+        "D23",
+        "D24",
+        "D25",
+        "D26",
+        "D27",
+        "D28",
+        "D29",
+        "D30"
+      ],
+      "wholeSources": [
+        {
+          "name": "nmf_arrays.py",
+          "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+        },
+        {
+          "name": "nmf_coordinate.py",
+          "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+        },
+        {
+          "name": "nmf_nnls.py",
+          "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+        },
+        {
+          "name": "nmf_multiplicative.py",
+          "sha256": "56d22f18907297f5c1239e31e98071e6bde0d33c5d2c5a1cbc9aa92546c210f9"
+        },
+        {
+          "name": "nmf_beta_mm.py",
+          "sha256": "92fa782d807217caa2edb033b22ad9ccfab207d6497a7ef0cc15cd600eb81815"
+        }
+      ]
+    },
+    "template": {
+      "file": "lesson-template.md",
+      "sha256": "578797ce61edd2dedcec739190ad803f858bb10030451b3bf12bab05cc67a827"
+    },
+    "manuscript": {
+      "file": "lesson.md",
+      "sha256": "ad04a180d3b005b8df5d52876bc700247b436ecbfa63d65666fb19141f2ab9a9",
+      "bytes": 94752
+    },
+    "composer": {
+      "file": "compose-content.mjs",
+      "sha256": "e926c5ff9d23f22c62662dad2a06efa65428209ee554a2051d34f8c021b10d67"
+    },
+    "limitations": [
+      "No runtime figures or labs implemented",
+      "No independent whole-content review or content acceptance",
+      "Sections9–19 and computational routesN6–N12 still to be authored",
+      "Figure markers refer to the accepted drawing contracts plus explicit content-phase additions, not painted native evidence"
+    ]
+  },
+  "current": {
+    "status": "PARTIAL_CONTENT_IN_PROGRESS_NOT_AUTHOR_READY",
+    "scope": "Complete accepted design still requires19 sections,66 drawing specifications,12 new computational routes and24 solved tasks",
+    "current": {
+      "sections": [
+        {
+          "position": 1,
+          "title": "Build one observation from positive amounts"
+        },
+        {
+          "position": 2,
+          "title": "Amount is not probability or identity"
+        },
+        {
+          "position": 3,
+          "title": "Measure the disagreement before choosing a loss"
+        },
+        {
+          "position": 4,
+          "title": "Encode a new row with the dictionary held fixed"
+        },
+        {
+          "position": 5,
+          "title": "Change one coordinate, then reuse the arithmetic"
+        },
+        {
+          "position": 6,
+          "title": "Fit both factors and decide when to stop"
+        },
+        {
+          "position": 7,
+          "title": "Explain the multiplicative route"
+        },
+        {
+          "position": 8,
+          "title": "Why the upper bound gives a safe step"
+        },
+        {
+          "position": 9,
+          "title": "Initialize without silently importing PCA centering"
+        }
+      ],
+      "figures": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D08",
+        "D09",
+        "D10",
+        "D11",
+        "D12",
+        "D13",
+        "D14",
+        "D15",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D21",
+        "D22",
+        "D23",
+        "D24",
+        "D25",
+        "D26",
+        "D27",
+        "D28",
+        "D29",
+        "D30",
+        "D31",
+        "D32",
+        "D33",
+        "D34"
+      ],
+      "wholeSources": [
+        {
+          "name": "nmf_arrays.py",
+          "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+        },
+        {
+          "name": "nmf_coordinate.py",
+          "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+        },
+        {
+          "name": "nmf_nnls.py",
+          "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+        },
+        {
+          "name": "nmf_multiplicative.py",
+          "sha256": "56d22f18907297f5c1239e31e98071e6bde0d33c5d2c5a1cbc9aa92546c210f9"
+        },
+        {
+          "name": "nmf_beta_mm.py",
+          "sha256": "92fa782d807217caa2edb033b22ad9ccfab207d6497a7ef0cc15cd600eb81815"
+        },
+        {
+          "name": "nmf_initialization.py",
+          "sha256": "1b6696a60871fcc092e7e5d2232f2d0d09ff19b6eb964d9b35ba3c12e87b7cde"
+        }
+      ]
+    },
+    "template": {
+      "file": "lesson-template.md",
+      "sha256": "e0a772df15cec465925b1360b4257f4e54022e61f38d03d2d8486c7052ca1e9d"
+    },
+    "manuscript": {
+      "file": "lesson.md",
+      "sha256": "3d3ee37260de3643c965651b1cb55796861eaade098f924f3d6f515549a22f99",
+      "bytes": 122731
+    },
+    "composer": {
+      "file": "compose-content.mjs",
+      "sha256": "4ac425ddb8764af2e31be2ccbc28ba9daf1022d479275ef3d5756df72c2e58e0"
+    },
+    "limitations": [
+      "No runtime figures or labs implemented",
+      "No independent whole-content review or content acceptance",
+      "Sections10–19 and computational routesN7–N12 still to be authored",
+      "Figure markers refer to the accepted drawing contracts plus explicit content-phase additions, not painted native evidence"
+    ]
+  },
+  "conditions": [
+    {
+      "name": "Scoped input unchanged: nmf_initialization.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: section-nine-template.md",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: section-nine.md",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: README.md",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: check-initialization.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: initialization-checks.json",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: initialization-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: initialization-main.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: section-nine-author-checks.json",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: freeze-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: nmf_initialization.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: nmf_multiplicative.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped input unchanged: check-initialization.py",
+      "passed": true
+    },
+    {
+      "name": "Original129 conditions passed; retained, not replayed",
+      "passed": true
+    },
+    {
+      "name": "Current template matches previous partial assembly",
+      "passed": true
+    },
+    {
+      "name": "Current manuscript matches previous partial assembly",
+      "passed": true
+    },
+    {
+      "name": "Eight actual sections precede this addition",
+      "passed": true
+    },
+    {
+      "name": "Section9 is not already present",
+      "passed": true
+    },
+    {
+      "name": "Scoped section has exactly one ninth section",
+      "passed": true
+    },
+    {
+      "name": "Composer has the exact predecessor limitation",
+      "passed": true
+    },
+    {
+      "name": "Source-only composition exits0",
+      "passed": true
+    },
+    {
+      "name": "Entire prior eight-section manuscript prefix conserved",
+      "passed": true
+    },
+    {
+      "name": "Nine sections are consecutive",
+      "passed": true
+    },
+    {
+      "name": "All34 figure markers are ordered and unique",
+      "passed": true
+    },
+    {
+      "name": "Six complete actual local sources included",
+      "passed": true
+    },
+    {
+      "name": "Full initializer literal body appears exactly once",
+      "passed": true
+    },
+    {
+      "name": "Whole scoped prose/code conserved except shared code-title affordance",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: nmf_initialization.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: section-nine-template.md",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: section-nine.md",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: README.md",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: check-initialization.py",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: initialization-checks.json",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: initialization-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: initialization-main.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: section-nine-author-checks.json",
+      "passed": true
+    },
+    {
+      "name": "Scoped handoff conserved after assembly: freeze-section.mjs",
+      "passed": true
+    }
+  ],
+  "composition": {
+    "exitCode": 0,
+    "stdout": "{\"sections\":9,\"figures\":34,\"wholeSources\":6,\"bytes\":122731,\"status\":\"PARTIAL_CONTENT_IN_PROGRESS_NOT_AUTHOR_READY\"}\n",
+    "stderr": ""
+  },
+  "rootReading": "Whole section9 literal manuscript/program read before composition, then all D31–D34 actionable specifications, retained actual stdout/empty stderr and the accepted N6/D31–D34 scope. This is scoped author intake, not independent whole-topic review.",
+  "scientificExecutions": 0,
+  "runtimeImplemented": false,
+  "phasePromotion": false,
+  "remaining": "Sections10–19/routesN7–N12, complete practice/resources/file mapping, whole author and DIFFERENT content review; all runtime/native/normal integration remain pending."
+}

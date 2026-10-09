@@ -1,0 +1,9 @@
+fit/cal/test: 885 1152 20634
+Baseline         q=0.95 alerts= 4416 inside=1379 outside=3037 windows=4/4
+Baseline         q=0.99 alerts= 1461 inside=1016 outside= 445 windows=4/4
+Isolation Forest q=0.95 alerts=10530 inside=1722 outside=8808 windows=4/4
+Isolation Forest q=0.99 alerts= 1548 inside= 971 outside= 577 windows=4/4
+One-Class SVM    q=0.95 alerts= 9719 inside=1347 outside=8372 windows=4/4
+One-Class SVM    q=0.99 alerts= 9232 inside=1319 outside=7913 windows=4/4
+LOF novelty      q=0.95 alerts= 8771 inside=1275 outside=7496 windows=4/4
+LOF novelty      q=0.99 alerts= 7837 inside=1138 outside=6699 windows=4/4

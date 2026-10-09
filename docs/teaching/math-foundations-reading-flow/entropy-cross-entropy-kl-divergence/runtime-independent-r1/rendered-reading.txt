@@ -1,0 +1,3408 @@
+Learn
+→
+Mathematical & Statistical Foundations
+→
+Entropy, Cross-Entropy & KL Divergence
+Module: Mathematical & Statistical Foundations
+Entropy, Cross-Entropy & KL Divergence
+FOUNDATION
+PUBLISHED
+Specialist branch
+~110 min read + 3 h practice
+
+LEARNING COMPASS
+
+14 sections
+
+A device sends status symbols. Some occur often; others rarely. Can short binary messages exploit that pattern? A prediction model has a related problem: what does it cost to believe the wrong pattern? Follow the same four outcomes through their probabilities, codewords and prediction costs, then use that accounting to compare models and certify a constrained distribution.
+
+On a first pass, read sections 1–4, the basic bound and direction in 5, then conditional prediction and practical scoring in 6–7. Try the related practice before returning to the deeper coding proof and sections 8–9. The drawings and live investigations work here; complete Python files run in your own environment. Most use the standard library. The explicitly named comparisons use NumPy/SciPy or PyTorch. Printed decimals are rounded and their tested environments are stated beside the programmes.
+
+Before you start
+Using the examples and labs
+
+IN THIS LESSON
+
+1.
+Start with a message and its surprise
+2.
+Average over what actually happens
+3.
+Turn information into actual binary words
+4.
+Let one distribution supply outcomes and another supply prices
+5.
+Prove the bound and respect the direction
+6.
+Predict with the information you have
+7.
+Compute and interpret log loss
+8.
+Change continuous units without changing the experiment
+9.
+Use KL to certify a maximum-entropy model
+10.
+Practise with new distributions and decisions
+—
+What you should now be able to do
+—
+Further learning
+—
+Technical references
+—
+Next: what does an observation tell us about another variable?
+1. Start with a message and its surprise
+
+Our device can send A, B, C or D. The source describes how frequently each would occur over repeated draws.
+
+E01 A law and one constructed message
+● A
+■ B
+▲ C
+◆ D
+
+Probability law: one whole divided into eight equal cells
+
+A
+B
+C
+D
+A 0.5
+B 0.25
+C 0.125
+D 0.125
+A
+A
+A
+A
+B
+B
+C
+D
+
+One deliberately constructed message; each cell is an indexed observation.
+
+A
+1
+A
+2
+A
+3
+A
+4
+B
+5
+B
+6
+C
+7
+D
+8
+
+A occupies half the probability strip, B a quarter, and C and D an eighth each. Together the masses sum to one. A distribution assigns such probabilities to the possible outcomes. We write P(x) for the mass of outcome x under source P. The letters name categories; A is not numerically closer to B than to D. The strip describes the law, not a promise that every eight-symbol message will contain exactly four As.
+
+Each time we halve a probability, we need one more equally weighted binary choice to identify that outcome.
+
+E02 Three halvings isolate one of eight
+0
+1 probability
+1
+½ probability
+2
+¼ probability
+3
+⅛ probability
+
+Left index: binary depth, in bits. Probability ticks are logarithmically spaced: each row halves the selected set.
+
+Probability 1/2 corresponds to one such choice,1/4 to two and 1/8 to three. A logarithm reverses the power: because 2⁻³=1/8, −log₂(1/8)=3. We call −log₂P(x) the outcome's surprisal, measured in bits. At this point “bit” names an information unit; it does not yet guarantee an integer number of transmitted digits.
+
+1. Start with a message and its surprise
+
+Outcome	P(x)	−log₂P(x)
+A	1/2	1 bit
+B	1/4	2 bits
+C	1/8	3 bits
+D	1/8	3 bits
+
+Why should information use a logarithm? Follow two choices along one path.
+
+E03 Conditional branches multiply; their information adds
+
+Two equally likely choices, followed by four equally likely choices.
+
+½
+½
+¼
+⅛
+
+Selected path: ½ × ¼ = ⅛; 1 + 2 = 3 bits.
+
+A different experiment: copy the first fair bit.
+
+½
+0
+1
+00
+½
+1
+1
+11
+
+For 00: ½ × 1 = ½; 1 + 0 = 1 bit. No new branch choice is made by the copy.
+
+An independent first event has probability 1/2 and the second 1/4. Their joint probability is 1/8; their information adds as 1+2=3 bits. The product rule and logarithm rule agree:
+
+𝐼
+𝑃
+(
+𝑥
+)
+=
+−
+log
+⁡
+𝑏
+𝑃
+(
+𝑥
+)
+,
+−
+log
+⁡
+𝑏
+(
+𝑝
+𝑞
+)
+=
+−
+log
+⁡
+𝑏
+𝑝
+−
+log
+⁡
+𝑏
+𝑞
+.
+I
+P
+	​
+
+(x)=−log
+b
+	​
+
+P(x),−log
+b
+	​
+
+(pq)=−log
+b
+	​
+
+p−log
+b
+	​
+
+q.
+
+The log identity holds for positive p and q. Using pq as a joint probability needs independence. In a dependent process, the second branch instead has its probability conditional on the first: P(x,y)=P(x)P(y|x). A second copy of an already known bit supplies no new information; its conditional probability is one.
+
+Information has a unit because we choose the logarithm's base.
+
+E04 Two rulers for the same event
+0
+1
+2
+3
+0
+0.693
+1.386
+2.079
+
+Top: bits. Bottom: nats. Each aligned pair denotes the same probability.
+
+p = ½ → 1 bit
+→
+¼ → 2
+→
+⅛ → 3
+→
+…
+↗
+
+As positive p approaches zero, surprisal has no finite upper endpoint.
+
+Base 2 gives bits. The natural logarithm, ln with base e, gives nats. One bit equals ln 2≈.693147 nats; divide nats by ln 2 to express the same amount in bits. The two rulers identify the same probability with different numerical units. Keep the base consistent within a sum or comparison.
+
+An outcome assigned probability 1 has zero surprise. As a positive probability approaches zero its surprise grows without bound. Observing something the model assigned probability 0 contradicts that exclusion and has infinite model surprise. “Surprising” here means improbable under a stated model. It does not measure emotional significance, usefulness, truth or how random a string looks.
+
+Checkpoint. A model assigns probability 1 to A and 0 to B. What does observing each one reveal?
+
+Compare your reasoning
+2. Average over what actually happens
+
+One rare outcome can be very surprising while making only a small contribution to an average. Weight its price by how often it occurs.
+
+E05 Areas add to the weighted average
+
+A: width 0.5 × price 1 = 0.5 bits
+
+0
+p = 1
+
+B: width 0.25 × price 2 = 0.5 bits
+
+0
+p = 1
+
+C: width 0.125 × price 3 = 0.375 bits
+
+0
+p = 1
+
+D: width 0.125 × price 3 = 0.375 bits
+
+0
+p = 1
+
+Every rectangle uses the same horizontal 0–1 probability ruler and vertical 0–4 bit price ruler.
+
+Summed contributions: total 1.75 bits
+
+A
+B
+C
+D
+A 0.5
+B 0.5
+C 0.375
+D 0.375
+
+The unweighted mean 2.25 gives each category one quarter of the weight; that describes a different law.
+
+Each rectangle has width P(x), height −log₂P(x), and area equal to their product. A contributes .5×1=.5 bit per draw; B contributes .25×2=.5; C and D each contribute .125×3=.375. The four areas sum to 1.75 bits per symbol. Giving every category equal weight would incorrectly produce(1+2+3+3)/4=2.25.
+
+Shannon entropy is this expected surprisal when the same distribution supplies both frequencies and prices:
+
+𝐻
+𝑏
+(
+𝑃
+)
+=
+𝐸
+𝑋
+∼
+𝑃
+[
+−
+log
+⁡
+𝑏
+𝑃
+(
+𝑋
+)
+]
+=
+−
+∑
+𝑥
+𝑃
+(
+𝑥
+)
+log
+⁡
+𝑏
+𝑃
+(
+𝑥
+)
+.
+H
+b
+	​
+
+(P)=E
+X∼P
+	​
+
+[−log
+b
+	​
+
+P(X)]=−
+x
+∑
+	​
+
+P(x)log
+b
+	​
+
+P(x).
+
+Expectation means multiply by the probability and add. Entropy concerns uncertainty before the draw, rather than the surprise of one particular outcome.
+
+A biased coin makes the distinction particularly clear.
+
+E06 Investigate a biased coin
+● Heads
+■ Tails
+
+Heads: width 0.9 × price 0.152 = 0.1368 bits
+
+0
+p = 1
+
+Tails: width 0.1 × price 3.32193 = 0.33219 bits
+
+0
+p = 1
+
+Every rectangle uses the same horizontal 0–1 probability ruler and vertical 0–4 bit price ruler.
+
+Vertical: H, bits.
+Horizontal: heads probability.
+
+0
+1
+1
+
+H = 0.468996 bits. Weighted heads 0.136803 + weighted tails 0.332193.
+
+Heads probability: 0.9
+Swap heads and tails probabilities
+Reset investigation
+
+At heads probability .9, a rare tail has about 3.322 bits of surprise but occurs only .1 of the time. Its weighted contribution is about .3322. Heads contributes about .1368, giving entropy .468996 bits. Change the heads probability in the investigation: the picture separates each outcome's price from its contribution, then locates their total on the entropy curve. Swapping .9 and .1 changes which outcome is rare but leaves the total unchanged. A fair coin has one bit.
+
+The following complete standard-library programme computes that average. Save it as entropy_coin.py and run python entropy_coin.py. It was executed in the retained Python 3.12 verification; this lesson preserves that source and rounded result.
+
+entropy_coin.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_coin.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_coin.py
+
+Output:
+
+entropy_coin.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_coin.py.stdout.txt
+
+The two terms directly match the two contribution rectangles. This small fixture uses positive probabilities. At a boundary, the entropy sum uses the limit 0log0=0; it does not evaluate log0 or pretend that the excluded event's surprise is zero. A distribution certain of one outcome has entropy 0. For m equally likely outcomes every price is log_b m, so the weighted average is also log_b m. Section 5 will prove that no finite distribution on those m labels has greater entropy.
+
+Deeper: why mixing laws can create uncertainty
+
+Compare two certain but different outcomes with a random choice between their laws.
+
+E07 A single summand and a mixed law
+
+Single summand g(p) = −p ln p, in nats.
+
+Vertical: g, nats [0 to 0.4].
+Horizontal: p.
+
+0
+1
+
+Binary entropy H₂(p), in bits. Mixing the two certain laws gives the fair law.
+
+Vertical: H₂, bits.
+Horizontal: p.
+
+0
+½
+1
+
+The endpoint chord is zero; its midpoint mixture has entropy 1 bit.
+
+Each certain law has entropy 0, but an equal mixture of them is a fair bit with entropy 1. The curve lies above the chord joining the component entropies. More generally entropy is concave in a finite probability vector. The summand g(p)=−p ln p has second derivative−1/p for p>0; summing these concave terms preserves concavity, and the continuous endpoint limit handles zero masses. Mixing laws and averaging their separate uncertainty are different operations.
+
+3. Turn information into actual binary words
+
+We now need an actual message the receiver can decode. Assign a binary string to each status symbol.
+
+E08 Leaves are complete codewords
+● A
+■ B
+▲ C
+◆ D
+0
+1
+0
+1
+0
+1
+A
+B
+C
+D
+
+C follows 1 → 1 → 0. A leaf ends the word; decoding restarts at the root.
+
+0
+A
+1
+B
+
+Collision: A = 0 is already complete when B = 01 still requires another digit.
+
+The root is the start of a word. A0-edge or 1-edge chooses a branch. The leaves name A=0, B=10, C=110 and D=111. A codeword is the complete bit string from root to its leaf. This code is prefix-free: no complete word is the beginning of another complete word. An internal node therefore cannot also be a symbol leaf. The receiver must know this same codebook.
+
+Follow a full stream and see where the receiver can emit a symbol.
+
+E09 Encode completely, then inspect the decoder
+● A
+■ B
+▲ C
+◆ D
+
+Complete encoded message (14 bits):
+
+00001010110111
+
+Complete decoded result: AAAABBCD. This output is visible before stepping.
+
+Expected length 1.75 bits per symbol. Realized length 1.75. Fixed two-bit length: 16.
+
+0
+1
+0
+1
+0
+1
+A
+B
+C
+D
+Codewords and lengths
+Symbol	Word	Length
+A	0	1
+B	10	2
+C	110	3
+D	111	3
+
+Inspection 0/14: decoded prefix “”; unfinished tree prefix “”.
+
+Message
+Apply Message
+Codebook
+Short words for frequent A
+Short words for rare D
+Two bits for every symbol
+Previous bit
+Next bit
+Reset investigation
+Inspect every bit and decoded prefix
+
+After each leaf, decoding returns to the root. The boundaries in the displayed stream are obtained by this rule; separators are not transmitted. The constructed message AAAABBCD contains the source proportions exactly. Its stream 00001010110111 uses 14 bits for 8 symbols, or 1.75 bits per symbol. Fixed two-bit words would use 16 bits.
+
+The live investigation starts with the complete decoded result visible. Edit the message, then inspect any bit's path and output. A changed message changes the realized length; it does not change the source's expected length. The complete small codec shows the same operation:
+
+entropy_prefix.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_prefix.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_prefix.py
+
+Output:
+
+entropy_prefix.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_prefix.py.stdout.txt
+
+Read the decoder from its codebook check to its loop. It accumulates an unfinished prefix, emits only when that prefix equals a complete word, and rejects an impossible continuation or an unfinished ending. The final 11 has reached an internal node and cannot yet identify C or D. The printed error is the actual failed operation's result.
+
+This fixed A–D implementation scans possible prefixes for clarity. For a larger alphabet, a tree decoder consumes each received bit once, O(B) visits for B stream bits plus output storage. The actual heap construction, sibling-exchange proof and tree decoder are taught in Greedy Algorithms, section6. A Huffman tree is built in O(KlogK) heap operations for K symbols. Reuse that implementation when constructing a codebook; our small codec explains the information accounting rather than a general file format. Framing, metadata and a deterministic single-symbol alphabet need their own conventions.
+
+Compare code assignments using the same source probabilities.
+
+E10 The same source, three different trees
+Short words for frequent A
+0
+1
+0
+1
+0
+1
+A
+B
+C
+D
+matched code accounting
+Symbol	Probability	Word	Weighted length
+A	0.5	0	0.5
+B	0.25	10	0.5
+C	0.125	110	0.375
+D	0.125	111	0.375
+
+Expected length = 1.75 bits per symbol.
+
+Short words for rare D
+1
+1
+1
+0
+0
+0
+A
+B
+C
+D
+reversed code accounting
+Symbol	Probability	Word	Weighted length
+A	0.5	111	1.5
+B	0.25	110	0.75
+C	0.125	10	0.25
+D	0.125	0	0.125
+
+Expected length = 2.625 bits per symbol.
+
+Two bits for every symbol
+0
+0
+1
+1
+0
+1
+A
+B
+C
+D
+fixed code accounting
+Symbol	Probability	Word	Weighted length
+A	0.5	00	1
+B	0.25	01	0.5
+C	0.125	10	0.25
+D	0.125	11	0.25
+
+Expected length = 2 bits per symbol.
+
+Source-weighted mean lengths; common scale 3 bits
+
+Matched
+1.75
+Fixed
+2
+Reversed
+2.625
+
+Realized length for the one-symbol message D; common scale 3 bits
+
+Matched
+3
+Fixed
+2
+Reversed
+1
+
+One D costs 3 bits with the matched tree and 2 with the fixed tree. The matched tree wins on the specified average, not on every string.
+
+The matched leaf depths 1,2,3,3 give expected length .5×1+.25×2+.125×3+.125×3=1.75. This equals entropy because each probability is exactly 2 to a negative integer. Reassigning long words to common symbols raises the expectation. A specific message can still favour another assignment: a single D uses 3 bits under the matched code and 2 under a fixed-width code. Expected cost is not a guarantee for every realized string.
+
+Ideal information lengths are usually not integers.
+
+E11 Ideal prices need not be integer word lengths
+0
+1
+2
+3
+4
+0
+1
+2
+3
+4
+Ideal, rounded and optimal binary lengths
+Outcome	Probability	Ideal	Ceiling	Optimal word
+0	0.9	0.152	1	0 (length 1)
+1	0.1	3.32193	4	1 (length 1)
+
+The ceiling construction is a bound, not the best code. Dyadic masses (½,¼,⅛,⅛) already have integer prices (1,2,3,3), so rounding adds zero.
+
+For probability .9 the ideal price is about .152 bits. A nontrivial two-symbol binary prefix code nevertheless needs at least one digit per individual symbol. For a finite alphabet, an optimal expected prefix-code length L* obeys
+
+𝐻
+2
+(
+𝑃
+)
+≤
+𝐿
+∗
+<
+𝐻
+2
+(
+𝑃
+)
++
+1
+,
+H
+2
+	​
+
+(P)≤L
+∗
+<H
+2
+	​
+
+(P)+1,
+
+allowing the empty word for a deterministic single-outcome source. The upper construction rounds each positive outcome's ideal length upward: ℓ_x=⌈−log₂P(x)⌉. These lengths satisfy the prefix-capacity budget Σ2⁻ˡ≤1. Rounding adds less than one bit on average. This is a feasible bound construction; it need not be the optimal Huffman code. We will prove the lower bound after developing KL in section 5.
+
+Deeper: share the rounding overhead across a block
+
+Group n independent source symbols and give the entire block one codeword.
+
+E12 A block is one larger alphabet symbol
+.9
+0
+00
+01
+.1
+1
+10
+11
+
+Two-symbol block probabilities
+
+00
+00 0.81
+01 0.09
+10 0.09
+11 0.01
+One block length Lₙ
+÷
+n source symbols
+→
+Lₙ/n per symbol
+Exact finite enumeration; Bernoulli .9/.1 ceiling construction
+Block n	Bits per block	Bits per symbol	H + 1/n bound
+1	1.3	1.3	1.468995594
+2	1.6	0.8	0.968995594
+4	2.2037	0.550925	0.718995594
+8	4.40043165	0.550053956	0.593995594
+
+The gap is bounded by 1/n; this does not assert that every particular code family improves monotonically.
+
+The ideal information of an independent block adds to nH(P). Applying the same prefix bound gives nH≤L_n<nH+1, hence H≤L_n/n<H+1/n. The less-than-one-bit overhead belongs to the entire block; dividing by n spreads it across the symbols. This can approach entropy without assigning a fraction of a physical digit to one isolated symbol.
+
+entropy_blocks.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_blocks.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_blocks.py
+
+Output:
+
+entropy_blocks.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_blocks.py.stdout.txt
+
+The programme enumerates each block, computes its exact rational probability, and finds the first integer length whose capacity 2⁻ˡ is no greater than that probability. It checks the Kraft budget using fractions. For this .9 source, the n=1 ceiling construction costs 1.3 bits per symbol, worse than the optimal one-bit binary code. At n=8 its rate is .550054 against entropy .468996; the stated upper bound is .593996. The bound does not require every particular sequence of block sizes to improve monotonically.
+
+Enumeration here takes 2ⁿ block visits, deliberately limited to n≤8 to inspect the theorem. It is not a scalable compressor. Dependent sequences use their joint/conditional probabilities; nH for independent draws cannot be substituted merely to simplify a calculation. Actual compression also includes framing, metadata, finite precision and any cost of learning an unknown source.
+
+4. Let one distribution supply outcomes and another supply prices
+
+Keep the device's source P, but let a model Q believe the statuses occur in almost the opposite pattern.
+
+E13 Outcomes come from P; prices come from Q
+● A
+■ B
+▲ C
+◆ D
+
+P supplies outcomes; solid strip
+
+A
+B
+C
+D
+A 0.5
+B 0.25
+C 0.125
+D 0.125
+
+Q supplies prices; dashed model outline
+
+A
+B
+C
+D
+A 0.125
+B 0.125
+C 0.25
+D 0.5
+Follow each identity from mass to cost (bits)
+Outcome	P	Q	−log Q	P × price	P log(P/Q)
+A	0.5	0.125	3	1.5	1
+B	0.25	0.125	3	0.75	0.25
+C	0.125	0.25	2	0.25	-0.125
+D	0.125	0.5	1	0.125	-0.25
+
+Weighted model prices; common scale 4 bits
+
+A
+1.5
+B
+0.75
+C
+0.25
+D
+0.125
+A: 1.5
++
+B: .75
++
+C: .25
++
+D: .125
+=
+2.625 bits
+
+The category identities and order remain A,B,C,D. Source weights are P=(.5,.25,.125,.125); model probabilities are Q=(.125,.125,.25,.5). Each P width now pays the corresponding −log₂Q price. A becomes expensive because Q wrongly calls it rare. These prices 3,3,2,1 produce total .5×3+.25×3+.125×2+.125×1=2.625 bits per symbol.
+
+This expected model price is cross-entropy:
+
+𝐻
+𝑏
+(
+𝑃
+,
+𝑄
+)
+=
+𝐸
+𝑋
+∼
+𝑃
+[
+−
+log
+⁡
+𝑏
+𝑄
+(
+𝑋
+)
+]
+=
+−
+∑
+𝑥
+𝑃
+(
+𝑥
+)
+log
+⁡
+𝑏
+𝑄
+(
+𝑥
+)
+.
+H
+b
+	​
+
+(P,Q)=E
+X∼P
+	​
+
+[−log
+b
+	​
+
+Q(X)]=−
+x
+∑
+	​
+
+P(x)log
+b
+	​
+
+Q(x).
+
+The first argument supplies the expectation. Comparing probabilities in mismatched category orders would charge the wrong events. In our dyadic example the prices are actual prefix lengths; for a general Q they are ideal logarithmic costs, approached through suitable coding with overhead.
+
+Place that 2.625-bit cost beside P's own 1.75-bit entropy.
+
+E14 Investigate source weights and model weights
+● A
+■ B
+▲ C
+◆ D
+
+P supplies outcomes; solid strip
+
+A
+B
+C
+D
+A 0.5
+B 0.25
+C 0.125
+D 0.125
+
+Q supplies prices; dashed model outline
+
+A
+B
+C
+D
+A 0.125
+B 0.125
+C 0.25
+D 0.5
+Follow each identity from mass to cost (bits)
+Outcome	P	Q	−log Q	P × price	P log(P/Q)
+A	0.5	0.125	3	1.5	1
+B	0.25	0.125	3	0.75	0.25
+C	0.125	0.25	2	0.25	-0.125
+D	0.125	0.5	1	0.125	-0.25
+
+Weighted model prices; common scale 4 bits
+
+A
+1.5
+B
+0.75
+C
+0.25
+D
+0.125
+
+Signed row contributions to KL; common scale −2 to 2 bits
+
+A
+1
+B
+0.25
+C
+-0.125
+D
+-0.25
+
+H = 1.75; cross-entropy = 2.625; KL = 0.875 bits. Individual KL rows can be negative; the normalized total cannot.
+
+Source weights A B C D
+Apply Source weights A B C D
+Model weights A B C D
+Apply Model weights A B C D
+Information unit
+bits
+nats
+Match model to source
+Reverse source and model
+Reset investigation
+
+The difference is .875 bits. We call it Kullback–Leibler divergence, or KL:
+
+𝐷
+K
+L
+(
+𝑃
+∥
+𝑄
+)
+=
+∑
+𝑥
+𝑃
+(
+𝑥
+)
+log
+⁡
+𝑏
+𝑃
+(
+𝑥
+)
+𝑄
+(
+𝑥
+)
+=
+𝐻
+𝑏
+(
+𝑃
+,
+𝑄
+)
+−
+𝐻
+𝑏
+(
+𝑃
+)
+.
+D
+KL
+	​
+
+(P∥Q)=
+x
+∑
+	​
+
+P(x)log
+b
+	​
+
+Q(x)
+P(x)
+	​
+
+=H
+b
+	​
+
+(P,Q)−H
+b
+	​
+
+(P).
+
+Each row compares two prices for the same outcome. A contributes .5log₂4=1; B contributes .25; C contributes−.125; D contributes−.25. Individual contributions can be negative: Q prices some outcomes more cheaply. The sum is nonnegative, as section 5 proves. The signed ruler shows those terms on opposite sides of zero; they are not another probability distribution or four mistake probabilities.
+
+The investigation lets you change the source weights and model weights separately. Matching Q to P removes every price difference. Swapping their roles changes which law supplies the frequencies. A unit switch rescales all three totals consistently. For a second finite example, this complete Bernoulli programme uses natural logarithms:
+
+entropy_bernoulli.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_bernoulli.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_bernoulli.py
+
+Output:
+
+entropy_bernoulli.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_bernoulli.py.stdout.txt
+
+The printed .611,.765,.154 are entropy, cross-entropy and KL in nats for P(1)=.7,Q(1)=.9. Divide all three by ln 2 to obtain bits. No model changes merely because its information unit changes.
+
+Now consider an outcome that the model excludes.
+
+E15 A missing model slot cannot price an observed event
+● A
+■ B
+▲ C
+◆ D
+
+Source probabilities
+
+A
+B
+A 0.5
+B 0.5
+C 0
+D 0
+
+Original model weights: (1, 0, 0, 0).
+
+Original normalized Q
+
+A
+A 1
+B 0
+C 0
+D 0
+Q(B)=0
+
+Original B term: positive source mass × excluded model event → ∞.
+
+Changed model: add α=0 to every weight, then normalize
+
+A
+A 1
+B 0
+C 0
+D 0
+Original and explicitly changed model
+Model	Cross-entropy	KL
+Original	∞	∞
+Smoothed	∞	∞
+Source probability of B: 0.5
+Original model weight B
+Apply Original model weight B
+Pseudocount alpha: 0
+Reset investigation
+
+At P=(.5,.5,0,0),Q=(1,0,0,0), positive source mass on B has no model probability. Cross-entropy and KL are infinite. The picture leaves an unbounded cost rather than drawing a finite-height bar labelled infinity. If the source mass on B becomes zero, that requirement disappears. A small positive Q(B) gives a large finite price instead; zero and very small positive probability are different mathematical cases.
+
+4. Let one distribution supply outcomes and another supply prices
+
+One outcome	Entropy term	Cross-entropy and KL terms
+P=0,Q≥0	0 by its limit	0; no draw under P charges this row
+P>0,Q=0	Finite for this fixed P	+∞
+P>0,Q>0	Ordinary formula	Ordinary formula; KL term may have either sign
+
+The support is the set of positive-probability outcomes. Finite KL on a finite alphabet requires P's support to lie inside Q's. A probability floor or smoothing distribution changes Q. That may be a sensible modeling choice, but it is not a finite report of the original infinite score. Normalize the new model and name the change.
+
+Inputs have their own contract.
+
+E16 Weights and probabilities are different input contracts
+Raw weights (2, 1)
+→
+Total 3
+→
+Divide each by 3
+
+Normalized probabilities
+
+first 0.66667
+second 0.33333
+(2, 1)
+sum ≠ 1
+(⅔, ⅓)
+sum = 1
+
+A strict probability API rejects the first vector. The live weight editors above explicitly normalize it; malformed drafts leave the active drawing unchanged.
+
+The browser accepts explicit weights, normalizes them and shows the active probabilities. A malformed draft leaves its last valid experiment in place. The Python helper below instead requires normalized distributions. It rejects malformed input rather than silently changing its meaning.
+
+entropy_support.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_support.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_support.py
+
+Output:
+
+entropy_support.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_support.py.stdout.txt
+
+The helper skips P=0 before taking logs, handles positive-P/zero-Q explicitly, and computes weighted sums. Its four outputs cover the status mismatch, a one-supported-outcome case, missing support and a certain matching law. Reading a browser's normalized weights as though a strict probability API had accepted them would mix two different contracts. An entered positive weight too small to represent numerically must not silently become an intended mathematical zero.
+
+Use a library while keeping the same question
+
+SciPy's entropy(pk,base=2) computes entropy; with qk supplied it computes KL, not cross-entropy. It also normalizes non-unit sums. For the four-outcome vectors already defined, the calls are h = entropy(p, base=2) and d = entropy(p, q, base=2) after importing entropy from scipy.stats. The direct helper above supplies a strict validation contract. The complete library programme in section6 validates inputs, compares the finite sums and then applies the same API to conditional rows once we have learned that operation.
+
+For the four statuses, these two routes give H=1.75,CE=2.625,KL=.875 bits. The code forms CE=H+KL only in this finite case; it never uses an undefined infinity-minus-infinity subtraction. Its missing-support case remains infinite. Passing weights[2,1] directly to SciPy gives entropy .918295834 bits after normalization, while the strict wrapper rejects them as probabilities. Choose the intended interface rather than treating those outcomes as a contradiction. The comparison was executed with NumPy 2.3.5 and SciPy 1.18.1; the displayed scalar formatting preserves those computed values.
+
+Work is linear in the number of categories for these finite sums. For huge or sparse alphabets, retain only occupied source entries and the required model lookups rather than allocating an enormous dense table. The core operation remains the same weighted price calculation.
+
+5. Prove the bound and respect the direction
+
+The negative contributions in section 4 can reduce the total, but they cannot make it negative. Start with one ordinary logarithm inequality.
+
+E17 A tangent line stays above the logarithm
+
+Vertical: value [-2.5 to 2].
+Horizontal: t > 0 [0 to 3].
+
+1
+2
+● ln t
+■ t − 1
+▲ gap at t = 2
+
+At t=1 both values and slopes agree. At t=2 the gap is 1−ln2 ≈ .306853.
+
+For t>0, ln t≤t−1, with equality only at 1. The difference t−1−ln t has derivative 1−1/t: it decreases up to 1, increases afterwards and equals zero there. The straight tangent touches the log curve at 1 and stays above it.
+
+Apply that inequality to each supported source outcome.
+
+E18 Summing over the source support leaves model mass outside
+● A
+■ B
+▲ C
+◆ D
+
+P=(½,½,0,0); support S={A,B}
+
+A
+B
+A 0.5
+B 0.5
+C 0
+D 0
+
+Q=(¼,¼,¼,¼); Q(S)=½
+
+A
+B
+C
+D
+A 0.25
+B 0.25
+C 0.25
+D 0.25
+A
+B
+C
+D
+inside S
+outside S
+The pointwise natural-log bound multiplied by P
+Source row	P ln(P/Q)	P − Q
+A	0.34657	0.25
+B	0.34657	0.25
+Sum	0.69315	0.5
+
+D(P‖Q) ≥ 1−Q(S)=.5 nats. Equality at zero requires both Q=P on the support and no leftover model mass outside it.
+
+Let S be P's support and assume Q>0 on S; otherwise KL is already infinite. Substitute t=Q(x)/P(x), multiply by P(x), and sum over S. In nats,
+
+𝐷
+K
+L
+(
+𝑃
+∥
+𝑄
+)
+	
+=
+−
+∑
+𝑥
+∈
+𝑆
+𝑃
+(
+𝑥
+)
+ln
+⁡
+𝑄
+(
+𝑥
+)
+𝑃
+(
+𝑥
+)
+
+
+	
+≥
+∑
+𝑥
+∈
+𝑆
+(
+𝑃
+(
+𝑥
+)
+−
+𝑄
+(
+𝑥
+)
+)
+
+
+	
+=
+1
+−
+𝑄
+(
+𝑆
+)
+≥
+0.
+D
+KL
+	​
+
+(P∥Q)
+	​
+
+=−
+x∈S
+∑
+	​
+
+P(x)ln
+P(x)
+Q(x)
+	​
+
+≥
+x∈S
+∑
+	​
+
+(P(x)−Q(x))
+=1−Q(S)≥0.
+	​
+
+
+Equality requires equality in every supported row, Q(x)=P(x), and no Q mass left outside S. Thus the whole finite distributions must agree. A positive log-base conversion preserves the inequality.
+
+Hold the source fixed and let the reporting model move.
+
+E19 Vary the model; keep the source fixed
+
+Vertical: bits [0 to 4].
+Horizontal: Q(first outcome).
+
+0
+.5
+.8
+1
+● Cross-entropy
+■ H(P) floor
+▲ Gap at Q=.5
+
+H(P)=.721928 bits. The uniform model costs 1 bit, leaving .278072 bits of KL. Endpoints exclude a positive source event and have infinite cost; arrows denote continuation beyond the displayed range.
+
+The expected logarithmic loss reaches its unique minimum at Q=P. This is the strictly proper scoring property: truthful probabilities minimize the population expectation over all possible reports. It does not promise that the truthful model wins on every finite sample, or that a restricted fitted family can represent P.
+
+The same gap proves the entropy maximum on a fixed alphabet.
+
+E20 Uniform prices expose the finite-alphabet ceiling
+● A
+■ B
+▲ C
+◆ D
+
+Source P
+
+A
+B
+C
+D
+A 0.5
+B 0.25
+C 0.125
+D 0.125
+
+Uniform Q: every event costs 2 bits
+
+A
+B
+C
+D
+A 0.25
+B 0.25
+C 0.25
+D 0.25
+
+2-bit budget accounting; common scale 2 bits
+
+H(P)
+1.75
+KL
+0.25
+H + KL
+2
+
+The same four source-weighted uniform prices sum to 2 = 1.75 + .25 bits.
+
+For uniform U on m labels, every event costs log_b m. Hence H(P,U)=log_b m and
+
+𝐻
+𝑏
+(
+𝑃
+)
+=
+log
+⁡
+𝑏
+𝑚
+−
+𝐷
+K
+L
+(
+𝑃
+∥
+𝑈
+)
+≤
+log
+⁡
+𝑏
+𝑚
+.
+H
+b
+	​
+
+(P)=log
+b
+	​
+
+m−D
+KL
+	​
+
+(P∥U)≤log
+b
+	​
+
+m.
+
+Only uniform P removes the gap. The alphabet is fixed: changing the number or resolution of outcomes changes the question.
+
+Deeper: return to the prefix-code lower bound
+
+A prefix code uses disjoint portions of a binary tree's capacity.
+
+E21 Codewords occupy disjoint binary intervals
+
+Matched code: every split halves the available interval.
+
+0
+1
+0
+1
+0
+1
+A
+B
+C
+D
+
+A = 0; interval [0, 0.5)
+
+B = 10; interval [0.5, 0.75)
+
+C = 110; interval [0.75, 0.875)
+
+D = 111; interval [0.875, 1)
+
+0
+Binary interval capacity
+1
+
+Incomplete code: A=0110, B=0111, C=010, D=00.
+
+0
+1
+1
+0
+1
+0
+0
+A
+B
+C
+D
+
+A = 0110; interval [0.375, 0.4375)
+
+B = 0111; interval [0.4375, 0.5)
+
+C = 010; interval [0.25, 0.375)
+
+D = 00; interval [0, 0.25)
+
+0
+Binary interval capacity
+1
+
+Occupied capacity K = ½; the right half is unused
+
+D
+C
+D 0.25
+C 0.125
+A 0.0625
+B 0.0625
+
+The geometric ordering is D, C, A, B; symbol identities and their codewords stay unchanged.
+
+At a common depth d, a word of length ℓ occupies 2^(d−ℓ) descendant slots. Distinct prefix-free words cannot overlap those slots. Dividing their total by 2ᵈ gives the Kraft inequality, K=Σ2⁻ˡ≤1. Choose d at least as large as every finite word length.
+
+The matched code A=0, B=10, C=110, D=111 fills the entire capacity: K=1. To see unused capacity as well as mismatch, keep the same source P but choose A=0110, B=0111, C=010, D=00. No word prefixes another. Their lengths are (4,4,3,2), with capacities (1/16,1/16,1/8,1/4), summing to K=1/2. The four prefix intervals occupy the left half of the unit interval; the right half is unused. The source-weighted expected length is .5×4+.25×4+.125×3+.125×2=3.625 bits per symbol.
+
+Normalize those capacities to another distribution R(x)=2⁻ˡˣ/K. Its price is −log₂R(x)=ℓ_x+log₂K. Average using the actual source P, then subtract its entropy.
+
+E22 Normalize occupied capacity, then account for both gaps
+The incomplete code's capacities become a probability law
+Symbol	Word length	Capacity 2⁻ˡ	Divide by K=½: R
+A	4	0.0625	0.125
+B	4	0.0625	0.125
+C	3	0.125	0.25
+D	2	0.25	0.5
+
+Raw capacity; half the tree unused
+
+C
+D
+A 0.0625
+B 0.0625
+C 0.125
+D 0.25
+
+Normalized R; symbol order A–D
+
+A
+B
+C
+D
+A 0.125
+B 0.125
+C 0.25
+D 0.5
+L − H = 3.625 − 1.75
+=
+1.875
+=
+D(P‖R) .875
++
+−log₂K = 1
+
+For the matched complete code, R=P and K=1: both costs vanish.
+
+𝐿
+−
+𝐻
+2
+(
+𝑃
+)
+=
+𝐷
+K
+L
+(
+𝑃
+∥
+𝑅
+)
+−
+log
+⁡
+2
+𝐾
+≥
+0.
+L−H
+2
+	​
+
+(P)=D
+KL
+	​
+
+(P∥R)−log
+2
+	​
+
+K≥0.
+
+For the incomplete code, normalization gives R=(1/8,1/8,1/4,1/2), exactly the mismatched law already calculated in section4. Its KL cost is .875 bits. The unused-capacity cost is −log₂(1/2)=1 bit. Together they explain the full excess: L−H=3.625−1.75=1.875=.875+1 bits per symbol. For the matched complete code, R=P and K=1, so both pieces are zero.
+
+Both pieces are nonnegative: mismatching the normalized capacity distribution incurs KL, and unfilled capacity has −log₂K≥0. This proves why every such prefix code pays at least the entropy. Section 3's ceiling construction supplies the other bound. No theorem about an average implies that each short realized message uses exactly its source entropy.
+
+Direction answers a different question
+
+Exchange the law supplying the expectation.
+
+E23 Reverse the expectation, reverse the support test
+
+P
+
+first 1
+second 0
+
+Q
+
+first 0.5
+second 0.5
+P → Q
+1
+Q → P
+∞
+
+Forward D(P‖Q)=1 bit. Reverse Q assigns positive mass to the second event, whose P price is infinite.
+
+KL(P∥Q) weights the log ratio by P; KL(Q∥P) weights the reversed log ratio by Q. If P=(1,0) and Q=(.5,.5), the forward direction is 1 bit because Q covers P's one possible outcome. The reverse is infinite because Q draws an outcome P excludes. Different supports alone do not tell us both directions; support inclusion has a direction.
+
+Checkpoint. Repair the claim “these supports differ, so both divergences are infinite.”
+
+Compare your reasoning
+
+In a restricted variational family, reverse-KL minimization can favour concentration in one region of a multimodal target. This depends on the target, family and optimizer; it does not invariably choose one mode. Variational Inference contains the actual finite-family and Gaussian comparisons.
+
+Nor is KL an ordinary metric.
+
+E24 Directed costs do not obey a triangle inequality
+.1
+.5
+.9
+KL costs in nats; positions do not encode cost
+Directed path	Cost
+.1 → .5	0.368064207
+.5 → .9	0.510825624
+via .5 total	0.878889831
+.1 → .9 direct	1.757779662
+
+Direct 1.757780 exceeds the two-edge sum .878890. KL is not a metric distance.
+
+For Bernoulli probabilities .1,.5,.9, in nats, D(.1∥.9)≈1.757780 while D(.1∥.5)+D(.5∥.9)≈.878890. The triangle inequality fails. Labels on the connecting arrows give computed directed costs; drawn segment lengths do not encode those costs. Relabelling categories preserves KL; moving mass between numerically near or far labels has no built-in transport distance. Optimal Transport supplies a geometry-aware comparison.
+
+A finite symmetric alternative is Jensen–Shannon divergence: M=(P+Q)/2, then average KL(P∥M) and KL(Q∥M). The mixture covers both supports, avoiding direct mismatch infinities. It still does not add geometric distances between labels. f-Divergences & Integral Probability Metrics examines how the comparison depends on the intended question.
+
+Deeper: when subtraction is undefined
+
+Finite probability mass can be spread over infinitely many outcomes in a way that has infinite entropy.
+
+E25 A finite picture cannot settle an infinite tail
+
+Vertical: unnormalized term [0 to 1.1].
+Horizontal: k (finite window) [2 to 80].
+
+2
+80
+● 1/(k ln²k)
+■ 1/(k ln k)
+
+The first tail has a finite integral; its log-price-weighted tail behaves like the second, whose integral diverges. Those analytic tail statements, not this finite window, establish the infinite expectation.
+
+Q = P
+→
+log(P(k)/Q(k)) = 0
+→
+sum of exact zeros = 0
+
+Compute self-divergence from its ratio definition; “∞−∞” is not an arithmetic calculation.
+
+Normalize p_k proportional to 1/[k(ln k)²], k≥2. The probability series converges by the integral test, while its entropy diverges like Σ1/(k ln k). Partial sums in a drawing only illustrate the different tails; they are not a numerical proof of convergence or divergence.
+
+For Q=P, every supported ratioP/Q is 1 and KL=0. Yet H(P,Q)−H(P) would be∞−∞, an undefined subtraction. The ratio definition is primary. On general spaces, KL uses the expected log density ratio when P is absolutely continuous with respect to Q—every Q-null measurable set is also P-null—and is infinite otherwise, with the required integrability conventions. Do not turn two divergent quantities into a claimed finite difference.
+
+6. Predict with the information you have
+
+A classifier sees features X before predicting a label Y. Its report Q(y|x) is a distribution over labels for that context. Begin with one observed label.
+
+E26 A target selects or weights already-computed prices
+● A
+■ B
+▲ C
+◆ D
+
+Class prices from the same Q; common scale 4 bits
+
+A
+3
+B
+3
+C
+2
+D
+1
+A
+B
+C
+D
+selected C price = 2 bits
+
+Soft target: multiply each class price by its target weight; common scale 4 bits
+
+A: 0.5 × 3
+1.5
+B: 0.25 × 3
+0.75
+C: 0.125 × 2
+0.25
+D: 0.125 × 1
+0.125
+The same price vector with different targets
+Target	Weights	Loss in bits
+Hard C	(0,0,1,0)	2
+Soft	(.5,.25,.125,.125)	2.625
+
+These are target weights, not model logits. A hard target picks one class; a soft target averages the class prices.
+
+The one-hot target puts probability 1 on the observed correct class and 0 on the others. Multiplying model log prices by those target weights selects just one price, −log Q(y|x). A soft target instead distributes its weights across classes; its loss is the weighted sum of those same prices. Neither target vector is a second set of logits.
+
+To ask about expected prediction cost, we must also account for how frequently each context occurs.
+
+E27 Investigate conditional rows and context weights
+P(X=0)=0.5
+P(X=1)=0.5
+● Y=0
+■ Y=1
+Joint rows become conditional rows only when their context has positive mass
+Context	Joint P(X,Y=0), P(X,Y=1)	Conditional P(Y|X)	Model Q(Y|X)	Row H / CE	Weighted CE
+X=0; mass 0.5	0.45, 0.05	0.9, 0.1	0.8, 0.2	0.469 / 0.52193	0.26096
+X=1; mass 0.5	0.05, 0.45	0.1, 0.9	0.2, 0.8	0.469 / 0.52193	0.26096
+
+Context X=0: normalize this joint row by its mass 0.5.
+
+Conditional source P(Y|X); solid
+
+Y=0
+Y=0 0.9
+Y=1 0.1
+
+Conditional model Q(Y|X); dashed
+
+Y=0
+Y=1
+Y=0 0.8
+Y=1 0.2
+
+Context X=1: normalize this joint row by its mass 0.5.
+
+Conditional source P(Y|X); solid
+
+Y=1
+Y=0 0.1
+Y=1 0.9
+
+Conditional model Q(Y|X); dashed
+
+Y=0
+Y=1
+Y=0 0.2
+Y=1 0.8
+
+Contributions weighted by actual context mass; common scale 2 bits
+
+X=0
+0.26096
+X=1
+0.26096
+
+Conditional H = 0.468995594; CE = 0.521928095; excess = 0.052932501 bits. Marginal H(Y) = 1.
+
+Conditional example
+Symmetric noisy context
+Unequal truthful rows
+Context probability P(X=1): 0.5
+Flip noise: 0.1
+Model trust: 0.8
+Reset investigation
+
+The initial joint table uses a fair context bit X. The label agrees with X with probability .9, while the model reports agreement probability .8. Select either row: divide its joint masses by its context mass. Price the resulting label probabilities using that row's model, then multiply its row cost by the context mass before adding the rows.
+
+With label-flip probability .1, each true row has entropy h₂(.1)≈.468996 bits. Each model row costs −.9log₂.8−.1log₂.2≈.521928 bits, an excess .052933. The label histogram is balanced, H(Y)=1 bit; knowing X improves the relevant baseline to H(Y|X). If Y always equalled X, that remaining uncertainty would be zero even though the marginal labels stayed balanced.
+
+For each positive-probability context, cross-entropy equals entropy plus KL. Weight those identities by P_X(x):
+
+𝐸
+(
+𝑋
+,
+𝑌
+)
+∼
+𝑃
+[
+−
+log
+⁡
+𝑄
+(
+𝑌
+∣
+𝑋
+)
+]
+=
+𝐻
+𝑃
+(
+𝑌
+∣
+𝑋
+)
++
+𝐸
+𝑋
+∼
+𝑃
+𝑋
+𝐷
+K
+L
+(
+𝑃
+(
+⋅
+∣
+𝑋
+)
+∥
+𝑄
+(
+⋅
+∣
+𝑋
+)
+)
+.
+E
+(X,Y)∼P
+	​
+
+[−logQ(Y∣X)]=H
+P
+	​
+
+(Y∣X)+E
+X∼P
+X
+	​
+
+	​
+
+D
+KL
+	​
+
+(P(⋅∣X)∥Q(⋅∣X)).
+
+Conditional entropy is that context-weighted average remaining uncertainty. It is generally different from entropy of the overall label histogram. A context of probability zero contributes nothing to the expectation; its conditional distribution is not defined by dividing zero by zero.
+
+entropy_conditional.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_conditional.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_conditional.py
+
+Output:
+
+entropy_conditional.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_conditional.py.stdout.txt
+
+This complete standard-library programme visits all four joint outcomes and directly weights their losses. Its initial symmetric rows have the same cost. Changing only their frequency therefore leaves their correctly weighted average unchanged. That is a useful null result, but it can conceal an incorrect routine that averages the row costs equally.
+
+Switch the investigation to unequal row costs. Context masses are now(.75,.25), with P(Y=1|X=0)=.1 and P(Y=1|X=1)=.5. Let the model report those truthful conditionals. The joint rows are(.675,.075) and(.125,.125). Their entropies are .468995594 and 1 bit, so the correct average is
+
+.75
+(
+.468995594
+)
++
+.25
+(
+1
+)
+=
+.601746695
+ bits
+.
+.75(.468995594)+.25(1)=.601746695 bits.
+
+An incorrect uniform average gives(.468995594+1)/2=.734497797. The drawing shows both row costs and both context multipliers before joining the contributions. Change the second context mass to .5: the two averages then agree. At mass 0, the answer is just .468995594 and the absent context is explicitly unavailable. The complete information_library.py below performs both the direct joint sum and SciPy row entropies with axis=1, followed by the actual context weights. The axis chooses what is summed; it does not supply the correct context frequencies by itself.
+
+Conditioning helps on average, but one observed context can make the remaining uncertainty larger.
+
+E28 Conditioning can leave unequal amounts of uncertainty
+0 OR 0 = 0
+0 OR 1 = 1
+1 OR 0 = 1
+1 OR 1 = 1
+A=0
+A=1
+B=0
+B=1
+Average conditional entropy with the actual context masses
+Context	OR law	Entropy	Context weight	Contribution
+A=0	(½,½)	1	0.5	0.5
+A=1	(0,1)	0	0.5	0
+
+Given A=0: OR law
+
+Y=0
+Y=1
+Y=0 0.5
+Y=1 0.5
+
+Given A=1: OR law
+
+Y=1
+Y=0 0
+Y=1 1
+
+H(OR|A)=.5 bit; H(OR)=H₂(¼)=.811278 bits. Each row has its own uncertainty before the weighted average.
+
+Let independent fair bits A and B produce Y=A OR B. Before seeing A, Y=1 has probability .75 and H(Y)≈.811278 bits. If A=0, Y=B is a fair bit with entropy 1; if A=1, Y is certain with entropy 0. The contexts occur equally often, giving average .5. The increase in the first slice does not contradict the average reduction. Mutual Information & Information Bottleneck develops that reduction as a measure of dependence.
+
+The same multiplication rule explains the entropy chain rule. Start from P(x,y)=P(x)P(y|x), take negative logs and average over the joint law:
+
+𝐻
+(
+𝑋
+,
+𝑌
+)
+=
+𝐻
+(
+𝑋
+)
++
+𝐻
+(
+𝑌
+∣
+𝑋
+)
+.
+H(X,Y)=H(X)+H(Y∣X).
+
+Identifying the pair costs the information in X plus the average remaining information in Y once X is known. We have not assumed X and Y independent.
+
+For observed data, connect these prices to the probability assigned to the whole record. The first trace below uses two labelled rows, with inputs x₁,x₂ held fixed and observed labels y₁=0,y₂=1. A model with fixed shared parameters θ supplies one correct-label probability for each row.
+
+The second trace is a different experiment: an ordered sequence A,B,A. Its next-token distribution uses the prefix already observed, so its conditioning inputs are start, A and A,B. Keep those past-context factors distinct from the separate fixed-input rows.
+
+E29 Two different factorizations, drawn separately
+
+Fixed supervised rows share parameters θ. There is no row-to-row dependency arrow.
+
+shared θ
+(x₁,y=0)
+(x₂,y=1)
+qθ=.8
+qθ=.25
+product .2
+
+Total NLL = −ln(.2)=1.609437912; mean over two rows = .804718956 nats.
+
+Ordered sequence A, B, A. Each next prediction receives its actual prefix.
+
+start
+A
+.5
+A
+B
+.25
+A,B
+A
+.8
+
+Chain product = .5×.25×.8=.1; NLL=2.302585093 nats. Prefix conditioning is explicit; no iid assumption was inserted.
+
+In the first trace, Qθ(0|x₁)=.8 and Qθ(1|x₂)=.25. Under the conditionally independent row model, their joint conditional likelihood is .8×.25=.2. Their negative log prices add to −ln(.2)=1.609437912 nats, with mean .804718956 nats per observed row.
+
+If observations are modeled as conditionally independent given their inputs and shared parameters θ, their conditional likelihood is ∏ᵢQ_θ(yᵢ|xᵢ). Negative log turns that product into a sum. Dividing by fixed positive n changes the scale but not the minimizing parameter:
+
+argmax
+⁡
+𝜃
+∏
+𝑖
+=
+1
+𝑛
+𝑄
+𝜃
+(
+𝑦
+𝑖
+∣
+𝑥
+𝑖
+)
+=
+argmin
+⁡
+𝜃
+1
+𝑛
+∑
+𝑖
+=
+1
+𝑛
+−
+log
+⁡
+𝑄
+𝜃
+(
+𝑦
+𝑖
+∣
+𝑥
+𝑖
+)
+.
+θ
+argmax
+	​
+
+i=1
+∏
+n
+	​
+
+Q
+θ
+	​
+
+(y
+i
+	​
+
+∣x
+i
+	​
+
+)=
+θ
+argmin
+	​
+
+n
+1
+	​
+
+i=1
+∑
+n
+	​
+
+−logQ
+θ
+	​
+
+(y
+i
+	​
+
+∣x
+i
+	​
+
+).
+
+This is the connection to Maximum Likelihood. In the separately labelled sequence trace, use Q(A|start)=.5, Q(B|A)=.25 and Q(A|A,B)=.8. The probability of that ordered sequence is .5×.25×.8=.1, and its negative log likelihood is −ln(.1)=2.302585093 nats. These are past-context factors, not three independent marginal token probabilities. An autoregressive sequence handles dependence with conditional factors Q(y_t|earlier context); tokens need not be independent. Omitting dependence without modeling it gives the objective a different statistical meaning. A lucky finite observed sample may have lower average loss than population conditional entropy; the entropy-plus-KL inequality concerns the full expected risk.
+
+The full library comparison below now joins the two calculations. Its first part compares the four-status H, CE and KL from section 4. Its conditional array has two rows, each summing to one; axis=1 computes one entropy for each row. The context vector then weights those two values. Multiplying context[:, None] by the row matrix reconstructs the joint table, so a direct joint-weighted sum checks the same operation through a different arrangement. The three context settings expose the unequal-cost case, the equal-context null and the zero-context limit.
+
+<a id="information-library-py"></a>
+
+information_library.py
+
+Python 3.12.14, NumPy 2.3.5 and SciPy 1.18.1. The numerical calculation was executed once; scalar display formatting was subsequently simplified without changing the computed values.
+
+information_library.py
+
+The program loads here as you reach this part of the lesson.
+
+Download information_library.py
+
+Output:
+
+information_library.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download information_library.py.stdout.txt
+
+The validator rejects weights before an automatic API normalization can change their meaning. Boolean selection keeps zero source probabilities out of logarithms. The direct KL uses separate logs; it does not first divide two tiny probabilities. This finite calculation takes linear work in the number of joint cells; array broadcasting changes the arrangement of the arithmetic, not the probability law.
+
+7. Compute and interpret log loss
+
+A neural classifier often supplies one real-valued score per class. These logits must become probabilities, but computing enormous exponentials is unnecessary.
+
+E30 Investigate the stable logit calculation
+● Class 0
+■ Class 1
+▲ Class 2
+1000
+0
+998
+-2
+996
+-4
+Σ exp(shifted) = 1.15365
+
+Every score subtracts maximum m=1000. Each log probability is its shifted score minus ln(sum)=0.14293163.
+
+Class identity through the stable calculation
+Class	Score	Shifted	exp shifted	Probability	log probability	Target weight	Loss term
+0	1000	0	1	0.8668133	-0.1429316	0	0
+1	998	-2	0.1353353	0.1173104	-2.1429316	0	0
+2	996	-4	0.0183156	0.0158762	-4.1429316	1	4.1429316
+
+Loss = 4.1429316285 nats. The target is applied to log probabilities, not to exponentiated values.
+
+Class 0 logit
+Apply Class 0 logit
+Class 1 logit
+Apply Class 1 logit
+Class 2 logit
+Apply Class 2 logit
+Common logit shift: 0
+Target type
+Hard class index
+Normalized soft target
+Target class
+Class 0
+Class 1
+Class 2
+Inspect extreme separation
+Reset investigation
+
+For z=(1000,998,996), subtract the largest score 1000 from every entry, producing(0,−2,−4). Exponentiate those shifted scores and add them. The sum is 1+e⁻²+e⁻⁴; its logarithm is about .142932. Each log probability is its shifted score minus that common log sum. The last class therefore has log probability−4.142932 and loss 4.142932 nats.
+
+Softmax is Q_j=e^(z_j)/Σ_ke^(z_k). A common added constant multiplies numerator and denominator by the same factor and cancels. With m=max_jz_j and s=Σ_je^(z_j−m), compute
+
+log
+⁡
+𝑄
+𝑗
+=
+(
+𝑧
+𝑗
+−
+𝑚
+)
+−
+ln
+⁡
+𝑠
+,
+ℓ
+(
+𝑧
+,
+𝑦
+)
+=
+(
+𝑚
+−
+𝑧
+𝑦
+)
++
+ln
+⁡
+𝑠
+.
+logQ
+j
+	​
+
+=(z
+j
+	​
+
+−m)−lns,ℓ(z,y)=(m−z
+y
+	​
+
+)+lns.
+
+Keep these grouped subtractions. Computing a huge common log normalizer and subtracting it afterwards can lose precision. The investigation preserves the class identities through logits, exponentials, normalization and target selection. Change a score, add a common shift or change the target; the last operation chooses a price rather than changing the model.
+
+Even a stable probability can underflow when converted out of log space.
+
+E31 Keep log probabilities before exponentiation
+log p = −2000
+negate
+exp
+loss 2000
+p rounds to 0
+−log 0 → ∞
+Extreme logits retain finite direct log loss
+Class	Logit / log probability	exp(log probability)
+0	0	1
+1	-1000	0
+2	-2000	0
+
+The zero in the probability column is floating-point underflow. It is not the model's mathematical support exclusion.
+
+For logits(0,−1000,−2000), the last probability rounds to zero in floating arithmetic. Its log probability can still be represented as−2000, and its loss is 2000 nats. Taking log of the separately rounded zero would incorrectly turn this finite-logit result into infinity.
+
+entropy_logits.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_logits.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_logits.py
+
+Output:
+
+entropy_logits.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_logits.py.stdout.txt
+
+The first two score vectors differ by a common 1000 and have the same printed log probabilities. The last vector follows the log path directly. Work is O(C) per row for C classes. Stable evaluation does not repair NaN inputs, unrepresentable differences between finite extremes, or a truly excluded class. Those are distinct from ordinary small positive probabilities whose logs remain representable.
+
+The framework interface must describe the same arrays.
+
+E32 A batch has rows; classes occupy columns
+Floating logits with shape (2,3)
+Row	Class 0	Class 1	Class 2
+0	1000	998	996
+1	0	-1000	-2000
+row 0
+y=0
+.142932
+row 1
+y=2
+2000
+mean = 1000.071466 nats
+
+Hard targets are integer class indices, shape (2,): [0,2]. Soft targets are normalized floating rows with the same (2,3) shape as logits. A probability vector passed as logits is a different input.
+
+For N examples and C classes, PyTorch cross_entropy receives raw logits of shape(N,C). Class-index targets have shape(N,) and dtypetorch.long. Soft targets are valid probability rows of shape(N,C) with floating dtype. The library does not completely validate their normalization and nonnegativity, so the caller must supply a meaningful target. Applying softmax first feeds probabilities into an API that expects logits and changes the resulting model loss.
+
+entropy_torch.py
+
+Retained tested PyTorch 2.14 CPU example with float64 logits. Install PyTorch using its official platform instructions.
+
+entropy_torch.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_torch.py
+
+Output:
+
+entropy_torch.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_torch.py.stdout.txt
+
+This preserved programme was executed with PyTorch 2.14 CPU. It uses float64, no class weights, no ignored labels and no smoothing. Thus its mean is the ordinary mean of its two class-index losses. The first row changes from hard-target loss .142932 to soft-target loss .942932 because the target now assigns weight to other class prices. The second row keeps its 2000-nat cost. reduction='none' exposes each example before averaging.
+
+Weights, ignored labels and smoothing alter the scoring or reduction contract; inspect the documented denominator before transferring a hand calculation. For a binary one-logit model the stable interface is binary_cross_entropy_with_logits. Names that contain “cross entropy” do not guarantee interchangeable input conventions. Install PyTorch using its official platform instructions; the optional SciPy programme needs NumPy and SciPy. Python files include their own imports and data except the explicitly supplied CSV beside the observed-data programme.
+
+Confidence changes what accuracy cannot see
+
+Give two models exactly the same ten binary test cases.
+
+E33 Eight correct answers can have very different prices
+Ten actual constructed evaluation rows
+Row	Top-class correctness	Moderate true-class probability	Confident true-class probability
+1	correct	0.6	0.99
+2	correct	0.6	0.99
+3	correct	0.6	0.99
+4	correct	0.6	0.99
+5	correct	0.6	0.99
+6	correct	0.6	0.99
+7	correct	0.6	0.99
+8	correct	0.6	0.99
+9	wrong	0.4	0.01
+10	wrong	0.4	0.01
+
+Vertical: row loss, nats [0 to 5].
+Horizontal: row index [1 to 10].
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+● Moderate .6/.4
+■ Confident .99/.01
+
+Both accuracies are .8. Mean losses: .591918645 versus .929074306 nats. The second model's rare wrong rows cost 4.605170 each; its correct-row loss .010050 keeps its true, very small bar height.
+
+Model A assigns correct-label probability .6 on cases 1–8 and .4 on 9–10. Model B gives .99 on 1–8 and .01 on 9–10. With threshold .5 and no ties, both get 8/10 correct. Their log prices differ sharply: B saves a little on eight already-correct cases and pays about 4.605 nats on each confidently wrong one.
+
+The mean losses are −[8ln.6+2ln.4]/10≈.591919 nats for A and −[8ln.99+2ln.01]/10≈.929074 for B. The drawing uses actual heights and numeric prices, including small positive costs; it does not impose a misleading minimum visible bar height.
+
+entropy_evaluation.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_evaluation.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_evaluation.py
+
+Output:
+
+entropy_evaluation.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_evaluation.py.stdout.txt
+
+The programme stores all ten probabilities and uses the same denominator for both models. Its threshold-based accuracy is appropriate for this binary, no-ties fixture. In a multiclass problem compare the predicted argmax with the correct label; correct-label probability need not exceed .5 to be the largest class probability.
+
+Turn the average log price back into a probability-like scale.
+
+E34 A geometric probability becomes an effective choice count
+True-class probabilities p₁…pₙ
+→
+geometric mean exp(mean ln p)
+→
+reciprocal = exp(mean NLL)
+0
+1
+1
+1
+1
+1
+1
+1
+1
+1
+nine rows in batch 2
+Reduce losses by row count before exponentiating
+Batch	Rows	Total NLL	Mean NLL	Perplexity
+1	1	0	0	1
+2	9	9	1	2.71828
+Combined	10	9	0.9	2.4596
+
+Averaging the two batch perplexities, (1+e)/2, ignores their different row counts and applies the nonlinear transformation too early.
+
+Perplexity is b raised to the average base-b log loss. For natural logs,
+
+PP
+⁡
+=
+exp
+⁡
+(
+−
+1
+𝑛
+∑
+𝑖
+ln
+⁡
+𝑄
+(
+𝑦
+𝑖
+∣
+𝑥
+𝑖
+)
+)
+=
+(
+∏
+𝑖
+𝑄
+(
+𝑦
+𝑖
+∣
+𝑥
+𝑖
+)
+)
+−
+1
+/
+𝑛
+.
+PP=exp(−
+n
+1
+	​
+
+i
+∑
+	​
+
+lnQ(y
+i
+	​
+
+∣x
+i
+	​
+
+))=(
+i
+∏
+	​
+
+Q(y
+i
+	​
+
+∣x
+i
+	​
+
+))
+−1/n
+.
+
+It is the reciprocal geometric mean probability assigned to the actual outcomes. A uniform m-way model has perplexity m. A general value 20 is an equivalent uniform cost, not a claim that every context presents exactly 20 candidates. The programme gives A about 1.807453 and B about 2.532164.
+
+For language models, compare like tokenization, text, context rules and averaging. A different number of tokens changes the unit “per token.” Aggregate total negative log likelihood and total scored-token count for a token-weighted mean; averaging sentence perplexities does not perform that operation. A zero-probability observed event gives infinite perplexity.
+
+Score a small observed dataset
+
+We can use actual field records to inspect context-aware prediction costs. The Palmer penguin data describe penguins observed in a study of body size, sex and foraging-related ecological differences. The collectors' scientific question was not our classification exercise; this small example asks only how island information affects species prediction on a declared year split.
+
+E35 Observed rows split by year before model fitting
+2007
+2008
+2009
+train: 224
+test: 120
+● Adelie
+■ Chinstrap
+▲ Gentoo
+Training species counts; alpha=1 added only after this split
+Island	Adelie	Chinstrap	Gentoo	Total
+Biscoe	28	0	80	108
+Dream	36	44	0	80
+Torgersen	36	0	0	36
+Held-out 2009 species counts; no test row used to fit the probabilities
+Island	Adelie	Chinstrap	Gentoo	Total
+Biscoe	16	0	44	60
+Dream	20	24	0	44
+Torgersen	16	0	0	16
+
+The counts are a projection of the saved programme's observed CSV execution. They are not a new random sample.
+
+The supplied penguins.csv contains 344 rows. We use species, island and year, which are complete in these records. Missing body measurements do not justify dropping rows for this question. Use 2007–2008 for training,224 rows, and 2009 for the held-out comparison,120 rows. The fixed three species are Adelie, Chinstrap and Gentoo; islands are Biscoe, Dream and Torgersen.
+
+Download penguins.csv beside the programme file.
+
+Training species counts are(100,44,80). A global model adds one count to each species and divides by 227. A context model adds one to every species within each island and divides by that island's training count plus 3. Its training counts are Biscoe(28,0,80), Dream(36,44,0), Torgersen(36,0,0). Additive smoothing is an explicit model change that gives all three species positive predicted probability; its strength is fixed at 1 before using the test labels.
+
+Select the predicted probability for each held-out record, then sum its loss.
+
+E36 One observed row joins an explicitly weighted test average
+● Adelie
+■ Chinstrap
+▲ Gentoo
+Test row: Adelie on Biscoe
+→
+training count 28 + 1
+÷
+Biscoe train 108 + 3
+→
+29/111
+→
+−log₂(29/111) = 1.93643
+
+Biscoe model probabilities from training
+
+Adelie 0.26126
+Chinstrap 0.00901
+Gentoo 0.72973
+
+Dream model probabilities from training
+
+Adelie 0.44578
+Chinstrap 0.54217
+Gentoo 0.01205
+
+Torgersen model probabilities from training
+
+Adelie 0.94872
+Chinstrap 0.02564
+Gentoo 0.02564
+Island totals use every held-out row exactly once
+Island	Test rows	Total test loss, bits	Divide global total by 120
+Biscoe	60	50.983856	0.424865
+Dream	44	44.508193	0.370902
+Torgersen	16	1.215182	0.010127
+
+Conditional-model total accounting; common scale 1.6 bits
+
+H(test)
+0.7828
+KL
+0.0231
+CE
+0.80589
+Global CE
+1.51834
+
+.782798115 empirical conditional entropy + .023095476 mismatch = .805893591 test bits per row (rounded). The global model costs 1.518341224. This comparison is tied to this split and model class.
+
+The test island counts are Biscoe(16,0,44), Dream(20,24,0), Torgersen(16,0,0):60,44and16 rows. The global model's mean loss is 1.518341224 bits, accuracy .433333333 and perplexity 2.864614937. The island model's mean loss is .805893591 bits, accuracy .7 and perplexity 1.748228292. These are results for these records and this specified split, not universal rankings of methods or a random census of Antarctic penguins.
+
+penguins_log_loss.py
+
+Executed with Python 3.12.14, NumPy 2.3.5 and SciPy 1.18.1. Save the supplied penguins.csv beside this file before running it.
+
+penguins_log_loss.py
+
+The program loads here as you reach this part of the lesson.
+
+Download penguins_log_loss.py
+
+Output:
+
+penguins_log_loss.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download penguins_log_loss.py.stdout.txt
+
+Place the supplied CSV beside the programme and run python penguins_log_loss.py. Python's csv reader and Counter expose the training counts; no hidden fitting API is needed for this categorical model. NumPy/SciPy calculate the same finite entropy and KL quantities per held-out island. The measured run used Python 3.12.14, NumPy 2.3.5 and SciPy 1.18.1.
+
+The final check forms a descriptive empirical distribution from the test labels. It does not use that distribution to fit either prediction model. Its context-weighted entropy is .782798115 bits, the island model's cross-entropy .805893591, and their KL gap .023095476. Each island's entropy uses its test histogram, then the average uses actual test weights 60/120,44/120,16/120. An unweighted average of island costs would answer a different sampling question.
+
+The programme fits counts in O(number of training records) and scores each held-out row with one lookup. Dense storage is the small island-by-species table. For a future island absent from training, a prediction rule would need an explicit fallback; the provided split has every test island represented in training. Changing smoothing after looking at test scores turns that set into development information. Field-study selection, pairs and other dependence also limit what this one year split can establish about another population. Keep the collectors' sampling question separate from the didactic prediction task.
+
+The offline CSV is the CC 0 Palmer penguins simplified dataset maintained by Allison Horst and colleagues. The underlying study is Gorman, Williams and Fraser2014. Its retrieved bytes and selected fields are recorded with the supplied file; no network request occurs when running the programme.
+
+Lower held-out log loss means a higher geometric mean probability on the same observed outcomes. It does not alone guarantee better accuracy, subgroup calibration, fairness, robustness after shift or decisions under asymmetric costs. A log-loss anomaly score is not automatically a p-value or a diagnosis of a cause.
+
+Deeper: price differences accumulate as evidence
+
+Follow the actual signed model-price differences along a sequence.
+
+E37 A constructed short path differs from its expected trend
+
+Vertical: cumulative bits [-2.5 to 4].
+Horizontal: observed prefix length [0 to 4].
+
+0
+D
+A
+D
+A
+● Actual D,A,D,A path
+■ Expected n × .875
+Constructed increments, not a random-path claim
+Symbol	Increment	Cumulative
+D	-2	-2
+A	2	0
+D	-2	-2
+A	2	0
+
+The selected string has zero cumulative excess. Expected excess under P is .875 bits per draw; that statement does not determine each realized prefix.
+
+For specified models P and Q, the log likelihood ratio is Σ_tlog[P(event_t|past)/Q(event_t|past)]. In an independent finite source P, its expectation after n draws is nKL(P∥Q). The expected price gap therefore accumulates between those models. A realized sequence can include negative increments or have a negative total; an expectation is not a guarantee of a monotone trace. Dependence must be represented in the conditional factors rather than ignored.
+
+8. Change continuous units without changing the experiment
+
+For a numerical measurement, a density describes probability per unit coordinate. It is not the probability assigned to one exact value.
+
+E38 Investigate a coordinate change of the same uniform law
+
+Metres: support [0,0.25], density 4 per m.
+
+Vertical: density / m [0 to 8].
+Horizontal: m [0 to 1].
+
+0
+1
+8
+
+Middle-half endpoints: 0.0625 to 0.1875 m; width × density = .5. Differential entropy h = -2 bits.
+
+Centimetres: support [0,25], density 0.04 per cm.
+
+Vertical: density / cm [0 to 0.08].
+Horizontal: cm [0 to 100].
+
+0
+100
+0.08
+
+Middle-half endpoints: 6.25 to 18.75 cm; width × density = .5. Differential entropy h = 4.643856 bits.
+
+The horizontal ruler scales by 100; the vertical density ruler scales by its reciprocal. The shaded event has probability .5 in both coordinate systems.
+
+Physical support width in metres: 0.25
+Comparison coordinate unit
+Metres — identity change
+Centimetres — 100 per metre
+Reset investigation
+
+Take X uniform over[0,.25]metres. Its density is 4per metre, and the middle-half interval has width .125metres, giving probability 4×.125=.5. A density can exceed 1 while every event probability remains valid. Under a continuous density law, a singleton has zero probability even where the density is positive.
+
+For a density f relative to the chosen Lebesgue coordinate measure, differential entropy is h(f)=−∫f(x)log f(x)dx when that integral is defined. Lower-case h distinguishes it from discrete H. It can be negative, infinite or undefined; the finite-alphabet bounds do not transfer unchanged. A uniform interval of width w has h₂=log₂w, so the present coordinate convention gives−2. This is not “negative digits to transmit an exact real number.”
+
+In centimetres, the same physical interval is[0,25], with density .04per centimetre. Let Y=aX,a>0. Since dy=a dx, preservation of interval probability requires f_Y(y)=f_X(y/a)/a. Substituting into the entropy integral gives h(Y)=h(X)+log a under the needed existence and finiteness conditions. At a=100, h₂ changes from−2 to 4.643856 while the same physical event still has probability .5. The live investigation keeps both the coordinate unit and density unit beside their rulers.
+
+Now change what is recorded, rather than just its numerical unit.
+
+E39 Investigate finite bins of one physical interval
+
+The full-support detail below always shows the same physical interval; its x ruler follows the chosen unit.
+
+0
+1
+2
+3
+4
+
+Boundary labels are bin indices, 0…4. Physical width is 25 cm; each Δ=6.25 has mass 1/4.
+
+H(bins) = log₂4 = 2
+=
+h 4.64386
+−
+log₂Δ 2.64386
+
+This identity is exact for the uniform density. Changing units changes h and log₂Δ by the same amount.
+
+Inspect all bin boundaries and masses
+Bin count: 4
+Physical width in metres: 0.25
+Bin boundary units
+Metres
+Centimetres
+Reset investigation
+
+Split the physical interval into four equal bins. Each bin label has probability .25, so its discrete entropy is 2 bits. For N equal aligned bins, Δ=w/N and
+
+𝐻
+2
+(
+bin
+)
+=
+log
+⁡
+2
+𝑁
+=
+ℎ
+2
+(
+𝑋
+)
++
+log
+⁡
+2
+(
+1
+/
+Δ
+)
+.
+H
+2
+	​
+
+(bin)=log
+2
+	​
+
+N=h
+2
+	​
+
+(X)+log
+2
+	​
+
+(1/Δ).
+
+This equality is exact for the displayed uniform case. Doubling the number of bins adds one bit of bin-label entropy. Merely converting metres to centimetres scales both w and Δ and does not change the bins or their probabilities. A related fine-binning approximation can hold for suitably regular densities, but not universally for atoms, irregular bins or divergent integrals.
+
+KL behaves differently from the two density entropies taken separately.
+
+E40 Both densities and the integration width transform
+
+Original x coordinate; density units divide by 1.
+
+Vertical: density [0 to 0.45].
+Horizontal: x [-5 to 5].
+
+-5
+0
+5
+0.45
+
+New coordinate u=100x; density units divide by 100.
+
+Vertical: density [0 to 0.0045].
+Horizontal: u [-500 to 500].
+
+-500
+0
+500
+0.0045
+● P: Normal(0,1²)
+■ Q: Normal(1,2²)
+At the matching point x=1 and u=100
+Quantity	Original	Transformed
+P density	0.24197	0.00242
+Q density	0.19947	0.00199
+Density ratio	1.21306	1.21306
+Integration width	dx	du=100 dx
+
+The ratio is unchanged; density and integration width cancel their scale factors. KL stays ln2−¼=.443147 nats.
+
+Compare P and Q using densities f and g relative to the same coordinate measure:
+
+𝐷
+K
+L
+(
+𝑃
+∥
+𝑄
+)
+=
+∫
+𝑓
+(
+𝑥
+)
+ln
+⁡
+𝑓
+(
+𝑥
+)
+𝑔
+(
+𝑥
+)
+ 
+𝑑
+𝑥
+.
+D
+KL
+	​
+
+(P∥Q)=∫f(x)ln
+g(x)
+f(x)
+	​
+
+dx.
+
+Under the same invertible smooth coordinate change, both density heights acquire the same inverse Jacobian factor. Those factors cancel in the ratio, and the probability element f(x)dx is preserved. Hence KL stays invariant. Differential entropy and differential cross-entropy separately change. For a general invertible smooth map, h gains the expected log absolute Jacobian determinant when the change-of-variable and integrability hypotheses hold.
+
+entropy_continuous.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_continuous.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_continuous.py
+
+Output:
+
+entropy_continuous.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_continuous.py.stdout.txt
+
+The complete programme keeps four physical bins and reports H(bin)=2 bits in both units. It also compares P=Normal(0,1²) with Q=Normal(1,2²). KL is .443147 nats before and after multiplying both means and standard deviations by 100. Scaling only one distribution would be a different comparison.
+
+Deeper: derive Normal KL and compare measures honestly
+
+Expand the two nondegenerate Normal log densities. Under P, E[(X−μ_P)²]=σ_P² and E[(X−μ_Q)²]=σ_P²+(μ_P−μ_Q)². Their normalizing constants give ln(σ_Q/σ_P); the averaged quadratic terms give
+
+𝐷
+K
+L
+(
+𝑃
+∥
+𝑄
+)
+=
+ln
+⁡
+𝜎
+𝑄
+𝜎
+𝑃
+−
+1
+2
++
+𝜎
+𝑃
+2
++
+(
+𝜇
+𝑃
+−
+𝜇
+𝑄
+)
+2
+2
+𝜎
+𝑄
+2
+.
+D
+KL
+	​
+
+(P∥Q)=ln
+σ
+P
+	​
+
+σ
+Q
+	​
+
+	​
+
+−
+2
+1
+	​
+
++
+2σ
+Q
+2
+	​
+
+σ
+P
+2
+	​
+
++(μ
+P
+	​
+
+−μ
+Q
+	​
+
+)
+2
+	​
+
+.
+
+Both standard deviations must be strictly positive. A degenerate point mass is not handled by substituting zero into this formula. Nor does one isolated zero of a density establish a support mismatch: the measure question is whether a Q-null measurable set has positive P probability.
+
+Compare a finite empirical dataset with a smooth continuous model.
+
+E41 Point mass and smooth density live on different measures
+
+Vertical: density / point masses [0 to 0.5].
+Horizontal: observation coordinate [-3 to 3].
+
+-1
+0
+1
+
+Arrows denote atoms of probability ⅓ each; their drawn height is not a density value. The smooth curve is a continuous density.
+
+The same finite event S={−1,0,1}
+Law	Probability of S
+Empirical point-mass law	1
+Continuous Gaussian law	0
+
+KL from the empirical law to the continuous law is infinite. Evaluating finite −log density at each sample is a different calculation: it is a finite density score, not that discrete-to-continuous KL.
+
+The empirical distribution puts positive mass on its observed points; together that finite set has empirical probability 1. A continuous density model gives the same finite set probability 0. Thus KL from the empirical point-mass measure to that continuous law is infinite. Empirical average negative log density can still be a useful likelihood objective, but it is not a finite KL for those two measures.
+
+A common fixed binning or smoothing changes the model and can supply a meaningful discrete comparison. For an underlying continuous density P with suitable finite entropy and cross-entropy, its population expected log density still obeys the valid entropy-plus-KL identity. Measure Theory explains densities relative to a reference and mixed or singular laws.
+
+9. Use KL to certify a maximum-entropy model
+
+Suppose a count can be 0,1or2. We know its mean but do not know all three probabilities.
+
+E42 Three probabilities determine one point
+count 0
+count 1
+count 2
+
+The selected law: probabilities in count order
+
+count 0 0.2
+count 1 0.3
+count 2 0.5
+
+Each line through the selected point is parallel to the opposite side: amber q₀=.2, blue q₁=.3, lavender q₂=.5. Dotted parallels mark ¼, ½ and ¾. The three coordinates sum to one; the point is a law, not a physical count location.
+
+A point in the triangle represents(q0,q1,q2), three nonnegative coordinates summing to one. The vertex labelled 0 is the certain count 0 law; the other vertices are certain 1 and certain 2. The interior distributes probability among all three outcomes. The triangle is a map of probability laws, not the physical location of a count.
+
+First hold the mean constraint fixed at E[X]=10/7. This first view lets you move among feasible probability laws; it does not yet introduce an optimizer or an entropy-gap display.
+
+E43 Investigate the feasible slice before choosing a criterion
+count 0
+count 1
+count 2
+
+Current q is the blue circle. The white segment contains exactly the laws satisfying the selected mean.
+
+Current q in count order
+
+count 0 0
+count 1 0.57143
+count 2 0.42857
+sum q = 1
+mean = 1.42857143
+t=q₂=0.42857143
+feasible t ∈ [0.42857143, 0.71428571]
+Feasible-slice fraction — stage 1: 0
+Reset investigation
+
+All three investigation positions share this state. Scrolling does not reset it; reset anywhere restores mean 10/7 and fraction 0.
+
+The admissible laws lie on a line through the triangle. Let t=q2. Solving q0+q1+q2=1 and q1+2q2=10/7 gives q=(t−3/7,10/7−2t,t). Nonnegativity restricts t to[3/7,5/7]. The constraint leaves a real choice; it does not already determine the distribution.
+
+Maximum entropy chooses the feasible distribution with the largest Shannon entropy on this specified alphabet. This is a modeling rule relative to stated outcomes and constraints, not proof of the physical process. Try p*=(1,2,4)/7. Its masses sum to one and its mean is(2+8)/7=10/7.
+
+We can now compare a feasible q with the candidate p*. The entropy difference H(p*)−H(q) is their vertical separation on an entropy plot; a plot alone does not establish its sign for every feasible law. The linked view below adds the candidate, both entropies and their difference. Selecting p* moves q onto that candidate.
+
+Compare the same feasible point in probability space and on the entropy curve.
+
+E44 Compare the current law with the entropy candidate
+count 0
+count 1
+count 2
+
+Current q is the blue circle. Candidate p* is the amber open diamond. The white segment contains exactly the laws satisfying the selected mean.
+
+Current q in count order
+
+count 0 0
+count 1 0.57143
+count 2 0.42857
+sum q = 1
+mean = 1.42857143
+t=q₂=0.42857143
+feasible t ∈ [0.42857143, 0.71428571]
+
+Candidate p* in count order
+
+count 0 0.14286
+count 1 0.28571
+count 2 0.57143
+
+Vertical: entropy, bits [0 to 1.6].
+Horizontal: t = q₂ [0.42857 to 0.71429].
+
+0.4286
+0.7143
+
+H(q)=0.985228136; H(p*)=1.378783493; gap=0.393555357 bits. η=0.69314718.
+
+Feasible-slice fraction — stage 2: 0
+Select p*
+Reset investigation
+
+All three investigation positions share this state. Scrolling does not reset it; reset anywhere restores mean 10/7 and fraction 0.
+
+The live parameter t means q2, not Euclidean distance along the line. The linked views locate one law and its entropy. At t=3/7, q=(0,4/7,3/7), entropy .985228 bits. At t=5/7, q=(2/7,0,5/7), entropy .863121. The interior candidate p* has 1.378783. A sampled plot suggests a maximum, but a proof must cover every feasible law.
+
+Here p*(x)=2ˣ/7, so log₂p*(x)=x−log₂7. Every feasible q has the same expected x,10/7. Its cross-entropy against p* is therefore fixed at log₂7−10/7. Hence
+
+𝐷
+K
+L
+(
+𝑞
+∥
+𝑝
+∗
+)
+=
+log
+⁡
+2
+7
+−
+10
+7
+−
+𝐻
+2
+(
+𝑞
+)
+=
+𝐻
+2
+(
+𝑝
+∗
+)
+−
+𝐻
+2
+(
+𝑞
+)
+≥
+0.
+D
+KL
+	​
+
+(q∥p
+∗
+)=log
+2
+	​
+
+7−
+7
+10
+	​
+
+−H
+2
+	​
+
+(q)=H
+2
+	​
+
+(p
+∗
+)−H
+2
+	​
+
+(q)≥0.
+
+This certifies the global maximum and identifies its gap for every feasible q. Equality occurs only at p*. We did not merely find a stationary point or inspect a dense grid.
+
+The general connection comes from Exponential Families. With equal base weights on a finite support, p_η(x)=exp(ηT(x)−A(η)). If a positive member has the desired mean E[T]=m, then E_q log p_η=ηm−A(η) is fixed over every feasible q. The same KL identity certifies that member's entropy maximum. Our three-count example uses T(x)=x and η=ln 2.
+
+Deeper: feasible boundaries and reference weights
+
+The earlier two views share the current feasible law. We now add a mean editor, after explaining how a changed constraint changes the feasible set and candidate. Change the required mean and watch that same line move in every linked view.
+
+E45 Move the mean constraint, keeping the same slice fraction
+Four reference slices, before changing the live mean
+Mean	t lower	t upper	Feasible geometry
+0	0	0	one vertex
+1	0	0.5	line segment
+10/7	3/7	5/7	line segment
+2	1	1	one vertex
+
+Reference mean 0
+
+count 0
+count 1
+count 2
+
+Reference mean 1
+
+count 0
+count 1
+count 2
+
+Reference mean 1.428571
+
+count 0
+count 1
+count 2
+
+Reference mean 2
+
+count 0
+count 1
+count 2
+count 0
+count 1
+count 2
+
+Current q is the blue circle. Candidate p* is the amber open diamond. The white segment contains exactly the laws satisfying the selected mean.
+
+Current q in count order
+
+count 0 0
+count 1 0.57143
+count 2 0.42857
+sum q = 1
+mean = 1.42857143
+t=q₂=0.42857143
+feasible t ∈ [0.42857143, 0.71428571]
+
+Candidate p* in count order
+
+count 0 0.14286
+count 1 0.28571
+count 2 0.57143
+
+Vertical: entropy, bits [0 to 1.6].
+Horizontal: t = q₂ [0.42857 to 0.71429].
+
+0.4286
+0.7143
+
+H(q)=0.985228136; H(p*)=1.378783493; gap=0.393555357 bits. η=0.69314718.
+
+Feasible-slice fraction — stage 3: 0
+Select p*
+Required mean
+Apply Required mean
+Reset investigation
+
+All three investigation positions share this state. Scrolling does not reset it; reset anywhere restores mean 10/7 and fraction 0.
+
+For any mean m∈[0,2], q=(1−m+t,m−2t,t) with max(0,m−1)≤t≤m/2. The investigation preserves your relative position along this feasible t interval when m changes: if a=max(0,m−1), b=m/2 and τ∈[0,1], set t=a+τ(b−a). This is a coordinate fraction, not distance along the drawn line. All linked displays update to the same m and q. The numeric interface supports exact endpoint means0,2 and interior means from10⁻⁶ to2−10⁻⁶; unsupported or invalid drafts leave the last valid experiment visible with an explanation. A mathematical feasible mean outside that numerical interior is not thereby impossible. Reset in any view restores m=10/7 and the first endpoint τ=0. The means 0and2 leave only their corresponding vertices. Interior means have positive maximizers; endpoint point masses require η→−∞ or+∞, not finite η. On a nonempty finite simplex slice, continuity and compactness give an attained maximum, while strict concavity gives uniqueness. This does not establish existence of a finite optimizer for every unbounded continuous moment problem.
+
+The base weights in an exponential-family model matter as well.
+
+E46 A nonuniform reference changes the entropy objective
+count 0
+count 1
+count 2
+
+The two middle subslots represent reference weight h₁=2; they do not create a fourth outcome.
+
+Distribution proportional to base h=(1,2,1)
+
+count 0 0.25
+count 1 0.5
+count 2 0.25
+Shannon entropy and the base-relative objective are different
+Candidate	Shannon H, bits	H + E log₂h, bits
+(.25,.5,.25)	1.5	2
+Uniform (⅓,⅓,⅓)	1.584963	1.918296
+
+Both satisfy mean 1. The uniform law wins for Shannon entropy; the base-weighted law wins for the explicitly changed relative objective.
+
+For p_η(x)=h(x)exp(ηT(x)−A(η)) with positive nonuniform h, log p includes log h. With a fixed moment m,
+
+𝐷
+K
+L
+(
+𝑞
+∥
+𝑝
+𝜂
+)
+=
+𝐴
+−
+𝜂
+𝑚
+−
+[
+𝐻
+(
+𝑞
+)
++
+𝐸
+𝑞
+log
+⁡
+ℎ
+]
+.
+D
+KL
+	​
+
+(q∥p
+η
+	​
+
+)=A−ηm−[H(q)+E
+q
+	​
+
+logh].
+
+Thus the certified objective is H(q)+E_qlog h. If r=h/Σh, that objective equals−KL(q∥r)+logΣh; it is entropy relative to those base weights, generally not ordinary Shannon entropy.
+
+For count outcomes 0,1,2 and h=(1,2,1), η=0 gives p=(.25,.5,.25), mean 1 and entropy 1.5 bits. The uniform distribution has the same mean and greater ordinary entropy log₂3≈1.584963. But the base-relative objective is 2 for p and log₂3+1/3≈1.918296 for uniform. The programme's final two lines expose the ordinary-entropy counterexample, while the drawn base slots explain the extra weighting.
+
+entropy_maximum.py
+
+Standard-library Python example; the output is retained from its earlier verified execution.
+
+entropy_maximum.py
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_maximum.py
+
+Output:
+
+entropy_maximum.py.stdout.txt
+
+The program loads here as you reach this part of the lesson.
+
+Download entropy_maximum.py.stdout.txt
+
+The programme visits the two endpoints and the proposed optimum and verifies the same identity numerically. A small cleanup handles floating subtraction near an exact zero in this fixed fixture. Such cleanup is not a replacement for feasibility checks in an arbitrary solver: normalization and the specified mean must both hold.
+
+A moment constraint fixes the expected log price of the matching exponential-family candidate; nonnegative KL turns that fact into a certificate. This mathematical conclusion does not require an additional slogan about making the “fewest assumptions.”
+
+10. Practise with new distributions and decisions
+
+Try the prompts before opening a hint or solution. Name the alphabet, weighting distribution, units and required support or sampling assumptions. For implementation repairs, first write a small function and a changed input that would expose the wrong operation.
+
+1. Information and code length are different quantities
+
+A source has five labels with probabilities (1/2,1/8,1/8,1/8,1/8). Calculate its entropy and construct a prefix code attaining it. Compare fixed-width coding and the actual message AEEE. Explain why a 2.5-bit message average would not contradict the 2-bit source entropy.
+
+Also express the source entropy in nats and compare the surprise of E with its contribution to entropy.
+
+Optional hint
+Worked solution and reasoning
+2. Compute a changed mismatch and diagnose the signed terms
+
+For P=(3/4,1/4) and Q=(1/2,1/2), compute entropy, cross-entropy, both signed KL contributions and the reverse KL. Explain why taking the absolute value of each contribution would define a different quantity.
+
+Optional hint
+Worked solution and reasoning
+3. Decode a changed stream and reject an ambiguous code
+
+Decode 110010111 using the lesson's matched code. Then inspect A=0, B=00, C=1. Give a concrete ambiguous bitstream and explain why “always choose the shortest matching word” is not a repair.
+
+Independently implement a prefix-tree decoder. It must reject a word that prefixes another in either insertion order, reject an unfinished stream, and decode 101100. Use a tree so each received bit is visited once.
+
+Optional hint
+Worked solution and reasoning
+4. Repair a support and clipping claim
+
+For P=(0.8,0.2,0) and Q=(1,0,0), classify both KL directions. A colleague replaces log 0 with log 10⁻⁶ and reports “the exact original KL.” Explain the error and give one valid explicitly smoothed model.
+
+Write a finite H/CE/KL helper for already normalized vectors. Repair code that takes every log before checking P=0. Check P=(.5,.5,0),Q=(.25,.75,0), then Q=(1,0,0); reject P=(.5,.5,.1).
+
+Optional hint
+Worked solution and reasoning
+5. Use unequal context frequencies
+
+P(X=0)=0.75, P(Y=1|X=0)=0.2 and P(Y=1|X=1)=0.8. Calculate H(Y), H(Y|X), and the ideal expected losses with and without X. Explain which probabilities would need changing if the context frequencies shifted.
+
+Now use joint rows(.675,.075),(.125,.125). Implement conditional entropy from the joint table, and repair an equal-row-average bug. Repeat after changing only context masses to(.5,.5) and(1,0), preserving conditional Y1 probabilities(.1,.5).
+
+Optional hint
+Worked solution and reasoning
+6. Evaluate confidence with a consistent denominator
+
+On six shared binary test cases, C's correct-label probabilities are (0.9,0.9,0.9,0.9,0.4,0.4). D's are (0.6,0.6,0.6,0.6,0.6,0.01). Calculate accuracy and mean log loss. Which wins each measure, and what additional claim would this small test not justify?
+
+A separate language example has one scored token with total loss 0 nats and nine scored tokens with total loss 9 nats. Find the token-weighted mean and perplexity; explain why averaging the two sentence perplexities differs.
+
+Optional hint
+Worked solution and reasoning
+7. Compute an extreme but finite log loss
+
+Scores are (800,0,−800), and the last class occurs. Calculate the stable loss and explain why adding −700 to every score changes nothing. Give both an ordinary-score acceptance case and an underflow case for an implementation test.
+
+Write stable_loss(logits,target) without taking log of a separately computed softmax. Check(0,−1000,−2000), target 2 and a common+1000 shift. Repair wrong class-axis and unnormalized-soft-target use separately.
+
+Optional hint
+Worked solution and reasoning
+8. Preserve the physical experiment when changing units
+
+X is uniform on [0,2] metres. Express its differential entropy in metres and millimetres; quantize it into four equal bins and compare bin-label entropy. Then explain why finite negative log density on observed samples does not establish finite KL from their empirical point-mass distribution.
+
+Optional hint
+Worked solution and reasoning
+9. Certify a new constrained maximum
+
+On outcomes 0,1,2, replace the required mean with 1/2. Derive the feasible slice, find the positive exponential-family candidate and prove it maximizes entropy. State what changes if the base weights become (1,2,1).
+
+Independently implement the feasible three-count slice for a general mean. Use mean 6/5 and both exact endpoints; reject t=.1 and mean 2.1. Explain why normalizing an arbitrary vector is insufficient.
+
+Optional hint
+Worked solution and reasoning
+10. Distinguish independent choices from a copied bit
+
+Let X be a fair bit. In one experiment Y is an independent fair bit; in another Y=X. Find the probability and surprise of the pair(1,1), using the correct conditional factor in each experiment. Is adding the two marginal surprises always correct?
+
+Optional hint
+Worked solution and reasoning
+11. Repair a block-length construction
+
+A routine floors the ideal information of each block and divides lengths by n before checking prefix feasibility. For Bernoulli P(1)=1/4 and n=2, repair the construction, find the expected per-symbol length, and expose the floor bug. Use an exact dyadic probability as an additional boundary check.
+
+Optional hint
+Worked solution and reasoning
+12. Decide which KL argument is valid
+
+Prove the equality condition in the finite KL bound when P has zero entries. Then assess three claims: “uniform entropy is largest even when the alphabet changes”; “a symmetric divergence must use distance between labels”; and “if P=Q has infinite entropy, KL is infinity minus infinity.” Give a correction for each.
+
+Optional hint
+Worked solution and reasoning
+13. Repair the library boundary
+
+An array has shape(2,3), with rows(1000,998,996) and(0,−1000,−2000). The observed classes are 0and2. A routine applies softmax across the two examples, passes those results into cross_entropy, and uses target array(2,1,0) as a soft row. Identify each change needed. Explain which mean formula would have to be reconsidered if class weights or ignored labels were added.
+
+Optional hint
+Worked solution and reasoning
+14. Trace an observed prediction without refitting on test labels
+
+Using the supplied penguin counts, find the island model's probability for an Adelie record on Biscoe, trained on 2007–2008 with additive count 1. Explain why its test-island loss uses 60 records and the final mean uses 120. Reconstruct the conditional entropy-plus-KL total. Then consider changing the smoothing strength to .5 after choosing it by the 2009score: what role does that score now play?
+
+Optional hint
+Worked solution and reasoning
+What you should now be able to do
+
+Choose a fresh four-outcome law and explain each weighted entropy contribution, then trace a new message through a prefix tree. Compare the cost under a different prediction law, diagnose a missing-support state and prove why the total KL cannot be negative. These are the core checks behind practice 1–4 and 10–12.
+
+For conditional predictions, reconstruct joint probabilities from context masses and normalized rows, and show why unequal row costs need the actual context weights. Compute a stable log loss from raw logits and explain the library's class axis and reduction. Use the same observations and denominator when comparing log scores or perplexity. Practice 5–7 and 13–14 ask you to repair those operations independently.
+
+For the deeper branch, keep a physical event fixed while changing measurement units, distinguish an atomic empirical law from a density model, and use a feasible moment slice plus a KL certificate to establish a global entropy maximum. Practice 8–9 test those distinctions. If a step is unclear, return to its drawing and trace one row, branch or probability point before repeating the equation.
+
+Further learning
+Cover and Thomas, chapter2 offers another sustained written explanation. Start with §§2.1–2.3 for entropy, conditioning and divergence, then §2.6 for inequalities. Its binary-question example connects directly to the four symbols here.
+MIT6.02: Overview, information and entropy supplies George Verghese's lecture and companion material. Use it for a slower spoken route through surprise and coding. The companion slides were assessed for fit; the entire recording has not been reviewed for this lesson.
+MIT6.441, chapter1 is a more compressed graduate treatment. Read §§1.1–1.3 after the examples to connect finite sums, general measures and differential entropy.
+The earlier Greedy Algorithms lesson develops the actual efficient Huffman heap/tree construction and exchange argument. It complements the fixed codebook here; a ceiling-length bound is not a Huffman implementation.
+Technical references
+MIT6.441, chapter6: prefix versus uniquely decodable codes, Kraft capacity and the entropy coding bound.
+Shannon, A Mathematical Theory of Communication: the original source/communication formulation; §6 develops weighted grouping of choices. It measures probabilistic alternatives rather than the semantic importance of a message.
+Stanford CS229, Maximum Entropy and Exponential Families: the finite interior exponential form. Keep nonnegative probabilities and boundary means explicit; an affine constraint alone does not make every parameter feasible.
+SciPy entropy: base, axis and automatic normalization, including the distinction between entropy and KL. The new programmes above identify their actual SciPy 1.18.1 execution environment.
+PyTorch CrossEntropyLoss: raw logits, class indices and probability targets, shapes and reduction. BCEWithLogitsLoss is the corresponding stable single-logit binary interface, with a different input contract.
+Palmerpenguins documentation identifies the CC 0 dataset maintained by Allison Horst, Alison Hill and Kristen Gorman, with original collection by Gorman and PalmerStationLTER. Gorman, Williams and Fraser's ecological study explains the sampling and scientific question. The local CSV is pinned to the supplied 344 records; our year-split prediction exercise answers a different question from that study.
+Next: what does an observation tell us about another variable?
+
+Conditional entropy already compares uncertainty before and after a context is known. Mutual Information & Information Bottleneck turns that reduction into a measure of dependence, then asks which details a representation can discard while retaining information relevant to a task. Keep the joint table, its normalized conditional rows and their actual weights in view: they are the objects behind the next formulas.
+
+Code & supporting files
+
+Download a complete program or save an example to work with locally. Example snippets keep the setup and dependencies explained beside them; saving a snippet does not make it a standalone program.
+
+entropy_coin.py
+Download entropy_coin.py
+Download
+entropy_coin.py.stdout.txt
+Download entropy_coin.py.stdout.txt
+Download
+entropy_prefix.py
+Download entropy_prefix.py
+Download
+entropy_prefix.py.stdout.txt
+Download entropy_prefix.py.stdout.txt
+Download
+entropy_blocks.py
+Download entropy_blocks.py
+Download
+entropy_blocks.py.stdout.txt
+Download entropy_blocks.py.stdout.txt
+Download
+entropy_bernoulli.py
+Download entropy_bernoulli.py
+Download
+entropy_bernoulli.py.stdout.txt
+Download entropy_bernoulli.py.stdout.txt
+Download
+entropy_support.py
+Download entropy_support.py
+Download
+entropy_support.py.stdout.txt
+Download entropy_support.py.stdout.txt
+Download
+entropy_conditional.py
+Download entropy_conditional.py
+Download
+entropy_conditional.py.stdout.txt
+Download entropy_conditional.py.stdout.txt
+Download
+information_library.py
+Download information_library.py
+Download
+information_library.py.stdout.txt
+Download information_library.py.stdout.txt
+Download
+entropy_logits.py
+Download entropy_logits.py
+Download
+entropy_logits.py.stdout.txt
+Download entropy_logits.py.stdout.txt
+Download
+entropy_torch.py
+Download entropy_torch.py
+Download
+entropy_torch.py.stdout.txt
+Download entropy_torch.py.stdout.txt
+Download
+entropy_evaluation.py
+Download entropy_evaluation.py
+Download
+entropy_evaluation.py.stdout.txt
+Download entropy_evaluation.py.stdout.txt
+Download
+penguins.csv
+Download penguins.csv
+Download
+penguins_log_loss.py
+Download penguins_log_loss.py
+Download
+penguins_log_loss.py.stdout.txt
+Download penguins_log_loss.py.stdout.txt
+Download
+entropy_continuous.py
+Download entropy_continuous.py
+Download
+entropy_continuous.py.stdout.txt
+Download entropy_continuous.py.stdout.txt
+Download
+entropy_maximum.py
+Download entropy_maximum.py
+Download
+entropy_maximum.py.stdout.txt
+Download entropy_maximum.py.stdout.txt
+Download
+Practice and optional files · 6
+○ Mark as complete

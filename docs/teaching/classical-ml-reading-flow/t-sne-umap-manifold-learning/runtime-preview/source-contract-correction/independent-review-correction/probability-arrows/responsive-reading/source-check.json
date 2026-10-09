@@ -1,0 +1,36 @@
+{
+  "schema": "manifold-responsive-source-check/v1",
+  "status": "PASS_EXACT_PREFIX_ADDITIVE_SCOPED_CSS_NO_CONTENT_CHANGE",
+  "at": "2026-10-09T14:42:06.314988+00:00",
+  "predecessor": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/author-ready-built-source.json",
+    "bytes": 45222,
+    "sha256": "b6643cfeb323b8038217c8400ccde10462c19dc2267e1cb2f44a747ca3067ff2"
+  },
+  "rootFinding": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/root-native-review.json",
+    "bytes": 5954,
+    "sha256": "4644cca8160d295518779d35f480487c366302cc881d0827ed10c95a98b5ae2b"
+  },
+  "originalCss": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-reader.css",
+    "bytes": 4690,
+    "sha256": "cdbabe22dca81d07fe19d225de92b35c01c86e4fb0760bb24da2e5b0b8622cb0"
+  },
+  "overlayCss": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/manifold-reader.css",
+    "bytes": 5060,
+    "sha256": "25a7954c41747468debe80dd8a89750078859cd28c7ac7f66eb8dce6f3ad375b"
+  },
+  "additionBytes": 370,
+  "priorSourceBindingsGuarded": 83,
+  "priorBuiltArtifactsGuarded": 66,
+  "contentReferencesGuarded": 11,
+  "payloadsGuarded": 35,
+  "exactOriginalPrefix": true,
+  "inverseRecoversOriginal": true,
+  "scope": "Only paragraph text/code wrapping and actual direct-KaTeX inline renderer wrapper local scrolling. No table/caption/font/global clipping changes.",
+  "accessibilityLimit": "Original KaTeX MathML and shared focus-visible outline remain. CSS cannot add tabindex/name; Root must inspect actual overflow-container keyboard/accessibility behavior in Chromium and request a render-only follow-up if needed.",
+  "nativeClaim": false,
+  "scientificReplay": false
+}

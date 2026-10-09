@@ -1,9 +1,12 @@
 import { Callout, Code, H2, H3, Prose } from '../../components/content';
-import { MathBlock } from '../../components/content/Math.jsx';
-import { Checkpoint, LessonIntro, LessonTable, Sources } from '../../components/lesson-labs/LessonElements';
+import { MathBlock } from '../../components/lesson-labs/SingleVariableCalculusEquation.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+import { LessonIntro, LessonTable, Sources } from '../../components/lesson-labs/LessonElements';
 import { RunnableExample } from '../../components/lesson-labs/RunnableExample';
-import { ChainLocalChangeLab, ExponentialRateLab, ExtremaCandidatesLab, FundamentalStripFigure, ImproperIntegralLab, LimitGateLab, MotionJourneyFigure, MotionRateLab, ProductIncrementFigure, SignedAccumulationLab, TaylorErrorLab, WeightedRodFigure } from '../../components/lesson-labs/SingleVariableCalculusLabs.jsx';
+import { ChainLocalChangeLab, ExponentialRateLab, ExtremaCandidatesLab, ImproperIntegralLab, LimitGateLab, MotionRateLab, SignedAccumulationLab, TaylorErrorLab, AccumulationStripLab } from '../../components/lesson-labs/SingleVariableCalculusLabs.jsx';
 import { singleVariableCalculusExamples } from '../single-variable-calculus-examples.js';
+import { symbolicCalculusExample } from '../single-variable-calculus-library-example.js';
+import { JourneyObservationsFigure, FiniteSecantFigure, JourneyLegsFigure, LimitVersusValueFigure, ToleranceBandFigure, JumpLimitsFigure, UnboundedBranchesFigure, ContinuityHypothesesFigure, SquareLocalChangeFigure, MotionCurvatureFigure, DerivativeFailureFigure, ProductStripsFigure, ChainChangesFigure, ZeroInnerChangeFigure, RadianSqueezeFigure, InverseSlopeFigure, CircleBranchesFigure, MeanValueFigure, PerimeterOptimumFigure, RelatedCircleRateFigure, CandidateClassesFigure, TaggedPartitionFigure, MeshComparisonFigure, SquareSumFigure, SignedMagnitudeFigure, AccumulationStripFigure, ConstantPrimitiveFigure, StepAccumulationFigure, MovingBoundsFigure, TransformedBoundsFigure, NonmonotoneSubstitutionFigure, PartsBoundaryFigure, IntegrationDomainsFigure, LogAreaFigure, InverseExponentialFigure, TaylorBoundFigure, SeriesOutsideRadiusFigure, FloatingCancellationFigure, ImproperBoundariesFigure, PrincipalValueFigure, WorkContributionFigure, RodBalanceFigure, DiskVolumeFigure, ArcLengthFigure, DecayEulerFigure } from '../../components/lesson-labs/SingleVariableCalculusFigures.jsx';
 function CalculusExample({
   id,
   children
@@ -26,26 +29,38 @@ export default {
   title: 'Single-Variable Calculus: Limits, Derivatives & Integrals',
   readTime: '~100 min read + 2–3 hours practice',
   hasIntegratedGuide: true,
-  content: () => <div className="lesson-pilot single-calculus-lesson">
-    <LessonIntro prerequisites="Use functions, domains and equations from Algebra; quantified statements from Sets & Logic; and radians and signed trigonometric coordinates from Geometry. We refresh the needed meanings before using them. The Python programs are optional; the diagrams and investigations work here." sections={[['1-ask-three-questions-about-one-journey', 'Position, rate and change'], ['2-make-approaching-precise', 'Limits and continuity'], ['3-extract-the-local-linear-rate', 'Derivatives and their limits'], ['4-build-rules-from-changing-operations', 'Products, chains and inverses'], ['5-connect-local-rates-to-global-decisions', 'Mean values and extrema'], ['6-accumulate-signed-contributions', 'Riemann sums and distance'], ['7-prove-the-bridge-between-rate-and-total', 'Fundamental theorem'], ['8-reverse-operations-to-integrate', 'Integration methods'], ['9-complete-the-exponential-growth-story', 'Logarithms and exponential rates'], ['10-keep-the-remainder-with-the-approximation', 'Taylor and numerical limits'], ['11-check-what-happens-at-the-edge', 'Improper integrals and limit rules'], ['12-transfer-the-same-idea-to-new-quantities', 'Work, mass and rate laws'], ['13-practise-with-changed-assumptions', 'Independent practice'], ['14-connect-the-pieces-and-continue', 'Readiness and resources']]}>A changing quantity has a current value, a local rate and a total change over an interval. Calculus explains how these descriptions fit together. Start with a small journey, then derive the tools needed to make predictions, accumulate contributions and recognize when a tempting calculation is invalid. Read the core route in order; the marked proof and extension branches give additional depth.</LessonIntro>
+  content: () => <div className="lesson-flow single-calculus-lesson">
+    <LessonIntro prerequisites="Use functions, domains and equations from Algebra; quantified statements from Sets & Logic; and radians and signed trigonometric coordinates from Geometry. We refresh the needed meanings before using them. The Python programs are optional; the diagrams and investigations work here." sections={[['1-ask-three-questions-about-one-journey', 'Position, rate and change'], ['2-make-approaching-precise', 'Limits and continuity'], ['3-extract-the-local-linear-rate', 'Derivatives and their limits'], ['4-build-rules-from-changing-operations', 'Products, chains and inverses'], ['5-connect-local-rates-to-global-decisions', 'Mean values and extrema'], ['6-accumulate-signed-contributions', 'Riemann sums and distance'], ['7-prove-the-bridge-between-rate-and-total', 'Fundamental theorem'], ['8-reverse-operations-to-integrate', 'Integration methods'], ['9-complete-the-exponential-growth-story', 'Logarithms and exponential rates'], ['10-keep-the-remainder-with-the-approximation', 'Taylor and numerical limits'], ['11-check-what-happens-at-the-edge', 'Improper integrals and limit rules'], ['12-transfer-the-same-idea-to-new-quantities', 'Work, mass and rate laws'], ['13-practise-with-changed-assumptions', 'Independent practice'], ['14-connect-the-pieces-and-continue', 'Readiness and resources']]}>A changing quantity has a current value, a local rate and a total change over an interval. Calculus explains how these descriptions fit together. Start with a small journey, then derive the tools needed to make predictions, accumulate contributions and recognize when a tempting calculation is invalid. Read the route in order. Each proof develops the mechanism in place; the practice section asks you to use it with changed assumptions.</LessonIntro>
 
     <H2>1. Ask three questions about one journey</H2>
+    <Prose>A moving object is observed at four times. Read each track from the same origin: which observations share a position, even though they happened at different times?</Prose>
+    <JourneyObservationsFigure />
+    <Prose>The object is at 0, 4, 0 and 4 metres at times 0, 1, 3 and 4 seconds. Time labels identify separate observations; the distance along each row measures position. We now give one rule connecting those observations.</Prose>
     <Prose>A small object travels along a straight track. At each time t, its <strong>position</strong> s(t) tells us where it is relative to a chosen origin. A position can increase or decrease; the object can return to a place it visited earlier. We will use the instructional model s(t)=t³−6t²+9t=t(t−3)² on 0≤t≤4. Time is measured in seconds and position in metres. The polynomial uses the numerical time in that unit; its coefficients carry the corresponding metre/second powers. This is a declared mathematical example, not measured motion.</Prose>
     <LessonTable caption="One position rule, four observations" headers={['Time (s)', 'Position (m)', 'What that says']} rows={[['0', '0', 'Start at the origin'], ['1', '4', 'Four metres to the positive side'], ['3', '0', 'Back at the origin'], ['4', '4', 'Four metres to the positive side again']]} />
+    <Prose>Join the observations at one and three seconds. How much time passes, and how much position is lost? Read the horizontal and vertical legs before dividing.</Prose>
+    <FiniteSecantFigure />
     <Prose>Between t=1 and t=3, the position change is 0−4=−4 m. Divide by the elapsed 2 s to obtain an <strong>average velocity</strong> of −2 m/s. The minus sign describes direction. <strong>Speed</strong> is the nonnegative magnitude of velocity; it answers how fast, without the direction.</Prose>
     <MathBlock>{String.raw`\begin{gathered}\text{average velocity on }[a,b]\\
       =\frac{s(b)-s(a)}{b-a},\qquad a<b.
     \end{gathered}`}</MathBlock>
     <Prose>A graph of position against time makes this quotient the slope of a line joining two observations—a <strong>secant</strong>. It is an interval summary. To ask for velocity at one instant, bring the second observation closer. At t=2, s(2)=2. At t=2.5, s(2.5)=0.625, so the average velocity over that half-second is −2.75 m/s. The instantaneous answer will be −3 m/s, but obtaining it requires explaining what “closer” guarantees.</Prose>
+    <Prose>Bring a second observation toward the fixed one from either time direction. Choose the base time and a nonzero signed increment; the two points, slope triangle, secant and instantaneous tangent update together. Compare an interval average with the tangent rate. Reset restores t=2 and h=0.5.</Prose>
     <MotionRateLab />
-    <Prose>The total position change over the whole journey is only 4 m. That does not say how far the object travelled: forward and backward motion can cancel in a signed total. We will derive the turning times before using the following three-leg decomposition.</Prose>
-    <MotionJourneyFigure />
-    <Callout accent="green" label="Three different questions">The value s(t) locates the object. A derivative will describe its local rate of change. An integral will add the contributions over an interval. Keep the quantity and its units attached to each question.</Callout>
-    <Prose>For an optional program, save one complete block as <Code>calculus_check.py</Code> and run <Code>python calculus_check.py</Code> with Python 3.12 or a compatible Python 3. Every block supplies its own imports and inputs. Standard-library <Code>Fraction</Code> gives exact rational arithmetic; decimal transcendental outputs use floating-point arithmetic and are labelled accordingly. No program runs automatically in your browser.</Prose>
+    <Prose>Follow the actual travel directions: four metres forward, four back, then four forward. Which parts cancel when we remember only the final position?</Prose>
+    <JourneyLegsFigure />
+    <Prose>Signed contributions add to 4 metres; the lengths of the three legs add to 12 metres. Turning times will be derived below, so this picture is a concrete question to check rather than a substitute for that derivation.</Prose>
+    <Callout title="Value, local rate and accumulated change">The value s(t) locates the object. A derivative will describe its local rate of change. An integral will add the contributions over an interval. Keep the quantity and its units attached to each question.</Callout>
+    <Prose>For an optional program, use Python 3.12 or a compatible Python 3. Save one complete block with its displayed filename and run <Code>python filename.py</Code> (or <Code>py filename.py</Code> on Windows), replacing that name with the chosen file. Every block supplies its own imports and inputs. Standard-library <Code>Fraction</Code> gives exact rational arithmetic; decimal transcendental outputs use floating-point arithmetic and are labelled accordingly. No program runs automatically in your browser.</Prose>
     <CalculusExample id="motion-secants"><Prose>The fractions expose the entire finite error. At t=2 the quotient is −3+h², so either sign of h gives a value approaching −3. The equal left/right finite slopes here arise from this particular cubic at this point; they are not a rule for every curve.</Prose></CalculusExample>
 
     <H2>2. Make approaching precise</H2>
+    <Prose>The nearby curve uses the square rule on both sides of input 2. The open point at height 4 and the assigned dot at height 6 record different information. Which one can changing only the central value affect?</Prose>
+    <LimitVersusValueFigure />
     <Prose>A <strong>limit</strong> describes the values a function approaches near an input, whether or not its value at that input agrees. For f(x)=x², inputs near 2 have outputs near 4. Changing only f(2) to 6 leaves every nearby, different input unchanged. The limit is still 4; the new function is not continuous at 2.</Prose>
+    <Prose>Request an output error below 0.5 around height 4. The vertical input strip of radius 0.1 lies within that horizontal accuracy band, apart from the excluded center. What must remain true for every allowed input?</Prose>
+    <ToleranceBandFigure />
+    <Prose>For this square curve the largest boundary error is 0.1×4.1=0.41. Boundary inputs are not included in the strict strip. The picture suggests a radius; the following factorization proves the guarantee throughout the neighborhood.</Prose>
     <Prose>The notation below says: make the output error smaller than any requested positive tolerance by restricting the input to a sufficiently small, punctured neighborhood. “Punctured” removes the center x=2. The symbol ε, epsilon, is the requested output accuracy; δ, delta, is an input radius we choose after seeing that request.</Prose>
     <MathBlock>{String.raw`\begin{gathered}\lim_{x\to a}f(x)=L\quad\text{means}\\
       \text{for every }\varepsilon>0\text{ there is }\delta>0\\
@@ -55,16 +70,26 @@ export default {
     <Prose>The order matters: one chosen δ must work for <em>every</em> allowed nearby x, not merely for a favorite sequence of test points. δ can depend on ε and the fixed point a. A sampled graph illustrates this promise; a proof must justify it between the samples too.</Prose>
     <H3>Prove one promise completely</H3>
     <Prose>For x² near 2, factor the output error as |x²−4|=|x−2||x+2|. First keep |x−2|&lt;1. Then 1&lt;x&lt;3 and |x+2|&lt;5. Given any ε&gt;0, choose δ=min(1,ε/5). Every x with 0&lt;|x−2|&lt;δ satisfies |x²−4|&lt;5δ≤ε. That is a proof for all such x. It need not find the largest possible δ; a sufficient radius establishes the limit.</Prose>
+    <Prose>Change the requested accuracy and input radius, then compare the entire strip with the band. Choose the unchanged square, a removable point change or a one-sided jump. The exact bound or a strict-interior counterexample accompanies the picture; sampling alone cannot certify the promise. Reset restores the square, ε=0.5 and δ=0.1.</Prose>
     <LimitGateLab />
     <CalculusExample id="limit-guarantee"><Prose>The exact computations confirm several instances of the bound and exhibit a counterexample to an overly large radius. The general factorization supplies the proof; the program alone does not cover every real input.</Prose></CalculusExample>
     <H3>One-sided behavior and continuity</H3>
+    <Prose>Approach input 2 along the left and right branches separately. The chosen central dot is at 4; the two nearby branches approach 4 and 6. Could moving just that dot make the approaches agree?</Prose>
+    <JumpLimitsFigure />
     <Prose>A <strong>left-hand limit</strong> approaches through x&lt;a; a right-hand limit uses x&gt;a. A two-sided finite limit exists precisely when both sides approach the same finite number, assuming both sides belong to the local domain. In the jump example, the left limit is 4 and the right limit is 6. Defining f(2) cleverly cannot repair that disagreement. At a domain endpoint, use the permitted one-sided approach.</Prose>
+    <Prose>Approach zero through the positive and negative parts of 1/x. Follow the outward branch arrows rather than filling in a value at the excluded input.</Prose>
+    <UnboundedBranchesFigure />
     <Prose>Limits may also fail because values grow without bound or keep oscillating. For 1/x near zero the two signs grow in opposite directions; there is no finite two-sided limit. Writing an infinite limit is a statement about eventually exceeding every chosen magnitude, not treating infinity as an ordinary value that can be substituted into arithmetic.</Prose>
     <Prose><strong>Limit laws</strong> let us add and multiply finite limits, and divide them when the denominator's limit is nonzero. They follow by bounding the corresponding errors. Cancellation can reveal a limit at an excluded point: (x²−4)/(x−2)=x+2 for x≠2, so the limit is 4, while the original expression remains undefined at 2. “0/0” after a direct substitution is an unresolved form, not a numerical answer.</Prose>
+    <Prose>Compare the closed interval for the square with the open interval for 1/x. Which extreme values are attained, and which endpoint or unbounded behavior prevents the same conclusion?</Prose>
+    <ContinuityHypothesesFigure />
     <Prose>A function is <strong>continuous at a</strong> when f(a) exists and the limit through its domain equals f(a). Two useful existence theorems are stated here: a continuous function on a closed bounded interval attains a minimum and a maximum; and it takes every value between its endpoint values. These are the <strong>extreme value theorem</strong> and <strong>intermediate value theorem</strong>. Their full completeness foundations belong to Real Analysis. The hypotheses do work: 1/x on the open interval (0,1) has no attained minimum or maximum; a jump can skip intermediate values.</Prose>
-    <Checkpoint prompt="Keep f(x)=x² for x≠2, but define f(2)=−10. What are the limit at 2, continuity at 2 and the effect on the nearby guarantee?"><Prose>The limit remains 4 and every punctured-neighborhood guarantee remains unchanged. Continuity fails because f(2)=−10 differs from the limit. A point's value and the behavior nearby are different pieces of information.</Prose></Checkpoint>
+    <section className="calculus-reasoning"><H3>Reason through a changed assumption</H3><Prose>Keep f(x)=x² for x≠2, but define f(2)=−10. What are the limit at 2, continuity at 2 and the effect on the nearby guarantee?</Prose><Prose>The limit remains 4 and every punctured-neighborhood guarantee remains unchanged. Continuity fails because f(2)=−10 differs from the limit. A point's value and the behavior nearby are different pieces of information.</Prose></section>
 
     <H2>3. Extract the local linear rate</H2>
+    <Prose>At input 2, follow a small step of 0.1 along the square curve and along its tangent. The tangent predicts 4.4, while the curve reaches 4.41. Where does the extra 0.01 belong?</Prose>
+    <SquareLocalChangeFigure />
+    <Prose>The main graph keeps the true scales. A separate labelled magnification makes the small vertical remainder readable. A local rate specifies the first-order prediction; it does not erase a finite-step error.</Prose>
     <Prose>For an interior point a, a <strong>derivative</strong> is the finite limit of the secant quotient as its nonzero input increment h approaches zero. The notation f′(a), read “f prime at a,” denotes one number. The function f′ assigns that number at each point where it exists. The notation df/dx names the same derivative operation; its definition is not a division with dx=0.</Prose>
     <MathBlock>{String.raw`f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}h.`}</MathBlock>
     <Prose>For f(x)=x², expansion gives f(a+h)−f(a)=2ah+h². With h≠0, divide by h to get 2a+h; its limit is 2a. The derivative is exactly 2a, while 2a+h is an interval approximation. At a=2 and h=0.1, the derivative predicts a change of 0.4; the true change is 0.41.</Prose>
@@ -73,6 +98,8 @@ export default {
       \frac{r(h)}h&\longrightarrow0.
     \end{aligned}`}</MathBlock>
     <Prose>This is the derivative's most useful meaning: one <strong>linear approximation</strong> has an error that becomes negligible relative to the input change. An error merely approaching zero would be too weak. The wrong prediction f(a+h)≈f(a) for a nonflat line has an error tending to zero, yet misses its entire first-order change. For the square, r(h)=h² and r(h)/h=h→0.</Prose>
+    <Prose>The journey curve crosses its tangent at t=2. Its velocity and acceleration use their own labelled axes. Can a zero acceleration there coexist with a nonzero velocity?</Prose>
+    <MotionCurvatureFigure />
     <Prose>Expanding our motion polynomial gives the full change below. The first coefficient is velocity; the next two terms explain its finite-increment error.</Prose>
     <MathBlock>{String.raw`\begin{gathered}
       s(t+h)-s(t)\\
@@ -83,26 +110,38 @@ export default {
     \end{gathered}`}</MathBlock>
     <Prose>The <strong>second derivative</strong> differentiates the first derivative. Here it is acceleration, with units m/s². The derivative's units are output units divided by input units. Higher derivatives repeat the operation when the required derivatives exist.</Prose>
     <H3>Know when the local model fails</H3>
+    <Prose>At zero, compare a corner with a vertical tangent. The corner has different finite slopes from each side; the cube-root curve has slopes growing without bound from both sides. Which, if either, meets a finite two-sided derivative definition?</Prose>
+    <DerivativeFailureFigure />
     <Prose>For f(x)=|x| at zero, the quotient |h|/h is 1 for h&gt;0 and −1 for h&lt;0. Both sides are perfectly clear, but they disagree: there is no derivative at the corner. For the real cube-root function at zero, the quotient is |h|^(−2/3), which grows without bound. A vertical tangent can be meaningful geometrically, but it is not a finite derivative under our definition.</Prose>
     <Prose>Differentiability implies continuity: f(a+h)−f(a) is h times a quotient approaching a finite number, so the difference approaches zero. Continuity does not imply differentiability, as |x| shows. Nor does a tangent have to touch without crossing: at the cubic's inflection point t=2, its graph crosses its tangent while the limiting slope is well-defined.</Prose>
 
     <H2>4. Build rules from changing operations</H2>
     <Prose>Derivative rules let us reuse local reasoning when functions are assembled from smaller operations. Constants have zero change. A sum's change is the sum of its changes, so (f+g)′=f′+g′ and (cf)′=cf′ for constant c. Each rule requires the component derivatives at the point under discussion.</Prose>
     <H3>A product changes along two edges</H3>
+    <Prose>A 2-by-3 rectangle changes its sides by 0.2 and 0.1. Identify the two edge strips and the small corner separately before adding their areas.</Prose>
+    <ProductStripsFigure />
+    <Prose>The old area is 6, the strips contribute 0.6 and 0.2, and their intersection contributes another 0.02. The exact new area is 6.82. The algebra below also works for negative increments; the displayed added strips are one positive case.</Prose>
     <Prose>When both factors change, (a+Δa)(b+Δb)−ab=bΔa+aΔb+ΔaΔb. If Δa and Δb are each proportional to h to first order, their product contributes only at second order. Divide by h and take the limit: the two edge terms survive.</Prose>
-    <ProductIncrementFigure />
+
     <MathBlock>{String.raw`(fg)'=f'g+fg'.`}</MathBlock>
     <Prose>For a formal check, write the product difference as f(a+h)[g(a+h)−g(a)]+g(a)[f(a+h)−f(a)]. Divide by h. Differentiability gives continuity of f, so f(a+h)→f(a); the quotient limits give the stated rule. Repeated products then prove (xⁿ)′=nxⁿ⁻¹ for positive integers n by induction. For a reciprocal, directly subtract 1/g(a+h)−1/g(a); when g(a)≠0, its derivative is −g′(a)/g(a)². This gives negative integer powers and the quotient rule.</Prose>
     <MathBlock>{String.raw`\left(\frac fg\right)'=\frac{f'g-fg'}{g^2},\qquad g\ne0.`}</MathBlock>
     <H3>A composition passes the change onward</H3>
+    <Prose>Pass input 1 through 3x+1 and then through a square. After an input step of 0.1, the intermediate value changes from 4 to 4.3 and the output from 16 to 18.49. Why is the outer sensitivity evaluated at 4?</Prose>
+    <ChainChangesFigure />
     <Prose>Let u=g(x) be an intermediate quantity and y=f(u) the output. A small input change h produces approximately g′(x)h in u. The outer function turns that into approximately f′(g(x))g′(x)h. Thus the <strong>chain rule</strong> multiplies the two local sensitivities, with the outer derivative evaluated at the actual intermediate value.</Prose>
     <MathBlock>{String.raw`\frac{d}{dx}f(g(x))=f'(g(x))g'(x).`}</MathBlock>
+    <Prose>Change the initial input and the signed step. The intermediate and final coordinates, actual finite change and first-order prediction stay visible together. At x=−1/3 the output prediction is zero, but the square remainder remains positive. Reset restores x=1 and h=0.1.</Prose>
     <ChainLocalChangeLab />
+    <Prose>A different composition sends x through x², then squares again. At x=0, a step of 0.1 gives intermediate change 0.01 and output change 0.0001. Both local slopes at the starting point are zero. Does zero first-order prediction require zero finite change?</Prose>
+    <ZeroInnerChangeFigure />
     <section className="lesson-deeper lesson-teaching-section" data-lesson-teaching=""><h3 className="lesson-teaching-section__title">Why the chain proof still works when the inner derivative is zero</h3>
       <Prose>Write Δu=g(x+h)−g(x)=g′(x)h+r_g(h), with r_g(h)/h→0. Differentiability of f means f(u+v)−f(u)=f′(u)v+vE(v), where E(v)→0 and we set E(0)=0. Substitute v=Δu and divide by h. The factor Δu/h tends to g′(x), so it is bounded; E(Δu) tends to zero by continuity of g. Their product vanishes even if g′(x)=0 or some increments give Δu=0. No illegal division by the inner change is needed.</Prose>
     </section>
     <CalculusExample id="local-operations"><Prose>The x=−1/3 case makes u=0. The first-order output prediction is zero, but the positive square remainder remains. The product example also uses a negative increment, showing why the algebra is more general than a picture of added positive strips.</Prose></CalculusExample>
     <H3>Trigonometric, inverse and implicit derivatives</H3>
+    <Prose>On one unit circle, compare the inscribed triangle, the sector and the tangent triangle at the same angle π/6. Read the angle as an arc length in radians; that common geometry orders the three areas.</Prose>
+    <RadianSqueezeFigure />
     <Prose>Trigonometric derivatives use angles measured in <strong>radians</strong>. The unit-circle triangle, sector and tangent-triangle areas give sin h≤h≤tan h for 0&lt;h&lt;π/2. Dividing and using symmetry yields cos h≤sin h/h≤1 near zero, hence sin h/h→1. Also 1−cos h=2sin²(h/2), so |(cos h−1)/h|≤|h|/2→0. The angle-addition identities now derive, rather than guess, the two basic rules:</Prose>
     <MathBlock>{String.raw`\begin{gathered}
       \frac{\sin(x+h)-\sin x}{h}\\
@@ -112,11 +151,17 @@ export default {
       (\cos x)'=-\sin x.
     \end{gathered}`}</MathBlock>
     <Prose>The squeeze uses the circle's continuous components at zero, visible from their geometry. It would acquire a π/180 scale factor if the numerical input were degrees. Quotient and chain rules give (tan x)′=sec²x wherever cos x≠0, and d[sin(g(x))]/dx=cos(g(x))g′(x).</Prose>
+    <Prose>On the positive square branch, exchange the coordinates of the pair 2→2.1 and 4→4.41. The finite slopes are 4.1 and 1/4.1. What happens to that reciprocal relation as the step shrinks?</Prose>
+    <InverseSlopeFigure />
     <Prose>An inverse function reverses input and output changes, so its local slope is the reciprocal of the original nonzero slope. Precisely, let g be continuous and strictly monotone near a, differentiable there with g′(a)≠0. Its inverse is continuous near g(a). For y=g(x), the inverse difference quotient is (x−a)/(g(x)−g(a)); as y→g(a), continuity of the inverse gives x→a, so the quotient tends to 1/g′(a). This establishes inverse differentiability instead of assuming it.</Prose>
     <MathBlock>{String.raw`(g^{-1})'(g(a))=\frac1{g'(a)}.`}</MathBlock>
+    <Prose>The circle has two points above and below input 3: (3,4) and (3,−4). Select one branch before drawing its tangent. At the horizontal endpoints the tangent becomes vertical, where solving by division by y fails.</Prose>
+    <CircleBranchesFigure />
     <Prose>On the principal branch, (arcsin x)′=1/√(1−x²) for −1&lt;x&lt;1 because the cosine of the inverse angle is positive. Similarly, (arctan x)′=1/(1+x²) for every real x. For x²+y²=25, differentiate along one chosen function branch y(x): 2x+2y y′=0, so y′=−x/y when y≠0. At (3,4), the slope is −3/4. The equation alone has two branches; choosing one matters, and dividing by y at y=0 is invalid.</Prose>
 
     <H2>5. Connect local rates to global decisions</H2>
+    <Prose>For the square on [0,2], the endpoint secant has slope 2. Locate the parallel tangent at input 1, then subtract the secant to see the equal endpoint heights used by Rolle’s argument.</Prose>
+    <MeanValueFigure />
     <Prose>A derivative tells us about a point. To draw a conclusion across an interval, state the hypotheses that connect those points. The <strong>mean value theorem</strong> says that a function continuous on [a,b] and differentiable on (a,b) has some interior c whose derivative equals its endpoint average slope.</Prose>
     <MathBlock>{String.raw`\begin{gathered}f'(c)=\frac{f(b)-f(a)}{b-a},\\
       a<c<b.\end{gathered}`}</MathBlock>
@@ -126,22 +171,36 @@ export default {
     </section>
     <H3>Find extrema using the whole allowed domain</H3>
     <Prose>On a closed bounded interval, a continuous function's extrema occur at endpoints or at interior points where its derivative is zero or does not exist. This is a list of <strong>candidates</strong>; compare their values. A stationary point, meaning derivative zero, need not be an extremum. For (t−2)³ the derivative is zero at 2 but the function keeps increasing. A cusp such as |t−2| can attain a minimum where no derivative exists.</Prose>
+    
+    <Prose>Compare a stationary inflection with a cusp and with the original journey. Zero derivative alone does not certify a maximum or minimum; a nondifferentiable point can still win. Which endpoints and interior candidates must be compared?</Prose>
+    <CandidateClassesFigure />
     <Prose>For the motion cubic, s′=3(t−1)(t−3) is positive before 1, negative between 1 and 3, and positive after 3. Thus the object changes direction at 1 and 3. On [0,4], the values at candidates 0,1,3,4 are 0,4,0,4. Both 0 and 3 attain the global minimum; both 1 and 4 attain the maximum. On a smaller interval, the answer can change completely.</Prose>
+    <Prose>Choose a function and one of the displayed closed intervals. The plotted endpoints, stationary points or cusp and all tied winners update immediately. Reset returns to the cubic on [0,4]. An interval theorem explains why a winner exists; evaluating every candidate finds it here.</Prose>
     <ExtremaCandidatesLab />
     <CalculusExample id="interval-extrema"><Prose>On [3/2,5/2], neither stationary point lies inside. The function decreases throughout this interval, so its endpoint values determine both extrema. The derivative factorization justifies completeness of the candidate list; the program is not guessing from a sample grid.</Prose></CalculusExample>
+    <Prose>Keep a perimeter of 12 while changing a rectangle’s sides. The four rectangles use one common length scale. Compare areas 5, 8, 9 and 5 before differentiating the area rule.</Prose>
+    <PerimeterOptimumFigure />
     <Prose>For a separate design problem, make a rectangle with perimeter 12 length units. If one side is a, the other is 6−a and the area is A(a)=6a−a². The feasible nondegenerate domain is 0&lt;a&lt;6. A′=6−2a vanishes at a=3, with positive slope before and negative after. The maximum is 9 square units, attained by a square. The boundary values 0 describe degenerate rectangles and explain what happens near the feasible domain's edges.</Prose>
+    <Prose>A radius of 3 grows by 0.2. The true added annulus has area 1.24π; the first-order strip estimate is 1.2π. Distinguish this finite one-second change from the instantaneous rate when dr/dt=0.2 metres per second.</Prose>
+    <RelatedCircleRateFigure />
     <Prose>Changing quantities can also be related implicitly. If a circular region has area A=πr², then dA/dt=2πr·dr/dt. At r=3 m and dr/dt=0.2 m/s, its area grows at 1.2π m²/s. The same radius-growth rate produces different area-growth rates at different radii. This is the chain rule with units, not a new formula to memorize.</Prose>
 
     <H2>6. Accumulate signed contributions</H2>
+    <Prose>On the square curve, inspect the unequal intervals [0,0.5], [0.5,1.5] and [1.5,2]. Each marked sample lies inside its own interval. Multiply each sampled height by that interval’s actual width.</Prose>
+    <TaggedPartitionFigure />
     <Prose>When velocity is constant over an interval, displacement is velocity×duration. For a changing rate, partition the time interval into smaller pieces, choose a sample time in each piece and add the corresponding rectangles. Their widths have time units, their heights velocity units, and their signed areas have position units.</Prose>
     <MathBlock>{String.raw`\begin{gathered}
       a=t_0<t_1<\cdots<t_n=b,\\
       \Delta t_i=t_i-t_{i-1},\quad \xi_i\in[t_{i-1},t_i],\\
       \text{Riemann sum}=\sum_{i=1}^n f(\xi_i)\Delta t_i.
     \end{gathered}`}</MathBlock>
+    <Prose>One family keeps the first interval [0,1] intact while subdividing the rest. Another refines the whole interval. Which family makes its largest width tend to zero?</Prose>
+    <MeshComparisonFigure />
     <Prose>The sample ξᵢ, read “xi sub i,” may be the left endpoint, midpoint or another point in its subinterval. The <strong>mesh</strong> is the largest subinterval width. A bounded function is Riemann integrable when these sums approach one finite value as the mesh tends to zero, regardless of the chosen tags and sufficiently fine partitions. That value is the <strong>definite integral</strong>, written ∫ from a to b of f(t) dt. Increasing the number of pieces while leaving one large piece unchanged does not ensure shrinking mesh.</Prose>
     <Prose>Every continuous function on a closed bounded interval is integrable. The key reason is that its oscillation on uniformly short intervals becomes uniformly small. Lower and upper rectangle sums differ by at most interval length times that maximum local oscillation, forcing all tagged sums toward the same value. This uses uniform continuity on a compact interval; Real Analysis develops the underlying existence argument.</Prose>
     <H3>Take one finite sum all the way to its limit</H3>
+    <Prose>Read four right-endpoint rectangles on [0,2] separately from four cube increments indexed 1 through 4. The rectangle sum is 15/4; the cube increments telescope to 64. The second identity will help prove the sum formula used by the first.</Prose>
+    <SquareSumFigure />
     <Prose>For f(x)=x² on [0,2], use n equal pieces of width 2/n and their right endpoints 2j/n. The exact sum is (8/n³)Σj². The identity Σ from j=1 to n of j²=n(n+1)(2n+1)/6 gives:</Prose>
     <MathBlock>{String.raw`\begin{aligned}
       R_n&=\frac{8}{n^3}\frac{n(n+1)(2n+1)}6\\
@@ -153,24 +212,37 @@ export default {
     </section>
     <CalculusExample id="square-riemann-limit"><Prose>Both positive error terms vanish as n grows. The limit equals 8/3; no displayed finite rectangle sum is being called that exact area.</Prose></CalculusExample>
     <H3>Signed change and total travel require different sums</H3>
+    <Prose>Use the same time axis for velocity and its magnitude. The three signed regions contribute +4, −4 and +4 metres; taking magnitudes changes the middle contribution to +4.</Prose>
+    <SignedMagnitudeFigure />
     <Prose>A negative rate contributes a negative signed area. For our motion, integrating velocity adds displacement; integrating its magnitude adds distance. Split at the turning times 1 and 3 when evaluating the latter. The three signed legs are +4,−4,+4 m. They sum to 4 m, while their magnitudes sum to 12 m. The absolute value of the net displacement is only 4 m.</Prose>
+    <Prose>Change the ending time, number of rectangles and sample rule. Compare the actual signed velocity rectangles with the magnitude sum and exact displacement and distance. These are finite approximations: the accidental exact distance at some grids does not certify every sum. Reset restores upper time 4, eight panels and midpoint samples.</Prose>
     <SignedAccumulationLab />
     <CalculusExample id="signed-rectangles"><Prose>Three panels expose errors in both approximations. The four- and eight-panel absolute sums happen to equal 12 even though their signed sums are still inaccurate. That cancellation depends on this function, these intervals and the chosen grids. Agreement in one summary does not certify the whole approximation mechanism.</Prose></CalculusExample>
     <Prose>Linearity of finite sums passes to integrals: constants can be factored out and sums integrated term by term when the integrals exist. Integrals add across adjacent intervals. Reversing bounds negates a signed integral, and equal bounds give zero. These are orientation and accumulation rules, not statements that geometric areas become negative objects.</Prose>
 
     <H2>7. Prove the bridge between rate and total</H2>
+    <Prose>For the continuous rate 1+t², move the upper endpoint from 1 to 1.5. The added area is 31/24; divide by the input width 0.5 to obtain average height 31/12. Compare it with the starting height 2.</Prose>
+    <AccumulationStripFigure />
     <Prose>Fix a continuous rate f on [a,b]. For each endpoint x, define A(x)=∫ from a to x of f(t) dt. A fixed endpoint gives one number; allowing x to vary gives an <strong>accumulation function</strong>. Moving x by h adds the strip between x and x+h. Its average height should approach f(x) as the strip narrows.</Prose>
-    <FundamentalStripFigure />
+
     <MathBlock>{String.raw`\begin{gathered}
       \frac{A(x+h)-A(x)}h-f(x)\\
       =\frac1h\int_x^{x+h}[f(t)-f(x)]\,dt.
     \end{gathered}`}</MathBlock>
+    <Prose>Choose a positive or negative endpoint increment in the strip investigation. The signed added total, its average height, the reference rectangle and the corresponding accumulation secant update together. For h=−0.5 the total is −19/24 and the average is 19/12: both signs in the quotient matter. Reset restores h=0.5.</Prose>
+    <AccumulationStripLab />
     <Prose>By continuity at x, every height f(t) in a sufficiently small strip differs from f(x) by less than ε. The absolute value of the integral on the right is then at most ε|h|. Dividing by |h| bounds the average-height error by ε. The same argument works for negative h after accounting for reversed bounds. Hence A′(x)=f(x) at interior points. This is the first part of the <strong>fundamental theorem of calculus</strong>.</Prose>
     <Prose>Now suppose F is an <strong>antiderivative</strong> of f: F′=f on the interval, with continuous endpoint values. The derivative of F−A is zero. The mean value theorem says that difference is constant on the interval, and continuity extends it to the endpoints. Subtracting endpoint values cancels the constant and gives the second part:</Prose>
     <MathBlock>{String.raw`\int_a^b f(t)\,dt=F(b)-F(a).`}</MathBlock>
+    <Prose>Shift the three primitives of x² vertically by −1, 0 and 1. Their heights change, but each endpoint difference from 0 to 2 stays 8/3. Which part of the definite difference cancels?</Prose>
+    <ConstantPrimitiveFigure />
     <Prose>This is why an accumulation can be calculated by finding a function with the required derivative. It is a theorem connecting two previously different constructions, not a definition that makes their relationship automatic. All antiderivatives on one interval differ by a constant C. In an indefinite integral, +C records that family; in a definite difference, the same constant cancels. On disconnected domains, different components can have different constants.</Prose>
     <H3>Keep the hypothesis with the conclusion</H3>
+    <Prose>A rate jumps from 0 to 1 at zero. Its accumulated total is continuous but changes slope at that input. Compare the rate’s discontinuity with the accumulation’s corner before weakening the theorem’s hypothesis.</Prose>
+    <StepAccumulationFigure />
     <Prose>Continuity of the rate is a sufficient condition for the pointwise derivative result. It cannot be casually replaced with “integrable.” Consider a step that is 0 for t&lt;0 and 1 for t≥0. Its accumulation is flat to the left and has slope 1 to the right, so it has a corner at zero. In fact no everywhere differentiable antiderivative can have exactly this step as its derivative: zero derivative forces a constant left branch, derivative one forces a line of slope one on the right, and continuity at zero joins them into the same corner. The finite integral still exists.</Prose>
+    <Prose>At input x=2, the lower endpoint x is at 2 and moves at speed 1; the upper endpoint x² is at 4 and moves at speed 4. Their rate heights are 5 and 17. Which contribution must be subtracted?</Prose>
+    <MovingBoundsFigure />
     <Prose>For a continuous f and differentiable endpoint functions u(x),v(x), apply the chain rule to two accumulations from the same fixed base:</Prose>
     <MathBlock>{String.raw`\begin{gathered}\frac{d}{dx}\int_{u(x)}^{v(x)}f(t)\,dt\\
       =f(v(x))v'(x)-f(u(x))u'(x).
@@ -178,31 +250,43 @@ export default {
     <Prose>The lower endpoint subtracts a contribution. For ∫ from x to x² of (1+t²) dt, the derivative is (1+x⁴)2x−(1+x²). At x=2, it is 68−5=63. A variable named t inside the integral is a <strong>dummy variable</strong>; replacing that name does not change the integral or create another free input.</Prose>
     <CalculusExample id="moving-bounds"><Prose>The integral value at x=2 is 62/3, while its derivative is 63. They are different quantities. The exact Fraction secants approach the derivative but need not equal it at finite h.</Prose></CalculusExample>
     <Prose>An initial value fixes the constant: knowing velocity v and starting position s(a) gives s(x)=s(a)+∫ from a to x of v(t) dt. The <strong>average value</strong> of a continuous f on [a,b] is its integral divided by b−a. It is the constant height giving the same signed total. Continuity and the intermediate value theorem ensure that some point attains this average height, even though that point need not be the midpoint.</Prose>
-    <Checkpoint prompt="If a continuous velocity is negative throughout an interval but increases, becoming less negative, is the accumulation decreasing or increasing? Is its curve bending upward or downward?"><Prose>Its first derivative equals that negative velocity, so the accumulation decreases. Its increasing slope makes the curve convex, bending upward. Wherever velocity is differentiable, acceleration is nonnegative; it need not be strictly positive at every point. For example, v(t)=−1+t³ on a small interval around zero increases but has acceleration zero at t=0. Decreasing value and increasing slope can happen together.</Prose></Checkpoint>
+    <section className="calculus-reasoning"><H3>Reason through a changed assumption</H3><Prose>If a continuous velocity is negative throughout an interval but increases, becoming less negative, is the accumulation decreasing or increasing? Is its curve bending upward or downward?</Prose><Prose>Its first derivative equals that negative velocity, so the accumulation decreases. Its increasing slope makes the curve convex, bending upward. Wherever velocity is differentiable, acceleration is nonnegative; it need not be strictly positive at every point. For example, v(t)=−1+t³ on a small interval around zero increases but has acceleration zero at t=0. Decreasing value and increasing slope can happen together.</Prose></section>
     <H2>8. Reverse operations to integrate</H2>
     <Prose>Finding an antiderivative often means recognizing a derivative rule in reverse. There is no single elementary recipe that handles every function. Begin by simplifying valid algebra, inspect the domain and choose a method whose mechanism matches the expression. Always differentiate a proposed primitive as a check.</Prose>
     <H3>Substitution reverses a chain</H3>
+    <Prose>Follow x from 0 to 2 while u=1+x² runs from 1 to 5. Carry the differential 2x dx and both transformed endpoints into the new integral. The two signed totals agree at 156, although their axes have different coordinates.</Prose>
+    <TransformedBoundsFigure />
     <Prose>If f is continuous on an interval containing g([a,b]) and g is continuously differentiable, choose an antiderivative F of f. The chain rule says [F(g(x))]′=f(g(x))g′(x). The fundamental theorem then gives:</Prose>
     <MathBlock>{String.raw`\begin{gathered}\int_a^b f(g(x))g'(x)\,dx\\
       =\int_{g(a)}^{g(b)}f(u)\,du.\end{gathered}`}</MathBlock>
     <Prose>For ∫ from 0 to 2 of 2x(1+x²)³ dx, let u=1+x². Its derivative is 2x, so du=2x dx records the exact differential relation. The bounds become 1 and 5. The integral becomes ∫ from 1 to 5 of u³ du=(5⁴−1)/4=156. The transformed variable, differential and bounds belong to the same calculation.</Prose>
+    <Prose>The route x=−1→0→1 sends u=x² along 1→0→1. Read the two orientations separately: −sin1 and +sin1 cancel. An invertible coordinate map is not being assumed.</Prose>
+    <NonmonotoneSubstitutionFigure />
     <Prose>This chain-rule form does not require g to be one-to-one. For example, ∫ from −1 to 1 of 2x cos(x²) dx=sin(1)−sin(1)=0. The intermediate value x² first decreases and then increases, so the signed contributions cancel. That is a different task from collecting nonnegative probability mass from multiple inverse branches, which the next lesson will explain.</Prose>
     <H3>Integration by parts reverses a product</H3>
+    <Prose>At the two endpoints, the product x sin x changes by sin1. Its two accumulated product-rule contributions are ∫x cos x and ∫sin x. Identify the endpoint term before moving the other contribution across the equation.</Prose>
+    <PartsBoundaryFigure />
     <Prose>Integrate the product rule u′v+uv′=(uv)′ and rearrange. With continuously differentiable u and v, the result keeps a boundary contribution:</Prose>
     <MathBlock>{String.raw`\begin{gathered}\int_a^b u(x)v'(x)\,dx\\
       =[u(x)v(x)]_a^b-\int_a^b u'(x)v(x)\,dx.
     \end{gathered}`}</MathBlock>
     <Prose>For ∫ from 0 to 1 of x cos x dx, take u=x and v′=cos x, so u′=1 and v=sin x. The answer is [x sin x]₀¹−∫₀¹sin x dx=sin1+cos1−1. The product's accumulated change is why the boundary term appears. Dropping it is not a harmless choice of integration constant.</Prose>
     <H3>Rewrite the expression without rewriting its domain</H3>
+    <Prose>Locate the two excluded poles before selecting the valid interval [1,2]. In the adjacent unit quarter circle, the chosen angle range keeps the cosine nonnegative. Algebraic rewrites and geometric substitutions must keep these domain facts.</Prose>
+    <IntegrationDomainsFigure />
     <Prose>Algebra can separate a rational expression: 1/[x(x+1)]=1/x−1/(x+1), away from x=0 and x=−1. This <strong>partial-fraction decomposition</strong> follows by recombining the right side over a common denominator. It reduces the problem to the missing power-rule case 1/x. The next section builds its logarithmic primitive rather than pretending the denominator can be ignored.</Prose>
     <Prose>Trigonometric substitutions can make a geometric constraint explicit. For ∫₀¹√(1−x²) dx, put x=sin θ on 0≤θ≤π/2. Here cos θ is nonnegative, so √(1−sin²θ)=cos θ and dx=cos θ dθ. The integral is ∫₀^(π/2)cos²θ dθ. Using cos²θ=(1+cos2θ)/2 gives π/4. The selected branch justified removing the square root; outside it, an absolute value would be needed. The answer also agrees with the area of a unit-circle quarter.</Prose>
     <LessonTable caption="Choose an integration operation for a reason" headers={['Expression structure', 'Useful operation', 'What to check']} rows={[['A sum of known derivatives', 'Linearity and primitive rules', 'Each term and its domain'], ['An inner expression and its derivative', 'Substitution', 'Differential and both bounds'], ['A product with one factor simplified by differentiation', 'Integration by parts', 'Boundary term and new integral'], ['A rational expression with factorable denominator', 'Division / partial fractions', 'Excluded poles and valid interval'], ['A square root tied to a circle identity', 'A branch-aware trigonometric substitution', 'Sign of the square root and transformed range']]} />
     <Prose>Some continuous functions, such as exp(−x²), have no antiderivative expressible using a finite combination of elementary functions. The fundamental theorem still defines their accumulation functions and supplies their derivatives. Numerical quadrature can estimate their definite integrals. “No elementary primitive” is not “no integral”; a proof of non-elementary expressibility is a separate symbolic-integration question, not a claim established by failing to guess a formula.</Prose>
 
     <H2>9. Complete the exponential growth story</H2>
+    <Prose>On the positive curve 1/t, compare the oriented areas from 1 to 2, from 2 to 4 and from 1 back to 0.5. The first two are equal; reversing direction makes the third negative.</Prose>
+    <LogAreaFigure />
     <Prose>Algebra introduced repeated multiplication, logarithms and the number e, but deliberately did not assume derivative rules. We can now close that connection using integration. For x&gt;0, define L(x)=∫ from 1 to x of 1/t dt. The fundamental theorem gives L′(x)=1/x and L(1)=0. This function will be the natural logarithm.</Prose>
     <MathBlock>{String.raw`L(x)=\int_1^x\frac{dt}{t},\qquad L'(x)=\frac1x.`}</MathBlock>
     <Prose>Its derivative is positive, so L is strictly increasing. Fix a&gt;0 and differentiate L(ax)−L(x): the derivative is a/(ax)−1/x=0. The constant-difference result and evaluation at x=1 give L(ax)=L(a)+L(x). Thus multiplication of positive inputs becomes addition of outputs—the logarithm law, now derived from the integral.</Prose>
+    <Prose>Exchange the logarithm point (e,1) with the inverse point (1,e). Beside those curves, four copies of the short integral strip from 1 to 1.25 lie between the bounds 0.8 and 1. What is finite here, and what requires a limiting proof?</Prose>
+    <InverseExponentialFigure />
     <Prose>Because L(2)&gt;0, repeated use of the product law gives L(2ⁿ)=nL(2), which grows without bound. The reciprocal law gives L(2⁻ⁿ)=−nL(2), unbounded in the other direction. L is continuous and strictly increasing, so it takes every real value exactly once. Its continuous inverse, <strong>exp</strong>, maps each real y to the positive x for which L(x)=y. Define e=exp(1); this agrees with the base convention introduced in Algebra.</Prose>
     <MathBlock>{String.raw`\begin{gathered}
       \ln x=L(x),\qquad \ln(\exp y)=y,\\
@@ -214,6 +298,7 @@ export default {
     </section>
     <H3>Differentiate a continuous rate and interpret it</H3>
     <Prose>For A(t)=A₀exp(kt), the chain rule gives A′=kA. When A is positive, A′/A=k: k is the <strong>instantaneous relative rate</strong>. It has inverse-time units so kt is dimensionless. Over a finite period Δ, the fractional change is exp(kΔ)−1, not kΔ exactly. The latter is only its first-order approximation for small kΔ.</Prose>
+    <Prose>Change the continuous relative rate and the future period. Compare current amount, tangent rate, future amount and finite fractional gain; they have different units and meanings. A zero rate gives a constant curve. Reset restores rate 0.2 and period 1.</Prose>
     <ExponentialRateLab />
     <Prose>With k=0.2 per time unit, a one-unit gain is exp(0.2)−1≈0.221403, about 22.14%. A genuine 20% one-unit gain corresponds to k=ln(1.2)≈0.182322 per unit. For k&gt;0, doubling time solves exp(kT)=2, giving T=ln2/k. If k&lt;0, the model decays; k=0 is constant, so neither has a positive doubling time under this unchanged model.</Prose>
     <CalculusExample id="exponential-rate"><Prose>The compounding log stays between the proved bounds. The subsequent calculation distinguishes an amount, an amount-per-time derivative, a period fraction and a continuous relative rate. All outputs belong to the explicitly assumed model.</Prose></CalculusExample>
@@ -222,6 +307,8 @@ export default {
     <CalculusExample id="integration-operations"><Prose>The substitution result is exactly 156. Integration by parts for x exp x gives the primitive (x−1)exp x and definite value 1 on [0,1]. The partial-fraction integral on [1,2] is ln(4/3)≈0.287682072. Neither pole lies in that interval; crossing one would require an improper-integral analysis.</Prose></CalculusExample>
 
     <H2>10. Keep the remainder with the approximation</H2>
+    <Prose>At input 4.4, compare the square root with the tangent based at 4. The prediction is 2.1, the true value about 2.097617696 and the conservative error bound 0.0025. The labelled error magnification does not change the main graph’s scale.</Prose>
+    <TaylorBoundFigure />
     <Prose>A tangent uses a function's value and first derivative at one point. To incorporate curvature, add a quadratic term; further derivatives add further terms. The <strong>Taylor polynomial</strong> of degree n about a matches the first n derivatives there. Matching those derivatives is a finite local condition, not yet equality with the function.</Prose>
     <MathBlock>{String.raw`\begin{gathered}
       P_n(a+h)=\sum_{j=0}^{n}\frac{f^{(j)}(a)}{j!}h^j,\\
@@ -236,17 +323,24 @@ export default {
     </section>
     <MathBlock>{String.raw`|R_n(a+h)|\le\frac{M|h|^{n+1}}{(n+1)!}.`}</MathBlock>
     <Prose>For f(x)=√x near a=4, the linear prediction at x=4.4 is 2+0.4/4=2.1. The true value is about 2.097617696. Since |f″(x)|=1/(4x^(3/2))≤1/32 on [4,4.4], the absolute error is at most (1/32)(0.4²)/2=0.0025. The actual error, about 0.002382304, satisfies that bound. The curvature bound was needed throughout the interval, not only at a.</Prose>
+    <Prose>Choose exponential or logarithm, degree and evaluation input. The actual curve, finite polynomial, error and applicable bound remain visible together. At logarithm input 1.5, increasing degree can worsen the approximation. Reset restores exponential, degree 3 and input 0.5.</Prose>
     <TaylorErrorLab />
     <CalculusExample id="taylor-remainders"><Prose>The exponential errors are smaller than their stated upper bounds. At x=1.5, higher even-degree log polynomials become worse in the displayed cases. The function ln(2.5) exists; that fact does not make its power series around zero converge at this input.</Prose></CalculusExample>
     <H3>An infinite series needs a separate conclusion</H3>
     <Prose>For exp x about zero, every derivative at zero is 1. On the segment from 0 to a fixed x, the remainder bound is exp(max(0,x))|x|ⁿ⁺¹/(n+1)!. The ratio of successive bound terms is |x|/(n+2); eventually it is at most 1/2, so the bound tends to zero. Therefore exp x equals its infinite power series at each fixed real x. The proof comes from the vanishing remainder.</Prose>
+    <Prose>The logarithm ln(2.5) exists. Nevertheless, at x=1.5 its even-degree Taylor approximations of degrees 2, 4 and 6 become worse in these actual cases. Can a smooth function graph certify convergence of a particular power series?</Prose>
+    <SeriesOutsideRadiusFigure />
     <Prose>For ln(1+x), integrate the finite geometric identity 1/(1+t)=Σ from j=0 to n−1 of (−t)ʲ+(−t)ⁿ/(1+t). This gives the degree-n alternating log polynomial plus remainder ∫₀ˣ(−t)ⁿ/(1+t)dt. When |x|&lt;1, its magnitude is at most |x|ⁿ⁺¹/[(n+1)(1−|x|)], which tends to zero. At x=1 a separate bound, 1/(n+1), still gives convergence to ln2. At x=−1 the logarithm is undefined and the terms sum negatively without bound. For |x|&gt;1, the term magnitudes |x|ⁿ/n do not tend to zero, ruling out convergence of this series.</Prose>
     <Prose>Finite differentiability, arbitrarily many derivatives and equality with a Taylor series are different claims. Real Analysis develops sequence/series convergence, uniformity and when derivatives or integrals may pass through an infinite sum. Do not infer those exchanges from a smooth-looking plot.</Prose>
     <H3>A computer takes finite steps in finite arithmetic</H3>
+    <Prose>Compare the recorded complete Python results with the analytic target 1. At the smallest recorded step, direct subtraction rounds to zero; expm1 preserves the small difference. These rows report actual finite arithmetic, not a second mathematical limit.</Prose>
+    <FloatingCancellationFigure />
     <Prose>The analytic quotient [exp(h)−1]/h approaches 1. On a computer, exp(h) may round to exactly 1 when h is extremely small, destroying the difference before division. <Code>expm1(h)</Code> computes exp(h)−1 with a numerically suitable method near zero. This is a different issue from the mathematical truncation error.</Prose>
     <CalculusExample id="finite-difference-rounding"><Prose>At the recorded smallest step, direct subtraction reports zero while the analytic derivative is 1. The displayed values are actual Python float results in the verification environment; the precise last digits depend on numerical implementation. Numerical Methods develops step selection, higher-order stencils and error budgets. An ever-smaller step is not a universal accuracy strategy.</Prose></CalculusExample>
 
     <H2>11. Check what happens at the edge</H2>
+    <Prose>Compare a shrinking gap at zero with an expanding tail cutoff. For power 0.5 the origin integral has finite limit 2 and missing amount 2√δ. For power 1.5 the tail has finite limit 2 and missing amount 2/√B. The thresholds face opposite directions.</Prose>
+    <ImproperBoundariesFigure />
     <Prose>An integral over an infinite interval, or across an unbounded integrand, is defined through a limit of ordinary finite integrals. It is called an <strong>improper integral</strong>. A finite answer at every finite cutoff does not decide whether the limit is finite.</Prose>
     <MathBlock>{String.raw`\begin{aligned}
       \int_1^\infty x^{-p}\,dx
@@ -256,9 +350,12 @@ export default {
     \end{aligned}`}</MathBlock>
     <Prose>For p≠1, the primitive is x^(1−p)/(1−p). The tail integral from 1 to B is [B^(1−p)−1]/(1−p). If p&gt;1, the power of B tends to zero and the total is 1/(p−1); if p&lt;1 it grows without bound. At p=1 the finite integral is ln B, which also diverges. So the tail converges exactly when p&gt;1.</Prose>
     <Prose>At the other end, the finite integral from δ to 1 is [1−δ^(1−p)]/(1−p). It has finite limit 1/(1−p) exactly when p&lt;1. At p=1 it is −lnδ and diverges. Thus x^(−1/2) is unbounded at zero but has integral 2 on (0,1]; and 1/x tends to zero at infinity but still has divergent tail area. Height, local singularity and total area answer different questions.</Prose>
+    <Prose>Choose the origin or tail, a power and a cutoff scale. The finite shaded domain and truncated total update; a finite limit and missing amount appear only when that boundary’s convergence condition holds. At power 1 both corresponding limits diverge. Reset restores the tail with power 1.5 and cutoff 100.</Prose>
     <ImproperIntegralLab />
     <CalculusExample id="improper-cutoffs"><Prose>Discarding [0,10⁻⁶] from x^(−1/2) loses 0.002 of area, which may be too much for an accuracy requirement. The missing amount is computable here; calling an interval “tiny” cannot replace that error calculation.</Prose></CalculusExample>
     <H3>Separate singularities instead of cancelling infinities</H3>
+    <Prose>Cut out the singularity of 1/x from each side separately. The left total decreases without bound and the right increases without bound. Symmetric cancellation is a different prescription; it does not establish convergence of either ordinary tail.</Prose>
+    <PrincipalValueFigure />
     <Prose>For an interior singularity c, both ∫ₐᶜf and ∫ᶜᵇf must converge independently. Likewise, an integral across both infinite directions requires separate tail convergence. For 1/x on [−1,1], the left improper integral tends to −∞ and the right to +∞; their sum is not a defined real integral. Symmetric cutoffs give zero, but that is a <strong>Cauchy principal value</strong>, a different limiting prescription. It does not repair ordinary convergence.</Prose>
     <section className="lesson-deeper lesson-teaching-section" data-lesson-teaching=""><h3 className="lesson-teaching-section__title">A justified finite-endpoint version of l'Hôpital's rule</h3>
       <Prose>Suppose f and g are continuous at a with f(a)=g(a)=0, differentiable on a one-sided punctured interval, and g′ never vanishes there. Suppose also f′(x)/g′(x) approaches a finite L as x approaches a on that side. Then f(x)/g(x) approaches L. Here is the mechanism. For a fixed nearby x, the function H(t)=f(t)g(x)−g(t)f(x) has equal zero values at a and x. Rolle's theorem gives an interior c with f′(c)g(x)−g′(c)f(x)=0. Also g(x)≠0, because otherwise Rolle applied to g would contradict nonvanishing g′. Therefore f(x)/g(x)=f′(c)/g′(c). As x→a, the intermediate c→a too, giving the limit. This is Cauchy's mean-value argument.</Prose>
@@ -268,20 +365,38 @@ export default {
     <H2>12. Transfer the same idea to new quantities</H2>
     <Prose>The integral's mechanism is not tied to area measured in square metres. It adds a local contribution multiplied by the corresponding small input increment. The units tell us what has been accumulated.</Prose>
     <H3>Work: force component times displacement</H3>
+    <Prose>A force component grows with position. Each short travelled length carries its own force-times-length contribution. Read the common position axis and the force units before adding the work.</Prose>
+    <WorkContributionFigure />
     <Prose>Along a straight path, a force component F(x) acting in the positive travel direction contributes approximately F(x)Δx to mechanical work over a short displacement. Its total is W=∫F(x)dx. In a declared example, F(x)=3+2x newtons for the numerical position x in metres on [0,2]. The work is [3x+x²]₀²=10 N·m=10 J. This averages a varying force over position, not over time. An opposing force component contributes negative work in this signed convention.</Prose>
     <H3>Mass: density times length, then a balance condition</H3>
+    <Prose>Equal-length rod pieces carry more mass toward the right. Compare density, each approximate piece mass and the balance marker at 10/9 metres. Which quantity belongs in the weighted moment?</Prose>
+    <RodBalanceFigure />
     <Prose>A two-metre rod has linear density ρ(x)=2+x kg/m in the chosen numerical metre coordinate. A short piece has approximate mass ρ(x)Δx. Integrating gives total mass M=∫₀²(2+x)dx=6 kg. To find a balance point c, require the signed first moment ∫₀²(x−c)ρ(x)dx to vanish. Rearranging gives c=[∫xρ(x)dx]/M when M&gt;0.</Prose>
-    <WeightedRodFigure />
+
     <Prose>Here the first moment is ∫₀²(2x+x²)dx=20/3 kg·m. Dividing by 6 kg gives c=10/9 m, a little to the right of the geometric midpoint. More mass lies toward the right end, so this direction makes sense. The next topic's weighted expectation will use the same averaging structure with probability mass instead of material mass.</Prose>
     <CalculusExample id="weighted-material"><Prose>Mass, first moment, position and work have different units even though all arise from simple polynomial integrals. Dividing by length would give average density, not the rod's balance point.</Prose></CalculusExample>
     <section className="lesson-deeper lesson-teaching-section" data-lesson-teaching=""><h3 className="lesson-teaching-section__title">Two more geometric accumulations: volume and curve length</h3>
-      <Prose>If a solid has cross-sectional area A(x), a thin slice has approximate volume A(x)Δx. Its volume is ∫A(x)dx under the usual continuous-slice assumptions. Rotating the region under y=√x, 0≤x≤3, around the x-axis makes disk slices of area πy²=πx. The volume is ∫₀³πx dx=9π/2 in cubic units. The slice's area, not its radius, is what gets multiplied by thickness.</Prose>
-      <Prose>For a continuously differentiable graph y=f(x), a short segment has length √(Δx²+Δy²). Divide Δy by Δx and refine the partition; the mean value theorem and continuity of f′ justify the limit ∫√(1+f′(x)²)dx. For y=(2/3)x^(3/2) on [0,3], f′=√x and length is ∫₀³√(1+x)dx=(2/3)[(1+x)^(3/2)]₀³=14/3 in length units. These examples use chosen numerical length units; the coordinate scales must agree when interpreting Euclidean length.</Prose>
+      <Prose>Rotate the region under √x about its horizontal axis. Each thin slice is a disk: its radius is √x, its area πx and its approximate volume that area times thickness.</Prose>
+    <DiskVolumeFigure />
+    <Prose>If a solid has cross-sectional area A(x), a thin slice has approximate volume A(x)Δx. Its volume is ∫A(x)dx under the usual continuous-slice assumptions. Rotating the region under y=√x, 0≤x≤3, around the x-axis makes disk slices of area πy²=πx. The volume is ∫₀³πx dx=9π/2 in cubic units. The slice's area, not its radius, is what gets multiplied by thickness.</Prose>
+      <Prose>Follow small chord segments along y=(2/3)x^(3/2). A segment’s length uses both coordinate changes on one common length scale. Refining these actual chords motivates the derivative-based length density.</Prose>
+    <ArcLengthFigure />
+    <Prose>For a continuously differentiable graph y=f(x), a short segment has length √(Δx²+Δy²). Divide Δy by Δx and refine the partition; the mean value theorem and continuity of f′ justify the limit ∫√(1+f′(x)²)dx. For y=(2/3)x^(3/2) on [0,3], f′=√x and length is ∫₀³√(1+x)dx=(2/3)[(1+x)^(3/2)]₀³=14/3 in length units. These examples use chosen numerical length units; the coordinate scales must agree when interpreting Euclidean length.</Prose>
     </section>
     <H3>A rate law describes a solution, not an automatic simulation</H3>
     <Prose>The equation y′=ky says the local change is proportional to the current state. Together with y(0)=y₀, it has solution y(t)=y₀exp(kt). To see uniqueness among differentiable solutions on an interval, differentiate exp(−kt)y(t): its derivative is zero, so it stays y₀. This integrating-factor argument also covers y₀=0 without dividing by y.</Prose>
+    <Prose>Start at 3 with rate coefficient −2 and final time 1. One tangent step of length 1 gives −3; two steps of length 0.5 give 0. Compare those finite updates with the exact positive decay curve 3exp(−2t).</Prose>
+    <DecayEulerFigure />
     <Prose>A simple numerical approximation, <strong>Euler's method</strong>, follows the current tangent for a finite time step: y_next=y+hky. That update is not the same as the exact factor exp(kh). For decay, a step so large that 1+hk is negative can make the numerical value negative even while the exact positive solution remains positive.</Prose>
     <CalculusExample id="decay-steps"><Prose>The one-step result is negative and the two-step result collapses to zero. Refining the step improves this example toward 3exp(−2), but accuracy and stability require a method-specific analysis. Ordinary Differential Equations & Linear Systems develops that next branch; a smooth drawn trajectory is not itself a numerical guarantee.</Prose></CalculusExample>
+
+    <H3>Check exact expressions without outsourcing the argument</H3>
+    <Prose>The optional library route uses SymPy 1.14.0 with Python 3.12. In a separate environment install it with <Code>python -m pip install sympy==1.14.0</Code>, save the full displayed program as <Code>symbolic_calculus.py</Code>, and run <Code>python symbolic_calculus.py</Code>. The browser does not execute this Python. Its input is declared mathematics, not an empirical dataset.</Prose>
+    <Prose><Code>Rational</Code> keeps the sample points and exact bounds symbolic. <Code>diff</Code> checks the already-derived motion rate; two directional <Code>limit</Code> calls on the corner quotient give −1 and 1, so a formal expression at the center cannot certify differentiability. The circle substitution selects the positive square-root branch before its slope is evaluated.</Prose>
+    <Prose><Code>integrate</Code> checks signed displacement 4 and distance 12 separately. The rational integral on [1,3] gives ln5 with transformed bounds; differentiating the returned primitive checks it. An indefinite result omits the arbitrary +C, which you must include when describing the whole primitive family on a connected interval. The two singular tails of 1/x are evaluated independently and diverge with opposite signs; they are never added as real numbers.</Prose>
+    <Prose><Code>series(exp(x), x, 0, 4)</Code> keeps degrees 0 through 3 and the <Code>O(x**4)</Code> remainder order. That order is local information, not an equality for every input or a numerical error bound. The rod outputs reproduce mass, moment and balance with different units. The complete assertions and output make every call checkable.</Prose>
+    <RunnableExample example={symbolicCalculusExample} />
+    <Prose><a href="/learn-code/single-variable-calculus-limits-derivatives-integrals/symbolic_calculus.py">Complete exact symbolic program</a> — the same source as the displayed Copy and Download payload.</Prose>
 
     <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>13. Practise with changed assumptions</H2>
     <Prose>Try each task before opening its hint. A satisfactory answer explains the operation, checks its domain or theorem hypotheses and interprets the result. The final program gives a changed synthesis example to compare with your own reasoning.</Prose>
@@ -341,6 +456,8 @@ export default {
       <li><a href="https://openstax.org/books/calculus-volume-2/pages/6-3-taylor-and-maclaurin-series" target="_blank" rel="noreferrer">OpenStax: Taylor and Maclaurin Series</a> — finite approximations, remainders and convergence exercises for the deeper branch.</li>
       <li><a href="https://openstax.org/books/calculus-volume-2/pages/6-4-working-with-taylor-series" target="_blank" rel="noreferrer">OpenStax: Working with Taylor Series</a> — the nonelementary Gaussian integral illustrates why an accumulation function can exist without a finite elementary formula. Read the convergence conditions before integrating an infinite series term by term.</li>
       <li><a href="https://openstax.org/books/calculus-volume-2/pages/3-7-improper-integrals" target="_blank" rel="noreferrer">OpenStax: Improper Integrals</a> — endpoint and infinite-tail definitions, convergence examples and further exercises.</li>
+      <li><a href="https://ocw.mit.edu/courses/res-18-001-calculus-fall-2023/pages/open-textbook/" target="_blank" rel="noreferrer">Gilbert Strang, Calculus, through MIT OpenCourseWare</a> — selected difference-quotient, fundamental-theorem and Taylor-remainder passages from chapters 2, 5 and 10 informed this revision. The full book and recordings were not reviewed.</li>
+      <li><a href="https://docs.sympy.org/latest/tutorials/intro-tutorial/calculus.html" target="_blank" rel="noreferrer">SymPy’s official calculus tutorial</a> — exact differentiation, integration, directional limits and series-order conventions used in the complete symbolic program. The version actually executed was 1.14.0.</li>
     </Sources>
   </div>
 };

@@ -1,0 +1,712 @@
+{
+  "stage": "native",
+  "protocol_sha256": "e32ae20a3971b9ae1ddad8c23ba574ca5a5b6d6de75e49ea0d440f8d506e0d39",
+  "passed": true,
+  "continuation_plan_sha256": "3fd8c5eec55a410911c19758ffac24d3c941d5717fd669d18e5c30113a20e81f",
+  "result": {
+    "scope": "Native attempts accounted separately: failed greedy retained, unstarted sample completed; greedy not retried.",
+    "status": "sample-completed-with-prior-greedy-failure",
+    "rows": [
+      {
+        "prompt_ids": [
+          510,
+          1355,
+          2502,
+          9735
+        ],
+        "mode": "sample",
+        "lookahead": 3,
+        "seed": 409,
+        "ids": [
+          313,
+          395,
+          253,
+          2644,
+          273,
+          776,
+          1533,
+          10
+        ],
+        "elapsed_ns": 320438600,
+        "ns_per_emitted_token": 40054825.0,
+        "stop": "cap",
+        "work": {
+          "target_calls": 7,
+          "draft_calls": 15,
+          "target_rows": 25,
+          "draft_rows": 23,
+          "rounds": [
+            {
+              "prefix_ids": [
+                510,
+                1355,
+                2502,
+                9735
+              ],
+              "candidate_ids": [
+                313,
+                436,
+                310
+              ],
+              "proposal_score_shape": [
+                1,
+                3,
+                50304
+              ],
+              "q_selected": [
+                0.00962343905121088,
+                0.11513763666152954,
+                0.050910189747810364
+              ],
+              "emitted_ids": [
+                313,
+                395
+              ],
+              "processed_target_score_shape": [
+                1,
+                4,
+                50304
+              ],
+              "forward_logits_shape": [
+                1,
+                4,
+                50304
+              ],
+              "native_post_stop_n_matches": 1,
+              "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+              "target_cache_after_crop": 5,
+              "p_selected_candidates": [
+                0.011337575502693653,
+                1.4019797163200565e-06,
+                0.3399317264556885
+              ]
+            },
+            {
+              "prefix_ids": [
+                510,
+                1355,
+                2502,
+                9735,
+                313,
+                395
+              ],
+              "candidate_ids": [
+                643,
+                37299,
+                187
+              ],
+              "proposal_score_shape": [
+                1,
+                3,
+                50304
+              ],
+              "q_selected": [
+                0.9030206203460693,
+                0.5079460144042969,
+                0.2623335123062134
+              ],
+              "emitted_ids": [
+                253
+              ],
+              "processed_target_score_shape": [
+                1,
+                4,
+                50304
+              ],
+              "forward_logits_shape": [
+                1,
+                4,
+                50304
+              ],
+              "native_post_stop_n_matches": 0,
+              "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+              "target_cache_after_crop": 6,
+              "p_selected_candidates": [
+                0.00938146747648716,
+                1.8858564487800322e-08,
+                0.005972862709313631
+              ]
+            },
+            {
+              "prefix_ids": [
+                510,
+                1355,
+                2502,
+                9735,
+                313,
+                395,
+                253
+              ],
+              "candidate_ids": [
+                346,
+                262,
+                281
+              ],
+              "proposal_score_shape": [
+                1,
+                3,
+                50304
+              ],
+              "q_selected": [
+                0.9801853895187378,
+                0.7986339926719666,
+                0.5884336829185486
+              ],
+              "emitted_ids": [
+                2644
+              ],
+              "processed_target_score_shape": [
+                1,
+                4,
+                50304
+              ],
+              "forward_logits_shape": [
+                1,
+                4,
+                50304
+              ],
+              "native_post_stop_n_matches": 0,
+              "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+              "target_cache_after_crop": 7,
+              "p_selected_candidates": [
+                0.014244163408875465,
+                0.00014287445810623467,
+                0.001059164060279727
+              ]
+            },
+            {
+              "prefix_ids": [
+                510,
+                1355,
+                2502,
+                9735,
+                313,
+                395,
+                253,
+                2644
+              ],
+              "candidate_ids": [
+                187,
+                14,
+                253
+              ],
+              "proposal_score_shape": [
+                1,
+                3,
+                50304
+              ],
+              "q_selected": [
+                0.00807998888194561,
+                0.32620561122894287,
+                0.16781066358089447
+              ],
+              "emitted_ids": [
+                273
+              ],
+              "processed_target_score_shape": [
+                1,
+                4,
+                50304
+              ],
+              "forward_logits_shape": [
+                1,
+                4,
+                50304
+              ],
+              "native_post_stop_n_matches": 0,
+              "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+              "target_cache_after_crop": 8,
+              "p_selected_candidates": [
+                0.0003659201611299068,
+                0.0002117296971846372,
+                0.0003634189779404551
+              ]
+            },
+            {
+              "prefix_ids": [
+                510,
+                1355,
+                2502,
+                9735,
+                313,
+                395,
+                253,
+                2644,
+                273
+              ],
+              "candidate_ids": [
+                697,
+                298
+              ],
+              "proposal_score_shape": [
+                1,
+                2,
+                50304
+              ],
+              "q_selected": [
+                0.0313752107322216,
+                0.06921601295471191
+              ],
+              "emitted_ids": [
+                776
+              ],
+              "processed_target_score_shape": [
+                1,
+                3,
+                50304
+              ],
+              "forward_logits_shape": [
+                1,
+                3,
+                50304
+              ],
+              "native_post_stop_n_matches": 0,
+              "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+              "target_cache_after_crop": 9,
+              "p_selected_candidates": [
+                0.0029846990946680307,
+                0.0002006974973483011
+              ]
+            },
+            {
+              "prefix_ids": [
+                510,
+                1355,
+                2502,
+                9735,
+                313,
+                395,
+                253,
+                2644,
+                273,
+                776
+              ],
+              "candidate_ids": [
+                1072
+              ],
+              "proposal_score_shape": [
+                1,
+                1,
+                50304
+              ],
+              "q_selected": [
+                0.04369702190160751
+              ],
+              "emitted_ids": [
+                1533
+              ],
+              "processed_target_score_shape": [
+                1,
+                2,
+                50304
+              ],
+              "forward_logits_shape": [
+                1,
+                2,
+                50304
+              ],
+              "native_post_stop_n_matches": 0,
+              "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+              "target_cache_after_crop": 10,
+              "p_selected_candidates": [
+                3.928113801521249e-05
+              ]
+            },
+            {
+              "prefix_ids": [
+                510,
+                1355,
+                2502,
+                9735,
+                313,
+                395,
+                253,
+                2644,
+                273,
+                776,
+                1533
+              ],
+              "candidate_ids": [],
+              "proposal_score_shape": null,
+              "emitted_ids": [
+                10
+              ],
+              "processed_target_score_shape": [
+                1,
+                1,
+                50304
+              ],
+              "forward_logits_shape": [
+                1,
+                1,
+                50304
+              ],
+              "native_post_stop_n_matches": 0,
+              "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+              "target_cache_after_crop": 11,
+              "p_selected_candidates": []
+            }
+          ],
+          "instrumentation": "Forward hooks count calls and input rows."
+        },
+        "config": {
+          "max_length": null,
+          "max_new_tokens": 8,
+          "min_length": null,
+          "min_new_tokens": null,
+          "early_stopping": null,
+          "max_time": null,
+          "stop_strings": null,
+          "do_sample": true,
+          "num_beams": 1,
+          "use_mtp": false,
+          "use_cache": true,
+          "cache_implementation": null,
+          "cache_config": null,
+          "max_cache_len": null,
+          "temperature": 0.8,
+          "top_k": 0,
+          "top_p": 1.0,
+          "min_p": null,
+          "top_h": null,
+          "typical_p": null,
+          "epsilon_cutoff": null,
+          "eta_cutoff": null,
+          "repetition_penalty": null,
+          "encoder_repetition_penalty": null,
+          "length_penalty": null,
+          "no_repeat_ngram_size": null,
+          "bad_words_ids": null,
+          "renormalize_logits": null,
+          "forced_bos_token_id": null,
+          "forced_eos_token_id": null,
+          "remove_invalid_values": null,
+          "exponential_decay_length_penalty": null,
+          "suppress_tokens": null,
+          "begin_suppress_tokens": null,
+          "sequence_bias": null,
+          "token_healing": null,
+          "guidance_scale": null,
+          "watermarking_config": null,
+          "num_return_sequences": 1,
+          "output_attentions": null,
+          "output_hidden_states": null,
+          "output_scores": null,
+          "output_logits": null,
+          "return_dict_in_generate": null,
+          "pad_token_id": 0,
+          "bos_token_id": 0,
+          "eos_token_id": 0,
+          "encoder_no_repeat_ngram_size": null,
+          "decoder_start_token_id": null,
+          "is_assistant": null,
+          "num_assistant_tokens": 3,
+          "num_assistant_tokens_schedule": "constant",
+          "assistant_confidence_threshold": 0.0,
+          "prompt_lookup_num_tokens": null,
+          "max_matching_ngram_size": null,
+          "assistant_early_exit": null,
+          "assistant_lookbehind": null,
+          "target_lookbehind": null,
+          "assistant_ensemble_weight": null,
+          "speculation_type": null,
+          "compile_config": null,
+          "disable_compile": null,
+          "continuous_batching_config": null,
+          "low_memory": null,
+          "penalty_alpha": null,
+          "dola_layers": null,
+          "diversity_penalty": null,
+          "num_beam_groups": null,
+          "constraints": null,
+          "force_words_ids": null,
+          "prefill_chunk_size": null,
+          "_from_model_config": true,
+          "transformers_version": "5.19.0"
+        }
+      }
+    ],
+    "failed_greedy": {
+      "scope": "Two separate native diagnostic calls, maximum16 emitted tokens.",
+      "model": {
+        "model": "EleutherAI/pythia-14m",
+        "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+        "files": [
+          {
+            "name": "README.md",
+            "bytes": 10560,
+            "sha256": "d1f2cf1d5181daedeaa70208ddd5cc5251867bde9acf6db7bb45a2265e25e163"
+          },
+          {
+            "name": "config.json",
+            "bytes": 698,
+            "sha256": "f97f966a66c444890ed461fff2a51eefb15d74303df05b948124719f199b0b17"
+          },
+          {
+            "name": "model.safetensors",
+            "bytes": 28143920,
+            "sha256": "116a02532db461f91386a5b20f942ff2c8d4de7341e21b55caafc3d7b25f49a1"
+          },
+          {
+            "name": "special_tokens_map.json",
+            "bytes": 441,
+            "sha256": "10b8c8852c1e1f70b54d9aff61728408c28971c0e97a6c5a7b2debbd1d3e9c0c"
+          },
+          {
+            "name": "tokenizer.json",
+            "bytes": 2114042,
+            "sha256": "870f4e2baa6b683221fa52004d5d6f40ab8c9d31961617304b78c910c2c3caf2"
+          },
+          {
+            "name": "tokenizer_config.json",
+            "bytes": 4834,
+            "sha256": "eee017c5bd133137f45907bd0a6e781e2ccd1a533734b7ed2a2f2f4446659809"
+          }
+        ]
+      },
+      "prompt_text": "The small red boat",
+      "rows": [],
+      "passed": false,
+      "helper": {
+        "uniform": 0,
+        "p_proposal": 0,
+        "q_proposal": 1,
+        "native_output": [
+          [
+            0,
+            1
+          ]
+        ],
+        "native_matches": 1,
+        "strict_reference_accepts": false,
+        "scope": "Constructed finite-RNG endpoint; not a typical sampled run or ideal-law counterexample."
+      },
+      "failure": "Traceback (most recent call last):\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\native_speculation.py\", line 251, in diagnostic\n    row = generate_one(target,draft,prompt,mode,3,seed,cap=8,rich=True,observer=observe)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\native_speculation.py\", line 164, in generate_one\n    output = target.generate(input_ids=ids,attention_mask=torch.ones_like(ids),\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2982, in generate\n    result = decoding_method(\n             ^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 4025, in _assisted_decoding\n    candidate_input_ids, candidate_logits = candidate_generator.get_candidates(input_ids)\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\native_speculation.py\", line 108, in get_observed\n    ids,logits = get(input_ids,*args,**kwargs)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\candidate_generator.py\", line 220, in get_candidates\n    candidate_ids, candidate_logits = self._generate_candidates(generation_args)\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\candidate_generator.py\", line 323, in _generate_candidates\n    assistant_output = self.assistant_model.generate(**generation_args, **self.assistant_kwargs)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2945, in generate\n    self._prepare_cache_for_generation(\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2237, in _prepare_cache_for_generation\n    raise ValueError(\nValueError: Passing both `cache_implementation` (used to initialize certain caches) and `past_key_values` (a Cache object) is unsupported. Please use only one of the two.\n"
+    },
+    "failed_greedy_events": [
+      {
+        "begin": true,
+        "source_sha256": "4f2a958cd10268c241942d611e12279696714875a58b4b755c4d930e4d83ca55"
+      },
+      {
+        "event": "native-call-start",
+        "prompt_ids": [
+          510,
+          1355,
+          2502,
+          9735
+        ],
+        "mode": "greedy",
+        "lookahead": 3,
+        "seed": 401,
+        "cap": 8,
+        "rich": true
+      },
+      {
+        "event": "native-candidate-start",
+        "prefix_ids": [
+          510,
+          1355,
+          2502,
+          9735
+        ]
+      },
+      {
+        "event": "native-candidates",
+        "round": {
+          "prefix_ids": [
+            510,
+            1355,
+            2502,
+            9735
+          ],
+          "candidate_ids": [
+            281,
+            48056,
+            25013
+          ],
+          "proposal_score_shape": [
+            1,
+            3,
+            50304
+          ],
+          "q_selected": [
+            0.3971322178840637,
+            0.6064690947532654,
+            0.0860118716955185
+          ]
+        }
+      },
+      {
+        "event": "native-round-update",
+        "round": {
+          "prefix_ids": [
+            510,
+            1355,
+            2502,
+            9735
+          ],
+          "candidate_ids": [
+            281,
+            48056,
+            25013
+          ],
+          "proposal_score_shape": [
+            1,
+            3,
+            50304
+          ],
+          "q_selected": [
+            0.3971322178840637,
+            0.6064690947532654,
+            0.0860118716955185
+          ],
+          "emitted_ids": [
+            13
+          ],
+          "processed_target_score_shape": [
+            1,
+            4,
+            50304
+          ],
+          "forward_logits_shape": [
+            1,
+            4,
+            50304
+          ],
+          "native_post_stop_n_matches": 0,
+          "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+          "target_cache_after_crop": 4,
+          "p_selected_candidates": [
+            0.018617963418364525,
+            6.697849386227972e-08,
+            7.899542353584366e-09
+          ]
+        }
+      },
+      {
+        "event": "native-candidate-start",
+        "prefix_ids": [
+          510,
+          1355,
+          2502,
+          9735,
+          13
+        ]
+      },
+      {
+        "event": "native-call-exception",
+        "elapsed_ns": 46157200,
+        "work": {
+          "target_calls": 1,
+          "draft_calls": 3,
+          "target_rows": 7,
+          "draft_rows": 6,
+          "rounds": [
+            {
+              "prefix_ids": [
+                510,
+                1355,
+                2502,
+                9735
+              ],
+              "candidate_ids": [
+                281,
+                48056,
+                25013
+              ],
+              "proposal_score_shape": [
+                1,
+                3,
+                50304
+              ],
+              "q_selected": [
+                0.3971322178840637,
+                0.6064690947532654,
+                0.0860118716955185
+              ],
+              "emitted_ids": [
+                13
+              ],
+              "processed_target_score_shape": [
+                1,
+                4,
+                50304
+              ],
+              "forward_logits_shape": [
+                1,
+                4,
+                50304
+              ],
+              "native_post_stop_n_matches": 0,
+              "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+              "target_cache_after_crop": 4,
+              "p_selected_candidates": [
+                0.018617963418364525,
+                6.697849386227972e-08,
+                7.899542353584366e-09
+              ]
+            }
+          ],
+          "instrumentation": "Forward hooks count calls and input rows."
+        },
+        "failure": "Traceback (most recent call last):\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\native_speculation.py\", line 164, in generate_one\n    output = target.generate(input_ids=ids,attention_mask=torch.ones_like(ids),\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2982, in generate\n    result = decoding_method(\n             ^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 4025, in _assisted_decoding\n    candidate_input_ids, candidate_logits = candidate_generator.get_candidates(input_ids)\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\native_speculation.py\", line 108, in get_observed\n    ids,logits = get(input_ids,*args,**kwargs)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\candidate_generator.py\", line 220, in get_candidates\n    candidate_ids, candidate_logits = self._generate_candidates(generation_args)\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\candidate_generator.py\", line 323, in _generate_candidates\n    assistant_output = self.assistant_model.generate(**generation_args, **self.assistant_kwargs)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2945, in generate\n    self._prepare_cache_for_generation(\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2237, in _prepare_cache_for_generation\n    raise ValueError(\nValueError: Passing both `cache_implementation` (used to initialize certain caches) and `past_key_values` (a Cache object) is unsupported. Please use only one of the two.\n"
+      }
+    ],
+    "helper": {
+      "uniform": 0,
+      "p_proposal": 0,
+      "q_proposal": 1,
+      "native_output": [
+        [
+          0,
+          1
+        ]
+      ],
+      "native_matches": 1,
+      "strict_reference_accepts": false,
+      "scope": "Constructed finite-RNG endpoint; not a typical sampled run or ideal-law counterexample."
+    },
+    "model": {
+      "model": "EleutherAI/pythia-14m",
+      "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+      "files": [
+        {
+          "name": "README.md",
+          "bytes": 10560,
+          "sha256": "d1f2cf1d5181daedeaa70208ddd5cc5251867bde9acf6db7bb45a2265e25e163"
+        },
+        {
+          "name": "config.json",
+          "bytes": 698,
+          "sha256": "f97f966a66c444890ed461fff2a51eefb15d74303df05b948124719f199b0b17"
+        },
+        {
+          "name": "model.safetensors",
+          "bytes": 28143920,
+          "sha256": "116a02532db461f91386a5b20f942ff2c8d4de7341e21b55caafc3d7b25f49a1"
+        },
+        {
+          "name": "special_tokens_map.json",
+          "bytes": 441,
+          "sha256": "10b8c8852c1e1f70b54d9aff61728408c28971c0e97a6c5a7b2debbd1d3e9c0c"
+        },
+        {
+          "name": "tokenizer.json",
+          "bytes": 2114042,
+          "sha256": "870f4e2baa6b683221fa52004d5d6f40ab8c9d31961617304b78c910c2c3caf2"
+        },
+        {
+          "name": "tokenizer_config.json",
+          "bytes": 4834,
+          "sha256": "eee017c5bd133137f45907bd0a6e781e2ccd1a533734b7ed2a2f2f4446659809"
+        }
+      ]
+    },
+    "budget": {
+      "diagnostic_attempts_total": 2,
+      "greedy_retries": 0,
+      "new_sample_calls": 1
+    }
+  }
+}

@@ -1,16 +1,19 @@
-// Generated from the complete current prepared manuscript by render-rwkv-memory-lesson.mjs.
+// Current continuous manuscript; original scientific programmes and fits remain preserved.
 import { Prose, H2, H3, CodeBlock } from '../../components/content';
 import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
 import { LessonIntro } from '../../components/lesson-labs/LessonElements.jsx';
 import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
-import { RwkvFigure, RwkvSummaryLab, RwkvWeightedLab, RwkvDeltaLab, RwkvTrajectoryLab, RwkvProgram } from '../../components/lesson-labs/RwkvMemoryLabs.jsx';
+import { RwkvProgram } from '../../components/lesson-labs/RwkvFlowPrograms.jsx';
 import '../../components/lesson-labs/neural-lesson-neutral.css';
+import { RwkvMatrixBlockDrawing, RwkvGooseChannelDrawing, RwkvObjectiveDrawing, RwkvCollapsedHistoryDrawing, RwkvRetNetRotationDrawing, RwkvSequenceCompressionDrawing, RwkvDecayDrawing, RwkvInputDrawing, RwkvSummaryDrawing, RwkvChunkDrawing, RwkvWeightedDrawing, RwkvScaleDrawing, RwkvBlockDrawing, RwkvDeltaDrawing, RwkvReflectionDrawing, RwkvFeatureDrawing, RwkvGradientDrawing, RwkvGooseBlockDrawing, RwkvClassifierDrawing, RwkvBoundaryDrawing, RwkvSplitDrawing } from '../../components/lesson-labs/RwkvFlowDrawings.jsx';
+import { RwkvFlowProvider, RwkvTranscriptFlow, RwkvSummaryFlow, RwkvWeightedFlow, RwkvAddressFlow, RwkvGooseFlow, RwkvNonunitFlow, RwkvRowGateFlow, RwkvCacheFlow } from '../../components/lesson-labs/RwkvFlowLabs.jsx';
+import { RwkvTrajectoryProvider, RwkvFittedFlow, RwkvRecordedEvidence } from '../../components/lesson-labs/RwkvTrajectoryFlow.jsx';
 export default {
   title: 'RWKV & Linear Attention Models',
   readTime: '~100 min read + experiments and practice',
   hasIntegratedGuide: true,
-  content: () => <div className="neural-lesson neural-lesson-neutral rwkv-memory-lesson"><LessonIntro prerequisites="Vector products and a recurrent update. Query/key/value, matrix orientation and stable normalization are refreshed locally." sections={[["1-what-must-the-memory-answer","1. What must the memory answer?"],["2-a-running-summary-that-really-equals-its-attention-rule","2. A running summary that really equals its attention rule"],["3-parallel-training-and-streamed-inference-are-two-computations-of-one-operator","3. Parallel training and streamed inference are two computations of one operator"],["4-rwkv-4-weighted-memories-with-several-forgetting-timescales","4. RWKV-4: weighted memories with several forgetting timescales"],["5-from-one-memory-channel-to-a-trainable-sequence-model","5. From one memory channel to a trainable sequence model"],["6-when-a-summary-needs-an-editable-address","6. When a summary needs an editable address"],["7-nearby-models-shared-algebra-and-different-choices","7. Nearby models, shared algebra and different choices"],["8-train-a-real-movement-classifier-then-interrupt-its-stream","8. Train a real movement classifier, then interrupt its stream"],["9-troubleshooting-by-locating-the-broken-assumption","9. Troubleshooting by locating the broken assumption"],["10-practice-change-the-task-not-just-the-numbers-on-a-trace","10. Practice: change the task, not just the numbers on a trace"],["references-and-other-ways-to-learn","References and other ways to learn"]]}>Choose what a stream must remember: a weighted summary, individual records, or associations that can be corrected.</LessonIntro>
-<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Edit keys/queries/values, decay, current-token bonus, memory write/correction inputs and real stream interruptions. Update summary matrices/denominators, present output versus stored history and chronological state together. Compare a continued stream with an explicit reset. The labs show current results as you work; you do not enter or submit a guess. Use those comparisons to choose the correct current-read and future-memory semantics and see what compact state cannot retain."}</Prose>
+  content: () => <div className="neural-lesson neural-lesson-neutral rwkv-memory-lesson lesson-flow rwkv-reading-flow"><RwkvFlowProvider><RwkvTrajectoryProvider><LessonIntro prerequisites="Vector products and a recurrent update. Query/key/value, matrix orientation and stable normalization are refreshed locally." sections={[["1-what-must-the-memory-answer","1. What must the memory answer?"],["2-a-running-summary-that-really-equals-its-attention-rule","2. A running summary that really equals its attention rule"],["3-parallel-training-and-streamed-inference-are-two-computations-of-one-operator","3. Parallel training and streamed inference are two computations of one operator"],["4-rwkv-4-weighted-memories-with-several-forgetting-timescales","4. RWKV-4: weighted memories with several forgetting timescales"],["5-from-one-memory-channel-to-a-trainable-sequence-model","5. From one memory channel to a trainable sequence model"],["6-when-a-summary-needs-an-editable-address","6. When a summary needs an editable address"],["7-nearby-models-shared-algebra-and-different-choices","7. Nearby models, shared algebra and different choices"],["8-train-a-real-movement-classifier-then-interrupt-its-stream","8. Train a real movement classifier, then interrupt its stream"],["9-troubleshooting-by-locating-the-broken-assumption","9. Troubleshooting by locating the broken assumption"],["10-practice-change-the-task-not-just-the-numbers-on-a-trace","10. Practice: change the task, not just the numbers on a trace"],["references-and-other-ways-to-learn","References and other ways to learn"]]}>Choose what a stream must remember: a weighted summary, individual records, or associations that can be corrected.</LessonIntro>
+<Prose>{"Follow one read before changing it. Each investigation keeps its result visible; its controls change the inputs just taught. The same summary, weighted stream and address case continue across adjacent investigations."}</Prose>
 
 <Prose>{"A conversation can be remembered in two quite different ways. You can keep a transcript and consult individual lines. Or you can maintain a working summary: who is speaking, what they want, which facts changed, and what remains unresolved. A transcript grows. A fixed-size summary must decide what deserves its limited space."}</Prose>
 
@@ -20,13 +23,20 @@ export default {
 
 <Prose>{"The "}<a href={"/learn/path/full-curriculum/state-space-models-s4-mamba-mamba-2?module=deep-learning-fundamentals"}>{"preceding state-space lesson"}</a>{" explained how input-dependent coefficients update a state. Here we examine memory as weighted aggregation and as a small associative map. You need vectors, matrix multiplication and the idea of a learned projection; we refresh the attention operation locally."}</Prose>
 
-<Prose>{""}<strong>{"A useful first route:"}</strong>{" read sections 1–5, do the summary and weighted-memory investigations, and then run the real-data example in section 8. Sections6–7 explain the newer architectures and hardware choices; take them after you can trace one update. The optional derivations and later exercises provide a deeper pass. By the end you should be able to derive a causal summary, distinguish an exact reformulation from a different attention operator, preserve state across chunks, and explain what an efficiency claim does—and does not—measure."}</Prose>
+<Prose>{""}<strong>{"A useful first route:"}</strong>{" read sections 1–5, do the summary and weighted-memory investigations, and then run the real-data example in section 8. Sections 6–7 explain the newer architectures and hardware choices; take them after you can trace one update. The optional derivations and later exercises provide a deeper pass. By the end you should be able to derive a causal summary, distinguish an exact reformulation from a different attention operator, preserve state across chunks, and explain what an efficiency claim does—and does not—measure."}</Prose>
 
 <H2>{"1. What must the memory answer?"}</H2>
+
+<Prose>{"What does one input need to remember, and what can another input ask of it? First separate the three jobs in a single position."}</Prose>
+<RwkvInputDrawing />
 
 <Prose>{"Think of a "}<strong>{"key"}</strong>{" as an address or description, a "}<strong>{"value"}</strong>{" as information stored with that address, and a "}<strong>{"query"}</strong>{" as a request to retrieve information. These are learned numeric vectors, not necessarily readable words. The same token can produce all three through different learned matrices. A projection takes an input vector x and computes, for example, q=Wq x. Its weights are learned from a downstream objective."}</Prose>
 
 <Prose>{"A dot product q·k is large when the two vectors align in the directions the model has learned to use. It is not automatically a semantic similarity score: training gives those directions their job. A value can contain negative numbers and several channels even when the weight used to combine values is positive."}</Prose>
+
+<Prose>{"How does a request turn stored content into an answer? The following scalar-content cutaway stipulates three compatibility scores; it does not claim they were generated by the symbolic matrices above. Here exp raises the number e to a power, making a positive mass. Subtract the largest permitted score m from each score first: the common scale cancels when we divide each mass by their sum."}</Prose>
+<RwkvTranscriptFlow />
+<Prose>{"The first row holds a score for each permitted record. Exponentiation makes positive masses. Each own mass divides by their shared sum, producing weights that multiply the corresponding returned values. Adding those contributions gives the output. A future record has no legal edge. For a two-coordinate query [2,1] and key [1,3], the dot product is 2×1+1×3=5; the general scaled score divides by the square root of the key width."}</Prose>
 
 <Prose>{"For one attention head, let q and k have d coordinates and let v have p coordinates. At sequence position t, causal softmax attention computes"}</Prose>
 
@@ -34,7 +44,7 @@ export default {
 
 <Prose>{"The weights are nonnegative and sum to one. The word "}<strong>{"causal"}</strong>{" means that the answer at t uses only positions through t. The √d factor controls the scale of the dot products; it does not change which keys are stored. For numerical evaluation, subtract the largest permitted score before exponentiating."}</Prose>
 
-<RwkvFigure kind="transcript" />
+
 
 <Prose>{"For scores [0, log(2), 0] and values [2,8,−1], the normalized weights are [1/4,1/2,1/4] and the output is 4.25. An attention output is usually a mixture, not a command to select one original token. A later query can assign a different mixture to the same stored history."}</Prose>
 
@@ -46,7 +56,7 @@ export default {
 
 <Prose>{"Updating a state at inference does not, by itself, mean changing the pretrained model weights."}</Prose>
 
-<RwkvFigure kind="parameters" />
+<Prose>{"Notice two clocks: model parameters change when loss and an optimizer train the network across examples; sequence state changes whenever this particular stream supplies another input. The evaluation weights can stay fixed while the memory changes at every position."}</Prose>
 
 <H2>{"2. A running summary that really equals its attention rule"}</H2>
 
@@ -55,6 +65,10 @@ export default {
 <Prose>{"y_t = [Σ_{i≤t} κ(q_t,k_i)v_i] / [Σ_{i≤t} κ(q_t,k_i)]."}</Prose>
 
 <Prose>{"We will assume nonnegative weights and a positive denominator. Nonnegative features alone permit a zero vector or disjoint support, so that last condition must actually hold. A zero total weight makes this normalized expression undefined; returning an arbitrary answer would silently invent a different rule."}</Prose>
+
+<Prose>{"Can two totals answer the same request without storing every record? Use the following first-two-write cutaway; this section changes the weighting rule to a dot product of nonnegative features."}</Prose>
+<RwkvSummaryDrawing />
+<Prose>{"The key column [0,1] multiplies the scalar value 8, writing [0,8] into two address-feature rows. Adding old S=[2,0] produces [2,8]. A separate key-total route changes old z=[1,0] into [1,1]. The request [2,1] reads numerator 12 and denominator 3, returning 4. Those feature values are supplied examples, not physical sensor coordinates."}</Prose>
 
 <Prose>{"For readability, write q̄=φ(q), k̄=φ(k). Let columns represent coordinates in the equations below. A state S_t of shape m×p and a vector z_t of length m are sufficient:"}</Prose>
 
@@ -68,7 +82,7 @@ export default {
 
 <Prose>{"The same distributive law changes the denominator into Σ_i k̄_iᵀq̄_t. We have regrouped the arithmetic of the "}<strong>{"chosen kernel"}</strong>{". We have not proved that an arbitrary kernel equals softmax."}</Prose>
 
-<RwkvFigure kind="outer" />
+
 
 <H3>{"A complete four-update example"}</H3>
 
@@ -76,13 +90,26 @@ export default {
 
 <NeuralTable caption={"A complete four-update example"} headers={[<>{"t"}</>,<>{"q̄_t"}</>,<>{"k̄_t"}</>,<>{"v_t"}</>,<>{"output"}</>]} rows={[[<>{"1"}</>,<>{"[1,1]"}</>,<>{"[1,0]"}</>,<>{"2"}</>,<>{"2"}</>],[<>{"2"}</>,<>{"[2,1]"}</>,<>{"[0,1]"}</>,<>{"8"}</>,<>{"4"}</>],[<>{"3"}</>,<>{"[1,2]"}</>,<>{"[1,1]"}</>,<>{"−1"}</>,<>{"2.5"}</>],[<>{"4"}</>,<>{"[3,1]"}</>,<>{"[2,1]"}</>,<>{"5"}</>,<>{"3"}</>]]} />
 
+<RwkvSummaryFlow study="key" />
+
 <Prose>{"After the first two writes, S=[2,8]ᵀ and z=[1,1]ᵀ. The second query produces (2×2+1×8)/(2×1+1×1)=4. At the third write, S becomes [1,7]ᵀ and z=[2,2]ᵀ; the query returns 15/6=2.5. At the end S=[11,12]ᵀ and z=[4,3]ᵀ, so the final answer is 45/15=3."}</Prose>
 
-<RwkvFigure kind="ledger" />
+
+
+<RwkvCollapsedHistoryDrawing />
 
 <Prose>{"Two summaries contain all the information this particular operator needs. They do not contain an individually recoverable copy of every original pair. If two histories have the same S and z, every future query with no intervening write receives the same answer."}</Prose>
 
-<RwkvSummaryLab />
+<Prose>{"Now keep those address features fixed and change the content returned by one write. Later answers can change; earlier answers cannot use this later write."}</Prose>
+<RwkvSummaryFlow study="value" />
+<Prose>{"A query changes a read, not the already written S or z. Choose the read position and coordinate to inspect that separation. A zero-overlap request has no normalized answer."}</Prose>
+<RwkvSummaryFlow study="query" />
+<Prose>{"When every written value is the same c, numerator becomes c times the mass, so every supported read returns c. This branch clones the current keys/queries and uses an empty initial state; it does not replace your main stream."}</Prose>
+<RwkvSummaryFlow study="constant" />
+<Prose>{"Does another write change earlier answers? Append or remove a supplied row and inspect the chronological table. The newly appended row uses key [1,1], query [1,1], value 2; at most 12 rows are retained in this small study."}</Prose>
+<RwkvSummaryFlow study="extent" />
+<Prose>{"Keep an exact comparison case by pinning your current input. Subsequent edits affect the current calculation while the pinned input remains fixed."}</Prose>
+<RwkvSummaryFlow study="pin" />
 
 <Prose>{"This example also reveals a limitation: an ungated summary retains all writes. Repeating an address can accumulate conflicting values. Normalization may average them, but it does not know that a later measurement was meant to replace an earlier one."}</Prose>
 
@@ -90,21 +117,25 @@ export default {
 
 <Prose>{"For fixed feature dimension m and value width p, these updates take O(Tmp) work over T positions and O(mp+m) persistent state per head. Computing the learned projections and feature map adds its own cost. The full model has nonlinearities, normalization and input-dependent features; it is not a linear function of the original sequence."}</Prose>
 
+<RwkvFeatureDrawing />
+
 <Prose>{"One common map is φ(x)=ELU(x)+1, applied coordinatewise. For x≥0 it is x+1, and for x<0 it is exp(x), so it is strictly positive in exact arithmetic. This chooses a useful kernel. It is "}<strong>{"not an exact softmax factorization"}</strong>{"."}</Prose>
 
 <Prose>{"Take one-dimensional keys [0,1], values [0,10], and query 2. Softmax gives 10exp(2)/(1+exp(2)), about 8.807971. ELU+1 gives feature-query 3 and feature-keys [1,2], hence weights proportional to [3,6] and output 6.666667. Both are correct evaluations of different operators. A resemblance on one random tensor cannot establish equivalence or downstream quality."}</Prose>
 
-<RwkvFigure kind="kernels" />
 
-<H3>{"Optional: approximating the exponential kernel"}</H3>
+
+<H3>{"Deeper: approximating the exponential kernel"}</H3>
 
 <Prose>{"Performer approaches the problem differently. For x=q/d^(1/4), y=k/d^(1/4), the desired score kernel is exp(x·y). If ω is a standard Gaussian vector,"}</Prose>
+
+<RwkvFeatureDrawing random />
 
 <Prose>{"E[exp(ω·x−||x||²/2) exp(ω·y−||y||²/2)] = exp(x·y)."}</Prose>
 
 <Prose>{"The identity follows from E exp(ω·s)=exp(||s||²/2), with s=x+y. Average m samples, dividing each feature by √m, to estimate that kernel with positive features. FAVOR+ additionally uses a carefully constructed orthogonal sampling scheme to reduce variance. It is not the ordinary sine/cosine random-feature approximation to a Gaussian distance kernel."}</Prose>
 
-<RwkvFigure kind="random" />
+
 
 <Prose>{"The kernel estimate can be unbiased while the "}<strong>{"ratio"}</strong>{" forming normalized attention is biased: in general E[A/B]≠E[A]/E[B]. Feature count, norm scales and numerical stabilization matter. The later "}<a href={"/learn/path/full-curriculum/sparse-linear-attention-variants?module=deep-learning-fundamentals"}>{"Sparse & Linear Attention Variants"}</a>{" lesson owns the detailed approximation comparison. Here the essential distinction is exact regrouping for one kernel versus approximate recovery of another. See the "}<a href={"https://proceedings.mlr.press/v119/katharopoulos20a.html"}>{"Linear Transformer paper"}</a>{" and "}<a href={"https://arxiv.org/abs/2009.14794"}>{"Performer, §2"}</a>{"."}</Prose>
 
@@ -112,9 +143,11 @@ export default {
 
 <Prose>{"During autoregressive generation, the next token is not known until the current step produces it. The model must advance sequentially. During training, the input sequence is already available, so projections for all positions can be computed together, and structured sums or chunk operations can expose parallel work."}</Prose>
 
-<RwkvFigure kind="timeline" />
+<Prose>{"These are execution schedules, not claims that two different weighting operators become identical."}</Prose>
 
 <Prose>{"For an ungated positive kernel, divide the sequence into a chunk of c rows. Let Q,K,V denote the already-mapped queries, keys and values in that chunk; let S_in,z_in summarize earlier chunks. Define L as a lower-triangular matrix of ones. The chunk numerator is"}</Prose>
+
+<RwkvSummaryFlow study="chunk" />
 
 <Prose>{"N = Q S_in + [(QKᵀ) ⊙ L] V."}</Prose>
 
@@ -128,9 +161,9 @@ export default {
 
 <Prose>{"There are two sources of context: earlier chunks through the carried state, and earlier/current positions inside this chunk through the triangular mask. Omitting the second mask leaks future information. Omitting the first term forgets earlier chunks. Including the entire updated S_out when calculating every within-chunk output also leaks future writes."}</Prose>
 
-<RwkvFigure kind="chunk" />
 
-<Prose>{"Our four-update example produces exactly[2,4,2.5,3] for chunk sizes1,2,3,4 and 8 in the small NumPy calculation. Size3 deliberately leaves a shorter final chunk; size 8 contains the whole example. That agreement is an algebra check, not evidence that all chunk sizes run equally quickly."}</Prose>
+
+<Prose>{"Our four-update example produces exactly [2,4,2.5,3] for chunk sizes1,2,3,4 and 8 in the small NumPy calculation. Size 3 deliberately leaves a shorter final chunk; size 8 contains the whole example. That agreement is an algebra check, not evidence that all chunk sizes run equally quickly."}</Prose>
 
 <Prose>{"Here is a complete short program for the causal operator. Q and K contain features, so this program does not secretly apply another map:"}</Prose>
 
@@ -142,9 +175,22 @@ export default {
 
 <Prose>{"When processing a real model in pieces, the carried state may also include token-shift inputs, convolution history, normalization-related state if the architecture has any, or a readout accumulator. Saving only the central matrix is insufficient when other operations cross the chunk boundary. We will test a complete block's continuation in section 8."}</Prose>
 
+<H3>{"Deeper: where does a normalized read send learning credit?"}</H3>
+<Prose>{"The summary can be part of a learned network. Begin with one returned answer and its target; this isolates the derivative of a read, before time-unrolled training adds earlier writes."}</Prose>
+<RwkvGradientDrawing />
+<Prose>{"In this fixture S=[2,8], z=[1,1], q=[2,1], so y=12/3=4. Target 6 gives half-squared loss L=½(4−6)²=2 and dL/dy=−2. Write n=qᵀS and d=qᵀz. Holding the other operands fixed, dy/dS=q/d, dy/dz=−nq/d², and dy/dq=(Sd−zn)/d². Thus read derivatives are [2/3,1/3], [−8/3,−4/3] and [−2/3,4/3]. Multiplying by −2 gives loss gradients to S [−4/3,−2/3], z [16/3,8/3], and q [4/3,−8/3]. The denominator is a learned path too; detaching it changes the training operator."}</Prose>
+<Prose>{"Earlier writes receive additional credit because S and z depend on their keys and values. An ordinary autograd recurrence retains the computation graph across time. The Linear Transformer paper derives an accumulated backward that need not store every prefix state matrix; projections, input/output tensors and the rest of the model still use memory."}</Prose>
+<Prose>{"Here is the batched differentiable implementation. N counts independent examples, T positions, H heads, m mapped address features and p value features. Inputs q/k have shape [N,T,H,m], v has [N,T,H,p], and returned state is S [N,H,m,p] plus z [N,H,m]. Features enter already mapped. The default is the transparent recurrence; chunked uses bounded lower-triangular local score blocks, and dense_oracle is an independent small full-score reference."}</Prose>
+<RwkvProgram file="linear-memory-operators.py" title="Differentiable positive memory, bounded chunks and independent dense reference" />
+<Prose>{"The API policy is explicit: padding emits zero and preserves state, which is not an answer to an undefined normalized read. A reset on a valid position clears the previous segment before this position writes; a reset flag on padding does nothing. An active zero-support read raises an error. Choose recurrence or bounded chunks for the workload, and keep the T² dense reference for small parity tests. Torch vectorizes batch/head/features; this portable program does not claim fused-kernel throughput."}</Prose>
+
 <H2>{"4. RWKV-4: weighted memories with several forgetting timescales"}</H2>
 
 <Prose>{"RWKV stands for "}<strong>{"Receptance Weighted Key Value"}</strong>{". Its early published architecture, commonly called RWKV-4, is especially useful for understanding a stable recurrent memory without starting from a full matrix state. Each channel maintains a decaying weighted numerator and denominator. Different channels can learn different retention rates."}</Prose>
+
+<Prose>{"What should be used for today’s answer, and what should be saved for tomorrow? Switch weighting rules while keeping the worked values [2,8,−1,5]."}</Prose>
+<RwkvWeightedDrawing />
+<Prose>{"The left read sees old A=2, B=1 and current value 8 with weight 4, giving (2+4×8)/(1+4)=6.8. The separate storage branch retains half the old totals and writes with ordinary weight 2, saving A=17 and B=2.5. Current bonus and future retention belong to different branches."}</Prose>
 
 <Prose>{"Use λ∈(0,1] for retention, u for a learned current-token log bonus, k_t for a key-derived log weight, and v_t for a value. All of these operations are per channel. Before reading token t, let A_{t−1},B_{t−1} contain earlier writes. The current read is"}</Prose>
 
@@ -156,11 +202,13 @@ export default {
 
 <Prose>{"The two operations have different jobs. "}<strong>{"The current-token bonus changes this read; it does not become a permanent bonus on the stored write."}</strong>{" Also notice the indexing: at t, the most recent earlier write has not yet been decayed by the update for t. Expanding the history gives weight λ^(t−1−i)exp(k_i) for i<t."}</Prose>
 
-<Prose>{"A retention of .5 halves an old contribution on each later state update; a retention near1 decays it slowly. Its half-life is log(.5)/logλ updates when0<λ<1. Half-life describes the decay factor, not a guaranteed lifespan of semantic information after nonlinear layers and later writes."}</Prose>
+<RwkvDecayDrawing />
 
-<RwkvFigure kind="retention" />
+<Prose>{"A retention of .5 halves an old contribution on each later state update; a retention near 1 decays it slowly. Its half-life is log(.5)/logλ updates when 0<λ<1. Half-life describes the decay factor, not a guaranteed lifespan of semantic information after nonlinear layers and later writes."}</Prose>
 
-<RwkvFigure kind="circuit" />
+<RwkvWeightedFlow study="retention" />
+
+
 
 <H3>{"One channel, fully worked"}</H3>
 
@@ -174,7 +222,9 @@ export default {
 
 <H3>{"Stable arithmetic without changing the answer"}</H3>
 
-<Prose>{"Computing exp(k) directly fails for very large keys even when the final normalized answer is modest. If we add1000 to all keys in this example, every numerator and denominator is multiplied by exp(1000), so the exact outputs should remain unchanged. Raw float64 exponentials overflow; a rescaled calculation changes the answer by only about 1.1×10^−13 in our probe."}</Prose>
+<Prose>{"Computing exp(k) directly fails for very large keys even when the final normalized answer is modest. If we add 1000 to all keys in this example, every numerator and denominator is multiplied by exp(1000), so the exact outputs should remain unchanged. Raw float64 exponentials overflow; a rescaled calculation changes the answer by only about 1.1×10^−13 in our probe."}</Prose>
+
+<RwkvScaleDrawing />
 
 <Prose>{"Represent A=exp(p)a and B=exp(p)b. Store a,b and the log scale p, rather than enormous A,B. Initially a=b=0 and p=−∞. For the read choose q=max(p,u+k), so"}</Prose>
 
@@ -186,7 +236,7 @@ export default {
 
 <Prose>{"Both exponential arguments are nonpositive. One competing exponential equals1; with valid finite keys, the normalization remains meaningful. Crucially, a may be negative because values may be negative. p tracks the scale of "}<strong>{"weights"}</strong>{", not log(a). This method works for signed values."}</Prose>
 
-<RwkvFigure kind="scale" />
+
 
 <Prose>{"Adding the same small ε to the raw and rescaled denominators does not preserve equivalence: ε has a different effective scale in the two formulas. Diagnose invalid inputs or insufficient precision explicitly rather than treating arbitrary ε as an exact algebraic identity."}</Prose>
 
@@ -194,13 +244,26 @@ export default {
 
 <RwkvProgram file="linear_memory_mechanisms.py" title="Read the complete scratch memory operators" />
 
-<RwkvWeightedLab />
+<Prose>{"Change one key and content pair, keeping the same stream and weighting convention. The picture reports a common numerical scale so large keys do not make its operands overflow."}</Prose>
+<RwkvWeightedFlow study="write" />
+<Prose>{"Now change only today’s log bonus u. It increases the current read weight, but the saved a, b and p exclude this bonus."}</Prose>
+<RwkvWeightedFlow study="bonus" />
+<Prose>{"Changing the common key unit should not change the normalized mixture. Move the shared log offset, and compare finite scaled state with the raw exponential’s overflow boundary. This branch starts empty; shifting a pre-existing history also requires shifting its p."}</Prose>
+<RwkvWeightedFlow study="scale" />
+<Prose>{"A separate empty-state branch gives every content value the same scalar. Supported weighted reads then return that scalar for any permitted keys, bonus and retention; a nonempty history with different values breaks that assumption."}</Prose>
+<RwkvWeightedFlow study="constant" />
+<Prose>{"Add or remove tokens while retaining the edited parameters. The new token uses log key 0 and value 2; resetting restores the declared four-token fixture."}</Prose>
+<RwkvWeightedFlow study="extent" />
+<Prose>{"For differentiable training, the following implementation vectorizes independent examples/channels and exposes all three saved arrays. Its explicit log-weight oracle checks the stable recurrence, including nonempty incoming history. Safe empty-history branches avoid undefined infinite subtraction in autograd. The maximum scale is nondifferentiable at ties, but the represented weighted ratio remains smooth; gradient comparisons use non-tied fixtures and separately check tie forwards."}</Prose>
+<RwkvProgram file="rwkv-weighted-state.py" title="Differentiable stable read-before-storage and explicit log-weight reference" />
 
 <H2>{"5. From one memory channel to a trainable sequence model"}</H2>
 
 <Prose>{"A useful memory operator is only part of a neural network. The model must learn how to encode input, what to write, how to read, and how to turn that read into a task prediction."}</Prose>
 
 <Prose>{"RWKV-4 alternates a time-mixing sublayer with a channel-mixing sublayer. “Time mixing” combines information from different positions; “channel mixing” transforms the feature coordinates at one position. Pre-normalization and residual additions provide stable paths through a stack of blocks."}</Prose>
+
+<RwkvBlockDrawing />
 
 <Prose>{"First form shifted inputs. For the key branch, for example,"}</Prose>
 
@@ -214,7 +277,10 @@ export default {
 
 <Prose>{"Squaring is elementwise. The hidden projection expands the width, allowing a richer transformation, and W_v' returns to the residual width. This sublayer has its own previous normalized input for token shifting. Reusing the time-mixing previous input would be a different model."}</Prose>
 
-<RwkvFigure kind="block" />
+
+
+<Prose>{"How does a task teach those weights? In language training, the current token updates state and the resulting representation produces scores for the next token. Its actual following token is a separate target, supplied to the loss after those scores."}</Prose>
+<RwkvObjectiveDrawing />
 
 <Prose>{"For language modeling, token IDs become embedding vectors; the final hidden vector becomes one logit per vocabulary token. Softmax converts logits into probabilities. With training text x_1,...,x_T, the loss predicts the following token from each prefix:"}</Prose>
 
@@ -222,7 +288,7 @@ export default {
 
 <Prose>{"A causal state update processes x_t before predicting x_{t+1}. Shifting labels incorrectly can ask the model to reproduce an already visible token and create an artificially easy training task. Backpropagation adjusts projections, mixing coefficients, decay and readout weights to reduce this loss. The a,b,p values from one training sequence are not a permanent collection of learned model parameters."}</Prose>
 
-<RwkvFigure kind="objective" />
+
 
 <Prose>{"When training across chunks, passing a state carries context forward. "}<strong>{"Detaching"}</strong>{" that state from the gradient graph preserves its numerical value while truncating credit assignment across the boundary. Resetting it discards context. These two choices can have very different learning consequences. Unrelated documents or movement examples normally start from their designated initial state; state reuse across shuffled examples causes information contamination."}</Prose>
 
@@ -236,6 +302,9 @@ export default {
 
 <H3>{"Adding and overwriting are different learning rules"}</H3>
 
+<Prose>{"How can a new sensor A reading replace its old reading? Return to the A=2, B=7, A=5 task, with orthogonal unit addresses [1,0] and [0,1]. At the last write, read the old association first, then write only its error."}</Prose>
+<RwkvDeltaDrawing />
+
 <Prose>{"An additive memory writes M_new=M_old+v kᵀ. If k_A=[1,0]ᵀ and k_B=[0,1]ᵀ, writes A→2, B→7, A→5 produce"}</Prose>
 
 <Prose>{"M_add=[7,7]."}</Prose>
@@ -248,19 +317,32 @@ export default {
 
 <Prose>{"For the same three writes and β=1, the states are [2,0], then [2,7], then [5,7]. A's outdated reading is replaced while B survives. At the final write the residual is 5−2=3, so we add[3,0], not[5,0]."}</Prose>
 
-<RwkvFigure kind="correction" />
+
 
 <Prose>{"The gradient interpretation is real arithmetic, not a metaphor. Starting from M=[2,7], key [1,0] and target 5, loss=4.5, gradient=[−3,0], and a step β=.5 produces M=[3.5,7]. Our NumPy and autograd calculations agree. It is "}<strong>{"fast state adaptation inside the forward pass"}</strong>{", while the outer training process learns the projections and update parameters."}</Prose>
 
 <Prose>{"Keys interfere when they are not orthogonal. Replace B's key by [.6,.8]. After the first two delta writes the memory is [5.48,4.64]. It retrieves B as7, but it no longer retrieves A as2. Updating A to 5 produces [5,4.64], after which B retrieves 6.712. A finite vector space cannot provide arbitrarily many mutually orthogonal address directions."}</Prose>
 
-<RwkvFigure kind="interference" />
+<RwkvAddressFlow study="query" />
 
-<RwkvDeltaLab />
+<Prose>{"Choose an address write and rotate its unit key. A target belongs to that write; a later query is a separate request. Correlated address directions expose interference."}</Prose>
+<RwkvAddressFlow study="write" />
+<Prose>{"Changing correction strength β changes how much of the residual is written. Compare both final address reads; a better new answer can damage a correlated old answer."}</Prose>
+<RwkvAddressFlow study="rate" />
+<Prose>{"The initial memory need not be empty. Edit either signed coordinate; a zero correction rate preserves this initial matrix rather than inventing a zero memory."}</Prose>
+<RwkvAddressFlow study="initial" />
+<Prose>{"Extend the same association sequence to at most ten writes. A new write has address 0° and target 2; reset restores A=2, B=7, A=5 with empty initial memory."}</Prose>
+<RwkvAddressFlow study="extent" />
+<H3>{"Deeper: why a longer key can overshoot"}</H3>
+<Prose>{"The exact one-address error after a delta step is multiplied by 1−β‖k‖². A key with twice the length makes the effective correction four times stronger. Inspect the constructed one-write target 3, initial M=[0,0], key [radius,0]."}</Prose>
+<RwkvNonunitFlow />
+<Prose>{"With radius 2 and β=1, memory becomes [6,0] and the read becomes 12, overshooting target 3. β=.25 makes the read exactly 3. For repeated updates to one fixed nonzero key, residual convergence requires 0<β<2/‖k‖²; zero key cannot be corrected by this rule. Sum-normalizing a positive feature map is not the same as unit L2-normalizing an address."}</Prose>
 
 <H3>{"RWKV-5 and 6: a matrix state with structured forgetting"}</H3>
 
-<Prose>{"RWKV-5, named Eagle, replaces the earlier per-channel weighted average with multi-head matrix states. In key-by-value orientation, a head reads"}</Prose>
+<Prose>{"RWKV-5, named Eagle, replaces the earlier per-channel weighted average with multi-head matrix states. Follow one head's read and storage branches; u weights current key rows, w retains old rows, and r chooses a row mixture. GN normalizes the returned feature coordinates within a head; SiLU(g)=gσ(g) is its output gate."}</Prose>
+<RwkvMatrixBlockDrawing />
+<Prose>{"In key-by-value orientation, a head reads"}</Prose>
 
 <Prose>{"R_t = S_{t−1}+diag(u) k_t v_tᵀ,"}</Prose>
 
@@ -270,19 +352,21 @@ export default {
 
 <Prose>{"The receptance vector reads rows of R_t; per-head normalization, a SiLU gate and an output projection follow. This core is not the normalized positive-kernel operator of section 2, and its keys/values need not be positive. The current-token contribution still has special treatment; removing it would lose a useful original mechanism."}</Prose>
 
-<Prose>{"For RWKV-5, the retention vector is learned but fixed over sequence positions, with w=exp(−expω). RWKV-6, Finch, makes both retention and token-shift mixing depend on current/previous input through small low-rank networks. Its retention is w_t=exp(−exp d_t), so it lies in(0,1) in exact arithmetic. This is a constrained parameterization; its unconstrained precursor is not itself the retention factor."}</Prose>
+<Prose>{"For RWKV-5, the retention vector is learned but fixed over sequence positions, with w=exp(−expω). RWKV-6, Finch, makes both retention and token-shift mixing depend on current/previous input through small low-rank networks. Its retention is w_t=exp(−exp d_t), so it lies in (0,1) in exact arithmetic. This is a constrained parameterization; its unconstrained precursor is not itself the retention factor."}</Prose>
 
 <Prose>{"An important practical consequence is the state shape: a head of width d now carries d×d entries, rather than one weighted numerator/denominator per channel. Sequence-length independence is preserved, but the constant can grow substantially. More address interactions cost more memory and arithmetic."}</Prose>
 
-<RwkvFigure kind="versions" />
 
 <H3>{"RWKV-7: decay, targeted removal, then a fresh write"}</H3>
 
 <Prose>{"RWKV-7, Goose, uses a generalized delta-like update. Its paper switches to a value-by-key state M, which is the orientation used for our correction example. Per head,"}</Prose>
 
+<Prose>{"Here w is one retention coefficient per key coordinate, κ̂ is a unit removal direction, a controls its coordinatewise erase strength, k̃ is the independent replacement address, and v is the new content. The following constructed two-by-two state exposes each contribution."}</Prose>
+<RwkvGooseFlow />
+
 <Prose>{"M_t = M_{t−1}[diag(w_t)−κ̂_t(a_t⊙κ̂_t)ᵀ] + v_t k̃_tᵀ."}</Prose>
 
-<Prose>{"Here κ̂ is a normalized removal key, a is a vector controlling removal, w is the retention vector, and k̃ is the replacement key. The dense-looking update can be evaluated as"}</Prose>
+<Prose>{"Evaluate that transition without forming its full dense matrix:"}</Prose>
 
 <Prose>{"M_t = M_{t−1}diag(w_t)       − (M_{t−1}κ̂_t)(a_t⊙κ̂_t)ᵀ       + v_t k̃_tᵀ."}</Prose>
 
@@ -300,26 +384,40 @@ export default {
 
 <Prose>{"and M_new=[[4.152,5.212],[.552,2.412]]. Off-diagonal entries now couple key directions. A set of independent scalar forget gates cannot express that same cross-direction transition."}</Prose>
 
-<RwkvFigure kind="goose" />
 
-<Prose>{"The full model learns those vectors from token-shifted input using projections and small low-rank branches. It normalizes κ per head; uses a sigmoid to keep a in(0,1); constrains w via exp[−exp(−.5)σ(d)]; and mixes a value precursor from the first layer with the current layer's precursor. The readout applies receptance to the updated matrix, normalizes within the head, adds a separately weighted current-token value term, then gates and projects the combined heads. Its feed-forward branch retains squared ReLU but removes the earlier receptance gate. Thus “change the recurrence” alone does not recreate a released RWKV-7 block."}</Prose>
+
+<Prose>{"Where does that core sit in a complete block? Follow six separately shifted generators; g is the output gate, and σ(l) is a learned blend coefficient for the current and first-layer values."}</Prose>
+<RwkvGooseBlockDrawing />
+
+<Prose>{"The full model learns those vectors from token-shifted input using projections and small low-rank branches. It normalizes κ per head; uses a sigmoid to keep a in (0,1); constrains w via exp[−exp(−.5)σ(d_t)], where d_t is the learned decay precursor, distinct from head width; and mixes the first-layer value with the current layer's precursor using σ(l). Here l is the learned blend logit. The readout applies receptance to the updated matrix, normalizes within the head, adds a separately weighted current-token value term, then gates and projects the combined heads. Its feed-forward branch retains squared ReLU but removes the earlier receptance gate. Thus “change the recurrence” alone does not recreate a released RWKV-7 block."}</Prose>
+<Prose>{"The following channel branch changes feature coordinates after the time branch. Compare its fourfold expansion and direct residual join with the earlier twofold teaching model and its extra receptance gate."}</Prose>
+<RwkvGooseChannelDrawing />
+<Prose>{"Each positive expanded coordinate is squared, then contracted to the residual width. The previous normalized channel input remains a separate carried slot. The first-layer value passed between layers is a within-token intermediate; it is not another past-token cache."}</Prose>
 
 <Prose>{"These architectural details and their ablations are in "}<a href={"https://arxiv.org/abs/2503.14456"}>{"RWKV-7, §§3–4"}</a>{". The exact two-dimensional calculation above isolates its state update; it is not a measurement of a pretrained language model."}</Prose>
 
-<H3>{"Optional: what the expressivity and stability claims actually establish"}</H3>
+<H3>{"Deeper: what the expressivity and stability claims actually establish"}</H3>
+
+<RwkvReflectionDrawing />
 
 <Prose>{"A diagonal transition rescales coordinate directions independently. A rank-one correction can mix them, enabling richer state tracking. For example, I−2nnᵀ with n=[1,−1]/√2 swaps two coordinates. A product of such transitions can track ordered transformations that an elementwise decay cannot express in the same way."}</Prose>
 
-<RwkvFigure kind="reflection" />
 
-<Prose>{"That reflection is an explanatory extension, not the precise parameter choice of the released RWKV-7 core. The paper's stronger constructions introduce an additional factor c=2 and boundary parameter values; the implemented core uses c=1. Its complexity-class claims also make formal assumptions about precision, depth and standard complexity conjectures. They do not mean a small trained checkpoint solves every finite-state task or is universally better at reasoning."}</Prose>
+
+<Prose>{"The revised RWKV-7 paper, v2 Appendix D.3, also describes a scaled construction that removes the extra c=2 factor. With no fresh write, halving both c and retention halves the transition: [3,8] becomes [4,1.5] instead of [8,3]. Ideal zero-epsilon homogeneous normalization can remove that common scale. Practical per-head GroupNorm subtracts the coordinate mean and divides by the square root of coordinate variance plus epsilon; it is not merely unit-length normalization. The construction’s retention .5 is outside the released parameter floor exp(−exp(−.5))≈.545239, and finite precision/epsilon matter. Existence under specified depth/precision assumptions does not establish learned checkpoint competence on arbitrary reasoning tasks."}</Prose>
 
 <Prose>{"Similarly, stable eigenvalues of individual transitions do not automatically bound every product of changing transitions. Appendix C's product bound assumes a time-independent a vector; time-varying a is evaluated empirically. Normalization and constrained updates provide useful structure, while actual long-stream state norms, gradients and task behavior still need examination. This is an opportunity to distinguish a theorem's conditions from a model family's headline description."}</Prose>
+
+<Prose>{"These updates are implementable without generic cubic dense matrix products. The next complete program uses value-by-key matrices [N,H,p,d], computes ordinary delta correction via one matrix-vector read and outer write, and evaluates Goose’s diagonal-plus-rank-one transition the same way. Its independent dense transition option is a small oracle; it carries the same nonempty state and masks."}</Prose>
+<RwkvProgram file="delta-memory-operators.py" title="Differentiable additive, corrective, row-gated and generalized Goose cores" />
 
 <H2>{"7. Nearby models, shared algebra and different choices"}</H2>
 
 <Prose>{"RWKV is one architecture family in a larger design space. Related methods often share state equations without sharing every gate, positional mechanism, normalization or objective."}</Prose>
 
+<Prose>{"A position can rotate a pair of feature coordinates without changing its length. Inspect the same unit circle for a key and a position-rotated query."}</Prose>
+<RwkvRetNetRotationDrawing />
+<Prose>{"The key stays at phase zero and the query rotates by 60 degrees; their dot product becomes cos(60°)=.5. Rotating both by their own position phases makes the relative phase enter compatibility. The later positional-encoding lesson derives the full pairwise construction."}</Prose>
 <Prose>{""}<strong>{"RetNet"}</strong>{" uses a decayed unnormalized associative state. Ignoring its positional rotations for a moment,"}</Prose>
 
 <Prose>{"S_t=γS_{t−1}+k_t v_tᵀ, y_t=S_tᵀq_t."}</Prose>
@@ -334,13 +432,15 @@ export default {
 
 <Prose>{"Using the section 2 queries, keys and values with every row gate equal to .5 gives unnormalized outputs [2,10,5.5,35.75]. Change only the third retention vector to [.1,.9] and the outputs become [2,10,11.5,36.75]. At that step, one address direction forgets faster while another preserves more. These values are not weighted averages constrained to the range of the input values."}</Prose>
 
-<RwkvFigure kind="forgetting" />
+<RwkvRowGateFlow />
 
 <Prose>{"The "}<a href={"https://arxiv.org/abs/2307.08621"}>{"RetNet paper, §2"}</a>{" and "}<a href={"https://arxiv.org/abs/2312.06635"}>{"GLA paper, §§2–4"}</a>{" derive these relationships and their chunked algorithms. A global cumulative product of tiny gates can underflow, while dividing by that product can overflow. GLA's hardware work therefore uses chunking and log-space treatment where needed; an algebraically convenient quotient is not automatically a stable GPU implementation."}</Prose>
 
+<Prose>{"Unlike these recurrent updates, sequence compression combines different positions into fewer stored rows. Draw a separate sequence projection E for keys and F for values; feature width stays fixed while four source positions become two compact slots."}</Prose>
+<RwkvSequenceCompressionDrawing />
 <Prose>{"The preceding Mamba-2/SSD construction has a scalar transition per head with matrix-valued state. That brings it close to a gated linear-attention equation. The parameter generators, block structure and normalization still differ. Conversely, "}<strong>{"Linformer"}</strong>{" compresses the sequence axis of keys/values into a smaller set before attention; it is not simply a feature-map prefix sum. A global sequence projection can mix future positions, so autoregressive use needs a genuinely causal construction. See "}<a href={"https://arxiv.org/abs/2006.04768"}>{"Linformer, §4"}</a>{"."}</Prose>
 
-<Prose>{"This family map continues to evolve. The RWKV project's history page, inspected 13 September 2026, discusses experimental RWKV-8 directions including token-indexed DeepEmbed modulation and a suffix-automaton retrieval mechanism called ROSA. An external table or growing automaton changes the memory accounting: offloading parameters or history to RAM/SSD does not make their storage and access free. The established4–7 mechanisms taught here remain the core; treat new branches through their explicit operator, available code and evidence, not a version number alone."}</Prose>
+<Prose>{"This family map continues to evolve. The RWKV project's history page, inspected 5 October 2026, discusses experimental RWKV-8 directions including token-indexed DeepEmbed modulation and a suffix-automaton retrieval mechanism called ROSA. An external table or growing automaton changes the memory accounting: offloading parameters or history to RAM/SSD does not make their storage and access free. The established 4–7 mechanisms taught here remain the core; treat new branches through their explicit operator, available code and evidence, not a version number alone."}</Prose>
 
 <H3>{"Count the state before comparing speed"}</H3>
 
@@ -350,7 +450,7 @@ export default {
 
 <Prose>{"These are calculated storage inventories, excluding parameters, activations, temporary buffers, allocator overhead and serving replicas. Mixed state dtypes alter the totals. The "}<a href={"/learn/path/full-curriculum/grouped-query-attention-gqa-multi-query-attention-mqa?module=deep-learning-fundamentals"}>{"GQA/MQA lesson"}</a>{" explains why sharing KV heads reduces cache storage without proportionally eliminating all query-head attention arithmetic."}</Prose>
 
-<RwkvFigure kind="cache" />
+<RwkvCacheFlow />
 
 <Prose>{"For an attention head, cached decoding at position t reads t keys and values: the per-token attention work grows roughly linearly with t. Generating an entire length-T continuation from scratch can sum to quadratic attention work. Full-sequence training also has quadratic dense attention arithmetic. FlashAttention avoids storing a full T×T score matrix in high-bandwidth memory while computing exact attention; “quadratic score arithmetic” and “must allocate a quadratic score matrix” are different claims."}</Prose>
 
@@ -370,7 +470,9 @@ export default {
 
 <Prose>{"Download "}<a href={"/learn-code/rwkv-linear-attention-models/movement_libras.data"}>{"movement_libras.data"}</a>{", "}<a href={"/learn-code/rwkv-linear-attention-models/movement_libras.names"}>{"movement_libras.names"}</a>{", "}<a href={"/learn-code/rwkv-linear-attention-models/trajectory_memory_models.py"}>{"trajectory_memory_models.py"}</a>{" and "}<a href={"/learn-code/rwkv-linear-attention-models/data-provenance.md"}>{"data-provenance.md"}</a>{" into one directory. Credit Daniel Dias, Sarajane Peres and Helton Bíscaro, University of São Paulo; UCI provides the dataset under CC BY 4.0. The provenance file preserves attribution, source hashes and transformations."}</Prose>
 
-<Prose>{"The source has 360 rows and 30 exact duplicate copies, with consistent labels. Retain the first occurrence of each exact coordinate row, giving330 unique trajectories. Within each class, use NumPy's default_rng(73) to permute those retained source IDs; put the first floor(2n/3) in fitting, the last 4 in assessment, and the middle rows in validation. Totals are 220/50/60. The saved "}<a href={"/learn-code/rwkv-linear-attention-models/trajectory-results.json"}>{"trajectory-results.json"}</a>{" records every one-based source ID and duplicate group."}</Prose>
+<RwkvSplitDrawing />
+
+<Prose>{"The source has 360 rows and 30 exact duplicate copies, with consistent labels. Retain the first occurrence of each exact coordinate row, giving 330 unique trajectories. Within each class, use NumPy's default_rng(73) to permute those retained source IDs; put the first floor(2n/3) in fitting, the last 4 in assessment, and the middle rows in validation. Totals are 220/50/60. The saved "}<a href={"/learn-code/rwkv-linear-attention-models/trajectory-results.json"}>{"trajectory-results.json"}</a>{" records every one-based source ID and duplicate group."}</Prose>
 
 <Prose>{"Coordinates are mapped by the fixed rule 2x−1 and processed in their original order. There is no fitted preprocessing that can learn from validation or assessment rows. The dataset records four performers in two sessions but omits row-level performer/session IDs. This partition measures row-level behavior on this small corpus; it cannot establish new-performer transfer. Its 45 sampled points are not a physical velocity trace or a complete sign-language utterance."}</Prose>
 
@@ -379,6 +481,8 @@ export default {
 <H3>{"What exactly are we fitting?"}</H3>
 
 <Prose>{"The teaching networks share this route:"}</Prose>
+
+<RwkvClassifierDrawing />
 
 <Prose>{"45×2 coordinates → learned 2-to 16 projection → two residual memory blocks → mean over 45 feature vectors → linear 16-to 15 logits."}</Prose>
 
@@ -392,7 +496,7 @@ export default {
 
 <Prose>{"where ℓ are its 15 logits. The program uses the library's stable cross-entropy operation, backpropagates through the time steps, and updates the model weights with Adam. Model state starts fresh for every trajectory; the batch dimension holds independent examples."}</Prose>
 
-<RwkvFigure kind="pipeline" />
+
 
 <Prose>{"The following loop is the central training operation, already included in the complete program:"}</Prose>
 
@@ -410,29 +514,44 @@ export default {
 
 <H3>{"The observed result"}</H3>
 
+<RwkvRecordedEvidence />
+
 <NeuralTable caption={"The observed result"} headers={[<>{"Model and seed"}</>,<>{"Parameters"}</>,<>{"Selected epoch"}</>,<>{"Fit errors/220"}</>,<>{"Validation errors/50"}</>,<>{"Assessment errors/60"}</>]} rows={[[<>{"Ordered logistic baseline"}</>,<>{"1,365"}</>,<>{"Single fit"}</>,<>{"35"}</>,<>{"17"}</>,<>{"22"}</>],[<>{"RWKV-4-style,17"}</>,<>{"5,263"}</>,<>{"67"}</>,<>{"31"}</>,<>{"18"}</>,<>{"19"}</>],[<>{"RWKV-4-style,41"}</>,<>{"5,263"}</>,<>{"61"}</>,<>{"46"}</>,<>{"23"}</>,<>{"23"}</>],[<>{"Positive kernel,17"}</>,<>{"5,199"}</>,<>{"54"}</>,<>{"70"}</>,<>{"31"}</>,<>{"34"}</>],[<>{"Positive kernel,41"}</>,<>{"5,199"}</>,<>{"69"}</>,<>{"34"}</>,<>{"22"}</>,<>{"23"}</>]]} />
 
 <Prose>{"One RWKV-style run has fewer assessment errors than the baseline; the other does not. The positive-kernel runs vary considerably. This is evidence about these small fits and this protocol. It does not rank full RWKV, Performer, Transformer or Mamba architectures, nor isolate a single causal reason for the performance differences."}</Prose>
 
 <Prose>{"Validation error count and cross-entropy can prefer different epochs: cross-entropy also measures how much probability is assigned to the correct class. For example, RWKV-style seed 41 has 23 validation errors but lower selected validation cross-entropy than seed 17's18 errors. The selection rule was cross-entropy for both."}</Prose>
 
-<RwkvFigure kind="outcomes" />
+
 
 <H3>{"Carry the whole state, including the small forgotten pieces"}</H3>
 
+<RwkvBoundaryDrawing />
+
 <Prose>{"Take the predetermined first validation example, source row 7, labeled curved swing. For RWKV-style seed 17, its class 1 probability is about .753939. Process 22 points, carry every block's memory and previous-input slots, then process the remaining 23 points. Combine the feature sums and counts for the final temporal mean. The carried computation agrees with the uninterrupted logits within 2.4×10^−7 for this example."}</Prose>
 
-<Prose>{"Now deliberately reset the block states at that boundary but keep the same 45 points and final pooling rule. Class1 probability falls to .047025 and the predicted class becomes 10, vertical zigzag. Merely splitting an input should not change a computation; discarding its history does."}</Prose>
+<Prose>{"Now deliberately reset the block states at that boundary but keep the same 45 points and final pooling rule. Class 1 probability falls to .047025 and the predicted class becomes 10, vertical zigzag. Merely splitting an input should not change a computation; discarding its history does."}</Prose>
 
-<RwkvFigure kind="continuation" />
 
-<Prose>{"The positive-kernel seed 17 model already predicts class 10 on the original row, with class 1 probability.251896. Carrying its state preserves the computation; resetting midway changes its prediction to class 7. This contrast separates "}<strong>{"implementation equivalence"}</strong>{" from "}<strong>{"prediction correctness"}</strong>{". A model can consistently compute the wrong classification."}</Prose>
+
+<Prose>{"The positive-kernel seed 17 model already predicts class 10 on the original row, with class 1 probability .251896. Carrying its state preserves the computation; resetting midway changes its prediction to class 7. This contrast separates "}<strong>{"implementation equivalence"}</strong>{" from "}<strong>{"prediction correctness"}</strong>{". A model can consistently compute the wrong classification."}</Prose>
 
 <Prose>{"For all four fits, a separate continuation through chunk lengths 1,12,16,16 agrees with the full-sequence features on the first five source rows within 7.7×10^−6. These are floating-point agreements, not bit-identical guarantees."}</Prose>
 
-<RwkvTrajectoryLab />
+<Prose>{"Select only a retained validation source. Source changes deliberately restore its original coordinates; source 20 starts with an incorrect classification, so carrying it correctly cannot be mistaken for fixing its accuracy."}</Prose>
+<RwkvFittedFlow study="source" />
+<Prose>{"Inspect or drag any of the 45 supplied points. A point’s x/y coordinates stay within normalized [0,1]. The white outline identifies the selected point; selecting it alone does not change the path. Later points cannot change earlier internal features."}</Prose>
+<RwkvFittedFlow study="edit" />
+<Prose>{"Reversing the chronological order changes the task seen by the model. Reflecting one selected x changes only that point. Restore the source to compare an isolated intervention; edited curves have no verified new class label."}</Prose>
+<RwkvFittedFlow study="order" />
+<Prose>{"Now compare all four retained fits on that same edited path. Switching model kind or seed preserves every coordinate edit; it changes only the frozen parameters used to compute the probabilities."}</Prose>
+<RwkvFittedFlow study="model" />
+<Prose>{"Move the interruption boundary. Carrying keeps each block’s complete memory and two shifts, plus the pooling sum/count. The reset comparison deliberately clears block histories but retains the same points and total pooling rule, isolating loss of temporal context rather than a differently weighted mean."}</Prose>
+<RwkvFittedFlow study="cut" />
+<Prose>{"Pin the current edited source, model, seed and cut for a precise comparison. Its saved coordinates and probabilities remain unchanged when you continue experimenting."}</Prose>
+<RwkvFittedFlow study="pin" />
 
-<Prose>{"For the fixed row 7 contrast, reflecting the23rd normalized x coordinate from +.249520 to−.249520 barely changes RWKV-style class 1 probability, from .753939 to .753752, while reversing the entire order changes it to .580592. The same operations affect the kernel model differently. A small visual edit need not produce a large class change; a null or weak response is informative."}</Prose>
+<Prose>{"For the fixed row 7 contrast, reflecting the 23rd centered coordinate 2x−1 from +.249520 to −.249520 means changing the raw x coordinate from .624760 to .375240. It barely changes RWKV-style class 1 probability, from .753939 to .753752, while reversing the entire order changes it to .580592. The same operations affect the kernel model differently. A small visual edit need not produce a large class change; a null or weak response is informative."}</Prose>
 
 <Prose>{"Changing point31 leaves earlier per-position features unchanged in the bounded probe. The final mean-pooled classifier uses the complete trajectory, so its final prediction can change. “Causal internal features” does not mean “a whole-sequence classification is available without seeing the whole sequence.”"}</Prose>
 
@@ -449,6 +568,12 @@ export default {
 <Prose>{"The small "}<code>{"TrajectoryMemoryClassifier"}</code>{" above is the ordinary trainable PyTorch route: its time state, shift state, channel state and parameters are visible. For an existing language model, use the model's own inference implementation and tokenizer instead of assuming our classroom block has its checkpoint layout. The optional "}<a href={"/learn-code/rwkv-linear-attention-models/rwkv_checkpoint_state.py"}>{"complete checkpoint-continuation program"}</a>{" uses the official "}<code>{"rwkv"}</code>{" API on a local checkpoint. Its parameters choose generation 4 or 7, matching tokenizer and CPU float32; it requests no model download."}</Prose>
 
 <RwkvProgram file="rwkv_checkpoint_state.py" title="Read the optional official-checkpoint continuation route" />
+
+<H3>{"Current Transformers-format Goose: the returned object is state"}</H3>
+<Prose>{"A newer official Transformers-format Goose snapshot is a different integration, not a replacement cache argument for every library. Its bundled model returns a state object with per-layer WKV [N,H,d,d], attention shift [N,D] and feed-forward shift [N,D]. The WKV dtype is configured separately from activation/shift dtype. Its bundled default is chunked; the native Transformers integration defaults to eager. The program below selects eager explicitly on the audited bundled source and keeps its matching tokenizer/config."}</Prose>
+<Prose>{"Obtain an immutable local snapshot, inspect its Python, and record the repository revision and actual model-source SHA256. Pass both to the program; all loads are local-files-only. A returned state can be mutated by continuation, so deep-copy it before branching. A suffix must receive its own matching attention mask: passing unrelated tail mask columns can hide valid tokens. This implementation holds all slots on masked padding; other library contracts must be checked separately."}</Prose>
+<RwkvProgram file="goose-transformers-state.py" title="Audited local Transformers-format Goose continuation and complete state inventory" />
+<Prose>{"This optional route is source checked, not executed without a compatible local checkpoint. Run python goose-transformers-state.py --snapshot ./audited-snapshot --revision YOUR_IMMUTABLE_REVISION --model-source-sha256 YOUR_AUDITED_HASH. It compares whole, chunked and tokenwise logits, verifies cache-neutral padding, and prints actual tensor payload bytes. Those checks establish continuation for that configuration; they do not measure language quality or kernel speed. FLA’s layer instead uses its own past_key_values Cache interface, while the older rwkv package uses a list of state tensors. Packed unrelated sequences additionally need the implementation’s explicit reset/position convention; use_cache=False during an appropriate training path is a separate choice from inference caching."}</Prose>
 
 <Prose>{"Install the official "}<code>{"rwkv"}</code>{" package in a separate compatible environment and record its version. A World checkpoint uses the matching packaged "}<code>{"rwkv_vocab_v20230424"}</code>{"; a Pile checkpoint needs its matching local tokenizer JSON. For example: "}<code>{"python rwkv_checkpoint_state.py --checkpoint ./model.pth --generation 7 --tokenizer rwkv_vocab_v20230424"}</code>{". Provide a checkpoint that fits available memory; this is not a promise that a large language model is economical on a CPU."}</Prose>
 
@@ -512,17 +637,17 @@ export default {
 
 <details><summary>Solution</summary>
 
-<Prose>{"The first read is 4 and stored A=8,B=2. The second read is(8+3×(−2))/(2+3)=.4. The stored state becomes A=.25×8−2=0 and B=.25×2+1=1.5. Including the bonus in this stored write would incorrectly give A=−4 and B=3.5."}</Prose>
+<Prose>{"The first read is 4 and stored A=8,B=2. The second read is (8+3×(−2))/(2+3)=.4. The stored state becomes A=.25×8−2=0 and B=.25×2+1=1.5. Including the bonus in this stored write would incorrectly give A=−4 and B=3.5."}</Prose>
 
 </details></div>
 
 <div className="lesson-exercise" data-lesson-exercise=""><H3>{"4. Does forgetting change a constant value?"}</H3>
 
-<Prose>{"All RWKV values equal−3. Keys vary and λ=.9. Does changing the current bonus alter the output? What if the initial numerator and denominator represent an earlier different value?"}</Prose>
+<Prose>{"All RWKV values equal −3. Keys vary and λ=.9. Does changing the current bonus alter the output? What if the initial numerator and denominator represent an earlier different value?"}</Prose>
 
 <details><summary>Hint</summary>
 
-<Prose>{"From empty state, A is always−3B. Decide whether that invariant holds for the changed initial condition."}</Prose>
+<Prose>{"From empty state, A is always −3B. Decide whether that invariant holds for the changed initial condition."}</Prose>
 
 </details>
 
@@ -576,7 +701,7 @@ export default {
 
 <details><summary>Solution</summary>
 
-<Prose>{"No. The original mean is(10m_1+35m_2)/45, not(m_1+m_2)/2. Carry a sum and a count, or weight chunk means by their lengths. Correct central recurrence state does not excuse an incorrect aggregation outside it."}</Prose>
+<Prose>{"No. The original mean is (10m_1+35m_2)/45, not (m_1+m_2)/2. Carry a sum and a count, or weight chunk means by their lengths. Correct central recurrence state does not excuse an incorrect aggregation outside it."}</Prose>
 
 </details></div>
 
@@ -614,7 +739,7 @@ export default {
 
 <div className="lesson-exercise" data-lesson-exercise=""><H3>{"10. Read a speed headline critically"}</H3>
 
-<Prose>{"A graph says “linear attention is 8×faster” but gives no sequence length, kernel, hardware, precision, batch size, model quality or prefill/decode distinction. What conclusion can you draw, and what measurement would you request?"}</Prose>
+<Prose>{"A graph says “linear attention is 8× faster” but gives no sequence length, kernel, hardware, precision, batch size, model quality or prefill/decode distinction. What conclusion can you draw, and what measurement would you request?"}</Prose>
 
 <details><summary>Hint</summary>
 
@@ -634,8 +759,11 @@ export default {
 
 <section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H2>{"References and other ways to learn"}</H2>
 
-<ul><li>{""}<a href={"https://proceedings.mlr.press/v119/katharopoulos20a.html"}>{"Katharopoulos et al., Transformers are RNNs"}</a>{": start with§3 for the feature-map rearrangement, causal state and backward-memory discussion. Match its tensor orientation to the equations here."}</li><li>{""}<a href={"https://aclanthology.org/2023.findings-emnlp.936/"}>{"RWKV-4 paper and supplemental material"}</a>{":§3 and Appendix D explain the block and stable recurrence; the "}<a href={"https://github.com/BlinkDL/RWKV-LM/blob/main/RWKV-v4/cuda/wkv_cuda.cu"}>{"official forward kernel"}</a>{" makes read-versus-write order explicit. Best after section 4."}</li><li>{""}<a href={"https://arxiv.org/abs/2404.05892"}>{"Eagle and Finch"}</a>{":§§3–4 distinguish matrix state, input-dependent retention and token shifting. Useful for seeing why version changes affect more than model size."}</li><li>{""}<a href={"https://arxiv.org/abs/2503.14456"}>{"RWKV-7 Goose"}</a>{":§§3–4 define the generalized correction; Appendices C–D state the conditions behind stability and expressivity claims. Advanced follow-up rather than a substitute for the worked matrix example."}</li><li>{""}<a href={"https://arxiv.org/abs/2009.14794"}>{"Performer"}</a>{":§§2.3–2.4 explain positive and orthogonal random features. Read alongside the local expectation identity, then continue to the later attention-variants lesson."}</li><li>{""}<a href={"https://arxiv.org/abs/2307.08621"}>{"RetNet"}</a>{" and "}<a href={"https://arxiv.org/abs/2312.06635"}>{"GLA"}</a>{": mechanism papers for fixed decay, dynamic row gating and chunked computation. Their benchmark figures describe particular setups, not universal rankings."}</li><li>{""}<a href={"https://arxiv.org/abs/2006.04768"}>{"Linformer"}</a>{":§4 gives a different form of compression along the sequence axis. Useful for separating several ideas that are sometimes all called “linear attention.”"}</li><li>{""}<a href={"https://wiki.rwkv.com/basic/architecture.html"}>{"RWKV Architecture History"}</a>{": a project-maintained visual history, version notes and links to inference/training guides. Use it to locate actual implementations; treat experimental features and broad performance language as claims to inspect."}</li><li>{""}<a href={"https://www.oxen.ai/blog/how-rwkv-7-goose-works-notes-from-the-author"}>{"Oxen Arxiv Dive: How RWKV-7 Goose Works"}</a>{": an illustrated article with an embedded YouTube discussion involving RWKV contributor Eugene Cheah. The article's memory and correction walkthrough offers another entry point after section 6. Its broad attention-complexity shorthand needs the prefill/decode and storage distinctions in section 7. The article and embedded-video identity were inspected; the recording was not watched."}</li><li>{""}<a href={"https://github.com/fla-org/flash-linear-attention"}>{"Flash Linear Attention"}</a>{": maintained code, supported model layers and current benchmark/integration examples. Best for moving from the small programs to an actual accelerated implementation; pin the backend and revision."}</li><li>{""}<a href={"https://archive.ics.uci.edu/dataset/181/libras%2Bmovement"}>{"UCI Libras Movement"}</a>{": the original task description and data license. Use the local provenance file when reproducing the duplicate-safe partition."}</li></ul>
+<ul><li>{""}<a href={"https://proceedings.mlr.press/v119/katharopoulos20a.html"}>{"Katharopoulos et al., Transformers are RNNs"}</a>{": start with §3 for the feature-map rearrangement, causal state and backward-memory discussion. Match its tensor orientation to the equations here."}</li><li>{""}<a href={"https://aclanthology.org/2023.findings-emnlp.936/"}>{"RWKV-4 paper and supplemental material"}</a>{":§3 and Appendix D explain the block and stable recurrence; the "}<a href={"https://github.com/BlinkDL/RWKV-LM/blob/main/RWKV-v4/cuda/wkv_cuda.cu"}>{"official forward kernel"}</a>{" makes read-versus-write order explicit. Best after section 4."}</li><li>{""}<a href={"https://arxiv.org/abs/2404.05892"}>{"Eagle and Finch"}</a>{":§§3–4 distinguish matrix state, input-dependent retention and token shifting. Useful for seeing why version changes affect more than model size."}</li><li>{""}<a href={"https://arxiv.org/html/2503.14456v2"}>{"RWKV-7 Goose"}</a>{":§§3–4 define the generalized correction; Appendices C–D state the conditions behind stability and expressivity claims. Advanced follow-up rather than a substitute for the worked matrix example."}</li><li>{""}<a href={"https://arxiv.org/abs/2009.14794"}>{"Performer"}</a>{":§§2.3–2.4 explain positive and orthogonal random features. Read alongside the local expectation identity, then continue to the later attention-variants lesson."}</li><li>{""}<a href={"https://arxiv.org/abs/2307.08621"}>{"RetNet"}</a>{" and "}<a href={"https://arxiv.org/abs/2312.06635"}>{"GLA"}</a>{": mechanism papers for fixed decay, dynamic row gating and chunked computation. Their benchmark figures describe particular setups, not universal rankings."}</li><li>{""}<a href={"https://arxiv.org/abs/2006.04768"}>{"Linformer"}</a>{":§4 gives a different form of compression along the sequence axis. Useful for separating several ideas that are sometimes all called “linear attention.”"}</li><li>{""}<a href={"https://wiki.rwkv.com/basic/architecture.html"}>{"RWKV Architecture History"}</a>{": a project-maintained visual history, version notes and links to inference/training guides. Use it to locate actual implementations; treat experimental features and broad performance language as claims to inspect."}</li><li>{""}<a href={"https://ghost.oxen.ai/how-rwkv-7-goose-works-notes-from-the-author"}>{"Oxen Arxiv Dive: How RWKV-7 Goose Works"}</a>{": an illustrated article with an embedded YouTube discussion involving RWKV contributor Eugene Cheah. The article's memory and correction walkthrough offers another entry point after section 6. Its broad attention-complexity shorthand needs the prefill/decode and storage distinctions in section 7. The accompanying video offers another discussion of memory and correction; use the papers for formal conditions."}</li><li>{""}<a href={"https://github.com/fla-org/flash-linear-attention"}>{"Flash Linear Attention"}</a>{": maintained code, supported model layers and current benchmark/integration examples. Best for moving from the small programs to an actual accelerated implementation; pin the backend and revision."}</li><li>{""}<a href={"https://archive.ics.uci.edu/dataset/181/libras%2Bmovement"}>{"UCI Libras Movement"}</a>{": the original task description and data license. Use the local provenance file when reproducing the duplicate-safe partition."}</li></ul>
+
+<H3>{"Another mathematical route and current implementation docs"}</H3>
+<ul><li><a href="https://proceedings.mlr.press/v139/schlag21a.html">Linear Transformers Are Secretly Fast Weight Programmers</a>: sections 2–4 connect additive summaries with corrective fast memory, normalization choices and interference. Read after the sensor-address example.</li><li><a href="https://github.com/fla-org/flash-linear-attention/blob/main/fla/ops/rwkv7/RWKV7%28Goose%29.md">FLA’s Goose derivation</a>: association-loss derivation and structured forward/backward arithmetic. Match matrix orientation and initial-state assumptions carefully.</li><li><a href="https://huggingface.co/RWKV/RWKV7-G1j-7.2B-20260831/blob/main/README.md">Official Transformers-format Goose guide</a>: matching model/config/tokenizer, backend choices, state and packing contracts. Inspect the actual bundled source before running an immutable local snapshot.</li><li><a href="https://www.youtube.com/watch?v=4Bdty7GOrbw">RWKV-7 author discussion</a>: a longer alternative to the illustrated article; use the worked circuits here alongside the discussion, then verify formal claims in v2 Appendices C–D.</li></ul>
 
 <Prose>{"The "}<a href={"/learn-code/rwkv-linear-attention-models/linear_memory_mechanisms.py"}>{"complete mechanism program"}</a>{", "}<a href={"/learn-code/rwkv-linear-attention-models/trajectory_memory_models.py"}>{"complete training program"}</a>{", "}<a href={"/learn-code/rwkv-linear-attention-models/trajectory-results.json"}>{"checked results"}</a>{" and "}<a href={"/learn-code/rwkv-linear-attention-models/investigation-checks.json"}>{"perturbation/continuation evidence"}</a>{" let you reproduce the examples without relying on screenshots of someone else's benchmark."}</Prose></section>
-  </div>,
+  </RwkvTrajectoryProvider></RwkvFlowProvider></div>,
 };

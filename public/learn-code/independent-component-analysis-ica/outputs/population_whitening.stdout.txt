@@ -1,0 +1,11 @@
+training_mean [10. -3.] K [[ 0.23570226  0.23570226]
+ [-0.70710678  0.70710678]] decoder [[ 2.12132034 -0.70710678]
+ [ 2.12132034  0.70710678]]
+population_covariance [[1.0000000e+00 2.7476618e-16]
+ [2.7476618e-16 1.0000000e+00]]
+sample_adapter_population_variance [0.75 0.75]
+query_white [[ 5.55111512e-17 -1.41421356e+00]] query_roundtrip [[11. -4.]]
+plane_query_retained [[ 1. -1.  0.]]
+refused rank Retained count exceeds positive numerical rank
+refused zero_count ICA requires a positive integer retained count
+refused constant Retained count exceeds positive numerical rank

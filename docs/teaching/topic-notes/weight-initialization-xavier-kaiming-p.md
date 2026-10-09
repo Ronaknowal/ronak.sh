@@ -4,7 +4,7 @@ Canonical topic ID: `weight-initialization-xavier-kaiming-p`
 
 ## 2026-09-11 — Average variance preservation does not preserve every direction
 
-- Status: open
+- Status: adapted (see the 2026-09-29 implementation resolution below)
 - Origin: `random-matrix-theory`; [RMT34 design](../RANDOM-MATRIX-THEORY-DESIGN.md), random-linear-map application.
 - Destination and ownership rationale: this later lesson owns activation-specific gains, forward/backward fan conventions, depth effects, orthogonal initialization and μP. RMT's smaller example only establishes the spectral distinction for a random linear map.
 - Idea and learning benefit: a learner should distinguish E‖Wx‖² for a fixed input from the worst-direction singular values of an actual draw, and from the product of layer Jacobians. One scalar variance condition is not a certificate that all directions or all training runs remain stable.
@@ -21,3 +21,7 @@ Canonical topic ID: `weight-initialization-xavier-kaiming-p`
 The full destination source was reviewed and the note was adapted in [the prepared manuscript](../drafts/weight-initialization-xavier-kaiming-p/lesson.md), “Average preservation can hide a collapsed direction.” It distinguishes fixed-input expectation over random weights, one actual Gaussian draw, average squared singular value, direction-specific gain, and a product/local gated Jacobian. An exact diagonal matrix, fixed seed-19 spectrum, orthogonal Gram check and ReLU Jacobian support the explanation; see [design and source review](../drafts/weight-initialization-xavier-kaiming-p/design.md) and [visual specifications](../drafts/weight-initialization-xavier-kaiming-p/visual-specifications.md).
 
 This resolves the proposed research/writing treatment, with initialization-specific primary sources inspected. It does not close implementation verification: the prepared visuals and website content have not been implemented. Preserve the note and packet for phase two.
+
+## 2026-09-29 — Implementation resolution: adapted
+
+The prepared treatment is implemented in the published lesson, section “Average preservation can hide a collapsed direction” ([lesson](/learn/path/full-curriculum/weight-initialization-xavier-kaiming-p?module=deep-learning-fundamentals#average-preservation-can-hide-a-collapsed-direction), source `src/learn/data/topics/weight-initialization-xavier-kaiming-p.jsx`). The beginner buildup revision kept it and connected it to the new layer and stacked-layer figures. Evidence: the [revision record](../deep-learning-beginner/weight-initialization-xavier-kaiming-p/beginner-revision.md), its [author checks](../deep-learning-beginner/weight-initialization-xavier-kaiming-p/author-checks.json) and the [independent review with closure confirmation](../deep-learning-beginner/weight-initialization-xavier-kaiming-p/beginner-review.md). The originating RMT lesson is still in design; linking back from it remains that lesson's job.

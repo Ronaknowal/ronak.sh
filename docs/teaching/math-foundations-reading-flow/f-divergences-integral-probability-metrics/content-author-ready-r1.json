@@ -1,0 +1,49 @@
+{
+  "status": "AUTHOR_READY_FOR_DIFFERENT_WHOLE_CONTENT_REVIEW",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-source-r1.json",
+    "sha256": "ab9b0b29b946f6c5561fc87f4d4906c3801c3aafab6a6a8d40e2348b84304ff9",
+    "bytes": 29225
+  },
+  "manuscript": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/manuscript-complete-r1.md",
+    "sha256": "ac62af55d0552f535946ae176114cea548d8069933f94bc60cc06dc762eda0d7",
+    "bytes": 113428
+  },
+  "specification": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/visual-specifications-r1.md",
+    "sha256": "f8cb443152c3ce238d158619782a99869ecb6752bf2e0d84cbadb85e8da007e9",
+    "bytes": 134029
+  },
+  "authorReview": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-author-review-r1.md",
+    "sha256": "0fb319b1b9358c498f96dd3322a8c6e0c08100ef1391583448b2b2244ba4b958",
+    "bytes": 15974
+  },
+  "checks": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-author-checks-r1.json",
+    "sha256": "2619178e4195a49901572f2b57ad35c296afd31d9fef6d144f8815a93dd74edf",
+    "bytes": 34698
+  },
+  "scope": {
+    "numberedSections": 10,
+    "drawings": 53,
+    "investigationFamilies": 7,
+    "retainedProgrammePairs": 11,
+    "newTeachingProgrammePairs": 2,
+    "newPracticePair": 1,
+    "importableHelper": 1,
+    "retainedFinalTasks": 10,
+    "newFinalTasks": 4,
+    "retainedInBodyTasks": 1
+  },
+  "requiredFileCount": 116,
+  "openAuthorFindings": [],
+  "nextAction": "DIFFERENT whole-content review by Root, then bounded author correction and SAME closure if required.",
+  "limits": [
+    "Content only; no runtime build, browser, clipboard or download acceptance.",
+    "Author heuristic reading, no actual learner study.",
+    "No historical scientific main rerun; only two new teaching mains and one new exercise main executed once.",
+    "Root owns independent content acceptance, central phases and runtime release."
+  ]
+}

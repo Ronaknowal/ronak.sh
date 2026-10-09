@@ -1,0 +1,25 @@
+{
+  "reviewer": "frameworks_annotation_modalities",
+  "date": "2026-09-28",
+  "scope": "Complete source and teaching review; independent dependency/invariance checks. Author owns CPU numerical campaign; parent owns browser and integration.",
+  "source_hashes": {
+    "src/learn/data/topics/tensor-shapes-autograd-graphs-device-boundaries.jsx": "a5a1999e804fb3182540d670f642e8138c25b1da8925c7e5eb776396b5812ec5",
+    "src/learn/data/tensor-boundary-models.js": "6733da55868eaad9e4bd0f43e320e1ad0623d78416430551184b5e5228c157b9",
+    "src/learn/components/lesson-labs/TensorBoundaryLabs.jsx": "00aed23cce4c9bd228cd56b4272e8ade108dac7142eb53b3ec8391cd08880124",
+    "src/learn/components/lesson-labs/tensor-boundary-lessons.css": "5dcea9e8178c5a54b276d499a268da15abdbca9c86669c7b7df903b584bf3e7d",
+    "src/learn/data/curriculum/blueprints/tensor-shapes-autograd-graphs-device-boundaries.js": "fe36582e23fd4bf2988a7191467a4d259075689f0498e0b3f6878accb63ebd58",
+    "public/learn-code/tensor-shapes-autograd-graphs-device-boundaries/tensor_shape_gradients.py": "722b4b0f01de94e0a984ca33469e0f43429d14660ce65e2833bcccff4f1888cb",
+    "public/learn-code/tensor-shapes-autograd-graphs-device-boundaries/tensor_boundary_audit.py": "ba47da4120eb5a298609ac80260de9eaddfc1315dcf83a068405b607ab22ebaa"
+  },
+  "checks": {
+    "dependency_and_translation_and_zero_route_cases": 24,
+    "native_program_receipt_binding": "verified",
+    "final_formatted_runtime_reviewed": true
+  },
+  "open_blockers": [],
+  "limitations": [
+    "No duplicate execution of the author native campaign claimed.",
+    "CUDA conversion branch unavailable on the retained CPU-only runtime.",
+    "Parent owns rendered layout and interaction verification."
+  ]
+}

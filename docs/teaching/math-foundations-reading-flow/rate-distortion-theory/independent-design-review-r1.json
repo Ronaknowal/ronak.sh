@@ -1,0 +1,252 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "reviewer": "/root/queue_nonconvex_resume",
+  "author": "/root",
+  "completedAt": "2026-10-09T16:18:58.030Z",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-source-r1.json",
+    "sha256": "f8124a60d80bee69a2f00f1bf9387f69df505f093cd0cd9ae93c834d0a7932a5",
+    "bytes": 8286
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/independent-design-review-r1.md",
+    "sha256": "a4505f2a732ac9133a5550b2c013259cf47fc953a92ee3ecc22a0280832f3347",
+    "bytes": 7687
+  },
+  "checker": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/check-independent-design-r1.mjs",
+    "sha256": "cf2671020828c6baa2ce5ddd77e863d2bae5f83ad075a1d34b499ed0e0fbcdff",
+    "bytes": 3547
+  },
+  "findings": [
+    "RD1",
+    "RD2",
+    "RD3"
+  ],
+  "checks": [
+    {
+      "name": "current input src/learn/data/topics/rate-distortion-theory.jsx",
+      "pass": true
+    },
+    {
+      "name": "current input src/learn/data/rate-distortion-models.js",
+      "pass": true
+    },
+    {
+      "name": "current input src/learn/data/rate-distortion-examples.js",
+      "pass": true
+    },
+    {
+      "name": "current input src/learn/components/lesson-labs/RateDistortionLabs.jsx",
+      "pass": true
+    },
+    {
+      "name": "current input src/learn/components/lesson-labs/rate-distortion-labs.css",
+      "pass": true
+    },
+    {
+      "name": "current input src/learn/data/curriculum/blueprints/rate-distortion-theory.js",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/RATE-DISTORTION-LESSON-DESIGN.md",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/RATE-DISTORTION-VERIFICATION.md",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/RATE-DISTORTION-INDEPENDENT-REVIEW.md",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/evidence/rate-distortion-author-review.json",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/topic-notes/sampling-aliasing-and-quantization-in-neural-recordings.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/SKILL.md",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-r1.md",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-r1.md",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-source-r1.json",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r2.md",
+      "pass": true
+    },
+    {
+      "name": "current input src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+      "pass": true
+    },
+    {
+      "name": "current input src/learn/data/topics/eigenvalues-eigenvectors.jsx",
+      "pass": true
+    },
+    {
+      "name": "current input public/learn-code/eigenvalues-eigenvectors/eigen_symmetric_library.py",
+      "pass": true
+    },
+    {
+      "name": "current input src/learn/data/topics/k-means-hierarchical-clustering.jsx",
+      "pass": true
+    },
+    {
+      "name": "current input public/learn-code/k-means-hierarchical-clustering/clustering_quantization.py",
+      "pass": true
+    },
+    {
+      "name": "current input public/learn-code/k-means-hierarchical-clustering/clustering_lloyd.py",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r2.md",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/penguins.csv",
+      "pass": true
+    },
+    {
+      "name": "current input scratch/rate-distortion-review/formatting-results.json",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/workflow.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/teaching.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/topic-design.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/domain-playbook.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/visuals-and-labs.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/examples-and-code.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/practice-and-resources.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/review.md",
+      "pass": true
+    },
+    {
+      "name": "current input skills/lesson-authoring/references/portfolio-adapter.md",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-binary-channel-p343.png",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-thomas-ch13.pdf",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-thomas-ch13.txt",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/mit-ch23.pdf",
+      "pass": true
+    },
+    {
+      "name": "current input docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/mit-ch23.txt",
+      "pass": true
+    },
+    {
+      "name": "new mixed-channel MI strictly below component average",
+      "pass": true
+    },
+    {
+      "name": "D31 forward conditional variance",
+      "pass": true
+    },
+    {
+      "name": "D31 forward slope",
+      "pass": true
+    },
+    {
+      "name": "D37 rotated error diagonal",
+      "pass": true
+    },
+    {
+      "name": "D37 rotated error off diagonal",
+      "pass": true
+    },
+    {
+      "name": "D37 trace",
+      "pass": true
+    },
+    {
+      "name": "T13 total rate",
+      "pass": true
+    },
+    {
+      "name": "suggested T15 H",
+      "pass": true
+    },
+    {
+      "name": "suggested T15 CE",
+      "pass": true
+    },
+    {
+      "name": "suggested T15 gap",
+      "pass": true
+    },
+    {
+      "name": "suggested payload14/21",
+      "pass": true
+    },
+    {
+      "name": "suggested full bytes6/7",
+      "pass": true
+    },
+    {
+      "name": "CSV344records342billlength",
+      "pass": true
+    },
+    {
+      "name": "missing original row indices",
+      "pass": true
+    }
+  ],
+  "count": 53,
+  "derived": {
+    "mixedChannelInformationBits": 0.2780719051126377,
+    "averageComponentInformationBits": 0.32485675359001304,
+    "gaussianStandardDeviations": {
+      "source": 3,
+      "error": 1.5,
+      "reproduction": 2.598076211353316,
+      "forwardConditional": 1.299038105676658
+    }
+  },
+  "scope": "Entire proposed design/research and actual existing topic/code/models/labs read. Applicable prerequisite implementations and targeted primary sources independently inspected. Direct complementary arithmetic only; no original/new programme mains, build or browser campaign."
+}

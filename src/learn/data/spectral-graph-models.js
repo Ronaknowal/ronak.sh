@@ -8,6 +8,45 @@ function numberIn(value, low, high, name) {
 export function dot(a, b) {
   return a.reduce((sum, value, i) => sum + value * b[i], 0);
 }
+/** Stable sweep boundaries: a gap of exactly 10⁻⁹ stays grouped. */
+export function retainedSweepGap(lower, upper) {
+  if (![lower, upper].every(Number.isFinite) || upper < lower) throw new RangeError('Supply ascending finite coordinates.');
+  return upper - lower > 1e-9;
+}
+
+export function ridgePathState(alpha = 1) {
+  numberIn(alpha, 0, 10, 'Ridge strength');
+  const graph = graphFromEdges(3, [[0, 1, 1], [1, 2, 1]]);
+  const spectrum = symmetricSpectrum(graph.laplacian);
+  const input = [0, 1, 0];
+  const coefficients = spectrum.vectors.map(vector => dot(vector, input));
+  const gains = spectrum.values.map(value => 1 / (1 + alpha * Math.max(0, value)));
+  const output = input.map((_, node) => spectrum.vectors.reduce((sum, vector, mode) => sum + vector[node] * coefficients[mode] * gains[mode], 0));
+  const normal = graph.laplacian.map((row, i) => row.map((value, j) => alpha * value + +(i === j)));
+  const fit = output.reduce((sum, value, i) => sum + (value - input[i]) ** 2, 0);
+  const energy = graphEnergy(graph, output).total;
+  return { ...graph, ...spectrum, input, coefficients, gains, output, normal, fit, energy, objective: fit + alpha * energy, alpha };
+}
+
+export const diffusionInput = [4, 1, 1, -2, -2, 1];
+export function diffusionState(weight = 0.2, time = 5) {
+  numberIn(time, 0, 40, 'Diffusion time');
+  const graph = bridgeSpectrum(weight);
+  const coefficients = graph.vectors.map(vector => dot(vector, diffusionInput));
+  const values = graph.values.map((value, i) => i < graph.components.length ? 0 : Math.max(0, value));
+  const at = t => diffusionInput.map((_, node) => graph.vectors.reduce((sum, vector, mode) => sum + vector[node] * coefficients[mode] * Math.exp(-t * values[mode]), 0));
+  const limit = Array(6).fill(0);
+  graph.components.forEach(group => {
+    const mean = group.reduce((sum, node) => sum + diffusionInput[node], 0) / group.length;
+    group.forEach(node => { limit[node] = mean; });
+  });
+  const initialDistance = Math.hypot(...diffusionInput.map((value, i) => value - limit[i]));
+  const output = at(time);
+  const distance = Math.hypot(...output.map((value, i) => value - limit[i]));
+  const rate = values[graph.components.length];
+  return { ...graph, input: diffusionInput, coefficients, output, limit, time, rate, distance, bound: Math.exp(-time * rate) * initialDistance,
+    curves: Array.from({ length: 81 }, (_, i) => ({ time: i / 2, values: at(i / 2) })) };
+}
 export function multiply(matrix, vector) {
   return matrix.map(row => dot(row, vector));
 }
@@ -184,7 +223,7 @@ export function cutSweep(weight = 0.2, kind = 'bridge') {
   const candidates = [];
   for (let count = 1; count < order.length; count++) {
     // Near-ties at this numerical precision remain together; the table discloses this.
-    if (Math.abs(coordinates[order[count]] - coordinates[order[count - 1]]) < 1e-9) continue;
+    if (!retainedSweepGap(coordinates[order[count - 1]], coordinates[order[count]])) continue;
     candidates.push({
       ...cutMetrics(graph, order.slice(0, count)),
       threshold: (coordinates[order[count]] + coordinates[order[count - 1]]) / 2

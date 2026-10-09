@@ -1,0 +1,1255 @@
+{
+  "scope": "Finite CPU simulation; original failed PS implementation and accepted corrected continuation distinct.",
+  "config": {
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "arrivals_per_case": 30000,
+    "warmup_arrivals": 5000,
+    "mm1_loads": [
+      0.5,
+      0.8,
+      0.9
+    ],
+    "general_load": 0.8,
+    "distributions": [
+      "constant",
+      "exponential",
+      "mixture"
+    ],
+    "stationary_comparison_rows": 27,
+    "distinct_simulations": 24,
+    "trace_stretches": [
+      0.5,
+      1,
+      2
+    ],
+    "trace_alpha": 0.0002,
+    "trace_beta": 0.003
+  },
+  "comparisons": [
+    {
+      "case": "seed-17-constant-rho-0.8-fcfs",
+      "seed": 17,
+      "distribution": "constant",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 3.0371415435604625,
+      "response_p99": 12.482585194933389,
+      "mean_wait": 2.0371415435604616,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 2.0000000000000004,
+        "mean_response": 3.0000000000000004,
+        "service_cv_squared": 0.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6284.379828937475,
+        37773.59714983062
+      ],
+      "time_average": {
+        "population": 2.411232024472788,
+        "queue": 1.6173210464515149,
+        "busy_fraction": 0.7939109780212626
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "c24b5ece2c6b5d7ee8fcdff427e5440f3b157766ed1a3fb049f89eb3f2c849e5"
+    },
+    {
+      "case": "seed-17-exponential-rho-0.5-fcfs",
+      "seed": 17,
+      "distribution": "exponential",
+      "rho": 0.5,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 1.9968296071207006,
+      "response_p99": 9.556715950086435,
+      "mean_wait": 0.9988041008043627,
+      "analytic_reference": {
+        "rho": 0.5,
+        "stationary": true,
+        "mean_wait": 1.0,
+        "mean_response": 2.0,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        10055.0077263,
+        60437.7554397297
+      ],
+      "time_average": {
+        "population": 0.9907773891867736,
+        "queue": 0.49559639089770535,
+        "busy_fraction": 0.49518099828906836
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "baa14577d052f4212e0e3bb9f4f95fcaa58f575f84e11ba2402982039451fddf",
+      "fcfs_exponential_tail_reference": 9.210340371976182
+    },
+    {
+      "case": "seed-17-exponential-rho-0.8-fcfs",
+      "seed": 17,
+      "distribution": "exponential",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 5.065550376545871,
+      "response_p99": 27.890225792768014,
+      "mean_wait": 4.067524870229529,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 4.000000000000001,
+        "mean_response": 5.000000000000001,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6284.379828937475,
+        37773.59714983062
+      ],
+      "time_average": {
+        "population": 4.022061959909659,
+        "queue": 3.2296518920905393,
+        "busy_fraction": 0.7924100678191295
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "3e1fe2379ca61d5d01933cb9f4218ddf1ca65ea1c1e143c83fe977b7901e0d61",
+      "fcfs_exponential_tail_reference": 23.02585092994046
+    },
+    {
+      "case": "seed-17-exponential-rho-0.9-fcfs",
+      "seed": 17,
+      "distribution": "exponential",
+      "rho": 0.9,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 10.445127612823903,
+      "response_p99": 72.30090042805152,
+      "mean_wait": 9.44710210650755,
+      "analytic_reference": {
+        "rho": 0.9,
+        "stationary": true,
+        "mean_wait": 9.000000000000002,
+        "mean_response": 10.000000000000002,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        5586.115403500003,
+        33576.53079984965
+      ],
+      "time_average": {
+        "population": 9.332574536672125,
+        "queue": 8.440946058343073,
+        "busy_fraction": 0.8916284783291136
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "721cae7bf8996a120cd2182d5f61fe355c940c84c02283867928e54869990c5b",
+      "fcfs_exponential_tail_reference": 46.05170185988092
+    },
+    {
+      "case": "seed-17-mixture-rho-0.8-fcfs",
+      "seed": 17,
+      "distribution": "mixture",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 7.549243035465547,
+      "response_p99": 33.49288312520377,
+      "mean_wait": 6.543043035465546,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 6.500000000000002,
+        "mean_response": 7.500000000000002,
+        "service_cv_squared": 2.25,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6284.379828937475,
+        37773.59714983062
+      ],
+      "time_average": {
+        "population": 5.997216491613943,
+        "queue": 5.197975329801,
+        "busy_fraction": 0.7992411618129611
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "ff4fa792e7b2c2ea3b51ef241ad4472f8fe1adf898052c52011e0e9343f53d78"
+    },
+    {
+      "case": "seed-29-constant-rho-0.8-fcfs",
+      "seed": 29,
+      "distribution": "constant",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 2.880014759234498,
+      "response_p99": 9.939435710644856,
+      "mean_wait": 1.880014759234498,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 2.0000000000000004,
+        "mean_response": 3.0000000000000004,
+        "service_cv_squared": 0.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6304.139805123586,
+        37665.96281607667
+      ],
+      "time_average": {
+        "population": 2.2949721973794017,
+        "queue": 1.4980380995692482,
+        "busy_fraction": 0.7969340978101492
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "fcf24d5be67ffc7d3a97bd7086e33325bbdcb5de5f19c4af6685f489ff7a113c"
+    },
+    {
+      "case": "seed-29-exponential-rho-0.5-fcfs",
+      "seed": 29,
+      "distribution": "exponential",
+      "rho": 0.5,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 1.9929387643211602,
+      "response_p99": 8.837083462854535,
+      "mean_wait": 0.9924853186659759,
+      "analytic_reference": {
+        "rho": 0.5,
+        "stationary": true,
+        "mean_wait": 1.0,
+        "mean_response": 2.0,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        10086.623688197707,
+        60265.54050572285
+      ],
+      "time_average": {
+        "population": 0.9929012407682524,
+        "queue": 0.4944732676649506,
+        "busy_fraction": 0.49842797310330184
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "5f1e074a756218d208d63787501b4cd43971fec4ffd0c2a6abb21c5088a13260",
+      "fcfs_exponential_tail_reference": 9.210340371976182
+    },
+    {
+      "case": "seed-29-exponential-rho-0.8-fcfs",
+      "seed": 29,
+      "distribution": "exponential",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 5.072165395288723,
+      "response_p99": 22.797271288158836,
+      "mean_wait": 4.071711949633551,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 4.000000000000001,
+        "mean_response": 5.000000000000001,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6304.139805123586,
+        37665.96281607667
+      ],
+      "time_average": {
+        "population": 4.042782445763316,
+        "queue": 3.245401808031794,
+        "busy_fraction": 0.7973806377315533
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "4eb2631b2d3c5fa5e40c095fe55db209ac9ab89be8b7dad8f7a6ed8c3f1309cb",
+      "fcfs_exponential_tail_reference": 23.02585092994046
+    },
+    {
+      "case": "seed-29-exponential-rho-0.9-fcfs",
+      "seed": 29,
+      "distribution": "exponential",
+      "rho": 0.9,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 10.465564474553311,
+      "response_p99": 51.281058140949334,
+      "mean_wait": 9.46511102889814,
+      "analytic_reference": {
+        "rho": 0.9,
+        "stationary": true,
+        "mean_wait": 9.000000000000002,
+        "mean_response": 10.000000000000002,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        5603.679826776493,
+        33480.85583651252
+      ],
+      "time_average": {
+        "population": 9.387248300861602,
+        "queue": 8.489857098138257,
+        "busy_fraction": 0.8973912027234452
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "dfa097d253d064e84cd2fec7ff761e12252034735a8458ce2ee20a18dc91fec1",
+      "fcfs_exponential_tail_reference": 46.05170185988092
+    },
+    {
+      "case": "seed-29-mixture-rho-0.8-fcfs",
+      "seed": 29,
+      "distribution": "mixture",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 7.372638423105229,
+      "response_p99": 36.00722105450764,
+      "mean_wait": 6.376238423105229,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 6.500000000000002,
+        "mean_response": 7.500000000000002,
+        "service_cv_squared": 2.25,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6304.139805123586,
+        37665.96281607667
+      ],
+      "time_average": {
+        "population": 5.875343939581442,
+        "queue": 5.081337372280009,
+        "busy_fraction": 0.7940065673014237
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "fa5694dcb3bca775cb290e349edd77e1181d290c570a694646fd4aff34ceeab1"
+    },
+    {
+      "case": "seed-43-constant-rho-0.8-fcfs",
+      "seed": 43,
+      "distribution": "constant",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 3.022684529339504,
+      "response_p99": 11.348615452483724,
+      "mean_wait": 2.022684529339504,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 2.0000000000000004,
+        "mean_response": 3.0000000000000004,
+        "service_cv_squared": 0.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6186.6326202249,
+        37444.585650659246
+      ],
+      "time_average": {
+        "population": 2.4176431284870175,
+        "queue": 1.6177990904157709,
+        "busy_fraction": 0.7998440380712482
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "44a7b640a7a969820f9cd14523738d23e843ef68e55f7a1d6d8475b62484ce6d"
+    },
+    {
+      "case": "seed-43-exponential-rho-0.5-fcfs",
+      "seed": 43,
+      "distribution": "exponential",
+      "rho": 0.5,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 2.0288208147587117,
+      "response_p99": 9.763421700575515,
+      "mean_wait": 1.0318495514086121,
+      "analytic_reference": {
+        "rho": 0.5,
+        "stationary": true,
+        "mean_wait": 1.0,
+        "mean_response": 2.0,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        9898.612192359862,
+        59911.33704105449
+      ],
+      "time_average": {
+        "population": 1.0140826840463042,
+        "queue": 0.5157630498505655,
+        "busy_fraction": 0.49831963419573866
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "51d9ed0e229856c14b51a9d0fc4355a4cf4a6e880e58a5ccff294f15f275ec99",
+      "fcfs_exponential_tail_reference": 9.210340371976182
+    },
+    {
+      "case": "seed-43-exponential-rho-0.8-fcfs",
+      "seed": 43,
+      "distribution": "exponential",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 5.10827447445975,
+      "response_p99": 24.081863139305575,
+      "mean_wait": 4.111303211109659,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 4.000000000000001,
+        "mean_response": 5.000000000000001,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6186.6326202249,
+        37444.585650659246
+      ],
+      "time_average": {
+        "population": 4.0850303858369115,
+        "queue": 3.2878048778377353,
+        "busy_fraction": 0.7972255079991515
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "f751527fd8cdd3a357fa835ab5918438bba25a4e5c6da9791d746f08bf680c48",
+      "fcfs_exponential_tail_reference": 23.02585092994046
+    },
+    {
+      "case": "seed-43-exponential-rho-0.9-fcfs",
+      "seed": 43,
+      "distribution": "exponential",
+      "rho": 0.9,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 10.722357740648329,
+      "response_p99": 45.78064812104769,
+      "mean_wait": 9.725386477298226,
+      "analytic_reference": {
+        "rho": 0.9,
+        "stationary": true,
+        "mean_wait": 9.000000000000002,
+        "mean_response": 10.000000000000002,
+        "service_cv_squared": 1.0,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        5499.2289957554685,
+        33284.07613391924
+      ],
+      "time_average": {
+        "population": 9.643472094662403,
+        "queue": 8.74692713455221,
+        "busy_fraction": 0.8965449601101682
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "b0c6425797b79a843029449aabe065029a14e62c13c4ed4534776519049a2a4c",
+      "fcfs_exponential_tail_reference": 46.05170185988092
+    },
+    {
+      "case": "seed-43-mixture-rho-0.8-fcfs",
+      "seed": 43,
+      "distribution": "mixture",
+      "rho": 0.8,
+      "policy": "fcfs",
+      "cohort_count": 25000,
+      "mean_response": 7.88424306096606,
+      "response_p99": 46.86850995881117,
+      "mean_wait": 6.88424306096606,
+      "analytic_reference": {
+        "rho": 0.8,
+        "stationary": true,
+        "mean_wait": 6.500000000000002,
+        "mean_response": 7.500000000000002,
+        "service_cv_squared": 2.25,
+        "tail_quantile": null,
+        "assumptions": "Poisson arrivals, independent FCFS service, finite second moment."
+      },
+      "time_window": [
+        6186.6326202249,
+        37444.585650659246
+      ],
+      "time_average": {
+        "population": 6.305685932089237,
+        "queue": 5.505945752666445,
+        "busy_fraction": 0.7997401794227851
+      },
+      "cohort_note": "Drain after warmup; distinct from independently clipped time-window population.",
+      "outcomes_sha256": "7bccba79fe132a8adf0b77fe83c47448a6ba2af33acd570333256d60d2ace36c"
+    },
+    {
+      "case": "seed-17-constant-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 17,
+      "distribution": "constant",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 5.074184849175992,
+      "response_p99": 22.270068985744285,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6284.379828937475,
+        37773.59714983062
+      ],
+      "mean_population": 4.028586718669839,
+      "busy_fraction": 0.7939109780212754,
+      "submitted_work": 30000.0,
+      "nominal_processed_work": 30000.000000000244,
+      "attained_work": 30000.000000000193,
+      "completion_roundoff_work": 3.2554254431049756e-15,
+      "nominal_minus_attained_work": 5.093170329928398e-11,
+      "event_count": 60000,
+      "quantized_segments": 18619,
+      "input_sha256": "d51fbe4de7081bc33245ea2c88ab175dd7432b755fe730b0a42525985a570317",
+      "outcomes_sha256": "626cbe227846003f5f713fec152820bd9cefd3fd6257a436e21b4a06afe1f694",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    },
+    {
+      "case": "seed-17-exponential-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 17,
+      "distribution": "exponential",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 5.12371222978299,
+      "response_p99": 41.36929913888666,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6284.379828937475,
+        37773.59714983062
+      ],
+      "mean_population": 4.0680440773682855,
+      "busy_fraction": 0.79241006781913,
+      "submitted_work": 29987.59862446247,
+      "nominal_processed_work": 29987.59862446251,
+      "attained_work": 29987.59862446251,
+      "completion_roundoff_work": 3.0440060194703022e-15,
+      "nominal_minus_attained_work": 0.0,
+      "event_count": 60000,
+      "quantized_segments": 29992,
+      "input_sha256": "94653d936c7345ebf1e87409eb31eb290fc548d2ae97172d21f0b4326da8e307",
+      "outcomes_sha256": "845668638c29f2ecaa7bf9471a8d4bd058f9ac04131cd125384bd04b8f772cf3",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    },
+    {
+      "case": "seed-17-mixture-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 17,
+      "distribution": "mixture",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 5.03237203197701,
+      "response_p99": 54.999051809546984,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6284.379828937475,
+        37773.59714983062
+      ],
+      "mean_population": 3.9978875305886366,
+      "busy_fraction": 0.7992411618129558,
+      "submitted_work": 30290.0,
+      "nominal_processed_work": 30290.000000000007,
+      "attained_work": 30289.999999999927,
+      "completion_roundoff_work": 3.157196726277789e-15,
+      "nominal_minus_attained_work": 8.003553375601768e-11,
+      "event_count": 60000,
+      "quantized_segments": 18365,
+      "input_sha256": "8ec1b679cd1d215102369296b5356b7d056e48e4bfca9ba265faee04a508b164",
+      "outcomes_sha256": "a9101181695a84437830c0476fe2c10552e442f3ea68fe44e7d4eef95342ab19",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    },
+    {
+      "case": "seed-29-constant-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 29,
+      "distribution": "constant",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 4.760029518468754,
+      "response_p99": 17.49904295376638,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6304.139805123586,
+        37665.96281607667
+      ],
+      "mean_population": 3.792609626602795,
+      "busy_fraction": 0.796934097810147,
+      "submitted_work": 30000.0,
+      "nominal_processed_work": 29999.999999999956,
+      "attained_work": 29999.999999999956,
+      "completion_roundoff_work": 3.4785542502024924e-15,
+      "nominal_minus_attained_work": 0.0,
+      "event_count": 60000,
+      "quantized_segments": 18823,
+      "input_sha256": "b06d595f528fe0c08f28c244c058ad8a0940f3f013a88afcc0ceb6e451a37c6d",
+      "outcomes_sha256": "19513b7796e0d0991bca8d3b11b9f666ed34ee8495decce62eadc03d2b1b3d5b",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    },
+    {
+      "case": "seed-29-exponential-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 29,
+      "distribution": "exponential",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 5.075145433904952,
+      "response_p99": 37.399177203327255,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6304.139805123586,
+        37665.96281607667
+      ],
+      "mean_population": 4.045136552101395,
+      "busy_fraction": 0.7973806377315585,
+      "submitted_work": 29963.047590891267,
+      "nominal_processed_work": 29963.047590891216,
+      "attained_work": 29963.047590891216,
+      "completion_roundoff_work": 3.235801383782988e-15,
+      "nominal_minus_attained_work": 0.0,
+      "event_count": 60000,
+      "quantized_segments": 29986,
+      "input_sha256": "6e6701233064222e773f8f643a72ce4e87b15f8c5258cfcf0a49d21882168e8d",
+      "outcomes_sha256": "0c164b060c335d80271c1bafe14e21507d1447a201e315e51ee8a4f2b9af0f6f",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    },
+    {
+      "case": "seed-29-mixture-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 29,
+      "distribution": "mixture",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 4.913633850551271,
+      "response_p99": 54.77793663176355,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6304.139805123586,
+        37665.96281607667
+      ],
+      "mean_population": 3.9162373651563276,
+      "busy_fraction": 0.794006567301422,
+      "submitted_work": 29765.0,
+      "nominal_processed_work": 29764.999999999964,
+      "attained_work": 29764.999999999905,
+      "completion_roundoff_work": 2.260778370066774e-15,
+      "nominal_minus_attained_work": 5.820766091346741e-11,
+      "event_count": 60000,
+      "quantized_segments": 17801,
+      "input_sha256": "e786d47b8bd551d768dd7a7a02a23933028dfd7f5c61905d12694760696f6b6c",
+      "outcomes_sha256": "1433272098823821f2b84266099356bf6a10ba5c3ebb9a040e0b7e53689afc5d",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    },
+    {
+      "case": "seed-43-constant-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 43,
+      "distribution": "constant",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 5.045077903898907,
+      "response_p99": 19.941652027082455,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6186.6326202249,
+        37444.585650659246
+      ],
+      "mean_population": 4.0355387339209345,
+      "busy_fraction": 0.7998440380712558,
+      "submitted_work": 30000.0,
+      "nominal_processed_work": 30000.00000000001,
+      "attained_work": 29999.99999999999,
+      "completion_roundoff_work": 2.9707681627189064e-15,
+      "nominal_minus_attained_work": 2.1827872842550278e-11,
+      "event_count": 60000,
+      "quantized_segments": 18993,
+      "input_sha256": "43d7562b12ead2c4c14576ec899a0ef67cebf0705f2f01bf8a205c395f59e50d",
+      "outcomes_sha256": "5b0fbce512ced00923abd197b135751476a262bf0cd2a3d4eba4f415a0d1030d",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    },
+    {
+      "case": "seed-43-exponential-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 43,
+      "distribution": "exponential",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 5.075115950171436,
+      "response_p99": 37.52321615655358,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6186.6326202249,
+        37444.585650659246
+      ],
+      "mean_population": 4.05869392312066,
+      "busy_fraction": 0.7972255079991539,
+      "submitted_work": 29964.14486778543,
+      "nominal_processed_work": 29964.14486778536,
+      "attained_work": 29964.14486778536,
+      "completion_roundoff_work": 3.444998192964066e-15,
+      "nominal_minus_attained_work": 0.0,
+      "event_count": 60000,
+      "quantized_segments": 29995,
+      "input_sha256": "bd33db5021c5a72f8b94aba2d3cb0db613ca14fa0ad6026770c15c97fb1a57d4",
+      "outcomes_sha256": "8bac985c09c65ad15e6f6b36f8cd47d8909fd67debedd92ab6acdef37f802aac",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    },
+    {
+      "case": "seed-43-mixture-rho-0.8-ps",
+      "policy": "ps",
+      "seed": 43,
+      "distribution": "mixture",
+      "rho": 0.8,
+      "cohort_count": 25000,
+      "mean_response": 5.227309621891541,
+      "response_p99": 58.19170593973806,
+      "analytic_mean_response": 5,
+      "time_window": [
+        6186.6326202249,
+        37444.585650659246
+      ],
+      "mean_population": 4.180886987195233,
+      "busy_fraction": 0.799740179422774,
+      "submitted_work": 29780.0,
+      "nominal_processed_work": 29779.999999999865,
+      "attained_work": 29779.999999999894,
+      "completion_roundoff_work": 3.0473670462050073e-15,
+      "nominal_minus_attained_work": -2.9103830456733704e-11,
+      "event_count": 60000,
+      "quantized_segments": 17987,
+      "input_sha256": "9f9b992e76cc72327c081b096d851f8a1eb3e24ea05177c9410bd7b0f16761a8",
+      "outcomes_sha256": "9e7639c5a25a3175749c497c0bea17b02f05b1d6ae0c12d621546b08965bba2c",
+      "scope": "Corrected implementation continuation; original seed17 failure preserved separately."
+    }
+  ],
+  "groups": [
+    {
+      "policy": "fcfs",
+      "distribution": "exponential",
+      "rho": 0.5,
+      "mean_range": [
+        1.9929387643211602,
+        2.0288208147587117
+      ],
+      "p99_range": [
+        8.837083462854535,
+        9.763421700575515
+      ],
+      "means": [
+        1.9968296071207006,
+        1.9929387643211602,
+        2.0288208147587117
+      ],
+      "p99s": [
+        9.556715950086435,
+        8.837083462854535,
+        9.763421700575515
+      ]
+    },
+    {
+      "policy": "fcfs",
+      "distribution": "exponential",
+      "rho": 0.8,
+      "mean_range": [
+        5.065550376545871,
+        5.10827447445975
+      ],
+      "p99_range": [
+        22.797271288158836,
+        27.890225792768014
+      ],
+      "means": [
+        5.065550376545871,
+        5.072165395288723,
+        5.10827447445975
+      ],
+      "p99s": [
+        27.890225792768014,
+        22.797271288158836,
+        24.081863139305575
+      ]
+    },
+    {
+      "policy": "fcfs",
+      "distribution": "exponential",
+      "rho": 0.9,
+      "mean_range": [
+        10.445127612823903,
+        10.722357740648329
+      ],
+      "p99_range": [
+        45.78064812104769,
+        72.30090042805152
+      ],
+      "means": [
+        10.445127612823903,
+        10.465564474553311,
+        10.722357740648329
+      ],
+      "p99s": [
+        72.30090042805152,
+        51.281058140949334,
+        45.78064812104769
+      ]
+    },
+    {
+      "policy": "fcfs",
+      "distribution": "constant",
+      "rho": 0.8,
+      "mean_range": [
+        2.880014759234498,
+        3.0371415435604625
+      ],
+      "p99_range": [
+        9.939435710644856,
+        12.482585194933389
+      ],
+      "means": [
+        3.0371415435604625,
+        2.880014759234498,
+        3.022684529339504
+      ],
+      "p99s": [
+        12.482585194933389,
+        9.939435710644856,
+        11.348615452483724
+      ]
+    },
+    {
+      "policy": "fcfs",
+      "distribution": "mixture",
+      "rho": 0.8,
+      "mean_range": [
+        7.372638423105229,
+        7.88424306096606
+      ],
+      "p99_range": [
+        33.49288312520377,
+        46.86850995881117
+      ],
+      "means": [
+        7.549243035465547,
+        7.372638423105229,
+        7.88424306096606
+      ],
+      "p99s": [
+        33.49288312520377,
+        36.00722105450764,
+        46.86850995881117
+      ]
+    },
+    {
+      "policy": "ps",
+      "distribution": "constant",
+      "rho": 0.8,
+      "mean_range": [
+        4.760029518468754,
+        5.074184849175992
+      ],
+      "p99_range": [
+        17.49904295376638,
+        22.270068985744285
+      ],
+      "means": [
+        5.074184849175992,
+        4.760029518468754,
+        5.045077903898907
+      ],
+      "p99s": [
+        22.270068985744285,
+        17.49904295376638,
+        19.941652027082455
+      ]
+    },
+    {
+      "policy": "ps",
+      "distribution": "exponential",
+      "rho": 0.8,
+      "mean_range": [
+        5.075115950171436,
+        5.12371222978299
+      ],
+      "p99_range": [
+        37.399177203327255,
+        41.36929913888666
+      ],
+      "means": [
+        5.12371222978299,
+        5.075145433904952,
+        5.075115950171436
+      ],
+      "p99s": [
+        41.36929913888666,
+        37.399177203327255,
+        37.52321615655358
+      ]
+    },
+    {
+      "policy": "ps",
+      "distribution": "mixture",
+      "rho": 0.8,
+      "mean_range": [
+        4.913633850551271,
+        5.227309621891541
+      ],
+      "p99_range": [
+        54.77793663176355,
+        58.19170593973806
+      ],
+      "means": [
+        5.03237203197701,
+        4.913633850551271,
+        5.227309621891541
+      ],
+      "p99s": [
+        54.999051809546984,
+        54.77793663176355,
+        58.19170593973806
+      ]
+    }
+  ],
+  "trace_source": {
+    "file_sha256": "4fc10e3684a18f570a16fef72916f15b1ef9658a2f2447efcb1e3d8e838808f2",
+    "rows": 512,
+    "first_raw_timestamp": "2023-11-16 18:15:46.6805900",
+    "last_raw_timestamp": "2023-11-16 18:17:57.1639350",
+    "time_precision": "Raw strings preserved. Python datetime truncates fractional digits beyond microseconds."
+  },
+  "trace_observed": {
+    "elapsed_seconds": 130.483345,
+    "gap_count": 511,
+    "mean_gap": 0.255349011741683,
+    "observed_gap_cv_squared": 1.6714691956441754,
+    "bin_seconds": 1,
+    "bin_counts": [
+      1,
+      0,
+      0,
+      0,
+      3,
+      1,
+      1,
+      1,
+      4,
+      2,
+      2,
+      3,
+      1,
+      2,
+      3,
+      0,
+      0,
+      2,
+      3,
+      2,
+      3,
+      2,
+      2,
+      1,
+      3,
+      5,
+      3,
+      2,
+      5,
+      2,
+      1,
+      4,
+      1,
+      8,
+      1,
+      1,
+      3,
+      2,
+      4,
+      5,
+      3,
+      2,
+      10,
+      6,
+      3,
+      9,
+      6,
+      4,
+      6,
+      9,
+      9,
+      6,
+      5,
+      5,
+      2,
+      3,
+      2,
+      9,
+      2,
+      1,
+      7,
+      9,
+      4,
+      3,
+      7,
+      7,
+      7,
+      5,
+      1,
+      1,
+      5,
+      2,
+      4,
+      6,
+      2,
+      5,
+      4,
+      2,
+      5,
+      9,
+      4,
+      2,
+      5,
+      2,
+      7,
+      4,
+      4,
+      8,
+      5,
+      5,
+      2,
+      6,
+      3,
+      1,
+      8,
+      2,
+      4,
+      6,
+      3,
+      4,
+      3,
+      5,
+      8,
+      3,
+      3,
+      5,
+      4,
+      4,
+      2,
+      2,
+      6,
+      3,
+      5,
+      5,
+      6,
+      4,
+      3,
+      5,
+      3,
+      6,
+      5,
+      3,
+      1,
+      8,
+      8,
+      5,
+      4,
+      5,
+      4,
+      9,
+      4
+    ],
+    "count_dispersion": 1.4431655534351147,
+    "edge_bin_note": "Last bin can be partial; this finite count diagnostic does not prove Poisson input.",
+    "prompt_tokens": {
+      "mean": 928.23828125,
+      "p50": 996.5,
+      "p99": 4087.67
+    },
+    "output_tokens": {
+      "mean": 265.8203125,
+      "p50": 217.0,
+      "p99": 584.4499999999999
+    },
+    "observed_latency": null
+  },
+  "trace_replays": [
+    {
+      "stretch": 0.5,
+      "mean_wait": 202.41186978027332,
+      "wait_p99": 434.8002619049999,
+      "mean_response": 203.39497837402334,
+      "response_p99": 436.19270190499986,
+      "drained": {
+        "left": 0,
+        "right": 505.8099484999999,
+        "busy_server_seconds": 503.3515999999999,
+        "busy_fraction": 0.995139778275832,
+        "independent_clipped_system_area": 104138.22892749995,
+        "independent_clipped_queue_area": 103634.87732749994,
+        "completions_in_window": 512,
+        "completion_rate": 1.0122378998640833,
+        "completed_cohort_mean_residence": 203.39497837402334,
+        "boundary_note": "Completion cohort mean need not match clipped time-population accounting.",
+        "system": {
+          "area": 104138.22892749992,
+          "mean_population": 205.88410575222196
+        },
+        "queue": {
+          "area": 103634.87732750003,
+          "mean_population": 204.88896597394634
+        },
+        "unfinished_count": 0
+      },
+      "arrival_window": {
+        "left": 0,
+        "right": 65.2416725,
+        "busy_server_seconds": 62.78332400000001,
+        "busy_fraction": 0.9623193519448785,
+        "independent_clipped_system_area": 10995.264111500004,
+        "independent_clipped_queue_area": 10932.480787500004,
+        "completions_in_window": 96,
+        "completion_rate": 1.4714521611934457,
+        "completed_cohort_mean_residence": 16.030119526041677,
+        "boundary_note": "Completion cohort mean need not match clipped time-population accounting.",
+        "system": {
+          "area": 10995.264111500013,
+          "mean_population": 168.5313035391607
+        },
+        "queue": {
+          "area": 10932.480787500004,
+          "mean_population": 167.56898418721568
+        },
+        "unfinished_count": 415
+      }
+    },
+    {
+      "stretch": 1,
+      "mean_wait": 170.8238700527343,
+      "wait_p99": 375.29432081,
+      "mean_response": 171.8069786464843,
+      "response_p99": 376.6867608099999,
+      "drained": {
+        "left": 0,
+        "right": 511.20631799999995,
+        "busy_server_seconds": 503.35159999999996,
+        "busy_fraction": 0.9846349355956121,
+        "independent_clipped_system_area": 87965.17306699997,
+        "independent_clipped_queue_area": 87461.82146699996,
+        "completions_in_window": 512,
+        "completion_rate": 1.001552566883573,
+        "completed_cohort_mean_residence": 171.8069786464843,
+        "boundary_note": "Completion cohort mean need not match clipped time-population accounting.",
+        "system": {
+          "area": 87965.17306699995,
+          "mean_population": 172.07372047189753
+        },
+        "queue": {
+          "area": 87461.82146700009,
+          "mean_population": 171.08908553630218
+        },
+        "unfinished_count": 0
+      },
+      "arrival_window": {
+        "left": 0,
+        "right": 130.483345,
+        "busy_server_seconds": 122.62862700000002,
+        "busy_fraction": 0.9398029074132029,
+        "independent_clipped_system_area": 18125.57112200001,
+        "independent_clipped_queue_area": 18002.942495000007,
+        "completions_in_window": 147,
+        "completion_rate": 1.1265805609137318,
+        "completed_cohort_mean_residence": 23.929081122448995,
+        "boundary_note": "Completion cohort mean need not match clipped time-population accounting.",
+        "system": {
+          "area": 18125.571122,
+          "mean_population": 138.9109937517313
+        },
+        "queue": {
+          "area": 18002.942495000014,
+          "mean_population": 137.9711908443182
+        },
+        "unfinished_count": 364
+      }
+    },
+    {
+      "stretch": 2,
+      "mean_wait": 120.3254228281249,
+      "wait_p99": 269.71596161999986,
+      "mean_response": 121.3085314218749,
+      "response_p99": 271.1084016199999,
+      "drained": {
+        "left": 0,
+        "right": 535.4325799999999,
+        "busy_server_seconds": 503.35159999999996,
+        "busy_fraction": 0.9400839971299468,
+        "independent_clipped_system_area": 62109.96808799995,
+        "independent_clipped_queue_area": 61606.61648799995,
+        "completions_in_window": 512,
+        "completion_rate": 0.956236170761219,
+        "completed_cohort_mean_residence": 121.3085314218749,
+        "boundary_note": "Completion cohort mean need not match clipped time-population accounting.",
+        "system": {
+          "area": 62109.968087999914,
+          "mean_population": 115.9996055675206
+        },
+        "queue": {
+          "area": 61606.61648799996,
+          "mean_population": 115.05952157039076
+        },
+        "unfinished_count": 0
+      },
+      "arrival_window": {
+        "left": 0,
+        "right": 260.96669,
+        "busy_server_seconds": 228.88571000000005,
+        "busy_fraction": 0.8770686787650945,
+        "independent_clipped_system_area": 25636.02119800001,
+        "independent_clipped_queue_area": 25407.135488000007,
+        "completions_in_window": 251,
+        "completion_rate": 0.9618085741134241,
+        "completed_cohort_mean_residence": 43.76965521912351,
+        "boundary_note": "Completion cohort mean need not match clipped time-population accounting.",
+        "system": {
+          "area": 25636.021197999984,
+          "mean_population": 98.23484061509912
+        },
+        "queue": {
+          "area": 25407.135488000014,
+          "mean_population": 97.35777193633415
+        },
+        "unfinished_count": 260
+      }
+    }
+  ],
+  "original_failure": {
+    "stage": "simulate-seed-17-constant-rho-0.8-ps",
+    "error": "",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\queueing-research\\run_study.py\", line 205, in run\n    result = simulate(requests) if policy == \"fcfs\" else simulate_ps(requests)\n                                                         ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn\\examples\\llm-serving-queues\\processor_sharing.py\", line 39, in simulate_ps\n    segments.append({\"start\": time, \"end\": next_time, \"count\": len(active),\nMemoryError\n",
+    "retention": "All preceding outputs/raw realizations conserved; no retry."
+  },
+  "continuation_passed": true,
+  "boundary_checks": 33,
+  "projection": "Exact summary fields; all event segments/unfinished identities remain in source observation archive."
+}

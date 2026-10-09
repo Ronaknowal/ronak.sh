@@ -1,0 +1,214 @@
+{
+  "topic": {
+    "title": "f-Divergences & Integral Probability Metrics",
+    "level": "advanced",
+    "blueprint": {
+      "summary": "Choose and compute a distribution comparison by the differences it can detect, connecting probability-ratio penalties, constrained observers, kernel witnesses and finite-sample evidence.",
+      "outcomes": [
+        "Calculate finite f-divergences with explicit normalization, log units and zero-support limits",
+        "Explain nonnegativity, shared-channel data processing and the distinction between divergences and metrics",
+        "Derive total variation as an event witness and an equal-prior classification advantage",
+        "Construct bounded, linear and Lipschitz observers and explain their different blind spots",
+        "Compute kernel MMD from feature means and pair similarities, with correctly normalized witnesses",
+        "Distinguish a nonnegative empirical-law norm from an unbiased squared estimator that may be negative",
+        "Carry out and interpret an exact finite permutation test under its exchangeability assumptions",
+        "Derive a variational f-divergence bound and diagnose restricted or fitted-critic limitations",
+        "Stress-test a metric choice against meaningful changes in support, geometry, representation and sampling"
+      ],
+      "prerequisites": [
+        "Entropy, Cross-Entropy & KL Divergence",
+        "Optimal Transport (Wasserstein Distance, Sinkhorn)",
+        "Hypothesis Testing & Confidence Intervals"
+      ],
+      "sequence": [
+        "Compare probability ratios",
+        "Handle support and processing",
+        "Derive events and metric conditions",
+        "Choose the observer class",
+        "Expose support versus geometry",
+        "Build kernel distribution witnesses",
+        "Separate estimates from calibrated tests",
+        "Connect variational critics and practical decisions",
+        "Practise changed laws and assumptions"
+      ],
+      "visual": {
+        "type": "Aligned mass-and-penalty rows, coarsening flows, constrained critic scores, moving atoms, feature-mean geometry, kernel Gram blocks and witnesses, and exact permutation ranks",
+        "question": "What mismatch can this comparison see, what does its numerical value mean, and what additional evidence is needed to make a decision?",
+        "interaction": "Apply bounded distribution or sample edits, choose an observer or kernel, move a point mass, inspect a finite relabeling and compare a critic bound with its exact known-law target."
+      },
+      "practice": {
+        "task": "Compute changed finite comparisons, prove or repair their assumptions, diagnose an invisible distribution change and build a reproducible small kernel test with an explained decision rule.",
+        "success": "Calculations agree independently; support, constants, geometry, kernel class and estimator assumptions are explicit; statistical significance is separated from effect size and practical harm."
+      },
+      "misconceptions": [
+        "Every divergence is symmetric or satisfies a triangle inequality",
+        "Zero numerical discrepancy proves equality regardless of function class",
+        "Finite samples always have a finite KL comparison",
+        "A smaller geometric displacement makes every divergence smaller",
+        "TV has the same factor for all bounded-function conventions",
+        "All kernels distinguish all probability laws",
+        "A negative unbiased MMD-squared estimate means a negative population distance",
+        "Choosing a kernel after seeing labels preserves an unchanged permutation test",
+        "A trained finite-sample critic automatically gives a population lower bound",
+        "One score certifies useful generation, no distribution shift or fairness"
+      ],
+      "sources": [
+        "https://people.lids.mit.edu/yp/homepage/data/LN_fdiv.pdf",
+        "https://jmlr.org/papers/volume13/gretton12a/gretton12a.pdf",
+        "https://arxiv.org/pdf/1606.00709"
+      ],
+      "depth": "specialist",
+      "designRecord": "docs/teaching/F-DIVERGENCES-IPMS-LESSON-DESIGN.md",
+      "reviewFocus": "Extended support terms and metric constants; event and Lipschitz witnesses; kernel separation and witness normalization; biased versus unbiased estimates; exchangeability and selected-statistic calibration; exact population versus fitted variational bounds."
+    },
+    "id": "f-divergences-integral-probability-metrics",
+    "trackId": "math-foundations",
+    "section": "Information Theory",
+    "trackIds": [
+      "math-foundations"
+    ],
+    "prerequisiteStatus": "recorded",
+    "prerequisiteIds": [
+      "entropy-cross-entropy-kl-divergence",
+      "optimal-transport-wasserstein-distance-sinkhorn",
+      "hypothesis-testing-confidence-intervals"
+    ],
+    "designStatus": "topic-brief-ready"
+  },
+  "authoringNotes": {
+    "instruction": "Read destination notes and relevant unresolved routing notes. Reassess evidence and learner benefit; record inclusion, adaptation, rerouting, reasoned deferral or rejection. A saved proposal is not an automatic content requirement.",
+    "workflow": "docs/teaching/topic-notes/README.md",
+    "destination": {
+      "path": "docs/teaching/topic-notes/f-divergences-integral-probability-metrics.md",
+      "exists": false,
+      "markdown": null
+    },
+    "unassigned": {
+      "path": "docs/teaching/topic-notes/UNASSIGNED.md",
+      "exists": true,
+      "markdown": "# Discoveries awaiting a teaching owner\r\n\r\nThis routing inbox records actual discoveries awaiting an owner; it is not evidence that the whole curriculum was audited or is complete.\r\n\r\n## 2026-09-10 — Establish a teaching owner for bit manipulation in interview preparation\r\n\r\nThe original search, proposal and alternatives below explain why this item was routed. They are retained as history; use the current resolution and canonical destination when deciding future work.\r\n\r\n- Status: assigned 11 September 2026 to [Arrays, Strings & Hash Maps](arrays-strings-hash-maps.md); implemented, author-verified and independently reviewed; production integration is complete. This item is retained as resolved routing history, not an unassigned obligation.\r\n- Origin: [DSA practice standard and evolving coverage map](../DSA-PRACTICE-STANDARD.md), prepared while adding practice to the first five DSA lessons.\r\n- Proposed destination and alternatives: find an existing programming/DSA owner before proposing a new topic. A scoped search of track definitions and curriculum source for bitwise, bit manipulation, bitmask and XOR found incidental numerical-reproducibility mentions, not an explicit DSA teaching home. This does not prove that no relevant sentence exists elsewhere.\r\n- Idea and learning benefit: a future interview-preparation route should teach masks as sets, bitwise versus boolean operations, width/sign and shift contracts, and the reasoning behind useful XOR identities before asking learners to memorize bit tricks. Determine which mechanisms already belong to a foundation lesson and which need a DSA extension.\r\n- Existing coverage: the later bounded source review found substantive DP section 7 mask teaching and the Fenwick lowest-bit proof. The original title/brief search was incomplete evidence of absence. Broader XOR/popcount/word interpretation and direct practice were the concrete extension gap; the Arrays branch is now implemented and independently reviewed, with production integration tracked separately in its destination note.\r\n- Proposed treatment: inspect plausible owners and prerequisites during the next relevant scoped authoring/planning task; route a full note there with examples, independently verified language behavior and curated transfer practice. Preserve stable IDs and module order. Do not insert an unexplained hard problem into the present foundation sets merely to increase breadth.\r\n- Prerequisites and boundaries: integer representation, boolean logic, sets, language-specific bit/shift semantics; distinguish Python's integer behavior from fixed-width machine integers. API/version details must be researched before authoring.\r\n- Evidence: the local curriculum search and the explicitly partial practice coverage map; no new technical implementation claim or source endorsement is made by this note.\r\n- Resolution: the existing Arrays owner is assigned a connected deeper representation branch, retaining stable title/ID/order and existing DP/Fenwick applications. No new topic is added. The earlier discovery itself made no source edit; the subsequent scoped extension has its own baseline and evidence.\r\n- Implementation/verification links: [design and authoring instructions](../BITWISE-FOUNDATIONS-EXTENSION-DESIGN.md), [destination note](arrays-strings-hash-maps.md), [author verification](../BITWISE-FOUNDATIONS-EXTENSION-VERIFICATION.md) and [closed independent review](../BITWISE-FOUNDATIONS-INDEPENDENT-REVIEW.md). The [final production integration](../evidence/dsa-math-foundations-complete-integration.json) is complete; do not implement this resolved branch again from the original proposal.\r\n\r\nAdd further unassigned discoveries using the [note format](README.md), substituting a proposed module/topic and ownership alternatives for the canonical destination. Record why each matters and what remains uncertain. Once assigned, save the full note against the receiving topic's stable ID and leave a link and disposition here. Authors review entries relevant to the current topic; they do not implement every inbox idea on each run.\r\n"
+    }
+  },
+  "selectedLedger": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "record": "docs/teaching/implementation-depth/MATH-DEPTH-REMEDIATION.md",
+    "content": {
+      "status": "complete",
+      "completedAt": "2026-09-21T20:08:19.551Z",
+      "manuscript": "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+      "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "files": {
+        "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "5e255b375e1160607cf5ec3bc450e1bdba6a97a684721162aee6c19877a43759",
+        "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+        "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+        "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+        "src/learn/data/divergences-mechanism-program.js": "7cfe381bd9046c506f566ba3299c05ffee8c5d5f539bc5e33b8e1ef84543e39e",
+        "public/learn-assets/divergences/mmd-library-bridge.py": "708274444dc59476c4ebc6d4b334c94d60a7a65f31ecad1d777415e894fac08f"
+      }
+    },
+    "implementation": {
+      "status": "complete",
+      "completedAt": "2026-09-21T20:08:19.587Z",
+      "reviewedFiles": {
+        "public/learn-assets/divergences/mmd-library-bridge.py": "708274444dc59476c4ebc6d4b334c94d60a7a65f31ecad1d777415e894fac08f",
+        "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+        "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+        "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+        "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+        "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+        "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+        "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+        "src/learn/components/lesson-labs/DivergenceIpmLabs.jsx": "788b9d56f1e7da1144f71e86e716fae634479861fa0930e956d2c69948152537",
+        "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+        "src/learn/components/lesson-labs/MechanismProgram.jsx": "347fde8eefd4ce624c0db36597d4a421412a7c70a60e4a553a708f30f4b9d920",
+        "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+        "src/learn/components/lesson-labs/divergence-ipm-labs.css": "616b50a7cfce7b315a4b410a3af652b2b34e0310b8aa492f2d7dd15efe64db96",
+        "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+        "src/learn/components/lesson-labs/mechanism-program.css": "a2758dfc67cd54052aebf4f753b08fa66a054766da862bdb9aa6fa0c54e83316",
+        "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+        "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+        "src/learn/data/divergence-ipm-models.js": "0bd0c775c7b5b27a3d90117d27e3fb615516c64151c2d5c9ff08e63245308ffe",
+        "src/learn/data/divergences-mechanism-program.js": "7cfe381bd9046c506f566ba3299c05ffee8c5d5f539bc5e33b8e1ef84543e39e",
+        "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "5e255b375e1160607cf5ec3bc450e1bdba6a97a684721162aee6c19877a43759",
+        "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+      }
+    },
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/F-DIVERGENCES-IPMS-VERIFICATION.md",
+        "legacyReview": true
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.868Z",
+          "manuscript": "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "7526c9d2895f5164061de7ce26f24b27b0534ee404455f3ee0af5353fe3a0882",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5",
+            "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.870Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx": "7526c9d2895f5164061de7ce26f24b27b0534ee404455f3ee0af5353fe3a0882",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/DivergenceIpmLabs.jsx": "788b9d56f1e7da1144f71e86e716fae634479861fa0930e956d2c69948152537",
+            "src/learn/data/divergence-ipm-models.js": "0bd0c775c7b5b27a3d90117d27e3fb615516c64151c2d5c9ff08e63245308ffe",
+            "src/learn/components/lesson-labs/divergence-ipm-labs.css": "616b50a7cfce7b315a4b410a3af652b2b34e0310b8aa492f2d7dd15efe64db96",
+            "src/learn/data/divergence-ipm-examples.js": "2e99f9317c1e13a301349a3e3450d74bd3e8a22e2a42f0cea929fc9feb824057",
+            "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js": "11193f06a6e317bc20c51d682cd71a720e575149500e0731b14f729b580a45b5"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      }
+    ],
+    "nextAction": "Scoped implementation-depth revision complete; retain source-bound evidence. User acceptance remains separate."
+  },
+  "selectedEffectiveState": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "content": "stale",
+    "implementation": "stale",
+    "recordedContent": "complete",
+    "recordedImplementation": "complete",
+    "canFinish": false,
+    "record": "docs/teaching/implementation-depth/MATH-DEPTH-REMEDIATION.md",
+    "contentFiles": [
+      "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+      "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js",
+      "src/learn/data/divergence-ipm-examples.js",
+      "src/learn/data/divergences-mechanism-program.js",
+      "public/learn-assets/divergences/mmd-library-bridge.py"
+    ],
+    "nextAction": "Scoped implementation-depth revision complete; retain source-bound evidence. User acceptance remains separate."
+  },
+  "qualification": "Standard topic command attempted but did not return after several minutes and was interrupted. This scoped read imports the same catalogue/notes/state helpers for only the assigned topic; no global current-source review or inventory regeneration."
+}

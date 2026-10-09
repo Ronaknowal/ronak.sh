@@ -1,0 +1,51 @@
+{
+  "retrieved": "2026-10-06",
+  "upstream": "R Core Team datasets package, original sleep.R source",
+  "records": [
+    {
+      "file": "sleep.R",
+      "source": "https://svn.r-project.org/R/trunk/src/library/datasets/data/sleep.R",
+      "sha256": "998f363abb36342a6e5cd1d508d2ac2d044146832b617b18649b5b8ce21ab7f2",
+      "bytes": 183,
+      "headers": {
+        "ETag": "\"52721//trunk/src/library/datasets/data/sleep.R\"",
+        "Last-Modified": "Sat, 14 Aug 2010 08:36:49 GMT"
+      }
+    },
+    {
+      "file": "sleep.Rd",
+      "source": "https://svn.r-project.org/R/trunk/src/library/datasets/man/sleep.Rd",
+      "sha256": "f17781ff555f1c5791ae1c8c07bb2ca990aef04d0df461770605dca85e8d3975",
+      "bytes": 1461,
+      "headers": {
+        "ETag": "\"88624//trunk/src/library/datasets/man/sleep.Rd\"",
+        "Last-Modified": "Sun, 17 Aug 2025 05:48:03 GMT"
+      }
+    },
+    {
+      "file": "R-COPYING",
+      "source": "https://svn.r-project.org/R/trunk/COPYING",
+      "sha256": "e6d6a009505e345fe949e1310334fcb0747f28dae2856759de102ab66b722cb4",
+      "bytes": 18011,
+      "headers": {
+        "ETag": "\"36968//trunk/COPYING\"",
+        "Last-Modified": "Tue, 03 Jan 2006 14:40:23 GMT"
+      }
+    },
+    {
+      "file": "R-datasets-DESCRIPTION.in",
+      "source": "https://svn.r-project.org/R/trunk/src/library/datasets/DESCRIPTION.in",
+      "sha256": "e58b793cb90e167d9f4c9a23b7b63a2344bbdab6b7d36049fd9fd84190daf99d",
+      "bytes": 319,
+      "headers": {
+        "ETag": "\"88503//trunk/src/library/datasets/DESCRIPTION.in\"",
+        "Last-Modified": "Mon, 04 Aug 2025 16:39:10 GMT"
+      }
+    }
+  ],
+  "derivedCsvSha256": "3b27360f282bc31de8368de72f339561f70d324ffaf7aa69c9326467ea4b4fe6",
+  "transformation": "2026-10-06: reshape the two complete groups into ten rows using the original factor ID; no measurements changed, dropped or invented. Columns are increases in hours of sleep relative to control. Drug2 minus drug1 defines the paired difference.",
+  "licenseDelivery": "Retain verbatim sleep.R, sleep.Rd, package description and complete R-COPYING with the separate derived dataset assets. R datasets metadata states Part of R; R-COPYING supplies GNU GPL version2. These assets and their reshaped data are delivered under those upstream terms.",
+  "origin": "R help cites Cushny and Peebles1905 and Student1908. The help explicitly warns that group is misleading: these are measurements on10 people, not two independent groups.",
+  "limits": "The teaching analysis is model based and does not establish a random sampling or randomized order protocol from these records. It is not a medical treatment recommendation. The source hash pins the actual observed numbers even though the upstream URL uses trunk."
+}

@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+    "-B",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-engines-research\\artifacts\\source\\llama.cpp-d81235049384534c167caea52b85a694f6103d14\\convert_hf_to_gguf.py",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\sft-research\\pythia-14m",
+    "--outfile",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-engines-research\\study\\conversion-hf457\\pythia-14m-f16.gguf",
+    "--outtype",
+    "f16"
+  ],
+  "model": {
+    "model": "EleutherAI/pythia-14m",
+    "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+    "files": [
+      {
+        "name": "README.md",
+        "bytes": 10560,
+        "sha256": "d1f2cf1d5181daedeaa70208ddd5cc5251867bde9acf6db7bb45a2265e25e163"
+      },
+      {
+        "name": "config.json",
+        "bytes": 698,
+        "sha256": "f97f966a66c444890ed461fff2a51eefb15d74303df05b948124719f199b0b17"
+      },
+      {
+        "name": "model.safetensors",
+        "bytes": 28143920,
+        "sha256": "116a02532db461f91386a5b20f942ff2c8d4de7341e21b55caafc3d7b25f49a1"
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 441,
+        "sha256": "10b8c8852c1e1f70b54d9aff61728408c28971c0e97a6c5a7b2debbd1d3e9c0c"
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 2114042,
+        "sha256": "870f4e2baa6b683221fa52004d5d6f40ab8c9d31961617304b78c910c2c3caf2"
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 4834,
+        "sha256": "eee017c5bd133137f45907bd0a6e781e2ccd1a533734b7ed2a2f2f4446659809"
+      }
+    ]
+  },
+  "converter_commit": "d81235049384534c167caea52b85a694f6103d14",
+  "acquisition_sha256": "3ca50b64723c1f22bda15ae39f135b61415c9887e6726d78a126864e8003531e",
+  "exit_code": 0,
+  "gguf": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-engines-research\\study\\conversion-hf457\\pythia-14m-f16.gguf",
+    "bytes": 29929408,
+    "sha256": "8977255964083cdf425026d13e1af3595c97e94e93ae123baa4412853bf682bf"
+  }
+}

@@ -1,0 +1,24 @@
+.gmm-lesson .gmm-em-object { margin-block: 2rem; min-width: 0; }
+.gmm-lesson .em-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1.5rem; }
+.gmm-lesson .em-grid > * { min-width: 0; }
+.gmm-lesson .em-table-region { overflow-x: auto; max-width: 100%; margin-block: 1rem; overscroll-behavior-inline: contain; }
+.gmm-lesson .em-table-region:focus-visible { outline: 1px solid #e9b94c; outline-offset: .2rem; }
+.gmm-lesson .em-exact-table { border-collapse: collapse; font-variant-numeric: tabular-nums; width: 100%; }
+.gmm-lesson .em-exact-table caption { text-align: left; margin-block: .5rem; }
+.gmm-lesson .em-exact-table th, .gmm-lesson .em-exact-table td { text-align: left; vertical-align: top; padding: .45rem .7rem .45rem 0; }
+.gmm-lesson .em-exact-table thead { border-bottom: 1px solid #555; }
+.gmm-lesson .em-exact-table td { white-space: nowrap; }
+.gmm-lesson .em-mass-bracket { display: flex; justify-content: space-around; gap: 1rem; padding-block: .75rem; border-bottom: 1px solid #85858b; flex-wrap: wrap; }
+.gmm-lesson .em-total-mass { text-align: center; }
+.gmm-lesson .em-matrix { display: flex; align-items: center; gap: .5rem; max-width: 100%; width: max-content; margin-block: .75rem; }
+.gmm-lesson .em-matrix > span { font-size: 2rem; font-weight: 200; }
+.gmm-lesson .em-matrix table { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.gmm-lesson .em-matrix caption { text-align: left; padding-block: .4rem; }
+.gmm-lesson .em-matrix td { padding: .3rem .6rem; color: #8abcb8; }
+.gmm-lesson .em-reduction-values { display: flex; flex-direction: column; padding-inline-start: .75rem; border-left: 1px solid #85858b; }
+.gmm-lesson .em-reduction-values span { overflow-wrap: anywhere; }
+.gmm-lesson .em-reduction-port { padding-block-start: .75rem; border-top: 1px solid #85858b; }
+.gmm-lesson .em-entity-selector { display: flex; flex-direction: column; gap: .5rem; }
+.gmm-lesson .em-entity-selector select { width: 10rem; }
+.gmm-lesson .em-matrix, .gmm-lesson .em-reduction-port, .gmm-lesson .gmm-em-object p { overflow-wrap: anywhere; }
+@media (max-width: 700px) { .gmm-lesson .em-grid { grid-template-columns: minmax(0, 1fr); } }

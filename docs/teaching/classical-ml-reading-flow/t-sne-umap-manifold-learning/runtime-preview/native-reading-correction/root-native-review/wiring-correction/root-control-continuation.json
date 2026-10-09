@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "/root",
+  "recordedOn": "2026-10-09",
+  "scope": "Supplemental actual native L7/L11/L12 control observations on the already built 5203 t-SNE successor; no science replay or phase promotion",
+  "attribution": "Actions were personally performed in the immediately preceding continuation of this same task. This record preserves those observations; creating it does not imply a fresh replay.",
+  "inputs": [
+    {
+      "path": "docs\\teaching\\classical-ml-reading-flow\\t-sne-umap-manifold-learning\\runtime-preview\\native-reading-correction\\root-native-review\\wiring-correction\\root-native-continuation.json",
+      "bytes": 79842,
+      "sha256": "3f5df311c6377d2f51bda70d2be96850082c83324a5f8009f3270dcc41f01bb8"
+    },
+    {
+      "path": "docs\\teaching\\classical-ml-reading-flow\\t-sne-umap-manifold-learning\\runtime-preview\\native-reading-correction\\root-native-review\\wiring-correction\\built-source-http.json",
+      "bytes": 58315,
+      "sha256": "72365a22cdd5169ee29dad08af8e73dd8768e69585ce24f6a026eb3a7f2a1021"
+    },
+    {
+      "path": "docs\\teaching\\classical-ml-reading-flow\\t-sne-umap-manifold-learning\\runtime-preview\\native-reading-correction\\root-native-review\\wiring-correction\\NativeReadingObjects.jsx",
+      "bytes": 17744,
+      "sha256": "1acda558d04f5f6568690dc55f0f2e0a14552b460891fa89e3b314766d652d06"
+    },
+    {
+      "path": "docs\\teaching\\classical-ml-reading-flow\\t-sne-umap-manifold-learning\\runtime-preview\\native-reading-correction\\root-native-review\\wiring-correction\\phone-optimizer-reset.png",
+      "bytes": 34711,
+      "sha256": "e7d4577cf064afb7257ea1e9dcb8a9961b091b0bc933d18dfbd65caf1595226e"
+    }
+  ],
+  "browser": {
+    "surface": "in-app browser 2, tab5",
+    "url": "http://127.0.0.1:5203/",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rootTextPx": 16
+  },
+  "cases": [
+    {
+      "id": "L7-keyboard",
+      "action": "ArrowRight on current-x range",
+      "before": -1.5,
+      "after": -1.42,
+      "exactEditor": -1.42,
+      "kl": 0.0479449
+    },
+    {
+      "id": "L7-pointer",
+      "action": "Click near range center",
+      "currentX": -0.00990022430195704,
+      "kl": 0.129695373
+    },
+    {
+      "id": "L7-large-step",
+      "action": "Set exact learning rate100 then Step",
+      "currentX": -21.451612725914412,
+      "bounds": [
+        -22,
+        22
+      ],
+      "kl": 1.300797115,
+      "centroidRemoved": 0.372524943925,
+      "interpretation": "A large step raises KL; the lab does not promise monotone improvement."
+    },
+    {
+      "id": "L7-invalid",
+      "action": "Select B, enter999 in exact current-x, then blur",
+      "alert": "Enter a finite Current x from -22 to 22. The last valid state remains visible.",
+      "preservedB": 13.980683663201903,
+      "preservedKL": 1.300797115,
+      "bounds": [
+        -22,
+        22
+      ]
+    },
+    {
+      "id": "L7-reset",
+      "action": "Reset",
+      "currentX": -1.5,
+      "learningRate": 0.5,
+      "bounds": [
+        -4,
+        4
+      ],
+      "kl": 0.053522403,
+      "alertCount": 0,
+      "screenshot": "phone-optimizer-reset.png"
+    },
+    {
+      "id": "L11-edit-reset",
+      "action": "Set exact mapped query4 then Reset",
+      "edited": {
+        "target": 2,
+        "residual": 2,
+        "squaredError": 4
+      },
+      "reset": {
+        "query": 2,
+        "residual": 0,
+        "squaredError": 0
+      }
+    },
+    {
+      "id": "L12-edit-reset",
+      "action": "Set exact middle coordinate1.5 then Reset",
+      "edited": {
+        "differences": [
+          -1.5,
+          -1.5
+        ],
+        "energy": 4.5,
+        "orderedSum": 9
+      },
+      "reset": {
+        "middle": 1,
+        "differences": [
+          -1,
+          -2
+        ],
+        "energy": 5,
+        "orderedSum": 10
+      }
+    }
+  ],
+  "limits": [
+    "This is the affected native complement, not another whole-lesson review.",
+    "The prior clipboard read returned empty despite visible Copied feedback; payload copy is not certified.",
+    "No additional download was attempted after the prior unusually slow native download event.",
+    "Canonical/public normal-route integration remains pending; implementation is in progress."
+  ]
+}

@@ -1,0 +1,22 @@
+.gpu-residency {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #111;
+  border: 1px solid #3d3d3d;
+}
+.gpu-residency figcaption { font-weight: 650; }
+.gpu-residency-path { border-inline-start: 3px solid #e4b752; padding: .75rem 1rem; margin: 1rem 0; }
+.gpu-residency-path p { overflow-wrap: anywhere; }
+.gpu-residency-path span { color: #bbb; }
+.gpu-index-cells { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: .45rem; }
+.gpu-index-cells > div { border: 1px solid #444; padding: .6rem; background: #161616; }
+.gpu-index-cells span { display: block; font-size: .85rem; color: #bcbcbc; }
+.gpu-index-cells .is-selected { border-color: #e4b752; background: #241e12; }
+.gpu-index-cells .is-selected strong { color: #e4b752; }
+.gpu-cost-row { margin: 1rem 0; }
+.gpu-cost-row strong { display: block; margin-bottom: .5rem; }
+.gpu-cost-track { display: flex; height: 28px; width: 100%; background: #1b1b1b; border: 1px solid #444; }
+.gpu-cost-track span { display: block; height: 100%; }
+.gpu-cost-key { display: flex; flex-wrap: wrap; gap: .75rem; }
+.gpu-cost-key span { display: inline-flex; gap: .4rem; align-items: center; }
+.gpu-cost-key i { width: .9rem; height: .9rem; display: inline-block; }

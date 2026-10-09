@@ -1,0 +1,66 @@
+{
+  "boundary": "Constructed addresses/advantages and optional resulting masks; no generated observations or real optimizer updates.",
+  "cases": [
+    {
+      "mask_truncated": false,
+      "log_ratio_shift": 0.0,
+      "native_loss": -0.2,
+      "scratch_loss": -0.200000000000002,
+      "dtype": "torch.float64",
+      "gradient_elements": 14067712,
+      "maximum_gradient_error": 2.1387336346379016e-12,
+      "shadow_sgd_maximum_error": 2.1337098754514727e-16
+    },
+    {
+      "mask_truncated": false,
+      "log_ratio_shift": 0.4,
+      "native_loss": -0.17127012094349175,
+      "scratch_loss": -0.17127012094349175,
+      "dtype": "torch.float64",
+      "gradient_elements": 14067712,
+      "maximum_gradient_error": 0.0,
+      "shadow_sgd_maximum_error": null
+    },
+    {
+      "mask_truncated": false,
+      "log_ratio_shift": -0.4,
+      "native_loss": -0.0821920276213836,
+      "scratch_loss": -0.08219202762138493,
+      "dtype": "torch.float64",
+      "gradient_elements": 14067712,
+      "maximum_gradient_error": 1.8474111129762605e-12,
+      "shadow_sgd_maximum_error": null
+    },
+    {
+      "mask_truncated": true,
+      "log_ratio_shift": 0.0,
+      "native_loss": -0.5625,
+      "scratch_loss": -0.5625000000000024,
+      "dtype": "torch.float64",
+      "gradient_elements": 14067712,
+      "maximum_gradient_error": 3.2791547255328624e-12,
+      "shadow_sgd_maximum_error": null
+    },
+    {
+      "mask_truncated": true,
+      "log_ratio_shift": 0.4,
+      "native_loss": -0.6802828691922618,
+      "scratch_loss": -0.6802828691922618,
+      "dtype": "torch.float64",
+      "gradient_elements": 14067712,
+      "maximum_gradient_error": 0.0,
+      "shadow_sgd_maximum_error": null
+    },
+    {
+      "mask_truncated": true,
+      "log_ratio_shift": -0.4,
+      "native_loss": -0.35274003452672953,
+      "scratch_loss": -0.3527400345267312,
+      "dtype": "torch.float64",
+      "gradient_elements": 14067712,
+      "maximum_gradient_error": 7.620570841027074e-13,
+      "shadow_sgd_maximum_error": null
+    }
+  ],
+  "initial_weights_restored_exactly": true
+}

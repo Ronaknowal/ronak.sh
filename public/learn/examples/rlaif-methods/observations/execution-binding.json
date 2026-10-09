@@ -1,0 +1,55 @@
+{
+  "kind": "retained actual observations; no execution or fitting during export",
+  "prospective_freeze_sha256": "7ba9c8a186c65966635bd9006cdd1cd4d6989e5aede2568ab7f7d1417e72aa30",
+  "stages": [
+    {
+      "stage": "records",
+      "result_sha256": "4d3924b4563004be1a5e89c4a92310c13f8a8a474d135491c7873da6af50b08e",
+      "receipt_sha256": "8449d93aab1c64e2a3aecb4bbbc99e7cc77dc7afa231d544d6e808926fa80b35",
+      "bytes": 144436
+    },
+    {
+      "stage": "losses",
+      "result_sha256": "9e8a3994d820edcb977f9fc3ea46b03c92d89633ecacc5901f40e76e3ca760d9",
+      "receipt_sha256": "aa68454c99693495da996f4532181f715662792c23decb7617e65ac66f0fc991",
+      "bytes": 2703
+    },
+    {
+      "stage": "finite",
+      "result_sha256": "dece5d62114decae52316bda454a3c84b6e119d64b832717339b4a6da2fb5751",
+      "receipt_sha256": "69616e793a79768ec83fb959ad8ee290d87c1d167ae12d055d7af496ec672b90",
+      "bytes": 1914
+    },
+    {
+      "stage": "feedback",
+      "result_sha256": "2230227e5b8edffa71fc70e89786822aaf67fb8c91630ea01a2b388e7f00c54a",
+      "receipt_sha256": "f12182022e17c51ad8f17455f6b8773d055f59cc7f80f91b9e77d82a6af29ec9",
+      "bytes": 16109
+    },
+    {
+      "stage": "loop",
+      "result_sha256": "29f27dcde59dfa1d753c72fa26a0dc84a6f9d64b22a408bd3e9223d4ea3b474e",
+      "receipt_sha256": "ba86b37a1310611e1073dd5395f8948c67df7cba36daa2fee36021c1fedfe171",
+      "bytes": 81465
+    },
+    {
+      "stage": "judge",
+      "result_sha256": "8503e7ff9750297b8396cc7de3959c377e14bb82c18b7ac855948f616485edfb",
+      "receipt_sha256": "417596a5799c0126ce0205af12de003a900503719cccfedd68d3d33c7f996e79",
+      "bytes": 64370
+    },
+    {
+      "stage": "training",
+      "result_sha256": "0ffd5b7c810cc674f69b8d0ac17f72519966ea15574ac8dd193aef8208c6f933",
+      "receipt_sha256": "88c0ea80bf65bfc0a905d834f67380b10a07e21c601daf9a28898b2cd37b5bb9",
+      "bytes": 5485140
+    },
+    {
+      "stage": "native",
+      "result_sha256": "05916c65008341bbebeade0f320406898a1ab2db117d84d29e6f59d73c9d4f71",
+      "receipt_sha256": "c56ee1c7c8eb012ad2595f2db488ed3c7c8be76ef24f99c2207a66017b0139e7",
+      "bytes": 75219
+    }
+  ],
+  "limits": "Proxy labels, small lexical model, fixed study; no generations or human study."
+}

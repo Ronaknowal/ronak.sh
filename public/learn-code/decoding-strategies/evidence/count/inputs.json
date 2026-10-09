@@ -1,0 +1,62 @@
+{
+  "programs": {
+    "analyze_outputs.py": "6b97efb3556b9fad2d8d115d5e22f4317be26124bd07bfd37437a75d085f5b5b",
+    "beam_search.py": "da2e78cec18673613d1c5d8cb6957d58fb752428c329ee8884c0366d816d20f7",
+    "corpus_model.py": "9c7be776fe760753247fa2d2542a2ebc84654e60aecd914f3acf4d3641ead642",
+    "filters.py": "50bc4069430f408c8ee8df301d587c2077d383ea76bfd1ecff93e957a331591c",
+    "history_and_stops.py": "8754cc521ffe1f5414ad8a32c158221ef0248d8efd38414353b557b7eb64dae7",
+    "native_generation.py": "7fd68efb0f6e4f567c579cfffcaa7a89f28d482c101c4ca1a045c937344309eb",
+    "practice_answers.py": "efd73713e2552d6beac73ba89304af6442e02c0863b15d130416e99d4b71d89b",
+    "sampling.py": "77d420efea08f8cdbf60b135d058c34127e2c56b5ec3848078be6e98478943f7",
+    "scratch_study.py": "49a4e9d549575ea7eabbade7d70af002f3dcda2b9820a83d259a6ec5e25c893f"
+  },
+  "data": {
+    "alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+    "alice-provenance.json": "58047ab67319ff4ad1511508bf8f3cd96afa40ac129e070454e9203b76733741",
+    "alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed"
+  },
+  "methods": [
+    {
+      "name": "greedy",
+      "greedy": true
+    },
+    {
+      "name": "beam2",
+      "beam": 2
+    },
+    {
+      "name": "beam4",
+      "beam": 4
+    },
+    {
+      "name": "temperature07",
+      "temperature": 0.7
+    },
+    {
+      "name": "temperature10",
+      "temperature": 1.0
+    },
+    {
+      "name": "temperature13",
+      "temperature": 1.3
+    },
+    {
+      "name": "top_k20",
+      "k": 20
+    },
+    {
+      "name": "top_p09",
+      "mass": 0.9
+    },
+    {
+      "name": "min_p005",
+      "relative": 0.05
+    }
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "limit": 32
+}

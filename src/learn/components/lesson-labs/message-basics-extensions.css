@@ -1,0 +1,11 @@
+.lesson-flow .mp-basic-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr)); gap:1.5rem; align-items:start; }
+.lesson-flow .mp-basic-sequence { width:min(100%,22rem); min-width:0; margin-inline:auto; }
+.lesson-flow .mp-basic-select { display:grid; gap:.4rem; }
+.lesson-flow .mp-basic-select select { max-width:100%; }
+.lesson-flow .mp-basic-values { overflow-x:auto; max-width:100%; }
+.lesson-flow .mp-basic-values table { border-collapse:collapse; width:100%; font-variant-numeric:tabular-nums; }
+.lesson-flow .mp-basic-values :is(th,td) { text-align:start; padding:.6rem; border-bottom:1px solid #383838; white-space:nowrap; }
+.lesson-flow .mp-basic-values th { font-weight:500; }
+.lesson-flow .mp-basic-grid > * { min-width:0; }
+.lesson-flow .mp-basic-caption { color:#c9c9c9; }
+.lesson-flow .mp-basic-null { color:#ddd; }

@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id = 'self-attention-multi-head-attention';
+if (fs.readFileSync(`src/learn/data/topics/${id}.jsx`, 'utf8').includes('Reading-flow revision:')) {
+  throw new Error('This historical renderer cannot overwrite the newer reading-flow lesson. Edit the topic source directly.');
+}
 const manuscript = fs.readFileSync(`docs/teaching/drafts/${id}/lesson.md`, 'utf8');
 const figure = kind => `<SelfAttentionFigure kind="${kind}" />`;
 const { jsx, sections } = renderPreparedLesson(manuscript, { preserveOpeningFrom: `src/learn/data/topics/${id}.jsx`,

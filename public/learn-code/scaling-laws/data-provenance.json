@@ -1,0 +1,14 @@
+{
+  "authors": "Muennighoff et al., Scaling Data-Constrained Language Models",
+  "paper": "https://arxiv.org/abs/2305.16264",
+  "source": "https://github.com/huggingface/datablations/blob/13701315b163f1c54642b94ad237b2699187c3ee/plotstables/contours.ipynb",
+  "commit": "13701315b163f1c54642b94ad237b2699187c3ee",
+  "source_sha256": "3a8681f105ea1ac1e4063b54e63a901078c5ce12b36947fd96aa24f80ca6bd14",
+  "repository_license": "Apache-2.0",
+  "source_note": "Authors' literal validation losses copied from released-model TensorBoard logs; zero marks unfinished runs.",
+  "selection": "All seven plain-name 2b8 models with 4B unique tokens and 4,8,12,16,24,32,40B presentations. No seed/dedup/optimized variants.",
+  "parameter_convention": "Exact PARAMS_MAP value 2.81B, not the rounded run-name number.",
+  "extraction": "AST literal dictionaries only; downloaded notebook code never executed.",
+  "split": "Fit first five token budgets through24B; hold out32B and40B. One fixed model size and unique-data budget cannot identify a joint N,D surface.",
+  "csv_sha256": "d3831011c3f08ae30e0a22efd9e00ebed1ece7b4105b55e39bffb368ddc9d3a8"
+}

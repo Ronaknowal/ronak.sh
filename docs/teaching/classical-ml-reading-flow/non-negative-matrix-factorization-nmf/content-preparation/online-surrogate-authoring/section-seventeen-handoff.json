@@ -1,0 +1,186 @@
+{
+  "status": "SECTION17_N12_D61_D63_COMPLETE_SCOPED_NOT_WHOLE_TOPIC_READY",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T12:11:36.602Z",
+  "acceptedAnchor": "17-update-as-rows-arrive",
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen-template.md",
+      "bytes": 13241,
+      "sha256": "b32c8c6ea3b93d970a988a0217366823ab4d62af7c414ed4776d472f97481ff7"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen.md",
+      "bytes": 25413,
+      "sha256": "f18fade18b4dca3d84bd3632db9df94502ec82f8edd94b2c13e97c53f2e48d50"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\visual-specifications.md",
+      "bytes": 2530,
+      "sha256": "05c151810d245a5fd66838d78bee78c50adb14c4f216075ee546877284af37d5"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\assemble-section.mjs",
+      "bytes": 4883,
+      "sha256": "85f147f8e44e6392091cb6b18715d8cb2c1e79dc5d0b728ef1a17db62ddf3cdb"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\check-online.py",
+      "bytes": 8998,
+      "sha256": "d24ed4bf336d91c952fb58390996087a0a679d4ba016b3d528c1639a4e0da759"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\online-checks.json",
+      "bytes": 10115,
+      "sha256": "135468326bd3908a2fbf760558425ca414cf33f1429f9d1dcc0f8282f3e2a0c4"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+      "bytes": 4228,
+      "sha256": "a7f59677f85590b65f4a76ec5a37d684c73f270cf0d156bb3471aeb2c5129316"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "sourceSlots": [
+    {
+      "marker": "<!-- source:nmf_online.py -->",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_online.py",
+      "language": "python",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_online.py",
+        "bytes": 7983,
+        "sha256": "44880c6ed798d3156d8f98dcc0d24df5794057f7d5f63889919d33838180db10"
+      }
+    },
+    {
+      "marker": "<!-- output:nmf_online.stdout.txt -->",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+      "language": "json",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+        "bytes": 4228,
+        "sha256": "a7f59677f85590b65f4a76ec5a37d684c73f270cf0d156bb3471aeb2c5129316"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "all86 focused conditions",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_online.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "full stream conserved stdout",
+      "passed": true
+    },
+    {
+      "name": "full stream conserved stderr",
+      "passed": true
+    },
+    {
+      "name": "new only stream",
+      "passed": true
+    },
+    {
+      "name": "one accepted section17",
+      "passed": true
+    },
+    {
+      "name": "D61 beforewalkthrough",
+      "passed": true
+    },
+    {
+      "name": "D62 beforewalkthrough",
+      "passed": true
+    },
+    {
+      "name": "D63 beforewalkthrough",
+      "passed": true
+    },
+    {
+      "name": "actual Gram setup cost taught",
+      "passed": true
+    },
+    {
+      "name": "dictionary independent constant qualified",
+      "passed": true
+    },
+    {
+      "name": "retention cannot silently refit",
+      "passed": true
+    },
+    {
+      "name": "atomic and flat rows visible",
+      "passed": true
+    },
+    {
+      "name": "stale/new objective visible",
+      "passed": true
+    },
+    {
+      "name": "new actual counters",
+      "passed": true
+    },
+    {
+      "name": "query rounded claims",
+      "passed": true
+    },
+    {
+      "name": "one complete slot <!-- source:nmf_online.py -->",
+      "passed": true
+    },
+    {
+      "name": "literal complete <!-- source:nmf_online.py -->",
+      "passed": true
+    },
+    {
+      "name": "one complete slot <!-- output:nmf_online.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "literal complete <!-- output:nmf_online.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "slots resolved",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "focusedConditions": 86,
+    "newMain": 1,
+    "newPublicPartialFitCalls": 2,
+    "newScratchMainPartialFitCalls": 2,
+    "additionalFocusedScratchNonemptyUpdates": 3,
+    "additionalEmptyNoOp": 1,
+    "oldCampaignReplay": false,
+    "fullStreamsRead": true
+  },
+  "costAmendment": "Include O(d k²) N2 fixed-H Gram setup per changed dictionary, in addition to accepted O(b d k+q b k²) encode work. Actual recurrence/retained-memory/section scope preserved.",
+  "reading": "Current official MiniBatchNMF public partial_fit/transform contracts plus installed1.9.1 partial_fit/_minibatch_step source targeted read. Internal source inspection establishes differing optimizer only, never used as learner API. Mairal2010 Algorithms1–2 and section5.3 targeted primary read; no entire42-page/convergence-proof claim. Entire new source/checker/prose/spec and full4228B stdout/empty stderr read.",
+  "limits": "Author scoped finite numerical/source conditions, not independent whole review/native/all-history optimum/asymptotic theorem or matching library trajectories.",
+  "continuation": "Root compose exact full section17. Section18 finite axis/phase anatomy and section19 full24tasks/fileindex/annotatedresources remain. No phase/main/public/runtime mutation."
+}

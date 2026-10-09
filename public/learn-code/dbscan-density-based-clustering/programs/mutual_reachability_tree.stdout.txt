@@ -1,0 +1,5 @@
+self-inclusive cores [1.0, 1.0, 1.0, 1.0]
+maintained Prim edges [('v0', 'v1', 1.0), ('v1', 'v2', 3.0), ('v2', 'v3', 1.0)]
+cut 1.0 components [['v0', 'v1'], ['v2', 'v3']]
+cut 3.0 components [['v0', 'v1', 'v2', 'v3']]
+one-vertex tree []

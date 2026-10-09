@@ -1,0 +1,85 @@
+{
+  "scope": "JSX text rendering only; whitespace normalized, Math literals decoded, original dynamic149 computed in prior evidence; all original raw blocks separately exact",
+  "tasks": [
+    {
+      "task": "T01",
+      "original_block_sha256": "2320d905600afc6ae5044ab4ef7ccf84e82d3d385a8e6dc6d7d641d43248f4dd",
+      "title": "1. Unequal folds",
+      "question": "Three folds assess 4, 3 and 3 rows and get 3, 1 and 2 correct. Find the unweighted mean fold accuracy and the pooled accuracy. Which gives each row equal weight?",
+      "hint": "Average the three fractions for one answer; add correct counts before dividing for the other.",
+      "solution": "The fold mean is $(3/4+1/3+2/3)/3=7/12\\approx.5833$. Pooled accuracy is 6/10 = .6 and gives each row equal weight. Equal weighting of folds is a different declared summary."
+    },
+    {
+      "task": "T02",
+      "original_block_sha256": "9382589a2e1a540087903ef3f78c9fdceebbee936d7ef39729011869d1c289e8",
+      "title": "2. A remainder is still a learner's data",
+      "question": "A splitter uses fold_size = n // k and slices exactly that many rows for each of k validation folds. What happens at n = 11, k = 3? How does the provided splitter repair it?",
+      "hint": null,
+      "solution": "Only nine rows receive a validation turn; two are omitted. Depending on how training indices are constructed, those omitted rows may be permanently in training or dropped altogether. `np.array_split` creates folds 4, 4 and 3 so every row belongs to one validation fold and the remaining folds form its training set."
+    },
+    {
+      "task": "T03",
+      "original_block_sha256": "05e38354ba91b896fdbc5f6122fbc552e2d7c5aae3511a31a5466cc09912a0d0",
+      "title": "3. New patient or known patient?",
+      "question": "A wearable model will predict tomorrow's measurements for people who already provided a week of history. A second product must work on entirely new wearers. Describe an assessment boundary for each. What extra question arises if the second product also launches in a future season?",
+      "hint": null,
+      "solution": "The first task can use each person\u2019s available earlier history but must respect prediction time and target availability. The second needs held-out people. A future season introduces a time-distribution boundary as well, so a custom group-and-time assessment may be needed. A random visit split does not by itself establish either claimed setting."
+    },
+    {
+      "task": "T04",
+      "original_block_sha256": "83584297b634c6815c0f7b194f87e3834a76c17d79ed514f0606606932b47b33",
+      "title": "4. An impossible out-of-fold array",
+      "question": "A forward plan trains on rows 0\u20133 and assesses 4\u20135, then trains 0\u20135 and assesses 6\u20137. Why can it be used for fold scoring but not passed directly to cross_val_predict on all eight rows? What should a manual prediction table contain at rows 0\u20133?",
+      "hint": null,
+      "solution": "Rows 0\u20133 never appear in a held-out set, so the required exactly-once partition is missing. A manual table should retain their predictions as absent, not fit on them and label in-sample outputs out-of-fold. Score the valid held-out rows, or train a stacking stage only where legitimate predictions exist."
+    },
+    {
+      "task": "T05",
+      "original_block_sha256": "f56d362cd08b7930edc3cd92ab46f864529a704ad0cc5aaf7c0c9a29720073b8",
+      "title": "5. A new candidate pattern",
+      "question": "Validation labels are [0,1,0,1]. Initially the candidates predict all zeros or all ones. Add a candidate predicting [0,1,0,1]. Under the independent fair-label model, what changes in best validation accuracy and expected future accuracy? What if you add only another all-zero candidate?",
+      "hint": null,
+      "solution": "The best validation score rises from .5 to 1. Every fixed prediction remains independent of future fair labels, so expected future accuracy remains .5. A duplicate all-zero candidate changes neither the original best validation score nor future accuracy. Candidate diversity, and how selection uses the labels, are what matter. Both cases are saved setups in the selection investigation above."
+    },
+    {
+      "task": "T06",
+      "original_block_sha256": "de2b9db1db99f186b2b0230cc3615f287a94df7382a530f3def5bd8821fc4aa6",
+      "title": "6. Which rows selected the epoch?",
+      "question": "An outer-fold model chooses its number of epochs using outer assessment loss, then reports accuracy on that same outer fold. Identify the violated boundary and give two repairs.",
+      "hint": null,
+      "solution": "The assessed rows selected a training setting. Move stopping into the outer training data, either using a stopping subset inside each inner training partition or treating inner-validation-based stopping as part of the complete rule assessed by protected outer rows. Another valid design uses development data for all such choices and a genuinely separate final test set. Renaming the used assessment set does not restore independence."
+    },
+    {
+      "task": "T07",
+      "original_block_sha256": "9c9b138a8b82765dc74904c0bf95a207b3af96e4537d75d5b81fb129b5910f64",
+      "title": "7. Probability mass is not score distance \u2014 deeper",
+      "question": "A satisfactory parameter region has probability .02 under your sampler. How many independent draws give at least a 95% chance of hitting it? Would this guarantee a score within 2% of the global optimum?",
+      "hint": "Solve $(1-.02)^T\\le.05$ and round upward.",
+      "solution": "$T\\ge\\log(.05)/\\log(.98)\\approx148.28$, so 149 draws suffice under the assumed independent sampling model. The 2% is sampling mass, not score proximity. The satisfactory region itself must be defined and its assumed mass justified for a practical guarantee."
+    },
+    {
+      "task": "T08",
+      "original_block_sha256": "09fcbd9787fe64e090cd8c5d10d0f6ff44b531d7f12003f02b7e5fcf9fc632b7",
+      "title": "8. An unchanged acquisition value \u2014 deeper",
+      "question": "The incumbent loss is .30. Candidate C has equal predicted probabilities of losses .10 and .50. Find EI. If only the worse outcome changes from .50 to .90, does EI change? Does expected loss change?",
+      "hint": null,
+      "solution": "EI is $.5(.30-.10)=.10$. The worse outcome contributes zero improvement in both cases, so EI remains .10. Expected loss changes from .30 to .50. This does not prove the surrogate is calibrated; it distinguishes the summaries of its stated distribution."
+    },
+    {
+      "task": "T09",
+      "original_block_sha256": "16e79c1fcd53a07b8a28ea32728114b37f81062fd925fc5ee38275b4142a2286",
+      "title": "9. Account for the whole schedule \u2014 deeper",
+      "question": "A halving plan starts 27 candidates with budgets 5, 15, 45 and 135 and retains one third after each stage. Find the nominal from-scratch resource cost, and compare it with giving every candidate 135. If each stage instead resumes genuine saved state, what is the incremental resource cost?",
+      "hint": null,
+      "solution": "Candidate counts 27, 9, 3 and 1 each consume 135 nominal units per stage, totalling 540, versus 3,645 for all candidates at 135. Resuming costs $27\\cdot5+9\\cdot10+3\\cdot30+1\\cdot90=405$. Multiply appropriate evaluations by fold count and account separately for scoring and refits. Real time need not be linear in this resource."
+    },
+    {
+      "task": "T10",
+      "original_block_sha256": "c661e06962d38b9f7e8bec87a8c6c0acee7d5e0b5154884c7da029baee6c2031",
+      "title": "10. A fixed rule tests an overlap story \u2014 deeper",
+      "question": "A classifier always predicts class 0 and ignores training. Labels on n observations are independent fair bits. What is the variance of its leave-one-out accuracy? Why does this contradict equating loss correlation with training overlap?",
+      "hint": null,
+      "solution": "The correctness indicators are independent Bernoulli(.5), so their average has variance $(.5)(.5)/n=1/(4n)$. The leave-one-out training sets overlap heavily, but those sets do not influence this rule\u2019s predictions. Thus overlap alone does not determine loss correlation or imply variance stays near 1/4."
+    }
+  ]
+}

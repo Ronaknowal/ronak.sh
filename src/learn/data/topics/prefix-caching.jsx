@@ -1,1001 +1,2690 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+// Generated from the accepted manuscript by scripts/render-prefix-caching-lesson.mjs.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { Table as NeuralTable } from '../../components/lesson-labs/PrefixCachingShared.jsx';
+import { PcTensors, PcAliasing, PcCausal, PcEdit, PcNamespace, PcBoundary, PcResident, PcPairs, PcUnits } from '../../components/lesson-labs/PrefixCachingFoundations.jsx';
+import { PcStates, PcOwners, PcAdmission, PcUnion, PcFork, PcHash, PcTrace, PcHistory, PcDenominators } from '../../components/lesson-labs/PrefixCachingStorage.jsx';
+import { PcSnapshot, PcNative, PcAllocator } from '../../components/lesson-labs/PrefixCachingNative.jsx';
+import { PcRadix, PcPins, PcDepthFirst, PcWaiting, PcProviders, PcCost, PcSession, PcTrust } from '../../components/lesson-labs/PrefixCachingPolicy.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+const Program = ({
+  file
+}) => <RemoteCodeBlock 
+  source={'/learn-code/prefix-caching/' + file} 
+  language="python" 
+  title={file} 
+  filename={file} 
+/>;
+function PrefixCachingLesson() {
+  return <div className="lesson-flow pc-flow">
+  <section>
+
+    <Prose>
+      {"Two readers ask different questions about the same long document. The model must answer each question, but much of the work of reading the document can be shared. The useful question is precise: which intermediate values depend only on the common beginning, where are those values stored, and who may overwrite them?"}
+    </Prose>
+
+
+    <Prose opening="summary">
+      {""}
+      <strong>
+        {"You will learn to"}
+      </strong>
+      {" trace a new query through retained keys and values; identify a compatible prefix; manage finite shared pages without corrupting active requests; count saved work and physical bytes; reuse a real decoder cache; and interpret a provider's cache lifetime and usage fields."}
+    </Prose>
+
+
+    <Prose opening="prerequisites">
+      {""}
+      <strong>
+        {"Prerequisites:"}
+      </strong>
+      {" "}
+      <a href={"/learn/path/full-curriculum/kv-cache-memory-management?module=large-language-models"}>
+        {"KV-Cache & Memory Management"}
+      </a>
+      {" explains per-layer projected keys and values and absolute positions. "}
+      <a href={"/learn/path/full-curriculum/continuous-batching-pagedattention?module=large-language-models"}>
+        {"Continuous Batching & PagedAttention"}
+      </a>
+      {" introduces request page tables and copy-on-write. We refresh those objects before using them. The queueing comparison later uses only waiting plus service time; its broader context is "}
+      <a href={"/learn/path/full-curriculum/queueing-theory-for-llm-serving?module=large-language-models"}>
+        {"Queueing Theory"}
+      </a>
+      {"."}
+    </Prose>
+
+
+    <Prose opening="route">
+      {""}
+      <strong>
+        {"First pass:"}
+      </strong>
+      {" follow sections 1–9 and the provider comparison in 12, then practice tasks 1–12 and 16. The visible deeper branches 10–11 and 13 examine radix trees, scheduling, money and isolation; the practice entry maps the remaining tasks back to these sections. Complete programs accompany the mechanisms; their saved examples include useful misses and refusals as well as reuse."}
+    </Prose>
 
-const prefixCaching = {
-  title: "Prefix Caching & Prompt Caching",
-  readTime: "44 min",
-  content: () => (
-    <div>
 
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
+    <span 
+      id="1-why-it-exists" 
+      aria-hidden="true" 
+    />
 
-      <Prose>
-        Most production LLM traffic carries redundancy that is invisible from the outside. Every chat turn re-sends the same system prompt and the full conversation history. Every agentic loop re-attaches hundreds or thousands of tokens of tool definitions before appending the latest observation. Every few-shot classification pipeline prepends the same examples to each new input. Every RAG query attaches the same retrieval context. These shared prefixes can constitute sixty, seventy, even ninety percent of the total token budget on a given request — and without any caching mechanism in place, the GPU prefills them from scratch on every single call.
-      </Prose>
+    <H2>
+      {"1. Keep the work both requests need"}
+    </H2>
+
+
+    <Prose>
+      {"Consider token-ID sequences A="}
+      <code>
+        {"[1,2,3,4,5,6,7,8,9,10]"}
+      </code>
+      {" and B="}
+      <code>
+        {"[1,2,3,4,5,6,7,8,11,12]"}
+      </code>
+      {". These are integer token IDs, not an assertion that each written word is one token. Their first eight IDs agree. A's last two IDs and B's last two IDs differ."}
+    </Prose>
 
-      <Prose>
-        A deployment handling ten thousand requests per day with a ten-thousand-token system prompt is recomputing that system prompt ten thousand times. The compute is not cheap. On a production cluster billing at three dollars per million input tokens, that is one hundred million tokens of system prompt per day — three hundred dollars daily from the prefix alone, producing no output that differs from what was produced the first time. The latency is not free either: prefilling ten thousand tokens on a single A100 takes around a second of wall time even at peak throughput. That second is paid on every request, on every agentic step, on every retry.
-      </Prose>
 
-      <Prose>
-        Prefix caching eliminates that redundancy at the serving layer. Instead of recomputing the KV states for a shared prefix, the serving stack identifies that the prefix has already been processed, retrieves the cached KV blocks from memory, and proceeds directly to the tokens that are actually new. The shared work happens once. Every subsequent request that shares the same prefix pays only for its unique tail. Typical savings at scale: 80–95% prefill reduction on agent workflows with long stable context.
-      </Prose>
+    <PcTensors />
 
-      <Prose>
-        The idea surfaced in several systems concurrently in 2023–2024. SGLang introduced RadixAttention in December 2023 (Zheng et al., arXiv:2312.07104), maintaining a radix tree of cached KV blocks so that any tree-structured set of related prompts could share their common ancestors. vLLM shipped Automatic Prefix Caching (APC) in 2024, using hash-based block matching over fixed-size paged blocks. Anthropic launched the prompt caching API in mid-2024, exposing explicit <Code>cache_control</Code> markers so clients could declaratively mark stable segments and receive a billing discount on cache hits. OpenAI activated implicit prefix caching later in 2024, applying it automatically to the first matching prefix of any qualifying request with no annotation required. Google added explicit context caching to the Gemini API in 2024, structured as a named API resource with configurable TTL and per-hour storage billing. By the end of 2024, prefix caching had become a standard feature of every major LLM serving stack and API.
-      </Prose>
 
-      <Callout accent="purple">
-        Prefix caching is among the highest-leverage deployment-time optimizations available: no model changes, no architectural modifications, and often no code changes beyond enabling a flag or adding a marker. For agentic workloads with large stable context, prefill reduction of 80–95% is routine.
-      </Callout>
+    <Prose>
+      {"At one attention layer, the new token at position 8 is projected into a query, a key and a value. Its query compares with keys at positions 0–8, and the resulting weights combine values at those positions. The cache already supplies rows 0–7. Only row 8's new key and value must be written. The next layer repeats the operation with its own projected rows; retaining one layer's values is insufficient for the other layers."}
+    </Prose>
 
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
 
-      <H3>Block hashing: same tokens, same KV</H3>
+    <Prose>
+      {"For batch size one, a common tensor layout is "}
+      <code>
+        {"[1, KV heads, positions, head features]"}
+      </code>
+      {" for each of K and V at each layer. In the drawing, the head and feature axes distinguish one position's vector from a list of tokens. A query is an operation on the vectors; it is not a physical cache page. Grouped-query attention may have more query heads than KV heads, so memory uses the latter count."}
+    </Prose>
 
-      <Prose>
-        The KV computation for any block of tokens is deterministic. Given the same model weights, the same token IDs, and the same preceding context, the key and value tensors for that block are always the same numbers. This is the fact that makes caching correct: caching a block's KV tensors and returning them on a future hit is not an approximation. It is algebraically exact.
-      </Prose>
 
-      <Prose>
-        The serving stack turns this into a hash lookup. When a new request arrives, the engine walks the token sequence in fixed-size block increments — sixteen tokens per block is standard in vLLM. For each block, it computes a hash that covers both the block's own token IDs and the full token sequence that preceded it. The prefix-dependency in the hash is essential: the KV state of block number three is a function of tokens 0 through 63, not just tokens 48 through 63. Two requests that share tokens 0–47 and then diverge will produce the same hash for blocks 0, 1, and 2, and different hashes from block 3 onward. A hash match means the physical KV page is already in GPU memory and can be pointed to by the new request's page table without any recomputation.
-      </Prose>
+    <Prose>
+      {"The cache preserves the document's intermediate representations. It does not preserve a final answer for every possible question. B still computes representations for IDs 11 and 12 and their output logits, so a different question can lead to a different answer."}
+    </Prose>
 
-      <H3>LRU eviction: memory budget forces choices</H3>
 
-      <Prose>
-        Cached KV blocks cannot accumulate indefinitely. GPU memory is finite, new requests constantly need fresh allocations, and a block that has not been referenced in some time is unlikely to be referenced again soon. The serving stack maintains a least-recently-used eviction queue over blocks whose reference count has dropped to zero — a block actively used by an in-flight request cannot be evicted. When memory pressure rises and a new block must be allocated, the LRU policy walks from the cold end of the queue, reclaiming the oldest unreferenced blocks until enough space is free. The quality of the cache is determined by how well the LRU eviction policy keeps hot prefixes warm under a finite memory budget.
-      </Prose>
+    <PcAliasing />
 
-      <H3>Tenant isolation: the hash must include identity</H3>
 
-      <Prose>
-        In a multi-tenant deployment where different users or API keys submit requests to the same serving instance, a naive prefix cache indexed only by token IDs is a security boundary violation. Two different users could send byte-identical system prompts — two separate SaaS products both using the same popular "helpful assistant" boilerplate — and the serving stack would route both to the same physical KV blocks. If the implementation has any path by which one tenant can observe or influence the cache state of another, confidential information from one user's context could be inferred by another. The correct fix is to incorporate tenant identity into the block hash. The hash becomes a function of (tenant_id, prefix_tokens, block_tokens) rather than (prefix_tokens, block_tokens). Identical prompts from different tenants produce different hashes and occupy different physical blocks. The memory savings from hash-matching are preserved within a tenant but never across tenant boundaries.
-      </Prose>
+    <Prose>
+      {"With four positions per page, A's table can be "}
+      <code>
+        {"[p0,p1,p2]"}
+      </code>
+      {" and B's "}
+      <code>
+        {"[p0,p1,p3]"}
+      </code>
+      {". Both tables point to the same stored K/V for IDs 1–8. The last pages hold different tails. This is physical sharing: two references identify one allocation. Copying the first eight rows into a second array also saves computation, but occupies two allocations. We will execute both kinds of reuse and measure the appropriate evidence for each."}
+    </Prose>
 
-      <H3>Two layers: engine caching vs API caching</H3>
 
-      <Prose>
-        The "prefix caching" label covers two distinct mechanisms that live at different layers of the stack. Engine-level prefix caching — vLLM's APC, SGLang's RadixAttention — operates automatically inside the serving engine, invisible to the client. The engine detects prefix overlap between concurrent or sequential requests, shares physical KV blocks, and handles eviction. No API change is required. Any two requests that happen to share a prefix benefit, whether or not the client knows the feature exists.
-      </Prose>
+    <span 
+      id="2-core-intuition" 
+      aria-hidden="true" 
+    />
 
-      <Prose>
-        API-level prompt caching — Anthropic's <Code>cache_control</Code>, OpenAI's automatic caching, Google's context caching — is a billing feature. The client either marks stable segments explicitly (Anthropic, Google) or relies on the provider detecting the prefix automatically (OpenAI). Cache hits are billed at a fraction of the standard input-token rate. The distinction matters operationally: engine-level caching affects latency and throughput at the infrastructure layer; API-level caching affects the cost invoice and requires awareness of the provider's caching semantics to exploit correctly.
-      </Prose>
+    <H2>
+      {"2. Establish what makes reuse valid"}
+    </H2>
 
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
 
-      <H3>Cache hit condition</H3>
+    <Prose>
+      {"Why should A's first eight representations be usable by B? The answer comes from causal dependence, not from the prompts seeming similar."}
+    </Prose>
 
-      <Prose>
-        A prefix cache hit requires byte-identical tokens from position 0 through position <Code>P_cached - 1</Code>, where <Code>P_cached</Code> is a multiple of the block size. Even a single token difference anywhere in the shared prefix breaks all subsequent block hashes, because each hash is computed over the full causal prefix. This is why Anthropic's documentation emphasizes that cached segments must be character-for-character identical across requests — a trailing space, a changed date field, or a dynamic field that was not isolated to the non-cached tail all produce a hash miss for every block that follows the point of divergence.
-      </Prose>
 
-      <H3>Prefill savings</H3>
+    <PcCausal />
 
-      <Prose>
-        For a request of total length <Code>L</Code> tokens where the first <Code>P</Code> tokens are served from cache, the prefill cost is reduced to only the uncached tail:
-      </Prose>
 
-      <MathBlock>{"\\text{prefill\\_cost}_{\\text{cached}} = (L - P) \\times c_{\\text{prefill}}"}</MathBlock>
+    <Prose>
+      {"Begin at position 3. Its input embedding depends on its token and position. In a causal decoder, attention at that position can read only positions 0–3. Suppose both requests have the same embeddings, position convention, attention permissions and parameters over that prefix. The first layer then performs the same real-arithmetic operations on the same inputs for each old row. The same reasoning applies at the next layer: equal previous-layer rows provide equal next-layer inputs. Induction through all layers establishes reusable prefix K/V."}
+    </Prose>
 
-      <MathBlock>{"\\text{savings fraction} = \\frac{P}{L}"}</MathBlock>
 
-      <Prose>
-        For a 10,000-token request with a 9,000-token cached system prompt, <Code>P/L = 0.9</Code>, and ninety percent of the prefill compute and latency is eliminated. The savings are linear in the cached fraction — no diminishing returns. This is what makes prefix caching so effective on agent workloads: the shared prefix (tool definitions, agent instructions, accumulated context) is often 70–90% of the total request length.
-      </Prose>
+    <Prose>
+      {"Changing a later suffix cannot enter an earlier row's causal dependency cone. Changing an earlier token can affect its own row and every later row. In particular, the second block's IDs can be identical while its K/V differ because it attended to a different first block."}
+    </Prose>
 
-      <H3>Hit rate and workload diversity</H3>
 
-      <Prose>
-        The cache hit rate for a prefix of length <Code>P_min</Code> tokens is the fraction of requests that share at least <Code>P_min</Code> identical tokens from the start of their sequence:
-      </Prose>
-
-      <MathBlock>{"P_{\\text{hit}} = \\frac{\\text{# requests sharing} \\geq P_{\\min} \\text{ prefix tokens}}{\\text{total requests}}"}</MathBlock>
-
-      <Prose>
-        This is a workload property, not a system property. A deployment where all requests use the same ten-thousand-token system prompt achieves near-perfect hit rates after the first request, regardless of block size or eviction policy. A deployment where every request has a unique prompt achieves zero hit rate regardless of cache capacity. The decision of whether to invest in prefix caching is a measurement question: what fraction of your traffic shares a substantial prefix?
-      </Prose>
-
-      <H3>Memory cost of prefix caching</H3>
-
-      <Prose>
-        The memory overhead of maintaining a prefix cache is the sum of KV storage for all active cached prefixes. For a set of <Code>K</Code> distinct cached prefixes each of length <Code>P_k</Code> tokens, the memory cost is:
-      </Prose>
-
-      <MathBlock>{"\\text{cache\\_memory} = \\sum_{k=1}^{K} P_k \\times \\text{bytes\\_per\\_token\\_kv}"}</MathBlock>
-
-      <Prose>
-        Where bytes_per_token_kv is the per-token KV cache size as derived in the KV Cache topic: <Code>2 × L × H_kv × d_h × bytes_dtype</Code>. For Llama 3 8B in BF16 (32 layers, 8 KV heads, d_h=128), each token of cached prefix consumes <Code>2 × 32 × 8 × 128 × 2 = 131,072 bytes ≈ 128 KB</Code>. A 10,000-token system prompt cached in GPU memory costs approximately 1.25 GB — a significant but manageable fraction of an A100's 80 GB for a high-reuse prefix.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        All five implementations below were executed and their outputs are embedded verbatim. NumPy is not required for this topic — the primitives are hashing, dictionary lookup, and integer arithmetic.
-      </Prose>
-
-      <H3>4a. Block hashing</H3>
-
-      <Prose>
-        The hash of a block must capture its full causal context, not just the block's own token IDs. If two requests share tokens 0–31 and diverge at token 32, they must produce the same hash for blocks 0 and 1 and different hashes for block 2 onward. SHA-256 over the concatenation of (prefix_tokens, block_tokens) achieves this — any divergence upstream propagates through the hash of every downstream block.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import hashlib
-
-BLOCK_SIZE = 16
-
-def hash_block(prefix_tokens: list, block_tokens: list) -> str:
-    """SHA-256 of (prefix_tokens || block_tokens). Captures full causal identity."""
-    raw = str(prefix_tokens + block_tokens).encode()
-    return hashlib.sha256(raw).hexdigest()
-
-def compute_block_hashes(token_ids: list) -> list[str]:
-    hashes = []
-    for i in range(0, len(token_ids), BLOCK_SIZE):
-        prefix = token_ids[:i]
-        block  = token_ids[i : i + BLOCK_SIZE]
-        if not block:
-            break
-        hashes.append(hash_block(prefix, block))
-    return hashes
-
-# Demo: 32-token system prompt (2 blocks) shared by two requests
-system_prompt = list(range(32))
-req_A = system_prompt + list(range(32, 36))   # 4-token unique tail
-req_B = system_prompt + list(range(36, 41))   # 5-token unique tail
-
-hashes_A = compute_block_hashes(req_A)
-hashes_B = compute_block_hashes(req_B)
-
-# Blocks 0-1 are identical (same 32-token prefix):
-# hashes_A[:2] == hashes_B[:2]  →  True
-# Block 2 (tail) diverges:
-# hashes_A[2] == hashes_B[2]    →  False
-
-# Results verified:
-# Block 0 hash A: be2af200787b297a  (truncated for display)
-# Block 0 hash B: be2af200787b297a  ← same
-# Block 2 (tail) A: 6772f7c15b65b2ab
-# Block 2 (tail) B: 95afea7b1c1272d7  ← different; diverged`}
-      </CodeBlock>
-
-      <Prose>
-        Blocks 0 and 1 are hash-identical because they were computed over the same prefix and the same block tokens. Block 2 differs because the tail tokens differ, and the hash of block 2 incorporates tokens 0–31 (the prefix) plus the new tail tokens — so even a single-token divergence in the tail separates the hashes cleanly.
-      </Prose>
-
-      <H3>4b. Prefix cache table</H3>
-
-      <Prose>
-        The cache table maps block hashes to physical KV block IDs. Each entry tracks a reference count (incremented when a request uses the block, decremented when it finishes) and a last-access timestamp for LRU eviction. Only blocks with reference count zero are eviction candidates — blocks actively in use by in-flight requests cannot be reclaimed.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import time
-
-class PrefixCacheTable:
-    """
-    hash -> {"bid": int, "ref": int, "ts": float}
-    bid  = physical block ID (index into KV pool)
-    ref  = reference count (in-flight requests using this block)
-    ts   = last-access timestamp for LRU eviction
-    """
-    def __init__(self, max_blocks: int):
-        self.max_blocks = max_blocks
-        self.table: dict = {}
-        self.next_bid = 0
-        self.evictions = 0
-
-    def get(self, h: str) -> int | None:
-        """Cache hit: return block ID and update access time. Miss: return None."""
-        if h in self.table:
-            entry = self.table[h]
-            entry["ref"] += 1
-            entry["ts"]   = time.monotonic()
-            return entry["bid"]
-        return None
-
-    def put(self, h: str) -> int:
-        """Allocate a new block for this hash. Evict LRU block if at capacity."""
-        if len(self.table) >= self.max_blocks:
-            self._evict_lru()
-        bid = self.next_bid
-        self.next_bid += 1
-        self.table[h] = {"bid": bid, "ref": 1, "ts": time.monotonic()}
-        return bid
-
-    def release(self, h: str):
-        """Decrement ref count when a request finishes using this block."""
-        if h in self.table:
-            self.table[h]["ref"] = max(0, self.table[h]["ref"] - 1)
-
-    def _evict_lru(self):
-        """Remove the oldest block with ref_count == 0."""
-        candidates = [(v["ts"], k) for k, v in self.table.items() if v["ref"] == 0]
-        if not candidates:
-            raise MemoryError("All blocks in use — cannot evict")
-        _, oldest_hash = min(candidates)
-        del self.table[oldest_hash]
-        self.evictions += 1`}
-      </CodeBlock>
-
-      <H3>4c. Request with cache lookup</H3>
-
-      <Prose>
-        Given a prompt's token IDs, walk its blocks from the start. Each consecutive hash match from the beginning counts as a prefix hit — the KV computation is skipped for that block. The first miss breaks the streak: all subsequent blocks must be computed fresh and inserted into the cache. The prefill savings are the fraction of blocks that were cache hits.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def lookup_request(cache: PrefixCacheTable, token_ids: list) -> dict:
-    """
-    Walk token_ids block by block from the front.
-    Consecutive hits from block 0 = cached prefix = prefill skipped.
-    First miss breaks the streak; all subsequent blocks are computed and cached.
-    Returns: {"total_blocks", "prefix_hits", "prefill_savings"}
-    """
-    hashes = compute_block_hashes(token_ids)
-    prefix_hits = 0
-    hit_streak  = True
-
-    for h in hashes:
-        bid = cache.get(h)
-        if bid is not None and hit_streak:
-            prefix_hits += 1       # skip prefill for this block
-        else:
-            hit_streak = False
-            cache.put(h)           # compute and cache this block
-
-    savings = prefix_hits / len(hashes) if hashes else 0.0
-    return {
-        "total_blocks":   len(hashes),
-        "prefix_hits":    prefix_hits,
-        "prefill_savings": savings,
-    }
-
-# Demo: 64-token system prompt (4 blocks) + varying tails
-cache = PrefixCacheTable(max_blocks=64)
-
-SYSTEM = list(range(64))
-req1 = SYSTEM + list(range(64, 80))   # 5 blocks total
-req2 = SYSTEM + list(range(80, 100))  # 6 blocks total
-
-r1 = lookup_request(cache, req1)
-r2 = lookup_request(cache, req2)
-
-# Request 1 (cold cache):
-#   total_blocks=5, prefix_hits=0, prefill_savings=0.0%
-# Request 2 (warm cache):
-#   total_blocks=6, prefix_hits=4, prefill_savings=66.7%
-#   → 4 of 6 blocks cached; only the 2-block unique tail is prefilled`}
-      </CodeBlock>
-
-      <Prose>
-        The second request skips 4 of its 6 blocks — the entire system prompt — and only prefills the two-block unique tail. With a longer system prompt (say, 32 blocks instead of 4), the savings would be 32/34 = 94%. The savings scale directly with the ratio of shared prefix length to total request length.
-      </Prose>
-
-      <H3>4d. LRU eviction under capacity</H3>
-
-      <Prose>
-        Real deployments have a finite KV cache budget. The LRU eviction policy must keep the most-reused blocks warm while releasing cold blocks to make room for new requests. The simulation below uses a 20-block cache with 40 requests: 80% share a 2-block system prompt, 20% have unique prompts. LRU correctly identifies the shared system prompt as the hot prefix and preserves it across eviction pressure.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import random
-
-random.seed(42)
-
-CACHE_CAPACITY = 20
-cache = PrefixCacheTable(max_blocks=CACHE_CAPACITY)
-
-SHARED_SYS = list(range(32))    # 32-token system prompt = 2 blocks
-N_REQUESTS  = 40
-total_hits = total_blocks = 0
-
-for i in range(N_REQUESTS):
-    if random.random() < 0.80:
-        tokens = SHARED_SYS + [1000 + i*8 + j for j in range(16)]  # 3 blocks
-    else:
-        tokens = [2000 + i*32 + j for j in range(32)]              # 2 blocks (unique)
-
-    r = lookup_request(cache, tokens)
-    total_hits   += r["prefix_hits"]
-    total_blocks += r["total_blocks"]
-
-hit_rate = total_hits / total_blocks
-
-# Results:
-# Requests        : 40
-# Cache capacity  : 20 blocks
-# Total blocks    : 111
-# Prefix hits     : 60
-# Hit rate        : 54.1%
-# LRU evictions   : 31
-# Blocks in cache : 20  (at capacity; hot blocks preserved)
-#
-# The 2-block shared system prompt is referenced ~32 times across 40
-# requests, keeping its LRU timestamp perpetually fresh. Unique-prefix
-# blocks are evicted quickly — they are never accessed again.`}
-      </CodeBlock>
-
-      <H3>4e. Benchmark: with vs without caching on simulated workload</H3>
-
-      <Prose>
-        The benchmark simulates 1,000 requests with a 90% shared-prefix rate, using a 512-token system prompt (32 blocks). All prefill costs are counted in tokens, and the cache is capped at 200 blocks. Output shows block hit rate, prefill reduction, and peak memory use.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import random, time
-
-random.seed(7)
-
-N                 = 1000
-SHARED_SYS_LEN    = 512          # 32 blocks — realistic long system prompt
-SYS_TOKENS        = list(range(SHARED_SYS_LEN))
-CACHE_CAPACITY_BL = 200
-
-cache_bench = PrefixCacheTable(max_blocks=CACHE_CAPACITY_BL)
-
-total_tokens_with    = 0   # prefill tokens paid with cache
-total_tokens_without = 0   # prefill tokens paid without cache
-total_hits   = 0
-total_seen   = 0
-peak_blocks  = 0
-
-for i in range(N):
-    if random.random() < 0.90:
-        tail_len = random.randint(16, 128)
-        tokens   = SYS_TOKENS + [10000 + i*128 + j for j in range(tail_len)]
-    else:
-        unique_len = random.randint(64, 256)
-        tokens     = [20000 + i*256 + j for j in range(unique_len)]
-
-    r = lookup_request(cache_bench, tokens)
-
-    cached_tokens      = r["prefix_hits"] * BLOCK_SIZE
-    total_tokens_with += len(tokens) - cached_tokens
-    total_tokens_without += len(tokens)
-    total_hits += r["prefix_hits"]
-    total_seen += r["total_blocks"]
-    peak_blocks = max(peak_blocks, len(cache_bench.table))
-
-prefill_reduction = 1.0 - total_tokens_with / total_tokens_without
-hit_rate          = total_hits / total_seen
-
-# Results (verified):
-# Total requests         : 1,000
-# System prompt length   : 512 tokens  (32 blocks, 90% shared)
-# Without caching:
-#   Total prefill tokens : 540,402
-# With prefix caching:
-#   Total prefill tokens :  81,650
-#   Block hit rate       :  83.8%
-#   Prefill reduction    :  84.9%
-#   Peak memory (blocks) :  200   (3,200 token slots)
-#   LRU evictions        :  5,361`}
-      </CodeBlock>
-
-      <Prose>
-        An 84.9% prefill reduction on a workload with 90% shared-prefix rate. The gap between the hit rate (83.8%) and the workload's theoretical maximum (90%) reflects LRU eviction forcing occasional re-prefills of the system prompt when the 200-block cache is under pressure from the unique-tail blocks. Increasing the cache budget toward 200 blocks dedicated to the system prompt would push the hit rate to the workload limit.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <H3>vLLM: Automatic Prefix Caching</H3>
-
-      <Prose>
-        vLLM's APC is enabled with a single flag and requires no changes to client code. The block manager computes a SHA-256 hash over (prefix_token_ids, block_token_ids) for each block in the new request's page table. If the hash is already in the cache, the physical KV page is shared by reference-counting; the prefill kernel is skipped for that block. Miss blocks proceed through the normal prefill path and are inserted into the cache after computation.
-      </Prose>
-
-      <CodeBlock language="bash">
-{`# Enable APC at the server level — no client-side changes needed
-python -m vllm.entrypoints.openai.api_server \\
-    --model meta-llama/Llama-3.1-8B-Instruct \\
-    --enable-prefix-caching \\
-    --max-model-len 32768 \\
-    --gpu-memory-utilization 0.90`}
-      </CodeBlock>
-
-      <CodeBlock language="python">
-{`# Programmatic vLLM — enable_prefix_caching is the key flag
-from vllm import LLM, SamplingParams
-
-llm = LLM(
-    model="meta-llama/Llama-3.1-8B-Instruct",
-    enable_prefix_caching=True,
-    max_model_len=32768,
-    gpu_memory_utilization=0.90,
-)
-
-SYSTEM = "You are a helpful assistant with access to the following tools:\n" + "..." * 200
-
-params = SamplingParams(temperature=0.6, max_tokens=512)
-
-# Request 1: full prefill
-out1 = llm.generate([f"{SYSTEM}\nUser: What is 2+2?"], params)
-
-# Request 2: system prompt blocks served from cache — only user message prefilled
-out2 = llm.generate([f"{SYSTEM}\nUser: What is the capital of France?"], params)`}
-      </CodeBlock>
-
-      <H3>Anthropic: explicit cache_control markers</H3>
-
-      <Prose>
-        Anthropic's prompt caching API requires the client to explicitly mark which content blocks should be cached using <Code>cache_control: {"{type: 'ephemeral'}"}</Code>. The default TTL is 5 minutes; a 1-hour TTL is available at a higher write cost. Cache reads are billed at 10% of the standard input-token rate (0.1× base rate), making it highly cost-effective for large stable prefixes. The minimum cacheable length is 1,024 tokens for Claude Sonnet models.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import anthropic
-
-client = anthropic.Anthropic()
-
-SYSTEM_PROMPT   = "You are an expert code reviewer. " + "..." * 500   # >1024 tokens
-TOOL_DEFINITIONS = "[{...tool schemas...}]" * 50                       # more tokens
-
-# Mark stable segments with cache_control: {"type": "ephemeral"}
-# First request: cache write (billed at 1.25× base rate for 5-min TTL)
-response = client.messages.create(
-    model="claude-sonnet-4-5",
-    max_tokens=1024,
-    system=[
-        {
-            "type": "text",
-            "text": SYSTEM_PROMPT,
-            "cache_control": {"type": "ephemeral"},
-        },
-        {
-            "type": "text",
-            "text": TOOL_DEFINITIONS,
-            "cache_control": {"type": "ephemeral"},
-        },
-    ],
-    messages=[{"role": "user", "content": "Review this PR: [diff here]"}],
-)
-
-# Subsequent requests within 5 minutes:
-# cached tokens billed at 0.1× base rate (~10% of standard cost)
-# usage.cache_read_input_tokens shows how many were served from cache
-
-print(response.usage.cache_creation_input_tokens)  # first call: tokens written
-print(response.usage.cache_read_input_tokens)       # subsequent calls: tokens read
-
-# 1-hour TTL for long-running agent sessions:
-# "cache_control": {"type": "ephemeral", "ttl": "1h"}
-# write cost: 2× base rate; read cost: 0.1× base rate`}
-      </CodeBlock>
-
-      <H3>OpenAI: implicit automatic caching</H3>
-
-      <Prose>
-        OpenAI's prompt caching is fully automatic — no annotation is required. For any request to a supported model (GPT-4o, GPT-4o mini, o1, o3) where the first 1,024+ tokens match a recently cached prefix, the cached tokens are billed at 50% of the standard input-token rate. The TTL is a few minutes (exact value undisclosed but observable in latency patterns). Client code requires no modification; the only operational concern is ensuring that stable content stays at the front of the prompt so the automatic prefix detection fires correctly.
-      </Prose>
-
-      <CodeBlock language="python">
-{`from openai import OpenAI
-
-client = OpenAI()
-
-SYSTEM = "You are a helpful assistant specialized in financial analysis. " + "..." * 300
-
-# No annotation needed — caching is automatic for prefixes over 1,024 tokens.
-# First call: full prefill cost (cache write, no charge)
-# Subsequent calls within TTL: cached tokens billed at 50% of base input rate
-
-response = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[
-        {"role": "system", "content": SYSTEM},
-        {"role": "user",   "content": "Summarize Q3 earnings for AAPL."},
-    ],
-)
-
-# Cache stats surface in the usage object:
-usage = response.usage
-cached   = usage.prompt_tokens_details.cached_tokens       # tokens from cache
-uncached = usage.prompt_tokens - cached                    # tokens freshly prefilled
-print(f"Cached: {cached}, Uncached: {uncached}")
-# On a cache hit: cached ≈ len(SYSTEM tokens), billed at 0.5× input rate`}
-      </CodeBlock>
-
-      <H3>Google Gemini: explicit context caching</H3>
-
-      <Prose>
-        Google's context caching is a first-class API resource. You create a named cache object with configurable TTL (default 1 hour, no stated maximum), and subsequent calls reference it by name. Storage is billed per hour. Cached token reads are billed at 10% of the standard input-token rate. The explicit resource model makes it straightforward to manage multiple cached contexts (different system prompts, different document corpora) and update their TTLs independently.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import google.generativeai as genai
-from google.generativeai import caching
-import datetime
-
-genai.configure(api_key="GEMINI_API_KEY")
-
-LARGE_DOCUMENT = "..." * 2000   # content to cache (must be >32,768 tokens for Gemini)
-
-# 1. Create a named cache resource with configurable TTL
-cache = caching.CachedContent.create(
-    model="models/gemini-1.5-flash-001",
-    display_name="my-system-context",
-    system_instruction="You are an expert document analyst.",
-    contents=[{"role": "user", "parts": [{"text": LARGE_DOCUMENT}]}],
-    ttl=datetime.timedelta(hours=2),   # 2-hour TTL; billed per storage-hour
-)
-
-# 2. Reference the cache in subsequent requests
-model = genai.GenerativeModel.from_cached_content(cached_content=cache)
-response = model.generate_content("Summarize the key findings.")
-
-# Cached tokens billed at 10% of standard rate; storage billed per hour.
-# To extend TTL without recreating the cache:
-cache.update(ttl=datetime.timedelta(hours=4))
-
-# Delete when no longer needed to stop storage billing:
-cache.delete()`}
-      </CodeBlock>
-
-      <H3>Billing comparison</H3>
-
-      <CodeBlock>
-{`Provider    | Mechanism   | Cache Write Cost     | Cache Read Cost  | TTL
------------ | ----------- | -------------------- | ---------------- | ------
-Anthropic   | Explicit    | 1.25× base (5 min)   | 0.1× base        | 5 min / 1 hr
-            |             | 2.0× base  (1 hr)    |                  |
-OpenAI      | Implicit    | 1.0× base (no charge)| 0.5× base        | ~5 min
-Google      | Explicit    | 1.0× base + storage  | 0.1× base        | configurable
-            |             | fee per hour         |                  | (default 1 hr)
-vLLM (self) | Automatic   | compute cost         | 0 (already done) | LRU eviction`}
-      </CodeBlock>
-
-      <Prose>
-        The billing asymmetry matters for workload design. Anthropic's model penalizes write cost: the first request in a cache window pays a premium, and subsequent requests within the TTL pay a fraction. OpenAI's model applies no write premium but a smaller read discount (50% vs 90%). Google's model adds a storage-hour cost that makes long TTLs with infrequent reads potentially more expensive than re-prefilling. For high-frequency agent workloads with sub-minute inter-request intervals, all three providers yield substantial savings. For low-frequency requests with hours between calls, only Google's explicit caching (with appropriate TTL tuning) and vLLM's self-hosted APC are economical.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>Prefix cache lookup step by step</H3>
-
-      <StepTrace
-        label="prefix cache lookup — two requests sharing a system prompt"
-        steps={[
-          {
-            label: "step 1 — request A arrives (system prompt + user query A)",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "sys[0-15]",  color: colors.purple },
-                  { label: "sys[16-31]", color: colors.purple },
-                  { label: "sys[32-47]", color: colors.purple },
-                  { label: "sys[48-63]", color: colors.purple },
-                  { label: "user A",     color: colors.gold },
-                ]} label="5 blocks total — 4 system prompt, 1 user tail" />
-              </div>
-            ),
-          },
-          {
-            label: "step 2 — A's blocks hashed; cache miss on all (cold cache)",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "h₀ → pg 10 (new)", color: "#4ade80" },
-                  { label: "h₁ → pg 11 (new)", color: "#4ade80" },
-                  { label: "h₂ → pg 12 (new)", color: "#4ade80" },
-                  { label: "h₃ → pg 13 (new)", color: "#4ade80" },
-                  { label: "hA → pg 14 (new)", color: colors.gold },
-                ]} label="all 5 blocks prefilled and stored; 5 physical pages allocated" />
-              </div>
-            ),
-          },
-          {
-            label: "step 3 — request B arrives (same system prompt, different user query B)",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "h₀ → pg 10 ✓ HIT",  color: "#4ade80" },
-                  { label: "h₁ → pg 11 ✓ HIT",  color: "#4ade80" },
-                  { label: "h₂ → pg 12 ✓ HIT",  color: "#4ade80" },
-                  { label: "h₃ → pg 13 ✓ HIT",  color: "#4ade80" },
-                  { label: "hB → MISS",           color: "#f87171" },
-                ]} label="4 of 5 blocks cached; only user tail B is a miss" />
-              </div>
-            ),
-          },
-          {
-            label: "step 4 — B's page table: 4 shared pages + 1 new page; 80% prefill skipped",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "B page table: [10, 11, 12, 13, 15]", color: "#4ade80" },
-                  { label: "prefill cost: 1 block (tail only)", color: colors.gold },
-                  { label: "skipped: 4 blocks (system prompt)", color: "#555" },
-                ]} label="pages 10-13 are shared; page 15 is B's private tail block" />
-              </div>
-            ),
-          },
-        ]}
-      />
-
-      <H3>Hit rate vs workload diversity</H3>
-
-      <Plot
-        label="block hit rate vs fraction of requests sharing the system prompt — cache capacity 200 blocks"
-        width={520}
-        height={260}
-        xLabel="fraction of requests sharing system prompt"
-        yLabel="block hit rate"
-        series={[
-          {
-            name: "512-token system prompt (32 blocks)",
-            points: [
-              [0.0, 0.00], [0.1, 0.07], [0.2, 0.14], [0.3, 0.20],
-              [0.4, 0.27], [0.5, 0.35], [0.6, 0.44], [0.7, 0.55],
-              [0.8, 0.66], [0.9, 0.84], [1.0, 0.97],
-            ],
-          },
-          {
-            name: "128-token system prompt (8 blocks)",
-            points: [
-              [0.0, 0.00], [0.1, 0.04], [0.2, 0.08], [0.3, 0.13],
-              [0.4, 0.18], [0.5, 0.24], [0.6, 0.32], [0.7, 0.41],
-              [0.8, 0.52], [0.9, 0.65], [1.0, 0.88],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        Hit rate scales roughly linearly with the shared-prefix fraction of the workload, and scales with prefix length — a longer system prompt occupies a larger fraction of each request's total token budget, so the same hit rate translates to a larger absolute prefill reduction. At 90% shared-prefix rate with a 512-token system prompt, the block hit rate of 84% from the section 4e benchmark is consistent with the upper curve at x=0.9.
-      </Prose>
-
-      <H3>Cache memory usage over time under LRU</H3>
-
-      <Heatmap
-        label="KV cache block occupancy over time — 20 blocks, 40 requests (green = block occupied)"
-        matrix={[
-          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-          [0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-          [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
-          [0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
-          [0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
-          [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-          [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-        ]}
-        rowLabels={[
-          "sys blk 0", "sys blk 1",
-          "tail r0", "tail r1", "tail r2", "tail r3", "tail r4",
-          "tail r5", "tail r6", "tail r7", "tail r8", "tail r9",
-          "tail r10","tail r11","tail r12","tail r13","tail r14",
-          "tail r15","tail r16","tail r17",
-        ]}
-        colLabels={[
-          "r0","r2","r4","r6","r8","r10","r12","r14","r16","r18",
-          "r20","r22","r24","r26","r28","r30","r32","r34","r36","r38",
-        ]}
-        cellSize={28}
-        colorScale="green"
-      />
-
-      <Prose>
-        The top two rows — the shared system prompt blocks — stay occupied across all 20 time steps. Their LRU timestamp is updated every time a shared-prefix request arrives, keeping them perpetually warm. The unique tail blocks (rows 2–19) appear briefly when their request is active and then vanish as LRU eviction reclaims them for the next request. This is the ideal behavior: the hot shared prefix consumes two blocks permanently, the cold unique content is recycled rapidly, and no memory is wasted.
-      </Prose>
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <CodeBlock>
-{`Scenario                             | Recommendation                        | Reason
------------------------------------- | ------------------------------------- | ----------------------------------------
-Agent workflows with tool specs      | Always enable (engine + API caching)  | System prompt 50-90% of total tokens;
-  (500+ token system prompts)        |                                       | 80-95% prefill reduction typical
-                                     |                                       |
-Multi-turn chat with fixed persona   | Enable engine-level APC               | Each turn re-sends full history;
-                                     |                                       | prefix grows; savings compound per turn
-                                     |                                       |
-Batch classification (fixed few-shot)| Enable; place few-shot first          | Few-shot examples shared across all
-                                     |                                       | inputs; high hit rate guaranteed
-                                     |                                       |
-RAG with repeated retrieved context  | Enable; isolate retrieved docs to     | Retrieved chunk may repeat across
-                                     | cached segment                        | multiple user turns; mark explicitly
-                                     |                                       |
-API caching (Anthropic/OpenAI/Google)| Use when prefix >2,000 tokens and     | Below 1,024 tokens: providers do not
-                                     | reused more than once per TTL window  | cache; write overhead not recovered
-                                     |                                       |
-Consumer chat (short, unique system  | Lower priority; measure first         | Short system prompts (<100 tokens)
-  prompts, 1 user = 1 history)       |                                       | yield small absolute savings; unique
-                                     |                                       | per-user history has zero reuse
-                                     |                                       |
-Fully dynamic prompts (no stable     | Skip prefix caching; focus on other   | Hit rate will be near zero; cache
-  prefix across any two requests)    | optimizations                         | overhead is pure cost with no benefit
-                                     |                                       |
-Multi-tenant self-hosted deployment  | Enable with tenant-scoped hashing     | Without isolation, cache is a
-                                     | (include tenant_id in block hash)     | cross-tenant security boundary;
-                                     |                                       | see section 9 failure modes`}
-      </CodeBlock>
-
-      <Prose>
-        The decision is almost always to enable engine-level prefix caching — the overhead is negligible (hash computation per block on admission), the downside risk is zero for correctness, and the benefit is large for any workload with prefix reuse. The decision is more nuanced for API-level caching where write cost and TTL mechanics interact with request frequency. Measure hit rates before committing to explicit caching annotations: if the workload does not produce hits, the write premium is pure overhead.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>Hit rate scales with workload concentration</H3>
-
-      <Prose>
-        Cache hit rate is a function of how many distinct system prompts and shared contexts the workload uses, not of the number of requests. A deployment with one system prompt shared across ten thousand concurrent users gets near-perfect hit rates on the first few requests and sustains them indefinitely, regardless of scale. The math is simple: the shared prefix is computed once and the cost is amortized over every subsequent request that hits it. At 90% shared-prefix rate and 84% block hit rate (from the section 4e benchmark), adding more requests increases the benefit proportionally — the savings per request are approximately constant, so total savings grow linearly with traffic.
-      </Prose>
-
-      <H3>Memory overhead scales with number of distinct cached prefixes</H3>
-
-      <Prose>
-        The memory cost of the cache is proportional to the number of distinct active prefixes, not the number of requests. One system prompt shared by a thousand users costs one prefix worth of memory. A thousand users each with unique system prompts cost a thousand prefixes worth of memory — at which point the cache provides no sharing benefit and the memory budget is consumed entirely by non-reusable blocks. The formula from section 3 is the governing constraint: total cache memory = sum of all active prefix lengths × per-token KV size. For Llama 3 8B in BF16 at 32k context, the per-token KV size is 128 KB, so caching 100 distinct 10,000-token system prompts requires approximately 125 GB — more than a single H100 can hold after model weights.
-      </Prose>
-
-      <H3>Tenant isolation multiplies the memory requirement</H3>
-
-      <Prose>
-        Correct multi-tenant isolation requires separate cache namespaces per tenant. If two tenants send the same system prompt, they cannot share physical KV blocks — the tenant identity must be incorporated into the block hash to prevent cross-tenant information leakage. This means the memory benefit of shared prefixes is limited to within-tenant reuse. A deployment with 1,000 tenants each using the same 10,000-token system prompt requires 1,000 separate cached copies of that prefix if strict isolation is enforced, not one. The memory cost scales with the tenant count, not the number of requests. This is the fundamental tension in multi-tenant prefix caching: isolation is correct but expensive. At scale, the solution is either accepting less isolation (risky) or investing in larger KV cache pools.
-      </Prose>
-
-      <H3>Savings are capped by the shared-prefix fraction</H3>
-
-      <Prose>
-        Prefix caching cannot reduce prefill cost below the cost of the unique tail. If a request is 10,000 tokens total with a 9,000-token shared prefix and a 1,000-token unique tail, caching reduces prefill from 10,000 tokens to 1,000 tokens — a 90% reduction. But that 1,000-token unique tail is the hard floor. No amount of cache investment eliminates it. For workloads where the shared prefix is already small relative to the unique content — document-per-request pipelines, highly personalized per-user contexts — the absolute savings are modest regardless of hit rate.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>Hash collisions</H3>
-
-      <Prose>
-        SHA-256 has a collision probability of approximately 2⁻²⁵⁶ for any two distinct inputs. For any practical deployment, collisions are astronomically unlikely. But "astronomically unlikely" is not zero, and the consequence of a hash collision is catastrophic: the serving stack would return KV tensors computed from a different token sequence than the one being processed. The model would attend to the wrong context and produce incorrect outputs silently — no error, no warning, plausible-looking but wrong generations. This is why production implementations use SHA-256 rather than faster 64-bit hashes: the extra bits eliminate collision risk entirely for any realistic deployment scale. Do not substitute a faster, shorter hash without understanding the collision implications.
-      </Prose>
-
-      <H3>Cache staleness after model update</H3>
-
-      <Prose>
-        KV cache blocks are computed under specific model weights. If the model is updated — a new checkpoint, a LoRA adapter change, a quantization configuration change, or even a different precision for the attention kernels — all cached blocks are invalid. The KV tensors stored in the cache were produced by different computations than what the new model would produce for the same token IDs. If the serving stack does not invalidate the prefix cache on model updates, requests will receive KV states from the old model blended with attention outputs from the new model. The outputs will be subtly wrong in ways that are very difficult to detect in production, because the generations remain fluent and plausible. Model update procedures must include explicit cache invalidation or a fresh cache namespace.
-      </Prose>
-
-      <H3>Cache fragmentation with many small prefixes</H3>
-
-      <Prose>
-        When a deployment serves many tenants or applications each with short, distinct system prompts (fewer than one full block — 16 tokens), the prefix cache fills with blocks that each get referenced only once. The LRU eviction policy evicts these quickly, but not before they consume memory that could have served reusable long prefixes. The symptom is a high block allocation rate and low sustained hit rate even when the workload nominally has prefix structure. The fix is to measure the distribution of prefix lengths across your traffic before enabling the cache: if most system prompts are shorter than two blocks (32 tokens), the cache savings will be marginal and may not justify the memory allocation.
-      </Prose>
-
-      <H3>Tenant-leak via shared block hashes</H3>
-
-      <Prose>
-        This is the critical security failure mode. If a self-hosted serving stack computes block hashes over (prefix_tokens, block_tokens) without including tenant identity, two tenants sending byte-identical prompts will produce identical hashes and share the same physical KV blocks. This is not just a memory optimization question — it is a data isolation breach. An adversarial tenant who knows the system prompt of another tenant can construct a matching request, hit the shared cache block, and learn (via timing or metadata) that this particular prompt was processed recently by another user. In a regulated environment (healthcare, finance, legal), this constitutes unauthorized information access even if the cached KV vectors themselves cannot be read directly. Always incorporate tenant identity into the hash when operating a multi-tenant service. This is not optional.
-      </Prose>
-
-      <H3>Over-eager eviction dropping productive prefixes</H3>
-
-      <Prose>
-        LRU eviction under memory pressure can evict the shared system prompt block if several unique-content requests arrive in rapid succession. The system prompt block's LRU timestamp is stale relative to the freshly allocated unique-tail blocks. The next shared-prefix request then experiences a cold miss and pays full prefill cost, which under a busy workload can cascade: the re-prefill consumes compute, delays responses, and the newly-populated system prompt block may immediately be evicted again under continued pressure. The fix is priority-aware eviction: distinguish high-reuse prefix blocks (those with high historical hit count) from low-reuse tail blocks, and apply a "sticky" policy that requires more pressure to evict the former. vLLM's APC in recent versions supports this through reference-count-weighted eviction scoring.
-      </Prose>
-
-      <H3>Per-token billing discrepancy on cache boundary tokens</H3>
-
-      <Prose>
-        Providers require that cached segments end on a block boundary aligned to their minimum cacheable unit. Anthropic's minimum cacheable segment is 1,024 tokens (for Sonnet); tokens before the cache marker but below that threshold are not cached and are billed at the standard rate regardless of the cache_control annotation. If a developer annotates a 900-token segment as cacheable, it is silently ignored and charged at full rate. The symptom is unexpectedly high bills despite cache_control annotations being present. The fix is to measure <Code>usage.cache_read_input_tokens</Code> in the API response and verify it is nonzero; a persistent zero means the cached segment is not meeting the minimum threshold or the prompt is changing between requests.
-      </Prose>
-
-      <H3>Cache-awareness interfering with fair-share scheduling</H3>
-
-      <Prose>
-        Some serving stacks implement cache-aware request routing: incoming requests are directed to the GPU or replica whose KV cache already holds the matching prefix, to maximize hit rate. This is correct behavior but it can break fair-share scheduling guarantees. If all requests for one tenant happen to arrive on the same physical node because that node holds their cached prefix, that node may be overloaded while others sit idle. The cache-aware routing optimizer locally maximizes hit rate but globally undermines load balancing. Production deployments need to bound the cache-affinity routing preference so it degrades gracefully toward load-balanced routing when the affinity target node is saturated.
-      </Prose>
-
-      <Callout accent="red">
-        Silent correctness failures are more dangerous than obvious ones. Cache staleness after model update, hash collision (however unlikely), and tenant identity omission from the hash all produce plausible-looking but wrong generations — they will pass smoke tests and look fine in demos. Add explicit cache validation (timestamp, model version tag, tenant namespace) to your cache table entries.
-      </Callout>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        Verified against public sources in April 2026.
-      </Prose>
-
-      <CodeBlock>
-{`1. Zheng, L., Yin, L., Xie, Z., Huang, J., Sun, C., Yu, C. H., ... & Gonzalez, J. E.
-   "SGLang: Efficient Execution of Structured Language Model Programs."
-   arXiv:2312.07104 (2023). Published NeurIPS 2024.
-   Introduces RadixAttention — a radix-tree prefix cache enabling automatic KV
-   reuse across multiple generation calls within structured LLM programs. Enables
-   partial prefix matching: two calls sharing 80% of a prompt share 80% of KV
-   blocks. Demonstrates 1.1–2.2× throughput improvement over vLLM on prefix-heavy
-   workloads. The reference for tree-structured prefix caching.
-
-2. Kwon, W., Li, Z., Zhuang, S., Sheng, Y., Zheng, L., Yu, C. H., ... & Stoica, I.
-   "Efficient Memory Management for Large Language Model Serving with PagedAttention."
-   arXiv:2309.06180 (2023). Published SOSP 2023.
-   Introduces vLLM and PagedAttention. Block-based KV memory management makes
-   prefix sharing physically possible by allowing multiple sequences to point their
-   page tables at the same physical KV blocks. Hash-based prefix detection (each
-   block hashed over its full causal prefix) is the mechanism vLLM's Automatic
-   Prefix Caching builds on.
-
-3. Anthropic. "Prompt Caching." Claude API Documentation. (2024–2026).
-   https://platform.claude.com/docs/en/build-with-claude/prompt-caching
-   Introduces the cache_control: {"type": "ephemeral"} annotation. 5-minute TTL
-   at 1.25× write cost, 1-hour TTL at 2× write cost, reads at 0.1× base rate.
-   Minimum cacheable length: 1,024 tokens (Sonnet), 4,096 tokens (Opus/Haiku).
-   First provider to offer explicit API-level prompt caching as a GA feature.
-
-4. OpenAI. "Prompt Caching in the API." OpenAI Blog. (2024).
-   https://openai.com/index/api-prompt-caching/
-   Introduces automatic implicit prompt caching for GPT-4o, GPT-4o mini, o1,
-   and o3 models. No annotation required; cache activates automatically for prefixes
-   over 1,024 tokens. Cache read cost: 50% of standard input-token rate. TTL
-   undisclosed but observable as ~5 minutes. Reports up to 80% latency reduction
-   on time-to-first-token for long cached prefixes.
-
-5. Google. "Context Caching." Gemini API Documentation. (2024–2026).
-   https://ai.google.dev/gemini-api/docs/caching
-   Introduces context caching as a named API resource with configurable TTL
-   (default 1 hour). Cache reads billed at 10% of standard rate; storage billed
-   per hour. Enables caching of large documents and system contexts by reference ID.
-   Minimum input for Gemini 1.5 Flash: 32,768 tokens. Gemini 2.5 models also
-   support implicit automatic caching at 10% read cost.`}
-      </CodeBlock>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1: Compute prefill savings for a 10K-token prompt with 9K cached prefix</H3>
-
-      <Prose>
-        A production agent sends a request consisting of a 9,000-token system prompt (tool definitions, instructions, few-shot examples) followed by a 1,000-token user message and current context. The serving stack has the system prompt's KV blocks cached from the previous request, which was sent 90 seconds ago. Compute: (a) the prefill savings fraction, (b) the absolute token count that must be prefilled, (c) whether the cache would hit for Anthropic's ephemeral tier (5-minute TTL) at this inter-request interval. Now change the scenario: the user modifies one word in the instructions at position token 4,500. How many blocks are still cacheable, assuming a block size of 16 tokens?
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Expected workings:
-# (a) savings = P/L = 9000/10000 = 90%
-# (b) prefill tokens = 10000 - 9000 = 1000
-# (c) 90 seconds < 300 seconds (5-min TTL): YES, cache would hit
-#
-# With modification at token 4,500 (block index 4500//16 = 281):
-# Blocks 0-280 are still byte-identical → 281 blocks cacheable
-# Block 281 onward: all diverge (hash includes prefix)
-# Cacheable tokens = 281 * 16 = 4,496
-# Savings = 4496 / 10000 = 44.96% (still meaningful, but far less than unmodified)`}
-      </CodeBlock></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2: Design a cache-aware rate limiter</H3>
-
-      <Prose>
-        You operate a multi-tenant inference API with prefix caching enabled. Each tenant is allocated a rate limit of 1,000,000 tokens per minute. With prefix caching, a tenant's effective token throughput is higher than their raw request count would suggest — cached tokens are not prefilled, so the GPU can process more requests in the same time. Design a rate limiter that: (a) counts cache-hit tokens at a discounted rate (reflecting their lower GPU cost), (b) still enforces a per-tenant memory cap on cached prefix blocks to prevent one tenant from monopolizing the cache, and (c) degrades gracefully when a tenant approaches their memory cap (evict cold blocks within the tenant's namespace before evicting hot ones).
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3: When does hash-based caching miss on semantically identical but byte-different prefixes?</H3>
-
-      <Prose>
-        Identify four concrete scenarios where two prompts are semantically equivalent but byte-different, causing the prefix cache to miss even though the KV outputs would be identical. For each, explain whether the miss is avoidable and what the fix would require.
-      </Prose>
-
-      <CodeBlock>
-{`# Expected answers:
-# 1. Unicode normalization: "café" (NFC) vs "cafe\u0301" (NFD) — byte-different,
-#    semantically identical. Fix: normalize all input to NFC before hashing.
-#    Avoidable with preprocessing.
-#
-# 2. Whitespace variants: "Hello  World" (2 spaces) vs "Hello World" (1 space).
-#    Avoidable with whitespace normalization, but changes tokenization.
-#
-# 3. Timestamp in system prompt: "Today is 2026-04-20" vs "Today is 2026-04-21".
-#    NOT avoidable without removing the timestamp from the cached segment.
-#    Fix: move dynamic content to the non-cached tail.
-#
-# 4. Encoding-identical strings with different BOM or line endings (CRLF vs LF).
-#    Avoidable with normalization at the API boundary.
-#    Note: none of these are addressable by improving the hash function —
-#    the hash is correct; the issue is upstream byte representation.`}
-      </CodeBlock></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4: Estimate memory for caching the top-100 most-used system prompts</H3>
-
-      <Prose>
-        Your platform serves 500 distinct system prompts, of which the top 100 account for 95% of traffic. The average length of a top-100 system prompt is 8,000 tokens. You are deploying Llama 3 8B (32 layers, 8 KV heads, head dimension 128) in BF16 on an A100 80GB. The model weights consume approximately 16 GB. Compute: (a) the KV cache memory required to permanently hold the top-100 system prompts, (b) how much of the A100's remaining memory this occupies, and (c) whether it is feasible to hold all top-100 prefixes simultaneously alongside a 32-concurrent-session workload at average context 4,096 tokens.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Expected workings:
-# per-token KV size (Llama 3 8B, BF16):
-#   = 2 * 32 * 8 * 128 * 2 = 131,072 bytes = 128 KB / token
-#
-# (a) top-100 prefix memory:
-#   = 100 * 8000 tokens * 128 KB/token
-#   = 100 * 8000 * 131072 bytes
-#   = 104,857,600,000 bytes ≈ 97.7 GB  ← exceeds A100 capacity!
-#
-# Conclusion: caching all top-100 prefixes simultaneously requires ~98 GB,
-# which exceeds the A100 80 GB. Options:
-#   - Use FP8 cache (halves to ~49 GB) → fits after model weights (80-16=64 GB avail)
-#   - Reduce top-N to top-50: ~49 GB at BF16, feasible
-#   - Use CPU offload for cold cached prefixes with async GPU fetch
-#
-# (c) concurrent session memory at 4k context, BF16:
-#   = 32 * 4096 * 128 KB = 16,777,216,000 bytes ≈ 15.6 GB
-# Combined (FP8 prefixes + BF16 sessions): ~49 + 15.6 = 64.6 GB < 64 GB avail → tight`}
-      </CodeBlock></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5: Predict impact of prefix caching on a workload with zero prefix reuse</H3>
-
-      <Prose>
-        A content generation pipeline produces unique, fully personalized documents. Each request consists of a 500-token system prompt that is unique per user (includes their name, preferences, account data), followed by a 200-token topic specification. No two requests share any prefix beyond the first token (a standard role marker). Predict: (a) the expected block hit rate, (b) the prefill savings, (c) the net impact of enabling prefix caching on this workload, and (d) what optimizations would actually help this workload if prefix caching does not.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Expected answers:
-# (a) Hit rate ≈ 0%. The only shared token is the role marker at position 0,
-#     which is less than one block. Block hash requires a full 16-token block to match.
-#     Effective hit rate = 0 blocks / (700/16 = 44 blocks per request) ≈ 0%.
-#
-# (b) Prefill savings = 0%. All 700 tokens must be prefilled on every request.
-#
-# (c) Net impact of enabling APC on this workload:
-#     - Overhead: SHA-256 hash computed for every block on every request (44 hashes).
-#     - Memory: cache fills with unreusable blocks; LRU evicts them immediately.
-#     - Benefit: zero.
-#     APC adds measurable CPU overhead with no return. Consider disabling for this
-#     tenant or workload class if granular control is available.
-#
-# (d) Optimizations that DO help zero-reuse workloads:
-#     - Reduce system prompt length (fewer unique tokens to prefill)
-#     - Chunked prefill (reduce TTFT by parallelizing prefill across iterations)
-#     - Speculative decoding (reduce decode latency)
-#     - KV cache quantization (increase concurrent session count)
-#     - Move shared boilerplate to the front and user-specific data to a
-#       non-cached tail (restructure the prompt so shared portions CAN be cached)`}
-      </CodeBlock></div></section>
+    <PcEdit />
+
+
+    <Prose>
+      {"Change B's zero-based index 5 from 6 to 20. Positions 0–4 remain the same causal prefix, but positions 5 onward need new computation. With page size 4, only the first complete page remains eligible. Changing an index in B's last two tokens instead preserves the first eight positions. Restore the original ID to recover the original compatibility boundary."}
+    </Prose>
+
+
+    <PcNamespace />
+
+
+    <Prose>
+      {"A cache entry therefore needs more than text. Its "}
+      <strong>
+        {"compatibility namespace"}
+      </strong>
+      {" identifies the model revision, adapter, tokenization/input convention, positional treatment, attention-mask policy and any other effective inputs, including multimodal state when present. A "}
+      <strong>
+        {"trust group"}
+      </strong>
+      {" determines which callers may share even numerically compatible content. An adapter mismatch can invalidate numbers; a trust mismatch can disallow an otherwise correct computation. Those are different reasons for a miss."}
+    </Prose>
+
+
+    <Prose>
+      {"The causal argument concerns equivalent mathematical computations. Floating-point kernels can evaluate reductions in different orders when a prefix is processed separately. Later comparisons use a declared tolerance and separately report top-1 agreement. Evaluation mode fixes inference behavior; training dropout, changed weights or a mutable prefix invalidate this simple reuse contract."}
+    </Prose>
+
+
+    <Prose>
+      {"Put stable instructions and genuinely shared material before changing questions when that ordering suits the task. Reordering or normalizing text solely to obtain a cache hit changes the model input. Similar meaning, a hash of displayed text, or two separately decoded strings cannot substitute for comparing the actual effective token prefix."}
+    </Prose>
+
+
+    <H2>
+      {"3. Find the reusable boundary"}
+    </H2>
+
+
+    <Prose>
+      {"Even a compatible prefix is useful only while its stored blocks are resident. First determine which complete blocks are eligible; then find how many consecutive eligible blocks are still present."}
+    </Prose>
+
+
+    <PcBoundary />
+
+
+    <Prose>
+      {"For a ten-token prompt with four-token pages, at most eight rows fit complete reusable blocks. For an eight-token prompt, it may seem that both full blocks can be reused. There is a subtlety: K/V stores keys and values, not the final hidden row's output logits. An engine that retains only full KV blocks and must compute at least one prompt query leaves the final block for recomputation. It can reuse four rows at length 8, then eight rows at length 9."}
+    </Prose>
+
+
+    <Prose>
+      {"Let prompt length be "}
+      <InlineMath>
+        {"L"}
+      </InlineMath>
+      {", page size "}
+      <InlineMath>
+        {"b"}
+      </InlineMath>
+      {", and let this engine require a final query. Its maximum reusable row count is"}
+    </Prose>
+
+
+    <div className="pc-equation">
+
+      <MathBlock>
+        {"P_{\\max}=b\\left\\lfloor\\frac{\\max(0,L-1)}b\\right\\rfloor."}
+      </MathBlock>
 
     </div>
-  ),
-};
 
-export default prefixCaching;
+
+    <Prose>
+      {"At page size 4, lengths 1, 4, 7, 8, 9, 10 have limits 0, 0, 4, 4, 8, 8. A system that also saves compatible final logits can use a different boundary. The formula describes the stated KV-only policy, not a theorem that every engine must recompute an entire final block."}
+    </Prose>
+
+
+    <PcResident />
+
+
+    <Prose>
+      {"Lookup starts at the first block and stops at the first miss. If block 0 is resident, block 1 is absent and block 2 is resident, the reusable prefix ends at block 0. A later cached block is not a replacement for the missing earlier rows that suffix attention must read. Residency is a fact about current storage, whereas identity is a fact about compatible content."}
+    </Prose>
+
+
+    <H3>
+      {"Prepare the runnable examples"}
+    </H3>
+
+
+    <Prose>
+      {"Download the complete example bundle and extract its files into one directory. Use Python 3.12. The finite programs use the standard library; the decoder and allocator examples require the pinned packages in "}
+      <code>
+        {"requirements.txt"}
+      </code>
+      {"."}
+    </Prose>
+
+
+    <CodeBlock language={"sh"}>
+      {"python -m venv .venv\n# Windows PowerShell: .venv/Scripts/Activate.ps1\n# macOS/Linux: source .venv/bin/activate\npython -m pip install -r requirements.txt\npython prefix_study.py --stage finite --output results\npython prefix_study.py --stage tiny --output results"}
+    </CodeBlock>
+
+
+    <Prose>
+      {"The pinned local environment uses NumPy 2.3.5, Torch 2.14.0 and Transformers 5.19.0, with the exact tokenizer and model-file dependencies listed in the bundle. "}
+      <code>
+        {"README.md"}
+      </code>
+      {" gives the full sequence and separate optional API setup. Saved JSON observations let you inspect the supplied results without running a model. New runs create an exclusive stage directory so a previous result is not silently replaced; use a new output directory for your own changed experiment."}
+    </Prose>
+
+
+    <Prose>
+
+      <a 
+        href="/learn-code/prefix-caching/prefix-caching.zip" 
+        download
+      >Download all programs and saved JSON results</a>
+      {" · "}
+      <a href="/learn-code/prefix-caching/README.md">Setup and file guide</a>
+      {" · "}
+      <a href="/learn-code/prefix-caching/SAVED-RESULTS.md">Saved-result scope</a>
+
+    </Prose>
+
+    <Program file="prefix_identity.py" />
+
+
+    <Prose>
+      {""}
+      <code>
+        {"eligible_rows"}
+      </code>
+      {" implements the final-query limit. "}
+      <code>
+        {"block_identities"}
+      </code>
+      {" first validates uint32 token IDs, serializes the namespace with a stable key order, and hashes a length-delimited parent digest followed by the current block's explicit little-endian integers. Its parent chain carries earlier context into each later lookup key. Each "}
+      <code>
+        {"Identity"}
+      </code>
+      {" also retains the exact namespace and complete prefix tuple; "}
+      <code>
+        {"ExactIndex.find"}
+      </code>
+      {" checks that equality after selecting a digest bucket. Section 7 explains why both layers matter."}
+    </Prose>
+
+
+    <Prose>
+      {"Try the page-size boundary independently of the model: "}
+      <code>
+        {"eligible_rows(8,4)"}
+      </code>
+      {" gives 4, while "}
+      <code>
+        {"eligible_rows(9,4)"}
+      </code>
+      {" gives 8. The program's complete finite checks include the supplied boundary cases and a deliberately colliding digest. All new cache code here is batch-independent bookkeeping; it does not normalize token IDs or alter model inputs to manufacture a hit."}
+    </Prose>
+
+
+    <span 
+      id="3-mathematical-foundation" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"4. Count the work that disappears"}
+    </H2>
+
+
+    <Prose>
+      {"Reusing eight rows out of ten avoids eight new query-row computations. It does not remove eight tenths of everything the request does. Draw the attention pairs before converting that row count into a performance claim."}
+    </Prose>
+
+
+    <PcPairs />
+
+
+    <Prose>
+      {"Without reuse, query 0 reads one key, query 1 two, and query 9 ten. The ten rows contain 55 causal query/key pairs. Reusing positions 0–7 avoids their triangle of 36 pairs. Query 8 still reads nine keys and query 9 ten: 19 pairs remain. The live rectangle has two new queries reading eight old keys, or 16 pairs; the new tail's own triangle contributes 3."}
+    </Prose>
+
+
+    <Prose>
+      {"For "}
+      <InlineMath>
+        {"T(n)=n(n+1)/2"}
+      </InlineMath>
+      {", retained prefix length "}
+      <InlineMath>
+        {"P"}
+      </InlineMath>
+      {" and tail length "}
+      <InlineMath>
+        {"R=L-P"}
+      </InlineMath>
+      {","}
+    </Prose>
+
+
+    <div className="pc-equation">
+
+      <MathBlock>
+        {"\\text{avoided pairs}=T(P),\\qquad\n\\text{remaining pairs}=T(L)-T(P)=RP+\\frac{R(R+1)}2."}
+      </MathBlock>
+
+    </div>
+
+
+    <Prose>
+      {"The rectangle "}
+      <InlineMath>
+        {"RP"}
+      </InlineMath>
+      {" explains an apparent puzzle: a cache hit saves recomputation while the suffix still reads old K/V. The suffix query projections, attention products, feed-forward work and output calculation remain. At "}
+      <InlineMath>
+        {"P=0"}
+      </InlineMath>
+      {", nothing is reused and all 55 pairs remain. At "}
+      <InlineMath>
+        {"L=10,P=9"}
+      </InlineMath>
+      {", one query and ten pairs remain."}
+    </Prose>
+
+
+    <PcUnits />
+
+
+    <Prose>
+      {"Eight avoided query rows are 80% of this prompt's rows; 36 avoided pairs are about 65.45% of its causal pairs. Neither percentage is elapsed-time reduction. Actual kernels batch operations, move memory, launch work and interact with scheduling. Reusing one prefix for several later requests also requires computing the shared prefix once in the first place."}
+    </Prose>
+
+
+    <Program file="prefix_work.py" />
+
+
+    <Prose>
+      {""}
+      <code>
+        {"work"}
+      </code>
+      {" returns the row count, full and avoided triangles, the still-live prefix rectangle and the suffix triangle separately. "}
+      <code>
+        {"verify"}
+      </code>
+      {" compares its closed form with a direct sum of the surviving query lengths for 136 small cases. Its saved anchor is 10/8→2 new rows, 16 old-prefix reads, 3 tail pairs and 19 total remaining pairs. This gives an exact finite accounting reference for the later cache traces, without a timing curve disguised as a measurement."}
+    </Prose>
+
+
+    <span 
+      id="4-from-scratch-implementation" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"5. Give every physical page an owner"}
+    </H2>
+
+
+    <Prose>
+      {"Identity and eligibility say what could be reused. A finite store must also know who is using each allocation, which bytes have been computed, and what can be discarded."}
+    </Prose>
+
+
+    <PcStates />
+
+
+    <Prose>
+      {"A free page has no owner or reusable content. Admission reserves a page for a request before computation has finished. Successful computation fills it; a full page can then be indexed as complete. An active page has at least one owner and cannot be evicted. When its last owner releases it, a complete page becomes retained inactive: it still occupies memory and remains reusable, but is eligible for eviction. An incomplete tail in this implementation returns to the free pool after its last owner releases it."}
+    </Prose>
+
+
+    <Prose>
+      {"The distinction prevents two common errors. Reserving storage does not mean its K/V values are ready for reuse. Finishing or cancelling a request does not free storage unless the release operation actually runs."}
+    </Prose>
+
+
+    <PcOwners />
+
+
+    <Prose>
+      {"After A completes, p0 and p1 each have owner A. B's compatible lookup returns those pages without changing them. Admission acquires each once, producing owners {A,B}. A releases and the count drops to 1; B may still read. B releases and the count drops to 0; the full pages enter the inactive queue. A new compatible request can remove them from that queue and acquire them again. Releasing twice is an error, not a way to create capacity."}
+    </Prose>
+
+
+    <PcAdmission />
+
+
+    <Prose>
+      {"Admission must be planned before mutation. Suppose a request can reuse one retained page and needs two new pages. It must exclude the matched page from the eviction candidates. If only one unprotected page can be reclaimed, admission fails without altering ownership, contents, index or queue order. Otherwise a rejected request could damage the very cache state it was trying to reuse."}
+    </Prose>
+
+
+    <Program file="prefix_store.py" />
+
+
+    <Prose>
+      {"The store owns a fixed list of "}
+      <code>
+        {"Page"}
+      </code>
+      {" objects, a free list, an "}
+      <code>
+        {"ExactIndex"}
+      </code>
+      {", a request table and an "}
+      <code>
+        {"OrderedDict"}
+      </code>
+      {" of inactive pages. "}
+      <code>
+        {"match"}
+      </code>
+      {" is read-only and stops at the first miss. "}
+      <code>
+        {"admit"}
+      </code>
+      {" determines total pages, subtracts matched pages and asks "}
+      <code>
+        {"_victims"}
+      </code>
+      {" to plan the full deficit while protecting those hits. Only after that succeeds does it claim shared pages, reclaim victims and reserve new pages. No active page can be a victim."}
+    </Prose>
+
+
+    <Prose>
+      {""}
+      <code>
+        {"complete"}
+      </code>
+      {" writes the finite payload identity and registers only complete blocks after computation. This example stores token tuples as stand-ins for actual K/V; section 9 uses real tensors. A block rediscovered after a miss can be deduplicated onto an existing exact entry. That explicit choice differs from engines whose append-only tables permit duplicate physical copies. "}
+      <code>
+        {"release"}
+      </code>
+      {" removes one request's ownership and either retains a complete page or reclaims an incomplete one. "}
+      <code>
+        {"generation"}
+      </code>
+      {" increases when a physical slot receives a new allocation, so p0 reused later must not be mistaken for p0's old content."}
+    </Prose>
+
+
+    <Prose>
+      {"The saved A/B example fills a four-page pool: tables "}
+      <code>
+        {"[0,1,2]"}
+      </code>
+      {" and "}
+      <code>
+        {"[0,1,3]"}
+      </code>
+      {", with two owners on pages 0 and 1. An unrelated request is denied while all four pages are active; the snapshot stays identical. After both releases, pages 2 and 3 are free and pages 0 and 1 are retained. The invariant checks ensure each physical page is in exactly one of free, retained inactive or active ownership."}
+    </Prose>
+
+
+    <Prose>
+      {"This is a single-threaded teaching allocator with atomic admission at function boundaries. A concurrent engine also needs synchronization around computation completion and reclamation. "}
+      <code>
+        {"OrderedDict"}
+      </code>
+      {" updates are constant-time, but candidate selection and explicit whole-prefix equality cost more; the source names those costs rather than claiming a production-optimal allocator."}
+    </Prose>
+
+
+    <H2>
+      {"6. Count unique storage and protect branches"}
+    </H2>
+
+
+    <Prose>
+      {"Six logical page references do not necessarily occupy six physical pages. The address graph gives the correct count."}
+    </Prose>
+
+
+    <PcUnion />
+
+
+    <Prose>
+      {"A="}
+      <code>
+        {"[p0,p1,p2]"}
+      </code>
+      {" and B="}
+      <code>
+        {"[p0,p1,p3]"}
+      </code>
+      {" contain six references but the union is {p0,p1,p2,p3}: four pages. If a full page across all layers contains "}
+      <InlineMath>
+        {"M"}
+      </InlineMath>
+      {" bytes, these allocations occupy "}
+      <InlineMath>
+        {"4M"}
+      </InlineMath>
+      {", whereas multiplying both table lengths yields "}
+      <InlineMath>
+        {"6M"}
+      </InlineMath>
+      {". A retained inactive page also occupies physical bytes even when no live request table points to it. Metadata and unused tail slots need separate accounting."}
+    </Prose>
+
+
+    <Prose>
+      {"For "}
+      <InlineMath>
+        {"N"}
+      </InlineMath>
+      {" layers, "}
+      <InlineMath>
+        {"H_{KV}"}
+      </InlineMath>
+      {" heads, head width "}
+      <InlineMath>
+        {"d"}
+      </InlineMath>
+      {", page size "}
+      <InlineMath>
+        {"b"}
+      </InlineMath>
+      {", and "}
+      <InlineMath>
+        {"s"}
+      </InlineMath>
+      {" bytes per scalar, a full all-layer K/V block has"}
+    </Prose>
+
+
+    <div className="pc-equation">
+
+      <MathBlock>
+        {"M=2NH_{KV}bds."}
+      </MathBlock>
+
+    </div>
+
+
+    <Prose>
+      {"The 2 counts K and V. Our native fixture later uses two layers, two KV heads, four positions, four features and FP32 scalars: 512 bytes per all-layer block. Four occupied blocks use 2048 bytes of payload; six independently allocated logical blocks would use 3072. Its allocator additionally reserves two trash sectors, so the actual backing allocation is 3072 bytes even when the ordinary data blocks total 2048. Backing and occupied payload answer different questions."}
+    </Prose>
+
+
+    <PcFork />
+
+
+    <Prose>
+      {"An immutable full block is safe to share. A partial tail is about to change. If two branches share "}
+      <code>
+        {"[5,6,7,_]"}
+      </code>
+      {" and append different IDs, one physical write cannot represent both outcomes. Copy that partial page before their writes, retaining any earlier complete shared pages. The result is "}
+      <code>
+        {"[5,6,7,8]"}
+      </code>
+      {" and "}
+      <code>
+        {"[5,6,7,9]"}
+      </code>
+      {" in separate slots."}
+    </Prose>
+
+
+    <Prose>
+      {""}
+      <code>
+        {"PrefixStore.fork"}
+      </code>
+      {" acquires the full pages for the new request and allocates copies only for unindexed partial pages. It plans those copies before changing ownership. "}
+      <code>
+        {"append_to_partial"}
+      </code>
+      {" requires exactly one owner, fills the private tail and then runs completion; the newly full block can enter the index. Its saved check records the copy pair and both final token tuples. This is the same copy-on-write principle introduced in PagedAttention, now applied to separately evolving requests."}
+    </Prose>
+
+
+    <span 
+      id="9-failure-modes-and-gotchas" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"7. Make hashes an index, not a proof"}
+    </H2>
+
+
+    <Prose>
+      {"The first two pages of A and B agree; the third does not. A hash chain gives a compact way to locate candidate entries without repeatedly scanning all prior IDs."}
+    </Prose>
+
+
+    <PcHash />
+
+
+    <Prose>
+      {"For namespace "}
+      <InlineMath>
+        {"n"}
+      </InlineMath>
+      {" and blocks "}
+      <InlineMath>
+        {"t_0,t_1,\\ldots"}
+      </InlineMath>
+      {", define "}
+      <InlineMath>
+        {"h_0=H(n,t_0)"}
+      </InlineMath>
+      {", then "}
+      <InlineMath>
+        {"h_j=H(h_{j-1},t_j)"}
+      </InlineMath>
+      {". An upstream edit changes the parent identity of every later block. Without the parent, identical current IDs such as "}
+      <code>
+        {"[50,51]"}
+      </code>
+      {" after "}
+      <code>
+        {"[30,31]"}
+      </code>
+      {" and after "}
+      <code>
+        {"[40,41]"}
+      </code>
+      {" could incorrectly reuse K/V that attended to different context."}
+    </Prose>
+
+
+    <Prose>
+      {"Hashing still maps a large input space into a finite output space. In the program, replace the digest with a function returning one byte, zero, for every input. Two distinct prefixes now deliberately land in the same bucket. "}
+      <code>
+        {"ExactIndex"}
+      </code>
+      {" rejects the wrong candidate because it compares the namespace and complete prefix tuple. Comparing only the current block and a collided parent digest would not be sufficient."}
+    </Prose>
+
+
+    <Prose>
+      {"The default digest is SHA256, but exact equality is what makes this reference collision-safe. Retaining every full prefix tuple uses quadratic aggregate prefix storage in the worst case, approximately "}
+      <InlineMath>
+        {"O(L^2/b)"}
+      </InlineMath>
+      {" token IDs. The chained hashing pass itself processes "}
+      <InlineMath>
+        {"O(L)"}
+      </InlineMath>
+      {" IDs. An engine can intern exact parent identities or choose a different collision policy; the compact teaching implementation makes the distinction inspectable. A namespace field must bind the actual effective-input policy, not merely a reassuring name that remains unchanged after the underlying weights change."}
+    </Prose>
+
+
+    <span 
+      id="6-visual-walkthrough" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"8. Measure hits under finite pressure"}
+    </H2>
+
+
+    <Prose>
+      {"A long common prefix provides an opportunity. A resident, eligible and admitted prefix provides actual reuse. A trace explains why the two differ."}
+    </Prose>
+
+
+    <PcTrace />
+
+
+    <Prose>
+      {"Introduce C="}
+      <code>
+        {"[1,2,3,4,20,21,22,23,24,25]"}
+      </code>
+      {". It shares only A's first page. The examples below run one request at a time and release it before the next arrives; they are constructed workloads, not captured service traffic."}
+    </Prose>
+
+
+    <PcHistory />
+
+
+    <Prose>
+      {"After A completes and releases, its first two pages remain retained and its two-token tail is free. B can acquire both retained pages and allocate a private tail. If C arrives between A and B, C's unrelated blocks consume capacity. With fewer physical pages, completing C can evict the second block that B later wants. The event grid distinguishes a slot reused for new content from the same prefix continuing to reside there."}
+    </Prose>
+
+
+    <Program file="prefix_workload.py" />
+
+
+    <Prose>
+      {""}
+      <code>
+        {"run_trace"}
+      </code>
+      {" captures before-state, admission decision, completed payload and released state for every request. Its counters derive from those actual finite-store decisions. "}
+      <code>
+        {"requested_tokens"}
+      </code>
+      {" includes every prompt row; "}
+      <code>
+        {"reused_tokens"}
+      </code>
+      {" sums matched rows; "}
+      <code>
+        {"new_queries"}
+      </code>
+      {" is their difference. It also counts requests with at least one reused row. The saved results are:"}
+    </Prose>
+
+
+    <NeuralTable 
+      caption={"8. Measure hits under finite pressure"} 
+      headers={[<>{"Constructed trace"}</>, <>{"Pool pages"}</>, <>{"Requests hitting / requests"}</>, <>{"Reused / requested rows"}</>, <>{"New query rows"}</>]} 
+      rows={[[<>{"A, cold"}</>, <>{"4"}</>, <>{"0/1"}</>, <>{"0/10"}</>, <>{"10"}</>], [<>{"A, B, A"}</>, <>{"4"}</>, <>{"2/3"}</>, <>{"16/30"}</>, <>{"14"}</>], [<>{"A, C, B"}</>, <>{"4"}</>, <>{"2/3"}</>, <>{"12/30"}</>, <>{"18"}</>], [<>{"A, C, B under pressure"}</>, <>{"3"}</>, <>{"2/3"}</>, <>{"8/30"}</>, <>{"22"}</>], [<>{"Three unrelated ten-ID prompts"}</>, <>{"4"}</>, <>{"0/3"}</>, <>{"0/30"}</>, <>{"30"}</>], [<>{"No requests"}</>, <>{"4"}</>, <>{"not applicable"}</>, <>{"not applicable"}</>, <>{"0"}</>]]} 
+    />
+
+
+    <PcDenominators />
+
+
+    <Prose>
+      {"The reordered and pressured traces have the same request hit rate, 2/3, but different reused-token fractions: 40% and about 26.67%. A small hit and a large hit count equally in the first metric. To estimate avoided query work, the token-weighted numerator matters. Neither statistic reveals waiting time or the still-live attention rectangle on its own."}
+    </Prose>
+
+
+    <Prose>
+      {""}
+      <code>
+        {"run_trace"}
+      </code>
+      {" uses real admissions into the finite store, rather than assuming every common prefix hits. An empty trace reports "}
+      <code>
+        {"None"}
+      </code>
+      {" for both fractions, because neither 0/0 denominator defines a rate. Read the event history when a hit is unexpectedly short: inspect first mismatch, first absent block, capacity pressure and final-query policy in that order. Only after those boundaries are understood is it useful to change the eviction policy."}
+    </Prose>
+
+
+    <span 
+      id="5-production-implementation" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"9. Reuse a real decoder prefix"}
+    </H2>
+
+
+    <Prose>
+      {"The store used token tuples to make ownership easy to inspect. Now carry the same branch discipline into actual K/V tensors. We use the complete decoder from the KV-Cache lesson, with its parameters and attention implementation unchanged."}
+    </Prose>
+
+
+    <PcSnapshot />
+
+
+    <Prose>
+      {""}
+      <code>
+        {"CachedDecoder"}
+      </code>
+      {" owns one K tensor and one V tensor per layer plus a current length. A snapshot copies only occupied positions, not stale unused capacity. A fork allocates fresh backing, copies those saved rows and restores the length. Appending a suffix then starts at that length, preserving its absolute positions and allowing each new query to read the full old prefix. Starting a suffix at position 0 would change both positional embeddings and its attention context."}
+    </Prose>
+
+
+    <Program file="prefix_decoder.py" />
+
+
+    <Prose>
+      {"The mechanism is concentrated in "}
+      <code>
+        {"snapshot"}
+      </code>
+      {" and "}
+      <code>
+        {"fork"}
+      </code>
+      {". Slicing "}
+      <code>
+        {":decoder.length"}
+      </code>
+      {" selects valid rows; "}
+      <code>
+        {".clone()"}
+      </code>
+      {" isolates the saved snapshot. A new "}
+      <code>
+        {"CachedDecoder"}
+      </code>
+      {" receives those rows and the same occupied length. "}
+      <code>
+        {"equal_prefix"}
+      </code>
+      {" checks that the original decoder still has exactly that length and those values after both branches append. The complete file includes the fixed comparison and recorded operands, rather than requiring a hidden helper to construct the branches."}
+    </Prose>
+
+
+    <Prose>
+      {"The saved TinyLM example uses an untrained, same-weight model: vocabulary 32, width 16, four heads, two layers, context 20, CPU FP64, seed 149. A has IDs 1–12; B shares 1–8 then has 13–16. C changes A's zero-based index 3 to 17. Three full references, one shared prefill, two suffix branches and a fresh C prefill/tail use eight forwards in total. No training or generated continuation is involved."}
+    </Prose>
+
+
+    <Prose>
+      {"Both reused-tail comparisons had maximum absolute logit error "}
+      <InlineMath>
+        {"4.440892098500626\\times10^{-16}"}
+      </InlineMath>
+      {"; C's correctly recomputed prefix/tail had "}
+      <InlineMath>
+        {"2.220446049250313\\times10^{-16}"}
+      </InlineMath>
+      {". All passed the fixed absolute and relative tolerances of "}
+      <InlineMath>
+        {"2\\times10^{-12}"}
+      </InlineMath>
+      {", and A/B tail top-1 IDs agreed. The full-reference A/C rows before the edit were exactly equal, as were A/B's common-prefix full logits. The base and parameter digest stayed unchanged. Each branch copied 4096 occupied prefix bytes and reserved 10240 K/V bytes for capacity 20. These values demonstrate isolation and finite numerical compatibility; they do not make the untrained model a useful language system."}
+    </Prose>
+
+
+    <H3>
+      {"The ordinary library route"}
+    </H3>
+
+
+    <Prose>
+      {"The same lifecycle can use Transformers "}
+      <code>
+        {"DynamicCache"}
+      </code>
+      {". Create one cache, prefill the shared prefix once, then deep-copy that cache separately for each suffix. Direct forwards pass only new IDs, the correct position offset and an attention mask spanning past plus new positions. This example does not ask "}
+      <code>
+        {"generate"}
+      </code>
+      {" to infer cache ownership or combine an explicit cache object with a conflicting cache-construction option."}
+    </Prose>
+
+
+    <Program file="native_prefix.py" />
+
+
+    <Prose>
+      {""}
+      <code>
+        {"run"}
+      </code>
+      {" loads the verified local checkpoint, converts it to FP64 before any forward and creates a "}
+      <code>
+        {"DynamicCache"}
+      </code>
+      {" using its configuration. For each saved prefix, it records the original K/V arrays. Each tail gets a fresh full-prompt reference and an independent "}
+      <code>
+        {"copy.deepcopy(cache)"}
+      </code>
+      {" branch. "}
+      <code>
+        {"forward(..., begin=length, last_only=False)"}
+      </code>
+      {" compares every tail row, not just the last logit vector. Different backing pointers establish that these branches are copies; exact base comparisons establish that neither append mutated the retained prefix."}
+    </Prose>
+
+
+    <Prose>
+      {"To reproduce the complete local sequence after the finite and Tiny stages, explicitly acquire the pinned model files, then run the native and allocator stages:"}
+    </Prose>
+
+
+    <CodeBlock language={"sh"}>
+      {"python acquire_model.py --output model-cache\npython prefix_study.py --stage native --output results --model model-cache\npython prefix_study.py --stage allocator --output results"}
+    </CodeBlock>
+
+
+    <Prose>
+      {"Acquisition is separate from inference. The loader checks the six model files against the supplied identity report and uses local-only loading. The saved run used EleutherAI/pythia-14m revision "}
+      <code>
+        {"cf967c0a9a04383db6f7b1108d86b2962634b4ac"}
+      </code>
+      {", Torch 2.14.0+cpu, Transformers 5.19.0 and eager attention. Alice provides an attributed public-domain input: prefix lengths 8 and 32 use the saved leading IDs; the two eight-ID tails use offsets [40, 48) and [48, 56). These spliced inputs test compatible computation, not coherent answers or extraction quality."}
+    </Prose>
+
+
+    <PcNative />
+
+
+    <NeuralTable 
+      caption={"The ordinary library route"} 
+      headers={[<>{"Prefix rows"}</>, <>{"Tail slice"}</>, <>{"Maximum absolute error"}</>, <>{"Compared logits"}</>, <>{"Tolerance failures"}</>, <>{"Copied prefix bytes"}</>, <>{"Branch bytes"}</>]} 
+      rows={[[<>{"8"}</>, <>{"[40, 48)"}</>, <>{"3.552713678800501e−14"}</>, <>{"402432"}</>, <>{"0"}</>, <>{"98304"}</>, <>{"196608"}</>], [<>{"8"}</>, <>{"[48, 56)"}</>, <>{"9.592326932761353e−14"}</>, <>{"402432"}</>, <>{"0"}</>, <>{"98304"}</>, <>{"196608"}</>], [<>{"32"}</>, <>{"[40, 48)"}</>, <>{"3.197442310920451e−14"}</>, <>{"402432"}</>, <>{"0"}</>, <>{"393216"}</>, <>{"491520"}</>], [<>{"32"}</>, <>{"[48, 56)"}</>, <>{"2.7533531010703882e−14"}</>, <>{"402432"}</>, <>{"0"}</>, <>{"393216"}</>, <>{"491520"}</>]]} 
+    />
+
+
+    <Prose>
+      {"Each comparison covers eight positions times 50304 vocabulary columns. All four passed the fixed criterion "}
+      <InlineMath>
+        {"|a-r|\\le2\\times10^{-9}+2\\times10^{-9}|r|"}
+      </InlineMath>
+      {" and separately had equal top-1 IDs. The original prefix cache and weights remained unchanged. Two prefills, four full references and four cached-tail forwards account for all ten calls. There is no timed arm: copied storage and all-logit agreement cannot establish a serving speedup. The nonzero differences also explain why causal compatibility should not be described as universal bitwise equality."}
+    </Prose>
+
+
+    <H3>
+      {"Observe actual physical sharing"}
+    </H3>
+
+
+    <Prose>
+      {"The ordinary cache branch intentionally copied data. To verify the different claim that two request tables share backing addresses, the next program uses the actual pinned Transformers allocator with supplied K/V values and no model."}
+    </Prose>
+
+
+    <PcAllocator />
+
+
+    <Prose>
+      {"The native allocation calls produce tables A="}
+      <code>
+        {"[5,4,3]"}
+      </code>
+      {" and B="}
+      <code>
+        {"[5,4,2]"}
+      </code>
+      {". Blocks 5 and 4 are shared with two references each; 3 and 2 are private tails. These are observed native IDs, distinct from the illustrative p0–p3 diagram. The read indices for the eight shared positions and their physical K and V addresses agree across A and B at both layers. Writing B's tail preserves A's shared values."}
+    </Prose>
+
+
+    <Program file="native_prefix_allocator.py" />
+
+
+    <Prose>
+      {"The file configures two layers, two KV heads, four features per head and four tokens per page. Its "}
+      <code>
+        {"supplied"}
+      </code>
+      {" function encodes layer, position, token, head and feature into deterministic scalar values, so a misplaced row is inspectable. "}
+      <code>
+        {"allocate_cache_to_request"}
+      </code>
+      {" reserves A's storage; "}
+      <code>
+        {"update"}
+      </code>
+      {" writes those values; "}
+      <code>
+        {"mark_complete_blocks"}
+      </code>
+      {" exposes the two full blocks. Only then can "}
+      <code>
+        {"match_prefix_blocks"}
+      </code>
+      {" and "}
+      <code>
+        {"acquire_prefix_blocks"}
+      </code>
+      {" provide B's shared prefix. B allocates and writes its own tail."}
+    </Prose>
+
+
+    <Prose>
+      {"The pointer comparison uses the physical backing views, not the gathered arrays returned by "}
+      <code>
+        {"update"}
+      </code>
+      {": an indexed read can produce a copy even when the underlying request tables alias the same storage. The native class calls a one-layer four-token K/V payload a "}
+      <strong>
+        {"page"}
+      </strong>
+      {" of 256 bytes; a two-layer "}
+      <strong>
+        {"block"}
+      </strong>
+      {" is 512 bytes. Four allocatable blocks plus two required trash sectors occupy 3072 backing bytes."}
+    </Prose>
+
+
+    <Prose>
+      {"After A and B release, their tails are free and blocks 5 and 4 remain retained. C can reacquire those retained blocks, release them, and leave them evictable again. Eviction returns all four blocks to their assigned sectors. Returning those sectors to the outer pool leaves "}
+      <code>
+        {"free_sectors=4"}
+      </code>
+      {" and "}
+      <code>
+        {"free_blocks=0"}
+      </code>
+      {": zero here means no blocks remain assigned to this allocator, not that the capacity leaked. The layer responsible for the counter matters."}
+    </Prose>
+
+
+    <Prose>
+      {"This is an executed storage fixture on Transformers 5.19.0 internals, not a live serving-manager hit-rate test. Its BLAKE2b-64 parent index lacks the scratch program's exact collision fallback and trust namespace. Ordinary engine automatic prefix caching, such as "}
+      <a href={"https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/"}>
+        {"vLLM's maintained APC interface"}
+      </a>
+      {", must be used with that engine's current options and request lifecycle. We did not launch such a server here; "}
+      <a href={"/learn/path/full-curriculum/inference-engines-serving?module=large-language-models"}>
+        {"Inference Engines & Serving"}
+      </a>
+      {" owns that complete deployment path."}
+    </Prose>
+
+
+    <H2>
+      {"10. Compress the prefix tree — deeper"}
+    </H2>
+
+
+    <Prose>
+      {"Full-block hashing chooses a fixed matching granularity. A radix tree instead represents common token sequences along compressed edges. It can locate divergence inside an edge, then divide that edge without duplicating the shared prefix."}
+    </Prose>
+
+
+    <PcRadix />
+
+
+    <Prose>
+      {"Insert A="}
+      <code>
+        {"[1,2,3,4,5]"}
+      </code>
+      {" into an empty tree: one edge can hold the entire sequence. Inserting "}
+      <code>
+        {"[1,2,3,9]"}
+      </code>
+      {" shares its first three IDs. Split the old edge into a common "}
+      <code>
+        {"[1,2,3]"}
+      </code>
+      {" edge and children "}
+      <code>
+        {"[4,5]"}
+      </code>
+      {" and "}
+      <code>
+        {"[9]"}
+      </code>
+      {". Inserting "}
+      <code>
+        {"[1,2,8]"}
+      </code>
+      {" splits the common edge again into "}
+      <code>
+        {"[1,2]"}
+      </code>
+      {", with a "}
+      <code>
+        {"[3]"}
+      </code>
+      {" branch for the older descendants and a new "}
+      <code>
+        {"[8]"}
+      </code>
+      {" branch. A match may stop partway through a compressed edge; matched length and reached node are not always the same boundary."}
+    </Prose>
+
+
+    <PcPins />
+
+
+    <Prose>
+      {"The path used by a live request must remain pinned. Removing its parent would invalidate the location of its stored continuation even if the leaf itself were marked active. Each pinned path therefore contributes a count to every ancestor it uses. When a pinned edge splits, the new intermediate node inherits the descendants' pins. Existing active endpoint handles continue to identify the same node object."}
+    </Prose>
+
+
+    <Program file="radix_prefix.py" />
+
+
+    <Prose>
+      {""}
+      <code>
+        {"insert"}
+      </code>
+      {" finds the common length between the pending IDs and a child edge. A partial match creates an intermediate node and reconnects the old child beneath it. "}
+      <code>
+        {"match"}
+      </code>
+      {" reports both total matching tokens and the portion used within each edge. "}
+      <code>
+        {"pin"}
+      </code>
+      {" retains the endpoint and increments the path; "}
+      <code>
+        {"unpin"}
+      </code>
+      {" follows current parent pointers, so it still works after a split. "}
+      <code>
+        {"evict_leaf "}
+      </code>
+      {" chooses an unpinned leaf by access order, then removes just that edge. Its parent can become a later candidate only when it is itself a leaf and unpinned."}
+    </Prose>
+
+
+    <Prose>
+      {"The supplied check pins A before either split, then inserts the two other branches. It evicts "}
+      <code>
+        {"[9]"}
+      </code>
+      {" and "}
+      <code>
+        {"[8]"}
+      </code>
+      {" while A's entire path remains. After A unpins, the remaining nodes can drain to the root. This reference scans leaves in "}
+      <InlineMath>
+        {"O(\\text{nodes})"}
+      </InlineMath>
+      {" and stores token identities rather than GPU tensors. It explains "}
+      <a href={"https://arxiv.org/html/2312.07104v2"}>
+        {"SGLang's radix-cache mechanism"}
+      </a>
+      {" without representing itself as that engine's allocator or reproducing its system benchmarks."}
+    </Prose>
+
+
+    <span 
+      id="8-what-scales-and-what-doesnt" 
+      aria-hidden="true" 
+    />
+
+    <span 
+      id="8-what-scales-and-what-doesn-t" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"11. Schedule reuse without hiding waiting — deeper"}
+    </H2>
+
+
+    <Prose>
+      {"A shared-prefix tree also suggests a request order. If all requests are already known and the cache can retain the longest root-to-leaf path, finishing related branches together can avoid rebuilding old prefixes."}
+    </Prose>
+
+
+    <PcDepthFirst />
+
+
+    <Prose>
+      {"For our ten-ID A/B/C prompts, order A,B,C computes 10+2+6=18 new rows. Order A,C,B computes 10+6+6=22 when the cache retains only the previous complete path. A and B share 8; A and C share 4; C and B also share 4. The tree contains 18 distinct token edges, so every edge must be computed at least once. A depth-first traversal attains that lower bound: retain the current path, finish its descendants before moving to a sibling, and never need a completed subtree again."}
+    </Prose>
+
+
+    <Prose>
+      {"This proof concerns a fixed offline tree, enough capacity for a longest path, and query-row work only. Unknown future arrivals, growing decode outputs, page boundaries, deadlines and fairness change the problem. The token-granularity "}
+      <code>
+        {"order_work"}
+      </code>
+      {" example deliberately allows reuse of a complete previous path; it is not the KV-only final-query page rule from section 3. In the saved reference, capacity is 10 tokens, the distinct-edge lower bound is 18, DFS reaches 18 and the interleaved order uses 22."}
+    </Prose>
+
+
+    <Prose>
+      {"An online router must also account for a warm worker's queue. Define "}
+      <InlineMath>
+        {"W"}
+      </InlineMath>
+      {" as waiting time before service and "}
+      <InlineMath>
+        {"S"}
+      </InlineMath>
+      {" as service until the result of interest, such as the first output token. Compare "}
+      <InlineMath>
+        {"W+S"}
+      </InlineMath>
+      {" for the same arrival time and outcome."}
+    </Prose>
+
+
+    <PcWaiting />
+
+
+    <Prose>
+      {"Suppose a warm worker needs 4 ms of service, while a cold worker waits 2 ms then needs 10 ms. These are supplied estimates, not measurements. Cold finishes 12 ms after arrival. Warm wins when its wait is below 8 ms, ties at 8, and loses above 8. At a 20 ms warm queue it finishes at 24 ms, twice the cold estimate, despite the cache hit."}
+    </Prose>
+
+
+    <Program file="prefix_routing.py" />
+
+
+    <Prose>
+      {""}
+      <code>
+        {"route"}
+      </code>
+      {" uses nonnegative Decimal inputs and returns both finish times, the tie threshold and the choice. At warm waits 0, 7, 8, 9, 20 it chooses warm,warm,tie,cold,cold. Reuse affinity is one routing input, not permission to ignore waiting. The wider scheduling and tail-latency issues belong with the queueing and serving lessons."}
+    </Prose>
+
+
+    <H2>
+      {"12. Use a provider's cache contract"}
+    </H2>
+
+
+    <Prose>
+      {"A local engine exposes page allocation. An API exposes a request contract and reported usage. A client cannot infer physical page layout from a cache key, and a provider's billing categories need not correspond one-for-one to our allocator states."}
+    </Prose>
+
+
+    <PcProviders />
+
+
+    <Prose>
+      {"There are three useful shapes. "}
+      <strong>
+        {"Implicit matching"}
+      </strong>
+      {" lets the service locate eligible repeated content. An "}
+      <strong>
+        {"explicit breakpoint"}
+      </strong>
+      {" identifies a stable boundary in a request, after which the changing question can follow. A "}
+      <strong>
+        {"named resource"}
+      </strong>
+      {" is created separately and referenced by later requests until its lifetime ends. In every case, model support, eligible length, scope and retention policy are part of the contract. A requested cache operation is not itself evidence of a hit."}
+    </Prose>
+
+
+    <Prose>
+      {"Our optional examples are source-checked against documentation on 9 October 2026. They have not made remote requests. They use a reader-selected supported model and document, then print the actual usage instead of supplying invented hit counts or a universal discount. Keep these current contracts separate from the fixed local scientific examples."}
+    </Prose>
+
+
+    <Program file="provider_cache_examples.py" />
+
+
+    <Prose>
+      {"The Claude branch puts a breakpoint on the stable document block and the varying question after it. It prints complete response usage; "}
+      <code>
+        {"cache_read_input_tokens"}
+      </code>
+      {", "}
+      <code>
+        {"cache_creation_input_tokens"}
+      </code>
+      {" and uncached "}
+      <code>
+        {"input_tokens"}
+      </code>
+      {" describe different portions of the request. Their sum accounts for total input. The provider also documents automatic placement; changing the selected boundary can change reuse. See "}
+      <a href={"https://platform.claude.com/docs/en/build-with-claude/prompt-caching"}>
+        {"Claude prompt caching"}
+      </a>
+      {"."}
+    </Prose>
+
+
+    <Prose>
+      {"The OpenAI branch is explicitly for the documented GPT-5.6-and-later contract. It sets an explicit content breakpoint and "}
+      <code>
+        {"prompt_cache_options"}
+      </code>
+      {" with a 30m lifetime, forwards those wire options through "}
+      <code>
+        {"extra_body"}
+      </code>
+      {", and prints "}
+      <code>
+        {"response.usage"}
+      </code>
+      {". Separate accounting can use "}
+      <code>
+        {"prompt_cache_key"}
+      </code>
+      {"; earlier models have different routing/retention rules. Read cached and cache-write input details rather than assuming all prompt tokens were reused or that writes have no cost. See "}
+      <a href={"https://developers.openai.com/api/docs/guides/prompt-caching"}>
+        {"OpenAI prompt caching"}
+      </a>
+      {"."}
+    </Prose>
+
+
+    <Prose>
+      {"The Google branch uses the generateContent v1beta named-resource route: create a cache for the document, obtain metadata, reference "}
+      <code>
+        {"cache.name"}
+      </code>
+      {" for two different questions, update its lifetime and delete it in "}
+      <code>
+        {"finally"}
+      </code>
+      {". "}
+      <code>
+        {"client.close()"}
+      </code>
+      {" runs even if deletion raises. Resource expiry and API/model support still bound its use; this is distinct from Interactions implicit caching. See "}
+      <a href={"https://ai.google.dev/gemini-api/docs/generate-content/caching"}>
+        {"the explicit-resource guide"}
+      </a>
+      {" and "}
+      <a href={"https://github.com/googleapis/python-genai/blob/main/google/genai/caches.py"}>
+        {"actual SDK methods"}
+      </a>
+      {"."}
+    </Prose>
+
+
+    <Prose>
+      {"For a resource with an exclusive expiry at time 90, a call at 89 may be eligible while a call at 90 requires recreation or another supported route. Extending metadata does not prove a prior request read cached content. Record resource identity, lifetime, actual usage and application output separately."}
+    </Prose>
+
+
+    <Prose>
+      {"To run an optional branch, install that provider's SDK, set its named environment key and supply your own document and two questions:"}
+    </Prose>
+
+
+    <CodeBlock language={"sh"}>
+      {"python provider_cache_examples.py --provider google --model YOUR_SUPPORTED_MODEL --document your-document.txt --question \"Summarize the main claim.\" --question \"What evidence supports it?\""}
+    </CodeBlock>
+
+
+    <Prose>
+      {"The supported provider choices are "}
+      <code>
+        {"google"}
+      </code>
+      {", "}
+      <code>
+        {"claude"}
+      </code>
+      {" and "}
+      <code>
+        {"openai"}
+      </code>
+      {"; the corresponding variables are "}
+      <code>
+        {"GEMINI_API_KEY"}
+      </code>
+      {", "}
+      <code>
+        {"ANTHROPIC_API_KEY"}
+      </code>
+      {" and "}
+      <code>
+        {"OPENAI_API_KEY"}
+      </code>
+      {". These calls transmit the supplied document and can incur charges. They are separate from the local stage runner. Check current model minima and pricing before choosing a model; this lesson's arithmetic uses explicit illustrative units instead of freezing a provider price table into a general rule."}
+    </Prose>
+
+
+    <span 
+      id="7-decision-matrix" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"13. Decide what should stay cached — deeper"}
+    </H2>
+
+
+    <Prose>
+      {"Correct reuse may still cost more than computing normally. Separate its initial write, subsequent reads and storage lifetime before making an economic decision."}
+    </Prose>
+
+
+    <PcCost />
+
+
+    <Prose>
+      {"Let "}
+      <InlineMath>
+        {"C_w"}
+      </InlineMath>
+      {" be the first request's total write-path charge, "}
+      <InlineMath>
+        {"C_n"}
+      </InlineMath>
+      {" a normal request charge and "}
+      <InlineMath>
+        {"C_h"}
+      </InlineMath>
+      {" a later hit charge for the same work. Let storage over the selected lifetime cost "}
+      <InlineMath>
+        {"C_s"}
+      </InlineMath>
+      {", which can itself be rate times duration. With "}
+      <InlineMath>
+        {"n"}
+      </InlineMath>
+      {" later hits,"}
+    </Prose>
+
+
+    <div className="pc-equation">
+
+      <MathBlock>
+        {"C_{cache}=C_w+nC_h+C_s,\\qquad C_{normal}=(n+1)C_n."}
+      </MathBlock>
+
+    </div>
+
+
+    <Prose>
+      {"The net saving is "}
+      <InlineMath>
+        {"n(C_n-C_h)-(C_w-C_n+C_s)"}
+      </InlineMath>
+      {". The per-hit benefit is "}
+      <InlineMath>
+        {"B=C_n-C_h"}
+      </InlineMath>
+      {" and the fixed overhead is "}
+      <InlineMath>
+        {"O=C_w-C_n+C_s"}
+      </InlineMath>
+      {". When "}
+      <InlineMath>
+        {"B>0"}
+      </InlineMath>
+      {", the first non-more-expensive integer is "}
+      <InlineMath>
+        {"\\max(0,\\lceil O/B\\rceil)"}
+      </InlineMath>
+      {"; the first strictly cheaper integer is "}
+      <InlineMath>
+        {"\\max(0,\\lfloor O/B\\rfloor+1)"}
+      </InlineMath>
+      {". They differ when the threshold itself is an integer."}
+    </Prose>
+
+
+    <Prose>
+      {"For illustrative charges write 1.25, normal 1, hit 0.1 and no storage, the initial overhead is 0.25 and each hit saves 0.9. One later hit makes cached cost 1.35 versus normal 2. With storage 0.65, fixed overhead becomes 0.90: one hit ties at 2.00, and two hits save 0.90. These are constructed amounts, not quoted provider prices."}
+    </Prose>
+
+
+    <Program file="prefix_cost.py" />
+
+
+    <Prose>
+      {""}
+      <code>
+        {"decision"}
+      </code>
+      {" uses Decimal so an exact monetary tie does not become a rounding accident. It returns current costs, current saving, first non-more-expensive and first strictly cheaper counts. If the per-hit benefit is zero or negative, additional hits cannot improve saving. With positive fixed overhead there is no break-even. If the write path begins cheaper but hits later cost more than normal, a first qualifying count of 0 does not mean all larger counts remain economical: inspect the current saving and "}
+      <code>
+        {"extra_hits_improve_saving"}
+      </code>
+      {" as well."}
+    </Prose>
+
+
+    <Prose>
+      {"The finite results include 44 hit/storage combinations and those boundary cases. Neither money nor row-work calculations include a measured service queue."}
+    </Prose>
+
+
+    <PcSession />
+
+
+    <Prose>
+      {"Keeping historically popular content is also not always the best policy. In the supplied three-page trace, a five-token A occurs five times and then never returns. New five-token B and C arrive, followed by B again. Each request needs one reusable four-token block plus its private final-query page. Historical frequency can retain A's old hot block and discard B, even though A's session has ended. In this exact trace, inactive LRU reuses 20 of 40 requested rows; the simple frequency policy reuses 16. The last B gets a four-row hit under LRU and zero under frequency."}
+    </Prose>
+
+
+    <Prose>
+      {""}
+      <code>
+        {"FrequencyStore"}
+      </code>
+      {" changes only victim choice: it sorts inactive, unprotected candidates by historical complete-block count, using inactive order to break ties. It deliberately retains old counts and scans candidates, so this is a concrete counterexample rather than a general ranking of production policies. The recent preprint "}
+      <a href={"https://arxiv.org/html/2609.28870v1"}>
+        {"When Fancy Eviction Fails"}
+      </a>
+      {" studies session-related reuse in real traces; its selected mechanism discussion motivates the question, while our values come from the included finite program."}
+    </Prose>
+
+
+    <PcTrust />
+
+
+    <Prose>
+      {"Finally, correctness and privacy require separate reasoning. Two users may supply identical public content and obtain numerically correct reuse. Yet an observer who can test candidate prefixes and distinguish a hit from a miss may learn something about another user's activity. A shared page need not return wrong text for its reuse timing or usage indicator to reveal information."}
+    </Prose>
+
+
+    <Prose>
+      {"A trust namespace prevents reuse across the groups it separates, at the cost of missed sharing opportunities. It does not establish every other security property of a service. "}
+      <a href={"https://arxiv.org/html/2603.10726v1"}>
+        {"CacheSolidarity"}
+      </a>
+      {" explores selective owner/flag mechanisms under stated distinguishability conditions; it is a research alternative to examine, not a blanket guarantee demonstrated by this lesson. Hybrid recurrent-state snapshots, remote KV transfer and distributed eviction add other state and transport contracts; the later inference architecture material is the right place to implement them."}
+    </Prose>
+
+
+    <Prose>
+      {"The resulting decision is concrete: establish exact compatibility, find a resident eligible prefix, preserve ownership during admission, then assess measured work, waiting, memory and charges under the relevant policy. A hit is useful evidence about one boundary. It is not a substitute for the rest of the request's contract."}
+    </Prose>
+
+  </section>
+
+  <section 
+    className="lesson-ending lesson-ending--practice" 
+    data-lesson-ending="practice"
+  >
+
+    <span 
+      id="11-self-check-exercises" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"14. Practice"}
+    </H2>
+
+    <Prose>
+      {"First-pass readers can work through tasks 1–12 and 16 after sections 1–9 and 12. Before task 13, read the radix-tree explanation in section 10; before task 14, read the waiting-time comparison in section 11. Task 15 combines expiry from section 12 with the cost calculation in section 13, so read section 13 before its economic half. These deeper sections remain visible and available whenever you need them."}
+    </Prose>
+
+
+    <Prose>
+      {"Each task changes the worked example or asks you to combine its boundaries. Try the question before opening its separate hint and solution. The final complete "}
+      <code>
+        {"practice.py"}
+      </code>
+      {" computes the core supplied fixtures; the worked solutions also explain their interpretation and storage extensions. It does not call a model."}
+    </Prose>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"1. Read the right rows"}
+      </H3>
+
+
+      <Prose>
+        {"A new query at zero-based position 6 follows six cached positions. The model has three layers and two KV heads. Which positions must each layer read and write? Can the request reuse a previous answer?"}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" distinguish the query's position from each head's stored K and V rows."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" each layer reads K/V positions 0–6, writes new K and V only at position 6 in both heads, and leaves positions 0–5 unchanged. There are six layer/head pairs. Each pair reads seven K rows and seven V rows, making 42 rows of each kind across those pairs. The suffix-dependent hidden state and output still need computation; a previous answer is not the prefix cache."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"2. Find the earliest invalid state"}
+      </H3>
+
+
+      <Prose>
+        {"Two length 9 prompts differ only at zero-based token index 3. Model weights, adapter, positions and masks agree. Which rows remain reusable? How many rows fit reusable complete pages of size 2?"}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" draw the dependency cone from the changed embedding."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" positions 0–2 remain the same causal prefix. Rows 3–8 must be reconsidered at each layer. A complete-page policy can reuse only positions 0–1: one two-row page. The equal row 2 cannot combine with changed row 3 to form a reusable complete page. A future edit would not invalidate earlier positions, but semantic similarity would not repair this earlier edit."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"3. Include the parent"}
+      </H3>
+
+
+      <Prose>
+        {"With page size 2, compare "}
+        <code>
+          {"[2,4,7,9,11]"}
+        </code>
+        {" and "}
+        <code>
+          {"[8,6,7,9,12]"}
+        </code>
+        {". Their second full blocks are both "}
+        <code>
+          {"[7,9]"}
+        </code>
+        {". Is that block's K/V interchangeable?"}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" inspect the older keys and values available when its rows were computed."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" no. The exact contexts are "}
+          <code>
+            {"([2,4],[7,9])"}
+          </code>
+          {" and "}
+          <code>
+            {"([8,6],[7,9])"}
+          </code>
+          {". The second block attends to different parent prefixes, so equal current IDs do not establish equal hidden representations or K/V. A current-block-only key merges incompatible computations. Bind the full causal identity through a parent chain and appropriate exact comparison."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"4. Preserve a final query"}
+      </H3>
+
+
+      <Prose>
+        {"An engine reuses only full KV pages of size 3 and leaves at least one prompt query to obtain logits. Find the maximum reusable rows for lengths 5, 6, 10. Then change zero-based index 4 in the length 10 prompt."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" combine the first changed position with the final-query limit."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" the unedited limits are "}
+          <InlineMath>
+            {"3\\lfloor4/3\\rfloor=3"}
+          </InlineMath>
+          {", "}
+          <InlineMath>
+            {"3\\lfloor5/3\\rfloor=3"}
+          </InlineMath>
+          {", and "}
+          <InlineMath>
+            {"3\\lfloor9/3\\rfloor=9"}
+          </InlineMath>
+          {". After the index 4 edit, only the first complete page, positions 0–2, can be reused: 3 rows. Position 3 remains causally compatible but lies in the partly invalid second page. Saving compatible final logits or permitting finer-grained reuse would be different contracts."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"5. Count the surviving work"}
+      </H3>
+
+
+      <Prose>
+        {"For "}
+        <InlineMath>
+          {"L=12,P=6"}
+        </InlineMath>
+        {", find new query rows, full causal pairs, avoided pairs and remaining pairs. Repeat at "}
+        <InlineMath>
+          {"P=0"}
+        </InlineMath>
+        {"."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" add the suffix-to-prefix rectangle and suffix triangle."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" six query rows remain. Full pairs are "}
+          <InlineMath>
+            {"12\\times13/2=78"}
+          </InlineMath>
+          {"; avoided pairs are "}
+          <InlineMath>
+            {"6\\times7/2=21"}
+          </InlineMath>
+          {". Remaining pairs are 57, also "}
+          <InlineMath>
+            {"6\\times6+6\\times7/2=36+21"}
+          </InlineMath>
+          {". At "}
+          <InlineMath>
+            {"P=0"}
+          </InlineMath>
+          {", all 12 rows and 78 pairs remain. Calling the six reused rows a 50% latency saving would confuse a row count with a measured workload result."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"6. Diagnose a leaked owner"}
+      </H3>
+
+
+      <Prose>
+        {"One physical page has owners A and B. A finishes and releases it. B is cancelled, but its release callback is omitted. C needs the only page. Explain the refusal and the correct repair."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" cancellation text and ownership mutation are separate events."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" the reference count goes 2→1 after A. The missing B release leaves it at 1, so the allocator correctly refuses to evict it. Run exactly one B release to reach 0; a complete page then becomes retained and evictable. Releasing B twice is an ownership bug. The program's "}
+          <code>
+            {"leaked_owner"}
+          </code>
+          {" case retains both the unchanged denied state and the explicit duplicate-release refusal."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"7. Deny atomically"}
+      </H3>
+
+
+      <Prose>
+        {"A three-page pool contains active p0, retained matching p1 and retained p2. A new request needs p1 plus two new pages. What changes after a failed admission? What if it needs only one new page?"}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" protect every matched page before selecting victims."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" p0 is active and p1 is a needed hit, leaving only p2 evictable. Two new pages cannot fit, so ownership, contents, index and inactive order remain unchanged. For one new page, acquire p1, reclaim p2 for a new generation and leave p0 untouched. Evicting p1 to pass the capacity check would destroy a needed prefix rather than satisfy the original request."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"8. Count unique bytes"}
+      </H3>
+
+
+      <Prose>
+        {"Tables are A="}
+        <code>
+          {"[p0,p2,p4]"}
+        </code>
+        {", B="}
+        <code>
+          {"[p0,p3,p4]"}
+        </code>
+        {", C="}
+        <code>
+          {"[p1,p4]"}
+        </code>
+        {". Every physical page occupies 2048 bytes, and no other pages are retained. Find logical-reference bytes and actual physical payload."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" take the union before multiplying."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" there are eight logical references, representing 16384 bytes if counted separately. Their union has five physical pages, so actual payload is 10240 bytes, or 10 KiB. Page 4 has three owners and page 0 has two. This excludes metadata and any additional backing allocation; it is not process memory usage."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"9. Fork a partial page"}
+      </H3>
+
+
+      <Prose>
+        {"A size 4 page contains "}
+        <code>
+          {"[5,6,7,_]"}
+        </code>
+        {". Two branches append 8 and 9. Each branch also refers to three earlier complete pages shared by both. Show correct storage, count physical pages versus logical references, and diagnose a faulty shared in-place append."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" distinguish immutable full pages from a writable tail."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" make independent physical tail copies, producing "}
+          <code>
+            {"[5,6,7,8]"}
+          </code>
+          {" and "}
+          <code>
+            {"[5,6,7,9]"}
+          </code>
+          {"; preceding full pages can remain shared. With one writable tail, the later append replaces the earlier branch's fourth position, so at least one branch reads the wrong state. The three earlier shared pages plus two private tails occupy five physical pages, while the two four-entry request tables contain eight logical references. Correct allocation and per-branch ownership must precede the writes."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"10. Defeat a forced collision"}
+      </H3>
+
+
+      <Prose>
+        {"A teaching hash returns zero for every input. In namespace N, prefixes "}
+        <code>
+          {"[1,3,5,7]"}
+        </code>
+        {" and "}
+        <code>
+          {"[2,4,5,7]"}
+        </code>
+        {" use two-token pages. A bucket compares only current block "}
+        <code>
+          {"[5,7]"}
+        </code>
+        {" and parent digest 0. Diagnose and repair it."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" a collided parent digest is not an exact parent identity."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" both checked pieces agree even though the causal prefixes differ, so this comparator falsely accepts. Compare the namespace and complete effective prefix, or use an equivalent collision-safe interned parent identity. "}
+          <code>
+            {"ExactIndex"}
+          </code>
+          {" in the supplied example refuses the second prefix after indexing the first. Changing trust namespace must also refuse reuse even if the token tuples match. A cryptographic hash's low collision probability and the comparator's exact-equality guarantee are different statements."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"11. Use the right denominator"}
+      </H3>
+
+
+      <Prose>
+        {"Three prompts have lengths 6, 10, 14 and reuse 0, 8, 4 rows. Find request hit rate, reused-token fraction and new query count. After pressure removes the first block of the third prompt, a later block remains resident. May lookup skip ahead?"}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" a request hit is a boolean; token work uses a weighted denominator."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" two of three requests hit. Reuse totals 12 of 30 rows, or 40%; 18 new query rows remain. If the first block is absent, lookup for that prompt begins with a miss and returns zero reusable rows. The later resident descendant does not supply its missing ancestor's K/V. The original 40% describes the original three observations, not the changed pressured state."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"12. Keep numerical evidence bounded"}
+      </H3>
+
+
+      <Prose>
+        {"Two FP64 cached-tail branches match all reference logits within a declared 2e−9 tolerance, and both have equal top-1 IDs. Does that establish bitwise equality, shared storage or a speedup? What missing observation would establish physical sharing?"}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" numerical, storage and timing claims need different evidence."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" it supports tolerance and top-1 agreement for those cases. Bitwise equality needs an exact element comparison. A copied cache can pass all numerical comparisons while occupying independent arrays. Physical sharing requires common backing addresses together with correct ownership and lifetime; a gathered output tensor is not necessarily the backing. Speed requires a controlled timed comparison. None follows merely from the word “cache.”"}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"13. Split a radix edge"}
+      </H3>
+
+
+      <Prose>
+        {"Insert "}
+        <code>
+          {"[3,1,4,1]"}
+        </code>
+        {", "}
+        <code>
+          {"[3,1,5]"}
+        </code>
+        {", then "}
+        <code>
+          {"[3,1,4,2]"}
+        </code>
+        {". Draw the compressed edges. Pin the final request's path. Which other leaf can be evicted safely?"}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" split at each first mismatch and protect the ancestors of a live endpoint."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" root edge "}
+          <code>
+            {"[3,1]"}
+          </code>
+          {" has children "}
+          <code>
+            {"[5]"}
+          </code>
+          {" and "}
+          <code>
+            {"[4]"}
+          </code>
+          {"; the latter has leaves "}
+          <code>
+            {"[1]"}
+          </code>
+          {" and "}
+          <code>
+            {"[2]"}
+          </code>
+          {". Protect "}
+          <code>
+            {"[3,1]→[4]→[2]"}
+          </code>
+          {". Either unpinned leaf "}
+          <code>
+            {"[5]"}
+          </code>
+          {" or "}
+          <code>
+            {"[1]"}
+          </code>
+          {" is eligible, subject to eviction policy. The parent "}
+          <code>
+            {"[4]"}
+          </code>
+          {" cannot be removed while the live "}
+          <code>
+            {"[2]"}
+          </code>
+          {" branch depends on it. Splitting an existing pinned edge transfers its protection to the new intermediate parent."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"14. Price affinity's wait"}
+      </H3>
+
+
+      <Prose>
+        {"Warm service is 5 ms. Cold wait is 3 ms and cold service 12 ms. Choose for warm waits 7, 10, 13 ms, ignoring network and transfer time."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" use the same arrival-to-finish clock."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" warm finish times are 12, 15, 18 ms; cold is 15 ms. Choose warm, tie, cold. The warm-wait threshold is 10 ms. The arithmetic uses supplied estimates and does not measure either worker. A cache-affinity rule that always selects the warm worker loses on the last case."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"15. Respect expiry and integer saving"}
+      </H3>
+
+
+      <Prose>
+        {"A named resource created at 0 expires at 90 seconds, with exclusive expiry. Which calls at 89 and 90 may use it? Separately, a write path adds 3 units over normal processing, each later hit saves 0.6 units and total storage costs 0.6 units. Find the first non-more-expensive and first strictly cheaper hit counts."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" compare "}
+          <InlineMath>
+            {"0.6n"}
+          </InlineMath>
+          {" with the fixed 3.6 units of overhead."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" the 89-second request is eligible subject to the API contract; at 90 the resource is expired. For cost, six hits recover exactly 3.6 and tie; seven strictly save. "}
+          <code>
+            {"practice.py"}
+          </code>
+          {" represents these charges as total write 4, normal 1, hit 0.4 and storage 0.6, which has the same 3.6 fixed overhead and 0.6 per-hit benefit. If per-hit saving is nonpositive and fixed overhead positive, no number of additional hits breaks even."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+    <section 
+      className="pc-practice" 
+      data-lesson-exercise
+    >
+
+      <H3>
+        {"16. Protect reuse under pressure"}
+      </H3>
+
+
+      <Prose>
+        {"A pool holds three full pages of two tokens each. This exercise's pool stores "}
+        <strong>
+          {"only retained full prefixes"}
+        </strong>
+        {": the final one-token query's temporary K/V lives outside this three-page budget. At t=0, complete and release A="}
+        <code>
+          {"[1,2,3,4,9]"}
+        </code>
+        {", retaining x="}
+        <code>
+          {"[1,2]"}
+        </code>
+        {" and y="}
+        <code>
+          {"[3,4]"}
+        </code>
+        {", where y depends on x. At t=1, B="}
+        <code>
+          {"[1,2,7,8,10]"}
+        </code>
+        {" acquires x, fills z="}
+        <code>
+          {"[7,8]"}
+        </code>
+        {", then releases x and z. At t=2, C="}
+        <code>
+          {"[1,2,3,4,11]"}
+        </code>
+        {" arrives. Compare matching-first admission with a buggy policy that preallocates unnecessarily and evicts x before lookup. Count C's reusable rows and attention pairs."}
+      </Prose>
+
+      <details>
+
+        <summary>Hint</summary>
+
+        <Prose>
+          {" list the three physical contents before C and recall that a retained descendant cannot bypass a missing ancestor."}
+        </Prose>
+
+      </details>
+
+      <details>
+
+        <summary>Worked solution</summary>
+
+        <Prose>
+          {" after A, x and y are retained and one page is free. B reuses x and uses the free page for z. After B, x,y,z are retained; no eviction was needed. Correct C protects x and y and needs no new full prefix page, so it reuses four rows. Its one final query reads five positions: five pairs."}
+        </Prose>
+
+
+        <Prose>
+          {"The buggy preallocation evicts x even though no new prefix allocation was needed. C cannot start with y alone, so it reuses zero rows and computes all five queries, giving "}
+          <InlineMath>
+            {"T(5)=15"}
+          </InlineMath>
+          {" pairs. The content of y may remain identifiable, but the missing first block prevents prefix reuse. This comparison concerns the stated prefix-only pool; a full-request allocator must also budget the transient query and any decode growth. Preserve exact parent identities, active ownership and atomic refusal before comparing policies by work or measured latency."}
+        </Prose>
+
+
+        <Program file="practice.py" />
+
+
+        <Prose>
+          {""}
+          <code>
+            {"answers"}
+          </code>
+          {" combines independent arithmetic with finite ownership traces. "}
+          <code>
+            {"PrefixOnlyPool"}
+          </code>
+          {" is confined to task 16 and removes the ordinary final-block restriction only because it receives complete retained prefix IDs, not whole request prompts. "}
+          <code>
+            {"capstone"}
+          </code>
+          {" records both correct matching-first and explicitly buggy ancestor-eviction states. This subclass is not a replacement for the full-request store used earlier."}
+        </Prose>
+
+      </details>
+
+    </section>
+
+  </section>
+
+  <section 
+    className="lesson-ending lesson-ending--resources" 
+    data-lesson-ending="further-learning"
+  >
+
+    <H2>
+      {"15. Further learning"}
+    </H2>
+
+
+    <ul>
+
+      <li>
+        {""}
+        <a href={"https://mlsysbook.ai/vol1/model_serving/model_serving.html"}>
+          {"Machine Learning Systems: Model Serving"}
+        </a>
+        {" and "}
+        <a href={"https://mlsysbook.ai/vol2/inference/inference.html"}>
+          {"the inference chapter"}
+        </a>
+        {" connect shared-prefix state with memory and system costs. Read the serving/KV/prefix sections for a wider explanation of why avoided arithmetic and real latency differ; their illustrative hardware values are not this lesson's measurements."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://llmsystem.github.io/llmsystem2025spring/assets/files/llmsys-22-vLLM_woosuk_kwon-1f34697dbb1a1fb5b798daf6eff14b67.pdf"}>
+          {"CMU LLM Systems: vLLM lecture slides"}
+        </a>
+        {" connect repeated prompt content, dependent block hashes and computed-token offsets. The selected slide text complements the page-table diagrams here. No video viewing or reproduced slide-image claim is made."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://arxiv.org/html/2312.07104v2"}>
+          {"SGLang's paper, section 3 and appendix scheduler discussion"}
+        </a>
+        {" gives the original radix-cache/scheduling mechanism and fixed-tree DFS argument. Compare its assumptions with the small "}
+        <code>
+          {"order_work"}
+        </code>
+        {" model before applying the bound to online traffic."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://docs.vllm.ai/en/latest/design/prefix_caching/"}>
+          {"vLLM's prefix-caching design"}
+        </a>
+        {" describes current identity fields, complete blocks, pool lifecycle and duplication choices. Use it to compare the exact finite teaching allocator with a maintained engine, rather than assuming every engine deduplicates or hashes identically."}
+      </li>
+
+    </ul>
+
+
+  </section>
+
+  <section 
+    className="lesson-ending lesson-ending--resources" 
+    data-lesson-ending="references"
+  >
+
+    <span 
+      id="10-primary-sources" 
+      aria-hidden="true" 
+    />
+
+    <H2>
+      {"16. Technical references and runnable files"}
+    </H2>
+
+    <Prose>Complete orchestration and prerequisite files:</Prose>
+
+    <ul>
+
+      <li>
+
+        <a 
+          href="/learn-code/prefix-caching/prefix_study.py" 
+          download
+        >prefix_study.py</a>
+
+      </li>
+
+      <li>
+
+        <a 
+          href="/learn-code/prefix-caching/observations.py" 
+          download
+        >observations.py</a>
+
+      </li>
+
+      <li>
+
+        <a 
+          href="/learn-code/prefix-caching/tiny_causal_lm.py" 
+          download
+        >tiny_causal_lm.py</a>
+
+      </li>
+
+      <li>
+
+        <a 
+          href="/learn-code/prefix-caching/cached_decoder.py" 
+          download
+        >cached_decoder.py</a>
+
+      </li>
+
+      <li>
+
+        <a 
+          href="/learn-code/prefix-caching/native_cache.py" 
+          download
+        >native_cache.py</a>
+
+      </li>
+
+      <li>
+
+        <a 
+          href="/learn-code/prefix-caching/acquire_model.py" 
+          download
+        >acquire_model.py</a>
+
+      </li>
+
+    </ul>
+
+
+    <Prose>
+      {"The complete bundle includes all twelve subject programs, "}
+      <code>
+        {"prefix_study.py"}
+      </code>
+      {", "}
+      <code>
+        {"observations.py"}
+      </code>
+      {", the four unchanged prerequisite programs, pinned requirements, model identity, attributed Alice input, fixed token-ID protocol and saved JSON observations. The stage runner checks "}
+      <code>
+        {"source-manifest.json"}
+      </code>
+      {", requires earlier stages with the same identity and creates a new stage directory. "}
+      <code>
+        {"observations.py"}
+      </code>
+      {" saves completed operands/results before assertions. These helpers explain the reproducible boundary without changing the numerical mechanism."}
+    </Prose>
+
+
+    <Prose>
+      {"The four prerequisite files are "}
+      <code>
+        {"tiny_causal_lm.py"}
+      </code>
+      {", "}
+      <code>
+        {"cached_decoder.py"}
+      </code>
+      {", "}
+      <code>
+        {"native_cache.py"}
+      </code>
+      {" and "}
+      <code>
+        {"acquire_model.py"}
+      </code>
+      {". Only their required classes, loader, direct-forward, payload and file-acquisition interfaces are reused here; their older training, timing and verification mains were not rerun. The saved local sequence consists of finite checks, eight TinyLM forwards, ten Pythia forwards and the supplied-tensor allocator lifecycle, each once. All stages passed. No optimizer, autoregressive generation, timed workload, GPU execution or provider request is included."}
+    </Prose>
+
+
+    <Prose>
+      {"Use the file index to download individual complete sources or the full archive. Inspect "}
+      <code>
+        {"saved-results/finite/result.json"}
+      </code>
+      {", "}
+      <code>
+        {"saved-results/tiny/result.json"}
+      </code>
+      {", "}
+      <code>
+        {"saved-results/native/result.json"}
+      </code>
+      {" and "}
+      <code>
+        {"saved-results/allocator/result.json"}
+      </code>
+      {" before deciding whether you need a new run. Binary tensor journals were retained locally for the recorded experiment; the lightweight downloadable result summaries bind their source identities and report the actual outcomes."}
+    </Prose>
+
+
+    <ul>
+
+      <li>
+        {""}
+        <a href={"https://arxiv.org/abs/2312.07104"}>
+          {"Zheng et al., SGLang"}
+        </a>
+        {", version 2: compressed radix prefixes, state sharing and cache-aware scheduling; system benchmark claims remain those of the paper."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://arxiv.org/abs/2309.06180"}>
+          {"Kwon et al., PagedAttention"}
+        </a>
+        {": paged logical/physical cache management and sharing. The earlier Continuous Batching lesson owns the detailed mechanism and accepted prerequisite source."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://docs.vllm.ai/en/latest/design/prefix_caching/"}>
+          {"vLLM APC design"}
+        </a>
+        {": maintained full-block identity, namespaces, free queue and lifecycle. Its current implementation is distinct from this lesson's exact-prefix tuple index."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://github.com/huggingface/transformers/tree/v5.19.0/src/transformers/generation/continuous_batching/cache_allocators"}>
+          {"Transformers 5.19.0 source"}
+        </a>
+        {": the pinned "}
+        <code>
+          {"FullAttentionCacheAllocator"}
+        </code>
+        {", "}
+        <code>
+          {"CachePool"}
+        </code>
+        {" and ledger interfaces used for the supplied K/V fixture. The ordinary model example uses "}
+        <code>
+          {"DynamicCache"}
+        </code>
+        {" and direct forwards."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://platform.claude.com/docs/en/build-with-claude/prompt-caching"}>
+          {"Claude caching"}
+        </a>
+        {", "}
+        <a href={"https://developers.openai.com/api/docs/guides/prompt-caching"}>
+          {"OpenAI caching"}
+        </a>
+        {", "}
+        <a href={"https://ai.google.dev/gemini-api/docs/generate-content/caching"}>
+          {"Gemini generateContent caching"}
+        </a>
+        {", and "}
+        <a href={"https://github.com/googleapis/python-genai/blob/main/google/genai/caches.py"}>
+          {"Google SDK cache source"}
+        </a>
+        {": current source-checked request/lifetime/usage contracts, with optional examples unexecuted remotely."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://arxiv.org/html/2609.28870v1"}>
+          {"When Fancy Eviction Fails"}
+        </a>
+        {", selected sections 3.1 and 4.1–4.3: a recent preprint perspective on session-bounded reuse and eviction. Our illustrative comparison is generated by "}
+        <code>
+          {"prefix_workload.py"}
+        </code>
+        {", not copied from its measured data."}
+      </li>
+
+      <li>
+        {""}
+        <a href={"https://arxiv.org/html/2603.10726v1"}>
+          {"CacheSolidarity"}
+        </a>
+        {", selected sections 3.1–3.2: owner/flag isolation as a research mechanism under stated conditions. No attack or defense experiment is reproduced here."}
+      </li>
+
+    </ul>
+
+
+  </section>
+
+  <section 
+    className="lesson-ending lesson-ending--resources" 
+    data-lesson-ending="readiness"
+  >
+
+    <H2>
+      {"17. Ready to continue"}
+    </H2>
+
+
+    <Prose>
+      {"You should now be able to point to the old K/V rows a new query reads, explain why a changed earlier token invalidates later cached states, and separate a compatible prefix from a resident hit. Given two request tables, count the physical union, track owners through cancellation, and refuse an admission without corrupting protected hits. Given a suffix comparison, identify what its numerical tolerance, storage pointers and timing evidence do or do not establish."}
+    </Prose>
+
+
+    <Prose>
+      {"For an unfamiliar cache, ask for its exact identity, matching boundary, mutation and release contract before trusting a hit-rate number. For a remote API, inspect reported usage and lifetime instead of projecting a local allocator onto its billing model. "}
+      <a href={"/learn/path/full-curriculum/inference-cost-economics-compute-scaling?module=large-language-models"}>
+        {"Inference Cost Economics"}
+      </a>
+      {" broadens the cost model; "}
+      <a href={"/learn/path/full-curriculum/inference-engines-serving?module=large-language-models"}>
+        {"Inference Engines & Serving"}
+      </a>
+      {" brings these state and scheduling contracts into a complete serving stack."}
+    </Prose>
+
+  </section>
+</div>;
+}
+export default {
+  title: 'Prefix Caching & Prompt Caching',
+  slug: 'prefix-caching-prompt-caching',
+  readTime: '~75 min read + 75 min practice',
+  content: PrefixCachingLesson
+};

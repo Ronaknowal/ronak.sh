@@ -1,0 +1,37 @@
+.ensemble-probability-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0;
+  scrollbar-color: #8e7750 #17171b;
+}
+
+.ensemble-probability-table table {
+  border-collapse: collapse;
+  min-width: 44rem;
+  width: max-content;
+  max-width: none;
+  font-size: 1rem;
+}
+
+.ensemble-probability-table th,
+.ensemble-probability-table td {
+  border: 1px solid #45454b;
+  padding: .65rem .8rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.ensemble-probability-table tbody th,
+.ensemble-probability-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  background: #17171b;
+  z-index: 1;
+}
+
+.ensemble-probability-table caption {
+  text-align: left;
+  white-space: normal;
+  width: min(44rem, 100%);
+  padding-bottom: .7rem;
+}

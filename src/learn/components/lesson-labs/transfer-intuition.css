@@ -1,12 +1,47 @@
-.transfer-intuition { margin: 1.7rem 0; padding: 1.2rem; border: 1px solid #3c362b; border-radius: 6px; background: #10100f; color: #dedbd3; }
-.transfer-intuition h3, .transfer-intuition h4 { color: #edcc80; line-height: 1.5; }
-.transfer-intuition figcaption { margin-top: 1rem; font-size: .92rem; line-height: 1.7; color: #b8b4aa; }
-.transfer-intuition-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
+/* Transfer-learning intuition figures, drawn in the reading flow (lesson-flow.css).
+   Vocabulary: same/+1 filled amber circle, different/−1 blue ring; computed values violet;
+   grey unchanged; dashed amber added and trained. */
+.transfer-intuition { color: #dedbd3; }
+.transfer-intuition p { line-height: 1.7; }
+.transfer-row-label { color: #d6d1c6; font-size: .93rem; }
+.transfer-part-title { font-weight: 600; color: #ece8df; margin: 0 0 .4rem; }
+.transfer-violet { color: #c7a5ee; }
+.transfer-intuition-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1.1rem; }
+.transfer-intuition-pair > * { min-width: 0; }
 .transfer-intuition svg { display: block; width: 100%; max-width: 340px; height: auto; }
-.transfer-intuition svg text { fill: #dedbd3; font: 12px ui-monospace, monospace; }
-.transfer-collapsed-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
-.transfer-collapsed-features > div { display: flex; flex-direction: column; gap: .7rem; padding: .6rem; border: 1px solid #796134; }
-.transfer-adapter-trace { display: grid; gap: .8rem; }
-.transfer-adapter-trace > div { display: flex; flex-direction: column; gap: .3rem; border-left: 2px solid #b99244; padding: .5rem 1rem; }
-@media (max-width: 750px) { .transfer-intuition-pair { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 480px) { .transfer-intuition { padding: .8rem; } }
+.transfer-intuition svg text { fill: #dedbd3; font: 11px ui-monospace, monospace; }
+.transfer-intuition svg .transfer-svg-amber { fill: #f1cc79; }
+.transfer-collapsed-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); gap: .6rem; }
+.transfer-collapsed-features > div { display: flex; flex-direction: column; gap: .6rem; padding: .6rem; border: 1px solid #c7a5ee; border-radius: 4px; min-width: 0; overflow-wrap: anywhere; }
+.transfer-dot { display: inline-block; width: .8em; height: .8em; border-radius: 50%; vertical-align: -.05em; margin-right: .3em; }
+.transfer-dot.is-same { background: #e4b752; }
+.transfer-dot.is-different { border: 2px solid #83b4e8; }
+
+/* Adapter: one split, a grey direct route and a dashed amber detour, one join. */
+.transfer-adapter-placement { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: .6rem 0 1rem; }
+.transfer-adapter-placement strong { padding: .3rem .6rem; border: 2px dashed #e4b752; color: #f1cc79; border-radius: 3px; }
+.transfer-route-end { display: flex; flex-direction: column; gap: .4rem; padding: .7rem; border-radius: 4px; text-align: center; overflow-wrap: anywhere; border: 1px solid #7dd5e9; }
+.transfer-route-end.is-sum { border-color: #c7a5ee; }
+.transfer-adapter-branches { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.4fr); gap: .8rem; margin: 0 1rem; }
+.transfer-adapter-branches > div { min-width: 0; padding: .9rem .6rem; }
+.transfer-adapter-branches .transfer-adapter-direct { border-inline: 2px solid #4a4640; background: #1a1917; }
+.transfer-adapter-branches .transfer-adapter-detour { border-inline: 2px dashed #e4b752; }
+.transfer-adapter-branches .transfer-adapter-detour .transfer-part-title { color: #f1cc79; }
+.transfer-adapter-direct { display: flex; flex-direction: column; text-align: center; align-items: center; }
+.transfer-skip-line { flex: 1; min-height: 3rem; border-left: 2px solid #8f897f; position: relative; margin-bottom: .75rem; }
+.transfer-skip-line::after { content: '▼'; position: absolute; bottom: -.35rem; left: -.4rem; color: #8f897f; font-size: .8rem; }
+.transfer-adapter-detour ol { list-style: none; display: grid; gap: 1.4rem; margin: 0; padding: 0; }
+.transfer-adapter-detour li { display: flex; flex-direction: column; gap: .4rem; position: relative; border: 1px solid #5a554d; border-radius: 4px; padding: .55rem; margin: 0; overflow-wrap: anywhere; }
+.transfer-adapter-detour li:not(:last-child)::after { content: '↓'; position: absolute; bottom: -1.4rem; left: 50%; color: #e4b752; }
+.transfer-fork { display: flex; justify-content: space-between; align-items: center; gap: .6rem; margin: .5rem 1.2rem; color: #bdb8ad; font-size: .85rem; text-align: center; }
+.transfer-fork > span:first-child, .transfer-fork > span:last-child { font-size: 1.3rem; color: #d6d1c6; }
+.transfer-route-tag { display: block; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: #a9a499; margin-bottom: .2rem; font-weight: 400; }
+.transfer-route-tail { margin: .8rem 0 0; color: #d6d1c6; font-weight: 600; }
+[data-figure="transfer-adapter-routes"] { container-type: inline-size; }
+@container (max-width: 28rem) {
+  .transfer-adapter-branches { grid-template-columns: minmax(0, 1fr); margin: .75rem 0; gap: .75rem; }
+  .transfer-adapter-branches .transfer-adapter-direct { border: 2px solid #4a4640; }
+  .transfer-adapter-branches .transfer-adapter-detour { border: 2px dashed #e4b752; }
+  .transfer-skip-line { display: none; }
+  .transfer-fork { margin-inline: 0; }
+}

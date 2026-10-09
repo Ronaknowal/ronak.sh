@@ -1,0 +1,336 @@
+{
+  "status": "COMPLETE_MANUSCRIPT_PENDING_DIFFERENT_WHOLE_CONTENT_REVIEW",
+  "author": "/root/nmf_content_recovery",
+  "created": "2026-10-09T14:27:22.850Z",
+  "acceptance": false,
+  "authority": "Root delegated source-only recovery of the interrupted NMF19 author handoff. No new lesson rewrite or phase/runtime/publication work.",
+  "manuscript": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson.md",
+    "bytes": 430287,
+    "sha256": "1d828562c404a70a2372eed3a821651ab8817738124dc9e4d0880d01d66b186f"
+  },
+  "template": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson-template.md",
+    "bytes": 81056,
+    "sha256": "f4b92946790435c26a5aea1622b08f65998bb759a063c325719c29361b3b9167"
+  },
+  "assembly": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\partial-content-assembly.json",
+    "bytes": 11948,
+    "sha256": "b14e9ae09ba852c970ced579f75f17260ff21aa39447d7a66092daff718c09ba"
+  },
+  "composition": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\section-composition.json",
+    "bytes": 2679,
+    "sha256": "27c9274fa3f0170206d929dc24f49fe2a34c4f11cfaebe36185a833bdfdb64a7"
+  },
+  "composer": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\compose-content.mjs",
+    "bytes": 5104,
+    "sha256": "9c2adef44bedcafbc9df19839a83d9b9e820bb7032aa4d69054976a14be1c91b"
+  },
+  "fullBindingManifest": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\whole-composition-receipt.json",
+    "bytes": 123980,
+    "sha256": "eb551b68b3a760baca80e56cdec41c01b3d8badabea865dba5c35afdfb7b6c26"
+  },
+  "remainingSectionManifest": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\remaining-content-handoff.json",
+    "bytes": 24933,
+    "sha256": "9547c0b2bf6f4442d02cf96d4fc336b57c46175261a761c0eed55bcaa1caaee3"
+  },
+  "endingManifest": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\section-nineteen-handoff.json",
+    "bytes": 48111,
+    "sha256": "be5cabdd8191255a88b57187fa3d2b97941cf077c11c3cd2115d8806d2a0afeb"
+  },
+  "preservedStepCorrection": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\preserved-step-correction.json",
+    "bytes": 6665,
+    "sha256": "4c953dd27feb3344c36e4281a59d620ad55715077c011b9bc7ffe85c94226b8b"
+  },
+  "failedWriteRecord": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\failed-whole-review-write.json",
+    "bytes": 1069,
+    "sha256": "93fbd3ecffe9829d03ce2257cff9345c7a842ea26aba1eafd7fe504168047867"
+  },
+  "recoverySource": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\recover-whole-review-handoff.mjs",
+    "bytes": 20108,
+    "sha256": "a3d81cb0aea5afa390e596b3c7190eddaf837091fa80176fafa90bf41dc32bfd"
+  },
+  "interruptedFreezeSource": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\freeze-whole-review-handoff.mjs",
+    "bytes": 5730,
+    "sha256": "dcde94924ebd86296631ca84ebed0429e33ce1eff1aa36d08d216fca82b1093b"
+  },
+  "conservation": {
+    "priorAssemblyConditions": 304,
+    "currentVerifiedDistinctFiles": 120,
+    "inMemoryCompositionExact": true,
+    "spacingPairs": [
+      [
+        "sweeps1,2,10 and40",
+        "sweeps 1, 2, 10 and 40"
+      ],
+      [
+        "printed sweep1",
+        "printed sweep 1"
+      ],
+      [
+        "loss is0.03944744",
+        "loss is 0.03944744"
+      ],
+      [
+        "By sweep40",
+        "By sweep 40"
+      ],
+      [
+        "loss is5×10⁻⁸",
+        "loss is 5×10⁻⁸"
+      ],
+      [
+        "ones from section1",
+        "ones from section 1"
+      ]
+    ],
+    "spacingInverseTemplateSha256": "d1451fecb41a4d9396335df6000e093558c9ce0ac6f752ea844a42b193a1f9f2",
+    "spacingInverseManuscriptSha256": "a06a478712e897b3689400d5d2f4b321b0cea345c9ee50165ad8bfe38ce88ec7",
+    "insertionInverseTemplateSha256": "63a318227faa8146950823d0b8f00c90221f0c524613db175683a85675963a3a",
+    "insertionInverseManuscriptSha256": "31e199cdbeabfdfcb5024cb9c03ad7e0996543517152526023372a9042c85fbc",
+    "originalElevenSectionPrefixBeforeLaterCorrectionExact": true
+  },
+  "scope": {
+    "actualSections": 19,
+    "actualVisualPlacements": 66,
+    "actualSpecifiedVisualJobs": 66,
+    "namedRoutes": 12,
+    "additionalCompleteAdapterDemonstrationSources": 3,
+    "completeNewSources": 15,
+    "originalCompleteCodeOutputPairs": 3,
+    "retainedStdoutStreams": 16,
+    "solvedTasks": 24,
+    "sharedFileIndex": 22,
+    "acceptedOutcomes": 9
+  },
+  "originalPrograms": [
+    {
+      "file": "nmf_step.py",
+      "decodedCodeSha256": "b75511b9f0d8bacdf28a316351ac668ca7246cbe18de0c55d15f93002578c1a1",
+      "decodedOutputSha256": "0a0e7b7ba934a3f72ed27701cdd825698bafac0b2d3269c4dcef99a37aef060a",
+      "codeOccurrences": 1,
+      "outputOccurrences": 1
+    },
+    {
+      "file": "nmf_digits.py",
+      "decodedCodeSha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989",
+      "decodedOutputSha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981",
+      "codeOccurrences": 1,
+      "outputOccurrences": 1
+    },
+    {
+      "file": "nmf_words.py",
+      "decodedCodeSha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343",
+      "decodedOutputSha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23",
+      "codeOccurrences": 1,
+      "outputOccurrences": 1
+    }
+  ],
+  "openMaterialFinding": {
+    "location": "section19 / Files for the worked implementations, sentence beginning Each worked new program",
+    "claim": "Each worked new program's complete stdout is displayed beside it.",
+    "assessment": "Inaccurate for eight retained streams. They exist with exact frozen identities, and some results are discussed in prose, but their complete outputs are absent from the manuscript. This is not merely a CRLF versus LF comparison issue. No numerical result has been invalidated or rerun. Root explicitly instructed recovery to preserve the current manuscript for this status/review packet.",
+    "streamPresentation": [
+      {
+        "file": "nmf_arrays.stdout.txt",
+        "retainedBytes": 213,
+        "retainedSha256": "a29980714874ff3c5e0f5b4b4238acf99a3e998cc36e9e49bccc8a7fec164009",
+        "literalFullOccurrences": 0,
+        "fullOccurrencesAfterCRLFNormalization": 0
+      },
+      {
+        "file": "nmf_coordinate.stdout.txt",
+        "retainedBytes": 525,
+        "retainedSha256": "c9f6c935d3dbeb5754943c046637556734f20c8eb00356118b7e83c929dc468e",
+        "literalFullOccurrences": 0,
+        "fullOccurrencesAfterCRLFNormalization": 0
+      },
+      {
+        "file": "nmf_nnls.stdout.txt",
+        "retainedBytes": 277,
+        "retainedSha256": "d985954fd0fd74ca4ef4ed504c7403fc0f43c0ed1db8b28dfff89f5f2b3f4051",
+        "literalFullOccurrences": 0,
+        "fullOccurrencesAfterCRLFNormalization": 0
+      },
+      {
+        "file": "nmf_multiplicative.stdout.txt",
+        "retainedBytes": 405,
+        "retainedSha256": "2463a81a7757d551e9521c24e6eb58589a6b76df839efb1400a09c7262e2cf58",
+        "literalFullOccurrences": 0,
+        "fullOccurrencesAfterCRLFNormalization": 0
+      },
+      {
+        "file": "nmf_beta_mm.stdout.txt",
+        "retainedBytes": 526,
+        "retainedSha256": "87ab2d9faf5f1e8e1874ece88664b70ec1cedab2f84c19cc43fb27a850053a55",
+        "literalFullOccurrences": 0,
+        "fullOccurrencesAfterCRLFNormalization": 0
+      },
+      {
+        "file": "initialization-main.stdout.txt",
+        "retainedBytes": 875,
+        "retainedSha256": "fc0ee263d36478e372b32b4f97d973468935691a1ced9e3595962006f9c60ef5",
+        "literalFullOccurrences": 0,
+        "fullOccurrencesAfterCRLFNormalization": 0
+      },
+      {
+        "file": "lifecycle-main.stdout.txt",
+        "retainedBytes": 773,
+        "retainedSha256": "c0623b08ca502f127cfe2488aa1db45eed3e0821b4a6f8c1c76e5a012b85b175",
+        "literalFullOccurrences": 1,
+        "fullOccurrencesAfterCRLFNormalization": 1
+      },
+      {
+        "file": "penalties-masks-main.stdout.txt",
+        "retainedBytes": 784,
+        "retainedSha256": "024907ee70452af2c13057d2e535ed3c02c2a78b195dd1578ed5711899ab1156",
+        "literalFullOccurrences": 0,
+        "fullOccurrencesAfterCRLFNormalization": 0
+      },
+      {
+        "file": "nmf_factor_alignment.stdout.txt",
+        "retainedBytes": 702,
+        "retainedSha256": "b5ab059aa2c342e16464e061e5fc8528c05c8fbe69eaca0daabf6827a0612e0a",
+        "literalFullOccurrences": 1,
+        "fullOccurrencesAfterCRLFNormalization": 1
+      },
+      {
+        "file": "nmf_saved_digits.stdout.txt",
+        "retainedBytes": 9285,
+        "retainedSha256": "472bd7083b1f348d37729b705c2b74163bebeecda1c109ea25adfd6ebdb8b5ac",
+        "literalFullOccurrences": 1,
+        "fullOccurrencesAfterCRLFNormalization": 1
+      },
+      {
+        "file": "nmf_digit_comparison.stdout.txt",
+        "retainedBytes": 38803,
+        "retainedSha256": "b3ec28cea308fb5003d017f201fd47afbd7336db9bbda7c70a9c233dbcd44286",
+        "literalFullOccurrences": 1,
+        "fullOccurrencesAfterCRLFNormalization": 1
+      },
+      {
+        "file": "nmf_anchors.stdout.txt",
+        "retainedBytes": 496,
+        "retainedSha256": "8bc8941bab29409882962876c722b685e1ef15dbb4783b9d12c3a99c5aa457bb",
+        "literalFullOccurrences": 1,
+        "fullOccurrencesAfterCRLFNormalization": 1
+      },
+      {
+        "file": "nmf_text_spectra.stdout.txt",
+        "retainedBytes": 6934,
+        "retainedSha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35",
+        "literalFullOccurrences": 1,
+        "fullOccurrencesAfterCRLFNormalization": 1
+      },
+      {
+        "file": "nmf_online.stdout.txt",
+        "retainedBytes": 4228,
+        "retainedSha256": "a7f59677f85590b65f4a76ec5a37d684c73f270cf0d156bb3471aeb2c5129316",
+        "literalFullOccurrences": 1,
+        "fullOccurrencesAfterCRLFNormalization": 1
+      },
+      {
+        "file": "nmf_axis_phase.stdout.txt",
+        "retainedBytes": 2292,
+        "retainedSha256": "4ef80b4a363b2507bcb7f9fc5e331b44ce31645c164a2c412389622d9191cefc",
+        "literalFullOccurrences": 1,
+        "fullOccurrencesAfterCRLFNormalization": 1
+      },
+      {
+        "file": "positive-kl.stdout.txt",
+        "retainedBytes": 222,
+        "retainedSha256": "43fb77d25dc6c9bcdf8bc60de5b6eb89228990dcec35d59fa923b9c5d2360b47",
+        "literalFullOccurrences": 0,
+        "fullOccurrencesAfterCRLFNormalization": 0
+      }
+    ],
+    "requiredClosure": "Author must reconcile complete output presentation and the learner-facing delivery promise, with source-qualified retained streams and no scientific replay. DIFFERENT reviewer must inspect the full lesson and determine the affected delivery/correctness/learning consequences. This recovery does not close that finding."
+  },
+  "precisionCorrection": {
+    "handoff": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\correction-handoff.json",
+      "bytes": 25318,
+      "sha256": "3084e21cbacb6d10e3d97319b6ef03cde113f6c0c3cd324e1b62469c23320ac1"
+    },
+    "originalIndependentReport": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\independent-content-review\\sections-twelve-sixteen-review.md",
+      "bytes": 13599,
+      "sha256": "e3d1e2c850a036448b705275001d74f755547ebc5d4dd562d16cb397e053f035"
+    },
+    "originalIndependentIdentities": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\independent-content-review\\sections-twelve-sixteen-identities.json",
+      "bytes": 54292,
+      "sha256": "615c8333ba98020b70f756e1263c51b24d1452e19ab7f97fd4c1528183b66534"
+    },
+    "disposition": "Exact prose-only overlays for12/16 selected and conserved; SAME/whole reviewer closure remains pending. Original R1 report misnamed matching_factors: row_contribution actually calls nonnegative_table directly, which calls real_table. The wrapper-copy cost conclusion and corrected prose remain valid."
+  },
+  "authorReading": {
+    "retainedFullReadback": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\reading-flow-intake.md",
+      "bytes": 7731,
+      "sha256": "e76e5d4440336d5432f5cf1a3cdef0807d48753b3a0af0b71185ecc6d777a0d4"
+    },
+    "originalScope": "Original author read continuous teaching prose/equations/tables/placements1–18 with separately closed truncated ranges, section19 during its authoring, full owned9–19 bodies during authoring, and corrected complete7. This is not a fresh literal read of every earlier1–8 program.",
+    "recoveryScope": "Recovery read the full retained author readback, the current entire7 including restored original and robust code/output, six exact spacing edits, corrected12/16 continuous prose with unchanged fences explicitly elided, actual contribution validation chain, and section19 setup/file/resource/ending roles. No independent entire-manuscript reading is claimed.",
+    "assessment": "The restored original step pair and six spacing corrections are conserved. Recovery additionally found the complete-stdout presentation discrepancy recorded above; therefore the original bounded no-further-gap assessment is historical, not this recovery's disposition."
+  },
+  "reviewPacket": {
+    "readyForDifferentWholeContentReview": true,
+    "required": "Read complete literal1–19 including every code/output block,19-section/66-job/12-route/24-task/9-outcome coverage, setup/file index, all actionable specifications and exact research/prerequisite links. Assess correctness and learning experience independently; close precision overlays with reference to original staged findings. Do not substitute this conservation receipt for substantive reading.",
+    "explicitAmendments": [
+      "D28/D30 scalar and Jensen/tangent additions",
+      "N8 separately bounded optional global assignment ambiguity audit and wrapper costs",
+      "D48 original fixed-eight aggregates versus separate new predetermined rank6/seed23 matched images; never fabricate old PCA8 factors",
+      "Qualified positive shifted KL demonstration and unchanged original failed stream",
+      "Section11 streamed-loss correction has affected pure checks rather than a replayed original main",
+      "Finite tensor anatomy/phase counterexample is not tensor fitting or audio study"
+    ],
+    "presentationConsideration": "Full long controlled-study output remains retained; runtime must keep the local comparison readable and preserve access without deleting evidence or hiding instructional code."
+  },
+  "checks": {
+    "passedBeforeFinalization": 368,
+    "passedFinalizationGuards": 2,
+    "totalActualPassed": 370,
+    "verifiedDistinctFiles": 120,
+    "scope": "Frozen input identity, exact in-memory assembly, spacing/insertion inverse and original prefix, literal source/code/output roles, actual visual jobs, solved task roles, setup/index, precision overlays and exact final artifact guards. The368saved checks include the absent-temporary-file guard; the final two verify temporary JSON and the still-empty destination before atomic replacement.",
+    "detailedProcedure": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\recover-whole-review-handoff.mjs",
+      "bytes": 20108,
+      "sha256": "a3d81cb0aea5afa390e596b3c7190eddaf837091fa80176fafa90bf41dc32bfd"
+    },
+    "execution": "node content-preparation/whole-manuscript-composition/recover-whole-review-handoff.mjs exited0; actual tool result reported370conditions. Original failed guards disclosed in execution; no scientific runs."
+  },
+  "execution": {
+    "kind": "Node source/identity/assembly inspection only; no historical composer invoked",
+    "preliminaryGuardFailures": [
+      "First attempt rejected a mistyped expected SHA256 (missing leading1); actual manuscript identity was checked and the script literal corrected. Only the empty-artifact observation had been written.",
+      "Second attempt correctly rejected an assumed full-stdout-occurrence requirement, exposing the eight missing full presentations. Manuscript unchanged; this finding is recorded rather than bypassed."
+    ],
+    "newPythonMains": 0,
+    "newFits": 0,
+    "scientificReplay": false,
+    "builds": 0
+  },
+  "phase": "Content remains in progress pending DIFFERENT whole-content review and Root acceptance; implementation not started. Root alone owns central phases/integration.",
+  "limits": [
+    "No current rendered/native figures, labs, code downloads or responsive/browser review",
+    "No independent whole-content certification or observed learner mastery",
+    "Original numerical/warning/environment/review qualifications remain; identities are not correctness proof",
+    "No canonical, public, runtime, publication or central-ledger edit"
+  ],
+  "compaction": {
+    "ownVerbosePredecessorBytes": 60899,
+    "ownVerbosePredecessorSha256": "20df24a800a64be5f38ead35abd8badae9728336d71b643a8e9b10fbfd812432",
+    "operation": "Replace own repeated condition-name list by actual counts and categories; substantive packet, source identities and open finding unchanged. Existing full manifest remains sole full binding manifest."
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "checkedAt": "2026-10-06T20:14:47.407Z",
+  "base": "http://127.0.0.1:4242",
+  "sourceFiles": {
+    "src/learn/data/topics/multimodal-tokenization.jsx": "ca9aae58cd88867ec2b60511115ea70db0af92847ecfecddf594e2585d4d00b8",
+    "src/learn/components/lesson-labs/MultimodalTokenizationFlow.jsx": "e9851716708e6246a1506ed6ec375730af7295db9191869f8571566f7b227411",
+    "src/learn/components/lesson-labs/multimodal-tokenization-flow.css": "88556836086f3526d75641d878ae690d4953edb9f17b320266db9cb1118bed36",
+    "scripts/verify-multimodal-math-scroll.cjs": "3f1dfd8a416675f0223b8efed7b10f896764614ee6f665c818a0bce98d5f10c8"
+  },
+  "buildManifestHash": "4f7b15bdb48ec41ca50758946c3556f8ae7b98f9b3f3d6248a0e52cc36de6642",
+  "views": [
+    {
+      "width": 390,
+      "zoom": 1,
+      "name": "phone",
+      "equations": []
+    },
+    {
+      "width": 768,
+      "zoom": 2,
+      "name": "enlarged",
+      "equations": [
+        {
+          "equation": 2,
+          "width": 411,
+          "scrollWidth": 419,
+          "position": 0,
+          "finalPosition": 8,
+          "overflow": 0,
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-accepted/screenshots/enlarged-equation-2-end.png",
+          "screenshotSha256": "cd9bf38d4bee89f5058eea0a67882100cce858d7977a88fce9c014a3530f8569",
+          "control": "Focused native ArrowRight key; no script-set scroll position"
+        },
+        {
+          "equation": 4,
+          "width": 411,
+          "scrollWidth": 559,
+          "position": 0,
+          "finalPosition": 148,
+          "overflow": 0,
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-accepted/screenshots/enlarged-equation-4-end.png",
+          "screenshotSha256": "6196f44116d5f5e1dd780c0a3c2534453223969cbed6d82a7763964c0692115e",
+          "control": "Focused native ArrowRight key; no script-set scroll position"
+        },
+        {
+          "equation": 5,
+          "width": 411,
+          "scrollWidth": 502,
+          "position": 0,
+          "finalPosition": 91,
+          "overflow": 0,
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-accepted/screenshots/enlarged-equation-5-end.png",
+          "screenshotSha256": "60e0afc057b8748bd339a2b70a1a3fd48af7b07ca1eeb1b1911d07661e3710f5",
+          "control": "Focused native ArrowRight key; no script-set scroll position"
+        },
+        {
+          "equation": 7,
+          "width": 411,
+          "scrollWidth": 438,
+          "position": 0,
+          "finalPosition": 27,
+          "overflow": 0,
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-accepted/screenshots/enlarged-equation-7-end.png",
+          "screenshotSha256": "32dc5b0fb0f211d6de823bd53b4b48e1d85df19c8256e3b411c859410fb37088",
+          "control": "Focused native ArrowRight key; no script-set scroll position"
+        },
+        {
+          "equation": 10,
+          "width": 411,
+          "scrollWidth": 450,
+          "position": 0,
+          "finalPosition": 39,
+          "overflow": 0,
+          "screenshot": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/browser-accepted/screenshots/enlarged-equation-10-end.png",
+          "screenshotSha256": "681698d824951518239836cb030db0e8149c0e25268ca0c23766e5ba13b426e8",
+          "control": "Focused native ArrowRight key; no script-set scroll position"
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "browser": "154.0.4258.62"
+}

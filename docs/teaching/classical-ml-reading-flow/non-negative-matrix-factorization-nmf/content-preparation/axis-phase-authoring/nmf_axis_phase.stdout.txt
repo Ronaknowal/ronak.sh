@@ -1,0 +1,170 @@
+{
+  "scope": "New exact anatomy only, no tensor optimizer/audio experiment",
+  "factors": {
+    "observation": [
+      1.0,
+      2.0
+    ],
+    "feature": [
+      1.0,
+      0.0
+    ],
+    "time": [
+      1.0,
+      3.0
+    ]
+  },
+  "tensor_ijt": [
+    [
+      [
+        1.0,
+        3.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      [
+        2.0,
+        6.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ]
+  ],
+  "time_slices": [
+    [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        2.0,
+        0.0
+      ]
+    ],
+    [
+      [
+        3.0,
+        0.0
+      ],
+      [
+        6.0,
+        0.0
+      ]
+    ]
+  ],
+  "address_1_0_1": 6.0,
+  "unfolded_j_major_t_minor": [
+    [
+      1.0,
+      3.0,
+      0.0,
+      0.0
+    ],
+    [
+      2.0,
+      6.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "einsum_equal": true,
+  "tucker111_equal": true,
+  "different_tucker_core": [
+    [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        2.0,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ]
+  ],
+  "different_tucker_tensor": [
+    [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        2.0,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ]
+  ],
+  "waves": [
+    {
+      "coefficients": [
+        0.0,
+        1.0
+      ],
+      "magnitude": [
+        0.0,
+        1.0
+      ],
+      "second_bin_phase": 0.0,
+      "direct_inverse_real": [
+        0.5,
+        -0.5
+      ],
+      "direct_roundoff_imaginary": [
+        0.0,
+        6.123233995736766e-17
+      ],
+      "ordinary_ifft_real": [
+        0.5,
+        -0.5
+      ]
+    },
+    {
+      "coefficients": [
+        0.0,
+        -1.0
+      ],
+      "magnitude": [
+        0.0,
+        1.0
+      ],
+      "second_bin_phase": 3.141592653589793,
+      "direct_inverse_real": [
+        -0.5,
+        0.5
+      ],
+      "direct_roundoff_imaginary": [
+        0.0,
+        -6.123233995736766e-17
+      ],
+      "ordinary_ifft_real": [
+        -0.5,
+        0.5
+      ]
+    }
+  ]
+}

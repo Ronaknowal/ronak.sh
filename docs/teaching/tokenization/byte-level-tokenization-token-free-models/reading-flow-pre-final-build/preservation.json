@@ -1,0 +1,427 @@
+{
+  "date": "2026-10-06",
+  "reason": "Preserve successful author checks and actually inspected paints before final shared rebuild changed propagated compiled imports; final source remains frozen.",
+  "manifestSHA256": "d6684e18061488ddfc10b987a148ff13f45cac83925d0cb8b3265f25c4e17189",
+  "files": [
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-browser.json",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-browser.json",
+      "sha256": "fc160179950ca7ed66b4f61f9674b45902b906b99c0888568391220e57b1d036"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paint-review.json",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paint-review.json",
+      "sha256": "0b065e7c99dbd18bd6ed97609cf0017bcdb7f607d9578f86ef3126736f0c4d44"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-review.md",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-review.md",
+      "sha256": "2774facb270ad82ca49bd505777b45047c37962f296df787018a38d89649870d"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-blt-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-blt-1366-1x.png",
+      "sha256": "13fe3c6178fbbc075b23d31f8c824e62c2b63bdab2f406f396f7bd5e6bdd0152"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-blt-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-blt-390-1x.png",
+      "sha256": "286c64caa4e44379928973f5e952ac18114732bf7d3f33523735a035050f5cf2"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-blt-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-blt-768-2x.png",
+      "sha256": "36ae7d18f88c8b27bf2e84afc7ece267bcb614100603ba043218b356d0a28c1f"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-byt5-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-byt5-1366-1x.png",
+      "sha256": "bec6a1ee619d5532203546cadba2763b862d58e47fed790eed7f18953cc3e151"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-byt5-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-byt5-390-1x.png",
+      "sha256": "d0420441f12ccfbb9824ceac8d1c55e7d0418634d47dbdb38311734a91e1d6eb"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-byt5-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-byt5-768-2x.png",
+      "sha256": "80765e1fb9e27ee17fce4a5aba1052bb7f3dbe1e6a191098b9a2d272a688480e"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-canine-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-canine-1366-1x.png",
+      "sha256": "3dbc9dadd4d3d3eb2221b7b561abe19754fc70851873829413ba0c8cb6ed79a5"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-canine-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-canine-390-1x.png",
+      "sha256": "38eaae0b3f89d8d20259c81524172b3a6b57e05d6fcdc06f43b8ae1586f53244"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-canine-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-canine-768-2x.png",
+      "sha256": "e9cbc97765c81dc1f72c1d91f8832645e1db57b7830a996786cc1d9fda1fb460"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-charformer-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-charformer-1366-1x.png",
+      "sha256": "74f783a4545edd6740aa835e097e4e7f706c6a0de41a407f0c956708728191a9"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-charformer-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-charformer-390-1x.png",
+      "sha256": "58e35cb9dc180dad88b144248332fcfef66c315105c8cd9f636ee39e0104a5bd"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-charformer-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-charformer-768-2x.png",
+      "sha256": "f03c04d24fa539536c74ec195e576026a803e3d1f46519b6fc8cbbbb8c10f175"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-mambabyte-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-mambabyte-1366-1x.png",
+      "sha256": "0f25bca64402c60cc87c45aebc69eec118ca61b047b9a2c4354df2ddead508f6"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-mambabyte-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-mambabyte-390-1x.png",
+      "sha256": "bfe01d680dcbdfce793e37ae9f953bafc632b10dbd39d048fcf20d8cf1f28f43"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/architecture-mambabyte-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/architecture-mambabyte-768-2x.png",
+      "sha256": "8134b20bbda4c19c4be08c2354123cf72aafc8f0b0c6a069c7c8800848e99c42"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-cost-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-cost-1366-1x.png",
+      "sha256": "a57b617e0616d7e649208578557c2ee9dc044baf16cfe9b4a903cb882303f65b"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-cost-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-cost-390-1x.png",
+      "sha256": "4bd21c9f6227f8f55c793257790778fcc89f314b9215963665a53d7f36784753"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-cost-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-cost-768-2x.png",
+      "sha256": "372c1afe3aba09510607d72732a6b033aefffc104b66e5d9f43ade307e9318f3"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-embedding-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-embedding-1366-1x.png",
+      "sha256": "d1d7ac0092dbee28f0a6b252087ca29b231e20ecdc7d7a7a0c82890ce1c13baa"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-embedding-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-embedding-390-1x.png",
+      "sha256": "7f6dacd688a0ab6f7b42d3b1199f7dd837d264f1fa34246353f0f18656d39d51"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-embedding-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-embedding-768-2x.png",
+      "sha256": "3ae62f34d2377a54add328cdd8554f65cad201f90119af0cf0194bb1c3ec66f0"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-generation-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-generation-1366-1x.png",
+      "sha256": "add8c086a03c45e7d021176d23b8bb6fac22a7a1a22bcb72fae80ed6e4e3e20a"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-generation-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-generation-390-1x.png",
+      "sha256": "0beec778f2b6c187158edc4fa25bb8fc944510e9e71c32e80dd24e36340e4827"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-generation-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-generation-768-2x.png",
+      "sha256": "a08ba6a1b613ca242bf39a867280216b126702b7e580061c94f5d1240fe52cae"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-loss-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-loss-1366-1x.png",
+      "sha256": "348315f734053abc0169a96caa18eb873ff5d2f3593917252ebe1f51795c55ab"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-loss-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-loss-390-1x.png",
+      "sha256": "4194b4d22b465c6048d852df89bd811edebde8364e3986620c84795cd38460a9"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-loss-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-loss-768-2x.png",
+      "sha256": "b3e9095439d88865c3c92877174c1433a7327bdd531e12d146aa17d9fe90aeec"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-masks-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-masks-1366-1x.png",
+      "sha256": "4bf000b2e8c0d2f3c779c2dae9b30c759dd693e89d2e18d3043c88486751b5b9"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-masks-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-masks-390-1x.png",
+      "sha256": "6b0cecd6edcd49cc9092e43a0af2bb89b8771688e5d78736a3abd377684c4fd9"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-masks-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-masks-768-2x.png",
+      "sha256": "2365e1b93a0f373a3d87924dd09f667d34b0820fbd9747b745a91dfea9bf88e7"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-merges-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-merges-1366-1x.png",
+      "sha256": "4bba996afa55c5616a73d9219a5efbf6eb2d629a349f1d84cfaeb4020487d6ca"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-merges-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-merges-390-1x.png",
+      "sha256": "a0cc94cdc1610c5d8a629b0d052e018f232b60fe0de6ff5bc7069c3da4c8b82e"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-merges-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-merges-768-2x.png",
+      "sha256": "90969b09bb2eb6d3e603d3c8459cc0ca94ca32a5e66503c965cf6d12d2a44c8a"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-metric-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-metric-1366-1x.png",
+      "sha256": "19f0b524c72daac51f763d608aebac6f32ae7d1c776bd6d2943d75ffb4301e03"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-metric-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-metric-390-1x.png",
+      "sha256": "b1adf29e1feb402e9ae020fbc819af8372466d13c5765eec120a30dd1cc26570"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-metric-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-metric-768-2x.png",
+      "sha256": "f68651ff6b4d9e1b5c370cff604d8cee1b40daa405480b2ebdc064d5ac0b578d"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-normalization-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-normalization-1366-1x.png",
+      "sha256": "fbc1d4a2ba2ef5d9eed8a5528850b06fe831f54e21d24a5b4ef06342e03a7a63"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-normalization-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-normalization-390-1x.png",
+      "sha256": "2787a3ce010801d91da5fec115b051e6c017555001a6e7df8288c323053ba1f0"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-normalization-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-normalization-768-2x.png",
+      "sha256": "3cc0d470c7087100a33e27324df5bb27814c81418295550f5c8f9caab0e97d83"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-pipeline-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-pipeline-1366-1x.png",
+      "sha256": "eac524689156ebcca7561ce52bdbc0140aafc97f431b314b391a0278e7576a13"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-pipeline-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-pipeline-390-1x.png",
+      "sha256": "10b572e9d6bceeb76236e24c741e24f8b75c4217a99bb9e9f99f8b465cc1c863"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-pipeline-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-pipeline-768-2x.png",
+      "sha256": "12bf018823801af5fb5e125b62546589b05402bee41f527643439d4167f55980"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-pooling-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-pooling-1366-1x.png",
+      "sha256": "87e080328ea43b78de31428eccb0447762eb4f1f816bb69ac1c71ad673a7ab69"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-pooling-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-pooling-390-1x.png",
+      "sha256": "2f3b831f8926b17e8ee145ea120b8a9ef5b48f16bc5717cc8922115a2ef00917"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-pooling-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-pooling-768-2x.png",
+      "sha256": "0c05da53798c10268d0b66882f9fb458f69990b3dfb440b18600d6694c2729e8"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-state-machine-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-state-machine-1366-1x.png",
+      "sha256": "cb5bfed9681f08d2349a1246a26a56dac30eaa19b258960de5226e073506bc95"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-state-machine-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-state-machine-390-1x.png",
+      "sha256": "40d3a61c3147094ae2fabc5717aa2ce5c722bc0e680d6d7e2edef2e813ebc563"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-state-machine-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-state-machine-768-2x.png",
+      "sha256": "85b52700db6bed1e481a806cda3fb413129ca2feee2716198095a6e33e26b512"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-targets-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-targets-1366-1x.png",
+      "sha256": "1887a5c9f1388bcd03b02d7e0ed14a7df7341549d2f9a74d04fe3fe2732b701d"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-targets-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-targets-390-1x.png",
+      "sha256": "37c87761f4e8f641b90cbf768702c93fcc4cb3ee54163f9077fbca63d09b7565"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-targets-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-targets-768-2x.png",
+      "sha256": "7fbad2a8cdb1288b2514938741855c60bbb021eafcb68dbc4811b7676053d2fd"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-uncertainty-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-uncertainty-1366-1x.png",
+      "sha256": "76c9fa97e5ee40ff7b087c5b09722eb09492073d887bdb2bc1bd1a51f01608a5"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-uncertainty-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-uncertainty-390-1x.png",
+      "sha256": "b9eeb17eabf226836c110f236bcbc65db247024a7dce2bae20855c2f5ba0fc34"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/byte-uncertainty-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/byte-uncertainty-768-2x.png",
+      "sha256": "020190a4a2a6f5c39bb6e1c02dd99aa3f7814dec5dd461aebc0ae4a40cabfc75"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/entropy-live-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/entropy-live-1366-1x.png",
+      "sha256": "e0c693bb029692a4541a3c5a0eca2e0c7c3fe372fe28c3861c48523e2be01d9f"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/entropy-live-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/entropy-live-390-1x.png",
+      "sha256": "d8b3c821da10ff6b7e95e9b1f9507a74a327aa9ebeeaebca9dac570db0f0e58d"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/entropy-live-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/entropy-live-768-2x.png",
+      "sha256": "52551055542e31e5aec8c96a0cb74a2f14a74674af6dc1e292135dfe27a25699"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/patch-equality-one-patch-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/patch-equality-one-patch-desktop.png",
+      "sha256": "0cff5ebcc16177a70761266745e9999b3d9def24db4c66ed8f73e95c954cdf6d"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/patch-space-uncertain-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/patch-space-uncertain-desktop.png",
+      "sha256": "cef1050617ab712986f829fdf17ea46c727bc7b7b77d93f5fd83c0f2aa1a1020"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/patch-space-uncertain-phone.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/patch-space-uncertain-phone.png",
+      "sha256": "4f557d6874522a4385996e103385a86303c40a9db6fb9cddd8b900322203eb73"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/patch-threshold-zero-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/patch-threshold-zero-desktop.png",
+      "sha256": "a2f67bb30833a6926d8bb9137badde8902f27c7a365bb947f972ae5a6653a8d5"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/stream-split-inside-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/stream-split-inside-desktop.png",
+      "sha256": "49a7a866bb0e24fb2cf35e9e89f040be3aa22a9ac91ef3f10b0a313705c929d8"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/stream-truncated-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/stream-truncated-desktop.png",
+      "sha256": "0db2dd172268b2ed3790489a98002cf9e78400032016c68623c3318b663a10e8"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/stream-truncated-phone.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/stream-truncated-phone.png",
+      "sha256": "6a23d724d8dbca5ec7b46296aa774e61dd88d92e53f0f66b32ad469d186ce59a"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/streaming-live-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/streaming-live-1366-1x.png",
+      "sha256": "4ac0dce12d2576d45ea14d35c65f0b1092764b9318d21c59eb189553323d4198"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/streaming-live-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/streaming-live-390-1x.png",
+      "sha256": "0630f47d9390d155dc9d72d2ca415557f17c6ae8e33677c35e61661015d99df0"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/streaming-live-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/streaming-live-768-2x.png",
+      "sha256": "18ae9152c40581b28a72230e21607e77c1ecd911bf56b9dd8babab72a11b5119"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/text-storage-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/text-storage-1366-1x.png",
+      "sha256": "ae5ee3ddc9d7b5be00cf732bdfd17a8a1aab30523bc98480c4a7d2da9e66c2c2"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/text-storage-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/text-storage-390-1x.png",
+      "sha256": "49d45600ea88754506b792d8b6c2d49cbb625fdfb4baa77be63ef84bbf355dc7"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/text-storage-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/text-storage-768-2x.png",
+      "sha256": "eefdf86d95fe8e1192e5bf1478cc033c47f9f9d792403a363911cc1f5356e860"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-invalid-length-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/unicode-invalid-length-desktop.png",
+      "sha256": "9e8d064a2e87ab0f9e66b93ad906d15e38db0bb09845f39fcadb6acba479c999"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-invalid-surrogate-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/unicode-invalid-surrogate-desktop.png",
+      "sha256": "6e7efed78fc2b5a68536a13bae2c0d2869c403334ea8c5a469fc283603907345"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-live-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/unicode-live-1366-1x.png",
+      "sha256": "3583fdf3310cb685ef3f5a665cd6da30081a4100ee62c0d3426d30878c71bec0"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-live-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/unicode-live-390-1x.png",
+      "sha256": "57dc7362ca103d395b24b6d7b7df459b8ed2bfaf76ae796ff1401c99f5be085e"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-live-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/unicode-live-768-2x.png",
+      "sha256": "4a7377806fce471745b7e85e4f43ca63f627af318299d65dd4208df70c54ca8a"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-nfc-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/unicode-nfc-desktop.png",
+      "sha256": "0a2a3498578e9d9cb58de822dced4e503cd2e84f0f23e3b6b75a16509e506ccb"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-scientist-desktop.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/unicode-scientist-desktop.png",
+      "sha256": "ad6939b54b734ff08e5d3707f0968b74746dfe3cddc95ebc7190b7ee953932be"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/unicode-scientist-phone.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/unicode-scientist-phone.png",
+      "sha256": "208c8c17977b280259a694ac2129a9d02b0f64900bea887d85e8557c2c9503c5"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/utf8-packing-1366-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/utf8-packing-1366-1x.png",
+      "sha256": "bf5031aac04bb26e6fb5aeee8c032cd11f72c3e5cbee181aa87cdd4ca5210a45"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/utf8-packing-390-1x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/utf8-packing-390-1x.png",
+      "sha256": "6f2558299f4eb73e0c013926a2daa4c00d65772d442252bf101bb15039d7aeff"
+    },
+    {
+      "original": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-author-paints/utf8-packing-768-2x.png",
+      "preserved": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-pre-final-build/reading-flow-author-paints/utf8-packing-768-2x.png",
+      "sha256": "ffcc92583ef2d74f287f64e532ff3645b97cc8fd797925608cb8a9e0aa2015fb"
+    }
+  ]
+}

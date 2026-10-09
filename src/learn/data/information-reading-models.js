@@ -1,0 +1,6 @@
+import {finiteInformation,bottleneckIterations,sampledInformation} from './mutual-information-models.js';
+export const klNats=(p,q)=>p.reduce((sum,v,i)=>sum+(v===0?0:q[i]===0?Infinity:v*(Math.log(v)-Math.log(q[i]))),0);
+export function proposal(state,row){const costs=state.decoder.map(q=>klNats(state.pYGivenX[row],q)),log=costs.map((d,z)=>Math.log(state.pZ[z])-state.beta*d),maximum=Math.max(...log),weights=log.map(v=>Math.exp(v-maximum)),total=weights.reduce((a,b)=>a+b,0);return {costs,log,maximum,weights,total,q:weights.map(v=>v/total)};}
+export function iterationTraces(s){return {chosen:bottleneckIterations(s.beta,40,s.start,s.error),informative:bottleneckIterations(s.beta,40,'signal',s.error),symmetric:bottleneckIterations(s.beta,40,'symmetric',s.error)};}
+export function sampleWithDonors(s){const result=sampledInformation(s);let seed=(s.seed^0x5a39b174)>>>0||1;const random=()=>{seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;return (seed>>>0)/4294967296;};const donors=Array.from({length:20},()=>{const ids=result.pairs.map((_,i)=>i);for(let i=ids.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[ids[i],ids[j]]=[ids[j],ids[i]];}return ids;});return {...result,donors};}
+export function countsInformation(counts){const total=counts.flat().reduce((a,b)=>a+b,0);return {...finiteInformation(counts.map(r=>r.map(n=>n/total))),counts,total};}

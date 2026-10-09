@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-28",
+  "reviewer": "frameworks_training_data",
+  "author": "frameworks_functional_tracking",
+  "kind": "independent-source-and-learning-review",
+  "record": "independent-review.md",
+  "openSourceFindings": [],
+  "browser": "Parent integration scope; not certified by this source receipt",
+  "files": {
+    "src/learn/data/topics/experiment-tracking-tools-weights-biases-mlflow-neptune.jsx": "fbd5df2683d27b7b06168bfe0a0aeb493468e891a5bfbb9e12db17b3a66817c7",
+    "src/learn/components/lesson-labs/ExperimentTrackingLabs.jsx": "e1c5462a0096a2d13a4f9b20de3544e1170e6d20ce815ac1890fa448d0aaddd2",
+    "src/learn/data/experiment-tracking-models.js": "670eea66a7dfb353b7571bc7c92e273eb3309f666e0932df7a30aabfcf57ba34",
+    "docs/teaching/core-frameworks/experiment-tracking-tools-weights-biases-mlflow-neptune/design.md": "c866e372a65f6d68f5cb747d6209229a99bdd9c54b74dc7ddc5d4199253bf017",
+    "docs/teaching/core-frameworks/experiment-tracking-tools-weights-biases-mlflow-neptune/native-evidence.json": "6018766d25611db2e426ed0894b093a05eae500a641a96cc6eb9bd85b72acf43",
+    "public/learn-code/experiment-tracking-tools-weights-biases-mlflow-neptune/portable_run_store.py": "9bf00c470d6e83d9cf17a37add6792a35fff0b49255fb36e41d8c61e803293f8",
+    "public/learn-code/experiment-tracking-tools-weights-biases-mlflow-neptune/tracking_library_bridge.py": "b9e724ad4e467d010deff5f2b15168c0e37cb9411e2c9838dfcd02f27178146a"
+  },
+  "documentationFollowup": "Reviewed appended author-native, independent-review and screenshot-status paragraphs; rebound only design.md. Runtime/program checks retained without rerun."
+}

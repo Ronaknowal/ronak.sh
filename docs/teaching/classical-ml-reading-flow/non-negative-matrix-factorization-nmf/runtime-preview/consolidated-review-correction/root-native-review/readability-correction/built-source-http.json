@@ -1,0 +1,1594 @@
+{
+  "schema": "nmf-d46-root-built-http/v1",
+  "sourceFreeze": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/combined-author-review/author-ready-source.json",
+    "bytes": 151243,
+    "sha256": "03620c4d159f87479c884711931ccea69309a2b9cf4fc541fae8b6e424674c56"
+  },
+  "preparation": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/source-preparation.json",
+    "bytes": 2248,
+    "sha256": "21aba255b11ea60f19d82922ef16ad698ab5f898f31632c51754bcba81113e46"
+  },
+  "config": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/vite.config.mjs",
+    "bytes": 1187,
+    "sha256": "960658298151bf864af3bd85bfa8f6c31a61022c07bea7b5ac817d4be3e3c611"
+  },
+  "moduleMap": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/private-module-map.json",
+    "bytes": 19142,
+    "sha256": "41945e016e3589a70f212998634c833962f506ec54b82575c0bdfff4f0831c97"
+  },
+  "compiledSourceBindings": [
+    {
+      "path": "node_modules/react/cjs/react-jsx-runtime.production.js",
+      "bytes": 976,
+      "sha256": "1e46f15002696985e80c61d47aaa30dabb03c954270a690f5f7dfbbacfa9002b"
+    },
+    {
+      "path": "node_modules/react/jsx-runtime.js",
+      "bytes": 210,
+      "sha256": "b392951a77d0a2e6a6bd017e49d768481ae5b63c4109c6c31f622cf7b2433edc"
+    },
+    {
+      "path": "node_modules/react/cjs/react.production.js",
+      "bytes": 17217,
+      "sha256": "6a3554a5287116df819640334924348287618dcdcd7124a05eb126dcbbecd5f9"
+    },
+    {
+      "path": "node_modules/react/index.js",
+      "bytes": 186,
+      "sha256": "60caffdecbdc5db3bc4ec4e83df9488345ccb271d07533b9210bf5750918d97e"
+    },
+    {
+      "path": "node_modules/scheduler/cjs/scheduler.production.js",
+      "bytes": 10181,
+      "sha256": "679adff761d31e9426604f80c0e99be44a3e6f4c6834b0218ecf0312a67c171f"
+    },
+    {
+      "path": "node_modules/scheduler/index.js",
+      "bytes": 194,
+      "sha256": "145965504d60007bc25486ab930b0367867dcd5d579ccd343c148d69349a7cfb"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom.production.js",
+      "bytes": 6655,
+      "sha256": "7a5e56724be242e34ddc14f9d0dc7fc6a32f1367ae994f02d3699b00c085eff4"
+    },
+    {
+      "path": "node_modules/react-dom/index.js",
+      "bytes": 1359,
+      "sha256": "ba1a3e33489f868371561777607e3ee5091df0f7ea3f1a10f789d6b86e4c1505"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom-client.production.js",
+      "bytes": 536016,
+      "sha256": "764ffa6adc2c9b02b4dc00f4a58ef13d050e7825898bd9e5dc808d3a3f9d4bb9"
+    },
+    {
+      "path": "node_modules/react-dom/client.js",
+      "bytes": 1373,
+      "sha256": "00e348ab3d6bc2eef908345d0bc4e008c95bcfecec060dfda5c4967953761396"
+    },
+    {
+      "path": "node_modules/react-router/dist/development/chunk-UVKPFVEO.mjs",
+      "bytes": 360344,
+      "sha256": "621b9bfd0f8b6bcd5970b75f8a67d67c5c8fc65d72931f0e9169d2246893e5b0"
+    },
+    {
+      "path": "src/learn/data/generated/navigation.js",
+      "bytes": 942828,
+      "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+    },
+    {
+      "path": "src/learn/data/catalogue.js",
+      "bytes": 477,
+      "sha256": "639cde33208e3e71fcdb4669eafdcaa71abbff1646ae01cbf1f77e623c78d693"
+    },
+    {
+      "path": "src/learn/components/PlaceholderContent.jsx",
+      "bytes": 2665,
+      "sha256": "3e963ae06cb932213259acd5849841816be92f97a1e364b9c5912c509de624a0"
+    },
+    {
+      "path": "src/learn/styles.js",
+      "bytes": 1539,
+      "sha256": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+    },
+    {
+      "path": "src/learn/components/LevelBadge.jsx",
+      "bytes": 629,
+      "sha256": "325fd3eb0b155780333620b584b7a62315fb9647625afb18313ac9c6e16a9647"
+    },
+    {
+      "path": "src/learn/components/lesson-navigation.js",
+      "bytes": 1362,
+      "sha256": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b"
+    },
+    {
+      "path": "src/learn/components/lesson-guide.css",
+      "bytes": 2967,
+      "sha256": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2"
+    },
+    {
+      "path": "src/learn/components/LessonGuide.jsx",
+      "bytes": 2925,
+      "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+    },
+    {
+      "path": "src/learn/components/LessonOpening.jsx",
+      "bytes": 1112,
+      "sha256": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/preview-loader.js",
+      "bytes": 176,
+      "sha256": "932aeeb0631ad74e40f460b610ef5d2db12ef1ba1387ce9dae91efecd28d1c39"
+    },
+    {
+      "path": "src/learn/hooks/useTopicResource.js",
+      "bytes": 991,
+      "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+    },
+    {
+      "path": "src/learn/components/LessonBoundary.jsx",
+      "bytes": 992,
+      "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+    },
+    {
+      "path": "src/learn/components/topic-content.css",
+      "bytes": 2992,
+      "sha256": "8ef6856306e028433ad10d8d18cdaf37362ba9db1a17ab8fbe1e1b76d9ce4fb0"
+    },
+    {
+      "path": "src/learn/components/lesson-endings.css",
+      "bytes": 5203,
+      "sha256": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6"
+    },
+    {
+      "path": "src/learn/components/content/code-downloads.js",
+      "bytes": 1709,
+      "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+    },
+    {
+      "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+      "bytes": 4857,
+      "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+    },
+    {
+      "path": "src/learn/components/content/lesson-code.css",
+      "bytes": 4491,
+      "sha256": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283"
+    },
+    {
+      "path": "src/learn/data/projects/typed-decision-model/metadata.js",
+      "bytes": 3158,
+      "sha256": "9253c1486af2f5a083dd6ad4fafae6eb9d644caca89d22aad4d7ed39313ef1a4"
+    },
+    {
+      "path": "src/learn/data/projects/catalogue.js",
+      "bytes": 610,
+      "sha256": "7b35afa5ba219c9a535ab7c3dc81683cbaf218ae1bd73fd315e4a9bc3ca5562c"
+    },
+    {
+      "path": "src/learn/components/TopicContent.jsx",
+      "bytes": 7106,
+      "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+    },
+    {
+      "path": "src/learn/learning-base.css",
+      "bytes": 19925,
+      "sha256": "595f1446ed9d4e5f7d2710b796be26527b58e78796a34d0bcdf4ffffe0717d97"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/lesson.css",
+      "bytes": 8021,
+      "sha256": "44d5194847126019e30ddbcf369c3866799ddb844bf294ffcd3d3554560ccfaa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/preview.css",
+      "bytes": 146,
+      "sha256": "9a7ac50bb5107e96a686a36917f00511a1fccab8ec21d4416aceafe13c73b962"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/readability.css",
+      "bytes": 288,
+      "sha256": "25a94855cd371e380c6ebfc890b5a2d26804ef65d8bcb18ce7067f273b937811"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/preview-entry.jsx",
+      "bytes": 1722,
+      "sha256": "01ec8f2d33aae968e94abbbce2f98114395c01616bf538742240a020c2ae76d6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/index.html",
+      "bytes": 264,
+      "sha256": "c2e879c87075c9f8ccc6ada2a16343783c01d7ad8a289795840b826a33552bb3"
+    },
+    {
+      "path": "src/learn/components/content/Headings.jsx",
+      "bytes": 1405,
+      "sha256": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f"
+    },
+    {
+      "path": "src/learn/components/content/Prose.jsx",
+      "bytes": 549,
+      "sha256": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff"
+    },
+    {
+      "path": "src/learn/components/content/Code.jsx",
+      "bytes": 3120,
+      "sha256": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e"
+    },
+    {
+      "path": "src/learn/components/content/RemoteCodeBlock.jsx",
+      "bytes": 2455,
+      "sha256": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.min.css",
+      "bytes": 23804,
+      "sha256": "23aefa0850248a16478b9f55d6b67028f74cc0b46b82b24dc22af068acaa4170"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.mjs",
+      "bytes": 597917,
+      "sha256": "e1b9ee63435797f929ceb2faf1defa4e13785d0b93f6330fa263c0dce07f2158"
+    },
+    {
+      "path": "src/learn/components/content/Math.jsx",
+      "bytes": 931,
+      "sha256": "427a466aaa33b2733c7b87cf9c2c8e2ed338a2f234764590b69fafc1b5952459"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/nmf-model.js",
+      "bytes": 6561,
+      "sha256": "057c37d97da0c0ec5e69404feefb05fc71e94323a16015275470f18ba161b680"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/Drawing.jsx",
+      "bytes": 7017,
+      "sha256": "0620bddf26f521d07ef360216265f9af4f930c04c5416945f3ba28a65d54ee8a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/Operations.jsx",
+      "bytes": 1451,
+      "sha256": "26b2b8dd1e58b0eaf40b3ef93e7fd4ef2fd17e2123c8c51bec69835260b5efa3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/ArrayFigures.jsx",
+      "bytes": 9415,
+      "sha256": "fedad522e550150fc7fce8bc6d57151f08e21f6405cd56a864094435cee0227e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/GeometryFigures.jsx",
+      "bytes": 16629,
+      "sha256": "322b8774703e1591776d1fb4a6cc0509684ee23917b6f3d49856cf40c02ca3f7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/OptimizationFigures.jsx",
+      "bytes": 38983,
+      "sha256": "fffbec944ea643d54fc6d86770b9d87036a2fee44000efe7111bf31b23bb45ed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/saved-data.js",
+      "bytes": 48181,
+      "sha256": "d8f5759102aee34ff0c2029d91956639baa2eb828884b5359782b933958bd425"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/SavedDataFigures.jsx",
+      "bytes": 18348,
+      "sha256": "5d98431d02940c855417673cf50aceaeb421d3c8f4123ed14b2c17fabe753744"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/IdentifiabilityFigures.jsx",
+      "bytes": 11681,
+      "sha256": "925af706b8a0fcd07d1864581f329d29cc8350b5eea8cc787b1c700e989ba10a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/TransferFigures.jsx",
+      "bytes": 18848,
+      "sha256": "920c50b7185366856c950cc84b585ee4260b28c8c40cd7575fdcf46c1775ec68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/NmfFigures.jsx",
+      "bytes": 1535,
+      "sha256": "f2ebe6ae8b69e659a04a40ccd9dab4bb9be0a69a28142fc7aeb3af71689a7156"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/file-index-data.js",
+      "bytes": 7985,
+      "sha256": "2b59344616a5438cde3a0fdf82230edeeeef1db578c93aa61c3dfb448927990c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/FileIndex.jsx",
+      "bytes": 1152,
+      "sha256": "3071b516ee35b09f60beec970eceb0f71d4dd527f3648685a891e5a33dc06a99"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/nmf-lesson.jsx",
+      "bytes": 324434,
+      "sha256": "6f22d35534dcd94694a61d60dec33e9f58d70e11b5f660bd3006bcf8b08880f1"
+    }
+  ],
+  "unchangedPredecessorCompiledBindings": [
+    {
+      "path": "node_modules/react/cjs/react-jsx-runtime.production.js",
+      "bytes": 976,
+      "sha256": "1e46f15002696985e80c61d47aaa30dabb03c954270a690f5f7dfbbacfa9002b"
+    },
+    {
+      "path": "node_modules/react/jsx-runtime.js",
+      "bytes": 210,
+      "sha256": "b392951a77d0a2e6a6bd017e49d768481ae5b63c4109c6c31f622cf7b2433edc"
+    },
+    {
+      "path": "node_modules/react/cjs/react.production.js",
+      "bytes": 17217,
+      "sha256": "6a3554a5287116df819640334924348287618dcdcd7124a05eb126dcbbecd5f9"
+    },
+    {
+      "path": "node_modules/react/index.js",
+      "bytes": 186,
+      "sha256": "60caffdecbdc5db3bc4ec4e83df9488345ccb271d07533b9210bf5750918d97e"
+    },
+    {
+      "path": "node_modules/scheduler/cjs/scheduler.production.js",
+      "bytes": 10181,
+      "sha256": "679adff761d31e9426604f80c0e99be44a3e6f4c6834b0218ecf0312a67c171f"
+    },
+    {
+      "path": "node_modules/scheduler/index.js",
+      "bytes": 194,
+      "sha256": "145965504d60007bc25486ab930b0367867dcd5d579ccd343c148d69349a7cfb"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom.production.js",
+      "bytes": 6655,
+      "sha256": "7a5e56724be242e34ddc14f9d0dc7fc6a32f1367ae994f02d3699b00c085eff4"
+    },
+    {
+      "path": "node_modules/react-dom/index.js",
+      "bytes": 1359,
+      "sha256": "ba1a3e33489f868371561777607e3ee5091df0f7ea3f1a10f789d6b86e4c1505"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom-client.production.js",
+      "bytes": 536016,
+      "sha256": "764ffa6adc2c9b02b4dc00f4a58ef13d050e7825898bd9e5dc808d3a3f9d4bb9"
+    },
+    {
+      "path": "node_modules/react-dom/client.js",
+      "bytes": 1373,
+      "sha256": "00e348ab3d6bc2eef908345d0bc4e008c95bcfecec060dfda5c4967953761396"
+    },
+    {
+      "path": "node_modules/react-router/dist/development/chunk-UVKPFVEO.mjs",
+      "bytes": 360344,
+      "sha256": "621b9bfd0f8b6bcd5970b75f8a67d67c5c8fc65d72931f0e9169d2246893e5b0"
+    },
+    {
+      "path": "src/learn/data/generated/navigation.js",
+      "bytes": 942828,
+      "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+    },
+    {
+      "path": "src/learn/data/catalogue.js",
+      "bytes": 477,
+      "sha256": "639cde33208e3e71fcdb4669eafdcaa71abbff1646ae01cbf1f77e623c78d693"
+    },
+    {
+      "path": "src/learn/components/PlaceholderContent.jsx",
+      "bytes": 2665,
+      "sha256": "3e963ae06cb932213259acd5849841816be92f97a1e364b9c5912c509de624a0"
+    },
+    {
+      "path": "src/learn/styles.js",
+      "bytes": 1539,
+      "sha256": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+    },
+    {
+      "path": "src/learn/components/LevelBadge.jsx",
+      "bytes": 629,
+      "sha256": "325fd3eb0b155780333620b584b7a62315fb9647625afb18313ac9c6e16a9647"
+    },
+    {
+      "path": "src/learn/components/lesson-navigation.js",
+      "bytes": 1362,
+      "sha256": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b"
+    },
+    {
+      "path": "src/learn/components/lesson-guide.css",
+      "bytes": 2967,
+      "sha256": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2"
+    },
+    {
+      "path": "src/learn/components/LessonGuide.jsx",
+      "bytes": 2925,
+      "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+    },
+    {
+      "path": "src/learn/components/LessonOpening.jsx",
+      "bytes": 1112,
+      "sha256": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/preview-loader.js",
+      "bytes": 176,
+      "sha256": "932aeeb0631ad74e40f460b610ef5d2db12ef1ba1387ce9dae91efecd28d1c39"
+    },
+    {
+      "path": "src/learn/hooks/useTopicResource.js",
+      "bytes": 991,
+      "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+    },
+    {
+      "path": "src/learn/components/LessonBoundary.jsx",
+      "bytes": 992,
+      "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+    },
+    {
+      "path": "src/learn/components/topic-content.css",
+      "bytes": 2992,
+      "sha256": "8ef6856306e028433ad10d8d18cdaf37362ba9db1a17ab8fbe1e1b76d9ce4fb0"
+    },
+    {
+      "path": "src/learn/components/lesson-endings.css",
+      "bytes": 5203,
+      "sha256": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6"
+    },
+    {
+      "path": "src/learn/components/content/code-downloads.js",
+      "bytes": 1709,
+      "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+    },
+    {
+      "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+      "bytes": 4857,
+      "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+    },
+    {
+      "path": "src/learn/components/content/lesson-code.css",
+      "bytes": 4491,
+      "sha256": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283"
+    },
+    {
+      "path": "src/learn/data/projects/typed-decision-model/metadata.js",
+      "bytes": 3158,
+      "sha256": "9253c1486af2f5a083dd6ad4fafae6eb9d644caca89d22aad4d7ed39313ef1a4"
+    },
+    {
+      "path": "src/learn/data/projects/catalogue.js",
+      "bytes": 610,
+      "sha256": "7b35afa5ba219c9a535ab7c3dc81683cbaf218ae1bd73fd315e4a9bc3ca5562c"
+    },
+    {
+      "path": "src/learn/components/TopicContent.jsx",
+      "bytes": 7106,
+      "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+    },
+    {
+      "path": "src/learn/learning-base.css",
+      "bytes": 19925,
+      "sha256": "595f1446ed9d4e5f7d2710b796be26527b58e78796a34d0bcdf4ffffe0717d97"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/lesson.css",
+      "bytes": 8021,
+      "sha256": "44d5194847126019e30ddbcf369c3866799ddb844bf294ffcd3d3554560ccfaa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/preview.css",
+      "bytes": 146,
+      "sha256": "9a7ac50bb5107e96a686a36917f00511a1fccab8ec21d4416aceafe13c73b962"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/index.html",
+      "bytes": 264,
+      "sha256": "c2e879c87075c9f8ccc6ada2a16343783c01d7ad8a289795840b826a33552bb3"
+    },
+    {
+      "path": "src/learn/components/content/Headings.jsx",
+      "bytes": 1405,
+      "sha256": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f"
+    },
+    {
+      "path": "src/learn/components/content/Prose.jsx",
+      "bytes": 549,
+      "sha256": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff"
+    },
+    {
+      "path": "src/learn/components/content/Code.jsx",
+      "bytes": 3120,
+      "sha256": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e"
+    },
+    {
+      "path": "src/learn/components/content/RemoteCodeBlock.jsx",
+      "bytes": 2455,
+      "sha256": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.min.css",
+      "bytes": 23804,
+      "sha256": "23aefa0850248a16478b9f55d6b67028f74cc0b46b82b24dc22af068acaa4170"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.mjs",
+      "bytes": 597917,
+      "sha256": "e1b9ee63435797f929ceb2faf1defa4e13785d0b93f6330fa263c0dce07f2158"
+    },
+    {
+      "path": "src/learn/components/content/Math.jsx",
+      "bytes": 931,
+      "sha256": "427a466aaa33b2733c7b87cf9c2c8e2ed338a2f234764590b69fafc1b5952459"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/nmf-model.js",
+      "bytes": 6561,
+      "sha256": "057c37d97da0c0ec5e69404feefb05fc71e94323a16015275470f18ba161b680"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/Drawing.jsx",
+      "bytes": 7017,
+      "sha256": "0620bddf26f521d07ef360216265f9af4f930c04c5416945f3ba28a65d54ee8a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/Operations.jsx",
+      "bytes": 1451,
+      "sha256": "26b2b8dd1e58b0eaf40b3ef93e7fd4ef2fd17e2123c8c51bec69835260b5efa3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/ArrayFigures.jsx",
+      "bytes": 9415,
+      "sha256": "fedad522e550150fc7fce8bc6d57151f08e21f6405cd56a864094435cee0227e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/GeometryFigures.jsx",
+      "bytes": 16629,
+      "sha256": "322b8774703e1591776d1fb4a6cc0509684ee23917b6f3d49856cf40c02ca3f7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/OptimizationFigures.jsx",
+      "bytes": 38983,
+      "sha256": "fffbec944ea643d54fc6d86770b9d87036a2fee44000efe7111bf31b23bb45ed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/saved-data.js",
+      "bytes": 48181,
+      "sha256": "d8f5759102aee34ff0c2029d91956639baa2eb828884b5359782b933958bd425"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/IdentifiabilityFigures.jsx",
+      "bytes": 11681,
+      "sha256": "925af706b8a0fcd07d1864581f329d29cc8350b5eea8cc787b1c700e989ba10a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/TransferFigures.jsx",
+      "bytes": 18848,
+      "sha256": "920c50b7185366856c950cc84b585ee4260b28c8c40cd7575fdcf46c1775ec68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/NmfFigures.jsx",
+      "bytes": 1535,
+      "sha256": "f2ebe6ae8b69e659a04a40ccd9dab4bb9be0a69a28142fc7aeb3af71689a7156"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/file-index-data.js",
+      "bytes": 7985,
+      "sha256": "2b59344616a5438cde3a0fdf82230edeeeef1db578c93aa61c3dfb448927990c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/FileIndex.jsx",
+      "bytes": 1152,
+      "sha256": "3071b516ee35b09f60beec970eceb0f71d4dd527f3648685a891e5a33dc06a99"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/nmf-lesson.jsx",
+      "bytes": 324434,
+      "sha256": "6f22d35534dcd94694a61d60dec33e9f58d70e11b5f660bd3006bcf8b08880f1"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/.vite/manifest.json",
+      "bytes": 17060,
+      "sha256": "25574d72f9a079d8fcc54925164385453820fefa2be5746593502c38cd7d6340"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/index-BL_TVI_z.css",
+      "bytes": 36509,
+      "sha256": "f40d26a5ad09fa51a47df9cf7d4a8c384bf1d1674a694f981955024823d7f2d9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/index-CQfBNTif.js",
+      "bytes": 1139875,
+      "sha256": "377f47ba73ac95ecac5debbd89fb60110dd4cee7eeec3f300b1b4a8bef167f5f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+      "bytes": 28076,
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_AMS-Regular-DMm9YOAa.woff",
+      "bytes": 33516,
+      "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_AMS-Regular-DRggAlZN.ttf",
+      "bytes": 63632,
+      "sha256": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf",
+      "bytes": 12368,
+      "sha256": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff",
+      "bytes": 7716,
+      "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2",
+      "bytes": 6912,
+      "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff",
+      "bytes": 7656,
+      "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+      "bytes": 6908,
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf",
+      "bytes": 12344,
+      "sha256": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf",
+      "bytes": 19584,
+      "sha256": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff",
+      "bytes": 13296,
+      "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2",
+      "bytes": 11348,
+      "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Fraktur-Regular-CB_wures.ttf",
+      "bytes": 19572,
+      "sha256": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2",
+      "bytes": 11316,
+      "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff",
+      "bytes": 13208,
+      "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Bold-Cx986IdX.woff2",
+      "bytes": 25324,
+      "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Bold-Jm3AIy58.woff",
+      "bytes": 29912,
+      "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Bold-waoOVXN0.ttf",
+      "bytes": 51336,
+      "sha256": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2",
+      "bytes": 16780,
+      "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf",
+      "bytes": 32968,
+      "sha256": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff",
+      "bytes": 19412,
+      "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Italic-3WenGoN9.ttf",
+      "bytes": 33580,
+      "sha256": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Italic-BMLOBm91.woff",
+      "bytes": 19676,
+      "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2",
+      "bytes": 16988,
+      "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+      "bytes": 26272,
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Regular-Dr94JaBh.woff",
+      "bytes": 30772,
+      "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Main-Regular-ypZvNtVU.ttf",
+      "bytes": 53580,
+      "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf",
+      "bytes": 31196,
+      "sha256": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2",
+      "bytes": 16400,
+      "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff",
+      "bytes": 18668,
+      "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Math-Italic-DA0__PXp.woff",
+      "bytes": 18748,
+      "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Math-Italic-flOr_0UB.ttf",
+      "bytes": 31308,
+      "sha256": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+      "bytes": 16440,
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf",
+      "bytes": 24504,
+      "sha256": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2",
+      "bytes": 12216,
+      "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff",
+      "bytes": 14408,
+      "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2",
+      "bytes": 12028,
+      "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff",
+      "bytes": 14112,
+      "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf",
+      "bytes": 22364,
+      "sha256": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf",
+      "bytes": 19436,
+      "sha256": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff",
+      "bytes": 12316,
+      "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2",
+      "bytes": 10344,
+      "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Script-Regular-C5JkGWo-.ttf",
+      "bytes": 16648,
+      "sha256": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Script-Regular-D3wIWfF6.woff2",
+      "bytes": 9644,
+      "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Script-Regular-D5yQViql.woff",
+      "bytes": 10588,
+      "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size1-Regular-C195tn64.woff",
+      "bytes": 6496,
+      "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf",
+      "bytes": 12228,
+      "sha256": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+      "bytes": 5468,
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf",
+      "bytes": 11508,
+      "sha256": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+      "bytes": 5208,
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size2-Regular-oD1tc_U0.woff",
+      "bytes": 6188,
+      "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size3-Regular-CTq5MqoE.woff",
+      "bytes": 4420,
+      "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf",
+      "bytes": 7588,
+      "sha256": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size4-Regular-BF-4gkZK.woff",
+      "bytes": 5980,
+      "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
+      "bytes": 4928,
+      "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+      "bytes": 10364,
+      "sha256": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
+      "bytes": 16028,
+      "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2",
+      "bytes": 13568,
+      "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf",
+      "bytes": 27556,
+      "sha256": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/nmf-lesson-Brzsceav.js",
+      "bytes": 768893,
+      "sha256": "d4aacae654d1832a11c8cef6abfc6925cfde12c3d185a95f9a67b734d960c27a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/assets/nmf-lesson-CfVKi3_s.css",
+      "bytes": 29265,
+      "sha256": "172910a725ddf7dc3e34e8c005de61f1afba5bd3a73352cedc18815d7638fb83"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/index.html",
+      "bytes": 358,
+      "sha256": "2c9842f09b525cd27ec7e3bcdd110b595e7c001517b72663137f83edad4532f1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/build-private/private-module-map.json",
+      "bytes": 19142,
+      "sha256": "41945e016e3589a70f212998634c833962f506ec54b82575c0bdfff4f0831c97"
+    }
+  ],
+  "http": [
+    {
+      "url": "/.vite/manifest.json",
+      "status": 200,
+      "bytes": 17060,
+      "sha256": "25574d72f9a079d8fcc54925164385453820fefa2be5746593502c38cd7d6340"
+    },
+    {
+      "url": "/assets/index-BL_TVI_z.css",
+      "status": 200,
+      "bytes": 36509,
+      "sha256": "f40d26a5ad09fa51a47df9cf7d4a8c384bf1d1674a694f981955024823d7f2d9"
+    },
+    {
+      "url": "/assets/index-CQfBNTif.js",
+      "status": 200,
+      "bytes": 1139875,
+      "sha256": "377f47ba73ac95ecac5debbd89fb60110dd4cee7eeec3f300b1b4a8bef167f5f"
+    },
+    {
+      "url": "/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+      "status": 200,
+      "bytes": 28076,
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308"
+    },
+    {
+      "url": "/assets/KaTeX_AMS-Regular-DMm9YOAa.woff",
+      "status": 200,
+      "bytes": 33516,
+      "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251"
+    },
+    {
+      "url": "/assets/KaTeX_AMS-Regular-DRggAlZN.ttf",
+      "status": 200,
+      "bytes": 63632,
+      "sha256": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13"
+    },
+    {
+      "url": "/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf",
+      "status": 200,
+      "bytes": 12368,
+      "sha256": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268"
+    },
+    {
+      "url": "/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff",
+      "status": 200,
+      "bytes": 7716,
+      "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed"
+    },
+    {
+      "url": "/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2",
+      "status": 200,
+      "bytes": 6912,
+      "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c"
+    },
+    {
+      "url": "/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff",
+      "status": 200,
+      "bytes": 7656,
+      "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c"
+    },
+    {
+      "url": "/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+      "status": 200,
+      "bytes": 6908,
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b"
+    },
+    {
+      "url": "/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf",
+      "status": 200,
+      "bytes": 12344,
+      "sha256": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7"
+    },
+    {
+      "url": "/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf",
+      "status": 200,
+      "bytes": 19584,
+      "sha256": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1"
+    },
+    {
+      "url": "/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff",
+      "status": 200,
+      "bytes": 13296,
+      "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb"
+    },
+    {
+      "url": "/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2",
+      "status": 200,
+      "bytes": 11348,
+      "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f"
+    },
+    {
+      "url": "/assets/KaTeX_Fraktur-Regular-CB_wures.ttf",
+      "status": 200,
+      "bytes": 19572,
+      "sha256": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3"
+    },
+    {
+      "url": "/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2",
+      "status": 200,
+      "bytes": 11316,
+      "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc"
+    },
+    {
+      "url": "/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff",
+      "status": 200,
+      "bytes": 13208,
+      "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Bold-Cx986IdX.woff2",
+      "status": 200,
+      "bytes": 25324,
+      "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Bold-Jm3AIy58.woff",
+      "status": 200,
+      "bytes": 29912,
+      "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Bold-waoOVXN0.ttf",
+      "status": 200,
+      "bytes": 51336,
+      "sha256": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8"
+    },
+    {
+      "url": "/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2",
+      "status": 200,
+      "bytes": 16780,
+      "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b"
+    },
+    {
+      "url": "/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf",
+      "status": 200,
+      "bytes": 32968,
+      "sha256": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f"
+    },
+    {
+      "url": "/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff",
+      "status": 200,
+      "bytes": 19412,
+      "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Italic-3WenGoN9.ttf",
+      "status": 200,
+      "bytes": 33580,
+      "sha256": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Italic-BMLOBm91.woff",
+      "status": 200,
+      "bytes": 19676,
+      "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2",
+      "status": 200,
+      "bytes": 16988,
+      "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+      "status": 200,
+      "bytes": 26272,
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Regular-Dr94JaBh.woff",
+      "status": 200,
+      "bytes": 30772,
+      "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc"
+    },
+    {
+      "url": "/assets/KaTeX_Main-Regular-ypZvNtVU.ttf",
+      "status": 200,
+      "bytes": 53580,
+      "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830"
+    },
+    {
+      "url": "/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf",
+      "status": 200,
+      "bytes": 31196,
+      "sha256": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5"
+    },
+    {
+      "url": "/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2",
+      "status": 200,
+      "bytes": 16400,
+      "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1"
+    },
+    {
+      "url": "/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff",
+      "status": 200,
+      "bytes": 18668,
+      "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e"
+    },
+    {
+      "url": "/assets/KaTeX_Math-Italic-DA0__PXp.woff",
+      "status": 200,
+      "bytes": 18748,
+      "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571"
+    },
+    {
+      "url": "/assets/KaTeX_Math-Italic-flOr_0UB.ttf",
+      "status": 200,
+      "bytes": 31308,
+      "sha256": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a"
+    },
+    {
+      "url": "/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+      "status": 200,
+      "bytes": 16440,
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf",
+      "status": 200,
+      "bytes": 24504,
+      "sha256": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2",
+      "status": 200,
+      "bytes": 12216,
+      "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff",
+      "status": 200,
+      "bytes": 14408,
+      "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2",
+      "status": 200,
+      "bytes": 12028,
+      "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff",
+      "status": 200,
+      "bytes": 14112,
+      "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf",
+      "status": 200,
+      "bytes": 22364,
+      "sha256": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf",
+      "status": 200,
+      "bytes": 19436,
+      "sha256": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff",
+      "status": 200,
+      "bytes": 12316,
+      "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605"
+    },
+    {
+      "url": "/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2",
+      "status": 200,
+      "bytes": 10344,
+      "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342"
+    },
+    {
+      "url": "/assets/KaTeX_Script-Regular-C5JkGWo-.ttf",
+      "status": 200,
+      "bytes": 16648,
+      "sha256": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67"
+    },
+    {
+      "url": "/assets/KaTeX_Script-Regular-D3wIWfF6.woff2",
+      "status": 200,
+      "bytes": 9644,
+      "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b"
+    },
+    {
+      "url": "/assets/KaTeX_Script-Regular-D5yQViql.woff",
+      "status": 200,
+      "bytes": 10588,
+      "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a"
+    },
+    {
+      "url": "/assets/KaTeX_Size1-Regular-C195tn64.woff",
+      "status": 200,
+      "bytes": 6496,
+      "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9"
+    },
+    {
+      "url": "/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf",
+      "status": 200,
+      "bytes": 12228,
+      "sha256": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b"
+    },
+    {
+      "url": "/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+      "status": 200,
+      "bytes": 5468,
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe"
+    },
+    {
+      "url": "/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf",
+      "status": 200,
+      "bytes": 11508,
+      "sha256": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b"
+    },
+    {
+      "url": "/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+      "status": 200,
+      "bytes": 5208,
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd"
+    },
+    {
+      "url": "/assets/KaTeX_Size2-Regular-oD1tc_U0.woff",
+      "status": 200,
+      "bytes": 6188,
+      "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d"
+    },
+    {
+      "url": "/assets/KaTeX_Size3-Regular-CTq5MqoE.woff",
+      "status": 200,
+      "bytes": 4420,
+      "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949"
+    },
+    {
+      "url": "/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf",
+      "status": 200,
+      "bytes": 7588,
+      "sha256": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082"
+    },
+    {
+      "url": "/assets/KaTeX_Size4-Regular-BF-4gkZK.woff",
+      "status": 200,
+      "bytes": 5980,
+      "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58"
+    },
+    {
+      "url": "/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
+      "status": 200,
+      "bytes": 4928,
+      "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0"
+    },
+    {
+      "url": "/assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+      "status": 200,
+      "bytes": 10364,
+      "sha256": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877"
+    },
+    {
+      "url": "/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
+      "status": 200,
+      "bytes": 16028,
+      "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7"
+    },
+    {
+      "url": "/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2",
+      "status": 200,
+      "bytes": 13568,
+      "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b"
+    },
+    {
+      "url": "/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf",
+      "status": 200,
+      "bytes": 27556,
+      "sha256": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa"
+    },
+    {
+      "url": "/assets/nmf-lesson-Brzsceav.js",
+      "status": 200,
+      "bytes": 768893,
+      "sha256": "d4aacae654d1832a11c8cef6abfc6925cfde12c3d185a95f9a67b734d960c27a"
+    },
+    {
+      "url": "/assets/nmf-lesson-CfVKi3_s.css",
+      "status": 200,
+      "bytes": 29265,
+      "sha256": "172910a725ddf7dc3e34e8c005de61f1afba5bd3a73352cedc18815d7638fb83"
+    },
+    {
+      "url": "/index.html",
+      "status": 200,
+      "bytes": 358,
+      "sha256": "2c9842f09b525cd27ec7e3bcdd110b595e7c001517b72663137f83edad4532f1"
+    },
+    {
+      "url": "/private-module-map.json",
+      "status": 200,
+      "bytes": 19142,
+      "sha256": "41945e016e3589a70f212998634c833962f506ec54b82575c0bdfff4f0831c97"
+    },
+    {
+      "url": "/learn-assets/nmf-private/centered_pca.py",
+      "status": 200,
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_arrays.py",
+      "status": 200,
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_coordinate.py",
+      "status": 200,
+      "bytes": 9109,
+      "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_nnls.py",
+      "status": 200,
+      "bytes": 2256,
+      "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_multiplicative.py",
+      "status": 200,
+      "bytes": 8988,
+      "sha256": "56d22f18907297f5c1239e31e98071e6bde0d33c5d2c5a1cbc9aa92546c210f9"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_beta_mm.py",
+      "status": 200,
+      "bytes": 10103,
+      "sha256": "92fa782d807217caa2edb033b22ad9ccfab207d6497a7ef0cc15cd600eb81815"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_initialization.py",
+      "status": 200,
+      "bytes": 6885,
+      "sha256": "1b6696a60871fcc092e7e5d2232f2d0d09ff19b6eb964d9b35ba3c12e87b7cde"
+    },
+    {
+      "url": "/learn-assets/nmf-private/ordinary_nmf_lifecycle.py",
+      "status": 200,
+      "bytes": 6184,
+      "sha256": "bcb1705c424895be7629900ba26005629c7f0701faeb41c1f31c08980218122b"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_penalties_masks.py",
+      "status": 200,
+      "bytes": 15667,
+      "sha256": "66011064d265a75292ce62978ce7aa81cdb018b3f5ed2a1717266a0de483a3dd"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_factor_alignment.py",
+      "status": 200,
+      "bytes": 6580,
+      "sha256": "6505488fa7183cb8fb656629707eb9585b4228162764dd355ce8a5f4e60d257c"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_saved_digits.py",
+      "status": 200,
+      "bytes": 6991,
+      "sha256": "ff1e4f2d5f395745e4f1b824bcb7c33d5dcb6d0bc025c7c68d717ec1c268ce14"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_digit_comparison.py",
+      "status": 200,
+      "bytes": 4275,
+      "sha256": "36ac3ce284bfa74dd5ff25124327eca5c73b1e4d28603535df78961d448c1e0e"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_anchors.py",
+      "status": 200,
+      "bytes": 5319,
+      "sha256": "2dd67d6e1784525b356d39daf580f62499756319cd742dfba74b0bb418e74b30"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_text_spectra.py",
+      "status": 200,
+      "bytes": 9130,
+      "sha256": "2fbca92d514885bcf9b1d84dfd678437d09837a8fdad8ae7b9c02cfed3513c3b"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_online.py",
+      "status": 200,
+      "bytes": 7983,
+      "sha256": "44880c6ed798d3156d8f98dcc0d24df5794057f7d5f63889919d33838180db10"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_axis_phase.py",
+      "status": 200,
+      "bytes": 2229,
+      "sha256": "d3a454899bb6bc3946bf243f00264d571b488b21e7dadd174bad520cc10eb3b5"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_step.py",
+      "status": 200,
+      "bytes": 465,
+      "sha256": "b75511b9f0d8bacdf28a316351ac668ca7246cbe18de0c55d15f93002578c1a1"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_step.retained.stdout.txt",
+      "status": 200,
+      "bytes": 56,
+      "sha256": "0a0e7b7ba934a3f72ed27701cdd825698bafac0b2d3269c4dcef99a37aef060a"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_digits.py",
+      "status": 200,
+      "bytes": 1915,
+      "sha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_digits.retained.stdout.txt",
+      "status": 200,
+      "bytes": 621,
+      "sha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_words.py",
+      "status": 200,
+      "bytes": 805,
+      "sha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_words.retained.stdout.txt",
+      "status": 200,
+      "bytes": 137,
+      "sha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_saved_state.json",
+      "status": 200,
+      "bytes": 69820,
+      "sha256": "46f3dc0931e3ccddc30cc3e30bbb4d3f330bc35a4dccccef33f74a63472eddd0"
+    },
+    {
+      "url": "/learn-assets/nmf-private/digits-300.csv",
+      "status": 200,
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    },
+    {
+      "url": "/learn-assets/nmf-private/digits-data-provenance.md",
+      "status": 200,
+      "bytes": 2939,
+      "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_arrays.stdout.txt",
+      "status": 200,
+      "bytes": 213,
+      "sha256": "a29980714874ff3c5e0f5b4b4238acf99a3e998cc36e9e49bccc8a7fec164009"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_coordinate.stdout.txt",
+      "status": 200,
+      "bytes": 525,
+      "sha256": "c9f6c935d3dbeb5754943c046637556734f20c8eb00356118b7e83c929dc468e"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_nnls.stdout.txt",
+      "status": 200,
+      "bytes": 277,
+      "sha256": "d985954fd0fd74ca4ef4ed504c7403fc0f43c0ed1db8b28dfff89f5f2b3f4051"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_multiplicative.stdout.txt",
+      "status": 200,
+      "bytes": 405,
+      "sha256": "2463a81a7757d551e9521c24e6eb58589a6b76df839efb1400a09c7262e2cf58"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_beta_mm.stdout.txt",
+      "status": 200,
+      "bytes": 526,
+      "sha256": "87ab2d9faf5f1e8e1874ece88664b70ec1cedab2f84c19cc43fb27a850053a55"
+    },
+    {
+      "url": "/learn-assets/nmf-private/initialization-main.stdout.txt",
+      "status": 200,
+      "bytes": 875,
+      "sha256": "fc0ee263d36478e372b32b4f97d973468935691a1ced9e3595962006f9c60ef5"
+    },
+    {
+      "url": "/learn-assets/nmf-private/lifecycle-main.stdout.txt",
+      "status": 200,
+      "bytes": 773,
+      "sha256": "c0623b08ca502f127cfe2488aa1db45eed3e0821b4a6f8c1c76e5a012b85b175"
+    },
+    {
+      "url": "/learn-assets/nmf-private/penalties-masks-main.stdout.txt",
+      "status": 200,
+      "bytes": 784,
+      "sha256": "024907ee70452af2c13057d2e535ed3c02c2a78b195dd1578ed5711899ab1156"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_factor_alignment.stdout.txt",
+      "status": 200,
+      "bytes": 702,
+      "sha256": "b5ab059aa2c342e16464e061e5fc8528c05c8fbe69eaca0daabf6827a0612e0a"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_saved_digits.stdout.txt",
+      "status": 200,
+      "bytes": 9285,
+      "sha256": "472bd7083b1f348d37729b705c2b74163bebeecda1c109ea25adfd6ebdb8b5ac"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_digit_comparison.stdout.txt",
+      "status": 200,
+      "bytes": 38803,
+      "sha256": "b3ec28cea308fb5003d017f201fd47afbd7336db9bbda7c70a9c233dbcd44286"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_anchors.stdout.txt",
+      "status": 200,
+      "bytes": 496,
+      "sha256": "8bc8941bab29409882962876c722b685e1ef15dbb4783b9d12c3a99c5aa457bb"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_text_spectra.stdout.txt",
+      "status": 200,
+      "bytes": 6934,
+      "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_online.stdout.txt",
+      "status": 200,
+      "bytes": 4228,
+      "sha256": "a7f59677f85590b65f4a76ec5a37d684c73f270cf0d156bb3471aeb2c5129316"
+    },
+    {
+      "url": "/learn-assets/nmf-private/nmf_axis_phase.stdout.txt",
+      "status": 200,
+      "bytes": 2292,
+      "sha256": "4ef80b4a363b2507bcb7f9fc5e331b44ce31645c164a2c412389622d9191cefc"
+    },
+    {
+      "url": "/learn-assets/nmf-private/positive-kl.stdout.txt",
+      "status": 200,
+      "bytes": 222,
+      "sha256": "43fb77d25dc6c9bcdf8bc60de5b6eb89228990dcec35d59fa923b9c5d2360b47"
+    }
+  ],
+  "unknownPayloadStatus": 404,
+  "build": {
+    "sandbox": {
+      "command": "1f943e",
+      "exitCode": 1,
+      "reason": "react/jsx-runtime resolution",
+      "transformedModules": 2
+    },
+    "authorizedSameCommand": {
+      "command": "923100",
+      "session": 65455,
+      "completionCommand": "d837c4",
+      "exitCode": 0,
+      "transformedModules": 87
+    },
+    "preview": {
+      "command": "7fba6e",
+      "session": 83838,
+      "port": 5205
+    }
+  },
+  "limits": [
+    "Exact compiled/current/HTTP identity is not native paint or event acceptance.",
+    "No original model, numerical programme, fit or SSR campaign was replayed.",
+    "This private build warning does not establish normal-route performance acceptance."
+  ]
+}

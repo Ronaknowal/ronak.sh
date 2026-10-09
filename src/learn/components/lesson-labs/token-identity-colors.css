@@ -1,0 +1,15 @@
+/* Identity is local to labelled data marks; page surfaces/controls stay neutral. */
+.token-identity {
+  color: var(--token-identity-color);
+  background-color: var(--token-identity-background);
+  border-color: var(--token-identity-border);
+}
+g.token-identity-node circle,
+g.token-identity-node rect {
+  fill: var(--token-identity-background);
+  stroke: var(--token-identity-color);
+}
+g.token-identity-node text,
+.token-identity-text {
+  fill: var(--token-identity-color);
+}

@@ -1,0 +1,17 @@
+.ensemble-costs-table {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.ensemble-costs-table table {
+  border-collapse: collapse;
+  font-size: 1rem;
+  min-width: 40rem;
+}
+
+.ensemble-costs-table td,
+.ensemble-costs-table th {
+  padding: .65rem .8rem;
+  text-align: left;
+  border: 1px solid #45454b;
+}

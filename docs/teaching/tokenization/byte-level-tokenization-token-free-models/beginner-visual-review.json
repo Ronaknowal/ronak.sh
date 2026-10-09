@@ -1,0 +1,108 @@
+{
+  "checkedAt": "2026-09-28T17:03:14.784Z",
+  "reviewer": "/root/byte_tokenization",
+  "kind": "Author visual inspection of root production captures",
+  "status": "Scoped final visual follow-up complete; no unresolved finding",
+  "sources": {
+    "src/learn/data/topics/byte-level-tokenization.jsx": "822f22264b6040c743f5e43947a3f479b5ace6b7e9505eab72c4e8871eb5cd8b",
+    "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx": "c5c80b077ee117d589745e77f14a57eaeb8a60b4a061fa0a5030768cebdc979d",
+    "src/learn/components/lesson-labs/byte-tokenization-labs.css": "51036aae87d935239fad27cd09c5b3ad9e91f1fc9aabbd8cc35ced994031aa1b"
+  },
+  "report": {
+    "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/beginner-visual-review.md",
+    "sha256": "6396b7e8e6149f7aa92757f11a7527a64dceecb2a245b1082369c52db2d01af3"
+  },
+  "screenshots": [
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/browser/byte-level-tokenization-token-free-models-figure-2-desktop.png",
+      "observedAt": "scratch/tokenization-intuition/browser/byte-level-tokenization-token-free-models-figure-2-desktop.png",
+      "sha256": "b6c1c3729a8c0f9ae5a28a5773e54b7f7ec053a721c02ee80dcd7a5bd34fff7a"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/browser/byte-level-tokenization-token-free-models-2-desktop.png",
+      "observedAt": "scratch/tokenization-intuition/browser/byte-level-tokenization-token-free-models-2-desktop.png",
+      "sha256": "c60a508eb4b3aea90fdf2a841e2ada072dd02445a3280fd73435ee67f683f46b"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/interactions/entropy-one-patch.png",
+      "observedAt": "scratch/tokenization-intuition/interactions/entropy-one-patch.png",
+      "sha256": "ad103a884926530f3fe83cd849d8174a2ff13ba814e4a98828c65fcbb5c76267"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/interactions/entropy-splits-patch.png",
+      "observedAt": "scratch/tokenization-intuition/interactions/entropy-splits-patch.png",
+      "sha256": "55d827a2c92c82b870369fb006e385fc5ef374f1aee512f1f6e88ff0428180aa"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/interactions/byte-level-tokenization-token-free-models-text-zoom.png",
+      "observedAt": "scratch/tokenization-intuition/interactions/byte-level-tokenization-token-free-models-text-zoom.png",
+      "sha256": "aeb226791945588bdcafe6fb7d6c4d5112c1fd98f37702d5aa379e52649af713"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/interactions/unicode-scientist.png",
+      "observedAt": "scratch/tokenization-intuition/interactions/unicode-scientist.png",
+      "sha256": "68d70b655da5e682dc2e4095448ceb955d8b260f1437549e7359b4ef8dc66169"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/interactions/streaming-inside-emoji.png",
+      "observedAt": "scratch/tokenization-intuition/interactions/streaming-inside-emoji.png",
+      "sha256": "e3e541a75ed50fe47f131f401bd7bc5116445b6b0583b9b42d876368a6fd658f"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/interactions/streaming-truncated.png",
+      "observedAt": "scratch/tokenization-intuition/interactions/streaming-truncated.png",
+      "sha256": "7310d0d3097bf48d9cee30213e9ba36b9ae4542a5ba5fee8d7d9f4809b9d4860"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/browser/byte-level-tokenization-token-free-models-figure-2-320.png",
+      "observedAt": "scratch/tokenization-intuition/browser/byte-level-tokenization-token-free-models-figure-2-320.png",
+      "sha256": "1c69463982066d6ef9b49d6c5d5ac37ad73fa710943e9f6c7dae84b361ab5e48"
+    },
+    {
+      "path": "docs/teaching/tokenization/beginner-screenshots/browser/byte-level-tokenization-token-free-models-2-320.png",
+      "observedAt": "scratch/tokenization-intuition/browser/byte-level-tokenization-token-free-models-2-320.png",
+      "sha256": "11a9786eadb72758bee2f5b6a79a737c0d50da12afee2f7021d4e2e6ebe29c76"
+    }
+  ],
+  "findingsClosed": [
+    "Narrow UTF8 C3/A9 pair remains together under its label",
+    "Causal grids use equal cells in default, split and one-patch states",
+    "Narrow patch controls, entropy bars, grouping and counts remain readable"
+  ],
+  "semanticObservations": {
+    "defaultPatchLengths": [
+      3,
+      3,
+      2
+    ],
+    "defaultPairs": [
+      36,
+      6
+    ],
+    "splitPatchLengths": [
+      3,
+      1,
+      2,
+      2
+    ],
+    "splitGlobalPairs": 10,
+    "onePatchLengths": [
+      8
+    ],
+    "oneGlobalPair": 1,
+    "scientist": {
+      "graphemes": 1,
+      "scalars": 3,
+      "bytes": 11
+    },
+    "streaming": {
+      "insideEmojiPending": 2,
+      "truncatedFinalFlush": "rejected"
+    }
+  },
+  "limits": [
+    "No new scientific/native run; numerical source unchanged",
+    "Root owns build and complete automated browser campaign",
+    "No observed learner study"
+  ]
+}

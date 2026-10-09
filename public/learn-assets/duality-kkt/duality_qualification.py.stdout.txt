@@ -1,0 +1,7 @@
+lambda 0 q -inf
+lambda 1 q -0.25
+lambda 10 q -0.025
+lambda 100 q -0.0025
+primal at x=0 0 Lagrangian derivative there 1
+affine reformulation x=0: nu=-1 makes L identically zero
+nonconvex primal 1.0 dual optimum 0.0 gap 1.0

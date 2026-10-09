@@ -1,0 +1,40 @@
+{
+  "status": "APPROVED_DESIGN",
+  "reviewer": "/root/queue_nonconvex_resume",
+  "authors": [
+    "/root",
+    "/root/causal_whole_review"
+  ],
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-source-r2.json",
+    "sha256": "b89100c3f4fa0b5960e36feb3519f1e94e8fc917a189ce3778b2d3d16800248c",
+    "bytes": 9218
+  },
+  "proposal": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-proposal-r2.md",
+    "sha256": "b3a06c8015a77d42647d0cd429f539debc7a3d3a25b4db328ecee1e4c2fac932",
+    "bytes": 51585
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/independent-design-review-r1.md",
+    "sha256": "107fe27c54ba89066a02dfc3f64d85af4244e61d4d978d6891205d136e68bc94",
+    "bytes": 6519
+  },
+  "checks": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/independent-design-checks-r1.json",
+    "sha256": "4a1d50cf01de5a9d887129833582a7ba2bdf2e6a8a2cc40651c2cbb3989562c6",
+    "bytes": 8408
+  },
+  "checker": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/independent-design-checks-r1.py",
+    "sha256": "e1416878d5b0f454edcdbcc4c91f8693b7ca672aa3e0ee224e873ff18b199dcf",
+    "bytes": 2712
+  },
+  "passingChecks": 45,
+  "findings": [],
+  "limits": [
+    "Design only; content and runtime not accepted",
+    "No lesson mains replayed",
+    "No central phase changes"
+  ]
+}

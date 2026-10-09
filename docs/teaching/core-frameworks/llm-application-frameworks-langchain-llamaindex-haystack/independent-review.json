@@ -1,0 +1,30 @@
+{
+  "reviewer": "frameworks_functional_tracking",
+  "date": "2026-09-28",
+  "kind": "independent-source-and-concept-review",
+  "scope": "Complete manuscript, blueprint, visual/model source, all canonical programs and author design/native evidence read. Complementary invariants executed independently; no repeat of full native-library campaigns.",
+  "sources": {
+    "src/learn/data/topics/llm-application-frameworks-langchain-llamaindex-haystack.jsx": "05678eccf680adece4f66526ae7be7e9c8c24a3e2db7c52f5ecd09922c0af3ad",
+    "src/learn/components/lesson-labs/ApplicationFrameworkLabs.jsx": "2be425d6b2b68103f00ae211291bc45cde00e07dc58dd560a777037f58fedafe",
+    "src/learn/data/application-framework-models.js": "737ea9f928f04682e8050f76a347ffcb990a4fbf6a445be8291780c30045586f",
+    "src/learn/data/curriculum/blueprints/llm-application-frameworks-langchain-llamaindex-haystack.js": "d5144b15c208db9f8a2bd07cd7f1f519a16d597414d1f775be6990075890a586",
+    "docs/teaching/core-frameworks/llm-application-frameworks-langchain-llamaindex-haystack/design.md": "aa00454609e0f54155d6e1fc168d2d18efb5d05f020724596579a81742752bb0",
+    "public/learn-code/llm-application-frameworks-langchain-llamaindex-haystack/framework_retrieval.py": "ec2d6c7fa2f8fe7f2b6cdc98585ae0d5a72cb49693c9753ef9d1c0b67dd5ffae",
+    "public/learn-code/llm-application-frameworks-langchain-llamaindex-haystack/retrieval_pipeline.py": "f6cfae5fa6224dec2d954c513ea99351a843978cc3d0b9e64f2af6ea44b520af"
+  },
+  "checks": {
+    "frequency_saturation_limit_cases": 5,
+    "packing_conservation_cases": 4
+  },
+  "resolved_findings": [],
+  "open_blockers": [],
+  "commands": [
+    "node scripts/verify-framework-execution-review.mjs"
+  ],
+  "primary_fact_checks": [],
+  "limits": [
+    "Source and executed complementary checks are independent; parent owns browser/theme/responsive/copy/download and integration verification.",
+    "Author source-bound native-library results inspected and reused; hosted generation and native GPU serving are not claimed executed.",
+    "No learner study or production concurrency guarantee is claimed."
+  ]
+}

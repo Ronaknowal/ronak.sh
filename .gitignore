@@ -1,12 +1,12 @@
 # ---------------------------------------------------------------------------
 # IMPORTANT: Markdown is intentionally NOT ignored anywhere in this repo.
-# Root entry points, docs/ records and skills/ teaching guidance are required
+# Root entry points, durable docs/ records and skills/ teaching guidance are required
 # sources for the website and its authoring workflow.
-# They must stay committed. Do not add *.md patterns here.
+# They must stay committed. Do not add blanket *.md patterns here.
 # Also kept: public/learn-assets/ (loaded at runtime by lesson-labs),
-# src/learn/data/generated/ (imported by the build) and docs/**/*.json.
+# src/learn/data/generated/ (imported by the build) and durable docs JSON.
 # Keep content/, src/articles/generated/ and all intentional public assets too.
-# Scope temporary/build directories to their actual owner; do not hide archive evidence.
+# Scope local authoring artifacts to their owner; keep substantive prepared content.
 # ---------------------------------------------------------------------------
 
 # Dependencies
@@ -28,6 +28,77 @@ node_modules/
 /scratch_*.py
 /tmp_*/
 /tmp_*.py
+
+# Completed authoring workspaces are local history, not deployment inputs.
+# Keep the small restart indexes and the explicitly unfinished content packets.
+# Canonical lessons/assets, docs/teaching/drafts, topic-notes and skills stay tracked.
+/docs/teaching/classical-ml-reading-flow/*
+!/docs/teaching/classical-ml-reading-flow/*.md
+!/docs/teaching/classical-ml-reading-flow/scope.json
+!/docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/
+!/docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/
+!/docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/
+!/docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/
+!/docs/teaching/classical-ml-reading-flow/regularization-l1-l2-elastic-net-dropout/
+/docs/teaching/math-foundations-reading-flow/*
+!/docs/teaching/math-foundations-reading-flow/*.md
+!/docs/teaching/math-foundations-reading-flow/scope.json
+!/docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/
+!/docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/
+!/docs/teaching/math-foundations-reading-flow/rate-distortion-theory/
+!/docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/
+!/docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/
+!/docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/
+/docs/teaching/deep-learning-beginner/*
+!/docs/teaching/deep-learning-beginner/*.md
+!/docs/teaching/deep-learning-beginner/scope.json
+/docs/teaching/deep-learning-completion/*
+!/docs/teaching/deep-learning-completion/*.md
+/docs/teaching/llm-architecture-training/*
+!/docs/teaching/llm-architecture-training/*.md
+!/docs/teaching/llm-architecture-training/*scope*.json
+
+# Local lesson-authoring artifacts, not website or prepared-content sources.
+# Retained locally for historical inspection; never match src/, public/, scripts/,
+# skills/, topic notes, manuscripts or visual specifications outside these copies.
+/docs/teaching/**/*frozen*/
+/docs/teaching/**/copies/
+/docs/teaching/**/snapshot/
+/docs/teaching/**/snapshots/
+/docs/teaching/**/*-snapshot*/
+/docs/teaching/**/*-before-*/
+/docs/teaching/**/original/
+/docs/teaching/**/node_modules/
+/docs/teaching/**/site-packages/
+/docs/teaching/**/packages/
+/docs/teaching/**/optional-*-packages/
+/docs/teaching/**/production/
+/docs/teaching/**/production-*/
+/docs/teaching/**/prototype-dist/
+/docs/teaching/**/runtime-preview/assets/
+/docs/teaching/**/playwright-report/
+/docs/teaching/**/test-results/
+/docs/teaching/**/screenshots/
+/docs/teaching/**/captures/
+
+# One-off authoring/review runners. Reusable project checks live in scripts/;
+# explained lesson programmes and their data remain trackable.
+/docs/teaching/**/check-*.py
+/docs/teaching/**/check-*.cjs
+/docs/teaching/**/check-*.mjs
+/docs/teaching/**/verify-*.py
+/docs/teaching/**/verify-*.cjs
+/docs/teaching/**/verify-*.mjs
+/docs/teaching/**/freeze-*.py
+/docs/teaching/**/freeze-*.cjs
+/docs/teaching/**/freeze-*.mjs
+/docs/teaching/**/capture-*.py
+/docs/teaching/**/capture-*.cjs
+/docs/teaching/**/capture-*.mjs
+/docs/teaching/**/patch-*.py
+/docs/teaching/**/install-*.py
+/docs/teaching/**/assemble-*.py
+/docs/teaching/**/prepare-*.py
 
 # ML training artifacts written into the working tree
 /catboost_info/

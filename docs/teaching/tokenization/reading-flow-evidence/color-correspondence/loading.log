@@ -1,0 +1,165 @@
+{"originalVerifier":"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scripts\\verify-learning-load-boundaries.cjs","sourceSha256":"6ec98e9aa8dcc7ffbe18f8aee1b3202e51f896df23008472a28b208c13652226","adaptations":["build directory","result path"],"build":"dist-tokenization-flow","output":"docs/teaching/tokenization/reading-flow-evidence/color-correspondence/load-boundaries.json"}
+[
+  {
+    "case": "selected lesson loads only its body and static dependencies",
+    "topicId": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+    "jsFiles": [
+      "assets/index-Ds62zaFq.js",
+      "assets/Reader-D4vmRhLI.js",
+      "assets/LevelBadge-07p_2htt.js",
+      "assets/LearningNav-XFVGcgqB.js",
+      "assets/tokenization-WmYhL2v-.js",
+      "assets/Code-BRvtR-_K.js",
+      "assets/Math-CWXQrJby.js",
+      "assets/katex-BJpuVtPE.js",
+      "assets/LessonElements-Cyw9Z3zZ.js",
+      "assets/RemoteCodeBlock-Dt6um7ly.js",
+      "assets/NeuralLessonElements-Czsqe2-2.js",
+      "assets/LessonFlow-C76AzfaW.js",
+      "assets/subword-tokenization-models-Ba6hdjWS.js",
+      "assets/token-identity-colors-Xtbuyzx0.js"
+    ],
+    "lessonBodies": [
+      "assets/tokenization-WmYhL2v-.js"
+    ],
+    "outlines": []
+  },
+  {
+    "case": "selected lesson loads only its body and static dependencies",
+    "topicId": "byte-level-tokenization-token-free-models",
+    "jsFiles": [
+      "assets/index-Ds62zaFq.js",
+      "assets/Reader-D4vmRhLI.js",
+      "assets/LevelBadge-07p_2htt.js",
+      "assets/LearningNav-XFVGcgqB.js",
+      "assets/byte-level-tokenization-BYcv0mTD.js",
+      "assets/Code-BRvtR-_K.js",
+      "assets/LessonElements-Cyw9Z3zZ.js",
+      "assets/RemoteCodeBlock-Dt6um7ly.js",
+      "assets/LessonFlow-C76AzfaW.js",
+      "assets/token-identity-colors-Xtbuyzx0.js"
+    ],
+    "lessonBodies": [
+      "assets/byte-level-tokenization-BYcv0mTD.js"
+    ],
+    "outlines": []
+  },
+  {
+    "case": "selected lesson loads only its body and static dependencies",
+    "topicId": "vocabulary-design-multilingual-tokenization",
+    "jsFiles": [
+      "assets/index-Ds62zaFq.js",
+      "assets/Reader-D4vmRhLI.js",
+      "assets/LevelBadge-07p_2htt.js",
+      "assets/LearningNav-XFVGcgqB.js",
+      "assets/vocabulary-multilingual-D5uTI3kO.js",
+      "assets/Code-BRvtR-_K.js",
+      "assets/Math-CWXQrJby.js",
+      "assets/katex-BJpuVtPE.js",
+      "assets/LessonElements-Cyw9Z3zZ.js",
+      "assets/RemoteCodeBlock-Dt6um7ly.js",
+      "assets/NeuralLessonElements-Czsqe2-2.js",
+      "assets/LessonFlow-C76AzfaW.js",
+      "assets/subword-tokenization-models-Ba6hdjWS.js",
+      "assets/token-identity-colors-Xtbuyzx0.js"
+    ],
+    "lessonBodies": [
+      "assets/vocabulary-multilingual-D5uTI3kO.js"
+    ],
+    "outlines": []
+  },
+  {
+    "case": "hub loads metadata and no lesson bodies or outlines",
+    "jsFiles": [
+      "assets/index-Ds62zaFq.js",
+      "assets/LearnHub-IP2IIJn5.js",
+      "assets/LearningNav-XFVGcgqB.js",
+      "assets/LevelBadge-07p_2htt.js",
+      "assets/useProjectProgress-upMI5ij-.js"
+    ],
+    "lessonBodies": [],
+    "outlines": []
+  },
+  {
+    "case": "selected lesson and next destination only; footer previous and browser Back reuse imports",
+    "initialJs": [
+      "assets/index-Ds62zaFq.js",
+      "assets/Reader-D4vmRhLI.js",
+      "assets/LevelBadge-07p_2htt.js",
+      "assets/LearningNav-XFVGcgqB.js",
+      "assets/python-basics-types-control-flow-functions-modules-CWLgynRm.js",
+      "assets/Code-BRvtR-_K.js",
+      "assets/LessonElements-Cyw9Z3zZ.js",
+      "assets/PythonExample-Dae9lVi-.js"
+    ],
+    "destinationJs": [
+      "assets/object-oriented-programming-in-python-p4uHCMNO.js"
+    ]
+  },
+  {
+    "case": "mathematical lesson loads its renderer and styles and renders notation",
+    "jsFiles": [
+      "assets/index-Ds62zaFq.js",
+      "assets/Reader-D4vmRhLI.js",
+      "assets/LevelBadge-07p_2htt.js",
+      "assets/LearningNav-XFVGcgqB.js",
+      "assets/eigenvalues-eigenvectors-Cop_8Beg.js",
+      "assets/Code-BRvtR-_K.js",
+      "assets/Math-CWXQrJby.js",
+      "assets/katex-BJpuVtPE.js",
+      "assets/LessonElements-Cyw9Z3zZ.js",
+      "assets/RunnableExample-THYW8qpB.js"
+    ],
+    "lessonBodies": [
+      "assets/eigenvalues-eigenvectors-Cop_8Beg.js"
+    ],
+    "outlines": [],
+    "rendererJs": [
+      "assets/katex-BJpuVtPE.js"
+    ],
+    "fontCss": [
+      "assets/katex-CfVKi3_s.css"
+    ]
+  },
+  {
+    "case": "planned topic fetches only its outline and stays uncompletable",
+    "topicId": "typed-decision-models-calibrated-neural-decision-systems",
+    "jsFiles": [
+      "assets/index-Ds62zaFq.js",
+      "assets/Reader-D4vmRhLI.js",
+      "assets/LevelBadge-07p_2htt.js",
+      "assets/LearningNav-XFVGcgqB.js",
+      "assets/typed-decision-models-calibrated-neural-decision-systems-p9q5yzw7.js"
+    ],
+    "lessonBodies": [],
+    "outlines": [
+      "assets/typed-decision-models-calibrated-neural-decision-systems-p9q5yzw7.js"
+    ]
+  },
+  {
+    "case": "planned entry without an individual outline makes no nonexistent-resource request",
+    "topicId": "mdps-bellman-equations-dynamic-programming",
+    "jsFiles": [
+      "assets/index-Ds62zaFq.js",
+      "assets/Reader-D4vmRhLI.js",
+      "assets/LevelBadge-07p_2htt.js",
+      "assets/LearningNav-XFVGcgqB.js"
+    ],
+    "lessonBodies": [],
+    "outlines": []
+  },
+  {
+    "case": "shell stays available while loading; stale completion cannot replace destination"
+  },
+  {
+    "case": "failed lesson stays distinct from planned; keyboard retry and explicit reload provide recovery",
+    "retryRecovered": false,
+    "reloadRequired": true,
+    "requestsForFailedChunk": 2
+  },
+  {
+    "case": "controlled render failure preserves shell, prevents completion and recovers after reload",
+    "requestsForLessonChunk": 2,
+    "intentionalFixture": "Browser-only one-response replacement; no application or lesson source mutation."
+  }
+]

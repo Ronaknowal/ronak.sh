@@ -1,0 +1,13 @@
+records / observed / missing: 1629 1566 63
+qsmk 0 records 1201 observed 1163 missing 38 observed mean 1.984498
+qsmk 1 records 428 observed 403 missing 25 observed mean 4.525079
+design columns / rank: 21 21
+standardized means: [1.660267, 5.178841]
+standardized difference: 3.518574
+complete-row target means: [1.756213, 5.273587]
+linear-only difference: 3.434108
+first-row model means: [4.143747, 8.103226]
+NumPy/sklearn predictions agree: True
+bootstrap seed / refits: 20261009 1000
+bootstrap SE: 0.48537
+percentile interval: [2.587609, 4.441855]

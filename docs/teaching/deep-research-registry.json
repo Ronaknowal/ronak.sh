@@ -1,0 +1,632 @@
+{
+  "purpose": "Lessons that no longer need the full deep-dive research pass. Before revising a lesson, look up its stable ID here. If it is absent, the revision must start with the full deep-dive research (skills/lesson-authoring/references/teaching.md, 'Go deep on every topic') and record a coverage map; when the revision is complete, add the lesson here. If it is present, research only what the revision changes, new claims and time-sensitive material.",
+  "updatedOn": "2026-10-09",
+  "topics": {
+    "perceptrons-neurons-activation-functions": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "backpropagation-automatic-differentiation": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "loss-functions-ce-mse-focal-contrastive-triplet": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "batch-layer-group-rms-normalization": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "transfer-learning-fine-tuning-strategies": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "weight-initialization-xavier-kaiming-p": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "residual-connections-skip-connections": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "dropout-droppath-stochastic-depth": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "convolution-pooling-receptive-fields": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "landmark-architectures-lenet-alexnet-vgg-resnet-efficientnet": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/reading-flow.md"
+    },
+    "depthwise-separable-dilated-convolutions": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/depthwise-separable-dilated-convolutions/drawings-revision.md"
+    },
+    "convnext-modern-cnn-designs": {
+      "basis": "user decision",
+      "record": "docs/teaching/deep-learning-beginner/convnext-modern-cnn-designs/reading-flow-revision.md"
+    },
+    "capsule-networks": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/deep-learning-beginner/capsule-networks/reading-flow-revision.md"
+    },
+    "self-attention-multi-head-attention": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/deep-learning-beginner/self-attention-multi-head-attention/reading-flow-revision.md"
+    },
+    "boltzmann-machines-restricted-boltzmann-machines-rbm": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/deep-learning-beginner/boltzmann-machines-restricted-boltzmann-machines-rbm/reading-flow-revision.md"
+    },
+    "transformer-block-architecture": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/deep-learning-beginner/transformer-block-architecture/reading-flow-research.md"
+    },
+    "spectral-normalization-gradient-penalty": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/deep-learning-beginner/spectral-normalization-gradient-penalty/reading-flow-design.md"
+    },
+    "rnns-lstms-grus": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/deep-learning-beginner/rnns-lstms-grus/reading-flow-revision.md"
+    },
+    "modern-hopfield-networks": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/deep-learning-beginner/modern-hopfield-networks/reading-flow-design.md"
+    },
+    "positional-encodings-sinusoidal-learned-rope-alibi": {
+      "basis": "Full deep-dive canonical/original/official-method research for reading-flow revision4, with independent complete-source closure.",
+      "record": "docs/teaching/deep-learning-beginner/positional-encodings-sinusoidal-learned-rope-alibi/reading-flow-revision.md"
+    },
+    "xlstm-extended-lstm": {
+      "basis": "Full canonical/original/official-method deep research and independently closed complete revision4 reading-flow coverage.",
+      "record": "docs/teaching/deep-learning-beginner/xlstm-extended-lstm/reading-flow-revision.md"
+    },
+    "sequence-to-sequence-encoder-decoder": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/deep-learning-beginner/sequence-to-sequence-encoder-decoder/reading-flow-revision.md"
+    },
+    "hyena-long-convolution-models": {
+      "basis": "Full deep-dive canonical/original/official-method research and independent whole-source reading-flow review.",
+      "record": "docs/teaching/deep-learning-beginner/hyena-long-convolution-models/reading-flow-design.md"
+    },
+    "attention-mechanism-bahdanau-luong": {
+      "basis": "Full deep-dive canonical/original/official research, complete reading-flow source and independent arithmetic/review closure.",
+      "record": "docs/teaching/deep-learning-beginner/attention-mechanism-bahdanau-luong/reading-flow-revision.md"
+    },
+    "grouped-query-attention-gqa-multi-query-attention-mqa": {
+      "basis": "Full canonical/original/official deep-dive research and independent complete-source review, with new native checked scratch/cache/gradient program.",
+      "record": "docs/teaching/deep-learning-beginner/grouped-query-attention-gqa-multi-query-attention-mqa/reading-flow-research.md"
+    },
+    "ring-attention-sequence-parallelism": {
+      "basis": "Full canonical/original/official assessment, exact accepted design and independent complete-manuscript/program/drawing review with new learned-map native bridge.",
+      "record": "docs/teaching/deep-learning-beginner/ring-attention-sequence-parallelism/reading-flow-assessment.md"
+    },
+    "long-context-sequence-models-transformer-xl-griffin-perceiver": {
+      "basis": "Complete canonical/original/official research and independently accepted complete teaching/visual source, with new executed memory operators and context adaptation contracts; large-checkpoint training not claimed.",
+      "record": "docs/teaching/deep-learning-beginner/long-context-sequence-models-transformer-xl-griffin-perceiver/reading-flow-revision.md"
+    },
+    "multi-head-latent-attention-mla": {
+      "basis": "Complete canonical/original/official research and independently accepted whole teaching source, actual factor/cache/model paths and executed compact cache/gradient supplement. Scientific fits conserved; no new GPU benchmark.",
+      "record": "docs/teaching/deep-learning-beginner/multi-head-latent-attention-mla/reading-flow-research.md"
+    },
+    "advanced-optimizers-lion-sophia-prodigy-schedule-free": {
+      "basis": "Complete two-canonical/original/official specialist research with whole concept/coverage/implementation map and independent exact manuscript/source acceptance. Historical experiments preserved.",
+      "record": "docs/teaching/deep-learning-beginner/advanced-optimizers-lion-sophia-prodigy-schedule-free/reading-flow-assessment.md"
+    },
+    "state-space-models-s4-mamba-mamba-2": {
+      "basis": "Complete specialist two-treatment/original/current-official research, full continuous manuscript and concept/drawing/code coverage; exact whole-source independent acceptance. Original scientific evidence conserved.",
+      "record": "docs/teaching/deep-learning-beginner/state-space-models-s4-mamba-mamba-2/reading-flow-revision.md"
+    },
+    "sparse-linear-attention-variants": {
+      "basis": "Full two-treatment/original/current-official specialist research and continuous concept/drawing/code coverage independently accepted against exact immutable97-binding packet plus reviewed affine geometry override. Historical scientific trials preserved.",
+      "record": "docs/teaching/deep-learning-beginner/sparse-linear-attention-variants/reading-flow-revision.md"
+    },
+    "neural-ode-continuous-depth-models": {
+      "basis": "Full two-treatment, original-paper and current official-source research, 13-section continuous reading flow,65 drawings/shared views, four complete programmes and ten solved practices independently accepted. Whole30 arithmetic and54 sensitivity groups conserved;29 historical scientific files exact.",
+      "record": "docs/teaching/deep-learning-beginner/neural-ode-continuous-depth-models/reading-flow-revision.md"
+    },
+    "rwkv-linear-attention-models": {
+      "basis": "Full two-standard-treatment/original-paper/current-source deep research and whole continuous manuscript independently accepted; actual summary/weighted/Goose/classifier anatomy, portable scratch and source-only library route, ten solved practices; original four fits conserved. Shared production integration pending separately.",
+      "record": "docs/teaching/deep-learning-beginner/rwkv-linear-attention-models/reading-flow-revision.md"
+    },
+    "vision-transformers-vit-deit-swin-dinov2": {
+      "basis": "Full canonical treatments, original ViT/DeiT/Swin/DINO family papers and current official-source research; complete beginner-to-specialist manuscript and operator/dense-head additions independently accepted. Seven original fits preserved. Shared production integration remains separate.",
+      "record": "docs/teaching/deep-learning-beginner/vision-transformers-vit-deit-swin-dinov2/reading-flow-research.md"
+    },
+    "hybrid-ssm-transformer-architectures-jamba": {
+      "basis": "Full canonical treatments, original hybrid/selective/attention/expert and current official-source research; complete beginner-to-specialist reading-flow manuscript, actual operation circuits and optional source-only request adapter independently accepted. All original science/six fits retained. Shared production integration remains separate.",
+      "record": "docs/teaching/deep-learning-beginner/hybrid-ssm-transformer-architectures-jamba/reading-flow-research.md"
+    },
+    "linear-logistic-regression": {
+      "basis": "Full canonical treatments, original regression/existence/high-dimensional papers and current official solver/API research; complete14-section reading-flow manuscript and specialist coverage independently accepted, with five bounded findings closed. Shared integration remains separate.",
+      "record": "docs/teaching/classical-ml-reading-flow/linear-logistic-regression/reading-flow-revision.md"
+    },
+    "titans-multi-memory-architecture": {
+      "basis": "Completed full deep-research reading-flow revision4 with independent design and complete-source closure; exact preserved science and current production/loading.",
+      "record": "docs/teaching/deep-learning-beginner/titans-multi-memory-architecture/reading-flow-research.md",
+      "coverageMap": "docs/teaching/deep-learning-beginner/titans-multi-memory-architecture/reading-flow-design.md",
+      "review": "docs/teaching/deep-learning-beginner/titans-multi-memory-architecture/reading-flow-final-review.md"
+    },
+    "mixture-of-experts-transformers-moe": {
+      "basis": "Completed full specialist canonical/original-paper/official-doc research with complete reading-flow design, independent whole-source/correction closure and current production/loading integration.",
+      "record": "docs/teaching/deep-learning-beginner/mixture-of-experts-transformers-moe/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/deep-learning-beginner/mixture-of-experts-transformers-moe/reading-flow-design.md",
+      "review": "docs/teaching/deep-learning-beginner/mixture-of-experts-transformers-moe/reading-flow-independent-review.md"
+    },
+    "decision-trees-random-forests": {
+      "basis": "Completed full specialist canonical/original-paper/official-doc research with complete reading-flow design, independent whole-source/correction closure and current production/loading integration.",
+      "record": "docs/teaching/classical-ml-reading-flow/decision-trees-random-forests/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/decision-trees-random-forests/reading-flow-revision.md",
+      "review": "docs/teaching/classical-ml-reading-flow/decision-trees-random-forests/reading-flow-independent-review.md"
+    },
+    "mini-batches-training-loops-gradient-accumulation": {
+      "basis": "Full specialist research/design, independently assessed complete manuscript/source and correction closure, current production integration",
+      "record": "docs/teaching/deep-learning-beginner/mini-batches-training-loops-gradient-accumulation/reading-flow-integration.md"
+    },
+    "k-nearest-neighbors-knn": {
+      "basis": "Completed full specialist canonical/original-paper/official-doc research, independent entire source and bounded correction review, and actual shared production/loading integration.",
+      "record": "docs/teaching/classical-ml-reading-flow/k-nearest-neighbors-knn/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/k-nearest-neighbors-knn/reading-flow-design.md",
+      "review": "docs/teaching/classical-ml-reading-flow/k-nearest-neighbors-knn/reading-flow-independent-review.md"
+    },
+    "neural-training-diagnostics-reproducible-experiments": {
+      "basis": "Completed full specialist canonical/original-paper/official-doc research, independent entire source and bounded correction review, and actual shared production/loading integration.",
+      "record": "docs/teaching/deep-learning-beginner/neural-training-diagnostics-reproducible-experiments/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/deep-learning-beginner/neural-training-diagnostics-reproducible-experiments/reading-flow-design.md",
+      "review": "docs/teaching/deep-learning-beginner/neural-training-diagnostics-reproducible-experiments/reading-flow-independent-review.md"
+    },
+    "vectors-matrices-tensor-operations": {
+      "basis": "Full primary-source deep research, complete coverage map and independently accepted reading-flow revision4",
+      "record": "docs/teaching/math-foundations-reading-flow/vectors-matrices-tensor-operations/reading-flow-revision.md"
+    },
+    "interleaved-cross-attention-architectures": {
+      "basis": "Completed full canonical/original-paper/official-doc research, independent complete source and same-reviewer bounded correction closure, current production/loading and complementary actual-reader verification.",
+      "record": "docs/teaching/deep-learning-beginner/interleaved-cross-attention-architectures/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/deep-learning-beginner/interleaved-cross-attention-architectures/reading-flow-design.md",
+      "review": "docs/teaching/deep-learning-beginner/interleaved-cross-attention-architectures/reading-flow-independent-complete-review.md"
+    },
+    "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-revision.md"
+    },
+    "byte-level-tokenization-token-free-models": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/reading-flow-revision.md"
+    },
+    "vocabulary-design-multilingual-tokenization": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/reading-flow-revision.md"
+    },
+    "matrix-decompositions-svd-qr-cholesky-lu": {
+      "basis": "Complete two-canonical, original Householder/LAPACK, current NumPy/SciPy and observed NIST deep-dive coverage; independent whole-source and current actual paint closure.",
+      "record": "docs/teaching/math-foundations-reading-flow/matrix-decompositions-svd-qr-cholesky-lu/reading-flow-revision.md"
+    },
+    "algebra-functions-exponentials-logarithms": {
+      "basis": "Complete section-bound OpenStax and Stitz–Zeager canonical treatments, current SymPy/Python contracts and original mathematical mechanisms; independent complete content/source and actual paint continuity closed.",
+      "record": "docs/teaching/math-foundations-reading-flow/algebra-functions-exponentials-logarithms/research.md"
+    },
+    "probability-distributions-bayes-theorem": {
+      "basis": "Section-bound MIT and Harvard canonical probability treatments, current SciPy/NumPy contracts, complete source and same-reviewer actual-paint closure. Coverage limits and original-program executions retained.",
+      "record": "docs/teaching/math-foundations-reading-flow/probability-distributions-bayes-theorem/reading-flow-revision.md"
+    },
+    "graph-fundamentals-adjacency-laplacian-connectivity": {
+      "basis": "Section-bound Spielman, MIT/Strang and Chung canonical treatments; original harmonic-function/GCN sources; current NetworkX/SciPy contracts and observed recorded-network operator route. Complete independent source, arithmetic and actual-paint closure; exact reading/execution limits retained.",
+      "record": "docs/teaching/math-foundations-reading-flow/graph-fundamentals-adjacency-laplacian-connectivity/reading-flow-revision.md"
+    },
+    "maximum-likelihood-map-estimation": {
+      "basis": "Section-bound canonical statistical treatments and current SciPy contracts recorded in the accepted design; full scratch/library executions with actual Iris data, complete independent manuscript/source and successor actual-paint closure.",
+      "record": "docs/teaching/math-foundations-reading-flow/maximum-likelihood-map-estimation/accepted-design.md"
+    },
+    "multimodal-tokenization-visual-audio-video": {
+      "basis": "Full canonical/original-paper and official-library research recorded in the independently accepted design; complete scratch/library execution including pretrained EnCodec and actual held-out digits; independent whole-source and current responsive/changed/error paint acceptance.",
+      "record": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/design.md",
+      "deliveryRecord": "docs/teaching/tokenization/multimodal-tokenization-visual-audio-video/delivery.md"
+    },
+    "sets-logic-relations-proof-techniques": {
+      "basis": "Selected MIT6.042 and Hammack canonical passages with current SymPy contracts; complete design/content/whole-runtime source and actual-paint independent acceptance, all complete scratch/tool programs and current integration.",
+      "record": "docs/teaching/math-foundations-reading-flow/sets-logic-relations-proof-techniques/research.md"
+    },
+    "eigenvalues-eigenvectors": {
+      "basis": "Selected MIT/ALAFF/Cornell and application primary treatments plus current NumPy/SciPy/UCI contracts; complete independently accepted design/content/source/actual representation and source-current production integration. Research passages and access scope are frozen in accepted-design.md.",
+      "record": "docs/teaching/math-foundations-reading-flow/eigenvalues-eigenvectors/accepted-design.md"
+    },
+    "graph-transformers-geometric-deep-learning": {
+      "basis": "Completed full canonical/original-paper/official-documentation research, different whole-source review, bounded correction closure, current scoped production/loading and complementary actual-reader verification.",
+      "record": "docs/teaching/deep-learning-beginner/graph-transformers-geometric-deep-learning/message-passing-prerequisite-continuation.md",
+      "coverageMap": "docs/teaching/deep-learning-beginner/graph-transformers-geometric-deep-learning/reading-flow-design.md",
+      "review": "docs/teaching/deep-learning-beginner/graph-transformers-geometric-deep-learning/reading-flow-independent-review.md"
+    },
+    "gradient-boosted-trees-xgboost-lightgbm-catboost": {
+      "basis": "Completed full canonical/original-paper/official-documentation research, different whole-source review, bounded correction closure, current scoped production/loading and complementary actual-reader verification.",
+      "record": "docs/teaching/classical-ml-reading-flow/gradient-boosted-trees-xgboost-lightgbm-catboost/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/gradient-boosted-trees-xgboost-lightgbm-catboost/reading-flow-design.md",
+      "review": "docs/teaching/classical-ml-reading-flow/gradient-boosted-trees-xgboost-lightgbm-catboost/reading-flow-independent-review.md"
+    },
+    "spectral-graph-theory": {
+      "basis": "Primary graph-spectrum/clustering/signal/electrical treatments and exact independently checked complete content/runtime/actual diagrams, canonical maintained library, documented NetworkX3.6.1 dataset provenance and source-current normal-production integration. Accessed passages and honest scope remain in research.md.",
+      "record": "docs/teaching/math-foundations-reading-flow/spectral-graph-theory/research.md"
+    },
+    "geometry-trigonometry-coordinate-reasoning": {
+      "basis": "Canonical coordinate/triangle/trigonometric/affine treatments and selected primary derivations, complete independently reviewed research-backed teaching, ten complete executed programmes including maintained SymPy, actual model-specific diagrams and source-current normal production/payload/loading integration. Actual access and review scope are retained in the research and receipts.",
+      "record": "docs/teaching/math-foundations-reading-flow/geometry-trigonometry-coordinate-reasoning/research.md"
+    },
+    "matrix-calculus-jacobians": {
+      "basis": "Canonical matrix calculus and selected primary differentiation/operator treatments, complete independently reviewed manuscript/design/programmes, maintained full scratch/library routes, actual index/operator-specific diagrams and controls, separate complete-source and current painted-learning closure plus normal production/payload/loading integration. Research record preserves actual access and scope.",
+      "record": "docs/teaching/math-foundations-reading-flow/matrix-calculus-jacobians/research.md"
+    },
+    "dynamic-tokenization-adat-boundlessbpe-litetoken": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/dynamic-tokenization-adat-boundlessbpe-litetoken/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "causal-language-modeling-next-token-prediction": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/causal-language-modeling-next-token-prediction/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "masked-language-modeling-bert-style": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/masked-language-modeling-bert-style/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "data-curation-deduplication-minhash-bloom-filters": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/data-curation-deduplication-minhash-bloom-filters/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "scaling-laws-kaplan-chinchilla-beyond": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/scaling-laws-kaplan-chinchilla-beyond/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "hypothesis-testing-confidence-intervals": {
+      "basis": "Canonical/primary inference treatments, full independently reviewed manuscript, all16 complete executed scratch/library programmes, source-bound observed data/licensing, independently accepted complete mathematical runtime and actual mechanism diagrams/native changed cases plus current normal production/programme/loading integration.",
+      "record": "docs/teaching/math-foundations-reading-flow/hypothesis-testing-confidence-intervals/accepted-design.md"
+    },
+    "counting-combinatorics-mathematical-induction": {
+      "basis": "Canonical discrete mathematics/counting treatments with qualified original reflection/orbit-stabilizer evidence, complete independently accepted manuscript/all14 executed scratch/library programmes, literal enumeration/native mathematics and separate full-source/current actual mechanism paint plus normal production/complete payload/loading integration.",
+      "record": "docs/teaching/math-foundations-reading-flow/counting-combinatorics-mathematical-induction/research.md"
+    },
+    "single-variable-calculus-limits-derivatives-integrals": {
+      "basis": "Primary OpenStax/MIT calculus treatments, selected actual Strang proof pages and Newton source, complete accepted fourteen-section manuscript, all16 whole scratch/SymPy programs, actual unit-cube/punctured-limit mechanism source and separate current picture/behavior/keyboard review with production/loading integration.",
+      "record": "docs/teaching/math-foundations-reading-flow/single-variable-calculus-limits-derivatives-integrals/research.md"
+    },
+    "support-vector-machines-svm": {
+      "basis": "Completed full canonical/original-paper/official-documentation specialist research with entire independently accepted content and runtime, same-reviewer correction closure, and actual normal production/Reader/loading acceptance.",
+      "record": "docs/teaching/classical-ml-reading-flow/support-vector-machines-svm/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/support-vector-machines-svm/reading-flow-design.md",
+      "research": "docs/teaching/classical-ml-reading-flow/support-vector-machines-svm/reading-flow-research.md",
+      "review": "docs/teaching/classical-ml-reading-flow/support-vector-machines-svm/reading-flow-runtime-independent-review.md"
+    },
+    "naive-bayes-probabilistic-classifiers": {
+      "basis": "Completed full canonical/original-paper/official-documentation specialist research with entire independently accepted content and runtime, same-reviewer correction closure, and actual normal production/Reader/loading acceptance.",
+      "record": "docs/teaching/classical-ml-reading-flow/naive-bayes-probabilistic-classifiers/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/naive-bayes-probabilistic-classifiers/reading-flow-design.md",
+      "research": "docs/teaching/classical-ml-reading-flow/naive-bayes-probabilistic-classifiers/reading-flow-research.md",
+      "review": "docs/teaching/classical-ml-reading-flow/naive-bayes-probabilistic-classifiers/reading-flow-runtime-independent-review.md"
+    },
+    "complex-numbers-fourier-laplace-transforms": {
+      "basis": "Source-current canonical complex/Fourier/Laplace treatments, complete accepted437-line manuscript and all24 scratch/library programmes, fixed recorded-data/licence scope, complete source and separately inspected native/overview representation behavior, current normal-production/loading integration.",
+      "record": "docs/teaching/math-foundations-reading-flow/complex-numbers-fourier-laplace-transforms/research.md"
+    },
+    "message-passing-graph-convolutions-gcn-gat-graphsage": {
+      "basis": "Completed full specialist canonical/original-paper/official-documentation research and entire different content/runtime acceptance with current normal publication/Reader/loading checks.",
+      "record": "docs/teaching/deep-learning-beginner/message-passing-graph-convolutions-gcn-gat-graphsage/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/deep-learning-beginner/message-passing-graph-convolutions-gcn-gat-graphsage/reading-flow-design.md",
+      "research": "docs/teaching/deep-learning-beginner/message-passing-graph-convolutions-gcn-gat-graphsage/reading-flow-research.md",
+      "review": "docs/teaching/deep-learning-beginner/message-passing-graph-convolutions-gcn-gat-graphsage/reading-flow-runtime-independent-whole-review.md"
+    },
+    "tensor-algebra-einsum-notation": {
+      "basis": "Source-current complete tensor/einsum manuscript,48 mechanisms and18 fully executed scratch/library programs; canonical tensor/contraction references, recorded-data identity and separate source/paint/loading integration, with exact predecessor scopes retained.",
+      "record": "docs/teaching/math-foundations-reading-flow/tensor-algebra-einsum-notation/research-and-coverage.md"
+    },
+    "random-variables-expectation-covariance": {
+      "basis": "Canonical probability/moment/conditional expectation and covariance treatments, complete accepted402-line manuscript,52 concrete mechanisms,16 fully executed scratch/library programs and13 solved transfer tasks; distinct complete source and actual-paint acceptance, exact source-preserving presentation corrections and current production/loading integration.",
+      "record": "docs/teaching/math-foundations-reading-flow/random-variables-expectation-covariance/research-and-coverage.md"
+    },
+    "bayesian-inference-conjugate-priors": {
+      "basis": "Canonical conjugate/normal and original characterization/predictive treatments at explicitly qualified reading scopes, full accepted manuscript,55 concrete mechanisms and15 fully executed scratch/library programs; distinct whole source and actual-paint acceptance and current production/loading/payload delivery.",
+      "record": "docs/teaching/math-foundations-reading-flow/bayesian-inference-conjugate-priors/research-and-coverage.md"
+    },
+    "curriculum-learning-data-mixing-strategies": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/curriculum-learning-data-mixing-strategies/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "fp8-training-low-precision-pre-training": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/fp8-training-low-precision-pre-training/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "sampling-measurement-experimental-design": {
+      "basis": "Canonical sampling, measurement and experiment sources; independently accepted complete59-mechanism manuscript,15 fully executed programs and13 solved tasks; composed different whole-source and actual-paint acceptance with current normal production, OS-program, asset and loading checks.",
+      "record": "docs/teaching/math-foundations-reading-flow/sampling-measurement-experimental-design/research-and-coverage.md"
+    },
+    "multimodal-pre-training-vision-encoders-cross-modal-alignment": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/multimodal-pre-training-vision-encoders-cross-modal-alignment/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "constitutional-ai-cai": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/constitutional-ai-cai/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "randomized-linear-algebra": {
+      "basis": "Canonical randomized range/sketch/trace/preconditioning sources, entire56-mechanism accepted manuscript and16whole programs; different entire source/math and actual-paint acceptance, corrected true origin/undefined semantics, complete native bottom windows and current normal OS/asset/loading gates.",
+      "record": "docs/teaching/math-foundations-reading-flow/randomized-linear-algebra/research-and-coverage.md"
+    },
+    "combinatorial-optimization-approximation-algorithms": {
+      "basis": "Full canonical matroid/approximation/flow/cover/knapsack/tour research and61-mechanism accepted manuscript; fourteen whole programmes, thirteen solved practices, separate whole-source and actual-paint review with current normal delivery.",
+      "record": "docs/teaching/math-foundations-reading-flow/combinatorial-optimization-approximation-algorithms/research-and-coverage.md"
+    },
+    "ensemble-methods-stacking": {
+      "basis": "Completed full canonical/original-paper/official-documentation specialist research, entire independently accepted content/runtime and same-reviewer corrections, followed by actual different normal production/Reader/loading acceptance.",
+      "record": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/reading-flow-design.md",
+      "research": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/reading-flow-research.md",
+      "review": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/publication/normal-reader-integration-review.md"
+    },
+    "moe-training-expert-load-balancing": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/moe-training-expert-load-balancing/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "data-curation-pipelines-curator-models-quality-filtering": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/data-curation-pipelines-curator-models-quality-filtering/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "multivariate-calculus-gradients": {
+      "basis": "Full multivariate differentiability/gradient/curvature/constraint/forward-AD research and accepted49-mechanism nine-section manuscript, eleven full local programs plus exact maintained bridge, separate entire source and actual-paint acceptance with current normal delivery.",
+      "record": "docs/teaching/math-foundations-reading-flow/multivariate-calculus-gradients/research-and-coverage.md"
+    },
+    "concentration-inequalities-hoeffding-bernstein-chernoff": {
+      "basis": "Full canonical/original concentration research and accepted47-mechanism manuscript, thirteen complete programs/twelve solved tasks, separate whole source and current composed paint acceptance with guarded root normal delivery.",
+      "record": "docs/teaching/math-foundations-reading-flow/concentration-inequalities-hoeffding-bernstein-chernoff/research-and-coverage.md"
+    },
+    "rlhf-reinforcement-learning-from-human-feedback": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/rlhf-reinforcement-learning-from-human-feedback/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "convex-optimization": {
+      "basis": "Complete canonical convex geometry/certificates/smooth and nonsmooth optimization research, accepted53-mechanism continuous manuscript, six focused labs, twelve complete programmes, independent entire source/current actual-paint closure and normal production delivery.",
+      "record": "docs/teaching/math-foundations-reading-flow/convex-optimization/research-and-coverage-D1.md"
+    },
+    "supervised-fine-tuning-sft": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/supervised-fine-tuning-sft/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "synthetic-data-generation-for-pre-training": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/synthetic-data-generation-for-pre-training/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "pca-dimensionality-reduction": {
+      "basis": "Completed canonical treatments/original papers/official documentation, whole coverage/content/runtime review and current normal Reader integration",
+      "record": "docs/teaching/classical-ml-reading-flow/pca-dimensionality-reduction/publication/root-normal-integration-acceptance.json"
+    },
+    "dpo-direct-preference-optimization": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/dpo-direct-preference-optimization/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "process-reward-models-prm-vs-outcome-reward-models-orm": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "simpo-simple-preference-optimization": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/simpo-simple-preference-optimization/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "p-tuning-soft-prompt-methods": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/p-tuning-soft-prompt-methods/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "monte-carlo-methods-mcmc-metropolis-hastings-hmc-nuts": {
+      "basis": "Complete researched reading-flow revision with different entire source and actual-paint acceptance and current normal delivery",
+      "record": "docs/teaching/math-foundations-reading-flow/monte-carlo-methods-mcmc-metropolis-hastings-hmc-nuts/integration.json"
+    },
+    "rl-for-reasoning-deepseek-r1-style": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/rl-for-reasoning-deepseek-r1-style/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "multi-label-multi-output-learning": {
+      "basis": "Complete canonical/original-paper/official-documentation research, whole different content/runtime review and SAME closures, followed by actual normal Reader/source/native/loading integration.",
+      "record": "docs/teaching/classical-ml-reading-flow/multi-label-multi-output-learning/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/multi-label-multi-output-learning/reading-flow-design.md",
+      "research": "docs/teaching/classical-ml-reading-flow/multi-label-multi-output-learning/reading-flow-design-author-report.md",
+      "review": "docs/teaching/classical-ml-reading-flow/multi-label-multi-output-learning/publication/normal-layout-correction/independent-review/review.md"
+    },
+    "stochastic-processes-markov-chains-brownian-motion-poisson": {
+      "basis": "Complete researched reading-flow revision with different entire source/actual-paint acceptance and current normal delivery",
+      "record": "docs/teaching/math-foundations-reading-flow/stochastic-processes-markov-chains-brownian-motion-poisson/integration.json"
+    },
+    "gradient-descent-variants-sgd-adam-adagrad-rmsprop-lamb-lars": {
+      "basis": "Complete researched reading-flow revision with independent entire source/currentpaint and source-current normal production integration",
+      "record": "docs/teaching/math-foundations-reading-flow/gradient-descent-variants-sgd-adam-adagrad-rmsprop-lamb-lars/integration.json"
+    },
+    "ordinary-differential-equations-linear-systems": {
+      "basis": "Complete researched reading-flow revision with different whole scientific/source/paint review and source-current normal-reader equation closure/production integration",
+      "record": "docs/teaching/math-foundations-reading-flow/ordinary-differential-equations-linear-systems/integration.json"
+    },
+    "rlaif-ipo-orpo-emerging-alignment-methods": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/rlaif-ipo-orpo-emerging-alignment-methods/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "knowledge-distillation-for-llms-deepseek-r1-distill-cot-distillation": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/knowledge-distillation-for-llms-deepseek-r1-distill-cot-distillation/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "recommender-systems-collaborative-filtering-matrix-factorization": {
+      "basis": "Complete canonical/original-paper/official-documentation research, different entire content/runtime review and SAME corrections, followed by actual normal Reader/source/native/loading integration.",
+      "record": "docs/teaching/classical-ml-reading-flow/recommender-systems-collaborative-filtering-matrix-factorization/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/recommender-systems-collaborative-filtering-matrix-factorization/reading-flow-design.md",
+      "research": "docs/teaching/classical-ml-reading-flow/recommender-systems-collaborative-filtering-matrix-factorization/reading-flow-research.md",
+      "review": "docs/teaching/classical-ml-reading-flow/recommender-systems-collaborative-filtering-matrix-factorization/publication/normal-reader-independent-review/normal-layout-closure.md"
+    },
+    "grpo-rloo-kto-advanced-preference-methods": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/grpo-rloo-kto-advanced-preference-methods/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "typed-decision-models-calibrated-neural-decision-systems": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/typed-decision-models-calibrated-neural-decision-systems/design.md",
+      "completedOn": "2026-10-07"
+    },
+    "dapo-dynamic-adaptive-policy-optimization": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/dapo-dynamic-adaptive-policy-optimization/design.md",
+      "completedOn": "2026-10-08"
+    },
+    "rlvr-reinforcement-learning-with-verifiable-rewards": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/rlvr-reinforcement-learning-with-verifiable-rewards/design.md",
+      "completedOn": "2026-10-08"
+    },
+    "survival-analysis-cox-regression-kaplan-meier-hazard-models": {
+      "basis": "Complete canonical/original-paper/official-documentation research and whole independent content/private runtime review with SAME corrections and normal Reader integration.",
+      "record": "docs/teaching/classical-ml-reading-flow/survival-analysis-cox-regression-kaplan-meier-hazard-models/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/survival-analysis-cox-regression-kaplan-meier-hazard-models/reading-flow-design.md",
+      "research": "docs/teaching/classical-ml-reading-flow/survival-analysis-cox-regression-kaplan-meier-hazard-models/reading-flow-scratch-research.md",
+      "review": "docs/teaching/classical-ml-reading-flow/survival-analysis-cox-regression-kaplan-meier-hazard-models/independent-content-review/normal-integration/closure/same-closure.md"
+    },
+    "random-matrix-theory": {
+      "basis": "Full primary research/complete content and source-bound different entire reading-flow integration",
+      "record": "docs/teaching/math-foundations-reading-flow/random-matrix-theory/reading-flow-revision.md",
+      "integration": "docs/teaching/math-foundations-reading-flow/random-matrix-theory/runtime-independent-root-normal-integration-r3.json"
+    },
+    "clustering-evaluation-validation-silhouette-ari-nmi": {
+      "basis": "Recorded canonical treatments, original/official sources and explicit access limits, complete coverage map and accepted whole content/private/normal reviews. No new research reading or scientific execution implied by this registration.",
+      "record": "docs/teaching/classical-ml-reading-flow/clustering-evaluation-validation-silhouette-ari-nmi/reading-flow-integration.md",
+      "coverageMap": "docs/teaching/classical-ml-reading-flow/clustering-evaluation-validation-silhouette-ari-nmi/reading-flow-design.md",
+      "research": "docs/teaching/classical-ml-reading-flow/clustering-evaluation-validation-silhouette-ari-nmi/reading-flow-research-conservation.md",
+      "review": "docs/teaching/classical-ml-reading-flow/clustering-evaluation-validation-silhouette-ari-nmi/independent-normal-integration-review/review.md"
+    },
+    "partial-differential-equations-conservation-boundary-conditions": {
+      "basis": "Full primary research, complete explained content and DIFFERENT entire source/actual normal reading-flow integration",
+      "record": "docs/teaching/math-foundations-reading-flow/partial-differential-equations-conservation-boundary-conditions/reading-flow-revision.md",
+      "integration": "docs/teaching/math-foundations-reading-flow/partial-differential-equations-conservation-boundary-conditions/runtime-root-normal-integration-r7.json"
+    },
+    "abstract-algebra-groups-symmetry-actions": {
+      "basis": "Full research, complete explained content and DIFFERENT entire private/current normal reading-flow integration",
+      "record": "docs/teaching/math-foundations-reading-flow/abstract-algebra-groups-symmetry-actions/reading-flow-revision.md",
+      "integration": "docs/teaching/math-foundations-reading-flow/abstract-algebra-groups-symmetry-actions/runtime-root-normal-integration-r4.json"
+    },
+    "variational-inference": {
+      "basis": "Complete deep research, explained content, different entire source/normal reading and SAME correction acceptance",
+      "record": "docs/teaching/math-foundations-reading-flow/variational-inference/reading-flow-revision.md",
+      "integration": "docs/teaching/math-foundations-reading-flow/variational-inference/runtime-root-normal-integration-r10.json"
+    },
+    "exponential-families-sufficient-statistics": {
+      "basis": "Complete deep research, explained content, different entire review, SAME corrections and final normal integration",
+      "record": "docs/teaching/math-foundations-reading-flow/exponential-families-sufficient-statistics/reading-flow-revision.md",
+      "integration": "docs/teaching/math-foundations-reading-flow/exponential-families-sufficient-statistics/runtime-root-normal-integration-r5.json"
+    },
+    "decoding-strategies-greedy-beam-top-k-top-p-temperature": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/decoding-strategies-greedy-beam-top-k-top-p-temperature/design.md",
+      "completedOn": "2026-10-08"
+    },
+    "test-time-compute-scaling": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/test-time-compute-scaling/design.md",
+      "completedOn": "2026-10-08"
+    },
+    "numerical-pdes-grids-finite-elements-stability": {
+      "basis": "Complete deep research/content, different entire runtime review, SAME corrections and Root current normal acceptance",
+      "record": "docs/teaching/math-foundations-reading-flow/numerical-pdes-grids-finite-elements-stability/reading-flow-revision.md",
+      "integration": "docs/teaching/math-foundations-reading-flow/numerical-pdes-grids-finite-elements-stability/runtime-root-normal-integration-r4.json"
+    },
+    "kv-cache-memory-management": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/kv-cache-memory-management/design.md",
+      "completedOn": "2026-10-08"
+    },
+    "queueing-theory-for-llm-serving": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/queueing-theory-for-llm-serving/design.md",
+      "completedOn": "2026-10-08"
+    },
+    "measure-theory-probability-spaces": {
+      "basis": "Complete deep research/content, DIFFERENT whole runtime review, SAME R1/R2 closure and Root current normal acceptance",
+      "record": "docs/teaching/math-foundations-reading-flow/measure-theory-probability-spaces/reading-flow-revision.md",
+      "integration": "docs/teaching/math-foundations-reading-flow/measure-theory-probability-spaces/runtime-independent-root-normal-r14.json"
+    },
+    "continuous-batching-pagedattention": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/design.md",
+      "completedOn": "2026-10-08"
+    },
+    "structured-output-constrained-decoding-outlines-xgrammar": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/structured-output-constrained-decoding-outlines-xgrammar/design.md",
+      "completedOn": "2026-10-08"
+    },
+    "convex-duality-lagrangian-methods-kkt-conditions": {
+      "basis": "Complete researched reading-flow revision3 with independent entire content and runtime acceptance",
+      "record": "docs/teaching/math-foundations-reading-flow/convex-duality-lagrangian-methods-kkt-conditions/reading-flow-revision.md",
+      "acceptance": "docs/teaching/math-foundations-reading-flow/convex-duality-lagrangian-methods-kkt-conditions/runtime-root-final-acceptance-r6.json"
+    },
+    "speculative-decoding": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/speculative-decoding/design.md",
+      "completedOn": "2026-10-09"
+    },
+    "prefix-caching-prompt-caching": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/prefix-caching-prompt-caching/design.md",
+      "completedOn": "2026-10-09"
+    },
+    "second-order-methods-l-bfgs-k-fac-shampoo-natural-gradient": {
+      "basis": "Complete researched reading-flow revision4 with entire independent content and runtime acceptance",
+      "record": "docs/teaching/math-foundations-reading-flow/second-order-methods-l-bfgs-k-fac-shampoo-natural-gradient/runtime-root-final-acceptance-r14.md",
+      "acceptance": "docs/teaching/math-foundations-reading-flow/second-order-methods-l-bfgs-k-fac-shampoo-natural-gradient/runtime-root-final-acceptance-r14.json"
+    },
+    "inference-cost-economics-compute-scaling": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/inference-cost-economics-compute-scaling/design.md",
+      "completedOn": "2026-10-09"
+    },
+    "inference-engines-serving": {
+      "basis": "deep-dive coverage map",
+      "record": "docs/teaching/llm-architecture-training/inference-engines-serving/design.md",
+      "completedOn": "2026-10-09"
+    },
+    "causal-inference-do-calculus": {
+      "basis": "Completed full source-bound deep research and whole reading-flow revision",
+      "record": "docs/teaching/math-foundations-reading-flow/causal-inference-do-calculus/design-proposal-r3.md",
+      "completion": "docs/teaching/math-foundations-reading-flow/causal-inference-do-calculus/runtime-root-final-acceptance-r5.json"
+    },
+    "numerical-methods-finite-differences-quadrature-root-finding": {
+      "basis": "Completed full source-bound deep research and whole reading-flow revision",
+      "record": "docs/teaching/math-foundations-reading-flow/numerical-methods-finite-differences-quadrature-root-finding/research-and-coverage-r3.md",
+      "completion": "docs/teaching/math-foundations-reading-flow/numerical-methods-finite-differences-quadrature-root-finding/runtime-root-final-acceptance-r3.json"
+    },
+    "non-convex-optimization-landscape": {
+      "basis": "Completed source-bound deep research and whole reading-flow revision",
+      "record": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/design-proposal-r1.md",
+      "completion": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/runtime-root-final-acceptance-r3.json"
+    },
+    "constrained-multi-objective-optimization": {
+      "basis": "Completed source-bound deep research and whole reading-flow revision",
+      "record": "docs/teaching/math-foundations-reading-flow/constrained-multi-objective-optimization/design-proposal-r1.md",
+      "completion": "docs/teaching/math-foundations-reading-flow/constrained-multi-objective-optimization/runtime-root-final-acceptance-r3.json"
+    }
+  },
+  "notes": "Deep Learning1–12 use targeted research by the user decision. Additional completed deep-dive revisions are listed explicitly below with their coverage-map records. Any absent stable ID requires the full pass on its next substantive revision; historical implementation alone does not satisfy it."
+}

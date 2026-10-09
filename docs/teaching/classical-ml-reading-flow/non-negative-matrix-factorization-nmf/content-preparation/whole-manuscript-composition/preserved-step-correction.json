@@ -1,0 +1,120 @@
+{
+  "status": "BOUNDED_ORIGINAL_PROGRAM_DELIVERY_CORRECTION_PENDING_DIFFERENT_WHOLE_CONTENT_REVIEW",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T12:53:29.456Z",
+  "authority": "Root explicitly authorized this later reversible §7 insertion after exact eleven-section-prefix conservation during composition.",
+  "predecessorCompositionReceipt": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\whole-composition-receipt.json",
+    "bytes": 123980,
+    "sha256": "eb551b68b3a760baca80e56cdec41c01b3d8badabea865dba5c35afdfb7b6c26"
+  },
+  "predecessor": {
+    "assembly": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\partial-content-assembly.json",
+      "bytes": 11948,
+      "sha256": "fdb6c4bc601ea901312cff078870b63f4de404c334f9dd445ac3dffee71f71d8"
+    },
+    "template": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson-template.md",
+      "bytes": 78734,
+      "sha256": "63a318227faa8146950823d0b8f00c90221f0c524613db175683a85675963a3a"
+    },
+    "manuscript": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson.md",
+      "bytes": 427965,
+      "sha256": "31e199cdbeabfdfcb5024cb9c03ad7e0996543517152526023372a9042c85fbc"
+    },
+    "composition": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\section-composition.json",
+      "bytes": 2679,
+      "sha256": "27c9274fa3f0170206d929dc24f49fe2a34c4f11cfaebe36185a833bdfdb64a7"
+    },
+    "composer": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\compose-content.mjs",
+      "bytes": 5104,
+      "sha256": "9c2adef44bedcafbc9df19839a83d9b9e820bb7032aa4d69054976a14be1c91b"
+    }
+  },
+  "current": {
+    "template": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson-template.md",
+      "bytes": 81047,
+      "sha256": "d1451fecb41a4d9396335df6000e093558c9ce0ac6f752ea844a42b193a1f9f2"
+    },
+    "manuscript": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\lesson.md",
+      "bytes": 430278,
+      "sha256": "a06a478712e897b3689400d5d2f4b321b0cea345c9ee50165ad8bfe38ce88ec7"
+    },
+    "assembly": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\partial-content-assembly.json",
+      "bytes": 11948,
+      "sha256": "dbb94c44951464b5ab73353468717a04295cb314c219ab5b81d8e7bca449361f"
+    },
+    "composer": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\compose-content.mjs",
+      "bytes": 5104,
+      "sha256": "9c2adef44bedcafbc9df19839a83d9b9e820bb7032aa4d69054976a14be1c91b"
+    },
+    "composition": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\section-composition.json",
+      "bytes": 2679,
+      "sha256": "27c9274fa3f0170206d929dc24f49fe2a34c4f11cfaebe36185a833bdfdb64a7"
+    }
+  },
+  "insertion": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\whole-manuscript-composition\\preserved-step-insertion.md",
+    "bytes": 2313,
+    "sha256": "9fc14c1fdea379a65019db29fe892a3b9ee502cf3f0021b67300bef50fd99b39"
+  },
+  "insertBefore": "Does multiplication automatically solve the boundary problem?",
+  "sourceOwner": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+    "bytes": 5471,
+    "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24"
+  },
+  "originalBodies": [
+    {
+      "file": "nmf_step.py",
+      "decodedCodeSha256": "b75511b9f0d8bacdf28a316351ac668ca7246cbe18de0c55d15f93002578c1a1",
+      "decodedOutputSha256": "0a0e7b7ba934a3f72ed27701cdd825698bafac0b2d3269c4dcef99a37aef060a",
+      "codeOccurrences": 1,
+      "outputOccurrences": 1
+    },
+    {
+      "file": "nmf_digits.py",
+      "decodedCodeSha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989",
+      "decodedOutputSha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981",
+      "codeOccurrences": 1,
+      "outputOccurrences": 1
+    },
+    {
+      "file": "nmf_words.py",
+      "decodedCodeSha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343",
+      "decodedOutputSha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23",
+      "codeOccurrences": 1,
+      "outputOccurrences": 1
+    }
+  ],
+  "inverse": {
+    "templateExactlyRestored": true,
+    "whole19ManuscriptExactlyRestored": true,
+    "oldElevenSectionPrefixIdentityRetainedInPredecessorReceipt": true,
+    "onlyThisInsertion": true
+  },
+  "evidence": {
+    "newPythonMains": 0,
+    "newFits": 0,
+    "oldCampaignReplay": false,
+    "originalDecodedCodeAndOutputUnchanged": true,
+    "allScopedFrozenInputsUnchanged": true
+  },
+  "indexDisposition": "Section19 exact original source/output promise is now satisfied for allthree preserved programs. No wording, row or filename changed; its original handoff remains current.",
+  "composerExecution": {
+    "exitCode": 0,
+    "stdout": "{\"sections\":19,\"figures\":66,\"wholeSources\":15,\"bytes\":430278,\"status\":\"COMPLETE_MANUSCRIPT_PENDING_AUTHOR_AND_INDEPENDENT_REVIEW\"}\n",
+    "stderr": ""
+  },
+  "reading": "Affected entire section7 and incoming6/outgoing8 bridge must be read after this correction before final handoff.",
+  "limits": "No phase, canonical/public/runtime or central-ledger change; no native acceptance or independent whole review."
+}

@@ -1,0 +1,40 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import { parse } from '@babel/parser';
+import { build } from 'esbuild';
+import { createRequire } from 'node:module';
+
+const owner = 'docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm';
+const output = `${owner}/runtime-review-successor`;
+const current = 'src/learn/components/lesson-labs/PRMFlow.jsx';
+const previous = `${output}/predecessor/PRMFlow.jsx`;
+const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const clean = value => Array.isArray(value) ? value.map(clean) : value && typeof value === 'object'
+  ? Object.fromEntries(Object.entries(value).filter(([key]) => !['start', 'end', 'loc', 'extra', 'leadingComments', 'trailingComments', 'innerComments'].includes(key)).map(([key, child]) => [key, clean(child)])) : value;
+const ast = file => parse(fs.readFileSync(file, 'utf8'), { sourceType: 'module', plugins: ['jsx'] }).program.body;
+const identify = node => node.declaration?.id?.name || node.id?.name;
+const changed = ['Figure', 'PRMBranchAnnotation', 'PRMHeldoutInspector', 'PRMEvaluationDenominators', 'PRMCompletionTree', 'FiniteTree', 'PRMPolicyCredit', 'PRMProxyFailure'];
+const a = ast(previous), b = ast(current);
+assert.equal(a.length, b.length);
+const declarations = a.map((node, i) => ({ name: identify(node) || `top-level-${i}`, changed: JSON.stringify(clean(node)) !== JSON.stringify(clean(b[i])) }));
+for (const row of declarations) assert.ok(!row.changed || changed.includes(row.name), row.name);
+for (const name of changed) assert.ok(declarations.some(row => row.name === name && row.changed), name);
+const wide = ast(`${output}/wide-tree-component.jsx`);
+for (let i = 0; i < b.length; i++) assert.ok(JSON.stringify(clean(wide[i])) === JSON.stringify(clean(b[i])) || identify(b[i]) === 'FiniteTree');
+const inputs = JSON.parse(fs.readFileSync(`${owner}/runtime-inputs.json`));
+const delta = Object.entries(inputs.files).filter(([file, expected]) => hash(file) !== expected).map(([file, before]) => ({ path: file, before, after: hash(file) }));
+assert.deepEqual(delta.map(row => row.path).sort(), ['src/learn/components/lesson-labs/PRMFlow.jsx', 'src/learn/components/lesson-labs/prm-flow.css'].sort());
+const accepted = JSON.parse(fs.readFileSync(`${owner}/content-acceptance.json`));
+for (const [file, expected] of Object.entries(accepted.bindings)) assert.equal(hash(file), expected, file);
+const names = [...fs.readFileSync(current, 'utf8').matchAll(/export function (PRM\w+)\(/g)].map(match => match[1]).filter(name => name !== 'PRMTable');
+assert.equal(names.length, 29);
+const result = await build({ stdin: { contents: `import React from 'react';import {renderToString} from 'react-dom/server';import * as figures from './${current}';export const html=${JSON.stringify(names)}.map(name=>renderToString(React.createElement(figures[name])));`, resolveDir: process.cwd(), loader: 'jsx' }, write: false, bundle: true, format: 'cjs', platform: 'node', jsx: 'automatic', loader: { '.css': 'empty' }, external: ['react', 'react-dom/server'] });
+const require = createRequire(import.meta.url), mod = { exports: {} }, warnings = [];
+const beforeError = console.error;
+console.error = (...args) => warnings.push(args.join(' '));
+try { new Function('require', 'module', 'exports', result.outputFiles[0].text)(require, mod, mod.exports); } finally { console.error = beforeError; }
+assert.equal(warnings.length, 0);
+assert.ok(mod.exports.html.every(html => !html.includes('<figcaption>') && html.includes('aria-label=')));
+fs.writeFileSync(`${output}/conservation.json`, JSON.stringify({ passed: true, fits: 0, before: hash(previous), after: hash(current), conservedRuntimeInputs: Object.keys(inputs.files).length - delta.length, acceptedContentBindings: Object.keys(accepted.bindings).length, delta, declarations, currentSSR: { figures: names.length, warnings: warnings.length }, compactContinuationOnly: 'FiniteTree', scope: 'Only the eight named runtime functions and topic-local CSS differ. Manuscript, pure model, all scientific programs/data/weights/receipts and all other declarations stay exact. The 132-image successor is conserved for every mechanism except the final compact tree renderer; current compact-tree evidence supplies that bounded continuation.' }, null, 2) + '\n');
+console.log(JSON.stringify({ passed: true, conserved: Object.keys(inputs.files).length - 2, acceptedContent: Object.keys(accepted.bindings).length, SSR: 29, warnings: 0, fits: 0 }));

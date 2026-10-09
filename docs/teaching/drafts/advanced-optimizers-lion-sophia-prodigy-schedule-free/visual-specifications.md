@@ -1,112 +1,220 @@
-# Advanced optimizers: visual and investigation contract
+# Advanced optimizers: current reading-flow specifications
 
-## Live exploration contract — 21 September 2026
+This revision supersedes the earlier prepared visual instructions. The earlier
+packet is preserved in `../../deep-learning-beginner/original/optimizers-before-reading-flow/`.
+The whole manuscript is [lesson.md](lesson.md). The independently accepted design,
+full deep-research coverage and exact preservation inventory live in
+`../../deep-learning-beginner/advanced-optimizers-lion-sophia-prodigy-schedule-free/`.
+These are source-bound implementation contracts, not a claim that every current
+view has passed its final browser or independent review.
 
-Open each investigation with its current inputs, intermediate mechanism and complete current output visible. Apply valid edits to meaningful entities immediately and update diagrams, tables, units and causal explanation together. No prediction entry, predicted-answer choices, commitment, prediction grading or answer-unlock feature is part of this packet, even optionally. Model predictions and mathematical masks/gates remain subject matter.
+## Reading and placement
 
-Use the topic-specific controls and checked fixtures below. Pair sliders or direct manipulation with labeled keyboard/numeric controls; keep presets as starting points, not the only editable values. A pinned baseline preserves its inputs, seed, units and outputs while the current case changes. Explain both a meaningful contrast and an unchanged/null result, then connect the observed effect to a practical design decision. Reset restores the stated fixture and current result. Invalid text has a local explanation and a clearly identified last valid result; never silently clamp or pair new inputs with old output.
+Each `OPT_FLOW` anchor replaces one paragraph at its precise manuscript location.
+The manuscript establishes a question and one-line viewing instruction before
+the picture; the labelled walk-through, formula/code and changed case follow.
+All13 sections, nine exercises/solutions, specialist branches, four original
+learner programs, two licensed pinned implementations and one new HVP program
+remain visible. There is no reading-length cap. One running classifier motivates
+the rules; scalar/bowl/matrix/real-image switches are announced with their purpose.
 
-Step/Back and bounded Run controls advance a real computation or reveal its chronological stages, not permission to view an answer. Show the current state and its result throughout. Keep exact small calculations live. For costly frozen inference, debounce or run bounded work with pending/current state labels and stale-result cancellation; inspect saved measurements without implying fresh training. Respect reduced motion, keep focus stable and avoid announcing every animation frame. Independent written practice and its hints/solutions stay separate.
+Drawings are actual circuits, matrices, coordinate rulers, contours, byte
+allocations, image grids or measured histories, never sentences in cards. Follow
+the DL module visual vocabulary. Supplied values cyan; weights amber; computed
+values violet; operations grey; derivatives orange with dashed differentiation
+routes. Consuming a stored derivative in arithmetic uses a solid forward route.
+Colours are labelled adjacent to their entities and backed by text/shape.
 
-Phase two must test default results without any action, meaningful edits, quick consecutive edits, valid extremes, null/invalid cases, reset, linked-view agreement, keyboard operation and readable phone layouts. The mathematical/reference checks already specified below remain; these live browser checks have not been performed in this content-only revision.
+## Shared state and controls
 
-### Topic-specific live route
-**Make an optimizer decision visible.** Edit gradient/momentum, curvature estimate, step scale, averaging state and supported real digit input for one update.
-**See the consequence.** Show the exact update vector and state changes for Lion, Sophia, Prodigy and Schedule-Free, including where gradients and evaluation occur.
-**Decision connection.** Choose a debugging question from sign, curvature, scale and averaging effects rather than extrapolating a universal optimizer ranking.
+Root uses AdvancedOptimizerFlowProvider, SophiaFlowProvider (three separated
+cases), OptimizerAdaptationFlowProvider, OptimizerAveragingFlowProvider,
+OptimizerMemoryFlowProvider, AdvancedOptimizerStudyFlowProvider and
+OptimizerHistoryFlowProvider. Every view of one case reads that same state.
+One-to-three controls per just-taught question sit directly beneath its picture,
+with a complete current live sentence. No prediction/reveal gate, preset wall,
+unexplained mode selector or duplicate slider/number input. Exact arbitrary
+values use a single labelled numeric text editor, valid bounded pixel/index/rate
+controls use the shared slider. Invalid/nonfinite/out-of-domain text stays local,
+retains the last valid result and reports the problem; reset clears invalid drafts.
+Pin stores full immutable case inputs/results, not a moving baseline.
 
+## Numerical provenance and implementation boundary
 
-Content-only packet, 13 September 2026. Implement after an authorized finish preflight. [The manuscript](lesson.md) is complete; these specifications are not rendered components. Preserve the separate roles of direction, curvature, scale adaptation and iterate averaging. Use number-line balances, matrix geometry, branching probability trees, state traces and actual pixel contributions where each reveals its mechanism. A uniform text-output panel would obscure these differences.
+The41 scientific dependencies and71 original rollback sources are checked by
+SHA256. Do not rerun fits, change original outputs or invoke historical generator
+writers. The guarded pure renderer supports --preview, --check and explicit
+--write-reading-flow; preview writes only its disposable authored JSX. The new
+HVP program is independently executed, not an extension to the retained fit.
+All fitted models/histories/data records below are immutable actual artifacts.
+Constructed examples and resource counts are labelled as such; no time or
+quality extrapolation is invented. Formula/prose values need direct numerical
+checks in addition to the helper tests.
 
-## Shared implementation contract
+## View-by-view contracts
 
-Use topic-owned figures, model functions and lab files named for their mechanism. Load this topic's data and models only when its lesson/investigation needs them. Saved models total twelve 650-parameter arrays plus state; a selected model suffices for the image investigation. Do not fetch all other lesson data, train 24 models in the browser or eagerly load a scientific runtime. Browser calculations use ordinary double precision and bounded arrays; preserve full-precision inputs and round only labels. Complete runnable Python downloads are teaching artifacts, not browser dependencies.
+Each row's control bounds, default state and numerical meaning are intentional.
+The implementation mapping is explicit and exhaustive; the renderer refuses
+unknown, repeated or missing placements.
 
-Each investigation follows the live exploration contract above: current results are visible immediately, valid entity edits update all linked views, and comparisons explain the mechanism. Reset restores the declared inputs and recomputes their result. No prediction or answer-submission state is retained.
+### 1. What lies between an input and the next learned prediction?
 
-Provide keyboard-editable numeric inputs alongside graphical controls, visible focus, readable labels, and text/table equivalents for every diagram. Color is redundant with signs, labels, line styles and selected-cell borders. Narrow layouts stack mechanism stages while preserving arrow/order meaning; matrices may scroll within a labeled region, never the entire article. Announce completed calculations once; avoid screen-reader announcements for every pixel hover. Respect reduced motion. No autoplay, hidden result-unlock threshold, unlabeled log axis or contrived animation is required.
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `scores` · `OptimizerScoresDrawing/` | Two supplied features [1,2], four learned weights [[.4,-.2],[.1,.3]], four products, two actual sums, scores [.6,.4]. Trace every feature/weight contribution to its class score. Static foundational picture. |
+| `probabilities` · `OptimizerProbabilityDrawing/` | Two scores become exp(.6),exp(.4), join the shared denominator, then each numerator divides by that same sum. Bars share 0–1; class0=.549833997312478. Explicit numerator forks attach to the division operators. Static. |
+| `objective` · `OptimizerObjectiveDrawing/` | One-hot supplied target [1,0], -log p0=.598138869381592, score residual p-y, feature multiplications and all four returning weight derivatives. Orange derivative routes match visible computed values; no optimizer control yet. |
+| `update` · `OptimizerOpeningFlowLab/` | One shared rate slider [0,1] changes the actual four weights by -ηg. At .1 new p0=.65704787; zero rate is exactly unchanged. The picture labels old θ, stored g, η and next θ; using g is grey forward arithmetic. |
 
-Validate finite inputs and declared ranges before computing. If an exploratory calculation becomes nonfinite, stop at that step, retain the last finite state and explain the numerical event; do not replace divergence with a reassuring capped trace. Use tolerances for numerical comparisons (absolute 1e-6 or relative 1e-5), and exact semantic comparisons for sign/order/mode choices. Browser parity and accessibility remain phase-two work.
+### 2. AdamW: smooth direction and magnitude separately
 
-## Thirteen inline figures
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `adam-histories` · `AdamHistoriesDrawing/` | Declared three incoming gradients and two exponentially weighted histories: signed m versus squared v. All intermediates are computed by the retained rule. Distinguish history from input and correction. |
+| `adam-correction` · `AdamCorrectionDrawing/` | At the third update, draw missing initialization mass and the 1-β^t divisors. The corrected moments are not newly observed gradients. Static computed reference. |
+| `adam-update` · `AdamUpdateDrawing/` | Same signed rulers show old [ .5,-.7 ], decayed values and next [.4685,-.6679] for η=.03,λ=.1,g=[2,-4]. All points share actual scale and labels. |
+| `adam-impulse` · `AdamImpulseDrawing/` | 999 zero gradients then a unit impulse at step1000: corrected normalized update about2.5145667. Show the delayed first/second history effect; no universal one-coordinate-step bound. |
 
-| Figure and placement | Representation and actual input | Reading task and accuracy boundary |
-| --- | --- | --- |
-| 1, §1 update anatomy | Image → ten scores → probability/loss → gradient → history/direction/scale → changed parameters → prediction loop | Separate optimizer state from labels and architecture. Use real source277 as the worked image; never imply the optimizer changes its label. |
-| 2, §2 Adam histories | Signed and squared gradient bar sequences; separate EMA accumulation; raw/corrected first-step cells | g=[2,−4], betas .9/.999, then the independently calculated late impulse ratio2.5145667. The second moment is not variance; the ratio is not bounded by1. |
-| 3, §3 Lion | Signed number-line contributions .18 and−.10, sign threshold, then separate .198 and−.01 memory row | Explain old momentum versus new memory, sign-zero and decay. Figure is the worked example; investigation A starts elsewhere. |
-| 4, §4 curvature | Equal-scale contour plots of H=diag(1,20) and its π/6 rotation; same start[2,−1]; GDη.08, diagonal Newton and full Newton arrows | Use the matrices and points in `calculated-inputs.json.geometry`. Full Newton reaches the quadratic optimum; diagonal approximation can miss coupling. Axes use the same parameter units, not arbitrary decorative ellipses. |
-| 5, §4 estimators | Separate true-label training lane and independent sampled-label curvature lane; probability-weighted binary branches plus batch expansion | Worked x2,p.8 gives true square.16 and expected.64; two-row worked expectation.425. Display the parameter Jacobian in the nonlinear deeper branch. Do not silently substitute true-label squares. |
-| 6, §5 adaptation | Parameter line with initial/current/target positions, gradient and displacement dot product; r and s histories; old-d/next-d columns | Calculated worked target3 trace, including step7 overshoot7.1100814. Target is visible only as the declared educational objective, not input to Prodigy's scale estimator. |
-| 7, §6 iterates | x/y/z points on one line; interpolation arrow forms y, gradient-at-y updates z, averaging arrow forms x | Use all four worked rows in manuscript; final x1.119624. Arrow origin and updated object must differ visibly. |
-| 8, §6 weighting | Learning-rate strip above separately labeled c and final-history-weight strips | Warmup rates.1/.2/.3 give final weights1/14,4/14,9/14. Show final coefficients rather than confusing historical insertion weights with final influence. |
-| 9, §7 real gradient | Actual 8×8 digit, selected row3/column4 pixel, ten score terms and ten class-residual contributions | Pixel28 is zero-based. Label raw intensity0…16 and normalized intensity0…1. Bias feature is separate from the image. Show all ten probabilities, not an invented confidence score. |
-| 10, §7 selection | Three role columns and the declared two-scale/two-seed grid per method | Actual240/80/80 source roles, all24 fits, validation-only scale selection. Assessment does not point back into tuning. |
-| 11, §7 outcomes | Actual saved fit/validation curves at recorded updates, paired seeds and selectable candidate scales; separate d and clipped-fraction panels | `study-results.json` only. No interpolated points presented as measurements, no timing axis. Optional log-loss view explicitly labeled. Retain inferior candidates and increases. Show x/y comparison for Schedule-Free, including seed29 y lower than x. |
-| 12, §8 allocation | Named payload rows with dtype, entry count and replication/sharding rule; decimal GB and optional GiB conversion | Calculated, hypothetical allocation, not measured peak.70B two FP32 moments560GB, one280GB, BF16 weights140GB. Keep activation/workspace unknown unless explicitly supplied. Adafactor shape4096² factors32768bytes versus dense67108864. |
-| 13, §9 singular geometry | M=[[2,1],[1,2]], entrywise sign, ideal polar factor; transformed vectors[1,1] and[1,−1] | Ideal polar=I, entrywise sign has rank1 and kills[1,−1]. Finite Muon Newton–Schulz iterations are not this exact SVD operation. No timing/quality comparison is inferred. |
+### 3. Lion: keep a directional memory, then take its sign
 
-Static figures expose their explanatory state directly. The five investigations also show current results immediately, adding live entity controls and bounded optimizer/process steps where needed. Neither form needs a prediction or answer gate.
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `lion-worked` · `LionWorkedFlowFigure/` | Original θ=.5,m=.2,g=-1,β1=.9,β2=.99,η=.01,λ=.2 gives blend .08,new θ .489,new m .188. Both β branches receive the old memory; saved m does not replace the direction before the step. |
+| `lion-evidence` · `LionFlowLab view="evidence"/` | Fresh complete sequence context θ0=-.4,m0=-.3,g=[2,2,2]. Three controls selected update, its gradient[-10,10] and initial momentum[-10,10] change the signed blend; the separate memory question exposes β1/β2. θ/g/m signs labelled; g4 reverses the initial blend. |
+| `lion-update` · `LionFlowLab view="update"/` | Same case and selected step; η [0,.2],λ [0,1],initial θ[-10,10] control shrinkage and step. Shared ruler shows before/decay/after, including overlapping concentric marks. η0 changes no parameter. |
+| `lion-memory` · `LionFlowLab view="memory"/` | Same case and selected update; two controls β1/β2[0,.999] keep present direction and future memory separate. Show current and next m with exact chronology. |
+| `lion-sequence` · `LionFlowLab view="sequence"/` | One to twelve editable gradient entries [-10,10] with selected-entry control and append/remove buttons. All sequence rows stay available; never fit/train a browser model. |
+| `lion-actions` · `LionFlowActions/` | Pin full θ/m/gradient sequence/all hyperparameters and result; reset full fresh case. Comparison preserves the pinned case as current controls change. |
 
-## A. Lion: when does new evidence win?
+### 4. Sophia: distinguish a large slope from rapidly changing slope
 
-Use a signed contribution balance and a small chronological parameter/history strip. Fresh default θ=−.4, m=−.3, g=2, η=.02, λ=.1, β₁=.9, β₂=.99. This differs from worked θ.5,m.2,g−1. Editable entities are the initial weight/history and a gradient sequence of1–12 entries. Bounds θ,m,g∈[−10,10], η∈[0,.2], λ∈[0,1]; advanced betas in[0,1). Default betas stay visible.
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `curvature-bowls` · `CurvatureBowlsDrawing/` | Actual contours in a two-coordinate plane: diagonal curvature versus coupled rotated curvature. Label θ1/θ2, contour levels and off-diagonal effect before Hessian notation. No claim a diagonal recovers every eigen-direction. |
+| `sophia-coordinates` · `SophiaClipFlowLab view="coordinates"/` | Three actual m=[.2,-.3,0],h=[5,.1,0] lanes,ρ=.5, ε=1e-12. Coordinate index/m[-3,3]/h[-6,6] are three local controls; max floor and clip produce [.08,-1,0]. Negative estimates permitted and visibly floored. |
+| `sophia-step-scale` · `SophiaClipFlowLab view="scale"/` | Shared Sophia context old θ=[1,2,3];ρ[.01,2],η[0,.4],λ[0,1] change distinct operations. Default next [.972,2.06,2.94], full three-coordinate readout. Zero rate is null. |
+| `sophia-actions` · `SophiaClipFlowActions/` | Pin all three m/h coordinates and scale/rate/decay plus next θ; reset defaults and invalid editor drafts. No stale value paired with changed input. |
+| `hessian-probe-worked` · `HessianProbeDrawing/` | Static H=[[2,3],[3,1]],u=[1,1]: Hu=[5,4],u⊙Hu=[5,4]. Show all matrix products and sign multiplication; average over independent sign probes targets the actual diagonal. |
+| `hessian-probe-matrix` · `HessianProbeFlowLab view="matrix"/` | Symmetric H default[[4,-2],[-2,1]]. Three arbitrary entries [-6,6] control both off-diagonal occurrences together. Recompute eigenvalues, diagonal and all probes; default PSD eigenvalues0/5 does not force every sampled coordinate nonnegative. |
+| `hessian-probe-choice` · `HessianProbeFlowLab view="probe"/` | Shared edited H, one sign-probe selection among all four outcomes. Full enumeration table and actual mean always visible. Default same-sign estimate[2,-1] versus opposite-sign[6,3]. |
+| `hessian-probe-actions` · `HessianProbeFlowActions/` | Pin full H/probe/eigenvalues/mean then reset all case and draft fields. Probe comparison concerns the same retained matrix. |
+| `hessian-autograd` · `HessianAutogradDrawing/` | Draw scalar loss→g→g·u→Hu, with two separate differentiations and fixed probe. Explain create_graph/recomputed graph as appropriate; complete nonlinear library check in the companion HVP program. |
+| `sampled-label-worked` · `SampledLabelDrawing/` | Binary x=2,p=.8,true target1: real g²=.16; model-drawn label branches probability .8/.2 give expected g²=.64. Every branch probability and derivative labelled. Changing this example is announced. |
+| `sampled-batch-worked` · `SampledBatchDrawing/` | Two examples x=[2,1],p=[.8,.3],true labels[1,0]; all four independent sampled-label leaves. Their batch-mean derivatives squared and multiplied by N=2 have expectation .425. |
+| `sampled-example` · `SampledCurvatureFlowLab view="example"/` | Fresh x=[3,1],p=[.25,.6],labels[1,0]. Three controls example index/input[-5,5]/p[.01,.99] update all four leaves and analytic mean curvature. Initial expectation .96375. |
+| `sampled-target` · `SampledCurvatureFlowLab view="target"/` | Same two current examples; example index plus true-label control. Real-label squared mean .680625 initially, while model-sampled expectation stays unchanged when only true targets change. |
+| `sampled-enumeration` · `SampledCurvatureFlowLab view="enumeration"/` | Every current sampled pair, its probability, mean ĝ,Nĝ² and weighted contribution shown as an exact live table. Missing N yields half the correct expectation. No Monte Carlo claim. |
+| `sampled-actions` · `SampledCurvatureFlowActions/` | Pin all features/probabilities/labels and enumeration; reset fresh fixture and field drafts. True and sampled quantities remain separate. |
+| `ggn-chain` · `GGNChainDrawing/` | Two logits from one θ, Jacobian J, actual 2×2 softmax curvature C, JᵀCJ operator and separate residual-weighted logit Hessians join at plus. Grey multiplication consumes already computed derivatives; dashed orange means differentiation only. Label linear-logit residual route zero. |
+| `ggn-counterexample` · `GGNScalarDrawing/` | Constructed f1=θ²,f0=0,θ1,y1=1: G=.7864477329659274,logit-curvature term=-.5378828427399902,full H=.2485648902259372. Two routes are shown before the formal chain rule. |
+| `sophia-refresh` · `SophiaRefreshDrawing/` | Same θ forks into true-label and model-sampled mean losses. Separate gradient buffers; save true g,clear and obtain ĝ, multiply N once,refresh h,then finally update θ. No new optimizer write between refresh and training gradient. |
 
-Display the next **gradient-driven direction** and resulting parameter immediately, before an optional trace-step selection; separate decay from that direction. The computed blend−.07 gives θ_next−.3792 and m_next−.277. Contrast changing current g2→4 with the same positive sign: the blend becomes+.13, reversing the signed update. Compare the later histories for same-sign sequences[2,2,2] and[4,4,4], rather than implying magnitude was discarded before the blend. Compute each from reset state.
+### 5. Prodigy: use observed movement to adapt a shared scale
 
-Null: m=0,g=0,λ=0 leaves the parameter unchanged exactly; η=0 also prevents the parameter change but can still update memory. Do not use a decimal cancellation as a bit-exact floating-point null. Feedback should show β₁m, (1−β₁)g, their sum, sign, shrinkage and the separate β₂ memory update. Reset returns the fresh input, never the manuscript worked input. Reference: `calculated-inputs.json.lion` and `optimizer_rules.py`.
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `prodigy-displacement` · `ProdigyDisplacementDrawing/` | Original scalar θ0=0,target3,d0=.01,γ1,update3: initial/current/next/target positions share a ruler. Only observed θ0-θ and current gradient feed the statistic. |
+| `prodigy-global` · `ProdigyFlowLab view="global"/` | Two signed gradient/displacement contributions feed one dot product. Three controls index/g[-5,5]/displacement[-5,5]. Default[-1,2]·[-.5,-.25]=0; abs-first yields1. Cancellation stays visible. |
+| `prodigy-state` · `ProdigyStateDrawing/` | Original paper Algorithm4 current d splits into m(dg),v(d²g²) and r/s accumulation; current d drives this update, next max scale is retained separately. All numerical state is from the retained recurrence. |
+| `prodigy-worked` · `ProdigyWorkedFlowFigure/` | Full twelve-state original scalar trace, including step7θ7.11008 overshoot. No monotone-convergence assertion. Distinguish this worked example from the fresh live case. |
+| `prodigy-objective` · `ProdigyFlowLab view="objective"/` | Fresh θ0=1,target-2,d0=.01,γ=.3,12 steps. Two initial/target[-5,5] controls change quadratic gradient and complete finite trajectory. The target is never an oracle input to d adaptation. |
+| `prodigy-scale` · `ProdigyFlowLab view="scale"/` | Same live case; d0[1e-6,.1],γ[.1,1] controls current/next scale and selected full state. γ0 excluded by declared experiment; stationary target case tests null. |
+| `prodigy-chronology` · `ProdigyFlowLab view="chronology"/` | Two controls selected state and integer count[1,24], full nine-column table every completed finite update. Identify first scale increase; if nonfinite, report exact stopped step and last valid state. |
+| `prodigy-actions` · `ProdigyFlowActions/` | Pin complete scalar and two-coordinate global case, settings and recurrence; reset all. Changing current case never overwrites pinned chronology. |
 
-## B. Sophia: what did the curvature instrument measure?
+### 6. Schedule-Free: take a gradient here, update there, evaluate the average
 
-This investigation has two distinct instruments, each with its own editable inputs, computed result and state. Do not present their outputs as identical estimates from interchangeable presets.
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `averaging-points` · `ScheduleFreePointsDrawing/` | Same ruler before/after labels x average,z fast,y interpolated. Follow x/z→βmix→g(y)→new z→postupdate average x→next y; gradient at y,gradient-driven step at z,evaluation x. |
+| `averaging-worked` · `ScheduleFreeWorkedFlowFigure/` | Original start2,target0,β.9,η.2,noise[1,-1,.5,-.5],four computed states including final x1.119624. All table values and points refer to same one-based update. |
+| `averaging-history` · `ScheduleFreeHistoryDrawing/` | Rates[.1,.2,.3]: squared[.01,.04,.09],final normalized[1,4,9]/14 versus insertion1,4/5,9/14. The two coefficient meanings are not conflated. |
+| `averaging-objective` · `ScheduleFreeFlowLab view="objective"/` | Fresh start-1,target1,noise[-.5,.5,1,-1],β.9,η.2; two initial/target controls[-5,5]. Three-point shared context and full actual trace result. |
+| `averaging-mixing` · `ScheduleFreeFlowLab view="mixing"/` | Same case; β[0,1],η[0,.4]. Endpoint β0/1 valid for literal recurrence; compare final x-.208/-.193 with -.19456 at .9. η0 preserves state. |
+| `averaging-perturbation` · `ScheduleFreeFlowLab view="perturbation"/` | Same case; selected perturbation and arbitrary noise[-2,2]. Recompute every following state, not just current arrow. No invented randomness; perturbations are explicitly constructed. |
+| `averaging-length` · `ScheduleFreeFlowLab view="length"/` | Selected update is shared with the preceding perturbation question; bounded append/remove buttons allow1–12 steps. All x/y/z chronology accessible, no hidden reset or mode wall. |
+| `averaging-actions` · `ScheduleFreeFlowActions/` | Pin every objective/β/η/noise state and squared-rate example; reset whole fixture and field drafts. Compare current/pinned final x honestly. |
+| `averaging-adam-route` · `ScheduleFreeAdamDrawing/` | Constructed first Schedule-Free Adam step at x=y=z2,target0,η.1,β2.999: g2,v.004,vhat4,new z1.9,new x1.9. Show second moment route, no ordinary first-moment EMA. |
+| `averaging-weights` · `ScheduleFreeFlowLab view="weights"/` | Two controls selected rate and value[0,1], same three-rate history. All-zero rates explicitly have no normalized new-point weight; do not silently create a fictitious average. |
+| `averaging-storage` · `ScheduleFreeStorageDrawing/` | Draw literal three additional arrays versus compact z/v plus one changing main buffer. Train/eval operation and model mode are different. Memory inventory names actual representations. |
+| `averaging-theorem` · `ScheduleFreeConvexDrawing/` | Constructed convex parabola f(θ)=θ²/2,points±1,mean0. Loss of mean0≤mean endpoint loss. Teach theorem assumptions separately; no neural nonconvex guarantee. |
 
-**Sampled-label tree:** fresh two-row x=[3,1], p=[.25,.6], true labels[1,0]. Inputs x∈[−5,5], p∈[.01,.99], binary true labels; learner may edit either row. show whether B times a model-sampled mean gradient squared, averaged over all outcomes, equals the true-label mean gradient squared. Enumerate all four independent label pairs with current probabilities, means, squares and probability-weighted contributions. Saved expectation.96375 equals the analytic average curvature; true-label mean gradient squared.680625 differs. Omitting B produces.481875. Changing true labels alters the training-gradient lane while leaving the expected curvature lane fixed at the same x,p. Setting x=[0,0] produces a zero-output null in both lanes. Count B as actual examples, not classes or input dimensions. Exact enumeration is the primary evidence; optional seeded sampling may show variance, without calling a finite sample unbiased in the sense of exact equality.
+### 7. Train the same real classifier with different update rules
 
-**Hessian probe:** fresh H=[[4,−2],[−2,1]], unlike the worked indefinite matrix. Edit three independent entries of a symmetric2×2 matrix in[−6,6]. Observe whether a selected probe's negative output proves a negative eigenvalue. u=[1,1] gives[2,−1]; u=[1,−1] gives[6,3]; all four equally weighted probes average[4,1]. Eigenvalues0,5 show why one negative estimate is not a negative-curvature certificate. Contrast setting off-diagonal to0: every ±1 probe yields the same exact diagonal. Display optional eigenvalues as calculated diagnostics with a clear distinction from the sampled diagonal. Null H=0 gives all zeros.
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `study-image` · `OptimizerWorkedStudyFlow view="image"/` | Actual source2778×8 digits,all64raw pixel numbers0…16,zero-based axes and selected pixel18. Actual provenance, no generic cartoon substitutes. |
+| `study-model` · `OptimizerWorkedStudyFlow view="model"/` | Deferred near-view saved AdamW11 model with full65×10 actual learned matrix,65inputs including appended1bias,all10score/probability values. Complete650 parameters retained; opacity uses actual values, label numerical convention. |
+| `study-gradient` · `OptimizerWorkedStudyFlow view="gradient"/` | Same full source277 model and objective target0; all10p-y residuals,selected normalizedpixel18 multiplications,and separate bias gradients. Draw returned derivatives for all10destinations. |
+| `study-roles` · `OptimizerDataRolesDrawing/` | Actual400 selected records split240fitting/80validation/80assessment; candidate choice uses two paired seeds and validation only. Draw boundaries and forbidden assessment feedback to selection. |
+| `study-curves` · `OptimizerHistoryFlow/` | Near-view immutable histories24candidates,22points perrun; candidate selector and linear/log axis plus selected-method paired-seed selector. Same loss axes for comparisons; no invented benchmark timings or smoothed extra measurements. |
+| `study-state-curves` · `OptimizerHistoryFlow view="state"/` | Same currently selected candidate: actual retained Prodigy d,Sophia clipped fraction[0,1],all recorded x/y report losses. Histories are frozen measurements, not outputs of browser edits. |
+| `study-edit` · `OptimizerDigitFlowLab view="image"/` | Fresh actualsource312 image with explicitly declared pixel28raw16 edit (recorded raw value0); reset restores this edited starting case. Two controls selectedpixel0…63/intensity0…16; separate saved-model question has method/seed controls that remain mounted through loading/failure. All12saved snapshots and complete copied optimizer state used, one diagnostic update from fixed step400. |
+| `study-target` · `OptimizerDigitFlowLab view="target"/` | One diagnostic target0…9, source truth remains0. Preupdate probability unchanged at fixedimage/model; gradients change. Target is not edited groundtruth for frozenfit reports. |
+| `study-coordinate` · `OptimizerDigitFlowLab view="coordinate"/` | Any zero-based feature0…64 including bias,full10gradient/weightchanges plus actual retained statearrays/scalars. All650 parameters participate, not a selectedpixel-only model. |
+| `study-representation` · `OptimizerDigitFlowLab view="representation"/` | Only Schedule-Free exposes explained x/evaluation or y/training representation. Gradient always at current trainingy, ordinary evaluation atx; displayed selection changes reported before/afterprobabilities explicitly. |
+| `study-probabilities` · `OptimizerDigitFlowLab view="probabilities"/` | Full10before/after probabilities[0,1] and deltas; separate enlarged delta axes explicitlyscaled. No assertion chosen target always rises. Savedcosinenextstep401eta0 is exact parameter/probability null. |
+| `study-actions` · `OptimizerStudyFlowActions/` | Pin completeimage,target,method,seed,representation,result and reset. Edits made before delayed loading survive. Oldrequest completion cannot overwrite newer method/seed. Retry uses latest case; finitefailures show status. |
+| `rules-program` · `OptimizerFlowProgram file="optimizer_rules.py" title="Complete runnable optimizer_rules.py"/` | Exact complete optimizer_rules.py from draft/public; readable Copy/Copied/error/Download shared reader near viewport, no dropdown. All four optimizers and classifier scratch rules conserved. |
+| `study-program` · `OptimizerFlowProgram file="optimizer_study.py" title="Complete runnable optimizer_study.py"/` | Exact complete optimizer_study.py retained24fits/12models/dataroles; sharedreader and codeexplanation visible. Reading/downloading does not rerun fits. |
+| `calculations-program` · `OptimizerFlowProgram file="optimizer_calculations.py" title="Complete runnable optimizer_calculations.py"/` | Exact complete optimizer_calculations.py constructs declared handcases/resource arithmetic; no fabricated timing evidence. Sharedreader visible. |
+| `curvature-program` · `OptimizerFlowProgram file="optimizer-curvature-instruments.py" title="Complete runnable optimizer-curvature-instruments.py"/` | New complete optimizer-curvature-instruments.py exact author/reviewer verified SHA3e1be3b4…; quadratic/nonlinear HVP fixedprobes/FD/GGN residual counterexample. Publiccopycreated only by explicit guarded implementation. |
+| `library-program` · `OptimizerFlowProgram file="optimizer_library_bridge.py" title="Complete runnable optimizer_library_bridge.py"/OptimizerFlowProgram file="lion_pytorch.py" title="Complete pinned Lion library implementation"/OptimizerFlowProgram file="sophia.py" title="Complete pinned Sophia library implementation"/` | Exact optimizer_library_bridge.py plus licensed pinned lion_pytorch.py/sophia.py all visible sharedreaders. EightactualCPUupdates/checkpointresume; declared packageversions and source/license context retained. No claimed samepaper/packagefit. |
 
-The subsequent Sophia update view may inspect m/h/ρ clipping using the stated rule, but does not need a sixth generic lab. Keep its computed result visible; a changed default can complement the adjacent worked vector without any learner answer entry. Preserve sampled versus analytic/expected refresh labels. No browser autograd engine is needed for this small exact instrument.
+### 8. Count the resources you actually need
 
-## C. Prodigy: an adapting scale can overshoot
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `memory-global` · `OptimizerMemoryDrawing global ranks={1} allocations={[{name:'weights',total:140e9},{name:'gradients',total:280e9},{name:'optimizer buffers',total:560e9}]}/` | Static initial global BF16weights140GB/FP32gradients280GB/twoFP32moments560GB;segmentroles and exactglobalpayloads taught before byte/control/sharding terminology. |
+| `memory-payload` · `OptimizerMemoryFlowLab view="payload"/` | After bytes/table taught, three controls Pbillions[.001,1000]/buffercount1…4/entrybytes2,4,8 change globalweights/gradients/statecounts. Diagram global only; neverperrank/shardingbeforeitssection. |
+| `memory-ownership` · `OptimizerMemoryFlowLab view="ownership"/` | Same globalcase; rankcountinteger1…128 plus arraysshardednone/moments/all. Only declaredshardsdivide; default8ranks moments490GB,all122.5,none980. Report GBandGiB,notactualpeakmemory. |
+| `memory-factor-values` · `OptimizerFactorDrawing/` | Declared2×2V[[1,3],[5,7]],rowmeans[2,6],colmeans[3,5],global4;reconstruction[[1.5,2.5],[4.5,7.5]] preservesmarginalsnotcells. Means/sumsnormalizersandallzerolimitexplained. |
+| `memory-factor-shape` · `OptimizerMemoryFlowLab view="shape"/` | Two exactintegern/mcontrols1…16384; actualshapeimage labels fullnmcountvsn+m;separatorsschematicatlargeshapes. FP32dense4nm vsfactors4(n+m),includingonerowcornercase. |
+| `memory-actions` · `OptimizerMemoryFlowActions/` | Pin fullparameter/buffer/dtype/rank/shard/matrixshape settings and counts then reset; pinnedownershipdoesnotfollowcurrentrankchanges. |
+| `resource-work` · `OptimizerWorkDrawing/` | Constructed600updates×1.1=660timeunits versus1000×1=1000,samezeroaxis,totalratio1.515. ExplicitlynotactualGPUtiming;teachupdatecostversustotalwork. |
 
-Use an actual parameter trajectory on the declared quadratic, linked to r, ||s||₁, current d and next d. Fresh default θ₀=1,target−2,d₀=.01,γ=.3,β₁=.9,β₂=.999,ε1e−8. Permit θ₀,target∈[−5,5], d₀∈[1e−6,.1], γ∈[.1,1],1–24 updates. Fixed betas avoid unnecessarily broad production-variant controls. Restart from zero histories after any objective/initial-state change.
+### 9. Choose a method by a question you can test
 
-Inspect the first update where d increases, then whether crossing the target settles the trajectory. Saved fresh d first increases **after step3**, used at step4. Parameters at steps1/2/3 are.990513168,.977765462,.962918671; step12 overshoots target−2 to−3.41631850. Contrast γ1: first increase after step2 and overshoot−6.11008139 at step7. Show loss increases as they occur. The source of the current g is θ−target; the update's scale estimate must receive only the algorithm's observed g, initial position and current state, not the known target distance.
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `muon-polar` · `MuonPolarDrawing/` | ActualM[[2,1],[1,2]],idealpolarI versusentrysignallones;bothacton[1,1]/[1,-1] onsharedaxes. Zerooutputvisibleconcentricmark. ExactSVDintuitionnotclaimedfiniteNewtonSchulzimplementation. |
 
-Null initial=target, zero histories and d₀1e−6 keeps parameter and d unchanged. Preserve old-d versus next-d indexing and d inside both moments. Reference full computed traces in `calculated-inputs.json.prodigy`; optional finer trajectories are derived from the complete rule, not fabricated smooth paths. A log-d axis must label its scale; parameter position and loss use separate panels. The paper rule is named explicitly and must not be swapped for current package behavior without revising the teaching contract.
+### 11. Reproduce the calculations
 
-## D. Schedule-Free: gradient here, update there, evaluate the average
+| Placement / actual component | Meaning, inputs, controls and required observations |
+| --- | --- |
+| `file-index` · `OptimizerFlowSupportingFiles/` | Contextual supporting-data/provenance/license links; the shared TopicContent automatic Code & supporting files index owns the complete programme catalogue. All seven inline readers retain Copy/Download. No second identical code index or duplicated undefined-path anchor. |
 
-Use a spatial x/y/z board with current arrows and a time-indexed table; permit direct noise-sequence editing. Fresh default x₀=z₀=−1,target1,η.2,β.9, perturbations[−.5,.5,1,−1]. This differs from the worked target0/start2 sequence. Bounds initial/target[−5,5],η[0,.4],β[0,1], noise1–12 entries in[−2,2]. This is the simple mathematical SGD recurrence, so endpointβ0/1 is allowed; it is **not** the optimized library mode-switch implementation whose reconstruction divides byβ.
+## Loading, layout and final verification
 
-Inspect the next gradient-evaluation point and the resulting x. After update2, z−.3,x−.4,nexty−.39; update3 gradient−.39. After four updates x−.19456. Compareβ0 finalx−.208 andβ1 finalx−.193 using unchanged inputs. Report the actual loss at each defined point; do not claim “β.9 always best.” Null start=target1 and zero noise leaves all three there. η0 prevents movement. Intermediate selected updates display post-z averaging1/t with explicit one-based indexing.
+Model JSON and histories load only when their relevant views approach the
+viewport. Cache one promise per immutable file; share the worked/fresh AdamW11
+request. Retain edits through deferred loading, expose current loading/error and
+retry status, reject wrong snapshot identity/shape, and cancel stale request
+effects. Switching method/seed never attaches an old output to new input labels.
+RemoteCodeBlock loads visible complete source near viewport, with Copy/Copied/
+error and Download; instructional programs are not disclosures. Do not add large
+fits/raw data to the initial JavaScript bundle. All12 selected states are separate
+assets; no browser fitting campaign is involved.
 
-The optional AdamW weighting panel uses the actual warmup coefficients and saved real-study x/y values; it is explanatory evidence, not a mislabeled SGD output. A mode toggle on a saved model displays which stored/reconstructed parameters produce predictions and updates its computed result immediately. A visual implementation of a future production optimizer must preserve model-mode versus optimizer-mode distinction and BatchNorm guidance. Browser shape/mode round-trip parity remains a finish-stage check.
+Own SVGs have titles/descriptions, local labels, adequate labelled endpoints and
+attached operand routes. CSS is scoped to `.advanced-optimizer-flow`; never
+resize KaTeX SVGs. Controls/buttons are at least44CSSpx and retain keyboard/focus
+and amber-theme styling. Inspect actual painted diagrams at1366,390,320 and
+768 with200% text; check labels/wires/axes and overlapped zero marks, not merely
+page bounding boxes. Matrices and long tables may use honest labelled horizontal
+scroll; no page-wide leak. The650map needs a readable selected-row enlargement
+and complete textual numeric values, not650microscopic unexplained cells.
 
-## E. One edited digit, one genuine optimizer update
-
-Edit the chosen raw pixel to 16 (normalized 1) or any integer 0…16 and choose a target label 0…9. Show the selected probabilities, their gradient contributions and one actual optimizer update from the retained starting state. Reset/revise restarts that diagnostic step; no browser training campaign or predicted direction is requested.
-
-Compute XΘ, ten-way softmax, the true chosen-label gradient at current training parameters, then the selected actual optimizer update with a deep copy of **all** saved state. Evaluate Schedule-Free at x before and after, while computing its gradient at y. A chosen label is the diagnostic objective, not a ground-truth replacement. Show source truth separately. Sophia uses the exact expected-label GGN diagonal for this one-example linear diagnostic, explicitly distinguished from the fit's B-scaled sampled refresh. Prodigy preserves d,initial,m,v,s,r and step; no fresh optimizer on an old model. Cosine retains horizon400 and next-step zero rate.
-
-Saved fresh source312/pixel28=16 AdamW class0 probability.9959764253640799→.9961295551626631. The change is small: provide a delta table and a separately labeled enlarged delta axis, keeping the main probabilities on0…1. Do not inflate it into a large classification improvement. Other methods may produce a different or non-monotonic direction because of stored state. Derive result checks from the actual current model and inputs, not a rule that the chosen label must always increase.
-
-Contrasts: change target label at fixed pixels/model—pre-update probabilities stay exactly the same, while gradients change; change the pixel at fixed target—scores and gradients actually change. Null: frozen cosine update401 gives exactly unchanged parameters/predictions although internal moments may change. Reset restores the stated inputs and immediately displays their computed result. No diagnostic edits touch the saved fit/validation/assessment reports or train across role boundaries.
-
-Show ten residual contributions for the selected pixel, the selected method's state transformation and before/after probability deltas. Hiding all of this behind a single confidence bar fails the intended learning outcome. No performance/quality claim comes from one diagnostic update. References: all twelve full snapshots, CSV roles, and `calculated-inputs.json.real_pixel_edit` (first six source312, next six source277).
-
-## Author evidence and phase-two acceptance
-
-The actual author calculations and24 bounded fits are recorded in [provenance](data-provenance.md) and [design](design.md). Fresh Lion, exact sampled-label enumeration, Prodigy scale contrast, Schedule-Free beta contrast, real pixel/label changes and zero-rate controls were calculated. No visual interaction was implemented or browser-tested in this content-only phase.
-
-A later implementer must check reference parity at fresh and changed inputs, independent gradient/reduction cases, full state restoration, current-input result checks, stale-live recomputation, no-data/invalid-input handling, wide/narrow rendering, keyboard/focus/text equivalents, actual figure readability and lazy imports. Maintain all real outcomes and the distinction between measured fits, exact arithmetic and hypothetical resource accounting. Use the full manuscript and complete programs, not these contracts alone, as the teaching handoff.
-
-## Precise fixture and scope details retained for implementation
-
-**One actual digit update.** Default AdamW, seed 11, selected scale .03, validation source 312, actual class 0; manuscript source 277 is a different worked record. Use the retained CSV pixels, initially highlighting raw pixel 28=0. The whole 64-pixel array is editable in integers 0…16, with target label 0…9. Each diagnostic update starts from the retained state and may be reset/revised. Selecting another saved method/seed loads that actual record.
-
-
-## Scratch/tool bridge presentation — 22 September 2026
-
-Map local method state names to actual library names next to each optimizer investigation. Show Sophia probe gradient cleared before true-label gradient and B applied once. Schedule-Free mode directly switches x/y with explicit model-mode versus optimizer-mode labels; state checkpoint stores the chosen representation. Do not animate new unexecuted package fits as measured outcomes.
-
-The complete source and teaching explanation are already written in the manuscript and companion programs. Phase two implements the presentation and verifies actual behavior; it does not invent an omitted algorithm. Show code only when requested, load large code assets on demand, preserve exact source equality, and keep immediately visible numerical explanations usable without running Python in the browser. No learner-prediction entry or grading state is permitted.
+Verify all defaults, positive/negative/zero signs, arbitrary non-preset edits,
+valid extremes, invalid inputs, full reset/pins, every retained state and shared
+view agreement. Cover delayed/error/retry/stale method loading and edits made
+while pending. Check zero-rate/cosine401, target-only/preupdate invariance,
+Schedule-Free x/y gradients/evaluation, all650parameter gradients and full
+optimizer-state copying. Check all24histories/all12snapshot outputs against
+independent reference calculations; no retraining is needed. Preserve exact old
+program copies and new HVP parity, common opening/index, nine practice solutions,
+separate end purposes, file index, Copy feedback and all annotated references.
+Final independent whole-source review and current production/loading/browser
+receipts precede completion; earlier bounded opening evidence is not whole-page
+acceptance. Record source identities and unresolved issues per topic.

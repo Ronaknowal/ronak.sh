@@ -78,7 +78,16 @@ export function normalizationProbe(input, probe, epsilon = 1e-5, step = 1e-5) {
   };
 }
 export function movementBlockForward(model, points, times, padding = []) {
-  if (!points.length || points.length > 60 || points.some(row => row.length !== 2 || row.some(value => !Number.isFinite(value))) || times.length !== points.length || times.some(value => !Number.isFinite(value)) || points.every((_, i) => padding[i])) throw new Error('Use 1–60 finite point/time records with at least one valid record.');
+  return movementBlockForwardWithMasks(model, points, times, {
+    validity: points.map((_, i) => !padding[i]), excludeInvalidKeys: true, excludeInvalidPool: true
+  });
+}
+// Record validity is data; excluding invalid keys and pooling rows are two separate operations.
+// The original entry point above preserves its same-mask defaults and retained fit semantics.
+export function movementBlockForwardWithMasks(model, points, times, {
+  validity = points.map(() => true), excludeInvalidKeys = true, excludeInvalidPool = true
+} = {}) {
+  if (!points.length || points.length > 60 || points.some(row => row.length !== 2 || row.some(value => !Number.isFinite(value))) || times.length !== points.length || times.some(value => !Number.isFinite(value)) || validity.length !== points.length || validity.some(value => typeof value !== 'boolean') || !validity.some(Boolean)) throw new Error('Use 1–60 finite point/time records with a Boolean validity vector and at least one valid record.');
   const weights = model.state_dict;
   const linear = (row, prefix) => dense(row, weights[`${prefix}.weight`], weights[`${prefix}.bias`]);
   const norm = (row, prefix) => layerNorm(row, weights[`${prefix}.weight`], weights[`${prefix}.bias`]);
@@ -89,7 +98,7 @@ export function movementBlockForward(model, points, times, padding = []) {
     const input = state;
     const attentionInput = model.preNorm ? input.map(row => norm(row, `${prefix}.norm_attention`)) : input;
     const packed = attentionInput.map(row => dense(row, weights[`${prefix}.attention.in_proj_weight`], weights[`${prefix}.attention.in_proj_bias`]));
-    const heads = [0, 1].map(head => attention(packed.map(row => row.slice(12 * head, 12 * head + 12)), packed.map(row => row.slice(24 + 12 * head, 36 + 12 * head)), packed.map(row => row.slice(48 + 12 * head, 60 + 12 * head)), (_, key) => !padding[key]));
+    const heads = [0, 1].map(head => attention(packed.map(row => row.slice(12 * head, 12 * head + 12)), packed.map(row => row.slice(24 + 12 * head, 36 + 12 * head)), packed.map(row => row.slice(48 + 12 * head, 60 + 12 * head)), (_, key) => !excludeInvalidKeys || validity[key]));
     const update = input.map((_, i) => linear([...heads[0].output[i], ...heads[1].output[i]], `${prefix}.attention.out_proj`));
     const residual = input.map((row, i) => add(row, update[i]));
     const context = model.preNorm ? residual : residual.map(row => norm(row, `${prefix}.norm_attention`));
@@ -111,7 +120,7 @@ export function movementBlockForward(model, points, times, padding = []) {
       weights: heads.map(head => head.weights)
     });
   }
-  const valid = state.map((row, i) => padding[i] ? null : norm(row, 'final_norm')).filter(Boolean);
+  const valid = state.map((row, i) => excludeInvalidPool && !validity[i] ? null : norm(row, 'final_norm')).filter(Boolean);
   const pooled = valid[0].map((_, i) => mean(valid.map(row => row[i])));
   const logits = linear(pooled, 'classifier');
   return {

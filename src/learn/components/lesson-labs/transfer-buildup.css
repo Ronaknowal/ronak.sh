@@ -1,0 +1,191 @@
+/* Topic-owned figures for the transfer-learning lesson. Figures sit in the reading flow
+   (lesson-flow.css): no frame or heading; the boxes below are parts of each drawing.
+   Vocabulary: cyan supplied inputs, amber learned parameters, violet computed values,
+   grey frozen, dashed amber added-and-trained, orange dashed backward. Feature strips and
+   count grids are value grids: amber positive, blue negative. Every colour has a text label. */
+.transfer-lesson .tb-figure { color: #dedbd3; min-width: 0; }
+.transfer-lesson .tb-figure p { line-height: 1.7; margin: .6rem 0; }
+.transfer-lesson .tb-row-label { color: #d6d1c6; font-size: .93rem; }
+.transfer-lesson .tb-part-title { font-weight: 600; color: #ece8df; margin: 0 0 .4rem; }
+.transfer-lesson .tb-violet { color: var(--tl-computed); }
+.transfer-lesson .tb-tag { display: inline-block; width: fit-content; font-size: .75rem; padding: 0 .4rem; border-radius: 3px; border: 1px solid; }
+.transfer-lesson .tb-tag.is-input { color: var(--tl-input); border-color: var(--tl-input); }
+.transfer-lesson .tb-tag.is-computed { color: var(--tl-computed); border-color: var(--tl-computed); }
+.transfer-lesson .tb-param { color: var(--tl-param); font-size: .82rem; font-variant-numeric: tabular-nums; }
+
+/* Feature strips: 16 values, sign-coloured. */
+.transfer-lesson .tb-strip-row { margin: 1rem 0; }
+.transfer-lesson .tb-strip-label { font-weight: 600; color: #ece8df; margin-bottom: .4rem; }
+.transfer-lesson .tb-strip { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(16, minmax(0, 1fr)); gap: 3px; }
+.transfer-lesson .tb-strip li { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 0; border: 1px solid #2c2a27; border-radius: 3px; font: .72rem/1.3 ui-monospace, monospace; }
+.transfer-lesson .tb-strip li.is-positive { background: rgba(228, 183, 82, calc(.12 + .7 * var(--tb-strength))); color: #16130d; }
+.transfer-lesson .tb-strip li.is-negative { background: rgba(131, 180, 232, calc(.12 + .7 * var(--tb-strength))); color: #0d1219; }
+.transfer-lesson .tb-strip li.is-faint { color: #ece8df; }
+.transfer-lesson .tb-strip li.is-limit { outline: 2px solid #f4f0e6; outline-offset: -2px; }
+.transfer-lesson .tb-strip .tb-cell-index { opacity: .75; }
+.transfer-lesson .tb-strip .tb-cell-value { font-weight: 700; }
+.transfer-lesson [data-figure="transfer-feature-vector"] { container-type: inline-size; }
+@container (max-width: 44rem) { .transfer-lesson .tb-strip { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+@container (max-width: 24rem) { .transfer-lesson .tb-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); } .transfer-lesson .tb-strip li { font-size: .78rem; } }
+
+/* Tables inside figures. */
+.transfer-lesson .tb-table { overflow-x: auto; margin: .9rem 0; }
+.transfer-lesson .tb-table table { border-collapse: collapse; width: 100%; line-height: 1.6; }
+.transfer-lesson .tb-table caption { text-align: left; color: #bdb8ad; padding-bottom: .5rem; }
+.transfer-lesson .tb-table :is(th, td) { padding: 8px 10px; border-bottom: 1px solid #34312c; text-align: left; }
+.transfer-lesson .tb-table tr.is-focus th, .transfer-lesson .tb-table tr.is-focus td { color: #f1cc79; }
+.transfer-lesson .tb-table td { white-space: nowrap; overflow-wrap: normal; }
+.transfer-lesson .tb-votes td { text-align: center; font-variant-numeric: tabular-nums; }
+.transfer-lesson .tb-votes td.is-some { background: rgba(228, 183, 82, .12); }
+.transfer-lesson .tb-votes td.is-collision { background: #e4b752; color: #16130d; font-weight: 700; }
+.transfer-lesson .tb-votes td.is-diagonal { outline: 1px solid #8a8378; outline-offset: -3px; color: #ece8df; font-weight: 700; }
+.transfer-lesson .tb-votes :is(th, td) { padding: 7px 6px; }
+.transfer-lesson .tb-votes thead th:first-child { font-weight: 500; color: #bdb8ad; font-size: .85rem; }
+.transfer-lesson .tb-votes thead th:not(:first-child) { text-align: center; }
+.transfer-lesson .tb-confusions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1rem; }
+@media (max-width: 440px) {
+  .transfer-lesson .tb-table table { font-size: .84rem; }
+  .transfer-lesson .tb-table :is(th, td) { padding: 7px 5px; }
+  .transfer-lesson .tb-votes thead th { white-space: nowrap; }
+  .transfer-lesson .tb-votes thead th:first-child { white-space: normal; font-size: .75rem; }
+}
+
+/* Outer product. */
+.transfer-lesson .tb-outer { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1.2rem; align-items: start; }
+.transfer-lesson .tb-outer-grid { display: grid; gap: 4px; }
+.transfer-lesson .tb-outer-row { display: grid; grid-template-columns: minmax(70px, .8fr) repeat(2, minmax(0, 1fr)); gap: 4px; }
+.transfer-lesson .tb-outer-row > span { padding: 8px 6px; border-radius: 3px; font: .85rem/1.45 ui-monospace, monospace; }
+.transfer-lesson .tb-corner { color: #9d978b; }
+.transfer-lesson .tb-head { border: 1px solid var(--tl-param); color: #f1cc79; }
+.transfer-lesson .tb-outer-cell { border: 1px solid #4a4640; }
+.transfer-lesson .tb-routes { display: grid; gap: .8rem; }
+.transfer-lesson .tb-routes > div { border-left: 2px solid #6f6a62; padding: .1rem 0 .1rem 1rem; }
+
+/* Strategy map: one block per layer, its state in words and by outline. */
+.transfer-lesson .tb-network { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.transfer-lesson .tb-block { margin: 0; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.5fr) minmax(8.5rem, auto); gap: 4px 14px; align-items: center; padding: 9px 14px; border-radius: 4px; border: 1px solid #3a3631; }
+.transfer-lesson .tb-block.is-input { color: #a9a499; border-color: var(--tl-input); border-style: dashed; }
+.transfer-lesson .tb-block.is-trains { border: 2px solid var(--tl-param); }
+.transfer-lesson .tb-block.is-added { border: 2px dashed var(--tl-param); }
+.transfer-lesson .tb-block.is-frozen { background: var(--tl-frozen-fill); border-color: #4a4640; color: #b6b1a7; }
+.transfer-lesson .tb-block-count { font-variant-numeric: tabular-nums; text-align: right; }
+.transfer-lesson .tb-state-word { font-weight: 700; }
+.transfer-lesson .tb-block.is-trains .tb-state-word, .transfer-lesson .tb-block.is-added .tb-state-word { color: #f1cc79; }
+@container (max-width: 34rem) { .transfer-lesson .tb-block { grid-template-columns: minmax(0, 1fr); } .transfer-lesson .tb-block-count { text-align: left; } }
+
+/* Network anatomy: data flows left to right; the outline groups the reusable backbone. */
+.transfer-lesson .tb-anatomy { display: grid; grid-template-columns: minmax(0, .8fr) auto minmax(0, 2fr) auto minmax(0, .9fr); gap: .5rem; align-items: center; }
+.transfer-lesson :is(.tb-anatomy-input, .tb-feature-junction, .tb-backbone-layers > div) { display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+.transfer-lesson :is(.tb-anatomy-input, .tb-feature-junction) { padding: .65rem; border-radius: 4px; font-size: .9rem; }
+.transfer-lesson .tb-anatomy-input { border: 1px solid var(--tl-input); }
+.transfer-lesson .tb-feature-junction { border: 1px solid var(--tl-computed); }
+.transfer-lesson .tb-backbone-boundary { padding: .75rem; border: 2px solid var(--tl-param); border-radius: 5px; min-width: 0; }
+.transfer-lesson .tb-boundary-label { color: #f1cc79; font-weight: 600; margin-top: 0; }
+.transfer-lesson .tb-backbone-layers { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: .5rem; align-items: center; font-size: .88rem; }
+.transfer-lesson .tb-neuron-marks { color: #d6d1c6; font-size: 1.2rem; letter-spacing: .06em; }
+.transfer-lesson .tb-flow-arrow { color: #a9a499; font-size: 1.3rem; text-align: center; }
+.transfer-lesson .tb-branch-label { margin: 1rem 0 .4rem; }
+.transfer-lesson .tb-head-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem; }
+.transfer-lesson .tb-head-route { min-width: 0; padding: .75rem; border: 1px solid #716b60; border-radius: 4px; }
+.transfer-lesson .tb-head-route.is-target { border: 2px dashed var(--tl-param); }
+.transfer-lesson .tb-head-route.is-target strong { color: #f1cc79; }
+.transfer-lesson .tb-class-scores { display: flex; flex-wrap: wrap; gap: .35rem; }
+.transfer-lesson .tb-class-scores > span { display: flex; flex-direction: column; gap: .25rem; padding: .35rem .5rem; border: 1px solid var(--tl-computed); text-align: center; font-size: .8rem; }
+.transfer-lesson .tb-class-scores b { font-size: 1rem; color: #ece8df; }
+.transfer-lesson [data-figure="transfer-network-anatomy"] { container-type: inline-size; }
+@container (max-width: 48rem) {
+  .transfer-lesson .tb-anatomy { grid-template-columns: minmax(0, 1fr); }
+  .transfer-lesson .tb-anatomy > .tb-flow-arrow { justify-self: center; transform: rotate(90deg); pointer-events: none; }
+  .transfer-lesson :is(.tb-anatomy-input, .tb-feature-junction) { text-align: center; align-items: center; }
+}
+@container (max-width: 26rem) {
+  .transfer-lesson .tb-backbone-layers { grid-template-columns: minmax(0, 1fr); }
+  .transfer-lesson .tb-backbone-layers > .tb-flow-arrow { justify-self: center; transform: rotate(90deg); pointer-events: none; }
+}
+
+/* Frozen-gradient routes: forward grey arrows; backward orange, right to left. */
+.transfer-lesson .tb-gradient-route { display: grid; gap: 1.25rem; }
+.transfer-lesson :is(.tb-gradient-route, .tb-probe-route) ol { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.6rem; margin: 0; padding: 0; }
+.transfer-lesson :is(.tb-gradient-route, .tb-probe-route) li { display: flex; flex-direction: column; gap: .5rem; position: relative; padding: .7rem; border: 1px solid #716b60; border-radius: 4px; margin: 0; min-width: 0; }
+.transfer-lesson :is(.tb-gradient-route, .tb-probe-route) li.is-frozen { background: var(--tl-frozen-fill); border-color: #4a4640; }
+.transfer-lesson :is(.tb-gradient-route, .tb-probe-route) li.is-added { border: 2px dashed var(--tl-param); }
+.transfer-lesson .tb-gradient-route li:not(:last-child)::after, .transfer-lesson .tb-probe-route li:first-child::after { content: '→'; position: absolute; right: -1.4rem; top: 40%; color: #a9a499; }
+.transfer-lesson .tb-gradient-route > .is-backward li { border-color: var(--tl-backward); border-style: dashed; }
+.transfer-lesson .tb-gradient-route > .is-backward li.is-frozen { background: var(--tl-frozen-fill); }
+.transfer-lesson .tb-gradient-route > .is-backward li:not(:last-child)::after { content: '←'; color: var(--tl-backward); }
+.transfer-lesson .tb-gradient-route > .is-backward .tb-row-label { color: var(--tl-backward); }
+.transfer-lesson .tb-probe-route { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #34312c; }
+.transfer-lesson .tb-probe-route li.is-backward-stop { border: 1px dashed var(--tl-backward); }
+.transfer-lesson .tb-probe-route li.is-backward-stop strong { color: var(--tl-backward); }
+.transfer-lesson .tb-probe-route li:nth-child(2)::after { content: '⇠'; position: absolute; right: -1.4rem; top: 40%; color: var(--tl-backward); }
+.transfer-lesson [data-figure="transfer-frozen-gradient-path"] { container-type: inline-size; }
+@container (max-width: 44rem) {
+  .transfer-lesson :is(.tb-gradient-route, .tb-probe-route) ol { grid-template-columns: minmax(0, 1fr); }
+  .transfer-lesson .tb-gradient-route li:not(:last-child)::after, .transfer-lesson .tb-probe-route li:first-child::after { content: '↓'; top: auto; right: auto; bottom: -1.55rem; left: 50%; }
+  .transfer-lesson .tb-gradient-route > .is-backward ol { display: flex; flex-direction: column-reverse; }
+  .transfer-lesson .tb-gradient-route > .is-backward li:not(:last-child)::after { content: '↓'; bottom: auto; top: -1.55rem; }
+  .transfer-lesson .tb-probe-route li:nth-child(2)::after { content: '⇡'; top: auto; right: auto; bottom: -1.55rem; left: 50%; }
+}
+
+/* LoRA location: one split, two parallel routes, one join. */
+.transfer-lesson :is(.tb-lora-split, .tb-lora-join) { display: flex; flex-direction: column; gap: .4rem; padding: .7rem; border-radius: 4px; text-align: center; }
+.transfer-lesson .tb-lora-split { border: 1px solid var(--tl-input); }
+.transfer-lesson .tb-lora-join { border: 1px solid var(--tl-computed); }
+.transfer-lesson .tb-lora-routes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; margin-inline: .7rem; }
+.transfer-lesson .tb-lora-routes > div { padding: .8rem .65rem; min-width: 0; overflow-wrap: anywhere; }
+.transfer-lesson .tb-lora-routes > .is-frozen-route { border-inline: 2px solid #4a4640; background: var(--tl-frozen-fill); }
+.transfer-lesson .tb-lora-routes > .is-added-route { border-inline: 2px dashed var(--tl-param); }
+.transfer-lesson .tb-lora-routes > .is-added-route .tb-part-title { color: #f1cc79; }
+.transfer-lesson .tb-route-tag { display: block; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: #a9a499; margin-bottom: .2rem; font-weight: 400; }
+.transfer-lesson .tb-route-tail { margin: .8rem 0 0; color: #d6d1c6; font-weight: 600; }
+.transfer-lesson .tb-fork { display: flex; justify-content: space-between; align-items: center; gap: .6rem; margin: .5rem 1.2rem; color: #bdb8ad; font-size: .85rem; text-align: center; }
+.transfer-lesson .tb-fork > span:first-child, .transfer-lesson .tb-fork > span:last-child { font-size: 1.3rem; color: #d6d1c6; }
+.transfer-lesson .tb-lora-routes ol { padding: 0; margin: 0; list-style: none; display: grid; gap: 1.4rem; }
+.transfer-lesson .tb-lora-routes li { display: flex; flex-direction: column; gap: .4rem; position: relative; margin: 0; }
+.transfer-lesson .tb-lora-routes li:first-child::after { content: '↓'; position: absolute; bottom: -1.4rem; left: 50%; color: var(--tl-param); }
+.transfer-lesson [data-figure="transfer-lora-location"] { container-type: inline-size; }
+@container (max-width: 28rem) {
+  .transfer-lesson .tb-lora-routes { grid-template-columns: minmax(0, 1fr); margin: .75rem 0; gap: .75rem; }
+  .transfer-lesson .tb-lora-routes > .is-frozen-route { border: 2px solid #4a4640; }
+  .transfer-lesson .tb-lora-routes > .is-added-route { border: 2px dashed var(--tl-param); }
+  .transfer-lesson .tb-fork { margin-inline: 0; }
+}
+
+/* Two-number nearest-mean example. */
+.transfer-lesson .tb-toy { display: grid; grid-template-columns: minmax(0, 250px) minmax(0, 1fr); gap: 1.2rem; align-items: center; }
+.transfer-lesson .tb-toy svg { display: block; width: 100%; max-width: 250px; height: auto; }
+.transfer-lesson .tb-toy .tb-toy-mean { fill: #f4f0e6; font: 700 18px ui-monospace, monospace; }
+.transfer-lesson .tb-toy .tb-toy-label { fill: #e6e1d6; font: 11px ui-sans-serif, system-ui, sans-serif; }
+.transfer-lesson .tb-toy .tb-toy-dist { fill: #c7a5ee; font: 700 11px ui-monospace, monospace; }
+.transfer-lesson .tb-toy-key { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; line-height: 1.55; }
+.transfer-lesson .tb-toy-key li { margin: 0; }
+.transfer-lesson .tb-toy-key span { display: inline-block; width: 1.4em; }
+.transfer-lesson [data-figure="transfer-nearest-mean-toy"] { container-type: inline-size; }
+@container (max-width: 34rem) { .transfer-lesson .tb-toy { grid-template-columns: minmax(0, 1fr); } .transfer-lesson .tb-toy svg { margin-inline: auto; } }
+
+/* Co-adaptation sketch. */
+.transfer-lesson .tb-coadapt { display: grid; gap: .9rem; }
+.transfer-lesson .tb-coadapt-row p { margin: 0 0 .4rem; }
+.transfer-lesson .tb-coadapt-row ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 4px; }
+.transfer-lesson .tb-coadapt-layer { margin: 0; padding: 8px 0; text-align: center; border-radius: 3px; border: 1px solid #3a3631; font-variant-numeric: tabular-nums; font-weight: 700; }
+.transfer-lesson .tb-coadapt-layer.is-trains { border: 2px solid var(--tl-param); }
+.transfer-lesson .tb-coadapt-layer.is-added { border: 2px dashed var(--tl-param); }
+.transfer-lesson .tb-coadapt-layer.is-frozen { background: var(--tl-frozen-fill); border-color: #4a4640; color: #b6b1a7; }
+.transfer-lesson .tb-coadapt-layer.is-cut { box-shadow: 4px 0 0 #f4f0e6; }
+.transfer-lesson .tb-key-line { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .88rem; }
+.transfer-lesson .tb-key { padding: 1px 8px; border-radius: 3px; border: 1px solid #3a3631; }
+.transfer-lesson .tb-key.is-trains { border: 2px solid var(--tl-param); }
+.transfer-lesson .tb-key.is-added { border: 2px dashed var(--tl-param); }
+.transfer-lesson .tb-key.is-frozen { background: var(--tl-frozen-fill); border-color: #4a4640; }
+.transfer-lesson .tb-key.is-cut-key { border: none; border-right: 4px solid #f4f0e6; border-radius: 0; }
+
+/* BatchNorm mode policy. */
+.transfer-lesson .tb-bn-policy { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: .8rem; align-items: stretch; }
+.transfer-lesson .tb-bn-part { padding: .7rem 1rem; border-radius: 4px; min-width: 0; }
+.transfer-lesson .tb-bn-part ul { margin: 0; padding-left: 1.1rem; line-height: 1.6; }
+.transfer-lesson .tb-bn-part.is-frozen { background: var(--tl-frozen-fill); border: 1px solid #4a4640; }
+.transfer-lesson .tb-bn-part.is-added { border: 2px dashed var(--tl-param); }
+.transfer-lesson .tb-bn-policy > .tb-flow-arrow { align-self: center; }
+.transfer-lesson [data-figure="transfer-batchnorm-policy"] { container-type: inline-size; }
+@container (max-width: 40rem) { .transfer-lesson .tb-bn-policy { grid-template-columns: minmax(0, 1fr); } .transfer-lesson .tb-bn-policy > .tb-flow-arrow { justify-self: center; transform: rotate(90deg); pointer-events: none; } }
+.transfer-lesson .tb-figure code { font-size: .9em; overflow-wrap: anywhere; }

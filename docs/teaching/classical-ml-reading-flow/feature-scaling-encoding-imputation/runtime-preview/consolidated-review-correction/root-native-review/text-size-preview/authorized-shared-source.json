@@ -1,0 +1,37 @@
+{
+  "schema": "feature20-root-authorized-shared-context/v1",
+  "authorization": "Root message: Authorize exact current navigation8914a945 context; only selected t-SNE readTime/legacy-guide metadata; compose explicit context without rebinding frozen products.",
+  "context_receipt": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/root-metadata-composition.json",
+    "bytes": 1459,
+    "sha256": "fef7ccf0a127e41b5badef1b1e5222f14c73c9adcf177023f55d51a170c2c49a"
+  },
+  "current_bindings": [
+    {
+      "path": "src/learn/data/generated/navigation.js",
+      "bytes": 942782,
+      "sha256": "8914a9455626731e23c50d1d8fd2412056178364293b87cf0c4c6a00d0c1b385"
+    }
+  ],
+  "previous_binding": {
+    "path": "src/learn/data/generated/navigation.js",
+    "bytes": 942828,
+    "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+  },
+  "only_selected_two_fields": true,
+  "physical_inverse_exact_independently_checked": true,
+  "inverse_sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1",
+  "foreign_rows": 1460,
+  "selected_before": {
+    "readTime": "~60 min first pass \u00b7 deeper branches + 60\u201390 min investigations and practice",
+    "hasIntegratedGuide": true
+  },
+  "selected_after": {
+    "readTime": "~100 min read + 120 min practice",
+    "hasIntegratedGuide": false
+  },
+  "limits": [
+    "Read-only composition; frozen Feature source records remain exact and historical",
+    "Only this exact navigation identity exception is permitted"
+  ]
+}

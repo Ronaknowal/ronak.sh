@@ -1,0 +1,4640 @@
+{
+  "boundless-reference": {
+    "hand_trace": {
+      "text": "Tip of the hat",
+      "pieces": [
+        "Tip",
+        "␠of␠the",
+        "␠hat"
+      ],
+      "trace": [
+        {
+          "rank": -1,
+          "kind": "bytes",
+          "groups": [
+            [
+              "T",
+              "i",
+              "p"
+            ],
+            [
+              "␠",
+              "o",
+              "f"
+            ],
+            [
+              "␠",
+              "t",
+              "h",
+              "e"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 0,
+          "kind": "regular",
+          "groups": [
+            [
+              "T",
+              "i",
+              "p"
+            ],
+            [
+              "␠",
+              "o",
+              "f"
+            ],
+            [
+              "␠t",
+              "h",
+              "e"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 1,
+          "kind": "regular",
+          "groups": [
+            [
+              "T",
+              "i",
+              "p"
+            ],
+            [
+              "␠",
+              "o",
+              "f"
+            ],
+            [
+              "␠t",
+              "he"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 2,
+          "kind": "regular",
+          "groups": [
+            [
+              "T",
+              "i",
+              "p"
+            ],
+            [
+              "␠",
+              "o",
+              "f"
+            ],
+            [
+              "␠the"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 3,
+          "kind": "regular",
+          "groups": [
+            [
+              "T",
+              "i",
+              "p"
+            ],
+            [
+              "␠o",
+              "f"
+            ],
+            [
+              "␠the"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 4,
+          "kind": "regular",
+          "groups": [
+            [
+              "T",
+              "i",
+              "p"
+            ],
+            [
+              "␠of"
+            ],
+            [
+              "␠the"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 5,
+          "kind": "super",
+          "groups": [
+            [
+              "T",
+              "i",
+              "p"
+            ],
+            [
+              "␠of␠the"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 6,
+          "kind": "regular",
+          "groups": [
+            [
+              "Ti",
+              "p"
+            ],
+            [
+              "␠of␠the"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 7,
+          "kind": "regular",
+          "groups": [
+            [
+              "Tip"
+            ],
+            [
+              "␠of␠the"
+            ],
+            [
+              "␠",
+              "h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 8,
+          "kind": "regular",
+          "groups": [
+            [
+              "Tip"
+            ],
+            [
+              "␠of␠the"
+            ],
+            [
+              "␠h",
+              "a",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 9,
+          "kind": "regular",
+          "groups": [
+            [
+              "Tip"
+            ],
+            [
+              "␠of␠the"
+            ],
+            [
+              "␠ha",
+              "t"
+            ]
+          ]
+        },
+        {
+          "rank": 10,
+          "kind": "regular",
+          "groups": [
+            [
+              "Tip"
+            ],
+            [
+              "␠of␠the"
+            ],
+            [
+              "␠hat"
+            ]
+          ]
+        }
+      ]
+    },
+    "deletion_trace": {
+      "text": "ab",
+      "final_pieces": [
+        "a",
+        "b"
+      ],
+      "applied_ranks": [
+        -1,
+        0,
+        1
+      ],
+      "earlier_merge_reapplied": false
+    },
+    "vocab_budget": 320,
+    "configurations": [
+      {
+        "supermerges_allowed": false,
+        "vocab_size": 320,
+        "operations": 64,
+        "supermerges": 0,
+        "deletions": 0,
+        "test_bytes": 4996,
+        "test_tokens": 3274,
+        "bytes_per_token": 1.5259621258399512
+      },
+      {
+        "supermerges_allowed": true,
+        "vocab_size": 320,
+        "operations": 64,
+        "supermerges": 1,
+        "deletions": 0,
+        "test_bytes": 4996,
+        "test_tokens": 3276,
+        "bytes_per_token": 1.525030525030525
+      }
+    ]
+  },
+  "adaptive": {
+    "fixture": {
+      "rows": [
+        80,
+        20,
+        20
+      ],
+      "seed": 13,
+      "epochs": 8
+    },
+    "hand_lattice": {
+      "probabilities": {
+        "a": 0.1,
+        "b": 0.1,
+        "ab": 0.4,
+        "aba": 0.2,
+        "bab": 0.19,
+        "abab": 0.01
+      },
+      "best_path": [
+        "ab",
+        "ab"
+      ],
+      "minimum_count_path": [
+        "abab"
+      ],
+      "marginal_probability": 0.21710000000000002,
+      "one_step_removal_cost_nats": 1.4864990420837711,
+      "samples_seed13": [
+        [
+          "ab",
+          "ab"
+        ],
+        [
+          "a",
+          "bab"
+        ],
+        [
+          "abab"
+        ],
+        [
+          "ab",
+          "ab"
+        ],
+        [
+          "ab",
+          "ab"
+        ]
+      ]
+    },
+    "rounds": [
+      {
+        "round": 0,
+        "vocab_before": 384,
+        "vocab_after": 352,
+        "training_epoch_nats_per_target": [
+          5.217467538321543,
+          4.679628304006594,
+          4.558652615422911,
+          4.422849868939046,
+          4.286021077593679,
+          4.139611916892837,
+          4.018668919895136,
+          3.9278807075896713
+        ],
+        "feedback": {
+          "bytes": 4425,
+          "targets_including_eos": 2693,
+          "nll_nats": 11623.283233642578,
+          "bits_per_byte": 3.7895713175195445,
+          "token_perplexity": 74.89668496163978
+        },
+        "test": {
+          "bytes": 4996,
+          "targets_including_eos": 3019,
+          "nll_nats": 12942.248596191406,
+          "bits_per_byte": 3.737333440287728,
+          "token_perplexity": 72.74297182734249
+        },
+        "removed": [
+          "␠,",
+          "␠an",
+          "␠d",
+          "␠e",
+          "␠i",
+          "␠o",
+          "␠of",
+          "␠r",
+          "␠t",
+          "␠to",
+          ",␠",
+          "a␠",
+          "d␠t",
+          "ea",
+          "f␠",
+          "fo",
+          "g␠",
+          "io",
+          "l␠",
+          "na",
+          "ng␠",
+          "o␠",
+          "of",
+          "of␠",
+          "rk",
+          "rs",
+          "wa",
+          "and",
+          "␠wa",
+          "ie",
+          "ne",
+          "to␠"
+        ],
+        "candidates": [
+          {
+            "piece": "s␠",
+            "count": 61,
+            "loss_sum": 263.068598985672,
+            "mean_loss": 4.312599983371672,
+            "momentum_priority": 10.939331890249637
+          },
+          {
+            "piece": "␠,␠",
+            "count": 53,
+            "loss_sum": 219.9582598209381,
+            "mean_loss": 4.150155845678078,
+            "momentum_priority": 9.81849890817296
+          },
+          {
+            "piece": "ar",
+            "count": 48,
+            "loss_sum": 226.67579460144043,
+            "mean_loss": 4.722412387530009,
+            "momentum_priority": 8.843162103732181
+          },
+          {
+            "piece": "e␠",
+            "count": 36,
+            "loss_sum": 170.30687952041626,
+            "mean_loss": 4.730746653344896,
+            "momentum_priority": 6.999184214699551
+          },
+          {
+            "piece": "the␠",
+            "count": 36,
+            "loss_sum": 105.72207570075989,
+            "mean_loss": 2.936724325021108,
+            "momentum_priority": 7.70840304878765
+          },
+          {
+            "piece": "st",
+            "count": 35,
+            "loss_sum": 195.4463973045349,
+            "mean_loss": 5.584182780129569,
+            "momentum_priority": 6.628298782091819
+          },
+          {
+            "piece": "y␠",
+            "count": 34,
+            "loss_sum": 123.11100387573242,
+            "mean_loss": 3.6209118786980126,
+            "momentum_priority": 7.052220760532837
+          },
+          {
+            "piece": "er",
+            "count": 32,
+            "loss_sum": 133.15312695503235,
+            "mean_loss": 4.161035217344761,
+            "momentum_priority": 6.531969446854937
+          }
+        ]
+      },
+      {
+        "round": 1,
+        "vocab_before": 352,
+        "vocab_after": 320,
+        "training_epoch_nats_per_target": [
+          5.156135558406222,
+          4.57221237865953,
+          4.4464737542647885,
+          4.291085759427261,
+          4.145664093713096,
+          4.002885199867023,
+          3.88578798600454,
+          3.818404973622395
+        ],
+        "feedback": {
+          "bytes": 4425,
+          "targets_including_eos": 2704,
+          "nll_nats": 11533.935974121094,
+          "bits_per_byte": 3.7604411823266255,
+          "token_perplexity": 71.20114260904742
+        },
+        "test": {
+          "bytes": 4996,
+          "targets_including_eos": 3056,
+          "nll_nats": 12839.347442626953,
+          "bits_per_byte": 3.707618671683006,
+          "token_perplexity": 66.77689566635323
+        },
+        "removed": [
+          "r␠",
+          "the",
+          "␠C",
+          "nd␠",
+          "␠th",
+          "␠m",
+          "to",
+          "in␠",
+          "el",
+          "␠.",
+          "ng",
+          "ing",
+          "as",
+          "␠S",
+          "␠in",
+          "␠A",
+          "n␠",
+          "␠and",
+          "␠h",
+          "␠fo",
+          "ra",
+          "al␠",
+          "ma",
+          "s␠a",
+          "d␠",
+          "␠a",
+          "␠f",
+          "nd",
+          "␠s",
+          "he",
+          "li",
+          "il"
+        ],
+        "candidates": [
+          {
+            "piece": "s␠",
+            "count": 63,
+            "loss_sum": 261.97918033599854,
+            "mean_loss": 4.1583996878729925,
+            "momentum_priority": 16.77604669300448
+          },
+          {
+            "piece": "␠,␠",
+            "count": 53,
+            "loss_sum": 202.48181867599487,
+            "mean_loss": 3.8204116731319786,
+            "momentum_priority": 14.879945657379825
+          },
+          {
+            "piece": "ar",
+            "count": 50,
+            "loss_sum": 217.73608565330505,
+            "mean_loss": 4.354721713066101,
+            "momentum_priority": 13.701693213326667
+          },
+          {
+            "piece": "er",
+            "count": 39,
+            "loss_sum": 159.4923768043518,
+            "mean_loss": 4.089548123188508,
+            "momentum_priority": 10.945801058295963
+          },
+          {
+            "piece": "e␠",
+            "count": 38,
+            "loss_sum": 153.76004219055176,
+            "mean_loss": 4.046316899751362,
+            "momentum_priority": 11.036469549178731
+          },
+          {
+            "piece": "the␠",
+            "count": 37,
+            "loss_sum": 103.75719738006592,
+            "mean_loss": 2.8042485778396196,
+            "momentum_priority": 11.808376419533214
+          },
+          {
+            "piece": "st",
+            "count": 35,
+            "loss_sum": 193.08949375152588,
+            "mean_loss": 5.516842678615025,
+            "momentum_priority": 9.957634268053999
+          },
+          {
+            "piece": "y␠",
+            "count": 35,
+            "loss_sum": 138.77811861038208,
+            "mean_loss": 3.965089103153774,
+            "momentum_priority": 10.611049880241701
+          }
+        ]
+      },
+      {
+        "round": 2,
+        "vocab_before": 320,
+        "vocab_after": 320,
+        "training_epoch_nats_per_target": [
+          4.876434335333275,
+          4.3360341506395885,
+          4.187619671632449,
+          4.037940665525726,
+          3.91494077455208,
+          3.798389867632452,
+          3.711876025434199,
+          3.644975229456585
+        ],
+        "feedback": {
+          "bytes": 4425,
+          "targets_including_eos": 2837,
+          "nll_nats": 11554.334899902344,
+          "bits_per_byte": 3.7670919007591843,
+          "token_perplexity": 58.71703922939013
+        },
+        "test": {
+          "bytes": 4996,
+          "targets_including_eos": 3213,
+          "nll_nats": 12854.969329833984,
+          "bits_per_byte": 3.712129804429786,
+          "token_perplexity": 54.64863084588046
+        },
+        "removed": [],
+        "candidates": [
+          {
+            "piece": "s␠",
+            "count": 73,
+            "loss_sum": 325.60299038887024,
+            "mean_loss": 4.460314936833839,
+            "momentum_priority": 20.998700748091146
+          },
+          {
+            "piece": "␠,␠",
+            "count": 53,
+            "loss_sum": 192.89553678035736,
+            "mean_loss": 3.6395384298180633,
+            "momentum_priority": 17.502016636543622
+          },
+          {
+            "piece": "ar",
+            "count": 51,
+            "loss_sum": 262.57085275650024,
+            "mean_loss": 5.148448093264711,
+            "momentum_priority": 15.999940965046212
+          },
+          {
+            "piece": "er",
+            "count": 43,
+            "loss_sum": 179.36902618408203,
+            "mean_loss": 4.171372701955396,
+            "momentum_priority": 13.750082331080003
+          },
+          {
+            "piece": "e␠",
+            "count": 40,
+            "loss_sum": 182.0655062198639,
+            "mean_loss": 4.551637655496597,
+            "momentum_priority": 13.196007783667385
+          },
+          {
+            "piece": "the␠",
+            "count": 38,
+            "loss_sum": 105.1374922990799,
+            "mean_loss": 2.7667761131336817,
+            "momentum_priority": 14.050416697033787
+          },
+          {
+            "piece": "st",
+            "count": 36,
+            "loss_sum": 209.5526909828186,
+            "mean_loss": 5.820908082856072,
+            "momentum_priority": 11.708121240935554
+          },
+          {
+            "piece": "y␠",
+            "count": 35,
+            "loss_sum": 134.80704712867737,
+            "mean_loss": 3.8516299179622107,
+            "momentum_priority": 12.432041841864049
+          }
+        ]
+      }
+    ]
+  },
+  "residue": {
+    "thresholds": {
+      "ratio": 0.2,
+      "entropy_bits": 1.5
+    },
+    "vocab_before": 512,
+    "excluded_count": 13,
+    "test_original_split_remerged_tokens": [
+      2581,
+      2584,
+      2584
+    ],
+    "corruption_fixture": {
+      "text": "corruptions",
+      "excluded": [
+        "ruption",
+        "ruptions"
+      ],
+      "original": [
+        "cor",
+        "ruptions"
+      ],
+      "split_only": [
+        "cor",
+        "ru",
+        "ption",
+        "s"
+      ],
+      "remerged": [
+        "corruption",
+        "s"
+      ],
+      "hf_baseline_exact": true,
+      "rules": [
+        {
+          "rank": 0,
+          "left": "c",
+          "right": "o",
+          "joined": "co"
+        },
+        {
+          "rank": 1,
+          "left": "co",
+          "right": "r",
+          "joined": "cor"
+        },
+        {
+          "rank": 2,
+          "left": "r",
+          "right": "u",
+          "joined": "ru"
+        },
+        {
+          "rank": 3,
+          "left": "p",
+          "right": "t",
+          "joined": "pt"
+        },
+        {
+          "rank": 4,
+          "left": "pt",
+          "right": "i",
+          "joined": "pti"
+        },
+        {
+          "rank": 5,
+          "left": "pti",
+          "right": "o",
+          "joined": "ptio"
+        },
+        {
+          "rank": 6,
+          "left": "ptio",
+          "right": "n",
+          "joined": "ption"
+        },
+        {
+          "rank": 7,
+          "left": "ru",
+          "right": "ption",
+          "joined": "ruption"
+        },
+        {
+          "rank": 8,
+          "left": "ruption",
+          "right": "s",
+          "joined": "ruptions"
+        },
+        {
+          "rank": 9,
+          "left": "cor",
+          "right": "ru",
+          "joined": "corru"
+        },
+        {
+          "rank": 10,
+          "left": "corru",
+          "right": "ption",
+          "joined": "corruption"
+        }
+      ]
+    },
+    "rank_only_fixture": {
+      "strict_pair_output": [
+        "a",
+        "bc"
+      ],
+      "rank_only_output": [
+        "abc"
+      ],
+      "recorded_parents": [
+        "a",
+        "bc"
+      ],
+      "other_possible_parents": [
+        "ab",
+        "c"
+      ]
+    },
+    "residue_fixture": {
+      "constructed_strings": true,
+      "includ": {
+        "piece": "includ",
+        "final_count": 2,
+        "descendant_count": 30,
+        "ratio": 0.0625,
+        "left_entropy_bits": 1.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      "descendant_final_words": {
+        "include": 12,
+        "includes": 8,
+        "including": 10
+      },
+      "kept_parent_unchanged": true
+    },
+    "statistics": [
+      {
+        "piece": "␠\"",
+        "final_count": 26,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.6078869505808346,
+        "right_entropy_bits": 3.902174814211728,
+        "minimum_entropy_bits": 3.6078869505808346,
+        "excluded": false
+      },
+      {
+        "piece": "␠'",
+        "final_count": 26,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.3825680832760767,
+        "right_entropy_bits": 0.23519338181924143,
+        "minimum_entropy_bits": 0.23519338181924143,
+        "excluded": false
+      },
+      {
+        "piece": "␠(",
+        "final_count": 9,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.169925001442312,
+        "right_entropy_bits": 1.4466166676282082,
+        "minimum_entropy_bits": 1.4466166676282082,
+        "excluded": false
+      },
+      {
+        "piece": "␠,",
+        "final_count": 207,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 5.614837677381457,
+        "right_entropy_bits": 5.197822539144832,
+        "minimum_entropy_bits": 5.197822539144832,
+        "excluded": false
+      },
+      {
+        "piece": "␠.",
+        "final_count": 111,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 5.223041404450978,
+        "right_entropy_bits": 4.248133203218473,
+        "minimum_entropy_bits": 4.248133203218473,
+        "excluded": false
+      },
+      {
+        "piece": "␠:",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.8159220638351665,
+        "right_entropy_bits": 3.506890595608519,
+        "minimum_entropy_bits": 2.8159220638351665,
+        "excluded": false
+      },
+      {
+        "piece": "␠@",
+        "final_count": 8,
+        "descendant_count": 27,
+        "ratio": 0.22857142857142856,
+        "left_entropy_bits": 2.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "␠@-",
+        "final_count": 1,
+        "descendant_count": 26,
+        "ratio": 0.037037037037037035,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "␠@-@",
+        "final_count": 26,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.161978179679554,
+        "right_entropy_bits": 3.902174814211728,
+        "minimum_entropy_bits": 3.902174814211728,
+        "excluded": false
+      },
+      {
+        "piece": "␠A",
+        "final_count": 30,
+        "descendant_count": 30,
+        "ratio": 0.5,
+        "left_entropy_bits": 3.346602752036061,
+        "right_entropy_bits": 3.781076011914607,
+        "minimum_entropy_bits": 3.346602752036061,
+        "excluded": false
+      },
+      {
+        "piece": "␠Ar",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.4548223999466057,
+        "right_entropy_bits": 1.7130788426267936,
+        "minimum_entropy_bits": 1.7130788426267936,
+        "excluded": false
+      },
+      {
+        "piece": "␠Arsenal",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.1401156785146092,
+        "right_entropy_bits": 3.180832987205441,
+        "minimum_entropy_bits": 1.1401156785146092,
+        "excluded": false
+      },
+      {
+        "piece": "␠B",
+        "final_count": 27,
+        "descendant_count": 20,
+        "ratio": 0.574468085106383,
+        "left_entropy_bits": 2.861575817764811,
+        "right_entropy_bits": 3.3785445592475365,
+        "minimum_entropy_bits": 2.861575817764811,
+        "excluded": false
+      },
+      {
+        "piece": "␠Barker",
+        "final_count": 20,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.521928094887363,
+        "right_entropy_bits": 3.446439344671016,
+        "minimum_entropy_bits": 3.446439344671016,
+        "excluded": false
+      },
+      {
+        "piece": "␠C",
+        "final_count": 34,
+        "descendant_count": 30,
+        "ratio": 0.53125,
+        "left_entropy_bits": 3.7933451941915157,
+        "right_entropy_bits": 3.098473049913859,
+        "minimum_entropy_bits": 3.098473049913859,
+        "excluded": false
+      },
+      {
+        "piece": "␠Ch",
+        "final_count": 13,
+        "descendant_count": 17,
+        "ratio": 0.43333333333333335,
+        "left_entropy_bits": 3.238901256602631,
+        "right_entropy_bits": 2.1920058354921066,
+        "minimum_entropy_bits": 2.1920058354921066,
+        "excluded": false
+      },
+      {
+        "piece": "␠Chron",
+        "final_count": 0,
+        "descendant_count": 17,
+        "ratio": 0.0,
+        "left_entropy_bits": null,
+        "right_entropy_bits": null,
+        "minimum_entropy_bits": null,
+        "excluded": false
+      },
+      {
+        "piece": "␠Chronic",
+        "final_count": 0,
+        "descendant_count": 17,
+        "ratio": 0.0,
+        "left_entropy_bits": null,
+        "right_entropy_bits": null,
+        "minimum_entropy_bits": null,
+        "excluded": false
+      },
+      {
+        "piece": "␠Chronicles",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.1400677626718572,
+        "right_entropy_bits": 1.8536882264834516,
+        "minimum_entropy_bits": 1.1400677626718572,
+        "excluded": false
+      },
+      {
+        "piece": "␠D",
+        "final_count": 19,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.0053148568942794,
+        "right_entropy_bits": 2.6100635408770723,
+        "minimum_entropy_bits": 2.6100635408770723,
+        "excluded": false
+      },
+      {
+        "piece": "␠E",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.9689185639620974,
+        "right_entropy_bits": 2.7192945256669794,
+        "minimum_entropy_bits": 2.7192945256669794,
+        "excluded": false
+      },
+      {
+        "piece": "␠F",
+        "final_count": 23,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.7081320646586016,
+        "right_entropy_bits": 2.9140163035068447,
+        "minimum_entropy_bits": 2.9140163035068447,
+        "excluded": false
+      },
+      {
+        "piece": "␠G",
+        "final_count": 19,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.471354487013929,
+        "right_entropy_bits": 2.2942740671928616,
+        "minimum_entropy_bits": 2.2942740671928616,
+        "excluded": false
+      },
+      {
+        "piece": "␠H",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.866587105828959,
+        "right_entropy_bits": 2.8221819586428722,
+        "minimum_entropy_bits": 2.8221819586428722,
+        "excluded": false
+      },
+      {
+        "piece": "␠I",
+        "final_count": 22,
+        "descendant_count": 10,
+        "ratio": 0.6875,
+        "left_entropy_bits": 2.547897627500467,
+        "right_entropy_bits": 3.020727779800787,
+        "minimum_entropy_bits": 2.547897627500467,
+        "excluded": false
+      },
+      {
+        "piece": "␠II",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 1.9609640474436811,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "␠J",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.1898980954642875,
+        "right_entropy_bits": 2.4225797618424916,
+        "minimum_entropy_bits": 2.4225797618424916,
+        "excluded": false
+      },
+      {
+        "piece": "␠L",
+        "final_count": 15,
+        "descendant_count": 21,
+        "ratio": 0.4166666666666667,
+        "left_entropy_bits": 3.106890595608519,
+        "right_entropy_bits": 3.106890595608519,
+        "minimum_entropy_bits": 3.106890595608519,
+        "excluded": false
+      },
+      {
+        "piece": "␠Little",
+        "final_count": 21,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.4809381138541116,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "␠M",
+        "final_count": 29,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.9952378913808864,
+        "right_entropy_bits": 3.1212731338654933,
+        "minimum_entropy_bits": 3.1212731338654933,
+        "excluded": false
+      },
+      {
+        "piece": "␠N",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.057476076289931,
+        "right_entropy_bits": 2.498077546623641,
+        "minimum_entropy_bits": 2.498077546623641,
+        "excluded": false
+      },
+      {
+        "piece": "␠O",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.3219280948873626,
+        "right_entropy_bits": 3.1219280948873624,
+        "minimum_entropy_bits": 3.1219280948873624,
+        "excluded": false
+      },
+      {
+        "piece": "␠P",
+        "final_count": 14,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.4677201004744993,
+        "right_entropy_bits": 3.3787834934861753,
+        "minimum_entropy_bits": 3.3787834934861753,
+        "excluded": false
+      },
+      {
+        "piece": "␠R",
+        "final_count": 20,
+        "descendant_count": 23,
+        "ratio": 0.46511627906976744,
+        "left_entropy_bits": 3.5464393446710156,
+        "right_entropy_bits": 2.8464393446710154,
+        "minimum_entropy_bits": 2.8464393446710154,
+        "excluded": false
+      },
+      {
+        "piece": "␠Ro",
+        "final_count": 2,
+        "descendant_count": 21,
+        "ratio": 0.08695652173913043,
+        "left_entropy_bits": 1.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "␠Rock",
+        "final_count": 21,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 2.9385400412082454,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "␠S",
+        "final_count": 38,
+        "descendant_count": 24,
+        "ratio": 0.6129032258064516,
+        "left_entropy_bits": 4.346225868535943,
+        "right_entropy_bits": 4.017535737070863,
+        "minimum_entropy_bits": 4.017535737070863,
+        "excluded": false
+      },
+      {
+        "piece": "␠She",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 3.2776134368191157,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "␠St",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.334679141051595,
+        "right_entropy_bits": 2.353533948577482,
+        "minimum_entropy_bits": 2.353533948577482,
+        "excluded": false
+      },
+      {
+        "piece": "␠T",
+        "final_count": 27,
+        "descendant_count": 25,
+        "ratio": 0.5192307692307693,
+        "left_entropy_bits": 3.480577429698035,
+        "right_entropy_bits": 3.426209613980979,
+        "minimum_entropy_bits": 3.426209613980979,
+        "excluded": false
+      },
+      {
+        "piece": "␠The",
+        "final_count": 25,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.691510777487775,
+        "right_entropy_bits": 4.083856189774725,
+        "minimum_entropy_bits": 2.691510777487775,
+        "excluded": false
+      },
+      {
+        "piece": "␠U",
+        "final_count": 9,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.6416041678685938,
+        "right_entropy_bits": 1.4466166676282082,
+        "minimum_entropy_bits": 1.4466166676282082,
+        "excluded": false
+      },
+      {
+        "piece": "␠V",
+        "final_count": 4,
+        "descendant_count": 25,
+        "ratio": 0.13793103448275862,
+        "left_entropy_bits": 2.0,
+        "right_entropy_bits": 2.0,
+        "minimum_entropy_bits": 2.0,
+        "excluded": false
+      },
+      {
+        "piece": "␠Valk",
+        "final_count": 1,
+        "descendant_count": 24,
+        "ratio": 0.04,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "␠Valky",
+        "final_count": 2,
+        "descendant_count": 22,
+        "ratio": 0.08333333333333333,
+        "left_entropy_bits": 1.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "␠Valkyria",
+        "final_count": 22,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.481714572986073,
+        "right_entropy_bits": 1.6930405350919489,
+        "minimum_entropy_bits": 1.6930405350919489,
+        "excluded": false
+      },
+      {
+        "piece": "␠W",
+        "final_count": 25,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.573660689688186,
+        "right_entropy_bits": 3.319079570624175,
+        "minimum_entropy_bits": 3.319079570624175,
+        "excluded": false
+      },
+      {
+        "piece": "␠a",
+        "final_count": 101,
+        "descendant_count": 260,
+        "ratio": 0.27977839335180055,
+        "left_entropy_bits": 5.145911240954315,
+        "right_entropy_bits": 4.935536424513769,
+        "minimum_entropy_bits": 4.935536424513769,
+        "excluded": false
+      },
+      {
+        "piece": "␠al",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.9735572622751856,
+        "right_entropy_bits": 2.4729055953200563,
+        "minimum_entropy_bits": 2.4729055953200563,
+        "excluded": false
+      },
+      {
+        "piece": "␠an",
+        "final_count": 21,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.7489948035250964,
+        "right_entropy_bits": 3.7849418274376427,
+        "minimum_entropy_bits": 3.7489948035250964,
+        "excluded": false
+      },
+      {
+        "piece": "␠and",
+        "final_count": 114,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.327603849018733,
+        "right_entropy_bits": 5.073236944934079,
+        "minimum_entropy_bits": 4.327603849018733,
+        "excluded": false
+      },
+      {
+        "piece": "␠ar",
+        "final_count": 9,
+        "descendant_count": 10,
+        "ratio": 0.47368421052631576,
+        "left_entropy_bits": 3.169925001442312,
+        "right_entropy_bits": 1.224394445405986,
+        "minimum_entropy_bits": 1.224394445405986,
+        "excluded": false
+      },
+      {
+        "piece": "␠are",
+        "final_count": 9,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.94770277922009,
+        "right_entropy_bits": 3.169925001442312,
+        "minimum_entropy_bits": 2.94770277922009,
+        "excluded": false
+      },
+      {
+        "piece": "␠arsenal",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.8230264907128848,
+        "right_entropy_bits": 3.334679141051595,
+        "minimum_entropy_bits": 1.8230264907128848,
+        "excluded": false
+      },
+      {
+        "piece": "␠art",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.721928094887362,
+        "right_entropy_bits": 2.9219280948873623,
+        "minimum_entropy_bits": 2.721928094887362,
+        "excluded": false
+      },
+      {
+        "piece": "␠as",
+        "final_count": 33,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.195909270873605,
+        "right_entropy_bits": 3.9225895736416696,
+        "minimum_entropy_bits": 3.9225895736416696,
+        "excluded": false
+      },
+      {
+        "piece": "␠at",
+        "final_count": 36,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.461320140211008,
+        "right_entropy_bits": 3.2138617852864635,
+        "minimum_entropy_bits": 3.2138617852864635,
+        "excluded": false
+      },
+      {
+        "piece": "␠b",
+        "final_count": 37,
+        "descendant_count": 62,
+        "ratio": 0.37373737373737376,
+        "left_entropy_bits": 4.175273297885966,
+        "right_entropy_bits": 4.013111135723804,
+        "minimum_entropy_bits": 4.013111135723804,
+        "excluded": false
+      },
+      {
+        "piece": "␠be",
+        "final_count": 27,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.9265716511782727,
+        "right_entropy_bits": 3.1117568363634582,
+        "minimum_entropy_bits": 3.1117568363634582,
+        "excluded": false
+      },
+      {
+        "piece": "␠bu",
+        "final_count": 20,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.239353872167201,
+        "right_entropy_bits": 2.1567796494470395,
+        "minimum_entropy_bits": 2.1567796494470395,
+        "excluded": false
+      },
+      {
+        "piece": "␠by",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.871602261409798,
+        "right_entropy_bits": 2.923231428797621,
+        "minimum_entropy_bits": 1.871602261409798,
+        "excluded": false
+      },
+      {
+        "piece": "␠c",
+        "final_count": 43,
+        "descendant_count": 62,
+        "ratio": 0.4095238095238095,
+        "left_entropy_bits": 4.4325657790462705,
+        "right_entropy_bits": 4.1581409171909165,
+        "minimum_entropy_bits": 4.1581409171909165,
+        "excluded": false
+      },
+      {
+        "piece": "␠ch",
+        "final_count": 18,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.530493056757482,
+        "right_entropy_bits": 2.1279868068776753,
+        "minimum_entropy_bits": 2.1279868068776753,
+        "excluded": false
+      },
+      {
+        "piece": "␠cl",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.334679141051595,
+        "right_entropy_bits": 1.4885252948977485,
+        "minimum_entropy_bits": 1.4885252948977485,
+        "excluded": false
+      },
+      {
+        "piece": "␠com",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.506890595608519,
+        "right_entropy_bits": 2.0662478973127314,
+        "minimum_entropy_bits": 2.0662478973127314,
+        "excluded": false
+      },
+      {
+        "piece": "␠con",
+        "final_count": 6,
+        "descendant_count": 10,
+        "ratio": 0.375,
+        "left_entropy_bits": 2.584962500721156,
+        "right_entropy_bits": 2.2516291673878226,
+        "minimum_entropy_bits": 2.2516291673878226,
+        "excluded": false
+      },
+      {
+        "piece": "␠cont",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.3219280948873626,
+        "right_entropy_bits": 1.3709505944546687,
+        "minimum_entropy_bits": 1.3709505944546687,
+        "excluded": false
+      },
+      {
+        "piece": "␠d",
+        "final_count": 51,
+        "descendant_count": 16,
+        "ratio": 0.7611940298507462,
+        "left_entropy_bits": 5.000569214393252,
+        "right_entropy_bits": 3.9806474020206344,
+        "minimum_entropy_bits": 3.9806474020206344,
+        "excluded": false
+      },
+      {
+        "piece": "␠de",
+        "final_count": 16,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.625,
+        "right_entropy_bits": 2.202819531114783,
+        "minimum_entropy_bits": 2.202819531114783,
+        "excluded": false
+      },
+      {
+        "piece": "␠e",
+        "final_count": 27,
+        "descendant_count": 10,
+        "ratio": 0.7297297297297297,
+        "left_entropy_bits": 3.782122224145305,
+        "right_entropy_bits": 3.1434143538550634,
+        "minimum_entropy_bits": 3.1434143538550634,
+        "excluded": false
+      },
+      {
+        "piece": "␠ex",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.3219280948873626,
+        "right_entropy_bits": 2.0464393446710156,
+        "minimum_entropy_bits": 2.0464393446710156,
+        "excluded": false
+      },
+      {
+        "piece": "␠f",
+        "final_count": 62,
+        "descendant_count": 61,
+        "ratio": 0.5040650406504065,
+        "left_entropy_bits": 4.549788281134227,
+        "right_entropy_bits": 4.165327513280672,
+        "minimum_entropy_bits": 4.165327513280672,
+        "excluded": false
+      },
+      {
+        "piece": "␠for",
+        "final_count": 49,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.400224639945271,
+        "right_entropy_bits": 4.4127944769809,
+        "minimum_entropy_bits": 4.400224639945271,
+        "excluded": false
+      },
+      {
+        "piece": "␠from",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.7516291673878226,
+        "right_entropy_bits": 3.188721875540867,
+        "minimum_entropy_bits": 2.7516291673878226,
+        "excluded": false
+      },
+      {
+        "piece": "␠g",
+        "final_count": 26,
+        "descendant_count": 13,
+        "ratio": 0.6666666666666666,
+        "left_entropy_bits": 3.5309638736577575,
+        "right_entropy_bits": 3.426616045880948,
+        "minimum_entropy_bits": 3.426616045880948,
+        "excluded": false
+      },
+      {
+        "piece": "␠game",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.4416298737872246,
+        "right_entropy_bits": 3.0269868333592873,
+        "minimum_entropy_bits": 2.4416298737872246,
+        "excluded": false
+      },
+      {
+        "piece": "␠h",
+        "final_count": 32,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.3871987351738495,
+        "right_entropy_bits": 3.222067094075591,
+        "minimum_entropy_bits": 3.222067094075591,
+        "excluded": false
+      },
+      {
+        "piece": "␠he",
+        "final_count": 10,
+        "descendant_count": 17,
+        "ratio": 0.37037037037037035,
+        "left_entropy_bits": 2.9219280948873623,
+        "right_entropy_bits": 2.8464393446710154,
+        "minimum_entropy_bits": 2.8464393446710154,
+        "excluded": false
+      },
+      {
+        "piece": "␠her",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.4548223999466057,
+        "right_entropy_bits": 2.771902372038558,
+        "minimum_entropy_bits": 2.771902372038558,
+        "excluded": false
+      },
+      {
+        "piece": "␠in",
+        "final_count": 124,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 5.238949041648008,
+        "right_entropy_bits": 4.822279772624512,
+        "minimum_entropy_bits": 4.822279772624512,
+        "excluded": false
+      },
+      {
+        "piece": "␠is",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.188721875540867,
+        "right_entropy_bits": 2.7516291673878226,
+        "minimum_entropy_bits": 2.7516291673878226,
+        "excluded": false
+      },
+      {
+        "piece": "␠it",
+        "final_count": 12,
+        "descendant_count": 14,
+        "ratio": 0.46153846153846156,
+        "left_entropy_bits": 2.7516291673878226,
+        "right_entropy_bits": 2.7516291673878226,
+        "minimum_entropy_bits": 2.7516291673878226,
+        "excluded": false
+      },
+      {
+        "piece": "␠its",
+        "final_count": 14,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.521640636343318,
+        "right_entropy_bits": 3.6644977792004614,
+        "minimum_entropy_bits": 3.521640636343318,
+        "excluded": false
+      },
+      {
+        "piece": "␠l",
+        "final_count": 36,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.350209029099897,
+        "right_entropy_bits": 4.107017709595357,
+        "minimum_entropy_bits": 4.107017709595357,
+        "excluded": false
+      },
+      {
+        "piece": "␠m",
+        "final_count": 97,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 5.3544489251719245,
+        "right_entropy_bits": 4.63998362632677,
+        "minimum_entropy_bits": 4.63998362632677,
+        "excluded": false
+      },
+      {
+        "piece": "␠n",
+        "final_count": 29,
+        "descendant_count": 10,
+        "ratio": 0.7435897435897436,
+        "left_entropy_bits": 4.306256857196537,
+        "right_entropy_bits": 2.813697804950183,
+        "minimum_entropy_bits": 2.813697804950183,
+        "excluded": false
+      },
+      {
+        "piece": "␠ne",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.6464393446710157,
+        "right_entropy_bits": 1.295461844238322,
+        "minimum_entropy_bits": 1.295461844238322,
+        "excluded": false
+      },
+      {
+        "piece": "␠o",
+        "final_count": 26,
+        "descendant_count": 109,
+        "ratio": 0.1925925925925926,
+        "left_entropy_bits": 4.056020968057882,
+        "right_entropy_bits": 3.1377785457145273,
+        "minimum_entropy_bits": 3.1377785457145273,
+        "excluded": false
+      },
+      {
+        "piece": "␠of",
+        "final_count": 109,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 5.105500385169417,
+        "right_entropy_bits": 4.126706008470059,
+        "minimum_entropy_bits": 4.126706008470059,
+        "excluded": false
+      },
+      {
+        "piece": "␠on",
+        "final_count": 27,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.384517131793098,
+        "right_entropy_bits": 3.1895296315527126,
+        "minimum_entropy_bits": 3.1895296315527126,
+        "excluded": false
+      },
+      {
+        "piece": "␠or",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.7345216647797512,
+        "right_entropy_bits": 2.0874628412503395,
+        "minimum_entropy_bits": 2.0874628412503395,
+        "excluded": false
+      },
+      {
+        "piece": "␠p",
+        "final_count": 61,
+        "descendant_count": 56,
+        "ratio": 0.5213675213675214,
+        "left_entropy_bits": 4.628673043051074,
+        "right_entropy_bits": 4.120579297810238,
+        "minimum_entropy_bits": 4.120579297810238,
+        "excluded": false
+      },
+      {
+        "piece": "␠pl",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.0271691184406184,
+        "right_entropy_bits": 1.8585552118703144,
+        "minimum_entropy_bits": 1.8585552118703144,
+        "excluded": false
+      },
+      {
+        "piece": "␠pos",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.9219280948873623,
+        "right_entropy_bits": 1.8464393446710154,
+        "minimum_entropy_bits": 1.8464393446710154,
+        "excluded": false
+      },
+      {
+        "piece": "␠pr",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.5219280948873624,
+        "right_entropy_bits": 1.9219280948873623,
+        "minimum_entropy_bits": 1.9219280948873623,
+        "excluded": false
+      },
+      {
+        "piece": "␠pre",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.1219280948873624,
+        "right_entropy_bits": 0.7219280948873623,
+        "minimum_entropy_bits": 0.7219280948873623,
+        "excluded": false
+      },
+      {
+        "piece": "␠pro",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.640223928941852,
+        "right_entropy_bits": 3.0062389286533895,
+        "minimum_entropy_bits": 3.0062389286533895,
+        "excluded": false
+      },
+      {
+        "piece": "␠r",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.0271691184406184,
+        "right_entropy_bits": 2.8453509366224368,
+        "minimum_entropy_bits": 2.8453509366224368,
+        "excluded": false
+      },
+      {
+        "piece": "␠re",
+        "final_count": 46,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.658900271039244,
+        "right_entropy_bits": 3.6074974889392384,
+        "minimum_entropy_bits": 3.6074974889392384,
+        "excluded": false
+      },
+      {
+        "piece": "␠s",
+        "final_count": 89,
+        "descendant_count": 66,
+        "ratio": 0.5741935483870968,
+        "left_entropy_bits": 5.079352184058137,
+        "right_entropy_bits": 4.691430905177926,
+        "minimum_entropy_bits": 4.691430905177926,
+        "excluded": false
+      },
+      {
+        "piece": "␠se",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.4182958340544896,
+        "right_entropy_bits": 2.117492461184755,
+        "minimum_entropy_bits": 2.117492461184755,
+        "excluded": false
+      },
+      {
+        "piece": "␠ser",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.2776134368191157,
+        "right_entropy_bits": 1.3485878960124222,
+        "minimum_entropy_bits": 1.3485878960124222,
+        "excluded": false
+      },
+      {
+        "piece": "␠st",
+        "final_count": 23,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.7820946601870014,
+        "right_entropy_bits": 2.9638096525384383,
+        "minimum_entropy_bits": 2.7820946601870014,
+        "excluded": false
+      },
+      {
+        "piece": "␠su",
+        "final_count": 20,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.746439344671016,
+        "right_entropy_bits": 2.5709505944546684,
+        "minimum_entropy_bits": 2.5709505944546684,
+        "excluded": false
+      },
+      {
+        "piece": "␠t",
+        "final_count": 31,
+        "descendant_count": 346,
+        "ratio": 0.08222811671087533,
+        "left_entropy_bits": 4.2603326005698765,
+        "right_entropy_bits": 3.394050246625576,
+        "minimum_entropy_bits": 3.394050246625576,
+        "excluded": false
+      },
+      {
+        "piece": "␠th",
+        "final_count": 18,
+        "descendant_count": 15,
+        "ratio": 0.5454545454545454,
+        "left_entropy_bits": 3.8365916681089787,
+        "right_entropy_bits": 2.1054105870684143,
+        "minimum_entropy_bits": 2.1054105870684143,
+        "excluded": false
+      },
+      {
+        "piece": "␠that",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.589898095464288,
+        "right_entropy_bits": 3.139572261986723,
+        "minimum_entropy_bits": 3.139572261986723,
+        "excluded": false
+      },
+      {
+        "piece": "␠the",
+        "final_count": 238,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.6242894684632905,
+        "right_entropy_bits": 5.634739331612029,
+        "minimum_entropy_bits": 4.6242894684632905,
+        "excluded": false
+      },
+      {
+        "piece": "␠to",
+        "final_count": 75,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.528472446248367,
+        "right_entropy_bits": 4.775814887003634,
+        "minimum_entropy_bits": 4.528472446248367,
+        "excluded": false
+      },
+      {
+        "piece": "␠un",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.4182958340544896,
+        "right_entropy_bits": 1.7841591278514217,
+        "minimum_entropy_bits": 1.7841591278514217,
+        "excluded": false
+      },
+      {
+        "piece": "␠v",
+        "final_count": 9,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.725480556997868,
+        "right_entropy_bits": 2.113283334294875,
+        "minimum_entropy_bits": 2.113283334294875,
+        "excluded": false
+      },
+      {
+        "piece": "␠w",
+        "final_count": 41,
+        "descendant_count": 118,
+        "ratio": 0.2578616352201258,
+        "left_entropy_bits": 4.6193895044597815,
+        "right_entropy_bits": 3.5209611522730158,
+        "minimum_entropy_bits": 3.5209611522730158,
+        "excluded": false
+      },
+      {
+        "piece": "␠was",
+        "final_count": 50,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.648367439558378,
+        "right_entropy_bits": 4.743465189601647,
+        "minimum_entropy_bits": 4.648367439558378,
+        "excluded": false
+      },
+      {
+        "piece": "␠were",
+        "final_count": 19,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.110578014789016,
+        "right_entropy_bits": 4.142664355548848,
+        "minimum_entropy_bits": 3.110578014789016,
+        "excluded": false
+      },
+      {
+        "piece": "␠wh",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.1609640474436813,
+        "right_entropy_bits": 1.9609640474436811,
+        "minimum_entropy_bits": 1.9609640474436811,
+        "excluded": false
+      },
+      {
+        "piece": "␠with",
+        "final_count": 24,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.625814583693911,
+        "right_entropy_bits": 3.736440501696144,
+        "minimum_entropy_bits": 3.625814583693911,
+        "excluded": false
+      },
+      {
+        "piece": "␠work",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.106890595608519,
+        "right_entropy_bits": 2.4225797618424916,
+        "minimum_entropy_bits": 2.4225797618424916,
+        "excluded": false
+      },
+      {
+        "piece": "␠y",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.2776134368191157,
+        "right_entropy_bits": 0.8658566174572235,
+        "minimum_entropy_bits": 0.8658566174572235,
+        "excluded": false
+      },
+      {
+        "piece": "18",
+        "final_count": 8,
+        "descendant_count": 15,
+        "ratio": 0.34782608695652173,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 2.1556390622295662,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "186",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 2.063458298648303,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "19",
+        "final_count": 31,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 2.9180861336525608,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "Barker",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 2.321928094887362,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "In",
+        "final_count": 14,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 1.626688849701832,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "The",
+        "final_count": 23,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 3.729446194905256,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "ab",
+        "final_count": 20,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.541446071165522,
+        "right_entropy_bits": 2.365957320949175,
+        "minimum_entropy_bits": 2.365957320949175,
+        "excluded": false
+      },
+      {
+        "piece": "ac",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.913977073182752,
+        "right_entropy_bits": 2.7321588913645702,
+        "minimum_entropy_bits": 2.7321588913645702,
+        "excluded": false
+      },
+      {
+        "piece": "ad",
+        "final_count": 31,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.340031793699528,
+        "right_entropy_bits": 4.453880987666651,
+        "minimum_entropy_bits": 3.340031793699528,
+        "excluded": false
+      },
+      {
+        "piece": "ain",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.2825887305018333,
+        "right_entropy_bits": 2.5995812306460646,
+        "minimum_entropy_bits": 2.2825887305018333,
+        "excluded": false
+      },
+      {
+        "piece": "ak",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.584962500721156,
+        "right_entropy_bits": 2.8553885422075336,
+        "minimum_entropy_bits": 2.584962500721156,
+        "excluded": false
+      },
+      {
+        "piece": "al",
+        "final_count": 74,
+        "descendant_count": 70,
+        "ratio": 0.5138888888888888,
+        "left_entropy_bits": 4.594805481097004,
+        "right_entropy_bits": 5.144669750500961,
+        "minimum_entropy_bits": 4.594805481097004,
+        "excluded": false
+      },
+      {
+        "piece": "alk",
+        "final_count": 1,
+        "descendant_count": 25,
+        "ratio": 0.038461538461538464,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "all",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.586887840995814,
+        "right_entropy_bits": 3.528064311584049,
+        "minimum_entropy_bits": 2.586887840995814,
+        "excluded": false
+      },
+      {
+        "piece": "am",
+        "final_count": 28,
+        "descendant_count": 20,
+        "ratio": 0.5833333333333334,
+        "left_entropy_bits": 2.9722092797270987,
+        "right_entropy_bits": 2.963581604006164,
+        "minimum_entropy_bits": 2.963581604006164,
+        "excluded": false
+      },
+      {
+        "piece": "ame",
+        "final_count": 7,
+        "descendant_count": 13,
+        "ratio": 0.35,
+        "left_entropy_bits": 2.2359263506290326,
+        "right_entropy_bits": 2.8073549220576037,
+        "minimum_entropy_bits": 2.2359263506290326,
+        "excluded": false
+      },
+      {
+        "piece": "an",
+        "final_count": 74,
+        "descendant_count": 25,
+        "ratio": 0.7474747474747475,
+        "left_entropy_bits": 4.704263122584975,
+        "right_entropy_bits": 4.725798636685425,
+        "minimum_entropy_bits": 4.704263122584975,
+        "excluded": false
+      },
+      {
+        "piece": "and",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.872905595320056,
+        "right_entropy_bits": 3.640223928941852,
+        "minimum_entropy_bits": 2.872905595320056,
+        "excluded": false
+      },
+      {
+        "piece": "ans",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.8810947601100747,
+        "right_entropy_bits": 2.5073801024236357,
+        "minimum_entropy_bits": 1.8810947601100747,
+        "excluded": false
+      },
+      {
+        "piece": "ap",
+        "final_count": 37,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.3705587705665785,
+        "right_entropy_bits": 2.7616580945400697,
+        "minimum_entropy_bits": 2.7616580945400697,
+        "excluded": false
+      },
+      {
+        "piece": "ar",
+        "final_count": 54,
+        "descendant_count": 92,
+        "ratio": 0.3698630136986301,
+        "left_entropy_bits": 4.069818641798821,
+        "right_entropy_bits": 4.412230215792767,
+        "minimum_entropy_bits": 4.069818641798821,
+        "excluded": false
+      },
+      {
+        "piece": "ard",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.084962500721156,
+        "right_entropy_bits": 2.7516291673878226,
+        "minimum_entropy_bits": 2.7516291673878226,
+        "excluded": false
+      },
+      {
+        "piece": "ark",
+        "final_count": 4,
+        "descendant_count": 30,
+        "ratio": 0.11764705882352941,
+        "left_entropy_bits": 2.0,
+        "right_entropy_bits": 2.0,
+        "minimum_entropy_bits": 2.0,
+        "excluded": false
+      },
+      {
+        "piece": "arker",
+        "final_count": 0,
+        "descendant_count": 30,
+        "ratio": 0.0,
+        "left_entropy_bits": null,
+        "right_entropy_bits": null,
+        "minimum_entropy_bits": null,
+        "excluded": false
+      },
+      {
+        "piece": "art",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.038159681645953,
+        "right_entropy_bits": 2.7773627950641693,
+        "minimum_entropy_bits": 2.038159681645953,
+        "excluded": false
+      },
+      {
+        "piece": "ary",
+        "final_count": 16,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.0550365325772657,
+        "right_entropy_bits": 3.327819531114783,
+        "minimum_entropy_bits": 2.0550365325772657,
+        "excluded": false
+      },
+      {
+        "piece": "as",
+        "final_count": 29,
+        "descendant_count": 60,
+        "ratio": 0.3258426966292135,
+        "left_entropy_bits": 3.65041030517399,
+        "right_entropy_bits": 3.4266094432542293,
+        "minimum_entropy_bits": 3.4266094432542293,
+        "excluded": false
+      },
+      {
+        "piece": "ass",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 0.7219280948873623,
+        "right_entropy_bits": 2.6464393446710157,
+        "minimum_entropy_bits": 0.7219280948873623,
+        "excluded": false
+      },
+      {
+        "piece": "at",
+        "final_count": 46,
+        "descendant_count": 70,
+        "ratio": 0.39655172413793105,
+        "left_entropy_bits": 4.561286684176787,
+        "right_entropy_bits": 4.083587370023807,
+        "minimum_entropy_bits": 4.083587370023807,
+        "excluded": false
+      },
+      {
+        "piece": "ate",
+        "final_count": 16,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.2806390622295662,
+        "right_entropy_bits": 3.75,
+        "minimum_entropy_bits": 2.2806390622295662,
+        "excluded": false
+      },
+      {
+        "piece": "ated",
+        "final_count": 16,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.2806390622295662,
+        "right_entropy_bits": 3.024397470347699,
+        "minimum_entropy_bits": 3.024397470347699,
+        "excluded": false
+      },
+      {
+        "piece": "ation",
+        "final_count": 23,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.8492239123906247,
+        "right_entropy_bits": 3.31163573949496,
+        "minimum_entropy_bits": 3.31163573949496,
+        "excluded": false
+      },
+      {
+        "piece": "ay",
+        "final_count": 23,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.872511153838009,
+        "right_entropy_bits": 4.001822825622231,
+        "minimum_entropy_bits": 2.872511153838009,
+        "excluded": false
+      },
+      {
+        "piece": "ber",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.9609640474436811,
+        "right_entropy_bits": 2.5219280948873624,
+        "minimum_entropy_bits": 1.9609640474436811,
+        "excluded": false
+      },
+      {
+        "piece": "ce",
+        "final_count": 39,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.224773296385318,
+        "right_entropy_bits": 3.982992282465551,
+        "minimum_entropy_bits": 3.224773296385318,
+        "excluded": false
+      },
+      {
+        "piece": "ch",
+        "final_count": 31,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.5263039714678297,
+        "right_entropy_bits": 3.974695407915898,
+        "minimum_entropy_bits": 3.5263039714678297,
+        "excluded": false
+      },
+      {
+        "piece": "ci",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.0464393446710156,
+        "right_entropy_bits": 2.1709505944546685,
+        "minimum_entropy_bits": 2.0464393446710156,
+        "excluded": false
+      },
+      {
+        "piece": "ck",
+        "final_count": 12,
+        "descendant_count": 21,
+        "ratio": 0.36363636363636365,
+        "left_entropy_bits": 1.792481250360578,
+        "right_entropy_bits": 2.8553885422075336,
+        "minimum_entropy_bits": 1.792481250360578,
+        "excluded": false
+      },
+      {
+        "piece": "ct",
+        "final_count": 25,
+        "descendant_count": 12,
+        "ratio": 0.6756756756756757,
+        "left_entropy_bits": 2.9150849518197797,
+        "right_entropy_bits": 3.5238561897747247,
+        "minimum_entropy_bits": 2.9150849518197797,
+        "excluded": false
+      },
+      {
+        "piece": "ear",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.8498687225851778,
+        "right_entropy_bits": 2.8954238702803154,
+        "minimum_entropy_bits": 1.8498687225851778,
+        "excluded": false
+      },
+      {
+        "piece": "ect",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.6140054628542204,
+        "right_entropy_bits": 3.2516291673878226,
+        "minimum_entropy_bits": 1.6140054628542204,
+        "excluded": false
+      },
+      {
+        "piece": "ed",
+        "final_count": 168,
+        "descendant_count": 27,
+        "ratio": 0.8615384615384616,
+        "left_entropy_bits": 5.607098063560781,
+        "right_entropy_bits": 5.24739782292921,
+        "minimum_entropy_bits": 5.24739782292921,
+        "excluded": false
+      },
+      {
+        "piece": "eder",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.4949188482339508,
+        "right_entropy_bits": 2.1180782093497093,
+        "minimum_entropy_bits": 1.4949188482339508,
+        "excluded": false
+      },
+      {
+        "piece": "el",
+        "final_count": 53,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.235101294586525,
+        "right_entropy_bits": 3.9640724648393495,
+        "minimum_entropy_bits": 3.9640724648393495,
+        "excluded": false
+      },
+      {
+        "piece": "em",
+        "final_count": 22,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.4428621651554665,
+        "right_entropy_bits": 2.9540036423298544,
+        "minimum_entropy_bits": 2.9540036423298544,
+        "excluded": false
+      },
+      {
+        "piece": "en",
+        "final_count": 79,
+        "descendant_count": 91,
+        "ratio": 0.4647058823529412,
+        "left_entropy_bits": 4.5638046480960766,
+        "right_entropy_bits": 4.966454919167679,
+        "minimum_entropy_bits": 4.5638046480960766,
+        "excluded": false
+      },
+      {
+        "piece": "enal",
+        "final_count": 1,
+        "descendant_count": 26,
+        "ratio": 0.037037037037037035,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "end",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.727497224852472,
+        "right_entropy_bits": 2.8895494308620875,
+        "minimum_entropy_bits": 2.727497224852472,
+        "excluded": false
+      },
+      {
+        "piece": "ent",
+        "final_count": 35,
+        "descendant_count": 12,
+        "ratio": 0.7446808510638298,
+        "left_entropy_bits": 3.911306145999518,
+        "right_entropy_bits": 4.128724445269141,
+        "minimum_entropy_bits": 3.911306145999518,
+        "excluded": false
+      },
+      {
+        "piece": "er",
+        "final_count": 109,
+        "descendant_count": 148,
+        "ratio": 0.42412451361867703,
+        "left_entropy_bits": 4.744326986315499,
+        "right_entropy_bits": 5.3174582112956585,
+        "minimum_entropy_bits": 4.744326986315499,
+        "excluded": false
+      },
+      {
+        "piece": "ere",
+        "final_count": 1,
+        "descendant_count": 19,
+        "ratio": 0.05,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "ers",
+        "final_count": 23,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.708132064658601,
+        "right_entropy_bits": 3.729446194905256,
+        "minimum_entropy_bits": 3.708132064658601,
+        "excluded": false
+      },
+      {
+        "piece": "es",
+        "final_count": 74,
+        "descendant_count": 61,
+        "ratio": 0.5481481481481482,
+        "left_entropy_bits": 4.908363163770924,
+        "right_entropy_bits": 4.742624481250783,
+        "minimum_entropy_bits": 4.742624481250783,
+        "excluded": false
+      },
+      {
+        "piece": "ess",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.133937566094917,
+        "right_entropy_bits": 3.546593564294939,
+        "minimum_entropy_bits": 2.133937566094917,
+        "excluded": false
+      },
+      {
+        "piece": "est",
+        "final_count": 16,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.8522170014624826,
+        "right_entropy_bits": 3.024397470347699,
+        "minimum_entropy_bits": 2.8522170014624826,
+        "excluded": false
+      },
+      {
+        "piece": "et",
+        "final_count": 22,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.0773238024297203,
+        "right_entropy_bits": 3.970573095811685,
+        "minimum_entropy_bits": 3.0773238024297203,
+        "excluded": false
+      },
+      {
+        "piece": "gh",
+        "final_count": 1,
+        "descendant_count": 11,
+        "ratio": 0.08333333333333333,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "he",
+        "final_count": 22,
+        "descendant_count": 346,
+        "ratio": 0.059782608695652176,
+        "left_entropy_bits": 2.895505620611538,
+        "right_entropy_bits": 3.5160276412662306,
+        "minimum_entropy_bits": 2.895505620611538,
+        "excluded": false
+      },
+      {
+        "piece": "hed",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.6140054628542204,
+        "right_entropy_bits": 3.4182958340544896,
+        "minimum_entropy_bits": 1.6140054628542204,
+        "excluded": false
+      },
+      {
+        "piece": "her",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.1219280948873624,
+        "right_entropy_bits": 3.1219280948873624,
+        "minimum_entropy_bits": 2.1219280948873624,
+        "excluded": false
+      },
+      {
+        "piece": "ian",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.5220552088742005,
+        "right_entropy_bits": 3.188721875540867,
+        "minimum_entropy_bits": 2.5220552088742005,
+        "excluded": false
+      },
+      {
+        "piece": "ic",
+        "final_count": 57,
+        "descendant_count": 17,
+        "ratio": 0.7702702702702703,
+        "left_entropy_bits": 4.318176041750051,
+        "right_entropy_bits": 4.4187959977765345,
+        "minimum_entropy_bits": 4.318176041750051,
+        "excluded": false
+      },
+      {
+        "piece": "id",
+        "final_count": 23,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.000972825245975,
+        "right_entropy_bits": 3.186392934223819,
+        "minimum_entropy_bits": 3.000972825245975,
+        "excluded": false
+      },
+      {
+        "piece": "ies",
+        "final_count": 14,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.692380602454975,
+        "right_entropy_bits": 2.9852281360342516,
+        "minimum_entropy_bits": 2.692380602454975,
+        "excluded": false
+      },
+      {
+        "piece": "ig",
+        "final_count": 18,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.2390979179887864,
+        "right_entropy_bits": 1.925126559410829,
+        "minimum_entropy_bits": 1.925126559410829,
+        "excluded": false
+      },
+      {
+        "piece": "il",
+        "final_count": 30,
+        "descendant_count": 36,
+        "ratio": 0.45454545454545453,
+        "left_entropy_bits": 3.295600714687273,
+        "right_entropy_bits": 3.961406329721843,
+        "minimum_entropy_bits": 3.295600714687273,
+        "excluded": false
+      },
+      {
+        "piece": "ild",
+        "final_count": 13,
+        "descendant_count": 13,
+        "ratio": 0.5,
+        "left_entropy_bits": 1.2389012566026305,
+        "right_entropy_bits": 1.7004397181410922,
+        "minimum_entropy_bits": 1.2389012566026305,
+        "excluded": false
+      },
+      {
+        "piece": "ilding",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 0.9957274520849255,
+        "right_entropy_bits": 3.180832987205441,
+        "minimum_entropy_bits": 0.9957274520849255,
+        "excluded": false
+      },
+      {
+        "piece": "ilit",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 0.7219280948873623,
+        "right_entropy_bits": 1.3709505944546687,
+        "minimum_entropy_bits": 0.7219280948873623,
+        "excluded": false
+      },
+      {
+        "piece": "im",
+        "final_count": 18,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.905764584655453,
+        "right_entropy_bits": 2.9329993066372895,
+        "minimum_entropy_bits": 2.905764584655453,
+        "excluded": false
+      },
+      {
+        "piece": "in",
+        "final_count": 52,
+        "descendant_count": 247,
+        "ratio": 0.17391304347826086,
+        "left_entropy_bits": 4.305645006353,
+        "right_entropy_bits": 4.132636113615507,
+        "minimum_entropy_bits": 4.132636113615507,
+        "excluded": false
+      },
+      {
+        "piece": "ing",
+        "final_count": 84,
+        "descendant_count": 24,
+        "ratio": 0.7777777777777778,
+        "left_entropy_bits": 4.959939149507312,
+        "right_entropy_bits": 4.805717501383702,
+        "minimum_entropy_bits": 4.805717501383702,
+        "excluded": false
+      },
+      {
+        "piece": "ingt",
+        "final_count": 0,
+        "descendant_count": 11,
+        "ratio": 0.0,
+        "left_entropy_bits": null,
+        "right_entropy_bits": null,
+        "minimum_entropy_bits": null,
+        "excluded": false
+      },
+      {
+        "piece": "ington",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.3221793455166666,
+        "right_entropy_bits": 3.2776134368191157,
+        "minimum_entropy_bits": 1.3221793455166666,
+        "excluded": false
+      },
+      {
+        "piece": "ion",
+        "final_count": 23,
+        "descendant_count": 37,
+        "ratio": 0.38333333333333336,
+        "left_entropy_bits": 2.631832608042798,
+        "right_entropy_bits": 3.6381476962048267,
+        "minimum_entropy_bits": 2.631832608042798,
+        "excluded": false
+      },
+      {
+        "piece": "ious",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.4572659136233872,
+        "right_entropy_bits": 3.3927474104487847,
+        "minimum_entropy_bits": 1.4572659136233872,
+        "excluded": false
+      },
+      {
+        "piece": "ir",
+        "final_count": 19,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.815333779292342,
+        "right_entropy_bits": 3.32110433057849,
+        "minimum_entropy_bits": 2.815333779292342,
+        "excluded": false
+      },
+      {
+        "piece": "is",
+        "final_count": 64,
+        "descendant_count": 36,
+        "ratio": 0.64,
+        "left_entropy_bits": 4.040373393011544,
+        "right_entropy_bits": 4.348584617629516,
+        "minimum_entropy_bits": 4.040373393011544,
+        "excluded": false
+      },
+      {
+        "piece": "ist",
+        "final_count": 24,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.5178941476196224,
+        "right_entropy_bits": 3.184560814286289,
+        "minimum_entropy_bits": 3.184560814286289,
+        "excluded": false
+      },
+      {
+        "piece": "it",
+        "final_count": 59,
+        "descendant_count": 99,
+        "ratio": 0.37341772151898733,
+        "left_entropy_bits": 4.895106396709462,
+        "right_entropy_bits": 4.339667414791378,
+        "minimum_entropy_bits": 4.339667414791378,
+        "excluded": false
+      },
+      {
+        "piece": "ith",
+        "final_count": 3,
+        "descendant_count": 24,
+        "ratio": 0.1111111111111111,
+        "left_entropy_bits": 0.9182958340544896,
+        "right_entropy_bits": 1.584962500721156,
+        "minimum_entropy_bits": 0.9182958340544896,
+        "excluded": true
+      },
+      {
+        "piece": "ition",
+        "final_count": 14,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.3248629576173565,
+        "right_entropy_bits": 3.0391486719030705,
+        "minimum_entropy_bits": 2.3248629576173565,
+        "excluded": false
+      },
+      {
+        "piece": "ittle",
+        "final_count": 1,
+        "descendant_count": 21,
+        "ratio": 0.045454545454545456,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "iv",
+        "final_count": 27,
+        "descendant_count": 11,
+        "ratio": 0.7105263157894737,
+        "left_entropy_bits": 3.1797273164975124,
+        "right_entropy_bits": 3.0036203719729397,
+        "minimum_entropy_bits": 3.0036203719729397,
+        "excluded": false
+      },
+      {
+        "piece": "ive",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.8453509366224368,
+        "right_entropy_bits": 3.2776134368191157,
+        "minimum_entropy_bits": 2.8453509366224368,
+        "excluded": false
+      },
+      {
+        "piece": "ld",
+        "final_count": 5,
+        "descendant_count": 10,
+        "ratio": 0.3333333333333333,
+        "left_entropy_bits": 1.3709505944546687,
+        "right_entropy_bits": 1.9219280948873623,
+        "minimum_entropy_bits": 1.3709505944546687,
+        "excluded": false
+      },
+      {
+        "piece": "le",
+        "final_count": 46,
+        "descendant_count": 28,
+        "ratio": 0.6216216216216216,
+        "left_entropy_bits": 3.988144771641998,
+        "right_entropy_bits": 4.526294499949899,
+        "minimum_entropy_bits": 3.988144771641998,
+        "excluded": false
+      },
+      {
+        "piece": "les",
+        "final_count": 1,
+        "descendant_count": 17,
+        "ratio": 0.05555555555555555,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "low",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.8879185026711327,
+        "right_entropy_bits": 1.7841591278514217,
+        "minimum_entropy_bits": 1.7841591278514217,
+        "excluded": false
+      },
+      {
+        "piece": "ly",
+        "final_count": 39,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.929149578103759,
+        "right_entropy_bits": 4.109138039864114,
+        "minimum_entropy_bits": 3.929149578103759,
+        "excluded": false
+      },
+      {
+        "piece": "ment",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.584962500721156,
+        "right_entropy_bits": 2.8553885422075336,
+        "minimum_entropy_bits": 2.584962500721156,
+        "excluded": false
+      },
+      {
+        "piece": "nd",
+        "final_count": 16,
+        "descendant_count": 129,
+        "ratio": 0.1103448275862069,
+        "left_entropy_bits": 1.7743974703476992,
+        "right_entropy_bits": 3.077819531114783,
+        "minimum_entropy_bits": 1.7743974703476992,
+        "excluded": false
+      },
+      {
+        "piece": "ok",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.198183947911799,
+        "right_entropy_bits": 2.931208948910323,
+        "minimum_entropy_bits": 1.198183947911799,
+        "excluded": false
+      },
+      {
+        "piece": "ol",
+        "final_count": 27,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.2319461881351814,
+        "right_entropy_bits": 3.374845838132356,
+        "minimum_entropy_bits": 3.2319461881351814,
+        "excluded": false
+      },
+      {
+        "piece": "om",
+        "final_count": 18,
+        "descendant_count": 15,
+        "ratio": 0.5454545454545454,
+        "left_entropy_bits": 2.8855130303998817,
+        "right_entropy_bits": 2.473851389610045,
+        "minimum_entropy_bits": 2.473851389610045,
+        "excluded": false
+      },
+      {
+        "piece": "on",
+        "final_count": 63,
+        "descendant_count": 138,
+        "ratio": 0.31343283582089554,
+        "left_entropy_bits": 4.322031114968267,
+        "right_entropy_bits": 4.196377988604876,
+        "minimum_entropy_bits": 4.196377988604876,
+        "excluded": false
+      },
+      {
+        "piece": "op",
+        "final_count": 17,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.0191534613250353,
+        "right_entropy_bits": 2.6986604604011153,
+        "minimum_entropy_bits": 2.0191534613250353,
+        "excluded": false
+      },
+      {
+        "piece": "or",
+        "final_count": 88,
+        "descendant_count": 95,
+        "ratio": 0.4808743169398907,
+        "left_entropy_bits": 4.8663956202327325,
+        "right_entropy_bits": 5.025114465402163,
+        "minimum_entropy_bits": 4.8663956202327325,
+        "excluded": false
+      },
+      {
+        "piece": "ork",
+        "final_count": 4,
+        "descendant_count": 15,
+        "ratio": 0.21052631578947367,
+        "left_entropy_bits": 0.8112781244591328,
+        "right_entropy_bits": 1.5,
+        "minimum_entropy_bits": 0.8112781244591328,
+        "excluded": false
+      },
+      {
+        "piece": "ort",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.5219280948873624,
+        "right_entropy_bits": 2.9219280948873623,
+        "minimum_entropy_bits": 2.5219280948873624,
+        "excluded": false
+      },
+      {
+        "piece": "os",
+        "final_count": 20,
+        "descendant_count": 20,
+        "ratio": 0.5,
+        "left_entropy_bits": 3.3709505944546687,
+        "right_entropy_bits": 2.6016094970590276,
+        "minimum_entropy_bits": 2.6016094970590276,
+        "excluded": false
+      },
+      {
+        "piece": "ot",
+        "final_count": 24,
+        "descendant_count": 12,
+        "ratio": 0.6666666666666666,
+        "left_entropy_bits": 2.8018796874098553,
+        "right_entropy_bits": 3.7720552088742,
+        "minimum_entropy_bits": 2.8018796874098553,
+        "excluded": false
+      },
+      {
+        "piece": "oth",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.6258145836939115,
+        "right_entropy_bits": 2.7516291673878226,
+        "minimum_entropy_bits": 1.6258145836939115,
+        "excluded": false
+      },
+      {
+        "piece": "ou",
+        "final_count": 23,
+        "descendant_count": 56,
+        "ratio": 0.2911392405063291,
+        "left_entropy_bits": 2.848373912014369,
+        "right_entropy_bits": 2.370963042825407,
+        "minimum_entropy_bits": 2.370963042825407,
+        "excluded": false
+      },
+      {
+        "piece": "ough",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.4911148500551856,
+        "right_entropy_bits": 2.5949066182439395,
+        "minimum_entropy_bits": 1.4911148500551856,
+        "excluded": false
+      },
+      {
+        "piece": "ould",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.3567796494470397,
+        "right_entropy_bits": 2.1609640474436813,
+        "minimum_entropy_bits": 1.3567796494470397,
+        "excluded": false
+      },
+      {
+        "piece": "ous",
+        "final_count": 8,
+        "descendant_count": 13,
+        "ratio": 0.38095238095238093,
+        "left_entropy_bits": 1.75,
+        "right_entropy_bits": 1.5487949406953985,
+        "minimum_entropy_bits": 1.5487949406953985,
+        "excluded": false
+      },
+      {
+        "piece": "out",
+        "final_count": 14,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.217021885879718,
+        "right_entropy_bits": 2.692380602454975,
+        "minimum_entropy_bits": 2.217021885879718,
+        "excluded": false
+      },
+      {
+        "piece": "ov",
+        "final_count": 23,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.9638096525384383,
+        "right_entropy_bits": 2.4305634566040726,
+        "minimum_entropy_bits": 2.4305634566040726,
+        "excluded": false
+      },
+      {
+        "piece": "ow",
+        "final_count": 17,
+        "descendant_count": 12,
+        "ratio": 0.5862068965517241,
+        "left_entropy_bits": 2.6542553132150286,
+        "right_entropy_bits": 1.775523493673489,
+        "minimum_entropy_bits": 1.775523493673489,
+        "excluded": false
+      },
+      {
+        "piece": "pos",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.0464393446710156,
+        "right_entropy_bits": 2.6464393446710157,
+        "minimum_entropy_bits": 2.0464393446710156,
+        "excluded": false
+      },
+      {
+        "piece": "pp",
+        "final_count": 14,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.41379956460568,
+        "right_entropy_bits": 3.0391486719030705,
+        "minimum_entropy_bits": 2.41379956460568,
+        "excluded": false
+      },
+      {
+        "piece": "qu",
+        "final_count": 18,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.6337314206421327,
+        "right_entropy_bits": 3.1279868068776753,
+        "minimum_entropy_bits": 2.6337314206421327,
+        "excluded": false
+      },
+      {
+        "piece": "re",
+        "final_count": 33,
+        "descendant_count": 65,
+        "ratio": 0.336734693877551,
+        "left_entropy_bits": 3.6283621207766186,
+        "right_entropy_bits": 4.195909270873605,
+        "minimum_entropy_bits": 3.6283621207766186,
+        "excluded": false
+      },
+      {
+        "piece": "ri",
+        "final_count": 23,
+        "descendant_count": 23,
+        "ratio": 0.5,
+        "left_entropy_bits": 3.1333807190554,
+        "right_entropy_bits": 3.203365087509175,
+        "minimum_entropy_bits": 3.1333807190554,
+        "excluded": false
+      },
+      {
+        "piece": "ria",
+        "final_count": 1,
+        "descendant_count": 22,
+        "ratio": 0.043478260869565216,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "ro",
+        "final_count": 34,
+        "descendant_count": 28,
+        "ratio": 0.5483870967741935,
+        "left_entropy_bits": 3.6793951065171857,
+        "right_entropy_bits": 3.442870283576997,
+        "minimum_entropy_bits": 3.442870283576997,
+        "excluded": false
+      },
+      {
+        "piece": "rom",
+        "final_count": 1,
+        "descendant_count": 12,
+        "ratio": 0.07692307692307693,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": -0.0,
+        "minimum_entropy_bits": -0.0,
+        "excluded": true
+      },
+      {
+        "piece": "ron",
+        "final_count": 7,
+        "descendant_count": 17,
+        "ratio": 0.2916666666666667,
+        "left_entropy_bits": 1.8423709931771084,
+        "right_entropy_bits": 1.8423709931771084,
+        "minimum_entropy_bits": 1.8423709931771084,
+        "excluded": false
+      },
+      {
+        "piece": "rs",
+        "final_count": 7,
+        "descendant_count": 26,
+        "ratio": 0.21212121212121213,
+        "left_entropy_bits": 1.9502120649147467,
+        "right_entropy_bits": 1.9502120649147467,
+        "minimum_entropy_bits": 1.9502120649147467,
+        "excluded": false
+      },
+      {
+        "piece": "rsenal",
+        "final_count": 0,
+        "descendant_count": 26,
+        "ratio": 0.0,
+        "left_entropy_bits": null,
+        "right_entropy_bits": null,
+        "minimum_entropy_bits": null,
+        "excluded": false
+      },
+      {
+        "piece": "ru",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.789929075309999,
+        "right_entropy_bits": 1.6767370300521325,
+        "minimum_entropy_bits": 1.6767370300521325,
+        "excluded": false
+      },
+      {
+        "piece": "st",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.2825887305018333,
+        "right_entropy_bits": 2.739572261986723,
+        "minimum_entropy_bits": 2.2825887305018333,
+        "excluded": false
+      },
+      {
+        "piece": "ter",
+        "final_count": 43,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 3.5564129408902834,
+        "right_entropy_bits": 4.85056969651225,
+        "minimum_entropy_bits": 3.5564129408902834,
+        "excluded": false
+      },
+      {
+        "piece": "th",
+        "final_count": 15,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.8402239289418523,
+        "right_entropy_bits": 3.323231428797621,
+        "minimum_entropy_bits": 2.8402239289418523,
+        "excluded": false
+      },
+      {
+        "piece": "tle",
+        "final_count": 6,
+        "descendant_count": 22,
+        "ratio": 0.21428571428571427,
+        "left_entropy_bits": -0.0,
+        "right_entropy_bits": 1.2516291673878228,
+        "minimum_entropy_bits": -0.0,
+        "excluded": false
+      },
+      {
+        "piece": "ub",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.419556298571613,
+        "right_entropy_bits": 1.8810947601100747,
+        "minimum_entropy_bits": 1.419556298571613,
+        "excluded": false
+      },
+      {
+        "piece": "ue",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.9591479170272446,
+        "right_entropy_bits": 2.292481250360578,
+        "minimum_entropy_bits": 1.9591479170272446,
+        "excluded": false
+      },
+      {
+        "piece": "ul",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.6635327548042547,
+        "right_entropy_bits": 2.550340709546388,
+        "minimum_entropy_bits": 2.550340709546388,
+        "excluded": false
+      },
+      {
+        "piece": "um",
+        "final_count": 14,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.1280852788913944,
+        "right_entropy_bits": 2.8962915290459277,
+        "minimum_entropy_bits": 2.1280852788913944,
+        "excluded": false
+      },
+      {
+        "piece": "un",
+        "final_count": 17,
+        "descendant_count": 12,
+        "ratio": 0.5862068965517241,
+        "left_entropy_bits": 2.5424826938097276,
+        "right_entropy_bits": 2.3071885761626687,
+        "minimum_entropy_bits": 2.3071885761626687,
+        "excluded": false
+      },
+      {
+        "piece": "ur",
+        "final_count": 44,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 4.0805444717496355,
+        "right_entropy_bits": 3.6937365170075025,
+        "minimum_entropy_bits": 3.6937365170075025,
+        "excluded": false
+      },
+      {
+        "piece": "us",
+        "final_count": 27,
+        "descendant_count": 13,
+        "ratio": 0.675,
+        "left_entropy_bits": 2.8760335779708552,
+        "right_entropy_bits": 2.739938317203912,
+        "minimum_entropy_bits": 2.739938317203912,
+        "excluded": false
+      },
+      {
+        "piece": "ust",
+        "final_count": 13,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 1.8919954870390203,
+        "right_entropy_bits": 2.038159681645953,
+        "minimum_entropy_bits": 1.8919954870390203,
+        "excluded": false
+      },
+      {
+        "piece": "ut",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.3685225277282065,
+        "right_entropy_bits": 2.6635327548042547,
+        "minimum_entropy_bits": 2.3685225277282065,
+        "excluded": false
+      },
+      {
+        "piece": "\\xe3\\x81",
+        "final_count": 10,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.8464393446710154,
+        "right_entropy_bits": 2.1609640474436813,
+        "minimum_entropy_bits": 2.1609640474436813,
+        "excluded": false
+      },
+      {
+        "piece": "\\xe3\\x82",
+        "final_count": 11,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.16264411804726,
+        "right_entropy_bits": 2.16264411804726,
+        "minimum_entropy_bits": 2.16264411804726,
+        "excluded": false
+      },
+      {
+        "piece": "\\xe3\\x83",
+        "final_count": 12,
+        "descendant_count": 0,
+        "ratio": 1.0,
+        "left_entropy_bits": 2.0,
+        "right_entropy_bits": 2.0,
+        "minimum_entropy_bits": 2.0,
+        "excluded": false
+      }
+    ]
+  },
+  "contract": {
+    "embedding_rows": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "output_rows": [
+      [
+        0.2,
+        0.1,
+        0.0
+      ],
+      [
+        0.0,
+        0.3,
+        0.1
+      ],
+      [
+        0.1,
+        0.0,
+        0.4
+      ],
+      [
+        0.4,
+        0.2,
+        0.1
+      ],
+      [
+        0.1,
+        0.3,
+        0.2
+      ]
+    ],
+    "output_bias": [
+      0.0,
+      0.1,
+      -0.1,
+      0.2,
+      0.0
+    ],
+    "retained_old_ids": [
+      0,
+      2,
+      4
+    ],
+    "old_to_new": {
+      "0": 0,
+      "2": 1,
+      "4": 2
+    },
+    "old_input_ids": [
+      4,
+      0,
+      2
+    ],
+    "new_input_ids": [
+      2,
+      0,
+      1
+    ],
+    "hidden": [
+      0.5,
+      1.0,
+      -0.5
+    ],
+    "original_logits": [
+      0.2,
+      0.35,
+      -0.25,
+      0.55,
+      0.24999999999999997
+    ],
+    "retained_logits": [
+      0.2,
+      -0.25,
+      0.24999999999999997
+    ],
+    "original_probabilities": [
+      0.18976048479605653,
+      0.2204702291527782,
+      0.12099662717136113,
+      0.269282945979408,
+      0.1994897129003962
+    ],
+    "masked_probabilities": [
+      0.37189939368111985,
+      0.0,
+      0.23713352298215065,
+      0.0,
+      0.39096708333672947
+    ],
+    "compacted_probabilities": [
+      0.37189939368111985,
+      0.23713352298215065,
+      0.39096708333672947
+    ],
+    "untied_parameters_before_after": [
+      35,
+      21
+    ],
+    "tied_parameters_before_after": [
+      20,
+      12
+    ],
+    "tied_compact_weights_share_parameter": true,
+    "tied_compact_logits": [
+      0.5,
+      -0.6,
+      0.0
+    ],
+    "prefix": {
+      "old_ids": [
+        0,
+        2,
+        4
+      ],
+      "edited_ids": [
+        0,
+        1,
+        4
+      ],
+      "reusable_positions": 1,
+      "changed_version_reusable_positions": 0,
+      "old_keys": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          1.0,
+          2.0
+        ],
+        [
+          4.0,
+          2.0,
+          4.0
+        ]
+      ],
+      "edited_keys": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          2.0,
+          1.0
+        ],
+        [
+          4.0,
+          3.0,
+          3.0
+        ]
+      ]
+    },
+    "equal_nll_metrics": [
+      {
+        "targets": 2,
+        "token_perplexity": 7.38905609893065,
+        "bits_per_byte": 0.7213475204444817
+      },
+      {
+        "targets": 4,
+        "token_perplexity": 2.718281828459045,
+        "bits_per_byte": 0.7213475204444817
+      }
+    ]
+  },
+  "libraries": {
+    "versions": {
+      "tokenizers": "0.22.2",
+      "sentencepiece": "0.2.1"
+    },
+    "budget": 512,
+    "bytelevel_bpe": {
+      "vocab_size": 512,
+      "test": {
+        "utf8_bytes": 4996,
+        "tokens": 2564,
+        "bytes_per_token": 1.9485179407176287
+      },
+      "example_pieces": [
+        "S",
+        "en",
+        "j",
+        "Å",
+        "į",
+        "Ġn",
+        "o",
+        "ĠValkyria",
+        "Ġ3",
+        "Ġ:",
+        "Ġ",
+        "U",
+        "n",
+        "re",
+        "c",
+        "or",
+        "d",
+        "ed",
+        "ĠChronicles",
+        "Ġ",
+        "(",
+        "ĠJ",
+        "ap",
+        "an",
+        "es",
+        "e",
+        "Ġ:",
+        "Ġ",
+        "æ",
+        "Ī",
+        "¦",
+        "å",
+        "ł",
+        "´",
+        "ãģ",
+        "®",
+        "ãĥ",
+        "´",
+        "ãĤ",
+        "¡",
+        "ãĥ",
+        "«",
+        "ãĤ",
+        "Ń",
+        "ãĥ",
+        "¥",
+        "ãĥ",
+        "ª",
+        "ãĤ",
+        "¢",
+        "3",
+        "Ġ,",
+        "Ġl",
+        "it",
+        "Ġ.",
+        "ĠValkyria",
+        "Ġof",
+        "Ġthe",
+        "ĠB",
+        "at",
+        "tle",
+        "f",
+        "i",
+        "el",
+        "d",
+        "Ġ3",
+        "Ġ",
+        ")",
+        "Ġ,",
+        "Ġcom",
+        "m",
+        "on",
+        "ly",
+        "Ġre",
+        "f",
+        "er",
+        "r",
+        "ed",
+        "Ġto",
+        "Ġas",
+        "ĠValkyria",
+        "ĠChronicles",
+        "ĠII",
+        "I",
+        "Ġo",
+        "ut",
+        "s",
+        "id",
+        "e",
+        "ĠJ",
+        "ap",
+        "an",
+        "Ġ,",
+        "Ġis",
+        "Ġa",
+        "Ġt",
+        "a",
+        "ct",
+        "ic",
+        "al",
+        "Ġ",
+        "ro",
+        "le",
+        "Ġ@-@",
+        "Ġpl",
+        "ay",
+        "ing",
+        "Ġ",
+        "v",
+        "id",
+        "e",
+        "o",
+        "Ġgame",
+        "Ġde",
+        "v",
+        "el",
+        "op",
+        "ed",
+        "Ġby",
+        "ĠS",
+        "e",
+        "g",
+        "a",
+        "Ġand",
+        "ĠM",
+        "ed",
+        "i",
+        "a",
+        ".",
+        "V",
+        "is",
+        "ion",
+        "Ġfor",
+        "Ġ"
+      ]
+    },
+    "sentencepiece_unigram": {
+      "vocab_size": 512,
+      "test": {
+        "utf8_bytes": 4996,
+        "tokens": 3209,
+        "bytes_per_token": 1.55687129947024
+      },
+      "example_pieces": [
+        "S",
+        "en",
+        "j",
+        "ō",
+        "▁no",
+        "▁Valky",
+        "ria",
+        "▁3",
+        "▁",
+        ":",
+        "▁",
+        "U",
+        "n",
+        "re",
+        "c",
+        "or",
+        "d",
+        "ed",
+        "▁Chr",
+        "on",
+        "ic",
+        "les",
+        "▁",
+        "(",
+        "▁",
+        "J",
+        "a",
+        "p",
+        "an",
+        "es",
+        "e",
+        "▁",
+        ":",
+        "▁",
+        "戦",
+        "場",
+        "の",
+        "ヴ",
+        "ァ",
+        "ル",
+        "キ",
+        "ュ",
+        "リ",
+        "ア",
+        "3",
+        "▁,",
+        "▁",
+        "l",
+        "it",
+        "▁.",
+        "▁Valky",
+        "ria",
+        "▁of",
+        "▁the",
+        "▁",
+        "B",
+        "a",
+        "ttle",
+        "f",
+        "i",
+        "el",
+        "d",
+        "▁3",
+        "▁",
+        ")",
+        "▁,",
+        "▁co",
+        "m",
+        "m",
+        "on",
+        "l",
+        "y",
+        "▁re",
+        "f",
+        "er",
+        "r",
+        "ed",
+        "▁to",
+        "▁as",
+        "▁Valky",
+        "ria",
+        "▁Chr",
+        "on",
+        "ic",
+        "les",
+        "▁",
+        "I",
+        "I",
+        "I",
+        "▁",
+        "out",
+        "side",
+        "▁",
+        "J",
+        "a",
+        "p",
+        "an",
+        "▁,",
+        "▁",
+        "is",
+        "▁a",
+        "▁",
+        "t",
+        "a",
+        "c",
+        "t",
+        "ic",
+        "al",
+        "▁",
+        "r",
+        "ol",
+        "e",
+        "▁@-",
+        "@",
+        "▁p",
+        "l",
+        "a",
+        "y",
+        "ing",
+        "▁",
+        "v",
+        "i",
+        "d",
+        "e",
+        "o",
+        "▁game",
+        "▁de",
+        "ve",
+        "lo",
+        "p",
+        "ed",
+        "▁b",
+        "y",
+        "▁S",
+        "e",
+        "ga",
+        "▁",
+        "and",
+        "▁",
+        "M",
+        "ed",
+        "i",
+        "a",
+        ".",
+        "V",
+        "is",
+        "ion",
+        "▁for",
+        "▁"
+      ],
+      "sampled_pieces": [
+        [
+          "S",
+          "e",
+          "n",
+          "j",
+          "ō",
+          "▁no",
+          "▁Valky",
+          "ria",
+          "▁3",
+          "▁",
+          ":",
+          "▁",
+          "U",
+          "n",
+          "r",
+          "e",
+          "c",
+          "or",
+          "d",
+          "ed",
+          "▁Chr",
+          "on",
+          "ic",
+          "les",
+          "▁",
+          "(",
+          "▁",
+          "J",
+          "a",
+          "p",
+          "an",
+          "e",
+          "se",
+          "▁",
+          ":",
+          "▁",
+          "戦",
+          "場",
+          "の",
+          "ヴ",
+          "ァ",
+          "ル",
+          "キ",
+          "ュ",
+          "リ",
+          "ア",
+          "3",
+          "▁,",
+          "▁",
+          "l",
+          "it",
+          "▁.",
+          "▁Valky",
+          "ria",
+          "▁of",
+          "▁the",
+          "▁",
+          "B",
+          "at",
+          "t",
+          "le",
+          "f",
+          "i",
+          "el",
+          "d",
+          "▁",
+          "3",
+          "▁",
+          ")",
+          "▁,",
+          "▁co",
+          "m",
+          "m",
+          "on",
+          "l",
+          "y",
+          "▁",
+          "r",
+          "e",
+          "f",
+          "er",
+          "r",
+          "ed",
+          "▁",
+          "t",
+          "o",
+          "▁as",
+          "▁Valky",
+          "ria",
+          "▁Chr",
+          "on",
+          "ic",
+          "le",
+          "s",
+          "▁",
+          "I",
+          "I",
+          "I",
+          "▁",
+          "out",
+          "side",
+          "▁",
+          "J",
+          "a",
+          "p",
+          "a",
+          "n",
+          "▁,",
+          "▁",
+          "is",
+          "▁a",
+          "▁",
+          "t",
+          "a",
+          "c",
+          "t",
+          "ic",
+          "al",
+          "▁",
+          "r",
+          "ol",
+          "e",
+          "▁@-",
+          "@",
+          "▁",
+          "p",
+          "l",
+          "a",
+          "y",
+          "ing",
+          "▁",
+          "v",
+          "i",
+          "d",
+          "e",
+          "o",
+          "▁game",
+          "▁de",
+          "ve",
+          "lo",
+          "p",
+          "e",
+          "d",
+          "▁b",
+          "y",
+          "▁",
+          "S",
+          "e",
+          "ga",
+          "▁",
+          "and",
+          "▁",
+          "M",
+          "ed",
+          "i",
+          "a",
+          ".",
+          "V",
+          "i",
+          "s",
+          "i",
+          "on",
+          "▁for",
+          "▁"
+        ],
+        [
+          "S",
+          "en",
+          "j",
+          "ō",
+          "▁no",
+          "▁Valky",
+          "ria",
+          "▁",
+          "3",
+          "▁",
+          ":",
+          "▁",
+          "U",
+          "n",
+          "re",
+          "c",
+          "o",
+          "r",
+          "d",
+          "ed",
+          "▁Chr",
+          "on",
+          "ic",
+          "les",
+          "▁",
+          "(",
+          "▁",
+          "J",
+          "a",
+          "p",
+          "an",
+          "e",
+          "s",
+          "e",
+          "▁",
+          ":",
+          "▁",
+          "戦",
+          "場",
+          "の",
+          "ヴ",
+          "ァ",
+          "ル",
+          "キ",
+          "ュ",
+          "リ",
+          "ア",
+          "3",
+          "▁,",
+          "▁",
+          "l",
+          "it",
+          "▁.",
+          "▁Valky",
+          "ria",
+          "▁of",
+          "▁the",
+          "▁",
+          "B",
+          "a",
+          "ttle",
+          "f",
+          "i",
+          "el",
+          "d",
+          "▁3",
+          "▁",
+          ")",
+          "▁,",
+          "▁co",
+          "m",
+          "mo",
+          "n",
+          "l",
+          "y",
+          "▁re",
+          "f",
+          "er",
+          "re",
+          "d",
+          "▁",
+          "to",
+          "▁as",
+          "▁Valky",
+          "ria",
+          "▁Chr",
+          "on",
+          "ic",
+          "les",
+          "▁",
+          "I",
+          "I",
+          "I",
+          "▁",
+          "out",
+          "side",
+          "▁",
+          "J",
+          "a",
+          "p",
+          "an",
+          "▁,",
+          "▁",
+          "is",
+          "▁a",
+          "▁",
+          "t",
+          "a",
+          "c",
+          "t",
+          "ic",
+          "al",
+          "▁",
+          "r",
+          "ol",
+          "e",
+          "▁@-",
+          "@",
+          "▁p",
+          "l",
+          "a",
+          "y",
+          "ing",
+          "▁",
+          "v",
+          "i",
+          "d",
+          "e",
+          "o",
+          "▁game",
+          "▁de",
+          "ve",
+          "lo",
+          "p",
+          "ed",
+          "▁b",
+          "y",
+          "▁S",
+          "e",
+          "g",
+          "a",
+          "▁an",
+          "d",
+          "▁",
+          "M",
+          "ed",
+          "i",
+          "a",
+          ".",
+          "V",
+          "i",
+          "s",
+          "ion",
+          "▁for",
+          "▁"
+        ],
+        [
+          "S",
+          "en",
+          "j",
+          "ō",
+          "▁no",
+          "▁Valky",
+          "ria",
+          "▁3",
+          "▁",
+          ":",
+          "▁",
+          "U",
+          "n",
+          "re",
+          "c",
+          "or",
+          "d",
+          "ed",
+          "▁Chr",
+          "o",
+          "n",
+          "ic",
+          "l",
+          "es",
+          "▁",
+          "(",
+          "▁",
+          "J",
+          "a",
+          "p",
+          "an",
+          "es",
+          "e",
+          "▁",
+          ":",
+          "▁",
+          "戦",
+          "場",
+          "の",
+          "ヴ",
+          "ァ",
+          "ル",
+          "キ",
+          "ュ",
+          "リ",
+          "ア",
+          "3",
+          "▁,",
+          "▁",
+          "l",
+          "i",
+          "t",
+          "▁.",
+          "▁Valky",
+          "ria",
+          "▁of",
+          "▁the",
+          "▁",
+          "B",
+          "a",
+          "ttle",
+          "f",
+          "i",
+          "el",
+          "d",
+          "▁3",
+          "▁",
+          ")",
+          "▁,",
+          "▁",
+          "c",
+          "o",
+          "m",
+          "m",
+          "on",
+          "l",
+          "y",
+          "▁",
+          "re",
+          "f",
+          "er",
+          "r",
+          "ed",
+          "▁",
+          "to",
+          "▁a",
+          "s",
+          "▁Valky",
+          "ria",
+          "▁Chr",
+          "on",
+          "i",
+          "c",
+          "l",
+          "e",
+          "s",
+          "▁",
+          "I",
+          "I",
+          "I",
+          "▁",
+          "out",
+          "side",
+          "▁",
+          "J",
+          "a",
+          "p",
+          "a",
+          "n",
+          "▁,",
+          "▁",
+          "is",
+          "▁",
+          "a",
+          "▁",
+          "t",
+          "a",
+          "c",
+          "t",
+          "ic",
+          "al",
+          "▁",
+          "r",
+          "o",
+          "le",
+          "▁@-",
+          "@",
+          "▁",
+          "p",
+          "l",
+          "a",
+          "y",
+          "ing",
+          "▁",
+          "v",
+          "i",
+          "d",
+          "e",
+          "o",
+          "▁game",
+          "▁de",
+          "v",
+          "e",
+          "lo",
+          "p",
+          "e",
+          "d",
+          "▁",
+          "b",
+          "y",
+          "▁S",
+          "e",
+          "ga",
+          "▁",
+          "and",
+          "▁",
+          "M",
+          "e",
+          "d",
+          "i",
+          "a",
+          ".",
+          "V",
+          "is",
+          "ion",
+          "▁for",
+          "▁"
+        ]
+      ]
+    },
+    "configuration": {
+      "sp_normalization": "identity",
+      "sp_dummy_prefix": false,
+      "sp_byte_fallback": true,
+      "hf_bytelevel_regex": true,
+      "test_selected_settings": false
+    }
+  },
+  "official-default": {
+    "official_revision": "9c7ef2ebff09dfc000ce2c0cf5f7d32eaeb6ec86",
+    "tau": 1.1,
+    "vocab_size": 320,
+    "regular_merges": 63,
+    "supermerges": 1,
+    "deletions": 0,
+    "deleted_tokens_still_in_dictionary": [],
+    "train_save_load_seconds": 0.34995660000276985,
+    "test_bytes": 4996,
+    "test_tokens": 3276,
+    "bytes_per_token": 1.525030525030525,
+    "exact_reference_replay_inputs": 24,
+    "examples": [
+      {
+        "text": "Tip of the hat",
+        "ids": [
+          84,
+          105,
+          112,
+          315,
+          32,
+          104,
+          278
+        ],
+        "pieces_hex": [
+          "54",
+          "69",
+          "70",
+          "206f6620746865",
+          "20",
+          "68",
+          "6174"
+        ]
+      },
+      {
+        "text": "Tip 123 hat",
+        "ids": [
+          84,
+          105,
+          112,
+          32,
+          49,
+          50,
+          51,
+          32,
+          104,
+          278
+        ],
+        "pieces_hex": [
+          "54",
+          "69",
+          "70",
+          "20",
+          "31",
+          "32",
+          "33",
+          "20",
+          "68",
+          "6174"
+        ]
+      },
+      {
+        "text": "है café",
+        "ids": [
+          224,
+          164,
+          185,
+          224,
+          165,
+          136,
+          283,
+          97,
+          102,
+          195,
+          169
+        ],
+        "pieces_hex": [
+          "e0",
+          "a4",
+          "b9",
+          "e0",
+          "a5",
+          "88",
+          "2063",
+          "61",
+          "66",
+          "c3",
+          "a9"
+        ]
+      },
+      {
+        "text": "",
+        "ids": [],
+        "pieces_hex": []
+      }
+    ]
+  },
+  "official-deletions": {
+    "official_revision": "9c7ef2ebff09dfc000ce2c0cf5f7d32eaeb6ec86",
+    "tau": 0.5,
+    "vocab_size": 512,
+    "regular_merges": 249,
+    "supermerges": 7,
+    "deletions": 51,
+    "deleted_tokens_still_in_dictionary": [
+      "2074",
+      "6865",
+      "6e64",
+      "206f",
+      "696e",
+      "746f",
+      "6173",
+      "5468",
+      "2041",
+      "61726b",
+      "2040",
+      "20402d",
+      "656e616c",
+      "546865",
+      "2056",
+      "616c6b",
+      "2056616c6b",
+      "697468",
+      "2052",
+      "2056616c6b79",
+      "726961",
+      "746c65",
+      "204c",
+      "6974746c65",
+      "20526f",
+      "636b",
+      "61726b6572",
+      "657265",
+      "206865",
+      "204368",
+      "726f6e",
+      "204368726f6e",
+      "204368726f6e6963",
+      "6c6573",
+      "6f726b",
+      "206974",
+      "6f76",
+      "73656e616c",
+      "6e61",
+      "20617273",
+      "656e61",
+      "20617273656e61",
+      "616d65",
+      "6f7573",
+      "696c64",
+      "726f6d",
+      "205368",
+      "746f6e",
+      "6768",
+      "6b65",
+      "726b65"
+    ],
+    "train_save_load_seconds": 1.2831908000007388,
+    "test_bytes": 4996,
+    "test_tokens": 2725,
+    "bytes_per_token": 1.833394495412844,
+    "exact_reference_replay_inputs": 24,
+    "examples": [
+      {
+        "text": "Tip of the hat",
+        "ids": [
+          84,
+          105,
+          112,
+          318,
+          303,
+          278
+        ],
+        "pieces_hex": [
+          "54",
+          "69",
+          "70",
+          "206f6620746865",
+          "2068",
+          "6174"
+        ]
+      },
+      {
+        "text": "Tip 123 hat",
+        "ids": [
+          84,
+          105,
+          112,
+          32,
+          49,
+          50,
+          51,
+          303,
+          278
+        ],
+        "pieces_hex": [
+          "54",
+          "69",
+          "70",
+          "20",
+          "31",
+          "32",
+          "33",
+          "2068",
+          "6174"
+        ]
+      },
+      {
+        "text": "है café",
+        "ids": [
+          224,
+          164,
+          185,
+          224,
+          165,
+          136,
+          284,
+          97,
+          102,
+          195,
+          169
+        ],
+        "pieces_hex": [
+          "e0",
+          "a4",
+          "b9",
+          "e0",
+          "a5",
+          "88",
+          "2063",
+          "61",
+          "66",
+          "c3",
+          "a9"
+        ]
+      },
+      {
+        "text": "",
+        "ids": [],
+        "pieces_hex": []
+      }
+    ]
+  }
+}

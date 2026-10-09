@@ -1,0 +1,148 @@
+{
+  "authorizedOn": "2026-10-08",
+  "mode": "full",
+  "module": "large-language-models",
+  "topics": [
+    {
+      "position": 30,
+      "id": "kv-cache-memory-management",
+      "title": "KV-Cache & Memory Management",
+      "owner": "training_author",
+      "source": "src/learn/data/topics/kv-cache.jsx",
+      "original": "docs/teaching/llm-architecture-training/kv-cache-memory-management/original/kv-cache.jsx",
+      "originalSha256": "066ac91fc3c4e7d912cb062063c1fca85b7d387c09a585da47f0c8021793691f",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 31,
+      "id": "decoding-strategies-greedy-beam-top-k-top-p-temperature",
+      "title": "Decoding Strategies (Greedy, Beam, Top-k, Top-p, Temperature)",
+      "owner": "alignment_author",
+      "source": "src/learn/data/topics/decoding-strategies.jsx",
+      "original": "docs/teaching/llm-architecture-training/decoding-strategies-greedy-beam-top-k-top-p-temperature/original/decoding-strategies.jsx",
+      "originalSha256": "3be11e2ac57d94972e970d96361ed2579c0d699d0a2fc60595ac68ef265524df",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 32,
+      "id": "structured-output-constrained-decoding-outlines-xgrammar",
+      "title": "Structured Output & Constrained Decoding (Outlines, XGrammar)",
+      "owner": "alignment_author",
+      "source": "src/learn/data/topics/constrained-decoding.jsx",
+      "original": "docs/teaching/llm-architecture-training/structured-output-constrained-decoding-outlines-xgrammar/original/constrained-decoding.jsx",
+      "originalSha256": "31ceae26a57478a8af2b53cd4cea674e4079f65f369e60b15678db1d436d9f64",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 33,
+      "id": "continuous-batching-pagedattention",
+      "title": "Continuous Batching & PagedAttention",
+      "owner": "training_author",
+      "source": "src/learn/data/topics/continuous-batching.jsx",
+      "original": "docs/teaching/llm-architecture-training/continuous-batching-pagedattention/original/continuous-batching.jsx",
+      "originalSha256": "be1a33e0f1944a8b8dc94bec233487928ae49215178679f2d9a77329aac90536",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 34,
+      "id": "queueing-theory-for-llm-serving",
+      "title": "Queueing Theory for LLM Serving",
+      "owner": "multimodal_reviewer",
+      "source": "src/learn/data/topics/queueing-theory-llm-serving.jsx",
+      "original": "docs/teaching/llm-architecture-training/queueing-theory-for-llm-serving/original/queueing-theory-llm-serving.jsx",
+      "originalSha256": "e298fbf2a8e7552b2815c0d4f293be6e0e41cc688399d0c754cf2b9466791a82",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 35,
+      "id": "speculative-decoding",
+      "title": "Speculative Decoding",
+      "owner": "alignment_author",
+      "source": "src/learn/data/topics/speculative-decoding.jsx",
+      "original": "docs/teaching/llm-architecture-training/speculative-decoding/original/speculative-decoding.jsx",
+      "originalSha256": "82c0cd05bf115ec042f7479c7576a840b7aff299c7475e421a076be86344a957",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 36,
+      "id": "prefix-caching-prompt-caching",
+      "title": "Prefix Caching & Prompt Caching",
+      "owner": "training_author",
+      "source": "src/learn/data/topics/prefix-caching.jsx",
+      "original": "docs/teaching/llm-architecture-training/prefix-caching-prompt-caching/original/prefix-caching.jsx",
+      "originalSha256": "96eb877d760dab140aadfbf0d66733e2a83fca8e7fd00e281d30074cadff6d82",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 37,
+      "id": "inference-cost-economics-compute-scaling",
+      "title": "Inference Cost Economics & Compute Scaling",
+      "owner": "multimodal_reviewer",
+      "source": "src/learn/data/topics/inference-cost-economics.jsx",
+      "original": "docs/teaching/llm-architecture-training/inference-cost-economics-compute-scaling/original/inference-cost-economics.jsx",
+      "originalSha256": "b115da8e255d84faa492aed886e6d4634514e3a78eefd059b34d0ce83b66cc6b",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 38,
+      "id": "test-time-compute-scaling",
+      "title": "Test-Time Compute Scaling",
+      "owner": "root",
+      "source": "src/learn/data/topics/test-time-compute.jsx",
+      "original": "docs/teaching/llm-architecture-training/test-time-compute-scaling/original/test-time-compute.jsx",
+      "originalSha256": "acb135134692802198f1d431ae57d94a31416187ce8d32f6eb3060b6d6fa9a9d",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    },
+    {
+      "position": 39,
+      "id": "inference-engines-serving",
+      "title": "Inference Engines & Serving",
+      "owner": "multimodal_reviewer",
+      "source": "src/learn/data/topics/inference-engines.jsx",
+      "original": "docs/teaching/llm-architecture-training/inference-engines-serving/original/inference-engines.jsx",
+      "originalSha256": "2eaf60d046503c1758631cf4284d7f5c677f1205f1984a3e3a99ffd24378ac98",
+      "researchBefore": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started"
+      }
+    }
+  ],
+  "stopBefore": "inference-system-architecture-end-to-end"
+}

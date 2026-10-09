@@ -1,0 +1,122 @@
+{
+  "measuredAt": "2026-10-06T18:19:48.126Z",
+  "browser": "154.0.4258.62",
+  "base": "http://127.0.0.1:4242",
+  "results": [
+    {
+      "case": "selected lesson loads only its body and static dependencies",
+      "topicId": "multimodal-tokenization-visual-audio-video",
+      "jsFiles": [
+        "assets/index-B8el4qVg.js",
+        "assets/Reader-hA988unF.js",
+        "assets/LevelBadge-DNVY2XxJ.js",
+        "assets/LearningNav-C9CWimBm.js",
+        "assets/multimodal-tokenization-BpA4DXJ7.js",
+        "assets/Code-C-ZA3s5F.js",
+        "assets/Math-BD_bAvE4.js",
+        "assets/katex-BJpuVtPE.js",
+        "assets/RemoteCodeBlock-oKiOcn_b.js",
+        "assets/LessonElements-Da_0B6CB.js",
+        "assets/LessonFlow-CaA9Ylb5.js"
+      ],
+      "lessonBodies": [
+        "assets/multimodal-tokenization-BpA4DXJ7.js"
+      ],
+      "outlines": []
+    },
+    {
+      "case": "hub loads metadata and no lesson bodies or outlines",
+      "jsFiles": [
+        "assets/index-B8el4qVg.js",
+        "assets/LearnHub-CkwYLakF.js",
+        "assets/LearningNav-C9CWimBm.js",
+        "assets/LevelBadge-DNVY2XxJ.js",
+        "assets/useProjectProgress-lCWg07M9.js"
+      ],
+      "lessonBodies": [],
+      "outlines": []
+    },
+    {
+      "case": "selected lesson and next destination only; footer previous and browser Back reuse imports",
+      "initialJs": [
+        "assets/index-B8el4qVg.js",
+        "assets/Reader-hA988unF.js",
+        "assets/LevelBadge-DNVY2XxJ.js",
+        "assets/LearningNav-C9CWimBm.js",
+        "assets/python-basics-types-control-flow-functions-modules-BcuM7zVe.js",
+        "assets/Code-C-ZA3s5F.js",
+        "assets/LessonElements-Da_0B6CB.js",
+        "assets/PythonExample-Dy_QlI7P.js"
+      ],
+      "destinationJs": [
+        "assets/object-oriented-programming-in-python-C9Kr9qaC.js"
+      ]
+    },
+    {
+      "case": "mathematical lesson loads its renderer and styles and renders notation",
+      "jsFiles": [
+        "assets/index-B8el4qVg.js",
+        "assets/Reader-hA988unF.js",
+        "assets/LevelBadge-DNVY2XxJ.js",
+        "assets/LearningNav-C9CWimBm.js",
+        "assets/eigenvalues-eigenvectors-AycIyIPa.js",
+        "assets/Code-C-ZA3s5F.js",
+        "assets/Math-BD_bAvE4.js",
+        "assets/katex-BJpuVtPE.js",
+        "assets/LessonElements-Da_0B6CB.js",
+        "assets/RunnableExample-BAQy6OCY.js"
+      ],
+      "lessonBodies": [
+        "assets/eigenvalues-eigenvectors-AycIyIPa.js"
+      ],
+      "outlines": [],
+      "rendererJs": [
+        "assets/katex-BJpuVtPE.js"
+      ],
+      "fontCss": [
+        "assets/katex-CfVKi3_s.css"
+      ]
+    },
+    {
+      "case": "planned topic fetches only its outline and stays uncompletable",
+      "topicId": "typed-decision-models-calibrated-neural-decision-systems",
+      "jsFiles": [
+        "assets/index-B8el4qVg.js",
+        "assets/Reader-hA988unF.js",
+        "assets/LevelBadge-DNVY2XxJ.js",
+        "assets/LearningNav-C9CWimBm.js",
+        "assets/typed-decision-models-calibrated-neural-decision-systems-p9q5yzw7.js"
+      ],
+      "lessonBodies": [],
+      "outlines": [
+        "assets/typed-decision-models-calibrated-neural-decision-systems-p9q5yzw7.js"
+      ]
+    },
+    {
+      "case": "planned entry without an individual outline makes no nonexistent-resource request",
+      "topicId": "mdps-bellman-equations-dynamic-programming",
+      "jsFiles": [
+        "assets/index-B8el4qVg.js",
+        "assets/Reader-hA988unF.js",
+        "assets/LevelBadge-DNVY2XxJ.js",
+        "assets/LearningNav-C9CWimBm.js"
+      ],
+      "lessonBodies": [],
+      "outlines": []
+    },
+    {
+      "case": "shell stays available while loading; stale completion cannot replace destination"
+    },
+    {
+      "case": "failed lesson stays distinct from planned; keyboard retry and explicit reload provide recovery",
+      "retryRecovered": false,
+      "reloadRequired": true,
+      "requestsForFailedChunk": 2
+    },
+    {
+      "case": "controlled render failure preserves shell, prevents completion and recovers after reload",
+      "requestsForLessonChunk": 2,
+      "intentionalFixture": "Browser-only one-response replacement; no application or lesson source mutation."
+    }
+  ]
+}

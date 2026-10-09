@@ -1,3 +1,25 @@
+import subwordTokenizationBlueprint from './byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram.js';
+import byteTokenizationBlueprint from './byte-level-tokenization-token-free-models.js';
+import multilingualVocabularyBlueprint from './vocabulary-design-multilingual-tokenization.js';
+import advancedAnnotationBlueprint from './data-annotation-labeling-extended.js';
+import tensorBoundariesBlueprint from './tensor-shapes-autograd-graphs-device-boundaries.js';
+import exactResumeBlueprint from './dataset-loaders-checkpoints-exact-resume-contracts.js';
+import gpuAcceleratedComputingBlueprint from './gpu-accelerated-computing.js';
+import agentWorkflowFrameworksBlueprint from './agent-workflow-frameworks-crewai-autogen-langgraph.js';
+import llmServingFrameworksBlueprint from './llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm.js';
+import llmApplicationFrameworksBlueprint from './llm-application-frameworks-langchain-llamaindex-haystack.js';
+import vectorDatabasesBlueprint from './vector-databases.js';
+import visualizationBlueprint from './visualization.js';
+import experimentTrackingToolsBlueprint from './experiment-tracking-tools-weights-biases-mlflow-neptune.js';
+import tensorflowKerasBlueprint from './tensorflow-keras.js';
+import jaxBlueprint from './jax.js';
+import computerVisionLibrariesBlueprint from './computer-vision-libraries.js';
+import nlpLibrariesBlueprint from './nlp-libraries.js';
+import dataAnnotationLabelingBlueprint from './data-annotation-labeling.js';
+import dataProcessingLoadingBlueprint from './data-processing-loading.js';
+import llmFineTuningPlatformsBlueprint from './llm-fine-tuning-platforms.js';
+import trainingAccelerationBlueprint from './training-acceleration.js';
+import pytorchBlueprint from './pytorch.js';
 import typedDecisionModelsBlueprint from './typed-decision-models-calibrated-neural-decision-systems.js';
 import depthwiseConvolutionsBlueprint from './depthwise-separable-dilated-convolutions.js';
 import convnextBlueprint from './convnext-modern-cnn-designs.js';
@@ -157,6 +179,28 @@ import convexOptimizationBlueprint from './convex-optimization.js';
 import rangeQueriesBlueprint from './segment-trees-fenwick-trees-range-queries.js';
 
 export const authoredBlueprints = {
+  "Byte-Pair Encoding (BPE), WordPiece, SentencePiece, Unigram": subwordTokenizationBlueprint,
+  "Byte-Level Tokenization & Token-Free Models": byteTokenizationBlueprint,
+  "Vocabulary Design & Multilingual Tokenization": multilingualVocabularyBlueprint,
+  "Data Annotation & Labeling (Extended)": advancedAnnotationBlueprint,
+  "Tensor Shapes, Autograd Graphs & Device Boundaries": tensorBoundariesBlueprint,
+  "Dataset Loaders, Checkpoints & Exact Resume Contracts": exactResumeBlueprint,
+  "GPU-Accelerated Computing": gpuAcceleratedComputingBlueprint,
+  "Agent & Workflow Frameworks (CrewAI, AutoGen, LangGraph)": agentWorkflowFrameworksBlueprint,
+  "LLM Serving Frameworks (vLLM, TGI, SGLang, TensorRT-LLM)": llmServingFrameworksBlueprint,
+  "LLM Application Frameworks (LangChain, LlamaIndex, Haystack)": llmApplicationFrameworksBlueprint,
+  "Vector Databases": vectorDatabasesBlueprint,
+  "Visualization": visualizationBlueprint,
+  "Experiment Tracking Tools (Weights & Biases, MLflow, Neptune)": experimentTrackingToolsBlueprint,
+  "TensorFlow & Keras": tensorflowKerasBlueprint,
+  "JAX": jaxBlueprint,
+  "Computer Vision Libraries": computerVisionLibrariesBlueprint,
+  "NLP Libraries": nlpLibrariesBlueprint,
+  "Data Annotation & Labeling": dataAnnotationLabelingBlueprint,
+  "Data Processing & Loading": dataProcessingLoadingBlueprint,
+  "LLM Fine-Tuning Platforms": llmFineTuningPlatformsBlueprint,
+  "Training Acceleration": trainingAccelerationBlueprint,
+  "PyTorch": pytorchBlueprint,
   'Depthwise Separable & Dilated Convolutions': depthwiseConvolutionsBlueprint,
   'ConvNeXt & Modern CNN Designs': convnextBlueprint,
   'Capsule Networks': capsuleNetworksBlueprint,

@@ -1,0 +1,79 @@
+{
+  "scope": "new elementary design arithmetic; no original fit/main/checker replay",
+  "gaussianRows": [
+    {
+      "sigma": 0.5,
+      "probabilities": [
+        0.9975272648640291,
+        0.002472622879065751,
+        1.1225690503869818e-07
+      ],
+      "perplexity": 1.017464075196902
+    },
+    {
+      "sigma": 1,
+      "probabilities": [
+        0.8055124120405227,
+        0.17973411350014984,
+        0.01475347445932747
+      ],
+      "perplexity": 1.7244216785472941
+    },
+    {
+      "sigma": 2,
+      "probabilities": [
+        0.4865780557512029,
+        0.33441988101275766,
+        0.17900206323603943
+      ],
+      "perplexity": 2.786447439687662
+    }
+  ],
+  "normalization": {
+    "orderedZ": [
+      1.6,
+      2.4
+    ],
+    "qAB": [
+      0.3125,
+      0.20833333333333334
+    ]
+  },
+  "fuzzyChanged": {
+    "union": [
+      0.68,
+      0.92
+    ],
+    "pairOptima": [
+      0.6859943405700353,
+      0.29488391230979416
+    ]
+  },
+  "densityRadiusSquared": 3.6666666666666665,
+  "doubledDistanceLogShift": 1.3862943611198906,
+  "nonEuclideanTriangle": {
+    "gram": [
+      [
+        2.111111111111111,
+        0.2777777777777777,
+        -2.3888888888888884
+      ],
+      [
+        0.2777777777777777,
+        -0.5555555555555557,
+        0.2777777777777777
+      ],
+      [
+        -2.3888888888888884,
+        0.2777777777777777,
+        2.111111111111111
+      ]
+    ],
+    "eigenvalues": [
+      4.5,
+      -0.8333333333333334,
+      0
+    ]
+  },
+  "newOutputsAreNot": "learned coordinates, a stochastic experiment, current-page/native certification or a new output of an old program"
+}

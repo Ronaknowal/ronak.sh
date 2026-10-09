@@ -1,0 +1,2103 @@
+{
+  "ids": [
+    436,
+    1425,
+    187,
+    187,
+    1628,
+    42,
+    1364,
+    320,
+    40806,
+    598,
+    751,
+    436,
+    1425,
+    187,
+    187,
+    1628,
+    42,
+    1364,
+    320,
+    40806,
+    598,
+    751,
+    436,
+    1425,
+    187,
+    187,
+    1628,
+    42,
+    1364,
+    320,
+    40806,
+    598
+  ],
+  "text": " this.\u201d\n\n\u201cI must be shutting up like this.\u201d\n\n\u201cI must be shutting up like this.\u201d\n\n\u201cI must be shutting up",
+  "stop_reason": "cap",
+  "steps": [
+    {
+      "position": 0,
+      "parent_beam": 0,
+      "selected_id": 436,
+      "log_p": -1.5573663711547852,
+      "log_q": null,
+      "processed_transition_score": -1.557512640953064,
+      "model_entropy": 4.307763521148944,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 436,
+          "token": " this",
+          "p": 0.21065689205551627,
+          "q": null
+        },
+        {
+          "id": 247,
+          "token": " a",
+          "p": 0.1297542248376137,
+          "q": null
+        },
+        {
+          "id": 326,
+          "token": " that",
+          "p": 0.0681346317782884,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.06168667482632968,
+          "q": null
+        },
+        {
+          "id": 368,
+          "token": " you",
+          "p": 0.03865340867935748,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.02784294416379885,
+          "q": null
+        },
+        {
+          "id": 309,
+          "token": " I",
+          "p": 0.018196606410254144,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.017139248570807147,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 1,
+      "parent_beam": 0,
+      "selected_id": 1425,
+      "log_p": -1.386372685432434,
+      "log_q": null,
+      "processed_transition_score": -1.3864587545394897,
+      "model_entropy": 3.7883164193338517,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.2499550590315519,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.1248907310769644,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.10441870073576155,
+          "q": null
+        },
+        {
+          "id": 11602,
+          "token": "!\u201d",
+          "p": 0.035251682086961285,
+          "q": null
+        },
+        {
+          "id": 27,
+          "token": ":",
+          "p": 0.031911085681967974,
+          "q": null
+        },
+        {
+          "id": 28,
+          "token": ";",
+          "p": 0.03040960698431061,
+          "q": null
+        },
+        {
+          "id": 2,
+          "token": "!",
+          "p": 0.02590303373400304,
+          "q": null
+        },
+        {
+          "id": 275,
+          "token": " in",
+          "p": 0.02234853730959481,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "parent_beam": 0,
+      "selected_id": 187,
+      "log_p": -0.4549284875392914,
+      "log_q": null,
+      "processed_transition_score": -0.4550589323043823,
+      "model_entropy": 2.5926805372550756,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 187,
+          "token": "\n",
+          "p": 0.6343968931944459,
+          "q": null
+        },
+        {
+          "id": 16922,
+          "token": " Alice",
+          "p": 0.05350077721369482,
+          "q": null
+        },
+        {
+          "id": 773,
+          "token": " \u201c",
+          "p": 0.029636042222234673,
+          "q": null
+        },
+        {
+          "id": 380,
+          "token": " The",
+          "p": 0.013811091153485566,
+          "q": null
+        },
+        {
+          "id": 0,
+          "token": "<|endoftext|>",
+          "p": 0.011643188817253059,
+          "q": null
+        },
+        {
+          "id": 1500,
+          "token": " She",
+          "p": 0.010633128722926443,
+          "q": null
+        },
+        {
+          "id": 1244,
+          "token": " And",
+          "p": 0.008754442566953636,
+          "q": null
+        },
+        {
+          "id": 754,
+          "token": " He",
+          "p": 0.00875154598245656,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 3,
+      "parent_beam": 0,
+      "selected_id": 187,
+      "log_p": -0.07675531506538391,
+      "log_q": null,
+      "processed_transition_score": -0.07694529742002487,
+      "model_entropy": 0.7200060493727372,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 187,
+          "token": "\n",
+          "p": 0.9259130100070451,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.004335112420850104,
+          "q": null
+        },
+        {
+          "id": 1628,
+          "token": "\u201c",
+          "p": 0.0029665841885712,
+          "q": null
+        },
+        {
+          "id": 688,
+          "token": "In",
+          "p": 0.0020970232291973112,
+          "q": null
+        },
+        {
+          "id": 0,
+          "token": "<|endoftext|>",
+          "p": 0.0017143567951785255,
+          "q": null
+        },
+        {
+          "id": 42,
+          "token": "I",
+          "p": 0.0015499581224048876,
+          "q": null
+        },
+        {
+          "id": 1898,
+          "token": "And",
+          "p": 0.0014829886956042484,
+          "q": null
+        },
+        {
+          "id": 1276,
+          "token": "What",
+          "p": 0.0014345258564130905,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 4,
+      "parent_beam": 0,
+      "selected_id": 1628,
+      "log_p": -1.9911420345306396,
+      "log_q": null,
+      "processed_transition_score": -1.9912687540054321,
+      "model_entropy": 5.203129523482024,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1628,
+          "token": "\u201c",
+          "p": 0.13651968457662667,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.09540804294394836,
+          "q": null
+        },
+        {
+          "id": 34,
+          "token": "A",
+          "p": 0.02433555850106542,
+          "q": null
+        },
+        {
+          "id": 42,
+          "token": "I",
+          "p": 0.022617200732776354,
+          "q": null
+        },
+        {
+          "id": 2598,
+          "token": "So",
+          "p": 0.02099641630544272,
+          "q": null
+        },
+        {
+          "id": 26845,
+          "token": "Bob",
+          "p": 0.020934833665245907,
+          "q": null
+        },
+        {
+          "id": 1898,
+          "token": "And",
+          "p": 0.020031825339389103,
+          "q": null
+        },
+        {
+          "id": 688,
+          "token": "In",
+          "p": 0.019686046595315004,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 5,
+      "parent_beam": 0,
+      "selected_id": 42,
+      "log_p": -1.9106262922286987,
+      "log_q": null,
+      "processed_transition_score": -1.9107537269592285,
+      "model_entropy": 4.847798725932007,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 42,
+          "token": "I",
+          "p": 0.14796614822173776,
+          "q": null
+        },
+        {
+          "id": 1276,
+          "token": "What",
+          "p": 0.04967658929675435,
+          "q": null
+        },
+        {
+          "id": 1394,
+          "token": "You",
+          "p": 0.04343244954106825,
+          "q": null
+        },
+        {
+          "id": 4967,
+          "token": "Why",
+          "p": 0.028138430061490697,
+          "q": null
+        },
+        {
+          "id": 1147,
+          "token": "It",
+          "p": 0.028077794946984674,
+          "q": null
+        },
+        {
+          "id": 2347,
+          "token": "How",
+          "p": 0.023492249579074045,
+          "q": null
+        },
+        {
+          "id": 4013,
+          "token": "Oh",
+          "p": 0.022280908550029822,
+          "q": null
+        },
+        {
+          "id": 4497,
+          "token": "Well",
+          "p": 0.02208614893904512,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 6,
+      "parent_beam": 0,
+      "selected_id": 1364,
+      "log_p": -2.2970566749572754,
+      "log_q": null,
+      "processed_transition_score": -2.297138214111328,
+      "model_entropy": 4.293384129143284,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 457,
+          "token": "\u2019",
+          "p": 0.1301400225606432,
+          "q": null
+        },
+        {
+          "id": 1364,
+          "token": " must",
+          "p": 0.10054408504370099,
+          "q": null
+        },
+        {
+          "id": 717,
+          "token": " am",
+          "p": 0.09972074290251232,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.04019510591345673,
+          "q": null
+        },
+        {
+          "id": 476,
+          "token": " can",
+          "p": 0.03088017455297651,
+          "q": null
+        },
+        {
+          "id": 1053,
+          "token": " don",
+          "p": 0.026418956864221195,
+          "q": null
+        },
+        {
+          "id": 943,
+          "token": " should",
+          "p": 0.024458649661501387,
+          "q": null
+        },
+        {
+          "id": 871,
+          "token": " know",
+          "p": 0.024361598352935467,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 7,
+      "parent_beam": 1,
+      "selected_id": 320,
+      "log_p": -0.22091080248355865,
+      "log_q": null,
+      "processed_transition_score": -0.22103561460971832,
+      "model_entropy": 1.4416157071268785,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 320,
+          "token": " be",
+          "p": 0.8016700226114186,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.024855250947229318,
+          "q": null
+        },
+        {
+          "id": 564,
+          "token": " go",
+          "p": 0.02293643612249652,
+          "q": null
+        },
+        {
+          "id": 417,
+          "token": " not",
+          "p": 0.015137145889782254,
+          "q": null
+        },
+        {
+          "id": 1379,
+          "token": " take",
+          "p": 0.009026329399751622,
+          "q": null
+        },
+        {
+          "id": 1705,
+          "token": " come",
+          "p": 0.004711233295086469,
+          "q": null
+        },
+        {
+          "id": 1333,
+          "token": " say",
+          "p": 0.00391818040118769,
+          "q": null
+        },
+        {
+          "id": 3553,
+          "token": " leave",
+          "p": 0.003481589872501795,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 8,
+      "parent_beam": 1,
+      "selected_id": 40806,
+      "log_p": -2.271517038345337,
+      "log_q": null,
+      "processed_transition_score": -2.2716152667999268,
+      "model_entropy": 5.183638961060363,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 40806,
+          "token": " shutting",
+          "p": 0.10314401348455798,
+          "q": null
+        },
+        {
+          "id": 6179,
+          "token": " waiting",
+          "p": 0.06521454710680633,
+          "q": null
+        },
+        {
+          "id": 1469,
+          "token": " going",
+          "p": 0.05775116043285504,
+          "q": null
+        },
+        {
+          "id": 2970,
+          "token": " getting",
+          "p": 0.03109048204570657,
+          "q": null
+        },
+        {
+          "id": 15910,
+          "token": " stopping",
+          "p": 0.028992867558923427,
+          "q": null
+        },
+        {
+          "id": 6294,
+          "token": " shut",
+          "p": 0.02485540714973495,
+          "q": null
+        },
+        {
+          "id": 4854,
+          "token": " hearing",
+          "p": 0.01750246211628937,
+          "q": null
+        },
+        {
+          "id": 11298,
+          "token": " listening",
+          "p": 0.017230782938071953,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 9,
+      "parent_beam": 1,
+      "selected_id": 598,
+      "log_p": -0.3409041166305542,
+      "log_q": null,
+      "processed_transition_score": -0.3409998416900635,
+      "model_entropy": 1.0179225291545082,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 598,
+          "token": " up",
+          "p": 0.7110430386045846,
+          "q": null
+        },
+        {
+          "id": 1066,
+          "token": " down",
+          "p": 0.22220688803766167,
+          "q": null
+        },
+        {
+          "id": 562,
+          "token": " out",
+          "p": 0.01519074730722523,
+          "q": null
+        },
+        {
+          "id": 745,
+          "token": " off",
+          "p": 0.008181315615254607,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.004020420848991939,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.0029588686904639112,
+          "q": null
+        },
+        {
+          "id": 896,
+          "token": " back",
+          "p": 0.002346379266551646,
+          "q": null
+        },
+        {
+          "id": 436,
+          "token": " this",
+          "p": 0.002107728423393742,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 10,
+      "parent_beam": 1,
+      "selected_id": 751,
+      "log_p": -0.20152638852596283,
+      "log_q": null,
+      "processed_transition_score": -0.2016562819480896,
+      "model_entropy": 1.2783652948026074,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 751,
+          "token": " like",
+          "p": 0.8173578936902292,
+          "q": null
+        },
+        {
+          "id": 1806,
+          "token": ",\u201d",
+          "p": 0.025145224163969915,
+          "q": null
+        },
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.015995628411614435,
+          "q": null
+        },
+        {
+          "id": 342,
+          "token": " with",
+          "p": 0.011907319078968524,
+          "q": null
+        },
+        {
+          "id": 347,
+          "token": " as",
+          "p": 0.010943247125156232,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.01009197301498232,
+          "q": null
+        },
+        {
+          "id": 668,
+          "token": "\u201d",
+          "p": 0.007194601355563025,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.003820768864683657,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 11,
+      "parent_beam": 0,
+      "selected_id": 436,
+      "log_p": -0.12451309710741043,
+      "log_q": null,
+      "processed_transition_score": -0.12464044243097305,
+      "model_entropy": 0.6727830720614985,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 436,
+          "token": " this",
+          "p": 0.8827956325924124,
+          "q": null
+        },
+        {
+          "id": 326,
+          "token": " that",
+          "p": 0.05591915474946465,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.014520233726240582,
+          "q": null
+        },
+        {
+          "id": 309,
+          "token": " I",
+          "p": 0.005160096320114979,
+          "q": null
+        },
+        {
+          "id": 627,
+          "token": " there",
+          "p": 0.004240755866596123,
+          "q": null
+        },
+        {
+          "id": 368,
+          "token": " you",
+          "p": 0.004140970511562542,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.0033454935112796165,
+          "q": null
+        },
+        {
+          "id": 594,
+          "token": " so",
+          "p": 0.0023898631912921938,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 12,
+      "parent_beam": 0,
+      "selected_id": 1425,
+      "log_p": -0.7345588803291321,
+      "log_q": null,
+      "processed_transition_score": -0.7347077131271362,
+      "model_entropy": 2.1734040037024878,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.4796357251561469,
+          "q": null
+        },
+        {
+          "id": 1806,
+          "token": ",\u201d",
+          "p": 0.1254528551488111,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.09665692149887833,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.0671298410884384,
+          "q": null
+        },
+        {
+          "id": 7721,
+          "token": "?\u201d",
+          "p": 0.06226467543871395,
+          "q": null
+        },
+        {
+          "id": 11602,
+          "token": "!\u201d",
+          "p": 0.03793215917156526,
+          "q": null
+        },
+        {
+          "id": 668,
+          "token": "\u201d",
+          "p": 0.014759469337689993,
+          "q": null
+        },
+        {
+          "id": 2,
+          "token": "!",
+          "p": 0.008562752636460544,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 13,
+      "parent_beam": 0,
+      "selected_id": 187,
+      "log_p": -0.5259267091751099,
+      "log_q": null,
+      "processed_transition_score": -0.5260409116744995,
+      "model_entropy": 2.5903972369400643,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 187,
+          "token": "\n",
+          "p": 0.5909282231879897,
+          "q": null
+        },
+        {
+          "id": 16922,
+          "token": " Alice",
+          "p": 0.11414302571724269,
+          "q": null
+        },
+        {
+          "id": 753,
+          "token": " said",
+          "p": 0.03747575484535268,
+          "q": null
+        },
+        {
+          "id": 8679,
+          "token": " Bob",
+          "p": 0.01816902191272515,
+          "q": null
+        },
+        {
+          "id": 14187,
+          "token": " cried",
+          "p": 0.0070338881113731384,
+          "q": null
+        },
+        {
+          "id": 773,
+          "token": " \u201c",
+          "p": 0.006822505756443718,
+          "q": null
+        },
+        {
+          "id": 703,
+          "token": " she",
+          "p": 0.006242909964897519,
+          "q": null
+        },
+        {
+          "id": 309,
+          "token": " I",
+          "p": 0.0053080700865770795,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 14,
+      "parent_beam": 0,
+      "selected_id": 187,
+      "log_p": -0.03356900066137314,
+      "log_q": null,
+      "processed_transition_score": -0.03375353664159775,
+      "model_entropy": 0.34243592374975057,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 187,
+          "token": "\n",
+          "p": 0.9667833092191128,
+          "q": null
+        },
+        {
+          "id": 0,
+          "token": "<|endoftext|>",
+          "p": 0.003005647490178564,
+          "q": null
+        },
+        {
+          "id": 1628,
+          "token": "\u201c",
+          "p": 0.0017403948608664696,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.0013666548931302786,
+          "q": null
+        },
+        {
+          "id": 1898,
+          "token": "And",
+          "p": 0.0011295303361996201,
+          "q": null
+        },
+        {
+          "id": 14,
+          "token": "-",
+          "p": 0.0008230394037998951,
+          "q": null
+        },
+        {
+          "id": 2598,
+          "token": "So",
+          "p": 0.0005926525061738387,
+          "q": null
+        },
+        {
+          "id": 26845,
+          "token": "Bob",
+          "p": 0.0005548765067547944,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 15,
+      "parent_beam": 0,
+      "selected_id": 1628,
+      "log_p": -0.7909190654754639,
+      "log_q": null,
+      "processed_transition_score": -0.791077196598053,
+      "model_entropy": 3.792923039278983,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1628,
+          "token": "\u201c",
+          "p": 0.45334664110332135,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.0534328522534454,
+          "q": null
+        },
+        {
+          "id": 26845,
+          "token": "Bob",
+          "p": 0.01966929926647788,
+          "q": null
+        },
+        {
+          "id": 2993,
+          "token": "She",
+          "p": 0.01811858327588532,
+          "q": null
+        },
+        {
+          "id": 1328,
+          "token": "He",
+          "p": 0.017942984264910308,
+          "q": null
+        },
+        {
+          "id": 34,
+          "token": "A",
+          "p": 0.013450367656877146,
+          "q": null
+        },
+        {
+          "id": 42,
+          "token": "I",
+          "p": 0.013348241797635552,
+          "q": null
+        },
+        {
+          "id": 1898,
+          "token": "And",
+          "p": 0.01169417640176529,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 16,
+      "parent_beam": 0,
+      "selected_id": 42,
+      "log_p": -1.233068585395813,
+      "log_q": null,
+      "processed_transition_score": -1.233193278312683,
+      "model_entropy": 4.201479250806682,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 42,
+          "token": "I",
+          "p": 0.29135487878942073,
+          "q": null
+        },
+        {
+          "id": 1394,
+          "token": "You",
+          "p": 0.05242674988114763,
+          "q": null
+        },
+        {
+          "id": 1276,
+          "token": "What",
+          "p": 0.03422164916834978,
+          "q": null
+        },
+        {
+          "id": 1147,
+          "token": "It",
+          "p": 0.027339173789328947,
+          "q": null
+        },
+        {
+          "id": 2773,
+          "token": "That",
+          "p": 0.02391166853061021,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.0191315418712256,
+          "q": null
+        },
+        {
+          "id": 4967,
+          "token": "Why",
+          "p": 0.01858293495057554,
+          "q": null
+        },
+        {
+          "id": 2598,
+          "token": "So",
+          "p": 0.016864650077872304,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 17,
+      "parent_beam": 0,
+      "selected_id": 1364,
+      "log_p": -0.9685242772102356,
+      "log_q": null,
+      "processed_transition_score": -0.9686311483383179,
+      "model_entropy": 3.2966590474647526,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1364,
+          "token": " must",
+          "p": 0.37959520592655954,
+          "q": null
+        },
+        {
+          "id": 457,
+          "token": "\u2019",
+          "p": 0.08484368869945695,
+          "q": null
+        },
+        {
+          "id": 717,
+          "token": " am",
+          "p": 0.08043218299356392,
+          "q": null
+        },
+        {
+          "id": 943,
+          "token": " should",
+          "p": 0.038203990406908965,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.026905511265660237,
+          "q": null
+        },
+        {
+          "id": 878,
+          "token": " need",
+          "p": 0.026231788888263677,
+          "q": null
+        },
+        {
+          "id": 476,
+          "token": " can",
+          "p": 0.02358263100431881,
+          "q": null
+        },
+        {
+          "id": 588,
+          "token": " will",
+          "p": 0.0192540081123117,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 18,
+      "parent_beam": 1,
+      "selected_id": 320,
+      "log_p": -0.089654341340065,
+      "log_q": null,
+      "processed_transition_score": -0.08976244926452637,
+      "model_entropy": 0.687125087697834,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 320,
+          "token": " be",
+          "p": 0.914132123796139,
+          "q": null
+        },
+        {
+          "id": 564,
+          "token": " go",
+          "p": 0.011793352731776851,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.008530274291086975,
+          "q": null
+        },
+        {
+          "id": 417,
+          "token": " not",
+          "p": 0.007954055335426941,
+          "q": null
+        },
+        {
+          "id": 1705,
+          "token": " come",
+          "p": 0.003468357109305138,
+          "q": null
+        },
+        {
+          "id": 4089,
+          "token": " hear",
+          "p": 0.003158140731717824,
+          "q": null
+        },
+        {
+          "id": 1379,
+          "token": " take",
+          "p": 0.0029712894173768074,
+          "q": null
+        },
+        {
+          "id": 3553,
+          "token": " leave",
+          "p": 0.0019034776441902706,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 19,
+      "parent_beam": 1,
+      "selected_id": 40806,
+      "log_p": -1.1620490550994873,
+      "log_q": null,
+      "processed_transition_score": -1.162125587463379,
+      "model_entropy": 4.169226658394805,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 40806,
+          "token": " shutting",
+          "p": 0.31281718795876795,
+          "q": null
+        },
+        {
+          "id": 6179,
+          "token": " waiting",
+          "p": 0.06071951853209349,
+          "q": null
+        },
+        {
+          "id": 1469,
+          "token": " going",
+          "p": 0.03403036746185498,
+          "q": null
+        },
+        {
+          "id": 15910,
+          "token": " stopping",
+          "p": 0.03351859486438385,
+          "q": null
+        },
+        {
+          "id": 6294,
+          "token": " shut",
+          "p": 0.0328842705335119,
+          "q": null
+        },
+        {
+          "id": 11196,
+          "token": " closing",
+          "p": 0.026967747918003306,
+          "q": null
+        },
+        {
+          "id": 2970,
+          "token": " getting",
+          "p": 0.02093477256462204,
+          "q": null
+        },
+        {
+          "id": 5877,
+          "token": " holding",
+          "p": 0.014382606224220686,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 20,
+      "parent_beam": 1,
+      "selected_id": 598,
+      "log_p": -0.3224427103996277,
+      "log_q": null,
+      "processed_transition_score": -0.32254156470298767,
+      "model_entropy": 0.9391368755281784,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 598,
+          "token": " up",
+          "p": 0.7242894174910622,
+          "q": null
+        },
+        {
+          "id": 1066,
+          "token": " down",
+          "p": 0.2237888543479868,
+          "q": null
+        },
+        {
+          "id": 562,
+          "token": " out",
+          "p": 0.009792730651843202,
+          "q": null
+        },
+        {
+          "id": 745,
+          "token": " off",
+          "p": 0.006426211854708574,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.002723168402224514,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.0023753482619649413,
+          "q": null
+        },
+        {
+          "id": 436,
+          "token": " this",
+          "p": 0.00237484541668109,
+          "q": null
+        },
+        {
+          "id": 1841,
+          "token": " things",
+          "p": 0.0019859273589679463,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 21,
+      "parent_beam": 1,
+      "selected_id": 751,
+      "log_p": -0.08182445168495178,
+      "log_q": null,
+      "processed_transition_score": -0.08195559680461884,
+      "model_entropy": 0.6489935326387595,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 751,
+          "token": " like",
+          "p": 0.921292565015717,
+          "q": null
+        },
+        {
+          "id": 1806,
+          "token": ",\u201d",
+          "p": 0.008691723698893697,
+          "q": null
+        },
+        {
+          "id": 347,
+          "token": " as",
+          "p": 0.006317191387453869,
+          "q": null
+        },
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.004600476470374194,
+          "q": null
+        },
+        {
+          "id": 342,
+          "token": " with",
+          "p": 0.0037529450384616897,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.0033224716586145306,
+          "q": null
+        },
+        {
+          "id": 668,
+          "token": "\u201d",
+          "p": 0.0026898472980035944,
+          "q": null
+        },
+        {
+          "id": 1892,
+          "token": " hard",
+          "p": 0.002623260604962719,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 22,
+      "parent_beam": 1,
+      "selected_id": 436,
+      "log_p": -0.09228356182575226,
+      "log_q": null,
+      "processed_transition_score": -0.09239953756332397,
+      "model_entropy": 0.515879749647852,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 436,
+          "token": " this",
+          "p": 0.9117231418488456,
+          "q": null
+        },
+        {
+          "id": 326,
+          "token": " that",
+          "p": 0.04726987743570076,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.009507410286043337,
+          "q": null
+        },
+        {
+          "id": 309,
+          "token": " I",
+          "p": 0.003276998590002853,
+          "q": null
+        },
+        {
+          "id": 627,
+          "token": " there",
+          "p": 0.003093240352476205,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.0022200746217242245,
+          "q": null
+        },
+        {
+          "id": 368,
+          "token": " you",
+          "p": 0.0019697077856253146,
+          "q": null
+        },
+        {
+          "id": 594,
+          "token": " so",
+          "p": 0.0017777779768642804,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 23,
+      "parent_beam": 1,
+      "selected_id": 1425,
+      "log_p": -0.43448564410209656,
+      "log_q": null,
+      "processed_transition_score": -0.43458715081214905,
+      "model_entropy": 1.5491794072511276,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1425,
+          "token": ".\u201d",
+          "p": 0.6475184953096731,
+          "q": null
+        },
+        {
+          "id": 15,
+          "token": ".",
+          "p": 0.0935270676735697,
+          "q": null
+        },
+        {
+          "id": 1806,
+          "token": ",\u201d",
+          "p": 0.08519213018443932,
+          "q": null
+        },
+        {
+          "id": 7721,
+          "token": "?\u201d",
+          "p": 0.05268403763464866,
+          "q": null
+        },
+        {
+          "id": 13,
+          "token": ",",
+          "p": 0.024451754414885063,
+          "q": null
+        },
+        {
+          "id": 11602,
+          "token": "!\u201d",
+          "p": 0.0214029750488447,
+          "q": null
+        },
+        {
+          "id": 668,
+          "token": "\u201d",
+          "p": 0.011520477386713374,
+          "q": null
+        },
+        {
+          "id": 6598,
+          "token": "\u201d.",
+          "p": 0.005926564243959308,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 24,
+      "parent_beam": 1,
+      "selected_id": 187,
+      "log_p": -0.09361599385738373,
+      "log_q": null,
+      "processed_transition_score": -0.0937776193022728,
+      "model_entropy": 0.6815853521833116,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 187,
+          "token": "\n",
+          "p": 0.9104634874094512,
+          "q": null
+        },
+        {
+          "id": 16922,
+          "token": " Alice",
+          "p": 0.032012542932556697,
+          "q": null
+        },
+        {
+          "id": 0,
+          "token": "<|endoftext|>",
+          "p": 0.0062559422790951094,
+          "q": null
+        },
+        {
+          "id": 8679,
+          "token": " Bob",
+          "p": 0.004965105546304606,
+          "q": null
+        },
+        {
+          "id": 380,
+          "token": " The",
+          "p": 0.002252762124618029,
+          "q": null
+        },
+        {
+          "id": 753,
+          "token": " said",
+          "p": 0.00205181084130226,
+          "q": null
+        },
+        {
+          "id": 535,
+          "token": "\n\n",
+          "p": 0.0013409563342203056,
+          "q": null
+        },
+        {
+          "id": 1500,
+          "token": " She",
+          "p": 0.001305482097086533,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 25,
+      "parent_beam": 1,
+      "selected_id": 187,
+      "log_p": -0.016797177493572235,
+      "log_q": null,
+      "processed_transition_score": -0.01697065494954586,
+      "model_entropy": 0.1794356981518966,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 187,
+          "token": "\n",
+          "p": 0.9831467844731646,
+          "q": null
+        },
+        {
+          "id": 0,
+          "token": "<|endoftext|>",
+          "p": 0.0027567522402152504,
+          "q": null
+        },
+        {
+          "id": 1898,
+          "token": "And",
+          "p": 0.0007367084498720425,
+          "q": null
+        },
+        {
+          "id": 14,
+          "token": "-",
+          "p": 0.0006803076751596814,
+          "q": null
+        },
+        {
+          "id": 1628,
+          "token": "\u201c",
+          "p": 0.000656200086647449,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.0006120833758661415,
+          "q": null
+        },
+        {
+          "id": 19658,
+          "token": "CHAPTER",
+          "p": 0.0003341014137934897,
+          "q": null
+        },
+        {
+          "id": 13617,
+          "token": "Chapter",
+          "p": 0.00024152433795215702,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 26,
+      "parent_beam": 1,
+      "selected_id": 1628,
+      "log_p": -0.35493719577789307,
+      "log_q": null,
+      "processed_transition_score": -0.35508379340171814,
+      "model_entropy": 2.315281060717716,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1628,
+          "token": "\u201c",
+          "p": 0.701098802635418,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.030235072213808473,
+          "q": null
+        },
+        {
+          "id": 2993,
+          "token": "She",
+          "p": 0.012605115428337116,
+          "q": null
+        },
+        {
+          "id": 1328,
+          "token": "He",
+          "p": 0.010787702227730915,
+          "q": null
+        },
+        {
+          "id": 26845,
+          "token": "Bob",
+          "p": 0.0104771601671814,
+          "q": null
+        },
+        {
+          "id": 42,
+          "token": "I",
+          "p": 0.006458781299797988,
+          "q": null
+        },
+        {
+          "id": 1898,
+          "token": "And",
+          "p": 0.006323216818242189,
+          "q": null
+        },
+        {
+          "id": 688,
+          "token": "In",
+          "p": 0.00563476558566947,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 27,
+      "parent_beam": 1,
+      "selected_id": 42,
+      "log_p": -0.7930276989936829,
+      "log_q": null,
+      "processed_transition_score": -0.7931997776031494,
+      "model_entropy": 3.43465367139097,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 42,
+          "token": "I",
+          "p": 0.4523844879350901,
+          "q": null
+        },
+        {
+          "id": 1394,
+          "token": "You",
+          "p": 0.04857500398392274,
+          "q": null
+        },
+        {
+          "id": 1147,
+          "token": "It",
+          "p": 0.02315973084887707,
+          "q": null
+        },
+        {
+          "id": 1276,
+          "token": "What",
+          "p": 0.022227913446613914,
+          "q": null
+        },
+        {
+          "id": 2773,
+          "token": "That",
+          "p": 0.02183431308037453,
+          "q": null
+        },
+        {
+          "id": 510,
+          "token": "The",
+          "p": 0.0156428703322132,
+          "q": null
+        },
+        {
+          "id": 2042,
+          "token": "If",
+          "p": 0.013694141853804517,
+          "q": null
+        },
+        {
+          "id": 1231,
+          "token": "We",
+          "p": 0.012905300944642548,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 28,
+      "parent_beam": 1,
+      "selected_id": 1364,
+      "log_p": -0.4656338691711426,
+      "log_q": null,
+      "processed_transition_score": -0.46571993827819824,
+      "model_entropy": 2.238199965185196,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 1364,
+          "token": " must",
+          "p": 0.6276731718626483,
+          "q": null
+        },
+        {
+          "id": 717,
+          "token": " am",
+          "p": 0.0441585104891034,
+          "q": null
+        },
+        {
+          "id": 943,
+          "token": " should",
+          "p": 0.03860896432572184,
+          "q": null
+        },
+        {
+          "id": 457,
+          "token": "\u2019",
+          "p": 0.037364925699590296,
+          "q": null
+        },
+        {
+          "id": 878,
+          "token": " need",
+          "p": 0.018144959683404745,
+          "q": null
+        },
+        {
+          "id": 2550,
+          "token": " cannot",
+          "p": 0.016092968585489392,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.016041575472887468,
+          "q": null
+        },
+        {
+          "id": 476,
+          "token": " can",
+          "p": 0.015480324112537082,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 29,
+      "parent_beam": 0,
+      "selected_id": 320,
+      "log_p": -0.06893742829561234,
+      "log_q": null,
+      "processed_transition_score": -0.06903834640979767,
+      "model_entropy": 0.5529932175007596,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 320,
+          "token": " be",
+          "p": 0.9332749393910472,
+          "q": null
+        },
+        {
+          "id": 564,
+          "token": " go",
+          "p": 0.00841485592994498,
+          "q": null
+        },
+        {
+          "id": 417,
+          "token": " not",
+          "p": 0.0062359466425393455,
+          "q": null
+        },
+        {
+          "id": 452,
+          "token": " have",
+          "p": 0.0060801734886108865,
+          "q": null
+        },
+        {
+          "id": 1705,
+          "token": " come",
+          "p": 0.0029171850555350168,
+          "q": null
+        },
+        {
+          "id": 4089,
+          "token": " hear",
+          "p": 0.0029012625152264175,
+          "q": null
+        },
+        {
+          "id": 1379,
+          "token": " take",
+          "p": 0.0020681106872466374,
+          "q": null
+        },
+        {
+          "id": 3553,
+          "token": " leave",
+          "p": 0.0016516035714616616,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 30,
+      "parent_beam": 0,
+      "selected_id": 40806,
+      "log_p": -0.9505574107170105,
+      "log_q": null,
+      "processed_transition_score": -0.9506341218948364,
+      "model_entropy": 3.8040404432819512,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 40806,
+          "token": " shutting",
+          "p": 0.3864918774357751,
+          "q": null
+        },
+        {
+          "id": 6179,
+          "token": " waiting",
+          "p": 0.05389640914699362,
+          "q": null
+        },
+        {
+          "id": 6294,
+          "token": " shut",
+          "p": 0.03217356405775815,
+          "q": null
+        },
+        {
+          "id": 11196,
+          "token": " closing",
+          "p": 0.03127073616431238,
+          "q": null
+        },
+        {
+          "id": 15910,
+          "token": " stopping",
+          "p": 0.03100085446591249,
+          "q": null
+        },
+        {
+          "id": 1469,
+          "token": " going",
+          "p": 0.027135057318020635,
+          "q": null
+        },
+        {
+          "id": 2970,
+          "token": " getting",
+          "p": 0.01797555508146195,
+          "q": null
+        },
+        {
+          "id": 5877,
+          "token": " holding",
+          "p": 0.014737774950101564,
+          "q": null
+        }
+      ]
+    },
+    {
+      "position": 31,
+      "parent_beam": 1,
+      "selected_id": 598,
+      "log_p": -0.335248738527298,
+      "log_q": null,
+      "processed_transition_score": -0.335347443819046,
+      "model_entropy": 0.9511313426228294,
+      "entropy_q": null,
+      "support": 50304,
+      "top": [
+        {
+          "id": 598,
+          "token": " up",
+          "p": 0.7150736914259206,
+          "q": null
+        },
+        {
+          "id": 1066,
+          "token": " down",
+          "p": 0.23359576342481686,
+          "q": null
+        },
+        {
+          "id": 562,
+          "token": " out",
+          "p": 0.009126927761511562,
+          "q": null
+        },
+        {
+          "id": 745,
+          "token": " off",
+          "p": 0.006075057193232362,
+          "q": null
+        },
+        {
+          "id": 253,
+          "token": " the",
+          "p": 0.002806513976905997,
+          "q": null
+        },
+        {
+          "id": 352,
+          "token": " it",
+          "p": 0.0025670329688288213,
+          "q": null
+        },
+        {
+          "id": 436,
+          "token": " this",
+          "p": 0.0024704767056787894,
+          "q": null
+        },
+        {
+          "id": 1841,
+          "token": " things",
+          "p": 0.002075760142952647,
+          "q": null
+        }
+      ]
+    }
+  ],
+  "wall_seconds": 0.5764788000087719,
+  "log_p": -22.381681099534035,
+  "log_q": null,
+  "sequence_score": -22.385629653930664,
+  "reconstructed_sequence_score": -22.385631134733558,
+  "resolved_generation_config": {
+    "max_length": null,
+    "max_new_tokens": 32,
+    "min_length": 0,
+    "min_new_tokens": 0,
+    "early_stopping": "never",
+    "max_time": null,
+    "stop_strings": null,
+    "do_sample": false,
+    "num_beams": 2,
+    "use_mtp": null,
+    "use_cache": true,
+    "cache_implementation": null,
+    "cache_config": null,
+    "max_cache_len": null,
+    "temperature": null,
+    "top_k": null,
+    "top_p": null,
+    "min_p": null,
+    "top_h": null,
+    "typical_p": null,
+    "epsilon_cutoff": null,
+    "eta_cutoff": null,
+    "repetition_penalty": 1.0,
+    "encoder_repetition_penalty": null,
+    "length_penalty": 0.0,
+    "no_repeat_ngram_size": 0,
+    "bad_words_ids": null,
+    "renormalize_logits": true,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "remove_invalid_values": null,
+    "exponential_decay_length_penalty": null,
+    "suppress_tokens": null,
+    "begin_suppress_tokens": null,
+    "sequence_bias": null,
+    "token_healing": null,
+    "guidance_scale": null,
+    "watermarking_config": null,
+    "num_return_sequences": null,
+    "output_attentions": null,
+    "output_hidden_states": null,
+    "output_scores": true,
+    "output_logits": true,
+    "return_dict_in_generate": true,
+    "pad_token_id": 0,
+    "bos_token_id": 0,
+    "eos_token_id": 0,
+    "encoder_no_repeat_ngram_size": null,
+    "decoder_start_token_id": null,
+    "is_assistant": null,
+    "num_assistant_tokens": null,
+    "num_assistant_tokens_schedule": null,
+    "assistant_confidence_threshold": null,
+    "prompt_lookup_num_tokens": null,
+    "max_matching_ngram_size": null,
+    "assistant_early_exit": null,
+    "assistant_lookbehind": null,
+    "target_lookbehind": null,
+    "assistant_ensemble_weight": null,
+    "speculation_type": null,
+    "compile_config": null,
+    "disable_compile": null,
+    "continuous_batching_config": null,
+    "low_memory": null,
+    "penalty_alpha": null,
+    "dola_layers": null,
+    "diversity_penalty": null,
+    "num_beam_groups": null,
+    "constraints": null,
+    "force_words_ids": null,
+    "prefill_chunk_size": null,
+    "_from_model_config": null,
+    "transformers_version": "5.19.0"
+  },
+  "run_id": "heldout-line-2-beam2-None",
+  "model": "pythia-14m",
+  "prompt": {
+    "id": "heldout-line-2",
+    "source": " \u201cWhat a curious feeling!\u201d said Alice; \u201cI must be shutting up like a telescope.\u201d",
+    "source_sha256": "e2e18217d3d2e21bd094b9a1db319ce64961ceb7afe06fa670431f32da2e6d25",
+    "prompt": "\u201cWhat a curious feeling!\u201d said Alice; \u201cI must be shutting up like"
+  },
+  "prompt_ids": [
+    1628,
+    1276,
+    247,
+    14338,
+    5471,
+    11602,
+    753,
+    16922,
+    28,
+    773,
+    42,
+    1364,
+    320,
+    40806,
+    598,
+    751
+  ],
+  "method": {
+    "name": "beam2",
+    "beam": 2
+  },
+  "seed": null
+}

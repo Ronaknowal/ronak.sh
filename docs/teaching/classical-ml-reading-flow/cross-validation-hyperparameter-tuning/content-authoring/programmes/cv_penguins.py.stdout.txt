@@ -1,0 +1,7 @@
+1 11 StandardScaler 114 / 115 baseline 51
+2 3 StandardScaler 114 / 115 baseline 51
+3 3 RobustScaler 112 / 114 baseline 50
+outer fold mean 0.9883549
+outer pooled 0.9883721
+final settings {'classify__n_neighbors': 3, 'prepare__numeric__scale': StandardScaler()}
+final selection score 0.9913043

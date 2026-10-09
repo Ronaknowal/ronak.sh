@@ -1,0 +1,40 @@
+{
+  "dataset": "HuggingFaceFW/fineweb-edu-llama3-annotations",
+  "expected_revision": "72df4c92fb1b48beceb16016e8f695ec40a6c3a5",
+  "offsets": [
+    0,
+    24596,
+    49192,
+    73788,
+    98384,
+    122980,
+    147576,
+    172172,
+    196768,
+    221364,
+    245960,
+    270556,
+    295152,
+    319748,
+    344344,
+    368940,
+    393536,
+    418132,
+    442728,
+    467324
+  ],
+  "window": 100,
+  "prefix_characters": 1000,
+  "positive_integer_score_at_least": 3,
+  "group_edges": [
+    "same nonempty lowercase hostname without leading www.",
+    "exact NFC/casefold/whitespace normalized prefix",
+    "exact Jaccard >= 0.8 over normalized 3-word shingles"
+  ],
+  "near_duplicate_search": "all pairs with length-ratio upper bound; no missed LSH candidates",
+  "group_identity": "SHA256 of newline-joined sorted zero-padded source row IDs",
+  "split": "first 8 digest bytes as big-endian integer modulo 10: 0..5 train,6..7 tune,8..9 final",
+  "sample_kind": "20 deterministic coverage windows; not IID web sampling",
+  "missing_host": "no host edge; exact and near-duplicate edges still apply",
+  "normalization_owner": "preceding lesson curation_records.py and lexical_dedup.py"
+}

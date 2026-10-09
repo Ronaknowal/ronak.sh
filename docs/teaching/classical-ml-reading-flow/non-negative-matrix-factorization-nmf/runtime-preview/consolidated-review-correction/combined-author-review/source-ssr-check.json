@@ -1,0 +1,7836 @@
+{
+  "schema": "nmf-current-combined-author-source-ssr/v1",
+  "author": "Original NMF runtime author; not independent",
+  "conditions": [
+    {
+      "name": "Current product parses Drawing.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses ArrayFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses GeometryFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses OptimizationFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses SavedDataFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses IdentifiabilityFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses TransferFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses NmfFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses FileIndex.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses nmf-model.js",
+      "passed": true
+    },
+    {
+      "name": "Current product parses saved-data.js",
+      "passed": true
+    },
+    {
+      "name": "Current product parses nmf-lesson.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses file-index-data.js",
+      "passed": true
+    },
+    {
+      "name": "Current product parses preview-entry.jsx",
+      "passed": true
+    },
+    {
+      "name": "Current product parses preview-loader.js",
+      "passed": true
+    },
+    {
+      "name": "Current product parses vite.config.mjs",
+      "passed": true
+    },
+    {
+      "name": "Current product parses Operations.jsx",
+      "passed": true
+    },
+    {
+      "name": "File table has original row centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_multiplicative.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_beta_mm.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_initialization.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row ordinary_nmf_lifecycle.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_penalties_masks.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_factor_alignment.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_digit_comparison.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_anchors.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_text_spectra.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_online.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_axis_phase.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_step.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_digits.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_words.py",
+      "passed": true
+    },
+    {
+      "name": "File table has original row nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "File table has original row digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "File table has original row digits-data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "Entire Reader equals original plus exact Root composition amendments",
+      "passed": true
+    },
+    {
+      "name": "Reader source has66 ordered placements",
+      "passed": true
+    },
+    {
+      "name": "Reader keeps all19 H2 sections",
+      "passed": true
+    },
+    {
+      "name": "No duplicate custom compass or file index",
+      "passed": true
+    },
+    {
+      "name": "Exactly22 embedded FileActions",
+      "passed": true
+    },
+    {
+      "name": "18 whole programme placements conserved",
+      "passed": true
+    },
+    {
+      "name": "whole-reader no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Whole current Reader renders66 ordered actual figures",
+      "passed": true
+    },
+    {
+      "name": "Whole Reader renders19 sections",
+      "passed": true
+    },
+    {
+      "name": "Whole Reader renders24 practice scopes",
+      "passed": true
+    },
+    {
+      "name": "Whole Reader renders48 hint/solution disclosures",
+      "passed": true
+    },
+    {
+      "name": "Whole Reader renders22 complete file copy actions",
+      "passed": true
+    },
+    {
+      "name": "Whole Reader unique element/fragment IDs",
+      "passed": true
+    },
+    {
+      "name": "Whole Reader no unresolved template placeholders",
+      "passed": true
+    },
+    {
+      "name": "D01-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D01 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D02-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D02 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D03-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D03 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D04-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D04 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D05-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D05 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D06-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D06 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D07-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D07 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D08-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D08 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D09-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D09 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D10-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D10 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D11-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D11 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D12-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D12 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D13-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D13 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D14-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D14 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D15-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D15 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D16-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D16 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D17-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D17 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D18-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D18 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D19-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D19 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D20-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D20 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D21-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D21 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D22-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D22 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D23-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D23 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D24-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D24 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D25-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D25 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D26-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D26 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D27-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D27 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D28-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D28 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D29-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D29 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D30-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D30 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D31-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D31 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D32-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D32 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D33-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D33 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D34-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D34 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D35-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D35 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D36-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D36 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D37-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D37 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D38-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D38 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D39-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D39 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D40-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D40 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D41-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D41 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D42-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D42 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D43-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D43 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D44-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D44 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D45-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D45 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D46-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D46 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D47-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D47 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D48-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D48 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D49-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D49 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D50-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D50 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D51-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D51 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D52-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D52 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D53-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D53 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D54-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D54 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D55-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D55 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D56-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D56 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D57-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D57 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D58-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D58 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D59-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D59 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D60-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D60 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D61-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D61 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D62-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D62 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D63-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D63 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D64-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D64 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D65-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D65 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "D66-default no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D66 exact actual identity",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D3",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D4",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D17",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D20",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D23",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D24",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D25",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D28",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D30",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D31",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D32",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D33",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D34",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D35",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D36",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D37",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D40",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D61",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D62",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D64",
+      "passed": true
+    },
+    {
+      "name": "Addressed operation groups D65",
+      "passed": true
+    },
+    {
+      "name": "Root addressed contractions D3",
+      "passed": true
+    },
+    {
+      "name": "Root addressed contractions D17",
+      "passed": true
+    },
+    {
+      "name": "D14 amount plane uses equal units",
+      "passed": true
+    },
+    {
+      "name": "D43-242-0-2 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D43 observed comes before pattern/addend 242/2",
+      "passed": true
+    },
+    {
+      "name": "Actual image C1 · weighted addend",
+      "passed": true
+    },
+    {
+      "name": "D43 complete edited addend 242/2",
+      "passed": true
+    },
+    {
+      "name": "Actual image Current complete reconstruction",
+      "passed": true
+    },
+    {
+      "name": "D43 other addends held 242/2",
+      "passed": true
+    },
+    {
+      "name": "D43-242-7-0 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D43 observed comes before pattern/addend 242/0",
+      "passed": true
+    },
+    {
+      "name": "Actual image C8 · weighted addend",
+      "passed": true
+    },
+    {
+      "name": "D43 complete edited addend 242/0",
+      "passed": true
+    },
+    {
+      "name": "Actual image Current complete reconstruction",
+      "passed": true
+    },
+    {
+      "name": "D43 other addends held 242/0",
+      "passed": true
+    },
+    {
+      "name": "D43 actual zero saved amount remains zero 0",
+      "passed": true
+    },
+    {
+      "name": "D43-242-7-2 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D43 observed comes before pattern/addend 242/2",
+      "passed": true
+    },
+    {
+      "name": "Actual image C8 · weighted addend",
+      "passed": true
+    },
+    {
+      "name": "D43 complete edited addend 242/2",
+      "passed": true
+    },
+    {
+      "name": "Actual image Current complete reconstruction",
+      "passed": true
+    },
+    {
+      "name": "D43 other addends held 242/2",
+      "passed": true
+    },
+    {
+      "name": "D43 actual zero saved amount remains zero 2",
+      "passed": true
+    },
+    {
+      "name": "D43-256-7-0 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D43 observed comes before pattern/addend 256/0",
+      "passed": true
+    },
+    {
+      "name": "Actual image C8 · weighted addend",
+      "passed": true
+    },
+    {
+      "name": "D43 complete edited addend 256/0",
+      "passed": true
+    },
+    {
+      "name": "Actual image Current complete reconstruction",
+      "passed": true
+    },
+    {
+      "name": "D43 other addends held 256/0",
+      "passed": true
+    },
+    {
+      "name": "D43-256-7-2 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "D43 observed comes before pattern/addend 256/2",
+      "passed": true
+    },
+    {
+      "name": "Actual image C8 · weighted addend",
+      "passed": true
+    },
+    {
+      "name": "D43 complete edited addend 256/2",
+      "passed": true
+    },
+    {
+      "name": "Actual image Current complete reconstruction",
+      "passed": true
+    },
+    {
+      "name": "D43 other addends held 256/2",
+      "passed": true
+    },
+    {
+      "name": "D45-remove-0 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image C8 addend actually removed · r × complete addend",
+      "passed": true
+    },
+    {
+      "name": "D45 actual removed full image 0",
+      "passed": true
+    },
+    {
+      "name": "Actual image Current reconstruction",
+      "passed": true
+    },
+    {
+      "name": "D45 current equals original minus removed 0",
+      "passed": true
+    },
+    {
+      "name": "D45 meaningful removal semantics 0",
+      "passed": true
+    },
+    {
+      "name": "D45-remove-0.5 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image C8 addend actually removed · r × complete addend",
+      "passed": true
+    },
+    {
+      "name": "D45 actual removed full image 0.5",
+      "passed": true
+    },
+    {
+      "name": "Actual image Current reconstruction",
+      "passed": true
+    },
+    {
+      "name": "D45 current equals original minus removed 0.5",
+      "passed": true
+    },
+    {
+      "name": "D45 meaningful removal semantics 0.5",
+      "passed": true
+    },
+    {
+      "name": "D45-remove-1 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image C8 addend actually removed · r × complete addend",
+      "passed": true
+    },
+    {
+      "name": "D45 actual removed full image 1",
+      "passed": true
+    },
+    {
+      "name": "Actual image Current reconstruction",
+      "passed": true
+    },
+    {
+      "name": "D45 current equals original minus removed 1",
+      "passed": true
+    },
+    {
+      "name": "D45 meaningful removal semantics 1",
+      "passed": true
+    },
+    {
+      "name": "D46 actual disjoint180/60/60 masks",
+      "passed": true
+    },
+    {
+      "name": "D46 mask union is actual300 attributed CSV source IDs",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 242",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 256",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 40",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 220",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 132",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 97",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 1",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 13",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 43",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 180",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 120",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 272",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 244",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 202",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 95",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 265",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 102",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 221",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 248",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 213",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 145",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 74",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 58",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 232",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 222",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 7",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 179",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 29",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 261",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 60",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 246",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 47",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 194",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 107",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 119",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 159",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 38",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 259",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 177",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 147",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 306",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 59",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 84",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 41",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 140",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 8",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 203",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 20",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 182",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 26",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 85",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 113",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 118",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 127",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 121",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 103",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 290",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 185",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 260",
+      "passed": true
+    },
+    {
+      "name": "D46 reserved label/pixels are actual CSV source 239",
+      "passed": true
+    },
+    {
+      "name": "D46 exact original reserved IDs",
+      "passed": true
+    },
+    {
+      "name": "D46 representative source membership",
+      "passed": true
+    },
+    {
+      "name": "D46 every actual ID tick",
+      "passed": true
+    },
+    {
+      "name": "D46 complete accessible train IDs",
+      "passed": true
+    },
+    {
+      "name": "D46 complete accessible validation IDs",
+      "passed": true
+    },
+    {
+      "name": "D46 complete accessible test IDs",
+      "passed": true
+    },
+    {
+      "name": "D46 complete eight by64 stored H shape",
+      "passed": true
+    },
+    {
+      "name": "D46 stores exactly one actual H table",
+      "passed": true
+    },
+    {
+      "name": "D46 explicit train-only and reused H roles",
+      "passed": true
+    },
+    {
+      "name": "D46 validation values correctly qualified",
+      "passed": true
+    },
+    {
+      "name": "D46 original inspection and selection roles stay distinct",
+      "passed": true
+    },
+    {
+      "name": "D46 corrected source ruler760",
+      "passed": true
+    },
+    {
+      "name": "D46 conservative explicit13px text fits760 by300",
+      "passed": true
+    },
+    {
+      "name": "D46 conservative explicit13px text boxes do not intersect",
+      "passed": true
+    },
+    {
+      "name": "D46 actual H is saved dictionary to presentation precision",
+      "passed": true
+    },
+    {
+      "name": "D46 actual first two reserved64 feature rows",
+      "passed": true
+    },
+    {
+      "name": "D46 actual first two reserved8 amounts",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 0/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 0/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 0/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 0/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 0/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 0/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 0/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 0/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 1/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 1/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 1/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 1/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 1/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 1/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 1/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 1/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 2/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 2/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 2/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 2/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 2/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 2/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 2/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 2/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 3/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 3/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 3/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 3/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 3/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 3/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 3/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 3/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 4/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 4/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 4/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 4/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 4/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 4/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 4/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 4/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 5/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 5/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 5/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 5/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 5/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 5/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 5/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 5/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 6/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 6/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 6/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 6/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 6/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 6/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 6/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 6/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 7/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 7/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 7/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 7/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 7/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 7/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 7/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 7/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 8/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 8/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 8/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 8/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 8/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 8/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 8/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 8/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 9/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 9/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 9/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 9/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 9/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 9/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 9/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 9/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 10/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 10/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 10/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 10/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 10/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 10/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 10/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 10/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 11/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 11/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 11/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 11/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 11/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 11/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 11/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 11/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 12/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 12/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 12/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 12/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 12/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 12/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 12/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 12/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 13/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 13/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 13/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 13/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 13/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 13/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 13/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 13/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 14/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 14/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 14/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 14/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 14/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 14/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 14/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 14/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 15/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 15/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 15/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 15/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 15/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 15/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 15/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 15/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 16/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 16/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 16/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 16/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 16/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 16/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 16/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 16/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 17/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 17/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 17/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 17/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 17/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 17/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 17/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 17/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 18/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 18/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 18/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 18/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 18/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 18/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 18/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 18/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 19/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 19/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 19/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 19/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 19/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 19/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 19/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 19/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 20/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 20/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 20/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 20/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 20/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 20/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 20/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 20/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 21/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 21/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 21/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 21/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 21/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 21/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 21/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 21/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 22/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 22/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 22/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 22/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 22/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 22/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 22/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 22/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 23/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 23/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 23/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 23/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 23/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 23/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 23/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 23/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 24/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 24/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 24/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 24/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 24/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 24/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 24/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 24/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 25/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 25/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 25/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 25/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 25/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 25/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 25/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 25/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 26/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 26/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 26/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 26/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 26/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 26/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 26/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 26/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 27/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 27/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 27/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 27/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 27/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 27/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 27/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 27/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 28/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 28/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 28/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 28/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 28/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 28/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 28/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 28/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 29/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 29/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 29/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 29/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 29/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 29/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 29/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 29/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 30/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 30/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 30/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 30/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 30/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 30/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 30/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 30/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 31/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 31/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 31/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 31/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 31/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 31/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 31/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 31/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 32/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 32/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 32/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 32/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 32/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 32/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 32/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 32/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 33/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 33/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 33/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 33/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 33/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 33/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 33/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 33/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 34/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 34/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 34/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 34/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 34/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 34/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 34/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 34/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 35/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 35/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 35/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 35/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 35/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 35/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 35/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 35/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 36/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 36/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 36/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 36/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 36/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 36/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 36/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 36/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 37/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 37/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 37/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 37/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 37/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 37/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 37/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 37/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 38/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 38/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 38/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 38/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 38/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 38/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 38/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 38/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 39/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 39/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 39/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 39/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 39/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 39/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 39/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 39/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 40/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 40/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 40/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 40/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 40/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 40/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 40/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 40/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 41/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 41/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 41/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 41/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 41/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 41/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 41/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 41/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 42/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 42/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 42/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 42/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 42/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 42/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 42/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 42/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 43/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 43/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 43/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 43/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 43/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 43/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 43/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 43/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 44/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 44/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 44/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 44/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 44/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 44/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 44/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 44/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 45/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 45/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 45/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 45/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 45/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 45/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 45/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 45/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 46/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 46/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 46/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 46/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 46/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 46/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 46/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 46/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 47/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 47/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 47/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 47/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 47/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 47/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 47/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 47/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 48/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 48/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 48/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 48/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 48/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 48/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 48/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 48/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 49/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 49/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 49/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 49/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 49/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 49/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 49/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 49/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 50/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 50/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 50/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 50/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 50/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 50/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 50/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 50/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 51/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 51/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 51/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 51/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 51/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 51/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 51/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 51/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 52/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 52/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 52/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 52/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 52/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 52/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 52/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 52/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 53/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 53/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 53/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 53/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 53/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 53/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 53/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 53/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 54/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 54/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 54/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 54/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 54/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 54/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 54/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 54/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 55/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 55/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 55/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 55/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 55/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 55/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 55/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 55/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 56/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 56/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 56/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 56/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 56/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 56/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 56/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 56/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 57/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 57/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 57/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 57/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 57/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 57/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 57/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 57/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 58/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 58/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 58/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 58/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 58/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 58/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 58/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 58/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 59/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 59/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 59/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 59/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 59/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 59/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 59/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 59/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 60/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 60/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 60/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 60/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 60/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 60/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 60/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 60/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 61/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 61/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 61/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 61/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 61/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 61/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 61/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 61/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 62/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 62/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 62/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 62/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 62/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 62/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 62/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 62/End/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 63/ArrowLeft/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 63/ArrowRight/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 63/ArrowUp/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 63/ArrowDown/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 63/Home/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 63/End/false",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 63/Home/true",
+      "passed": true
+    },
+    {
+      "name": "Actual Pixels handler 63/End/true",
+      "passed": true
+    },
+    {
+      "name": "Top row ArrowUp preserves all eight columns",
+      "passed": true
+    },
+    {
+      "name": "Bottom row ArrowDown preserves all eight columns",
+      "passed": true
+    },
+    {
+      "name": "Pixels-address-0 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image Actual source242 addressed measurement",
+      "passed": true
+    },
+    {
+      "name": "Pixels emits64 individually named exact values 0",
+      "passed": true
+    },
+    {
+      "name": "Pixels exact current readout 0",
+      "passed": true
+    },
+    {
+      "name": "Pixels selected address 0",
+      "passed": true
+    },
+    {
+      "name": "Pixels group named/described/focusable 0",
+      "passed": true
+    },
+    {
+      "name": "Pixels-address-7 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image Actual source242 addressed measurement",
+      "passed": true
+    },
+    {
+      "name": "Pixels emits64 individually named exact values 7",
+      "passed": true
+    },
+    {
+      "name": "Pixels exact current readout 7",
+      "passed": true
+    },
+    {
+      "name": "Pixels selected address 7",
+      "passed": true
+    },
+    {
+      "name": "Pixels group named/described/focusable 7",
+      "passed": true
+    },
+    {
+      "name": "Pixels-address-8 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image Actual source242 addressed measurement",
+      "passed": true
+    },
+    {
+      "name": "Pixels emits64 individually named exact values 8",
+      "passed": true
+    },
+    {
+      "name": "Pixels exact current readout 8",
+      "passed": true
+    },
+    {
+      "name": "Pixels selected address 8",
+      "passed": true
+    },
+    {
+      "name": "Pixels group named/described/focusable 8",
+      "passed": true
+    },
+    {
+      "name": "Pixels-address-35 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image Actual source242 addressed measurement",
+      "passed": true
+    },
+    {
+      "name": "Pixels emits64 individually named exact values 35",
+      "passed": true
+    },
+    {
+      "name": "Pixels exact current readout 35",
+      "passed": true
+    },
+    {
+      "name": "Pixels selected address 35",
+      "passed": true
+    },
+    {
+      "name": "Pixels group named/described/focusable 35",
+      "passed": true
+    },
+    {
+      "name": "Pixels-address-56 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image Actual source242 addressed measurement",
+      "passed": true
+    },
+    {
+      "name": "Pixels emits64 individually named exact values 56",
+      "passed": true
+    },
+    {
+      "name": "Pixels exact current readout 56",
+      "passed": true
+    },
+    {
+      "name": "Pixels selected address 56",
+      "passed": true
+    },
+    {
+      "name": "Pixels group named/described/focusable 56",
+      "passed": true
+    },
+    {
+      "name": "Pixels-address-63 no nonfinite geometry",
+      "passed": true
+    },
+    {
+      "name": "Actual image Actual source242 addressed measurement",
+      "passed": true
+    },
+    {
+      "name": "Pixels emits64 individually named exact values 63",
+      "passed": true
+    },
+    {
+      "name": "Pixels exact current readout 63",
+      "passed": true
+    },
+    {
+      "name": "Pixels selected address 63",
+      "passed": true
+    },
+    {
+      "name": "Pixels group named/described/focusable 63",
+      "passed": true
+    },
+    {
+      "name": "Pixel exact inspected F35 matches accepted raw16/16",
+      "passed": true
+    },
+    {
+      "name": "All saved H, amount, addend/prediction/residual image rulers unchanged",
+      "passed": true
+    },
+    {
+      "name": "Named scrollable dependency diagram retains full width",
+      "passed": true
+    },
+    {
+      "name": "Pixel accessible focus/readout/style source",
+      "passed": true
+    },
+    {
+      "name": "File action copy/refusal/manual fallback retained",
+      "passed": true
+    },
+    {
+      "name": "Private config isolates public/foreign lesson trees",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks Drawing.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks ArrayFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks GeometryFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks OptimizationFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks SavedDataFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks IdentifiabilityFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks TransferFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks NmfFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks FileIndex.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks nmf-model.js",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks saved-data.js",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks nmf-lesson.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks file-index-data.js",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks lesson.css",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks preview.css",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks preview-entry.jsx",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks preview-loader.js",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks index.html",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks vite.config.mjs",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks file-payloads.json",
+      "passed": true
+    },
+    {
+      "name": "Product remains exact after combined checks Operations.jsx",
+      "passed": true
+    },
+    {
+      "name": "Previous original-author scoped freeze still exact docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/GeometryFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Previous original-author scoped freeze still exact docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/OptimizationFigures.jsx",
+      "passed": true
+    },
+    {
+      "name": "Previous original-author scoped freeze still exact docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/TransferFigures.jsx",
+      "passed": true
+    }
+  ],
+  "conditionCount": 918,
+  "productBindings": [
+    {
+      "path": "Drawing.jsx",
+      "bytes": 7017,
+      "sha256": "0620bddf26f521d07ef360216265f9af4f930c04c5416945f3ba28a65d54ee8a"
+    },
+    {
+      "path": "ArrayFigures.jsx",
+      "bytes": 9415,
+      "sha256": "fedad522e550150fc7fce8bc6d57151f08e21f6405cd56a864094435cee0227e"
+    },
+    {
+      "path": "GeometryFigures.jsx",
+      "bytes": 16629,
+      "sha256": "322b8774703e1591776d1fb4a6cc0509684ee23917b6f3d49856cf40c02ca3f7"
+    },
+    {
+      "path": "OptimizationFigures.jsx",
+      "bytes": 38983,
+      "sha256": "fffbec944ea643d54fc6d86770b9d87036a2fee44000efe7111bf31b23bb45ed"
+    },
+    {
+      "path": "SavedDataFigures.jsx",
+      "bytes": 18336,
+      "sha256": "456d7b64ff39d1476d8b737a67b86d6c91fada3617a02160eb6d9053b25f11c2"
+    },
+    {
+      "path": "IdentifiabilityFigures.jsx",
+      "bytes": 11681,
+      "sha256": "925af706b8a0fcd07d1864581f329d29cc8350b5eea8cc787b1c700e989ba10a"
+    },
+    {
+      "path": "TransferFigures.jsx",
+      "bytes": 18848,
+      "sha256": "920c50b7185366856c950cc84b585ee4260b28c8c40cd7575fdcf46c1775ec68"
+    },
+    {
+      "path": "NmfFigures.jsx",
+      "bytes": 1535,
+      "sha256": "f2ebe6ae8b69e659a04a40ccd9dab4bb9be0a69a28142fc7aeb3af71689a7156"
+    },
+    {
+      "path": "FileIndex.jsx",
+      "bytes": 1152,
+      "sha256": "3071b516ee35b09f60beec970eceb0f71d4dd527f3648685a891e5a33dc06a99"
+    },
+    {
+      "path": "nmf-model.js",
+      "bytes": 6561,
+      "sha256": "057c37d97da0c0ec5e69404feefb05fc71e94323a16015275470f18ba161b680"
+    },
+    {
+      "path": "saved-data.js",
+      "bytes": 48181,
+      "sha256": "d8f5759102aee34ff0c2029d91956639baa2eb828884b5359782b933958bd425"
+    },
+    {
+      "path": "nmf-lesson.jsx",
+      "bytes": 324434,
+      "sha256": "6f22d35534dcd94694a61d60dec33e9f58d70e11b5f660bd3006bcf8b08880f1"
+    },
+    {
+      "path": "file-index-data.js",
+      "bytes": 7985,
+      "sha256": "2b59344616a5438cde3a0fdf82230edeeeef1db578c93aa61c3dfb448927990c"
+    },
+    {
+      "path": "lesson.css",
+      "bytes": 8021,
+      "sha256": "44d5194847126019e30ddbcf369c3866799ddb844bf294ffcd3d3554560ccfaa"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 146,
+      "sha256": "9a7ac50bb5107e96a686a36917f00511a1fccab8ec21d4416aceafe13c73b962"
+    },
+    {
+      "path": "preview-entry.jsx",
+      "bytes": 1104,
+      "sha256": "eb80c09ca7576f62a18f5daf1b067f869dbffeebc9780480b5c579f25590e7b8"
+    },
+    {
+      "path": "preview-loader.js",
+      "bytes": 176,
+      "sha256": "932aeeb0631ad74e40f460b610ef5d2db12ef1ba1387ce9dae91efecd28d1c39"
+    },
+    {
+      "path": "index.html",
+      "bytes": 264,
+      "sha256": "c2e879c87075c9f8ccc6ada2a16343783c01d7ad8a289795840b826a33552bb3"
+    },
+    {
+      "path": "vite.config.mjs",
+      "bytes": 3127,
+      "sha256": "5dac28b4fa0d82448d62d000b4263dcd7afbef3ce16a9293faf4073c027ba75e"
+    },
+    {
+      "path": "file-payloads.json",
+      "bytes": 19497,
+      "sha256": "fb3b029264e9482a783f608e52fb77cc8912bf5718e898f93cee7642ab7bce47"
+    },
+    {
+      "path": "Operations.jsx",
+      "bytes": 1451,
+      "sha256": "26b2b8dd1e58b0eaf40b3ef93e7fd4ef2fd17e2123c8c51bec69835260b5efa3"
+    }
+  ],
+  "cases": [
+    {
+      "name": "whole-reader",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/whole-reader.html",
+        "bytes": 1810870,
+        "sha256": "c8f94d98ae8417c29e2f68b1199453b76f17a3a0a2f22f305b4af92bd4c783f1"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D01-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D01-default.html",
+        "bytes": 806,
+        "sha256": "22ebe83d7a6cf2e3324726097bf9f105cfe80c9a53654f5ef0a0584d0ef9b3a0"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D02-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D02-default.html",
+        "bytes": 3554,
+        "sha256": "2c578481d85897634a5cafecbf3154466abcf96ced7052b57ec15c5fbacc4473"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D03-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D03-default.html",
+        "bytes": 4593,
+        "sha256": "65df09919989e85371cb4f51e8e697ff3bdf09f783fa6c5ef49ec7db73791855"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D04-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D04-default.html",
+        "bytes": 10145,
+        "sha256": "2a2b47c408e0cabf3967503c87d954c1218fe61217ed19d20dcd051aa4d42a77"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D05-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D05-default.html",
+        "bytes": 2685,
+        "sha256": "221f88339c9a3acb92bc61ac1fa891615d2c1c762eed5bd26bfa59f891502922"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D06-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D06-default.html",
+        "bytes": 5663,
+        "sha256": "d1126befcb2be9bb4c2cd1125858161168f36d0bf2b49740d9e4b44c31817932"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D07-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D07-default.html",
+        "bytes": 6660,
+        "sha256": "7213447b94dad8270f3d207a0fbe6a014cccf3f545b87fea4cf82f2af382eb41"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D08-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D08-default.html",
+        "bytes": 1503,
+        "sha256": "e56ef971c96dd580f5fe0709e0c723ad71b2a01c885c7b2e5c3e8977c894e389"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D09-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D09-default.html",
+        "bytes": 2539,
+        "sha256": "ad02fb114bef31a9040d5aadf0615aa7c9f0bd64d6777afa0d35d0fea71cdadb"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D10-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D10-default.html",
+        "bytes": 2129,
+        "sha256": "f5b372348ec95c9531c54ae328eec02c74dcad7802b5dd647f816deba4387f75"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D11-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D11-default.html",
+        "bytes": 2218,
+        "sha256": "befddc9508a54ace23e146fe92057548d46ac57c60c11ac6e0db82d47bb0cf6f"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D12-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D12-default.html",
+        "bytes": 11353,
+        "sha256": "8946ef43b7c30542319ab58d8e758bc1e80335889f7b7acc51fd51e1d1825c59"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D13-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D13-default.html",
+        "bytes": 4844,
+        "sha256": "ba31fbe5fd18a3821ce3faba91efb76eb7484be1df88325af5753149c9e7effa"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D14-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D14-default.html",
+        "bytes": 6242,
+        "sha256": "b6b8f7d9c55b3f66102a89394dd246f1b3d6142aac3b5a832d5a6a48f36ec885"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D15-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D15-default.html",
+        "bytes": 5192,
+        "sha256": "7e72f296a31465e19bc35d064060ba238bd53e5e0265e6b01db3c519cdf57a8b"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D16-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D16-default.html",
+        "bytes": 4697,
+        "sha256": "f50d8369f195f449d6cd2fe8b17f08b03709aa1f5ae6b67280157eb396ec8cd4"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D17-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D17-default.html",
+        "bytes": 8462,
+        "sha256": "be84dd20db1267204f135265606d5e705a7811b60b47799d64e7cb58013bb498"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D18-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D18-default.html",
+        "bytes": 3300,
+        "sha256": "9462d0bd89e0b7c4753f2415b418f1f7530e05ce58f985bdbc1398b1961aba7c"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D19-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D19-default.html",
+        "bytes": 3472,
+        "sha256": "bf094580648bedf338ebb0317f498a22a7a9da494ab89edb67417f20d9beb125"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D20-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D20-default.html",
+        "bytes": 8040,
+        "sha256": "a554164400ac3e040c086dbd39611aa6a3cebfd24a62bd5e611c7a9230f6f772"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D21-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D21-default.html",
+        "bytes": 7143,
+        "sha256": "bb062bdc0a7ca9f78b6f69a2bbc1deb36f906f016cfb0570e2536a0cb2c99501"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D22-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D22-default.html",
+        "bytes": 4180,
+        "sha256": "54bd208dbf4d51d08c1514cdaaa08efbbe9f3463bceda448c237f8aa16dcd2fe"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D23-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D23-default.html",
+        "bytes": 8848,
+        "sha256": "729c8046392670791bad56caafe1b7f84f962229bcea5c3762163ecc219f404a"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D24-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D24-default.html",
+        "bytes": 11788,
+        "sha256": "d94e08e0b3267367df8a702432eb4d2c505c70b424b3b8d3b5a53c056b7402eb"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D25-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D25-default.html",
+        "bytes": 6174,
+        "sha256": "18370c998bf9ef61e2dbe1787fc68c520bf52478c5e4f67238f90dcb845bfa36"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D26-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D26-default.html",
+        "bytes": 2549,
+        "sha256": "40e0138b8932a3a9224d1ab8002e373b627cbae1a131769dc6908ec7c94108dd"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D27-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D27-default.html",
+        "bytes": 2125,
+        "sha256": "bd823ea131aea16a61259ec7ac2bb5dc95cfe73060d148d8130c19c065b05a33"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D28-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D28-default.html",
+        "bytes": 8556,
+        "sha256": "125c76e58f0b8d21654d1f82cde5f7172e09f7bec430439b80920841c3cbb877"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D29-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D29-default.html",
+        "bytes": 2627,
+        "sha256": "bf463512e8d172c4badceaf8fca5b8d8b5efe10e5d7224a18f22834ddae418e1"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D30-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D30-default.html",
+        "bytes": 13964,
+        "sha256": "24633e6da5826f4a5a10102892754dd2d48a2b966466a10fb9ab56cd56d9dff6"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D31-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D31-default.html",
+        "bytes": 6824,
+        "sha256": "3d071232c7ee0d1c1f48d28c337a57c02c6bc6437adf64f536fb5a3f3cb6c7cf"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D32-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D32-default.html",
+        "bytes": 14227,
+        "sha256": "06f8ee0984051bf6c5dc682e6a2e7fcc33ab5d8d05897e29a1ce3521ca35529c"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D33-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D33-default.html",
+        "bytes": 8411,
+        "sha256": "c253263c239bd1924111cac61f669dabfe16c1ca536d06a8621391d79e9f20dc"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D34-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D34-default.html",
+        "bytes": 8927,
+        "sha256": "342a5a90ea67bffea3f94fb584b30cb0ae759c4233b36d0a4fa955d2623a41d1"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D35-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D35-default.html",
+        "bytes": 14413,
+        "sha256": "567d757b9da138cf23100fefbb1b8e7d2faeb65c3424f2417eea145c4e485845"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D36-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D36-default.html",
+        "bytes": 19371,
+        "sha256": "bba143d8c37708f7b97fa845eb7d8efddb3a1c10d177f4e51f657810b989bf6f"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D37-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D37-default.html",
+        "bytes": 11438,
+        "sha256": "dd71d9b5e51368462724e47db03ca831c76996e645063df28b4667b8bf7df8cc"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D38-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D38-default.html",
+        "bytes": 13113,
+        "sha256": "ea0720ab06a36afba4da0790e726da52e19893a67397f7a8aed607e37be80b36"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D39-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D39-default.html",
+        "bytes": 6309,
+        "sha256": "5afe0fce5fa1c7884f53917b5a7852aef40711c0ac344e6fdaf96acff872114f"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D40-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D40-default.html",
+        "bytes": 11505,
+        "sha256": "760feadfd8713026a8eb41f196ed75401d601ef135718b6ac5e0e82b1e1e0747"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D41-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D41-default.html",
+        "bytes": 5382,
+        "sha256": "5ce6e4b820fe8e06f0384f6e2788671662bf8bc835d393ca40ca3f4d1f0c0ad8"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D42-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D42-default.html",
+        "bytes": 89451,
+        "sha256": "933d91e2969b9c6cae6e84e19159d3180c1e526dd81bbc080a5174a6ef862fa1"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D43-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D43-default.html",
+        "bytes": 62005,
+        "sha256": "d5eb9a283b2e2d9c7e1db59f5f0d41aa3d806e1e8863198dc0b27898111e1e31"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D44-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D44-default.html",
+        "bytes": 26528,
+        "sha256": "d20cba9087e2a6ad38ed05766679397f9896c4dbb51f50dd6cf638a6b92e32a5"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D45-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D45-default.html",
+        "bytes": 59914,
+        "sha256": "0b4d582d00289f2bd268a25323d2c5f9a5dafa4d1cf917958be7d2d90f41cfb5"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D46-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D46-default.html",
+        "bytes": 87720,
+        "sha256": "78bd8f3047cb876367ef89e8b9902b1f4072da5a12c3a30d4b911258246d190f"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D47-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D47-default.html",
+        "bytes": 5439,
+        "sha256": "44c045b30d1dd8758bf01d530c2c97ed3d5c947e7d621966a5ba6f02d88b7fe6"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D48-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D48-default.html",
+        "bytes": 98218,
+        "sha256": "a18a1f662c12d97d414a98c8587e84608951f28217cd38c5031bc2a0875be10c"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D49-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D49-default.html",
+        "bytes": 23852,
+        "sha256": "bcd1b0c334fd3800e80a2035e5c1730f722e3b3d57c74234d649d488d8064c33"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D50-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D50-default.html",
+        "bytes": 6591,
+        "sha256": "1bc5f68274914bb24d9e6e3d544887b49cdd88175e4e9262c25215220833ea05"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D51-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D51-default.html",
+        "bytes": 6958,
+        "sha256": "18a34acd5aa2f2e2046c8b8ab44ab888df303ede513aa2d2567f2e6fe656666b"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D52-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D52-default.html",
+        "bytes": 10546,
+        "sha256": "31f97f5407fb01a937fd2134ac9b3fc2646bf27ef5d1b2a2dce9ea4bc6609962"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D53-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D53-default.html",
+        "bytes": 6096,
+        "sha256": "1a6227d970bd64f8083b7a6e6befd54cbcb2b12a06647c34e713194de556b02a"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D54-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D54-default.html",
+        "bytes": 4158,
+        "sha256": "18d52bd42d8db778ab9565ca2e6ca166980e95e580247d288840d357a21710a7"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D55-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D55-default.html",
+        "bytes": 10401,
+        "sha256": "eac55a073720643581cb6cdd926e95992fc588da7059477d3c80ca257b14f936"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D56-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D56-default.html",
+        "bytes": 6419,
+        "sha256": "052e5b1f123ba9b0b4f9c9adffae44dc3fc1fbdb81f4e9d4a76209833696fa1f"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D57-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D57-default.html",
+        "bytes": 7027,
+        "sha256": "00de3441b29039c8d5dd2914e0bae9b770802fa8f2c2219e15a17d2309e3a0f4"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D58-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D58-default.html",
+        "bytes": 7182,
+        "sha256": "e0c0f8d8830b6d096ec5fbbc5b533d3c630fa06d6416e6e1e2bb430d4caa31e0"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D59-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D59-default.html",
+        "bytes": 6789,
+        "sha256": "e829bcbb621043f48390eac84346d6ebec5376182388931460a116af36522961"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D60-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D60-default.html",
+        "bytes": 6995,
+        "sha256": "fff2e7094446c6b87287d652ac806e68db699032e0602c975a67ef56d4280935"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D61-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D61-default.html",
+        "bytes": 10547,
+        "sha256": "3b58f6a368ef6be2e1e36b284e95ec4c9d6719440d25ab5afdf2336f4b1e6ba6"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D62-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D62-default.html",
+        "bytes": 9752,
+        "sha256": "e5d953198fbed786635d2f09e0436b17d97b1696b6d3d43e9a3ded4a8341f726"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D63-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D63-default.html",
+        "bytes": 6551,
+        "sha256": "ad1bd22d66acddc3d444bf6ce41cea70dd25a8b547c559dd9ee1959ef6bab7dc"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D64-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D64-default.html",
+        "bytes": 7132,
+        "sha256": "c079b0f0431b67bd14edd8189a8e81dd881c52e04c324064b41a70dcb5d9af8f"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D65-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D65-default.html",
+        "bytes": 14778,
+        "sha256": "73ffb28a6b459a0015cb8add52f98a4f2d20c46682072969f081b89f88f59016"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D66-default",
+      "initialState": [],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D66-default.html",
+        "bytes": 6359,
+        "sha256": "5044503a6a18421eb675d2700c7a16d145ac4783da204ff4b352af807b169d74"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D43-242-0-2",
+      "initialState": [
+        "242",
+        "0",
+        2
+      ],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D43-242-0-2.html",
+        "bytes": 61964,
+        "sha256": "5ae664dd53ff644054ffd6dc4255594a48a6a41d3ef977c654d3dd1962e16746"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D43-242-7-0",
+      "initialState": [
+        "242",
+        "7",
+        0
+      ],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D43-242-7-0.html",
+        "bytes": 60948,
+        "sha256": "68ae997b13e43ea8c8eec2e75bc7c15715c429161b3bdc706eab424795cd1ff7"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D43-242-7-2",
+      "initialState": [
+        "242",
+        "7",
+        2
+      ],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D43-242-7-2.html",
+        "bytes": 60948,
+        "sha256": "ccf0ec8715e01143f223c6699e9526fda78ce1a98c15accdddba03f7642c9a47"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D43-256-7-0",
+      "initialState": [
+        "256",
+        "7",
+        0
+      ],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D43-256-7-0.html",
+        "bytes": 60905,
+        "sha256": "79c52abdb2b59ad462b3cf20293d2fd097ef494b8a0b0938e3f8c5573408437b"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D43-256-7-2",
+      "initialState": [
+        "256",
+        "7",
+        2
+      ],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D43-256-7-2.html",
+        "bytes": 61852,
+        "sha256": "cd1a61b9c5cbd1027384e2bd6b4586029334f8ee37a2780ec2b3d2c5fa69607f"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D45-remove-0",
+      "initialState": [
+        0
+      ],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D45-remove-0.html",
+        "bytes": 59914,
+        "sha256": "0b4d582d00289f2bd268a25323d2c5f9a5dafa4d1cf917958be7d2d90f41cfb5"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D45-remove-0.5",
+      "initialState": [
+        0.5
+      ],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D45-remove-0.5.html",
+        "bytes": 60888,
+        "sha256": "f5d90d370a950b95bab16f66c4fb83c3472f7cd26b6807cd4667029d272f6b57"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "D45-remove-1",
+      "initialState": [
+        1
+      ],
+      "props": {},
+      "html": {
+        "path": "combined-author-review/ssr/D45-remove-1.html",
+        "bytes": 60881,
+        "sha256": "e24aedb05ef2d7f074948255049b2f46b587a70f0ac0b6ba1d2eb757af45e620"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "Pixels-address-0",
+      "initialState": [
+        0
+      ],
+      "props": {
+        "values": "Bound literal64-bin array (see expected rendered attributes)",
+        "label": "Actual source242 addressed measurement",
+        "max": 4
+      },
+      "html": {
+        "path": "combined-author-review/ssr/Pixels-address-0.html",
+        "bytes": 10344,
+        "sha256": "6518bc597859df162aaa394da270f4ff7bd308c72f55a8a377c1c661ca213aee"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "Pixels-address-7",
+      "initialState": [
+        7
+      ],
+      "props": {
+        "values": "Bound literal64-bin array (see expected rendered attributes)",
+        "label": "Actual source242 addressed measurement",
+        "max": 4
+      },
+      "html": {
+        "path": "combined-author-review/ssr/Pixels-address-7.html",
+        "bytes": 10344,
+        "sha256": "5457b76df984dd29e5f32a7cf3896489f7845c55dbf7cd08ebf349c290d75718"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "Pixels-address-8",
+      "initialState": [
+        8
+      ],
+      "props": {
+        "values": "Bound literal64-bin array (see expected rendered attributes)",
+        "label": "Actual source242 addressed measurement",
+        "max": 4
+      },
+      "html": {
+        "path": "combined-author-review/ssr/Pixels-address-8.html",
+        "bytes": 10344,
+        "sha256": "f9230466ff9a7f7c105601a0da46ceca6b992f7485bd592c5a910912d01ea2f3"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "Pixels-address-35",
+      "initialState": [
+        35
+      ],
+      "props": {
+        "values": "Bound literal64-bin array (see expected rendered attributes)",
+        "label": "Actual source242 addressed measurement",
+        "max": 4
+      },
+      "html": {
+        "path": "combined-author-review/ssr/Pixels-address-35.html",
+        "bytes": 10345,
+        "sha256": "82cb28a6bbe65bd5e6414040b1d8785b3adbd2a3d0cbbba04d5e019ad9c26c35"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "Pixels-address-56",
+      "initialState": [
+        56
+      ],
+      "props": {
+        "values": "Bound literal64-bin array (see expected rendered attributes)",
+        "label": "Actual source242 addressed measurement",
+        "max": 4
+      },
+      "html": {
+        "path": "combined-author-review/ssr/Pixels-address-56.html",
+        "bytes": 10345,
+        "sha256": "daf0f26651820f82a72c7c2a6481c1f6e56c10f22fc5b1d8ff8528c06b702d9f"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    },
+    {
+      "name": "Pixels-address-63",
+      "initialState": [
+        63
+      ],
+      "props": {
+        "values": "Bound literal64-bin array (see expected rendered attributes)",
+        "label": "Actual source242 addressed measurement",
+        "max": 4
+      },
+      "html": {
+        "path": "combined-author-review/ssr/Pixels-address-63.html",
+        "bytes": 10345,
+        "sha256": "1e9f20c7a48d3926cca378f190867d7291cf2988989a0e282a6cf292defde998"
+      },
+      "scope": "Actual source SSR, test-only initial state; no browser events or paint"
+    }
+  ],
+  "actualPixelHandlerCases": [
+    {
+      "address": 0,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 0,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 1
+    },
+    {
+      "address": 0,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 0,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 0,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 0,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 0,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 0,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 1,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 1,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 2
+    },
+    {
+      "address": 1,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 1
+    },
+    {
+      "address": 1,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 9
+    },
+    {
+      "address": 1,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 1,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 1,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 1,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 2,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 1
+    },
+    {
+      "address": 2,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 3
+    },
+    {
+      "address": 2,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 2
+    },
+    {
+      "address": 2,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 10
+    },
+    {
+      "address": 2,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 2,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 2,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 2,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 3,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 2
+    },
+    {
+      "address": 3,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 4
+    },
+    {
+      "address": 3,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 3
+    },
+    {
+      "address": 3,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 11
+    },
+    {
+      "address": 3,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 3,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 3,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 3,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 4,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 3
+    },
+    {
+      "address": 4,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 5
+    },
+    {
+      "address": 4,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 4
+    },
+    {
+      "address": 4,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 12
+    },
+    {
+      "address": 4,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 4,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 4,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 4,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 5,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 4
+    },
+    {
+      "address": 5,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 6
+    },
+    {
+      "address": 5,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 5
+    },
+    {
+      "address": 5,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 13
+    },
+    {
+      "address": 5,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 5,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 5,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 5,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 6,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 5
+    },
+    {
+      "address": 6,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 6,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 6
+    },
+    {
+      "address": 6,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 14
+    },
+    {
+      "address": 6,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 6,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 6,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 6,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 7,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 6
+    },
+    {
+      "address": 7,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 7,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 7,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 7,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 7,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 7,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 7,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 8,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 8,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 9
+    },
+    {
+      "address": 8,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 0
+    },
+    {
+      "address": 8,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 8,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 8,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 8,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 8,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 9,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 9,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 10
+    },
+    {
+      "address": 9,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 1
+    },
+    {
+      "address": 9,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 17
+    },
+    {
+      "address": 9,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 9,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 9,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 9,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 10,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 9
+    },
+    {
+      "address": 10,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 11
+    },
+    {
+      "address": 10,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 2
+    },
+    {
+      "address": 10,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 18
+    },
+    {
+      "address": 10,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 10,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 10,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 10,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 11,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 10
+    },
+    {
+      "address": 11,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 12
+    },
+    {
+      "address": 11,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 3
+    },
+    {
+      "address": 11,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 19
+    },
+    {
+      "address": 11,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 11,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 11,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 11,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 12,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 11
+    },
+    {
+      "address": 12,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 13
+    },
+    {
+      "address": 12,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 4
+    },
+    {
+      "address": 12,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 20
+    },
+    {
+      "address": 12,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 12,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 12,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 12,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 13,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 12
+    },
+    {
+      "address": 13,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 14
+    },
+    {
+      "address": 13,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 5
+    },
+    {
+      "address": 13,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 21
+    },
+    {
+      "address": 13,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 13,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 13,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 13,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 14,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 13
+    },
+    {
+      "address": 14,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 14,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 6
+    },
+    {
+      "address": 14,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 22
+    },
+    {
+      "address": 14,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 14,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 14,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 14,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 15,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 14
+    },
+    {
+      "address": 15,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 15,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 7
+    },
+    {
+      "address": 15,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 15,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 15,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 15,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 15,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 16,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 16,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 17
+    },
+    {
+      "address": 16,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 8
+    },
+    {
+      "address": 16,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 16,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 16,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 16,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 16,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 17,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 17,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 18
+    },
+    {
+      "address": 17,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 9
+    },
+    {
+      "address": 17,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 25
+    },
+    {
+      "address": 17,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 17,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 17,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 17,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 18,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 17
+    },
+    {
+      "address": 18,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 19
+    },
+    {
+      "address": 18,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 10
+    },
+    {
+      "address": 18,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 26
+    },
+    {
+      "address": 18,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 18,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 18,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 18,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 19,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 18
+    },
+    {
+      "address": 19,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 20
+    },
+    {
+      "address": 19,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 11
+    },
+    {
+      "address": 19,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 27
+    },
+    {
+      "address": 19,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 19,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 19,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 19,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 20,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 19
+    },
+    {
+      "address": 20,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 21
+    },
+    {
+      "address": 20,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 12
+    },
+    {
+      "address": 20,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 28
+    },
+    {
+      "address": 20,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 20,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 20,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 20,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 21,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 20
+    },
+    {
+      "address": 21,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 22
+    },
+    {
+      "address": 21,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 13
+    },
+    {
+      "address": 21,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 29
+    },
+    {
+      "address": 21,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 21,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 21,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 21,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 22,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 21
+    },
+    {
+      "address": 22,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 22,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 14
+    },
+    {
+      "address": 22,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 30
+    },
+    {
+      "address": 22,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 22,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 22,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 22,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 23,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 22
+    },
+    {
+      "address": 23,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 23,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 15
+    },
+    {
+      "address": 23,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 23,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 23,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 23,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 23,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 24,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 24,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 25
+    },
+    {
+      "address": 24,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 16
+    },
+    {
+      "address": 24,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 24,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 24,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 24,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 24,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 25,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 25,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 26
+    },
+    {
+      "address": 25,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 17
+    },
+    {
+      "address": 25,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 33
+    },
+    {
+      "address": 25,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 25,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 25,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 25,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 26,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 25
+    },
+    {
+      "address": 26,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 27
+    },
+    {
+      "address": 26,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 18
+    },
+    {
+      "address": 26,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 34
+    },
+    {
+      "address": 26,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 26,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 26,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 26,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 27,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 26
+    },
+    {
+      "address": 27,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 28
+    },
+    {
+      "address": 27,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 19
+    },
+    {
+      "address": 27,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 35
+    },
+    {
+      "address": 27,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 27,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 27,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 27,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 28,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 27
+    },
+    {
+      "address": 28,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 29
+    },
+    {
+      "address": 28,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 20
+    },
+    {
+      "address": 28,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 36
+    },
+    {
+      "address": 28,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 28,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 28,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 28,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 29,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 28
+    },
+    {
+      "address": 29,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 30
+    },
+    {
+      "address": 29,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 21
+    },
+    {
+      "address": 29,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 37
+    },
+    {
+      "address": 29,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 29,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 29,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 29,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 30,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 29
+    },
+    {
+      "address": 30,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 30,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 22
+    },
+    {
+      "address": 30,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 38
+    },
+    {
+      "address": 30,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 30,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 30,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 30,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 31,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 30
+    },
+    {
+      "address": 31,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 31,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 23
+    },
+    {
+      "address": 31,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 31,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 31,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 31,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 31,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 32,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 32,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 33
+    },
+    {
+      "address": 32,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 24
+    },
+    {
+      "address": 32,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 32,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 32,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 32,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 32,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 33,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 33,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 34
+    },
+    {
+      "address": 33,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 25
+    },
+    {
+      "address": 33,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 41
+    },
+    {
+      "address": 33,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 33,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 33,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 33,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 34,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 33
+    },
+    {
+      "address": 34,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 35
+    },
+    {
+      "address": 34,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 26
+    },
+    {
+      "address": 34,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 42
+    },
+    {
+      "address": 34,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 34,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 34,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 34,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 35,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 34
+    },
+    {
+      "address": 35,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 36
+    },
+    {
+      "address": 35,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 27
+    },
+    {
+      "address": 35,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 43
+    },
+    {
+      "address": 35,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 35,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 35,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 35,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 36,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 35
+    },
+    {
+      "address": 36,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 37
+    },
+    {
+      "address": 36,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 28
+    },
+    {
+      "address": 36,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 44
+    },
+    {
+      "address": 36,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 36,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 36,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 36,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 37,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 36
+    },
+    {
+      "address": 37,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 38
+    },
+    {
+      "address": 37,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 29
+    },
+    {
+      "address": 37,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 45
+    },
+    {
+      "address": 37,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 37,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 37,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 37,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 38,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 37
+    },
+    {
+      "address": 38,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 38,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 30
+    },
+    {
+      "address": 38,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 46
+    },
+    {
+      "address": 38,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 38,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 38,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 38,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 39,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 38
+    },
+    {
+      "address": 39,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 39,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 31
+    },
+    {
+      "address": 39,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 39,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 39,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 39,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 39,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 40,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 40,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 41
+    },
+    {
+      "address": 40,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 32
+    },
+    {
+      "address": 40,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 40,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 40,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 40,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 40,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 41,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 41,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 42
+    },
+    {
+      "address": 41,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 33
+    },
+    {
+      "address": 41,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 49
+    },
+    {
+      "address": 41,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 41,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 41,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 41,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 42,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 41
+    },
+    {
+      "address": 42,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 43
+    },
+    {
+      "address": 42,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 34
+    },
+    {
+      "address": 42,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 50
+    },
+    {
+      "address": 42,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 42,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 42,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 42,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 43,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 42
+    },
+    {
+      "address": 43,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 44
+    },
+    {
+      "address": 43,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 35
+    },
+    {
+      "address": 43,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 51
+    },
+    {
+      "address": 43,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 43,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 43,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 43,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 44,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 43
+    },
+    {
+      "address": 44,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 45
+    },
+    {
+      "address": 44,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 36
+    },
+    {
+      "address": 44,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 52
+    },
+    {
+      "address": 44,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 44,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 44,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 44,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 45,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 44
+    },
+    {
+      "address": 45,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 46
+    },
+    {
+      "address": 45,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 37
+    },
+    {
+      "address": 45,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 53
+    },
+    {
+      "address": 45,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 45,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 45,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 45,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 46,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 45
+    },
+    {
+      "address": 46,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 46,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 38
+    },
+    {
+      "address": 46,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 54
+    },
+    {
+      "address": 46,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 46,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 46,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 46,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 47,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 46
+    },
+    {
+      "address": 47,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 47,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 39
+    },
+    {
+      "address": 47,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 47,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 47,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 47,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 47,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 48,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 48,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 49
+    },
+    {
+      "address": 48,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 40
+    },
+    {
+      "address": 48,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 48,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 48,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 48,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 48,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 49,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 49,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 50
+    },
+    {
+      "address": 49,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 41
+    },
+    {
+      "address": 49,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 57
+    },
+    {
+      "address": 49,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 49,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 49,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 49,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 50,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 49
+    },
+    {
+      "address": 50,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 51
+    },
+    {
+      "address": 50,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 42
+    },
+    {
+      "address": 50,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 58
+    },
+    {
+      "address": 50,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 50,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 50,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 50,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 51,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 50
+    },
+    {
+      "address": 51,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 52
+    },
+    {
+      "address": 51,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 43
+    },
+    {
+      "address": 51,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 59
+    },
+    {
+      "address": 51,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 51,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 51,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 51,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 52,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 51
+    },
+    {
+      "address": 52,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 53
+    },
+    {
+      "address": 52,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 44
+    },
+    {
+      "address": 52,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 60
+    },
+    {
+      "address": 52,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 52,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 52,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 52,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 53,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 52
+    },
+    {
+      "address": 53,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 54
+    },
+    {
+      "address": 53,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 45
+    },
+    {
+      "address": 53,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 61
+    },
+    {
+      "address": 53,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 53,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 53,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 53,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 54,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 53
+    },
+    {
+      "address": 54,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 54,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 46
+    },
+    {
+      "address": 54,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 62
+    },
+    {
+      "address": 54,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 54,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 54,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 54,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 55,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 54
+    },
+    {
+      "address": 55,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 55,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 47
+    },
+    {
+      "address": 55,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 55,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 55,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 55,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 55,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 56,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 56,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 57
+    },
+    {
+      "address": 56,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 48
+    },
+    {
+      "address": 56,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 56,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 56,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 56,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 56,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 57,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 57,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 58
+    },
+    {
+      "address": 57,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 49
+    },
+    {
+      "address": 57,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 57
+    },
+    {
+      "address": 57,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 57,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 57,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 57,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 58,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 57
+    },
+    {
+      "address": 58,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 59
+    },
+    {
+      "address": 58,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 50
+    },
+    {
+      "address": 58,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 58
+    },
+    {
+      "address": 58,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 58,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 58,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 58,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 59,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 58
+    },
+    {
+      "address": 59,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 60
+    },
+    {
+      "address": 59,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 51
+    },
+    {
+      "address": 59,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 59
+    },
+    {
+      "address": 59,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 59,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 59,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 59,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 60,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 59
+    },
+    {
+      "address": 60,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 61
+    },
+    {
+      "address": 60,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 52
+    },
+    {
+      "address": 60,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 60
+    },
+    {
+      "address": 60,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 60,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 60,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 60,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 61,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 60
+    },
+    {
+      "address": 61,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 62
+    },
+    {
+      "address": 61,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 53
+    },
+    {
+      "address": 61,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 61
+    },
+    {
+      "address": 61,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 61,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 61,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 61,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 62,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 61
+    },
+    {
+      "address": 62,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 62,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 54
+    },
+    {
+      "address": 62,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 62
+    },
+    {
+      "address": 62,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 62,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 62,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 62,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    },
+    {
+      "address": 63,
+      "key": "ArrowLeft",
+      "ctrlKey": false,
+      "result": 62
+    },
+    {
+      "address": 63,
+      "key": "ArrowRight",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 63,
+      "key": "ArrowUp",
+      "ctrlKey": false,
+      "result": 55
+    },
+    {
+      "address": 63,
+      "key": "ArrowDown",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 63,
+      "key": "Home",
+      "ctrlKey": false,
+      "result": 56
+    },
+    {
+      "address": 63,
+      "key": "End",
+      "ctrlKey": false,
+      "result": 63
+    },
+    {
+      "address": 63,
+      "key": "Home",
+      "ctrlKey": true,
+      "result": 0
+    },
+    {
+      "address": 63,
+      "key": "End",
+      "ctrlKey": true,
+      "result": 63
+    }
+  ],
+  "reusedEvidence": {
+    "original69PureConditions": {
+      "path": "../model-and-ssr-check.json",
+      "bytes": 8631,
+      "sha256": "23cd404d80bd0c8312ed3b0281097b1c98fe8387ef06f38fc860637c3bfefb90"
+    },
+    "original195ComponentSSRCases": {
+      "path": "../changed-and-null-ssr-check.json",
+      "bytes": 105261,
+      "sha256": "9352aab674b94f2b304f009eb9dbc5b43f3d45f9bf684e2aad35ee1cc63a7336"
+    },
+    "assigned43States3764Conditions": {
+      "path": "author-operation-correction/source-check.json",
+      "bytes": 346714,
+      "sha256": "f9f81e2acf575023990d2e685a5358e893fe2d1109f8ec75ebf41dcd29d59c93"
+    }
+  },
+  "native": false,
+  "scientificExecutions": 0,
+  "viteBuilds": 0,
+  "scope": "All21 current products parsed/bound, entire current lesson SSR and66 default figures; bounded changed Root cases and actual pixel handler arithmetic. Prior unchanged numerical/scientific evidence reused; no browser events, paint, clipboard or download acceptance."
+}

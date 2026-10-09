@@ -1,0 +1,10 @@
+rate 1.0 first prices [0.0, 2.0, 2.5, 2.625, 2.65625]
+final allocation [1.666687, 3.333344] violation 3.1e-05
+lower 2.666667 repaired upper 2.666667 stable gap 1.86265e-09
+rate 3.0 first prices [0.0, 6.0, 0.0, 6.0, 0.0]
+final allocation [3.0, 4.0] violation 2.0
+lower 0.0 repaired upper 8.0 stable gap 8
+rate 4.0 first prices [0.0, 8.0, 0.0, 8.0, 0.0]
+final allocation [3.0, 4.0] violation 2.0
+lower 0.0 repaired upper 8.0 stable gap 8
+analytic optimum [1.6666666666666667, 3.3333333333333335] price 2.6666666666666665 value 2.6666666666666665

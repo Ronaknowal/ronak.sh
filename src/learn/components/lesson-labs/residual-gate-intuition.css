@@ -1,7 +1,10 @@
-.res-gate-intuition { margin: 2rem 0; padding: clamp(.8rem, 2vw, 1.35rem); border: 1px solid #494235; background: #121211; color: #ddd9d1; }
-.res-gate-intuition h4, .res-gate-intuition h5 { color: #eee5d3; margin: 0 0 .7rem; font-size: 1rem; }
+/* Highway gate derivative figure in the reading flow: no frame or heading. */
+.res-gate-intuition { margin: 1.75rem 0; padding: 0; border: 0; background: transparent; color: #ddd9d1; }
+.res-gate-intuition h5 { color: #eee5d3; margin: 0 0 .5rem; font-size: 1rem; }
 .res-gate-intuition p, .res-gate-intuition figcaption { line-height: 1.7; }
-.res-gate-intuition span, .res-gate-intuition strong { color: #e9b949; }
+.res-gate-intuition span { color: #c7a5ee; }
+.res-gate-intuition strong { color: #c7a5ee; }
+.res-gate-intuition .res-gate-derivative span, .res-gate-intuition .res-gate-derivative strong { color: #f0a878; }
 .res-gate-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
-.res-gate-panels section { border-top: 1px solid #494235; padding-top: .85rem; min-width: 0; }
-.res-gate-intuition figcaption { color: #c9beab; margin-top: 1rem; }
+.res-gate-panels section { border-top: 1px solid #3a3a3a; padding-top: .75rem; min-width: 0; }
+.res-gate-intuition figcaption { color: #bdbdbd; margin-top: .75rem; font-size: .95rem; }

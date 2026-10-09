@@ -1,0 +1,22 @@
+.resume-boundary { border: 1px solid #333; padding: 1.2rem; margin: 2rem 0; }
+.resume-boundary figcaption { color: #e4b752; font-weight: 600; }
+.resume-boundary ol { display: flex; flex-wrap: wrap; gap: .8rem 2rem; padding-left: 1.5rem; }
+.resume-boundary li { flex: 1 1 180px; padding: .5rem .3rem; }
+.resume-checkpoint { color: #e4b752; border-bottom: 2px solid #e4b752; }
+.resume-snapshot { border: 1px solid #444; padding: .8rem 1rem; margin-top: 1.2rem; }
+.resume-snapshot h4 { margin: .3rem 0; }
+.resume-snapshot dl,.resume-cursors { display: flex; flex-wrap: wrap; gap: .8rem 1.8rem; }
+.resume-snapshot dl > div { flex: 1 1 135px; }
+.resume-snapshot dt { font-size: 14px; color: #aaa; }
+.resume-snapshot dd { margin: .25rem 0; overflow-wrap: anywhere; }
+.resume-result { border-left: 3px solid #e4b752; padding-left: .8rem; }
+.resume-queue { margin: 1rem 0; }
+.resume-queue section { border-top: 1px solid #333; padding: .6rem 0; }
+.resume-queue h4 { margin: .4rem 0 .7rem; }
+.resume-records { display: flex; flex-wrap: wrap; gap: 6px; min-height: 32px; }
+.resume-records span { border: 1px solid #666; min-width: 30px; height: 32px; display: grid; place-items: center; }
+.resume-records-committed span { background: #363636; }
+.resume-records-pending span { border-color: #e4b752; color: #e4b752; background: #211c13; }
+.resume-records-unissued span { border-style: dashed; }
+.resume-cursors p { flex: 1 1 140px; }
+.resume-cursors strong { display: block; color: #e4b752; font-size: 1.3rem; }

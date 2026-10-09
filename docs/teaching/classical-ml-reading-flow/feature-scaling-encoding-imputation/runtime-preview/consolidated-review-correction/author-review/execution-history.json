@@ -1,0 +1,33 @@
+{
+  "schema": "feature20-author-execution-history/v1",
+  "intake": {
+    "chunk": "7b4eae",
+    "exitCode": 0,
+    "identities": 188
+  },
+  "initialSSRFailure": {
+    "chunk": "25302d",
+    "exitCode": 1,
+    "reason": "External KaTeX CSS was not ignored in author-only Node SSR transformer; corrected to existing stylesheet-ignore pattern; no learner/science change"
+  },
+  "firstPass": {
+    "chunk": "b37792",
+    "exitCode": 0,
+    "conditions": 1024
+  },
+  "presentationPass": {
+    "chunk": "1595d0",
+    "exitCode": 0,
+    "conditions": 672
+  },
+  "finalPass": {
+    "chunk": "a36ee6",
+    "exitCode": 0,
+    "sourceStateSSRConditions": 1024,
+    "presentationConditions": 672
+  },
+  "scienceExecutions": 0,
+  "viteBuilds": 0,
+  "httpRequests": 0,
+  "nativeActions": 0
+}

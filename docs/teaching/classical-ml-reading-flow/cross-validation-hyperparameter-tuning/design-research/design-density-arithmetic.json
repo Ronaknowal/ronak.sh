@@ -1,0 +1,60 @@
+{
+  "schema": "classical21-design-density-arithmetic/v1",
+  "at": "2026-10-09T16:34:47.437800+00:00",
+  "status": "NEW_THREE_SUPPORT_ARITHMETIC_CHECKED",
+  "conditions": [
+    "both conditional distributions and mixture normalize",
+    "exact mixture masses",
+    "exact proportional acquisition",
+    "A wins",
+    "mixture-weighted acquisition normalizes"
+  ],
+  "better": [
+    "2/5",
+    "1/5",
+    "2/5"
+  ],
+  "other": [
+    "1/10",
+    "2/5",
+    "1/2"
+  ],
+  "mixture": [
+    "7/40",
+    "7/20",
+    "19/40"
+  ],
+  "acquisition": [
+    "16/7",
+    "4/7",
+    "16/19"
+  ],
+  "inputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-fixtures.md",
+      "bytes": 11359,
+      "sha256": "f15c734bdccd2ecf9735601645c0b72a202b3c5d0d05ef9c80ff6dfc9e484a7f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/visual-and-investigation-contracts.md",
+      "bytes": 29467,
+      "sha256": "0c792b9cd33dba3fbdfcba3875e258b0be4173ef4f771e7ffc46b263c9334c18"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-arithmetic.json",
+      "bytes": 34502,
+      "sha256": "e5f7a6f9013890e32819b9777b0cbcc73a326d252c662dd3eebbb2d09cb8042c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/check-design-density.py",
+      "bytes": 2430,
+      "sha256": "61abb661a33a677aa2e4240ae184674c90b15c81a68b1f7ed02e923afeabb0c4"
+    }
+  ],
+  "limits": [
+    "supplied static belief, not history-fitted densities",
+    "no scientific/library/native execution",
+    "does not replay or replace earlier arithmetic",
+    "no phase or design-review acceptance"
+  ]
+}

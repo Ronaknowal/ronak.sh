@@ -1,0 +1,148 @@
+.pca-reading-flow {
+  --pca-blue: #4ea3d8;
+  --pca-violet: #ab83d8;
+  --pca-coral: #dd8c78;
+  --pca-cyan: #55b7bd;
+}
+
+.pca-reading-flow .pca-mechanism {
+  margin: 1.6rem 0 1.9rem;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.pca-reading-flow .pca-mechanism figcaption {
+  margin-top: .65rem;
+  line-height: 1.6;
+  color: #bcbcbc;
+}
+
+.pca-reading-flow .pca-drawing-pan,
+.pca-reading-flow .pca-table-pan,
+.pca-reading-flow .pca-matrix {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.pca-reading-flow .pca-drawing {
+  display: block;
+  width: var(--pca-drawing-width);
+  min-width: var(--pca-drawing-width);
+  height: auto;
+  overflow: visible;
+  color: #dedede;
+  fill: currentColor;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.pca-reading-flow .pca-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.pca-reading-flow .pca-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: .8rem 1.2rem;
+  margin: 1rem 0;
+}
+
+.pca-reading-flow .pca-number-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .35rem;
+  width: min(100%, 14rem);
+  min-width: 0;
+}
+
+.pca-reading-flow .pca-number-field input,
+.pca-reading-flow .pca-controls select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font: inherit;
+  color: #ededed;
+  background: #1b1b1b;
+  border: 1px solid #777;
+  border-radius: .25rem;
+  padding: .4rem .55rem;
+}
+
+.pca-reading-flow .pca-controls button {
+  font: inherit;
+  color: #efbd6d;
+  background: transparent;
+  border: 1px solid #99754a;
+  border-radius: .25rem;
+  padding: .4rem .8rem;
+  cursor: pointer;
+}
+
+.pca-reading-flow .pca-controls :focus-visible,
+.pca-reading-flow .pca-drawing-pan:focus-visible,
+.pca-reading-flow .pca-table-pan:focus-visible {
+  outline: 2px solid #efbd6d;
+  outline-offset: 3px;
+}
+
+.pca-reading-flow .pca-number-field small,
+.pca-reading-flow .pca-status {
+  font-size: .85em;
+  line-height: 1.5;
+}
+
+.pca-reading-flow table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.pca-reading-flow table caption {
+  text-align: left;
+  padding-bottom: .5rem;
+  color: #d8d8d8;
+}
+
+.pca-reading-flow th,
+.pca-reading-flow td {
+  text-align: left;
+  padding: .45rem .65rem;
+  border-bottom: 1px solid #3b3b3b;
+  white-space: nowrap;
+}
+
+.pca-reading-flow td[data-sign='1'] {
+  color: #dd8c78;
+}
+
+.pca-reading-flow td[data-sign='-1'] {
+  color: #4ea3d8;
+}
+
+.pca-reading-flow .pca-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* The normal reader's font can make unbroken APIs and exact decimals wider
+   than the text lane. Reflow text; keep diagrams and numeric tables pannable. */
+.pca-reading-flow p,
+.pca-reading-flow figcaption {
+  overflow-wrap: anywhere;
+}
+
+/* Size the opening's columns from the available reading lane and text size,
+   including enlarged text. Scope remains this lesson after route changes. */
+.reader-content:has(.pca-reading-flow) .lesson-compass .lesson-compass__sections {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}

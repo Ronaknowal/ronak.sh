@@ -1,0 +1,26 @@
+.titans-flow { --titans-paper: #161616; --titans-data: #67d8e8; --titans-computed: #bd9cff; --titans-parameter: #f3bd61; --titans-gradient: #f39a62; --titans-forward: #b5b1aa; overflow-wrap: anywhere; }
+.titans-pan-hint { margin: 0 0 .6em; font-size: 1em; line-height: 1.5; }
+.titans-drawing { margin: 1.5em 0 .75em; color: var(--text-primary, #e8e5df); }
+.titans-drawing-scroll { overflow-x: auto; overscroll-behavior-x: contain; max-width: 100%; padding-bottom: 8px; }
+.titans-drawing svg { display: block; max-width: none; font-family: inherit; font-size: 16px; }
+.titans-controls { display: flex; align-items: end; flex-wrap: wrap; gap: 16px; margin: .5em 0 1.25em; }
+.titans-controls > * { flex: 1 1 160px; max-width: 320px; }
+.titans-controls input, .titans-controls select, .titans-controls button { min-height: 44px; font: inherit; }
+.titans-controls input, .titans-controls select { width: 100%; min-width: 0; }
+.titans-flow .titans-controls .neural-number.neural-number-control--numeric { display: grid; grid-template-columns: minmax(0, 1fr); }
+.titans-controls .neural-number-control--numeric > * { min-width: 0; max-width: 100%; }
+.titans-flow .neural-table { overflow-x: auto; max-width: 100%; }
+.titans-flow .neural-table-scroll { overflow-x: auto; max-width: 100%; }
+.titans-flow .katex { display: inline-block; max-width: 100%; overflow-x: auto; vertical-align: middle; }
+.titans-controls label { display: grid; gap: 8px; }
+.titans-controls button, .titans-controls select { border: 1px solid #8e8577; background: transparent; color: inherit; padding: 8px 12px; border-radius: 3px; }
+.titans-controls button:disabled { opacity: .45; }
+.titans-controls :focus-visible, .titans-drawing-scroll:focus-visible { outline: 2px solid #f3bd61; outline-offset: 3px; }
+.titans-live { line-height: 1.6; overflow-wrap: anywhere; }
+.titans-table-scroll { overflow-x: auto; max-width: 100%; }
+.titans-flow table { border-collapse: collapse; min-width: 500px; width: 100%; font-size: 1em; }
+.titans-flow th, .titans-flow td { padding: 10px 12px; border-bottom: 1px solid #605a50; text-align: left; }
+.titans-error { color: #ffb3a6; }
+[data-theme="light"] .titans-flow { --titans-paper: #f8f6ef; --titans-data: #006b7a; --titans-computed: #6e38a4; --titans-parameter: #8a5400; --titans-gradient: #a64212; --titans-forward: #716c65; }
+[data-theme="light"] .titans-drawing { color: #292621; }
+@media (prefers-reduced-motion: reduce) { .titans-flow * { scroll-behavior: auto; } }

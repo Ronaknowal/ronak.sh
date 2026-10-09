@@ -1,0 +1,718 @@
+{
+  "status": "CURRENT_SOURCE_BOUND_PROPOSED_DESIGN",
+  "bindings": [
+    {
+      "path": "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx",
+      "bytes": 64828,
+      "sha256": "31975f88139c8596ea2f7185aeba32c723ad98d7c05e681e6fd735f7f18d54a8",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx",
+      "bytes": 64828,
+      "sha256": "31975f88139c8596ea2f7185aeba32c723ad98d7c05e681e6fd735f7f18d54a8",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/non-negative-matrix-factorization-nmf.js",
+      "bytes": 7872,
+      "sha256": "0970b9e8ea96ba502f77f72dfc77a6ca31285840258573004c390989f163c0e8",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/data/curriculum/blueprints/non-negative-matrix-factorization-nmf.js",
+      "bytes": 7872,
+      "sha256": "0970b9e8ea96ba502f77f72dfc77a6ca31285840258573004c390989f163c0e8",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "src/learn/data/nmf-models.js",
+      "bytes": 29426,
+      "sha256": "e605f03d70dee878b2292a9dcc93fcb1046ad44b51761ba9e2a5931bdd95fe4b",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/data/nmf-models.js",
+      "bytes": 29426,
+      "sha256": "e605f03d70dee878b2292a9dcc93fcb1046ad44b51761ba9e2a5931bdd95fe4b",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "src/learn/data/nmf-examples.js",
+      "bytes": 5471,
+      "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/data/nmf-examples.js",
+      "bytes": 5471,
+      "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "src/learn/data/nmf-data.js",
+      "bytes": 28450,
+      "sha256": "40cd6b9079da9601743be3599b4c9d3087f62b074823a4cd83f46267eff1cbbe",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/data/nmf-data.js",
+      "bytes": 28450,
+      "sha256": "40cd6b9079da9601743be3599b4c9d3087f62b074823a4cd83f46267eff1cbbe",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/NmfFigures.jsx",
+      "bytes": 45136,
+      "sha256": "31e31c4b2b3e7afff4e2d0369d034b1b2b5fcb8e9ab4f62c4b0fc6fccf320b5e",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/components/lesson-labs/NmfFigures.jsx",
+      "bytes": 45136,
+      "sha256": "31e31c4b2b3e7afff4e2d0369d034b1b2b5fcb8e9ab4f62c4b0fc6fccf320b5e",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/NmfLabs.jsx",
+      "bytes": 28735,
+      "sha256": "bc7c837228647df94fe5d0e78ad63985f011cfd77468d6b3dd162025bbae1770",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/components/lesson-labs/NmfLabs.jsx",
+      "bytes": 28735,
+      "sha256": "bc7c837228647df94fe5d0e78ad63985f011cfd77468d6b3dd162025bbae1770",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/NmfShared.jsx",
+      "bytes": 13638,
+      "sha256": "6b0f7342f26d836debd041ac42938c2ae0c97adecbe900e03d49a362851c9351",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/components/lesson-labs/NmfShared.jsx",
+      "bytes": 13638,
+      "sha256": "6b0f7342f26d836debd041ac42938c2ae0c97adecbe900e03d49a362851c9351",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/nmf-labs.css",
+      "bytes": 11353,
+      "sha256": "e4a3ca7b48fba331560947bee9acb4efae0d784b0680e07dc313897d347bd6c0",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/src/learn/components/lesson-labs/nmf-labs.css",
+      "bytes": 11353,
+      "sha256": "e4a3ca7b48fba331560947bee9acb4efae0d784b0680e07dc313897d347bd6c0",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/topic-notes/non-negative-matrix-factorization-nmf.md",
+      "bytes": 7055,
+      "sha256": "9a41a021b9ef6d8ff53106c442321e18733d9b8d848c0ae2b5ff44ecd09fcb11",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/topic-notes/non-negative-matrix-factorization-nmf.md",
+      "bytes": 7055,
+      "sha256": "9a41a021b9ef6d8ff53106c442321e18733d9b8d848c0ae2b5ff44ecd09fcb11",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/evidence/sequential-nmf-review.md",
+      "bytes": 9960,
+      "sha256": "7c6e4dc0d996387ed6e40f6edee5819e51d3e8a7aab3a6c3d658972b9b866bc4",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/evidence/sequential-nmf-review.md",
+      "bytes": 9960,
+      "sha256": "7c6e4dc0d996387ed6e40f6edee5819e51d3e8a7aab3a6c3d658972b9b866bc4",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/lesson.md",
+      "bytes": 50642,
+      "sha256": "64c89413f2ac1905c91c67ff735fc860cc462bfec04a72645c2422bb822968d9",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/drafts/non-negative-matrix-factorization-nmf/lesson.md",
+      "bytes": 50642,
+      "sha256": "64c89413f2ac1905c91c67ff735fc860cc462bfec04a72645c2422bb822968d9",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/visual-specifications.md",
+      "bytes": 20227,
+      "sha256": "78403f1872e0abb1b5f8cd22a5a58f0aaf454e340135fecd4b4b25606b6de1a9",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/drafts/non-negative-matrix-factorization-nmf/visual-specifications.md",
+      "bytes": 20227,
+      "sha256": "78403f1872e0abb1b5f8cd22a5a58f0aaf454e340135fecd4b4b25606b6de1a9",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/design.md",
+      "bytes": 43892,
+      "sha256": "e6089fb6de849d6259dca29b9c63a80784c4e8ed0306707557b76f50b6d6fb8a",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/drafts/non-negative-matrix-factorization-nmf/design.md",
+      "bytes": 43892,
+      "sha256": "e6089fb6de849d6259dca29b9c63a80784c4e8ed0306707557b76f50b6d6fb8a",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/data-provenance.md",
+      "bytes": 3083,
+      "sha256": "d54862c3efd6ad0ad459cc4b7106db036926ba2b26b9930faac9e31da3ae0a83",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/drafts/non-negative-matrix-factorization-nmf/data-provenance.md",
+      "bytes": 3083,
+      "sha256": "d54862c3efd6ad0ad459cc4b7106db036926ba2b26b9930faac9e31da3ae0a83",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/calculated-inputs.json",
+      "bytes": 159761,
+      "sha256": "11e162d838f606ac1e93e0bf2005310c0eb4204d10e7e92dbb03f7322e38d245",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/drafts/non-negative-matrix-factorization-nmf/calculated-inputs.json",
+      "bytes": 159761,
+      "sha256": "11e162d838f606ac1e93e0bf2005310c0eb4204d10e7e92dbb03f7322e38d245",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/author-calculations.py",
+      "bytes": 3872,
+      "sha256": "7aa0b5e77cf2df673199029d7df876117dbe4c229656b78c94f4027be8fbdbbd",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/drafts/non-negative-matrix-factorization-nmf/author-calculations.py",
+      "bytes": 3872,
+      "sha256": "7aa0b5e77cf2df673199029d7df876117dbe4c229656b78c94f4027be8fbdbbd",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/drafts/non-negative-matrix-factorization-nmf/digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/evidence/nmf-browser.json",
+      "bytes": 8126,
+      "sha256": "cc29c5a31e7f277e4df6396a65257e34f140d3e9da1e20fc1a0d5b66c8d75d4d",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/evidence/nmf-browser.json",
+      "bytes": 8126,
+      "sha256": "cc29c5a31e7f277e4df6396a65257e34f140d3e9da1e20fc1a0d5b66c8d75d4d",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/evidence/nmf-models.json",
+      "bytes": 3531,
+      "sha256": "4047a73b08d32dc828cb757109616db8eb7d8cda39ae8c42d5dc0ed69defa04f",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/evidence/nmf-models.json",
+      "bytes": 3531,
+      "sha256": "4047a73b08d32dc828cb757109616db8eb7d8cda39ae8c42d5dc0ed69defa04f",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/evidence/nmf-data.json",
+      "bytes": 11904,
+      "sha256": "d06977806a197eff696ab1452d342499ea1140a474be8f9f6d0d519d49c8ecf0",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/evidence/nmf-data.json",
+      "bytes": 11904,
+      "sha256": "d06977806a197eff696ab1452d342499ea1140a474be8f9f6d0d519d49c8ecf0",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/evidence/nmf-native.json",
+      "bytes": 2610,
+      "sha256": "6930634989f499ef6e605c04b248e6820b66a76ed3d3a9eaf26841ba52b68c4d",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/docs/teaching/evidence/nmf-native.json",
+      "bytes": 2610,
+      "sha256": "6930634989f499ef6e605c04b248e6820b66a76ed3d3a9eaf26841ba52b68c4d",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "public/learn-assets/nmf/digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/public/learn-assets/nmf/digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "public/learn-assets/nmf/data-provenance.md",
+      "bytes": 2939,
+      "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/public/learn-assets/nmf/data-provenance.md",
+      "bytes": 2939,
+      "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "scripts/verify-nmf-models.mjs",
+      "bytes": 36553,
+      "sha256": "bdf557b01d898aff87447be3e765642290a69ed9a7b43ec8ed0a76a5bc0c0511",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/scripts/verify-nmf-models.mjs",
+      "bytes": 36553,
+      "sha256": "bdf557b01d898aff87447be3e765642290a69ed9a7b43ec8ed0a76a5bc0c0511",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "scripts/verify-nmf-data.py",
+      "bytes": 24824,
+      "sha256": "17d0746a2b579221cb5823bbf22a6b1dc1235032a969314b5acb56e35e76ecf3",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/scripts/verify-nmf-data.py",
+      "bytes": 24824,
+      "sha256": "17d0746a2b579221cb5823bbf22a6b1dc1235032a969314b5acb56e35e76ecf3",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "scripts/verify-nmf-examples.py",
+      "bytes": 13434,
+      "sha256": "2440618cc3014f68d9f0a9bcecc78827b5952212091de09b32c3b4cbfbd006a0",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/scripts/verify-nmf-examples.py",
+      "bytes": 13434,
+      "sha256": "2440618cc3014f68d9f0a9bcecc78827b5952212091de09b32c3b4cbfbd006a0",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "scripts/verify-nmf-browser.cjs",
+      "bytes": 40228,
+      "sha256": "12b81ee38538beaee79b8451cd283a09fc1f864a9c16b3baf73630db278d5ea7",
+      "role": "unchanged-original-topic/science"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved/scripts/verify-nmf-browser.cjs",
+      "bytes": 40228,
+      "sha256": "12b81ee38538beaee79b8451cd283a09fc1f864a9c16b3baf73630db278d5ea7",
+      "role": "protected-physical-copy"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/source-conservation.json",
+      "bytes": 15748,
+      "sha256": "d8faec7588f01fda2d83883ce957ef0002b804fc9a8057e9900d2616a66dc697",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/preserved-current-ledger-row.json",
+      "bytes": 14043,
+      "sha256": "33a906f7d4ec202c43ef2117c4abe9a34782d64fb1998e4375490f764d52cc58",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/current-assessment.md",
+      "bytes": 9835,
+      "sha256": "2bca30d6f4902fe634f1ec9c648934f9c98f68118e0b0af75cff04ccbeefaab1",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/research-reading.md",
+      "bytes": 9486,
+      "sha256": "78962577701b66b9f91b5ef2f42ecf82849f36c12a51d57e148468f5ee96d6a7",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/resume-checkpoint.md",
+      "bytes": 3010,
+      "sha256": "76912ac2d14abffee87083c2b5ab6ca9fb9d2a194b6964b2b14ce510fb90cfc5",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/inspect-saved-inputs.py",
+      "bytes": 3005,
+      "sha256": "ef59069354d6f0a69f22ccfcdfc2e9e65c0eb8b5e94a59819a393859faa176d1",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/saved-input-inspection.json",
+      "bytes": 3415,
+      "sha256": "f38738ab5f5ebc146018fdf642249c77bd9ab185f6c2bc233bbfc7f91badab7b",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/saved-contribution-arithmetic.py",
+      "bytes": 1603,
+      "sha256": "9a10cecee4d2c835b08e9a0a4a60ecde6944a02fc18b90845f994bd899e4693e",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/saved-contribution-arithmetic.json",
+      "bytes": 1720,
+      "sha256": "93a0b1a71446576f092d20d84cd2e37871e39c5a47765ce2d0176f1cf7432aad",
+      "role": "immutable-initial-assessment/research/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/research-continuation.md",
+      "bytes": 4086,
+      "sha256": "09b36625834fa72d8f1d249c2a4f8a48d4abcf33e9d467b30cff5e289fbe52d3",
+      "role": "immutable-resumed-partial-design/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/reading-flow-design.md",
+      "bytes": 17062,
+      "sha256": "248233d0fcb6b76a92c47609f1ab1b2b2fe9d580d58d604410a2c631106f41a0",
+      "role": "immutable-resumed-partial-design/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/programs-and-practice.md",
+      "bytes": 18962,
+      "sha256": "024a20f88893cea58b73a9daa1d01c8e9aad362d6a8a1fc52b8eed1e8781fec9",
+      "role": "immutable-resumed-partial-design/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/visual-and-investigation-contracts.md",
+      "bytes": 45045,
+      "sha256": "5e2a9e5e5ecb8c4ca160134ae351f6e4c8c437dd7bb5545f7c4ae48b9f441d02",
+      "role": "immutable-resumed-partial-design/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-foundation-arithmetic.py",
+      "bytes": 3074,
+      "sha256": "ab47d9385e535ec8a1d307c41328e7f2f41718cd9ce71f37c998058dc952c2ed",
+      "role": "immutable-resumed-partial-design/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-foundation-arithmetic.json",
+      "bytes": 3525,
+      "sha256": "65473834b05851198c172d846af9e98d36deeefa2fa04a727f3f00d2dc86f240",
+      "role": "immutable-resumed-partial-design/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/resumed-design-checkpoint.md",
+      "bytes": 3653,
+      "sha256": "d585ea19a5ee00b05dd03c56f52b2042b8983b316cbf869522829707bbe5d3e3",
+      "role": "immutable-resumed-partial-design/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/freeze-resumed-checkpoint.mjs",
+      "bytes": 2272,
+      "sha256": "df327e3baf2f535ab8922aefe512b49be88b66c13223da8cf319c336bbdadb63",
+      "role": "immutable-resumed-partial-design/evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/partial-checkpoint.json",
+      "bytes": 2730,
+      "sha256": "6d404276fd9a19ca63f7f24313ec84061b326c7f5e97257d4eae43b46d004ffe",
+      "role": "immutable-first-packet"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/resumed-partial-checkpoint.json",
+      "bytes": 18156,
+      "sha256": "33e4eb0e165015912088bc722ea61bf8294359956f3aaa677c6a99cda2771c72",
+      "role": "immutable-resumed-packet"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/intake.py",
+      "bytes": 3367,
+      "sha256": "bce00520add162de7332df095371cd6e363438c9783b97f2badda75bcfcd75fe",
+      "role": "original-copy-only-intake-source-not-reexecuted"
+    },
+    {
+      "path": "src/learn/data/topics/pca-dimensionality-reduction.jsx",
+      "bytes": 146487,
+      "sha256": "39890fd5a835d085fe3ea46728f3d1b3781d435eedf51d9723bf6f0515e35657",
+      "role": "selected-PCA-shape/reconstruction/actual-anchor"
+    },
+    {
+      "path": "public/learn-code/pca-dimensionality-reduction/centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055",
+      "role": "complete-unchanged-reusable-helper-with-guarded-unexecuted-main"
+    },
+    {
+      "path": "src/learn/data/topics/matrix-calculus-jacobians.jsx",
+      "bytes": 65156,
+      "sha256": "25b0e4b57acc2ac84097c4f113cd2b8e9c62873b11083c957e47be0ee281f6d7",
+      "role": "selected-shaped-gradient/actual-anchor"
+    },
+    {
+      "path": "src/learn/data/topics/independent-component-analysis-ica.jsx",
+      "bytes": 57439,
+      "sha256": "bbb5ff01036487f38ab219e138d60829e7b069311b09f074e50fd78740557d5f",
+      "role": "selected-actual-canonical-assumption-contrast-not-successor-acceptance"
+    },
+    {
+      "path": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+      "bytes": 64405,
+      "sha256": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1",
+      "role": "selected-later-preparation-further-learning-not-prerequisite"
+    },
+    {
+      "path": "src/learn/data/topics/tensor-algebra-einsum-notation.jsx",
+      "bytes": 64335,
+      "sha256": "a0128fde4593cfecdafc0362b9ab1fec45e89b401902024c21b501431a0eafdb",
+      "role": "selected-axis/unfold/rankone-actual-anchor-not-general-optimizer"
+    },
+    {
+      "path": "src/learn/data/einsum-reading-flow-examples.js",
+      "bytes": 22140,
+      "sha256": "21073b2202cce8113c00a8eee4a5375463cbb75111f7afa07efbd097e6624f94",
+      "role": "selected-existing-modes-route-no-import-or-main-replay"
+    },
+    {
+      "path": "src/learn/data/topics/complex-numbers-fourier-laplace-transforms.jsx",
+      "bytes": 88259,
+      "sha256": "2bb486118efe98d9a35559a67bf8d3c8f6247598cec5ae7d5f93e4bb99a9673c",
+      "role": "selected-phasor/finiteDFT-actual-anchors-no-audio-acceptance"
+    },
+    {
+      "path": "scratch/survival-tools/Lib/site-packages/sklearn/decomposition/_nmf.py",
+      "bytes": 84039,
+      "sha256": "1d04084441f145ac43a5401212d3df6501de6a1f8885efd29de7fe58fa9435be",
+      "role": "selected-readonly-installed-init/CD/transform/MiniBatch-implementation-no-private-API-dependency"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 3751,
+      "sha256": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+      "role": "current-repository-guidance"
+    },
+    {
+      "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+      "bytes": 95470,
+      "sha256": "b6a100b71e60ca41fcce82ef7acf44f5be94f958aa8af11df0f4de63cf676961",
+      "role": "current-mutable-global-guidance-not-historical-conservation-claim"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/visual-vocabulary.md",
+      "bytes": 5546,
+      "sha256": "799ac277b81d78b659e3836b8af82bdad0bf2f4f91f12b2bef7e37b27365a1b2",
+      "role": "current-module-visual-contract"
+    },
+    {
+      "path": "skills/lesson-authoring/SKILL.md",
+      "bytes": 20953,
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "role": "current-versioned-skill"
+    },
+    {
+      "path": "skills/lesson-authoring/references/portfolio-adapter.md",
+      "bytes": 16033,
+      "sha256": "347c3ee5c5f4db818f7ab4b9d9b17ef9fd49c3c3ede5d6ea2174badd24a9173d",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/workflow.md",
+      "bytes": 25767,
+      "sha256": "4096cdebcadf3c94d61be0e1e534592160c64ef6529aca9754a2cdaaec6d1c3b",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/teaching.md",
+      "bytes": 27407,
+      "sha256": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/topic-design.md",
+      "bytes": 32018,
+      "sha256": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/domain-playbook.md",
+      "bytes": 30795,
+      "sha256": "43897a74d31c0c9b85748ef544a8be5b5bd220b8b2f79136f176e88190f16e04",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/visuals-and-labs.md",
+      "bytes": 33359,
+      "sha256": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/examples-and-code.md",
+      "bytes": 15888,
+      "sha256": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/practice-and-resources.md",
+      "bytes": 11956,
+      "sha256": "b5f7a6e67c311a0ffd48dc6ee12e416aaf772b08baa9c58684c7ca0fcb817b22",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/review.md",
+      "bytes": 19019,
+      "sha256": "98695248dd9470843c5eced1c59d89c54167b1ca2bc22a5c016616e10b31fd0d",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "skills/lesson-authoring/references/handoffs-and-cleanup.md",
+      "bytes": 8434,
+      "sha256": "c3a72e7d79419514fc606c440041c4b01cc9eec4c774c4247d0b5d37b93322ba",
+      "role": "applicable-current-guidance"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/author-review.md",
+      "bytes": 11008,
+      "sha256": "2412a20ffb411a263640fb84489532711c90ff384286389aba50ad72c8db9629",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/compose-design.mjs",
+      "bytes": 11777,
+      "sha256": "5fff9abade76ed8e59e6cf3c2c53a900517d711a1a5cf9333f1c496561edb29b",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/dependencies-and-anchors.md",
+      "bytes": 10861,
+      "sha256": "8d8eb4157c1eb2ccbd77a8075e3eaa33b196670779db54f6f0ba6beb6453c5a3",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-arithmetic.json",
+      "bytes": 46860,
+      "sha256": "fa04c779c42514521ff50cd14f0c78a8c85f132c538ddf360d86bd1a4deec973",
+      "role": "new-bounded-design-arithmetic/source-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-arithmetic.py",
+      "bytes": 10159,
+      "sha256": "581f6c072d0468af186d04704f548e494156155a07218ee40800afceaa234f09",
+      "role": "new-bounded-design-arithmetic/source-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-composition-deltas.json",
+      "bytes": 11863,
+      "sha256": "926f7a0aadb886131a2bde049b92cb8326e043771ec5f9736db8b48e73bafc63",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/execution-and-limitations.json",
+      "bytes": 3956,
+      "sha256": "5245cf2ede215df6551d54e12ee22336a42a8508e157e6f2f8ca691e2dc0656a",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/freeze-design.mjs",
+      "bytes": 15643,
+      "sha256": "a7f7056720105c5570f9487f033bc7628f090df0ad554ac6a15db374d5a33c56",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/practice-arithmetic.json",
+      "bytes": 7514,
+      "sha256": "7c4a9266376ddd7e969854542f6d5fcbd2e8485887c36cddbe048d8c69286b53",
+      "role": "new-bounded-design-arithmetic/source-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/practice-arithmetic.py",
+      "bytes": 4274,
+      "sha256": "4ae30d23948306d7ff2e091e4e6cad120d883182251d93b0ad1bc098425bca5c",
+      "role": "new-bounded-design-arithmetic/source-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/programs-and-practice.md",
+      "bytes": 33329,
+      "sha256": "d501ca6df0eef4c58da45ce1da9347be58d67f753b265b584bb72331ef519e02",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-design.md",
+      "bytes": 24261,
+      "sha256": "9730039e51e5c10083671ed45b6e8b704db4d11c697792ed588eb84d09e6ffb7",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-revision.md",
+      "bytes": 2588,
+      "sha256": "cc04dea3f9da7598ffe82a1a74d6d2af8f346d18bcdb597eacacbb7537289044",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/research-and-claim-disposition.md",
+      "bytes": 13336,
+      "sha256": "a00195bc864b291e4b4e62a8db52f275dbe443601377de4507f9ca2d585f4a3a",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/saved-scale-arithmetic.json",
+      "bytes": 986,
+      "sha256": "1375a79c245a15623d70b469667f2e26213abe54ae09307a2c9f6267734a57a9",
+      "role": "new-bounded-design-arithmetic/source-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/saved-scale-arithmetic.py",
+      "bytes": 1706,
+      "sha256": "a6aa28c58a60438a5ee6190ec0a1e35c89d76a13b96b3e5a2fadc3990d14831f",
+      "role": "new-bounded-design-arithmetic/source-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/visual-and-investigation-contracts.md",
+      "bytes": 28778,
+      "sha256": "04955b4c5cfe88bf4d1fe2ddb3876368edb41a8198444d5011ee9422caceff15",
+      "role": "complete-proposed-design/source/author-evidence"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-source-checks.json",
+      "bytes": 68170,
+      "sha256": "1f0689f5fc60f537de1a2f727bf3537fbfe98fcc5451ac1c57aa61e477e5f776",
+      "role": "finite-source-guard-result-not-independent-acceptance"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/selected-ledger-observation.json",
+      "bytes": 396,
+      "sha256": "3c14679a681eaa0800807db40216627bd2193e2ba8c9b54f8408fe4493992101",
+      "role": "current-selected-historical-row-observation"
+    }
+  ],
+  "originalPairs": 28,
+  "immutableFirstBindings": 9,
+  "immutableResumedBindings": 8,
+  "remoteSources": "Actual read/access scopes and URLs in research-and-claim-disposition.md and unchanged parent records; remote bodies not represented as local hashes",
+  "qualification": "No whole neighboring lesson/native or source-role acceptance beyond named selected inputs"
+}

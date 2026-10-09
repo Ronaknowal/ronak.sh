@@ -1,0 +1,1165 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "Message invalid feedback",
+      "pass": true
+    },
+    {
+      "name": "Message invalid default reset",
+      "pass": true
+    },
+    {
+      "name": "Message unsubmitted reset",
+      "pass": true
+    },
+    {
+      "name": "Source weights A B C D invalid feedback",
+      "pass": true
+    },
+    {
+      "name": "Source weights A B C D invalid default reset",
+      "pass": true
+    },
+    {
+      "name": "Source weights A B C D unsubmitted reset",
+      "pass": true
+    },
+    {
+      "name": "Model weights A B C D invalid feedback",
+      "pass": true
+    },
+    {
+      "name": "Model weights A B C D invalid default reset",
+      "pass": true
+    },
+    {
+      "name": "Model weights A B C D unsubmitted reset",
+      "pass": true
+    },
+    {
+      "name": "Original model weight B invalid feedback",
+      "pass": true
+    },
+    {
+      "name": "Original model weight B invalid default reset",
+      "pass": true
+    },
+    {
+      "name": "Original model weight B unsubmitted reset",
+      "pass": true
+    },
+    {
+      "name": "Class 0 logit invalid feedback",
+      "pass": true
+    },
+    {
+      "name": "Class 0 logit invalid default reset",
+      "pass": true
+    },
+    {
+      "name": "Class 0 logit unsubmitted reset",
+      "pass": true
+    },
+    {
+      "name": "Class 1 logit invalid feedback",
+      "pass": true
+    },
+    {
+      "name": "Class 1 logit invalid default reset",
+      "pass": true
+    },
+    {
+      "name": "Class 1 logit unsubmitted reset",
+      "pass": true
+    },
+    {
+      "name": "Class 2 logit invalid feedback",
+      "pass": true
+    },
+    {
+      "name": "Class 2 logit invalid default reset",
+      "pass": true
+    },
+    {
+      "name": "Class 2 logit unsubmitted reset",
+      "pass": true
+    },
+    {
+      "name": "soft target invalid draft reset",
+      "pass": true
+    },
+    {
+      "name": "shared invalid mean feedback",
+      "pass": true
+    },
+    {
+      "name": "shared cross-mount invalid-default reset",
+      "pass": true
+    },
+    {
+      "name": "shared cross-mount unsubmitted reset",
+      "pass": true
+    },
+    {
+      "name": "valid changed decoder retained",
+      "pass": true
+    },
+    {
+      "name": "valid shared mean propagates",
+      "pass": true
+    },
+    {
+      "name": "E14 actual aligned totals",
+      "pass": true
+    },
+    {
+      "name": "E14 matched zero gap",
+      "pass": true
+    },
+    {
+      "name": "E14 infinite cost no finite endpoint",
+      "pass": true
+    },
+    {
+      "name": "E22 mismatch/unused geometrical proportions",
+      "pass": true
+    },
+    {
+      "name": "E03 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E03 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E08 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E08 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E09 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E09 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E10 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E10 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E12 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E12 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E21 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E21 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E26 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E26 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E29 core canvas fits 390/root16",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E29 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E30 core canvas fits 390/root16",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E30 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E31 core canvas fits 390/root16",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E31 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E32 core canvas fits 390/root16",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E32 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E42 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E42 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E43 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E43 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E44 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E44 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E45 core canvas fits 390/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E45 reflow paths contained 390/root16",
+      "pass": true
+    },
+    {
+      "name": "document containment 390/root16",
+      "pass": true
+    },
+    {
+      "name": "E03 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E03 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E08 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E08 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E09 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E09 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E10 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E10 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E12 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E12 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E21 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E21 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E26 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E26 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E29 core canvas fits 390/root32",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E29 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E30 core canvas fits 390/root32",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E30 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E31 core canvas fits 390/root32",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E31 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E32 core canvas fits 390/root32",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E32 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E42 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E42 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E43 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E43 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E44 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E44 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E45 core canvas fits 390/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        },
+        {
+          "width": 350,
+          "scroll": 350,
+          "svg": 350
+        }
+      ]
+    },
+    {
+      "name": "E45 reflow paths contained 390/root32",
+      "pass": true
+    },
+    {
+      "name": "document containment 390/root32",
+      "pass": true
+    },
+    {
+      "name": "E03 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E03 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E08 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E08 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E09 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E09 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E10 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E10 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E12 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E12 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E21 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E21 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E26 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E26 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E29 core canvas fits 768/root32",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E29 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E30 core canvas fits 768/root32",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E30 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E31 core canvas fits 768/root32",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E31 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E32 core canvas fits 768/root32",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E32 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E42 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E42 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E43 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E43 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E44 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E44 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "E45 core canvas fits 768/root32",
+      "pass": true,
+      "detail": [
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        },
+        {
+          "width": 309,
+          "scroll": 309,
+          "svg": 309.21875
+        }
+      ]
+    },
+    {
+      "name": "E45 reflow paths contained 768/root32",
+      "pass": true
+    },
+    {
+      "name": "document containment 768/root32",
+      "pass": true
+    },
+    {
+      "name": "enlarged flow text remains actual root size",
+      "pass": true
+    },
+    {
+      "name": "endpoint keeps collapsed exact law",
+      "pass": true
+    },
+    {
+      "name": "E03 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E03 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E08 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E08 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E09 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E09 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E10 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E10 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E12 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E12 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E21 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E21 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E26 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E26 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E29 core canvas fits 768/root16",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E29 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E30 core canvas fits 768/root16",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E30 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E31 core canvas fits 768/root16",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E31 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E32 core canvas fits 768/root16",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "E32 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E42 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E42 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E43 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E43 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E44 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E44 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "E45 core canvas fits 768/root16",
+      "pass": true,
+      "detail": [
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        },
+        {
+          "width": 691,
+          "scroll": 691,
+          "svg": 691.21875
+        }
+      ]
+    },
+    {
+      "name": "E45 reflow paths contained 768/root16",
+      "pass": true
+    },
+    {
+      "name": "document containment 768/root16",
+      "pass": true
+    },
+    {
+      "name": "root restored16",
+      "pass": true
+    },
+    {
+      "name": "no page errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "images": [
+    "E14-gap-phone",
+    "E14-infinite-phone",
+    "E22-two-part-phone",
+    "E42-simplex-phone",
+    "E30-class-phone",
+    "E09-tree-constrained-root32",
+    "E21-incomplete-tree-constrained-root32",
+    "E29-factor-constrained-root32",
+    "E29-prefix-constrained-root32",
+    "E30-class-constrained-root32",
+    "E30-normalizer-constrained-root32",
+    "E42-simplex-constrained-root32",
+    "E22-gap-constrained-root32",
+    "E45-endpoint-constrained-root32"
+  ],
+  "errors": [],
+  "buildBindingHash": "7ea1a5a7da2234448b3bee9cf6f95574032da974b6c2193c55b4c6a6759c26ba",
+  "qualification": "768/root32 is deliberately constrained to386px Reader (about309px inner figure), a width complement, not Root normal-app integration. Native image files require personal reading."
+}

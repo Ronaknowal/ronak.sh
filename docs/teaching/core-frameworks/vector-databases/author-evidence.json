@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-28",
+  "status": "author native checks and independent source review complete; parent rendered/integration review tracked separately",
+  "files": {
+    "src/learn/data/topics/vector-databases.jsx": "a244f7b5d5107e39a6a850f1d8b5d0b82356a3783d9545d065d40f2ad3d3822b",
+    "src/learn/data/curriculum/blueprints/vector-databases.js": "afe4f527ac7ba43424cc6f21ec1ffb361299950ea8f2b034f265b68278205e1c",
+    "src/learn/components/lesson-labs/VectorDatabaseLabs.jsx": "3a3acf9a36716abd14f37bf263445c0dba8d76885473383708193ffec2dac880",
+    "src/learn/components/lesson-labs/vector-database-labs.css": "416c258f7652cde975042867f1fa311608b1be0cf799c85a903183de321f67d3",
+    "src/learn/data/vector-database-models.js": "8202b63062654c8b4258b910434bce7e8b0f858becf1cd5a6a6b0de5617934e8",
+    "public/learn-code/vector-databases/vector_retrieval.py": "ce90958b55feb15fe875776c91f48ba93ca847620f6f8f65f232cc8948f40915"
+  },
+  "native_evidence": "native-evidence.json",
+  "limits": "CPU/local bounded studies; no cloud server, GPU or production benchmark. See manuscript and native receipt for topic-specific boundaries.",
+  "independent_review": "independent-review.md",
+  "author_painted_review": {
+    "attribution": "Author inspected parent-created screenshots; parent performed browser interactions.",
+    "captures": "scratch/core-frameworks/interactions/vector-labels-320.png; vector-labels-changed-320.png; original retrieval-browser metric/lineage captures",
+    "observations": "Final narrow coarse map separates A/B leader labels and C/L1 centroid labels; query diamond has a visible legend. Metric and lineage figures readable; table scroll is local.",
+    "closed_finding": "Coarse-map labels overlapped before offsets/leader lines; final captured pixels inspected."
+  },
+  "cleanup": "Removed own processed archive and superseded portalocker4.4 metadata only; retained public data/provenance, runnable environment and required evidence."
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "Actual P05 current dependency capture; no model fits or old programmes",
+  "reason": "P05 first capture at17:23 preceded P04 final revision at17:24 and did not record import hashes. Run only new split/index main against changed current helper; preserve first receipt.",
+  "actual_execution": "bdcdf5/session48344 ->9817b5 exit0",
+  "current_receipt": "checks/programme-attempts/split_information_contracts.py.2.json",
+  "source_and_complete_streams_unchanged": true,
+  "source_sha256": "a6843279c834626da46578d8b9dfa2ff3ea35ae682bb34ca9e2bf7f73fad8496",
+  "stdout_sha256": "497b341268bf6c875e5bd9589fc9cc18b3683590569ab4dabdb7fb58d9c51dc7",
+  "dependency_bindings": [
+    {
+      "file": "fold_fitted_pipeline.py",
+      "bytes": 11262,
+      "sha256": "e26e2d319ed6783319e394c49b0137d8eed6d14469ec1b5ad9b431797a95ebfa"
+    }
+  ]
+}

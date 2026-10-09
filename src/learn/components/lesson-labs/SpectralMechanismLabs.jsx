@@ -1,371 +1,107 @@
 import { useState } from 'react';
-import { NeuralNumber } from './NeuralNumberControl.jsx';
-import { NeuralLab, NeuralSelect, NeuralTable } from './NeuralLessonElements.jsx';
-import { convolution, difference, dot, kinkValue, libraryAccess, linearMargin, linearPenalty, matvec, norm, normalizationGradient, normalizeMatrix, penaltyValue, powerTrace, probePenalty, scale, singular2 } from '../../data/spectral-regularization-models.js';
-import { CurvePlane, MatrixEditor, SpectralFigure, SpectralMatrix, SpectralPlot, SpectralVector, f, vector } from './SpectralPrimitives.jsx';
+import { FlowLab, FlowControls, FlowSlider, FlowReadout } from './LessonFlow.jsx';
+import { NeuralTable } from './NeuralLessonElements.jsx';
+import { convolution, dot, kinkValue, libraryAccess, linearMargin, linearPenalty, matvec, norm, normalizationGradient, normalizeMatrix, penaltyValue, powerTrace, probePenalty, scale, singular2 } from '../../data/spectral-regularization-models.js';
+import { CurvePlane, MatrixDrawing, MatrixEditor, SpectralFigure, SpectralMatrix, SpectralPlot, SpectralVector, f, vector, spectralColors as C } from './SpectralPrimitives.jsx';
 import './spectral-regularization-labs.css';
-import './neural-lesson-neutral.css';
-const color = ['#e6b854', '#ddd', '#ba9fd1'];
-const circle = Array.from({
-  length: 97
-}, (_, i) => [Math.cos(i * Math.PI / 48), Math.sin(i * Math.PI / 48)]);
-const methods = [['exact', 'Exact spectral normalization'], ['power', 'Power-estimated normalization'], ['cap', 'Cap spectral norm only'], ['frobenius', 'Frobenius normalization'], ['entry', 'Entrywise clipping'], ['singular-cap', 'Clip each singular value']];
-const kinds = [['target-one', 'Target one: λ(r−1)²'], ['one-sided', 'One-sided: λ max(0,r−1)²'], ['zero', 'Zero-centered: λr²']];
-function SpectrumBars({
-  raw,
-  effective
-}) {
-  const a = singular2(raw),
-    b = singular2(effective),
-    values = [[...a.values, a.frobenius], [...b.values, b.frobenius]],
-    bound = Math.max(1, ...values.flat());
-  return <SpectralFigure title="Singular values describe individual stretches; Frobenius combines their squares" height={240} description={'All bars use the same zero baseline and scale 0 to ' + f(bound, 5) + '. White is the original matrix; amber is the effective matrix. The Frobenius norm is an upper bound, not a typical directional stretch.'}>
-    {['Largest singular value', 'Second singular value', 'Frobenius norm'].map((name, i) => <g key={name}><text x="10" y={30 + i * 73} fill="#ddd" fontSize="13">{name}</text>{values.map((row, j) => <g key={j}><rect x="185" y={12 + i * 73 + j * 25} width={row[i] / bound * 355} height="16" fill={j ? '#e6b854' : '#ddd'} /><text x="550" y={25 + i * 73 + j * 25} fill="#ddd" fontSize="12">{f(row[i], 5)}</text></g>)}</g>)}
-  </SpectralFigure>;
+const circle=Array.from({length:97},(_,i)=>[Math.cos(i*Math.PI/48),Math.sin(i*Math.PI/48)]);
+const kinds=[['target-one','Target one'],['one-sided','Upper only'],['zero','Zero centered']];
+function Selector({name,value,onChange,options}) {return <label className="spectral-select">{name}<select value={value} onChange={e=>onChange(e.target.value)}>{options.map(([v,label])=><option key={v} value={v}>{label}</option>)}</select></label>;}
+function SpectrumBars({raw,effective}) {
+ const a=singular2(raw),b=singular2(effective),rows=[[...a.values,a.frobenius],[...b.values,b.frobenius]],maximum=Math.max(1,...rows.flat());
+ return <SpectralFigure title="Original and normalized stretches on one scale" height={268} description={'White is the original matrix; violet is the normalized matrix. Every bar starts at zero and uses scale 0 to '+f(maximum)+'. Frobenius combines both squared singular values.'}>
+ {['largest stretch','second stretch','Frobenius norm'].map((label,i)=><g key={label}><text x="20" y={25+i*84}>{label}</text>{rows.map((r,j)=><g key={j}><rect x="20" y={34+i*84+j*22} width={210*r[i]/maximum} height="14" fill={j?C.computed:'#ddd'}/><text x="238" y={47+i*84+j*22}>{f(r[i],4)}</text></g>)}</g>)}
+ </SpectralFigure>;
 }
 export function SpectralSlopeLab() {
-  const [knot, setKnot] = useState(1),
-    [extra, setExtra] = useState(1),
-    [a, setA] = useState(-.5),
-    [b, setB] = useState(1.5),
-    [limit, setLimit] = useState(1);
-  const xs = Array.from({
-      length: 85
-    }, (_, i) => -3 + i / 12),
-    fa = kinkValue(a, knot, extra),
-    fb = kinkValue(b, knot, extra),
-    actual = Math.abs(fb - fa),
-    allowed = limit * Math.abs(b - a),
-    bound = Math.max(1, Math.abs(1 + extra));
-  const curves = [{
-    label: 'Actual f(x)',
-    color: color[0],
-    values: xs.map(x => [x, kinkValue(x, knot, extra)])
-  }, {
-    label: 'Upper permitted difference from a',
-    color: color[1],
-    dashed: true,
-    values: xs.map(x => [x, fa + limit * Math.abs(x - a)])
-  }, {
-    label: 'Lower permitted difference from a',
-    color: color[1],
-    dashed: true,
-    values: xs.map(x => [x, fa - limit * Math.abs(x - a)])
-  }];
-  const values = curves.flatMap(c => c.values.map(v => v[1]));
-  return <NeuralLab id="spectral-slope" title="A bound must contain every allowed difference"><div className="neural-controls"><NeuralNumber label="Knot location" value={knot} min={-2} max={3} onChange={setKnot} /><NeuralNumber label="Extra slope after knot" value={extra} min={-.9} max={5} onChange={setExtra} /><NeuralNumber label="Reference input a" value={a} min={-3} max={4} onChange={setA} /><NeuralNumber label="Comparison input b" value={b} min={-3} max={4} onChange={setB} /><NeuralNumber label="Claimed global bound L" value={limit} min={0} max={6} onChange={setLimit} /></div><SpectralPlot title="Difference envelope anchored at a" xLabel="input x" yLabel="function value" xDomain={[-3, 4]} yDomain={[Math.min(...values) - .5, Math.max(...values) + .5]} series={curves} points={[{
-      id: 'a',
-      x: a,
-      y: fa,
-      label: 'Anchor a',
-      selected: true
-    }, {
-      id: 'b',
-      x: b,
-      y: fb,
-      label: 'Comparison b',
-      selected: true,
-      color: color[2]
-    }]} /><p data-result="slope">Output difference {f(actual)} versus allowed {f(allowed)}: {actual > allowed + 1e-10 ? 'this pair disproves the claimed bound' : 'this pair respects the bound'}. The analytic global Lipschitz constant of this entire piecewise-linear function is {f(bound)}. {limit + 1e-10 >= bound ? 'The claimed bound is valid for every pair here.' : 'A passing pair alone cannot rescue a smaller global claim.'}</p><button onClick={() => {
-      setKnot(1);
-      setExtra(1);
-      setA(-.5);
-      setB(1.5);
-      setLimit(1);
-    }}>Reset difference envelope</button></NeuralLab>;
+ const [a,setA]=useState(-.5),[b,setB]=useState(1.5),[limit,setLimit]=useState(1);
+ const xs=Array.from({length:85},(_,i)=>-3+i/12),fa=kinkValue(a,1,1),fb=kinkValue(b,1,1),series=[{label:'Violet: f(x)=x+ReLU(x−1)',color:C.computed,values:xs.map(x=>[x,kinkValue(x,1,1)])},...[1,-1].map(sign=>({label:sign===1?'White upper envelope':'White lower envelope',color:'#ddd',dashed:true,values:xs.map(x=>[x,fa+sign*limit*Math.abs(x-a)])}))],ys=series.flatMap(s=>s.values.map(v=>v[1]));
+ return <FlowLab id="spectral-slope" label="Compare an output change with its allowed envelope"><SpectralPlot title="A reference point and a comparison point" xLabel="input x" yLabel="output f(x)" xDomain={[-3,4]} yDomain={[Math.min(...ys)-.5,Math.max(...ys)+.5]} series={series} points={[{x:a,y:fa,label:'reference a',selected:true},{x:b,y:fb,label:'comparison b',selected:true,color:C.computed}]}/><FlowControls><FlowSlider name="Reference input a" value={a} min={-3} max={4} step={.05} onChange={setA}/><FlowSlider name="Comparison input b" value={b} min={-3} max={4} step={.05} onChange={setB}/><FlowSlider name="Claimed bound L" value={limit} min={0} max={6} step={.05} onChange={setLimit}/></FlowControls><FlowReadout data-result="slope">The input moves {f(Math.abs(b-a))}; the output moves {f(Math.abs(fb-fa))}, versus allowed {f(limit*Math.abs(b-a))}. {Math.abs(fb-fa)>limit*Math.abs(b-a)+1e-10?'This pair disproves the claim.':'This pair respects the claim.'} The whole function has slopes 1 and 2, so its global bound is 2; {limit>=2?'this L bounds all pairs.':'a passing pair does not establish this smaller L everywhere.'}</FlowReadout></FlowLab>;
 }
 export function SpectralCircleFigure() {
-  const w = [[3, 0], [0, 1]],
-    effective = [[1, 0], [0, 1 / 3]];
-  return <><div className="spectral-two"><CurvePlane title="Unit circle → W circle" extent={3.3} curves={[{
-        values: circle,
-        color: color[1],
-        dashed: true
-      }, {
-        values: circle.map(x => matvec(w, x))
-      }]} points={[{
-        value: [3, 0],
-        from: [0, 0],
-        label: 'W e₁'
-      }]} /><CurvePlane title="After exact unit normalization" extent={1.2} curves={[{
-        values: circle,
-        color: color[1],
-        dashed: true
-      }, {
-        values: circle.map(x => matvec(effective, x))
-      }]} points={[{
-        value: [1, 0],
-        from: [0, 0],
-        label: 'W̄ e₁'
-      }]} /></div><SpectrumBars raw={w} effective={effective} /><NeuralTable caption="Exact spectrum: one common rescaling" headers={['Quantity', 'Original W', 'Normalized W̄']} rows={[['largest singular value', 3, 1], ['second singular value', 1, '1/3'], ['Frobenius norm', '√10', '√10/3']]} /></>;
+ const w=[[3,0],[0,1]],effective=[[1,0],[0,1/3]];
+ return <><div className="spectral-two">{[[w,'Original: ellipse radii 3 and 1'],[effective,'Normalized: radii 1 and ⅓']].map(([matrix,title])=><CurvePlane key={title} title={title} extent={3.3} curves={[{label:'Unit input circle',values:circle,color:C.input,dashed:true},{label:'Transformed shape',values:circle.map(v=>matvec(matrix,v)),color:C.computed}]} points={[{value:matvec(matrix,[1,0]),from:[0,0],label:'horizontal output',color:C.computed}]}/>)}</div><SpectrumBars raw={w} effective={effective}/><SpectralMatrix title="Original output-by-input matrix" values={w}/><SpectralMatrix title="After exact unit normalization" values={effective}/></>;
 }
-const initialMatrix = () => ({
-  w: [[2, 1], [0, 1]],
-  u: [1, 1],
-  steps: 1,
-  target: 1,
-  method: 'power',
-  bias: [0, 0],
-  angle: 30
-});
+export function SpectralNormalizationLab() {
+ const [w,setW]=useState([[2,1],[0,1]]),[target,setTarget]=useState(1),[angle,setAngle]=useState(30),[bias,setBias]=useState([0,0]),[gain,setGain]=useState(1);
+ const recipes=[['exact','Exact spectral rescaling'],['cap','Cap only'],['frobenius','Frobenius'],['entry','Entry clipping'],['singular-cap','Singular clipping']],v=[Math.cos(angle*Math.PI/180),Math.sin(angle*Math.PI/180)],extent=Math.max(1.2,singular2(w).values[0],target)*1.2;
+ return <><FlowLab id="spectral-normalization" label="Change the matrix and compare exact operations"><MatrixDrawing label="Editable matrix W" values={w}/><MatrixEditor label="W" values={w} onChange={setW}/><FlowReadout>Its exact largest stretch is {f(singular2(w).values[0])}. Every operation below uses this same matrix.</FlowReadout>
+ <p>What changes if we apply different recipes to exactly the same matrix? Violet is each transformed unit circle; the dashed cyan circle is the original unit input. The panels share physical axis scales.</p>
+ <div className="spectral-two">{recipes.map(([method,title])=>{const r=normalizeMatrix(w,method,target);return <CurvePlane key={method} title={title} extent={extent} curves={[{label:'Unit input circle',values:circle,color:C.input,dashed:true},{label:'Transformed shape',values:circle.map(x=>matvec(r.effective,x)),color:C.computed}]} points={[{value:matvec(r.effective,v),from:[0,0],label:'marked output',color:C.computed}]}/>;})}</div>
+ <FlowControls><FlowSlider name="Norm target or clipping threshold" value={target} min={.05} max={3} step={.05} onChange={setTarget}/></FlowControls><NeuralTable caption="All five exact recipes on one matrix" headers={['operation','actual norm','effective rows']} rows={recipes.map(([method,title])=>{const r=normalizeMatrix(w,method,target);return [title,f(r.trueNorm,7),r.effective.map(vector).join('; ')];})}/></FlowLab>
+ <FlowLab id="spectral-direction" label="Change one direction through the current map"><CurvePlane title="A unit input and its transformed endpoint" extent={extent} curves={[{label:'Unit input circle',values:circle,color:C.input,dashed:true}]} points={[{value:v,from:[0,0],label:'unit input',color:C.input},{value:matvec(w,v),from:[0,0],label:'Wv',color:C.computed}]}/><FlowControls><FlowSlider name="Unit input angle, degrees" value={angle} min={0} max={360} step={1} onChange={setAngle}/></FlowControls><FlowReadout>The input length stays 1; this direction stretches to {f(norm(matvec(w,v)))}. The largest stretch over all directions remains {f(singular2(w).values[0])}.</FlowReadout></FlowLab>
+ <p>Does adding a bias change stretch, or just the center? Now translate the same output shape. The vector starts at the translated center, so its length still measures a difference.</p>
+ <FlowLab id="spectral-bias" label="Translate the output without changing its stretch"><CurvePlane title="Bias moves the output center" extent={extent+norm(bias)} curves={[{label:'Translated output shape',values:circle.map(x=>matvec(w,x).map((n,i)=>n+bias[i])),color:C.computed}]} points={[{value:bias,label:'center b',color:C.parameter},{value:matvec(w,v).map((n,i)=>n+bias[i]),from:bias,label:'Wv+b',color:C.computed}]}/><SpectralVector label="Output bias b" values={bias} onChange={setBias}/><FlowReadout>Center {vector(bias)}; difference from center {vector(matvec(w,v))}. Bias has not changed the largest pairwise stretch.</FlowReadout></FlowLab>
+ <p>Exact unit normalization has a useful null: multiplying every nonzero coefficient by the same positive number leaves the represented normalized map unchanged.</p>
+ <FlowLab id="spectral-rescaling" label="Rescale all coefficients together"><MatrixDrawing label="Positive rescaling × W" values={scale(w,gain)}/><FlowControls><FlowSlider name="Positive common multiplier" value={gain} min={.1} max={2} step={.05} onChange={setGain}/></FlowControls><FlowReadout>Raw norm becomes {f(singular2(scale(w,gain)).values[0])}; exact unit-normalized rows stay {normalizeMatrix(scale(w,gain)).effective.map(vector).join('; ')}. The zero matrix is explicitly left zero; it is not divided by zero.</FlowReadout></FlowLab></>;
+}
 export function SpectralMatrixLab() {
-  const [state, setState] = useState(initialMatrix),
-    [pinned, setPinned] = useState(initialMatrix),
-    [round, setRound] = useState(1);
-  const change = (key, value) => setState(s => ({
-    ...s,
-    [key]: value
-  }));
-  const current = normalizeMatrix(state.w, state.method, state.target, state.u, state.steps),
-    reference = normalizeMatrix(pinned.w, pinned.method, pinned.target, pinned.u, pinned.steps),
-    trace = powerTrace(state.w, state.u, state.steps),
-    shown = trace.records[Math.min(round, trace.records.length) - 1];
-  const direction = [Math.cos(state.angle * Math.PI / 180), Math.sin(state.angle * Math.PI / 180)];
-  const translated = (w, x, b) => matvec(w, x).map((v, i) => v + b[i]);
-  const effective = current.effective;
-  const extent = Math.max(1.2, singular2(state.w).values[0] + norm(state.bias), effective ? current.trueNorm + norm(state.bias) : 0, reference.effective ? reference.trueNorm + norm(pinned.bias) : 0) * 1.1;
-  return <NeuralLab id="spectral-matrix" title="Find—or miss—the strongest matrix direction">
- <MatrixEditor label="W" values={state.w} onChange={w => change('w', w)} /><div className="neural-controls"><NeuralSelect label="Matrix operation" value={state.method} onChange={v => change('method', v)} options={methods} /><NeuralNumber label="Target norm or clipping threshold" value={state.target} min={.05} max={3} onChange={v => change('target', v)} /><NeuralNumber label="Power-iteration rounds" value={state.steps} min={1} max={16} integer onChange={v => change('steps', v)} /><NeuralNumber label="Marked input angle degrees" value={state.angle} min={0} max={360} onChange={v => change('angle', v)} /></div><SpectralVector label="Initial left direction u" values={state.u} onChange={v => change('u', v)} min={-2} max={2} /><SpectralVector label="Output bias b" values={state.bias} onChange={v => change('bias', v)} />
- {current.error ? <p role="status">{current.error} Edit the direction or matrix to resume this calculation.</p> : <p data-result="matrix">Exact original norm {f(current.sigma, 8)}; actual effective norm <strong>{f(current.trueNorm, 8)}</strong>. {current.zero ? 'Zero matrix: output is defined as zero before the bias; singular direction undefined.' : state.method === 'power' && current.trueNorm > state.target + 1e-10 ? 'The finite power estimate leaves a norm above the requested target.' : 'The selected operation is evaluated on the actual effective matrix.'}</p>}
- <div className="spectral-two"><CurvePlane title="Original map and marked unit input" extent={extent} curves={[{
-        values: circle,
-        color: color[1],
-        dashed: true
-      }, {
-        values: circle.map(x => translated(state.w, x, state.bias))
-      }]} points={[{
-        value: direction,
-        from: [0, 0],
-        label: 'v',
-        color: color[1]
-      }, {
-        value: translated(state.w, direction, state.bias),
-        from: state.bias,
-        label: 'Wv+b'
-      }]} />{effective && <CurvePlane title="Current amber map; pinned dashed map" extent={extent} curves={[{
-        values: circle.map(x => translated(effective, x, state.bias))
-      }, ...(reference.effective ? [{
-        values: circle.map(x => translated(reference.effective, x, pinned.bias)),
-        dashed: true,
-        color: color[1]
-      }] : [])]} points={[{
-        value: translated(effective, direction, state.bias),
-        from: state.bias,
-        label: 'W̄v+b'
-      }]} />}</div>
- {effective && <><SpectrumBars raw={state.w} effective={effective} /><SpectralMatrix title="Current effective output-by-input matrix" values={effective} /><NeuralTable caption="Spectrum is not an average stretch" headers={['Quantity', 'Raw matrix', 'Current effective']} rows={[['σ₁', f(current.values[0], 8), f(singular2(effective).values[0], 8)], ['σ₂', f(current.values[1], 8), f(singular2(effective).values[1], 8)], ['Frobenius', f(singular2(state.w).frobenius), f(singular2(effective).frobenius)]]} /></>}
- <p>Both geometric panels use the same axis scale. Bias translates the output center without changing any pairwise stretch. The pinned state retains its own matrix, operation, target, direction and bias; it does not silently follow the controls.</p>
- <div className="neural-buttons"><button onClick={() => setPinned(structuredClone(state))}>Pin current map</button><button disabled={state.w.flat().some(x => Math.abs(x) > 2.5)} onClick={() => change('w', scale(state.w, 2))}>Double every matrix coefficient</button><button onClick={() => {
-        setState({
-          ...initialMatrix(),
-          w: [[3, 0], [0, 1]],
-          u: [0, 1]
-        });
-        setRound(1);
-      }}>Orthogonal starting direction</button><button onClick={() => {
-        setState({
-          ...initialMatrix(),
-          w: [[1.01, 0], [0, 1]],
-          steps: 8
-        });
-        setRound(8);
-      }}>Slow spectral gap</button><button onClick={() => setState({
-        ...initialMatrix(),
-        w: [[.2, 0], [0, .2]],
-        method: 'cap'
-      })}>Small matrix: cap only</button><button onClick={() => {
-        setState(initialMatrix());
-        setPinned(initialMatrix());
-        setRound(1);
-      }}>Reset matrix investigation</button></div>
- <p>With exact unit normalization, positive uniform rescaling leaves the effective matrix unchanged. Cap-only, entrywise clipping and a one-coefficient change need not share that null. The near-zero cutoff is 10⁻¹².</p>
- <section open={state.method === 'power'} data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Follow the actual power-iteration vectors</h4>{trace.error && <p>{trace.error}</p>}{shown && <><NeuralNumber label="Inspect computed power round" value={Math.min(round, trace.records.length)} min={1} max={trace.records.length} integer onChange={setRound} /><SpectralFigure title="Each multiplication exposes a different coordinate space" width={760} height={155} description="The first u is the preceding normalized left vector. Multiply by Wᵀ, normalize to v, multiply by W, and normalize the next u. The estimate uses the final u and Wv.">{[['u', shown.before], ['Wᵀu', shown.wtU], ['v', shown.v], ['Wv', shown.wV], ['next u', shown.u]].map(([name, values], i) => <g key={name}><rect x={10 + 150 * i} y="35" width="130" height="72" fill="#222" stroke={i % 2 ? '#ba9fd1' : '#e6b854'} /><text x={75 + 150 * i} y="57" textAnchor="middle" fill="#ddd" fontSize="14">{name}</text><text x={75 + 150 * i} y="82" textAnchor="middle" fill="#ddd" fontSize="12">{vector(values)}</text>{i < 4 && <path d={'M' + (140 + 150 * i) + ' 70 h20'} stroke="#ddd" />}</g>)}<text x="380" y="140" textAnchor="middle" fill="#eee" fontSize="13">{'uᵀWv = ' + f(shown.estimate, 8)}</text></SpectralFigure></>}<NeuralTable caption="Every computed power round" headers={['Round', 'Estimated σ', 'True norm after unit division']} rows={trace.records.map(r => [r.step, f(r.estimate, 8), f(r.trueNorm, 8)])} /><p>This trace shows unit division before any target scaling. It starts from the declared left vector. The library example later has two stored buffers and follows its documented update order.</p></section>
- </NeuralLab>;
+ const [w,setW]=useState([[3,0],[0,1]]),[angle,setAngle]=useState(45),[round,setRound]=useState(1),[diagnostic,setDiagnostic]=useState(0);
+ const initial=[Math.cos(angle*Math.PI/180),Math.sin(angle*Math.PI/180)].map(v=>Math.abs(v)<1e-14?0:v),trace=powerTrace(w,initial,round),shown=trace.records.at(-1),s=singular2(w),extent=Math.max(1.2,s.values[0]*1.15),bad=diagnostic===0?[0,0]:[0,1],diagnosticMatrix=diagnostic===0?w:[[1,0],[0,0]],failed=powerTrace(diagnosticMatrix,bad,1);
+ return <><p>First change a matrix entry if you want to test a different spectral gap. The initial diagram uses diag(3,1), matching the hand calculation.</p><FlowLab id="spectral-power-matrix" label="Set the power iteration matrix"><MatrixDrawing label="Power-iteration W" values={w}/><MatrixEditor label="Power W" values={w} onChange={setW}/><FlowReadout>Its exact singular values are {vector(s.values)}; nearly equal values slow amplification of a preferred direction.</FlowReadout></FlowLab>
+ <FlowLab id="spectral-matrix" label="Trace the actual power iteration">{shown?<><div className="spectral-two">{[['Previous u',shown.before,1.2],['Wᵀu',shown.wtU,extent],['Normalized v',shown.v,1.2],['Wv',shown.wV,extent],['Next u',shown.u,1.2]].map(([title,value,limit])=><CurvePlane key={title} title={title} extent={limit} points={[{value,from:[0,0],label:title,color:title.includes('Normalized')||title.includes('Next')?C.computed:C.input}]}/>)}</div></>:<><MatrixDrawing label="Current W" values={w}/><FlowReadout>{trace.error}</FlowReadout></>}
+ <FlowControls><FlowSlider name="Initial left-vector angle, degrees" value={angle} min={0} max={360} step={1} onChange={setAngle}/><FlowSlider name="Power rounds" value={round} min={1} max={16} step={1} onChange={setRound}/></FlowControls><FlowReadout data-result="matrix">{shown?'Round '+round+' estimates '+f(shown.estimate,8)+'; dividing by that estimate leaves actual norm '+f(shown.trueNorm,8)+'.':trace.error} Exact norm {f(s.values[0])} is a comparison, not the computed estimate.</FlowReadout><NeuralTable caption="Every computed round" headers={['round','estimated norm','actual norm after division']} rows={trace.records.map(r=>[r.step,f(r.estimate,8),f(r.trueNorm,8)])}/></FlowLab>
+ <p>There are two different unusable cases. A zero starting vector cannot be normalized. A nonzero vector in the null space of Wᵀ becomes zero during multiplication. Neither is a small, valid norm estimate.</p>
+ <FlowLab id="spectral-nullspace" label="Distinguish zero start from null-space start"><MatrixDrawing label="Diagnostic matrix" values={diagnosticMatrix}/><CurvePlane title="Diagnostic starting vector" extent={1.2} points={[{value:bad,from:[0,0],label:'initial u'}]}/><FlowControls><Selector name="Failure to inspect" value={diagnostic} onChange={v=>setDiagnostic(Number(v))} options={[[0,'Zero start'],[1,'Nonzero null-space start']]}/></FlowControls><FlowReadout>{failed.error} The calculation stops rather than dividing by zero.</FlowReadout></FlowLab></>;
 }
 export function SpectralDerivativeLab() {
-  const [w, setW] = useState([[2, 1], [0, 1]]),
-    [h, setH] = useState([[1, -.3], [.2, .7]]);
-  const result = normalizationGradient(w, h);
-  return <NeuralLab id="spectral-derivative" title="Changing a weight also changes its normalization scale"><MatrixEditor label="Derivative example W" values={w} onChange={setW} /><MatrixEditor label="Upstream derivative H" values={h} onChange={setH} min={-2} max={2} />{result ? <><SpectralFigure title="The quotient derivative subtracts the scale response" height={125} description="These are matrices in the same output-by-input coordinates. The subtraction removes sensitivity to a positive radial rescaling of W."><text x="20" y="39" fill="#eee" fontSize="14">H / σ</text><path d="M85 34 H208" stroke="#ddd" /><text x="231" y="39" fill="#eee" fontSize="22">−</text><text x="283" y="39" fill="#eee" fontSize="14">〈H,W̄〉 uvᵀ / σ</text><path d="M452 34 H548" stroke="#ddd" /><text x="557" y="40" fill="#e6b854" fontSize="15">∂L/∂W</text><text x="320" y="85" textAnchor="middle" fill="#ddd" fontSize="13">{'σ=' + f(result.values[0], 6) + '; 〈H,W̄〉=' + f(result.inner, 6)}</text></SpectralFigure><div className="spectral-two"><SpectralMatrix title="Detached-denominator derivative" values={result.detached} /><SpectralMatrix title="Derivative through the scale" values={result.gradient} /></div><p data-result="normalization-gradient">Radial directional derivative 〈∂L/∂W,W〉 = {f(dot(result.gradient.flat(), w.flat()), 9)}. The detached route gives {f(dot(result.detached.flat(), w.flat()), 9)}. Exact positive rescaling is a null direction; this explains why the omitted term matters.</p></> : <p role="status">This zero matrix or repeated largest singular value has no unique positive leading-vector derivative of the displayed form.</p>}<button onClick={() => {
-      setW([[2, 1], [0, 1]]);
-      setH([[1, -.3], [.2, .7]]);
-    }}>Reset derivative example</button></NeuralLab>;
+ const [w,setW]=useState([[2,1],[0,1]]),[h,setH]=useState([[1,-.3],[.2,.7]]),r=normalizationGradient(w,h),cached=powerTrace(w,[1,1],1).records.at(-1);
+ const estimate=cached?.estimate,inner=cached?dot(h.flat(),scale(w,1/estimate).flat()):null,cachedGradient=cached?h.map((row,i)=>row.map((v,j)=>(v-inner*cached.u[i]*cached.v[j])/estimate)):null;
+ return <><FlowLab id="spectral-derivative-weight" label="Inspect the original matrix"><MatrixDrawing label="Original W" values={w}/><MatrixEditor label="Derivative W" values={w} onChange={setW}/></FlowLab>
+ <p>H is the derivative arriving from the loss with respect to the effective weight. Each H cell says how much the loss changes if that effective coefficient changes. Choose a cell to change that arriving signal.</p>
+ <FlowLab id="spectral-upstream" label="Inspect the arriving derivative"><MatrixDrawing label="Upstream H" values={h} color={C.computed}/><MatrixEditor label="Upstream H" values={h} onChange={setH} min={-2} max={2}/></FlowLab>
+ <FlowLab id="spectral-derivative" label="Compare derivatives through the normalization">{r?<><SpectralFigure title="The numerator and scale both depend on W" height={224} description="The top amber input forks. One route carries W directly; the other measures its largest stretch σ. They meet at the division circle. Dashed orange routes show both dependencies carrying loss derivatives backwards.">
+ <text x="142" y="22" fill={C.parameter}>W</text><path d="M160 30V63H70V149 M160 63H250V125H182" fill="none" stroke="#888"/><text x="213" y="92" fill={C.computed}>σ(W)</text><circle cx="160" cy="150" r="20" fill="none" stroke="#ddd"/><text x="160" y="155" textAnchor="middle">÷</text><path d="M70 149H139 M160 171V197" stroke="#888"/><text x="140" y="217" fill={C.computed}>W / σ</text><path d="M145 194V179H56V49H147 M175 194V180H266V49H174" fill="none" stroke={C.gradient} strokeDasharray="5 4"/>
+ </SpectralFigure><div className="spectral-two"><MatrixDrawing label="If σ is detached" values={r.detached} color={C.computed}/><MatrixDrawing label="Full exact quotient derivative" values={r.gradient} color={C.computed}/></div><FlowReadout data-result="normalization-gradient">Exact σ={f(r.values[0],6)}. Radial derivative ⟨∂L/∂W,W⟩ is {f(dot(r.gradient.flat(),w.flat()),9)}; detaching the denominator gives {f(dot(r.detached.flat(),w.flat()),9)}. Positive rescaling is a null of the exact normalized function.</FlowReadout></>:<FlowReadout>This zero matrix or repeated largest singular value has no unique positive leading-vector derivative of this formula.</FlowReadout>}
+ <p>The finite cached-vector quotient is a different function. Hold the current search vectors u and v fixed, but let the scalar uᵀWv depend on W. The derivative has the same quotient structure with this actual estimate and these vectors; it need not equal the exact singular-norm derivative.</p>
+ {cachedGradient?<><MatrixDrawing label="One-round cached-vector derivative" values={cachedGradient} color={C.computed}/><FlowReadout>One-round denominator {f(estimate,8)}; cached u={vector(cached.u)}, v={vector(cached.v)}. Searching for these directions is stopped in the derivative graph; the current denominator is not detached.</FlowReadout></>:<FlowReadout>The search cannot supply a usable cached denominator for this matrix.</FlowReadout>}</FlowLab></>;
+}
+function WindowDrawing({input,result,selected=1}) {
+ const n=input.length,spacing=260/n, outputSpacing=260/result.output.length;
+ return <SpectralFigure title="Spatial inputs connect through actual nonzero coefficients" height={218} description="Cyan outlines mark inputs; violet outlines mark outputs. Cell fill encodes sign: amber nonnegative, blue negative. Lines exist exactly where the full matrix has a nonzero coefficient. White outlines mark the selected input column; amber lines show its destinations.">
+ {result.matrix.map((row,i)=>row.map((coefficient,j)=>coefficient!==0&&<line key={i+'-'+j} x1={30+(j+.5)*spacing} y1="76" x2={30+(i+.5)*outputSpacing} y2="153" stroke={j===selected?C.parameter:'#777'}/>))}
+ {input.map((value,j)=><g key={j}><text x={30+(j+.5)*spacing} y="23" textAnchor="middle">{'x'+j}</text><rect x={31+j*spacing} y="34" width={spacing-4} height="42" fill={value<0?'#152934':'#302718'} stroke={j===selected?'#fff':C.input}/><text x={30+(j+.5)*spacing} y="61" textAnchor="middle">{f(value,2)}</text></g>)}
+ {result.output.map((value,i)=><g key={i}><rect x={31+i*outputSpacing} y="154" width={outputSpacing-4} height="42" fill={value<0?'#152934':'#302718'} stroke={C.computed}/><text x={30+(i+.5)*outputSpacing} y="179" textAnchor="middle">{f(value,2)}</text><text x={30+(i+.5)*outputSpacing} y="214" textAnchor="middle">{'y'+i}</text></g>)}
+ </SpectralFigure>;
 }
 export function SpectralConvolutionLab() {
-  const [kernel, setKernel] = useState([1, 2]),
-    [input, setInput] = useState([1, -1, 2]),
-    [mode, setMode] = useState('valid'),
-    [stride, setStride] = useState(1),
-    [selected, setSelected] = useState(1);
-  const result = convolution(kernel, mode, input, stride),
-    baseline = Array.from({
-      length: input.length
-    }, (_, i) => [1, -1, 2][i] || 0),
-    before = matvec(result.matrix, baseline),
-    delta = input.map((v, i) => v - baseline[i]);
-  const rows = result.matrix.length;
-  return <NeuralLab id="spectral-convolution" title="One stored kernel, several spatial operators"><SpectralVector label="Cross-correlation kernel" values={kernel} onChange={setKernel} /><div className="neural-controls"><NeuralNumber label="Input length" value={input.length} min={3} max={6} integer onChange={n => {
-        setInput(x => Array.from({
-          length: n
-        }, (_, i) => x[i] ?? 0));
-        setSelected(Math.min(selected, n - 1));
-      }} /><NeuralSelect label="Boundary rule" value={mode} onChange={setMode} options={[['valid', 'Valid windows only'], ['circular', 'Circular wrap']]} /><NeuralSelect label="Stride" value={stride} onChange={v => setStride(Number(v))} options={[[1, '1: neighboring starts'], [2, '2: skip one start']]} /><NeuralNumber label="Highlight input column" value={selected} min={0} max={input.length - 1} integer onChange={setSelected} /></div><SpectralVector label="Spatial input x" values={input} onChange={setInput} />
- <SpectralFigure title="A selected input reaches every output whose window contains it" width={680} height={235} description="A line exists exactly when the corresponding matrix coefficient is nonzero. Labels use zero-based input/output indices. Amber lines highlight the selected input; the full matrix below retains zero coefficients as well.">{input.map((v, j) => <g key={j}><rect x={20 + j * 110} y="20" width="90" height="48" fill="#222" stroke={j === selected ? '#e6b854' : '#777'} /><text x={65 + j * 110} y="41" textAnchor="middle" fill="#eee" fontSize="13">{'x' + j}</text><text x={65 + j * 110} y="60" textAnchor="middle" fill="#eee" fontSize="13">{f(v)}</text></g>)}{result.matrix.map((row, i) => <g key={i}>{row.map((coefficient, j) => coefficient !== 0 && <line key={j} x1={65 + j * 110} y1="68" x2={65 + i * 110} y2="163" stroke={j === selected ? '#e6b854' : '#555'} strokeWidth={j === selected ? 2.5 : 1} />)}<rect x={20 + i * 110} y="164" width="90" height="48" fill="#222" stroke="#777" /><text x={65 + i * 110} y="184" textAnchor="middle" fill="#eee" fontSize="13">{'y' + i}</text><text x={65 + i * 110} y="204" textAnchor="middle" fill="#eee" fontSize="13">{f(result.output[i])}</text></g>)}</SpectralFigure>
- <SpectralMatrix title="Full operator: y = A x" values={result.matrix} selected={selected} /><p data-result="convolution">Stored kernel norm {f(result.kernelNorm, 8)}; full operator norm {f(result.operatorNorm, 8)}; after dividing the kernel by its norm, full norm <strong>{f(result.normalizedNorm, 8)}</strong>. {result.zero ? 'Zero kernel is explicitly left zero; no division is performed.' : result.normalizedNorm > 1 + 1e-10 ? 'Kernel normalization has not capped this whole operator at one.' : 'This particular full operator respects the unit cap.'}</p><NeuralTable caption="Actual input change and operator bound answer different questions" headers={['Quantity', 'Value']} rows={[['Baseline input, same current kernel', vector(baseline)], ['Baseline output', vector(before)], ['Current output', vector(result.output)], ['‖Δx‖', f(norm(delta))], ['‖A Δx‖', f(norm(result.output.map((v, i) => v - before[i])))], ['Valid upper bound ‖A‖ ‖Δx‖', f(result.operatorNorm * norm(delta))]]} /><p>The kernel is used as cross-correlation in the shown order. Circular wrapping applies only when selected. All {rows} output directions enter a small Gram-matrix eigensolve; this is not a finite power estimate.</p><div className="neural-buttons"><button onClick={() => {
-        setKernel([1, 1]);
-        setInput([1, -1, 2, 0]);
-        setStride(2);
-        setMode('valid');
-      }}>Disjoint [1,1] windows</button><button onClick={() => {
-        setKernel([1, 1]);
-        setInput([1, -1, 2, 0]);
-        setStride(1);
-        setMode('circular');
-      }}>Circular [1,1] windows</button><button onClick={() => {
-        setKernel([1, 2]);
-        setInput([1, -1, 2]);
-        setStride(1);
-        setMode('valid');
-        setSelected(1);
-      }}>Reset spatial operator</button></div></NeuralLab>;
-}
-export function SpectralPenaltyLab() {
-  const [knot, setKnot] = useState(2),
-    [extra, setExtra] = useState(4),
-    [probes, setProbes] = useState([-.5, .5, 1.5]),
-    [strength, setStrength] = useState(2),
-    [kind, setKind] = useState('target-one');
-  const [pinned, setPinned] = useState({
-    knot: 2,
-    extra: 4,
-    probes: [-.5, .5, 1.5],
-    kind: 'target-one',
-    strength: 2
-  });
-  const result = probePenalty(knot, extra, probes, kind, strength),
-    reference = probePenalty(pinned.knot, pinned.extra, pinned.probes, pinned.kind, pinned.strength);
-  const xs = Array.from({
-      length: 85
-    }, (_, i) => -3 + i / 12),
-    ys = xs.map(x => kinkValue(x, knot, extra));
-  return <NeuralLab id="spectral-penalty" title="Move a probe into a region the penalty missed"><div className="neural-controls"><NeuralNumber label="Kink location" value={knot} min={-2} max={3} onChange={setKnot} /><NeuralNumber label="Extra slope" value={extra} min={-.9} max={5} onChange={setExtra} /><NeuralNumber label="Penalty strength λ" value={strength} min={0} max={10} onChange={setStrength} /><NeuralSelect label="Penalty objective" value={kind} onChange={setKind} options={kinds} /></div><SpectralVector label="Actual probe coordinates" values={probes} onChange={setProbes} min={-3} max={4} /><SpectralPlot title="Only the marked points were probed" xLabel="input x" yLabel="f(x)" xDomain={[-3, 4]} yDomain={[Math.min(...ys) - 1, Math.max(...ys) + 1]} series={[{
-      label: 'Current f=x+extra ReLU(x−knot)',
-      color: color[0],
-      values: xs.map((x, i) => [x, ys[i]])
-    }, {
-      label: 'Pinned function',
-      color: color[1],
-      dashed: true,
-      values: xs.map(x => [x, kinkValue(x, pinned.knot, pinned.extra)])
-    }]} points={result.rows.map((row, i) => ({
-      id: i,
-      x: row.x,
-      y: row.value,
-      label: 'Probe ' + i + ', derivative ' + (row.slope ?? 'undefined'),
-      selected: true
-    }))} /><p data-result="penalty">Current mean penalty <strong>{result.penalty === null ? 'undefined at a probed corner' : f(result.penalty, 8)}</strong>; analytic global Lipschitz constant {f(result.globalBound)}. Pinned mean {reference.penalty === null ? 'undefined' : f(reference.penalty, 8)} under {pinned.kind}, strength {pinned.strength}. A zero sample penalty can coexist with a steep unobserved region.</p><NeuralTable caption="Differentiate first; square each contribution; then average" headers={['Probe', 'Input', 'f(x)', 'Derivative', 'Weighted penalty contribution']} rows={result.rows.map((r, i) => [i, f(r.x), f(r.value), r.slope === null ? 'ordinary derivative undefined' : f(r.slope), r.contribution === null ? 'undefined' : f(r.contribution)])} /><SpectralPlot title="The objective changes which slopes are preferred" xLabel="gradient norm r" yLabel="weighted penalty" xDomain={[0, 6]} yDomain={[0, Math.max(1, 36 * strength)]} series={kinds.map(([name, label], i) => ({
-      label,
-      color: color[i],
-      values: Array.from({
-        length: 73
-      }, (_, j) => [j / 12, penaltyValue(j / 12, name, strength)])
-    }))} /><div className="neural-buttons"><button disabled={probes.length >= 6} onClick={() => setProbes(p => [...p, 2.5])}>Add probe</button><button disabled={probes.length <= 2} onClick={() => setProbes(p => p.slice(0, -1))}>Remove last probe</button><button onClick={() => setPinned({
-        knot,
-        extra,
-        probes: [...probes],
-        kind,
-        strength
-      })}>Pin current probes and function</button><button onClick={() => {
-        setKnot(2);
-        setExtra(4);
-        setProbes([-.5, .5, 1.5]);
-        setStrength(2);
-        setKind('target-one');
-        setPinned({
-          knot: 2,
-          extra: 4,
-          probes: [-.5, .5, 1.5],
-          kind: 'target-one',
-          strength: 2
-        });
-      }}>Reset probe coverage</button></div><p>A probe exactly at the nonzero kink has no ordinary derivative. This view names that mathematical ambiguity instead of treating an automatic-differentiation convention as a unique derivative.</p></NeuralLab>;
+ const [kernel,setKernel]=useState([1,1]),[input,setInput]=useState([1,-1,2]),[mode,setMode]=useState('valid'),[stride,setStride]=useState(1),[selected,setSelected]=useState(1);
+ const r=convolution(kernel,mode,input,stride),base=input.map((_,i)=>[1,-1,2][i]??0),before=matvec(r.matrix,base),delta=input.map((v,i)=>v-base[i]);
+ return <><FlowLab id="spectral-convolution" label="A repeated kernel becomes a whole spatial operator"><WindowDrawing input={input} result={r} selected={selected}/><SpectralVector label="Kernel tap" values={kernel} onChange={setKernel}/><SpectralMatrix title="Actual output-by-input operator" values={r.matrix} selected={selected}/><FlowReadout data-result="convolution">Stored kernel norm {f(r.kernelNorm,8)}; whole operator norm {f(r.operatorNorm,8)}. Dividing by the kernel norm leaves whole-operator norm {f(r.normalizedNorm,8)}. {r.zero?'The zero kernel stays zero without division.':r.normalizedNorm>1+1e-10?'The whole map is not capped at one.':'This particular map respects the unit cap.'}</FlowReadout></FlowLab>
+ <p>Which outputs depend on one input value? Edit a selected cyan cell. Its white outline matches the highlighted column of the operator matrix above.</p>
+ <FlowLab id="spectral-input" label="Change a spatial input"><WindowDrawing input={input} result={r} selected={selected}/><FlowControls><FlowSlider name="Selected input column" value={selected} min={0} max={input.length-1} step={1} onChange={setSelected}/><FlowSlider name="Selected input value" value={input[selected]} min={-3} max={3} step={.05} onChange={v=>setInput(x=>x.map((n,i)=>i===selected?v:n))}/></FlowControls><FlowReadout>Input change length {f(norm(delta))}; output change {f(norm(r.output.map((v,i)=>v-before[i])))} is bounded by {f(r.operatorNorm*norm(delta))}. The baseline [1,−1,2,0,…] uses this same current kernel.</FlowReadout></FlowLab>
+ <p>Now change how often and where the same kernel is applied. Valid windows omit out-of-range cells; circular windows wrap to the start. Stride two skips alternate starting positions.</p>
+ <FlowLab id="spectral-operator-shape" label="Change the whole spatial operator"><WindowDrawing input={input} result={r} selected={selected}/><FlowControls><FlowSlider name="Spatial input count" value={input.length} min={3} max={6} step={1} onChange={n=>{setInput(x=>Array.from({length:n},(_,i)=>x[i]??0));setSelected(s=>Math.min(s,n-1));}}/><Selector name="Boundary rule" value={mode} onChange={setMode} options={[['valid','Valid windows'],['circular','Circular wrap']]}/><Selector name="Stride" value={stride} onChange={v=>setStride(Number(v))} options={[[1,'Every start'],[2,'Every second start']]}/></FlowControls><SpectralMatrix title="Every direction enters this small operator" values={r.matrix}/><FlowReadout>There are {r.output.length} outputs. The operator norm {f(r.operatorNorm,8)} comes from all directions of its Gram matrix, not a finite power estimate. Kernel order here is cross-correlation.</FlowReadout></FlowLab></>;
 }
 export function SpectralLinearPenaltyLab() {
-  const [w, setW] = useState([3, 4]),
-    [strength, setStrength] = useState(2),
-    [rate, setRate] = useState(.1),
-    [kind, setKind] = useState('target-one');
-  const result = linearPenalty(w, strength, rate, kind);
-  return <NeuralLab id="spectral-linear-penalty" title="Follow the parameter derivative of an input-gradient penalty"><SpectralVector label="Linear critic weight w" values={w} onChange={setW} min={-5} max={5} /><div className="neural-controls"><NeuralNumber label="Penalty coefficient" value={strength} min={0} max={5} onChange={setStrength} /><NeuralNumber label="Penalty-only step size" value={rate} min={0} max={.25} onChange={setRate} /><NeuralSelect label="Linear penalty objective" value={kind} onChange={setKind} options={kinds} /></div><CurvePlane title="Weight before and after one penalty-only step" extent={Math.max(1.2, norm(w), result.updated ? norm(result.updated) : 0) * 1.1} curves={[{
-      values: circle,
-      color: color[1],
-      dashed: true
-    }]} points={[{
-      value: w,
-      from: [0, 0],
-      label: 'w'
-    }, ...(result.updated ? [{
-      value: result.updated,
-      from: w,
-      label: 'w′',
-      color: color[2]
-    }] : [])]} /><NeuralTable caption="One evaluated update; no GAN fit is run" headers={['Stage', 'Value']} rows={[['Input gradient ∇x f', vector(w)], ['Its norm', f(result.norm)], ['Current penalty', f(result.penalty)], ['Parameter gradient ∇w R', result.gradient ? vector(result.gradient) : 'undefined at zero for target-one'], ['Updated weight', result.updated ? vector(result.updated) : 'no unique derivative step'], ['Updated norm', result.updated ? f(result.updatedNorm) : 'undefined'], ['Updated penalty', result.updated ? f(result.updatedPenalty) : 'undefined']]} /><button disabled={!result.updated || result.updated.some(x => Math.abs(x) > 5)} onClick={() => setW(result.updated)}>Use this updated weight</button><button onClick={() => {
-      setW([3, 4]);
-      setStrength(2);
-      setRate(.1);
-      setKind('target-one');
-    }}>Reset penalty step</button><p>A large step can cross the preferred norm or increase the penalty. This isolates the regularizer’s gradient; adversarial training adds another parameter gradient.</p></NeuralLab>;
+ const [w,setW]=useState([3,4]),[strength,setStrength]=useState(2),[rate,setRate]=useState(.1),result=linearPenalty(w,strength,rate);
+ return <><FlowLab id="spectral-linear-penalty" label="Measure the linear input gradient"><CurvePlane title="Weight length equals input-gradient length" extent={Math.max(1.2,norm(w)*1.1)} curves={[{label:'Target radius one',values:circle,color:'#ddd',dashed:true}]} points={[{value:w,from:[0,0],label:'w = input gradient',color:C.parameter}]}/><FlowControls><FlowSlider name="Critic weight w₁" value={w[0]} min={-5} max={5} step={.05} onChange={v=>setW([v,w[1]])}/><FlowSlider name="Critic weight w₂" value={w[1]} min={-5} max={5} step={.05} onChange={v=>setW([w[0],v])}/><FlowSlider name="Penalty strength λ" value={strength} min={0} max={5} step={.05} onChange={setStrength}/></FlowControls><FlowReadout>The radius is {f(result.norm)}; target-one penalty is {f(result.penalty)}. Its parameter derivative is {result.gradient?vector(result.gradient):'undefined at zero for positive target-one strength'}.</FlowReadout></FlowLab>
+ <p>Take one penalty-only parameter step. The cyan endpoint is the current weight; the violet endpoint is what subtracting the orange derivative times the step size produces. The critic's adversarial objective would add another gradient.</p>
+ <FlowLab id="spectral-penalty-step" label="Take one parameter-gradient step"><CurvePlane title="Before and after the penalty-only step" extent={Math.max(1.2,norm(w),result.updated?norm(result.updated):0)*1.15} curves={[{label:'Target radius one',values:circle,color:'#ddd',dashed:true}]} points={[{value:w,from:[0,0],label:'before',color:C.input},...(result.updated?[{value:result.updated,from:w,label:'after',color:C.computed}]:[])]}/><FlowControls><FlowSlider name="Penalty-only step size" value={rate} min={0} max={.25} step={.01} onChange={setRate}/><button type="button" disabled={!result.updated||result.updated.some(v=>Math.abs(v)>5)} onClick={()=>setW(result.updated)}>Use updated weight</button></FlowControls><FlowReadout data-result="linear-penalty">After weight {result.updated?vector(result.updated):'undefined'}, radius {result.updated?f(result.updatedNorm):'undefined'}, penalty {result.updated?f(result.updatedPenalty):'undefined'}. A large step can overshoot or increase the objective.</FlowReadout><NeuralTable caption="Three objectives give different derivatives and preferred radii" headers={['objective','current penalty','parameter derivative','after this step']} rows={kinds.map(([kind,label])=>{const r=linearPenalty(w,strength,rate,kind);return [label,f(r.penalty),r.gradient?vector(r.gradient):'undefined',r.updated?vector(r.updated):'undefined'];})}/></FlowLab></>;
+}
+export function SpectralPenaltyLab() {
+ const [knot,setKnot]=useState(2),[extra,setExtra]=useState(4),[probes,setProbes]=useState([-.5,.5,1.5]),[selected,setSelected]=useState(0),[strength,setStrength]=useState(2);
+ const result=probePenalty(knot,extra,probes,'target-one',strength),xs=Array.from({length:85},(_,i)=>-3+i/12),ys=xs.map(x=>kinkValue(x,knot,extra));
+ const picture=()=> <SpectralPlot title="Only the marked points have been probed" xLabel="input x" yLabel="critic score" xDomain={[-3,4]} yDomain={[Math.min(...ys)-1,Math.max(...ys)+1]} series={[{label:'Violet kinked function',color:C.computed,values:xs.map((x,i)=>[x,ys[i]])}]} points={result.rows.map((r,i)=>({id:i,x:r.x,y:r.value,label:'Probe '+i,selected:i===selected,color:C.input}))}/>;
+ return <><FlowLab id="spectral-penalty-function" label="Move the steep region">{picture()}<FlowControls><FlowSlider name="Kink location" value={knot} min={-2} max={3} step={.05} onChange={setKnot}/><FlowSlider name="Extra slope" value={extra} min={-.9} max={5} step={.05} onChange={setExtra}/></FlowControls><FlowReadout>The two slopes are 1 and {f(1+extra)}. Their largest absolute value {f(result.globalBound)} is the analytic global bound here.</FlowReadout></FlowLab>
+ <p>Move one probe into that steep region. Changing a probe changes what the penalty observes, without changing the underlying function.</p>
+ <FlowLab id="spectral-penalty" label="Change the finite probe coverage">{picture()}<FlowControls><FlowSlider name="Probe count" value={probes.length} min={2} max={6} step={1} onChange={n=>{setProbes(p=>Array.from({length:n},(_,i)=>p[i]??2.5));setSelected(s=>Math.min(s,n-1));}}/><FlowSlider name="Selected probe index" value={selected} min={0} max={probes.length-1} step={1} onChange={setSelected}/><FlowSlider name="Selected probe location" value={probes[selected]} min={-3} max={4} step={.05} onChange={v=>setProbes(p=>p.map((n,i)=>i===selected?v:n))}/></FlowControls><FlowReadout data-result="penalty">Mean target-one penalty {result.penalty===null?'undefined at a sampled kink':f(result.penalty,8)}; global bound {f(result.globalBound)}. A zero finite-sample penalty can miss a steep unsampled region.</FlowReadout><NeuralTable caption="Differentiate, square each contribution, then average" headers={['probe','input','score','derivative','weighted contribution']} rows={result.rows.map((r,i)=>[i,f(r.x),f(r.value),r.slope===null?'undefined':f(r.slope),r.contribution===null?'undefined':f(r.contribution)])}/></FlowLab>
+ <p>Changing the preferred gradient norm is a different decision from moving the probes. The three curves below use the same gradient-norm axis and the same coefficient.</p>
+ <FlowLab id="spectral-penalty-objectives" label="Compare all three penalty targets"><SpectralPlot title="Three objectives on the same gradient norm" xLabel="gradient norm r" yLabel="penalty" xDomain={[0,6]} yDomain={[0,Math.max(1,36*strength)]} series={kinds.map(([kind,label],i)=>({label,color:[C.parameter,C.computed,'#ddd'][i],values:Array.from({length:73},(_,j)=>[j/12,penaltyValue(j/12,kind,strength)])}))}/><FlowControls><FlowSlider name="Shared penalty strength λ" value={strength} min={0} max={10} step={.05} onChange={setStrength}/></FlowControls><FlowReadout>With these same probes, target-one mean is {result.penalty===null?'undefined':f(result.penalty)}, upper-only mean is {f(probePenalty(knot,extra,probes,'one-sided',strength).penalty)}, and zero-centered mean is {f(probePenalty(knot,extra,probes,'zero',strength).penalty)}. A probe at a nonzero kink has no unique ordinary derivative.</FlowReadout></FlowLab></>;
 }
 export function SpectralLibraryLab() {
-  const [w, setW] = useState([[2, 1], [0, 1]]),
-    [training, setTraining] = useState(true),
-    [accesses, setAccesses] = useState(1);
-  const initial = {
-    u: [1 / Math.SQRT2, 1 / Math.SQRT2],
-    v: [1 / Math.SQRT2, 1 / Math.SQRT2]
-  };
-  let buffers = initial;
-  const history = [];
-  for (let i = 0; i < accesses; i++) {
-    const next = libraryAccess(w, buffers, training);
-    history.push(next);
-    if (next.error) break;
-    buffers = next;
-  }
-  const result = history.at(-1);
-  return <NeuralLab id="spectral-library" title="A weight has an original value, an effective value and cached directions"><MatrixEditor label="Original stored weight" values={w} onChange={setW} /><div className="neural-controls"><NeuralSelect label="Mode for the displayed accesses" value={training ? 'training' : 'evaluation'} onChange={v => setTraining(v === 'training')} options={[['training', 'Training: update cached directions'], ['evaluation', 'Evaluation: freeze cached directions']]} /><NeuralNumber label="Number of weight accesses" value={accesses} min={1} max={12} integer onChange={setAccesses} /></div><p>The teaching state starts with explicitly assigned u=v=[1,1]/√2 after registration. Changing a control replays from that declared state. The real API may initialize its buffers through preliminary iterations; this is the controlled buffer experiment checked against PyTorch 2.14.</p>{result.error ? <p role="status">{result.error}</p> : <><SpectralFigure title="The forward weight is derived from two separately stored quantities" height={195} description="The optimizer owns W. Training access updates power buffers, which help estimate a scalar denominator. Both W and that denominator enter the effective weight; evaluation only freezes the buffer update."><rect x="15" y="20" width="175" height="45" fill="#222" stroke="#e6b854" /><text x="102" y="47" textAnchor="middle" fill="#ddd" fontSize="13">original W</text><rect x="15" y="128" width="175" height="45" fill="#222" stroke="#ba9fd1" /><text x="102" y="154" textAnchor="middle" fill="#ddd" fontSize="13">cached u and v</text><rect x="290" y="120" width="150" height="60" fill="#222" stroke="#777" /><text x="365" y="145" textAnchor="middle" fill="#ddd" fontSize="13">σ = uᵀWv</text><text x="365" y="166" textAnchor="middle" fill="#ddd" fontSize="13">{f(result.sigma, 6)}</text><rect x="490" y="20" width="135" height="60" fill="#222" stroke="#e6b854" /><text x="557" y="46" textAnchor="middle" fill="#ddd" fontSize="13">forward W / σ</text><text x="557" y="67" textAnchor="middle" fill="#ddd" fontSize="13">effective weight</text><path d="M190 42 H490 M220 42 V137 H290 M190 150 H290 M440 150 H557 V80" fill="none" stroke="#ddd" /></SpectralFigure><div className="spectral-stores"><section className="spectral-card"><h4>Original weight</h4><SpectralMatrix title="Optimizer-owned W" values={w} /></section><section className="spectral-card"><h4>Power-vector buffers</h4><p>u={vector(result.u)}</p><p>v={vector(result.v)}</p><p>σ estimate={f(result.sigma, 8)}</p></section><section className="spectral-card"><h4>Effective weight</h4><SpectralMatrix title="Forward uses W / (uᵀWv)" values={result.effective} /></section></div><p data-result="library">Actual effective norm {f(singular2(result.effective).values[0], 8)}. Evaluation freezes this estimation procedure; it does not turn an approximation into an exact norm.</p><NeuralTable caption="The library updates u from v, then v from u" headers={['Access', 'u', 'v', 'Estimated σ']} rows={history.map((row, i) => [i + 1, vector(row.u), vector(row.v), f(row.sigma, 8)])} /></>}<button onClick={() => {
-      setW([[2, 1], [0, 1]]);
-      setTraining(true);
-      setAccesses(1);
-    }}>Reset stored-weight trace</button></NeuralLab>;
+ const [w,setW]=useState([[2,1],[0,1]]),[accesses,setAccesses]=useState(1),initial={u:[1/Math.SQRT2,1/Math.SQRT2],v:[1/Math.SQRT2,1/Math.SQRT2]};
+ const traces=[true,false].map(training=>{let buffers=initial;const history=[];for(let i=0;i<accesses;i++){const next=libraryAccess(w,buffers,training);history.push(next);if(next.error)break;buffers=next;}return {training,history,last:history.at(-1)};});
+ return <><FlowLab id="spectral-library-weight" label="Inspect the optimizer-owned matrix"><MatrixDrawing label="Stored original W" values={w}/><MatrixEditor label="Library W" values={w} onChange={setW}/></FlowLab>
+ <p>The next two traces start with the explicitly assigned cache u=v=[1,1]/√2 after registration. A weight access in training mode updates u from cached v, then v from the new u. Evaluation leaves both directions fixed. Native registration may initialize them through preliminary iterations; this controlled state makes the distinction visible.</p>
+ <FlowLab id="spectral-library" label="Compare updating and frozen caches"><div className="spectral-two">{traces.map(({training,last})=><div key={String(training)}>{last.error?<p role="status">{last.error}</p>:<><CurvePlane title={training?'Training: updated cache':'Evaluation: fixed cache'} extent={1.2} points={[{value:last.u,from:[0,0],label:'left buffer u',color:C.input},{value:last.v,from:[0,0],label:'right buffer v',color:C.computed}]}/><MatrixDrawing label={training?'Training effective W':'Evaluation effective W'} values={last.effective}/></>}</div>)}</div><FlowControls><FlowSlider name="Weight accesses from declared cache" value={accesses} min={1} max={12} step={1} onChange={setAccesses}/></FlowControls><FlowReadout data-result="library">{traces.map(({training,last})=>last.error?(training?'Training: ':'Evaluation: ')+last.error:(training?'Training':'Evaluation')+' denominator '+f(last.sigma,8)+', actual effective norm '+f(singular2(last.effective).values[0],8)+'.').join(' ')} Frozen directions do not turn an estimate into an exact norm.</FlowReadout>{traces.map(({training,history})=><NeuralTable key={String(training)} caption={training?'Every updating access':'Every frozen access'} headers={['access','u','v','denominator']} rows={history.map((r,i)=>[i+1,r.error?'unusable':vector(r.u),r.error?'unusable':vector(r.v),r.error||f(r.sigma,8)])}/>)}</FlowLab></>;
 }
 export function SpectralMarginLab() {
-  const [w, setW] = useState([[1, 0], [0, 1]]),
-    [bias, setBias] = useState([0, 0]),
-    [point, setPoint] = useState([1.5, .25]);
-  const r = linearMargin(w, bias, point);
-  const direction = r.pair > 1e-12 ? [-r.normal[1] / r.pair, r.normal[0] / r.pair] : null;
-  const extent = Math.max(2, norm(point), Number.isFinite(r.radius) ? r.radius + norm(point) : 0) * 1.1;
-  const boundary = r.boundary && direction ? [r.boundary.map((v, i) => v - extent * 3 * direction[i]), r.boundary.map((v, i) => v + extent * 3 * direction[i])] : null;
-  const ring = Number.isFinite(r.radius) && r.radius > 0 ? circle.map(x => x.map((v, i) => point[i] + v * r.radius)) : null;
-  return <NeuralLab id="spectral-margin" title="A logit gap needs the sensitivity of that same difference"><MatrixEditor label="Two logit rows W" values={w} onChange={setW} min={-2} max={2} /><SpectralVector label="Logit bias" values={bias} onChange={setBias} min={-1} max={1} /><SpectralVector label="Input point" values={point} onChange={setPoint} min={-2} max={2} /><CurvePlane title="Winning input, tie boundary and nearest perturbation" extent={extent} curves={[...(boundary ? [{
-      values: boundary,
-      color: color[1]
-    }] : []), ...(ring ? [{
-      values: ring,
-      color: color[2],
-      dashed: true
-    }] : [])]} points={[{
-      value: point,
-      label: 'x'
-    }, ...(r.boundary ? [{
-      value: r.boundary,
-      from: point,
-      label: 'tie',
-      color: color[1]
-    }] : [])]} /><NeuralTable caption="Exact linear distance versus a sufficient joint-norm certificate" headers={['Quantity', 'Value']} rows={[['Logits', vector(r.logits)], ['Class-0 gap', f(r.gap)], ['Row-difference slope', f(r.pair)], ['Joint spectral norm', f(r.joint)], ['Exact class-0 winning radius', Number.isFinite(r.radius) ? f(r.radius) : 'unbounded: constant positive gap'], ['Joint-norm sufficient radius', Number.isFinite(r.jointRadius) ? f(r.jointRadius) : 'unbounded'], ['Perpendicular perturbation', r.delta ? vector(r.delta) : 'no finite boundary']]} /><p data-result="margin">{r.gap <= 0 ? 'Class 0 has no positive winning certificate at this point.' : r.pair <= 1e-12 ? 'Identical weight rows and a positive bias gap make this class comparison independent of input.' : 'The open ball below the exact radius preserves a positive class-0 gap; the nearest boundary point is a tie.'} This is a two-class linear model in its stated raw coordinates.</p><button onClick={() => {
-      setW([[1, 0], [0, 1]]);
-      setBias([0, 0]);
-      setPoint([1.5, .25]);
-    }}>Reset margin geometry</button></NeuralLab>;
+ const [w,setW]=useState([[1,0],[0,1]]),[bias,setBias]=useState([0,0]),[point,setPoint]=useState([2,0]),r=linearMargin(w,bias,point),direction=r.pair>1e-12?[-r.normal[1]/r.pair,r.normal[0]/r.pair]:null,extent=Math.max(2,norm(point),Number.isFinite(r.radius)?r.radius+norm(point):0)*1.1;
+ const boundary=r.boundary&&direction?[r.boundary.map((v,i)=>v-extent*3*direction[i]),r.boundary.map((v,i)=>v+extent*3*direction[i])]:null,ring=Number.isFinite(r.radius)&&r.radius>0?circle.map(v=>v.map((n,i)=>point[i]+n*r.radius)):null;
+ const drawing=()=> <CurvePlane title="Class-0 point, tie boundary and open-ball radius" extent={extent} curves={[...(boundary?[{label:'Tie boundary',values:boundary,color:'#ddd'}]:[]),...(ring?[{label:'Boundary of the open winning ball',values:ring,color:C.computed,dashed:true}]:[])]} points={[{value:point,label:'input x',color:C.input},...(r.boundary?[{value:r.boundary,from:point,label:'nearest tie',color:'#ddd'}]:[])]}/>;
+ return <><FlowLab id="spectral-margin" label="Move the input near a class boundary">{drawing()}<SpectralVector label="Classifier input" values={point} onChange={setPoint} min={-2} max={2}/><FlowReadout data-result="margin">Logits {vector(r.logits)}; class-0 gap {f(r.gap)}. {r.gap<=0?'Class 0 is not a strict winner, so its winning radius is zero.':r.pair<=1e-12?'The positive gap is constant: this class comparison is independent of input.':'Exact class-0 radius '+f(r.radius)+'; the nearest boundary is a tie, so the certificate uses a strictly smaller radius.'}</FlowReadout><NeuralTable caption="Exact distance and a sufficient joint-norm bound" headers={['quantity','value']} rows={[['difference slope',f(r.pair)],['joint matrix norm',f(r.joint)],['exact class-0 radius',Number.isFinite(r.radius)?f(r.radius):'unbounded'],['joint-norm sufficient radius',Number.isFinite(r.jointRadius)?f(r.jointRadius):'unbounded'],['nearest perturbation',r.delta?vector(r.delta):'no finite boundary']]}/></FlowLab>
+ <p>The certificate must describe the same classifier that produced these logits. Change a weight coefficient, then a bias, to see the boundary move. A bias changes the gap but not its slope.</p>
+ <FlowLab id="spectral-margin-weight" label="Change the two-output classifier"><MatrixDrawing label="Classifier W" values={w}/><MatrixEditor label="Logit W" values={w} onChange={setW} min={-2} max={2}/></FlowLab><FlowLab id="spectral-margin-bias" label="Change the logit offsets">{drawing()}<SpectralVector label="Logit bias" values={bias} onChange={setBias} min={-1} max={1}/><FlowReadout>The current class-0 gap is {f(r.gap)}; slope {f(r.pair)}. These are the stated raw input coordinates; preprocessing needs its own sensitivity accounting.</FlowReadout></FlowLab></>;
 }
+

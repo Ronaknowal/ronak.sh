@@ -2,6 +2,10 @@
 import fs from 'node:fs';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id = 'depthwise-separable-dilated-convolutions';
+const production = `src/learn/data/topics/${id}.jsx`;
+if (fs.existsSync(production) && fs.readFileSync(production, 'utf8').includes('Reading-flow revision 5')) {
+  throw new Error('This historical manuscript generator must not overwrite the reading-flow revision. Edit the current production lesson and its source-bound reading-flow record instead.');
+}
 const draft = `docs/teaching/drafts/${id}/`;
 const assets = `public/learn-code/${id}/`;
 fs.mkdirSync(assets, { recursive: true });

@@ -1,0 +1,22 @@
+import { useState } from 'react';
+import { FlowControls, FlowSlider, FlowChoice, FlowReadout } from './LessonFlow';
+import { MultivariateFigure } from './MultivariateCalculusFigures';
+import { fmt, pointState, residualState, approachState, directionState, chainState, circleState, maximumAngle, descentState, adState } from '../../data/multivariate-calculus-flow-models.js';
+const initial={C05:{x:1,y:1},C10:{scale:1},C14:{kind:'line',t:.1},C20:{angle:0,speed:1},C24:{t:.5},C28:{angle:0},C38:{eta:.1,iteration:1},C44:{vx:2,vy:-1}};
+export function MultivariateLab({id}){
+  if(!initial[id])throw new Error(`Unknown multivariate lab ${id}`);
+  const [input,setInput]=useState(()=>({...initial[id]})),update=(key,value)=>setInput(p=>({...p,[key]:value}));
+  const slider=(key,name,min,max,step)=><FlowSlider key={key} name={name} value={input[key]} min={min} max={max} step={step} onChange={v=>update(key,v)} format={fmt}/>;
+  let state,controls,readout;
+  switch(id){
+  case 'C05':state=pointState(input.x,input.y);controls=<>{slider('x','Input x',-2,2,.25)}{slider('y','Input y',-2,2,.25)}</>;readout=<>Input ({fmt(state.x)},{fmt(state.y)}) has graph height <strong>{fmt(state.z)}</strong>. Both coordinate slices pass through this same graph point.</>;break;
+  case 'C10':state=residualState(input.scale);controls=slider('scale','Displacement multiplier',0,4,.25);readout=<>The true height is <strong>{fmt(state.actual)}</strong>; affine height {fmt(state.affine)}, remainder {fmt(state.error)} and normalized remainder {fmt(state.normalized)}.</>;break;
+  case 'C14':state=approachState(input.kind,input.t);controls=<><FlowChoice label="Approach path" options={[['x-axis','x axis'],['y-axis','y axis'],['line','y=x'],['parabola','y=x²']]} value={input.kind} onChange={v=>update('kind',v)}/>{slider('t','Positive path parameter t',.01,.5,.01)}</>;readout=<>The input is ({fmt(state.x)},{fmt(state.y)}); its value is <strong>{fmt(state.value)}</strong>. This single path does not establish an all-neighborhood limit.</>;break;
+  case 'C20':state=directionState(input.angle,input.speed);controls=<>{slider('angle','Direction angle, degrees',-180,180,5)}{slider('speed','Speed, input distance / time',0,5,.25)}</>;readout=<>The unit-distance slope is <strong>{fmt(state.slope)}</strong>; the time rate is <strong>{fmt(state.rate)}</strong> at speed{fmt(state.speed)}.</>;break;
+  case 'C24':state=chainState(input.t);controls=slider('t','Curve parameter t',-1,1,.05);readout=<>At t={fmt(state.t)}, the input is ({fmt(state.x)},{fmt(state.y)}), height <strong>{fmt(state.z)}</strong> and height rate <strong>{fmt(state.rate)}</strong>.</>;break;
+  case 'C28':state=circleState(input.angle);controls=<>{slider('angle','Circle angle, degrees',-180,180,'any')}<button type="button" onClick={()=>update('angle',maximumAngle)}>Exact maximum</button><button type="button" onClick={()=>update('angle',maximumAngle-180)}>Exact minimum</button></>;readout=<>The feasible point has objective <strong>{fmt(state.value)}</strong> and allowed tangent rate <strong>{fmt(state.rate)} per radian</strong>. The angle control displays degrees.</>;break;
+  case 'C38':state=descentState(input.eta,input.iteration);controls=<>{slider('eta','Step size η',0,.65,.025)}{slider('iteration','Iteration n',0,12,1)}</>;readout=<>Iteration{state.iteration} reaches ({fmt(state.current.x)},{fmt(state.current.y)}), loss <strong>{fmt(state.current.loss)}</strong>. The signed factors are{fmt(state.factors[0])} and{fmt(state.factors[1])}.</>;break;
+  case 'C44':state=adState(input.vx,input.vy);controls=<>{slider('vx','Seed tangent vx',-2,2,.25)}{slider('vy','Seed tangent vy',-2,2,.25)}<FlowChoice label="Tangent seed" options={[['zero','Zero'],['x','x basis'],['y','y basis'],['velocity','Velocity (2,−1)']]} value={input.vx===0&&input.vy===0?'zero':input.vx===1&&input.vy===0?'x':input.vx===0&&input.vy===1?'y':input.vx===2&&input.vy===-1?'velocity':null} onChange={v=>setInput(v==='zero'?{vx:0,vy:0}:v==='x'?{vx:1,vy:0}:v==='y'?{vx:0,vy:1}:{vx:2,vy:-1})}/></>;readout=<>The seed ({fmt(state.vx)},{fmt(state.vy)}) produces tangent <strong>{fmt(state.rate)}</strong>. A basis seed returns one gradient component; a velocity seed returns a time rate.</>;break;
+  }
+  return <section className="flow-lab" data-mvc-lab={id} aria-label={`Interactive calculus representation ${id}`}><MultivariateFigure id={id} state={state}/><FlowControls>{controls}<button type="button" onClick={()=>setInput({...initial[id]})}>Reset</button></FlowControls><FlowReadout>{readout}</FlowReadout></section>;
+}

@@ -1,0 +1,11 @@
+.recurrent-flow-drawing { margin: 1.4rem 0 1rem; min-width: 0; }
+.recurrent-flow-drawing > svg { display: block; width: 100%; max-width: 32rem; height: auto; margin-inline: auto; overflow: visible; }
+.recurrent-flow-drawing > svg text { font-family: var(--font-mono, monospace); font-size: 13px; }
+.recurrent-flow-lesson .flow-columns-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+.recurrent-flow-lesson .flow-controls select { background: var(--bg, #0b0b0b); color: var(--text, #ddd); border: 1px solid var(--border, #444); padding: .45rem .6rem; max-width: 100%; }
+.recurrent-flow-lesson .flow-controls > label { min-width: 0; }
+.recurrent-flow-lesson .recurrent-flow-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: .8rem; }
+.recurrent-flow-lesson .recurrent-flow-actions button { font: inherit; padding: .45rem .7rem; color: var(--accent, #e4b752); background: transparent; border: 1px solid var(--border, #444); }
+.recurrent-flow-lesson .recurrent-flow-actions button:focus-visible { outline: 2px solid var(--accent, #e4b752); outline-offset: 3px; }
+.recurrent-flow-lesson .recurrent-flow-actions button:disabled { opacity: .45; cursor: default; }
+.recurrent-flow-lesson .recurrent-path circle:focus-visible { stroke: var(--accent, #e4b752); stroke-width: 3; outline: none; }

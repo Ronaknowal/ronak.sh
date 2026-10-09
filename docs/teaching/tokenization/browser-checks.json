@@ -1,0 +1,552 @@
+{
+  "base": "http://127.0.0.1:4197",
+  "results": [
+    {
+      "id": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+      "headings": [
+        "1. Start with the problem",
+        "2. Build the intuition",
+        "3. Make the idea precise",
+        "4. From-scratch implementation",
+        "5. Unigram: compare complete paths",
+        "6. Train and sample a probabilistic vocabulary",
+        "7. SentencePiece and the ordinary library route",
+        "8. What scales and what doesn't",
+        "9. Failure modes and gotchas",
+        "10. Self-check exercises",
+        "11. From learned pieces to bytes",
+        "Further learning",
+        "Technical references"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-start-with-the-problem",
+          "text": "1.\nStart with the problem",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-build-the-intuition",
+          "text": "2.\nBuild the intuition",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-make-the-idea-precise",
+          "text": "3.\nMake the idea precise",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-from-scratch-implementation",
+          "text": "4.\nFrom-scratch implementation",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-unigram-compare-complete-paths",
+          "text": "5.\nUnigram: compare complete paths",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-train-and-sample-a-probabilistic-vocabulary",
+          "text": "6.\nTrain and sample a probabilistic vocabulary",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-sentencepiece-and-the-ordinary-library-route",
+          "text": "7.\nSentencePiece and the ordinary library route",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-what-scales-and-what-doesn-t",
+          "text": "8.\nWhat scales and what doesn't",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-failure-modes-and-gotchas",
+          "text": "9.\nFailure modes and gotchas",
+          "targetCount": 1
+        },
+        {
+          "href": "#10-self-check-exercises",
+          "text": "10.\nSelf-check exercises",
+          "targetCount": 1
+        },
+        {
+          "href": "#11-from-learned-pieces-to-bytes",
+          "text": "11.\nFrom learned pieces to bytes",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "subword-unit-comparison",
+          "index": 0
+        },
+        {
+          "name": "tokenizer-pipeline",
+          "index": 1
+        }
+      ],
+      "labs": [
+        {
+          "name": "bpe-merge-trainer",
+          "changedControl": true,
+          "rangeControls": 1,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "15"
+            }
+          ],
+          "pointerValue": "12",
+          "selectControls": 0,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "wordpiece-greedy-path",
+          "changedControl": false,
+          "rangeControls": 0,
+          "rangeChecks": [],
+          "pointerValue": null,
+          "selectControls": 0,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "unigram-segmentation-lattice",
+          "changedControl": true,
+          "rangeControls": 1,
+          "rangeChecks": [
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "99"
+            }
+          ],
+          "pointerValue": "76",
+          "selectControls": 0,
+          "checkboxControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 3,
+      "localDownloads": 6,
+      "lessonLinks": [
+        "/learn/path/full-curriculum/byte-level-tokenization-token-free-models?module=large-language-models",
+        "/learn/path/full-curriculum/vocabulary-design-multilingual-tokenization?module=large-language-models"
+      ],
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 2
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 2
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 2
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "byte-level-tokenization-token-free-models",
+      "headings": [
+        "1. One visible character can contain several different units",
+        "2. UTF-8 packs an integer into recognizable byte shapes",
+        "3. What exact reconstruction actually promises",
+        "4. Byte BPE groups bytes; token-free models keep the fine-grained input",
+        "5. Streaming needs memory between chunks",
+        "6. Build the encoding and decoding state machine",
+        "7. Turn bytes into an actual learning problem",
+        "8. Token-free architectures move the work to different places",
+        "9. Derive and inspect an entropy patch boundary",
+        "10. Count the right resource before claiming an improvement",
+        "11. Choose an interface that fits the task",
+        "12. Practice: preserve text, repair a stream and account for work",
+        "Further learning",
+        "Technical references",
+        "13. Continue from coverage to vocabulary quality"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-one-visible-character-can-contain-several-different-units",
+          "text": "1.\nOne visible character can contain several different units",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-utf-8-packs-an-integer-into-recognizable-byte-shapes",
+          "text": "2.\nUTF-8 packs an integer into recognizable byte shapes",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-what-exact-reconstruction-actually-promises",
+          "text": "3.\nWhat exact reconstruction actually promises",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-byte-bpe-groups-bytes-token-free-models-keep-the-fine-grained-input",
+          "text": "4.\nByte BPE groups bytes; token-free models keep the fine-grained input",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-streaming-needs-memory-between-chunks",
+          "text": "5.\nStreaming needs memory between chunks",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-build-the-encoding-and-decoding-state-machine",
+          "text": "6.\nBuild the encoding and decoding state machine",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-turn-bytes-into-an-actual-learning-problem",
+          "text": "7.\nTurn bytes into an actual learning problem",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-token-free-architectures-move-the-work-to-different-places",
+          "text": "8.\nToken-free architectures move the work to different places",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-derive-and-inspect-an-entropy-patch-boundary",
+          "text": "9.\nDerive and inspect an entropy patch boundary",
+          "targetCount": 1
+        },
+        {
+          "href": "#10-count-the-right-resource-before-claiming-an-improvement",
+          "text": "10.\nCount the right resource before claiming an improvement",
+          "targetCount": 1
+        },
+        {
+          "href": "#11-choose-an-interface-that-fits-the-task",
+          "text": "11.\nChoose an interface that fits the task",
+          "targetCount": 1
+        },
+        {
+          "href": "#12-practice-preserve-text-repair-a-stream-and-account-for-work",
+          "text": "12.\nPractice: preserve text, repair a stream and account for work",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        },
+        {
+          "href": "#13-continue-from-coverage-to-vocabulary-quality",
+          "text": "13.\nContinue from coverage to vocabulary quality",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "figure-1",
+          "index": 1
+        },
+        {
+          "name": "figure-4",
+          "index": 4
+        }
+      ],
+      "labs": [
+        {
+          "name": "unicode-byte-units",
+          "changedControl": true,
+          "rangeControls": 0,
+          "rangeChecks": [],
+          "pointerValue": null,
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "streaming-byte-decoder",
+          "changedControl": true,
+          "rangeControls": 1,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "10"
+            }
+          ],
+          "pointerValue": "8",
+          "selectControls": 0,
+          "checkboxControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "byte-entropy-patches",
+          "changedControl": true,
+          "rangeControls": 2,
+          "rangeChecks": [
+            {
+              "start": "0.5",
+              "interior": "0.501",
+              "end": "1"
+            },
+            {
+              "start": "0",
+              "interior": "0.01",
+              "end": "1"
+            }
+          ],
+          "pointerValue": "0.883",
+          "selectControls": 1,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 4,
+      "localDownloads": 5,
+      "lessonLinks": [
+        "/learn/topic/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+        "/learn/topic/self-attention-multi-head-attention",
+        "/learn/topic/pytorch",
+        "/learn/topic/state-space-models-s4-mamba-mamba-2",
+        "/learn/topic/vocabulary-design-multilingual-tokenization"
+      ],
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 2
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 2
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 2
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "vocabulary-design-multilingual-tokenization",
+      "headings": [
+        "1. Coverage is the floor; useful pieces are the design",
+        "2. Measure the quantity that answers your question",
+        "3. Let the corpus mix express a deliberate priority",
+        "4. A larger dictionary moves work between matrices and positions",
+        "5. Protect distinctions before learning pieces",
+        "6. Build a reproducible measurement pipeline",
+        "7. Train the ordinary tool and interpret the whole result",
+        "8. Deeper branch: change a pretrained vocabulary deliberately",
+        "9. Choose a design by its failure case",
+        "10. Practice: defend the design, not just the average",
+        "Further learning",
+        "Technical references",
+        "11. Readiness and the next input problem"
+      ],
+      "sectionLinks": [
+        {
+          "href": "#1-coverage-is-the-floor-useful-pieces-are-the-design",
+          "text": "1.\nCoverage is the floor; useful pieces are the design",
+          "targetCount": 1
+        },
+        {
+          "href": "#2-measure-the-quantity-that-answers-your-question",
+          "text": "2.\nMeasure the quantity that answers your question",
+          "targetCount": 1
+        },
+        {
+          "href": "#3-let-the-corpus-mix-express-a-deliberate-priority",
+          "text": "3.\nLet the corpus mix express a deliberate priority",
+          "targetCount": 1
+        },
+        {
+          "href": "#4-a-larger-dictionary-moves-work-between-matrices-and-positions",
+          "text": "4.\nA larger dictionary moves work between matrices and positions",
+          "targetCount": 1
+        },
+        {
+          "href": "#5-protect-distinctions-before-learning-pieces",
+          "text": "5.\nProtect distinctions before learning pieces",
+          "targetCount": 1
+        },
+        {
+          "href": "#6-build-a-reproducible-measurement-pipeline",
+          "text": "6.\nBuild a reproducible measurement pipeline",
+          "targetCount": 1
+        },
+        {
+          "href": "#7-train-the-ordinary-tool-and-interpret-the-whole-result",
+          "text": "7.\nTrain the ordinary tool and interpret the whole result",
+          "targetCount": 1
+        },
+        {
+          "href": "#8-deeper-branch-change-a-pretrained-vocabulary-deliberately",
+          "text": "8.\nDeeper branch: change a pretrained vocabulary deliberately",
+          "targetCount": 1
+        },
+        {
+          "href": "#9-choose-a-design-by-its-failure-case",
+          "text": "9.\nChoose a design by its failure case",
+          "targetCount": 1
+        },
+        {
+          "href": "#10-practice-defend-the-design-not-just-the-average",
+          "text": "10.\nPractice: defend the design, not just the average",
+          "targetCount": 1
+        },
+        {
+          "href": "#further-learning",
+          "text": "—\nFurther learning",
+          "targetCount": 1
+        },
+        {
+          "href": "#technical-references",
+          "text": "—\nTechnical references",
+          "targetCount": 1
+        },
+        {
+          "href": "#11-readiness-and-the-next-input-problem",
+          "text": "11.\nReadiness and the next input problem",
+          "targetCount": 1
+        }
+      ],
+      "inlineFigures": [
+        {
+          "name": "vocabulary-coverage",
+          "index": 0
+        },
+        {
+          "name": "multilingual-heldout-counts",
+          "index": 3
+        },
+        {
+          "name": "vocabulary-row-identity",
+          "index": 4
+        }
+      ],
+      "labs": [
+        {
+          "name": "vocabulary-mixture",
+          "changedControl": true,
+          "rangeControls": 5,
+          "rangeChecks": [
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "100"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "100"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "100"
+            },
+            {
+              "start": "0",
+              "interior": "0.01",
+              "end": "1"
+            },
+            {
+              "start": "0",
+              "interior": "1",
+              "end": "16"
+            }
+          ],
+          "pointerValue": "77",
+          "selectControls": 0,
+          "checkboxControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "vocabulary-budget",
+          "changedControl": true,
+          "rangeControls": 4,
+          "rangeChecks": [
+            {
+              "start": "32000",
+              "interior": "33000",
+              "end": "256000"
+            },
+            {
+              "start": "256",
+              "interior": "512",
+              "end": "8192"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "2000"
+            },
+            {
+              "start": "1",
+              "interior": "2",
+              "end": "2000"
+            }
+          ],
+          "pointerValue": "206000",
+          "selectControls": 0,
+          "checkboxControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 3,
+      "localDownloads": 6,
+      "lessonLinks": [
+        "/learn/path/full-curriculum/byte-level-tokenization-token-free-models?module=large-language-models",
+        "/learn/path/full-curriculum/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram?module=large-language-models",
+        "/learn/path/full-curriculum/multimodal-tokenization-visual-audio-video?module=large-language-models"
+      ],
+      "widths": [
+        {
+          "width": 768,
+          "overflow": 0,
+          "inlineFigures": 3
+        },
+        {
+          "width": 390,
+          "overflow": 0,
+          "inlineFigures": 3
+        },
+        {
+          "width": 320,
+          "overflow": 0,
+          "inlineFigures": 3
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

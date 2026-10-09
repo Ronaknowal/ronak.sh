@@ -1,0 +1,134 @@
+.vision-transformer-lesson.lesson-flow .vision-flow-figure {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-pan-hint {
+  margin: -.5rem 0 1.25rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #b8b8b8;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-drawing-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin-block: 1.25rem;
+}
+
+.vision-transformer-lesson.lesson-flow {
+  container-type: inline-size;
+  container-name: vision-reading-flow;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-parallel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@container vision-reading-flow (min-width: 44.375rem) {
+  .vision-transformer-lesson.lesson-flow .vision-flow-parallel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-drawing {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-drawing text {
+  font: 16px ui-monospace, monospace;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-drawing text:not([fill]) {
+  fill: #e6e6e6;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-drawing-scroll:focus-visible {
+  outline: 2px solid #e0b660;
+  outline-offset: 4px;
+}
+
+/* Formula rows keep their exact content and scroll locally when necessary. */
+.vision-transformer-lesson.lesson-flow .vision-equation-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+}
+
+.vision-transformer-lesson.lesson-flow .katex-display {
+  overflow: visible;
+  text-align: left;
+  padding-block: .4rem;
+}
+
+.vision-transformer-lesson.lesson-flow .katex-display > .katex {
+  display: inline-block;
+  min-width: max-content;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-equation-scroll:focus-visible {
+  outline: 2px solid #e0b660;
+  outline-offset: 4px;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-inline-math > span {
+  font-size: 1rem !important;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-field {
+  display: flex;
+  flex: 1 1 190px;
+  flex-direction: column;
+  gap: .4rem;
+  min-width: 0;
+  color: #e6e6e6;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-field input,
+.vision-transformer-lesson.lesson-flow .vision-flow-field select,
+.vision-transformer-lesson.lesson-flow .flow-controls input,
+.vision-transformer-lesson.lesson-flow .flow-controls select,
+.vision-transformer-lesson.lesson-flow .flow-controls button,
+.vision-transformer-lesson.lesson-flow .lesson-code__actions button,
+.vision-transformer-lesson.lesson-flow .lesson-code__actions a,
+.vision-transformer-lesson.lesson-flow .lesson-code-source__pending button {
+  min-height: max(44px, 2.75rem);
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-field input,
+.vision-transformer-lesson.lesson-flow .vision-flow-field select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: .5rem .65rem;
+  border: 1px solid #666;
+  border-radius: 0;
+  background: #0b0b0b;
+  color: #e6e6e6;
+  font: inherit;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-field input[aria-invalid='true'] {
+  border-color: #ef9969;
+}
+
+.vision-transformer-lesson.lesson-flow .vision-flow-field input:focus-visible,
+.vision-transformer-lesson.lesson-flow .vision-flow-field select:focus-visible {
+  outline: 2px solid #e0b660;
+  outline-offset: 3px;
+}
+
+.vision-transformer-lesson.lesson-flow .lesson-code-source__pending button {
+  padding: .45rem .75rem;
+  border: 1px solid #e0b660;
+  background: #101010;
+  color: #e0b660;
+  font: inherit;
+  cursor: pointer;
+}

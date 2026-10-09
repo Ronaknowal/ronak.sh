@@ -1,0 +1,692 @@
+{
+  "stage": "cache",
+  "protocol_sha256": "89db78881c60edc9c042a1b9a68c8f78d470a54e1634761cfbd74baafed09486",
+  "passed": true,
+  "result": {
+    "passed": true,
+    "scope": "Random FP64 architecture mechanics; no fit.",
+    "greedy": [
+      {
+        "lookahead": 0,
+        "poison": false,
+        "result": {
+          "ids": [
+            8,
+            13,
+            13,
+            2,
+            16,
+            2
+          ],
+          "rounds": [
+            {
+              "old_length": 3,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                8
+              ],
+              "source": "bonus",
+              "retained_computed": 3,
+              "pending": 8,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 4
+            },
+            {
+              "old_length": 4,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                13
+              ],
+              "source": "bonus",
+              "retained_computed": 4,
+              "pending": 13,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 5
+            },
+            {
+              "old_length": 5,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                13
+              ],
+              "source": "bonus",
+              "retained_computed": 5,
+              "pending": 13,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 6
+            },
+            {
+              "old_length": 6,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                2
+              ],
+              "source": "bonus",
+              "retained_computed": 6,
+              "pending": 2,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 7
+            },
+            {
+              "old_length": 7,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                16
+              ],
+              "source": "bonus",
+              "retained_computed": 7,
+              "pending": 16,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 8
+            },
+            {
+              "old_length": 8,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                2
+              ],
+              "source": "bonus",
+              "retained_computed": 8,
+              "pending": 2,
+              "score_rows": 1,
+              "terminal": true
+            }
+          ],
+          "cache_lengths": [
+            8,
+            8
+          ],
+          "stop": "cap"
+        }
+      },
+      {
+        "lookahead": 0,
+        "poison": true,
+        "result": {
+          "ids": [
+            8,
+            13,
+            13,
+            2,
+            16,
+            2
+          ],
+          "rounds": [
+            {
+              "old_length": 3,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                8
+              ],
+              "source": "bonus",
+              "retained_computed": 3,
+              "pending": 8,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 4
+            },
+            {
+              "old_length": 4,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                13
+              ],
+              "source": "bonus",
+              "retained_computed": 4,
+              "pending": 13,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 5
+            },
+            {
+              "old_length": 5,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                13
+              ],
+              "source": "bonus",
+              "retained_computed": 5,
+              "pending": 13,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 6
+            },
+            {
+              "old_length": 6,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                2
+              ],
+              "source": "bonus",
+              "retained_computed": 6,
+              "pending": 2,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 7
+            },
+            {
+              "old_length": 7,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                16
+              ],
+              "source": "bonus",
+              "retained_computed": 7,
+              "pending": 16,
+              "score_rows": 1,
+              "terminal": false,
+              "next_computed": 8
+            },
+            {
+              "old_length": 8,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                2
+              ],
+              "source": "bonus",
+              "retained_computed": 8,
+              "pending": 2,
+              "score_rows": 1,
+              "terminal": true
+            }
+          ],
+          "cache_lengths": [
+            8,
+            8
+          ],
+          "stop": "cap"
+        }
+      },
+      {
+        "lookahead": 1,
+        "poison": false,
+        "result": {
+          "ids": [
+            8,
+            13,
+            13,
+            2,
+            16,
+            2
+          ],
+          "rounds": [
+            {
+              "old_length": 3,
+              "candidates": [
+                5
+              ],
+              "accepted": [],
+              "discarded": [
+                5
+              ],
+              "emitted": [
+                8
+              ],
+              "source": "repair",
+              "retained_computed": 3,
+              "pending": 8,
+              "score_rows": 2,
+              "terminal": false,
+              "next_computed": 4
+            },
+            {
+              "old_length": 4,
+              "candidates": [
+                13
+              ],
+              "accepted": [
+                13
+              ],
+              "discarded": [],
+              "emitted": [
+                13,
+                13
+              ],
+              "source": "bonus",
+              "retained_computed": 5,
+              "pending": 13,
+              "score_rows": 2,
+              "terminal": false,
+              "next_computed": 6
+            },
+            {
+              "old_length": 6,
+              "candidates": [
+                2
+              ],
+              "accepted": [
+                2
+              ],
+              "discarded": [],
+              "emitted": [
+                2,
+                16
+              ],
+              "source": "bonus",
+              "retained_computed": 7,
+              "pending": 16,
+              "score_rows": 2,
+              "terminal": false,
+              "next_computed": 8
+            },
+            {
+              "old_length": 8,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                2
+              ],
+              "source": "bonus",
+              "retained_computed": 8,
+              "pending": 2,
+              "score_rows": 1,
+              "terminal": true
+            }
+          ],
+          "cache_lengths": [
+            8,
+            8
+          ],
+          "stop": "cap"
+        }
+      },
+      {
+        "lookahead": 1,
+        "poison": true,
+        "result": {
+          "ids": [
+            8,
+            13,
+            13,
+            2,
+            16,
+            2
+          ],
+          "rounds": [
+            {
+              "old_length": 3,
+              "candidates": [
+                5
+              ],
+              "accepted": [],
+              "discarded": [
+                5
+              ],
+              "emitted": [
+                8
+              ],
+              "source": "repair",
+              "retained_computed": 3,
+              "pending": 8,
+              "score_rows": 2,
+              "terminal": false,
+              "next_computed": 4
+            },
+            {
+              "old_length": 4,
+              "candidates": [
+                13
+              ],
+              "accepted": [
+                13
+              ],
+              "discarded": [],
+              "emitted": [
+                13,
+                13
+              ],
+              "source": "bonus",
+              "retained_computed": 5,
+              "pending": 13,
+              "score_rows": 2,
+              "terminal": false,
+              "next_computed": 6
+            },
+            {
+              "old_length": 6,
+              "candidates": [
+                2
+              ],
+              "accepted": [
+                2
+              ],
+              "discarded": [],
+              "emitted": [
+                2,
+                16
+              ],
+              "source": "bonus",
+              "retained_computed": 7,
+              "pending": 16,
+              "score_rows": 2,
+              "terminal": false,
+              "next_computed": 8
+            },
+            {
+              "old_length": 8,
+              "candidates": [],
+              "accepted": [],
+              "discarded": [],
+              "emitted": [
+                2
+              ],
+              "source": "bonus",
+              "retained_computed": 8,
+              "pending": 2,
+              "score_rows": 1,
+              "terminal": true
+            }
+          ],
+          "cache_lengths": [
+            8,
+            8
+          ],
+          "stop": "cap"
+        }
+      },
+      {
+        "lookahead": 3,
+        "poison": false,
+        "result": {
+          "ids": [
+            8,
+            13,
+            13,
+            2,
+            16,
+            2
+          ],
+          "rounds": [
+            {
+              "old_length": 3,
+              "candidates": [
+                5,
+                1,
+                14
+              ],
+              "accepted": [],
+              "discarded": [
+                5,
+                1,
+                14
+              ],
+              "emitted": [
+                8
+              ],
+              "source": "repair",
+              "retained_computed": 3,
+              "pending": 8,
+              "score_rows": 4,
+              "terminal": false,
+              "next_computed": 4
+            },
+            {
+              "old_length": 4,
+              "candidates": [
+                13,
+                3,
+                8
+              ],
+              "accepted": [
+                13
+              ],
+              "discarded": [
+                3,
+                8
+              ],
+              "emitted": [
+                13,
+                13
+              ],
+              "source": "repair",
+              "retained_computed": 5,
+              "pending": 13,
+              "score_rows": 4,
+              "terminal": false,
+              "next_computed": 6
+            },
+            {
+              "old_length": 6,
+              "candidates": [
+                2,
+                16
+              ],
+              "accepted": [
+                2,
+                16
+              ],
+              "discarded": [],
+              "emitted": [
+                2,
+                16,
+                2
+              ],
+              "source": "bonus",
+              "retained_computed": 8,
+              "pending": 2,
+              "score_rows": 3,
+              "terminal": true
+            }
+          ],
+          "cache_lengths": [
+            8,
+            8
+          ],
+          "stop": "cap"
+        }
+      },
+      {
+        "lookahead": 3,
+        "poison": true,
+        "result": {
+          "ids": [
+            8,
+            13,
+            13,
+            2,
+            16,
+            2
+          ],
+          "rounds": [
+            {
+              "old_length": 3,
+              "candidates": [
+                5,
+                1,
+                14
+              ],
+              "accepted": [],
+              "discarded": [
+                5,
+                1,
+                14
+              ],
+              "emitted": [
+                8
+              ],
+              "source": "repair",
+              "retained_computed": 3,
+              "pending": 8,
+              "score_rows": 4,
+              "terminal": false,
+              "next_computed": 4
+            },
+            {
+              "old_length": 4,
+              "candidates": [
+                13,
+                3,
+                8
+              ],
+              "accepted": [
+                13
+              ],
+              "discarded": [
+                3,
+                8
+              ],
+              "emitted": [
+                13,
+                13
+              ],
+              "source": "repair",
+              "retained_computed": 5,
+              "pending": 13,
+              "score_rows": 4,
+              "terminal": false,
+              "next_computed": 6
+            },
+            {
+              "old_length": 6,
+              "candidates": [
+                2,
+                16
+              ],
+              "accepted": [
+                2,
+                16
+              ],
+              "discarded": [],
+              "emitted": [
+                2,
+                16,
+                2
+              ],
+              "source": "bonus",
+              "retained_computed": 8,
+              "pending": 2,
+              "score_rows": 3,
+              "terminal": true
+            }
+          ],
+          "cache_lengths": [
+            8,
+            8
+          ],
+          "stop": "cap"
+        }
+      }
+    ],
+    "sampled": {
+      "ids": [
+        15,
+        1,
+        11,
+        0,
+        8,
+        9
+      ],
+      "rounds": [
+        {
+          "old_length": 3,
+          "candidates": [
+            15,
+            1,
+            11
+          ],
+          "accepted": [
+            15,
+            1,
+            11
+          ],
+          "discarded": [],
+          "emitted": [
+            15,
+            1,
+            11,
+            0
+          ],
+          "source": "bonus",
+          "retained_computed": 6,
+          "pending": 0,
+          "score_rows": 4,
+          "terminal": false,
+          "next_computed": 7
+        },
+        {
+          "old_length": 7,
+          "candidates": [
+            3
+          ],
+          "accepted": [],
+          "discarded": [
+            3
+          ],
+          "emitted": [
+            8
+          ],
+          "source": "repair",
+          "retained_computed": 7,
+          "pending": 8,
+          "score_rows": 2,
+          "terminal": false,
+          "next_computed": 8
+        },
+        {
+          "old_length": 8,
+          "candidates": [],
+          "accepted": [],
+          "discarded": [],
+          "emitted": [
+            9
+          ],
+          "source": "bonus",
+          "retained_computed": 8,
+          "pending": 9,
+          "score_rows": 1,
+          "terminal": true
+        }
+      ],
+      "cache_lengths": [
+        8,
+        8
+      ],
+      "stop": "cap"
+    },
+    "rollback": [
+      {
+        "accepted": 0,
+        "max_error": 2.220446049250313e-16
+      },
+      {
+        "accepted": 2,
+        "max_error": 3.3306690738754696e-16
+      }
+    ],
+    "capacity_atomic": true,
+    "tolerance": {
+      "atol": 1e-12,
+      "rtol": 1e-12
+    }
+  }
+}

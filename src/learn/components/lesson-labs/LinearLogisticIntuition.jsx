@@ -4,7 +4,6 @@ const residuals = [0.1, 0.2, -0.7, 0.4];
 
 export function NormalEquationBalanceFigure() {
   return <figure className="linear-intuition" data-concept="normal-equation-balance">
-    <figcaption><strong>At the best line, neither allowed adjustment has a remaining first-order pull.</strong></figcaption>
     <div className="linear-balance-panels">
       {[
         { title: 'Move every prediction equally: change the intercept', terms: residuals, total: '0.1 + 0.2 − 0.7 + 0.4 = 0' },
@@ -15,14 +14,14 @@ export function NormalEquationBalanceFigure() {
           <span>{String.fromCharCode(65 + index)}</span>
           <svg viewBox="0 0 180 22" role="img" aria-label={`Shipment ${String.fromCharCode(65 + index)} contribution ${term.toFixed(1)}`}>
             <line x1="90" x2="90" y1="0" y2="22" stroke="#8c8c8c" />
-            <rect x={term < 0 ? 90 + term * 55 : 90} y="5" width={Math.abs(term) * 55} height="12" fill={term < 0 ? '#b6b6b6' : '#e8b84b'} />
+            <rect x={term < 0 ? 90 + term * 55 : 90} y="5" width={Math.abs(term) * 55} height="12" fill={term < 0 ? '#77a9d5' : '#e8b84b'} />
           </svg>
           <span>{term.toFixed(1)}</span>
         </div>)}
         <p className="linear-balance-sum">{panel.total}</p>
       </section>)}
     </div>
-    <p>Bars share one scale. Left means negative; right means positive. Residuals are observed minus fitted hours. The first sum is the intercept column dotted with the residuals; the second is the distance column dotted with them. Individual errors remain, but these two sums cancel.</p>
+    <p>Bars share one scale. Blue bars left of zero are negative; amber bars right of zero are positive. Residuals are observed minus fitted hours. The first sum is the intercept column dotted with the residuals; the second is the distance column dotted with them. Individual errors remain, but these two sums cancel.</p>
   </figure>;
 }
 
@@ -30,7 +29,6 @@ export function LogisticLearningFlowFigure() {
   const probability = 1 / (1 + Math.exp(-1));
   const scoreGradient = probability - 1;
   return <figure className="linear-intuition" data-concept="logistic-learning-flow">
-    <figcaption><strong>One observed late shipment asks the model to increase its score.</strong></figcaption>
     <ol className="linear-gradient-flow">
       <li><strong>Read the current belief</strong><span>x = 2, y = 1; b = −1, w = 1</span><span>z = −1 + 1 × 2 = 1</span><span>p = {probability.toFixed(3)}</span></li>
       <li><strong>Find the score's pull</strong><span>p − y = {scoreGradient.toFixed(3)}</span><span>A higher score reduces this row's loss.</span></li>
@@ -50,7 +48,6 @@ export function PenaltyResponseFigure() {
     { title: 'Lasso, λ = 0.5', formula: 'w = sign(a) max(|a| − 0.5, 0)', solve: value => Math.sign(value) * Math.max(Math.abs(value) - 0.5, 0) },
   ];
   return <figure className="linear-intuition" data-concept="penalty-response">
-    <figcaption><strong>Different penalties answer “how much evidence is enough?” differently.</strong></figcaption>
     <div className="linear-penalty-panels">{rules.map(rule => <section key={rule.title}>
       <p><strong>{rule.title}</strong><br />{rule.formula}</p>
       <svg viewBox="0 0 296 290" role="img" aria-label={`${rule.title}: coefficient w as unpenalized optimum a varies from minus two to two`}>

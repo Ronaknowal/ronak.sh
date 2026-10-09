@@ -1,0 +1,61 @@
+.bayesian-inference-lesson{overflow-wrap:anywhere}
+.bayes-flow-figure{margin:1.8rem 0 2.2rem;padding:0;border:0;background:transparent;min-width:0;container-type:inline-size}
+.bayes-flow-figure .bf-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+.bf-panel{min-width:0}
+.bf-drawing-title,.bf-table-title{font-weight:600;margin:1rem 0 .6rem;overflow-wrap:anywhere}
+.bf-scene-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-gutter:stable}
+.bf-scene{display:block;width:100%;min-width:340px;height:auto;overflow:visible}
+.bf-label{fill:#d8d8dc;font-family:inherit;font-size:14px}
+.bf-axis,.bf-zero{stroke:#a1a1ab;stroke-width:1.25;fill:none}
+.bf-grid{stroke:#45454c;stroke-width:.7}
+.bf-reference{stroke:#aaaab4;stroke-dasharray:4 4;fill:none}
+.bf-curve{fill:none;stroke:#e6b65b;stroke-width:2.2}
+.bf-curve.prior{stroke:#79c8e8}
+.bf-curve.future{stroke:#ca9de8}
+.bf-curve.neutral{stroke:#d1d1d8}
+.bf-curve.dashed,.bf-arrow.dashed{stroke-dasharray:6 4}
+.bf-area{fill:#e6b65b;opacity:.22}
+.bf-area.prior{fill:#79c8e8}
+.bf-area.future{fill:#ca9de8}
+.bf-point,.bf-bar,.bf-outcome{fill:#e6b65b;stroke:#e6b65b;stroke-width:1.25}
+.bf-point.prior,.bf-bar.prior{fill:#79c8e8;stroke:#79c8e8}
+.bf-point.future,.bf-bar.future{fill:#ca9de8;stroke:#ca9de8}
+.bf-point.neutral,.bf-bar.neutral{fill:#bfc0ca;stroke:#bfc0ca}
+.bf-cell{fill:none;stroke:#ca9de8;stroke-dasharray:5 4;stroke-width:1.5}
+.bf-bar.selected{stroke:#f5f5f8;stroke-width:1.7}
+.bf-arrow{stroke:#e6b65b;fill:none;stroke-width:1.5}
+.bf-arrow.prior{stroke:#79c8e8}
+.bf-arrow.future{stroke:#ca9de8}
+.bf-outcome.success{fill:#e6b65b;stroke:#e6b65b}
+.bf-outcome.failure{fill:#79c8e8;stroke:#79c8e8}
+.bf-outcome+.bf-label{fill:#17171b}
+.bf-category-token>.bf-point+.bf-label{fill:#17171b}
+.bf-outcome.category-0,.bf-point.category-0{fill:#e6b65b;stroke:#e6b65b}
+.bf-outcome.category-1,.bf-point.category-1{fill:#79c8e8;stroke:#79c8e8}
+.bf-outcome.category-2,.bf-point.category-2{fill:#ca9de8;stroke:#ca9de8}
+.bf-reference.category-0,.bf-arrow.category-0{stroke:#e6b65b}
+.bf-reference.category-1,.bf-arrow.category-1{stroke:#79c8e8}
+.bf-reference.category-2{stroke:#ca9de8}
+.bf-axis-caption, .bf-plane-units{margin:.35rem 0 1rem;color:#b7b7c3;line-height:1.55}
+.bf-ledger{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem 1.2rem;margin:1rem 0}
+.bf-ledger>div{min-width:0}.bf-ledger dt{color:#aaaab6;font-size:.88rem}.bf-ledger dd{margin:.15rem 0 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.bf-table-scroll{max-width:100%;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.bf-table-scroll--tall{max-height:28rem}
+.bf-table-scroll table{min-width:34rem;width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.bf-table-scroll th,.bf-table-scroll td{padding:.55rem .65rem;text-align:left;white-space:nowrap;border-bottom:1px solid #45454c}
+.bf-table-scroll--tall thead{position:sticky;top:0;background:#18181b;z-index:1}
+.bf-scene-scroll:focus-visible,.bf-table-scroll:focus-visible{outline:2px solid #e6b65b;outline-offset:3px}
+.bf-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:end;gap:.8rem;margin:1rem 0 1.2rem}
+.bf-control{display:grid;gap:.45rem;min-width:0}.bf-control span{line-height:1.4;overflow-wrap:anywhere}.bf-control input,.bf-control select{width:100%;min-width:0}
+.bf-control input[type=number],.bf-control select,.bf-controls button{padding:.65rem .75rem;color:#eeeef2;background:#242429;border:1px solid #686873;border-radius:5px;font:inherit}
+.bf-control input[type=range]{accent-color:#e6b65b}.bf-controls button{cursor:pointer;min-height:44px}
+.bf-controls button:focus-visible,.bf-control input:focus-visible,.bf-control select:focus-visible{outline:2px solid #e6b65b;outline-offset:3px}
+.bf-error{color:#f4ada7;margin:1rem 0}
+.bf-simplex{stroke:#a1a1ab;stroke-width:1.5;fill:none}
+.bf-word-row{display:flex;align-items:center;gap:.75rem;min-width:0;margin:.5rem 0}
+.bf-word-row>span{min-width:3rem;font-variant-numeric:tabular-nums}.bf-word{display:block;width:100%;max-width:360px;min-width:0}
+.bf-word-label{fill:#121216;font-size:15px;font-family:inherit}.bf-run-bracket{fill:none;stroke:#bbbcc8;stroke-width:1.2}.bf-word.event .bf-run-bracket{stroke:#f4f4fa;stroke-width:2}
+.bf-word-atlas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1rem}
+.bayes-flow-figure figcaption{margin:1rem 0 0;color:#b9b9c5;line-height:1.7}
+@container(max-width:42rem){.bayes-flow-figure .bf-compare,.bf-controls,.bf-ledger,.bf-word-atlas{grid-template-columns:1fr}.bf-controls button{width:100%}}
+@media(prefers-reduced-motion:reduce){.bf-scene-scroll,.bf-table-scroll{scroll-behavior:auto}}

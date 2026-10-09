@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "All32 panels loaded before geometry",
+      "pass": true
+    },
+    {
+      "name": "Keyboard table scroll",
+      "pass": true
+    },
+    {
+      "name": "No page errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Final root16",
+      "pass": true
+    }
+  ],
+  "captures": [
+    {
+      "file": "table-keyboard.jpg",
+      "id": "M30",
+      "offset": 0,
+      "actualTop": 39.5
+    },
+    {
+      "file": "bounds-poor-aux.jpg",
+      "id": "M35",
+      "offset": 550,
+      "actualTop": -510.140625
+    },
+    {
+      "file": "gaussian-scale10.jpg",
+      "id": "M42",
+      "offset": 0,
+      "actualTop": 40.21875
+    },
+    {
+      "file": "gaussian-scale10-density.jpg",
+      "id": "M42",
+      "offset": 780,
+      "actualTop": -739.78125
+    },
+    {
+      "file": "observed2009grouped.jpg",
+      "id": "M48",
+      "offset": 0,
+      "actualTop": 40
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,10 @@
+budget 5.0 change 0.1 price 2.0 actual cost change -0.195 linear -0.2
+budget 5.0 change -0.1 price 2.0 actual cost change 0.205 linear 0.2
+budget 7.0 change -0.1 price 0.0 actual cost change 0.005 linear 0.0
+kink price 0.0 change -0.2 value 0.2 lower line 0.0
+kink price 0.0 change 0.2 value 0.0 lower line -0.0
+kink price 0.5 change -0.2 value 0.2 lower line 0.1
+kink price 0.5 change 0.2 value 0.0 lower line -0.1
+kink price 1.0 change -0.2 value 0.2 lower line 0.2
+kink price 1.0 change 0.2 value 0.0 lower line -0.2
+constraint scaled by 10: price 0.2 same contribution 2.0

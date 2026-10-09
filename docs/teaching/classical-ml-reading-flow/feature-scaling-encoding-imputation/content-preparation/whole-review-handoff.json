@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "topicId": "feature-scaling-encoding-imputation",
+  "revision": 5,
+  "status": "corrected-author-ready-awaiting-same-reviewer-F1-F2-closure",
+  "frozenAt": "2026-10-09T15:41:26.291929+00:00",
+  "phaseAuthority": "Root only; content remains in progress; implementation not started",
+  "manuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+    "bytes": 215186,
+    "sha256": "cabb07a552c707930c01b8a9aa91dc93227fb4c1c7fd81d45220441dad3b5db5",
+    "role": "whole manuscript; bounded F1/F2 successor to whole-reviewed predecessor"
+  },
+  "visualSpecifications": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/visual-specifications.md",
+    "bytes": 40852,
+    "sha256": "fac6974a56a32bd052baa1bf55bd9209d70a1b55de66d298368dbd50691065bf",
+    "role": "whole specifications with corrected D37 initialization"
+  },
+  "fullBindingManifest": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/composition.json",
+    "bytes": 34845,
+    "sha256": "7ed190c108599e95512f49a26ae9788c93abc29d39f738fa6857246e8abfd312",
+    "role": "full placements, all42 learner files, accepted-source conservation checks and author inputs"
+  },
+  "sourceRoles": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/source-roles.json",
+    "bytes": 16412,
+    "sha256": "302cf9f974721663dd799e719633f7a1a3e6fc5b2a77d75e7c0869a71ceb7b68",
+    "role": "full source/stdout/stderr/data-role and actual successful-run bindings"
+  },
+  "authorReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/whole-author-review.md",
+    "bytes": 6207,
+    "sha256": "fd7bcb32c71a0eff0e5bd3e344d1cfc9c56fc32ee1970ac73c0091361e1d2cc5",
+    "role": "actual whole beginner and specialist author reading; different review required"
+  },
+  "acceptedDesignAuthority": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/root-content-release.json",
+    "bytes": 10573,
+    "sha256": "6b98f8133ff4770e0abe9251101b86187361a1b4a65702abf19201ae0367bb44",
+    "role": "accepted seven-source design and original/successor independent closures"
+  },
+  "sourceIntake": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/intake.json",
+    "bytes": 4847,
+    "sha256": "8c1e30df8ef8868165c8c474913271af81ffac9e6380876d837f00288a3cda58",
+    "role": "thirty protected current/original pairs and three exact historical literal pairs"
+  },
+  "numericalEvidence": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/new-program-execution.json",
+    "bytes": 25618,
+    "sha256": "384c7a2712fe2e9d042c5889c7d16efbe3982203c81e2ba4f169a390d5cbb781",
+    "role": "all actual new attempts with exact source and streams, including failures"
+  },
+  "preservedFirstAssembly": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/author-readback/first-assembly/receipt.json",
+    "bytes": 1198,
+    "sha256": "2b170f133206f271217e5ed568645bc6a4047ef597a7fdec11ae4a1f680d5008",
+    "role": "exact pre-read assembly and failed-guard explanation"
+  },
+  "scope": {
+    "sections": 11,
+    "drawings": 41,
+    "investigations": 16,
+    "teachingProgrammes": 16,
+    "newTeachingProgrammes": 13,
+    "retained": 3,
+    "optionalR": 1,
+    "answerFile": 1,
+    "solvedTasks": 26
+  },
+  "codeRoles": {
+    "teaching": 16,
+    "exactHistoricalPairs": 3,
+    "newCheckedTeachingPairs": 13,
+    "optionalR": "complete source, unexecuted",
+    "answer": "complete separate checked solution source/stdout"
+  },
+  "actualAttempts": 18,
+  "failedAttempts": [
+    {
+      "attempt": 9,
+      "name": "local_spline_basis",
+      "exit": 1
+    },
+    {
+      "attempt": 14,
+      "name": "local_spline_basis",
+      "exit": 1
+    }
+  ],
+  "reviewInstructions": [
+    "SAME whole reviewer: bounded F1/F2 closure against preserved predecessor and exact reversible deltas. Read changed paragraphs and D37/L13 correspondence; verify initialization [2.5,6], unchanged observed row2 a=3 and predictions 3.9652777778/6.0158266415; verify original practice, learner files, code/streams and meaningful qualifications remain exact. No repeat entire review or numerical replay."
+  ],
+  "limits": [
+    "No contentcomplete or independent acceptance claim",
+    "No runtime, native visual review or publication",
+    "No unchanged old fits/mains/Python-science replay",
+    "R source has no output/execution claim"
+  ],
+  "unrelatedFrozenNmfObserved": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/lesson.md",
+    "bytes": 436503,
+    "sha256": "3907412af22650e27be5a9f1f275864e4ee3f24d35a396b2e0028dfa10b0af83",
+    "role": "read-only observation; unchanged NMF successor"
+  },
+  "predecessorWholeReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/independent-content-review/whole-content-review.md",
+    "bytes": 18121,
+    "sha256": "f79d38b66db95fe17a5d65c7d739a692a6b2f07eeb5c54f19b1ecf451ff4809d"
+  },
+  "preservedReviewedPredecessor": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/review-correction/reviewed-predecessor/whole-review-handoff.json",
+    "bytes": 5864,
+    "sha256": "9bed8c091c950fd69288404afe844861823728dc1a68e9a94350019293a42c29"
+  },
+  "boundedCorrection": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/review-correction/exact-text-deltas.json",
+    "bytes": 12155,
+    "sha256": "e7ea671833bc1c048cb2a8e6bb1b7a6ceda0e9a56e55d04fa2cd504c417f5f17",
+    "role": "exact reversible F1/F2 edits, unchanged 42 learner-file bindings"
+  },
+  "authorCorrectionReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/review-correction/author-correction-readback.md",
+    "bytes": 2366,
+    "sha256": "2368fb5cb538bd7f8ed3d9f2c8f8ca8c24e1c27501e78a5f16aa5888c98ae29c",
+    "role": "actual affected-paragraph and D37/L13 correspondence readback; not a new whole review"
+  }
+}

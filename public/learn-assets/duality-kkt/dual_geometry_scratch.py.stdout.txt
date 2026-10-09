@@ -1,0 +1,15 @@
+price contact_residual contact_cost intercept
+0 2 0 0
+1 1 1/2 3/2
+2 0 2 2
+3 -1 9/2 3/2
+4 -2 8 0
+allowed_residual exact_residual_frontier relaxed_value
+-2 8 8
+0 2 2
+1 1/2 1/2
+2 0 0
+3 1/2 0
+candidate_cost lower gap displacement_squared price_times_slack
+5 3/2 7/2 5/2 1
+negative_price rejected

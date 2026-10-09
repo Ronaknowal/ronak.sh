@@ -1,0 +1,113 @@
+{
+  "status": "IT1_IT2_AND_CONDITIONING_WORDING_CORRECTED_PENDING_SAME",
+  "before": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/design-r1.md",
+    "sha256": "dbc94e4b3324e5b8ce0b1b1a7852084b49abea1975f92eedd9db553560537286",
+    "bytes": 55529
+  },
+  "after": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/design-r2.md",
+    "sha256": "618fdfc0fcff93c81f1174a521c7fe5f7278a5de3a77d99db700f10dbf0278bb",
+    "bytes": 57046
+  },
+  "review": {
+    "path": "docs/teaching/math-foundations-reading-flow/it-calculus-stochastic-differential-equations/independent-design-review-r1.json",
+    "sha256": "7c728c2306e9a906547d8f88dd2371c31499b5c914499dcf9cb5612129afcb84",
+    "bytes": 4364
+  },
+  "changes": [
+    {
+      "before": "| D12 §2 isometry/localization | Area of H² over each interval, with E H0²=1 and E H1²=.99 giving energy .5+.495=.995; separate orthogonality picture of cross term conditioned on later history. | Formula and expectation operations not a simulation histogram. Beside it a finite stopping boundary on a conceptual path shows localization, labelled illustrative geometry only. No invented stopped-martingale numerical proof. |",
+      "after": "| D12 §2 isometry/localization | Area of H² over each interval, with E H0²=1 and E H1²=.99 giving energy .5+.495=.995; separate orthogonality picture conditions the cross term on the information F at the second interval’s left endpoint, before its new increment. | Formula and expectation operations not a simulation histogram. Beside it a finite stopping boundary on a conceptual path shows localization, labelled illustrative geometry only. No invented stopped-martingale numerical proof. |"
+    },
+    {
+      "before": "| D25 §5 OU law | Mean marker and density from initialmean1.5/variance0; variance budget shows retained initial portionv0e−2θt and new-noise portion. | L6b t plus initial mean/variance, after Gaussian-initial condition. Explicit mean0 stationary presetv0η²/(2θ) onlyθ>0. Atoms/nonstationaryθ0 handled. |",
+      "after": "| D25 §5 OU law | Mean marker and density from initial mean 1.5 and variance 0; variance budget separates retained initial variance v0 exp(−2θt) and new-noise variance. | L6b adds t, initial mean and variance after the Gaussian-initial condition. The editable v0 remains in [0,4]. The stationary comparison in D26 is a separate analytic law, never a preset that forces an out-of-range value into this editor or ouLaw. Atoms and θ=0 are handled explicitly. |"
+    },
+    {
+      "before": "| D26 §5 stationarity | Same scale three time slices of fixed-start versus stationary Gaussian laws; injectionη² and removal2θv arrows meet atvarianceη²/(2θ). | L6c use sharedθ,η; stationary comparison absent/labelled no stationary positive-noise law atθ0.η0θ0 every fixed initial law invariant but no unique target law. |",
+      "after": "| D26 §5 stationarity | On one shared state axis, show three time slices of the editable initial-law evolution beside the analytic stationary Gaussian N(0, η²/(2θ)) for θ>0. Injection η² and removal 2θv balance. At θ=.05, η=1.2, the invariant variance is 14.4 at t=0,1,4. | L6c shares θ and η. Compute the invariant branch directly, without passing its variance to ouLaw or clamping it to the v0 editor limit. Choose one axis covering all shown means plus/minus three SDs, retaining tail continuation labels: the axis is a display window, not finite Gaussian support. A zero variance uses a point mass. At θ=0, η>0 there is no invariant probability law; at θ=η=0 every initial law is invariant, with no unique selected equilibrium. |"
+    },
+    {
+      "before": "| D42 §8 exact error curves | Plot analytically computed RMS and weak bias against h on labelled log axes. Show zero bias separately on a linear zero line. | L10a edits μ, σ and n=1–512, initially .4/.6/16 with T=1, x0=1. σ=0 is deterministic and μ=0 gives mean bias zero. Label omitted zeros explicitly. Reuse the stable model. |",
+      "after": "| D42 §8 exact error curves | Plot analytically computed RMS and absolute first-moment bias magnitude against h on labelled log axes; retain signed bias E[Y]−E[X] in the adjacent readout with its under/overestimate interpretation. For the default μ=.4, n=16, T=1, x0=1, signed Euler bias is approximately −.00731908; its plotted magnitude is +.00731908. Name the absolute-value operation before showing the curve. | L10a edits μ, σ and n=1–512, initially .4/.6/16 with T=1, x0=1. An exact zero has no log coordinate: show a separate labelled zero strip and corresponding h markers, never an epsilon. Keep RMS and absolute weak-bias magnitude distinct. σ=0 is deterministic and μ=0 gives first-moment bias zero. Reuse the stable model for computed values. |"
+    },
+    {
+      "before": "| L6 OU law | θ=1 in {0}∪[.05,3], η=.8 in {0}∪[.05,1.2], fixed target m=0; initial mean m0=1.5 in [−2,2], variance v0=0 in [0,4], t=1 in {0}∪[1/8192,4]. | D24 offers θ and η. D25 adds t, m0 and v0 in compact adjacent rows. D26 uses current θ and η. At θ=0 and η>0 no invariant probability law exists. t=0 recovers the initial Gaussian or atom. η=0 preserves deterministic contraction when θ>0. No path simulation is required. |",
+      "after": "| L6 OU law | θ=1 in {0}∪[.05,3], η=.8 in {0}∪[.05,1.2], fixed target m=0; initial mean m0=1.5 in [−2,2], variance v0=0 in [0,4], t=1 in {0}∪[1/8192,4]. | D24 offers θ and η. D25 adds t, m0 and v0 in compact adjacent rows and retains ouLaw’s existing input domain. D26 computes its stationary branch analytically for θ>0, independently of v0; the allowed corner θ=.05, η=1.2 has stationary variance 14.4 at every shown time. Both laws use the shared axis specified in D26. At θ=0, η>0 there is no invariant probability law. t=0 recovers the edited initial Gaussian or atom. η=0 retains deterministic contraction for θ>0 and makes its invariant law a point at m=0. θ=η=0 retains every initial law without selecting one. No path simulation is required. |"
+    },
+    {
+      "before": "| L10 error moments/sample | μ=.4 in [−.5,1], σ=.6 in {0}∪[.05,1.2], integer n=16 in [1,512]; T=1 and x0=1. Sample M=256 in [16,1024], seed 13. | D42 updates the analytic curve immediately. D43 has a bounded Run action for empirical draws and identifies the completed input state. Both methods and the exact endpoint use compatible common noise. Changing M may reuse a prefix; changing n starts a declared new simulation with no automatic refinement claim. μ=0 removes first-moment bias; σ=0 gives deterministic SE zero while bias may persist. |",
+      "after": "| L10 error moments/sample | μ=.4 in [−.5,1], σ=.6 in {0}∪[.05,1.2], integer n=16 in [1,512]; T=1 and x0=1. Sample M=256 in [16,1024], seed 13. | D42 immediately updates RMS and absolute first-moment bias magnitude, with the signed bias retained beside the log plot. Exact zeros go to its separate zero strip. D43 has a bounded Run action for empirical draws and identifies the completed input state. Both methods and the exact endpoint use compatible common noise. Changing M may reuse a prefix; changing n starts a declared new simulation with no automatic refinement claim. μ=0 removes first-moment bias; σ=0 gives deterministic SE zero while bias may persist. |"
+    }
+  ],
+  "exactInverseConservation": true,
+  "checks": [
+    {
+      "case": "bias",
+      "mu": -0.5,
+      "signed": -0.0048203562805611,
+      "magnitude": 0.0048203562805611,
+      "coordinate": -2.3169208611463468,
+      "branch": "absolute log magnitude with signed readout"
+    },
+    {
+      "case": "bias",
+      "mu": 0,
+      "signed": 0.0,
+      "magnitude": 0.0,
+      "coordinate": null,
+      "branch": "exact zero strip"
+    },
+    {
+      "case": "bias",
+      "mu": 0.4,
+      "signed": -0.007319076980708106,
+      "magnitude": 0.007319076980708106,
+      "coordinate": -2.135543684988159,
+      "branch": "absolute log magnitude with signed readout"
+    },
+    {
+      "case": "bias",
+      "mu": 1,
+      "signed": -0.08035333109244513,
+      "magnitude": 0.08035333109244513,
+      "coordinate": -1.0949961146059153,
+      "branch": "absolute log magnitude with signed readout"
+    },
+    {
+      "case": "invariant OU corner",
+      "theta": 0.05,
+      "eta": 1.2,
+      "time": 0,
+      "variance": 14.399999999999999,
+      "axisMinimum": -11.384199576606164,
+      "axisMaximum": 11.384199576606164
+    },
+    {
+      "case": "invariant OU corner",
+      "theta": 0.05,
+      "eta": 1.2,
+      "time": 1,
+      "variance": 14.399999999999997,
+      "axisMinimum": -11.384199576606164,
+      "axisMaximum": 11.384199576606164
+    },
+    {
+      "case": "invariant OU corner",
+      "theta": 0.05,
+      "eta": 1.2,
+      "time": 4,
+      "variance": 14.399999999999999,
+      "axisMinimum": -11.384199576606164,
+      "axisMaximum": 11.384199576606164
+    }
+  ],
+  "unchangedProgrammes": true,
+  "scientificMainsReplayed": 0,
+  "script": {
+    "path": "scratch/correct-ito-design-root-r2.py",
+    "sha256": "58fbce522173e671e32ba793fe3740b5ff3c15078373be20814dbce86e927fc3",
+    "bytes": 6825
+  }
+}

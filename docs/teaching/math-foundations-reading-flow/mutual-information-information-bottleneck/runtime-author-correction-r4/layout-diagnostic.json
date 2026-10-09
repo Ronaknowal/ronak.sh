@@ -1,0 +1,1136 @@
+{
+  "w": 390,
+  "root": {
+    "tag": "HTML",
+    "cls": "",
+    "x": 0,
+    "w": 390,
+    "sw": 535,
+    "cw": 390,
+    "ox": "visible",
+    "oy": "visible",
+    "text": "Mutual information private reader  \n  \nLearn→Mathematical & Statistical Foundations→Mutual"
+  },
+  "body": {
+    "tag": "BODY",
+    "cls": "",
+    "x": 0,
+    "w": 390,
+    "sw": 535,
+    "cw": 390,
+    "ox": "hidden",
+    "oy": "auto",
+    "text": "Learn→Mathematical & Statistical Foundations→Mutual Information & Information BottleneckMo"
+  },
+  "nodes": [
+    {
+      "tag": "DIV",
+      "cls": "",
+      "x": 0,
+      "w": 390,
+      "sw": 535,
+      "cw": 390,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Learn→Mathematical & Statistical Foundations→Mutual Information & Information BottleneckMo"
+    },
+    {
+      "tag": "DIV",
+      "cls": "learn-shell",
+      "x": 0,
+      "w": 390,
+      "sw": 535,
+      "cw": 390,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Learn→Mathematical & Statistical Foundations→Mutual Information & Information BottleneckMo"
+    },
+    {
+      "tag": "MAIN",
+      "cls": "reader-content",
+      "x": 0,
+      "w": 390,
+      "sw": 535,
+      "cw": 390,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Learn→Mathematical & Statistical Foundations→Mutual Information & Information BottleneckMo"
+    },
+    {
+      "tag": "DIV",
+      "cls": "reader-article",
+      "x": 20,
+      "w": 350,
+      "sw": 515,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+    },
+    {
+      "tag": "DIV",
+      "cls": "lesson-pilot lesson-flow information-reading",
+      "x": 20,
+      "w": 350,
+      "sw": 515,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 39.1875,
+      "w": 311.625,
+      "sw": 324,
+      "cw": 312,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 1186,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I(X;Y)=H(Y)−H(Y∣X),H(Y∣X)=∑xp(x)H(Y∣X=x).I(X;Y)=H(Y)-H(Y\\mid X),\\qquad\nH(Y\\mid X)=\\sum_x p"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 515,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Equal row entropies can hide an incorrect implementation. The later practice table (.45,.1"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 39.1875,
+      "w": 311.625,
+      "sw": 324,
+      "cw": 312,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 726,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "ı(x;y)=log⁡2p(x,y)−log⁡2p(x)−log⁡2p(y).\\imath(x;y)=\\log_2 p(x,y)-\\log_2 p(x)-\\log_2 p(y)."
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 588,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I(X;Y)=∑x,yp(x,y)log⁡2p(x,y)p(x)p(y)=H(Y)−H(Y∣X)=DKL(PXY∥PXPY).\\begin{aligned}\nI(X;Y)\n&=\\s"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 39.1875,
+      "w": 311.625,
+      "sw": 324,
+      "cw": 312,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 461,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "The points are (−1,1),(0,0),(1,1), each with mass1/3. Their symmetry makes E[X]=0 and E[XY"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 416,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "The magnitude map Z₁=|X| merges −1 and1; both have Y=1. Its other group contains only0, wi"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 39.1875,
+      "w": 311.625,
+      "sw": 324,
+      "cw": 312,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 731,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I(A;Y∣B)=∑bp(b)DKL(PAY∣b∥PA∣bPY∣b).I(A;Y\\mid B)=\\sum_b p(b)D_{\\rm KL}\\bigl(P_{AY\\mid b}\\Ve"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 637,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I((A,B);Y)=I(B;Y)+I(A;Y∣B).I((A,B);Y)=I(B;Y)+I(A;Y\\mid B).I((A,B);Y)=I(B;Y)+I(A;Y∣B)."
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 812,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "p(x,y,z)=p(x,y)q(z∣x)=p(x)p(y∣x)q(z∣x).p(x,y,z)=p(x,y)q(z\\mid x)=p(x)p(y\\mid x)q(z\\mid x)."
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 934,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I(Y;X,Z)=I(Y;X)+I(Y;Z∣X)=I(Y;X),I(Y;X,Z)=I(Y;Z)+I(Y;X∣Z),I(Y;X)−I(Y;Z)=I(Y;X∣Z)≥0.\\begin{a"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 354,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Because E is determined by (Y,Z), the chain rule gives H(Y|Z)=H(E|Z)+H(Y|E,Z). The first t"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 619,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "H(Y∣Z)≤h2(Pe)+Pelog⁡2(K−1).H(Y\\mid Z)\\leq h_2(P_e)+P_e\\log_2(K-1).H(Y∣Z)≤h2​(Pe​)+Pe​log2​"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 39.1875,
+      "w": 311.625,
+      "sw": 324,
+      "cw": 312,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 373,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Call R=I(X;Z) the rate and T=I(Y;Z) the relevance. The constant has (R,T)=(0,0). Keeping S"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 1182,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "J(q)=I(X;Z)−βI(Y;Z),β≥0,p(x,y,z)=p(x,y)q(z∣x).J(q)=I(X;Z)-\\beta I(Y;Z),\\qquad \\beta\\geq0,\n"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 490,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "J=R−βT≥(1−β)R≥0.J=R-\\beta T\\geq(1-\\beta)R\\geq0.J=R−βT≥(1−β)R≥0."
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 373,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "For z=0, the assigned source fragments are (.2,.15,.075,.05), with total .475. Multiply th"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 969,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "p(x∣z)=p(x)q(z∣x)p(z),p(y∣z)=∑xp(x∣z)p(y∣x).p(x\\mid z)=\\frac{p(x)q(z\\mid x)}{p(z)},\\qquad\n"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 368,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Their KL divergence d(x,z)=D_KL(p(y|x)‖p(y|z)) is the predictive distortion. It measures a"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 946,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "az(x)=p(z)exp⁡[−βd(x,z)],qnew(z∣x)=az(x)∑jaj(x).a_z(x)=p(z)\\exp[-\\beta d(x,z)],\\qquad\nq_{\\"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 1496,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "Dw(x,z)=DKL(p(y∣x)∥w(y∣z)),F(q,r,w)=Ep(x)q(z∣x)[log⁡q(z∣x)r(z)+βDw(x,z)].D_w(x,z)=D_{\\rm K"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 809,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "F(q,r,w)=J(q)+βI(X;Y)+DKL(p(z)∥r(z))+β∑zp(z)DKL(p(y∣z)∥w(y∣z)).\\begin{aligned}\nF(q,r,w)={}"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 416,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "The final SciPy call solves just the two-entry row with fixed r=(.25,.75), distortions(0,l"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 715,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "U=I(X;Z)+DKL(p(z)∥r(z))≥I(X;Z).U=I(X;Z)+D_{\\rm KL}(p(z)\\Vert r(z))\\geq I(X;Z).U=I(X;Z)+DKL"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 409,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "For prediction let C=E_(Y,Z)[−log s(Y|Z)] be the decoder cross-entropy. Subtracting condit"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 714,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "L=H(Y)−C=I(Y;Z)−Gs≤I(Y;Z).L=H(Y)-C=I(Y;Z)-G_s\\leq I(Y;Z).L=H(Y)−C=I(Y;Z)−Gs​≤I(Y;Z)."
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 642,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "J=R−βT,J~=U−βL=U+βC−βH(Y),J~−J=Gr+βGs≥0.\\begin{aligned}\nJ&=R-\\beta T,\\\\\n\\widetilde J&=U-\\b"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 870,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "DKL(q(z∣x)∥N(0,I))=12∑j(μj2+vj−1−log⁡vj).D_{\\rm KL}(q(z\\mid x)\\Vert\\mathcal N(0,I))\n=\\tfra"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 506,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "In the first row μ=−.4, z=−.4+.7×(−1)=−1.1, and ℓ=1.1×(−1.1)−.2=−1.41. For target0 its sta"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 515,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "gμ=ug+λμ,(ga,gb,gc)=(Sgμ,Ngμ,gμ),gd=ugσϵ+λ(σ2−1),(gu,gv)=(gz,g).\\begin{aligned}\ng_\\mu&=ug+"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 417,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "The joint-versus-product definition extends beyond tables: I(X;Z)=D_KL(P_XZ‖P_XP_Z), with "
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 474,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I(X;Z)=12log⁡2(1+1σ2).I(X;Z)=\\tfrac12\\log_2\\left(1+\\frac1{\\sigma^2}\\right).I(X;Z)=21​log2​"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 357,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "With species rows Adelie,Chinstrap,Gentoo and island columns Biscoe,Dream,Torgersen, the o"
+    },
+    {
+      "tag": "SECTION",
+      "cls": "lesson-ending lesson-ending--practice",
+      "x": 20,
+      "w": 350,
+      "sw": 373,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "10. Practise and connect the next questionTry each prompt before opening its hint or solut"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 33,
+      "w": 324,
+      "sw": 513,
+      "cw": 324,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "H(Y)=h₂(.45)≈.992774 bits. Each row, after normalization, has probabilities (.75,.25) or ("
+    },
+    {
+      "tag": "DIV",
+      "cls": "lesson-exercise",
+      "x": 20,
+      "w": 350,
+      "sw": 373,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "5. Compute conditional informationImplement conditional MI from joint context layers. Use "
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 373,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Implement conditional MI from joint context layers. Use context 0 table (.375,0;0,.375), c"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 33,
+      "w": 324,
+      "sw": 428,
+      "cw": 324,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "bayes_error returns decisions[0,1], wrong-mass rows(0,.10,.10),(.05,0,.20), and Pe=.45. H("
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 33,
+      "w": 324,
+      "sw": 344,
+      "cw": 324,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Form p(z), p(y|z), R, T and I(X;Y) from p(x,y)q(z|x). Directly evaluate F and compare it w"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 33,
+      "w": 324,
+      "sw": 333,
+      "cw": 324,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Use g=sigmoid(logit)−y, g_mu=u*g+lambda*mu, and the separate noise path through log_sd. Re"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 33,
+      "w": 324,
+      "sw": 379,
+      "cw": 324,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "The complete hand function in gaussian_vib_step.py is the executable solution: call it wit"
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 33,
+      "w": 324,
+      "sw": 464,
+      "cw": 324,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "For all344 records, full MI .750428171 becomes .616057102 after Biscoe/other grouping, los"
+    }
+  ],
+  "text": [
+    {
+      "text": "Equal row entropies can hide an incorrect implementation. The later practice table (.45,.15; .10,.30",
+      "right": 534.6875,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "Equal row entropies can hide an incorrect implementation. The later practice table (.45,.1"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": "The points are (−1,1),(0,0),(1,1), each with mass1/3. Their symmetry makes E[X]=0 and E[XY]=0, hence",
+      "right": 481.0625,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 461,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "The points are (−1,1),(0,0),(1,1), each with mass1/3. Their symmetry makes E[X]=0 and E[XY"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": "The magnitude map Z₁=|X| merges −1 and1; both have Y=1. Its other group contains only0, with Y=0. Ea",
+      "right": 436,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 416,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "The magnitude map Z₁=|X| merges −1 and1; both have Y=1. Its other group contains only0, wi"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": ". The constant has (R,T)=(0,0). Keeping S gives (1,.531004406); keeping N gives (1,0); keeping both ",
+      "right": 393.390625,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 373,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "Call R=I(X;Z) the rate and T=I(Y;Z) the relevance. The constant has (R,T)=(0,0). Keeping S"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": "For z=0, the assigned source fragments are (.2,.15,.075,.05), with total .475. Multiply these unnorm",
+      "right": 393.390625,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 373,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "For z=0, the assigned source fragments are (.2,.15,.075,.05), with total .475. Multiply th"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": "The final SciPy call solves just the two-entry row with fixed r=(.25,.75), distortions(0,ln2) and be",
+      "right": 435.734375,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 416,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "The final SciPy call solves just the two-entry row with fixed r=(.25,.75), distortions(0,l"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": "For prediction let C=E_(Y,Z)[−log s(Y|Z)] be the decoder cross-entropy. Subtracting conditional entr",
+      "right": 428.71875,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 409,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "For prediction let C=E_(Y,Z)[−log s(Y|Z)] be the decoder cross-entropy. Subtracting condit"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": "In the first row μ=−.4, z=−.4+.7×(−1)=−1.1, and ℓ=1.1×(−1.1)−.2=−1.41. For target0 its stable logist",
+      "right": 525.875,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 506,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "In the first row μ=−.4, z=−.4+.7×(−1)=−1.1, and ℓ=1.1×(−1.1)−.2=−1.41. For target0 its sta"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": "The joint-versus-product definition extends beyond tables: I(X;Z)=D_KL(P_XZ‖P_XP_Z), with probabilit",
+      "right": 437.359375,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 417,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "The joint-versus-product definition extends beyond tables: I(X;Z)=D_KL(P_XZ‖P_XP_Z), with "
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 515,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    },
+    {
+      "text": "H(Y)=h₂(.45)≈.992774 bits. Each row, after normalization, has probabilities (.75,.25) or (.25,.75), ",
+      "right": 545.921875,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 33,
+          "w": 324,
+          "sw": 513,
+          "cw": 324,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "H(Y)=h₂(.45)≈.992774 bits. Each row, after normalization, has probabilities (.75,.25) or ("
+        },
+        {
+          "tag": "DETAILS",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 348,
+          "cw": 348,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "Explained solutionH(Y)=h₂(.45)≈.992774 bits. Each row, after normalization, has probabilit"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-exercise",
+          "x": 20,
+          "w": 350,
+          "sw": 350,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Weight the contextsStart with joint rows (.45,.15) and (.10,.30). Compute both marginal"
+        }
+      ]
+    },
+    {
+      "text": "Implement conditional MI from joint context layers. Use context 0 table (.375,0;0,.375), context 1 t",
+      "right": 393.03125,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 373,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "Implement conditional MI from joint context layers. Use context 0 table (.375,0;0,.375), c"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-exercise",
+          "x": 20,
+          "w": 350,
+          "sw": 373,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "5. Compute conditional informationImplement conditional MI from joint context layers. Use "
+        },
+        {
+          "tag": "SECTION",
+          "cls": "lesson-ending lesson-ending--practice",
+          "x": 20,
+          "w": 350,
+          "sw": 373,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "10. Practise and connect the next questionTry each prompt before opening its hint or solut"
+        }
+      ]
+    },
+    {
+      "text": " returns decisions[0,1], wrong-mass rows(0,.10,.10),(.05,0,.20), and Pe=.45. H(Y|Z)=1.365957321 and ",
+      "right": 460.53125,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 33,
+          "w": 324,
+          "sw": 428,
+          "cw": 324,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "bayes_error returns decisions[0,1], wrong-mass rows(0,.10,.10),(.05,0,.20), and Pe=.45. H("
+        },
+        {
+          "tag": "DETAILS",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 348,
+          "cw": 348,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "Explained solutionbayes_error returns decisions[0,1], wrong-mass rows(0,.10,.10),(.05,0,.2"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-exercise",
+          "x": 20,
+          "w": 350,
+          "sw": 350,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "7. Implement the error partitionFor Z rows(.30,.10,.10),(.05,.25,.20), implement a Bayes d"
+        }
+      ]
+    },
+    {
+      "text": " function in gaussian_vib_step.py is the executable solution: call it with a single-row list to obta",
+      "right": 411.53125,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 33,
+          "w": 324,
+          "sw": 379,
+          "cw": 324,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "The complete hand function in gaussian_vib_step.py is the executable solution: call it wit"
+        },
+        {
+          "tag": "DETAILS",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 348,
+          "cw": 348,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "Explained solutionThe complete hand function in gaussian_vib_step.py is the executable sol"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-exercise",
+          "x": 20,
+          "w": 350,
+          "sw": 350,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "12. Differentiate one VIB rowImplement the row0 contribution to the six-parameter gradient"
+        }
+      ]
+    },
+    {
+      "text": "For all344 records, full MI .750428171 becomes .616057102 after Biscoe/other grouping, losing .13437",
+      "right": 496.75,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 33,
+          "w": 324,
+          "sw": 464,
+          "cw": 324,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "For all344 records, full MI .750428171 becomes .616057102 after Biscoe/other grouping, los"
+        },
+        {
+          "tag": "DETAILS",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 348,
+          "cw": 348,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "Explained solutionFor all344 records, full MI .750428171 becomes .616057102 after Biscoe/o"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-exercise",
+          "x": 20,
+          "w": 350,
+          "sw": 350,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "15. Coarsen the observed tableFrom the offline records construct species/island counts, th"
+        }
+      ]
+    }
+  ]
+}

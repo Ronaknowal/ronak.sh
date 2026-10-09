@@ -1,0 +1,6425 @@
+{
+  "status": "passed",
+  "type": "author-only browser checks",
+  "previewKind": "final production dist-tokenization-flow",
+  "base": "http://127.0.0.1:4240",
+  "build": {
+    "manifestPath": "dist-tokenization-flow/.vite/manifest.json",
+    "manifestSha256": "07a0114e26a7eaf4f3255902d5f229e524f3fa83012db16b5011d92ec61da74e"
+  },
+  "sourceSha256": {
+    "src/learn/data/topics/tokenization.jsx": "d3f3b74cee46f21d884754fd0bc286eddcc1eee2844838f9a5bb9d4741c2205b",
+    "src/learn/components/lesson-labs/SubwordStructureFigures.jsx": "ce4ef3a14228daf4320942a0e0cfb8fceaec7f14f20eeec6fadd78ecf3f74877",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "fd52d88e3f398925b2e46d979504610de7b0ef4bf02b516febe3df871e14c983",
+    "src/learn/components/lesson-labs/subword-structure-figures.css": "d60ed2212b07e9808dd6fa8846100ff75e9e8a238cdea070aa92727a42bada87",
+    "src/learn/components/lesson-labs/subword-tokenization-lessons.css": "233cfd4e954b2b089fe28a860f03c922eac258f87184b658caedb9d16f1144d0"
+  },
+  "states": [
+    "Weighted overlap aaaa×2: count6, replacements4",
+    "Empty corpus, unseen query, reset restores zero merges/corpus/query",
+    "WordPiece greedy failure despite valid alternative, invalid draft, reset",
+    "Unigram10% split wins, no-whole normalized mass.25, keyboard endpoints and reset60%"
+  ],
+  "layouts": [
+    {
+      "width": 1366,
+      "zoom": false,
+      "overflow": 0,
+      "triage": [
+        {
+          "svgIndex": 0,
+          "description": "A branching merge tree, with the three suffix merges in training order.",
+          "labelCount": 10,
+          "issues": []
+        },
+        {
+          "svgIndex": 1,
+          "description": "The pair-to-words index has two outgoing links for e+s.",
+          "labelCount": 4,
+          "issues": []
+        },
+        {
+          "svgIndex": 2,
+          "description": "Two actual prefix trees, one for starting entries and one for continuation entries.",
+          "labelCount": 11,
+          "issues": []
+        },
+        {
+          "svgIndex": 3,
+          "description": "The a edge goes from position 0 to 1, b from 1 to 2. The ab edge goes directly from 0 to 2. Exact path weights appear below.",
+          "labelCount": 6,
+          "issues": []
+        },
+        {
+          "svgIndex": 4,
+          "description": "A lattice for abab with reusable totals under each position.",
+          "labelCount": 16,
+          "issues": []
+        },
+        {
+          "svgIndex": 5,
+          "description": "Forward and suffix weights meet at a traced edge in the ab lattice.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 6,
+          "description": "Before and after removing the whole-piece edge, with the split path unchanged.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 7,
+          "description": "Two conditional sampling branches with complete outputs.",
+          "labelCount": 8,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "zoom": false,
+      "overflow": 0,
+      "triage": [
+        {
+          "svgIndex": 0,
+          "description": "A branching merge tree, with the three suffix merges in training order.",
+          "labelCount": 10,
+          "issues": []
+        },
+        {
+          "svgIndex": 1,
+          "description": "The pair-to-words index has two outgoing links for e+s.",
+          "labelCount": 4,
+          "issues": []
+        },
+        {
+          "svgIndex": 2,
+          "description": "Two actual prefix trees, one for starting entries and one for continuation entries.",
+          "labelCount": 11,
+          "issues": []
+        },
+        {
+          "svgIndex": 3,
+          "description": "The a edge goes from position 0 to 1, b from 1 to 2. The ab edge goes directly from 0 to 2. Exact path weights appear below.",
+          "labelCount": 6,
+          "issues": []
+        },
+        {
+          "svgIndex": 4,
+          "description": "A lattice for abab with reusable totals under each position.",
+          "labelCount": 16,
+          "issues": []
+        },
+        {
+          "svgIndex": 5,
+          "description": "Forward and suffix weights meet at a traced edge in the ab lattice.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 6,
+          "description": "Before and after removing the whole-piece edge, with the split path unchanged.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 7,
+          "description": "Two conditional sampling branches with complete outputs.",
+          "labelCount": 8,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "zoom": false,
+      "overflow": 0,
+      "triage": [
+        {
+          "svgIndex": 0,
+          "description": "A branching merge tree, with the three suffix merges in training order.",
+          "labelCount": 10,
+          "issues": []
+        },
+        {
+          "svgIndex": 1,
+          "description": "The pair-to-words index has two outgoing links for e+s.",
+          "labelCount": 4,
+          "issues": []
+        },
+        {
+          "svgIndex": 2,
+          "description": "Two actual prefix trees, one for starting entries and one for continuation entries.",
+          "labelCount": 11,
+          "issues": []
+        },
+        {
+          "svgIndex": 3,
+          "description": "The a edge goes from position 0 to 1, b from 1 to 2. The ab edge goes directly from 0 to 2. Exact path weights appear below.",
+          "labelCount": 6,
+          "issues": []
+        },
+        {
+          "svgIndex": 4,
+          "description": "A lattice for abab with reusable totals under each position.",
+          "labelCount": 16,
+          "issues": []
+        },
+        {
+          "svgIndex": 5,
+          "description": "Forward and suffix weights meet at a traced edge in the ab lattice.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 6,
+          "description": "Before and after removing the whole-piece edge, with the split path unchanged.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 7,
+          "description": "Two conditional sampling branches with complete outputs.",
+          "labelCount": 8,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "zoom": false,
+      "overflow": 0,
+      "triage": [
+        {
+          "svgIndex": 0,
+          "description": "A branching merge tree, with the three suffix merges in training order.",
+          "labelCount": 10,
+          "issues": []
+        },
+        {
+          "svgIndex": 1,
+          "description": "The pair-to-words index has two outgoing links for e+s.",
+          "labelCount": 4,
+          "issues": []
+        },
+        {
+          "svgIndex": 2,
+          "description": "Two actual prefix trees, one for starting entries and one for continuation entries.",
+          "labelCount": 11,
+          "issues": []
+        },
+        {
+          "svgIndex": 3,
+          "description": "The a edge goes from position 0 to 1, b from 1 to 2. The ab edge goes directly from 0 to 2. Exact path weights appear below.",
+          "labelCount": 6,
+          "issues": []
+        },
+        {
+          "svgIndex": 4,
+          "description": "A lattice for abab with reusable totals under each position.",
+          "labelCount": 16,
+          "issues": []
+        },
+        {
+          "svgIndex": 5,
+          "description": "Forward and suffix weights meet at a traced edge in the ab lattice.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 6,
+          "description": "Before and after removing the whole-piece edge, with the split path unchanged.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 7,
+          "description": "Two conditional sampling branches with complete outputs.",
+          "labelCount": 8,
+          "issues": []
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "zoom": true,
+      "overflow": 0,
+      "triage": [
+        {
+          "svgIndex": 0,
+          "description": "A branching merge tree, with the three suffix merges in training order.",
+          "labelCount": 10,
+          "issues": []
+        },
+        {
+          "svgIndex": 1,
+          "description": "The pair-to-words index has two outgoing links for e+s.",
+          "labelCount": 4,
+          "issues": []
+        },
+        {
+          "svgIndex": 2,
+          "description": "Two actual prefix trees, one for starting entries and one for continuation entries.",
+          "labelCount": 11,
+          "issues": []
+        },
+        {
+          "svgIndex": 3,
+          "description": "The a edge goes from position 0 to 1, b from 1 to 2. The ab edge goes directly from 0 to 2. Exact path weights appear below.",
+          "labelCount": 6,
+          "issues": []
+        },
+        {
+          "svgIndex": 4,
+          "description": "A lattice for abab with reusable totals under each position.",
+          "labelCount": 16,
+          "issues": []
+        },
+        {
+          "svgIndex": 5,
+          "description": "Forward and suffix weights meet at a traced edge in the ab lattice.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 6,
+          "description": "Before and after removing the whole-piece edge, with the split path unchanged.",
+          "labelCount": 8,
+          "issues": []
+        },
+        {
+          "svgIndex": 7,
+          "description": "Two conditional sampling branches with complete outputs.",
+          "labelCount": 8,
+          "issues": []
+        }
+      ]
+    }
+  ],
+  "typeSizes": [
+    {
+      "width": 1366,
+      "zoom": false,
+      "root": 16,
+      "elements": [
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "12"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "[UNK]"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lo"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lower"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "##er"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "abc"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "##c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "LOW"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice was curious."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "a"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "b"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 14,
+          "text": "Best complete path: ab | ab → .6 × .6 = .36"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 14,
+          "text": "Trace a: 1 × .2 × .2 / .64 = .0625Trace ab: 1 × .6 × 1 / .64 = .9375"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "0.2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "-0.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "0.1"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": ".2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "−.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": ".1"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "Illustrated learned embedding rows"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "V=4 rows, d=3 values per row"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "Original model row for low"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 14,
+          "text": "6 × 6 = 36 pairs"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 14,
+          "text": "2 × 2 = 4 pairs"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 14,
+          "text": "low → 7"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 14,
+          "text": "est → 7"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Characters"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 0: e + s"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 1: es + t"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 2: est + </w>"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 3: l + o"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 4: lo + w"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Text, one space"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Illustrated pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Decoded text"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Source"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Normalized"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Regions/pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "IDs"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Input"
+        },
+        {
+          "selector": ".subword-dictionary caption",
+          "fontSize": 14,
+          "text": "Illustrated vocabulary"
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "zoom": false,
+      "root": 16,
+      "elements": [
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "12"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "[UNK]"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lo"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lower"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "##er"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "abc"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "##c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "LOW"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice was curious."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "a"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "b"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 14,
+          "text": "Best complete path: ab | ab → .6 × .6 = .36"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 14,
+          "text": "Trace a: 1 × .2 × .2 / .64 = .0625Trace ab: 1 × .6 × 1 / .64 = .9375"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "0.2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "-0.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "0.1"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": ".2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "−.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": ".1"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "Illustrated learned embedding rows"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "V=4 rows, d=3 values per row"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "Original model row for low"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 14,
+          "text": "6 × 6 = 36 pairs"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 14,
+          "text": "2 × 2 = 4 pairs"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 14,
+          "text": "low → 7"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 14,
+          "text": "est → 7"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Characters"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 0: e + s"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 1: es + t"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 2: est + </w>"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 3: l + o"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 4: lo + w"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Text, one space"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Illustrated pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Decoded text"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Source"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Normalized"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Regions/pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "IDs"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Input"
+        },
+        {
+          "selector": ".subword-dictionary caption",
+          "fontSize": 14,
+          "text": "Illustrated vocabulary"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "zoom": false,
+      "root": 16,
+      "elements": [
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "12"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "[UNK]"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lo"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lower"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "##er"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "abc"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "##c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "LOW"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice was curious."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "a"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "b"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 14,
+          "text": "Best complete path: ab | ab → .6 × .6 = .36"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 14,
+          "text": "Trace a: 1 × .2 × .2 / .64 = .0625Trace ab: 1 × .6 × 1 / .64 = .9375"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "0.2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "-0.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "0.1"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": ".2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "−.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": ".1"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "Illustrated learned embedding rows"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "V=4 rows, d=3 values per row"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "Original model row for low"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 14,
+          "text": "6 × 6 = 36 pairs"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 14,
+          "text": "2 × 2 = 4 pairs"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 14,
+          "text": "low → 7"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 14,
+          "text": "est → 7"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Characters"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 0: e + s"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 1: es + t"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 2: est + </w>"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 3: l + o"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 4: lo + w"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Text, one space"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Illustrated pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Decoded text"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Source"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Normalized"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Regions/pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "IDs"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Input"
+        },
+        {
+          "selector": ".subword-dictionary caption",
+          "fontSize": 14,
+          "text": "Illustrated vocabulary"
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "zoom": false,
+      "root": 16,
+      "elements": [
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "12"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "[UNK]"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lo"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lower"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "##er"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "abc"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "##c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "LOW"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice was curious."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "▁c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "a"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 14,
+          "text": "b"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 14,
+          "text": "Best complete path: ab | ab → .6 × .6 = .36"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 14,
+          "text": "Trace a: 1 × .2 × .2 / .64 = .0625Trace ab: 1 × .6 × 1 / .64 = .9375"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "0.2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "-0.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "0.1"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": ".2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": "−.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 14,
+          "text": ".1"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "Illustrated learned embedding rows"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "V=4 rows, d=3 values per row"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 14,
+          "text": "Original model row for low"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 14,
+          "text": "6 × 6 = 36 pairs"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 14,
+          "text": "2 × 2 = 4 pairs"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 14,
+          "text": "low → 7"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 14,
+          "text": "est → 7"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Characters"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 0: e + s"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 1: es + t"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 2: est + </w>"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 3: l + o"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Rank 4: lo + w"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Text, one space"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Illustrated pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Decoded text"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Source"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Normalized"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Regions/pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "IDs"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 14,
+          "text": "Input"
+        },
+        {
+          "selector": ".subword-dictionary caption",
+          "fontSize": 14,
+          "text": "Illustrated vocabulary"
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "zoom": true,
+      "root": 32,
+      "elements": [
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "12"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "[UNK]"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "r"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "n"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "d"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "est"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "l"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "o"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "lo"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "est</w>"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "e"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "w"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "es"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "t"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "lower"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "##er"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "lowest"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "abc"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "##c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "▁low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "LOW"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "␠"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "low"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "7"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "Alice was curious."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "Alice"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "▁was"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "▁c"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "ur"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "i"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "ou"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "s"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "."
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "ab"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "a"
+        },
+        {
+          "selector": ".subword-spans > span",
+          "fontSize": 28,
+          "text": "b"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 28,
+          "text": "Best complete path: ab | ab → .6 × .6 = .36"
+        },
+        {
+          "selector": ".subword-credit-calculation",
+          "fontSize": 28,
+          "text": "Trace a: 1 × .2 × .2 / .64 = .0625Trace ab: 1 × .6 × 1 / .64 = .9375"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "0.2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "-0.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "0.1"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "·"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "•"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": ".2"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": "−.4"
+        },
+        {
+          "selector": ".subword-matrix td",
+          "fontSize": 28,
+          "text": ".1"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 28,
+          "text": "Illustrated learned embedding rows"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 28,
+          "text": "V=4 rows, d=3 values per row"
+        },
+        {
+          "selector": ".subword-matrix caption",
+          "fontSize": 28,
+          "text": "Original model row for low"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 28,
+          "text": "6 × 6 = 36 pairs"
+        },
+        {
+          "selector": ".subword-pair-grid > span",
+          "fontSize": 28,
+          "text": "2 × 2 = 4 pairs"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 28,
+          "text": "low → 7"
+        },
+        {
+          "selector": ".subword-compatibility-rows code",
+          "fontSize": 28,
+          "text": "est → 7"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Characters"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Rank 0: e + s"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Rank 1: es + t"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Rank 2: est + </w>"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Rank 3: l + o"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Rank 4: lo + w"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Text, one space"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Illustrated pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Decoded text"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Source"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Normalized"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Regions/pieces"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "IDs"
+        },
+        {
+          "selector": ".subword-rank-frame > span",
+          "fontSize": 28,
+          "text": "Input"
+        },
+        {
+          "selector": ".subword-dictionary caption",
+          "fontSize": 28,
+          "text": "Illustrated vocabulary"
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "name": "bpe-five-merges-desktop",
+      "selector": "[data-lab=\"bpe-merge-trainer\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-five-merges-desktop.png"
+    },
+    {
+      "name": "bpe-overlap-desktop",
+      "selector": "[data-lab=\"bpe-merge-trainer\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-overlap-desktop.png"
+    },
+    {
+      "name": "bpe-empty-desktop",
+      "selector": "[data-lab=\"bpe-merge-trainer\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-empty-desktop.png"
+    },
+    {
+      "name": "bpe-unseen-desktop",
+      "selector": "[data-lab=\"bpe-merge-trainer\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-unseen-desktop.png"
+    },
+    {
+      "name": "wordpiece-greedy-failure-desktop",
+      "selector": "[data-lab=\"wordpiece-greedy-path\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-greedy-failure-desktop.png"
+    },
+    {
+      "name": "unigram-split-wins-desktop",
+      "selector": "[data-lab=\"unigram-segmentation-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-split-wins-desktop.png"
+    },
+    {
+      "name": "unigram-no-whole-desktop",
+      "selector": "[data-lab=\"unigram-segmentation-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-no-whole-desktop.png"
+    },
+    {
+      "name": "text-vocabulary-id-correspondence-1366",
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-vocabulary-id-correspondence-1366.png"
+    },
+    {
+      "name": "same-spelling-three-units-1366",
+      "selector": "figure[data-figure=\"same-spelling-three-units\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-spelling-three-units-1366.png"
+    },
+    {
+      "name": "weighted-corpus-first-merge-1366",
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/weighted-corpus-first-merge-1366.png"
+    },
+    {
+      "name": "bpe-suffix-merge-tree-1366",
+      "selector": "figure[data-figure=\"bpe-suffix-merge-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-suffix-merge-tree-1366.png"
+    },
+    {
+      "name": "bpe-word-segments-1366",
+      "selector": "figure[data-figure=\"bpe-word-segments\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-word-segments-1366.png"
+    },
+    {
+      "name": "bpe-query-pieces-1366",
+      "selector": "figure[data-figure=\"bpe-query-pieces\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-query-pieces-1366.png"
+    },
+    {
+      "name": "saved-rank-new-word-trace-1366",
+      "selector": "figure[data-figure=\"saved-rank-new-word-trace\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/saved-rank-new-word-trace-1366.png"
+    },
+    {
+      "name": "bpe-index-neighbor-links-1366",
+      "selector": "figure[data-figure=\"bpe-index-neighbor-links\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-index-neighbor-links-1366.png"
+    },
+    {
+      "name": "wordpiece-ordinary-success-1366",
+      "selector": "figure[data-figure=\"wordpiece-ordinary-success\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-ordinary-success-1366.png"
+    },
+    {
+      "name": "wordpiece-path-1366",
+      "selector": "figure[data-figure=\"wordpiece-path\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-path-1366.png"
+    },
+    {
+      "name": "wordpiece-two-prefix-trees-1366",
+      "selector": "figure[data-figure=\"wordpiece-two-prefix-trees\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-two-prefix-trees-1366.png"
+    },
+    {
+      "name": "unigram-position-lattice-1366",
+      "selector": "figure[data-figure=\"unigram-position-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-position-lattice-1366.png"
+    },
+    {
+      "name": "unigram-shared-prefix-dp-1366",
+      "selector": "figure[data-figure=\"unigram-shared-prefix-dp\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-shared-prefix-dp-1366.png"
+    },
+    {
+      "name": "unigram-forward-backward-credit-1366",
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-forward-backward-credit-1366.png"
+    },
+    {
+      "name": "fixed-weight-path-removal-1366",
+      "selector": "figure[data-figure=\"fixed-weight-path-removal\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/fixed-weight-path-removal-1366.png"
+    },
+    {
+      "name": "unigram-posterior-sampling-tree-1366",
+      "selector": "figure[data-figure=\"unigram-posterior-sampling-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-posterior-sampling-tree-1366.png"
+    },
+    {
+      "name": "sentencepiece-space-span-1366",
+      "selector": "figure[data-figure=\"sentencepiece-space-span\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/sentencepiece-space-span-1366.png"
+    },
+    {
+      "name": "text-transform-id-row-pipeline-1366",
+      "selector": "figure[data-figure=\"text-transform-id-row-pipeline\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-transform-id-row-pipeline-1366.png"
+    },
+    {
+      "name": "recorded-native-pieces-space-contrast-1366",
+      "selector": "figure[data-figure=\"recorded-native-pieces-space-contrast\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/recorded-native-pieces-space-contrast-1366.png"
+    },
+    {
+      "name": "vocabulary-matrix-attention-pair-grids-1366",
+      "selector": "figure[data-figure=\"vocabulary-matrix-attention-pair-grids\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/vocabulary-matrix-attention-pair-grids-1366.png"
+    },
+    {
+      "name": "same-id-wrong-piece-and-fragment-boundary-1366",
+      "selector": "figure[data-figure=\"same-id-wrong-piece-and-fragment-boundary\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-id-wrong-piece-and-fragment-boundary-1366.png"
+    },
+    {
+      "name": "text-vocabulary-id-correspondence-768",
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-vocabulary-id-correspondence-768.png"
+    },
+    {
+      "name": "same-spelling-three-units-768",
+      "selector": "figure[data-figure=\"same-spelling-three-units\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-spelling-three-units-768.png"
+    },
+    {
+      "name": "weighted-corpus-first-merge-768",
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/weighted-corpus-first-merge-768.png"
+    },
+    {
+      "name": "bpe-suffix-merge-tree-768",
+      "selector": "figure[data-figure=\"bpe-suffix-merge-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-suffix-merge-tree-768.png"
+    },
+    {
+      "name": "bpe-word-segments-768",
+      "selector": "figure[data-figure=\"bpe-word-segments\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-word-segments-768.png"
+    },
+    {
+      "name": "bpe-query-pieces-768",
+      "selector": "figure[data-figure=\"bpe-query-pieces\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-query-pieces-768.png"
+    },
+    {
+      "name": "saved-rank-new-word-trace-768",
+      "selector": "figure[data-figure=\"saved-rank-new-word-trace\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/saved-rank-new-word-trace-768.png"
+    },
+    {
+      "name": "bpe-index-neighbor-links-768",
+      "selector": "figure[data-figure=\"bpe-index-neighbor-links\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-index-neighbor-links-768.png"
+    },
+    {
+      "name": "wordpiece-ordinary-success-768",
+      "selector": "figure[data-figure=\"wordpiece-ordinary-success\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-ordinary-success-768.png"
+    },
+    {
+      "name": "wordpiece-path-768",
+      "selector": "figure[data-figure=\"wordpiece-path\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-path-768.png"
+    },
+    {
+      "name": "wordpiece-two-prefix-trees-768",
+      "selector": "figure[data-figure=\"wordpiece-two-prefix-trees\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-two-prefix-trees-768.png"
+    },
+    {
+      "name": "unigram-position-lattice-768",
+      "selector": "figure[data-figure=\"unigram-position-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-position-lattice-768.png"
+    },
+    {
+      "name": "unigram-shared-prefix-dp-768",
+      "selector": "figure[data-figure=\"unigram-shared-prefix-dp\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-shared-prefix-dp-768.png"
+    },
+    {
+      "name": "unigram-forward-backward-credit-768",
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-forward-backward-credit-768.png"
+    },
+    {
+      "name": "fixed-weight-path-removal-768",
+      "selector": "figure[data-figure=\"fixed-weight-path-removal\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/fixed-weight-path-removal-768.png"
+    },
+    {
+      "name": "unigram-posterior-sampling-tree-768",
+      "selector": "figure[data-figure=\"unigram-posterior-sampling-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-posterior-sampling-tree-768.png"
+    },
+    {
+      "name": "sentencepiece-space-span-768",
+      "selector": "figure[data-figure=\"sentencepiece-space-span\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/sentencepiece-space-span-768.png"
+    },
+    {
+      "name": "text-transform-id-row-pipeline-768",
+      "selector": "figure[data-figure=\"text-transform-id-row-pipeline\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-transform-id-row-pipeline-768.png"
+    },
+    {
+      "name": "recorded-native-pieces-space-contrast-768",
+      "selector": "figure[data-figure=\"recorded-native-pieces-space-contrast\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/recorded-native-pieces-space-contrast-768.png"
+    },
+    {
+      "name": "vocabulary-matrix-attention-pair-grids-768",
+      "selector": "figure[data-figure=\"vocabulary-matrix-attention-pair-grids\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/vocabulary-matrix-attention-pair-grids-768.png"
+    },
+    {
+      "name": "same-id-wrong-piece-and-fragment-boundary-768",
+      "selector": "figure[data-figure=\"same-id-wrong-piece-and-fragment-boundary\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-id-wrong-piece-and-fragment-boundary-768.png"
+    },
+    {
+      "name": "text-vocabulary-id-correspondence-390",
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-vocabulary-id-correspondence-390.png"
+    },
+    {
+      "name": "same-spelling-three-units-390",
+      "selector": "figure[data-figure=\"same-spelling-three-units\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-spelling-three-units-390.png"
+    },
+    {
+      "name": "weighted-corpus-first-merge-390",
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/weighted-corpus-first-merge-390.png"
+    },
+    {
+      "name": "bpe-suffix-merge-tree-390",
+      "selector": "figure[data-figure=\"bpe-suffix-merge-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-suffix-merge-tree-390.png"
+    },
+    {
+      "name": "bpe-word-segments-390",
+      "selector": "figure[data-figure=\"bpe-word-segments\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-word-segments-390.png"
+    },
+    {
+      "name": "bpe-query-pieces-390",
+      "selector": "figure[data-figure=\"bpe-query-pieces\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-query-pieces-390.png"
+    },
+    {
+      "name": "saved-rank-new-word-trace-390",
+      "selector": "figure[data-figure=\"saved-rank-new-word-trace\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/saved-rank-new-word-trace-390.png"
+    },
+    {
+      "name": "bpe-index-neighbor-links-390",
+      "selector": "figure[data-figure=\"bpe-index-neighbor-links\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-index-neighbor-links-390.png"
+    },
+    {
+      "name": "wordpiece-ordinary-success-390",
+      "selector": "figure[data-figure=\"wordpiece-ordinary-success\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-ordinary-success-390.png"
+    },
+    {
+      "name": "wordpiece-path-390",
+      "selector": "figure[data-figure=\"wordpiece-path\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-path-390.png"
+    },
+    {
+      "name": "wordpiece-two-prefix-trees-390",
+      "selector": "figure[data-figure=\"wordpiece-two-prefix-trees\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-two-prefix-trees-390.png"
+    },
+    {
+      "name": "unigram-position-lattice-390",
+      "selector": "figure[data-figure=\"unigram-position-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-position-lattice-390.png"
+    },
+    {
+      "name": "unigram-shared-prefix-dp-390",
+      "selector": "figure[data-figure=\"unigram-shared-prefix-dp\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-shared-prefix-dp-390.png"
+    },
+    {
+      "name": "unigram-forward-backward-credit-390",
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-forward-backward-credit-390.png"
+    },
+    {
+      "name": "fixed-weight-path-removal-390",
+      "selector": "figure[data-figure=\"fixed-weight-path-removal\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/fixed-weight-path-removal-390.png"
+    },
+    {
+      "name": "unigram-posterior-sampling-tree-390",
+      "selector": "figure[data-figure=\"unigram-posterior-sampling-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-posterior-sampling-tree-390.png"
+    },
+    {
+      "name": "sentencepiece-space-span-390",
+      "selector": "figure[data-figure=\"sentencepiece-space-span\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/sentencepiece-space-span-390.png"
+    },
+    {
+      "name": "text-transform-id-row-pipeline-390",
+      "selector": "figure[data-figure=\"text-transform-id-row-pipeline\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-transform-id-row-pipeline-390.png"
+    },
+    {
+      "name": "recorded-native-pieces-space-contrast-390",
+      "selector": "figure[data-figure=\"recorded-native-pieces-space-contrast\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/recorded-native-pieces-space-contrast-390.png"
+    },
+    {
+      "name": "vocabulary-matrix-attention-pair-grids-390",
+      "selector": "figure[data-figure=\"vocabulary-matrix-attention-pair-grids\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/vocabulary-matrix-attention-pair-grids-390.png"
+    },
+    {
+      "name": "same-id-wrong-piece-and-fragment-boundary-390",
+      "selector": "figure[data-figure=\"same-id-wrong-piece-and-fragment-boundary\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-id-wrong-piece-and-fragment-boundary-390.png"
+    },
+    {
+      "name": "text-vocabulary-id-correspondence-320",
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-vocabulary-id-correspondence-320.png"
+    },
+    {
+      "name": "same-spelling-three-units-320",
+      "selector": "figure[data-figure=\"same-spelling-three-units\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-spelling-three-units-320.png"
+    },
+    {
+      "name": "weighted-corpus-first-merge-320",
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/weighted-corpus-first-merge-320.png"
+    },
+    {
+      "name": "bpe-suffix-merge-tree-320",
+      "selector": "figure[data-figure=\"bpe-suffix-merge-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-suffix-merge-tree-320.png"
+    },
+    {
+      "name": "bpe-word-segments-320",
+      "selector": "figure[data-figure=\"bpe-word-segments\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-word-segments-320.png"
+    },
+    {
+      "name": "bpe-query-pieces-320",
+      "selector": "figure[data-figure=\"bpe-query-pieces\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-query-pieces-320.png"
+    },
+    {
+      "name": "saved-rank-new-word-trace-320",
+      "selector": "figure[data-figure=\"saved-rank-new-word-trace\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/saved-rank-new-word-trace-320.png"
+    },
+    {
+      "name": "bpe-index-neighbor-links-320",
+      "selector": "figure[data-figure=\"bpe-index-neighbor-links\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-index-neighbor-links-320.png"
+    },
+    {
+      "name": "wordpiece-ordinary-success-320",
+      "selector": "figure[data-figure=\"wordpiece-ordinary-success\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-ordinary-success-320.png"
+    },
+    {
+      "name": "wordpiece-path-320",
+      "selector": "figure[data-figure=\"wordpiece-path\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-path-320.png"
+    },
+    {
+      "name": "wordpiece-two-prefix-trees-320",
+      "selector": "figure[data-figure=\"wordpiece-two-prefix-trees\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-two-prefix-trees-320.png"
+    },
+    {
+      "name": "unigram-position-lattice-320",
+      "selector": "figure[data-figure=\"unigram-position-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-position-lattice-320.png"
+    },
+    {
+      "name": "unigram-shared-prefix-dp-320",
+      "selector": "figure[data-figure=\"unigram-shared-prefix-dp\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-shared-prefix-dp-320.png"
+    },
+    {
+      "name": "unigram-forward-backward-credit-320",
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-forward-backward-credit-320.png"
+    },
+    {
+      "name": "fixed-weight-path-removal-320",
+      "selector": "figure[data-figure=\"fixed-weight-path-removal\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/fixed-weight-path-removal-320.png"
+    },
+    {
+      "name": "unigram-posterior-sampling-tree-320",
+      "selector": "figure[data-figure=\"unigram-posterior-sampling-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-posterior-sampling-tree-320.png"
+    },
+    {
+      "name": "sentencepiece-space-span-320",
+      "selector": "figure[data-figure=\"sentencepiece-space-span\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/sentencepiece-space-span-320.png"
+    },
+    {
+      "name": "text-transform-id-row-pipeline-320",
+      "selector": "figure[data-figure=\"text-transform-id-row-pipeline\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-transform-id-row-pipeline-320.png"
+    },
+    {
+      "name": "recorded-native-pieces-space-contrast-320",
+      "selector": "figure[data-figure=\"recorded-native-pieces-space-contrast\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/recorded-native-pieces-space-contrast-320.png"
+    },
+    {
+      "name": "vocabulary-matrix-attention-pair-grids-320",
+      "selector": "figure[data-figure=\"vocabulary-matrix-attention-pair-grids\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/vocabulary-matrix-attention-pair-grids-320.png"
+    },
+    {
+      "name": "same-id-wrong-piece-and-fragment-boundary-320",
+      "selector": "figure[data-figure=\"same-id-wrong-piece-and-fragment-boundary\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-id-wrong-piece-and-fragment-boundary-320.png"
+    },
+    {
+      "name": "text-vocabulary-id-correspondence-768-text200",
+      "selector": "figure[data-figure=\"text-vocabulary-id-correspondence\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-vocabulary-id-correspondence-768-text200.png"
+    },
+    {
+      "name": "same-spelling-three-units-768-text200",
+      "selector": "figure[data-figure=\"same-spelling-three-units\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-spelling-three-units-768-text200.png"
+    },
+    {
+      "name": "weighted-corpus-first-merge-768-text200",
+      "selector": "figure[data-figure=\"weighted-corpus-first-merge\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/weighted-corpus-first-merge-768-text200.png"
+    },
+    {
+      "name": "bpe-suffix-merge-tree-768-text200",
+      "selector": "figure[data-figure=\"bpe-suffix-merge-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-suffix-merge-tree-768-text200.png"
+    },
+    {
+      "name": "bpe-word-segments-768-text200",
+      "selector": "figure[data-figure=\"bpe-word-segments\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-word-segments-768-text200.png"
+    },
+    {
+      "name": "bpe-query-pieces-768-text200",
+      "selector": "figure[data-figure=\"bpe-query-pieces\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-query-pieces-768-text200.png"
+    },
+    {
+      "name": "saved-rank-new-word-trace-768-text200",
+      "selector": "figure[data-figure=\"saved-rank-new-word-trace\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/saved-rank-new-word-trace-768-text200.png"
+    },
+    {
+      "name": "bpe-index-neighbor-links-768-text200",
+      "selector": "figure[data-figure=\"bpe-index-neighbor-links\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/bpe-index-neighbor-links-768-text200.png"
+    },
+    {
+      "name": "wordpiece-ordinary-success-768-text200",
+      "selector": "figure[data-figure=\"wordpiece-ordinary-success\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-ordinary-success-768-text200.png"
+    },
+    {
+      "name": "wordpiece-path-768-text200",
+      "selector": "figure[data-figure=\"wordpiece-path\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-path-768-text200.png"
+    },
+    {
+      "name": "wordpiece-two-prefix-trees-768-text200",
+      "selector": "figure[data-figure=\"wordpiece-two-prefix-trees\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/wordpiece-two-prefix-trees-768-text200.png"
+    },
+    {
+      "name": "unigram-position-lattice-768-text200",
+      "selector": "figure[data-figure=\"unigram-position-lattice\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-position-lattice-768-text200.png"
+    },
+    {
+      "name": "unigram-shared-prefix-dp-768-text200",
+      "selector": "figure[data-figure=\"unigram-shared-prefix-dp\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-shared-prefix-dp-768-text200.png"
+    },
+    {
+      "name": "unigram-forward-backward-credit-768-text200",
+      "selector": "figure[data-figure=\"unigram-forward-backward-credit\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-forward-backward-credit-768-text200.png"
+    },
+    {
+      "name": "fixed-weight-path-removal-768-text200",
+      "selector": "figure[data-figure=\"fixed-weight-path-removal\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/fixed-weight-path-removal-768-text200.png"
+    },
+    {
+      "name": "unigram-posterior-sampling-tree-768-text200",
+      "selector": "figure[data-figure=\"unigram-posterior-sampling-tree\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/unigram-posterior-sampling-tree-768-text200.png"
+    },
+    {
+      "name": "sentencepiece-space-span-768-text200",
+      "selector": "figure[data-figure=\"sentencepiece-space-span\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/sentencepiece-space-span-768-text200.png"
+    },
+    {
+      "name": "text-transform-id-row-pipeline-768-text200",
+      "selector": "figure[data-figure=\"text-transform-id-row-pipeline\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/text-transform-id-row-pipeline-768-text200.png"
+    },
+    {
+      "name": "recorded-native-pieces-space-contrast-768-text200",
+      "selector": "figure[data-figure=\"recorded-native-pieces-space-contrast\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/recorded-native-pieces-space-contrast-768-text200.png"
+    },
+    {
+      "name": "vocabulary-matrix-attention-pair-grids-768-text200",
+      "selector": "figure[data-figure=\"vocabulary-matrix-attention-pair-grids\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/vocabulary-matrix-attention-pair-grids-768-text200.png"
+    },
+    {
+      "name": "same-id-wrong-piece-and-fragment-boundary-768-text200",
+      "selector": "figure[data-figure=\"same-id-wrong-piece-and-fragment-boundary\"]",
+      "path": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/reading-flow-evidence/screenshots/same-id-wrong-piece-and-fragment-boundary-768-text200.png"
+    }
+  ],
+  "errors": []
+}

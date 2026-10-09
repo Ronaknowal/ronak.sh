@@ -1,0 +1,53 @@
+.scaling-laws-flow .scaling-figure { margin:1.7rem 0; min-width:0; }
+.scaling-laws-flow :is(p,li) { overflow-wrap:anywhere; }
+.scaling-laws-flow .scaling-figure p { margin:.7rem 0; }
+.scaling-laws-flow .scaling-scroll,.scaling-laws-flow .scaling-math { max-width:100%; overflow-x:auto; padding-bottom:.5rem; }
+.scaling-laws-flow .scaling-scroll:focus-visible,.scaling-laws-flow .scaling-math:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+.scaling-laws-flow .scaling-plot { display:block; width:100%; min-width:36rem; }
+.scaling-laws-flow .scaling-responsive-plot { min-width:21.875rem; }
+.scaling-laws-flow .scaling-plot text { font:14px var(--font-sans, sans-serif); fill:#ddd; }
+.scaling-laws-flow .scaling-grid line { stroke:#555; stroke-width:.5; opacity:.6; }
+.scaling-laws-flow .scaling-legend { display:flex; flex-wrap:wrap; gap:.65rem 1.1rem; margin:.8rem 0; }
+.scaling-laws-flow .scaling-legend span { display:flex; align-items:center; gap:.4rem; }
+.scaling-laws-flow .scaling-legend i { width:1rem; height:.3rem; display:inline-block; }
+.scaling-laws-flow .scaling-bars { display:grid; gap:.8rem; }
+.scaling-laws-flow .scaling-bar-row { display:grid; grid-template-columns:11rem minmax(3rem,1fr) 6rem; gap:.8rem; align-items:center; }
+.scaling-laws-flow .scaling-bar-track { height:1.5rem; border-bottom:1px solid #777; }
+.scaling-laws-flow .scaling-bar-track i { display:block; height:1.25rem; }
+.scaling-laws-flow .scaling-plots-pair { display:grid; gap:1.4rem; grid-template-columns:minmax(0,1fr); }
+.scaling-laws-flow .scaling-cross-section { display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; border-top:1px solid #555; padding-top:.5rem; }
+.scaling-laws-flow .scaling-cross-section p { flex-basis:100%; }
+.scaling-laws-flow .scaling-balance-equation { text-align:center; font-size:1.15rem; }
+.scaling-laws-flow .scaling-schedules { display:flex; flex-wrap:wrap; gap:1rem; }
+.scaling-laws-flow .scaling-schedules > div { flex:1 1 10rem; display:grid; gap:.3rem; }
+.scaling-laws-flow .scaling-schedules svg { width:100%; max-width:18rem; }
+.scaling-laws-flow .scaling-schedules span { font-size:.9rem; }
+.scaling-laws-flow .scaling-residual { display:grid; gap:.35rem; margin-top:1rem; }
+.scaling-laws-flow .scaling-residual-axis { height:1.5rem; background:linear-gradient(90deg,transparent 49.7%,#aaa 49.7%,#aaa 50.3%,transparent 50.3%); position:relative; border-bottom:1px solid #777; }
+.scaling-laws-flow .scaling-residual-axis i { position:absolute; height:1.2rem; }
+.scaling-laws-flow .scaling-table { border-collapse:collapse; width:100%; min-width:37rem; }
+.scaling-laws-flow .scaling-table :is(th,td) { border-bottom:1px solid #555; padding:.65rem .55rem; text-align:center; font-weight:400; }
+.scaling-laws-flow .scaling-table caption { text-align:left; padding:.6rem 0; }
+.scaling-laws-flow .scaling-sensitivity { height:.75rem; min-width:3rem; position:relative; background:linear-gradient(90deg,transparent 49%,#777 49%,#777 51%,transparent 51%); }
+.scaling-laws-flow .scaling-sensitivity i { height:.65rem; position:absolute; }
+.scaling-laws-flow .scaling-token-passes { display:grid; gap:1.3rem; }
+.scaling-laws-flow .scaling-token-passes > div { display:grid; gap:.5rem; }
+.scaling-laws-flow .scaling-token-row { display:flex; flex-wrap:wrap; gap:.5rem; }
+.scaling-laws-flow .scaling-token { display:grid; border:1px solid currentColor; padding:.35rem .5rem; min-width:3rem; }
+.scaling-laws-flow .scaling-token small { font-size:.75rem; }
+.scaling-laws-flow .scaling-pass-weight { width:100%; height:.65rem; background:#333; }
+.scaling-laws-flow .scaling-pass-weight i { display:block; background:#bbb; height:100%; }
+.scaling-laws-flow .scaling-costs { display:grid; gap:1rem; }
+.scaling-laws-flow .scaling-costs > div { display:grid; gap:.4rem; }
+.scaling-laws-flow .scaling-cost-track { display:flex; width:100%; height:1.5rem; background:#222; }
+.scaling-laws-flow .scaling-cost-track i { height:100%; }
+.scaling-laws-flow .scaling-unit-equations { text-align:center; }
+.scaling-laws-flow .scaling-unit-equations p { display:flex; justify-content:center; flex-wrap:wrap; gap:.6rem; align-items:center; }
+.scaling-laws-flow .scaling-utilization { display:grid; gap:.5rem; }
+.scaling-laws-flow .scaling-utilization > div { height:1.6rem; background:#333; }
+.scaling-laws-flow .scaling-utilization i { display:block; height:100%; }
+.scaling-laws-flow .scaling-anchor { scroll-margin-top:7rem; }
+@media(max-width:900px) {
+  .scaling-laws-flow .scaling-bar-row { grid-template-columns:minmax(0,1fr) 6rem; gap:.4rem; }
+  .scaling-laws-flow .scaling-bar-row > span { grid-column:1 / -1; }
+}

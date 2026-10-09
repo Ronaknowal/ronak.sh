@@ -1,0 +1,1698 @@
+{
+  "outputs": {
+    "sampling": {
+      "single_step": {
+        "probabilities": [
+          0.55,
+          0.25,
+          0.15,
+          0.049999999999999996
+        ],
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "kept": [
+          0,
+          1
+        ],
+        "nucleus": [
+          0.6875,
+          0.3125,
+          0.0,
+          0.0
+        ],
+        "ordered_cumulative": [
+          0.55,
+          0.8,
+          0.9500000000000001,
+          1.0
+        ]
+      },
+      "sequence": {
+        "steps": [
+          {
+            "step": 0,
+            "previous": 0,
+            "uniform": 0.8,
+            "distribution": [
+              0.5789473684210527,
+              0.2631578947368421,
+              0.15789473684210525,
+              0.0
+            ],
+            "token": 1
+          },
+          {
+            "step": 1,
+            "previous": 1,
+            "uniform": 0.8,
+            "distribution": [
+              0.10000000000000003,
+              0.20000000000000004,
+              0.10000000000000003,
+              0.6
+            ],
+            "token": 3
+          }
+        ],
+        "termination": "EOS"
+      }
+    },
+    "verification": {
+      "tasks": [
+        {
+          "id": 0,
+          "expression": "(9 + 7) * 5",
+          "answer": "80"
+        },
+        {
+          "id": 1,
+          "expression": "(6 + 5) * 3",
+          "answer": "33"
+        },
+        {
+          "id": 2,
+          "expression": "(9 + 5) * 2",
+          "answer": "28"
+        },
+        {
+          "id": 3,
+          "expression": "(1 + 4) * 7",
+          "answer": "35"
+        },
+        {
+          "id": 4,
+          "expression": "(7 + 5) * 9",
+          "answer": "108"
+        }
+      ],
+      "candidates": [
+        {
+          "final_correct": true,
+          "steps_valid": [
+            false,
+            false
+          ],
+          "all_equalities_valid": false
+        },
+        {
+          "final_correct": true,
+          "steps_valid": [
+            false,
+            false
+          ],
+          "all_equalities_valid": false
+        },
+        {
+          "final_correct": false,
+          "steps_valid": [
+            false
+          ],
+          "all_equalities_valid": false
+        }
+      ],
+      "selection": {
+        "accepted_correct_mass": 0.54,
+        "accepted_wrong_mass": 0.08000000000000002,
+        "acceptance": 0.6200000000000001,
+        "precision": 0.8709677419354838,
+        "recall": 0.9,
+        "cost_per_keep": 0.08064516129032256
+      }
+    },
+    "corpus": {
+      "records": [
+        {
+          "id": "train-00",
+          "split": "train",
+          "text": "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, “and what is the use of a book,” thought Alice “without pictures or conversations?”",
+          "normalized_sha256": "13059a06f39e742eb543f71d331c6088785a34f5286433aec07e4f023e327e70"
+        },
+        {
+          "id": "train-01",
+          "split": "train",
+          "text": "So she was considering in her own mind (as well as she could, for the hot day made her feel very sleepy and stupid), whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly a White Rabbit with pink eyes ran close by her.",
+          "normalized_sha256": "bcc1283dd130bea7e0770f8d354880f7ee1085748a4c5ee7d75cc59cef3d21fa"
+        },
+        {
+          "id": "train-02",
+          "split": "train",
+          "text": "There was nothing so _very_ remarkable in that; nor did Alice think it so _very_ much out of the way to hear the Rabbit say to itself, “Oh dear! Oh dear! I shall be late!” (when she thought it over afterwards, it occurred to her that she ought to have wondered at this, but at the time it all seemed quite natural); but when the Rabbit actually _took a watch out of its waistcoat-pocket_, and looked at it, and then hurried on, Alice started to her feet, for it flashed across her mind that she had never before seen a rabbit with either a waistcoat-pocket, or a watch to take out of it, and burning with curiosity, she ran across the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge.",
+          "normalized_sha256": "242f0f8d62eccd5833ffad238afe7021ab29523a4e7885f8cbde5c23b9e1d06c"
+        },
+        {
+          "id": "train-03",
+          "split": "train",
+          "text": "In another moment down went Alice after it, never once considering how in the world she was to get out again.",
+          "normalized_sha256": "8bac4410bbd387155b5a0701e07729b603da4aef506337ab51f9f797cbf2a869"
+        },
+        {
+          "id": "train-04",
+          "split": "train",
+          "text": "The rabbit-hole went straight on like a tunnel for some way, and then dipped suddenly down, so suddenly that Alice had not a moment to think about stopping herself before she found herself falling down a very deep well.",
+          "normalized_sha256": "b32a939f5efba10162e2bc37bb6360f27779cea25bad2fadf86f65d18ed690ad"
+        },
+        {
+          "id": "train-05",
+          "split": "train",
+          "text": "Either the well was very deep, or she fell very slowly, for she had plenty of time as she went down to look about her and to wonder what was going to happen next. First, she tried to look down and make out what she was coming to, but it was too dark to see anything; then she looked at the sides of the well, and noticed that they were filled with cupboards and book-shelves; here and there she saw maps and pictures hung upon pegs. She took down a jar from one of the shelves as she passed; it was labelled “ORANGE MARMALADE”, but to her great disappointment it was empty: she did not like to drop the jar for fear of killing somebody underneath, so managed to put it into one of the cupboards as she fell past it.",
+          "normalized_sha256": "fd72f2efbfc48a493af23f617c6a2a3242af11f504bdf061289c1fbf6cb73087"
+        },
+        {
+          "id": "train-06",
+          "split": "train",
+          "text": "“Well!” thought Alice to herself, “after such a fall as this, I shall think nothing of tumbling down stairs! How brave they’ll all think me at home! Why, I wouldn’t say anything about it, even if I fell off the top of the house!” (Which was very likely true.)",
+          "normalized_sha256": "97a80d65b9dcf649a1becf873d7cf455cc4acb3fc4c17ceee25e759767ae8d50"
+        },
+        {
+          "id": "train-07",
+          "split": "train",
+          "text": "Down, down, down. Would the fall _never_ come to an end? “I wonder how many miles I’ve fallen by this time?” she said aloud. “I must be getting somewhere near the centre of the earth. Let me see: that would be four thousand miles down, I think—” (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a _very_ good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) “—yes, that’s about the right distance—but then I wonder what Latitude or Longitude I’ve got to?” (Alice had no idea what Latitude was, or Longitude either, but thought they were nice grand words to say.)",
+          "normalized_sha256": "cc109dacf649d7742794696c7ab907708e86d2f349fca2792afb69c511692bb0"
+        },
+        {
+          "id": "train-08",
+          "split": "train",
+          "text": "Presently she began again. “I wonder if I shall fall right _through_ the earth! How funny it’ll seem to come out among the people that walk with their heads downward! The Antipathies, I think—” (she was rather glad there _was_ no one listening, this time, as it didn’t sound at all the right word) “—but I shall have to ask them what the name of the country is, you know. Please, Ma’am, is this New Zealand or Australia?” (and she tried to curtsey as she spoke—fancy _curtseying_ as you’re falling through the air! Do you think you could manage it?) “And what an ignorant little girl she’ll think me for asking! No, it’ll never do to ask: perhaps I shall see it written up somewhere.”",
+          "normalized_sha256": "d4db450236b584e0609e133a2c72aeeca0d24b3bbee77646294fb9acbcd5aa39"
+        },
+        {
+          "id": "train-09",
+          "split": "train",
+          "text": "Down, down, down. There was nothing else to do, so Alice soon began talking again. “Dinah’ll miss me very much to-night, I should think!” (Dinah was the cat.) “I hope they’ll remember her saucer of milk at tea-time. Dinah my dear! I wish you were down here with me! There are no mice in the air, I’m afraid, but you might catch a bat, and that’s very like a mouse, you know. But do cats eat bats, I wonder?” And here Alice began to get rather sleepy, and went on saying to herself, in a dreamy sort of way, “Do cats eat bats? Do cats eat bats?” and sometimes, “Do bats eat cats?” for, you see, as she couldn’t answer either question, it didn’t much matter which way she put it. She felt that she was dozing off, and had just begun to dream that she was walking hand in hand with Dinah, and saying to her very earnestly, “Now, Dinah, tell me the truth: did you ever eat a bat?” when suddenly, thump! thump! down she came upon a heap of sticks and dry leaves, and the fall was over.",
+          "normalized_sha256": "31165e4e585aa687bcd74b48b6c44ae113f17ab77a5fde39cfa20c3098297ef2"
+        },
+        {
+          "id": "train-10",
+          "split": "train",
+          "text": "Alice was not a bit hurt, and she jumped up on to her feet in a moment: she looked up, but it was all dark overhead; before her was another long passage, and the White Rabbit was still in sight, hurrying down it. There was not a moment to be lost: away went Alice like the wind, and was just in time to hear it say, as it turned a corner, “Oh my ears and whiskers, how late it’s getting!” She was close behind it when she turned the corner, but the Rabbit was no longer to be seen: she found herself in a long, low hall, which was lit up by a row of lamps hanging from the roof.",
+          "normalized_sha256": "0da128b4e65b781b4d32ace837d6eab6624878c0eac7a6055809ceca031a2fab"
+        },
+        {
+          "id": "train-11",
+          "split": "train",
+          "text": "There were doors all round the hall, but they were all locked; and when Alice had been all the way down one side and up the other, trying every door, she walked sadly down the middle, wondering how she was ever to get out again.",
+          "normalized_sha256": "8454a1fa249bc4f6e5ec3309cbf3c8886ec5f84a8c92303034c8aea976f7662d"
+        },
+        {
+          "id": "train-12",
+          "split": "train",
+          "text": "Suddenly she came upon a little three-legged table, all made of solid glass; there was nothing on it except a tiny golden key, and Alice’s first thought was that it might belong to one of the doors of the hall; but, alas! either the locks were too large, or the key was too small, but at any rate it would not open any of them. However, on the second time round, she came upon a low curtain she had not noticed before, and behind it was a little door about fifteen inches high: she tried the little golden key in the lock, and to her great delight it fitted!",
+          "normalized_sha256": "0bbae95a81c9f0984f16136f1654670c7966313bb997a952c7c338a886702891"
+        },
+        {
+          "id": "train-13",
+          "split": "train",
+          "text": "Alice opened the door and found that it led into a small passage, not much larger than a rat-hole: she knelt down and looked along the passage into the loveliest garden you ever saw. How she longed to get out of that dark hall, and wander about among those beds of bright flowers and those cool fountains, but she could not even get her head through the doorway; “and even if my head would go through,” thought poor Alice, “it would be of very little use without my shoulders. Oh, how I wish I could shut up like a telescope! I think I could, if I only knew how to begin.” For, you see, so many out-of-the-way things had happened lately, that Alice had begun to think that very few things indeed were really impossible.",
+          "normalized_sha256": "169dc53270bab49ecd110f7e89e3695fe7d5274de4e71d39f7ec71e964609322"
+        },
+        {
+          "id": "train-14",
+          "split": "train",
+          "text": "There seemed to be no use in waiting by the little door, so she went back to the table, half hoping she might find another key on it, or at any rate a book of rules for shutting people up like telescopes: this time she found a little bottle on it, (“which certainly was not here before,” said Alice,) and round the neck of the bottle was a paper label, with the words “DRINK ME,” beautifully printed on it in large letters.",
+          "normalized_sha256": "91809a600a3a493d6177413bb01afb30c8ab393293f6c872a43d137198646c63"
+        },
+        {
+          "id": "train-15",
+          "split": "train",
+          "text": "It was all very well to say “Drink me,” but the wise little Alice was not going to do _that_ in a hurry. “No, I’ll look first,” she said, “and see whether it’s marked ‘_poison_’ or not”; for she had read several nice little histories about children who had got burnt, and eaten up by wild beasts and other unpleasant things, all because they _would_ not remember the simple rules their friends had taught them: such as, that a red-hot poker will burn you if you hold it too long; and that if you cut your finger _very_ deeply with a knife, it usually bleeds; and she had never forgotten that, if you drink much from a bottle marked “poison,” it is almost certain to disagree with you, sooner or later.",
+          "normalized_sha256": "94f4619c2bbd3b9d852cefd744c953bd132fadb9ecdf16841ccf38b14331e4db"
+        },
+        {
+          "id": "train-16",
+          "split": "train",
+          "text": "However, this bottle was _not_ marked “poison,” so Alice ventured to taste it, and finding it very nice, (it had, in fact, a sort of mixed flavour of cherry-tart, custard, pine-apple, roast turkey, toffee, and hot buttered toast,) she very soon finished it off.",
+          "normalized_sha256": "4c90d6e024726d1ee020d98a22eb14cc6390bcbd29be1e6747a539683397045d"
+        },
+        {
+          "id": "heldout-02",
+          "split": "heldout",
+          "text": " “What a curious feeling!” said Alice; “I must be shutting up like a telescope.”",
+          "normalized_sha256": "78d5aec03b739fa119ae321d2355bf0e92b4f5b31aff5ccbdcbdc8e5943cb00a"
+        },
+        {
+          "id": "heldout-03",
+          "split": "heldout",
+          "text": "And so it was indeed: she was now only ten inches high, and her face brightened up at the thought that she was now the right size for going through the little door into that lovely garden. First, however, she waited for a few minutes to see if she was going to shrink any further: she felt a little nervous about this; “for it might end, you know,” said Alice to herself, “in my going out altogether, like a candle. I wonder what I should be like then?” And she tried to fancy what the flame of a candle is like after the candle is blown out, for she could not remember ever having seen such a thing.",
+          "normalized_sha256": "cb30de2fbae7f272d1aa54d0c2b292ba4b2c6abc8474a68350394a06ff5d4cbb"
+        },
+        {
+          "id": "heldout-04",
+          "split": "heldout",
+          "text": "After a while, finding that nothing more happened, she decided on going into the garden at once; but, alas for poor Alice! when she got to the door, she found she had forgotten the little golden key, and when she went back to the table for it, she found she could not possibly reach it: she could see it quite plainly through the glass, and she tried her best to climb up one of the legs of the table, but it was too slippery; and when she had tired herself out with trying, the poor little thing sat down and cried.",
+          "normalized_sha256": "179e653e8b36db2e311ff662a39aeb7316a3149a621fc3619515c859c829c305"
+        },
+        {
+          "id": "heldout-05",
+          "split": "heldout",
+          "text": "“Come, there’s no use in crying like that!” said Alice to herself, rather sharply; “I advise you to leave off this minute!” She generally gave herself very good advice, (though she very seldom followed it), and sometimes she scolded herself so severely as to bring tears into her eyes; and once she remembered trying to box her own ears for having cheated herself in a game of croquet she was playing against herself, for this curious child was very fond of pretending to be two people. “But it’s no use now,” thought poor Alice, “to pretend to be two people! Why, there’s hardly enough of me left to make _one_ respectable person!”",
+          "normalized_sha256": "1e90712bd7d42c73c3315d8473fb9a3018538330e408c53f0ea3e4a2459d9b3d"
+        }
+      ],
+      "excluded": [
+        {
+          "id": "train-17",
+          "split": "train",
+          "text": "*      *      *      *      *      *      *",
+          "normalized_sha256": "5d41f07abddd70a3fd8be3827705d908c8d1c5facc5c642298c24e4a2a37b838",
+          "reason": "whitespace or decorative asterism"
+        },
+        {
+          "id": "heldout-00",
+          "split": "heldout",
+          "text": "    *      *      *      *      *      *",
+          "normalized_sha256": "14e74e58e46b35d4d32a1af013283044ac2135c29ec4ba676061575be8dc080b",
+          "reason": "whitespace or decorative asterism"
+        },
+        {
+          "id": "heldout-01",
+          "split": "heldout",
+          "text": "*      *      *      *      *      *      *",
+          "normalized_sha256": "5d41f07abddd70a3fd8be3827705d908c8d1c5facc5c642298c24e4a2a37b838",
+          "reason": "whitespace or decorative asterism"
+        }
+      ],
+      "diagnostics": {
+        "train": {
+          "records": 17,
+          "utf8_bytes": 8636,
+          "record_bytes": [
+            310,
+            289,
+            743,
+            109,
+            219,
+            719,
+            271,
+            730,
+            714,
+            1012,
+            584,
+            228,
+            560,
+            727,
+            431,
+            725,
+            265
+          ],
+          "unique_normalized": 17,
+          "families": {
+            "train-00": 1,
+            "train-01": 1,
+            "train-02": 1,
+            "train-03": 1,
+            "train-04": 1,
+            "train-05": 1,
+            "train-06": 1,
+            "train-07": 1,
+            "train-08": 1,
+            "train-09": 1,
+            "train-10": 1,
+            "train-11": 1,
+            "train-12": 1,
+            "train-13": 1,
+            "train-14": 1,
+            "train-15": 1,
+            "train-16": 1
+          },
+          "effective_families_document_weighted": 17.0
+        },
+        "heldout": {
+          "records": 4,
+          "utf8_bytes": 1866,
+          "record_bytes": [
+            88,
+            608,
+            516,
+            654
+          ],
+          "unique_normalized": 4,
+          "families": {
+            "heldout-02": 1,
+            "heldout-03": 1,
+            "heldout-04": 1,
+            "heldout-05": 1
+          },
+          "effective_families_document_weighted": 4.0
+        }
+      }
+    },
+    "recursive": {
+      "paths": {
+        "replace": [
+          {
+            "generation": 0,
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54
+          },
+          {
+            "generation": 1,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.4,
+              0.6,
+              0.0
+            ],
+            "H": 0.48,
+            "stored_population": 10
+          },
+          {
+            "generation": 2,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.4,
+              0.6,
+              0.0
+            ],
+            "H": 0.48,
+            "stored_population": 10
+          },
+          {
+            "generation": 3,
+            "sample_counts": [
+              3,
+              7,
+              0
+            ],
+            "distribution": [
+              0.3,
+              0.7,
+              0.0
+            ],
+            "H": 0.42000000000000004,
+            "stored_population": 10
+          },
+          {
+            "generation": 4,
+            "sample_counts": [
+              3,
+              7,
+              0
+            ],
+            "distribution": [
+              0.3,
+              0.7,
+              0.0
+            ],
+            "H": 0.42000000000000004,
+            "stored_population": 10
+          },
+          {
+            "generation": 5,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.4,
+              0.6,
+              0.0
+            ],
+            "H": 0.48,
+            "stored_population": 10
+          },
+          {
+            "generation": 6,
+            "sample_counts": [
+              3,
+              7,
+              0
+            ],
+            "distribution": [
+              0.3,
+              0.7,
+              0.0
+            ],
+            "H": 0.42000000000000004,
+            "stored_population": 10
+          },
+          {
+            "generation": 7,
+            "sample_counts": [
+              1,
+              9,
+              0
+            ],
+            "distribution": [
+              0.1,
+              0.9,
+              0.0
+            ],
+            "H": 0.17999999999999994,
+            "stored_population": 10
+          },
+          {
+            "generation": 8,
+            "sample_counts": [
+              2,
+              8,
+              0
+            ],
+            "distribution": [
+              0.2,
+              0.8,
+              0.0
+            ],
+            "H": 0.31999999999999984,
+            "stored_population": 10
+          },
+          {
+            "generation": 9,
+            "sample_counts": [
+              2,
+              8,
+              0
+            ],
+            "distribution": [
+              0.2,
+              0.8,
+              0.0
+            ],
+            "H": 0.31999999999999984,
+            "stored_population": 10
+          },
+          {
+            "generation": 10,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 11,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 12,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 13,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 14,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 15,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 16,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 17,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 18,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 19,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          },
+          {
+            "generation": 20,
+            "sample_counts": [
+              0,
+              10,
+              0
+            ],
+            "distribution": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "H": 0.0,
+            "stored_population": 10
+          }
+        ],
+        "anchor": [
+          {
+            "generation": 0,
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54
+          },
+          {
+            "generation": 1,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.5,
+              0.44999999999999996,
+              0.05
+            ],
+            "H": 0.545,
+            "stored_population": 20
+          },
+          {
+            "generation": 2,
+            "sample_counts": [
+              5,
+              5,
+              0
+            ],
+            "distribution": [
+              0.55,
+              0.4,
+              0.05
+            ],
+            "H": 0.5349999999999999,
+            "stored_population": 20
+          },
+          {
+            "generation": 3,
+            "sample_counts": [
+              7,
+              3,
+              0
+            ],
+            "distribution": [
+              0.6499999999999999,
+              0.3,
+              0.05
+            ],
+            "H": 0.4850000000000002,
+            "stored_population": 20
+          },
+          {
+            "generation": 4,
+            "sample_counts": [
+              7,
+              3,
+              0
+            ],
+            "distribution": [
+              0.6499999999999999,
+              0.3,
+              0.05
+            ],
+            "H": 0.4850000000000002,
+            "stored_population": 20
+          },
+          {
+            "generation": 5,
+            "sample_counts": [
+              6,
+              4,
+              0
+            ],
+            "distribution": [
+              0.6,
+              0.35,
+              0.05
+            ],
+            "H": 0.515,
+            "stored_population": 20
+          },
+          {
+            "generation": 6,
+            "sample_counts": [
+              7,
+              3,
+              0
+            ],
+            "distribution": [
+              0.6499999999999999,
+              0.3,
+              0.05
+            ],
+            "H": 0.4850000000000002,
+            "stored_population": 20
+          },
+          {
+            "generation": 7,
+            "sample_counts": [
+              9,
+              0,
+              1
+            ],
+            "distribution": [
+              0.75,
+              0.15,
+              0.1
+            ],
+            "H": 0.405,
+            "stored_population": 20
+          },
+          {
+            "generation": 8,
+            "sample_counts": [
+              6,
+              4,
+              0
+            ],
+            "distribution": [
+              0.6,
+              0.35,
+              0.05
+            ],
+            "H": 0.515,
+            "stored_population": 20
+          },
+          {
+            "generation": 9,
+            "sample_counts": [
+              6,
+              3,
+              1
+            ],
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54,
+            "stored_population": 20
+          },
+          {
+            "generation": 10,
+            "sample_counts": [
+              9,
+              1,
+              0
+            ],
+            "distribution": [
+              0.75,
+              0.2,
+              0.05
+            ],
+            "H": 0.395,
+            "stored_population": 20
+          },
+          {
+            "generation": 11,
+            "sample_counts": [
+              9,
+              1,
+              0
+            ],
+            "distribution": [
+              0.75,
+              0.2,
+              0.05
+            ],
+            "H": 0.395,
+            "stored_population": 20
+          },
+          {
+            "generation": 12,
+            "sample_counts": [
+              7,
+              3,
+              0
+            ],
+            "distribution": [
+              0.6499999999999999,
+              0.3,
+              0.05
+            ],
+            "H": 0.4850000000000002,
+            "stored_population": 20
+          },
+          {
+            "generation": 13,
+            "sample_counts": [
+              4,
+              4,
+              2
+            ],
+            "distribution": [
+              0.5,
+              0.35,
+              0.15000000000000002
+            ],
+            "H": 0.605,
+            "stored_population": 20
+          },
+          {
+            "generation": 14,
+            "sample_counts": [
+              5,
+              4,
+              1
+            ],
+            "distribution": [
+              0.55,
+              0.35,
+              0.1
+            ],
+            "H": 0.565,
+            "stored_population": 20
+          },
+          {
+            "generation": 15,
+            "sample_counts": [
+              6,
+              2,
+              2
+            ],
+            "distribution": [
+              0.6,
+              0.25,
+              0.15000000000000002
+            ],
+            "H": 0.5549999999999999,
+            "stored_population": 20
+          },
+          {
+            "generation": 16,
+            "sample_counts": [
+              7,
+              0,
+              3
+            ],
+            "distribution": [
+              0.6499999999999999,
+              0.15,
+              0.2
+            ],
+            "H": 0.5150000000000001,
+            "stored_population": 20
+          },
+          {
+            "generation": 17,
+            "sample_counts": [
+              6,
+              1,
+              3
+            ],
+            "distribution": [
+              0.6,
+              0.2,
+              0.2
+            ],
+            "H": 0.5599999999999999,
+            "stored_population": 20
+          },
+          {
+            "generation": 18,
+            "sample_counts": [
+              5,
+              3,
+              2
+            ],
+            "distribution": [
+              0.55,
+              0.3,
+              0.15000000000000002
+            ],
+            "H": 0.585,
+            "stored_population": 20
+          },
+          {
+            "generation": 19,
+            "sample_counts": [
+              5,
+              4,
+              1
+            ],
+            "distribution": [
+              0.55,
+              0.35,
+              0.1
+            ],
+            "H": 0.565,
+            "stored_population": 20
+          },
+          {
+            "generation": 20,
+            "sample_counts": [
+              5,
+              4,
+              1
+            ],
+            "distribution": [
+              0.55,
+              0.35,
+              0.1
+            ],
+            "H": 0.565,
+            "stored_population": 20
+          }
+        ],
+        "accumulate": [
+          {
+            "generation": 0,
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54
+          },
+          {
+            "generation": 1,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.5,
+              0.44999999999999996,
+              0.05
+            ],
+            "H": 0.545,
+            "stored_population": 20
+          },
+          {
+            "generation": 2,
+            "sample_counts": [
+              5,
+              5,
+              0
+            ],
+            "distribution": [
+              0.5,
+              0.4666666666666667,
+              0.03333333333333334
+            ],
+            "H": 0.5311111111111111,
+            "stored_population": 30
+          },
+          {
+            "generation": 3,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.475,
+              0.5,
+              0.025000000000000005
+            ],
+            "H": 0.52375,
+            "stored_population": 40
+          },
+          {
+            "generation": 4,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.46,
+              0.52,
+              0.020000000000000004
+            ],
+            "H": 0.5176,
+            "stored_population": 50
+          },
+          {
+            "generation": 5,
+            "sample_counts": [
+              6,
+              4,
+              0
+            ],
+            "distribution": [
+              0.48333333333333334,
+              0.5,
+              0.01666666666666667
+            ],
+            "H": 0.5161111111111112,
+            "stored_population": 60
+          },
+          {
+            "generation": 6,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.4714285714285715,
+              0.5142857142857143,
+              0.014285714285714289
+            ],
+            "H": 0.5130612244897959,
+            "stored_population": 70
+          },
+          {
+            "generation": 7,
+            "sample_counts": [
+              3,
+              5,
+              2
+            ],
+            "distribution": [
+              0.45,
+              0.5125000000000001,
+              0.037500000000000006
+            ],
+            "H": 0.5334374999999999,
+            "stored_population": 80
+          },
+          {
+            "generation": 8,
+            "sample_counts": [
+              6,
+              4,
+              0
+            ],
+            "distribution": [
+              0.4666666666666666,
+              0.5,
+              0.03333333333333334
+            ],
+            "H": 0.5311111111111111,
+            "stored_population": 90
+          },
+          {
+            "generation": 9,
+            "sample_counts": [
+              5,
+              5,
+              0
+            ],
+            "distribution": [
+              0.47,
+              0.5,
+              0.030000000000000006
+            ],
+            "H": 0.5282,
+            "stored_population": 100
+          },
+          {
+            "generation": 10,
+            "sample_counts": [
+              1,
+              9,
+              0
+            ],
+            "distribution": [
+              0.43636363636363634,
+              0.5363636363636364,
+              0.02727272727272728
+            ],
+            "H": 0.5211570247933884,
+            "stored_population": 110
+          },
+          {
+            "generation": 11,
+            "sample_counts": [
+              3,
+              7,
+              0
+            ],
+            "distribution": [
+              0.425,
+              0.5499999999999999,
+              0.025000000000000005
+            ],
+            "H": 0.5162500000000001,
+            "stored_population": 120
+          },
+          {
+            "generation": 12,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.4230769230769231,
+              0.5538461538461539,
+              0.02307692307692308
+            ],
+            "H": 0.5137278106508876,
+            "stored_population": 130
+          },
+          {
+            "generation": 13,
+            "sample_counts": [
+              6,
+              4,
+              0
+            ],
+            "distribution": [
+              0.4357142857142857,
+              0.5428571428571429,
+              0.021428571428571432
+            ],
+            "H": 0.5149999999999999,
+            "stored_population": 140
+          },
+          {
+            "generation": 14,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.43333333333333335,
+              0.5466666666666667,
+              0.020000000000000004
+            ],
+            "H": 0.5129777777777778,
+            "stored_population": 150
+          },
+          {
+            "generation": 15,
+            "sample_counts": [
+              4,
+              5,
+              1
+            ],
+            "distribution": [
+              0.43125,
+              0.5437500000000001,
+              0.025
+            ],
+            "H": 0.517734375,
+            "stored_population": 160
+          },
+          {
+            "generation": 16,
+            "sample_counts": [
+              4,
+              4,
+              2
+            ],
+            "distribution": [
+              0.4294117647058824,
+              0.5352941176470589,
+              0.03529411764705882
+            ],
+            "H": 0.5278200692041521,
+            "stored_population": 170
+          },
+          {
+            "generation": 17,
+            "sample_counts": [
+              5,
+              5,
+              0
+            ],
+            "distribution": [
+              0.43333333333333335,
+              0.5333333333333334,
+              0.03333333333333333
+            ],
+            "H": 0.5266666666666666,
+            "stored_population": 180
+          },
+          {
+            "generation": 18,
+            "sample_counts": [
+              5,
+              5,
+              0
+            ],
+            "distribution": [
+              0.4368421052631579,
+              0.5315789473684212,
+              0.031578947368421054
+            ],
+            "H": 0.5255955678670359,
+            "stored_population": 190
+          },
+          {
+            "generation": 19,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.435,
+              0.5350000000000001,
+              0.03
+            ],
+            "H": 0.5236499999999998,
+            "stored_population": 200
+          },
+          {
+            "generation": 20,
+            "sample_counts": [
+              5,
+              5,
+              0
+            ],
+            "distribution": [
+              0.4380952380952381,
+              0.5333333333333334,
+              0.028571428571428567
+            ],
+            "H": 0.5228117913832199,
+            "stored_population": 210
+          }
+        ],
+        "fresh": [
+          {
+            "generation": 0,
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54
+          },
+          {
+            "generation": 1,
+            "sample_counts": [
+              4,
+              6,
+              0
+            ],
+            "distribution": [
+              0.4,
+              0.6,
+              0.0
+            ],
+            "H": 0.48,
+            "stored_population": 10
+          },
+          {
+            "generation": 2,
+            "sample_counts": [
+              6,
+              3,
+              1
+            ],
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54,
+            "stored_population": 10
+          },
+          {
+            "generation": 3,
+            "sample_counts": [
+              7,
+              3,
+              0
+            ],
+            "distribution": [
+              0.7,
+              0.3,
+              0.0
+            ],
+            "H": 0.42000000000000004,
+            "stored_population": 10
+          },
+          {
+            "generation": 4,
+            "sample_counts": [
+              6,
+              3,
+              1
+            ],
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54,
+            "stored_population": 10
+          },
+          {
+            "generation": 5,
+            "sample_counts": [
+              5,
+              5,
+              0
+            ],
+            "distribution": [
+              0.5,
+              0.5,
+              0.0
+            ],
+            "H": 0.5,
+            "stored_population": 10
+          },
+          {
+            "generation": 6,
+            "sample_counts": [
+              7,
+              2,
+              1
+            ],
+            "distribution": [
+              0.7,
+              0.2,
+              0.1
+            ],
+            "H": 0.4600000000000001,
+            "stored_population": 10
+          },
+          {
+            "generation": 7,
+            "sample_counts": [
+              8,
+              0,
+              2
+            ],
+            "distribution": [
+              0.8,
+              0.0,
+              0.2
+            ],
+            "H": 0.31999999999999984,
+            "stored_population": 10
+          },
+          {
+            "generation": 8,
+            "sample_counts": [
+              5,
+              5,
+              0
+            ],
+            "distribution": [
+              0.5,
+              0.5,
+              0.0
+            ],
+            "H": 0.5,
+            "stored_population": 10
+          },
+          {
+            "generation": 9,
+            "sample_counts": [
+              6,
+              3,
+              1
+            ],
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54,
+            "stored_population": 10
+          },
+          {
+            "generation": 10,
+            "sample_counts": [
+              9,
+              1,
+              0
+            ],
+            "distribution": [
+              0.9,
+              0.1,
+              0.0
+            ],
+            "H": 0.17999999999999994,
+            "stored_population": 10
+          },
+          {
+            "generation": 11,
+            "sample_counts": [
+              8,
+              2,
+              0
+            ],
+            "distribution": [
+              0.8,
+              0.2,
+              0.0
+            ],
+            "H": 0.31999999999999984,
+            "stored_population": 10
+          },
+          {
+            "generation": 12,
+            "sample_counts": [
+              6,
+              3,
+              1
+            ],
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54,
+            "stored_population": 10
+          },
+          {
+            "generation": 13,
+            "sample_counts": [
+              4,
+              4,
+              2
+            ],
+            "distribution": [
+              0.4,
+              0.4,
+              0.2
+            ],
+            "H": 0.6399999999999999,
+            "stored_population": 10
+          },
+          {
+            "generation": 14,
+            "sample_counts": [
+              6,
+              4,
+              0
+            ],
+            "distribution": [
+              0.6,
+              0.4,
+              0.0
+            ],
+            "H": 0.48,
+            "stored_population": 10
+          },
+          {
+            "generation": 15,
+            "sample_counts": [
+              7,
+              1,
+              2
+            ],
+            "distribution": [
+              0.7,
+              0.1,
+              0.2
+            ],
+            "H": 0.4600000000000001,
+            "stored_population": 10
+          },
+          {
+            "generation": 16,
+            "sample_counts": [
+              7,
+              0,
+              3
+            ],
+            "distribution": [
+              0.7,
+              0.0,
+              0.3
+            ],
+            "H": 0.42000000000000004,
+            "stored_population": 10
+          },
+          {
+            "generation": 17,
+            "sample_counts": [
+              6,
+              4,
+              0
+            ],
+            "distribution": [
+              0.6,
+              0.4,
+              0.0
+            ],
+            "H": 0.48,
+            "stored_population": 10
+          },
+          {
+            "generation": 18,
+            "sample_counts": [
+              5,
+              3,
+              2
+            ],
+            "distribution": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "H": 0.62,
+            "stored_population": 10
+          },
+          {
+            "generation": 19,
+            "sample_counts": [
+              6,
+              4,
+              0
+            ],
+            "distribution": [
+              0.6,
+              0.4,
+              0.0
+            ],
+            "H": 0.48,
+            "stored_population": 10
+          },
+          {
+            "generation": 20,
+            "sample_counts": [
+              6,
+              3,
+              1
+            ],
+            "distribution": [
+              0.6,
+              0.3,
+              0.1
+            ],
+            "H": 0.54,
+            "stored_population": 10
+          }
+        ]
+      },
+      "replacement_mean_H": [
+        0.5399999999999852,
+        0.48555000000000115,
+        0.4341800000000002,
+        0.3942300000000007,
+        0.35608000000000056,
+        0.3202800000000013,
+        0.28857000000000127,
+        0.2613100000000013,
+        0.2316100000000009,
+        0.2070300000000008,
+        0.1899400000000006,
+        0.16895000000000004,
+        0.15071999999999972,
+        0.1345299999999993,
+        0.12084999999999932,
+        0.10855999999999952,
+        0.09701999999999969,
+        0.08733999999999979,
+        0.07843999999999991,
+        0.07307000000000002,
+        0.06607000000000005
+      ],
+      "replacement_expected_H": [
+        0.54,
+        0.48600000000000004,
+        0.43740000000000007,
+        0.39366000000000007,
+        0.35429400000000005,
+        0.31886460000000005,
+        0.28697814000000005,
+        0.25828032600000006,
+        0.23245229340000007,
+        0.20920706406000006,
+        0.18828635765400006,
+        0.16945772188860006,
+        0.15251194969974005,
+        0.13726075472976604,
+        0.12353467925678943,
+        0.11118121133111049,
+        0.10006309019799944,
+        0.0900567811781995,
+        0.08105110306037955,
+        0.07294599275434159,
+        0.06565139347890743
+      ],
+      "accumulation_expected_H": [
+        0.54,
+        0.5265,
+        0.52065,
+        0.5173959374999999,
+        0.5153263537499999,
+        0.5138948916562499,
+        0.5128461265712372,
+        0.5120448044984696,
+        0.5114126504188419,
+        0.510901237768423,
+        0.5104790053405153,
+        0.510124506031251,
+        0.5098226572111142,
+        0.5095625436104964,
+        0.5093360713688917,
+        0.5091371119660132,
+        0.5089609399549523,
+        0.5088038532450896,
+        0.5086629103494538,
+        0.5085357446218665,
+        0.508420430394061
+      ],
+      "rare_extinction_one_step": 0.3486784401000001
+    },
+    "library": {
+      "scratch": [
+        0.8670357598021707,
+        0.1329642401978293,
+        0.0,
+        0.0
+      ],
+      "native": [
+        0.8670357598021706,
+        0.1329642401978293,
+        0.0,
+        0.0
+      ],
+      "max_distribution_error": 1.1102230246251565e-16,
+      "inverse_cdf_draws": [
+        0,
+        0,
+        1
+      ],
+      "multinomial_frequencies": [
+        0.60146,
+        0.29838,
+        0.10016
+      ],
+      "per_target_nll": [
+        [
+          0.24169164875571972,
+          0.39368917849646395
+        ]
+      ],
+      "scratch_mean_loss": 0.31769041362609185,
+      "native_mean_loss": 0.31769041362609185
+    }
+  },
+  "provenance": "Actual program executions retained from the preflight. Only anchored stored_population labels are projected from the verified N-to-2N metadata continuation; no samples, fits or model generations repeated.",
+  "recursive_current_sha256": "ac8b7abb76e029886207b47fe54ea190504cc9bbca2e15317abdcff853bf8675",
+  "recursive_original_sha256": "5aac7bd130debe00c1425edee4713c687df221448c3da74bb04d5b5568ec86ce"
+}

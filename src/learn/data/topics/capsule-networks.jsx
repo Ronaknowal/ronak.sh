@@ -1,16 +1,16 @@
-// Complete revision-3 prepared manuscript; statically rendered at authoring time.
 import { Prose, H2, H3, CodeBlock } from '../../components/content';
 import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
 import { LessonIntro } from '../../components/lesson-labs/LessonElements.jsx';
 import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
-import { CapsuleSensitivityFigure } from '../../components/lesson-labs/CapsuleIntuitionFigures.jsx';
-import { CapsuleGrouping, CapsuleVoteLab, CapsuleSquashLab, CapsuleEvidenceLab, CapsuleFrozenInvestigation, CapsuleGeometryFigure, CapsuleEMLab, CapsuleClassicShape, CapsuleProgram, capsuleAsset } from '../../components/lesson-labs/CapsuleLabs.jsx';
+import { CapsuleGrouping, CapsuleInitialSum, CapsuleVoteLab, CapsuleSquashLab, CapsuleEvidenceLab, CapsuleFrozenInvestigation, CapsuleGeometryFigure, CapsuleEMLab, CapsuleMarginLab, CapsuleSensitivityLab, CapsuleTemperatureLab } from '../../components/lesson-labs/CapsuleFlowLabs.jsx';
+import { CapsuleAnatomy, CapsuleLifetimeDrawing, CapsulePartWholeDrawing, CapsuleVoteDrawing, CapsuleClassifierDrawing, CapsuleDecoderDrawing, CapsuleObjectiveDrawing, CapsuleGradientDrawing, CapsuleFrameDrawing, CapsuleEMProcessDrawing, CapsulePriorDrawing, CapsuleGateDrawing, CapsuleMarginDrawing, CapsuleCoordinateAdditionDrawing, CapsuleDensityDrawing } from '../../components/lesson-labs/CapsuleDrawings.jsx';
+import { CapsuleProgram, capsuleAsset } from '../../components/lesson-labs/CapsuleLabs.jsx';
 export default {
  title: 'Capsule Networks',
  readTime: '~70 min read + code, live investigations and practice; optional deeper mechanics',
  hasIntegratedGuide: true,
- content: () => <div className="neural-lesson capsule-lesson"><LessonIntro prerequisites="Vector addition, matrix multiplication, convolution shapes and the idea of learning through a loss. Capsule-specific vocabulary and axes are introduced here." sections={[["1-a-capsule-is-a-bundle-of-properties","1. A capsule is a bundle of properties"],["2-from-a-part-to-a-prediction-about-a-whole","2. From a part to a prediction about a whole"],["3-routing-is-a-short-inference-computation","3. Routing is a short inference computation"],["4-build-the-classifier-and-its-objective","4. Build the classifier and its objective"],["5-run-a-controlled-experiment-on-real-digits","5. Run a controlled experiment on real digits"],["6-geometry-reconstruction-and-a-useful-failure","6. Geometry, reconstruction and a useful failure"],["7-deeper-mechanics-gradients-and-explicit-coordinate-frames","7. Deeper mechanics: gradients and explicit coordinate frames"],["follow-routing-all-the-way-into-a-trainable-program","Follow routing all the way into a trainable program"],["8-architecture-costs-and-alternative-routing-designs","8. Architecture costs and alternative routing designs"],["9-practice-implement-explain-and-compare","9. Practice: implement, explain and compare"],["10-continue-and-learn-another-way","10. Continue and learn another way"]]}>Follow one image from grouped properties to votes, assignments and class vectors. Build the mechanism, train a controlled model, and test what its geometry actually supports.</LessonIntro>
-<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Edit capsule votes, routing iterations, vector magnitude/direction and supported retained image/latent coordinates. Follow the coupling rows, vote contributions, squash length/direction, current parent vectors and saved/frozen-model outputs. Step routing to inspect its computation, with all current outputs visible. The labs show current results as you work; you do not enter or submit a guess. Use those comparisons to distinguish agreement from activation magnitude, pose changes from class evidence and a model intervention from a new empirical result."}</Prose>
+ content: () => <div className="neural-lesson capsule-lesson lesson-flow"><LessonIntro prerequisites="Vector addition, matrix multiplication, convolution shapes and the idea of learning through a loss. Capsule-specific vocabulary and axes are introduced here." sections={[["1-a-capsule-is-a-bundle-of-properties","1. A capsule is a bundle of properties"],["2-from-a-part-to-a-prediction-about-a-whole","2. From a part to a prediction about a whole"],["3-routing-is-a-short-inference-computation","3. Routing is a short inference computation"],["4-build-the-classifier-and-its-objective","4. Build the classifier and its objective"],["5-run-a-controlled-experiment-on-real-digits","5. Run a controlled experiment on real digits"],["6-geometry-reconstruction-and-a-useful-failure","6. Geometry, reconstruction and a useful failure"],["7-deeper-mechanics-gradients-and-explicit-coordinate-frames","7. Deeper mechanics: gradients and explicit coordinate frames"],["follow-routing-all-the-way-into-a-trainable-program","Follow routing all the way into a trainable program"],["8-architecture-costs-and-alternative-routing-designs","8. Architecture costs and alternative routing designs"],["9-practice-implement-explain-and-compare","9. Practice: implement, explain and compare"],["10-continue-and-learn-another-way","10. Continue and learn another way"]]}>Follow one image from grouped properties to votes, assignments and class vectors. Build the mechanism, train a controlled model, and test what its geometry actually supports.</LessonIntro>
+<Prose opening="exploration">Move the controls as each idea is introduced. The arrows, fractions, scores and images change immediately. Each investigation asks one local question; the written exercises ask you to transfer what you learned.</Prose>
 
 <Prose>{"A wheel detector firing twice is not enough to recognize a bicycle. The wheels also need a plausible arrangement relative to a frame. A "}<strong>{"capsule network"}</strong>{" tries to combine evidence about a part's presence with a vector or matrix describing its properties, then asks whether several parts support a compatible whole."}</Prose>
 
@@ -18,126 +18,101 @@ export default {
 
 <Prose opening="route">{""}<strong>{"First pass:"}</strong>{" follow sections 1–6, run the small offline program or inspect its saved results, then attempt practice 1–5 and 8. You only need vector addition, matrix multiplication and the idea that a loss guides parameter updates. Sections 7–8 and practice 6–7 develop derivatives, matrix routing and engineering tradeoffs; they are a deeper branch, not a condition for understanding the core lesson."}</Prose>
 
+
 <H2>{"1. A capsule is a bundle of properties"}</H2>
-
-<Prose>{"Imagine a local image feature represented by the vector "}<InlineMath>{"u=(0.3,0.4)"}</InlineMath>{". Its length is "}<InlineMath>{"0.5"}</InlineMath>{". In a vector-capsule design, length is used as a presence "}<strong>{"score"}</strong>{" and the remaining variation can carry information useful for describing the feature."}</Prose>
-
-<Prose>{"This does not mean coordinate 1 must be “rotation” and coordinate 2 must be “width.” A network can learn mixed, entangled coordinates. Calling a vector a pose vector is an architectural intention; interpreting a coordinate physically requires evidence from controlled input changes or reconstruction experiments."}</Prose>
-
-<Prose>{"A usual CNN feature tensor already contains multiple channels at multiple positions. Capsules make a particular grouping and downstream computation explicit:"}</Prose>
-
-<NeuralTable caption={"1. A capsule is a bundle of properties"} headers={[<>{"Representation"}</>,<>{"What is stored at one location?"}</>,<>{"How is it combined later?"}</>]} rows={[[<>{"Ordinary feature map"}</>,<>{"Several scalar channel values"}</>,<>{"Fixed learned convolutions or other mixing"}</>],[<>{"Vector capsule"}</>,<>{"A group of coordinates, such as an 8-vector"}</>,<>{"Transform into candidate whole-vectors, then combine by routing"}</>],[<>{"Matrix capsule"}</>,<>{"A pose matrix plus a separate activation scalar"}</>,<>{"Transform into candidate matrices, then estimate agreement and activation"}</>]]} />
-
-<Prose>{"The distinction is not “CNNs contain no geometry.” Convolutions retain a spatial grid; channels can encode positional or orientation-sensitive information. Pooling can discard some exact detail, but its effect depends on the operation, boundaries and task. Capsule systems commonly begin with ordinary convolutions."}</Prose>
-
-<Prose>{"A useful mental picture is an "}<strong>{"arrow"}</strong>{", not a glowing neuron: arrow direction carries a multidimensional state and arrow length carries a bounded score. The zero arrow has no direction. Ten class-capsule lengths need not sum to one, so they are not a softmax distribution or automatically calibrated probabilities."}</Prose>
-
+<Prose>What would a detector need to tell us besides “I found a wheel”? It could also carry a description of that wheel. A capsule keeps several numbers together as one description of one entity.</Prose>
+<Prose>Begin with two numbers. In the picture, the cyan arrow's endpoint is the pair (0.3, 0.4); its two dashed projections show the individual coordinates.</Prose>
+<CapsuleAnatomy />
+<Prose>Start at zero and move 0.3 units along coordinate 1, then 0.4 along coordinate 2. The arrow joins zero to that endpoint. Its length is the straight-line distance, 0.5. Its direction distinguishes this description from another pair with the same length. We call the pair a <strong>vector</strong>, and write it as <InlineMath>{"u=(0.3,0.4)"}</InlineMath>.</Prose>
+<div className="neural-equation"><MathBlock>{"\\|u\\|=\\sqrt{0.3^2+0.4^2}=0.5."}</MathBlock></div>
+<Prose>In a vector-capsule design, length becomes a presence <strong>score</strong>; direction and the coordinates carry other information useful for describing the entity. The zero arrow has no direction. A bounded score is not automatically a calibrated probability, and ten class-capsule lengths need not sum to one.</Prose>
+<Prose>The axes are deliberately called coordinates, not “rotation” or “width.” Learned coordinates can mix several properties. Calling them a pose representation expresses an intention; a physical interpretation needs evidence from controlled changes, which we will investigate later.</Prose>
+<H3>{"Where do those coordinates come from?"}</H3>
+<Prose>Recall the channel maps in <a href="/learn/path/full-curriculum/convnext-modern-cnn-designs?module=deep-learning-fundamentals">ConvNeXt</a>: every spatial location has one value in each channel. We now group a location's channel values into several vectors. In the next drawing, four shown planes stand for the sixteen channel planes; the selected cell is the same location on every plane. Four groups of four channels form four capsule types there.</Prose>
 <CapsuleGrouping />
+<Prose>Follow the highlighted group. At row 1, column 2, type 3, channels 12–15 become four coordinates of child 27. Selecting another row, column or type changes which group you trace; it changes no values. There are sixteen locations and four types at each location, giving 64 child capsules. Rows, columns, types and coordinates here start at zero.</Prose>
+<div className="neural-equation"><MathBlock>{"\\text{channel}=4\\,\\text{type}+\\text{coordinate},\\qquad\n\\text{child}=4(4\\,\\text{row}+\\text{column})+\\text{type}."}</MathBlock></div>
+<Prose>The distinction is not “CNNs contain no geometry.” Convolutions keep a spatial grid and can learn orientation-sensitive features. Capsules specify a particular grouping and a way to combine those groups. Our classifier will still begin with ordinary convolutions. A matrix-capsule variant separates a pose matrix from a presence score; we will build that variant's meaning in the deeper section.</Prose>
 
 <H2>{"2. From a part to a prediction about a whole"}</H2>
-
-<Prose>{"A front wheel and a back wheel should make different predictions about the bicycle's center. The relation between each part and the whole matters."}</Prose>
-
-<Prose>{"For child capsule "}<InlineMath>{"i"}</InlineMath>{" and candidate parent "}<InlineMath>{"j"}</InlineMath>{", learn a transformation matrix "}<InlineMath>{"W_{ij}"}</InlineMath>{". The "}<strong>{"vote"}</strong>{""}</Prose>
-
-<div className="neural-equation"><MathBlock>{"\\widehat u_{j|i}=W_{ij}u_i"}</MathBlock></div>
-
-<Prose>{"is child "}<InlineMath>{"i"}</InlineMath>{"'s prediction of parent "}<InlineMath>{"j"}</InlineMath>{"'s representation. If "}<InlineMath>{"u_i"}</InlineMath>{" has 4 coordinates and the parent has 8, "}<InlineMath>{"W_{ij}"}</InlineMath>{" has shape "}<InlineMath>{"8\\times4"}</InlineMath>{". A child has a different vote for each parent. Comparing its untransformed vector directly with every parent would skip the learned relationship."}</Prose>
-
-<Prose>{"Suppose three children send these two-dimensional votes:"}</Prose>
-
-<NeuralTable caption={"2. From a part to a prediction about a whole"} headers={[<>{"Child"}</>,<>{"Vote for parent A"}</>,<>{"Vote for parent B"}</>]} rows={[[<>{"1"}</>,<>{""}<InlineMath>{"(2,0)"}</InlineMath>{""}</>,<>{""}<InlineMath>{"(0,1)"}</InlineMath>{""}</>],[<>{"2"}</>,<>{""}<InlineMath>{"(2,0)"}</InlineMath>{""}</>,<>{""}<InlineMath>{"(0,-1)"}</InlineMath>{""}</>],[<>{"3"}</>,<>{""}<InlineMath>{"(0,1)"}</InlineMath>{""}</>,<>{""}<InlineMath>{"(0,2)"}</InlineMath>{""}</>]]} />
-
-<Prose>{"This is a constructed arithmetic example, not measured image features. Children 1 and 2 reinforce each other for A but oppose each other for B. Child 3 could support B."}</Prose>
-
-<Prose>{"We need a way to combine the votes without fixing every connection strength for every image. Define "}<InlineMath>{"c_{ij}"}</InlineMath>{" as child "}<InlineMath>{"i"}</InlineMath>{"'s fraction assigned to parent "}<InlineMath>{"j"}</InlineMath>{". Initially, with two parents, each row is "}<InlineMath>{"(0.5,0.5)"}</InlineMath>{"."}</Prose>
-
-<Prose>{"The tentative parent inputs are "}<strong>{"weighted sums"}</strong>{":"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"s_j=\\sum_i c_{ij}\\widehat u_{j|i}."}</MathBlock></div>
-
-<Prose>{"Initially "}<InlineMath>{"s_A=(2,0.5)"}</InlineMath>{" and "}<InlineMath>{"s_B=(0,1)"}</InlineMath>{". The weights sum to one "}<strong>{"across parents for each child"}</strong>{". They generally do not sum to one across children for a parent. Therefore this operation is not a weighted average of the incoming votes."}</Prose>
-
-<Prose>{"That distinction matters: duplicating two agreeing children can strengthen the parent input. A routing diagram should show both the incoming arrows and their scalar contribution weights, not only a heatmap."}</Prose>
-
+<Prose>We have a description of each part. How can parts tell us whether they belong to a compatible whole? First see why each part needs its own relationship to that whole.</Prose>
+<Prose>The rear and front wheel occupy different positions, so their arrows to a bicycle's centre point in different directions.</Prose>
+<CapsulePartWholeDrawing />
+<Prose>Starting from either wheel, the appropriate part-to-whole relation predicts the same centre. The wheel picture is a geometric analogy. In a learned network the descriptions need not be literal image coordinates: a learned matrix converts a child description into a <strong>vote</strong>, a prediction of a candidate parent's description.</Prose>
+<Prose>Read the next drawing downward. One four-coordinate child branches through two different learned matrices; each matrix produces an eight-coordinate vote for its own candidate parent.</Prose>
+<CapsuleVoteDrawing />
+<Prose>The cyan cells are the child vector. The amber grids are learned relations: one for parent A, one for B. Each has eight output rows and four input columns. Its rows combine the four child coordinates to produce the eight violet vote coordinates. “Child” means the lower-level capsule and “parent” a candidate higher-level capsule; a child makes a separate vote for every candidate.</Prose>
+<div className="neural-equation"><MathBlock>{"\\widehat u_{j|i}=W_{ij}u_i,\\qquad W_{ij}\\in\\mathbb R^{8\\times4}."}</MathBlock></div>
+<Prose>The hat names the predicted parent vector; the index <InlineMath>{"j|i"}</InlineMath> means “for parent j, from child i.” Comparing an untransformed child with every parent would omit the learned relationship.</Prose>
+<H3>{"How do several votes become one parent input?"}</H3>
+<Prose>We will now use two coordinates rather than eight so that every sum can be worked by hand. Keep this constructed three-child, two-parent example throughout the routing explanation.</Prose>
+<NeuralTable caption="The running fixture: six abstract votes, not measured image features" headers={['Child', 'Vote for A', 'Vote for B']} rows={[[1,'(2,0)','(0,1)'],[2,'(2,0)','(0,−1)'],[3,'(0,1)','(0,2)']]} />
+<Prose>Initially each child sends half of its vote to each parent. The next two planes place the resulting contributions head-to-tail; the last arrow's endpoint is their sum. Both planes use the same fixed axes, −6 to 6.</Prose>
+<CapsuleInitialSum />
+<Prose>For A, child 1 contributes (1,0), child 2 adds (1,0), and child 3 adds (0,0.5). The final endpoint is (2,0.5). For B, (0,0.5) and (0,−0.5) cancel, leaving child 3's (0,1). The three series colours identify children 1,2,3 in these coordinate plots; the dashed neutral arrow is the total.</Prose>
+<Prose>Call a child's assigned fraction <InlineMath>{"c_{ij}"}</InlineMath> and a parent's summed input <InlineMath>{"s_j"}</InlineMath>. We have just performed a <strong>weighted sum</strong>:</Prose>
+<div className="neural-equation"><MathBlock>{"s_j=\\sum_i c_{ij}\\widehat u_{j|i},\\qquad\n\\sum_j c_{ij}=1\\quad\\text{for each child }i."}</MathBlock></div>
+<Prose>Each child divides its own contribution across parents. A parent's incoming fractions need not sum to one: there is no division by their total. Two agreeing children can therefore supply more evidence than one. This is not an incoming weighted average.</Prose>
 <H3>{"Keeping the output length below one"}</H3>
-
-<Prose>{"Use the squash function"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"v=\\operatorname{squash}(s)=\\frac{r}{1+r^2}s,\\qquad r=\\|s\\|."}</MathBlock></div>
-
-<Prose>{"Its output length is"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"\\|v\\|=\\frac{r^2}{1+r^2}."}</MathBlock></div>
-
-<Prose>{"Small inputs become very short; large inputs approach length one. Direction is preserved whenever "}<InlineMath>{"s\\ne0"}</InlineMath>{", and "}<InlineMath>{"\\operatorname{squash}(0)=0"}</InlineMath>{". This form avoids an explicit division by the norm at zero."}</Prose>
-
-<Prose>{"For parent B, "}<InlineMath>{"r=1"}</InlineMath>{", so "}<InlineMath>{"v_B=(0,0.5)"}</InlineMath>{". For A, "}<InlineMath>{"r=\\sqrt{4.25}"}</InlineMath>{", giving "}<InlineMath>{"v_A\\approx(0.78535,0.19634)"}</InlineMath>{", length "}<InlineMath>{"0.80952"}</InlineMath>{". A has the stronger initial score."}</Prose>
-
-<Prose>{"Do not read the output as “an 80.95% probability of a bicycle.” A bounded range and a probabilistic interpretation are different requirements."}</Prose>
-
+<Prose>The sum tells us both a direction and a strength, but its length can grow without bound. Can we keep the direction while mapping strength into a bounded score? The violet arrow is a shortened version of the cyan input; the curve shows how its length changes.</Prose>
 <CapsuleSquashLab />
+<Prose>This operation is called <strong>squash</strong>. At input (0.3,0.4), the radius is 0.5 and the output is (0.12,0.16), length 0.2. At radius 1 the output length is 0.5. Very small inputs become much shorter; large inputs approach length 1. Changing either coordinate changes the input direction as well as its radius, but the squashed vector follows the same nonzero direction.</Prose>
+<div className="neural-equation"><MathBlock>{"v=\\operatorname{squash}(s)=\\frac{r}{1+r^2}s,\\quad r=\\|s\\|,\\quad\n\\|v\\|=\\frac{r^2}{1+r^2}."}</MathBlock></div>
+<Prose>The scalar multiplies every coordinate equally, so it preserves direction. The rewritten form also gives zero directly when <InlineMath>{"s=0"}</InlineMath>, without dividing by a zero norm. For our summed B input, radius 1 gives <InlineMath>{"v_B=(0,0.5)"}</InlineMath>. For A, <InlineMath>{"r=\\sqrt{4.25}"}</InlineMath> gives <InlineMath>{"v_A\\approx(0.78535,0.19634)"}</InlineMath>, length 0.80952. A has the stronger initial score; that is not a calibrated 80.95% bicycle probability.</Prose>
 
 <H2>{"3. Routing is a short inference computation"}</H2>
-
-<Prose>{""}<strong>{"Routing by agreement"}</strong>{" repeatedly revises the connection fractions within one forward pass. This is different from updating model parameters across training examples."}</Prose>
-
-<Prose>{"Start a logit "}<InlineMath>{"b_{ij}=0"}</InlineMath>{" for each child–parent pair. A logit is an unconstrained score used by softmax. For each routing step:"}</Prose>
-
-<ol start={1}><li>{"Compute "}<InlineMath>{"c_{ij}=\\exp(b_{ij})/\\sum_k\\exp(b_{ik})"}</InlineMath>{", normalizing over candidate parents."}</li><li>{"Sum the weighted votes into "}<InlineMath>{"s_j"}</InlineMath>{", then squash to obtain "}<InlineMath>{"v_j"}</InlineMath>{"."}</li><li>{"If another routing step remains, update "}<InlineMath>{"b_{ij}\\leftarrow b_{ij}+\\widehat u_{j|i}^{\\mathsf T}v_j"}</InlineMath>{"."}</li></ol>
-
-<Prose>{"Subtracting the row maximum before exponentiation gives the same softmax with better numerical stability. The agreement is a "}<strong>{"dot product"}</strong>{": both direction and magnitude affect it. It is not cosine similarity unless the operands are explicitly normalized, which would define a different routing rule."}</Prose>
-
-<Prose>{"For our first step, child 1's agreements are approximately "}<InlineMath>{"1.5707"}</InlineMath>{" with A and "}<InlineMath>{"0.5"}</InlineMath>{" with B. Child 2 agrees by "}<InlineMath>{"1.5707"}</InlineMath>{" with A and "}<InlineMath>{"-0.5"}</InlineMath>{" with B. Child 3 agrees by "}<InlineMath>{"0.1963"}</InlineMath>{" with A and "}<InlineMath>{"1.0"}</InlineMath>{" with B. Those differences change the next softmax rows."}</Prose>
-
-<NeuralTable caption={"3. Routing is a short inference computation"} headers={[<>{"Step"}</>,<>{"Child 1 → A"}</>,<>{"Child 2 → A"}</>,<>{"Child 3 → A"}</>,<>{"A length"}</>,<>{"B length"}</>]} rows={[[<>{"1"}</>,<>{".5000"}</>,<>{".5000"}</>,<>{".5000"}</>,<>{".8095"}</>,<>{".5000"}</>],[<>{"2"}</>,<>{".7447"}</>,<>{".8880"}</>,<>{".3092"}</>,<>{".9150"}</>,<>{".6993"}</>],[<>{"3"}</>,<>{".8996"}</>,<>{".9900"}</>,<>{".1076"}</>,<>{".9346"}</>,<>{".7786"}</>]]} />
-
-<Prose>{"Each B fraction is one minus the corresponding A fraction. Both parents can acquire substantial scores because different children support them."}</Prose>
-
+<Prose>Our first outputs used equal fractions. Now the question is: which parts support which parent more strongly? <strong>Routing by agreement</strong> uses the current parent descriptions to revise each child's fractions during one forward pass.</Prose>
+<Prose>A dot product measures the agreement of a vote with its current parent vector: multiply matching coordinates and add. For child 2 and A this is <InlineMath>{"(2,0)\\cdot(0.78535,0.19634)\\approx1.5707"}</InlineMath>. For child 2 and B it is <InlineMath>{"(0,-1)\\cdot(0,0.5)=-0.5"}</InlineMath>. The child's A vote reinforces its parent; its B vote points against B.</Prose>
+<Prose>Keep one running score, called a <strong>logit</strong>, for each child–parent pair. All start at zero. A parent-axis <strong>softmax</strong> turns each child's logits into positive fractions that add to one: the larger relative logit receives the larger share. Read one routing step downward, then use its dot agreements to form the next step's logits.</Prose>
 <CapsuleVoteLab />
-
-<details>
-
-<summary>Worked changed-vote calculation</summary>
-
-<Prose>{"The computed lengths become approximately .6491 for A and .8585 for B. Explain the cancellation, then explain why child 3's reassignment also matters. Try a different edited vote without being given its answer in advance."}</Prose>
-
-</details>
-
-<Prose>{"Two useful null cases guard against overinterpreting the animation:"}</Prose>
-
-<ul><li>{"If every vote is zero, every output stays zero and every coupling stays uniform."}</li><li>{"If every child sends exactly the same vote to both parents, symmetry keeps the two parent outputs and each row's fractions equal. Routing cannot invent evidence to break this symmetry."}</li></ul>
-
-<Prose>{"Repeated agreement often makes rows increasingly concentrated. It need not change the predicted class, converge to the correct grouping or improve generalization. “Run until certain” is not a valid stopping rule. The number of iterations is part of the model configuration."}</Prose>
-
+<Prose>The three numbered circles are children, each with two outgoing shares. Follow the shares into each parent's sum and squash. Then compare each original vote with its parent's output and add the dot product to that pair's logit. The “next step” arrow describes the next chronological update; the table gives the current step's input logits, not future ones. Moving the step control inspects a computed state, while editing child 2's A vote reruns all states from zero.</Prose>
+<div className="neural-equation"><MathBlock>{"b_{ij}=0\\text{ initially},\\qquad\nc_{ij}=\\frac{\\exp(b_{ij})}{\\sum_k\\exp(b_{ik})},\\quad\ns_j=\\sum_i c_{ij}\\widehat u_{j|i},\\quad v_j=\\operatorname{squash}(s_j),\\quad\nb_{ij}\\leftarrow b_{ij}+\\widehat u_{j|i}^{\\mathsf T}v_j\\quad\\text{if another step remains}."}</MathBlock></div>
+<Prose>Subtract each row's largest logit before exponentiating to obtain the same fractions with better numerical stability. The dot product depends on magnitude as well as direction; normalizing both vectors into a cosine similarity would define a different rule.</Prose>
+<Prose>In step 1, children 1,2,3 have A agreements 1.5707,1.5707,0.1963 and B agreements 0.5,−0.5,1.0. Adding them to zero logits makes child 2's next A share <InlineMath>{"\\exp(1.5707)/(\\exp(1.5707)+\\exp(-0.5))\\approx0.8880"}</InlineMath>. The other rows change by their own relative agreements.</Prose>
+<NeuralTable caption="Three actual routing states of the unchanged fixture" headers={['Step','Child 1 → A','Child 2 → A','Child 3 → A','A length','B length']} rows={[[1,'.5000','.5000','.5000','.8095','.5000'],[2,'.7447','.8880','.3092','.9150','.6993'],[3,'.8996','.9900','.1076','.9346','.7786']]} />
+<Prose>Each B share is one minus its A share. Both parents can have substantial lengths because different children support them. The fractions describe assignments, not class probabilities.</Prose>
+<H3>{"What changes when one part disagrees?"}</H3>
+<Prose>Set child 2's A vote to (−2,0), keeping its B vote unchanged. At the first step A's horizontal contributions cancel, leaving (0,0.5); B still sums to (0,1). Subsequent agreement moves more of child 3's support toward B. At step 3 the exact rerun gives A length 0.6491 and B length 0.8585. Moving only a part's vote can change both parents through the child's normalized fractions.</Prose>
+<Prose>If every vote is zero, all sums and outputs stay zero, all dot agreements are zero, and fractions stay uniform. If each child sends identical votes to A and B, the parent calculations remain symmetric: no agreement difference can break that symmetry. Two children each voting (1,0) to both parents give each sum (1,0), output length 0.5; four such children give sum (2,0), length 0.8. Those changed counts confirm the incoming operation is a sum.</Prose>
+<Prose>Repeated agreement can concentrate assignments without improving classification or finding the correct grouping. The iteration count is a model setting, not a “run until certain” rule.</Prose>
 <H3>{"Where does learning happen?"}</H3>
-
-<Prose>{"The convolution weights, "}<InlineMath>{"W_{ij}"}</InlineMath>{" and decoder weights are persistent learned parameters. Votes, logits, couplings and parent vectors are input-dependent intermediate values. Our logits restart at zero for each new image and every forward pass; they are not carried from the preceding image."}</Prose>
-
-<Prose>{"A finite sequence of matrix products, softmax, sums and squash operations can be differentiated. Backpropagation can flow through all routing steps. Some implementations detach intermediate routing computations; that preserves the forward numbers for a fixed input but changes the gradient used to learn the parameters. It is a deliberate algorithmic choice, not a requirement imposed by routing."}</Prose>
-
-<Prose>{"The distinction will return in "}<a href={"/learn/path/full-curriculum/rnns-lstms-grus?module=deep-learning-fundamentals"}>{"RNNs, LSTMs and GRUs"}</a>{": repetition inside routing refines assignments for one image, whereas recurrence along a sequence updates state as new observations arrive."}</Prose>
+<Prose>The relations are learned across training examples; the fractions are computed afresh for one input. In the next drawing the same learned matrix serves both images, while each image gets new zero logits.</Prose>
+<CapsuleLifetimeDrawing />
+<Prose>Convolution weights, vote matrices and decoder weights are persistent parameters. Votes, logits, fractions and parent outputs are intermediate values. Our zero-initialized logits restart at every forward pass. The original vector paper also permits learned initial coupling priors tied to type/location; zero initial logits are this model's choice, not a compulsory rule for every capsule architecture.</Prose>
+<Prose>The finite chain of matrix products, softmax, sums and squash is differentiable. Backpropagation may flow through every routing step. Detaching intermediate agreements preserves forward numbers but changes the derivative used to learn weights; we will draw that distinction in section 7. In <a href="/learn/path/full-curriculum/rnns-lstms-grus?module=deep-learning-fundamentals">RNNs, LSTMs and GRUs</a>, repeated computation instead updates state as new observations arrive in time.</Prose>
 
 <H2>{"4. Build the classifier and its objective"}</H2>
 
-<Prose>{"Our small model receives one real "}<InlineMath>{"8\\times8"}</InlineMath>{" grayscale digit. Here is the complete shape path; "}<InlineMath>{"B"}</InlineMath>{" means batch size."}</Prose>
+<Prose>{"Our small model receives one real "}<InlineMath>{"8\\times8"}</InlineMath>{" grayscale digit. Follow its pixels downward through the complete model. "}<InlineMath>{"B"}</InlineMath>{" means batch size: the program uses B for the module's N examples, so B=N here."}</Prose>
 
-<NeuralTable caption={"4. Build the classifier and its objective"} headers={[<>{"Stage"}</>,<>{"Output shape"}</>,<>{"Meaning"}</>]} rows={[[<>{"Image"}</>,<>{""}<InlineMath>{"B\\times1\\times8\\times8"}</InlineMath>{""}</>,<>{"Pixel intensities divided by 16"}</>],[<>{"Conv "}<InlineMath>{"3\\times3"}</InlineMath>{", padding 1; ReLU"}</>,<>{""}<InlineMath>{"B\\times32\\times8\\times8"}</InlineMath>{""}</>,<>{"Local scalar features"}</>],[<>{"Conv "}<InlineMath>{"3\\times3"}</InlineMath>{", stride 2, padding 1"}</>,<>{""}<InlineMath>{"B\\times16\\times4\\times4"}</InlineMath>{""}</>,<>{"Four capsule types, four coordinates each"}</>],[<>{"Regroup and squash"}</>,<>{""}<InlineMath>{"B\\times64\\times4"}</InlineMath>{""}</>,<>{""}<InlineMath>{"4\\cdot4"}</InlineMath>{" locations × 4 types"}</>],[<>{"Learned votes"}</>,<>{""}<InlineMath>{"B\\times64\\times10\\times8"}</InlineMath>{""}</>,<>{"Every child predicts all ten digit classes"}</>],[<>{"Routing and squash"}</>,<>{""}<InlineMath>{"B\\times10\\times8"}</InlineMath>{""}</>,<>{"One vector per class"}</>],[<>{"Vector lengths and argmax"}</>,<>{""}<InlineMath>{"B\\times10"}</InlineMath>{", then "}<InlineMath>{"B"}</InlineMath>{""}</>,<>{"Scores, then predicted digit"}</>]]} />
+<CapsuleClassifierDrawing />
+<Prose>Read downward: the first convolution makes 32 channel maps without changing 8×8 size; the stride-two convolution makes 16 maps at 4×4. Group each location's sixteen values into four 4-vectors, giving 64 children. Learned transforms produce ten votes per child, routing combines them into ten 8-vectors, and their lengths give ten class scores. The last row is ten vectors, not a ten-coordinate vector. The table states every batch shape.</Prose>
+<NeuralTable caption={"Every stage of the same 8×8 classifier"} headers={[<>{"Stage"}</>,<>{"Output shape"}</>,<>{"Meaning"}</>]} rows={[[<>{"Image"}</>,<>{""}<InlineMath>{"B\\times1\\times8\\times8"}</InlineMath>{""}</>,<>{"Pixel intensities divided by 16"}</>],[<>{"Conv "}<InlineMath>{"3\\times3"}</InlineMath>{", padding 1; ReLU"}</>,<>{""}<InlineMath>{"B\\times32\\times8\\times8"}</InlineMath>{""}</>,<>{"Local scalar features"}</>],[<>{"Conv "}<InlineMath>{"3\\times3"}</InlineMath>{", stride 2, padding 1"}</>,<>{""}<InlineMath>{"B\\times16\\times4\\times4"}</InlineMath>{""}</>,<>{"Four capsule types, four coordinates each"}</>],[<>{"Regroup and squash"}</>,<>{""}<InlineMath>{"B\\times64\\times4"}</InlineMath>{""}</>,<>{""}<InlineMath>{"4\\cdot4"}</InlineMath>{" locations × 4 types"}</>],[<>{"Learned votes"}</>,<>{""}<InlineMath>{"B\\times64\\times10\\times8"}</InlineMath>{""}</>,<>{"Every child predicts all ten digit classes"}</>],[<>{"Routing and squash"}</>,<>{""}<InlineMath>{"B\\times10\\times8"}</InlineMath>{""}</>,<>{"One vector per class"}</>],[<>{"Vector lengths and argmax"}</>,<>{""}<InlineMath>{"B\\times10"}</InlineMath>{", then "}<InlineMath>{"B"}</InlineMath>{""}</>,<>{"Scores, then predicted digit"}</>]]} />
 
 <Prose>{"Regrouping must preserve the coordinate group. In the supplied program, the primary channels are ordered by capsule type, then coordinate. We reshape to "}<InlineMath>{"B\\times4_{\\text{type}}\\times4_{\\text{coord}}\\times4_H\\times4_W"}</InlineMath>{", permute to location–type–coordinate order, then flatten the child index. Flattening the original tensor indiscriminately could group coordinates from different locations."}</Prose>
 
 <Prose>{"For a true class "}<InlineMath>{"k"}</InlineMath>{", the margin objective encourages its length to reach at least .9 and other lengths to stay at most .1:"}</Prose>
 
+<Prose>The true-class ruler has a target threshold 0.9; the wrong-class ruler has threshold 0.1. The marks show their current lengths. Move either mark to see its own squared penalty change.</Prose>
+<CapsuleMarginLab />
+<Prose>The true term measures only a shortage below 0.9. The wrong term measures only excess above 0.1 and has half the weight. Scores within their desired regions pay zero; a high true score does not excuse a high wrong score.</Prose>
+<Prose>The target indicator Tⱼ is 1 for the actual class and 0 for every other class. The equation adds one term per class j.</Prose>
 <div className="neural-equation"><MathBlock>{"L_{\\text{margin}}\n=\\sum_j\\left[T_j\\max(0,.9-\\|v_j\\|)^2\n+.5(1-T_j)\\max(0,\\|v_j\\|-.1)^2\\right],"}</MathBlock></div>
 
-<Prose>{"where "}<InlineMath>{"T_j=1"}</InlineMath>{" for the actual class and 0 otherwise. Average this sum over images. If the true-class length is .7 and one wrong-class length is .3, with all other wrong lengths at most .1, the loss is "}<InlineMath>{".2^2+.5(.2^2)=.06"}</InlineMath>{"."}</Prose>
+<Prose>{"Average this sum over images. If the true-class length is .7 and one wrong-class length is .3, with all other wrong lengths at most .1, the loss is "}<InlineMath>{".2^2+.5(.2^2)=.06"}</InlineMath>{"."}</Prose>
 
 <Prose>{"The loss has a zero-penalty region, rather than continually pushing the true length to one. The factor .5 changes the cost of wrong-class activation. This is not cross-entropy, so do not feed the lengths into a cross-entropy API as though they were unconstrained logits."}</Prose>
 
 <H3>{"Reconstruction asks the vector to retain useful detail"}</H3>
 
+<Prose>Why add a decoder? Classification can succeed while discarding image details. A decoder asks the chosen class vector to describe enough to reconstruct pixels. In the next drawing class 4 is the example selected vector: dashed rows show the nine vectors zeroed before the 80 values are flattened. The class selector comes from the true label during training, or from the longest vector at ordinary inference.</Prose>
+<CapsuleDecoderDrawing />
+<Prose>The flattened vector still has 80 slots, with 72 of them zero. Learned dense layers turn those inputs into 64 sigmoid pixel intensities. Class labels do not enter the convolutional encoder: they select the training reconstruction mask and supply the classification target. That separation matters when evaluating the decoder.</Prose>
 <Prose>{"Mask all class vectors except one, flatten the ten 8-vectors into 80 values, and decode through "}<InlineMath>{"80\\to64\\to128\\to64"}</InlineMath>{", using ReLU between layers and sigmoid on the final pixels. During training, select the "}<strong>{"true"}</strong>{" class vector for the auxiliary reconstruction objective:"}</Prose>
 
+<Prose>The complete training graph has two target routes. The true class supplies the margin target and selects the decoder mask; original pixels supply the reconstruction target. Trace the dashed target branches separately from the computed vector and decoder branches.</Prose>
+<CapsuleObjectiveDrawing />
+<Prose>The encoder receives pixels alone. Its class-vector lengths meet the true class at margin loss. The decoder receives the masked vectors; its predicted pixels meet original pixels at reconstruction loss. The two losses are added with the stated coefficient.</Prose>
 <div className="neural-equation"><MathBlock>{"L=L_{\\text{margin}}+.0005\\sum_{p=1}^{64}(\\widehat x_p-x_p)^2."}</MathBlock></div>
 
 <Prose>{"The squared errors are summed over pixels and averaged over images. On 64 pixels, this is equivalent to adding "}<InlineMath>{".032"}</InlineMath>{" times pixel-mean MSE. Accidentally using mean MSE with coefficient .0005 makes this term 64 times smaller."}</Prose>
@@ -156,15 +131,15 @@ export default {
 
 <Prose>{"Save "}<a href={"/learn-assets/capsule-networks/capsule-learning.py"}>{"capsule-learning.py"}</a>{" beside the CSV. The complete program includes model definitions, input validation, split, training, evaluation and JSON export. It does not download pretrained weights."}</Prose>
 
-<CapsuleProgram /><Prose>The complete source below is deferred until you open it. The CSV, import helper and mechanics program are available beside it; save these linked files in one directory for the documented local commands.</Prose><p><a href={capsuleAsset + "native-verification.json"}>Actual execution, environment and numerical checks</a> · <a href={capsuleAsset + "calculated-inputs.json"}>Complete measured record</a></p>
+<CapsuleProgram /><Prose>Save the CSV, import helper and mechanics program beside it to run the documented commands.</Prose><p><a href={capsuleAsset + "native-verification.json"}>Actual execution, environment and numerical checks</a> · <a href={capsuleAsset + "calculated-inputs.json"}>Complete measured record</a></p>
 
 <CodeBlock language={"bash"}>{"python -m pip install numpy==2.3.5 scikit-learn==1.9.1 torch==2.14.0\npython capsule-learning.py"}</CodeBlock>
 
-<Prose>{"The author run used Python 3.12.14 and PyTorch 2.14.0+cpu, one CPU thread. Choose the CPU package source appropriate to your platform if the general package command offers a different accelerator build. Numerical results can vary with platform or future dependency changes; the saved arrays give an exact reference for this run."}</Prose>
+<Prose>{"The recorded experiment used Python 3.12.14 and PyTorch 2.14.0+cpu, one CPU thread. Choose the CPU package source appropriate to your platform if the general package command offers a different accelerator build. Numerical results can vary with platform or future dependency changes; the saved arrays give an exact reference for this run."}</Prose>
 
 <Prose>{"There are six fits: seeds 1, 2 and 3, each with one or three routing steps. Every fit performs 600 Adam updates, learning rate .003, batch size 64 sampled with replacement. The vote matrices start from a normal distribution with standard deviation .1; other layers use PyTorch's defaults. No augmentation, early stopping or checkpoint selection is used. Both variants contain 47,184 parameters, including the decoder."}</Prose>
 
-<Prose>{"The central routing function is short enough to inspect. Votes have shape "}<InlineMath>{"B,I,J,D"}</InlineMath>{"; the parent axis is 2:"}</Prose>
+<Prose>{"The central routing function is short enough to inspect. B is batch size, I is the number of children, J is the number of candidate parents, and D is each parent's vote width. Votes have shape "}<InlineMath>{"B,I,J,D"}</InlineMath>{"; the parent axis is 2:"}</Prose>
 
 <CodeBlock language={"python"}>{"def squash(vectors):\n    radius = torch.linalg.vector_norm(vectors, dim=-1, keepdim=True)\n    return vectors * radius / (1 + radius.square())\n\ndef route(votes, iterations=3):\n    logits = votes.new_zeros(votes.shape[:-1])\n    for step in range(iterations):\n        coupling = logits.softmax(dim=2)\n        sums = (coupling[..., None] * votes).sum(dim=1)\n        output = squash(sums)\n        if step < iterations - 1:\n            logits = logits + (votes * output[:, None]).sum(dim=-1)\n    return output"}</CodeBlock>
 
@@ -174,19 +149,21 @@ export default {
 
 <Prose>{"All six models classified all 280 training images correctly at the final update. Development performance was:"}</Prose>
 
-<NeuralTable caption={"What actually happened?"} headers={[<>{"Seed"}</>,<>{"Routing during training and evaluation"}</>,<>{"Correct / 120"}</>,<>{"Margin loss"}</>,<>{"Reconstruction MSE using predicted class"}</>]} rows={[[<>{"1"}</>,<>{"1"}</>,<>{"117"}</>,<>{".04680"}</>,<>{".03126"}</>],[<>{"1"}</>,<>{"3"}</>,<>{"117"}</>,<>{".02364"}</>,<>{".03334"}</>],[<>{"2"}</>,<>{"1"}</>,<>{"117"}</>,<>{".04823"}</>,<>{".03103"}</>],[<>{"2"}</>,<>{"3"}</>,<>{"116"}</>,<>{".03311"}</>,<>{".03401"}</>],[<>{"3"}</>,<>{"1"}</>,<>{"117"}</>,<>{".04608"}</>,<>{".03325"}</>],[<>{"3"}</>,<>{"3"}</>,<>{"118"}</>,<>{".02497"}</>,<>{".03552"}</>]]} />
+<CapsuleEvidenceLab />
+
 
 <Prose>{"The three-step model's margin loss is lower in every paired run, but classification ties, loses one example or gains one example. Stronger margins do not necessarily change the largest score. The reconstruction term is not a proxy for classification quality either."}</Prose>
 
 <Prose>{"A training-mean-image baseline has development pixel MSE .07296. Both decoders improve on that crude reconstruction baseline. Their predicted-mask reconstructions differ from their true-label-conditioned reconstructions: for seed 1, the corresponding MSEs are .03126 versus .03041 for one-step routing and .03334 versus .03293 for three steps. The lower diagnostic error uses information unavailable at ordinary inference."}</Prose>
 
-<CapsuleEvidenceLab />
+
 
 <H3>{"A different question: change routing after fitting"}</H3>
 
 <Prose>{"Hold each trained model fixed and evaluate it with different routing counts:"}</Prose>
 
-<NeuralTable caption={"A different question: change routing after fitting"} headers={[<>{"Seed"}</>,<>{"Steps used to train"}</>,<>{"Evaluate with 1"}</>,<>{"With 2"}</>,<>{"With 3"}</>,<>{"With 5"}</>]} rows={[[<>{"1"}</>,<>{"1"}</>,<>{"117"}</>,<>{"117"}</>,<>{"117"}</>,<>{"116"}</>],[<>{"1"}</>,<>{"3"}</>,<>{"118"}</>,<>{"118"}</>,<>{"117"}</>,<>{"117"}</>],[<>{"2"}</>,<>{"1"}</>,<>{"117"}</>,<>{"117"}</>,<>{"117"}</>,<>{"116"}</>],[<>{"2"}</>,<>{"3"}</>,<>{"118"}</>,<>{"117"}</>,<>{"116"}</>,<>{"116"}</>],[<>{"3"}</>,<>{"1"}</>,<>{"117"}</>,<>{"117"}</>,<>{"117"}</>,<>{"118"}</>],[<>{"3"}</>,<>{"3"}</>,<>{"117"}</>,<>{"118"}</>,<>{"118"}</>,<>{"118"}</>]]} />
+<CapsuleEvidenceLab intervention />
+
 
 <Prose>{"All entries are correct counts out of the same 120 development images. Equal counts need not mean identical predictions: the seed-3 one-step model changes one prediction at inference step 2, although its correct count stays 117."}</Prose>
 
@@ -198,6 +175,9 @@ export default {
 
 <Prose>{"A system can recognize an object despite movement without retaining a predictable geometric representation. Conversely, a representation can move predictably while the final classifier still makes errors."}</Prose>
 
+<Prose>Think of moving a wheel while asking two different questions: its identity should remain “wheel,” but its estimated position should move with it. The supplied frame drawing below shows a part at(2,3) predicting a whole at(1,3); rotate the scene 90° and the whole moves to (−3,1). The tiny axes attached to each point are its local frame. These are constructed geometric meanings, not claims about a learned capsule coordinate.</Prose>
+<CapsuleFrameDrawing />
+<Prose>The identity answer stays unchanged; the position answer transforms. Call the input transformation T, the chosen output function f, and the corresponding output transformation ρ(T). With those names, the two desired behaviors become:</Prose>
 <ul><li>{""}<strong>{"Invariance:"}</strong>{" "}<InlineMath>{"f(Tx)=f(x)"}</InlineMath>{". The chosen output does not change under transformation "}<InlineMath>{"T"}</InlineMath>{"."}</li><li>{""}<strong>{"Equivariance:"}</strong>{" "}<InlineMath>{"f(Tx)=\\rho(T)f(x)"}</InlineMath>{". The output changes according to a specified corresponding transformation "}<InlineMath>{"\\rho(T)"}</InlineMath>{"."}</li></ul>
 
 <Prose>{"For an image classification label, invariance may be desirable for a small translation that preserves the digit. For a position estimate, translation equivariance is usually necessary: the estimated location should move. A rotation can change the semantic label in some tasks, so desired invariances must come from the task contract."}</Prose>
@@ -208,18 +188,25 @@ export default {
 
 <Prose>{"Shift every development image one pixel right or down, filling the exposed boundary with zero and discarding pixels that leave the frame. Evaluate with the routing count used for training."}</Prose>
 
-<NeuralTable caption={"A shift test with no retraining"} headers={[<>{"Seed"}</>,<>{"Trained steps"}</>,<>{"Unchanged"}</>,<>{"One pixel right"}</>,<>{"One pixel down"}</>]} rows={[[<>{"1"}</>,<>{"1"}</>,<>{"117"}</>,<>{"69"}</>,<>{"75"}</>],[<>{"1"}</>,<>{"3"}</>,<>{"117"}</>,<>{"61"}</>,<>{"72"}</>],[<>{"2"}</>,<>{"1"}</>,<>{"117"}</>,<>{"66"}</>,<>{"72"}</>],[<>{"2"}</>,<>{"3"}</>,<>{"116"}</>,<>{"60"}</>,<>{"77"}</>],[<>{"3"}</>,<>{"1"}</>,<>{"117"}</>,<>{"72"}</>,<>{"76"}</>],[<>{"3"}</>,<>{"3"}</>,<>{"118"}</>,<>{"65"}</>,<>{"78"}</>]]} />
+<CapsuleFrozenInvestigation kind="shift" />
+<Prose>The two image grids show actual fixed-model input and shifted input. Changing a horizontal or vertical shift always starts from the original image, so returning both to zero is an exact null. The score bars compare current lengths with original ticks; their winner can change. The all-development comparison below applies the same one-pixel operation to every image, rather than inferring robustness from one example.</Prose>
+<NeuralTable caption={"Measured one-pixel shifts, all six fixed models"} headers={[<>{"Seed"}</>,<>{"Trained steps"}</>,<>{"Unchanged"}</>,<>{"One pixel right"}</>,<>{"One pixel down"}</>]} rows={[[<>{"1"}</>,<>{"1"}</>,<>{"117"}</>,<>{"69"}</>,<>{"75"}</>],[<>{"1"}</>,<>{"3"}</>,<>{"117"}</>,<>{"61"}</>,<>{"72"}</>],[<>{"2"}</>,<>{"1"}</>,<>{"117"}</>,<>{"66"}</>,<>{"72"}</>],[<>{"2"}</>,<>{"3"}</>,<>{"116"}</>,<>{"60"}</>,<>{"77"}</>],[<>{"3"}</>,<>{"1"}</>,<>{"117"}</>,<>{"72"}</>,<>{"76"}</>],[<>{"3"}</>,<>{"3"}</>,<>{"118"}</>,<>{"65"}</>,<>{"78"}</>]]} />
 
 <Prose>{"The model is highly sensitive to these shifts. The experiment uses small images, stride 2, location-specific vote matrices and no shift augmentation. Cropping can also remove meaningful strokes; inspect individual transformed inputs rather than assuming every transformation perfectly preserves the label. Zero shift reproduces the unchanged predictions."}</Prose>
 
 <Prose>{"This is a useful failure. Routing's internal agreement does not manufacture the missing coverage of transformed data or constrain every preceding layer to respect a symmetry."}</Prose>
 
-<CapsuleFrozenInvestigation />
 
+
+<Prose>After seeing the shift failure, inspect a smaller change: select an actual pixel and adjust its intensity while all 47,184 weights stay frozen. The source label is a reference annotation; only pixels enter the encoder and its predicted-class decoder.</Prose>
+<CapsuleFrozenInvestigation kind="pixels" />
+<Prose>Selecting a cell chooses the pixel slider's target; adjusting its intensity reruns the fixed model. The bar lengths and reconstruction come from those new pixels. This is an input intervention, which can alter encoder scores. We will now contrast it with a decoder-only intervention.</Prose>
 <H3>{"What can a latent-coordinate experiment tell us?"}</H3>
 
-<Prose>{"Choose one class vector, keep the decoder and mask fixed, and change one coordinate by "}<InlineMath>{"-.1,0,+.1"}</InlineMath>{". Display the three reconstructions at the same intensity scale. This probes how the "}<strong>{"learned decoder"}</strong>{" responds to that coordinate near that specimen."}</Prose>
+<Prose>{"Choose one class vector, keep the decoder and mask fixed, and change one coordinate by "}<InlineMath>{"-.1,0,+.1"}</InlineMath>{". Compare the original reconstruction with the continuously edited one at the same intensity scale; the parallel masked-out edit tests what must remain unchanged. This probes how the "}<strong>{"learned decoder"}</strong>{" responds to that coordinate near that specimen."}</Prose>
 
+<CapsuleFrozenInvestigation kind="latent" />
+<Prose>The fixed mask is the original predicted class. The selected-class edit changes only its chosen coordinate before decoding; the parallel masked-out edit applies the same delta to the next class but keeps the original mask. Those altered coordinates are zeroed, so that comparison remains exactly unchanged. The three controls select the actual source, coordinate and delta; no encoder score is recomputed from an edited decoder vector.</Prose>
 <Prose>{"It may alter several image properties at once. Even if a change resembles thickness in one image, call it a local observed effect until it recurs under broader controlled tests. A coordinate edit is not guaranteed to lie on the distribution of vectors the encoder actually produces."}</Prose>
 
 <Prose>{"There is also a precise null case: if the decoder mask selects class 4, changing only class 5's vector cannot affect the masked decoder input. Changing a caption's label without changing the actual mask cannot affect any arithmetic."}</Prose>
@@ -236,8 +223,11 @@ export default {
 
 <H3>{"Squash changes radial and sideways sensitivity differently"}</H3>
 
-<Prose>{"Write "}<InlineMath>{"s=rq"}</InlineMath>{", where "}<InlineMath>{"q"}</InlineMath>{" is a unit vector. A small change parallel to "}<InlineMath>{"q"}</InlineMath>{" changes length; a perpendicular change initially changes direction. The squash Jacobian has eigenvalues"}</Prose>
+<Prose>The decoder experiments showed that a direction can change several pixels. Return now to squash itself: why can a change of direction affect its output more than an equal change of length?</Prose>
 
+<Prose>To understand the derivative, compare equal small changes along the input arrow and perpendicular to it. “Radial” changes its length; “tangential” turns it. Both start from the same vector. The next views draw the actual input and output arrows, with only the tiny perturbations enlarged by the labelled factors.</Prose>
+<CapsuleSensitivityLab />
+<Prose>The two equal input changes need not cause equal output changes. A <strong>Jacobian</strong> is the matrix that maps an infinitesimal input displacement to its output displacement. An <strong>eigen-direction</strong> keeps its direction under that mapping; its scalar size multiplier is the <strong>eigenvalue</strong>. Along the unit direction q, s=rq, squash has a radial multiplier; in each perpendicular direction it has a tangential multiplier.</Prose>
 <div className="neural-equation"><MathBlock>{"\\lambda_{\\text{radial}}=\\frac{2r}{(1+r^2)^2},\\qquad\n\\lambda_{\\text{tangent}}=\\frac{r}{1+r^2}."}</MathBlock></div>
 
 <Prose>{"Both approach zero at the origin and at very large radius, at different rates. Consequently, making initial votes arbitrarily tiny or letting summed inputs become huge can reduce useful gradients. The radial output-length curve "}<InlineMath>{"r^2/(1+r^2)"}</InlineMath>{" has its inflection at "}<InlineMath>{"r=1/\\sqrt3"}</InlineMath>{", not at 1."}</Prose>
@@ -246,18 +236,25 @@ export default {
 
 <Prose>{"Derive the two directions separately. Along the unit arrow "}<InlineMath>{"q"}</InlineMath>{", changing input radius changes output length "}<InlineMath>{"g(r)=r^2/(1+r^2)"}</InlineMath>{", so the multiplier is "}<InlineMath>{"g'(r)=2r/(1+r^2)^2"}</InlineMath>{". A tiny perpendicular displacement has zero first-order effect on radius, so it is multiplied by the existing scale "}<InlineMath>{"r/(1+r^2)"}</InlineMath>{". These are the two eigen-directions of the Jacobian: one scalar cannot describe the layer's sensitivity. At radius 5, even though the output is nearly saturated in length, a directional correction is about 13 times as responsive as an equal radial correction."}</Prose>
 
-<CapsuleSensitivityFigure />
+
 
 <Prose>{"The "}<a href={"/learn-assets/capsule-networks/capsule-mechanics.py"}>{"mechanics program"}</a>{" computes the analytical Jacobian and checks it by central differences. At zero the exact derivative is zero; a finite difference has a small step-dependent residual. This is a numerical approximation, not a contradictory derivative."}</Prose>
 
-<Prose>{"For the three-step routing fixture, differentiating the full computation agrees with central differences to about "}<InlineMath>{"1.2\\times10^{-10}"}</InlineMath>{". Detaching earlier routing calculations gives the same scalar loss but a gradient differing by up to .03752. Both can be coded; only the full derivative matches the stated full forward function's derivative."}</Prose>
 
+
+<Prose>Routing also contains two derivative routes. A vote affects the output directly through its value, and indirectly through the fractions computed from earlier agreements. The orange dashed route is the feedback derivative that a stopped-gradient choice removes.</Prose>
+<CapsuleGradientDrawing />
+<Prose>Read the scalar analogy below with u as the input value and c(u) as a fraction computed from it. Both multiply at the output. Keeping c's forward number while stopping its backward route removes only its derivative, not the direct route through u.</Prose>
 <Prose>{"The missing path under detachment is easy to locate. The final parent receives a direct vote contribution, but an earlier vote also changes agreement, which changes the next coupling, which changes the final sum. If "}<InlineMath>{"s(u)=c(u)u"}</InlineMath>{" in a scalar illustration, its derivative is "}<InlineMath>{"c(u)+u c'(u)"}</InlineMath>{". Detaching the coupling keeps the first term and removes the second. For "}<InlineMath>{"c(u)=\\operatorname{sigmoid}(u)"}</InlineMath>{" at "}<InlineMath>{"u=1"}</InlineMath>{", both forward values are .73106, but the derivatives are .92767 and .73106. This illustrates the computation-graph choice; it is not a substitute for the full routing calculation above."}</Prose>
+<Prose>{"For the three-step routing fixture, differentiating the full computation agrees with central differences to about "}<InlineMath>{"1.2\\times10^{-10}"}</InlineMath>{". Detaching earlier routing calculations gives the same scalar loss but a gradient differing by up to .03752. Both can be coded; only the full derivative matches the stated full forward function's derivative."}</Prose>
 
 <H3>{"Why explicit matrices can help—and what they do not guarantee"}</H3>
 
-<Prose>{"Suppose a part really has a homogeneous 2D coordinate frame"}</Prose>
+<Prose>We have been testing learned vectors. For the next calculation switch deliberately to a supplied geometric frame, because explicit geometry lets us prove an exact identity instead of inferring it from a reconstruction.</Prose>
 
+<Prose>Now give the geometric analogy explicit matrices. A part frame has origin (2,3), its relation shifts one unit toward the whole's origin (1,3), and G rotates the entire scene. The physical-frame picture below shows both transformation orders ending at the same point; the companion vector picture applies an unequal horizontal scale instead, which need not commute with rotation. Angle and horizontal scale act on only these supplied transformations.</Prose>
+<CapsuleGeometryFigure />
+<Prose>The matrices encode the attached coordinate axes and translated origins, with a final homogeneous coordinate 1. Right multiplication by W applies the relation in the part's frame; left multiplication by G moves the whole scene. The pictures do not assign these semantics to our learned digit vectors.</Prose>
 <div className="neural-equation"><MathBlock>{"M_i=\\begin{bmatrix}1&0&2\\\\0&1&3\\\\0&0&1\\end{bmatrix}"}</MathBlock></div>
 
 <Prose>{"and its relation to the whole is"}</Prose>
@@ -272,7 +269,7 @@ export default {
 
 <Prose>{"This is an exact calculation "}<strong>{"because"}</strong>{" these matrices have an explicitly supplied geometric meaning and transform by left multiplication. A learned encoder must still produce frames with the promised transformation behavior. A generic learned "}<InlineMath>{"4\\times4"}</InlineMath>{" array does not automatically become a rigid camera pose."}</Prose>
 
-<CapsuleGeometryFigure />
+
 
 <Prose>{"For vector votes, a linear map needs"}</Prose>
 
@@ -286,13 +283,19 @@ export default {
 
 <Prose>{"Matrix capsules separate an activation scalar "}<InlineMath>{"a_i"}</InlineMath>{" from pose matrix "}<InlineMath>{"M_i"}</InlineMath>{". Votes are "}<InlineMath>{"V_{ij}=M_iW_{ij}"}</InlineMath>{". Flatten the entries of a vote into coordinates "}<InlineMath>{"h"}</InlineMath>{" only for the statistics."}</Prose>
 
+<Prose>The vector method summarizes weighted votes with a squashed arrow. The matrix method instead asks how tightly parent-specific vote points cluster. A responsibility is a child's share assigned to one parent; child activation is a separate amount of available evidence. Multiplying them once gives effective mass. Read the statistical update downward.</Prose>
+<CapsuleEMProcessDrawing />
+<Prose>Weighted votes give the parent's mean and spread. A coding-cost expression turns that spread and mass into parent activation; the density of each child vote under each parent, together with that activation, gives the next responsibilities. “Mean” is the weighted centre, “variance” measures weighted squared distance along a coordinate, and “diagonal” means we estimate these coordinate spreads separately rather than their cross-covariances.</Prose>
 <Prose>{"Instead of repeatedly adding dot-product agreement, a diagonal-Gaussian routing procedure estimates a mean and variance for the votes supporting each parent. Let "}<InlineMath>{"R_{ij}"}</InlineMath>{" be a child's normalized responsibility and "}<InlineMath>{"q_{ij}=a_iR_{ij}"}</InlineMath>{". Then"}</Prose>
 
+<Prose>Our three-child fixture uses activations 1,1,0.5 and separate transformed vote points for A and B. In round 1 every responsibility is 0.5, so each parent has effective mass 1.25. The mean markers and spread ellipses below are computed from those actual weights. The vertical coordinate of every vote is zero; its drawn spread comes from the declared variance floor 0.01, not measured variation. Changing child 3's activation or A vote exposes the difference between a vote and available evidence.</Prose>
+<CapsuleEMLab />
+<Prose>Let R be a normalized responsibility, a the fixed child activation, and q their product. A parent's total mass n is the sum of q; divide weighted coordinates and squared deviations by that mass to obtain its mean μ and variance σ².</Prose>
 <div className="neural-equation"><MathBlock>{"n_j=\\sum_iq_{ij},\\quad\n\\mu_{jh}=\\frac{\\sum_iq_{ij}V_{ijh}}{n_j},\\quad\n\\sigma^2_{jh}=\\frac{\\sum_iq_{ij}(V_{ijh}-\\mu_{jh})^2}{n_j}."}</MathBlock></div>
 
 <Prose>{"The child activation scales its contribution. Each iteration recomputes "}<InlineMath>{"q=aR"}</InlineMath>{"; repeatedly multiplying a previously scaled "}<InlineMath>{"q"}</InlineMath>{" by "}<InlineMath>{"a"}</InlineMath>{" would incorrectly suppress children again and again. A parent with zero effective mass has no identified mean. A numerical denominator guard prevents a crash but does not create evidence; report the no-evidence case. A variance floor similarly prevents singular densities while changing the fitted spread."}</Prose>
 
-<Prose>{"Estimate a parent activation from a coding-cost expression, then revise responsibilities using a Gaussian log density plus log parent activation, normalized over parents. Our complete constructed demonstration uses"}</Prose>
+<Prose>{"Estimate a parent activation from a coding-cost expression, then revise responsibilities using a Gaussian log density plus log parent activation, normalized over parents. Here βᵤ is a learned per-coordinate coding-cost offset, βₐ is a learned activation threshold, and positive λ controls how sharply the cost comparison becomes an activation; it is an inverse temperature. Our constructed demonstration fixes the two offsets at zero, rather than fitting them. Its expressions are"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\mathrm{cost}_j=\\sum_h n_j(\\beta_u+\\log\\sigma_{jh}),\\quad\na_j=\\operatorname{sigmoid}\\{\\lambda(\\beta_a-\\mathrm{cost}_j)\\},"}</MathBlock></div>
 
@@ -304,13 +307,18 @@ export default {
 
 <Prose>{"For three children with activations "}<InlineMath>{"1,1,.5"}</InlineMath>{", parent-A first coordinates "}<InlineMath>{"0,.2,2"}</InlineMath>{" and parent-B first coordinates "}<InlineMath>{"0,3,3.2"}</InlineMath>{", uniform responsibilities give mass 1.25 per parent. The first means are .48 and 1.84. After three rounds they are approximately .10881 and 2.81927. The second coordinate is zero for every vote, so its variance hits the stated floor. Making the third child inactive makes edits to its votes irrelevant to the estimated means."}</Prose>
 
+<Prose>To remove <em>all</em> evidence, multiply every child activation by a common gain. At gain 0 no mean is identified: finite denominator guards cannot create an object. This is a separate question from turning off child 3 while the other children stay active.</Prose>
+<CapsuleEMLab allEvidence />
+<Prose>There is one important density subtlety before comparing this with ordinary Gaussian-mixture EM. Switch briefly from vote clusters to a uniformly filled square containing probability mass 0.2. A horizontal scaling of 2 doubles the square's area but preserves its probability mass.</Prose>
+<CapsuleDensityDrawing />
+<Prose>Density is probability per coordinate area. In the original area 1 region it is 0.2; after stretching to area 2 it is 0.1. The same mass therefore has different density numbers in differently transformed coordinates. For an invertible change of variables this is the determinant correction: the absolute determinant of diag(2,1) is 2. Different parents' transformed vote densities are not automatically likelihoods in one common original child space. Matrix Capsules Appendix A.2 discusses this issue; transforms are held fixed during routing and learned discriminatively outside it, rather than inverted anew at each routing round. Our bounded diagonal-EM illustration does not add an original-space Jacobian correction.</Prose>
 <Prose>{"The resemblance to "}<a href={"/learn/path/full-curriculum/gaussian-mixture-models-gmm-em-algorithm?module=classical-ml"}>{"Gaussian-mixture EM"}</a>{" is useful, but each capsule parent sees a differently transformed version of the children, and parent activations do not sum to one. It is not ordinary maximum-likelihood fitting of one common observed dataset. The matrix-capsule paper discusses the change-of-variables issue when comparing densities in different transformed spaces. "}<a href={"https://www.cs.toronto.edu/~hinton/absps/EMcapsules.pdf"}>{"Matrix Capsules with EM Routing"}</a>{""}</Prose>
 
-<CapsuleEMLab /><CapsuleProgram file="capsule-mechanics.py" title="Read the complete NumPy routing, derivative, geometry and EM program" />
+<CapsuleProgram file="capsule-mechanics.py" title="Read the complete NumPy routing, derivative, geometry and EM program" />
 
 <H2>{"Follow routing all the way into a trainable program"}</H2>
 
-<Prose>{"The runnable scratch route is split by purpose, not by missing work. "}<a href={"/learn-assets/capsule-networks/capsule-mechanics.py"}>{"capsule-mechanics.py"}</a>{" owns NumPy votes, stable softmax, squash, routing iterations and the bounded diagonal-EM illustration. "}<a href={"/learn-assets/capsule-networks/capsule-learning.py"}>{"capsule-learning.py"}</a>{" owns the differentiable Torch routing, "}<code>{"TinyCapsules"}</code>{", margin loss, reconstruction and complete fit. The Torch tensor implementation is the ordinary research route: there is no universal standard capsule layer whose import can replace specifying the routing algorithm. Reusing "}<code>{"einsum"}</code>{", linear layers and autograd does not hide routing; the code explicitly updates its coupling logits and sums weighted votes."}</Prose>
+<Prose>{"The two programs implement complementary parts of the mechanism. "}<a href={"/learn-assets/capsule-networks/capsule-mechanics.py"}>{"capsule-mechanics.py"}</a>{" owns NumPy votes, stable softmax, squash, routing iterations and the bounded diagonal-EM illustration. "}<a href={"/learn-assets/capsule-networks/capsule-learning.py"}>{"capsule-learning.py"}</a>{" owns the differentiable Torch routing, "}<code>{"TinyCapsules"}</code>{", margin loss, reconstruction and complete fit. The Torch tensor implementation is the ordinary research route: there is no universal standard capsule layer whose import can replace specifying the routing algorithm. Reusing "}<code>{"einsum"}</code>{", linear layers and autograd does not hide routing; the code explicitly updates its coupling logits and sums weighted votes."}</Prose>
 
 <Prose>{"The paired route compares the same votes and iteration count, not two independently fitted classifiers. "}<code>{"author-checks.py"}</code>{" reconstructs saved encoder/routing/reconstruction outputs through a separate NumPy path. The lesson's gradient branch explains how gradients flow through the iterative computation. Detaching intermediate agreements would change that training algorithm even if its forward result stayed identical. Softmax runs over candidate "}<strong>{"parents for each child"}</strong>{"; moving that axis changes who competes for responsibility."}</Prose>
 
@@ -318,19 +326,22 @@ export default {
 
 <Prose>{"Dynamic routing with B examples, I child capsules, J parents, vote width D and R rounds uses O(BIJD·R) routing arithmetic and O(BIJD) vote storage, apart from the learned vote transforms. Parent-batched contractions are appropriate for the small inspected classifier; manufacturing an extra all-pairs child tensor is not. Diagonal EM has a different Gaussian/statistical meaning and stays explicitly a small illustrative calculation, not an implementation claim for the complete Matrix Capsules paper or its convolutional pose system."}</Prose>
 
-<Prose>{""}<strong>{"Implementation exercise:"}</strong>{" add a positive routing temperature τ by replacing "}<code>{"softmax(logits)"}</code>{" with "}<code>{"softmax(logits/τ)"}</code>{", leaving the agreement update unscaled. Compare τ0.5,1 and2 with fixed votes and R. Do not divide both the logits and every agreement update unless you mean a different algorithm. The worked two-parent logits[0,2] give shares approximately[0.1192,0.8808] atτ1, [0.0180,0.9820] atτ0.5, and[0.2689,0.7311] atτ2. Check each child row sums to one and that a single candidate parent always receives share one. Trace actual vector outputs as well as shares; sharper assignments do not guarantee better classification. At finite nonzero votes this remains differentiable, while τ must remain strictly positive."}</Prose>
+<Prose>One controllable modification is a positive softmax temperature τ. Divide input logits by τ before parent softmax: a smaller τ makes relative differences sharper. Keep agreement updates unchanged so that you change one defined part of the algorithm.</Prose>
+<CapsuleTemperatureLab />
+<Prose>{""}<strong>{"Implementation exercise:"}</strong>{" add a positive routing temperature τ by replacing "}<code>{"softmax(logits)"}</code>{" with "}<code>{"softmax(logits/τ)"}</code>{", leaving the agreement update unscaled. Compare τ0.5,1 and 2 with fixed votes and R. Do not divide both the logits and every agreement update unless you mean a different algorithm. The worked two-parent logits [0,2] give shares approximately[0.1192,0.8808] at τ1, [0.0180,0.9820] at τ0.5, and[0.2689,0.7311] at τ2. Check each child row sums to one and that a single candidate parent always receives share one. Trace actual vector outputs as well as shares; sharper assignments do not guarantee better classification. At finite nonzero votes this remains differentiable, while τ must remain strictly positive."}</Prose>
 
 <H2>{"8. Architecture costs and alternative routing designs"}</H2>
 
 <Prose>{"The classic vector CapsNet uses a larger shape chain than our experiment:"}</Prose>
 
-<CapsuleClassicShape />
+<CapsuleClassifierDrawing classic />
+<Prose>Compared with the 8×8 experiment, these two valid 9×9 convolutions change spatial size 28→20→6. The second tensor has 256 channels arranged into 32 types of 8 coordinates at 36 locations, giving 1,152 children. Ten 16-coordinate class vectors feed a masked 160-value decoder. Map spacing is drawn to a common input-size scale; plane depth is schematic.</Prose>
 
 <div className="neural-equation"><MathBlock>{"28^2\\to256\\times20\\times20\n\\to32\\text{ types}\\times6\\times6\\times8\\text{ coordinates}\n\\to10\\times16."}</MathBlock></div>
 
 <Prose>{"Both convolutions have "}<InlineMath>{"9\\times9"}</InlineMath>{" kernels; the second has stride 2. There are 1,152 primary capsules. With a masked 160-value decoder input and decoder widths 512, 1,024 and 784, the parameter accounting is:"}</Prose>
 
-<NeuralTable caption={"8. Architecture costs and alternative routing designs"} headers={[<>{"Component"}</>,<>{"Parameters"}</>]} rows={[[<>{"First convolution"}</>,<>{"20,992"}</>],[<>{"Primary-capsule convolution"}</>,<>{"5,308,672"}</>],[<>{"Vote transformations"}</>,<>{"1,474,560"}</>],[<>{"Reconstruction decoder"}</>,<>{"1,411,344"}</>],[<>{"Total"}</>,<>{"8,215,568"}</>]]} />
+<NeuralTable caption={"The stated topology determines these quantities"} headers={[<>{"Component"}</>,<>{"Parameters"}</>]} rows={[[<>{"First convolution"}</>,<>{"20,992"}</>],[<>{"Primary-capsule convolution"}</>,<>{"5,308,672"}</>],[<>{"Vote transformations"}</>,<>{"1,474,560"}</>],[<>{"Reconstruction decoder"}</>,<>{"1,411,344"}</>],[<>{"Total"}</>,<>{"8,215,568"}</>]]} />
 
 <Prose>{"The primary convolution, not the vote matrices, owns the largest share here. Disabling the decoder removes its parameters. A decoder that receives only the selected 16-vector is another design with different counts; do not mix that count with the masked-160 implementation."}</Prose>
 
@@ -348,18 +359,27 @@ export default {
 
 <Prose>{"To see the restriction, take one row of the pose matrix. Right multiplication applies the same 4×4 relation to that row as to every other row; it does not arbitrarily mix entries from different pose rows. Likewise, sharing a type-to-type transformation across image positions reduces learned parameters, while every position still produces its own votes. Sharing alone does not eliminate the vote tensor's memory cost. Restricting each child to nearby parents is a separate change that also reduces the number of materialized connections."}</Prose>
 
+<Prose>Sharing a transformation across positions raises a new question: how does a parent's vote retain the location that generated it? The Matrix Capsules design uses <strong>coordinate addition</strong>. The next constructed 4×4 vote shows two selected entries in its last column; add the scaled receptive-field centre's row and column there.</Prose>
+<CapsuleCoordinateAdditionDrawing />
+<Prose>In this illustration, last-column entries 0.1 and 0.2 become 0.35 and 0.7 when the scaled centre is (row 0.25, column 0.5). This is a supplied indexing example, not a fitted pose. In the paper's shared class-capsule transforms, the first two entries of the vote's rightmost column receive those scaled image-position coordinates. The local relation can be shared while the vote still identifies its receptive-field centre. Our tiny vector classifier uses location-specific transforms instead; it does not implement this matrix-capsule operation.</Prose>
 <Prose>{"Three alternative directions answer different shortcomings:"}</Prose>
 
-<NeuralTable caption={"8. Architecture costs and alternative routing designs"} headers={[<>{"Direction"}</>,<>{"Mechanism"}</>,<>{"What to examine"}</>]} rows={[[<>{"Diagonal EM routing"}</>,<>{"Estimate vote clusters, spread and activation separately"}</>,<>{"Variance floors, negligible mass, log-domain numerics, local sharing"}</>],[<>{"Variational-Bayes routing"}</>,<>{"Maintain approximate uncertainty over mixture parameters and assignments with priors"}</>,<>{"Prior strength, approximation assumptions, whether variance-collapse behavior improves"}</>],[<>{"STAR-Caps"}</>,<>{"Use learned attentive coefficients and binary routing gates with a straight-through gradient estimator"}</>,<>{"Discrete forward choices versus surrogate gradients, actual sparse execution and measured cost"}</>]]} />
+<NeuralTable caption={"The stated topology determines these quantities"} headers={[<>{"Direction"}</>,<>{"Mechanism"}</>,<>{"What to examine"}</>]} rows={[[<>{"Diagonal EM routing"}</>,<>{"Estimate vote clusters, spread and activation separately"}</>,<>{"Variance floors, negligible mass, log-domain numerics, local sharing"}</>],[<>{"Variational-Bayes routing"}</>,<>{"Maintain approximate uncertainty over mixture parameters and assignments with priors"}</>,<>{"Prior strength, approximation assumptions, whether variance-collapse behavior improves"}</>],[<>{"STAR-Caps"}</>,<>{"Use learned attentive coefficients and binary routing gates with a straight-through gradient estimator"}</>,<>{"Discrete forward choices versus surrogate gradients, actual sparse execution and measured cost"}</>]]} />
 
 <Prose>{"The "}<a href={"https://ojs.aaai.org/index.php/AAAI/article/view/5785"}>{"AAAI 2020 variational-routing paper"}</a>{" and "}<a href={"https://karim-ahmed.github.io/publications/starcaps.pdf"}>{"NeurIPS 2019 STAR-Caps paper"}</a>{" are distinct algorithms, not extra loop counts for the vector-routing function above. STAR-Caps includes ImageNet experiments, so “capsules have never been tried on ImageNet” is incorrect. Historical results should be read with their architecture, data and training conditions, not used as an undated ranking."}</Prose>
 
+<Prose>A prior supplies a distribution of plausible means before seeing votes. The next constructed Gaussian curves compare that prior with the posterior after one or nine identical observations. Their narrowing shows reduced uncertainty; their centre shows the mean estimate moving toward the observations.</Prose>
+<CapsulePriorDrawing />
 <Prose>{"Two short bridges make those alternatives easier to approach. A point estimate can become overconfident about a parent supported by almost no mass; a distribution over its parameters can retain uncertainty and let a prior matter more when evidence is scarce. As a separate Gaussian illustration, a mean with prior "}<InlineMath>{"N(0,1)"}</InlineMath>{", known observation variance 1 and one observed vote 2 has posterior mean 1 and variance .5. Nine identical observed votes 2 move those to 1.8 and .1. This is not the complete variational capsule algorithm; it shows the role that posterior uncertainty adds beyond one fitted mean and spread. Read the variational paper for its actual priors and factorization."}</Prose>
 
+<Prose>Hard routing gates are a different alternative to repeated fractions. The violet step below is the binary forward decision; the orange dashed curve is a deliberately supplied training derivative. They perform different roles, so agreement of a forward value says nothing about the chosen backward estimator.</Prose>
+<CapsuleGateDrawing />
 <Prose>{"A binary gate has a different problem: its hard forward decision has derivative zero away from its threshold and no ordinary derivative at the jump. A "}<strong>{"straight-through estimator"}</strong>{" deliberately supplies a surrogate backward derivative so parameters can change. For example, a forward rule "}<InlineMath>{"1[s>0]"}</InlineMath>{" at "}<InlineMath>{"s=1"}</InlineMath>{" returns 1; using a sigmoid derivative in backpropagation supplies about .1966 even though the hard rule's true derivative there is 0. That is a generic illustration, not a claim that STAR-Caps uses precisely this surrogate. When reading its estimator, keep three questions separate: which routes are active, which gradient is used to train them, and whether the runtime actually skips inactive work."}</Prose>
 
 <Prose>{"For matrix capsules, "}<strong>{"spread loss"}</strong>{" is another objective:"}</Prose>
 
+<Prose>Spread loss compares the true and wrong activations directly. In this pair the true score 0.6 exceeds the wrong score 0.3 by 0.3, larger than the required margin 0.2. Both marks share 0–1 rulers.</Prose>
+<CapsuleMarginDrawing trueLength={.6} wrongLength={.3} spread />
 <div className="neural-equation"><MathBlock>{"L=\\sum_{i\\ne t}\\max(0,m-(a_t-a_i))^2."}</MathBlock></div>
 
 <Prose>{"It asks the true activation to exceed each wrong activation by a margin "}<InlineMath>{"m"}</InlineMath>{", often increased during training. Unlike the earlier independent thresholds .9 and .1, it penalizes a relative activation gap."}</Prose>
@@ -452,7 +472,7 @@ export default {
 
 <div className="lesson-exercise" data-lesson-exercise=""><H3>{"5. Design a new routing comparison"}</H3>
 
-<Prose>{"You want to know whether routing helps with left-shifted digits. The existing table contains only right and downward shifts. Specify a comparison that does not treat those table rows as a new untouched test, then make and check a prediction with the program."}</Prose>
+<Prose>{"You want to know whether routing helps with left-shifted digits. The existing table contains only right and downward shifts. Specify a comparison that does not treat those table rows as a new untouched test, then run the comparison and explain its result with the program."}</Prose>
 
 <details>
 
@@ -512,7 +532,7 @@ export default {
 
 <div className="lesson-exercise" data-lesson-exercise=""><H3>{"8. Explain a reconstruction edit without inventing semantics"}</H3>
 
-<Prose>{"Use either saved image and the fixed seed-1 three-step model. Change a selected class-vector coordinate by a value other than the demonstrated ±.1. Predict what changes and what must remain invariant. What evidence would justify naming the coordinate “stroke thickness”?"}</Prose>
+<Prose>{"Use either saved image and the fixed seed-1 three-step model. Change a selected class-vector coordinate by a value other than the demonstrated ±.1. Run the edit, explain what changes, and verify what remains invariant. What evidence would justify naming the coordinate “stroke thickness”?"}</Prose>
 
 <details>
 
@@ -530,14 +550,19 @@ export default {
 
 </details>
 
-<Prose>{""}<strong>{"Readiness:"}</strong>{" you can follow one image through grouping, voting, routing, scoring and reconstruction; explain why routing normalizes over parents for each child; distinguish input-dependent assignments from trained weights; and design a comparison whose conclusion matches the data. For the deeper branch, derive a squash sensitivity, check a transformation identity and trace one EM update."}</Prose></div></section>
+</div>
+<Prose>{""}<strong>{"Readiness:"}</strong>{" you can follow one image through grouping, voting, routing, scoring and reconstruction; explain why routing normalizes over parents for each child; distinguish input-dependent assignments from trained weights; and design a comparison whose conclusion matches the data. For the deeper branch, derive a squash sensitivity, check a transformation identity and trace one EM update."}</Prose></section>
 
 <section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H2>{"10. Continue and learn another way"}</H2>
 
 <Prose>{"Next in the module is "}<a href={"/learn/path/full-curriculum/rnns-lstms-grus?module=deep-learning-fundamentals"}>{"RNNs, LSTMs and GRUs"}</a>{". We move from repeated assignment refinement for one image to a state updated over observations in time. The connection is repeated computation; the purpose and state lifetime are different."}</Prose>
 
-<Prose>{"Useful references and alternate routes:"}</Prose>
+<H3>Learn another way</H3>
 
-<ul><li>{""}<a href={"https://arxiv.org/abs/1710.09829"}>{"Dynamic Routing Between Capsules — Sabour, Frosst and Hinton"}</a>{". Read the routing procedure with the child/parent axes beside it, then the reconstruction experiment. Its ordinary MNIST result and the separately trained affNIST-transfer model are different protocols; do not merge their scores."}</li><li>{""}<a href={"https://www.cs.toronto.edu/~saaraa/CapsuleSlides.pdf"}>{"Introduction to Capsules — Sara Sabour's slides"}</a>{". A visual route through coordinate frames, agreement and assignment, especially slides 10–40. Some slides use cosine terminology; the implemented vector-routing agreement in this lesson is the dot product."}</li><li>{""}<a href={"https://www.crcv.ucf.edu/cvpr2019-tutorial/"}>{"Capsule Networks for Computer Vision — UCF CVPR 2019 tutorial"}</a>{". The historical university index links talks and slides (it returned a gateway error during the September2026 implementation check; use the accessible author slides above if unavailable), including Sabour's introduction, a survey, video capsules and segmentation. It is historical research teaching, with separate prerequisites for the application sessions; the full video was not watched for this packet."}</li><li>{""}<a href={"https://www.cs.toronto.edu/~hinton/absps/EMcapsules.pdf"}>{"Matrix Capsules with EM Routing"}</a>{". Follow the pose/activation distinction and algorithm, then Appendix A for why transforming Gaussian votes differ from fitting an ordinary mixture."}</li><li>{""}<a href={"https://proceedings.mlr.press/v101/paik19a.html"}>{"Capsule Networks Need an Improved Routing Algorithm"}</a>{". An alternative reading centered on controlled comparisons and assignment polarization. Its experiments are evidence under those configurations, not a universal impossibility theorem."}</li><li>{""}<a href={"https://ojs.aaai.org/index.php/AAAI/article/view/5785"}>{"Capsule Routing via Variational Bayes"}</a>{". A deeper probabilistic route; read after the local EM bridge and prior Gaussian-mixture material."}</li><li>{""}<a href={"https://karim-ahmed.github.io/publications/starcaps.pdf"}>{"STAR-Caps"}</a>{". Study the distinction between a discrete routing decision and its straight-through training gradient before attempting to reproduce this architecture."}</li><li>{""}<a href={"/learn-assets/capsule-networks/data-provenance.md"}>{"Data and calculation provenance"}</a>{", "}<a href={"/learn-assets/capsule-networks/capsule-learning.py"}>{"complete learning program"}</a>{", "}<a href={"/learn-assets/capsule-networks/capsule-mechanics.py"}>{"constructed mechanics program"}</a>{" and its "}<a href={"/learn-assets/capsule-networks/capsule_learning_import.py"}>{"small import helper"}</a>{". The first trains the offline model; the second supplies exact routing, geometry, derivative and EM fixtures. No browser lab is required to inspect the underlying arithmetic."}</li></ul></section>
+<ul><li>{""}<a href={"https://www.cs.toronto.edu/~saaraa/CapsuleSlides.pdf"}>{"Introduction to Capsules — Sara Sabour's slides"}</a>{". A visual route through coordinate frames, agreement and assignment, especially slides 10–40. Some slides use cosine terminology; the implemented vector-routing agreement in this lesson is the dot product."}</li><li>{""}<a href={"https://www.crcv.ucf.edu/cvpr2019-tutorial/"}>{"Capsule Networks for Computer Vision — UCF CVPR 2019 tutorial"}</a>{". The historical university index links talks and slides (use the accessible author slides above if the historical index is unavailable), including Sabour's introduction, a survey, video capsules and segmentation. It is historical research teaching, with separate prerequisites for the application sessions."}</li><li><a href="https://sailab.diism.unisi.it/wp-content/uploads/2018/02/Capsule-Networks.pdf">University of Siena capsule lecture</a>. A second visual treatment of capsule components and transform–sum–squash. Compare its images with our exact grouping and routing axes.</li></ul>
+<H3>Technical references</H3>
+<ul><li>{""}<a href={"https://arxiv.org/abs/1710.09829"}>{"Dynamic Routing Between Capsules — Sabour, Frosst and Hinton"}</a>{". Read the routing procedure with the child/parent axes beside it, then the reconstruction experiment. Its ordinary MNIST result and the separately trained affNIST-transfer model are different protocols; do not merge their scores."}</li><li>{""}<a href={"https://www.cs.toronto.edu/~hinton/absps/EMcapsules.pdf"}>{"Matrix Capsules with EM Routing"}</a>{". Follow the pose/activation distinction and algorithm, then Appendix A for why transforming Gaussian votes differ from fitting an ordinary mixture."}</li><li>{""}<a href={"https://proceedings.mlr.press/v101/paik19a.html"}>{"Capsule Networks Need an Improved Routing Algorithm"}</a>{". An alternative reading centered on controlled comparisons and assignment polarization. Its experiments are evidence under those configurations, not a universal impossibility theorem."}</li><li>{""}<a href={"https://ojs.aaai.org/index.php/AAAI/article/view/5785"}>{"Capsule Routing via Variational Bayes"}</a>{". A deeper probabilistic route; read after the local EM bridge and prior Gaussian-mixture material."}</li><li>{""}<a href={"https://karim-ahmed.github.io/publications/starcaps.pdf"}>{"STAR-Caps"}</a>{". Study the distinction between a discrete routing decision and its straight-through training gradient before attempting to reproduce this architecture."}</li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.softmax.html">PyTorch softmax</a>, <a href="https://docs.pytorch.org/docs/stable/generated/torch.einsum.html">einsum</a> and <a href="https://docs.pytorch.org/docs/stable/generated/torch.Tensor.detach.html">detach</a>. Use the parent axis, contraction labels and gradient semantics from the implementation walkthrough when reading these APIs.</li></ul>
+<H3>Code and data</H3>
+<ul><li>{""}<a href={"/learn-assets/capsule-networks/data-provenance.md"}>{"Data and calculation provenance"}</a>{", "}<a href={"/learn-assets/capsule-networks/capsule-learning.py"}>{"complete learning program"}</a>{", "}<a href={"/learn-assets/capsule-networks/capsule-mechanics.py"}>{"constructed mechanics program"}</a>{" and its "}<a href={"/learn-assets/capsule-networks/capsule_learning_import.py"}>{"small import helper"}</a>{". The first trains the offline model; the second supplies exact routing, geometry, derivative and EM fixtures. No browser lab is required to inspect the underlying arithmetic."}</li><li><a href="/learn-assets/capsule-networks/digits-400.csv" download="digits-400.csv">Offline 400-digit dataset</a>. Save it beside the Python programs. The source IDs and split remain part of the experiment, not new random samples each run.</li></ul></section>
 </div>
 };

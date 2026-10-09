@@ -1,0 +1,353 @@
+{
+  "provenance": {
+    "bundle": {
+      "path": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/content-preparation/wdbc-study/serving-bundle.json",
+      "sha256": "816f7aed77f903bd5d8e52f8fae3c71c3bd6c94b6d831bd291615cde959ce266"
+    },
+    "receipt": {
+      "path": "docs/teaching/classical-ml-reading-flow/ensemble-methods-stacking/content-preparation/wdbc-study/execution-receipt.json",
+      "sha256": "35df36a4c5a15d07d2c1f11c8ffd9344ddfefb397030b32c3218b416625b9df7"
+    },
+    "nativePayloadSHA256": "40a7e1faf56ca4701e5756826bcea3dca9bb0328ea4845bdf595ff5cfcaa29fc",
+    "encoding": "Native Python sorted compact UTF-8 payload; exact float spelling retained, not replaced by JavaScript stringify."
+  },
+  "defaultQuery": [
+    14.45,
+    20.22,
+    94.49,
+    642.7,
+    0.09872,
+    0.1206,
+    0.118,
+    0.0598,
+    0.195,
+    0.06466,
+    0.2092,
+    0.6509,
+    1.446,
+    19.42,
+    0.004044,
+    0.01597,
+    0.02,
+    0.007303,
+    0.01522,
+    0.001976,
+    18.33,
+    30.12,
+    117.9,
+    1044.0,
+    0.1552,
+    0.4056,
+    0.4967,
+    0.1838,
+    0.4753,
+    0.1013
+  ],
+  "defaultQueryOriginalID": 199,
+  "validation": {
+    "prior": {
+      "log_loss": 0.6581444885744455,
+      "Brier": 0.23270308449721835,
+      "accuracy_at_half": 0.631578947368421,
+      "confusion_at_half": [
+        [
+          72,
+          0
+        ],
+        [
+          42,
+          0
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "line": {
+      "log_loss": 0.11646818933385698,
+      "Brier": 0.027701206405270497,
+      "accuracy_at_half": 0.956140350877193,
+      "confusion_at_half": [
+        [
+          70,
+          2
+        ],
+        [
+          3,
+          39
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "bayes": {
+      "log_loss": 0.6574260068560307,
+      "Brier": 0.06093598367463526,
+      "accuracy_at_half": 0.9385964912280702,
+      "confusion_at_half": [
+        [
+          71,
+          1
+        ],
+        [
+          6,
+          36
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 26,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "neighbor": {
+      "log_loss": 0.4172257276483436,
+      "Brier": 0.04158544509421702,
+      "accuracy_at_half": 0.9385964912280702,
+      "confusion_at_half": [
+        [
+          69,
+          3
+        ],
+        [
+          4,
+          38
+        ]
+      ],
+      "exact_zero_count": 60,
+      "exact_one_count": 28,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "soft": {
+      "log_loss": 0.1480246325960916,
+      "Brier": 0.03521033208309019,
+      "accuracy_at_half": 0.9473684210526315,
+      "confusion_at_half": [
+        [
+          71,
+          1
+        ],
+        [
+          5,
+          37
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "simplex": {
+      "log_loss": 0.12743540552772628,
+      "Brier": 0.029160279668496502,
+      "accuracy_at_half": 0.956140350877193,
+      "confusion_at_half": [
+        [
+          70,
+          2
+        ],
+        [
+          3,
+          39
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "stack": {
+      "log_loss": 0.28853789699239885,
+      "Brier": 0.06941979602313667,
+      "accuracy_at_half": 0.9473684210526315,
+      "confusion_at_half": [
+        [
+          72,
+          0
+        ],
+        [
+          6,
+          36
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "blend": {
+      "log_loss": 0.2934170392114124,
+      "Brier": 0.07097728014520484,
+      "accuracy_at_half": 0.9473684210526315,
+      "confusion_at_half": [
+        [
+          72,
+          0
+        ],
+        [
+          6,
+          36
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    }
+  },
+  "test": {
+    "prior": {
+      "log_loss": 0.6627215844390355,
+      "Brier": 0.23494108418852877,
+      "accuracy_at_half": 0.6228070175438597,
+      "confusion_at_half": [
+        [
+          71,
+          0
+        ],
+        [
+          43,
+          0
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "line": {
+      "log_loss": 0.08796120444824555,
+      "Brier": 0.024357768038986892,
+      "accuracy_at_half": 0.9824561403508771,
+      "confusion_at_half": [
+        [
+          71,
+          0
+        ],
+        [
+          2,
+          41
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "bayes": {
+      "log_loss": 0.7452632031032421,
+      "Brier": 0.07042959642105105,
+      "accuracy_at_half": 0.9210526315789473,
+      "confusion_at_half": [
+        [
+          67,
+          4
+        ],
+        [
+          5,
+          38
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 26,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "neighbor": {
+      "log_loss": 0.7236094789660269,
+      "Brier": 0.046133853151397015,
+      "accuracy_at_half": 0.9385964912280702,
+      "confusion_at_half": [
+        [
+          71,
+          0
+        ],
+        [
+          7,
+          36
+        ]
+      ],
+      "exact_zero_count": 63,
+      "exact_one_count": 28,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "soft": {
+      "log_loss": 0.12885202630133544,
+      "Brier": 0.037270320209481185,
+      "accuracy_at_half": 0.956140350877193,
+      "confusion_at_half": [
+        [
+          70,
+          1
+        ],
+        [
+          4,
+          39
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "simplex": {
+      "log_loss": 0.10311708729076594,
+      "Brier": 0.028188991990269398,
+      "accuracy_at_half": 0.9736842105263158,
+      "confusion_at_half": [
+        [
+          70,
+          1
+        ],
+        [
+          2,
+          41
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "stack": {
+      "log_loss": 0.2936993441362996,
+      "Brier": 0.07152418691527833,
+      "accuracy_at_half": 0.9473684210526315,
+      "confusion_at_half": [
+        [
+          70,
+          1
+        ],
+        [
+          5,
+          38
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    },
+    "blend": {
+      "log_loss": 0.30003424089586905,
+      "Brier": 0.07403663770834006,
+      "accuracy_at_half": 0.9298245614035088,
+      "confusion_at_half": [
+        [
+          70,
+          1
+        ],
+        [
+          7,
+          36
+        ]
+      ],
+      "exact_zero_count": 0,
+      "exact_one_count": 0,
+      "log_loss_clip_epsilon": 2.220446049250313e-16
+    }
+  },
+  "selectedID": "line",
+  "threshold": 0.29624271447535583,
+  "selectedTestConfusion": [
+    [
+      68,
+      3
+    ],
+    [
+      2,
+      41
+    ]
+  ],
+  "selectedTestCost": 11,
+  "limits": "one random-row split; no entity/time or clinical validation; no uncertainty interval; portable queries are computations, not specimens"
+}

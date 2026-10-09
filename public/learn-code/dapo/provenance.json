@@ -1,0 +1,33 @@
+{
+  "data": {
+    "repository": "https://github.com/google-research-datasets/poem-sentiment",
+    "revision": "612e9a1f86799126c68f0c5d9c3f1fc28f88068f",
+    "license": "CC-BY-4.0",
+    "credit": "Emily Sheng and David Uthus (2020)"
+  },
+  "model": {
+    "base": "EleutherAI/pythia-14m",
+    "base_revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+    "license": "Apache-2.0",
+    "sft_weights_sha256": "8ffe40fc676d22d608b58b35af11bf467c36981dbb3ccfe373a7d574bd8251cd",
+    "bundled": false
+  },
+  "exact_reused_sources": {
+    "online_preferences.py": {
+      "source": "public/learn-code/grpo-rloo-kto/online_preferences.py",
+      "sha256": "092c143900df3c272c919d545426101159a6a7694485a7e061c8f22e42fe363a"
+    },
+    "group_losses.py": {
+      "source": "public/learn-code/grpo-rloo-kto/group_losses.py",
+      "sha256": "32e43eafc01ae95d59746c6e796f8546f0e42ffa32a35185aea250ad9f2f9fc2"
+    },
+    "sft_data.py": {
+      "source": "public/learn-code/grpo-rloo-kto/sft_data.py",
+      "sha256": "a3bbbb7ff6db8b7a48f1327dc7fc0bd1313d7fb07d19041a11f4b816e87aeaab"
+    },
+    "sft_evaluate.py": {
+      "source": "public/learn-code/grpo-rloo-kto/sft_evaluate.py",
+      "sha256": "ff392707272355cbda4bd0ca7fa24066416802e05274dc7e1880b0c29ed8216b"
+    }
+  }
+}

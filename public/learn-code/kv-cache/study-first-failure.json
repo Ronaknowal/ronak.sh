@@ -1,0 +1,17 @@
+{
+  "stage": "native_contracts, first dynamic [4,3,5] chunk comparison; before timing or greedy study",
+  "protocol_sha256": "aa6218cc7696809f02195982edcf79ae1a8ebf127cce17ad1f4ba68febca1b3f",
+  "command_session": 37915,
+  "exit_code": 1,
+  "assertion": "Tensor-likes are not close",
+  "mismatched": 21589,
+  "compared_elements": 603648,
+  "maximum_absolute_error": 0.002811908721923828,
+  "maximum_absolute_index": [0, 10, 49269],
+  "maximum_relative_error": 7.047884464263916,
+  "maximum_relative_index": [0, 1, 32340],
+  "atol": 0.0002,
+  "rtol": 0.0002,
+  "timing_observations_produced": 0,
+  "interpretation": "Unresolved at first failure; no tolerance relaxation or scientific success claim. Exact protocol and programs remain present."
+}

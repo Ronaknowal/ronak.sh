@@ -1,0 +1,24 @@
+covariance K validation_log_density training_BIC
+full 1 -2.934881 533.238
+full 2 -2.668800 490.753
+full 3 -2.671122 496.832
+full 4 -3.256749 461.595
+tied 1 -2.934881 533.238
+tied 2 -2.729729 500.157
+tied 3 -2.741336 496.608
+tied 4 -2.787305 499.707
+diag 1 -2.939660 528.817
+diag 2 -2.963611 528.980
+diag 3 -3.253775 537.340
+diag 4 -2.820248 541.401
+spherical 1 -2.939660 524.317
+spherical 2 -2.922018 527.058
+spherical 3 -2.968764 527.253
+spherical 4 -2.925480 532.312
+selected full 2
+test log-density -3.011223
+baseline test log-density -2.887249
+test ARI 0.433446
+first test ID 34
+responsibilities [1. 0.]
+log-density -4.861128

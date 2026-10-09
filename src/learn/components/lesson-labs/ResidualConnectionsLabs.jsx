@@ -1,75 +1,117 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { correctionFixture, correctionModel, scalarStack, operatorPlacement, projectionModel, gateModel, nonlinearPaths } from '../../data/residual-connections-model.js';
 import MechanismProgram from './MechanismProgram.jsx';
+import { FlowLab, FlowControls, FlowChoice, FlowSlider, FlowReadout } from './LessonFlow.jsx';
 import './residual-connections.css';
 
 export const residualAssets = '/learn-assets/residual-connections';
-const fmt = value => Math.abs(value) > 0 && (Math.abs(value) < 0.00001 || Math.abs(value) >= 1e6) ? value.toExponential(5) : Number(value.toFixed(7)).toLocaleString('en-US', { maximumFractionDigits: 7 });
+const fmt = value => {
+  const text = Math.abs(value) > 0 && (Math.abs(value) < 0.00001 || Math.abs(value) >= 1e6)
+    ? value.toExponential(5)
+    : Number(value.toFixed(7)).toLocaleString('en-US', { maximumFractionDigits: 7 });
+  return text.replace(/-/g, '−');
+};
+const paren = value => value < 0 ? '(' + fmt(value) + ')' : fmt(value);
 const vec = values => `[${values.map(fmt).join(', ')}]`;
-const matrix = rows => rows.map(vec).join(' · ');
-function Lab({ id, title, children, kind = 'Live mechanism exploration' }) { return <section className="res-lab" data-testid={id} aria-labelledby={`${id}-title`}><p className="res-eyebrow">{kind}</p><h3 id={`${id}-title`}>{title}</h3>{children}</section>; }
-function Numeric({ label, value, onChange, min, max, step = 'any', slider = true }) {
-  const id = useId(); const [text, setText] = useState(String(value));
-  useEffect(() => setText(String(value)), [value]);
-  const valid = text.trim() !== '' && Number.isFinite(Number(text)) && Number(text) >= min && Number(text) <= max && (step !== 1 || Number.isInteger(Number(text)));
-  return <div className="res-field"><label htmlFor={id}>{label}</label><input id={id} type="number" min={min} max={max} step={step} value={text} onBlur={() => setText(String(value))} aria-invalid={!valid} aria-describedby={!valid ? `${id}-error` : undefined} onChange={event => { const next = event.target.value; setText(next); const n = Number(next); if (next.trim() !== '' && Number.isFinite(n) && n >= min && n <= max && (step !== 1 || Number.isInteger(n))) onChange(n); }} />{slider && <input type="range" min={min} max={max} step={step} value={value} aria-label={`${label} slider`} onChange={event => { setText(event.target.value); onChange(Number(event.target.value)); }} />}{!valid && <span id={`${id}-error`} className="res-error" role="alert">Enter {step === 1 ? 'an integer' : 'a finite number'} from {min} to {max}. The current results still use {fmt(value)}.</span>}</div>;
-}
-function Table({ caption, headers, rows, live = false }) { return <div className={`res-table ${live ? 'res-live-table' : ''}`} role="region" tabIndex={0} aria-label={caption}><table><caption>{caption}</caption><thead><tr>{headers.map((header, i) => <th key={i} scope="col">{header}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((entry, j) => j === 0 ? <th key={j} scope="row">{entry}</th> : <td key={j} data-label={headers[j]}>{entry}</td>)}</tr>)}</tbody></table></div>; }
-export { Table as ResidualTable };
-function Reset({ onClick }) { return <button onClick={onClick}>Reset investigation</button>; }
+const matrix = rows => `[${rows.map(vec).join(', ')}]`;
 
+function Table({ caption, headers, rows }) { return <div className="res-table" role="region" tabIndex={0} aria-label={caption}><table><caption>{caption}</caption><thead><tr>{headers.map((header, i) => <th key={i} scope="col">{header}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((entry, j) => j === 0 ? <th key={j} scope="row">{entry}</th> : <td key={j}>{entry}</td>)}</tr>)}</tbody></table></div>; }
+export { Table as ResidualTable };
+
+// One gradient-descent step on the block's weights, repeated on request.
 export function ResidualCorrectionLab() {
   const [weight, setWeight] = useState(correctionFixture), [rate, setRate] = useState(0.1), [steps, setSteps] = useState(0);
   const state = correctionModel(weight, rate);
-  const change = (i, j, value) => { setWeight(old => old.map((row, r) => row.map((entry, c) => r === i && c === j ? value : entry))); setSteps(0); };
-  return <Lab id="res-correction" title="Keep two values; learn their correction">
-    <p>Fixed teaching representation x = [2, −1], target t = [1, 0]. Edit a weight and follow both lanes. The preview uses all gradients from the same current weight matrix.</p>
-    <div className="res-controls">{weight.flatMap((row, i) => row.map((value, j) => <Numeric key={`${i}-${j}`} label={`Weight W${i + 1}${j + 1}`} value={value} min={-1} max={1} onChange={v => change(i, j, v)} />))}</div>
-    <div className="res-columns"><div className="res-lane"><strong>Direct lane · preserve x</strong><p className="res-value">Coordinate 1: 2<br />Coordinate 2: −1</p><p>No trainable weight here.</p></div><div className="res-lane"><strong>Correction lane · Wx</strong>{weight.map((row, i) => <p key={i} className="res-value">F{i + 1}: {fmt(row[0])} × 2 + {fmt(row[1])} × (−1)<br />= {fmt(state.correction[i])}</p>)}</div></div>
-    <div className="res-lane res-join"><strong>+ Join matching coordinates</strong><p className="res-value" data-testid="res-output">y = {vec(state.output)}; target = [1, 0]</p><p data-testid="res-loss">Half-squared loss = {fmt(state.loss)}. Original fixed reference: 0.625.</p></div>
-    <Table live caption="One gradient-descent step from the current state" headers={['Quantity', 'Current calculation']} rows={[
-      ['Upstream error y − t', vec(state.upstream)], ['Weight gradient g xᵀ', matrix(state.weightGradient)], ['Proposed W − η∇W', matrix(state.newWeight)], ['Proposed output', vec(state.newOutput)], ['Proposed loss', fmt(state.newLoss)],
-    ]} />
-    <Numeric label="Learning rate" min={0} max={0.2} value={rate} onChange={setRate} />
-    <div className="res-buttons"><button disabled={steps >= 10 || rate === 0 || state.newWeight.flat().some(value => Math.abs(value) > 1)} onClick={() => { setWeight(state.newWeight); setSteps(value => value + 1); }}>Apply one SGD step</button><Reset onClick={() => { setWeight(correctionFixture()); setRate(0.1); setSteps(0); }} /></div>
-    <p>{steps} applied {steps === 1 ? 'step' : 'steps'}. Updates are limited to ten and the displayed [−1, 1] weight range. At rate zero the proposed state is unchanged. Editing a weight starts a new comparison.</p>
-    <p>Try W11 = −0.1, then W11 = 0.3. The same direct lane permits either lower or higher loss. Changing W21 instead changes only the second output coordinate.</p>
-  </Lab>;
+  const canStep = steps < 10 && rate > 0;
+  return <FlowLab id="res-correction" label="Train the correction with gradient steps">
+    <div className="res-flow">
+      <div className="res-input">input <span className="ink-input">x = [2, −1]</span> · target t = [1, 0]</div>
+      <div className="res-learned">branch weights <span className="ink-learned">W = {matrix(weight)}</span></div>
+      <div className="res-computed">correction <span className="ink-computed">F(x) = {vec(state.correction)}</span> · output <span className="ink-computed">y = x + F(x) = {vec(state.output)}</span></div>
+      <div className="res-op">loss ½‖y − t‖² = <strong>{fmt(state.loss)}</strong> · gradient <span className="ink-backward">∇W = g xᵀ = {matrix(state.weightGradient)}</span></div>
+    </div>
+    <FlowControls>
+      <FlowSlider name="Learning rate η" value={rate} onChange={setRate} min={0} max={0.2} step={0.01} format={fmt} />
+      <button type="button" disabled={!canStep} onClick={() => { setWeight(state.newWeight); setSteps(value => value + 1); }}>Take one step: W ← W − η∇W</button>
+      <button type="button" onClick={() => { setWeight(correctionFixture()); setSteps(0); }}>Start over</button>
+    </FlowControls>
+    <FlowReadout>After {steps} {steps === 1 ? 'step' : 'steps'} the loss is <strong>{fmt(state.loss)}</strong>; the next step would give W = {matrix(state.newWeight)}, output {vec(state.newOutput)} and loss <strong>{fmt(state.newLoss)}</strong>. The skip has no weight to update; only W changes.</FlowReadout>
+  </FlowLab>;
 }
 
-export function ResidualGradientFigure() {
-  const state = correctionModel(correctionFixture());
-  return <Lab id="res-gradient-paths" title="Two signed contributions meet at the input" kind="Exact backward trace · original fixture"><p>Hold the upstream derivative g = [1, −0.5] fixed while following the original matrix. These are contributions to the same input gradient, so signs matter.</p><div className="res-gradient">{state.input.map((_, i) => <div key={i}><h4>Input coordinate {i + 1}</h4><p className="res-signed"><b>{fmt(state.upstream[i])}<br />direct</b><span>+</span><b>{fmt(state.branchGradient[i])}<br />through Wᵀ</b><span>=</span><b>{fmt(state.totalGradient[i])}<br />total</b></p></div>)}</div><p>The second coordinate nearly cancels: −0.5 + 0.45 = −0.05. A visible identity route is a contribution, not a lower bound on the complete derivative.</p></Lab>;
-}
-
+// A skip in every block, yet the end-to-end gain can still vanish or explode.
 export function ResidualDepthLab() {
   const [slope, setSlope] = useState(0), [depth, setDepth] = useState(10);
   const state = scalarStack(slope, depth), magnitude = Math.abs(state.gain);
-  return <Lab id="res-depth" title="A skip in every block can still cancel the signal"><div className="res-controls"><Numeric label="Branch slope a" min={-2} max={1} value={slope} onChange={setSlope} /><Numeric label="Number of blocks" min={1} max={20} step={1} value={depth} onChange={setDepth} /></div><div className="res-flow"><div>Each branch: F(x) = {fmt(slope)} x</div><span aria-hidden="true">↓</span><div>Direct + correction: x + F(x) = {fmt(state.multiplier)} x</div><span aria-hidden="true">↓</span><div className="res-join" data-testid="res-depth-gain">After {depth} blocks: derivative {fmt(state.gain)}<br />Magnitude {fmt(magnitude)} · {magnitude === 0 ? 'exact cancellation' : magnitude < 1 ? 'contraction' : magnitude === 1 ? 'unit magnitude' : 'growth'}</div></div><Table caption="Every intermediate gain; input gain is 1" headers={['Blocks passed', 'Signed derivative', 'Magnitude']} rows={state.trace.map(row => [row.step, fmt(row.value), fmt(Math.abs(row.value))])} /><p>Set a = −1 for exact zero; −0.5 for repeated contraction; −2 for sign changes without magnitude loss. Zero values remain zero, not an invented logarithmic floor.</p><Reset onClick={() => { setSlope(0); setDepth(10); }} /></Lab>;
+  const verdict = magnitude === 0 ? 'exact cancellation' : magnitude < 1 ? 'contraction' : magnitude === 1 ? 'unit magnitude' : 'growth';
+  return <FlowLab id="res-depth" label="A skip in every block can still cancel the signal">
+    <ol className="res-chips res-chips--derivative" aria-label="Derivative after each block">{state.trace.map(row => <li key={row.step} className={row.value === 0 ? 'is-zero' : ''}><span>after {row.step}</span>{fmt(row.value)}</li>)}</ol>
+    <FlowControls>
+      <FlowSlider name="Branch slope a" value={slope} onChange={setSlope} min={-2} max={1} step={0.05} format={fmt} />
+      <FlowSlider name="Number of blocks" value={depth} onChange={setDepth} min={1} max={20} step={1} format={value => String(value)} />
+    </FlowControls>
+    <FlowReadout>Each block multiplies by 1 + a = <strong>{fmt(state.multiplier)}</strong>; after {depth} blocks the derivative is <strong>{fmt(state.gain)}</strong> ({verdict}).</FlowReadout>
+  </FlowLab>;
 }
 
+// With a zero correction, what reaches the output depends only on what sits after the join.
 export function ResidualOrderLab() {
-  const [mode, setMode] = useState('post-relu'), [shift, setShift] = useState(0), [positive, setPositive] = useState(false);
-  const state = operatorPlacement(mode, shift, positive);
-  return <Lab id="res-order" title="Move an operation; inspect what survives"><p>The correction is deliberately zero. This isolates the effect of an operation on the direct route. LayerNorm uses both features, ε = 10⁻⁵, unit scale and zero bias.</p><label>Operation location<select value={mode} onChange={event => setMode(event.target.value)}><option value="post-relu">ReLU after addition</option><option value="inside">ReLU/normalization inside the zero branch</option><option value="post-ln">LayerNorm after addition</option></select></label><div className="res-controls"><Numeric label="Common shift added to both inputs" min={-3} max={3} value={shift} onChange={setShift} /><label className="res-toggle"><input type="checkbox" checked={positive} onChange={event => setPositive(event.target.checked)} />Use positive base input [1, 2]</label></div><div className="res-flow"><div>Input {vec(state.input)} ↘<br />zero correction [0, 0] ↗</div><div className="res-join">Join: {vec(state.input)}</div><div>{mode === 'post-relu' ? 'ReLU after join' : mode === 'post-ln' ? 'LayerNorm after join' : 'No operation after join'}<br /><strong data-testid="res-order-output">Output {vec(state.output)}</strong></div></div><Table live caption="Value preservation and common-shift sensitivity are different questions" headers={['Quantity', 'Result']} rows={[
-    ['Output − input', vec(state.difference)], ['Jacobian rows', matrix(state.jacobian)], ['Jacobian × [1, 1]', vec(state.shiftDirection)],
-  ]} /><p>{mode === 'post-ln' ? 'A common shift moves the input but leaves this normalized output unchanged. Its common-shift derivative is zero.' : mode === 'post-relu' ? 'Positive coordinates pass through; negative ones do not. At exactly zero this fixture follows PyTorch’s zero ReLU derivative.' : 'The zero branch leaves the raw values and the entire identity derivative intact.'}</p><Reset onClick={() => { setMode('post-relu'); setShift(0); setPositive(false); }} /></Lab>;
+  const [mode, setMode] = useState('post-relu'), [shift, setShift] = useState(0);
+  const state = operatorPlacement(mode, shift);
+  const opName = mode === 'post-relu' ? 'ReLU after the join' : mode === 'post-ln' ? 'LayerNorm after the join' : 'nothing after the join';
+  return <FlowLab id="res-order" label="Move an operation; inspect what survives">
+    <div className="res-flow">
+      <div className="res-input">skip delivers <span className="ink-input">x = {vec(state.input)}</span> · correction <span className="ink-computed">F(x) = [0, 0]</span></div>
+      <div className="res-arrow" aria-hidden="true">↓ ⊕</div>
+      <div className="res-op">{opName}</div>
+      <div className="res-arrow" aria-hidden="true">↓</div>
+      <div className="res-computed">output <span className="ink-computed">{vec(state.output)}</span></div>
+    </div>
+    <FlowControls>
+      <FlowChoice label="After the join" value={mode} onChange={setMode} options={[['inside', 'Nothing (operations inside the branch)'], ['post-relu', 'ReLU'], ['post-ln', 'LayerNorm']]} />
+      <FlowSlider name="Common shift added to both inputs" value={shift} onChange={setShift} min={-3} max={3} step={0.25} format={fmt} />
+    </FlowControls>
+    <FlowReadout>Output − input = {vec(state.difference)}; local Jacobian {matrix(state.jacobian)}; response to a common shift, Jacobian × [1, 1] = <strong>{vec(state.shiftDirection)}</strong>. {mode === 'post-ln' ? 'A common shift moves the input but leaves this normalized output unchanged.' : mode === 'post-relu' ? 'Positive coordinates pass through; negative ones become 0. At exactly zero this follows PyTorch’s zero ReLU derivative.' : 'The raw values and the whole identity derivative reach the output.'}</FlowReadout>
+  </FlowLab>;
 }
 
+// When the correction has three features, what must the skip's third coordinate mean?
 export function ResidualProjectionLab() {
-  const [enabled, setEnabled] = useState(false), [row, setRow] = useState([1, 1]), [changed, setChanged] = useState(false), [broadcast, setBroadcast] = useState(false);
-  const state = projectionModel(row, changed, enabled, broadcast);
-  return <Lab id="res-projection" title="Match the sockets and their meanings"><p>The correction has three output coordinates. A raw two-coordinate identity cannot be added to it. A projection must define what the third output represents.</p><label className="res-toggle"><input type="checkbox" checked={enabled} onChange={event => setEnabled(event.target.checked)} />Use the 3 × 2 projection</label><div className="res-controls">{row.map((value, i) => <Numeric key={i} label={`Projection third row, column ${i + 1}`} value={value} min={-2} max={2} onChange={v => setRow(old => old.map((entry, j) => j === i ? v : entry))} />)}</div><label className="res-toggle"><input type="checkbox" checked={changed} onChange={event => setChanged(event.target.checked)} />Change input to [1, 3] and upstream gradient to [2, −1, 4]</label><div className="res-columns"><div className="res-lane"><strong>Skip sockets</strong><p>Input: {vec(state.input)}</p><p>{enabled ? `Projection rows: ${matrix(state.projection)}` : 'Identity: preserve two coordinates'}</p><p>Skip output: {vec(state.skip)}</p>{enabled && <p>Third socket: {fmt(row[0])} × {fmt(state.input[0])} + {fmt(row[1])} × {fmt(state.input[1])} = {fmt(state.skip[2])}</p>}</div><div className="res-lane"><strong>Correction sockets</strong><p>Correction: {vec(state.correction)}</p><p>{broadcast ? 'One scalar correction is repeated in all three coordinates.' : 'Three independently specified corrections.'}</p></div></div><label className="res-toggle"><input type="checkbox" checked={broadcast} onChange={event => setBroadcast(event.target.checked)} />Broadcast one correction [0.5] across all three features</label><p className="res-readout" data-testid="res-projection-result">{state.compatible ? `Output: ${vec(state.output)}. Skip contribution to input gradient: ${vec(state.gradient)}.` : 'Shape mismatch: 2 skip values versus 3 correction values. No addition or complete backward result is computed.'}</p><p>With third row [1, 1], the third socket means “sum of the original two.” Row [0, 0] has the right dimensions but loses that meaning. Broadcasting can be intentional; it cannot create three independent corrections. A permuted feature order also requires a corresponding permutation before addition.</p><Reset onClick={() => { setEnabled(false); setRow([1, 1]); setChanged(false); setBroadcast(false); }} /></Lab>;
+  const [skip, setSkip] = useState('projection'), [row, setRow] = useState('sum'), [correction, setCorrection] = useState('three');
+  const rows = { sum: [1, 1], zero: [0, 0], difference: [1, -1] };
+  const state = projectionModel(rows[row], false, skip === 'projection', correction === 'broadcast');
+  return <FlowLab id="res-projection" label="Match the sockets and their meanings">
+    <div className="res-columns">
+      <div><h5>Skip</h5><p>input <span className="ink-input">{vec(state.input)}</span></p><p>{skip === 'projection' ? <>P = <span className="ink-learned">{matrix(state.projection)}</span><br />third coordinate {paren(rows[row][0])} × {paren(state.input[0])} + {paren(rows[row][1])} × {paren(state.input[1])} = {fmt(state.skip[2])}</> : 'identity: keeps 2 coordinates'}</p><p>skip output <span className="ink-input">{vec(state.skip)}</span></p></div>
+      <div><h5>Branch</h5><p>correction <span className="ink-computed">{vec(state.correction)}</span></p><p>{correction === 'broadcast' ? 'one value [0.5] repeated in all three features' : 'three independently computed corrections'}</p></div>
+    </div>
+    <FlowControls>
+      <FlowChoice label="Skip" value={skip} onChange={setSkip} options={[['identity', 'Identity'], ['projection', '3 × 2 projection P']]} />
+      {skip === 'projection' && <FlowChoice label="Third row of P" value={row} onChange={setRow} options={[['sum', '[1, 1]: x₁ + x₂'], ['difference', '[1, −1]: x₁ − x₂'], ['zero', '[0, 0]']]} />}
+      <FlowChoice label="Correction" value={correction} onChange={setCorrection} options={[['three', 'Three values'], ['broadcast', 'One value, broadcast']]} />
+    </FlowControls>
+    <FlowReadout>{state.compatible ? <>Output <strong>{vec(state.output)}</strong>; an upstream gradient [1, 2, 3] returns through the skip as Pᵀg = <strong>{vec(state.gradient)}</strong>.</> : 'Shape mismatch: 2 skip values cannot be added to 3 correction values, so no output or backward result exists.'}</FlowReadout>
+  </FlowLab>;
 }
 
+// A learned gate α starting at 0: what can move on the first step?
 export function ResidualOpeningLab() {
   const [scale, setScale] = useState(0), [kind, setKind] = useState('scalar'), [firstCorrection, setFirstCorrection] = useState(0);
   const state = gateModel(scale, kind, firstCorrection);
-  return <Lab id="res-opening" title="Zero output is not the same as a closed learning route"><Table live caption="Same identity output [1, 2]; different first weight gradients" headers={['Last branch operation', 'Earlier weight gradient', 'Final weight gradient']} rows={[
-    ['Zero final linear map', 'All zero', '[[1, 2], [2, 4]]'], ['Zero final map followed by ReLU', 'All zero', 'All zero'],
-  ]} /><p>Now investigate a learned gate with fixed x = [1, 2] and target zero. The branch’s second correction is 0.7. The gradient into branch weights is shown even though this preview updates only the gate.</p><div className="res-controls"><Numeric label="Initial gate scale" value={scale} min={-1} max={1} onChange={setScale} /><Numeric label="First branch correction" value={firstCorrection} min={-1} max={1} onChange={setFirstCorrection} /></div><label>Gate parameter shape<select value={kind} onChange={event => setKind(event.target.value)}><option value="scalar">One shared scalar</option><option value="channel">One scale per feature (same initial value)</option></select></label><Table live caption="Current gate mechanism and rate-0.1 gate-only update" headers={['Quantity', 'Value']} rows={[
-    ['Current output', vec(state.output)], ['Gate gradient', Array.isArray(state.scaleGradient) ? vec(state.scaleGradient) : fmt(state.scaleGradient)], ['Branch-weight gradient', matrix(state.branchGradient)], ['Gate after one step', Array.isArray(state.nextScale) ? vec(state.nextScale) : fmt(state.nextScale)], ['Output after gate-only step', vec(state.nextOutput)], ['Loss: current → proposed', `${fmt(state.loss)} → ${fmt(state.nextLoss)}`],
-  ]} /><p data-testid="res-gate-readout">{scale === 0 ? 'At zero gate, branch-weight gradients are zero, but the gate gradient can move. The next full training step can reach branch weights.' : 'A nonzero gate allows a branch-weight gradient immediately. This displayed proposed update freezes those weights so you can isolate the gate.'} Edit the first correction away from zero to see why separate feature gates can behave differently.</p><Reset onClick={() => { setScale(0); setKind('scalar'); setFirstCorrection(0); }} /></Lab>;
+  const show = value => Array.isArray(value) ? vec(value) : fmt(value);
+  return <FlowLab id="res-opening" label="A zero gate still lets the gate itself learn">
+    <div className="res-flow">
+      <div className="res-input">input <span className="ink-input">x = [1, 2]</span> · branch output <span className="ink-computed">F(x) = {vec(state.branch)}</span></div>
+      <div className="res-learned">gate <span className="ink-learned">α = {fmt(scale)}</span> ({kind === 'channel' ? 'one per feature' : 'one shared scalar'})</div>
+      <div className="res-computed">output <span className="ink-computed">x + αF(x) = {vec(state.output)}</span> · loss ½‖y‖² = {fmt(state.loss)}</div>
+    </div>
+    <FlowControls>
+      <FlowSlider name="Initial gate α" value={scale} onChange={setScale} min={-1} max={1} step={0.05} format={fmt} />
+      <FlowChoice label="Gate shape" value={kind} onChange={setKind} options={[['scalar', 'One scalar'], ['channel', 'One per feature']]} />
+      <FlowSlider name="First branch correction" value={firstCorrection} onChange={setFirstCorrection} min={-1} max={1} step={0.05} format={fmt} />
+    </FlowControls>
+    <FlowReadout>Gate gradient <span className="ink-backward">{show(state.scaleGradient)}</span>; gradient for the weights inside F (a 2 × 2 matrix acting on x) <span className="ink-backward">{matrix(state.branchGradient)}</span>. One gate-only step at rate 0.1 moves α to <strong>{show(state.nextScale)}</strong> and the loss from {fmt(state.loss)} to <strong>{fmt(state.nextLoss)}</strong>. {scale === 0 ? 'At α = 0 the branch weights get no gradient yet, but α does, so the next step can reach them.' : 'A nonzero gate passes a gradient to the branch weights immediately.'}</FlowReadout>
+  </FlowLab>;
 }
 
 function usePlotWidth() {
@@ -77,40 +119,160 @@ function usePlotWidth() {
   useEffect(() => { const observer = new ResizeObserver(entries => { const w = entries[0]?.contentRect.width; if (w > 0) setWidth(w); }); if (ref.current) observer.observe(ref.current); return () => observer.disconnect(); }, []);
   return [ref, width];
 }
-function TracePlot({ points, title, axis, signed = false }) {
-  const [ref, width] = usePlotWidth(); const height = 240, left = 48, right = 12, top = 28, bottom = 44;
-  const values = points.flatMap(row => [row.training, row.validation].filter(Number.isFinite));
-  const low = signed ? Math.min(0, ...values) : 0; const high = Math.max(1e-8, ...values); const span = high - low || 1;
+// Lines are labelled at their right-hand end, so no separate legend is needed.
+// yRange fixes the vertical axis so switching records never silently rescales it; log draws a log10 axis.
+function TracePlot({ points, label, axis, yTitle, series = [['training', 'training']], signed = false, yRange, log = false, reference }) {
+  const [ref, width] = usePlotWidth(); const height = 240, left = 56, right = 92, top = 18, bottom = 40;
+  const values = points.flatMap(row => series.map(([key]) => row[key]).filter(Number.isFinite));
+  const t = value => log ? Math.log10(value) : value;
+  const low = yRange ? t(yRange[0]) : signed ? Math.min(0, ...values) : 0;
+  const high = yRange ? t(yRange[1]) : Math.max(1e-8, ...values); const span = high - low || 1;
   const last = Math.max(1, ...points.map(row => row.step));
-  const x = value => left + value / last * (width - left - right), y = value => top + (high - value) / span * (height - top - bottom);
-  return <figure ref={ref} style={{ margin: '20px 0' }}><figcaption>{title}</figcaption><svg className="res-plot" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`${title}. Exact values appear in the adjacent table.`}><line x1={left} y1={y(0)} x2={width - right} y2={y(0)} /><line x1={left} y1={top} x2={left} y2={height - bottom} />{[low, (low + high) / 2, high].map((value, i) => <text key={i} x={left - 6} y={y(value) + 4} textAnchor="end">{Math.abs(value) >= 100 ? value.toPrecision(2) : Number(value.toFixed(2))}</text>)}{['training', 'validation'].map((key, i) => <g key={key}><polyline className={`res-path ${i ? 'res-validation' : 'res-train'}`} strokeDasharray={i ? '5 4' : undefined} points={points.filter(row => Number.isFinite(row[key])).map(row => `${x(row.step)},${y(row[key])}`).join(' ')} />{points.filter(row => Number.isFinite(row[key])).map(row => <circle key={row.step} className={i ? 'res-validation' : 'res-train'} cx={x(row.step)} cy={y(row[key])} r={i ? 4 : 2.5} />)}</g>)}<text x={left} y={height - bottom + 19}>0</text><text x={width - right} y={height - bottom + 19} textAnchor="end">{last}</text><text x={width / 2} y={height - 4} textAnchor="middle">{axis}</text></svg></figure>;
+  const x = value => left + value / last * (width - left - right);
+  const y = value => top + (high - Math.min(high, Math.max(low, t(value)))) / span * (height - top - bottom);
+  const ticks = log ? Array.from({ length: Math.round(high - low) + 1 }, (_, i) => 10 ** (low + i)).filter((_, i) => i % 2 === 0 || Math.round(high - low) <= 4)
+    : signed ? [yRange ? yRange[0] : low, 0, yRange ? yRange[1] : high] : [low, (low + high) / 2, high];
+  const tickText = value => log ? (value >= 1 ? String(value) : `10${String(Math.round(Math.log10(value))).replace('-', '⁻').replace(/\d/g, d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d])}`) : Math.abs(value) >= 100 ? value.toPrecision(2) : String(Number(value.toFixed(2))).replace('-', '−');
+  // End labels: place each beside its last point, then push apart any that would overlap.
+  const ends = series.map(([key, name], i) => { const rows = points.filter(row => Number.isFinite(row[key])); const end = rows.at(-1); return end ? { i, name, y: y(end[key]) + 4 } : null; }).filter(Boolean);
+  if (reference) ends.push({ i: 'ref', name: reference.name, y: y(reference.value) + 4 });
+  ends.sort((a, b) => a.y - b.y);
+  for (let k = 1; k < ends.length; k++) if (ends[k].y - ends[k - 1].y < 14) ends[k].y = ends[k - 1].y + 14;
+  for (const end of ends) end.y = Math.min(height - bottom + 4, Math.max(top + 4, end.y));
+  const labelY = i => ends.find(end => end.i === i)?.y;
+  return <div ref={ref}><svg className="res-plot" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label}>
+    <line x1={left} y1={height - bottom} x2={width - right} y2={height - bottom} /><line x1={left} y1={top} x2={left} y2={height - bottom} />
+    {signed && <line className="res-zero" x1={left} y1={y(0)} x2={width - right} y2={y(0)} />}
+    {ticks.map((value, i) => <text key={i} x={left - 6} y={y(value) + 4} textAnchor="end">{tickText(value)}</text>)}
+    {yTitle && <text className="res-axis-title" x={12} y={(top + height - bottom) / 2} textAnchor="middle" transform={`rotate(-90 12 ${(top + height - bottom) / 2})`}>{yTitle}</text>}
+    {reference && <g><line className="res-reference" x1={left} y1={y(reference.value)} x2={width - right} y2={y(reference.value)} /><text className="res-series-label res-reference-label" x={width - right + 8} y={labelY('ref')}>{reference.name}</text></g>}
+    {series.map(([key, name], i) => { const rows = points.filter(row => Number.isFinite(row[key])); return <g key={key}><polyline className={`res-path ${i ? 'res-validation' : 'res-train'}`} strokeDasharray={i ? '5 4' : undefined} points={rows.map(row => `${x(row.step)},${y(row[key])}`).join(' ')} />{rows.map(row => <circle key={row.step} className={i ? 'res-validation' : 'res-train'} cx={x(row.step)} cy={y(row[key])} r={i ? 4 : 2.5} />)}{rows.length > 0 && <text className={`res-series-label ${i ? 'res-validation' : 'res-train'}`} x={width - right + 8} y={labelY(i)}>{name}</text>}</g>; })}
+    <text x={left} y={height - bottom + 19}>0</text><text x={width - right} y={height - bottom + 19} textAnchor="end">{last}</text><text x={(width - right + left) / 2} y={height - 4} textAnchor="middle">{axis}</text>
+  </svg></div>;
 }
 let measurementsPromise;
 function fetchMeasurements() { if (!measurementsPromise) measurementsPromise = fetch(`${residualAssets}/browser-measurements.json`).then(response => { if (!response.ok) throw new Error('Saved measurements unavailable'); return response.json(); }).catch(error => { measurementsPromise = null; throw error; }); return measurementsPromise; }
-const modeLabel = { stem_only: 'Stem only', plain: 'Plain', residual: 'Additive residual', scaled: 'Fixed 1/√L scale', rezero: 'Learned zero gate' };
-export function ResidualEvidenceLab() {
-  const [data, setData] = useState(null), [failed, setFailed] = useState(false), [attempt, setAttempt] = useState(0), [seed, setSeed] = useState(1), [depth, setDepth] = useState(6), [mode, setMode] = useState('residual'), [step, setStep] = useState(250), [omit, setOmit] = useState(-1), [diagnostic, setDiagnostic] = useState('mean_square');
+function useMeasurements() {
+  const [data, setData] = useState(null), [failed, setFailed] = useState(false), [attempt, setAttempt] = useState(0);
   useEffect(() => { let active = true; setFailed(false); fetchMeasurements().then(value => { if (active) setData(value); }).catch(() => { if (active) setFailed(true); }); return () => { active = false; }; }, [attempt]);
-  const reset = () => { setSeed(1); setDepth(6); setMode('residual'); setStep(250); setOmit(-1); setDiagnostic('mean_square'); };
-  if (!data) return <Lab id="res-evidence" title="Inspect real fits, then remove one trained block" kind="Recorded CPU experiment">{failed ? <p role="alert">Saved measurements could not load. <button onClick={() => setAttempt(value => value + 1)}>Retry measurements</button></p> : <p role="status">Loading the recorded experiment…</p>}</Lab>;
+  return { data, failed, retry: () => setAttempt(value => value + 1) };
+}
+const modeLabel = { stem_only: 'Stem only', plain: 'Plain', residual: 'Additive residual', scaled: 'Fixed 1/√L scale', rezero: 'Learned zero gate' };
+function Pending({ id, label, failed, retry }) {
+  return <FlowLab id={id} label={label}>{failed ? <p role="alert">Saved measurements could not load. <button type="button" onClick={retry}>Retry measurements</button></p> : <p role="status">Loading the recorded experiment…</p>}</FlowLab>;
+}
+
+// The training specimens: real UCI digits, drawn from their recorded 8 × 8 pixels.
+export function ResidualDigitSpecimens() {
+  const { data, failed, retry } = useMeasurements();
+  if (!data) return <Pending id="res-digits" label="Recorded training specimens" failed={failed} retry={retry} />;
+  // Inner specimens are plain elements: a nested size-container figure would collapse inside the flex row.
+  return <figure data-figure="residual-digit-specimens"><div className="res-digits">{data.specimens.map(row => <div className="res-digit" key={row.source_id}><svg className="res-pixels" viewBox="0 0 80 80" role="img" aria-label={`UCI digit ${row.digit}, source ${row.source_id}, recorded 8 by 8 pixels`}>{row.pixels.map((value, i) => <rect key={i} x={10 * (i % 8)} y={10 * Math.floor(i / 8)} width={10} height={10} fill={`rgb(${20 + Math.round(value * 14)},${20 + Math.round(value * 11)},${20 + Math.round(value * 5)})`} />)}</svg><p className="res-digit-label">Digit {row.digit}<br />source {row.source_id}</p></div>)}</div></figure>;
+}
+
+// Shared fixed range for every recorded fit: cross-entropy spans about 1.8e−4 to 4.8.
+export const evidenceRange = [1e-4, 10];
+
+// Recorded fits: choose a seed, a depth and a connection; read the learning curves on one fixed log axis.
+export function ResidualEvidenceLab() {
+  const { data, failed, retry } = useMeasurements();
+  const [seed, setSeed] = useState(1), [depth, setDepth] = useState(12), [mode, setMode] = useState('residual');
+  if (!data) return <Pending id="res-evidence" label="Inspect the recorded fits" failed={failed} retry={retry} />;
   const fit = data.fits.find(row => row.seed === seed && row.depth === depth && row.mode === mode), baseline = data.fits.find(row => row.seed === seed && row.depth === 0);
-  const snapshot = fit.trace.find(row => row.step === step), final = fit.trace.at(-1), baselineFinal = baseline.trace.at(-1), ablation = fit.validation_block_ablations.find(row => row.omitted_block === omit);
-  const branchDisplacements = Object.entries(fit.parameter_displacements).filter(([name]) => name.startsWith('blocks.') && /(?:lower|upper)\.weight$/.test(name));
-  return <Lab id="res-evidence" title="Inspect real fits, then remove one trained block" kind="Recorded CPU experiment · no browser training"><p>39 actual fits: three seeds, one stem-only baseline and twelve deeper configurations per seed. The same 280/120 train/validation split is used throughout. All experiments run 250 full-batch Adam updates. There is no held-out test result.</p><div className="res-columns">{data.specimens.map(row => <figure className="res-digit" key={row.source_id}><svg className="res-pixels" viewBox="0 0 80 80" role="img" aria-label={`UCI digit ${row.digit}, source ${row.source_id}, recorded 8 by 8 pixels`}>{row.pixels.map((value, i) => <rect key={i} x={10 * (i % 8)} y={10 * Math.floor(i / 8)} width={10} height={10} fill={`rgb(${20 + Math.round(value * 14)},${20 + Math.round(value * 11)},${20 + Math.round(value * 5)})`} />)}</svg><figcaption>Digit {row.digit}<br />Source ID {row.source_id}<br />Training specimen; pixel range 0–16</figcaption></figure>)}</div><div className="res-flow"><div>64 pixels / 16 → Linear 64→32 → tanh</div><div>{depth} blocks: LayerNorm → Linear 32→32 → tanh → Linear 32→32<br /><strong>{mode === 'plain' ? 'Return correction F(h)' : mode === 'residual' ? 'Return h + F(h)' : mode === 'scaled' ? 'Return h + F(h)/√L' : 'Return h + learned scale × F(h)'}</strong></div><div>Linear 32→10 → ten logits → cross-entropy</div></div><div className="res-controls"><label>Recorded seed<select value={seed} onChange={event => { setSeed(Number(event.target.value)); setOmit(-1); }}>{[1, 2, 3].map(value => <option key={value}>{value}</option>)}</select></label><label>Recorded depth<select value={depth} onChange={event => { setDepth(Number(event.target.value)); setOmit(-1); }}>{[2, 6, 12].map(value => <option key={value}>{value}</option>)}</select></label><label>Recorded architecture<select value={mode} onChange={event => { setMode(event.target.value); setOmit(-1); }}>{['plain', 'residual', 'scaled', 'rezero'].map(value => <option value={value} key={value}>{modeLabel[value]}</option>)}</select></label></div><TracePlot title="Mean cross-entropy (natural-log units): amber training, dashed white validation" axis="Adam updates" points={fit.trace.map(row => ({ step: row.step, training: row.training.ce, validation: row.validation.ce }))} /><p>Lines connect recorded points to guide the eye; no intermediate measurements were saved. Correct counts are a separate quantity.</p><Table live caption="Complete saved learning trace" headers={['Update', 'Training CE', 'Validation CE', 'Validation correct / 120']} rows={fit.trace.map(row => [row.step, fmt(row.training.ce), fmt(row.validation.ce), `${row.validation.correct} / 120`])} /><p className="res-readout" data-testid="res-fit-result">Final {modeLabel[mode]}: {final.validation.correct}/120 correct, CE {fmt(final.validation.ce)}, {fit.trainable_count.toLocaleString()} parameters. Same-seed stem-only baseline: {baselineFinal.validation.correct}/120, CE {fmt(baselineFinal.validation.ce)}, {baseline.trainable_count.toLocaleString()} parameters.</p><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect loss-specific layer diagnostics and actual parameter movement</h4><div className="res-controls"><label>Saved diagnostic update<select value={step} onChange={event => setStep(Number(event.target.value))}>{[0, 1, 25, 100, 250].map(value => <option key={value}>{value}</option>)}</select></label><label>Diagnostic quantity<select value={diagnostic} onChange={event => setDiagnostic(event.target.value)}><option value="mean_square">Activation mean square</option><option value="activation_gradient_rms">Loss gradient RMS with respect to activation</option></select></label></div><p>Fixed first 32 training rows; the actual loss and labels determine these gradients. A larger value is not automatically better. Stem-weight gradient norm: {fmt(snapshot.diagnostics.stem_weight_gradient_norm)}; this is a different quantity from an activation gradient.</p><Table caption="Layer state diagnostics; layer 0 is the stem" headers={['Layer', diagnostic === 'mean_square' ? 'Mean square' : 'Activation gradient RMS']} rows={snapshot.diagnostics.layers.map(row => [row.layer, fmt(row[diagnostic])])} /><Table caption="Final branch matrix movement; Frobenius norm from its own initialization" headers={['Parameter', 'Displacement']} rows={branchDisplacements.map(([name, value]) => [name, fmt(value)])} /><p>Final branch scales: {vec(fit.scales)}. Zero gates at initialization do not imply untrained branch matrices at the end.</p></section><h4>Delete one block from the final trained model</h4><label>Recorded single-block omission<select value={omit} onChange={event => setOmit(Number(event.target.value))}><option value={-1}>None — full model</option>{fit.validation_block_ablations.map(row => <option key={row.omitted_block} value={row.omitted_block}>Omit block {row.omitted_block + 1}</option>)}</select></label><p className="res-readout" data-testid="res-ablation-result">{ablation ? `Omit block ${omit + 1}: ${ablation.correct}/120, CE ${fmt(ablation.ce)}. Full fitted model: ${final.validation.correct}/120, CE ${fmt(final.validation.ce)}.` : `No block omitted: ${final.validation.correct}/120, CE ${fmt(final.validation.ce)}. This is exactly the unmodified final model.`}</p><p>{mode === 'plain' ? 'The retained experiment did not measure omissions for plain models.' : 'Each option is an actual recorded deletion without retraining. No arbitrary multi-block combination is synthesized.'} Selecting another trace does not create a fresh experiment.</p><Reset onClick={reset} /><p><a href={`${residualAssets}/calculated-inputs.json`} download>Download complete measured values, split IDs and diagnostics</a></p></Lab>;
+  const final = fit.trace.at(-1), baselineFinal = baseline.trace.at(-1);
+  return <FlowLab id="res-evidence" label="Inspect the recorded fits" note="Recorded CPU experiment: these are saved measurements, not training in your browser.">
+    <TracePlot log yRange={evidenceRange} yTitle="cross-entropy (nats)" label={`Mean cross-entropy, log scale, over Adam updates for seed ${seed}, ${depth} blocks, ${modeLabel[mode]}: training and validation, with the stem-only validation value as a reference`} axis="Adam updates" series={[['training', 'training'], ['validation', 'validation']]} reference={{ value: baselineFinal.validation.ce, name: 'stem only' }} points={fit.trace.map(row => ({ step: row.step, training: row.training.ce, validation: row.validation.ce }))} />
+    <FlowControls>
+      <FlowChoice label="Connection" value={mode} onChange={setMode} options={['plain', 'residual', 'scaled', 'rezero'].map(value => [value, modeLabel[value]])} />
+      <FlowChoice label="Blocks" value={depth} onChange={setDepth} options={[2, 6, 12].map(value => [value, String(value)])} />
+      <FlowChoice label="Seed" value={seed} onChange={setSeed} options={[1, 2, 3].map(value => [value, `seed ${value}`])} />
+    </FlowControls>
+    <FlowReadout>{modeLabel[mode]}, {depth} blocks, seed {seed}: <strong>{final.validation.correct}/120</strong> validation digits correct, validation CE {fmt(final.validation.ce)}, training CE {fmt(final.training.ce)}, {fit.trainable_count.toLocaleString()} parameters. The same seed's stem-only model, drawn as the faint line: {baselineFinal.validation.correct}/120, CE {fmt(baselineFinal.validation.ce)}. The vertical axis is logarithmic and the same for every record; points are the recorded updates 0, 1, 25, 100 and 250, and lines only connect them.</FlowReadout>
+  </FlowLab>;
 }
 
+// Three recorded diagnostics for seed 1: gradient reaching the layers at update 0, final gates, branch movement.
+export function ResidualDiagnosticsFigure() {
+  const { data, failed, retry } = useMeasurements();
+  if (!data) return <Pending id="res-diagnostics" label="Recorded diagnostics" failed={failed} retry={retry} />;
+  const fit = mode => data.fits.find(row => row.seed === 1 && row.depth === 12 && row.mode === mode);
+  const gradients = ['plain', 'residual'].map(mode => [mode, fit(mode).trace.find(row => row.step === 0).diagnostics.layers]);
+  const gated = fit('rezero');
+  const moves = Object.entries(gated.parameter_displacements).filter(([name]) => /^blocks\.\d+\.(lower|upper)\.weight$/.test(name)).map(([, value]) => value);
+  return <figure data-figure="residual-diagnostics">
+    <div className="res-columns">
+      <div><h5>Gradient reaching each layer at update 0 (RMS, 12 blocks)</h5>{gradients.map(([mode, layers]) => <p key={mode} className="res-value">{modeLabel[mode]}: stem <span className="ink-backward">{fmt(layers[0].activation_gradient_rms)}</span> … last block <span className="ink-backward">{fmt(layers.at(-1).activation_gradient_rms)}</span></p>)}</div>
+      <div><h5>Learned-gate model after training</h5><p>final gates α, one per block:</p><ol className="res-chips" aria-label="Final learned gates">{gated.scales.map((value, i) => <li key={i} className="res-chip-learned"><span>block {i + 1}</span>{fmt(Number(value.toFixed(3)))}</li>)}</ol><p>branch weight matrices moved <strong>{Math.min(...moves).toFixed(2)}–{Math.max(...moves).toFixed(2)}</strong> from their initialization (Frobenius norm)</p></div>
+    </div>
+  </figure>;
+}
+
+// Delete one block from a trained six-block model and re-score it, without retraining. The chips are the control.
+export function ResidualAblationLab() {
+  const { data, failed, retry } = useMeasurements();
+  const [seed, setSeed] = useState(1), [mode, setMode] = useState('residual'), [omit, setOmit] = useState(-1);
+  if (!data) return <Pending id="res-ablation" label="Remove one trained block" failed={failed} retry={retry} />;
+  const fit = data.fits.find(row => row.seed === seed && row.depth === 6 && row.mode === mode);
+  const final = fit.trace.at(-1);
+  const rows = fit.validation_block_ablations;
+  const ablation = rows.find(row => row.omitted_block === omit);
+  return <FlowLab id="res-ablation" label="Remove one trained block" note="Recorded deletions of one block at a time, measured after training; nothing is retrained.">
+    <div className="res-chips res-chips--buttons" role="group" aria-label="Choose a block to omit">
+      <button type="button" aria-pressed={omit === -1} onClick={() => setOmit(-1)}><span>full model</span>{final.validation.correct}/120</button>
+      {rows.map(row => <button type="button" key={row.omitted_block} aria-pressed={omit === row.omitted_block} aria-label={`Omit block ${row.omitted_block + 1}: ${row.correct} of 120 correct`} onClick={() => setOmit(row.omitted_block)}><span>omit {row.omitted_block + 1}</span>{row.correct}/120</button>)}
+    </div>
+    <FlowControls>
+      <FlowChoice label="Connection" value={mode} onChange={value => { setMode(value); setOmit(-1); }} options={['residual', 'scaled', 'rezero'].map(value => [value, modeLabel[value]])} />
+      <FlowChoice label="Seed" value={seed} onChange={value => { setSeed(value); setOmit(-1); }} options={[1, 2, 3].map(value => [value, `seed ${value}`])} />
+    </FlowControls>
+    <FlowReadout>{ablation ? <>Without block {omit + 1}: <strong>{ablation.correct}/120</strong> correct, CE {fmt(ablation.ce)}. Full six-block model: {final.validation.correct}/120, CE {fmt(final.validation.ce)}.</> : <>Full six-block {modeLabel[mode].toLowerCase()} model, seed {seed}: <strong>{final.validation.correct}/120</strong> correct, CE {fmt(final.validation.ce)}. Select a block above to delete it.</>}</FlowReadout>
+    <p className="flow-note"><a href={`${residualAssets}/calculated-inputs.json`} download>Download every measured value</a>, including split IDs, per-layer diagnostics and parameter displacements.</p>
+  </FlowLab>;
+}
+
+// Two linear blocks expand into four summed paths; a nonlinear branch does not distribute.
 export function ResidualPathsFigure() {
-  const [zero, setZero] = useState(false); const input = zero ? 0 : 1, state = nonlinearPaths(input);
-  return <Lab id="res-paths" title="Four linear products do not justify distributing a nonlinear function" kind="Composition comparison"><div className="res-columns"><div className="res-lane"><strong>Two linear blocks</strong><p>Identity: x<br />First correction: W₀x<br />Second correction: W₁x<br />Both: W₁W₀x</p><p>Four products summed; weights are shared.</p></div><div className="res-lane"><strong>Nonlinear F(x) = x²</strong><p>x₀ = {input}<br />x₁ = {input} + {input ** 2} = {state.first}<br />x₂ = {state.first} + {state.first ** 2} = {state.actual}</p><p>The invalid distributed expression gives {state.invalid}.</p></div></div><label className="res-toggle"><input type="checkbox" checked={zero} onChange={event => setZero(event.target.checked)} />Use the zero-input null comparison</label><p>{zero ? 'Both expressions happen to return zero. One agreeing input cannot validate a general algebraic identity.' : 'Squaring the sum introduces cross terms. F(1 + 1) = 4, whereas F(1) + F(1) = 2.'}</p></Lab>;
+  const state = nonlinearPaths(1);
+  return <figure data-figure="residual-paths"><div className="res-columns">
+    <div><h5>Two linear blocks: four paths, summed</h5><p className="res-value">(I + W₁)(I + W₀)x<br />= <span className="ink-input">x</span> + <span className="ink-computed">W₀x</span> + <span className="ink-computed">W₁x</span> + <span className="ink-computed">W₁W₀x</span></p><p>The four products share W₀ and W₁.</p></div>
+    <div><h5>Nonlinear F(x) = x², starting at x₀ = 1</h5><p className="res-value">x₁ = 1 + 1 = {state.first}<br />x₂ = {state.first} + {state.first}² = <strong>{state.actual}</strong></p><p>The distributed expression x + F(x) + F(x) + F(F(x)) gives {state.invalid}.</p></div>
+  </div></figure>;
 }
 
+// Forward Euler for dx/dt = −x: x_{k+1} = (1 − Δt) x_k.
 export function ResidualEulerLab() {
-  const [stepSize, setStepSize] = useState(0.1), [visibleSteps, setVisibleSteps] = useState(10);
+  const [stepSize, setStepSize] = useState(0.1);
+  const visibleSteps = 10;
   const state = scalarStack(-stepSize, visibleSteps);
-  return <Lab id="res-euler" title="A stable continuous equation can have an unstable discrete update" kind="Optional numerical connection"><p>Constructed forward Euler solution of dx/dt = −x, starting at x₀ = 1. Each discrete step multiplies by 1 − Δt. This is not measured neural training.</p><div className="res-controls"><Numeric label="Euler step size Δt" min={0} max={3} value={stepSize} onChange={setStepSize} /><Numeric label="Number of Euler steps" min={1} max={20} step={1} value={visibleSteps} onChange={setVisibleSteps} /></div><TracePlot signed title="Signed state after each discrete step" axis="Discrete step index" points={state.trace.map(row => ({ step: row.step, training: row.value }))} /><p className="res-readout" data-testid="res-euler-result">Multiplier {fmt(state.multiplier)}; after {visibleSteps} steps: {fmt(state.gain)}. {stepSize === 0 ? 'Identity: time has not advanced.' : stepSize === 2 ? 'Sign alternates with unchanged magnitude.' : stepSize > 2 ? 'Magnitude grows despite a direct path in every update.' : stepSize === 1 ? 'First update reaches zero exactly.' : stepSize < 1 ? 'Magnitude contracts without changing sign.' : 'Magnitude contracts while alternating sign.'}</p><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Exact intermediate values</h4><Table caption="Euler trajectory" headers={['Step', 'Value']} rows={state.trace.map(row => [row.step, fmt(row.value)])} /></section><Reset onClick={() => { setStepSize(0.1); setVisibleSteps(10); }} /></Lab>;
+  const verdict = stepSize === 0 ? 'Identity: time has not advanced.' : stepSize === 2 ? 'The sign alternates with unchanged magnitude.' : stepSize > 2 ? 'The magnitude grows despite a direct path in every update.' : stepSize === 1 ? 'The first update reaches zero exactly.' : stepSize < 1 ? 'The magnitude contracts without changing sign.' : 'The magnitude contracts while alternating sign.';
+  return <FlowLab id="res-euler" label="A stable equation can have an unstable discrete update" note="Constructed calculation of a differential equation; not measured neural training.">
+    <TracePlot signed label={`Euler state over ${visibleSteps} steps with step size ${stepSize}`} axis="Euler step k" series={[['training', 'xₖ']]} points={state.trace.map(row => ({ step: row.step, training: row.value }))} />
+    <FlowControls>
+      <FlowSlider name="Step size Δt" value={stepSize} onChange={setStepSize} min={0} max={3} step={0.05} format={fmt} />
+    </FlowControls>
+    <FlowReadout>Each step multiplies by 1 − Δt = <strong>{fmt(state.multiplier)}</strong>; after {visibleSteps} steps x = <strong>{fmt(state.gain)}</strong>. {verdict}</FlowReadout>
+  </FlowLab>;
 }
 
-export function ResidualDenoisingFigure() { return <Lab id="res-denoising" title="Learn a noise estimate, then subtract it" kind="Illustrative arithmetic · no trained DnCNN output"><div className="res-flow"><div>Observed z: [0.2, 0.9, 0.4]</div><div>Hypothetical estimated noise: [0.1, −0.1, 0.2]</div><div className="res-join">z − estimated noise: [0.1, 1.0, 0.2]</div></div><p>The second entry rises because its estimated noise is negative. This calculation alone says nothing about whether the estimate is correct.</p></Lab>; }
-export function ResidualMemoryFigure() { return <Lab id="res-memory" title="A route needs a value at the join, not a new copy at every arrow" kind="Explanatory lifetime sketch"><div className="res-flow"><div>x remains available ──────────┐<br />Branch intermediates may be saved or recomputed</div><div className="res-join">Join consumes x and F(x)</div><div>Backward addition routes g to both inputs<br />Its derivative does not depend on saved input values</div></div><p>The executed addition-and-sum saved-tensor hook records []. That narrow observation is not the peak memory of a complete branch, optimizer or device.</p></Lab>; }
+// Illustrative residual denoising arithmetic.
+export function ResidualDenoisingFigure() {
+  return <figure data-figure="residual-denoising"><div className="res-flow">
+    <div className="res-input">observed <span className="ink-input">z = [0.2, 0.9, 0.4]</span></div>
+    <div className="res-computed">estimated noise <span className="ink-computed">n̂(z) = [0.1, −0.1, 0.2]</span> (hypothetical)</div>
+    <div className="res-arrow" aria-hidden="true">↓ z − n̂(z)</div>
+    <div className="res-computed">denoised <span className="ink-computed">[0.1, 1.0, 0.2]</span></div>
+  </div></figure>;
+}
+
+// What a residual join needs in memory: the two values at the moment of addition.
+export function ResidualMemoryFigure() {
+  return <figure data-figure="residual-memory"><div className="res-flow">
+    <div className="res-input">x stays available until the join</div>
+    <div className="res-computed">branch F: its intermediate values may be saved for backward, or recomputed</div>
+    <div className="res-op">⊕ join consumes x and F(x)</div>
+    <div className="res-arrow ink-backward" aria-hidden="true">↑ backward</div>
+    <div className="res-op">the addition routes <span className="ink-backward">g</span> to both inputs; its own derivative needs no saved values</div>
+  </div></figure>;
+}
 
 export function ResidualProgram() { return <><MechanismProgram source={`${residualAssets}/residual-experiments.py`} title="Read the complete scratch-routing and ordinary PyTorch experiment" output={'Executed on CPU: 39 fitted models, seeds 1/2/3, depths 0/2/6/12.\nSelected seed-1 final rows (training CE, validation CE, correct/120):\n0 stem_only  0.027306  0.107264  117\n6 plain      0.000702  0.254232  116\n6 residual   0.000664  0.221809  116\n12 plain     0.002000  0.599136  110\n12 residual  0.000389  0.303736  111\n12 scaled    0.000405  0.144360  113\n12 rezero    0.000184  0.161761  116\nComplete JSON includes every fit and diagnostic; this is an excerpt.'} /><p><a href={`${residualAssets}/digits-400.csv`} download>Download required digits-400.csv</a> · <a href={`${residualAssets}/data-provenance.md`}>Data attribution and complete experiment protocol</a></p></>; }

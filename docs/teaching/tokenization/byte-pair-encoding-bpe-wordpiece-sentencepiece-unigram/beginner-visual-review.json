@@ -1,0 +1,51 @@
+{
+  "topicId": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+  "date": "2026-09-28",
+  "scope": "Independent final production captured-image inspection; 19 images actually viewed",
+  "status": "No blocking visual or copy findings in inspected captures",
+  "sourceIdentity": "Four relevant source hashes equal the prior completed beginner review",
+  "imageOrigin": "Integration-owner production captures read from scratch/tokenization-intuition; retained paths below identify unchanged-byte destination",
+  "correctionsVisiblyConfirmed": [
+    "Original-corpus qualifier and Reset in changed BPE states",
+    "WordPiece failure statement accurate at word start and after a committed prefix"
+  ],
+  "mechanismObservations": [
+    "Overlap count6 versus replacements4; total10 to6",
+    "Greedy ab prefix fails while a|##bc remains a valid alternative",
+    "Removed Unigram ab edge leaves one 100-percent path and equal updated character probabilities"
+  ],
+  "notClaimed": [
+    "Direct browser interaction by this reviewer",
+    "Actual novice observation",
+    "Repeat desktop static-figure inspection; owner performed that separately",
+    "New numerical or model execution"
+  ],
+  "sourceSha256": {
+    "src/learn/data/topics/tokenization.jsx": "a68e15987a4d6cabe90b4daaaf886dc6d3fc4d49c31ad3521880f9c4b6f3adc1",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "21e947f8a453d4deebc9855ac8e9937583dbcd285f699fd4b49dd7f2b22083c0",
+    "src/learn/components/lesson-labs/subword-tokenization-lessons.css": "a55a6d3b8503e630f6c83d3776a4958313cd0ed43fd40867dd91bf55510cef24",
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19"
+  },
+  "imageSha256": {
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-0-320.png": "bc24fdaf2ded46486067b351089f0d9379c15a444729bbe38dae514cf9c985b9",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-1-320.png": "58c66feefd2c600af71c08cb03765470fa52486e9d4a2cd0b09c4c809f1dc2d6",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-2-320.png": "a30d5c170019101cadf25609548c088f02d154ab6b22eeac2ef54fdb060efb1b",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-4-320.png": "43d65cf73865c9b0ba8b2eb438aec235cf436718271af4e9973d5e46d0bcf76c",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-5-320.png": "f755a6f96de551aa519a89aa7d5b87d7ff9500c9acc5e30491aa5fd231053e64",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-8-320.png": "7634329baa74dcd3a2d26601447bccf5a9d37ec87542032f294d5d8f34c371f1",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-9-320.png": "194eb06edbb859876a76e1ade42ffe627bc912097f5120ad52ab10e6dad19835",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-10-320.png": "396fe5e0c1004d3b055bd7e4c776310c7b9c77a732d1ed4c39c8f4a7eeecde13",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-0-desktop.png": "429f0af4058efbe03d498e0df9b91eac0f976671e7a51e7520bb1606a9354e00",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-0-320.png": "b8e62fffb7173c7a425f9897e8a006ff8225763990f0f18bef5763b50a1c1e72",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-1-desktop.png": "5c089fb0d077116687d594ee2adc89ac4a10670088ef8b2c113953166640883d",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-1-320.png": "a762f01fc7751cc54e432ae6af6fe4859d2b429e465079f06ecfe8a433b8f5e6",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-2-desktop.png": "6eaf9c2836b1530f1ab73cfc84310e6b501d827ec404cf8459ba9136432891a6",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-2-320.png": "51e4b8d10c6f5175a0854595282cb3bca651cf6b9e18d45b2e70346f733cd3a2",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-0-changed.png": "37498e7c3e83573bdd55166d1119e8638087d2f2424a488606b989be55f53409",
+    "docs/teaching/tokenization/beginner-screenshots/browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-1-changed.png": "abe2ebe3408378097b9079522e3a66428ad2d2470355424733d070461f519df0",
+    "docs/teaching/tokenization/beginner-screenshots/interactions/bpe-overlap.png": "1012a6dff28c9a87c6c8a742a477bfb188a369d69b7ec06f9414107537555ae2",
+    "docs/teaching/tokenization/beginner-screenshots/interactions/wordpiece-greedy-failure.png": "10bc424b653df66fa7eac5c4367e1539e1eb7c511e0be2ba88d9788c3db41241",
+    "docs/teaching/tokenization/beginner-screenshots/interactions/unigram-whole-piece-removed.png": "ac2aeb05423b6f5035662ab96ad9f3732d2de8a15cc493011af76688165ccdd9"
+  },
+  "observations": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/beginner-visual-review.md"
+}

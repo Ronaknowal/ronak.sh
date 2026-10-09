@@ -1,0 +1,264 @@
+{
+  "ids": [
+    1
+  ],
+  "log_p": -7.56320059235807,
+  "log_q": null,
+  "steps": [
+    {
+      "position": 0,
+      "prefix_ids": [
+        544,
+        94,
+        6,
+        459,
+        543,
+        391,
+        321,
+        495,
+        233,
+        0,
+        267,
+        454,
+        2,
+        545,
+        393,
+        32,
+        474,
+        211,
+        6
+      ],
+      "selected_id": 1,
+      "log_p": -7.56320059235807,
+      "log_q": null,
+      "entropy_q": null,
+      "model_entropy": 4.695534192249843,
+      "support": 546
+    }
+  ],
+  "stop_reason": "eos",
+  "beam": {
+    "selected": {
+      "ids": [
+        1
+      ],
+      "log_p": -7.56320059235807,
+      "ancestry": [
+        0
+      ]
+    },
+    "selected_status": "eos",
+    "search_stop_reason": "retained_frontier_bound",
+    "finished": [
+      {
+        "ids": [
+          1
+        ],
+        "log_p": -7.56320059235807,
+        "ancestry": [
+          0
+        ]
+      },
+      {
+        "ids": [
+          40,
+          1
+        ],
+        "log_p": -9.054205907566992,
+        "ancestry": [
+          0,
+          0
+        ]
+      }
+    ],
+    "capped": [],
+    "trace": [
+      {
+        "depth": 1,
+        "scored_cells": 546,
+        "candidate_count": 546,
+        "kept": [
+          {
+            "ids": [
+              40
+            ],
+            "log_p": -2.1207828818362775,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              80
+            ],
+            "log_p": -2.853670391045737,
+            "ancestry": [
+              0
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -7.56320059235807,
+            "ancestry": [
+              0
+            ]
+          }
+        ],
+        "pruned_count": 543,
+        "alive_upper_bound": -2.1207828818362775
+      },
+      {
+        "depth": 2,
+        "scored_cells": 1092,
+        "candidate_count": 1092,
+        "kept": [
+          {
+            "ids": [
+              40,
+              406
+            ],
+            "log_p": -5.6202187030818465,
+            "ancestry": [
+              0,
+              0
+            ]
+          },
+          {
+            "ids": [
+              80,
+              238
+            ],
+            "log_p": -5.993363353521236,
+            "ancestry": [
+              0,
+              1
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -7.56320059235807,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              40,
+              1
+            ],
+            "log_p": -9.054205907566992,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "pruned_count": 1088,
+        "alive_upper_bound": -5.6202187030818465
+      },
+      {
+        "depth": 3,
+        "scored_cells": 1092,
+        "candidate_count": 1092,
+        "kept": [
+          {
+            "ids": [
+              40,
+              406,
+              506
+            ],
+            "log_p": -8.206775289131137,
+            "ancestry": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "ids": [
+              80,
+              238,
+              6
+            ],
+            "log_p": -8.454172451730177,
+            "ancestry": [
+              0,
+              1,
+              1
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -7.56320059235807,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              40,
+              1
+            ],
+            "log_p": -9.054205907566992,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "pruned_count": 1088,
+        "alive_upper_bound": -8.206775289131137
+      }
+    ],
+    "alpha": 0,
+    "width": 2
+  },
+  "run_id": "heldout-line-5-beam2-None",
+  "model": "smoothed_word_bigram",
+  "prompt": {
+    "id": "heldout-line-5",
+    "source": "\u201cCome, there\u2019s no use in crying like that!\u201d said Alice to herself, rather sharply; \u201cI advise you to leave off this minute!\u201d She generally gave herself very good advice, (though she very seldom followed it), and sometimes she scolded herself so severely as to bring tears into her eyes; and once she remembered trying to box her own ears for having cheated herself in a game of croquet she was playing against herself, for this curious child was very fond of pretending to be two people. \u201cBut it\u2019s no use now,\u201d thought poor Alice, \u201cto pretend to be two people! Why, there\u2019s hardly enough of me left to make _one_ respectable person!\u201d",
+    "source_sha256": "1e90712bd7d42c73c3315d8473fb9a3018538330e408c53f0ea3e4a2459d9b3d",
+    "prompt": "\u201cCome, there\u2019s no use in crying like that!\u201d said Alice to herself,"
+  },
+  "prompt_ids": [
+    544,
+    94,
+    6,
+    459,
+    543,
+    391,
+    321,
+    495,
+    233,
+    0,
+    267,
+    454,
+    2,
+    545,
+    393,
+    32,
+    474,
+    211,
+    6
+  ],
+  "method": {
+    "name": "beam2",
+    "beam": 2
+  },
+  "seed": null,
+  "text": "",
+  "wall_seconds": 0.004083600011654198
+}

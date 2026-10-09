@@ -1,0 +1,195 @@
+{
+  "scope": "Zero generation, zero optimizer steps; full model gradients and serialization",
+  "cases": [
+    {
+      "beta": 0.0,
+      "temperature": 1.0,
+      "native_loss": 8.598334312438965,
+      "full_loss": 8.598334312438965,
+      "parameters_compared": 40,
+      "max_gradient_error": 0.0008897781372070312,
+      "gradient_relative_l2": 3.0829874892268345e-05
+    },
+    {
+      "beta": 0.0,
+      "temperature": 2.0,
+      "native_loss": 2.2602100372314453,
+      "full_loss": 2.260209798812866,
+      "parameters_compared": 40,
+      "max_gradient_error": 0.00016999244689941406,
+      "gradient_relative_l2": 4.5106417913057253e-05
+    },
+    {
+      "beta": 0.5,
+      "temperature": 1.0,
+      "native_loss": 0.6850309371948242,
+      "full_loss": 0.6850309371948242,
+      "parameters_compared": 40,
+      "max_gradient_error": 1.0030344128608704e-06,
+      "gradient_relative_l2": 9.456401025696202e-06
+    },
+    {
+      "beta": 0.5,
+      "temperature": 2.0,
+      "native_loss": 0.3544899821281433,
+      "full_loss": 0.3544899821281433,
+      "parameters_compared": 40,
+      "max_gradient_error": 1.813843846321106e-05,
+      "gradient_relative_l2": 3.139323797188759e-05
+    },
+    {
+      "beta": 1.0,
+      "temperature": 1.0,
+      "native_loss": 13.388236999511719,
+      "full_loss": 13.388236999511719,
+      "parameters_compared": 40,
+      "max_gradient_error": 0.0016937255859375,
+      "gradient_relative_l2": 4.199735314609213e-05
+    },
+    {
+      "beta": 1.0,
+      "temperature": 2.0,
+      "native_loss": 2.473574161529541,
+      "full_loss": 2.473573923110962,
+      "parameters_compared": 40,
+      "max_gradient_error": 0.0001647472381591797,
+      "gradient_relative_l2": 1.8315354128470058e-05
+    }
+  ],
+  "fp64_projection_fp32_softmax_cases": [
+    {
+      "beta": 0.0,
+      "gradient_relative_l2": 3.2254787838762654e-14
+    },
+    {
+      "beta": 0.5,
+      "gradient_relative_l2": 6.931246511063851e-14
+    },
+    {
+      "beta": 1.0,
+      "gradient_relative_l2": 8.885810603261273e-14
+    }
+  ],
+  "all_masked_null": true,
+  "teacher_unchanged": true,
+  "student_unchanged": true,
+  "reload_exact": true,
+  "train_ids": [
+    0,
+    1,
+    2,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67
+  ],
+  "tokenizer_contract": "Exact vocabulary/EOS and all1052x3 complete candidate and prompt encodings; both file identities retained",
+  "batch": {
+    "prompt_ids": [
+      [
+        0,
+        11,
+        22
+      ],
+      [
+        11,
+        22,
+        33
+      ]
+    ],
+    "prompt_mask": [
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1
+      ]
+    ],
+    "completion_ids": [
+      [
+        12,
+        0,
+        0
+      ],
+      [
+        15,
+        16,
+        0
+      ]
+    ],
+    "completion_mask": [
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "initial_student_sha256": "9e3b7e1bb4a8879e43d6855ce074c1928250deec39ce39ed8be8d7a4464c7e1b"
+}

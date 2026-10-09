@@ -1,0 +1,329 @@
+{
+  "status": "PASS_EXACT_REVERSIBLE_BOUNDED_CORRECTION",
+  "files": [
+    {
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/reading-flow-manuscript.md",
+        "bytes": 136791,
+        "sha256": "d11d369ff19d23db2780356e15e172cb34dcbf5e69fcf3bf97133a283e530e56"
+      },
+      "current": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/reading-flow-manuscript.md",
+        "bytes": 138332,
+        "sha256": "8d1c32dc7cf8de49b99fd6198671927c52196d7ac5714dd0ec90c70eebfbbec5"
+      },
+      "edits": [
+        {
+          "kind": "replace",
+          "beforeStart": 334,
+          "beforeEnd": 335,
+          "afterStart": 334,
+          "afterEnd": 335,
+          "before": "The code calls $\\beta=1/(2\\sigma^2)$. Increasing beta narrows the row and lowers entropy. `row_at_beta` subtracts the smallest squared distance before exponentiating; this common shift cancels in normalization and stops all weights from underflowing together. `solve_row` brackets beta, bisects once an upper bound exists and reports a status after a bounded number of iterations. It ignores zero-probability terms when evaluating $p\\log p$, whose limiting value is 0. Uniform input scaling by $c>0$ divides beta by $c^2$ at the same target and preserves the row.\n",
+          "after": "The code calls $\\beta=1/(2\\sigma^2)$. Increasing beta narrows the row and lowers entropy. `row_at_beta` subtracts the smallest squared distance before exponentiating; this common shift cancels in normalization and stops all weights from underflowing together. `solve_row` brackets beta, bisects once an upper bound exists and reports a status after a positive integer iteration budget. At `iteration-limit`, the returned probabilities and beta describe the last evaluated row, even though its entropy has not met the tolerance. For example, distances[1,2,3], target perplexity2 and one iteration return the row at beta1, not the proposed next beta.5. A nonpositive budget is rejected before any boundary return. Entropy evaluation ignores zero-probability terms when evaluating $p\\log p$, whose limiting value is 0. Uniform input scaling by $c>0$ divides beta by $c^2$ at the same target and preserves the row.\n"
+        },
+        {
+          "kind": "insert",
+          "beforeStart": 363,
+          "beforeEnd": 363,
+          "afterStart": 363,
+          "afterEnd": 365,
+          "before": "",
+          "after": "    if not isinstance(max_iter, (int, np.integer)) or max_iter <= 0:\n        raise ValueError(\"max_iter must be a positive integer\")\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 375,
+          "beforeEnd": 376,
+          "afterStart": 377,
+          "afterEnd": 379,
+          "before": "        p, entropy = row_at_beta(d, beta)\n",
+          "after": "        evaluated_beta = beta\n        p, entropy = row_at_beta(d, evaluated_beta)\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 383,
+          "beforeEnd": 384,
+          "afterStart": 386,
+          "afterEnd": 387,
+          "before": "    return p, beta, \"iteration-limit\"\n",
+          "after": "    return p, evaluated_beta, \"iteration-limit\"\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 412,
+          "beforeEnd": 413,
+          "afterStart": 415,
+          "afterEnd": 416,
+          "before": "The new deterministic stream includes all four rows and the entire joint matrix:\n",
+          "after": "The recorded deterministic stream below belongs to the preceding solver version; all four searches returned `converged`. The current source keeps that path and corrects the `iteration-limit` tuple. The stream includes all four rows and the entire joint matrix:\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 471,
+          "beforeEnd": 472,
+          "afterStart": 474,
+          "afterEnd": 475,
+          "before": "The four-point step investigation keeps the input $P$ fixed. Select an ID, edit its current coordinate and choose a learning rate; Step updates every row from the same old state and then subtracts the new centroid. Reset returns the original four coordinates. Learning rate 0 leaves all coordinates unchanged. Centroid removal chooses a plotting origin, since translating all coordinates leaves every distance and the cost unchanged. An exactly coincident symmetric start can have zero forces; that stationary state does not establish a good minimum.\n",
+          "after": "The four-point step investigation keeps the input $P$ fixed. Select an ID, edit only its current coordinate and choose a learning rate. A positive-rate Step updates every row from the same old state and then subtracts the new centroid; it reports that common shift. The current-coordinate editor starts with bounds−4 to4. After a Step, its labelled bounds expand symmetrically to contain every computed coordinate, and remain fixed while you edit or select another ID. The editor, point and live value always use that ID's same current coordinate. Reset returns the original four coordinates, selected A, rate.5 and bounds−4 to4. Learning rate 0 leaves all current coordinates unchanged, including after an edit. Centroid removal chooses a plotting origin, since translating all coordinates leaves every distance and the cost unchanged. An exactly coincident symmetric start can have zero forces; that stationary state does not establish a good minimum.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 479,
+          "beforeEnd": 480,
+          "afterStart": 482,
+          "afterEnd": 483,
+          "before": "An explicit oversized step makes the limitation concrete. From the same four-point start and fixed $P$, a single rate 100 update gives approximately[6.278461,−8.261085,−10.760275,12.742899], and KL rises from .053522403 to 1.360383966. This is one constructed update, not another saved optimizer trajectory. A smaller step or a line-search rule addresses step size; it does not make the nonconvex objective globally solved.\n",
+          "after": "An explicit oversized step makes the limitation concrete. From the same four-point start and fixed $P$, a single rate 100 update gives approximately[6.278461,−8.261085,−10.760275,12.742899], and KL rises from .053522403 to 1.360383966. This is one constructed update, not another saved optimizer trajectory. The editor's bounds now read−13 to13, with A still selected at its actual coordinate6.278461…; selecting C loads−10.760275… on the same ruler and in the exact-entry field. Editing C to−10 changes that coordinate and its forces immediately while retaining these bounds. The next positive-rate Step starts from those edited coordinates and expands the bounds again if needed. Reset restores the original state. A smaller step or a line-search rule addresses step size; it does not make the nonconvex objective globally solved.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 941,
+          "beforeEnd": 942,
+          "afterStart": 944,
+          "afterEnd": 945,
+          "before": "Practical inspection therefore starts with a stated input metric and several scales, examines individual records, repeats justified settings and compares with a linear baseline. Cluster area, separation and placement on a t-SNE/UMAP plot are consequences of its construction and sampling as well as the input. Use original-space evidence and the [clustering evaluation lesson](/learn/machine-learning/clustering-evaluation-validation-silhouette-ari-nmi) when the question is whether named groups are supported. The [Distill guide](https://distill.pub/2016/misread-tsne/) provides additional visual examples of parameter sensitivity and misleading area/gap interpretations.\n",
+          "after": "Practical inspection therefore starts with a stated input metric and several scales, examines individual records, repeats justified settings and compares with a linear baseline. Cluster area, separation and placement on a t-SNE/UMAP plot are consequences of its construction and sampling as well as the input. Use original-space evidence and the [clustering evaluation lesson](/learn/path/full-curriculum/clustering-evaluation-validation-silhouette-ari-nmi?module=classical-ml#4-a-score-evaluates-a-geometry-as-well-as-a-partition) when the question is whether named groups are supported. The [Distill guide](https://distill.pub/2016/misread-tsne/) provides additional visual examples of parameter sensitivity and misleading area/gap interpretations.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 991,
+          "beforeEnd": 992,
+          "afterStart": 994,
+          "afterEnd": 995,
+          "before": "scikit-learn's `TSNE` produces coordinates for the supplied collection and has no general `.transform` method. The optional openTSNE route fits a reference embedding and places future observations against it; this extension has its own affinity and optimization choices and is not the same API as fitting all rows together. The shown optional call is source-only and needs openTSNE installed. A supervised UMAP call supplies training labels to alter the graph, making it a different construction. A parametric UMAP encoder learns a function from input rows to coordinates; encoder training belongs to the linked [deep learning module](/learn/deep-learning), rather than being implied by ordinary graph-based transform.\n",
+          "after": "scikit-learn's `TSNE` produces coordinates for the supplied collection and has no general `.transform` method. The optional openTSNE route fits a reference embedding and places future observations against it; this extension has its own affinity and optimization choices and is not the same API as fitting all rows together. The shown optional call is source-only and needs openTSNE installed. A supervised UMAP call supplies training labels to alter the graph, making it a different construction. A parametric UMAP encoder learns a function from input rows to coordinates. The [Deep Learning Fundamentals module](/learn/track/deep-learning-fundamentals) develops neural functions, backpropagation and training objectives needed to train an encoder; ordinary graph-based transform does not imply that an encoder was trained.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 1550,
+          "beforeEnd": 1551,
+          "afterStart": 1553,
+          "afterEnd": 1554,
+          "before": "Diffusion coordinates weight walk eigenmodes by $\\lambda_l^t$ at a chosen time $t$. For an undirected positive-degree graph, the symmetric-normalized operator provides real modes that can be converted to right eigenvectors of the walk. The complete `diffusion_coordinates` function above removes stationary modes and ranks other modes by absolute eigenvalue. The chain has a−1 mode: without self loops the walk is periodic. A lazy transition $(I+P_{walk})/2$ would remove that particular alternation, but it is a changed walk and must be named. There is no scikit-learn `DiffusionMap` call invented here; the exact tiny walk and numerical eigensolver are the computational route.\n",
+          "after": "Diffusion coordinates weight walk eigenmodes by $\\lambda_l^t$ at a chosen time $t$. For an undirected positive-degree graph, the symmetric-normalized operator provides real modes that can be converted to right eigenvectors of the walk. The complete `diffusion_coordinates` function above removes stationary modes and ranks other modes by absolute eigenvalue. The chain has a−1 mode: without self loops the walk is periodic. A lazy transition $(I+P_{walk})/2$ would remove that particular alternation, but it is a changed walk and must be named. The computational route here uses the exact tiny walk and a numerical eigensolver, rather than a scikit-learn diffusion-map estimator.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 1819,
+          "beforeEnd": 1820,
+          "afterStart": 1822,
+          "afterEnd": 1823,
+          "before": "For implementation practice, run the deterministic files, alter a declared small fixture and inspect the intermediate object before interpreting the final coordinates. The five original full programmes retain their recorded outputs; the ten new files have separate deterministic streams. Ordinary fitting/extension functions added in the new files are complete source-only routes until you run them in a matching environment. New results belong to the modified source and settings. The common file index lists every programme, data file and its role; Copy and Download must deliver the entire displayed source, not an excerpt.\n",
+          "after": "For implementation practice, run a deterministic file, alter a declared small fixture and inspect the intermediate object before interpreting the final coordinates. The common file index lists every complete programme, data file and recorded stream. Use the setup guide to choose the dependencies and distinguish a recorded result from a new fitting experiment; retain the modified source and settings with your new results.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 1821,
+          "beforeEnd": 1822,
+          "afterStart": 1824,
+          "afterEnd": 1825,
+          "before": "The next topic, [Independent Component Analysis](/learn/machine-learning/independent-component-analysis-ica), asks another reduction question: can observed mixtures be separated into statistically independent sources? A map that preserves neighbors does not answer it. Bring centering, linear transformations and the habit of naming the target relationship; ICA will add its own assumptions and objective.\n",
+          "after": "The next topic, [Independent Component Analysis](/learn/path/full-curriculum/independent-component-analysis-ica?module=classical-ml), asks another reduction question: can observed mixtures be separated into statistically independent sources? A map that preserves neighbors does not answer it. Bring centering, linear transformations and the habit of naming the target relationship; ICA will add its own assumptions and objective.\n"
+        }
+      ],
+      "exactInverse": true
+    },
+    {
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/visual-and-investigation-specifications.md",
+        "bytes": 42262,
+        "sha256": "b82da5c43df028a20263068707031ec13606d370a5f1ccec8d4729d47437b5e3"
+      },
+      "current": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/visual-and-investigation-specifications.md",
+        "bytes": 45697,
+        "sha256": "07aee732555d0a30e519fa7feb1687d58837d4b232640a337b0e500de5a217b3"
+      },
+      "edits": [
+        {
+          "kind": "replace",
+          "beforeStart": 84,
+          "beforeEnd": 85,
+          "afterStart": 84,
+          "afterEnd": 85,
+          "before": "At actual initial A−1.5 with B−.5,C.5,D1.5, draw three **negative-gradient** arrows −4(P−Q)tΔ on a common coordinate ruler. Label(P,Q,t,Δ) for each: AB(.157500626,.125,.5,−1), AC(.069448540,.05,.2,−2), AD(.009721412,.025,.1,−3). Contributions are+.065001252,+.031117664,−.018334306; sum+.077784611. Use one labelled arrow multiplier and a net arrow at A. Then show all four old/new points for rate.5: [−1.461108,−.538805,.443699,1.556214], recentered. Source: complete P stream and new direct `prose-intermediates.json`; no old optimizer replay. L7 uses same fixed P with current Y; invalid edit retains state, zero rate is an exact null.\n",
+          "after": "At actual initial A−1.5 with B−.5,C.5,D1.5, draw three **negative-gradient** arrows −4(P−Q)tΔ on a common coordinate ruler. Label(P,Q,t,Δ) for each: AB(.157500626,.125,.5,−1), AC(.069448540,.05,.2,−2), AD(.009721412,.025,.1,−3). Contributions are+.065001252,+.031117664,−.018334306; sum+.077784611. Use one labelled arrow multiplier and a net arrow at A. Then show all four old/new points for rate.5: [−1.461108,−.538805,.443699,1.556214], recentered. Source: complete P stream and new direct `prose-intermediates.json`; no old optimizer replay. L7 uses same fixed P with current Y and the explicit editor-domain protocol below; invalid edits retain state. A zero-rate Step is an exact no-op, including after a manual edit, and skips recentering. Positive-rate Step reports the common centroid subtraction.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 88,
+          "beforeEnd": 89,
+          "afterStart": 88,
+          "afterEnd": 89,
+          "before": "Pair one attractive coefficient αP with unchanged Q repulsion, and draw ordered massα versus1. Use α12 as an explicitly named ordinary early-phase example; these are not renormalized probabilities. Momentum arrows, if shown, use a declared previous displacement rather than an invented trajectory. The **constructed single** rate100 step from D17 yields [6.278461,−8.261085,−10.760275,12.742899] and KL1.360383966 from.053522403. Put old/new on a shared extended ruler or explicitly separated zoom with numeric extents; don't clip failed endpoints. Source: direct new prose calculation. Keep failed result visible with reset; no assertion of global minimization or historical200-step intermediates.\n",
+          "after": "Pair one attractive coefficient αP with unchanged Q repulsion, and draw ordered massα versus1. Use α12 as an explicitly named ordinary early-phase example; these are not renormalized probabilities. Momentum arrows, if shown, use a declared previous displacement rather than an invented trajectory. The **constructed single** rate100 step from D17 yields [6.278461,−8.261085,−10.760275,12.742899] and KL1.360383966 from.053522403. Put old/new on a shared extended ruler or explicitly separated zoom with numeric extents; don't clip failed endpoints. Source: direct new prose calculation. Keep this finite failed result visible with all actual endpoints and the expanded L7 editor domain−13…13; no assertion of global minimization or historical200-step intermediates. Selection changes load the actual stepped coordinate, without clamping or implicit resetting.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 210,
+          "beforeEnd": 211,
+          "afterStart": 210,
+          "afterEnd": 211,
+          "before": "| L7, after D17 | Selected A, current x−1.5, learning rate.5; IDs A–D, x−4–4, rate0–100 | Fixed supplied P; selected edit updates all Q/forces. Step computes all4 displacements from old Y, then recentering; shows before/after/changed KL and complete coordinates. | Rate0 exact null; coincident symmetric state may have zero force without optimality. A failed oversized step remains visible. Edit/Step retains coherent current state; Reset restores all4 initial Y,A,.5. No historical200-step replay. |\n",
+          "after": "| L7, after D17 | Selected A, current x−1.5, learning rate.5; IDs A–D, initial x bounds−4…4, rate0–100; the same coordinate has range and exact entry | Fixed supplied P; editing moves only the selected point and updates all Q/forces immediately. Positive-rate Step computes all4 displacements from old Y, then recenters with a reported shift. Show complete before/after coordinates and KL; expand shared coordinate bounds by the protocol below. | Rate0 skips update/recentering and is an exact null even after an edit. Keep finite failed oversized steps visible. Selection, edit and Step preserve synchronized current state; Reset restores all4 initial Y,A,.5 and bounds−4…4. No historical200-step replay. |\n"
+        },
+        {
+          "kind": "insert",
+          "beforeStart": 217,
+          "beforeEnd": 217,
+          "afterStart": 217,
+          "afterEnd": 223,
+          "before": "",
+          "after": "### L7 current-coordinate domain and required state trace\n\nKeep a shared symmetric half-bound M in the state, initially4. After each finite positive-rate Step and its reported centroid subtraction, set M←max(M,ceil(max_i|y_i|)). Label the coordinate range and exact entry with the same bounds[−M,M]. Keep the entire computed coordinate at full model precision; step=any and no decimal snapping grid are required for the range. Rounded point labels never become model inputs. The range value, exact-entry value, selected point and live sentence must refer to the same current coordinate. Drawing extents include all current and compared endpoints and disclose a scale extension; they cannot silently crop the failed step. Keep scale and M fixed throughout a drag/edit and on ID changes. A valid finite edit within the displayed bounds changes only the selected y_i; it does not recenter the other points. Reject empty/nonfinite/out-of-bounds drafts with precise feedback while explicitly retaining the last valid state. Rate0 Step is an exact no-op, so a noncentered edited state is not translated by a nominal zero step.\n\nRequired finite state trace for phase-two native/keyboard checks: Reset→A−1.5,B−.5,C.5,D1.5, selected A, rate.5, bounds−4…4. Set rate100 and Step: keep the supplied full-precision result whose rounded coordinates are[6.278461,−8.261085,−10.760275,12.742899]; KL rises to1.360383966 and remains visible. M becomes13, and selected A's range/exact entry/point/live sentence all show the same6.278461… value within[−13,13]. Select C: all four views load its same−10.760275… coordinate; neither coordinates nor M change. Enter C=−10: update only C, Q, forces and current KL immediately; M stays13. At rate0, Step leaves this edited state exactly unchanged. At rate.5, Step uses this entire edited state, computes every displacement from it before mutation, recenters with a visible common shift and recomputes M by the same rule. Repeated positive Steps use the current state and may expand M again; they never clamp a computed coordinate or shrink M during selection/edit. Reset returns every original coordinate, selected A, rate.5, M4, baseline KL and clears edit/error/before-after history. A nonfinite computed step must report a computation failure and clearly retain the last finite state, rather than inventing finite coordinates; a finite KL increase is a real accepted failed result, not a reason to reject or hide the step.\n\n"
+        },
+        {
+          "kind": "insert",
+          "beforeStart": 220,
+          "beforeEnd": 220,
+          "afterStart": 226,
+          "afterEnd": 228,
+          "before": "",
+          "after": "\nUse the shared Reader file index for every complete mapped payload, and make Copy/Download deliver the complete displayed source with visible success/error feedback. Keep section12's annotated further-learning routes and precise technical references in their separate shared ending roles. Preserve all annotations, optional-package boundaries and access/video qualifications; metadata is not a viewing claim.\n"
+        }
+      ],
+      "exactInverse": true
+    },
+    {
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/gaussian_rows.py",
+        "bytes": 2887,
+        "sha256": "7a9290f1d0583a94c7e32bb75d7b4eb0b45d26bc81fcf6329b52937f380e6955"
+      },
+      "current": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/programs/gaussian_rows.py",
+        "bytes": 3070,
+        "sha256": "22b027b6683bc6a106da83f0d478fb3c1ca700a1556242e44f423de2a9fdd63e"
+      },
+      "edits": [
+        {
+          "kind": "insert",
+          "beforeStart": 25,
+          "beforeEnd": 25,
+          "afterStart": 25,
+          "afterEnd": 27,
+          "before": "",
+          "after": "    if not isinstance(max_iter, (int, np.integer)) or max_iter <= 0:\n        raise ValueError(\"max_iter must be a positive integer\")\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 37,
+          "beforeEnd": 38,
+          "afterStart": 39,
+          "afterEnd": 41,
+          "before": "        p, entropy = row_at_beta(d, beta)\n",
+          "after": "        evaluated_beta = beta\n        p, entropy = row_at_beta(d, evaluated_beta)\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 45,
+          "beforeEnd": 46,
+          "afterStart": 48,
+          "afterEnd": 49,
+          "before": "    return p, beta, \"iteration-limit\"\n",
+          "after": "    return p, evaluated_beta, \"iteration-limit\"\n"
+        }
+      ],
+      "exactInverse": true
+    },
+    {
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/setup-and-files.md",
+        "bytes": 7342,
+        "sha256": "6fe6a5aba29addc325e049d91befb9b94f9a21d44d868f7cc6613085a75b57d2"
+      },
+      "current": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/setup-and-files.md",
+        "bytes": 7557,
+        "sha256": "0b11d995f5822d5f5e0182db03248bbad23f8030acc0f2adcc2dd3515635d72c"
+      },
+      "edits": [
+        {
+          "kind": "replace",
+          "beforeStart": 4,
+          "beforeEnd": 5,
+          "afterStart": 4,
+          "afterEnd": 5,
+          "before": "Download the ten new scripts in `programs/`, the five preserved scripts in `retained-programs/`, and `data/`. Put the scripts together in one working `programs` directory: `isomap_routes.py` imports `classical_geometry.py`. The full source is also visible beside its teaching. The common Reader file index should expose these whole payloads, with Copy and Download producing the same source. An output file records an execution; copying it does not run its program.\n",
+          "after": "Download all fifteen scripts and the five supporting data files listed in the file index. Put the scripts together in one working `programs` directory: `isomap_routes.py` imports `classical_geometry.py`. The full source is also visible beside its teaching; use the file index to find each complete payload. An output file records an execution; copying it does not run its program.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 15,
+          "beforeEnd": 16,
+          "afterStart": 15,
+          "afterEnd": 16,
+          "before": "  outputs/              ten new deterministic and five retained streams\n",
+          "after": "  outputs/              ten deterministic and five retained streams\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 18,
+          "beforeEnd": 19,
+          "afterStart": 18,
+          "afterEnd": 19,
+          "before": "The new deterministic examples were executed under Python3.12.14,NumPy2.3.5,SciPy1.18.1. The retained environment also records scikit-learn1.9.1,umap-learn.5.12,numba.67.0 and related versions. These are attributed snapshots, not a promise of bitwise output on every platform. Use a separate virtual environment for reproduction; the minimum scratch routes need NumPy/SciPy. The MDS ordinary code specifically uses the inspected1.9.1 API. Optional openTSNE source was checked against its1.0.0 documentation; no matched installed openTSNE execution is claimed.\n",
+          "after": "The recorded deterministic examples were executed under Python3.12.14,NumPy2.3.5,SciPy1.18.1. The Gaussian solver now returns its last evaluated beta when its iteration budget is exhausted and rejects nonpositive budgets. Its corrected callables have separate bounded checks; the displayed historical main stream remains attached to its preceding source. The retained environment also records scikit-learn1.9.1,umap-learn.5.12,numba.67.0 and related versions. These are attributed snapshots, not a promise of bitwise output on every platform. Use a separate virtual environment for reproduction; the minimum scratch routes need NumPy/SciPy. The MDS ordinary code specifically uses the inspected1.9.1 API. Optional openTSNE source was checked against its1.0.0 documentation; no matched installed openTSNE execution is claimed.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 61,
+          "beforeEnd": 63,
+          "afterStart": 61,
+          "afterEnd": 63,
+          "before": "| `audit_saved_neighbors.py` | ID join, row-wise distances, self exclusion, rank penalties, changed source/k | Newly executed saved-array audit; no fit |\n| `gaussian_rows.py` | Shifted weights, entropy targets, nearest ties and boundary status | Newly executed four-row probability construction |\n",
+          "after": "| `audit_saved_neighbors.py` | ID join, row-wise distances, self exclusion, rank penalties, changed source/k | Recorded saved-array audit; no fit |\n| `gaussian_rows.py` | Shifted weights, entropy targets, nearest ties and consistent last-evaluated iteration-limit status | Corrected callable checks; the recorded main stream belongs to the exact preceding source |\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 64,
+          "beforeEnd": 69,
+          "afterStart": 64,
+          "afterEnd": 69,
+          "before": "| `isomap_routes.py` | Radius/union graph, relaxation, infinity and finite embedding | Newly executed U-chain routes; ordinary estimator source-only |\n| `lle_recipes.py` | Offset Gram, ridge, affine weights, centered eigenproblem | Newly executed curved five-point recipe example |\n| `graph_spectrum.py` | Degrees, three Laplacians, random walk and diffusion modes | Newly executed chain energy/walk; ordinary spectral call source-only |\n| `local_tangent_patch.py` | Thin SVD, shared-ID alignment, curvature stencil | Newly executed five-point patch; global variants source-only |\n| `sampled_pair_events.py` | Positive/negative endpoints, explicit frequencies/noise law | Newly executed finite expected-event enumeration |\n",
+          "after": "| `isomap_routes.py` | Radius/union graph, relaxation, infinity and finite embedding | Recorded U-chain routes; ordinary estimator source-only |\n| `lle_recipes.py` | Offset Gram, ridge, affine weights, centered eigenproblem | Recorded curved five-point recipe example |\n| `graph_spectrum.py` | Degrees, three Laplacians, random walk and diffusion modes | Recorded chain energy/walk; ordinary spectral call source-only |\n| `local_tangent_patch.py` | Thin SVD, shared-ID alignment, curvature stencil | Recorded five-point patch; global variants source-only |\n| `sampled_pair_events.py` | Positive/negative endpoints, explicit frequencies/noise law | Recorded finite expected-event enumeration |\n"
+        }
+      ],
+      "exactInverse": true
+    },
+    {
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/current-api-and-resource-notes.md",
+        "bytes": 4542,
+        "sha256": "51a106cce4d3e7404f8397b3ae97eacee9f1c53cad089fde8f3888605bcf7dce"
+      },
+      "current": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/current-api-and-resource-notes.md",
+        "bytes": 5219,
+        "sha256": "f13c791133b5ca15397dc965308bed3482c5bcd5547872b7e93d94b8b8f88ed3"
+      },
+      "edits": [
+        {
+          "kind": "insert",
+          "beforeStart": 1,
+          "beforeEnd": 1,
+          "afterStart": 1,
+          "afterEnd": 3,
+          "before": "",
+          "after": "\nThe research and source-reading statements below retain the preceding successor author's scope and attribution. This correction author freshly reads the affected complete content, validates current local learner routes and updates only the current GMM status; no new external-source reading, API execution or whole-design reading is claimed.\n"
+        },
+        {
+          "kind": "replace",
+          "beforeStart": 10,
+          "beforeEnd": 11,
+          "afterStart": 12,
+          "afterEnd": 13,
+          "before": "Current prerequisite source inspection confirms PCA§4 fitted projection,§5 scaling and§10 deeper/whitening anchors, SVM§5 kernel anchor and Clustering Evaluation§4 geometry heading. Root binds KMeans' actual published geometry anchor `2-make-the-geometry-explicit`, with old alias preserved. GMM's complete private acceptance is not treated as current normal publication or a required accepted prerequisite in this manuscript.\n",
+          "after": "Current prerequisite source inspection confirms PCA§4 fitted projection,§5 scaling and§10 deeper/whitening anchors, SVM§5 kernel anchor and Clustering Evaluation§4 geometry heading. Root binds KMeans' actual published geometry anchor `2-make-the-geometry-explicit`, with old alias preserved. GMM revision4 now has Root normal integration acceptance at `docs/teaching/classical-ml-reading-flow/gaussian-mixture-models-gmm-em-algorithm/publication/root-normal-integration-acceptance.json` (SHA256 4ee308034f85990a6f28a0ec9f77466b4922b2ec44a84057945544936c8525e4); it remains an optional neighboring topic, not a new required prerequisite. The preceding private-only sentence remains preserved in the submitted predecessor, accepted design and historical records.\n"
+        }
+      ],
+      "exactInverse": true
+    }
+  ],
+  "predecessorBytesRemainAtOriginalPaths": true,
+  "predecessorAuthorReady": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/author-ready.json",
+    "bytes": 6092,
+    "sha256": "1832c1bc6800da4ee0a8e1cf6008485c85bfd0d7ac59c0219cc17d69470b16a7"
+  }
+}

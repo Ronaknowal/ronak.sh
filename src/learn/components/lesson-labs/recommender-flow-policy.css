@@ -1,0 +1,12 @@
+.rec-policy-tree { width:62.5rem; max-width:none; font:18px "Space Grotesk",sans-serif; }
+.rec-policy-tree path { stroke:currentColor; fill:none; stroke-width:2; }
+.rec-policy-tree circle { fill:currentColor; }
+.rec-policy-tree text { fill:#eee; }
+.rec-policy-entry-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.rec-policy-entry-grid > div { display:flex; flex-direction:column; padding:1rem; border:1px solid #62656d; gap:.5rem; }
+.rec-policy-entry-grid .is-missing { background:repeating-linear-gradient(135deg,transparent 0 8px,#ffffff08 8px 10px); }
+.rec-policy-reduction { display:flex; flex-wrap:wrap; align-items:center; gap:1rem; margin:1rem 0; }
+.rec-policy-reduction > span + span::before { content:"→ "; color:#e8b44a; }
+[data-rec-job="D49"] .rec-flow-pan, [data-rec-job="D50"] .rec-flow-pan { max-height:24rem; overflow:auto; }
+[data-rec-job="D49"] .rec-flow-matrix thead th, [data-rec-job="D50"] .rec-flow-matrix thead th { position:sticky; top:0; background:#080808; z-index:2; }
+@media(max-width:540px) { .rec-policy-entry-grid { grid-template-columns:1fr; } }

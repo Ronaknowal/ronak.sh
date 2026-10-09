@@ -1,0 +1,253 @@
+{
+  "kind": "constructed scalar examples; no training",
+  "checks": [
+    "complete leaf mass",
+    "sum/mean rank reversal",
+    "all forced EOS edges",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "pair derivative and oriented links",
+    "threshold is not zero loss or zero derivative",
+    "stable extreme",
+    "stable extreme",
+    "shared parameter improves gap while both compared masses fall",
+    "repeated-label derivative; zero-margin coincidence",
+    "repeated-label derivative; zero-margin coincidence",
+    "repeated-label derivative; zero-margin coincidence"
+  ],
+  "tree": [
+    {
+      "name": "A",
+      "transitions": [
+        0.4,
+        1.0
+      ],
+      "mass": 0.4,
+      "sum": -0.916290731874155,
+      "targets": 2,
+      "mean": -0.4581453659370775,
+      "geometric_mean": 0.6324555320336759
+    },
+    {
+      "name": "B1",
+      "transitions": [
+        0.3,
+        0.9,
+        1.0
+      ],
+      "mass": 0.27,
+      "sum": -1.3093333199837625,
+      "targets": 3,
+      "mean": -0.4364444399945875,
+      "geometric_mean": 0.6463304070095651
+    },
+    {
+      "name": "B2",
+      "transitions": [
+        0.3,
+        0.1,
+        1.0
+      ],
+      "mass": 0.03,
+      "sum": -3.506557897319982,
+      "targets": 3,
+      "mean": -1.168852632439994,
+      "geometric_mean": 0.31072325059538586
+    },
+    {
+      "name": "C",
+      "transitions": [
+        0.3,
+        1.0
+      ],
+      "mass": 0.3,
+      "sum": -1.2039728043259361,
+      "targets": 2,
+      "mean": -0.6019864021629681,
+      "geometric_mean": 0.5477225575051661
+    }
+  ],
+  "default": {
+    "gap": 0.3,
+    "z": 0.19999999999999996,
+    "loss": 0.5981388693815919,
+    "derivative": -0.9003320053750442,
+    "threshold": 0.2
+  },
+  "boundary": {
+    "gap": 0.2,
+    "z": 0.0,
+    "loss": 0.6931471805599453,
+    "derivative": -1.0,
+    "threshold": 0.2
+  },
+  "drift": {
+    "coefficient": 10.0,
+    "theta": 0.1197375320224904,
+    "before": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "after": [
+      0.21165039315472026,
+      0.16657751564160284,
+      0.6217720912036769
+    ],
+    "gap_before": 0.0,
+    "gap_after": 0.2394750640449808,
+    "preference_derivative": -1.197375320224904,
+    "chosen_nll_derivative": 2.3333333333333335,
+    "total_derivative": -1.197375320224904,
+    "kl_after_to_before": 0.17594677412531384
+  },
+  "auxiliary": [
+    {
+      "coefficient": 10.0,
+      "theta": 0.1197375320224904,
+      "before": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "after": [
+        0.21165039315472026,
+        0.16657751564160284,
+        0.6217720912036769
+      ],
+      "gap_before": 0.0,
+      "gap_after": 0.2394750640449808,
+      "preference_derivative": -1.197375320224904,
+      "chosen_nll_derivative": 2.3333333333333335,
+      "total_derivative": -1.197375320224904,
+      "kl_after_to_before": 0.17594677412531384
+    },
+    {
+      "coefficient": 10.0,
+      "theta": 0.09640419868915706,
+      "before": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "after": [
+        0.2377601615095769,
+        0.19606653059561144,
+        0.5661733078948117
+      ],
+      "gap_before": 0.0,
+      "gap_after": 0.19280839737831412,
+      "preference_derivative": -1.197375320224904,
+      "chosen_nll_derivative": 2.3333333333333335,
+      "total_derivative": -0.9640419868915706,
+      "kl_after_to_before": 0.1155495335692414
+    },
+    {
+      "coefficient": 10.0,
+      "theta": -0.11359580131084296,
+      "before": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "after": [
+        0.3824363120063833,
+        0.4799844643623501,
+        0.13757922363126673
+      ],
+      "gap_before": 0.0,
+      "gap_after": -0.22719160262168592,
+      "preference_derivative": -1.197375320224904,
+      "chosen_nll_derivative": 2.3333333333333335,
+      "total_derivative": 1.1359580131084295,
+      "kl_after_to_before": 0.10581178485360249
+    }
+  ],
+  "practice": {
+    "margin": {
+      "gap": 0.2,
+      "z": -0.29999999999999993,
+      "loss": 0.8543552444685271,
+      "derivative": -1.723327550434977,
+      "threshold": 0.3
+    },
+    "drift": {
+      "coefficient": 6.0,
+      "theta": 0.0549833997312478,
+      "before": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "after": [
+        0.31130485362561744,
+        0.27888677339839363,
+        0.40980837297598904
+      ],
+      "gap_before": 0.0,
+      "gap_after": 0.1099667994624956,
+      "preference_derivative": -1.099667994624956,
+      "chosen_nll_derivative": 1.0,
+      "total_derivative": -1.099667994624956,
+      "kl_after_to_before": 0.013624680524934246
+    },
+    "opposite_label_optimum": 0.698124102237949,
+    "smoothing_optimum": 0.7993061443340549
+  }
+}

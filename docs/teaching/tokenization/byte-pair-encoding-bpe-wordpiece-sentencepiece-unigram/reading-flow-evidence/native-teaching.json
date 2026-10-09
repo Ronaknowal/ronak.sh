@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "checks": [
+    "Actual displayed Counter snippet prints 9",
+    "Actual displayed ordinary Tokenizers train/encode/decode/save/reload workflow",
+    "First five native merges and new-word trace",
+    "95 to 86 symbol count",
+    "Familiar WordPiece successes",
+    "Posterior and fractional-count normalization",
+    "Shared-prefix abab dynamic programming",
+    "Changed probability winner",
+    "Position-pair arithmetic"
+  ],
+  "ordinaryLibraryOutput": [
+    "['lo', 'w', 'est</w>']",
+    "lowest"
+  ],
+  "scope": "New instructional fixtures; prior full model/native campaigns are reused separately against unchanged sources.",
+  "sourceSha256": {
+    "src/learn/data/topics/tokenization.jsx": "d3f3b74cee46f21d884754fd0bc286eddcc1eee2844838f9a5bb9d4741c2205b",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "scripts/verify-tokenization-teaching-examples.py": "fccdd7d95aab43a5c7a6cb12e9fa2d4b67995c323db5f3b5e810d50f35537959"
+  }
+}

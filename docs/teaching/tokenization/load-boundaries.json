@@ -1,0 +1,165 @@
+{
+  "measuredAt": "2026-09-28T16:06:10.132Z",
+  "browser": "154.0.4258.37",
+  "base": "http://127.0.0.1:4197",
+  "results": [
+    {
+      "case": "selected lesson loads only its body and static dependencies",
+      "topicId": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+      "jsFiles": [
+        "assets/index-_k6rVLRr.js",
+        "assets/Reader-BlVLwgmL.js",
+        "assets/LevelBadge-DRgL1Wbv.js",
+        "assets/LearningNav-C8zNo-Og.js",
+        "assets/tokenization-CHgnC4gp.js",
+        "assets/Code-0w_bivUJ.js",
+        "assets/Math-CeTGoegX.js",
+        "assets/katex-BJpuVtPE.js",
+        "assets/LessonElements-q-eYhpAk.js",
+        "assets/RemoteCodeBlock-B2AJ6HEQ.js",
+        "assets/NeuralLessonElements-DfbPGd6Z.js",
+        "assets/subword-tokenization-models-Ba6hdjWS.js"
+      ],
+      "lessonBodies": [
+        "assets/tokenization-CHgnC4gp.js"
+      ],
+      "outlines": []
+    },
+    {
+      "case": "selected lesson loads only its body and static dependencies",
+      "topicId": "byte-level-tokenization-token-free-models",
+      "jsFiles": [
+        "assets/index-_k6rVLRr.js",
+        "assets/Reader-BlVLwgmL.js",
+        "assets/LevelBadge-DRgL1Wbv.js",
+        "assets/LearningNav-C8zNo-Og.js",
+        "assets/byte-level-tokenization-FfAzW-BU.js",
+        "assets/Code-0w_bivUJ.js",
+        "assets/LessonElements-q-eYhpAk.js",
+        "assets/RemoteCodeBlock-B2AJ6HEQ.js",
+        "assets/NeuralLessonElements-DfbPGd6Z.js"
+      ],
+      "lessonBodies": [
+        "assets/byte-level-tokenization-FfAzW-BU.js"
+      ],
+      "outlines": []
+    },
+    {
+      "case": "selected lesson loads only its body and static dependencies",
+      "topicId": "vocabulary-design-multilingual-tokenization",
+      "jsFiles": [
+        "assets/index-_k6rVLRr.js",
+        "assets/Reader-BlVLwgmL.js",
+        "assets/LevelBadge-DRgL1Wbv.js",
+        "assets/LearningNav-C8zNo-Og.js",
+        "assets/vocabulary-multilingual-9KvC7VKw.js",
+        "assets/Code-0w_bivUJ.js",
+        "assets/Math-CeTGoegX.js",
+        "assets/katex-BJpuVtPE.js",
+        "assets/LessonElements-q-eYhpAk.js",
+        "assets/RemoteCodeBlock-B2AJ6HEQ.js",
+        "assets/NeuralLessonElements-DfbPGd6Z.js",
+        "assets/NeuralNumberControl-BCzP4M_g.js",
+        "assets/subword-tokenization-models-Ba6hdjWS.js"
+      ],
+      "lessonBodies": [
+        "assets/vocabulary-multilingual-9KvC7VKw.js"
+      ],
+      "outlines": []
+    },
+    {
+      "case": "hub loads metadata and no lesson bodies or outlines",
+      "jsFiles": [
+        "assets/index-_k6rVLRr.js",
+        "assets/LearnHub-CD-EBaBO.js",
+        "assets/LearningNav-C8zNo-Og.js",
+        "assets/LevelBadge-DRgL1Wbv.js",
+        "assets/useProjectProgress-WBjnmmh-.js"
+      ],
+      "lessonBodies": [],
+      "outlines": []
+    },
+    {
+      "case": "selected lesson and next destination only; footer previous and browser Back reuse imports",
+      "initialJs": [
+        "assets/index-_k6rVLRr.js",
+        "assets/Reader-BlVLwgmL.js",
+        "assets/LevelBadge-DRgL1Wbv.js",
+        "assets/LearningNav-C8zNo-Og.js",
+        "assets/python-basics-types-control-flow-functions-modules-DSpGTaKM.js",
+        "assets/Code-0w_bivUJ.js",
+        "assets/LessonElements-q-eYhpAk.js",
+        "assets/PythonExample-CxFcsC9b.js"
+      ],
+      "destinationJs": [
+        "assets/object-oriented-programming-in-python-CD_EN66p.js"
+      ]
+    },
+    {
+      "case": "mathematical lesson loads its renderer and styles and renders notation",
+      "jsFiles": [
+        "assets/index-_k6rVLRr.js",
+        "assets/Reader-BlVLwgmL.js",
+        "assets/LevelBadge-DRgL1Wbv.js",
+        "assets/LearningNav-C8zNo-Og.js",
+        "assets/eigenvalues-eigenvectors-Do33-r-f.js",
+        "assets/Code-0w_bivUJ.js",
+        "assets/Math-CeTGoegX.js",
+        "assets/katex-BJpuVtPE.js",
+        "assets/LessonElements-q-eYhpAk.js",
+        "assets/RunnableExample-DVUKwpiz.js"
+      ],
+      "lessonBodies": [
+        "assets/eigenvalues-eigenvectors-Do33-r-f.js"
+      ],
+      "outlines": [],
+      "rendererJs": [
+        "assets/katex-BJpuVtPE.js"
+      ],
+      "fontCss": [
+        "assets/katex-CfVKi3_s.css"
+      ]
+    },
+    {
+      "case": "planned topic fetches only its outline and stays uncompletable",
+      "topicId": "typed-decision-models-calibrated-neural-decision-systems",
+      "jsFiles": [
+        "assets/index-_k6rVLRr.js",
+        "assets/Reader-BlVLwgmL.js",
+        "assets/LevelBadge-DRgL1Wbv.js",
+        "assets/LearningNav-C8zNo-Og.js",
+        "assets/typed-decision-models-calibrated-neural-decision-systems-p9q5yzw7.js"
+      ],
+      "lessonBodies": [],
+      "outlines": [
+        "assets/typed-decision-models-calibrated-neural-decision-systems-p9q5yzw7.js"
+      ]
+    },
+    {
+      "case": "planned entry without an individual outline makes no nonexistent-resource request",
+      "topicId": "mdps-bellman-equations-dynamic-programming",
+      "jsFiles": [
+        "assets/index-_k6rVLRr.js",
+        "assets/Reader-BlVLwgmL.js",
+        "assets/LevelBadge-DRgL1Wbv.js",
+        "assets/LearningNav-C8zNo-Og.js"
+      ],
+      "lessonBodies": [],
+      "outlines": []
+    },
+    {
+      "case": "shell stays available while loading; stale completion cannot replace destination"
+    },
+    {
+      "case": "failed lesson stays distinct from planned; keyboard retry and explicit reload provide recovery",
+      "retryRecovered": false,
+      "reloadRequired": true,
+      "requestsForFailedChunk": 2
+    },
+    {
+      "case": "controlled render failure preserves shell, prevents completion and recovers after reload",
+      "requestsForLessonChunk": 2,
+      "intentionalFixture": "Browser-only one-response replacement; no application or lesson source mutation."
+    }
+  ]
+}

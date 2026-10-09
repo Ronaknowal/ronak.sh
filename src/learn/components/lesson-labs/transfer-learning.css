@@ -1,75 +1,103 @@
-.transfer-lesson { color: #c5cec9; min-width: 0; }
+/* Transfer-learning lesson: base text and its labs. Figures and labs sit in the reading flow
+   (lesson-flow.css); the boxes below are parts of diagrams, not frames around them.
+   Colour vocabulary (docs/teaching/deep-learning-beginner/visual-vocabulary.md). */
+.transfer-lesson {
+  --tl-input: #7dd5e9;
+  --tl-param: #e4b752;
+  --tl-computed: #c7a5ee;
+  --tl-frozen: #8a8378;
+  --tl-frozen-fill: #1a1917;
+  --tl-backward: #eba36f;
+  --tl-negative: #83b4e8;
+  --tl-muted: #b3ada2;
+  color: #d6d2c9;
+  min-width: 0;
+}
 .transfer-lesson a { color: #e2b55a; text-underline-offset: .2em; }
 .transfer-lesson a:hover { color: #f4d08b; }
 .transfer-lesson :is(button, input, select, summary, a):focus-visible { outline: 2px solid #e2b55a; outline-offset: 4px; }
 .transfer-lesson :is(p, li, td, dd, h3, h4, figcaption) { overflow-wrap: anywhere; }
 .transfer-lesson :is(ul, ol) { padding-left: 1.4rem; line-height: 1.85; }
 .transfer-lesson li { margin: .45rem 0; }
-.transfer-lesson .transfer-equation { max-width: 100%; overflow-x: auto; }
-.transfer-lesson .transfer-lab, .transfer-lesson .transfer-downloads { background: #0b100e; border: 1px solid #34483e; border-radius: 6px; padding: clamp(14px, 3vw, 24px); margin: 28px 0; min-width: 0; }
-.transfer-lesson .transfer-lab :is(h3,h4), .transfer-lesson .transfer-downloads h3 { color: #e3e9e5; line-height: 1.45; margin: 0 0 12px; }
-.transfer-lesson .transfer-lab p, .transfer-lesson .transfer-downloads p { line-height: 1.7; margin: 12px 0; }
-.transfer-lesson .transfer-eyebrow { color: #e2b55a; text-transform: uppercase; font-size: .73rem; letter-spacing: .09em; }
-.transfer-lesson .transfer-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 18px; margin: 18px 0; align-items: start; }
-.transfer-lesson .transfer-columns > * { min-width: 0; }
-.transfer-lesson :is(button, select, input[type=number]) { font: inherit; color: #f0d498; background: #141b17; border: 1px solid #708172; border-radius: 4px; min-height: 42px; padding: .5rem .65rem; max-width: 100%; }
-.transfer-lesson button { cursor: pointer; white-space: normal; line-height: 1.5; }
-.transfer-lesson button:hover:not(:disabled) { background: #263426; border-color: #e2b55a; }
-.transfer-lesson button[aria-pressed=true] { border-color: #e2b55a; color: #ffe6b7; box-shadow: inset 3px 0 #e2b55a; }
-.transfer-lesson button:disabled { color: #a8b0aa; border-color: #526055; background: #151917; cursor: not-allowed; }
-.transfer-lesson .transfer-field, .transfer-lesson .transfer-select { display: grid; gap: 7px; min-width: 0; color: #d0d9d2; }
-.transfer-lesson .transfer-field input[type=number] { width: 100%; box-sizing: border-box; min-width: 0; }
-.transfer-lesson select { width: 100%; min-width: 0; }
-.transfer-lesson input[type=range] { width: 100%; height: 32px; accent-color: #e2b55a; margin: 2px 0; }
-.transfer-lesson input[type=checkbox] { accent-color: #e2b55a; width: 18px; height: 18px; flex: 0 0 18px; margin: 4px 0 0; }
-.transfer-lesson .transfer-toggle { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; min-height: 32px; padding: 8px 0; line-height: 1.6; }
-.transfer-lesson .transfer-control-lanes { display: grid; gap: 4px; padding: 10px 0; border-block: 1px solid #34483e; }
-.transfer-lesson .transfer-error { color: #ffd1b8; font-size: .86rem; line-height: 1.5; }
-.transfer-lesson .transfer-note { color: #afc3b7; font-size: .94rem; }
-.transfer-lesson .transfer-readout { background: #101a14; border-left: 3px solid #9fc8b4; padding: 15px; min-width: 0; }
-.transfer-lesson .transfer-digit { margin: 12px 0; display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 12px; }
-.transfer-lesson .transfer-pixels { display: block; width: 96px; height: 96px; image-rendering: pixelated; border: 1px solid #526055; }
-.transfer-lesson .transfer-digit figcaption { font-size: .83rem; line-height: 1.6; }
-.transfer-lesson .transfer-stage-route { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin: 20px 0; }
-.transfer-lesson .transfer-stage-route span { display: block; color: #b9c7bd; font-size: .85rem; }
-.transfer-lesson .transfer-flow { display: grid; gap: 8px; text-align: center; max-width: 510px; margin: 20px auto; }
-.transfer-lesson .transfer-flow div { border: 1px solid #52705c; padding: 14px; line-height: 1.65; }
-.transfer-lesson .transfer-lora-route { display: grid; gap: 10px; border-left: 3px solid #e2b55a; padding: 12px 16px; margin: 18px 0; line-height: 1.8; }
-.transfer-lesson .transfer-partitions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 175px), 1fr)); gap: 12px; }
-.transfer-lesson .transfer-partitions > div { border: 1px solid #465a4c; padding: 14px; }
-.transfer-lesson details { margin: 16px 0; border-top: 1px solid #35483b; padding-top: 12px; }
+.transfer-lesson .transfer-equation, .transfer-lesson .transfer-code { max-width: 100%; overflow-x: auto; }
+.transfer-lesson details { margin: 16px 0; border-top: 1px solid #3a3631; padding-top: 12px; }
 .transfer-lesson summary { cursor: pointer; min-height: 32px; color: #e2b55a; line-height: 1.7; padding: 6px 0; }
-.transfer-lesson .transfer-table-scroll { width: 100%; max-height: 620px; overflow: auto; margin: 12px 0; }
 .transfer-lesson table { border-collapse: collapse; width: 100%; line-height: 1.65; text-align: left; }
-.transfer-lesson :is(td, th) { padding: 10px; border-bottom: 1px solid #34483e; vertical-align: top; }
-.transfer-lesson th { color: #e1e8e3; font-weight: 600; }
+.transfer-lesson :is(td, th) { padding: 10px; border-bottom: 1px solid #3a3631; vertical-align: top; }
+.transfer-lesson th { color: #ece8df; font-weight: 600; }
+.transfer-lesson .transfer-table-scroll { width: 100%; max-height: 620px; overflow: auto; margin: 12px 0; }
+.transfer-lesson .transfer-table-scroll :is(td, th) { overflow-wrap: normal; }
 .transfer-lesson .transfer-id-list { min-width: 220px; }
-.transfer-lesson .transfer-code { max-width: 100%; overflow-x: auto; }
-.transfer-lesson .transfer-matrix { border: 1px solid #48614f; margin: 0; padding: 12px; min-width: 0; }
-.transfer-lesson .transfer-matrix legend { padding: 0 6px; color: #e2b55a; }
-.transfer-lesson .transfer-matrix-cells { display: grid; gap: 10px; }
-.transfer-lesson .transfer-matrix-cells label { font-size: .79rem; line-height: 1.5; }
-.transfer-lesson .transfer-test-report { border: 1px solid #a98b4d; padding: 16px; background: #19180e; margin: 18px 0; }
-.transfer-lesson .transfer-evidence-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 205px), 1fr)); gap: 12px; }
-.transfer-lesson .transfer-evidence-cards article { border: 1px solid #3f5446; padding: 14px; min-width: 0; }
-.transfer-lesson .transfer-evidence-cards article.is-selected { border-color: #e2b55a; }
-.transfer-lesson dl { margin: 12px 0; }
-.transfer-lesson dt { color: #aebfb4; font-size: .85rem; margin-top: 8px; }
-.transfer-lesson dd { color: #e0e6e1; margin: 0 0 7px; }
-.transfer-lesson :is(.transfer-trace, .transfer-schedule) { margin: 24px 0; min-width: 0; }
-.transfer-lesson .transfer-plot { width: 100%; height: auto; display: block; overflow: visible; margin: 12px 0; }
-.transfer-lesson .transfer-plot text { fill: #c4d1c8; font-family: inherit; font-size: 12px; }
-.transfer-lesson .transfer-retention { margin: 14px 0; }
-.transfer-lesson .transfer-bar { height: 12px; background: #2e3c32; margin: 8px 0 18px; overflow: hidden; }
-.transfer-lesson .transfer-bar i { display: block; background: #aacbb9; height: 100%; }
-.transfer-lesson .transfer-budget-decision { border-top: 1px solid #586b55; margin-top: 24px; padding-top: 24px; }
-.transfer-lesson .transfer-checkpoint-fields { display: grid; grid-template-columns: minmax(115px, 1fr) minmax(0, 2fr); gap: 12px; }
-.transfer-lesson .transfer-checkpoint-fields :is(dt, dd) { border-bottom: 1px solid #34483e; margin: 0; padding: 12px 0; }
-.transfer-lesson .transfer-probabilities { display: grid; gap: 4px; }
-@media (max-width: 480px) {
-  .transfer-lesson .transfer-stage-route { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .transfer-lesson .transfer-checkpoint-fields { display: block; }
-  .transfer-lesson .transfer-checkpoint-fields dt { border: 0; padding-bottom: 2px; }
-  .transfer-lesson .transfer-digit { grid-template-columns: 80px minmax(0, 1fr); }
-  .transfer-lesson .transfer-pixels { width: 80px; height: 80px; }
+.transfer-lesson .transfer-violet { color: var(--tl-computed); }
+.transfer-lesson .transfer-part-title { font-weight: 600; color: #ece8df; margin: 0 0 .35rem; }
+.transfer-lesson .transfer-flow-arrow { color: #a9a499; font-size: 1.3rem; text-align: center; align-self: center; }
+
+/* Real 8 × 8 digit images. */
+.transfer-lesson .transfer-digit { margin: 0; display: grid; grid-template-columns: 88px minmax(0, 1fr); align-items: center; gap: 10px; }
+.transfer-lesson .transfer-pixels { display: block; width: 88px; height: 88px; image-rendering: pixelated; border: 1px solid var(--tl-input); }
+.transfer-lesson .transfer-digit figcaption { font-size: .85rem; line-height: 1.55; color: var(--tl-muted); margin: 0; }
+
+/* Diagram parts shared by the labs: input cyan, frozen grey, computed violet, added dashed amber. */
+.transfer-lesson :is(.transfer-reuse-box, .transfer-bn-cell, .transfer-lane) { display: flex; flex-direction: column; gap: .3rem; padding: .6rem .75rem; border: 1px solid #5a554d; border-radius: 4px; min-width: 0; font-size: .92rem; line-height: 1.5; }
+.transfer-lesson :is(.transfer-reuse-box, .transfer-bn-cell, .transfer-lane).is-input { border-color: var(--tl-input); }
+.transfer-lesson :is(.transfer-reuse-box, .transfer-bn-cell, .transfer-lane).is-frozen { border-color: #4a4640; background: var(--tl-frozen-fill); color: #c9c4ba; }
+.transfer-lesson :is(.transfer-reuse-box, .transfer-bn-cell, .transfer-lane).is-computed { border-color: var(--tl-computed); }
+.transfer-lesson :is(.transfer-reuse-box, .transfer-bn-cell, .transfer-lane).is-added { border: 2px dashed var(--tl-param); }
+.transfer-lesson :is(.transfer-reuse-box, .transfer-bn-cell, .transfer-lane).is-source { border-color: #716b60; }
+.transfer-lesson .transfer-bn-cell.is-backward { border: 1px dashed var(--tl-backward); color: #f1c8a8; }
+.transfer-lesson .transfer-bn-cell.is-backward strong { color: var(--tl-backward); }
+
+.transfer-lesson .transfer-reuse { display: grid; grid-template-columns: minmax(0, 1.25fr) auto minmax(0, 1fr) auto minmax(0, .8fr) auto minmax(0, 1.1fr); gap: .5rem; align-items: center; }
+.transfer-lesson .transfer-bn-trace { display: grid; grid-template-columns: minmax(0, .8fr) auto minmax(0, 1.4fr) auto minmax(0, 1fr); gap: .5rem; align-items: stretch; }
+.transfer-lesson .transfer-bn-buffers { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin-top: .7rem; padding: .5rem 0; border-top: 1px dashed #4a4640; font-size: .92rem; }
+@container (max-width: 44rem) {
+  .transfer-lesson :is(.transfer-reuse, .transfer-bn-trace) { grid-template-columns: minmax(0, 1fr); }
+  .transfer-lesson :is(.transfer-reuse, .transfer-bn-trace) > .transfer-flow-arrow { justify-self: center; transform: rotate(90deg); pointer-events: none; }
 }
+
+/* LoRA lab: input, two parallel lanes, the sum, then the backward signal. */
+.transfer-lesson .transfer-lora-lab { display: grid; gap: .55rem; }
+.transfer-lesson .transfer-lora-lanes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+@container (max-width: 34rem) { .transfer-lesson .transfer-lora-lanes { grid-template-columns: minmax(0, 1fr); } }
+.transfer-lesson .transfer-route-tag { display: block; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: #a9a499; }
+
+/* Horizontal count bars: length encodes the count on one shared scale per lab. */
+.transfer-lesson .transfer-count-bars { display: grid; gap: .45rem; }
+.transfer-lesson .transfer-count-bars > div { display: grid; grid-template-columns: minmax(9rem, 1.2fr) minmax(4rem, 2fr) minmax(3.5rem, auto); gap: .6rem; align-items: center; font-size: .9rem; }
+.transfer-lesson .transfer-count-bars i { display: block; height: .9rem; border-radius: 2px; }
+.transfer-lesson .transfer-count-bars i.is-frozen { background: #4a4640; }
+/* A neutral baseline bar: grey fill is reserved for frozen parameters. */
+.transfer-lesson .transfer-count-bars i.is-baseline { background: transparent; border: 2px solid #d8d2c4; box-sizing: border-box; }
+.transfer-lesson .transfer-count-bars i.is-added { background: transparent; border: 2px dashed var(--tl-param); }
+.transfer-lesson .transfer-count-bars i.is-computed { background: var(--tl-computed); }
+.transfer-lesson .transfer-count-bars b { font-variant-numeric: tabular-nums; text-align: right; }
+@container (max-width: 30rem) { .transfer-lesson .transfer-count-bars > div { grid-template-columns: minmax(0, 1fr) minmax(3rem, auto); } .transfer-lesson .transfer-count-bars > div > i { grid-column: 1 / -1; order: 3; } }
+
+/* Fixed partitions. */
+.transfer-lesson .transfer-partitions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: .6rem; }
+.transfer-lesson .transfer-partitions > div { padding: .6rem .75rem; border: 1px solid #4a4640; border-radius: 4px; font-size: .9rem; min-width: 0; }
+.transfer-lesson .transfer-partitions > div.is-source { border-left: 3px solid #d8d2c4; }
+.transfer-lesson .transfer-partitions > div.is-target { border-left: 3px solid var(--tl-input); }
+.transfer-lesson .transfer-partitions p { margin: .3rem 0; line-height: 1.5; }
+
+/* Selection under a cap. */
+.transfer-lesson .transfer-candidates { list-style: none; padding: 0; margin: 0; display: grid; gap: .35rem; }
+.transfer-lesson .transfer-candidates li { margin: 0; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.5fr) minmax(5rem, auto); gap: .6rem; padding: .4rem .6rem; border: 1px solid #3a3631; border-radius: 4px; font-size: .9rem; }
+.transfer-lesson .transfer-candidates li.is-excluded { color: #8f897f; border-style: dashed; }
+.transfer-lesson .transfer-candidates li.is-winner { border: 3px solid #f4f0e6; }
+@container (max-width: 30rem) { .transfer-lesson .transfer-candidates li { grid-template-columns: minmax(0, 1fr); gap: .1rem; } }
+
+/* Checkpoint replay. */
+.transfer-lesson .transfer-checkpoint { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: 1rem; align-items: start; }
+@container (max-width: 34rem) { .transfer-lesson .transfer-checkpoint { grid-template-columns: minmax(0, 1fr); } }
+.transfer-lesson .transfer-probabilities { display: grid; gap: 4px; font-size: .9rem; }
+.transfer-lesson .transfer-probabilities > div.is-largest span { font-weight: 700; color: #f4f0e6; }
+.transfer-lesson .transfer-bar { height: 10px; background: #2a2825; margin: 4px 0 8px; overflow: hidden; }
+.transfer-lesson .transfer-bar i { display: block; background: var(--tl-computed); height: 100%; }
+.transfer-lesson .is-largest .transfer-bar { outline: 2px solid #f4f0e6; outline-offset: 1px; }
+
+/* Plots. */
+.transfer-lesson :is(.transfer-trace, .transfer-schedule) { min-width: 0; }
+.transfer-lesson .transfer-plot { width: 100%; height: auto; display: block; overflow: visible; margin: 8px 0; }
+.transfer-lesson .transfer-plot text { fill: #cfcac0; font-family: inherit; font-size: 12px; }
+.transfer-lesson .transfer-downloads p { line-height: 1.7; }

@@ -1,0 +1,10 @@
+.lesson-flow .mp-study-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr)); align-items:start; gap:1.5rem; }
+.lesson-flow .mp-study-scroll { max-height:23rem; overflow:auto; margin:1.2rem 0; }
+.lesson-flow .mp-study-scroll:focus-visible { outline:2px solid #e4b752; outline-offset:3px; }
+.lesson-flow .mp-study-table { width:100%; border-collapse:collapse; }
+.lesson-flow .mp-study-table caption { text-align:left; color:#eee; padding-bottom:.65rem; }
+.lesson-flow .mp-study-table th,.lesson-flow .mp-study-table td { padding:.65rem .6rem; text-align:left; vertical-align:top; border-bottom:1px solid #333; white-space:nowrap; }
+.lesson-flow .mp-study-table th { color:#eee; }
+.lesson-flow .mp-study-family { display:flex; flex-direction:column; gap:.4rem; color:#eee; }
+.lesson-flow .mp-study-family select { padding:.45rem .65rem; color:#eee; background:#111; border:1px solid #777; max-width:100%; }
+.lesson-flow .mp-study-family select:focus-visible { outline:2px solid #e4b752; outline-offset:3px; }

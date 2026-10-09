@@ -1,0 +1,17 @@
+.capsule-lesson.lesson-flow .capsule-flow-figure { margin: 1.25rem 0; padding: 0; border: 0; background: transparent; min-width: 0; }
+.capsule-lesson .capsule-flow-figure > svg { display: block; width: min(100%, 24rem); height: auto; overflow: visible; margin-inline: auto; }
+.capsule-lesson .capsule-flow-figure text { font: 15px 'JetBrains Mono', monospace; }
+.capsule-lesson .capsule-flow-figure text.capsule-flow-small { font-size: 12.5px; }
+.capsule-lesson.lesson-flow .capsule-flow-select { display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+.capsule-lesson.lesson-flow .capsule-flow-select select { min-height: 44px; max-width: 100%; padding: .5rem; }
+.capsule-lesson.lesson-flow .capsule-pixels-editable { width: min(100%, 22rem); max-width: 22rem; }
+.capsule-lesson.lesson-flow .capsule-pixels-editable button { min-width: 0; min-height: 0; border: 1px solid #555; color: inherit; }
+.capsule-lesson.lesson-flow .capsule-pixels-editable button[aria-pressed=true] { outline: 2px solid white; outline-offset: -3px; background-image: none; }
+.capsule-lesson.lesson-flow .capsule-score-bars i { background: #b69ee8; }
+.capsule-lesson.lesson-flow .capsule-pixels figure { margin: 0; }
+.capsule-lesson.lesson-flow .capsule-pixel-scroll { padding: 3px; }
+.capsule-lesson .capsule-flow-evidence text { font-size: 13px; }
+.capsule-lesson .capsule-flow-series { display: grid; gap: .8rem; container-type: inline-size; }
+.capsule-lesson .capsule-flow-series > * { min-width: 0; }
+.capsule-lesson .capsule-flow-series > p { margin: 0; }
+.capsule-lesson.lesson-flow .neural-equation { min-width: 0; max-width: 100%; overflow-x: auto; }

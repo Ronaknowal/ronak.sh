@@ -1,0 +1,257 @@
+{
+  "status": "Private author implementation in progress",
+  "acceptedSha256": "9b2ae7a3ea81b0fde79051e61c66890d3d74c3f262aeed6217dc059a32e063c6",
+  "manuscriptSha256": "29fa9110f159d1a5805a4240f3e1406d2529f26314f000bca38dbb0afdb4ab7d",
+  "figures": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "D09",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22",
+    "D23",
+    "D24",
+    "D25",
+    "D26",
+    "D27",
+    "D28",
+    "D29",
+    "D30",
+    "D31",
+    "D32",
+    "D33",
+    "D34",
+    "D35",
+    "D36",
+    "D37",
+    "D38",
+    "D39",
+    "D40",
+    "D41",
+    "D42",
+    "D43",
+    "D44",
+    "D45",
+    "D46"
+  ],
+  "payloads": [
+    {
+      "file": "rd_blockCode.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_blockCode.py",
+      "sha256": "48da6af7786e510a5e1616d295105205dd07957aab9891ea956e26c4d09bf898",
+      "role": "source"
+    },
+    {
+      "file": "rd_blockCode.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_blockCode.stdout",
+      "sha256": "49bd99a7e0254e19a8469c39185de1babefb9d3906aa35c385d021383c548063",
+      "role": "stdout"
+    },
+    {
+      "file": "rd_biasedChannel.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_biasedChannel.py",
+      "sha256": "668d1c0219cf056433f820810c4ed2e3ea83c533a3cda812865936441258a027",
+      "role": "source"
+    },
+    {
+      "file": "rd_biasedChannel.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_biasedChannel.stdout",
+      "sha256": "481ab52a623b20f11019ce48e7841795e1bb487c204547eec983099a4ec36c68",
+      "role": "stdout"
+    },
+    {
+      "file": "rd_originalBinary.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_originalBinary.py",
+      "sha256": "058344ddba3fcf625bac8b552f09d9409827346e3254c48f2a82d1d0cbc16df4",
+      "role": "source"
+    },
+    {
+      "file": "rd_originalBinary.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_originalBinary.stdout",
+      "sha256": "e7b0a8d0db158dbbd7b236dbdf40cfb34c743b83cf036479be2c166321b9beae",
+      "role": "stdout"
+    },
+    {
+      "file": "rd_finiteOptimizer.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_finiteOptimizer.py",
+      "sha256": "c8d39b15bbb6287d340d95cfac85fd6387d5e89d471870a98dc09ceea5d996aa",
+      "role": "source"
+    },
+    {
+      "file": "rd_finiteOptimizer.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_finiteOptimizer.stdout",
+      "sha256": "1a4cddc48924b1bc89a7575c93cac1869ca59344e345d9ef7f57cbb476adb7fa",
+      "role": "stdout"
+    },
+    {
+      "file": "finite_rd_library.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/finite_rd_library.py",
+      "sha256": "ec196cc17959dc17e5da0496364a2de8ce5669917061f921eb3d6ef383b380c2",
+      "role": "source"
+    },
+    {
+      "file": "finite_rd_library.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/finite_rd_library.stdout",
+      "sha256": "7888e9759880d10b2e9a9483810c05684fec33a2825d1ea90f3e76598fe30e36",
+      "role": "stdout"
+    },
+    {
+      "file": "rd_gaussianAllocation.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_gaussianAllocation.py",
+      "sha256": "a9ba00731d80bc87e91c8914eb44685e0c62197fc6e2b7ac93d913a26759894a",
+      "role": "source"
+    },
+    {
+      "file": "rd_gaussianAllocation.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_gaussianAllocation.stdout",
+      "sha256": "442025785faefb46bd81cc618fb50463e3e6d3a3df29f0306a922ffe20f7f780",
+      "role": "stdout"
+    },
+    {
+      "file": "gaussian_rd_library.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/gaussian_rd_library.py",
+      "sha256": "9facbe766f30399baed46a95d1f9baa16950c348d2013aa19030c9e27c451418",
+      "role": "source"
+    },
+    {
+      "file": "gaussian_rd_library.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/gaussian_rd_library.stdout",
+      "sha256": "aad8d83678e7b87e3994818e48c4c1e879e8c4f54c474c4a0aa93fe452e8dbaa",
+      "role": "stdout"
+    },
+    {
+      "file": "rd_fidelity.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_fidelity.py",
+      "sha256": "91aafc13eb95baf06aed6bf869328c971a822e3c6ae2800af88cbf85d936c9cb",
+      "role": "source"
+    },
+    {
+      "file": "rd_fidelity.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_fidelity.stdout",
+      "sha256": "7b7823c839d76c4bb0b00bc6278b7b3d08051cdef44af73bebdbaf8722b9d0dc",
+      "role": "stdout"
+    },
+    {
+      "file": "rd_bitstream.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_bitstream.py",
+      "sha256": "7bf110f6cc9b70684d294a13b7203d6f2b5522f44d5086c77f37a86c6a93fe79",
+      "role": "source"
+    },
+    {
+      "file": "rd_bitstream.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_bitstream.stdout",
+      "sha256": "0b8762c3417423c9bd93e00a88586726959a137ed17e13b984e7331cc2eea512",
+      "role": "stdout"
+    },
+    {
+      "file": "penguins_quantization.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/penguins_quantization.py",
+      "sha256": "98e5b13c90b48dab6d7d9c81b335d1e6419a83d44d02b1843a6dacdcfd5651b7",
+      "role": "source"
+    },
+    {
+      "file": "penguins_quantization.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/penguins_quantization.stdout",
+      "sha256": "7457197919a0da70091e7be7ccd31f405afd37165f5ef6d643b47c8a3389f2fb",
+      "role": "stdout"
+    },
+    {
+      "file": "rd_scalar_helpers.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_scalar_helpers.py",
+      "sha256": "71ffb8010aa98cc1858b76e7fa26fa02922a22a1108fb58d655c8af49750e139",
+      "role": "source"
+    },
+    {
+      "file": "rd_practice.py",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_practice.py",
+      "sha256": "ceadfc0817548d2ad63cdd9927c12c5e6f90ac2398d8968e1f0bd32245ef61f1",
+      "role": "source"
+    },
+    {
+      "file": "rd_practice.stdout.txt",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_practice.stdout",
+      "sha256": "e84077aac2d2bbe1101106ab1447c875c22124492c154ca7af04375fe0ec6990",
+      "role": "stdout"
+    },
+    {
+      "file": "penguins.csv",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/penguins.csv",
+      "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "role": "data"
+    },
+    {
+      "file": "DATA-PROVENANCE.md",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/DATA-PROVENANCE.md",
+      "sha256": "831769f897a5166115f10d29cf0336922e9859cd13869eec0eb635bd1f597271",
+      "role": "data"
+    }
+  ],
+  "sections": [
+    [
+      "1-send-an-index-and-reconstruct-a-block",
+      "1. Send an index and reconstruct a block"
+    ],
+    [
+      "2-define-the-budget-before-the-bound",
+      "2. Define the budget before the bound"
+    ],
+    [
+      "3-derive-the-binary-frontier",
+      "3. Derive the binary frontier"
+    ],
+    [
+      "4-explain-what-long-blocks-can-achieve",
+      "4. Explain what long blocks can achieve"
+    ],
+    [
+      "5-compute-a-finite-reconstruction-rule",
+      "5. Compute a finite reconstruction rule"
+    ],
+    [
+      "6-allocate-error-for-gaussian-data",
+      "6. Allocate error for Gaussian data"
+    ],
+    [
+      "7-choose-what-must-survive",
+      "7. Choose what must survive"
+    ],
+    [
+      "8-turn-a-representation-into-a-bitstream",
+      "8. Turn a representation into a bitstream"
+    ],
+    [
+      "9-practise-the-compression-decision",
+      "9. Practise the compression decision"
+    ],
+    [
+      "further-learning",
+      "Further learning"
+    ],
+    [
+      "technical-references",
+      "Technical references"
+    ],
+    [
+      "files-and-setup",
+      "Files and setup"
+    ]
+  ],
+  "structuredContracts": "All seven text fields of all 46 contracts verified present in personally read complete specification.",
+  "scientificMainsReplayed": 0
+}

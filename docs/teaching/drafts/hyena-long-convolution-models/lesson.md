@@ -13,6 +13,12 @@ The preceding [xLSTM lesson](/learn/path/full-curriculum/xlstm-extended-lstm?mod
 
 ## 1. Three questions about a long sequence
 
+What does remembering mean here? Compare copying a known offset with finding a matching key.
+
+**Figure H01 — Two kinds of “remember.”** Show a fixed-delay conveyor carrying `4,7,2` into three predetermined output slots beside a key-addressed request with rearrangeable `A→7, B→2` pairs. Highlight that changing pair order changes the relevant distance in the second task. This is a task diagram, not a measured model result.
+
+In the fixed-delay drawing each input has a predetermined destination. The query B selects B:2 even if its position changes. Circles hold values; rounded rectangles perform operations. Cyan marks supplied inputs, amber learned parameters, violet computed values, grey forward arrows and dashed orange backward paths. Numeric grids use amber for positive, blue for negative and neutral for zero; white outlines mark a traced element.
+
 Suppose a model sees `A 7 B 2 … B` and should answer `2`. The last symbol must identify which earlier association matters. Contrast that with copying `4 7 2` after exactly three time steps: a fixed delay is sufficient for the latter. Both involve distant information, but only the first requires choosing an address from the content.
 
 Sequence mixers make different tradeoffs among three questions:
@@ -25,9 +31,15 @@ Sequence mixers make different tradeoffs among three questions:
 
 Hyena’s design joins long filters, input-dependent gates and fast convolution. These are properties of its mechanism; whether training learns a useful solution is a separate empirical question. [The original paper](https://arxiv.org/html/2302.10866v2) used associative recall and other small controlled tasks to guide its design before studying language and vision.
 
-**Figure H01 — Two kinds of “remember.”** Show a fixed-delay conveyor carrying `4,7,2` into three predetermined output slots beside a key-addressed request with rearrangeable `A→7, B→2` pairs. Highlight that changing pair order changes the relevant distance in the second task. This is a task diagram, not a measured model result.
-
 ## 2. A convolution is a ledger of delayed contributions
+
+The key example separated distance from selection. First build the distance rule.
+
+How can an old number contribute to a new output? A lag is the number of positions between sender and receiver.
+
+**Figure H02 — Echo ribbons.** Put input pulses on a horizontal position axis; each pulse emits a scaled copy of the filter. At output position 2, stack the three signed contributions, with labels `3`, `1`, `0.25`. An aligned table supplies the exact values. A pulse ribbon should not imply a physical time unit: these are sequence positions and dimensionless values.
+
+A unit pulse at0 creates four echoes: 1 now, .5 one position later, .25 two later and .125 three later. The second drawing follows our running input `[1,2,3,4]` into receiver2. Its incoming products .25,1,3 add to4.25. Positions before the input begins supply zero. These are dimensionless sequence values, not seconds.
 
 Let $u_t$ be the input at position $t$, starting at zero. Let $h_r$ be the filter coefficient for a **lag** of $r$ positions. The causal output is
 
@@ -47,7 +59,11 @@ Take $u=[1,2,3,4]$ and $h=[1,0.5,0.25,0.125]$. At position 2, the current input 
 | 2 | $1\times3+0.5\times2+0.25\times1$ | 4.25 |
 | 3 | $1\times4+0.5\times3+0.25\times2+0.125\times1$ | 6.125 |
 
-**Figure H02 — Echo ribbons.** Put input pulses on a horizontal position axis; each pulse emits a scaled copy of the filter. At output position 2, stack the three signed contributions, with labels `3`, `1`, `0.25`. An aligned table supplies the exact values. A pulse ribbon should not imply a physical time unit: these are sequence positions and dimensionless values.
+Can the same rule be written as a matrix? Read one receiving row across sender columns.
+
+**Figure H03 — Distance becomes a diagonal.** Label matrix rows as receiving positions and columns as sending positions. Use one pattern per lag, show the upper triangle as forbidden future access, and trace the lag-2 diagonal back to its filter coefficient. Keep signed values visible when later examples use negative coefficients.
+
+Row0 can see only sender0. Row2 has coefficients .25,.5,1, then a forbidden future cell. Equal distances repeat along diagonals: receivers2 and3 weight senders0 and1 by the same .25. The grid makes causality and weight sharing visible.
 
 The equivalent matrix is
 
@@ -59,13 +75,25 @@ The equivalent matrix is
 
 This is a **lower-triangular Toeplitz matrix**: “lower triangular” encodes causality; “Toeplitz” says each diagonal uses the same lag coefficient. Every pair of positions at distance 2 receives $h_2$. A length-$K$ finite impulse response, or FIR, filter additionally sets $h_r=0$ for $r\ge K$.
 
-**Figure H03 — Distance becomes a diagonal.** Label matrix rows as receiving positions and columns as sending positions. Use one pattern per lag, show the upper triangle as forbidden future access, and trace the lag-2 diagonal back to its filter coefficient. Keep signed values visible when later examples use negative coefficients.
+How does this relate to [Convolution & Pooling](/learn/path/full-curriculum/convolution-pooling-receptive-fields?module=deep-learning-fundamentals)? Neural libraries commonly store a cross-correlation kernel: tap0 multiplies the oldest item in a causal three-item window, tap2 the current item. Our lag array stores current first, so $h=[h_0,h_1,h_2]$ corresponds to library weight `[h2,h1,h0]`. Left-pad by2 and use no right-hand samples. For `[1,2,3]` with lag coefficients `[1,.5,.25]`, receiver2 is $.25(1)+.5(2)+1(3)=4.25$ in either representation. A flipped kernel or centered crop changes the operation; naming it convolution does not fix orientation.
 
 For a length-$L$ filter applied to $L$ inputs, direct causal evaluation has $L(L+1)/2$ coefficient-input products per channel. With many channels and long sequences, that work matters. Yet the matrix contains extensive repetition. The FFT exploits this structure.
 
 ## 3. Why an FFT can compute the same sum faster
 
+The matrix repeated one distance rule many times. Can a change of coordinates avoid repeating all those products? Begin with four samples; frequency labels describe patterns across them, not four token addresses.
+
+**Figure H21 — The real four-sample Fourier basis.** Draw DC `[1,1,1,1]`, cosine `[1,0,-1,0]`, sine `[0,1,0,-1]` and Nyquist `[1,-1,1,-1]` with explicit sample indices.
+
+DC gives a constant offset. Cosine and sine together describe amplitude and phase of one cycle; Nyquist alternates every sample. These four real patterns reconstruct `[1,2,3,4]` as `2.5 DC − cosine − sine − .5 Nyquist`. At the first position, `2.5−1−.5=1`; at the second, `2.5−1+.5=2`. Complex Fourier coordinates package that same information as `[10,−2+2i,−2,−2−2i]`, where $i^2=-1$. The conjugate entries represent one sine/cosine pair, not two independent real waves.
+
 The discrete Fourier transform represents a finite signal using oscillating basis patterns. Think of changing coordinates: we can describe a sound by its samples over time or by the amplitudes and phases of its frequencies. We have not yet removed information.
+
+What happens to the filter in these coordinates? Follow both arrays into matching frequency bins and then back to samples.
+
+**Figure H22 — Transform, multiply and reconstruct.** Draw two forward transforms, a complex product at each shared frequency, inverse transform and causal crop.
+
+Let P be the number of padded sample slots and m the frequency-bin index. For bins $a+ib$ and $c+id$, the product is $(ac-bd)+i(ad+bc)$. Multiplying only real parts is wrong. Under backward normalization, the forward DFT is $U_m=\sum_{t=0}^{P-1}u_t e^{-2\pi i mt/P}$ and the inverse divides by P. Substitute both forward sums into the inverse: the frequency sum vanishes unless $j+r=t$ modulo P, when it equals P. This leaves exactly modulo-indexed convolution. The theorem is algebra; FFT is the algorithm that reuses smaller transforms to compute those coordinates.
 
 For two arrays padded to length $P$, the Fourier convolution theorem gives
 
@@ -75,9 +103,13 @@ For two arrays padded to length $P$, the Fourier convolution theorem gives
 
 Here $\odot$ is elementwise multiplication. The forward transforms separate the oscillating components; multiplication applies the filter to those components; the inverse transform reconstructs samples. The FFT is an efficient algorithm for that coordinate change, with work proportional to $P\log P$.
 
-There is a catch. A length-$P$ transform treats indices modulo $P$: values that run past the right edge wrap to the left. It naturally computes **circular convolution**. To recover ordinary linear convolution of lengths $L$ and $K$, choose $P\ge L+K-1$, pad both arrays with zeros, and keep the desired outputs. For causal sequence mixing, keep the first $L$.
+Why would an exact coordinate change read the future? A finite Fourier transform joins the ends of its index range.
 
 **Figure H04 — Make room for the tail.** Show an unpadded ring beside a padded straight strip. For the four-input example, ordinary convolution has seven output slots; using eight FFT slots is convenient. Color wrapped tail contributions separately. Do not draw Fourier bins as if they were token positions.
+
+The straight drawing has seven independent positions. The circle has only four: tail4 is added to0, tail5 to1, tail6 to2. Cropping after that addition cannot undo the mix. Padding first gives the tail somewhere else to go.
+
+There is a catch. A length-$P$ transform treats indices modulo $P$: values that run past the right edge wrap to the left. It naturally computes **circular convolution**. To recover ordinary linear convolution of lengths $L$ and $K$, choose $P\ge L+K-1$, pad both arrays with zeros, and keep the desired outputs. For causal sequence mixing, keep the first $L$.
 
 The wrong $P=4$ computation for our example produces `[4, 3.875, 4.75, 6.125]`. Its first output is
 
@@ -112,9 +144,19 @@ print(np.allclose(direct, fast, atol=1e-12))
 
 The arrays both display `[1. 2.5 4.25 6.125]`, followed by `True`. The underlying floating-point arrays need not be bit-for-bit identical. In the saved calculation the first FFT output is `0.9999999999999996`. That numerical roundoff is distinct from the large semantic wraparound error above. Always pass the intended inverse-transform length, especially for odd sizes; make normalization conventions agree. The [PyTorch FFT documentation](https://docs.pytorch.org/docs/main/generated/torch.fft.rfft.html) explains normalization and device/dtype restrictions.
 
-**Investigation HA — Find the future leak.** Start with a fresh editable signal `[2,-1,3,0,1]` and filter `[0.5,1,-0.25]`. Edit the final input and compare which outputs actually change under direct, correctly padded FFT and intentionally circular computation. Repair the padding, then construct a different signed filter for which the circular result happens to agree at one output. Explain why one matching number does not establish causality. The impulse and identity-filter views help distinguish lag direction from wraparound.
+The four-position example is now complete. Try a fresh signed case `[2,-1,3,0,1]` with `[.5,1,-.25]`; comma-separated valid edits also change lengths.
+
+**Investigation HA — Find the future leak.** Start with a fresh editable signal `[2,-1,3,0,1]` and filter `[0.5,1,-0.25]`. Edit the final input and compare which outputs actually change under direct, correctly padded FFT and intentionally circular computation. Repair the padding, then construct a different signed filter for which the circular result happens to agree at one output. Explain why one matching number does not establish causality. Enter a unit impulse, `[1]` identity filter or all-zero filter to test lag direction, identity and the null case.
+
+**Investigation HA-padding — Compare the same signal in three computations.** Keep the edited state above; compare direct, padded FFT and circular outputs simultaneously, then pin the complete vectors before changing the last input.
 
 ## 4. Gates make the mixing depend on the input
+
+A distance-only filter treats equally distant senders alike. How can a sender close its own route? Multiply its value before filtering, then let a receiver multiply what arrives.
+
+**Figure H05 — The gate-filter-gate signal path.** Three parallel rails begin at the same input: `q`, `k`, `v`. Only `k×v` enters the long filter. The receiver multiplies by `q`. Show the short causal preprocessing separately from the long filter so that the number and role of each convolution remain visible.
+
+The strips contain values v and sender coefficients k. The first ⊗ means coordinatewise multiplication, written $\odot$ below: a zero sender contributes nothing; a negative sender reverses sign. Σh adds delayed contributions. The second ⊗ uses receiver coefficient q. Follow the circuit downward; it is one channel, not yet the full network.
 
 A useful basic Hyena block has three projected streams: $q$, $k$ and $v$, each shaped $L\times D$. Here $D$ is the channel width. These letters resemble attention’s query, key and value names, but the computation below contains no softmax and no pairwise query-key dot product.
 
@@ -127,8 +169,6 @@ z_j=k_jv_j,\qquad r_t=\sum_{j\le t}h_{t-j}z_j,
 
 The sending gate $k_j$ changes what enters the filter. The receiving gate $q_t$ changes how the result is used. Gates can amplify or reverse sign; they are not automatically probabilities in $[0,1]$. A neural implementation derives them from the input using learned projections and small causal depthwise convolutions. “Depthwise” means each channel has its own short filter rather than mixing channels at that operation. Dense projections before and after it handle channel mixing.
 
-**Figure H05 — The gate-filter-gate signal path.** Three parallel rails begin at the same input: `q`, `k`, `v`. Only `k×v` enters the long filter. The receiver multiplies by `q`. Show the short causal preprocessing separately from the long filter so that the number and role of each convolution remain visible.
-
 Use the earlier $v=[1,2,3,4]$, filter $h$, sending gates $k=[1,0,-1,2]$, and receiving gates $q=[1,2,-1,0.5]$. Then
 
 \[
@@ -138,6 +178,12 @@ kv=[1,0,-3,8],\quad h*(kv)=[1,.5,-2.75,6.625],
 
 At the last position the contributions before the receiving gate are $0.125+0-1.5+8=6.625$. The final factor 0.5 gives 3.3125. The zero gate suppresses the second value along this path; the negative gate reverses the third.
 
+Which input contributes to a particular receiver? Hold the current gates fixed and trace a matrix cell.
+
+**Figure H06 — A coefficient is three factors.** For each selected matrix cell, show receiving gate × distance coefficient × sending gate. One gate edit changes a row or column of this conditional matrix. Use a diverging signed scale, a numeric cell label and a contribution ledger. Row totals need not equal one.
+
+For receiver3/sender2 the coefficient is $.5	imes.5	imes(-1)=-.25$. Multiply value3 to get−.75. Editing a receiver scales a row; editing a sender scales a column. Entries can be negative and need not sum to1.
+
 We can expose every pairwise coefficient without using a dense matrix to run the block:
 
 \[
@@ -145,11 +191,23 @@ H(q,k)=\operatorname{diag}(q)\,T_h\,\operatorname{diag}(k),
 \qquad H_{tj}=q_t h_{t-j}k_j\quad(j\le t).
 \]
 
-**Figure H06 — A coefficient is three factors.** For each selected matrix cell, show receiving gate × distance coefficient × sending gate. One gate edit changes a row or column of this conditional matrix. Use a diverging signed scale, a numeric cell label and a contribution ledger. Row totals need not equal one.
-
 For fixed $q,k,h$, this is linear in $v$. A complete block is nonlinear in its original input because the same input also changes its gates. Consequently the displayed matrix is neither the full input-output Jacobian nor a guaranteed causal explanation of the network’s final prediction. It describes a specific internal path with gates held fixed.
 
+The following signed transfer case uses one shared state across its sender, receiver and matrix views, so combined edits remain meaningful.
+
+**Investigation HB-sender — Change sending gates and values.** Edit the complete taught vectors; changing value length resizes all streams.
+
+**Investigation HB-receiver — Change receiving gates and filter coefficients.** Follow the same transmitted values through the new final read.
+
+**Investigation HB-matrix — Read one receiver and sender.** Select a row/column of the conditional grid and pin its complete state/output.
+
 ### Why “hierarchy” matters
+
+What changes when another filter precedes the sending gate? An input can reach that gate through several intermediate positions.
+
+**Figure H07 — Paths through an intermediate gate.** Trace two possible routes from source $j$ through intermediate $m$ to receiver $t$, then show the summed coefficient. Compare with the single-filter sandwich; do not present the two matrices as identical.
+
+Each row is a path $j	o m	o t$. Multiply first filter φ, intermediate gate k, second filter h and receiver gate q along the row; add complete paths. A future sender has no legal rows. The picture uses φ and h; the general equation below calls the second filter ψ.
 
 The general construction alternates filters and gates:
 
@@ -168,13 +226,19 @@ H_{tj}=q_t\sum_{m=j}^{t}\psi_{t-m}k_m\varphi_{m-j}.
 
 The sum over $m$ is the new feature: an input can reach the receiver through several intervening gates. Every path still goes forward in sequence order, proving causality if the gate-generating operations are also causal.
 
-**Figure H07 — Paths through an intermediate gate.** Trace two possible routes from source $j$ through intermediate $m$ to receiver $t$, then show the summed coefficient. Compare with the single-filter sandwich; do not present the two matrices as identical.
-
 Terminology differs across descriptions. The original paper’s formal $N$-stage hierarchy counts alternating filter/gate stages. HyenaDNA’s common `order=2` implementation has three projected streams, two gates and one long convolution after their short preprocessing. In this lesson the practical model is explicitly a **one-long-filter Hyena-style block**, stacked twice. Inspect the actual equation or code rather than infer the computation from “order two.” [HyenaDNA’s method](https://arxiv.org/html/2306.15794v2) and [the authors’ standalone code](https://github.com/HazyResearch/hyena-dna/blob/main/standalone_hyenadna.py) show this convention.
 
-**Investigation HB — Build a selective route.** You receive editable values `[2,-1,3,1]`, sending gates `[0.5,1,0,-1]`, receiving gates `[1,-0.5,2,1]`, and a signed filter `[1,-0.25,0.5,0]`. Inspect which outputs respond when the zero sending gate becomes one. Inspect the signed matrix and create a different arrangement that suppresses one sender while preserving another. Add an optional preceding filter `[1,-0.5,0,0]` and reason about the new intermediate paths. Pin a complete baseline to compare later edits.
+**Investigation HB-hierarchy — Compare one filter with two.** You receive editable values `[2,-1,3,1]`, sending gates `[0.5,1,0,-1]`, receiving gates `[1,-0.5,2,1]`, and a signed filter `[1,-0.25,0.5,0]`. Inspect which outputs respond when the zero sending gate becomes one. Inspect the signed matrix and create a different arrangement that suppresses one sender while preserving another. Compare a preceding filter `[1,-0.5,0,0]` and reason about the new intermediate paths. Pin a complete baseline to compare later edits.
 
 ## 5. Generate the filter from position
+
+Gates decide what to transmit. Their filter still needs a coefficient for every lag.
+
+Could one small network describe many lag coefficients? Give each lag a coordinate and reuse the same weights. One learned decay number a per channel will be converted to a positive rate for its envelope.
+
+**Figure H08 — A function becomes a strip of coefficients.** Feed lag coordinates `0,1,…,59` into one shared network and place its outputs along channel strips. Select one channel to show its raw network curve, positive decay envelope and product. Label whether these are initialized or fitted coefficients; use the saved actual fit for the latter.
+
+Read the fixed ruler first. Nine features describe a lag; learned edges map them through32 sine units to16 raw channel values. A positive envelope multiplies each signed raw value. Its positive rate is $\operatorname{softplus}(a)=\log(1+e^a)$; any finite learned a gives a positive rate. The code evaluates this transform stably instead of overflowing for large a. The plot uses actual saved coefficients; block/channel selectors pick one fitted filter rather than edit a gate. Two such filters belong to the later two-block example.
 
 An explicit length-$L$, $D$-channel filter stores $LD$ learned coefficients. An **implicit filter** instead learns a function whose input is lag and whose output is a vector of channel coefficients:
 
@@ -183,8 +247,6 @@ h_r=\gamma_\theta(\operatorname{pos}(r))\odot w(r).
 \]
 
 The small neural network $\gamma_\theta$ shares parameters across positions. The window $w(r)$, often an exponential envelope, biases the filter’s range. A position representation may include the lag itself and sine/cosine features at several frequencies. A sine activation in the filter network makes oscillating and sharply varying filters easier to represent than an overly smooth initialization would suggest.
-
-**Figure H08 — A function becomes a strip of coefficients.** Feed lag coordinates `0,1,…,59` into one shared network and place its outputs along channel strips. Select one channel to show its raw network curve, positive decay envelope and product. Label whether these are initialized or fitted coefficients; use the saved actual fit for the latter.
 
 Our experiment fixes a reference length $L_{\rm ref}=60$, sets $s_r=r/59$, and uses
 
@@ -198,17 +260,29 @@ followed by multiplication by $\exp[-s_r\operatorname{softplus}(a)]$, one decay 
 
 ### A less obvious causality bug: moving the coordinate system
 
+What breaks if that ruler stretches when an input grows? Compare the same old lag positions before changing the formula.
+
+**Figure H09 — A ruler that must not stretch mid-read.** Align the same first four lag positions under the two coordinate conventions. Show the coefficient change at each shared lag, with a stable-reference ruler above both sequence lengths. A separate dashed region past the trained support marks a new extrapolation question, not a free extension.
+
+The fixed curve always uses r/7. The rescaled curve uses r/3 for four positions, changing old coefficients. A growing prefix should reveal more coefficients on the same ruler, not rewrite earlier coordinates.
+
 If a four-token prefix uses coordinates $r/3$, then the same prefix inside an eight-token sequence uses $r/7$, its filter changes when later tokens arrive. Correct FFT padding cannot repair that problem. A causal model must use the same lag interpretation for the same prefix.
 
 For the illustrative function $h_r=e^{-s_r}\cos(2\pi s_r)$, using reference length 8 gives initial coefficients `[1,0.54049,-0.16722,-0.58693]`. Recomputing them with active length 4 gives `[1,-0.35827,-0.25671,0.36788]`. The first four coefficients differ by as much as 0.95481. Our implementation stores a fixed position grid and slices it for shorter inputs.
-
-**Figure H09 — A ruler that must not stretch mid-read.** Align the same first four lag positions under the two coordinate conventions. Show the coefficient change at each shared lag, with a stable-reference ruler above both sequence lengths. A separate dashed region past the trained support marks a new extrapolation question, not a free extension.
 
 A filter function may be mathematically evaluable at longer lags, but those values were not necessarily trained. Extending a position buffer, changing frequency scales and continuing training are separate choices. Some official configurations also learn positional embeddings, adding length-dependent parameters. Read the chosen configuration before claiming that *all* parameters are independent of maximum length.
 
 The exponential window is an inductive bias, not a proof that every fitted coefficient decreases monotonically. The network can oscillate or grow inside the envelope; some implementations add a nonzero envelope floor. A finite filter without decay is perfectly well-defined. The practical question is which initialization and parameterization let the model learn useful filters stably.
 
 ## 6. How the block learns
+
+The fixed ruler made forward computation well-defined. A loss can now teach its parameters how to change.
+
+How do coefficients learn? Switch briefly to two inputs so every gradient is visible by hand.
+
+**Figure H10 — Follow one gradient to two coefficients.** Trace `loss → prediction error → weighted inputs → coefficient updates`, using the exact values above. The arrow labels distinguish the learning rate from a gate and a filter coefficient.
+
+Current input2 is weighted by .5; previous input1 by .25. Their sum1.25 is below target2. The same error travels backward, multiplied by each coefficient’s own input. Dashed orange paths are gradients, not additional forward inputs. We return to the four-position gates afterward.
 
 Start with one trainable filter and a transparent loss. For inputs `[1,2]`, filter `[0.5,0.25]`, and desired final output 2, the prediction is $2h_0+h_1=1.25$. Use half squared error:
 
@@ -218,21 +292,39 @@ Start with one trainable filter and a transparent loss. For inputs `[1,2]`, filt
 
 The prediction error is $-0.75$. Each coefficient’s gradient is this error multiplied by the input it weights: $\nabla_h\mathcal L=[-1.5,-0.75]$. One gradient step with learning rate 0.1 gives `[0.65,0.325]`, prediction 1.625 and loss 0.0703125. A coefficient grows because doing so moves this prediction toward its target.
 
-**Figure H10 — Follow one gradient to two coefficients.** Trace `loss → prediction error → weighted inputs → coefficient updates`, using the exact values above. The arrow labels distinguish the learning rate from a gate and a filter coefficient.
-
 In a neural Hyena block, backpropagation follows the same chain through receiving gates, convolution, sending gates and the filter-generating network. FFT convolution is differentiable. A direct implementation and a correctly normalized FFT implementation must agree on the operation’s derivatives within numerical tolerance. The saved double-precision probe checks both outputs and gradients against an independently indexed direct sum.
 
-The full sequence block also has residual paths and a per-position feed-forward network. These keep the representation update separate from the long mixing operation. The small classifier below uses LayerNorm before each update, two blocks, a 16-dimensional token embedding and a three-logit head at the final position. Each block’s mixed update is
+### Follow every branch, not only the filter
 
-\[
-q\odot\{h*(k\odot v)+b_{\rm skip}\odot(k\odot v)\}.
-\]
+The two-coefficient update explained one path. In the earlier gate example a loss reaches q,k,v and h separately. The labels dq,dk,dv,dh name derivatives with respect to receiver, sender, value and filter.
 
-The learned skip coefficient is another current-position path. It does not make the long filter noncausal. No probability interpretation is assigned to either gate; only the classifier’s final softmax produces class probabilities.
+**Figure H23 — Four branches of the gated derivative.** Draw every forward multiply/sum and reverse path into receiver, sender, value and kernel.
 
-For next-token language modeling, a different head produces vocabulary logits at each position and the loss compares each output with the following token. Shift targets consistently; apply any loss mask to predictions of the intended continuation. Teacher-forced accuracy, where preceding true tokens are supplied, and free-running generation answer different questions. The sequence classifier we now train is supervised classification, so it uses one label for the whole 60-position window.
+Follow the orange arrows upward. The receiver multiply has two inputs, so its derivative must return to both. The filter sum returns one derivative for every transmitted value and one for every shared lag coefficient. The sender multiply then separates that transmitted derivative into value and sender-gate branches. Keeping just the value-mixing matrix discards two routes through the learned gates.
+
+Let upstream derivative be $d_t=\partial\mathcal L/\partial y_t$, and define $g_t=d_tq_t$. The receiver derivative is $d_t r_t$. The transmitted derivative is $\partial\mathcal L/\partial z_j=\sum_{t\ge j}g_t h_{t-j}$; the filter derivative is $\partial\mathcal L/\partial h_r=\sum_{t\ge r}g_t z_{t-r}$. These correlations can be computed using reversed arrays and correctly aligned FFT convolution slices. Then $\partial\mathcal L/\partial k_j=(\partial\mathcal L/\partial z_j)v_j$ and $\partial\mathcal L/\partial v_j=(\partial\mathcal L/\partial z_j)k_j$. A local skip adds $b_{\rm skip}g$ to the transmitted derivative and contributes $\sum_t g_tz_t$ to its own derivative. Shared parameters sum contributions across examples as well as positions.
+
+Return to `v=[1,2,3,4]`, `k=[1,0,-1,2]`, `q=[1,2,-1,.5]`, `h=[1,.5,.25,.125]`. Desired outputs `[0,0,0,2]` give half-sum squared loss5.642578125. The derivatives are dq=`[1,.5,-7.5625,8.6953125]`, dk=`[1.39453125,1.578125,-7.265625,2.625]`, dv=`[1.39453125,0,2.421875,1.3125]`, dh=`[14.5,.03125,-2.75,.65625]`. Sender1 is closed: dv1 is zero, yet dk1 is not. Changing its gate could open a useful path, so it still needs a gradient.
+
+**Program gradient — Complete FFT VJP and ordinary autograd.** Show gated_convolution_gradients.py with Copy/Download; include all validation and native comparisons.
+
+The complete program uses batch-first `(N,L,D)`, with sequence axis1 streams, `(K,D)` shared kernel and `(D,)` skip. It never forms a pairwise L×L grid. Forward snapshots own their arrays so caller edits cannot corrupt backward. Reverse the kernel to align the transmitted correlation at K−1; reverse the transmitted sequence to align the kernel correlation at L−1. If K>L, never-observed taps keep zero gradients without shrinking the parameter shape. The ordinary Torch route uses the same explicit FFT length and crop; autograd computes all reverse branches. Independent direct sums and central differences check signed gates, different lengths, null kernels and a closed sender. This float64 CPU implementation prioritizes a clear, efficient reference contract; a production dtype/device policy needs its own checks.
+
+Where do those three stream derivatives meet? Trace one shared input through three small projections.
+
+**Figure H30 — Shared input receives three gradient branches.** Draw X with two features, three2×2 learned matrices and the sum of the three returned input derivatives.
+
+The amber grids are separate learned weights. Each forward projection creates a different stream; each orange path returns a derivative through its own weights. A conditional value-only map keeps only the v branch, while learned gates require all three.
+
+If the streams share input X, $q=XW_q^T$, $k=XW_k^T$, $v=XW_v^T$ imply $dX=dqW_q+dkW_k+dvW_v$, before adding normalization, short-filter and residual derivatives. The runnable program checks this three-branch chain too. Reuse the graph accumulation already taught in [Backpropagation & Automatic Differentiation](/learn/path/full-curriculum/backpropagation-automatic-differentiation?module=deep-learning-fundamentals) and channelwise short-filter derivatives in [Depthwise Separable & Dilated Convolutions](/learn/path/full-curriculum/depthwise-separable-dilated-convolutions?module=deep-learning-fundamentals); the conditional matrix is not a substitute for that full graph.
 
 ## 7. A real sequence task: identify a splice boundary
+
+What could we train the operator to decide? Switch from constructed numbers to an observed DNA window; first learn what the label means.
+
+**Figure H11 — A DNA window around a boundary.** Show all 60 positions with the central divider, observed characters, and the three possible class directions. A compact ambiguity key appears where needed. Selecting a base must identify both its array index and its biological relative-position label.
+
+EI marks entering an intron; IE marks leaving one. RNA processing removes the RNA intron and joins exons; it does not delete DNA. The observed window places its boundary between array29 and30. Output N means neither boundary, distinct from the input ambiguity N explained next.
 
 A gene can be transcribed into an RNA molecule containing regions called introns and exons. RNA splicing removes introns and joins retained exons; alternative splicing can produce different mature RNAs from one gene. The DNA itself is not cut up by this RNA-processing operation, and introns need not be biologically useless. The [NHGRI RNA explanation](https://www.genome.gov/about-genomics/educational-resources/fact-sheets/ribonucleic-acid-fact-sheet) gives the biological background.
 
@@ -240,9 +332,13 @@ The historical [UCI Splice-Junction dataset](https://archive.ics.uci.edu/dataset
 
 The input alphabet is `A,C,G,T,D,N,R,S`. The last four symbols describe uncertainty among bases: `D` means A/G/T, `N` any of the four, `R` A/G, `S` C/G. They are not four extra chemical bases. We keep them as separate input symbols rather than invent a measured probability for the alternatives. A sequence symbol `N` is also distinct from the *output class* `N`.
 
-**Figure H11 — A DNA window around a boundary.** Show all 60 positions with the central divider, observed characters, and the three possible class directions. A compact ambiguity key appears where needed. Selecting a base must identify both its array index and its biological relative-position label.
-
 ### Separate the data roles before fitting
+
+Before fitting, which records may influence the same evaluation? Duplicates and source prefixes can connect examples.
+
+**Figure H12 — Keep connected records on one side.** Draw a source-prefix node joined to its windows, and a duplicate-sequence edge joining two source prefixes. Move the entire connected component into one of the three role lanes. Separately place the two conflicting records in a disclosed exclusion tray.
+
+A and B are source-prefix groups. Their equal sequence a joins them. A row-only split could distribute related records across roles; the connected group must move as a unit. Exclude the stated conflict before assigning retained roles.
 
 The source contains 3,190 rows and 3,005 distinct sequence strings. Two identical-input rows, source IDs 1022 and 1969, have conflicting labels; we exclude both from this exercise and disclose the decision. We keep the first occurrence of every other sequence, leaving 3,004 examples. Before splitting, we join source-record prefixes connected by an identical sequence, then keep every resulting group within one data role. This also keeps different windows from each observed source-record prefix together.
 
@@ -254,9 +350,15 @@ The source contains 3,190 rows and 3,005 distinct sequence strings. Two identica
 
 Exact source IDs, group assignments and class counts accompany the downloadable data. Distinct record names can still describe homologous biological sequences. This grouping addresses the relationships visible in the file; it does not establish independence across species, gene families or new patients. The assessment is a modest historical-data exercise, not a biological validation study or evidence of million-token performance.
 
-**Figure H12 — Keep connected records on one side.** Draw a source-prefix node joined to its windows, and a duplicate-sequence edge joining two source prefixes. Move the entire connected component into one of the three role lanes. Separately place the two conflicting records in a disclosed exclusion tray.
-
 ### Train a model you can inspect
+
+Where do gates and filters sit in an actual model? Follow its tensor widths and residual paths from token lookup to final class.
+
+**Figure H24 — The complete two-block classifier.** Draw the eight-symbol lookup, changing widths, three short causal streams, gate/filter/skip operations and both residual paths.
+
+Each symbol selects one row of an8×16 learned embedding table: sixty IDs become sixty16-feature vectors. For N examples the stream is `(N,60,16)`. The older code calls this axis `batch`; B below denotes an input FFT block size. LayerNorm prepares each position; a16→48 projection creates q,k,v, each width16. Three-tap causal filters process each channel independently. Multiply k and v, apply the generated long filter and a learned current-position skip, add these results, then multiply by q. A16→16 projection feeds the first residual add. A second LayerNorm branch expands16→32, applies exact GELU, contracts32→16 and adds another residual. Repeat this block twice and read position59 through a three-logit head.
+
+The branch expression is $q\odot\{h*(k\odot v)+b_{\rm skip}\odot(k\odot v)\}$. The skip is immediate, not future access; only final softmax creates probabilities. The positional linear baseline instead uses60×8 one-hot features directly. Reuse the earlier [Normalization](/learn/path/full-curriculum/batch-layer-group-rms-normalization?module=deep-learning-fundamentals) and [Residual Connections](/learn/path/full-curriculum/residual-connections-skip-connections?module=deep-learning-fundamentals) computations for the already taught layer updates; this program implements their composition with the new mixer.
 
 Download [the complete training program](splice_models.py), [the data](splice.data) and [its original metadata](splice.names) into one directory. The program needs Python, NumPy, PyTorch and scikit-learn. In a fresh environment run:
 
@@ -287,6 +389,12 @@ Padding is along the sequence axis, not the channel axis. The filter broadcasts 
 
 ### Read the actual outcome
 
+Did this operator help on this task? Read the measured validation curves before comparing selected outcomes.
+
+**Figure H13 — Learning curves with a decision point.** Plot the actual 80 validation cross-entropies for each predeclared fit, with the selected epoch marked. Use a common vertical axis with an optional detailed view; the assessment outcome is a separate table. Do not synthesize a smooth training curve or display assessment scores at every epoch.
+
+All eighty validation losses appear for each fit. Its marked minimum selects an epoch; assessment never selects it. A larger model can do worse on a small fixed-location task, so keep the positional baseline.
+
 | Model | Selected epoch | Validation errors / 460 | Assessment errors / 416 |
 | --- | ---: | ---: | ---: |
 | Positional linear, seed 29 | 42 | 32 | 30 |
@@ -295,8 +403,6 @@ Padding is along the sequence axis, not the channel axis. The filter broadcasts 
 | Gated Hyena-style, seed 71 | 11 | 50 | 57 |
 
 The positional baseline makes fewer errors than either small gated fit. That is an informative result: a fixed-location motif task can reward a direct representation. Gating helps relative to this ungated comparison, but changing seed also changes outcomes. These fits are not a universal ranking of linear classifiers, Hyena or other architectures.
-
-**Figure H13 — Learning curves with a decision point.** Plot the actual 80 validation cross-entropies for each predeclared fit, with the selected epoch marked. Use a common vertical axis with an optional detailed view; the assessment outcome is a separate table. Do not synthesize a smooth training curve or display assessment scores at every epoch.
 
 For the gated seed-29 model, the assessment confusion matrix is:
 
@@ -310,17 +416,41 @@ Rows reveal different errors: 9 of 85 EI examples, 9 of 83 IE examples and 22 of
 
 ### Change a sequence and observe a hypothesis
 
+What did a fixed model use? Change two observed symbols and compare all three probabilities.
+
+**Figure H14 — An observed sequence and a model counterfactual.** Align the original and edited 60-character strings, mark exactly the two changed bases and show three aligned probability bars before/after. Keep the original observed label on the original row only. A text table contains the logits and probabilities.
+
+Only GT at array30–31 becomes AA. White markers retain original probabilities; violet bars show the synthetic edit. Keep observed EI on the original, because an input edit does not measure a new biological label.
+
 Validation source row 3 is an EI example whose two bases immediately after the central divider are `GT`. The gated seed-29 fit assigns class probabilities approximately `[0.99284,0.00648,0.00068]` in EI/IE/N order. Replacing those two input bases by `AA`, without refitting, produces `[0.08177,0.28564,0.63259]`: the prediction changes to N.
 
 This establishes that the fitted model is sensitive to that edit. It does not provide a newly measured biological label for the edited sequence. The original label belongs to the observed record. Sequence perturbation is a way to investigate a model’s behavior; a biological claim requires separate evidence.
 
-**Figure H14 — An observed sequence and a model counterfactual.** Align the original and edited 60-character strings, mark exactly the two changed bases and show three aligned probability bars before/after. Keep the original observed label on the original row only. A text table contains the logits and probabilities.
+**Investigation HC — Edit a fresh observed window.** Start from the different validation source row 4. Edit a chosen base or short span and inspect the resulting class scores. Every valid change to the 60-character sequence is evaluated by the fixed saved model. Compare an edit near the boundary with an equally sized distant edit. You can also restrict the learned long filter to lags 0–4 or turn off its gates to investigate the internal route. Those controls modify the fitted computation; they do not retrain an alternative architecture. Restore the exact original to check that its result returns. An all-`N` input is a useful uncertainty probe: this model still strongly predicts class N, about 0.95478, illustrating why absence of informative input need not produce uniform probabilities.
 
-**Investigation HC — Which context changes this model’s answer?** Start from the different validation source row 4. Edit a chosen base or short span and inspect the resulting class scores. Every valid change to the 60-character sequence is evaluated by the fixed saved model. Compare an edit near the boundary with an equally sized distant edit. You can also restrict the learned long filter to lags 0–4 or turn off its gates to investigate the internal route. Those controls modify the fitted computation; they do not retrain an alternative architecture. Restore the exact original to check that its result returns. An all-`N` input is a useful uncertainty probe: this model still strongly predicts class N, about 0.95478, illustrating why absence of informative input need not produce uniform probabilities.
+Inspect one position, a span, saved fits and internal paths through these shared views. Fit changes preserve the validated string and settings. Pins include the actual model identity and frozen scores.
+
+**Investigation HC-position — Edit one supported symbol.** Show selected index/symbol controls beneath its complete observed window.
+
+**Investigation HC-span — Edit an inclusive span.** Fill a declared range; invalid ranges do not apply.
+
+**Investigation HC-fit — Compare fits and pin exact results.** Show all class probabilities/logits, then saved-fit and full-result pin controls.
+
+**Investigation HC-ablation — Change the computation without refitting.** Tap retention and gate override change fixed weights’ computation; the linear baseline has neither route and unit-gate override is a no-op for the trained ungated fit.
+
+**Investigation HC-trace — Follow an actual block and channel.** Show sender product, lag coefficient and receiver read before block/channel controls; retain all intermediate vectors.
+
+What changes for next-token training? Read shifted targets before reusing the classifier loss.
+
+**Figure H25 — A next-symbol target sits one position later.** Draw A,C,G,T and the shifted target for each causal output.
+
+Output at A predicts C; output at C predicts G. Teacher forcing supplies preceding true symbols; free-running generation feeds each chosen symbol back. Neither is final-window classification. A continuation loss mask selects predictions of intended next symbols, not an unshifted input mask.
 
 A causal network can classify this *whole observed window* using its final position because that position has access to all 60 bases. It does not forecast a central boundary before the right-hand context arrives. If an application must decide before the right-hand context arrives, train and evaluate it using only the context available at that decision.
 
 ## 8. Deeper route: long filters, streaming and compact state
+
+The classifier observed its whole window. Generation must respect when each input becomes available.
 
 FFT convolution is attractive when the input segment is already available. Autoregressive generation presents a different workload: produce one new token, feed it back, then produce the next. Re-running a full FFT for each token wastes earlier work. But “therefore Hyena must re-run a full FFT” is too strong. There are several computational representations.
 
@@ -335,9 +465,13 @@ These counts exclude projections, gates and feed-forward layers. A fixed-$K$ buf
 
 ### Blocks must include the overlapping tail
 
-Split inputs `[1,2,3,4]` into `[1,2]` and `[3,4]`. Convolve each block with the filter, shift the second result by two positions, then **add the overlapping outputs**. This overlap-add construction gives the same linear convolution. If each chunk is filtered independently and only its first two outputs are retained, contributions crossing the chunk boundary vanish.
+What survives when the input is split? Align each block at its original positions, including the tail.
 
 **Figure H15 — Overlap is information.** Put the full convolutions of the two blocks on separate rows, aligned to their original starts. Shade the overlap region and sum its contributions into the output strip. Contrast with an explicitly crossed-out reset-at-boundary result. When used for an autoregressive model, note that future input blocks cannot be computed before their tokens exist.
+
+Block0 creates outputs beyond its two inputs. Block1 begins at global2, where earlier contributions still arrive. Amber tail entries add into occupied positions; discarding them loses history. Future autoregressive blocks are unavailable until their tokens exist.
+
+Split inputs `[1,2,3,4]` into `[1,2]` and `[3,4]`. Convolve each block with the filter, shift the second result by two positions, then **add the overlapping outputs**. This overlap-add construction gives the same linear convolution. If each chunk is filtered independently and only its first two outputs are retained, contributions crossing the chunk boundary vanish.
 
 ### Complete the blocked FFT route before choosing a package
 
@@ -392,7 +526,11 @@ if __name__ == "__main__":
     main()
 ```
 
-For input length N, filter length M, block size B and transform length F≥B+M−1, work is O(F log F + ceil(N/B) F log F). Retained workspace beyond the O(N) returned output is O(F); the transformed kernel is reused. This bound describes this program, not a measured speed victory. Very short kernels can favor direct convolution; unsuitable B can waste work. The authoring probe's seven-sample fixture gives `[1, 1.5, 0, 3.5, −.375, 2.375, 1.5]` at B=1,2,3,8, with maximum observed float64 difference 4.45×10⁻¹⁶ from the direct oracle. No training run or speed measurement was added.
+For input length N, filter length M, block size B and transform length F≥B+M−1, work is O(F log F + ceil(N/B) F log F). Retained workspace beyond the O(N) returned output is O(F); the transformed kernel is reused. This bound describes this program, not a measured speed victory. Very short kernels can favor direct convolution; unsuitable B can waste work. The independent seven-sample calculation gives `[1, 1.5, 0, 3.5, −.375, 2.375, 1.5]` at B=1,2,3,8, with maximum observed float64 difference 4.45×10⁻¹⁶ from the direct oracle. These are numerical agreement checks, not speed measurements.
+
+**Investigation blocked — Carry actual FFT tails.** Use the program’s fresh seven-sample input/four-tap filter; edit vectors and B.
+
+**Investigation blocked-workspace — Inspect one block and two mistakes.** Compare carry, reset/crop and centered same simultaneously; inspect exact inverse terms and frequency products.
 
 The trainable ordinary workflow remains `splice_models.py::causal_convolution`, `ImplicitFilter` and `SequenceBlock`: Torch FFT operations preserve the gradient path into the filter-generating network and both input-dependent gates. NumPy/SciPy are useful numeric references, not differentiable replacements inside that Torch training graph. The two-gate block is an explicitly scoped Hyena-style operation; StripedHyena's other filters/attention layers and pretrained checkpoints remain distinct family examples.
 
@@ -405,6 +543,12 @@ Choose F≥7, hence F=8 for this power-of-two implementation. The final input bl
 </details>
 
 ### Some long filters are exactly recurrent
+
+Can a whole tail fit into one or two numbers? Switch to an exponential-mode filter with a recursive structure.
+
+**Figure H16 — Two modes, one long echo.** Draw one fading positive mode and one alternating mode; their weighted sum forms the filter. Below, a two-register state machine shows the update and read at each input. The mode curves and state values are exact calculations, not fitted experimental results.
+
+A register stores old contributions. Its pole multiplies that state, then the current input is added. A residue weights the new state in the read. The feedback path carries it forward. Two registers combine positive and alternating decays; arbitrary learned filters need not be two-state.
 
 For $h_r=a^r$, define $s_t=a s_{t-1}+u_t$, with $s_{-1}=0$. Expanding the recurrence gives $s_t=u_t+a u_{t-1}+a^2u_{t-2}+\cdots$. That is exactly convolution with the exponential filter. The past has been compressed into one number because this particular filter has algebraic structure.
 
@@ -419,8 +563,6 @@ y_t=\sum_n R_n s_{n,t}.
 Each $\lambda_n$ determines a mode’s retention and oscillation; $R_n$ determines its contribution. A negative real pole alternates sign. Complex-conjugate pairs can produce real decaying oscillations. For an indefinitely sustained stable filter, poles inside the unit circle give decaying modes; a finite FIR remains well-defined without that infinite-horizon requirement.
 
 Take $R=[0.6,0.4]$, $\lambda=[0.5,-0.25]$. The first six coefficients are `[1,0.2,0.175,0.06875,0.0390625,0.018359375]`. For inputs `[1,-2,0.5,3,-1,2]`, the output is `[1,-1.8,0.275,2.81875,-0.4109375,2.299609375]`.
-
-**Figure H16 — Two modes, one long echo.** Draw one fading positive mode and one alternating mode; their weighted sum forms the filter. Below, a two-register state machine shows the update and read at each input. The mode curves and state values are exact calculations, not fitted experimental results.
 
 This complete NumPy program computes the recurrent output and independently checks convolution:
 
@@ -445,9 +587,21 @@ After the first three inputs, the state is `[-0.25,1.0625]`. Carry that state in
 
 Inside a gated block, these modes accumulate the **gated value** $k_t v_t$; $q_t$ multiplies the read afterward. Cache the short-convolution history as well. An attention layer elsewhere in a hybrid does not execute these updates on behalf of the convolution layers.
 
+The fresh input `[2,0,-1,3,1,-.5]` tests transfer across chunk boundaries. Its input/mode edits carry into later comparisons.
+
+**Investigation HD-registers — Change the mode and its input.** Follow current states, then edit inputs, residues and stable toy poles.
+
+**Investigation HD-carry — Move the boundary without losing state.** Show carried and reset outputs together; inspect a step and pin complete state.
+
 ### When the recurrence is an approximation
 
 A general filter network need not output a small sum of exponentials. [Laughing Hyena Distillery](https://proceedings.neurips.cc/paper_files/paper/2023/file/371355cd42caaf83412c3fbef4688979-Paper-Conference.pdf) studies converting trained long filters into compact state-space approximations. The teaching idea is: choose a target state size, fit a recurrent filter to the original coefficients or transfer function, then check both the approximation and the model using it.
+
+If the filter is not exactly recurrent, what does replacing it lose? Compare identical lag positions and separate observed error from a bound.
+
+**Figure H17 — Approximation error has units and a route.** Align original and truncated coefficient stems, shade the omitted absolute mass, then show observed output error and the bound on one numeric axis. Label this finite six-position calculation; do not imply that it bounds an unmeasured infinite tail.
+
+White reference markers retain the original six taps. Shortening the filter omits absolute coefficient mass. Signed cancellation can make output error smaller than the bound. This is finite-horizon, fixed-path analysis, not a guarantee for every later network.
 
 An elementary error bound explains what must be controlled. If $e=h-\hat h$ is the filter error, then
 
@@ -462,15 +616,43 @@ For one fixed-gate sandwich, multiply this bound by $\|q\|_\infty\|k\|_\infty$. 
 
 Truncate our six-coefficient example after lag 1. Its omitted coefficient sum is 0.301171875 and the input’s largest magnitude is 3, so the bound is 0.903515625. The observed maximum output change is 0.499609375. The bound is deliberately conservative and the truncation is deliberately visible. Both filters can run quickly, but they do not compute the same result.
 
-**Figure H17 — Approximation error has units and a route.** Align original and truncated coefficient stems, shade the omitted absolute mass, then show observed output error and the bound on one numeric axis. Label this finite six-position calculation; do not imply that it bounds an unmeasured infinite tail.
+**Investigation HD-truncate — Choose a finite approximation.** Keep shared inputs/modes and vary retained taps.
+
+What structure suggests a small state? Read coefficient anti-diagonals.
+
+**Figure H26 — Hankel anti-diagonals encode sums of lags.** Draw the6×6 grid from the known analytic filter through lag10.
+
+Anti-diagonals repeat lag i+j, unlike the earlier Toeplitz diagonals using receiver minus sender. Extra coefficients come from stated analytic modes; a saved finite vector does not authorize inventing unknown later samples.
 
 For a deeper connection, extend this known analytic two-mode filter through lag 10 and arrange its coefficients into a **Hankel matrix**, whose entries are constant on anti-diagonals: $A_{ij}=h_{i+j}$. For a sum of $d$ exponential modes, $A_{ij}=\sum_n R_n\lambda_n^i\lambda_n^j$, so it is a sum of at most $d$ rank-one matrices. Our 6×6 example has two substantive singular values, about 1.08698 and 0.13949; the others are numerical roundoff below $10^{-16}$. A rapidly decaying Hankel spectrum suggests that a smaller state may approximate a filter. It does not say that every neural filter has low rank or that one finite matrix certifies all future lags. The full system-realization theory refines the indexing, assumptions and minimal-state statement.
 
-**Investigation HD — Preserve the past, or approximate it deliberately.** Use fresh inputs `[2,0,-1,3,1,-0.5]` with the two-mode filter. Change a chunk boundary, reset the state or truncate the filter and compare their actual outputs. Edit inputs, residues and poles; compare direct convolution, full recurrence and carried chunks. Now choose a shorter finite approximation and compare its observed error with the finite-horizon bound. Design a nonzero example with zero truncation error at a chosen position, and explain why that does not establish equality everywhere.
+**Practice before continuing.** Use fresh inputs `[2,0,-1,3,1,-0.5]` with the two-mode filter. Change a chunk boundary, reset the state or truncate the filter and compare their actual outputs. Edit inputs, residues and poles; compare direct convolution, full recurrence and carried chunks. Now choose a shorter finite approximation and compare its observed error with the finite-horizon bound. Design a nonzero example with zero truncation error at a chosen position, and explain why that does not establish equality everywhere.
+
+### From a learned filter to a deployed recurrence
+
+The finite bound gives an approximation target. How could we find modal states rather than just cut taps? First make the immediate coefficient and delayed states agree on time indexing.
+
+**Figure H27 — Immediate h0 and delayed modes are separate paths.** Draw h0's current-input path and a read of OLD states before the next update.
+
+Our toy updates state and then reads, giving $h_r=\sum_nR_n\lambda_n^r$, including lag0. The [Distillery paper](https://arxiv.org/html/2310.18780v1) instead retains a direct h0 and models delayed coefficients by $h_r=\sum_n\widetilde R_n\lambda_n^{r-1}$ for r≥1. Its output is $h_0u_t+\sum_n\widetilde R_ns_{n,t-1}$, then states update. Convert our toy by keeping $h_0=\sum_nR_n$ and $\widetilde R_n=R_n\lambda_n$. For R=`[.6,.4]`, λ=`[.5,-.25]`, this gives h0=1 and delayed residues `[.3,-.1]`; lag1 is .2, lag2 .175. A zero pole contributes only to the immediate term. Moving the read without changing residues shifts the impulse response; either convention is valid if its indexing is explicit.
+
+For a learned filter, sample coefficients using their existing coordinate ruler. Pick candidate state orders, initialize poles/residues and minimize a declared discrepancy such as $\sum_{r=1}^{K-1}|h_r-\sum_n\widetilde R_n\lambda_n^{r-1}|^2$. For fixed poles, fitting residues is linear least squares; optimizing poles is nonlinear. Pair complex poles with conjugates to produce real outputs. Compare reconstructed coefficients, full-model logits and task performance. A small filter discrepancy alone does not promise unchanged decisions.
+
+A transfer function collects delays into $H(z)=h_0+\sum_{r\ge1}h_rz^{-r}$. Geometric modes make it rational, motivating rational interpolation and state realization. Polynomial-coefficient methods such as Prony and Padé can be ill-conditioned: close poles, tiny singular values and noise magnify errors. Hankel singular values suggest candidate orders; they do not guarantee an optimal state size. Evaluate each candidate on the stated reconstruction and deployment workload.
+
+Finite-window fitting and infinite-horizon stability differ. The paper's finite-horizon fits can use poles outside the unit circle; imposing stable poles can worsen finite fit. Indefinite deployment needs separately justified stability and extension assumptions. Our lab's ±.95 pole range is a stable toy choice, not a universal distillation constraint. A finite Hankel sample cannot alone certify unseen future lags.
+
+Parallel prompt prefill must leave precisely the states incremental decoding will use. Specialized rational-filter prefill uses its own algebra; an arbitrary neural filter does not get compact-state prefill merely by applying an FFT. Carry each channel's modal registers, short-filter buffer and each attention layer's KV records separately. The saved splice filters here have not been distilled: the runnable toy derives an exact analytic recurrence; this branch explains the research workflow and required comparisons.
 
 ## 9. Deeper route: what the family adds
 
 ### Different ways to specify a filter
+
+Which part of the mechanism differs? Compare retained objects and which input can change coefficients.
+
+**Figure H18 — Mechanism map, not a leaderboard.** Compare a lag-only kernel, gate-filter-gate sandwich, input-selective state update and normalized attention. Each row displays the equation and retained object, with no fabricated “quality,” “speed” or “best for everything” score.
+
+A lag-only filter shares its distance rule. Surrounding gates change transmitted and received values. A selective transition changes the state update itself; attention computes normalized coefficients over allowed keys. A shared long-context goal does not make these operations identical.
 
 The [S4/Mamba lesson](/learn/path/full-curriculum/state-space-models-s4-mamba-mamba-2?module=deep-learning-fundamentals) showed how a time-invariant state-space system yields a convolution kernel. Hyena often starts with a direct neural function of lag. These parameterizations impose different structure. Once a model makes its state transition or input maps depend on the current token, the overall operator need not be one fixed convolution. Mamba’s selectivity and Hyena’s surrounding gates should be described by their actual equations rather than called interchangeable implementations.
 
@@ -478,29 +660,59 @@ Continuous kernel convolution, or CKConv, developed the idea of evaluating a lea
 
 For ordinary row-softmax attention, $A_{tj}\propto\exp(q_t^\top k_j/\sqrt{d_k})$ over allowed positions. Its coefficients are nonnegative and normalized. Hyena’s signed distance-and-gate coefficients generally compute a different operator. [Sparse and linear attention](/learn/path/full-curriculum/sparse-linear-attention-variants?module=deep-learning-fundamentals) distinguishes changing an operator from finding a different algorithm for the same one.
 
-**Figure H18 — Mechanism map, not a leaderboard.** Compare a lag-only kernel, gate-filter-gate sandwich, input-selective state update and normalized attention. Each row displays the equation and retained object, with no fabricated “quality,” “speed” or “best for everything” score.
-
 ### Why genomics is an interesting application
 
-Single DNA-base resolution and long context can both matter: a local change and a distant regulatory region may affect what a model should infer. HyenaDNA pretrained a causal decoder on the human reference genome, using individual nucleotide symbols and special tokens, then adapted it to downstream tasks. Its method includes length warm-up, task-specific supervised adaptation and learned soft prompts. Soft prompts are trainable input vectors; they are not newly observed DNA bases. The paper also studied a separately implemented bidirectional ablation. Its main pretrained architecture was not bidirectional. [HyenaDNA](https://arxiv.org/html/2306.15794v2)
+Single DNA-base resolution and long context can both matter: a local change and a distant regulatory region may affect what a model should infer. HyenaDNA pretrained a causal decoder on the human reference genome, using individual nucleotide symbols and special tokens, then adapted it to downstream tasks. Its method includes length warm-up, task-specific supervised adaptation and learned soft prompts. AppendixA3 places learned prompt vectors before embedded DNA and SEP; optimizing these vectors while freezing the backbone is learned adaptation, not an untrained prompt’s guaranteed classifier. Soft prompts are trainable input vectors; they are not newly observed DNA bases. The paper also studied a separately implemented bidirectional ablation. Its main pretrained architecture was not bidirectional. [HyenaDNA](https://arxiv.org/html/2306.15794v2)
 
 The practical workflow is to distinguish the pretraining task from your labeled downstream question, preserve the chosen tokenizer and positional conventions, train or validate the downstream head, and establish an appropriate biological split. A pretrained backbone does not arrive with a valid classifier for every possible new label. Our 60-base experiment demonstrates the trainable mechanism and model inspection; it does not reproduce the paper’s long-context experiments.
 
 ### StripedHyena and StripedHyena 2
 
+Which history belongs to each layer of a hybrid? Follow the different ranges and storage.
+
+**Figure H19 — A striped architecture with different ranges.** Use a repeating operator strip: short, medium, long and occasional attention. Under each type, show its filter representation and decode-state object. It is a conceptual architecture map; the caption must not present it as an exact official layer schedule unless a particular verified configuration is selected.
+
+Finite short/medium filters keep recent values, modal filters keep registers, attention keeps keys and values. Each layer owns its history. Repeating one filter across a channel group does not itself mix channels. This conceptual range map is not an exact checkpoint schedule.
+
 StripedHyena’s 2023 release combined attention, gated convolutions and feed-forward layers. Its recurrent convolution representation and its attention KV cache coexist during generation. The [original release article](https://www.together.ai/blog/stripedhyena-7b) describes the architecture and the measured workloads of that release; its historical timing claims are not timings for the small program here.
 
 The 2025 StripedHyena 2 work takes a more specific mixture: short explicit filters for local mixing, medium explicit filters with decay regularization, and long implicit filters expressed using exponential modes, interleaved with attention. The long modal filters permit recurrent evaluation; finite short/medium filters retain bounded input history. Filter sharing across channel groups helps organize hardware-efficient computation. These are deliberate choices of memory range and algorithm, rather than an assertion that every layer should use the longest possible filter. The work supports the Evo 2 genomic model family. [StripedHyena 2 methods](https://arxiv.org/html/2503.01868v1)
 
-**Figure H19 — A striped architecture with different ranges.** Use a repeating operator strip: short, medium, long and occasional attention. Under each type, show its filter representation and decode-state object. It is a conceptual architecture map; the caption must not present it as an exact official layer schedule unless a particular verified configuration is selected.
-
 ### Complexity is a guide to what to measure
+
+How much work might these routes need? Count operations before treating a curve as a speed measurement.
+
+**Figure H20 — From an equation to a benchmark protocol.** Separate three columns: asymptotic mixing work, actual tensor/storage inventory, and measured workload. A learner fills the workload card with sequence length, width, batch, precision, implementation/version, device, forward/backward/prefill/decode scope and warm-up. Leave timing cells empty until there is an actual measurement.
+
+Cyan marks count L² pairwise work; violet marks L log₂L transform work on an arbitrary common scale. Projections, precision and memory traffic also affect runtime. No elapsed seconds are assigned here.
 
 For $D$ channels and a fixed small number of long-filter stages, convolution mixing has $O(DL\log L)$ work, while dense input/output projections and feed-forward updates add $O(LD^2)$. Filter generation also costs work at every evaluated position. Attention’s pairwise mixing has $O(L^2D)$ work, but optimized exact attention need not materialize an $L\times L$ score array in main device memory. A memory-efficient attention algorithm and a different sequence operator answer different questions.
 
+**Investigation work-count — Specify the workload.** Set sequence length, channel width and batch count; inspect operation scales without claiming latency.
+
+**Investigation work-storage — Specify scalar storage.** Use the same workload, choose bytes/scalar and compare one activation with an explicitly materialized pairwise array.
+
 An operation-count sketch such as $L^2/(L\log_2 L)=L/\log_2 L$ is not a speedup measurement. FFT workspaces, complex arithmetic, dtype, kernel fusion, hardware utilization, batch size and projections all affect wall time. [FlashFFTConv](https://arxiv.org/abs/2311.05908) investigates why FFT-based sequence convolutions need hardware-aware algorithms; later multi-hybrid work also uses blocked direct convolution for selected filter lengths.
 
-**Figure H20 — From an equation to a benchmark protocol.** Separate three columns: asymptotic mixing work, actual tensor/storage inventory, and measured workload. A learner fills the workload card with sequence length, width, batch, precision, implementation/version, device, forward/backward/prefill/decode scope and warm-up. Leave timing cells empty until there is an actual measurement.
+### Hardware-aware convolution still needs a shape contract
+
+The FFT count does not reveal whether a GPU computes efficiently or waits for memory. Read a small factorized transform before interpreting [FlashFFTConv](https://arxiv.org/pdf/2311.05908).
+
+**Figure H28 — Reshape and factor the transform.** Draw a4×4 grid, column/row transforms and twiddle factors, separating reused on-chip tiles from global memory.
+
+Reshaping a sixteen-point transform reorganizes it into smaller transforms. Complex phase factors called twiddles join subproblems; output ordering must restore the intended frequency indices. Tensor-core matrix operations can perform those subtransforms. Fusion can combine input gates, transforms, products and output gates without repeatedly moving intermediates to global high-bandwidth memory. A tiled algorithm may recompute values to save storage: fewer transfers and fewer scalar operations are different objectives. More factorization does not always mean faster execution.
+
+The [official package](https://github.com/HazyResearch/flash-fft-conv) expects contiguous `(N,D,L)` input and `(D,L)` kernel, unlike our batch-first (N,L,D) streams with sequence axis1. Explicitly transpose and make contiguous, then check transform support, dtype and channel constraints. As checked5October2026, its README documents selected power-of-two transform sizes256…4194304, FP16/BF16 long convolution, channel divisibility by16 above32768 and input-length divisibility conditions. The short-depthwise interface has separate restrictions and a documented BF16-backward limitation. Consult the installed release. The complete Torch/SciPy CPU routes above were executed; this GPU route is source-reviewed, not GPU-tested. Sparsifying frequencies or shortening support changes the operator unless equivalence is established; fusing an unchanged operator does not.
+
+### Block matrices: derive support before dropping history
+
+Medium filters can use blocked matrix products instead of full FFTs. Read the already taught Toeplitz object in B×B blocks before assuming just the previous block matters.
+
+**Figure H29 — A second earlier block still contributes.** Show B2/K4 and H2[0,1] at global receiver4/sender1/lag3.
+
+For within-block indices i,k from0…B−1, $H_j[i,k]=h[jB+i-k]$, with coefficients outside0…K−1 zero. H0 uses within-block history; H1 uses the previous block. H2's smallest possible lag is B+1, so H0/H1 alone suffice for a general kernel only when K≤B+1. For B=2,K=4, H2[0,1]=h3 is nonzero. The [StripedHyena2 paper](https://arxiv.org/html/2503.01868v1) describes a two-stage GEMM route, but nearby K≤2B prose does not guarantee this general support claim. Its matrices show why indices must be checked. More support needs more history blocks or a different valid decomposition.
+
+An exact causal FIR across device shards needs up to K−1 preceding input values. If that halo exceeds a shard, several earlier shards may contribute. This is a convolution-history dependency, not an attention KV cache; Ring Attention next teaches another exact communication problem. StripedHyena2's short/medium/long mixture and context-extension training are architecture/training choices, not free outcomes of a long-filter formula.
 
 When diagnosing a model, distinguish an operator bug from a modeling problem. Padding, lag direction, shifted targets, short-filter causality and moving position coordinates can change the intended computation. A correct model can still underfit, overfit, exploit a shortcut or fail on a new context length. Inspect the data roles, learning curves and changed-input behavior before attributing a result to the architecture family.
 
@@ -633,6 +845,11 @@ Fix model dimensions, input lengths, batch, dtype, device and implementation ver
 ## 11. References and another way to learn
 
 These links supplement the self-contained route above. Read a resource for a particular question rather than treating every linked model as a prerequisite.
+
+- [Dive into Deep Learning, convolution layers](https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html): canonical pictures and hand sums for cross-correlation, padding and shared filters. Map its orientation to our lag coefficients.
+- [JuliusO.Smith, DFT convolution](https://ccrma.stanford.edu/~jos/mdft/Convolution.html) and [graphical convolution](https://ccrma.stanford.edu/~jos/mdft/Graphical_Convolution.html): another standard treatment of shifted contributions and the cyclic domain; follow it after the four-sample basis.
+- [NumPy rfft](https://numpy.org/doc/stable/reference/generated/numpy.fft.rfft.html) and [irfft](https://numpy.org/doc/stable/reference/generated/numpy.fft.irfft.html): explicit length, normalization and odd/even reconstruction; executed code records its installed version.
+- [Complete all-branch gradient program](gated_convolution_gradients.py): FFT forward/VJP, direct oracle, ordinary Torch autograd, central differences and the learned-input chain.
 
 - [Hyena Hierarchy — original paper](https://arxiv.org/html/2302.10866v2): the formal hierarchy, synthetic task design, filter parameterization and matrix interpretation. Read §3 after the gate example; Appendix B derives the conditional matrix, and Appendix D explains frequency-rich initialization.
 - [Hazy Research’s illustrated Hyena introduction](https://hazyresearch.stanford.edu/blog/2023-03-07-hyena): a more informal creator explanation of why gating and long filters were combined. Its reported comparisons describe the 2023 experiments.

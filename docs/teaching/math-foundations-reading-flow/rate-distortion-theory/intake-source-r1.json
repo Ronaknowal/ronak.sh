@@ -1,0 +1,101 @@
+{
+  "status": "INTAKE_IN_PROGRESS",
+  "author": "/root",
+  "topicId": "rate-distortion-theory",
+  "syllabusPosition": 28,
+  "mode": "full",
+  "createdAt": "2026-10-09T15:57:07.211288+00:00",
+  "inputs": {
+    "src/learn/data/topics/rate-distortion-theory.jsx": {
+      "sha256": "9b05242dc7ee29a0c8e0642003f67e25561256bd56f67a8bd433c0f297e624fb",
+      "bytes": 51267,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/src/learn/data/topics/rate-distortion-theory.jsx"
+    },
+    "src/learn/data/rate-distortion-models.js": {
+      "sha256": "0ed6cfa45289711a49e1b0124bce69dcd9e325efd2a1d77da5fd7b8ce6a6dba8",
+      "bytes": 13175,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/src/learn/data/rate-distortion-models.js"
+    },
+    "src/learn/data/rate-distortion-examples.js": {
+      "sha256": "65810df3f1f96dc34b384f1e3c326e8c5afb3fef7bf57ef1870e2d8839b4a882",
+      "bytes": 12232,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/src/learn/data/rate-distortion-examples.js"
+    },
+    "src/learn/components/lesson-labs/RateDistortionLabs.jsx": {
+      "sha256": "17c4df75afce9b134a7a39af3d755073b46026b5c272375319726ce5d2e3db47",
+      "bytes": 24417,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/src/learn/components/lesson-labs/RateDistortionLabs.jsx"
+    },
+    "src/learn/components/lesson-labs/rate-distortion-labs.css": {
+      "sha256": "2fe5c0b0f141874beccf6bd6d69628525dc52653c15b54d2be69a0e4c69a9112",
+      "bytes": 8178,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/src/learn/components/lesson-labs/rate-distortion-labs.css"
+    },
+    "src/learn/data/curriculum/blueprints/rate-distortion-theory.js": {
+      "sha256": "cbd19a010a36f713edf06bb6d5dee0e0aa4c723ff736d730c94f6f2b86e1c581",
+      "bytes": 3338,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/src/learn/data/curriculum/blueprints/rate-distortion-theory.js"
+    },
+    "docs/teaching/RATE-DISTORTION-LESSON-DESIGN.md": {
+      "sha256": "603ea76f105dd5247bfaa743c18ad09dbf9fe5a49e0483981c54ff61ff6879a3",
+      "bytes": 13879,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/docs/teaching/RATE-DISTORTION-LESSON-DESIGN.md"
+    },
+    "docs/teaching/RATE-DISTORTION-VERIFICATION.md": {
+      "sha256": "e515a4e7d7307398e5be271001b7571a2fcc28de612d6172d57a7099df517943",
+      "bytes": 10827,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/docs/teaching/RATE-DISTORTION-VERIFICATION.md"
+    },
+    "docs/teaching/RATE-DISTORTION-INDEPENDENT-REVIEW.md": {
+      "sha256": "16713cf966fc4684b296adbad8a647c30a4e13adf87476f400c6e630c2fd2b86",
+      "bytes": 7741,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/docs/teaching/RATE-DISTORTION-INDEPENDENT-REVIEW.md"
+    },
+    "docs/teaching/evidence/rate-distortion-author-review.json": {
+      "sha256": "044373d2804c8542a524d5b123c43a8d4b50f521d35362fca5dc36ebab8194f8",
+      "bytes": 49535,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/docs/teaching/evidence/rate-distortion-author-review.json"
+    },
+    "docs/teaching/topic-notes/sampling-aliasing-and-quantization-in-neural-recordings.md": {
+      "sha256": "cede8866f977521d8ac629ff7d74f2c4908be16ccad1ffaa3d5bb2b49073c4d1",
+      "bytes": 2682,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/docs/teaching/topic-notes/sampling-aliasing-and-quantization-in-neural-recordings.md"
+    },
+    "skills/lesson-authoring/SKILL.md": {
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "bytes": 20953,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-frozen-r1/skills/lesson-authoring/SKILL.md"
+    }
+  },
+  "boundary": "Research/design only. No content or implementation promotion; old scientific outputs are reused without replay.",
+  "programmes": {
+    "originalBinary": {
+      "sourceSha256": "058344ddba3fcf625bac8b552f09d9409827346e3254c48f2a82d1d0cbc16df4",
+      "stdoutSha256": "e7b0a8d0db158dbbd7b236dbdf40cfb34c743b83cf036479be2c166321b9beae"
+    },
+    "blockCode": {
+      "sourceSha256": "48da6af7786e510a5e1616d295105205dd07957aab9891ea956e26c4d09bf898",
+      "stdoutSha256": "49bd99a7e0254e19a8469c39185de1babefb9d3906aa35c385d021383c548063"
+    },
+    "biasedChannel": {
+      "sourceSha256": "668d1c0219cf056433f820810c4ed2e3ea83c533a3cda812865936441258a027",
+      "stdoutSha256": "481ab52a623b20f11019ce48e7841795e1bb487c204547eec983099a4ec36c68"
+    },
+    "finiteOptimizer": {
+      "sourceSha256": "c8d39b15bbb6287d340d95cfac85fd6387d5e89d471870a98dc09ceea5d996aa",
+      "stdoutSha256": "1a4cddc48924b1bc89a7575c93cac1869ca59344e345d9ef7f57cbb476adb7fa"
+    },
+    "gaussianAllocation": {
+      "sourceSha256": "a9ba00731d80bc87e91c8914eb44685e0c62197fc6e2b7ac93d913a26759894a",
+      "stdoutSha256": "442025785faefb46bd81cc618fb50463e3e6d3a3df29f0306a922ffe20f7f780"
+    },
+    "fidelity": {
+      "sourceSha256": "3566c7d7e29daff01b16038ac7abaec44f18e5c2dfda955a673555150c7a87ea",
+      "stdoutSha256": "ab85710b1dda06ed7315ed85ed8f919a0f3bb645f54d5bbd28c6cefaf1829a38"
+    },
+    "bitstream": {
+      "sourceSha256": "9e73dea991c20b0a9eaef833d446a68b7f156a20f0693db687a25858f7162466",
+      "stdoutSha256": "7fe18cc5a3251628ff96b1a133611ca3ef76bfde5b840f3e32498387e375bb52"
+    }
+  }
+}

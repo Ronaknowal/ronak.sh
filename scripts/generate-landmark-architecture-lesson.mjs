@@ -1,5 +1,12 @@
 // Static authoring conversion; no Markdown parser or training loop ships to the reader.
+// Historical: this rendered revision 4 from docs/teaching/drafts/<id>/lesson.md. Since the
+// beginner revision (revision 5) the production JSX is the edited content source, so this
+// script refuses to overwrite it unless explicitly asked to reproduce revision 4.
 import { readFileSync, writeFileSync } from 'node:fs';
+if (!process.argv.includes('--reproduce-revision-4')) {
+  console.error('Refusing to overwrite the revision-5 lesson. Edit src/learn/data/topics/<id>.jsx directly; pass --reproduce-revision-4 only to regenerate the historical version elsewhere.');
+  process.exit(1);
+}
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 const id = 'landmark-architectures-lenet-alexnet-vgg-resnet-efficientnet';
 const assets = `public/learn-assets/${id}/`;

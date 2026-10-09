@@ -1,0 +1,1522 @@
+{
+  "cold_load_seconds": 53.9901389000006,
+  "first_batch4_seconds": 5.681102600006852,
+  "warmups_batch1": 3,
+  "warm": {
+    "1": {
+      "seconds": [
+        4.271604699984891,
+        2.817352400015807,
+        6.298833500011824,
+        5.677975700004026,
+        3.026370300009148,
+        1.373428299993975,
+        1.7062436999985948,
+        3.0038734000117984,
+        2.0853759000019636,
+        1.9103488000109792,
+        1.7635446000203956,
+        2.1286773000028916,
+        1.7715805000043474,
+        3.2367067000013776,
+        3.9541889000101946,
+        3.446509400004288,
+        2.8293751000019256,
+        2.7205854000058025,
+        2.086493899987545,
+        1.4357943999930285
+      ],
+      "n": 20,
+      "median_seconds": 2.7689689000108046,
+      "p95_seconds": 5.709018590004416,
+      "examples_per_second": 0.34755491614828404
+    },
+    "4": {
+      "seconds": [
+        4.170621899975231,
+        4.404747299995506,
+        4.655732600018382,
+        7.251300200005062,
+        8.400664499989944
+      ],
+      "n": 5,
+      "median_seconds": 4.655732600018382,
+      "p95_seconds": 8.170791639992967,
+      "examples_per_second": 0.6924472510566353
+    }
+  },
+  "rss_after_bytes": 1511243776,
+  "hardware": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 165 Stepping 2, GenuineIntel",
+    "logical_cpus": 12
+  },
+  "threads": 4,
+  "parameters": 421293827,
+  "dtype": "float32",
+  "backend": "eager",
+  "native_temperature": [
+    1.6369030475616455,
+    1.2514300346374512,
+    1.983399510383606
+  ],
+  "native_temperature_by_options": {
+    "choice:3-5": 1.7601518630981445,
+    "choice:6-10": 1.0000158548355103,
+    "score:3-5": 1.2514300346374512,
+    "noul:2": 1.983399510383606,
+    "choice:11+": 0.5,
+    "choice:2": 1.9063563346862793
+  },
+  "forward_events_before_timings": [
+    {
+      "input_shape": [
+        4,
+        130
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        133
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        127
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        129
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        127
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        134
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        129
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        140
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        136
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        129
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        128
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        140
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        137
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        132
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        135
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        126
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        133
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        130
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        126
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        129
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        146
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        130
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        127
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        127
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        125
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        157
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        131
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        142
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        148
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        128
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        134
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        137
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        138
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        127
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        132
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        126
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        128
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        127
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        125
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        129
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        131
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        126
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        141
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        134
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        131
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        129
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        130
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        132
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        131
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        127
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        129
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        129
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        151
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        144
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        143
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        138
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        144
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        145
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        131
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        128
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        4,
+        130
+      ],
+      "marker_shape": [
+        4,
+        6
+      ],
+      "widths": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        124
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        128
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        130
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        127
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        130
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        136
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        114
+      ],
+      "marker_shape": [
+        1,
+        5
+      ],
+      "widths": [
+        5
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        141
+      ],
+      "marker_shape": [
+        1,
+        7
+      ],
+      "widths": [
+        7
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        123
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        129
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        106
+      ],
+      "marker_shape": [
+        1,
+        5
+      ],
+      "widths": [
+        5
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        134
+      ],
+      "marker_shape": [
+        1,
+        7
+      ],
+      "widths": [
+        7
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        131
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        137
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        117
+      ],
+      "marker_shape": [
+        1,
+        5
+      ],
+      "widths": [
+        5
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        142
+      ],
+      "marker_shape": [
+        1,
+        7
+      ],
+      "widths": [
+        7
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        126
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        132
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        110
+      ],
+      "marker_shape": [
+        1,
+        5
+      ],
+      "widths": [
+        5
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        137
+      ],
+      "marker_shape": [
+        1,
+        7
+      ],
+      "widths": [
+        7
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        181
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        151
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        512
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        512
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        57
+      ],
+      "marker_shape": [
+        1,
+        2
+      ],
+      "widths": [
+        2
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        148
+      ],
+      "marker_shape": [
+        1,
+        8
+      ],
+      "widths": [
+        8
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        108
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        1,
+        107
+      ],
+      "marker_shape": [
+        1,
+        6
+      ],
+      "widths": [
+        6
+      ],
+      "grad_enabled": false
+    },
+    {
+      "input_shape": [
+        6,
+        131
+      ],
+      "marker_shape": [
+        6,
+        6
+      ],
+      "widths": [
+        6,
+        3,
+        2,
+        6,
+        3,
+        2
+      ],
+      "grad_enabled": false
+    }
+  ],
+  "boundary": "local CPU end-to-end calls; excludes downloading; RSS is a snapshot, not peak allocation"
+}

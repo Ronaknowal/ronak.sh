@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const b='docs/teaching/llm-architecture-training/speculative-decoding/native-cache-correction';
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const roots=[['inputs.json','c592fc6e039d73f5ed76a7ae06da366fc63ea5ee9143da390286e63f41b7ab7f'],['independent-acceptance.json','8f5366a420a50f4cf9723a066eb602e75b6d2959b77a7372f84268844504cc9c'],['independent-review.md','639a39dea7e8b230cb1da29102fa9da79b9c71b048f9e85ff4c29e9eb6643365'],['independent-checks.json','8e0366ab5a2ed36384c772072c6ede1ce9b3ef4fce94b41a672619f983eb0f77']].map(([p,sha256])=>({path:`${b}/${p}`,sha256}));
+const packet=JSON.parse(fs.readFileSync(roots[0].path));
+for(const f of [...roots,...packet.files])if(hash(f.path)!==f.sha256)throw Error(`Changed: ${f.path}`);
+const record={accepted:true,author:'root',scope:'Only the previously unstarted sample diagnostic, then the original fixed study once. No content/runtime acceptance.',files:roots,guardedBindings:packet.files.length,stages:['sample','study'],reading:'Root personally read complete author correction, proposed continuation helper, plan, diagnosis, actual failed native terminal and all JSONL events, and entire SAME independent review/acceptance. Unchanged full program semantics compose the original DIFFERENT review and prior closures.',bounds:'One sample diagnostic seed409/K3/cap8; then32 warmups and96 measurements under unchanged original protocol. No greedy retry, replay of cache/tree/heads/finite work, new arm/seed/model/optimizer step or retry after another scientific failure.',qualification:'Original greedy attempt completed one round/ID13 and then failed before second-round forward. Retain its failure and original source identity. Dynamic storage remains, with initialization selection set to None so a carried cache is accepted.'};
+fs.writeFileSync(`${b}/execution-accepted-root.json`,JSON.stringify(record,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({accepted:true,bindings:packet.files.length,sha256:hash(`${b}/execution-accepted-root.json`)}));

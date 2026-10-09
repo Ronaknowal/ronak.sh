@@ -1,0 +1,82 @@
+{
+  "seed": 17,
+  "steps": 300,
+  "torch": "2.14.0+cpu",
+  "vocabulary": 64,
+  "train_characters": 8531,
+  "heldout_characters": 1917,
+  "heldout_unknown": 1,
+  "context": 48,
+  "parameters": 30848,
+  "history": [
+    {
+      "step": 0,
+      "train": {
+        "nll_sum": 36110.88478541374,
+        "targets": 8530,
+        "mean_nats": 4.233397981877344,
+        "perplexity": 68.95112924738956
+      },
+      "heldout": {
+        "nll_sum": 8101.977994441986,
+        "targets": 1916,
+        "mean_nats": 4.228589767454063,
+        "perplexity": 68.6203931953569
+      }
+    },
+    {
+      "step": 100,
+      "train": {
+        "nll_sum": 21810.4689797163,
+        "targets": 8530,
+        "mean_nats": 2.5569131277510317,
+        "perplexity": 12.89594766796743
+      },
+      "heldout": {
+        "nll_sum": 5033.468997478485,
+        "targets": 1916,
+        "mean_nats": 2.627071501815493,
+        "perplexity": 13.833200025558472
+      }
+    },
+    {
+      "step": 200,
+      "train": {
+        "nll_sum": 20616.449092924595,
+        "targets": 8530,
+        "mean_nats": 2.416934243015779,
+        "perplexity": 11.211435038339225
+      },
+      "heldout": {
+        "nll_sum": 4854.428170681,
+        "targets": 1916,
+        "mean_nats": 2.5336263938836114,
+        "perplexity": 12.59911273831074
+      }
+    },
+    {
+      "step": 300,
+      "train": {
+        "nll_sum": 20192.943210877478,
+        "targets": 8530,
+        "mean_nats": 2.367285253326785,
+        "perplexity": 10.668390957434527
+      },
+      "heldout": {
+        "nll_sum": 4830.136967658997,
+        "targets": 1916,
+        "mean_nats": 2.520948312974424,
+        "perplexity": 12.440388453317402
+      }
+    }
+  ],
+  "bigram": {
+    "nll_sum": 4784.862787929931,
+    "targets": 1916,
+    "mean_nats": 2.497318782844432,
+    "perplexity": 12.149873799308596
+  },
+  "uniform_ppl": 64,
+  "greedy": "Alice the the the the the the the the t the the the the the the the the the the the the the the the the t",
+  "sample_temperature_1": "Alice napucordt on’rt a an tly, d gasee,”-tin-wnd pico aitof shk tenolas w poind y “pt  in sigin sce they"
+}

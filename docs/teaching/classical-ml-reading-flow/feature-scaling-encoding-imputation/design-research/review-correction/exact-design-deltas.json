@@ -1,0 +1,85 @@
+{
+  "scope": "Only these sequential byte replacements; unchanged bytes exact. Apply windows in order forward or reverse order inverse.",
+  "files": [
+    {
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/reading-flow-design.md",
+        "bytes": 22522,
+        "sha256": "f643f0b1a735e26f20e674f3de917a3f0d6b63ef95504b6c2120f151c9c3418c"
+      },
+      "successor": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/reading-flow-design.md",
+        "bytes": 22597,
+        "sha256": "a970f6d0ec2d13b61b3947b732dc3c1768462c2c8fbb51da30f7395e430b6f8f"
+      },
+      "windows": [
+        {
+          "offsetAtStep": 12776,
+          "oldBase64": "RDE5IHBhcmFsbGVsIG51bWVyaWMvY2F0ZWdvcmljYWwgYnJhbmNoZXMgam9pbiBpbnRvIGEgMcOXNyByb3c=",
+          "newBase64": "RDE5IHBhcmFsbGVsIG51bWVyaWMvY2F0ZWdvcmljYWwgYnJhbmNoZXMgam9pbiBQMeKAmXMgMyszPTYgY29vcmRpbmF0ZXMsIHRoZW4gZXhwbGljaXRseSBzd2l0Y2ggdG8gdGhlIHJlYWwgcGVuZ3VpbuKAmXMgNCszPTcgY29vcmRpbmF0ZXM="
+        }
+      ],
+      "forwardAndInverseExact": true
+    },
+    {
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/programmes-practice-and-resources.md",
+        "bytes": 33142,
+        "sha256": "71f0ee57f117166796343b3e8d41abff5442146a653935796ed288d15707deeb"
+      },
+      "successor": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/programmes-practice-and-resources.md",
+        "bytes": 34270,
+        "sha256": "f2f792ee23becb0a9ba2d85cd87b44b80f48dd4aee5f9f8290eb14234768bc4a"
+      },
+      "windows": [
+        {
+          "offsetAtStep": 10763,
+          "oldBase64": "T3JkaW5hcnkga21lYW5zIHJvdXRlIGlzIGxhYmVsbGVkIHNlcGFyYXRlbHksIHdpdGggc3VwcGxpZWQgY2VudHJlcyBhbmQgbl9pbml0PTEgZm9yIGEgY29udHJvbGxlZCBjb21wYXJpc29uOyBnZW5lcmljIGRlZmF1bHRzIGRvIG5vdCBpbXBseSBlcXVhbCBmaXR0ZWQgZWRnZXMu",
+          "newBase64": "Q29udHJvbGxlZCBzdXBwbGllZC1jZW50cmVzIGNvbXBhcmlzb24gdXNlcyBgc2tsZWFybi5jbHVzdGVyLktNZWFucyhuX2NsdXN0ZXJzPWxlbihjZW50cmVzKSxpbml0PWNlbnRyZXMsbl9pbml0PTEsYWxnb3JpdGhtPSdsbG95ZCcsbWF4X2l0ZXI9ZXhwbGljaXQsdG9sPWV4cGxpY2l0KWAgb24gb25lLWNvbHVtbiBkYXRhLCB3aXRoIGNlbnRyZXMgc2hhcGVkIChrLDEpLiBTb3J0IGZpbmFsIGNlbnRyZXMgYW5kIGZvcm0gbWlkcG9pbnQgZWRnZXM7IGRvY3VtZW50IHN0b3BwaW5nL3RpZS9lbXB0eS1jbHVzdGVyIGRpZmZlcmVuY2VzLiBTZXBhcmF0ZSBgS0JpbnNEaXNjcmV0aXplcihzdHJhdGVneT0na21lYW5zJywuLi4pYCBvd25zIGl0cyBpbml0aWFsaXphdGlvbiBzZW1hbnRpY3MgYW5kIGFjY2VwdHMgbmVpdGhlciBpbml0IG5vciBuX2luaXQ7IGdlbmVyaWMgZGVmYXVsdHMgZG8gbm90IGltcGx5IGVxdWFsIGVkZ2VzLg=="
+        },
+        {
+          "offsetAtStep": 18567,
+          "oldBase64": "S2VlcCB0aGlzIHN1cHBvcnRlZCB0b3kgYWxnb3JpdGhtIGRpc3RpbmN0IGZyb20gb3JkaW5hcnkgbGlicmFyeSBpbml0aWFsaXphdGlvbi9kZWZhdWx0IGNvbnZlcmdlbmNlIGRldGFpbHMu",
+          "newBase64": "VGhlIGNvbnRyb2xsZWQgb3JkaW5hcnkgY29tcGFyYXRvciBpcyBgc2tsZWFybi5jbHVzdGVyLktNZWFuc2Agd2l0aCBleHBsaWNpdCBzdXBwbGllZCBjZW50cmVzLCBuX2luaXQ9MSBhbmQgYWxnb3JpdGhtPSdsbG95ZCc7IGRlcml2ZSBzb3J0ZWQtY2VudHJlIG1pZHBvaW50IGVkZ2VzIHNlcGFyYXRlbHkuIFJlY29yZCBtYXhfaXRlci90b2wsIGZpbmFsIGRpYWdub3N0aWNzIGFuZCBzdG9wcGluZy90aWUvZW1wdHktY2x1c3RlciBkaWZmZXJlbmNlcyBiZWZvcmUgY2xhaW1pbmcgYSBzdXBwb3J0ZWQgbWF0Y2guIGBLQmluc0Rpc2NyZXRpemVyKHN0cmF0ZWd5PSdrbWVhbnMnLC4uLilgIHJlbWFpbnMgYSBzZXBhcmF0ZSBiaW5uaW5nIHJvdXRlIHdpdGggaXRzIG93biBpbml0aWFsaXphdGlvbiBzZW1hbnRpY3MsIG5vdCBhIHN1cHBsaWVkLWNlbnRyZXMgY29tcGFyYXRvci4="
+        },
+        {
+          "offsetAtStep": 21642,
+          "oldBase64": "UHJlc2VydmUgdGhlaXIgb3JpZ2luYWwgaWRlbnRpdGllcyBieSBtYXBwaW5nIG9sZCBwcmFjdGljZSBudW1iZXJzIHRvIFQy4oCTVDEwIGJlbG93IHJhdGhlciB0aGFuIHNpbGVudGx5IGRlbGV0aW5nIHRoZW07IGZpbmFsIGxlYXJuZXIgbnVtYmVyaW5nIGNhbiByZW1haW4gb2xkMeKAkzkgcGx1cyBhcHBlbmRlZCB0YXNrcy4=",
+          "newBase64": "UHJlc2VydmUgb3JpZ2luYWwgcHJhY3RpY2UgaWRlbnRpdGllcyBleHBsaWNpdGx5OiAx4oaSVDIsIDLihpJUMywgM+KGklQ0LCA04oaSVDUsIDXihpJUNiwgNuKGklQ4LCA34oaSVDEwLCA44oaSVDksIDnihpJUMjQ7IHRoZSBvcmlnaW5hbCBpbmRpY2F0b3IgaW1wbGVtZW50YXRpb24gZXh0ZW5zaW9uIG1hcHMgdG8gVDcuIEZpbmFsIGxlYXJuZXIgbnVtYmVyaW5nIGNhbiByZW1haW4gb2xkMeKAkzkgcGx1cyBhcHBlbmRlZCB0YXNrcy4="
+        },
+        {
+          "offsetAtStep": 23826,
+          "oldBase64": "fFQ5IHJldGFpbmVkIG5vbmxpbmVhcnxZSiB4PeKIkjMszrsyIGFuZM67MC584oiSbG40IHZlcnN1c+KIkig0wrLiiJIxKS8yPeKIkjcuNTsgaWRlbnRpZnkgYnJhbmNoIGJlZm9yZSBldmFsdWF0aW5nLnw=",
+          "newBase64": "fFQ5IHJldGFpbmVkIG5vbmxpbmVhcnxSZXRhaW4gb3JpZ2luYWwgcHJhY3RpY2U4OiBldmFsdWF0ZSBZZW/igJNKb2huc29uIGF0IM67PTEgb24gKzMgYW5kIOKIkjMsIGFuZCBleHBsYWluIHdoeSBuZWdhdGl2ZSBpbnB1dHMgZG8gbm90IGdlbmVyaWNhbGx5IHVzZSBhIHNxdWFyZSByb290LiBBZGRpdGlvbmFsIGNoYW5nZWQgY2FzZXM6IHg94oiSMyBhdCDOuzIgYW5kzrswLnxQb3NpdGl2ZSBicmFuY2ggKCgzKzEpXjHiiJIxKS8xPTM7IG5lZ2F0aXZlIGJyYW5jaCDiiJIoKDErMyleKDLiiJIxKeKIkjEpLygy4oiSMSk94oiSMy4gQm90aCBicmFuY2hlcyBnaXZlIHRoZSBpZGVudGl0eTsgdGhlIG5lZ2F0aXZlIGV4cG9uZW50IGRlcGVuZHMgb24gMuKIks67LCB3aXRoIGEgbG9nYXJpdGhtaWMgbGltaXQgYXQgzrsyIHJhdGhlciB0aGFuIGEgZml4ZWQgc3F1YXJlIHJvb3QuIEFkZGl0aW9uYWwgY2FzZXMgZ2l2ZSDiiJJsbjQgYW5kIOKIkig0wrLiiJIxKS8yPeKIkjcuNSByZXNwZWN0aXZlbHk7IGlkZW50aWZ5IGVhY2ggYnJhbmNoIGZpcnN0Lnw="
+        }
+      ],
+      "forwardAndInverseExact": true
+    },
+    {
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/research-and-coverage.md",
+        "bytes": 25654,
+        "sha256": "ce2746c8bda627e007c769f1ae05e0383c32f727092fbca33e591704c6727145"
+      },
+      "successor": {
+        "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+        "bytes": 26499,
+        "sha256": "f4573042f00f83f83f1830646939649dd677d57f9232015c0c71330d171560d6"
+      },
+      "windows": [
+        {
+          "offsetAtStep": 13213,
+          "oldBase64": "QWN0dWFsUnVsZXJMYWIgY2xpcHMgY2lyY2xlIHJhZGl1cyB0b2ZyYW1lOyBuZXdmdWxsZ2VvbWV0cnltdXN0bm90Y2FwIGNvbXB1dGVkcmFkaWku",
+          "newBase64": "Q3VycmVudCBSdWxlckxhYiBoYXMgYSByYWRpdXMtY2FwIGd1YXJkLCBidXQgaXRzIGZpbml0ZSAyRCBvZmZzZXRzIGFuZCByZWFjaD0xLjM1w5dtYXhpbXVtIGNvb3JkaW5hdGUgaW1wbHkgcmFkaXVz4omkc3FydCgyKS8xLjM1w5cxMDTiiYgxMDguOTVweCwgYmVsb3cgdGhlMTI0cHggY2FwLiBObyByZWFjaGFibGUgY3VycmVudCBjbGlwcGluZyBmYWlsdXJlIHdhcyBlc3RhYmxpc2hlZC4gRDA0IGV4cGxpY2l0bHkgZ3VhcmFudGVlcyB1bmNhcHBlZCBjb21wbGV0ZS1yYWRpdXMgZ2VvbWV0cnkvZnVsbC1kb21haW4gY292ZXJhZ2UgaW4gdGhlIHN1Y2Nlc3Nvci4="
+        },
+        {
+          "offsetAtStep": 6990,
+          "oldBase64": "fFtLQmluc0Rpc2NyZXRpemVyMS45LjFd",
+          "newBase64": "fFtLTWVhbnMxLjkuMV0oaHR0cHM6Ly9zY2lraXQtbGVhcm4ub3JnL3N0YWJsZS9tb2R1bGVzL2dlbmVyYXRlZC9za2xlYXJuLmNsdXN0ZXIuS01lYW5zLmh0bWwpOiBjb3JyZWN0aW9uLXRpbWUgc2VsZWN0ZWQgc2lnbmF0dXJlL2luaXQvbl9pbml0L21heF9pdGVyL3RvbC9hbGdvcml0aG0vc3RhdGUgbm90ZXMsIHJldHVybmVkIGxpbmVzNjM14oCTNzI0IGFuZDc1MzsgW0tCaW5zRGlzY3JldGl6ZXIxLjkuMV0oaHR0cHM6Ly9zY2lraXQtbGVhcm4ub3JnL3N0YWJsZS9tb2R1bGVzL2dlbmVyYXRlZC9za2xlYXJuLnByZXByb2Nlc3NpbmcuS0JpbnNEaXNjcmV0aXplci5odG1sKTogc2lnbmF0dXJlL3N0cmF0ZWd5L3F1YW50aWxlIHBhcmFtZXRlcnM2MzXigJM2NzcgcmVyZWFkLnxSMyBjb21wYXJhdG9yIGJlbG9uZ3MgdG8gS01lYW5zOyBLQmlucyBoYXMgbm8gc3VwcGxpZWQtY2VudHJlcyBpbml0IG9yIG5faW5pdCBwYXJhbWV0ZXIuIFAxMCByZWNvcmRzIHRoZSB0d28gZGlzdGluY3Qgcm91dGVzIGFuZCBjb25maWd1cmVkIGNvbXBhcmlzb24gbGltaXRzLiBOYXJyb3cgb2ZmaWNpYWwgQVBJIHJlYWRpbmcgb25seTsgbm8gb2xkIGNhbXBhaWduIG9yIG5ldyBmaXQufA0KfFtLQmluc0Rpc2NyZXRpemVyMS45LjFd"
+        }
+      ],
+      "forwardAndInverseExact": true
+    }
+  ]
+}

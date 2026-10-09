@@ -1,0 +1,141 @@
+{
+  "beforeSelected": {
+    "revision": 2,
+    "deliveryMode": "full",
+    "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+    "content": {
+      "status": "complete",
+      "completedAt": "2026-09-21T15:16:47.103Z",
+      "manuscript": "src/learn/data/topics/dynamical-systems-theory-chaos.jsx",
+      "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "files": {
+        "src/learn/data/topics/dynamical-systems-theory-chaos.jsx": "26b3c22fb1570d389fd82c6fb8c69882b0840b7ef148c89f4d9155c9c2ea49a4",
+        "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+        "src/learn/data/curriculum/blueprints/dynamical-systems-theory-chaos.js": "f742827de99291801cd843f5fc9faf2a0dd9e140b056bbad4b3aa1a4afc7b283",
+        "src/learn/data/dynamical-systems-examples.js": "3af5b2d3e6303ea9193712b9a6786be7361ffa9373b997efc67b28bae39bbbf1"
+      }
+    },
+    "implementation": {
+      "status": "complete",
+      "completedAt": "2026-09-21T15:16:47.105Z",
+      "reviewedFiles": {
+        "src/learn/data/topics/dynamical-systems-theory-chaos.jsx": "26b3c22fb1570d389fd82c6fb8c69882b0840b7ef148c89f4d9155c9c2ea49a4",
+        "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+        "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+        "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+        "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+        "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+        "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+        "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+        "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+        "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+        "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+        "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+        "src/learn/components/lesson-labs/DynamicalSystemsLabs.jsx": "a67fa41772255058e98331338d70fcbdab2d8bbb9a83db1fa24d6305995976e8",
+        "src/learn/data/dynamical-systems-models.js": "b5bf068e357558100f73f5336b53a43382d0a1decc73a3aaa1467f494732909f",
+        "src/learn/components/lesson-labs/dynamical-systems-labs.css": "719e3bf2f52acfdffaee002f60d95e5991d20f045b1fe0c25005f728818b7d87",
+        "src/learn/data/dynamical-systems-examples.js": "3af5b2d3e6303ea9193712b9a6786be7361ffa9373b997efc67b28bae39bbbf1",
+        "src/learn/data/curriculum/blueprints/dynamical-systems-theory-chaos.js": "f742827de99291801cd843f5fc9faf2a0dd9e140b056bbad4b3aa1a4afc7b283"
+      }
+    },
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete",
+          "evidence": [
+            "docs/teaching/LESSON-VISUAL-LAYOUT-REVIEW.md",
+            "docs/teaching/evidence/lesson-visual-layout-review.json"
+          ]
+        },
+        "record": "docs/teaching/DYNAMICAL-SYSTEMS-VERIFICATION.md",
+        "legacyReview": true,
+        "nextAction": "Both phases have recorded completion; use the current user request for the next scope. Visual-layout follow-up reviewed on 14 September 2026; see docs/teaching/LESSON-VISUAL-LAYOUT-REVIEW.md for the current presentation evidence and its limits."
+      }
+    ],
+    "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+  },
+  "afterSelected": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "record": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-accepted-root-r2.json",
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete",
+          "evidence": [
+            "docs/teaching/LESSON-VISUAL-LAYOUT-REVIEW.md",
+            "docs/teaching/evidence/lesson-visual-layout-review.json"
+          ]
+        },
+        "record": "docs/teaching/DYNAMICAL-SYSTEMS-VERIFICATION.md",
+        "legacyReview": true,
+        "nextAction": "Both phases have recorded completion; use the current user request for the next scope. Visual-layout follow-up reviewed on 14 September 2026; see docs/teaching/LESSON-VISUAL-LAYOUT-REVIEW.md for the current presentation evidence and its limits."
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:47.103Z",
+          "manuscript": "src/learn/data/topics/dynamical-systems-theory-chaos.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/dynamical-systems-theory-chaos.jsx": "26b3c22fb1570d389fd82c6fb8c69882b0840b7ef148c89f4d9155c9c2ea49a4",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/dynamical-systems-theory-chaos.js": "f742827de99291801cd843f5fc9faf2a0dd9e140b056bbad4b3aa1a4afc7b283",
+            "src/learn/data/dynamical-systems-examples.js": "3af5b2d3e6303ea9193712b9a6786be7361ffa9373b997efc67b28bae39bbbf1"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:47.105Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/dynamical-systems-theory-chaos.jsx": "26b3c22fb1570d389fd82c6fb8c69882b0840b7ef148c89f4d9155c9c2ea49a4",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/DynamicalSystemsLabs.jsx": "a67fa41772255058e98331338d70fcbdab2d8bbb9a83db1fa24d6305995976e8",
+            "src/learn/data/dynamical-systems-models.js": "b5bf068e357558100f73f5336b53a43382d0a1decc73a3aaa1467f494732909f",
+            "src/learn/components/lesson-labs/dynamical-systems-labs.css": "719e3bf2f52acfdffaee002f60d95e5991d20f045b1fe0c25005f728818b7d87",
+            "src/learn/data/dynamical-systems-examples.js": "3af5b2d3e6303ea9193712b9a6786be7361ffa9373b997efc67b28bae39bbbf1",
+            "src/learn/data/curriculum/blueprints/dynamical-systems-theory-chaos.js": "f742827de99291801cd843f5fc9faf2a0dd9e140b056bbad4b3aa1a4afc7b283"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      }
+    ],
+    "content": {
+      "status": "in-progress"
+    },
+    "implementation": {
+      "status": "not-started"
+    },
+    "nextAction": "Write the complete revised manuscript and actionable visual specifications from design-r2. Preserve eleven full old programme pairs; exact print-only successors for nine, execute only the new vector RK4 teaching programme and new practice once. Independent whole-content review precedes runtime. Explicit staged-state ownership, exact fixtures and clockwise numerical oscillator convention are mandatory carryforwards."
+  },
+  "ledgerBefore": "7f9feba9aa8448cf9718f3487a2aa660fcdc9b7f6d0a17e3fc726c64e8d44d17",
+  "ledgerAfter": "34faa60ff99cdd8dd7e10d61905a937158b96e534cf286f39d1601663b62787f",
+  "foreignRowsPreserved": 234,
+  "acceptance": {
+    "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-accepted-root-r2.json",
+    "sha256": "a1825316880f8b8f31416dadf3424d003b737a5731777193aee653fc9c35869d"
+  }
+}

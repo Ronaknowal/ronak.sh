@@ -1,0 +1,103 @@
+{
+  "schema": "classical21-design-source-retention/v1",
+  "at": "2026-10-09T15:38:40.453017+00:00",
+  "status": "SOURCE_IDENTITY_ONLY_NO_OLD_NUMERICAL_REPLAY",
+  "protected_manifest": {
+    "path": "../original-manifest.json",
+    "sha256": "c2edbd99eb469d1af4d19934ea9c926a8508bc61e28a81e5ddd8c4b32e61b6c1",
+    "files": 28
+  },
+  "guarded_sources_unchanged": true,
+  "example_container": {
+    "path": "src/learn/data/validation-examples.js",
+    "raw_bytes": 7327,
+    "raw_sha256": "3c194949f3344351ece8d33c5605146d7d36470119c3ee7d290130733511563c",
+    "lf_bytes": 7297,
+    "lf_sha256": "d5c8677e86c0b7513ef6748624b26a910062b94925b53a29b41ba93ce556394b",
+    "historical_native_container_matches_lf": true
+  },
+  "programs": [
+    {
+      "id": "tinySplitter",
+      "file": "cv_tiny.py",
+      "code_bytes": 988,
+      "code_sha256": "e067a71d2ab22c35327183c4e135970b69a60fc8cc52b875412321b997e905b7",
+      "stdout_bytes": 106,
+      "stdout_sha256": "565643189473ea32fe3e59404f440360221adf2fafe2f260911a896dbd8afb94",
+      "code_terminal_newline": false,
+      "stdout_terminal_newline": false,
+      "role": "exact JSON-decoded displayed source and retained stdout string; historical native execution, no new execution"
+    },
+    {
+      "id": "nestedPenguins",
+      "file": "cv_penguins.py",
+      "code_bytes": 3279,
+      "code_sha256": "7308b4e7fc544209504371af354d481cf61e757cae3b72b324fb3d30d4b2a9b6",
+      "stdout_bytes": 291,
+      "stdout_sha256": "8f1ec377554adbf25a7dc5ef3fe604189c3684f36ca5fe41e120e48939236145",
+      "code_terminal_newline": false,
+      "stdout_terminal_newline": false,
+      "role": "exact JSON-decoded displayed source and retained stdout string; historical native execution, no new execution"
+    },
+    {
+      "id": "optunaStudy",
+      "file": "cv_optuna.py",
+      "code_bytes": 984,
+      "code_sha256": "8d314771249f94c3900fb43f0a1a5c6906c2c35fede8ab3b644df15250747a08",
+      "stdout_bytes": 112,
+      "stdout_sha256": "c6ca28777c32fd132b48db85a2a9d5462e3ee78d265d3a851d52aaee8d365637",
+      "code_terminal_newline": false,
+      "stdout_terminal_newline": false,
+      "role": "exact JSON-decoded displayed source and retained stdout string; historical native execution, no new execution"
+    }
+  ],
+  "data": {
+    "path": "public/learn-assets/cross-validation/penguins.csv",
+    "raw_bytes": 15586,
+    "raw_sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+    "current_line_endings": "CRLF",
+    "lf_bytes": 15241,
+    "lf_sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+    "parsed_rows": 344,
+    "columns": [
+      "species",
+      "island",
+      "bill_length_mm",
+      "bill_depth_mm",
+      "flipper_length_mm",
+      "body_mass_g",
+      "sex",
+      "year"
+    ],
+    "missing": {
+      "species": 0,
+      "island": 0,
+      "bill_length_mm": 2,
+      "bill_depth_mm": 2,
+      "flipper_length_mm": 2,
+      "body_mass_g": 2,
+      "sex": 11,
+      "year": 0
+    },
+    "interpretation": "Raw current owner bytes differ from the historical LF receipt; LF-normalized content matches exactly. Neither receipt nor original is rewritten."
+  },
+  "old_execution": {
+    "at": "2026-09-14T17:02:53.752188+00:00",
+    "python": "3.12.14",
+    "versions": {
+      "numpy": "2.3.5",
+      "pandas": "3.0.1",
+      "scikit-learn": "1.9.1",
+      "optuna": "5.0.0"
+    },
+    "scope": [
+      "The penguin programs ran beside the served copy of the supplied CSV; no network request was made.",
+      "One dataset, one stratified seed pair and one candidate grid: a demonstration of a protocol, not new evidence about penguins or about any scaler.",
+      "The Optuna study is a development search only. Its printed score selected its own settings and is not an assessment of them.",
+      "The Optuna program was explicitly unexecuted in the content phase; this run used Optuna 5.0.0 in an isolated environment built for phase two. A different Optuna or scikit-learn version can move its trial sequence.",
+      "Fit counts are exact; no timing or speed claim is recorded."
+    ],
+    "stdout_role": "Displayed captured stdout strings omit process terminal newline; Optuna INFO trial stderr is not part of the retained displayed stdout. Do not invent missing full stderr or call these raw full process byte captures."
+  },
+  "design_execution": "stdlib parsing, hashes and row counting only; no imports/fits/builds/old main execution"
+}

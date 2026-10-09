@@ -1,0 +1,23 @@
+WikiText-2 raw excerpt used by the Dynamic Tokenization lesson
+
+Source: https://huggingface.co/datasets/Salesforce/wikitext
+Configuration: wikitext-2-raw-v1
+Attribution: Wikipedia contributors; WikiText collection by Stephen Merity,
+Caiming Xiong, James Bradbury and Richard Socher (2016).
+
+The dataset metadata lists CC BY-SA 3.0 and alternatively the GFDL.
+This excerpt is distributed under CC BY-SA 3.0:
+https://creativecommons.org/licenses/by-sa/3.0/
+Legal text: https://creativecommons.org/licenses/by-sa/3.0/legalcode
+
+Changes: Strip each selected source row's outer whitespace and retain its first
+256 characters. Select the first80 eligible train prose rows and first20 each
+validation/test prose rows, in source order. No Unicode normalization,
+punctuation repair or generated replacement text. Retained records include the
+source row and article title. The corpus and response provenance are embedded
+in wikitext_excerpt.json. The official rows API does not identify its served git
+revision; the recorded dataset repository revision is retrieval context, not
+a claim of byte equality with a pinned Parquet release.
+
+Code and original constructed examples in this directory are separate from
+the WikiText excerpt; this notice covers the corpus text.

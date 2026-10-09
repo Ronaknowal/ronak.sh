@@ -1,0 +1,29 @@
+original status unique_leading_axis singular [4.242641 1.414214] rank 2
+original factor_residual 4.965068306494546e-16
+original leading_projector_equal True
+collinear status unique_leading_axis singular [4.472136 0.      ] rank 1
+collinear factor_residual 9.930136612989092e-16
+collinear leading_projector_equal True
+constant status zero_energy singular [0. 0.] rank 0
+constant factor_residual 0.0
+square status tied singular [2. 2.] rank 2
+square factor_residual 0.0
+square 0 0 loss 8.0 projector [[0. 0.]
+ [0. 0.]]
+square 0 1 loss 4.0 projector [[1. 0.]
+ [0. 0.]]
+square 0 2 loss 0.0 projector [[1. 0.]
+ [0. 1.]]
+square 45 0 loss 8.0 projector [[0. 0.]
+ [0. 0.]]
+square 45 1 loss 4.0 projector [[0.5 0.5]
+ [0.5 0.5]]
+square 45 2 loss 0.0 projector [[1. 0.]
+ [0. 1.]]
+square 90 0 loss 8.0 projector [[0. 0.]
+ [0. 0.]]
+square 90 1 loss 4.0 projector [[0. 0.]
+ [0. 1.]]
+square 90 2 loss 0.0 projector [[1. 0.]
+ [0. 1.]]
+dependence_EU_EW_cov_cond_marg_product (0.0, 0.6666666666666666, 0.0, 1.0, 0.3333333333333333, 0.1111111111111111)

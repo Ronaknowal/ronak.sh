@@ -1,0 +1,82 @@
+{
+  "scope": "Exact in-memory reconstruction from accepted entire manuscript, 13 programme/output pairs and six practice snippets; no reviewed source writes or main executions",
+  "checks": [
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyReadingDrawings.jsx",
+      "exact": true,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "2e89776e716ecf555d57f5ff134acdf1f68a7f90162fc440fb85320e74e36a00"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyReadingLesson.jsx",
+      "exact": true,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "641c556ffebc4d2dcda98ecedc14d518671370bce6ca323c74741ba31a42c3ce"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\data\\topics\\entropy-cross-entropy-kl-divergence.jsx",
+      "exact": true,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "52f57cd0f7c47226e7a234a0f8aafc38435815c01d4a75f0ab28eee5ed42c84e"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyCodingDrawings.jsx",
+      "exact": false,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "2465a4679a54d282d9a4f46c2d19c6f48f44222652bce909cec5345461d1fea6"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyContinuousDrawings.jsx",
+      "exact": true,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "636de24253e05c0e41093a23d25037ebedb357a08a9aaa724248e86e79139166"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyDivergenceDrawings.jsx",
+      "exact": true,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "e93d6641c1574e1839362643a34eb38e4a05644475598b2d693e1edaa504c715"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyDrawingElements.jsx",
+      "exact": false,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "6c05aa290967567af0ec0bee100b2e6db55f2512b83a07be5c02b0c60792cdd0"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyMaximumDrawings.jsx",
+      "exact": true,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "06c0e3bcbd923c82388bfa69f6cc7c0110172a194bea4892fdb64b067ae8e53a"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyPredictionDrawings.jsx",
+      "exact": false,
+      "lineEndingNormalizedEqual": false,
+      "formatterIdempotent": true,
+      "expectedSha256": "02a1b0aae5ea96c40d6ac9c50dca9faa013b63234e8973233a23fd40818eb136"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-private-r1\\src\\learn\\components\\lesson-labs\\EntropyProbabilityDrawings.jsx",
+      "exact": true,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": true,
+      "expectedSha256": "d3fc4436862bcf3662def64dcfc6575759e75dc784ebc6b73e1c22b4d98b0246"
+    },
+    {
+      "path": "docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-manuscript-projection-r1.json",
+      "exact": true,
+      "lineEndingNormalizedEqual": true,
+      "formatterIdempotent": null,
+      "expectedSha256": "1fe87fdd4dd25da53ecd7f9221dec3eee9899200faae5f6c40fbf46ddcc3b6e2"
+    }
+  ]
+}

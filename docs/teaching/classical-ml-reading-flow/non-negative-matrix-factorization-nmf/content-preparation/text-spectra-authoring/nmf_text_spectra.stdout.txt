@@ -1,0 +1,359 @@
+{
+  "text": {
+    "training_documents": [
+      "orbit orbit rocket",
+      "rocket team",
+      "team team"
+    ],
+    "query_documents": [
+      "orbit orbit rocket",
+      "rocket planet",
+      "planet"
+    ],
+    "vocabulary": [
+      "orbit",
+      "rocket",
+      "team"
+    ],
+    "counts": [
+      [
+        2.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        1.0
+      ],
+      [
+        0.0,
+        0.0,
+        2.0
+      ]
+    ],
+    "document_frequency": [
+      1,
+      2,
+      2
+    ],
+    "idf": [
+      1.6931471805599454,
+      1.2876820724517808,
+      1.2876820724517808
+    ],
+    "tfidf_norm_none": [
+      [
+        3.386294361119891,
+        1.2876820724517808,
+        0.0
+      ],
+      [
+        0.0,
+        1.2876820724517808,
+        1.2876820724517808
+      ],
+      [
+        0.0,
+        0.0,
+        2.5753641449035616
+      ]
+    ],
+    "query_counts": [
+      [
+        2.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "query_tfidf": [
+      [
+        3.386294361119891,
+        1.2876820724517808,
+        0.0
+      ],
+      [
+        0.0,
+        1.2876820724517808,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "scratch": {
+      "dictionary": [
+        [
+          1.0459433267438019,
+          0.4296350876826676,
+          0.0
+        ],
+        [
+          0.0,
+          0.23742168468324357,
+          1.1727448727556171
+        ]
+      ],
+      "training_amounts": [
+        [
+          3.202844856182045,
+          0.0
+        ],
+        [
+          0.33340194362485476,
+          1.2445611217207246
+        ],
+        [
+          0.0,
+          2.1095522422367297
+        ]
+      ],
+      "training_half_loss": 0.5710663094424072,
+      "status": "stationary-tolerance",
+      "last_diagnostic": [
+        12,
+        0.5710663094424072,
+        3.306971207123834e-08
+      ],
+      "query_amounts": [
+        [
+          3.2028448549071626,
+          0.0
+        ],
+        [
+          0.41803245347565,
+          0.18375529265332882
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "query_diagnostic": {
+        "status": "stationary-tolerance",
+        "iterations": 4,
+        "projected_gradient": 3.4226452783059358e-09
+      },
+      "query_reconstruction": [
+        [
+          3.349994202585867,
+          1.3760545300720197,
+          0.0
+        ],
+        [
+          0.4372382550751949,
+          0.22322890095442732,
+          0.2154980773008993
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "ordinary": {
+      "dictionary": [
+        [
+          1.04594332580967,
+          0.4296350900574366,
+          0.0
+        ],
+        [
+          0.0,
+          0.23742168036641245,
+          1.1727448735963044
+        ]
+      ],
+      "training_amounts": [
+        [
+          3.2028448549071618,
+          0.0
+        ],
+        [
+          0.3334019635705866,
+          1.2445611085382222
+        ],
+        [
+          0.0,
+          2.109552249175553
+        ]
+      ],
+      "training_half_loss": 0.5710663094424069,
+      "iterations": 13,
+      "warnings": [],
+      "query_amounts": [
+        [
+          3.2028448546082,
+          0.0
+        ],
+        [
+          0.41803245364270813,
+          0.18375528914574835
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "query_reconstruction": [
+        [
+          3.34999419928129,
+          1.3760545375495914,
+          0.0
+        ],
+        [
+          0.43723825485943085,
+          0.22322890039291568,
+          0.215498073341883
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "scope": "New tiny TF-IDF/Frobenius study, separate from original five-document count/KL run"
+  },
+  "spectra": {
+    "scope": "Constructed three-band geometry, not measured/calibrated physical endmembers",
+    "dictionary": [
+      [
+        1.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        1.0
+      ]
+    ],
+    "rows": [
+      {
+        "gain": 0.5,
+        "query": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "cone_amounts": [
+          1.0,
+          0.4999999999999999
+        ],
+        "cone_residual_norm": 1.6653345369377348e-16,
+        "simplex_amounts": [
+          0.75,
+          0.25
+        ],
+        "simplex_prediction": [
+          0.75,
+          0.25,
+          1.0
+        ],
+        "simplex_half_loss": 0.1875,
+        "ordinary_constrained": {
+          "amounts": [
+            0.75,
+            0.25
+          ],
+          "half_loss": 0.1875,
+          "iterations": 2,
+          "success": true
+        },
+        "normalized_NNLS": [
+          0.6666666666666666,
+          0.33333333333333326
+        ],
+        "normalized_NNLS_half_loss": 0.19444444444444453
+      },
+      {
+        "gain": 1.0,
+        "query": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cone_amounts": [
+          2.0,
+          0.9999999999999998
+        ],
+        "cone_residual_norm": 3.3306690738754696e-16,
+        "simplex_amounts": [
+          1.0,
+          0.0
+        ],
+        "simplex_prediction": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "simplex_half_loss": 3.0,
+        "ordinary_constrained": {
+          "amounts": [
+            1.0,
+            0.0
+          ],
+          "half_loss": 3.0,
+          "iterations": 2,
+          "success": true
+        },
+        "normalized_NNLS": [
+          0.6666666666666666,
+          0.33333333333333326
+        ],
+        "normalized_NNLS_half_loss": 3.1111111111111116
+      },
+      {
+        "gain": 2.0,
+        "query": [
+          4.0,
+          2.0,
+          6.0
+        ],
+        "cone_amounts": [
+          4.0,
+          1.9999999999999996
+        ],
+        "cone_residual_norm": 6.661338147750939e-16,
+        "simplex_amounts": [
+          1.0,
+          0.0
+        ],
+        "simplex_prediction": [
+          1.0,
+          0.0,
+          1.0
+        ],
+        "simplex_half_loss": 19.0,
+        "ordinary_constrained": {
+          "amounts": [
+            1.0,
+            0.0
+          ],
+          "half_loss": 19.0,
+          "iterations": 2,
+          "success": true
+        },
+        "normalized_NNLS": [
+          0.6666666666666666,
+          0.33333333333333326
+        ],
+        "normalized_NNLS_half_loss": 19.444444444444446
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "command": "node node_modules/vite/bin/vite.js build --config .../probability-arrows/vite.config.mjs",
+  "qualification": "Failed before transforming modules: system Node realpath EPERM. No product source was changed. Retry will use preceding successful preview's bundled Node runtime and same output owner.",
+  "actualToolResult": {
+    "chunk_id": "7631cf",
+    "wall_time_seconds": 0,
+    "exit_code": 1,
+    "original_token_count": 465,
+    "output": "vite v6.4.1 building for production...\n✓ 0 modules transformed.\n✗ Build failed in 56ms\nerror during build:\n[vite:build-html] EPERM: operation not permitted, realpath 'C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\t-sne-umap-manifold-learning\\runtime-preview\\preview-entry.jsx'\nfile: C:/Personal Projects and files/Portfolio/Portfolio/docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/index.html\n    at node:fs:2848:18\n    at getRealPath (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:16363:16)\n    at tryResolveRealFileOrType (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:16354:20)\n    at tryCleanFsResolve (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:15954:22)\n    at tryFsResolve (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:15947:15)\n    at Object.resolveId (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:15747:19)\n    at Object.handler (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/vite/dist/node/chunks/dep-D4NMHUTW.js:46488:15)\n    at file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:22571:40\n    at async PluginDriver.hookFirstAndGetPlugin (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:22453:28)\n    at async resolveId (file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/node_modules/rollup/dist/es/shared/node-entry.js:20912:26)\n"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-28",
+  "kind": "author-only",
+  "author": "frameworks_annotation_modalities",
+  "topicId": "nlp-libraries",
+  "checks": [
+    "Complete manuscript, concept-hurdle map and visual specifications saved before runtime implementation",
+    "Semantic browser-model assertions passed; native reference comparisons passed",
+    "Six topic/lab JSX files parsed successfully",
+    "Author heuristic teaching review recorded in README"
+  ],
+  "nativeEvidence": "../computer-vision-libraries/native-evidence.json",
+  "pending": [
+    "Parent-owned production/browser final receipt and central ledger closure"
+  ],
+  "files": {
+    "src/learn/data/topics/nlp-libraries.jsx": "ed63abd9a3213a5a3860136a4c6e677581ad0af5f2a5beb46c28a4e7afe6df6c",
+    "src/learn/data/curriculum/blueprints/nlp-libraries.js": "e01e5679d6b6cfee8c27f955cc24e598b6ac4dca9a979c1eb09fb9529bd69bad",
+    "src/learn/components/lesson-labs/NlpLibraryLabs.jsx": "98d0b3f6aaeac35be6df037a39f15417e443d80bf6edeafe34f2804dac954e20",
+    "src/learn/data/text-alignment-model.js": "2d3210bc0ee7962f271b92068a1d4ea3abe7b34980e7621a975758f4ca07799b",
+    "public/learn-code/nlp-libraries/text_pipeline.py": "1179d2fdb7abc7e19f08ac96b926548c32fa1f26235224835d3ffc21973293e3",
+    "public/learn-code/nlp-libraries/subword_alignment.py": "335940390fae9e6af03c6e729fc6038291944d81f13be506f5ff7bce7f577cc7",
+    "src/learn/components/lesson-labs/framework-data-contracts.css": "bd5ad7fe52b1df6b4a0c0c7485d7f3b235192cc2307e8b195bd9734be74be1e6",
+    "scripts/verify-framework-data-contracts.mjs": "68bc00c4969b3971cfe035de963daa8ce1ea1fd0d97996269b76c7c190668c00",
+    "scripts/verify-framework-data-contracts.py": "6d09c7dfc3de7a818bda820cfdef9f13daf5219d26e7a1cefb0eae08638faf26"
+  },
+  "corrections": [
+    "NLP code-point typography enlarged after desktop screenshot review; textarea explicitly neutral with keyboard focus. Models unchanged.",
+    "Annotation agreement counters use one pass/O(k) extra space; scoped 256-case native reference and missing/empty/main checks rerun and passed.",
+    "CV contribution list given 14px type and explicit inline-start padding after a clipped-marker finding in the 320px capture. Numerics unchanged; corrected desktop/320px/changed captures reviewed and finding closed."
+  ],
+  "independentReview": "independent-review.md",
+  "paintedAuthorReview": "Desktop, 320px and meaningful changed-state lab captures inspected; details and targeted typography closure in README.",
+  "sourceState": "Frozen: author, native, independent source and targeted painted review complete; root owns final integration receipt."
+}

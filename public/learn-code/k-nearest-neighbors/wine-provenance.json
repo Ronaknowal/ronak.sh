@@ -1,0 +1,19 @@
+{
+  "title": "Wine",
+  "creators": "Aeberhard, Stefan; Forina, M.",
+  "doi": "10.24432/C5PC7J",
+  "license": "CC BY 4.0",
+  "datasetUrl": "https://archive.ics.uci.edu/dataset/109/wine",
+  "fileUrl": "https://archive.ics.uci.edu/static/public/109/data.csv",
+  "sha256": "70ba539f750faef04eb4859f68cf67f13676d42fafce8e4f85982705953c219a",
+  "rows": 178,
+  "features": 13,
+  "classLabels": [
+    1,
+    2,
+    3
+  ],
+  "transformation": "None: exact official CSV bytes, original precision and header retained.",
+  "units": "Feature units not inferred where unspecified by official metadata.",
+  "designDisposition": "Official downloadable CSV replaces the planned precision-preserving conversion of wine.data; same documented 178-row/13-feature/class1\u20133 dataset. No learner or experiment protocol changes."
+}

@@ -1,0 +1,560 @@
+{
+  "schema": "classical21-learner-source-role-index/v1",
+  "scope": "52 complete payloads, one entry each; this index is the53rd metadata file and does not hash itself",
+  "historical_stderr": "Unretained for the original three displayed pairs; absence is not zero stderr.",
+  "data_line_endings": {
+    "current_bytes": 15586,
+    "current_sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+    "historical_lf_bytes": 15241,
+    "historical_lf_sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+  },
+  "files": [
+    {
+      "path": "programmes/cv_tiny.py",
+      "bytes": 988,
+      "sha256": "e067a71d2ab22c35327183c4e135970b69a60fc8cc52b875412321b997e905b7",
+      "id": "P01",
+      "section": 2,
+      "role": "whole teaching source",
+      "execution": "exact retained decoded original; no new execution",
+      "local_dependencies": [],
+      "terminal_newline": false
+    },
+    {
+      "path": "programmes/cv_tiny.py.stdout.txt",
+      "bytes": 106,
+      "sha256": "565643189473ea32fe3e59404f440360221adf2fafe2f260911a896dbd8afb94",
+      "id": "P01",
+      "section": 2,
+      "role": "exact retained displayed stdout string; terminal process newline omitted; historical execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "programmes/cv_penguins.py",
+      "bytes": 3279,
+      "sha256": "7308b4e7fc544209504371af354d481cf61e757cae3b72b324fb3d30d4b2a9b6",
+      "id": "P02",
+      "section": 6,
+      "role": "whole teaching source",
+      "execution": "exact retained decoded original; no new execution",
+      "local_dependencies": [],
+      "terminal_newline": false
+    },
+    {
+      "path": "programmes/cv_penguins.py.stdout.txt",
+      "bytes": 291,
+      "sha256": "8f1ec377554adbf25a7dc5ef3fe604189c3684f36ca5fe41e120e48939236145",
+      "id": "P02",
+      "section": 6,
+      "role": "exact retained displayed stdout string; terminal process newline omitted; historical execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "programmes/cv_optuna.py",
+      "bytes": 984,
+      "sha256": "8d314771249f94c3900fb43f0a1a5c6906c2c35fede8ab3b644df15250747a08",
+      "id": "P03",
+      "section": 8,
+      "role": "whole teaching source",
+      "execution": "exact retained decoded original; no new execution",
+      "local_dependencies": [
+        "cv_penguins.py"
+      ],
+      "terminal_newline": false
+    },
+    {
+      "path": "programmes/cv_optuna.py.stdout.txt",
+      "bytes": 112,
+      "sha256": "c6ca28777c32fd132b48db85a2a9d5462e3ee78d265d3a851d52aaee8d365637",
+      "id": "P03",
+      "section": 8,
+      "role": "exact retained displayed stdout string; terminal process newline omitted; historical execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "programmes/fold_fitted_pipeline.py",
+      "bytes": 11262,
+      "sha256": "e26e2d319ed6783319e394c49b0137d8eed6d14469ec1b5ad9b431797a95ebfa",
+      "id": "P04",
+      "section": 2,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/fold_fitted_pipeline.py.3.json",
+        "bytes": 1178,
+        "sha256": "3d5ff61a8b0765f87938b514df08a83a72963567c094988d30cd79a8ae8f02a5"
+      }
+    },
+    {
+      "path": "programmes/fold_fitted_pipeline.py.stdout.txt",
+      "bytes": 571,
+      "sha256": "c1ea7c852b122bed7cf9e122522177e923835c0f87e760a45a6da2d9dfb9e036",
+      "id": "P04",
+      "section": 2,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/fold_fitted_pipeline.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P04",
+      "section": 2,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/split_information_contracts.py",
+      "bytes": 5606,
+      "sha256": "a6843279c834626da46578d8b9dfa2ff3ea35ae682bb34ca9e2bf7f73fad8496",
+      "id": "P05",
+      "section": 3,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [
+        "fold_fitted_pipeline.py"
+      ],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/split_information_contracts.py.2.json",
+        "bytes": 1545,
+        "sha256": "af312b91455887b18de361c55b4b862518a708409385a8cd8caeaec575416d7b"
+      }
+    },
+    {
+      "path": "programmes/split_information_contracts.py.stdout.txt",
+      "bytes": 1720,
+      "sha256": "497b341268bf6c875e5bd9589fc9cc18b3683590569ab4dabdb7fb58d9c51dc7",
+      "id": "P05",
+      "section": 3,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/split_information_contracts.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P05",
+      "section": 3,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/finite_selection_optimism.py",
+      "bytes": 1823,
+      "sha256": "8ef741013cb8a4d19afff254753c0f2ed600273c80604e6e7dc88b363ed90b57",
+      "id": "P06",
+      "section": 4,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/finite_selection_optimism.py.1.json",
+        "bytes": 1198,
+        "sha256": "eefb27c99e7bdbb6c2d168fc0c439bd4b2fd5dfee4e67f5c96fc5023799b896b"
+      }
+    },
+    {
+      "path": "programmes/finite_selection_optimism.py.stdout.txt",
+      "bytes": 1300,
+      "sha256": "235026f39c209e87a171a9fd9bf1b4c54a8ffe9b2402bd0db8e9f56942fedf5e",
+      "id": "P06",
+      "section": 4,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/finite_selection_optimism.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P06",
+      "section": 4,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/nested_procedure_from_indices.py",
+      "bytes": 4433,
+      "sha256": "e45f35b38254b1918cc1e025b3e1bd9569b86e20133897d4f01e881fdc0a5593",
+      "id": "P07",
+      "section": 4,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [
+        "fold_fitted_pipeline.py"
+      ],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/nested_procedure_from_indices.py.2.json",
+        "bytes": 1554,
+        "sha256": "1c0b3392013f15c6d00b234947d07ed46aba3f08e28d04fb262593734774a50f"
+      }
+    },
+    {
+      "path": "programmes/nested_procedure_from_indices.py.stdout.txt",
+      "bytes": 12386,
+      "sha256": "10c40e913918243101db406891255c5500f11551735e9aaa476a76793f8f5a12",
+      "id": "P07",
+      "section": 4,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/nested_procedure_from_indices.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P07",
+      "section": 4,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/parameter_spaces_and_sampling.py",
+      "bytes": 3807,
+      "sha256": "180d256e0d3c123adf5be9f8cd28edd4622d8285d1b2d66ce10384c8dcf69f71",
+      "id": "P08",
+      "section": 5,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/parameter_spaces_and_sampling.py.2.json",
+        "bytes": 1386,
+        "sha256": "ad87b62fba6cab0597a0fd7f64882a1bde0ab9845843e679dc32d03359e9bda0"
+      }
+    },
+    {
+      "path": "programmes/parameter_spaces_and_sampling.py.stdout.txt",
+      "bytes": 1563,
+      "sha256": "2789cd58100df44fcbd7846c1bc357d45d87dda0ab7371e49dafa31b9bb4c462",
+      "id": "P08",
+      "section": 5,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/parameter_spaces_and_sampling.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P08",
+      "section": 5,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/search_results_and_refit.py",
+      "bytes": 4464,
+      "sha256": "4f1e653c0f7476af71a25e1d2c3985b3ca0a49e0767cb4ac79f90ed730eb4bc9",
+      "id": "P09",
+      "section": 6,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [
+        "fold_fitted_pipeline.py"
+      ],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/search_results_and_refit.py.1.json",
+        "bytes": 1536,
+        "sha256": "1eb8e3925dd4896a4c9e03750fad0dcef0b3499d7b4fc9d3152798dcbb586b9b"
+      }
+    },
+    {
+      "path": "programmes/search_results_and_refit.py.stdout.txt",
+      "bytes": 1729,
+      "sha256": "9825a0f76abb650e8d55db653950bf41972130b0bfdbfc7315d36d8bcec50ffd",
+      "id": "P09",
+      "section": 6,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/search_results_and_refit.py.stderr.txt",
+      "bytes": 2283,
+      "sha256": "c655042fa9ab90f707fad23f194cbc4681c24be2d0829e2b64475a15a65e56d7",
+      "id": "P09",
+      "section": 6,
+      "role": "complete actual raw stderr; intentional invalid-candidate diagnostics; main exit0"
+    },
+    {
+      "path": "programmes/risk_and_covariance_exact.py",
+      "bytes": 2353,
+      "sha256": "bc1a6635bd3eec5c35af578bc20a102d76e399f03bcc78f145e6e4e77b961a39",
+      "id": "P10",
+      "section": 7,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/risk_and_covariance_exact.py.1.json",
+        "bytes": 1197,
+        "sha256": "135706e1bcc7ad4c80f1428876227ccf2729d257ddfd0d5328a91bd8d150025e"
+      }
+    },
+    {
+      "path": "programmes/risk_and_covariance_exact.py.stdout.txt",
+      "bytes": 551,
+      "sha256": "b11f116cd4a0c14769c67a6ea0747512a8d593b060fb13cda9193558ab5ec1e3",
+      "id": "P10",
+      "section": 7,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/risk_and_covariance_exact.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P10",
+      "section": 7,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/bootstrap_the_whole_statistic.py",
+      "bytes": 6610,
+      "sha256": "a214cedd021304760fefd5e46c0ab5c06df83de86b274e63136a71f4302116d0",
+      "id": "P11",
+      "section": 7,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [
+        "fold_fitted_pipeline.py"
+      ],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/bootstrap_the_whole_statistic.py.2.json",
+        "bytes": 1554,
+        "sha256": "580aa78e0bc4a6f0837398c07ca82b07838c2ac1bc3804dfe08fda34016b1e49"
+      }
+    },
+    {
+      "path": "programmes/bootstrap_the_whole_statistic.py.stdout.txt",
+      "bytes": 12211,
+      "sha256": "785690dee466841d6332f93bedbb1ce9fce26997f92689b5f4db88e42fef60f9",
+      "id": "P11",
+      "section": 7,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/bootstrap_the_whole_statistic.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P11",
+      "section": 7,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/holdout_mse_identity.py",
+      "bytes": 2576,
+      "sha256": "093874803b6dcb5e0e49661ee0987d490b53977d64de712a6d99c85e2e6d68d5",
+      "id": "P12",
+      "section": 7,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/holdout_mse_identity.py.2.json",
+        "bytes": 1349,
+        "sha256": "d52982a39841fc37875a659b7ea249bf7d8e6dbff30950afaa5162a6b9933a37"
+      }
+    },
+    {
+      "path": "programmes/holdout_mse_identity.py.stdout.txt",
+      "bytes": 309,
+      "sha256": "c60dec485c8a816a26063cf6a9631d2b7f92c414349c85a04051af281218c5bf",
+      "id": "P12",
+      "section": 7,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/holdout_mse_identity.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P12",
+      "section": 7,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/discrete_adaptive_search.py",
+      "bytes": 5169,
+      "sha256": "e123d1f47ee4a974984fcc254e2e0d81a19880e9cc3c0d3ae948c6227081b24d",
+      "id": "P13",
+      "section": 8,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/discrete_adaptive_search.py.1.json",
+        "bytes": 1366,
+        "sha256": "8aa04d896fbf13747ad13fab8f73b2e3ff73227fa3e62c3bd02776b11883174b"
+      }
+    },
+    {
+      "path": "programmes/discrete_adaptive_search.py.stdout.txt",
+      "bytes": 3410,
+      "sha256": "8058d0abd17f37fc0af5383b5d71a92cb3ddcaa16cd9b8b6939e63b74850a3aa",
+      "id": "P13",
+      "section": 8,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/discrete_adaptive_search.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P13",
+      "section": 8,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/resource_tournaments.py",
+      "bytes": 4897,
+      "sha256": "abdd363cf5b7dbfb731b3155b678e47771bbe901d5ef13e793faf38c2017e1ef",
+      "id": "P14",
+      "section": 8,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/resource_tournaments.py.2.json",
+        "bytes": 1350,
+        "sha256": "c1c48c4157514a817c66b743066e25b112165e43257424b71004eb5146838fd8"
+      }
+    },
+    {
+      "path": "programmes/resource_tournaments.py.stdout.txt",
+      "bytes": 2546,
+      "sha256": "3162d3b768726af9fb7423e4e5eedbc309ab863f580f52e6476e7f0882e6acda",
+      "id": "P14",
+      "section": 8,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/resource_tournaments.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P14",
+      "section": 8,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/ordinary_halving_audit.py",
+      "bytes": 2545,
+      "sha256": "7d436ae79f568cf6145c5a7b9c2cb4f9c1defa8887ac504acbce2c5c51eb1565",
+      "id": "P15",
+      "section": 8,
+      "role": "whole teaching source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/ordinary_halving_audit.py.1.json",
+        "bytes": 1358,
+        "sha256": "fd9b634dcad3ed130055eb10398dba917957fd26d69f03d0c8e2e42002694fef"
+      }
+    },
+    {
+      "path": "programmes/ordinary_halving_audit.py.stdout.txt",
+      "bytes": 2977,
+      "sha256": "67327189310b47454de5f8437c6225d4fd3b1ad72da447414962c37948f06623",
+      "id": "P15",
+      "section": 8,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/ordinary_halving_audit.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "P15",
+      "section": 8,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/practice_answers.py",
+      "bytes": 4932,
+      "sha256": "320e8dedf203dd64584a0cdecd92b1f3a8a7f0cd61048bd000b5515869d9f7d4",
+      "id": "A01",
+      "section": 10,
+      "role": "optional changed-task answer source",
+      "execution": "new constructed source; actual successful main captured",
+      "local_dependencies": [
+        "fold_fitted_pipeline.py",
+        "split_information_contracts.py",
+        "search_results_and_refit.py",
+        "bootstrap_the_whole_statistic.py",
+        "resource_tournaments.py"
+      ],
+      "terminal_newline": true,
+      "successful_execution_receipt": {
+        "path": "checks/programme-attempts/practice_answers.py.3.json",
+        "bytes": 2173,
+        "sha256": "d5349fe3181c0f8815f4c9c4ab00df19ac902b795b28a77af17abc758a0a6f59"
+      }
+    },
+    {
+      "path": "programmes/practice_answers.py.stdout.txt",
+      "bytes": 2524,
+      "sha256": "b962ebac26ffe210136338c71012237cd5772fe379ff5897c37ccadcb6423286",
+      "id": "A01",
+      "section": 10,
+      "role": "complete actual raw stdout; successful current source",
+      "terminal_newline": true
+    },
+    {
+      "path": "programmes/practice_answers.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "A01",
+      "section": 10,
+      "role": "complete actual raw stderr; zero captured bytes, not an absent stream"
+    },
+    {
+      "path": "programmes/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "role": "exact current offline CSV, CRLF; historical LF-normalized content matches"
+    },
+    {
+      "path": "programmes/nested-experiment.json",
+      "bytes": 16989,
+      "sha256": "fd53f72e89cb511f68646a4a8fa81f0a5f6ef125c5141a4bd164c7b6a48d0499",
+      "role": "exact retained full nested experiment arrays and selection record"
+    },
+    {
+      "path": "programmes/calculated-inputs.json",
+      "bytes": 82281,
+      "sha256": "dc0311a0c1ba7a72d45708ee2d76f847ad87004108ce99018a549e8b22f51f54",
+      "role": "exact retained full calculated inputs, historical numerical evidence; no replay"
+    },
+    {
+      "path": "programmes/data-provenance.md",
+      "bytes": 3770,
+      "sha256": "b7d8a56b683f797574834989dc9259ed932e53ceeb5c9bbb5a0393c7c5248692",
+      "role": "exact historical provenance; LF byte/hash statement retained and qualified in setup"
+    },
+    {
+      "path": "programmes/README.md",
+      "bytes": 3673,
+      "sha256": "7ba39d2e14bd41b5f9ba71672bded9cc2db0b1dd04bece3e85c34640e7591e32",
+      "role": "run/setup and dependency instructions"
+    },
+    {
+      "path": "programmes/requirements.txt",
+      "bytes": 61,
+      "sha256": "ed9a683cbf487f4979c1deb16c27eeec981cbc6611d5cb639a40a98e77d2a6b8",
+      "role": "pins of actual tested new-code environment"
+    },
+    {
+      "path": "programmes/requirements-optuna.txt",
+      "bytes": 34,
+      "sha256": "4a5c4bb6fe00f4268ade4daf8ec209fba3dd1c12bc2468484944c7d8daba9c1c",
+      "role": "optional original adaptive-programme dependency; historical Optuna5.0.0, not installed/run anew"
+    }
+  ]
+}

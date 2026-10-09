@@ -1,0 +1,16 @@
+ml_eigenvalues [4.5 0.5]
+ordinary_sample_to_ml_eigenvalues [4.5 0.5]
+noise_variance 0.5000000000000001
+weights_covariance [[2. 2.]
+ [2. 2.]]
+latent_posterior_means [[1.571348]
+ [0.      ]]
+latent_posterior_covariance [[0.111111]]
+posterior_decoded [[5.222222 4.222222]
+ [3.       2.      ]]
+query_log_density [-4.132231 -2.243342]
+full_covariance_log_density_equal True
+factor_analysis_diagonal_noise [0.500061 0.500061]
+factor_analysis_covariance [[2.500031 1.999969]
+ [1.999969 2.500031]]
+n_less_than_d_zero_padded_ml_spectrum [1. 0. 0. 0.] 0.25000000000000006

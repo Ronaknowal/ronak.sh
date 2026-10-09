@@ -1,0 +1,8 @@
+trace: [{'update': 1, 'before': 12.0, 'after_means': 5.5, 'after_assignment': 5.5, 'labels_changed': 0}]
+scratch centers: [1.25, 8.75]
+ordinary centers: [1.25, 8.75]
+scratch labels: [0, 0, 0, 1, 1]
+inertia / fixed point / updates / stop: 5.5 True 1 fixed_point
+weighted / repeated fixed-center objective: 5.5 5.5
+duplicate seed rows / occupied groups: [2, 0, 1] 1
+one-update labels / fixed point / stop: [0, 0, 1, 1] False budget

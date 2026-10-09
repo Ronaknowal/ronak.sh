@@ -1,0 +1,38 @@
+{
+  "stage": "tiny",
+  "status": "passed",
+  "source_manifest": "030f66381c3e4bca501b526082f853cfe6e20a7fc76970b0173026df5530232a",
+  "protocol_sha256": "6c301081b86e3b471cef9e935cb36e7752359f1cf619cc036f8d8081aeed56f6",
+  "observations": {
+    "calls": 8,
+    "cases": [
+      {
+        "prompt": "A",
+        "call": 5,
+        "max_absolute_error": 4.440892098500626e-16,
+        "top1_equal": true,
+        "base_unchanged": true,
+        "branch_length": 12,
+        "copied_prefix_bytes": 4096,
+        "branch_reserved_bytes": 10240
+      },
+      {
+        "prompt": "B",
+        "call": 6,
+        "max_absolute_error": 4.440892098500626e-16,
+        "top1_equal": true,
+        "base_unchanged": true,
+        "branch_length": 12,
+        "copied_prefix_bytes": 4096,
+        "branch_reserved_bytes": 10240
+      }
+    ],
+    "changed_prefix_max_error": 2.220446049250313e-16,
+    "before_edit_rows_exact": true,
+    "shared_prefix_full_logits_exact": true,
+    "weight_hash_before": "55b2aa7231a4d745325e4c0888187098870d8a3378c93700c1fbf9f487504149",
+    "weight_hash_after": "55b2aa7231a4d745325e4c0888187098870d8a3378c93700c1fbf9f487504149",
+    "dtype": "torch.float64",
+    "training": false
+  }
+}

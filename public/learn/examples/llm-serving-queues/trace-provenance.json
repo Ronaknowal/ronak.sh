@@ -1,0 +1,12 @@
+{
+  "source_url": "https://raw.githubusercontent.com/Azure/AzurePublicDataset/215becdacba1ce682c7368642ce97d5a332de7a6/data/AzureLLMInferenceTrace_conv.csv",
+  "commit": "215becdacba1ce682c7368642ce97d5a332de7a6",
+  "source_sha256": "2f1e5b666d4e3055fdbba98598ce2ec307767b9064e03e2fa46676dbcc7d0bf8",
+  "subset_sha256": "4fc10e3684a18f570a16fef72916f15b1ef9658a2f2447efcb1e3d8e838808f2",
+  "selection": "First 512 data rows; source_row is 1-based, excludes header.",
+  "change": "Added source_row for provenance; original three fields remain verbatim.",
+  "license": "Creative Commons Attribution 4.0; AZURE-DATA-LICENSE.txt",
+  "attribution": "Microsoft Azure Public Dataset; Patel et al., Splitwise: Efficient Generative LLM Inference Using Phase Splitting, ISCA 2024.",
+  "paper_url": "https://www.microsoft.com/en-us/research/uploads/prodnew/2023/12/Splitwise_ISCA24.pdf",
+  "limits": "No service duration, GPU, latency, first-token timestamps or prompt text. README says November 11; actual CSV times November 16 are preserved."
+}

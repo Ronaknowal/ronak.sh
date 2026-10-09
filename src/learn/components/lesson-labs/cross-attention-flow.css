@@ -1,0 +1,60 @@
+.cross-flow .cross-flow-figure { border: 0; padding: 0; margin: 1.5rem 0; background: none; }
+.cross-flow .cross-flow-figure figcaption { margin-top: .75rem; color: var(--text-secondary, #bbb); font-size: 1rem; line-height: 1.65; }
+.cross-flow :is(.cross-flow-scroll, .neural-equation) { max-width: 100%; min-width: 0; overflow-x: auto; scrollbar-color: #e4b752 #111; }
+.cross-flow .cross-flow-scroll { padding: .4rem .15rem .6rem; container-type: inline-size; }
+.cross-flow .cross-flow-scroll:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+.cross-flow .cross-flow-matrix { border-collapse: separate; border-spacing: .18rem; font-size: 1rem; width: max-content; min-width: min(100%, 20rem); }
+.cross-flow .cross-flow-matrix :is(th, td) { padding: .4rem .5rem; text-align: center; white-space: nowrap; font-weight: 400; }
+.cross-flow .cross-flow-matrix th { color: var(--text-secondary, #bbb); }
+.cross-flow .cross-flow-matrix caption { text-align: left; font-weight: 600; padding: .4rem 0; white-space: normal; max-width: 100cqw; }
+.cross-flow .cross-flow-matrix td { background: color-mix(in srgb, currentColor 12%, #101010); border-bottom: 1px solid currentColor; font-variant-numeric: tabular-nums; }
+.cross-flow .cross-role-input { color: #82cbd0; }
+.cross-flow .cross-role-parameter { color: #e4b752; }
+.cross-flow .cross-role-computed { color: #c0a0e0; }
+.cross-flow .cross-role-credit { color: #e29b72; }
+.cross-flow [data-selected] { outline: 3px solid #fff; outline-offset: -3px; }
+.cross-flow .cross-flow-matrix button { min-height: max(44px, 2.75rem); min-width: max(44px, 2.75rem); font: inherit; color: inherit; background: transparent; border: 0; padding: .2rem; }
+.cross-flow .cross-flow-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1.25rem; align-items: start; }
+.cross-flow .cross-flow-branches > * { min-width: 0; }
+.cross-flow .cross-flow-arrow { display: flex; flex-direction: column; align-items: center; gap: .2rem; color: #c0a0e0; margin: .5rem 0; text-align: center; }
+.cross-flow .cross-flow-arrow svg { flex-shrink: 0; }
+.cross-flow :is(.cross-flow-number, .cross-flow-select) { display: flex; flex-direction: column; gap: .45rem; flex: 1 1 12rem; min-width: 0; max-width: 100%; }
+.cross-flow :is(.cross-flow-number input, .cross-flow-select select, .cross-flow-actions button) { min-height: max(44px, 2.75rem); max-width: 100%; min-width: 0; border: 1px solid #777; background: #111; color: #eee; border-radius: 3px; padding: .5rem .7rem; font: inherit; }
+.cross-flow :is(button, input, select):focus-visible { outline: 2px solid #e4b752; outline-offset: 3px; }
+.cross-flow .cross-flow-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: .75rem 0; }
+.cross-flow .cross-flow-pixels { display: grid; grid-template-columns: repeat(8, 2rem); width: max-content; gap: 1px; }
+.cross-flow .cross-flow-pixels :is(span, button) { display: grid; place-items: center; min-width: 0; min-height: 2rem; padding: .1rem; font: inherit; border: 0; font-variant-numeric: tabular-nums; }
+.cross-flow .cross-editable-pixels { grid-template-columns: repeat(8, max(44px, var(--cross-pixel-width, 2.75rem))); }
+.cross-flow .cross-editable-pixels button { min-height: max(44px, var(--cross-pixel-width, 2.75rem)); white-space: nowrap; }
+.cross-flow .cross-flow-pixels [data-patch-selected] { box-shadow: inset 0 0 0 2px #e4b752; }
+.cross-flow .cross-flow-bar-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem .75rem; align-items: center; margin: .65rem 0; }
+.cross-flow .cross-flow-bar-row > span:first-child { overflow-wrap: anywhere; }
+.cross-flow .cross-flow-bar-row output { grid-column: 2; grid-row: 1; }
+.cross-flow .cross-flow-bar-track { grid-column: 1 / -1; grid-row: 2; }
+.cross-flow .cross-flow-bar-track { height: .75rem; background: #29242e; }
+.cross-flow .cross-flow-bar-track i { display: block; height: 100%; background: #c0a0e0; }
+.cross-flow .cross-flow-shape svg { display: block; max-width: 100%; }
+.cross-flow .cross-flow-shape small { font-size: 1rem; color: #bbb; }
+.cross-flow .cross-flow-head-grids { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1rem; }
+.cross-flow .cross-flow-head-grids > * { min-width: 0; }
+.cross-flow .cross-flow-add { font-size: 2rem; color: #c0a0e0; text-align: center; }
+.cross-flow .cross-flow-arrivals { padding-left: 1.5rem; }
+.cross-flow .cross-flow-arrivals li { padding: .3rem 0 .3rem .5rem; border-left: 2px solid #82cbd0; }
+.cross-flow .cross-flow-depth-ruler { margin: 1.5rem 0; }
+.cross-flow .cross-flow-depth-ruler > div { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .5rem; padding-bottom: 1rem; }
+.cross-flow .cross-flow-depth-mark { border-left: 2px solid #82cbd0; border-top: 2px solid #82cbd0; }
+.cross-flow .cross-flow-depth-read { grid-column: 2; color: #c0a0e0; }
+.cross-flow .cross-flow-memory-bus { border-left: 3px solid #c0a0e0; padding: 1rem; margin: 1rem 0; }
+.cross-flow .cross-flow-insertion { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .75rem; }
+.cross-flow .cross-flow-bypass { border-left: 2px solid #82cbd0; border-bottom: 2px solid #82cbd0; }
+.cross-flow .cross-flow-stage-track { display: flex; flex-direction: column; gap: .5rem; }
+.cross-flow .cross-flow-loss-plot { max-width: none; display: block; }
+.cross-flow .cross-flow-loss-plot text { font: 16px sans-serif; fill: #eee; }
+.cross-flow .cross-flow-cache-stack { display: grid; gap: .75rem; padding-left: .75rem; border-left: 2px solid #c0a0e0; }
+.cross-flow .cross-flow-cache-stack > div { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: .75rem; }
+.cross-flow .cross-flow-wiring { display: block; max-width: none; }
+.cross-flow .cross-flow-wiring text { font: 16px sans-serif; }
+.cross-flow .cross-flow-wiring text:not([fill]) { fill: #eee; }
+.cross-flow p { overflow-wrap: anywhere; }
+.cross-flow .flow-controls { align-items: start; }
+@media (max-width: 600px) { .cross-flow .cross-flow-branches { grid-template-columns: minmax(0, 1fr); } }

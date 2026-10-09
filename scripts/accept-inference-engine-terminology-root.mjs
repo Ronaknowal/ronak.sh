@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+const base='docs/teaching/llm-architecture-training/inference-engines-serving';
+const dir=`${base}/latency-terminology-correction`;
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const read=p=>JSON.parse(fs.readFileSync(p));
+const packet=read(`${dir}/inputs.json`), changes=read(`${dir}/changes.json`);
+for(const [p,h] of Object.entries(packet.files))assert.equal(sha(p),h,p);
+let expected=fs.readFileSync(`${dir}/lesson.md`,'utf8');
+for(const [before,after] of changes.literalReplacements){assert.equal(expected.split(before).length,2,before);expected=expected.replace(before,after);}
+assert.equal(fs.readFileSync(`${base}/lesson.md`,'utf8'),expected);
+const original=read(`${base}/content-release-root.json`);
+for(const [p,h]of Object.entries(original.files))assert.equal(sha(p===`${base}/lesson.md`?`${dir}/lesson.md`:p),h,p);
+const report=`${dir}/review-root.md`;
+fs.writeFileSync(report,`# Same Root terminology closure\n\nAccepted. Root personally read the whole accepted content and the complete 1,882-line static runtime projection, finding that practice 8 called first-content latency TTFT despite lacking token-to-event correspondence. The exact three literal replacements now name first-content latency in the question and worked answer, and explicitly keep token TTFT and token TPOT unknown. Arrival, three content times, terminal time and all arithmetic remain unchanged. The existing section 8 definition and D15 correspondence switch agree.\n\nThe complete original content review remains applicable. All prior content-release inputs except this narrowly replaced manuscript remain byte-identical; the original manuscript, release, input packet, renderer and runtime projection remain preserved. No program, source recipe, scientific execution, observation or figure contract changed. This is a correctness amendment, not a repeated scientific campaign or rendered acceptance.\n`,{flag:'wx'});
+const files={...original.files,...packet.files,[`${dir}/inputs.json`]:sha(`${dir}/inputs.json`),[report]:sha(report),[import.meta.filename.replaceAll('\\','/').split('/Portfolio/Portfolio/')[1]??'scripts/accept-inference-engine-terminology-root.mjs']:sha(import.meta.filename)};
+files[`${base}/lesson.md`]=sha(`${base}/lesson.md`);
+const target=`${dir}/accepted-root.json`;
+fs.writeFileSync(target,JSON.stringify({accepted:true,reviewer:'root',review:report,priorRelease:`${base}/content-release-root.json`,priorReleaseSha256:sha(`${base}/content-release-root.json`),files},null,2)+'\n',{flag:'wx'});
+const ledgerPath='docs/teaching/lesson-delivery-progress.json',bytes=fs.readFileSync(ledgerPath),ledger=JSON.parse(bytes),entry=ledger.topics['inference-engines-serving'];
+assert.equal(entry.content.status,'complete');assert.equal(entry.implementation.status,'in-progress');assert.equal(entry.content.files[`${base}/lesson.md`],changes.manuscriptBefore);
+entry.content.files={...entry.content.files,...files,[target]:sha(target)};
+entry.content.amendment=target;
+assert.ok(fs.readFileSync(ledgerPath).equals(bytes),'Concurrent phase write');
+fs.writeFileSync(ledgerPath,JSON.stringify(ledger,null,2)+'\n');
+console.log(JSON.stringify({accepted:true,files:Object.keys(files).length,sha256:sha(target)}));

@@ -1,0 +1,40 @@
+{
+  "schema": "classical21-new-programme-execution/v1",
+  "at": "2026-10-09T18:13:06.072917+00:00",
+  "source": {
+    "file": "bootstrap_the_whole_statistic.py",
+    "bytes": 6610,
+    "sha256": "a214cedd021304760fefd5e46c0ab5c06df83de86b274e63136a71f4302116d0"
+  },
+  "python": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+  "command": [
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\content-authoring\\programmes\\bootstrap_the_whole_statistic.py"
+  ],
+  "dependencies": [
+    {
+      "file": "fold_fitted_pipeline.py",
+      "bytes": 11262,
+      "sha256": "e26e2d319ed6783319e394c49b0137d8eed6d14469ec1b5ad9b431797a95ebfa"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1"
+  },
+  "returncode": 0,
+  "stdout": {
+    "file": "bootstrap_the_whole_statistic.py.2.stdout.txt",
+    "bytes": 12211,
+    "sha256": "785690dee466841d6332f93bedbb1ce9fce26997f92689b5f4db88e42fef60f9"
+  },
+  "stderr": {
+    "file": "bootstrap_the_whole_statistic.py.2.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "One new constructed educational programme; no retained science or checker execution"
+}

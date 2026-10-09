@@ -57,11 +57,19 @@ Apply this map to the whole lesson, including substeps within a section and adva
 
 For an existing lesson, include a before/after disposition: exact location, what is already explained, missing bridge or visual relationship, change made, worked interpretation and practice connection. A reuse decision names the earlier concept/figure and the small bridge that makes the extension understandable. The independent reviewer checks these dispositions against the complete reading flow rather than accepting the author's table as evidence by itself. Follow the standard's **Apply the teaching loop at every conceptual transition** requirement.
 
-| Outcome / hurdle | Required prior idea | Plain explanation and exact mechanism | Complete example and interpretation | Representation and learner question | Live exploration / independent practice / feedback | Core or deeper |
+| Outcome / hurdle | Required prior idea and where already taught | Plain explanation and exact mechanism | Complete example and interpretation | Representation and learner question | Live exploration / independent practice / feedback | Core or deeper |
 | --- | --- | --- | --- | --- | --- | --- |
-| Complete this for each actual hurdle | Name the skill and its lesson or local bridge | Explain causality, not only terminology | Include inputs, intermediate states and result | Choose static, stepped or interactive support | Specify evidence that distinguishes understanding from copying | Keep required reasoning in core |
+| Complete this for each actual hurdle | Exact earlier section or verified prerequisite; flag first-use gaps | Explain causality, not only terminology | Include inputs, intermediate states and result | Choose static, stepped or interactive support | Specify evidence that distinguishes understanding from copying | Keep required reasoning in core |
 
 Write the core route in concept order. Explain the correspondence between prose, symbols, visual entities, code and output. Record vocabulary, symbols, units, shapes and conventions at first use. A new module may repeat the teaching loop; it need not wait until the final “practice” section to ask a question.
+
+For each major new object or composition, include the [foundational visual coverage](visuals-and-labs.md#foundational-visual-coverage) decision in this same map: its anatomy, one traced operation, its larger-system context and a revealing changed case where useful. Compare the actual diagrams in a strong teaching reference with these jobs. Record exact figure/section locations or the reason an alternative suffices; “has visuals/labs” is not a disposition. Recheck when deeper sections introduce another structure. Do this during content preparation, so the handoff specifies the basic view as well as the advanced investigations.
+
+Use this map to check order, not merely coverage: trace a learner through each
+major mechanism using only the support available before its first use. If several
+rows rely on missing or later teaching, repair the sequence and examples rather
+than inserting one introductory glossary. Keep the map compact in the existing
+design; locate the actual explanations instead of creating a second manuscript.
 
 Linux example: “Why can I read a known filename but not list the directory?” needs directory-name listing versus path traversal, then file read permission. A sequence of permission checks makes the first failed check visible. Toggle directory read while keeping search/file read enabled and observe that file access can still succeed; then change another permission and diagnose its effect. The current path and permission results stay visible. An octal table alone does not expose the mechanism.
 
@@ -75,6 +83,7 @@ For every visual, including a static inline diagram, record:
 
 - The precise question and misconception it resolves.
 - Initial state, entity labels, units/scales, what appearance encodes and what is merely layout.
+- Colour contract where colour helps: which identities, groups, roles, states or quantities it encodes; the worked-example distinctions; continuity through connected views and edits; separate selection/focus cues; and labels or shapes that preserve meaning without hue recognition. Use the [cross-topic patterns](visuals-and-labs.md#colour-carries-conceptual-meaning) appropriate to the question.
 - Placement beside the relevant explanation, correspondence to its concrete example, what the reader should notice and any simplification.
 - Accessible description and narrow-screen composition that preserves relationships and readable labels.
 - Annotation/layout contract: which text reflows outside the geometry, room between successive stages, equal-scale comparisons, and the desktop/phone/intermediate-width states to inspect. Plan separation of labels from foreground marks; do not rely only on the outer SVG bounds or a fixed row-height guess.

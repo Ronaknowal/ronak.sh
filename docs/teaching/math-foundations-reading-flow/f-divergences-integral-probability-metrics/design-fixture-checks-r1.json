@@ -1,0 +1,130 @@
+{
+  "scope": "New bounded design fixture calculations only; no old mains, model checker, fits, tests or build replay. Iris values are descriptive empirical norms, not population estimates or significance claims.",
+  "csv": {
+    "path": "public/learn-code/eigenvalues-eigenvectors/iris-corrected.csv",
+    "sha256": "5a8853b2e82f9d021e5843af7d647339e359b25e037ec6e87e23ca9e91507821",
+    "rows": 150
+  },
+  "checks": [
+    {
+      "name": "Linear observer stays blind to original symmetric change",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "name": "Editable Lipschitz interval slopes expose contrast",
+      "pass": true,
+      "detail": "6/5"
+    },
+    {
+      "name": "Zero editable observer supplies null",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "name": "Event membership exposes positive mass",
+      "pass": true,
+      "detail": "3/5"
+    },
+    {
+      "name": "Changed end-point laws remove linear blind spot",
+      "pass": true,
+      "detail": "-6"
+    },
+    {
+      "name": "Iris observed group sizes sepal length",
+      "pass": true,
+      "detail": 50
+    },
+    {
+      "name": "Iris coordinate-and-bandwidth unit invariance sepal length",
+      "pass": true,
+      "detail": [
+        0.6622804839336799,
+        0.6622804839336799
+      ]
+    },
+    {
+      "name": "Iris identical empirical laws have zero norm sepal length",
+      "pass": true,
+      "detail": 0.0
+    },
+    {
+      "name": "Changing units without bandwidth changes comparison sepal length",
+      "pass": true,
+      "detail": [
+        0.6622804839336799,
+        0.1235917176074641
+      ]
+    },
+    {
+      "name": "Iris observed group sizes petal length",
+      "pass": true,
+      "detail": 50
+    },
+    {
+      "name": "Iris coordinate-and-bandwidth unit invariance petal length",
+      "pass": true,
+      "detail": [
+        1.7166120981241104,
+        1.7166120981241104
+      ]
+    },
+    {
+      "name": "Iris identical empirical laws have zero norm petal length",
+      "pass": true,
+      "detail": 0.0
+    },
+    {
+      "name": "Changing units without bandwidth changes comparison petal length",
+      "pass": true,
+      "detail": [
+        1.7166120981241104,
+        0.3502981383313794
+      ]
+    },
+    {
+      "name": "Iris declared petal/sepal descriptive contrast",
+      "pass": true,
+      "detail": [
+        0.6622804839336799,
+        1.7166120981241104
+      ]
+    },
+    {
+      "name": "Rare-event finite sample miss illustration",
+      "pass": true,
+      "detail": 0.8179069375972308
+    }
+  ],
+  "observed": [
+    {
+      "features": [
+        "sepal length",
+        "sepal width"
+      ],
+      "groupP": "Iris-setosa",
+      "groupQ": "Iris-versicolor",
+      "n": 50,
+      "m": 50,
+      "sigmaCm": 1,
+      "biasedMmdSquared": 0.6622804839336799,
+      "sameStatisticMmSigma10": 0.6622804839336799,
+      "incorrectMmSigma1": 0.1235917176074641
+    },
+    {
+      "features": [
+        "petal length",
+        "petal width"
+      ],
+      "groupP": "Iris-setosa",
+      "groupQ": "Iris-versicolor",
+      "n": 50,
+      "m": 50,
+      "sigmaCm": 1,
+      "biasedMmdSquared": 1.7166120981241104,
+      "sameStatisticMmSigma10": 1.7166120981241104,
+      "incorrectMmSigma1": 0.3502981383313794
+    }
+  ]
+}

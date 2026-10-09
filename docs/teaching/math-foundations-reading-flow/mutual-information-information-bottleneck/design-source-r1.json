@@ -1,0 +1,282 @@
+{
+  "status": "PROPOSED_DESIGN_AUTHOR_READY_FOR_DIFFERENT_WHOLE_REVIEW",
+  "createdAt": "2026-10-09T15:41:44.331Z",
+  "author": "/root/queue_nonconvex_resume",
+  "topicId": "mutual-information-information-bottleneck",
+  "syllabusPosition": 27,
+  "mode": "full",
+  "currentBoundary": "Research/design only; substantive manuscript and runtime not started",
+  "proposal": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r1.md",
+    "sha256": "e0c8428b688c49ad32f1d79c56910d8f31a7bd667137e93397e915a8f3d2c45e",
+    "bytes": 45378
+  },
+  "research": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research-r1.md",
+    "sha256": "5526eced2c422084959c865c186e3976b72f02d897cf549ad36d16e1f0fba30a",
+    "bytes": 21485
+  },
+  "inputs": {
+    "src/learn/data/topics/mutual-information-information-bottleneck.jsx": {
+      "sha256": "c969992cba3d640531a326b5eeab51ec54338ea700f4808908369e8167efeba4",
+      "bytes": 48635,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/intake-frozen-r1/src/learn/data/topics/mutual-information-information-bottleneck.jsx"
+    },
+    "src/learn/data/mutual-information-models.js": {
+      "sha256": "f8f890c06a123e77fec65e5fcb2084a372c270554c225d0c53dff01becbc982c",
+      "bytes": 12597,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/intake-frozen-r1/src/learn/data/mutual-information-models.js"
+    },
+    "src/learn/data/mutual-information-examples.js": {
+      "sha256": "29574e13ad103256ca0ebd3df5970cc72c825c2b832e92b438ad7119922aca35",
+      "bytes": 18004,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/intake-frozen-r1/src/learn/data/mutual-information-examples.js"
+    },
+    "src/learn/data/mutual-information-mechanism-program.js": {
+      "sha256": "97410c954dd95936f6054b4a72c1fbd2e76f587131e68f9e06d22865ce48e11a",
+      "bytes": 506,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/intake-frozen-r1/src/learn/data/mutual-information-mechanism-program.js"
+    },
+    "public/learn-assets/mutual-information/mutual-information-library-bridge.py": {
+      "sha256": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+      "bytes": 2619,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/intake-frozen-r1/public/learn-assets/mutual-information/mutual-information-library-bridge.py"
+    },
+    "src/learn/components/lesson-labs/MutualInformationLabs.jsx": {
+      "sha256": "a6d53622d99005d226c5bd4a9d35c5ba24879a9bb6c03e7d278816a56175bc64",
+      "bytes": 29121,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/intake-frozen-r1/src/learn/components/lesson-labs/MutualInformationLabs.jsx"
+    },
+    "src/learn/components/lesson-labs/mutual-information-labs.css": {
+      "sha256": "dba421e8bc7d4d795819df22eb1e8747829e099d42d3aa65fe2d768e3b8bf120",
+      "bytes": 7038,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/intake-frozen-r1/src/learn/components/lesson-labs/mutual-information-labs.css"
+    },
+    "src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js": {
+      "sha256": "e1fe6abb7c2ecb0205a1d808ce96e6b2a6488546382fd30da07fcf2409d9cf43",
+      "bytes": 4026,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/intake-frozen-r1/src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js"
+    },
+    "AGENTS.md": {
+      "sha256": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+      "bytes": 3751,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/AGENTS.md"
+    },
+    "skills/lesson-authoring/SKILL.md": {
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "bytes": 20953,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/SKILL.md"
+    },
+    "skills/lesson-authoring/references/workflow.md": {
+      "sha256": "4096cdebcadf3c94d61be0e1e534592160c64ef6529aca9754a2cdaaec6d1c3b",
+      "bytes": 25767,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/skills/lesson-authoring/references/workflow.md"
+    },
+    "skills/lesson-authoring/references/teaching.md": {
+      "sha256": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "bytes": 27407,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/teaching.md"
+    },
+    "skills/lesson-authoring/references/topic-design.md": {
+      "sha256": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "bytes": 32018,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/topic-design.md"
+    },
+    "skills/lesson-authoring/references/domain-playbook.md": {
+      "sha256": "43897a74d31c0c9b85748ef544a8be5b5bd220b8b2f79136f176e88190f16e04",
+      "bytes": 30795,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/domain-playbook.md"
+    },
+    "skills/lesson-authoring/references/visuals-and-labs.md": {
+      "sha256": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "bytes": 33359,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/visuals-and-labs.md"
+    },
+    "skills/lesson-authoring/references/examples-and-code.md": {
+      "sha256": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "bytes": 15888,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/examples-and-code.md"
+    },
+    "skills/lesson-authoring/references/practice-and-resources.md": {
+      "sha256": "b5f7a6e67c311a0ffd48dc6ee12e416aaf772b08baa9c58684c7ca0fcb817b22",
+      "bytes": 11956,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/practice-and-resources.md"
+    },
+    "skills/lesson-authoring/references/portfolio-adapter.md": {
+      "sha256": "347c3ee5c5f4db818f7ab4b9d9b17ef9fd49c3c3ede5d6ea2174badd24a9173d",
+      "bytes": 16033,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/skills/lesson-authoring/references/portfolio-adapter.md"
+    },
+    "docs/teaching/MUTUAL-INFORMATION-LESSON-DESIGN.md": {
+      "sha256": "2ff973014289d6fc9611449458a8701f989ae8e5df34aca9e03f793ce7c0b9fc",
+      "bytes": 16872,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/MUTUAL-INFORMATION-VERIFICATION.md": {
+      "sha256": "c3e7e7ef97cd2f75b9eeb8a172583e675817eacdafd0e3fb7c28262bb984d27a",
+      "bytes": 19128,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/MUTUAL-INFORMATION-INDEPENDENT-REVIEW.md": {
+      "sha256": "7fb788e228e84e1ee14daa41ae5fabbf229429039fa1ad3e504e89945b66f911",
+      "bytes": 7121,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/evidence/mutual-information-verification.json": {
+      "sha256": "00dbbd018187f4cf5ab84539d5103e5c66ebc04bfb7263ea81694a0481a16ccd",
+      "bytes": 40360,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/evidence/mutual-information-independent-review.json": {
+      "sha256": "04ae5664653c963637984d6825e9458540361dd243b53ed5239544d9707138e6",
+      "bytes": 6552,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "scratch/mutual-information-native-verification/final-source-hashes.json": {
+      "sha256": "e5289a3e77214b048d017ec0274feabfa06473d37ceb0d28b758d26458eb0e34",
+      "bytes": 1019,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "scratch/mutual-information-native-verification/results.json": {
+      "sha256": "212d6ccd346ae93062de54d6e229399f0ec6fefe3df97bc798bdc62c4f8b6e1c",
+      "bytes": 680,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/evidence/math-depth-remediation-author.json": {
+      "sha256": "379b9f88afb5211dfce980ade2bedaf20367a4e908ba6d86f678fd4e971c08f0",
+      "bytes": 10328,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/evidence/math-depth-remediation-independent.json": {
+      "sha256": "b06e3d6888143325af61dbc893eae8700008b4661efb91acf34d7f535d1e231d",
+      "bytes": 2697,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/IMPLEMENTATION-DEPTH-REVIEW.md": {
+      "sha256": "67da5b94c58f05745e0ca4f966dacea7761485a834295e3e43a48b0a082fc223",
+      "bytes": 8052,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/implementation-depth/FOUNDATIONS.md": {
+      "sha256": "0ffb3a7fcf8b02231cc3326823c720f6b9deb541370c44acc9647df0e68e4da4",
+      "bytes": 54772,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/topic-notes/contrastive-learning-simclr-moco-infonce-loss.md": {
+      "sha256": "b4da367337b35f169ac3dca6aedea7482acb72039d601602f3d230d919fe209f",
+      "bytes": 3600,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx": {
+      "sha256": "57e92aed15c98bac85b3eabd17e46de7385aa1d1d4a0a27e1e095f8d82834a9d",
+      "bytes": 52234,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "src/learn/data/topics/probability-distributions-bayes-theorem.jsx": {
+      "sha256": "c5fdfc87e2358f3b0e2d27b9aecbf72cb5a61c8e4116491fcae1603d045dc6c0",
+      "bytes": 58538,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "src/learn/data/variational-inference-reading-flow-text.js": {
+      "sha256": "f240909e76a2732e7ae937ca45e5a72f0fb03c8a89bef3da8f4046da1c0259fc",
+      "bytes": 157309,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "src/learn/data/measure-reading-flow-text.js": {
+      "sha256": "c4104bc9f9d0d76f8acfb4f58e26a0dd24ef819983bfc9b20a671eaa98ba75a5",
+      "bytes": 96563,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "src/learn/data/topics/feature-selection-importance-shap-permutation-mutual-info.jsx": {
+      "sha256": "ddf7f903cebdc761b831f57cd746b94592e317cfaf343b1d0f6ffda76b3c89d6",
+      "bytes": 73836,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "src/learn/data/topics/rate-distortion-theory.jsx": {
+      "sha256": "9b05242dc7ee29a0c8e0642003f67e25561256bd56f67a8bd433c0f297e624fb",
+      "bytes": 51267,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-thomas-ch2.pdf": {
+      "sha256": "9e0a10cce4efdb8d12d917168bf2134138d11740ba20156f636c9c2da8b520b1",
+      "bytes": 2318370,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/penguins.csv": {
+      "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "bytes": 15241,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r2.md": {
+      "sha256": "c42c7d77d5f9c44367692e29da30ee51f097b2e7273f7ee42f04d18d39367194",
+      "bytes": 26894,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-source-r2.json": {
+      "sha256": "1fbfd9ca37c348df6519b77f005a47262b72c2320e79974533ae50b058c1e067",
+      "bytes": 18454,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-accepted-root-r2.json": {
+      "sha256": "0c0514e3b683e2eb0d0b62cc19fa84a355ecc2014b28c476827aecfda3234d66",
+      "bytes": 1673,
+      "role": "Referenced retained source; no duplicate source tree or campaign copy"
+    },
+    "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r1.md": {
+      "sha256": "e0c8428b688c49ad32f1d79c56910d8f31a7bd667137e93397e915a8f3d2c45e",
+      "bytes": 45378
+    },
+    "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research-r1.md": {
+      "sha256": "5526eced2c422084959c865c186e3976b72f02d897cf549ad36d16e1f0fba30a",
+      "bytes": 21485
+    },
+    "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/selected-intake-r1.json": {
+      "sha256": "236cbe04c4e060ac0bc53285e21fc89abd10790c489ab843c1fcd57376a5ba62",
+      "bytes": 13661
+    },
+    "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/historical-identity-r1.json": {
+      "sha256": "b9fc7d9e45205e3eb92ba997514f2e71fa7c1a8468485e4626cf7a76212c57f8",
+      "bytes": 6196
+    },
+    "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/freeze-design-r1.mjs": {
+      "sha256": "d1e1a32e245d5eab44e1c99acd80b2f88f18b527b04a839290ba7ee329252de6",
+      "bytes": 9189
+    },
+    "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research/mit-chapter-2.pdf": {
+      "sha256": "97c6fcae4dd8f6a0dd87f26a570a71fb8c5c9b0361e24d774617e4079fc84a91",
+      "bytes": 622913
+    },
+    "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research/mit-binary-channel.png": {
+      "sha256": "94ccb9a70c57c7e446db14593f41f16d8258555a476461455dc0f31a14add092",
+      "bytes": 143374
+    }
+  },
+  "counts": {
+    "conceptualHurdles": 48,
+    "visualJobs": 52,
+    "investigations": 9,
+    "preservedProgramRoutes": 10,
+    "printOnlyPresentationSuccessorsPlanned": 2,
+    "newProgrammesProposed": 4,
+    "practiceOutcomeGroups": 16
+  },
+  "authorChecks": {
+    "wholeExistingLessonRead": true,
+    "allNineOriginalProgramsOutputsRead": true,
+    "actualBridgePythonRead": true,
+    "wholeModelsLabsRead": true,
+    "priorDesignAndVerificationRead": true,
+    "actualPrerequisiteContractsRead": true,
+    "primaryDiagramPersonallyInspected": true,
+    "currentDesignResearchSelfRead": true,
+    "scientificRuns": 0,
+    "builds": 0
+  },
+  "limits": [
+    "Design only; no content or runtime acceptance.",
+    "New programme11–14 outputs are not yet written or executed; design fixes fixtures and owned computational scope.",
+    "Sample-law/bound/MI distinctions and old scientific qualifications must survive content and visual implementation.",
+    "Canonical preceding Entropy manuscript is being prepared after independent design acceptance; it is not assumed already installed."
+  ],
+  "next": "Root DIFFERENT whole review, one consolidated author correction, SAME closure and explicit release before substantive MI manuscript. Author next prepares already released Entropy content."
+}

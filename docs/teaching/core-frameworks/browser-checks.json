@@ -1,0 +1,487 @@
+{
+  "checkedOn": "2026-09-28",
+  "base": "http://127.0.0.1:4204",
+  "viewports": [
+    1366,
+    390,
+    320
+  ],
+  "elementCaptureNote": "Element captures hide only fixed site-header/skip-link overlays to prevent full-element stitching artifacts; opening captures use the unchanged page.",
+  "results": [
+    {
+      "id": "pytorch",
+      "headings": [
+        "1. The framework keeps track of a changing calculation",
+        "2. A tensor has a logical shape and a physical layout",
+        "3. Gradients are state; backward is an operation",
+        "4. A module is an ownership tree",
+        "5. Build the mechanism before trusting the abstraction",
+        "6. Train/eval and gradient recording answer different questions",
+        "7. Run one complete, auditable experiment",
+        "8. Cross a device boundary deliberately",
+        "9. Research control: derivatives you can interrogate",
+        "10. Diagnose the boundary that broke",
+        "11. Practice and transfer",
+        "12. What you can now control",
+        "Further learning",
+        "Technical references"
+      ],
+      "labs": [
+        {
+          "name": "pytorch-storage",
+          "changedControl": true,
+          "rangeControls": 1,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "pytorch-gradient",
+          "changedControl": true,
+          "rangeControls": 3,
+          "selectControls": 2,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "pytorch-mode",
+          "changedControl": true,
+          "rangeControls": 1,
+          "selectControls": 2,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 3,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "jax",
+      "headings": [
+        "1. One calculation, several questions",
+        "2. Make inputs, state and shapes visible",
+        "3. Read a gradient as contributions from examples",
+        "4. Batch a function without confusing shared and mapped axes",
+        "5. Compile the calculation, not your hidden Python history",
+        "6. Build the complete functional update, then use Optax",
+        "7. Randomness is another input to the experiment",
+        "8. Deeper: derivatives can be products, not giant matrices",
+        "9. Debug and measure the computation you actually ran",
+        "10. Practice: modify the computation and defend its meaning",
+        "Further learning",
+        "Technical references",
+        "Ready to continue"
+      ],
+      "labs": [
+        {
+          "name": "jax-gradient",
+          "changedControl": true,
+          "rangeControls": 3,
+          "selectControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "jax-trace",
+          "changedControl": true,
+          "rangeControls": 2,
+          "selectControls": 2,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 2,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "tensorflow-keras",
+      "headings": [
+        "1. Choose how much of the training process you own",
+        "2. Separate a tensor value from a tracked variable",
+        "3. A derivative follows recorded dependencies",
+        "4. A layer owns weights; a model connects the layers",
+        "5. One complete scratch-to-library comparison",
+        "6. Data pipelines must preserve the unit of an example",
+        "7. Keep training behavior, optimization and metric state distinct",
+        "8. Deeper: customize a step without rebuilding fit",
+        "9. Save what the next consumer actually needs",
+        "10. Practice and diagnosis",
+        "Further learning",
+        "Technical references",
+        "Ready to continue"
+      ],
+      "labs": [
+        {
+          "name": "tensorflow-tape",
+          "changedControl": true,
+          "rangeControls": 1,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "tensorflow-metric",
+          "changedControl": true,
+          "rangeControls": 4,
+          "selectControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 3,
+      "localDownloads": 3,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "experiment-tracking-tools-weights-biases-mlflow-neptune",
+      "headings": [
+        "1. A good score is not yet a usable result",
+        "2. Give every measurement a precise meaning",
+        "3. Decide the horizontal axis before comparing curves",
+        "4. A retry must not silently rewrite the experiment",
+        "5. Build a small portable tracker from the mechanism",
+        "6. Map the same record into MLflow and W&B",
+        "7. Make a comparison answer the intended research question",
+        "8. Resume the computation and resume the record separately",
+        "9. Keep the evidence usable after a tool changes",
+        "10. Practice: reconstruct and challenge a result",
+        "Further learning",
+        "Technical references",
+        "Ready to continue"
+      ],
+      "labs": [
+        {
+          "name": "tracking-budget",
+          "changedControl": true,
+          "rangeControls": 5,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "tracking-retry",
+          "changedControl": true,
+          "rangeControls": 2,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 2,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "training-acceleration",
+      "headings": [
+        "1. Which resource is preventing the next experiment?",
+        "2. Divide the work without changing its meaning",
+        "3. A larger effective batch is not always a larger physical batch",
+        "4. Trade stored intermediates for recomputation",
+        "5. Smaller numbers and compiled work",
+        "6. Select a level of control and verify the whole run",
+        "7. Practice: preserve the experiment while changing execution",
+        "8. What you can now control",
+        "Further learning",
+        "Technical references"
+      ],
+      "labs": [
+        {
+          "name": "accumulation-weights",
+          "changedControl": true,
+          "rangeControls": 2,
+          "selectControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "training-memory",
+          "changedControl": true,
+          "rangeControls": 3,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 3,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "llm-fine-tuning-platforms",
+      "headings": [
+        "1. Begin with the behavior you want to change",
+        "2. A message is not yet a training example",
+        "3. Give the update a smaller place to live",
+        "4. Run a complete tiny token-training path",
+        "5. Read a platform configuration as an executable hypothesis",
+        "6. Evaluate and save something another person can use",
+        "7. Practice: audit the run before enlarging it",
+        "8. Continue from examples to a dependable stream",
+        "Further learning",
+        "Technical references"
+      ],
+      "labs": [
+        {
+          "name": "fine-tuning-masks",
+          "changedControl": true,
+          "rangeControls": 2,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "low-rank-path",
+          "changedControl": true,
+          "rangeControls": 3,
+          "selectControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 2,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "data-processing-loading",
+      "headings": [
+        "1. Follow a row, not just a tensor shape",
+        "2. Separate access, order and collation",
+        "3. Fit transformations on the information you are allowed to use",
+        "4. See where padding spends the budget",
+        "5. Assign every record to a worker deliberately",
+        "6. Implement the pipeline and compare ordinary tools",
+        "7. Stream with bounded memory and reproducible meaning",
+        "8. Improve throughput without hiding errors",
+        "9. Practice: make the stream auditable",
+        "10. Readiness and the next data question",
+        "Further learning",
+        "Technical references"
+      ],
+      "labs": [
+        {
+          "name": "padding-budget",
+          "changedControl": true,
+          "rangeControls": 4,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "data-ownership",
+          "changedControl": true,
+          "rangeControls": 3,
+          "selectControls": 0,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 4,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "data-annotation-labeling",
+      "headings": [
+        "1. Define the decision before choosing a labeling tool",
+        "2. Collect independent evidence, then resolve it",
+        "3. Read disagreement rather than worship a score",
+        "4. Build the same contract in an annotation tool",
+        "5. Release targets with an auditable boundary",
+        "6. Implement the audit and compare the library route",
+        "7. Improve the dataset through informative review",
+        "8. Practice: make and defend an annotation decision",
+        "9. Carry the contract into the next pipeline",
+        "Further learning",
+        "Technical references"
+      ],
+      "labs": [
+        {
+          "name": "annotation-agreement",
+          "changedControl": true,
+          "rangeControls": 0,
+          "selectControls": 18,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 3,
+      "localDownloads": 3,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "nlp-libraries",
+      "headings": [
+        "1. Keep the evidence before changing its representation",
+        "2. Choose the representation that answers the question",
+        "3. Implement offsets and entity labels from scratch",
+        "4. Run the ordinary spaCy workflow",
+        "5. Evaluate the output unit you actually need",
+        "6. Bridge word labels to subword models",
+        "7. Choose tools by the boundary you need to control",
+        "8. Practice: preserve meaning through a changed pipeline",
+        "9. Keep the same discipline when the input is an image",
+        "Further learning",
+        "Technical references"
+      ],
+      "labs": [
+        {
+          "name": "text-offsets",
+          "changedControl": true,
+          "rangeControls": 2,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 2,
+      "localDownloads": 2,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "computer-vision-libraries",
+      "headings": [
+        "1. Read an image as values with a contract",
+        "2. See what a local filter actually computes",
+        "3. Move annotations with the image",
+        "4. Treat masks and keypoints as different data types",
+        "5. Choose a library at the boundary it handles well",
+        "6. Run scratch and library routes on the same pixels",
+        "7. Connect preprocessing to training and inference",
+        "8. Practice: diagnose a legal but wrong tensor",
+        "9. Continue with explicit input contracts",
+        "Further learning",
+        "Technical references"
+      ],
+      "labs": [
+        {
+          "name": "pixel-filter",
+          "changedControl": true,
+          "rangeControls": 1,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        },
+        {
+          "name": "image-geometry",
+          "changedControl": true,
+          "rangeControls": 2,
+          "selectControls": 1,
+          "resetAvailable": true,
+          "background": "rgb(17, 17, 17)"
+        }
+      ],
+      "codeSources": 1,
+      "localDownloads": 1,
+      "widths": [
+        {
+          "width": 390,
+          "overflow": 0
+        },
+        {
+          "width": 320,
+          "overflow": 0
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "followupTopics": [
+    "training-acceleration",
+    "llm-fine-tuning-platforms",
+    "computer-vision-libraries"
+  ]
+}

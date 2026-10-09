@@ -1,0 +1,13 @@
+{
+  "status": "PRINT_ONLY_SUCCESSOR_NO_NUMERICAL_REPLAY",
+  "beforeSha256": "886dff961143d74ac2d2a58242ecfefdc5133933a73dbf4a37566062ff730fbc",
+  "afterSha256": "b990bebbf52d1d3e1e27119c5b8be436497b84d81e936dcd41b55a62de67e960",
+  "before": "round(x, 9) for x in",
+  "after": "round(float(x), 9) for x in",
+  "replacements": 3,
+  "inverse": "Replace all exact after tokens with before; raw executed source and stdout retained",
+  "rawOutputSha256": "9644ac6bac08830fbf8810cbe19f8eea1bde49eede982415c5fdfd580635f496",
+  "displayOutputSha256": "20e5c8edab827c404dac0059493708ed47e4a18f26b1127a3e4f1cf2e32e9741",
+  "displayRole": "Deterministic formatting projection of executed values; no numerical outputs recomputed",
+  "scientificExecutions": 0
+}

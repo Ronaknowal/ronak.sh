@@ -1,0 +1,99 @@
+{
+  "schema": "manifold-normal-integration-plan-handoff/v1",
+  "at": "2026-10-09T18:33:32.687325+00:00",
+  "status": "PLAN_AND_SELECTED_DESTINATION_GUARDS_ONLY_ROOT_RELEASE_REQUIRED",
+  "author": "/root/tsne_probability_arrow_recovery",
+  "plan": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/plan.json",
+    "bytes": 65168,
+    "sha256": "e53ba3ce80a5eb204480f5119180d273e19ffaeca49769befc10e3409869f52c"
+  },
+  "report": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/plan.md",
+    "bytes": 15733,
+    "sha256": "ebc9e1fc8d39d4efc063b2a20cbf7f532deb59f3a2c35e9c9c0f20b1594d524c"
+  },
+  "planner": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/prepare-plan.py",
+    "bytes": 10705,
+    "sha256": "f65b90d041efb8d07d22b6858f6ad439ba93d0e0cfba3600c1758c079cb49ac2"
+  },
+  "authority": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/author-ready-source.json",
+      "bytes": 137742,
+      "sha256": "ffba1af17a352530b5fb1756f2f9e7b3a8c1bed14d74dbba750e79169bc8801d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-content-amendment-and-build-release.json",
+      "bytes": 76694,
+      "sha256": "3228dea7ce08f618705aac88ffe283363f8773b55935e6983ed3d60784d5a014"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/NativeReadingObjects.jsx",
+      "bytes": 17744,
+      "sha256": "1acda558d04f5f6568690dc55f0f2e0a14552b460891fa89e3b314766d652d06"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/independent-review/source-closure.md",
+      "bytes": 8701,
+      "sha256": "44b49e5168e027f1da858d3cd56c3109b0a538753c387eca92be4997e941b302"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/root-native-continuation.json",
+      "bytes": 79842,
+      "sha256": "3f5df311c6377d2f51bda70d2be96850082c83324a5f8009f3270dcc41f01bb8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/root-control-continuation.json",
+      "bytes": 4276,
+      "sha256": "6101199c641fe0e2410c25e92c6240331c06eb1651271dbae1a739f1b9f10f91"
+    }
+  ],
+  "compiledEffectiveModuleMap": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/build-private/private-module-map.json",
+    "bytes": 19901,
+    "sha256": "a5d42be12e55cc692732ab197ac29dc71dd14dc6de1e596eb4be51d0888756dd"
+  },
+  "rollback": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/rollback/src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+      "bytes": 77151,
+      "sha256": "3820fd932aa0314695c6ece949273c1e6260df510173155629645e5a3f4381de"
+    }
+  ],
+  "counts": {
+    "products": 19,
+    "newProducts": 18,
+    "publicPayloads": 35,
+    "readOnlyNormalLoadingGuards": 16,
+    "legacyFilesPreserved": 16,
+    "acceptedLabelSpaces": 2
+  },
+  "sourceScope": {
+    "sections": 13,
+    "mechanisms": 45,
+    "investigations": 12,
+    "wholeProgrammes": 15,
+    "solvedTasks": 19,
+    "payloads": 35
+  },
+  "authorExecution": {
+    "initialPlanner": "65aecb exit1 CRLF-anchor assumption; no destination write",
+    "correctedPlanner": "4ec06a exit0",
+    "finalPlanner": "bb7ad3 exit0",
+    "normalReport": "b6af97 exit0",
+    "freshDestinationsAndAuthorityGuarded": true
+  },
+  "rootDecisionRequired": [
+    "Accept19-product/35-public map with exact proposed hashes and reversible transforms",
+    "Decide selected generated readTime and hasIntegratedGuidefalse consequence of preserved accepted export",
+    "Release canonical/public apply separately; Root owns generator/shared/phase and later normal build/native"
+  ],
+  "canonicalWrites": 0,
+  "publicWrites": 0,
+  "sharedCentralChanges": 0,
+  "builds": 0,
+  "modelSSRScienceReplays": 0,
+  "browserOperations": 0
+}

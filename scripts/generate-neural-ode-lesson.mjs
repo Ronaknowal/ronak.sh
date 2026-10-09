@@ -1,3 +1,9 @@
+// Guard before every historical writer. The current revision reuses exact science.
+if (process.argv.length !== 3 || !['--check', '--preview', '--write-reading-flow'].includes(process.argv[2])) {
+  throw new Error('Use --check, --preview or --write-reading-flow; scientific outputs are preserved.');
+}
+await import('./lib/neural-ode-reading-flow-renderer.mjs');
+process.exit(0);
 import fs from 'node:fs';
 import { parse } from '@babel/parser';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';

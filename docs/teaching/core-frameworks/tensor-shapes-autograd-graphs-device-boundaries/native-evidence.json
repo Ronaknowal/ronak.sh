@@ -1,0 +1,175 @@
+{
+  "kind": "author-native-verification",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "torch": "2.14.0+cpu",
+  "cuda_available": false,
+  "program_outputs": {
+    "tensor_boundary_audit.py": {
+      "torch": "2.14.0+cpu",
+      "paths": [
+        {
+          "mode": "connected",
+          "product": 6.0,
+          "output": 7.0,
+          "loss": 24.5,
+          "weight_gradient": 21.0,
+          "bias_gradient": 7.0,
+          "shares_product_storage": true,
+          "routed_requires_grad": true,
+          "routed_is_leaf": false
+        },
+        {
+          "mode": "clone",
+          "product": 6.0,
+          "output": 7.0,
+          "loss": 24.5,
+          "weight_gradient": 21.0,
+          "bias_gradient": 7.0,
+          "shares_product_storage": false,
+          "routed_requires_grad": true,
+          "routed_is_leaf": false
+        },
+        {
+          "mode": "detach",
+          "product": 6.0,
+          "output": 7.0,
+          "loss": 24.5,
+          "weight_gradient": null,
+          "bias_gradient": 7.0,
+          "shares_product_storage": true,
+          "routed_requires_grad": false,
+          "routed_is_leaf": true
+        },
+        {
+          "mode": "detached-copy",
+          "product": 6.0,
+          "output": 7.0,
+          "loss": 24.5,
+          "weight_gradient": null,
+          "bias_gradient": 7.0,
+          "shares_product_storage": false,
+          "routed_requires_grad": false,
+          "routed_is_leaf": true
+        }
+      ],
+      "detach_mutation": {
+        "source_after_mutation": [
+          9.0,
+          4.0
+        ],
+        "routed": [
+          9.0,
+          4.0
+        ]
+      },
+      "clone_mutation": {
+        "source_after_mutation": [
+          2.0,
+          4.0
+        ],
+        "routed": [
+          9.0,
+          4.0
+        ]
+      },
+      "same_dtype_returns_same_object": true,
+      "float_conversion_gradient": [
+        4.0,
+        -6.0
+      ],
+      "float_conversion_is_leaf": false,
+      "integer_requires_grad": false,
+      "new_leaf_gradient": [
+        4.0,
+        -6.0
+      ],
+      "old_leaf_gradient": null,
+      "saved_value_mutation_rejected": true,
+      "cuda": {
+        "available": false,
+        "executed": false
+      }
+    },
+    "tensor_shape_gradients.py": {
+      "numpy": "2.3.5",
+      "torch": "2.14.0+cpu",
+      "broadcast_fixture": {
+        "paired_residual": [
+          [
+            -1.0
+          ],
+          [
+            -1.0
+          ]
+        ],
+        "cross_residual": [
+          [
+            -1.0,
+            -3.0
+          ],
+          [
+            1.0,
+            -1.0
+          ]
+        ],
+        "paired_loss": 0.5,
+        "cross_loss": 1.5,
+        "paired_gradient": [
+          -0.5,
+          -0.5
+        ],
+        "cross_gradient": [
+          -1.0,
+          0.0
+        ]
+      },
+      "initial_affine_loss": 2.577083333333334,
+      "initial_manual_gradients": {
+        "x": [
+          [
+            -0.14166666666666666,
+            -0.2208333333333333
+          ],
+          [
+            -0.1625,
+            -0.5229166666666667
+          ],
+          [
+            -0.3291666666666667,
+            -0.7520833333333334
+          ]
+        ],
+        "weight": [
+          [
+            -0.9666666666666667,
+            -0.024999999999999988
+          ],
+          [
+            -1.2166666666666668,
+            -0.23333333333333334
+          ]
+        ],
+        "bias": [
+          -1.4500000000000002,
+          -0.1833333333333333
+        ]
+      },
+      "matched_steps": 30,
+      "final_training_fixture_loss": 0.07536894403997262
+    }
+  },
+  "finite_difference_derivatives": 192,
+  "maximum_finite_difference_error": 8.413006402641088e-11,
+  "shape_configurations": 18,
+  "invalid_target_shapes_rejected": 3,
+  "source_files": {
+    "public/learn-code/tensor-shapes-autograd-graphs-device-boundaries/tensor_boundary_audit.py": "ba47da4120eb5a298609ac80260de9eaddfc1315dcf83a068405b607ab22ebaa",
+    "public/learn-code/tensor-shapes-autograd-graphs-device-boundaries/tensor_shape_gradients.py": "722b4b0f01de94e0a984ca33469e0f43429d14660ce65e2833bcccff4f1888cb"
+  },
+  "limits": [
+    "CPU numerical, layout, alias and dtype contracts tested.",
+    "CUDA copy branch unavailable on this CPU-only runtime.",
+    "Rendered checks and independent review are separate."
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "root-manifold-held-out-topology-source-check/v1",
+  "at": "2026-10-09T17:26:48.723Z",
+  "source": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/NativeReadingObjects.jsx",
+    "bytes": 17744,
+    "sha256": "1acda558d04f5f6568690dc55f0f2e0a14552b460891fa89e3b314766d652d06"
+  },
+  "harness": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/preview-entry.jsx",
+      "bytes": 1704,
+      "sha256": "5cee4b9915711f333e52c70a577ab7c0e7a990f51329c27ad6c1313fa3a7c846"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/wiring.css",
+      "bytes": 539,
+      "sha256": "9de790d566383661f6b73f7a7f821f452bfd9d508d40a6ad8376836e3546e820"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/vite.config.mjs",
+      "bytes": 1166,
+      "sha256": "02ebab5bc659a80294b0e61c796ef5d1d0daef1284517f73e9382d155200f8ca"
+    }
+  ],
+  "predecessor": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/author-ready-source.json",
+    "bytes": 137742,
+    "sha256": "ffba1af17a352530b5fb1756f2f9e7b3a8c1bed14d74dbba750e79169bc8801d"
+  },
+  "conditions": [
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldDrawing.jsx",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldObjects.jsx",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldInvestigations.jsx",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/GeometryFigures.jsx",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/AffinityFigures.jsx",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/ManifoldOperationObjects.jsx",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/NativeReadingObjects.jsx",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/manifold-lesson.jsx",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/manifold-reader.css",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/vite.config.mjs",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/reading-flow-manuscript.md",
+      "pass": true
+    },
+    {
+      "name": "Frozen predecessor exact: docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/visual-and-investigation-specifications.md",
+      "pass": true
+    },
+    {
+      "name": "Unchanged operation bodies conserved under explicit import relocation and CRLF-to-LF normalization",
+      "pass": true
+    },
+    {
+      "name": "Entire existing TrainingStateFlow retained except one new topology placement",
+      "pass": true
+    },
+    {
+      "name": "Detail order no longer implies a dependency edge",
+      "pass": true
+    },
+    {
+      "name": "Explicit train-only reducer route declared",
+      "pass": true
+    },
+    {
+      "name": "Explicit train-only classifier route declared",
+      "pass": true
+    },
+    {
+      "name": "Private test-size harness is separate from learner source",
+      "pass": true
+    },
+    {
+      "name": "Both connected diagrams render",
+      "pass": true
+    },
+    {
+      "name": "Original fixed-state and prediction array details render",
+      "pass": true
+    },
+    {
+      "name": "Training and held-out coordinate dimensions retained",
+      "pass": true
+    },
+    {
+      "name": "No SVG generic detail arrow survives",
+      "pass": true
+    },
+    {
+      "name": "Scrolling explanation is accessible",
+      "pass": true
+    }
+  ],
+  "conditionsPassed": 23,
+  "renderedHTMLBytes": 40563,
+  "scientificExecutions": 0,
+  "builds": 0,
+  "native": false,
+  "limits": [
+    "SSR does not prove glyph paint or keyboard/scroll behavior",
+    "Independent source review and actual scoped build/native review still required"
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "authorizedOn": "2026-10-07",
+  "mode": "full",
+  "module": "large-language-models",
+  "topics": [
+    {
+      "position": 10,
+      "id": "curriculum-learning-data-mixing-strategies",
+      "title": "Curriculum Learning & Data Mixing Strategies",
+      "owner": "root",
+      "source": "src/learn/data/topics/curriculum-data-mixing.jsx",
+      "originalSha256": "86daeaff5f478b0069a72411933b1d932fee239e6b2abc67447f1cceb4818b50",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 11,
+      "id": "fp8-training-low-precision-pre-training",
+      "title": "FP8 Training & Low-Precision Pre-Training",
+      "owner": "causal_author",
+      "source": "src/learn/data/topics/fp8-training.jsx",
+      "originalSha256": "dd5b9e0dc93ff0e6820faf355b1e6c289546a903c6d9ceb039f990a9daab91ba",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 12,
+      "id": "moe-training-expert-load-balancing",
+      "title": "MoE Training & Expert Load Balancing",
+      "owner": "causal_author",
+      "source": "src/learn/data/topics/moe-training.jsx",
+      "originalSha256": "209137ea95bc54b3f5284b63d365649f00b289b34761009b0f1b855d00799979",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 13,
+      "id": "multimodal-pre-training-vision-encoders-cross-modal-alignment",
+      "title": "Multimodal Pre-Training (Vision Encoders, Cross-Modal Alignment)",
+      "owner": "masked_author",
+      "source": "src/learn/data/topics/multimodal-pretraining.jsx",
+      "originalSha256": "86f6f86c487dc1a8882bc30c4051a207db6549c6e44dc9d03dfa64edfe15f08a",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 14,
+      "id": "data-curation-pipelines-curator-models-quality-filtering",
+      "title": "Data Curation Pipelines (Curator Models, Quality Filtering)",
+      "owner": "root",
+      "source": "src/learn/data/topics/data-curation-pipelines.jsx",
+      "originalSha256": "d0daec389a9b7d9c956cf4f8c86b0f548cac6ecd859d81c7f2a2c0fe49737a5c",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 15,
+      "id": "synthetic-data-generation-for-pre-training",
+      "title": "Synthetic Data Generation for Pre-Training",
+      "owner": "root",
+      "source": "src/learn/data/topics/synthetic-data-pretraining.jsx",
+      "originalSha256": "ccd9d3ffbc661f2497bac4d7fcaa3884e6d0147b199fc792306e6525dbdbfd3f",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 16,
+      "id": "supervised-fine-tuning-sft",
+      "title": "Supervised Fine-Tuning (SFT)",
+      "owner": "causal_author",
+      "source": "src/learn/data/topics/supervised-fine-tuning.jsx",
+      "originalSha256": "7f3493b73234d4a2e5345a29f7c2a430e00f49ca5b52d8d0d72ea0c99fba413f",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 17,
+      "id": "rlhf-reinforcement-learning-from-human-feedback",
+      "title": "RLHF (Reinforcement Learning from Human Feedback)",
+      "owner": "masked_author",
+      "source": "src/learn/data/topics/rlhf.jsx",
+      "originalSha256": "ad6b4ea1cbace22f0b86d951958bd294741150d40fa5b8801fe5dd1fb2e3cb5c",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 18,
+      "id": "dpo-direct-preference-optimization",
+      "title": "DPO (Direct Preference Optimization)",
+      "owner": "masked_author",
+      "source": "src/learn/data/topics/dpo.jsx",
+      "originalSha256": "8d1c086314c1d9f2baa1cebd47872f46a14910144bffb5eb90360255dcbd5589",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 19,
+      "id": "simpo-simple-preference-optimization",
+      "title": "SimPO (Simple Preference Optimization)",
+      "owner": "masked_author",
+      "source": "src/learn/data/topics/simpo.jsx",
+      "originalSha256": "09f8a9238c6303859afb2e326bbf7d6c8e76e2af86e69927daf1782ff7267afd",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 20,
+      "id": "p-tuning-soft-prompt-methods",
+      "title": "P-Tuning & Soft Prompt Methods",
+      "owner": "causal_author",
+      "source": "src/learn/data/topics/p-tuning-soft-prompts.jsx",
+      "originalSha256": "c2d1845cdd9455ea6b85c3018d5c5f35abae469fbe65e1b783546d8a19fef255",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 21,
+      "id": "grpo-rloo-kto-advanced-preference-methods",
+      "title": "GRPO, RLOO, KTO & Advanced Preference Methods",
+      "owner": "masked_author",
+      "source": "src/learn/data/topics/grpo-rloo-kto.jsx",
+      "originalSha256": "342a446bf0fa4c367cb23643ad8af3feb709461e2cbef6fdadfc2d7a03b0a20c",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 22,
+      "id": "constitutional-ai-cai",
+      "title": "Constitutional AI (CAI)",
+      "owner": "multimodal_reviewer",
+      "source": "src/learn/data/topics/constitutional-ai.jsx",
+      "originalSha256": "5631b4b4dc40a0f5735a40dccbc1d6f3c41fa5a7eedbefd8ff74d987be75f550",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 23,
+      "id": "process-reward-models-prm-vs-outcome-reward-models-orm",
+      "title": "Process Reward Models (PRM) vs Outcome Reward Models (ORM)",
+      "owner": "multimodal_reviewer",
+      "source": "src/learn/data/topics/prm-vs-orm.jsx",
+      "originalSha256": "89043f5f944045aab5b288afc3754cd61b90394ab3e3064763a81e1d51a84dc1",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 24,
+      "id": "rlaif-ipo-orpo-emerging-alignment-methods",
+      "title": "RLAIF, IPO, ORPO & Emerging Alignment Methods",
+      "owner": "multimodal_reviewer",
+      "source": "src/learn/data/topics/rlaif-ipo-orpo.jsx",
+      "originalSha256": "f8d71378557c157edd8ff5c434cbac06910702e446028f31545fb67750b1bbfa",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 25,
+      "id": "rlvr-reinforcement-learning-with-verifiable-rewards",
+      "title": "RLVR (Reinforcement Learning with Verifiable Rewards)",
+      "owner": "multimodal_reviewer",
+      "source": "src/learn/data/topics/rlvr.jsx",
+      "originalSha256": "cb8262aa0c937ecd809aa1ff022a8b72478165737784928db9ac313d39b97052",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 26,
+      "id": "dapo-dynamic-adaptive-policy-optimization",
+      "title": "DAPO (Dynamic Adaptive Policy Optimization)",
+      "owner": "multimodal_reviewer",
+      "source": "src/learn/data/topics/dapo.jsx",
+      "originalSha256": "420b6fb24ab2d641dc3d308645d5e6440ad0253191211ce456e4e0ce25592859",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 27,
+      "id": "knowledge-distillation-for-llms-deepseek-r1-distill-cot-distillation",
+      "title": "Knowledge Distillation for LLMs (DeepSeek-R1-Distill, CoT Distillation)",
+      "owner": "causal_author",
+      "source": "src/learn/data/topics/knowledge-distillation-llms.jsx",
+      "originalSha256": "c0bcc1748f136b0c6c3f63af72b4b01d7672cd0b0325553e7d1aa20decbfe217",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 28,
+      "id": "rl-for-reasoning-deepseek-r1-style",
+      "title": "RL for Reasoning (DeepSeek-R1 Style)",
+      "owner": "root",
+      "source": "src/learn/data/topics/rl-for-reasoning.jsx",
+      "originalSha256": "f98991248937b72f5e251b1e0bd991b317f32faa50c567bc24a08e32d8edd1a2",
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    },
+    {
+      "position": 29,
+      "id": "typed-decision-models-calibrated-neural-decision-systems",
+      "title": "Typed Decision Models & Calibrated Neural Decision Systems",
+      "owner": "root",
+      "source": null,
+      "originalSha256": null,
+      "before": {
+        "content": "not-started",
+        "implementation": "not-started",
+        "canFinish": false
+      }
+    }
+  ]
+}

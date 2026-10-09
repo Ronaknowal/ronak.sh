@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+const topic='typed-decision-models-calibrated-neural-decision-systems';
+const folder=`docs/teaching/llm-architecture-training/${topic}`;
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const input=`${folder}/runtime-inputs.json`;
+assert.equal(sha(input),'7d70477940afcf95d107ce8068f5adde65c05fcbb5891bb519f4b2c74249b996');
+const packet=JSON.parse(fs.readFileSync(input));
+const files={...packet.files};
+assert.ok(Object.keys(files).length>1000);
+for(const[p,h]of Object.entries(files))assert.equal(sha(p),h,p);
+for(const name of ['runtime-inputs.json','runtime-review.md','runtime-root-math-checks.json'])files[`${folder}/${name}`]=sha(`${folder}/${name}`);
+files['scripts/accept-typed-decision-runtime.mjs']=sha('scripts/accept-typed-decision-runtime.mjs');
+fs.writeFileSync(`${folder}/runtime-acceptance.json`,JSON.stringify({at:new Date().toISOString(),accepted:true,reviewer:'root; different whole runtime and bounded correction closure',phase:'ready-for-production-integration',topic,manuscript:`${folder}/lesson.jsx`,figures:'[data-typed-figure]',count:36,assets:'learn/examples/typed-decision-systems',files},null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({accepted:true,guards:Object.keys(packet.files).length}));

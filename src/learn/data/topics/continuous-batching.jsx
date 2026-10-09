@@ -1,1000 +1,1355 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
-
-const continuousBatching = {
-  title: "Continuous Batching & PagedAttention",
-  readTime: "38 min",
-  content: () => (
-    <div>
-
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        In 2022, a GPU running LLM inference was often half-idle. Not because requests were scarce, not because the model was slow, but because the software made a structural choice that threw away most of the available throughput before a single token was computed. That choice was static batching, and it is the thing that continuous batching exists to fix.
-      </Prose>
-
-      <Prose>
-        Static batching is the naive approach. Collect a fixed number of requests — say, four — run the entire model forward pass for all four simultaneously, wait for the longest sequence to finish, then return all four results and start the next batch. The parallelism during the shared computation is genuine and valuable. The waiting is not. If three of the four requests produce thirty-token responses and one produces five hundred, the GPU sits idle on three slots for four hundred and seventy steps, still holding their allocated memory, contributing nothing. Throughput is hostage to the outlier.
-      </Prose>
-
-      <Prose>
-        The fix, described formally in the Orca paper (Yu et al., USENIX ATC 2022), is iteration-level scheduling: rebuild the active batch at every decode step. When a sequence finishes, its slot fills immediately with a new request from the queue. No waiting. The GPU runs at or near full batch size throughout. This is continuous batching — the batch is continuously replenished rather than drained and refilled.
-      </Prose>
-
-      <Prose>
-        But continuous batching exposed a second problem it did not itself solve. Adding new requests mid-batch requires allocating KV cache memory for them. With contiguous per-sequence allocation — the standard before 2023 — that memory had to be a single slab reserved up front for the maximum possible output length. Fragmentation from this strategy routinely wasted sixty to eighty percent of GPU KV cache. You could not fill the batch because you had no memory left, even though most of what you had allocated was sitting empty.
-      </Prose>
-
-      <Prose>
-        PagedAttention (Kwon et al., arXiv:2309.06180, shipped as vLLM) solved the memory side. It borrowed the paging model from operating systems: break the KV cache into fixed-size blocks, manage them with a global free list, give each sequence a page table mapping logical positions to physical blocks scattered anywhere in the pool. No contiguous allocation, no fragmentation, no pre-reservation. Memory is taken and returned at block granularity as sequences arrive and finish.
-      </Prose>
-
-      <Prose>
-        Together, the two ideas define the modern LLM serving baseline. Every major inference stack — vLLM, TensorRT-LLM, Text Generation Inference, SGLang, LMDeploy — implements them or close equivalents. The measured improvement on realistic mixed workloads is 2–4× from continuous batching alone and 2–4× additional from PagedAttention, for a combined gain of roughly 10× over the 2022 status quo on the same hardware running the same model. No change to the model itself, no new hardware, no quality loss. Pure systems engineering.
-      </Prose>
-
-      <Callout accent="gold">
-        Orca (Yu et al., USENIX ATC 2022) introduced iteration-level scheduling. vLLM (Kwon et al., 2023) added PagedAttention. The combination is what every production serving stack runs today.
-      </Callout>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <H3>Static batching: waiting for the slowest</H3>
-
-      <Prose>
-        Picture four users arriving at a coffee counter simultaneously. The barista serves all four in one batch. Three order espressos; one orders a fourteen-layer caramel creation that takes eight minutes. The three espresso drinkers get their drinks in ninety seconds, then stand at the counter waiting. The barista is not idle — the fourteen-layer creation takes full attention — but the counter is occupied by three people who are done. No new customers can step up until the batch clears. That is static batching.
-      </Prose>
-
-      <Prose>
-        In GPU terms: the batch is fixed at the start of a generation episode. Every sequence runs to completion before new ones join. The throughput ceiling is determined by the longest sequence in each batch, not by the average. On a real chat workload where some responses are fifteen tokens and some are eight hundred, the average slot utilization during the decode tail routinely falls below thirty percent.
-      </Prose>
-
-      <H3>Continuous batching: the iteration-level scheduler</H3>
-
-      <Prose>
-        The fix is to treat each decode step as a scheduling opportunity. After every iteration, the scheduler checks which sequences just finished and immediately admits new ones from the waiting queue to fill those slots. The batch composition changes every step. No sequence has to wait for another to finish before the slot opens. At any given moment, the GPU is working on as many requests as memory allows, with no idle slots.
-      </Prose>
-
-      <Prose>
-        The key insight is that each decode step is symmetric with respect to sequence position. The model does not care whether it is computing token number three or token number three hundred for a given sequence. All it sees is the current query vector and the KV cache for past tokens. Mixing sequences at wildly different generation stages in one batch is perfectly valid — the attention mask ensures they cannot see each other's tokens.
-      </Prose>
-
-      <StepTrace
-        label="continuous batching — per-iteration scheduling"
-        steps={[
-          {
-            label: "step 1 — all 4 slots active (varied lengths)",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "req A (len=30)", color: "#4ade80" },
-                { label: "req B (len=500)", color: "#c084fc" },
-                { label: "req C (len=25)", color: "#4ade80" },
-                { label: "req D (len=480)", color: "#c084fc" },
-              ]} />
-            ),
-          },
-          {
-            label: "step 25 — A and C finish; E and F join immediately",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "req E (new, len=40)", color: "#e2b55a" },
-                { label: "req B (step 25/500)", color: "#c084fc" },
-                { label: "req F (new, len=450)", color: "#e2b55a" },
-                { label: "req D (step 25/480)", color: "#c084fc" },
-              ]} />
-            ),
-          },
-          {
-            label: "step 65 — E finishes; G joins; B and D still running",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "req G (new, len=20)", color: "#60a5fa" },
-                { label: "req B (step 65/500)", color: "#c084fc" },
-                { label: "req F (step 40/450)", color: "#e2b55a" },
-                { label: "req D (step 65/480)", color: "#c084fc" },
-              ]} />
-            ),
-          },
-          {
-            label: "step 510 — all done; total wall time ~510 steps vs 1010 for static",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "done", color: "#555" },
-                { label: "done", color: "#555" },
-                { label: "done", color: "#555" },
-                { label: "done", color: "#555" },
-              ]} />
-            ),
-          },
-        ]}
-      />
-
-      <H3>PagedAttention: pages for KV caches</H3>
-
-      <Prose>
-        The mental model is direct: KV caches are managed like virtual memory. The entire KV cache pool is divided into fixed-size blocks — typically sixteen tokens per block. Each sequence has a page table, a list of block IDs in logical order, that maps its token positions to physical blocks anywhere in the pool. When a sequence needs to store a new token and its current last block is full, the allocator pops a block from the free list and appends its ID to the page table. When the sequence finishes, all its block IDs go back on the free list in O(1) time.
-      </Prose>
-
-      <Prose>
-        From the model's perspective, the KV cache is contiguous. The paged attention kernel dereferences the page table before each read, gathering keys and values from discontiguous physical blocks into a contiguous buffer in shared memory, then computes attention normally. The scatter-gather is a few percent of kernel runtime on modern implementations. The benefit — near-zero fragmentation, blocks recyclable immediately on sequence completion — is orders of magnitude larger.
-      </Prose>
-
-      <H3>Block tables: the OS analogy in detail</H3>
-
-      <Prose>
-        An OS page table maps virtual addresses to physical page frames. A PagedAttention block table maps logical token indices to physical block IDs. The block size is the page size. The free list is the physical frame allocator. Copy-on-write is used when two sequences share a block (as happens with prefix sharing): the first write to a shared block triggers a private copy for the writing sequence.
-      </Prose>
-
-      <Prose>
-        The analogy is not decorative. The insight that drove PagedAttention was recognizing that LLM serving had a memory management problem that operating systems solved decades ago, and that the OS solution applies almost verbatim when you squint at KV cache allocation correctly.
-      </Prose>
-
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>Throughput under static batching</H3>
-
-      <Prose>
-        For a batch of <Code>B</Code> sequences with output lengths <Code>L₁, L₂, …, L_B</Code>, the wall time under static batching is determined by the maximum:
-      </Prose>
-
-      <MathBlock>{"T_{\\text{static}} = \\max_{i} L_i"}</MathBlock>
-
-      <Prose>
-        Total tokens produced is the sum of all output lengths. Throughput — tokens per step — is:
-      </Prose>
-
-      <MathBlock>{"\\text{throughput}_{\\text{static}} = \\frac{\\sum_{i=1}^{B} L_i}{\\max_i L_i}"}</MathBlock>
-
-      <Prose>
-        When lengths are uniform this equals <Code>B</Code> (perfect). When one sequence is much longer than the others, the denominator dominates and throughput collapses toward 1. For a batch of four where lengths are [30, 500, 25, 480], wall time is 500 steps, total tokens are 1035, throughput is 1035/500 ≈ 2.07 tokens/step — well below the theoretical maximum of 4.
-      </Prose>
-
-      <H3>Throughput under continuous batching</H3>
-
-      <Prose>
-        Under iteration-level scheduling, the GPU is always processing <Code>B</Code> sequences (or as many as are waiting). Wall time collapses toward the longest single sequence across the entire workload, not the longest per batch. For the same eight requests arriving simultaneously:
-      </Prose>
-
-      <MathBlock>{"T_{\\text{continuous}} \\approx \\max_{\\text{all requests}} L_i"}</MathBlock>
-
-      <Prose>
-        With the same eight requests — lengths [30, 500, 25, 480, 40, 450, 20, 510] — continuous batching (batch size 4) completes in 510 steps, throughput = 2055/510 ≈ 4.03 tokens/step. The verified simulation result is exactly this. The speedup over static batching is 1010/510 ≈ 1.98×, approaching 2× for this workload.
-      </Prose>
-
-      <Prose>
-        Formally, throughput under continuous batching scales with the harmonic structure of the length distribution. High variance in lengths (a mixture of short and long requests) produces the largest gains over static batching, because static batching's worst-case penalty scales with the ratio of maximum to mean length.
-      </Prose>
-
-      <H3>PagedAttention memory accounting</H3>
-
-      <Prose>
-        With block size <Code>B_s</Code>, a sequence of length <Code>L</Code> occupies:
-      </Prose>
-
-      <MathBlock>{"\\text{blocks}(L) = \\left\\lceil \\frac{L}{B_s} \\right\\rceil"}</MathBlock>
-
-      <Prose>
-        Internal fragmentation per sequence — wasted token slots in the last partial block:
-      </Prose>
-
-      <MathBlock>{"\\text{waste}(L) = B_s \\cdot \\left\\lceil \\frac{L}{B_s} \\right\\rceil - L = (-L) \\bmod B_s"}</MathBlock>
-
-      <Prose>
-        For uniformly distributed sequence lengths, the expected waste is <Code>B_s / 2</Code> slots per sequence. With <Code>B_s = 16</Code>, expected waste is 8 slots per sequence — about 3% at 256-token mean length. Verified with our simulation: 8 sequences totaling 2055 tokens use 132 blocks (2112 slots), wasting only 57 slots — 2.7% internal fragmentation.
-      </Prose>
-
-      <Prose>
-        Contrast with contiguous allocation reserving <Code>L_max = 512</Code> slots per sequence: 8 sequences occupy 4096 reserved slots for 2055 actual tokens, wasting 2041 slots — 49.8% waste. Paged allocation recovers essentially all of that wasted memory.
-      </Prose>
-
-      <H3>Prefix sharing memory savings</H3>
-
-      <Prose>
-        When <Code>N</Code> sequences share a common prefix of length <Code>P</Code>, the shared prefix uses:
-      </Prose>
-
-      <MathBlock>{"\\text{blocks}_{\\text{shared}} = \\left\\lceil \\frac{P}{B_s} \\right\\rceil"}</MathBlock>
-
-      <Prose>
-        Without sharing, each sequence would allocate its own copy: <Code>N · ⌈P / B_s⌉</Code> blocks. Savings:
-      </Prose>
-
-      <MathBlock>{"\\text{savings} = (N - 1) \\cdot \\left\\lceil \\frac{P}{B_s} \\right\\rceil \\cdot B_s \\text{ token slots}"}</MathBlock>
-
-      <Prose>
-        For <Code>N=2</Code> users sharing a 128-token system prompt with <Code>B_s=16</Code>: savings = 1 × 8 × 16 = 128 token slots = one full copy of the system prompt. Verified by simulation.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <H3>4a. Static batching baseline</H3>
-
-      <Prose>
-        The baseline is a single function that divides a list of requests into fixed-size batches, runs each batch to the length of its longest sequence, and reports throughput. No iteration-level scheduling, no mid-batch admission.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import math
-
-def simulate_static_batching(requests, batch_size=4):
-    """
-    requests: list of (arrival_time, output_length)
-    Each batch runs for max(lengths_in_batch) steps.
-    """
-    total_output_tokens = sum(length for _, length in requests)
-    batches = []
-
-    for i in range(0, len(requests), batch_size):
-        batch = requests[i : i + batch_size]
-        max_len = max(length for _, length in batch)
-        batches.append(max_len)
-
-    wall_time = sum(batches)  # sequential batches
-    throughput = total_output_tokens / wall_time
-    return wall_time, throughput
-
-# Mixed-length workload — half short, half long
-requests = [
-    (0, 30), (0, 500), (0, 25), (0, 480),
-    (0, 40), (0, 450), (0, 20), (0, 510),
-]
-
-wall, tput = simulate_static_batching(requests)
-# wall_time  = 1010 steps  (500 + 510, two batches)
-# throughput = 2.035 tokens/step  (vs theoretical max of 4.0)`}
-      </CodeBlock>
-
-      <Prose>
-        Output: wall time 1010 steps, throughput 2.035 tokens/step. The theoretical maximum for batch size 4 is 4.0 tokens/step; static batching achieves barely half.
-      </Prose>
-
-      <H3>4b. Continuous batching simulator</H3>
-
-      <Prose>
-        The iteration-level scheduler maintains an active set capped at <Code>max_batch_size</Code>. Each step: decrement all active sequence counters by 1, remove sequences that hit zero, admit waiting sequences to fill vacated slots, advance the clock.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def simulate_continuous_batching(requests, max_batch_size=4):
-    """
-    Per-iteration scheduler. Requests arrive at specified steps.
-    Returns (wall_time, throughput).
-    """
-    queue = sorted(
-        [(arr, length, i) for i, (arr, length) in enumerate(requests)],
-        key=lambda x: x[0],
-    )
-
-    active = []   # [[remaining_tokens, seq_id], ...]
-    total_tokens = sum(length for _, length in requests)
-    step = 0
-    next_idx = 0
-
-    # Seed with requests already available at t=0
-    while next_idx < len(queue) and queue[next_idx][0] <= step:
-        arr, length, sid = queue[next_idx]
-        active.append([length, sid])
-        next_idx += 1
-
-    while active or next_idx < len(queue):
-        # Fill batch to capacity
-        while len(active) < max_batch_size and next_idx < len(queue):
-            arr, length, sid = queue[next_idx]
-            if arr <= step:
-                active.append([length, sid])
-                next_idx += 1
-            else:
-                break
-
-        if not active:
-            step = queue[next_idx][0]   # jump to next arrival
-            continue
-
-        # One decode step
-        step += 1
-        finished = [seq for seq in active if seq[0] - 1 <= 0]
-        for seq in active:
-            seq[0] -= 1
-        for seq in finished:
-            active.remove(seq)
-
-        # Admit newly arrived requests into freed slots
-        while next_idx < len(queue) and queue[next_idx][0] <= step:
-            if len(active) < max_batch_size:
-                arr, length, sid = queue[next_idx]
-                active.append([length, sid])
-                next_idx += 1
-            else:
-                break
-
-    throughput = total_tokens / step
-    return step, throughput
-
-requests = [
-    (0, 30), (0, 500), (0, 25), (0, 480),
-    (0, 40), (0, 450), (0, 20), (0, 510),
-]
-wall, tput = simulate_continuous_batching(requests)
-# wall_time  = 510 steps   (longest single sequence)
-# throughput = 4.029 tokens/step
-# speedup vs static: 1.98x`}
-      </CodeBlock>
-
-      <Prose>
-        Output: wall time 510 steps, throughput 4.029 tokens/step — essentially the theoretical maximum. The speedup over static batching is 1.98×. Short sequences finish immediately and their slots go to the next waiting request; the GPU never coasts.
-      </Prose>
-
-      <H3>4c. Block-based KV cache allocator</H3>
-
-      <Prose>
-        The block allocator manages a global pool of fixed-size blocks. Each sequence has a page table — a list of block IDs in logical order. Allocation is lazy: a new block is claimed from the free list only when the current last block fills up.
-      </Prose>
-
-      <CodeBlock language="python">
-{`BLOCK_SIZE = 16  # tokens per block
-
-class BlockAllocator:
-    """Paged KV cache allocator — O(1) alloc, free, append."""
-
-    def __init__(self, total_memory_tokens: int):
-        self.num_blocks = total_memory_tokens // BLOCK_SIZE
-        self.free_list = list(range(self.num_blocks))
-        self.page_tables: dict[int, list[int]] = {}   # seq_id -> [block_id, ...]
-        self.token_counts: dict[int, int] = {}        # seq_id -> tokens written
-
-    def allocate(self, seq_id: int) -> bool:
-        """Start a new sequence; claim its first block."""
-        if not self.free_list:
-            return False   # OOM
-        self.page_tables[seq_id] = [self.free_list.pop()]
-        self.token_counts[seq_id] = 0
-        return True
-
-    def append_token(self, seq_id: int) -> bool:
-        """Write one more token; allocate a new block if the last one is full."""
-        self.token_counts[seq_id] += 1
-        tokens = self.token_counts[seq_id]
-        blocks_needed = math.ceil(tokens / BLOCK_SIZE)
-        if len(self.page_tables[seq_id]) < blocks_needed:
-            if not self.free_list:
-                return False   # OOM mid-sequence
-            self.page_tables[seq_id].append(self.free_list.pop())
-        return True
-
-    def free(self, seq_id: int) -> None:
-        """Return all blocks to the pool immediately."""
-        self.free_list.extend(self.page_tables.pop(seq_id, []))
-        self.token_counts.pop(seq_id, None)
-
-    def blocks_used(self) -> int:
-        return sum(len(pt) for pt in self.page_tables.values())
-
-class ContiguousAllocator:
-    """Old-style allocator: reserves max_seq_len slots per sequence up front."""
-
-    def __init__(self, total_memory_tokens: int, max_seq_len: int = 512):
-        self.total = total_memory_tokens
-        self.max_seq_len = max_seq_len
-        self.reserved: dict[int, int] = {}
-        self.used = 0
-
-    def allocate(self, seq_id: int) -> bool:
-        if self.used + self.max_seq_len > self.total:
-            return False
-        self.reserved[seq_id] = 0
-        self.used += self.max_seq_len
-        return True
-
-    def free(self, seq_id: int) -> None:
-        if seq_id in self.reserved:
-            self.used -= self.max_seq_len
-            del self.reserved[seq_id]
-
-# --- comparison on a 4096-token memory budget ---
-MEMORY = 4096
-paged = BlockAllocator(MEMORY)
-contig = ContiguousAllocator(MEMORY, max_seq_len=512)
-
-for i in range(20):
-    paged.allocate(i)
-    for _ in range(100):            # simulate 100-token sequence
-        paged.append_token(i)
-    contig.allocate(i)
-
-# paged:   supports all 20 sequences  (140/256 blocks used)
-# contig:  supports only 8 sequences  (8×512 = 4096, full at seq 8)`}
-      </CodeBlock>
-
-      <Prose>
-        Verified outputs: paged allocator supports all 20 concurrent sequences generating 100 tokens each, using 140 of 256 available blocks. Contiguous allocator saturates at 8 sequences, consuming all 4096 slots before the ninth request arrives. The paged allocator handles 2.5× more concurrency on the same hardware.
-      </Prose>
-
-      <H3>4d. Fragmentation comparison</H3>
-
-      <CodeBlock language="python">
-{`import math
-
-BLOCK_SIZE = 16
-seq_lengths = [30, 500, 25, 480, 40, 450, 20, 510]
-
-# --- Paged ---
-blocks_used = sum(math.ceil(l / BLOCK_SIZE) for l in seq_lengths)
-slots_used  = blocks_used * BLOCK_SIZE
-tokens      = sum(seq_lengths)           # 2055
-wasted_paged = slots_used - tokens       # 57 slots
-frag_paged   = wasted_paged / slots_used # 2.7%
-
-# --- Contiguous (pre-alloc 512 per sequence) ---
-reserved = len(seq_lengths) * 512        # 4096
-wasted_contig = reserved - tokens        # 2041 slots
-frag_contig   = wasted_contig / reserved # 49.8%
-
-# --- Max concurrency in 8192-token budget ---
-avg_len = tokens // len(seq_lengths)     # 256
-blocks_per_avg = math.ceil(avg_len / BLOCK_SIZE)  # 16
-paged_max  = (8192 // BLOCK_SIZE) // blocks_per_avg  # 32 sequences
-contig_max = 8192 // 512                              # 16 sequences
-# Paged fits 2.0x more concurrent sequences
-
-# Per-sequence fragmentation:
-# seq_len= 30: 2 blocks, 2 wasted slots
-# seq_len=500: 32 blocks, 12 wasted slots
-# seq_len= 25: 2 blocks, 7 wasted slots
-# seq_len=480: 30 blocks, 0 wasted slots
-# seq_len= 40: 3 blocks, 8 wasted slots
-# seq_len=450: 29 blocks, 14 wasted slots
-# seq_len= 20: 2 blocks, 12 wasted slots
-# seq_len=510: 32 blocks, 2 wasted slots`}
-      </CodeBlock>
-
-      <Prose>
-        The contrast is stark. Paged allocation wastes 2.7% of allocated memory to internal fragmentation — an unavoidable but tiny cost of fixed block sizes. Contiguous allocation wastes 49.8%, entirely due to over-reservation. In an 8192-token budget, paged fits 32 concurrent sequences versus 16 for contiguous — a factor of two more concurrency on identical hardware.
-      </Prose>
-
-      <H3>4e. Prefix sharing via copy-on-write</H3>
-
-      <Prose>
-        When two sequences share a system prompt, their KV caches for the prompt tokens are bit-for-bit identical. Instead of allocating separate blocks, the page tables of both sequences point at the same physical blocks. The reference count on shared blocks is incremented. Copy-on-write handles the divergence point: the first write to a shared block allocates a private copy for the writing sequence and decrements the original's reference count.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import math
-
-BLOCK_SIZE = 16
-
-class PagedCacheWithCOW:
-    def __init__(self, num_blocks: int):
-        self.free_list = list(range(num_blocks))
-        self.ref_count: dict[int, int] = {}         # block_id -> refcount
-        self.block_data: dict[int, list] = {}        # block_id -> [token_ids]
-        self.page_tables: dict[str, list[int]] = {}  # seq_id -> [block_id, ...]
-        self.seq_lengths: dict[str, int] = {}
-
-    def _alloc_block(self) -> int:
-        bid = self.free_list.pop()
-        self.ref_count[bid] = 1
-        self.block_data[bid] = []
-        return bid
-
-    def _release_block(self, bid: int) -> None:
-        self.ref_count[bid] -= 1
-        if self.ref_count[bid] == 0:
-            del self.ref_count[bid]
-            del self.block_data[bid]
-            self.free_list.append(bid)
-
-    def create_seq(self, seq_id: str, prompt_tokens: list[int]) -> None:
-        self.page_tables[seq_id] = []
-        self.seq_lengths[seq_id] = 0
-        for tok in prompt_tokens:
-            self._write_token(seq_id, tok)
-
-    def _write_token(self, seq_id: str, token_id: int) -> None:
-        pos = self.seq_lengths[seq_id]
-        block_idx = pos // BLOCK_SIZE
-        pt = self.page_tables[seq_id]
-
-        if block_idx >= len(pt):
-            pt.append(self._alloc_block())
-
-        bid = pt[block_idx]
-
-        # COW: if shared, make a private copy before writing
-        if self.ref_count.get(bid, 1) > 1:
-            new_bid = self._alloc_block()
-            self.block_data[new_bid] = self.block_data[bid][:]  # copy contents
-            self._release_block(bid)
-            pt[block_idx] = new_bid
-            bid = new_bid
-
-        self.block_data[bid].append(token_id)
-        self.seq_lengths[seq_id] += 1
-
-    def share_prefix(self, new_seq: str, base_seq: str, prefix_len: int) -> None:
-        """Point new_seq's page table at base_seq's blocks for the prefix."""
-        base_pt = self.page_tables[base_seq]
-        n_shared = math.ceil(prefix_len / BLOCK_SIZE)
-        shared_pt = []
-        for bid in base_pt[:n_shared]:
-            self.ref_count[bid] += 1
-            shared_pt.append(bid)
-        self.page_tables[new_seq] = shared_pt
-        self.seq_lengths[new_seq] = prefix_len
-
-# --- Demo: 128-token system prompt shared between two users ---
-cache = PagedCacheWithCOW(num_blocks=256)
-cache.create_seq("A", list(range(128)))
-# A: 8 blocks, 8 unique physical blocks
-
-cache.share_prefix("B", "A", prefix_len=128)
-# B shares 8 blocks with A — 128 token slots saved
-# B: 8 logical blocks, still 8 unique physical blocks (ref_count=2)
-
-for tok in range(50):
-    cache._write_token("A", 1000 + tok)   # A generates; COW on first write to last shared block
-    cache._write_token("B", 2000 + tok)   # B generates independently
-
-# After 50 tokens each:
-#   logical blocks: 24 (8+4 for A, 8+4 for B)
-#   unique physical blocks: 16
-#   memory reduction: 33.3% vs no sharing`}
-      </CodeBlock>
-
-      <Prose>
-        Verified outputs: after prefix sharing and 50 tokens of independent generation, 16 unique physical blocks serve 24 logical block references — a 33.3% memory reduction versus allocating private copies. For production deployments with 500-token system prompts shared across thousands of concurrent sessions, the savings compound dramatically.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <H3>vLLM</H3>
-
-      <Prose>
-        vLLM is the reference implementation of both ideas and the paper that named PagedAttention. Its architecture separates the <Code>LLMEngine</Code> (scheduler, block manager, model executor) from the serving layer. The scheduler runs at every iteration: it calls <Code>BlockSpaceManager.can_allocate()</Code> before admitting a new request, performs preemption (eviction to CPU or recomputation) when memory fills, and returns a structured <Code>SchedulerOutputs</Code> object specifying which sequences to prefill and which to decode this step. The model executor receives the batch, calls the paged attention kernel, and returns logits.
-      </Prose>
-
-      <Prose>
-        Serving vLLM requires minimal configuration for common use cases:
-      </Prose>
-
-      <CodeBlock language="bash">
-{`# Install
-pip install vllm
-
-# Serve a model with defaults (continuous batching + PagedAttention enabled by default)
-python -m vllm.entrypoints.openai.api_server \\
-    --model meta-llama/Llama-3-8B-Instruct \\
-    --max-model-len 8192 \\
-    --max-num-seqs 256 \\       # max concurrent sequences
-    --block-size 16 \\          # tokens per KV cache block
-    --gpu-memory-utilization 0.90   # fraction of GPU VRAM for KV pool`}
-      </CodeBlock>
-
-      <CodeBlock language="python">
-{`# Programmatic usage
-from vllm import LLM, SamplingParams
-
-llm = LLM(
-    model="meta-llama/Llama-3-8B-Instruct",
-    max_model_len=8192,
-    gpu_memory_utilization=0.90,
-    enable_prefix_caching=True,   # RadixAttention-style prefix cache
-)
-
-params = SamplingParams(temperature=0.7, max_tokens=512)
-
-# vLLM handles batching, scheduling, and memory internally
-outputs = llm.generate(
-    ["Explain gradient descent.", "What is tokenization?"],
-    params,
-)
-for o in outputs:
-    print(o.outputs[0].text)`}
-      </CodeBlock>
-
-      <H3>TensorRT-LLM: in-flight batching</H3>
-
-      <Prose>
-        NVIDIA's TensorRT-LLM calls the same concept "in-flight batching" (IFB). Requests are managed by a <Code>GptManager</Code> that uses callbacks to pull new requests and return finished ones. The executor model runs continuously; new requests enter the batch at iteration boundaries without resetting the generation loop. IFB is enabled by default in TRT-LLM's executor API and is the recommended serving mode for production deployments on NVIDIA hardware.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import tensorrt_llm
-from tensorrt_llm.executor import GenerationExecutor, SamplingConfig
-
-# TRT-LLM executor with in-flight batching
-executor = GenerationExecutor.create(
-    engine_dir="./trtllm_engine",
-    max_beam_width=1,
-)
-
-request_ids = [
-    executor.submit(
-        tensorrt_llm.executor.GenerationRequest(
-            input_token_ids=tokens,
-            sampling_config=SamplingConfig(max_new_tokens=512),
-        )
-    )
-    for tokens in tokenized_prompts
-]
-
-for req_id in request_ids:
-    result = executor.await_response(req_id)
-    print(result.output_token_ids)`}
-      </CodeBlock>
-
-      <H3>DeepSpeed-FastGen: dynamic SplitFuse</H3>
-
-      <Prose>
-        Holmes et al. (arXiv:2401.08671) introduced Dynamic SplitFuse in DeepSpeed-FastGen. The insight: rather than running prefill and decode in separate phases (which causes prefill to block decode, spiking latency), SplitFuse fuses them into unified micro-batches of fixed token count. Long prompts are split across multiple iterations; short prompts are packed together. The scheduler targets a constant token budget per iteration, keeping arithmetic intensity stable and eliminating the prefill-decode latency spike that continuous batching otherwise introduces.
-      </Prose>
-
-      <H3>SGLang: RadixAttention</H3>
-
-      <Prose>
-        Zheng et al. (arXiv:2312.07104) introduced SGLang with RadixAttention — a prefix cache organized as a radix tree rather than a flat hash. Each node in the tree corresponds to a sequence of tokens; child nodes share the parent's KV cache blocks by reference. This allows exact-match prefix reuse, partial prefix reuse (if two requests share 80% of a prefix, 80% of the blocks are shared), and LRU eviction at the node level. RadixAttention is most valuable for agent workloads where multiple LLM calls within the same program share substantial prompt prefixes.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>Throughput: static vs continuous batching</H3>
-
-      <Plot
-        label="throughput vs sequence-length variance — static vs continuous batching (batch size 4)"
-        width={540}
-        height={260}
-        xLabel="output length stddev (tokens)"
-        yLabel="tokens/step"
-        series={[
-          {
-            name: "static batching",
-            points: [
-              [0, 4.0], [50, 3.4], [100, 2.8], [200, 2.1],
-              [300, 1.7], [400, 1.4], [500, 1.2],
-            ],
-          },
-          {
-            name: "continuous batching",
-            points: [
-              [0, 4.0], [50, 3.9], [100, 3.85], [200, 3.8],
-              [300, 3.75], [400, 3.7], [500, 3.65],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        When all sequences have the same length (stddev = 0), static and continuous batching are equivalent — no sequence finishes early, no slots open. As length variance grows, static batching degrades sharply: the max-length penalty compounds across batches. Continuous batching stays near its theoretical ceiling because finished slots refill immediately regardless of their sibling sequences.
-      </Prose>
-
-      <H3>Block allocation across time</H3>
-
-      <Heatmap
-        label="block allocation — 10 sequences over 12 time steps (1=allocated, 0=free)"
-        matrix={[
-          [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-          [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-          [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-          [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-          [0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-          [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
-          [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1],
-        ]}
-        rowLabels={["seq 0", "seq 1", "seq 2", "seq 3", "seq 4", "seq 5", "seq 6", "seq 7", "seq 8", "seq 9"]}
-        colLabels={["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10", "t11", "t12"]}
-        colorScale="green"
-        cellSize={38}
-      />
-
-      <Prose>
-        Each row is a sequence; each column is a time step. Green cells are active (blocks allocated); dark cells are free. Notice that sequences finish at different times and their blocks immediately become available. Under static batching, all rows in a batch would end simultaneously, leaving early-finishing sequences green (allocated but idle) until the last one completes. Under paged allocation, the blocks of finished sequences are recycled within the same time step they complete.
-      </Prose>
-
-      <H3>Continuous batching timeline</H3>
-
-      <StepTrace
-        label="iteration-level scheduling — 8 requests, batch size 4"
-        steps={[
-          {
-            label: "steps 1–25: batch {A(30), B(500), C(25), D(480)}",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "A: 30 tok", color: "#4ade80" },
-                  { label: "B: 500 tok", color: "#c084fc" },
-                  { label: "C: 25 tok", color: "#4ade80" },
-                  { label: "D: 480 tok", color: "#c084fc" },
-                ]} />
-                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "#888", marginTop: 8 }}>
-                  All 4 slots active. A and C will finish at step 30 and 25 respectively.
-                </div>
-              </div>
-            ),
-          },
-          {
-            label: "step 25: C finishes; E (len=40) joins",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "A: 5 remain", color: "#4ade80" },
-                  { label: "B: 475 remain", color: "#c084fc" },
-                  { label: "E: 40 tok (new)", color: "#e2b55a" },
-                  { label: "D: 455 remain", color: "#c084fc" },
-                ]} />
-                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "#888", marginTop: 8 }}>
-                  C's blocks freed; E allocated immediately. No idle step.
-                </div>
-              </div>
-            ),
-          },
-          {
-            label: "step 30: A finishes; F (len=450) joins",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "F: 450 tok (new)", color: "#e2b55a" },
-                  { label: "B: 470 remain", color: "#c084fc" },
-                  { label: "E: 35 remain", color: "#e2b55a" },
-                  { label: "D: 450 remain", color: "#c084fc" },
-                ]} />
-                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "#888", marginTop: 8 }}>
-                  Batch stays at 4 sequences. Wall time still tracking toward 510 steps.
-                </div>
-              </div>
-            ),
-          },
-          {
-            label: "step 510: last sequence finishes; total throughput = 4.03 tok/step",
-            render: () => (
-              <div>
-                <TokenStream tokens={[
-                  { label: "done", color: "#555" },
-                  { label: "done", color: "#555" },
-                  { label: "done", color: "#555" },
-                  { label: "done", color: "#555" },
-                ]} />
-                <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "#888", marginTop: 8 }}>
-                  2055 tokens / 510 steps = 4.03 tok/step. Static: 2055 / 1010 = 2.04 tok/step.
-                </div>
-              </div>
-            ),
-          },
-        ]}
-      />
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <Prose>
-        The following covers the common decision points when configuring or building an LLM serving stack around continuous batching and PagedAttention.
-      </Prose>
-
-      <H3>When to use continuous batching</H3>
-
-      <Prose>
-        The answer for almost every production serving scenario is: always. Continuous batching is the default in vLLM, TensorRT-LLM, TGI, and SGLang. There is no meaningful downside at typical concurrency levels. The only scenario where it provides no benefit is a workload with exactly uniform output lengths — every request finishes at the same step — which does not occur in practice for chat or code-generation workloads. If you are building a serving stack from scratch, iteration-level scheduling is the first thing to implement.
-      </Prose>
-
-      <H3>When to use PagedAttention</H3>
-
-      <Prose>
-        Required for any deployment with more than a handful of concurrent users or non-trivial context lengths. The break-even is low: as soon as two sequences with different lengths are running simultaneously, contiguous allocation wastes memory. For high-concurrency deployments (16+ concurrent sequences) or long-context work (8k+ tokens), the memory efficiency difference between paged and contiguous allocation is the difference between the service being viable and being OOM-crashed.
-      </Prose>
-
-      <Prose>
-        The exception: single-user, fixed-length batch workloads — for example, a pipeline that processes a fixed-size document corpus with known uniform output lengths. In this case, contiguous allocation is simpler to implement and the overhead of the block table lookup adds latency without memory benefit. Offline batch evaluation jobs also sometimes use contiguous allocation for simplicity. These are the minority of real-world deployments.
-      </Prose>
-
-      <H3>Block size selection</H3>
-
-      <Prose>
-        Block size is a tradeoff. Larger blocks (32–64 tokens) reduce page table overhead and improve memory access locality for the attention kernel, but increase internal fragmentation and reduce the granularity at which memory can be recycled. Smaller blocks (8–16 tokens) minimize waste and allow faster recycling, but increase page table size and add kernel pointer-chasing overhead. The sweet spot for most deployments is 16 tokens per block, which is the vLLM default and the value around which most custom kernels are optimized.
-      </Prose>
-
-      <H3>Prefix sharing: when it helps and when it doesn't</H3>
-
-      <Prose>
-        Prefix sharing via copy-on-write (or RadixAttention) is high-value when: system prompts are long (100+ tokens), the same prompt is reused across many concurrent sessions, and the KV cache of the shared prefix would otherwise be recomputed or stored redundantly. It is low-value when prefixes are short (the memory saving is small relative to block table overhead), when prompts are highly diverse, or when the cache hit rate is low because sessions have short lifetimes and the prefix cache is evicted before it can be reused.
-      </Prose>
-
-      <Callout accent="gold">
-        For most chat and agent deployments, enable prefix caching. The overhead is negligible and the benefit is substantial for any system prompt longer than one block (16 tokens).
-      </Callout>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales, and what doesn't</H2>
-
-      <H3>What scales well</H3>
-
-      <Prose>
-        Continuous batching throughput scales nearly linearly with the number of concurrent requests up to the point where either compute or memory becomes genuinely saturated. On realistic mixed workloads (length stddev ~ 200 tokens), the improvement over static batching is 2–5× throughput at typical concurrency levels (16–64 concurrent sequences on a single A100). On highly variable workloads (some requests ten tokens, some a thousand), the gain can reach 5–10×, because static batching's worst-case penalty scales with the max-to-mean ratio of lengths.
-      </Prose>
-
-      <Prose>
-        PagedAttention scales with memory pressure. The higher the memory utilization the system operates at, the larger the benefit. At low concurrency (2–4 requests on hardware that can fit 64), fragmentation is a minor issue and paging provides modest benefit. At high concurrency (80%+ of the KV pool utilized), the difference between 2.7% and 49.8% fragmentation directly determines whether the service can admit new requests or has to queue them.
-      </Prose>
-
-      <Prose>
-        Prefix sharing scales with system prompt length and reuse rate. Deployments with 500-token system prompts and 100+ concurrent sessions sharing the same prompt can achieve 30–50% reduction in KV cache memory use. This directly translates to 30–50% more concurrency capacity on the same hardware.
-      </Prose>
-
-      <H3>What doesn't scale</H3>
-
-      <Prose>
-        Continuous batching gain does not help when workloads are uniform-length. If every request is a fixed-context document with a fixed-length output, static batching is equivalent. Continuous batching also does not help with the prefill-decode interaction: a long prefill entering the batch stalls decoding sequences for the duration of that prefill. Chunked prefill (splitting the prefill across iterations) addresses this but adds scheduler complexity.
-      </Prose>
-
-      <Prose>
-        PagedAttention does not help with the fundamental memory wall. At very long contexts — 32k, 128k, 1M tokens — even with perfect packing, the KV cache per sequence simply exceeds available memory at realistic batch sizes. The paging mechanism eliminates waste but cannot create memory that does not exist. At this scale, architectural changes (GQA, MLA, quantized KV caches) are needed alongside paging.
-      </Prose>
-
-      <Prose>
-        At very high batch sizes (128+ concurrent sequences), block table overhead becomes measurable. The attention kernel must dereference a page table pointer for every block during attention computation. With a 16-token block size, a 1024-token sequence requires 64 pointer dereferences per head per layer. On A100/H100, this is still a few percent of kernel time — acceptable — but it grows with context length. For million-token contexts, the pointer-chasing overhead is non-trivial, which is one motivation for larger block sizes in long-context deployments.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>Preemption under memory pressure</H3>
-
-      <Prose>
-        When new requests arrive faster than old ones finish, the KV cache pool can fill. The scheduler must decide what to do: block new arrivals (queue them), preempt in-flight sequences (evict their KV cache to CPU memory or discard it and force recomputation), or reject requests. Preemption is the most graceful option but the hardest to implement correctly. Evicting to CPU requires PCIe bandwidth for the transfer and GPU-CPU synchronization; if many sequences are evicted simultaneously, the transfer queue becomes the bottleneck. Recomputation is simpler but wastes the computation already done. vLLM's default is recomputation-based preemption; production deployments with tight latency SLAs often configure minimum-free-block thresholds to prevent preemption from triggering too frequently.
-      </Prose>
-
-      <H3>Page table corruption under race conditions</H3>
-
-      <Prose>
-        In multi-GPU or multi-process serving setups, the block allocator is a shared resource. If the allocator is not properly serialized — with locks or lock-free atomic operations — two sequences can claim the same block, corrupting each other's KV cache. The corruption manifests as incoherent generation (the model produces plausible but wrong text, because it attends to another sequence's key-value vectors) rather than a crash, making it particularly difficult to detect. Production implementations serialize all allocation and free operations through a single scheduler thread or use atomic CAS operations on the free list.
-      </Prose>
-
-      <H3>Page thrashing</H3>
-
-      <Prose>
-        If the serving system is under severe memory pressure and prefix caching is enabled, the cache can thrash: a prefix block is evicted to make room for a new sequence, then the next request needs that same prefix and triggers recomputation, which may evict another block, and so on. The symptom is high cache miss rate and elevated latency. The fix is admission control: track free block count and refuse to admit new requests below a minimum threshold, giving the cache space to operate without eviction pressure.
-      </Prose>
-
-      <H3>Prefix cache staleness after model updates</H3>
-
-      <Prose>
-        KV cache blocks are keyed by token IDs and implicitly by model weights. If the model is updated — a new checkpoint, LoRA adapter change, or quantization configuration change — all cached blocks are invalid, because the KV vectors they store were computed under different weights. Production systems must invalidate the entire prefix cache on model updates. This is straightforward in principle but easy to miss in deployments that do rolling updates, where some serving workers may have the new weights and some the old, with their caches keyed identically.
-      </Prose>
-
-      <H3>Incorrect attention masks under block-wise attention</H3>
-
-      <Prose>
-        Standard attention assumes a contiguous key-value tensor with a causal mask. When attention operates over discontiguous blocks via a page table, the mask logic must account for the block boundaries. An off-by-one in the block table read — reading from the wrong block index or using incorrect slot offsets — causes the model to attend to tokens from a different sequence or a different position, producing incorrect output silently. This is especially common when implementing paged attention kernels from scratch and is the most common source of quality regressions in custom serving stack implementations.
-      </Prose>
-
-      <H3>KV-cache-aware admission control complexity</H3>
-
-      <Prose>
-        The scheduler must predict how many blocks a new request will need before it can safely admit it. The problem: output lengths are unknown at admission time. Over-admitting (assuming short outputs) causes mid-sequence OOM and preemption. Under-admitting (reserving space for maximum possible outputs) re-introduces the contiguous-allocation waste problem in a different form. Most production schedulers use a combination of a minimum block reserve (enough for N tokens of immediate generation), monitoring of the free block pool, and preemption as a last resort. Tuning these thresholds for a given workload requires profiling and is not always intuitive.
-      </Prose>
-
-      <Callout accent="gold">
-        The most insidious failures are silent: page table corruption and incorrect masks produce plausible but wrong outputs. Build test suites that verify token-level output determinism under known inputs before deploying a custom paged attention kernel.
-      </Callout>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <H3>Orca — iteration-level scheduling</H3>
-
-      <Prose>
-        Yu, G., Kim, J., Jeong, H., Cho, J., Ryu, S., Kim, E., ... and Chun, B.-G. "Orca: A Distributed Serving System for Transformer-Based Generative Models." USENIX Annual Technical Conference (ATC), 2022. The paper that defined continuous batching as an explicit systems contribution: iteration-level scheduling, selective batching for heterogeneous sequences, and the separation of prefill and decode phases. The original experimental results reported 36.9× improvement over naive batching on GPT-3-scale models.
-      </Prose>
-
-      <H3>vLLM and PagedAttention</H3>
-
-      <Prose>
-        Kwon, W., Li, Z., Zhuang, S., Sheng, Y., Zheng, L., Yu, C. H., ... and Stoica, I. "Efficient Memory Management for Large Language Model Serving with PagedAttention." arXiv:2309.06180, 2023. Introduced the paged block manager, the custom CUDA attention kernel with page table dereferences, and the copy-on-write mechanism for prefix sharing. Reported 2–4× throughput improvement over FasterTransformer and Orca on LLaMA and OPT models. The open-source vLLM codebase derived from this work is the most widely deployed LLM serving engine.
-      </Prose>
-
-      <H3>TensorRT-LLM in-flight batching</H3>
-
-      <Prose>
-        NVIDIA. "TensorRT-LLM In-Flight Batching." TensorRT-LLM Documentation. NVIDIA's implementation of continuous batching for its inference runtime, called in-flight batching (IFB). IFB is enabled by default in the TRT-LLM executor API and integrates with NVIDIA's Triton Inference Server for production deployment. The documentation covers the GptManager callback interface, chunked context (chunked prefill), and KV cache reuse.
-      </Prose>
-
-      <H3>DeepSpeed-FastGen — Dynamic SplitFuse</H3>
-
-      <Prose>
-        Holmes, C., Tanvir, M., Wyatt, A., Elangovan, A., Jain, D., Muzio, G., ... and He, Y. "DeepSpeed-FastGen: High-throughput Text Generation for LLMs via MoE Model Support and Dynamic SplitFuse." arXiv:2401.08671, 2024. Introduced Dynamic SplitFuse, which fuses prefill and decode into unified fixed-budget micro-batches to eliminate prefill-induced latency spikes on decoding sequences. Reported consistent throughput improvements over vLLM at high concurrency with reduced tail latency.
-      </Prose>
-
-      <H3>SGLang — RadixAttention</H3>
-
-      <Prose>
-        Zheng, L., Yin, L., Xie, Z., Huang, J., Sun, C., Yu, C. H., ... and Gonzalez, J. E. "Efficient LLM Serving with RadixAttention." arXiv:2312.07104, 2023. Introduced SGLang and RadixAttention, a prefix cache organized as a radix tree that enables partial prefix matching and LRU eviction at node granularity. Particularly effective for agent and multi-call workloads where different calls share variable-length prefixes. Reported 1.1–2.2× throughput improvement over vLLM on prefix-heavy workloads.
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — Fragmentation calculation</H3>
-
-      <Prose>
-        Compute the internal fragmentation (wasted token slots) for sequences of lengths [137, 89, 512, 50] using block size 16. How many total blocks are needed? How many slots are wasted in each?
-      </Prose>
-
-      <Prose>
-        Answer: seq_len=137 uses 9 blocks (144 slots), wasting 7. seq_len=89 uses 6 blocks (96 slots), wasting 7. seq_len=512 uses 32 blocks (512 slots), wasting 0. seq_len=50 uses 4 blocks (64 slots), wasting 14. Total: 51 blocks, 28 wasted slots, 1.4% fragmentation. Compare to contiguous allocation with max_len=512: 4×512=2048 slots reserved, 788 tokens stored, 1260 wasted — 61.5% waste.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — Why iteration-level scheduling helps chat</H3>
-
-      <Prose>
-        A chat serving system receives a mix of requests: 80% produce fewer than 50 tokens and 20% produce 400–600 tokens. Explain why iteration-level scheduling (continuous batching) produces substantially higher throughput than request-level scheduling (static batching) for this distribution, in terms of the mathematical relationship between batch wall time and sequence length variance.
-      </Prose>
-
-      <Prose>
-        Hint: under static batching, wall time per batch is <Code>max(lengths)</Code>. For a batch of 4 where 3 are short and 1 is long, the average throughput is approximately <Code>(3 × 50 + 500) / 500 = 1.3</Code> tokens/step — far below the theoretical maximum of 4. Iteration-level scheduling keeps all 4 slots productive for all 500 steps of the long request, adding ~4 tokens per step continuously.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — Preemption policy design</H3>
-
-      <Prose>
-        The KV cache pool is at 95% capacity. New requests are arriving faster than sequences are completing. Design a preemption policy. Which sequences should be evicted first? What information does the scheduler need to make this decision? What are the tradeoffs between recomputation-based and swap-based preemption?
-      </Prose>
-
-      <Prose>
-        Key considerations: (a) evict sequences closest to their output length limit — they have generated the most and have the least remaining value per block freed; (b) evict sequences that arrived most recently — they have the least sunk compute cost; (c) prefer recomputation over swap for short sequences (low recomputation cost) and swap over recomputation for long sequences (high recomputation cost relative to PCIe transfer time). The scheduler needs remaining token budget, block count, and estimated time-to-completion per sequence.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — When prefix sharing is not worth it</H3>
-
-      <Prose>
-        Identify three scenarios where prefix sharing via copy-on-write adds overhead without meaningful memory savings.
-      </Prose>
-
-      <Prose>
-        (a) Very short system prompts — less than one block (16 tokens) means zero savings; the block table lookup adds latency for no benefit. (b) Low request volume — if fewer than two concurrent sessions share the same prefix, there is nothing to share; the cache just consumes memory. (c) High diversity in prompts — if each user has a unique system prompt, the hash-based lookup finds no match for every request, spending CPU time on lookups that always miss. The overhead of maintaining the prefix cache (hashing, eviction, COW bookkeeping) is only justified when the hit rate is high enough that the memory savings compound across many sessions.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — Throughput ratio for uniform vs high-variance workloads</H3>
-
-      <Prose>
-        Predict the throughput ratio (continuous batching / static batching) for: (a) a workload where all outputs are exactly 256 tokens (stddev = 0), and (b) a workload with a bimodal distribution: half of requests produce 10 tokens and half produce 1000 tokens (stddev ≈ 495 tokens). Batch size is 4.
-      </Prose>
-
-      <Prose>
-        (a) Stddev = 0: both methods are equivalent. Every batch takes 256 steps, every slot is productive for all 256. Ratio = 1.0. (b) Bimodal: static batching — batches of 4 will frequently contain 2 short and 2 long; wall time per batch ≈ 1000 steps, total tokens ≈ 2 × 10 + 2 × 1000 = 2020, throughput ≈ 2.02 tokens/step. Continuous batching — short sequences finish at step 10, their slots immediately take new short requests; the two long slots run to 1000; throughput ≈ (large number of short completions + 2000 long tokens) / 1000. For a long-running queue, throughput approaches 4.0 tokens/step. Ratio ≈ 1.98× — consistent with the verified simulation result.
-      </Prose></div></section>
-
-    </div>
-  ),
+// Generated from accepted immutable content by scripts/render-continuous-batching-lesson.mjs.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import { Math as InlineMath, MathBlock as SharedMathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { Table as NeuralTable } from '../../components/lesson-labs/ContinuousBatchingShared.jsx';
+import { CbRequest, CbBoundary, CbSchedules, CbRefill, CbBudgets, CbClocks, CbProjection, CbSegmented, CbScatter } from '../../components/lesson-labs/ContinuousBatchingFoundations.jsx';
+import { CbAddresses, CbSlack, CbTransaction, CbRelease, CbFork, CbCopyOnWrite, CbPageNormalization, CbOnlineSoftmax, CbAdmission, CbRebuild } from '../../components/lesson-labs/ContinuousBatchingStorage.jsx';
+import { CbChunks, CbQueryAllocation, CbModeledTime, CbManager, CbLifecycle, CbNativeParity, CbNativeClocks, CbWorkers, CbPipeline, CbDiagnosis, CbBindingLimit } from '../../components/lesson-labs/ContinuousBatchingServing.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+
+const MathBlock = ({ children }) => (
+  <div className="cb-equation" role="region" tabIndex={0} aria-label="Mathematical expression">
+    <SharedMathBlock>{children}</SharedMathBlock>
+  </div>
+);
+const Program = ({ file }) => (
+  <RemoteCodeBlock source={'/learn-code/continuous-batching/' + file} language="python" title={file} filename={file} />
+);
+function ContinuousBatchingLesson() {
+  return <div className="lesson-flow cb-flow">
+    <section>
+    <Prose>{
+      "A language model serves several people at once. One response ends after a few tokens; " +
+      "another continues for hundreds. A new prompt arrives while both are running. How can the " +
+      "model admit that new work without waiting for an entire batch to finish—and without letting " +
+      "one person's query read another person's history?"
+    }</Prose>
+    
+    <Prose>{"We will build the two mechanisms together. "}<strong>{"Continuous batching"}</strong>{" changes the set of requests between forward passes. "}<strong>{"PagedAttention"}</strong>{
+      " lets attention read a request's history from physical blocks that need not be adjacent. The " +
+      "scheduler decides which work runs; the page tables decide which stored numbers that work may " +
+      "read. Correctness requires their identities, positions and lifetimes to agree."
+    }</Prose>
+    
+    <Prose opening="prerequisites">{"The "}<a href={"/learn/path/full-curriculum/kv-cache-memory-management?module=large-language-models"}>{"KV-cache lesson"}</a>{" explains the per-layer keys and values we retain. The "}<a href={
+      "/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models"
+    }>{"causal decoder"}</a>{
+      " supplies the complete PyTorch network used here. We refresh both contracts before extending " +
+      "them. No operating-systems paging or queueing-theory prerequisite is assumed."
+    }</Prose>
+    
+    <Prose opening="route">{
+      "The first pass follows sections 1–13, the diagnostic in section 15, and the practices. The " +
+      "online-softmax derivation in section 9 and the multi-worker discussion in section 14 are " +
+      "visible deeper branches. The concrete normalization rule and the local request lifecycle are " +
+      "part of the first pass. The Python programs run locally; the interactive drawings operate " +
+      "finite models and recorded observations."
+    }</Prose>
+    
+    <span id="1-why-it-exists" aria-hidden="true" />
+    <H2>{"1. Keep a request separate from its last selected token"}</H2>
+    
+    <Prose>{"Start with request A, whose prompt IDs are "}<code>{"[11, 7, 5]"}</code>{". The final prompt row has just selected ID "}<code>{"9"}</code>{
+      ". An ID is a vocabulary index, not an embedding coordinate. The model has processed three " +
+      "positions and has emitted one output. Those are different counts."
+    }</Prose>
+    
+    <CbRequest />
+    
+    <Prose>{"Positions 0, 1 and 2 already have a key and value in every attention layer. ID "}<code>{"9"}</code>{
+      ", at position 3, is waiting to become an input. The next forward pass creates its K/V " +
+      "records and predicts the following output. If the response stops immediately after selecting "
+    }<code>{"9"}</code>{", those records are never needed."}</Prose>
+    
+    <Prose>{"Call the initial processing of a known prompt "}<strong>{"prefill"}</strong>{". Call the later processing of a pending generated token "}<strong>{"decode"}</strong>{
+      ". Prefill's final row selects the first output; each subsequent decode pass selects one " +
+      "more. For a prompt of length P and a completed response of G outputs, stopping immediately " +
+      "after the last selection normally leaves P + G − 1 computed positions. This convention will " +
+      "explain both memory reservations and the simulation's useful-row counter."
+    }</Prose>
+    
+    <Prose>{
+      "A request record therefore needs its identity, prompt IDs, generated IDs, computed length, " +
+      "arrival time, output cap and state. The "
+    }<strong>{"cap"}</strong>{
+      " is an upper bound supplied before execution. The actual stopping point may be earlier and " +
+      "is not known to the scheduler. Two requests with identical lengths still need distinct " +
+      "identities."
+    }</Prose>
+    
+    <H2>{"2. Change membership at a forward boundary"}</H2>
+    
+    <Prose>{
+      "A forward pass has already assembled its tensors. Inserting a new request halfway through " +
+      "that pass would change their shapes and interpretation. Instead, finish the pass, deliver " +
+      "its outputs, update state and assemble the next one."
+    }</Prose>
+    
+    <CbBoundary />
+    
+    <Prose>{
+      "The waiting queue contains accepted requests that are not yet running. Active requests can " +
+      "be prefilling or decoding. At a boundary the scheduler chooses work, the model computes it, " +
+      "and the output handler attaches each result to its request ID. Finished requests release " +
+      "their cache references. A request arriving during the forward waits until a later boundary; " +
+      "it does not retroactively join the current tensor."
+    }</Prose>
+    
+    <Prose>{"This is "}<strong>{"iteration-level scheduling"}</strong>{
+      ": the unit of scheduling is one model iteration rather than a whole response. It does not " +
+      "require every request to produce a token on every iteration. A prefill chunk may end before " +
+      "the prompt's final position and therefore produce no externally emitted token yet."
+    }</Prose>
+    
+    <Prose>{
+      "Cancellation also needs a contract. Our finite scheduler observes cancellation at " +
+      "boundaries, emits one local "
+    }<code>{"canceled"}</code>{
+      " event and releases owned references. The maintained library later has a different " +
+      "acknowledgment behavior: removing a pending request does not itself return a terminal "
+    }<code>{"GenerationOutput"}</code>{
+      ". Keep application state and framework results distinct. Refusing a duplicate ID before " +
+      "insertion is simpler than trying to disentangle two histories after they share a name."
+    }</Prose>
+    
+    <span id="2-core-intuition" aria-hidden="true" />
+    <H2>{"3. Refill the empty slot"}</H2>
+    
+    <Prose>{"Consider eight requests A–H arriving together, four slots, and completion lengths "}<code>{"[30, 500, 25, 480, 40, 450, 20, 510]"}</code>{
+      " work units. These lengths belong to a supplied workload oracle. Admission uses arrival " +
+      "order, not foreknowledge of which response will finish soonest. For this first comparison " +
+      "every nonempty iteration lasts one unit."
+    }</Prose>
+    
+    <CbSchedules />
+    
+    <Prose>{
+      "A static batch admits A–D and waits until all four finish before admitting E–H. A continuous " +
+      "batch reuses each slot as soon as its previous request ends. Both versions can deliver a " +
+      "completed output immediately; the static baseline's limitation here is admission, not " +
+      "delayed output delivery."
+    }</Prose>
+    
+    <CbRefill />
+    
+    <Prose>{
+      "C completes at boundary 25. The row that held C now holds E; A, B and D continue. A ends at " +
+      "30, so F enters. E ends at 65, then G enters that slot. G ends at 85, then H enters. The " +
+      "continuous finish times are C 25, A 30, E 65, G 85, D 480, F 480, B 500 and H 595. In the " +
+      "static schedule the second group starts at 500 and its longest member takes another 510 " +
+      "units, giving 1010."
+    }</Prose>
+    
+    <Prose>{
+      "Both schedules perform 2055 request-work units. Continuous batching removes idle slot " +
+      "intervals; it does not shorten an individual request's prescribed work. The ratio 1010/595, " +
+      "about 1.697, is a ratio under the equal-iteration-time model. Real iteration time changes " +
+      "with token count, history length, kernels and memory traffic. This drawing is not a hardware " +
+      "speed measurement."
+    }</Prose>
+    
+    <Prose>{
+      "To run the complete examples, extract the lesson's file bundle into one directory. Use " +
+      "Python 3.11 or later; the recorded environment used NumPy 2.3.5 and CPU PyTorch 2.14.0. A " +
+      "separate virtual environment keeps these dependencies local. The ordinary Transformers route " +
+      "in section 12 has additional pinned packages and a separately downloaded model. Start with " +
+      "the standard-library scheduler:"
+    }</Prose>
+    
+    <CodeBlock language={"bash"}>{
+      "python -m venv .venv\n" +
+      "# Activate .venv using your shell's activation command.\n" +
+      "python -m pip install numpy==2.3.5 torch==2.14.0\n" +
+      "python iteration_scheduler.py"
+    }</CodeBlock>
+    
+    <Prose>{"The "}<code>{"README.md"}</code>{
+      " gives Windows and POSIX activation commands, every program's inputs, and the model " +
+      "acquisition step. "
+    }<code>{"iteration_scheduler.py"}</code>{" prints JSON with both schedules, every interval and the changed-input checks. Its top-level "}<code>{"schedule"}</code>{" function is useful independently of the verification fixtures."}</Prose>
+    
+    <Prose>
+    <a href="/learn-code/continuous-batching/continuous-batching-programs.zip" download>Download the complete program bundle</a>{' · '}<a href="/learn-code/continuous-batching/README.md">Setup and file guide</a>
+    </Prose>
+    <Program file="iteration_scheduler.py" />
+    
+    <Prose>{"The program sorts arrivals once and uses a deque for future and waiting work. "}<code>{"active"}</code>{
+      " preserves slot identity; the event list preserves request identity. At each boundary it " +
+      "first admits arrivals and observes cancellations, then fills eligible slots, performs one " +
+      "unit of work and records completions. A static batch may admit only when all its slots are " +
+      "empty. Idle time jumps directly to the next arrival instead of scanning unused timestamps."
+    }</Prose>
+    
+    <Prose>{
+      "The loop's work scales with scheduled iterations and the small active set, in addition to " +
+      "arrival sorting. It does not allocate a dense time-by-request array. The separate interval " +
+      "reconstruction checks capacity and work conservation. Empty work terminates without a " +
+      "forward, a one-request workload makes the two policies equal, and a later arrival can leave " +
+      "a slot idle even under continuous batching. No admission policy can run work before it " +
+      "arrives."
+    }</Prose>
+    
+    <H2>{"4. Count three different budgets"}</H2>
+    
+    <Prose>{
+      "Refilling a slot solves only one constraint. A server must also decide how much token work " +
+      "and how much history storage fit."
+    }</Prose>
+    
+    <CbBudgets />
+    
+    <Prose>{"First count "}<strong>{"scheduled requests"}</strong>{". Second count "}<strong>{"new query rows"}</strong>{
+      " processed in this iteration. A decode request typically adds one row, while a prefill chunk " +
+      "may add several. Third count "
+    }<strong>{"resident physical pages"}</strong>{
+      " containing K/V state. An unscheduled request may still occupy pages; a page shared by two " +
+      "requests counts once physically."
+    }</Prose>
+    
+    <Prose>{
+      "With a six-query-row budget, two continuing decodes use two rows and leave four for prefill. " +
+      "This says nothing by itself about how many new pages are needed: a row may fit into an " +
+      "already allocated tail. Conversely, a waiting request may need storage even though there is " +
+      "an empty request slot. Units prevent a misleading diagnosis such as “six tokens fit, " +
+      "therefore six requests fit.”"
+    }</Prose>
+    
+    <Prose>{
+      "The user experiences time, not these internal counters. Give each timestamp a precise event " +
+      "before subtracting it."
+    }</Prose>
+    
+    <CbClocks />
+    
+    <Prose>{"If arrival is a, first emission is f, and subsequent emissions are t₂, t₃ and so on, "}<strong>{"time to first token"}</strong>{", or TTFT, is f − a. An "}<strong>{"inter-token gap"}</strong>{
+      " is the time between adjacent emissions. Completed-response elapsed time is last emission " +
+      "minus arrival. Queueing and prefill both contribute to TTFT. A response with one output has " +
+      "an empty gap list, not a measured zero gap. A canceled response may have emitted tokens but " +
+      "lacks a completed-response elapsed time under this definition."
+    }</Prose>
+    
+    <Prose>{"For supplied times a = 2, emissions "}<code>{"[5, 6.5, 8]"}</code>{", TTFT is 3, gaps are "}<code>{"[1.5, 1.5]"}</code>{
+      " and response elapsed is 6. These are arithmetic over declared clocks. Later we will inspect " +
+      "actual framework timestamps without inventing event times the API did not record."
+    }</Prose>
+    
+    <H2>{"5. Share the weights, separate the histories"}</H2>
+    
+    <Prose>{
+      "Changing membership also changes tensor rows. Suppose A contributes two new positions and B " +
+      "contributes one, with hidden width four. Stack their new hidden rows into a 3 × 4 matrix. " +
+      "The same projection weights apply to every row, so that operation can be shared."
+    }</Prose>
+    
+    <CbProjection />
+    
+    <Prose>{"The offsets "}<code>{"[0, 2, 3]"}</code>{
+      " say that A owns rows 0–1 and B owns row 2. Offsets locate segments in this iteration's " +
+      "packed tensor. Absolute position IDs locate tokens within each request's history. They are " +
+      "not interchangeable: B's first packed row could represent its position 50."
+    }</Prose>
+    
+    <Prose>{
+      "Row-wise normalization, linear projections and the feed-forward network can operate on the " +
+      "packed matrix. Attention needs more information. A's queries may read A's earlier cached " +
+      "keys and their own permitted new keys; they must not read B's keys."
+    }</Prose>
+    
+    <CbSegmented />
+    
+    <Prose>{"A single lower-triangular mask over "}<code>{"[A0, A1, B0]"}</code>{
+      " would allow B0 to read A0 and A1. That is causal in the concatenated row order but wrong " +
+      "for independent requests. The correct mask first enforces request identity and then enforces " +
+      "position order within that request. Perturbing A while holding B fixed must leave B's result " +
+      "unchanged under the correct mask."
+    }</Prose>
+    
+    <Prose>{
+      "For a query at absolute position q and a key at k, an ordinary causal segment permits k ≤ q. " +
+      "If the segment already has n cached positions and contributes m new rows, new query i has q " +
+      "= n + i. Its row sees all n old keys plus the first i + 1 new keys. This is the same offset " +
+      "mask used by the cached decoder; packing adds a request boundary around it."
+    }</Prose>
+    
+    <CbScatter />
+    
+    <Prose>{
+      "After the forward, scatter rows back using the recorded segment-to-request mapping. A " +
+      "request's ID persists when its row number changes. Comparing only the multiset of output IDs " +
+      "would miss a swap between A and B."
+    }</Prose>
+    
+    <Prose>{"The complete "}<code>{"packed_decoder.py"}</code>{" reuses the actual "}<code>{"TinyLM"}</code>{
+      " class from the causal lesson. It has learned absolute position embeddings, explicit " +
+      "attention layers and a feed-forward network. Here a three-layer, width-16, four-head random " +
+      "fixture supplies fixed weights. This is an architecture comparison, not trained language " +
+      "quality. The Pythia network later uses a different position mechanism and tokenizer."
+    }</Prose>
+    
+    <Program file="packed_decoder.py" />
+    
+    <Prose>{""}<code>{"PackedDecoder"}</code>{
+      " concatenates the new token and position embeddings, runs shared row-wise primitives, then " +
+      "splits Q/K/V by request for attention. For each layer it gathers only that request's valid " +
+      "old K/V records from the shared pool introduced next. It concatenates those with the new " +
+      "keys and values, applies the offset mask, and places the result back into the corresponding " +
+      "packed rows. Newly computed K/V records are appended to storage only after the forward has " +
+      "assembled all layers."
+    }</Prose>
+    
+    <Prose>{"Its manual attention and PyTorch's "}<code>{"scaled_dot_product_attention"}</code>{
+      " use matching scale and masks. FP64 comparisons check mixed prefill/decode chunks and " +
+      "reordered requests against independent full-prefix TinyLM calls at absolute and relative " +
+      "tolerance 10⁻¹². An A-only perturbation leaves B exactly unchanged in the tested fixture. A " +
+      "partial fork followed by a child append also matches the independently recomputed child " +
+      "prefix; its maximum absolute discrepancy was about 4.44 × 10⁻¹⁶. These checks establish the " +
+      "tested operator correspondence, not universal bitwise equality across devices."
+    }</Prose>
+    
+    <Prose>{
+      "The wrapper conservatively reserves enough pages for every member before computing. When " +
+      "both members would write a shared tail, this reservation can overestimate the ultimate " +
+      "requirement. That makes rejection safe but does not claim maximum packing. The " +
+      "implementation is an inspectable CPU reference: it shares position-wise computation but does " +
+      "not implement a fused GPU segmented-attention kernel."
+    }</Prose>
+    
+    <Prose>{"The complete inherited "}<code>{"tiny_causal_lm.py"}</code>{
+      " is included for the packed decoder's architecture import. Its training entry point belongs " +
+      "to the causal-modeling lesson and is not executed by this workflow. The bundled Alice " +
+      "train/heldout files and provenance preserve that helper's complete inputs; this lesson's " +
+      "native campaign uses only the declared train-text prefixes and trains no model."
+    }</Prose>
+    
+    <Program file="tiny_causal_lm.py" />
+    
+    <span id="3-mathematical-foundation" aria-hidden="true" />
+    <H2>{"6. Give logical positions physical addresses"}</H2>
+    
+    <Prose>{
+      "The model needs a history in token order. Memory does not have to place that history in one " +
+      "contiguous region. Split it into fixed-size "
+    }<strong>{"pages"}</strong>{", also called blocks, and store a table translating each logical block to a physical page."}</Prose>
+    
+    <CbAddresses />
+    
+    <Prose>{"Use page size C = 3, valid length 7 and table "}<code>{"[4, 1, 6]"}</code>{
+      ". Logical positions 0–2 occupy physical page 4, positions 3–5 occupy page 1, and position 6 " +
+      "occupies offset 0 of page 6. Position 5 therefore reads page 1, offset 2. Position 7 would " +
+      "point into allocated page 6, but it is invalid because it lies beyond the request's valid " +
+      "length."
+    }</Prose>
+    
+    <Prose>{
+      "For logical position t, compute block b = floor(t/C), offset o = t mod C, and physical page " +
+      "p = table[b]. Then read the K/V cell at p, o. Layer, head and feature coordinate remain " +
+      "additional axes. Our actual arrays have shape "
+    }<code>{"[layer, head, physical_page, offset, coordinate]"}</code>{
+      "; the drawing simplifies those axes explicitly instead of turning a token position into a " +
+      "feature coordinate."
+    }</Prose>
+    
+    <Prose>{
+      "Moving a page's values and updating every corresponding table reference can leave logical " +
+      "attention unchanged. Changing the table without moving values cannot. This separation is the " +
+      "point of indirection: logical order follows the table, while allocation chooses available " +
+      "physical addresses."
+    }</Prose>
+    
+    <CbSlack />
+    
+    <Prose>{"For lengths "}<code>{"[137, 89, 512, 50]"}</code>{" and C = 16, useful history is 788 token slots. Page counts are "}<code>{"[9, 6, 32, 4]"}</code>{
+      ", giving 51 × 16 = 816 allocated slots and 28 unused tail slots. Reserving 512 slots for " +
+      "each request would allocate 2048 slots. The paged allocation uses 816/2048 ≈ 39.84% of that " +
+      "reservation, while its tail slack is 28/816 ≈ 3.43% of its allocated slots. Different " +
+      "denominators answer different questions."
+    }</Prose>
+    
+    <Prose>{
+      "For lengths ℓᵢ, allocated token slots are CΣᵢceil(ℓᵢ/C). Multiply by the bytes per token " +
+      "across layers and K/V heads to obtain tensor storage; table entries and reference counters " +
+      "are additional metadata. Smaller pages reduce tail slack but increase metadata and the " +
+      "number of page boundaries a kernel handles. The often-used expected slack (C − 1)/2 assumes " +
+      "uniformly distributed integer length residues modulo C. It is not a measured property of " +
+      "every workload."
+    }</Prose>
+    
+    <span id="4-from-scratch-implementation" aria-hidden="true" />
+    <H2>{"7. Make an append all-or-nothing"}</H2>
+    
+    <Prose>{
+      "A table is useful only if updates keep it consistent with physical storage. Suppose a " +
+      "request has length 5 with C = 3 and wants to append two rows. Its current second page has " +
+      "one free valid-tail slot; the second new row needs a third page."
+    }</Prose>
+    
+    <CbTransaction />
+    
+    <Prose>{
+      "First compute the full allocation requirement. Then reserve all required pages and prepare " +
+      "their values. Finally publish the new table, valid length and reference counts together. If " +
+      "reservation fails, return before any observable mutation. Writing the first new row and only " +
+      "then discovering that the next page is unavailable would leave the caller unsure whether " +
+      "retrying should append one or two rows."
+    }</Prose>
+    
+    <Prose>{
+      "The complete shared pool supplies actual NumPy K/V arrays rather than page-number " +
+      "bookkeeping alone. It also supplies a dense logical read so that each operation can be " +
+      "compared with an independent expected history."
+    }</Prose>
+    
+    <Program file="shared_pool.py" />
+    
+    <Prose>{""}<code>{"create"}</code>{" installs an empty identity. "}<code>{"append"}</code>{
+      " validates the incoming layer/head/row/coordinate shape, computes new-page and private-tail " +
+      "requirements, stages the touched arrays, and commits only after all requirements fit. "
+    }<code>{"dense"}</code>{" follows the table and truncates at valid length. "}<code>{"snapshot"}</code>{
+      " records all metadata and whole-array hashes, making a failed append's unchanged-state claim " +
+      "testable. A scheduler may choose a smaller chunk before calling "
+    }<code>{"append"}</code>{"; the allocator itself never silently shortens one."}</Prose>
+    
+    <CbRelease />
+    
+    <Prose>{""}<code>{"release"}</code>{
+      " removes table references. A physical page becomes free only when its reference count " +
+      "reaches zero. Reusing its numeric address does not resurrect the old request. A released ID " +
+      "has no valid table from which to read, and newly allocated tail cells remain invalid until " +
+      "written. Duplicate IDs, invalid fork bounds and double release are errors in this interface."
+    }</Prose>
+    
+    <Prose>{
+      "Releasing a request traverses its table, so its cost grows with the number of references " +
+      "released. Appending costs the new-row writes plus any necessary tail copy. Dense gathering " +
+      "deliberately materializes a logical view for verification; the addressed attention operator " +
+      "in section 9 can instead consume one page at a time. The tests cover multiple fork/release " +
+      "orders, actual value conservation, physical reuse and whole-state equality after an " +
+      "out-of-memory refusal."
+    }</Prose>
+    
+    <span id="6-visual-walkthrough" aria-hidden="true" />
+    <H2>{"8. Share a prefix, then copy only when writing"}</H2>
+    
+    <Prose>{
+      "Two requests can share computed history only when that history means the same computation: " +
+      "matching model weights, tokens, positions, attention rules and relevant adapters. Our pool's " +
+      "explicit "
+    }<code>{"fork"}</code>{
+      " trusts that condition. It does not search text or decide whether two arbitrary prompts are " +
+      "equivalent; the later prefix-caching lesson develops lookup and cache identity."
+    }</Prose>
+    
+    <CbFork />
+    
+    <Prose>{
+      "Take a parent of length 5, C = 3, and fork its first 4 positions. Both tables initially " +
+      "reference the parent's first two pages. The child has three valid cells on page one and only " +
+      "one on page two. The parent has two valid cells on page two. The extra parent cell is " +
+      "physically present, but it is not part of the child's history."
+    }</Prose>
+    
+    <Prose>{"If the child appends at its logical position 4, it must not overwrite the parent's position 4. "}<strong>{"Copy-on-write"}</strong>{", or COW, makes a private page for this write."}</Prose>
+    
+    <CbCopyOnWrite />
+    
+    <Prose>{
+      "Copy the child's one valid tail cell into a fresh page, place the child's new row at offset " +
+      "1, and change the child's table to point at that private page. Decrement the old page's " +
+      "reference count. The parent's values and table stay unchanged. Copying a full physical page " +
+      "without preserving the child's validity boundary risks treating an unrelated parent suffix " +
+      "as computed child history."
+    }</Prose>
+    
+    <Prose>{
+      "Contrast a parent of length 6 forked at 6. Both shared pages are full. The next append " +
+      "allocates a new third page; it need not copy either old page. A fork at zero shares no page. " +
+      "The amount of sharing therefore depends on both logical prefix length and alignment, not " +
+      "just a percentage of matching text."
+    }</Prose>
+    
+    <Prose>{""}<code>{"SharedPool.fork"}</code>{
+      " increments one reference per table entry. Reference counts count ownership paths, not token " +
+      "counts. "
+    }<code>{"append"}</code>{
+      " includes a partial shared tail in its reservation requirement, so insufficient space fails " +
+      "atomically before either request changes. The supplied tests compare child and parent dense " +
+      "arrays after append and after both release orders. This makes a stale reference, leaked page " +
+      "or corrupted parent visible as a concrete value or ownership discrepancy."
+    }</Prose>
+    
+    <H2>{"9. Normalize attention across the whole permitted history"}</H2>
+    
+    <Prose>{
+      "Storage pages do not create separate attention distributions. A query still asks one " +
+      "question over all its permitted keys. To see the difference, use scores "
+    }<code>{"[0, log 2, log 3, log 4]"}</code>{", values "}<code>{"[2, 0, 4, 1]"}</code>{", and two tokens per page."}</Prose>
+    
+    <CbPageNormalization />
+    
+    <Prose>{"Exponentiating the scores gives masses "}<code>{"[1, 2, 3, 4]"}</code>{". Their total is 10, so probabilities are "}<code>{"[.1, .2, .3, .4]"}</code>{
+      ". The output is .1×2 + .2×0 + .3×4 + .4×1 = 1.8. Normalizing the first page alone gives " +
+      "output 2/3; normalizing the second alone gives 16/7. Averaging those outputs gives 31/21 ≈ " +
+      "1.47619. The second page had more probability mass and should have received more weight."
+    }</Prose>
+    
+    <Prose>{
+      "For scores sⱼ and value vectors vⱼ, ordinary attention is Σⱼ exp(sⱼ)vⱼ / Σⱼ exp(sⱼ), after " +
+      "excluding masked positions and applying the usual query/key scale. Reordering page visits " +
+      "does not change the real-number expression. Equal total mass on each page is a special case " +
+      "where equally averaging page outputs happens to work; it does not justify the shortcut " +
+      "generally."
+    }</Prose>
+    
+    <Prose>{
+      "The complete operator reads the pool's addressed pages, excludes invalid tails, and " +
+      "accumulates one global normalization. It compares with an independent dense calculation and " +
+      "actual PyTorch SDPA."
+    }</Prose>
+    
+    <Program file="paged_attention.py" />
+    
+    <Prose>{""}<code>{"attend"}</code>{
+      " maps logical blocks through the table. For each block it forms scaled scores and the " +
+      "matching valid mask, then passes only permitted score/value pairs to "
+    }<code>{"online_reduce"}</code>{
+      ". A fully masked row returns an explicit invalid status rather than silently returning a " +
+      "plausible zero vector. The recorded twelve changed query/mask cases include large positive " +
+      "and negative scores, a skipped masked block, physical relocation and an all-invalid row. The " +
+      "valid float64 outputs match dense and SDPA references at tolerance 10⁻¹²."
+    }</Prose>
+    
+    <Prose>{""}<strong>{"Deeper: keeping the denominator stable without gathering every page."}</strong>{
+      " Directly exponentiating a score near 1000 can overflow. Softmax avoids that by subtracting " +
+      "a common maximum, which cancels between numerator and denominator. Across pages, maintain " +
+      "the maximum m seen so far, scaled mass l, and scaled weighted accumulator u."
+    }</Prose>
+    
+    <CbOnlineSoftmax />
+    
+    <Prose>{
+      "When the next page has maximum m_b, let m′ = max(m, m_b). Previously accumulated terms used " +
+      "scale exp(−m), so multiply them by exp(m − m′) to express them at the new scale. Add each " +
+      "new term exp(sⱼ − m′). The updates are l′ = exp(m − m′)l + Σ exp(sⱼ − m′) and u′ = exp(m − " +
+      "m′)u + Σ exp(sⱼ − m′)vⱼ. At the end return u/l. Here l is a scalar mass and u has the " +
+      "value-vector width; neither is already normalized."
+    }</Prose>
+    
+    <Prose>{
+      "Initialize from the first nonempty valid block. That avoids evaluating −∞ − (−∞) before any " +
+      "score exists. A masked-only block contributes nothing. Shifting every valid score by the " +
+      "same constant changes the stored maximum but leaves the final ratio unchanged. " +
+      "Floating-point summation order can still change rounding; stability does not imply bitwise " +
+      "equality for every traversal or dtype. This implementation teaches the operator. A GPU " +
+      "PagedAttention kernel additionally arranges memory loads, parallel reductions and occupancy " +
+      "for the target hardware."
+    }</Prose>
+    
+    <span id="7-decision-matrix" aria-hidden="true" />
+    <H2>{"10. Decide which histories may remain resident"}</H2>
+    
+    <Prose>{
+      "We can now append safely, but an allocator's refusal still leaves a scheduling question. " +
+      "Should the server reserve each request's possible future growth at admission, or admit more " +
+      "current work and handle later pressure?"
+    }</Prose>
+    
+    <CbAdmission />
+    
+    <Prose>{
+      "With prompt length P, output cap G and page size C, reserving ceil((P + G − 1)/C) pages " +
+      "covers the cache through final selection under our stopping convention. Summing those " +
+      "reservations before admission can guarantee room if the caps and model state assumptions " +
+      "hold. It can also leave much of that capacity unused when responses stop early. In contrast, " +
+      "incremental allocation counts currently resident pages and grows when needed. That admits " +
+      "more work but requires a response when growth fails."
+    }</Prose>
+    
+    <Prose>{
+      "For page size 4, a prompt of length 3 with cap 8 needs at most ceil(10/4) = 3 pages. Two " +
+      "such requests and a prompt 12/cap 3 request need a total cap reservation of 3 + 3 + 4 = 10 " +
+      "pages. Eight pages can hold their early state but not all those maxima simultaneously. " +
+      "Available request slots do not remove the eventual storage constraint."
+    }</Prose>
+    
+    <CbRebuild />
+    
+    <Prose>{
+      "Our explicit policy protects the oldest admitted request that can make progress. If it needs " +
+      "pages, it can "
+    }<strong>{"preempt"}</strong>{
+      " a later admitted request: discard that request's K/V state, keep its known token history " +
+      "and generated count, and put it back in the waiting queue. On readmission, rebuild the known " +
+      "computed prefix before continuing decode. The victim policy uses visible admission order, " +
+      "not hidden remaining output length."
+    }</Prose>
+    
+    <Prose>{
+      "Rebuilding performs repeated work. It must not emit the old outputs again, increment the " +
+      "generated count during reconstruction, or pretend that recomputed rows are newly useful " +
+      "positions. A request can even be preempted halfway through its initial prompt, before its " +
+      "first output. The simulator therefore tracks a logical high-water position and counts " +
+      "repeated positions separately from the stage label "
+    }<code>{"prefill"}</code>{" or "}<code>{"recompute"}</code>{"."}</Prose>
+    
+    <Prose>{
+      "A progress policy matters as much as an allocation policy. If the next row of one request " +
+      "would require more pages than the whole pool can hold, the simulator reports "
+    }<code>{"infeasible-next-row"}</code>{
+      ". Repeatedly evicting everyone else would not help. If it fits alone, protecting one request " +
+      "prevents a cycle in which every request is repeatedly evicted before anyone advances. " +
+      "Swapping state to another memory tier is another possible response, but its transfers, " +
+      "backing capacity and consistency have costs; it is not implemented as a free alternative " +
+      "here."
+    }</Prose>
+    
+    <span id="8-what-scales-and-what-doesn-t" aria-hidden="true" />
+    <H2>{"11. Bound prefill without forgetting earlier chunks"}</H2>
+    
+    <Prose>{
+      "A long arriving prompt can occupy an iteration while existing users wait for their next " +
+      "token. Splitting its prefill into chunks gives the scheduler boundaries at which to include " +
+      "continuing decodes."
+    }</Prose>
+    
+    <CbChunks />
+    
+    <Prose>{
+      "For a 12-token prompt split into four-row chunks, the second chunk represents absolute " +
+      "positions 4–7. Those queries read the cached first four keys plus their own permitted new " +
+      "keys. Resetting their positions to 0–3 or applying only a four-by-four triangle would change " +
+      "the computation. Chunking changes the schedule, not the intended causal dependencies. The " +
+      "packed decoder's matching full-prefix checks exercise precisely this offset rule."
+    }</Prose>
+    
+    <CbQueryAllocation />
+    
+    <Prose>{
+      "If two decodes each need one row and the query budget is six, four rows remain for prefill. " +
+      "With both decodes continuing, the 12-token prompt takes three such chunks. If a decode " +
+      "finishes, recompute the remaining budget at the next boundary instead of reserving a slot " +
+      "for a request that no longer exists."
+    }</Prose>
+    
+    <Prose>{
+      "Smaller chunks do not reduce the total required causal query/key pairs for an unchanged " +
+      "prompt. They change when those pairs are processed, how often fixed per-iteration overhead " +
+      "is paid, and how often old K/V data must be brought back for later chunks. The complete " +
+      "causal pair count for 12 prompt rows is 12×13/2 = 78. The three chunks contribute 10, 26 and " +
+      "42 pairs respectively: local triangles plus attention to the old prefix. Counting only three " +
+      "local triangles would miss 48 required pairs."
+    }</Prose>
+    
+    <CbModeledTime />
+    
+    <Prose>{"The finite simulator charges each iteration "}<code>{"fixed + linear × query_rows + attention × valid_pairs"}</code>{
+      ". Its default coefficients are .2, .05 and .001 in arbitrary modeled time units. These " +
+      "numbers are a declared sensitivity model, not a fit to a GPU. Even within that model, equal " +
+      "query budgets need not give equal iteration times because the history lengths change the " +
+      "pair count."
+    }</Prose>
+    
+    <Program file="serving_simulation.py" />
+    
+    <Prose>{""}<code>{"simulate"}</code>{
+      " combines arrivals, request slots, query budgets, the real shared pool and boundary " +
+      "cancellation. Deterministic numeric storage fixtures give each logical position the same K/V " +
+      "values when rebuilt; they do not predict language-model tokens. The event stream separates " +
+      "arrivals, admission, preemption, emission and termination. Every iteration records its " +
+      "actual row assignments, attention-pair count, modeled start/end and page state."
+    }</Prose>
+    
+    <Prose>{
+      "The supplied A/B/long workload uses prompts 3/3/12, caps 8/8/3 and arrivals 0/0/.6. With ten " +
+      "pages, chunk 4 and budget 6, it performs no preemption. A and B finish at modeled time " +
+      "3.515; the long request finishes at 3.195. With five pages, the long request is preempted " +
+      "before its first output and repeats four positions. With eight pages, it is preempted after " +
+      "outputs have already begun and repeats thirteen positions. These deliberately different " +
+      "pressure cases show why a bigger intermediate pool need not monotonically improve every " +
+      "request under one fixed greedy policy."
+    }</Prose>
+    
+    <Prose>{"The source also compares chunk 64 under the same six-row query budget: "}<code>{"chunk64"}</code>{
+      " is permission to use all remaining row budget, not permission to exceed it. Inspect the " +
+      "actual iteration trace rather than assuming its entire prompt fits into one call. A " +
+      "completed request's useful positions total P + G − 1; repeated positions are additional. A " +
+      "one-output request has no gap samples. Cancellation releases storage at the first observed " +
+      "boundary after its requested time, which can be later than that time if an iteration is in " +
+      "progress."
+    }</Prose>
+    
+    <Prose>{
+      "Change one cost coefficient, page budget or chunk limit and read the entire changed trace. " +
+      "More prefill work per iteration can shorten an arriving request's TTFT while increasing a " +
+      "continuing request's next gap. In the absence of competing decode work, there is no other " +
+      "request's gap to improve. Choosing a production token budget requires measurements on the " +
+      "intended model, device and traffic; this deterministic example identifies what to measure."
+    }</Prose>
+    
+    <span id="5-production-implementation" aria-hidden="true" />
+    <H2>{"12. Use a maintained request manager deliberately"}</H2>
+    
+    <Prose>{
+      "The scratch route made request identity, segmentation and storage visible. An ordinary " +
+      "library manages those mechanisms through an API. The following route uses the actually " +
+      "exercised Transformers 5.19.0 CPU continuous-batching manager, with eager SDPA attention. " +
+      "Configuration names and lifecycle behavior are version-specific."
+    }</Prose>
+    
+    <Prose>{
+      "Install the pinned additions in the same environment, then acquire the six pinned Pythia " +
+      "files into a separate cache. "
+    }<code>{"acquire_model.py"}</code>{
+      " checks their exact hashes; inference afterwards uses local files only. Downloading model " +
+      "weights needs network access and disk space. The lesson's file bundle includes the source " +
+      "report and Alice text, not the model weights."
+    }</Prose>
+    
+    <CodeBlock language={"bash"}>{
+      "python -m pip install transformers==5.19.0 tokenizers==0.23.2 huggingface-hub==1.33.0 " +
+      "safetensors==0.8.0\n" +
+      "python acquire_model.py --output model-cache\n" +
+      "python native_batching.py --model model-cache --budget 16"
+    }</CodeBlock>
+    
+    <Program file="acquire_model.py" />
+    
+    <Prose>{
+      "The acquirer refuses an existing file with different bytes and retains a failed partial " +
+      "download for inspection. That avoids silently mixing model revisions. It is the exact " +
+      "maintained helper reused from KV-cache work. The native runner verifies the same files " +
+      "before loading the model in evaluation mode. Its "
+    }<code>{"torch.inference_mode"}</code>{" reference call disables gradient tracking; "}<code>{"torch.set_num_threads(1)"}</code>{" bounds CPU work in the executable example."}</Prose>
+    
+    <CbManager />
+    
+    <Prose>{"Each submitted record has an ID such as "}<code>{"alice-8"}</code>{". "}<code>{"add_request"}</code>{" returns the accepted ID. Terminal results carry "}<code>{"request_id"}</code>{
+      ", generated token IDs and a status. Store results under that ID and compare each to its own " +
+      "reference, even if completions arrive in a different order. A missing result is a timeout or " +
+      "error, not an empty successful response."
+    }</Prose>
+    
+    <Program file="native_batching.py" />
+    
+    <Prose>{""}<code>{"page_size=8"}</code>{" and "}<code>{"num_blocks=128"}</code>{" configure physical storage. "}<code>{"max_batch_tokens"}</code>{" is the scheduled query-row budget; "}<code>{"max_requests_per_batch=3"}</code>{" is a request limit. "}<code>{"max_blocks_per_request=0"}</code>{
+      " delegates that sizing choice to the library. This route disables sharing, async batching, " +
+      "CUDA graphs, compilation and automatic Flash attention switching. The scratch COW exercise " +
+      "and the native campaign consequently test different capabilities; a successful native run " +
+      "does not certify the library's sharing path."
+    }</Prose>
+    
+    <Prose>{"The dataclass uses "}<code>{"dataclasses.asdict"}</code>{" for inspection. Older guide spellings such as "}<code>{"block_size"}</code>{" and "}<code>{"use_default_compile_configs"}</code>{" do not replace the pinned source's "}<code>{"page_size"}</code>{" and "}<code>{"default_compile_level"}</code>{
+      ". Resolved padding settings are also separate from logical budgets: this run resolved query " +
+      "padding to 64 and K/V padding to 16384. Those padded dimensions do not mean the scheduler " +
+      "was allowed to ignore its chosen 16/32/64 row budget."
+    }</Prose>
+    
+    <CbLifecycle />
+    
+    <Prose>{"The runner initializes a manager, submits all finite requests before "}<code>{"start"}</code>{", drains results with a deadline and stops the manager in "}<code>{"finally"}</code>{". It explicitly does not call "}<code>{"warmup"}</code>{". "}<code>{"stop(block=True, ...)"}</code>{" waits for the background thread; "}<code>{"destroy()"}</code>{
+      " clears remaining resources after the thread stops. A failure to stop is surfaced rather " +
+      "than labeled successful cleanup."
+    }</Prose>
+    
+    <Prose>{
+      "A separate tiny random-model preflight queued A and B, canceled pending C before starting, " +
+      "then observed two forwards and three emissions: A returned "
+    }<code>{"[30, 19]"}</code>{", B returned "}<code>{"[24]"}</code>{", and both were "}<code>{"FINISHED"}</code>{". C was removed and produced no terminal "}<code>{"GenerationOutput"}</code>{
+      ". The queues were empty, the thread stopped and the processor was cleared. That is the " +
+      "exercised pending-cancellation contract. It is not evidence for every possible race between " +
+      "a live producer and a running forward. An application should record its own cancel request " +
+      "and reconcile eventual framework state instead of waiting forever for an acknowledgment this " +
+      "API does not supply."
+    }</Prose>
+    
+    <H2>{"13. Inspect all requests from one real campaign"}</H2>
+    
+    <Prose>{
+      "The finite drawings isolate mechanisms; a real tokenizer and model can expose mismatches " +
+      "they miss. We use the existing public-domain Alice text as natural token history, with " +
+      "EleutherAI Pythia14M revision "
+    }<code>{"cf967c0a9a04383db6f7b1108d86b2962634b4ac"}</code>{
+      ". Literary text supplies varied prefix lengths, not a sample of production traffic or a " +
+      "quality benchmark."
+    }</Prose>
+    
+    <Prose>{
+      "The campaign fixed six prompts—the first 8, 12, 20, 32, 48 and 64 tokenizer IDs without " +
+      "added special tokens—and six greedy outputs per prompt. EOS stopping was disabled for this " +
+      "bounded comparison. The same CPU FP32 model, SDPA, one Torch thread and evaluation mode " +
+      "supplied six independent full-prefix references, then three manager arms with query budgets " +
+      "16, 32 and 64. Page size 8, 128 pages and request limit 3 stayed fixed. There was no " +
+      "training, warmup, tuning or repeated timing loop."
+    }</Prose>
+    
+    <CbNativeParity />
+    
+    <Prose>{"Every arm returned all six request identities with "}<code>{"FINISHED"}</code>{
+      " status. All 108 native output IDs matched their corresponding 36 full-prefix reference IDs. " +
+      "The complete reference sequences were:"
+    }</Prose>
+    
+    <NeuralTable caption={"13. Inspect all requests from one real campaign"} headers={[<>{"Request / prompt length"}</>,<>{"Six generated IDs, in order"}</>]} rows={[[<>{"alice-8"}</>,<>{"15, 187, 187, 3, 42, 1353"}</>],[<>{"alice-12"}</>,<>{"1930, 15, 187, 187, 3, 42"}</>],[<>{"alice-20"}</>,<>{"247, 1643, 1897, 281, 755, 617"}</>],[<>{"alice-32"}</>,<>{"562, 13, 703, 369, 1335, 275"}</>],[<>{"alice-48"}</>,<>{"617, 2564, 15, 187, 187, 510"}</>],[<>{"alice-64"}</>,<>{"253, 2934, 273, 253, 1984, 1425"}</>]]} />
+    
+    <Prose>{
+      "These are token identities from the pinned tokenizer, not word counts. The native output API " +
+      "did not supply the per-step logits used for a logit-tolerance comparison. Matching the IDs " +
+      "therefore establishes this finite greedy-output result; it does not imply equal " +
+      "floating-point arrays or agreement for arbitrary future prompts."
+    }</Prose>
+    
+    <CbNativeClocks />
+    
+    <Prose>{
+      "Inclusive manager elapsed times were .745033 seconds for budget 16, .517740 seconds for 32 " +
+      "and .494733 seconds for 64, on the recorded Windows CPU host. Each includes manager " +
+      "initialization, submission, execution, collection and cleanup as measured by the runner. The " +
+      "three are single observations, not repeated estimates with confidence intervals, and their " +
+      "order is not a justified performance ranking. All managers stopped and cleared their " +
+      "processors."
+    }</Prose>
+    
+    <Prose>{
+      "The saved record retains creation time, available lifespan events and output timestamp " +
+      "arrays relative to each arm's own origin. Read each field according to the pinned API: a " +
+      "framework creation timestamp is not an externally measured network arrival. Missing lifespan " +
+      "entries stay unavailable. The trace does not fill gaps with inferred GPU activity or divide " +
+      "an inclusive duration into invented prefill/decode measurements."
+    }</Prose>
+    
+    <Prose>{
+      "The complete study program freezes exact model/data/source identities and settings before " +
+      "running. Its exclusive output journal prevents accidentally overwriting an earlier campaign. " +
+      "A failed arm would retain partial results and stop instead of silently rerunning for a " +
+      "favorable outcome."
+    }</Prose>
+    
+    <Program file="native_study.py" />
+    
+    <Prose>{"To make a new independent campaign, choose fresh record/output paths and run "}<code>{"prepare"}</code>{" before "}<code>{"run"}</code>{
+      ". Inspect the prepared protocol before executing it. The supplied observations are already " +
+      "complete; reading them does not require repeating inference."
+    }</Prose>
+    
+    <CodeBlock language={"bash"}>{
+      "python native_study.py prepare --model model-cache --record my-protocol.json\n" +
+      "python native_study.py run --model model-cache --record my-protocol.json --output " +
+      "my-results.json"
+    }</CodeBlock>
+    
+    <Prose>{""}<code>{"prepare"}</code>{" checks bytes and tokenization without model inference; "}<code>{"run"}</code>{
+      " checks the frozen inputs before loading the model. Each reference and arm is appended to a " +
+      "journal as it completes. The source's comparison indexes by request ID, records first " +
+      "divergence when present, and treats generated-token equality and terminal status as separate " +
+      "fields. Changing a scheduler setting creates a new experiment; it does not retroactively " +
+      "change the saved one."
+    }</Prose>
+    
+    <H2>{"14. Deeper: place the scheduler inside an engine"}</H2>
+    
+    <Prose>{
+      "So far one process has held the whole small model. A larger engine may divide layers or " +
+      "heads across workers. The request's logical identity must then survive another boundary: " +
+      "scheduling decisions travel separately from large activation and K/V tensors."
+    }</Prose>
+    
+    <CbWorkers />
+    
+    <Prose>{"The "}<strong>{"control plane"}</strong>{" tells workers which requests and logical positions to process. The "}<strong>{"tensor plane"}</strong>{
+      " carries numerical arrays needed by the computation. Thin ID/table arrows and thick " +
+      "activation arrows represent different payloads. A shared logical mapping decision does not " +
+      "imply that every worker stores identical K/V bytes: one worker may own a different layer or " +
+      "head shard. Workers must interpret the coordinated decision consistently for their local " +
+      "tensors."
+    }</Prose>
+    
+    <Prose>{
+      "This is one reason Orca's selective batching distinguishes position-wise operations from " +
+      "request-specific attention rather than treating every operation as the same rectangular " +
+      "batch. The finite packed decoder implements that distinction locally. It does not implement " +
+      "worker communication, fault recovery or distributed scheduling."
+    }</Prose>
+    
+    <CbPipeline />
+    
+    <Prose>{
+      "For a constructed two-stage pipeline, let stage 1 take two units and stage 2 three units per " +
+      "microbatch. With two microbatches, stage 1 runs M1 during 0–2 and M2 during 2–4. Stage 2 " +
+      "runs M1 during 2–5, then M2 during 5–8. M2 cannot enter stage 2 at 4 because that stage is " +
+      "occupied. The schedule finishes at 8; simply adding stage durations per microbatch would " +
+      "give 10 and miss overlap. Three such microbatches finish at 11. These are supplied " +
+      "dependency schedules, not observed engine benchmarks."
+    }</Prose>
+    
+    <Prose>{
+      "Chunking prefill can create smaller schedulable pieces, but it also changes communication " +
+      "and repeated-read overhead. Separating prefill and decode onto different resources adds a " +
+      "K/V transfer boundary and separate capacity requirements. Current engine configuration " +
+      "therefore involves more than selecting the largest batch. The dated vLLM V1 documentation " +
+      "discusses decode-prioritized chunked prefill and distinct "
+    }<code>{"max_num_batched_tokens"}</code>{" and "}<code>{"max_num_seqs"}</code>{
+      "; those GPU-oriented settings were source-read, not executed in this CPU lesson. Inference " +
+      "Engines & Serving develops the broader deployment choices."
+    }</Prose>
+    
+    <span id="9-failure-modes-and-gotchas" aria-hidden="true" />
+    <H2>{"15. Reconstruct the state before changing the knob"}</H2>
+    
+    <Prose>{
+      "A slow or wrong response is easier to diagnose when its request record, scheduled rows and " +
+      "physical history can be inspected together."
+    }</Prose>
+    
+    <CbDiagnosis />
+    
+    <Prose>{
+      "If A receives B's otherwise correct IDs, inspect the scatter mapping. If a child changes its " +
+      "parent, inspect the shared tail's reference count and copy boundary. If retrying an append " +
+      "duplicates a row, inspect whether a failed call mutated valid length or bytes. If perturbing " +
+      "A changes B, inspect the cross-request attention mask. If rearranging pages changes the " +
+      "mathematical result substantially, inspect whether normalization was reset at every page."
+    }</Prose>
+    
+    <Prose>{
+      "Each diagnosis names an invariant and a counterexample. “The batch is too large” is not a " +
+      "substitute for locating the violated relation. A numerical discrepancy also deserves a " +
+      "matched-input comparison before it is attributed to scheduling; dtype, mask, token positions " +
+      "and stopping convention must agree."
+    }</Prose>
+    
+    <CbBindingLimit />
+    
+    <Prose>{
+      "For performance, first identify the binding constraint. Empty request slots with no free " +
+      "pages suggest residence/admission pressure. Free pages with a full query-row budget suggest " +
+      "work scheduling. An idle device with no arrived work is neither failure. Changing a " +
+      "nonbinding limit may do nothing, which is a useful null result when the drawing makes the " +
+      "reason visible."
+    }</Prose>
+    
+    <Prose>{
+      "You can now follow a request through a changing batch while preserving its logical history: " +
+      "select work at boundaries, pack only compatible row-wise operations, segment attention by " +
+      "identity, address valid K/V through tables, transact mutations and account for repeated " +
+      "work. The next lesson, "
+    }<a href={"/learn/path/full-curriculum/queueing-theory-for-llm-serving?module=large-language-models"}>{"Queueing Theory for LLM Serving"}</a>{
+      ", asks how traffic and service variability change the latency/throughput tradeoff. Prefix " +
+      "caching later extends our trusted fork into reusable-prefix lookup; engine design extends " +
+      "the local lifecycle into deployment."
+    }</Prose>
+    </section>
+    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+    <span id="11-self-check-exercises" aria-hidden="true" />
+    <H2>{"Practice"}</H2>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"1. Separate arrival wait from a static-batch barrier"}</H3>
+    
+    <Prose>{"Two slots receive A, B, C, D with arrivals "}<code>{"[0,0,1,5]"}</code>{" and work lengths "}<code>{"[3,7,2,1]"}</code>{
+      ". Find continuous and static start/finish times, using the boundary convention from section " +
+      "3. Which waits could a larger slot count remove?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" At boundary 3 only A's slot is free; at boundary 5 C completes just as D arrives."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Continuous intervals are A 0–3, B 0–7, C 3–5 and D 5–6, finishing at 7. Static admits A/B " +
+      "at 0, then waits for B: C 7–9 and D 7–8, finishing at 9. C waits 2 units continuously versus " +
+      "6 statically; D waits 0 versus 2. Before its arrival, neither C nor D is eligible. Extra " +
+      "slots can remove capacity/barrier waits after arrival, but cannot move arrival earlier. Both " +
+      "execute 13 work units. Run these changed inputs through "
+    }<code>{"schedule"}</code>{
+      ", then reconstruct active counts from the half-open intervals rather than trusting only the " +
+      "final makespan."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"2. Pack three segments without making one conversation"}</H3>
+    
+    <Prose>{
+      "Requests A, B, C contribute 1, 3, 2 rows. Their first new absolute positions are 4, 0, 7. " +
+      "Give offsets, positions and the identity of packed row 4. State a perturbation check that " +
+      "detects cross-request attention."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Prefix-sum the row counts; absolute positions restart from each request's own origin."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{" Offsets are "}<code>{"[0,1,4,6]"}</code>{"; packed absolute positions are "}<code>{"[4,0,1,2,7,8]"}</code>{
+      ". Row 4 belongs to C at position 7. A global triangle wrongly permits C to see all earlier " +
+      "A/B rows. Perturb only B's tokens or cached values and compare C's outputs before/after " +
+      "under the correct mask: C must remain unchanged, with matching model state and deterministic " +
+      "evaluation. Reorder segments to C, A, B and rebuild offsets; scatter outputs by ID so that " +
+      "the per-request comparison still matches."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"3. An allocated cell can still be invalid"}</H3>
+    
+    <Prose>{"Use C=4, table "}<code>{"[5,2,8]"}</code>{", valid length 9. Locate positions 3, 4 and 8. Is position 9 readable?"}</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Table lookup and validity are two separate checks."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Position 3 is page 5/offset 3; position 4 is page 2/offset 0; position 8 is page 8/offset " +
+      "0. Position 9 would address page 8/offset 1 physically but is outside "
+    }<code>{"[0,9)"}</code>{
+      ", so reject it before reading. Three tail cells are allocated and invalid. Swapping physical " +
+      "pages 2 and 8 while swapping their table references preserves all nine logical values; " +
+      "swapping only references corrupts them."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"4. Keep the memory denominator visible"}</H3>
+    
+    <Prose>{
+      "For lengths 9, 17, 24 and page size 8, compute useful, allocated and unused slots. Compare " +
+      "with 32 reserved slots per request and report both allocation/reservation and tail/allocated " +
+      "fractions."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Round each request separately before summing."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Useful=50. Page counts 2, 3, 3 allocate 64 slots; 14 are unused. Three maximum reservations " +
+      "allocate 96. Thus allocation/reservation=64/96=2/3, while tail/allocated=14/64=21.875%. " +
+      "Tail/useful would be 28%, a different quantity. Metadata is additional to these token-slot " +
+      "counts. Dividing total 50 by 8 and rounding once would allocate 56 slots and incorrectly " +
+      "assume unrelated tails can share a page without a different layout."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"5. Refuse a whole append"}</H3>
+    
+    <Prose>{
+      "A chunk requires two new pages but only one is free. Specify the equality a failed append " +
+      "must preserve. Then explain the retry after another request releases one unshared page."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Checking only valid length can miss corruption of live values."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Save the full table/length/refcount/free-list state and hashes of both K/V arrays. After " +
+      "refusal all must equal the snapshot; no partial row or reserved page may escape. Releasing " +
+      "the other request makes two pages available, assuming its released reference was the last " +
+      "one. Retry the original whole chunk exactly once; it either commits all rows with the " +
+      "expected dense result or fails atomically again. If the released page is still shared, it " +
+      "does not become free, so the same retry still fails. The supplied allocator implements this " +
+      "transaction rather than requiring callers to roll back partial writes."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"6. Fork a different partial tail"}</H3>
+    
+    <Prose>{
+      "Parent length 7, page size 4, child prefix 5. Describe the shared references, the child's " +
+      "append at position 5, and the parent's state. Compare a parent 8/child 8 fork."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" The second physical page contains more valid parent data than child data."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Both tables initially reference two pages; each count becomes 2. The child's valid tail has " +
+      "only offset 0, while the parent's tail has offsets 0–2. For a child append, allocate a " +
+      "private tail, copy only offset 0 and write offset 1. The old tail count falls to 1, the " +
+      "private tail count is 1, and the first shared page remains count 2. The parent's seven " +
+      "logical values stay exact. For parent 8/child 8, both pages are full; appending position 8 " +
+      "allocates a new page without copying either old page. With no free page, both append " +
+      "variants refuse without mutation, for different structural reasons: private-tail allocation " +
+      "versus new-block allocation."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"7. Do not average page answers"}</H3>
+    
+    <Prose>{"Scores are "}<code>{"[log2,log5,log1]"}</code>{", values "}<code>{"[1,3,−2]"}</code>{
+      ", page size 2. Compute the correct output and the equally averaged page-output shortcut. " +
+      "What happens under physical relocation?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Global mass is 8; the pages have masses 7 and 1."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The global numerator is 2×1+5×3+1×(−2)=15, giving 15/8=1.875. Page outputs are 17/7 and −2, " +
+      "whose equal average is 3/14≈.214286. Correct mass-weighted combination is " +
+      "(7/8)(17/7)+(1/8)(−2)=15/8. Relocating the same values and updating tables leaves this " +
+      "expression unchanged. The shortcut's error is a denominator error, not a storage-address " +
+      "error."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"8. Shift every score by 1000"}</H3>
+    
+    <Prose>{
+      "Add 1000 to the scores in task 7. Explain the stable online calculation when a fully masked " +
+      "block is inserted before the first valid block, and the result when every block is masked."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" A common exponential scale cancels only if you avoid overflowing while forming it."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The correct output remains 15/8 because the factor exp(1000) would multiply numerator and " +
+      "denominator equally. Do not form that factor. Skip the initial empty block, initialize from " +
+      "the first valid maximum and exponentiate only differences from the running maximum. Rescale " +
+      "old mass and weighted sum together whenever that maximum rises. If all blocks are masked, no " +
+      "denominator exists; return the explicit invalid state rather than dividing 0/0 or " +
+      "manufacturing probabilities. A masked block is not a zero-valued observation with positive " +
+      "mass."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"9. Explain a preemption and an infeasible request"}</H3>
+    
+    <Prose>{
+      "Page size 4, pool 5 pages: active A has prompt 3/cap 8 and B prompt 3/cap 8. Their current " +
+      "cache lengths are 8 and 8, so each occupies 2 pages. A's next row needs another page; " +
+      "afterwards B also asks for its next row. Under the protected-oldest policy, what happens? " +
+      "Separately consider one request already at length 20 asking to append one row."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Compare current pages, cap reservations and a request's minimum possible next state."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " A's append consumes the fifth page; B cannot grow then. A remains protected and can " +
+      "continue within its third page, eventually finish and release it. B can wait, or be " +
+      "preempted if a later protected append needs its pages; preemption is not automatically " +
+      "required merely because B's immediate append is blocked. Full cap reservation would have " +
+      "needed 3+3=6 pages and would not admit both initially. The length 20 request needs 6 pages " +
+      "for 21 positions, more than the entire 5-page pool. It is explicitly infeasible; evicting " +
+      "other requests cannot solve it. A recomputation trace must preserve already generated IDs, " +
+      "count rebuilt positions as repeated and resume from the pending token rather than emit old " +
+      "outputs again."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"10. Recompute the mixed-row budget"}</H3>
+    
+    <Prose>{
+      "A 10-token prompt is waiting while three decodes continue. Query budget 7, chunk limit 4. " +
+      "After the first iteration one decode finishes. Give the prefill chunk sizes and " +
+      "attention-pair counts."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" The chunk limit and the remaining query budget both apply."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " First allocate 3 decode rows and 4 prefill rows. Next only 2 decodes remain, leaving 5 " +
+      "budget rows, but chunk 4 still limits prefill to 4. The final chunk has 2 rows. Prefill " +
+      "absolute ranges are 0–3, 4–7, 8–9, with pair counts 10, 26 and 19, totaling 55=10×11/2. The " +
+      "last chunk's 19 pairs are 16 old-prefix pairs plus 3 local-triangle pairs. Raising the chunk " +
+      "limit to 5 after the first boundary would permit a 5-row second chunk and a 1-row last " +
+      "chunk, still totaling 55 causal pairs but changing iteration packing and modeled overhead."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"11. Compute only the clocks that exist"}</H3>
+    
+    <Prose>{
+      "X arrives at 1.2 and emits at 2, 2.7, 4.1. Y arrives at 3 and emits once at 3.4. Z arrives " +
+      "at 0, emits at .8 and is canceled at 1.5. Report TTFT, gap lists and completed-response " +
+      "elapsed time."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" An absent interval is not a zero interval."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " X: TTFT .8, gaps [.7, 1.4], elapsed 2.9. Y: TTFT .4, gaps [], elapsed .4. Z: TTFT .8, gaps " +
+      "[], completed-response elapsed unavailable because it did not complete. Its cancellation " +
+      "elapsed 1.5 is a different metric. The framework's own request-creation event may be later " +
+      "than an external client arrival; state which timestamp you used before comparing TTFT across " +
+      "systems."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"12. Check identities rather than insertion order"}</H3>
+    
+    <Prose>{"Expected outputs are A "}<code>{"[4,2]"}</code>{", B "}<code>{"[9]"}</code>{", C "}<code>{"[3,7]"}</code>{
+      ". A returned map inserts C, then A, then B. Which comparisons are valid? Now suppose A and " +
+      "C's arrays are swapped while the three-array multiset stays unchanged."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" The map key is part of each observation."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{" Compare "}<code>{"returned[A]"}</code>{" with "}<code>{"[4, 2]"}</code>{", "}<code>{"returned[B]"}</code>{" with "}<code>{"[9]"}</code>{" and "}<code>{"returned[C]"}</code>{" with "}<code>{"[3, 7]"}</code>{
+      ", and check the exact key set and terminal statuses. Insertion order does not matter. A/C " +
+      "swapping fails two keyed comparisons even though a sorted multiset check passes. Also reject " +
+      "duplicate terminal responses while collecting, because overwriting a previous map entry can " +
+      "hide a lifecycle defect. A missing key is not equivalent to a valid empty array."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"13. Repair the pinned API boundary"}</H3>
+    
+    <Prose>{"A script calls "}<code>{"config.to_dict()"}</code>{", uses "}<code>{"block_size"}</code>{
+      ", cancels pending request C, waits for three terminal outputs from A/B/C, and exits without " +
+      "stopping the manager. Repair its contract for the exercised 5.19 route."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Serialization, request acknowledgment and resource lifetime are independent problems."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{" Use "}<code>{"dataclasses.asdict(config)"}</code>{" and the pinned "}<code>{"page_size"}</code>{
+      " field; inspect actual resolved settings rather than assuming guide aliases. Record C's " +
+      "cancellation locally and do not await a terminal "
+    }<code>{"GenerationOutput"}</code>{
+      " for that removed pending request. Drain the two expected uncanceled results with a deadline " +
+      "and fatal-error checks. Put blocking "
+    }<code>{"stop"}</code>{" in "}<code>{"finally"}</code>{
+      ", surface a still-running thread and destroy resources after stopping. Record whether warmup " +
+      "ran. These corrections establish API consistency; they do not prove that one token budget is " +
+      "faster or that cancellation during a live forward behaves identically to this pre-start " +
+      "case."
+    }</Prose>
+    </details>
+    </section>
+    <section className="cb-practice" data-lesson-exercise>
+    <H3>{"14. Assemble a new finite serving check"}</H3>
+    
+    <Prose>{
+      "Use the supplied capstone solution as a reference only after trying the task. Create three " +
+      "requests with prompts of lengths 2, 4, 3 and small supplied continuations. Mix their chunks " +
+      "and change insertion order. Back the decoder with real shared pages; compare every new logit " +
+      "row with the corresponding independent full-prefix decoder. Then fork a partial prefix, " +
+      "force an atomic allocation refusal and verify that an infeasible schedule terminates " +
+      "explicitly."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " Separate the neural equality check from the modeled schedule: the latter supplies costs and " +
+      "completion events, not generated language."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{" "}<code>{"serving_capstone.py"}</code>{
+      " implements the complete changed fixture with fixed random weights, segment-by-segment " +
+      "reference slices, a partial COW append, parent conservation and an unchanged whole-pool " +
+      "snapshot after refusal. It also runs new finite arrival/cap schedules, checks page/query " +
+      "capacities and requires every request to finish, cancel or report infeasibility. The " +
+      "assertions state the success criteria rather than merely comparing final strings. Extend it " +
+      "with a new request order and a zero-length new segment; preserve existing IDs, position " +
+      "origins and checks. Do not weaken a tolerance to conceal a wrong mask or relabel repeated " +
+      "rows as useful."
+    }</Prose>
+    
+    <Program file="serving_capstone.py" />
+    </details>
+    </section>
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="further-learning">
+    <H2>{"Further learning"}</H2>
+    
+    <ul>
+    <li>{""}<a href={"https://raw.githubusercontent.com/stanford-cs336/spring2025-lectures/main/lecture_10.py"}>{"Stanford CS336 lecture 10 source"}</a>{
+      " develops inference arithmetic intensity, selective batching and paging. Read its " +
+      "tensor-shape argument after section 5, then compare its operating-systems analogy with our " +
+      "explicit table and valid-tail checks. This recommendation is based on the source text, not a " +
+      "claim of watching the lecture video."
+    }</li>
+    <li>{""}<a href={"https://jax-ml.github.io/scaling-book/inference/"}>{"How to Scale Your Model: inference"}</a>{
+      " connects cache capacity and batching to hardware limits and serving architecture. It is " +
+      "useful after the finite model: ask which fixed costs and memory transfers our simple clock " +
+      "leaves out."
+    }</li>
+    </ul>
+    
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="references">
+    <span id="10-primary-sources" aria-hidden="true" />
+    <H2>{"Technical references"}</H2>
+    
+    <ul>
+    <li>{""}<a href={"https://www.usenix.org/system/files/osdi22-yu.pdf"}>{"Orca, OSDI 2022"}</a>{
+      ", especially §§3–4: iteration-level scheduling, selective batching, reservations and the " +
+      "control/data distinction. Its complete-system benchmark is not the source of our finite " +
+      "1010/595 comparison."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/html/2309.06180v1"}>{"PagedAttention/vLLM, original v1"}</a>{
+      ", §§2–4: noncontiguous K/V blocks, logical tables, sharing, COW and eviction/recomputation. " +
+      "Our allocator/attention references expose those invariants without claiming GPU-kernel " +
+      "performance."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/html/2403.02310v2"}>{"Sarathi-Serve v2"}</a>{
+      ", §§2–4: chunked prefill and decode work under token budgets. Hardware-sensitive conclusions " +
+      "require its stated evaluation conditions."
+    }</li>
+    <li>{""}<a href={"https://huggingface.co/docs/transformers/v5.19.0/continuous_batching"}>{"Transformers 5.19 continuous batching"}</a>{
+      ": the ordinary API route. The complete runnable source pins the inspected dataclass fields " +
+      "and actual lifecycle behavior; current online documentation may evolve."
+    }</li>
+    <li>{""}<a href={"https://docs.vllm.ai/en/latest/configuration/optimization/"}>{"vLLM optimization guidance"}</a>{
+      ", read 8 October 2026: current V1 preemption/chunking and separate work/request limits. GPU " +
+      "execution of that engine is outside these recorded CPU examples."
+    }</li>
+    </ul>
+    
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="readiness">
+    <H2>{"Readiness check"}</H2>
+    
+    <Prose>{
+      "You are ready to continue when you can trace a finished slot's replacement without changing " +
+      "another request's identity; derive its valid cache length from processed versus selected " +
+      "tokens; map a logical read through a page table; preserve a parent's values during " +
+      "partial-prefix COW; explain the global softmax denominator; and diagnose a blocked append " +
+      "using separate row, request and page budgets. Implement a changed case and compare it " +
+      "against an independent reference. Then use actual request clocks to distinguish a " +
+      "correctness failure from a scheduling tradeoff."
+    }</Prose>
+    </section>
+  </div>;
+}
+export default {
+  title: 'Continuous Batching & PagedAttention',
+  slug: 'continuous-batching-pagedattention',
+  readTime: '~80 min read + 90 min practice', content: ContinuousBatchingLesson,
 };
-
-export default continuousBatching;

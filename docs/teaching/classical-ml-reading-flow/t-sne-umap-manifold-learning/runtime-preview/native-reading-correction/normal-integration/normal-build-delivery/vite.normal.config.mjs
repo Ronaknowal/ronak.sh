@@ -1,0 +1,31 @@
+import base from '../../../../../../../../vite.config.js';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+const owner=path.dirname(fileURLToPath(import.meta.url));
+const app=path.resolve(owner,'../../../../../../../..');
+const topic='src/learn/data/topics/t-sne-umap-manifold-learning.jsx';
+const normalize=id=>id.split('?')[0].replaceAll('\\','/');
+const relative=id=>path.relative(app,normalize(id)).replaceAll('\\','/');
+function binding(file){const raw=fs.readFileSync(file);return {path:relative(file),bytes:raw.length,sha256:crypto.createHash('sha256').update(raw).digest('hex')};}
+const capture={name:'manifold-normal-source-provenance',enforce:'post',generateBundle(_options,output){
+ const chunks=Object.values(output).filter(row=>row.type==='chunk');
+ const byName=new Map(chunks.map(row=>[row.fileName,row]));
+ const selected=chunks.filter(row=>Object.keys(row.modules).some(id=>relative(id)===topic));
+ if(selected.length!==1)this.error('Expected exactly one canonical t-SNE lazy chunk');
+ const closure=starts=>{const found=new Set();const visit=name=>{if(found.has(name))return;found.add(name);for(const next of byName.get(name)?.imports||[])visit(next);};starts.forEach(visit);return [...found];};
+ const selectedClosure=closure([selected[0].fileName]);
+ const initialClosure=closure(chunks.filter(row=>row.isEntry).map(row=>row.fileName));
+ const ids=names=>[...new Set(names.flatMap(name=>Object.keys(byName.get(name)?.modules||{})))];
+ const initialIds=ids(initialClosure);
+ const isOwned=id=>{const p=relative(id);return p===topic||p.startsWith('src/learn/components/lesson-labs/manifold-reading-flow/')||p.startsWith('src/learn/data/manifold-reading-flow/');};
+ if(initialIds.some(isOwned))this.error('t-SNE lesson/component/data reached initial static bundle');
+ const allIds=chunks.flatMap(row=>Object.keys(row.modules));
+ if(allIds.some(id=>normalize(id).includes('/docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/')))this.error('Private t-SNE source/harness reached normal graph');
+ const physical=[...new Set(ids(selectedClosure).filter(id=>!id.startsWith('\0')).map(normalize))].filter(file=>fs.existsSync(file)&&fs.statSync(file).isFile());
+ const sourceBindings=physical.map(binding);
+ const provenance={schema:'manifold-normal-built-source-map/v1',topic,rootConfig:binding(path.join(app,'vite.config.js')),wrapperConfig:binding(fileURLToPath(import.meta.url)),normalRoot:app,normalPublicDir:path.join(app,'public'),selectedChunk:selected[0].fileName,selectedClosure,initialClosure,initialLessonExclusion:true,privateTopicSourcesExcluded:true,sourceBindings,canonicalOwnedBindings:sourceBindings.filter(row=>isOwned(path.join(app,row.path))),chunks:chunks.filter(row=>selectedClosure.includes(row.fileName)||initialClosure.includes(row.fileName)).map(row=>({fileName:row.fileName,isEntry:row.isEntry,isDynamicEntry:row.isDynamicEntry,imports:row.imports,dynamicImports:row.dynamicImports,moduleIds:Object.keys(row.modules).map(id=>id.startsWith('\0')?id:relative(id))}))};
+ this.emitFile({type:'asset',fileName:'manifold-normal-source-map.json',source:JSON.stringify(provenance,null,2)+'\n'});
+}};
+export default {...base,root:app,plugins:[...base.plugins,capture],build:{...base.build,outDir:path.resolve(owner,'../build-normal'),emptyOutDir:false},preview:{host:'127.0.0.1',port:5208,strictPort:true}};

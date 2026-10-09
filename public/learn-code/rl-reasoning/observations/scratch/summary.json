@@ -1,0 +1,584 @@
+{
+  "protocol_sha256": "07a52ccddb48398000a902665cf8b28d262a5164476b26a6ffafec4c3838e22d",
+  "parameters": 66528,
+  "fits": [
+    {
+      "seed": 17,
+      "arm": "sft",
+      "steps": 80,
+      "targets": 25600
+    },
+    {
+      "seed": 17,
+      "arm": "rl",
+      "steps": 80,
+      "targets": 25591
+    },
+    {
+      "seed": 29,
+      "arm": "sft",
+      "steps": 80,
+      "targets": 25600
+    },
+    {
+      "seed": 29,
+      "arm": "rl",
+      "steps": 80,
+      "targets": 25599
+    },
+    {
+      "seed": 43,
+      "arm": "sft",
+      "steps": 80,
+      "targets": 25600
+    },
+    {
+      "seed": 43,
+      "arm": "rl",
+      "steps": 80,
+      "targets": 25598
+    }
+  ],
+  "evaluations": [
+    {
+      "seed": 17,
+      "arm": "warm",
+      "step": 0,
+      "file": "evaluation-17-warm-0.json",
+      "nll": 2.4404592514038086,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.85,
+      "format": 0.9953125,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 17,
+      "arm": "sft",
+      "step": 20,
+      "file": "evaluation-17-sft-20.json",
+      "nll": 2.5043439865112305,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.7,
+      "format": 0.9921875,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 17,
+      "arm": "sft",
+      "step": 40,
+      "file": "evaluation-17-sft-40.json",
+      "nll": 2.500922918319702,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.925,
+      "format": 0.996875,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 17,
+      "arm": "sft",
+      "step": 60,
+      "file": "evaluation-17-sft-60.json",
+      "nll": 2.5353784561157227,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.925,
+      "format": 0.996875,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 17,
+      "arm": "sft",
+      "step": 80,
+      "file": "evaluation-17-sft-80.json",
+      "nll": 2.5603699684143066,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.925,
+      "format": 0.9984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 17,
+      "arm": "rl",
+      "step": 20,
+      "file": "evaluation-17-rl-20.json",
+      "nll": 2.394711971282959,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 1.0,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 17,
+      "arm": "rl",
+      "step": 40,
+      "file": "evaluation-17-rl-40.json",
+      "nll": 2.3412294387817383,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.925,
+      "format": 0.9953125,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 17,
+      "arm": "rl",
+      "step": 60,
+      "file": "evaluation-17-rl-60.json",
+      "nll": 2.3867430686950684,
+      "pass1": 0.0015625,
+      "passk": 0.0125,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.9984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 17,
+      "arm": "rl",
+      "step": 80,
+      "file": "evaluation-17-rl-80.json",
+      "nll": 2.3245091438293457,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 1.0,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "warm",
+      "step": 0,
+      "file": "evaluation-29-warm-0.json",
+      "nll": 2.4010918140411377,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.025,
+      "format": 0.975,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "sft",
+      "step": 20,
+      "file": "evaluation-29-sft-20.json",
+      "nll": 2.4364383220672607,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.25,
+      "format": 0.9796875,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "sft",
+      "step": 40,
+      "file": "evaluation-29-sft-40.json",
+      "nll": 2.4720985889434814,
+      "pass1": 0.0015625,
+      "passk": 0.0125,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 78.5,
+      "format": 0.9625,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "sft",
+      "step": 60,
+      "file": "evaluation-29-sft-60.json",
+      "nll": 2.510315179824829,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 78.7,
+      "format": 0.9671875,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "sft",
+      "step": 80,
+      "file": "evaluation-29-sft-80.json",
+      "nll": 2.519468307495117,
+      "pass1": 0.0015625,
+      "passk": 0.0125,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 78.425,
+      "format": 0.9640625,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "rl",
+      "step": 20,
+      "file": "evaluation-29-rl-20.json",
+      "nll": 2.4268500804901123,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.525,
+      "format": 0.9859375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "rl",
+      "step": 40,
+      "file": "evaluation-29-rl-40.json",
+      "nll": 2.4492383003234863,
+      "pass1": 0.0015625,
+      "passk": 0.0125,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 78.725,
+      "format": 0.9734375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "rl",
+      "step": 60,
+      "file": "evaluation-29-rl-60.json",
+      "nll": 2.461005687713623,
+      "pass1": 0.0015625,
+      "passk": 0.0125,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 78.875,
+      "format": 0.971875,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 29,
+      "arm": "rl",
+      "step": 80,
+      "file": "evaluation-29-rl-80.json",
+      "nll": 2.4292478561401367,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 79.525,
+      "format": 0.984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "warm",
+      "step": 0,
+      "file": "evaluation-43-warm-0.json",
+      "nll": 2.1316967010498047,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.9984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "sft",
+      "step": 20,
+      "file": "evaluation-43-sft-20.json",
+      "nll": 2.147784948348999,
+      "pass1": 0.0015625,
+      "passk": 0.0125,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.9984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "sft",
+      "step": 40,
+      "file": "evaluation-43-sft-40.json",
+      "nll": 2.179611921310425,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.9984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "sft",
+      "step": 60,
+      "file": "evaluation-43-sft-60.json",
+      "nll": 2.2200257778167725,
+      "pass1": 0.00625,
+      "passk": 0.02403846153846154,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.9984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "sft",
+      "step": 80,
+      "file": "evaluation-43-sft-80.json",
+      "nll": 2.234863758087158,
+      "pass1": 0.0015625,
+      "passk": 0.0125,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.9984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "rl",
+      "step": 20,
+      "file": "evaluation-43-rl-20.json",
+      "nll": 2.1173386573791504,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.9984375,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "rl",
+      "step": 40,
+      "file": "evaluation-43-rl-40.json",
+      "nll": 2.1156861782073975,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.996875,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "rl",
+      "step": 60,
+      "file": "evaluation-43-rl-60.json",
+      "nll": 2.0473155975341797,
+      "pass1": 0.003125,
+      "passk": 0.019166666666666665,
+      "observed_oracle": 0.025,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.996875,
+      "derivation": 0.0,
+      "eos": 1.0
+    },
+    {
+      "seed": 43,
+      "arm": "rl",
+      "step": 80,
+      "file": "evaluation-43-rl-80.json",
+      "nll": 2.11179256439209,
+      "pass1": 0.0,
+      "passk": 0.0,
+      "observed_oracle": 0.0,
+      "majority": 0.0,
+      "tokens": 80.0,
+      "format": 0.996875,
+      "derivation": 0.0,
+      "eos": 1.0
+    }
+  ],
+  "paired_family_bootstrap": [
+    {
+      "seed": 17,
+      "arm": "sft",
+      "metric": "pass1",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 17,
+      "arm": "sft",
+      "metric": "passk",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 17,
+      "arm": "rl",
+      "metric": "pass1",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 17,
+      "arm": "rl",
+      "metric": "passk",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 29,
+      "arm": "sft",
+      "metric": "pass1",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0015625,
+      "percentile95": [
+        0.0,
+        0.004687500000000001
+      ]
+    },
+    {
+      "seed": 29,
+      "arm": "sft",
+      "metric": "passk",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0125,
+      "percentile95": [
+        0.0,
+        0.037500000000000006
+      ]
+    },
+    {
+      "seed": 29,
+      "arm": "rl",
+      "metric": "pass1",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 29,
+      "arm": "rl",
+      "metric": "passk",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 43,
+      "arm": "sft",
+      "metric": "pass1",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0015625,
+      "percentile95": [
+        0.0,
+        0.004687500000000001
+      ]
+    },
+    {
+      "seed": 43,
+      "arm": "sft",
+      "metric": "passk",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0125,
+      "percentile95": [
+        0.0,
+        0.037500000000000006
+      ]
+    },
+    {
+      "seed": 43,
+      "arm": "rl",
+      "metric": "pass1",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 43,
+      "arm": "rl",
+      "metric": "passk",
+      "unit": "eight held-out families, five c-values each",
+      "difference": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "seconds": 146.66987950002658
+}

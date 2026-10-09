@@ -1,0 +1,32 @@
+{
+  "status": "AUTHOR_READY_FOR_SAME_ER1_ER2_ER3_CLOSURE",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-source-r2.json",
+    "sha256": "c1e045adf5d8eb02f02707459129f39f053f1849118aed6da6f124c1e8480456",
+    "bytes": 301555
+  },
+  "evidence": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-evidence-r2.json",
+    "sha256": "fdbcef138699740f2845cc9a26683aec06f6da408bad07b61b9c7b8bde71c534",
+    "bytes": 11675
+  },
+  "authorReview": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-author-correction-r2.md",
+    "sha256": "520ce326562aa4384d77f86f24f9d2449eddc932a9ddb8236e592bf61bf91a66",
+    "bytes": 9209
+  },
+  "amendment": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-content-amendment-r2.md",
+    "sha256": "6767fdc4493cb45fcaf03089f888801fd290d51934cb92a9a8828c7340576180",
+    "bytes": 3029
+  },
+  "preview": {
+    "url": "http://127.0.0.1:5774/",
+    "sessionId": 44053,
+    "cwd": "scratch/entropy-private-reader",
+    "command": "node ../../node_modules/vite/bin/vite.js preview --outDir production-correction --host 127.0.0.1 --port 5774 --strictPort"
+  },
+  "openAuthorFindings": [],
+  "nextAction": "SAME independent reviewer closes consolidated findings; Root alone integrates canonical normal application.",
+  "unchangedSourceReuse": "Complete frozen r1 plus seven changed-only frozen r2 owners. No numerical model, programme or data change."
+}

@@ -1,0 +1,117 @@
+{
+  "checkedAt": "2026-10-06T16:20:37.551Z",
+  "kind": "author-only final narrow join-colour production proof; earlier complete colour receipt preserved",
+  "sources": {
+    "src/learn/data/topics/vocabulary-multilingual.jsx": "0b956d5a44e44304d2a08f002aa014d03f8f2572651b93f6dfe4faddcb4fa288",
+    "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "11b062841ec5dd079d9715352ca67ebc197cc6a015cbd90b01ab4f1f8b994e04",
+    "src/learn/components/lesson-labs/multilingual-vocabulary.css": "08acb6669a27de76f5a63fc50d3017b1211d3eb326308daa5aedacf9a9d6a315",
+    "src/learn/data/multilingual-vocabulary-models.js": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9",
+    "src/learn/components/lesson-labs/token-identity-colors.js": "6bdda73f6e8a02435d4b5dfbb0662a7ebab078e6af34e286e42d804ceed2b13c",
+    "src/learn/components/lesson-labs/token-identity-colors.css": "5e9b388e88cb88bf37caaef1ea75fce394c9b8c020155181005d219e1ede4c8d",
+    "scratch/vocabulary-color-before/verify-final-join-colour.cjs": "b78d4cd24a7f08f760156bf7ec7eec5f680b090b1a4e0f05ef2eaa95262627b9",
+    "dist-tokenization-flow/.vite/manifest.json": "8025bc17510e0d5905bc07baebc0c3da5a55c7f171e40566017d44f4e38d9eaf"
+  },
+  "priorCompleteColourReceipt": {
+    "file": "scratch/vocabulary-color-before/color-author-browser.json",
+    "sha256": "b7df3164740dc426ac5a11657badcc572063fd4a8960e4570d0962748dc3c446"
+  },
+  "layouts": [
+    {
+      "width": 1366,
+      "enlarged": false,
+      "overflow": 0,
+      "labels": [
+        {
+          "label": "Join1",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join2",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join3",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join4",
+          "color": "rgb(96, 165, 250)"
+        }
+      ],
+      "outputPiece": {
+        "literal": "ं</w>",
+        "color": "rgb(226, 181, 90)"
+      }
+    },
+    {
+      "width": 390,
+      "enlarged": false,
+      "overflow": 0,
+      "labels": [
+        {
+          "label": "Join1",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join2",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join3",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join4",
+          "color": "rgb(96, 165, 250)"
+        }
+      ],
+      "outputPiece": {
+        "literal": "ं</w>",
+        "color": "rgb(226, 181, 90)"
+      }
+    },
+    {
+      "width": 768,
+      "enlarged": true,
+      "overflow": 0,
+      "labels": [
+        {
+          "label": "Join1",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join2",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join3",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "label": "Join4",
+          "color": "rgb(96, 165, 250)"
+        }
+      ],
+      "outputPiece": {
+        "literal": "ं</w>",
+        "color": "rgb(226, 181, 90)"
+      }
+    }
+  ],
+  "paints": [
+    {
+      "file": "scratch/vocabulary-color-before/final-combining-mark-paints/hindi-only-desktop.png",
+      "sha256": "042e59b57c682b5429651208947472dc71b82bb2a7d5c5cfe4d1b87235254d5c"
+    },
+    {
+      "file": "scratch/vocabulary-color-before/final-combining-mark-paints/hindi-only-phone.png",
+      "sha256": "f5b0499cfb60f3df285253804e744691814592476126a5d19260d1b0fc1e1595"
+    },
+    {
+      "file": "scratch/vocabulary-color-before/final-combining-mark-paints/hindi-only-enlarged.png",
+      "sha256": "62613d33eaa13fb93df320fd13119adb3c46c10eeab684630686db537511a7b9"
+    }
+  ],
+  "errors": [],
+  "diagnosticCorrection": "Prior direct browser extraction already found all4 Hindi join labels blue; the initial small-screenshot interpretation was wrong. No classifier correction was retained; the blue corpus label and amber output piece intentionally encode different identities."
+}

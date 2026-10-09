@@ -1,0 +1,131 @@
+{
+  "beforeSelected": {
+    "revision": 2,
+    "deliveryMode": "full",
+    "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+    "content": {
+      "status": "complete",
+      "completedAt": "2026-09-21T15:16:46.838Z",
+      "manuscript": "src/learn/data/topics/rate-distortion-theory.jsx",
+      "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "files": {
+        "src/learn/data/topics/rate-distortion-theory.jsx": "718d928d3fe4f7463b3c9bb8d7fc7ff867944a1220d529be578d7deef2e1629e",
+        "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+        "src/learn/data/curriculum/blueprints/rate-distortion-theory.js": "c00da4b64d6baa889002a6f0f48e998b66e25a96624da12a105393900fbb1949",
+        "src/learn/data/rate-distortion-examples.js": "faae6b625572f9609f61fd27b0f5959f8cd47c20a18b8360ea225047fb010a71"
+      }
+    },
+    "implementation": {
+      "status": "complete",
+      "completedAt": "2026-09-21T15:16:46.840Z",
+      "reviewedFiles": {
+        "src/learn/data/topics/rate-distortion-theory.jsx": "718d928d3fe4f7463b3c9bb8d7fc7ff867944a1220d529be578d7deef2e1629e",
+        "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+        "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+        "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+        "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+        "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+        "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+        "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+        "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+        "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+        "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+        "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+        "src/learn/components/lesson-labs/RateDistortionLabs.jsx": "d563d41383ae71bb53fb14061fb8f686cc2c395fd700e55ea0bfa0fbc5d644ed",
+        "src/learn/data/rate-distortion-models.js": "c783813d848028f3d218848bbcd7411a54b33ee73c968e53a7d7885835bbe886",
+        "src/learn/components/lesson-labs/rate-distortion-labs.css": "743b09f7846409e53af844070e45b16bb8833efae9186b9f8bb34688c11742b8",
+        "src/learn/data/rate-distortion-examples.js": "faae6b625572f9609f61fd27b0f5959f8cd47c20a18b8360ea225047fb010a71",
+        "src/learn/data/curriculum/blueprints/rate-distortion-theory.js": "c00da4b64d6baa889002a6f0f48e998b66e25a96624da12a105393900fbb1949"
+      }
+    },
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/RATE-DISTORTION-VERIFICATION.md",
+        "legacyReview": true
+      }
+    ],
+    "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+  },
+  "afterSelected": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "record": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-accepted-root-r2.json",
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/RATE-DISTORTION-VERIFICATION.md",
+        "legacyReview": true
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.838Z",
+          "manuscript": "src/learn/data/topics/rate-distortion-theory.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/rate-distortion-theory.jsx": "718d928d3fe4f7463b3c9bb8d7fc7ff867944a1220d529be578d7deef2e1629e",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/rate-distortion-theory.js": "c00da4b64d6baa889002a6f0f48e998b66e25a96624da12a105393900fbb1949",
+            "src/learn/data/rate-distortion-examples.js": "faae6b625572f9609f61fd27b0f5959f8cd47c20a18b8360ea225047fb010a71"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.840Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/rate-distortion-theory.jsx": "718d928d3fe4f7463b3c9bb8d7fc7ff867944a1220d529be578d7deef2e1629e",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/RateDistortionLabs.jsx": "d563d41383ae71bb53fb14061fb8f686cc2c395fd700e55ea0bfa0fbc5d644ed",
+            "src/learn/data/rate-distortion-models.js": "c783813d848028f3d218848bbcd7411a54b33ee73c968e53a7d7885835bbe886",
+            "src/learn/components/lesson-labs/rate-distortion-labs.css": "743b09f7846409e53af844070e45b16bb8833efae9186b9f8bb34688c11742b8",
+            "src/learn/data/rate-distortion-examples.js": "faae6b625572f9609f61fd27b0f5959f8cd47c20a18b8360ea225047fb010a71",
+            "src/learn/data/curriculum/blueprints/rate-distortion-theory.js": "c00da4b64d6baa889002a6f0f48e998b66e25a96624da12a105393900fbb1949"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      }
+    ],
+    "content": {
+      "status": "in-progress"
+    },
+    "implementation": {
+      "status": "not-started"
+    },
+    "nextAction": "Write the complete manuscript and actionable specifications from corrected design-r2, including three bounded new code executions, fifteen solved transfer tasks and annotated sources. Different entire content review precedes private runtime."
+  },
+  "ledgerBefore": "92a791fee12385b810adcfa5bb9982c1e914edd14dc1d9c53203e12035e67ebb",
+  "ledgerAfter": "7a4d85800aa71c0ebaa528da736e607d702affecf9b88f745a085f0991731c1b",
+  "foreignRowsPreserved": 234,
+  "acceptance": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-accepted-root-r2.json",
+    "sha256": "6b642ca7354f2504bf6aabb827ed25de9c01a7ce12f7bea30f89744b63bf9a68"
+  }
+}

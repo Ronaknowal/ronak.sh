@@ -1,0 +1,63 @@
+{
+  "stage": "native",
+  "protocol_sha256": "89db78881c60edc9c042a1b9a68c8f78d470a54e1634761cfbd74baafed09486",
+  "passed": false,
+  "result": {
+    "scope": "Two separate native diagnostic calls, maximum16 emitted tokens.",
+    "model": {
+      "model": "EleutherAI/pythia-14m",
+      "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+      "files": [
+        {
+          "name": "README.md",
+          "bytes": 10560,
+          "sha256": "d1f2cf1d5181daedeaa70208ddd5cc5251867bde9acf6db7bb45a2265e25e163"
+        },
+        {
+          "name": "config.json",
+          "bytes": 698,
+          "sha256": "f97f966a66c444890ed461fff2a51eefb15d74303df05b948124719f199b0b17"
+        },
+        {
+          "name": "model.safetensors",
+          "bytes": 28143920,
+          "sha256": "116a02532db461f91386a5b20f942ff2c8d4de7341e21b55caafc3d7b25f49a1"
+        },
+        {
+          "name": "special_tokens_map.json",
+          "bytes": 441,
+          "sha256": "10b8c8852c1e1f70b54d9aff61728408c28971c0e97a6c5a7b2debbd1d3e9c0c"
+        },
+        {
+          "name": "tokenizer.json",
+          "bytes": 2114042,
+          "sha256": "870f4e2baa6b683221fa52004d5d6f40ab8c9d31961617304b78c910c2c3caf2"
+        },
+        {
+          "name": "tokenizer_config.json",
+          "bytes": 4834,
+          "sha256": "eee017c5bd133137f45907bd0a6e781e2ccd1a533734b7ed2a2f2f4446659809"
+        }
+      ]
+    },
+    "prompt_text": "The small red boat",
+    "rows": [],
+    "passed": false,
+    "helper": {
+      "uniform": 0,
+      "p_proposal": 0,
+      "q_proposal": 1,
+      "native_output": [
+        [
+          0,
+          1
+        ]
+      ],
+      "native_matches": 1,
+      "strict_reference_accepts": false,
+      "scope": "Constructed finite-RNG endpoint; not a typical sampled run or ideal-law counterexample."
+    },
+    "failure": "Traceback (most recent call last):\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\native_speculation.py\", line 251, in diagnostic\n    row = generate_one(target,draft,prompt,mode,3,seed,cap=8,rich=True,observer=observe)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\native_speculation.py\", line 164, in generate_one\n    output = target.generate(input_ids=ids,attention_mask=torch.ones_like(ids),\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2982, in generate\n    result = decoding_method(\n             ^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 4025, in _assisted_decoding\n    candidate_input_ids, candidate_logits = candidate_generator.get_candidates(input_ids)\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\native_speculation.py\", line 108, in get_observed\n    ids,logits = get(input_ids,*args,**kwargs)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\candidate_generator.py\", line 220, in get_candidates\n    candidate_ids, candidate_logits = self._generate_candidates(generation_args)\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\candidate_generator.py\", line 323, in _generate_candidates\n    assistant_output = self.assistant_model.generate(**generation_args, **self.assistant_kwargs)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2945, in generate\n    self._prepare_cache_for_generation(\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\inference-serving-tools\\transformers\\generation\\utils.py\", line 2237, in _prepare_cache_for_generation\n    raise ValueError(\nValueError: Passing both `cache_implementation` (used to initialize certain caches) and `past_key_values` (a Cache object) is unsupported. Please use only one of the two.\n"
+  },
+  "failure": "Traceback (most recent call last):\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\speculative-decoding\\speculation_study.py\", line 173, in run\n    raise RuntimeError('Native diagnostics failed; retain all detail.')\nRuntimeError: Native diagnostics failed; retain all detail.\n"
+}

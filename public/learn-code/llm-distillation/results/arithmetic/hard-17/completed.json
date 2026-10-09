@@ -1,0 +1,3364 @@
+{
+  "status": "complete",
+  "arm": "hard",
+  "seed": 17,
+  "steps": 600,
+  "selected_step": 200,
+  "selected_dev_accuracy": 0.08333333333333333,
+  "selected_sha256": "a1e969dbc246ba1a10ab5e5f7509fefb590df929b29fad0ff03b95fb8369d6c4",
+  "parameters": 21408,
+  "initial_sha256": "3c18b0054e60c242709b72a8cb83257f189baaec0ec2777b630ea97023c99a48",
+  "targets": 86067,
+  "examples": 9563,
+  "unique_rows": 255,
+  "unique_parents": 128,
+  "history": [
+    {
+      "step": 0,
+      "dev": {
+        "records": 24,
+        "correct": 0,
+        "accuracy": 0.0,
+        "structural": 0,
+        "invalid": 24,
+        "eos_stopped": 0,
+        "full_trace_correct": 0,
+        "mean_length": 12.0,
+        "reference": {
+          "sum_nats": 1102.7446103096008,
+          "targets": 216,
+          "nll": 5.105299121803707,
+          "target_format": "full-trace",
+          "rows": [
+            {
+              "id": "3:7:1",
+              "sum_nats": 45.01668119430542,
+              "targets": 9
+            },
+            {
+              "id": "3:7:2",
+              "sum_nats": 45.615785121917725,
+              "targets": 9
+            },
+            {
+              "id": "3:7:3",
+              "sum_nats": 45.48987102508545,
+              "targets": 9
+            },
+            {
+              "id": "3:7:4",
+              "sum_nats": 45.61686372756958,
+              "targets": 9
+            },
+            {
+              "id": "1:4:1",
+              "sum_nats": 44.87738299369812,
+              "targets": 9
+            },
+            {
+              "id": "1:4:2",
+              "sum_nats": 44.764092683792114,
+              "targets": 9
+            },
+            {
+              "id": "1:4:3",
+              "sum_nats": 44.742422580718994,
+              "targets": 9
+            },
+            {
+              "id": "1:4:4",
+              "sum_nats": 45.54530715942383,
+              "targets": 9
+            },
+            {
+              "id": "1:1:1",
+              "sum_nats": 49.278942584991455,
+              "targets": 9
+            },
+            {
+              "id": "1:1:2",
+              "sum_nats": 46.473697662353516,
+              "targets": 9
+            },
+            {
+              "id": "1:1:3",
+              "sum_nats": 48.35281229019165,
+              "targets": 9
+            },
+            {
+              "id": "1:1:4",
+              "sum_nats": 47.087273597717285,
+              "targets": 9
+            },
+            {
+              "id": "4:6:1",
+              "sum_nats": 44.9988431930542,
+              "targets": 9
+            },
+            {
+              "id": "4:6:2",
+              "sum_nats": 45.62762212753296,
+              "targets": 9
+            },
+            {
+              "id": "4:6:3",
+              "sum_nats": 45.453834533691406,
+              "targets": 9
+            },
+            {
+              "id": "4:6:4",
+              "sum_nats": 45.5806040763855,
+              "targets": 9
+            },
+            {
+              "id": "6:7:1",
+              "sum_nats": 47.40506553649902,
+              "targets": 9
+            },
+            {
+              "id": "6:7:2",
+              "sum_nats": 45.525309801101685,
+              "targets": 9
+            },
+            {
+              "id": "6:7:3",
+              "sum_nats": 45.63664674758911,
+              "targets": 9
+            },
+            {
+              "id": "6:7:4",
+              "sum_nats": 46.932137966156006,
+              "targets": 9
+            },
+            {
+              "id": "5:6:1",
+              "sum_nats": 45.1365442276001,
+              "targets": 9
+            },
+            {
+              "id": "5:6:2",
+              "sum_nats": 44.61992573738098,
+              "targets": 9
+            },
+            {
+              "id": "5:6:3",
+              "sum_nats": 45.163249015808105,
+              "targets": 9
+            },
+            {
+              "id": "5:6:4",
+              "sum_nats": 47.80369472503662,
+              "targets": 9
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "parent_id": "3:7:1",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              56,
+              45,
+              11,
+              43,
+              61,
+              55
+            ],
+            "text": "42 97 28 108 68 answer 53 42 8 40 58 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "3:7:2",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              56,
+              45,
+              11,
+              43,
+              61,
+              55
+            ],
+            "text": "42 97 28 108 68 answer 53 42 8 40 58 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "3:7:3",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              56,
+              45,
+              11,
+              43,
+              61,
+              55
+            ],
+            "text": "42 97 28 108 68 answer 53 42 8 40 58 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "3:7:4",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              56,
+              45,
+              11,
+              43,
+              61,
+              55
+            ],
+            "text": "42 97 28 108 68 answer 53 42 8 40 58 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "1:4:1",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 5
+          },
+          {
+            "parent_id": "1:4:2",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "1:4:3",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 15
+          },
+          {
+            "parent_id": "1:4:4",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "1:1:1",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              22,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 19 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 2
+          },
+          {
+            "parent_id": "1:1:2",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 4
+          },
+          {
+            "parent_id": "1:1:3",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 6
+          },
+          {
+            "parent_id": "1:1:4",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 8
+          },
+          {
+            "parent_id": "4:6:1",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "4:6:2",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "4:6:3",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "4:6:4",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "6:7:1",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 13
+          },
+          {
+            "parent_id": "6:7:2",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              56,
+              45,
+              11,
+              43,
+              61,
+              55
+            ],
+            "text": "42 97 28 108 68 answer 53 42 8 40 58 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 26
+          },
+          {
+            "parent_id": "6:7:3",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              56,
+              45,
+              11,
+              43,
+              61,
+              55
+            ],
+            "text": "42 97 28 108 68 answer 53 42 8 40 58 52",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 39
+          },
+          {
+            "parent_id": "6:7:4",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 52
+          },
+          {
+            "parent_id": "5:6:1",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 11
+          },
+          {
+            "parent_id": "5:6:2",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 22
+          },
+          {
+            "parent_id": "5:6:3",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 33
+          },
+          {
+            "parent_id": "5:6:4",
+            "ids": [
+              45,
+              100,
+              31,
+              111,
+              71,
+              120,
+              50,
+              0,
+              118,
+              62,
+              119,
+              96
+            ],
+            "text": "42 97 28 108 68 answer 47 <pad> ; 59 product 93",
+            "eos_stopped": false,
+            "horizon": true,
+            "length": 12,
+            "check": {
+              "structural": false,
+              "answer": null,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 44
+          }
+        ]
+      }
+    },
+    {
+      "step": 200,
+      "last_train_loss": 0.6575688123703003,
+      "gradient_norm_before_clip": 0.7279794812202454,
+      "dev": {
+        "records": 24,
+        "correct": 2,
+        "accuracy": 0.08333333333333333,
+        "structural": 24,
+        "invalid": 0,
+        "eos_stopped": 24,
+        "full_trace_correct": 0,
+        "mean_length": 9.0,
+        "reference": {
+          "sum_nats": 271.2512293306645,
+          "targets": 216,
+          "nll": 1.255792728382706,
+          "target_format": "full-trace",
+          "rows": [
+            {
+              "id": "3:7:1",
+              "sum_nats": 11.376557167619467,
+              "targets": 9
+            },
+            {
+              "id": "3:7:2",
+              "sum_nats": 10.082606981275603,
+              "targets": 9
+            },
+            {
+              "id": "3:7:3",
+              "sum_nats": 12.897967356722802,
+              "targets": 9
+            },
+            {
+              "id": "3:7:4",
+              "sum_nats": 9.326708995038643,
+              "targets": 9
+            },
+            {
+              "id": "1:4:1",
+              "sum_nats": 13.452078356407583,
+              "targets": 9
+            },
+            {
+              "id": "1:4:2",
+              "sum_nats": 11.159561810316518,
+              "targets": 9
+            },
+            {
+              "id": "1:4:3",
+              "sum_nats": 12.166619547642767,
+              "targets": 9
+            },
+            {
+              "id": "1:4:4",
+              "sum_nats": 11.650028773816302,
+              "targets": 9
+            },
+            {
+              "id": "1:1:1",
+              "sum_nats": 25.04504894465208,
+              "targets": 9
+            },
+            {
+              "id": "1:1:2",
+              "sum_nats": 9.928846854250878,
+              "targets": 9
+            },
+            {
+              "id": "1:1:3",
+              "sum_nats": 10.128532937727869,
+              "targets": 9
+            },
+            {
+              "id": "1:1:4",
+              "sum_nats": 12.198706212220713,
+              "targets": 9
+            },
+            {
+              "id": "4:6:1",
+              "sum_nats": 9.995487950742245,
+              "targets": 9
+            },
+            {
+              "id": "4:6:2",
+              "sum_nats": 9.669008621014655,
+              "targets": 9
+            },
+            {
+              "id": "4:6:3",
+              "sum_nats": 10.876783367013559,
+              "targets": 9
+            },
+            {
+              "id": "4:6:4",
+              "sum_nats": 8.103297169320285,
+              "targets": 9
+            },
+            {
+              "id": "6:7:1",
+              "sum_nats": 10.30947803077288,
+              "targets": 9
+            },
+            {
+              "id": "6:7:2",
+              "sum_nats": 9.29733908153139,
+              "targets": 9
+            },
+            {
+              "id": "6:7:3",
+              "sum_nats": 8.895928543293849,
+              "targets": 9
+            },
+            {
+              "id": "6:7:4",
+              "sum_nats": 11.420104556018487,
+              "targets": 9
+            },
+            {
+              "id": "5:6:1",
+              "sum_nats": 13.049310868838802,
+              "targets": 9
+            },
+            {
+              "id": "5:6:2",
+              "sum_nats": 10.810679547023028,
+              "targets": 9
+            },
+            {
+              "id": "5:6:3",
+              "sum_nats": 10.445370172383264,
+              "targets": 9
+            },
+            {
+              "id": "5:6:4",
+              "sum_nats": 8.965177485020831,
+              "targets": 9
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "parent_id": "3:7:1",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              17,
+              118,
+              120,
+              15,
+              2
+            ],
+            "text": "sum 12 ; product 14 ; answer 12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "3:7:2",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 12 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "3:7:3",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              45,
+              118,
+              120,
+              39,
+              2
+            ],
+            "text": "sum 12 ; product 42 ; answer 36 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 36,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "3:7:4",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              51,
+              118,
+              120,
+              51,
+              2
+            ],
+            "text": "sum 12 ; product 48 ; answer 48 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 48,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "1:4:1",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              9,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 6 ; product 6 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 5
+          },
+          {
+            "parent_id": "1:4:2",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              15,
+              118,
+              120,
+              15,
+              2
+            ],
+            "text": "sum 6 ; product 12 ; answer 12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "1:4:3",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              21,
+              118,
+              120,
+              21,
+              2
+            ],
+            "text": "sum 6 ; product 18 ; answer 18 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 18,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 15
+          },
+          {
+            "parent_id": "1:4:4",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 6 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "1:1:1",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              9,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 6 ; product 6 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 2
+          },
+          {
+            "parent_id": "1:1:2",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              7,
+              118,
+              120,
+              7,
+              2
+            ],
+            "text": "sum 6 ; product 4 ; answer 4 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 4,
+              "final_correct": true,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 4
+          },
+          {
+            "parent_id": "1:1:3",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              15,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 6 ; product 12 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": true,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 6
+          },
+          {
+            "parent_id": "1:1:4",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              9,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 6 ; product 6 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 8
+          },
+          {
+            "parent_id": "4:6:1",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              11,
+              118,
+              120,
+              11,
+              2
+            ],
+            "text": "sum 14 ; product 8 ; answer 8 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 8,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "4:6:2",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              17,
+              118,
+              120,
+              17,
+              2
+            ],
+            "text": "sum 14 ; product 14 ; answer 14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "4:6:3",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 14 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "4:6:4",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 14 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "6:7:1",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              17,
+              118,
+              120,
+              17,
+              2
+            ],
+            "text": "sum 14 ; product 14 ; answer 14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 13
+          },
+          {
+            "parent_id": "6:7:2",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 14 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 26
+          },
+          {
+            "parent_id": "6:7:3",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              39,
+              118,
+              120,
+              45,
+              2
+            ],
+            "text": "sum 14 ; product 36 ; answer 42 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 42,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 39
+          },
+          {
+            "parent_id": "6:7:4",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              59,
+              118,
+              120,
+              51,
+              2
+            ],
+            "text": "sum 14 ; product 56 ; answer 48 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 48,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 52
+          },
+          {
+            "parent_id": "5:6:1",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              11,
+              118,
+              120,
+              11,
+              2
+            ],
+            "text": "sum 14 ; product 8 ; answer 8 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 8,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 11
+          },
+          {
+            "parent_id": "5:6:2",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              17,
+              118,
+              120,
+              17,
+              2
+            ],
+            "text": "sum 14 ; product 14 ; answer 14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 22
+          },
+          {
+            "parent_id": "5:6:3",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 14 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 33
+          },
+          {
+            "parent_id": "5:6:4",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 14 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 44
+          }
+        ]
+      },
+      "targets": 28692,
+      "examples": 3188
+    },
+    {
+      "step": 400,
+      "last_train_loss": 0.12118618935346603,
+      "gradient_norm_before_clip": 0.4672001600265503,
+      "dev": {
+        "records": 24,
+        "correct": 1,
+        "accuracy": 0.041666666666666664,
+        "structural": 24,
+        "invalid": 0,
+        "eos_stopped": 24,
+        "full_trace_correct": 0,
+        "mean_length": 9.0,
+        "reference": {
+          "sum_nats": 322.67320876952726,
+          "targets": 216,
+          "nll": 1.4938574480070708,
+          "target_format": "full-trace",
+          "rows": [
+            {
+              "id": "3:7:1",
+              "sum_nats": 5.641167585854419,
+              "targets": 9
+            },
+            {
+              "id": "3:7:2",
+              "sum_nats": 6.072859758278355,
+              "targets": 9
+            },
+            {
+              "id": "3:7:3",
+              "sum_nats": 5.693117344693746,
+              "targets": 9
+            },
+            {
+              "id": "3:7:4",
+              "sum_nats": 6.342516007309314,
+              "targets": 9
+            },
+            {
+              "id": "1:4:1",
+              "sum_nats": 19.533466512861196,
+              "targets": 9
+            },
+            {
+              "id": "1:4:2",
+              "sum_nats": 17.825347210629843,
+              "targets": 9
+            },
+            {
+              "id": "1:4:3",
+              "sum_nats": 14.312441840709653,
+              "targets": 9
+            },
+            {
+              "id": "1:4:4",
+              "sum_nats": 17.6858936639037,
+              "targets": 9
+            },
+            {
+              "id": "1:1:1",
+              "sum_nats": 31.003474831813946,
+              "targets": 9
+            },
+            {
+              "id": "1:1:2",
+              "sum_nats": 12.77608936431352,
+              "targets": 9
+            },
+            {
+              "id": "1:1:3",
+              "sum_nats": 11.036747423815541,
+              "targets": 9
+            },
+            {
+              "id": "1:1:4",
+              "sum_nats": 18.170813765435014,
+              "targets": 9
+            },
+            {
+              "id": "4:6:1",
+              "sum_nats": 16.28353244072059,
+              "targets": 9
+            },
+            {
+              "id": "4:6:2",
+              "sum_nats": 12.388989936152939,
+              "targets": 9
+            },
+            {
+              "id": "4:6:3",
+              "sum_nats": 11.464885765861254,
+              "targets": 9
+            },
+            {
+              "id": "4:6:4",
+              "sum_nats": 7.929340480186511,
+              "targets": 9
+            },
+            {
+              "id": "6:7:1",
+              "sum_nats": 8.137200233526528,
+              "targets": 9
+            },
+            {
+              "id": "6:7:2",
+              "sum_nats": 7.974396611331031,
+              "targets": 9
+            },
+            {
+              "id": "6:7:3",
+              "sum_nats": 8.165147376945242,
+              "targets": 9
+            },
+            {
+              "id": "6:7:4",
+              "sum_nats": 8.484300507348962,
+              "targets": 9
+            },
+            {
+              "id": "5:6:1",
+              "sum_nats": 21.206178563297726,
+              "targets": 9
+            },
+            {
+              "id": "5:6:2",
+              "sum_nats": 19.54238533898024,
+              "targets": 9
+            },
+            {
+              "id": "5:6:3",
+              "sum_nats": 16.43988751753932,
+              "targets": 9
+            },
+            {
+              "id": "5:6:4",
+              "sum_nats": 18.563028688018676,
+              "targets": 9
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "parent_id": "3:7:1",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              15,
+              118,
+              120,
+              15,
+              2
+            ],
+            "text": "sum 12 ; product 12 ; answer 12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "3:7:2",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 12 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "3:7:3",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              39,
+              118,
+              120,
+              39,
+              2
+            ],
+            "text": "sum 12 ; product 36 ; answer 36 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 36,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "3:7:4",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              51,
+              118,
+              120,
+              51,
+              2
+            ],
+            "text": "sum 12 ; product 48 ; answer 48 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 48,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "1:4:1",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              9,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 6 ; product 6 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 5
+          },
+          {
+            "parent_id": "1:4:2",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              15,
+              118,
+              120,
+              15,
+              2
+            ],
+            "text": "sum 6 ; product 12 ; answer 12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "1:4:3",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              15,
+              118,
+              120,
+              15,
+              2
+            ],
+            "text": "sum 6 ; product 12 ; answer 12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 15
+          },
+          {
+            "parent_id": "1:4:4",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 6 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "1:1:1",
+            "ids": [
+              117,
+              6,
+              118,
+              119,
+              9,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 3 ; product 6 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 2
+          },
+          {
+            "parent_id": "1:1:2",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              9,
+              118,
+              120,
+              11,
+              2
+            ],
+            "text": "sum 6 ; product 6 ; answer 8 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 8,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 4
+          },
+          {
+            "parent_id": "1:1:3",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              7,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 6 ; product 4 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": true,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 6
+          },
+          {
+            "parent_id": "1:1:4",
+            "ids": [
+              117,
+              9,
+              118,
+              119,
+              6,
+              118,
+              120,
+              6,
+              2
+            ],
+            "text": "sum 6 ; product 3 ; answer 3 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 3,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 8
+          },
+          {
+            "parent_id": "4:6:1",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              11,
+              118,
+              120,
+              11,
+              2
+            ],
+            "text": "sum 8 ; product 8 ; answer 8 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 8,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "4:6:2",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              19,
+              118,
+              120,
+              19,
+              2
+            ],
+            "text": "sum 8 ; product 16 ; answer 16 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 16,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "4:6:3",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 8 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "4:6:4",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 8 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "6:7:1",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              17,
+              118,
+              120,
+              17,
+              2
+            ],
+            "text": "sum 14 ; product 14 ; answer 14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 13
+          },
+          {
+            "parent_id": "6:7:2",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 14 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 26
+          },
+          {
+            "parent_id": "6:7:3",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              45,
+              118,
+              120,
+              45,
+              2
+            ],
+            "text": "sum 14 ; product 42 ; answer 42 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 42,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 39
+          },
+          {
+            "parent_id": "6:7:4",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              59,
+              118,
+              120,
+              59,
+              2
+            ],
+            "text": "sum 14 ; product 56 ; answer 56 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 56,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 52
+          },
+          {
+            "parent_id": "5:6:1",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              11,
+              118,
+              120,
+              11,
+              2
+            ],
+            "text": "sum 14 ; product 8 ; answer 8 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 8,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 11
+          },
+          {
+            "parent_id": "5:6:2",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              19,
+              118,
+              120,
+              19,
+              2
+            ],
+            "text": "sum 14 ; product 16 ; answer 16 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 16,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 22
+          },
+          {
+            "parent_id": "5:6:3",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 14 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 33
+          },
+          {
+            "parent_id": "5:6:4",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 14 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 44
+          }
+        ]
+      },
+      "targets": 28683,
+      "examples": 3187
+    },
+    {
+      "step": 600,
+      "last_train_loss": 0.021528776735067368,
+      "gradient_norm_before_clip": 0.21368978917598724,
+      "dev": {
+        "records": 24,
+        "correct": 1,
+        "accuracy": 0.041666666666666664,
+        "structural": 24,
+        "invalid": 0,
+        "eos_stopped": 24,
+        "full_trace_correct": 0,
+        "mean_length": 9.0,
+        "reference": {
+          "sum_nats": 478.62401133586536,
+          "targets": 216,
+          "nll": 2.21585190433271,
+          "target_format": "full-trace",
+          "rows": [
+            {
+              "id": "3:7:1",
+              "sum_nats": 9.17198160366388,
+              "targets": 9
+            },
+            {
+              "id": "3:7:2",
+              "sum_nats": 9.340097851090832,
+              "targets": 9
+            },
+            {
+              "id": "3:7:3",
+              "sum_nats": 9.210506113799056,
+              "targets": 9
+            },
+            {
+              "id": "3:7:4",
+              "sum_nats": 9.207102798623964,
+              "targets": 9
+            },
+            {
+              "id": "1:4:1",
+              "sum_nats": 27.372103247296764,
+              "targets": 9
+            },
+            {
+              "id": "1:4:2",
+              "sum_nats": 26.625348384695826,
+              "targets": 9
+            },
+            {
+              "id": "1:4:3",
+              "sum_nats": 21.919306592841167,
+              "targets": 9
+            },
+            {
+              "id": "1:4:4",
+              "sum_nats": 26.070003008266212,
+              "targets": 9
+            },
+            {
+              "id": "1:1:1",
+              "sum_nats": 32.546978059835965,
+              "targets": 9
+            },
+            {
+              "id": "1:1:2",
+              "sum_nats": 11.99768854805734,
+              "targets": 9
+            },
+            {
+              "id": "1:1:3",
+              "sum_nats": 20.444963628047844,
+              "targets": 9
+            },
+            {
+              "id": "1:1:4",
+              "sum_nats": 21.596920378418872,
+              "targets": 9
+            },
+            {
+              "id": "4:6:1",
+              "sum_nats": 29.761055801413022,
+              "targets": 9
+            },
+            {
+              "id": "4:6:2",
+              "sum_nats": 27.839857494691387,
+              "targets": 9
+            },
+            {
+              "id": "4:6:3",
+              "sum_nats": 23.90304283023579,
+              "targets": 9
+            },
+            {
+              "id": "4:6:4",
+              "sum_nats": 22.97489463945385,
+              "targets": 9
+            },
+            {
+              "id": "6:7:1",
+              "sum_nats": 8.126206516637467,
+              "targets": 9
+            },
+            {
+              "id": "6:7:2",
+              "sum_nats": 8.283043615985662,
+              "targets": 9
+            },
+            {
+              "id": "6:7:3",
+              "sum_nats": 8.172225149843143,
+              "targets": 9
+            },
+            {
+              "id": "6:7:4",
+              "sum_nats": 8.249790021276567,
+              "targets": 9
+            },
+            {
+              "id": "5:6:1",
+              "sum_nats": 30.86774002580205,
+              "targets": 9
+            },
+            {
+              "id": "5:6:2",
+              "sum_nats": 32.20638193303603,
+              "targets": 9
+            },
+            {
+              "id": "5:6:3",
+              "sum_nats": 27.516662937006913,
+              "targets": 9
+            },
+            {
+              "id": "5:6:4",
+              "sum_nats": 25.22011015584576,
+              "targets": 9
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "parent_id": "3:7:1",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              15,
+              118,
+              120,
+              15,
+              2
+            ],
+            "text": "sum 12 ; product 12 ; answer 12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "3:7:2",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              27,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 12 ; product 24 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "3:7:3",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              39,
+              118,
+              120,
+              27,
+              2
+            ],
+            "text": "sum 12 ; product 36 ; answer 24 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 24,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": false,
+              "all_steps_correct": false
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "3:7:4",
+            "ids": [
+              117,
+              15,
+              118,
+              119,
+              51,
+              118,
+              120,
+              51,
+              2
+            ],
+            "text": "sum 12 ; product 48 ; answer 48 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 48,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "1:4:1",
+            "ids": [
+              117,
+              6,
+              118,
+              119,
+              9,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 3 ; product 6 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 5
+          },
+          {
+            "parent_id": "1:4:2",
+            "ids": [
+              117,
+              6,
+              118,
+              119,
+              9,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 3 ; product 6 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "1:4:3",
+            "ids": [
+              117,
+              6,
+              118,
+              119,
+              9,
+              118,
+              120,
+              9,
+              2
+            ],
+            "text": "sum 3 ; product 6 ; answer 6 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 6,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 15
+          },
+          {
+            "parent_id": "1:4:4",
+            "ids": [
+              117,
+              6,
+              118,
+              119,
+              15,
+              118,
+              120,
+              15,
+              2
+            ],
+            "text": "sum 3 ; product 12 ; answer 12 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 12,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "1:1:1",
+            "ids": [
+              117,
+              7,
+              118,
+              119,
+              7,
+              118,
+              120,
+              7,
+              2
+            ],
+            "text": "sum 4 ; product 4 ; answer 4 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 4,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 2
+          },
+          {
+            "parent_id": "1:1:2",
+            "ids": [
+              117,
+              7,
+              118,
+              119,
+              7,
+              118,
+              120,
+              7,
+              2
+            ],
+            "text": "sum 4 ; product 4 ; answer 4 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 4,
+              "final_correct": true,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 4
+          },
+          {
+            "parent_id": "1:1:3",
+            "ids": [
+              117,
+              7,
+              118,
+              119,
+              7,
+              118,
+              120,
+              7,
+              2
+            ],
+            "text": "sum 4 ; product 4 ; answer 4 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 4,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 6
+          },
+          {
+            "parent_id": "1:1:4",
+            "ids": [
+              117,
+              7,
+              118,
+              119,
+              19,
+              118,
+              120,
+              19,
+              2
+            ],
+            "text": "sum 4 ; product 16 ; answer 16 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 16,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 8
+          },
+          {
+            "parent_id": "4:6:1",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              10,
+              118,
+              120,
+              10,
+              2
+            ],
+            "text": "sum 8 ; product 7 ; answer 7 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 7,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 10
+          },
+          {
+            "parent_id": "4:6:2",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              17,
+              118,
+              120,
+              17,
+              2
+            ],
+            "text": "sum 8 ; product 14 ; answer 14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 20
+          },
+          {
+            "parent_id": "4:6:3",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              24,
+              118,
+              120,
+              24,
+              2
+            ],
+            "text": "sum 8 ; product 21 ; answer 21 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 21,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 30
+          },
+          {
+            "parent_id": "4:6:4",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 8 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 40
+          },
+          {
+            "parent_id": "6:7:1",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              17,
+              118,
+              120,
+              17,
+              2
+            ],
+            "text": "sum 14 ; product 14 ; answer 14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 13
+          },
+          {
+            "parent_id": "6:7:2",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 14 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 26
+          },
+          {
+            "parent_id": "6:7:3",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              45,
+              118,
+              120,
+              45,
+              2
+            ],
+            "text": "sum 14 ; product 42 ; answer 42 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 42,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 39
+          },
+          {
+            "parent_id": "6:7:4",
+            "ids": [
+              117,
+              17,
+              118,
+              119,
+              59,
+              118,
+              120,
+              59,
+              2
+            ],
+            "text": "sum 14 ; product 56 ; answer 56 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 56,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": true,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 52
+          },
+          {
+            "parent_id": "5:6:1",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              10,
+              118,
+              120,
+              10,
+              2
+            ],
+            "text": "sum 8 ; product 7 ; answer 7 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 7,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 11
+          },
+          {
+            "parent_id": "5:6:2",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              17,
+              118,
+              120,
+              17,
+              2
+            ],
+            "text": "sum 8 ; product 14 ; answer 14 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 14,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 22
+          },
+          {
+            "parent_id": "5:6:3",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              24,
+              118,
+              120,
+              24,
+              2
+            ],
+            "text": "sum 8 ; product 21 ; answer 21 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 21,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 33
+          },
+          {
+            "parent_id": "5:6:4",
+            "ids": [
+              117,
+              11,
+              118,
+              119,
+              31,
+              118,
+              120,
+              31,
+              2
+            ],
+            "text": "sum 8 ; product 28 ; answer 28 <eos>",
+            "eos_stopped": true,
+            "horizon": false,
+            "length": 9,
+            "check": {
+              "structural": true,
+              "answer": 28,
+              "final_correct": false,
+              "sum_correct": false,
+              "product_follows_sum": false,
+              "answer_follows_product": true,
+              "all_steps_correct": false
+            },
+            "gold": 44
+          }
+        ]
+      },
+      "targets": 28692,
+      "examples": 3188
+    }
+  ],
+  "elapsed_seconds": 18.649182900000596,
+  "protocol_sha256": "eb9f03920c70601345682d5db3d59361463d72d68ee54c5b0d45cb1bc7b1837c",
+  "corpus_sha256": "6025f7312cdf071dc80245aa1f14ebbe1553011c0ff351da19cfa5decb61ad33"
+}

@@ -1,0 +1,32 @@
+/* Scientific names, observation IDs and scalar tokens must remain whole.
+   Allow prose to wrap at spaces; scroll the table locally when its meaningful
+   columns need more width than the Reader. Keep native table semantics. */
+.gmm-lesson :is(.gmm-readable-table-region, .em-table-region, .gmm-conditional-table, .gmm-family-table-region, .gmm-selection-table-region, .gmm-bayes-inline-table, .gmm-bayes-table-scroll, .neural-table-scroll) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.gmm-lesson :is(.gmm-readable-table-region, .em-table-region, .gmm-conditional-table, .gmm-family-table-region, .gmm-selection-table-region, .gmm-bayes-inline-table, .gmm-bayes-table-scroll, .neural-table-scroll) > table {
+  inline-size: max-content;
+  min-inline-size: 100%;
+  table-layout: auto;
+}
+
+.gmm-lesson :is(.gmm-readable-table-region, .em-table-region, .gmm-conditional-table, .gmm-family-table-region, .gmm-selection-table-region, .gmm-bayes-inline-table, .gmm-bayes-table-scroll, .neural-table-scroll) > table :is(th, td) {
+  min-inline-size: 6ch;
+  max-inline-size: 26rem;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: normal;
+}
+
+.gmm-lesson .gmm-readable-table-region:focus-visible {
+  outline: 2px solid #e9b94c;
+  outline-offset: 3px;
+}
+
+.gmm-lesson .gmm-family-tables > .gmm-readable-table-region {
+  flex: 1 1 19rem;
+}

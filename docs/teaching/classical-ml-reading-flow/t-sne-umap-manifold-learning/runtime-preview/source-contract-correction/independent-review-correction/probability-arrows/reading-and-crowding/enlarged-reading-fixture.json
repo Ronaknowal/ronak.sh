@@ -1,0 +1,51 @@
+{
+  "schema": "manifold-render-only-enlarged-root-fixture/v1",
+  "status": "EXACT_BUILT_ASSETS_ROOT32_FIXTURE_CREATED_NATIVE_PENDING",
+  "at": "2026-10-09T15:04:21.530920+00:00",
+  "sourceBuiltFreeze": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/author-ready-built-source.json",
+    "bytes": 54292,
+    "sha256": "abef1eca722fe99e1991cb8107f59db97a12264fc8af1f383faabdbf88213a0f"
+  },
+  "originalClosure": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/build-closure.json",
+    "bytes": 46304,
+    "sha256": "3552a3453ad4a788de70a779452915f562f7ca41f992fe57e736d904d8f03889"
+  },
+  "originalBuildArtifactsGuarded": 66,
+  "originalIndex": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/build-private/index.html",
+    "bytes": 366,
+    "sha256": "c5a11bd970cde739f3ecffd5561dc5ea8aacf2b430110946347aa7297891ad1f"
+  },
+  "fixture": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/build-private/enlarged-reading-root32.html",
+    "bytes": 447,
+    "sha256": "6a5daa34aa6605cec9f10a42ecef93621ef051f715983b9b23293221cdc86831"
+  },
+  "composer": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/create-enlarged-reading-fixture.py",
+    "bytes": 2608,
+    "sha256": "3b5153d4cb82934ed8a1beec33612dcafb46a85a9ac34b0df0359d1436740594"
+  },
+  "exactExistingAssetReferences": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/build-private/assets/index-CuivhmES.js",
+      "bytes": 1139499,
+      "sha256": "18179683b0d6f11c758ecee682db16f90aa331f2f72cbb56555e0616f296e7a9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/build-private/assets/index-BmioOq5k.css",
+      "bytes": 33082,
+      "sha256": "4cffa5959344443d68646a10b8d7850d51a85d011f6e64127bcef6f6309fd42d"
+    }
+  ],
+  "onlyAddedMarkup": "  <style data-render-only-fixture=\"enlarged-root32\">html{font-size:32px}</style>\n",
+  "inverseRecoversOriginalIndex": true,
+  "url": "http://127.0.0.1:5198/enlarged-reading-root32.html",
+  "routeQualification": "Separately named render-only enlarged-root fixture. It references the exact original compiled assets; it is not the standard lesson route, a rebuild or whole-content acceptance.",
+  "rootFontSizePx": 32,
+  "newBuilds": 0,
+  "sourceOrContentChanges": 0,
+  "nativeAcceptance": false
+}

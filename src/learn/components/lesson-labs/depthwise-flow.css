@@ -1,0 +1,47 @@
+.depthwise-lesson { --dw-input: #77cddb; --dw-parameter: #e4b752; --dw-computed: #be9cf5; --dw-gradient: #eda064; }
+.depthwise-lesson .dw-input { color: var(--dw-input); }
+.depthwise-lesson .dw-parameter { color: var(--dw-parameter); }
+.depthwise-lesson .dw-computed { color: var(--dw-computed); }
+.depthwise-lesson .dw-gradient { color: var(--dw-gradient); }
+.depthwise-lesson .dw-arrow { color: #bbb; text-align: center; margin: .65rem 0; font-size: .9rem; }
+.depthwise-lesson .dw-arrow > span { font-size: 1.5rem; }
+.depthwise-lesson .dw-operation { border: 1px solid #aaa; border-radius: .4rem; padding: .65rem; color: #eee; text-align: center; line-height: 1.65; }
+.depthwise-lesson .dw-strip { display: flex; flex-wrap: wrap; gap: .45rem; margin-block: .6rem; }
+.depthwise-lesson .dw-strip > span { display: grid; place-items: center; gap: .15rem; min-width: 2.5rem; padding: .3rem; border: 1px solid currentColor; font-variant-numeric: tabular-nums; }
+.depthwise-lesson .dw-strip small { font-size: .75rem; font-weight: normal; }
+.depthwise-lesson .dw-traced { outline: 2px solid white; outline-offset: 2px; }
+.depthwise-lesson .dw-interval { margin-bottom: .6rem; }
+.depthwise-lesson .dw-field-rows > div { margin-bottom: 1rem; }
+.depthwise-lesson .dw-field-track { position: relative; width: 100%; height: .8rem; background: #202020; }
+.depthwise-lesson .dw-field-track > span { position: absolute; height: 100%; background: var(--dw-computed); }
+.depthwise-lesson .dw-context-routes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: 1rem; }
+.depthwise-lesson svg.dw-plot { display: block; width: min(100%, 28rem); height: auto; margin-inline: auto; }
+.depthwise-lesson svg.dw-plot text { fill: #ddd; font: 12px ui-monospace, monospace; }
+.depthwise-lesson .dw-lattice { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); width: min(100%, 24rem); gap: .2rem; }
+.depthwise-lesson .dw-lattice > span { aspect-ratio: 1; display: grid; place-items: center; font-size: .75rem; color: #999; background: #171717; }
+.depthwise-lesson .dw-lattice .dw-read { outline: 2px solid white; outline-offset: -2px; color: var(--dw-input); }
+.depthwise-lesson .dw-lattice .dw-center { background: #352b19; color: #fff; }
+.depthwise-lesson .dw-budget { height: 1.25rem; display: flex; background: #191919; }
+.depthwise-lesson .dw-budget > span { background: var(--dw-parameter); }
+.depthwise-lesson .dw-budget > .dw-mixing { border: 2px solid var(--dw-parameter); background: transparent; box-sizing: border-box; }
+.depthwise-lesson .dw-offsets { display: flex; flex-wrap: wrap; gap: .35rem; margin-block: .5rem; }
+.depthwise-lesson .dw-offsets > span { padding: .15rem .4rem; font-size: .85rem; font-variant-numeric: tabular-nums; }
+.depthwise-lesson .dw-offsets .dw-reachable { border-bottom: 2px solid var(--dw-computed); color: var(--dw-computed); }
+.depthwise-lesson .dw-offsets .dw-hole { color: #aaa; text-decoration: line-through; }
+.depthwise-lesson .dw-digit-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 2px; width: min(100%, 18rem); }
+.depthwise-lesson .dw-digit-grid button { aspect-ratio: 1; min-width: 0; padding: 0; border: 0; cursor: pointer; }
+.depthwise-lesson .dw-digit-grid button[aria-pressed='true'] { outline: 3px solid white; outline-offset: -3px; }
+.depthwise-lesson .dw-digit-grid button:focus-visible { outline: 3px solid var(--dw-parameter); outline-offset: -3px; }
+.depthwise-lesson .dw-score-row { display: grid; grid-template-columns: 1.3rem minmax(0, 1fr); gap: .5rem; margin-bottom: .6rem; }
+.depthwise-lesson .dw-score-track { height: 1.4rem; position: relative; background: #171717; }
+.depthwise-lesson .dw-score-track::after { content: ''; position: absolute; inset-block: 0; left: 50%; width: 1px; background: #aaa; }
+.depthwise-lesson .dw-score-track > span { position: absolute; height: 35%; }
+.depthwise-lesson .dw-score-dense { background: #d4d4d4; top: 8%; }
+.depthwise-lesson .dw-score-compressed { background: #be9cf5; top: 55%; }
+.depthwise-lesson .dw-weight-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .3rem; }
+.depthwise-lesson .dw-weight-grid > span { padding: .5rem .1rem; text-align: center; font: .8rem ui-monospace, monospace; background: #332716; color: #f3d48f; }
+.depthwise-lesson .dw-weight-grid .dw-negative { background: #172b3b; color: #acd7f1; }
+.depthwise-lesson .dw-weight-grid .dw-zero { background: #202020; color: #ccc; }
+
+.depthwise-lesson .dw-retry { font: inherit; color: var(--dw-parameter); background: #161616; border: 1px solid #5a5a5a; border-radius: 4px; padding: .4rem .7rem; cursor: pointer; }
+.depthwise-lesson .dw-retry:focus-visible { outline: 2px solid var(--dw-parameter); outline-offset: 2px; }

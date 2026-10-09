@@ -1,0 +1,8 @@
+{
+  "session": 70689,
+  "stage": "before prospective freeze; no fits or generation",
+  "failed_condition": "FP64 backbone/head interior beta=0.5 whole-gradient relative L2 < 1e-8",
+  "observed": 0.000003880559544357393,
+  "finding": "Reference used logaddexp; native uses stack/logsumexp. Both still calculate softmax and mixture in FP32. Match the actual documented native mixture primitive for this parity diagnostic.",
+  "science_replayed": false
+}

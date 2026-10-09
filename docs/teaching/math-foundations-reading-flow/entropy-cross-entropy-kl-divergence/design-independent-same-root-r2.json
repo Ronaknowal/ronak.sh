@@ -1,0 +1,24 @@
+{
+  "status": "PASS_ED1_ED2_ED3_CLOSED",
+  "reviewer": "/root",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-source-r2.json",
+    "sha256": "1fbfd9ca37c348df6519b77f005a47262b72c2320e79974533ae50b058c1e067"
+  },
+  "amendment": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-correction-r2.json",
+    "sha256": "472ddfdc5441b6ad9f2f2ffa02a1e57cd166cca1a176e9ce72ba117fd25533d5"
+  },
+  "checks": {
+    "exactEightChangeInverse": true,
+    "bindings": 46,
+    "blockExpectedBits": "31/16",
+    "validKraft": "13/16",
+    "invalidKraft": "25/16",
+    "finiteCrossEntropyBits": 1.207518749639422
+  },
+  "reading": "Root read all eight exact replacements and their current design/research locations. ED1 includes both the symmetric null and an asymmetric weighted mechanism, .5 equality and zero-context semantics. ED2 supplies explicit visible independent prompts and complete solution contracts at the actual owners. ED3 section locators were independently checked against the primary 1991 chapter headings at printed pages33,36,38.",
+  "primarySource": "https://sites.stat.columbia.edu/liam/teaching/neurostat-spr11/papers/EM/Cover&Thomas-Ch2.pdf",
+  "scientificMainsReplayed": 0,
+  "scope": "Design SAME closure; runtime/native/completed content not certified."
+}

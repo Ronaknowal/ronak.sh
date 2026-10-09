@@ -1,0 +1,4555 @@
+{
+  "source_hashes": {
+    "mechanism-reports.json": "6c4a941822c8e78ab2426c77206f778c3bd341062221778ba831e469756f3860",
+    "study-evaluation.json": "faabd4a8aaad10be35b728da9fa3c23fa458dd8f7af6e47c7d75581b44a2dde1",
+    "study-summary.json": "744aaf366697e08674b94ca61cc103aa7ba012fe1f208ab309dab06900ec3736"
+  },
+  "context_fixture": {
+    "ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "labels": [
+      -100,
+      -100,
+      -100,
+      -100,
+      4,
+      5
+    ],
+    "embedding": [
+      [
+        -0.18929277441433928,
+        0.4259786692372696,
+        0.04973026659077079
+      ],
+      [
+        -0.5610097126975425,
+        0.0857264188868317,
+        0.027056446116082107
+      ],
+      [
+        -0.08137775962973065,
+        -0.5398648986459723,
+        0.42381511205099986
+      ],
+      [
+        -0.29263876798263694,
+        0.6330541767789978,
+        -0.2639775928724301
+      ],
+      [
+        0.012990743741672453,
+        -0.017925168176862762,
+        0.060469771039886655
+      ],
+      [
+        1.057366004016792,
+        -0.1993151217882411,
+        0.8277829415784921
+      ],
+      [
+        0.24938328966996148,
+        -0.27800301641953035,
+        0.502224184354025
+      ]
+    ],
+    "head": [
+      [
+        0.2522473219011666,
+        0.2863310555985557,
+        -0.4001953205774003,
+        0.15084348153072438,
+        -0.12075476894058183,
+        -0.042649679778113805,
+        -0.03943748504339636
+      ],
+      [
+        0.01220050421113701,
+        0.47713306160305874,
+        0.11353205749418248,
+        -0.5534283112359621,
+        0.3740603141196231,
+        0.026292931873390286,
+        0.03945821476075245
+      ],
+      [
+        -0.547998009855208,
+        0.11992599685654902,
+        -0.1496896403579641,
+        0.2866859874980851,
+        0.13686846420307003,
+        0.24831578346641603,
+        -0.1119155432629171
+      ]
+    ]
+  },
+  "reports": {
+    "objective-report.json": {
+      "checks": [
+        "Uniform and hand-calculated two-target losses",
+        "All shifted logit derivatives match Torch in three reductions",
+        "Every embedding/head derivative, ignored direct loss, context credit and SGD",
+        "Stable shifted logits, zero-target and nonfinite rejection"
+      ],
+      "finite_difference_max_error": 1.480461777475517e-10,
+      "before_loss": 1.891815432870422,
+      "after_loss": 1.887540431237169,
+      "prompt_embedding_gradient": [
+        0.01905422493628704,
+        -0.030654563967995728,
+        -0.04170408926195465
+      ],
+      "updated": {
+        "embedding": [
+          [
+            -0.191198196907968,
+            0.4290441256340692,
+            0.05390067551696626
+          ],
+          [
+            -0.5629151351911712,
+            0.08879187528363128,
+            0.03122685504227757
+          ],
+          [
+            -0.08328318212335935,
+            -0.5367994422491728,
+            0.42798552097719533
+          ],
+          [
+            -0.2945441904762656,
+            0.6361196331757973,
+            -0.25980718394623464
+          ],
+          [
+            0.01256021302707348,
+            -0.018476307181606044,
+            0.0629413502565733
+          ],
+          [
+            1.057366004016792,
+            -0.1993151217882411,
+            0.8277829415784921
+          ],
+          [
+            0.24938328966996148,
+            -0.27800301641953035,
+            0.502224184354025
+          ]
+        ],
+        "head": [
+          [
+            0.255486972009107,
+            0.28989079808663354,
+            -0.39622293986200363,
+            0.15407774058165902,
+            -0.13091049913307917,
+            -0.050094474364995,
+            -0.0358429926263674
+          ],
+          [
+            0.010471753901174856,
+            0.47523338561709805,
+            0.11141190389209056,
+            -0.5551540793896745,
+            0.3795409740364322,
+            0.03020487899155007,
+            0.03753995577751074
+          ],
+          [
+            -0.5487619660102073,
+            0.11908723547043566,
+            -0.15062406320077154,
+            0.28592269367406753,
+            0.13890886054799198,
+            0.2504225480838121,
+            -0.11276227001729736
+          ]
+        ]
+      }
+    },
+    "data-program-report.json": {
+      "checks": [
+        "All real joint prompt prefixes",
+        "EOS/PAD positional collision",
+        "Full versus response counts",
+        "All/final assistant spans",
+        "Overlength rejection",
+        "Actual BPE merge crossing fragment boundary"
+      ],
+      "rows": 1052,
+      "maximum_length": 47,
+      "eos": 0,
+      "source": {
+        "counts": {
+          "train": {
+            "positive": 133,
+            "no impact": 555,
+            "negative": 155
+          },
+          "dev": {
+            "no impact": 69,
+            "positive": 17,
+            "negative": 19
+          },
+          "test": {
+            "no impact": 69,
+            "positive": 16,
+            "negative": 19
+          }
+        },
+        "normalized_exact_collisions": [],
+        "limitation": "No poem identifiers; exact text checks cannot establish poem-level or semantic independence."
+      },
+      "fixture": {
+        "input_ids": [
+          [
+            6,
+            1,
+            2,
+            3,
+            4,
+            0,
+            0
+          ],
+          [
+            6,
+            1,
+            2,
+            3,
+            5,
+            4,
+            0
+          ]
+        ],
+        "attention_mask": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "labels": [
+          [
+            -100,
+            -100,
+            -100,
+            -100,
+            4,
+            0,
+            -100
+          ],
+          [
+            -100,
+            -100,
+            -100,
+            -100,
+            5,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    "batching-report.json": {
+      "checks": [
+        "Separate versus packed every valid logit, mean loss, all parameter gradients and SGD update",
+        "Native scaled-dot-product attention parity with explicit block mask",
+        "Ordinary causal packing and nonreset positions fail independently",
+        "Unequal-target weighted accumulation matches all gradients/update; naive mean-of-means fails"
+      ],
+      "torch": "2.14.0+cpu",
+      "target_counts": [
+        2,
+        4
+      ],
+      "loss": 2.543199837765957,
+      "all_parameter_gradient_error": 1.1102230246251565e-16,
+      "update_error": 2.7755575615628914e-17,
+      "accumulation_error": 5.551115123125783e-17,
+      "naive_accumulation_gradient_error": 0.138330382633592,
+      "cross_record_logit_error": 0.3055464283673449,
+      "nonreset_position_logit_error": 1.6694196226886968,
+      "packed_ids": [
+        [
+          1,
+          2,
+          3,
+          4,
+          0,
+          1,
+          6,
+          7,
+          8,
+          9,
+          10,
+          0
+        ]
+      ],
+      "packed_labels": [
+        [
+          -100,
+          -100,
+          -100,
+          4,
+          0,
+          -100,
+          -100,
+          -100,
+          8,
+          9,
+          10,
+          0
+        ]
+      ],
+      "packed_positions": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "allowed": [
+        [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      ]
+    },
+    "evaluation-contract-successor.json": {
+      "checks": [
+        "Invalid-output confusion and macro-F1",
+        "Zero-denominator F1 convention",
+        "Pooled NLL invariant to unequal batch target counts and genuine EOS=PAD",
+        "Full-vocabulary greedy uses last valid positions for unequal prompts, independent EOS stops and unmapped IDs",
+        "EOS stop and valid label are distinct under the generation cap"
+      ],
+      "metrics": {
+        "gold_order": [
+          "negative",
+          "no impact",
+          "positive"
+        ],
+        "prediction_order": [
+          "negative",
+          "no impact",
+          "positive",
+          "invalid"
+        ],
+        "confusion": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "accuracy": 0.5,
+        "class_f1": [
+          0.5,
+          0.0,
+          1.0
+        ],
+        "macro_f1": 0.5,
+        "valid_label_rate": 0.75
+      },
+      "uniform": {
+        "nll_sum": 14.387371636790224,
+        "targets": 6,
+        "nll": 2.3978952727983707,
+        "records": 2,
+        "rows": [
+          {
+            "id": "a",
+            "nll_sum": 4.795790545596741,
+            "targets": 2,
+            "nll": 2.3978952727983707
+          },
+          {
+            "id": "b",
+            "nll_sum": 9.591581091193483,
+            "targets": 4,
+            "nll": 2.3978952727983707
+          }
+        ]
+      },
+      "generated_fixture": [
+        {
+          "id": "short",
+          "gold": "negative",
+          "ids": [
+            5,
+            0
+          ],
+          "text": "negative",
+          "unmapped_ids": [],
+          "prediction": "negative",
+          "eos_stopped": true
+        },
+        {
+          "id": "long",
+          "gold": "no impact",
+          "ids": [
+            6,
+            7,
+            0
+          ],
+          "text": "no impact",
+          "unmapped_ids": [],
+          "prediction": "no impact",
+          "eos_stopped": true
+        },
+        {
+          "id": "unmapped",
+          "gold": "positive",
+          "ids": [
+            14,
+            0
+          ],
+          "text": null,
+          "unmapped_ids": [
+            14
+          ],
+          "prediction": "invalid",
+          "eos_stopped": true
+        }
+      ],
+      "capped_fixture": [
+        {
+          "id": "short",
+          "gold": "negative",
+          "ids": [
+            5
+          ],
+          "text": "negative",
+          "unmapped_ids": [],
+          "prediction": "negative",
+          "eos_stopped": false
+        },
+        {
+          "id": "long",
+          "gold": "no impact",
+          "ids": [
+            6
+          ],
+          "text": "no",
+          "unmapped_ids": [],
+          "prediction": "invalid",
+          "eos_stopped": false
+        }
+      ]
+    },
+    "native-trainer-report.json": {
+      "versions": {
+        "torch": "2.14.0+cpu",
+        "transformers": "5.19.0",
+        "trl": "1.14.2"
+      },
+      "checks": [
+        "Actual raw prompt/completion preparation preserves genuine EOS and ignores padding",
+        "Native/scratch shifted loss and every parameter gradient agree",
+        "Actual one-step SFTTrainer SGD equals explicit update; saved/reloaded logits exact",
+        "Text-only schema changes target count from5 to9",
+        "Actual generation-aware chat template selects all assistant content/EOS only"
+      ],
+      "batch": {
+        "input_ids": [
+          [
+            2,
+            3,
+            4,
+            5,
+            0,
+            0
+          ],
+          [
+            2,
+            3,
+            6,
+            8,
+            9,
+            0
+          ]
+        ],
+        "labels": [
+          [
+            -100,
+            -100,
+            -100,
+            5,
+            0,
+            -100
+          ],
+          [
+            -100,
+            -100,
+            -100,
+            8,
+            9,
+            0
+          ]
+        ],
+        "attention_mask": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "scratch_loss": 2.5878851413726807,
+      "native_loss": 2.5878851413726807,
+      "gradient_error": 0.0,
+      "update_error": 1.862645149230957e-09,
+      "native_train": {
+        "train_runtime": 0.0191,
+        "train_samples_per_second": 104.824,
+        "train_steps_per_second": 52.412,
+        "train_loss": 2.5878851413726807,
+        "entropy": 2.5631680488586426,
+        "mean_token_accuracy": 0.0,
+        "num_tokens": 11.0,
+        "epoch": 1.0
+      },
+      "response_targets": 5,
+      "text_targets": 9,
+      "assistant_record": {
+        "messages": [
+          {
+            "content": "blue",
+            "role": "user"
+          },
+          {
+            "content": "negative",
+            "role": "assistant"
+          },
+          {
+            "content": "red",
+            "role": "tool"
+          },
+          {
+            "content": "positive",
+            "role": "assistant"
+          }
+        ],
+        "input_ids": [
+          10,
+          4,
+          0,
+          11,
+          5,
+          0,
+          12,
+          6,
+          0,
+          11,
+          7,
+          0
+        ],
+        "labels": [
+          -100,
+          -100,
+          -100,
+          -100,
+          5,
+          0,
+          -100,
+          -100,
+          -100,
+          -100,
+          7,
+          0
+        ]
+      },
+      "assistant_selected_ids": [
+        5,
+        0,
+        7,
+        0
+      ]
+    },
+    "study-program-preflight.json": {
+      "checks": [
+        {
+          "policy": "response",
+          "native_loss": 7.182507514953613,
+          "explicit_loss": 7.182507514953613,
+          "targets": 21,
+          "all_parameter_gradients_finite": true
+        },
+        {
+          "policy": "full",
+          "native_loss": 5.955897331237793,
+          "explicit_loss": 5.955897331237793,
+          "targets": 261,
+          "all_parameter_gradients_finite": true
+        }
+      ],
+      "plans": {
+        "17": {
+          "steps": 200,
+          "presentations": 1595,
+          "last_full_epoch_batch": 3
+        },
+        "29": {
+          "steps": 200,
+          "presentations": 1595,
+          "last_full_epoch_batch": 3
+        },
+        "43": {
+          "steps": 200,
+          "presentations": 1595,
+          "last_full_epoch_batch": 3
+        }
+      },
+      "optimizer_steps": 0,
+      "weights_unchanged": true,
+      "bindings": {
+        "public/learn-code/supervised-fine-tuning/sft_objective.py": "430cadc1885d1989490147356008e2d46bd02e5bc5e512d2b8220fe7cd5c9a45",
+        "public/learn-code/supervised-fine-tuning/sft_data.py": "a3bbbb7ff6db8b7a48f1327dc7fc0bd1313d7fb07d19041a11f4b816e87aeaab",
+        "public/learn-code/supervised-fine-tuning/sft_batching.py": "08a3db0c9dce034312dbb5ae3b6f11149b2785f0d2fc005300732d4faea970f4",
+        "public/learn-code/supervised-fine-tuning/sft_study.py": "b228fe70b136b7e2a39b141ead784a4707663f605cfa2b94128fbdcb7b7105e8",
+        "public/learn-code/supervised-fine-tuning/sft_trl.py": "87c3e8ed06d4397b43c6183a8bf81fe0056eb549c560c9479f04b6a557fd3f64",
+        "public/learn-code/supervised-fine-tuning/sft_evaluate.py": "ff392707272355cbda4bd0ca7fa24066416802e05274dc7e1880b0c29ed8216b",
+        "scripts/verify-sft-study-preflight.py": "ce638a568838d7a18edad26f58d879d319488540a7db5c6938c9740136df2171"
+      }
+    }
+  },
+  "tokenized_record": {
+    "id": 0,
+    "verse": "my canoe to make more steady,",
+    "raw_label": 0,
+    "label": "no impact",
+    "split": "test",
+    "ids": [
+      4947,
+      1419,
+      253,
+      23252,
+      21942,
+      347,
+      4016,
+      13,
+      642,
+      3486,
+      13,
+      390,
+      2762,
+      15,
+      187,
+      10754,
+      339,
+      27,
+      619,
+      47884,
+      281,
+      1056,
+      625,
+      11792,
+      13,
+      187,
+      32869,
+      27,
+      642,
+      3486,
+      0
+    ],
+    "prompt_ids": [
+      4947,
+      1419,
+      253,
+      23252,
+      21942,
+      347,
+      4016,
+      13,
+      642,
+      3486,
+      13,
+      390,
+      2762,
+      15,
+      187,
+      10754,
+      339,
+      27,
+      619,
+      47884,
+      281,
+      1056,
+      625,
+      11792,
+      13,
+      187,
+      32869,
+      27
+    ],
+    "boundary": 28,
+    "eos_id": 0
+  },
+  "summary": {
+    "source_sha256": "faabd4a8aaad10be35b728da9fa3c23fa458dd8f7af6e47c7d75581b44a2dde1",
+    "protocol_sha256": "7b15480455acc19d42c9a3bd031e48c7500874738d89df882274fecb4c5c6662",
+    "base": {
+      "response_nll": 7.0527254304300575,
+      "generation_accuracy": 0.0,
+      "generation_macro_f1": 0.0,
+      "valid_rate": 0.0,
+      "eos_rate": 0.0,
+      "constrained_accuracy": 0.36538461538461536,
+      "constrained_macro_f1": 0.30025190597734513
+    },
+    "majority": {
+      "label": "no impact",
+      "counts": {
+        "positive": 133,
+        "no impact": 555,
+        "negative": 155
+      },
+      "gold_order": [
+        "negative",
+        "no impact",
+        "positive"
+      ],
+      "prediction_order": [
+        "negative",
+        "no impact",
+        "positive",
+        "invalid"
+      ],
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "accuracy": 0.6634615384615384,
+      "class_f1": [
+        0.0,
+        0.7976878612716763,
+        0.0
+      ],
+      "macro_f1": 0.26589595375722547,
+      "valid_label_rate": 1.0
+    },
+    "runs": [
+      {
+        "policy": "response",
+        "seed": 17,
+        "selected_step": 200,
+        "selected_development_nll": 0.26154327687159384,
+        "selected_targets": 4242,
+        "input_positions": 53178,
+        "presentations": 1595,
+        "response_nll": 0.2603346396979247,
+        "generation_accuracy": 0.7403846153846154,
+        "generation_macro_f1": 0.6205135335558027,
+        "valid_rate": 1.0,
+        "eos_rate": 1.0,
+        "constrained_accuracy": 0.7403846153846154,
+        "constrained_macro_f1": 0.6205135335558027
+      },
+      {
+        "policy": "response",
+        "seed": 29,
+        "selected_step": 150,
+        "selected_development_nll": 0.26623782197435386,
+        "selected_targets": 4251,
+        "input_positions": 53256,
+        "presentations": 1595,
+        "response_nll": 0.31117686186618543,
+        "generation_accuracy": 0.7403846153846154,
+        "generation_macro_f1": 0.5548340548340548,
+        "valid_rate": 1.0,
+        "eos_rate": 1.0,
+        "constrained_accuracy": 0.7403846153846154,
+        "constrained_macro_f1": 0.5548340548340548
+      },
+      {
+        "policy": "response",
+        "seed": 43,
+        "selected_step": 200,
+        "selected_development_nll": 0.2696519958362947,
+        "selected_targets": 4240,
+        "input_positions": 53242,
+        "presentations": 1595,
+        "response_nll": 0.3026418332729295,
+        "generation_accuracy": 0.6826923076923077,
+        "generation_macro_f1": 0.5174006622516556,
+        "valid_rate": 1.0,
+        "eos_rate": 1.0,
+        "constrained_accuracy": 0.6826923076923077,
+        "constrained_macro_f1": 0.5174006622516556
+      },
+      {
+        "policy": "full",
+        "seed": 17,
+        "selected_step": 200,
+        "selected_development_nll": 0.30479985295451084,
+        "selected_targets": 51583,
+        "input_positions": 53178,
+        "presentations": 1595,
+        "response_nll": 0.30856541413326316,
+        "generation_accuracy": 0.6634615384615384,
+        "generation_macro_f1": 0.32807113046634,
+        "valid_rate": 1.0,
+        "eos_rate": 1.0,
+        "constrained_accuracy": 0.6634615384615384,
+        "constrained_macro_f1": 0.32807113046634
+      },
+      {
+        "policy": "full",
+        "seed": 29,
+        "selected_step": 100,
+        "selected_development_nll": 0.33992698303688573,
+        "selected_targets": 51661,
+        "input_positions": 53256,
+        "presentations": 1595,
+        "response_nll": 0.3382344804629591,
+        "generation_accuracy": 0.6634615384615384,
+        "generation_macro_f1": 0.26589595375722547,
+        "valid_rate": 1.0,
+        "eos_rate": 1.0,
+        "constrained_accuracy": 0.6634615384615384,
+        "constrained_macro_f1": 0.26589595375722547
+      },
+      {
+        "policy": "full",
+        "seed": 43,
+        "selected_step": 200,
+        "selected_development_nll": 0.3128389237505894,
+        "selected_targets": 51647,
+        "input_positions": 53242,
+        "presentations": 1595,
+        "response_nll": 0.31103439444162206,
+        "generation_accuracy": 0.6442307692307693,
+        "generation_macro_f1": 0.4774774774774775,
+        "valid_rate": 1.0,
+        "eos_rate": 1.0,
+        "constrained_accuracy": 0.6442307692307693,
+        "constrained_macro_f1": 0.4774774774774775
+      }
+    ],
+    "aggregates": {
+      "response": {
+        "response_nll": {
+          "mean": 0.2913844449456799,
+          "min": 0.2603346396979247,
+          "max": 0.31117686186618543
+        },
+        "generation_accuracy": {
+          "mean": 0.7211538461538461,
+          "min": 0.6826923076923077,
+          "max": 0.7403846153846154
+        },
+        "generation_macro_f1": {
+          "mean": 0.5642494168805043,
+          "min": 0.5174006622516556,
+          "max": 0.6205135335558027
+        },
+        "valid_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "eos_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "constrained_accuracy": {
+          "mean": 0.7211538461538461,
+          "min": 0.6826923076923077,
+          "max": 0.7403846153846154
+        },
+        "constrained_macro_f1": {
+          "mean": 0.5642494168805043,
+          "min": 0.5174006622516556,
+          "max": 0.6205135335558027
+        }
+      },
+      "full": {
+        "response_nll": {
+          "mean": 0.3192780963459481,
+          "min": 0.30856541413326316,
+          "max": 0.3382344804629591
+        },
+        "generation_accuracy": {
+          "mean": 0.657051282051282,
+          "min": 0.6442307692307693,
+          "max": 0.6634615384615384
+        },
+        "generation_macro_f1": {
+          "mean": 0.35714818723368097,
+          "min": 0.26589595375722547,
+          "max": 0.4774774774774775
+        },
+        "valid_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "eos_rate": {
+          "mean": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "constrained_accuracy": {
+          "mean": 0.657051282051282,
+          "min": 0.6442307692307693,
+          "max": 0.6634615384615384
+        },
+        "constrained_macro_f1": {
+          "mean": 0.35714818723368097,
+          "min": 0.26589595375722547,
+          "max": 0.4774774774774775
+        }
+      }
+    },
+    "examples": {
+      "base": [
+        {
+          "id": 5,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              187,
+              32869,
+              27,
+              187,
+              32869,
+              27,
+              187,
+              32869
+            ],
+            "text": "\nAnswer:\nAnswer:\nAnswer",
+            "unmapped_ids": [],
+            "prediction": "invalid",
+            "eos_stopped": false
+          },
+          "constrained": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -18.097747802734375,
+              -18.907177925109863,
+              -18.47368812561035
+            ],
+            "prediction": "negative"
+          }
+        },
+        {
+          "id": 6,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              187,
+              187,
+              3,
+              42,
+              452,
+              247,
+              2419,
+              275
+            ],
+            "text": "\n\n\"I have a house in",
+            "unmapped_ids": [],
+            "prediction": "invalid",
+            "eos_stopped": false
+          },
+          "constrained": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -19.537080764770508,
+              -19.995777368545532,
+              -19.26154136657715
+            ],
+            "prediction": "positive"
+          }
+        },
+        {
+          "id": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              309,
+              452,
+              281,
+              1333,
+              326,
+              309,
+              452,
+              281
+            ],
+            "text": " I have to say that I have to",
+            "unmapped_ids": [],
+            "prediction": "invalid",
+            "eos_stopped": false
+          },
+          "constrained": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -20.274709701538086,
+              -19.034350395202637,
+              -20.4344425201416
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 2,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              187,
+              187,
+              510,
+              806,
+              23252,
+              310,
+              247,
+              3159
+            ],
+            "text": "\n\nThe first verse is a word",
+            "unmapped_ids": [],
+            "prediction": "invalid",
+            "eos_stopped": false
+          },
+          "constrained": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -17.37877655029297,
+              -17.583232879638672,
+              -17.35038471221924
+            ],
+            "prediction": "positive"
+          }
+        },
+        {
+          "id": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              285,
+              320,
+              9995,
+              275,
+              253,
+              5768,
+              4131,
+              672
+            ],
+            "text": " and be glad in the summer morning when",
+            "unmapped_ids": [],
+            "prediction": "invalid",
+            "eos_stopped": false
+          },
+          "constrained": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -19.594148635864258,
+              -18.742332935333252,
+              -19.15794086456299
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 10,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              187,
+              187,
+              3,
+              42,
+              717,
+              417,
+              247,
+              1429
+            ],
+            "text": "\n\n\"I am not a child",
+            "unmapped_ids": [],
+            "prediction": "invalid",
+            "eos_stopped": false
+          },
+          "constrained": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -16.67268657684326,
+              -16.42845630645752,
+              -16.41242790222168
+            ],
+            "prediction": "positive"
+          }
+        }
+      ],
+      "response-17": [
+        {
+          "id": 5,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              4016,
+              0
+            ],
+            "text": " negative",
+            "unmapped_ids": [],
+            "prediction": "negative",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -0.2097260819573421,
+              -2.70236332267541,
+              -2.114754676593293
+            ],
+            "prediction": "negative"
+          }
+        },
+        {
+          "id": 6,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              4016,
+              0
+            ],
+            "text": " negative",
+            "unmapped_ids": [],
+            "prediction": "negative",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -0.32884024144732393,
+              -1.4281837456055655,
+              -3.2566933613998117
+            ],
+            "prediction": "negative"
+          }
+        },
+        {
+          "id": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              2762,
+              0
+            ],
+            "text": " positive",
+            "unmapped_ids": [],
+            "prediction": "positive",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -6.201137055642903,
+              -2.871139010123443,
+              -0.06485692848218605
+            ],
+            "prediction": "positive"
+          }
+        },
+        {
+          "id": 2,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -2.5034643404760573,
+              -0.23396944474370684,
+              -2.080571651395985
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -4.118410944851348,
+              -0.0611285934355692,
+              -3.1756099462422753
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 10,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              2762,
+              0
+            ],
+            "text": " positive",
+            "unmapped_ids": [],
+            "prediction": "positive",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -5.177366985473782,
+              -3.220723209786229,
+              -0.06014101766049862
+            ],
+            "prediction": "positive"
+          }
+        }
+      ],
+      "response-29": [
+        {
+          "id": 5,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              4016,
+              0
+            ],
+            "text": " negative",
+            "unmapped_ids": [],
+            "prediction": "negative",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -0.42151242473300954,
+              -1.0837796883624833,
+              -5.405749320929317
+            ],
+            "prediction": "negative"
+          }
+        },
+        {
+          "id": 6,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.0710006950921525,
+              -0.43436521101830294,
+              -4.907071471160634
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -5.972576141350146,
+              -0.023045071910019033,
+              -3.927901864033174
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 2,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -3.153834581349656,
+              -0.051374825054153916,
+              -5.003857731811422
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -2.1018582582273666,
+              -0.20797446222422877,
+              -2.744070768348138
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 10,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              2762,
+              0
+            ],
+            "text": " positive",
+            "unmapped_ids": [],
+            "prediction": "positive",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -3.166998982404948,
+              -1.7375636100148313,
+              -0.24804519089775567
+            ],
+            "prediction": "positive"
+          }
+        }
+      ],
+      "response-43": [
+        {
+          "id": 5,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              4016,
+              0
+            ],
+            "text": " negative",
+            "unmapped_ids": [],
+            "prediction": "negative",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -0.7993034124347105,
+              -2.1372419577646724,
+              -0.8437403440402704
+            ],
+            "prediction": "negative"
+          }
+        },
+        {
+          "id": 6,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -2.3016659021377492,
+              -0.24687949966391898,
+              -2.1417040824890137
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -3.059332013130181,
+              -0.46629049840339576,
+              -1.1262311935424734
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 2,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -3.7631288766860393,
+              -0.10498552494209434,
+              -2.5814422369003225
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -3.4228359460830617,
+              -0.22065984957771434,
+              -1.8060204982757497
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 10,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              2762,
+              0
+            ],
+            "text": " positive",
+            "unmapped_ids": [],
+            "prediction": "positive",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -4.470962524413949,
+              -4.464973993257445,
+              -0.025034010410081464
+            ],
+            "prediction": "positive"
+          }
+        }
+      ],
+      "full-17": [
+        {
+          "id": 5,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.3945355284377001,
+              -0.6031418110360391,
+              -1.6387841506657423
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 6,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.7387621352245333,
+              -0.48077458592888433,
+              -1.6568773957260419
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.5615665847581113,
+              -0.6590014081884874,
+              -1.3471740416862303
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 2,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -2.417569746117806,
+              -0.20750904513261048,
+              -2.3815325465402566
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.8334024985379074,
+              -0.5256017278152285,
+              -1.4358501051319763
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 10,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.5674926760257222,
+              -0.8400338259234559,
+              -1.060939134855289
+            ],
+            "prediction": "no impact"
+          }
+        }
+      ],
+      "full-29": [
+        {
+          "id": 5,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.8971439558081329,
+              -0.2847186839208007,
+              -2.4003017200157046
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 6,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.864500398922246,
+              -0.2868686292786151,
+              -2.4312408638943452
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.8064594809547998,
+              -0.3336986713693477,
+              -2.180350318492856
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 2,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -2.03429490304552,
+              -0.26173967181239277,
+              -2.3623501605470665
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.7815712326555513,
+              -0.30890382488723844,
+              -2.3808233415766153
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 10,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.8626735265133902,
+              -0.30979072232730687,
+              -2.253552994225174
+            ],
+            "prediction": "no impact"
+          }
+        }
+      ],
+      "full-43": [
+        {
+          "id": 5,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.4537190167829976,
+              -0.5402834689921292,
+              -1.7233201254930464
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 6,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              4016,
+              0
+            ],
+            "text": " negative",
+            "unmapped_ids": [],
+            "prediction": "negative",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -0.9479195945314132,
+              -1.2780674417881528,
+              -1.1239052935270593
+            ],
+            "prediction": "negative"
+          }
+        },
+        {
+          "id": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              2762,
+              0
+            ],
+            "text": " positive",
+            "unmapped_ids": [],
+            "prediction": "positive",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.2556367927463725,
+              -1.3697261603665538,
+              -0.7883307762967888
+            ],
+            "prediction": "positive"
+          }
+        },
+        {
+          "id": 2,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -2.823301073833136,
+              -0.1254539708243101,
+              -2.8777091496922367
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.6613486991591344,
+              -0.4687959861839772,
+              -1.7090454097906331
+            ],
+            "prediction": "no impact"
+          }
+        },
+        {
+          "id": 10,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              2762,
+              0
+            ],
+            "text": " positive",
+            "unmapped_ids": [],
+            "prediction": "positive",
+            "eos_stopped": true
+          },
+          "constrained": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.1230846613907488,
+              -1.4953084413937177,
+              -0.8129523383613559
+            ],
+            "prediction": "positive"
+          }
+        }
+      ]
+    }
+  },
+  "study": {
+    "display_test_ids": [
+      5,
+      6,
+      0,
+      2,
+      1,
+      10
+    ],
+    "test_records": [
+      {
+        "id": 0,
+        "verse": "my canoe to make more steady,",
+        "raw_label": 0,
+        "label": "no impact",
+        "split": "test"
+      },
+      {
+        "id": 1,
+        "verse": "and be glad in the summer morning when the kindred ride on their way;",
+        "raw_label": 1,
+        "label": "positive",
+        "split": "test"
+      },
+      {
+        "id": 2,
+        "verse": "and when they reached the strait symplegades",
+        "raw_label": 0,
+        "label": "no impact",
+        "split": "test"
+      },
+      {
+        "id": 5,
+        "verse": "indignantly i hurled the cry:",
+        "raw_label": -1,
+        "label": "negative",
+        "split": "test"
+      },
+      {
+        "id": 6,
+        "verse": "with which his house is haunted;",
+        "raw_label": -1,
+        "label": "negative",
+        "split": "test"
+      },
+      {
+        "id": 10,
+        "verse": "on thine own bird the sweet enthusiasm",
+        "raw_label": 1,
+        "label": "positive",
+        "split": "test"
+      }
+    ],
+    "models": [
+      {
+        "id": "base",
+        "name": "Base checkpoint",
+        "evaluation": {
+          "response": {
+            "nll_sum": 1953.604944229126,
+            "targets": 277,
+            "nll": 7.0527254304300575,
+            "records": 104,
+            "rows": [
+              {
+                "id": 0,
+                "nll_sum": 19.034350395202637,
+                "targets": 3,
+                "nll": 6.344783465067546
+              },
+              {
+                "id": 1,
+                "nll_sum": 19.1578369140625,
+                "targets": 2,
+                "nll": 9.57891845703125
+              },
+              {
+                "id": 2,
+                "nll_sum": 17.58273696899414,
+                "targets": 3,
+                "nll": 5.860912322998047
+              },
+              {
+                "id": 5,
+                "nll_sum": 18.097747802734375,
+                "targets": 2,
+                "nll": 9.048873901367188
+              },
+              {
+                "id": 6,
+                "nll_sum": 19.537080764770508,
+                "targets": 2,
+                "nll": 9.768540382385254
+              },
+              {
+                "id": 10,
+                "nll_sum": 16.41242790222168,
+                "targets": 2,
+                "nll": 8.20621395111084
+              }
+            ]
+          },
+          "generation": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "ids": [
+                  309,
+                  452,
+                  281,
+                  1333,
+                  326,
+                  309,
+                  452,
+                  281
+                ],
+                "text": " I have to say that I have to",
+                "unmapped_ids": [],
+                "prediction": "invalid",
+                "eos_stopped": false
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "ids": [
+                  285,
+                  320,
+                  9995,
+                  275,
+                  253,
+                  5768,
+                  4131,
+                  672
+                ],
+                "text": " and be glad in the summer morning when",
+                "unmapped_ids": [],
+                "prediction": "invalid",
+                "eos_stopped": false
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "ids": [
+                  187,
+                  187,
+                  510,
+                  806,
+                  23252,
+                  310,
+                  247,
+                  3159
+                ],
+                "text": "\n\nThe first verse is a word",
+                "unmapped_ids": [],
+                "prediction": "invalid",
+                "eos_stopped": false
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "ids": [
+                  187,
+                  32869,
+                  27,
+                  187,
+                  32869,
+                  27,
+                  187,
+                  32869
+                ],
+                "text": "\nAnswer:\nAnswer:\nAnswer",
+                "unmapped_ids": [],
+                "prediction": "invalid",
+                "eos_stopped": false
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "ids": [
+                  187,
+                  187,
+                  3,
+                  42,
+                  452,
+                  247,
+                  2419,
+                  275
+                ],
+                "text": "\n\n\"I have a house in",
+                "unmapped_ids": [],
+                "prediction": "invalid",
+                "eos_stopped": false
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "ids": [
+                  187,
+                  187,
+                  3,
+                  42,
+                  717,
+                  417,
+                  247,
+                  1429
+                ],
+                "text": "\n\n\"I am not a child",
+                "unmapped_ids": [],
+                "prediction": "invalid",
+                "eos_stopped": false
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                0,
+                0,
+                0,
+                19
+              ],
+              [
+                0,
+                0,
+                0,
+                69
+              ],
+              [
+                0,
+                0,
+                0,
+                16
+              ]
+            ],
+            "accuracy": 0.0,
+            "class_f1": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "macro_f1": 0.0,
+            "valid_label_rate": 0.0,
+            "eos_stop_rate": 0.0
+          },
+          "constrained": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -20.274709701538086,
+                  -19.034350395202637,
+                  -20.4344425201416
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "candidate_logp": [
+                  -19.594148635864258,
+                  -18.742332935333252,
+                  -19.15794086456299
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -17.37877655029297,
+                  -17.583232879638672,
+                  -17.35038471221924
+                ],
+                "prediction": "positive"
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "candidate_logp": [
+                  -18.097747802734375,
+                  -18.907177925109863,
+                  -18.47368812561035
+                ],
+                "prediction": "negative"
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "candidate_logp": [
+                  -19.537080764770508,
+                  -19.995777368545532,
+                  -19.26154136657715
+                ],
+                "prediction": "positive"
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "candidate_logp": [
+                  -16.67268657684326,
+                  -16.42845630645752,
+                  -16.41242790222168
+                ],
+                "prediction": "positive"
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                7,
+                7,
+                5,
+                0
+              ],
+              [
+                26,
+                28,
+                15,
+                0
+              ],
+              [
+                1,
+                12,
+                3,
+                0
+              ]
+            ],
+            "accuracy": 0.36538461538461536,
+            "class_f1": [
+              0.2641509433962264,
+              0.4827586206896552,
+              0.15384615384615385
+            ],
+            "macro_f1": 0.30025190597734513,
+            "valid_label_rate": 1.0
+          }
+        }
+      },
+      {
+        "id": "response-17",
+        "name": "response / seed 17",
+        "history": [
+          {
+            "step": 0,
+            "development_response": {
+              "nll_sum": 1948.6253871917725,
+              "targets": 279,
+              "nll": 6.9843203841999015,
+              "records": 105
+            }
+          },
+          {
+            "step": 50,
+            "development_response": {
+              "nll_sum": 97.90571886494126,
+              "targets": 279,
+              "nll": 0.35091655507147407,
+              "records": 105
+            }
+          },
+          {
+            "step": 100,
+            "development_response": {
+              "nll_sum": 85.66604942123081,
+              "targets": 279,
+              "nll": 0.30704677211910686,
+              "records": 105
+            }
+          },
+          {
+            "step": 150,
+            "development_response": {
+              "nll_sum": 99.47236152089329,
+              "targets": 279,
+              "nll": 0.3565317617236319,
+              "records": 105
+            }
+          },
+          {
+            "step": 200,
+            "development_response": {
+              "nll_sum": 72.97057424717468,
+              "targets": 279,
+              "nll": 0.26154327687159384,
+              "records": 105
+            }
+          }
+        ],
+        "selected_step": 200,
+        "evaluation": {
+          "response": {
+            "nll_sum": 72.11269519632515,
+            "targets": 277,
+            "nll": 0.2603346396979247,
+            "records": 104,
+            "rows": [
+              {
+                "id": 0,
+                "nll_sum": 2.871139010123443,
+                "targets": 3,
+                "nll": 0.9570463367078142
+              },
+              {
+                "id": 1,
+                "nll_sum": 3.1756054162892724,
+                "targets": 2,
+                "nll": 1.5878027081446362
+              },
+              {
+                "id": 2,
+                "nll_sum": 0.23396944474370684,
+                "targets": 3,
+                "nll": 0.07798981491456895
+              },
+              {
+                "id": 5,
+                "nll_sum": 0.2097260819573421,
+                "targets": 2,
+                "nll": 0.10486304097867105
+              },
+              {
+                "id": 6,
+                "nll_sum": 0.32884024144732393,
+                "targets": 2,
+                "nll": 0.16442012072366197
+              },
+              {
+                "id": 10,
+                "nll_sum": 0.06014101766049862,
+                "targets": 2,
+                "nll": 0.03007050883024931
+              }
+            ]
+          },
+          "generation": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "ids": [
+                  2762,
+                  0
+                ],
+                "text": " positive",
+                "unmapped_ids": [],
+                "prediction": "positive",
+                "eos_stopped": true
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "ids": [
+                  4016,
+                  0
+                ],
+                "text": " negative",
+                "unmapped_ids": [],
+                "prediction": "negative",
+                "eos_stopped": true
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "ids": [
+                  4016,
+                  0
+                ],
+                "text": " negative",
+                "unmapped_ids": [],
+                "prediction": "negative",
+                "eos_stopped": true
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "ids": [
+                  2762,
+                  0
+                ],
+                "text": " positive",
+                "unmapped_ids": [],
+                "prediction": "positive",
+                "eos_stopped": true
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                10,
+                5,
+                4,
+                0
+              ],
+              [
+                2,
+                61,
+                6,
+                0
+              ],
+              [
+                0,
+                10,
+                6,
+                0
+              ]
+            ],
+            "accuracy": 0.7403846153846154,
+            "class_f1": [
+              0.6451612903225806,
+              0.8413793103448276,
+              0.375
+            ],
+            "macro_f1": 0.6205135335558027,
+            "valid_label_rate": 1.0,
+            "eos_stop_rate": 1.0
+          },
+          "constrained": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -6.201137055642903,
+                  -2.871139010123443,
+                  -0.06485692848218605
+                ],
+                "prediction": "positive"
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "candidate_logp": [
+                  -4.118410944851348,
+                  -0.0611285934355692,
+                  -3.1756099462422753
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -2.5034643404760573,
+                  -0.23396944474370684,
+                  -2.080571651395985
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "candidate_logp": [
+                  -0.2097260819573421,
+                  -2.70236332267541,
+                  -2.114754676593293
+                ],
+                "prediction": "negative"
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "candidate_logp": [
+                  -0.32884024144732393,
+                  -1.4281837456055655,
+                  -3.2566933613998117
+                ],
+                "prediction": "negative"
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "candidate_logp": [
+                  -5.177366985473782,
+                  -3.220723209786229,
+                  -0.06014101766049862
+                ],
+                "prediction": "positive"
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                10,
+                5,
+                4,
+                0
+              ],
+              [
+                2,
+                61,
+                6,
+                0
+              ],
+              [
+                0,
+                10,
+                6,
+                0
+              ]
+            ],
+            "accuracy": 0.7403846153846154,
+            "class_f1": [
+              0.6451612903225806,
+              0.8413793103448276,
+              0.375
+            ],
+            "macro_f1": 0.6205135335558027,
+            "valid_label_rate": 1.0
+          }
+        }
+      },
+      {
+        "id": "response-29",
+        "name": "response / seed 29",
+        "history": [
+          {
+            "step": 0,
+            "development_response": {
+              "nll_sum": 1948.6253871917725,
+              "targets": 279,
+              "nll": 6.9843203841999015,
+              "records": 105
+            }
+          },
+          {
+            "step": 50,
+            "development_response": {
+              "nll_sum": 77.03217810373826,
+              "targets": 279,
+              "nll": 0.2761009967875923,
+              "records": 105
+            }
+          },
+          {
+            "step": 100,
+            "development_response": {
+              "nll_sum": 78.2472784289489,
+              "targets": 279,
+              "nll": 0.28045619508583836,
+              "records": 105
+            }
+          },
+          {
+            "step": 150,
+            "development_response": {
+              "nll_sum": 74.28035233084472,
+              "targets": 279,
+              "nll": 0.26623782197435386,
+              "records": 105
+            }
+          },
+          {
+            "step": 200,
+            "development_response": {
+              "nll_sum": 133.93932085185736,
+              "targets": 279,
+              "nll": 0.48006925036508014,
+              "records": 105
+            }
+          }
+        ],
+        "selected_step": 150,
+        "evaluation": {
+          "response": {
+            "nll_sum": 86.19599073693337,
+            "targets": 277,
+            "nll": 0.31117686186618543,
+            "records": 104,
+            "rows": [
+              {
+                "id": 0,
+                "nll_sum": 0.023045071910019033,
+                "targets": 3,
+                "nll": 0.007681690636673011
+              },
+              {
+                "id": 1,
+                "nll_sum": 2.744069337836663,
+                "targets": 2,
+                "nll": 1.3720346689183316
+              },
+              {
+                "id": 2,
+                "nll_sum": 0.051374825054153916,
+                "targets": 3,
+                "nll": 0.01712494168471797
+              },
+              {
+                "id": 5,
+                "nll_sum": 0.42151242473300954,
+                "targets": 2,
+                "nll": 0.21075621236650477
+              },
+              {
+                "id": 6,
+                "nll_sum": 1.0710006950921525,
+                "targets": 2,
+                "nll": 0.5355003475460762
+              },
+              {
+                "id": 10,
+                "nll_sum": 0.24804519089775567,
+                "targets": 2,
+                "nll": 0.12402259544887784
+              }
+            ]
+          },
+          "generation": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "ids": [
+                  4016,
+                  0
+                ],
+                "text": " negative",
+                "unmapped_ids": [],
+                "prediction": "negative",
+                "eos_stopped": true
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "ids": [
+                  2762,
+                  0
+                ],
+                "text": " positive",
+                "unmapped_ids": [],
+                "prediction": "positive",
+                "eos_stopped": true
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                11,
+                8,
+                0,
+                0
+              ],
+              [
+                5,
+                64,
+                0,
+                0
+              ],
+              [
+                1,
+                13,
+                2,
+                0
+              ]
+            ],
+            "accuracy": 0.7403846153846154,
+            "class_f1": [
+              0.6111111111111112,
+              0.8311688311688312,
+              0.2222222222222222
+            ],
+            "macro_f1": 0.5548340548340548,
+            "valid_label_rate": 1.0,
+            "eos_stop_rate": 1.0
+          },
+          "constrained": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -5.972576141350146,
+                  -0.023045071910019033,
+                  -3.927901864033174
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "candidate_logp": [
+                  -2.1018582582273666,
+                  -0.20797446222422877,
+                  -2.744070768348138
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -3.153834581349656,
+                  -0.051374825054153916,
+                  -5.003857731811422
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "candidate_logp": [
+                  -0.42151242473300954,
+                  -1.0837796883624833,
+                  -5.405749320929317
+                ],
+                "prediction": "negative"
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "candidate_logp": [
+                  -1.0710006950921525,
+                  -0.43436521101830294,
+                  -4.907071471160634
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "candidate_logp": [
+                  -3.166998982404948,
+                  -1.7375636100148313,
+                  -0.24804519089775567
+                ],
+                "prediction": "positive"
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                11,
+                8,
+                0,
+                0
+              ],
+              [
+                5,
+                64,
+                0,
+                0
+              ],
+              [
+                1,
+                13,
+                2,
+                0
+              ]
+            ],
+            "accuracy": 0.7403846153846154,
+            "class_f1": [
+              0.6111111111111112,
+              0.8311688311688312,
+              0.2222222222222222
+            ],
+            "macro_f1": 0.5548340548340548,
+            "valid_label_rate": 1.0
+          }
+        }
+      },
+      {
+        "id": "response-43",
+        "name": "response / seed 43",
+        "history": [
+          {
+            "step": 0,
+            "development_response": {
+              "nll_sum": 1948.6253871917725,
+              "targets": 279,
+              "nll": 6.9843203841999015,
+              "records": 105
+            }
+          },
+          {
+            "step": 50,
+            "development_response": {
+              "nll_sum": 91.39393708530173,
+              "targets": 279,
+              "nll": 0.327576835431189,
+              "records": 105
+            }
+          },
+          {
+            "step": 100,
+            "development_response": {
+              "nll_sum": 79.0342936390768,
+              "targets": 279,
+              "nll": 0.28327703813289173,
+              "records": 105
+            }
+          },
+          {
+            "step": 150,
+            "development_response": {
+              "nll_sum": 88.0956789046395,
+              "targets": 279,
+              "nll": 0.31575512152200536,
+              "records": 105
+            }
+          },
+          {
+            "step": 200,
+            "development_response": {
+              "nll_sum": 75.23290683832622,
+              "targets": 279,
+              "nll": 0.2696519958362947,
+              "records": 105
+            }
+          }
+        ],
+        "selected_step": 200,
+        "evaluation": {
+          "response": {
+            "nll_sum": 83.83178781660146,
+            "targets": 277,
+            "nll": 0.3026418332729295,
+            "records": 104,
+            "rows": [
+              {
+                "id": 0,
+                "nll_sum": 0.46629049840339576,
+                "targets": 3,
+                "nll": 0.15543016613446525
+              },
+              {
+                "id": 1,
+                "nll_sum": 1.8060207366943288,
+                "targets": 2,
+                "nll": 0.9030103683471644
+              },
+              {
+                "id": 2,
+                "nll_sum": 0.10498552494209434,
+                "targets": 3,
+                "nll": 0.03499517498069812
+              },
+              {
+                "id": 5,
+                "nll_sum": 0.7993034124347105,
+                "targets": 2,
+                "nll": 0.39965170621735524
+              },
+              {
+                "id": 6,
+                "nll_sum": 2.3016659021377492,
+                "targets": 2,
+                "nll": 1.1508329510688746
+              },
+              {
+                "id": 10,
+                "nll_sum": 0.025034010410081464,
+                "targets": 2,
+                "nll": 0.012517005205040732
+              }
+            ]
+          },
+          "generation": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "ids": [
+                  4016,
+                  0
+                ],
+                "text": " negative",
+                "unmapped_ids": [],
+                "prediction": "negative",
+                "eos_stopped": true
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "ids": [
+                  2762,
+                  0
+                ],
+                "text": " positive",
+                "unmapped_ids": [],
+                "prediction": "positive",
+                "eos_stopped": true
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                4,
+                13,
+                2,
+                0
+              ],
+              [
+                2,
+                60,
+                7,
+                0
+              ],
+              [
+                0,
+                9,
+                7,
+                0
+              ]
+            ],
+            "accuracy": 0.6826923076923077,
+            "class_f1": [
+              0.32,
+              0.7947019867549668,
+              0.4375
+            ],
+            "macro_f1": 0.5174006622516556,
+            "valid_label_rate": 1.0,
+            "eos_stop_rate": 1.0
+          },
+          "constrained": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -3.059332013130181,
+                  -0.46629049840339576,
+                  -1.1262311935424734
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "candidate_logp": [
+                  -3.4228359460830617,
+                  -0.22065984957771434,
+                  -1.8060204982757497
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -3.7631288766860393,
+                  -0.10498552494209434,
+                  -2.5814422369003225
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "candidate_logp": [
+                  -0.7993034124347105,
+                  -2.1372419577646724,
+                  -0.8437403440402704
+                ],
+                "prediction": "negative"
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "candidate_logp": [
+                  -2.3016659021377492,
+                  -0.24687949966391898,
+                  -2.1417040824890137
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "candidate_logp": [
+                  -4.470962524413949,
+                  -4.464973993257445,
+                  -0.025034010410081464
+                ],
+                "prediction": "positive"
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                4,
+                13,
+                2,
+                0
+              ],
+              [
+                2,
+                60,
+                7,
+                0
+              ],
+              [
+                0,
+                9,
+                7,
+                0
+              ]
+            ],
+            "accuracy": 0.6826923076923077,
+            "class_f1": [
+              0.32,
+              0.7947019867549668,
+              0.4375
+            ],
+            "macro_f1": 0.5174006622516556,
+            "valid_label_rate": 1.0
+          }
+        }
+      },
+      {
+        "id": "full-17",
+        "name": "full / seed 17",
+        "history": [
+          {
+            "step": 0,
+            "development_response": {
+              "nll_sum": 1948.6253871917725,
+              "targets": 279,
+              "nll": 6.9843203841999015,
+              "records": 105
+            }
+          },
+          {
+            "step": 50,
+            "development_response": {
+              "nll_sum": 96.2975115035224,
+              "targets": 279,
+              "nll": 0.34515237098036705,
+              "records": 105
+            }
+          },
+          {
+            "step": 100,
+            "development_response": {
+              "nll_sum": 94.13396977959201,
+              "targets": 279,
+              "nll": 0.3373977411454911,
+              "records": 105
+            }
+          },
+          {
+            "step": 150,
+            "development_response": {
+              "nll_sum": 92.5095413987874,
+              "targets": 279,
+              "nll": 0.33157541719995487,
+              "records": 105
+            }
+          },
+          {
+            "step": 200,
+            "development_response": {
+              "nll_sum": 85.03915897430852,
+              "targets": 279,
+              "nll": 0.30479985295451084,
+              "records": 105
+            }
+          }
+        ],
+        "selected_step": 200,
+        "evaluation": {
+          "response": {
+            "nll_sum": 85.47261971491389,
+            "targets": 277,
+            "nll": 0.30856541413326316,
+            "records": 104,
+            "rows": [
+              {
+                "id": 0,
+                "nll_sum": 0.6590014081884874,
+                "targets": 3,
+                "nll": 0.21966713606282914
+              },
+              {
+                "id": 1,
+                "nll_sum": 1.4358349655522034,
+                "targets": 2,
+                "nll": 0.7179174827761017
+              },
+              {
+                "id": 2,
+                "nll_sum": 0.20750904513261048,
+                "targets": 3,
+                "nll": 0.06916968171087017
+              },
+              {
+                "id": 5,
+                "nll_sum": 1.3945355284377001,
+                "targets": 2,
+                "nll": 0.6972677642188501
+              },
+              {
+                "id": 6,
+                "nll_sum": 1.7387621352245333,
+                "targets": 2,
+                "nll": 0.8693810676122666
+              },
+              {
+                "id": 10,
+                "nll_sum": 1.060939134855289,
+                "targets": 2,
+                "nll": 0.5304695674276445
+              }
+            ]
+          },
+          "generation": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                0,
+                17,
+                2,
+                0
+              ],
+              [
+                0,
+                67,
+                2,
+                0
+              ],
+              [
+                0,
+                14,
+                2,
+                0
+              ]
+            ],
+            "accuracy": 0.6634615384615384,
+            "class_f1": [
+              0.0,
+              0.8023952095808383,
+              0.18181818181818182
+            ],
+            "macro_f1": 0.32807113046634,
+            "valid_label_rate": 1.0,
+            "eos_stop_rate": 1.0
+          },
+          "constrained": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -1.5615665847581113,
+                  -0.6590014081884874,
+                  -1.3471740416862303
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "candidate_logp": [
+                  -1.8334024985379074,
+                  -0.5256017278152285,
+                  -1.4358501051319763
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -2.417569746117806,
+                  -0.20750904513261048,
+                  -2.3815325465402566
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "candidate_logp": [
+                  -1.3945355284377001,
+                  -0.6031418110360391,
+                  -1.6387841506657423
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "candidate_logp": [
+                  -1.7387621352245333,
+                  -0.48077458592888433,
+                  -1.6568773957260419
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "candidate_logp": [
+                  -1.5674926760257222,
+                  -0.8400338259234559,
+                  -1.060939134855289
+                ],
+                "prediction": "no impact"
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                0,
+                17,
+                2,
+                0
+              ],
+              [
+                0,
+                67,
+                2,
+                0
+              ],
+              [
+                0,
+                14,
+                2,
+                0
+              ]
+            ],
+            "accuracy": 0.6634615384615384,
+            "class_f1": [
+              0.0,
+              0.8023952095808383,
+              0.18181818181818182
+            ],
+            "macro_f1": 0.32807113046634,
+            "valid_label_rate": 1.0
+          }
+        }
+      },
+      {
+        "id": "full-29",
+        "name": "full / seed 29",
+        "history": [
+          {
+            "step": 0,
+            "development_response": {
+              "nll_sum": 1948.6253871917725,
+              "targets": 279,
+              "nll": 6.9843203841999015,
+              "records": 105
+            }
+          },
+          {
+            "step": 50,
+            "development_response": {
+              "nll_sum": 96.60702789493371,
+              "targets": 279,
+              "nll": 0.346261748727361,
+              "records": 105
+            }
+          },
+          {
+            "step": 100,
+            "development_response": {
+              "nll_sum": 94.83962826729112,
+              "targets": 279,
+              "nll": 0.33992698303688573,
+              "records": 105
+            }
+          },
+          {
+            "step": 150,
+            "development_response": {
+              "nll_sum": 97.3215787858062,
+              "targets": 279,
+              "nll": 0.3488228630315634,
+              "records": 105
+            }
+          },
+          {
+            "step": 200,
+            "development_response": {
+              "nll_sum": 160.86127842556743,
+              "targets": 279,
+              "nll": 0.5765637219554388,
+              "records": 105
+            }
+          }
+        ],
+        "selected_step": 100,
+        "evaluation": {
+          "response": {
+            "nll_sum": 93.69095108823967,
+            "targets": 277,
+            "nll": 0.3382344804629591,
+            "records": 104,
+            "rows": [
+              {
+                "id": 0,
+                "nll_sum": 0.3336986713693477,
+                "targets": 3,
+                "nll": 0.11123289045644924
+              },
+              {
+                "id": 1,
+                "nll_sum": 2.3808209573908243,
+                "targets": 2,
+                "nll": 1.1904104786954122
+              },
+              {
+                "id": 2,
+                "nll_sum": 0.26173943356843665,
+                "targets": 3,
+                "nll": 0.08724647785614555
+              },
+              {
+                "id": 5,
+                "nll_sum": 1.8971439558081329,
+                "targets": 2,
+                "nll": 0.9485719779040664
+              },
+              {
+                "id": 6,
+                "nll_sum": 1.864500398922246,
+                "targets": 2,
+                "nll": 0.932250199461123
+              },
+              {
+                "id": 10,
+                "nll_sum": 2.253552994225174,
+                "targets": 2,
+                "nll": 1.126776497112587
+              }
+            ]
+          },
+          "generation": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                0,
+                19,
+                0,
+                0
+              ],
+              [
+                0,
+                69,
+                0,
+                0
+              ],
+              [
+                0,
+                16,
+                0,
+                0
+              ]
+            ],
+            "accuracy": 0.6634615384615384,
+            "class_f1": [
+              0.0,
+              0.7976878612716763,
+              0.0
+            ],
+            "macro_f1": 0.26589595375722547,
+            "valid_label_rate": 1.0,
+            "eos_stop_rate": 1.0
+          },
+          "constrained": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -1.8064594809547998,
+                  -0.3336986713693477,
+                  -2.180350318492856
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "candidate_logp": [
+                  -1.7815712326555513,
+                  -0.30890382488723844,
+                  -2.3808233415766153
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -2.03429490304552,
+                  -0.26173967181239277,
+                  -2.3623501605470665
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "candidate_logp": [
+                  -1.8971439558081329,
+                  -0.2847186839208007,
+                  -2.4003017200157046
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "candidate_logp": [
+                  -1.864500398922246,
+                  -0.2868686292786151,
+                  -2.4312408638943452
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "candidate_logp": [
+                  -1.8626735265133902,
+                  -0.30979072232730687,
+                  -2.253552994225174
+                ],
+                "prediction": "no impact"
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                0,
+                19,
+                0,
+                0
+              ],
+              [
+                0,
+                69,
+                0,
+                0
+              ],
+              [
+                0,
+                16,
+                0,
+                0
+              ]
+            ],
+            "accuracy": 0.6634615384615384,
+            "class_f1": [
+              0.0,
+              0.7976878612716763,
+              0.0
+            ],
+            "macro_f1": 0.26589595375722547,
+            "valid_label_rate": 1.0
+          }
+        }
+      },
+      {
+        "id": "full-43",
+        "name": "full / seed 43",
+        "history": [
+          {
+            "step": 0,
+            "development_response": {
+              "nll_sum": 1948.6253871917725,
+              "targets": 279,
+              "nll": 6.9843203841999015,
+              "records": 105
+            }
+          },
+          {
+            "step": 50,
+            "development_response": {
+              "nll_sum": 94.65602118458628,
+              "targets": 279,
+              "nll": 0.33926889313471786,
+              "records": 105
+            }
+          },
+          {
+            "step": 100,
+            "development_response": {
+              "nll_sum": 93.47970694579635,
+              "targets": 279,
+              "nll": 0.33505271306737044,
+              "records": 105
+            }
+          },
+          {
+            "step": 150,
+            "development_response": {
+              "nll_sum": 91.25295970062507,
+              "targets": 279,
+              "nll": 0.3270715401456096,
+              "records": 105
+            }
+          },
+          {
+            "step": 200,
+            "development_response": {
+              "nll_sum": 87.28205972641445,
+              "targets": 279,
+              "nll": 0.3128389237505894,
+              "records": 105
+            }
+          }
+        ],
+        "selected_step": 200,
+        "evaluation": {
+          "response": {
+            "nll_sum": 86.15652726032931,
+            "targets": 277,
+            "nll": 0.31103439444162206,
+            "records": 104,
+            "rows": [
+              {
+                "id": 0,
+                "nll_sum": 1.3697261603665538,
+                "targets": 3,
+                "nll": 0.4565753867888513
+              },
+              {
+                "id": 1,
+                "nll_sum": 1.709035873047469,
+                "targets": 2,
+                "nll": 0.8545179365237345
+              },
+              {
+                "id": 2,
+                "nll_sum": 0.1254539708243101,
+                "targets": 3,
+                "nll": 0.04181799027477003
+              },
+              {
+                "id": 5,
+                "nll_sum": 1.4537190167829976,
+                "targets": 2,
+                "nll": 0.7268595083914988
+              },
+              {
+                "id": 6,
+                "nll_sum": 0.9479195945314132,
+                "targets": 2,
+                "nll": 0.4739597972657066
+              },
+              {
+                "id": 10,
+                "nll_sum": 0.8129523383613559,
+                "targets": 2,
+                "nll": 0.40647616918067797
+              }
+            ]
+          },
+          "generation": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "ids": [
+                  2762,
+                  0
+                ],
+                "text": " positive",
+                "unmapped_ids": [],
+                "prediction": "positive",
+                "eos_stopped": true
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "ids": [
+                  642,
+                  3486,
+                  0
+                ],
+                "text": " no impact",
+                "unmapped_ids": [],
+                "prediction": "no impact",
+                "eos_stopped": true
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "ids": [
+                  4016,
+                  0
+                ],
+                "text": " negative",
+                "unmapped_ids": [],
+                "prediction": "negative",
+                "eos_stopped": true
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "ids": [
+                  2762,
+                  0
+                ],
+                "text": " positive",
+                "unmapped_ids": [],
+                "prediction": "positive",
+                "eos_stopped": true
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                3,
+                12,
+                4,
+                0
+              ],
+              [
+                4,
+                56,
+                9,
+                0
+              ],
+              [
+                1,
+                7,
+                8,
+                0
+              ]
+            ],
+            "accuracy": 0.6442307692307693,
+            "class_f1": [
+              0.2222222222222222,
+              0.7777777777777778,
+              0.43243243243243246
+            ],
+            "macro_f1": 0.4774774774774775,
+            "valid_label_rate": 1.0,
+            "eos_stop_rate": 1.0
+          },
+          "constrained": {
+            "rows": [
+              {
+                "id": 0,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -1.2556367927463725,
+                  -1.3697261603665538,
+                  -0.7883307762967888
+                ],
+                "prediction": "positive"
+              },
+              {
+                "id": 1,
+                "gold": "positive",
+                "candidate_logp": [
+                  -1.6613486991591344,
+                  -0.4687959861839772,
+                  -1.7090454097906331
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 2,
+                "gold": "no impact",
+                "candidate_logp": [
+                  -2.823301073833136,
+                  -0.1254539708243101,
+                  -2.8777091496922367
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 5,
+                "gold": "negative",
+                "candidate_logp": [
+                  -1.4537190167829976,
+                  -0.5402834689921292,
+                  -1.7233201254930464
+                ],
+                "prediction": "no impact"
+              },
+              {
+                "id": 6,
+                "gold": "negative",
+                "candidate_logp": [
+                  -0.9479195945314132,
+                  -1.2780674417881528,
+                  -1.1239052935270593
+                ],
+                "prediction": "negative"
+              },
+              {
+                "id": 10,
+                "gold": "positive",
+                "candidate_logp": [
+                  -1.1230846613907488,
+                  -1.4953084413937177,
+                  -0.8129523383613559
+                ],
+                "prediction": "positive"
+              }
+            ],
+            "gold_order": [
+              "negative",
+              "no impact",
+              "positive"
+            ],
+            "prediction_order": [
+              "negative",
+              "no impact",
+              "positive",
+              "invalid"
+            ],
+            "confusion": [
+              [
+                3,
+                12,
+                4,
+                0
+              ],
+              [
+                4,
+                56,
+                9,
+                0
+              ],
+              [
+                1,
+                7,
+                8,
+                0
+              ]
+            ],
+            "accuracy": 0.6442307692307693,
+            "class_f1": [
+              0.2222222222222222,
+              0.7777777777777778,
+              0.43243243243243246
+            ],
+            "macro_f1": 0.4774774774774775,
+            "valid_label_rate": 1.0
+          }
+        }
+      }
+    ]
+  }
+}

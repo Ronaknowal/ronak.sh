@@ -1,0 +1,30 @@
+{
+  "scope": "Root complementary private runtime review; native geometry and supported edits, not scientific programme replay",
+  "checks": [
+    {
+      "name": "M33 nuisance initial visible text",
+      "text": "0\n40\n-0.681\n0.08\nObjective J (bits)\nComplete update index\nSolid: informative start\nDashed: symmetric start\nRing: selected current state\n\ninformative, after 40 updates: current q(Z|X)\n\nX\tZ0\tZ1\n00\t0.994252\t0.005747954\n01\t0.994252\t0.005747954\n10\t0.005747954\t0.994252\n11\t0.005747954\t0.994252\n\n○ informative, after 40 updates: decoder Z0, marginal 0.5\n\nY0 = 0.8954016\nY1 = 0.1045984\n\n◇ informative, after 40 updates: decoder Z1, marginal 0.5\n\nY0 = 0.1045984\nY1 = 0.8954016\nRate\n0.9489508\nRelevance\n0.5165952\nObjective\n-0.6008346\n\nsymmetric, after 40 updates: current q(Z|X)\n\nX\tZ0\tZ1\n00\t0.5\t0.5\n01\t0.5\t0.5\n10\t0.5\t0.5\n11\t0.5\t0.5\n\n○ symmetric, after 40 updates: decoder Z0, marginal 0.5\n\nY0 = 0.5\nY1 = 0.5\n\n◇ symmetric, after 40 updates: decoder Z1, marginal 0.5\n\nY0 = 0.5\nY1 = 0.5\nRate\n0\nRelevance\n0\nObjective\n0\nCurrent t=0: rate\n0.2780719\nCurrent relevance\n0\nCurrent objective J\n0.2780719\nFinite-update starting encoder\nsignal\nsymmetric\nnuisance\nFinite-update beta:\n3\nFinite-update label error:\n0.1\nCurrent finite-update index:\n0\nTraced input row\n00\n01\n10\n11\nPrevious update\nNext update\nReset finite-update investigation"
+    }
+  ],
+  "captures": [
+    {
+      "id": "M33",
+      "file": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r1/nuisance-start.jpg",
+      "offset": 0,
+      "viewport": {
+        "width": 1366,
+        "height": 1100
+      },
+      "root": "16px",
+      "figure": {
+        "x": 301.296875,
+        "y": 29.8125,
+        "width": 760,
+        "height": 1611.046875
+      },
+      "sha256": "6dff34fbd814e8421347edcd3ff68df2d7e72ad0a6a410e02e36346381375261"
+    }
+  ],
+  "status": "Acquisition interrupted",
+  "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-mechanism=\"M41\"]').getByRole('button', { name: /Apply/ })\u001b[22m\n\n    at C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\mi-root-complement-r1.cjs:14:175"
+}

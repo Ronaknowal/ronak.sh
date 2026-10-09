@@ -1,0 +1,112 @@
+{
+  "revision": "beginner-first follow-up",
+  "checkedAt": "2026-09-28T16:54:05.803Z",
+  "status": "Source frozen after author image review and focused wrapping/grid fixes; final production visual acceptance pending",
+  "sources": {
+    "src/learn/data/topics/byte-level-tokenization.jsx": "822f22264b6040c743f5e43947a3f479b5ace6b7e9505eab72c4e8871eb5cd8b",
+    "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx": "c5c80b077ee117d589745e77f14a57eaeb8a60b4a061fa0a5030768cebdc979d",
+    "src/learn/components/lesson-labs/byte-tokenization-labs.css": "51036aae87d935239fad27cd09c5b3ad9e91f1fc9aabbd8cc35ced994031aa1b"
+  },
+  "reusedNumericalEvidence": [
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py",
+      "sha256": "086862e9a9fb0db1bb9a76f66e07ac2c5fb4344bd75708e46e940213932be8bf"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py",
+      "sha256": "0a25011f005042c45965cf93e4d7825d5e4d8449c9470f7519cfdd705487cd12"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_patches.py",
+      "sha256": "ca5d1ecf947365bc8147d8e89e172649165ebcc8cc89d6c9349473b0e27a148e"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py",
+      "sha256": "1fe7bbeb0376588e78ffc3dacfae1e34a845a3cef8864ab33a208b32de7e5206"
+    },
+    {
+      "path": "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py",
+      "sha256": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4"
+    },
+    {
+      "path": "scripts/verify-byte-tokenization.py",
+      "sha256": "70453327bf11619d427aae8b7885292d3de0ee6dd74a5d3bf46f6f4cd00cb40b"
+    },
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "scripts/verify-byte-tokenization-model.mjs",
+      "sha256": "80cb5e14c2e3250e5e6a433b2b35a6b807b86d8c4d70a7d8374ac2d7f6f03846"
+    }
+  ],
+  "checks": {
+    "jsxParse": "both files passed",
+    "utf8": "C3 A9 => é; payload 3*64+41=233",
+    "mergeTrace": "four supplied rules from unchanged byte_bpe_bridge.py; no inferred trained vocabulary",
+    "loss": [
+      0.10536051565782628,
+      2.3025850929940455
+    ],
+    "entropy": [
+      1,
+      0.08079313589591118
+    ],
+    "pooling": [
+      1,
+      4.666666666666667
+    ],
+    "bitsPerByte": 1.4426950408889634
+  },
+  "visuals": [
+    "TextStorageFigure",
+    "Utf8PackingFigure",
+    "ByteMergeFigure",
+    "ByteTargetsFigure",
+    "ByteUncertaintyFigure",
+    "BytePoolingFigure",
+    "BytePipelineFigure identity colouring",
+    "UnicodeByteLab identity colouring"
+  ],
+  "limits": "No new training execution, no new browser acceptance, no learner testing. Existing native evidence is reused only for unchanged source and semantics.",
+  "authorVisualReview": {
+    "viewed": [
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-0-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-0-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-2-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-2-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-3-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-3-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-4-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-4-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-7-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-7-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-8-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-8-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-9-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-9-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-14-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-figure-14-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-0-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-0-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-0-changed.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-1-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-1-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-1-changed.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-2-desktop.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-2-320.png",
+      "scratch/tokenization-intuition/early-browser/byte-level-tokenization-token-free-models-2-changed.png"
+    ],
+    "findingsFixed": [
+      "Grouped UTF8 byte pairs to prevent lone A9 wrapping beneath label and C3",
+      "Causal grids use equal16px cells; largest149px and smallest54px outer width at default3patches"
+    ],
+    "pending": [
+      "Final production narrow packing figure",
+      "Final production common-cell patch grids and interaction",
+      "Root final build/browser campaign"
+    ],
+    "observation": "All other inspected diagrams and lab states remain readable; no new numerical model change"
+  }
+}

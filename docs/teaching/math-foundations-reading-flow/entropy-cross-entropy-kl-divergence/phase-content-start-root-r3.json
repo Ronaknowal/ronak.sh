@@ -1,0 +1,131 @@
+{
+  "beforeSelected": {
+    "revision": 2,
+    "deliveryMode": "full",
+    "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+    "content": {
+      "status": "complete",
+      "completedAt": "2026-09-21T15:16:46.780Z",
+      "manuscript": "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+      "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+      "files": {
+        "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx": "20dc4ed0f32a6cf0811af9809f68e48a63d28aa0eaff0eb7fb688f70d93d5a1b",
+        "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+        "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js": "52644d709aa664c88f5760fa0d7095ea16b3a5b58605194fb48192c4aeb4cdee",
+        "src/learn/data/entropy-information-examples.js": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163"
+      }
+    },
+    "implementation": {
+      "status": "complete",
+      "completedAt": "2026-09-21T15:16:46.783Z",
+      "reviewedFiles": {
+        "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx": "20dc4ed0f32a6cf0811af9809f68e48a63d28aa0eaff0eb7fb688f70d93d5a1b",
+        "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+        "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+        "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+        "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+        "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+        "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+        "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+        "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+        "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+        "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+        "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+        "src/learn/components/lesson-labs/EntropyInformationLabs.jsx": "4cec10829bb5540e148ef4c0c1760783ae87b18f7ba655a5f47ae69706d83a0b",
+        "src/learn/data/entropy-information-models.js": "519d1fff3ae48c1cd36e11a3bce3a0e31880b8286ca8188faddfe958c0ccf49f",
+        "src/learn/components/lesson-labs/entropy-information-labs.css": "2b370e2ac65d7db1a3175bad05e1067716dbb870c0d34b8e9fff73d8c3d59f4d",
+        "src/learn/data/entropy-information-examples.js": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163",
+        "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js": "52644d709aa664c88f5760fa0d7095ea16b3a5b58605194fb48192c4aeb4cdee"
+      }
+    },
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/ENTROPY-CROSS-ENTROPY-KL-VERIFICATION.md",
+        "legacyReview": true
+      }
+    ],
+    "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+  },
+  "afterSelected": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "record": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-accepted-root-r2.json",
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "full",
+        "content": {
+          "status": "complete"
+        },
+        "implementation": {
+          "status": "complete"
+        },
+        "record": "docs/teaching/ENTROPY-CROSS-ENTROPY-KL-VERIFICATION.md",
+        "legacyReview": true
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.780Z",
+          "manuscript": "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md",
+          "files": {
+            "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx": "20dc4ed0f32a6cf0811af9809f68e48a63d28aa0eaff0eb7fb688f70d93d5a1b",
+            "docs/teaching/LIVE-EXPLORATION-FOUNDATIONS.md": "63d10df4785f30de35543833be8907a7ea7f9dbe4286434353e7571cc6fd23bf",
+            "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js": "52644d709aa664c88f5760fa0d7095ea16b3a5b58605194fb48192c4aeb4cdee",
+            "src/learn/data/entropy-information-examples.js": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:46.783Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx": "20dc4ed0f32a6cf0811af9809f68e48a63d28aa0eaff0eb7fb688f70d93d5a1b",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/EntropyInformationLabs.jsx": "4cec10829bb5540e148ef4c0c1760783ae87b18f7ba655a5f47ae69706d83a0b",
+            "src/learn/data/entropy-information-models.js": "519d1fff3ae48c1cd36e11a3bce3a0e31880b8286ca8188faddfe958c0ccf49f",
+            "src/learn/components/lesson-labs/entropy-information-labs.css": "2b370e2ac65d7db1a3175bad05e1067716dbb870c0d34b8e9fff73d8c3d59f4d",
+            "src/learn/data/entropy-information-examples.js": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163",
+            "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js": "52644d709aa664c88f5760fa0d7095ea16b3a5b58605194fb48192c4aeb4cdee"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      }
+    ],
+    "content": {
+      "status": "in-progress"
+    },
+    "implementation": {
+      "status": "not-started"
+    },
+    "nextAction": "Complete the manuscript and visual specifications from independently accepted design-r2; preserve eleven original programmes and add the scoped library/data routes and independent repair tasks. Different entire content review precedes private runtime."
+  },
+  "ledgerBefore": "749eae2aa8cb79e75a8e69d00ed9295b879da6afc04ba20e28311f094f822b8f",
+  "ledgerAfter": "1f4d479d88e6ee87d79968482324e5c58f72f5bc1cfe0f69286c24f4725f47cb",
+  "foreignRowsPreserved": 234,
+  "acceptance": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-accepted-root-r2.json",
+    "sha256": "0c0514e3b683e2eb0d0b62cc19fa84a355ecc2014b28c476827aecfda3234d66"
+  }
+}

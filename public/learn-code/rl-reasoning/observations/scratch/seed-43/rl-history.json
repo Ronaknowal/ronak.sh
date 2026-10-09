@@ -1,0 +1,3522 @@
+[
+  {
+    "step": 1,
+    "loss": -0.40825390815734863,
+    "gradient_norm": 0.860306441783905,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "5-5-4",
+      "ids": [
+        91,
+        10,
+        92,
+        40,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 40",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 40,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003122795606032014,
+      -0.0013898485340178013,
+      -0.00031859567388892174,
+      -0.004978284705430269,
+      -0.00026806574896909297
+    ]
+  },
+  {
+    "step": 2,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-7-3",
+      "ids": [
+        91,
+        10,
+        92,
+        30,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 30",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 30,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003106111544184387,
+      -0.0014605579199269414,
+      -0.0003240775258745998,
+      -0.005768082570284605,
+      -0.0002890407631639391
+    ]
+  },
+  {
+    "step": 3,
+    "loss": -0.11204641312360764,
+    "gradient_norm": 0.5578596591949463,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "8-9-1",
+      "ids": [
+        91,
+        17,
+        92,
+        17,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 17; answer = 17",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 17,
+      "answer": 17,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003122795606032014,
+      -0.003062798175960779,
+      -0.00028308198670856655,
+      -0.006002968642860651,
+      -0.00027021096320822835
+    ]
+  },
+  {
+    "step": 4,
+    "loss": -0.18749451637268066,
+    "gradient_norm": 1.3020786046981812,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 319,
+    "sample": {
+      "id": "5-8-4",
+      "ids": [
+        91,
+        13,
+        92,
+        52,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 13; answer = 52",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 13,
+      "answer": 52,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003106111544184387,
+      -0.0019938128534704447,
+      -0.00020847532141488045,
+      -0.01085908617824316,
+      -0.0002499506517779082
+    ]
+  },
+  {
+    "step": 5,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-9-4",
+      "ids": [
+        91,
+        11,
+        92,
+        44,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 44",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 44,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003135904553346336,
+      -0.0016763457097113132,
+      -0.00024375328212045133,
+      -0.006703744642436504,
+      -0.00022420754248742014
+    ]
+  },
+  {
+    "step": 6,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-3-5",
+      "ids": [
+        91,
+        6,
+        92,
+        30,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 6; answer = 30",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 6,
+      "answer": 30,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00031120702624320984,
+      -0.0033824394922703505,
+      -0.00028796817059628665,
+      -0.009318903088569641,
+      -0.00028224775451235473
+    ]
+  },
+  {
+    "step": 7,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-5-1",
+      "ids": [
+        91,
+        7,
+        92,
+        7,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 7; answer = 7",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 7,
+      "answer": 7,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003093002596870065,
+      -0.0029593980871140957,
+      -0.0002739054325502366,
+      -0.007740030065178871,
+      -0.0003165697562508285
+    ]
+  },
+  {
+    "step": 8,
+    "loss": -0.09526005387306213,
+    "gradient_norm": 0.5317482948303223,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "1-4-2",
+      "ids": [
+        91,
+        5,
+        92,
+        10,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 5; answer = 10",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 5,
+      "answer": 10,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003123987407889217,
+      -0.0029673613607883453,
+      -0.00025293012731708586,
+      -0.003725375747308135,
+      -0.000418575422372669
+    ]
+  },
+  {
+    "step": 9,
+    "loss": -0.08992482721805573,
+    "gradient_norm": 0.5313906669616699,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "0-4-3",
+      "ids": [
+        91,
+        4,
+        92,
+        12,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 4; answer = 12",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 4,
+      "answer": 12,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00032062159152701497,
+      -0.0021261009387671947,
+      -0.00024351492174901068,
+      -0.003017042065039277,
+      -0.00024291902082040906
+    ]
+  },
+  {
+    "step": 10,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "5-8-4",
+      "ids": [
+        91,
+        13,
+        92,
+        52,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 13; answer = 52",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 13,
+      "answer": 52,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00031323294388130307,
+      -0.001960024470463395,
+      -0.00020037073409184813,
+      -0.0093148872256279,
+      -0.0002575780963525176
+    ]
+  },
+  {
+    "step": 11,
+    "loss": -0.06739090383052826,
+    "gradient_norm": 1.093189001083374,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "3-9-5",
+      "ids": [
+        91,
+        12,
+        92,
+        60,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 12; answer = 60",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 12,
+      "answer": 60,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00032026408007368445,
+      -0.0015499495202675462,
+      -0.00022289653134066612,
+      -0.0054933070205152035,
+      -0.00028701478731818497
+    ]
+  },
+  {
+    "step": 12,
+    "loss": -0.5292426943778992,
+    "gradient_norm": 1.3526827096939087,
+    "reward_mean": 0.9375,
+    "mixed_groups": 3,
+    "targets": 320,
+    "sample": {
+      "id": "4-9-5",
+      "ids": [
+        91,
+        13,
+        92,
+        65,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 13; answer = 65",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 13,
+      "answer": 65,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00031990656862035394,
+      -0.001991552533581853,
+      -0.00021038226259406656,
+      -0.008356249891221523,
+      -0.00039402826223522425
+    ]
+  },
+  {
+    "step": 13,
+    "loss": -0.11215663701295853,
+    "gradient_norm": 0.5362668037414551,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "6-6-4",
+      "ids": [
+        91,
+        12,
+        92,
+        48,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 12; answer = 48",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 12,
+      "answer": 48,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00031263710116036236,
+      -0.0007883778307586908,
+      -0.0002097863471135497,
+      -0.005525672342628241,
+      -0.00025006983196362853
+    ]
+  },
+  {
+    "step": 14,
+    "loss": -0.11462115496397018,
+    "gradient_norm": 0.6428059339523315,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "1-4-1",
+      "ids": [
+        91,
+        5,
+        92,
+        5,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 5; answer = 5",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 5,
+      "answer": 5,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003122795606032014,
+      -0.0030062266159802675,
+      -0.0002236116270069033,
+      -0.003657558001577854,
+      -0.00029237763374112546
+    ]
+  },
+  {
+    "step": 15,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "8-8-4",
+      "ids": [
+        91,
+        16,
+        92,
+        64,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 16; answer = 64",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 16,
+      "answer": 64,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00031096869497559965,
+      -0.0016663487767800689,
+      -0.0002579356369096786,
+      -0.01571614295244217,
+      -0.00033182359766215086
+    ]
+  },
+  {
+    "step": 16,
+    "loss": -0.11370795220136642,
+    "gradient_norm": 0.712811291217804,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "2-8-2",
+      "ids": [
+        91,
+        10,
+        92,
+        20,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 20",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 20,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00031740395934320986,
+      -0.001134824356995523,
+      -0.00030501006403937936,
+      -0.007190657779574394,
+      -0.00023505308490712196
+    ]
+  },
+  {
+    "step": 17,
+    "loss": -0.3302168548107147,
+    "gradient_norm": 1.2773913145065308,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "3-6-5",
+      "ids": [
+        91,
+        9,
+        92,
+        45,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 9; answer = 45",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 9,
+      "answer": 45,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.1428571343421936,
+    "sample_logps": [
+      -0.00032026408007368445,
+      -0.0017416798509657383,
+      -0.00034421717282384634,
+      -0.007931641303002834,
+      -0.00032669928623363376
+    ]
+  },
+  {
+    "step": 18,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "1-4-1",
+      "ids": [
+        91,
+        5,
+        92,
+        5,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 5; answer = 5",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 5,
+      "answer": 5,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00031013446277938783,
+      -0.003235821146517992,
+      -0.00021479207498487085,
+      -0.0036011389456689358,
+      -0.0002915434306487441
+    ]
+  },
+  {
+    "step": 19,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "4-7-2",
+      "ids": [
+        91,
+        11,
+        92,
+        22,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 22",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 22,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003079893649555743,
+      -0.002025577938184142,
+      -0.0002805792901199311,
+      -0.007940985262393951,
+      -0.00025054652360267937
+    ]
+  },
+  {
+    "step": 20,
+    "loss": -0.1078726202249527,
+    "gradient_norm": 0.5694032311439514,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "5-6-4",
+      "ids": [
+        91,
+        11,
+        92,
+        44,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 44",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 44,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.000311802898067981,
+      -0.0017642899183556437,
+      -0.000228140561375767,
+      -0.00825552362948656,
+      -0.0002383901592111215
+    ]
+  },
+  {
+    "step": 21,
+    "loss": -0.12602031230926514,
+    "gradient_norm": 0.4280610680580139,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "5-8-1",
+      "ids": [
+        91,
+        13,
+        92,
+        13,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 13; answer = 13",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 13,
+      "answer": 13,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00030298411729745567,
+      -0.0020343814976513386,
+      -0.000198821333469823,
+      -0.00429149204865098,
+      -0.00026770823751576245
+    ]
+  },
+  {
+    "step": 22,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "1-2-5",
+      "ids": [
+        91,
+        3,
+        92,
+        15,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 3; answer = 15",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 3,
+      "answer": 15,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00031132620642893016,
+      -0.004278197418898344,
+      -0.0002450642641633749,
+      -0.004559359047561884,
+      -0.00025197668583132327
+    ]
+  },
+  {
+    "step": 23,
+    "loss": -0.4296608567237854,
+    "gradient_norm": 1.266952633857727,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "2-8-2",
+      "ids": [
+        91,
+        10,
+        92,
+        20,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 20",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 20,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00030655929003842175,
+      -0.0012625826057046652,
+      -0.0003000047872774303,
+      -0.008158097974956036,
+      -0.00023600654094479978
+    ]
+  },
+  {
+    "step": 24,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "0-7-1",
+      "ids": [
+        91,
+        7,
+        92,
+        7,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 7; answer = 7",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 7,
+      "answer": 7,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002972637885250151,
+      -0.0025469979736953974,
+      -0.00024125049822032452,
+      -0.005073055624961853,
+      -0.00030870441696606576
+    ]
+  },
+  {
+    "step": 25,
+    "loss": -0.5179460048675537,
+    "gradient_norm": 1.6407884359359741,
+    "reward_mean": 0.9375,
+    "mixed_groups": 3,
+    "targets": 320,
+    "sample": {
+      "id": "1-2-4",
+      "ids": [
+        91,
+        3,
+        92,
+        12,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 3; answer = 12",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 3,
+      "answer": 12,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00032395837479270995,
+      -0.006226900964975357,
+      -0.0002455409849062562,
+      -0.002724746707826853,
+      -0.0002748588449321687
+    ]
+  },
+  {
+    "step": 26,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-9-5",
+      "ids": [
+        91,
+        11,
+        92,
+        55,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 55",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 55,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002978596603497863,
+      -0.00194110709708184,
+      -0.0002548369811847806,
+      -0.011060829274356365,
+      -0.0002544794406276196
+    ]
+  },
+  {
+    "step": 27,
+    "loss": -0.1837843805551529,
+    "gradient_norm": 0.48464733362197876,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "2-6-5",
+      "ids": [
+        91,
+        8,
+        92,
+        40,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 8; answer = 40",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 8,
+      "answer": 40,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00029225845355540514,
+      -0.0022055604495108128,
+      -0.00019870213873218745,
+      -0.03247641399502754,
+      -0.0002865380665753037
+    ]
+  },
+  {
+    "step": 28,
+    "loss": -0.2632843255996704,
+    "gradient_norm": 1.596995234489441,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "7-9-2",
+      "ids": [
+        91,
+        16,
+        92,
+        32,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 16; answer = 32",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 16,
+      "answer": 32,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00029797881143167615,
+      -0.0012257928028702736,
+      -0.0002335037279408425,
+      -0.0066996002569794655,
+      -0.0002648479712661356
+    ]
+  },
+  {
+    "step": 29,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "0-6-1",
+      "ids": [
+        91,
+        6,
+        92,
+        6,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 6; answer = 6",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 6,
+      "answer": 6,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00029345019720494747,
+      -0.0027497122064232826,
+      -0.00025233422638848424,
+      -0.003932838328182697,
+      -0.00033420699764974415
+    ]
+  },
+  {
+    "step": 30,
+    "loss": -0.0980679839849472,
+    "gradient_norm": 0.691747784614563,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "1-3-1",
+      "ids": [
+        91,
+        4,
+        92,
+        4,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 4; answer = 4",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 4,
+      "answer": 4,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002949994814116508,
+      -0.0031531162094324827,
+      -0.00022349244682118297,
+      -0.004984334111213684,
+      -0.0003110878460574895
+    ]
+  },
+  {
+    "step": 31,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-7-3",
+      "ids": [
+        91,
+        10,
+        92,
+        30,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 30",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 30,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003026265767402947,
+      -0.001479484373703599,
+      -0.00028200942324474454,
+      -0.007410537451505661,
+      -0.00029523781267926097
+    ]
+  },
+  {
+    "step": 32,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "5-5-1",
+      "ids": [
+        91,
+        10,
+        92,
+        10,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 10",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 10,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00029023250681348145,
+      -0.0013306819600984454,
+      -0.0002711643755901605,
+      -0.003175456775352359,
+      -0.0004758894501719624
+    ]
+  },
+  {
+    "step": 33,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "0-6-5",
+      "ids": [
+        91,
+        6,
+        92,
+        30,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 6; answer = 30",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 6,
+      "answer": 30,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00028606137493625283,
+      -0.003107126336544752,
+      -0.00026246439665555954,
+      -0.026953496038913727,
+      -0.0002949994814116508
+    ]
+  },
+  {
+    "step": 34,
+    "loss": -0.30466699600219727,
+    "gradient_norm": 1.2086737155914307,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "1-2-2",
+      "ids": [
+        91,
+        3,
+        92,
+        6,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 3; answer = 6",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 3,
+      "answer": 6,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.1428571343421936,
+    "sample_logps": [
+      -0.00031025364296510816,
+      -0.012424568645656109,
+      -0.00022849810193292797,
+      -0.007664084900170565,
+      -0.0003067976504098624
+    ]
+  },
+  {
+    "step": 35,
+    "loss": -0.42014673352241516,
+    "gradient_norm": 1.4656226634979248,
+    "reward_mean": 0.953125,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "2-5-2",
+      "ids": [
+        91,
+        7,
+        92,
+        14,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 7; answer = 14",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 7,
+      "answer": 14,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00029797881143167615,
+      -0.002686940599232912,
+      -0.00022218143567442894,
+      -0.004359147977083921,
+      -0.0002656822034623474
+    ]
+  },
+  {
+    "step": 36,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "1-3-1",
+      "ids": [
+        91,
+        4,
+        92,
+        4,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 4; answer = 4",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 4,
+      "answer": 4,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00028939827461726964,
+      -0.0030039683915674686,
+      -0.0002217047003796324,
+      -0.005371542181819677,
+      -0.0003133521240670234
+    ]
+  },
+  {
+    "step": 37,
+    "loss": -0.47673261165618896,
+    "gradient_norm": 1.0118391513824463,
+    "reward_mean": 0.953125,
+    "mixed_groups": 3,
+    "targets": 320,
+    "sample": {
+      "id": "1-4-3",
+      "ids": [
+        91,
+        5,
+        92,
+        15,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 5; answer = 15",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 5,
+      "answer": 15,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003097769513260573,
+      -0.004288524389266968,
+      -0.00028153270250186324,
+      -0.005244782194495201,
+      -0.0002450642641633749
+    ]
+  },
+  {
+    "step": 38,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "4-8-5",
+      "ids": [
+        91,
+        12,
+        92,
+        60,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 12; answer = 60",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 12,
+      "answer": 60,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002803409588523209,
+      -0.0009702504030428827,
+      -0.00018368464952800423,
+      -0.00814450066536665,
+      -0.0002686616498976946
+    ]
+  },
+  {
+    "step": 39,
+    "loss": -0.2502968907356262,
+    "gradient_norm": 1.2469362020492554,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 319,
+    "sample": {
+      "id": "0-4-3",
+      "ids": [
+        91,
+        4,
+        92,
+        12,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 4; answer = 12",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 4,
+      "answer": 12,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003051292151212692,
+      -0.002135379472747445,
+      -0.00020859450160060078,
+      -0.002101000864058733,
+      -0.00024530262453481555
+    ]
+  },
+  {
+    "step": 40,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "8-9-1",
+      "ids": [
+        91,
+        17,
+        92,
+        17,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 17; answer = 17",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 17,
+      "answer": 17,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.000285227142740041,
+      -0.0051269009709358215,
+      -0.00024720950750634074,
+      -0.007097034715116024,
+      -0.0002803409588523209
+    ]
+  },
+  {
+    "step": 41,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "0-2-2",
+      "ids": [
+        91,
+        2,
+        92,
+        4,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 2; answer = 4",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 2,
+      "answer": 4,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00030191155383363366,
+      -0.004954323638230562,
+      -0.0003522014303598553,
+      -0.005571551155298948,
+      -0.00032693761750124395
+    ]
+  },
+  {
+    "step": 42,
+    "loss": -0.08849790692329407,
+    "gradient_norm": 1.0219125747680664,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "2-5-1",
+      "ids": [
+        91,
+        7,
+        92,
+        7,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 7; answer = 7",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 7,
+      "answer": 7,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00028236693469807506,
+      -0.002553062280640006,
+      -0.00020966715237591416,
+      -0.004076030571013689,
+      -0.00029476112104021013
+    ]
+  },
+  {
+    "step": 43,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "0-9-2",
+      "ids": [
+        91,
+        9,
+        92,
+        18,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 9; answer = 18",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 9,
+      "answer": 18,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00028689560713246465,
+      -0.0012397230602800846,
+      -0.00020275443966966122,
+      -0.0054257274605333805,
+      -0.0002493547508493066
+    ]
+  },
+  {
+    "step": 44,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-3-1",
+      "ids": [
+        91,
+        5,
+        92,
+        5,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 5; answer = 5",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 5,
+      "answer": 5,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002836778585333377,
+      -0.0023350848350673914,
+      -0.00017629499780014157,
+      -0.004903790075331926,
+      -0.00027926836628466845
+    ]
+  },
+  {
+    "step": 45,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "1-4-4",
+      "ids": [
+        91,
+        5,
+        92,
+        20,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 5; answer = 20",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 5,
+      "answer": 20,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002949994814116508,
+      -0.0031680890824645758,
+      -0.0002944036095868796,
+      -0.006260427180677652,
+      -0.00024625606602057815
+    ]
+  },
+  {
+    "step": 46,
+    "loss": -0.039074357599020004,
+    "gradient_norm": 2.1201510429382324,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "2-2-5",
+      "ids": [
+        91,
+        4,
+        92,
+        20,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 4; answer = 20",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 4,
+      "answer": 20,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.1428571343421936,
+    "sample_logps": [
+      -0.0003060825983993709,
+      -0.002920412225648761,
+      -0.00018261195509694517,
+      -0.08551409095525742,
+      -0.0002562671434134245
+    ]
+  },
+  {
+    "step": 47,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "0-3-4",
+      "ids": [
+        91,
+        3,
+        92,
+        12,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 3; answer = 12",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 3,
+      "answer": 12,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002859421947505325,
+      -0.0018982740584760904,
+      -0.0002037079248111695,
+      -0.002960229991003871,
+      -0.0002658013836480677
+    ]
+  },
+  {
+    "step": 48,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "6-9-4",
+      "ids": [
+        91,
+        15,
+        92,
+        60,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 15; answer = 60",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 15,
+      "answer": 60,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00029237763374112546,
+      -0.001914693508297205,
+      -0.0002687808300834149,
+      -0.022016864269971848,
+      -0.00026723151677288115
+    ]
+  },
+  {
+    "step": 49,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "4-8-1",
+      "ids": [
+        91,
+        12,
+        92,
+        12,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 12; answer = 12",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 12,
+      "answer": 12,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002791491860989481,
+      -0.0009552444680593908,
+      -0.00017188502533826977,
+      -0.0016235039802268147,
+      -0.0003518439189065248
+    ]
+  },
+  {
+    "step": 50,
+    "loss": -0.1556093543767929,
+    "gradient_norm": 1.1245187520980835,
+    "reward_mean": 0.96875,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "1-2-3",
+      "ids": [
+        91,
+        3,
+        92,
+        9,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 3; answer = 9",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 3,
+      "answer": 9,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003333727945573628,
+      -0.0018669809214770794,
+      -0.00022456508304458112,
+      -0.00393806304782629,
+      -0.00021634146105498075
+    ]
+  },
+  {
+    "step": 51,
+    "loss": -0.158577099442482,
+    "gradient_norm": 0.5465261936187744,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "8-9-3",
+      "ids": [
+        91,
+        17,
+        92,
+        51,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 17; answer = 51",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 17,
+      "answer": 51,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.000302030734019354,
+      -0.005596682894974947,
+      -0.0002165798214264214,
+      -0.03535265848040581,
+      -0.00027044929447583854
+    ]
+  },
+  {
+    "step": 52,
+    "loss": -0.11781090497970581,
+    "gradient_norm": 0.6704500317573547,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "2-6-4",
+      "ids": [
+        91,
+        8,
+        92,
+        32,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 8; answer = 32",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 8,
+      "answer": 32,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002862997353076935,
+      -0.0013852057745680213,
+      -0.00016127715934999287,
+      -0.006461797747761011,
+      -0.00026663561584427953
+    ]
+  },
+  {
+    "step": 53,
+    "loss": -0.24027399718761444,
+    "gradient_norm": 1.0222952365875244,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "2-8-1",
+      "ids": [
+        91,
+        10,
+        92,
+        10,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 10",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 10,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.1428571343421936,
+    "sample_logps": [
+      -0.00027724236133508384,
+      -0.0014153235824778676,
+      -0.00029047083808109164,
+      -0.004727496299892664,
+      -0.00045885046711191535
+    ]
+  },
+  {
+    "step": 54,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-6-5",
+      "ids": [
+        91,
+        9,
+        92,
+        45,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 9; answer = 45",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 9,
+      "answer": 45,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002759314374998212,
+      -0.00160624657291919,
+      -0.0002673506969586015,
+      -0.006746490485966206,
+      -0.00032848684350028634
+    ]
+  },
+  {
+    "step": 55,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "6-8-5",
+      "ids": [
+        91,
+        14,
+        92,
+        70,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 14; answer = 70",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 14,
+      "answer": 70,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002719986077863723,
+      -0.003052815329283476,
+      -0.0001967951684491709,
+      -0.022863585501909256,
+      -0.000327652640407905
+    ]
+  },
+  {
+    "step": 56,
+    "loss": -0.3735412061214447,
+    "gradient_norm": 1.1871353387832642,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "7-9-4",
+      "ids": [
+        91,
+        16,
+        92,
+        64,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 16; answer = 64",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 16,
+      "answer": 64,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.1428571343421936,
+    "sample_logps": [
+      -0.00028546550311148167,
+      -0.0013988957507535815,
+      -0.00020692592079285532,
+      -0.03227386623620987,
+      -0.0003175231395289302
+    ]
+  },
+  {
+    "step": 57,
+    "loss": -0.1372300237417221,
+    "gradient_norm": 0.6410334706306458,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "2-9-5",
+      "ids": [
+        91,
+        11,
+        92,
+        55,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 55",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 55,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00027259447961114347,
+      -0.0017258524894714355,
+      -0.00022790218645241112,
+      -0.010984192602336407,
+      -0.00024196557933464646
+    ]
+  },
+  {
+    "step": 58,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "6-9-2",
+      "ids": [
+        91,
+        15,
+        92,
+        30,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 15; answer = 30",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 15,
+      "answer": 30,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00027855331427417696,
+      -0.0018687656847760081,
+      -0.00022480344341602176,
+      -0.019178668037056923,
+      -0.0002798642381094396
+    ]
+  },
+  {
+    "step": 59,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-3-2",
+      "ids": [
+        91,
+        5,
+        92,
+        10,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 5; answer = 10",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 5,
+      "answer": 10,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00027843413408845663,
+      -0.002580647822469473,
+      -0.0001839230244513601,
+      -0.003935925662517548,
+      -0.0004111875023227185
+    ]
+  },
+  {
+    "step": 60,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-5-3",
+      "ids": [
+        91,
+        8,
+        92,
+        24,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 8; answer = 24",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 8,
+      "answer": 24,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002914242504630238,
+      -0.0014854359906166792,
+      -0.0001618731184862554,
+      -0.0026462795212864876,
+      -0.00025078488397412
+    ]
+  },
+  {
+    "step": 61,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-3-2",
+      "ids": [
+        91,
+        5,
+        92,
+        10,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 5; answer = 10",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 5,
+      "answer": 10,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00027414379292167723,
+      -0.0024512740783393383,
+      -0.0001839230244513601,
+      -0.0038750097155570984,
+      -0.000392598332837224
+    ]
+  },
+  {
+    "step": 62,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-9-4",
+      "ids": [
+        91,
+        11,
+        92,
+        44,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 44",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 44,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00027366707217879593,
+      -0.001716570113785565,
+      -0.00020394629973452538,
+      -0.014822120778262615,
+      -0.00020728347590193152
+    ]
+  },
+  {
+    "step": 63,
+    "loss": -0.20566530525684357,
+    "gradient_norm": 1.3517297506332397,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "0-8-4",
+      "ids": [
+        91,
+        8,
+        92,
+        32,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 8; answer = 32",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 8,
+      "answer": 32,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002643712505232543,
+      -0.0020493713673204184,
+      -0.000169382052263245,
+      -0.004933683667331934,
+      -0.00025018901214934886
+    ]
+  },
+  {
+    "step": 64,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-9-5",
+      "ids": [
+        91,
+        12,
+        92,
+        60,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 12; answer = 60",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 12,
+      "answer": 60,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00026306029758416116,
+      -0.0017778557958081365,
+      -0.00018261195509694517,
+      -0.005053485278040171,
+      -0.0002623452164698392
+    ]
+  },
+  {
+    "step": 65,
+    "loss": -0.2983725666999817,
+    "gradient_norm": 2.749241828918457,
+    "reward_mean": 0.953125,
+    "mixed_groups": 3,
+    "targets": 320,
+    "sample": {
+      "id": "0-9-3",
+      "ids": [
+        91,
+        9,
+        92,
+        27,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 9; answer = 27",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 9,
+      "answer": 27,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.1428571343421936,
+    "sample_logps": [
+      -0.0002775999018922448,
+      -0.0013222293928265572,
+      -0.0002029928145930171,
+      -0.0463184118270874,
+      -0.000285227142740041
+    ]
+  },
+  {
+    "step": 66,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "1-3-2",
+      "ids": [
+        91,
+        4,
+        92,
+        8,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 4; answer = 8",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 4,
+      "answer": 8,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002609150833450258,
+      -0.004148093517869711,
+      -0.00017569905321579427,
+      -0.002473986940458417,
+      -0.00023314618738368154
+    ]
+  },
+  {
+    "step": 67,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-2-2",
+      "ids": [
+        91,
+        4,
+        92,
+        8,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 4; answer = 8",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 4,
+      "answer": 8,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0003053675754927099,
+      -0.0020434230100363493,
+      -0.00017629499780014157,
+      -0.003128636162728071,
+      -0.0002356490003876388
+    ]
+  },
+  {
+    "step": 68,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "5-8-3",
+      "ids": [
+        91,
+        13,
+        92,
+        39,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 13; answer = 39",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 13,
+      "answer": 39,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002671123365871608,
+      -0.002292506629601121,
+      -0.00015937011630740017,
+      -0.04797712340950966,
+      -0.00022349244682118297
+    ]
+  },
+  {
+    "step": 69,
+    "loss": -0.25399330258369446,
+    "gradient_norm": 2.1928741931915283,
+    "reward_mean": 0.96875,
+    "mixed_groups": 2,
+    "targets": 320,
+    "sample": {
+      "id": "3-6-3",
+      "ids": [
+        91,
+        9,
+        92,
+        27,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 9; answer = 27",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 9,
+      "answer": 27,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002643712505232543,
+      -0.0022846567444503307,
+      -0.0002460177056491375,
+      -0.04035000503063202,
+      -0.00024423000286333263
+    ]
+  },
+  {
+    "step": 70,
+    "loss": -0.10097621381282806,
+    "gradient_norm": 1.2381274700164795,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "3-7-1",
+      "ids": [
+        91,
+        10,
+        92,
+        10,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 10",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 10,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002506657037883997,
+      -0.004457775037735701,
+      -0.00027092601521871984,
+      -0.001476865611039102,
+      -0.0002812943421304226
+    ]
+  },
+  {
+    "step": 71,
+    "loss": -0.16228443384170532,
+    "gradient_norm": 0.9257850646972656,
+    "reward_mean": 0.984375,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "6-7-1",
+      "ids": [
+        91,
+        13,
+        92,
+        13,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 13; answer = 13",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 13,
+      "answer": 13,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00026174934464506805,
+      -0.0026274940464645624,
+      -0.00015293381875380874,
+      -0.0061592524871230125,
+      -0.00023338454775512218
+    ]
+  },
+  {
+    "step": 72,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-6-5",
+      "ids": [
+        91,
+        9,
+        92,
+        45,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 9; answer = 45",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 9,
+      "answer": 45,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002547178009990603,
+      -0.0022414815612137318,
+      -0.00027926836628466845,
+      -0.007662665098905563,
+      -0.0002795067266561091
+    ]
+  },
+  {
+    "step": 73,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "5-6-1",
+      "ids": [
+        91,
+        11,
+        92,
+        11,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 11",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 11,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002517383254598826,
+      -0.0018167671514675021,
+      -0.0002805792901199311,
+      -0.003331707790493965,
+      -0.00032789100077934563
+    ]
+  },
+  {
+    "step": 74,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-3-1",
+      "ids": [
+        91,
+        6,
+        92,
+        6,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 6; answer = 6",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 6,
+      "answer": 6,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00025388356880284846,
+      -0.005465446040034294,
+      -0.0002172949316445738,
+      -0.007591328117996454,
+      -0.0002208704245276749
+    ]
+  },
+  {
+    "step": 75,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "3-8-5",
+      "ids": [
+        91,
+        11,
+        92,
+        55,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 55",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 55,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002479245886206627,
+      -0.0025178655050694942,
+      -0.00021646064124070108,
+      -0.007577249314635992,
+      -0.00021240839851088822
+    ]
+  },
+  {
+    "step": 76,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "5-6-1",
+      "ids": [
+        91,
+        11,
+        92,
+        11,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 11; answer = 11",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 11,
+      "answer": 11,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002503081923350692,
+      -0.001816648175008595,
+      -0.00027771908207796514,
+      -0.0032745571807026863,
+      -0.0003262225945945829
+    ]
+  },
+  {
+    "step": 77,
+    "loss": -0.17482471466064453,
+    "gradient_norm": 1.3539361953735352,
+    "reward_mean": 0.96875,
+    "mixed_groups": 1,
+    "targets": 320,
+    "sample": {
+      "id": "5-5-2",
+      "ids": [
+        91,
+        10,
+        92,
+        20,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 10; answer = 20",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 10,
+      "answer": 20,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.00025078488397412,
+      -0.0014786511892452836,
+      -0.00024375328212045133,
+      -0.0055653867311775684,
+      -0.0002109781780745834
+    ]
+  },
+  {
+    "step": 78,
+    "loss": -0.36676329374313354,
+    "gradient_norm": 1.9823294878005981,
+    "reward_mean": 0.9375,
+    "mixed_groups": 4,
+    "targets": 320,
+    "sample": {
+      "id": "0-8-5",
+      "ids": [
+        91,
+        8,
+        92,
+        40,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 8; answer = 40",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 8,
+      "answer": 40,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.1428571343421936,
+    "sample_logps": [
+      -0.0002456601650919765,
+      -0.0026138208340853453,
+      -0.00018523407925385982,
+      -0.004864524118602276,
+      -0.0002882065309677273
+    ]
+  },
+  {
+    "step": 79,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "2-6-5",
+      "ids": [
+        91,
+        8,
+        92,
+        40,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 8; answer = 40",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 8,
+      "answer": 40,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002466136065777391,
+      -0.0022753796074539423,
+      -0.00016866691294126213,
+      -0.008840586990118027,
+      -0.0002641328901518136
+    ]
+  },
+  {
+    "step": 80,
+    "loss": -0.0,
+    "gradient_norm": 0.0,
+    "reward_mean": 1.0,
+    "mixed_groups": 0,
+    "targets": 320,
+    "sample": {
+      "id": "1-3-4",
+      "ids": [
+        91,
+        4,
+        92,
+        16,
+        98
+      ],
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "tokens": 5,
+      "text": "sum = 4; answer = 16",
+      "format_valid": true,
+      "terminated": true,
+      "sum": 4,
+      "answer": 16,
+      "sum_correct": true,
+      "product_consistent": true,
+      "answer_correct": true,
+      "derivation_correct": true,
+      "reward": 1
+    },
+    "sample_advantage": 0.0,
+    "sample_logps": [
+      -0.0002489972102921456,
+      -0.004310602322220802,
+      -0.00017474555352237076,
+      -0.0031100972555577755,
+      -0.0001932195882545784
+    ]
+  }
+]

@@ -1,0 +1,1883 @@
+{
+  "topicId": "feature-scaling-encoding-imputation",
+  "reviewer": "/root/ica_normal_integration_review",
+  "recordedOn": "2026-10-09",
+  "scope": "Complete proposed design source identities and protected predecessor equality only; not scientific execution, new content or runtime acceptance.",
+  "packet": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-ready-design.json",
+    "bytes": 4906,
+    "sha256": "78cf04c91795d2b1cbc65e009dd274302f96832ef8a7801a3ecf243340f064cf"
+  },
+  "conditions": [
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-ready-design.json: hash",
+      "passed": true,
+      "actual": "78cf04c91795d2b1cbc65e009dd274302f96832ef8a7801a3ecf243340f064cf",
+      "expected": "78cf04c91795d2b1cbc65e009dd274302f96832ef8a7801a3ecf243340f064cf"
+    },
+    {
+      "name": "seven bound artifacts",
+      "passed": true,
+      "actual": 7,
+      "expected": 7
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/reading-flow-design.md: hash",
+      "passed": true,
+      "actual": "f643f0b1a735e26f20e674f3de917a3f0d6b63ef95504b6c2120f151c9c3418c",
+      "expected": "f643f0b1a735e26f20e674f3de917a3f0d6b63ef95504b6c2120f151c9c3418c"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/reading-flow-design.md: bytes",
+      "passed": true,
+      "actual": 22522,
+      "expected": 22522
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md: hash",
+      "passed": true,
+      "actual": "28bac4300147805992e05c888cdfe693e2961c9a064a864f44f90091f35cd8f1",
+      "expected": "28bac4300147805992e05c888cdfe693e2961c9a064a864f44f90091f35cd8f1"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md: bytes",
+      "passed": true,
+      "actual": 32698,
+      "expected": 32698
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/programmes-practice-and-resources.md: hash",
+      "passed": true,
+      "actual": "71f0ee57f117166796343b3e8d41abff5442146a653935796ed288d15707deeb",
+      "expected": "71f0ee57f117166796343b3e8d41abff5442146a653935796ed288d15707deeb"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/programmes-practice-and-resources.md: bytes",
+      "passed": true,
+      "actual": 33142,
+      "expected": 33142
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/research-and-coverage.md: hash",
+      "passed": true,
+      "actual": "ce2746c8bda627e007c769f1ae05e0383c32f727092fbca33e591704c6727145",
+      "expected": "ce2746c8bda627e007c769f1ae05e0383c32f727092fbca33e591704c6727145"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/research-and-coverage.md: bytes",
+      "passed": true,
+      "actual": 25654,
+      "expected": 25654
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md: hash",
+      "passed": true,
+      "actual": "07efdf3876f1f91b3d86997604537268b09a4da0cd2b4d9f626e6493e5dd41fa",
+      "expected": "07efdf3876f1f91b3d86997604537268b09a4da0cd2b4d9f626e6493e5dd41fa"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md: bytes",
+      "passed": true,
+      "actual": 4298,
+      "expected": 4298
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json: hash",
+      "passed": true,
+      "actual": "fb0d8e8e241f30b5870d09b547a6525d9a096beff6a3bd0f524d4c106e577ee8",
+      "expected": "fb0d8e8e241f30b5870d09b547a6525d9a096beff6a3bd0f524d4c106e577ee8"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json: bytes",
+      "passed": true,
+      "actual": 48017,
+      "expected": 48017
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py: hash",
+      "passed": true,
+      "actual": "4235e304c0ddda0e1d5a4ab9b90300aec4e7166bc80a8070566ba47270bb9e01",
+      "expected": "4235e304c0ddda0e1d5a4ab9b90300aec4e7166bc80a8070566ba47270bb9e01"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py: bytes",
+      "passed": true,
+      "actual": 14176,
+      "expected": 14176
+    },
+    {
+      "name": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx: hash",
+      "passed": true,
+      "actual": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1",
+      "expected": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1"
+    },
+    {
+      "name": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx: bytes",
+      "passed": true,
+      "actual": 64405,
+      "expected": 64405
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/topics/feature-scaling-encoding-imputation.jsx: hash",
+      "passed": true,
+      "actual": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1",
+      "expected": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/topics/feature-scaling-encoding-imputation.jsx: bytes",
+      "passed": true,
+      "actual": 64405,
+      "expected": 64405
+    },
+    {
+      "name": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js: hash",
+      "passed": true,
+      "actual": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5",
+      "expected": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5"
+    },
+    {
+      "name": "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js: bytes",
+      "passed": true,
+      "actual": 8461,
+      "expected": 8461
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js: hash",
+      "passed": true,
+      "actual": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5",
+      "expected": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js: bytes",
+      "passed": true,
+      "actual": 8461,
+      "expected": 8461
+    },
+    {
+      "name": "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "src/learn/data/scaling-models.js: hash",
+      "passed": true,
+      "actual": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c",
+      "expected": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c"
+    },
+    {
+      "name": "src/learn/data/scaling-models.js: bytes",
+      "passed": true,
+      "actual": 23135,
+      "expected": 23135
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-models.js: hash",
+      "passed": true,
+      "actual": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c",
+      "expected": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-models.js: bytes",
+      "passed": true,
+      "actual": 23135,
+      "expected": 23135
+    },
+    {
+      "name": "src/learn/data/scaling-models.js: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "src/learn/data/scaling-data.js: hash",
+      "passed": true,
+      "actual": "524b769fa5039fa891467142c816fb438a9a4064ff02b4c8ff81d98ead59575d",
+      "expected": "524b769fa5039fa891467142c816fb438a9a4064ff02b4c8ff81d98ead59575d"
+    },
+    {
+      "name": "src/learn/data/scaling-data.js: bytes",
+      "passed": true,
+      "actual": 36374,
+      "expected": 36374
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-data.js: hash",
+      "passed": true,
+      "actual": "524b769fa5039fa891467142c816fb438a9a4064ff02b4c8ff81d98ead59575d",
+      "expected": "524b769fa5039fa891467142c816fb438a9a4064ff02b4c8ff81d98ead59575d"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-data.js: bytes",
+      "passed": true,
+      "actual": 36374,
+      "expected": 36374
+    },
+    {
+      "name": "src/learn/data/scaling-data.js: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "src/learn/data/scaling-examples.js: hash",
+      "passed": true,
+      "actual": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799",
+      "expected": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799"
+    },
+    {
+      "name": "src/learn/data/scaling-examples.js: bytes",
+      "passed": true,
+      "actual": 9142,
+      "expected": 9142
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-examples.js: hash",
+      "passed": true,
+      "actual": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799",
+      "expected": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-examples.js: bytes",
+      "passed": true,
+      "actual": 9142,
+      "expected": 9142
+    },
+    {
+      "name": "src/learn/data/scaling-examples.js: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingLabs.jsx: hash",
+      "passed": true,
+      "actual": "06b2b1f40d081504dd7e93fad631c3d1c607ad0c2ae00b284c37d015e9452bc6",
+      "expected": "06b2b1f40d081504dd7e93fad631c3d1c607ad0c2ae00b284c37d015e9452bc6"
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingLabs.jsx: bytes",
+      "passed": true,
+      "actual": 32684,
+      "expected": 32684
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingLabs.jsx: hash",
+      "passed": true,
+      "actual": "06b2b1f40d081504dd7e93fad631c3d1c607ad0c2ae00b284c37d015e9452bc6",
+      "expected": "06b2b1f40d081504dd7e93fad631c3d1c607ad0c2ae00b284c37d015e9452bc6"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingLabs.jsx: bytes",
+      "passed": true,
+      "actual": 32684,
+      "expected": 32684
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingLabs.jsx: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingFigures.jsx: hash",
+      "passed": true,
+      "actual": "ae09f99f74e2af36b047470605ff5de9b2023d0beb00e21c0b57cac8107b793d",
+      "expected": "ae09f99f74e2af36b047470605ff5de9b2023d0beb00e21c0b57cac8107b793d"
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingFigures.jsx: bytes",
+      "passed": true,
+      "actual": 41710,
+      "expected": 41710
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingFigures.jsx: hash",
+      "passed": true,
+      "actual": "ae09f99f74e2af36b047470605ff5de9b2023d0beb00e21c0b57cac8107b793d",
+      "expected": "ae09f99f74e2af36b047470605ff5de9b2023d0beb00e21c0b57cac8107b793d"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingFigures.jsx: bytes",
+      "passed": true,
+      "actual": 41710,
+      "expected": 41710
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingFigures.jsx: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingShared.jsx: hash",
+      "passed": true,
+      "actual": "99e25f52c9554f10c2ed44cb40ad080e2d8992863fdf0e200b738d64af4e7030",
+      "expected": "99e25f52c9554f10c2ed44cb40ad080e2d8992863fdf0e200b738d64af4e7030"
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingShared.jsx: bytes",
+      "passed": true,
+      "actual": 10794,
+      "expected": 10794
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingShared.jsx: hash",
+      "passed": true,
+      "actual": "99e25f52c9554f10c2ed44cb40ad080e2d8992863fdf0e200b738d64af4e7030",
+      "expected": "99e25f52c9554f10c2ed44cb40ad080e2d8992863fdf0e200b738d64af4e7030"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingShared.jsx: bytes",
+      "passed": true,
+      "actual": 10794,
+      "expected": 10794
+    },
+    {
+      "name": "src/learn/components/lesson-labs/ScalingShared.jsx: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "src/learn/components/lesson-labs/scaling-labs.css: hash",
+      "passed": true,
+      "actual": "02db05ed2dcd7979d2eac67b9b042181a872242f6e7f0f339facc3fd8803b644",
+      "expected": "02db05ed2dcd7979d2eac67b9b042181a872242f6e7f0f339facc3fd8803b644"
+    },
+    {
+      "name": "src/learn/components/lesson-labs/scaling-labs.css: bytes",
+      "passed": true,
+      "actual": 10216,
+      "expected": 10216
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/scaling-labs.css: hash",
+      "passed": true,
+      "actual": "02db05ed2dcd7979d2eac67b9b042181a872242f6e7f0f339facc3fd8803b644",
+      "expected": "02db05ed2dcd7979d2eac67b9b042181a872242f6e7f0f339facc3fd8803b644"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/scaling-labs.css: bytes",
+      "passed": true,
+      "actual": 10216,
+      "expected": 10216
+    },
+    {
+      "name": "src/learn/components/lesson-labs/scaling-labs.css: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "public/learn-assets/feature-scaling/penguins.csv: hash",
+      "passed": true,
+      "actual": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "expected": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "name": "public/learn-assets/feature-scaling/penguins.csv: bytes",
+      "passed": true,
+      "actual": 15586,
+      "expected": 15586
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/public/learn-assets/feature-scaling/penguins.csv: hash",
+      "passed": true,
+      "actual": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "expected": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/public/learn-assets/feature-scaling/penguins.csv: bytes",
+      "passed": true,
+      "actual": 15586,
+      "expected": 15586
+    },
+    {
+      "name": "public/learn-assets/feature-scaling/penguins.csv: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py: hash",
+      "passed": true,
+      "actual": "e6c596d17071d67fc74dc84786a983c4c18c7c9d75e9edd5af763176cc46f479",
+      "expected": "e6c596d17071d67fc74dc84786a983c4c18c7c9d75e9edd5af763176cc46f479"
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py: bytes",
+      "passed": true,
+      "actual": 5239,
+      "expected": 5239
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py: hash",
+      "passed": true,
+      "actual": "e6c596d17071d67fc74dc84786a983c4c18c7c9d75e9edd5af763176cc46f479",
+      "expected": "e6c596d17071d67fc74dc84786a983c4c18c7c9d75e9edd5af763176cc46f479"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py: bytes",
+      "passed": true,
+      "actual": 5239,
+      "expected": 5239
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json: hash",
+      "passed": true,
+      "actual": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f",
+      "expected": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f"
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json: bytes",
+      "passed": true,
+      "actual": 43077,
+      "expected": 43077
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json: hash",
+      "passed": true,
+      "actual": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f",
+      "expected": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json: bytes",
+      "passed": true,
+      "actual": 43077,
+      "expected": 43077
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md: hash",
+      "passed": true,
+      "actual": "f8fb746affc7be2ca03bb2012a7e90b39a50bbd05e56ce3e1aaa30a575ffa3a0",
+      "expected": "f8fb746affc7be2ca03bb2012a7e90b39a50bbd05e56ce3e1aaa30a575ffa3a0"
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md: bytes",
+      "passed": true,
+      "actual": 3321,
+      "expected": 3321
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md: hash",
+      "passed": true,
+      "actual": "f8fb746affc7be2ca03bb2012a7e90b39a50bbd05e56ce3e1aaa30a575ffa3a0",
+      "expected": "f8fb746affc7be2ca03bb2012a7e90b39a50bbd05e56ce3e1aaa30a575ffa3a0"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md: bytes",
+      "passed": true,
+      "actual": 3321,
+      "expected": 3321
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md: hash",
+      "passed": true,
+      "actual": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575",
+      "expected": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575"
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md: bytes",
+      "passed": true,
+      "actual": 44836,
+      "expected": 44836
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/design.md: hash",
+      "passed": true,
+      "actual": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575",
+      "expected": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/design.md: bytes",
+      "passed": true,
+      "actual": 44836,
+      "expected": 44836
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md: hash",
+      "passed": true,
+      "actual": "c786174702fc6f52faf21b26a61bd569824354e657a8abca7d3a017c04f128f0",
+      "expected": "c786174702fc6f52faf21b26a61bd569824354e657a8abca7d3a017c04f128f0"
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md: bytes",
+      "passed": true,
+      "actual": 47557,
+      "expected": 47557
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md: hash",
+      "passed": true,
+      "actual": "c786174702fc6f52faf21b26a61bd569824354e657a8abca7d3a017c04f128f0",
+      "expected": "c786174702fc6f52faf21b26a61bd569824354e657a8abca7d3a017c04f128f0"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md: bytes",
+      "passed": true,
+      "actual": 47557,
+      "expected": 47557
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv: hash",
+      "passed": true,
+      "actual": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "expected": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv: bytes",
+      "passed": true,
+      "actual": 15586,
+      "expected": 15586
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv: hash",
+      "passed": true,
+      "actual": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "expected": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv: bytes",
+      "passed": true,
+      "actual": 15586,
+      "expected": 15586
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md: hash",
+      "passed": true,
+      "actual": "ca5e17f08d3bf249610621b749846d08b3f01df4dbca95c12fb863f0078b3ef0",
+      "expected": "ca5e17f08d3bf249610621b749846d08b3f01df4dbca95c12fb863f0078b3ef0"
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md: bytes",
+      "passed": true,
+      "actual": 17689,
+      "expected": 17689
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md: hash",
+      "passed": true,
+      "actual": "ca5e17f08d3bf249610621b749846d08b3f01df4dbca95c12fb863f0078b3ef0",
+      "expected": "ca5e17f08d3bf249610621b749846d08b3f01df4dbca95c12fb863f0078b3ef0"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md: bytes",
+      "passed": true,
+      "actual": 17689,
+      "expected": 17689
+    },
+    {
+      "name": "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json: hash",
+      "passed": true,
+      "actual": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd",
+      "expected": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd"
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json: bytes",
+      "passed": true,
+      "actual": 1621,
+      "expected": 1621
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json: hash",
+      "passed": true,
+      "actual": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd",
+      "expected": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json: bytes",
+      "passed": true,
+      "actual": 1621,
+      "expected": 1621
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json: hash",
+      "passed": true,
+      "actual": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90",
+      "expected": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90"
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json: bytes",
+      "passed": true,
+      "actual": 2058,
+      "expected": 2058
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json: hash",
+      "passed": true,
+      "actual": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90",
+      "expected": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json: bytes",
+      "passed": true,
+      "actual": 2058,
+      "expected": 2058
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json: hash",
+      "passed": true,
+      "actual": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad",
+      "expected": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad"
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json: bytes",
+      "passed": true,
+      "actual": 1453,
+      "expected": 1453
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json: hash",
+      "passed": true,
+      "actual": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad",
+      "expected": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json: bytes",
+      "passed": true,
+      "actual": 1453,
+      "expected": 1453
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md: hash",
+      "passed": true,
+      "actual": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb",
+      "expected": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb"
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md: bytes",
+      "passed": true,
+      "actual": 1281,
+      "expected": 1281
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md: hash",
+      "passed": true,
+      "actual": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb",
+      "expected": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md: bytes",
+      "passed": true,
+      "actual": 1281,
+      "expected": 1281
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md: hash",
+      "passed": true,
+      "actual": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210",
+      "expected": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210"
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md: bytes",
+      "passed": true,
+      "actual": 4434,
+      "expected": 4434
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md: hash",
+      "passed": true,
+      "actual": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210",
+      "expected": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md: bytes",
+      "passed": true,
+      "actual": 4434,
+      "expected": 4434
+    },
+    {
+      "name": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-models.json: hash",
+      "passed": true,
+      "actual": "2675bbfe221eadbca762d2575b106767317a44f36a1cdaa03e9fc65ba3ff29e9",
+      "expected": "2675bbfe221eadbca762d2575b106767317a44f36a1cdaa03e9fc65ba3ff29e9"
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-models.json: bytes",
+      "passed": true,
+      "actual": 3847,
+      "expected": 3847
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-models.json: hash",
+      "passed": true,
+      "actual": "2675bbfe221eadbca762d2575b106767317a44f36a1cdaa03e9fc65ba3ff29e9",
+      "expected": "2675bbfe221eadbca762d2575b106767317a44f36a1cdaa03e9fc65ba3ff29e9"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-models.json: bytes",
+      "passed": true,
+      "actual": 3847,
+      "expected": 3847
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-models.json: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-native.json: hash",
+      "passed": true,
+      "actual": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea",
+      "expected": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea"
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-native.json: bytes",
+      "passed": true,
+      "actual": 2506,
+      "expected": 2506
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-native.json: hash",
+      "passed": true,
+      "actual": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea",
+      "expected": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-native.json: bytes",
+      "passed": true,
+      "actual": 2506,
+      "expected": 2506
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-native.json: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-data.json: hash",
+      "passed": true,
+      "actual": "79791c5b2d44f96d62f7e89785f25d15e818f1d04ca9c443ede69444ea191d56",
+      "expected": "79791c5b2d44f96d62f7e89785f25d15e818f1d04ca9c443ede69444ea191d56"
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-data.json: bytes",
+      "passed": true,
+      "actual": 1737,
+      "expected": 1737
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-data.json: hash",
+      "passed": true,
+      "actual": "79791c5b2d44f96d62f7e89785f25d15e818f1d04ca9c443ede69444ea191d56",
+      "expected": "79791c5b2d44f96d62f7e89785f25d15e818f1d04ca9c443ede69444ea191d56"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-data.json: bytes",
+      "passed": true,
+      "actual": 1737,
+      "expected": 1737
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-data.json: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-browser.json: hash",
+      "passed": true,
+      "actual": "624a6430bfecb8cacb58aa39a008723a537b6ade074357917be56899d01e64ae",
+      "expected": "624a6430bfecb8cacb58aa39a008723a537b6ade074357917be56899d01e64ae"
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-browser.json: bytes",
+      "passed": true,
+      "actual": 9643,
+      "expected": 9643
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-browser.json: hash",
+      "passed": true,
+      "actual": "624a6430bfecb8cacb58aa39a008723a537b6ade074357917be56899d01e64ae",
+      "expected": "624a6430bfecb8cacb58aa39a008723a537b6ade074357917be56899d01e64ae"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-browser.json: bytes",
+      "passed": true,
+      "actual": 9643,
+      "expected": 9643
+    },
+    {
+      "name": "docs/teaching/evidence/scaling-browser.json: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "scripts/verify-scaling-models.mjs: hash",
+      "passed": true,
+      "actual": "76b24846ea1bbc543ae888c54d6f204529cc30ae1054efb7a554843b23d51066",
+      "expected": "76b24846ea1bbc543ae888c54d6f204529cc30ae1054efb7a554843b23d51066"
+    },
+    {
+      "name": "scripts/verify-scaling-models.mjs: bytes",
+      "passed": true,
+      "actual": 34521,
+      "expected": 34521
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-models.mjs: hash",
+      "passed": true,
+      "actual": "76b24846ea1bbc543ae888c54d6f204529cc30ae1054efb7a554843b23d51066",
+      "expected": "76b24846ea1bbc543ae888c54d6f204529cc30ae1054efb7a554843b23d51066"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-models.mjs: bytes",
+      "passed": true,
+      "actual": 34521,
+      "expected": 34521
+    },
+    {
+      "name": "scripts/verify-scaling-models.mjs: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "scripts/verify-scaling-examples.py: hash",
+      "passed": true,
+      "actual": "03018dc6a6612796c326b3ea0db6013866fa49265523aba5ed6f09560fa948c2",
+      "expected": "03018dc6a6612796c326b3ea0db6013866fa49265523aba5ed6f09560fa948c2"
+    },
+    {
+      "name": "scripts/verify-scaling-examples.py: bytes",
+      "passed": true,
+      "actual": 19755,
+      "expected": 19755
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-examples.py: hash",
+      "passed": true,
+      "actual": "03018dc6a6612796c326b3ea0db6013866fa49265523aba5ed6f09560fa948c2",
+      "expected": "03018dc6a6612796c326b3ea0db6013866fa49265523aba5ed6f09560fa948c2"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-examples.py: bytes",
+      "passed": true,
+      "actual": 19755,
+      "expected": 19755
+    },
+    {
+      "name": "scripts/verify-scaling-examples.py: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "scripts/verify-scaling-data.py: hash",
+      "passed": true,
+      "actual": "7f38fa835590312750c7c1b0c88f0a74f8c97b265641739c18a26ae874e103a1",
+      "expected": "7f38fa835590312750c7c1b0c88f0a74f8c97b265641739c18a26ae874e103a1"
+    },
+    {
+      "name": "scripts/verify-scaling-data.py: bytes",
+      "passed": true,
+      "actual": 24069,
+      "expected": 24069
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-data.py: hash",
+      "passed": true,
+      "actual": "7f38fa835590312750c7c1b0c88f0a74f8c97b265641739c18a26ae874e103a1",
+      "expected": "7f38fa835590312750c7c1b0c88f0a74f8c97b265641739c18a26ae874e103a1"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-data.py: bytes",
+      "passed": true,
+      "actual": 24069,
+      "expected": 24069
+    },
+    {
+      "name": "scripts/verify-scaling-data.py: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "scripts/verify-scaling-browser.cjs: hash",
+      "passed": true,
+      "actual": "3e2809505a35f55ae5191aaef62ff0d63559b28913a551325a5d9a50d4647cab",
+      "expected": "3e2809505a35f55ae5191aaef62ff0d63559b28913a551325a5d9a50d4647cab"
+    },
+    {
+      "name": "scripts/verify-scaling-browser.cjs: bytes",
+      "passed": true,
+      "actual": 46182,
+      "expected": 46182
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-browser.cjs: hash",
+      "passed": true,
+      "actual": "3e2809505a35f55ae5191aaef62ff0d63559b28913a551325a5d9a50d4647cab",
+      "expected": "3e2809505a35f55ae5191aaef62ff0d63559b28913a551325a5d9a50d4647cab"
+    },
+    {
+      "name": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-browser.cjs: bytes",
+      "passed": true,
+      "actual": 46182,
+      "expected": 46182
+    },
+    {
+      "name": "scripts/verify-scaling-browser.cjs: exact preserved bytes",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "selected revision4 row unchanged",
+      "passed": true,
+      "actual": {
+        "revision": 4,
+        "deliveryMode": "full",
+        "record": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-26T16:07:53.480Z",
+          "manuscript": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+          "visualSpecifications": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+          "files": {
+            "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd",
+            "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5",
+            "src/learn/data/scaling-examples.js": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799",
+            "scripts/verify-representation-concept-intuition.mjs": "665d4e670b6977ebc15815db6b352af7cf6f7d95ceb51ee7f98692ff3fd4d14d"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-26T16:12:07.719Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd",
+            "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5",
+            "src/learn/data/scaling-examples.js": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799",
+            "scripts/verify-representation-concept-intuition.mjs": "665d4e670b6977ebc15815db6b352af7cf6f7d95ceb51ee7f98692ff3fd4d14d",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90",
+            "docs/teaching/concept-intuition/integration-checks.json": "2dc722589498e119ce8fc966b5e8866eca48353f8aa736e87f9271a7fc029f1e",
+            "src/learn/components/LessonOpening.jsx": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348",
+            "src/learn/components/LessonGuide.jsx": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb",
+            "src/learn/components/lesson-navigation.js": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b",
+            "src/learn/components/lesson-guide.css": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2",
+            "src/learn/components/TopicContent.jsx": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6",
+            "src/learn/components/content/Prose.jsx": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff",
+            "src/learn/components/content/Headings.jsx": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "8bb65cf49315753531a00f639d497f493c75ac964f722462cfe606f38f3854d2",
+            "src/learn/learning-base.css": "434562e545573a931609a0695c71ac1f309401179b88bda5db086591fe09a919",
+            "src/learn/components/lesson-endings.css": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6",
+            "src/learn/components/content/Code.jsx": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e",
+            "src/learn/components/content/RemoteCodeBlock.jsx": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290",
+            "src/learn/components/content/LessonCodeDownloads.jsx": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720",
+            "src/learn/components/content/code-downloads.js": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d",
+            "src/learn/components/content/lesson-code.css": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283",
+            "src/learn/components/lesson-labs/useLessonViewport.js": "3bca9b88a8c2b10792c493b4410a0531f2e3a015e73a0838facebb692cd54838"
+          },
+          "evidence": {
+            "author": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+            "independent": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+            "browser": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+            "integration": "docs/teaching/concept-intuition/integration-checks.json"
+          },
+          "presentationReviews": [
+            "docs/teaching/lesson-navigation/presentation-review.json",
+            "docs/teaching/lesson-endings/presentation-review.json",
+            "docs/teaching/lesson-code-access/presentation-review.json",
+            "docs/teaching/lesson-code-access/copy-feedback-review.json"
+          ]
+        },
+        "nextAction": "Current concept-by-concept revision is implemented and reviewed. User acceptance remains separate; preserve unchanged numerical evidence and follow the next scoped request.",
+        "previousRevisions": [
+          {
+            "revision": 1,
+            "deliveryMode": "content-first",
+            "record": "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+            "content": {
+              "status": "complete",
+              "manuscript": "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+              "visualSpecifications": "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+              "files": {
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py": "a81c1a030838a87a4d6993ca842a753e5bc21a79066e54c0741797fdb2317a1b",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md": "233f38872a40b907011c6010010a876151d825a43174cbd375593f83d7d667fd",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md": "c7a4f15a216cc140408f559e4325ae3d8f6962bfddaf7ddcd26218e84cb209e9",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md": "389fc4e93f958e0ca819a73ae36bb5e5fb09aa11ce73072572329b2eb07182da",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md": "3729dfb734d3b4a929d7600f5c8db237b2b0e8543e665eb2dea1f9187cc9e91c"
+              },
+              "completedAt": "2026-09-12T12:15:20.861Z",
+              "correctedAt": "2026-09-14T17:26:09.487756+00:00",
+              "corrections": "Phase two appended its implementation section and the disposition of the independent review to the design record. The manuscript, visual specifications, recorded calculations, provenance and dataset are unchanged."
+            },
+            "implementation": {
+              "status": "complete",
+              "reviewedFiles": {
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "22b7fc178c0664a7d87d881d42997f908470c67dffbd25eb3e62f5db8cc43dcb",
+                "src/learn/data/scaling-models.js": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c",
+                "src/learn/data/scaling-data.js": "1f0bc9e1ae81883aa0bccbd0ee3daa1140ce9f87b5847203f1da82efdbf93c04",
+                "src/learn/data/scaling-examples.js": "0ef4de579fe7b3a38a15d10dbc8e6f8265081d6f13a82894cd5d91140aefd2ef",
+                "src/learn/components/lesson-labs/ScalingShared.jsx": "1bf1c4ad6bced33d90ec3c6136ef03ef79311dccf0bce8f7949fcc0c445e8af3",
+                "src/learn/components/lesson-labs/ScalingLabs.jsx": "9ae5d49c4eb0a73d720e19c2dda3dfec0bc76e41348acf2d9362bb46a03ba9be",
+                "src/learn/components/lesson-labs/ScalingFigures.jsx": "c4ba8c21fb3d9f90c0f7e9db6d73db2844023138193ffacc5e4eba4b55cccb19",
+                "src/learn/components/lesson-labs/scaling-labs.css": "aa9ad22ed790347b211c38f8690416dc91c02afc82e5fc686786abce835b6a22",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "8b87cdc8f5f49cdd7036c63f7f56016e97dabfd2006413e77151010b061310b6",
+                "public/learn-assets/feature-scaling/penguins.csv": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+              },
+              "completedAt": "2026-09-14T17:26:09.487756+00:00",
+              "evidence": [
+                "docs/teaching/evidence/scaling-models.json",
+                "docs/teaching/evidence/scaling-native.json",
+                "docs/teaching/evidence/scaling-data.json",
+                "docs/teaching/evidence/scaling-browser.json",
+                "docs/teaching/FEATURE-SCALING-INDEPENDENT-REVIEW.md"
+              ]
+            },
+            "nextAction": "Implementation complete; sequential audit on 16 September repaired exercise precision/range, bounds, category mapping and inclusive tolerances. Continue from the separate audit ledger."
+          },
+          {
+            "revision": 2,
+            "deliveryMode": "full",
+            "record": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+            "content": {
+              "status": "complete",
+              "completedAt": "2026-09-21T15:16:48.600Z",
+              "manuscript": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+              "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+              "files": {
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "9f903641dec12140e18787802f11319359936ab43c4a09c6d7b091406bcacd6c",
+                "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md": "b43c3153ef520427188f57429a56fcbfcf9e3490956db35d72d9fea06d55dc90",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "7d24f3760625e967f383d237bd5a20edc8dcae218aab684eee11c2be7d1b8a40",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md": "ca3d6f43f40aaac866625be19329b27073dee5e6b07eae38ccc29bdf44e329d7",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md": "5dfaee4e1e2d053b8f1fb8b4cd90abaa5e74f294a89e7eaddb79788a7ee0a52f",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md": "810e007194cde52a62db4b6e2c62037618f955cbc63219c4e058318a30967b6f",
+                "src/learn/data/scaling-examples.js": "0ef4de579fe7b3a38a15d10dbc8e6f8265081d6f13a82894cd5d91140aefd2ef"
+              }
+            },
+            "implementation": {
+              "status": "complete",
+              "completedAt": "2026-09-21T15:16:48.604Z",
+              "reviewedFiles": {
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "9f903641dec12140e18787802f11319359936ab43c4a09c6d7b091406bcacd6c",
+                "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+                "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+                "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+                "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+                "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+                "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+                "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+                "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+                "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+                "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+                "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+                "src/learn/components/lesson-labs/ScalingLabs.jsx": "b77cafeb110e92d154372f2921be0989e6011f25e54e531f329de094c782cc97",
+                "src/learn/data/scaling-models.js": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c",
+                "src/learn/data/scaling-data.js": "1f0bc9e1ae81883aa0bccbd0ee3daa1140ce9f87b5847203f1da82efdbf93c04",
+                "src/learn/components/lesson-labs/ScalingFigures.jsx": "c4ba8c21fb3d9f90c0f7e9db6d73db2844023138193ffacc5e4eba4b55cccb19",
+                "src/learn/components/lesson-labs/ScalingShared.jsx": "48ae0461ae9880f200b5403ccc871d66bf9ec69856623c61275f471c955d719a",
+                "src/learn/components/lesson-labs/scaling-labs.css": "aa9ad22ed790347b211c38f8690416dc91c02afc82e5fc686786abce835b6a22",
+                "src/learn/data/scaling-examples.js": "0ef4de579fe7b3a38a15d10dbc8e6f8265081d6f13a82894cd5d91140aefd2ef",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "7d24f3760625e967f383d237bd5a20edc8dcae218aab684eee11c2be7d1b8a40"
+              }
+            },
+            "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+          },
+          {
+            "revision": 3,
+            "deliveryMode": "full",
+            "record": "docs/teaching/implementation-depth/feature-scaling-encoding-imputation.md",
+            "content": {
+              "status": "complete",
+              "completedAt": "2026-09-21T18:52:04.274Z",
+              "manuscript": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+              "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+              "files": {
+                "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md": "b43c3153ef520427188f57429a56fcbfcf9e3490956db35d72d9fea06d55dc90",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md": "810e007194cde52a62db4b6e2c62037618f955cbc63219c4e058318a30967b6f",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md": "5dfaee4e1e2d053b8f1fb8b4cd90abaa5e74f294a89e7eaddb79788a7ee0a52f",
+                "docs/teaching/implementation-depth/feature-scaling-encoding-imputation.md": "3101fccbeb050c3533d7aa71ee2bfcf216cb60ab26c0edba6beec5eb51dc1338",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "7d24f3760625e967f383d237bd5a20edc8dcae218aab684eee11c2be7d1b8a40",
+                "src/learn/data/scaling-examples.js": "c5bd20f01db2d04ef6185621a654dad09f10bd78695eb6b36dc3ee588db60287",
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "2bfac10d285285dde822f13e2017e1e572a8aa4fd17147e6b5195b7e40de5a4c"
+              }
+            },
+            "implementation": {
+              "status": "complete",
+              "completedAt": "2026-09-21T18:52:04.274Z",
+              "reviewedFiles": {
+                "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+                "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+                "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+                "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+                "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+                "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+                "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+                "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+                "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+                "src/learn/components/lesson-labs/ScalingFigures.jsx": "c4ba8c21fb3d9f90c0f7e9db6d73db2844023138193ffacc5e4eba4b55cccb19",
+                "src/learn/components/lesson-labs/ScalingLabs.jsx": "b77cafeb110e92d154372f2921be0989e6011f25e54e531f329de094c782cc97",
+                "src/learn/components/lesson-labs/ScalingShared.jsx": "48ae0461ae9880f200b5403ccc871d66bf9ec69856623c61275f471c955d719a",
+                "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+                "src/learn/components/lesson-labs/scaling-labs.css": "aa9ad22ed790347b211c38f8690416dc91c02afc82e5fc686786abce835b6a22",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "7d24f3760625e967f383d237bd5a20edc8dcae218aab684eee11c2be7d1b8a40",
+                "src/learn/data/scaling-data.js": "1f0bc9e1ae81883aa0bccbd0ee3daa1140ce9f87b5847203f1da82efdbf93c04",
+                "src/learn/data/scaling-examples.js": "c5bd20f01db2d04ef6185621a654dad09f10bd78695eb6b36dc3ee588db60287",
+                "src/learn/data/scaling-models.js": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c",
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "2bfac10d285285dde822f13e2017e1e572a8aa4fd17147e6b5195b7e40de5a4c",
+                "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+              }
+            },
+            "nextAction": "This focused implementation-depth revision is complete with native, independent and production evidence. Read docs/teaching/IMPLEMENTATION-DEPTH-REVIEW.md for broader unresolved coverage; no next-topic queue is implied. User acceptance is separate."
+          }
+        ]
+      },
+      "expected": {
+        "revision": 4,
+        "deliveryMode": "full",
+        "record": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-26T16:07:53.480Z",
+          "manuscript": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+          "visualSpecifications": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+          "files": {
+            "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd",
+            "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5",
+            "src/learn/data/scaling-examples.js": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799",
+            "scripts/verify-representation-concept-intuition.mjs": "665d4e670b6977ebc15815db6b352af7cf6f7d95ceb51ee7f98692ff3fd4d14d"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-26T16:12:07.719Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd",
+            "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5",
+            "src/learn/data/scaling-examples.js": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799",
+            "scripts/verify-representation-concept-intuition.mjs": "665d4e670b6977ebc15815db6b352af7cf6f7d95ceb51ee7f98692ff3fd4d14d",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb",
+            "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90",
+            "docs/teaching/concept-intuition/integration-checks.json": "2dc722589498e119ce8fc966b5e8866eca48353f8aa736e87f9271a7fc029f1e",
+            "src/learn/components/LessonOpening.jsx": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348",
+            "src/learn/components/LessonGuide.jsx": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb",
+            "src/learn/components/lesson-navigation.js": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b",
+            "src/learn/components/lesson-guide.css": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2",
+            "src/learn/components/TopicContent.jsx": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6",
+            "src/learn/components/content/Prose.jsx": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff",
+            "src/learn/components/content/Headings.jsx": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "8bb65cf49315753531a00f639d497f493c75ac964f722462cfe606f38f3854d2",
+            "src/learn/learning-base.css": "434562e545573a931609a0695c71ac1f309401179b88bda5db086591fe09a919",
+            "src/learn/components/lesson-endings.css": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6",
+            "src/learn/components/content/Code.jsx": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e",
+            "src/learn/components/content/RemoteCodeBlock.jsx": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290",
+            "src/learn/components/content/LessonCodeDownloads.jsx": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720",
+            "src/learn/components/content/code-downloads.js": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d",
+            "src/learn/components/content/lesson-code.css": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283",
+            "src/learn/components/lesson-labs/useLessonViewport.js": "3bca9b88a8c2b10792c493b4410a0531f2e3a015e73a0838facebb692cd54838"
+          },
+          "evidence": {
+            "author": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+            "independent": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+            "browser": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+            "integration": "docs/teaching/concept-intuition/integration-checks.json"
+          },
+          "presentationReviews": [
+            "docs/teaching/lesson-navigation/presentation-review.json",
+            "docs/teaching/lesson-endings/presentation-review.json",
+            "docs/teaching/lesson-code-access/presentation-review.json",
+            "docs/teaching/lesson-code-access/copy-feedback-review.json"
+          ]
+        },
+        "nextAction": "Current concept-by-concept revision is implemented and reviewed. User acceptance remains separate; preserve unchanged numerical evidence and follow the next scoped request.",
+        "previousRevisions": [
+          {
+            "revision": 1,
+            "deliveryMode": "content-first",
+            "record": "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+            "content": {
+              "status": "complete",
+              "manuscript": "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+              "visualSpecifications": "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+              "files": {
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py": "a81c1a030838a87a4d6993ca842a753e5bc21a79066e54c0741797fdb2317a1b",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md": "233f38872a40b907011c6010010a876151d825a43174cbd375593f83d7d667fd",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md": "c7a4f15a216cc140408f559e4325ae3d8f6962bfddaf7ddcd26218e84cb209e9",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md": "389fc4e93f958e0ca819a73ae36bb5e5fb09aa11ce73072572329b2eb07182da",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md": "3729dfb734d3b4a929d7600f5c8db237b2b0e8543e665eb2dea1f9187cc9e91c"
+              },
+              "completedAt": "2026-09-12T12:15:20.861Z",
+              "correctedAt": "2026-09-14T17:26:09.487756+00:00",
+              "corrections": "Phase two appended its implementation section and the disposition of the independent review to the design record. The manuscript, visual specifications, recorded calculations, provenance and dataset are unchanged."
+            },
+            "implementation": {
+              "status": "complete",
+              "reviewedFiles": {
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "22b7fc178c0664a7d87d881d42997f908470c67dffbd25eb3e62f5db8cc43dcb",
+                "src/learn/data/scaling-models.js": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c",
+                "src/learn/data/scaling-data.js": "1f0bc9e1ae81883aa0bccbd0ee3daa1140ce9f87b5847203f1da82efdbf93c04",
+                "src/learn/data/scaling-examples.js": "0ef4de579fe7b3a38a15d10dbc8e6f8265081d6f13a82894cd5d91140aefd2ef",
+                "src/learn/components/lesson-labs/ScalingShared.jsx": "1bf1c4ad6bced33d90ec3c6136ef03ef79311dccf0bce8f7949fcc0c445e8af3",
+                "src/learn/components/lesson-labs/ScalingLabs.jsx": "9ae5d49c4eb0a73d720e19c2dda3dfec0bc76e41348acf2d9362bb46a03ba9be",
+                "src/learn/components/lesson-labs/ScalingFigures.jsx": "c4ba8c21fb3d9f90c0f7e9db6d73db2844023138193ffacc5e4eba4b55cccb19",
+                "src/learn/components/lesson-labs/scaling-labs.css": "aa9ad22ed790347b211c38f8690416dc91c02afc82e5fc686786abce835b6a22",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "8b87cdc8f5f49cdd7036c63f7f56016e97dabfd2006413e77151010b061310b6",
+                "public/learn-assets/feature-scaling/penguins.csv": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+              },
+              "completedAt": "2026-09-14T17:26:09.487756+00:00",
+              "evidence": [
+                "docs/teaching/evidence/scaling-models.json",
+                "docs/teaching/evidence/scaling-native.json",
+                "docs/teaching/evidence/scaling-data.json",
+                "docs/teaching/evidence/scaling-browser.json",
+                "docs/teaching/FEATURE-SCALING-INDEPENDENT-REVIEW.md"
+              ]
+            },
+            "nextAction": "Implementation complete; sequential audit on 16 September repaired exercise precision/range, bounds, category mapping and inclusive tolerances. Continue from the separate audit ledger."
+          },
+          {
+            "revision": 2,
+            "deliveryMode": "full",
+            "record": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+            "content": {
+              "status": "complete",
+              "completedAt": "2026-09-21T15:16:48.600Z",
+              "manuscript": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+              "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+              "files": {
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "9f903641dec12140e18787802f11319359936ab43c4a09c6d7b091406bcacd6c",
+                "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md": "b43c3153ef520427188f57429a56fcbfcf9e3490956db35d72d9fea06d55dc90",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "7d24f3760625e967f383d237bd5a20edc8dcae218aab684eee11c2be7d1b8a40",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md": "ca3d6f43f40aaac866625be19329b27073dee5e6b07eae38ccc29bdf44e329d7",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md": "5dfaee4e1e2d053b8f1fb8b4cd90abaa5e74f294a89e7eaddb79788a7ee0a52f",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md": "810e007194cde52a62db4b6e2c62037618f955cbc63219c4e058318a30967b6f",
+                "src/learn/data/scaling-examples.js": "0ef4de579fe7b3a38a15d10dbc8e6f8265081d6f13a82894cd5d91140aefd2ef"
+              }
+            },
+            "implementation": {
+              "status": "complete",
+              "completedAt": "2026-09-21T15:16:48.604Z",
+              "reviewedFiles": {
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "9f903641dec12140e18787802f11319359936ab43c4a09c6d7b091406bcacd6c",
+                "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+                "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+                "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+                "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+                "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+                "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+                "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+                "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+                "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+                "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+                "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+                "src/learn/components/lesson-labs/ScalingLabs.jsx": "b77cafeb110e92d154372f2921be0989e6011f25e54e531f329de094c782cc97",
+                "src/learn/data/scaling-models.js": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c",
+                "src/learn/data/scaling-data.js": "1f0bc9e1ae81883aa0bccbd0ee3daa1140ce9f87b5847203f1da82efdbf93c04",
+                "src/learn/components/lesson-labs/ScalingFigures.jsx": "c4ba8c21fb3d9f90c0f7e9db6d73db2844023138193ffacc5e4eba4b55cccb19",
+                "src/learn/components/lesson-labs/ScalingShared.jsx": "48ae0461ae9880f200b5403ccc871d66bf9ec69856623c61275f471c955d719a",
+                "src/learn/components/lesson-labs/scaling-labs.css": "aa9ad22ed790347b211c38f8690416dc91c02afc82e5fc686786abce835b6a22",
+                "src/learn/data/scaling-examples.js": "0ef4de579fe7b3a38a15d10dbc8e6f8265081d6f13a82894cd5d91140aefd2ef",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "7d24f3760625e967f383d237bd5a20edc8dcae218aab684eee11c2be7d1b8a40"
+              }
+            },
+            "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+          },
+          {
+            "revision": 3,
+            "deliveryMode": "full",
+            "record": "docs/teaching/implementation-depth/feature-scaling-encoding-imputation.md",
+            "content": {
+              "status": "complete",
+              "completedAt": "2026-09-21T18:52:04.274Z",
+              "manuscript": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+              "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+              "files": {
+                "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md": "b43c3153ef520427188f57429a56fcbfcf9e3490956db35d72d9fea06d55dc90",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md": "810e007194cde52a62db4b6e2c62037618f955cbc63219c4e058318a30967b6f",
+                "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md": "5dfaee4e1e2d053b8f1fb8b4cd90abaa5e74f294a89e7eaddb79788a7ee0a52f",
+                "docs/teaching/implementation-depth/feature-scaling-encoding-imputation.md": "3101fccbeb050c3533d7aa71ee2bfcf216cb60ab26c0edba6beec5eb51dc1338",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "7d24f3760625e967f383d237bd5a20edc8dcae218aab684eee11c2be7d1b8a40",
+                "src/learn/data/scaling-examples.js": "c5bd20f01db2d04ef6185621a654dad09f10bd78695eb6b36dc3ee588db60287",
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "2bfac10d285285dde822f13e2017e1e572a8aa4fd17147e6b5195b7e40de5a4c"
+              }
+            },
+            "implementation": {
+              "status": "complete",
+              "completedAt": "2026-09-21T18:52:04.274Z",
+              "reviewedFiles": {
+                "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+                "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+                "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+                "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+                "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+                "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+                "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+                "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+                "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+                "src/learn/components/lesson-labs/ScalingFigures.jsx": "c4ba8c21fb3d9f90c0f7e9db6d73db2844023138193ffacc5e4eba4b55cccb19",
+                "src/learn/components/lesson-labs/ScalingLabs.jsx": "b77cafeb110e92d154372f2921be0989e6011f25e54e531f329de094c782cc97",
+                "src/learn/components/lesson-labs/ScalingShared.jsx": "48ae0461ae9880f200b5403ccc871d66bf9ec69856623c61275f471c955d719a",
+                "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+                "src/learn/components/lesson-labs/scaling-labs.css": "aa9ad22ed790347b211c38f8690416dc91c02afc82e5fc686786abce835b6a22",
+                "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js": "7d24f3760625e967f383d237bd5a20edc8dcae218aab684eee11c2be7d1b8a40",
+                "src/learn/data/scaling-data.js": "1f0bc9e1ae81883aa0bccbd0ee3daa1140ce9f87b5847203f1da82efdbf93c04",
+                "src/learn/data/scaling-examples.js": "c5bd20f01db2d04ef6185621a654dad09f10bd78695eb6b36dc3ee588db60287",
+                "src/learn/data/scaling-models.js": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c",
+                "src/learn/data/topics/feature-scaling-encoding-imputation.jsx": "2bfac10d285285dde822f13e2017e1e572a8aa4fd17147e6b5195b7e40de5a4c",
+                "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+              }
+            },
+            "nextAction": "This focused implementation-depth revision is complete with native, independent and production evidence. Read docs/teaching/IMPLEMENTATION-DEPTH-REVIEW.md for broader unresolved coverage; no next-topic queue is implied. User acceptance is separate."
+          }
+        ]
+      }
+    },
+    {
+      "name": "selected research registry row unchanged",
+      "passed": true,
+      "actual": null,
+      "expected": null
+    },
+    {
+      "name": "fittedStateParity: source literal hash",
+      "passed": true,
+      "actual": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05",
+      "expected": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05"
+    },
+    {
+      "name": "fittedStateParity: output literal hash",
+      "passed": true,
+      "actual": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb",
+      "expected": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb"
+    },
+    {
+      "name": "fittedStateParity: source historical receipt",
+      "passed": true,
+      "actual": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05",
+      "expected": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05"
+    },
+    {
+      "name": "fittedStateParity: stdout historical receipt",
+      "passed": true,
+      "actual": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb",
+      "expected": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb"
+    },
+    {
+      "name": "penguinExperiment: source literal hash",
+      "passed": true,
+      "actual": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94",
+      "expected": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94"
+    },
+    {
+      "name": "penguinExperiment: output literal hash",
+      "passed": true,
+      "actual": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52",
+      "expected": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52"
+    },
+    {
+      "name": "penguinExperiment: source historical receipt",
+      "passed": true,
+      "actual": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94",
+      "expected": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94"
+    },
+    {
+      "name": "penguinExperiment: stdout historical receipt",
+      "passed": true,
+      "actual": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52",
+      "expected": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52"
+    },
+    {
+      "name": "crossFitEncoding: source literal hash",
+      "passed": true,
+      "actual": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252",
+      "expected": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252"
+    },
+    {
+      "name": "crossFitEncoding: output literal hash",
+      "passed": true,
+      "actual": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2",
+      "expected": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2"
+    },
+    {
+      "name": "crossFitEncoding: source historical receipt",
+      "passed": true,
+      "actual": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252",
+      "expected": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252"
+    },
+    {
+      "name": "crossFitEncoding: stdout historical receipt",
+      "passed": true,
+      "actual": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2",
+      "expected": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2"
+    },
+    {
+      "name": "current CRLF CSV identity",
+      "passed": true,
+      "actual": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "expected": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "name": "current CRLF CSV size",
+      "passed": true,
+      "actual": 15586,
+      "expected": 15586
+    },
+    {
+      "name": "exact CRLF-to-LF historical identity",
+      "passed": true,
+      "actual": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "expected": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+    },
+    {
+      "name": "historical normalized LF size",
+      "passed": true,
+      "actual": 15241,
+      "expected": 15241
+    },
+    {
+      "name": "normalized identity equals retained executed-input metadata",
+      "passed": true,
+      "actual": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "expected": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-ready-design.json",
+      "bytes": 4906,
+      "sha256": "78cf04c91795d2b1cbc65e009dd274302f96832ef8a7801a3ecf243340f064cf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/reading-flow-design.md",
+      "bytes": 22522,
+      "sha256": "f643f0b1a735e26f20e674f3de917a3f0d6b63ef95504b6c2120f151c9c3418c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md",
+      "bytes": 32698,
+      "sha256": "28bac4300147805992e05c888cdfe693e2961c9a064a864f44f90091f35cd8f1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/programmes-practice-and-resources.md",
+      "bytes": 33142,
+      "sha256": "71f0ee57f117166796343b3e8d41abff5442146a653935796ed288d15707deeb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/research-and-coverage.md",
+      "bytes": 25654,
+      "sha256": "ce2746c8bda627e007c769f1ae05e0383c32f727092fbca33e591704c6727145"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md",
+      "bytes": 4298,
+      "sha256": "07efdf3876f1f91b3d86997604537268b09a4da0cd2b4d9f626e6493e5dd41fa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+      "bytes": 48017,
+      "sha256": "fb0d8e8e241f30b5870d09b547a6525d9a096beff6a3bd0f524d4c106e577ee8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py",
+      "bytes": 14176,
+      "sha256": "4235e304c0ddda0e1d5a4ab9b90300aec4e7166bc80a8070566ba47270bb9e01"
+    },
+    {
+      "path": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+      "bytes": 64405,
+      "sha256": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+      "bytes": 64405,
+      "sha256": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1"
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js",
+      "bytes": 8461,
+      "sha256": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/curriculum/blueprints/feature-scaling-encoding-imputation.js",
+      "bytes": 8461,
+      "sha256": "21be48c98a0b74a789d8ed302f317b6b1c7db8c831c9f1b2896a1b6a315768a5"
+    },
+    {
+      "path": "src/learn/data/scaling-models.js",
+      "bytes": 23135,
+      "sha256": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-models.js",
+      "bytes": 23135,
+      "sha256": "2016b0426dad0a3c76da8a04dd88ccee56a78c9f75bf81b029007552d56c9d2c"
+    },
+    {
+      "path": "src/learn/data/scaling-data.js",
+      "bytes": 36374,
+      "sha256": "524b769fa5039fa891467142c816fb438a9a4064ff02b4c8ff81d98ead59575d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-data.js",
+      "bytes": 36374,
+      "sha256": "524b769fa5039fa891467142c816fb438a9a4064ff02b4c8ff81d98ead59575d"
+    },
+    {
+      "path": "src/learn/data/scaling-examples.js",
+      "bytes": 9142,
+      "sha256": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/data/scaling-examples.js",
+      "bytes": 9142,
+      "sha256": "6c1268ff53d20a82a82d2dfa473db04d48cab47a5f82cf047efc963bcfe87799"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ScalingLabs.jsx",
+      "bytes": 32684,
+      "sha256": "06b2b1f40d081504dd7e93fad631c3d1c607ad0c2ae00b284c37d015e9452bc6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingLabs.jsx",
+      "bytes": 32684,
+      "sha256": "06b2b1f40d081504dd7e93fad631c3d1c607ad0c2ae00b284c37d015e9452bc6"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ScalingFigures.jsx",
+      "bytes": 41710,
+      "sha256": "ae09f99f74e2af36b047470605ff5de9b2023d0beb00e21c0b57cac8107b793d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingFigures.jsx",
+      "bytes": 41710,
+      "sha256": "ae09f99f74e2af36b047470605ff5de9b2023d0beb00e21c0b57cac8107b793d"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ScalingShared.jsx",
+      "bytes": 10794,
+      "sha256": "99e25f52c9554f10c2ed44cb40ad080e2d8992863fdf0e200b738d64af4e7030"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/ScalingShared.jsx",
+      "bytes": 10794,
+      "sha256": "99e25f52c9554f10c2ed44cb40ad080e2d8992863fdf0e200b738d64af4e7030"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/scaling-labs.css",
+      "bytes": 10216,
+      "sha256": "02db05ed2dcd7979d2eac67b9b042181a872242f6e7f0f339facc3fd8803b644"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/src/learn/components/lesson-labs/scaling-labs.css",
+      "bytes": 10216,
+      "sha256": "02db05ed2dcd7979d2eac67b9b042181a872242f6e7f0f339facc3fd8803b644"
+    },
+    {
+      "path": "public/learn-assets/feature-scaling/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/public/learn-assets/feature-scaling/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py",
+      "bytes": 5239,
+      "sha256": "e6c596d17071d67fc74dc84786a983c4c18c7c9d75e9edd5af763176cc46f479"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/author-calculations.py",
+      "bytes": 5239,
+      "sha256": "e6c596d17071d67fc74dc84786a983c4c18c7c9d75e9edd5af763176cc46f479"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+      "bytes": 43077,
+      "sha256": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/calculated-inputs.json",
+      "bytes": 43077,
+      "sha256": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md",
+      "bytes": 3321,
+      "sha256": "f8fb746affc7be2ca03bb2012a7e90b39a50bbd05e56ce3e1aaa30a575ffa3a0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/data-provenance.md",
+      "bytes": 3321,
+      "sha256": "f8fb746affc7be2ca03bb2012a7e90b39a50bbd05e56ce3e1aaa30a575ffa3a0"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+      "bytes": 44836,
+      "sha256": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/design.md",
+      "bytes": 44836,
+      "sha256": "a094bda844e51b027c7279cb0763655c57418c62b3c5142c7011740b49fdd575"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+      "bytes": 47557,
+      "sha256": "c786174702fc6f52faf21b26a61bd569824354e657a8abca7d3a017c04f128f0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/lesson.md",
+      "bytes": 47557,
+      "sha256": "c786174702fc6f52faf21b26a61bd569824354e657a8abca7d3a017c04f128f0"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+      "bytes": 17689,
+      "sha256": "ca5e17f08d3bf249610621b749846d08b3f01df4dbca95c12fb863f0078b3ef0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/drafts/feature-scaling-encoding-imputation/visual-specifications.md",
+      "bytes": 17689,
+      "sha256": "ca5e17f08d3bf249610621b749846d08b3f01df4dbca95c12fb863f0078b3ef0"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+      "bytes": 1621,
+      "sha256": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/author-checks.json",
+      "bytes": 1621,
+      "sha256": "0d3e6b2ebd5a67c8c2f7ecb3c81718ba4eb532626af757ffc74f323af8159cdd"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+      "bytes": 2058,
+      "sha256": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/browser-checks.json",
+      "bytes": 2058,
+      "sha256": "3706ea9d338a9dfc1511a6b70bc95f0474593705368dbc4b83d3f92f873b0d90"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+      "bytes": 1453,
+      "sha256": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-checks.json",
+      "bytes": 1453,
+      "sha256": "c5967096d37bc1b981c775a29a6d3ef7e87eb5c579806ee168f781233951d0ad"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md",
+      "bytes": 1281,
+      "sha256": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/independent-review.md",
+      "bytes": 1281,
+      "sha256": "fd6b0772f4e7bb82d380d6381858b1f799da77d432e53a9a7b7ce5fcbde856eb"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+      "bytes": 4434,
+      "sha256": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/concept-intuition/feature-scaling-encoding-imputation/review.md",
+      "bytes": 4434,
+      "sha256": "402208743687e06c638d72745793b7bcb405ce5f6e74dd85a5958a2681537210"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-models.json",
+      "bytes": 3847,
+      "sha256": "2675bbfe221eadbca762d2575b106767317a44f36a1cdaa03e9fc65ba3ff29e9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-models.json",
+      "bytes": 3847,
+      "sha256": "2675bbfe221eadbca762d2575b106767317a44f36a1cdaa03e9fc65ba3ff29e9"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-native.json",
+      "bytes": 2506,
+      "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-native.json",
+      "bytes": 2506,
+      "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-data.json",
+      "bytes": 1737,
+      "sha256": "79791c5b2d44f96d62f7e89785f25d15e818f1d04ca9c443ede69444ea191d56"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-data.json",
+      "bytes": 1737,
+      "sha256": "79791c5b2d44f96d62f7e89785f25d15e818f1d04ca9c443ede69444ea191d56"
+    },
+    {
+      "path": "docs/teaching/evidence/scaling-browser.json",
+      "bytes": 9643,
+      "sha256": "624a6430bfecb8cacb58aa39a008723a537b6ade074357917be56899d01e64ae"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/docs/teaching/evidence/scaling-browser.json",
+      "bytes": 9643,
+      "sha256": "624a6430bfecb8cacb58aa39a008723a537b6ade074357917be56899d01e64ae"
+    },
+    {
+      "path": "scripts/verify-scaling-models.mjs",
+      "bytes": 34521,
+      "sha256": "76b24846ea1bbc543ae888c54d6f204529cc30ae1054efb7a554843b23d51066"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-models.mjs",
+      "bytes": 34521,
+      "sha256": "76b24846ea1bbc543ae888c54d6f204529cc30ae1054efb7a554843b23d51066"
+    },
+    {
+      "path": "scripts/verify-scaling-examples.py",
+      "bytes": 19755,
+      "sha256": "03018dc6a6612796c326b3ea0db6013866fa49265523aba5ed6f09560fa948c2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-examples.py",
+      "bytes": 19755,
+      "sha256": "03018dc6a6612796c326b3ea0db6013866fa49265523aba5ed6f09560fa948c2"
+    },
+    {
+      "path": "scripts/verify-scaling-data.py",
+      "bytes": 24069,
+      "sha256": "7f38fa835590312750c7c1b0c88f0a74f8c97b265641739c18a26ae874e103a1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-data.py",
+      "bytes": 24069,
+      "sha256": "7f38fa835590312750c7c1b0c88f0a74f8c97b265641739c18a26ae874e103a1"
+    },
+    {
+      "path": "scripts/verify-scaling-browser.cjs",
+      "bytes": 46182,
+      "sha256": "3e2809505a35f55ae5191aaef62ff0d63559b28913a551325a5d9a50d4647cab"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/original/scripts/verify-scaling-browser.cjs",
+      "bytes": 46182,
+      "sha256": "3e2809505a35f55ae5191aaef62ff0d63559b28913a551325a5d9a50d4647cab"
+    }
+  ],
+  "qualifications": [
+    "No old binder or numerical verifier run.",
+    "No scientific source imported, fitted, executed or rebuilt.",
+    "No native observations or new content/phase acceptance.",
+    "Only this independent-review owner is written."
+  ]
+}

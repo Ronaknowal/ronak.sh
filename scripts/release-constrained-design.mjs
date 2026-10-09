@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+const base='docs/teaching/llm-architecture-training/structured-output-constrained-decoding-outlines-xgrammar';
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const read=p=>JSON.parse(fs.readFileSync(p));
+const input=`${base}/design-inputs.json`,review=`${base}/design-review-training-inputs.json`;
+const files={...read(input).files,...read(review).bindings};
+const relocation={'public/learn-code/decoding-strategies/sampling.py':'docs/teaching/llm-architecture-training/decoding-strategies-greedy-beam-top-k-top-p-temperature/runtime-review-successor/00-sampling.py'};
+for(const [p,h] of Object.entries(files))assert.equal(sha(relocation[p]||p),h,p);
+assert.match(read(review).decision,/Design accepted conditional/);
+const record={accepted:true,phase:'design only; complete manuscript/program preparation released',topicId:read(input).topicId,reviewer:'/root/training_author',differentReview:review,files,relocation,conditions:['Repair and accept topic31 categorical support endpoint before reusing and accepting complete32 content.','Complete pinned native/source inspection and lifecycle preflight; freeze actual study protocol before any real-data generation.','No runtime or central phase promotion until complete content and different review.'],assignment:'Root now owns32 after explicit handoff; membership/original hashes unchanged.'};
+const target=`${base}/design-release-root.json`;fs.writeFileSync(target,JSON.stringify(record,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({target,sha256:sha(target),bindings:Object.keys(files).length}));

@@ -1,0 +1,27 @@
+C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\model_selection\_validation.py:493: FitFailedWarning: 
+3 fits failed out of a total of 9.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+3 fits failed with the following error:
+Traceback (most recent call last):
+  File "C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\model_selection\_validation.py", line 855, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\pipeline.py", line 645, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\base.py", line 1393, in wrapper
+    estimator._validate_params()
+  File "C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\base.py", line 554, in _validate_params
+    validate_parameter_constraints(
+  File "C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\utils\_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'n_neighbors' parameter of KNeighborsClassifier must be an int in the range [1, inf) or None. Got 0 instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\model_selection\_search.py:1237: UserWarning: One or more of the test scores are non-finite: [0.91666667 0.91666667        nan]
+  warnings.warn(

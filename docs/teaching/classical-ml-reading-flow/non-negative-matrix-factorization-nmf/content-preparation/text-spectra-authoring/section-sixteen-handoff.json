@@ -1,0 +1,229 @@
+{
+  "status": "SECTION16_N10_D57_D60_COMPLETE_SCOPED_NOT_WHOLE_TOPIC_READY",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T12:04:03.620Z",
+  "acceptedAnchor": "16-change-application-assumptions-explicitly",
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen-template.md",
+      "bytes": 17494,
+      "sha256": "1856753d5e1b992ff4c4f26cbf7c5ad88bd9ec9afbf205850280f93048fa3b7b"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen.md",
+      "bytes": 34405,
+      "sha256": "2a8767cc3f2ce11de0c969e3ab549ee42d532dfb443d7dc579daf14f72bdb322"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\visual-specifications.md",
+      "bytes": 4274,
+      "sha256": "6d07b5a340a848f14489aa6696d071dba94b1d4815d646032669f901d3189aff"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\assemble-section.mjs",
+      "bytes": 6031,
+      "sha256": "0c4bbb969f854d14c2d9084f5b18736b1a22747998b65d1b2abe612135750f22"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\check-transfers.py",
+      "bytes": 6797,
+      "sha256": "4338320ff83527c4261a89a6fc2cc057e8ea990303184f278adbf235d07708e4"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\transfer-checks.json",
+      "bytes": 8196,
+      "sha256": "fe59ed117319a8f2966f8857b92c9387b518bce7fb1fd6fb8b83d5b71279611d"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "bytes": 6934,
+      "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "sourceSlots": [
+    {
+      "marker": "<!-- original-source:wordPatterns -->",
+      "language": "python",
+      "file": "nmf_words.py",
+      "decodedFrom": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+      "decodedBodySha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343",
+      "literalBody": "import numpy as np\nfrom sklearn.feature_extraction.text import CountVectorizer\nfrom sklearn.decomposition import NMF\n\ndocuments = ['orbit rocket orbit', 'rocket orbit rocket',\n             'goal team goal', 'team goal team',\n             'orbit rocket goal team']\nvectorizer = CountVectorizer()\nX = vectorizer.fit_transform(documents)\nmodel = NMF(n_components=2, init='nndsvda', solver='mu',\n            beta_loss='kullback-leibler', max_iter=1000,\n            tol=1e-5, random_state=19)\nW = model.fit_transform(X)\nH = model.components_\nmass = H.sum(axis=1)\nnormalized_patterns = H / mass[:, None]\namounts = W * mass\nprint(vectorizer.get_feature_names_out())\nprint(normalized_patterns.round(3))\nprint(amounts.round(3))\nnew = vectorizer.transform(['rocket team'])\nprint((model.transform(new) @ H).round(3))"
+    },
+    {
+      "marker": "<!-- original-output:wordPatterns -->",
+      "language": "text",
+      "decodedFrom": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+      "decodedBodySha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23",
+      "literalBody": "['goal' 'orbit' 'rocket' 'team']\n[[0.5 0.  0.  0.5]\n [0.  0.5 0.5 0. ]]\n[[0. 3.]\n [0. 3.]\n [3. 0.]\n [3. 0.]\n [2. 2.]]\n[[0.5 0.5 0.5 0.5]]"
+    },
+    {
+      "marker": "<!-- source:nmf_text_spectra.py -->",
+      "language": "python",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+      "decodedBodySha256": "d2611fe8d6a1f2d026901d3ab667eea32197645ec514a084491a0dd07977ed91",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+        "bytes": 9130,
+        "sha256": "2fbca92d514885bcf9b1d84dfd678437d09837a8fdad8ae7b9c02cfed3513c3b"
+      }
+    },
+    {
+      "marker": "<!-- output:nmf_text_spectra.stdout.txt -->",
+      "language": "json",
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "decodedBodySha256": "bbc2718339a09accf69cbbef96ec99c3cf727245ec40ebf0a488ff5afcc570a5",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+        "bytes": 6934,
+        "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "all70 focused new conditions retained",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved nmf_text_spectra.py",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "executed source conserved nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "full stream conserved stdout",
+      "passed": true
+    },
+    {
+      "name": "full stream conserved stderr",
+      "passed": true
+    },
+    {
+      "name": "new only correct applications",
+      "passed": true
+    },
+    {
+      "name": "old word code exact",
+      "passed": true
+    },
+    {
+      "name": "old word output exact",
+      "passed": true
+    },
+    {
+      "name": "one accepted section16",
+      "passed": true
+    },
+    {
+      "name": "D57 picture before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D58 picture before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D59 picture before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "D60 picture before walkthrough",
+      "passed": true
+    },
+    {
+      "name": "scratch exact half-loss taught",
+      "passed": true
+    },
+    {
+      "name": "ordinary exact half-loss taught",
+      "passed": true
+    },
+    {
+      "name": "distinct stopping counters taught",
+      "passed": true
+    },
+    {
+      "name": "full null query exact",
+      "passed": true
+    },
+    {
+      "name": "no physical identification claim",
+      "passed": true
+    },
+    {
+      "name": "normalization objective distinction",
+      "passed": true
+    },
+    {
+      "name": "OOV and train only taught",
+      "passed": true
+    },
+    {
+      "name": "one slot <!-- original-source:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "literal full body <!-- original-source:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "one slot <!-- original-output:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "literal full body <!-- original-output:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "one slot <!-- source:nmf_text_spectra.py -->",
+      "passed": true
+    },
+    {
+      "name": "literal full body <!-- source:nmf_text_spectra.py -->",
+      "passed": true
+    },
+    {
+      "name": "one slot <!-- output:nmf_text_spectra.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "literal full body <!-- output:nmf_text_spectra.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "no unresolved instructional slots",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "focusedConditions": 70,
+    "newMain": 1,
+    "newNMFfits": 2,
+    "newPreprocessorFits": 2,
+    "constrainedReferences": 3,
+    "oldWordFitReplay": false,
+    "fullStreamsRead": true
+  },
+  "reading": "Full new N10 source/checker/template/D57–D60 specs, entire6934B stdout and empty stderr read. Preserved word code/output fully decoded and identity checked, not rerun. Current official TFIDF smoothing/norm, CountVectorizer tokenization/sparse representation and SciPy SLSQP contracts targeted read; earlier broad canonical NMF treatments reused.",
+  "limits": "Finite tiny transfer witnesses and author source reading only; no independent whole review/native/large sparse benchmark/physical identification/semantic certification.",
+  "continuation": "Root compose exact section16. Section17/N12, section18 and complete section19 remain in authoring. No main/canonical/public/runtime/phase changes."
+}

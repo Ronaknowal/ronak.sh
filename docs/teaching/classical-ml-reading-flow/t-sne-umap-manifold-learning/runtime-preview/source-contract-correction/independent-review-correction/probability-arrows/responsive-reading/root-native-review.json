@@ -1,0 +1,80 @@
+{
+  "schema": "root-actual-responsive-review/v1",
+  "checkedAt": "2026-10-09T14:56:15.337Z",
+  "reviewer": "/root",
+  "status": "corrections-required",
+  "inputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/author-ready-built-source.json",
+      "bytes": 48836,
+      "sha256": "739b3c3c552a9b39bc6877064109266148c0fcf92adeef4e02f6143ca444bd03"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/manifold-reader.css",
+      "bytes": 5060,
+      "sha256": "25a7954c41747468debe80dd8a89750078859cd28c7ac7f66eb8dce6f3ad375b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/enlarged-reading-fixture.json",
+      "bytes": 3293,
+      "sha256": "d2effbc23913f719cb0d2c24e676b2d9d4e18c69240d20bf5326507355214ba1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/build-private/enlarged-reading-root32.html",
+      "bytes": 447,
+      "sha256": "963a2bd20e507154b6393980a90406e8015f936dee604ce9890dddb38c942cf1"
+    }
+  ],
+  "actualObservations": [
+    {
+      "url": "http://127.0.0.1:5197/learn/path/full-curriculum/t-sne-umap-manifold-learning?module=classical-ml",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rootFont": "16px",
+      "documentClientWidth": 375,
+      "documentScrollWidth": 375,
+      "formerlyOverflowingParagraphClientWidth": 309,
+      "formerlyOverflowingParagraphScrollWidth": 309,
+      "visualReading": "Former oversized-step coordinate sequence wraps inside the prose column. Gaussian probability lanes and printed B/C/D labels remain readable."
+    },
+    {
+      "url": "http://127.0.0.1:5197/enlarged-reading-root32.html",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "rootFont": "32px",
+      "proseFont": "32px",
+      "documentClientWidth": 753,
+      "documentScrollWidth": 753,
+      "overflowingParagraphs": 0,
+      "inlineMathWithMoreThan4PixelsOverflow": 0,
+      "visualReading": "Actual root32 screenshot confirms enlarged prose. Short InlineMath expressions are boxed with horizontal AND vertical grey scrollbars, including d_ij; avoiding page overflow alone is insufficient."
+    }
+  ],
+  "findings": [
+    {
+      "id": "inline-math-scrollbars",
+      "severity": "material readability regression",
+      "location": "Section1 Input distance is paragraph; new paragraph-inline KaTeX CSS",
+      "evidence": "Actual screenshot after keyboard-attempt investigation; anonymous math span has client146/scroll148 and13px font while prose32px. Additional short spans have2px overflow. The CSS adds inline-block/max-width/overflow:auto to every inline math span.",
+      "requiredAction": "Remove unnecessary blanket inlineMath overflow styling; preserve ordinary/code wrapping. If a genuinely oversized formula remains, use a deliberate accessible local surface only there. Inspect actual390 and768/root32 result."
+    },
+    {
+      "id": "crowding-annotation-overlap",
+      "severity": "material diagram-label readability",
+      "location": "D14 CrowdingGeometry cube and ring in section5",
+      "evidence": "Actual390 and768/root32 pictures: cube radius-sqrt3 bracket text overlaps N3 and cube edge near upper right. Ring adjacent-length annotation crowds N1/edge.",
+      "requiredAction": "Reposition text and leader annotations without changing points, edges, lengths, meaning or font sizes. Independently assess source and Root inspect actual paint."
+    }
+  ],
+  "keyboardLimits": [
+    "No keyboard acceptance is claimed. Nonfocusable paragraph locator.press timed out; wrong multiple-match selectors were corrected before actual captures. Read-only compareDocumentPosition inspection was unsupported.",
+    "No inline math expression exceeded4px overflow at actual tested dimensions;2px artificial scrollbars nevertheless make existing expressions less readable."
+  ],
+  "evidenceAttribution": "Root personally read CUA screenshots in this conversation (mobile oversized-step prose; mobile Gaussian lanes; enlarged cube; enlarged input-distance paragraph). No local PNG is claimed.",
+  "preserved": "No browser clipboard write, download/save, learner completion, scientific run, phase change or source hash promotion.",
+  "nextAction": "Author consolidated geometry-label and inlineMath CSS correction; different source review; one scoped build followed by actual affected responsive reading."
+}

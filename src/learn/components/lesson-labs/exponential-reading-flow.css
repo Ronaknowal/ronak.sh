@@ -1,0 +1,49 @@
+.exponential-reading-lesson{overflow-wrap:anywhere;}
+.ef-figure{margin:1.5rem 0 2rem;padding:0;border:0;background:transparent;container-type:inline-size;container-name:ef-figure;}
+.ef-figure figcaption{margin-top:1rem;line-height:1.7;color:var(--text-secondary,#aaa);}
+.ef-reading-region{min-width:0;max-width:100%;}
+.ef-scroll-hint{margin:.5rem 0 .75rem;line-height:1.6;color:var(--text-secondary,#aaa);}
+.ef-scene-region{overflow-x:auto;max-width:100%;scrollbar-gutter:stable;}
+.ef-scene{display:block;width:100%;height:auto;overflow:visible;}
+.ef-label{font:15px ui-monospace,SFMono-Regular,Consolas,monospace;}
+.ef-table-label{font-weight:600;line-height:1.6;margin:1rem 0 .65rem;}
+.ef-table-region{max-width:100%;overflow:auto;scrollbar-gutter:stable;}
+.ef-table-region--tall{max-height:24rem;}
+.ef-table table{width:max-content;min-width:100%;border-collapse:collapse;}
+.ef-table th,.ef-table td{padding:.6rem .8rem;white-space:nowrap;border-bottom:1px solid #333;text-align:right;font-variant-numeric:tabular-nums;}
+.ef-table th:first-child{text-align:left;}
+.ef-table thead{position:sticky;top:0;background:#171717;z-index:1;}
+.ef-scene-region:focus-visible,.ef-table-region:focus-visible{outline:2px solid #e7b54a;outline-offset:4px;}
+.ef-compare{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;align-items:start;}
+.ef-compare>*{min-width:0;}
+.exponential-reading-lesson .flow-lab{container-name:ef-figure;}
+.exponential-reading-lesson .flow-slider output{flex:0 0 auto;white-space:nowrap;overflow-wrap:normal;}
+.exponential-reading-lesson .flow-readout strong{display:inline-block;white-space:nowrap;overflow-wrap:normal;}
+.ef-input{display:grid;gap:.5rem;line-height:1.5;}
+.ef-input input,.ef-input select{min-width:0;max-width:100%;font:inherit;color:inherit;background:#171717;border:1px solid #666;padding:.5rem;}
+.ef-manuscript-table{width:max-content;min-width:100%;border-collapse:collapse;}
+.ef-manuscript-table th,.ef-manuscript-table td{padding:.65rem .8rem;border-bottom:1px solid #333;text-align:left;max-width:32rem;}
+.ef-programme{margin:1.5rem 0 2rem;padding:0;border:0;background:transparent;}
+.ef-practice{margin:1.5rem 0;}
+.ef-practice details{margin:.8rem 0;}
+.ef-series-key{display:flex;flex-wrap:wrap;gap:.65rem 1.5rem;line-height:1.6;}
+
+.ef-responsive{position:relative;min-width:0;width:100%;}
+.ef-rem-probe{position:absolute;visibility:hidden;width:1rem;height:1rem;pointer-events:none;}
+.ef-axis-label{margin:.6rem 0;line-height:1.6;overflow-wrap:anywhere;}
+.ef-bar-row{margin:1rem 0 1.5rem;}
+.ef-bar-name{font-weight:600;margin:0 0 .4rem;}
+.ef-bar-values{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:.25rem 0;line-height:1.6;}
+.ef-local-updates p{line-height:1.7;overflow-wrap:anywhere;}
+.ef-observed-value{display:inline-block;border:1px solid currentColor;border-radius:50%;padding:.3rem .65rem;}
+.exponential-reading-lesson code{font-size:.875em!important;}
+.exponential-reading-lesson .lesson-code pre{font-size:.875rem;line-height:1.65;}
+.exponential-reading-lesson .lesson-code pre code{font-size:1em!important;}
+
+/* Core drawings fit their current width; full tables keep their separate keyboard overflow. */
+.ef-scene-region{overflow:visible;scrollbar-gutter:auto;}
+.ef-fibres{display:grid;gap:1.5rem;}
+.ef-bit-record{margin:.5rem 0 1rem;}
+.ef-bit-record p{line-height:1.6;overflow-wrap:anywhere;}
+.ef-fibre-label{font-weight:600;line-height:1.6;}
+.ef-bit-controls{display:flex;flex-wrap:wrap;gap:.5rem;}

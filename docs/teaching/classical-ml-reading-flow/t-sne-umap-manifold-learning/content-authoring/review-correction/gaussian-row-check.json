@@ -1,0 +1,161 @@
+{
+  "status": "PASS_SCOPED_CORRECTED_GAUSSIAN_CALLABLES",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\ronak\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "numpy": "2.3.5",
+  "source": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/programs/gaussian_rows.py",
+    "bytes": 3070,
+    "sha256": "22b027b6683bc6a106da83f0d478fb3c1ca700a1556242e44f423de2a9fdd63e"
+  },
+  "predecessorSource": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/programs/gaussian_rows.py",
+    "bytes": 2887,
+    "sha256": "7a9290f1d0583a94c7e32bb75d7b4eb0b45d26bc81fcf6329b52937f380e6955"
+  },
+  "script": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/check-gaussian-row.py",
+    "bytes": 4193,
+    "sha256": "b386ce324b837d0c471617bf96c85cb00aa01cf314767d88fc6723c32731f982"
+  },
+  "cases": [
+    {
+      "name": "one-iteration returns evaluated beta1",
+      "maxIter": 1,
+      "status": "iteration-limit",
+      "beta": 1.0,
+      "probabilities": [
+        0.952269826123778,
+        0.047410722937878444,
+        0.0003194509383437506
+      ],
+      "entropyNats": 0.19369462986779112,
+      "mismatchAtReturnedBeta": 0.0,
+      "independentMismatch": 2.220446049250313e-16,
+      "passed": true
+    },
+    {
+      "name": "two-iterations returns evaluated beta.5",
+      "maxIter": 2,
+      "status": "iteration-limit",
+      "beta": 0.5,
+      "probabilities": [
+        0.8055124120405226,
+        0.1797341135001498,
+        0.014753474459327466
+      ],
+      "entropyNats": 0.5448917354583603,
+      "mismatchAtReturnedBeta": 0.0,
+      "independentMismatch": 2.220446049250313e-16,
+      "passed": true
+    },
+    {
+      "name": "converged interior retains target and consistent tuple",
+      "maxIter": 100,
+      "status": "converged",
+      "beta": 0.3744606756372377,
+      "probabilities": [
+        0.7271772608165872,
+        0.23646217201887287,
+        0.03636056716453976
+      ],
+      "entropyNats": 0.6931471805783134,
+      "mismatchAtReturnedBeta": 0.0,
+      "independentMismatch": 2.220446049250313e-16,
+      "passed": true
+    },
+    {
+      "name": "uniform upper limit",
+      "status": "uniform-limit",
+      "beta": 0.0,
+      "probabilities": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "entropyNats": 1.0986122886681096,
+      "passed": true
+    },
+    {
+      "name": "nearest tied lower limit",
+      "status": "nearest-tie-limit",
+      "beta": "infinity",
+      "probabilities": [
+        0.5,
+        0.5,
+        0.0
+      ],
+      "entropyNats": 0.6931471805599453,
+      "passed": true
+    },
+    {
+      "name": "all-tied shared boundary chooses uniform",
+      "status": "uniform-limit",
+      "beta": 0.0,
+      "probabilities": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "entropyNats": 1.0986122886681096,
+      "passed": true
+    },
+    {
+      "name": "invalid budget rejected before interior/boundary",
+      "maxIter": 0,
+      "target": 2,
+      "refused": "max_iter must be a positive integer",
+      "passed": true
+    },
+    {
+      "name": "invalid budget rejected before interior/boundary",
+      "maxIter": -1,
+      "target": 2,
+      "refused": "max_iter must be a positive integer",
+      "passed": true
+    },
+    {
+      "name": "invalid budget rejected before interior/boundary",
+      "maxIter": 0,
+      "target": 3,
+      "refused": "max_iter must be a positive integer",
+      "passed": true
+    },
+    {
+      "name": "invalid budget rejected before interior/boundary",
+      "maxIter": -1,
+      "target": 3,
+      "refused": "max_iter must be a positive integer",
+      "passed": true
+    },
+    {
+      "name": "invalid budget rejected before interior/boundary",
+      "maxIter": 0,
+      "target": 1,
+      "refused": "max_iter must be a positive integer",
+      "passed": true
+    },
+    {
+      "name": "invalid budget rejected before interior/boundary",
+      "maxIter": -1,
+      "target": 1,
+      "refused": "max_iter must be a positive integer",
+      "passed": true
+    },
+    {
+      "name": "invalid budget rejected before interior/boundary",
+      "maxIter": 1.5,
+      "target": 2,
+      "refused": "max_iter must be a positive integer",
+      "passed": true
+    }
+  ],
+  "conditions": 13,
+  "mainExecutions": 0,
+  "fits": 0,
+  "historical41Replay": false,
+  "historicalTenMainsReplay": false,
+  "conditionalAndJointCalls": 0,
+  "lessonModulesImported": 1,
+  "scope": "Only current solve_row/row_at_beta callable consistency and the stated iteration-budget/boundary contracts; independent scalar exponential rows, no campaign replay."
+}

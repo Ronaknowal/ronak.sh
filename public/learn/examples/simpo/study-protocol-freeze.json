@@ -1,0 +1,35 @@
+{
+  "frozen_at": "2026-10-07T21:06:01.740556+00:00",
+  "inputs": {
+    "files": {
+      "pair_records.py": "b00a5c11ba6a2f0d2329d1e973ccb1afef3783962c833754f08751ba0982fe61",
+      "simpo_algebra.py": "1031351fde39ba2c9ac9129c234bc1e5e764539cb1a28de882674c3b643ebeac",
+      "response_scores.py": "34c3ed5139bec088c00296c4f615745ad3ecf4076dbe695069d1d285481570c7",
+      "scratch_simpo.py": "816fd04465ef4a3c8213fd30c62fa1f48f3a498c50af241ec3f0dec79a0f180b",
+      "trl_simpo.py": "b2672bd8dd087cf41b7617bd48af62339c5d5b88dbedeb80d40eb9925352e51a",
+      "simpo_study.py": "96a1d6137d845da5090cc42af12defe05ba1bb99efd81afa9ef941b4aa2f4410",
+      "causal_backbone.py": "05184e75756c7a642821dc5d991ac8c2a9fd8fc2daa33ca1dafe3bc9b0d9049e",
+      "records.json": "2a22244d319774ff000ee2fa755a139a1d4a4a72d637e21c5ca6c232d1a748d8",
+      "selection.json": "80cc84b6ae4ec05e32709b42fe6d09322d86de41f96d34fb9359e9ec4fbce056",
+      "study-protocol.md": "8c7a34522c00bab0333a9ab7b6834c52970a416c11a36c360fa48b06e2d09be0",
+      "requirements.txt": "b03f90a3cf78fb35c7be157beac008c98fecd7644535eaec5428b2398bf5df27",
+      "backbone-provenance.json": "9b86124c333fd9c1c1d8a08b7fcb191da5f50213c71ddc0fab4c7004159ebd63",
+      "HH-LICENSE.txt": "d4fb18db48757e273261a5597b8a09381de8073da060474ce33d0643e06c875e",
+      "native-source-provenance.json": "f94e72c0dcfb0cf5b957b53e73afe14ade61425abf1146b2b883ec873cb9de98"
+    },
+    "packages": {
+      "torch": "2.14.0+cpu",
+      "transformers": "5.19.0",
+      "trl": "1.14.2",
+      "datasets": "5.1.0",
+      "tokenizers": "0.23.2",
+      "numpy": "2.3.5",
+      "accelerate": "1.15.0"
+    },
+    "native_sources": {
+      "cpo_config.py": "d408fde1ebfff36c5be3c6240ace3197f7796cc2cc4fc3c5dcd6fa3ff0541660",
+      "cpo_trainer.py": "406dbad2507eb614368f88a59aa89a1ff5d85f5d90c2744bbc7144d35e7bf73b"
+    }
+  },
+  "meaning": "Prospective source/data/budget freeze; no completed result implied"
+}

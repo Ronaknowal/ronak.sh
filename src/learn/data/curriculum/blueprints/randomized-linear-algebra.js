@@ -6,7 +6,7 @@ export default {
   visual: {
     type: 'Weighted-vector geometry, singular-value/error budgets, influential observation selection and actual running trace estimates',
     question: 'What did the sketch preserve, what did it miss, and does the smaller answer satisfy the original objective?',
-    interaction: 'Choose three column weights; vary spectrum/rank/oversampling/iterations/seed on bounded six-dimensional matrices; select observations and compare fitted lines; advance independent-sign trace probes.'
+    interaction: 'Seven focused investigations: column weights; rank/extra-probe/seed budgets at q0; power rounds at fixed k2/p2; original-row fits with a common adaptive scale; sign-probe running means; all eight fresh sign possibilities; dense action/storage decisions.'
   },
   practice: {
     task: 'Compare a new noisy three-factor signal with the exact rank floor; repair training-probe validation; construct unbounded original residual despite a zero sketch objective; reason about finite sign averages.',

@@ -1,0 +1,1496 @@
+{
+  "checks": 133,
+  "gradient_cases": [
+    {
+      "advantage": -1.3,
+      "ratio": 0.4,
+      "dual_clip": null,
+      "loss": 1.04,
+      "logp_derivative": 0.0
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 0.4,
+      "dual_clip": 10.0,
+      "loss": 1.04,
+      "logp_derivative": 0.0
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 0.85,
+      "dual_clip": null,
+      "loss": 1.105,
+      "logp_derivative": 1.105
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 0.85,
+      "dual_clip": 10.0,
+      "loss": 1.105,
+      "logp_derivative": 1.105
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 1.05,
+      "dual_clip": null,
+      "loss": 1.3650000000000002,
+      "logp_derivative": 1.3650000000000002
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 1.05,
+      "dual_clip": 10.0,
+      "loss": 1.3650000000000002,
+      "logp_derivative": 1.3650000000000002
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 1.24,
+      "dual_clip": null,
+      "loss": 1.612,
+      "logp_derivative": 1.612
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 1.24,
+      "dual_clip": 10.0,
+      "loss": 1.612,
+      "logp_derivative": 1.612
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 1.5,
+      "dual_clip": null,
+      "loss": 1.9500000000000002,
+      "logp_derivative": 1.9500000000000002
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 1.5,
+      "dual_clip": 10.0,
+      "loss": 1.9500000000000002,
+      "logp_derivative": 1.9500000000000002
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 12.0,
+      "dual_clip": null,
+      "loss": 15.600000000000001,
+      "logp_derivative": 15.600000000000001
+    },
+    {
+      "advantage": -1.3,
+      "ratio": 12.0,
+      "dual_clip": 10.0,
+      "loss": 13.0,
+      "logp_derivative": 0.0
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 0.4,
+      "dual_clip": null,
+      "loss": -0.27999999999999997,
+      "logp_derivative": -0.27999999999999997
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 0.4,
+      "dual_clip": 10.0,
+      "loss": -0.27999999999999997,
+      "logp_derivative": -0.27999999999999997
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 0.85,
+      "dual_clip": null,
+      "loss": -0.595,
+      "logp_derivative": -0.595
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 0.85,
+      "dual_clip": 10.0,
+      "loss": -0.595,
+      "logp_derivative": -0.595
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 1.05,
+      "dual_clip": null,
+      "loss": -0.735,
+      "logp_derivative": -0.735
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 1.05,
+      "dual_clip": 10.0,
+      "loss": -0.735,
+      "logp_derivative": -0.735
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 1.24,
+      "dual_clip": null,
+      "loss": -0.868,
+      "logp_derivative": -0.868
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 1.24,
+      "dual_clip": 10.0,
+      "loss": -0.868,
+      "logp_derivative": -0.868
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 1.5,
+      "dual_clip": null,
+      "loss": -0.8959999999999999,
+      "logp_derivative": 0.0
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 1.5,
+      "dual_clip": 10.0,
+      "loss": -0.8959999999999999,
+      "logp_derivative": 0.0
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 12.0,
+      "dual_clip": null,
+      "loss": -0.8959999999999999,
+      "logp_derivative": 0.0
+    },
+    {
+      "advantage": 0.7,
+      "ratio": 12.0,
+      "dual_clip": 10.0,
+      "loss": -0.8959999999999999,
+      "logp_derivative": 0.0
+    }
+  ],
+  "groups": [
+    {
+      "rewards": [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "advantages": [
+        -0.8660246537850883,
+        -0.8660246537850883,
+        0.8660246537850883,
+        0.8660246537850883
+      ],
+      "statistics": {
+        "mean": [
+          0.0
+        ],
+        "sample_sd": [
+          1.1547005383792515
+        ]
+      }
+    },
+    {
+      "rewards": [
+        -1,
+        1,
+        1,
+        1
+      ],
+      "advantages": [
+        -1.4999985000015001,
+        0.49999950000050003,
+        0.49999950000050003,
+        0.49999950000050003
+      ],
+      "statistics": {
+        "mean": [
+          0.5
+        ],
+        "sample_sd": [
+          1.0
+        ]
+      }
+    },
+    {
+      "rewards": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "advantages": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "statistics": {
+        "mean": [
+          1.0
+        ],
+        "sample_sd": [
+          0.0
+        ]
+      }
+    },
+    {
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "advantages": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "statistics": {
+        "mean": [
+          -1.0
+        ],
+        "sample_sd": [
+          0.0
+        ]
+      }
+    }
+  ],
+  "collector": {
+    "status": "filled",
+    "selected": [
+      {
+        "id": 2,
+        "uid": "p2:0",
+        "group_uid": "p2",
+        "prompt_ids": [
+          10,
+          2,
+          11
+        ],
+        "completion_ids": [
+          20,
+          0
+        ],
+        "old_logps": [
+          -1.0,
+          -0.1
+        ],
+        "correct": true
+      },
+      {
+        "id": 2,
+        "uid": "p2:1",
+        "group_uid": "p2",
+        "prompt_ids": [
+          10,
+          2,
+          11
+        ],
+        "completion_ids": [
+          21,
+          0
+        ],
+        "old_logps": [
+          -2.0,
+          -0.1
+        ],
+        "correct": false
+      },
+      {
+        "id": 2,
+        "uid": "p2:2",
+        "group_uid": "p2",
+        "prompt_ids": [
+          10,
+          2,
+          11
+        ],
+        "completion_ids": [
+          22,
+          0
+        ],
+        "old_logps": [
+          -3.0,
+          -0.1
+        ],
+        "correct": true
+      },
+      {
+        "id": 2,
+        "uid": "p2:3",
+        "group_uid": "p2",
+        "prompt_ids": [
+          10,
+          2,
+          11
+        ],
+        "completion_ids": [
+          23,
+          0
+        ],
+        "old_logps": [
+          -4.0,
+          -0.1
+        ],
+        "correct": false
+      },
+      {
+        "id": 4,
+        "uid": "p4:0",
+        "group_uid": "p4",
+        "prompt_ids": [
+          10,
+          4,
+          11
+        ],
+        "completion_ids": [
+          20,
+          0
+        ],
+        "old_logps": [
+          -1.0,
+          -0.1
+        ],
+        "correct": false
+      },
+      {
+        "id": 4,
+        "uid": "p4:1",
+        "group_uid": "p4",
+        "prompt_ids": [
+          10,
+          4,
+          11
+        ],
+        "completion_ids": [
+          21,
+          0
+        ],
+        "old_logps": [
+          -2.0,
+          -0.1
+        ],
+        "correct": true
+      },
+      {
+        "id": 4,
+        "uid": "p4:2",
+        "group_uid": "p4",
+        "prompt_ids": [
+          10,
+          4,
+          11
+        ],
+        "completion_ids": [
+          22,
+          0
+        ],
+        "old_logps": [
+          -3.0,
+          -0.1
+        ],
+        "correct": false
+      },
+      {
+        "id": 4,
+        "uid": "p4:3",
+        "group_uid": "p4",
+        "prompt_ids": [
+          10,
+          4,
+          11
+        ],
+        "completion_ids": [
+          23,
+          0
+        ],
+        "old_logps": [
+          -4.0,
+          -0.1
+        ],
+        "correct": true
+      }
+    ],
+    "candidates": [
+      [
+        {
+          "id": 0,
+          "uid": "p0:0",
+          "group_uid": "p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "p0:1",
+          "group_uid": "p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "p0:2",
+          "group_uid": "p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "p0:3",
+          "group_uid": "p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 1,
+          "uid": "p1:0",
+          "group_uid": "p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "p1:1",
+          "group_uid": "p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "p1:2",
+          "group_uid": "p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "p1:3",
+          "group_uid": "p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": false
+        }
+      ],
+      [
+        {
+          "id": 2,
+          "uid": "p2:0",
+          "group_uid": "p2",
+          "prompt_ids": [
+            10,
+            2,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 2,
+          "uid": "p2:1",
+          "group_uid": "p2",
+          "prompt_ids": [
+            10,
+            2,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 2,
+          "uid": "p2:2",
+          "group_uid": "p2",
+          "prompt_ids": [
+            10,
+            2,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 2,
+          "uid": "p2:3",
+          "group_uid": "p2",
+          "prompt_ids": [
+            10,
+            2,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 3,
+          "uid": "p3:0",
+          "group_uid": "p3",
+          "prompt_ids": [
+            10,
+            3,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 3,
+          "uid": "p3:1",
+          "group_uid": "p3",
+          "prompt_ids": [
+            10,
+            3,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 3,
+          "uid": "p3:2",
+          "group_uid": "p3",
+          "prompt_ids": [
+            10,
+            3,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 3,
+          "uid": "p3:3",
+          "group_uid": "p3",
+          "prompt_ids": [
+            10,
+            3,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": true
+        }
+      ],
+      [
+        {
+          "id": 4,
+          "uid": "p4:0",
+          "group_uid": "p4",
+          "prompt_ids": [
+            10,
+            4,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 4,
+          "uid": "p4:1",
+          "group_uid": "p4",
+          "prompt_ids": [
+            10,
+            4,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 4,
+          "uid": "p4:2",
+          "group_uid": "p4",
+          "prompt_ids": [
+            10,
+            4,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 4,
+          "uid": "p4:3",
+          "group_uid": "p4",
+          "prompt_ids": [
+            10,
+            4,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 5,
+          "uid": "p5:0",
+          "group_uid": "p5",
+          "prompt_ids": [
+            10,
+            5,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 5,
+          "uid": "p5:1",
+          "group_uid": "p5",
+          "prompt_ids": [
+            10,
+            5,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 5,
+          "uid": "p5:2",
+          "group_uid": "p5",
+          "prompt_ids": [
+            10,
+            5,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 5,
+          "uid": "p5:3",
+          "group_uid": "p5",
+          "prompt_ids": [
+            10,
+            5,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": false
+        }
+      ]
+    ],
+    "decisions": [
+      {
+        "group_uid": "p0",
+        "mixed_correctness": false,
+        "kept": false,
+        "reason": "homogeneous"
+      },
+      {
+        "group_uid": "p1",
+        "mixed_correctness": false,
+        "kept": false,
+        "reason": "homogeneous"
+      },
+      {
+        "group_uid": "p2",
+        "mixed_correctness": true,
+        "kept": true,
+        "reason": "kept"
+      },
+      {
+        "group_uid": "p3",
+        "mixed_correctness": false,
+        "kept": false,
+        "reason": "homogeneous"
+      },
+      {
+        "group_uid": "p4",
+        "mixed_correctness": true,
+        "kept": true,
+        "reason": "kept"
+      },
+      {
+        "group_uid": "p5",
+        "mixed_correctness": true,
+        "kept": false,
+        "reason": "quota"
+      }
+    ]
+  },
+  "exhausted": {
+    "status": "exhausted",
+    "selected": [],
+    "candidates": [
+      [
+        {
+          "id": 0,
+          "uid": "p0:0",
+          "group_uid": "p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "p0:1",
+          "group_uid": "p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "p0:2",
+          "group_uid": "p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "p0:3",
+          "group_uid": "p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 1,
+          "uid": "p1:0",
+          "group_uid": "p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "p1:1",
+          "group_uid": "p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "p1:2",
+          "group_uid": "p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "p1:3",
+          "group_uid": "p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": false
+        }
+      ],
+      [
+        {
+          "id": 0,
+          "uid": "next:p0:0",
+          "group_uid": "next:p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "next:p0:1",
+          "group_uid": "next:p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "next:p0:2",
+          "group_uid": "next:p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 0,
+          "uid": "next:p0:3",
+          "group_uid": "next:p0",
+          "prompt_ids": [
+            10,
+            0,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": true
+        },
+        {
+          "id": 1,
+          "uid": "next:p1:0",
+          "group_uid": "next:p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            20,
+            0
+          ],
+          "old_logps": [
+            -1.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "next:p1:1",
+          "group_uid": "next:p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            21,
+            0
+          ],
+          "old_logps": [
+            -2.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "next:p1:2",
+          "group_uid": "next:p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            22,
+            0
+          ],
+          "old_logps": [
+            -3.0,
+            -0.1
+          ],
+          "correct": false
+        },
+        {
+          "id": 1,
+          "uid": "next:p1:3",
+          "group_uid": "next:p1",
+          "prompt_ids": [
+            10,
+            1,
+            11
+          ],
+          "completion_ids": [
+            23,
+            0
+          ],
+          "old_logps": [
+            -4.0,
+            -0.1
+          ],
+          "correct": false
+        }
+      ]
+    ],
+    "decisions": [
+      {
+        "group_uid": "p0",
+        "mixed_correctness": false,
+        "kept": false,
+        "reason": "homogeneous"
+      },
+      {
+        "group_uid": "p1",
+        "mixed_correctness": false,
+        "kept": false,
+        "reason": "homogeneous"
+      },
+      {
+        "group_uid": "next:p0",
+        "mixed_correctness": false,
+        "kept": false,
+        "reason": "homogeneous"
+      },
+      {
+        "group_uid": "next:p1",
+        "mixed_correctness": false,
+        "kept": false,
+        "reason": "homogeneous"
+      }
+    ]
+  },
+  "lengths": [
+    {
+      "length": 0,
+      "scratch": 0.0,
+      "native": 0.0
+    },
+    {
+      "length": 15,
+      "scratch": 0.0,
+      "native": 0.0
+    },
+    {
+      "length": 16,
+      "scratch": 0.0,
+      "native": 0.0
+    },
+    {
+      "length": 17,
+      "scratch": -0.25,
+      "native": -0.25
+    },
+    {
+      "length": 18,
+      "scratch": -0.5,
+      "native": -0.5
+    },
+    {
+      "length": 19,
+      "scratch": -0.75,
+      "native": -0.75
+    },
+    {
+      "length": 20,
+      "scratch": -1.0,
+      "native": -1.0
+    },
+    {
+      "length": 21,
+      "scratch": -1.0,
+      "native": -1.0
+    }
+  ],
+  "reduction": {
+    "terms": [
+      [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        3.0,
+        3.0,
+        3.0,
+        3.0,
+        3.0,
+        3.0
+      ]
+    ],
+    "mask": [
+      [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ],
+    "pooled": 2.5,
+    "response": 2.0,
+    "shared_denominator": 2.5,
+    "microbatch_mean": 2.0
+  },
+  "probabilities": [
+    {
+      "p": 0.0,
+      "G": 2,
+      "mixed_probability": 0.0,
+      "ideal_candidates_for_two": null
+    },
+    {
+      "p": 0.0,
+      "G": 4,
+      "mixed_probability": 0.0,
+      "ideal_candidates_for_two": null
+    },
+    {
+      "p": 0.0,
+      "G": 8,
+      "mixed_probability": 0.0,
+      "ideal_candidates_for_two": null
+    },
+    {
+      "p": 0.1,
+      "G": 2,
+      "mixed_probability": 0.17999999999999994,
+      "ideal_candidates_for_two": 11.111111111111114
+    },
+    {
+      "p": 0.1,
+      "G": 4,
+      "mixed_probability": 0.3438,
+      "ideal_candidates_for_two": 5.817335660267598
+    },
+    {
+      "p": 0.1,
+      "G": 8,
+      "mixed_probability": 0.5695327799999998,
+      "ideal_candidates_for_two": 3.511650374189174
+    },
+    {
+      "p": 0.5,
+      "G": 2,
+      "mixed_probability": 0.5,
+      "ideal_candidates_for_two": 4.0
+    },
+    {
+      "p": 0.5,
+      "G": 4,
+      "mixed_probability": 0.875,
+      "ideal_candidates_for_two": 2.2857142857142856
+    },
+    {
+      "p": 0.5,
+      "G": 8,
+      "mixed_probability": 0.9921875,
+      "ideal_candidates_for_two": 2.015748031496063
+    },
+    {
+      "p": 0.9,
+      "G": 2,
+      "mixed_probability": 0.17999999999999994,
+      "ideal_candidates_for_two": 11.111111111111114
+    },
+    {
+      "p": 0.9,
+      "G": 4,
+      "mixed_probability": 0.3438,
+      "ideal_candidates_for_two": 5.817335660267598
+    },
+    {
+      "p": 0.9,
+      "G": 8,
+      "mixed_probability": 0.5695327799999998,
+      "ideal_candidates_for_two": 3.511650374189174
+    },
+    {
+      "p": 1.0,
+      "G": 2,
+      "mixed_probability": 0.0,
+      "ideal_candidates_for_two": null
+    },
+    {
+      "p": 1.0,
+      "G": 4,
+      "mixed_probability": 0.0,
+      "ideal_candidates_for_two": null
+    },
+    {
+      "p": 1.0,
+      "G": 8,
+      "mixed_probability": 0.0,
+      "ideal_candidates_for_two": null
+    }
+  ],
+  "parser": [
+    {
+      "text": "\\boxed{12}",
+      "parsed": 12
+    },
+    {
+      "text": "\\boxed{  +12 }",
+      "parsed": 12
+    },
+    {
+      "text": "\\boxed{12} then \\boxed{13}",
+      "parsed": 13
+    },
+    {
+      "text": "\\boxed{12} then \\boxed{",
+      "parsed": null
+    },
+    {
+      "text": "\\boxed{6+6}",
+      "parsed": null
+    },
+    {
+      "text": "\\boxed{\\frac{24}{2}}",
+      "parsed": null
+    },
+    {
+      "text": "12",
+      "parsed": null
+    },
+    {
+      "text": "wrong reasoning; \\boxed{12}",
+      "parsed": 12
+    },
+    {
+      "text": "\\boxed{\\boxed{12}}",
+      "parsed": 12
+    }
+  ],
+  "source_audit_circle": {
+    "center": [
+      11,
+      8
+    ],
+    "radius_squared": 72,
+    "derived_min_x": 2.5147186257614305,
+    "source_claim": 6.101020514433644,
+    "derived_coefficients": [
+      11,
+      6,
+      2
+    ],
+    "source_coefficients": [
+      11,
+      2,
+      6
+    ]
+  },
+  "boundary": "Finite constructed mechanisms and ordinary length-reward helper; no learned-model outcomes."
+}

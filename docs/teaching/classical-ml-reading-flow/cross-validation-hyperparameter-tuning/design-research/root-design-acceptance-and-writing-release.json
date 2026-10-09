@@ -1,0 +1,552 @@
+{
+  "schema": "classical21-root-design-acceptance-writing-release/v1",
+  "at": "2026-10-09T17:12:16.189665+00:00",
+  "topicId": "cross-validation-hyperparameter-tuning",
+  "revision": 4,
+  "status": "DESIGN_ACCEPTED_COMPLETE_CONTENT_AUTHORING_RELEASED",
+  "baseInputs": [
+    {
+      "path": "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+      "bytes": 75750,
+      "sha256": "67a5eef76b2276b46144b0ed7ba595353b3fbc50dff556ae28469fa5d839f0e3"
+    },
+    {
+      "path": "src/learn/data/validation-examples.js",
+      "bytes": 7327,
+      "sha256": "3c194949f3344351ece8d33c5605146d7d36470119c3ee7d290130733511563c"
+    },
+    {
+      "path": "src/learn/data/validation-models.js",
+      "bytes": 29914,
+      "sha256": "5bd7fb68ea0c8668953f41dabf2510d857e4d6b126ffc575992e5a51c2f85daf"
+    },
+    {
+      "path": "src/learn/data/validation-data.js",
+      "bytes": 20810,
+      "sha256": "02ce57b5e6b2096fa2b7efa49dfc9fc06cd0c0db58c35c4abf329d983a074d73"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ValidationLabs.jsx",
+      "bytes": 44297,
+      "sha256": "62eebceaf2f95124dd3ba9db7c26b5b703cd57dbdf2630400f2e0e23e4532ddc"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ValidationFigures.jsx",
+      "bytes": 42078,
+      "sha256": "3089df565601724ccf47253af230e753ac83a24cb56e0ff7983021b46935a9a6"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ValidationShared.jsx",
+      "bytes": 9088,
+      "sha256": "db6a2f128695e33ec5ef3670bc296ce671ddc8551218acc964a83f2e84a9afa4"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/validation-labs.css",
+      "bytes": 11072,
+      "sha256": "4ff8ae7c4be39f670e9481a846bd3bed0bf9a753fa3706de3f16b9dc13a10a1b"
+    },
+    {
+      "path": "docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+      "bytes": 5445,
+      "sha256": "4657b6a76382ad3a9c5dd0b26f421ba7213ff04bb32c358808d26770e924c326"
+    },
+    {
+      "path": "docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md",
+      "bytes": 57673,
+      "sha256": "eb21e38ca3a6f6e5283810b94a2aa1a775fd49b282d27603f08ff956f979b312"
+    },
+    {
+      "path": "scripts/verify-validation-browser.cjs",
+      "bytes": 43044,
+      "sha256": "316754cb6143d4688cbd24896619f7dcaa656118a20f10da12c2795e80dcf03a"
+    },
+    {
+      "path": "scripts/verify-validation-data.py",
+      "bytes": 21082,
+      "sha256": "ca36cf866be8b17c583b8d48da429d06f8bd8d1a0f2b56e9d3bcd64d53fdad12"
+    },
+    {
+      "path": "scripts/verify-validation-examples.py",
+      "bytes": 20788,
+      "sha256": "601dd03b825cab6630fcde30a59942b3d70f5633d5afd4998a05cbcbdb899e53"
+    },
+    {
+      "path": "scripts/verify-validation-models.mjs",
+      "bytes": 42700,
+      "sha256": "28a41eeb389ef4626016c0f86242672ef4bdcb5cf1b5c96120badcec4215e90a"
+    },
+    {
+      "path": "public/learn-assets/cross-validation/data-provenance.md",
+      "bytes": 3770,
+      "sha256": "b7d8a56b683f797574834989dc9259ed932e53ceeb5c9bbb5a0393c7c5248692"
+    },
+    {
+      "path": "public/learn-assets/cross-validation/nested-experiment.json",
+      "bytes": 16989,
+      "sha256": "fd53f72e89cb511f68646a4a8fa81f0a5f6ef125c5141a4bd164c7b6a48d0499"
+    },
+    {
+      "path": "public/learn-assets/cross-validation/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py",
+      "bytes": 7965,
+      "sha256": "2df8292a2237ed6254e4a0880c35ef32336daad4838b3f06f119a4d4afbce741"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json",
+      "bytes": 82281,
+      "sha256": "dc0311a0c1ba7a72d45708ee2d76f847ad87004108ce99018a549e8b22f51f54"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md",
+      "bytes": 3770,
+      "sha256": "b7d8a56b683f797574834989dc9259ed932e53ceeb5c9bbb5a0393c7c5248692"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+      "bytes": 47188,
+      "sha256": "858530bf044c7bafb5e3b7ff2e5e94de0c91d7f1a1fd22620ca4ddb80bdc6030"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+      "bytes": 58666,
+      "sha256": "7142e5a39e7582339263a2656a59290b0e3dbbba07afbf502affc4f2c9be3432"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+      "bytes": 19247,
+      "sha256": "02376dcace6bb917c9f5798c086067ece526b3e2ad16c0bddd4af8a6cff3e3cd"
+    },
+    {
+      "path": "docs/teaching/evidence/validation-browser.json",
+      "bytes": 8132,
+      "sha256": "3a19f64ab0121816a0af7a30daa121b5b770de6db989d2d5a0e808e3153948ec"
+    },
+    {
+      "path": "docs/teaching/evidence/validation-data.json",
+      "bytes": 12469,
+      "sha256": "0fd2079e6ef30dd7f12b348e19a19f37d2bcb51a257db2d15b699b758bae6333"
+    },
+    {
+      "path": "docs/teaching/evidence/validation-models.json",
+      "bytes": 2771,
+      "sha256": "fc6375d54a2949fc4cab7d8829008dc4b9b25a6064e12191885dab5ede841a9a"
+    },
+    {
+      "path": "docs/teaching/evidence/validation-native.json",
+      "bytes": 2647,
+      "sha256": "957e99cb266f748c5583cc69cd2260e13c0682d7ad43d07b4433dcf6d893044c"
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js",
+      "bytes": 8832,
+      "sha256": "c4c363c9e60247a00267325bcfa5e4cc8b0bb4689dfeabbd0a985d9017f34766"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json",
+      "bytes": 1657,
+      "sha256": "7be59635376b34c7182311cf423e0309f309d216ac1d0d9f4112f1892445723f"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/browser-checks.json",
+      "bytes": 2064,
+      "sha256": "cadc2bf4306192bed6ad03df8781ec8ee4e14ecb9137e3d8b2b99e16c3617741"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-checks.json",
+      "bytes": 1555,
+      "sha256": "5e589c273dd3ca229679c767d7ad3005158510e0ee015c99d59c2f64c62148a3"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-review.md",
+      "bytes": 1318,
+      "sha256": "c874a26653f4cfb15f45e0eb8e50b1902c25f581dd434bcc2b01a193113d258f"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md",
+      "bytes": 5104,
+      "sha256": "e19b12a4001bf5f9c3cbf3257dd1a0fbc0c71aaa91ca2525d8424568e841d144"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/reading-flow-design.md",
+      "bytes": 16511,
+      "sha256": "bc39e7cbc7344a13691ed32b7487dd35b581dc3d9f92c1592a3b01220c9e36d4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/visual-and-investigation-contracts.md",
+      "bytes": 29775,
+      "sha256": "a158240db04069461c03d228057bb150d071bc5c9f7ac287e75cc61feb4a2b31"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/programmes-practice-and-resources.md",
+      "bytes": 21341,
+      "sha256": "ce89b53ec6b7d79e58aa29b1430a634c553b03c6a83229af10a40fbd6fd77c9e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/research-and-claims.md",
+      "bytes": 8603,
+      "sha256": "e0bf6d5eec57c66d1f616474cccc0ad80bc78708fce4a572c8121d5dc011acfc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/notes-and-resources.md",
+      "bytes": 10100,
+      "sha256": "fbf062491a6128a3b06e0e20cfcc6144954ba113d7b5a37beab171a08a8f431c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-fixtures.md",
+      "bytes": 11359,
+      "sha256": "f15c734bdccd2ecf9735601645c0b72a202b3c5d0d05ef9c80ff6dfc9e484a7f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/author-design-review.md",
+      "bytes": 8592,
+      "sha256": "562263d7ca53ade9cb4b6551d2cace73f2ef43f3680121a31c8bd2328cc14e86"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-arithmetic.json",
+      "bytes": 34502,
+      "sha256": "e5f7a6f9013890e32819b9777b0cbcc73a326d252c662dd3eebbb2d09cb8042c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-density-arithmetic.json",
+      "bytes": 1903,
+      "sha256": "58b5e100e142a81bf88feccfc66077e4dcfb6c88e56cdd569ae57595cd808c52"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/check-design-arithmetic.py",
+      "bytes": 13203,
+      "sha256": "9e935fa84203f41d9058c1874c99df081b326b35ba383c6a22fd62a870663b83"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/check-design-density.py",
+      "bytes": 2430,
+      "sha256": "61abb661a33a677aa2e4240ae184674c90b15c81a68b1f7ed02e923afeabb0c4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/freeze-complete-design.py",
+      "bytes": 7272,
+      "sha256": "7d7d6fe60f59811e63bcee1bc6034b26ff76773437ed2d0306c7f932b79aedd4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/source-retention.json",
+      "bytes": 4559,
+      "sha256": "438d8582de22f48c533d6196cc032538e7efe6d1130bf88c65f8785964e35259"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/partial-design-checkpoint.json",
+      "bytes": 4922,
+      "sha256": "51403c0f4f4463e12cfe53c22a6b0b5c2ea8b49577e01fc3ef59919016f2e5bc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/original-manifest.json",
+      "bytes": 8272,
+      "sha256": "c2edbd99eb469d1af4d19934ea9c926a8508bc61e28a81e5ddd8c4b32e61b6c1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/original-manifest-supplement.json",
+      "bytes": 4431,
+      "sha256": "e751960c72ec02ce266f98fec2fc148b22e944175077f7edfafffcf03cb7dcb1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/reading-flow-revision.md",
+      "bytes": 5787,
+      "sha256": "6a2bcc9640d2ada07c2112d054111e55e71a176210987414640b28094933a0dc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/reading-flow-design.md",
+      "bytes": 16178,
+      "sha256": "3b9051ab7e636ea166340130f568dec274d2bbad4d84616693f4b7a033e5dd3b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/visual-and-investigation-contracts.md",
+      "bytes": 27388,
+      "sha256": "499a2074cd8727a54872f210c984bd27712580f58c0defc22e9655aff4feaf8d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/programmes-practice-and-resources.md",
+      "bytes": 20739,
+      "sha256": "e94d955e6617adbc141bcfcf5533b5b5b228539154dfd9138f2593bb76922b38"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/visual-vocabulary.md",
+      "bytes": 5546,
+      "sha256": "799ac277b81d78b659e3836b8af82bdad0bf2f4f91f12b2bef7e37b27365a1b2"
+    },
+    {
+      "path": "src/learn/data/topics/regularization-l1-l2-elastic-net-dropout.jsx",
+      "bytes": 76818,
+      "sha256": "ddaa376c258e40f96c4d8028cc45730c45a2d20d51ed2e2afc7ee74c1e59a950"
+    },
+    {
+      "path": "src/learn/data/topics/automl-neural-architecture-search-nas.jsx",
+      "bytes": 78275,
+      "sha256": "eb3c91f887854d02bd30f677fb59d3a14c645a828112d61ea76b62cd0b2868ab"
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/automl-neural-architecture-search-nas.js",
+      "bytes": 14027,
+      "sha256": "c59531c362fa949b89914100119883f26011e5ee8d92f54c87562728a4419185"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-accepted-root.json",
+      "bytes": 3978,
+      "sha256": "06eaf404879062bc986ec810bc305669b7598b63f63f26e0b00561f03714453c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/root-start.json",
+      "bytes": 2581,
+      "sha256": "81e24c5174f417bcadfd1ab19ffb3667afa8c1b3815f74e4de94bddcad01b912"
+    }
+  ],
+  "reviewedComposition": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/author-ready-design.json",
+      "bytes": 37052,
+      "sha256": "0b36c78f55dd683938b73bd1fd695254a5c5e0424b7a646f9e14924d57068809"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/independent-review/whole-design-review.md",
+      "bytes": 23441,
+      "sha256": "d0ca0d56f5e5ffcdd03878bb656ef2774b370d7fc75cf0b8f6b4b7d10ed2076f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/design-policy-correction.md",
+      "bytes": 14564,
+      "sha256": "8fa0ea99010c807162677b833080b9777e6dde79dec7477d026499642970ed49"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/policy-closure.md",
+      "bytes": 9282,
+      "sha256": "faab7e8d5b372926ce2f05c50366e4d9ca3945cb1cc34ae70c962ff68f1558f0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/policy-closure-check.json",
+      "bytes": 11713,
+      "sha256": "a4a6fac54f3fdf091d15ff412d9aad1d32a67b81c4d8280f7f84c3945314415e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/check-policy-closure.py",
+      "bytes": 4605,
+      "sha256": "e55ef9db2c15c2888350fe8fff26a42dc231069eac7ba7f169e15bc66e3b4f57"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/check-hand-policies.py",
+      "bytes": 24697,
+      "sha256": "d2f72f81fed68cdafd57e2ce3a7a3f3abc2045e243e89bbe90adf17aa160c2e1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/hand-policy-check.json",
+      "bytes": 82626,
+      "sha256": "ae91e1a34d35d598a25311c3e841a68af91e02a1d1ff9aae8cf6c3a1d08942f8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/arithmetic-review.md",
+      "bytes": 5197,
+      "sha256": "2a057415122b1f41484bc614dc4c6225d4802f0b382078f7f01ced14931736a6"
+    }
+  ],
+  "closureHandoff": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/independent-review/policy-closure-handoff.json",
+    "bytes": 4164,
+    "sha256": "544c59fb3a6b6c91c2c4259d1731b7be7ea7f6a20fcbee116cd95267e4534b1c"
+  },
+  "releaseScript": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/release-content-authoring.py",
+    "bytes": 5031,
+    "sha256": "3dbcd92ef7fecb60ac2b4359abfa09ed5898a5083a274728de58a355c520680a"
+  },
+  "retainedPreviousRow": {
+    "revision": 3,
+    "deliveryMode": "full",
+    "record": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md",
+    "content": {
+      "status": "complete",
+      "completedAt": "2026-09-26T16:07:53.484Z",
+      "manuscript": "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+      "visualSpecifications": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md",
+      "files": {
+        "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx": "67a5eef76b2276b46144b0ed7ba595353b3fbc50dff556ae28469fa5d839f0e3",
+        "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md": "e19b12a4001bf5f9c3cbf3257dd1a0fbc0c71aaa91ca2525d8424568e841d144",
+        "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json": "7be59635376b34c7182311cf423e0309f309d216ac1d0d9f4112f1892445723f",
+        "src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js": "c4c363c9e60247a00267325bcfa5e4cc8b0bb4689dfeabbd0a985d9017f34766",
+        "src/learn/data/validation-examples.js": "3c194949f3344351ece8d33c5605146d7d36470119c3ee7d290130733511563c",
+        "scripts/verify-representation-concept-intuition.mjs": "665d4e670b6977ebc15815db6b352af7cf6f7d95ceb51ee7f98692ff3fd4d14d"
+      }
+    },
+    "implementation": {
+      "status": "complete",
+      "completedAt": "2026-09-26T16:12:07.745Z",
+      "reviewedFiles": {
+        "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx": "67a5eef76b2276b46144b0ed7ba595353b3fbc50dff556ae28469fa5d839f0e3",
+        "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md": "e19b12a4001bf5f9c3cbf3257dd1a0fbc0c71aaa91ca2525d8424568e841d144",
+        "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json": "7be59635376b34c7182311cf423e0309f309d216ac1d0d9f4112f1892445723f",
+        "src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js": "c4c363c9e60247a00267325bcfa5e4cc8b0bb4689dfeabbd0a985d9017f34766",
+        "src/learn/data/validation-examples.js": "3c194949f3344351ece8d33c5605146d7d36470119c3ee7d290130733511563c",
+        "scripts/verify-representation-concept-intuition.mjs": "665d4e670b6977ebc15815db6b352af7cf6f7d95ceb51ee7f98692ff3fd4d14d",
+        "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-checks.json": "5e589c273dd3ca229679c767d7ad3005158510e0ee015c99d59c2f64c62148a3",
+        "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-review.md": "c874a26653f4cfb15f45e0eb8e50b1902c25f581dd434bcc2b01a193113d258f",
+        "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/browser-checks.json": "cadc2bf4306192bed6ad03df8781ec8ee4e14ecb9137e3d8b2b99e16c3617741",
+        "docs/teaching/concept-intuition/integration-checks.json": "2dc722589498e119ce8fc966b5e8866eca48353f8aa736e87f9271a7fc029f1e",
+        "src/learn/components/LessonOpening.jsx": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348",
+        "src/learn/components/LessonGuide.jsx": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb",
+        "src/learn/components/lesson-navigation.js": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b",
+        "src/learn/components/lesson-guide.css": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2",
+        "src/learn/components/TopicContent.jsx": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6",
+        "src/learn/components/content/Prose.jsx": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff",
+        "src/learn/components/content/Headings.jsx": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f",
+        "src/learn/components/lesson-labs/LessonElements.jsx": "8bb65cf49315753531a00f639d497f493c75ac964f722462cfe606f38f3854d2",
+        "src/learn/learning-base.css": "434562e545573a931609a0695c71ac1f309401179b88bda5db086591fe09a919",
+        "src/learn/components/lesson-endings.css": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6",
+        "src/learn/components/content/Code.jsx": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e",
+        "src/learn/components/content/RemoteCodeBlock.jsx": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290",
+        "src/learn/components/content/LessonCodeDownloads.jsx": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720",
+        "src/learn/components/content/code-downloads.js": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d",
+        "src/learn/components/content/lesson-code.css": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283",
+        "src/learn/components/lesson-labs/useLessonViewport.js": "3bca9b88a8c2b10792c493b4410a0531f2e3a015e73a0838facebb692cd54838"
+      },
+      "evidence": {
+        "author": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json",
+        "independent": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-checks.json",
+        "browser": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/browser-checks.json",
+        "integration": "docs/teaching/concept-intuition/integration-checks.json"
+      },
+      "presentationReviews": [
+        "docs/teaching/lesson-navigation/presentation-review.json",
+        "docs/teaching/lesson-endings/presentation-review.json",
+        "docs/teaching/lesson-code-access/presentation-review.json",
+        "docs/teaching/lesson-code-access/copy-feedback-review.json"
+      ]
+    },
+    "nextAction": "Current concept-by-concept revision is implemented and reviewed. User acceptance remains separate; preserve unchanged numerical evidence and follow the next scoped request.",
+    "previousRevisions": [
+      {
+        "revision": 1,
+        "deliveryMode": "content-first",
+        "record": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+        "content": {
+          "status": "complete",
+          "manuscript": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+          "visualSpecifications": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+          "files": {
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py": "42dc24363cf97f3c40a1b686027eb6d07aa33cfd003671bc0135da7c7c2c27fb",
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json": "dc0311a0c1ba7a72d45708ee2d76f847ad87004108ce99018a549e8b22f51f54",
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md": "74dd4e94c4f95070e4c98fffcc308aef0a957101fafd0d4086bbf2aa50407b30",
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md": "7c341e848742646b8ffc78ef929fc70a53c62c255e40f23c441af18b194919e5",
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md": "7142e5a39e7582339263a2656a59290b0e3dbbba07afbf502affc4f2c9be3432",
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md": "b4c03631fb77311683e470a1dbd08c81d5871de2e3c5603ce4bd7f5d752cad57"
+          },
+          "completedAt": "2026-09-12T12:39:47.860Z",
+          "correctedAt": "2026-09-14T17:06:45.859399+00:00",
+          "corrections": "Phase two appended its implementation section and the disposition of the independent review to the design record. The manuscript, visual specifications, recorded calculations, provenance and dataset are unchanged."
+        },
+        "implementation": {
+          "status": "complete",
+          "reviewedFiles": {
+            "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx": "c16456eee696b78ff1347c53a088cf3f9a85e627d1781473e50d14bf868d0454",
+            "src/learn/data/validation-models.js": "53ac50c510d51052765de8f82809e21ac72b11da4397012bd8f3ece31c062086",
+            "src/learn/data/validation-data.js": "6a7b1a5d9ef55846fb723967202498ef4f71add328b1e94e1ae8e320b317a0a0",
+            "src/learn/data/validation-examples.js": "d5c8677e86c0b7513ef6748624b26a910062b94925b53a29b41ba93ce556394b",
+            "src/learn/components/lesson-labs/ValidationShared.jsx": "30829e8f16cf193ed6f7a2e5bbf80626722d5966bfc890a90e85399a49d5da06",
+            "src/learn/components/lesson-labs/ValidationLabs.jsx": "a448921b3f2ac3ed5a4d66bcda61a652d9ad5eed58be5efd1e829decf5f10d55",
+            "src/learn/components/lesson-labs/ValidationFigures.jsx": "6328ac52acef23c38fc1bb13e9037884c7211f68508beb9c2f5b64ac13c26c3a",
+            "src/learn/components/lesson-labs/validation-labs.css": "c86495c5e65c0a4d2a17b927aac911a092593f63f524ebb12862681b3b43c119",
+            "src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js": "e95b4dc370f106d1503a942baa8b19c1555bc2f8d51112336ea2d2e7af492477",
+            "public/learn-assets/cross-validation/penguins.csv": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+            "public/learn-assets/cross-validation/data-provenance.md": "74dd4e94c4f95070e4c98fffcc308aef0a957101fafd0d4086bbf2aa50407b30",
+            "public/learn-assets/cross-validation/nested-experiment.json": "f8a61a361629e29a0f9bb8e42f1b548620910611210c23709da9b095efd4290f"
+          },
+          "completedAt": "2026-09-14T17:06:45.859399+00:00",
+          "evidence": [
+            "docs/teaching/evidence/validation-models.json",
+            "docs/teaching/evidence/validation-native.json",
+            "docs/teaching/evidence/validation-data.json",
+            "docs/teaching/evidence/validation-browser.json",
+            "docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md"
+          ]
+        },
+        "nextAction": "Implementation complete; sequential audit on 16 September closed tie handling, history identity, finalist semantics, enumeration coverage and figure repairs. Continue from the separate audit ledger."
+      },
+      {
+        "revision": 2,
+        "deliveryMode": "full",
+        "record": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+        "content": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:48.655Z",
+          "manuscript": "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+          "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+          "files": {
+            "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx": "5bdfef7cf8ea2790b2052d18881c5e63ddc2c905b39c297dd0a8e63e2ca017e1",
+            "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md": "b43c3153ef520427188f57429a56fcbfcf9e3490956db35d72d9fea06d55dc90",
+            "src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js": "4393ecbda19f29729c2f48fbea084badad77d97611d35298c3db74d55faa5b18",
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md": "a71aa9ff6ebf5b148fc4f0412bff72d785606252f28d31f03246ff2e37a8f978",
+            "docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md": "a9586f1a1f762fa409d8c06e6145a86fa29fe6b42cd7ebb583314f59f14a2f7f",
+            "src/learn/data/validation-examples.js": "d5c8677e86c0b7513ef6748624b26a910062b94925b53a29b41ba93ce556394b"
+          }
+        },
+        "implementation": {
+          "status": "complete",
+          "completedAt": "2026-09-21T15:16:48.659Z",
+          "reviewedFiles": {
+            "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx": "5bdfef7cf8ea2790b2052d18881c5e63ddc2c905b39c297dd0a8e63e2ca017e1",
+            "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+            "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+            "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+            "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+            "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+            "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+            "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+            "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+            "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+            "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+            "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+            "src/learn/components/lesson-labs/ValidationLabs.jsx": "d22d96f1a80d328b7c08d4de1d29127f3b897432e4dd280f54a20e5e272691ca",
+            "src/learn/data/validation-models.js": "53ac50c510d51052765de8f82809e21ac72b11da4397012bd8f3ece31c062086",
+            "src/learn/components/lesson-labs/ValidationShared.jsx": "2e3484fc2f53b258f595176a3d30fd7e362c859c667713b169b94ed5b84100e8",
+            "src/learn/components/lesson-labs/validation-labs.css": "c86495c5e65c0a4d2a17b927aac911a092593f63f524ebb12862681b3b43c119",
+            "src/learn/components/lesson-labs/ValidationFigures.jsx": "6328ac52acef23c38fc1bb13e9037884c7211f68508beb9c2f5b64ac13c26c3a",
+            "src/learn/data/validation-data.js": "6a7b1a5d9ef55846fb723967202498ef4f71add328b1e94e1ae8e320b317a0a0",
+            "src/learn/data/validation-examples.js": "d5c8677e86c0b7513ef6748624b26a910062b94925b53a29b41ba93ce556394b",
+            "src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js": "4393ecbda19f29729c2f48fbea084badad77d97611d35298c3db74d55faa5b18"
+          }
+        },
+        "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+      }
+    ]
+  },
+  "foreignRowsConserved": 234,
+  "effectiveDesign": "Original complete design plus design-policy-correction.md replacing only P11/D34/L10/N11 and P13/L12 policies; retain D37 static fixture separately.",
+  "readingAttribution": "Root previously read the entire original proposal and DIFFERENT review; Root read the complete amendment, complementary arithmetic report and SAME closure. Independent arithmetic is attributed to /root/nmf_content_recovery; no replay.",
+  "scope": {
+    "mainSections": 11,
+    "drawingJobs": 41,
+    "investigationOwnershipGroups": 14,
+    "teachingProgrammeContracts": 15,
+    "exactRetainedProgrammes": 3,
+    "plannedNewProgrammes": 12,
+    "exactRetainedTasks": 10,
+    "plannedChangedTasks": 13
+  },
+  "requiredContent": [
+    "complete continuous beginner-to-specialist manuscript",
+    "41 actual-object visual contracts and all 14 investigation ownership groups",
+    "15 complete explained programmes: three conserved and twelve new, with real outputs",
+    "all ten conserved and thirteen new solved tasks",
+    "author beginner/specialist reading and DIFFERENT entire content review"
+  ],
+  "limits": [
+    "No content completion claim",
+    "No runtime release or canonical/public changes",
+    "No new science, fits, builds, HTTP or native checks",
+    "Original scientific and access qualifications remain"
+  ]
+}

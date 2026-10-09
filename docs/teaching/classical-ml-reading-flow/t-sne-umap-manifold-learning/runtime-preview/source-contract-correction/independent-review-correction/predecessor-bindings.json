@@ -1,0 +1,50 @@
+{
+  "status": "correction-in-progress; no build or acceptance",
+  "frozen_author_source_packet": {
+    "path": "../author-ready-source.json",
+    "sha256": "a2e5da3e493543312c1d648f0388e30b95140cb74987e295688b2cfb309270e8"
+  },
+  "review": {
+    "path": "../../independent-whole-runtime-review/review.md",
+    "sha256": "82109d5b62d81074bd382f1c40f314e4ba4d5c2882d8f43032bb61a55dae6b3d"
+  },
+  "changed_owner_predecessors": [
+    {
+      "path": "ManifoldDrawing.jsx",
+      "bytes": 8013,
+      "sha256": "1cca35265483af5c78d3afbea08ded83d4b449fa45d6a2f64479c0f7460183fd",
+      "predecessor": "predecessors/ManifoldDrawing.jsx"
+    },
+    {
+      "path": "manifold-models.mjs",
+      "bytes": 7061,
+      "sha256": "dc6ecc40a8d499803610b2eade54ca49624eec9b17728f87b6f1fa067ad6edd6",
+      "predecessor": "predecessors/manifold-models.mjs"
+    },
+    {
+      "path": "ManifoldInvestigations.jsx",
+      "bytes": 23539,
+      "sha256": "3dc91b6d722c453e25e4afee585747a2fae04a859e698cd19a833fcc5e8e7ad7",
+      "predecessor": "predecessors/ManifoldInvestigations.jsx"
+    },
+    {
+      "path": "AffinityFigures.jsx",
+      "bytes": 18244,
+      "sha256": "bdefef9935ca74951f88d5d1795a362b076e5ffed0c79993b54a90bbab22e05c",
+      "predecessor": "predecessors/AffinityFigures.jsx"
+    },
+    {
+      "path": "GeometryFigures.jsx",
+      "bytes": 39168,
+      "sha256": "1a7192e4d506f23d8568a3e0ff5f6d0bdf1e269563e46850b1bace7b7091750f",
+      "predecessor": "predecessors/GeometryFigures.jsx"
+    },
+    {
+      "path": "ManifoldObjects.jsx",
+      "bytes": 17523,
+      "sha256": "50a63d3f1e865b1c961313d16e24ffaa3fe823201e48f17cc18fa27ce0e6b301",
+      "predecessor": "predecessors/ManifoldObjects.jsx"
+    }
+  ],
+  "old_build_unchanged": "build-source-corrected; served at5194; not successor source evidence"
+}

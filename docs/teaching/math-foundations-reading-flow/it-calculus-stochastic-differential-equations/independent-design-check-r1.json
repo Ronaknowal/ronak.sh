@@ -1,0 +1,189 @@
+{
+  "reviewer": "/root/queue_nonconvex_resume",
+  "scope": "Complementary whole-design review; source/helper and new exact algebra only.",
+  "createdAt": "2026-10-09T18:45:44.541Z",
+  "noOldMains": true,
+  "noRandomDraws": true,
+  "noBuildOrNativeCampaign": true,
+  "modelSha256": "f48f113cc9a256e421470614215e003306b372ea1d079644f45ea4ce17f8328d",
+  "checks": [
+    {
+      "name": "D42 signed bias mu=-0.5",
+      "pass": true,
+      "evidence": {
+        "mu": -0.5,
+        "n": 16,
+        "bias": -0.0048203562805611,
+        "realLogDefined": false
+      }
+    },
+    {
+      "name": "D42 signed bias mu=0",
+      "pass": true,
+      "evidence": {
+        "mu": 0,
+        "n": 16,
+        "bias": 0,
+        "realLogDefined": false
+      }
+    },
+    {
+      "name": "D42 signed bias mu=0.4",
+      "pass": true,
+      "evidence": {
+        "mu": 0.4,
+        "n": 16,
+        "bias": -0.007319076980708106,
+        "realLogDefined": false
+      }
+    },
+    {
+      "name": "D42 signed bias mu=1",
+      "pass": true,
+      "evidence": {
+        "mu": 1,
+        "n": 16,
+        "bias": -0.08035333109244513,
+        "realLogDefined": false
+      }
+    },
+    {
+      "name": "L6 valid parameter corner produces invariant variance 14.4",
+      "pass": true,
+      "evidence": {
+        "theta": 0.05,
+        "eta": 1.2,
+        "stationaryVariance": 14.399999999999999
+      }
+    },
+    {
+      "name": "L6 old helper rejects invariant comparison as initialVariance > 4",
+      "pass": true,
+      "evidence": {
+        "error": "Initial variance must be finite and between 0 and 4.",
+        "name": "RangeError"
+      }
+    },
+    {
+      "name": "L6 invariant variance identity independently preserves 14.4",
+      "pass": true,
+      "evidence": {
+        "explanation": "Retained initial variance plus independent injected variance."
+      }
+    },
+    {
+      "name": "D19 unit contour rho=-0.6",
+      "pass": true,
+      "evidence": {
+        "point": [
+          0.4472135954999579,
+          0.4472135954999579
+        ],
+        "radiusSquared": 0.9999999999999998,
+        "eigenvalues": [
+          0.4,
+          1.6
+        ]
+      }
+    },
+    {
+      "name": "D19 unit contour rho=0",
+      "pass": true,
+      "evidence": {
+        "point": [
+          0.7071067811865476,
+          0.7071067811865476
+        ],
+        "radiusSquared": 1.0000000000000002,
+        "eigenvalues": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "D19 unit contour rho=0.6",
+      "pass": true,
+      "evidence": {
+        "point": [
+          0.8944271909999159,
+          0.8944271909999159
+        ],
+        "radiusSquared": 1,
+        "eigenvalues": [
+          1.6,
+          0.4
+        ]
+      }
+    },
+    {
+      "name": "T15 both intermediate states and terminal",
+      "pass": true,
+      "evidence": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          -0.8
+        ],
+        [
+          0.30000000000000004,
+          -0.55
+        ]
+      ]
+    },
+    {
+      "name": "T15 transposed map has observably different endpoint",
+      "pass": true,
+      "evidence": {
+        "wrong": [
+          1.3,
+          -0.7999999999999999
+        ]
+      }
+    },
+    {
+      "name": "T15 zero second driver leaves first-column effect",
+      "pass": true,
+      "evidence": {
+        "endpoint": [
+          1.1,
+          -0.95
+        ]
+      }
+    },
+    {
+      "name": "T13 independent midpoint and split increments",
+      "pass": true,
+      "evidence": {
+        "midpoint": -0.55,
+        "increments": [
+          -0.35000000000000003,
+          1.15
+        ]
+      }
+    },
+    {
+      "name": "T13 zero residual leaves conditional variance positive",
+      "pass": true,
+      "evidence": {
+        "midpoint": 0.2,
+        "conditionalVariance": 0.25
+      }
+    },
+    {
+      "name": "T16 conditional versus total variance",
+      "pass": true,
+      "evidence": {
+        "attenuation": 0.5,
+        "conditionalVariance": 0.75,
+        "initialVariance4": 1.75,
+        "initialVariance1": 1
+      }
+    }
+  ],
+  "passed": 16,
+  "total": 16
+}

@@ -1,0 +1,463 @@
+.multimodal-flow .mm-anchor {
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.multimodal-flow .mm-drawing {
+  color: #ddd;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.multimodal-flow :is(.mm-grid-2, .mm-grid-3, .mm-grid-4) {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.multimodal-flow .mm-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.multimodal-flow .mm-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.multimodal-flow .mm-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.multimodal-flow :is(.mm-grid-2, .mm-grid-3, .mm-grid-4) > * {
+  min-width: 0;
+}
+
+.multimodal-flow .mm-label {
+  margin: 0 0 0.6rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--mm-colour, #ddd);
+}
+
+.multimodal-flow
+  :is(.mm-note, .mm-pixel-object small, .mm-matrix-object small) {
+  color: #b9b9b9;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.multimodal-flow .mm-equation {
+  font-variant-numeric: tabular-nums;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.multimodal-flow .mm-vector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.multimodal-flow .mm-value {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  padding: 0.4rem;
+  color: var(--mm-colour, #ddd);
+  border: 1px solid var(--mm-colour, #aaa);
+  background: color-mix(in srgb, var(--mm-colour, #aaa) 12%, transparent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+}
+
+.multimodal-flow .mm-matrix {
+  display: grid;
+  width: max-content;
+  max-width: 100%;
+  gap: 0.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.multimodal-flow .mm-matrix > span {
+  aspect-ratio: 1;
+  min-width: 0;
+  border: 1px solid var(--mm-colour);
+  background: color-mix(in srgb, var(--mm-colour) 22%, transparent);
+}
+
+.multimodal-flow .mm-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-block: 0.75rem;
+  color: #b9b9b9;
+  font-size: 0.9rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.multimodal-flow .mm-arrow svg {
+  flex: none;
+}
+.multimodal-flow .mm-interface-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  min-width: 0;
+}
+.multimodal-flow .mm-alternatives {
+  align-items: stretch;
+}
+.multimodal-flow .mm-interface-output {
+  margin-top: auto;
+}
+.multimodal-flow .mm-interface-choice {
+  text-align: center;
+  color: #b9b9b9;
+  margin-block: 0.6rem;
+}
+.multimodal-flow .mm-branch-wire {
+  display: block;
+  width: 100%;
+  height: 2rem;
+  color: #aaa;
+}
+.multimodal-flow .mm-text-route {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) 4rem minmax(0, 0.8fr) 4rem minmax(
+      0,
+      1fr
+    );
+  gap: 0.75rem;
+  align-items: center;
+  margin-block: 1rem;
+}
+.multimodal-flow .mm-text-route > * {
+  min-width: 0;
+}
+.multimodal-flow .mm-text-connector svg {
+  transform: rotate(-90deg);
+}
+
+.multimodal-flow .mm-pixel-grid {
+  display: grid;
+  position: relative;
+  width: 100%;
+  max-width: 16rem;
+  aspect-ratio: 1;
+  isolation: isolate;
+}
+
+.multimodal-flow .mm-pixel-grid > :is(button, span):not(.mm-patch-outline) {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid #555;
+  border-radius: 0;
+  font: inherit;
+}
+
+.multimodal-flow .mm-pixel-grid > button {
+  cursor: pointer;
+}
+.multimodal-flow .mm-pixel-grid > button:focus-visible {
+  outline: 3px dashed #fff;
+  outline-offset: -5px;
+  z-index: 3;
+}
+.multimodal-flow .mm-patch-outline {
+  position: absolute;
+  border: 2px solid var(--mm-colour);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.multimodal-flow .mm-patch-outline b {
+  position: absolute;
+  top: 0.1rem;
+  left: 0.1rem;
+  color: var(--mm-colour);
+  background: #111;
+  padding: 0 0.2rem;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.multimodal-flow .mm-selected-patch {
+  outline: 2px dashed #fff;
+  outline-offset: -6px;
+  z-index: 2;
+}
+
+.multimodal-flow .mm-patch-rows {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+.multimodal-flow .mm-patch-rows > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  align-items: baseline;
+  color: var(--mm-colour);
+  padding: 0.4rem;
+}
+
+.multimodal-flow .mm-selected-row {
+  outline: 1px dashed #fff;
+  outline-offset: 2px;
+}
+.multimodal-flow .mm-svg {
+  display: block;
+  width: 100%;
+  max-width: 18.75rem;
+  height: auto;
+}
+.multimodal-flow .mm-svg text {
+  font-family: inherit;
+  font-size: 13px;
+  fill: #ddd;
+}
+.multimodal-flow .mm-axis {
+  stroke: #888;
+  stroke-width: 1;
+}
+.multimodal-flow .mm-grid-line {
+  stroke: #444;
+  stroke-width: 1;
+}
+
+.multimodal-flow .mm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.multimodal-flow .mm-table :is(th, td) {
+  padding: 0.5rem 0.3rem;
+  text-align: left;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid #444;
+  color: var(--mm-colour, #ddd);
+}
+
+.multimodal-flow .mm-forward-values {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.multimodal-flow .mm-residual-stages {
+  display: grid;
+  gap: 1rem;
+}
+.multimodal-flow .mm-residual-stages > div {
+  padding: 0.5rem;
+}
+.multimodal-flow .mm-residual-stages p {
+  margin-block: 0.35rem;
+}
+.multimodal-flow .mm-code-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.3rem;
+  max-width: 14rem;
+}
+.multimodal-flow .mm-code-grid .mm-value {
+  min-width: 0;
+}
+.multimodal-flow .mm-grayscale-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.multimodal-flow .mm-grayscale-scale {
+  display: block;
+  width: 8rem;
+  height: 1rem;
+  border: 1px solid #888;
+  background: linear-gradient(to right, #000, #fff);
+}
+.multimodal-flow .mm-audio-matrix {
+  display: grid;
+  grid-template-columns: minmax(4rem, 1fr) repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  max-width: 24rem;
+  align-items: center;
+}
+.multimodal-flow .mm-audio-matrix > span {
+  overflow-wrap: anywhere;
+}
+.multimodal-flow .mm-ordered-codes {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
+  list-style: none;
+}
+.multimodal-flow .mm-ordered-codes li {
+  display: grid;
+  gap: 0.35rem;
+  flex: 0 1 9rem;
+  color: var(--mm-colour);
+}
+.multimodal-flow .mm-sample-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.multimodal-flow .mm-sample-times span {
+  color: var(--mm-colour);
+  padding: 0.3rem;
+  border: 1px solid var(--mm-colour);
+}
+.multimodal-flow .mm-hit-sample {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.multimodal-flow .mm-namespace-ranges {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.multimodal-flow .mm-namespace-ranges > div {
+  color: var(--mm-colour);
+  display: grid;
+  gap: 0.4rem;
+}
+.multimodal-flow .mm-causal-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1.5rem));
+  width: max-content;
+  max-width: 100%;
+  gap: 0.15rem;
+  margin-block: 0.75rem;
+}
+.multimodal-flow .mm-causal-grid span {
+  aspect-ratio: 1;
+  min-width: 0;
+}
+.multimodal-flow .mm-allowed-key {
+  background: #777;
+  border: 1px solid #ccc;
+}
+.multimodal-flow .mm-future-key {
+  border: 1px dashed #666;
+}
+.multimodal-flow .mm-pack-positions {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.multimodal-flow .mm-pack-positions > div {
+  display: grid;
+  gap: 0.4rem;
+  align-content: start;
+  color: var(--mm-colour);
+}
+.multimodal-flow .mm-pack-positions .mm-arrow {
+  margin-block: 0;
+}
+.multimodal-flow .mm-ignore-target {
+  border: 1px dashed #888;
+  color: #bbb;
+  padding: 0.35rem;
+}
+.multimodal-flow .mm-text-target {
+  border: 1px solid #e2b55a;
+  color: #e2b55a;
+  padding: 0.35rem;
+}
+.multimodal-flow .mm-budget-bar {
+  display: flex;
+  position: relative;
+  height: 2rem;
+  margin: 1rem 1px;
+}
+.multimodal-flow .mm-budget-bar > span {
+  flex: none;
+  min-width: 0;
+}
+.multimodal-flow .mm-budget-bar > i {
+  position: absolute;
+  top: -0.25rem;
+  bottom: -0.25rem;
+  width: 1px;
+  background: #fff;
+}
+.multimodal-flow .mm-budget-counts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+.multimodal-flow .mm-budget-counts > div {
+  display: grid;
+  color: var(--mm-colour);
+  gap: 0.2rem;
+}
+.multimodal-flow .mm-budget-counts strong {
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@container (max-width: 48rem) {
+  .multimodal-flow .mm-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .multimodal-flow .mm-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .multimodal-flow .mm-pack-positions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container (max-width: 36rem) {
+  .multimodal-flow :is(.mm-grid-2, .mm-grid-3, .mm-grid-4) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .multimodal-flow .mm-pack-positions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .multimodal-flow .mm-budget-counts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .multimodal-flow .mm-text-route {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .multimodal-flow .mm-text-connector svg {
+    transform: none;
+  }
+  .multimodal-flow .mm-branch-wire {
+    display: none;
+  }
+  .multimodal-flow .mm-alternatives {
+    gap: 2rem;
+  }
+}
+
+@container (min-width: 43rem) {
+  .multimodal-flow .mm-digit-triplet {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.multimodal-flow .mm-math {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.multimodal-flow .mm-math .katex-display {
+  padding-block: 0.5em;
+}
+.multimodal-flow .mm-math:focus-visible {
+  outline: 2px solid var(--flow-accent, #e2b55a);
+  outline-offset: 3px;
+}

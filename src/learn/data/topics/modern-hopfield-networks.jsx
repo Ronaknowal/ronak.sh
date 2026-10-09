@@ -1,12 +1,12 @@
-// Generated from the full prepared manuscript by scripts/generate-hopfield-lesson.mjs.
+// Reading-flow revision: preserve this reviewed lesson; the historical generator is guarded.
 import {Prose,H2,H3,CodeBlock} from '../../components/content';
 import {Math as InlineMath,MathBlock} from '../../components/content/Math.jsx';
 import {LessonIntro} from '../../components/lesson-labs/LessonElements.jsx';
 import {NeuralTable} from '../../components/lesson-labs/NeuralLessonElements.jsx';
-import {LookupFigure,NormTrapFigure,SignedMemoryFigure,BinaryWorkedFigure,BinaryEnergyFigure,BinaryCapacityFigure,ContinuousWorkedFigure,CobwebFigure,EnergyLandscapeFigure,KeyValueFigure,ModuleOwnershipFigure,QueryTrainingFigure,DigitRolesFigure,DigitArchitectureFigure,DigitMetricsFigure,MarginFigure,CapacityAxesFigure,ParityFigure,BagPoolingFigure,HopularFigure,SensitivityFigure,ChangingBankFigure} from '../../components/lesson-labs/HopfieldFigures.jsx';
+import {LookupFigure,NormTrapFigure,SignedMemoryFigure,BinaryWorkedFigure,BinaryEnergyFigure,BinaryCapacityFigure,ContinuousWorkedFigure,CobwebFigure,EnergyLandscapeFigure,KeyValueFigure,ModuleOwnershipFigure,QueryTrainingFigure,DigitRolesFigure,DigitArchitectureFigure,DigitMetricsFigure,MarginFigure,CapacityAxesFigure,ParityFigure,BagPoolingFigure,HopularFigure,SensitivityFigure,ChangingBankFigure,StorageFigure,BinaryNetworkFigure,PairEnergyFigure,SynchronousCycleFigure,EnergyBoundFigure,DigitAnatomyFigure,EnergyTransformerFigure} from '../../components/lesson-labs/HopfieldFlowFigures.jsx';
 import {BinaryMemoryLab,ContinuousMemoryLab,AssociationLab} from '../../components/lesson-labs/HopfieldLabs.jsx';
 import {DigitMemoryLab,DigitStoriesFigure,HopfieldProgram} from '../../components/lesson-labs/HopfieldDigitLab.jsx';
-export default {title:"Modern Hopfield Networks",readTime:"~70 min read + investigations and practice",hasIntegratedGuide:true,content:()=> <div className="neural-lesson neural-lesson-neutral hopfield-lesson"><LessonIntro prerequisites="Vectors, dot products and weighted averages; derivatives and the energy argument are developed here." sections={[["1-a-memory-is-more-than-a-label","1. A memory is more than a label"],["2-classical-hopfield-memory-correct-one-feature-at-a-time","2. Classical Hopfield memory: correct one feature at a time"],["3-continuous-memories-score-distribute-weight-retrieve","3. Continuous memories: score, distribute weight, retrieve"],["4-attention-reads-associations-as-well-as-memories","4. Attention reads associations as well as memories"],["5-a-real-memory-bank-for-handwritten-digits","5. A real memory bank for handwritten digits"],["6-build-a-reliable-association-system","6. Build a reliable association system"],["7-optional-depth-what-capacity-and-energy-really-promise","7. Optional depth: what capacity and energy really promise"],["8-applications-that-make-the-memory-choice-matter","8. Applications that make the memory choice matter"],["9-practice-predict-calculate-and-diagnose","9. Practice: predict, calculate and diagnose"],["references-another-way-to-learn-it","References & another way to learn it"]]}>Turn a partial cue into a memory read, then test what that read actually improves.</LessonIntro>
+export default {title:"Modern Hopfield Networks",readTime:"~70 min read + investigations and practice",hasIntegratedGuide:true,content:()=> <div className="neural-lesson neural-lesson-neutral hopfield-lesson lesson-flow"><LessonIntro prerequisites="Vectors, dot products and weighted averages; derivatives and the energy argument are developed here." sections={[["1-a-memory-is-more-than-a-label","1. A memory is more than a label"],["2-classical-hopfield-memory-correct-one-feature-at-a-time","2. Classical Hopfield memory: correct one feature at a time"],["3-continuous-memories-score-distribute-weight-retrieve","3. Continuous memories: score, distribute weight, retrieve"],["4-attention-reads-associations-as-well-as-memories","4. Attention reads associations as well as memories"],["5-a-real-memory-bank-for-handwritten-digits","5. A real memory bank for handwritten digits"],["6-build-a-reliable-association-system","6. Build a reliable association system"],["7-optional-depth-what-capacity-and-energy-really-promise","7. Optional depth: what capacity and energy really promise"],["8-applications-that-make-the-memory-choice-matter","8. Applications that make the memory choice matter"],["9-practice-calculate-modify-and-diagnose","9. Practice: calculate, modify and diagnose"],["references-another-way-to-learn-it","References & another way to learn it"]]}>Turn a partial cue into a memory read, then test what that read actually improves.</LessonIntro>
 <Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Flip cue bits and visit order, move continuous memories, and edit the keys, values and pixels of a real handwriting cue. Follow the resulting energy, retrieval weights and returned values. Compare cases where recall repairs a memory with cases where a cleaner reconstructed image represents the wrong class."}</Prose>
 
 <Prose>{"A smudged handwritten digit still contains clues: the bend of a stroke, an opening in a loop, the position of a vertical line. Suppose we keep examples of handwriting and ask a model to reconstruct something useful from those clues. The interesting question is not only which example receives the highest score. It is whether repeatedly using the retrieved information improves the cue, whether several examples should contribute, and how to recognize an incorrect reconstruction."}</Prose>
@@ -21,11 +21,15 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <H2>{"1. A memory is more than a label"}</H2>
 
+<Prose>What should a memory do with a damaged cue? First look at four on/off features: +1 means on, −1 means off; the cue differs in its second cell.</Prose>
+
+<LookupFigure />
+
 <Prose>{"Imagine storing the four-feature pattern"}</Prose>
 
 <Prose>{""}<strong>{"[on, on, off, off] = [1, 1, −1, −1]."}</strong>{""}</Prose>
 
-<Prose>{"An arriving cue is [1, −1, −1, −1]: one feature is wrong. We want the two left features to support one another and the two right features to oppose them. Those relationships can correct a feature without being told which feature was corrupted."}</Prose>
+<Prose>{"An arriving cue is [1, −1, −1, −1]: one feature is wrong. We want the two upper features to support one another and the two lower features to oppose them. Those relationships can correct a feature without being told which feature was corrupted."}</Prose>
 
 <Prose>{"There are three different success criteria:"}</Prose>
 
@@ -33,7 +37,9 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"A new person's handwritten “1” was never in our memory bank. Returning the pixels of an older “1” may classify it correctly while changing its handwriting. A convex combination of several examples may improve average reconstruction error without matching any particular stored image."}</Prose>
 
-<LookupFigure />
+<Prose>To compare continuous shapes later, we need a numerical agreement score. In this new two-coordinate example, the cue q and first memory x₁ coincide; the second memory x₂ is longer. Follow the common coordinate scale.</Prose>
+
+<NormTrapFigure />
 
 <Prose>{"A useful geometric refresher: a dot product adds coordinate-wise agreements. For q = [1, 0], memories [1, 0] and [3, 1] score 1 and 3. The second wins by dot product even though the first has Euclidean distance zero. If all memories have equal norm, minimizing squared distance to a fixed cue is equivalent to maximizing dot product, because"}</Prose>
 
@@ -41,11 +47,17 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"When norms differ, the middle term matters. Normalizing nonzero vectors to unit length makes the dot product a cosine similarity. That is a modeling choice: it removes information carried only by magnitude."}</Prose>
 
-<NormTrapFigure />
-
 <H2>{"2. Classical Hopfield memory: correct one feature at a time"}</H2>
 
 <H3>{"Store relationships"}</H3>
+
+<Prose>How do four stored signs become correction rules? Each pair recommends either matching or opposing signs. The outer product writes all pair recommendations into a matrix; dividing by four scales them, then self-connections are removed.</Prose>
+
+<StorageFigure />
+
+<Prose>The same matrix can be drawn as a recurrent network. Each feature has connections to the other three; symmetry means the same relationship is used in both directions.</Prose>
+
+<BinaryNetworkFigure />
 
 <Prose>{"Let P binary memories be rows of X, each containing d values in {−1, +1}. The Hebbian storage rule forms"}</Prose>
 
@@ -59,19 +71,27 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"A neuron does not vote for itself: removing the diagonal makes the local field describe the other features' evidence. A nonzero diagonal can change update behavior; it does not simply force every state to become all ones."}</Prose>
 
-<SignedMemoryFigure />
-
 <H3>{"Read relationships"}</H3>
+
+<Prose>The stored matrix is now fixed. How can its relationships repair one cell? Each other feature sends its current sign through a signed connection; the three violet products are added. Their sum is the local field at the receiving coordinate.</Prose>
+
+<SignedMemoryFigure />
 
 <Prose>{"The "}<strong>{"local field"}</strong>{" at coordinate i is hᵢ = Σⱼ Wᵢⱼsⱼ. If it is positive, set sᵢ to +1; if negative, set it to −1. At exactly zero, retain the current value."}</Prose>
 
 <Prose>{"Update one coordinate, then use the changed state when updating the next coordinate. This is an "}<strong>{"asynchronous update"}</strong>{". A "}<strong>{"sweep"}</strong>{" visits every coordinate once."}</Prose>
 
-<Prose>{"Starting from [1, −1, −1, −1], feature 1 sees field +0.25 and stays +1. Feature 2 then sees +0.75 and changes to +1. Features 3 and 4 already agree with their negative fields. After that sweep the state is the stored pattern."}</Prose>
+<Prose>Here is the moment our running cue changes. The white outline follows coordinate 2; the other signs stay fixed.</Prose>
 
 <BinaryWorkedFigure />
 
+<Prose>{"Starting from [1, −1, −1, −1], feature 1 sees field +0.25 and stays +1. Feature 2 then sees +0.75 and changes to +1. Features 3 and 4 already agree with their negative fields. After that sweep the state is the stored pattern."}</Prose>
+
 <H3>{"Why this particular update settles"}</H3>
+
+<Prose>What does the successful flip improve? Count one contribution from every undirected connection. Preferred sign relationships lower the total; the table-like drawing shows each actual pair before and after coordinate 2 changes.</Prose>
+
+<PairEnergyFigure />
 
 <Prose>{"Define an energy, a scalar score assigned to the whole configuration:"}</Prose>
 
@@ -89,9 +109,15 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"This is a local guarantee. It does not say the state is the desired memory, the closest memory, or the global minimum."}</Prose>
 
+<Prose>The whole first sweep has one downward jump, with flat steps for unchanged coordinates. Each step uses the latest state.</Prose>
+
 <BinaryEnergyFigure />
 
 <Prose>{""}<strong>{"Why update order matters."}</strong>{" From [−1, −1, −1, −1], the forward order 1, 2, 3, 4 reaches [1, 1, −1, −1]; the reverse order reaches [−1, −1, 1, 1]. Both have energy −1.5. With no thresholds, E(s) = E(−s), so the inverse pattern is equally plausible to this energy."}</Prose>
+
+<Prose>What if both neurons update at once from the old state? In this separate two-neuron counterexample, each copies the other, so the signs swap forever.</Prose>
+
+<SynchronousCycleFigure />
 
 <Prose>{"If all coordinates change simultaneously, the proof above no longer applies: each changed field was computed against the old state. For W = [[0, 1], [1, 0]], synchronous updates alternate [1, −1] → [−1, 1] → [1, −1]. A stopping limit is not proof of convergence."}</Prose>
 
@@ -105,13 +131,19 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"A small experiment is easier to interpret than an unexplained theoretical line. With d = 64, eight independently generated banks at each size, and exactly six randomly flipped cue bits, our recorded run gives:"}</Prose>
 
+<Prose>The two bars ask different questions of the same sampled bank: does an undamaged memory stay fixed, and does a damaged cue return exactly?</Prose>
+
+<BinaryCapacityFigure />
+
 <NeuralTable caption={"When memories interfere"} headers={[<>{"Patterns per bank"}</>,<>{"Stored patterns tested across 8 banks"}</>,<>{"Exact fixed states"}</>,<>{"Exact recalls from damaged cues"}</>]} rows={[[<>{"2"}</>,<>{"16"}</>,<>{"16"}</>,<>{"16"}</>],[<>{"6"}</>,<>{"48"}</>,<>{"48"}</>,<>{"47"}</>],[<>{"10"}</>,<>{"80"}</>,<>{"61"}</>,<>{"56"}</>],[<>{"16"}</>,<>{"128"}</>,<>{"49"}</>,<>{"29"}</>],[<>{"24"}</>,<>{"192"}</>,<>{"12"}</>,<>{"2"}</>]]} />
 
 <Prose>{"“Exact fixed state” means the original pattern would retain every coordinate under the tie-preserving local rule. Recall starts with damage and uses sequential updates. The two columns ask different questions, and neither eight-bank experiment estimates a universal capacity constant."}</Prose>
 
-<BinaryCapacityFigure />
-
 <H2>{"3. Continuous memories: score, distribute weight, retrieve"}</H2>
+
+<Prose>Binary signs cannot express a graded mixture. We now switch explicitly to two real-valued memories [1,0] and [−1,0], and cue q=[0.2,0.4]. A dot measures agreement; β=2 sharpens those scores; softmax turns them into positive shares adding to one. Each share scales its stored row, then the rows are added.</Prose>
+
+<ContinuousWorkedFigure />
 
 <Prose>{"The modern continuous construction keeps the memory vectors explicitly. X now has P rows and d real-valued columns. A cue q has d coordinates."}</Prose>
 
@@ -129,8 +161,6 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"The vertical component disappears because neither memory contains one. The horizontal component becomes more positive, but it does not jump to +1."}</Prose>
 
-<ContinuousWorkedFigure />
-
 <Prose>{"Apply the same update again:"}</Prose>
 
 <NeuralTable caption={"Work through two memories"} headers={[<>{"Update count"}</>,<>{"Horizontal coordinate"}</>,<>{"Vertical coordinate"}</>]} rows={[[<>{"0"}</>,<>{"0.200000"}</>,<>{"0.400000"}</>],[<>{"1"}</>,<>{"0.379949"}</>,<>{"0"}</>],[<>{"2"}</>,<>{"0.641017"}</>,<>{"0"}</>],[<>{"3"}</>,<>{"0.857026"}</>,<>{"0"}</>]]} />
@@ -145,11 +175,17 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"Now reduce β to 0.5. The same cue's horizontal coordinates become 0.099668, 0.049793 and 0.024891. Repetition approaches the middle, averaging the memories instead of selecting one."}</Prose>
 
+<Prose>The next-state curve and the identity line show where repetition can stop. The cyan staircase carries a state from the curve across to the identity line, then uses that coordinate for its next read.</Prose>
+
 <CobwebFigure />
 
 <Prose>{"A cue [0, 0.6] gives equal weights and reaches [0, 0]. It stays there even at β = 2. The exact symmetric state remains fixed although a small horizontal disturbance grows. A balanced cue does not acquire evidence about which memory was intended just because we turn up β."}</Prose>
 
 <H3>{"The energy behind the update"}</H3>
+
+<Prose>Why do these reads settle rather than run away? The grey contours group states with equal energy, a scalar objective; the route follows our original cue, and the plot records the same calculated objective after each read.</Prose>
+
+<EnergyLandscapeFigure />
 
 <Prose>{"For fixed X and β > 0, write"}</Prose>
 
@@ -163,6 +199,10 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"A stationary point therefore satisfies q = F(q). Writing this equality identifies a fixed-point equation; it does not solve it in one step."}</Prose>
 
+<Prose>We can show why the update lowers energy by building an easier upper-bound curve that touches the current one. The diagram takes a horizontal slice through the same opposite-memory model; its quadratic bound is minimized at the next read.</Prose>
+
+<EnergyBoundFigure />
+
 <Prose>{"Why does the iteration decrease E? Let g(q) = β⁻¹log Σ exp(βxᵢᵀq). Because g is convex,"}</Prose>
 
 <Prose>{"g(z) ≥ g(q) + ∇g(q)ᵀ(z − q)."}</Prose>
@@ -175,15 +215,18 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"For the β = 2 example, energies at updates 0–3 are −0.285550, −0.406684, −0.472651 and −0.505746. The second update changes the state substantially. Calling the first read “exact one-step convergence” would contradict the numbers."}</Prose>
 
-<EnergyLandscapeFigure />
-
 <Prose>{"The "}<a href={"https://arxiv.org/abs/2008.02217"}>{"Ramsauer paper"}</a>{" proves convergence properties and much stronger local retrieval results under separation assumptions. “One update” in those retrieval results means reaching a prescribed small error near an associated fixed point, not equality after one update for arbitrary memories and cues."}</Prose>
 
-<ContinuousMemoryLab />
+<Prose>The decrease bound and bounded energy imply that step sizes tend to zero. The paper further establishes stationary limit points; convergence to one state follows when stationary points at the limit energy are finite. A stationary point may be a saddle, and none of this makes one read exact for arbitrary cues.</Prose>
+
 
 <H3>{"A useful sensitivity connection"}</H3>
 
-<Prose>{"The derivative of retrieval is"}</Prose>
+<Prose>A balanced read may be fragile even when its energy is well defined. Compare a tiny horizontal cue displacement with the actual returned displacement. β controls how strongly the two opposite memories compete.</Prose>
+
+<SensitivityFigure />
+
+<Prose>The Jacobian J_F lists how each returned coordinate changes for a small change in each cue coordinate. Its norm is the largest local magnification of a small Euclidean displacement. For this read, that derivative is</Prose>
 
 <div className="neural-equation"><MathBlock>{"J_F(q)=\\beta X^\\top[\\operatorname{diag}(p)-pp^\\top]X=\\beta\\operatorname{Cov}_p(x)."}</MathBlock></div>
 
@@ -191,25 +234,29 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"In our two-memory example, F′(0) = β. At β = 0.5, small horizontal errors shrink near zero; at β = 2, they grow. This connects the previous lesson's derivative bounds to an observable attraction or repulsion. A small local derivative near one memory does not establish a global contraction over every cue."}</Prose>
 
-<SensitivityFigure />
+<Prose>Now vary the same bank, cue and sharpness together. The investigation exposes the read, energy path and local Jacobian just developed; every row can be edited directly.</Prose>
+
+<ContinuousMemoryLab />
 
 <H2>{"4. Attention reads associations as well as memories"}</H2>
 
+<Prose>So far the matched memory was also the returned vector. What if we want its label or another attached value? A key is the description used for comparison; its value is the attached payload. This separate example uses two-coordinate keys but scalar values 10 and −2.</Prose>
+
+<KeyValueFigure />
+
 <Prose>{"A library catalogue separates the description used to search from the information returned. A key might describe a book's subject; the value might be its location. Associative neural memory can use the same separation."}</Prose>
 
-<Prose>{"Let K contain P keys of width dₖ, V contain P associated values of width dᵥ, and Q contain B query rows. The read is"}</Prose>
+<Prose>{"Let K contain P keys of width dₖ, V contain P associated values of width dᵥ, and Q contain N query rows (the retained programs call this batch size B). The read is"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"A=\\operatorname{softmax}(\\beta QK^\\top),\\qquad Z=AV."}</MathBlock></div>
 
-<NeuralTable caption={"4. Attention reads associations as well as memories"} headers={[<>{"Quantity"}</>,<>{"Shape"}</>,<>{"Meaning"}</>]} rows={[[<>{"Q"}</>,<>{"B × dₖ"}</>,<>{"B requests"}</>],[<>{"K"}</>,<>{"P × dₖ"}</>,<>{"descriptions used to score memories"}</>],[<>{"QKᵀ"}</>,<>{"B × P"}</>,<>{"one score per query-memory pair"}</>],[<>{"A"}</>,<>{"B × P"}</>,<>{"row-normalized allocation of weight"}</>],[<>{"V"}</>,<>{"P × dᵥ"}</>,<>{"payload attached to each memory"}</>],[<>{"Z"}</>,<>{"B × dᵥ"}</>,<>{"retrieved payloads"}</>]]} />
+<NeuralTable caption={"4. Attention reads associations as well as memories"} headers={[<>{"Quantity"}</>,<>{"Shape"}</>,<>{"Meaning"}</>]} rows={[[<>{"Q"}</>,<>{"N × dₖ"}</>,<>{"N requests"}</>],[<>{"K"}</>,<>{"P × dₖ"}</>,<>{"descriptions used to score memories"}</>],[<>{"QKᵀ"}</>,<>{"N × P"}</>,<>{"one score per query-memory pair"}</>],[<>{"A"}</>,<>{"N × P"}</>,<>{"row-normalized allocation of weight"}</>],[<>{"V"}</>,<>{"P × dᵥ"}</>,<>{"payload attached to each memory"}</>],[<>{"Z"}</>,<>{"N × dᵥ"}</>,<>{"retrieved payloads"}</>]]} />
 
-<Prose>{"For one query, K = V = X and β = 1/√d, this is exactly the modern Hopfield update written with row vectors. The transpose convention is the only difference. Our complete CPU comparison against PyTorch scaled dot-product attention returns [0.1688805062, 0.4355881251], with maximum difference 2.78 × 10⁻¹⁷ in float64."}</Prose>
+<Prose>When keys and values are the same memory rows, K=V=X, this is the earlier weighted-memory read written with query rows rather than a column. With β=1/√d it matches the default attention scale. For a separate three-memory comparison, X=[[1,0],[0,1],[−1,0]], q=[0.3,−0.2], the complete program obtains [0.1688805062,0.4355881251]; its PyTorch float64 difference is 2.78×10⁻¹⁷.</Prose>
 
 <Prose>{"A learned value projection can then transform the key-space read into another space. Ordinary attention permits keys and values to have independent projections. Its association formula still makes sense, but the output is no longer automatically a state update of the same scalar energy we just derived."}</Prose>
 
 <Prose>{"For example, keys [1, 0] and [0, 1], cue [0.6, −0.2], and β = 1 give weights [0.689974, 0.310026]. Attach scalar payloads 10 and −2. The returned payload is approximately 6.279694, a scalar. It cannot be fed directly into the two-dimensional key-space energy."}</Prose>
-
-<KeyValueFigure />
 
 <H3>{"Classify by combining memory labels"}</H3>
 
@@ -223,6 +270,10 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <H3>{"Three useful module designs"}</H3>
 
+<Prose>The same read can sit inside three different systems. Cyan arrays are supplied by the current input; amber arrays are learned parameters retained between inputs. Notice which side stays in the model.</Prose>
+
+<ModuleOwnershipFigure />
+
 <Prose>{""}<strong>{"Associate two sets."}</strong>{" Queries come from one input and keys/values from another. Image patches can query a set of candidate object descriptions; a decoder can query encoded input. This connects to "}<a href={"/learn/path/full-curriculum/interleaved-cross-attention-architectures?module=deep-learning-fundamentals"}>{"Cross-Attention Architectures"}</a>{"."}</Prose>
 
 <Prose>{""}<strong>{"Pool a variable-sized set."}</strong>{" Learn one or several query vectors. Each query searches the input's keys and returns a weighted summary. If the input rows are permuted and their keys/values stay paired, the summary stays the same. This makes set pooling appropriate when order is irrelevant. An empty set still needs an explicit policy: softmax over no memories is undefined."}</Prose>
@@ -231,9 +282,11 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"These correspond to the author library's Hopfield, HopfieldPooling and HopfieldLayer abstractions. The "}<a href={"https://github.com/ml-jku/hopfield-layers"}>{"official repository"}</a>{" is useful for configuration and examples; its README describes an older Python/PyTorch development environment. The runnable programs here use ordinary NumPy and PyTorch, so understanding the lesson does not depend on installing that research package."}</Prose>
 
-<ModuleOwnershipFigure />
-
 <H3>{"Learn where to look"}</H3>
+
+<Prose>Retrieval changes a state using a fixed bank. Training instead uses a target to change the addressing representation. This new example has identity keys, query [0.2,−0.1], β=1, and desired memory 2; the target enters a loss, whose orange gradient returns to the query.</Prose>
+
+<QueryTrainingFigure />
 
 <Prose>{"For a single target memory t, the loss L = −log pₜ teaches the query to favor its key. With fixed keys and inverse temperature β,"}</Prose>
 
@@ -247,13 +300,19 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"For a class represented by several memories, let π_c = Σᵢ:yᵢ=c pᵢ. Training uses −log π_c. Its derivative with respect to scaled logit ℓᵢ = βqᵀkᵢ is pᵢ − rᵢ, where rᵢ = pᵢ/π_c for target-class memories and zero otherwise. The target class receives extra weight without requiring every query to match one arbitrarily selected prototype."}</Prose>
 
-<QueryTrainingFigure />
-
 <H2>{"5. A real memory bank for handwritten digits"}</H2>
+
+<Prose>We now replace our two-coordinate examples with a real image. Each cell in this source image is a count from 0 to 16; reading rows from left to right makes its 64-dimensional vector. This is the same source 3748 that starts the live handwriting investigation.</Prose>
+
+<DigitAnatomyFigure />
 
 <Prose>{"We use the "}<a href={"https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits"}>{"UCI Optical Recognition of Handwritten Digits dataset"}</a>{". Each image has 8 × 8 cells. A cell records how many pixels were on in a 4 × 4 block of a normalized 32 × 32 handwriting bitmap, so its value is an integer from 0 to 16."}</Prose>
 
 <Prose>{"The original split contains 3,823 training images from 30 writers and 1,797 test images from 13 different writers. We preserve that test boundary. The released 65-column files do not include individual writer IDs within each split."}</Prose>
+
+<Prose>Which images may be remembered, used to learn, used to choose settings, or assessed only at the end? Follow the disjoint roles and the separate test-writer boundary.</Prose>
+
+<DigitRolesFigure />
 
 <Prose>{"Our deliberately small experiment chooses, separately within each digit class and using seed 113:"}</Prose>
 
@@ -263,8 +322,6 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"Only memory labels are available to retrieval. Fitting-query labels train the projection; validation labels select settings; test labels score the final comparisons. No validation or test image becomes a stored reference."}</Prose>
 
-<DigitRolesFigure />
-
 <H3>{"Start with a direct memory baseline"}</H3>
 
 <Prose>{"Divide each intensity by 16, then normalize the 64-dimensional image vector to unit length. Compare the query with the 200 normalized memory vectors."}</Prose>
@@ -272,6 +329,10 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 <Prose>{"The first baseline returns the nearest memory's label by cosine similarity. The second uses softmax weights and sums them by class. Its β is selected from {4, 16, 64, 256} using clean validation cross-entropy. This selects β = 64. The β grid is predefined; we do not select settings on the corrupted test images."}</Prose>
 
 <H3>{"Learn a more useful association space"}</H3>
+
+<Prose>Raw pixel agreement is one choice of geometry. A shared learned matrix can give stroke combinations more useful directions. Each cue and each memory passes through that matrix separately, then is normalized; the resulting weights still read the original labels and pixels as values.</Prose>
+
+<DigitArchitectureFigure />
 
 <Prose>{"The learned model maps an image through a shared linear projection Wₑ of shape 16 × 64:"}</Prose>
 
@@ -282,8 +343,6 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 <Prose>{"We fit Wₑ by mean negative log probability of the correct class, using all 800 fitting queries in each update. Adam uses learning rate 0.005 for 100 epochs. After each update we evaluate clean validation cross-entropy and retain the best epoch. We run seeds 17 and 41 to expose initialization variation. Seed 17 is the predefined demonstration run, not a winner chosen from test performance."}</Prose>
 
 <Prose>{"These are learned associations in a small supervised model. They are not a reproduction of the Ramsauer paper's benchmarks or proof that a Hopfield layer outperforms other architectures."}</Prose>
-
-<DigitArchitectureFigure />
 
 <H3>{"Run the complete programs"}</H3>
 
@@ -305,6 +364,10 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <H3>{"Read the outcomes"}</H3>
 
+<Prose>Does cleaner classification also mean resistance to missing strokes? These are the actual clean and occluded error counts from the same fixed assessment split, using one common bar scale.</Prose>
+
+<DigitMetricsFigure />
+
 <Prose>{"To test sensitivity to missing visual evidence, set columns 4 and 5 of each 8 × 8 query image to zero: 16 cells out of 64. The models were fitted and selected on clean inputs. This is a fixed occlusion stress test, not an alternative training distribution selected after inspecting its errors."}</Prose>
 
 <NeuralTable caption={"Read the outcomes"} headers={[<>{"Model"}</>,<>{"Clean validation errors / 300"}</>,<>{"Clean test errors / 1,797"}</>,<>{"Occluded test errors / 1,797"}</>]} rows={[[<>{"Nearest of 200 memories, cosine"}</>,<>{"25"}</>,<>{"156"}</>,<>{"663"}</>],[<>{"Weighted labels, fixed pixel geometry, β = 64"}</>,<>{"18"}</>,<>{"136"}</>,<>{"667"}</>],[<>{"Learned projection, seed 17, epoch 100"}</>,<>{"13"}</>,<>{"100"}</>,<>{"564"}</>],[<>{"Learned projection, seed 41, epoch 25"}</>,<>{"16"}</>,<>{"113"}</>,<>{"740"}</>]]} />
@@ -313,9 +376,11 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"The seed-17 fitting queries have zero clean classification errors, yet the test set has 100. The memory bank contains only the 200 reference images; the remaining trainable capacity lies in the projection and its learned similarity function. Perfect fitting-query classification is not a guarantee of generalization."}</Prose>
 
-<DigitMetricsFigure />
-
 <H3>{"A cleaner image can tell the wrong story"}</H3>
+
+<Prose>A class label and a reconstructed image can disagree about success. We switch from the default live image, source 3748, to two named validation examples, sources 2946 and 3052, to inspect that difference. Both use the predeclared seed-17 projection; columns 4 and 5 are zeroed for the occluded view.</Prose>
+
+<DigitStoriesFigure />
 
 <Prose>{"The association weights can also retrieve a weighted image: x read = Σᵢ pᵢxᵢ, using the original memory pixels as values. This output is inspectable, but the classifier was trained for labels rather than pixel reconstruction."}</Prose>
 
@@ -324,8 +389,6 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 <Prose>{"The retrieved occluded image has mean squared pixel error 0.110814 relative to the original. The damaged input's error is 0.203674. The weighted reconstruction is closer in average pixel error while the class prediction is wrong. This is possible because reconstructing common background and stroke regions can reduce many squared errors while the identifying stroke remains incorrect."}</Prose>
 
 <Prose>{"For another image, row 3052, labeled “0,” the same occlusion retains class 0, with mass 0.838620. Its retrieved image error is 0.022476 versus 0.074036 for the damaged cue. A memory method can be helpful on one shape and misleading on another."}</Prose>
-
-<DigitStoriesFigure />
 
 <Prose>{"Across all test images, seed 17's mean squared reconstruction error after occlusion is 0.051198, versus 0.124713 for the damaged input. On clean images, reconstruction error is 0.029621, whereas the original clean input has zero error. Retrieval pulls handwriting toward the memory bank; it is not an identity operation and not an unconditional denoiser."}</Prose>
 
@@ -355,7 +418,7 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"There is an ordinary fused route for the softmax read itself: "}<code>{"scaled_dot_product_attention"}</code>{". The exact call in "}<code>{"associative_memory.py::main"}</code>{" holds Q, K and V fixed and compares it with explicit "}<code>{"softmax(QKᵀ/√d)V"}</code>{", with dropout zero. In our notation the inverse-temperature β must equal the call's score scale: the default is 1/√d, not an arbitrary β. For a different β pass "}<code>{"scale=beta"}</code>{" explicitly. When K=V are stored patterns the read can be the modern memory update; arbitrary distinct values retain the attention computation but do not inherit that energy-descent interpretation. "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html"}>{"PyTorch attention contract"}</a>{"."}</Prose>
 
-<Prose>{"For B queries and M stored d-dimensional patterns, an explicit read uses O(BMd) arithmetic and may materialize O(BM) scores. Query chunking bounds that intermediate without changing fixed-bank reads. Normalized log-class sums are intentionally used for a tiny ordinary bank; the optional Hopfield package is not required to expose this operation or to train it. The discrete symmetric memory uses O(d²) weight storage, a different object from an M-by-d continuous pattern bank."}</Prose>
+<Prose>{"For N queries and P stored d-dimensional patterns, an explicit read uses O(NPd) arithmetic and may materialize O(NP) scores. Query chunking bounds that intermediate without changing fixed-bank reads. Normalized log-class sums are intentionally used for a tiny ordinary bank; the optional Hopfield package is not required to expose this operation or to train it. The discrete symmetric memory uses O(d²) weight storage, a different object from a P-by-d continuous pattern bank."}</Prose>
 
 <Prose>{""}<strong>{"Change the contract."}</strong>{" Give the three stored keys different two-coordinate values, set β=.7, and compare the explicit read with "}<code>{"scaled_dot_product_attention(query, keys, values, scale=.7, dropout_p=0.)"}</code>{". Then differentiate the squared returned-value norm with respect to the same query in both routes."}</Prose>
 
@@ -368,6 +431,10 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 <H2>{"7. Optional depth: what capacity and energy really promise"}</H2>
 
 <H3>{"A margin explains when a single read can work"}</H3>
+
+<Prose>Our failures suggest the right question: how far ahead is the desired memory in score? Its gap is its score minus the largest competing score. A gap of 3 at β=2 makes each competitor's relative exponential mass at most exp(−6); here there are 99 competitors.</Prose>
+
+<MarginFigure />
 
 <Prose>{"Let xₜ be the desired memory, and suppose every memory has norm at most M. For the current cue q, define the score gap"}</Prose>
 
@@ -389,8 +456,6 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"For P = 100, δ = 3 and β = 2, the target-weight lower bound is 0.802957. With M = 1, the error upper bound from the tighter expression is 0.394086. These are bounds computed from the assumed gap, not measurements from the handwriting experiment."}</Prose>
 
-<MarginFigure />
-
 <Prose>{"A separation statement about the clean memory can be connected to noisy cues. Let Δₜ = ||xₜ||² − maxⱼ≠ₜ xₜᵀxⱼ. If ||q − xₜ|| ≤ r, then by Cauchy–Schwarz,"}</Prose>
 
 <Prose>{"δ(q) ≥ Δₜ − 2Mr."}</Prose>
@@ -398,6 +463,10 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 <Prose>{"Noise can spend the available margin. This does not prove that every cue in every such ball reaches a unique attractor; that stronger conclusion needs fixed-point conditions too. It does show exactly where cue error enters a one-read error bound."}</Prose>
 
 <H3>{"Three different meanings of “capacity”"}</H3>
+
+<Prose>Before discussing attraction theorems, separate the size of a stored matrix from successful recall. Each stored row consumes coordinates and must be compared with a query; changing these counts changes storage and arithmetic, not a theorem's assumptions.</Prose>
+
+<CapacityAxesFigure />
 
 <ol start={1}><li>{""}<strong>{"How many vectors can the hardware hold?"}</strong>{" P rows of width d require Pd stored numbers."}</li><li>{""}<strong>{"How many memories are stable under a specified update?"}</strong>{" This is a mathematical property of the patterns and dynamics."}</li><li>{""}<strong>{"How many relevant examples improve the real task?"}</strong>{" This depends on labels, representations, distribution and evaluation."}</li></ol>
 
@@ -411,11 +480,9 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"Our margin calculation is usually the better first diagnostic. The theorem explains why favorable separated configurations can support many memories; it does not certify every geometry learned from real handwriting."}</Prose>
 
-<Prose>{"At P = 1,000,000 and d = 64, an explicit float32 pattern bank needs 256,000,000 bytes, about 244.14 MiB, before other model state. Reading one query against all patterns uses O(Pd) score arithmetic and O(Pd) value aggregation when key/value widths both equal d. B queries cost O(BPd). If the memory and query sets both grow with sequence length T, this becomes quadratic in T."}</Prose>
+<Prose>{"At P = 1,000,000 and d = 64, an explicit float32 pattern bank needs 256,000,000 bytes, about 244.14 MiB, before other model state. Reading one query against all patterns uses O(Pd) score arithmetic and O(Pd) value aggregation when key/value widths both equal d. N queries cost O(NPd). If the memory and query sets both grow with sequence length T, this becomes quadratic in T."}</Prose>
 
 <Prose>{"Fused exact attention can avoid materializing all scores in device memory while still doing the dense pairwise arithmetic. Approximate retrieval, sparse subsets and alternative kernels change other parts of the contract. They must be assessed on their own retrieval errors and costs; an SSM such as Mamba is not simply a softmax Hopfield approximation."}</Prose>
-
-<CapacityAxesFigure />
 
 <H3>{"Higher-order binary memory and a useful logical example"}</H3>
 
@@ -427,11 +494,13 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"For a concrete parity task, store the four triples"}</Prose>
 
+<Prose>Here is a distinct logical example, rather than the handwriting model. Keep two binary inputs fixed and compare candidate output signs. Pairwise and cubic interactions are shown together so the difference is visible without a mode switch.</Prose>
+
+<ParityFigure />
+
 <Prose>{"[−1, −1, −1], [−1, +1, +1], [+1, −1, +1], [+1, +1, −1]."}</Prose>
 
 <Prose>{"Clamp the first two coordinates as inputs and infer the third, which should equal −ab. With F(z) = z², both candidate outputs have energy −12 for every input pair. This storage construction cannot distinguish the answers. With F(z) = z³, E(a,b,z) = 24abz on the binary cube. Minimization chooses z = −ab, giving energy −24 rather than +24."}</Prose>
-
-<ParityFigure />
 
 <Prose>{"The example shows why changing the interaction function changes representable relationships. It does not mean a quadratic network with additional hidden units can never represent parity, nor that higher degree always trains better."}</Prose>
 
@@ -441,11 +510,17 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"The "}<a href={"/learn/path/full-curriculum/boltzmann-machines-restricted-boltzmann-machines-rbm?module=deep-learning-fundamentals"}>{"Boltzmann Machines & RBM"}</a>{" lesson uses energy to define probabilities over states and learns through model/data statistics. Classical Hopfield recall here deterministically lowers an energy. A stochastic equilibrium distribution, a deterministic local minimum and a softmax distribution over memory scores are three different objects."}</Prose>
 
-<Prose>{"For a growing sequence memory, causal reading uses only the available prefix. An age bias can modify a score to βqᵀxᵢ − γ(t−i): equally matching older memories receive less unnormalized mass. The factor exp(−γ age) acts as a forgetting preference. This does not make an explicit bank occupy constant storage, and changing time or the bank changes the energy being considered."}</Prose>
-
-<Prose>{"There is also a genuine architecture consequence to requiring a shared energy when both queries and keys evolve. "}<a href={"https://arxiv.org/html/2302.07253v1"}>{"Energy Transformer"}</a>{" derives token dynamics from an engineered energy. Differentiating a token's contribution through both its query role and its key role adds terms absent from ordinary one-way attention. Its memory and attention contributions operate together. This is a specific construction, rather than a new name for an arbitrary transformer stack."}</Prose>
+<Prose>What happens if two equally matching records have different ages? An age penalty subtracts a chosen factor times age from the score. This example uses factor 0.5; it changes preference without deleting the stored row.</Prose>
 
 <ChangingBankFigure />
+
+<Prose>{"For a growing sequence memory, causal reading uses only the available prefix. An age bias can modify a score to βqᵀxᵢ − γ(t−i): equally matching older memories receive less unnormalized mass. The factor exp(−γ age) acts as a forgetting preference. This does not make an explicit bank occupy constant storage, and changing time or the bank changes the energy being considered."}</Prose>
+
+<Prose>If token states supply both queries and keys, changing a token affects the energy through both routes. The following drawing shows those two dependencies; it is an energy-derived system, not a claim that any ordinary attention block decreases energy.</Prose>
+
+<EnergyTransformerFigure />
+
+<Prose>{"There is also a genuine architecture consequence to requiring a shared energy when both queries and keys evolve. "}<a href={"https://arxiv.org/html/2302.07253v1"}>{"Energy Transformer"}</a>{" derives token dynamics from an engineered energy. Differentiating a token's contribution through both its query role and its key role adds terms absent from ordinary one-way attention. Its memory and attention contributions operate together. This is a specific construction, rather than a new name for an arbitrary transformer stack."}</Prose>
 
 <Prose>{"The continuous-time energy argument and a numerical discretization are separate: a large finite step can require its own stability analysis. The later "}<a href={"/learn/path/full-curriculum/neural-ode-continuous-depth-models?module=deep-learning-fundamentals"}>{"Neural ODE & Continuous-Depth Models"}</a>{" lesson develops that distinction."}</Prose>
 
@@ -453,21 +528,27 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <H3>{"Find a rare signal in a large set"}</H3>
 
+<Prose>The pooling design gives a practical use for associative reads. A bag is a set of sequences with one shared target label; the encoder is reused on every sequence, then one learned query chooses a weighted summary. A classifier turns that summary into a predicted bag label ŷ; training compares it with the separately supplied true bag label y.</Prose>
+
+<BagPoolingFigure />
+
 <Prose>{"Suppose a bag contains 10,000 short sequence embeddings, and only a small subset carries useful evidence for the bag's label. Plain mean pooling dilutes each instance equally; max pooling forces each feature to use its largest entry. A learned query instead scores instances and builds a weighted summary."}</Prose>
 
 <Prose>{"This is the structure used in "}<a href={"https://arxiv.org/abs/2007.13505"}>{"DeepRC"}</a>{": receptor sequences become embeddings, attention pools the set, and an output network predicts a repertoire-level label. The training labels apply to the bag, so learning must assign useful credit without being given a correct label for every receptor. Reordering instances should not change the summary. Adding duplicates or sampling a subset can change it."}</Prose>
-
-<BagPoolingFigure />
 
 <Prose>{"The broader lesson is useful for document collections and image patches as well: define what one instance is, what the set label means, and whether order or multiplicity matters. Attention weights alone do not establish that a high-weight receptor is a biological cause."}</Prose>
 
 <H3>{"Revisit examples and features during tabular prediction"}</H3>
 
+<Prose>A table offers two kinds of memory: earlier training rows and the current input's original embedded features. The unknown target is masked; sample and feature reads refine a representation while keeping those sources separate.</Prose>
+
+<HopularFigure />
+
 <Prose>{""}<a href={"https://arxiv.org/abs/2206.00664"}>{"Hopular"}</a>{" uses two memory roles in each block. One reads across stored training examples; another reads across the embedded features of the current input. The representation is refined through successive blocks, and masked attributes are part of training."}</Prose>
 
 <Prose>{"A row with an unknown target can therefore ask both “which earlier examples resemble my current representation?” and “which of my own attributes inform one another?” That differs from a one-off nearest-neighbor lookup and from attending only across columns. The actual training examples and the current query's unavailable target must remain distinguishable."}</Prose>
 
-<HopularFigure />
+<Prose>The sample read comes first and adds a residual to the current representation. After reshaping that updated representation, the feature read adds another residual. The unknown input target is masked; its representation is then allowed to become a prediction. The paper also excludes a fitting query’s own training row from sample retrieval so it cannot simply copy that row’s target.</Prose>
 
 <Prose>{"The paper's benchmark conclusions belong to its datasets and protocol. For a new table, compare with strong tabular baselines under the same split and preprocessing. Calling a component a memory does not establish that it will help."}</Prose>
 
@@ -477,7 +558,7 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"For large text retrieval, an external search system may first shortlist documents before a neural model reads them. The shortlist operation, the attention read and the final generated answer are distinct. A correct attention identity proves neither that the search found the right evidence nor that an answer faithfully uses it."}</Prose>
 
-<section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>{"9. Practice: predict, calculate and diagnose"}</H2>
+<section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>{"9. Practice: calculate, modify and diagnose"}</H2>
 
 <Prose>{"Attempt each prompt before opening its hint. Changed inputs are intentional: the aim is to use the mechanism, not recall a number from the worked example."}</Prose>
 
@@ -639,13 +720,13 @@ export default {title:"Modern Hopfield Networks",readTime:"~70 min read + invest
 
 <Prose>{"One acceptable plan predefines a distribution of missing-cell masks using fitting data only; trains both clean and mask-augmented projections with the same memory bank, parameter count and optimization budget; selects epochs using a predefined combination of clean and masked validation losses; and evaluates the frozen models on a separately specified test corruption protocol plus clean test images. Report both seeds, error counts and reconstruction metrics. Preserve the original images and masks so another learner can reproduce the comparison. More robust results on one mask family do not establish robustness to every handwriting distortion."}</Prose>
 
-</details>
+</details></div>
 
 <Prose>{"You are ready to move on when you can distinguish state refinement from parameter training, trace keys through weights to values, explain a failed retrieval without appealing to a vague capacity claim, and preserve the learning boundary in a memory-based experiment."}</Prose>
 
-<Prose>{"The next topic in this module is "}<a href={"/learn/path/full-curriculum/xlstm-extended-lstm?module=deep-learning-fundamentals"}>{"xLSTM (Extended LSTM)"}</a>{". It returns to recurrent sequence memory and asks how changing gates and scalar or matrix state changes what a model can retain and read. That is a different storage/update contract from retaining every row of an explicit reference bank."}</Prose></div></section>
+<Prose>{"The next topic in this module is "}<a href={"/learn/path/full-curriculum/xlstm-extended-lstm?module=deep-learning-fundamentals"}>{"xLSTM (Extended LSTM)"}</a>{". It returns to recurrent sequence memory and asks how changing gates and scalar or matrix state changes what a model can retain and read. That is a different storage/update contract from retaining every row of an explicit reference bank."}</Prose></section>
 
 <section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H2>{"References & another way to learn it"}</H2>
 
-<ul><li>{""}<a href={"https://arxiv.org/html/2008.02217v3"}>{"Ramsauer et al., Hopfield Networks is All You Need"}</a>{" — the main continuous-memory reference. Read §2 after the worked energy calculation, §3 for layer choices, and Appendix A.1.5–A.1.6 for precise stability and capacity assumptions. The introduction's one-update language is made precise in the theorems."}</li><li>{""}<a href={"https://ml-jku.github.io/hopfield-layers/"}>{"Johannes Brandstetter and the JKU authors, Hopfield layers illustrated article"}</a>{" — an alternate visual explanation of memory retrieval, temperature, keys/queries/values and pooling. Its familiar-image examples help establish the geometry; pair its informal convergence wording with the paper's exact statements."}</li><li>{""}<a href={"https://arxiv.org/html/1606.01164v2"}>{"Krotov & Hopfield, Dense Associative Memory for Pattern Recognition"}</a>{" — study §§2–3 for energy-difference updates and the parity example, and §§4–5 for learned features/prototypes and the feedforward interpretation."}</li><li>{""}<a href={"https://pmc.ncbi.nlm.nih.gov/articles/PMC346238/"}>{"Hopfield, Neural networks and physical systems with emergent collective computational abilities"}</a>{" — the 1982 historical starting point. The archive provides the original scanned article and describes content-addressable memory and asynchronous dynamics."}</li><li>{""}<a href={"https://authors.library.caltech.edu/records/q92rz-95p89"}>{"McEliece et al., The capacity of the Hopfield associative memory"}</a>{" — a more mathematical resource separating exact recovery of most memories from exact recovery of all memories. Useful when evaluating a capacity claim."}</li><li>{""}<a href={"https://github.com/ml-jku/hopfield-layers"}>{"Official Hopfield layers code and examples"}</a>{" — compare the three module interfaces and study the bit-pattern and latch-sequence notebook descriptions. Treat its documented older dependency environment as a research-package detail; the notebook experiments were not executed for this lesson."}</li><li>{""}<a href={"https://www.youtube.com/watch?v=nv6oFDp6rNQ"}>{"Yannic Kilcher, Hopfield Networks is All You Need — Paper Explained"}</a>{" — optional advanced paper walkthrough, also linked by the authors' article. The title and author link were verified; the video itself was not reviewed here, so use the paper and checked examples for the technical guarantees."}</li><li>{""}<a href={"https://arxiv.org/abs/2007.13505"}>{"Widrich et al., Modern Hopfield Networks and Attention for Immune Repertoire Classification"}</a>{" — read the Deep Repertoire Classification section to see how the unit of supervision changes from one sequence to a large set of sequences."}</li><li>{""}<a href={"https://arxiv.org/abs/2206.00664"}>{"Schäfl et al., Hopular"}</a>{" — §3 explains the two memory roles in tabular refinement. Follow the distinction between sample-to-sample and feature-to-feature retrieval."}</li><li>{""}<a href={"https://arxiv.org/html/2302.07253v1"}>{"Hoover et al., Energy Transformer"}</a>{" — an advanced extension. §2 explicitly derives dynamics with changing token representations and explains why its energy attention differs from ordinary attention."}</li><li>{""}<a href={"https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits"}>{"UCI digit dataset"}</a>{" and "}<a href={"/learn-code/modern-hopfield-networks/./data-provenance.md"}>{"local provenance"}</a>{" — original acquisition, count features, train/test writer split, license, exact downloads and our separate experimental roles."}</li></ul></section>
+<ul><li><a href="https://www.cs.toronto.edu/~hinton/coursera/lecture11/lec11.pdf">Geoffrey Hinton, lecture 11 written slides</a> — a standard visual treatment of binary memory, signed connections, energy and spurious minima. It also uses 0/1 conventions in some examples; our ±1 formulas should not be substituted silently into those examples.</li><li>{""}<a href={"https://arxiv.org/html/2008.02217v3"}>{"Ramsauer et al., Hopfield Networks is All You Need"}</a>{" — the main continuous-memory reference. Read §2 after the worked energy calculation, §3 for layer choices, and Appendix A.1.5–A.1.6 for precise stability and capacity assumptions. The introduction's one-update language is made precise in the theorems."}</li><li>{""}<a href={"https://ml-jku.github.io/hopfield-layers/"}>{"Johannes Brandstetter and the JKU authors, Hopfield layers illustrated article"}</a>{" — an alternate visual explanation of memory retrieval, temperature, keys/queries/values and pooling. Its familiar-image examples help establish the geometry; pair its informal convergence wording with the paper's exact statements."}</li><li>{""}<a href={"https://arxiv.org/html/1606.01164v2"}>{"Krotov & Hopfield, Dense Associative Memory for Pattern Recognition"}</a>{" — study §§2–3 for energy-difference updates and the parity example, and §§4–5 for learned features/prototypes and the feedforward interpretation."}</li><li>{""}<a href={"https://pmc.ncbi.nlm.nih.gov/articles/PMC346238/"}>{"Hopfield, Neural networks and physical systems with emergent collective computational abilities"}</a>{" — the 1982 historical starting point. The archive provides the original scanned article and describes content-addressable memory and asynchronous dynamics."}</li><li>{""}<a href={"https://authors.library.caltech.edu/records/q92rz-95p89"}>{"McEliece et al., The capacity of the Hopfield associative memory"}</a>{" — a more mathematical resource separating exact recovery of most memories from exact recovery of all memories. Useful when evaluating a capacity claim."}</li><li>{""}<a href={"https://github.com/ml-jku/hopfield-layers"}>{"Official Hopfield layers code and examples"}</a>{" — compare the three module interfaces and study the bit-pattern and latch-sequence notebook descriptions. Treat its documented older dependency environment as a research-package detail; the notebook experiments were not executed for this lesson."}</li><li>{""}<a href={"https://www.youtube.com/watch?v=nv6oFDp6rNQ"}>{"Yannic Kilcher, Hopfield Networks is All You Need — Paper Explained"}</a>{" — optional advanced paper walkthrough, also linked by the authors' article. The title and author link were verified; the video itself was not reviewed here, so use the paper and checked examples for the technical guarantees."}</li><li>{""}<a href={"https://arxiv.org/abs/2007.13505"}>{"Widrich et al., Modern Hopfield Networks and Attention for Immune Repertoire Classification"}</a>{" — read the Deep Repertoire Classification section to see how the unit of supervision changes from one sequence to a large set of sequences."}</li><li>{""}<a href={"https://arxiv.org/abs/2206.00664"}>{"Schäfl et al., Hopular"}</a>{" — §3 explains the two memory roles in tabular refinement. Follow the distinction between sample-to-sample and feature-to-feature retrieval."}</li><li>{""}<a href={"https://arxiv.org/html/2302.07253v1"}>{"Hoover et al., Energy Transformer"}</a>{" — an advanced extension. §2 explicitly derives dynamics with changing token representations and explains why its energy attention differs from ordinary attention."}</li><li>{""}<a href={"https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits"}>{"UCI digit dataset"}</a>{" and "}<a href={"/learn-code/modern-hopfield-networks/./data-provenance.md"}>{"local provenance"}</a>{" — original acquisition, count features, train/test writer split, license, exact downloads and our separate experimental roles."}</li></ul></section>
 </div>};

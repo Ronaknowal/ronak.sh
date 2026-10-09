@@ -1,0 +1,40 @@
+{
+  "schema": "classical21-new-programme-execution/v1",
+  "at": "2026-10-09T17:29:33.376207+00:00",
+  "source": {
+    "file": "search_results_and_refit.py",
+    "bytes": 4464,
+    "sha256": "4f1e653c0f7476af71a25e1d2c3985b3ca0a49e0767cb4ac79f90ed730eb4bc9"
+  },
+  "python": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+  "command": [
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\content-authoring\\programmes\\search_results_and_refit.py"
+  ],
+  "dependencies": [
+    {
+      "file": "fold_fitted_pipeline.py",
+      "bytes": 11262,
+      "sha256": "e26e2d319ed6783319e394c49b0137d8eed6d14469ec1b5ad9b431797a95ebfa"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1"
+  },
+  "returncode": 0,
+  "stdout": {
+    "file": "search_results_and_refit.py.1.stdout.txt",
+    "bytes": 1729,
+    "sha256": "9825a0f76abb650e8d55db653950bf41972130b0bfdbfc7315d36d8bcec50ffd"
+  },
+  "stderr": {
+    "file": "search_results_and_refit.py.1.stderr.txt",
+    "bytes": 2283,
+    "sha256": "c655042fa9ab90f707fad23f194cbc4681c24be2d0829e2b64475a15a65e56d7"
+  },
+  "scope": "One new constructed educational programme; no retained science or checker execution"
+}

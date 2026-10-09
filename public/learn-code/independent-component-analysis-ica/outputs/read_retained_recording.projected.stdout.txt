@@ -1,0 +1,17 @@
+headers ['direct_adc', 'abdomen1_adc', 'abdomen2_adc', 'abdomen3_adc', 'abdomen4_adc'] rows 20000 sampling_Hz 1000 split {'train': [0, 12000], 'development': [12000, 16000], 'test': [16000, 20000]}
+sample 0 five_counts [287.0, -89.0, 133.0, 220.0, 325.0] microvolts [28.750439, -8.850135, 13.350204, 22.050336, 32.550497]
+sample 16000 five_counts [-257.0, 77.0, -272.0, 41.0, -55.0] microvolts [-25.650391, 7.750118, -27.150414, 4.150063, -5.450083]
+retained channel all_development_signed [0.043935, 0.101807, 0.201203, 0.079348] chosen_one_based 3 test_signed 0.119806
+other_later_coordinates None
+retained PCA all_development_signed [-0.03474, 0.127795, 0.01077, 0.18458] chosen_one_based 4 test_signed 0.450178
+other_later_coordinates None
+retained ICA all_development_signed [0.079635, 0.169804, -0.043955, -0.116516] chosen_one_based 2 test_signed 0.343966
+other_later_coordinates None
+trace channel columns 500 first_min_max [0.4116, 0.7433]
+trace PCA columns 500 first_min_max [0.2753, 0.7022]
+trace ICA columns 500 first_min_max [-1.08, -0.8028]
+trace reference columns 500 first_min_max [-1.3508, -1.0672]
+exact_window [{'sample': 16000, 'second': 16.0, 'reference': -25.65, 'channel': 4.15, 'PCA': 1.751, 'ICA': -2.001}, {'sample': 16001, 'second': 16.001, 'reference': -28.25, 'channel': 3.25, 'PCA': 1.188, 'ICA': -2.233}, {'sample': 16002, 'second': 16.002, 'reference': -32.65, 'channel': 2.55, 'PCA': 0.607, 'ICA': -2.459}, {'sample': 16003, 'second': 16.003, 'reference': -36.251, 'channel': 2.15, 'PCA': -0.002, 'ICA': -2.706}, {'sample': 16004, 'second': 16.004, 'reference': -36.951, 'channel': 2.25, 'PCA': -0.326, 'ICA': -2.843}, {'sample': 16005, 'second': 16.005, 'reference': -34.451, 'channel': 2.75, 'PCA': -0.322, 'ICA': -2.847}, {'sample': 16006, 'second': 16.006, 'reference': -30.45, 'channel': 3.25, 'PCA': -0.317, 'ICA': -2.852}, {'sample': 16007, 'second': 16.007, 'reference': -27.35, 'channel': 3.65, 'PCA': -0.375, 'ICA': -2.876}, {'sample': 16008, 'second': 16.008, 'reference': -26.85, 'channel': 3.65, 'PCA': -0.628, 'ICA': -2.977}, {'sample': 16009, 'second': 16.009, 'reference': -29.15, 'channel': 3.25, 'PCA': -1.092, 'ICA': -3.163}, {'sample': 16010, 'second': 16.01, 'reference': -32.75, 'channel': 2.65, 'PCA': -1.653, 'ICA': -3.391}, {'sample': 16011, 'second': 16.011, 'reference': -35.751, 'channel': 2.15, 'PCA': -1.96, 'ICA': -3.504}, {'sample': 16012, 'second': 16.012, 'reference': -36.951, 'channel': 1.95, 'PCA': -1.946, 'ICA': -3.488}, {'sample': 16013, 'second': 16.013, 'reference': -36.251, 'channel': 2.05, 'PCA': -1.673, 'ICA': -3.354}, {'sample': 16014, 'second': 16.014, 'reference': -34.551, 'channel': 2.35, 'PCA': -1.16, 'ICA': -3.135}, {'sample': 16015, 'second': 16.015, 'reference': -32.75, 'channel': 2.65, 'PCA': -0.55, 'ICA': -2.881}, {'sample': 16016, 'second': 16.016, 'reference': -31.25, 'channel': 2.75, 'PCA': 0.014, 'ICA': -2.664}, {'sample': 16017, 'second': 16.017, 'reference': -30.25, 'channel': 2.45, 'PCA': 0.321, 'ICA': -2.558}, {'sample': 16018, 'second': 16.018, 'reference': -29.35, 'channel': 1.95, 'PCA': 0.51, 'ICA': -2.511}, {'sample': 16019, 'second': 16.019, 'reference': -28.65, 'channel': 1.25, 'PCA': 0.504, 'ICA': -2.563}]
+envelope_scale interval_z_score polarity development_aligned
+fitted_operator_arrays None
+retained_limit_count 4

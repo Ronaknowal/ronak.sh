@@ -1,0 +1,41 @@
+const {chromium}=require('C:/Users/ronak/projects/career-ops/node_modules/playwright');
+const fs=require('node:fs'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const folder='docs/teaching/deep-learning-beginner/sequence-to-sequence-encoder-decoder/';
+const url='http://127.0.0.1:4825/learn/path/full-curriculum/sequence-to-sequence-encoder-decoder?module=deep-learning-fundamentals';
+const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+(async()=>{
+ const browser=await chromium.launch({channel:'msedge'}),errors=[],groups=[];
+ try {
+  const context=await browser.newContext({viewport:{width:390,height:900},hasTouch:true}),page=await context.newPage();
+  page.on('pageerror',e=>errors.push(e.message));
+  let weightRequests=0,codeRequests=0;
+  await page.route('**/learn-code/sequence-to-sequence-encoder-decoder/seed-one-inference.json',route=>++weightRequests===1?route.fulfill({status:503,contentType:'application/json',body:'{}'}):route.continue());
+  await page.route('**/learn-code/sequence-to-sequence-encoder-decoder/explicit-inflector.py',route=>++codeRequests===1?route.fulfill({status:503,contentType:'text/plain',body:'Unavailable'}):route.continue());
+  await page.goto(url,{waitUntil:'domcontentloaded'});await page.locator('.seq2seq-lesson').waitFor();
+  assert.equal(weightRequests,0);assert.equal(codeRequests,0);
+  const lab=page.locator('#seq2seq-forward');await lab.scrollIntoViewIfNeeded();
+  const slider=lab.locator('input[type=range]').first(),before=await lab.locator('.flow-readout').innerText();
+  const box=await slider.boundingBox();await page.touchscreen.tap(box.x+box.width*.8,box.y+box.height/2);
+  assert.notEqual(await lab.locator('.flow-readout').innerText(),before);
+  const touched=await slider.inputValue();await page.mouse.click(box.x+box.width*.25,box.y+box.height/2);assert.notEqual(await slider.inputValue(),touched);
+  await lab.getByRole('button',{name:'Reset scalar forward calculation'}).click();groups.push('Native touch and mouse range changes update live state; reset restores the hand fixture');
+  await page.locator('[data-seq-load="seq2seq-fitted"]').scrollIntoViewIfNeeded();
+  const retry=page.getByRole('button',{name:'Retry saved model'}).first();await retry.waitFor();
+  const modelStyle=await retry.evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor,height:el.getBoundingClientRect().height}));
+  assert.ok(modelStyle.height>=44);assert.notEqual(modelStyle.background,'rgb(239, 239, 239)');
+  await retry.focus();await retry.press('Enter');await page.getByRole('textbox',{name:'Source lemma'}).waitFor();assert.equal(weightRequests,2);
+  assert.ok((await page.locator('#seq2seq-fitted .flow-readout').innerText()).includes('emoves'));
+  await page.getByRole('textbox',{name:'Source lemma'}).fill('care');await page.getByRole('textbox',{name:'Source lemma'}).fill('emmove');
+  assert.ok((await page.locator('#seq2seq-fitted .flow-readout').innerText()).includes('emoves'));
+  groups.push('503 model failure evicts the failed shared promise; themed keyboard retry restores the model and the latest query');
+  const code=page.locator('.lesson-code-source').filter({hasText:'Compose the differentiable scratch cells'});await code.scrollIntoViewIfNeeded();
+  const codeRetry=code.getByRole('button',{name:'Retry',exact:true});await codeRetry.waitFor();
+  const codeStyle=await codeRetry.evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor,height:el.getBoundingClientRect().height}));assert.ok(codeStyle.height>=44);assert.equal(codeStyle.color,modelStyle.color);assert.equal(codeStyle.background,modelStyle.background);
+  await codeRetry.focus();await codeRetry.press('Enter');await code.locator('pre').waitFor();assert.equal(codeRequests,2);assert.ok((await code.locator('pre').innerText()).includes('class ExplicitInflector'));
+  groups.push('503 code failure keeps a download route and themed keyboard retry restores the visible complete program');
+  assert.equal(await page.locator('.seq2seq-lesson').evaluate(el=>el.scrollWidth-el.clientWidth),0);
+  await context.close();
+  const receipt={passed:!errors.length,checkedAt:new Date().toISOString(),errors,groups,weightRequests,codeRequests,sourceHashes:JSON.parse(fs.readFileSync(folder+'reading-flow-source.json','utf8')).sourceHashes,verifierHash:hash(__filename),limits:'Current isolated production recovery, native touch/mouse and stale-query checks. No new fits; final independent source review and parent integration remain separate.'};
+  fs.writeFileSync(folder+'reading-flow-recovery.json',JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:receipt.passed,groups:groups.length,errors}));
+ } finally {await browser.close();}
+})().catch(error=>{console.error(error);process.exit(1)});

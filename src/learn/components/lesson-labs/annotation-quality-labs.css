@@ -1,0 +1,24 @@
+.annotation-quality-flow { border: 1px solid #333; padding: 1.1rem; margin: 2rem 0; }
+.annotation-quality-flow figcaption { color: #e4b752; font-weight: 600; }
+.annotation-quality-flow > div,.annotation-rater-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr)); gap: 1rem; margin: 1rem 0; }
+.annotation-quality-flow section { border-left: 2px solid #555; padding-left: .8rem; }
+.annotation-rater { padding: .8rem; border: 1px solid #3c3c3c; min-width: 0; }
+.annotation-rater h4 { margin: .3rem 0 .9rem; }
+.annotation-confusion { display: grid; grid-template-columns: 1.5fr 1fr 1fr; margin-top: 1rem; font-size: 14px; }
+.annotation-confusion > div { display: contents; }
+.annotation-confusion span,.annotation-confusion strong { padding: .45rem; border-bottom: 1px solid #333; }
+.annotation-confusion .annotation-active > * { background: #211d15; color: #f2c864; }
+.annotation-warning { border-left: 2px solid #e4b752; padding-left: .8rem; }
+.annotation-probability-bar { display: flex; height: 24px; border: 1px solid #777; }
+.annotation-probability-bar span:first-child { background: #777; }
+.annotation-probability-bar span:last-child,.annotation-population-track span { background: #e4b752; }
+.annotation-posterior strong { color: #e4b752; }
+.annotation-population-track { height: 8px; background: #333; margin: .9rem 0; }
+.annotation-population-track span { height: 100%; display: block; }
+.annotation-audit-cells { display: flex; flex-wrap: wrap; gap: 4px; min-height: 30px; margin: 1rem 0; }
+.annotation-audit-cells span { width: 25px; height: 25px; display: grid; place-items: center; font-size: 15px; background: #333; color: #ddd; }
+.annotation-audit-cells .annotation-error { color: #e4b752; border: 1px solid #e4b752; background: #1c1913; }
+.annotation-estimates { display: flex; flex-wrap: wrap; gap: 1rem; }
+.annotation-estimates p { flex: 1 1 200px; }
+.annotation-estimates strong,.annotation-estimates small { display: block; }
+.annotation-estimates strong { color: #e4b752; font-size: 1.6rem; }

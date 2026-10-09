@@ -1,0 +1,18 @@
+import {symmetricRandomMatrixEigen, randomMatrixSpectrum, marchenkoPastur, mpIntervalMass} from './random-matrix-models.js';
+export const countedRows=[[1,1],[1,1],[1,1],[-1,-1],[-1,-1],[-1,-1],[1,-1],[-1,1]];
+export const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+export const transpose=a=>a[0].map((_,j)=>a.map(r=>r[j]));
+export const multiply=(a,b)=>a.map(r=>transpose(b).map(c=>dot(r,c)));
+export function gram(rows,denominator=rows.length){if(!Number.isFinite(denominator)||denominator<=0)throw new Error('Positive finite denominator required');return multiply(transpose(rows),rows).map(r=>r.map(x=>x/denominator));}
+export const meanColumns=rows=>rows[0].map((_,j)=>rows.reduce((s,r)=>s+r[j],0)/rows.length);
+export function projectedVariance(angle){if(!Number.isInteger(angle)||angle< -90||angle>90)throw new Error('Integer angle from −90° to90° required');const a=angle*Math.PI/180,q=[Math.cos(a),Math.sin(a)],projections=countedRows.map(r=>dot(r,q)),squares=projections.map(x=>x*x);return {angle,q,projections,squares,feet:projections.map(v=>q.map(x=>x*v)),sum:squares.reduce((a,b)=>a+b,0),variance:squares.reduce((a,b)=>a+b,0)/8};}
+export function convention(a,centered){if(!Number.isFinite(a)||a< -2||a>2||typeof centered!=='boolean')throw new Error('Translation −2…2 and explicit centering choice required');const rows=countedRows.map(r=>[r[0]+a,r[1]]),means=meanColumns(rows),working=centered?rows.map(r=>r.map((x,j)=>x-means[j])):rows,denominator=centered?7:8,covariance=gram(working,denominator),eigen=symmetricRandomMatrixEigen(covariance);return {rows,means,working,denominator,covariance,values:eigen.values};}
+export function moments(n,p,law){if(!Number.isInteger(n)||n<4||n>500||!Number.isInteger(p)||p<2||p>48||!['gaussian','sign'].includes(law))throw new Error('Admitted integer dimensions and Gaussian/sign law required');const fourth=law==='gaussian'?3:1,diagonal=1+(fourth-1)/n,offDiagonal=1/n;return {n,p,law,fourth,diagonal,offDiagonal,diagonalCount:p,offDiagonalCount:p*(p-1),expectation:1+(p+fourth-2)/n};}
+export function covarianceWithModes(options){const sample=randomMatrixSpectrum(options),eigen=symmetricRandomMatrixEigen(sample.covariance);return {...sample,vectors:eigen.vectors,active:sample.centered?sample.data.map(r=>r.map((x,j)=>x-sample.means[j])):sample.data};}
+export function mpDensity(lambda,gamma,variance=1){const {lower,upper}=marchenkoPastur(gamma,variance);if(lambda===0&&gamma===1)return Infinity;if(lambda<=lower||lambda>=upper)return 0;return Math.sqrt((upper-lambda)*(lambda-lower))/(2*Math.PI*gamma*variance*lambda);}
+export function lineSamples(fn,lower,upper,steps=160){return Array.from({length:steps+1},(_,i)=>{const x=lower+(upper-lower)*i/steps;return [x,fn(x)];});}
+export const unitCircle=(scaleX=1,scaleY=1,angle=0)=>Array.from({length:121},(_,i)=>{const a=2*Math.PI*i/120,x=scaleX*Math.cos(a),y=scaleY*Math.sin(a);return [x*Math.cos(angle)-y*Math.sin(angle),x*Math.sin(angle)+y*Math.cos(angle)];});
+export function finiteSigns(){return Array.from({length:16},(_,id)=>{const entries=Array.from({length:4},(_,i)=>(id>>i)&1?1:-1),rows=[entries.slice(0,2),entries.slice(2)],c=(entries[0]*entries[1]+entries[2]*entries[3])/2;return {id,rows,c,moment:1+c*c,roots:[1-Math.abs(c),1+Math.abs(c)]};});}
+export const weightedNormal=(power,z)=>z**power*Math.exp(-z*z/2)/Math.sqrt(2*Math.PI);
+export function integrate(fn,a,b,steps=1200){let sum=fn(a)+fn(b);for(let i=1;i<steps;i++)sum+=(i%2?4:2)*fn(a+(b-a)*i/steps);return sum*(b-a)/steps/3;}
+export function mpMassRows(gamma=1){return [.1,.01,.001].map(epsilon=>[epsilon,mpIntervalMass(gamma,0,epsilon)]);}

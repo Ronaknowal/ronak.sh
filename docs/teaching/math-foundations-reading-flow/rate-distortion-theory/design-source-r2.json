@@ -1,0 +1,218 @@
+{
+  "topicId": "rate-distortion-theory",
+  "stage": "Corrected complete proposed design for SAME review",
+  "author": "/root",
+  "createdAt": "2026-10-09T16:16:13.260665+00:00",
+  "inputs": {
+    "src/learn/data/topics/rate-distortion-theory.jsx": {
+      "sha256": "9b05242dc7ee29a0c8e0642003f67e25561256bd56f67a8bd433c0f297e624fb",
+      "bytes": 51267
+    },
+    "src/learn/data/rate-distortion-models.js": {
+      "sha256": "0ed6cfa45289711a49e1b0124bce69dcd9e325efd2a1d77da5fd7b8ce6a6dba8",
+      "bytes": 13175
+    },
+    "src/learn/data/rate-distortion-examples.js": {
+      "sha256": "65810df3f1f96dc34b384f1e3c326e8c5afb3fef7bf57ef1870e2d8839b4a882",
+      "bytes": 12232
+    },
+    "src/learn/components/lesson-labs/RateDistortionLabs.jsx": {
+      "sha256": "17c4df75afce9b134a7a39af3d755073b46026b5c272375319726ce5d2e3db47",
+      "bytes": 24417
+    },
+    "src/learn/components/lesson-labs/rate-distortion-labs.css": {
+      "sha256": "2fe5c0b0f141874beccf6bd6d69628525dc52653c15b54d2be69a0e4c69a9112",
+      "bytes": 8178
+    },
+    "src/learn/data/curriculum/blueprints/rate-distortion-theory.js": {
+      "sha256": "cbd19a010a36f713edf06bb6d5dee0e0aa4c723ff736d730c94f6f2b86e1c581",
+      "bytes": 3338
+    },
+    "docs/teaching/RATE-DISTORTION-LESSON-DESIGN.md": {
+      "sha256": "603ea76f105dd5247bfaa743c18ad09dbf9fe5a49e0483981c54ff61ff6879a3",
+      "bytes": 13879
+    },
+    "docs/teaching/RATE-DISTORTION-VERIFICATION.md": {
+      "sha256": "e515a4e7d7307398e5be271001b7571a2fcc28de612d6172d57a7099df517943",
+      "bytes": 10827
+    },
+    "docs/teaching/RATE-DISTORTION-INDEPENDENT-REVIEW.md": {
+      "sha256": "16713cf966fc4684b296adbad8a647c30a4e13adf87476f400c6e630c2fd2b86",
+      "bytes": 7741
+    },
+    "docs/teaching/evidence/rate-distortion-author-review.json": {
+      "sha256": "044373d2804c8542a524d5b123c43a8d4b50f521d35362fca5dc36ebab8194f8",
+      "bytes": 49535
+    },
+    "docs/teaching/topic-notes/sampling-aliasing-and-quantization-in-neural-recordings.md": {
+      "sha256": "cede8866f977521d8ac629ff7d74f2c4908be16ccad1ffaa3d5bb2b49073c4d1",
+      "bytes": 2682
+    },
+    "skills/lesson-authoring/SKILL.md": {
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "bytes": 20953
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-r1.md": {
+      "sha256": "1307faac04a2361847085e206d6515024ab23452518d301b8b11ab9c7cbcbed2",
+      "bytes": 37021
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-r1.md": {
+      "sha256": "7a15f0c200f6368adc6fcb1a17f0869cbdf16b89718af2f15f708b5e507826c9",
+      "bytes": 13468
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/intake-source-r1.json": {
+      "sha256": "a54270d5d0338663ca15f3731cdfc941c05ef941adf134273e2314cb84480f40",
+      "bytes": 5890
+    },
+    "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r2.md": {
+      "sha256": "480b8a0f8060541df60fd4603afe10a2b413cd1a9bb09d697cdeeb73e9ee953e",
+      "bytes": 48509
+    },
+    "src/learn/data/topics/mutual-information-information-bottleneck.jsx": {
+      "sha256": "c969992cba3d640531a326b5eeab51ec54338ea700f4808908369e8167efeba4",
+      "bytes": 48635
+    },
+    "src/learn/data/topics/eigenvalues-eigenvectors.jsx": {
+      "sha256": "821e7543441fcdded7690b593498741335c142900db5e2f25d8a93df25a9e81d",
+      "bytes": 64355
+    },
+    "public/learn-code/eigenvalues-eigenvectors/eigen_symmetric_library.py": {
+      "sha256": "d9340ea1e697f3b4f6a78b0173730ac849129936aee23455f6d3844a99630bd3",
+      "bytes": 1552
+    },
+    "src/learn/data/topics/k-means-hierarchical-clustering.jsx": {
+      "sha256": "d0bbf2de6cdfc108deb9d85396b9c07c90a1b098bfb216fc59b2dc74fae99581",
+      "bytes": 258238
+    },
+    "public/learn-code/k-means-hierarchical-clustering/clustering_quantization.py": {
+      "sha256": "e3be003d81862e0cb62e09361700d1352b835eacc0a4a582658c20f484f4ce99",
+      "bytes": 2228
+    },
+    "public/learn-code/k-means-hierarchical-clustering/clustering_lloyd.py": {
+      "sha256": "18bfa86c8379ac235188886d26f6c4e6fabc0bb59f00504bb8ab40d78cb73a77",
+      "bytes": 4572
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r2.md": {
+      "sha256": "c42c7d77d5f9c44367692e29da30ee51f097b2e7273f7ee42f04d18d39367194",
+      "bytes": 26894
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/penguins.csv": {
+      "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "bytes": 15241
+    },
+    "scratch/rate-distortion-review/formatting-results.json": {
+      "sha256": "799f1778c00f4092a7488da4bcc6bbfb8294dedb74973a50c3f4d1fe1c2cbc8b",
+      "bytes": 489
+    },
+    "skills/lesson-authoring/references/workflow.md": {
+      "sha256": "4096cdebcadf3c94d61be0e1e534592160c64ef6529aca9754a2cdaaec6d1c3b",
+      "bytes": 25767
+    },
+    "skills/lesson-authoring/references/teaching.md": {
+      "sha256": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "bytes": 27407
+    },
+    "skills/lesson-authoring/references/topic-design.md": {
+      "sha256": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "bytes": 32018
+    },
+    "skills/lesson-authoring/references/domain-playbook.md": {
+      "sha256": "43897a74d31c0c9b85748ef544a8be5b5bd220b8b2f79136f176e88190f16e04",
+      "bytes": 30795
+    },
+    "skills/lesson-authoring/references/visuals-and-labs.md": {
+      "sha256": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "bytes": 33359
+    },
+    "skills/lesson-authoring/references/examples-and-code.md": {
+      "sha256": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "bytes": 15888
+    },
+    "skills/lesson-authoring/references/practice-and-resources.md": {
+      "sha256": "b5f7a6e67c311a0ffd48dc6ee12e416aaf772b08baa9c58684c7ca0fcb817b22",
+      "bytes": 11956
+    },
+    "skills/lesson-authoring/references/review.md": {
+      "sha256": "98695248dd9470843c5eced1c59d89c54167b1ca2bc22a5c016616e10b31fd0d",
+      "bytes": 19019
+    },
+    "skills/lesson-authoring/references/portfolio-adapter.md": {
+      "sha256": "347c3ee5c5f4db818f7ab4b9d9b17ef9fd49c3c3ede5d6ea2174badd24a9173d",
+      "bytes": 16033
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-binary-channel-p343.png": {
+      "sha256": "8ef64d4771bab96ebbe0e5b2f285b186bb1b52e8a42fbf6ae953256877a3f340",
+      "bytes": 112643
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-thomas-ch13.pdf": {
+      "sha256": "907074a7a862ded34cc7ae99c12de605dab88f63121cbc514effb8af96ad2aae",
+      "bytes": 2266407
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/cover-thomas-ch13.txt": {
+      "sha256": "40453d8319b5620223e7736effbb83adc649b25e7a9115061a02b588c092023a",
+      "bytes": 64161
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/mit-ch23.pdf": {
+      "sha256": "efd1faec8a9ede53be6c50e65db978b237c4ea9df400665ba311e5a74cd97be6",
+      "bytes": 636050
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/research-inputs/mit-ch23.txt": {
+      "sha256": "6bac44f925d60aa1e32a427572041c7ff0962d04a96ec3b783b80eb05b2d837c",
+      "bytes": 21834
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-r2.md": {
+      "sha256": "8a984c7d03e10da2d4425e4414cd01e26eb68c942debead556fc70e973847982",
+      "bytes": 39981
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-correction-r2.json": {
+      "sha256": "40c43b1fa8c826e809c6a227c9002953e55571b568c7334acdfc55a50f7670de",
+      "bytes": 9123
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/independent-design-review-r1.json": {
+      "sha256": "e0f480356d792f8d93157ba808cea75fbf14de0a2dffa4c3c7b67ce9d913a48c",
+      "bytes": 7631
+    },
+    "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/independent-design-review-r1.md": {
+      "sha256": "a4505f2a732ac9133a5550b2c013259cf47fc953a92ee3ecc22a0280832f3347",
+      "bytes": 7687
+    }
+  },
+  "dataIntake": {
+    "rows": 344,
+    "billLengthObserved": 342,
+    "missingRowIndicesOneBased": [
+      4,
+      272
+    ],
+    "firstRetained": [
+      [
+        1,
+        "39.1"
+      ],
+      [
+        2,
+        "39.5"
+      ],
+      [
+        3,
+        "40.3"
+      ]
+    ],
+    "scope": "CSV inspection only; no quantization/main/scientific campaign executed."
+  },
+  "preservation": {
+    "originalInputsCurrent": 12,
+    "originalProgrammes": 7,
+    "oldMainsReplayed": false,
+    "phaseChanged": false,
+    "runtimeAuthorized": false
+  },
+  "currentDesign": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-r2.md",
+    "sha256": "8a984c7d03e10da2d4425e4414cd01e26eb68c942debead556fc70e973847982"
+  },
+  "predecessor": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/design-source-r1.json",
+    "sha256": "f8124a60d80bee69a2f00f1bf9387f69df505f093cd0cd9ae93c834d0a7932a5"
+  }
+}

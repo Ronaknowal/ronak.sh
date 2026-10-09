@@ -1,0 +1,8 @@
+{
+  "stage": "First forward/backward parity before any optimizer update or model generation",
+  "failed_criterion": "elementwise atol3e-5 rtol3e-4",
+  "maximum_error": 0.0007791519165039062,
+  "mismatched_elements": 43,
+  "embedding_elements": 6438912,
+  "resolution": "Match native F.kl_div evaluation and compare full-parameter relative L2 with retained absolute errors; validate that unchanged weights and all-mask checks still hold"
+}

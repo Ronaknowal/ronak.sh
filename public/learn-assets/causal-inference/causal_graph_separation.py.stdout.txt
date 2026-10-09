@@ -1,0 +1,12 @@
+given [] separated True
+ancestors ['X', 'Y']
+parent links []
+remaining edges []
+given ['C'] separated False
+ancestors ['C', 'X', 'Y']
+parent links [('X', 'Y')]
+remaining edges [('X', 'Y')]
+given ['D'] separated False
+ancestors ['C', 'D', 'X', 'Y']
+parent links [('X', 'Y')]
+remaining edges [('C', 'X'), ('C', 'Y'), ('X', 'Y')]

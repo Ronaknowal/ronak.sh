@@ -1,0 +1,395 @@
+{
+  "status": "N12_SCOPED_NEW_STREAM_AND_STATE_WITNESSES",
+  "inputs": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_online.py",
+      "bytes": 7983,
+      "sha256": "44880c6ed798d3156d8f98dcc0d24df5794057f7d5f63889919d33838180db10"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+      "bytes": 9109,
+      "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_nnls.py",
+      "bytes": 2256,
+      "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+    }
+  ],
+  "checks": [
+    {
+      "name": "D61 hand old Gram",
+      "passed": true
+    },
+    {
+      "name": "D61 hand old cross",
+      "passed": true
+    },
+    {
+      "name": "D61 hand new Gram",
+      "passed": true
+    },
+    {
+      "name": "D61 hand new cross",
+      "passed": true
+    },
+    {
+      "name": "D62 hand A rho0",
+      "passed": true
+    },
+    {
+      "name": "D62 hand B rho0",
+      "passed": true
+    },
+    {
+      "name": "exact dictionary stationary rho0",
+      "passed": true
+    },
+    {
+      "name": "D62 hand A rho0.5",
+      "passed": true
+    },
+    {
+      "name": "D62 hand B rho0.5",
+      "passed": true
+    },
+    {
+      "name": "exact independent normal equations rho0.5",
+      "passed": true
+    },
+    {
+      "name": "exact dictionary stationary rho0.5",
+      "passed": true
+    },
+    {
+      "name": "D62 hand A rho1",
+      "passed": true
+    },
+    {
+      "name": "D62 hand B rho1",
+      "passed": true
+    },
+    {
+      "name": "exact independent normal equations rho1",
+      "passed": true
+    },
+    {
+      "name": "exact dictionary stationary rho1",
+      "passed": true
+    },
+    {
+      "name": "unused dictionary row kept",
+      "passed": true
+    },
+    {
+      "name": "flat A inconsistent B refused",
+      "passed": true
+    },
+    {
+      "name": "flat A inconsistent offdiagonal refused",
+      "passed": true
+    },
+    {
+      "name": "fresh cyclic row scalar result",
+      "passed": true
+    },
+    {
+      "name": "one sweep surrogate descends",
+      "passed": true
+    },
+    {
+      "name": "last row coordinate slope zero band0",
+      "passed": true
+    },
+    {
+      "name": "last row coordinate slope zero band1",
+      "passed": true
+    },
+    {
+      "name": "D63 fresh closed amount h1",
+      "passed": true
+    },
+    {
+      "name": "D63 closed stationary h1",
+      "passed": true
+    },
+    {
+      "name": "D63 old and fresh losses h1",
+      "passed": true
+    },
+    {
+      "name": "D63 fresh closed amount h1.25",
+      "passed": true
+    },
+    {
+      "name": "D63 closed stationary h1.25",
+      "passed": true
+    },
+    {
+      "name": "D63 old and fresh losses h1.25",
+      "passed": true
+    },
+    {
+      "name": "D63 fresh closed amount h1.5",
+      "passed": true
+    },
+    {
+      "name": "D63 closed stationary h1.5",
+      "passed": true
+    },
+    {
+      "name": "D63 old and fresh losses h1.5",
+      "passed": true
+    },
+    {
+      "name": "D63 fresh closed amount h1.75",
+      "passed": true
+    },
+    {
+      "name": "D63 closed stationary h1.75",
+      "passed": true
+    },
+    {
+      "name": "D63 old and fresh losses h1.75",
+      "passed": true
+    },
+    {
+      "name": "D63 fresh closed amount h2",
+      "passed": true
+    },
+    {
+      "name": "D63 closed stationary h2",
+      "passed": true
+    },
+    {
+      "name": "D63 old and fresh losses h2",
+      "passed": true
+    },
+    {
+      "name": "D63 exact h2 fresh loss2/9",
+      "passed": true
+    },
+    {
+      "name": "initial state arrays readonly",
+      "passed": true
+    },
+    {
+      "name": "retained fields do not contain historical X/W",
+      "passed": true
+    },
+    {
+      "name": "new arrival1 amounts",
+      "passed": true
+    },
+    {
+      "name": "arrival1 expected A/B",
+      "passed": true
+    },
+    {
+      "name": "empty batch is actual same snapshot",
+      "passed": true
+    },
+    {
+      "name": "negative rho",
+      "passed": true
+    },
+    {
+      "name": "atomic unchanged after negative rho",
+      "passed": true
+    },
+    {
+      "name": "rho>1",
+      "passed": true
+    },
+    {
+      "name": "atomic unchanged after rho>1",
+      "passed": true
+    },
+    {
+      "name": "bool rho",
+      "passed": true
+    },
+    {
+      "name": "atomic unchanged after bool rho",
+      "passed": true
+    },
+    {
+      "name": "nonfinite rho",
+      "passed": true
+    },
+    {
+      "name": "atomic unchanged after nonfinite rho",
+      "passed": true
+    },
+    {
+      "name": "feature reorder",
+      "passed": true
+    },
+    {
+      "name": "atomic unchanged after feature reorder",
+      "passed": true
+    },
+    {
+      "name": "negative incoming",
+      "passed": true
+    },
+    {
+      "name": "atomic unchanged after negative incoming",
+      "passed": true
+    },
+    {
+      "name": "shape incoming",
+      "passed": true
+    },
+    {
+      "name": "atomic unchanged after shape incoming",
+      "passed": true
+    },
+    {
+      "name": "overflow incoming",
+      "passed": true
+    },
+    {
+      "name": "atomic unchanged after overflow incoming",
+      "passed": true
+    },
+    {
+      "name": "new arrival2 amounts",
+      "passed": true
+    },
+    {
+      "name": "rho .5 accumulated expected",
+      "passed": true
+    },
+    {
+      "name": "batch diagnostics cumulative count",
+      "passed": true
+    },
+    {
+      "name": "surrogate diagnostics nonincrease",
+      "passed": true
+    },
+    {
+      "name": "query state immutable",
+      "passed": true
+    },
+    {
+      "name": "query shaped and reconstruction",
+      "passed": true
+    },
+    {
+      "name": "public arrays copies no mutation",
+      "passed": true
+    },
+    {
+      "name": "rho0 zero batch preserves flat dictionary rows",
+      "passed": true
+    },
+    {
+      "name": "empty initial dictionary",
+      "passed": true
+    },
+    {
+      "name": "zero cap",
+      "passed": true
+    },
+    {
+      "name": "negative tolerance",
+      "passed": true
+    },
+    {
+      "name": "bool sweep",
+      "passed": true
+    },
+    {
+      "name": "duplicate names",
+      "passed": true
+    },
+    {
+      "name": "one new main exit0",
+      "passed": true
+    },
+    {
+      "name": "public partialfit steps actual1/2",
+      "passed": true
+    },
+    {
+      "name": "public fitted rank2",
+      "passed": true
+    },
+    {
+      "name": "public query finite nonnegative",
+      "passed": true
+    },
+    {
+      "name": "public query full shape",
+      "passed": true
+    },
+    {
+      "name": "main scratch finite state step0",
+      "passed": true
+    },
+    {
+      "name": "main scratch fixed shape step0",
+      "passed": true
+    },
+    {
+      "name": "main scratch finite state step1",
+      "passed": true
+    },
+    {
+      "name": "main scratch fixed shape step1",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_online.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "source conserved nmf_nnls.py",
+      "passed": true
+    }
+  ],
+  "main": {
+    "newRuns": 1,
+    "newPublicPartialFitCalls": 2,
+    "newScratchPartialFitCalls": 2,
+    "exitCode": 0,
+    "stdout": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+      "bytes": 4228,
+      "sha256": "a7f59677f85590b65f4a76ec5a37d684c73f270cf0d156bb3471aeb2c5129316"
+    },
+    "stderr": {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "focusedAdditionalScratchPartialFitSuccesses": 4,
+  "historicalStreamReplayed": false,
+  "research": "Current official MiniBatchNMF public partial_fit/transform contracts plus installed1.9.1 partial_fit/_minibatch_step source targeted read. Internal source inspection establishes differing optimizer only, never used as learner API. Mairal2010 Algorithms1\u20132 and section5.3 targeted primary read; no entire42-page/convergence-proof claim."
+}

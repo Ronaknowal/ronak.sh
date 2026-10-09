@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-28",
+  "status": "author native checks and independent source review complete; parent rendered/integration review tracked separately",
+  "files": {
+    "src/learn/data/topics/dataset-loaders-checkpoints-exact-resume-contracts.jsx": "fb477fdb3b50e4c0aa58a5d1b875deed10f24062bb0d339c5c6afab146aa5a5b",
+    "src/learn/data/curriculum/blueprints/dataset-loaders-checkpoints-exact-resume-contracts.js": "36353036dff02a4bb66baa06415254be341668ca605774697c42191420dbfdc7",
+    "src/learn/components/lesson-labs/ExactResumeLabs.jsx": "f51a2df66502746207065f1dc635cd5b0e03a2abd0b06d7c5ae3489d26147aa6",
+    "src/learn/components/lesson-labs/exact-resume-labs.css": "407ab66b4be170bb2ca73c61cabaea735f6406d5390bfbb2e6150c2cce3f88d0",
+    "src/learn/data/exact-resume-models.js": "9bc9176a4ed135e6d1320ac74805343787124070fe23018efc84ee8a816ce2ff",
+    "public/learn-code/dataset-loaders-checkpoints-exact-resume-contracts/exact_resume.py": "26ec750215e64f26905809410fd30aafed82acb32f089076c1910be19b3c157d",
+    "public/learn-code/dataset-loaders-checkpoints-exact-resume-contracts/stateful_loader_resume.py": "7f73647b519042921fb83dc993cb8ea3c2de750bee13e430cf04ba76bdf9db04"
+  },
+  "native_evidence": "native-evidence.json",
+  "limits": "CPU/local bounded studies; no cloud server, GPU or production benchmark. See manuscript and native receipt for topic-specific boundaries.",
+  "independent_review": "independent-review.md",
+  "author_painted_review": {
+    "attribution": "Author inspected parent-created screenshots; parent performed browser interactions.",
+    "captures": "scratch/core-frameworks/state-browser/dataset-loaders-checkpoints-exact-resume-contracts-{0,1}-{desktop,320,changed}.png; figure-1-320.png",
+    "observations": "Checkpoint state stacks without clipped values; paired trajectories and line legend readable; wide trace table scrolls locally. Queue partitions, cursor values and skipped IDs remain legible in narrow/changed states. No new painted-layout finding."
+  },
+  "cleanup": "Removed own processed archive and superseded portalocker4.4 metadata only; retained public data/provenance, runnable environment and required evidence."
+}

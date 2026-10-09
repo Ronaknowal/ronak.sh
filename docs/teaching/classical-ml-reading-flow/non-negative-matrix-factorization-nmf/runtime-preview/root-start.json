@@ -1,0 +1,63 @@
+{
+  "schema": "nmf-private-implementation-root-release/v1",
+  "at": "2026-10-09T15:28:48.806Z",
+  "status": "IMPLEMENTATION_IN_PROGRESS_AFTER_COMPLETE_CURRENT_CONTENT_INTAKE",
+  "root": "/root",
+  "author": "/root/tsne_probability_arrow_recovery",
+  "topicId": "non-negative-matrix-factorization-nmf",
+  "revision": 4,
+  "intake": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/complete-intake.json",
+    "bytes": 56297,
+    "sha256": "fc6f6dd81c3c18241c3843c9c3fb8c291f73274424357822b64e00479e125b0b"
+  },
+  "rootContentAcceptance": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-accepted-root.json",
+    "bytes": 70087,
+    "sha256": "9781116f79f4c83639490007ae1beb5e45a5360f78d6e29b9550e52550cd0a12"
+  },
+  "manuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/lesson.md",
+    "bytes": 436503,
+    "sha256": "3907412af22650e27be5a9f1f275864e4ee3f24d35a396b2e0028dfa10b0af83"
+  },
+  "rootConditions": 417,
+  "foreignRowsConserved": 234,
+  "intakeScope": {
+    "manuscriptLines": 7398,
+    "completeSpecificationReads": 17,
+    "sections": 19,
+    "drawingJobs": 66,
+    "solvedTasks": 24,
+    "fileIndexEntries": 22
+  },
+  "acceptedAmendments": [
+    {
+      "name": "N8 optional global assignment ambiguity audit",
+      "decision": "Accept explicit O(k²d) cost construction/O(k³) core assignment/conservative O(k⁴) optional audit capped at64, with no unqualified uniqueness claim."
+    },
+    {
+      "name": "D48 matched rank6 seed23 study",
+      "decision": "Accept separately labelled new controlled image study with saved source IDs/train-only roles/signed PCA range; original PCA8 aggregates and missing historical factors remain distinct."
+    },
+    {
+      "name": "D28/D30 scalar/Jensen/tangent teaching",
+      "decision": "Accept resolved detailed visual specifications and positive-interior limits; no all-beta proof transferred from Frobenius."
+    },
+    {
+      "name": "Positive KL and section11 loss correction",
+      "decision": "Retain exact failed original KL stream, separately executed positive shifted demonstration, and original section11 stdout predating source-only streamed-loss correction. No later full main execution inferred."
+    },
+    {
+      "name": "Tensor anatomy and phase",
+      "decision": "Accept full zero-feature-plane, reversible unfolding, CP/Tucker anatomy and finite inverse-DFT example as scoped mechanisms, not tensor fitting/audio validation."
+    }
+  ],
+  "release": "Full private runtime implementation in topic semantic owners; no canonical/public/shared changes by author.",
+  "limits": [
+    "This release is not implementation acceptance.",
+    "Full different source/paint review, actual control/code/loading evidence and Root canonical normal integration remain.",
+    "Original numerical/execution roles retained; no unchanged scientific replay."
+  ],
+  "retainedHarnessFailure": "edd627 was an initial require/top-level-await module-format failure before any script execution; this explicit ESM successor replaces that attempt."
+}

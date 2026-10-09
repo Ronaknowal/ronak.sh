@@ -1,0 +1,514 @@
+{
+  "created_utc": "20261006T171649Z",
+  "status": "passed",
+  "python": "3.12.14",
+  "versions": {
+    "numpy": "2.3.5",
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "source_sha256": {
+    "public/learn-code/multimodal-tokenization/digits_subset.csv": "cfd78aa0f94269c48192b6ac03146422be9d14044fc47a856a85f5372183959c",
+    "public/learn-code/multimodal-tokenization/digits_subset_provenance.md": "6e18e67baf8321a8354b0b55652531a9a5a820463f5b60adfaf0d35a8e781120",
+    "public/learn-code/multimodal-tokenization/encodec_library.py": "08e714130bc1c8f2a12bfeaa16554a11447a4ef3dae8f20b6aa8ed422390289e",
+    "public/learn-code/multimodal-tokenization/patch_projection.py": "67ce5bb1264758e45953cc6e09d971502a8cb54ed42feb7dd7c1b6034c4ea378",
+    "public/learn-code/multimodal-tokenization/README.md": "df9a67dd0c19c5d1190c86a5e4223e81432ee26d260ef47bee511633a1ae078a",
+    "public/learn-code/multimodal-tokenization/residual_codec.py": "12685c003f0d714dcf619efbf2a8ac77678ab8d88642d407618bdaadafe28b0d",
+    "public/learn-code/multimodal-tokenization/vector_quantization.py": "407057b8eb354d1a1ef8c85703036c14d3183429ac7fb481e22cd6e2db54e1cb",
+    "scripts/verify-multimodal-tokenization.py": "771ac6ed76b19d5cbcb1136fbc2a116f54186f7257fcb006b0fea70958ce075f"
+  },
+  "checks": {
+    "patch": {
+      "independent_slice_cases": [
+        {
+          "shape": [
+            4,
+            6,
+            2
+          ],
+          "patch_size": 2
+        },
+        {
+          "shape": [
+            3,
+            6,
+            1
+          ],
+          "patch_size": 3
+        },
+        {
+          "shape": [
+            2,
+            3,
+            4
+          ],
+          "patch_size": 1
+        }
+      ],
+      "nondivisible_rejected": true
+    },
+    "vq": {
+      "random_distance_reference": [
+        57,
+        13,
+        5
+      ],
+      "chunk_sizes": [
+        1,
+        7,
+        1024
+      ],
+      "first_tie_ids": [
+        0,
+        1
+      ],
+      "analytical_gradient_checks": 6,
+      "csv_rows_bound_to_sklearn": 400,
+      "train_rows": 320,
+      "heldout_rows": 80
+    },
+    "rvq": {
+      "worked_errors": [
+        0.2,
+        0.10000000000000002,
+        0.025000000000000012
+      ],
+      "random_decode_cases": 30,
+      "tie_first": true,
+      "reversible_orders": 2,
+      "payload": {
+        "frames_per_second": 75.0,
+        "ids_per_second": 600.0,
+        "bits_per_id": 10,
+        "bits_per_second": 6000.0
+      }
+    }
+  },
+  "executions": {
+    "patch_projection": {
+      "command": [
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\multimodal-tokenization\\patch_projection.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "8ca141a7ea315073fa1b322bc954c2b01d75376ff4fe2f10096ceb2e8c5202a0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": {
+        "image_hwc": [
+          4,
+          6,
+          2
+        ],
+        "patches": [
+          6,
+          8
+        ],
+        "first_patch": [
+          0.0,
+          0.1,
+          0.2,
+          0.3,
+          1.2,
+          1.3,
+          1.4,
+          1.5
+        ],
+        "first_projection": [
+          1.048,
+          0.808,
+          1.368
+        ],
+        "conv_nchw": [
+          1,
+          3,
+          2,
+          3
+        ],
+        "max_abs_difference": 4.440892098500626e-16,
+        "unpatchify_exact": true
+      }
+    },
+    "residual_codec": {
+      "command": [
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\multimodal-tokenization\\residual_codec.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "2ecebf4d64dceca5fecfda1e2ffeb5ec22412388f3aff08d2be810ea1cbe7969",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": {
+        "input": [
+          0.8,
+          0.6
+        ],
+        "stage_ids": [
+          3,
+          0,
+          3
+        ],
+        "squared_error_sums": [
+          0.2,
+          0.10000000000000002,
+          0.025000000000000012
+        ],
+        "decoded_sum": [
+          0.75,
+          0.75
+        ],
+        "final_residual": [
+          0.050000000000000044,
+          -0.15000000000000002
+        ],
+        "stage_namespaced_ids": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "ids_time_stage": [
+          [
+            3,
+            0,
+            3
+          ],
+          [
+            2,
+            1,
+            2
+          ]
+        ],
+        "serializations": {
+          "time-major": [
+            3,
+            0,
+            3,
+            2,
+            1,
+            2
+          ],
+          "level-major": [
+            3,
+            2,
+            0,
+            1,
+            3,
+            2
+          ]
+        },
+        "malformed_stage_error_before": 0.01,
+        "malformed_stage_error_after": 0.81,
+        "payload": {
+          "frames_per_second": 75.0,
+          "ids_per_second": 600.0,
+          "bits_per_id": 10,
+          "bits_per_second": 6000.0
+        }
+      }
+    },
+    "vector_quantization": {
+      "command": [
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\multimodal-tokenization\\vector_quantization.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "0d998848df9087fb94ff10efea47abdcf193d55a0d295ac074e95cd00d026e93",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": {
+        "nearest_ids": [
+          1,
+          0,
+          0
+        ],
+        "selected": [
+          [
+            1.0,
+            1.0
+          ],
+          [
+            -1.0,
+            -1.0
+          ],
+          [
+            -1.0,
+            -1.0
+          ]
+        ],
+        "gradients": {
+          "selected_id": [
+            1
+          ],
+          "forward_vector": [
+            [
+              1.0,
+              1.0
+            ]
+          ],
+          "reconstruction": {
+            "value": 1.0,
+            "encoder_gradient": [
+              [
+                1.0,
+                1.0
+              ]
+            ],
+            "codebook_gradient": null
+          },
+          "codebook": {
+            "value": 0.1,
+            "encoder_gradient": null,
+            "codebook_gradient": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.19999999999999996,
+                0.4
+              ]
+            ]
+          },
+          "commitment": {
+            "value": 0.025,
+            "encoder_gradient": [
+              [
+                -0.04999999999999999,
+                -0.1
+              ]
+            ],
+            "codebook_gradient": null
+          }
+        },
+        "digits_vqvae": {
+          "seed": 0,
+          "epochs": 30,
+          "batch_size": 64,
+          "optimizer": "Adam",
+          "learning_rate": 0.002,
+          "beta": 0.25,
+          "epoch_total_loss_means": [
+            0.17737980782985688,
+            0.17207479178905488,
+            0.16785283982753754,
+            0.16423164308071136,
+            0.16274956464767457,
+            0.16783498525619506,
+            0.19317612946033477,
+            0.26670985519886015,
+            0.4121587693691254,
+            0.5661927103996277,
+            0.5914116024971008,
+            0.4952316880226135,
+            0.37851706743240354,
+            0.26023282706737516,
+            0.18894895315170288,
+            0.14240577220916747,
+            0.11593333035707473,
+            0.09816067665815353,
+            0.08960247933864593,
+            0.08394779562950135,
+            0.0815405085682869,
+            0.07997821271419525,
+            0.07788870930671692,
+            0.07577674239873886,
+            0.07370479851961136,
+            0.0717298522591591,
+            0.0697284460067749,
+            0.06798572093248367,
+            0.06589237004518508,
+            0.06409504115581513
+          ],
+          "heldout_before": {
+            "images": 80,
+            "latent_grid": [
+              4,
+              4
+            ],
+            "ids": 1280,
+            "reconstruction_mse_mean": 0.17092622816562653,
+            "code_counts": [
+              0,
+              584,
+              12,
+              119,
+              68,
+              3,
+              2,
+              0,
+              0,
+              63,
+              46,
+              0,
+              0,
+              197,
+              95,
+              91
+            ],
+            "used_codes": 11,
+            "usage_entropy_bits": 2.5097366452178616
+          },
+          "train_after": {
+            "images": 320,
+            "latent_grid": [
+              4,
+              4
+            ],
+            "ids": 5120,
+            "reconstruction_mse_mean": 0.030427897348999977,
+            "code_counts": [
+              93,
+              946,
+              1060,
+              277,
+              0,
+              25,
+              174,
+              437,
+              58,
+              9,
+              772,
+              626,
+              38,
+              3,
+              50,
+              552
+            ],
+            "used_codes": 15,
+            "usage_entropy_bits": 3.1015840814999396
+          },
+          "heldout_after": {
+            "images": 80,
+            "latent_grid": [
+              4,
+              4
+            ],
+            "ids": 1280,
+            "reconstruction_mse_mean": 0.03439391031861305,
+            "code_counts": [
+              25,
+              223,
+              258,
+              85,
+              1,
+              4,
+              36,
+              97,
+              14,
+              7,
+              194,
+              147,
+              21,
+              1,
+              6,
+              161
+            ],
+            "used_codes": 16,
+            "usage_entropy_bits": 3.1380091672786383
+          }
+        }
+      }
+    },
+    "encodec_library": {
+      "command": [
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\multimodal-tokenization\\encodec_library.py",
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\constructed-tone-stereo-16000hz.wav",
+        "--offline-shape"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "6f686173cebd03a2ee041bd7211dd32b4b4b9a65fd3f3a2ee7a9738272781484",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": {
+        "parameter_origin": "random-offline-shape",
+        "bandwidth_kbps": 6.0,
+        "source_sample_rate": 16000,
+        "model_sample_rate": 24000,
+        "source_channels": 2,
+        "model_channels": 1,
+        "valid_resampled_samples": 6002,
+        "processor_input_shape": [
+          1,
+          1,
+          6002
+        ],
+        "padding_mask_shape": [
+          1,
+          6002
+        ],
+        "audio_codes_shape": [
+          1,
+          1,
+          8,
+          19
+        ],
+        "audio_scales_shapes": [
+          null
+        ],
+        "last_frame_pad_length": 0,
+        "decoder_output_shape": [
+          1,
+          1,
+          6002
+        ],
+        "trimmed_output_samples": 6002,
+        "round_trip_mse_mean": 0.05565064400434494
+      }
+    },
+    "encodec_pretrained": {
+      "command": [
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-code\\multimodal-tokenization\\encodec_library.py",
+        "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\constructed-tone-stereo-16000hz.wav"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "98e167665cb51f2e713715ab6f1a179cdf119072321e2f9c3b3982e230f56e1d",
+      "stderr_sha256": "af756ed9aed0b62962e568fdef7eed3c9756a9829798227b1e6de8fef60e56ec",
+      "output": {
+        "parameter_origin": "facebook/encodec_24khz",
+        "bandwidth_kbps": 6.0,
+        "source_sample_rate": 16000,
+        "model_sample_rate": 24000,
+        "source_channels": 2,
+        "model_channels": 1,
+        "valid_resampled_samples": 6002,
+        "processor_input_shape": [
+          1,
+          1,
+          6002
+        ],
+        "padding_mask_shape": [
+          1,
+          6002
+        ],
+        "audio_codes_shape": [
+          1,
+          1,
+          8,
+          19
+        ],
+        "audio_scales_shapes": [
+          null
+        ],
+        "last_frame_pad_length": 0,
+        "decoder_output_shape": [
+          1,
+          1,
+          6002
+        ],
+        "trimmed_output_samples": 6002,
+        "round_trip_mse_mean": 0.00013271713396534324
+      }
+    }
+  },
+  "tone_fixture_sha256": "a588166fc90309aa7bdf32dc1b47afef2023ade217cd1d39b148e9928aa83a6d",
+  "pretrained_executed": true
+}

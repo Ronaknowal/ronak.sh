@@ -1,0 +1,60 @@
+.ensemble-permissions-table {
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-color: #8e7750 #17171b;
+  margin: 1rem 0;
+}
+
+.ensemble-permissions-table table {
+  border-collapse: collapse;
+  min-width: 44rem;
+  width: max-content;
+  max-width: none;
+  font-size: 1rem;
+}
+
+.ensemble-permissions-table th,
+.ensemble-permissions-table td {
+  border: 1px solid #45454b;
+  padding: .65rem .8rem;
+  text-align: left;
+  vertical-align: top;
+  max-width: 35rem;
+}
+
+.ensemble-permissions-table tbody th,
+.ensemble-permissions-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  background: #17171b;
+  z-index: 1;
+}
+
+.ensemble-permissions-table caption {
+  width: min(44rem, 100%);
+  text-align: left;
+  white-space: normal;
+  padding-bottom: .7rem;
+}
+
+.ensemble-permissions-toggle {
+  display: flex;
+  gap: .65rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.ensemble-permissions-toggle input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: #e8bb60;
+}
+
+.ensemble-lesson details {
+  margin: 1rem 0;
+}
+
+.ensemble-lesson summary {
+  cursor: pointer;
+  padding-block: .65rem;
+}

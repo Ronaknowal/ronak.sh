@@ -1,0 +1,49 @@
+.distill-flow { --distill-muted: #b5bdcc; }
+.distill-figure { margin: 2rem 0 2.4rem; padding: 0; container-type: inline-size; }
+.distill-figure p { margin: .6rem 0; }
+.distill-figure figcaption { color: #b5bdcc; line-height: 1.6; margin-top: .9rem; }
+.distill-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.distill-pair > * { min-width: 0; }
+.distill-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; margin: 1rem 0; }
+.distill-controls label { display: flex; flex: 1 1 12rem; flex-direction: column; gap: .4rem; min-width: 0; }
+.distill-controls label.distill-check { flex-direction: row; align-items: center; }
+.distill-controls input[type=range] { width: 100%; accent-color: #ffcb72; }
+.distill-controls input[type=checkbox] { accent-color: #ffcb72; width: 1.15em; height: 1.15em; flex-shrink: 0; }
+.distill-controls select, .distill-controls button, .distill-figure button { font: inherit; color: #e8e9ec; border: 1px solid #565b67; border-radius: .25rem; background: #22252c; padding: .45rem .65rem; max-width: 100%; }
+.distill-controls select { width: 100%; }
+.distill-controls button:focus-visible, .distill-controls input:focus-visible, .distill-controls select:focus-visible, .distill-scroll:focus-visible { outline: 2px solid #ffcb72; outline-offset: 3px; }
+.distill-scroll { overflow-x: auto; max-width: 100%; padding: .25rem 0 .5rem; }
+.distill-cue { font-size: .85em; color: #b5bdcc; }
+.distill-table table { border-collapse: collapse; min-width: 100%; font-size: .92em; }
+.distill-table th, .distill-table td { text-align: left; padding: .55rem .65rem; border-bottom: 1px solid #3d414b; vertical-align: top; overflow-wrap: normal; word-break: normal; }
+.distill-table th { font-weight: 550; color: #d8dce5; }
+.distill-figure[data-distill-figure="D07"] .distill-table td:last-child { white-space: nowrap; }
+.distill-bars > div { margin-bottom: .6rem; }
+.distill-bars span { display: block; overflow-wrap: normal; }
+.distill-track { height: .55rem; background: #30343d; width: 100%; margin-top: .2rem; }
+.distill-track i { height: 100%; display: block; }
+.distill-arrow { text-align: center; }
+.distill-key { display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+.distill-figure svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.distill-figure svg text { font-family: inherit; font-size: 16px; fill: #e2e5ec; }
+.distill-tree, .distill-curve { min-width: 31.25em; }
+.distill-backed { paint-order: stroke; stroke: #17191e; stroke-width: 7px; stroke-linejoin: round; }
+.distill-equation { overflow-x: auto; max-width: 100%; }
+.distill-practice { margin: 1.5rem 0; }
+.distill-practice details { margin: .6rem 0; }
+.distill-practice summary { cursor: pointer; color: #ffcb72; }
+.distill-stack { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: .45rem; min-width: 0; }
+.distill-layer { min-width: 0; border-left: .2rem solid var(--role); padding: .4rem .6rem; background: #21242b; }
+.distill-tree-pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+.distill-layer small { display: block; color: #c0c6d0; }
+.distill-vector { display: flex; flex-wrap: wrap; gap: .35rem; }
+.distill-vector > span { padding: .3rem .5rem; border-bottom: 2px solid var(--role); }
+.distill-family-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(4.5rem, 1fr)); gap: .5rem; }
+.distill-family-grid button { border-bottom: 3px solid var(--role); color: var(--role); }
+.distill-family-grid small, .distill-token-grid small { display: block; font-size: .8em; }
+.distill-token-grid { display: grid; gap: .4rem; overflow-x: auto; padding: .3rem; }
+.distill-token-grid > span { border-bottom: 2px solid var(--role); background: #252932; padding: .4rem; }
+.distill-chunks { display: grid; gap: .65rem; }
+.distill-flow p, .distill-flow li { overflow-wrap: break-word; }
+@container (max-width: 32rem) { .distill-pair { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .distill-figure * { transition: none !important; } }

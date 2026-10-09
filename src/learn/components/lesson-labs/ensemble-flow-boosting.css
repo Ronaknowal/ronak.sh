@@ -1,0 +1,67 @@
+.ensemble-lesson p {
+  overflow-wrap: anywhere;
+}
+
+.ensemble-boosting-stage {
+  flex: 1 1 15rem;
+  min-width: 0;
+}
+
+.ensemble-boosting-stage > div {
+  display: flex;
+  gap: .7rem;
+  flex-wrap: wrap;
+  margin-top: .7rem;
+}
+
+.ensemble-boosting-stage button:disabled {
+  color: #92929b;
+  border-color: #414148;
+  cursor: default;
+}
+
+.ensemble-flow-controls details {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.ensemble-flow-controls summary {
+  cursor: pointer;
+  margin-bottom: .7rem;
+}
+
+.ensemble-boosting-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.ensemble-boosting-table table {
+  width: 100%;
+  min-width: 42rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.ensemble-boosting-table th,
+.ensemble-boosting-table td {
+  padding: .7rem .85rem;
+  border: 1px solid #414148;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.ensemble-boosting-table th:first-child {
+  position: sticky;
+  left: 0;
+  background: #111115;
+}
+
+.ensemble-boosting-table caption {
+  position: sticky;
+  left: 0;
+  width: min(32rem, calc(100vw - 4rem));
+  white-space: normal;
+  text-align: left;
+  padding-bottom: .7rem;
+}

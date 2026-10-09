@@ -1,0 +1,60 @@
+.subword-figure {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  margin: 22px 0;
+  padding: 0;
+  min-width: 0;
+}
+.subword-lesson .katex-display { overflow-x: auto; overflow-y: hidden; padding: 6px 0; }
+.subword-figure figcaption { font-weight: 400; margin: 12px 0 0; font-size: .88em; color: #b9b9b9; }
+.subword-representation + .subword-representation { border-top: 1px solid #303030; margin-top: 16px; padding-top: 16px; }
+.subword-token-strip { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px; margin: 10px 0; min-width: 0; }
+.subword-token { display: inline-flex; flex-direction: column; gap: 3px; align-items: center; max-width: 100%; padding: 5px 8px; border: 1px solid #4a4a4a; border-radius: 4px; background: #191919; color: #ececec; font-family: var(--font-mono, monospace); overflow-wrap: anywhere; }
+.subword-token[data-tone="0"] { background: #291f10; border-color: #786035; color: #f2cb77; }
+.subword-token[data-tone="1"] { background: #10252c; border-color: #3e727d; color: #9ad8e6; }
+.subword-token[data-tone="2"] { background: #251b33; border-color: #70568a; color: #d3b5ee; }
+.subword-token[data-tone="3"] { background: #301c25; border-color: #89576c; color: #efb1c8; }
+.subword-token[data-tone="4"] { background: #19243b; border-color: #516d9a; color: #b6cef4; }
+.subword-token.is-selected { outline: 2px solid #e4b752; outline-offset: 2px; }
+.subword-explained-flow, .subword-before-after { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17em), 1fr)); gap: 22px; }
+.subword-explained-flow > div, .subword-before-after > div { min-width: 0; border-left: 2px solid #454545; padding-left: 14px; }
+.subword-before-after h4 { font-size: 1em; margin: 0 0 16px; }
+.subword-large-word { font: 1.6em var(--font-mono, monospace); color: #e9e9e9; }
+.subword-id-pairs { display: flex; flex-wrap: wrap; gap: 18px; }
+.subword-id-pairs > span { display: flex; align-items: center; gap: 8px; }
+.subword-token-index { font-size: 10px; color: #a7a7a7; }
+.subword-word-row + .subword-word-row { border-top: 1px solid #2d2d2d; padding-top: 12px; }
+.subword-word-row strong { overflow-wrap: anywhere; }
+.subword-pipeline { padding-left: 24px; }
+.subword-pipeline li { padding: 0 0 18px 8px; }
+.subword-pipeline strong, .subword-pipeline code, .subword-pipeline > li > span { display: block; }
+.subword-pipeline code { white-space: pre-wrap; padding: 8px 0; }
+.subword-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 16px 0; }
+.neural-lab:has(.subword-actions) label { display: block; margin-top: 12px; margin-bottom: 7px; }
+.neural-lab:has(.subword-actions) textarea,
+.neural-lab:has(.subword-actions) > input { display: block; width: 100%; max-width: 100%; box-sizing: border-box; background: #151515; color: #ececec; border: 1px solid #656565; border-radius: 5px; padding: 10px; font: inherit; }
+.neural-lab:has(.subword-actions) textarea { resize: vertical; min-height: 76px; }
+.subword-help, .subword-empty { color: #b4b4b4; font-size: .9em; }
+.subword-checkbox { display: flex; align-items: center; gap: 9px; margin: 14px 0; }
+.subword-checkbox input { accent-color: #e4b752; }
+.subword-lattice { display: block; width: 100%; max-width: 460px; height: auto; margin: auto; }
+.subword-lattice text { fill: #dedede; font: 17px ui-monospace, monospace; }
+.subword-path-mass { margin: 16px 0; }
+.subword-mass-track { height: 14px; background: #292929; margin: 8px 0; border-left: 1px solid #858585; border-right: 1px solid #858585; }
+.subword-mass-track span { display: block; height: 100%; background: #a98ac7; }
+.subword-text-control { flex: 1 1 100%; display: grid; gap: .4em; font-size: .9em; min-width: 0; }
+.subword-text-control :is(input, textarea) { box-sizing: border-box; width: 100%; max-width: 100%; padding: .6em; border: 1px solid #656565; border-radius: 4px; background: #151515; color: #e7e7e7; font: inherit; }
+.subword-text-control textarea { resize: vertical; }
+.subword-greedy-step { display: flex; flex-wrap: wrap; gap: .6em; margin: .6em 0; color: #c8c8c8; }
+.subword-greedy-step code { color: #eac27e; }
+.subword-lattice { max-width: 370px; }
+.subword-lattice .subword-piece-edge { stroke: var(--token-identity-color); }
+.subword-lattice .token-identity-text { fill: var(--token-identity-color); }
+.subword-greedy-step .is-missing { color: #c9c9c9; }
+@media (max-width: 480px) {
+  .subword-figure { padding: 0; }
+  .subword-token { padding: 5px 6px; }
+  .subword-actions button { flex: 1 1 150px; }
+  .subword-lattice text { font-size: 17px; }
+}

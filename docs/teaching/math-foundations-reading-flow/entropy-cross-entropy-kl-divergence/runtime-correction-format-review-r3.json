@@ -1,0 +1,133 @@
+{
+  "status": "PASS formatting-only successor",
+  "createdAt": "2026-10-09T18:31:12.578886+00:00",
+  "syntax": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-format-equivalence-r3.json",
+    "sha256": "c31fa0f59592fcf1da3f5c864d485e425114eecd05a17cc24e5e06dc0da5f90b",
+    "bytes": 897
+  },
+  "changedSource": [
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyCodingDrawings.jsx",
+        "sha256": "1b889c77865431be873bbee3e67f90abac21366112d48b8d08bfe3d2591826cd",
+        "bytes": 12116
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyCodingDrawings.jsx",
+        "sha256": "659e7cc5573fc1f4f279fa9bacc2e75b4e74182080c92d9c4adb00ab26faafc5",
+        "bytes": 12104
+      },
+      "frozen": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-frozen-r3/src/learn/components/lesson-labs/EntropyCodingDrawings.jsx",
+        "sha256": "659e7cc5573fc1f4f279fa9bacc2e75b4e74182080c92d9c4adb00ab26faafc5",
+        "bytes": 12104
+      }
+    },
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyDivergenceDrawings.jsx",
+        "sha256": "026ca2698c117e7ed82555fd017a1140a09e63c30ba7ebaa3a2106961e232c45",
+        "bytes": 13401
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyDivergenceDrawings.jsx",
+        "sha256": "ac374fa3d86c75e11792609facca3defb0cff9f94fd39ab0dab0cd8863221c0d",
+        "bytes": 13318
+      },
+      "frozen": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-frozen-r3/src/learn/components/lesson-labs/EntropyDivergenceDrawings.jsx",
+        "sha256": "ac374fa3d86c75e11792609facca3defb0cff9f94fd39ab0dab0cd8863221c0d",
+        "bytes": 13318
+      }
+    },
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyDrawingElements.jsx",
+        "sha256": "d2c677b0f8c41554a9d794f8aa4d385f043649b23e9a495ac93f3a6b2838008c",
+        "bytes": 12278
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyDrawingElements.jsx",
+        "sha256": "32f9b81a3f6f12918c94c2b99ab385287d83531d864ac252a3381a62205a695e",
+        "bytes": 12382
+      },
+      "frozen": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-frozen-r3/src/learn/components/lesson-labs/EntropyDrawingElements.jsx",
+        "sha256": "32f9b81a3f6f12918c94c2b99ab385287d83531d864ac252a3381a62205a695e",
+        "bytes": 12382
+      }
+    },
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyMaximumDrawings.jsx",
+        "sha256": "e97f8d84aa405fd5fc96aa0bd9dab1740a45be77f591c3d35bdbb503c452a9ba",
+        "bytes": 8264
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyMaximumDrawings.jsx",
+        "sha256": "6c73c0de4b6bd470ff0a3f11b777a861f8ec4f338a29eb732ca2427033598228",
+        "bytes": 8238
+      },
+      "frozen": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-frozen-r3/src/learn/components/lesson-labs/EntropyMaximumDrawings.jsx",
+        "sha256": "6c73c0de4b6bd470ff0a3f11b777a861f8ec4f338a29eb732ca2427033598228",
+        "bytes": 8238
+      }
+    },
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyPredictionDrawings.jsx",
+        "sha256": "7e29465005ad0c232c6d761450534bc662b6d98c1da2efa911c8d4715155a4b0",
+        "bytes": 19903
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyPredictionDrawings.jsx",
+        "sha256": "d46b6c076fa58fe2951915098f5e081040575274494e6802c93739805fd61147",
+        "bytes": 20662
+      },
+      "frozen": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-frozen-r3/src/learn/components/lesson-labs/EntropyPredictionDrawings.jsx",
+        "sha256": "d46b6c076fa58fe2951915098f5e081040575274494e6802c93739805fd61147",
+        "bytes": 20662
+      }
+    },
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyProbabilityDrawings.jsx",
+        "sha256": "c6fd315697e9915c24368a01126afaf4c69dc9d33e432093dc0dd316ec433901",
+        "bytes": 8223
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-private-r1/src/learn/components/lesson-labs/EntropyProbabilityDrawings.jsx",
+        "sha256": "36f9a9c523652ab643e264fab0659191f04272c3e8d01ad6138630b3bc5f73b4",
+        "bytes": 8174
+      },
+      "frozen": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-frozen-r3/src/learn/components/lesson-labs/EntropyProbabilityDrawings.jsx",
+        "sha256": "36f9a9c523652ab643e264fab0659191f04272c3e8d01ad6138630b3bc5f73b4",
+        "bytes": 8174
+      }
+    }
+  ],
+  "buildConservation": {
+    "previous": {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-correction-source-r2.json",
+      "sha256": "c1e045adf5d8eb02f02707459129f39f053f1849118aed6da6f124c1e8480456",
+      "bytes": 301555
+    },
+    "exactEmittedFiles": 573,
+    "onlyChangedBuildFile": {
+      "path": "scratch/entropy-private-reader/production-correction/source-bindings.json",
+      "sha256": "3b60412066a0510de93e5e4e86db30245e86f881b90e0ab5c051c0402a3a2b80",
+      "bytes": 113278
+    },
+    "scope": "Every served HTML/JS/CSS/public byte is identical to personally inspected final r2. Only source-binding metadata changed. Existing native evidence applies exactly; no browser/science replay required."
+  },
+  "buildLog": {
+    "path": "scratch/entropy-private-reader/build-correction-r3-format.log",
+    "sha256": "b2836ff59110794c1f3fae1f128b821150452bf6b875fa31b8ad76336e9f544c",
+    "bytes": 84641
+  },
+  "qualification": "A missing optional Babel JSX transform plugin caused the first equivalence command to stop before any source writes. The successful command compared complete parsed JSX trees including JSX text, omitting only source-location/raw-literal/comment metadata, then wrote conventional formatting. No dependency installation."
+}

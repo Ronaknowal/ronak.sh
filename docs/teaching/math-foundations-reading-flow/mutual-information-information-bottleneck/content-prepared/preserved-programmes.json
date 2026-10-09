@@ -1,0 +1,101 @@
+{
+  "original": {
+    "filename": "mi_original.py",
+    "title": "The original binary channel, with its output preserved",
+    "question": "With balanced labels and a 20% flip probability, how much uncertainty remains after observing X?",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_original.py",
+    "sourceSha256": "536f5219a3703bb44e1f9e24c1fc3aa48d47752011a09fe6537146f203ac2e9e",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_original.py.display.txt",
+    "outputSha256": "cfdd6d84c3bdc9c3b0abb42033b541afd822044304d919679d1c8c577aa2b930",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "nonlinear": {
+    "filename": "mi_nonlinear.py",
+    "title": "Zero covariance can coexist with a perfectly useful feature",
+    "question": "Let X be equally likely −1, 0, 1 and Y=X². Does zero correlation make X useless?",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_nonlinear.py",
+    "sourceSha256": "92424e9e56677e8349558c97f01806427cd15b62c280a52314fd1236c94bde12",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_nonlinear.py.display.txt",
+    "outputSha256": "f205b8b5f0e1724fdc780d968bd74181865536b171c182c29d4d157c93ff59e0",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "conditional": {
+    "filename": "mi_conditional.py",
+    "title": "Reveal the information hidden in a pair",
+    "question": "A is fair, B has probability 0.25 of being 1, and Y=A xor B. Calculate individual, joint and conditional information.",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_conditional.py",
+    "sourceSha256": "377021b814855fe21429ea0a1cf65ccde6f92ed3a5c6a8c95246a29d09b255b3",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_conditional.py.display.txt",
+    "outputSha256": "4e8038a397a323cf5973ac85eb9faedcff64dd2002c8064de64f2ffae759d8b0",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "processing": {
+    "filename": "mi_processing.py",
+    "title": "Calculate the loss in a noisy processing chain",
+    "question": "Y flips X with probability 0.1 and Z independently flips X with probability 0.2. How much of the original label information is lost?",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_processing.py",
+    "sourceSha256": "90cf6cd8e15da9d14b78989b779a2b1cbb3587c83ff1f23b096f98773c30f1c2",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_processing.py.display.txt",
+    "outputSha256": "18dbfa786618cb18df986ddd378424b2408a5b45ec6817625425913d190e7b9b",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "representations": {
+    "filename": "mi_representations.py",
+    "title": "Keep signal, nuisance, both, or neither",
+    "question": "X contains a fair signal S and an independent fair nuisance N. The label flips S with probability 0.1. Which representation wins at beta = 3?",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_representations.py",
+    "sourceSha256": "b9e50dd34b96c5e6f2d54d76f2738c2d3fcce02f63f93bdde78d62ec61eb40dd",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_representations.py.display.txt",
+    "outputSha256": "d145dfbcbee555fc834d3705900cbae85fb3ec4ec063f1a0f8226e8c6adde2a9",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "iteration": {
+    "filename": "mi_iteration.py",
+    "title": "Run a complete finite information bottleneck",
+    "question": "At beta = 3, compare an informative initialization with an exactly symmetric one. Does a stationary objective certify the best solution?",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_iteration.py",
+    "sourceSha256": "f2131c0303bd0f76a2f8350e558b852d80adb31ce761e944793c743dbd37b11b",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_iteration.py.display.txt",
+    "outputSha256": "c86561adcafecde0ec2e649668559f6077daa0dc35dac5b7acd9da0d7f6521d9",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "bounds": {
+    "filename": "mi_bounds.py",
+    "title": "Measure how loose the variational quantities are",
+    "question": "Fix the noisy-signal encoder. Change only the reference marginal and predictive decoder. Should actual mutual information change?",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_bounds.py",
+    "sourceSha256": "1a06c3ce2c329449324e07acc610392c2b50e484de886540a46035f17ec1be25",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_bounds.py.display.txt",
+    "outputSha256": "094fbb132ddda5a6b756c2b97cec4fa62f6434a117aa08634722cbd88ae0033a",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "continuous": {
+    "filename": "mi_continuous.py",
+    "title": "Keep coordinate units separate from information units",
+    "question": "Let X be standard Normal and Z=X+sigma E with independent standard-Normal E. What happens as measurement noise shrinks?",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_continuous.py",
+    "sourceSha256": "54e135317ccd2aa0eec9a6158158845eeac8e9d3db630fa258f3b160ce1df697",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_continuous.py.display.txt",
+    "outputSha256": "8e1a8e2f80da8196c5fdbb2b2fe2c85863e1efa96d516f5e194ca95187564e58",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "estimation": {
+    "filename": "mi_estimation.py",
+    "title": "A finite count table can report dependence under independence",
+    "question": "Generate independent categorical pairs. Compare the empirical MI with its known population value 0, then inspect unique identifiers.",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mi_estimation.py",
+    "sourceSha256": "fb9f823d7692707e65327971fdfc7e99a9ea8919b85539ea3893104ccbc29be3",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mi_estimation.py.display.txt",
+    "outputSha256": "fde850e8fedcc3d6dcc1eb8ea7380249ea34c8336a92a4c49622660347115823",
+    "role": "Preserved exact historical code/output; no new main execution"
+  },
+  "bridge": {
+    "filename": "mutual-information-library-bridge.py",
+    "source": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/programmes/mutual-information-library-bridge.py",
+    "sourceSha256": "f8fd620726b968cccbe775359e02c2a96e0231fecf3319850283e0f59621a708",
+    "outputPath": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/outputs/mutual-information-library-bridge.py.display.txt",
+    "outputSha256": "c843871ac6c0756c42e59a75de4eadc72a726fdee31d232ecad9763d4f8163a8",
+    "original": "public/learn-assets/mutual-information/mutual-information-library-bridge.py",
+    "role": "Preserved exact historical code/output; no new main execution"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "measuredAt": "2026-09-28T17:07:51.759Z",
+  "browser": "154.0.4258.37",
+  "base": "http://127.0.0.1:4197",
+  "results": [
+    {
+      "case": "selected lesson loads only its body and static dependencies",
+      "topicId": "vocabulary-design-multilingual-tokenization",
+      "jsFiles": [
+        "assets/index-B2xtYsHt.js",
+        "assets/Reader-CGUF4GdN.js",
+        "assets/LevelBadge-BT2yEIC2.js",
+        "assets/LearningNav-BHua_Yrc.js",
+        "assets/vocabulary-multilingual-CLlrktf2.js",
+        "assets/Code-HVIbUW22.js",
+        "assets/Math-Bkz_jPit.js",
+        "assets/katex-BJpuVtPE.js",
+        "assets/LessonElements-BrvsZhaF.js",
+        "assets/RemoteCodeBlock-D9gI1rpy.js",
+        "assets/NeuralLessonElements-CCRmuWrf.js",
+        "assets/NeuralNumberControl-CeleLtzd.js",
+        "assets/subword-tokenization-models-Ba6hdjWS.js"
+      ],
+      "lessonBodies": [
+        "assets/vocabulary-multilingual-CLlrktf2.js"
+      ],
+      "outlines": []
+    },
+    {
+      "case": "hub loads metadata and no lesson bodies or outlines",
+      "jsFiles": [
+        "assets/index-B2xtYsHt.js",
+        "assets/LearnHub-D6m2i7Ey.js",
+        "assets/LearningNav-BHua_Yrc.js",
+        "assets/LevelBadge-BT2yEIC2.js",
+        "assets/useProjectProgress-B_rOMDxP.js"
+      ],
+      "lessonBodies": [],
+      "outlines": []
+    },
+    {
+      "case": "selected lesson and next destination only; footer previous and browser Back reuse imports",
+      "initialJs": [
+        "assets/index-B2xtYsHt.js",
+        "assets/Reader-CGUF4GdN.js",
+        "assets/LevelBadge-BT2yEIC2.js",
+        "assets/LearningNav-BHua_Yrc.js",
+        "assets/python-basics-types-control-flow-functions-modules-B7mW4AoA.js",
+        "assets/Code-HVIbUW22.js",
+        "assets/LessonElements-BrvsZhaF.js",
+        "assets/PythonExample-QHvjrEFm.js"
+      ],
+      "destinationJs": [
+        "assets/object-oriented-programming-in-python-B7TiEa4q.js"
+      ]
+    },
+    {
+      "case": "mathematical lesson loads its renderer and styles and renders notation",
+      "jsFiles": [
+        "assets/index-B2xtYsHt.js",
+        "assets/Reader-CGUF4GdN.js",
+        "assets/LevelBadge-BT2yEIC2.js",
+        "assets/LearningNav-BHua_Yrc.js",
+        "assets/eigenvalues-eigenvectors-DEzRREX6.js",
+        "assets/Code-HVIbUW22.js",
+        "assets/Math-Bkz_jPit.js",
+        "assets/katex-BJpuVtPE.js",
+        "assets/LessonElements-BrvsZhaF.js",
+        "assets/RunnableExample-qmQpK6gB.js"
+      ],
+      "lessonBodies": [
+        "assets/eigenvalues-eigenvectors-DEzRREX6.js"
+      ],
+      "outlines": [],
+      "rendererJs": [
+        "assets/katex-BJpuVtPE.js"
+      ],
+      "fontCss": [
+        "assets/katex-CfVKi3_s.css"
+      ]
+    },
+    {
+      "case": "planned topic fetches only its outline and stays uncompletable",
+      "topicId": "typed-decision-models-calibrated-neural-decision-systems",
+      "jsFiles": [
+        "assets/index-B2xtYsHt.js",
+        "assets/Reader-CGUF4GdN.js",
+        "assets/LevelBadge-BT2yEIC2.js",
+        "assets/LearningNav-BHua_Yrc.js",
+        "assets/typed-decision-models-calibrated-neural-decision-systems-p9q5yzw7.js"
+      ],
+      "lessonBodies": [],
+      "outlines": [
+        "assets/typed-decision-models-calibrated-neural-decision-systems-p9q5yzw7.js"
+      ]
+    },
+    {
+      "case": "planned entry without an individual outline makes no nonexistent-resource request",
+      "topicId": "mdps-bellman-equations-dynamic-programming",
+      "jsFiles": [
+        "assets/index-B2xtYsHt.js",
+        "assets/Reader-CGUF4GdN.js",
+        "assets/LevelBadge-BT2yEIC2.js",
+        "assets/LearningNav-BHua_Yrc.js"
+      ],
+      "lessonBodies": [],
+      "outlines": []
+    },
+    {
+      "case": "shell stays available while loading; stale completion cannot replace destination"
+    },
+    {
+      "case": "failed lesson stays distinct from planned; keyboard retry and explicit reload provide recovery",
+      "retryRecovered": false,
+      "reloadRequired": true,
+      "requestsForFailedChunk": 2
+    },
+    {
+      "case": "controlled render failure preserves shell, prevents completion and recovers after reload",
+      "requestsForLessonChunk": 2,
+      "intentionalFixture": "Browser-only one-response replacement; no application or lesson source mutation."
+    }
+  ]
+}

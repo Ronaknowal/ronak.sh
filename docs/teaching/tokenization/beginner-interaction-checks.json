@@ -1,0 +1,39 @@
+{
+  "base": "http://127.0.0.1:4197",
+  "results": [
+    {
+      "id": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+      "checks": [
+        "Overlapping count6 vs replacements4",
+        "Empty corpus and unseen query",
+        "Greedy failure despite alternative complete path",
+        "Best-path switch17→18 percent",
+        "Vocabulary removal"
+      ]
+    },
+    {
+      "id": "byte-level-tokenization-token-free-models",
+      "checks": [
+        "Emoji scalar/grapheme/byte units",
+        "Compatibility normalization and empty input",
+        "Internal scalar vs valid chunk boundary",
+        "Strict truncated final flush",
+        "Probability change splits exact patch",
+        "Strict entropy equality leaves one patch"
+      ]
+    },
+    {
+      "id": "vocabulary-design-multilingual-tokenization",
+      "checks": [
+        "Zero total mass",
+        "Excluded language alphabet",
+        "Zero merges",
+        "Equal head work and quarter attention pairs",
+        "Tied/untied tables",
+        "Integer dimensional input recovery"
+      ]
+    }
+  ],
+  "textZoom": "200% root font at 768 CSS pixels",
+  "errors": []
+}

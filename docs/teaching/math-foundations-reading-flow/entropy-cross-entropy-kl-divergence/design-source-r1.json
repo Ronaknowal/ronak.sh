@@ -1,0 +1,296 @@
+{
+  "status": "PROPOSED_DESIGN_AUTHOR_READY_FOR_DIFFERENT_WHOLE_REVIEW",
+  "createdAt": "2026-10-09T15:17:50.773Z",
+  "author": "/root/queue_nonconvex_resume",
+  "topicId": "entropy-cross-entropy-kl-divergence",
+  "syllabusPosition": 26,
+  "mode": "full",
+  "currentBoundary": "Design/research only; substantive manuscript and runtime are not started for this revision",
+  "proposal": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-r1.md",
+    "sha256": "45cf709c5b1984b382bf1b4e7d5431b069e10431fe1162bc6754a292f5b765a3",
+    "bytes": 40594
+  },
+  "research": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r1.md",
+    "sha256": "7911a8078d8a1771f35d2ef0f8644c9903f4e27652d0c96c630e809b0c815c84",
+    "bytes": 26656
+  },
+  "selectedIntake": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/selected-intake-r1.json",
+    "sha256": "75d937e55ac9dd50dae8c04eef9c95f29db4c34acf0b1053d891eeb64a569f44",
+    "bytes": 8558
+  },
+  "counts": {
+    "conceptualHurdles": 41,
+    "visualJobs": 46,
+    "investigations": 9,
+    "preservedPrograms": 11,
+    "proposedNewPrograms": 2,
+    "practiceOutcomeGroups": 14
+  },
+  "inputs": {
+    "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx": {
+      "sha256": "57e92aed15c98bac85b3eabd17e46de7385aa1d1d4a0a27e1e095f8d82834a9d",
+      "bytes": 52234,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx"
+    },
+    "src/learn/data/entropy-information-models.js": {
+      "sha256": "36ba480e9f35052fba5cec68e77fa69d7da3177f283e5cc3028ce2f35f1c2496",
+      "bytes": 10082,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/src/learn/data/entropy-information-models.js"
+    },
+    "src/learn/data/entropy-information-examples.js": {
+      "sha256": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163",
+      "bytes": 12157,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/src/learn/data/entropy-information-examples.js"
+    },
+    "src/learn/components/lesson-labs/EntropyInformationLabs.jsx": {
+      "sha256": "5f209536f7f36fdcc07909a4e66f21e9c5d2246d688dd87fb0750d678e4fa55e",
+      "bytes": 26475,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/src/learn/components/lesson-labs/EntropyInformationLabs.jsx"
+    },
+    "src/learn/components/lesson-labs/entropy-information-labs.css": {
+      "sha256": "c1fd027f4d85ab220c9596bf5378db7e8d954e1338140f96158ccc152acf5132",
+      "bytes": 7118,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/src/learn/components/lesson-labs/entropy-information-labs.css"
+    },
+    "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js": {
+      "sha256": "9fa911f147010545ae75a07015f83142ab85047e22c9e94be56a3170d94b2c7f",
+      "bytes": 3515,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js"
+    },
+    "AGENTS.md": {
+      "sha256": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+      "bytes": 3751,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/AGENTS.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/SKILL.md": {
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "bytes": 20953,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/SKILL.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/references/workflow.md": {
+      "sha256": "4096cdebcadf3c94d61be0e1e534592160c64ef6529aca9754a2cdaaec6d1c3b",
+      "bytes": 25767,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/skills/lesson-authoring/references/workflow.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/references/teaching.md": {
+      "sha256": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "bytes": 27407,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/teaching.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/references/topic-design.md": {
+      "sha256": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "bytes": 32018,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/topic-design.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/references/domain-playbook.md": {
+      "sha256": "43897a74d31c0c9b85748ef544a8be5b5bd220b8b2f79136f176e88190f16e04",
+      "bytes": 30795,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/domain-playbook.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/references/visuals-and-labs.md": {
+      "sha256": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "bytes": 33359,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/visuals-and-labs.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/references/examples-and-code.md": {
+      "sha256": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "bytes": 15888,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/examples-and-code.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/references/practice-and-resources.md": {
+      "sha256": "b5f7a6e67c311a0ffd48dc6ee12e416aaf772b08baa9c58684c7ca0fcb817b22",
+      "bytes": 11956,
+      "existingSnapshot": "docs/teaching/math-foundations-reading-flow/non-convex-optimization-landscape/intake-frozen-r2/skills/lesson-authoring/references/practice-and-resources.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "skills/lesson-authoring/references/portfolio-adapter.md": {
+      "sha256": "347c3ee5c5f4db818f7ab4b9d9b17ef9fd49c3c3ede5d6ea2174badd24a9173d",
+      "bytes": 16033,
+      "snapshot": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/intake-frozen-r1/skills/lesson-authoring/references/portfolio-adapter.md",
+      "role": "Current authoring instructions; identical prior snapshot reused where available"
+    },
+    "docs/teaching/ENTROPY-CROSS-ENTROPY-KL-DESIGN.md": {
+      "sha256": "5a840c16fe2cba32bda192900c8002ee1f019d2d12ac0f15a2900b5bd7191bd4",
+      "bytes": 13447,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "docs/teaching/ENTROPY-CROSS-ENTROPY-KL-VERIFICATION.md": {
+      "sha256": "2598a914a293290a1de9ff11494539bba21a386606fb1baee37309d264f306dc",
+      "bytes": 13371,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "docs/teaching/ENTROPY-INDEPENDENT-REVIEW.md": {
+      "sha256": "c63dc1e93776d7ad68a58167c7aae76c728cac2324b79dea43b17c267952bb26",
+      "bytes": 6627,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "docs/teaching/evidence/entropy-independent-review.json": {
+      "sha256": "c7226794a0417f01153867871047df52abb451eb238bbb1226501a5d85978dd6",
+      "bytes": 8189,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "scratch/entropy-verification/final-source-hashes.json": {
+      "sha256": "f257e3c4d1c21405b53289b6f1f46a12f2831fe74e746d12f78ea3c23233374f",
+      "bytes": 2414,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "scratch/entropy-verification/native-results.json": {
+      "sha256": "9f5f701f948f37a80f4607fe0540e4832d4750ba3b8f7f13cc36d8b69ab63a01",
+      "bytes": 622,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "docs/teaching/topic-notes/entropy-cross-entropy-kl-divergence.md": {
+      "sha256": "5703d5deafbe6f2b78b7b22f3f10a694f18bb79b0fed5d03431077f9aba54f15",
+      "bytes": 3873,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "docs/teaching/topic-notes/README.md": {
+      "sha256": "da1e0b5021ff8619e5474cbecce0b24977af2416394cb877e05c6abc13bf5909",
+      "bytes": 7199,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "src/learn/data/topics/algebra-functions-exponentials-logarithms.jsx": {
+      "sha256": "c504f46fb632913732b8e9e20b096347f6cdfe613a729980b41b9c8323056fb7",
+      "bytes": 59426,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "src/learn/data/topics/probability-distributions-bayes-theorem.jsx": {
+      "sha256": "c5fdfc87e2358f3b0e2d27b9aecbf72cb5a61c8e4116491fcae1603d045dc6c0",
+      "bytes": 58538,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "src/learn/data/topics/maximum-likelihood-map-estimation.jsx": {
+      "sha256": "56a319afc2e0c608b93caeb6516394ea503cbe18334b5282cd67d8ac20acb9a6",
+      "bytes": 59069,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "src/learn/data/topics/greedy-algorithms-exchange-arguments.jsx": {
+      "sha256": "93328fa447b42daad7ea6ecaf2b2f06ae8e327ebe5fc9d3030781225746aceb2",
+      "bytes": 42399,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "src/learn/data/greedy-exchange-examples.js": {
+      "sha256": "00b8d8bff22217512dc8ff24a12749669e23cf1b29135ad35a58798cde1615ce",
+      "bytes": 12264,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "src/learn/data/exponential-reading-flow-text.js": {
+      "sha256": "75c34d5428963d60566cf6563a299340a20f434a2542874ca8220c5b272b5cd2",
+      "bytes": 119061,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "src/learn/data/measure-reading-flow-text.js": {
+      "sha256": "c4104bc9f9d0d76f8acfb4f58e26a0dd24ef819983bfc9b20a671eaa98ba75a5",
+      "bytes": 96563,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "src/learn/data/variational-inference-reading-flow-text.js": {
+      "sha256": "f240909e76a2732e7ae937ca45e5a72f0fb03c8a89bef3da8f4046da1c0259fc",
+      "bytes": 157309,
+      "role": "Referenced source identity; existing source/evidence retained without duplicate whole-owner copies"
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-r1.md": {
+      "sha256": "45cf709c5b1984b382bf1b4e7d5431b069e10431fe1162bc6754a292f5b765a3",
+      "bytes": 40594
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r1.md": {
+      "sha256": "7911a8078d8a1771f35d2ef0f8644c9903f4e27652d0c96c630e809b0c815c84",
+      "bytes": 26656
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/selected-intake-r1.json": {
+      "sha256": "75d937e55ac9dd50dae8c04eef9c95f29db4c34acf0b1053d891eeb64a569f44",
+      "bytes": 8558
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/freeze-design-r1.mjs": {
+      "sha256": "368c3b39a8660044840f26bdd3f94f438e61c1ff0084fcd8221af2041c64fe56",
+      "bytes": 7121
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-figure2-1.png": {
+      "sha256": "26743e67dcb44abc2d96533891befc2c5e90bcc91be6471fa8c25a8d45b8771f",
+      "bytes": 122127
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-thomas-ch2.pdf": {
+      "sha256": "9e0a10cce4efdb8d12d917168bf2134138d11740ba20156f636c9c2da8b520b1",
+      "bytes": 2318370
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/penguins.csv": {
+      "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "bytes": 15241
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/shannon-1948.pdf": {
+      "sha256": "6e4e3411984f3edf99dbfe8b941cb5e8a321379ff0cae6ae5c1f592ad8882ca8",
+      "bytes": 366296
+    },
+    "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/shannon-figure6.png": {
+      "sha256": "fddea06bb6afc5029b9e79ebc62a9153148c40bcde3c7c5df7ede958c7e116bd",
+      "bytes": 250542
+    }
+  },
+  "historicalConservation": [
+    {
+      "path": "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+      "historicalSha256": "20dc4ed0f32a6cf0811af9809f68e48a63d28aa0eaff0eb7fb688f70d93d5a1b",
+      "currentSha256": "57e92aed15c98bac85b3eabd17e46de7385aa1d1d4a0a27e1e095f8d82834a9d",
+      "byteIdentical": false
+    },
+    {
+      "path": "src/learn/data/entropy-information-models.js",
+      "historicalSha256": "519d1fff3ae48c1cd36e11a3bce3a0e31880b8286ca8188faddfe958c0ccf49f",
+      "currentSha256": "36ba480e9f35052fba5cec68e77fa69d7da3177f283e5cc3028ce2f35f1c2496",
+      "byteIdentical": false
+    },
+    {
+      "path": "src/learn/data/entropy-information-examples.js",
+      "historicalSha256": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163",
+      "currentSha256": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163",
+      "byteIdentical": true
+    },
+    {
+      "path": "src/learn/components/lesson-labs/EntropyInformationLabs.jsx",
+      "historicalSha256": "8ec85643c632c838051cba9e8bf5299d5e2ccb6b74b7e90cd72e18f9c02358a3",
+      "currentSha256": "5f209536f7f36fdcc07909a4e66f21e9c5d2246d688dd87fb0750d678e4fa55e",
+      "byteIdentical": false
+    },
+    {
+      "path": "src/learn/components/lesson-labs/entropy-information-labs.css",
+      "historicalSha256": "2b370e2ac65d7db1a3175bad05e1067716dbb870c0d34b8e9fff73d8c3d59f4d",
+      "currentSha256": "c1fd027f4d85ab220c9596bf5378db7e8d954e1338140f96158ccc152acf5132",
+      "byteIdentical": false
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js",
+      "historicalSha256": "52644d709aa664c88f5760fa0d7095ea16b3a5b58605194fb48192c4aeb4cdee",
+      "currentSha256": "9fa911f147010545ae75a07015f83142ab85047e22c9e94be56a3170d94b2c7f",
+      "byteIdentical": false
+    }
+  ],
+  "authorChecks": {
+    "wholeExistingLessonRead": true,
+    "allExistingProgramsAndModelsRead": true,
+    "wholeExistingLabsRead": true,
+    "priorDesignAndVerificationRead": true,
+    "currentDesignAndResearchSelfRead": true,
+    "sourceOnlyIdentityChecks": true,
+    "scientificProgramRuns": 0,
+    "builds": 0,
+    "newRuntimeClaims": false
+  },
+  "limits": [
+    "Named original Kullback-Leibler full text blocked by publisher security; mathematics supported by two independent canonical treatments.",
+    "Original Huffman full later pages not newly inspected; actual efficient published prerequisite and MIT coding theorem inspected.",
+    "Inventory retry interrupted during global scan; selected catalogue/notes/row read directly.",
+    "No new code outputs, browser accessibility, visual-fit or content completion is claimed."
+  ],
+  "next": "DIFFERENT reviewer reads entire design/research/selected old source and consolidates findings; author corrections then SAME closure; Root release required before substantive manuscript implementation."
+}

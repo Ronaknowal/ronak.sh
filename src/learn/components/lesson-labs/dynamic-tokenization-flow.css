@@ -1,0 +1,114 @@
+.dynamic-tokenization-flow .dt-anchor{display:block;height:0;margin:0;padding:0}
+.dynamic-tokenization-flow :is(p,li){overflow-wrap:anywhere}
+.dynamic-tokenization-flow :is(p,li) code{white-space:normal;overflow-wrap:anywhere}
+.dynamic-tokenization-flow .dt-drawing{min-width:0;color:#ddd;overflow-wrap:anywhere}
+.dynamic-tokenization-flow .dt-label{margin:0 0 .65rem;font-size:1rem;line-height:1.55;color:#ddd}
+.dynamic-tokenization-flow :is(.dt-columns-2,.dt-columns-3){display:grid;gap:1.5rem;align-items:start}
+.dynamic-tokenization-flow .dt-columns-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dynamic-tokenization-flow .dt-columns-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dynamic-tokenization-flow :is(.dt-columns-2,.dt-columns-3)>*{min-width:0}
+.dynamic-tokenization-flow .dt-strip{display:flex;flex-wrap:wrap;align-items:start;gap:.35rem;min-width:0}
+.dynamic-tokenization-flow .dt-strip-object{min-width:0}
+.dynamic-tokenization-flow .dt-piece{display:inline-flex;flex-direction:column;gap:.15rem;align-items:center;justify-content:center;min-width:1.65rem;max-width:100%;padding:.3rem .5rem;border:1px solid var(--dt-piece,#bbb);border-radius:2px;background:color-mix(in srgb,var(--dt-piece,#aaa) 13%,transparent);color:var(--dt-piece,#ddd);font:inherit;font-size:1rem;line-height:1.5;overflow-wrap:anywhere;text-align:center}
+.dynamic-tokenization-flow button.dt-piece{cursor:pointer}
+.dynamic-tokenization-flow .dt-piece small{font-size:.8rem;color:#ccc;line-height:1.45}
+.dynamic-tokenization-flow .is-selected{outline:2px solid #eee;outline-offset:2px}
+.dynamic-tokenization-flow .is-excluded{border-style:dashed;opacity:.7}
+.dynamic-tokenization-flow button:focus-visible{outline:2px solid #eee;outline-offset:3px}
+.dynamic-tokenization-flow .dt-arrow{display:flex;flex-direction:column;align-items:center;gap:.25rem;color:#bbb;font-size:.9rem;line-height:1.5;text-align:center;margin-block:.65rem}
+.dynamic-tokenization-flow .dt-matrix{display:flex;flex-direction:column;gap:.3rem;width:max-content;max-width:100%}
+.dynamic-tokenization-flow .dt-matrix-row{display:grid;grid-template-columns:1.3rem repeat(3,minmax(1.6rem,1fr));gap:.2rem;color:var(--dt-piece);border:1px solid transparent;align-items:center}
+.dynamic-tokenization-flow .dt-cell{border:1px solid var(--dt-piece);padding:.35rem .4rem;text-align:center;background:color-mix(in srgb,var(--dt-piece) 13%,transparent);font-variant-numeric:tabular-nums}
+.dynamic-tokenization-flow .dt-row-address{text-align:center;color:#ccc;font-size:.85rem}
+.dynamic-tokenization-flow :is(.dt-contract-path,.dt-decision-row,.dt-map-line,.dt-bias-line,.dt-surviving-rules){display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;line-height:1.6;min-width:0;margin-block:.75rem}
+.dynamic-tokenization-flow .dt-contract-path{justify-content:center}
+.dynamic-tokenization-flow .dt-mismatch{border-bottom:2px dashed #fff}
+.dynamic-tokenization-flow .dt-untrained{border:1px dashed #aaa;padding:.4rem}
+.dynamic-tokenization-flow .dt-dictionary-list{display:flex;flex-wrap:wrap;gap:.4rem}
+.dynamic-tokenization-flow .dt-timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+.dynamic-tokenization-flow .dt-timeline-lane{border-left:1px solid #777;padding-left:1rem;min-width:0}
+.dynamic-tokenization-flow .dt-timeline-lane>p{margin-top:0;font-size:1rem}
+.dynamic-tokenization-flow .dt-stage-dot{display:block;line-height:1.7;margin-top:.9rem;color:#ccc}
+.dynamic-tokenization-flow .dt-stage-dot:before{content:'●';margin-right:.4rem;color:#ccc}
+.dynamic-tokenization-flow .dt-probe-skeleton{display:grid;gap:.3rem;line-height:1.6;margin-block:1rem}
+.dynamic-tokenization-flow .dt-probe-skeleton svg{width:100%;max-width:12rem;height:4rem}
+.dynamic-tokenization-flow .dt-groups{display:flex;flex-wrap:wrap;gap:1rem;align-items:start}
+.dynamic-tokenization-flow .dt-group{padding:.3rem .25rem .45rem;border:1px solid #777;border-top:0;position:relative;min-width:0;max-width:100%}
+.dynamic-tokenization-flow .dt-group-label{display:block;font-size:.8rem;color:#bbb;margin-bottom:.4rem}
+.dynamic-tokenization-flow .dt-bars{min-width:0;margin-block:.75rem}
+.dynamic-tokenization-flow .dt-bar-row{display:grid;grid-template-columns:minmax(5rem,.9fr) minmax(3rem,1fr) minmax(5rem,.8fr);gap:.65rem;align-items:center;margin-block:.5rem;line-height:1.5;font-size:.9rem;min-width:0}
+.dynamic-tokenization-flow .dt-bar-row>*{min-width:0}
+.dynamic-tokenization-flow .dt-bar-track{height:.8rem;background:#272727;position:relative}
+.dynamic-tokenization-flow .dt-bar-track>span{display:block;height:100%;background:var(--dt-piece,#c084fc);min-width:0;max-width:100%}
+.dynamic-tokenization-flow .dt-winner{margin-block:.8rem;font-size:1rem;line-height:1.6}
+.dynamic-tokenization-flow .dt-text-input{display:grid;gap:.35rem;flex:1 1 18rem;min-width:0;font-size:.9rem;color:#bbb}
+.dynamic-tokenization-flow .dt-text-input input{width:100%;min-width:0;box-sizing:border-box}
+.dynamic-tokenization-flow .dt-rank-rail{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;padding:0;margin:.5rem 0}
+.dynamic-tokenization-flow .dt-rank-rail button{display:flex;flex-direction:column;padding:.4rem .6rem;background:transparent;border:1px solid #777;color:#ddd;min-height:2.75rem;font:inherit;font-size:.85rem;cursor:pointer}
+.dynamic-tokenization-flow .dt-rank-rail button[aria-pressed=true]{outline:2px solid #eee;outline-offset:1px}
+.dynamic-tokenization-flow .dt-floor{line-height:1.65;font-size:.95rem;color:#ccc}
+.dynamic-tokenization-flow :is(.dt-svg-scroll,.dt-tree-scroll){overflow-x:auto;max-width:100%;outline-offset:3px;scrollbar-color:#777 transparent;padding-block:.75rem}
+.dynamic-tokenization-flow :is(.dt-svg-scroll,.dt-tree-scroll):focus-visible{outline:2px solid #e2b55a}
+.dynamic-tokenization-flow .dt-svg-scroll svg{display:block;max-width:none}
+.dynamic-tokenization-flow .dt-svg-scroll text{font-family:inherit;font-size:14px}
+.dynamic-tokenization-flow .dt-svg-scroll .dt-edge-label{paint-order:stroke;stroke:#080808;stroke-width:5px;stroke-linejoin:round}
+.dynamic-tokenization-flow .dt-path-list{display:grid;gap:.45rem;margin-top:1rem}
+.dynamic-tokenization-flow .dt-path-list>div{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.7rem;border-bottom:1px solid #333;padding-block:.45rem;font-size:.9rem}
+.dynamic-tokenization-flow :is(.dt-exact,.dt-equation){font-variant-numeric:tabular-nums;line-height:1.7;overflow-wrap:anywhere}
+.dynamic-tokenization-flow .dt-shift-grid{display:grid;grid-template-columns:5rem repeat(3,minmax(0,1fr));gap:.65rem;align-items:center}
+.dynamic-tokenization-flow .dt-shift-grid>span:not(.dt-piece){font-size:.9rem;line-height:1.5}
+.dynamic-tokenization-flow .dt-loss-occurrences{display:flex;flex-wrap:wrap;gap:.75rem;margin-block:1rem}
+.dynamic-tokenization-flow .dt-loss-occurrences>div{display:flex;flex-direction:column;gap:.45rem;max-width:100%;font-size:.9rem;line-height:1.5}
+.dynamic-tokenization-flow .dt-priority-rows{display:grid;gap:.8rem}
+.dynamic-tokenization-flow .dt-priority-rows>div{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem;border-bottom:1px solid #444;padding:.5rem 0;font-size:.95rem;line-height:1.6}
+.dynamic-tokenization-flow .dt-measured-rounds{display:grid;gap:.8rem;margin-block:1rem}
+.dynamic-tokenization-flow .dt-measured-rounds>div{display:grid;gap:.4rem;font-size:.9rem;line-height:1.6}
+.dynamic-tokenization-flow .dt-row-count{height:.8rem;background:#272727}
+.dynamic-tokenization-flow .dt-row-count span{display:block;height:100%;background:#c084fc}
+.dynamic-tokenization-flow .dt-tree-node{display:flex;flex-direction:column;align-items:center;min-width:2.5rem;gap:.1rem}
+.dynamic-tokenization-flow .dt-tree-children{display:flex;align-items:start;justify-content:center;gap:.65rem;width:max-content;position:relative;padding-top:1.5rem}
+.dynamic-tokenization-flow .dt-tree-children:before{content:'';position:absolute;left:50%;top:0;height:.75rem;border-left:1px solid #aaa}
+.dynamic-tokenization-flow .dt-tree-children>.dt-tree-node{position:relative;flex:none}
+.dynamic-tokenization-flow .dt-tree-children>.dt-tree-node:before{content:'';position:absolute;left:50%;top:-.75rem;height:.75rem;border-left:1px solid #aaa}
+.dynamic-tokenization-flow .dt-tree-children>.dt-tree-node:after{content:'';position:absolute;top:-.75rem;border-top:1px solid #aaa}
+.dynamic-tokenization-flow .dt-tree-children>.dt-tree-node:first-child:after{left:50%;width:calc(50% + .65rem)}
+.dynamic-tokenization-flow .dt-tree-children>.dt-tree-node:last-child:after{left:0;width:50%}
+.dynamic-tokenization-flow .dt-tree-scroll>.dt-tree-node{width:max-content;min-width:100%;padding:.3rem;box-sizing:border-box}
+.dynamic-tokenization-flow .dt-byte-ruler{display:flex;flex-wrap:wrap;gap:.25rem;margin-bottom:1rem}
+.dynamic-tokenization-flow .dt-byte-ruler>span{display:flex;flex-direction:column;align-items:center;min-width:1.5rem;font-size:1rem;color:#ddd}
+.dynamic-tokenization-flow .dt-byte-ruler small{font-size:.75rem;color:#bbb}
+.dynamic-tokenization-flow .dt-aligned-scroll{overflow-x:auto;max-width:100%;padding:.5rem 0;scrollbar-color:#777 transparent}
+.dynamic-tokenization-flow .dt-aligned-scroll:focus-visible{outline:2px solid #e2b55a;outline-offset:2px}
+.dynamic-tokenization-flow .dt-aligned-scroll .dt-byte-ruler{flex-wrap:nowrap;gap:0}
+.dynamic-tokenization-flow .dt-aligned-scroll .dt-byte-ruler>span{width:2.3rem;min-width:2.3rem}
+.dynamic-tokenization-flow .dt-byte-lane{display:flex;min-width:0}
+.dynamic-tokenization-flow .dt-byte-lane>div{flex:none;box-sizing:border-box;padding:.15rem}
+.dynamic-tokenization-flow .dt-byte-lane .dt-piece{box-sizing:border-box;width:100%;min-width:0;padding:.25rem .1rem}
+.dynamic-tokenization-flow .dt-byte-lane .dt-piece small{font-size:.7rem}
+.dynamic-tokenization-flow .dt-surviving-rules{gap:.5rem;margin-block:1rem;font-size:.9rem}
+.dynamic-tokenization-flow .dt-map-line>span{color:var(--dt-piece);border-bottom:1px solid var(--dt-piece);padding:.3rem}
+.dynamic-tokenization-flow .dt-bias-line>span{color:var(--dt-piece,#ccc)}
+.dynamic-tokenization-flow .dt-retained-controls{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;width:100%;font-size:.9rem;line-height:1.5}
+.dynamic-tokenization-flow .dt-prefix-cells{display:flex;flex-direction:column;gap:.5rem}
+.dynamic-tokenization-flow .dt-prefix-cells>div{display:grid;gap:.35rem;border-left:2px dashed #777;padding-left:.75rem;line-height:1.55;font-size:.95rem}
+.dynamic-tokenization-flow .dt-prefix-cells .is-reusable{border-left:2px solid #eee}
+.dynamic-tokenization-flow .dt-prefix-cells small{font-size:.85rem;color:#ccc}
+.dynamic-tokenization-flow .dt-prefix-dependency{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-block:1rem;line-height:1.5;font-size:.9rem}
+.dynamic-tokenization-flow .dt-prefix-dependency svg{width:3rem;height:1.2rem;color:#aaa}
+.dynamic-tokenization-flow .dt-position-count{display:flex;flex-wrap:wrap;gap:.3rem}
+.dynamic-tokenization-flow .dt-position-count span{display:grid;place-items:center;border:1px solid #c084fc;color:#c084fc;min-width:2rem;min-height:2rem}
+.dynamic-tokenization-flow .dt-budget-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}
+.dynamic-tokenization-flow .dt-budget-grid>div{display:grid;gap:.4rem;min-width:0;font-size:.9rem;line-height:1.5;color:var(--dt-piece);padding-bottom:.65rem}
+.dynamic-tokenization-flow .dt-budget-grid>div>div{display:flex;flex-wrap:wrap;gap:.15rem}
+.dynamic-tokenization-flow .dt-budget-grid>div>div>span{border:1px solid var(--dt-piece);padding:.25rem;min-width:1.1rem;text-align:center}
+.dynamic-tokenization-flow .dt-budget-grid .is-untrained>div>span{border-style:dashed;color:#ddd}
+.dynamic-tokenization-flow .dt-budget-grid .is-free{color:#aaa;--dt-piece:#777!important}
+.dynamic-tokenization-flow .dt-budget-grid small{font-size:.8rem;color:#bbb}
+.dynamic-tokenization-flow .dt-math{min-width:0;max-width:100%;overflow-x:auto;padding-block:.4rem;scrollbar-color:#777 transparent}
+.dynamic-tokenization-flow .dt-math:focus-visible{outline:2px solid #e2b55a;outline-offset:2px}
+.dynamic-tokenization-flow .dt-math>div{width:max-content;min-width:100%;max-width:none;overflow:visible!important;box-sizing:border-box}
+.dynamic-tokenization-flow .dt-math .katex-display{overflow:visible!important;margin-block:.75rem}
+@container (max-width:43rem){.dynamic-tokenization-flow :is(.dt-columns-3,.dt-timeline){grid-template-columns:minmax(0,1fr)}}
+@container (max-width:34rem){.dynamic-tokenization-flow .dt-columns-2{grid-template-columns:minmax(0,1fr)}.dynamic-tokenization-flow .dt-budget-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dynamic-tokenization-flow .dt-shift-grid{grid-template-columns:3.5rem repeat(3,minmax(0,1fr));gap:.4rem}.dynamic-tokenization-flow .dt-shift-grid .dt-piece{padding:.3rem .2rem;font-size:.9rem}.dynamic-tokenization-flow .dt-bar-row{grid-template-columns:minmax(4rem,.8fr) minmax(3rem,1fr) minmax(4.5rem,.8fr);gap:.35rem}}
+@container (max-width:19rem){.dynamic-tokenization-flow .dt-shift-grid{grid-template-columns:1fr}.dynamic-tokenization-flow .dt-shift-grid>span{width:max-content;max-width:100%}.dynamic-tokenization-flow .dt-bar-row{grid-template-columns:1fr 1fr}.dynamic-tokenization-flow .dt-bar-row>span:last-child{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){.dynamic-tokenization-flow *{animation:none!important;transition:none!important}}

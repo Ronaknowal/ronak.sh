@@ -1,0 +1,50 @@
+{
+  "scope": "R1 current MDS design contract only",
+  "deltas": [
+    {
+      "beforeFile": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/programs-and-practice.md",
+        "bytes": 20864,
+        "sha256": "bb2ded0770f39d0c940f645c36c779670c8878090460c85c66fff8f6b5fce7f1"
+      },
+      "afterFile": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-programs-and-practice.md",
+        "bytes": 21435,
+        "sha256": "f8a5b6c6709814122e6bba449e211625bf141f0a0efd48798f24a108cef3770c"
+      },
+      "before": "`ClassicalMDS(metric='precomputed')`; ordinary `MDS(metric=True/False, dissimilarity='precomputed', normalized_stress=...)` after inspecting the exact1.9.1 constructor. No raw-coordinate equality across rotations/signs; compare distances, centered Gram, stress/strain definitions and subspaces. Negative eigenvalues are reported, not silently certified as Euclidean. Dense teaching O(n\u00b2) storage/O(n\u00b3) eigenwork is bounded to tiny fixtures. Full new nonmetric scratch optimizer is not promised; ordinary route and disparity operation are taught.",
+      "after": "`ClassicalMDS(n_components=1, metric='precomputed')` is the eigendecomposition route. Current iterative route uses `MDS(n_components=1, metric_mds=True, metric='precomputed', init='random', n_init=1, random_state=7, max_iter=300, eps=1e-6, normalized_stress=False, n_jobs=1)`; the metric comparison passes the same explicit initial coordinate array to scratch and `fit_transform(D, init=initial_coordinates)`. Separate nonmetric call changes `metric_mds=False, normalized_stress=True`; zero input dissimilarities mean missing there, not observed zero-distance duplicates. The [complete R1 contract](design-api-correction/mds-contract-amendment.md) specifies starts, raw/normalized stress, the duplicate example, optional classical initialization and compatibility. Old aliases remain supported with deprecation in1.9; no historical failure is claimed. Compare distances/Gram/stress/subspaces, not signed raw coordinates; preserve negative eigenvalue status. Dense O(n\u00b2) storage/O(n\u00b3) eigenwork remains tiny-fixture scope. Full nonmetric scratch optimizer is not promised; disparity and ordinary routes are explained.",
+      "inverseExact": true
+    },
+    {
+      "beforeFile": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/research.md",
+        "bytes": 14148,
+        "sha256": "b00251330e50b9955fac48d60072e03f5fd3072ac6fc8ef68bd648633dce5e71"
+      },
+      "afterFile": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-research.md",
+        "bytes": 14732,
+        "sha256": "cab6c0afc486ba938add9faa3760050d8fcca94190afb1f80d776c50ab4c59a6"
+      },
+      "before": "* [ClassicalMDS API](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.ClassicalMDS.html), accessed 1.9.1, constructor/metric description. Teach its eigendecomposition route separately from iterative `MDS`. Its availability was inspected; no unsupported \u201cintroduced in version X\u201d claim or numerical match has been executed here.",
+      "after": "* [ClassicalMDS API](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.ClassicalMDS.html) and [MDS API](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.MDS.html), accessed 1.9.1: actual constructor, stress/initialization parameters and input/fit sections read. `ClassicalMDS(metric='precomputed')` is the separate eigendecomposition route. Iterative `metric_mds` chooses metric/nonmetric stress; `metric='precomputed'` supplies a square dissimilarity matrix. Explicit starts/restart count/seed/stress avoid changing defaults. Nonmetric zero input dissimilarities mean missing, unlike classical known duplicate distances. Current installed constructor/array-start/stress source was inspected without execution; [R1 amendment](design-api-correction/mds-contract-amendment.md) binds exact decisions and limits. Deprecated aliases still work in1.9; no old failure, fit or numerical parity is inferred.",
+      "inverseExact": true
+    },
+    {
+      "beforeFile": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/proposed-design.md",
+        "bytes": 33262,
+        "sha256": "2320331840e4dbf62589c2b8bdeffce46925fed5b23f9a485e681e5e7814ddc1"
+      },
+      "afterFile": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-proposed-design.md",
+        "bytes": 33791,
+        "sha256": "6fc084e24333b60434bb95e5c7a79df805add6da80d7c233a3011bd46c7e7435"
+      },
+      "before": "Metric MDS matches numeric distances by stress; nonmetric uses ordered disparities; classical minimizes strain. One changed numeric dissimilarity and one monotone rank change make the distinction concrete. New scratch/library source follows these objects.",
+      "after": "Metric MDS matches numeric distances by stress; nonmetric uses ordered disparities; classical minimizes strain. One changed numeric dissimilarity and one monotone rank change make the distinction concrete. Then draw A=0,B=0,C=2 with distinct A/B IDs: known A\u2013B distance zero enters classical/metric routes, while the ordinary nonmetric API treats zero dissimilarities as missing. Different line treatments label those meanings, without a fitted coordinate claim. A shared explicit initial coordinate configuration precedes the metric scratch/library comparison; raw squared-distance stress and normalized Stress-1 have distinct labelled operands. The [complete current MDS contract](design-api-correction/mds-contract-amendment.md) fixes names, starts and reporting before new code.",
+      "inverseExact": true
+    }
+  ]
+}

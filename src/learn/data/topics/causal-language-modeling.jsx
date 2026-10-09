@@ -1,805 +1,165 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+import { Prose, H2, H3, Code, CodeBlock } from '../../components/content';
+import { MathBlock as SharedMathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { LessonIntro, LessonTable, Sources } from '../../components/lesson-labs/LessonElements.jsx';
+import { DistributionFigure, ShiftFigure, CausalMaskLab, LossLab, LossMaskLab, PackingLab, DecoderFigure, StudyFigure, GenerationLab, TrainingGenerationFigure, WindowLab, ObjectiveFigure } from '../../components/lesson-labs/CausalLanguageModelingFlow.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+
+const MathBlock = ({ children }) => <div className="clm-math" tabIndex={0} role="region" aria-label="Mathematical relationship"><SharedMathBlock>{children}</SharedMathBlock></div>;
+const Program = ({ file }) => <RemoteCodeBlock source={`/learn-code/causal-language-modeling/${file}`} filename={file} />;
+const Exercise = ({ title, children, hint, solution }) => <div className="lesson-exercise flow-check" data-lesson-exercise=""><p><strong>{title}</strong> {children}</p><details><summary>Hint</summary><div>{hint}</div></details><details><summary>Worked solution</summary><div>{solution}</div></details></div>;
+const Old = ({ id }) => <span className="clm-anchor" id={id} aria-hidden="true" />;
 
 const causalLanguageModeling = {
-  slug: "causal-language-modeling-next-token-prediction",
-  title: "Causal Language Modeling (Next-Token Prediction)",
-  readTime: "38 min",
-  content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        In the late 1990s, statistical language modeling was dominated by n-gram counts smoothed with techniques like Kneser-Ney. The approach was principled and fast, but it shattered against the curse of dimensionality: natural language sequences live in a space far too large for any count table to cover. To assign probability to the phrase "the cat sat on the mat," an n-gram model needed to have seen exactly that 5-gram before, or it would back off to shorter contexts and lose almost all the long-range information that makes language comprehensible.
-      </Prose>
-
-      <Prose>
-        Yoshua Bengio, Réjean Ducharme, Pascal Vincent, and Christian Jauvin published the solution in 2003 in the <em>Journal of Machine Learning Research</em>: "A Neural Probabilistic Language Model." Their proposal was deceptively simple. Instead of counting discrete n-grams, train a neural network that maps a fixed-length word context to a probability distribution over the next word. Words are represented as learned continuous vectors — what we now call embeddings — so words that appear in similar contexts push their vectors toward one another during gradient descent, and the model generalizes automatically to combinations it has never seen verbatim. A network that learned the sentence "the dog sat on the mat" had also, implicitly, learned something about "the cat sat on the mat," because "dog" and "cat" occupy similar positions in the embedding space after training. The joint probability of a sequence factored exactly as the chain rule demanded: multiply together the conditional probabilities of each token given all the ones before it.
-      </Prose>
-
-      <Prose>
-        The objective that fell out of this framing was next-token prediction: maximize the probability the model assigns to each successive token in the training corpus, given the prefix. Equivalently, minimize the cross-entropy between the model's distribution and the observed token at every position. Bengio et al. used a feedforward network with a fixed context window (typically five to ten tokens). It was slow to train by modern standards and the context window was tiny, but the fundamental objective — predict the next token, measure cross-entropy, take a gradient step — has not changed in twenty-three years.
-      </Prose>
-
-      <Prose>
-        In 2010, Tomáš Mikolov and colleagues at Brno University of Technology published "Recurrent Neural Network Based Language Model" at INTERSPEECH, replacing the feedforward window with an RNN that propagated a hidden state across the entire sequence. Perplexity on the Penn Treebank dropped roughly 50% compared to the best smoothed n-gram models. The objective was still next-token cross-entropy; the architecture had changed to allow unbounded context in principle. In practice, vanilla RNNs forgot context after twenty to fifty tokens due to gradient vanishing, but the gap over n-grams was large enough to ignite the field.
-      </Prose>
-
-      <Prose>
-        For the next eight years, the field added depth, gating (LSTM, GRU), and tricks for handling long sequences, but the core objective remained. Matthew Peters and colleagues introduced ELMo in 2018 (arXiv:1802.05365), training a deep bidirectional LSTM as a language model and using its internal representations as features for downstream tasks. ELMo was notable not for what it trained but for what it found: that representations from a language model objective transferred to tasks the model had never seen, a harbinger of the pretraining paradigm that was about to dominate everything.
-      </Prose>
-
-      <Prose>
-        The architecture shift came in 2017 when Vaswani et al. published "Attention Is All You Need" (arXiv:1706.03762), proposing the transformer: a sequence-to-sequence architecture built entirely from attention and feedforward layers, with no recurrence. Transformers parallelized over the sequence dimension in a way RNNs could not, and their memory of distant context was not degraded by path length. OpenAI combined the transformer with causal language modeling in 2018: Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever released "Improving Language Understanding by Generative Pre-Training" — GPT-1, an OpenAI technical report — a 117M-parameter transformer pretrained with next-token prediction on BooksCorpus, then fine-tuned on downstream tasks. It beat discriminatively trained baselines on 9 of 12 benchmarks. The same objective, on the same kind of data, but at ten times the scale of what had been tried before.
-      </Prose>
-
-      <Prose>
-        In 2019, Radford et al. published GPT-2 (OpenAI tech report: "Language Models Are Unsupervised Multitask Learners"), scaling to 1.5B parameters and training on WebText — 40GB of web text filtered for quality by Reddit upvote count. GPT-2 demonstrated zero-shot task performance: the model solved reading comprehension, translation, and summarization problems it had never been explicitly trained on. No fine-tuning. The pretraining objective was still next-token cross-entropy. The downstream tasks emerged from scale.
-      </Prose>
-
-      <Prose>
-        In May 2020, Brown et al. published "Language Models Are Few-Shot Learners" (arXiv:2005.14165), the GPT-3 paper. A 175-billion-parameter model, trained on a filtered crawl of the internet plus books and Wikipedia, using the same cross-entropy objective first written down by Bengio in 2003. The conclusion of the paper made the case explicitly: causal language modeling at sufficient scale is sufficient for few-shot generalization across essentially the entire space of natural language tasks. The simplest training objective turned out to be the only one the field needed.
-      </Prose>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        There are three ways to think about what next-token prediction is actually doing, and each illuminates a different aspect of why the objective works so well.
-      </Prose>
-
-      <H3>A distribution over vocabulary at each position</H3>
-
-      <Prose>
-        At each position <Code>t</Code> in a sequence, the model outputs a probability distribution over the entire vocabulary: a vector of non-negative numbers summing to 1, one entry per token. The distribution at position <Code>t</Code> is conditioned on the prefix <Code>x&#8321;, …, x&#8348;&#8315;&#8321;</Code>. Training says: the observed token <Code>x&#8348;</Code> should have high probability under that distribution. Inference says: draw a token from that distribution, append it, and repeat.
-      </Prose>
-
-      <Prose>
-        This framing makes the objective concrete. The model does not produce a single prediction. It produces a full distribution at every step, and the quality of that distribution is measured by the cross-entropy between it and the one-hot distribution that places all mass on the observed token. A distribution that spreads mass evenly over 50,000 tokens has cross-entropy log(50,000) ≈ 10.8 bits. A distribution that places probability 0.9 on the correct token has cross-entropy ≈ 0.15 bits. The model is being asked to compress the training corpus: assign high probability to what actually comes next, and the training loss measures how well it succeeds.
-      </Prose>
-
-      <H3>Dense per-token supervision</H3>
-
-      <Prose>
-        In a labeled classification task, each example yields one gradient signal. A 512-token sequence with a single label contributes one update per forward pass. Causal language modeling yields 512 gradient signals from that same sequence — one per position. The model receives a loss gradient for every token it processes. This density is not cosmetic. At the pretraining scales where modern LLMs are trained — tens of trillions of tokens — it is the difference between feasibility and impossibility.
-      </Prose>
-
-      <Prose>
-        The density also means the objective is self-supervised in the strictest sense. The supervision signal is the corpus itself: every document ever written contains its own labels, derived for free by shifting the input one position to the right. There is no annotation bottleneck. The entire internet is a labeled dataset under this objective.
-      </Prose>
-
-      <Prose>
-        To predict the next token well, the model must internalize grammar (grammatical continuations outscore ungrammatical ones), semantics (coherent continuations outscore incoherent ones), world knowledge (factually accurate continuations are more likely in real text), long-range dependencies (pronoun resolution, topic tracking, narrative structure), style, and register. None of these are labeled separately. They are all implicit in the single objective of cross-entropy minimization over the training corpus.
-      </Prose>
-
-      <H3>Autoregressive sampling as a learned Markov chain</H3>
-
-      <Prose>
-        At inference time, generation is autoregressive: sample a token from <Code>p(x&#8348; | x&#8321;,…,x&#8348;&#8315;&#8321;)</Code>, append it, then sample from <Code>p(x&#8348;&#8330;&#8321; | x&#8321;,…,x&#8348;)</Code>, and so on. This is a Markov chain with a variable-order dependency: the transition distribution at each step depends on the entire history, not just the last state. The chain is "learned" in the sense that the transition probabilities are the model's own conditional distributions, which were fitted to the training corpus.
-      </Prose>
-
-      <Prose>
-        This framing explains why temperature matters. The transition probabilities are computed by applying softmax to the model's logit vector. Dividing logits by a temperature <Code>T &lt; 1</Code> before softmax sharpens the distribution — the chain tends to follow high-probability paths, producing repetitive but fluent text. Dividing by <Code>T &gt; 1</Code> flattens the distribution — the chain takes more surprising steps, producing more varied text that is also more likely to be incoherent. Temperature 1.0 samples from the model's actual learned distribution without modification. The model has no internal concept of temperature; it is an external parameter applied at each step of the Markov chain.
-      </Prose>
-
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>The chain rule factorization</H3>
-
-      <Prose>
-        The joint probability of any sequence of tokens <Code>x&#8321;, x&#8322;, …, x&#8345;</Code> factors exactly via the chain rule of probability:
-      </Prose>
-
-      <MathBlock>{"p(x_1, x_2, \\dots, x_n) = \\prod_{t=1}^{n} p(x_t \\mid x_1, \\dots, x_{t-1})"}</MathBlock>
-
-      <Prose>
-        This factorization is exact and model-free — it follows from the definition of conditional probability and holds for any distribution. What causal language modeling does is parameterize each factor <Code>p(x&#8348; | x&#8321;,…,x&#8348;&#8315;&#8321;)</Code> with a neural network <Code>p&#952;</Code>, and optimize the parameters <Code>&#952;</Code> to maximize the likelihood of the training corpus under this factorization. Maximizing likelihood is equivalent to minimizing the average negative log-likelihood, which is the cross-entropy loss.
-      </Prose>
-
-      <H3>Cross-entropy loss</H3>
-
-      <MathBlock>{"\\mathcal{L}(\\theta) = -\\sum_{t=1}^{N} \\log p_\\theta(x_t \\mid x_{<t})"}</MathBlock>
-
-      <Prose>
-        The subscript <Code>x&#8344;&#8348;</Code> denotes the prefix <Code>x&#8321;, …, x&#8348;&#8315;&#8321;</Code>. The loss is a sum over all positions in the sequence (or over all sequences in the corpus). Each term is the negative log probability the model assigns to the observed token at that position. A model that always assigns probability 1 to the correct token achieves loss 0. A model that assigns probability <Code>1/V</Code> uniformly across a vocabulary of size <Code>V</Code> achieves loss <Code>N · log(V)</Code>.
-      </Prose>
-
-      <Prose>
-        In practice the loss is averaged over positions (divided by <Code>N</Code>) to produce a per-token mean cross-entropy that is comparable across sequences of different lengths. This per-token CE is the number reported as "training loss" in most papers and codebases.
-      </Prose>
-
-      <H3>Perplexity</H3>
-
-      <Prose>
-        Perplexity is the standard evaluation metric for language models. It is derived directly from the per-token cross-entropy:
-      </Prose>
-
-      <MathBlock>{"\\text{PPL} = \\exp\\!\\left(\\frac{\\mathcal{L}}{N}\\right) = \\exp\\!\\left(-\\frac{1}{N}\\sum_{t=1}^{N} \\log p_\\theta(x_t \\mid x_{<t})\\right)"}</MathBlock>
-
-      <Prose>
-        The geometric interpretation: perplexity is the effective number of equally likely choices the model faces at each step. A model with perplexity 50 is, on average, as uncertain as if it were choosing uniformly among 50 tokens. A model with perplexity 1 always predicts the correct token with certainty. A uniform distribution over a vocabulary of 50,000 tokens has perplexity 50,000.
-      </Prose>
-
-      <Prose>
-        The relationship to cross-entropy is clean: if per-token CE is <Code>H</Code> nats, then perplexity is <Code>e^H</Code>. If CE is measured in bits, perplexity is <Code>2^H</Code>. Most deep learning frameworks report nats because natural log is the default. The GPT-3 paper reports perplexity on Penn Treebank as 20.50, which corresponds to a per-token CE of roughly 3.02 nats. The best n-gram baseline was 35.76 perplexity (CE ≈ 3.58 nats). A gap of 0.56 nats per token sounds small; exponentiated, it translates to a 42% reduction in perplexity.
-      </Prose>
-
-      <H3>Causal mask</H3>
-
-      <Prose>
-        The causal constraint — that position <Code>t</Code> may only attend to positions 1 through <Code>t-1</Code> — is enforced in transformer models via an attention mask applied before the softmax in each attention head. The mask is an <Code>N × N</Code> matrix where the entry at row <Code>i</Code>, column <Code>j</Code> is 0 if <Code>j ≤ i</Code> (attending to past or present is allowed) and <Code>-∞</Code> if <Code>j &gt; i</Code> (attending to the future is forbidden). After adding this mask to the attention logits, the softmax maps all <Code>-∞</Code> entries to exactly 0, and the remaining weights are renormalized over the allowed positions.
-      </Prose>
-
-      <Prose>
-        The lower-triangular structure means position 1 attends only to itself, position 2 attends to positions 1–2, position 3 attends to 1–3, and so on. The full matrix is computed in one batched operation — every position is processed in parallel — but the mask isolates each position's computation so that it cannot access information from positions later in the sequence. Without the mask, the model could attend to the token it is trying to predict, the loss would be trivially minimized by copying, and the weights would learn nothing useful about language.
-      </Prose>
-
-      <Callout type="warn">
-        A missing or incorrect causal mask is one of the most dangerous silent bugs in causal LM implementations. The training loss will drop to near zero in a few steps — not because the model learned anything, but because it has direct access to the target. The model will produce garbage at inference time because the cheating path is no longer available. Always verify your mask with a small sanity check before training.
-      </Callout>
-
-      <H3>Teacher forcing and exposure bias</H3>
-
-      <Prose>
-        During training, each position <Code>t</Code> receives the ground-truth prefix as input, regardless of what the model would have predicted. This is teacher forcing. Its practical consequence is that a single forward pass through a transformer computes all <Code>N</Code> next-token predictions simultaneously: the causal mask ensures each position only sees its ground-truth prefix, and the parallelism of attention means all <Code>N</Code> predictions are computed in one matrix multiply. Without teacher forcing, training would require an autoregressive loop — generate token 1, feed it back, generate token 2, feed it back — which is sequential and roughly <Code>N</Code> times slower.
-      </Prose>
-
-      <Prose>
-        The tradeoff is exposure bias. At inference, the model consumes its own outputs. A mistake at position <Code>t</Code> becomes part of the input for position <Code>t+1</Code>, and the model was never trained on prefixes that contained its own errors. The distribution it encounters at inference — imperfect model outputs — differs from the distribution it trained on — perfect ground truth. This gap grows with sequence length and is one motivation behind scheduled sampling (gradually replacing ground-truth tokens with model predictions during training), minimum Bayes risk decoding (selecting outputs by expected loss rather than likelihood), and reinforcement learning from human feedback (using a reward model to train on generations rather than teacher-forced tokens). None of these have fully solved the problem; exposure bias remains an active area of research.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        The following is a minimal character-level causal language model built in PyTorch from scratch. Every component is spelled out explicitly — no <Code>nn.Transformer</Code> shortcut, no HuggingFace abstraction. The goal is to make the relationship between the math in the previous section and the running code as direct as possible. The model was trained on a tiny rhyming corpus and the outputs at the bottom are the actual outputs from that run, verbatim.
-      </Prose>
-
-      <H3>4a. CausalSelfAttention</H3>
-
-      <Prose>
-        The self-attention module projects the input into queries, keys, and values, applies the causal mask, computes scaled dot-product attention, and projects back to the model dimension. Multi-head attention splits the model dimension into <Code>n_heads</Code> parallel subspaces.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import math
-
-class CausalSelfAttention(nn.Module):
-    def __init__(self, d_model, n_heads):
-        super().__init__()
-        assert d_model % n_heads == 0
-        self.n_heads = n_heads
-        self.head_dim = d_model // n_heads
-        # single fused projection for Q, K, V
-        self.qkv = nn.Linear(d_model, 3 * d_model, bias=False)
-        self.proj = nn.Linear(d_model, d_model, bias=False)
-
-    def forward(self, x):
-        B, T, C = x.shape
-        # project and split into Q, K, V — each (B, T, C)
-        q, k, v = self.qkv(x).split(C, dim=-1)
-
-        # reshape to (B, n_heads, T, head_dim)
-        def reshape(t):
-            return t.view(B, T, self.n_heads, self.head_dim).transpose(1, 2)
-        q, k, v = reshape(q), reshape(k), reshape(v)
-
-        # scaled dot-product attention
-        scale = math.sqrt(self.head_dim)
-        att = (q @ k.transpose(-2, -1)) / scale   # (B, n_heads, T, T)
-
-        # causal mask: upper triangle (future positions) -> -inf
-        mask = torch.triu(torch.ones(T, T, device=x.device), diagonal=1).bool()
-        att = att.masked_fill(mask, float('-inf'))
-        att = F.softmax(att, dim=-1)               # future weights -> 0
-
-        # weighted sum of values
-        out = att @ v                              # (B, n_heads, T, head_dim)
-        out = out.transpose(1, 2).contiguous().view(B, T, C)
-        return self.proj(out)`}
-      </CodeBlock>
-
-      <H3>4b. TransformerBlock</H3>
-
-      <Prose>
-        Each transformer block wraps the attention module and a two-layer MLP with GELU activation, adding residual connections and applying layer normalization before each sub-layer (pre-norm, as used by GPT-2 and most modern models).
-      </Prose>
-
-      <CodeBlock language="python">
-{`class TransformerBlock(nn.Module):
-    def __init__(self, d_model, n_heads):
-        super().__init__()
-        self.ln1 = nn.LayerNorm(d_model)
-        self.attn = CausalSelfAttention(d_model, n_heads)
-        self.ln2 = nn.LayerNorm(d_model)
-        self.mlp = nn.Sequential(
-            nn.Linear(d_model, 4 * d_model),
-            nn.GELU(),
-            nn.Linear(4 * d_model, d_model),
-        )
-
-    def forward(self, x):
-        x = x + self.attn(self.ln1(x))   # residual + attention
-        x = x + self.mlp(self.ln2(x))    # residual + MLP
-        return x`}
-      </CodeBlock>
-
-      <H3>4c. MiniGPT</H3>
-
-      <Prose>
-        The full model stacks token embeddings (learned), position embeddings (learned), <Code>N</Code> transformer blocks, a final layer norm, and a linear head that projects back to vocabulary size. The LM head is intentionally kept separate from the token embedding matrix — weight tying (sharing the embedding and LM head weights) is a common optimization but unnecessary for understanding.
-      </Prose>
-
-      <CodeBlock language="python">
-{`class MiniGPT(nn.Module):
-    def __init__(self, vocab_size, d_model=64, n_heads=4,
-                 n_layers=3, block_size=64):
-        super().__init__()
-        self.block_size = block_size
-        self.tok_emb  = nn.Embedding(vocab_size, d_model)
-        self.pos_emb  = nn.Embedding(block_size, d_model)
-        self.blocks   = nn.Sequential(
-            *[TransformerBlock(d_model, n_heads) for _ in range(n_layers)]
-        )
-        self.ln_f     = nn.LayerNorm(d_model)
-        self.lm_head  = nn.Linear(d_model, vocab_size, bias=False)
-
-    def forward(self, idx):
-        B, T = idx.shape
-        pos = torch.arange(T, device=idx.device)
-        x = self.tok_emb(idx) + self.pos_emb(pos)   # (B, T, d_model)
-        x = self.blocks(x)
-        x = self.ln_f(x)
-        return self.lm_head(x)                        # (B, T, vocab_size)
-
-    @torch.no_grad()
-    def generate(self, idx, max_new=60, temperature=0.8, top_k=5):
-        for _ in range(max_new):
-            idx_cond = idx[:, -self.block_size:]
-            logits = self(idx_cond)[:, -1, :] / temperature
-            if top_k > 0:
-                topk_vals = torch.topk(logits, top_k).values
-                logits[logits < topk_vals[:, -1:]] = float('-inf')
-            probs = F.softmax(logits, dim=-1)
-            next_tok = torch.multinomial(probs, num_samples=1)
-            idx = torch.cat([idx, next_tok], dim=1)
-        return idx`}
-      </CodeBlock>
-
-      <H3>4d. Training loop</H3>
-
-      <Prose>
-        The training loop draws random context windows from the corpus, shifts the targets by one position (position <Code>t</Code> predicts position <Code>t+1</Code>), computes cross-entropy, and updates with AdamW. Gradient clipping prevents the norm explosion that can occur early in training when the attention weights are near-uniform.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Corpus and character vocabulary
-corpus = (
-    "the cat sat on the mat the cat ate the rat "
-    "the rat ran from the cat the mat is flat\n"
-    "the dog bit the log the log fell on the frog "
-    "the frog sat on a bog and sang all day long\n"
-)
-chars = sorted(set(corpus))
-stoi = {c: i for i, c in enumerate(chars)}
-itos = {i: c for c, i in stoi.items()}
-V = len(chars)                  # vocab size: 22 characters
-
-data = torch.tensor([stoi[c] for c in corpus], dtype=torch.long)
-
-torch.manual_seed(42)
-model = MiniGPT(V)
-opt = torch.optim.AdamW(model.parameters(), lr=3e-3, weight_decay=1e-2)
-
-block_size, batch_size = 64, 8
-loss_curve = []
-
-for step in range(500):
-    ix = torch.randint(len(data) - block_size, (batch_size,))
-    x = torch.stack([data[i:i+block_size]   for i in ix])
-    y = torch.stack([data[i+1:i+block_size+1] for i in ix])   # shifted target
-
-    logits = model(x)
-    loss = F.cross_entropy(logits.view(-1, V), y.view(-1))
-
-    opt.zero_grad()
-    loss.backward()
-    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-    opt.step()
-
-    if step % 50 == 0:
-        loss_curve.append((step, round(loss.item(), 4)))
-
-# Actual training losses (step, loss):
-# (0, 3.3702)  (50, 1.2752)  (100, 0.7683)  (150, 0.5900)
-# (200, 0.4211)  (250, 0.2579)  (300, 0.1521)  (350, 0.1136)
-# (400, 0.1034)  (450, 0.0745)`}
-      </CodeBlock>
-
-      <Plot
-        label="MiniGPT training loss — char-level, 500 steps, AdamW lr=3e-3"
-        xLabel="step"
-        yLabel="CE loss"
-        series={[{
-          name: "train loss",
-          color: colors.gold,
-          points: [[0,3.3702],[50,1.2752],[100,0.7683],[150,0.59],[200,0.4211],[250,0.2579],[300,0.1521],[350,0.1136],[400,0.1034],[450,0.0745]],
-        }]}
-      />
-
-      <H3>4e. Sampling loop</H3>
-
-      <Prose>
-        The sampling function is already embedded in <Code>MiniGPT.generate</Code> above. At each step: (1) take the last <Code>block_size</Code> tokens as context, (2) run a forward pass to get logits at the final position, (3) divide by temperature, (4) zero out all logits outside the top-k, (5) softmax, (6) sample. Below are actual outputs from the trained model:
-      </Prose>
-
-      <CodeBlock language="python">
-{`prompt = [stoi[c] for c in "the cat"]
-idx = torch.tensor([prompt], dtype=torch.long)
-
-# temperature=0.8, top_k=5 (actual output):
-out = model.generate(idx, max_new=80, temperature=0.8, top_k=5)
-# 'the cat the rat the rat ran from the cat the mat is flat
-#  the dog bit the log the log fe'
-
-# greedy (temperature=0.01, top_k=1) (actual output):
-out_greedy = model.generate(idx, max_new=80, temperature=0.01, top_k=1)
-# 'the cat the rat the rat rat ran from the cat the mat is flat
-#  the dog bit the log the lo'`}
-      </CodeBlock>
-
-      <Prose>
-        The model has memorized the training corpus — it reproduces it almost verbatim, with slight variations under temperature. This is expected: 22 characters, 500 steps, on 200 tokens of text. The purpose of the exercise is not generalization; it is to verify that the cross-entropy loss falls, that the causal mask is correctly implemented (if it were absent, the loss would collapse to near-zero in a handful of steps as the model simply copies the target), and that sampling produces coherent output from the learned conditional distributions.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        In production, you use HuggingFace <Code>transformers</Code>. GPT-2 ships as <Code>GPT2LMHeadModel</Code> and <Code>GPT2Tokenizer</Code>. The following examples show how to compute cross-entropy on an arbitrary string and how the <Code>.generate()</Code> method exposes the same temperature, top-k, and top-p controls we implemented from scratch.
-      </Prose>
-
-      <H3>5a. Computing cross-entropy and perplexity</H3>
-
-      <CodeBlock language="python">
-{`import torch, math
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
-
-tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-model     = GPT2LMHeadModel.from_pretrained("gpt2")
-model.eval()
-
-text = ("The quick brown fox jumps over the lazy dog "
-        "near the river bank in the morning light.")
-enc = tokenizer(text, return_tensors="pt")
-input_ids = enc.input_ids          # shape: (1, 18)
-
-with torch.no_grad():
-    out = model(input_ids, labels=input_ids)
-    ce  = out.loss.item()          # mean per-token cross-entropy (nats)
-    ppl = math.exp(ce)
-
-print(f"tokens : {tokenizer.convert_ids_to_tokens(input_ids[0].tolist())}")
-print(f"CE loss: {ce:.4f} nats")
-print(f"PPL    : {ppl:.2f}")
-
-# Actual output:
-# tokens : ['The', 'Ġquick', 'Ġbrown', 'Ġfox', 'Ġjumps', 'Ġover',
-#            'Ġthe', 'Ġlazy', 'Ġdog', 'Ġnear', 'Ġthe', 'Ġriver',
-#            'Ġbank', 'Ġin', 'Ġthe', 'Ġmorning', 'Ġlight', '.']
-# CE loss: 4.5195 nats
-# PPL    : 91.79`}
-      </CodeBlock>
-
-      <Prose>
-        A perplexity of 91.79 on this sentence means GPT-2 base is, on average, as uncertain as if it were choosing uniformly among about 92 tokens at each step. This is typical for GPT-2 base on general text that wasn't in its training set. GPT-2 large achieves roughly 35 PPL on the WebText test set; GPT-3 gets 20.50 on Penn Treebank.
-      </Prose>
-
-      <H3>5b. Generation with sampling strategies</H3>
-
-      <CodeBlock language="python">
-{`prompt = "Language models predict the next"
-enc2   = tokenizer(prompt, return_tensors="pt")
-
-# greedy decoding — deterministic, argmax at each step
-with torch.no_grad():
-    g = model.generate(enc2.input_ids, max_new_tokens=20, do_sample=False)
-print("greedy   :", tokenizer.decode(g[0]))
-# greedy   : Language models predict the next generation of human beings.
-#             The first step in the process is to understand how the human brain
-
-# temperature=0.9, top_k=50
-with torch.no_grad():
-    torch.manual_seed(42)
-    g2 = model.generate(
-        enc2.input_ids, max_new_tokens=20,
-        do_sample=True, temperature=0.9, top_k=50
-    )
-print("temp+topk:", tokenizer.decode(g2[0]))
-# temp+topk: Language models predict the next generation of human-machine
-#             relations will be different—and in a way that is fundamentally
-
-# nucleus sampling top_p=0.9
-with torch.no_grad():
-    torch.manual_seed(42)
-    g3 = model.generate(
-        enc2.input_ids, max_new_tokens=20,
-        do_sample=True, temperature=1.0, top_p=0.9
-    )
-print("nucleus  :", tokenizer.decode(g3[0]))
-# nucleus  : Language models predict the next generation of car-focused
-#             transportation will be safer, faster, cleaner, more convenient`}
-      </CodeBlock>
-
-      <Prose>
-        The greedy output is deterministic and reads fluently but converges on a generic continuation. The temperature+top-k sample is more varied and arguably more interesting. The nucleus sample is the most diverse — and in this case diverges the furthest from the obvious continuation. All three are valid outputs from the same model under the same next-token cross-entropy objective; the difference is entirely in how the distribution is sampled at each step.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>Causal attention mask</H3>
-
-      <Prose>
-        For a 6-token sequence, the causal mask is a 6×6 matrix where entry (i, j) is 1 (allowed) if j ≤ i and 0 (masked, i.e. set to −∞ before softmax) if j &gt; i. Row <Code>i</Code> is the attention pattern for position <Code>i</Code>: it can see all positions up to and including itself.
-      </Prose>
-
-      <Heatmap
-        label="causal mask — 6×6 (1=attend, 0=blocked)"
-        matrix={[
-          [1,0,0,0,0,0],
-          [1,1,0,0,0,0],
-          [1,1,1,0,0,0],
-          [1,1,1,1,0,0],
-          [1,1,1,1,1,0],
-          [1,1,1,1,1,1],
-        ]}
-        rowLabels={["pos 0","pos 1","pos 2","pos 3","pos 4","pos 5"]}
-        colLabels={["pos 0","pos 1","pos 2","pos 3","pos 4","pos 5"]}
-        cellSize={44}
-        colorScale="gold"
-      />
-
-      <H3>Token-by-token generation (StepTrace)</H3>
-
-      <Prose>
-        Each step of autoregressive generation extends the context by one token. The model runs a full forward pass at each step; only the prediction at the final position matters.
-      </Prose>
-
-      <StepTrace
-        label="autoregressive generation — one forward pass per step"
-        steps={[
-          {
-            label: "prompt only",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "the", color: "#888" },
-                { label: " cat", color: "#888" },
-              ]} />
-            ),
-          },
-          {
-            label: "step 1 — sample ' sat'",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "the", color: "#888" },
-                { label: " cat", color: "#888" },
-                { label: " sat", color: colors.gold },
-              ]} />
-            ),
-          },
-          {
-            label: "step 2 — sample ' on'",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "the", color: "#888" },
-                { label: " cat", color: "#888" },
-                { label: " sat", color: "#888" },
-                { label: " on", color: colors.gold },
-              ]} />
-            ),
-          },
-          {
-            label: "step 3 — sample ' the'",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "the", color: "#888" },
-                { label: " cat", color: "#888" },
-                { label: " sat", color: "#888" },
-                { label: " on", color: "#888" },
-                { label: " the", color: colors.gold },
-              ]} />
-            ),
-          },
-          {
-            label: "step 4 — sample ' mat'",
-            render: () => (
-              <TokenStream tokens={[
-                { label: "the", color: "#888" },
-                { label: " cat", color: "#888" },
-                { label: " sat", color: "#888" },
-                { label: " on", color: "#888" },
-                { label: " the", color: "#888" },
-                { label: " mat", color: colors.gold },
-              ]} />
-            ),
-          },
-        ]}
-      />
-
-      <H3>Greedy vs temperature sampling</H3>
-
-      <Prose>
-        Given the prompt "Language models predict the next", greedy decoding and temperature sampling produce different continuations from the same model.
-      </Prose>
-
-      <TokenStream
-        label="greedy — deterministic, argmax at every step"
-        tokens={[
-          { label: "Language", color: "#888" },
-          { label: " models", color: "#888" },
-          { label: " predict", color: "#888" },
-          { label: " the", color: "#888" },
-          { label: " next", color: "#888" },
-          { label: " generation", color: colors.gold },
-          { label: " of", color: colors.gold },
-          { label: " human", color: colors.gold },
-          { label: " beings", color: colors.gold },
-          { label: ".", color: colors.gold },
-        ]}
-      />
-
-      <TokenStream
-        label="temperature=0.9, top_k=50 — diverse, stochastic"
-        tokens={[
-          { label: "Language", color: "#888" },
-          { label: " models", color: "#888" },
-          { label: " predict", color: "#888" },
-          { label: " the", color: "#888" },
-          { label: " next", color: "#888" },
-          { label: " generation", color: "#4ade80" },
-          { label: " of", color: "#4ade80" },
-          { label: " human", color: "#4ade80" },
-          { label: "-machine", color: "#4ade80" },
-          { label: " relations", color: "#4ade80" },
-        ]}
-      />
-
-      <H3>Training loss curve</H3>
-
-      <Plot
-        label="MiniGPT char-level — CE loss vs training step (actual run)"
-        xLabel="step"
-        yLabel="CE loss (nats)"
-        series={[{
-          name: "cross-entropy",
-          color: colors.gold,
-          points: [[0,3.3702],[50,1.2752],[100,0.7683],[150,0.59],[200,0.4211],[250,0.2579],[300,0.1521],[350,0.1136],[400,0.1034],[450,0.0745]],
-        }]}
-      />
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <H3>Causal LM vs masked LM vs prefix LM</H3>
-
-      <Prose>
-        Three training objectives dominate the landscape. Causal LM (GPT-style) predicts each token from its left context only. Masked LM (BERT-style) masks 15% of tokens at random and predicts them from bidirectional context. Prefix LM (T5, UL2-style) uses bidirectional attention on a prefix and causal attention on the continuation.
-      </Prose>
-
-      <Prose>
-        Causal LM is the default for generation tasks. The model is trained in exactly the mode it is used at inference — autoregressive, left-to-right — so there is no train/inference mismatch in the attention pattern. Every token in the training set produces a useful gradient signal. The model can be used for classification and generation without any architectural modification; the only difference is whether you sample from the output distribution or read a representation from it.
-      </Prose>
-
-      <Prose>
-        Masked LM produces better bidirectional representations for tasks like sentence classification and named entity recognition, because every position has access to both left and right context. The tradeoff is that masked LM cannot generate text autoregressively without substantial architectural surgery — the attention pattern that makes it good at understanding is wrong for generation. BERT and its descendants are strong discriminators; they are weak generators by design.
-      </Prose>
-
-      <Prose>
-        Prefix LM is a compromise. The encoder portion of the input (the prompt or source document) uses full bidirectional attention, and the decoder portion uses causal attention. This gives the model strong encoding of the input while preserving the causal structure needed for generation. T5 uses this pattern for sequence-to-sequence tasks; UL2 from Google trains with a mixture of all three objectives to maximize transfer across tasks. The main cost is architectural complexity and the need to explicitly mark the prefix/suffix boundary.
-      </Prose>
-
-      <H3>Teacher forcing vs scheduled sampling vs RL fine-tuning</H3>
-
-      <Prose>
-        Teacher forcing is the default for pretraining and fine-tuning. It is fast — one forward pass per sequence, full parallelism over positions — and it works well when the model is large enough that exposure bias at the temperatures used in inference is a minor perturbation. In practice, most production LLMs are pretrained with teacher forcing throughout and the exposure bias gap is addressed post-hoc via RLHF rather than during pretraining.
-      </Prose>
-
-      <Prose>
-        Scheduled sampling replaces ground-truth tokens with model predictions with some probability that increases over training, gradually bridging the gap between teacher-forced training and autoregressive inference. It is slower (requires sequential sampling to generate the replacement tokens) and in practice produces modest improvements that do not justify the compute overhead for large models.
-      </Prose>
-
-      <Prose>
-        RL fine-tuning (PPO, GRPO, DPO) treats the language model as a policy and optimizes it against a reward signal — typically a human preference model or a verifiable outcome (code compilation, math correctness). This directly addresses exposure bias because the model is now trained on its own rollouts. The cost is training instability (policy collapse, reward hacking, high variance gradients) and significant engineering complexity. It is the dominant approach for aligning large pretrained models but is never used for pretraining from scratch.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>What scales</H3>
-
-      <Prose>
-        The dense per-token supervision signal makes causal LM exceptionally compute-efficient. Every token in the training corpus contributes a gradient; there is no waste. This scales with data volume in a way that annotated datasets cannot: the internet provides effectively unlimited unlabeled text, and every token of it is a training example.
-      </Prose>
-
-      <Prose>
-        Kaplan et al. (arXiv:2001.08361) established empirically that cross-entropy loss scales as a power law with model parameters, dataset size, and compute, across seven orders of magnitude. The key finding: <Code>L ∝ N^{-0.076}</Code> (parameters), <Code>L ∝ D^{-0.095}</Code> (tokens), <Code>L ∝ C^{-0.050}</Code> (compute). These exponents are small in the sense that you need roughly a 10x increase in any resource to achieve a 26–45% reduction in loss. But they are remarkably stable — the power law holds from 10M to 100B parameters with no sign of saturation as of the GPT-3 era. The predictability of these laws is what makes large training runs tractable to plan: given a compute budget, you can calculate the optimal model size and dataset size (the Chinchilla recipe).
-      </Prose>
-
-      <Prose>
-        Emergent capabilities scale non-smoothly. Many behaviors — multi-step arithmetic, chain-of-thought reasoning, in-context learning — appear sharply at some scale threshold rather than gradually as loss descends. The loss curve does not predict these transitions; they are not visible in the aggregate number. This means that loss-based scaling laws are necessary but not sufficient for predicting capability.
-      </Prose>
-
-      <H3>What doesn't scale</H3>
-
-      <Prose>
-        Data quality hits a wall before data quantity does. Kaplan et al. showed that the optimal training set size for a given compute budget grows roughly as the square root of compute. Current frontier models are data-limited — there is not enough high-quality text on the internet to train a model that is otherwise compute-optimal. Techniques like data filtering, deduplication, and synthetic data generation are not alternatives to scale; they are attempts to keep the data supply from becoming the binding constraint.
-      </Prose>
-
-      <Prose>
-        Cross-entropy does not directly measure downstream task performance. A 2.0-CE model is not uniformly better than a 2.1-CE model across all tasks. The aggregate loss averages over common words, rare words, easy and hard positions — and improvements on the high-signal positions that determine task performance can be invisible in the aggregate. This is why MMLU, HumanEval, and GSM8K exist alongside perplexity as evaluation metrics.
-      </Prose>
-
-      <Prose>
-        Exposure bias does not improve with scale. Larger models are better language models, but they are still trained with teacher forcing and still encounter their own error distributions at inference. RLHF, which does address this, requires a separate and more expensive training regime that does not scale as cleanly as pretraining.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES AND GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>1. Off-by-one shift error</H3>
-      <Prose>
-        The target sequence is the input shifted by one token: inputs are <Code>x[:-1]</Code>, targets are <Code>x[1:]</Code>. Getting this wrong — using unshifted targets, or shifting in the wrong direction — produces a model that either predicts the current token from itself (trivially solved by copying, loss collapses to near-zero immediately) or predicts two steps ahead (loss stays high and never converges). Symptom: training loss drops to near-zero in the first 10–50 steps with no real learning, or fails to converge at all.
-      </Prose>
-
-      <H3>2. Missing causal mask</H3>
-      <Prose>
-        Without the causal mask, each position attends to all positions including future ones. The model can trivially predict position <Code>t</Code> by looking at position <Code>t</Code> (or <Code>t+1</Code>) directly. The loss collapses to near-zero in a few steps. The trained model produces garbage at inference because the attending-forward path is unavailable. Symptom: suspiciously fast loss collapse, incoherent generation.
-      </Prose>
-
-      <H3>3. Position embedding overflow</H3>
-      <Prose>
-        Learned position embeddings have a maximum sequence length defined at training time (e.g., 1024 for GPT-2, 2048 for GPT-2-XL). Feeding a sequence longer than this requires either truncation or extrapolation. Extrapolation with learned embeddings is undefined behavior — the embedding table has no entry for position 1025. RoPE and ALiBi were developed specifically to address this; they encode positional information functionally rather than via lookup tables, enabling length generalization.
-      </Prose>
-
-      <H3>4. Exposure bias at long horizon</H3>
-      <Prose>
-        A model trained with teacher forcing degrades on long generations because errors compound. Each mistake shifts the distribution for the next token, and the model was never trained to recover from such shifts. The degradation is roughly proportional to the generation length times the per-step error rate. This is most visible in tasks requiring long coherent chains: multi-paragraph stories, long mathematical derivations, code with many interdependent functions.
-      </Prose>
-
-      <H3>5. Beam search length bias</H3>
-      <Prose>
-        Beam search scores sequences by total log-probability, which is a sum over token log-probabilities. Longer sequences accumulate more terms and thus lower total log-probability, even if each individual token is well-predicted. This biases beam search toward shorter outputs unless length normalization is applied (divide total log-prob by sequence length or a power thereof). Greedy and sampling-based methods are not affected by this bias.
-      </Prose>
-
-      <H3>6. Temperature extremes</H3>
-      <Prose>
-        Temperature near 0 (greedy limit) produces degenerate repetition — the model locks onto a high-probability loop and repeats it indefinitely. Temperature above 1.5 often produces incoherent text because the distribution is so flat that low-quality tokens are sampled with significant probability. The empirically useful range for most tasks is 0.6–1.2, with 0.7–0.9 covering the majority of production use cases.
-      </Prose>
-
-      <H3>7. Tokenization mismatch</H3>
-      <Prose>
-        A model trained with GPT-2's tokenizer and then evaluated or fine-tuned with a different tokenizer will produce nonsense, because the token ID 1234 means different things under different vocabularies. The tokenizer is fused into the model weights via the embedding table; they cannot be swapped. Always verify that the tokenizer used for evaluation and fine-tuning is byte-for-byte identical to the one used for pretraining.
-      </Prose>
-
-      <H3>8. Gradient explosion in early training</H3>
-      <Prose>
-        In the first few hundred steps, before the model has meaningful representations, attention weights can be near-uniform and residual streams are poorly conditioned. A single outlier gradient can overflow the weight update and cause NaN loss. Gradient clipping (norm clip to 1.0 is standard) prevents this. Post-normalization (layer norm after residual) is more susceptible to explosion than pre-normalization (layer norm before); GPT-2 switched to pre-norm in part for this reason.
-      </Prose>
-
-      <H3>9. Memory without activation checkpointing</H3>
-      <Prose>
-        A transformer's peak memory during the backward pass includes all activation tensors from the forward pass (needed for gradient computation). For a model with <Code>L</Code> layers and sequence length <Code>T</Code>, this is <Code>O(L · T · d_model)</Code>. For a 40-layer model with sequence length 2048 and d_model 4096, this is roughly 40 × 2048 × 4096 × 4 bytes ≈ 1.3 GB for the activations alone, on top of the model weights. Activation checkpointing recomputes activations during the backward pass instead of storing them, trading compute for memory at approximately 33% overhead. Without it, large models or long sequences run out of memory.
-      </Prose>
-
-      <H3>10. Softmax instability in attention</H3>
-      <Prose>
-        The attention scores are divided by <Code>sqrt(d_k)</Code> to prevent dot products from growing large and pushing softmax into saturation (where gradients vanish). Without this scaling, QK^T grows as O(d_k) in magnitude, the softmax produces near-one-hot distributions, and gradients through the attention weights approach zero. Flash Attention handles this numerically by using the log-sum-exp trick to compute the scaled softmax in a numerically stable way without materializing the full N×N attention matrix.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        All citations verified via web search against authoritative repositories (JMLR, ISCA Archive, OpenAI, arXiv, NeurIPS).
-      </Prose>
-
-      <H3>Foundational papers</H3>
-
-      <Prose>
-        <strong>Bengio et al. (2003).</strong> "A Neural Probabilistic Language Model." <em>Journal of Machine Learning Research</em>, 3, 1137–1155. <a href="https://www.jmlr.org/papers/v3/bengio03a.html" target="_blank" rel="noopener noreferrer">jmlr.org/papers/v3/bengio03a.html</a>. The paper that introduced learned word embeddings and neural next-token prediction. Established the chain-rule factorization as the training objective.
-      </Prose>
-
-      <Prose>
-        <strong>Mikolov et al. (2010).</strong> "Recurrent Neural Network Based Language Model." <em>INTERSPEECH 2010</em>, pp. 1045–1048. DOI: 10.21437/Interspeech.2010-343. <a href="https://www.isca-archive.org/interspeech_2010/mikolov10_interspeech.html" target="_blank" rel="noopener noreferrer">isca-archive.org</a>. First large-scale RNN language model; ~50% perplexity reduction over n-gram baselines on Wall Street Journal. Applied the same cross-entropy objective over unbounded recurrent context.
-      </Prose>
-
-      <Prose>
-        <strong>Peters et al. (2018).</strong> "Deep Contextualized Word Representations (ELMo)." <em>NAACL 2018</em>. arXiv:1802.05365. <a href="https://arxiv.org/abs/1802.05365" target="_blank" rel="noopener noreferrer">arxiv.org/abs/1802.05365</a>. Showed that language model representations transfer to downstream tasks without fine-tuning, establishing the pretraining paradigm.
-      </Prose>
-
-      <H3>GPT lineage</H3>
-
-      <Prose>
-        <strong>Radford et al. (2018).</strong> "Improving Language Understanding by Generative Pre-Training." OpenAI technical report. <a href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf" target="_blank" rel="noopener noreferrer">cdn.openai.com</a>. GPT-1: 117M decoder-only transformer, causal LM pretraining on BooksCorpus, fine-tuned on 12 downstream tasks. Beat discriminative baselines on 9/12 tasks.
-      </Prose>
-
-      <Prose>
-        <strong>Radford et al. (2019).</strong> "Language Models Are Unsupervised Multitask Learners." OpenAI technical report. <a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" target="_blank" rel="noopener noreferrer">cdn.openai.com</a>. GPT-2: 1.5B parameters, WebText, zero-shot task performance. Established that scale alone enables task transfer under causal LM pretraining.
-      </Prose>
-
-      <Prose>
-        <strong>Brown et al. (2020).</strong> "Language Models Are Few-Shot Learners." <em>NeurIPS 2020</em>. arXiv:2005.14165. <a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2005.14165</a>. GPT-3: 175B parameters. Demonstrated few-shot in-context learning as an emergent property of scale under causal LM. The definitive case that next-token prediction at scale is sufficient for general-purpose language understanding and generation.
-      </Prose>
-
-      <H3>Scaling and architecture</H3>
-
-      <Prose>
-        <strong>Vaswani et al. (2017).</strong> "Attention Is All You Need." <em>NeurIPS 2017</em>. arXiv:1706.03762. <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">arxiv.org/abs/1706.03762</a>. Introduced the transformer architecture. The causal mask described in Section 3 is from this paper (Section 3.2.3).
-      </Prose>
-
-      <Prose>
-        <strong>Kaplan et al. (2020).</strong> "Scaling Laws for Neural Language Models." arXiv:2001.08361. <a href="https://arxiv.org/abs/2001.08361" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2001.08361</a>. Power-law relationships between CE loss and model size, dataset size, and compute, stable across seven orders of magnitude. The empirical foundation for compute-optimal training (Chinchilla).
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — Derive perplexity from cross-entropy</H3>
-      <Prose>
-        Starting from the definition of per-token cross-entropy <Code>H = -(1/N) Σ log p(xₜ | x&#8344;ₜ)</Code>, derive the perplexity formula <Code>PPL = exp(H)</Code>. Then: if a model achieves 3.0 nats per token, what is its perplexity? If it achieves 3.0 bits per token (using log base 2), what is the perplexity? Are they the same number?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — Cross-entropy of a uniform distribution</H3>
-      <Prose>
-        GPT-2's vocabulary has 50,257 tokens. If a model assigned probability <Code>1/50,257</Code> uniformly to all tokens at every position, what would its cross-entropy be (in nats)? What would its perplexity be? GPT-2 base achieves perplexity ~35 on its own test set. How many times more uncertain is the uniform model than GPT-2 base?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — The -inf vs -1e9 question</H3>
-      <Prose>
-        In the causal mask, future positions are set to <Code>-inf</Code> before the softmax. Some implementations use <Code>-1e9</Code> instead. Under what conditions does <Code>-1e9</Code> fail to correctly implement the causal constraint? Write a 10-line test that demonstrates the failure. (Hint: consider what happens when the attention logits are themselves very large.)
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — 10-line greedy decoder</H3>
-      <Prose>
-        Using only <Code>torch</Code> and a pretrained <Code>MiniGPT</Code> (from Section 4), write a greedy decoding loop in 10 lines or fewer. It should take a prompt string, encode it to token IDs, loop until a stop token or max length, and return the decoded string. Then modify it to use top-k sampling with k=5.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — Diagnose off-by-one shift symptoms</H3>
-      <Prose>
-        Consider two bugs: (a) the targets are not shifted — <Code>y = x</Code> instead of <Code>y = x[1:]</Code> — and (b) the targets are shifted by two positions instead of one. For each bug, predict: (i) how the training loss will behave in the first 100 steps, (ii) what generation output will look like at inference, and (iii) what a sample attention pattern will look like on a short sequence. Verify your predictions by actually introducing each bug into the MiniGPT training loop from Section 4.
-      </Prose></div></section>
-    </div>
-  ),
+  slug: 'causal-language-modeling-next-token-prediction',
+  title: 'Causal Language Modeling (Next-Token Prediction)',
+  readTime: '~65 min read + experiments and practice',
+  content: () => <div className="lesson-flow causal-language-flow">
+    <LessonIntro prerequisites="Token IDs and embedding lookup from the tokenization lessons; probabilities and logarithms from Entropy, Cross-Entropy & KL Divergence. We refresh the particular loss and attention operations used here. The programs use Python, NumPy and PyTorch; the library comparison also uses Transformers." exampleKind="Python + probability, mask and sequence investigations">
+      <p>Turn a piece of text into training examples, follow one prediction through its loss, and build a small causal decoder. Read sections 1–9 first; sections 10–11 deepen evaluation and objective choices. Run each complete program where it appears, then try the changed cases in the practice.</p>
+    </LessonIntro>
+
+    <Old id="1-why-it-exists" /><Old id="1-start-with-the-problem" />
+    <H2>1. A continuation is a distribution</H2>
+    <Prose>You type <Code>the cat</Code>. A completion system could suggest <Code>sat</Code>, <Code>ran</Code> or <Code>slept</Code>. It needs a way to keep several continuations plausible while preferring some over others. A <strong>language model</strong> assigns a probability to each next token, given the tokens already available. Our small vocabulary also includes <Code>EOS</Code>, an end-of-sequence token.</Prose>
+    <Prose>The bars show one constructed prediction after this prefix; their lengths add to one.</Prose>
+    <DistributionFigure />
+    <Prose>The probability of <Code>sat</Code> is 0.5, so it is the most likely individual choice. The other choices together also have probability 0.5. If the observed continuation is <Code>sat</Code>, learning should increase its probability in similar contexts, while respecting the total probability budget. Colours identify the same labelled token across connected views; they do not measure similarity. A white outline or underline marks the occurrence being traced.</Prose>
+    <Prose>The earlier <a href="/learn/path/full-curriculum/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram?module=large-language-models">tokenization lesson</a> turns text into vocabulary IDs. Here we keep that mapping fixed and learn what tends to follow a prefix. A neural model shares learned parameters across prefixes instead of storing a separate count for every possible sentence. This is the useful idea behind neural probabilistic language modeling: combinations can receive predictions even when their complete prefix was never seen in training.</Prose>
+    <Prose>Prediction is about the data distribution. Frequent text can be false, and an unlikely continuation can be correct. The probability of a token is not a calibrated probability that a whole answer is true. We will judge this miniature system by the conditional probabilities it assigns to held-out text and by inspecting what it generates.</Prose>
+
+    <Old id="2-core-intuition" /><Old id="2-build-the-intuition" />
+    <H2>2. Let the text provide its targets</H2>
+    <Prose>We do not need someone to label every prefix. In <Code>the cat sat</Code>, the next piece is already present. Add a beginning marker <Code>BOS</Code> to supply context for the first word, and keep <Code>EOS</Code> as a target so the model can learn to stop. Align each input with the token immediately after it.</Prose>
+    <ShiftFigure />
+    <Prose>At array position 1, the input is <Code>the</Code>, the available prefix is <Code>BOS the</Code>, and the target is <Code>cat</Code>. Position 2 receives <Code>cat</Code> and predicts <Code>sat</Code>. The token at the current input position is allowed information; the target is one position later. This distinction resolves the apparent contradiction between “predict the next token” and “attention includes the current position.”</Prose>
+    <Prose>Let <Code>x₀=BOS</Code>, and let <Code>x₁,…,xₙ</Code> include the content and final EOS. The conditional probability of the whole continuation is a product of its successive conditional probabilities. This is the probability chain rule; the model's approximation lies in how it estimates each factor.</Prose>
+    <MathBlock>{String.raw`p_\theta(x_1,\ldots,x_n\mid x_0)=\prod_{i=0}^{n-1}p_\theta(x_{i+1}\mid x_0,\ldots,x_i).`}</MathBlock>
+    <Prose>A finite-context implementation may retain only the most recent L inputs rather than the entire prefix. State that limit when reporting a score. Beginning/end conventions also matter: many real pipelines concatenate documents with EOS, without inserting a separate BOS for every window. Our small hand examples include BOS to make the first prediction visible; the later character experiment uses the first real character as context and scores subsequent characters.</Prose>
+    <Prose>There are two correct places to perform the shift. A low-level loss receives <Code>inputs=ids[:-1]</Code> and <Code>targets=ids[1:]</Code>. A model API that shifts internally receives same-length inputs and labels, then compares <Code>logits[:, :-1]</Code> with <Code>labels[:, 1:]</Code>. Performing both shifts trains a different, two-step-ahead task. Always inspect the first few literal pairs, rather than diagnosing alignment from the shape alone.</Prose>
+
+    <Old id="3-mathematical-foundation" /><Old id="3-make-the-idea-precise" />
+    <H2>3. Predict every position without seeing tomorrow</H2>
+    <Prose>During training the entire observed sequence is available in memory. We would like to compute all its predictions together, but position 1 must not use the later <Code>sat</Code> to help predict <Code>cat</Code>. The matrix below says which input positions each row can read. A row is a query position; a column is a key position.</Prose>
+    <CausalMaskLab />
+    <Prose>The diagonal is allowed: input position i can read itself and positions before it. Cells above the diagonal are blocked. Select row 1 and change the last value. With the causal rule enabled its weighted result stays the same, because the last position contributes zero. With unrestricted attention the same change can affect the result. For the final row, enabling the causal rule changes nothing: all inputs are already in its past or present.</Prose>
+    <Prose>Attention first forms a query vector q for the row and key vectors k for candidate inputs. Their scaled dot products are scores. A softmax turns permitted scores into nonnegative weights summing to one. The row then takes a weighted sum of value vectors v. The lab uses equal permitted scores and scalar values to expose this operation; learned attention uses vectors and data-dependent scores.</Prose>
+    <MathBlock>{String.raw`\begin{aligned}a_{ij}&=\operatorname{softmax}_j(s_{ij}+M_{ij}),\quad s_{ij}=q_i^\top k_j/\sqrt{d_k},\\M_{ij}&=\begin{cases}0&j\le i,\\-\infty&j>i,\end{cases}\qquad o_i=\sum_j a_{ij}v_j.\end{aligned}`}</MathBlock>
+    <Prose>The mask is applied <em>before</em> normalization. Exponentiating negative infinity gives zero, and the remaining weights normalize over the allowed inputs. Merely setting some already-normalized weights to zero would leave a smaller sum unless you normalize again. In the scalar row with values 1 and 2, equal allowed scores produce weights 1/2 and 1/2 and output 1.5.</Prose>
+    <Prose>All rows can be evaluated in the same layer because their observed inputs already exist. Layers still depend on preceding layers; parallel training is not a claim of one matrix multiplication for an entire model. Each layer must preserve the information boundary. Token-local normalization and feed-forward operations do so, whereas a normalization that averages across future sequence positions would introduce another leakage path.</Prose>
+    <Prose>A useful implementation check changes only a future token and compares all earlier logits in evaluation mode. Earlier logits must agree within numerical tolerance. This directly tests the promised information boundary; an unusually low training loss alone cannot prove a mask bug. Every ordinary causal row has at least its diagonal. If an additional padding rule removes all keys from a row, handle that row deliberately rather than applying softmax to a vector of only negative infinities.</Prose>
+
+    <H2>4. Turn surprise into a learning signal</H2>
+    <Prose>We can now make a prediction without leakage. How should we change its parameters when the observed next token is <Code>sat</Code>? A model produces a real-valued score, or <strong>logit</strong>, for every vocabulary item. These scores need not be positive or sum to one. Softmax converts them into the probability distribution we first drew.</Prose>
+    <Prose>Change a logit or the observed target. The probability bars, target's surprise and signed logit gradients change together.</Prose>
+    <LossLab />
+    <Prose>Initially the logits are ln 4, ln 2, 0 and 0. Exponentiation gives weights 4,2,1,1; dividing by their sum 8 gives 0.5,0.25,0.125,0.125. For observed <Code>sat</Code>, the negative log probability is −ln 0.5=ln 2≈0.693147 <strong>nats</strong>. A less likely observed <Code>slept</Code> costs −ln 0.125≈2.079442 nats. This single observed-target loss is cross-entropy against a one-hot target distribution.</Prose>
+    <MathBlock>{String.raw`\begin{aligned}p_j&=\frac{e^{z_j}}{\sum_k e^{z_k}},\\\ell(z,y)&=-\ln p_y=\log\sum_k e^{z_k}-z_y,\\\log\sum_k e^{z_k}&=m+\log\sum_k e^{z_k-m},\quad m=\max_k z_k.\end{aligned}`}</MathBlock>
+    <Prose>The final line is the stable way to compute the logarithm of a sum of exponentials. Subtracting the largest logit prevents exponentials from overflowing, and adding it back preserves the value. Adding the same constant to every logit changes neither the probabilities nor the loss. The uniform button sets all four logits to zero, giving probability 1/4 and loss ln 4≈1.386294 for every target.</Prose>
+    <H3>Why the update moves probability in the right direction</H3>
+    <Prose>Differentiate the middle line with respect to logit zⱼ. The derivative of log-sum-exp is pⱼ. The derivative of −zᵧ is −1 when j is the observed target and zero otherwise. Therefore the gradient is <Code>pⱼ−1[j=y]</Code>. For target sat the four gradients are −0.5,0.25,0.125,0.125. Gradient descent subtracts a small multiple of each: it raises the target logit and lowers the others. Backpropagation passes these gradients through the output head and earlier layers to the shared parameters.</Prose>
+    <MathBlock>{String.raw`\frac{\partial\ell}{\partial z_j}=p_j-\mathbf1[j=y].`}</MathBlock>
+    <Prose>The gradient entries sum to zero, matching the fact that a common logit shift changes nothing. An average over several targets divides their contributions by the number of eligible targets. The complete program below computes that average and gradient directly, matches PyTorch cross-entropy, and checks the derivative by perturbing each logit.</Prose>
+    <Program file="causal_objective.py" />
+    <Prose>Run <Code>python causal_objective.py</Code>. Its two-row example has observed probabilities 1/2 and 1/4: total NLL ln 8≈2.079442, mean 1.039721 and perplexity 2.828427. The first row's mean-loss target gradient is −0.25 because the two-row denominator divides the earlier −0.5 by two. Change the second target and compare the selected probability before looking at the final loss.</Prose>
+    <H3>Deeper: likelihood, cross-entropy and perplexity</H3>
+    <Prose>Taking the logarithm of the chain-rule product makes its factors add. Maximizing sequence likelihood is therefore equivalent to minimizing the sum of observed negative log probabilities. Over the true conditional data distribution P, expected log loss is H(P)+KL(P∥pθ), so the unconstrained optimum is P. This follows from the <a href="/learn/path/full-curriculum/entropy-cross-entropy-kl-divergence#5-prove-the-bound-and-respect-the-direction">nonnegative-KL result</a>; a finite model fitted to finite data is an approximation to that population optimum.</Prose>
+    <Prose><strong>Perplexity</strong> converts mean log loss H back into an effective number of equally likely choices: PPL=exp(H) for nats, or 2ᴴ for bits. It is the reciprocal geometric mean of probabilities assigned to the observed targets. It need not equal the vocabulary size or the entropy of any one prediction. A uniform V-token predictor has PPL V. For V=50,000, its loss is ln 50,000≈10.819778 nats, or log₂50,000≈15.609640 bits. Keep the log base and the token unit attached to the number.</Prose>
+
+    <H2>5. Count the targets that actually belong</H2>
+    <Prose>Real batches contain sequences of different lengths. Padding makes their tensors rectangular; those added positions are not observations to learn. Meanwhile EOS is a real target: removing it would discard the signal for stopping. The drawing separates probability contributions from target eligibility.</Prose>
+    <LossMaskLab />
+    <Prose>The four eligible targets initially have probabilities 1/2,1/2,1/4,1/4. Their losses total 2 ln 2+2 ln 4=ln 64≈4.158883 nats. Divide by four to get 1.039721 nats per target and PPL≈2.828427. Excluding a target removes both its loss and its one unit of denominator. Excluding all targets leaves the mean undefined; a training loop should skip that batch's update.</Prose>
+    <MathBlock>{String.raw`\mathcal L=\frac{\sum_i w_i[-\ln p_\theta(y_i\mid x_{\le i})]}{\sum_i w_i},\qquad w_i\in\{0,1\},\quad\sum_iw_i>0.`}</MathBlock>
+    <Prose>The <strong>attention mask</strong> controls which inputs a representation can use. The <strong>loss mask</strong> controls which outputs are charged. These are different jobs. For example, a prompt may be visible to a model while only its response targets contribute loss. PyTorch's <Code>ignore_index=-100</Code> expresses the latter for integer target labels; the model still needs a separate attention mask for padded keys.</Prose>
+    <Prose>Some tokenizers reuse EOS's ID as the padding ID. Mask by the known padded <em>positions</em>, not by deleting every label equal to that ID. Otherwise genuine EOS targets disappear too. The Transformers program keeps both roles visible: two rows contain the same integer 7 as genuine EOS and as later padding.</Prose>
+    <Program file="causal_library.py" />
+    <Prose>Run <Code>python causal_library.py</Code>. It creates a small randomly initialized GPT-2 configuration locally, so no pretrained weights or text tokenizer are downloaded. Same-length labels enter the model. The explicit comparison uses returned logits except the final row and labels except the first row, preserving five valid targets including two EOS targets. The library and explicit loss must agree. A nonzero embedding gradient confirms the loss is connected to parameters; it does not establish useful language quality.</Prose>
+    <Prose>When accumulating metrics or gradients across unequal batches, accumulate their NLL sums and valid counts. A batch with one eligible target and mean 4 must not weigh the same as a batch with three targets and mean 1. The combined mean is (4+3)/4=1.75, not (4+1)/2=2.5. Distributed training likewise needs the intended global denominator; library defaults and gradient averaging deserve an explicit check.</Prose>
+
+    <H2>6. Keep document boundaries explicit</H2>
+    <Prose>Packing several documents into one tensor saves padding. It also asks a modeling question: should the start of document B be conditioned on document A? An EOS token marks a boundary in the data, but does not erase earlier attention by itself. Compare continuous-stream training with independent-document training.</Prose>
+    <PackingLab />
+    <Prose>In continuous mode, a later document may attend to all earlier stream positions, and the transition after EOS is a scored stream target. In independent mode, each document receives its own BOS, rows attend only within their document, and the cross-document transition from the previous EOS to the next BOS is not scored. Predicting B's first content token from B's BOS still contributes loss. Both the information boundary and the target boundary are required for this intended independent-document objective.</Prose>
+    <Prose>Document identity supplies a second condition: an allowed cell has j≤i <em>and</em> the same document ID in row i and column j. The result is a block-diagonal collection of causal triangles. If position indices restart at each document, provide those local indices deliberately; changing the attention mask alone does not reset learned positions. This choice should match the intended training and evaluation protocol.</Prose>
+    <Prose>The <Code>allowed_attention</Code> function in <Code>causal_objective.py</Code> constructs these cells. A fast production pipeline may express the same boundaries through sequence-length metadata and specialized attention kernels. Its tensor format can differ, but the questions remain: what can this prediction see, what is its target, and does it count?</Prose>
+
+    <Old id="4-from-scratch-implementation" />
+    <H2>7. Build the complete causal decoder</H2>
+    <Prose>We have described the objective independently of a particular neural architecture. Now connect it to a small transformer. Each input ID looks up a learned vector; a position vector distinguishes otherwise identical tokens at different places. A block mixes information only through its causal attention path, then transforms each position independently through a feed-forward network.</Prose>
+    <DecoderFigure />
+    <Prose>The drawing follows T input positions with d features each. Layer normalization operates on the feature dimension of each position. Query, key and value projections produce attention inputs; heads perform their separate weighted sums before concatenation and an output projection. The residual path adds the result to the block's incoming representation. A second pre-normalization and token-local network expands width d to 4d, applies GELU, and returns to d before another residual addition. Finally a linear head maps each d-vector to V vocabulary logits.</Prose>
+    <Prose>These residual connections preserve a direct path for representations and gradients while learned branches add transformations. This example keeps input embeddings and output-head weights separate to make their roles explicit; tying them is a common alternative. It uses learned absolute positions and a fixed context length. It does not implement a KV cache or optimized long-context attention.</Prose>
+    <Program file="tiny_causal_lm.py" />
+    <Prose>Save the program with <a href="/learn-code/causal-language-modeling/alice-train.txt" download>alice-train.txt</a> and <a href="/learn-code/causal-language-modeling/alice-heldout.txt" download>alice-heldout.txt</a>. Run <Code>python tiny_causal_lm.py --steps 300 --output study.json</Code>. <Code>CausalAttention</Code> exposes QK scores, the triangular mask, softmax and the weighted sum. Its <Code>fused=True</Code> route uses PyTorch scaled dot-product attention on the same Q/K/V values; dropout is explicitly zero for the comparison. Boolean mask meanings differ between APIs, so use each API's documented convention rather than copying a mask blindly.</Prose>
+    <Prose>The training loop samples a window of L+1 characters, forms L inputs and shifted targets, computes all their logits, and takes one mean cross-entropy loss. <Code>zero_grad</Code> clears accumulated parameter gradients, <Code>backward</Code> computes new gradients, clipping bounds their combined norm, and AdamW applies the parameter update. Autodiff and the optimizer are PyTorch primitives; the causal model and data construction are explicit here.</Prose>
+    <Prose>For batch size B and h heads, explicitly materialized attention weights use O(BhT²) storage. The attention matrix products cost O(BT²d); projections and the feed-forward layers add O(BTd²), and the vocabulary head adds O(BTdV). These are shape-based costs, not measured wall-clock predictions. Fused attention can avoid storing the full attention matrix; the ordinary SDPA route lets its implementation choose a suitable kernel. The transparent scratch route is intended for small experiments.</Prose>
+
+    <Old id="5-production-implementation" />
+    <H2>8. Measure a real held-out continuation</H2>
+    <Prose>The earlier calculations were constructed so every number could be followed. Now use actual text. The supplied corpus comes from Chapter I of Lewis Carroll's <em>Alice's Adventures in Wonderland</em>, with provenance and exact source hashes in <a href="/learn-code/causal-language-modeling/alice-provenance.json" download>alice-provenance.json</a>. Paragraphs 0–17 form training text; paragraphs 18–23 are held out. Each split retains its paragraph order. Windows never cross from training into held-out text.</Prose>
+    <Prose>The vocabulary is built from training characters alone, plus an unknown-character ID. Held-out characters absent from that vocabulary map to this explicit ID. This is a character model; its perplexity is per encoded character, including whitespace and the unknown mapping, not directly comparable with a subword model's token perplexity.</Prose>
+    <StudyFigure />
+    <Prose>The saved experiment uses seed 17, context length 48, width 32, two heads, two blocks, batches of 16 windows, dropout zero and 300 CPU AdamW updates at learning rate 0.003. The curves come from actual saved evaluation, not an imagined training trajectory. Both splits are scored at the saved checkpoints. A smoothed bigram baseline counts adjacent training characters and adds 0.5 to every possible continuation count before normalizing each row.</Prose>
+    <Prose>In this run, the held-out mean fell from 4.228590 to 2.520948 nats per encoded character, while the bigram baseline achieved 2.497319. The transformer improved over its initialization but did not beat the simpler baseline. Its final training mean was 2.367285. There are 64 vocabulary entries, including the unknown ID; one of the 1,917 held-out characters maps to unknown. The score contains 1,916 targets because the first character supplies context.</Prose>
+    <Prose>Read the held-out row alongside the training row: a training improvement alone does not establish generalization, and a short sample can look familiar while the held-out score remains poor. The baseline, initialized model and trained model use the same vocabulary and held-out target positions. This small contiguous excerpt tests only this local experiment; it supplies no claim about broad language quality or a model ranking.</Prose>
+    <Prose>The scorer counts every character after the first exactly once, using up to 48 preceding characters. It does not average overlapping window losses that repeatedly charge the same target. It resets learned position indices within each cropped context; that convention is part of the result. Section 10 exposes this evaluation mechanism with seven small IDs.</Prose>
+
+    <Old id="6-visual-walkthrough" />
+    <H2>9. Generate by feeding the selected token back</H2>
+    <Prose>Training supplied the observed prefixes. At generation time, future tokens are unavailable: choose one from the current distribution, append it, and use the extended prefix for the next prediction. The comparison shows where the next input comes from in each process.</Prose>
+    <TrainingGenerationFigure />
+    <Prose>Using observed prefixes during training is called <strong>teacher forcing</strong>. It lets all known positions be processed in parallel under the causal mask. Generation is sequential across unknown tokens, even though the computation inside a step may be parallel. A generated mistake becomes part of the next prefix; this change in prefix distribution is a reason to inspect actual rollouts, rather than treating teacher-forced loss as a complete behavior test.</Prose>
+    <Prose>Sampling can also change the distribution itself. Temperature τ divides logits before softmax. Here the colored intervals partition a unit-length line by probability. A uniform number u picks the interval containing it; moving u makes the selection rule visible without hiding it behind randomness.</Prose>
+    <GenerationLab />
+    <Prose>At τ=1 the distribution is unchanged. A lower positive temperature concentrates mass toward larger logits; a higher temperature flattens it. Greedy decoding instead chooses an argmax directly. It does not require division by zero or an arbitrarily tiny temperature. Ties in these teaching programs choose the first vocabulary index. For top-k sampling, retain the k largest logits and renormalize; nucleus sampling retains a probability-mass prefix. The separate decoding topic develops those choices in depth.</Prose>
+    <Prose>The two-step tree shows why greedy selection need not find the most probable complete sequence. Its first choice A has probability 0.6 and its best second choice probability 0.5, for a path probability of 0.30. Starting with B has probability 0.4 and can lead to a second choice of probability 0.9, for 0.36. These are constructed conditional probabilities, not model measurements. Searching across several partial paths changes the decoding algorithm, not the training objective.</Prose>
+    <Prose>The program's generation loop accepts one nonempty prompt, feeds only the final position's logits into its next-token decision, stops at its maximum number of new tokens, and can stop at a supplied EOS ID. Its character corpus does not add an EOS symbol, so the recorded samples use the length limit. Once a prefix exceeds 48 characters the loop crops it and restarts local position indices. A KV cache can reuse prior keys and values within a model's supported position policy; it speeds repeated computation without changing which future tokens are available.</Prose>
+
+    <Old id="8-what-scales-and-what-doesnt" /><Old id="8-what-scales-and-what-doesn-t" />
+    <H2>10. Deeper: evaluate every target once</H2>
+    <Prose>A long document does not fit in a short context window. Cutting it into disjoint blocks makes many targets lose otherwise available left context. Overlapping windows can restore context, but scoring every position in every window would count some targets repeatedly. Separate the tokens supplied as context from the new target being scored.</Prose>
+    <WindowLab />
+    <Prose>With seven IDs at positions 0–6 and context limit four, target 1 uses input position 0. Target 4 uses inputs 0–3. Target 5 uses inputs 1–4, and target 6 uses inputs 2–5. The six targets 1–6 are each charged once; the first ID is context only because this protocol does not supply a BOS. Overlap supplies evidence, not extra denominator.</Prose>
+    <Program file="score_windows.py" />
+    <Prose>Run <Code>python score_windows.py</Code> beside <Code>tiny_causal_lm.py</Code>. The explicit evaluator makes one call per target so its contract is easy to inspect. The model's batched scorer groups full-length contexts for efficiency and checks agreement. When the short sequence fits, an additional comparison uses a single parallel forward pass and the same shifted loss. The scores agree because causal earlier predictions do not depend on later input positions.</Prose>
+    <Prose>Real evaluation often scores several newly introduced positions per overlapping window. Its stride trades available context and work; it must still count the post-shift eligible labels, not the input window length. Aggregate NLL sums and valid counts before exponentiating. A corpus mean is not a mean of per-document perplexities. Record dataset, normalization, tokenizer, beginning/end treatment, window/stride, eligible positions and numerical precision so another result is meaningfully comparable.</Prose>
+    <Prose>Per-token perplexities from different tokenizers are generally incomparable because their prediction units and denominators differ. A common byte-normalized NLL can sometimes support a more aligned compression-style comparison, but only with consistent source bytes, boundary treatment and a well-defined probability assignment to the text. Tokenization itself can admit multiple segmentations; changing the evaluation unit does not automatically resolve that modeling choice.</Prose>
+
+    <Old id="7-decision-matrix" /><Old id="9-failure-modes-and-gotchas" />
+    <H2>11. Change the objective deliberately</H2>
+    <Prose>We have treated every next token as a target and restricted each prediction to its prefix. Other objectives change what is visible, what is predicted, or both. Read the allowed-information matrix and the scored-target row together.</Prose>
+    <ObjectiveFigure />
+    <Prose>A causal model predicts each next token from its left prefix. A <strong>prefix language model</strong> gives the designated input prefix full visibility within itself, while continuation positions remain causal and can read that prefix. A <strong>masked language model</strong> instead predicts selected corrupted positions using surrounding context. Its input must hide or otherwise corrupt the targets according to its training scheme; simply giving an uncorrupted token full visibility and asking it to reconstruct itself would change the problem.</Prose>
+    <Prose>An encoder-decoder model uses separate source and target stacks: the source encoder can read the source bidirectionally, and the target decoder reads earlier target positions plus source representations through cross-attention. T5's encoder-decoder architecture is therefore different from a single-stack prefix LM, even though both can generate a continuation conditioned on an input. The T5 paper explicitly compares these structures and objectives.</Prose>
+    <Prose>Before a training run, trace one example through four checks: the literal input/target pair, the information it can access, whether its loss counts, and the denominator that receives it. An unshifted target permits a copying task; a future-attending path permits leakage; masking EOS by ID removes genuine stopping supervision; averaging batch means can overweight short batches. Each failure has a direct structural test, without relying on a universal loss-curve symptom.</Prose>
+    <Prose>Increasing parameters or data changes the resources available to fit an objective; it does not make next-token loss a complete task evaluation. The later <a href="/learn/path/full-curriculum/scaling-laws-kaplan-chinchilla-beyond?module=large-language-models">Scaling Laws</a> lesson studies that budget. Preference optimization changes the training signal again; <a href="/learn/path/full-curriculum/dpo-direct-preference-optimization?module=large-language-models">DPO</a> works from preference pairs and should not be described as inherently collecting on-policy rollouts. Those are separate mechanisms from the causal likelihood developed here.</Prose>
+
+    <Old id="11-self-check-exercises" />
+    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+      <H2>Practice: align, calculate and diagnose</H2>
+      <Exercise title="1. Make the pairs." hint={<p>Write the full sequence once, then copy every item except the final one into inputs.</p>} solution={<p>For <Code>[BOS, red, fox, EOS]</Code>, inputs are <Code>[BOS,red,fox]</Code> and targets <Code>[red,fox,EOS]</Code>. There are three predictions. Row1 may read BOS and red, but not fox. An internally shifting API instead receives the four-ID sequence as both inputs and labels; do not pre-shift again.</p>}>For <Code>red fox</Code>, add BOS/EOS, write the low-level input and target arrays, and state what input row 1 may see.</Exercise>
+      <Exercise title="2. Keep the units attached." hint={<p>Add negative logarithms, divide by the number of observations, then exponentiate in the matching base.</p>} solution={<p>Probabilities 1/4 and 1/16 give losses ln4 and ln16. The sum is ln64, mean ln8≈2.079442 nats, and PPL8. In bits the losses are2 and4, mean3bits and PPL2³=8. A mean of3nats would instead give exp3≈20.085537.</p>}>Two observed targets have probabilities 1/4 and 1/16. Compute total NLL, mean loss and perplexity in both nats and bits.</Exercise>
+      <Exercise title="3. Test causality directly." hint={<p>Compare a prefix of output rows, not the final output or training curve.</p>} solution={<p>Choose two input sequences identical through position2 and different after it. Put the model in evaluation mode and compare logits rows0–2. They must agree within a justified numerical tolerance. A dropout difference is not leakage, so disable randomness. A changed final row is allowed. If early rows change, inspect masks and every sequence-mixing operation, not only the attention helper.</p>}>A model has a triangular attention mask but its normalization averages across sequence positions. Design a test that can expose the extra future-information path.</Exercise>
+      <Exercise title="4. Preserve stopping targets." hint={<p>The integer label can have two roles depending on its position.</p>} solution={<p>Mask the last two positions only: labels become <Code>[BOS,a,EOS,-100,-100]</Code>. After shifting there are two eligible targets,a andEOS. Replacing all EOS-ID labels by−100 incorrectly removes the genuine end target. The key-padding mask also marks only the final two positions unavailable.</p>}>EOS and PAD share one ID. For <Code>[BOS,a,EOS,PAD,PAD]</Code>, write same-length labels for an internally shifting model and count its valid targets.</Exercise>
+      <Exercise title="5. Accumulate the right denominator." hint={<p>Recover each batch's NLL sum from its mean and eligible count.</p>} solution={<p>The first batch contributes2×3=6nats and the second contributes8×1=8nats. Total14 over10targets gives1.4nats and PPLexp1.4≈4.055200. Averaging means gives2nats and overweights the small batch. For gradient accumulation, scale each summed contribution by the intended total eligible count.</p>}>Batch A has two targets and mean loss3; batch B has eight and mean loss1. Find combined mean loss and perplexity. Explain how a plain average of means changes the weighting.</Exercise>
+      <Exercise title="6. Make documents independent." hint={<p>Inspect a prediction immediately after the boundary and a key from the preceding document.</p>} solution={<p>EOS does not change a causal mask: a B-row can still read A-keys. Give each document its own BOS, forbid attention across document IDs, and exclude the target transition from A'sEOS to B'sBOS. Keep the B-BOS→first-B-content target. If the intended position convention restarts, supply local position IDs too. A future-invariance test alone cannot prove this cross-document independence.</p>}>Someone inserts EOS between documents and says the documents are now independent. Give a counterexample cell in the attention matrix, then describe the required attention, target and position choices.</Exercise>
+      <Exercise title="7. Audit a changed context limit." hint={<p>List each target's original index before choosing its context start.</p>} solution={<p>For original positions0–5 and limit3, targets1–5 use contexts[0],[0,1],[0,1,2],[1,2,3],[2,3,4]. Count5, with no target0 under the no-BOS convention. Change the program's context to3 and check these ranges and the accumulated count. Comparing with a full-context model after position3 is not a valid equality check because its available information differs.</p>}>Change the window example to six IDs and context limit three. List the scored positions and each context, then explain which comparison would be invalid.</Exercise>
+    </section>
+
+    <Old id="10-primary-sources" />
+    <Sources alternatives={<ul>
+      <li><a href="https://web.stanford.edu/~jurafsky/slp3/3.pdf">Jurafsky &amp; Martin — N-gram Language Models</a>. Free textbook chapter; probability, sequence boundaries and perplexity with count-based examples. Useful after sections2–4; its simpler models make the objective easier to separate from neural architecture.</li>
+      <li><a href="https://d2l.ai/chapter_recurrent-neural-networks/language-model.html">Dive into Deep Learning — Language Models</a>. Worked chapter connecting sequence examples and evaluation; suitable alongside the scratch program. Recurrent data/state choices differ from our attention decoder.</li>
+      <li><a href="https://huggingface.co/docs/transformers/perplexity">Hugging Face — Perplexity of fixed-length models</a>. Practical evaluation walkthrough after section10; inspect window overlap and post-shift target counts when adapting it.</li>
+    </ul>}>
+      <li><a href="https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf">Bengio et al., A Neural Probabilistic Language Model</a>. Shared neural conditional probabilities and the reason representations can generalize across contexts.</li>
+      <li><a href="https://arxiv.org/abs/1706.03762">Vaswani et al., Attention Is All You Need</a>. Scaled attention, shifted targets and masked decoder self-attention; our decoder omits its encoder cross-attention.</li>
+      <li><a href="https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html">PyTorch CrossEntropyLoss</a> and <a href="https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html">scaled dot-product attention</a>. Exact integer-label, ignore-index, mask and dropout contracts used in the programs.</li>
+      <li><a href="https://huggingface.co/docs/transformers/model_doc/gpt2">Transformers GPT-2 API</a>. Same-length labels are shifted inside the model. The supplied offline program checks that contract on an actual local configuration.</li>
+      <li><a href="https://arxiv.org/abs/1910.10683">Raffel et al., Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer</a>. Sections3.2.1–3.2.3 compare separate encoder-decoder, causal and prefix structures rather than treating their names as interchangeable.</li>
+    </Sources>
+    <section className="lesson-ending lesson-ending--next" data-lesson-ending="next"><H2>Readiness and the next question</H2><Prose>You are ready to move on when you can align a target with its permitted inputs, calculate and aggregate its log loss, preserve EOS while excluding padding, and distinguish an observed training prefix from a generated one. The next lesson, <a href="/learn/path/full-curriculum/masked-language-modeling-bert-style?module=large-language-models">Masked Language Modeling</a>, changes the information available around a missing token and examines what that objective teaches.</Prose></section>
+  </div>,
 };
-
 export default causalLanguageModeling;

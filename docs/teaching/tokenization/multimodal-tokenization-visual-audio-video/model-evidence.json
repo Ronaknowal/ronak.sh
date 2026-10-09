@@ -1,0 +1,85 @@
+{
+  "checkedAt": "2026-10-06T17:32:13.534Z",
+  "passed": true,
+  "checks": 2006,
+  "sourceFiles": {
+    "src/learn/data/topics/multimodal-tokenization.jsx": "8003537a0927658a0377361ca141e213e9a1a66c5fbf18599e7b394db0625634",
+    "src/learn/data/multimodal-tokenization-models.js": "d709d96540ad4c92d2838f0aa251de2ce2bad8a1e22fe0c5cf3b3d0a2d0eabd4",
+    "public/learn-code/multimodal-tokenization/sequence_geometry.py": "942d6f8f1ddd4be4ddb92c2e9e31074f1ef8931c42c96744a5b71f3f0856de98",
+    "public/learn-code/multimodal-tokenization/digits_reconstructions.json": "29547eac7fe7124fd00e0b5073840c83ff98c9c658d2fbdbd8db59a0d35e1ad4",
+    "scripts/verify-multimodal-tokenization-model.mjs": "0847f649c04210bcf0a1bf99b45edf671d8f76b5b0922b9ed6cb6d928854dec6"
+  },
+  "geometry": {
+    "tubelet_shape": [
+      8,
+      8
+    ],
+    "frame_patch_count": 16,
+    "first_tubelet": [
+      0,
+      0.015625,
+      0.0625,
+      0.078125,
+      0.25,
+      0.265625,
+      0.3125,
+      0.328125
+    ],
+    "conv3d_max_absolute_difference": 4.440892098500626e-16,
+    "namespace_local3": {
+      "text": 3,
+      "image": 11,
+      "audio_level0": 15,
+      "audio_level1": 19
+    },
+    "input_ids": [
+      20,
+      11,
+      8,
+      21,
+      3,
+      4
+    ],
+    "aligned_labels": [
+      -100,
+      -100,
+      -100,
+      -100,
+      3,
+      4
+    ],
+    "next_targets": [
+      -100,
+      -100,
+      -100,
+      3,
+      4,
+      -100
+    ],
+    "sample_times_1fps": [
+      0,
+      1
+    ],
+    "sample_times_4fps": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1,
+      1.25,
+      1.5,
+      1.75
+    ]
+  },
+  "reconstructionExamples": [
+    {
+      "source_index": 305,
+      "mse": 0.028418738394975662
+    },
+    {
+      "source_index": 302,
+      "mse": 0.033031996339559555
+    }
+  ],
+  "scope": "Independent arithmetic, slice/Euclidean references, actual generated reconstruction arrays, namespace/time/targets and NumPy/Conv3d agreement; browser paint reviewed separately."
+}

@@ -1,0 +1,33 @@
+.lesson-flow.hyena-lesson .hy-flow-drawing{margin:1.2rem 0;padding:0;border:0;background:none;box-shadow:none;min-width:0}
+.lesson-flow.hyena-lesson .hy-flow-drawing svg{display:block;width:100%;max-width:420px;height:auto;overflow:visible}
+.lesson-flow.hyena-lesson .hy-flow-drawing text{font-family:inherit;font-size:12px}
+.lesson-flow.hyena-lesson .hy-flow-drawing text:not([fill]){fill:var(--text,#dedede)}
+.lesson-flow.hyena-lesson .hy-flow-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem;align-items:start}
+.lesson-flow.hyena-lesson .hy-flow-pair .hy-flow-drawing{max-width:420px}
+.lesson-flow.hyena-lesson .hy-figure{border:0;padding:0;background:none;box-shadow:none;margin:1.3rem 0}
+.lesson-flow.hyena-lesson .hy-figure>figcaption{display:none}
+.lesson-flow.hyena-lesson .hy-tail-grid{overflow:auto;margin:1.4rem 0}
+.lesson-flow.hyena-lesson .hy-tail-row{display:flex;align-items:center;gap:0}
+.lesson-flow.hyena-lesson .hy-tail-row>span{flex:0 0 62px;text-align:center;min-height:48px;border-bottom:1px solid #333;padding:8px 0;color:#c5a5e8;font-size:.85rem}
+.lesson-flow.hyena-lesson .hy-tail-row>span:first-child{flex-basis:90px;color:var(--text,#dedede);text-align:left}
+.lesson-flow.hyena-lesson .hy-tail-row>span[data-tail=true]{background:#e6bb6020;color:#e6bb60}
+.lesson-flow.hyena-lesson .hy-tail-row>span[data-empty=true]{color:#656565}
+.lesson-flow.hyena-lesson .hy-tail-row small{display:block;color:#999}
+.lesson-flow.hyena-lesson .hy-vector-input{display:flex;flex-direction:column;gap:.4rem;min-width:0;flex:1 1 220px}
+.lesson-flow.hyena-lesson .hy-vector-input input,.lesson-flow.hyena-lesson .hy-vector-input textarea,.lesson-flow.hyena-lesson select{width:100%;color:var(--text,#dedede);background:#111;border:1px solid #555;padding:.6rem;font:inherit;border-radius:3px}
+.lesson-flow.hyena-lesson .hy-vector-input input:focus-visible,.lesson-flow.hyena-lesson select:focus-visible{outline:2px solid #e6bb60;outline-offset:3px}
+.lesson-flow.hyena-lesson .hy-result{padding:0;border:0;background:none}
+.lesson-flow.hyena-lesson .hy-control-error{color:#e6bb60}
+.lesson-flow.hyena-lesson .hy-flow-strip{margin:1rem 0;padding:0;border:0;background:none}
+.lesson-flow.hyena-lesson .hy-flow-strip>div{display:flex;flex-wrap:wrap;gap:1rem}
+.lesson-flow.hyena-lesson .hy-flow-strip span{display:grid;justify-items:center;gap:.3rem}
+.lesson-flow.hyena-lesson .hy-flow-strip b{border:1px solid;border-radius:50%;width:3rem;height:3rem;display:grid;place-items:center;font-weight:400}
+.lesson-flow.hyena-lesson .hy-dna-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(50px,1fr));gap:.8rem .3rem}
+.lesson-flow.hyena-lesson .hy-dna-strip>span{display:grid;justify-items:center;gap:.3rem;min-width:0}
+.lesson-flow.hyena-lesson .hy-dna-strip small{font-size:.75rem;color:#999}
+.lesson-flow.hyena-lesson .hy-dna-strip b{font-size:1rem;font-weight:400;color:#79c8e8}
+.lesson-flow.hyena-lesson .hy-dna-strip [data-changed=true] b{color:#c5a5e8;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.lesson-flow.hyena-lesson .hy-dna-strip [data-selected=true]{outline:2px solid #eee;outline-offset:2px}
+.lesson-flow.hyena-lesson .hy-dna-strip [data-boundary=true]{border-top:2px solid #eee}
+@media(max-width:680px){.lesson-flow.hyena-lesson .hy-flow-pair{grid-template-columns:1fr;gap:.4rem}}
+@media(min-width:681px){html[style*="200%"] .lesson-flow.hyena-lesson .hy-flow-pair{grid-template-columns:1fr}}

@@ -1,0 +1,26 @@
+.convex-optimization-lesson { overflow-wrap:anywhere; }
+.convex-optimization-lesson .cvx-figure { margin:1.8rem 0; }
+.convex-optimization-lesson .cvx-title { font-size:1rem; font-weight:500; margin-bottom:.65rem; color:#dedee3; }
+.convex-optimization-lesson .cvx-scroll { overflow:auto; max-width:100%; min-width:0; margin:.7rem 0; scrollbar-gutter:stable; }
+.convex-optimization-lesson .cvx-scroll:focus-visible { outline:2px solid #e5bb69; outline-offset:3px; }
+.convex-optimization-lesson .cvx-scroll svg { display:block; width:var(--cvx-width); min-width:var(--cvx-width); height:auto; overflow:visible; }
+.convex-optimization-lesson .cvx-scroll svg text { font-family:inherit; font-size:14px; fill:#dce1e9; paint-order:stroke; stroke:#080808; stroke-width:3px; stroke-linejoin:round; }
+.convex-optimization-lesson .cvx-axis { stroke:#7a8493; stroke-width:1; fill:none; }
+.convex-optimization-lesson .cvx-grid { stroke:#586375; stroke-width:1; fill:none; opacity:.35; }
+.convex-optimization-lesson .cvx-pair { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,36rem),1fr)); gap:1.3rem; }
+.convex-optimization-lesson .cvx-pair > * { min-width:0; }
+.convex-optimization-lesson .cvx-legend { display:flex; flex-wrap:wrap; gap:.5rem 1rem; color:#bfc6d0; font-size:.9rem; line-height:1.6; }
+.convex-optimization-lesson .cvx-legend span::before { content:''; display:inline-block; width:1.1rem; border-top:2px solid var(--cvx-ink); margin-right:.4rem; vertical-align:middle; }
+.convex-optimization-lesson .cvx-table { border-collapse:collapse; min-width:max-content; font-variant-numeric:tabular-nums; font-size:.95rem; }
+.convex-optimization-lesson .cvx-table caption { text-align:left; padding:.5rem 0; color:#bdc5d0; }
+.convex-optimization-lesson .cvx-table :is(th,td) { padding:.6rem .85rem; border-bottom:1px solid #30343b; text-align:left; white-space:nowrap; }
+.convex-optimization-lesson .cvx-table th { font-weight:500; }
+.convex-optimization-lesson .cvx-equation { overflow-x:auto; max-width:100%; min-width:0; margin:1rem 0; padding:.25rem .1rem; }
+.convex-optimization-lesson .cvx-equation:focus-visible { outline:2px solid #e5bb69; outline-offset:3px; }
+.convex-optimization-lesson .cvx-equation .katex-display { margin:.4rem 0; overflow:visible; }
+.convex-optimization-lesson .cvx-equation .katex-display > .katex { width:max-content; min-width:100%; }
+.convex-optimization-lesson .cvx-select { display:flex; flex-direction:column; gap:.4rem; min-width:0; max-width:100%; }
+.convex-optimization-lesson .cvx-select select { width:100%; max-width:100%; min-width:0; }
+@media(max-width:1200px) { .convex-optimization-lesson .cvx-pair { grid-template-columns:minmax(0,1fr); } }
+
+.convex-optimization-lesson .cvx-recorded-table { max-height:24rem; }

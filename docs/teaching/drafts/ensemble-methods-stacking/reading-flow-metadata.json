@@ -1,0 +1,116 @@
+{
+  "title": "Ensemble Methods & Stacking",
+  "id": "ensemble-methods-stacking",
+  "readTime": "~120\u2013150 min read + 3\u20134 hours practice",
+  "readTimeScope": "author estimate for visible text and code; first pass follows all thirteen mechanisms; not observed learner duration",
+  "guide": "one common LessonIntro/Learning compass",
+  "sections": [
+    {
+      "title": "1. Several forecasts, one outcome",
+      "anchor": "1-several-forecasts-one-outcome"
+    },
+    {
+      "title": "2. Decide what to combine",
+      "anchor": "2-decide-what-to-combine"
+    },
+    {
+      "title": "3. Find errors that can cancel",
+      "anchor": "3-find-errors-that-can-cancel"
+    },
+    {
+      "title": "4. Follow the bootstrap rows",
+      "anchor": "4-follow-the-bootstrap-rows"
+    },
+    {
+      "title": "5. Make the next fit listen to different rows",
+      "anchor": "5-make-the-next-fit-listen-to-different-rows"
+    },
+    {
+      "title": "6. Derive the vote and its limits",
+      "anchor": "6-derive-the-vote-and-its-limits"
+    },
+    {
+      "title": "7. Teach a combiner with unseen-row predictions",
+      "anchor": "7-teach-a-combiner-with-unseen-row-predictions"
+    },
+    {
+      "title": "8. Use the actual library contract",
+      "anchor": "8-use-the-actual-library-contract"
+    },
+    {
+      "title": "9. Preserve groups and time",
+      "anchor": "9-preserve-groups-and-time"
+    },
+    {
+      "title": "10. Inspect probabilities and real fitted rules",
+      "anchor": "10-inspect-probabilities-and-real-fitted-rules"
+    },
+    {
+      "title": "11. Run a complete comparison",
+      "anchor": "11-run-a-complete-comparison"
+    },
+    {
+      "title": "12. Go beyond constant combination weights",
+      "anchor": "12-go-beyond-constant-combination-weights"
+    },
+    {
+      "title": "13. Practise with changed data",
+      "anchor": "13-practise-with-changed-data"
+    }
+  ],
+  "endings": [
+    "practice",
+    "Further learning",
+    "Technical references",
+    "readiness/next-topic"
+  ],
+  "programMainCount": 18,
+  "programFileCount": 19,
+  "drawingPlacements": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "D09",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22",
+    "D23",
+    "D24",
+    "D25",
+    "D26",
+    "D27",
+    "D28",
+    "D29",
+    "D30",
+    "D31",
+    "D32",
+    "D33",
+    "D34",
+    "D35",
+    "D36",
+    "D37",
+    "D38",
+    "D39",
+    "D40",
+    "D41",
+    "D42",
+    "D43",
+    "D44"
+  ],
+  "runtimeBoundary": "all44 accepted diagram/control contracts retained; actual implementation/paint and different whole review still pending"
+}

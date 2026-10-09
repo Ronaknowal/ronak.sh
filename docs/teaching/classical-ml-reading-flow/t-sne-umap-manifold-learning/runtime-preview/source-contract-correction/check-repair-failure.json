@@ -1,0 +1,12 @@
+{
+  "toolChunk": "fe8d36",
+  "exit": 1,
+  "failure": "System Python cp1252 could not encode Unicode during checker repair; checker destination was truncated to zero bytes. No product source affected.",
+  "followingEmptyRun": {
+    "toolChunk": "f97e1e",
+    "exit": 0,
+    "reportProduced": false,
+    "passClaimed": false
+  },
+  "recovery": "Restored exact saved initial checker and applied syntax repair with explicit UTF-8."
+}

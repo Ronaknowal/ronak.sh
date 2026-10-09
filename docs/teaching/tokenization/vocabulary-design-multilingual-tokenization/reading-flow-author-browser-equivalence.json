@@ -1,0 +1,631 @@
+{
+  "checkedAt": "2026-10-06T14:29:43.455Z",
+  "kind": "author-only exact screenshot equivalence to previously personally inspected source-bound paint set",
+  "previousReceipt": {
+    "path": "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/reading-flow-author-browser-before-subword-svg.json",
+    "sha256": "51168706f8f7204672a3272e8c4f80ac20ddee3e9f360f762850f79d8212cc3b",
+    "manifest": "d6684e18061488ddfc10b987a148ff13f45cac83925d0cb8b3265f25c4e17189"
+  },
+  "currentReceipt": {
+    "path": "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/reading-flow-author-browser.json",
+    "sha256": "6f84a963423bd612facdf19a58fdf1a8c79f6e430925d283ee46952dea487d4a",
+    "manifest": "07a0114e26a7eaf4f3255902d5f229e524f3fa83012db16b5011d92ec61da74e"
+  },
+  "runtimeSourceEquivalence": [
+    {
+      "path": "src/learn/data/topics/vocabulary-multilingual.jsx",
+      "equal": true,
+      "sha256": "2e948495b677cbf8c490d12bf53bb097b1543e217327b0628c39aa3c0dc4a149"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx",
+      "equal": true,
+      "sha256": "7aaa7ae9d78d3fb9d0d0249144c59159c90a0b7dd5e8d1b489d48fe9f8356ba9"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/multilingual-vocabulary.css",
+      "equal": true,
+      "sha256": "e98c0e86fbf57479e840ca5521820e89019ebeef62872b43fc4e904d7dc09ea1"
+    },
+    {
+      "path": "src/learn/data/multilingual-vocabulary-models.js",
+      "equal": true,
+      "sha256": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9"
+    },
+    {
+      "path": "scripts/verify-vocabulary-reading-browser.cjs",
+      "equal": true,
+      "sha256": "afafc5adcaac80a0191cc6f0f6b3b1ce45ce7931313593cbf5b1a288f57ee5e4"
+    }
+  ],
+  "paintCount": 96,
+  "equalPaints": 94,
+  "comparisons": [
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-dictionary-choice-desktop.png",
+      "previousSha256": "b63ee66e92e982578365ee99686901e1a99d18090435c5af4f62d95d3fff9e7b",
+      "currentSha256": "b63ee66e92e982578365ee99686901e1a99d18090435c5af4f62d95d3fff9e7b",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-coverage-desktop.png",
+      "previousSha256": "33f468edff1e55a19705109e50fbde9935e91db1c8f400b1a49a432bb48c3536",
+      "currentSha256": "33f468edff1e55a19705109e50fbde9935e91db1c8f400b1a49a432bb48c3536",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-fertility-desktop.png",
+      "previousSha256": "50b426ddc90e72247af003102b9c0a46fb54db132a48476e06980faa425c5ab2",
+      "currentSha256": "50b426ddc90e72247af003102b9c0a46fb54db132a48476e06980faa425c5ab2",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-parallel-denominators-desktop.png",
+      "previousSha256": "9514fd7875cc37bba1a0fd65af8da48cb302464de6ddc2b90ed85062ce905efe",
+      "currentSha256": "9514fd7875cc37bba1a0fd65af8da48cb302464de6ddc2b90ed85062ce905efe",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-sampling-steps-desktop.png",
+      "previousSha256": "6b78cd78582ecc08dad3afabeab6bfd5d82fa5d931023eb3766eac0462460df6",
+      "currentSha256": "6b78cd78582ecc08dad3afabeab6bfd5d82fa5d931023eb3766eac0462460df6",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-integer-allocation-desktop.png",
+      "previousSha256": "e7c0ca1c4530cd7885c52fb2771f1147ba7da6ec2f5850c774f84780f99abbb3",
+      "currentSha256": "e7c0ca1c4530cd7885c52fb2771f1147ba7da6ec2f5850c774f84780f99abbb3",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-embedding-rows-desktop.png",
+      "previousSha256": "3cb7a91438fcbe643b658c2521a176dfbb3d6505da55529633e8abba53084f46",
+      "currentSha256": "3cb7a91438fcbe643b658c2521a176dfbb3d6505da55529633e8abba53084f46",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-output-dot-products-desktop.png",
+      "previousSha256": "4236bdbe7582ae98e035e6d061cf358c7aecc323e15faa2adfd2117a352bf7ba",
+      "currentSha256": "4236bdbe7582ae98e035e6d061cf358c7aecc323e15faa2adfd2117a352bf7ba",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-output-attention-work-desktop.png",
+      "previousSha256": "8f08cf1b734fec1703d29d638db89fc9be2acc94aec2a83c3f65700844b68e84",
+      "currentSha256": "8f08cf1b734fec1703d29d638db89fc9be2acc94aec2a83c3f65700844b68e84",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-normalization-loss-desktop.png",
+      "previousSha256": "c98dba9b5fcde9cae56c38800756e2be9dcc6c86fae62de16f2e723946abd93c",
+      "currentSha256": "c98dba9b5fcde9cae56c38800756e2be9dcc6c86fae62de16f2e723946abd93c",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-pretokenizer-boundaries-desktop.png",
+      "previousSha256": "ae81fa753fbd249771e80b8084359693c340056d17874a2c507a90d82a11c6d8",
+      "currentSha256": "ae81fa753fbd249771e80b8084359693c340056d17874a2c507a90d82a11c6d8",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-shared-word-count-desktop.png",
+      "previousSha256": "2d0aa8f23def84477321169b9f9316aa75151160bdf4d278da4380822a26016b",
+      "currentSha256": "2d0aa8f23def84477321169b9f9316aa75151160bdf4d278da4380822a26016b",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-train-holdout-desktop.png",
+      "previousSha256": "349ec92374754bf00a5d77451e59dbda7dd62704df2af340c042ecb24ab3a652",
+      "currentSha256": "349ec92374754bf00a5d77451e59dbda7dd62704df2af340c042ecb24ab3a652",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\multilingual-heldout-counts-desktop.png",
+      "previousSha256": "d1f5b1088576f65ee0c1bd0e5ae01c386a557e2e2033d5697d773fab3f47355c",
+      "currentSha256": "d1f5b1088576f65ee0c1bd0e5ae01c386a557e2e2033d5697d773fab3f47355c",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-row-identity-desktop.png",
+      "previousSha256": "6faf115a798b118c69f426d2d9dda78e3812972a4726cf39669352bca68f40f8",
+      "currentSha256": "6faf115a798b118c69f426d2d9dda78e3812972a4726cf39669352bca68f40f8",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-softmax-expansion-desktop.png",
+      "previousSha256": "accabe028c4c0a820c93561c5acb1a3924fd80bf536fa9e0019a8654187735bc",
+      "currentSha256": "accabe028c4c0a820c93561c5acb1a3924fd80bf536fa9e0019a8654187735bc",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-retrieval-budget-desktop.png",
+      "previousSha256": "d0ba562d47de400b394590d7b88b37b6c7d1675de96c54625a6807323ba8b96f",
+      "currentSha256": "d0ba562d47de400b394590d7b88b37b6c7d1675de96c54625a6807323ba8b96f",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-mixture-desktop.png",
+      "previousSha256": "2ec5a411c21cf7374f4f2459b4d8d3fae719ae50ce49a8536e42655d60a777f3",
+      "currentSha256": "2ec5a411c21cf7374f4f2459b4d8d3fae719ae50ce49a8536e42655d60a777f3",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-masses-desktop.png",
+      "previousSha256": "777569f7dd10057db9d3e7b69dc7177948af42db808d2d71b5b4ed508c9cc588",
+      "currentSha256": "777569f7dd10057db9d3e7b69dc7177948af42db808d2d71b5b4ed508c9cc588",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-joins-desktop.png",
+      "previousSha256": "18052ca0c9c237dc6963cadee11db369de086e36475ce1ed1aec9a3c66e952fb",
+      "currentSha256": "18052ca0c9c237dc6963cadee11db369de086e36475ce1ed1aec9a3c66e952fb",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-storage-desktop.png",
+      "previousSha256": "140489e9e0078871d4c98faa1b99f55776c2d5b8aa6db3f5188325671aae1466",
+      "currentSha256": "140489e9e0078871d4c98faa1b99f55776c2d5b8aa6db3f5188325671aae1466",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-budget-desktop.png",
+      "previousSha256": "56a13f67e0d394aa9f82bf7946b864c35217d42a9aa8e1931bf2b93b6b9f2f7c",
+      "currentSha256": "56a13f67e0d394aa9f82bf7946b864c35217d42a9aa8e1931bf2b93b6b9f2f7c",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-dictionary-choice-phone.png",
+      "previousSha256": "affd0dde1e1cf47f675d894567a69e9d623df83864314202f433e6e56ba79b70",
+      "currentSha256": "affd0dde1e1cf47f675d894567a69e9d623df83864314202f433e6e56ba79b70",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-coverage-phone.png",
+      "previousSha256": "35709161c45c7152c0f725ccadaf785ce8b5548fc1689b8c0843a61a1ae5c8b8",
+      "currentSha256": "35709161c45c7152c0f725ccadaf785ce8b5548fc1689b8c0843a61a1ae5c8b8",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-fertility-phone.png",
+      "previousSha256": "5d9b73f4907edbafced17608c25b703da6e740f4fa48a8a0b59790d44e196ea1",
+      "currentSha256": "5d9b73f4907edbafced17608c25b703da6e740f4fa48a8a0b59790d44e196ea1",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-parallel-denominators-phone.png",
+      "previousSha256": "a8413f6e54ac5c0883f551e8377dcb4284625975de133f00f9d31bb22573f097",
+      "currentSha256": "a8413f6e54ac5c0883f551e8377dcb4284625975de133f00f9d31bb22573f097",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-sampling-steps-phone.png",
+      "previousSha256": "fe6123e9dad837671a639d563ccc7751ad650e4b0cfd8e7fb9515f300b9fca93",
+      "currentSha256": "fe6123e9dad837671a639d563ccc7751ad650e4b0cfd8e7fb9515f300b9fca93",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-integer-allocation-phone.png",
+      "previousSha256": "d46add465cc0b1c4bf13762f232316d90cf9312670a7f22174b2a4b657e6b144",
+      "currentSha256": "d46add465cc0b1c4bf13762f232316d90cf9312670a7f22174b2a4b657e6b144",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-embedding-rows-phone.png",
+      "previousSha256": "2154e5c231dbe4c685aefb68476064a3b9428d316868dbf5cf54e92fd21e55f3",
+      "currentSha256": "2154e5c231dbe4c685aefb68476064a3b9428d316868dbf5cf54e92fd21e55f3",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-output-dot-products-phone.png",
+      "previousSha256": "462e1a46e18d2125b48a7bd84582168477a3bcbff2b5736ad862a287ed2d5db0",
+      "currentSha256": "462e1a46e18d2125b48a7bd84582168477a3bcbff2b5736ad862a287ed2d5db0",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-output-attention-work-phone.png",
+      "previousSha256": "07123584b595212b02c00143ea762b51c934b2979770a6c12b250d70eb2d174d",
+      "currentSha256": "07123584b595212b02c00143ea762b51c934b2979770a6c12b250d70eb2d174d",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-normalization-loss-phone.png",
+      "previousSha256": "83b197ef43d4c2f6b74445134b61f1281be6198df7d2d0599a6df393b82ee100",
+      "currentSha256": "83b197ef43d4c2f6b74445134b61f1281be6198df7d2d0599a6df393b82ee100",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-pretokenizer-boundaries-phone.png",
+      "previousSha256": "51ca2c19b0ee63f63c25916d6bad93948bada4373db840a64de864d71b57c626",
+      "currentSha256": "51ca2c19b0ee63f63c25916d6bad93948bada4373db840a64de864d71b57c626",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-shared-word-count-phone.png",
+      "previousSha256": "215c16f3d054543510bf5ce7b53fc491bac0391da7599f385a99a04a9273ca5a",
+      "currentSha256": "215c16f3d054543510bf5ce7b53fc491bac0391da7599f385a99a04a9273ca5a",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-train-holdout-phone.png",
+      "previousSha256": "7f626445a5f140feb111cd4aca9b44dd2cc50a5fb9107373a954b3b0cd93b92e",
+      "currentSha256": "7f626445a5f140feb111cd4aca9b44dd2cc50a5fb9107373a954b3b0cd93b92e",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\multilingual-heldout-counts-phone.png",
+      "previousSha256": "b9f1a3072f9476a64e95121114e66bfb5c63dd5fc59b8208d8631d439a65d64c",
+      "currentSha256": "b9f1a3072f9476a64e95121114e66bfb5c63dd5fc59b8208d8631d439a65d64c",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-row-identity-phone.png",
+      "previousSha256": "5b19f6a5eefdb1ed6147bc93cb40663ecf0e4c12f013e81cf494a465e7efc518",
+      "currentSha256": "5b19f6a5eefdb1ed6147bc93cb40663ecf0e4c12f013e81cf494a465e7efc518",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-softmax-expansion-phone.png",
+      "previousSha256": "422ff8891c0bfb8ef402e2c8b5c24396ba5cc63500fd559e983467766f99adac",
+      "currentSha256": "422ff8891c0bfb8ef402e2c8b5c24396ba5cc63500fd559e983467766f99adac",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-retrieval-budget-phone.png",
+      "previousSha256": "f3f0d9377dd9fa896d52f30be905d5a0dd9e2bd290e7ac4e67c390736a0665e9",
+      "currentSha256": "f3f0d9377dd9fa896d52f30be905d5a0dd9e2bd290e7ac4e67c390736a0665e9",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-mixture-phone.png",
+      "previousSha256": "f5dc6d5807576d6e3f44c7cd6bf5383b0b0c3d71b74bb2098e67243f4d903c7c",
+      "currentSha256": "f5dc6d5807576d6e3f44c7cd6bf5383b0b0c3d71b74bb2098e67243f4d903c7c",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-masses-phone.png",
+      "previousSha256": "2c52d4c409cdbddc745ad4d82df2f94604198cce4d9b1277b2eb6f5727832a85",
+      "currentSha256": "2c52d4c409cdbddc745ad4d82df2f94604198cce4d9b1277b2eb6f5727832a85",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-joins-phone.png",
+      "previousSha256": "adc85e7b3e43ce1ceb503b6db8454da763555a9d8481084d2b80eee552b161ea",
+      "currentSha256": "adc85e7b3e43ce1ceb503b6db8454da763555a9d8481084d2b80eee552b161ea",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-storage-phone.png",
+      "previousSha256": "9734421b2cd3620f5e982b772f2c05aa5ded8d938b91d119ce276aca63ab6814",
+      "currentSha256": "9734421b2cd3620f5e982b772f2c05aa5ded8d938b91d119ce276aca63ab6814",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-budget-phone.png",
+      "previousSha256": "cd2f9de88a361906bd463448dbfa73e9f9658ae5be52115a5d0acd82171e39b6",
+      "currentSha256": "cd2f9de88a361906bd463448dbfa73e9f9658ae5be52115a5d0acd82171e39b6",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-dictionary-choice-small.png",
+      "previousSha256": "88521aab3a6ae310f7cf77103d61dc004001e6fa127bc687957cc503fc008d71",
+      "currentSha256": "88521aab3a6ae310f7cf77103d61dc004001e6fa127bc687957cc503fc008d71",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-coverage-small.png",
+      "previousSha256": "7b30711b62a56bbae302a226682329e5424ab598d286772b5bf39f10d930cf56",
+      "currentSha256": "7b30711b62a56bbae302a226682329e5424ab598d286772b5bf39f10d930cf56",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-fertility-small.png",
+      "previousSha256": "5a11b1ff96088863dc6b340d723648221463ca7d932317ff23c9e9ec92e73d38",
+      "currentSha256": "5a11b1ff96088863dc6b340d723648221463ca7d932317ff23c9e9ec92e73d38",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-parallel-denominators-small.png",
+      "previousSha256": "b54aacda9d150163a2c669c8bb91d5ac73c0af075b519f2da67bcee0a3a8aba6",
+      "currentSha256": "b54aacda9d150163a2c669c8bb91d5ac73c0af075b519f2da67bcee0a3a8aba6",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-sampling-steps-small.png",
+      "previousSha256": "cb77658d86bb346fefd91118ad28f8611f429fcc69b819455883ccd2865469b4",
+      "currentSha256": "cb77658d86bb346fefd91118ad28f8611f429fcc69b819455883ccd2865469b4",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-integer-allocation-small.png",
+      "previousSha256": "e78b20cabd76a838003096287f880b52bca5ad7ee0a3b6c7b49198ee2f928516",
+      "currentSha256": "e78b20cabd76a838003096287f880b52bca5ad7ee0a3b6c7b49198ee2f928516",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-embedding-rows-small.png",
+      "previousSha256": "ea4c37e8f901139661d95d9b77c2b4099baded18fb6b3b8996bacd38f3f6eeab",
+      "currentSha256": "ea4c37e8f901139661d95d9b77c2b4099baded18fb6b3b8996bacd38f3f6eeab",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-output-dot-products-small.png",
+      "previousSha256": "617f26a1a71043cc65f0c09c7bf45c2ba0067ed387135e15afc50454154445fb",
+      "currentSha256": "617f26a1a71043cc65f0c09c7bf45c2ba0067ed387135e15afc50454154445fb",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-output-attention-work-small.png",
+      "previousSha256": "8bd776b24d870fee6931516ab66bdf64f6f27de10735487e08f8a3785868346f",
+      "currentSha256": "8bd776b24d870fee6931516ab66bdf64f6f27de10735487e08f8a3785868346f",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-normalization-loss-small.png",
+      "previousSha256": "aa70b51e022daf411fe14c7aca8529be95bfa1caadfed2b83099b7b4c71a5edb",
+      "currentSha256": "aa70b51e022daf411fe14c7aca8529be95bfa1caadfed2b83099b7b4c71a5edb",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-pretokenizer-boundaries-small.png",
+      "previousSha256": "60f751b42882ce1c34a25d6eeb27d4d2f74610364237977a0bb24e11eb22e318",
+      "currentSha256": "60f751b42882ce1c34a25d6eeb27d4d2f74610364237977a0bb24e11eb22e318",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-shared-word-count-small.png",
+      "previousSha256": "47854704cba23cdd24b09a6dfe248349fad57416e848b8babdd6d51d9c7aa915",
+      "currentSha256": "47854704cba23cdd24b09a6dfe248349fad57416e848b8babdd6d51d9c7aa915",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-train-holdout-small.png",
+      "previousSha256": "be2fb4670c99ff403d7f207cafbe05f781bcbc65040cdb11c900f0cea4c7141f",
+      "currentSha256": "be2fb4670c99ff403d7f207cafbe05f781bcbc65040cdb11c900f0cea4c7141f",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\multilingual-heldout-counts-small.png",
+      "previousSha256": "a46091fdbb4ab9fc0b2ec99ef69038ab55c2800378c6a5119f5e366b81deb0aa",
+      "currentSha256": "a46091fdbb4ab9fc0b2ec99ef69038ab55c2800378c6a5119f5e366b81deb0aa",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-row-identity-small.png",
+      "previousSha256": "66e6c12989464f80e0b384df9a8a0c94f66c4bc5abc20ae8a4fb72fb830ae79d",
+      "currentSha256": "66e6c12989464f80e0b384df9a8a0c94f66c4bc5abc20ae8a4fb72fb830ae79d",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-softmax-expansion-small.png",
+      "previousSha256": "8860cc48c40d45d55def9c72aafe7ab8e2430e9b26ddc9183cd80c57e8647882",
+      "currentSha256": "8860cc48c40d45d55def9c72aafe7ab8e2430e9b26ddc9183cd80c57e8647882",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-retrieval-budget-small.png",
+      "previousSha256": "3e4f89710ec05726cc0ee3935d241901fe513a5acd6f33d7791956f630033925",
+      "currentSha256": "3e4f89710ec05726cc0ee3935d241901fe513a5acd6f33d7791956f630033925",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-mixture-small.png",
+      "previousSha256": "e8c253d0f73049080c7d3397731ff3db091edb4e3d724ba33c84be8feeca3ccc",
+      "currentSha256": "e8c253d0f73049080c7d3397731ff3db091edb4e3d724ba33c84be8feeca3ccc",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-masses-small.png",
+      "previousSha256": "a97a4007e59ef6089d3cd8dd3af602a86f21e1d474f4f432eb0fa7074ba86bb9",
+      "currentSha256": "a97a4007e59ef6089d3cd8dd3af602a86f21e1d474f4f432eb0fa7074ba86bb9",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-joins-small.png",
+      "previousSha256": "8b2a3536e244908d1d93c203d2b8965a058bca9c70487696e5f0adf7c371e73d",
+      "currentSha256": "8b2a3536e244908d1d93c203d2b8965a058bca9c70487696e5f0adf7c371e73d",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-storage-small.png",
+      "previousSha256": "5d88b19460ac459d051db3d9f30b43dada19a6e88863561069cbeafb621ed96e",
+      "currentSha256": "5d88b19460ac459d051db3d9f30b43dada19a6e88863561069cbeafb621ed96e",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-budget-small.png",
+      "previousSha256": "973c7b368ed54bb5699fe294dc7533fe767ea90f0c61ce0101b68ebb70fd8e22",
+      "currentSha256": "973c7b368ed54bb5699fe294dc7533fe767ea90f0c61ce0101b68ebb70fd8e22",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-dictionary-choice-enlarged.png",
+      "previousSha256": "ac7e865835ff6b005eb9726ba8dd5a1442f96df2eeef219a11cb67962323d8da",
+      "currentSha256": "ac7e865835ff6b005eb9726ba8dd5a1442f96df2eeef219a11cb67962323d8da",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-coverage-enlarged.png",
+      "previousSha256": "2d789dd4217c883cacd1bc8bb3bb4c87ce79c28fbde106c2da4a037c120dff66",
+      "currentSha256": "2d789dd4217c883cacd1bc8bb3bb4c87ce79c28fbde106c2da4a037c120dff66",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-fertility-enlarged.png",
+      "previousSha256": "cd31d9ffefaf9bd9a98598fdccfae512aebe0c5ddd62f31db1a4d0a796e550f9",
+      "currentSha256": "cd31d9ffefaf9bd9a98598fdccfae512aebe0c5ddd62f31db1a4d0a796e550f9",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-parallel-denominators-enlarged.png",
+      "previousSha256": "896d6fadc460428d9342af40e4a227ae9cbcaccffb52d0f7a4453c5b46ecc8ba",
+      "currentSha256": "896d6fadc460428d9342af40e4a227ae9cbcaccffb52d0f7a4453c5b46ecc8ba",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-sampling-steps-enlarged.png",
+      "previousSha256": "1a0ac6fc6cc4f78d30b25f0f66a52d557e758db055f705fd399225b426549214",
+      "currentSha256": "7c8ad77735503b5bcaa9615d35593255c170ae0c13c6f69bef71bd96a4c8d96a",
+      "equal": false
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-integer-allocation-enlarged.png",
+      "previousSha256": "bf624f2b4c3191d5b1bce65d07ad0654766fffa5d729e956a0e65fe04a9163f7",
+      "currentSha256": "bf624f2b4c3191d5b1bce65d07ad0654766fffa5d729e956a0e65fe04a9163f7",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-embedding-rows-enlarged.png",
+      "previousSha256": "4c0e89b802a35e40253f9d37ad6cdf0d67cf6ee7b3fbefad4d6a5072cb1e7a40",
+      "currentSha256": "4c0e89b802a35e40253f9d37ad6cdf0d67cf6ee7b3fbefad4d6a5072cb1e7a40",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-output-dot-products-enlarged.png",
+      "previousSha256": "dfaab8d1ee840f4ea4084000e0e9924bb7cca551873d92b1be9bf03313cead27",
+      "currentSha256": "dfaab8d1ee840f4ea4084000e0e9924bb7cca551873d92b1be9bf03313cead27",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-output-attention-work-enlarged.png",
+      "previousSha256": "d0201e68a6c0280063566b7465083afae64b7b0c720bae792e116772af8bc71f",
+      "currentSha256": "d0201e68a6c0280063566b7465083afae64b7b0c720bae792e116772af8bc71f",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-normalization-loss-enlarged.png",
+      "previousSha256": "3c0c49466a03a48cce937af40a5392450aae4b1a4d119c08bd646f1fae961aab",
+      "currentSha256": "3c0c49466a03a48cce937af40a5392450aae4b1a4d119c08bd646f1fae961aab",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-pretokenizer-boundaries-enlarged.png",
+      "previousSha256": "f2494710594177d3f84c863f13086ddc0659f0666f22401d39318aeefd19d108",
+      "currentSha256": "f2494710594177d3f84c863f13086ddc0659f0666f22401d39318aeefd19d108",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-shared-word-count-enlarged.png",
+      "previousSha256": "05b6c71f052a494e44a13a0261d4999675c82d28dd6e4264b0cd420766729b21",
+      "currentSha256": "05b6c71f052a494e44a13a0261d4999675c82d28dd6e4264b0cd420766729b21",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-train-holdout-enlarged.png",
+      "previousSha256": "f6794c2fb3f25f769fb4c50b865a894ff78c302a7b17d336bf5fc29e86b691ae",
+      "currentSha256": "f6794c2fb3f25f769fb4c50b865a894ff78c302a7b17d336bf5fc29e86b691ae",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\multilingual-heldout-counts-enlarged.png",
+      "previousSha256": "2960764c5834b6e8cac07a8631f19241f64c6c2f1c5a7419f3c616f20c26900c",
+      "currentSha256": "2960764c5834b6e8cac07a8631f19241f64c6c2f1c5a7419f3c616f20c26900c",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-row-identity-enlarged.png",
+      "previousSha256": "c3c26f2dae2d35d9db4f4964c5adccc9c074e932e8293fa45b0aed3cf64723b9",
+      "currentSha256": "c3c26f2dae2d35d9db4f4964c5adccc9c074e932e8293fa45b0aed3cf64723b9",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-softmax-expansion-enlarged.png",
+      "previousSha256": "040993632ee4da9a5e35e0241067d1171e7f9785fb9079fcd1b9e4efc59c06c6",
+      "currentSha256": "040993632ee4da9a5e35e0241067d1171e7f9785fb9079fcd1b9e4efc59c06c6",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-retrieval-budget-enlarged.png",
+      "previousSha256": "284b9553348393e7a79d529056592ef32d18625e21390cfbb3d35796aec7b133",
+      "currentSha256": "284b9553348393e7a79d529056592ef32d18625e21390cfbb3d35796aec7b133",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-mixture-enlarged.png",
+      "previousSha256": "c9d58bc42f65eb84f2cd92a9b1090f87a733aa55f0127fff0445dba9b3b7663e",
+      "currentSha256": "c9d58bc42f65eb84f2cd92a9b1090f87a733aa55f0127fff0445dba9b3b7663e",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-masses-enlarged.png",
+      "previousSha256": "6801f2218dd7724a9cd6f76c8670105aebc85e2ada1cdee4b2bd51f3c43d1a7b",
+      "currentSha256": "6801f2218dd7724a9cd6f76c8670105aebc85e2ada1cdee4b2bd51f3c43d1a7b",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-joins-enlarged.png",
+      "previousSha256": "b4fbd9cc2524ee4450560e3ebac7715e196df9d79edd25e8a27aa10f6a54a097",
+      "currentSha256": "b4fbd9cc2524ee4450560e3ebac7715e196df9d79edd25e8a27aa10f6a54a097",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-storage-enlarged.png",
+      "previousSha256": "f3dcb8616da4df536e1f1d83ab5ed3f87b210fcefd318c8368b48aaea244e7f8",
+      "currentSha256": "55a34fa070bfa00d0b79ccf5bc8ff5073fadf30eb4676e52066172fcb5a87237",
+      "equal": false
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-budget-enlarged.png",
+      "previousSha256": "d411ff3672ca81a36c837cf722d0275de6cbbe40ccc3c44fe474d0d6d7049620",
+      "currentSha256": "d411ff3672ca81a36c837cf722d0275de6cbbe40ccc3c44fe474d0d6d7049620",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\alpha-null-one.png",
+      "previousSha256": "53563be160565b2a72b29cec7d9aa89356eb050d15da374fcbd189b434357071",
+      "currentSha256": "53563be160565b2a72b29cec7d9aa89356eb050d15da374fcbd189b434357071",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\alpha-interior-point17.png",
+      "previousSha256": "dbe364aa17eea9cf430f93e21c75fcdd2fda5ab15fc31ada41188e13257b0956",
+      "currentSha256": "dbe364aa17eea9cf430f93e21c75fcdd2fda5ab15fc31ada41188e13257b0956",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\masses-all-zero.png",
+      "previousSha256": "1193972ea2a4bdd2e77d2f777aa08a0a5d5e976d9995155715a542e0bf06cdd2",
+      "currentSha256": "1193972ea2a4bdd2e77d2f777aa08a0a5d5e976d9995155715a542e0bf06cdd2",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\masses-hindi-only.png",
+      "previousSha256": "c299b9c387e7b023179634a7c1151c16f85eb0a2e30095e900e330a1369d8b2a",
+      "currentSha256": "c299b9c387e7b023179634a7c1151c16f85eb0a2e30095e900e330a1369d8b2a",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\joins-zero.png",
+      "previousSha256": "95d8fc845e77c783351bf887ff15d68fb8c69fe47e9ee7a2eff430ae39177868",
+      "currentSha256": "95d8fc845e77c783351bf887ff15d68fb8c69fe47e9ee7a2eff430ae39177868",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\joins-maximum.png",
+      "previousSha256": "b541e7aef1c3ef148d3e3e5394e5b61b21b28fb8f91516941e2a47ef6d5afbb4",
+      "currentSha256": "b541e7aef1c3ef148d3e3e5394e5b61b21b28fb8f91516941e2a47ef6d5afbb4",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\storage-untied.png",
+      "previousSha256": "d5a99a1fae8e213730a086c755dbbf3048320b9791f07337242a762637207a55",
+      "currentSha256": "d5a99a1fae8e213730a086c755dbbf3048320b9791f07337242a762637207a55",
+      "equal": true
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\equal-head-quarter-pairs.png",
+      "previousSha256": "d74e8033d7e84482233307a1d25c681b3d57a4809fb1384e6129fbeb533381a7",
+      "currentSha256": "d74e8033d7e84482233307a1d25c681b3d57a4809fb1384e6129fbeb533381a7",
+      "equal": true
+    }
+  ],
+  "personallyInspectedNonIdenticalPaints": [
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-sampling-steps-enlarged.png",
+      "result": "Author opened final screenshot: complete labels/objects readable, correct values and no clipping/overlap; no runtime correction needed"
+    },
+    {
+      "file": "scratch\\vocabulary-flow\\final-paints\\vocabulary-storage-enlarged.png",
+      "result": "Author opened final screenshot: complete labels/objects readable, correct values and no clipping/overlap; no runtime correction needed"
+    }
+  ]
+}

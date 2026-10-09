@@ -1,50 +1,43 @@
-.spectral-investigation .spectral-graph-scroll { margin: 1.3rem 0; }
-.spectral-graph-scroll, .spectral-embedding-scroll { overflow-x: auto; max-width: 100%; }
-.spectral-graph-scroll:focus-visible, .spectral-embedding-scroll:focus-visible { outline: 2px solid var(--accent, #e2b55a); outline-offset: 3px; }
-.spectral-graph-scroll svg { display: block; width: 100%; max-height: none; }
-.spectral-graph-scroll svg.spectral-graph-compact { display: none; }
-.spectral-graph-scroll svg text { font-size: 20px !important; fill: #e1dfd8; }
-.spectral-graph-scroll svg .spectral-node-name { fill: #131513; font-weight: 750; font-size: 22px !important; }
-.spectral-investigation button { min-height: 44px; }
-.spectral-order, .spectral-mode-bank, .spectral-signal-comparison { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 1.3rem 0; }
-.spectral-order > div, .spectral-mode-bank > div, .spectral-signal-comparison > div { display: flex; flex-direction: column; align-items: center; gap: .45rem; padding: .65rem .3rem; border-bottom: 1px solid #53514b; min-width: 0; }
-.spectral-order > div.in-cut { border-bottom: 4px solid #e2b55a; background: #e2b55a0b; }
-.spectral-order span, .spectral-mode-bank span, .spectral-mode-bank strong, .spectral-signal-comparison span { font-size: .82rem; }
-.spectral-order small { font-size: .68rem; }
-.spectral-gain-track { height: 8px; width: 100%; background: #343737; }
-.spectral-gain-track span { display: block; height: 100%; background: #e2b55a; }
-.spectral-signed-bar { width: 100%; height: 14px; position: relative; background: linear-gradient(to right, transparent 49.3%, #9f9f93 49.3%, #9f9f93 50.7%, transparent 50.7%); }
-.spectral-signed-bar span { position: absolute; height: 7px; top: 3px; }
-.spectral-row-equation { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1.2rem; padding: 1rem 0; border-block: 1px solid #474844; }
-.spectral-row-equation span { font-size: .87rem; overflow-wrap: anywhere; }
-.spectral-embedding-scroll svg { display: block; width: 100%; max-width: 470px; margin: auto; }
-.spectral-embedding-scroll svg text { font-size: 19px !important; fill: #e1dfd8; }
-.spectral-inline { margin: 1.5rem 0 2rem; padding: 1rem 0; border-block: 1px solid #44433c; }
-.spectral-inline figcaption { color: #b6b4aa; font-size: .85rem; line-height: 1.7; margin-top: 1rem; }
-.spectral-anchor svg { display: block; width: 100%; max-width: 280px; margin: auto; }
-.spectral-anchor svg text { font-size: 17px !important; fill: #e1dfd8; }
-.spectral-anchor svg .anchor-name { fill: #151711; font-size: 20px !important; font-weight: 700; }
-.spectral-anchor svg .anchor-value { fill: #151711; font-size: 16px !important; }
-.spectral-correspondence, .spectral-circuit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
-.spectral-correspondence > div, .spectral-circuit > div { display: flex; flex-direction: column; gap: .55rem; }
-.spectral-correspondence strong, .spectral-circuit strong { color: #e2b55a; }
-.spectral-correspondence span, .spectral-circuit span { font-size: .87rem; }
-.spectral-walk { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.spectral-walk > div { display: flex; flex-direction: column; gap: .65rem; }
-.spectral-walk > span { color: #e2b55a; font-size: 1.5rem; }
-@media (max-width: 620px) {
-  .spectral-graph-scroll svg.spectral-graph-wide { display: none; }
-  .spectral-graph-scroll svg.spectral-graph-compact { display: block; max-width: 300px; margin: auto; }
-  .spectral-embedding-scroll svg text { font-size: 24px !important; }
-  .spectral-order, .spectral-mode-bank, .spectral-signal-comparison { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 1rem; }
-  .spectral-correspondence, .spectral-circuit { grid-template-columns: 1fr; gap: 1.1rem; }
-  .spectral-correspondence > div, .spectral-circuit > div { padding-left: .75rem; border-left: 2px solid #67644f; }
-  .spectral-walk { flex-direction: column; align-items: flex-start; }
-  .spectral-walk > span { transform: rotate(90deg); align-self: center; }
-  .spectral-investigation .lesson-controls { grid-template-columns: 1fr; }
-}
-
-.spectral-embedding-scroll .spectral-group-label { paint-order: stroke; stroke: #0d0f0e; stroke-width: 5px; stroke-linejoin: round; }
-.spectral-centroid-key { display: flex; flex-wrap: wrap; gap: .7rem 1rem; font-size: .85rem; line-height: 1.5; margin-top: .75rem; }
-.spectral-centroid-key span { display: inline-flex; align-items: center; gap: .4rem; }
-.spectral-centroid-key i { display: inline-block; width: .75rem; height: .75rem; border: 2px solid; flex: none; }
+.spectral-lesson { --sg-gold:#e4b752; --sg-cyan:#8dcce8; --sg-ink:#ded5c4; --sg-muted:#bab5ac; }
+.spectral-lesson .sg-figure,.spectral-lesson .sg-lab { background:transparent; border:0; padding:0; box-shadow:none; margin:2.25rem 0; min-width:0; }
+.sg-scene { display:block; width:100%; max-width:340px; height:auto; margin:1.1rem auto; }
+.sg-label { fill:#ded5c4; font:18px 'IBM Plex Sans',sans-serif; }
+.sg-small { font-size:16px; }
+.sg-halo { paint-order:stroke; stroke:#101010; stroke-width:5px; stroke-linejoin:round; }
+.sg-node { fill:#101010; stroke:#ded5c4; stroke-width:1.5px; }
+.sg-node.is-selected { stroke:#e4b752; stroke-width:3px; }
+.sg-edge { stroke:#aaa79f; fill:none; }
+.sg-crossing { stroke:#e4b752; stroke-dasharray:6 4; }
+.sg-axis,.sg-outline { stroke:#aaa79f; fill:none; stroke-width:1.2px; }
+.sg-arrow { stroke:#e4b752; fill:none; stroke-width:1.8px; }
+.sg-arrow.sg-cyan { stroke:#8dcce8; }
+.sg-bar { stroke:#e4b752; stroke-width:8px; }
+.sg-comparison-bar { stroke:#8dcce8; stroke-width:4px; }
+.sg-dot { fill:#e4b752; }
+.sg-area { fill:#e4b752; fill-opacity:.45; }
+.sg-density { fill:#e4b752; fill-opacity:.2; stroke:#e4b752; stroke-width:1.5px; }
+.sg-contour { stroke:#8dcce8; fill:none; stroke-width:1px; opacity:.7; }
+.sg-threshold { stroke:#e4b752; fill:none; stroke-width:1.8px; stroke-dasharray:5 3; }
+.sg-stem { stroke:#aaa79f; stroke-width:1px; }
+.sg-curve { stroke:#e4b752; stroke-width:2px; fill:none; }
+.sg-limit { stroke:#ded5c4; stroke-width:1px; stroke-dasharray:4 4; }
+.sg-coordinate-link { stroke:#aaa79f; stroke-width:.5px; opacity:.5; }
+.sg-matrix-block { margin:1.25rem 0; min-width:0; }
+.sg-matrix-block>p { line-height:1.65; font-size:.95rem; color:#bab5ac; overflow-wrap:anywhere; }
+.sg-local-scroll { overflow-x:auto; max-width:100%; padding-bottom:.6rem; }
+.sg-local-scroll:focus-visible { outline:2px solid #e4b752; outline-offset:3px; }
+.sg-matrix { border-collapse:collapse; margin:0 auto; font-size:.95rem; font-variant-numeric:tabular-nums; }
+.sg-matrix th,.sg-matrix td { padding:.55rem .75rem; border-bottom:1px solid #44413b; white-space:nowrap; text-align:right; color:#ded5c4; }
+.sg-matrix th { font-weight:500; }
+.sg-matrix th:first-child { text-align:left; }
+.sg-matrix .is-selected { color:#e4b752; background:#e4b75212; }
+.sg-matrix caption { position:absolute; width:1px; height:1px; clip-path:inset(50%); overflow:hidden; white-space:nowrap; }
+.sg-projections { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; min-width:0; }
+.sg-figure figcaption { color:#bab5ac; font-size:.95rem; line-height:1.7; margin-top:1rem; }
+.sg-figure p,.sg-lab p { overflow-wrap:anywhere; }
+.sg-advanced { margin-top:1.5rem; }
+.sg-advanced summary { cursor:pointer; color:#e4b752; }
+.sg-lab .flow-controls label:not(.flow-slider) { display:grid; gap:.35rem; max-width:100%; color:#bab5ac; }
+.sg-lab .flow-controls select { max-width:100%; }
+@container (max-width:40rem) { .sg-projections { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:640px) { .sg-projections { grid-template-columns:minmax(0,1fr); } }

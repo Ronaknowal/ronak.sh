@@ -1,0 +1,10 @@
+{
+  "qualification": "Localhost connection denied EACCES by sandbox; no byte mismatch and no source mutation. Same read-only HTTP checker retried with permitted local access.",
+  "actualToolResult": {
+    "chunk_id": "b5a85b",
+    "wall_time_seconds": 0.8855259,
+    "exit_code": 1,
+    "original_token_count": 269,
+    "output": "node:internal/deps/undici/undici:13510\r\n      Error.captureStackTrace(err);\r\n            ^\r\n\r\nTypeError: fetch failed\r\n    at node:internal/deps/undici/undici:13510:13\r\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\r\n    at async file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-http.mjs:26:20\r\n    at async Promise.all (index 0)\r\n    at async file:///C:/Personal%20Projects%20and%20files/Portfolio/Portfolio/docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-http.mjs:24:18 {\r\n  [cause]: Error: connect EACCES 127.0.0.1:5196\r\n      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16) {\r\n    errno: -4092,\r\n    code: 'EACCES',\r\n    syscall: 'connect',\r\n    address: '127.0.0.1',\r\n    port: 5196\r\n  }\r\n}\r\n\r\nNode.js v22.18.0\r\n"
+  }
+}

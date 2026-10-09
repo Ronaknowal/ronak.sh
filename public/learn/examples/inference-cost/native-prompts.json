@@ -1,0 +1,500 @@
+{
+  "model": "EleutherAI/pythia-14m",
+  "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+  "model_files": {
+    "README.md": "d1f2cf1d5181daedeaa70208ddd5cc5251867bde9acf6db7bb45a2265e25e163",
+    "config.json": "f97f966a66c444890ed461fff2a51eefb15d74303df05b948124719f199b0b17",
+    "model.safetensors": "116a02532db461f91386a5b20f942ff2c8d4de7341e21b55caafc3d7b25f49a1",
+    "special_tokens_map.json": "10b8c8852c1e1f70b54d9aff61728408c28971c0e97a6c5a7b2debbd1d3e9c0c",
+    "tokenizer.json": "870f4e2baa6b683221fa52004d5d6f40ab8c9d31961617304b78c910c2c3caf2",
+    "tokenizer_config.json": "eee017c5bd133137f45907bd0a6e781e2ccd1a533734b7ed2a2f2f4446659809"
+  },
+  "requests": [
+    {
+      "request_id": "Alice-1",
+      "source_text": " “What a curious feeling!” said Alice; “I must be shutting up like a telescope.”",
+      "source_characters": 80,
+      "source_bytes_utf8": 88,
+      "source_token_count": 19,
+      "input_ids": [
+        773,
+        1276,
+        247,
+        14338,
+        5471,
+        11602,
+        753,
+        16922,
+        28,
+        773,
+        42,
+        1364,
+        320,
+        40806,
+        598,
+        751
+      ],
+      "selected_text": " “What a curious feeling!” said Alice; “I must be shutting up like",
+      "pieces": [
+        "ĠâĢľ",
+        "What",
+        "Ġa",
+        "Ġcurious",
+        "Ġfeeling",
+        "!âĢĿ",
+        "Ġsaid",
+        "ĠAlice",
+        ";",
+        "ĠâĢľ",
+        "I",
+        "Ġmust",
+        "Ġbe",
+        "Ġshutting",
+        "Ġup",
+        "Ġlike"
+      ],
+      "offsets": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          16,
+          24
+        ],
+        [
+          24,
+          26
+        ],
+        [
+          26,
+          31
+        ],
+        [
+          31,
+          37
+        ],
+        [
+          37,
+          38
+        ],
+        [
+          38,
+          40
+        ],
+        [
+          40,
+          41
+        ],
+        [
+          41,
+          46
+        ],
+        [
+          46,
+          49
+        ],
+        [
+          49,
+          58
+        ],
+        [
+          58,
+          61
+        ],
+        [
+          61,
+          66
+        ]
+      ]
+    },
+    {
+      "request_id": "Alice-2",
+      "source_text": "And so it was indeed: she was now only ten inches high, and her face brightened up at the thought that she was now the right size for going through the little door into that lovely garden. First, however, she waited for a few minutes to see if she was going to shrink any further: she felt a little nervous about this; “for it might end, you know,” said Alice to herself, “in my going out altogether, like a candle. I wonder what I should be like then?” And she tried to fancy what the flame of a candle is like after the candle is blown out, for she could not remember ever having seen such a thing.",
+      "source_characters": 600,
+      "source_bytes_utf8": 608,
+      "source_token_count": 136,
+      "input_ids": [
+        1898,
+        594,
+        352,
+        369,
+        6296,
+        27,
+        703,
+        369,
+        1024,
+        760,
+        3578,
+        13048,
+        1029,
+        13,
+        285,
+        617
+      ],
+      "selected_text": "And so it was indeed: she was now only ten inches high, and her",
+      "pieces": [
+        "And",
+        "Ġso",
+        "Ġit",
+        "Ġwas",
+        "Ġindeed",
+        ":",
+        "Ġshe",
+        "Ġwas",
+        "Ġnow",
+        "Ġonly",
+        "Ġten",
+        "Ġinches",
+        "Ġhigh",
+        ",",
+        "Ġand",
+        "Ġher"
+      ],
+      "offsets": [
+        [
+          0,
+          3
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          13,
+          20
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          21,
+          25
+        ],
+        [
+          25,
+          29
+        ],
+        [
+          29,
+          33
+        ],
+        [
+          33,
+          38
+        ],
+        [
+          38,
+          42
+        ],
+        [
+          42,
+          49
+        ],
+        [
+          49,
+          54
+        ],
+        [
+          54,
+          55
+        ],
+        [
+          55,
+          59
+        ],
+        [
+          59,
+          63
+        ]
+      ]
+    },
+    {
+      "request_id": "Alice-3",
+      "source_text": "After a while, finding that nothing more happened, she decided on going into the garden at once; but, alas for poor Alice! when she got to the door, she found she had forgotten the little golden key, and when she went back to the table for it, she found she could not possibly reach it: she could see it quite plainly through the glass, and she tried her best to climb up one of the legs of the table, but it was too slippery; and when she had tired herself out with trying, the poor little thing sat down and cried.",
+      "source_characters": 516,
+      "source_bytes_utf8": 516,
+      "source_token_count": 116,
+      "input_ids": [
+        4553,
+        247,
+        1223,
+        13,
+        4560,
+        326,
+        2717,
+        625,
+        4592,
+        13,
+        703,
+        4425,
+        327,
+        1469,
+        715,
+        253
+      ],
+      "selected_text": "After a while, finding that nothing more happened, she decided on going into the",
+      "pieces": [
+        "After",
+        "Ġa",
+        "Ġwhile",
+        ",",
+        "Ġfinding",
+        "Ġthat",
+        "Ġnothing",
+        "Ġmore",
+        "Ġhappened",
+        ",",
+        "Ġshe",
+        "Ġdecided",
+        "Ġon",
+        "Ġgoing",
+        "Ġinto",
+        "Ġthe"
+      ],
+      "offsets": [
+        [
+          0,
+          5
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          14,
+          22
+        ],
+        [
+          22,
+          27
+        ],
+        [
+          27,
+          35
+        ],
+        [
+          35,
+          40
+        ],
+        [
+          40,
+          49
+        ],
+        [
+          49,
+          50
+        ],
+        [
+          50,
+          54
+        ],
+        [
+          54,
+          62
+        ],
+        [
+          62,
+          65
+        ],
+        [
+          65,
+          71
+        ],
+        [
+          71,
+          76
+        ],
+        [
+          76,
+          80
+        ]
+      ]
+    },
+    {
+      "request_id": "Alice-4",
+      "source_text": "“Come, there’s no use in crying like that!” said Alice to herself, rather sharply; “I advise you to leave off this minute!” She generally gave herself very good advice, (though she very seldom followed it), and sometimes she scolded herself so severely as to bring tears into her eyes; and once she remembered trying to box her own ears for having cheated herself in a game of croquet she was playing against herself, for this curious child was very fond of pretending to be two people. “But it’s no use now,” thought poor Alice, “to pretend to be two people! Why, there’s hardly enough of me left to make _one_ respectable person!”",
+      "source_characters": 632,
+      "source_bytes_utf8": 654,
+      "source_token_count": 143,
+      "input_ids": [
+        1628,
+        8380,
+        13,
+        627,
+        457,
+        84,
+        642,
+        897,
+        275,
+        17800,
+        751,
+        326,
+        11602,
+        753,
+        16922,
+        281
+      ],
+      "selected_text": "“Come, there’s no use in crying like that!” said Alice to",
+      "pieces": [
+        "âĢľ",
+        "Come",
+        ",",
+        "Ġthere",
+        "âĢĻ",
+        "s",
+        "Ġno",
+        "Ġuse",
+        "Ġin",
+        "Ġcrying",
+        "Ġlike",
+        "Ġthat",
+        "!âĢĿ",
+        "Ġsaid",
+        "ĠAlice",
+        "Ġto"
+      ],
+      "offsets": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          14,
+          17
+        ],
+        [
+          17,
+          21
+        ],
+        [
+          21,
+          24
+        ],
+        [
+          24,
+          31
+        ],
+        [
+          31,
+          36
+        ],
+        [
+          36,
+          41
+        ],
+        [
+          41,
+          43
+        ],
+        [
+          43,
+          48
+        ],
+        [
+          48,
+          54
+        ],
+        [
+          54,
+          57
+        ]
+      ]
+    }
+  ],
+  "tokenizer_only_fixtures": [
+    {
+      "text": "",
+      "codepoints": 0,
+      "utf8_bytes": 0,
+      "input_ids": [],
+      "pieces": [],
+      "offsets": []
+    },
+    {
+      "text": "🙂 café\n",
+      "codepoints": 7,
+      "utf8_bytes": 11,
+      "input_ids": [
+        14931,
+        18713,
+        36241,
+        187
+      ],
+      "pieces": [
+        "ðŁ",
+        "ĻĤ",
+        "ĠcafÃ©",
+        "Ċ"
+      ],
+      "offsets": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          6,
+          7
+        ]
+      ]
+    }
+  ],
+  "classification": "Real public-domain selected input IDs; no model forward or generated output yet"
+}

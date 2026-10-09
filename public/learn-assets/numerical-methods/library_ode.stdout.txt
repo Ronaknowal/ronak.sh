@@ -1,0 +1,14 @@
+rtol=0.001 atol=1e-06; success=True status=0 evaluations=50
+message: The solver successfully reached the end of the integration interval.
+  t=0.0 computed=1.0000000000 exact=1.0000000000 absolute error=0.000e+00
+  t=0.5 computed=0.3680865020 exact=0.3678794412 absolute error=2.071e-04
+  t=1.0 computed=0.1354933058 exact=0.1353352832 absolute error=1.580e-04
+  t=2.0 computed=0.0183472294 exact=0.0183156389 absolute error=3.159e-05
+  t=3.0 computed=0.0024866336 exact=0.0024787522 absolute error=7.881e-06
+rtol=1e-08 atol=1e-10; success=True status=0 evaluations=374
+message: The solver successfully reached the end of the integration interval.
+  t=0.0 computed=1.0000000000 exact=1.0000000000 absolute error=0.000e+00
+  t=0.5 computed=0.3678794411 exact=0.3678794412 absolute error=4.501e-11
+  t=1.0 computed=0.1353352837 exact=0.1353352832 absolute error=4.646e-10
+  t=2.0 computed=0.0183156391 exact=0.0183156389 absolute error=1.810e-10
+  t=3.0 computed=0.0024787522 exact=0.0024787522 absolute error=5.398e-11

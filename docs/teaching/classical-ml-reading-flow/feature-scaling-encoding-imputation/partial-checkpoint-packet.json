@@ -1,0 +1,79 @@
+{
+  "status": "PARTIAL_RESEARCH_PAUSED_FOR_DBSCAN_CONTENT",
+  "topicId": "feature-scaling-encoding-imputation",
+  "createdOn": "2026-10-08",
+  "owner": "/root/clustering_evaluation_author",
+  "sourceConservation": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/source-conservation.json",
+    "bytes": 33321,
+    "sha256": "b8c147dff955062ed8d065d311f4e3608d29bd543e76d6f9f4aad088bfe6b3fc"
+  },
+  "protectedPairs": 30,
+  "programs": [
+    {
+      "id": "fittedStateParity",
+      "file": "fitted_preparation.py",
+      "sourceSha256": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05",
+      "stdoutSha256": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb",
+      "executionRole": "Exact retained historically executed source/stream literals; not rerun at this checkpoint."
+    },
+    {
+      "id": "penguinExperiment",
+      "file": "penguins_prepare.py",
+      "sourceSha256": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94",
+      "stdoutSha256": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52",
+      "executionRole": "Exact retained historically executed source/stream literals; not rerun at this checkpoint."
+    },
+    {
+      "id": "crossFitEncoding",
+      "file": "cross_fit.py",
+      "sourceSha256": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252",
+      "stdoutSha256": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2",
+      "executionRole": "Exact retained historically executed source/stream literals; not rerun at this checkpoint."
+    }
+  ],
+  "csvs": [
+    {
+      "path": "docs/teaching/drafts/feature-scaling-encoding-imputation/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "lfSha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+    },
+    {
+      "path": "public/learn-assets/feature-scaling/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "lfSha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+    }
+  ],
+  "authoredInputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/resume-checkpoint.md",
+      "bytes": 3287,
+      "sha256": "652151b9618d2bd20f079e275a9652326d381bcbab807ba175fd72fcd6e450cc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/partial-research.md",
+      "bytes": 4353,
+      "sha256": "95159ce809a721b60dac9fb212a8f78838585d1f9a210581199d359ecdb18d58"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/preserve-original.mjs",
+      "bytes": 2850,
+      "sha256": "a4e0d6964ef81a0cb1aa82f18f2a38b6b665fed78c5b870b146d1e0c475c5d72"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/freeze-partial.mjs",
+      "bytes": 2871,
+      "sha256": "210a8025394f32aefcd2a633474bbc215ecafdd0f01821184956f9d350c08e5e"
+    }
+  ],
+  "limits": [
+    "Not a complete assessment, research/design packet, content completion or implementation acceptance.",
+    "No historical fits/mains/checker campaigns, estimator fitting, source-only R or new native/browser execution.",
+    "Current source/copy identities and exact displayed code/stream correspondence are checked once; historical container hashes and CSV byte roles remain qualified.",
+    "Whole original draft/design/specification and remaining guidance/prerequisites/research reading still pending.",
+    "Root alone owns central phases; KMeans normal freeze/current4999 remains preserved."
+  ],
+  "resume": "Finish remaining scoped original/guidance/dependency reads and specialist primary research; then complete full concept/visual/lab/program/practice design and DIFFERENT review. No new manuscript/runtime before release."
+}

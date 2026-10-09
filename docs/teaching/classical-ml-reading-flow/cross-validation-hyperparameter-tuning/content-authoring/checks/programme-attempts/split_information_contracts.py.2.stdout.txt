@@ -1,0 +1,13 @@
+time 3 {"train": [0, 1, 2], "held": [3], "reasons": {"0": [], "1": [], "2": [], "3": ["held", "event not strictly earlier", "label not arrived"], "4": ["event not strictly earlier", "label not arrived"], "5": ["event not strictly earlier", "label not arrived"]}}
+time 4 {"train": [0, 1], "held": [3], "reasons": {"0": [], "1": [], "2": ["label not arrived"], "3": ["held", "event not strictly earlier", "label not arrived"], "4": ["event not strictly earlier", "label not arrived"], "5": ["event not strictly earlier", "label not arrived"]}}
+joint {"train": [1], "held": [3], "reasons": {"0": ["held subject"], "1": [], "2": ["held subject"], "3": ["held", "event not strictly earlier", "label not arrived", "held subject"], "4": ["event not strictly earlier", "label not arrived"], "5": ["event not strictly earlier", "label not arrived"]}}
+group held [([1, 4, 5], [0, 2, 3]), ([0, 2, 3, 5], [1, 4]), ([0, 1, 2, 3, 4], [5])]
+mapped [1, 5, 9, 13]
+coverage [0, 0, 0, 0, 1, 1, 1, 1] full OOF False
+aligned {'source_ids': [4, 5, 6, 7], 'features': [4, 5, 6, 7], 'targets': [0, 1, 1, 1], 'predictions': [0, 1, 1, 1]}
+GroupKFold [([0, 1, 2, 3, 6, 7, 8, 9], [4, 5, 10, 11]), ([0, 1, 4, 5, 6, 7, 10, 11], [2, 3, 8, 9]), ([2, 3, 4, 5, 8, 9, 10, 11], [0, 1, 6, 7])] group disjoint True
+StratifiedGroupKFold [([2, 3, 4, 5, 8, 9, 10, 11], [0, 1, 6, 7]), ([0, 1, 4, 5, 6, 7, 10, 11], [2, 3, 8, 9]), ([0, 1, 2, 3, 6, 7, 8, 9], [4, 5, 10, 11])] group disjoint True
+TimeSeriesSplit [([0, 1, 2, 3, 4, 5, 6], [8, 9]), ([0, 1, 2, 3, 4, 5, 6, 7, 8], [10, 11])]
+PredefinedSplit [([0, 1, 4, 5], [2, 3]), ([0, 1, 2, 3], [4, 5])]
+RepeatedKFold coverage [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+LeavePOut count 10 combination count 10

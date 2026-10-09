@@ -1,0 +1,21 @@
+.ode-reading-figure { margin: 1.5rem 0 2rem; padding: 0; border: 0; background: transparent; }
+.ode-reading-figure figcaption { margin-top: 1rem; line-height: 1.7; color: var(--text-secondary, #aaa); overflow-wrap: anywhere; }
+.ode-reading-region { min-width: 0; max-width: 100%; }
+.ode-scroll-hint { margin: .5rem 0; font-size: .875rem; line-height: 1.6; color: var(--text-secondary, #aaa); }
+.ode-scroll-region { max-width: 100%; overflow: auto; }
+.ode-scroll-region--tall { max-height: 24rem; }
+.ode-scroll-region:focus-visible { outline: 2px solid #e7b54a; outline-offset: 3px; }
+.ode-reading-scene { display: block; width: 100%; min-width: var(--ode-min-width); height: auto; }
+.ode-reading-label { font: 15px ui-monospace, SFMono-Regular, Consolas, monospace; }
+.ode-reading-table { margin: 1rem 0; }
+.ode-diagram-key { margin: 1rem 0; line-height: 1.7; }
+.ode-table-label { margin: 0 0 .5rem; line-height: 1.6; font-weight: 600; }
+.ode-reading-table table { width: max-content; min-width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.ode-reading-table th, .ode-reading-table td { padding: .65rem .8rem; border-bottom: 1px solid #333; text-align: right; white-space: nowrap; }
+.ode-reading-table th:first-child { text-align: left; }
+.ode-reading-table thead { position: sticky; top: 0; background: #171717; z-index: 1; }
+.ode-reading-stack { display: grid; gap: 1rem; }
+.ode-equation-content { width: max-content; min-width: 100%; }
+.ode-lesson { overflow-wrap: anywhere; }
+.ode-lesson .flow-slider output { flex: 0 0 auto; white-space: nowrap; }
+.ode-lesson .flow-readout strong { display: inline-block; white-space: nowrap; }

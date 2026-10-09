@@ -1,0 +1,15 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+const id='rl-for-reasoning-deepseek-r1-style',folder=`docs/teaching/llm-architecture-training/${id}`;
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const checks=JSON.parse(fs.readFileSync(`${folder}/runtime-root-checks.json`));
+assert.equal(checks.passed,true);assert.equal(checks.conditions,2309);
+for(const[p,h]of Object.entries(checks.files))assert.equal(sha(p),h,p);
+const ledger=JSON.parse(fs.readFileSync('docs/teaching/lesson-delivery-progress.json'));
+assert.equal(ledger.topics[id].content.status,'complete');
+const files={...checks.files,...ledger.topics[id].content.files};
+for(const name of ['runtime-root-checks.json','runtime-review.md','root-probability-scale.json','root-review-paint/index.json'])files[`${folder}/${name}`]=sha(`${folder}/${name}`);
+for(const name of fs.readdirSync(`${folder}/root-review-paint`).filter(p=>p.endsWith('.png')))files[`${folder}/root-review-paint/${name}`]=sha(`${folder}/root-review-paint/${name}`);
+for(const p of ['scripts/accept-reasoning-runtime.mjs','scripts/check-reasoning-probability-scale.cjs','scripts/prepare-reasoning-review-paint.py'])files[p]=sha(p);
+for(const[p,h]of Object.entries(files))assert.equal(sha(p),h,p);
+fs.writeFileSync(`${folder}/runtime-acceptance.json`,JSON.stringify({at:new Date().toISOString(),accepted:true,reviewer:'root; different whole source and paint review',topic:id,phase:'ready-for-production-integration',manuscript:`${folder}/lesson.jsx`,figures:'[data-reasoning-figure]',count:27,assets:'learn-code/rl-reasoning',files,review:`${folder}/runtime-review.md`,limits:'No scientific replay. Native individual program saves and exact ZIP retrieval pass; native ZIP save unverified. Normal production integration follows.'},null,2)+'\n',{flag:'wx'});
+console.log(`Accepted reasoning runtime with ${Object.keys(files).length} guarded bindings.`);

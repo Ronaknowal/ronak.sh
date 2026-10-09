@@ -1,0 +1,76 @@
+{
+  "input": [
+    0.8,
+    0.6
+  ],
+  "stage_ids": [
+    3,
+    0,
+    3
+  ],
+  "squared_error_sums": [
+    0.2,
+    0.10000000000000002,
+    0.025000000000000012
+  ],
+  "decoded_sum": [
+    0.75,
+    0.75
+  ],
+  "final_residual": [
+    0.050000000000000044,
+    -0.15000000000000002
+  ],
+  "stage_namespaced_ids": [
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "ids_time_stage": [
+    [
+      3,
+      0,
+      3
+    ],
+    [
+      2,
+      1,
+      2
+    ]
+  ],
+  "serializations": {
+    "time-major": [
+      3,
+      0,
+      3,
+      2,
+      1,
+      2
+    ],
+    "level-major": [
+      3,
+      2,
+      0,
+      1,
+      3,
+      2
+    ]
+  },
+  "malformed_stage_error_before": 0.01,
+  "malformed_stage_error_after": 0.81,
+  "payload": {
+    "frames_per_second": 75.0,
+    "ids_per_second": 600.0,
+    "bits_per_id": 10,
+    "bits_per_second": 6000.0
+  }
+}

@@ -1,0 +1,7 @@
+duplicate-expanded labels [0, 0, 0, 0, -1] weighted representatives [0, 0, -1]
+negative-weight cores [False, False, False] labels [-1, -1, -1]
+stored-zero sparse rosters [['A', 'B'], ['A', 'B'], ['C']] labels [0, 0, -1]
+frozen query -5 {'status': 'none', 'components': (), 'eligible_core_ids': ()}
+frozen query -1.5 {'status': 'one_component', 'components': (0,), 'eligible_core_ids': ('A', 'B', 'C')}
+frozen query 0 {'status': 'ambiguous', 'components': (0, 1), 'eligible_core_ids': ('C', 'D')}
+reconciled core components [('A', 'B', 'C'), ('D', 'E', 'F')] halos {'west': ('A', 'B', 'C', 'D', 'E', 'F'), 'east': ('A', 'B', 'C', 'D', 'E', 'F')}

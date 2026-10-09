@@ -1,0 +1,1104 @@
+{
+  "precision": "float64",
+  "case": 6,
+  "native_loss": 0.0001183424272828415,
+  "scratch_loss": 0.00011834242728217537,
+  "loss_dtype": "torch.float64",
+  "parameters": [
+    {
+      "parameter": 0,
+      "shape": [
+        50304,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 8.704148513061227e-13,
+      "native_l2": 69.86189635742714,
+      "scratch_l2": 69.86189635742618,
+      "difference_l2": 3.183164378489107e-12,
+      "maximum_native_magnitude": 17.181605197505814,
+      "outside_original_tolerance": 0,
+      "elements": 6438912
+    },
+    {
+      "parameter": 1,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.3647750424515834e-14,
+      "native_l2": 1.525333533764235,
+      "scratch_l2": 1.5253335337641845,
+      "difference_l2": 6.395655754324851e-14,
+      "maximum_native_magnitude": 0.6619436279982762,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 2,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.0769163338864018e-14,
+      "native_l2": 1.5512666624042308,
+      "scratch_l2": 1.5512666624041773,
+      "difference_l2": 5.3893202096995625e-14,
+      "maximum_native_magnitude": 0.2995359967596508,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 3,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.587618925213974e-14,
+      "native_l2": 0.6577533794882792,
+      "scratch_l2": 0.6577533794882472,
+      "difference_l2": 4.1028558732990757e-14,
+      "maximum_native_magnitude": 0.3198814521066188,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 4,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.0297318553398327e-14,
+      "native_l2": 0.6491435298192327,
+      "scratch_l2": 0.6491435298192032,
+      "difference_l2": 3.579593587107158e-14,
+      "maximum_native_magnitude": 0.16358176807820576,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 5,
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 7.371880883511039e-13,
+      "native_l2": 190.1160254775866,
+      "scratch_l2": 190.1160254775787,
+      "difference_l2": 9.595237441378044e-12,
+      "maximum_native_magnitude": 15.565692581940489,
+      "outside_original_tolerance": 0,
+      "elements": 49152
+    },
+    {
+      "parameter": 6,
+      "shape": [
+        384
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 9.992007221626409e-14,
+      "native_l2": 8.660696586653804,
+      "scratch_l2": 8.66069658665351,
+      "difference_l2": 2.9629322422625184e-13,
+      "maximum_native_magnitude": 2.9193842291148906,
+      "outside_original_tolerance": 0,
+      "elements": 384
+    },
+    {
+      "parameter": 7,
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 5.311306949806749e-13,
+      "native_l2": 87.38257816110574,
+      "scratch_l2": 87.38257816110271,
+      "difference_l2": 3.928987961492183e-12,
+      "maximum_native_magnitude": 15.808143672854104,
+      "outside_original_tolerance": 0,
+      "elements": 16384
+    },
+    {
+      "parameter": 8,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 4.938272013532696e-13,
+      "native_l2": 29.718828686655197,
+      "scratch_l2": 29.718828686654184,
+      "difference_l2": 1.052256873639909e-12,
+      "maximum_native_magnitude": 14.150199589537308,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 9,
+      "shape": [
+        512,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.694200335577989e-13,
+      "native_l2": 35.32489936270387,
+      "scratch_l2": 35.3248993627022,
+      "difference_l2": 2.305069573863714e-12,
+      "maximum_native_magnitude": 2.49146031133528,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 10,
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.731148640577885e-14,
+      "native_l2": 1.971475148762409,
+      "scratch_l2": 1.971475148762325,
+      "difference_l2": 1.0479798226602582e-13,
+      "maximum_native_magnitude": 0.5112935173592985,
+      "outside_original_tolerance": 0,
+      "elements": 512
+    },
+    {
+      "parameter": 11,
+      "shape": [
+        128,
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 8.08242361927114e-13,
+      "native_l2": 92.83060433566556,
+      "scratch_l2": 92.83060433566209,
+      "difference_l2": 4.993997881286783e-12,
+      "maximum_native_magnitude": 10.67828915755471,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 12,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 4.938272013532696e-13,
+      "native_l2": 29.718828686655197,
+      "scratch_l2": 29.718828686654184,
+      "difference_l2": 1.052256873639909e-12,
+      "maximum_native_magnitude": 14.150199589537308,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 13,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.6965595595053173e-15,
+      "native_l2": 0.06938910066551238,
+      "scratch_l2": 0.0693891006655116,
+      "difference_l2": 4.721865836141756e-15,
+      "maximum_native_magnitude": 0.021836082454442997,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 14,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.822327011513636e-15,
+      "native_l2": 0.07478975995816617,
+      "scratch_l2": 0.07478975995816356,
+      "difference_l2": 6.130052558190598e-15,
+      "maximum_native_magnitude": 0.019015416238407162,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 15,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.352873534367973e-14,
+      "native_l2": 1.0161803855629319,
+      "scratch_l2": 1.0161803855628815,
+      "difference_l2": 5.636875587665213e-14,
+      "maximum_native_magnitude": 0.7357932560672118,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 16,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.865174681370263e-14,
+      "native_l2": 1.0619407819513704,
+      "scratch_l2": 1.061940781951328,
+      "difference_l2": 4.317005994603128e-14,
+      "maximum_native_magnitude": 0.47076644680894686,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 17,
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.6209256159527285e-13,
+      "native_l2": 12.24724122314652,
+      "scratch_l2": 12.24724122314612,
+      "difference_l2": 9.446703008707276e-13,
+      "maximum_native_magnitude": 1.4946972406962287,
+      "outside_original_tolerance": 0,
+      "elements": 49152
+    },
+    {
+      "parameter": 18,
+      "shape": [
+        384
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.2163881013549371e-14,
+      "native_l2": 0.43588804143631654,
+      "scratch_l2": 0.4358880414362974,
+      "difference_l2": 3.7535645637113815e-14,
+      "maximum_native_magnitude": 0.09734251863892604,
+      "outside_original_tolerance": 0,
+      "elements": 384
+    },
+    {
+      "parameter": 19,
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 7.127631818093505e-14,
+      "native_l2": 10.786864332875709,
+      "scratch_l2": 10.786864332875359,
+      "difference_l2": 8.097957062609458e-13,
+      "maximum_native_magnitude": 0.9089091380093568,
+      "outside_original_tolerance": 0,
+      "elements": 16384
+    },
+    {
+      "parameter": 20,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 7.355227538141662e-14,
+      "native_l2": 3.5890076259627293,
+      "scratch_l2": 3.5890076259625965,
+      "difference_l2": 2.675813403239086e-13,
+      "maximum_native_magnitude": 0.8163919655816232,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 21,
+      "shape": [
+        512,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.5349501104064984e-13,
+      "native_l2": 21.669113371788217,
+      "scratch_l2": 21.669113371787365,
+      "difference_l2": 1.23460995955337e-12,
+      "maximum_native_magnitude": 5.870779655547722,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 22,
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.574918139293004e-14,
+      "native_l2": 0.9981630221194208,
+      "scratch_l2": 0.9981630221193836,
+      "difference_l2": 4.444043535911089e-14,
+      "maximum_native_magnitude": 0.9074138246437322,
+      "outside_original_tolerance": 0,
+      "elements": 512
+    },
+    {
+      "parameter": 23,
+      "shape": [
+        128,
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 5.795364188543317e-14,
+      "native_l2": 14.8937682704864,
+      "scratch_l2": 14.893768270485975,
+      "difference_l2": 1.054952146767506e-12,
+      "maximum_native_magnitude": 0.7921436898653059,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 24,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 7.355227538141662e-14,
+      "native_l2": 3.5890076259627293,
+      "scratch_l2": 3.5890076259625965,
+      "difference_l2": 2.675813403239086e-13,
+      "maximum_native_magnitude": 0.8163919655816232,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 25,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.4847064550016498e-15,
+      "native_l2": 0.06246787265744399,
+      "scratch_l2": 0.062467872657441956,
+      "difference_l2": 6.089220978791996e-15,
+      "maximum_native_magnitude": 0.018768487596871154,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 26,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.560600607075635e-15,
+      "native_l2": 0.06490962905250013,
+      "scratch_l2": 0.0649096290524979,
+      "difference_l2": 7.022615837829022e-15,
+      "maximum_native_magnitude": 0.020496871826061816,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 27,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 4.045375145977914e-15,
+      "native_l2": 0.13863823192187721,
+      "scratch_l2": 0.13863823192187125,
+      "difference_l2": 1.0001249773457941e-14,
+      "maximum_native_magnitude": 0.05429997759810282,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 28,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.768618667658984e-15,
+      "native_l2": 0.14549536820343364,
+      "scratch_l2": 0.14549536820342718,
+      "difference_l2": 1.0110218379150757e-14,
+      "maximum_native_magnitude": 0.027880546546774736,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 29,
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 5.895284260759581e-14,
+      "native_l2": 5.651225476069631,
+      "scratch_l2": 5.65122547606941,
+      "difference_l2": 6.107831828014702e-13,
+      "maximum_native_magnitude": 0.45837258430923716,
+      "outside_original_tolerance": 0,
+      "elements": 49152
+    },
+    {
+      "parameter": 30,
+      "shape": [
+        384
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.1671219546371958e-14,
+      "native_l2": 0.26683520300384816,
+      "scratch_l2": 0.26683520300383384,
+      "difference_l2": 3.2415565020347044e-14,
+      "maximum_native_magnitude": 0.06712936769446336,
+      "outside_original_tolerance": 0,
+      "elements": 384
+    },
+    {
+      "parameter": 31,
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 7.177591854201637e-14,
+      "native_l2": 8.602126166736552,
+      "scratch_l2": 8.602126166736248,
+      "difference_l2": 9.470321244466209e-13,
+      "maximum_native_magnitude": 0.5575597782083287,
+      "outside_original_tolerance": 0,
+      "elements": 16384
+    },
+    {
+      "parameter": 32,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 6.789013795582832e-14,
+      "native_l2": 2.0138923670559303,
+      "scratch_l2": 2.0138923670558104,
+      "difference_l2": 2.639268798500176e-13,
+      "maximum_native_magnitude": 0.4278256075837848,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 33,
+      "shape": [
+        512,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 6.789013795582832e-14,
+      "native_l2": 7.612880707687347,
+      "scratch_l2": 7.612880707687213,
+      "difference_l2": 7.347610174093859e-13,
+      "maximum_native_magnitude": 0.44688785219478755,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 34,
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 7.441963711940502e-15,
+      "native_l2": 0.3017135626138523,
+      "scratch_l2": 0.30171356261384213,
+      "difference_l2": 3.459475085053047e-14,
+      "maximum_native_magnitude": 0.07908749728581878,
+      "outside_original_tolerance": 0,
+      "elements": 512
+    },
+    {
+      "parameter": 35,
+      "shape": [
+        128,
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.710054403110007e-13,
+      "native_l2": 20.84975116128841,
+      "scratch_l2": 20.849751161288008,
+      "difference_l2": 1.601488006053228e-12,
+      "maximum_native_magnitude": 4.211737557397969,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 36,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 6.789013795582832e-14,
+      "native_l2": 2.0138923670559303,
+      "scratch_l2": 2.0138923670558104,
+      "difference_l2": 2.639268798500176e-13,
+      "maximum_native_magnitude": 0.4278256075837848,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 37,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 9.041378756791119e-15,
+      "native_l2": 0.068684860920577,
+      "scratch_l2": 0.06868486092057237,
+      "difference_l2": 1.8204260118256908e-14,
+      "maximum_native_magnitude": 0.02127131646185792,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 38,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 6.8447851553354866e-15,
+      "native_l2": 0.10976487558475283,
+      "scratch_l2": 0.10976487558474297,
+      "difference_l2": 2.1561684873620464e-14,
+      "maximum_native_magnitude": 0.034645502026000065,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 39,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.9794556538907955e-15,
+      "native_l2": 0.07046315602924111,
+      "scratch_l2": 0.07046315602923821,
+      "difference_l2": 8.490386124516693e-15,
+      "maximum_native_magnitude": 0.02464118829297608,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 40,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.310651670001107e-15,
+      "native_l2": 0.07697702338989283,
+      "scratch_l2": 0.07697702338988913,
+      "difference_l2": 9.1537269897552e-15,
+      "maximum_native_magnitude": 0.017056042484203768,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 41,
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.867048182724318e-13,
+      "native_l2": 8.220202913690736,
+      "scratch_l2": 8.220202913690223,
+      "difference_l2": 1.4505148625485926e-12,
+      "maximum_native_magnitude": 0.8606332260529785,
+      "outside_original_tolerance": 0,
+      "elements": 49152
+    },
+    {
+      "parameter": 42,
+      "shape": [
+        384
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.3865458220750924e-14,
+      "native_l2": 0.3296733644432509,
+      "scratch_l2": 0.3296733644432264,
+      "difference_l2": 6.403475585802398e-14,
+      "maximum_native_magnitude": 0.1112598618372521,
+      "outside_original_tolerance": 0,
+      "elements": 384
+    },
+    {
+      "parameter": 43,
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.225997164373439e-14,
+      "native_l2": 3.6542996039019027,
+      "scratch_l2": 3.6542996039018045,
+      "difference_l2": 3.4550876313123393e-13,
+      "maximum_native_magnitude": 0.22277632656262045,
+      "outside_original_tolerance": 0,
+      "elements": 16384
+    },
+    {
+      "parameter": 44,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.8413716652030416e-14,
+      "native_l2": 1.2385045295634418,
+      "scratch_l2": 1.2385045295634027,
+      "difference_l2": 1.317033139325164e-13,
+      "maximum_native_magnitude": 0.3153492365326088,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 45,
+      "shape": [
+        512,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 6.85423939827956e-14,
+      "native_l2": 8.568136200678214,
+      "scratch_l2": 8.568136200678083,
+      "difference_l2": 9.63475491360572e-13,
+      "maximum_native_magnitude": 0.5612491007965116,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 46,
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 9.188830252249147e-15,
+      "native_l2": 0.2740530449716562,
+      "scratch_l2": 0.27405304497164606,
+      "difference_l2": 3.678870843492513e-14,
+      "maximum_native_magnitude": 0.06270133182385067,
+      "outside_original_tolerance": 0,
+      "elements": 512
+    },
+    {
+      "parameter": 47,
+      "shape": [
+        128,
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 4.490852134608758e-14,
+      "native_l2": 8.5184694327691,
+      "scratch_l2": 8.518469432768992,
+      "difference_l2": 7.353378237079329e-13,
+      "maximum_native_magnitude": 0.45207107340320446,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 48,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.8413716652030416e-14,
+      "native_l2": 1.2385045295634418,
+      "scratch_l2": 1.2385045295634027,
+      "difference_l2": 1.317033139325164e-13,
+      "maximum_native_magnitude": 0.3153492365326088,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 49,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.9305984722283185e-15,
+      "native_l2": 0.05735556888440592,
+      "scratch_l2": 0.05735556888440461,
+      "difference_l2": 8.501828702387548e-15,
+      "maximum_native_magnitude": 0.028310076148328922,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 50,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.5942108744226857e-15,
+      "native_l2": 0.07055621625138626,
+      "scratch_l2": 0.07055621625138528,
+      "difference_l2": 8.68500103743765e-15,
+      "maximum_native_magnitude": 0.018190041836896997,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 51,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 7.389922007661198e-16,
+      "native_l2": 0.08564268035310672,
+      "scratch_l2": 0.085642680353106,
+      "difference_l2": 2.1686075312015744e-15,
+      "maximum_native_magnitude": 0.028479206026755303,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 52,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 6.192962809237201e-16,
+      "native_l2": 0.08930934222665668,
+      "scratch_l2": 0.08930934222665612,
+      "difference_l2": 2.2352317140165117e-15,
+      "maximum_native_magnitude": 0.020035767781903035,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 53,
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.04638520070921e-14,
+      "native_l2": 8.373560433468565,
+      "scratch_l2": 8.373560433468533,
+      "difference_l2": 1.5303343248275053e-13,
+      "maximum_native_magnitude": 0.6998564480130008,
+      "outside_original_tolerance": 0,
+      "elements": 49152
+    },
+    {
+      "parameter": 54,
+      "shape": [
+        384
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.304512053934559e-15,
+      "native_l2": 0.3058381380366072,
+      "scratch_l2": 0.30583813803660614,
+      "difference_l2": 6.008016850166152e-15,
+      "maximum_native_magnitude": 0.08564309332342784,
+      "outside_original_tolerance": 0,
+      "elements": 384
+    },
+    {
+      "parameter": 55,
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.316791286067655e-15,
+      "native_l2": 4.464807824884834,
+      "scratch_l2": 4.464807824884821,
+      "difference_l2": 5.174363802715573e-14,
+      "maximum_native_magnitude": 0.23209089687184983,
+      "outside_original_tolerance": 0,
+      "elements": 16384
+    },
+    {
+      "parameter": 56,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.3584246494910985e-15,
+      "native_l2": 1.1291340797850014,
+      "scratch_l2": 1.1291340797849985,
+      "difference_l2": 1.3910721919125343e-14,
+      "maximum_native_magnitude": 0.28132206268175547,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 57,
+      "shape": [
+        512,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.67841304690819e-14,
+      "native_l2": 7.560524397343695,
+      "scratch_l2": 7.56052439734367,
+      "difference_l2": 1.8044855126517843e-13,
+      "maximum_native_magnitude": 0.4274786585371098,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 58,
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 4.440892098500626e-15,
+      "native_l2": 0.2825433368169872,
+      "scratch_l2": 0.282543336816986,
+      "difference_l2": 6.917591190525551e-15,
+      "maximum_native_magnitude": 0.05371297369671524,
+      "outside_original_tolerance": 0,
+      "elements": 512
+    },
+    {
+      "parameter": 59,
+      "shape": [
+        128,
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 4.440892098500626e-15,
+      "native_l2": 7.578912220827703,
+      "scratch_l2": 7.578912220827694,
+      "difference_l2": 6.878183272918489e-14,
+      "maximum_native_magnitude": 0.35510479925617056,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 60,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.3584246494910985e-15,
+      "native_l2": 1.1291340797850014,
+      "scratch_l2": 1.1291340797849985,
+      "difference_l2": 1.3910721919125343e-14,
+      "maximum_native_magnitude": 0.28132206268175547,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 61,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.745199900733297e-16,
+      "native_l2": 0.024179809868211593,
+      "scratch_l2": 0.024179809868211503,
+      "difference_l2": 9.453206413249836e-16,
+      "maximum_native_magnitude": 0.01240314431367354,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 62,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.4289784633358948e-16,
+      "native_l2": 0.024669994653173887,
+      "scratch_l2": 0.024669994653173866,
+      "difference_l2": 9.809764090778972e-16,
+      "maximum_native_magnitude": 0.008077630278456302,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 63,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.9255430583342559e-16,
+      "native_l2": 0.11510893745264818,
+      "scratch_l2": 0.11510893745264819,
+      "difference_l2": 4.581063647071636e-16,
+      "maximum_native_magnitude": 0.06463025611276862,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 64,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.3010426069826053e-16,
+      "native_l2": 0.0803132762739065,
+      "scratch_l2": 0.0803132762739065,
+      "difference_l2": 4.999228353892041e-16,
+      "maximum_native_magnitude": 0.01679434846343558,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 65,
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.5457747848965937e-15,
+      "native_l2": 7.668497255698705,
+      "scratch_l2": 7.668497255698693,
+      "difference_l2": 3.4146308617306914e-14,
+      "maximum_native_magnitude": 0.6231250866555149,
+      "outside_original_tolerance": 0,
+      "elements": 49152
+    },
+    {
+      "parameter": 66,
+      "shape": [
+        384
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.5673907444456745e-16,
+      "native_l2": 0.16316676025567126,
+      "scratch_l2": 0.163166760255671,
+      "difference_l2": 7.60989354310995e-16,
+      "maximum_native_magnitude": 0.04400496486777553,
+      "outside_original_tolerance": 0,
+      "elements": 384
+    },
+    {
+      "parameter": 67,
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.7763568394002505e-15,
+      "native_l2": 5.868528567071494,
+      "scratch_l2": 5.868528567071484,
+      "difference_l2": 2.562765156502527e-14,
+      "maximum_native_magnitude": 0.4010725109174322,
+      "outside_original_tolerance": 0,
+      "elements": 16384
+    },
+    {
+      "parameter": 68,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.1102230246251565e-15,
+      "native_l2": 1.0220251914550704,
+      "scratch_l2": 1.0220251914550693,
+      "difference_l2": 4.408412942286072e-15,
+      "maximum_native_magnitude": 0.3167147587060376,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 69,
+      "shape": [
+        512,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.0539125955565396e-15,
+      "native_l2": 8.790237941461315,
+      "scratch_l2": 8.790237941461307,
+      "difference_l2": 3.468645009996463e-14,
+      "maximum_native_magnitude": 0.51996546609816,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 70,
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.6020852139652106e-16,
+      "native_l2": 0.3036657854402305,
+      "scratch_l2": 0.3036657854402303,
+      "difference_l2": 1.3086266356949994e-15,
+      "maximum_native_magnitude": 0.06080623432983932,
+      "outside_original_tolerance": 0,
+      "elements": 512
+    },
+    {
+      "parameter": 71,
+      "shape": [
+        128,
+        512
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 3.4416913763379853e-15,
+      "native_l2": 11.837873782696139,
+      "scratch_l2": 11.83787378269613,
+      "difference_l2": 4.43722520098647e-14,
+      "maximum_native_magnitude": 1.1016967293072781,
+      "outside_original_tolerance": 0,
+      "elements": 65536
+    },
+    {
+      "parameter": 72,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.1102230246251565e-15,
+      "native_l2": 1.0220251914550704,
+      "scratch_l2": 1.0220251914550693,
+      "difference_l2": 4.408412942286072e-15,
+      "maximum_native_magnitude": 0.3167147587060376,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 73,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 2.7755575615628914e-16,
+      "native_l2": 0.1258425275348839,
+      "scratch_l2": 0.12584252753488362,
+      "difference_l2": 3.882791499447864e-16,
+      "maximum_native_magnitude": 0.11400261758237383,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 74,
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 8.673617379884035e-17,
+      "native_l2": 0.07215528036568664,
+      "scratch_l2": 0.07215528036568652,
+      "difference_l2": 3.1822929549824965e-16,
+      "maximum_native_magnitude": 0.02304635816892515,
+      "outside_original_tolerance": 0,
+      "elements": 128
+    },
+    {
+      "parameter": 75,
+      "shape": [
+        50304,
+        128
+      ],
+      "dtype": "torch.float64",
+      "maximum_absolute": 1.7541523789077473e-14,
+      "native_l2": 21.780636961743326,
+      "scratch_l2": 21.780636961743305,
+      "difference_l2": 9.341865460255408e-14,
+      "maximum_native_magnitude": 3.33952515127461,
+      "outside_original_tolerance": 0,
+      "elements": 6438912
+    }
+  ],
+  "maximum_gradient_difference": 8.704148513061227e-13,
+  "outside_original_tolerance": 0,
+  "shadow_sgd_coordinate_error_bound": 8.704148513061229e-18,
+  "optimizer_steps": 0,
+  "sampling_calls": 0
+}

@@ -1,0 +1,56 @@
+{
+  "source": "src/learn/data/topics/regularization-l1-l2-elastic-net-dropout.jsx",
+  "scope": "Complete literal JSX question/hint/solution blocks, preserved without evaluation.",
+  "tasks": [
+    {
+      "id": "O01",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"1. Shrinkage with a different sign\"\n      question={<>For <Math>{'\\\\frac12(w+2.4)^2'}</Math> and λ=0.6, find ridge, lasso and elastic-net ρ=0.5 coefficients. Explain why a zero answer is not appropriate here.</>}\n      hint=\"The data preference z is −2.4. Apply the threshold before the elastic-net denominator.\">\n      <Prose>Ridge is −2.4/1.6={num(scalarSolution(-2.4, 0.6, 0).coefficient)}. Lasso is {num(scalarSolution(-2.4, 0.6, 1).coefficient)}. Elastic net is (−2.4+0.3)/1.3=−21/13≈{num(Number(scalarSolution(-2.4, 0.6, 0.5).coefficient.toFixed(6)))}. The absolute data preference exceeds each relevant threshold.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "28a45220808602c1d73d7650208eb076b3007b772a83ad9fac508de35eeb24c9"
+    },
+    {
+      "id": "O02",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"2. What changes under a different measurement origin?\"\n      question=\"In the four-row example, fit lasso with λ=0.5, then increase every target by three. Give both sets of slopes and intercepts. Would penalizing the intercept necessarily preserve this result?\">\n      <Prose>The slopes are (2.5,0) in both fits. The original intercept is zero and the shifted intercept is three. Excluding the intercept allows an exact translation without changing the slope objective. An intercept penalty introduces an extra cost for that translation and can change the result.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "8ac350d04d36acbcac2e4effd50c56c813b39639aae95334c4b78b7adf9dbab3"
+    },
+    {
+      "id": "O03",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"3. A missing sample-count factor\"\n      question={<>You want our ridge objective with λ=0.2 on eighty training rows. Which <Code>Ridge(alpha=...)</Code> matches it? Which <Code>Lasso(alpha=...)</Code> matches pure L1 at the same λ convention? What happens to ridge&rsquo;s native alpha on a sixty-row fold?</>}>\n      <Prose>Ridge needs alpha=16 on eighty rows and alpha=12 on sixty rows. Lasso uses alpha=0.2 in either case. This follows from multiplying our ridge objective by 2n, not from treating the two parameter names as equivalent. It does not say that matching numerical λ gives the two penalty shapes identical effects.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "cb15a221ba2fabd3d8453f3f30aa428f92272335e780b565d34ab7dcdadbdd66"
+    },
+    {
+      "id": "O04",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"4. Duplicate sensors\"\n      question=\"The duplicate-feature example now has target 3x and lasso λ=0.5. Give the optimal coefficient sum and two different minimizers. What extra fact would you need before calling one sensor causally important?\">\n      <Prose>The optimal sum is 2.5. Pairs (2.5,0) and (1.25,1.25) both minimize the objective, as do other nonnegative allocations of that sum. The observational duplicate design does not identify which sensor is causally relevant; that requires an appropriate causal question, assumptions and evidence beyond this fit.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "d36960307eaf23e59536ed4c3f0a81b4a0052f2c09ab9db40f73895a605f0cd2"
+    },
+    {
+      "id": "O05",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"5. Exact dropout without uniform mask probabilities\"\n      question=\"Let x=(1,2), w=(2,0), y=1 and keep probability q=0.75. Compute the clean prediction, expected noisy prediction, clean half-squared loss and expected noisy half-squared loss. Why does the second mask not affect the answer?\"\n      hint=\"Only the first coordinate contributes. Its noisy prediction is zero with probability 1/4 and 8/3 with probability 3/4.\">\n      <Prose>Both clean and expected predictions are two. Clean half-squared loss is 1/2. Expected noisy loss is <Math>{'(1/4)(1/2)+(3/4)(25/18)=7/6'}</Math>. The difference is 2/3, matching <Math>{'(1-q)/(2q)\\\\,4'}</Math>. The second coefficient is zero, so changing that mask cannot change the weighted sum. The dropout investigation loads this exact fixture from its practice preset.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "8a2f93155a1c14d6d94a71e820276fddbae20eafebc10f3ce3943640b94e84ec"
+    },
+    {
+      "id": "O06",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"6. Read the actual experiment\"\n      question=\"A learner sees the λ=0.001 lasso result and says: “Lasso always selects fewer inputs than ridge, and the smallest score proves this family will win on a new airfoil.” Identify two separate errors. What does the λ=10 result legitimately demonstrate?\">\n      <Prose>The final selected lasso fit keeps all twenty terms, so L1 does not guarantee sparsity at the selected setting. These are development selection scores in a row-level design, not independent evidence about a new airfoil/run or a decisive family ranking. At λ=10 all lasso slopes are zero in the three folds, and the unpenalized intercept reproduces the corresponding mean baseline.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "7fc2530cf206f9006e60fb7a7ba4d8540d6343459ff96bf601b40af1091391df"
+    },
+    {
+      "id": "O07",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"7. A changed factor penalty — deeper\"\n      question={<>Minimize <Math>{'\\\\frac12(ab-1)^2+0.1(a^2+b^2)'}</Math>. Give the optimal product and balanced factors. Compare its total cost with the balanced zero-data-loss pair (1,1).</>}>\n      <Prose>The product is {factorOptimum(0.1).product} and equal-sign factors have magnitude √0.8≈{factorOptimum(0.1).magnitude.toFixed(6)}. Data cost is {factorOptimum(0.1).data.toFixed(2)}, penalty is {factorOptimum(0.1).penalty.toFixed(2)} and total is {factorOptimum(0.1).total.toFixed(2)}, below the {factorOptimum(0.1).balancedZeroLoss.total.toFixed(1)} of (1,1). Minimizing the penalty while insisting on zero data loss misses the actual full optimum.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "fac799ebe0103c4d81a54544ebd945b3198272d99cbeca7d4d3f54b7b30239c8"
+    },
+    {
+      "id": "O08",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"8. A code has to pay for its chosen pattern — deeper\"\n      question={<>Using the declared sixteen-bit code, encode <Code>1110111011101110</Code>. Give the mode, payload and total length. If someone chooses a different four-bit pattern after seeing the data but charges only the flag, what is missing?</>}>\n      <Prose>Mode 1, payload 1110, total five bits. The receiver must learn which of sixteen possible patterns was selected, so the four-bit pattern description cannot be omitted. The receiver already knows the total message length and the repeat rule under this declared code.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "6920b100b1453a902693e826b074257bb8b9da51f75eb5e5358f8c7f5554d57c"
+    },
+    {
+      "id": "O09",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"9. Criteria can disagree — deeper\"\n      question=\"On n=50 observations, a smaller model has log likelihood −80 and k=2. A larger model has log likelihood −77 and k=4. Compute AIC and BIC for both. Does disagreement imply a calculation error?\">\n      <Prose>AIC values are {criteria(-80, 2, 50).aic} and {criteria(-77, 4, 50).aic}, favoring the larger model. BIC values are <Math>{'160+2\\\\log50\\\\approx'}</Math>{criteria(-80, 2, 50).bic.toFixed(4)} and <Math>{'154+4\\\\log50\\\\approx'}</Math>{criteria(-77, 4, 50).bic.toFixed(4)}, favoring the smaller. The different penalties reflect different goals and assumptions; disagreement alone is not an error. These formulas still require compatible regular likelihood models and correctly counted parameters.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "94177f897f52625ffdfc1ffd780b47f7137dacbade95dc5b4785e0ebcd306250"
+    },
+    {
+      "id": "O10",
+      "source": "<div className=\"lesson-exercise\" data-lesson-exercise=\"\"><Practice title=\"10. A smoothness-preserving shift — deeper\"\n      question=\"Change the difference-penalty input from (0,2,0) to (3,5,3), keeping λ=1 and the unaveraged objective. Predict the solution without solving another matrix system. Would identity-based ridge make the same shift?\">\n      <Prose>The difference-penalty solution becomes ({shifted.difference.map(num).join(', ')}), because adding a constant lies in L&rsquo;s null space. Identity-based ridge gives ({shifted.identity.map(num).join(', ')}), so its output shift is only 1.5. The penalties express different preferences.</Prose>\n    </Practice></div>",
+      "sha256Utf8": "972a734dc7647a524b0335e2aa0c38d7b7d197d6a99356d6fcf20d837987244f"
+    }
+  ]
+}

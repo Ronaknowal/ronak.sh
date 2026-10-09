@@ -1,0 +1,14 @@
+standard center/scale [22.0] [39.01281840626232] later150 3.280973
+minmax center/scale [1.0] [99.0] later150 1.505051
+robust center/scale [3.0] [2.0] later150 73.5
+maxabs center/scale [0.0] [100.0] later150 1.5
+constant later7/9: [0.0, 2.0]
+row l1 [[0.428571, 0.571429], [0.428571, 0.571429], [0.0, 0.0]]
+row l2 [[0.6, 0.8], [0.6, 0.8], [0.0, 0.0]]
+row max [[0.75, 1.0], [0.75, 1.0], [0.0, 0.0]]
+sparse scale-only nnz: 3 3
+centered dense nnz: 9
+metric baseline/doubled: [2.0, 9.0001] [0.5, 2.250025]
+refused: no observed fitting value in a column
+refused: feature names/order differ from fit
+refused: nonempty rows × features; finite numbers or NaN

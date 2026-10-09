@@ -1,0 +1,44 @@
+{
+  "topic": {
+    "id": "t-sne-umap-manifold-learning",
+    "title": "t-SNE, UMAP & Manifold Learning",
+    "category": "classical-ml",
+    "trackId": "classical-ml",
+    "trackIds": [
+      "classical-ml"
+    ],
+    "level": "intermediate",
+    "section": "Unsupervised Learning",
+    "readTime": "~60 min first pass · deeper branches + 60–90 min investigations and practice",
+    "prerequisiteIds": [
+      "pca-dimensionality-reduction"
+    ],
+    "designStatus": "topic-brief-ready",
+    "depth": "core",
+    "hasOutline": false,
+    "hasIntegratedGuide": true,
+    "status": "published",
+    "order": 73
+  },
+  "modulePosition": 17,
+  "globalPosition": 74,
+  "neighbors": [
+    {
+      "id": "gaussian-mixture-models-gmm-em-algorithm",
+      "title": "Gaussian Mixture Models (GMM) & EM Algorithm"
+    },
+    {
+      "id": "t-sne-umap-manifold-learning",
+      "title": "t-SNE, UMAP & Manifold Learning"
+    },
+    {
+      "id": "independent-component-analysis-ica",
+      "title": "Independent Component Analysis (ICA)"
+    },
+    {
+      "id": "non-negative-matrix-factorization-nmf",
+      "title": "Non-Negative Matrix Factorization (NMF)"
+    }
+  ],
+  "scope": "scoped selected catalogue import only; no global inventory/checker"
+}

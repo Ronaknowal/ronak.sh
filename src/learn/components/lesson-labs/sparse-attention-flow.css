@@ -1,0 +1,94 @@
+.sparse-attention-lesson.lesson-flow {
+  container: sparse-attention-lesson / inline-size;
+  overflow-wrap: break-word;
+}
+.sparse-attention-lesson.lesson-flow .sparse-flow-drawing {
+  margin-inline: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.sparse-flow-scroll, .sparse-equation-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+.sparse-flow-scroll:focus-visible, .sparse-equation-scroll:focus-visible {
+  outline: 2px solid #e4b752;
+  outline-offset: 4px;
+}
+.sparse-flow-scroll > svg {
+  display: block;
+  height: auto;
+  font-family: var(--font-mono, ui-monospace, monospace);
+}
+.sparse-flow-scroll-hint {
+  display: block;
+  margin-block: .6rem;
+  color: #b9b9b9;
+  font-size: .88rem;
+  line-height: 1.6;
+}
+.sparse-flow-scroll-hint--small { display: none; }
+.sparse-flow-independent-scenes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+.sparse-flow-field {
+  display: grid;
+  gap: .35rem;
+  max-width: 100%;
+  color: #b9b9b9;
+}
+.sparse-attention-lesson.lesson-flow .sparse-flow-field input[type='number'],
+.sparse-attention-lesson.lesson-flow .sparse-flow-field select {
+  font: inherit;
+  color: #f0cd7c;
+  background: #161616;
+  border: 1px solid #5a5a5a;
+  padding: .45rem .6rem;
+  min-height: max(44px, 2.5rem);
+  border-radius: 3px;
+  width: 100%;
+}
+.sparse-attention-lesson.lesson-flow .sparse-flow-field input[aria-invalid='true'] { border-color: #eda064; }
+.sparse-attention-lesson.lesson-flow .sparse-flow-field input:focus-visible,
+.sparse-attention-lesson.lesson-flow .sparse-flow-field select:focus-visible {
+  outline: 2px solid #e4b752;
+  outline-offset: 3px;
+}
+.sparse-flow-field [role='status'] { color: #e8c38c; max-width: 32rem; font-size: .9rem; line-height: 1.6; }
+.sparse-flow-toggle { display: flex; align-items: center; gap: .6rem; color: #b9b9b9; min-height: 44px; }
+.sparse-attention-lesson .sparse-flow-toggle input,
+.sparse-attention-lesson .flow-controls input[type='range'] { accent-color: #e4b752; }
+.sparse-attention-lesson.lesson-flow .flow-controls button,
+.sparse-attention-lesson.lesson-flow .flow-controls input:not([type='checkbox']),
+.sparse-attention-lesson.lesson-flow .flow-controls select {
+  min-height: max(44px, 2.75rem);
+}
+.sparse-equation-scroll .katex-display { text-align: left; }
+.sparse-equation-scroll .katex-display > .katex, .sparse-equation-scroll .katex-html { width: max-content; }
+.sparse-attention-lesson.lesson-flow .lesson-code-source__pending button {
+  font: inherit;
+  color: #f0cd7c;
+  background: #161616;
+  border: 1px solid #5a5a5a;
+  border-radius: 4px;
+  padding: .3rem .7rem;
+  min-height: max(44px, 2.25rem);
+}
+.sparse-attention-lesson.lesson-flow .lesson-code-source__pending button:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+@container sparse-attention-lesson (max-width: 850px) {
+  .sparse-flow-independent-scenes { grid-template-columns: minmax(0, 1fr); }
+}
+@container sparse-attention-lesson (max-width: 340px) {
+  .sparse-flow-scroll-hint--small { display: block; }
+}
+
+.sparse-attention-lesson.lesson-flow .lesson-code-source__pending a {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}

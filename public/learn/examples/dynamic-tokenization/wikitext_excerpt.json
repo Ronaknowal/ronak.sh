@@ -1,0 +1,643 @@
+{
+  "dataset": "Salesforce/wikitext",
+  "configuration": "wikitext-2-raw-v1",
+  "retrieved_at_utc": "2026-10-06T22:38:56.707435+00:00",
+  "dataset_revision_at_retrieval": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "retrieval_scope": "Official dataset rows API does not identify its served git revision; exact response hashes and the retained fixture bind the data. No claim of matching a pinned Parquet file.",
+  "source": "https://huggingface.co/datasets/Salesforce/wikitext",
+  "license": "CC-BY-SA-3.0 (dataset metadata); alternative GFDL also listed",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "attribution": "Wikipedia contributors; WikiText collection by Stephen Merity, Caiming Xiong, James Bradbury and Richard Socher (2016)",
+  "selection": "First 80 train / 20 validation / 20 test non-heading prose rows of at least 100 characters, first 256 characters, in source order",
+  "modification": "Strip source row outer whitespace and retain its prefix; no Unicode normalization, punctuation repair or generated examples",
+  "api_responses": {
+    "train": [
+      {
+        "url": "https://datasets-server.huggingface.co/rows?dataset=Salesforce%2Fwikitext&config=wikitext-2-raw-v1&split=train&offset=0&length=100",
+        "sha256": "3f669a81cdf8d182a602aa4a544bd7ead9ca72424cd55e473deb436bd436420b"
+      },
+      {
+        "url": "https://datasets-server.huggingface.co/rows?dataset=Salesforce%2Fwikitext&config=wikitext-2-raw-v1&split=train&offset=100&length=100",
+        "sha256": "0b8c7a4211af1fe2b5684d2b1a209b3a24aac7012ac114a6cfe5e8764eaa295a"
+      }
+    ],
+    "validation": [
+      {
+        "url": "https://datasets-server.huggingface.co/rows?dataset=Salesforce%2Fwikitext&config=wikitext-2-raw-v1&split=validation&offset=0&length=100",
+        "sha256": "93931489059a6c06a0d81c1367b6ef89ab31460f4ff8a342a0215f809bc1224a"
+      }
+    ],
+    "test": [
+      {
+        "url": "https://datasets-server.huggingface.co/rows?dataset=Salesforce%2Fwikitext&config=wikitext-2-raw-v1&split=test&offset=0&length=100",
+        "sha256": "08ef9d542bf24fbb1e22dc4b96d6651c0a3622be974c71566d32a397f2eafeca"
+      }
+    ]
+  },
+  "train": [
+    {
+      "source_row": 3,
+      "article": "Valkyria Chronicles III",
+      "text": "Senjō no Valkyria 3 : Unrecorded Chronicles ( Japanese : 戦場のヴァルキュリア3 , lit . Valkyria of the Battlefield 3 ) , commonly referred to as Valkyria Chronicles III outside Japan , is a tactical role @-@ playing video game developed by Sega and Media.Vision for "
+    },
+    {
+      "source_row": 4,
+      "article": "Valkyria Chronicles III",
+      "text": "The game began development in 2010 , carrying over a large portion of the work done on Valkyria Chronicles II . While it retained the standard features of the series , it also underwent multiple adjustments , such as making the game more forgiving for seri"
+    },
+    {
+      "source_row": 5,
+      "article": "Valkyria Chronicles III",
+      "text": "It met with positive sales in Japan , and was praised by both Japanese and western critics . After release , it received downloadable content , along with an expanded edition in November of that year . It was also adapted into manga and an original video a"
+    },
+    {
+      "source_row": 9,
+      "article": "Valkyria Chronicles III",
+      "text": "As with previous Valkyira Chronicles games , Valkyria Chronicles III is a tactical role @-@ playing game where players take control of a military unit and take part in missions against enemy forces . Stories are told through comic book @-@ like panels with"
+    },
+    {
+      "source_row": 10,
+      "article": "Valkyria Chronicles III",
+      "text": "The game 's battle system , the BliTZ system , is carried over directly from Valkyira Chronicles . During missions , players select each unit using a top @-@ down perspective of the battlefield map : once a character is selected , the player moves the char"
+    },
+    {
+      "source_row": 11,
+      "article": "Valkyria Chronicles III",
+      "text": "Troops are divided into five classes : Scouts , Shocktroopers , Engineers , Lancers and Armored Soldier . Troopers can switch classes by changing their assigned weapon . Changing class does not greatly affect the stats gained while in a previous class . Wi"
+    },
+    {
+      "source_row": 15,
+      "article": "Valkyria Chronicles III",
+      "text": "The game takes place during the Second Europan War . Gallian Army Squad 422 , also known as \" The Nameless \" , are a penal military unit composed of criminals , foreign deserters , and military offenders whose real names are erased from the records and the"
+    },
+    {
+      "source_row": 16,
+      "article": "Valkyria Chronicles III",
+      "text": "As the Nameless officially do not exist , the upper echelons of the Gallian Army exploit the concept of plausible deniability in order to send them on missions that would otherwise make Gallia lose face in the war . While at times this works to their advan"
+    },
+    {
+      "source_row": 17,
+      "article": "Valkyria Chronicles III",
+      "text": "Partly due to these events , and partly due to the major losses in manpower Gallia suffers towards the end of the war with the Empire , the Nameless are offered a formal position as a squad in the Gallian Army rather than serve as an anonymous shadow force"
+    },
+    {
+      "source_row": 21,
+      "article": "Valkyria Chronicles III",
+      "text": "Concept work for Valkyria Chronicles III began after development finished on Valkyria Chronicles II in early 2010 , with full development beginning shortly after this . The director of Valkyria Chronicles II , Takeshi Ozawa , returned to that role for Valk"
+    },
+    {
+      "source_row": 22,
+      "article": "Valkyria Chronicles III",
+      "text": "The majority of material created for previous games , such as the BLiTZ system and the design of maps , was carried over . Alongside this , improvements were made to the game 's graphics and some elements were expanded , such as map layouts , mission struc"
+    },
+    {
+      "source_row": 26,
+      "article": "Valkyria Chronicles III",
+      "text": "The music was composed by Hitoshi Sakimoto , who had also worked on the previous Valkyria Chronicles games . When he originally heard about the project , he thought it would be a light tone similar to other Valkyria Chronicles games , but found the themes "
+    },
+    {
+      "source_row": 30,
+      "article": "Valkyria Chronicles III",
+      "text": "In September 2010 , a teaser website was revealed by Sega , hinting at a new Valkyria Chronicles game . In its September issue , Famitsu listed that Senjō no Valkyria 3 would be arriving on the PlayStation Portable . Its first public appearance was at the "
+    },
+    {
+      "source_row": 31,
+      "article": "Valkyria Chronicles III",
+      "text": "Unlike its two predecessors , Valkyria Chronicles III was not released in the west . According to Sega , this was due to poor sales of Valkyria Chronicles II and the general unpopularity of the PSP in the west . An unofficial fan translation patch began de"
+    },
+    {
+      "source_row": 35,
+      "article": "Valkyria Chronicles III",
+      "text": "On its day of release in Japan , Valkyria Chronicles III topped both platform @-@ exclusive and multi @-@ platform sales charts . By early February , the game sold 102 @,@ 779 units , coming in second overall to The Last Story for the Wii . By the end of t"
+    },
+    {
+      "source_row": 36,
+      "article": "Valkyria Chronicles III",
+      "text": "Famitsu enjoyed the story , and were particularly pleased with the improvements to gameplay . Japanese gaming site Game Watch Impress , despite negatively noting its pacing and elements recycled from previous games , was generally positive about its story "
+    },
+    {
+      "source_row": 37,
+      "article": "Valkyria Chronicles III",
+      "text": "PlayStation Official Magazine - UK praised the story 's blurring of Gallia 's moral standing , art style , and most points about its gameplay , positively noting the latter for both its continued quality and the tweaks to balance and content . Its one majo"
+    },
+    {
+      "source_row": 38,
+      "article": "Valkyria Chronicles III",
+      "text": "In a preview of the TGS demo , Ryan Geddes of IGN was left excited as to where the game would go after completing the demo , along with enjoying the improved visuals over Valkyria Chronicles II . Kotaku 's Richard Eisenbeis was highly positive about the ga"
+    },
+    {
+      "source_row": 42,
+      "article": "Valkyria Chronicles III",
+      "text": "Kurt and Riela were featured in the Nintendo 3DS crossover Project X Zone , representing the Valkyria series . Media.Vision would return to the series to develop Valkyria : Azure Revolution , with Ozawa returning as director . Azure Revolution is a role @-"
+    },
+    {
+      "source_row": 46,
+      "article": "Valkyria Chronicles III",
+      "text": "Valkyria Chronicles 3 was adapted into a two @-@ episode original video animation series in the same year of its release . Titled Senjō no Valkyria 3 : Taga Tame no Jūsō ( 戦場のヴァルキュリア３ 誰がための銃瘡 , lit . Valkyria of the Battlefield 3 : The Wound Taken for Some"
+    },
+    {
+      "source_row": 47,
+      "article": "Valkyria Chronicles III",
+      "text": "The anime 's title was inspired by the principle purpose of the Nameless : to suffer in battle for the goals of others . A subtitle attached to the project during development was \" The Road to Kubinka \" , which referenced the Kubinka Tank Museum in Moscow "
+    },
+    {
+      "source_row": 48,
+      "article": "Valkyria Chronicles III",
+      "text": "Two manga adaptations were produced , following each of the game 's main female protagonists Imca and Riela . They were Senjō no Valkyria 3 : Namo naki Chikai no Hana ( 戦場のヴァルキュリア3 名もなき誓いの花 , lit . Valkyria of the Battlefield 3 : The Flower of the Nameless"
+    },
+    {
+      "source_row": 53,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The Tower Building of the Little Rock Arsenal , also known as U.S. Arsenal Building , is a building located in MacArthur Park in downtown Little Rock , Arkansas . Built in 1840 , it was part of Little Rock 's first military installation . Since its decommi"
+    },
+    {
+      "source_row": 54,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The building receives its name from its distinct octagonal tower . Besides being the last remaining structure of the original Little Rock Arsenal and one of the oldest buildings in central Arkansas , it was also the birthplace of General Douglas MacArthur "
+    },
+    {
+      "source_row": 58,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The arsenal was constructed at the request of Governor James Sevier Conway in response to the perceived dangers of frontier life and fears of the many Native Americans who were passing through the state on their way to the newly established Oklahoma Territ"
+    },
+    {
+      "source_row": 62,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "For several years the arsenal , which was owned by the federal government , served as a simple arms depot and was staffed with only a handful of soldiers . But in November 1860 , with the American Civil War on the horizon , a company of the Second United S"
+    },
+    {
+      "source_row": 63,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The United States troops at the outposts of the western frontier of the state and in the Indian nation have all been recalled from winter quarters to reinforce the garrison at Fort Smith . The garrison at Fort Smith had been previously transferred to the U"
+    },
+    {
+      "source_row": 65,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The item was intended simply as a piece of news , but telegraph lines quickly spread the news throughout the state , fueling procession sentiment . The rumor was interpreted by some Arkansans as a call from the governor to assemble to help expel the federa"
+    },
+    {
+      "source_row": 66,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "This movement is prompted by the feeling that pervades the citizens of this State that in the present emergency the arms and munitions of war in the Arsenal should be under the control of the State authorities , in order to their security . This movement ,"
+    },
+    {
+      "source_row": 67,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Perhaps because Abraham Lincoln had not yet been inaugurated as President , Captain Totten received no instructions from his superiors and was forced to withdraw his troops . He agreed to surrender the arsenal as long as the governor agreed to three provis"
+    },
+    {
+      "source_row": 69,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The soldiers would be allowed safe passage in any direction carrying any personal and public property besides munitions of war ."
+    },
+    {
+      "source_row": 70,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The soldiers would be allowed to march away as men leaving under orders , not as conquered and surrendering soldiers ."
+    },
+    {
+      "source_row": 71,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "On the morning of February 8 , 1861 , Rector and Totten signed an agreement placing the arsenal in the hands of state officials . That afternoon , the citizen militia marched to the arsenal with Governor Rector at its head . All of the federal troops had l"
+    },
+    {
+      "source_row": 72,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The Little Rock Arsenal was classified in 1860 as an \" arsenal of deposit , \" meaning that it was simply a warehouse for the storage of weapons intended for the use of the state militia in times of crisis . Thus there were no substantial operations for ord"
+    },
+    {
+      "source_row": 73,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Inside the Little Rock Arsenal after its seizure in February , 1861 , the Confederates inventoried some 10 @,@ 247 weapons , 250 @,@ 000 musket cartridges , and 520 @,@ 000 percussion caps , as well as the four bronze cannon of Totten 's battery . Long arm"
+    },
+    {
+      "source_row": 84,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Of this number , approximately 9600 weapons were serviceable , or ready @-@ for @-@ issue . Note there were only 1 @,@ 364 percussion weapons available . Disposition of the weapons found in the Arsenal is somewhat sketchy , but from various records it can "
+    },
+    {
+      "source_row": 85,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Most of the equipment , arms , and machinery at the Little Rock Arsenal was removed to east of the Mississippi River by order of Maj. Gen. Earl Van Dorn in April and May 1862 , and accountability for it is lost at that point . By all appearances , the equi"
+    },
+    {
+      "source_row": 86,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Major General Thomas C. Hindman , sent to command the district of Arkansas in May , 1862 , found the state nearly destitute of military material . Hindman established another armory at Arkadelphia , and revived the Little Rock Arsenal as a collection point"
+    },
+    {
+      "source_row": 87,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "\" Machinery was made for manufacturing percussion caps and small arms , and both were turned out in small quantity , but of excellent quality . Lead mines were opened and worked , and a chemical laboratory was established and successfully operated in aid o"
+    },
+    {
+      "source_row": 88,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "This ammunition , and that which I brought with me , was rapidly prepared for use at the Laboratory established at the Little Rock Arsenal for that purpose . As illustrating as the pitiful scarcity of material in the country , the fact may be stated that i"
+    },
+    {
+      "source_row": 89,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The Confederate ordnance establishment at Little Rock was reactivated in August , 1862 . Looking around for a suitable person to head this activity , General Hindman turned to the Confederate Navy and borrowed Lieutenant John W. Dunnington . Lt. Dunnington"
+    },
+    {
+      "source_row": 90,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Lt. Col. Dunnington 's \" Returns for the month of August , 1862 , at Little Rock Arsenal , C.S.A. , \" are found in Vol . 149 , Chapter IV of the \" Captured Rebel Ordnance Records , \" and are most enlightening as to the scope of Confederate ordnance activit"
+    },
+    {
+      "source_row": 91,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The military force at Little Rock under Dunnington 's command consisted of four officers : himself , Major John B. Lockman , Captain C.C. Green , and 2nd Lt. W.W. Murphy . In addition to these , he had 20 enlisted men and a civilian force composed of a for"
+    },
+    {
+      "source_row": 92,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "During the month of August , 1862 , the following work was performed : \" Fabricated : one pair of musket bullet moulds ; 10 @,@ 000 buck & ball shot cartridges ; repaired : 750 muskets , shotguns , and rifles ; received and repaired : ordnance stores and o"
+    },
+    {
+      "source_row": 93,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Lt. Col. Dunnington continued to build up his works at Little Rock until November 1862 , when Captain Sanford C. Faulkner ( composer of The Arkansas Traveler ) was placed in charge of the Arsenal . Dunnington presumably returned to his naval duties and the"
+    },
+    {
+      "source_row": 110,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Perhaps the most illuminating points of the above \" Summary of Work \" and those for following months are that the standard ammunition made was . \" buck & ball \" , indicating that the .69 caliber smoothbores and shotguns remained the predominant caliber wea"
+    },
+    {
+      "source_row": 111,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The \" Summaries of Work done at Little Rock Arsenal , C.S.A. \" continue at about the same pace and scale from August 1862 until August 1863 . Appended to the \" Summary \" for August , 1863 is the ominous notation , \" During the last week in the month , near"
+    },
+    {
+      "source_row": 112,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "In 1864 , after Little Rock fell to the Union Army and the arsenal had been recaptured , General Fredrick Steele marched 8 @,@ 500 troops from the arsenal beginning the Camden Expedition ."
+    },
+    {
+      "source_row": 113,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The arsenal was briefly seized once more by Joseph Brooks loyalists during the Brooks @-@ Baxter War of 1874 ."
+    },
+    {
+      "source_row": 117,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "In 1873 , the building was renamed Little Rock Barracks and used as a barracks for married officers and their families . The building was drastically altered the inside and outside . Prior to renovation , a rear basement door provided the only entrance to "
+    },
+    {
+      "source_row": 118,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "In the 1880s , the federal government began closing many small arsenals around the country in favor of smaller ones built near railroads for quick deployment . The arsenal commander received word from Washington that the Little Rock site must be abandoned "
+    },
+    {
+      "source_row": 122,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "In 1894 the Little Rock Æsthetic Club , one of the oldest women 's societies west of the Mississippi River , moved into the Tower Building . This was prompted due to increased membership and a need for larger , more permanent quarters . The previous year ,"
+    },
+    {
+      "source_row": 123,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "Except for Æsthetic Club meetings , the Tower Building remained largely unoccupied for almost fifty years and suffered significant deterioration . The Æsthetic Club provided much @-@ needed financial support during the period and even paid the electric bil"
+    },
+    {
+      "source_row": 127,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The building and the surrounding park were used for many public purposes throughout the early 20th century . The Tower Building served as headquarters for the United Confederate Veterans Reunion , May 15 – 18 , 1911 . Over 106 @,@ 000 Civil War veterans , "
+    },
+    {
+      "source_row": 128,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "The arsenal was listed in the National Register of Historic Places in 1970 . Due to its association with the Camden Expedition of 1864 , the arsenal may be included in the Camden Expedition Sites National Historic Landmark designated in 1994 ."
+    },
+    {
+      "source_row": 129,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "In 1942 , the Tower Building was renovated due to the efforts of the Æsthetic Club , Little Rock philanthropist Frederick W. Allsop , and the Works Progress Administration . It became the new home of The Arkansas Museum of Natural History and Antiquities ,"
+    },
+    {
+      "source_row": 130,
+      "article": "Tower Building of the Little Rock Arsenal",
+      "text": "In 1997 , the Museum of Science and Natural History merged with the Little Rock Children 's Museum , which had been located in Union Station , to form the Arkansas Museum of Discovery . The new museum was relocated to a historic building in the Little Rock"
+    },
+    {
+      "source_row": 135,
+      "article": "Cicely Mary Barker",
+      "text": "Cicely Mary Barker ( 28 June 1895 – 16 February 1973 ) was an English illustrator best known for a series of fantasy illustrations depicting fairies and flowers . Barker 's art education began in girlhood with correspondence courses and instruction at the "
+    },
+    {
+      "source_row": 136,
+      "article": "Cicely Mary Barker",
+      "text": "Barker was a devout Anglican , and donated her artworks to Christian fundraisers and missionary organizations . She produced a few Christian @-@ themed books such as The Children ’ s Book of Hymns and , in collaboration with her sister Dorothy , He Leadeth"
+    },
+    {
+      "source_row": 137,
+      "article": "Cicely Mary Barker",
+      "text": "Barker was equally proficient in watercolour , pen and ink , oils , and pastels . Kate Greenaway and the Pre @-@ Raphaelites were the principal influences on her work . She claimed to paint instinctively and rejected artistic theories . Barker died in 1973"
+    },
+    {
+      "source_row": 144,
+      "article": "Cicely Mary Barker",
+      "text": "Barker was born the second daughter and youngest child of Walter Barker , a partner in a seed supply company and an amateur artist , and his wife Mary Eleanor ( Oswald ) Barker on 28 June 1895 at home at 66 Waddon Road in Croydon , Surrey , England . Barke"
+    },
+    {
+      "source_row": 145,
+      "article": "Cicely Mary Barker",
+      "text": "The family of four was moderately well off , and belonged to the lower end of the upper middle class . A nanny , a governess , and a cook to prepare special meals for Barker were hired . She spent much time in bed at home amusing herself with painting book"
+    },
+    {
+      "source_row": 149,
+      "article": "Cicely Mary Barker",
+      "text": "Barker took correspondence courses in art , probably until about 1919 . In 1908 at 13 years , she entered an evening class at the Croydon School of Art , and attended the school into the 1940s . In time , she received a teaching position ."
+    },
+    {
+      "source_row": 150,
+      "article": "Cicely Mary Barker",
+      "text": "In 1911 , Raphael Tuck & Sons bought four of Barker 's \" little drawings \" for half a sovereign , and published them as postcards . In October 1911 , she won second prize in the Croydon Art Society 's poster competition , and shortly afterward was elected "
+    },
+    {
+      "source_row": 151,
+      "article": "Cicely Mary Barker",
+      "text": "Following her father ’ s death in June 1912 , the seventeen @-@ year @-@ old Barker submitted art and poetry to My Magazine , Child ’ s Own , Leading Strings , and Raphael Tuck annuals in an effort to support both her mother and sister . Her sister Dorothy"
+    },
+    {
+      "source_row": 155,
+      "article": "Cicely Mary Barker",
+      "text": "Fairies became a popular theme in art and literature in the early 20th century following the releases of The Coming of the Fairies by Sir Arthur Conan Doyle , Peter Pan by J.M. Barrie , and the fairy @-@ themed work of Australian Ida Rentoul Outhwaite . Qu"
+    },
+    {
+      "source_row": 156,
+      "article": "Cicely Mary Barker",
+      "text": "In 1923 , Barker sent her flower fairy paintings to various publishers . Blackie paid £ 25 for 24 paintings with accompanying verses , but it wasn 't until publication of Flower Fairies of the Summer in 1925 that Barker received royalties for her work . Ma"
+    },
+    {
+      "source_row": 160,
+      "article": "Cicely Mary Barker",
+      "text": "In 1924 , the family moved into a four @-@ level , semi @-@ detached Victorian house at 23 The Waldrons . Barker had a studio built in the garden and her sister conducted a kindergarten in a room at the back of the house . The family lived frugally and att"
+    },
+    {
+      "source_row": 161,
+      "article": "Cicely Mary Barker",
+      "text": "The children in the kindergarten modelled for the Flower Fairies until the kindergarten closed in 1940 . In an interview in 1958 , Barker said , \" My sister ran a kindergarten and I used to borrow her students for models . For many years I had an atmospher"
+    },
+    {
+      "source_row": 165,
+      "article": "Cicely Mary Barker",
+      "text": "In the late 1920s , Barker began to doubt she was doing enough for the church and considered focusing solely on sacred works . Family and friends recommended she continue secular and sacred works , which she did ."
+    },
+    {
+      "source_row": 166,
+      "article": "Cicely Mary Barker",
+      "text": "Barker continued to attend evening classes at the Croydon Art School between the 1920s and the 1940s , eventually receiving a teaching position . She took sketching trips to Amberley and Storrington in Sussex and to Cornwall and the southern coast with fam"
+    },
+    {
+      "source_row": 167,
+      "article": "Cicely Mary Barker",
+      "text": "In 1940 , the Barker 's live @-@ in maid retired , and Dorothy Barker closed her school at the back of the house in The Waldrons . She continued to supervise the household , and to give both her mother and sister the care they needed . Dorothy and her sist"
+    },
+    {
+      "source_row": 171,
+      "article": "Cicely Mary Barker",
+      "text": "Barker 's mother died in 1960 , and , in 1961 , Barker moved from 23 The Waldrons to 6 Duppas Avenue in Croydon . She restored a maisonette in Storrington , Sussex , England , bequeathed by her friend Edith Major , and named it St. Andrew 's . After taking"
+    },
+    {
+      "source_row": 172,
+      "article": "Cicely Mary Barker",
+      "text": "Barker died at Worthing Hospital on 16 February 1973 , aged 77 years . Two funeral services were held – one in Storrington Church and one in Barker 's maisonette . Her ashes were scattered in Storrington churchyard . In 1989 , Frederick Warne , a division "
+    },
+    {
+      "source_row": 176,
+      "article": "Cicely Mary Barker",
+      "text": "Barker worked principally in watercolor with pen @-@ and @-@ ink , but she was equally competent in black @-@ and @-@ white , in oils , and in pastels . She carried a sketchbook with her for capturing interesting children . She once indicated , \" I have al"
+    },
+    {
+      "source_row": 177,
+      "article": "Cicely Mary Barker",
+      "text": "Kate Greenaway was a childhood favorite and an influence on her art . Barker 's child subjects wear nostalgic clothing as Greenaway 's children do , though Barker 's children are less melancholy and less flat in appearance , due perhaps to advances in prin"
+    },
+    {
+      "source_row": 178,
+      "article": "Cicely Mary Barker",
+      "text": "The Pre @-@ Raphaelites were a strong , lifelong influence on Barker . She once indicated , \" I am to some extent influenced by them — not in any technical sense , but in the choice of subject matter and the feeling and atmosphere they could achieve . \" Sh"
+    },
+    {
+      "source_row": 182,
+      "article": "Cicely Mary Barker",
+      "text": "Barker 's sketches , drawings , and paintings of children were given to friends or to the parents of the subjects , donated to charitable institutions and church sponsored events , or exhibited through various art organizations . She illustrated magazine c"
+    },
+    {
+      "source_row": 186,
+      "article": "Cicely Mary Barker",
+      "text": "Barker was a devout Christian , and produced religious @-@ themed works throughout her life . She published eight postcards and five guardian angel birthday cards for the Society for Promoting Christian Knowledge in 1916 and in 1923 respectively . Christma"
+    },
+    {
+      "source_row": 187,
+      "article": "Cicely Mary Barker",
+      "text": "Religious @-@ themed books include The Children 's Book of Hymns ( 1929 ) and He Leadeth Me ( 1933 ) , the latter written in collaboration with her sister . Major religious works include the triptychs in oil , The Feeding of the Five Thousand ( 1929 ) , fo"
+    }
+  ],
+  "validation": [
+    {
+      "source_row": 3,
+      "article": "Homarus gammarus",
+      "text": "Homarus gammarus , known as the European lobster or common lobster , is a species of clawed lobster from the eastern Atlantic Ocean , Mediterranean Sea and parts of the Black Sea . It is closely related to the American lobster , H. americanus . It may grow"
+    },
+    {
+      "source_row": 7,
+      "article": "Homarus gammarus",
+      "text": "Homarus gammarus is a large crustacean , with a body length up to 60 centimetres ( 24 in ) and weighing up to 5 – 6 kilograms ( 11 – 13 lb ) , although the lobsters caught in lobster pots are usually 23 – 38 cm ( 9 – 15 in ) long and weigh 0 @.@ 7 – 2 @.@ "
+    },
+    {
+      "source_row": 8,
+      "article": "Homarus gammarus",
+      "text": "The first pair of pereiopods is armed with a large , asymmetrical pair of claws . The larger one is the \" crusher \" , and has rounded nodules used for crushing prey ; the other is the \" cutter \" , which has sharp inner edges , and is used for holding or te"
+    },
+    {
+      "source_row": 9,
+      "article": "Homarus gammarus",
+      "text": "The exoskeleton is generally blue above , with spots that coalesce , and yellow below . The red colour associated with lobsters only appears after cooking . This occurs because , in life , the red pigment astaxanthin is bound to a protein complex , but the"
+    },
+    {
+      "source_row": 10,
+      "article": "Homarus gammarus",
+      "text": "The closest relative of H. gammarus is the American lobster , Homarus americanus . The two species are very similar , and can be crossed artificially , although hybrids are unlikely to occur in the wild since their ranges do not overlap . The two species c"
+    },
+    {
+      "source_row": 11,
+      "article": "Homarus gammarus",
+      "text": "The rostrum of H. americanus bears one or more spines on the underside , which are lacking in H. gammarus ."
+    },
+    {
+      "source_row": 12,
+      "article": "Homarus gammarus",
+      "text": "The spines on the claws of H. americanus are red or red @-@ tipped , while those of H. gammarus are white or white @-@ tipped ."
+    },
+    {
+      "source_row": 13,
+      "article": "Homarus gammarus",
+      "text": "The underside of the claw of H. americanus is orange or red , while that of H. gammarus is creamy white or very pale red ."
+    },
+    {
+      "source_row": 17,
+      "article": "Homarus gammarus",
+      "text": "Female H. gammarus reach sexual maturity when they have grown to a carapace length of 80 – 85 millimetres ( 3 @.@ 1 – 3 @.@ 3 in ) , whereas males mature at a slightly smaller size . Mating typically occurs in summer between a recently moulted female , who"
+    },
+    {
+      "source_row": 18,
+      "article": "Homarus gammarus",
+      "text": "The eggs hatch at night , and the larvae swim to the water surface where they drift with the ocean currents , preying on zooplankton . This stage involves three moults and lasts for 15 – 35 days . After the third moult , the juvenile takes on a form closer"
+    },
+    {
+      "source_row": 22,
+      "article": "Homarus gammarus",
+      "text": "Homarus gammarus is found across the north @-@ eastern Atlantic Ocean from northern Norway to the Azores and Morocco , not including the Baltic Sea . It is also present in most of the Mediterranean Sea , only missing from the section east of Crete , and al"
+    },
+    {
+      "source_row": 23,
+      "article": "Homarus gammarus",
+      "text": "The species can be divided into four genetically distinct populations , one widespread population , and three which have diverged due to small effective population sizes , possibly due to adaptation to the local environment . The first of these is the popu"
+    },
+    {
+      "source_row": 24,
+      "article": "Homarus gammarus",
+      "text": "Attempts have been made to introduce H. gammarus to New Zealand , alongside other European species such as the edible crab , Cancer pagurus . Between 1904 and 1914 , one million lobster larvae were released from hatcheries in Dunedin , but the species did "
+    },
+    {
+      "source_row": 28,
+      "article": "Homarus gammarus",
+      "text": "Adult H. gammarus live on the continental shelf at depths of 0 – 150 metres ( 0 – 492 ft ) , although not normally deeper than 50 m ( 160 ft ) . They prefer hard substrates , such as rocks or hard mud , and live in holes or crevices , emerging at night to "
+    },
+    {
+      "source_row": 29,
+      "article": "Homarus gammarus",
+      "text": "The diet of H. gammarus mostly consists of other benthic invertebrates . These include crabs , molluscs , sea urchins , starfish and polychaete worms ."
+    },
+    {
+      "source_row": 30,
+      "article": "Homarus gammarus",
+      "text": "The three clawed lobster species Homarus gammarus , H. americanus and Nephrops norvegicus are hosts to the three known species of the animal phylum Cycliophora ; the species on H. gammarus has not been described ."
+    },
+    {
+      "source_row": 31,
+      "article": "Homarus gammarus",
+      "text": "Homarus gammarus is susceptible to the disease gaffkaemia , caused by the bacterium Aerococcus viridans . Although it is frequently found in American lobsters , the disease has only been seen in captive H. gammarus , where prior occupation of the tanks by "
+    },
+    {
+      "source_row": 35,
+      "article": "Homarus gammarus",
+      "text": "Homarus gammarus is traditionally \" highly esteemed \" as a foodstuff and was mentioned in \" The Crabfish \" a seventeenth century English folk song . It may fetch very high prices and may be sold fresh , frozen , canned or powdered . Both the claws and the "
+    },
+    {
+      "source_row": 36,
+      "article": "Homarus gammarus",
+      "text": "Lobsters are mostly fished using lobster pots , although lines baited with octopus or cuttlefish sometimes succeed in tempting them out , to allow them to be caught in a net or by hand . In 2008 , 4 @,@ 386 t of H. gammarus were caught across Europe and No"
+    },
+    {
+      "source_row": 37,
+      "article": "Homarus gammarus",
+      "text": "Aquaculture systems for H. gammarus are under development , and production rates are still very low ."
+    }
+  ],
+  "test": [
+    {
+      "source_row": 3,
+      "article": "Robert Boulter",
+      "text": "Robert Boulter is an English film , television and theatre actor . He had a guest @-@ starring role on the television series The Bill in 2000 . This was followed by a starring role in the play Herons written by Simon Stephens , which was performed in 2001 "
+    },
+    {
+      "source_row": 4,
+      "article": "Robert Boulter",
+      "text": "In 2006 , Boulter starred alongside Whishaw in the play Citizenship written by Mark Ravenhill . He appeared on a 2006 episode of the television series , Doctors , followed by a role in the 2007 theatre production of How to Curse directed by Josie Rourke . "
+    },
+    {
+      "source_row": 11,
+      "article": "Robert Boulter",
+      "text": "In 2000 Boulter had a guest @-@ starring role on the television series The Bill ; he portrayed \" Scott Parry \" in the episode , \" In Safe Hands \" . Boulter starred as \" Scott \" in the play Herons written by Simon Stephens , which was performed in 2001 at t"
+    },
+    {
+      "source_row": 12,
+      "article": "Robert Boulter",
+      "text": "He had a recurring role in 2003 on two episodes of The Bill , as character \" Connor Price \" . In 2004 Boulter landed a role as \" Craig \" in the episode \" Teddy 's Story \" of the television series The Long Firm ; he starred alongside actors Mark Strong and "
+    },
+    {
+      "source_row": 16,
+      "article": "Robert Boulter",
+      "text": "In 2006 Boulter starred in the play Citizenship written by Mark Ravenhill . The play was part of a series which featured different playwrights , titled Burn / Chatroom / Citizenship . In a 2006 interview , fellow actor Ben Whishaw identified Boulter as one"
+    },
+    {
+      "source_row": 17,
+      "article": "Robert Boulter",
+      "text": "Boulter starred in two films in 2008 , Daylight Robbery by filmmaker Paris Leonti , and Donkey Punch directed by Olly Blackburn . Boulter portrayed a character named \" Sean \" in Donkey Punch , who tags along with character \" Josh \" as the \" quiet brother ."
+    },
+    {
+      "source_row": 34,
+      "article": "Du Fu",
+      "text": "Du Fu ( Wade – Giles : Tu Fu ; Chinese : 杜甫 ; 712 – 770 ) was a prominent Chinese poet of the Tang dynasty . Along with Li Bai ( Li Po ) , he is frequently called the greatest of the Chinese poets . His greatest ambition was to serve his country as a succe"
+    },
+    {
+      "source_row": 35,
+      "article": "Du Fu",
+      "text": "Although initially he was little @-@ known to other writers , his works came to be hugely influential in both Chinese and Japanese literary culture . Of his poetic writing , nearly fifteen hundred poems have been preserved over the ages . He has been calle"
+    },
+    {
+      "source_row": 39,
+      "article": "Du Fu",
+      "text": "Traditional Chinese literary criticism emphasized the life of the author when interpreting a work , a practice which Burton Watson attributes to \" the close links that traditional Chinese thought posits between art and morality \" . Since many of Du Fu 's p"
+    },
+    {
+      "source_row": 43,
+      "article": "Du Fu",
+      "text": "Most of what is known of Du Fu 's life comes from his poems . His paternal grandfather was Du Shenyan , a noted politician and poet during the reign of Empress Wu . Du Fu was born in 712 ; the exact birthplace is unknown , except that it was near Luoyang ,"
+    },
+    {
+      "source_row": 44,
+      "article": "Du Fu",
+      "text": "Du Fu 's mother died shortly after he was born , and he was partially raised by his aunt . He had an elder brother , who died young . He also had three half brothers and one half sister , to whom he frequently refers in his poems , although he never mentio"
+    },
+    {
+      "source_row": 45,
+      "article": "Du Fu",
+      "text": "The son of a minor scholar @-@ official , his youth was spent on the standard education of a future civil servant : study and memorisation of the Confucian classics of philosophy , history and poetry . He later claimed to have produced creditable poems by "
+    },
+    {
+      "source_row": 46,
+      "article": "Du Fu",
+      "text": "In the early 730s , he travelled in the Jiangsu / Zhejiang area ; his earliest surviving poem , describing a poetry contest , is thought to date from the end of this period , around 735 . In that year , he took the civil service exam , likely in Chang 'an "
+    },
+    {
+      "source_row": 47,
+      "article": "Du Fu",
+      "text": "His father died around 740 . Du Fu would have been allowed to enter the civil service because of his father 's rank , but he is thought to have given up the privilege in favour of one of his half brothers . He spent the next four years living in the Luoyan"
+    },
+    {
+      "source_row": 48,
+      "article": "Du Fu",
+      "text": "In the autumn of 744 , he met Li Bai ( Li Po ) for the first time , and the two poets formed a friendship . David Young describes this as \" the most significant formative element in Du Fu 's artistic development \" because it gave him a living example of th"
+    },
+    {
+      "source_row": 49,
+      "article": "Du Fu",
+      "text": "In 746 , he moved to the capital in an attempt to resurrect his official career . He took the civil service exam a second time during the following year , but all the candidates were failed by the prime minister ( apparently in order to prevent the emergen"
+    },
+    {
+      "source_row": 50,
+      "article": "Du Fu",
+      "text": "In 755 , he received an appointment as Registrar of the Right Commandant 's office of the Crown Prince 's Palace . Although this was a minor post , in normal times it would have been at least the start of an official career . Even before he had begun work "
+    },
+    {
+      "source_row": 54,
+      "article": "Du Fu",
+      "text": "The An Lushan Rebellion began in December 755 , and was not completely suppressed for almost eight years . It caused enormous disruption to Chinese society : the census of 754 recorded 52 @.@ 9 million people , but ten years later , the census counted just"
+    },
+    {
+      "source_row": 55,
+      "article": "Du Fu",
+      "text": "Brooding on what I have lived through , if even I know such suffering , the common man must surely be rattled by the winds ."
+    },
+    {
+      "source_row": 56,
+      "article": "Du Fu",
+      "text": "In 756 , Emperor Xuanzong was forced to flee the capital and abdicate . Du Fu , who had been away from the city , took his family to a place of safety and attempted to join the court of the new emperor ( Suzong ) , but he was captured by the rebels and tak"
+    }
+  ]
+}

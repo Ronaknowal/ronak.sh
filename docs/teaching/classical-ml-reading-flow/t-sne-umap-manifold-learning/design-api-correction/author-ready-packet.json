@@ -1,0 +1,80 @@
+{
+  "status": "AUTHOR_READY_R1_MDS_DESIGN_SAME_CLOSURE_REQUIRED",
+  "topic": "t-sne-umap-manifold-learning",
+  "modulePosition": 17,
+  "originalAuthor": "/root/clustering_evaluation_author",
+  "sameReviewer": "/root/survival_content_independent_review",
+  "scope": "Complete inherited proposed design + current MDS API contract; no content/runtime release",
+  "predecessor": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/proposed-design-packet.json",
+    "bytes": 23274,
+    "sha256": "92aafa0d19b0a3f5fe2efd62d6b5f87f891a4e737a96c141c0dbb3dfac7c65c4"
+  },
+  "differentReview": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/review.md",
+      "bytes": 14475,
+      "sha256": "ad229d170842fa0335f5aff496f8666ef6c1ea1fa0542e1d173a204da3b6e4f8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/packet.json",
+      "bytes": 29469,
+      "sha256": "67d92f9af9e95a3c3c2149fe8deef235f1a0fc77a1c9eb9d2a28ab5d41e80080"
+    }
+  ],
+  "effectiveComposition": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/assessment-and-continuity.md",
+      "bytes": 15159,
+      "sha256": "73e18a04b31514450767de2916a3a81d215ab1732f37b7c6aaf1c8527af38faf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-programs-and-practice.md",
+      "bytes": 21435,
+      "sha256": "f8a5b6c6709814122e6bba449e211625bf141f0a0efd48798f24a108cef3770c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-research.md",
+      "bytes": 14732,
+      "sha256": "cab6c0afc486ba938add9faa3760050d8fcca94190afb1f80d776c50ab4c59a6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-proposed-design.md",
+      "bytes": 33791,
+      "sha256": "6fc084e24333b60434bb95e5c7a79df805add6da80d7c233a3011bd46c7e7435"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/mds-contract-amendment.md",
+      "bytes": 5692,
+      "sha256": "535c4544bdbf0356b7e6a565ed9151f64f68984bd38571fc99057b3f3552f1bf"
+    }
+  ],
+  "correction": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/source-delta.json",
+      "bytes": 5870,
+      "sha256": "30153b741b71311ddb90a9b9b882bc994c9316e8b7128d357c7a2e1ab6065fad"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/source-check.json",
+      "bytes": 2300,
+      "sha256": "93293c0509ebef21e1481646d090c4a35cd624ee074daddfe68b7fca8e7788ef"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/compose.py",
+      "bytes": 9474,
+      "sha256": "a0fec28ea311c8705fe677c718293518d447d221c14dc673e7db72f94ef1dc92"
+    }
+  ],
+  "inheritedConservation": "12 proposal originals, all40 topic active/preserved source pairs, five original program/stream pairs, selected historical row and actual saved scientific outcomes remain exact; no old scientific replay",
+  "currentAPIEvidence": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.manifold.MDS.html",
+    "https://scikit-learn.org/stable/modules/generated/sklearn.manifold.ClassicalMDS.html"
+  ],
+  "limits": [
+    "Source/AST-only current-contract check, no estimator fit or old main/study/checker.",
+    "New full programs/manuscript/runtime remain uncreated until Root design release and subsequent phases.",
+    "Whole DIFFERENT design assessment inherited; author correction is not independent closure."
+  ],
+  "next": "Root routes one R1 successor to SAME reviewer; Root alone releases design."
+}

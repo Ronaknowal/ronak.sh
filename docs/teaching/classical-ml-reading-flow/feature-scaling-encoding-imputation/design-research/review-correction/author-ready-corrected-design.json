@@ -1,0 +1,130 @@
+{
+  "topicId": "feature-scaling-encoding-imputation",
+  "classicalPosition": 20,
+  "author": "/root/tsne_consolidated_content_correction",
+  "recordedOn": "2026-10-09",
+  "status": "corrected-proposed-design-author-ready-for-same-independent-reviewer-closure-and-root-release",
+  "predecessor": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-ready-design.json",
+    "bytes": 4906,
+    "sha256": "78cf04c91795d2b1cbc65e009dd274302f96832ef8a7801a3ecf243340f064cf"
+  },
+  "independentReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/design-review.md",
+    "bytes": 15836,
+    "sha256": "908bcffb0695892a0f5b1d72f4eb02a70510633ee9cf5e126c6c509b57b359e6"
+  },
+  "independentIdentityReceipt": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/independent-review/design-identities.json",
+    "bytes": 102810,
+    "sha256": "4e0e17702c2ea57191f18c8bafeb43932577ddc5002a46ed4e79b87be311c91d"
+  },
+  "effectiveWholeDesign": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/reading-flow-design.md",
+      "bytes": 22597,
+      "sha256": "a970f6d0ec2d13b61b3947b732dc3c1768462c2c8fbb51da30f7395e430b6f8f",
+      "role": "complete proposed design/research contract",
+      "unchanged": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/visual-and-investigation-contracts.md",
+      "bytes": 32698,
+      "sha256": "28bac4300147805992e05c888cdfe693e2961c9a064a864f44f90091f35cd8f1",
+      "role": "complete proposed design/research contract",
+      "unchanged": true
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/programmes-practice-and-resources.md",
+      "bytes": 34270,
+      "sha256": "f2f792ee23becb0a9ba2d85cd87b44b80f48dd4aee5f9f8290eb14234768bc4a",
+      "role": "complete proposed design/research contract",
+      "unchanged": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/research-and-coverage.md",
+      "bytes": 26499,
+      "sha256": "f4573042f00f83f83f1830646939649dd677d57f9232015c0c71330d171560d6",
+      "role": "complete proposed design/research contract",
+      "unchanged": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/author-design-review.md",
+      "bytes": 4298,
+      "sha256": "07efdf3876f1f91b3d86997604537268b09a4da0cd2b4d9f626e6493e5dd41fa",
+      "role": "complete proposed design/research contract",
+      "unchanged": true
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/intake-and-source-checks.json",
+      "bytes": 48017,
+      "sha256": "fb0d8e8e241f30b5870d09b547a6525d9a096beff6a3bd0f524d4c106e577ee8",
+      "role": "actual selected intake/conservation checks and preflight failure",
+      "unchanged": true
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/bind-design.py",
+      "bytes": 14176,
+      "sha256": "4235e304c0ddda0e1d5a4ab9b90300aec4e7166bc80a8070566ba47270bb9e01",
+      "role": "reproducible read-only-source binding script; writes this owner only",
+      "unchanged": true
+    }
+  ],
+  "assemblyContext": "Logical sibling and ../ references retain original design-research context; three complete overlays replace only corresponding documents. Four unchanged artifacts remain exact references.",
+  "correctionArtifacts": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/author-correction-review.md",
+      "bytes": 5590,
+      "sha256": "0e3fb93b645f3ee86dd657172ca0fdc59ad6756884e97457f1169ef00eb17ad7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/exact-design-deltas.json",
+      "bytes": 7661,
+      "sha256": "e93ee4d96d9cade513ca17b41e4b5b400472294637ac0e957cdab9f7cbe1591f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/source-checks.json",
+      "bytes": 20310,
+      "sha256": "72dc81e0b97fc2a6fcba247dde234f6c071a504bb5ef4ac7c03ec4ecc18e067b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/compose-correction.py",
+      "bytes": 8285,
+      "sha256": "5ab890152c39c346f1fe9e6d742f8efe5ba21f1f5d0be1352c58205d5c25322f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/freeze-corrected-design.py",
+      "bytes": 4401,
+      "sha256": "ba0848a59ef3385cdaf149452abf3719fb25bea4435d1e8c95f8729bf3ab9a8d"
+    }
+  ],
+  "actualCompositionCommand": {
+    "command": "python -B -X utf8 docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/design-research/review-correction/compose-correction.py",
+    "tool": "463dbe",
+    "exitCode": 0,
+    "protectedBindings": 68,
+    "focusedConditions": 7
+  },
+  "scope": {
+    "sections": 11,
+    "outcomes": 10,
+    "drawableJobs": 41,
+    "focusedInvestigations": 16,
+    "programmeContracts": 16,
+    "retainedWholeProgrammes": 3,
+    "newCompleteProgrammesProposed": 13,
+    "practiceIdentities": 26
+  },
+  "supersededClaims": [
+    "Original §5 seven-column-only summary; blanket practice T2–T10 mapping; unnamed supplied-centres ordinary comparator; old observed-radius-clipping assertion; original awaiting-initial-review status now awaiting bounded closure"
+  ],
+  "phaseAuthority": "Root only; existing revision4/history and central ledgers unchanged",
+  "noReplay": "Filesystem/hash/text only. No fits, numerical main/verifier, global inventory retry, build/install/native/public or canonical mutation.",
+  "limits": [
+    "Design is not manuscript/full new programme bodies/actual streams/solved learner prose/runtime acceptance",
+    "Same independent reviewer closure and Root release pending",
+    "Original source/stream/version/data/access and native-evidence qualifications preserved",
+    "Future complete content and different whole-content review required before runtime"
+  ],
+  "nextAction": "Root requests SAME independent design reviewer closure on this exact composed successor; then Root decides release/latest revision. Do not start manuscript before release."
+}

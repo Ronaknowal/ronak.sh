@@ -5,25 +5,27 @@ import { longContextDefaults, retainedRead, recurrenceTrace, latentRead } from '
 import './long-context-labs.css';
 
 export const longContextAsset = '/learn-code/long-context-sequence-models-transformer-xl-griffin-perceiver/';
+const resources = new Map();
 export function useLongContextResource(file, open, json = false) {
   const [state, setState] = useState({ data: null, error: null }), [attempt, setAttempt] = useState(0);
   useEffect(() => {
     if (!open) return;
-    const controller = new AbortController();
+    let live = true;
     setState({ data: null, error: null });
-    fetch(longContextAsset + file, { signal: controller.signal }).then(response => {
+    const key = file + ':' + json;
+    if (!resources.has(key)) resources.set(key, fetch(longContextAsset + file).then(response => {
       if (!response.ok) throw new Error('This saved lesson resource could not be loaded.');
       return json ? response.json() : response.text();
-    }).then(data => { if (!controller.signal.aborted) setState({ data, error: null }); })
-      .catch(error => { if (!controller.signal.aborted) setState({ data: null, error: error.message }); });
-    return () => controller.abort();
+    }).catch(error => { resources.delete(key); throw error; }));
+    resources.get(key).then(data => { if (live) setState({ data, error: null }); })
+      .catch(error => { if (live) setState({ data: null, error: error.message }); });
+    return () => { live = false; };
   }, [file, open, json, attempt]);
   return { ...state, retry: () => setAttempt(value => value + 1) };
 }
 export function LongContextProgram({ file, title }) {
   return <>
     <RemoteCodeBlock source={longContextAsset + file} language="python" filename={file} title={(title)} />
-    <p><a href={longContextAsset + file} download>Download {file}</a></p>
   </>;
 }
 const updateAt = (items, index, field, value) => items.map((item, i) => i === index ? { ...item, [field]: value } : item);

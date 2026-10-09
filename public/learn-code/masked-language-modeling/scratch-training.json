@@ -1,0 +1,194 @@
+{
+  "seed": 17,
+  "steps": 240,
+  "mask_rate": 0.15,
+  "data": {
+    "words": 6118,
+    "train_words": 4894,
+    "test_words": 1224,
+    "train_chunks": 204,
+    "test_chunks": 51,
+    "vocabulary_size": 1012,
+    "test_unknown_words": 162,
+    "data_sha256": "d4d1e63f00060bfc541d917618dd62dbaa7b8cfda7cb8ebb4d6ca4d2eb48d42f"
+  },
+  "architecture": {
+    "width": 48,
+    "heads": 4,
+    "layers": 2,
+    "dropout": 0
+  },
+  "versions": {
+    "torch": "2.14.0+cpu",
+    "numpy": "2.3.5"
+  },
+  "checkpoints": [
+    {
+      "step": 0,
+      "train": {
+        "targets": 732,
+        "loss": 6.916108131408691,
+        "accuracy": 0.0027322403620928526
+      },
+      "held_out": {
+        "targets": 166,
+        "loss": 6.90974760055542,
+        "accuracy": 0.0
+      }
+    },
+    {
+      "step": 40,
+      "train": {
+        "targets": 732,
+        "loss": 5.8606858253479,
+        "accuracy": 0.02459016442298889
+      },
+      "held_out": {
+        "targets": 166,
+        "loss": 5.451207160949707,
+        "accuracy": 0.09036144614219666
+      }
+    },
+    {
+      "step": 80,
+      "train": {
+        "targets": 732,
+        "loss": 5.802879810333252,
+        "accuracy": 0.054644808173179626
+      },
+      "held_out": {
+        "targets": 166,
+        "loss": 5.358157634735107,
+        "accuracy": 0.07228915393352509
+      }
+    },
+    {
+      "step": 120,
+      "train": {
+        "targets": 732,
+        "loss": 5.754238605499268,
+        "accuracy": 0.053278688341379166
+      },
+      "held_out": {
+        "targets": 166,
+        "loss": 5.340008735656738,
+        "accuracy": 0.0662650614976883
+      }
+    },
+    {
+      "step": 160,
+      "train": {
+        "targets": 732,
+        "loss": 5.7098822593688965,
+        "accuracy": 0.051912568509578705
+      },
+      "held_out": {
+        "targets": 166,
+        "loss": 5.297545433044434,
+        "accuracy": 0.07228915393352509
+      }
+    },
+    {
+      "step": 200,
+      "train": {
+        "targets": 732,
+        "loss": 5.624186992645264,
+        "accuracy": 0.04644808918237686
+      },
+      "held_out": {
+        "targets": 166,
+        "loss": 5.335370063781738,
+        "accuracy": 0.0602409653365612
+      }
+    },
+    {
+      "step": 240,
+      "train": {
+        "targets": 732,
+        "loss": 5.5724897384643555,
+        "accuracy": 0.05874316766858101
+      },
+      "held_out": {
+        "targets": 166,
+        "loss": 5.368065357208252,
+        "accuracy": 0.03614457696676254
+      }
+    }
+  ],
+  "held_out_unigram_loss": 5.4029700488707775,
+  "sample": {
+    "input": [
+      "[CLS]",
+      "[MASK]",
+      "and",
+      "the",
+      "eaglet",
+      "[UNK]",
+      "down",
+      "its",
+      "head",
+      "to",
+      "[UNK]",
+      "a",
+      "[UNK]",
+      "some",
+      "of",
+      "the",
+      "other",
+      "birds",
+      "[UNK]",
+      "[UNK]",
+      "what",
+      "i",
+      "was",
+      "going",
+      "to",
+      "[SEP]"
+    ],
+    "target_position": 1,
+    "target": "either",
+    "top5": [
+      [
+        "she",
+        0.02778148464858532
+      ],
+      [
+        "i",
+        0.02639181725680828
+      ],
+      [
+        "of",
+        0.02548672817647457
+      ],
+      [
+        "was",
+        0.017730655148625374
+      ],
+      [
+        "a",
+        0.015046178363263607
+      ]
+    ]
+  },
+  "leave_one_out": {
+    "positions": 19,
+    "sum_log_probability": -101.0411376953125,
+    "pseudo_perplexity": 203.96624755859375
+  },
+  "transfer_shapes": {
+    "token_tags": [
+      1,
+      26,
+      3
+    ],
+    "sequence_classes": [
+      1,
+      2
+    ],
+    "span_scores": [
+      1,
+      26,
+      2
+    ]
+  }
+}

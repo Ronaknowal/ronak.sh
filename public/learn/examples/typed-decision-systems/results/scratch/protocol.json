@@ -1,0 +1,36 @@
+{
+  "status": "prospective-before-any-fit",
+  "data_sha256": "fd853e3bdb9ff903f244f1bd13454b170540de0cefbcef4b5f3f953fd0194c63",
+  "copied_data_sha256": "a68624a4ccccfd4555dcb61a95ebb8bd3ef3461cd6c2d072ffdcaee939203a1c",
+  "plans_sha256": "53ae5ee5ab2234481b653a83560a02b588b277ac1bdb93a8873a35fe3e3b934f",
+  "vocabulary_sha256": "221d68c238cb437187dba85c2b1547834383b5c23f01e210ab842374a989f453",
+  "sources": {
+    "train_decision.py": "22a9d260fd16e0fad032bc0892bc4648e068c69913c9b3cc7914fae5fbe789ef",
+    "typed_decision.py": "7bbaee5ae0dc208f3c8af80c8cf4b193e064283eb4e2e438f50008cd262544dc"
+  },
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "primary_seed": 17,
+  "updates": 400,
+  "batch_size": 24,
+  "architecture": "exact project width32 blocks2 heads4 dropout0 max128",
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 0.003,
+    "weight_decay": 0.01,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "clip": 1
+  },
+  "threads": 4,
+  "dtype": "float32",
+  "selection": "earliest minimum development NLL at 0,40,...,400",
+  "budget": "three fits; no adaptive seed/step/hyperparameter change",
+  "evaluation": "all three fits terminal before selected logits on calibration/test; all seeds retained"
+}

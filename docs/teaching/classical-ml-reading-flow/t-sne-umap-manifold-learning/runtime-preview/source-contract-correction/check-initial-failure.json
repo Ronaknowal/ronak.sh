@@ -1,0 +1,9 @@
+{
+  "command": "node source-contract-correction/check-source-contracts.mjs",
+  "toolChunk": "c250ca",
+  "exit": 1,
+  "failure": "SyntaxError: Unexpected token ) at line121; checker did not execute",
+  "checkerBytes": 13323,
+  "checkerSha256": "04efc9cb20fc80e3c9edb243c5be23970a8986060b3d3c4c122b9d1689ad8e6d",
+  "correction": "Remove one extra closing parenthesis in AST array predicate; no product-source change from this checker syntax repair"
+}

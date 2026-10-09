@@ -1,12 +1,18 @@
 import RemoteCodeBlock from '../content/RemoteCodeBlock.jsx';
 import { useState } from 'react';
-import { NeuralLab, NeuralNumber, NeuralSelect, NeuralTable, formatNeural as number } from './NeuralLessonElements.jsx';
-import { activationMoments, directionalGeometry, gatedIdentity, idealSignal, initializationSchemes, symmetryState, widthConfiguration } from '../../data/weight-initialization-models.js';
+import { NeuralTable } from './NeuralLessonElements.jsx';
+import { FlowChoice, FlowControls, FlowLab, FlowReadout, FlowSlider, flowNumber } from './LessonFlow.jsx';
+import { activationMoments, directionalGeometry, initializationSchemes, symmetryState, widthConfiguration } from '../../data/weight-initialization-models.js';
 import records from '../../data/weight-initialization-measurements.json';
+import { SymmetryNetworkDiagram, sci } from './InitializationBuildupFigures.jsx';
 import './weight-initialization.css';
 
-const amber = '#e2b55a', pale = '#dedede';
-const seedOptions = ['1', '2', '3'].map(value => [value, `Seed ${value}`]);
+// Plot series colours are categorical and labelled on the curve (visual vocabulary, "plots").
+const seriesColor = ['#e8c36f', '#9fc3ea'];
+const seedOptions = [1, 2, 3].map(value => [value, `seed ${value}`]);
+const number = (value, digits = 4) => flowNumber(value, digits);
+const superscripts = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
+const power = exponent => '10' + String(exponent).split('').map(character => superscripts[character]).join('');
 export const initializationAsset = '/learn-assets/weight-initialization-xavier-kaiming-p/';
 
 export function InitializationProgram({ file = 'initialization-experiments.py', title = 'Read the complete CPU experiment' }) {
@@ -16,129 +22,216 @@ export function InitializationProgram({ file = 'initialization-experiments.py', 
   </>;
 }
 
-function Plot({ title, series, logarithmic = false, xLabel = 'Layer', yLabel, xDomain, yDomain }) {
+// A small line chart. Each series is labelled at its last point; axis titles are drawn on the chart.
+function Plot({ series, logarithmic = false, xLabel, yLabel, xDomain, xTicks }) {
   const positive = series.flatMap(line => line.values.map(([, value]) => value)).filter(value => !logarithmic || value > 0);
   const hasZero = logarithmic && series.some(line => line.values.some(([, value]) => value === 0));
   const allX = series.flatMap(line => line.values.map(([value]) => value));
   const [xmin, xmax] = xDomain || [Math.min(...allX), Math.max(...allX)];
-  let [ymin, ymax] = yDomain || (logarithmic ? [Math.floor(Math.log10(Math.min(...positive))), Math.ceil(Math.log10(Math.max(...positive)))] : [0, Math.max(...positive) * 1.08]);
+  let [ymin, ymax] = logarithmic ? [Math.floor(Math.log10(Math.min(...positive))), Math.ceil(Math.log10(Math.max(...positive)))] : [0, Math.max(...positive) * 1.1];
   if (ymax === ymin) { ymin -= 1; ymax += 1; }
-  // Reserve room for signed power labels in the site's monospaced font, including on phones.
-  const left = 80, right = 322, top = 24, bottom = hasZero ? 185 : 205;
+  const left = 70, right = 300, top = 20, bottom = hasZero ? 180 : 196;
   const x = value => left + (value - xmin) / (xmax - xmin || 1) * (right - left);
-  const y = value => value === 0 && logarithmic ? 213 : bottom - ((logarithmic ? Math.log10(value) : value) - ymin) / (ymax - ymin) * (bottom - top);
-  const middleTick = logarithmic ? Math.round((ymin + ymax) / 2) : (ymin + ymax) / 2;
-  const ticks = [...new Set([ymin, middleTick, ymax])];
-  return <figure><figcaption>{title}</figcaption><svg className="init-chart" viewBox="0 0 340 250" role="img" aria-label={`${title}. ${xLabel}; ${yLabel}. Exact values in the adjacent table.`}>
+  const y = value => value === 0 && logarithmic ? 206 : bottom - ((logarithmic ? Math.log10(value) : value) - ymin) / (ymax - ymin) * (bottom - top);
+  const middle = logarithmic ? Math.round((ymin + ymax) / 2) : (ymin + ymax) / 2;
+  const ticks = [...new Set([ymin, middle, ymax])];
+  const labelY = series.map(line => { const last = line.values.at(-1); return y(last[1]); });
+  if (labelY.length === 2 && Math.abs(labelY[0] - labelY[1]) < 14) { const shift = (14 - Math.abs(labelY[0] - labelY[1])) / 2; if (labelY[0] <= labelY[1]) { labelY[0] -= shift; labelY[1] += shift; } else { labelY[0] += shift; labelY[1] -= shift; } }
+  return <svg className="init-chart" viewBox="0 0 400 250" role="img" aria-label={`${yLabel} against ${xLabel}${logarithmic ? ', logarithmic vertical scale' : ''}. ${series.map(line => `${line.name}: from ${sci(line.values[0][1])} to ${sci(line.values.at(-1)[1])}`).join('; ')}.`}>
     <line className="init-axis" x1={left} x2={left} y1={top} y2={bottom} /><line className="init-axis" x1={left} x2={right} y1={bottom} y2={bottom} />
-    {ticks.map(tick => <g key={tick}><text x={left - 7} y={bottom - (tick - ymin) / (ymax - ymin) * (bottom - top) + 4} textAnchor="end">{logarithmic ? `10^${number(tick, 1)}` : number(tick, 2)}</text></g>)}
-    {[xmin, (xmin + xmax) / 2, xmax].map(tick => <text key={tick} x={x(tick)} y="240" textAnchor="middle">{number(tick, 1)}</text>)}
-    {hasZero && <><line x1={left} x2={right} y1="213" y2="213" stroke="#505050" strokeDasharray="2 4" /><text x={left - 7} y="217" textAnchor="end">zero</text></>}
-    {series.map((line, index) => <g key={line.name}>{line.values.map(([a, b], i) => {
-      const next = line.values[i + 1];
-      return <g key={i}>{next && !(logarithmic && ((b === 0) !== (next[1] === 0))) && <line x1={x(a)} y1={y(b)} x2={x(next[0])} y2={y(next[1])} stroke={index ? pale : amber} strokeWidth="2" strokeDasharray={index ? '5 4' : undefined} />}<circle cx={x(a)} cy={y(b)} r="2.8" fill={index ? pale : amber}><title>{line.name}: {a}, {number(b, 7)}</title></circle></g>;
-    })}</g>)}
-  </svg><p className="init-reading">Horizontal: {xLabel}. Vertical: {yLabel}{logarithmic ? '; logarithmic positive scale' : ''}.{hasZero && ' Exact zeros use a separate rail; no artificial epsilon.'}</p><div className="init-legend">{series.map((line, index) => <span key={line.name} data-dashed={Boolean(index)} style={{ '--series-color': index ? pale : amber }}>{line.name}</span>)}</div></figure>;
+    {ticks.map(tick => <text key={tick} className="init-axis-label" x={left - 6} y={bottom - (tick - ymin) / (ymax - ymin) * (bottom - top) + 4} textAnchor="end">{logarithmic ? power(tick) : number(tick, 2)}</text>)}
+    {(xTicks || [xmin, xmax]).map(tick => <text key={tick} className="init-axis-label" x={x(tick)} y={bottom + 16} textAnchor="middle">{tick}</text>)}
+    {hasZero && <><line x1={left} x2={right} y1="206" y2="206" className="init-axis init-axis--zero" /><text className="init-axis-label" x={left - 6} y="210" textAnchor="end">zero</text></>}
+    <text className="init-axis-title" x={(left + right) / 2} y="240" textAnchor="middle">{xLabel}</text>
+    <text className="init-axis-title" x="14" y={(top + bottom) / 2} textAnchor="middle" transform={`rotate(-90 14 ${(top + bottom) / 2})`}>{yLabel}</text>
+    {series.map((line, index) => <g key={line.name}>
+      {line.values.map(([a, b], i) => { const next = line.values[i + 1]; return next && !(logarithmic && ((b === 0) !== (next[1] === 0))) ? <line key={i} x1={x(a)} y1={y(b)} x2={x(next[0])} y2={y(next[1])} stroke={seriesColor[index]} strokeWidth="2.2" strokeDasharray={index ? '5 4' : undefined} /> : null; })}
+      {line.values.map(([a, b], i) => <circle key={i} cx={x(a)} cy={y(b)} r="2.8" fill={seriesColor[index]} />)}
+      <text className="init-series-label" x={x(line.values.at(-1)[0]) + 6} y={labelY[index] + 4} fill={seriesColor[index]}>{line.name}</text>
+    </g>)}
+  </svg>;
 }
+
+const shortName = { zero: 'all zero', small: 'std 0.01', xavier: 'Xavier', kaiming: 'Kaiming', orthogonal: 'orthogonal', large: 'std 0.5' };
 
 export function InitializationSignalLab() {
-  const [scheme, setScheme] = useState('small'), [seed, setSeed] = useState('1'), [variance, setVariance] = useState(.01), [depth, setDepth] = useState(20);
-  const current = records.propagation.find(row => row.seed === Number(seed) && row.scheme === scheme), baseline = records.propagation.find(row => row.seed === Number(seed) && row.scheme === 'kaiming');
-  const ratio = current.layers.at(-1).q / current.layers[0].q, theory = idealSignal(variance, depth);
-  return <NeuralLab title="Follow a signal through twenty layers" id="initialization-signal"><p>Saved float64 probes: 128 fixed inputs, width 64, input/cotangent seed 71. Selections read recorded runs; they do not train a model here. Dashed Kaiming uses the same selected seed.</p>
-    <div className="neural-controls"><NeuralSelect label="Recorded initialization" value={scheme} onChange={setScheme} options={initializationSchemes} /><NeuralSelect label="Propagation seed" value={seed} onChange={setSeed} options={seedOptions} /></div>
-    <div className="neural-two">{[['q', 'Forward second moment', 'pooled mean(h²)'], ['g', 'Backward sensitivity', 'RMS ∂probe/∂h']].map(([key, title, unit]) => <Plot key={key} title={title} yLabel={unit} logarithmic series={[{ name: initializationSchemes.find(([id]) => id === scheme)[1], values: current.layers.map(row => [row.layer, row[key]]) }, { name: 'Kaiming, same seed', values: baseline.layers.map(row => [row.layer, row[key]]) }]} />)}</div>
-    <p className="neural-result" data-result="signal">Layer 20 / input mean square: {number(ratio)} — {ratio < .1 ? 'below one tenth' : ratio > 10 ? 'above tenfold' : 'within one tenth to tenfold'}. This descriptive range does not certify trainability. Input gradient RMS: {number(current.layers[0].g)}.</p>
-    <p>The external output cotangent has RMS {number(records.cotangentRms)} for every scheme. Even a zero activation can have a nonzero derivative with respect to that output; the gates can still block its route back to the input.</p>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Exact forward and backward measurements</h4><NeuralTable caption="Current and reference measurements" headers={['Layer', 'Current mean square', 'Kaiming mean square', 'Current gradient RMS', 'Kaiming gradient RMS']} rows={current.layers.map((row, i) => [row.layer, number(row.q, 8), number(baseline.layers[i].q, 8), number(row.g, 8), number(baseline.layers[i].g, 8)])} /></section>
-    <h4>Construct an idealized recurrence</h4><p>A separate assumption-based calculation: fan-in 100, symmetric ReLU inputs, one-layer factor = 100 × weight variance / 2. No new measured curve is implied.</p>
-    <div className="neural-controls"><NeuralNumber label="Weight variance" value={variance} onChange={setVariance} min={0} max={.1} step={.001} /><NeuralNumber label="Idealized depth" value={depth} onChange={setDepth} min={1} max={30} step={1} integer /></div>
-    <p className="neural-result" data-result="recurrence">Per-layer factor {number(theory.factor)}; after {depth} layers, q / q₀ = {number(theory.ratio)}. Variance 0.02 preserves this idealized scale at every depth.</p><button onClick={() => { setScheme('small'); setSeed('1'); setVariance(.01); setDepth(20); }}>Reset signal investigation</button>
-  </NeuralLab>;
+  const [scheme, setScheme] = useState('small'), [seed, setSeed] = useState(1);
+  const current = records.propagation.find(row => row.seed === seed && row.scheme === scheme), baseline = records.propagation.find(row => row.seed === seed && row.scheme === 'kaiming');
+  const ratio = current.layers.at(-1).q / current.layers[0].q;
+  const series = key => [{ name: shortName[scheme], values: current.layers.map(row => [row.layer, row[key]]) }].concat(scheme === 'kaiming' ? [] : [{ name: 'Kaiming', values: baseline.layers.map(row => [row.layer, row[key]]) }]);
+  return <FlowLab id="initialization-signal" label="Follow a signal forward and its gradient backward through twenty layers">
+    <div className="flow-columns-2">
+      <Plot logarithmic xLabel="layer" yLabel="forward: mean(h²)" xDomain={[0, 20]} xTicks={[0, 10, 20]} series={series('q')} />
+      <Plot logarithmic xLabel="layer" yLabel="backward: gradient RMS" xDomain={[0, 20]} xTicks={[0, 10, 20]} series={series('g')} />
+    </div>
+    <FlowControls>
+      <FlowChoice label="Initialization" value={scheme} onChange={setScheme} options={initializationSchemes.map(([key, name]) => [key, key === 'zero' ? 'All-zero weights' : name.replace(' · ', ' ')])} />
+      <FlowChoice label="Seed" value={seed} onChange={setSeed} options={seedOptions} />
+    </FlowControls>
+    <FlowReadout>Layer 20 mean square ÷ input mean square = <strong>{sci(ratio)}</strong> (Kaiming, same seed: {sci(baseline.layers.at(-1).q / baseline.layers[0].q)}). The gradient RMS that reaches the input is <strong>{sci(current.layers[0].g)}</strong>; it started at the output as {number(records.cotangentRms, 3)}.</FlowReadout>
+    <p className="flow-note">Recorded float64 runs from the lesson's program, read from saved files; nothing is trained in your browser. The dashed line is Kaiming with the same seed.</p>
+  </FlowLab>;
 }
 
+const valueSets = { symmetric: [-2, -1, 1, 2], shifted: [-1, 0, 2, 3] };
 export function InitializationMomentsLab() {
-  const [values, setValues] = useState([-2, -1, 1, 2]), [activation, setActivation] = useState('relu'), [origin, setOrigin] = useState('zero');
-  const result = activationMoments(values, activation), maximum = Math.max(1, ...[result.before, result.after].flatMap(row => row.values.map(value => (value - (origin === 'mean' ? row.mean : 0)) ** 2)));
-  const edit = (index, value) => setValues(previous => previous.map((entry, i) => i === index ? value : entry));
-  return <NeuralLab title="Four values, two different squared distances" id="initialization-moments"><p>Move each value. The same named observation stays in its row before and after the activation. The bars measure squared distance; they are not sliders.</p>
-    <div className="neural-controls">{values.map((value, i) => <NeuralNumber key={i} label={`Value ${'ABCD'[i]}`} value={value} onChange={next => edit(i, next)} min={-5} max={5} step={.1} />)}<NeuralSelect label="Activation" value={activation} onChange={setActivation} options={[['relu', 'ReLU'], ['identity', 'Identity · no clipping']]} /><NeuralSelect label="Squared distance from" value={origin} onChange={setOrigin} options={[['zero', 'Zero · second moment'], ['mean', 'Each row’s own mean · variance']]} /></div>
-    <div className="neural-two">{[['Before', result.before], ['After', result.after]].map(([label, row]) => <div key={label}><h4>{label}: {row.values.map(value => number(value)).join(', ')}</h4><svg className="init-chart" viewBox="0 0 340 125" role="img" aria-label={`${label} observation positions on minus five to five. Mean ${number(row.mean)}.`}><line x1="30" x2="310" y1="94" y2="94" className="init-axis" /><line x1="170" x2="170" y1="10" y2="97" stroke="#505050" strokeDasharray="3 4" /><line x1={170 + 28 * row.mean} x2={170 + 28 * row.mean} y1="10" y2="97" stroke={amber} strokeDasharray="5 4" />{row.values.map((value, i) => <g key={i}><text x="12" y={24 + 19 * i}>{'ABCD'[i]}</text><circle cx={170 + 28 * value} cy={20 + 19 * i} r="4" fill={pale} /></g>)}{[-5, 0, 5].map(value => <text key={value} x={170 + 28 * value} y="115" textAnchor="middle">{value}</text>)}</svg><p className="init-reading">Dashed amber: mean {number(row.mean)}. Neutral center line: zero.</p>
-      {row.values.map((value, i) => { const squared = (value - (origin === 'mean' ? row.mean : 0)) ** 2; return <div className="init-moment-row" key={i}><span>{'ABCD'[i]}: {number(value)}</span><div className="init-distance"><span style={{ width: `${100 * squared / maximum}%` }} /></div><span>{number(squared)}</span></div>; })}
-      <div className="init-stats"><div>Mean<strong>{number(row.mean)}</strong></div><div>Mean square<strong>{number(row.secondMoment)}</strong></div><div>Variance<strong>{number(row.variance)}</strong></div></div></div>)}</div>
-    <p className="neural-result" data-result="moments">After: q = {number(result.after.secondMoment)}, variance = q − mean² = {number(result.after.variance)}. {activation === 'identity' ? 'Identity leaves every statistic unchanged.' : 'ReLU can move the mean. Half of a symmetric input’s squared mass is removed; its variance need not halve.'}</p><div className="neural-buttons"><button onClick={() => { setValues([-3, -1, 1, 3]); setActivation('relu'); }}>Outer pair ±3</button><button onClick={() => { setValues([-2, -1, 1, 2]); setActivation('relu'); setOrigin('zero'); }}>Reset moment investigation</button></div>
-  </NeuralLab>;
+  const [set, setSet] = useState('symmetric'), [activation, setActivation] = useState('relu'), [origin, setOrigin] = useState('zero');
+  const result = activationMoments(valueSets[set], activation);
+  const rows = [['before the activation', result.before], [activation === 'relu' ? 'after ReLU' : 'after no activation', result.after]];
+  const distance = (row, value) => (value - (origin === 'mean' ? row.mean : 0)) ** 2;
+  const maximum = Math.max(1, ...rows.flatMap(([, row]) => row.values.map(value => distance(row, value))));
+  const x = value => 30 + (value + 4) * 36;
+  return <FlowLab id="initialization-moments" label="Four values: distance from zero versus distance from the mean">
+    <div className="flow-columns-2">{rows.map(([label, row]) => <div key={label} className="init-moments">
+      <svg viewBox="0 0 320 176" role="img" aria-label={`Values ${label}: ${row.values.map(v => number(v, 2)).join(', ')}. Mean ${number(row.mean, 3)}.`}>
+        <text className="init-layer__heading" x="10" y="16">{label}</text>
+        <line className="init-axis" x1="30" x2="318" y1="70" y2="70" />
+        {[-4, -2, 0, 2, 4].map(t => <g key={t}><line className="init-axis" x1={x(t)} x2={x(t)} y1="66" y2="74" /><text className="init-axis-label" x={x(t)} y="88" textAnchor={t === 4 ? "end" : t === -4 ? "start" : "middle"}>{flowNumber(t, 0)}</text></g>)}
+        <line className="init-moments__zero" x1={x(0)} x2={x(0)} y1="28" y2="74" />
+        <line className="init-moments__mean" x1={x(row.mean)} x2={x(row.mean)} y1="28" y2="74" /><text className="init-moments__mean-label" x={x(row.mean)} y="104" textAnchor="middle">mean {number(row.mean, 2)}</text>
+        {row.values.map((value, i) => <g key={i}><circle className="init-moments__point" cx={x(value)} cy={28 + i * 11} r="5" /><text className="init-moments__point-label" x={x(value) + 9} y={32 + i * 11}>{'ABCD'[i]}</text></g>)}
+        {row.values.map((value, i) => { const d = distance(row, value); return <g key={`d${i}`}><rect className="init-moments__bar" x={30 + i * 72} y={170 - d / maximum * 34} width="56" height={d / maximum * 34} /><text className="init-axis-label" x={58 + i * 72} y={166 - d / maximum * 34} textAnchor="middle">{'ABCD'[i]}: {number(d, 2)}</text></g>; })}
+      </svg>
+      <p className="init-moments__stats">mean <strong>{number(row.mean, 4)}</strong> · mean square <strong>{number(row.secondMoment, 4)}</strong> · variance <strong>{number(row.variance, 4)}</strong></p>
+    </div>)}</div>
+    <FlowControls>
+      <FlowChoice label="Values" value={set} onChange={setSet} options={[['symmetric', '−2, −1, 1, 2'], ['shifted', '−1, 0, 2, 3']]} />
+      <FlowChoice label="Activation" value={activation} onChange={setActivation} options={[['relu', 'ReLU'], ['identity', 'none']]} />
+      <FlowChoice label="Bars show squared distance from" value={origin} onChange={setOrigin} options={[['zero', 'zero'], ['mean', 'the mean']]} />
+    </FlowControls>
+    <FlowReadout>Mean square: {number(result.before.secondMoment, 4)} → <strong>{number(result.after.secondMoment, 4)}</strong>{result.before.secondMoment ? ` (× ${number(result.after.secondMoment / result.before.secondMoment, 4)})` : ''}. Variance: {number(result.before.variance, 4)} → <strong>{number(result.after.variance, 4)}</strong>. {activation === 'identity' ? 'With no activation nothing changes.' : set === 'symmetric' ? 'The values are symmetric about zero, so ReLU keeps exactly half the mean square; the variance does not halve because the mean moved.' : 'These values are not symmetric about zero, so ReLU removes less than half the mean square.'}</FlowReadout>
+  </FlowLab>;
 }
 
+const directions = { horizontal: [1, 0], vertical: [0, 1], diagonal: [Math.SQRT1_2, Math.SQRT1_2] };
 export function InitializationGeometryLab() {
-  const [smallerSquared, setSmallerSquared] = useState(.1), [vector, setVector] = useState([0, 1]), [depth, setDepth] = useState(1), [gate, setGate] = useState(false), [base, setBase] = useState([-1, 1]);
-  const smaller = Math.sqrt(smallerSquared);
-  const geometry = directionalGeometry(smaller, vector, depth), gated = gatedIdentity(base, vector);
-  const gains = gate ? gated.diagonal : geometry.gains, output = gate ? gated.output : geometry.output;
-  const radius = Math.max(1.2, ...gains, ...vector.map(Math.abs), ...output.map(Math.abs)) * 1.15, scale = 125 / radius;
-  const x = value => 170 + scale * value, y = value => 155 - scale * value;
-  const points = Array.from({ length: 129 }, (_, i) => { const angle = i * Math.PI / 64; return `${x(gains[0] * Math.cos(angle))},${y(gains[1] * Math.sin(angle))}`; }).join(' ');
-  const gain = Math.hypot(...vector) === 0 ? null : Math.hypot(...output) / Math.hypot(...vector);
-  return <NeuralLab title="Average stability can hide a lost direction" id="initialization-geometry"><p>The unit circle becomes an ellipse under a diagonal map. Both axes use the same physical scale. Depth repeats the same map; it is not a random-network claim.</p>
-    <div className="neural-controls"><NeuralNumber label="Smaller one-layer gain squared" value={smallerSquared} onChange={setSmallerSquared} min={.0025} max={1} step={.0025} /><NeuralNumber label="Repeated layers" value={depth} onChange={setDepth} min={1} max={8} step={1} integer />{vector.map((value, i) => <NeuralNumber key={i} label={`Perturbation ${i ? 'vertical' : 'horizontal'}`} value={value} onChange={next => setVector(previous => previous.map((entry, j) => i === j ? next : entry))} min={-2} max={2} step={.1} />)}</div>
-    <p>The slider edits the squared gain s²; the actual smaller gain is s = √{number(smallerSquared)} = {number(smaller)}. The other squared gain is 2 − s², so their average remains one.</p>
-    <label><input type="checkbox" checked={gate} onChange={event => setGate(event.target.checked)} /> Compare the local Jacobian of ReLU(√2 x)</label>
-    {gate && <><p>This switches to a separate one-layer counterexample. The ellipse now shows the Jacobian at the base point, applied to a small perturbation; depth and smaller-gain controls belong to the linear comparison.</p><div className="neural-controls">{base.map((value, i) => <NeuralNumber key={i} label={`Base point ${i ? 'vertical' : 'horizontal'}`} value={value} onChange={next => setBase(previous => previous.map((entry, j) => i === j ? next : entry))} min={-2} max={2} step={.1} />)}</div>{gated.atKink && <p>At a zero base coordinate the derivative is not unique. This display uses the PyTorch convention: derivative zero at zero.</p>}</>}
-    <svg className="init-chart" viewBox="0 0 340 320" role="img" aria-label={`Equal-axis circle and transformed ellipse; gains ${gains.map(value => number(value)).join(', ')}. Exact vectors below.`}><line className="init-axis" x1="20" x2="320" y1="155" y2="155" /><line className="init-axis" x1="170" x2="170" y1="10" y2="300" /><circle cx="170" cy="155" r={scale} fill="none" stroke={pale} strokeDasharray="4 4" /><polyline points={points} fill="none" stroke={amber} strokeWidth="2" /><line x1="170" y1="155" x2={x(vector[0])} y2={y(vector[1])} stroke={pale} strokeWidth="3" strokeDasharray="4 3" /><circle cx={x(vector[0])} cy={y(vector[1])} r="4" fill={pale} /><line x1="170" y1="155" x2={x(output[0])} y2={y(output[1])} stroke={amber} strokeWidth="3" /><circle cx={x(output[0])} cy={y(output[1])} r="4" fill={amber} /><text x="318" y="175" textAnchor="end">x</text><text x="180" y="16">y</text></svg>
-    <p className="init-reading">Neutral dashed: input circle/vector. Amber solid: transformed circle/vector. Visible radius = {number(radius)} in both axes; this view rescales together as depth changes.</p>
-    <div className="neural-result" data-result="geometry"><p>One-layer linear gains: {number(geometry.larger)} and {number(smaller)}; average squared gain = {number(geometry.averageSquaredGain)}.</p><p>Displayed map gains: {gains.map(value => number(value)).join(', ')}. Input [{vector.map(value => number(value)).join(', ')}] → output [{output.map(value => number(value)).join(', ')}]. Norm gain: {gain === null ? 'undefined: the zero input has no direction; choose a nonzero perturbation' : number(gain)}.</p></div>
-    <div className="neural-buttons"><button onClick={() => { setSmallerSquared(.04); setDepth(5); setVector([0, 1]); setGate(false); }}>Five layers · smaller gain 0.2</button><button onClick={() => { setSmallerSquared(1); setDepth(1); setGate(false); }}>Identity comparison</button><button onClick={() => { setSmallerSquared(.1); setDepth(1); setVector([0, 1]); setBase([-1, 1]); setGate(false); }}>Reset geometry investigation</button></div>
-  </NeuralLab>;
+  const [smallerSquared, setSmallerSquared] = useState(0.1), [depth, setDepth] = useState(1), [direction, setDirection] = useState('vertical');
+  const smaller = Math.sqrt(smallerSquared), vector = directions[direction];
+  const geometry = directionalGeometry(smaller, vector, depth);
+  const radius = Math.max(1.2, ...geometry.gains) * 1.15, scale = 110 / radius;
+  const cx = 170, cy = 135, x = value => cx + scale * value, y = value => cy - scale * value;
+  const ellipse = Array.from({ length: 129 }, (_, i) => { const angle = i * Math.PI / 64; return `${x(geometry.gains[0] * Math.cos(angle))},${y(geometry.gains[1] * Math.sin(angle))}`; }).join(' ');
+  return <FlowLab id="initialization-geometry" label="Repeat a matrix with one weak direction">
+    <svg className="init-geometry" viewBox="0 0 340 285" role="img" aria-label={`Unit circle and the ellipse after ${depth} repetitions: horizontal gain ${number(geometry.gains[0])}, vertical gain ${number(geometry.gains[1])}. The ${direction} input of length 1 becomes length ${number(geometry.normGain)}.`}>
+      <line className="init-axis" x1="20" x2="320" y1={cy} y2={cy} /><line className="init-axis" x1={cx} x2={cx} y1="15" y2="255" />
+      <circle className="init-ellipse--input" cx={cx} cy={cy} r={scale} />
+      <polyline className="init-ellipse--output" points={ellipse} />
+      <line className="init-geometry__in" x1={cx} y1={cy} x2={x(vector[0])} y2={y(vector[1])} /><circle className="init-geometry__in-dot" cx={x(vector[0])} cy={y(vector[1])} r="4" />
+      <line className="init-geometry__out" x1={cx} y1={cy} x2={x(geometry.output[0])} y2={y(geometry.output[1])} /><circle className="init-geometry__out-dot" cx={x(geometry.output[0])} cy={y(geometry.output[1])} r="4" />
+      <text className="init-geometry__in-label" x={x(vector[0]) + 6} y={y(vector[1]) - 6}>input</text>
+      <text className="init-geometry__out-label" x={x(geometry.output[0]) + 6} y={y(geometry.output[1]) + 14}>after M{depth > 1 ? <tspan baseline-shift="super" fontSize="9">{depth}</tspan> : null}</text>
+      <text className="init-axis-label" x="170" y="280" textAnchor="middle">same scale on both axes; circle radius 1</text>
+    </svg>
+    <FlowControls>
+      <FlowSlider name="Weaker gain squared" value={smallerSquared} onChange={setSmallerSquared} min={0.0025} max={1} step={0.0025} format={value => number(value, 4)} />
+      <FlowSlider name="Repeated layers" value={depth} onChange={setDepth} min={1} max={8} step={1} format={value => String(value)} />
+      <FlowChoice label="Follow input direction" value={direction} onChange={setDirection} options={[['horizontal', 'horizontal'], ['vertical', 'vertical'], ['diagonal', 'diagonal']]} />
+    </FlowControls>
+    <FlowReadout>One layer stretches horizontally by <strong>{number(geometry.larger)}</strong> and vertically by <strong>{number(smaller)}</strong>; the average squared gain stays <strong>{number(geometry.averageSquaredGain)}</strong>. After {depth} {depth === 1 ? 'layer' : 'layers'} the {direction} input of length 1 has length <strong>{number(geometry.normGain)}</strong>.</FlowReadout>
+    <p className="flow-note">The same diagonal matrix repeated, not a random network. Dashed white: the input circle and vector; violet: their images after the map. The view rescales as gains grow; both axes keep one scale.</p>
+  </FlowLab>;
 }
 
 export function InitializationSpectrumFigure() {
   const values = records.fixtures.gaussian_singular_values, bins = Array.from({ length: 10 }, () => 0);
-  values.forEach(value => { bins[Math.min(9, Math.floor(value / .2))]++; });
-  return <figure><figcaption>One saved 64 × 64 Gaussian draw, seed 19</figcaption><div className="init-spectrum" role="img" aria-label={`Computed histogram of 64 singular values, ten bins from zero to two. Counts ${bins.join(', ')}.`}>{bins.map((count, i) => <span key={i} style={{ height: `${100 * count / Math.max(...bins)}%` }} title={`${number(i * .2, 1)}–${number((i + 1) * .2, 1)}: ${count}`} />)}</div><p>Ten equal bins from 0 to 2. Minimum {number(Math.min(...values))}; maximum {number(Math.max(...values))}. These are a different 64-dimensional map, not the ellipse above.</p><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect every singular value and histogram bin</h4><p>{values.map(value => number(value, 7)).join(', ')}</p><NeuralTable caption="Bins recomputed from the actual saved singular values" headers={['Interval [left, right)', 'Count']} rows={bins.map((count, i) => [`${number(i * .2, 1)}–${number((i + 1) * .2, 1)}`, count])} /></section></figure>;
+  values.forEach(value => { bins[Math.min(9, Math.floor(value / 0.2))]++; });
+  const top = Math.max(...bins);
+  return <figure className="init-spectrum" id="gaussian-spectrum">
+    <svg viewBox="0 -24 380 224" role="img" aria-label={`Histogram of the 64 singular values of one saved 64 by 64 Gaussian draw, ten bins from 0 to 2. Counts ${bins.join(', ')}. Minimum ${number(Math.min(...values))}, maximum ${number(Math.max(...values))}. An orthogonal matrix with gain √2 would put all 64 at 1.414.`}>
+      {bins.map((count, k) => <rect key={k} className="init-many__bar" x={40 + k * 30 + 1} width="28" y={150 - count / top * 120} height={count / top * 120} />)}
+      {bins.map((count, k) => <text key={`c${k}`} className="init-axis-label" x={55 + k * 30} y={146 - count / top * 120} textAnchor="middle">{count}</text>)}
+      <line className="init-axis" x1="40" x2="340" y1="150" y2="150" />
+      {[0, 0.5, 1, 1.5, 2].map(t => <text key={t} className="init-axis-label" x={40 + t * 150} y="166" textAnchor="middle">{t}</text>)}
+      <line className="init-spectrum__orthogonal" x1={40 + Math.SQRT2 * 150} x2={40 + Math.SQRT2 * 150} y1="-14" y2="150" />
+      <text className="init-spectrum__orthogonal-label" x={40 + Math.SQRT2 * 150 - 6} y="-4" textAnchor="end">orthogonal × √2: all 64 values here</text>
+      <text className="init-axis-title" x="190" y="190" textAnchor="middle">singular value (one directional gain)</text>
+    </svg>
+  </figure>;
 }
 
+const symmetryCases = { identical: { weights: [0.2, 0.2], outgoing: [0.3, 0.3] }, distinct: { weights: [0.1, 0.3], outgoing: [0.3, 0.3] }, zeroHead: { weights: [0.1, 0.3], outgoing: [0, 0] } };
 export function InitializationSymmetryLab() {
-  const initial = { weights: [.2, .2], outgoing: [.3, .3] };
-  const [state, setState] = useState(initial), [rate, setRate] = useState(.1), [steps, setSteps] = useState(0);
-  const result = symmetryState(state.weights, state.outgoing);
-  const setCase = (weights, outgoing) => { setState({ weights, outgoing }); setSteps(0); };
-  return <NeuralLab title="Which parameter can learn on the first step?" id="initialization-symmetry"><p>Two tanh units; input 1, target 1, loss ½(output − 1)². Gradients below are evaluated from the current state. A step updates every weight simultaneously.</p><div className="neural-buttons"><button onClick={() => setCase([.2, .2], [.3, .3])}>Identical units</button><button onClick={() => setCase([.1, .3], [.3, .3])}>Distinct units</button><button onClick={() => setCase([.1, .3], [0, 0])}>Distinct features, zero head</button></div>
-    <div className="init-matrix-flow">{state.weights.map((weight, i) => <div key={i}><strong>Unit {i + 1}: input 1 → weight {number(weight)} → tanh {number(result.features[i])} → outgoing {number(state.outgoing[i])}</strong><span>Incoming gradient {number(result.hiddenGradient[i])}; outgoing gradient {number(result.headGradient[i])}</span></div>)}</div>
-    <NeuralNumber label="Symmetry step size" value={rate} onChange={setRate} min={0} max={1} step={.01} /><p className="neural-result" data-result="symmetry">After {steps} {steps === 1 ? 'step' : 'steps'}: output {number(result.output)}, loss {number(result.loss)}. Incoming difference {number(state.weights[1] - state.weights[0])}. {rate === 0 ? 'A zero step leaves both parameters unchanged.' : 'Equal units receive equal gradients; distinct features can update a zero head before their own first change.'}</p>
-    <div className="neural-buttons"><button disabled={steps >= 30} onClick={() => { setState({ weights: state.weights.map((value, i) => value - rate * result.hiddenGradient[i]), outgoing: state.outgoing.map((value, i) => value - rate * result.headGradient[i]) }); setSteps(value => value + 1); }}>Apply one gradient step</button><button onClick={() => { setState(initial); setSteps(0); setRate(.1); }}>Reset symmetry investigation</button></div>{steps >= 30 && <p>This trace is bounded to 30 steps. Reset or choose a new starting case.</p>}
-  </NeuralLab>;
+  const [start, setStart] = useState('identical'), [state, setState] = useState(symmetryCases.identical), [steps, setSteps] = useState(0);
+  const result = symmetryState(state.weights, state.outgoing), rate = 0.1;
+  const choose = key => { setStart(key); setState(symmetryCases[key]); setSteps(0); };
+  const step = () => { setState({ weights: state.weights.map((value, i) => value - rate * result.hiddenGradient[i]), outgoing: state.outgoing.map((value, i) => value - rate * result.headGradient[i]) }); setSteps(value => value + 1); };
+  return <FlowLab id="initialization-symmetry" label="Which parameter can learn on the first step?">
+    <SymmetryNetworkDiagram weights={state.weights} outgoing={state.outgoing} features={result.features} output={result.output} hiddenGradient={result.hiddenGradient} headGradient={result.headGradient} />
+    <FlowControls>
+      <FlowChoice label="Start from" value={start} onChange={choose} options={[['identical', 'identical units'], ['distinct', 'distinct units'], ['zeroHead', 'distinct, zero head']]} />
+      <button type="button" disabled={steps >= 30} onClick={step}>Apply one gradient step</button>
+      <button type="button" onClick={() => choose(start)}>Start over</button>
+    </FlowControls>
+    <FlowReadout>After {steps} {steps === 1 ? 'step' : 'steps'} (rate {rate}): incoming-weight gradients <strong>{number(result.hiddenGradient[0], 5)}</strong> and <strong>{number(result.hiddenGradient[1], 5)}</strong>; outgoing-weight gradients <strong>{number(result.headGradient[0], 5)}</strong> and <strong>{number(result.headGradient[1], 5)}</strong>. Loss {number(result.loss, 5)}.{steps >= 30 ? ' This trace stops at 30 steps; start over to continue.' : ''}</FlowReadout>
+  </FlowLab>;
 }
 
 export function InitializationTrainingLab() {
-  const [scheme, setScheme] = useState('small'), [seed, setSeed] = useState('1');
-  const current = records.digitFits.find(row => row.scheme === scheme && row.seed === Number(seed));
-  return <NeuralLab title="A fitted training set can still give poor probabilities" id="initialization-training"><p>Recorded 64 → 32 → 32 → 32 → 32 → 10 digit model; 280 training / 120 validation rows. Adam 0.003, 300 full-batch updates. This is not the twenty-layer Gaussian probe.</p><div className="init-pixels">{records.specimens.map(sample => <figure key={sample.id}><div className="neural-pixels" role="img" aria-label={`Actual handwritten digit ${sample.digit}, source row ${sample.id}`}>{sample.pixels.map((pixel, i) => <span key={i} style={{ '--pixel': `rgb(${255 * pixel / 16} ${255 * pixel / 16} ${255 * pixel / 16})` }} />)}</div><figcaption>Digit {sample.digit}<br />Source {sample.id}</figcaption></figure>)}</div><div className="neural-controls"><NeuralSelect label="Training initialization" value={scheme} onChange={setScheme} options={initializationSchemes} /><NeuralSelect label="Training seed" value={seed} onChange={setSeed} options={seedOptions} /></div>
-    <Plot title="Recorded objective checkpoints" xLabel="Full-batch updates" yLabel="Cross-entropy" logarithmic xDomain={[0, 300]} series={['train', 'validation'].map(key => ({ name: key === 'train' ? 'Training' : 'Validation', values: current.trace.map(row => [row.step, row[key].ce]) }))} />
-    <p>Markers are actual recorded checkpoints. Straight connections show their order; the intervening trajectory was not recorded.</p><p className="neural-result" data-result="training">Final training CE {number(current.trace.at(-1).train.ce, 6)}; validation CE {number(current.trace.at(-1).validation.ce, 6)}; validation correct {current.trace.at(-1).validation.correct}/120. Validation is development evidence, not a final test estimate.</p>
-    <NeuralTable caption="All recorded checkpoints for the current selection" headers={['Update', 'Training CE', 'Validation CE', 'Correct / 120']} rows={current.trace.map(row => [row.step, number(row.train.ce, 6), number(row.validation.ce, 6), row.validation.correct])} /><button onClick={() => { setScheme('small'); setSeed('1'); }}>Reset training comparison</button>
-  </NeuralLab>;
+  const [scheme, setScheme] = useState('small'), [seed, setSeed] = useState(1);
+  const current = records.digitFits.find(row => row.scheme === scheme && row.seed === seed);
+  const last = current.trace.at(-1);
+  return <FlowLab id="initialization-training" label="Training and validation cross-entropy for one recorded digit fit">
+    <Plot logarithmic xLabel="full-batch updates" yLabel="cross-entropy" xDomain={[0, 300]} xTicks={[0, 100, 200, 300]} series={['train', 'validation'].map(key => ({ name: key === 'train' ? 'training' : 'validation', values: current.trace.map(row => [row.step, row[key].ce]) }))} />
+    <FlowControls>
+      <FlowChoice label="Hidden initialization" value={scheme} onChange={setScheme} options={initializationSchemes.map(([key, name]) => [key, name.replace(' · ', ' ')])} />
+      <FlowChoice label="Seed" value={seed} onChange={setSeed} options={seedOptions} />
+    </FlowControls>
+    <FlowReadout>After 300 updates: training CE <strong>{number(last.train.ce, 6)}</strong>, validation CE <strong>{number(last.validation.ce, 6)}</strong>, validation correct <strong>{last.validation.correct}/120</strong>.</FlowReadout>
+    <p className="flow-note">Markers are recorded checkpoints at updates {current.trace.map(row => row.step).join(', ')}; the path between them was not recorded. Validation is development evidence, not a final test.</p>
+  </FlowLab>;
 }
 
-export function InitializationWidthLab() {
-  const [width, setWidth] = useState(128), [rate, setRate] = useState(.003), [mode, setMode] = useState('mu'), [recordRate, setRecordRate] = useState('.01'), [seed, setSeed] = useState('1'), [step, setStep] = useState('0'), [coordinate, setCoordinate] = useState('4');
-  const config = widthConfiguration(width, rate, mode), names = ['First preactivation', 'First ReLU', 'Second preactivation', 'Second ReLU', 'Output logits'];
-  const selectedRecords = records.widthFits.filter(row => row.mode === mode && row.seed === Number(seed) && row.rate === Number(recordRate));
-  const means = ['standard', 'mu'].flatMap(parameterization => [32, 64, 128].map(n => [parameterization, n, ...[.001, .003, .01].map(lr => records.widthFits.filter(row => row.mode === parameterization && row.width === n && row.rate === lr).reduce((sum, row) => sum + row.trace.at(-1).validation.ce, 0) / 3)]));
-  return <NeuralLab title="Width changes the forward path and the update together" id="initialization-width"><p>Exact arithmetic for the restricted bias-free model. Base width stays 32; input/output sizes stay 64/10. These controls calculate a recipe; they do not run training.</p><div className="neural-controls"><NeuralNumber label="Target hidden width" value={width} onChange={setWidth} min={16} max={512} step={1} integer /><NeuralNumber label="Base Adam learning rate" value={rate} onChange={setRate} min={0} max={.02} step={.0001} /><NeuralSelect label="Width parametrization" value={mode} onChange={setMode} options={[['mu', 'μP · matching forward + Adam rules'], ['standard', 'Standard comparison']]} /></div>
-    <div className="init-matrix-flow"><div><strong>Input matrix: {width} × 64 → ReLU</strong>Fixed input axis 64; changing hidden axis {width}. Std {number(config.inputStd)}; Adam rate {number(config.inputRate)}.</div><div><strong>Hidden matrix: {width} × {width} → ReLU</strong>Two changing axes. Std {number(config.hiddenStd)}; Adam rate {number(config.hiddenRate)}.</div><div><strong>Readout input × {number(config.readoutMultiplier)} → raw matrix 10 × {width}</strong>Fixed output axis 10. Raw std {number(config.readoutStd)}; Adam rate {number(config.readoutRate)}.</div></div>
-    <p className="neural-result" data-result="width">m = {width}/32 = {number(config.multiplier)}. Hidden rate = {number(config.hiddenRate)}; readout input multiplier = {number(config.readoutMultiplier)}. {width === 32 ? 'At base width both full procedures coincide.' : mode === 'mu' ? `Omitting the forward division would multiply the same raw readout’s output by ${number(config.multiplier)}. This is an algebraic contrast, not new accuracy evidence.` : 'Standard comparison uses the same rate in all groups and no forward division.'}</p>
-    <h4>Inspect the saved coordinate experiment separately</h4><p>Only widths 32, 64 and 128 were trained. The plot below uses its own recorded rate, seed and checkpoint. Editing recipe width/rate above does not relabel these measurements. The same parametrization selector applies to both panels.</p>
-    <div className="neural-controls"><NeuralSelect label="Recorded base rate" value={recordRate} onChange={setRecordRate} options={[['.001', '0.001'], ['.003', '0.003'], ['.01', '0.01']]} /><NeuralSelect label="Coordinate seed" value={seed} onChange={setSeed} options={seedOptions} /><NeuralSelect label="Coordinate checkpoint" value={step} onChange={setStep} options={[0, 1, 2, 5, 150].map(value => [String(value), `Step ${value}`])} /><NeuralSelect label="Measured coordinate" value={coordinate} onChange={setCoordinate} options={names.map((name, i) => [String(i), name])} /></div>
-    <Plot title={`${names[Number(coordinate)]} · mean absolute value on the same 32 training rows`} xLabel="Recorded hidden width" yLabel="Mean absolute coordinate" xDomain={[32, 128]} series={[{ name: `${mode === 'mu' ? 'μP' : 'Standard'} · seed ${seed} · rate ${recordRate} · step ${step}`, values: selectedRecords.map(row => [row.width, row.trace.find(value => value.step === Number(step)).coordinate_mean_abs[Number(coordinate)]]) }]} />
-    <NeuralTable caption="Exact selected coordinates" headers={['Width', 'Mean absolute value']} rows={selectedRecords.map(row => [row.width, number(row.trace.find(value => value.step === Number(step)).coordinate_mean_abs[Number(coordinate)], 7)])} />
-    <p>A μP random readout can shrink with width at step zero. Compare the same coordinate at the same update; neither perfect flatness nor one final validation grid is a theorem about all architectures.</p>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">All three-seed validation means and within-row minima</h4><NeuralTable caption="Final validation CE; only these three candidate rates were tested" headers={['Parametrization', 'Width', 'LR .001', 'LR .003', 'LR .01']} rows={means.map(row => [...row.slice(0, 2), ...row.slice(2).map(value => <span key={value}>{number(value, 6)}{value === Math.min(...row.slice(2)) ? ' · row minimum' : ''}</span>)])} /></section>
-    <button onClick={() => { setWidth(128); setRate(.003); setMode('mu'); setRecordRate('.01'); setSeed('1'); setStep('0'); setCoordinate('4'); }}>Reset width investigation</button>
-  </NeuralLab>;
+export function WidthRecipeLab() {
+  const [width, setWidth] = useState(128), [mode, setMode] = useState('mu');
+  const rate = 0.003, config = widthConfiguration(width, rate, mode);
+  return <FlowLab id="initialization-width" label="Width changes the forward path and the update together">
+    <ol className="init-recipe" aria-label="The three matrices at the chosen width">
+      <li><strong>input matrix {width} × 64 → ReLU</strong><span>std {number(config.inputStd)} · Adam rate {number(config.inputRate)}</span></li>
+      <li><strong>hidden matrix {width} × {width} → ReLU</strong><span>std {number(config.hiddenStd)} · Adam rate {number(config.hiddenRate, 6)}</span></li>
+      <li><strong>readout: input × {number(config.readoutMultiplier)} → raw matrix 10 × {width}</strong><span>raw std {number(config.readoutStd)} · Adam rate {number(config.readoutRate)}</span></li>
+    </ol>
+    <FlowControls>
+      <FlowSlider name="Hidden width n" value={width} onChange={setWidth} min={32} max={512} step={1} format={value => String(value)} />
+      <FlowChoice label="Parametrization" value={mode} onChange={setMode} options={[['standard', 'standard'], ['mu', 'μP']]} />
+    </FlowControls>
+    <FlowReadout>m = {width}/32 = <strong>{number(config.multiplier)}</strong>. {width === 32 ? 'At the base width both parametrizations are the same training procedure.' : mode === 'mu' ? <>The hidden rate is η/m = <strong>{number(config.hiddenRate, 6)}</strong> and the readout divides its input by m. Leaving out that division would multiply the same raw readout's output by {number(config.multiplier)}.</> : 'Standard training uses the same rate in every group and no forward division.'}</FlowReadout>
+    <p className="flow-note">Exact arithmetic for the restricted bias-free model with base Adam rate 0.003; it calculates a recipe and runs no training.</p>
+  </FlowLab>;
 }
 
-export function InitializationPrecisionFigure() {
+const tensorNames = ['first preactivation', 'first ReLU', 'second preactivation', 'second ReLU', 'output logits'];
+export function CoordinateCheckLab() {
+  const [step, setStep] = useState(150), [tensor, setTensor] = useState(4);
+  const series = ['standard', 'mu'].map(mode => ({ name: mode === 'mu' ? 'μP' : 'standard', values: records.widthFits.filter(row => row.mode === mode && row.seed === 1 && row.rate === 0.01).sort((a, b) => a.width - b.width).map(row => [row.width, row.trace.find(value => value.step === step).coordinate_mean_abs[tensor]]) }));
+  return <FlowLab id="coordinate-check" label="Coordinate check: one tensor's typical size at three widths">
+    <Plot xLabel="hidden width" yLabel={`mean |${tensorNames[tensor]}|`} xDomain={[32, 128]} xTicks={[32, 64, 128]} series={series} />
+    <FlowControls>
+      <FlowChoice label="After update" value={step} onChange={setStep} options={[0, 1, 2, 5, 150].map(value => [value, String(value)])} />
+      <FlowChoice label="Tensor" value={tensor} onChange={setTensor} options={tensorNames.map((name, i) => [i, name])} />
+    </FlowControls>
+    <FlowReadout>Mean |{tensorNames[tensor]}| at widths 32, 64, 128 after {step} {step === 1 ? 'update' : 'updates'}: μP {series[1].values.map(([, v]) => number(v, 3)).join(', ')}; standard {series[0].values.map(([, v]) => number(v, 3)).join(', ')}.</FlowReadout>
+    <p className="flow-note">Recorded seed-1 runs at base rate 0.01 on the same 32 training rows; only widths 32, 64 and 128 were trained.</p>
+  </FlowLab>;
+}
+
+export function TruncationFigure() {
+  return <figure className="init-truncation" id="truncated-normal">
+    <svg viewBox="0 0 340 178" role="img" aria-label="A normal curve with the interval from minus two to plus two standard deviations shaded and labelled kept. The tails outside are dashed and labelled redrawn, not moved to the edge.">
+      <rect x="100" width="140" y="18" height="100" className="init-truncation__kept" />
+      <path d="M30 115 C68 115 81 107 102 93 C126 75 142 23 170 20 C198 23 214 75 238 93 C259 107 272 115 310 115" className="init-truncation__curve" />
+      <line className="init-axis" x1="30" x2="310" y1="118" y2="118" />
+      {[[-2, 100], [0, 170], [2, 240]].map(([value, position]) => <text key={value} className="init-axis-label" x={position} y="134" textAnchor="middle">{flowNumber(value, 0)}σ</text>)}
+      <text className="init-truncation__label" x="170" y="152" textAnchor="middle">kept: draws inside ±2σ</text>
+      <text className="init-axis-label" x="30" y="172">left tail: redrawn</text><text className="init-axis-label" x="310" y="172" textAnchor="end">right tail: redrawn</text>
+    </svg>
+  </figure>;
+}
+
+export function TruncationTable() {
+  return <NeuralTable caption="Actual 100,000-value samples; requested std 0.02" headers={['Absolute bounds', 'Measured std', 'Largest absolute sample']} rows={Object.values(records.fixtures.truncation).map(row => [row.bounds.map(b => flowNumber(b, 4)).join(' to '), number(row.std, 8), number(row.max_abs, 8)])} />;
+}
+
+export function PrecisionTable() {
   const precision = records.fixtures.precision;
-  return <aside><h4>Same requested normal scale, different retained distribution</h4><p>Distribution illustration: the central amber band below is the retained interval ±2σ. The dashed normal tail continues outside it; rejected draws are resampled, not moved to the boundary.</p><svg className="init-chart" viewBox="0 0 340 150" role="img" aria-label="Schematic normal density; retained interval from minus two to two standard deviations, tails outside."><rect x="100" width="140" y="18" height="100" fill="#e2b55a" opacity=".12" /><path d="M30 115 C68 115 81 107 102 93 C126 75 142 23 170 20 C198 23 214 75 238 93 C259 107 272 115 310 115" fill="none" stroke={pale} strokeWidth="2" strokeDasharray="4 3" /><line className="init-axis" x1="30" x2="310" y1="118" y2="118" />{[[-2, 100], [0, 170], [2, 240]].map(([value, position]) => <text key={value} x={position} y="140" textAnchor="middle">{value}σ</text>)}</svg><NeuralTable caption="Actual 100,000-value samples; requested std 0.02" headers={['Absolute bounds', 'Measured std', 'Maximum absolute sample']} rows={Object.values(records.fixtures.truncation).map(row => [row.bounds.join(' to '), number(row.std, 8), number(row.max_abs, 8)])} />
-    <NeuralTable caption="Actual precision conversion, back to float32 for display" headers={['Original float32', 'BF16 → float32', 'Float16 → float32']} rows={precision.float32.map((value, i) => [value.toExponential(7), precision.bfloat16_back_to_float32[i].toExponential(7), precision.float16_back_to_float32[i].toExponential(7)])} /><p>Representation of a small value is separate from losing its addition to a much larger weight.</p></aside>;
+  return <NeuralTable caption="Actual precision conversion, back to float32 for display" headers={['Original float32', 'BF16 → float32', 'Float16 → float32']} rows={precision.float32.map((value, i) => [value.toExponential(7), precision.bfloat16_back_to_float32[i].toExponential(7), precision.float16_back_to_float32[i].toExponential(7)])} />;
 }

@@ -1,0 +1,72 @@
+{
+  "files": {
+    "acquire_model.py": {
+      "sha256": "e192f6fcb1814113c4c110346efa7ecc141e73b88961e826082118a60052da79",
+      "bytes": 1989
+    },
+    "data/dev.tsv": {
+      "sha256": "0770bd7b80e04c92da82e78f9f93ce35d38b334b4830fca2b9b4d7e174f152e5",
+      "bytes": 4747
+    },
+    "data/test.tsv": {
+      "sha256": "a406d87b62a6b7c9615468a8b66e69c027fa8f2f03a4f8f6c79df26c260de620",
+      "bytes": 4556
+    },
+    "data/train.tsv": {
+      "sha256": "09503a850796736a8e63504ae2c8de983f57dceebc2342ea93a7f7ad06af56d0",
+      "bytes": 40567
+    },
+    "mechanism-reports.json": {
+      "sha256": "6c4a941822c8e78ab2426c77206f778c3bd341062221778ba831e469756f3860",
+      "bytes": 17372
+    },
+    "model-source-report.json": {
+      "sha256": "e13a9a5010fac493941bd918af38ee9186e7618544888d7be0e0afac196f0819",
+      "bytes": 1059
+    },
+    "README.md": {
+      "sha256": "c3044242cd1ff1395d59753df9a8f54595661097a27b0f3b9770eef236a63c77",
+      "bytes": 6290
+    },
+    "sft_batching.py": {
+      "sha256": "08a3db0c9dce034312dbb5ae3b6f11149b2785f0d2fc005300732d4faea970f4",
+      "bytes": 10002
+    },
+    "sft_data.py": {
+      "sha256": "a3bbbb7ff6db8b7a48f1327dc7fc0bd1313d7fb07d19041a11f4b816e87aeaab",
+      "bytes": 8834
+    },
+    "sft_evaluate.py": {
+      "sha256": "ff392707272355cbda4bd0ca7fa24066416802e05274dc7e1880b0c29ed8216b",
+      "bytes": 11517
+    },
+    "sft_objective.py": {
+      "sha256": "430cadc1885d1989490147356008e2d46bd02e5bc5e512d2b8220fe7cd5c9a45",
+      "bytes": 9264
+    },
+    "sft_study.py": {
+      "sha256": "b228fe70b136b7e2a39b141ead784a4707663f605cfa2b94128fbdcb7b7105e8",
+      "bytes": 12942
+    },
+    "sft_trl.py": {
+      "sha256": "87c3e8ed06d4397b43c6183a8bf81fe0056eb549c560c9479f04b6a557fd3f64",
+      "bytes": 8815
+    },
+    "study-evaluation.json": {
+      "sha256": "faabd4a8aaad10be35b728da9fa3c23fa458dd8f7af6e47c7d75581b44a2dde1",
+      "bytes": 907311
+    },
+    "study-protocol.json": {
+      "sha256": "7b15480455acc19d42c9a3bd031e48c7500874738d89df882274fecb4c5c6662",
+      "bytes": 80801
+    },
+    "study-summary.json": {
+      "sha256": "744aaf366697e08674b94ca61cc103aa7ba012fe1f208ab309dab06900ec3736",
+      "bytes": 32878
+    },
+    "tiny_causal_lm.py": {
+      "sha256": "9b0fe7cd93bf672f9904fc9240fc2857838c9a51015a53942d799d916518e103",
+      "bytes": 7626
+    }
+  }
+}

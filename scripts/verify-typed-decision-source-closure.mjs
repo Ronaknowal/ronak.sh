@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {parse} from '@babel/parser';
+const topic = 'docs/teaching/llm-architecture-training/typed-decision-models-calibrated-neural-decision-systems';
+const sha = path => crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');
+const read = path => JSON.parse(fs.readFileSync(path));
+const accepted = read(`${topic}/content-review-acceptance.json`);
+for(const [path,expected] of Object.entries(accepted.files)) assert.equal(sha(path),expected,path);
+const numerical = read(`${topic}/runtime-model-checks.json`);
+for(const path of ['src/learn/data/typed-decision-models.js','public/learn-assets/typed-decision-systems/observations.json']) assert.equal(sha(path),numerical.files[path],path);
+const sourcePaths = [`${topic}/lesson.jsx`,...['Shared','Foundations','Probability','Study','Native'].map(x=>`src/learn/components/lesson-labs/TypedDecision${x}.jsx`)];
+for(const path of sourcePaths) parse(fs.readFileSync(path,'utf8'),{sourceType:'module',plugins:['jsx']});
+const manuscript = fs.readFileSync(`${topic}/lesson.md`,'utf8');
+const source = fs.readFileSync(`${topic}/lesson.jsx`,'utf8');
+const equations = [...manuscript.matchAll(/^\$\$(.+)\$\$$/gm)].map(x=>x[1]);
+const rendered = [...source.matchAll(/<MathBlock>\{("(?:[^"\\]|\\.)*")\}<\/MathBlock>/g)].map(x=>JSON.parse(x[1]));
+assert.equal(equations.length,7);assert.deepEqual(rendered,equations);
+assert.equal((source.match(/<Decision\w+ \/>/g)||[]).length,36);
+assert.equal((source.match(/<Program file=/g)||[]).length,10);
+assert.equal((source.match(/data-lesson-exercise/g)||[]).length,18);
+const files = Object.fromEntries([...sourcePaths,'src/learn/components/lesson-labs/typed-decision-flow.css','scripts/render-typed-decision-lesson.mjs','scripts/verify-typed-decision-source-closure.mjs',`${topic}/runtime-model-checks.json`].map(path=>[path,sha(path)]));
+const report = {status:'passed',accepted_content_guards:Object.keys(accepted.files).length,equations:7,jsx_parses:sourcePaths.length,
+  reused_numerical_conditions:numerical.conditions,scope:'Current JSX syntax and exact display-equation translation; frozen content, pure model and projected observations unchanged. Prior finite arithmetic reused; no scientific execution.',files};
+fs.writeFileSync(`${topic}/runtime-source-closure.json`,JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report));

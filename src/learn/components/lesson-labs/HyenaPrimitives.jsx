@@ -83,15 +83,22 @@ export function Plot({
     x = value => 105 + (value - xmin) / (xmax - xmin) * 295,
     y = value => height - 55 - (value - ymin) / (ymax - ymin) * (height - 90),
     tick = formatHyenaTick;
-  return <><Figure title={title} width={460} height={height} description={`Horizontal: ${xLabel}. Vertical: ${yLabel}. Exact values are available below.`}><line x1="105" x2="400" y1={height - 55} y2={height - 55} stroke="#888" /><line x1="105" x2="105" y1="35" y2={height - 55} stroke="#888" />{[0, .5, 1].map(t => <g key={t}><text x={105 + t * 295} y={height - 28} textAnchor="middle">{tick(xmin + t * (xmax - xmin), xmax-xmin)}</text><text x="95" y={y(ymin + t * (ymax - ymin)) + 5} textAnchor="end">{tick(ymin + t * (ymax - ymin), ymax-ymin)}</text></g>)}{ymin < 0 && ymax > 0 && <line x1="105" x2="400" y1={y(0)} y2={y(0)} stroke="#555" strokeDasharray="4 3" />}{series.map((row, i) => <polyline key={row.label} points={row.values.map(([a, b]) => `${x(a)},${y(b)}`).join(' ')} fill="none" stroke={row.color || ['#e6bb60', '#87bdf1', '#e9979f', '#bda0df'][i % 4]} strokeWidth="2" strokeDasharray={row.dashed ? '5 4' : undefined} />)}{[...points, ...series.filter(row => row.values.length === 1).map(row => ({
-        x: row.values[0][0],
-        y: row.values[0][1],
-        label: row.label,
-        color: row.color
-      }))].map((point, i) => <circle key={i} cx={x(point.x)} cy={y(point.y)} r="5" fill={point.color || '#e6bb60'} stroke="white"><title>{point.label}</title></circle>)}</Figure><ul className="hy-plot-legend">{series.map((row, i) => <li key={row.label}><span style={{
-          borderColor: row.color || ['#e6bb60', '#87bdf1', '#e9979f', '#bda0df'][i % 4],
-          borderStyle: row.dashed ? 'dashed' : 'solid'
-        }} />{row.label}</li>)}</ul><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Exact plotted values</h4><NeuralTable caption={title} headers={['Series', xLabel, yLabel]} rows={series.flatMap(row => row.values.map(([a, b]) => [row.label, f(a, 9), f(b, 9)]))} /></section></>;
+  const colors=['#e6bb60','#87bdf1','#e9979f','#bda0df'];
+  const labelRows=series.map((row,i)=>({i,row,last:row.values.at(-1),color:row.color||colors[i%colors.length]})).filter(r=>r.last).sort((a,b)=>y(a.last[1])-y(b.last[1]));
+  const splitLabel=label=>{const lines=[];let line='';for(const word of label.split(' ')){if((line+' '+word).trim().length>29&&line){lines.push(line);line=word}else line=(line+' '+word).trim()}if(line)lines.push(line);return lines};
+  let previousBottom=18;
+  const labels=labelRows.map(r=>{const lines=splitLabel(r.row.label),position=Math.max(previousBottom+24,Math.min(height-65,y(r.last[1])));previousBottom=position+17*(lines.length-1);return {...r,position,lines}});
+  const actualHeight=Math.max(height+25,previousBottom+25);
+  return <><Figure title={title} width={680} height={actualHeight} description={`Horizontal: ${xLabel}. Vertical: ${yLabel}. Every curve has a directly connected label; exact values follow.`}>
+    <line x1="105" x2="400" y1={height-55} y2={height-55} stroke="#888"/><line x1="105" x2="105" y1="35" y2={height-55} stroke="#888"/>
+    {[0,.5,1].map(t=><g key={t}><text x={105+t*295} y={height-28} textAnchor="middle">{tick(xmin+t*(xmax-xmin),xmax-xmin)}</text><text x="95" y={y(ymin+t*(ymax-ymin))+5} textAnchor="end">{tick(ymin+t*(ymax-ymin),ymax-ymin)}</text></g>)}
+    <text x="250" y={height+2} textAnchor="middle">{xLabel}</text><text x="24" y="20">{yLabel}</text>
+    {ymin<0&&ymax>0&&<line x1="105" x2="400" y1={y(0)} y2={y(0)} stroke="#555" strokeDasharray="4 3"/>}
+    {series.map((row,i)=><polyline key={row.label} points={row.values.map(([a,b])=>`${x(a)},${y(b)}`).join(' ')} fill="none" stroke={row.color||colors[i%colors.length]} strokeWidth="2" strokeDasharray={row.dashed?'5 4':undefined}/>)}
+    {labels.map(({row,last,color,position,lines})=>{return <g key={row.label}><path d={`M${x(last[0])} ${y(last[1])} L418 ${position-4} L427 ${position-4}`} fill="none" stroke={color}/><text x="432" y={position} style={{fill:color}}>{lines.map((text,i)=><tspan key={i} x="432" dy={i?17:0}>{text}</tspan>)}</text></g>})}
+    {[...points,...series.filter(row=>row.values.length===1).map(row=>({x:row.values[0][0],y:row.values[0][1],label:row.label,color:row.color}))].map((point,i)=><circle key={i} cx={x(point.x)} cy={y(point.y)} r="5" fill={point.color||colors[i%colors.length]} stroke="white"><title>{point.label}</title></circle>)}
+  </Figure><NeuralTable caption={`Exact ${title}`} headers={['Series',xLabel,yLabel]} rows={series.flatMap(row=>row.values.map(([a,b])=>[row.label,f(a,9),f(b,9)]))}/></>;
+
 }
 export function Stems({
   title,
@@ -106,7 +113,7 @@ export function Stems({
     width = Math.max(460, 90 + values.length * 48),
     x = i => 70 + i * (width - 110) / Math.max(1, values.length - 1),
     y = v => 130 - v / bound * 85;
-  return <Figure title={title} width={width} height={285} description={`Signed stems on one common scale ±${f(bound, 6)}. Gold/rose: current positive/negative; ${reference ? 'blue outlined dots: ' + referenceLabel + '.' : 'zero is the horizontal line.'}`}><line x1="45" x2={width - 15} y1="130" y2="130" stroke="#888" />{values.map((value, i) => <g key={i}>{selected === i && <rect x={x(i) - 18} y="25" width="36" height="225" fill="#e6bb6014" stroke="#e6bb60" />}<line x1={x(i)} x2={x(i)} y1="130" y2={y(value)} stroke={value < 0 ? '#e9979f' : '#e6bb60'} strokeWidth="3" /><circle cx={x(i)} cy={y(value)} r="4" fill={value < 0 ? '#e9979f' : '#e6bb60'} />{reference && <circle cx={x(i)} cy={y(reference[i])} r="6" fill="none" stroke="#87bdf1" strokeWidth="2" />}<text x={x(i)} y="268" textAnchor="middle">{labels?.[i] ?? i}</text><text x={x(i)} y={value >= 0 ? y(value) - 10 : y(value) + 18} textAnchor="middle" className="hy-small">{f(value, 4)}</text></g>)}</Figure>;
+  return <Figure title={title} width={width} height={285} description={`Signed stems on one common scale ±${f(bound, 6)}. Amber/blue: current positive/negative; ${reference ? 'blue outlined dots: ' + referenceLabel + '.' : 'zero is the horizontal line.'}`}><line x1="45" x2={width - 15} y1="130" y2="130" stroke="#888" />{values.map((value, i) => <g key={i}>{selected === i && <rect x={x(i) - 18} y="25" width="36" height="225" fill="#ffffff09" stroke="white" />}<line x1={x(i)} x2={x(i)} y1="130" y2={y(value)} stroke={value < 0 ? '#87bdf1' : '#e6bb60'} strokeWidth="3" /><circle cx={x(i)} cy={y(value)} r="4" fill={value < 0 ? '#87bdf1' : '#e6bb60'} />{reference && <circle cx={x(i)} cy={y(reference[i])} r="6" fill="none" stroke="#87bdf1" strokeWidth="2" />}<text x={x(i)} y="268" textAnchor="middle">{labels?.[i] ?? i}</text><text x={x(i)} y={value >= 0 ? y(value) - 10 : y(value) + 18} textAnchor="middle" className="hy-small">{f(value, 4)}</text></g>)}</Figure>;
 }
 export function Matrix({
   title,
@@ -122,7 +129,7 @@ export function Matrix({
     width = Math.max(460, 100 + cell * m),
     height = 85 + cell * n,
     max = Math.max(1e-12, ...values.flat().map(Math.abs));
-  return <><Figure title={title} width={width} height={height} description={`Rows: ${rowLabel}; columns: ${columnLabel}. Gold positive,rose negative; signed numbers and zero are explicit.`}>{values[0].map((_, j) => <text key={j} x={90 + j * cell + cell / 2} y="26" textAnchor="middle">{j}</text>)}{values.map((row, i) => <g key={i}><text x="14" y={73 + i * cell}>{i}</text>{row.map((value, j) => <g key={j}><rect x={90 + j * cell} y={41 + i * cell} width={cell - 2} height={cell - 2} fill={value < 0 ? '#843b45' : '#8e6b23'} fillOpacity={.1 + .65 * Math.abs(value) / max} stroke={selected && selected[0] === i && selected[1] === j ? 'white' : '#555'} strokeWidth={selected && selected[0] === i && selected[1] === j ? 3 : 1} /><text x={90 + j * cell + cell / 2} y={75 + i * cell} textAnchor="middle" className="hy-small">{f(value, 3)}</text>{causal && j > i && <line x1={95 + j * cell} x2={142 + j * cell} y1={46 + i * cell} y2={94 + i * cell} stroke="#888" />}</g>)}</g>)}</Figure><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Exact matrix entries</h4><NeuralTable caption={title} headers={[rowLabel, ...values[0].map((_, j) => `${columnLabel}${j}`)]} rows={values.map((row, i) => [i, ...row.map(v => f(v, 9))])} /></section></>;
+  return <><Figure title={title} width={width} height={height} description={`Rows: ${rowLabel}; columns: ${columnLabel}. Amber positive,blue negative; signed numbers and zero are explicit.`}><text x="8" y="14">{columnLabel} columns →</text>{values[0].map((_, j) => <text key={j} x={90 + j * cell + cell / 2} y="26" textAnchor="middle">{j}</text>)}{values.map((row, i) => <g key={i}><text x="14" y={73 + i * cell}>{i}</text>{row.map((value, j) => <g key={j}><rect x={90 + j * cell} y={41 + i * cell} width={cell - 2} height={cell - 2} fill={value < 0 ? '#315f8b' : value===0?'#252525':'#8e6b23'} fillOpacity={.1 + .65 * Math.abs(value) / max} stroke={selected && selected[0] === i && selected[1] === j ? 'white' : '#555'} strokeWidth={selected && selected[0] === i && selected[1] === j ? 3 : 1} /><text x={90 + j * cell + cell / 2} y={75 + i * cell} textAnchor="middle" className="hy-small">{f(value, 3)}</text>{causal && j > i && <line x1={95 + j * cell} x2={142 + j * cell} y1={46 + i * cell} y2={94 + i * cell} stroke="#888" />}</g>)}</g>)}</Figure><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Exact matrix entries</h4><NeuralTable caption={title} headers={[rowLabel, ...values[0].map((_, j) => `${columnLabel}${j}`)]} rows={values.map((row, i) => [i, ...row.map(v => f(v, 9))])} /></section></>;
 }
 export function DnaStrip({
   title,
@@ -131,12 +138,7 @@ export function DnaStrip({
   selected = -1,
   observedLabel = null
 }) {
-  return <><Figure title={title} width={675} height={295} description="Three aligned rows of 20 bases. Labels use biological positions−30…−1,+1…+30; no position 0. The blue divider lies between array indices29 and30.">{[...sequence].map((base, i) => {
-        const x = 20 + i % 20 * 32,
-          y = 43 + Math.floor(i / 20) * 85,
-          changed = reference && base !== reference[i];
-        return <g key={i}><text x={x + 14} y={y - 12} textAnchor="middle" className="hy-small">{positionLabel(i) > 0 ? '+' : ''}{positionLabel(i)}</text><rect x={x} y={y} width="28" height="34" fill={changed ? '#4e2830' : '#202020'} stroke={i === selected ? '#e6bb60' : changed ? '#e9979f' : '#666'} strokeWidth={i === selected ? 3 : 1} /><text x={x + 14} y={y + 23} textAnchor="middle">{base}</text>{i === 30 && <line x1={x - 2} x2={x - 2} y1={y - 18} y2={y + 45} stroke="#87bdf1" strokeWidth="3" />}</g>;
-      })}<text x="20" y="286">{observedLabel ? 'Observed source label: ' + observedLabel : 'Synthetic/current symbols: no new observed biological label.'}</text></Figure><p className="hy-sequence-note">{sequence}</p></>;
+  return <figure className="hy-flow-drawing" aria-label={title}><div className="hy-dna-strip">{[...sequence].map((base,i)=><span key={i} data-changed={!!reference&&base!==reference[i]} data-selected={selected===i} data-boundary={i===29||i===30}><small>{positionLabel(i)>0?'+':''}{positionLabel(i)} · [{i}]</small><b>{base}</b></span>)}</div><p>{observedLabel?'Observed label: '+observedLabel:'Synthetic/current symbols have no newly measured biological label.'} Boundary: array29|30, biological−1|+1; no position0.</p></figure>;
 }
 export function Probabilities({
   title,
@@ -144,5 +146,5 @@ export function Probabilities({
   reference = null,
   referenceLabel = 'Original model input'
 }) {
-  return <Figure title={title} width={510} height={205} description={`Class probability uses a fixed 0–1 axis. Filled bars: current; ${reference ? 'white marker: ' + referenceLabel + '.' : 'all three scores are shown.'}`}>{['EI', 'IE', 'N'].map((label, i) => <g key={label}><text x="5" y={36 + i * 48}>{label}</text><rect x="65" y={19 + i * 48} width={current[i] * 310} height="23" fill={['#e6bb60', '#87bdf1', '#bda0df'][i]} />{reference && <line x1={65 + reference[i] * 310} x2={65 + reference[i] * 310} y1={14 + i * 48} y2={47 + i * 48} stroke="white" strokeWidth="2" />}<text x="390" y={36 + i * 48}>{f(current[i], 7)}</text></g>)}<line x1="65" x2="375" y1="174" y2="174" stroke="#888" />{[0, .5, 1].map(p => <text key={p} x={65 + p * 310} y="199" textAnchor="middle">{p}</text>)}</Figure>;
+  return <Figure title={title} width={510} height={205} description={`Class probability uses a fixed 0–1 axis. Filled bars: current; ${reference ? 'white marker: ' + referenceLabel + '.' : 'all three scores are shown.'}`}>{['EI', 'IE', 'N'].map((label, i) => <g key={label}><text x="5" y={36 + i * 48}>{label}</text><rect x="65" y={19 + i * 48} width={current[i] * 310} height="23" fill="#c5a5e8" />{reference && <line x1={65 + reference[i] * 310} x2={65 + reference[i] * 310} y1={14 + i * 48} y2={47 + i * 48} stroke="white" strokeWidth="2" />}<text x="390" y={36 + i * 48}>{f(current[i], 7)}</text></g>)}<line x1="65" x2="375" y1="174" y2="174" stroke="#888" />{[0, .5, 1].map(p => <text key={p} x={65 + p * 310} y="199" textAnchor="middle">{p}</text>)}</Figure>;
 }

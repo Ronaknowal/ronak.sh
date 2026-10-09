@@ -1,0 +1,20 @@
+Known collections, including known empty: [[1, 0], [0, 0], [0, 1]]
+Unknown schema rejected: A collection contains an unknown output name
+Observed supports and zero-weight gradients: [3, 3] [[0.16666666666666666, -0.16666666666666666], [-0.3333333333333333, 0.3333333333333333]]
+Changed masked gradient finite-difference maximum error: 2.6545182718606952e-11
+Fitted observed means, support and C: [('Billing', 7, 1.4285714285714284), ('Access', 7, 1.4285714285714284)]
+Scratch probabilities: [[0.346244, 0.300814], [0.451007, 0.436019], [0.451007, 0.436019], [0.560301, 0.581456], [0.560301, 0.581456], [0.664045, 0.71399], [0.664045, 0.71399], [0.754056, 0.817713]]
+Ordinary probability maximum difference: 1.1067231575623282e-09
+Named supported constant branch: [[1.0]]
+All-unobserved output rejected: An output has no observed rows: its fit is unsupported
+Iterative fold memberships: [0, 1, 2, 1, 0, 2]
+Fold positive supports: [[1, 1, 1], [1, 0, 1], [0, 1, 0]]
+Allocation trace: [{'row_id': 'r0', 'rare_label': 0, 'fold': 0, 'remaining_capacity': [1, 2, 2]}, {'row_id': 'r1', 'rare_label': 0, 'fold': 1, 'remaining_capacity': [1, 1, 2]}, {'row_id': 'r2', 'rare_label': 1, 'fold': 2, 'remaining_capacity': [1, 1, 1]}, {'row_id': 'r4', 'rare_label': 2, 'fold': 0, 'remaining_capacity': [0, 1, 1]}, {'row_id': 'r3', 'rare_label': 2, 'fold': 1, 'remaining_capacity': [0, 0, 1]}, {'row_id': 'r5', 'rare_label': None, 'fold': 2, 'remaining_capacity': [0, 0, 0]}]
+Impossible everywhere-positive support: [True, True, True]
+Ordinary indivisible group split IDs: ['r2', 'r3', 'r4', 'r5'] ['r0', 'r1']
+Split threshold, summed/joint parent, child, gain: 0.5 [2.0, 1.0] [1.3774437510817343, 0.6887218755408672] [0.6225562489182657, 0.31127812445913283]
+Split threshold, summed/joint parent, child, gain: 1.5 [2.0, 1.0] [0.0, -0.0] [2.0, 1.0]
+Split threshold, summed/joint parent, child, gain: 2.5 [2.0, 1.0] [1.3774437510817343, 0.6887218755408672] [0.6225562489182657, 0.31127812445913283]
+Ordinary entropy tree threshold/mean impurity: 1.5 1.0
+Shared logits / mean-cell BCE delta / hidden pullback: [[1.0, 2.0, 1.0]] [[-0.08964714045666504, 0.29359902599262744, -0.08964714045666504]] [[0.0, 0.20395188553596239]]
+Change output C truth to 0, joined hidden pullback: [[-0.3333333333333333, 0.5372852188692957]]

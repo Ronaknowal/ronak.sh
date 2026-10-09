@@ -1,0 +1,41 @@
+.ttc-flow { min-width:0; }
+.ttc-figure { margin:2rem 0 2.6rem; padding:0; min-width:0; container-type:inline-size; }
+.ttc-figure figcaption { margin-top:.85rem; color:#b6bbc7; font-size:.9rem; line-height:1.65; }
+.ttc-figure p { margin:.65rem 0; }
+.ttc-scroll { overflow-x:auto; max-width:100%; padding:.35rem .12rem .65rem; overscroll-behavior-x:contain; }
+.ttc-scroll:focus-visible { outline:2px solid #ffc56b; outline-offset:2px; }
+.ttc-drawing { display:block; max-width:none; overflow:visible; }
+.ttc-drawing text { font:14px ui-sans-serif,system-ui,sans-serif; fill:#e2e5ec; }
+.ttc-controls { display:flex; flex-wrap:wrap; align-items:end; gap:1rem; margin-top:1rem; }
+.ttc-controls label { display:flex; flex:1 1 10rem; flex-direction:column; gap:.4rem; max-width:22rem; min-width:0; }
+.ttc-controls input { width:100%; accent-color:#ffc56b; }
+.ttc-controls select { max-width:100%; min-width:0; padding:.45rem; color:#f2f3f5; background:#191b20; border:1px solid #5d626d; font:inherit; }
+.ttc-controls button,.ttc-figure button { padding:.4rem .7rem; border:1px solid #6c7380; color:#eee; background:transparent; font:inherit; border-radius:.2rem; }
+.ttc-controls :focus-visible,.ttc-figure button:focus-visible { outline:2px solid #ffc56b; outline-offset:3px; }
+.ttc-status { font-variant-numeric:tabular-nums; font-weight:550; }
+.ttc-key { display:flex; flex-wrap:wrap; gap:.4rem 1.2rem; }
+.ttc-cue { font-size:.82rem; color:#aeb5c4; }
+.ttc-pair { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr)); gap:1.4rem; }
+.ttc-table { border-collapse:collapse; width:100%; min-width:24rem; line-height:1.5; }
+.ttc-table caption { text-align:left; color:#bdc3cf; margin-bottom:.7rem; }
+.ttc-table th,.ttc-table td { padding:.6rem .7rem; text-align:left; border-bottom:1px solid #3b3f47; font-weight:400; vertical-align:top; }
+.ttc-table thead th { color:#d1d5df; font-weight:600; }
+.ttc-token-row { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; padding:.6rem 0; }
+.ttc-token { padding:.3rem .5rem; border-bottom:3px solid var(--token-color,#7db8ff); background:color-mix(in srgb,var(--token-color,#7db8ff) 12%,transparent); }
+.ttc-score-row { display:grid; grid-template-columns:5rem 1fr 6rem; gap:.6rem; align-items:center; padding:.5rem 0; }
+.ttc-score-track { height:.65rem; background:#30343c; position:relative; }
+.ttc-score-track i { display:block; height:100%; }
+.ttc-selected { outline:2px solid #f7f7fb; outline-offset:3px; }
+.ttc-cell { display:inline-flex; align-items:center; justify-content:center; min-width:2rem; padding:.15rem; margin:.1rem; border:1px solid #505560; }
+.ttc-file-path { overflow-wrap:normal; word-break:normal; display:block; min-width:18rem; }
+.ttc-table .ttc-selected { display:inline-block; }
+[data-ttc-figure="D15"] .ttc-table:first-child { min-width:43rem; }
+[data-ttc-figure="D15"] tbody th { position:sticky; left:0; background:#08090b; z-index:1; }
+.ttc-practice { margin:1.5rem 0; }
+.ttc-practice details { padding:.5rem 0; }
+.ttc-practice summary { cursor:pointer; }
+.ttc-flow .neural-equation { max-width:100%; overflow-x:auto; }
+@media(max-width:500px) { .ttc-score-row { grid-template-columns:3.2rem 1fr 4.5rem; } .ttc-controls label { flex-basis:100%; } }
+@container(max-width:28rem) { .ttc-score-row { grid-template-columns:1fr auto; gap:.4rem; padding:.65rem .25rem; } .ttc-score-track { grid-column:1/-1; grid-row:2; } }
+
+.reader-content:has(.ttc-flow) .lesson-compass .lesson-compass__sections { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22em), 1fr)); }

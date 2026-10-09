@@ -1,0 +1,594 @@
+{
+  "reviewer": "DIFFERENT entire proposed design reviewer; not design author",
+  "localSources": [
+    {
+      "binding": {
+        "path": "AGENTS.md",
+        "bytes": 3751,
+        "sha256": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/SKILL.md",
+        "bytes": 20953,
+        "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/review.md",
+        "bytes": 19019,
+        "sha256": "98695248dd9470843c5eced1c59d89c54167b1ca2bc22a5c016616e10b31fd0d"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx",
+        "bytes": 64828,
+        "sha256": "31975f88139c8596ea2f7185aeba32c723ad98d7c05e681e6fd735f7f18d54a8"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/lesson.md",
+        "bytes": 50642,
+        "sha256": "64c89413f2ac1905c91c67ff735fc860cc462bfec04a72645c2422bb822968d9"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/curriculum/blueprints/non-negative-matrix-factorization-nmf.js",
+        "bytes": 7872,
+        "sha256": "0970b9e8ea96ba502f77f72dfc77a6ca31285840258573004c390989f163c0e8"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/nmf-models.js",
+        "bytes": 29426,
+        "sha256": "e605f03d70dee878b2292a9dcc93fcb1046ad44b51761ba9e2a5931bdd95fe4b"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/nmf-examples.js",
+        "bytes": 5471,
+        "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "src/learn/components/lesson-labs/NmfFigures.jsx",
+        "bytes": 45136,
+        "sha256": "31e31c4b2b3e7afff4e2d0369d034b1b2b5fcb8e9ab4f62c4b0fc6fccf320b5e"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "src/learn/components/lesson-labs/NmfLabs.jsx",
+        "bytes": 28735,
+        "sha256": "bc7c837228647df94fe5d0e78ad63985f011cfd77468d6b3dd162025bbae1770"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "src/learn/components/lesson-labs/NmfShared.jsx",
+        "bytes": 13638,
+        "sha256": "6b0f7342f26d836debd041ac42938c2ae0c97adecbe900e03d49a362851c9351"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "public/learn-assets/nmf/data-provenance.md",
+        "bytes": 2939,
+        "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "public/learn-code/pca-dimensionality-reduction/centered_pca.py",
+        "bytes": 5089,
+        "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/evidence/nmf-native.json",
+        "bytes": 2610,
+        "sha256": "6930634989f499ef6e605c04b248e6820b66a76ed3d3a9eaf26841ba52b68c4d"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-design.md",
+        "bytes": 24261,
+        "sha256": "9730039e51e5c10083671ed45b6e8b704db4d11c697792ed588eb84d09e6ffb7"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/visual-and-investigation-contracts.md",
+        "bytes": 28778,
+        "sha256": "04955b4c5cfe88bf4d1fe2ddb3876368edb41a8198444d5011ee9422caceff15"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/programs-and-practice.md",
+        "bytes": 33329,
+        "sha256": "d501ca6df0eef4c58da45ce1da9347be58d67f753b265b584bb72331ef519e02"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/dependencies-and-anchors.md",
+        "bytes": 10861,
+        "sha256": "8d8eb4157c1eb2ccbd77a8075e3eaa33b196670779db54f6f0ba6beb6453c5a3"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/research-and-claim-disposition.md",
+        "bytes": 13336,
+        "sha256": "a00195bc864b291e4b4e62a8db52f275dbe443601377de4507f9ca2d585f4a3a"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/author-review.md",
+        "bytes": 11008,
+        "sha256": "2412a20ffb411a263640fb84489532711c90ff384286389aba50ad72c8db9629"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-revision.md",
+        "bytes": 2588,
+        "sha256": "cc04dea3f9da7598ffe82a1a74d6d2af8f346d18bcdb597eacacbb7537289044"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/freeze-design.mjs",
+        "bytes": 15643,
+        "sha256": "a7f7056720105c5570f9487f033bc7628f090df0ad554ac6a15db374d5a33c56"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-arithmetic.py",
+        "bytes": 10159,
+        "sha256": "581f6c072d0468af186d04704f548e494156155a07218ee40800afceaa234f09"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/practice-arithmetic.py",
+        "bytes": 4274,
+        "sha256": "4ae30d23948306d7ff2e091e4e6cad120d883182251d93b0ad1bc098425bca5c"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/saved-scale-arithmetic.py",
+        "bytes": 1706,
+        "sha256": "a6aa28c58a60438a5ee6190ec0a1e35c89d76a13b96b3e5a2fadc3990d14831f"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/current-assessment.md",
+        "bytes": 9835,
+        "sha256": "2bca30d6f4902fe634f1ec9c648934f9c98f68118e0b0af75cff04ccbeefaab1"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/research-reading.md",
+        "bytes": 9486,
+        "sha256": "78962577701b66b9f91b5ef2f42ecf82849f36c12a51d57e148468f5ee96d6a7"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/research-continuation.md",
+        "bytes": 4086,
+        "sha256": "09b36625834fa72d8f1d249c2a4f8a48d4abcf33e9d467b30cff5e289fbe52d3"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-foundation-arithmetic.py",
+        "bytes": 3074,
+        "sha256": "ab47d9385e535ec8a1d307c41328e7f2f41718cd9ce71f37c998058dc952c2ed"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/inspect-saved-inputs.py",
+        "bytes": 3005,
+        "sha256": "ef59069354d6f0a69f22ccfcdfc2e9e65c0eb8b5e94a59819a393859faa176d1"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/saved-input-inspection.json",
+        "bytes": 3415,
+        "sha256": "f38738ab5f5ebc146018fdf642249c77bd9ab185f6c2bc233bbfc7f91badab7b"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/partial-checkpoint.json",
+        "bytes": 2730,
+        "sha256": "6d404276fd9a19ca63f7f24313ec84061b326c7f5e97257d4eae43b46d004ffe"
+      },
+      "scope": "Complete semantic/source body read; chunked where needed; source only, not executed"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+        "bytes": 97324,
+        "sha256": "cfb76de036508a3b0ee2dfd8b8479fc5501ff0070925fa73fa6fdb7b0fced37a"
+      },
+      "scope": "Current educational entry/scope and ICA/NMF rows selected; historical giant handoff not fully reread; mutable current observation"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/nmf-data.js",
+        "bytes": 28450,
+        "sha256": "40cd6b9079da9601743be3599b4c9d3087f62b074823a4cd83f46267eff1cbbe"
+      },
+      "scope": "Complete NMF_DIGITS/NMF_RECORDED JSON exports decoded structurally and all values traversed; header/source roles read; no JavaScript execution"
+    },
+    {
+      "binding": {
+        "path": "public/learn-assets/nmf/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "scope": "All300 rows/66columns parsed; complete reserved60 row/label/pixel correspondence checked"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/topics/pca-dimensionality-reduction.jsx",
+        "bytes": 146487,
+        "sha256": "39890fd5a835d085fe3ea46728f3d1b3781d435eedf51d9723bf6f0515e35657"
+      },
+      "scope": "Reused actual canonical section4 and row/reconstruction support from previous ICA review under same hash; selected roles only"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/topics/independent-component-analysis-ica.jsx",
+        "bytes": 57439,
+        "sha256": "bbb5ff01036487f38ab219e138d60829e7b069311b09f074e50fd78740557d5f"
+      },
+      "scope": "Canonical full source previously read during ICA review; current NMF comparison roles sections1/2, no successor acceptance inferred"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/topics/matrix-calculus-jacobians.jsx",
+        "bytes": 65156,
+        "sha256": "25b0e4b57acc2ac84097c4f113cd2b8e9c62873b11083c957e47be0ee281f6d7"
+      },
+      "scope": "Actual section6 shaped whole-matrix gradient lines124-143 selected"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/topics/feature-scaling-encoding-imputation.jsx",
+        "bytes": 64405,
+        "sha256": "7d66378c4e86ab0344d4286d5c297b6a637c80d1d087d6cebbc9bbedb75eeaf1"
+      },
+      "scope": "Actual heading array lines22-38 and section5 train-transform lines156-182 selected"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/topics/tensor-algebra-einsum-notation.jsx",
+        "bytes": 64335,
+        "sha256": "a0128fde4593cfecdafc0362b9ab1fec45e89b401902024c21b501431a0eafdb"
+      },
+      "scope": "Complete actual section4 lines80-119 unfolding/mode/rankone foundation selected"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/einsum-reading-flow-examples.js",
+        "bytes": 22140,
+        "sha256": "21073b2202cce8113c00a8eee4a5375463cbb75111f7afa07efbd097e6624f94"
+      },
+      "scope": "Actual complete modes literal code/stdout selected; not executed"
+    },
+    {
+      "binding": {
+        "path": "src/learn/data/topics/complex-numbers-fourier-laplace-transforms.jsx",
+        "bytes": 88259,
+        "sha256": "2bb486118efe98d9a35559a67bf8d3c8f6247598cec5ae7d5f93e4bb99a9673c"
+      },
+      "scope": "Complete selected sections2 lines68-89 and6 lines175-196 phasor/finiteDFT; not whole neighboring lesson"
+    },
+    {
+      "binding": {
+        "path": "scratch/survival-tools/Lib/site-packages/sklearn/decomposition/_nmf.py",
+        "bytes": 84039,
+        "sha256": "1d04084441f145ac43a5401212d3df6501de6a1f8885efd29de7fe58fa9435be"
+      },
+      "scope": "Selected beta divergence lines78-191, init/CD275-519, transform1730-1760, minibatch2268-2410; source only, no import/private API dependency"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/visual-vocabulary.md",
+        "bytes": 5546,
+        "sha256": "799ac277b81d78b659e3836b8af82bdad0bf2f4f91f12b2bef7e37b27365a1b2"
+      },
+      "scope": "Complete previous ICA guidance read reused under identity guard"
+    },
+    {
+      "binding": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/resumed-partial-checkpoint.json",
+        "bytes": 18156,
+        "sha256": "33e4eb0e165015912088bc722ea61bf8294359956f3aaa677c6a99cda2771c72"
+      },
+      "scope": "Complete structural JSON consumption and all eight additive binding guards; not inferred semantic acceptance"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/portfolio-adapter.md",
+        "bytes": 16033,
+        "sha256": "347c3ee5c5f4db818f7ab4b9d9b17ef9fd49c3c3ede5d6ea2174badd24a9173d"
+      },
+      "scope": "Complete earlier ICA guidance read reused under current identity guard"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/topic-design.md",
+        "bytes": 32018,
+        "sha256": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424"
+      },
+      "scope": "Complete earlier ICA guidance read reused under current identity guard"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/visuals-and-labs.md",
+        "bytes": 33359,
+        "sha256": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635"
+      },
+      "scope": "Complete earlier ICA guidance read reused under current identity guard"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/examples-and-code.md",
+        "bytes": 15888,
+        "sha256": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00"
+      },
+      "scope": "Complete earlier ICA guidance read reused under current identity guard"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/practice-and-resources.md",
+        "bytes": 11956,
+        "sha256": "b5f7a6e67c311a0ffd48dc6ee12e416aaf772b08baa9c58684c7ca0fcb817b22"
+      },
+      "scope": "Complete earlier ICA guidance read reused under current identity guard"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/teaching.md",
+        "bytes": 27407,
+        "sha256": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548"
+      },
+      "scope": "Applicable selected earlier ICA guidance; byte identity guard is not a complete semantic reading claim"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/domain-playbook.md",
+        "bytes": 30795,
+        "sha256": "43897a74d31c0c9b85748ef544a8be5b5bd220b8b2f79136f176e88190f16e04"
+      },
+      "scope": "Applicable selected earlier ICA guidance; byte identity guard is not a complete semantic reading claim"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/workflow.md",
+        "bytes": 25767,
+        "sha256": "4096cdebcadf3c94d61be0e1e534592160c64ef6529aca9754a2cdaaec6d1c3b"
+      },
+      "scope": "Applicable selected earlier ICA guidance; byte identity guard is not a complete semantic reading claim"
+    },
+    {
+      "binding": {
+        "path": "skills/lesson-authoring/references/handoffs-and-cleanup.md",
+        "bytes": 8434,
+        "sha256": "c3a72e7d79419514fc606c440041c4b01cc9eec4c774c4247d0b5d37b93322ba"
+      },
+      "scope": "Applicable selected earlier ICA guidance; byte identity guard is not a complete semantic reading claim"
+    }
+  ],
+  "authorJSONCompleteStructuralConsumption": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/author-ready.json",
+      "bytes": 5151,
+      "sha256": "b37eb34b446c2b567f1c6a57d4ce121ecc6d3b7629ea206a4a77eb90601e87b6",
+      "fullyParsedJSONKeys": [
+        "status",
+        "topic",
+        "predecessorPackets",
+        "fullContracts",
+        "sourceIdentity",
+        "checks",
+        "executionAndLimits",
+        "composition",
+        "scope",
+        "science",
+        "limits",
+        "next"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/source-identity.json",
+      "bytes": 33627,
+      "sha256": "5a66d4e7796b9a9eb856f209aa219a450de32f33c5b992a4240de48bc075ee5e",
+      "fullyParsedJSONKeys": [
+        "status",
+        "bindings",
+        "originalPairs",
+        "immutableFirstBindings",
+        "immutableResumedBindings",
+        "remoteSources",
+        "qualification"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-source-checks.json",
+      "bytes": 68170,
+      "sha256": "1f0689f5fc60f537de1a2f727bf3537fbfe98fcc5451ac1c57aa61e477e5f776",
+      "fullyParsedJSONKeys": [
+        "status",
+        "conditions",
+        "scope"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/execution-and-limitations.json",
+      "bytes": 3956,
+      "sha256": "5245cf2ede215df6551d54e12ee22336a42a8508e157e6f2f8ca691e2dc0656a",
+      "fullyParsedJSONKeys": [
+        "scope",
+        "executions",
+        "retainedFailure",
+        "unchangedEvidence",
+        "limits"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-composition-deltas.json",
+      "bytes": 11863,
+      "sha256": "926f7a0aadb886131a2bde049b92cb8326e043771ec5f9736db8b48e73bafc63",
+      "fullyParsedJSONKeys": [
+        "predecessor",
+        "successor",
+        "replacements",
+        "removedPartialBoundary",
+        "appendedText",
+        "scope"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-arithmetic.json",
+      "bytes": 46860,
+      "sha256": "fa04c779c42514521ff50cd14f0c78a8c85f132c538ddf360d86bd1a4deec973",
+      "fullyParsedJSONKeys": [
+        "scope",
+        "sourceSha256",
+        "D12",
+        "D20",
+        "D24",
+        "D25",
+        "D27",
+        "D28",
+        "D34",
+        "D36",
+        "D39",
+        "D58",
+        "D59",
+        "D63",
+        "savedDescriptive",
+        "savedInput",
+        "scientificFitsOrOriginalExecutions"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/saved-scale-arithmetic.json",
+      "bytes": 986,
+      "sha256": "1375a79c245a15623d70b469667f2e26213abe54ae09307a2c9f6267734a57a9",
+      "fullyParsedJSONKeys": [
+        "source",
+        "sourceProgramSha256",
+        "dictionaryMaximum",
+        "chosenCommonNonnegativeMaximum",
+        "selectedAddresses",
+        "fitCount",
+        "originalMainExecutions"
+      ]
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/practice-arithmetic.json",
+      "bytes": 7514,
+      "sha256": "7c4a9266376ddd7e969854542f6d5fcbd2e8485887c36cddbe048d8c69286b53",
+      "fullyParsedJSONKeys": [
+        "scope",
+        "sourceSha256",
+        "states"
+      ]
+    }
+  ],
+  "other118Inputs": "Every selected path read as bytes for identities; protected copies and historical verifier/study bodies not all semantically read or executed",
+  "remoteSources": [
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.NMF.html",
+      "scope": "Fresh selected current signature/init/solver/beta/shape passages; initial page navigation consumed, not whole page"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.MiniBatchNMF.html",
+      "scope": "Fresh selected partial_fit/transform signature/input/first-custom-call mutation contract"
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.nnls.html",
+      "scope": "Fresh actual signature, support, residual norm return and notes"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html",
+      "scope": "Fresh signature, norm/smooth-IDF/feature/vocabulary passages"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1208.1237",
+      "scope": "Targeted text: orientation intro pages1-2; Algorithm1, complete tie/normalization/full-rank/signed-residual Assumptions1-2 passages pages3-4. Find output included later material but no full proof/experiment read claimed"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1010.1763",
+      "scope": "Targeted scale/domain text pages2-4; auxiliary construction/PSD/derived updates pages6-8, Table2/Eq38-42; no full24page read/pixels/audio study"
+    }
+  ],
+  "truncationRecovery": [
+    "Initial NMF reading-flow table output truncated; missing middle section ladder recovered in bounded source reads during review, complete seven contract bodies consumed.",
+    "Initial relevant review-guidance batch truncated; missing sections recovered from line70 onward, whole review.md consumed.",
+    "Subsequent redundant first50 reading-flow and broad rg output truncated; not used as proof of new complete reading. D51-D56 exact lines separately recovered.",
+    "Web NMF combined find output truncated in unrelated later portions; only actually visible selected passages recorded. Targeted primary algorithm/exponent passages separately read; no whole page/paper claim.",
+    "Two guessed local foundation/freeze filenames failed before exact filenames discovered by rg; source lookup failures only, no scientific execution."
+  ],
+  "limits": [
+    "No primary or historical figure pixels viewed by this reviewer; old author screenshot claims are author evidence only",
+    "No browser/native paint, novice observation, whole neighboring acceptance, performance experiment or scientific fit/main/checker replay",
+    "Prospective routes and saved JSON file are not implemented; freeze binds proposed contracts only"
+  ]
+}

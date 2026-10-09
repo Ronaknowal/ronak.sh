@@ -1,0 +1,201 @@
+{
+  "at": "2026-10-07T14:59:25.588440+00:00",
+  "selectionLockSHA256": "cefd9e1565438b04a616667f6ae8170436ef05f62b4419a2c6cd8efeac82b9e5",
+  "scorerId": "retail-final-q-fixed-history-v1",
+  "scorerCodeSHA256": "ef9ff8c88467ac75412826ce9f6728cc8e9c874e11e3d1bb5d5730b51937bc83",
+  "conversionVersion": "positive-occurrence-c1-plus2n-v1",
+  "alpha": 2.0,
+  "orderedIDsSHA256": "fab412bd57dc09c05ff1922e63823dd3e0506d789885ed9cea61abf3fea156f1",
+  "chosenConfig": {
+    "rank": 4,
+    "lambda": 0.1
+  },
+  "savedArrays": {
+    "npz": "locked-prefix-state.npz",
+    "npzSHA256": "973170273c9f31af977f043a72ac5523f5fc4b1143cc51e5adaa68a1f193eab0",
+    "portable": "locked-prefix-state.json",
+    "portableSHA256": "bca48ca152130e8fdddde570f8dcc3e249dc2395df839d21d66cc5afd8693722",
+    "arrays": {
+      "P": {
+        "shape": [
+          200,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "29401cb1b9a96ddcb1be5101369e1e26390297752c6c2ef198b42ffe514d6e9f"
+      },
+      "Q": {
+        "shape": [
+          100,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "c2a15d9ab548202e118f548c82961663505df9df8d2450d8f8cb76528d1c3d1a"
+      },
+      "initialP": {
+        "shape": [
+          200,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "b26a36252f0ad2e14c11c7c1ed646b87110e3bbea42c69e9af48d5c71708f669"
+      },
+      "initialQ": {
+        "shape": [
+          100,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "793319e8c0aa0b4ba30a5c7fee4f7b510df67bc83d09b1358d13d7d4f377a2f1"
+      },
+      "sweepP": {
+        "shape": [
+          11,
+          200,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "a8b3b2ed43db1c82182f86e4eb7c941be3b9493309b916f6f0298fb9e677a630"
+      },
+      "sweepQ": {
+        "shape": [
+          11,
+          100,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "0cd3210c4e7ecb812e79028f9f21636f1f7e89c234270f564daea409d70f2627"
+      },
+      "queryP": {
+        "shape": [
+          200,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "3fd97224b566628e7be5815f665f2f4c915a52f9d0801dfcaf51792dc89df1fe"
+      },
+      "scores": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<f8",
+        "sha256": "a600df48ec4ff9a6cc5be9ad3c4ebc559fe961f8a5d964df728a08aa03e55530"
+      },
+      "queryA": {
+        "shape": [
+          200,
+          4,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "c2338d3fff850cb7627591278594499b068d2c935d358ae34cc17ffcccc3b1b8"
+      },
+      "queryB": {
+        "shape": [
+          200,
+          4
+        ],
+        "dtype": "<f8",
+        "sha256": "54e8b13f2ee04b2d69868d46a8c36c4ec6a2db3c650ad82155bee4c69c1872a2"
+      },
+      "queryResidualInfinity": {
+        "shape": [
+          200
+        ],
+        "dtype": "<f8",
+        "sha256": "4043c3004ce7267eb32af4e7580f7f38f286e439be042467e2b676b8b785aaa9"
+      },
+      "counts": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<f8",
+        "sha256": "96fa373346c05c63058552e783b287ce419989321896569683693b91e19d4b5e"
+      },
+      "confidence": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<f8",
+        "sha256": "4a7cf119b15db3f25b81d644e82b61bdd5da2fa2a1832f85dfdd4fb0f4692dd7"
+      },
+      "target": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<i8",
+        "sha256": "bc7fccf7806fbbc18b7d3a7a352219fbf20b4b36e47a900367955c1c36f874d5"
+      },
+      "eligibility": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "|b1",
+        "sha256": "476f222f3cc0aba1441e30cb2039faa492ca3ca038df8ed49ea92c8959ef6bf6"
+      },
+      "orders": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<i8",
+        "sha256": "7d0e872929e511857496fa2358d50b12546028b2cc517fb525efda9a878772ff"
+      },
+      "popularityScores": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<f8",
+        "sha256": "4d164525e75a5aa99a69ffe0b78b9711b7e8661827e8d647a738cdda3395f0de"
+      },
+      "popularityOrders": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<i8",
+        "sha256": "93f6e01cda28c71de5e9aa3fd8fcf26012ff70223862248c42202632b4256c04"
+      },
+      "itemCosineScores": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<f8",
+        "sha256": "77f171b35d8940121a9a4a2b520dfbec269bca46aecdc263515b8118ab4e78e1"
+      },
+      "itemCosineOrders": {
+        "shape": [
+          200,
+          100
+        ],
+        "dtype": "<i8",
+        "sha256": "ac605be032d89a1efbdd7f3959867dbf43eaf220af4391953a6242cb371c2e62"
+      },
+      "popularityState": {
+        "shape": [
+          100
+        ],
+        "dtype": "<f8",
+        "sha256": "9cd489554e0a597fef034f0a9d44424027d4665a037188c7dbeca1c4315ff99a"
+      },
+      "itemCosineState": {
+        "shape": [
+          100,
+          100
+        ],
+        "dtype": "<f8",
+        "sha256": "15aa54c50cb6633b8667d96044511a95f7046f1df677f10dd15b37718549b73f"
+      }
+    }
+  },
+  "K": 10,
+  "fitsDone": 5,
+  "testEventFileParsed": false
+}

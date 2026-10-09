@@ -1,0 +1,11 @@
+posterior mu/kappa/alpha/beta: (7.5, 4.0, 3.5, 43.5)
+completed tables: [[8.0, 10.0, 13.844877, 12.0, 10.417592], [8.0, 10.0, 3.469308, 12.0, 3.517166], [8.0, 10.0, 9.252957, 12.0, 10.045356], [8.0, 10.0, 1.868145, 12.0, 3.030686], [8.0, 10.0, 5.3306, 12.0, 6.384847]]
+analysis Q: [10.852494, 7.397295, 9.859663, 6.979766, 8.343089] U: [0.966187, 2.940335, 0.423083, 3.854467, 1.457293]
+pooled: {'m': 5, 'estimate': 8.686461347735442, 'within': 1.9282729593925112, 'between': 2.6901900890776607, 'simulation': 0.5380380178155322, 'total': 5.1565010662857045, 'standard_error': 2.2707930478768215}
+changed seed/m estimates: [10.317975, 6.811258, 11.693476]
+ordinary joint posterior: (7.5, 4.0, 3.5, 43.5) estimates: [10.852494, 7.397295, 9.859663, 6.979766, 8.343089]
+assumed delta/pooled mean: -2.0 7.886461
+assumed delta/pooled mean: 0.0 8.686461
+assumed delta/pooled mean: 2.0 9.486461
+no-missing null: {'m': 5, 'estimate': 10.0, 'within': 1.3333333333333333, 'between': 0.0, 'simulation': 0.0, 'total': 1.3333333333333333, 'standard_error': 1.1547005383792515}
+prior-only posterior: (0.0, 1.0, 2.0, 2.0)

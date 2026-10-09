@@ -1,0 +1,185 @@
+{
+  "stage": "heads",
+  "protocol_sha256": "89db78881c60edc9c042a1b9a68c8f78d470a54e1634761cfbd74baafed09486",
+  "passed": true,
+  "result": {
+    "passed": true,
+    "scope": "A small real residual-head training diagnostic, not trained Medusa weights.\n\npython proposal_heads.py\nExactly one constructed SGD update in frozen and joint modes, with matched\ninitial states and fixed inputs. No corpus, generation or accuracy experiment.\n",
+    "seed": 191,
+    "dtype": "float64",
+    "updates_per_mode": 1,
+    "learning_rate": 0.01,
+    "outcomes": [
+      {
+        "frozen_backbone": true,
+        "loss": 5.8699800466238425,
+        "heads": [
+          {
+            "offset": 1,
+            "positions": 8,
+            "labels": [
+              [
+                1,
+                2,
+                3,
+                4
+              ],
+              [
+                2,
+                6,
+                1,
+                5
+              ]
+            ],
+            "mean_ce": 1.8496557586796403
+          },
+          {
+            "offset": 2,
+            "positions": 6,
+            "labels": [
+              [
+                2,
+                3,
+                4
+              ],
+              [
+                6,
+                1,
+                5
+              ]
+            ],
+            "mean_ce": 1.9479366489909162
+          },
+          {
+            "offset": 3,
+            "positions": 4,
+            "labels": [
+              [
+                3,
+                4
+              ],
+              [
+                1,
+                5
+              ]
+            ],
+            "mean_ce": 2.072387638953286
+          }
+        ],
+        "gradient_norms": {
+          "embedding.weight": null,
+          "backbone.weight": null,
+          "backbone.bias": null,
+          "heads.0.projection.weight": 0.0699379990004126,
+          "heads.0.projection.bias": 0.054335259676227016,
+          "heads.0.output.weight": 0.21057032391509004,
+          "heads.1.projection.weight": 0.09690593183711264,
+          "heads.1.projection.bias": 0.08893591286290836,
+          "heads.1.output.weight": 0.39007569326417335,
+          "heads.2.projection.weight": 0.21583390157358134,
+          "heads.2.projection.bias": 0.19919948958912054,
+          "heads.2.output.weight": 0.5717860585863365
+        },
+        "changed": {
+          "embedding.weight": false,
+          "backbone.weight": false,
+          "backbone.bias": false,
+          "heads.0.projection.weight": true,
+          "heads.0.projection.bias": true,
+          "heads.0.output.weight": true,
+          "heads.1.projection.weight": true,
+          "heads.1.projection.bias": true,
+          "heads.1.output.weight": true,
+          "heads.2.projection.weight": true,
+          "heads.2.projection.bias": true,
+          "heads.2.output.weight": true
+        }
+      },
+      {
+        "frozen_backbone": false,
+        "loss": 5.8699800466238425,
+        "heads": [
+          {
+            "offset": 1,
+            "positions": 8,
+            "labels": [
+              [
+                1,
+                2,
+                3,
+                4
+              ],
+              [
+                2,
+                6,
+                1,
+                5
+              ]
+            ],
+            "mean_ce": 1.8496557586796403
+          },
+          {
+            "offset": 2,
+            "positions": 6,
+            "labels": [
+              [
+                2,
+                3,
+                4
+              ],
+              [
+                6,
+                1,
+                5
+              ]
+            ],
+            "mean_ce": 1.9479366489909162
+          },
+          {
+            "offset": 3,
+            "positions": 4,
+            "labels": [
+              [
+                3,
+                4
+              ],
+              [
+                1,
+                5
+              ]
+            ],
+            "mean_ce": 2.072387638953286
+          }
+        ],
+        "gradient_norms": {
+          "embedding.weight": 0.2415277828419907,
+          "backbone.weight": 0.48295744869264123,
+          "backbone.bias": 0.28293777912155843,
+          "heads.0.projection.weight": 0.0699379990004126,
+          "heads.0.projection.bias": 0.054335259676227016,
+          "heads.0.output.weight": 0.21057032391509004,
+          "heads.1.projection.weight": 0.09690593183711264,
+          "heads.1.projection.bias": 0.08893591286290836,
+          "heads.1.output.weight": 0.39007569326417335,
+          "heads.2.projection.weight": 0.21583390157358134,
+          "heads.2.projection.bias": 0.19919948958912054,
+          "heads.2.output.weight": 0.5717860585863365
+        },
+        "changed": {
+          "embedding.weight": true,
+          "backbone.weight": true,
+          "backbone.bias": true,
+          "heads.0.projection.weight": true,
+          "heads.0.projection.bias": true,
+          "heads.0.output.weight": true,
+          "heads.1.projection.weight": true,
+          "heads.1.projection.bias": true,
+          "heads.1.output.weight": true,
+          "heads.2.projection.weight": true,
+          "heads.2.projection.bias": true,
+          "heads.2.output.weight": true
+        }
+      }
+    ]
+  }
+}

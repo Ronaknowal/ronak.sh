@@ -1,0 +1,42 @@
+{
+  "status": "ROOT_WHOLE_CURRENT_LESSON_INTAKE_ONLY",
+  "topicId": "dynamical-systems-theory-chaos",
+  "reader": "/root",
+  "source": "src/learn/data/topics/dynamical-systems-theory-chaos.jsx",
+  "sha256": "15da3dcb0195a4b0a62b27d660aa2f2fff268bb63745378992d5b01782270301",
+  "reading": "Entire current JSX lesson, full DynamicalSystemsLabs.jsx and stylesheet, full dynamical-systems-models.js, and all eleven complete programme/output pairs in dynamical-systems-examples.js personally read. No execution or browser assessment yet.",
+  "observedCoverage": "State/rate/update; existence and uniqueness; stability and marginal cases; basins/pitchfork/fold/hysteresis; Lyapunov/invariance; planar geometry/nonnormal transfer; Hopf and Poincare; logistic cycles; tangent/finite separation; exact tent chaos/conjugacy/invariant measure; Lorenz full state; numerical energy; optimization and Jacobian products.",
+  "nextAction": "Full selected source/code/visual intake and source-bound research/coverage design under updated skill; independent design review before manuscript revision. Preserve all working science and qualified evidence.",
+  "phaseChanged": false,
+  "scientificMainsReplayed": 0,
+  "selectedFiles": [
+    {
+      "sha256": "15da3dcb0195a4b0a62b27d660aa2f2fff268bb63745378992d5b01782270301",
+      "path": "src/learn/data/topics/dynamical-systems-theory-chaos.jsx"
+    },
+    {
+      "sha256": "3d485efefa619c5e0bc5fe9a14c9c65c28462fe39c9b223872533b82cfb1db59",
+      "path": "src/learn/components/lesson-labs/DynamicalSystemsLabs.jsx"
+    },
+    {
+      "sha256": "4f1f90b5300180574a44b8194a31141f8dbd29414e5bfb12625d005b77f8d8e9",
+      "path": "src/learn/components/lesson-labs/dynamical-systems-labs.css"
+    },
+    {
+      "sha256": "4cba9432e73f653d2c4090f348003473b703bd2723388340376d3b79c2d8e50d",
+      "path": "src/learn/data/dynamical-systems-models.js"
+    },
+    {
+      "sha256": "3af5b2d3e6303ea9193712b9a6786be7361ffa9373b997efc67b28bae39bbbf1",
+      "path": "src/learn/data/dynamical-systems-examples.js"
+    }
+  ],
+  "observedRevisionNeeds": [
+    "Remove framed lab sections and separate lab titles; embed mechanisms before prose and controls directly below their figure.",
+    "Stage later Hopf/transient/oscillator controls only after their corresponding concepts are taught.",
+    "Replace green role styling with meaningful stable identities and local labels/shapes; distinguish phase radius from trajectory state.",
+    "Make bifurcation teaching visible instead of hide/reveal; retain bounded cached deterministic computations.",
+    "Add missing mechanism drawings for return section/orbital-vs-phase, nonnormal coordinate transfer, tangent multiplication, cylinder inverse composition, invariant pushforward and numerical kick/drift.",
+    "Convert source-only equation/reference blocks into shared opening/endings/complete code controls, preserving all verified operations and original numerical qualifications."
+  ]
+}

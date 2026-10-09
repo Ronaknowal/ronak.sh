@@ -1,0 +1,347 @@
+{
+  "reviewer": "/root/numerical_runtime_resume",
+  "completedAt": "2026-10-09T17:45:55.208109+00:00",
+  "scope": "Independent whole content review supplementary structural and small complementary arithmetic checks. Function-only AST extraction; no main, old campaign, iterative fit, scientific baseline replay, build or runtime acceptance.",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-source-r1.json",
+    "sha256": "f063ee2278877ef517b301ea306c7466184b46870bff98f1a4dabb8c0026d55c",
+    "bytes": 31512
+  },
+  "ready": {
+    "path": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-author-ready-r1.json",
+    "sha256": "4c186b4b06caf67db4f620b6386e5ca3f5fe8620ae047c08fe3eb5330622de2b",
+    "bytes": 1272
+  },
+  "script": {
+    "path": "scratch/review-rd28-content-independent.py",
+    "sha256": "d8a1b3144ebe4073db53fff2725f2e9e1c22b95e2ba9fafc441f73f89ad19979",
+    "bytes": 9028
+  },
+  "checks": [
+    {
+      "name": "All frozen subject identities",
+      "passed": true,
+      "detail": {
+        "files": 126,
+        "drift": []
+      }
+    },
+    {
+      "name": "Whole inline source: finite_rd_library.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: gaussian_rd_library.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: penguins_quantization.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_biasedChannel.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_bitstream.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_blockCode.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_fidelity.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_finiteOptimizer.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_gaussianAllocation.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_originalBinary.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_practice.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline source: rd_scalar_helpers.py",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: finite_rd_library.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: gaussian_rd_library.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: penguins_quantization.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: rd_biasedChannel.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: rd_bitstream.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: rd_blockCode.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: rd_fidelity.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: rd_finiteOptimizer.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: rd_gaussianAllocation.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: rd_originalBinary.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Whole inline observed output: rd_practice.stdout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original source: blockCode",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original output: blockCode",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original source: biasedChannel",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original output: biasedChannel",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original source: originalBinary",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original output: originalBinary",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original source: finiteOptimizer",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original output: finiteOptimizer",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original source: gaussianAllocation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged original output: gaussianAllocation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Print-only source inverse: fidelity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Numeric output preserved: fidelity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Print-only source inverse: bitstream",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Numeric output preserved: bitstream",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Exact helper AST extraction: logsumexp",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Exact helper AST extraction: solve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Exact helper AST extraction: allocate",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Complementary backward source law and MI",
+      "passed": true,
+      "detail": {
+        "p": 0.73,
+        "D": 0.17,
+        "joint": [
+          [
+            0.12575757575757573,
+            0.14424242424242426
+          ],
+          [
+            0.025757575757575757,
+            0.7042424242424242
+          ]
+        ],
+        "MI": 0.18375985746395596
+      }
+    },
+    {
+      "name": "Upper-half zero-rate branch",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Changed rectangular BA direct normalizer",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Changed rectangular induced marginal and all-column identity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Output permutation preserves actual identities and objective",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Cost units preserve channel and objective",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Analytic optimum lies in all-column bracket",
+      "passed": true,
+      "detail": {
+        "lower": 0.39483116877641977,
+        "optimum": 0.5082739195899691,
+        "upper": 0.5241593788791981
+      }
+    },
+    {
+      "name": "Three-component active set and rate",
+      "passed": true,
+      "detail": {
+        "errors": [
+          0.5,
+          1.75,
+          1.75
+        ],
+        "rate": 1.1926450779423958
+      }
+    },
+    {
+      "name": "Zero-variance component excluded from active budget",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Changed eight-bit codec header/payload/partial block",
+      "passed": true,
+      "detail": {
+        "message": "0000000880",
+        "decoded": "11000000"
+      }
+    },
+    {
+      "name": "Changed partial-payload padding rejected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Changed small integer quantization tie and decode",
+      "passed": true,
+      "detail": {
+        "units": [
+          9,
+          10,
+          29,
+          30,
+          51
+        ],
+        "decoded": [
+          0,
+          20,
+          20,
+          40,
+          60
+        ],
+        "headerBytes": 11,
+        "wireBytes": 27
+      }
+    },
+    {
+      "name": "Changed quantization trailing stream rejected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "46 unique structured diagram identities",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": 55,
+  "failed": 0
+}

@@ -1,0 +1,54 @@
+{
+  "revision": "612e9a1f86799126c68f0c5d9c3f1fc28f88068f",
+  "parser": "Each physical UTF-8 line split on TAB; quotes are literal poem characters, not CSV quoting.",
+  "splits": {
+    "dev.tsv": {
+      "sha256": "0770bd7b80e04c92da82e78f9f93ce35d38b334b4830fca2b9b4d7e174f152e5",
+      "rows": 105,
+      "widths": {
+        "3": 105
+      },
+      "labels": {
+        "0": 69,
+        "1": 17,
+        "-1": 19
+      },
+      "max_utf8_bytes": 65,
+      "duplicate_texts": 0
+    },
+    "test.tsv": {
+      "sha256": "a406d87b62a6b7c9615468a8b66e69c027fa8f2f03a4f8f6c79df26c260de620",
+      "rows": 104,
+      "widths": {
+        "3": 104
+      },
+      "labels": {
+        "0": 69,
+        "1": 16,
+        "-1": 19
+      },
+      "max_utf8_bytes": 75,
+      "duplicate_texts": 0
+    },
+    "train.tsv": {
+      "sha256": "09503a850796736a8e63504ae2c8de983f57dceebc2342ea93a7f7ad06af56d0",
+      "rows": 892,
+      "widths": {
+        "3": 892
+      },
+      "labels": {
+        "1": 133,
+        "0": 555,
+        "-1": 155,
+        "2": 49
+      },
+      "max_utf8_bytes": 109,
+      "duplicate_texts": 0
+    }
+  },
+  "overlap": {
+    "dev.tsv / test.tsv": 0,
+    "dev.tsv / train.tsv": 0,
+    "test.tsv / train.tsv": 0
+  }
+}

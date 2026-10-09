@@ -1,0 +1,1189 @@
+{
+  "checks": [
+    {
+      "name": "L1 three entries expose unused address",
+      "pass": true
+    },
+    {
+      "name": "L1 four-word error1/6",
+      "pass": true
+    },
+    {
+      "name": "L1 zero-prevalence expected and supported worst zero",
+      "pass": true
+    },
+    {
+      "name": "L1 empty book rejected",
+      "pass": true
+    },
+    {
+      "name": "L2 shared backward state",
+      "pass": true
+    },
+    {
+      "name": "L2 changed forward asymmetry",
+      "pass": true
+    },
+    {
+      "name": "L2 zero source row unavailable",
+      "pass": true
+    },
+    {
+      "name": "L2 fair endpoint no division by zero",
+      "pass": true
+    },
+    {
+      "name": "L3 price change does not overwrite budget",
+      "pass": true
+    },
+    {
+      "name": "L3 zero-price representative labelled",
+      "pass": true
+    },
+    {
+      "name": "L3 finite fair comparison qualified",
+      "pass": true
+    },
+    {
+      "name": "L4 absent column remains in score table",
+      "pass": true
+    },
+    {
+      "name": "L4 locked objective1",
+      "pass": true
+    },
+    {
+      "name": "L4 linked exact applied count",
+      "pass": true
+    },
+    {
+      "name": "L4 lambda0 remains finite",
+      "pass": true
+    },
+    {
+      "name": "L4 early-stop actual length0",
+      "pass": true
+    },
+    {
+      "name": "L4 next disabled when no successor",
+      "pass": true
+    },
+    {
+      "name": "L5 changed forward mean",
+      "pass": true
+    },
+    {
+      "name": "L5 exact identity infinite",
+      "pass": true
+    },
+    {
+      "name": "L5 unused budget shown",
+      "pass": true
+    },
+    {
+      "name": "L5 degenerate source labelled",
+      "pass": true
+    },
+    {
+      "name": "L5 invalid draft retained",
+      "pass": true
+    },
+    {
+      "name": "L6 changed allocation",
+      "pass": true
+    },
+    {
+      "name": "L6 positive tiny budget remains positive",
+      "pass": true
+    },
+    {
+      "name": "L6 zero component retains finite tiny rate",
+      "pass": true
+    },
+    {
+      "name": "L6 zero total infinite for positive source",
+      "pass": true
+    },
+    {
+      "name": "L7 null paired cost remains2",
+      "pass": true
+    },
+    {
+      "name": "L7 copy uses1bit",
+      "pass": true
+    },
+    {
+      "name": "L7 constant error1",
+      "pass": true
+    },
+    {
+      "name": "L8 actual500 after meaningful cost edit",
+      "pass": true
+    },
+    {
+      "name": "L8 lambda0 still500",
+      "pass": true
+    },
+    {
+      "name": "L8 explicit null costs and count",
+      "pass": true
+    },
+    {
+      "name": "L9 partial block length preserved",
+      "pass": true
+    },
+    {
+      "name": "L9 header rejected",
+      "pass": true
+    },
+    {
+      "name": "L9 payload rejected",
+      "pass": true
+    },
+    {
+      "name": "L9 extra rejected",
+      "pass": true
+    },
+    {
+      "name": "L9 padding rejected",
+      "pass": true
+    },
+    {
+      "name": "L9 empty header valid",
+      "pass": true
+    },
+    {
+      "name": "L9 invalid source retains last valid",
+      "pass": true
+    },
+    {
+      "name": "L9 reset source exact",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_blockCode.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_blockCode.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_blockCode.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_blockCode.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_blockCode.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_blockCode.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_biasedChannel.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_biasedChannel.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_biasedChannel.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_biasedChannel.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_biasedChannel.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_biasedChannel.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_originalBinary.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_originalBinary.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_originalBinary.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_originalBinary.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_originalBinary.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_originalBinary.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_finiteOptimizer.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_finiteOptimizer.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_finiteOptimizer.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_finiteOptimizer.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_finiteOptimizer.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_finiteOptimizer.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact finite_rd_library.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content finite_rd_library.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact finite_rd_library.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact finite_rd_library.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content finite_rd_library.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact finite_rd_library.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_gaussianAllocation.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_gaussianAllocation.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_gaussianAllocation.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_gaussianAllocation.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_gaussianAllocation.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_gaussianAllocation.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact gaussian_rd_library.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content gaussian_rd_library.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact gaussian_rd_library.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact gaussian_rd_library.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content gaussian_rd_library.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact gaussian_rd_library.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_fidelity.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_fidelity.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_fidelity.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_fidelity.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_fidelity.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_fidelity.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_bitstream.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_bitstream.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_bitstream.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_bitstream.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_bitstream.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_bitstream.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact penguins_quantization.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content penguins_quantization.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact penguins_quantization.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact penguins_quantization.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content penguins_quantization.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact penguins_quantization.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_scalar_helpers.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_scalar_helpers.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_scalar_helpers.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_practice.py",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_practice.py",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_practice.py",
+      "pass": true
+    },
+    {
+      "name": "DOM exact rd_practice.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Copy content rd_practice.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native Download exact rd_practice.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Document fits 390/16",
+      "pass": true
+    },
+    {
+      "name": "46figures fit 390/16",
+      "pass": true
+    },
+    {
+      "name": "Document fits 768/32",
+      "pass": true
+    },
+    {
+      "name": "46figures fit 768/32",
+      "pass": true
+    },
+    {
+      "name": "Document fits 390/32",
+      "pass": true
+    },
+    {
+      "name": "46figures fit 390/32",
+      "pass": true
+    },
+    {
+      "name": "No page errors",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "layouts": [
+    {
+      "w": 390,
+      "font": 16,
+      "available": null,
+      "width": 390,
+      "scroll": 390,
+      "figures": [
+        {
+          "id": "D01",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D02",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D03",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D04",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D05",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D06",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D07",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D08",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D09",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D10",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D11",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D12",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D13",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D14",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D15",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D16",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D17",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D18",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D19",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D20",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D21",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D22",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D23",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D24",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D25",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D26",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D27",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D28",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D29",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D30",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D31",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D32",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D33",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D34",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D35",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D36",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D37",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D38",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D39",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D40",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D41",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D42",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D43",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D44",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D45",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D46",
+          "client": 350,
+          "scroll": 350
+        }
+      ]
+    },
+    {
+      "w": 768,
+      "font": 32,
+      "available": 386,
+      "width": 768,
+      "scroll": 768,
+      "figures": [
+        {
+          "id": "D01",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D02",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D03",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D04",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D05",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D06",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D07",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D08",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D09",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D10",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D11",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D12",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D13",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D14",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D15",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D16",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D17",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D18",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D19",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D20",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D21",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D22",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D23",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D24",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D25",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D26",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D27",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D28",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D29",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D30",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D31",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D32",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D33",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D34",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D35",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D36",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D37",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D38",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D39",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D40",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D41",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D42",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D43",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D44",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D45",
+          "client": 309,
+          "scroll": 309
+        },
+        {
+          "id": "D46",
+          "client": 309,
+          "scroll": 309
+        }
+      ]
+    },
+    {
+      "w": 390,
+      "font": 32,
+      "available": null,
+      "width": 390,
+      "scroll": 390,
+      "figures": [
+        {
+          "id": "D01",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D02",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D03",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D04",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D05",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D06",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D07",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D08",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D09",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D10",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D11",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D12",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D13",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D14",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D15",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D16",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D17",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D18",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D19",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D20",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D21",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D22",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D23",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D24",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D25",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D26",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D27",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D28",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D29",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D30",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D31",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D32",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D33",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D34",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D35",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D36",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D37",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D38",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D39",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D40",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D41",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D42",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D43",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D44",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D45",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "D46",
+          "client": 350,
+          "scroll": 350
+        }
+      ]
+    }
+  ],
+  "status": "PASS"
+}

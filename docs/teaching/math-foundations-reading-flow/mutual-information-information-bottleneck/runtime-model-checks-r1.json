@@ -1,0 +1,299 @@
+{
+  "status": "PASS",
+  "scope": "New UI transition/endpoint/donor/record transformations; old scientific teaching programmes not executed",
+  "inputs": {
+    "mutual-information-models.js": "f8f890c06a123e77fec65e5fcb2084a372c270554c225d0c53dff01becbc982c",
+    "information-reading-models.js": "5a3159911f11edc083a33656be476db6a90e2eec2a7b8054f198c8eb8ca5e9b6",
+    "information-penguin-records.json": "37e9a169f3297f93f1db1a396042617e60c8e7bc8fb828280801a1a2c3cb7da9"
+  },
+  "tests": [
+    {
+      "name": "assigned mass Z0",
+      "actual": 0.475,
+      "expected": 0.4750000000000001,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "joint decoder mass Z0Y0",
+      "actual": 0.32750000000000007,
+      "expected": 0.32750000000000007,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "one decoder normalization Z0Y0",
+      "actual": 0.6894736842105263,
+      "expected": 0.6894736842105263,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "joint decoder mass Z0Y1",
+      "actual": 0.14750000000000002,
+      "expected": 0.14750000000000002,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "one decoder normalization Z0Y1",
+      "actual": 0.31052631578947365,
+      "expected": 0.31052631578947365,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "assigned mass Z1",
+      "actual": 0.525,
+      "expected": 0.525,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "joint decoder mass Z1Y0",
+      "actual": 0.1725,
+      "expected": 0.1725,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "one decoder normalization Z1Y0",
+      "actual": 0.3285714285714285,
+      "expected": 0.3285714285714285,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "joint decoder mass Z1Y1",
+      "actual": 0.35250000000000004,
+      "expected": 0.35250000000000004,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "one decoder normalization Z1Y1",
+      "actual": 0.6714285714285715,
+      "expected": 0.6714285714285715,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "proposal row 0 Z0",
+      "actual": 0.8415418725342071,
+      "expected": 0.8415418725342071,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "proposal row 0 Z1",
+      "actual": 0.15845812746579296,
+      "expected": 0.15845812746579296,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "shifted row normalization 0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "proposal row 3 Z0",
+      "actual": 0.12348799642245373,
+      "expected": 0.12348799642245373,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "proposal row 3 Z1",
+      "actual": 0.8765120035775462,
+      "expected": 0.8765120035775462,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "shifted row normalization 3",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR pair at B=0",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR B alone at B=0",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR pair at B=0.25",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR B alone at B=0.25",
+      "actual": 4.004283129768647e-17,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR pair at B=0.5",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR B alone at B=0.5",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR pair at B=1",
+      "actual": 1,
+      "expected": 1,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR B alone at B=1",
+      "actual": 0,
+      "expected": 0,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "XOR A biased .25",
+      "actual": 0.18872187554086725,
+      "expected": 0.18872187554086717,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "same generator coherent prefix",
+      "pass": true
+    },
+    {
+      "name": "donor permutation score 0",
+      "actual": 0.24368372225545287,
+      "expected": 0.24368372225545287,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "bijection and both count marginals 0",
+      "pass": true
+    },
+    {
+      "name": "donor permutation score 7",
+      "actual": 0.456916847579973,
+      "expected": 0.456916847579973,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "bijection and both count marginals 7",
+      "pass": true
+    },
+    {
+      "name": "donor permutation score 19",
+      "actual": 0.5619101210854667,
+      "expected": 0.5619101210854667,
+      "tolerance": 1e-10
+    },
+    {
+      "name": "bijection and both count marginals 19",
+      "pass": true
+    },
+    {
+      "name": "exact record grouping all",
+      "N": 344,
+      "counts": [
+        [
+          44,
+          56,
+          52
+        ],
+        [
+          0,
+          68,
+          0
+        ],
+        [
+          124,
+          0,
+          0
+        ]
+      ],
+      "full": 0.7504281712632539,
+      "grouped": 0.6160571020953381
+    },
+    {
+      "name": "observed full MI",
+      "actual": 0.7504281712632539,
+      "expected": 0.750428171,
+      "tolerance": 1e-9
+    },
+    {
+      "name": "observed grouped MI",
+      "actual": 0.6160571020953381,
+      "expected": 0.616057102,
+      "tolerance": 1e-9
+    },
+    {
+      "name": "exact record grouping 2007",
+      "N": 110,
+      "counts": [
+        [
+          10,
+          20,
+          20
+        ],
+        [
+          0,
+          26,
+          0
+        ],
+        [
+          34,
+          0,
+          0
+        ]
+      ],
+      "full": 0.8101432786084863,
+      "grouped": 0.6428014604149583
+    },
+    {
+      "name": "exact record grouping 2008",
+      "N": 114,
+      "counts": [
+        [
+          18,
+          16,
+          16
+        ],
+        [
+          0,
+          18,
+          0
+        ],
+        [
+          46,
+          0,
+          0
+        ]
+      ],
+      "full": 0.6915926802587229,
+      "grouped": 0.5756359005549975
+    },
+    {
+      "name": "exact record grouping 2009",
+      "N": 120,
+      "counts": [
+        [
+          16,
+          20,
+          16
+        ],
+        [
+          0,
+          24,
+          0
+        ],
+        [
+          44,
+          0,
+          0
+        ]
+      ],
+      "full": 0.7351178422573375,
+      "grouped": 0.6141202892382204
+    }
+  ]
+}

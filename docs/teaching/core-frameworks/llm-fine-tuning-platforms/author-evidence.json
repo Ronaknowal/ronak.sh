@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-28",
+  "kind": "author-only",
+  "topicId": "llm-fine-tuning-platforms",
+  "environment": {
+    "datasets": "5.0.1",
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "huggingface_hub": "1.33.0",
+    "peft": "0.21.0",
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "accelerate": "1.15.0",
+    "cuda": false
+  },
+  "modelCheck": {
+    "passed": true,
+    "assertions": 320,
+    "command": "node scripts/verify-fine-tuning-platforms.mjs"
+  },
+  "nativeResults": "See README.md for exact recorded executions and numerical outputs",
+  "browser": "Author inspected parent-supplied desktop,320px and changed-state screenshots; presentation findings closed against targeted final-corrections recaptures where needed. Executed interaction/theme/code-control results belong to parent integration receipt.",
+  "independentReview": "Complete: separate independent-review.md by frameworks_annotation_modalities; no open source blocker",
+  "files": {
+    "src/learn/data/topics/llm-fine-tuning-platforms.jsx": "a6a388be982534c3791fcbc3d4993ebe97419308075828572a911ba576f14cee",
+    "src/learn/data/fine-tuning-platform-models.js": "2830cf8759003658bf8d588450dfb55d19ad15551b035c8362ae02dbd6e37764",
+    "src/learn/components/lesson-labs/FineTuningPlatformLabs.jsx": "c724ce1b902ac338a29961027698196d294152a41e65cfd2efdb3e47931142e5",
+    "src/learn/data/curriculum/blueprints/llm-fine-tuning-platforms.js": "ab6c962044a5f552db5e362f42df03032837c43576b19b34cd4bd580af888386",
+    "scripts/verify-fine-tuning-platforms.mjs": "8a6080d525cd9f35d88357a2909dccefe0feaf7948330419870797560fd78697",
+    "public/learn-code/llm-fine-tuning-platforms/adapter_bridge.py": "047ebfbc8f13c484d1a7621158b41742d811186d85202fe458edf730ef2d681f",
+    "public/learn-code/llm-fine-tuning-platforms/tiny_causal_finetune.py": "d1a69b3cca9a888c7f5d93ce015f22ca05d8aadba85bfeca0145730cf18749b5"
+  },
+  "correction": {
+    "reason": "Independent reviewer found empty-active-label loss returned NaN despite documented rejection contract",
+    "changedMaskLossError": 2.384185791015625e-7,
+    "changedMaskGradientError": 1.4901161193847656e-8,
+    "invalidSupervisionCasesRejected": 3,
+    "command": "scratch/lesson-tools/Scripts/python.exe -B public/learn-code/llm-fine-tuning-platforms/tiny_causal_finetune.py",
+    "runtime": "PYTHONPATH=scratch/training-frameworks-runtime; torch2.14.0+cpu"
+  },
+  "themeCorrection": "Parent browser review found neutral wrapper lacked stylesheet import; each owned lab now imports neural-lesson-neutral.css after base lab styles. No numerical code change.",
+  "visualCorrection": "Actual screenshot review: increase token-card flex basis so desktop assistant label does not split mid-word. Numerical model unchanged.",
+  "remaining": "Parent final ledger and source-bound integration evidence bookkeeping only"
+}

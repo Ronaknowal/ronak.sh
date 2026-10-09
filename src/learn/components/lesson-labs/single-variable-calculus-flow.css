@@ -1,0 +1,53 @@
+.single-calculus-flow{margin:1.5rem 0 2rem;padding:0;border:0;background:none;box-shadow:none;min-width:0;color:var(--text-primary,#ece8df);container-type:inline-size;container-name:single-calculus}
+.single-calculus-flow figcaption{margin-top:1rem;color:var(--text-secondary,#c6c2b9);font-size:.96rem;line-height:1.65}
+.single-calculus-flow p{margin:.75rem 0;line-height:1.6}
+.single-calculus-flow .sc-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;align-items:start}
+.single-calculus-flow .sc-scene{display:block;width:100%;height:auto;overflow:visible}
+.single-calculus-flow .sc-label{font-size:19px;font-family:inherit;fill:currentColor}
+.single-calculus-flow .sc-grid{stroke:#77736b;stroke-width:1;opacity:.3}
+.single-calculus-flow .sc-axis,.single-calculus-flow .sc-zero{stroke:#aaa69c;stroke-width:1.4;fill:none}
+.single-calculus-flow .sc-curve{stroke:#d7ad62;stroke-width:2.5;fill:none;stroke-linejoin:round;stroke-linecap:round}
+.single-calculus-flow .sc-curve.blue{stroke:#84becb}.single-calculus-flow .sc-curve.rose{stroke:#d890a0}
+.single-calculus-flow .sc-curve.dashed{stroke-dasharray:6 4}
+.single-calculus-flow .sc-reference{stroke:#aaa69c;stroke-width:1.5;stroke-dasharray:5 4;fill:none}
+.single-calculus-flow .sc-reference.blue{stroke:#84becb}
+.single-calculus-flow .sc-area{fill:#d7ad6230;stroke:#d7ad62;stroke-width:1}
+.single-calculus-flow .sc-area.blue{fill:#84becb24;stroke:#84becb}.single-calculus-flow .sc-area.rose{fill:#d890a028;stroke:#d890a0}
+.single-calculus-flow .sc-area.neutral{fill:#77736b20;stroke:#77736b}.single-calculus-flow .sc-area.opaque{fill:#171715;stroke:#aaa69c}
+.single-calculus-flow .sc-ring,.single-calculus-flow .sc-outline{fill:none;stroke:#aaa69c;stroke-width:1.5}
+.single-calculus-flow .sc-outline.blue{stroke:#84becb}
+.single-calculus-flow .sc-band{fill:#d7ad621a}.single-calculus-flow .sc-band.blue{fill:#84becb1c}
+.single-calculus-flow .sc-reference-rectangle{fill:none;stroke:#84becb;stroke-width:1.5;stroke-dasharray:6 4}
+.single-calculus-flow .sc-point,.single-calculus-flow .sc-dot{fill:#d7ad62;stroke:#d7ad62;stroke-width:1.5}
+.single-calculus-flow .sc-point.blue,.single-calculus-flow .sc-dot.blue{fill:#84becb;stroke:#84becb}.single-calculus-flow .sc-point.rose,.single-calculus-flow .sc-dot.rose{fill:#d890a0;stroke:#d890a0}
+.single-calculus-flow .sc-point.open{fill:#171715;stroke-width:2}
+.single-calculus-flow .sc-arrow{stroke:#d7ad62;stroke-width:1.5;fill:none}.single-calculus-flow .sc-arrow.blue{stroke:#84becb}.single-calculus-flow .sc-arrow.rose{stroke:#d890a0}
+.single-calculus-flow .sc-values{display:flex;flex-wrap:wrap;gap:.65rem 1.25rem;margin:.8rem 0;line-height:1.6;font-variant-numeric:tabular-nums}
+.single-calculus-flow .sc-values>span{max-width:100%;overflow-wrap:anywhere}
+.single-calculus-flow .sc-table-scroll{max-width:100%;overflow:auto;margin:1rem 0;scrollbar-gutter:stable}
+.single-calculus-flow table{border-collapse:collapse;width:max-content;min-width:100%;font-size:.95rem;font-variant-numeric:tabular-nums}
+.single-calculus-flow th,.single-calculus-flow td{padding:.65rem .8rem;text-align:left;border-bottom:1px solid #45423b;white-space:nowrap}
+.single-calculus-flow th{font-weight:500}.single-calculus-flow caption{text-align:left;color:#aaa69c;padding:.65rem 0}
+.single-calculus-flow .sc-equation-sum{display:flex;flex-wrap:wrap;gap:.5rem 1rem;line-height:1.65}
+.single-calculus-flow .sc-data{white-space:pre;overflow:auto;font-size:.9rem;line-height:1.6;max-width:100%;padding:.5rem 0}
+.single-calculus-flow .sc-select{display:grid;gap:.5rem;min-width:0;width:min(100%,25rem)}
+.single-calculus-flow select{width:100%;padding:.6rem;background:#22211f;color:inherit;border:1px solid #77736b;border-radius:.25rem;font:inherit}
+.single-calculus-flow :focus-visible{outline:2px solid #e2b66b;outline-offset:4px}
+.single-calculus-lesson .lesson-intro{border:0;padding:0;background:none}
+.single-calculus-lesson .calculus-reasoning{margin:1.5rem 0}
+.single-calculus-lesson .lesson-deeper{border:0;background:none;padding:0;margin:2rem 0}
+.single-calculus-lesson .calculus-practice{margin:1.5rem 0}
+.single-calculus-lesson .calculus-practice details>summary{min-height:44px;padding:.65rem 0;color:#d7ad62;cursor:pointer}
+.single-calculus-lesson .sc-equation-region{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:.3rem 0;scrollbar-gutter:stable}
+.single-calculus-lesson .sc-equation-region .katex-display{display:block;width:max-content;min-width:100%;max-width:none;overflow:visible;text-align:left}
+.single-calculus-lesson .sc-equation-region:focus-visible{outline:2px solid #e2b66b;outline-offset:4px}
+.single-calculus-lesson .sc-equation-caption{color:var(--text-secondary,#c6c2b9);font-size:.96rem;line-height:1.65}
+
+.single-calculus-flow .sc-excluded-test{stroke:#171715;stroke-width:4}
+.single-calculus-flow .sc-cube-cell{stroke-width:1.2;fill:#d7ad6238;stroke:#d7ad62}
+.single-calculus-flow .sc-cube-cell.blue{fill:#84becb38;stroke:#84becb}.single-calculus-flow .sc-cube-cell.rose{fill:#d890a038;stroke:#d890a0}
+.single-calculus-flow .sc-cube-cell.old{fill:#77736b20;stroke:#77736b}
+.single-calculus-flow .sc-cube-cell.edge{stroke-dasharray:3 2;fill-opacity:.75;stroke-width:2}
+.single-calculus-flow .sc-cube-cell.corner{stroke-width:3;fill:#d7ad6260}
+.single-calculus-flow del{text-decoration-thickness:2px;color:#c6c2b9}
+@container single-calculus (max-width:44rem){.single-calculus-flow .sc-comparison{grid-template-columns:1fr}}

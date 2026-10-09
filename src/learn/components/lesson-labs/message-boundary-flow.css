@@ -1,0 +1,4 @@
+.lesson-flow .mp-boundary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr)); gap:1.5rem; align-items:start; }
+.lesson-flow .mp-boundary-table { width:100%; border-collapse:collapse; margin:1.4rem 0; }
+.lesson-flow .mp-boundary-table caption { text-align:left; margin-bottom:.6rem; color:#eee; }
+.lesson-flow .mp-boundary-table th,.lesson-flow .mp-boundary-table td { text-align:left; vertical-align:top; padding:.65rem .5rem; border-bottom:1px solid #333; overflow-wrap:anywhere; }

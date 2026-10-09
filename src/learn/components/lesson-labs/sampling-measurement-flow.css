@@ -1,0 +1,38 @@
+.sampling-lesson .sm-figure{margin:1.8rem 0;padding:0;border:0;background:transparent;box-shadow:none;min-width:0}
+.sampling-lesson .sm-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem;align-items:start}
+.sampling-lesson .sm-scroll{max-width:100%;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;outline-offset:4px}
+.sampling-lesson .sm-table-scroll{max-height:34rem}
+.sampling-lesson .sm-scroll:focus-visible{outline:2px solid #e5ad43}
+.sampling-lesson .sm-scene{display:block;width:100%;min-width:21.25rem;max-width:32rem;height:auto;overflow:visible}
+.sampling-lesson .sm-label{fill:#ccc;font:15px ui-monospace,monospace}
+.sampling-lesson .sm-gold{color:#e5ad43;fill:#e5ad43;stroke:#e5ad43}
+.sampling-lesson .sm-cyan{color:#72bfcf;fill:#72bfcf;stroke:#72bfcf}
+.sampling-lesson .sm-rose{color:#dca0ad;fill:#dca0ad;stroke:#dca0ad}
+.sampling-lesson .sm-violet{color:#b6a6de;fill:#b6a6de;stroke:#b6a6de}
+.sampling-lesson .sm-label.sm-gold,.sampling-lesson .sm-label.sm-cyan,.sampling-lesson .sm-label.sm-rose,.sampling-lesson .sm-label.sm-violet{stroke:none}
+.sampling-lesson .sm-axis{fill:none;stroke:#777;stroke-width:1.3}
+.sampling-lesson .sm-grid{fill:none;stroke:#444;stroke-width:.7}
+.sampling-lesson .sm-line{fill:none;stroke-width:2}
+.sampling-lesson .sm-unit{fill:#222;stroke-width:2}
+.sampling-lesson .sm-selected{stroke:#eee;stroke-width:3}
+.sampling-lesson .sm-open{fill:none;stroke-dasharray:4 3}
+.sampling-lesson .sm-table{border-collapse:collapse;min-width:max-content;width:100%;font-size:.9rem;line-height:1.6;text-align:right}
+.sampling-lesson .sm-table caption{text-align:left;margin-bottom:.7rem;color:#bbb}
+.sampling-lesson .sm-table th,.sampling-lesson .sm-table td{padding:.6rem .9rem;border-bottom:1px solid #383838;white-space:nowrap}
+.sampling-lesson .sm-table th{font-weight:500;color:#eee}
+.sampling-lesson .sm-table th:first-child,.sampling-lesson .sm-table td:first-child{text-align:left}
+.sampling-lesson .sm-table thead{position:sticky;top:0;background:#191919}
+.sampling-lesson .sm-caption{margin:.7rem 0;color:#aaa;font-size:.94rem;line-height:1.7}
+.sampling-lesson .sm-equation{margin:1.25rem 0;min-width:0}
+.sampling-lesson .sm-equation .katex-display{margin:0;padding:1rem}
+.sampling-lesson .sm-equation .katex-display>.katex{white-space:nowrap}
+.sampling-lesson .sm-reset{background:transparent;border:1px solid #666;color:#ddd;padding:.5rem .9rem;border-radius:4px;cursor:pointer;min-height:44px}
+.sampling-lesson .sm-reset:focus-visible{outline:2px solid #e5ad43;outline-offset:3px}
+.sampling-lesson .sm-values{display:flex;flex-wrap:wrap;gap:.7rem 1.3rem;color:#ccc;line-height:1.8;margin:.8rem 0}
+@media(max-width:760px){.sampling-lesson .sm-compare{grid-template-columns:minmax(0,1fr)}}
+
+.sampling-lesson{container-type:inline-size;container-name:sampling}
+@container sampling (max-width:44rem){.sampling-lesson .sm-compare{grid-template-columns:minmax(0,1fr)}}
+.sampling-lesson .sm-table-block{min-width:0}
+.sampling-lesson .sm-table-title{margin:0 0 .7rem;color:#bbb;font-size:.94rem;line-height:1.7;overflow-wrap:anywhere}
+.sampling-lesson .sm-semantic-caption{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

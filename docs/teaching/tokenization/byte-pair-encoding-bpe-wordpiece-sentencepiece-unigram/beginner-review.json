@@ -1,0 +1,79 @@
+{
+  "topicId": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+  "date": "2026-09-28",
+  "reviewer": "subword_tokenization agent; independent of root beginner rewrite; disclosed minor manuscript repairs",
+  "reviewKind": "Independent heuristic reading and captured-image inspection, not observed beginner testing",
+  "outcome": "No open blocking source or inspected-image findings; ready for final production integration review",
+  "completeRead": [
+    "Current tokenization.jsx",
+    "Current SubwordTokenizationLabs.jsx",
+    "Current topic CSS",
+    "Preserved original/tokenization.jsx during initial comparison"
+  ],
+  "finalTargetedRead": [
+    "Focused native train/encode/decode/save/load snippet and output interpretation",
+    "Recorded Alice pieces compared to actual native-output.json",
+    "Extended abab dynamic-programming table and reuse explanation",
+    "Five-merge instructional alignment",
+    "Changed-corpus BPE instruction qualified to original example and Reset",
+    "WordPiece failure wording covers starting and continuation failures"
+  ],
+  "closedFindings": [
+    "Concrete objects and IDs precede terminology",
+    "Weighted BPE before/after states precede counting notation",
+    "New-word saved-rule trace visible",
+    "Successful WordPiece example before greedy failure",
+    "Count operation and function reading guide precede complete scratch file",
+    "Posterior normalization and fractional-count EM arithmetic explicit",
+    "DP now demonstrates shared-prefix reuse",
+    "Pruning example before implementation detail",
+    "Ordinary library workflow before full comparison program",
+    "Actual native pieces shown with retained or discarded spaces",
+    "First successful lowest segmentation consistently identified at five merges",
+    "Changed lab-state captions describe their current situation correctly"
+  ],
+  "executedByReviewer": [
+    "JavaScript canonical model check: merges 0 through 10, lowest first reaches low plus est</w> at 5",
+    "Independent Node enumeration: four abab path products 0.36, 0.024, 0.024, 0.0016 sum to 0.4096"
+  ],
+  "authorEvidenceInspected": [
+    "scratch/tokenization-intuition/teaching-examples.json actual displayed-snippet execution output, pending owner final source refresh for caption/prose-only changes",
+    "scripts/verify-tokenization-teaching-examples.py",
+    "Prior native-output.json for exact recorded Alice pieces"
+  ],
+  "notPerformedByReviewer": [
+    "Direct browser interaction",
+    "Actual beginner observation",
+    "New execution of unchanged full scratch/native campaigns"
+  ],
+  "remainingScope": "Root owns final production build, current browser interaction checks and central checkpoints. Reviewer inspected supplied early images, then final copy-only changes; this receipt does not claim direct browser operation.",
+  "sourceSha256": {
+    "src/learn/data/topics/tokenization.jsx": "a68e15987a4d6cabe90b4daaaf886dc6d3fc4d49c31ad3521880f9c4b6f3adc1",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "21e947f8a453d4deebc9855ac8e9937583dbcd285f699fd4b49dd7f2b22083c0",
+    "src/learn/components/lesson-labs/subword-tokenization-lessons.css": "a55a6d3b8503e630f6c83d3776a4958313cd0ed43fd40867dd91bf55510cef24",
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/unigram_model.py": "5a3ea845833594ca5c7aaed1fb4d63ef92c0ed7d70d2af35436505e985b95d1d",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/tokenizer_libraries.py": "febb16e52cd5a0a5dec8039db1aab6cff85bcf6c3306b57bbb98300887cbdfc3",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/native-output.json": "cf3d91aabd588d69198bba42f8484240e08b66133304ca8bac8a66926c8b220e",
+    "scripts/verify-tokenization-teaching-examples.py": "fccdd7d95aab43a5c7a6cb12e9fa2d4b67995c323db5f3b5e810d50f35537959",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/beginner-review.md": "322034ec77601aec83654304a100f6a6e044dc30e09ad568c4efa8e901d37d21"
+  },
+  "screenshotsInspected": {
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-0-320.png": "bc24fdaf2ded46486067b351089f0d9379c15a444729bbe38dae514cf9c985b9",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-1-320.png": "58c66feefd2c600af71c08cb03765470fa52486e9d4a2cd0b09c4c809f1dc2d6",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-2-320.png": "a30d5c170019101cadf25609548c088f02d154ab6b22eeac2ef54fdb060efb1b",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-4-320.png": "43d65cf73865c9b0ba8b2eb438aec235cf436718271af4e9973d5e46d0bcf76c",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-5-320.png": "f755a6f96de551aa519a89aa7d5b87d7ff9500c9acc5e30491aa5fd231053e64",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-8-320.png": "9c3a1bd35cef33215af6d61527f5b5df65c12b2299723764180f1215edcd3a2f",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-9-320.png": "ea175b0b70dcb2e8f723ddb359da231a8234198519787f3e6af49cb574200356",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-figure-10-320.png": "396fe5e0c1004d3b055bd7e4c776310c7b9c77a732d1ed4c39c8f4a7eeecde13",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-0-320.png": "4beebe9a15c55c101385041b4635449c3d1ae4b25531e084442e261489c24f0b",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-0-changed.png": "372f3c130e783dfa847b02c5754f983613f35d82c0eff41c8dd4ecfbcc2a7b9f",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-1-320.png": "fc33671da98a54adb2182e59eb160d0ff7d871eac3e861497a9f95c235ddb0a7",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-1-changed.png": "3cb4d3be0032e7b248ffd5d290b8c1593e0fc9c7a4274b219211f886d6d75c08",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-2-320.png": "c8c7eb6a12ef1f12a88f1dc01014edc3673e48eef701ecce7f315590d1e80830",
+    "scratch/tokenization-intuition/early-browser/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram-2-changed.png": "14375794885364e10e25e74a59252990e6ffaf37880d2cbbbf32a06705e3e806"
+  },
+  "screenshotScope": "Eight distinct figures narrow; three default labs narrow; three changed desktop labs. Two later caption-only repairs read in final source, preserving geometry/model. Exact observations in beginner-review.md."
+}

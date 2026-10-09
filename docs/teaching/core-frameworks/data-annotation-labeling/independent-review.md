@@ -1,0 +1,11 @@
+# Independent review — Data Annotation & Labeling
+
+Reviewer: `frameworks_functional_tracking`, independent of author `frameworks_annotation_modalities`. Reviewed 28 September 2026. The companion JSON binds this review to the current manuscript, blueprint, lab/model, CSS, XML/tasks and complete program. No open source-level blocker found.
+
+Read the entire manuscript, concept/visual contract and current one-pass Python implementation. The lesson begins with an operational decision rather than a tool catalog, distinguishes missing evidence from a negative target, and carries independent judgments through proposal, adjudication and release. The agreement matrix, marginal baseline and undefined denominator are derived from the same six judgments; changed practice tests both arithmetic and the scientific meaning of an audit. The ordinary Label Studio route has an actual XML/task contract and a checked export adapter, with honest limits on unexecuted server/edition features.
+
+The browser model's third rater changes proposals without changing A/B statistics; input edits have direct semantic meaning and no learner prediction gate. Original judgments and released labels remain conceptually separate. Native author evidence was inspected, including the 256 sklearn parity cases; that campaign was not duplicated.
+
+Complementary checks executed using Node ESM imports and Python3.12.14 with `-B`: all27 U/R/abstain vote triples match a separately counted strict majority and preserve A/B statistics under C-only edits. Parsed the real XML, checked its object/control/allowed-label names and three unique imported task IDs. Executed the local release adapter on one approved case and six rejecting cases: cancelled annotation, two approved annotations, unknown label, mismatched target name, duplicate task ID and no approval. All passed. Rechecked the official Label Studio task-format documentation for the annotations/results boundary. The latest O(n+k) time/O(k) additional-memory description matches the Counter implementation.
+
+This is independent source/correctness and heuristic learning review, not a learner study or a browser acceptance record. Parent owns final rendered keyboard/mobile/theme checks and integration. No Label Studio server, hosted permissions or human annotation study was executed here.

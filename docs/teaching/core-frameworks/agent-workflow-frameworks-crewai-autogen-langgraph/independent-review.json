@@ -1,0 +1,42 @@
+{
+  "reviewer": "frameworks_functional_tracking",
+  "date": "2026-09-28",
+  "kind": "independent-source-and-concept-review",
+  "scope": "Complete manuscript, blueprint, visual/model source, all canonical programs and author design/native evidence read. Complementary invariants executed independently; no repeat of full native-library campaigns.",
+  "sources": {
+    "src/learn/data/topics/agent-workflow-frameworks-crewai-autogen-langgraph.jsx": "89bac272241b3a245b7c7df79b661d914ce929478cb988d8e6c0cd0524d5c9f8",
+    "src/learn/components/lesson-labs/AgentWorkflowLabs.jsx": "1bb77635c7566a93b58a8e7e326cacc34bca19c144162671fcf0571cecabd654",
+    "src/learn/data/agent-workflow-models.js": "77269a86b4ab6500868c28acc4bccaa44d8e53f47be2a0b5f4c09167d3bb630e",
+    "src/learn/data/curriculum/blueprints/agent-workflow-frameworks-crewai-autogen-langgraph.js": "71a454eb441f4afdb51dbe3e39dca1337ad0d3fad811c536f2a3141cde1d0341",
+    "docs/teaching/core-frameworks/agent-workflow-frameworks-crewai-autogen-langgraph/design.md": "7e41f6ff608f7c4b19551220272752ad153177996e4dc86ec80191cb7680c99b",
+    "public/learn-code/agent-workflow-frameworks-crewai-autogen-langgraph/durable_workflow.py": "0b95b1f7d7a9ad53f1c60dfbea139980787e5857cdd087144a1963c334e3e679",
+    "public/learn-code/agent-workflow-frameworks-crewai-autogen-langgraph/langgraph_workflow.py": "cad85c136644f6668cd201aecb3aa627c094faf72b11a128d90d454e60a198a8"
+  },
+  "checks": {
+    "replay_closed_form_cases": 18,
+    "approval_cases": 18,
+    "invalid_keys_rejected": 5,
+    "same_key_replays": 8,
+    "changed_payload_rejected": true,
+    "independent_key_commit": true
+  },
+  "resolved_findings": [
+    "EffectStore accepted NULL/empty identities, undermining receipt identity. Author added nonempty-string validation before operations, NOT NULL schema for new stores, native run-ID validation; independent rejection and replay probes pass.",
+    "Continuation omitted the next module-sequence lesson. Author added the exact Tensor Shapes/Autograd/Device link while retaining deeper agent branches."
+  ],
+  "open_blockers": [],
+  "commands": [
+    "node scripts/verify-framework-execution-review.mjs",
+    "scratch/framework-lesson-runtime/Scripts/python.exe -B scripts/verify-workflow-identity-review.py"
+  ],
+  "primary_fact_checks": [
+    "https://github.com/microsoft/autogen",
+    "https://docs.langchain.com/oss/python/langgraph/interrupts"
+  ],
+  "limits": [
+    "Source and executed complementary checks are independent; parent owns browser/theme/responsive/copy/download and integration verification.",
+    "Author source-bound native-library results inspected and reused; hosted generation and native GPU serving are not claimed executed.",
+    "No learner study or production concurrency guarantee is claimed."
+  ],
+  "documentation_followup": "Inspected final design closure sentence linking completed independent review and stating no source blockers. Rebound only design.md; all other reviewed source hashes remain unchanged. No new numerical or runtime certification is implied."
+}

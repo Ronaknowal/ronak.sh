@@ -1,0 +1,343 @@
+{
+  "source": "6a8dd38fe0afd9fff13b88071ac21b15c4324e56a5841bbee832137b5aaab7f5",
+  "checks": [
+    {
+      "name": "Coin zero endpoint",
+      "pass": true
+    },
+    {
+      "name": "Coin one endpoint",
+      "pass": true
+    },
+    {
+      "name": "Empty decoder bounded",
+      "pass": true
+    },
+    {
+      "name": "Changed complete decoder",
+      "pass": true
+    },
+    {
+      "name": "Matched KL zero",
+      "pass": true
+    },
+    {
+      "name": "Natural unit conversion",
+      "pass": false
+    },
+    {
+      "name": "Zero source ignores excluded slot",
+      "pass": false
+    },
+    {
+      "name": "Positive tiny support remains finite",
+      "pass": true
+    },
+    {
+      "name": "Unequal context fixture",
+      "pass": false
+    },
+    {
+      "name": "Zero context row unavailable",
+      "pass": true
+    },
+    {
+      "name": "Underflow direct loss finite",
+      "pass": true
+    },
+    {
+      "name": "Coordinate null is physical identity",
+      "pass": false
+    },
+    {
+      "name": "Bin count32 entropy5",
+      "pass": false
+    },
+    {
+      "name": "Shared slice reaches all mounts",
+      "pass": true
+    },
+    {
+      "name": "Mean0 endpoint",
+      "pass": true
+    },
+    {
+      "name": "Mean2 endpoint",
+      "pass": true
+    },
+    {
+      "name": "Shared committed reset",
+      "pass": false
+    },
+    {
+      "name": "HTTP entropy_bernoulli.py",
+      "pass": true,
+      "sha256": "d28fbfc365c00ff5ff8894ce49a9161b839cef6f61729320e9be3dbc31093e29"
+    },
+    {
+      "name": "HTTP entropy_bernoulli.py.stdout.txt",
+      "pass": true,
+      "sha256": "c9a9fd83ea6f1ee66c166c1a10ea972e9666e172c0ef769804cb516d4c01f952"
+    },
+    {
+      "name": "HTTP entropy_blocks.py",
+      "pass": true,
+      "sha256": "c350cc2860c8ceae9f2b0b878eb07430a804e76b37a6a64bacc9d600eb97088a"
+    },
+    {
+      "name": "HTTP entropy_blocks.py.stdout.txt",
+      "pass": true,
+      "sha256": "ffacd0fb3fc0c3d635406aacd9fb55f6a93276ddd72e130ceec9e2fecda8f159"
+    },
+    {
+      "name": "HTTP entropy_coin.py",
+      "pass": true,
+      "sha256": "3ed8990146ff30a1012b1ea8aa7082345c3370ad2109476154d6a50097c9a6e3"
+    },
+    {
+      "name": "HTTP entropy_coin.py.stdout.txt",
+      "pass": true,
+      "sha256": "410ae0fe1b4a2b341e350e1318c08cd592c9311f10eda7cf1d0f79f6ff968871"
+    },
+    {
+      "name": "HTTP entropy_conditional.py",
+      "pass": true,
+      "sha256": "eb612681a243677383ce07b1d06bf698ce0ad2fc4e1abc93d8d4fdcbc2efdc90"
+    },
+    {
+      "name": "HTTP entropy_conditional.py.stdout.txt",
+      "pass": true,
+      "sha256": "1b18379ecfe4cb97cb12a0ce4fa36dbf030178855a34ac999d5507405db495b5"
+    },
+    {
+      "name": "HTTP entropy_continuous.py",
+      "pass": true,
+      "sha256": "537338dcfed092b66685f6a5637460b85d4d5a7f05af081234893b695bf4d682"
+    },
+    {
+      "name": "HTTP entropy_continuous.py.stdout.txt",
+      "pass": true,
+      "sha256": "5c1d7e86daef95889cf4cccf83ecff93043592dc874514e270ffda4729109a25"
+    },
+    {
+      "name": "HTTP entropy_evaluation.py",
+      "pass": true,
+      "sha256": "313c422d72480eef439f33e329bac70ba152bb8e25f69a4a89f62466ece8150b"
+    },
+    {
+      "name": "HTTP entropy_evaluation.py.stdout.txt",
+      "pass": true,
+      "sha256": "707ff49fb5282a8094e7f0e35dc0d09b2f692fc74de97df9a0e4019cda7e3cd3"
+    },
+    {
+      "name": "HTTP entropy_logits.py",
+      "pass": true,
+      "sha256": "e3d73b3fadf53a6cfbbe380bee0d867d8c9d62085d313c6a79d012df1e09797e"
+    },
+    {
+      "name": "HTTP entropy_logits.py.stdout.txt",
+      "pass": true,
+      "sha256": "21e37cc698eb20d7de004557d64c73da21e6612afaacbd9b6e6fd023b6fa1ac9"
+    },
+    {
+      "name": "HTTP entropy_maximum.py",
+      "pass": true,
+      "sha256": "0d9c5f638c424613d13ad7bad1f7189303bf05d430c163fc4407bfc4daa2c014"
+    },
+    {
+      "name": "HTTP entropy_maximum.py.stdout.txt",
+      "pass": true,
+      "sha256": "8af9735bfaddd62575504bfb361ca98f26d34bad38ef903b8a9ed84bb6e84d68"
+    },
+    {
+      "name": "HTTP entropy_prefix.py",
+      "pass": true,
+      "sha256": "e4b4fb4dfc210f9918631bcbeec28425695dd950922acce1a3ad5b8470b459ec"
+    },
+    {
+      "name": "HTTP entropy_prefix.py.stdout.txt",
+      "pass": true,
+      "sha256": "7ed24ce91add735adcc4749c9ea0ebd95cb17a39770d4a5a0c2087984274a6e6"
+    },
+    {
+      "name": "HTTP entropy_support.py",
+      "pass": true,
+      "sha256": "92e20737d064ac3056aff6d1034ecf9bc614f06e953a64958aa3ec5b4339ae7b"
+    },
+    {
+      "name": "HTTP entropy_support.py.stdout.txt",
+      "pass": true,
+      "sha256": "af7e39604bce5380c3986b32402d49d818db40afc8a7458de4fd58e718d134cf"
+    },
+    {
+      "name": "HTTP entropy_torch.py",
+      "pass": true,
+      "sha256": "fdce63715bb9446d3c4607241e967d3472651001ef8fe9940cea3b350fd69f31"
+    },
+    {
+      "name": "HTTP entropy_torch.py.stdout.txt",
+      "pass": true,
+      "sha256": "56f4d49157eccb4e5e851930ad94aba07b0f2d6021351845109579eab66f2d86"
+    },
+    {
+      "name": "HTTP information_library.py",
+      "pass": true,
+      "sha256": "b990bebbf52d1d3e1e27119c5b8be436497b84d81e936dcd41b55a62de67e960"
+    },
+    {
+      "name": "HTTP information_library.py.stdout.txt",
+      "pass": true,
+      "sha256": "20e5c8edab827c404dac0059493708ed47e4a18f26b1127a3e4f1cf2e32e9741"
+    },
+    {
+      "name": "HTTP penguins.csv",
+      "pass": true,
+      "sha256": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93"
+    },
+    {
+      "name": "HTTP penguins_log_loss.py",
+      "pass": true,
+      "sha256": "a591e009d34a1f2d088a6f274c4afbf096c7d5191611b836ac05a4b2c7f47eb0"
+    },
+    {
+      "name": "HTTP penguins_log_loss.py.stdout.txt",
+      "pass": true,
+      "sha256": "7438bb5ddca0135a87e93f2863a070d358fb8e211b48e30a8c9cda3d74bcd063"
+    },
+    {
+      "name": "Actual Copy source normalized LF",
+      "pass": true
+    }
+  ],
+  "states": [
+    {
+      "name": "zero heads",
+      "id": "E06",
+      "text": "E06 Investigate a biased coin\n● Heads\n■ Tails\n\nHeads: width 0 × price ∞ = 0 bits\n\n0\np = 1\nExcluded event: weighted cost 0\n\nTails: width 1 × price 0 = 0 bits\n\n0\np = 1\n\nEvery rectangle uses the same horizontal 0–1 probability ruler and vertical 0–4 bit price ruler.\n\nVertical: H, bits.\nHorizontal: heads probability.\n\n0\n1\n1\n\nH = 0 bits. Weighted heads 0 + weighted tails 0.\n\nHeads probability: 0\nSwap heads and tails probabilities\nReset investigation"
+    },
+    {
+      "name": "certain heads",
+      "id": "E06",
+      "text": "E06 Investigate a biased coin\n● Heads\n■ Tails\n\nHeads: width 1 × price 0 = 0 bits\n\n0\np = 1\n\nTails: width 0 × price ∞ = 0 bits\n\n0\np = 1\nExcluded event: weighted cost 0\n\nEvery rectangle uses the same horizontal 0–1 probability ruler and vertical 0–4 bit price ruler.\n\nVertical: H, bits.\nHorizontal: heads probability.\n\n0\n1\n1\n\nH = 0 bits. Weighted heads 0 + weighted tails 0.\n\nHeads probability: 1\nSwap heads and tails probabilities\nReset investigation"
+    },
+    {
+      "name": "empty source",
+      "id": "E09",
+      "text": "E09 Encode completely, then inspect the decoder\n● A\n■ B\n▲ C\n◆ D\n\nComplete encoded message (0 bits):\n\nEmpty string\n\nComplete decoded result: Empty string. This output is visible before stepping.\n\nExpected length 1.75 bits per symbol. Realized length unavailable for an empty message. Fixed two-bit length: 0.\n\n0\n1\n0\n1\n0\n1\nA\nB\nC\nD\nCodewords and lengths\nSymbol\tWord\tLength\nA\t0\t1\nB\t10\t2\nC\t110\t3\nD\t111\t3\n\nInspection 0/0: decoded prefix “”; unfinished tree prefix “”.\n\nMessage\nApply Message\nCodebook\nShort words for frequent A\nShort words for rare D\nTwo bits for every symbol\nPrevious bit\nNext bit\nReset investigation\nInspect every bit and decoded prefix"
+    },
+    {
+      "name": "DCBA fixed complete",
+      "id": "E09",
+      "text": "E09 Encode completely, then inspect the decoder\n● A\n■ B\n▲ C\n◆ D\n\nComplete encoded message (8 bits):\n\n11100100\n\nComplete decoded result: DCBA. This output is visible before stepping.\n\nExpected length 2 bits per symbol. Realized length 2. Fixed two-bit length: 8.\n\n0\n0\n1\n1\n0\n1\nA\nB\nC\nD\n\nLeaf A emits that symbol; the local return arrow means restart at the root before the next bit.\n\nCodewords and lengths\nSymbol\tWord\tLength\nA\t00\t2\nB\t01\t2\nC\t10\t2\nD\t11\t2\n\nInspection 8/8: decoded prefix “DCBA”; unfinished tree prefix “”.\n\nMessage\nApply Message\nCodebook\nShort words for frequent A\nShort words for rare D\nTwo bits for every symbol\nPrevious bit\nNext bit\nReset investigation\nInspect every bit and decoded prefix"
+    },
+    {
+      "name": "matched model",
+      "id": "E14",
+      "text": "E14 Investigate source weights and model weights\n● A\n■ B\n▲ C\n◆ D\n\nP supplies outcomes; solid strip\n\nA\nB\nC\nD\nA 0.5\nB 0.25\nC 0.125\nD 0.125\n\nQ supplies prices; dashed model outline\n\nA\nB\nC\nD\nA 0.5\nB 0.25\nC 0.125\nD 0.125\nFollow each identity from mass to cost (bits)\nOutcome\tP\tQ\t−log Q\tP × price\tP log(P/Q)\nA\t0.5\t0.5\t1\t0.5\t0\nB\t0.25\t0.25\t2\t0.5\t0\nC\t0.125\t0.125\t3\t0.375\t0\nD\t0.125\t0.125\t3\t0.375\t0\n\nWeighted model prices; common scale 4 bits\n\nA\n0.5\nB\n0.5\nC\n0.375\nD\n0.375\n\nSigned row contributions to KL; common scale −2 to 2 bits\n\nA\n0\nB\n0\nC\n0\nD\n0\n\nH = 1.75; cross-entropy = 1.75; KL = 0 bits. Individual KL rows can be negative; the normalized total cannot.\n\nSource weights A B C D\nApply Source weights A B C D\nModel weights A B C D\nApply Model weights A B C D\nInformation unit\nbits\nnats\nMatch model to source\nReverse source and model\nReset investigation"
+    },
+    {
+      "name": "matched nats",
+      "id": "E14",
+      "text": "E14 Investigate source weights and model weights\n● A\n■ B\n▲ C\n◆ D\n\nP supplies outcomes; solid strip\n\nA\nB\nC\nD\nA 0.5\nB 0.25\nC 0.125\nD 0.125\n\nQ supplies prices; dashed model outline\n\nA\nB\nC\nD\nA 0.5\nB 0.25\nC 0.125\nD 0.125\nFollow each identity from mass to cost (nats)\nOutcome\tP\tQ\t−log Q\tP × price\tP log(P/Q)\nA\t0.5\t0.5\t0.69315\t0.34657\t0\nB\t0.25\t0.25\t1.38629\t0.34657\t0\nC\t0.125\t0.125\t2.07944\t0.25993\t0\nD\t0.125\t0.125\t2.07944\t0.25993\t0\n\nWeighted model prices; common scale 4 nats\n\nA\n0.34657\nB\n0.34657\nC\n0.25993\nD\n0.25993\n\nSigned row contributions to KL; common scale −2 to 2 nats\n\nA\n0\nB\n0\nC\n0\nD\n0\n\nH = 1.21300757; cross-entropy = 1.21300757; KL = 0 nats. Individual KL rows can be negative; the normalized total cannot.\n\nSource weights A B C D\nApply Source weights A B C D\nModel weights A B C D\nApply Model weights A B C D\nInformation unit\nbits\nnats\nMatch model to source\nReverse source and model\nReset investigation"
+    },
+    {
+      "name": "zero source zero model",
+      "id": "E15",
+      "text": "E15 A missing model slot cannot price an observed event\n● A\n■ B\n▲ C\n◆ D\n\nSource probabilities\n\nA\nA 1\nB 0\nC 0\nD 0\n\nOriginal model weights: (1, 0, 0, 0).\n\nOriginal normalized Q\n\nA\nA 1\nB 0\nC 0\nD 0\nQ(B)=0\n\nOriginal B term: zero source weight → weighted cost 0.\n\nChanged model: add α=0 to every weight, then normalize\n\nA\nA 1\nB 0\nC 0\nD 0\nOriginal and explicitly changed model\nModel\tCross-entropy\tKL\nOriginal\t0\t0\nSmoothed\t0\t0\nSource probability of B: 0\nOriginal model weight B\nApply Original model weight B\nPseudocount alpha: 0\nReset investigation"
+    },
+    {
+      "name": "positive tiny support",
+      "id": "E15",
+      "text": "E15 A missing model slot cannot price an observed event\n● A\n■ B\n▲ C\n◆ D\n\nSource probabilities\n\nB\nA 0\nB 1\nC 0\nD 0\n\nOriginal model weights: (1, 1.00e-12, 0, 0).\n\nOriginal normalized Q\n\nA\nA 1\nB 1.00e-12\nC 0\nD 0\nQ(B)=1.00e-12\n\nOriginal B term: 39.86314 bits.\n\nChanged model: add α=0 to every weight, then normalize\n\nA\nA 1\nB 1.00e-12\nC 0\nD 0\nOriginal and explicitly changed model\nModel\tCross-entropy\tKL\nOriginal\t39.86314\t39.86314\nSmoothed\t39.86314\t39.86314\nSource probability of B: 1\nOriginal model weight B\nApply Original model weight B\nPseudocount alpha: 0\nReset investigation"
+    },
+    {
+      "name": "unequal truthful rows",
+      "id": "E27",
+      "text": "E27 Investigate conditional rows and context weights\nP(X=0)=0.75\nP(X=1)=0.25\n● Y=0\n■ Y=1\nJoint rows become conditional rows only when their context has positive mass\nContext\tJoint P(X,Y=0), P(X,Y=1)\tConditional P(Y|X)\tModel Q(Y|X)\tRow H / CE\tWeighted CE\nX=0; mass 0.75\t0.675, 0.075\t0.9, 0.1\t0.9, 0.1\t0.469 / 0.469\t0.35175\nX=1; mass 0.25\t0.125, 0.125\t0.5, 0.5\t0.5, 0.5\t1 / 1\t0.25\n\nContext X=0: normalize this joint row by its mass 0.75.\n\nConditional source P(Y|X); solid\n\nY=0\nY=0 0.9\nY=1 0.1\n\nConditional model Q(Y|X); dashed\n\nY=0\nY=0 0.9\nY=1 0.1\n\nContext X=1: normalize this joint row by its mass 0.25.\n\nConditional source P(Y|X); solid\n\nY=0\nY=1\nY=0 0.5\nY=1 0.5\n\nConditional model Q(Y|X); dashed\n\nY=0\nY=1\nY=0 0.5\nY=1 0.5\n\nContributions weighted by actual context mass; common scale 2 bits\n\nX=0\n0.35175\nX=1\n0.25\n\nConditional H = 0.601746695; CE = 0.601746695; excess = 0 bits. Marginal H(Y) = 0.721928095.\n\nAn equal average of the two row costs would give 0.734497797 bits. It is justified only at context weight ½; at a zero-mass context its conditional law is not recoverable from the joint distribution.\n\nConditional example\nSymmetric noisy context\nUnequal truthful rows\nContext probability P(X=1): 0.25\nFlip noise: 0.1\nModel trust: 0.8\n\nThe unequal preset fixes truthful rows (.9,.1) and (.5,.5); noise and trust controls are inactive for this example.\n\nReset investigation"
+    },
+    {
+      "name": "absent context",
+      "id": "E27",
+      "text": "E27 Investigate conditional rows and context weights\nP(X=0)=1\nP(X=1)=0\n● Y=0\n■ Y=1\nJoint rows become conditional rows only when their context has positive mass\nContext\tJoint P(X,Y=0), P(X,Y=1)\tConditional P(Y|X)\tModel Q(Y|X)\tRow H / CE\tWeighted CE\nX=0; mass 1\t0.9, 0.1\t0.9, 0.1\t0.9, 0.1\t0.469 / 0.469\t0.469\nX=1; mass 0\t0, 0\tunavailable: zero context\t0.5, 0.5\tnot observed\t0\n\nContext X=0: normalize this joint row by its mass 1.\n\nConditional source P(Y|X); solid\n\nY=0\nY=0 0.9\nY=1 0.1\n\nConditional model Q(Y|X); dashed\n\nY=0\nY=0 0.9\nY=1 0.1\n\nContext X=1: normalize this joint row by its mass 0.\n\nNo conditional row can be recovered from this zero-mass context.\n\nContributions weighted by actual context mass; common scale 2 bits\n\nX=0\n0.469\nX=1\n0\n\nConditional H = 0.468995594; CE = 0.468995594; excess = 0 bits. Marginal H(Y) = 0.468995594.\n\nAn equal average of the two row costs would give 0.734497797 bits. It is justified only at context weight ½; at a zero-mass context its conditional law is not recoverable from the joint distribution.\n\nConditional example\nSymmetric noisy context\nUnequal truthful rows\nContext probability P(X=1): 0\nFlip noise: 0.1\nModel trust: 0.8\n\nThe unequal preset fixes truthful rows (.9,.1) and (.5,.5); noise and trust controls are inactive for this example.\n\nReset investigation"
+    },
+    {
+      "name": "extreme logits",
+      "id": "E30",
+      "text": "E30 Investigate the stable logit calculation\n● Class 0\n■ Class 1\n▲ Class 2\n0\n0\n-1000\n-1000\n-2000\n-2000\nΣ exp(shifted) = 1\n\nEvery score subtracts maximum m=0. Each log probability is its shifted score minus ln(sum)=0.\n\nClass identity through the stable calculation\nClass\tScore\tShifted\texp shifted\tProbability\tlog probability\tTarget weight\tLoss term\n0\t0\t0\t1\t1\t0\t0\t0\n1\t-1000\t-1000\t0\t0\t-1000\t0\t0\n2\t-2000\t-2000\t0\t0\t-2000\t1\t2000\n\nLoss = 2000 nats. The target is applied to log probabilities, not to exponentiated values.\n\nClass 0 logit\nApply Class 0 logit\nClass 1 logit\nApply Class 1 logit\nClass 2 logit\nApply Class 2 logit\nCommon logit shift: 0\nTarget type\nHard class index\nNormalized soft target\nTarget class\nClass 0\nClass 1\nClass 2\nInspect extreme separation\nReset investigation"
+    },
+    {
+      "name": "soft target controls",
+      "controls": [
+        {
+          "label": "Class 0 logit",
+          "value": "0"
+        },
+        {
+          "label": "Class 1 logit",
+          "value": "-1000"
+        },
+        {
+          "label": "Class 2 logit",
+          "value": "-2000"
+        },
+        {
+          "label": "Common logit shift: 0",
+          "value": "0"
+        },
+        {
+          "label": "Soft target probabilities",
+          "value": "0.5, 0.25, 0.25"
+        }
+      ]
+    },
+    {
+      "name": "width4 identity",
+      "id": "E38",
+      "text": "E38 Investigate a coordinate change of the same uniform law\n\nMetres: support [0,4], density 0.25 per m.\n\nVertical: density / m [0 to 8].\nHorizontal: m [0 to 4].\n\n0\n4\n8\n\nMiddle-half endpoints: 1 to 3 m; width × density = .5. Differential entropy h = 2 bits.\n\nMetres: support [0,4], density 0.25 per m.\n\nVertical: density / m [0 to 8].\nHorizontal: m [0 to 4].\n\n0\n4\n8\n\nMiddle-half endpoints: 1 to 3 m; width × density = .5. Differential entropy h = 2 bits.\n\nThe horizontal ruler scales by 1; the vertical density ruler scales by its reciprocal. The shaded event has probability .5 in both coordinate systems.\n\nPhysical support width in metres: 4\nComparison coordinate unit\nMetres — identity change\nCentimetres — 100 per metre\nReset investigation"
+    },
+    {
+      "name": "quantization controls",
+      "controls": [
+        {
+          "label": "Bin count",
+          "value": "4"
+        },
+        {
+          "label": "Physical width in metres",
+          "value": "0.25"
+        },
+        {
+          "label": "Bin boundary units\nMetres\nCentimetres",
+          "value": "100"
+        }
+      ]
+    },
+    {
+      "name": "32 bins",
+      "id": "E39",
+      "text": "E39 Investigate finite bins of one physical interval\n\nThe full-support detail below always shows the same physical interval; its x ruler follows the chosen unit.\n\n0\n4\n8\n12\n16\n20\n24\n28\n32\n\nBoundary labels are bin indices, 0…32. Physical width is 25 cm; each Δ=0.78125 has mass 1/32.\n\nH(bins) = log₂32 = 5\n=\nh 4.64386\n−\nlog₂Δ -0.35614\n\nThis identity is exact for the uniform density. Changing units changes h and log₂Δ by the same amount.\n\nInspect all bin boundaries and masses\nBin count: 32\nPhysical width in metres: 0.25\nBin boundary units\nMetres\nCentimetres\nReset investigation"
+    },
+    {
+      "name": "selected optimum",
+      "id": "E44",
+      "text": "E44 Compare the current law with the entropy candidate\ncount 0\ncount 1\ncount 2\n\nCurrent q is the blue circle. Candidate p* is the amber open diamond. The white segment contains exactly the laws satisfying the selected mean.\n\nCurrent q in count order\n\ncount 0 0.14286\ncount 1 0.28571\ncount 2 0.57143\nsum q = 1\nmean = 1.42857143\nt=q₂=0.57142857\nfeasible t ∈ [0.42857143, 0.71428571]\n\nCandidate p* in count order\n\ncount 0 0.14286\ncount 1 0.28571\ncount 2 0.57143\n\nVertical: entropy, bits [0 to 1.6].\nHorizontal: t = q₂ [0.42857 to 0.71429].\n\n0.4286\n0.7143\n\nH(q)=1.378783493; H(p*)=1.378783493; gap=4.67e-32 bits. η=0.69314718.\n\nFeasible-slice fraction — stage 2: 0.5\nSelect p*\nReset investigation\n\nAll three investigation positions share this state. Scrolling does not reset it; reset anywhere restores mean 10/7 and fraction 0."
+    },
+    {
+      "name": "endpoint mean0",
+      "id": "E45",
+      "text": "E45 Move the mean constraint, keeping the same slice fraction\nFour reference slices, before changing the live mean\nMean\tt lower\tt upper\tFeasible geometry\n0\t0\t0\tone vertex\n1\t0\t0.5\tline segment\n10/7\t3/7\t5/7\tline segment\n2\t1\t1\tone vertex\n\nReference mean 0\n\ncount 0\ncount 1\ncount 2\n\nReference mean 1\n\ncount 0\ncount 1\ncount 2\n\nReference mean 1.428571\n\ncount 0\ncount 1\ncount 2\n\nReference mean 2\n\ncount 0\ncount 1\ncount 2\ncount 0\ncount 1\ncount 2\n\nCurrent q is the blue circle. Candidate p* is the amber open diamond. The white segment contains exactly the laws satisfying the selected mean.\n\nCurrent q in count order\n\ncount 0 1\ncount 1 0\ncount 2 0\nsum q = 1\nmean = 0\nt=q₂=0\nfeasible t ∈ [0, 0]\n\nCandidate p* in count order\n\ncount 0 1\ncount 1 0\ncount 2 0\n\nVertical: entropy, bits.\nHorizontal: t = q₂.\n\n0\n0\n\nH(q)=0; H(p*)=0; gap=0 bits. η=no finite value at this exact endpoint.\n\nFeasible-slice fraction — stage 3: 0.5\n\nThe feasible interval is one point; the fraction control is disabled because it cannot change the law.\n\nSelect p*\nRequired mean\nApply Required mean\nReset investigation\n\nAll three investigation positions share this state. Scrolling does not reset it; reset anywhere restores mean 10/7 and fraction 0."
+    },
+    {
+      "name": "endpoint mean2",
+      "id": "E45",
+      "text": "E45 Move the mean constraint, keeping the same slice fraction\nFour reference slices, before changing the live mean\nMean\tt lower\tt upper\tFeasible geometry\n0\t0\t0\tone vertex\n1\t0\t0.5\tline segment\n10/7\t3/7\t5/7\tline segment\n2\t1\t1\tone vertex\n\nReference mean 0\n\ncount 0\ncount 1\ncount 2\n\nReference mean 1\n\ncount 0\ncount 1\ncount 2\n\nReference mean 1.428571\n\ncount 0\ncount 1\ncount 2\n\nReference mean 2\n\ncount 0\ncount 1\ncount 2\ncount 0\ncount 1\ncount 2\n\nCurrent q is the blue circle. Candidate p* is the amber open diamond. The white segment contains exactly the laws satisfying the selected mean.\n\nCurrent q in count order\n\ncount 0 0\ncount 1 0\ncount 2 1\nsum q = 1\nmean = 2\nt=q₂=1\nfeasible t ∈ [1, 1]\n\nCandidate p* in count order\n\ncount 0 0\ncount 1 0\ncount 2 1\n\nVertical: entropy, bits.\nHorizontal: t = q₂.\n\n1\n1\n\nH(q)=0; H(p*)=0; gap=0 bits. η=no finite value at this exact endpoint.\n\nFeasible-slice fraction — stage 3: 0.5\n\nThe feasible interval is one point; the fraction control is disabled because it cannot change the law.\n\nSelect p*\nRequired mean\nApply Required mean\nReset investigation\n\nAll three investigation positions share this state. Scrolling does not reset it; reset anywhere restores mean 10/7 and fraction 0."
+    },
+    {
+      "name": "file buttons",
+      "buttons": [
+        "Copy"
+      ]
+    }
+  ],
+  "error": "page.waitForEvent: Timeout 8000ms exceeded while waiting for event \"download\"\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n    at C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\math-foundations-reading-flow\\entropy-cross-entropy-kl-divergence\\runtime-independent-r1\\complementary-states.cjs:21:42"
+}

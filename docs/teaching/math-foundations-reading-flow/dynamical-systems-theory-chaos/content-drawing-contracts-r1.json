@@ -1,0 +1,394 @@
+[
+  {
+    "id": "D01",
+    "title": "Complete state",
+    "construction": "Two carts occupy q=0 on a horizontal position ruler [−2,2]. Give the upper cart velocity +1 and lower cart −1, equal-length opposite arrowheads. Their next positions after .25 time are +.25 and −.25, ghosted distinctly. Label velocity as state information, not a second position.",
+    "provenance": "Constructed constant-velocity fixture q(t)=q0+vt.",
+    "reflow": "Stack the two complete rulers; wrap the common-state question outside the drawing."
+  },
+  {
+    "id": "D02",
+    "title": "Rate and finite increment",
+    "construction": "Cooling k=2,x0=8. Plot t in [0,.5], x in [0,9]; tangent at (0,8) has slope −16, and its h=.25 endpoint is ( .25,4). Exact endpoint is 8e^−.5≈4.852245. Draw h as horizontal width and the tangent increment −4 as vertical height.",
+    "provenance": "Exact exponential and left-endpoint Euler construction, C01.",
+    "reflow": "One plot with exterior slope and finite-increment labels; keep the two endpoints and their gap visible."
+  },
+  {
+    "id": "D03",
+    "title": "Exact samples and Euler samples",
+    "construction": "Use k=2,x0=8,h=.25 at t=0,.25,.5,.75. Exact states 8e^−2t; Euler states 8,4,2,1. Join the exact curve smoothly and Euler sample squares by thin dotted segments labeled update, not true flow. Below it compose widths .25+.25 and mark Φ.5(x)=Φ.25(Φ.25(x)).",
+    "provenance": "C01 rule and exact cooling semigroup. Programme horizon 3 remains separately labeled.",
+    "reflow": "Plot above a two-row time strip; retain equal physical-time alignments and avoid cramped formula text inside the plot."
+  },
+  {
+    "id": "D04",
+    "title": "Local lifetime",
+    "construction": "Draw x=1/(1−t) for t∈[0,.95], clip visible x at 10 with continuation arrow, y range [0,10]. Dashed vertical pole at t=1. Mark a short locally valid segment near t=0 and label maximal future interval [0,1). Do not draw the negative branch as a continuation.",
+    "provenance": "Exact solution of x′=x²,x0=1.",
+    "reflow": "One plot; exterior interval statement and pole label wrap beneath."
+  },
+  {
+    "id": "D05",
+    "title": "Stability tube",
+    "construction": "Equilibrium 0, ε=.5, δ=.25, x0=.2. On t∈[0,2], x∈[−.6,.6], compare .2e^−t and .2e^t. Shade ±ε as a light guide region, show the smaller initial δ segment, and mark unstable exit at ln(2.5). Curve beyond upper range gets an arrow. State the stable inequality for all |x0|<δ, not just the pictured start.",
+    "provenance": "Accepted DY2 exact fixture.",
+    "reflow": "Two plots with identical rulers if labels crowd; inequality and quantifiers stay outside."
+  },
+  {
+    "id": "D06",
+    "title": "Four equal linearizations do not tell the whole story",
+    "construction": "Start .25; t∈[0,4], x∈[0,.5]. Draw .25e^−t, .25/sqrt(1+.125t), constant .25, and .25/sqrt(1−.125t). Label exponential return, algebraic return, unchanged, departure. Positive cubic pole at t=8 is stated outside the displayed safe interval.",
+    "provenance": "C02 exact formulas; x′=−x adds the exponential comparison.",
+    "reflow": "Two pairs with equal axes rather than four colliding inline labels; all t=4 values remain readable."
+  },
+  {
+    "id": "D07",
+    "title": "Jacobian acts on a disturbance",
+    "construction": "Construct F(q,p)=(−q+q²,−2p) at zero. Input η=(.1,.1); rate-plane Jη=(−.1,−.2), actual difference=(−.09,−.2), connecting remainder=(.01,0). Both planes use equal units and axes [−.25,.15]. Show remainder squared scaling ||R||≤||η||².",
+    "provenance": "Accepted DY2 analytic Taylor fixture.",
+    "reflow": "Stack the state-disturbance plane above the rate-difference plane; retain separate axis titles so a rate is not called a next state."
+  },
+  {
+    "id": "D08",
+    "title": "Flow and map stability regions",
+    "construction": "Two complex planes, axes [−1.5,1.5], equal units. Flow shades Re λ<0 and marks −1±i,0,1; map shades |μ|<1 and marks .5±.5i,1,1.2. Dashed strict boundaries. Labels distinguish inverse-time λ from per-update dimensionless μ, and say boundary test inconclusive.",
+    "provenance": "Accepted matrices J=[[-1,-1],[1,-1]], M=[[.5,-.5],[.5,.5]].",
+    "reflow": "Stack flow then map; matrices and point coordinates appear in exterior text, not tiny plot labels."
+  },
+  {
+    "id": "D09",
+    "title": "Cubic rate and phase line",
+    "construction": "Default a=1, x0=.2 for f=ax−x³. Rate plot x∈[−1.8,1.8], f∈[−8,8]; align root marks and sign arrows on an x phase line below. Fill attracting ±1, open repelling zero; arrows point to correct attractor. Other a values retain axes and exact zero-root multiplicity classification.",
+    "provenance": "Existing scalar model, analytic roots/signs; L1 pitchfork.",
+    "reflow": "Rate plot above phase line; controls follow the sign explanation. No potential or time output yet."
+  },
+  {
+    "id": "D10",
+    "title": "Potential supplies the same arrows",
+    "construction": "Same L1 pitchfork state as D09. Plot V=x⁴/4−ax²/2 over x∈[−1.8,1.8], y∈[−.3,4.5]; show selected x on V, negative slope arrow and aligned time trace over [0,8]. Vdot=−f² appears beside the actual selected rate.",
+    "provenance": "C02 and retained scalarFlowState RK4 h=.02,T=8.",
+    "reflow": "Stack potential, phase position and time; exterior readouts use the same state identity. No earlier D09 control gains untaught output."
+  },
+  {
+    "id": "D11",
+    "title": "Basins separate close starts",
+    "construction": "At a=1 compare exact phase-line flow starts −.2,+.2,0; x extent [−1.5,1.5], time [0,8]. Show left and right basin strips (−∞,0),(0,∞) with boundary 0; trajectories end toward −1,+1,0 respectively. Infinity ends use arrows, not false finite basin endpoints.",
+    "provenance": "Analytic sign flow, retained scalar model may supply trace samples.",
+    "reflow": "Phase line above three small aligned time traces, with direct start/end labels rather than three sentence cards."
+  },
+  {
+    "id": "D12",
+    "title": "Local Lyapunov confinement",
+    "construction": "W=(x²−1)²/4 near +1. x∈[.7,1.3], W∈[0,.08]; horizontal level 1/64, positive component endpoints sqrt(3)/2 and sqrt(5)/2. Mark containment inside |x−1|<.25 and both arrows toward 1. Beneath, mark Wdot=0 within this component only at 1.",
+    "provenance": "Accepted DY2 local sublevel calculation.",
+    "reflow": "Potential plot, phase interval, and set statement stack; retain true sublevel endpoints and level height."
+  },
+  {
+    "id": "D13",
+    "title": "Parameter branches",
+    "construction": "Pitchfork parameter a∈[−1,1], equilibrium x∈[−1.2,1.2]. Root branch x=0 filled/solid for a<0, boundary ring at a=0 labeled nonlinear attraction, open/dashed for a>0. Branches ±sqrt(a) solid for positive a. Direct parameter label says not time.",
+    "provenance": "Analytic roots and derivative, including −x³ at a=0.",
+    "reflow": "One branch plot with sparse ticks and exterior line-style key. No animation that implies trajectories move along a parameter curve."
+  },
+  {
+    "id": "D14",
+    "title": "Tilted wells and folds",
+    "construction": "Independent L1 tilted model f=x−x³+b. Default b=0; options −.6,−2/(3sqrt3),0,+2/(3sqrt3),+.6. Rate/phase x∈[−1.8,1.8], potential V=x⁴/4−x²/2−bx. At exact folds mark the double root ±1/sqrt3 with half-filled symbol and opposing-side arrow behavior; do not misclassify by a near-zero derivative threshold.",
+    "provenance": "Analytic fold solutions and retained scalar solver.",
+    "reflow": "Rate/phase and potential stack; b controls and initial editor are separate from D09/D10."
+  },
+  {
+    "id": "D15",
+    "title": "Quasistatic hysteresis",
+    "construction": "Use b horizontally [−.65,.65], equilibria x vertically [−1.5,1.5]; derive branches parametrically b=x³−x. Mark folds ±2/(3sqrt3), solid outer stable and dashed inner unstable branch. Two arrow paths follow opposite quasistatic sweeps and jump after loss of a well. Exact fold jump targets at the threshold are ±2/sqrt3 with the appropriate opposite sign.",
+    "provenance": "Analytic branch curve; schematic quasistatic continuation, not a finite-rate ODE run.",
+    "reflow": "One branch plot; arrows carry sweep direction and label quasistatic. Place speed caveat in caption, never imply this is measured timing."
+  },
+  {
+    "id": "D16",
+    "title": "Phase plane and clock",
+    "construction": "Center q′=−p,p′=q, initial(1,0). L2 center-only state: T=4π,320 intervals,cursor160. Phase plane axes ±2 equal units; linked q(t),p(t) on time [0,4π], selected point and vertical time cursor share identity. Arrows show counterclockwise motion.",
+    "provenance": "Exact center solution and existing planar model.",
+    "reflow": "Phase plane above aligned coordinate traces; selected q,p,time exterior. Preserve equal axis units in all widths."
+  },
+  {
+    "id": "D17",
+    "title": "Nullclines are component-zero sets",
+    "construction": "Same center-only L2 state. q′=0 on p=0, p′=0 on q=0. Draw horizontal and vertical nullclines with distinct dash patterns, intersection equilibrium, and small field arrows: on p=0 vertical motion, on q=0 horizontal motion. Selected point is shared with D16.",
+    "provenance": "Component equations, no new numerical evidence.",
+    "reflow": "One equal-scale plane with exterior legend and two short component statements. Avoid labeling the entire nullcline stationary."
+  },
+  {
+    "id": "D18",
+    "title": "Center, spiral, saddle",
+    "construction": "Separate L2 comparison mount. Center (−p,q), spiral (−.4q−p,q−.4p), saddle (.4q,−.5p), start (1,0) by default; direct starts within [−1,1]². Center/spiral T=4π axes±2; saddle T=4 axes±5.5 with explicit clipping arrows if the growing q exceeds frame. Coordinate/radius traces distinguish recurrence, decay and escape.",
+    "provenance": "Retained exact planar functions; all three fields taught before their selector.",
+    "reflow": "Selector above one equal-scale plane and stacked traces. Axis/horizon change is visibly announced; never silently compare different clock spans."
+  },
+  {
+    "id": "D19",
+    "title": "Nonnormal coordinate transfer",
+    "construction": "L3 exact triangular flow, default(0,1). On t∈[0,4π], show p0e^−2t, direct q0e^−t, transferred 6p0e^−t(1−e^−t), total q. Separate horizontal transfer arrow p→q at the matrix off-diagonal. Plane extent±2.5. Signed components retain their sign for negative starts.",
+    "provenance": "C03 and analytic linear solution.",
+    "reflow": "Stack the component time plot and equal-scale state plane; use direct labels and do not encode transfer as a paragraph in a box."
+  },
+  {
+    "id": "D20",
+    "title": "Transient norm is not monotone",
+    "construction": "Share L3 state; add norm plot [0,2.5]. An exact-time action marks t=ln2 and actual analytic selected state, independent of the uniform-grid cursor. Default state(1.5,.25), norm1.520691; comparison start(1,0) gives(.5,0). Dashed initial-norm baseline makes amplification visible.",
+    "provenance": "C03 output and direct exact formula.",
+    "reflow": "Plane above norm curve with aligned selected-state summary; exact-time badge clears on cursor change/reset."
+  },
+  {
+    "id": "D21",
+    "title": "Radial and tangential velocity",
+    "construction": "At a=1,(q,p)=(.3,.4), r=.5. Draw radial(.225,.3), tangential(−.4,.3), total(−.175,.6) as head-to-tail rate vectors anchored at the point. State ray and radius differ visually from rate arrows. Equal coordinate units, q[−.2,.7],p[−.1,1.1].",
+    "provenance": "Accepted DY2 exact decomposition; r′=.375, θ′=1.",
+    "reflow": "Stack state/radius view and rate decomposition, with preserved scales and component labels. State that this a differs from L4 default."
+  },
+  {
+    "id": "D22",
+    "title": "Attracting radius",
+    "construction": "L4 default a=.25,r0=.3,phase0, T=4π,320 intervals,cursor160. Plot q,p axes±1.6 and r(t)∈[0,1.6], plus radial phase line. Mark origin and positive radius sqrt(a) only for a>0. Choices −.25,0,.25,1; direct r0[0,1.5].",
+    "provenance": "C04 exact radius evaluator; no Cartesian integration needed.",
+    "reflow": "Plane then radial time plot then radial phase line. Controls expose radius and parameter only; no phase-offset or return quantities yet."
+  },
+  {
+    "id": "D23",
+    "title": "Squared radius reduces the equation",
+    "construction": "On a symbolic operation strip, take r→u=r², then udot=2u(a−u), solve the separated equation, return r=sqrt(u). Pair a=.25,r0=.3 curves on t[0,4π]: u scale[0,.3], r scale[0,.6]. Show a=0 limit u0/(1+2u0t) in exterior math; label different vertical units.",
+    "provenance": "C04 stable expm1 formula and analytic derivation.",
+    "reflow": "Stack actual u/r curves and their conversion arrows; no pretend equal-height encoding of squared and unsquared radius."
+  },
+  {
+    "id": "D24",
+    "title": "Orbital attraction preserves phase",
+    "construction": "Share L4 a/r0/reference; add independent comparison offset φ=π/4. Two radius-matched paths have phase gap φ and Euclidean distance 2r(t)|sin(φ/2)|. For default a=.25 limit sin(π/8), not zero. φ=0 coincides; r0=0 has undefined phase and no rotating arrow.",
+    "provenance": "Analytic polar solution and geometric chord.",
+    "reflow": "One plane with chord and two rays, then distance trace; direct phase editor is mounted here only."
+  },
+  {
+    "id": "D25",
+    "title": "Return section and map",
+    "construction": "Share L4 reference, section p=0,q>0 crossed upward. Mark initial section point separately and subsequent returns at2π,4π; show r0→P(r0)→P²(r0) beside section. At a=.25 fixed .5 and radial multiplier e^−π. Origin has no nontrivial crossing; a≤0 has no attracting-cycle multiplier.",
+    "provenance": "C04 exact radius_at and analytic P derivative.",
+    "reflow": "Section plane above return-map plot; full period/return labels wrap outside. Do not call time0 a completed return."
+  },
+  {
+    "id": "D26",
+    "title": "Trapping annulus",
+    "construction": "For a=.25 use inner r=.25, outer r=.75. Draw annulus to equal scale in plane±.9, radial arrows inward relative to annulus on both boundaries, and moving tangent arrows. Origin lies in excluded hole. Print radial rates .046875 and −.234375 beside respective boundaries.",
+    "provenance": "Analytic r(a−r²), compact forward-invariance argument.",
+    "reflow": "Single annulus with exterior boundary-rate rows; keep the hole visible and distinguish radial from tangential arrows."
+  },
+  {
+    "id": "D27",
+    "title": "Feedback cobweb",
+    "construction": "L5 early r=2.5,x0=.2,40updates,cursor1. Axes[0,1] equal scales; graph F and diagonal y=x. Vertical evaluation leg then horizontal feedback leg, selected state in an aligned sequence. First path .2→.4→.6→.6. No later-regime selector in initial mount.",
+    "provenance": "Retained logistic values; exact initial three values.",
+    "reflow": "Plot above compact sequence. Use arrowheads and numbered operations; never require horizontal pan."
+  },
+  {
+    "id": "D28",
+    "title": "Fixed-point multiplier",
+    "construction": "Same r2.5 nonzero fixed .6; draw graph/diagonal intersection and tangent slope−.5. Magnified local disturbance .02 maps linearly to−.01; label tangent approximation. Also mark zero fixed point with derivative2.5. Scale local inset x/y[.55,.65] and label zoom.",
+    "provenance": "F′=r(1−2x), derived local test.",
+    "reflow": "Main intersection plot followed by separate labeled zoom; no unlabeled inflated disturbance."
+  },
+  {
+    "id": "D29",
+    "title": "Full two-cycle derivative",
+    "construction": "Independent later L5 initial r3.2. Mark exact x−,x+ from formula and both F arrows, then derivative factors r(1−2x−),r(1−2x+) multiplying to .16. Cycle points displayed to six decimals, but calculations use full precision.",
+    "provenance": "C05 two_cycle and multiplier.",
+    "reflow": "Stack two local operations and product row; return arrow spans both. Advanced regimes appear only after D30 and their introduction."
+  },
+  {
+    "id": "D30",
+    "title": "Finite parameter atlas",
+    "construction": "151 columns r2.5..4 with spacing .01, burn1000,keep48,start.217;7248 marks in fixed x-axis parameter/y-axis state[0,1]. Always mounted. Select real column default2.5; highlight corresponding tail with true r. Column3.83 exists exactly as an index even if binary representation is approximate.",
+    "provenance": "Retained atlas function and cached path; no new full recomputation per cursor.",
+    "reflow": "Single plot with enough height to see branches; selected tail below. Sparse parameter ticks, visible limits and sampling statement. Do not hide behind a reveal."
+  },
+  {
+    "id": "D31",
+    "title": "Tangent product",
+    "construction": "r2.5 reference .2,.4,.6,.6; derivative factors1.5,.5,−.5. Show d0=.001→.0015→.00075→−.000375, signed direction. Separate true-state rulers[0,1] and a labeled disturbance magnification. Total multiplier−3/8, log magnitude sum ln(3/8).",
+    "provenance": "Accepted DY2 exact finite chain.",
+    "reflow": "Three operations stack, then product and log row; preserve negative factor arrow flip and no saturated pair claim."
+  },
+  {
+    "id": "D32",
+    "title": "Pair versus tangent diagnostic",
+    "construction": "L7 ordinary r3.9,x0=.2,δ1e−6,70updates,cursor20; alternate stable r2.5. Pair plot state[0,1]; log10 separation plot[−18,1] with explicit zero/below-range markers. Natural-log exponent starts at current reference, burn1000,count2000. Requested and actual initial difference are distinct readouts.",
+    "provenance": "Existing pair/model and exponent computation, no scientific replay.",
+    "reflow": "State plot, separation, then diagnostic window. Avoid sharing y-axis units or four overlaid traces."
+  },
+  {
+    "id": "D33",
+    "title": "Critical zero derivative",
+    "construction": "Independent L7 r3.9,x0=.5,δ1e−6,burn0,count2000. Plot local F around .5; exact derivative0 and finite one-step difference−rδ². Tangent log is−∞ while pair may later separate. Point/curve local scales explicitly state magnification.",
+    "provenance": "Algebraic expansion and preserved original example; actual representable δ shown.",
+    "reflow": "Curve above tangent-versus-pair two-row values. Never draw a fake epsilon bar for zero."
+  },
+  {
+    "id": "D34",
+    "title": "Unstable fixed reference",
+    "construction": "Independent L7 r4,x0=.75,δ1e−6,burn0,count2000. Reference sequence remains .75; tangent multiplier−2 per step, λln2. Nearby pair is distinct and can leave. Draw fixed dot plus alternating growing tangent arrows, labeled magnification.",
+    "provenance": "Exact fixed equation and derivative.",
+    "reflow": "Reference strip above tangent strip and pair plot; label positive rate and period1 together."
+  },
+  {
+    "id": "D35",
+    "title": "Renormalization and budget",
+    "construction": "Constructed e(n)=1e−5exp(.4n), n[0,25], log10e[−5,−1], tolerance.02; mark n*=ln2000/.4 between19/20 and crop above plot explicitly. Separate arrow operation d1e−5→e^.4d, record gain.4, rescale to1e−5. Ordinary L7 diagnostics may appear below, visibly separate from this constructed curve.",
+    "provenance": "Accepted DY2 growth-model fixture and tangent measurement explanation.",
+    "reflow": "Budget plot then rescaling operation. No claim that this straight line fits the observed logistic pair."
+  },
+  {
+    "id": "D36",
+    "title": "Stretch and fold",
+    "construction": "Tent graph on equal[0,1] axes, left amber/right blue with L/R labels. Draw input halves and oriented images each onto entire output[0,1]. Right output arrow reverses. Endpoint .5 can receive both symbolic labels.",
+    "provenance": "Exact T(y)=2y or2(1−y).",
+    "reflow": "Graph above two interval-image rows; all endpoints direct labels, no prose boxes."
+  },
+  {
+    "id": "D37",
+    "title": "Inverse branch composition",
+    "construction": "L8 wordLR default. Target[0,1]→R target[.5,1] with reversed orientation→L result[.25,.5]. Show formula L(R(u))=.5−u/4 and forward two-step check as separate direction.",
+    "provenance": "C08 inverse_word, exact fractions.",
+    "reflow": "Vertical sequence of actual intervals with shared full[0,1] ruler. Distinguish backward construction from forward time arrows."
+  },
+  {
+    "id": "D38",
+    "title": "Nested cylinder and periodic point",
+    "construction": "StartLR, appendL/R to length10,remove to1. Draw parent/child intervals with exact endpoints and width2^−n, fixed point of inverse affine map. LR point2/5 maps4/5 then2/5. Mark separate local magnification when interval width is under24 CSS pixels.",
+    "provenance": "C08 exact Fraction identity mirrored deterministically for browser.",
+    "reflow": "Full interval above zoom; retain parent bounds and zoom factor. Never enlarge the full strip silently."
+  },
+  {
+    "id": "D39",
+    "title": "Whole cylinder covers the target",
+    "construction": "Use LR input[.25,.5], after first[.5,1], after second[0,1], oriented endpoints. Then n-letter schematic shows width2^−n and full target, with a chosen open start interval containing a sufficiently fine cylinder. Unique inverse fixed point belongs to cylinder; minimum period may divide n.",
+    "provenance": "Tent affine branches and contraction proof in manuscript.",
+    "reflow": "Three interval rows followed by general containment sketch; title says proof mechanism, not finite simulation."
+  },
+  {
+    "id": "D40",
+    "title": "Conjugate operations commute",
+    "construction": "Defaulty=.2, h(y)=sin²πy/2; square paths T thenh versus h thenlogistic4. Each corner is an actual point on its y or x ruler, with numeric value and rule. Both endpoints coincide. Direct y editor[0,1] starts here only.",
+    "provenance": "Exact double-angle identity and retained model.",
+    "reflow": "Vertical two-path layout ending at one common x ruler; retain both intermediate values without intersecting labels."
+  },
+  {
+    "id": "D41",
+    "title": "Two preimages conserve mass",
+    "construction": "Target tent interval[.2,.6], inverse strips[.1,.3],[.7,.9], eachwidth.2, combinedmass.4. Shade real intervals on full[0,1] axes and show two arrows feeding the target. Uniform density baseline1 gives areas matching widths.",
+    "provenance": "Analytic inverse-image probability.",
+    "reflow": "Two input strips stack above target; a sum bracket adds probabilities, never merges the separated locations."
+  },
+  {
+    "id": "D42",
+    "title": "Push uniform probability into logistic coordinates",
+    "construction": "L8 later presets x[0,.25],[.25,.75],[0,1]. Show y=h^−1(x) endpoints, corresponding uniform-width mass, logistic x interval, CDF difference and density shading. Default middleinterval gives1/3. Density sample excludes exact endpoints; annotate integrable divergence/no atoms, CDF endpoints exact0/1.",
+    "provenance": "C08 exact CDF; density1/(πsqrt(x(1−x))) derived.",
+    "reflow": "Stack uniform strip, x strip, CDF then density; density can crop with explicit divergence arrows but selected probability remains exact."
+  },
+  {
+    "id": "D43",
+    "title": "Finite representation exception",
+    "construction": "Use the exact Fraction path 51/256, 51/128, 51/64, 13/32, 13/16, 3/8, 3/4, 1/2, 1, 0. Render ten rational values paired with binary fraction strips and update arrows; zero remains fixed afterward. The initial denominator is an eight-bit binary grid, not a claim of eight-bit floating-point arithmetic.",
+    "provenance": "C08 preserved exact dyadic output.",
+    "reflow": "Wrap into vertical rows with explicit continuation arrows. Fractions stay at full reader size. The finite path does not contradict the continuum theorem."
+  },
+  {
+    "id": "D44",
+    "title": "One full Lorenz state, two projections",
+    "construction": "L9 uses ρ=28, h=.005, 4,800 steps, horizon 24 and initial state (1,1,1). The cursor defaults to 2,400 and advances by 20. Match x–z and x–y projections of the same finite trace, drawing every third sample plus the selected endpoint. Keep selected x,y,z,t readable. Retain fixed x extent [−25,25], y extent [−35,35] and z extent [0,55]. The two projection axes therefore have explicit different spans.",
+    "provenance": "Existing bounded Lorenz RK4 model; C12 explains the vector construction.",
+    "reflow": "Stack both projections with shared selected-state identity. Keep projection choice as a focus control if useful, but never hide the full coordinate readout. Clipping must be explicit if any permitted state exceeds its bounds."
+  },
+  {
+    "id": "D45",
+    "title": "Equilibria and contracting volume",
+    "construction": "Mark the origin and matched-sign equilibrium pair at ρ=28: x=y=±sqrt(72), z=27. A separate schematic small volume contracts by exp(−41t/3) while one axis may stretch. Label that deformation schematic; do not give an arbitrary ellipsoid an invented quantitative scale.",
+    "provenance": "Exact Lorenz roots and divergence −41/3; this is not a boundedness proof.",
+    "reflow": "Equilibrium view above the volume operation. All three equilibrium coordinates remain readable. Nonzero branches disappear for ρ≤1."
+  },
+  {
+    "id": "D46",
+    "title": "Four vector probes form one RK4 endpoint",
+    "construction": "Use exact rational trial states and slopes from design-rk4-trial-r2.json, initial (1,1,1), h=1/200 and ρ=28. Four complete state/rate rows occur at times 0,h/2,h/2,h. Every trial is built from the original state. The endpoint uses weights 1,2,2,1 divided by 6. Project q,p with q extent [.999,1.005] and p extent [.99,1.14]; label the unequal scales.",
+    "provenance": "Accepted rational fixture and the matching C12 formula; no repeated main execution.",
+    "reflow": "Stack rows at full font, followed by projection and time strip. The middle trials remain distinct at the same time. Retain z in every state row."
+  },
+  {
+    "id": "D47",
+    "title": "Solver mesh, reports, events",
+    "construction": "Use a time ruler [0,1]. A schematic irregular solver mesh differs from 101 requested t_eval times; label only selected report ticks 0,.5,1. A separate oriented p-zero bracket excludes the initial point and accepts upward crossing with q>0. Show an interpolated event location, explicitly schematic rather than an observed Lorenz event.",
+    "provenance": "Actual C09 settings and solve_ivp documentation; event mechanism is a separate illustration.",
+    "reflow": "Stack accepted-step, requested-report and event rows. Put labels outside. Never invent stored internal mesh values or call illustrative times observed."
+  },
+  {
+    "id": "D48",
+    "title": "Numerical cooling changes stability",
+    "construction": "L10 fixes k=2, initial excess temperature 8 and horizon 6. Step choices are .25,.5,1,1.5, default .5. Draw exact dashed cooling and square Euler samples at actual times. The vertical range includes every iterate and zero, and announces its extent when it rescales. At h=.5 the update reaches zero immediately; h=1 alternates ±8; h=1.5 gives 8,−16,32,−64,128.",
+    "provenance": "Retained cooling model. C01 uses horizon 3 and must keep that separate label.",
+    "reflow": "One plot with exterior multiplier and state text. Method labels use distinct shapes. The main plot must not require horizontal panning."
+  },
+  {
+    "id": "D49",
+    "title": "Forward Euler simultaneous increments",
+    "construction": "Use clockwise q′=p,p′=−q, initial (1,0), h=.5. Show both old-state increments and the endpoint (1,−.5), with the exact unit circle as reference. Energy changes from .5 to .625. Coordinate axes have equal units over [−1.5,1.5]. Both increments depend on the old pair.",
+    "provenance": "Exact forward Euler algebra; the manuscript states the rotation convention change.",
+    "reflow": "One plane with numbered operations and equations below in reader-size text. Arrows follow the clockwise equation."
+  },
+  {
+    "id": "D50",
+    "title": "Kick then drift",
+    "construction": "Use the same h=.5 and initial pair. The kick gives (1,−.5); the drift using new momentum gives (.75,−.5). Number the vertical kick and subsequent horizontal drift. The kinked arithmetic path is distinct from the dashed exact physical circle.",
+    "provenance": "C10 sequential arithmetic.",
+    "reflow": "One plane with update equations beneath it. Preserve the dependency of drift on the new momentum."
+  },
+  {
+    "id": "D51",
+    "title": "Area under the update",
+    "construction": "Map unit-square corners (0,0),(1,0),(1,1),(0,1) by Euler matrix [[1,.5],[−.5,1]] and kick–drift matrix [[.75,.5],[−.5,1]]. Draw resulting parallelograms at the same equal coordinate scale. Their areas are 1.25 and 1; put determinant labels beside the actual polygons.",
+    "provenance": "Analytic determinants at h=.5.",
+    "reflow": "Stack the original square and transformed planes when necessary. Keep the same units; area preservation is not radius preservation."
+  },
+  {
+    "id": "D52",
+    "title": "Ordinary and modified level sets",
+    "construction": "At h=.5, show the modified contour (q²+p²−.5qp)/2=.5 as an ellipse beside the ordinary-energy unit circle, equal axes [−1.8,1.8]. A separate h=2 view shows q−p=±1 and states (−3,−2),(5,4),(−7,−6), with equal axes [−8,8]. Announce the changed scale.",
+    "provenance": "C10 invariant and the analytic T11 boundary witness.",
+    "reflow": "Ellipse view above the degenerate-line view, both fully visible. Keep h=2 outside the bounded-energy L11 selector."
+  },
+  {
+    "id": "D53",
+    "title": "Equal-horizon energy comparison",
+    "construction": "L11 fixes horizon 20 and initial state (1,0), with h=.1,.2,.25,.5, default .2. Ordinary energy uses a labeled log scale and distinct Euler/symplectic styles; modified energy uses a linear [0,1] scale with baseline .5. Update counts are 200,100,80,40 respectively. Label final energies as endpoints rather than maximum errors.",
+    "provenance": "Retained oscillator states and C10 final output.",
+    "reflow": "Stack ordinary and modified plots. All methods use the clockwise equation. Readouts retain method identity, horizon and scale."
+  },
+  {
+    "id": "D54",
+    "title": "Gradient update is the same multiplier",
+    "construction": "Use L(x)=kx²/2, k=2, initial x=1. Draw the negative-gradient arrow and two updates: η=.25 gives multiplier .5 and loss .25; η=1.25 gives multiplier −1.5 and loss 2.25. Plot x in [−1.8,1.8], loss in [0,3.3]. Continuous loss derivative is −4x².",
+    "provenance": "Constructed quadratic fixture and the Euler multiplier identity.",
+    "reflow": "Loss curve above an aligned state axis. Step symbols and η labels distinguish the two updates; this is not a nonconvex global guarantee."
+  },
+  {
+    "id": "D55",
+    "title": "Ordered Jacobian transfer",
+    "construction": "Let A=[[0,2],[0,0]], B=[[0,0],[2,0]]. Draw e₂→2e₁→4e₂ on three equal-unit planes with extent [−4.5,4.5]. Matrix action labels sit between actual vectors. Individual spectra contain only zero; BA has eigenvalues 0 and 4.",
+    "provenance": "C11 exact matrix witness and preserved NumPy output.",
+    "reflow": "Stack the planes and operation arrows. Keep direction and order BA visible rather than replacing the picture with a list of eigenvalues."
+  },
+  {
+    "id": "D56",
+    "title": "Local defect feeds rollout error",
+    "construction": "Use constructed rules F(x)=x/2 and G(x)=x/2+.1 with common initial state 1. At updates 0–4, true states are 1,.5,.25,.125,.0625 and predicted states 1,.6,.4,.3,.25. On common state scale [0,1.1], draw gaps 0,.1,.15,.175,.1875 and feedback arrows to each rule’s own next input. A separate .1 local-defect mark explains e_next=.5e+.1.",
+    "provenance": "Accepted DY2 exact analytic fixture; no data or training claim.",
+    "reflow": "Paired traces above one feedback operation and an error row. Preserve actual gap lengths and the common initial point."
+  }
+]

@@ -207,6 +207,19 @@ export function mixedDelayState(width = 0.2, atom = 0, leftFraction = 0.25, righ
 // Fixed interior uniforms couple the two rate settings reproducibly. The plot
 // represents one disclosed realization, never a measured arrival stream.
 export const arrivalUniforms = [0.18, 0.72, 0.41, 0.86, 0.09, 0.55, 0.28, 0.64, 0.33, 0.91, 0.12, 0.47];
+// Equal priors; fixed rates3/1 per minute. A positive-width interval likelihood
+// uses expm1 to avoid subtracting close survival probabilities.
+export function continuousEvidenceState(time = 0.2, width = 0.1) {
+  bounded(time, 0, 2, 'Observation time in minutes');
+  bounded(width, 0.00001, 0.1, 'Observation width in minutes');
+  const areas = [3, 1].map(rate => Math.exp(-rate * time) * -Math.expm1(-rate * width));
+  const densities = [3, 1].map(rate => rate * Math.exp(-rate * time));
+  const weightedAreas = areas.map(area => 0.5 * area);
+  const denominator = weightedAreas[0] + weightedAreas[1];
+  return { time, width, areas, densities, weightedAreas, denominator,
+    posterior: weightedAreas[0] / denominator,
+    densityPosterior: densities[0] / (densities[0] + densities[1]) };
+}
 export function arrivalWindowState(rate = 2, window = 1.5, quantile = 0.5) {
   bounded(rate, 0.25, 6, 'Rate per minute');
   bounded(window, 0, 2, 'Window in minutes');

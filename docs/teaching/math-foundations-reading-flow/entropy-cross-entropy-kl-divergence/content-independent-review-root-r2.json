@@ -1,0 +1,491 @@
+{
+  "reviewer": "/root",
+  "author": "/root/queue_nonconvex_resume",
+  "createdAt": "2026-10-09T16:19:08.973927+00:00",
+  "status": "DIFFERENT_WHOLE_CONTENT_REVIEW_CHANGES_REQUIRED",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-source-r2.json",
+    "sha256": "c763ec074d717cfb73a013c7ee265a5e18c74cf280e73b0c445b715a83330091"
+  },
+  "readScope": [
+    "Entire97644-byte manuscript including13 complete inline programme/output pairs,14 tasks,six answer functions and all endings",
+    "Entire67454-byte visual specification,46 drawing contracts/nine live investigations",
+    "Ready/handoff,source bindings,new execution and exact scalar-format successor receipts",
+    "Earlier whole design review and retained original lesson/programme intake; affected current MaxEnt/continuous model implementation"
+  ],
+  "checks": [
+    {
+      "condition": "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/entropy-information-models.js",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/entropy-information-examples.js",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/components/lesson-labs/EntropyInformationLabs.jsx",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/components/lesson-labs/entropy-information-labs.css",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js",
+      "pass": true
+    },
+    {
+      "condition": "AGENTS.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/SKILL.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/references/workflow.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/references/teaching.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/references/topic-design.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/references/domain-playbook.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/references/visuals-and-labs.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/references/examples-and-code.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/references/practice-and-resources.md",
+      "pass": true
+    },
+    {
+      "condition": "skills/lesson-authoring/references/portfolio-adapter.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/ENTROPY-CROSS-ENTROPY-KL-DESIGN.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/ENTROPY-CROSS-ENTROPY-KL-VERIFICATION.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/ENTROPY-INDEPENDENT-REVIEW.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/evidence/entropy-independent-review.json",
+      "pass": true
+    },
+    {
+      "condition": "scratch/entropy-verification/final-source-hashes.json",
+      "pass": true
+    },
+    {
+      "condition": "scratch/entropy-verification/native-results.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/topic-notes/entropy-cross-entropy-kl-divergence.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/topic-notes/README.md",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/topics/algebra-functions-exponentials-logarithms.jsx",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/topics/probability-distributions-bayes-theorem.jsx",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/topics/maximum-likelihood-map-estimation.jsx",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/topics/greedy-algorithms-exchange-arguments.jsx",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/greedy-exchange-examples.js",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/exponential-reading-flow-text.js",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/measure-reading-flow-text.js",
+      "pass": true
+    },
+    {
+      "condition": "src/learn/data/variational-inference-reading-flow-text.js",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-r1.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r1.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/selected-intake-r1.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/freeze-design-r1.mjs",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-figure2-1.png",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-thomas-ch2.pdf",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/penguins.csv",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/shannon-1948.pdf",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/shannon-figure6.png",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-r2.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r2.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/correct-design-r2.mjs",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-source-r2.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-accepted-root-r2.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/manuscript-complete-r2.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/visual-specifications-r2.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/visual-contracts-r2.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/preserved-programmes.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/original-practice-checkpoints.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programme-mounts-r1.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/author-content-correction-r2.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/print-correction/information_library.executed-r1.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-new-programme-execution-r1.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-print-only-correction-r1.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-author-checks-r2.json",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/check-content-r2.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-author-handoff-r2.md",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/freeze-content-r2.mjs",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_bernoulli.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_blocks.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_coin.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_conditional.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_continuous.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_evaluation.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_logits.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_maximum.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_prefix.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_support.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/entropy_torch.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/information_library.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/penguins.csv",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/programmes/penguins_log_loss.py",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_bernoulli.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_blocks.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_coin.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_conditional.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_continuous.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_evaluation.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_logits.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_maximum.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_prefix.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_support.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/entropy_torch.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/information_library.py.display.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/information_library.py.stdout.stderr.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/information_library.py.stdout.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/penguins_log_loss.py.stdout.stderr.txt",
+      "pass": true
+    },
+    {
+      "condition": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/content-prepared/outputs/penguins_log_loss.py.stdout.txt",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_bernoulli.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_blocks.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_coin.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_conditional.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_continuous.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_evaluation.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_logits.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_maximum.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_prefix.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_support.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source entropy_torch.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source information_library.py",
+      "pass": true
+    },
+    {
+      "condition": "Full inline source penguins_log_loss.py",
+      "pass": true
+    },
+    {
+      "condition": "All46 structured visual contract leads/interpretations match manuscript placements",
+      "pass": true
+    }
+  ],
+  "newComplement": {
+    "purpose": "Concrete incomplete mismatched code fixture for EC1",
+    "code": {
+      "A": "0110",
+      "B": "0111",
+      "C": "010",
+      "D": "00"
+    },
+    "lengths": [
+      4,
+      4,
+      3,
+      2
+    ],
+    "kraft": 0.5,
+    "normalizedCapacity": [
+      0.125,
+      0.125,
+      0.25,
+      0.5
+    ],
+    "entropy": 1.75,
+    "expectedLength": 3.625,
+    "kl": 0.875,
+    "unusedCapacityCost": 1.0,
+    "totalGap": 1.875
+  },
+  "findings": [
+    {
+      "id": "EC1",
+      "severity": "required",
+      "location": "Section5/E21/E22",
+      "finding": "The two-overhead explanation has no concrete nonzero worked code. E21 requests an unspecified second feasible code and E22 says declared lengths without declaring any; the only pinned fixture is the matched complete code, where both terms vanish. This leaves the main contrast and diagram numbers for runtime authoring.",
+      "correction": "Pin a prefix-free incomplete mismatched code and explain its actual capacities, normalized law and both positive gaps in manuscript and structured/Markdown contracts. One independently checked choice preserves P=(.5,.25,.125,.125), code A=0110,B=0111,C=010,D=00: lengths4/4/3/2,K=.5,R=(.125,.125,.25,.5),L=3.625,H=1.75,KL=.875,unused-capacitycost1,totalgap1.875. Retain matched complete code as null. No old main replay."
+    },
+    {
+      "id": "EC2",
+      "severity": "required",
+      "location": "Section6/E29",
+      "finding": "The drawing shows an autoregressive token-prefix product P(x1)P(x2|x1)P(x3|x1,x2), but the adjacent first interpretation/equation explains conditionally independent supervised rows Qtheta(yi|xi). They are different conditioning structures and currently have no explicit visual transition.",
+      "correction": "Make the first drawn trace match the supervised data/label pairs and equation with an explicit small probability/product/log-sum calculation. Then introduce a separately labelled autoregressive extension after the text establishes the different past-context factors, preserving the complete chain-rule explanation. Specify actual entities, values and placement; one deliberate two-stage drawing or two placements is fine."
+    },
+    {
+      "id": "EC3",
+      "severity": "required",
+      "location": "Section9/E43/E44 and L9",
+      "finding": "L9 describes the simplex slice and entropy gap to p* as one initial visible mechanism across both mounts, while E43 precedes the definition and candidate p*. E43/E44 also lack an explicit shared-state/mount contract, risking an early untaught optimizer/eta/gap and inconsistent duplicated controls.",
+      "correction": "Stage the first E43 mount to feasible probabilities/mean/t only; introduce p*,entropy curve/gap and select-maximum action at E44 after their teaching. Specify whether mean editing begins only at E45 or is initially fixed at10/7, then explain later shared-state edits, selection conversion and reset across mounts. No reveal gate; all quantities taught at that location immediately visible. Preserve current supported interior range/exact endpoints explicitly."
+    }
+  ],
+  "oldMainsReplayed": false,
+  "runtimeStarted": false,
+  "limitations": [
+    "No native/rendering/code-delivery acceptance",
+    "Existing13 main numerical evidence reused with original execution/print-only qualifications",
+    "Source hashes and counts supplement whole reading; do not establish novice mastery"
+  ]
+}

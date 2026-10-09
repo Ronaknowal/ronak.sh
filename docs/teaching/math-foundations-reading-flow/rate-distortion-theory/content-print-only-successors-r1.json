@@ -1,0 +1,36 @@
+{
+  "completedAt": "2026-10-09T16:54:44.498Z",
+  "scientificExecutions": 0,
+  "changes": [
+    {
+      "key": "fidelity",
+      "originalSourceSha256": "3566c7d7e29daff01b16038ac7abaec44f18e5c2dfda955a673555150c7a87ea",
+      "originalOutputSha256": "ab85710b1dda06ed7315ed85ed8f919a0f3bb645f54d5bbd28c6cefaf1829a38",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_fidelity.py",
+      "stdout": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_fidelity.stdout",
+      "removedSourceLines": [
+        "    print(\"No source-dependent message: I(X; reconstruction) = 0.\")\n",
+        "print(\"Knowing an input-dependent sign would be extra information.\")"
+      ],
+      "originalCode": "source = {-1: 0.5, 1: 0.5}\nreconstructions = {\"constant zero\": {0: 1.0}, \"independent signs\": {-1: 0.5, 1: 0.5}}\nfor name, output in reconstructions.items():\n    mse = sum(\n        p * q * (x - y) ** 2 for x, p in source.items() for y, q in output.items()\n    )\n    print(name, \"MSE\", mse, \"same marginal\", output == source)\n    print(\"No source-dependent message: I(X; reconstruction) = 0.\")\nprint(\"Knowing an input-dependent sign would be extra information.\")",
+      "originalOutput": "constant zero MSE 1.0 same marginal False\nNo source-dependent message: I(X; reconstruction) = 0.\nindependent signs MSE 2.0 same marginal True\nNo source-dependent message: I(X; reconstruction) = 0.\nKnowing an input-dependent sign would be extra information.",
+      "successorCodeSha256": "91aafc13eb95baf06aed6bf869328c971a822e3c6ae2800af88cbf85d936c9cb",
+      "successorOutputSha256": "7b7823c839d76c4bb0b00bc6278b7b3d08051cdef44af73bebdbaf8722b9d0dc"
+    },
+    {
+      "key": "bitstream",
+      "originalSourceSha256": "9e73dea991c20b0a9eaef833d446a68b7f156a20f0693db687a25858f7162466",
+      "originalOutputSha256": "7fe18cc5a3251628ff96b1a133611ca3ef76bfde5b840f3e32498387e375bb52",
+      "source": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_bitstream.py",
+      "stdout": "docs/teaching/math-foundations-reading-flow/rate-distortion-theory/content-prepared/programmes/rd_bitstream.stdout",
+      "removedSourceLines": [
+        "print(\"empty input and malformed lengths checked\")"
+      ],
+      "originalCode": "import struct\n\nCODEBOOK = (\"000\", \"111\")  # Shared, fixed protocol; not transmitted per file.\n\n\ndef compress(source):\n    if any(bit not in \"01\" for bit in source):\n        raise ValueError(\"Only binary text is accepted.\")\n    if len(source) >= 2**32:\n        raise ValueError(\"Length exceeds the four-byte header.\")\n    padded = source + \"0\" * ((-len(source)) % 3)\n    indices = []\n    for start in range(0, len(padded), 3):\n        word = padded[start : start + 3]\n        indices.append(\"1\" if word.count(\"1\") >= 2 else \"0\")\n    payload_bits = \"\".join(indices)\n    padded_payload = payload_bits + \"0\" * ((-len(payload_bits)) % 8)\n    payload = bytes(\n        int(padded_payload[i : i + 8], 2) for i in range(0, len(padded_payload), 8)\n    )\n    return struct.pack(\">I\", len(source)) + payload\n\n\ndef decompress(encoded):\n    if len(encoded) < 4:\n        raise ValueError(\"Missing length header.\")\n    length = struct.unpack(\">I\", encoded[:4])[0]\n    blocks = (length + 2) // 3\n    if len(encoded) != 4 + (blocks + 7) // 8:\n        raise ValueError(\"Payload length does not match header.\")\n    payload = \"\".join(f\"{byte:08b}\" for byte in encoded[4:])\n    if \"1\" in payload[blocks:]:\n        raise ValueError(\"Nonzero padding.\")\n    return \"\".join(CODEBOOK[int(bit)] for bit in payload[:blocks])[:length]\n\n\nsource = \"\".join(f\"{value:03b}\" for value in range(8))\nencoded = compress(source)\nrestored = decompress(encoded)\nprint(\"source:\", source)\nprint(\"decoded:\", restored)\nprint(\"wire bytes, hex:\", len(encoded), encoded.hex())\nprint(\"raw packed bytes:\", (len(source) + 7) // 8)\nprint(\"payload bits/source bit:\", (len(source) // 3) / len(source))\nprint(\"wire bits/source bit:\", len(encoded) * 8 / len(source))\nprint(\"error fraction:\", sum(a != b for a, b in zip(source, restored)) / len(source))\nassert len(restored) == len(source)\nassert decompress(compress(\"\")) == \"\"\nfor bad in (b\"\", encoded[:-1], encoded + b\"\\x00\"):\n    try:\n        decompress(bad)\n    except ValueError:\n        pass\n    else:\n        raise AssertionError(\"Malformed payload was accepted.\")\nprint(\"empty input and malformed lengths checked\")",
+      "originalOutput": "source: 000001010011100101110111\ndecoded: 000000000111000111111111\nwire bytes, hex: 5 0000001817\nraw packed bytes: 3\npayload bits/source bit: 0.3333333333333333\nwire bits/source bit: 1.6666666666666667\nerror fraction: 0.25\nempty input and malformed lengths checked",
+      "successorCodeSha256": "7bf110f6cc9b70684d294a13b7203d6f2b5522f44d5086c77f37a86c6a93fe79",
+      "successorOutputSha256": "0b8762c3417423c9bd93e00a88586726959a137ed17e13b984e7331cc2eea512"
+    }
+  ],
+  "scope": "Only explanatory terminal prints removed; original complete pairs retained. Numeric calculations, assertions and numerical results unchanged."
+}

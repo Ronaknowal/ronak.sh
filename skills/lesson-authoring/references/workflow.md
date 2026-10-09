@@ -5,6 +5,7 @@ Part of [$lesson-authoring](../SKILL.md). Repository paths below are relative to
 - [1. Start here in a future session](#1-start-here-in-a-future-session)
 - [Quality takes priority over efficiency](#quality-takes-priority-over-efficiency)
 - [Six-stage authoring workflow](#six-stage-authoring-workflow)
+- [Revise existing lessons throughout](#revise-existing-lessons-throughout)
 - [Delivery modes and stopping boundaries](#delivery-modes-and-stopping-boundaries)
 - [Two-phase handoff and prerequisite](#two-phase-handoff-and-prerequisite)
 - [12. Delivery and handoff](#12-delivery-and-handoff)
@@ -52,6 +53,67 @@ Let the topic's complexity and quality needs determine the number of revisions a
 Use the existing topic/increment record to state the current stage, owner, reviewed source, findings and next action. Record substantive correction rounds with their reason and affected checks when they occur; do not create a new report for every edit or retroactively invent an exact iteration count. Keep implementation, numerical verification, browser review, independent review, integration and user acceptance distinguishable.
 
 **Readiness requires that the scoped outcomes are taught and assessed, material claims/examples are verified, the reading and interaction experience works, and no material review or integration finding remains.** Meeting this minimum does not require stopping if an identified in-scope improvement would materially improve understanding or correctness. Neither a fixed number of passes nor a claim of perfection establishes readiness. Apply the review reference's bounded-verification guidance under the quality-first principle above.
+
+### Revise existing lessons throughout
+
+For an authorized broad clarity revision, **assessment covers the whole lesson;
+the extent of rewriting follows the findings**. Read the complete current lesson,
+its actual figures/labs/code and relevant preserved versions. Use the concept map
+to identify missing foundations, unexplained intermediates and broken transitions
+through the middle, variants, advanced branches, implementation and practice.
+Rewrite and reorganize most of the teaching body if necessary. Do not satisfy a
+whole-lesson request by attaching an introductory primer or ending summary, and
+do not replace already effective explanations or verified programs just to claim
+a complete rewrite. Preserve useful depth, correct nuance and explicit coverage.
+
+When the user authorizes “all already implemented/improved topics,” resolve the
+selected set from the delivery ledger, current handoff and historical completion
+records in syllabus order. Publication alone does not establish that a lesson
+received the improved implementation. Reconcile stale/historical evidence and
+record uncertain membership instead of silently omitting it. Exclude prepared-only
+and never-improved articles unless the request includes them. Freeze that scoped
+list in the existing increment record so interruption does not change the queue.
+
+Complete and checkpoint one topic at a time, or use bounded parallel topic owners
+when delegation is authorized. Share prerequisite/notation decisions and reconcile
+their connections. Record per topic the assessed source, gaps, repaired or retained
+sections, actual verification, remaining issues and precise resume point. Use the
+existing two-phase ledger for genuine revisions; retain previous checkpoints.
+For a reviewed topic needing no changes, record source-bound review evidence
+without inventing a rewrite or promoting another topic's completion. A proposed
+prompt or a skill update alone does not authorize starting this rollout.
+
+How much research a revision needs depends on whether the lesson has already had the
+deep-dive research. Decide this from the repository's deep-research registry (see the
+repository adapter), not from memory or the user's wording: absent means the full pass,
+present means targeted research. When a full pass is complete, add the lesson to the
+registry with the record that holds its coverage map.
+
+- **Lessons not yet deep-researched** need the full pass first. This covers lessons
+  last written or revised before the deep-dive rule existed: the original curriculum
+  rewrite, which follows older standards, and any lesson whose record has no
+  deep-dive coverage map. Run the
+  [deep-dive research](teaching.md#go-deep-on-every-topic-and-keep-every-layer-easy)
+  against the current lesson as if writing it new:
+  - read at least two canonical treatments;
+  - answer the seven questions for each concept;
+  - collect the misconceptions learners actually hold;
+  - check current practice with dated sources.
+
+  Then record a coverage map in the topic's record: what is present and correct,
+  what is missing or outdated, and what is deliberately left out. Reuse an earlier
+  source only after confirming it still supports the same claim and version.
+  Re-check time-sensitive material (library APIs, "current" models, benchmarks)
+  instead of inheriting it.
+- **Lessons that already have it** get targeted research. A lesson whose record
+  already has a deep-dive coverage map from the current skill is researched only
+  where the revision changes or questions something: the weak mechanisms, new
+  claims, and anything time-sensitive.
+
+Research the weak mechanisms, implement the authorized repairs and run the normal
+content, reading, numerical, visual and integration checks appropriate to what
+changed. Reuse unchanged valid evidence. Finish each selected topic fully rather
+than applying superficial wording substitutions across the entire catalogue.
 
 ### Delivery modes and stopping boundaries
 

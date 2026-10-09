@@ -1,15 +1,16 @@
-// Generated from the active concept-intuition manuscript; canonical numerical programs retained.
+// Recurrent attention: continuous intuition, explicit mechanisms and retained measurements.
 import { Prose, H2, H3, CodeBlock } from '../../components/content';
 import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
 import { LessonIntro } from '../../components/lesson-labs/LessonElements.jsx';
 import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
-import { AttentionMemoryShelf, AttentionWorkedRead, AttentionReadLab, AttentionSchedules, AttentionFittedLab, AttentionGradientFlow, AttentionLearningCurves, AttentionProgram, AttentionWorkedAlignment, AttentionWindowLab, AttentionCopyFlow, AttentionCancellationLab, AttentionAmbiguityFigure, AttentionLocationFlow, AttentionScratchRoute } from '../../components/lesson-labs/RecurrentAttentionLabs.jsx';
-import { AttentionRecallContrast, AttentionLookupBridge, AttentionSoftmaxSteps, AttentionAdditiveSteps, AttentionPaddingShares, AttentionLearningDirection } from '../../components/lesson-labs/RecurrentAttentionIntuition.jsx';
+import { AttentionProgram, AttentionLearningCurves, AttentionWorkedAlignment } from '../../components/lesson-labs/RecurrentAttentionLabs.jsx';
+import { AttentionInformationDrawing, AttentionMemoryDrawing, AttentionLookupDrawing, AttentionDotDrawing, AttentionAdditiveDrawing, AttentionGeneralDrawing, AttentionScheduleDrawing, AttentionTensorDrawing, AttentionTrainingDrawing, AttentionGroupingDrawing, AttentionAmbiguityDrawing, AttentionLocationDrawing, AttentionCoverageDrawing, AttentionPyramidDrawing, AttentionCacheDrawing } from '../../components/lesson-labs/RecurrentAttentionDrawings.jsx';
+import { AttentionConstruction, AttentionQueryLab, AttentionKeyLab, AttentionSharesFigure, AttentionValueLab, AttentionMaskLab, AttentionValidityLab, AttentionLearningFigure, AttentionLearningLab, AttentionCancellationFlow, AttentionWindowFlow, AttentionCopyFlowLab, AttentionMonotonicFlow, AttentionMonotonicExpectedFigure, AttentionTemperatureFlow, AttentionFittedConstruction, AttentionFittedFlow } from '../../components/lesson-labs/RecurrentAttentionFlowLabs.jsx';
 export default {
   title: 'Attention Mechanism (Bahdanau, Luong)',
   readTime: '~65 min read + 90 min experiments and practice',
   hasIntegratedGuide: true,
-  content: () => <div className="neural-lesson attention-lesson"><LessonIntro prerequisites="Recurrent state updates, encoder–decoder generation and cross-entropy. Queries, vector reads, shapes and masks are introduced here." sections={[["1-the-problem-one-summary-has-to-serve-every-future-question","1. The problem: one summary has to serve every future question"],["2-build-one-read-before-building-the-whole-network","2. Build one read before building the whole network"],["3-bahdanau-and-luong-distinguish-the-score-from-the-schedule","3. Bahdanau and Luong: distinguish the score from the schedule"],["4-put-the-read-into-tensors-and-code","4. Put the read into tensors and code"],["5-learn-which-read-helps-the-output","5. Learn which read helps the output"],["6-does-revisiting-memory-help-on-real-spellings","6. Does revisiting memory help on real spellings?"],["7-connect-a-real-read-to-a-generated-character","7. Connect a real read to a generated character"],["implement-the-read-then-compose-it-into-ordinary-training","Implement the read, then compose it into ordinary training"],["8-deeper-branches-other-reads-and-other-tasks","8. Deeper branches: other reads and other tasks"],["9-practice-calculate-diagnose-and-transfer","9. Practice: calculate, diagnose and transfer"],["10-continue-the-route-and-choose-another-explanation","10. Continue the route and choose another explanation"]]}>Let each output read the input it needs. Follow an exact memory read, build it from scratch, and inspect real trained spelling models.</LessonIntro>
+  content: () => <div className="neural-lesson attention-lesson lesson-flow"><AttentionConstruction><LessonIntro prerequisites="Recurrent state updates, encoder–decoder generation and cross-entropy. Queries, vector reads, shapes and masks are introduced here." sections={[["1-the-problem-one-summary-has-to-serve-every-future-question","1. The problem: one summary has to serve every future question"],["2-build-one-read-before-building-the-whole-network","2. Build one read before building the whole network"],["3-bahdanau-and-luong-distinguish-the-score-from-the-schedule","3. Bahdanau and Luong: distinguish the score from the schedule"],["4-put-the-read-into-tensors-and-code","4. Put the read into tensors and code"],["5-learn-which-read-helps-the-output","5. Learn which read helps the output"],["6-does-revisiting-memory-help-on-real-spellings","6. Does revisiting memory help on real spellings?"],["7-connect-a-real-read-to-a-generated-character","7. Connect a real read to a generated character"],["implement-the-read-then-compose-it-into-ordinary-training","Implement the read, then compose it into ordinary training"],["8-deeper-branches-other-reads-and-other-tasks","8. Deeper branches: other reads and other tasks"],["9-practice-calculate-diagnose-and-transfer","9. Practice: calculate, diagnose and transfer"],["10-continue-the-route-and-choose-another-explanation","10. Continue the route and choose another explanation"]]}>Let each output read the input it needs. Follow an exact memory read, build it from scratch, and inspect real trained spelling models.</LessonIntro>
 <Prose>{"Imagine changing "}<code>{"walk"}</code>{" into its past tense, "}<code>{"walked"}</code>{", one character at a time. While writing "}<code>{"wal"}</code>{", you need the spelling. After "}<code>{"walk"}</code>{", you need to decide what ending belongs to the requested form. The useful part of the input changes as the answer grows."}</Prose>
 
 <Prose>{"The "}<a href={"/learn/path/full-curriculum/sequence-to-sequence-encoder-decoder?module=deep-learning-fundamentals"}>{"previous encoder–decoder lesson"}</a>{" gave the writer a summary of the input. That can work. But it asks one fixed-size representation to carry everything that any later output might need. What if the writer could return to its reading notes instead?"}</Prose>
@@ -20,23 +21,30 @@ export default {
 
 <H2>{"1. The problem: one summary has to serve every future question"}</H2>
 
+<Prose>Can the writer return to information it read earlier? Compare the two source-to-writer routes before following the arithmetic.</Prose>
+<AttentionInformationDrawing attentive={false} />
+<AttentionInformationDrawing />
+
 <Prose>{"A reader and a writer have different jobs. The "}<strong>{"encoder"}</strong>{" reads the source. Its state after each token is a vector: a list of learned numerical features summarizing what it has seen. The "}<strong>{"decoder"}</strong>{" writes the answer. Its own changing state reflects the output prefix and the information it has received so far."}</Prose>
 
 <Prose>{"With a fixed-context encoder–decoder, information from the source reaches the writer through the final encoder state. A later output cannot directly request an earlier encoder state that was discarded. Attention changes this wiring: save the intermediate states, and let each writing step read a mixture of them."}</Prose>
 
-<AttentionRecallContrast />
+
 
 <Prose>{"Consider two moments in our example. With output prefix "}<code>{"wal"}</code>{", source information about the next letter can help produce "}<code>{"k"}</code>{". With prefix "}<code>{"walk"}</code>{", information about the requested tense can help produce "}<code>{"e"}</code>{". These are useful behaviors we want the network to learn, not handwritten rules telling it which position to select. Training supplies correct output strings, not a manually assigned attention location for each character."}</Prose>
 
 <H3>{"What exactly do we keep?"}</H3>
 
-<Prose>{"For the measured example later, the source is "}<code>{"<past> lactate <eos>"}</code>{". The word is less familiar, but the operation is the same: turn a requested spelling into "}<code>{"lactated"}</code>{". EOS means “end of sequence.” Number the source positions from 0. Save the encoder state at each position and call it "}<InlineMath>{"h_j"}</InlineMath>{", where "}<InlineMath>{"j"}</InlineMath>{" is that position."}</Prose>
+<Prose>What is a saved state, and what is the whole memory? Call a position’s feature vector hⱼ, with j naming that source position; memory H stacks one vector per position. This drawing keeps walk’s six real source rows and the experiment’s width of 64, showing only eight columns in the memory cutaway.</Prose>
+<AttentionMemoryDrawing />
+
+<Prose>{"For the measured example later, switch from walk’s six-token source to the nine-token source "}<code>{"<past> lactate <eos>"}</code>{". The word is less familiar, but the operation is the same: turn a requested spelling into "}<code>{"lactated"}</code>{". EOS means “end of sequence.” Number the source positions from 0. Save the encoder state at each position and call it "}<InlineMath>{"h_j"}</InlineMath>{", where "}<InlineMath>{"j"}</InlineMath>{" is that position."}</Prose>
 
 <NeuralTable caption={"What exactly do we keep?"} headers={[<>{"Position"}</>,<>{"0"}</>,<>{"1"}</>,<>{"2"}</>,<>{"3"}</>,<>{"4"}</>,<>{"5"}</>,<>{"6"}</>,<>{"7"}</>,<>{"8"}</>]} rows={[[<>{"Token"}</>,<>{""}<code>{"<past>"}</code>{""}</>,<>{""}<code>{"l"}</code>{""}</>,<>{""}<code>{"a"}</code>{""}</>,<>{""}<code>{"c"}</code>{""}</>,<>{""}<code>{"t"}</code>{""}</>,<>{""}<code>{"a"}</code>{""}</>,<>{""}<code>{"t"}</code>{""}</>,<>{""}<code>{"e"}</code>{""}</>,<>{""}<code>{"<eos>"}</code>{""}</>],[<>{"Memory vector"}</>,<>{""}<InlineMath>{"h_0"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_1"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_2"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_3"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_4"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_5"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_6"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_7"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_8"}</InlineMath>{""}</>]]} />
 
 <Prose>{"The two "}<code>{"a"}</code>{" positions have different notes. A forward recurrent encoder has read a different prefix by the time it reaches the second one. A saved vector is therefore more than a character ID; it may carry information about earlier characters as well."}</Prose>
 
-<AttentionMemoryShelf />
+
 
 <Prose>{"We keep both paths: final-state initialization and repeated reads. Attention does not recover information the encoder never represented, and mixing memories can itself lose distinctions. Its benefit is access to several saved representations through shorter, selectable paths."}</Prose>
 
@@ -46,7 +54,7 @@ export default {
 
 <Prose>{"First separate finding information from returning it. A weather log might store a time beside each temperature. To ask for the temperature at 14:00, compare your requested time with the saved times, then return the associated temperature. The thing you compare is not the thing you return."}</Prose>
 
-<AttentionLookupBridge />
+<AttentionLookupDrawing />
 
 <Prose>{"This gives us three names with distinct jobs:"}</Prose>
 
@@ -62,17 +70,28 @@ export default {
 
 <H3>{"Score: how well does each key match this query?"}</H3>
 
-<Prose>{"Use small constructed vectors so every operation is visible. The two coordinates here have no claimed linguistic meaning. Memory A, B and C are labels for three rows, not words learned by the fitted model."}</Prose>
+<Prose>For hand-readable arithmetic, label three memory rows A, B and C and give each key two coordinates. Our query q = (1, 0) and the three compared keys live on the same plane. The open query ring and filled key endpoints show direction and length; cyan marks their supplied coordinates, and these coordinates have no assigned linguistic meaning.</Prose>
+<AttentionQueryLab />
+
+<Prose>The table fixes the starting query and keys so the hand calculation stays reproducible. The live query and key controls above and below share one editable calculation; resetting it restores this table’s fixture.</Prose>
 
 <NeuralTable caption={"Score: how well does each key match this query?"} headers={[<>{"Memory"}</>,<>{"Key "}<InlineMath>{"k_j"}</InlineMath>{""}</>,<>{"Value "}<InlineMath>{"v_j"}</InlineMath>{""}</>,<>{"Score "}<InlineMath>{"q^\\top k_j"}</InlineMath>{", for "}<InlineMath>{"q=(1,0)"}</InlineMath>{""}</>]} rows={[[<>{"A"}</>,<>{"(1,0)"}</>,<>{"(2,0)"}</>,<>{"1"}</>],[<>{"B"}</>,<>{"(0,1)"}</>,<>{"(0,2)"}</>,<>{"0"}</>],[<>{"C"}</>,<>{"(−1,0)"}</>,<>{"(−1,1)"}</>,<>{"−1"}</>]]} />
 
+<AttentionDotDrawing />
+
 <Prose>{"The dot product multiplies corresponding coordinates and adds them. Query "}<InlineMath>{"(1,0)"}</InlineMath>{" reads the first coordinate of each key: A points with it, B contributes zero, and C points against it. For B, "}<InlineMath>{"1\\cdot0+0\\cdot1=0"}</InlineMath>{". A larger score will get a larger share. Scores can be negative; they are not probabilities. Dot products depend on vector length as well as direction."}</Prose>
+
+<Prose>Once a query has been compared with fixed keys, change just one key. Its score changes, while the value it will return remains separate.</Prose>
+<AttentionKeyLab />
 
 <H3>{"Normalize: turn three scores into shares of one read"}</H3>
 
+<Prose>How can three unrestricted scores become shares of one read? Turn them into positive masses, then divide all three by the same total. Name each resulting source share α, the alpha label in the drawing.</Prose>
+<AttentionSharesFigure />
+
 <Prose>{"We want nonnegative shares that add to 1. Exponentiating turns each score into a positive number; dividing each by their total gives those shares. For numerical stability, first subtract the largest score. The scores "}<InlineMath>{"(1,0,-1)"}</InlineMath>{" become "}<InlineMath>{"(0,-1,-2)"}</InlineMath>{", their exponentials are approximately "}<InlineMath>{"(1,0.367879,0.135335)"}</InlineMath>{", and the total is 1.503215."}</Prose>
 
-<AttentionSoftmaxSteps />
+
 
 <Prose>{"A's share is "}<InlineMath>{"1/1.503215"}</InlineMath>{", about 0.665241. The complete operation is "}<strong>{"softmax"}</strong>{":"}</Prose>
 
@@ -82,17 +101,20 @@ export default {
 
 <H3>{"Read: multiply each value by its share, then add"}</H3>
 
+<Prose>What does the read return? Add the scaled value arrows head to tail; call their final returned vector the context c. Each share α multiplies both coordinates of its own value v. The selector edits one value’s two coordinates, leaving the query and keys fixed.</Prose>
+<AttentionValueLab />
+
 <Prose>{"For the first coordinate, A contributes "}<InlineMath>{"0.665241\\times2"}</InlineMath>{", B contributes zero, and C contributes "}<InlineMath>{"0.090031\\times(-1)"}</InlineMath>{". For the second coordinate, B and C contribute. The same three shares apply to both coordinates:"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"c=\\sum_j\\alpha_jv_j\n=0.665241(2,0)+0.244728(0,2)+0.090031(-1,1)\n=(1.240451,\\ 0.579488)."}</MathBlock></div>
 
-<Prose>{"The returned vector "}<InlineMath>{"c"}</InlineMath>{" is the "}<strong>{"context"}</strong>{". On the value plane below, the diamond is pulled toward the values with greater shares; it lies inside their triangle because the shares are nonnegative and sum to 1. The adjacent contribution table is the same calculation coordinate by coordinate."}</Prose>
+<Prose>On the value plane above, the diamond is pulled toward the values with greater shares; it lies inside their triangle because the shares are nonnegative and sum to 1. The contribution table is the same calculation coordinate by coordinate.</Prose>
 
-<AttentionWorkedRead />
+
 
 <Prose>{"We have completed a read: "}<strong>{"query → scores against keys → shared normalization → mixture of values"}</strong>{". It returns information, not yet a character. An output layer will combine that information with the decoder state to choose a character in section 3."}</Prose>
 
-<AttentionReadLab />
+
 
 <H2>{"3. Bahdanau and Luong: distinguish the score from the schedule"}</H2>
 
@@ -102,9 +124,14 @@ export default {
 
 <H3>{"Additive scoring"}</H3>
 
+<Prose>How can a question and a memory be compared after learning different feature systems? In the next drawing, learned maps Wq and Wh first transform the query q and memory hA into the same comparison width. Add the two transformed lists, bend each coordinate through tanh, then let a learned scoring row va combine them into one score.</Prose>
+<AttentionAdditiveDrawing />
+
 <Prose>{"The query and the stored memory may use different feature systems. A decoder might have 96 coordinates while the encoder has 192. We cannot directly compare unequal lists with a dot product. A learned projection turns each into a shared comparison space, rather like giving two measurements a compatible set of features."}</Prose>
 
-<AttentionAdditiveSteps />
+
+
+<Prose>In this two-coordinate hand fixture, q = (1, 0) maps to (.5, −.5), and hA = (1, 0) maps to (1, .5). Their sum (1.5, 0) bends to (tanh(1.5), 0); the learned row (2, −1) gives score 1.810297. This is one constructed comparison, not one of the fitted model’s 32-dimensional scores. The original memory remains the returned value. Repeat the same learned maps at every source position.</Prose>
 
 <Prose>{"An additive score first projects the query and memory into a shared feature width "}<InlineMath>{"d_a"}</InlineMath>{", combines them, applies a nonlinearity, and reduces the result to one number:"}</Prose>
 
@@ -120,6 +147,9 @@ export default {
 
 <H3>{"Dot and general scoring"}</H3>
 
+<Prose>Could we transform just the memory, then compare it with the query? This three-to-two-coordinate example shows a learned general map while preserving the original three-coordinate value.</Prose>
+<AttentionGeneralDrawing />
+
 <Prose>{"With equal query and memory widths, use"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"e_{tj}=q_t^\\top h_j\n\\quad\\text{(dot)}."}</MathBlock></div>
@@ -134,9 +164,14 @@ export default {
 
 <H3>{"Two valid decoder timelines"}</H3>
 
+
+<Prose>Where does the read sit in one writing step? Name the old decoder state sₜ₋₁ and the new state sₜ. E(yₜ₋₁) is the previous output token’s embedding; at the first step that token is BOS. Both circuits use that token and old state, but differ in which state asks the question.</Prose>
+<AttentionScheduleDrawing />
+<AttentionScheduleDrawing kind="general" />
+
 <Prose>{"Suppose the already written prefix is "}<code>{"wal"}</code>{". A recurrent state already exists for the preceding step. We also know the most recent output character, "}<code>{"l"}</code>{". To write "}<code>{"k"}</code>{", we can either read using that existing state and then update it with "}<code>{"l"}</code>{" and the read, or first update with "}<code>{"l"}</code>{" and then use the new state to read. Both orders are executable. Asking for the new state before calculating the read, while also requiring that read to calculate the new state, would create a circular dependency."}</Prose>
 
-<Prose>{"Let "}<InlineMath>{"s_{t-1}"}</InlineMath>{" be the previous decoder state and "}<InlineMath>{"E(y_{t-1})"}</InlineMath>{" the embedding of the previous output. At the first step, that output is a special start token, BOS."}</Prose>
+
 
 <Prose>{""}<strong>{"Bahdanau-style order:"}</strong>{""}</Prose>
 
@@ -158,11 +193,14 @@ export default {
 
 <ol start={4}><li>{"Apply an output layer and softmax to predict "}<InlineMath>{"y_t"}</InlineMath>{"."}</li></ol>
 
-<AttentionSchedules />
+
 
 <Prose>{"Our teaching model uses the same form of attentional output projection in both orders. It uses native GRU cells, not the original papers' complete networks: the original Bahdanau decoder had a different output network, and Luong's experiments used stacked LSTMs. These simplifications are explicit so the experiment demonstrates mechanisms without impersonating a historical reproduction."}</Prose>
 
 <H3>{"Input feeding remembers earlier reads"}</H3>
+
+<Prose>Can the next update remember the last combined read directly? Add a next-step wire carrying the combined vector alongside the previous token.</Prose>
+<AttentionScheduleDrawing kind="general" feeding />
 
 <Prose>{"A Luong decoder can feed "}<InlineMath>{"\\tilde s_{t-1}"}</InlineMath>{" alongside the previous token at the next step:"}</Prose>
 
@@ -176,6 +214,9 @@ export default {
 
 <Prose>{"This branch explains why the nonlinearity matters. You can continue to section 4 after understanding one complete decoder step, then return to this counterexample."}</Prose>
 
+<Prose>Does changing the question actually change the read? Keep scalar keys −.7, .1 and 1.3 fixed. The straight rule scores each key as 2q + k; the bent rule scores it as tanh(2q + k). Change only the scalar query q and compare the resulting shares.</Prose>
+<AttentionCancellationFlow />
+
 <Prose>{"Suppose someone tries to learn the score with a linear layer on the concatenated query and key:"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"e_j=a^\\top q+b^\\top k_j."}</MathBlock></div>
@@ -186,11 +227,14 @@ export default {
 
 <Prose>{"The weights no longer depend on the question. The code can run, gradients can exist elsewhere, and the model can appear to “have attention,” yet this scoring rule cannot change its read according to the query. A nonlinear interaction or a query–key product repairs this particular limitation. This is why the details inside a small scoring formula matter."}</Prose>
 
-<AttentionCancellationLab />
+
 
 <H2>{"4. Put the read into tensors and code"}</H2>
 
 <Prose>{"We have followed one example and one output step. Batching just lays several examples side by side in rectangular arrays; it does not change the meaning of query, memory or read. The bookkeeping matters because an array may contain storage cells that are not real source positions."}</Prose>
+
+<Prose>In tensor code, N and B both name batch size. Source positions, feature coordinates and vocabulary entries are different axes; keep their rectangles separate.</Prose>
+<AttentionTensorDrawing />
 
 <Prose>{"Suppose a batch has "}<InlineMath>{"B"}</InlineMath>{" examples, padded source width "}<InlineMath>{"S"}</InlineMath>{", padded target width "}<InlineMath>{"T"}</InlineMath>{", memory width "}<InlineMath>{"d_h"}</InlineMath>{", and decoder width "}<InlineMath>{"d_s"}</InlineMath>{"."}</Prose>
 
@@ -202,17 +246,26 @@ export default {
 
 <Prose>{"A short source is padded to share a rectangular batch with longer sources. PAD is storage, not another observation. Set invalid source scores to "}<InlineMath>{"-\\infty"}</InlineMath>{" "}<strong>{"before"}</strong>{" softmax. The remaining valid positions receive the full probability mass."}</Prose>
 
+<Prose>Can a storage-only zero change a real read? Keep two observed values fixed, and let the PAD slot enter or leave the score competition.</Prose>
+<AttentionMaskLab />
+
 <Prose>{"Imagine two real memories with equal scores and scalar values 2 and 4. Their read is "}<InlineMath>{"(2+4)/2=3"}</InlineMath>{". Add a padding slot with score 0 and value 0, but forget the mask: all three scores are still equal, so the read becomes "}<InlineMath>{"(2+4+0)/3=2"}</InlineMath>{". Nothing about the real observations changed. Their shares shrank because storage entered the competition."}</Prose>
 
-<AttentionPaddingShares />
+
 
 <Prose>{"Setting padded values to zero while leaving their scores valid is insufficient. A zero-valued memory can still steal probability mass and shrink the context. In a bidirectional encoder, processing padding can also change actual backward states; an attention mask cannot undo that earlier contamination. Our program packs actual source lengths before running the encoder, then also masks the attention read."}</Prose>
 
+<Prose>Apply that same rule to our A/B/C read. An excluded donor has zero share; changing its key or value afterward cannot affect this read.</Prose>
+<AttentionValidityLab />
+
 <Prose>{"Each source here includes a request token and EOS, so there is always a valid memory position. A general-purpose reader must reject or explicitly handle an all-masked row: ordinary softmax on all "}<InlineMath>{"-\\infty"}</InlineMath>{" values is undefined."}</Prose>
+
+<Prose>Where does the desired answer enter training? Its shifted prefix supplies previous tokens; the next desired token meets the output only at the loss.</Prose>
+<AttentionTrainingDrawing />
 
 <Prose>{"Target padding has a separate role. For the reference "}<code>{"cared<EOS>"}</code>{", teacher-forced decoder inputs are "}<code>{"<BOS>cared"}</code>{". Cross-entropy scores each next target, ignores padded target cells, and averages over the remaining target tokens. Source EOS is a memory; target EOS is a predicted stopping decision. BOS and request tokens are not valid generated outputs in this task."}</Prose>
 
-<AttentionFittedLab mode="padding" />
+
 
 <Prose>{"A source edit invalidates its cache. A decoder-prefix edit can reuse source memory but must recompute the affected decoder suffix. Renaming a display label changes neither."}</Prose>
 
@@ -228,19 +281,25 @@ export default {
 
 <H2>{"5. Learn which read helps the output"}</H2>
 
+<Prose>How can output feedback teach a source read? For this question only, use the two context coordinates as two class scores and ask for class 2; the target enters the loss, not memory.</Prose>
+<AttentionLearningLab />
+
 <Prose>{"Training does not ordinarily come with labels saying which input position to look at. It comes with desired outputs. If a different read would lower the output loss, gradients adjust the encoder, scoring parameters and decoder."}</Prose>
 
 <Prose>{"Think of each source value as proposing information to add to the current mixture. If giving B a little more share would make the desired output more likely, training should raise B's relative score. If the same change would hurt, it should lower it. The feedback depends on what B contains, not just on whether B already has a large weight."}</Prose>
 
-<Prose>{"Return to our three-memory arithmetic. Pretend the two context coordinates are logits for two classes, and the correct class is the second one. This tiny output head makes the whole path visible:"}</Prose>
+<Prose>The identity head copies the two context coordinates into class scores. Normalizing them over classes, rather than source positions, gives:</Prose>
 
 <div className="neural-equation"><MathBlock>{"p=\\operatorname{softmax}(c)=(0.659477,\\ 0.340523),\\qquad\nL=-\\log p_2=1.077272."}</MathBlock></div>
 
 <Prose>{"The first coordinate currently wins, although we want the second class. A's value "}<InlineMath>{"(2,0)"}</InlineMath>{" favors the first class, so putting more weight there would hurt. B's "}<InlineMath>{"(0,2)"}</InlineMath>{" favors the second; C's "}<InlineMath>{"(-1,1)"}</InlineMath>{" also favors it. Moving share away from A toward B or C therefore moves the output in a useful direction. That is the intuition the derivative below will make precise."}</Prose>
 
-<AttentionLearningDirection />
+
 
 <H3>{"Deeper calculation: follow one gradient all the way back"}</H3>
+
+<Prose>Where does the backward signal go? Name the context’s loss derivative g. Orange dashed arrows carry this credit from the class decision to the context, then to each source score e and the query q that created those scores.</Prose>
+<AttentionLearningFigure />
 
 <Prose>{"The sign argument above is enough to follow the training story on a first pass. For implementing or checking the backward pass, this derivation supplies the exact quantities used by the next lab."}</Prose>
 
@@ -249,6 +308,8 @@ export default {
 <div className="neural-equation"><MathBlock>{"g=\\frac{\\partial L}{\\partial c}=p-(0,1)\n=(0.659477,-0.659477)."}</MathBlock></div>
 
 <Prose>{"We want less first-coordinate support and more second-coordinate support. How should a source score change?"}</Prose>
+
+<Prose>The right-hand backward drawing follows another learnable path: each returned value receives the context credit scaled by its current share. Holding shares fixed, changing a value changes the context linearly. Thus ∂L/∂vⱼ = αⱼg. The scorer path on the left must additionally account for competition among donors.</Prose>
 
 <Prose>{"Differentiate the softmax-weighted sum:"}</Prose>
 
@@ -264,17 +325,22 @@ export default {
 
 <Prose>{"One learning-rate 0.1 step changes "}<InlineMath>{"q=(1,0)"}</InlineMath>{" to approximately "}<InlineMath>{"(0.925456,0.042946)"}</InlineMath>{". Recomputing the entire read gives loss 1.003220, down from 1.077272. These are calculated values, independently matched to automatic differentiation and finite differences. A sufficiently large step need not lower the loss."}</Prose>
 
-<AttentionGradientFlow />
 
-<AttentionReadLab learning />
+
+<AttentionLearningLab update diagram={false} />
 
 <Prose>{"Attention gives a direct weighted path from an output's loss to stored source values. Recurrent dependencies still exist; this additional path does not make vanishing gradients, optimization difficulties or generalization errors impossible."}</Prose>
+
+<Prose>For dot scoring, the corresponding key derivative is (∂L/∂eⱼ)q: the same score credit multiplies the query rather than the key. When one encoder state supplies both a key projection and a returned value, both backward paths add at that state. In additive scoring, continue through the learned scoring row, tanh derivative and the two maps. Native autodiff in the complete program carries those paths; the explicit query calculation gives a small independent check on signs and masking.</Prose>
 
 <H2>{"6. Does revisiting memory help on real spellings?"}</H2>
 
 <Prose>{"Return to the opening problem: can a writer generate an unfamiliar spelling more reliably if it can consult the source again? We can now test that with trained models, rather than infer success from an attractive attention picture. The unit of success is a complete requested word, including a correct stopping decision."}</Prose>
 
 <Prose>{"Use the same small English inflection extract as the preceding lesson: 1,800 records from 600 selected spellings, with three requested verb forms each. The source is the "}<a href={"https://github.com/unimorph/eng/tree/66e0e9e8e2dcd196da081a25a48e5c1fe3d8b49b"}>{"pinned UniMorph English repository"}</a>{". Its README names Wikipedia and licenses the data under "}<a href={"https://creativecommons.org/licenses/by-sa/3.0/"}>{"CC BY-SA 3.0"}</a>{". The supplied extract retains attribution, source rows, filtering decisions and license in "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/data-provenance.md"}>{"data provenance"}</a>{"."}</Prose>
+
+<Prose>How can we test transfer to unseen spellings rather than leak their answers? Keep each lemma’s requests and shared-form aliases together before assigning groups to partitions.</Prose>
+<AttentionGroupingDrawing />
 
 <Prose>{"All requests for the same lemma stay together. Selected lemmas sharing a target form are also grouped together, preventing the demonstrated "}<code>{"work"}</code>{"/"}<code>{"worke"}</code>{" overlap. The final partition has 451 training lemmas/1,353 rows and 149 development lemmas/447 rows, with no shared lemma spelling or target form across those partitions. This is a conservative identity check, not a proof that the lexicon contains no other aliases."}</Prose>
 
@@ -298,6 +364,9 @@ export default {
 
 <Prose>{"“Exact” requires the recorded form and natural EOS. Character error rate is total insertions, deletions and substitutions divided by total reference characters, excluding EOS. The 447 development references contain 3,490 characters."}</Prose>
 
+<Prose>How did each complete architecture learn under the same budget? These lines join recorded checkpoints; their final dips are retained, and the rules remain a separate baseline.</Prose>
+<AttentionLearningCurves />
+
 <Prose>{"Read one comparison first. After the same number of updates, fixed-context seed 1 produces 53 of 447 development forms exactly; additive-attention seed 1 produces 395. Simple suffix rules produce 407. In this experiment, a repeated source read helps the neural model substantially, but does not beat the task-specific rules. The table retains all seeds so one selected run does not stand in for the whole result."}</Prose>
 
 <NeuralTable caption={"Actual results"} headers={[<>{"Model / seed"}</>,<>{"Training exact /1,353"}</>,<>{"Development exact /447"}</>,<>{"Development character edits"}</>,<>{"Character error rate"}</>]} rows={[[<>{"Predeclared suffix rules"}</>,<>{"1,206"}</>,<>{"407"}</>,<>{"57"}</>,<>{"0.01633"}</>],[<>{"Fixed context /1"}</>,<>{"1,328"}</>,<>{"53"}</>,<>{"1,517"}</>,<>{"0.43467"}</>],[<>{"Fixed context /2"}</>,<>{"1,323"}</>,<>{"41"}</>,<>{"1,533"}</>,<>{"0.43926"}</>],[<>{"Fixed context /3"}</>,<>{"1,287"}</>,<>{"52"}</>,<>{"1,475"}</>,<>{"0.42264"}</>],[<>{"Additive /1"}</>,<>{"1,338"}</>,<>{"395"}</>,<>{"86"}</>,<>{"0.02464"}</>],[<>{"Additive /2"}</>,<>{"1,327"}</>,<>{"380"}</>,<>{"108"}</>,<>{"0.03095"}</>],[<>{"Additive /3"}</>,<>{"1,352"}</>,<>{"387"}</>,<>{"97"}</>,<>{"0.02779"}</>],[<>{"General /1"}</>,<>{"1,292"}</>,<>{"345"}</>,<>{"165"}</>,<>{"0.04728"}</>],[<>{"General /2"}</>,<>{"1,353"}</>,<>{"392"}</>,<>{"90"}</>,<>{"0.02579"}</>],[<>{"General /3"}</>,<>{"1,348"}</>,<>{"385"}</>,<>{"101"}</>,<>{"0.02894"}</>]]} />
@@ -306,7 +375,7 @@ export default {
 
 <Prose>{"The outcomes also separate fitting from transfer. General seed 2 gets every training form right but misses 55 development forms. Additive seed 3 fits 1,352 training records but does not produce the best development result. Reading the source again helps, while memorizing training outputs remains possible."}</Prose>
 
-<AttentionLearningCurves />
+
 
 <Prose>{"Length is another diagnostic, not a universal capacity threshold. Additive seed 1 gets 145/168 shorter lemmas and 250/279 longer lemmas correct. These groups differ in spelling patterns and examples, not just length. An increase in longer-word accuracy does not mean length is intrinsically easier, just as a decrease would not by itself prove a fixed memory limit."}</Prose>
 
@@ -314,7 +383,7 @@ export default {
 
 <Prose>{"Download "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/attentive-inflection.py"}>{"attentive-inflection.py"}</a>{", "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/calculated-inputs.json"}>{"calculated-inputs.json"}</a>{" and "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/english-inflections.csv"}>{"english-inflections.csv"}</a>{" into one directory. The JSON contains actual trained parameters and recorded results; it is an offline input, not a request to train during page rendering."}</Prose>
 
-<Prose>{"Use a Python environment with NumPy and CPU PyTorch. The author run used Python 3.12.14, NumPy 2.3.5 and PyTorch 2.14.0+cpu. Compatible versions can run the program, but numerical kernels and training trajectories can differ. From that directory, save and run this complete small example:"}</Prose>
+<Prose>{"Use a Python environment with NumPy and CPU PyTorch. The recorded runs used Python 3.12.14, NumPy 2.3.5 and PyTorch 2.14.0+cpu. Compatible versions can run the program, but numerical kernels and training trajectories can differ. From that directory, save and run this complete small example:"}</Prose>
 
 <CodeBlock language={"python"}>{"from pathlib import Path\nimport importlib.util\nimport json\nimport sys\nsys.dont_write_bytecode = True\nimport torch\n\nroot = Path.cwd()\nspec = importlib.util.spec_from_file_location(\"inflection\", root/\"attentive-inflection.py\")\ninflection = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(inflection)\ntorch.set_num_threads(1)\nreport = json.loads((root/\"calculated-inputs.json\").read_text(encoding=\"utf-8\"))\nrun = next(item for item in report[\"runs\"] if item[\"kind\"] == \"additive\" and item[\"seed\"] == 1)\nmodel = inflection.AttentiveInflector(\"additive\")\nshapes = model.state_dict()\nmodel.load_state_dict({\n    name: torch.tensor(value, dtype=shapes[name].dtype)\n    for name, value in run[\"weights\"].items()\n})\nresult = inflection.greedy(model, [{\"lemma\": \"lactate\", \"feature\": \"past\"}])[0]\nprint(result[\"prediction\"], result[\"ended_with_eos\"])"}</CodeBlock>
 
@@ -332,11 +401,14 @@ export default {
 
 <Prose>{"The opening diagram showed a behavior we wanted: a changing need should lead to a changing read. Now we can inspect actual trained weights. In an alignment picture, each row answers “where did this output step read?” and each column identifies one saved source position. Read across one row before comparing rows; a bright cell is a large source share, not the probability of a correct output."}</Prose>
 
+<Prose>We now switch from walk to lactate so the saved numerical trace is inspectable. The request is still past tense; these are actual source and output coordinates, not the constructed A/B/C vectors.</Prose>
+<AttentionWorkedAlignment />
+
 <Prose>{"The seed 1 additive model produces "}<code>{"lactated<EOS>"}</code>{" for the worked input. Its actual attention rows put the greatest weight on these source positions:"}</Prose>
 
 <NeuralTable caption={"7. Connect a real read to a generated character"} headers={[<>{"Output being predicted"}</>,<>{"Highest-weight source position"}</>,<>{"That weight"}</>,<>{"Probability of emitted output"}</>]} rows={[[<>{""}<code>{"l"}</code>{""}</>,<>{"1: "}<code>{"l"}</code>{""}</>,<>{"0.9755"}</>,<>{"0.9998"}</>],[<>{""}<code>{"a"}</code>{""}</>,<>{"2: first "}<code>{"a"}</code>{""}</>,<>{"0.8894"}</>,<>{"0.9994"}</>],[<>{""}<code>{"c"}</code>{""}</>,<>{"3: "}<code>{"c"}</code>{""}</>,<>{"0.9056"}</>,<>{"0.9999"}</>],[<>{""}<code>{"t"}</code>{""}</>,<>{"4: first "}<code>{"t"}</code>{""}</>,<>{"0.9047"}</>,<>{"0.9999"}</>],[<>{""}<code>{"a"}</code>{""}</>,<>{"5: second "}<code>{"a"}</code>{""}</>,<>{"0.6200"}</>,<>{"0.9804"}</>],[<>{""}<code>{"t"}</code>{""}</>,<>{"6: second "}<code>{"t"}</code>{""}</>,<>{"0.8527"}</>,<>{"0.9999"}</>],[<>{""}<code>{"e"}</code>{""}</>,<>{"7: "}<code>{"e"}</code>{""}</>,<>{"0.4830"}</>,<>{"1.0000, rounded"}</>],[<>{""}<code>{"d"}</code>{""}</>,<>{"0: "}<code>{"<past>"}</code>{""}</>,<>{"0.7016"}</>,<>{"0.9998"}</>],[<>{""}<code>{"<eos>"}</code>{""}</>,<>{"6: second "}<code>{"t"}</code>{""}</>,<>{"0.3358"}</>,<>{"1.0000, rounded"}</>]]} />
 
-<AttentionWorkedAlignment />
+
 
 <Prose>{"The picture is consistent with copying much of the spelling and consulting the request while appending "}<code>{"d"}</code>{". The EOS row is more diffuse and does not peak at source EOS in this model. That does not make its prediction invalid: contextual features and decoder state can supply stopping information in other ways."}</Prose>
 
@@ -344,13 +416,26 @@ export default {
 
 <Prose>{"Here is an exact counterexample to “the attention distribution uniquely explains the answer”:"}</Prose>
 
+<AttentionAmbiguityDrawing />
+
 <div className="neural-equation"><MathBlock>{"v_1=(1,0),\\quad v_2=(0,1),\\quad v_3=(0.5,0.5)."}</MathBlock></div>
 
 <Prose>{"Both "}<InlineMath>{"\\alpha=(0.4,0.4,0.2)"}</InlineMath>{" and "}<InlineMath>{"\\alpha'=(0.2,0.2,0.6)"}</InlineMath>{" produce "}<InlineMath>{"c=(0.5,0.5)"}</InlineMath>{". Their heatmaps look different, but a downstream calculation receiving only this context and the same other inputs cannot distinguish them. These are valid softmax outcomes: scores equal to their log probabilities would produce them."}</Prose>
 
-<AttentionAmbiguityFigure />
 
-<AttentionFittedLab />
+
+<Prose>What changes when the real spelling or requested form changes? These seed-one architectures are separately fitted, so their selector changes a whole model. All following questions share these source, prefix, cap and padding settings. Switching architecture retains those edits and selects step 1; reset restores cash + past.</Prose>
+<AttentionFittedConstruction>
+<AttentionFittedFlow />
+<Prose>At one selected writing step, how do source coordinates become a returned context? The heatmap shows source shares; the three complete 64-coordinate grids show the query, context and new state. These array coordinates are indexed 0–63, following the code’s zero-based convention. Select a coordinate to see every donor’s contribution below. The output table compares with the original cash + past reference in the selected architecture, not a changing reference.</Prose>
+<AttentionFittedFlow question="trace" />
+<Prose>What if an earlier emitted letter had been different? A forced prefix replaces emissions, then becomes input to later steps. Forcing first letter b leaves the first distribution unchanged and changes subsequent reads; it does not supply a desired reference word.</Prose>
+<AttentionFittedFlow question="prefix" />
+<Prose>How is stopping different from truncating? EOS is the model’s stopping decision; the cap counts emitted tokens, including EOS, and bounds work even when EOS has not occurred.</Prose>
+<AttentionFittedFlow question="cap" />
+<Prose>Can extra zero storage alter this actual model? Appended PAD rows are not additional encoder observations. Correct masking excludes them; admitting a slot is a deliberate faulty read. Compare with the exact same source, prefix and cap under correct masking.</Prose>
+<AttentionFittedFlow question="padding" />
+</AttentionFittedConstruction>
 
 <Prose>{"The masking investigation also has an instructive result: admitting extra zero memories can alter attention and probabilities while leaving the greedy word unchanged. A correct-looking word is not enough to prove the tensor computation is correct. Conversely, two different weights need not imply two different words. Inspect the quantity that your hypothesis actually concerns."}</Prose>
 
@@ -358,27 +443,31 @@ export default {
 
 <Prose>{"The complete "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/attentive-inflection.py"}>{"attentive-inflection.py"}</a>{" exposes additive and general scoring, source masks, normalized weighted reads and the decoder schedule. "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/attention-calculations.py"}>{"attention-calculations.py"}</a>{" opens the small numerical derivatives and local-window/copy calculations, while "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/attention-mechanics.py"}>{"attention-mechanics.py"}</a>{" reconstructs saved weights through NumPy and compares its trace with the native model. The scores, weights and context all remain learner-visible. The normal library route is this custom "}<code>{"nn.Module"}</code>{" composed with "}<code>{"nn.GRU"}</code>{", embeddings, losses and optimizers; "}<code>{"nn.MultiheadAttention"}</code>{" is a different architecture and should not be presented as a drop-in Bahdanau decoder."}</Prose>
 
-<AttentionScratchRoute />
+<H3>Compose the trainable mechanism with explicit recurrent gates</H3>
+<Prose>We already derived and implemented the r/z/n GRU gates in <a href="/learn/path/full-curriculum/rnns-lstms-grus?module=deep-learning-fundamentals">RNNs, LSTMs and GRUs</a>. Reuse that exact primitive rather than copy it. The new program below owns encoder history, masks, key caching, the source read, both decoder schedules and the likelihood loop. It uses tensor autodiff, ordinary embeddings and linear maps; it does not call a native recurrent or attention layer for its promised scratch recurrence.</Prose>
+<Prose>Save recurrent-cells.py, attentive-inflection.py and explicit-attentive-inflection.py together; add additive-seed-one.json for the saved demonstration. In the checkout, the import resolves the earlier lesson’s canonical gates automatically. The protocol import supplies vocabulary, batching and greedy output recording, not the attention implementation. Decoder cell parameters add the _l0 suffix when mapping native weights; the reset-after, r/z/n equations remain identical.</Prose>
+<AttentionProgram file="explicit-attentive-inflection.py" title="Explicit gates composed with locally implemented attention" />
+<Prose>Follow encode first: compute source history, zero storage-only memory rows, gather the last real row, and project keys once. Dense padded computation does extra work, while the native packed route avoids it. attend computes scores, masks, source softmax and the weighted read. step places that read on the correct side of the recurrent update and combines state with context. forward repeats it over shifted reference inputs. The output head forbids task-invalid vocabulary entries before likelihood normalization.</Prose>
+<Prose>The executed two-record demonstration prints score shape (2, 7, 32), read shape (2, 7, 6), loss 3.308828684 and a nonzero scorer gradient norm 0.003048249. Loading the conserved fitted parameters generates lactated with EOS. The differentiable composition matches the native route in outputs and every parameter gradient, including both recurrent biases and a nonzero initial state; matching a single spelling alone would not establish that.</Prose>
+<H3>Inspect the full independent NumPy route</H3>
+<Prose>The separate NumPy implementation rebuilds matrix projections, reset-after recurrent updates, both attention schedules and greedy inference without any recurrent or attention layer. Save attention-inference.py and calculated-inputs.json together, then run python attention-inference.py. It generates lactated with EOS from the same parameters. Read gru as the reused mathematical gate mechanism, encode as source-cache construction, and decode as the source read followed by the declared writing schedule.</Prose>
+<AttentionProgram file="attention-inference.py" title="Complete independent NumPy saved-model inference" />
+<Prose>The calculation program implements analytic query derivatives, finite-difference checks, Gaussian windows and repeated-word copy aggregation. Its arrays are the constructed fixtures used here, rather than training measurements.</Prose>
+<AttentionProgram file="attention-calculations.py" title="Attention derivative, local-window and copy calculations" />
+<Prose>For the complete trace comparison, attention-mechanics.py also reads the earlier encoder–decoder calculated-inputs.json. Keep it in a sibling directory named sequence-to-sequence-encoder-decoder; the attention report remains in attention-mechanism-bahdanau-luong. The simpler NumPy inference needs only its own report.</Prose>
 
 <Prose>{"The encoder's projected keys can be cached because the source and scorer parameters stay fixed during one decoding call. Cache them "}<strong>{"after"}</strong>{" the source mask has been paired with that source, and rebuild them after a parameter update or source edit. The decoder query changes every step. For source length S, target length T, memory width H, query width D and scoring width A, project the source once in O(SHA). Each output step costs O(DA + SA + SH) for query projection, scores and value mixing. Cached keys occupy O(SA), beside O(SH) source memory. These costs exclude the recurrent update and vocabulary projection. That is a useful avoided recomputation, not a claim to remove attention's source scan."}</Prose>
 
-<Prose>{"For a research change, add a positive scoring temperature before masked softmax, not after the weighted sum. The same padding mask must still exclude invalid positions exactly; temperature does not legalize padding. With general scores "}<code>{"[0, log(3)]"}</code>{" and values "}<code>{"[2,10]"}</code>{", temperature1 gives weights[0.25,0.75] and context8; temperature2 gives weights proportional to[1,√3] and context approximately7.0718. Smaller temperature sharpens competition but can make gradients and alignments less forgiving; it is not an accuracy guarantee."}</Prose>
+<H3>Change how sharply the read competes</H3>
+<Prose>Could the same comparisons produce a gentler mixture? A positive scoring temperature divides every score before normalization. For this scalar illustration only, keep scores [0, log(3)] and returned values [2, 10] fixed.</Prose>
+<AttentionTemperatureFlow />
+<Prose>At temperature 1 the masses are [1, 3], shares [.25, .75], and read 8. At temperature 2 they are [1, √3], so the read is (2 + 10√3)/(1 + √3) ≈ 7.0718. Smaller temperature sharpens competition; it does not guarantee accuracy. The validity mask still excludes storage exactly. Apply temperature before softmax rather than to the already mixed context.</Prose>
 
-<details>
-
-<summary>Implementation hint</summary>
-
-<Prose>{"Divide scores by temperature, then apply the illegal-key mask before softmax. Reject a row with no legal source token."}</Prose>
-
-</details>
-
-<details>
-
-<summary>Solution and success criteria</summary>
-
-<Prose>{"Implement "}<code>{"weights = (scores / temperature).masked_fill(~valid, -inf).softmax(-1)"}</code>{" for strictly positive temperature. At temperature2, context is "}<code>{"(2 + 10*sqrt(3))/(1+sqrt(3)) ≈7.0718"}</code>{". Recompute one output and its score gradient using the same saved source/query parameters in both NumPy and Torch. Append a large-valued masked source token and confirm it changes neither context nor output. Do not compare two different random fits and call that temperature-implementation parity."}</Prose>
-
-</details>
+<CodeBlock language="python">{`if temperature <= 0:
+    raise ValueError("Use a positive scoring temperature")
+weights = (scores / temperature).masked_fill(~valid, -torch.inf).softmax(-1)
+context = weights @ memory`}</CodeBlock>
+<Prose>Compare the same source, query and parameters under both routes; a high-valued masked row must still have no effect. Two unrelated random fits cannot establish implementation parity.</Prose>
 
 <Prose>{"The extended topics in the next section remain distinct: exact hard-monotonic alignment algorithms, a complete pointer-generator training system and location-sensitive speech models need their own objectives and datasets. The local copy-aggregation and normalized-window calculations are complete bounded mechanisms; they do not secretly claim those whole systems have been trained here."}</Prose>
 
@@ -394,6 +483,11 @@ export default {
 
 <Prose>{"Local attention restricts available positions to a window. A window centered at 3 with radius 2 on positions 1–5 contains all five; radius 1 contains only 2, 3 and 4. The decoder cannot consult a distant position outside that window even if it would have received the largest global score."}</Prose>
 
+<Prose>Where are the donors, and how does distance reduce their contributions? A Gaussian is a bell-shaped distance factor: it is 1 at the center and falls toward 0 away from it. In this fixture the radius controls eligibility and also sets the Gaussian standard deviation to radius/2. Normalize the allowed score masses first, multiply by distance factors, then choose explicitly whether to normalize that product again.</Prose>
+<AttentionWindowFlow />
+
+<Prose>The shaded interval marks allowed positions. Violet distance bars show the Gaussian factors on a fixed 0–1 scale. The table separates allowed-score shares, distance factors and final weights. Editing a score keeps returned values equal to position numbers; when that position is outside the window, its score cannot affect the read.</Prose>
+
 <Prose>{"Luong's local-p predicts a real center from the current state and multiplies its windowed alignment by a Gaussian factor. In the paper's one-based position convention,"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"p_t=S\\,\\sigma(v_p^\\top\\tanh(W_p s_t)),\\qquad\nw_{tj}=\\alpha_{tj}\\exp\\left[-\\frac{(j-p_t)^2}{2(D/2)^2}\\right]."}</MathBlock></div>
@@ -406,13 +500,49 @@ export default {
 
 <Prose>{"with sum 0.390755 and context 1.254375. Explicitly renormalizing those weights changes the context to 3.210133. Renormalization is a valid alternative design, but it changes the read's magnitude. Label the formula in use."}</Prose>
 
-<AttentionWindowLab />
+
 
 <Prose>{"A local window can move backward; locality alone does not enforce monotonicity. A monotonic mechanism constrains movement through source order. That can suit speech, while unrestricted reordering is useful in translation. Availability is another condition: a bidirectional encoder or a read of the entire future source cannot become streaming merely because its display uses a narrow window."}</Prose>
+
+<H3>Move through the source without moving backward</H3>
+<Prose>How can a reader scan forward instead of rescoring the whole source? Starting at the previous chosen position, test whether to choose each visited position; if not, continue right. A choose probability means a Bernoulli decision: it selects with that probability and passes otherwise.</Prose>
+<AttentionMonotonicFlow />
+<Prose>With choose probabilities (.5, .5, .5), the first scan reaches position 0 with probability 1. It chooses there with mass .5; the unchosen .5 reaches position 1 and contributes .25 there; .25 reaches position 2 and contributes .125. Remaining mass .125 selects nothing and contributes the zero value. A future scan can choose the same position again; monotonic means nondecreasing, not necessarily strictly advancing.</Prose>
+<Prose>Training can differentiate an expectation over these decisions rather than sampling a hard choice. Let αₜ₋₁,ⱼ be the previous choice mass at source position j, and pₜⱼ its current choose probability. Give the arriving mass a new name, reachₜⱼ, so it cannot be confused with the query vector q. The first scan is initialized with α₀,₀ = 1 and all other entries zero.</Prose>
+<AttentionMonotonicExpectedFigure />
+<MathBlock>{String.raw`\operatorname{reach}_{t,0}=\alpha_{t-1,0},\qquad
+\operatorname{reach}_{t,j}=(1-p_{t,j-1})\operatorname{reach}_{t,j-1}+\alpha_{t-1,j},\qquad
+\alpha_{t,j}=p_{t,j}\operatorname{reach}_{t,j}.`}</MathBlock>
+<Prose>The arriving mass combines paths that continued from j−1 with paths whose previous selection was already j. In the second .5-probability scan, reach is (.5, .5, .375), choice mass (.25, .25, .1875), and no-selection mass .3125. These subnormalized rows must not be silently divided to one: the missing mass has a different meaning. Expected training scans all S positions for each of T output steps; a hard online scan can visit only positions it needs. <a href="https://arxiv.org/abs/1704.00784">Raffel et al., sections 2.1–2.5</a> develops the complete recurrence and implementation.</Prose>
+<CodeBlock language="python">{`import numpy as np
+
+def expected_monotonic(choose_probability, previous):
+    probability = np.asarray(choose_probability, dtype=float)
+    previous = np.asarray(previous, dtype=float)
+    if (probability.ndim != 1 or probability.shape != previous.shape
+            or not np.all(np.isfinite(probability)) or not np.all(np.isfinite(previous))
+            or np.any((probability < 0) | (probability > 1))
+            or np.any(previous < 0) or previous.sum() > 1 + 1e-12):
+        raise ValueError("Use aligned choose probabilities and previous mass at most one")
+    choice = np.zeros_like(probability)
+    reach = 0.0
+    for position, p_choose in enumerate(probability):
+        reach = (0.0 if position == 0 else
+                 (1 - probability[position - 1]) * reach) + previous[position]
+        choice[position] = p_choose * reach
+    return choice, 1 - choice.sum()
+
+first, missing = expected_monotonic([.5, .5, .5], [1., 0., 0.])
+second, missing_next = expected_monotonic([.5, .5, .5], first)
+print(first, missing, second, missing_next)`}</CodeBlock>
+<Prose>This bounded calculation teaches the probability paths; it is not a fitted streaming recognizer. At inference, sampled Bernoulli choices and deterministic threshold choices are distinct algorithms. Thresholding p at .5 is a deterministic decision, not the expectation shown above. Decide what to do if no source position is selected, and restrict encoder lookahead as well as scanning before claiming streaming latency.</Prose>
 
 <H3>{"Copy a name that the output vocabulary does not contain"}</H3>
 
 <Prose>{"An ordinary output softmax can emit only vocabulary entries. Looking closely at an unfamiliar source name does not automatically create a new output token."}</Prose>
+
+<Prose>How can both Ada occurrences contribute to one output word? Add their source shares first, then mix that word-level copy mass with the vocabulary route. The mixture control is the probability of using the vocabulary route; the remaining probability uses copying.</Prose>
+<AttentionCopyFlowLab />
 
 <Prose>{"A pointer-generator adds a copying route. Let "}<InlineMath>{"p_{\\mathrm{gen}}"}</InlineMath>{" be the learned probability of using the vocabulary route. Sum attention over "}<strong>{"all occurrences"}</strong>{" of a word to obtain its copy mass, then mix:"}</Prose>
 
@@ -420,11 +550,14 @@ export default {
 
 <Prose>{"For source "}<code>{"Ada met Ada"}</code>{", attention "}<InlineMath>{"(0.2,0.3,0.5)"}</InlineMath>{", vocabulary probabilities "}<code>{"Ada:0.1, met:0.6, left:0.3"}</code>{", and "}<InlineMath>{"p_{\\mathrm{gen}}=0.4"}</InlineMath>{", the final probabilities are "}<code>{"Ada:0.46, met:0.42, left:0.12"}</code>{". Ada's two positions contribute 0.7 copy mass. If Ada were outside the vocabulary, its vocabulary contribution would be zero while its copy route could remain available."}</Prose>
 
-<AttentionCopyFlow />
+
 
 <H3>{"Remember where a speech reader has been"}</H3>
 
 <Prose>{"Imagine transcribing a repeated syllable. Two regions of the recording can have very similar acoustic content. Asking only “does this sound like what I need?” may not distinguish the earlier occurrence from the next occurrence. Remembering where the last read was provides another clue."}</Prose>
+
+<Prose>What local clue remains from the last read? A learned filter looks at neighboring positions of the previous share row before the current scorer makes its next decision.</Prose>
+<AttentionLocationDrawing />
 
 <Prose>{"Speech contains repeated and similar acoustic fragments. A content score can be ambiguous when two memories look similar. A location-aware scorer adds features from the previous attention row:"}</Prose>
 
@@ -432,11 +565,17 @@ export default {
 
 <Prose>{"The convolution "}<InlineMath>{"F*\\alpha_{t-1}"}</InlineMath>{" measures local patterns around each position in the previous read. It lets a score depend on both current content and recent location. This differs from permanently labeling one position “already used.” "}<a href={"https://arxiv.org/pdf/1506.07503"}>{"Chorowski et al., section 2.2"}</a>{""}</Prose>
 
-<AttentionLocationFlow />
+
 
 <Prose>{"For example, two acoustic regions can resemble the same vowel. A previous attention peak near the first supplies positional evidence about which occurrence the decoder may be approaching. Learned weights decide how much to use that evidence; the formula alone does not prohibit jumps or guarantee alignment."}</Prose>
 
+<Prose>How can a long recording offer fewer memory positions? Pair adjacent feature vectors before the next recurrent layer; this reduces time resolution without making the backward encoder causal.</Prose>
+<AttentionPyramidDrawing />
+
 <Prose>{"Listen, Attend and Spell combines acoustic encoding with character generation. Its pyramidal bidirectional encoder reduces source resolution before reading it, so acoustic frame count need not match output character count. Its original full-input architecture is not inherently streaming. "}<a href={"https://arxiv.org/pdf/1508.01211"}>{"LAS, sections 3–3.1"}</a>{""}</Prose>
+
+<Prose>What if we need a tally across every earlier read? Add past rows coordinate by coordinate; compare today’s share with the tally already accumulated at that position.</Prose>
+<AttentionCoverageDrawing />
 
 <Prose>{"A separate "}<strong>{"coverage"}</strong>{" vector "}<InlineMath>{"u_{tj}=\\sum_{\\tau<t}\\alpha_{\\tau j}"}</InlineMath>{" records accumulated reads. It can enter a score, or an overlap penalty "}<InlineMath>{"\\sum_j\\min(\\alpha_{tj},u_{tj})"}</InlineMath>{" can discourage repetition. Requiring exactly one unit per source is inappropriate for tasks such as summarization, where some material should be omitted and a phrase may support several output words. "}<a href={"https://arxiv.org/pdf/1704.04368"}>{"Coverage mechanism, section 2.3"}</a>{""}</Prose>
 
@@ -448,6 +587,9 @@ export default {
 
 <H3>{"Cache what is fixed; measure what is expensive"}</H3>
 
+<Prose>Which data belongs to the source, and which belongs to a writing history? Share one immutable source cache while keeping every candidate’s state and previous combined vector separate.</Prose>
+<AttentionCacheDrawing />
+
 <Prose>{"The encoder memory stays fixed while generating one output sequence. Cache projected keys once. Additive scoring's cache costs "}<InlineMath>{"O(Sd_hd_a)"}</InlineMath>{". Each read then projects a query in "}<InlineMath>{"O(d_sd_a)"}</InlineMath>{", scores positions in "}<InlineMath>{"O(Sd_a)"}</InlineMath>{", and combines values in "}<InlineMath>{"O(Sd_h)"}</InlineMath>{". General scoring can cache its "}<InlineMath>{"d_h\\to d_s"}</InlineMath>{" projection and use "}<InlineMath>{"O(Sd_s)"}</InlineMath>{" dot products per step."}</Prose>
 
 <Prose>{"Across the output, source–target interactions have an "}<InlineMath>{"S T"}</InlineMath>{" factor. It becomes square only when source and target lengths are identified. Retaining every attention row uses "}<InlineMath>{"O(S T)"}</InlineMath>{" extra storage; sequential inference can keep one row at a time, plus source memory, keys and recurrent state. A teaching heatmap deliberately retains extra history."}</Prose>
@@ -457,6 +599,23 @@ export default {
 <Prose>{"Scaled dot-product attention divides the dot product by "}<InlineMath>{"\\sqrt d"}</InlineMath>{". Under independent, zero-mean, unit-variance query/key coordinates, the unscaled dot product has variance "}<InlineMath>{"d"}</InlineMath>{"; division keeps that variance near one under those assumptions. Learned recurrent states need not satisfy them. Inserting scaling into a fitted general-attention model changes its computation."}</Prose>
 
 <Prose>{"Later multi-head layers add query/key/value projections, several reads and an output projection. A library multi-head module is not a drop-in reproduction of this decoder. Optimized dot-product kernels also do not automatically implement arbitrary additive scorers. Compare math, shapes, masks and outputs before choosing a fast kernel. Benchmark latency at the intended batch sizes, lengths, precision and device rather than inferring it from parameter counts. The "}<a href={"/learn/path/full-curriculum/self-attention-multi-head-attention?module=deep-learning-fundamentals"}>{"later self-attention lesson"}</a>{" develops those components."}</Prose>
+
+<H3>Use the ordinary optimized primitive without changing the mathematics</H3>
+<Prose>How can a library kernel implement the dot read we already understand? PyTorch’s scaled_dot_product_attention can perform this score–mask–softmax–value operation. Our single query has axes batch, head, query position, coordinate; keys and values have source position instead of query position. For this existing unscaled dot read, explicitly set scale=1. Its default scale is 1/√d, which would change the fitted computation. Here a boolean True permits a source entry, unlike the boolean padding convention of some higher-level APIs.</Prose>
+<CodeBlock language="python">{`import torch
+from torch.nn import functional as F
+
+query = torch.tensor([[[[1., 0.]]]], dtype=torch.float64)
+keys = torch.tensor([[[[1., 0.], [0., 1.], [-1., 0.]]]], dtype=torch.float64)
+values = torch.tensor([[[[2., 0.], [0., 2.], [-1., 1.]]]], dtype=torch.float64)
+allowed = torch.tensor([[[[True, True, True]]]])
+context = F.scaled_dot_product_attention(
+    query, keys, values, attn_mask=allowed, dropout_p=0.0, scale=1.0)
+scores = query @ keys.transpose(-2, -1)
+manual = scores.masked_fill(~allowed, -torch.inf).softmax(-1) @ values
+torch.testing.assert_close(context, manual)
+print(context[0, 0, 0])`}</CodeBlock>
+<Prose>The returned coordinates are the section-2 context, approximately (1.240451, .579488). Explicit dropout_p=0 keeps this comparison deterministic even when a surrounding module is in evaluation mode. Kernel dispatch, precision and device affect performance and numerical rounding; this match is a mathematical contract, not a fastest-kernel claim. It implements dot scoring, not the additive tanh scorer. <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html">Official SDPA reference</a> gives mask, scale, dropout and backend details.</Prose>
 
 <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>{"9. Practice: calculate, diagnose and transfer"}</H2>
 
@@ -630,10 +789,10 @@ export default {
 
 <Prose>{"Useful alternate routes:"}</Prose>
 
-<ul><li>{""}<strong>{"A visual overview:"}</strong>{" "}<a href={"https://distill.pub/2016/augmented-rnns/"}>{"Olah and Carter, Attention and Augmented Recurrent Neural Networks"}</a>{", especially “Attentional Interfaces,” shows how a changing read connects a reader and writer. The article's attention section was reviewed; it is a classic mechanism explanation, not current library documentation."}</li><li>{""}<strong>{"Lookup before algebra:"}</strong>{" "}<a href={"https://d2l.ai/chapter_attention-mechanisms-and-transformers/queries-keys-values.html"}>{"D2L, Queries, Keys, and Values"}</a>{" starts from retrieval and connects it to weighted pooling. Use it alongside section 2; our weather and vector examples are independently constructed."}</li><li>{""}<strong>{"Visual next step into transformers:"}</strong>{" "}<a href={"https://www.3blue1brown.com/lessons/attention/"}>{"3Blue1Brown, Attention in transformers, step-by-step"}</a>{" (2024) explains the desired contextual behavior before the matrix operations, with an accompanying "}<a href={"https://www.youtube.com/watch?v=eMlx5fFNoYc"}>{"video"}</a>{". The article and its diagrams were reviewed; the complete video was not watched. It teaches transformer self-attention, so return to our decoder timelines when comparing it with Bahdanau or Luong."}</li></ul>
+<ul><li>{""}<strong>{"A visual overview:"}</strong>{" "}<a href={"https://distill.pub/2016/augmented-rnns/"}>{"Olah and Carter, Attention and Augmented Recurrent Neural Networks"}</a>{", especially “Attentional Interfaces,” shows how a changing read connects a reader and writer. Use its pictures to revisit the memory-to-writer connection; consult official documentation for library behavior."}</li><li>{""}<strong>{"Lookup before algebra:"}</strong>{" "}<a href={"https://d2l.ai/chapter_attention-mechanisms-and-transformers/queries-keys-values.html"}>{"D2L, Queries, Keys, and Values"}</a>{" starts from retrieval and connects it to weighted pooling. Use it alongside section 2; our weather and vector examples are independently constructed."}</li><li>{""}<strong>{"Visual next step into transformers:"}</strong>{" "}<a href={"https://www.3blue1brown.com/lessons/attention/"}>{"3Blue1Brown, Attention in transformers, step-by-step"}</a>{" (2024) explains the desired contextual behavior before the matrix operations, with an accompanying "}<a href={"https://www.youtube.com/watch?v=eMlx5fFNoYc"}>{"video"}</a>{". It teaches transformer self-attention. Return to our decoder timelines when comparing it with Bahdanau or Luong."}</li></ul>
 
-<ul><li>{""}<strong>{"Textbook with tensor code:"}</strong>{" "}<a href={"https://d2l.ai/chapter_attention-mechanisms-and-transformers/attention-scoring-functions.html"}>{"D2L 1.0.3, Attention Scoring Functions"}</a>{" covers masks, batch matrix products, dot and additive scores. Use it after section 2 to connect vector calculations with batched code. Its helpers/conventions differ from this program; compare definitions before mixing snippets."}</li><li>{""}<strong>{"Recurrent attention chapter:"}</strong>{" "}<a href={"https://d2l.ai/chapter_attention-mechanisms-and-transformers/bahdanau-attention.html"}>{"D2L 1.0.3, Bahdanau Attention"}</a>{" connects stored outputs, valid lengths and decoder queries. Its translation experiment is separate from our inflection measurements."}</li><li>{""}<strong>{"Video and notes:"}</strong>{" "}<a href={"https://www.youtube.com/watch?v=XXtpJxZBa2c"}>{"Stanford Online CS224N Lecture 8: Neural Machine Translation, Seq2seq and Attention"}</a>{", with "}<a href={"https://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes06-NMT_seq2seq_attention.pdf"}>{"official 2019 notes"}</a>{". A spoken alternative for following the timelines. Lecture identity and companion notes were checked; the full video was not watched during authoring. Use the corrected primary equations here for nonlinear concat and exact input-feeding conventions."}</li><li>{""}<strong>{"Original motivation:"}</strong>{" "}<a href={"https://arxiv.org/pdf/1409.0473"}>{"Bahdanau, Cho and Bengio"}</a>{", especially sections 3/5 and appendix A. Its historical translation results do not establish a universal input-length boundary."}</li><li>{""}<strong>{"Scorers, windows and input feeding:"}</strong>{" "}<a href={"https://arxiv.org/pdf/1508.04025v5"}>{"Luong, Pham and Manning, arXiv v5"}</a>{", sections 3/4. Use its explicit nonlinear concat formula. Its local-p multiplication differs from our explicitly renormalized alternative."}</li><li>{""}<strong>{"Applications:"}</strong>{" "}<a href={"https://arxiv.org/pdf/1704.04368"}>{"Pointer-generator networks"}</a>{", "}<a href={"https://arxiv.org/pdf/1506.07503"}>{"location-aware speech attention"}</a>{", and "}<a href={"https://arxiv.org/pdf/1508.01211"}>{"Listen, Attend and Spell"}</a>{". Start at the mechanism sections cited above. Their full experimental reproduction is a separate project."}</li></ul>
+<ul><li>{""}<strong>{"Textbook with tensor code:"}</strong>{" "}<a href={"https://d2l.ai/chapter_attention-mechanisms-and-transformers/attention-scoring-functions.html"}>{"D2L 1.0.3, Attention Scoring Functions"}</a>{" covers masks, batch matrix products, dot and additive scores. Use it after section 2 to connect vector calculations with batched code. Its helpers/conventions differ from this program; compare definitions before mixing snippets."}</li><li>{""}<strong>{"Recurrent attention chapter:"}</strong>{" "}<a href={"https://d2l.ai/chapter_attention-mechanisms-and-transformers/bahdanau-attention.html"}>{"D2L 1.0.3, Bahdanau Attention"}</a>{" connects stored outputs, valid lengths and decoder queries. Its translation experiment is separate from our inflection measurements."}</li><li>{""}<strong>{"Video and notes:"}</strong>{" "}<a href={"https://www.youtube.com/watch?v=XXtpJxZBa2c"}>{"Stanford Online CS224N Lecture 8: Neural Machine Translation, Seq2seq and Attention"}</a>{", with "}<a href={"https://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes06-NMT_seq2seq_attention.pdf"}>{"official 2019 notes"}</a>{". A spoken alternative for following the timelines. Follow the companion notes for notation, then compare the primary equations here for nonlinear concat and exact input-feeding conventions."}</li><li>{""}<strong>{"Original motivation:"}</strong>{" "}<a href={"https://arxiv.org/pdf/1409.0473"}>{"Bahdanau, Cho and Bengio"}</a>{", especially sections 3/5 and appendix A. Its historical translation results do not establish a universal input-length boundary."}</li><li>{""}<strong>{"Scorers, windows and input feeding:"}</strong>{" "}<a href={"https://arxiv.org/pdf/1508.04025v5"}>{"Luong, Pham and Manning, arXiv v5"}</a>{", sections 3/4. Use its explicit nonlinear concat formula. Its local-p multiplication differs from our explicitly renormalized alternative."}</li><li>{""}<strong>{"Applications:"}</strong>{" "}<a href={"https://arxiv.org/pdf/1704.04368"}>{"Pointer-generator networks"}</a>{", "}<a href={"https://arxiv.org/pdf/1506.07503"}>{"location-aware speech attention"}</a>{", and "}<a href={"https://arxiv.org/pdf/1508.01211"}>{"Listen, Attend and Spell"}</a>{". Start at the mechanism sections cited above. Their full experimental reproduction is a separate project."}</li></ul>
 
 <Prose>{"The "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/data-provenance.md"}>{"provenance"}</a>{", "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/attentive-inflection.py"}>{"executed program"}</a>{", "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/calculated-inputs.json"}>{"actual trained results"}</a>{", "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/attention-calculations.py"}>{"constructed calculations"}</a>{" and "}<a href={"/learn-code/attention-mechanism-bahdanau-luong/mechanics-results.json"}>{"saved-model traces"}</a>{" make the page's numbers inspectable."}</Prose></section>
-  </div>,
+  </AttentionConstruction></div>,
 };

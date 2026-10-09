@@ -1,0 +1,28 @@
+.mla-lesson.lesson-flow { container: mla-lesson / inline-size; overflow-wrap: break-word; }
+.mla-lesson.lesson-flow .mla-flow-drawing { background: transparent; border: 0; box-shadow: none; padding: 0; margin-inline: 0; }
+.mla-flow-scroll, .mla-array-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+.mla-flow-scroll:focus-visible, .mla-array-scroll:focus-visible { outline: 2px solid #e4b752; outline-offset: 4px; }
+.mla-equation-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+.mla-equation-scroll:focus-visible { outline: 2px solid #e4b752; outline-offset: 4px; }
+.mla-equation-scroll .katex-display { text-align: left; }
+.mla-equation-scroll .katex-display > .katex, .mla-equation-scroll .katex-html { width: max-content; }
+.mla-flow-scroll svg { display: block; width: 100%; height: auto; font-family: var(--font-mono, ui-monospace, monospace); }
+.mla-flow-scroll-hint { display: block; margin-block: .6rem; color: #b9b9b9; font-size: .88rem; line-height: 1.6; }
+.mla-flow-scroll-hint--small { display: none; }
+.mla-independent-scenes { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.75rem; }
+.mla-flow-select { display: grid; gap: .35rem; max-width: 100%; color: #b9b9b9; }
+.mla-flow-select select { width: 100%; }
+.mla-lesson.lesson-flow .mla-flow-select input[type='number'], .mla-lesson.lesson-flow .mla-flow-select select { font: inherit; color: #f0cd7c; background: #161616; border: 1px solid #5a5a5a; padding: .45rem .6rem; min-height: max(44px, 2.5rem); border-radius: 3px; }
+.mla-lesson.lesson-flow .mla-flow-select input[aria-invalid='true'] { border-color: #eda064; }
+.mla-lesson.lesson-flow .mla-flow-select input:focus-visible, .mla-lesson.lesson-flow .mla-flow-select select:focus-visible { outline: 2px solid #e4b752; outline-offset: 3px; }
+.mla-flow-select [role='status'] { color: #e8c38c; max-width: 32rem; font-size: .9rem; line-height: 1.6; }
+.mla-flow-toggle { display: flex; align-items: center; gap: .6rem; color: #b9b9b9; }
+.mla-flow-toggle input, .mla-lesson .flow-controls input[type='range'] { accent-color: #e4b752; }
+.mla-lesson .lesson-code-source__pending button { font: inherit; color: #f0cd7c; background: #161616; border: 1px solid #5a5a5a; border-radius: 4px; padding: .3rem .7rem; min-height: max(44px, 2.25rem); }
+.mla-lesson .lesson-code-source__pending button:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+@container mla-lesson (max-width: 850px) {
+  .mla-independent-scenes { grid-template-columns: minmax(0,1fr); }
+}
+@container mla-lesson (max-width: 340px) {
+  .mla-flow-scroll-hint--small { display: block; }
+}

@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-06",
+  "reviewer": "author-only",
+  "checks": [
+    "ByteTokenizationDrawings.jsx parses; exact frozen v3 baseline is retained separately",
+    "ByteTokenizationLabs.jsx parses; exact frozen v3 baseline is retained separately",
+    "Unchanged invariant source bindings match native-evidence.json",
+    "Unchanged invariant source bindings match model-evidence.json",
+    "Owned geometry CSS is byte-for-byte unchanged",
+    "Bit prefix/payload, embedding table, masks, probabilities, pooling and cost drawings have identical function source",
+    "Actual presentation helper accepts precomputed 48 ligatures → 96 normalized scalars without reapplying input limit",
+    "All bytes of a displayed grapheme retain its NFC hue identity",
+    "Worked glyphs, four-piece merge row and three patch groups have distinct stable identity hues"
+  ],
+  "sourceBindings": [
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationDrawings.jsx",
+      "sha256": "18b1307fafc2ba25f48681bc1609b8cd3fffac43a15dea72b0e241e8ebaad667"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx",
+      "sha256": "a7693693fb86061f50520b6c96da0f19fc8fd272d4383672dd9b719d1b0f3c6d"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/byte-tokenization-labs.css",
+      "sha256": "f9621bb29043a4c1aca88b1fc5c979631bffefd760bbcf2febeccf2a41f62ff8"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/token-identity-colors.js",
+      "sha256": "6bdda73f6e8a02435d4b5dfbb0662a7ebab078e6af34e286e42d804ceed2b13c"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/token-identity-colors.css",
+      "sha256": "5e9b388e88cb88bf37caaef1ea75fce394c9b8c020155181005d219e1ede4c8d"
+    },
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "scripts/verify-byte-colour-feedback.mjs",
+      "sha256": "2c3a50a9a211328a619df2fbfe480ef7db1361d7ccd67bbfb1dac0cf94b173f2"
+    }
+  ],
+  "limits": "Source/invariant/identity checks only; fresh colour browser and personally inspected paint are recorded separately. Old receipts remain frozen."
+}

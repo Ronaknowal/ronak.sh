@@ -1,0 +1,24 @@
+versions numpy/POT 2.3.5 0.9.7
+barycentre [0.053239439, 0.393521127, 0.106478867, 0.393521127, 0.053239439] total 1.000000000
+barycentre log keys ['err', 'niter'] last error 8.729e-13
+barycentre coupling 0 [[0.053239433, 0.0, 6e-09, 0.0, 0.0], [0.39338916, 0.0, 0.000131967, 0.0, 0.0], [0.053239433, 0.0, 0.053239433, 0.0, 0.0], [0.000131967, 0.0, 0.39338916, 0.0, 0.0], [6e-09, 0.0, 0.053239433, 0.0, 0.0]]
+marginal residual 2.445e-13
+barycentre coupling 1 [[0.0, 0.0, 0.053239433, 0.0, 6e-09], [0.0, 0.0, 0.39338916, 0.0, 0.000131967], [0.0, 0.0, 0.053239433, 0.0, 0.053239433], [0.0, 0.0, 0.000131967, 0.0, 0.39338916], [0.0, 0.0, 6e-09, 0.0, 0.053239433]]
+marginal residual 2.444e-13
+soft POT plan [[0.350501447, 0.002431605], [0.165039602, 0.461910897]]
+soft scratch difference 1.388e-16
+soft objective terms [0.332510808, -1.008042429, 0.135506309, 0.130549333]
+soft full/reconciled log -0.409475979 -0.409475979
+soft stationarity 6.729e-13
+GW initial product plan [[0.0, 0.333333333, 0.0], [0.0, 0.0, 0.333333333], [0.333333333, 0.0, 0.0]]
+GW recomputed/log 0.000000000 0.000000000
+GW marginal residual/last update 0.000e+00 0.000e+00
+GW initial near witness plan [[0.0, 0.333333333, 0.0], [0.0, 0.0, 0.333333333], [0.333333333, 0.0, 0.0]]
+GW recomputed/log 0.000000000 0.000000000
+GW marginal residual/last update 0.000e+00 0.000e+00
+sleep ID/drug1/drug2 [[1, 0.7, 1.9], [2, -1.6, 0.8], [3, -0.2, 1.1], [4, -1.2, 0.1], [5, -0.1, -0.1], [6, 3.4, 4.4], [7, 3.7, 5.5], [8, 0.8, 1.6], [9, 0.0, 4.6], [10, 2.0, 3.4]]
+sleep sorted drug1/drug2 [-1.6, -1.2, -0.2, -0.1, 0.0, 0.7, 0.8, 2.0, 3.4, 3.7] [-0.1, 0.1, 0.8, 1.1, 1.6, 1.9, 3.4, 4.4, 4.6, 5.5]
+sleep W1 scratch/SciPy 1.580000000 1.580000000
+sleep W2 squared scratch/POT 2.758000000 2.758000000
+sleep actual paired squared displacement 3.858000000
+sleep marginal residual 0.000e+00

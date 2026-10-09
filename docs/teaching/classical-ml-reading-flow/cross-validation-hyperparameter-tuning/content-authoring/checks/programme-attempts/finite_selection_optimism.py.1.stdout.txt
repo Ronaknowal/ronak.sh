@@ -1,0 +1,20 @@
+labels (0, 0, 0, 0) scores ['1', '0'] winner 0 selected 1 fresh 1/2
+labels (0, 0, 0, 1) scores ['3/4', '1/4'] winner 0 selected 3/4 fresh 1/2
+labels (0, 0, 1, 0) scores ['3/4', '1/4'] winner 0 selected 3/4 fresh 1/2
+labels (0, 0, 1, 1) scores ['1/2', '1/2'] winner 0 selected 1/2 fresh 1/2
+labels (0, 1, 0, 0) scores ['3/4', '1/4'] winner 0 selected 3/4 fresh 1/2
+labels (0, 1, 0, 1) scores ['1/2', '1/2'] winner 0 selected 1/2 fresh 1/2
+labels (0, 1, 1, 0) scores ['1/2', '1/2'] winner 0 selected 1/2 fresh 1/2
+labels (0, 1, 1, 1) scores ['1/4', '3/4'] winner 1 selected 3/4 fresh 1/2
+labels (1, 0, 0, 0) scores ['3/4', '1/4'] winner 0 selected 3/4 fresh 1/2
+labels (1, 0, 0, 1) scores ['1/2', '1/2'] winner 0 selected 1/2 fresh 1/2
+labels (1, 0, 1, 0) scores ['1/2', '1/2'] winner 0 selected 1/2 fresh 1/2
+labels (1, 0, 1, 1) scores ['1/4', '3/4'] winner 1 selected 3/4 fresh 1/2
+labels (1, 1, 0, 0) scores ['1/2', '1/2'] winner 0 selected 1/2 fresh 1/2
+labels (1, 1, 0, 1) scores ['1/4', '3/4'] winner 1 selected 3/4 fresh 1/2
+labels (1, 1, 1, 0) scores ['1/4', '3/4'] winner 1 selected 3/4 fresh 1/2
+labels (1, 1, 1, 1) scores ['0', '1'] winner 1 selected 1 fresh 1/2
+constant rules mean 11/16
+duplicate rule mean 11/16
+all patterns mean 1
+changed pattern (2, Fraction(1, 1))

@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-06T16:04:51.516Z",
+  "reviewer": "root, independent of topic authors",
+  "checks": [
+    "Weighted overlapping-pair count versus actual replacement count",
+    "Greedy-prefix failure with a separate complete path and repaired continuation",
+    "Path partition/posterior/fractional EM, analytic winner boundary and shared-prefix marginal",
+    "UTF-8 payload/normalization/cluster bytes, every globe split, strict EOF, entropy boundaries and means",
+    "Mixture zero support, shared-word mass, MiB/tied storage, head/pair tradeoff and logit arithmetic",
+    "Unchanged native program/dataset identities and exact recorded held-out count series"
+  ],
+  "sourceHashes": {
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19",
+    "src/learn/data/byte-tokenization-model.js": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11",
+    "src/learn/data/multilingual-vocabulary-models.js": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9",
+    "src/learn/data/topics/tokenization.jsx": "d3f3b74cee46f21d884754fd0bc286eddcc1eee2844838f9a5bb9d4741c2205b",
+    "src/learn/data/topics/byte-level-tokenization.jsx": "8b6d8b39d1aa0f2a08090747036d1527f2fc0c3db8b8baf26a33344979142e2f",
+    "src/learn/data/topics/vocabulary-multilingual.jsx": "0b956d5a44e44304d2a08f002aa014d03f8f2572651b93f6dfe4faddcb4fa288",
+    "docs/teaching/tokenization/byte-level-tokenization-token-free-models/native-evidence.json": "028e51b53f36cedb00bc9881ae2239928638e473eee2738f56dc24773a3b6006",
+    "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/native-evidence.json": "c5535d9ffe15c10ed2477f8672ee01a4dfc622c227615eae5ece16e8330a9f60",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/author-evidence.json": "6d82457f21bca886f6407650e7903ceefd2c3a041569d4d95d92f63924d6f1fc"
+  },
+  "reusedBindings": {
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-provenance.json": "58047ab67319ff4ad1511508bf8f3cd96afa40ac129e070454e9203b76733741",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/tokenizer_libraries.py": "febb16e52cd5a0a5dec8039db1aab6cff85bcf6c3306b57bbb98300887cbdfc3",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/unigram_model.py": "5a3ea845833594ca5c7aaed1fb4d63ef92c0ed7d70d2af35436505e985b95d1d",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py": "086862e9a9fb0db1bb9a76f66e07ac2c5fb4344bd75708e46e940213932be8bf",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py": "0a25011f005042c45965cf93e4d7825d5e4d8449c9470f7519cfdd705487cd12",
+    "public/learn-code/byte-level-tokenization-token-free-models/byte_patches.py": "ca5d1ecf947365bc8147d8e89e172649165ebcc8cc89d6c9349473b0e27a148e",
+    "public/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py": "1fe7bbeb0376588e78ffc3dacfae1e34a845a3cef8864ab33a208b32de7e5206",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/flores_sample_provenance.md": "bf8f04425503a6a2e3dd92e804debf8c35a78a955b20a73d09e77da6e834de22",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/flores_tokenizer_sample.json": "3d5295ea2bebf100a0f95463f20fd0386665c84b8604fd6f65c7e9a58790a0d7",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/multilingual_sentencepiece.py": "69f3f7ad0d289c330f3a5705bbb4349d1fca7064f43b3551ac5f42fd1a1010c9",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/vocabulary_audit.py": "c3ea7bfb5219b1c166d8b7780ee99e01019592f209b50c846642739b3a7bf937",
+    "public/learn-code/vocabulary-design-multilingual-tokenization/vocabulary_migration.py": "4f05343523f2d23dd2d5ae1f1aa872b76cf9f2ff6b99eb97db9f0b658c2060d0"
+  },
+  "verifierHash": "d7b1c63e7f2f09424f1a08effabc4f5c795265ccce986107210b298078ecbeb7",
+  "limits": "Complementary analytic checks and original native input identity; does not rerun full tokenizer fits or certify rendered geometry."
+}

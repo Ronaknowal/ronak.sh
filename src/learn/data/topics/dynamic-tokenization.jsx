@@ -1,1065 +1,223 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+import { Prose, H2, H3, Code } from '../../components/content';
+import { MathBlock as SharedMathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { LessonIntro, LessonTable, Sources } from '../../components/lesson-labs/LessonElements.jsx';
+import { DictionaryContract, AdaptationTimeline, SupermergeGroups, MergeCompetition, RankedReplay, PathLattice, ProbeLoss, AdaptivePriority, ResidueTree, NeighborEntropy, SplitAndRemerge, RowCompaction, PrefixState, MetricsComparison, BudgetRows } from '../../components/lesson-labs/DynamicTokenizationFlow.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+
+const codeRoot = '/learn/examples/dynamic-tokenization/';
+const Program = ({ file, title }) => <RemoteCodeBlock source={`${codeRoot}${file}`} filename={file} title={title} />;
+const MathBlock = ({ children }) => <div className="dt-math" tabIndex={0} role="region" aria-label="Mathematical relationship"><SharedMathBlock>{children}</SharedMathBlock></div>;
+const Anchor = ({ id }) => <span id={id} className="dt-anchor" aria-hidden="true" />;
+const Exercise = ({ title, children, hint, solution }) => <div data-lesson-exercise className="lesson-exercise flow-check">
+  <p><strong>{title}</strong> {children}</p><details><summary>Hint</summary><div>{hint}</div></details>
+  <details><summary>Worked solution</summary><div>{solution}</div></details>
+</div>;
 
 const dynamicTokenization = {
-  title: "Dynamic Tokenization (ADAT, BoundlessBPE, LiteToken)",
-  readTime: "24 min",
-  content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        Every tokenizer this section has covered — BPE, WordPiece, Unigram, byte-level BPE,
-        ViT patches, VQ-VAE codebooks, RVQ for audio — shares one property: its vocabulary is
-        decided once, at training time, and then frozen for the life of the model. That is
-        not a detail. It is the single assumption that every piece of serving infrastructure
-        downstream of the tokenizer depends on. Embedding tables are allocated at a fixed
-        size. KV caches index by token ID. API billing meters bytes per token at a rate
-        fixed at model release. The vocabulary is load-bearing in a way that a schema is
-        load-bearing for a database: you can change it, but you have to reindex the world.
-      </Prose>
-
-      <Prose>
-        Dynamic tokenization is the name for a small cluster of research directions that
-        push on whether the vocabulary has to be that static. The motivation is a failure
-        mode easy to demonstrate. Consider a codebase that imports a new library published
-        last week — <Code>from pyrelic.retrieval import BM42Index</Code>. A production
-        tokenizer trained in 2024 has never seen <Code>pyrelic</Code> or <Code>BM42Index</Code>.
-        Its merge table knows nothing about them. When the line reaches the model, it will
-        come apart into a dozen pieces —
-        <Code>['p', 'yre', 'lic', '.', 'retrieval', ' import', ' BM', '42', 'Index']</Code>
-        is a plausible segmentation, and the exact split doesn't matter; the point is that
-        a name the programmer uses as an atomic identifier has been shredded into character-
-        class fragments. The model has to learn, at inference time, that these fragments
-        refer to one thing. Every repeated occurrence in the same file pays the same tax.
-      </Prose>
-
-      <Prose>
-        Generalize that failure: any static tokenizer is a bet, at training time, about what
-        text will look like. That bet can only age. Domain drift (new jargon, new libraries,
-        new product names, emerging slang, scientific vocabulary in fields that did not
-        exist during training) turns previously-compressive tokens into noise and turns
-        previously-rare bigrams into common ones. There is no feedback loop. The tokenizer
-        cannot update. The model's vocabulary literally could not be older than it is.
-      </Prose>
-
-      <Prose>
-        Three lines of recent work push on this. Meta's Byte-Latent Transformer (Pagnoni et
-        al., arXiv:2412.09871) asks whether the concept of a fixed vocabulary is necessary
-        at all — it operates directly on bytes and learns dynamically-sized patches whose
-        boundaries depend on the input. Kensho's BoundlessBPE (Schmidt et al., COLM 2025,
-        arXiv:2504.00178) relaxes the pre-tokenization constraint that forces BPE merges to
-        respect whitespace boundaries, producing a vocabulary of "superwords" that span
-        pre-tokens. A 2024 NeurIPS paper on adaptive LLM tokenization (ADAT, Zheng et al.)
-        refines the vocabulary itself using downstream-model feedback during training.
-        LiteToken (arXiv:2602.04706) analyzes intermediate-merge residues in existing
-        tokenizers and prunes them. None of these fit the naive "tokenizer that rebuilds
-        itself at inference" picture perfectly — and that discrepancy is itself the point.
-      </Prose>
-
-      <Callout accent="gold">
-        Honest framing. There is no production LLM as of this writing that uses a fully
-        dynamic, inference-time-mutable tokenizer. Dynamic tokenization is a frontier
-        topic. The papers exist, the experiments work, the engineering path to production
-        is not yet walked.
-      </Callout>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        Three angles are worth separating cleanly, because they are different ideas and
-        the literature muddles them. Each corresponds to a different thing you might mean
-        by "dynamic."
-      </Prose>
-
-      <H3>Adaptive boundaries</H3>
-
-      <Prose>
-        The unit of tokenization can be a function of the input rather than a lookup. A
-        learnable boundary predictor — a small network that reads characters or bytes and
-        outputs, for each gap between two bytes, a probability of inserting a token
-        boundary there — lets segmentation condition on context. The same three bytes
-        might form one token in prose and three tokens in code, depending on what
-        surrounds them. Charformer (Tay et al. 2021, arXiv:2106.12672) trains such a
-        predictor end-to-end with the downstream language-modeling loss, using a soft
-        gradient-based block scoring module (GBST). Byte-Latent Transformer extends the
-        idea: patches are segmented based on the entropy of the next byte, so the
-        tokenizer spends more granularity on information-dense regions and coarsens
-        through predictable runs. MambaByte (Wang et al. 2024, arXiv:2401.13660) takes
-        the dual position — operate on raw bytes, let the state-space model's gating
-        dynamics do the work a tokenizer would otherwise do.
-      </Prose>
-
-      <H3>Vocabulary growth</H3>
-
-      <Prose>
-        The vocabulary itself could be mutable. Most concretely: an inference-time
-        mechanism that watches a stream of tokens, notices that a particular adjacent
-        pair repeats enough times to be worth a single token, and adds it to the vocab.
-        BoundlessBPE does not do this at inference — it does it at training, by relaxing
-        the pre-tokenization barrier — but it points at the same idea: BPE's merge list
-        is artificially constrained by a one-time whitespace pre-split, and lifting that
-        constraint produces measurably better compression (at least 19.7% more bytes per
-        token in their reported results). The conceptual extrapolation, which no mainstream
-        system ships, is to let the merge table grow at inference when the input stream
-        justifies it.
-      </Prose>
-
-      <H3>Compression-aware, budget-bounded</H3>
-
-      <Prose>
-        Tokenization can be framed as rate-distortion under a fixed budget. Given a cap of
-        <Code>k</Code> tokens per unit text, which segmentation best preserves downstream
-        task performance? Schmidt et al. 2024 ("Tokenization Is More Than Compression,"
-        arXiv:2402.18376) explored this directly with PathPiece — a tokenizer that
-        segments into the minimum number of tokens for a given vocabulary — and reported
-        the non-obvious finding that fewer tokens is not always better. The more
-        interesting frame is content-adaptive: a scientific document full of molecular
-        notation should spend its token budget differently than an email. LiteToken
-        (arXiv:2602.04706) is related but narrower — it removes "residue" tokens that
-        appear during BPE training but are rarely emitted at inference, cutting vocab
-        size by roughly 10% without loss.
-      </Prose>
-
-      <Prose>
-        All three angles share one structural property. They move some decision that
-        static tokenization makes at training time to a later point — either to training
-        time but conditioned on the downstream model, or to inference time conditioned on
-        the input. Every gain compounds with the scale of that deferral, and every cost
-        is the engineering problem of making the new decision fast and deterministic.
-      </Prose>
-
-      {/* ======================================================================
-          3. MATHEMATICAL FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <Prose>
-        For learnable boundary prediction, the question is how gradients flow through a
-        discrete decision. Let <Code>x = (x₁, ..., xₙ)</Code> be a byte sequence and
-        <Code>b = (b₁, ..., bₙ₋₁)</Code> be the boundary indicators (<Code>bᵢ = 1</Code>
-        if there is a token boundary between <Code>xᵢ</Code> and <Code>xᵢ₊₁</Code>).
-        A boundary scorer outputs logits <Code>ℓᵢ</Code>, and we want a soft relaxation
-        that is differentiable. Charformer's GBST uses a convolution across candidate
-        block widths and takes a softmax over widths per position.
-      </Prose>
-
-      <MathBlock>
-        {"p(b_i = 1 \\mid x) = \\sigma(\\ell_i), \\qquad \\ell_i = f_\\theta(x_{i-c:i+c})"}
-      </MathBlock>
-
-      <Prose>
-        Rather than committing to a hard boundary, the representation at each position is a
-        soft mixture over possible block widths. Let <Code>h⁽ᵂ⁾</Code> denote the pooled
-        representation over width <Code>w</Code> centered at position <Code>i</Code>, and
-        let <Code>αᵢ⁽ᵂ⁾</Code> be the softmax-weighted attention over widths.
-      </Prose>
-
-      <MathBlock>
-        {"\\tilde{h}_i = \\sum_{w \\in W} \\alpha_i^{(w)} h_i^{(w)}, \\qquad \\alpha_i^{(w)} = \\mathrm{softmax}_w(\\mathrm{score}(h_i^{(w)}))"}
-      </MathBlock>
-
-      <Prose>
-        Gradients on the downstream loss flow through this soft mixture back to
-        <Code>f_θ</Code>. At inference, one can either keep the soft mixture (expensive)
-        or argmax the width (cheap, but loses the gradient that justified the design).
-        BLT replaces this with an entropy-based boundary criterion: insert a boundary
-        when the next-byte entropy under a small byte-level language model crosses a
-        threshold. That criterion is not itself learned, but the patch-encoder that
-        consumes the resulting bytes is.
-      </Prose>
-
-      <Prose>
-        For inference-time vocabulary extension, the math is simpler but worth making
-        explicit. Suppose the current vocabulary <Code>V</Code> has probability
-        distribution <Code>p</Code> over tokens, and a pair <Code>(a, b)</Code> with
-        joint frequency <Code>f(a, b)</Code> in a sliding window of length <Code>L</Code>
-        has been observed. Adding <Code>ab</Code> as a new vocab entry increases
-        probability mass on that specific composition.
-      </Prose>
-
-      <MathBlock>
-        {"\\Delta \\log P(\\text{window}) = f(a, b) \\cdot \\left[\\log p(ab) - \\log p(a) - \\log p(b)\\right]"}
-      </MathBlock>
-
-      <Prose>
-        The bracket is the pointwise mutual information of the pair under the unigram
-        model. It is positive exactly when <Code>(a, b)</Code> co-occurs more often than
-        independence would predict — which is the condition under which adding the merge
-        is a net win for compression. The trigger rule used by a typical pedagogical
-        implementation (cross a count threshold inside a sliding window) is a cheap
-        approximation of that PMI test.
-      </Prose>
-
-      <Prose>
-        For the rate-distortion framing, let <Code>R</Code> be the number of tokens
-        (rate) and <Code>D</Code> be a downstream-task loss (distortion). The
-        Pareto frontier <Code>D*(R)</Code> is the minimum distortion achievable at rate
-        <Code>R</Code>. A static tokenizer fixes one operating point; a content-adaptive
-        tokenizer chooses a different point per input.
-      </Prose>
-
-      <MathBlock>
-        {"D^*(R) = \\min_{T : |T(x)| \\le R} \\; \\mathbb{E}\\bigl[\\mathcal{L}(f_\\theta(T(x)), y)\\bigr]"}
-      </MathBlock>
-
-      <Prose>
-        No tokenizer in practice solves this optimization directly — the expectation is
-        intractable and the minimum over segmentations is combinatorial. But the frame
-        clarifies what experiments like PathPiece's actually tested: they minimized
-        <Code>R</Code> at a fixed vocabulary and measured <Code>D</Code>, and found the
-        relationship is not monotone.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        Because these methods are research-stage and lack canonical open implementations,
-        the code here is deliberately simplified. Each section builds a pedagogical
-        analog of one of the three ideas in section 2 — not the full paper, but the
-        core mechanism stripped to fit on one screen. Every implementation was run; the
-        outputs embedded as comments are the actual outputs.
-      </Prose>
-
-      <Callout accent="gold">
-        These are pedagogical simplifications. The real papers go further — they train
-        end-to-end, they use larger models for the scoring network, they benchmark on
-        downstream tasks — but they use the same core ideas shown here.
-      </Callout>
-
-      <H3>4a. Learnable segmentation (Charformer / BLT analog)</H3>
-
-      <Prose>
-        The simplest learnable segmenter reads pairs of adjacent characters and outputs
-        a boundary score. A real system would train this scorer end-to-end; here we use
-        two hand-designed scorers so the mechanism is visible. The first, <Code>
-        transition_scorer</Code>, places a boundary whenever the character class changes
-        (letter → digit, letter → punct, and so on) — a stripped-down heuristic analog of
-        what a learned scorer tends to converge on for code and scientific text. The
-        second, <Code>frequency_scorer</Code>, uses a tiny bigram frequency table and
-        breaks on rare bigrams — an analog of BLT's entropy-based boundary insertion.
-      </Prose>
-
-      <CodeBlock language="python">
-{`from collections import Counter
-
-def char_class(c):
-    if c.isalpha() and c.islower(): return "lower"
-    if c.isalpha() and c.isupper(): return "upper"
-    if c.isdigit():                 return "digit"
-    if c.isspace():                 return "space"
-    return "punct"
-
-def transition_scorer(left, right):
-    """Break on character-class transitions."""
-    return 1.0 if char_class(left) != char_class(right) else 0.0
-
-def frequency_scorer(pair_counts, threshold):
-    """Break on rare bigrams (entropy-like heuristic)."""
-    def score(left, right):
-        return 1.0 if pair_counts[(left, right)] < threshold else 0.0
-    return score
-
-def segment(text, scorer):
-    if not text: return []
-    out, cur = [], text[0]
-    for i in range(1, len(text)):
-        if scorer(text[i - 1], text[i]) >= 0.5:
-            out.append(cur); cur = text[i]
-        else:
-            cur += text[i]
-    out.append(cur)
-    return out
-
-samples = [
-    "the quick brown fox",
-    "compute_attention_scores(x, 42)",
-    "H2SO4 reacts with NaOH",
-    "TX-4891",
-]
-for s in samples:
-    print(f"{s!r:>40}  ->  {segment(s, transition_scorer)}")
-
-# Actual output (verified by running this code):
-#              'the quick brown fox' -> ['the', ' ', 'quick', ' ', 'brown', ' ', 'fox']
-#  'compute_attention_scores(x, 42)' -> ['compute', '_', 'attention', '_', 'scores',
-#                                        '(', 'x', ',', ' ', '42', ')']
-#           'H2SO4 reacts with NaOH' -> ['H', '2', 'SO', '4', ' ', 'reacts', ' ',
-#                                        'with', ' ', 'N', 'a', 'OH']
-#                          'TX-4891' -> ['TX', '-', '4891']`}
-      </CodeBlock>
-
-      <Prose>
-        Notice what changes between samples. The same scorer produces seven tokens on the
-        prose sample, eleven on the code sample, and splits the chemical formula at
-        digit–letter boundaries. No lookup table is doing this. The segmentation is a
-        function of the input, recomputed from scratch each time. That is the property
-        Charformer and BLT have in common, stripped of everything else. A learned scorer
-        would replace the hand-written <Code>char_class</Code> logic with a trained
-        network, but the flow is identical.
-      </Prose>
-
-      <Prose>
-        Swap in the frequency-based scorer and the segmentation changes again — this
-        time aggressively, because a bigram table learned from nine words of training
-        data thinks almost every byte-pair is rare.
-      </Prose>
-
-      <CodeBlock language="python">
-{`corpus = "the quick brown fox jumps over the lazy dog the the the"
-pair_counts = Counter()
-for i in range(len(corpus) - 1):
-    pair_counts[(corpus[i], corpus[i + 1])] += 1
-
-scorer = frequency_scorer(pair_counts, threshold=2)
-print(segment("the quick brown fox", scorer))
-print(segment("TX-4891", scorer))
-
-# Actual output:
-# ['the ', 'q', 'u', 'i', 'c', 'k', ' ', 'b', 'r', 'o', 'w', 'n', ' ',
-#  'f', 'o', 'x']
-# ['T', 'X', '-', '4', '8', '9', '1']`}
-      </CodeBlock>
-
-      <Prose>
-        The word <Code>the</Code> survives as a unit because <Code>t-h</Code> and
-        <Code>h-e</Code> and <Code>e-(space)</Code> all appear at least twice in the
-        corpus — they pass the threshold. Everything else fragments. In production, the
-        scorer would be a neural net trained on billions of tokens rather than nine
-        words, and the result would land between these two extremes: some parts of the
-        input stay coarse, the novel parts fragment finely.
-      </Prose>
-
-      <H3>4b. Inference-time vocabulary growth (BoundlessBPE-style conceptual)</H3>
-
-      <Prose>
-        BoundlessBPE proper does its merging at training time and emits a fixed
-        vocabulary. The conceptual extrapolation — letting the merge table grow at
-        inference — is useful to build because it exposes the engineering problems
-        (caching, determinism) directly. The implementation below starts with a simple
-        base vocabulary of single ASCII characters, greedy-encodes each incoming text
-        chunk, tracks pair frequencies inside a sliding window, and promotes a pair to
-        a vocab entry once it crosses a count threshold.
-      </Prose>
-
-      <CodeBlock language="python">
-{`from collections import Counter, deque
-
-BASE_VOCAB = set(
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    "0123456789_-. ,:;()[]{}/"
-)
-
-def greedy_encode(text, vocab):
-    """Longest-match encode against the current vocab."""
-    i, out = 0, []
-    max_len = max(len(t) for t in vocab)
-    while i < len(text):
-        matched = None
-        for L in range(min(max_len, len(text) - i), 0, -1):
-            if text[i:i + L] in vocab:
-                matched = text[i:i + L]; break
-        if matched is None:
-            out.append(text[i]); i += 1
-        else:
-            out.append(matched); i += len(matched)
-    return out
-
-class GrowingTokenizer:
-    def __init__(self, base_vocab, window=400, threshold=3):
-        self.vocab = set(base_vocab)
-        self.window, self.threshold = window, threshold
-        self.history = deque()
-        self.pair_counts = Counter()
-        self.added = []
-
-    def _observe(self, pair):
-        self.history.append(pair)
-        self.pair_counts[pair] += 1
-        if len(self.history) > self.window:
-            old = self.history.popleft()
-            self.pair_counts[old] -= 1
-            if self.pair_counts[old] <= 0:
-                del self.pair_counts[old]
-
-    def process(self, text):
-        tokens = greedy_encode(text, self.vocab)
-        for i in range(len(tokens) - 1):
-            pair = (tokens[i], tokens[i + 1])
-            self._observe(pair)
-            if (self.pair_counts[pair] >= self.threshold
-                    and (pair[0] + pair[1]) not in self.vocab):
-                self.vocab.add(pair[0] + pair[1])
-                self.added.append(pair[0] + pair[1])
-        return greedy_encode(text, self.vocab)`}
-      </CodeBlock>
-
-      <Prose>
-        Run it on a stream where the string <Code>TX-4891</Code> recurs across six
-        chunks of a long document. The static baseline re-fragments it every time; the
-        growing tokenizer builds up merges for <Code>TX</Code>, <Code>-4</Code>,
-        <Code>891</Code>, and eventually <Code>TX-4</Code> and <Code>-489</Code>, and
-        the sequence length drops.
-      </Prose>
-
-      <CodeBlock language="python">
-{`stream = [
-    "order TX-4891 shipped. ",
-    "status of TX-4891 is pending. ",
-    "TX-4891 was delayed. ",
-    "rebill TX-4891 next week. ",
-    "TX-4891 TX-4891 TX-4891 ",
-    "final: TX-4891 closed.",
-]
-tok = GrowingTokenizer(BASE_VOCAB, window=400, threshold=3)
-
-for i, chunk in enumerate(stream, 1):
-    s = len(greedy_encode(chunk, BASE_VOCAB))
-    d = len(tok.process(chunk))
-    print(f"chunk {i}: static={s:>3}  dynamic={d:>3}  vocab=+{len(tok.added)}")
-
-# Actual output (verified by running this code):
-# chunk 1: static= 23  dynamic= 23  vocab=+0
-# chunk 2: static= 30  dynamic= 30  vocab=+0
-# chunk 3: static= 21  dynamic= 15  vocab=+9
-# chunk 4: static= 26  dynamic= 21  vocab=+9
-# chunk 5: static= 24  dynamic=  6  vocab=+12
-# chunk 6: static= 22  dynamic= 15  vocab=+14
-#
-# totals:  static=146  dynamic=110  compression=1.33x  merges added=14
-# final additions: ['TX','X-','-4','48','89','91','1 ','s ','. ',
-#                   'TX-4','-489','891 ','ed','d.']`}
-      </CodeBlock>
-
-      <Prose>
-        The dynamic tokenizer compresses the stream to 75% of its static length by the
-        end, with the savings concentrated in chunk 5 where <Code>TX-4891</Code> repeats
-        three times back-to-back and gets absorbed into a two-token encoding instead of
-        seven. The new merges it picks up are telling: it discovers not just
-        <Code>TX-4</Code> and <Code>891</Code> but also <Code>{"'s '"}</Code>,
-        <Code>{"'. '"}</Code>, <Code>ed</Code> — unit-less pairs that happen to recur
-        often enough in English to be worth coalescing. A real system would be smarter
-        about PMI versus raw count, would cap vocab growth, and would have to solve the
-        problem that chunk 3's token IDs are not the same as chunk 4's token IDs because
-        the vocab grew in between. That problem is section 9.
-      </Prose>
-
-      <H3>4c. Rate-distortion-aware tokenization</H3>
-
-      <Prose>
-        The third implementation is the most directly new. Given a fixed token budget
-        <Code>k</Code> per input, find a segmentation into exactly <Code>k</Code> pieces
-        that preserves information best. The proxy we use for "information" is the
-        unigram surprisal of each character — more-common characters (like a run of
-        <Code>a</Code>) carry few bits, rare characters (a parenthesis or a digit in a
-        letter-heavy string) carry many. A static strategy cuts the string into equal
-        character widths, which wastes tokens on boring runs. An adaptive strategy
-        solves for cuts that equalize bits-per-token.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import math
-from collections import Counter
-
-def char_logp(text):
-    c = Counter(text); n = sum(c.values())
-    return {ch: math.log2(n / v) for ch, v in c.items()}
-
-def surprisal(seg, lp):
-    return sum(lp.get(c, 0.0) for c in seg)
-
-def static_segmentation(text, k):
-    n = len(text); cuts = [round(i * n / k) for i in range(k + 1)]
-    return [text[cuts[i]:cuts[i + 1]] for i in range(k)]
-
-def adaptive_segmentation(text, k, lp):
-    """DP minimizing the variance of bits across k segments."""
-    n = len(text)
-    ps = [0.0]
-    for c in text:
-        ps.append(ps[-1] + lp.get(c, 0.0))
-    target = ps[n] / k
-
-    INF = float("inf")
-    dp = [[INF] * (k + 1) for _ in range(n + 1)]
-    back = [[-1] * (k + 1) for _ in range(n + 1)]
-    dp[0][0] = 0.0
-    for i in range(1, n + 1):
-        for m in range(1, min(k, i) + 1):
-            for j in range(m - 1, i):
-                bits = ps[i] - ps[j]
-                c = dp[j][m - 1] + (bits - target) ** 2
-                if c < dp[i][m]:
-                    dp[i][m] = c; back[i][m] = j
-    cuts = [n]; i, m = n, k
-    while m > 0:
-        j = back[i][m]; cuts.append(j); i, m = j, m - 1
-    cuts.reverse()
-    return [text[cuts[i]:cuts[i + 1]] for i in range(len(cuts) - 1)]
-
-text = "aaaaaaaaaaaaTX-4891bbbbbbbbbbC(=O)OHccccccccccccc"
-lp = char_logp(text)
-for name, segs in [("static", static_segmentation(text, 6)),
-                   ("adaptive", adaptive_segmentation(text, 6, lp))]:
-    bits = [surprisal(s, lp) for s in segs]
-    m = sum(bits) / len(bits)
-    var = sum((b - m) ** 2 for b in bits) / len(bits)
-    print(f"{name}: segments={segs}  var={var:.2f}")
-
-# Actual output (verified by running this code):
-# static:   ['aaaaaaaa','aaaaTX-4','891bbbbb','bbbbbC(=O',')OHccccc','cccccccc']
-#           var=45.89
-# adaptive: ['aaaaaaaaaaaa','TX-4','891bbbb','bbbbbbC(','=O)OH','ccccccccccccc']
-#           var=1.47`}
-      </CodeBlock>
-
-      <Prose>
-        The variance of bits-per-segment drops by 31x under the adaptive strategy. The
-        boring <Code>aaa...</Code> prefix gets a single 12-character token because each
-        of those characters carries almost no information. The high-surprisal region
-        <Code>=O)OH</Code> gets a dedicated 5-character token because squeezing it into
-        a larger one would have put too many bits into a single slot. Both strategies
-        produce exactly six tokens. The difference is entirely in where the cuts go.
-      </Prose>
-
-      <Prose>
-        This is what "rate-distortion-aware" means in practice. Not free-lunch compression
-        — both outputs have the same token count — but better use of that budget for
-        downstream prediction. A language model consuming the adaptive output has the
-        high-information regions cleanly delimited; a model consuming the static output
-        has to learn to handle tokens that straddle meaningful boundaries like
-        <Code>bbbbbC(=O</Code>, where the relevant structure is cut in two.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        Be honest: no major production LLM as of this writing uses a fully-dynamic
-        tokenizer in the sense implied by section 4. The closest production-scale
-        examples are partial, and worth naming precisely so the gap to full dynamism is
-        visible.
-      </Prose>
-
-      <H3>Byte-level BPE (production, partial)</H3>
-
-      <Prose>
-        GPT-2/3/4, Llama's byte-level fallback, and every modern tokenizer that handles
-        arbitrary Unicode uses byte-level BPE. It is not dynamic in the sense of
-        adapting after training, but it is graceful in one specific way: anything
-        representable as UTF-8 bytes has a valid (if long) tokenization, so the "OOV"
-        failure mode never occurs. That counts as the most production-mature form of
-        dynamism available today — zero-shot handling of any input, with degraded
-        compression on the tail.
-      </Prose>
-
-      <H3>Byte-Latent Transformer (Meta, research-scale but frontier)</H3>
-
-      <Prose>
-        Meta published BLT in December 2024 with a FLOP-controlled scaling study up to
-        8B parameters and 4T training bytes. The patch encoder segments bytes based on
-        next-byte entropy (computed by a small auxiliary LM), producing patches whose
-        boundaries depend on the input. Code and model weights are on the
-        <Code>facebookresearch/blt</Code> repo. This is the closest thing to
-        production-grade dynamic tokenization as of 2026 — "production-grade" in the
-        sense that it has been trained at scale with published results, not that it is
-        serving user traffic. Whether Meta has moved Llama in this direction at scale is
-        not publicly confirmed.
-      </Prose>
-
-      <H3>BoundlessBPE (research code, training-time)</H3>
-
-      <Prose>
-        Kensho released <Code>boundlessbpe</Code> (GitHub: <Code>kensho-technologies/
-        boundlessbpe</Code>) alongside the COLM 2025 paper. The algorithm runs at
-        training time, produces a fixed output vocabulary, and plugs into standard
-        serving stacks — so it is "production-compatible" but not "dynamic at inference."
-        It demonstrates the training-time variant of the vocabulary-growth idea: lift
-        the pre-tokenization constraint that forces merges to respect whitespace, get a
-        measurably better final vocabulary, ship it the normal way.
-      </Prose>
-
-      <H3>LiteToken (research, post-hoc)</H3>
-
-      <Prose>
-        LiteToken (arXiv:2602.04706) runs on an already-trained tokenizer and removes
-        intermediate merge residues — tokens that appeared during BPE training but are
-        rarely emitted at inference. The paper reports ~10% of tokens in major
-        tokenizers (Qwen-3, Llama-3.1) are such residues. Removing them reduces
-        parameters and improves robustness on misspelled inputs without retraining.
-        This is a post-hoc simplification, not a dynamic adaptation — but it highlights
-        that the static vocabulary a model ships with is not always well-chosen, and
-        that it is possible to improve it after the fact.
-      </Prose>
-
-      <H3>Tokenizer retraining (slow and offline)</H3>
-
-      <Prose>
-        The closest thing to adaptation in practice is the process of retraining a
-        tokenizer alongside a new model generation. Llama 2 → Llama 3 shipped a
-        substantially different tokenizer, re-estimated on updated training data.
-        GPT-4o's tokenizer handles non-English text better than GPT-4's by design. This
-        is a slow form of adaptation — on the order of model-release cadence — and it
-        does not help with within-inference or within-document distribution shift. It
-        is the version of dynamism that has always existed and will always exist; the
-        research question is whether there is value in anything faster.
-      </Prose>
-
-      <Callout accent="blue">
-        If you are building an LLM application today and wondering whether to adopt a
-        dynamic tokenizer — don't. Use byte-level BPE. The frontier is worth
-        understanding; it is not yet worth integrating.
-      </Callout>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <Prose>
-        The abstract claim of section 2a — "the same bytes can become different tokens
-        in different contexts" — is easier to see on concrete inputs. Step through the
-        examples below. Each one shows how an adaptive segmenter redraws its boundaries
-        based on the content type.
-      </Prose>
-
-      <StepTrace
-        label="adaptive boundaries shift with content"
-        steps={[
-          { label: "English prose", render: () => (
-            <TokenStream tokens={["The", " ", "quick", " ", "brown", " ", "fox", " ", "jumps"]} />
-          ) },
-          { label: "Python code", render: () => (
-            <TokenStream tokens={["def", " ", "compute", "_", "scores", "(", "x", ",", " ", "42", ")"]} />
-          ) },
-          { label: "Chemical notation", render: () => (
-            <TokenStream tokens={["H", "2", "SO", "4", " ", "+", " ", "Na", "OH"]} />
-          ) },
-          { label: "Identifier in long context", render: () => (
-            <TokenStream tokens={[{ label: "TX-4891", color: "#f59e0b" }, " ", "shipped"]} />
-          ) },
-          { label: "Same identifier, static tokenizer", render: () => (
-            <TokenStream tokens={["T", "X", "-", "48", "91", " ", "shipped"]} />
-          ) },
-        ]}
-      />
-
-      <Prose>
-        The fourth and fifth steps show the same seven-character identifier under two
-        different tokenizers. An adaptive tokenizer that has seen <Code>TX-4891</Code>
-        enough times in a document treats it as a single token; a static tokenizer
-        fragments it into five. In a thousand-token document where the identifier
-        appears forty times, that difference is 160 tokens of context-window savings —
-        roughly one full code block's worth.
-      </Prose>
-
-      <Prose>
-        The second visualization: how sequence length on a recurring-pattern stream
-        evolves as the growing tokenizer from section 4b accumulates merges. Static
-        stays flat; dynamic drops sharply once the repeating pattern crosses the
-        threshold and gets promoted.
-      </Prose>
-
-      <Plot
-        label="tokens per chunk — static vs adaptive on a recurring-identifier stream"
-        xLabel="chunk index"
-        yLabel="tokens"
-        series={[
-          { name: "static", color: colors.textMuted, points: [[1, 23], [2, 30], [3, 21], [4, 26], [5, 24], [6, 22]] },
-          { name: "adaptive", color: colors.gold, points: [[1, 23], [2, 30], [3, 15], [4, 21], [5, 6], [6, 15]] },
-        ]}
-      />
-
-      <Prose>
-        The sharp drop at chunk 5 is where <Code>TX-4891 TX-4891 TX-4891</Code> repeats
-        three times in a row; by that point the merge table has absorbed enough of the
-        prefix that each occurrence compresses to two tokens instead of seven. Chunk 6
-        rebounds because a new substring — <Code>ed.</Code> — has not yet been merged.
-        This is the characteristic dynamic-tokenization curve: static is flat, adaptive
-        is step-function-like with a lag proportional to the merge threshold.
-      </Prose>
-
-      <Prose>
-        Third visualization: static vs adaptive on identical input. The bytes are the
-        same; the tokens are not.
-      </Prose>
-
-      <TokenStream
-        label="static byte-level BPE — fragments the novel identifier"
-        tokens={["from", " ", "py", "rel", "ic", ".", "retrieval", " import", " BM", "42", "Index"]}
-      />
-
-      <TokenStream
-        label="adaptive tokenizer — has absorbed the identifier into units"
-        tokens={[
-          "from",
-          " ",
-          { label: "pyrelic", color: "#f59e0b" },
-          ".",
-          "retrieval",
-          " import",
-          " ",
-          { label: "BM42Index", color: "#f59e0b" },
-        ]}
-      />
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <Prose>
-        The honest answer for almost every production application today is: use static
-        byte-level BPE. The ecosystem is built around it; the tooling is mature; the
-        costs are known. Dynamic techniques are worth the engineering tax only in
-        specific cases.
-      </Prose>
-
-      <H3>Use static byte-level BPE when</H3>
-
-      <Prose>
-        You are shipping a general-purpose LLM, a chat product, an API, or any system
-        where the vocabulary distribution is roughly stable over the model's deployed
-        lifetime. You use mainstream serving infrastructure (vLLM, TGI, Triton) and
-        value KV caching and request batching. You want token costs to be predictable
-        across runs of the same input. You have not measured a specific failure mode
-        that dynamism would fix. This covers probably 95% of current LLM deployments.
-      </Prose>
-
-      <H3>Consider BoundlessBPE-style training-time fixes when</H3>
-
-      <Prose>
-        You are training a new model from scratch and care about tokenizer efficiency
-        at the margin — bytes per token on your target corpus is a KPI. The target
-        corpus has patterns that cross whitespace boundaries systematically (function
-        calls with common argument shapes, templated log lines, compound scientific
-        terms). You are willing to run tokenizer training as a one-time offline step.
-        You want the output to be a standard fixed vocabulary that ships normally.
-      </Prose>
-
-      <H3>Consider BLT / learnable boundaries when</H3>
-
-      <Prose>
-        You are doing research on LLM architecture, particularly at Meta scale. You
-        want to evaluate whether removing tokenization as a hyperparameter improves
-        scaling laws. You are willing to pay the engineering cost of a custom serving
-        stack. You value robustness to noise and non-Latin-script performance. You have
-        the compute budget to train a byte-level model from scratch.
-      </Prose>
-
-      <H3>Consider inference-time vocab growth (hypothetical) when</H3>
-
-      <Prose>
-        Your corpus distribution shifts dramatically over time — a conversational
-        agent accumulating user-specific jargon across sessions, a code assistant
-        working inside a single repository with its own naming conventions, a
-        long-document RAG system where the same named entities recur thousands of
-        times per document. Your serving stack is bespoke enough to tolerate the
-        cache-invalidation and determinism problems. You are willing to treat this
-        as an open research problem in your own production system. Very few teams
-        should be in this bucket.
-      </Prose>
-
-      <H3>Consider LiteToken-style residue pruning when</H3>
-
-      <Prose>
-        You have an already-deployed model and an already-trained tokenizer, and you
-        want robustness to misspelled inputs without retraining. This is the cheapest
-        option on the table — post-hoc analysis, no training, ships as a different
-        tokenizer config.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn&apos;t</H2>
-
-      <Prose>
-        Every dynamic technique trades something away that static tokenization gives for
-        free. Enumerate the axes explicitly.
-      </Prose>
-
-      <H3>Inference latency</H3>
-
-      <Prose>
-        A lookup-table tokenizer is effectively free — a few microseconds per thousand
-        characters, dominated by memory access. A learnable boundary predictor adds a
-        forward pass through a small network for every input: BLT's entropy LM, for
-        instance, is a distilled byte-level model that is not free but is small. In
-        published BLT numbers the inference efficiency gain from coarser patches
-        outweighs the cost of the boundary predictor at scale, but the crossover point
-        depends on model size. An inference-time merge-growth tokenizer pays even more:
-        every merge decision requires a pair-count update and a possible vocabulary
-        write, and the re-encoding step runs every time the vocab changes. Allowance
-        for this cost is what separates research code from serving-ready code.
-      </Prose>
-
-      <H3>Training compatibility</H3>
-
-      <Prose>
-        Most training frameworks assume a fixed vocabulary size at dataloader time,
-        because the embedding matrix and output head need to be allocated at known
-        shape. A dynamic-vocab approach requires either pre-allocating a maximum vocab
-        size (wasteful memory, especially for the output head which is often tied to
-        the embedding) or rebuilding the embedding at runtime (latency-hostile,
-        gradient-hostile). BLT works around this by not having a vocab at all — patches
-        are summarized into continuous vectors without an embedding-table lookup —
-        which is a sharp architectural departure, not a drop-in change.
-      </Prose>
-
-      <H3>Memory overhead of growing vocabulary</H3>
-
-      <Prose>
-        Assuming each new entry is ~10 bytes for the string plus overhead, an
-        inference-time tokenizer that grows unboundedly across a long session can
-        accumulate megabytes of vocabulary state per user. This is tractable at
-        per-request scale; it is hostile to the shared-state model of most serving
-        stacks, where user data should not persist across requests. A session-scoped
-        vocabulary is one reasonable middle ground — grow during a conversation, discard
-        at the end — but it surrenders the cross-session learning that would motivate
-        the whole scheme.
-      </Prose>
-
-      <H3>KV cache implications</H3>
-
-      <Prose>
-        This is the single hardest scaling problem, and it has its own subsection in
-        failure modes (section 9). The one-line summary: KV caches index by token
-        position and implicitly by token identity. If two requests tokenize the same
-        input differently — even at one position — the caches are not interchangeable.
-        At serving scale where cache hit rates in the 60-90% range are the margin
-        between viable and unviable, a tokenizer that produces different outputs on
-        the same input is dead on arrival. Session-scoped dynamics are more viable
-        here because the cache can be scoped to the session too; cross-session
-        dynamics are the hard version.
-      </Prose>
-
-      <H3>Batching</H3>
-
-      <Prose>
-        Batched inference assumes requests in the batch share a vocabulary for the
-        output head. If request A has added merges that request B has not, the output
-        logits for A have a different shape than for B, and efficient batching breaks.
-        Workarounds exist (always pre-allocate max vocab, mask unused rows) but they
-        give back most of the compression gains that motivated the dynamism.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes &amp; gotchas</H2>
-
-      <H3>KV cache invalidation</H3>
-
-      <Prose>
-        A shared prefix between two requests is the single largest source of cache
-        reuse in modern serving. If request 1 tokenizes "you are a helpful assistant"
-        to one sequence of IDs and request 2 — arriving five seconds later, after the
-        vocabulary has grown — tokenizes the same prefix to a different sequence, the
-        cache does not hit. This is not a performance regression measured in percent.
-        It is potentially a 10-100x slowdown on workloads that relied on prefix
-        caching, which is most of them.
-      </Prose>
-
-      <H3>Token ID drift across inference sessions</H3>
-
-      <Prose>
-        In a naive implementation, the integer ID assigned to a merged pair depends on
-        the order in which merges were added. Two servers running the same model may
-        assign different IDs to "TX-4891" if they encountered different input streams.
-        For single-node serving this is cosmetic; for distributed inference, model
-        snapshots, fine-tuning on serving-era logs, or reproducing a bug reported by a
-        user three weeks later, it is a correctness hazard. Every ID must be
-        deterministic from the state that produced it — which in practice means logging
-        the full merge sequence, which in practice means giving up most of the storage
-        savings dynamism offered.
-      </Prose>
-
-      <H3>Serving infra assumes fixed embedding table size</H3>
-
-      <Prose>
-        vLLM, TGI, Triton, and most production stacks allocate the embedding matrix
-        and output projection at model-load time to a known shape. Dynamic vocab
-        growth requires either pre-allocating a ceiling (wasteful, and the ceiling
-        must be picked correctly) or adding runtime allocation inside the hot path
-        (a category of bug that every ML engineer has spent a week debugging). Any
-        approach that merely "grows the vocab" without solving this is not deployable.
-      </Prose>
-
-      <H3>Unbounded growth on adversarial input</H3>
-
-      <Prose>
-        A simple adversary feeds the tokenizer a long string of unique, repeating
-        byte patterns designed to trigger merges: <Code>ABAB ABAB ABAB...</Code>,
-        followed by <Code>ABABAB ABABAB...</Code>, followed by the three-tier version,
-        and so on. Each generation passes the threshold and gets promoted. Vocabulary
-        grows unboundedly. Memory OOMs. Any production system must cap growth, which
-        re-introduces a version of the static-vocab constraint the scheme was meant
-        to avoid.
-      </Prose>
-
-      <H3>Privacy leaks through vocabulary state</H3>
-
-      <Prose>
-        Under-examined in the literature but immediately concerning. A tokenizer that
-        has adapted to one user's conversation contains, in its merge table, a
-        compressed summary of that user's recurring language — names, project
-        identifiers, domain jargon. If the vocabulary state persists across user
-        boundaries, that state is a data-leakage vector. Any shared-tokenizer design
-        needs explicit scoping (session, user, organization) and a strong story about
-        how state leaves when it is supposed to. Shared-across-users cross-session
-        vocabulary growth is almost certainly a GDPR violation waiting to happen.
-      </Prose>
-
-      <H3>Evaluation inconsistency</H3>
-
-      <Prose>
-        Perplexity, bits-per-byte, and most token-level metrics assume a fixed
-        tokenization of the evaluation set. If the same text is tokenized to different
-        numbers of tokens across runs, perplexity numbers are not comparable. This is
-        why BLT's published results are denominated in bits-per-byte rather than
-        perplexity-per-token: the denominator is invariant to the tokenization scheme.
-        Any team evaluating a dynamic tokenizer must adopt byte-level metrics or
-        accept that their numbers are not directly comparable to published static-vocab
-        results.
-      </Prose>
-
-      <H3>Debugging becomes harder</H3>
-
-      <Prose>
-        A serving bug at 2 AM where a particular user's prompt produces bad output is
-        already hard to reproduce. Add "and the tokenizer has evolved since training"
-        and reproduction requires snapshotting the full tokenizer state alongside the
-        prompt. This is possible but adds operational burden that every team considering
-        dynamism must budget for.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        The naming in the original topic title deserves a correction. ADAT, BoundlessBPE,
-        and LiteToken all correspond to real published work, but they are not all
-        inference-time-adaptive tokenizers in the sense the title suggests. ADAT
-        (Zheng et al., NeurIPS 2024) refines vocabulary during training using
-        downstream-model feedback; BoundlessBPE (Schmidt et al., COLM 2025) relaxes the
-        pre-tokenization barrier at training time; LiteToken (arXiv:2602.04706) prunes
-        residue tokens from existing tokenizers. The closest work to actual
-        inference-time dynamism is Meta's BLT. The taxonomy in section 2 reflects this
-        corrected understanding.
-      </Prose>
-
-      <ul style={{ color: colors.textSecondary, lineHeight: 1.7, fontSize: 14 }}>
-        <li>
-          <strong>Byte-Latent Transformer (BLT)</strong> — Pagnoni, Pasunuru, Rodriguez et
-          al. Meta, December 2024. arXiv:2412.09871. "Patches Scale Better Than Tokens."
-          First FLOP-controlled scaling study of byte-level models up to 8B/4T. Closest
-          production-scale dynamic tokenization work.
-        </li>
-        <li>
-          <strong>Charformer</strong> — Tay, Tran, Ruder et al., Google. arXiv:2106.12672
-          (2021, revised 2022). "Fast Character Transformers via Gradient-based Subword
-          Tokenization." The GBST module is the canonical example of learnable boundary
-          prediction.
-        </li>
-        <li>
-          <strong>MambaByte</strong> — Wang, Gangavarapu, Yan, Rush. Cornell.
-          arXiv:2401.13660 (2024). "Token-free Selective State Space Model." Byte-level
-          alternative to tokenization via SSM gating, with 2.6x speedup over naive
-          implementation via speculative decoding.
-        </li>
-        <li>
-          <strong>BoundlessBPE</strong> — Schmidt, Reddy, Tanner, Pinter. COLM 2025.
-          arXiv:2504.00178. "Breaking the Pre-tokenization Barrier." Relaxes the whitespace
-          constraint in BPE; 19.7%+ bytes-per-token improvement. Code:
-          <Code>kensho-technologies/boundlessbpe</Code>.
-        </li>
-        <li>
-          <strong>ADAT (Adaptive Tokenizers via LLM Feedback)</strong> — Zheng et al.
-          NeurIPS 2024. "Enhancing Large Language Models through Adaptive Tokenizers."
-          Iteratively refines vocabulary based on downstream-model losses during training.
-        </li>
-        <li>
-          <strong>LiteToken</strong> — arXiv:2602.04706. "Removing Intermediate Merge
-          Residues From BPE Tokenizers." Finetuning-free pipeline that prunes ~10% of
-          tokens in Qwen-3 and Llama-3.1 without performance loss.
-        </li>
-        <li>
-          <strong>Tokenization Is More Than Compression</strong> — Schmidt, Reddy, Zhang et
-          al. EMNLP 2024. arXiv:2402.18376. Introduces PathPiece (minimum-token segmenter)
-          and empirically refutes the hypothesis that fewer tokens ⇒ better downstream
-          performance.
-        </li>
-      </ul>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <Prose>
-        <strong>1.</strong> A serving stack uses prefix caching — if two requests share
-        the first N tokens, the KV activations for those N positions are reused. Explain
-        precisely why an inference-time-growing tokenizer breaks this, and describe one
-        mitigation that preserves at least some cache reuse.
-      </Prose>
-
-      <Prose>
-        <strong>2.</strong> Design an adaptive tokenizer scoped to a single long
-        conversation with one user. What input signal would you use to trigger a new
-        merge? What would the throwaway policy be at session end, and what
-        implications does that have for cross-session behavior?
-      </Prose>
-
-      <Prose>
-        <strong>3.</strong> Research papers on adaptive tokenization tend to benchmark on
-        code, scientific text, or non-English languages — not on general web text. Why?
-        What does that imply about the upper bound of gains on general-purpose LLM
-        workloads?
-      </Prose>
-
-      <Prose>
-        <strong>4.</strong> The implementation in section 4b observes pair frequencies in
-        a sliding window and promotes a pair once it crosses a count threshold. What goes
-        wrong if you replace "count threshold" with "PMI threshold" naively? (Hint:
-        consider the PMI of a rare character pair that co-occurs every time.) How would
-        you fix it?
-      </Prose>
-
-      <Prose>
-        <strong>5.</strong> BLT uses next-byte entropy from a small auxiliary language
-        model as its boundary criterion. Why entropy rather than, say, raw next-byte
-        probability? What does entropy capture about the local segmentation decision
-        that probability alone does not?
-      </Prose>
-
-      <Prose>
-        Dynamic tokenization is the frontier frontier. The ideas are clear; the papers
-        are published; the engineering cost of shipping them is large and mostly
-        unpaid. Over the next few years either the cost comes down — through better
-        serving infrastructure, better APIs for KV management, cheaper learned scorers
-        — or the field concludes that static byte-level BPE plus periodic retraining is
-        a local optimum worth staying at. Both outcomes are plausible. What is not
-        plausible is that the current arrangement — tokenizers designed in 2023 running
-        on inputs the world produces in 2026 — stays stable forever.
-      </Prose></section>
-    </div>
-  ),
+  title: 'Dynamic Tokenization (ADAT, BoundlessBPE, LiteToken)',
+  readTime: '~65 min read + programs and practice',
+  content: () => <div className="lesson-flow dynamic-tokenization-flow">
+    <LessonIntro prerequisites="The preceding text lessons introduced UTF-8 bytes, BPE merges, Unigram paths, integer IDs and embedding rows. We reconnect each where needed. Basic Python and arithmetic are enough for the manual traces; the probability and model-loss calculations are explained before the programs." exampleKind="Python + tokenization and vocabulary investigations">
+      <p>Can a tokenizer spend its rows more usefully? Follow three concrete interventions: learn across selected word boundaries, use a small language model to select pieces, and clean residues from an existing vocabulary. For a first pass, follow sections 1–10 in order; section 11 extends the mechanisms to deployment decisions. Trace the drawings, run the complete programs where they appear, then test the altered cases in the practice.</p>
+    </LessonIntro>
+
+    <Anchor id="1-why-it-exists" /><Anchor id="1-start-with-the-problem" />
+    <H2>1. A token ID is a contract with a model row</H2>
+    <Prose>A new library name can take several pieces under a fixed tokenizer. That costs positions, but it does not make the spelling unrepresentable: a byte-complete tokenizer can still encode it exactly. The harder question is whether a different division of the same text helps the model and uses its limited dictionary well. Before changing that division, inspect what an ID means:</Prose>
+    <DictionaryContract />
+    <Prose>The dictionary maps a literal piece to an integer ID. ID 2 selects row 2 of the input embedding table E. The embedding is a vector: an ordered list of learned numbers. After the model processes a prefix, its output layer supplies one score for each dictionary item. Those scores are called <em>logits</em>; applying softmax turns them into probabilities. Input rows and output rows must agree on what every ID names.</Prose>
+    <Prose>Adding a spelling to a dictionary does not give its new row a learned meaning. Relabelling an existing ID without changing the matching model rows sends the model different numbers. In the drawing, choose the mistaken mapping and follow the mismatch. For an existing trained model, row selection and remapping must preserve surviving meanings. For a new model, finalize the dictionary before learning its rows.</Prose>
+    <Prose>The labelled colours follow literal piece identity through strips, trees and rows. They are a small reusable palette, not a numerical ID scale or a measure of semantic similarity. A white outline selects a piece; a dashed outline marks exclusion without changing its identity colour. Neutral arrows describe operations. Empty text contains no ordinary pieces, although a model protocol can add separately defined start or end markers.</Prose>
+
+    <Anchor id="2-core-intuition" /><Anchor id="2-build-the-intuition" />
+    <H2>2. Three methods change different objects at different times</H2>
+    <Prose>The term <em>dynamic tokenization</em> covers several adaptation ideas. The named methods here do not all add vocabulary rows during a live request. Put their interventions on a training timeline:</Prose>
+    <AdaptationTimeline />
+    <LessonTable caption="What actually adapts in the three papers" headers={['Method', 'Changed object and timing', 'Treatment of the language model']} rows={[
+      ['BoundlessBPE', 'Learn regular merges, eligible whole-pretoken supermerges and deletion operations while training the tokenizer.', 'Save the ordered rules; a downstream model can then train on the resulting encoding. The paper evaluates compression, not downstream model accuracy.'],
+      ['ADAT', 'Repeatedly prune a large candidate tokenizer using statistics and feedback from small probe models, before final model training.', 'Train a fresh probe for each round; the final language model learns the selected dictionary.'],
+      ['LiteToken', 'Identify vocabulary residues in an existing tokenizer; change input encoding and restrict generation.', 'Reuse surviving trained rows. Physically gather those rows to reduce stored parameters; masking alone does not do that.'],
+    ]} />
+    <Prose>Read the names with their evidence: ADAT is a NeurIPS 2024 paper; BoundlessBPE's revised paper appeared at COLM 2025; LiteToken is the February 2026 preprint inspected here. They address related waste, but their statistics, timing and model consequences differ. We will build each mechanism rather than describe them as a single online-growth algorithm.</Prose>
+
+    <Anchor id="3-mathematical-foundation" /><Anchor id="3-make-the-idea-precise" />
+    <H2>3. BoundlessBPE opens selected pretoken boundaries</H2>
+    <Prose>Ordinary BPE repeatedly joins adjacent pieces according to learned merge rules. Many implementations first split text with a regular expression. These chunks are <em>pretokens</em>: boundaries a later ordinary merge cannot cross. A leading space may belong to the following word. In <Code>Tip of the hat</Code>, that makes the groups <Code>Tip</Code>, <Code>␠of</Code>, <Code>␠the</Code> and <Code>␠hat</Code>, where ␠ displays an actual space.</Prose>
+    <SupermergeGroups />
+    <Prose>The small saved-rule example first merges bytes within groups. Once the complete groups <Code>␠of</Code> and <Code>␠the</Code> each consist of one piece, a <em>supermerge</em> joins the two groups into <Code>␠of␠the</Code>. The constructed final strip is <Code>Tip | ␠of␠the | ␠hat</Code>: three pieces preserving all original bytes.</Prose>
+    <Prose>Eligibility matters. Boundless does not let any two adjacent fragments cross any boundary. Both adjacent eligible word-like groups must already have collapsed to single whole pieces. A partially merged <Code>␠t | he</Code> group is not ready; a digit group in <Code>Tip 123 hat</Code> is not a word-like supermerge partner. The official tokenizer uses richer Unicode, digit, punctuation and case patterns than the compact teaching regex in our scratch program. Changing the regex changes which boundaries are available.</Prose>
+    <H3>Regular and supermerge candidates compete</H3>
+    <MergeCompetition />
+    <Prose>Count occurrences of legal regular pairs inside groups and legal superpairs between whole groups. Choose the highest-count candidate from both kinds. The drawing's tie convention chooses a supermerge on an equal cross-kind count, then literal byte order within a kind; our scratch trainer declares that convention. Counting identical overlapping pairs must match replacement: <Code>a a a</Code> has one non-overlapping replacement by <Code>aa</Code>, not two simultaneous replacements.</Prose>
+    <Prose>The revised Boundless paper reports roughly 9–15% higher bytes per token than its baseline on its evaluated corpora. More bytes per token means fewer positions for the same byte string. The paper explicitly leaves downstream language-model training for future work, so these compression results cannot establish better answers or lower model loss.</Prose>
+
+    <H2>4. Save merge and deletion history; never replay an earlier rank</H2>
+    <Prose>A useful merge can consume a constituent almost everywhere. Keeping that constituent as a final vocabulary row may then waste space. Boundless adapts PickyBPE's <em>intersection over self</em> ratio, abbreviated IoS. For selected regular pair (u,v), count f(u,v) and the constituent's current frequency f(u):</Prose>
+    <MathBlock>{"\\begin{aligned}\\operatorname{IoS}(u\\mid u,v)&=\\frac{f(u,v)}{f(u)}\\\\\\operatorname{IoS}(v\\mid u,v)&=\\frac{f(u,v)}{f(v)}\\end{aligned}"}</MathBlock>
+    <Prose>Pair count 90 and constituent count 100 gives IoS .9. Our reference deletes a non-base constituent only when this ratio strictly exceeds τ, then replaces its remaining occurrences by individual bytes. The inspected official snapshot uses ≥ at this boundary; with τ=.9, exactly .9 triggers that implementation but not our strict reference. Single bytes remain protected for coverage. A supermerge does not trigger this deletion step.</Prose>
+    <RankedReplay />
+    <Prose>A saved <em>rank</em> orders an operation: regular merge, supermerge or deletion. Encoding applies eligible operations in increasing rank order. Once rank r has run, the search continues above r. If rank 0 merges <Code>a+b→ab</Code> and rank 1 deletes <Code>ab→a|b</Code>, rank 0 cannot run again on those newly exposed bytes. Restarting from rank 0 would undo deletion and could loop. Choose the deletion fixture in the trace and watch the rank floor advance.</Prose>
+    <Prose>Longest-match lookup loses this operation history. It can select a long stored piece whose construction should not be available in the current ranked state. Likewise, independently tokenizing each word loses a saved supermerge across groups. The encoder must preserve both levels of boundaries and the chronology used by the saved model.</Prose>
+    <Anchor id="4-from-scratch-implementation" />
+    <H3>A complete small trainer and fixed-rule encoder</H3>
+    <Prose>The program starts with all 256 byte values, keeps nested pretoken lists, counts regular and eligible superpairs, saves ranks, protects byte coverage and encodes with one forward scan over immutable rules. Its hand trace is constructed; its measured training study uses the real excerpt described in section 10. It checks decoded bytes on every held-out row and explicitly tests merge-then-delete without reapplication.</Prose>
+    <Program file="boundless_reference.py" title="Train nested byte groups and replay regular, super and deletion rules" />
+    <Prose>The trainer recomputes corpus counts each round so the state is easy to inspect. With R operations and n pieces, fixed-rule scanning costs roughly O(Rn); training also revisits the corpus. This is a bounded teaching route. The official trainer maintains indexed counts and separate word/superword states. For large corpora, maintain affected occurrences and candidate priorities rather than recounting unrelated pairs. Those optimizations must preserve the counting, tie and rank-floor contract.</Prose>
+    <Anchor id="5-production-implementation" />
+    <H3>Run the actual official implementation</H3>
+    <Prose>Clone the linked Kensho repository at commit <Code>9c7ef2ebff09dfc000ce2c0cf5f7d32eaeb6ec86</Code>, install regex as stated in the program, and pass the clone directory with <Code>--library-path</Code>. The complete program writes training JSONL, trains with the actual required <Code>blowup=True</Code> argument, saves a model, reloads it and verifies encode/decode. It exports the saved operations into the reference encoder and compares exact IDs on 20 test rows plus four changed/empty examples.</Prose>
+    <Program file="boundless_library.py" title="Train, save, reload and compare pinned official BoundlessBPE" />
+    <Prose>At 320 rows and τ=1.1, the actual library produced 63 regular merges, one supermerge and no deletions, and used 3,276 tokens for the 4,996 held-out bytes. Its learned pieces for <Code>Tip of the hat</Code> differ from our constructed three-piece trace. The hand trace explains a legal mechanism; it is not claimed to be a rule set learned from this small excerpt.</Prose>
+    <Prose>A second actual run at 512 rows and τ=.5 recorded 51 deletion operations. All 51 deleted strings remained in that snapshot's serialized dictionary, even though encoding replayed the deletion operations correctly. The program reports this observation explicitly. Removing a piece from encoding and removing its stored vocabulary row are separate facts; inspect the serialized dictionary before claiming physical savings. These local measurements do not reproduce the paper's benchmark or establish production throughput.</Prose>
+
+    <Anchor id="6-visual-walkthrough" />
+    <H2>5. ADAT begins with competing Unigram paths</H2>
+    <Prose>Boundless learns ordered joins. ADAT starts with a larger candidate tokenizer and asks which pieces deserve to survive. To understand that choice, first follow a <em>Unigram</em> vocabulary: each piece v has a positive probability p(v), and the probabilities over the dictionary sum to one. A segmentation path covers the same input bytes without gaps.</Prose>
+    <PathLattice />
+    <Prose>For <Code>abab</Code>, our six piece probabilities are a=.1, b=.1, ab=.4, aba=.2, bab=.19 and abab=.01. The highest-probability path is <Code>ab | ab</Code> with product .16. The fewest-piece path is <Code>abab</Code> with product .01. “Use the longest piece” and “choose the most probable segmentation” solve different objectives.</Prose>
+    <MathBlock>{"\\begin{aligned}w(z)&=\\prod_{v\\in z}p(v)\\\\c(z)&=-\\sum_{v\\in z}\\ln p(v)\\\\Z(x)&=\\sum_{z\\in\\mathcal S(x)}w(z)\\\\q(z\\mid x)&=\\frac{w(z)}{Z(x)}\\end{aligned}"}</MathBlock>
+    <Prose>z is one complete path; repeated occurrences appear repeatedly in the product. S(x) is the set of complete segmentations. Z(x) adds all their weights; q is the posterior distribution over paths for this fixed input. The seven path weights here sum to .2171, so <Code>ab|ab</Code> has posterior .16/.2171≈.7370. Minimizing c finds the maximum-product path. Natural logarithms give costs in <em>nats</em>; using log₂ instead gives bits.</Prose>
+    <H3>Dynamic programming carries partial answers</H3>
+    <Prose>Draw an edge from byte position i to j when x[i:j] is a dictionary piece. A byte trie finds such prefixes without searching every dictionary string. Viterbi stores the best score reaching each position, plus a backpointer; following backpointers reconstructs the path. The forward algorithm stores the sum of all path weights reaching each position instead.</Prose>
+    <MathBlock>{"\\begin{aligned}D(0)&=0\\\\D(j)&=\\min_{i\\to j}\\{D(i)-\\ln p(x[i:j])\\}\\\\A(0)&=0\\\\A(j)&=\\operatorname{logsumexp}_{i\\to j}\\{A(i)+\\ln p(x[i:j])\\}\\\\Z(x)&=\\exp A(n)\\end{aligned}"}</MathBlock>
+    <Prose>D is a minimum negative-log cost; A is a log total weight; n is the byte length. Unreachable positions start at +∞ for D and −∞ for A. Logsumexp subtracts the largest value before exponentiating, avoiding underflow from long products. Our scratch encoder uses the equivalent maximum-log-score form for Viterbi. For empty text, the empty path has product 1 and log score 0. With missing byte coverage there may be no complete path; return an explicit failure rather than invent a segmentation.</Prose>
+    <Prose>Sampling differs from Viterbi: choose a path using q(z|x), or use weights w(z)^α and renormalize. Positive α&lt;1 flattens preferences; it does not make all dictionary pieces equally likely to appear. Backward weights let the program sample each next edge in proportion to its local weight times the remaining suffix weight. During EM, an <em>expectation–maximization</em> update, forward/backward values give expected occurrence counts for every edge. Normalize those counts, with the declared pseudocount, to update p(v).</Prose>
+    <Prose>Let B(j) be the log total weight of paths from position j to the end, with B(n)=0. For an edge i→j containing piece v, its posterior use is exp[A(i)+ln p(v)+B(j)−A(n)]. Add that value over every edge labelled v, then over corpus rows. In our lattice, ab appears twice in the .16 path and once in each of the two .004 paths, giving expected count (2×.16+.004+.004)/.2171≈1.5108. EM uses this fractional count, not just the two occurrences on the single best path. The program's .01 pseudocount keeps every protected base byte positive during normalization.</Prose>
+    <H3>Removing a piece changes the available paths</H3>
+    <Prose>One useful diagnostic asks how much total path weight is lost when a piece's edges are removed while the other weights remain fixed. Define positive cost Δᵥ=NLL_without_v−NLL_full. Removing <Code>ab</Code> leaves weight .0491, giving ln(.2171/.0491)≈1.4865 nats. This diagnostic removes paths at fixed weights; a subsequent renormalization or EM refit is a separate step. It is not identical to recomputing a normalized smaller model.</Prose>
+    <Prose>ADAT's main description discusses frequency and Unigram removal utility, while its experiment specifies frequency for the usefulness term. We will keep the positive diagnostic above separate from the reported frequency-based priority below; the paper's likelihood-sign wording does not justify silently switching the implementation's objective.</Prose>
+
+    <H2>6. Let a fresh probe report difficult pieces</H2>
+    <Prose>A frequent piece is not necessarily easy to predict. A small <em>probe language model</em> supplies feedback: given previous IDs, predict the next ID. A probe is a real trained model used to diagnose a proposed tokenizer, rather than the final model users will query. Follow the shifted input and targets:</Prose>
+    <ProbeLoss />
+    <Prose>For pieces <Code>ab | ab</Code>, the input is <Code>BOS, ab, ab</Code> and the next-token targets are <Code>ab, ab, EOS</Code>. BOS and EOS mark beginning and end of a row. At each position, softmax gives probabilities over all output IDs. If the true target receives .5, its cross-entropy loss is −ln(.5)=.6931 nats; at .1 it is 2.3026 nats. Loss for a target must use the prediction immediately before that target, not the model's state after seeing it.</Prose>
+    <MathBlock>{"\\begin{aligned}p_t(k)&=\\frac{\\exp\\ell_{t,k}}{\\sum_j\\exp\\ell_{t,j}}\\\\L_t&=-\\ln p_t(y_t)\\\\b_v&=\\sum_{t:y_t=v}L_t\\\\a_v&=\\#\\{t:y_t=v\\}\\\\\\overline L_v&=b_v/a_v\\quad(a_v>0)\\end{aligned}"}</MathBlock>
+    <Prose>ℓₜ,ₖ is logit k at prediction position t; yₜ is its true target. bᵥ is a <strong>sum</strong> of losses across v's occurrences, aᵥ their count, and the mean is bᵥ/aᵥ. A sum grows with exposure even at fixed difficulty. If a piece is never observed in feedback, its mean difficulty is unknown; it is not “perfectly easy with zero loss.” Zero target probability gives infinite mathematical loss. The illustrated probability control reports that limit explicitly.</Prose>
+    <AdaptivePriority />
+    <Prose>The ADAT experiment uses usefulness aᵥ, loss sum bᵥ and priority sᵥ=aᵥ/[λ ln(bᵥ+1)]. High frequency helps; a high loss sum lowers this priority. It prunes low-priority nonprotected candidates, carries momentum, then trains a fresh randomly initialized probe for the next round. This repeated fresh training avoids pretending rows learned under one dictionary have learned meanings under a new one.</Prose>
+    <MathBlock>{"\\begin{aligned}s_v^{(j)}&=\\frac{a_v^{(j)}}{\\lambda\\ln(1+b_v^{(j)})}\\\\m_v^{(j)}&=\\beta m_v^{(j-1)}+s_v^{(j)}\\end{aligned}"}</MathBlock>
+    <Prose>j indexes rounds; β controls the retained previous priority; m starts at zero. The paper's momentum is this unnormalized recurrence, not an exponential moving average with (1−β) on the new score. With current scores 4 then 2 and β=.5, m becomes 4 then 4. At β=0, it uses only the current score. The reported λ is 1. Any common positive λ rescales every current score without changing their ranking; changing it is not an independent ranking knob.</Prose>
+    <Prose>Our control uses declared constructed counts to make these dependencies visible and shows the separately measured probe rounds. Unobserved pieces have a visible unknown score. The native small study ranks them for removal before observed candidates, keeps previous momentum for its record, and always protects base bytes; this is a declared policy for the experiment, not a claim that absence proves uselessness. In a target domain, choose and validate a coverage policy before pruning rare specialist pieces.</Prose>
+    <H3>Execute the probabilistic tokenizer and the feedback loop</H3>
+    <Program file="adaptive_unigram.py" title="Unigram paths, EM, and actual fresh probe/prune rounds" />
+    <Prose>The program seeds 384 byte pieces: all 256 single bytes plus 128 frequent substrings of at most four bytes. It fits two EM iterations per round, samples training paths with α=.5, and trains an actual PyTorch model with width-24 embeddings, a width-32 GRU and a linear output over vocabulary IDs plus BOS/EOS. A GRU is a recurrent network whose hidden vector summarizes its preceding inputs. The probe trains eight epochs using Adam and 32-position windows, with padding targets ignored as −100. Training windows reset hidden state; evaluation keeps each complete short source row's prefix.</Prose>
+    <Prose>Each pruning round uses 80 training rows and 20 distinct feedback rows. Starting seeds 13, 14 and 15 initialize fresh probes for vocabularies 384, 352 and 320. Two rounds remove 32 pieces each; the third trains/evaluates the final dictionary. The 20 test rows supply reported outcomes and never select the survivors. The output retains counts, loss sums, means, momentum, removed strings, learning curves and byte-normalized likelihood.</Prose>
+    <Prose>The paper's scale is different: its reported 150k→50k setup uses five iterations and much larger Pythia probes, with separate probe-training and inference data. Our tiny GRU study exercises the feedback mechanism. It does not reproduce those results, test final large-model quality, or isolate every cause of a changed loss. Do not infer an ADAT benchmark from a decreasing training curve.</Prose>
+
+    <H2>7. LiteToken finds residues through ancestry and context</H2>
+    <Prose>A BPE dictionary contains many pieces that were useful stepping stones while learning longer pieces. A piece can remain stored even when it rarely appears as a final emitted token. LiteToken calls such candidates <em>imperfect merge residues</em>. But a rarely emitted affix can still be useful, so final frequency alone is not enough. Trace one occurrence tree:</Prose>
+    <ResidueTree />
+    <Prose>F₁(v) counts occurrences emitted as final roots. F₂(v) counts occurrences of v consumed inside the ancestry of larger final roots. Each occurrence counts; these are not merely numbers of distinct word types. Our explicitly constructed strings yield <Code>includ</Code> twice as a final piece and 30 times as a descendant of <Code>include</Code>, <Code>includes</Code> and <Code>including</Code>. Its final-use ratio is 2/(2+30)=.0625.</Prose>
+    <MathBlock>{"\\begin{aligned}R(v)&=\\frac{F_1(v)}{F_1(v)+F_2(v)}\\\\H_L(v)&=-\\sum_u p_L(u\\mid v)\\log_2p_L(u\\mid v)\\\\H_R(v)&=-\\sum_u p_R(u\\mid v)\\log_2p_R(u\\mid v)\\\\S(v)&=\\min\\{H_L(v),H_R(v)\\}\\end{aligned}"}</MathBlock>
+    <Prose>R is defined when F₁+F₂&gt;0. For context, inspect neighbors of the <strong>final emitted pieces</strong> in the corpus. Normalize left neighbor counts to pL and right counts to pR. Their entropies H measure diversity: one neighbor has 0 bits, while four equally frequent neighbors have 2 bits. Intermediate merge edges do not supply these final-neighbor counts.</Prose>
+    <NeighborEntropy />
+    <Prose>LiteToken combines low R with low S, the smaller of the two side entropies. Under our constructed r=.2 and s=1.5 bits, exclude a nonprotected piece only if R≤r <strong>and</strong> S≤s. The <Code>includ</Code> fixture has two equally frequent left neighbors (1 bit) and a fixed right neighbor (0 bits), so S=0 and it is excluded. A low-R affix with 2 bits on both sides stays under this criterion.</Prose>
+    <Prose>We include BOS/EOS as explicitly named neighbor categories at corpus-row boundaries. They are not pruning candidates. An unobserved piece has unknown contextual entropy, and the program keeps it rather than inventing a zero-bit distribution. Bytes and protocol markers require separate protection. The paper's illustrated, main and ablation thresholds differ; r=.2 and s=1.5 are this lesson's declared settings, not universal recommended values. It does not specify a universal log base; our entropy thresholds explicitly use bits.</Prose>
+    <H3>Parents belong to an occurrence, not just to a spelling</H3>
+    <Prose>With explicit pair rules, record the two live nodes whenever a merge occurs. Some rank-only tokenizers instead look up the rank of concatenated bytes. A piece can then form through different parent pairs. Our constructed rank dictionary gives <Code>bc</Code> rank 0, <Code>ab</Code> rank 1 and <Code>abc</Code> rank 3. Input <Code>abc</Code> first forms <Code>a|bc</Code>; a rank-only rule can join it to abc with parents <Code>a,bc</Code>, even if an alternative learned ancestry lists <Code>ab,c</Code>. Split the actual occurrence parents. Guessing one global parent pair can give the wrong children.</Prose>
+
+    <H2>8. Split excluded roots, then merge the exposed boundaries</H2>
+    <Prose>Removing a string from a dictionary is not a complete encoding procedure. LiteToken first uses the original tokenizer, recursively splits emitted excluded roots through their recorded children, then re-merges exposed pieces with surviving rules. Follow all three strips at identical byte positions:</Prose>
+    <SplitAndRemerge />
+    <Prose>Our actual constructed rank list encodes <Code>corruptions</Code> as <Code>cor | ruptions</Code>. Excluding <em>both</em> <Code>ruptions</Code> and its child <Code>ruption</Code> yields <Code>cor | ru | ption | s</Code>. Later surviving rules <Code>cor+ru→corru</Code> and <Code>corru+ption→corruption</Code> cross the newly exposed boundary, giving <Code>corruption | s</Code>. Excluding only the outer piece stops at its surviving child; inspect that changed case rather than silently assuming both were excluded.</Prose>
+    <Prose>If a surviving emitted parent contains an excluded descendant, it can remain a single piece. Encoding does not need to emit every historical intermediate ID. This is why cleanup starts from emitted roots and splits only excluded roots. No exclusions preserves the original strip; empty input stays empty. Re-merging reduces some split-only fragmentation, but need not produce fewer pieces than the original tokenizer.</Prose>
+    <Program file="residue_cleanup.py" title="Track actual BPE parents, compute residues, split and re-merge" />
+    <Prose>The full program uses a heap of candidate ranks and linked live blocks. After a merge, only neighboring candidates change; version stamps reject stale heap entries. This avoids rescanning every unrelated adjacent pair, while recording actual children. The corpus route respects ordinary pretoken boundaries. A separate rank-only fixture exercises the parent ambiguity. Hugging Face Tokenizers' explicit BPE model independently matches the original <Code>cor|ruptions</Code> strip.</Prose>
+    <Prose>With a 512-piece scratch dictionary trained on the real 80-row excerpt, thresholds .2/1.5 marked 13 pieces for exclusion, roughly 2.54% of this dictionary. Held-out counts were 2,581 original, 2,584 split-only and 2,584 re-merged: cleanup did not improve length in this run. This program tests encoding cleanup; section 9 separately executes physical row gathering. No pretrained language model was evaluated here. LiteToken's paper likewise distinguishes the three variants: its Table 9 full cleanup improves on split-only perplexity but does not beat the original token count. Its chosen corpora/models do not establish universal multilingual or domain preservation.</Prose>
+
+    <H2>9. Restrict output, gather rows and protect exact prefix state</H2>
+    <Prose>The cleaned tokenizer emits only retained pieces. A trained model must also avoid generating excluded IDs. Set those output logits to −∞ before softmax, which assigns them probability zero and renormalizes the survivors. This changes the model's output distribution; it does not simply recover its original probabilities. Watch the retained mass:</Prose>
+    <RowCompaction />
+    <Prose>The drawing and Torch program use five old IDs and keep [0,2,4]. Gather those input rows, output rows and output biases in exactly that order. New ID 0 means old 0, new 1 means old 2, and new 2 means old 4. Old input [4,0,2] therefore becomes new [2,0,1]. The input vectors and retained logits match exactly. Compact softmax matches the old masked-and-renormalized softmax, rather than the old unrestricted softmax.</Prose>
+    <MathBlock>{"\\begin{aligned}E'&=E[I,:]\\\\W'&=W[I,:]\\\\b'&=b[I]\\\\\\ell'&=W'h+b'\\\\p'_k&=\\frac{\\exp\\ell_{I_k}}{\\sum_{j\\in I}\\exp\\ell_j}\\end{aligned}"}</MathBlock>
+    <Prose>I is the ordered list of retained old IDs, h the model's hidden vector, W the output matrix and b its bias. E and W are V×d in this convention; output scores are W h+b. PyTorch <Code>Embedding</Code> indexes E rows and <Code>Linear</Code> uses this output-row convention. If input/output weights are tied, they share one learned V×d matrix; gathering must preserve that sharing, not accidentally create two independent parameter sets.</Prose>
+    <Prose>With width d and one output bias per item, untied storage has 2Vd+V parameters; tied storage has Vd+V. Our five-row width-three example reduces 35→21 untied parameters or 20→12 tied parameters by keeping three rows. Excluding logits without gathering leaves the allocated matrices unchanged. Quantization, optimizer state, alignment and allocator behavior affect actual bytes and latency; these counts cover the stated row parameters only.</Prose>
+    <PrefixState />
+    <Prose>A transformer <em>key/value cache</em> stores vectors computed for sequence positions in previous layers, rather than a table indexed by vocabulary ID. Those vectors depend on the exact prefix IDs, model weights, positions and other conditioning. With prefixes [0,2,4] and [0,1,4], only the first position matches. The third position cannot reuse its old state merely because its own ID is again 4: the earlier changed ID has already changed its context.</Prose>
+    <Prose>Even identical decoded text can have different token prefixes. If <Code>ab</Code> changes from one ID to <Code>a|b</Code>, position counts and all later contexts change. Reuse only a structurally identical preceding prefix under the same compatible model/state version. Invalidate affected state when IDs, rows, position policy or conditioning change; do not apply input re-merging to a partially generated prefix while keeping its old cache.</Prose>
+    <Program file="vocabulary_contract.py" title="Execute row/logit parity, masking, storage and prefix-state contracts" />
+    <Prose>The program computes the illustrated matrices in float64, checks exact embedding/logit equality and softmax parity, and rejects empty/duplicate retained-ID lists. Its prefix demonstration uses explicitly defined cumulative vectors and positions so dependency is visible. Those cells are a state-contract analogy, not a Transformer implementation or serving-cache benchmark. Production changes also need tied-weight handling, protected special IDs, optimizer/checkpoint remapping where applicable, and tests of generation under the cleaned distribution.</Prose>
+
+    <Anchor id="8-what-scales-and-what-doesn-t" />
+    <H2>10. Measure identical held-out text in explicit units</H2>
+    <Prose>WikiText's collectors wanted to test language models with longer contexts and more realistic vocabularies than heavily simplified benchmarks. Our real fixture is a retained excerpt of WikiText-2 raw, sourced through its official dataset rows API. It contains the first 80 eligible training prose rows, 20 validation rows for feedback and 20 untouched test rows, each truncated to its first 256 characters after trimming outer whitespace. The rows span 3/1/2 article titles and contain 20,044/4,425/4,996 UTF-8 bytes. This narrow sequential sample is useful for running the programs, not for estimating broad language performance or the original benchmark's long-context question.</Prose>
+    <Prose>Download <a href={`${codeRoot}wikitext_excerpt.json`} download>the exact corpus and provenance</a> beside all six programs, and keep its <a href={`${codeRoot}DATA-LICENSE.txt`}>attribution/licence notice</a>. Wikipedia contributors and the WikiText collectors supply the source text; the metadata lists CC BY-SA 3.0 and alternative GFDL. The fixture records modifications, source rows and response hashes. The API does not identify its served Git revision, so the recorded repository revision is retrieval context rather than a claim of matching pinned Parquet bytes.</Prose>
+    <H3>Compression counts are different from prediction losses</H3>
+    <MetricsComparison />
+    <MathBlock>{"\\begin{aligned}\\mathrm{BPT}&=B/T\\\\\\mathrm{PPL}_{\\rm token}&=\\exp(L/T)\\\\\\mathrm{bits/byte}&=L/(B\\ln2)\\end{aligned}"}</MathBlock>
+    <Prose>B is the number of original UTF-8 bytes; T the explicitly scored token targets; L the summed negative log-likelihood in nats. For tokenizer compression, use ordinary emitted pieces in T. For our probe PPL, T includes EOS targets and excludes BOS inputs/padding. Always name the count convention. Fertility is pieces per chosen linguistic unit, such as a whitespace-delimited word; define that unit and its segmentation consistently, especially across scripts.</Prose>
+    <Prose>At the same byte-event loss L=4 nats over eight bytes, T=2 gives token PPL exp(2)≈7.389, while T=4 gives exp(1)≈2.718. Both give .72135 bits/byte. A lower token PPL can arise from a changed denominator. It is not by itself evidence of better prediction of the original bytes. Empty bytes or zero targets make these ratios undefined; the lab shows n/a rather than a fabricated zero.</Prose>
+    <LessonTable caption="Observed outcomes on the same 4,996 held-out bytes" headers={['Run / configuration', 'Ordinary pieces or scored targets', 'Observed outcome']} rows={[
+      ['Scratch regular-only / 320 rows', '3,274 ordinary pieces', '1.5260 bytes/piece'],
+      ['Scratch supermerge-enabled / 320 rows', '3,276 ordinary pieces', '1.5250 bytes/piece; one learned supermerge, no deletion'],
+      ['HF ByteLevel BPE / budget 512', '2,564 ordinary pieces', '1.9485 bytes/piece'],
+      ['SentencePiece Unigram / budget 512', '3,209 ordinary pieces', '1.5569 bytes/piece'],
+      ['Fresh probe / vocabulary 384', '3,019 targets including EOS', '3.7373 bits/byte; token PPL 72.7430'],
+      ['Fresh probe / vocabulary 352', '3,056 targets including EOS', '3.7076 bits/byte; token PPL 66.7769'],
+      ['Fresh probe / vocabulary 320', '3,213 targets including EOS', '3.7121 bits/byte; token PPL 54.6486'],
+    ]} />
+    <Prose>The single learned supermerge did not reduce held-out positions versus this scratch baseline. The 512-budget library configurations differ in pretokenization, required characters and normalization policy, so their count difference does not prove BPE is universally better than Unigram. The final probe's token PPL fell substantially while byte-normalized likelihood changed much less and was slightly worse than the middle probe. Fresh initialization, changed segmentation and this tiny sample all affect the result; no test-based choice was made.</Prose>
+    <H3>The usual ByteLevel BPE and SentencePiece routes</H3>
+    <Program file="tokenizer_library_study.py" title="Train ordinary Tokenizers BPE and SentencePiece Unigram on the actual excerpt" />
+    <Prose>The program trains Hugging Face Tokenizers 0.22.2 with a ByteLevel pretokenizer and all byte-level alphabet symbols, then SentencePiece 0.2.1 Unigram with byte fallback, identity normalization, no dummy prefix and no whitespace collapsing. It uses a declared 512-row budget; observed characters, base bytes and special symbols consume different portions of that budget. It checks exact decode on every test row and shows deterministic and sampled SentencePiece paths. The installed sampling API uses <Code>out_type</Code>, <Code>enable_sampling=True</Code>, <Code>nbest_size=-1</Code> and α=.5.</Prose>
+    <Prose>Ordinary libraries supply tokenizer training/encoding; they do not implement the ADAT probe controller or the full LiteToken cleanup policy for you. Our separate complete programs show those extra operations. Compare an actual library path with the matching scratch contract, rather than relabelling a generic regex or top-count filter as one of the named methods.</Prose>
+    <H3>What would establish a better model?</H3>
+    <Prose>Freeze choices using training/feedback, then evaluate identical untouched text with consistent document boundaries, termination, context and normalization. Define whether scoring one canonical segmentation or summing probability over all valid paths. Our reported GRU loss scores the deterministic Viterbi path plus EOS; it is not the marginalized probability over every LM tokenization of a byte string. Summing Unigram segmentation weights is also not a trained LM likelihood.</Prose>
+    <Prose>Include the tasks the model must preserve: rare spellings, specialist terminology, multilingual scripts, generation validity and changed-domain data. Measure tokenizer fitting/encoding, model prefill/generation, actual memory and end-to-end latency separately. Fewer positions can reduce some dense attention work—roughly quadratic in positions at fixed width—but output-vocabulary projection scales with Vd per position, and kernel/hardware effects decide actual speed. Row shrinkage and sequence shortening can pull these costs in different directions.</Prose>
+
+    <Anchor id="7-decision-matrix" /><Anchor id="9-failure-modes-gotchas" />
+    <H2>11. Choose the changed object and protect the state</H2>
+    <Prose>If pretoken boundaries waste common phrase positions and you will train a new model, investigate a boundary-learning tokenizer such as Boundless. If selecting a new dictionary before expensive final training, investigate probe feedback such as ADAT. If cleaning an already trained model, inspect ancestry, retained output distribution and physical row mapping as in LiteToken. Choose the intervention after identifying the bottleneck.</Prose>
+    <LessonTable caption="Questions a tokenizer change must answer" headers={['Question', 'Required evidence']} rows={[
+      ['Coverage', 'Exact byte roundtrip, protected bytes/protocol symbols, explicit normalization and empty-input behavior.'],
+      ['Ranking and ancestry', 'Legal pretoken groups, rank-floor replay, count/tie conventions and actual occurrence parents.'],
+      ['Selection', 'Separate training/feedback/test, rare-domain checks, observed/unknown scores and declared thresholds.'],
+      ['Model agreement', 'One map for input rows/output rows/biases/IDs; tied weights and output restrictions preserved.'],
+      ['Serving state', 'Versioned dictionary/model, exact prefix/positions/conditioning, state invalidation and request isolation.'],
+      ['Benefit', 'Identical-text metrics with units plus model tasks, memory and measured runtime.'],
+    ]} />
+    <H3>Deeper: a hypothetical online append protocol</H3>
+    <Prose>Online vocabulary growth is a separate engineering proposal. Imagine retaining stable old IDs and appending k new IDs within a fixed row budget. Inspect the allocated rows before assuming a request can use them:</Prose>
+    <BudgetRows />
+    <Prose>With untied input/output width d, adding k pieces costs 2kd+k parameters if each output has a bias. At d=4, three new rows add 27 parameters under that convention. The diagram labels appended rows <em>untrained</em>: supplying a heuristic embedding or averaging children does not establish a good output probability for the new piece. Adding the spelling to an encoder is only one part of the protocol.</Prose>
+    <Prose>A complete proposal must define how new rows learn, reserve or exhaust a budget, update the output softmax, preserve old IDs, bind dictionary and weights to a version, and decide which requests use that version. Prefixes already encoded under the previous version may need re-encoding and recomputation. Per-request additions must not leak unintended state across batches or users. These are contracts to design and measure, not claimed features or measured deployment gains of the three papers.</Prose>
+    <H3>Other adaptation routes and an optional pair statistic</H3>
+    <Prose>BLT's input-dependent byte patches and Charformer's learned soft subword grouping are related ways to allocate or combine input positions. They do not imply appending learned vocabulary rows during an ordinary request. Return to <a href="/learn/path/full-curriculum/byte-level-tokenization-token-free-models?module=large-language-models">Byte-Level Tokenization and Token-Free Models</a> for their exact representation routes; this lesson does not duplicate that treatment.</Prose>
+    <Prose>Another hypothetical pair-selection statistic is pointwise mutual information, PMI. Define all probabilities on one adjacent-pair event sample: P(u,v)=f(u,v)/N, Pleft(u)=fleft(u)/N and Pright(v)=fright(v)/N. Then PMI=ln[P(u,v)/(Pleft(u)Pright(v))]. A single rare pair can have high PMI because the marginals are tiny. Require adequate support and held-out benefit rather than equating a raw count threshold with PMI. This optional statistic is separate from the named methods' actual selection rules.</Prose>
+    <Prose>Do not use visual fragmentation as a loss proxy, presume that every dropped piece is useless, or infer answer quality from a compression ratio. Trace the failed contract first: an illegal supermerge, an earlier rank replayed after deletion, a wrong parent split, mismatched model rows, unsupported output IDs, or stale prefix state each has a concrete repair.</Prose>
+
+    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+      <Anchor id="11-self-check-exercises" />
+      <H2>Practice: trace, calculate and diagnose</H2>
+      <Exercise title="1. Follow boundaries and history." hint={<p>A supermerge needs complete eligible adjacent groups; rank only increases.</p>} solution={<p>The first pair is legal; the partial second group and numeric third group block their proposed supermerges. After rank 0 applies a+b→ab and rank 1 applies ab→a|b, the final strip is a|b unless a later applicable rule changes it. Rank 0 cannot reactivate. A single-byte constituent is protected even at IoS=1.</p>}>Which superpairs are legal: [␠of],[␠the]; [␠of],[␠t,he]; [Tip],[123]? Then trace merge rank 0 on (a,b), followed by deletion rank 1 on ab. Can IoS=1 delete a base byte?</Exercise>
+      <Exercise title="2. Compare path objectives." hint={<p>Enumerate complete paths; count and probability are separate objectives.</p>} solution={<p>Minimum count chooses abab at .01; maximum product chooses ab|ab at .16. All seven weights sum to .2171, giving posterior .16/.2171≈.7370. Removing every ab edge at fixed other weights leaves .0491; cost ln(.2171/.0491)≈1.4865 nats. Removing protected a and all paths beginning with a could make coverage fail; protect a full base alphabet rather than assuming an unseen string has a path.</p>}>For section 5's dictionary, find the minimum-count and maximum-product paths, compute the latter's posterior and the fixed-weight cost of removing ab. Explain why removal coverage needs a separate check.</Exercise>
+      <Exercise title="3. Do not confuse sum with mean." hint={<p>Use ln(1+b), then the unnormalized recurrence.</p>} solution={<p>A has b=8, mean loss 2, and priority 4/ln(9)≈1.8205. B has b=8, mean loss 4, and priority 2/ln(9)≈.9102. Their equal loss sums hide different means. Scores 4 then 2 at β=.5 give momentum 4 then 4. Changing λ from 1 to 2 halves all current scores equally and cannot change rankings; a never-observed candidate has unknown mean.</p>}>Candidate A occurs four times with loss 2 each; B twice with loss 4 each. Compute sums, means and priorities at λ=1. Compute momentum for scores 4 then 2 at β=.5. What changes if every candidate uses λ=2?</Exercise>
+      <Exercise title="4. Retain diversity, repair a split." hint={<p>The exclusion rule needs both comparisons; one low side controls min entropy.</p>} solution={<p>R=2/32=.0625. Left entropy 1 bit and right entropy 0 bits give S=0: exclude at r=.2 and s=1.5. If both sides have four equal neighbors, S=2 and the piece stays. Excluding both ruption-family residues in our actual fixture gives cor|ru|ption|s, then surviving ranks 9/10 give corruption|s. Counts 2→4→2 show repair versus split-only, not improvement over original. Excluding only ruptions leaves cor|ruption|s, because ruption survives.</p>}>A piece has F₁=2, F₂=30 and two equal left neighbors but one right neighbor. Decide at r=.2 and s=1.5. Compare four equal neighbors on each side. Then trace section 8 excluding both residues and excluding only ruptions.</Exercise>
+      <Exercise title="5. Repair model and cache state." hint={<p>Invert the retained-ID order and inspect the first changed prefix position.</p>} solution={<p>For retained old IDs [0,2,4], the map is 0→0, 2→1, 4→2; [4,0,2] becomes [2,0,1]. Gather E, W and bias consistently, preserve tied sharing, and mask/renormalize output. Prefixes [0,2,4] versus [0,1,4] share one position. The final 4's old state is invalid because its earlier context changed. A new incompatible model version invalidates reuse even for identical IDs.</p>}>Keep old IDs 0,2,4 but an engineer supplies [4,0,2] to the new three-row model. Repair it. How much cache can prefixes [0,2,4] and [0,1,4] share, and why not the final 4?</Exercise>
+      <Exercise title="6. Repair a quality claim." hint={<p>Hold total likelihood and bytes fixed before changing the token denominator.</p>} solution={<p>At L=4 and B=8, PPL is exp(2)≈7.389 for two targets and exp(1)≈2.718 for four. Both have 4/(8 ln(2))≈.72135 bits/byte. Claim only the stated denominator changed. Compare identical raw text with consistent scoring, contexts, boundaries, termination and canonical/marginal treatment, then test task quality. A zero denominator is undefined.</p>}>A report says PPL fell 7.389→2.718, so tokenization improved the model. Both encodings score the same eight-byte event at NLL 4 nats, with two/four targets. Correct the conclusion and propose a meaningful comparison.</Exercise>
+      <Exercise title="7. Design a discriminating follow-up." hint={<p>Choose with feedback, evaluate test once, and identify a domain the tiny excerpt misses.</p>} solution={<p>One valid plan varies legal pretoken categories or residue thresholds using only feedback; freezes the dictionary/controller; evaluates untouched held-out bytes and generation with matched model-training budgets. Add independently sourced specialist/multilingual data, rare spellings and no-residue controls. Report row allocation, normalization, pieces, byte-normalized loss, generation/task outcomes and actual runtime separately. The existing three/one/two article sample cannot establish broad quality or fairness.</p>}>Choose one proposed change to a named method's configuration. Specify selection data, unchanged comparison conditions, measured benefit, a plausible failure case and a test that could reject the proposal.</Exercise>
+    </section>
+
+    <Anchor id="10-primary-sources" />
+    <Sources alternatives={<ul>
+      <li><a href="https://web.stanford.edu/~jurafsky/slp3/2.pdf">Jurafsky and Martin, chapter 2 §2.4</a> — canonical text/byte tokenization treatment before sections 3–5; distinguishes tokenizer learning from encoding. Basic strings and counting suffice.</li>
+      <li><a href="https://huggingface.co/learn/llm-course/chapter6/5">Hugging Face BPE walkthrough</a> and <a href="https://huggingface.co/learn/llm-course/chapter6/7">Unigram walkthrough</a> — independent concrete corpus/merge/path explanations after the manual traces. Compare their objectives and pretoken boundaries with our programs.</li>
+      <li><a href="https://aclanthology.org/P18-1007/">Kudo, Subword Regularization</a> — posterior segmentation, Unigram estimation and sampling after section 5; probability notation helps. Sampling does not guarantee equal exposure.</li>
+      <li><a href="https://huggingface.co/docs/transformers/en/perplexity">Transformers: perplexity</a> — consistent target/context counting after section 10; explains tokenization dependence and fixed-context evaluation. The runnable example uses a downloaded causal model rather than our tiny GRU.</li>
+    </ul>}>
+      <li><a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/cdf00c97c0cb2cc35179f03363da6c4f-Paper-Conference.pdf">Zheng et al., Enhancing Large Language Models through Adaptive Tokenizers (NeurIPS 2024)</a>, §§3–4: probe/prune pipeline, frequency/loss priority, momentum and actual evaluated setup.</li>
+      <li><a href="https://arxiv.org/html/2504.00178v2">Schmidt et al., Boundless Byte Pair Encoding (v2, COLM 2025)</a>, §3/Listing 1 and §5: eligible supermerges, IoS/ranked deletion and compression-only scope. <a href="https://github.com/kensho-technologies/boundlessbpe/tree/9c7ef2ebff09dfc000ce2c0cf5f7d32eaeb6ec86">Pinned official implementation</a>: exact API and inference rank floor tested here.</li>
+      <li><a href="https://arxiv.org/html/2602.04706v1">Sun et al., LiteToken (February 2026 preprint)</a>, method sections and Tables 4/9: residue frequency/entropy, split/re-merge, generation masking, row compaction and limits of length gains.</li>
+      <li><a href="https://github.com/google/sentencepiece/blob/master/python/README.md">SentencePiece Python documentation</a> and <a href="https://huggingface.co/docs/tokenizers/api/models">Tokenizers model APIs</a>: ordinary Unigram/BPE routes; installed 0.2.1/0.22.2 calls executed in the complete programs.</li>
+      <li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Embedding.html">PyTorch Embedding</a> and <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Linear.html">Linear</a>: integer row lookup and output-row/bias conventions used in compaction.</li>
+      <li><a href="https://huggingface.co/datasets/Salesforce/wikitext">WikiText dataset</a> and <a href="https://arxiv.org/abs/1609.07843">Merity et al., Pointer Sentinel Mixture Models (2016)</a>: actual retained corpus, collection question, metadata attribution/licence and split provenance.</li>
+    </Sources>
+    <section className="lesson-ending lesson-ending--next" data-lesson-ending="readiness">
+      <H2>Readiness and the next question</H2>
+      <Prose>Trace a legal supermerge and rank-floor deletion. Compute a best path and marginal, shifted-target loss statistics, a residue decision and split/re-merge. Carry surviving IDs through both model matrices and diagnose a changed prefix. Finally compare identical text in explicit byte and token units.</Prose>
+      <Prose>Next, <a href="/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models">Causal Language Modeling and Next-Token Prediction</a> develops the model-side objective. Bring the exact IDs, preceding context, shifted targets and probability/count conventions: they determine what the model is being trained to predict.</Prose>
+    </section>
+  </div>,
 };
-
 export default dynamicTokenization;

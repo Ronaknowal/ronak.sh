@@ -1,5 +1,6 @@
 export const eigenvalueExamples = {
   symmetricPairs: {
+    file: 'eigen_symmetric_pairs.py',
     title: 'Check the original symmetric transformation without relying on vector signs',
     code: `import numpy as np
 
@@ -16,6 +17,7 @@ print("determinant and product:", f"{np.linalg.det(A):.6f}", f"{values.prod():.6
     expected: "eigenvalues: [1.0, 3.0]\nA @ [1, 1]: [3.0, 3.0]\n3 * [1, 1]: [3.0, 3.0]\nall returned pairs: True\northonormal columns: True\ntrace and eigenvalue sum: 4.0 4.0\ndeterminant and product: 3.000000 3.000000"
   },
   diagonalizedPowers: {
+    file: 'eigen_diagonalized_powers.py',
     title: 'Compute repeated updates through an eigenbasis',
     code: `import numpy as np
 
@@ -39,6 +41,7 @@ print("diagonal fixed after one step:", np.allclose(reflection @ diagonal, diago
     expected: "basis coordinates: [1.0, 1.0]\nA S = S Lambda: True\nstep 0 [2.0, 0.0] agrees: True\nstep 1 [4.0, 2.0] agrees: True\nstep 2 [10.0, 8.0] agrees: True\nstep 3 [28.0, 26.0] agrees: True\nreflection squared is identity: True\ndiagonal fixed after two steps: True\ndiagonal fixed after one step: False"
   },
   missingDirections: {
+    file: 'eigen_missing_directions.py',
     title: 'Distinguish repeated eigenvalues, missing directions and complex pairs',
     code: `import numpy as np
 
@@ -56,6 +59,7 @@ print("four quarter-turns:", np.linalg.matrix_power(rotation, 4).tolist())`,
     expected: "identity dimension for eigenvalue 1: 2\nshear dimension for eigenvalue 1: 1\ncomplex pair A v = i v: True\nconjugate pair: True\nfour quarter-turns: [[1.0, 0.0], [0.0, 1.0]]"
   },
   nonorthogonalBasis: {
+    file: 'eigen_oblique_coordinates.py',
     title: 'A general eigenbasis needs its inverse, not automatically its transpose',
     code: `import numpy as np
 
@@ -72,6 +76,7 @@ print("pair residuals:", np.linalg.norm(A @ S - S * values, axis=0).tolist())`,
     expected: "coordinates: [1.0, 1.0]\ncorrect output: [1.0, 1.0]\ntranspose-based output: [-1.0, 1.0]\nbasis columns orthogonal: False\npair residuals: [0.0, 0.0]"
   },
   pcaProjection: {
+    file: 'eigen_pca_projection.py',
     title: 'Complete the original PCA idea with data, projections and an SVD check',
     code: `import numpy as np
 
@@ -98,6 +103,7 @@ print("SVD line agrees:", np.allclose(np.outer(direction, direction), np.outer(V
     expected: "covariance: [[3.333333, 2.666667], [2.666667, 3.333333]]\neigenvalues: [6.0, 0.666667]\nscores: [-2.12132, -2.12132, 2.12132, 2.12132]\nprojected points: [[-1.5, -1.5], [-1.5, -1.5], [1.5, 1.5], [1.5, 1.5]]\nretained fraction: 0.900000\nsquared reconstruction error: 2.000000\nSVD variances agree: True\nSVD line agrees: True"
   },
   transientGrowth: {
+    file: 'eigen_transient_growth.py',
     title: 'A stable spectrum can still permit temporary amplification',
     code: `import numpy as np
 
@@ -111,6 +117,7 @@ for k in [0, 1, 2, 3, 10, 30]:
     expected: "eigenvalues: [0.6, 0.6]\nstep 0 norm: 1.000000 formula agrees: True\nstep 1 norm: 2.088061 formula agrees: True\nstep 2 norm: 2.426850 formula agrees: True\nstep 3 norm: 2.170773 formula agrees: True\nstep 10 norm: 0.201645 formula agrees: True\nstep 30 norm: 0.000022 formula agrees: True"
   },
   twoCompartmentMixing: {
+    file: 'eigen_compartment_mixing.py',
     title: 'Predict the equilibrium and the decaying imbalance of two compartments',
     code: `import numpy as np
 
@@ -129,6 +136,7 @@ for k in range(4):
     expected: "column sums: [1.0, 1.0]\nstationary amount: True\nimbalance factor: True\nstep 0 [1000.0, 0.0] agrees: True\nstep 1 [800.0, 200.0] agrees: True\nstep 2 [700.0, 300.0] agrees: True\nstep 3 [650.0, 350.0] agrees: True"
   },
   powerIteration: {
+    file: 'eigen_power_iteration.py',
     title: 'Normalize a power iteration and test a misleading zero-residual start',
     code: `import numpy as np
 
@@ -167,6 +175,7 @@ print("A's largest eigenvalue:", np.linalg.eigvalsh(A)[-1])
     expected: "mixed start value: 3.000000 residual: 0.000000\nexact minor direction value: 1.000000 residual: 0.000000\nA's largest eigenvalue: 3.0"
   },
   coupledModes: {
+    file: 'eigen_coupled_springs.py',
     title: 'Separate two ideal coupled oscillation modes',
     code: `import numpy as np
 
@@ -186,6 +195,7 @@ print("mode columns orthonormal:", np.allclose(modes.T @ modes, np.eye(2)))`,
     expected: "squared angular frequencies: [1.0, 3.0]\nangular frequencies (rad/s): [1.0, 1.732051]\nmass times acceleration equals minus K q: True\nmode columns orthonormal: True"
   },
   independentSpectrum: {
+    file: 'eigen_rank_one_approximation.py',
     title: 'Check a different spectrum and an inferred rank-one approximation',
     code: `import numpy as np
 

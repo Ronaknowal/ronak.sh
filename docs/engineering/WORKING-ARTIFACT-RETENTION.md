@@ -1,5 +1,46 @@
 # Working files: keep useful evidence, remove finished working material
 
+## Lean workspace decision — 10 October 2026
+
+The user stopped further lesson implementation and explicitly requested removal
+of accumulated experiments, previews and unnecessary handoffs, keeping the site,
+prepared content and a small restart context. The [current handoff](../teaching/LESSON-AUTHORING-HANDOFF.md)
+is the stopped-state entry point. Do not treat old rollout instructions or a
+retained experiment as an instruction to resume it.
+
+For future authorized work:
+
+- Keep canonical website source/assets, pending manuscripts/specifications,
+  explained programmes, substantive data, unresolved findings and cross-topic
+  decisions. Keep teaching quality and depth unchanged.
+- Use a scoped temporary preview and share public assets where possible. Do not
+  copy the entire public tree into every correction build. Keep one useful current
+  output while needed; retire it when the task closes or the user stops it.
+- Record concise check results, source identities and actual limitations. Retain
+  captures that establish distinct unresolved or accepted claims while needed;
+  avoid overlapping screenshot campaigns and repeated unchanged states. Capture
+  and storage volume are not measures of review quality.
+- Keep a small dependency/version description and necessary scientific results.
+  Installed experiment environments, package downloads, trained research weights
+  and optimizer checkpoints need not remain indefinitely unless they are an
+  intended deliverable or an active task requires them. Reinstalling an environment
+  is separate from rerunning a successful scientific experiment.
+- Do not freeze whole repository trees, installed packages, compiled builds or
+  complete central-ledger copies for a bounded change. Prefer the exact affected
+  original source, a small source/hash manifest and a concise result. Preserve an
+  actual old source only when recovery or a stated comparison requires it.
+- Keep one current handoff and existing semantic topic records. Replace stale
+  next actions; do not prepend another dated history paragraph after every check.
+- When the user explicitly retires old evidence, record that retirement. Remove
+  only its artifact bindings from current checkpoints, preserve source hashes,
+  phase states and historical qualifications, and never imply deleted attachments
+  remain available or that cleanup recertifies a lesson.
+
+The [retirement receipt](evidence/authoring-artifact-retirement-2026-10-10.json)
+records this explicit cleanup. Its compressed binding tombstone is provenance,
+not a backup of the removed material. Routine cleanup below remains source-safe;
+it does not authorize deleting pending content or purging Git history.
+
 The user's 11 September 2026 cleanup request applies to `scratch/` and temporary artifacts elsewhere in the workspace. Cleanup is part of finishing work, not a new recurring audit of every lesson.
 
 The lesson-authoring skill's [handoff and cleanup lifecycle](../../skills/lesson-authoring/references/handoffs-and-cleanup.md) defines routine housekeeping at each topic/phase boundary and an explicit scoped cleanup mode. Perform the relevant housekeeping within the authorized task; a separate cleanup request is unnecessary for its own confirmed disposable work. This is not a background deletion service. Preserve content-first handoffs, unresolved topic notes, active workers' inputs and required evidence; respect explicit read-only scope. This document retains ownership of repository-specific file retention and removal checks.

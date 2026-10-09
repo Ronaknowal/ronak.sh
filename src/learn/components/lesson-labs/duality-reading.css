@@ -1,0 +1,17 @@
+.duality-reading{--duality-objective:#97bfca;--duality-price:#b8a6da;--duality-candidate:#edc267;--duality-optimum:#ded5bf;min-width:0}
+.duality-mechanism{margin:2rem 0;max-width:100%;min-width:0;border:0;background:none;padding:0}
+.duality-mechanism figcaption{font-size:1rem;line-height:1.65;margin:1rem 0;color:#ccc}
+.duality-panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1.25rem;align-items:start}
+.duality-plot{min-width:0;width:100%}.duality-plot svg{display:block;overflow:visible;font-family:inherit}.duality-plot text{fill:#ccc}.duality-axes text{fill:#aaa}
+.duality-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));gap:.7rem 1.4rem;margin:1rem 0;line-height:1.55}.duality-facts>div{min-width:0}.duality-facts dt{color:#ccc}.duality-facts dd{margin:.1rem 0 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.duality-key{display:inline-block;width:.65em;height:.65em;background:currentColor;border-radius:50%;margin-right:.5em}.duality-key.candidate{border-radius:0}.duality-key.price{border-radius:0;transform:rotate(45deg)}.duality-key.optimum{background:none;border:2px solid currentColor}
+.duality-controls{margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:1rem;align-items:end}.duality-controls label{display:flex;flex-direction:column;gap:.35rem;max-width:100%}.duality-controls input{width:8rem;max-width:100%;padding:.5rem;background:#151515;border:1px solid #777;color:#eee;border-radius:0;font:inherit}.duality-actions{display:flex;gap:.6rem;flex-wrap:wrap}.duality-actions button{background:#191919;color:#eee;border:1px solid #777;padding:.5rem .75rem;font:inherit;cursor:pointer}.duality-controls [role=alert]{flex-basis:100%;color:#e6a1b0;margin:0}.duality-reading :focus-visible{outline:2px solid #eee;outline-offset:4px}
+.duality-reading .neural-equation{overflow-x:auto;max-width:100%;padding:.8rem 0}.duality-reading .neural-equation .katex-display{overflow:visible;width:max-content;min-width:100%;max-width:none;text-align:left}.duality-reading p,.duality-reading li{overflow-wrap:break-word}.duality-programme{min-width:0;margin:1.4rem 0}.duality-matrix{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}.duality-matrix td,.duality-matrix th{padding:.5rem;text-align:center;border:1px solid #555}.duality-matrix td[data-selected=true]{outline:2px solid white;outline-offset:-3px}.duality-reading details{margin:.7rem 0}.duality-reading summary{cursor:pointer}
+
+.duality-plot{max-width:36rem;margin-inline:auto}.duality-key.witness,.duality-key.witness-square{border-radius:0;background:none;border:2px solid currentColor}.duality-key.changed{background:none;border:2px solid currentColor;box-shadow:inset 0 0 0 2px #0d0d0d}.duality-key.invalid{border-radius:0;clip-path:polygon(0 20%,20% 0,50% 30%,80% 0,100% 20%,70% 50%,100% 80%,80% 100%,50% 70%,20% 100%,0 80%,30% 50%)}
+
+/* Topic typography follows the reader text size, including instructional code. */
+.duality-reading h2{font-size:1.375rem!important}.duality-reading h3{font-size:1.125rem!important}.reader-article.duality-reading .lesson-code pre,.reader-article .duality-reading .lesson-code pre{font-size:.875rem}
+
+/* Long fallback filenames remain readable in the normal enlarged-text Reader. */
+.duality-reading .lesson-code-source__pending a{overflow-wrap:anywhere}

@@ -1,0 +1,342 @@
+{
+  "schema": "feature20-author-static-state-scenarios/v1",
+  "at": "2026-10-09T16:53:09.950Z",
+  "source": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\feature-scaling-encoding-imputation\\runtime-preview\\PreparationInvestigations.jsx",
+    "bytes": 22523,
+    "sha256": "52305f72cc5028248c763289eb60318cdd9d3670cb8e3ee4d5e777bc6c75d14a"
+  },
+  "checks": [
+    {
+      "id": "L1",
+      "changedState": [
+        "1",
+        "1"
+      ],
+      "expected": [
+        "10001",
+        "10"
+      ],
+      "baselineBytes": 5370,
+      "changedBytes": 5313,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L2",
+      "changedState": [
+        "A",
+        {
+          "Q": [
+            "40",
+            "4000"
+          ],
+          "A": [
+            "41",
+            "4400"
+          ],
+          "B": [
+            "43",
+            "4001"
+          ]
+        }
+      ],
+      "expected": [
+        "4400",
+        ">17<"
+      ],
+      "baselineBytes": 5547,
+      "changedBytes": 5513,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L3",
+      "changedState": [
+        "1000",
+        "150",
+        "robust"
+      ],
+      "expected": [
+        "73.5",
+        "3",
+        "2"
+      ],
+      "baselineBytes": 4945,
+      "changedBytes": 4920,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L4",
+      "changedState": [
+        "None",
+        "infrequent",
+        "2"
+      ],
+      "expected": [
+        "@missing",
+        "None (missing)"
+      ],
+      "baselineBytes": 1905,
+      "changedBytes": 1908,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L5",
+      "changedState": [
+        [
+          [
+            "2",
+            "12",
+            ""
+          ],
+          [
+            "1",
+            "10",
+            "100"
+          ],
+          [
+            "3",
+            "",
+            ""
+          ],
+          [
+            "",
+            "14",
+            "500"
+          ]
+        ],
+        "2,2",
+        "2"
+      ],
+      "expected": [
+        "300",
+        "D1, D3"
+      ],
+      "baselineBytes": 4902,
+      "changedBytes": 4791,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L6",
+      "changedState": [
+        [
+          "30",
+          "",
+          "7"
+        ],
+        "2"
+      ],
+      "expected": [
+        "numeric2",
+        "scaled2"
+      ],
+      "baselineBytes": 3553,
+      "changedBytes": 3553,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L7",
+      "changedState": [
+        "309",
+        "body_mass_g",
+        ""
+      ],
+      "expected": [
+        "-0.236756",
+        "originally missing"
+      ],
+      "baselineBytes": 8367,
+      "changedBytes": 8284,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L8",
+      "changedState": [
+        "YJ",
+        "-3",
+        "1"
+      ],
+      "expected": [
+        "negative power",
+        ">-3<"
+      ],
+      "baselineBytes": 6401,
+      "changedBytes": 5648,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L9",
+      "changedState": [
+        "1000",
+        "normal"
+      ],
+      "expected": [
+        "5.19934",
+        "endpoint100"
+      ],
+      "baselineBytes": 4461,
+      "changedBytes": 12614,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L10",
+      "changedState": [
+        "0",
+        "360"
+      ],
+      "expected": [
+        "Chord length",
+        "cos(2πt/period)"
+      ],
+      "baselineBytes": 4273,
+      "changedBytes": 4152,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L11a",
+      "changedState": [
+        "100",
+        "2"
+      ],
+      "expected": [
+        "0.990196",
+        "100"
+      ],
+      "baselineBytes": 3339,
+      "changedBytes": 16007,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L11b",
+      "changedState": [
+        [
+          [
+            "A",
+            "1",
+            "0"
+          ],
+          [
+            "A",
+            "1",
+            "1"
+          ],
+          [
+            "B",
+            "0",
+            "0"
+          ],
+          [
+            "B",
+            "1",
+            "1"
+          ],
+          [
+            "C",
+            "1",
+            "0"
+          ],
+          [
+            "C",
+            "0",
+            "1"
+          ]
+        ],
+        "3,1",
+        "0"
+      ],
+      "expected": [
+        "0.777778",
+        "0.444444"
+      ],
+      "baselineBytes": 6191,
+      "changedBytes": 6191,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L12",
+      "changedState": [
+        "1",
+        [
+          "3",
+          "3",
+          "2"
+        ],
+        [
+          "0,1",
+          "0,-1",
+          "1,1"
+        ]
+      ],
+      "expected": [
+        "bucket0",
+        ">0<"
+      ],
+      "baselineBytes": 2876,
+      "changedBytes": 2876,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L13",
+      "changedState": [
+        "3,0",
+        {
+          "3,0": "-10",
+          "2,1": ""
+        },
+        "1"
+      ],
+      "expected": [
+        "3.96528",
+        "iteration cap"
+      ],
+      "baselineBytes": 3747,
+      "changedBytes": 8575,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L14a",
+      "changedState": [
+        "Q,0",
+        [
+          "10",
+          "10",
+          "10"
+        ],
+        [
+          "4",
+          "4",
+          "4"
+        ]
+      ],
+      "expected": [
+        ">4<",
+        ">2<"
+      ],
+      "baselineBytes": 5646,
+      "changedBytes": 5548,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L14b",
+      "changedState": [
+        "2"
+      ],
+      "expected": [
+        "9.48646",
+        "assumed delta"
+      ],
+      "baselineBytes": 4360,
+      "changedBytes": 4359,
+      "restoredInitialExact": true
+    },
+    {
+      "id": "L1-invalid",
+      "draft": "-",
+      "result": "visible draft/local error/current result cleared"
+    }
+  ],
+  "scope": "Actual components with author-controlled initial state overrides in SSR; all16 changed fixtures and restored initial state",
+  "limits": [
+    "No browser control event, real pointer/keyboard/reset/Copy/Download/paint evidence",
+    "Pure calculations are source/retained-value checks; no Python fit replay"
+  ]
+}

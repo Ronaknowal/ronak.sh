@@ -1,0 +1,24 @@
+.mc-figure { margin:1.5rem 0 2rem; padding:0; border:0; background:transparent; container-type:inline-size; container-name:mc-figure; }
+.mc-figure figcaption { margin-top:1rem; line-height:1.7; color:var(--text-secondary,#aaa); overflow-wrap:anywhere; }
+.mc-compare { display:grid; grid-template-columns:minmax(0,1fr); gap:1.5rem; align-items:start; }
+.mc-compare > * { min-width:0; }
+.mc-reading-region { min-width:0; max-width:100%; }
+.mc-scroll-hint { margin:.5rem 0 .75rem; color:var(--text-secondary,#aaa); line-height:1.6; overflow-wrap:anywhere; }
+.mc-scene-region { overflow-x:auto; max-width:100%; scrollbar-gutter:stable; }
+.mc-scene { display:block; width:100%; height:auto; color:#ddd; overflow:visible; }
+.mc-scene-region:focus-visible,.mc-table-region:focus-visible { outline:2px solid #e7b54a; outline-offset:4px; }
+.mc-label { font:15px ui-monospace,SFMono-Regular,Consolas,monospace; }
+.mc-table-label { margin:0 0 .65rem; font-weight:600; line-height:1.6; overflow-wrap:anywhere; }
+.mc-table-region { max-width:100%; overflow:auto; scrollbar-gutter:stable; }
+.mc-table-region--tall { max-height:24rem; }
+.mc-table table { width:max-content; min-width:100%; border-collapse:collapse; }
+.mc-table th,.mc-table td { padding:.6rem .8rem; white-space:nowrap; border-bottom:1px solid #333; text-align:right; font-variant-numeric:tabular-nums; }
+.mc-table th:first-child { text-align:left; }.mc-table thead { position:sticky; top:0; background:#171717; z-index:1; }
+.mc-manuscript-table { width:max-content; min-width:100%; border-collapse:collapse; }
+.mc-manuscript-table th,.mc-manuscript-table td { padding:.65rem .8rem; border-bottom:1px solid #333; text-align:left; max-width:32rem; }
+.mc-programme { margin:1.5rem 0 2rem; padding:0; border:0; background:transparent; }
+.monte-carlo-mcmc-lesson { overflow-wrap:anywhere; }
+.monte-carlo-mcmc-lesson .flow-slider output { flex:0 0 auto; white-space:nowrap; overflow-wrap:normal; }
+.monte-carlo-mcmc-lesson .flow-readout strong { display:inline-block; white-space:nowrap; overflow-wrap:normal; }
+.monte-carlo-mcmc-lesson .flow-lab { container-name:mc-figure; }
+/* The reader is narrower than two full native canvases, including enlarged text. */

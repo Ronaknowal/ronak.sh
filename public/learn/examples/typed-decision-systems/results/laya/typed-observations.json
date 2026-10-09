@@ -1,0 +1,212 @@
+{
+  "states": [
+    {
+      "state": "My card has not arrived. Please tell me when it will arrive."
+    },
+    {
+      "state": "A payment I did not make is on my card. Please refund it immediately."
+    }
+  ],
+  "questions": {
+    "intent": {
+      "type": "choice",
+      "instructions": "What is the customer asking about?",
+      "criteria": {
+        "card_arrival": "card has not arrived or is missing in the post",
+        "card_delivery_estimate": "how long delivery of a new card takes",
+        "card_linking": "link or add an existing card to this account",
+        "card_not_working": "card does not work when trying to use it",
+        "lost_or_stolen_card": "a received card was lost or stolen",
+        "card_payment_not_recognised": "a card payment was not made or recognised by the customer"
+      }
+    },
+    "urgency": {
+      "type": "score",
+      "instructions": "How urgent is this request?",
+      "criteria": [
+        "no deadline",
+        "soon",
+        "immediate blocking emergency"
+      ]
+    },
+    "refund": {
+      "type": "noul",
+      "instructions": "Does the customer explicitly request a refund?"
+    }
+  },
+  "native": [
+    {
+      "model": "laya-rl-agent",
+      "answers": {
+        "intent": {
+          "type": "choice",
+          "choice": "card_arrival",
+          "probabilities": {
+            "card_arrival": 0.9976,
+            "card_delivery_estimate": 0.0012,
+            "card_linking": 0.0,
+            "card_not_working": 0.0002,
+            "lost_or_stolen_card": 0.0009,
+            "card_payment_not_recognised": 0.0002
+          },
+          "confidence": 0.9888,
+          "answer_confidence": 0.9976,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.2246,
+          "legend": {
+            "0": "no deadline",
+            "1": "soon",
+            "2": "immediate blocking emergency"
+          },
+          "probabilities": {
+            "0": 0.1652,
+            "1": 0.4449,
+            "2": 0.3898
+          },
+          "confidence": 0.067,
+          "answer_confidence": 0.4449,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "refund": {
+          "type": "noul",
+          "noul": 0.0834,
+          "confidence": 0.9166,
+          "answer_confidence": 0.9166,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 222,
+        "output_tokens": 0,
+        "state_tokens": 14,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    },
+    {
+      "model": "laya-rl-agent",
+      "answers": {
+        "intent": {
+          "type": "choice",
+          "choice": "card_payment_not_recognised",
+          "probabilities": {
+            "card_arrival": 0.0008,
+            "card_delivery_estimate": 0.0001,
+            "card_linking": 0.0001,
+            "card_not_working": 0.0007,
+            "lost_or_stolen_card": 0.0008,
+            "card_payment_not_recognised": 0.9975
+          },
+          "confidence": 0.9883,
+          "answer_confidence": 0.9975,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.6416,
+          "legend": {
+            "0": "no deadline",
+            "1": "soon",
+            "2": "immediate blocking emergency"
+          },
+          "probabilities": {
+            "0": 0.1604,
+            "1": 0.0377,
+            "2": 0.8019
+          },
+          "confidence": 0.4592,
+          "answer_confidence": 0.8019,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "refund": {
+          "type": "noul",
+          "noul": 0.9294,
+          "confidence": 0.9294,
+          "answer_confidence": 0.9294,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 228,
+        "output_tokens": 0,
+        "state_tokens": 16,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  ],
+  "raw_logits": [
+    [
+      6.242003917694092,
+      -0.5029937624931335,
+      -4.054078578948975,
+      -2.444955348968506,
+      -0.7811625003814697,
+      -2.3603978157043457
+    ],
+    [
+      1.1471080780029297,
+      2.3870177268981934,
+      2.221580982208252
+    ],
+    [
+      4.377863883972168,
+      -0.37559136748313904
+    ],
+    [
+      -2.246922731399536,
+      -3.964995861053467,
+      -3.9772703647613525,
+      -2.3631553649902344,
+      -2.2546439170837402,
+      4.915894508361816
+    ],
+    [
+      0.6254440546035767,
+      -1.186672329902649,
+      2.6397056579589844
+    ],
+    [
+      -3.6053948402404785,
+      1.5055789947509766
+    ]
+  ],
+  "forward_events": [
+    {
+      "input_shape": [
+        6,
+        131
+      ],
+      "marker_shape": [
+        6,
+        6
+      ],
+      "widths": [
+        6,
+        3,
+        2,
+        6,
+        3,
+        2
+      ],
+      "grad_enabled": false
+    }
+  ]
+}

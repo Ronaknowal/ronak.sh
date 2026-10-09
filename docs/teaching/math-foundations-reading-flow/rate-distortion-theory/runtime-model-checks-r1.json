@@ -1,0 +1,206 @@
+{
+  "status": "PASS",
+  "scope": "New UI models only, bounded complementary arithmetic; no accepted scientific main, recompression, or exhaustive serializer campaign.",
+  "checks": [
+    {
+      "name": "Equation comparison 0: iteration",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 1: distortion",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 2: information",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 3: lower",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 4: upper",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 5: gap",
+      "pass": true
+    },
+    {
+      "name": "Weighted all-column scores sum to1",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 7: iteration",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 8: distortion",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 9: information",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 10: lower",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 11: upper",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 12: gap",
+      "pass": true
+    },
+    {
+      "name": "Weighted all-column scores sum to1",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 14: iteration",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 15: distortion",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 16: information",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 17: lower",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 18: upper",
+      "pass": true
+    },
+    {
+      "name": "Equation comparison 19: gap",
+      "pass": true
+    },
+    {
+      "name": "Weighted all-column scores sum to1",
+      "pass": true
+    },
+    {
+      "name": "Fixed path applies exactly500 marginal updates",
+      "pass": true
+    },
+    {
+      "name": "Fixed path agrees with separate direct Gibbs timing",
+      "pass": true
+    },
+    {
+      "name": "Null still applies500 updates",
+      "pass": true
+    },
+    {
+      "name": "Null information and gap zero to floating precision",
+      "pass": true
+    },
+    {
+      "name": "Null still applies500 updates",
+      "pass": true
+    },
+    {
+      "name": "Null information and gap zero to floating precision",
+      "pass": true
+    },
+    {
+      "name": "Cost edits preserve original source",
+      "pass": true
+    },
+    {
+      "name": "Weighted cost edit changes selected conditional row",
+      "pass": true
+    },
+    {
+      "name": "constant fidelity values",
+      "pass": true
+    },
+    {
+      "name": "independent fidelity values",
+      "pass": true
+    },
+    {
+      "name": "copy fidelity values",
+      "pass": true
+    },
+    {
+      "name": "Gaussian forward values",
+      "pass": true
+    },
+    {
+      "name": "Gaussian budget saturation",
+      "pass": true
+    },
+    {
+      "name": "Gaussian identity infinite",
+      "pass": true
+    },
+    {
+      "name": "Gaussian point source",
+      "pass": true
+    },
+    {
+      "name": "Declared default message bytes",
+      "pass": true
+    },
+    {
+      "name": "Focused byte decode length ",
+      "pass": true
+    },
+    {
+      "name": "Focused decode equals encoder reconstruction ",
+      "pass": true
+    },
+    {
+      "name": "Focused byte decode length 1",
+      "pass": true
+    },
+    {
+      "name": "Focused decode equals encoder reconstruction 1",
+      "pass": true
+    },
+    {
+      "name": "Focused byte decode length 001011",
+      "pass": true
+    },
+    {
+      "name": "Focused decode equals encoder reconstruction 001011",
+      "pass": true
+    },
+    {
+      "name": "Focused byte decode length 10101",
+      "pass": true
+    },
+    {
+      "name": "Focused decode equals encoder reconstruction 10101",
+      "pass": true
+    },
+    {
+      "name": "Malformed protocol rejected",
+      "pass": true
+    },
+    {
+      "name": "Malformed protocol rejected",
+      "pass": true
+    },
+    {
+      "name": "Malformed protocol rejected",
+      "pass": true
+    },
+    {
+      "name": "Malformed protocol rejected",
+      "pass": true
+    }
+  ],
+  "inputs": {
+    "rate-distortion-models.js": "0ed6cfa45289711a49e1b0124bce69dcd9e325efd2a1d77da5fd7b8ce6a6dba8",
+    "rate-distortion-reading-models.js": "ae4858c39e509aaf40397ab8cedc0bc6ccb49b15598f4e4c41648b42c89d777e"
+  }
+}

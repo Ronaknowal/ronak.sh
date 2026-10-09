@@ -1,0 +1,18 @@
+.vector-contract { margin: 2rem 0; padding: 1.2rem; border: 1px solid #333; }
+.vector-contract figcaption,.vector-plane figcaption { color: #e4b752; font-weight: 600; margin-bottom: 1rem; }
+.vector-contract ol { display: flex; flex-wrap: wrap; gap: 1rem 2rem; padding-left: 1.4rem; }
+.vector-contract li { flex: 1 1 160px; }
+.vector-contract span,.vector-summary strong { display: block; }
+.vector-lab-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,280px),1fr)); gap: 1.4rem; margin: 1.4rem 0; }
+.vector-plane { margin: 0; min-width: 0; }
+.vector-plane svg { display: block; width: 100%; max-width: 390px; margin: auto; }
+.vector-plane svg text { font-size: 13px; fill: #ddd; }
+.vector-plane p { font-size: 14px; }
+.vector-lists { display: flex; flex-direction: column; gap: .7rem; }
+.vector-lists > div { border: 1px solid #383838; padding: .6rem .9rem; }
+.vector-lists .vector-selected { border-left: 3px solid #e4b752; background: #181715; }
+.vector-lists h4,.vector-lists p { margin: .4rem 0; }
+.vector-result { color: #e4b752; font-size: 1.5rem; }
+.vector-summary { display: flex; flex-wrap: wrap; gap: .7rem 2rem; }
+.vector-summary p { flex: 1 1 130px; }
+.vector-summary strong { color: #e4b752; font-size: 1.2rem; }

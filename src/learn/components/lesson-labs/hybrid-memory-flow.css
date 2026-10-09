@@ -1,0 +1,38 @@
+.hybrid-memory-flow .hybrid-flow-drawing svg { display: block; height: auto; max-width: none; margin-inline: auto; overflow: visible; }
+.hybrid-memory-flow .hybrid-flow-drawing svg text { font-family: var(--font-mono, monospace); font-size: 16px; }
+.hybrid-memory-flow .hybrid-flow-drawing svg :is(path,polyline,line) { vector-effect: non-scaling-stroke; }
+.hybrid-memory-flow :is(.hybrid-flow-scroll,.hybrid-flow-matrix-scroll) { overflow-x: auto; max-width: 100%; min-width: 0; }
+.hybrid-memory-flow :is(.hybrid-flow-scroll,.hybrid-flow-matrix-scroll):focus-visible { outline: 2px solid #e6bb60; outline-offset: 3px; }
+.hybrid-memory-flow .hybrid-flow-scroll-hint { color: #b9b9b9; font-size: .9rem; line-height: 1.7; margin-block: .6rem; }
+.hybrid-memory-flow .hybrid-flow-array { display: flex; flex-wrap: wrap; gap: .75rem 1.1rem; margin-block: 1rem; }
+.hybrid-memory-flow .hybrid-flow-array-cell { display: grid; gap: .6rem; min-width: min(10rem,100%); max-width: 100%; font-variant-numeric: tabular-nums; }
+.hybrid-memory-flow .hybrid-flow-array-cell span { color: var(--hybrid-role); }
+.hybrid-memory-flow .hybrid-flow-array-cell strong { display: grid; place-items: center; width: 6.5rem; min-height: 6.5rem; border: 1px solid var(--hybrid-role); border-radius: 50%; color: var(--hybrid-role); font-family: var(--font-mono,monospace); font-size: 1rem; padding: .4rem; }
+.hybrid-memory-flow .hybrid-flow-matrix { border-collapse: collapse; min-width: 100%; font-family: var(--font-mono,monospace); font-size: 1rem; }
+.hybrid-memory-flow .hybrid-flow-matrix :is(th,td) { border: 1px solid #444; padding: .7rem .85rem; min-width: 6rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hybrid-memory-flow .hybrid-flow-matrix th { color: var(--hybrid-role); font-weight: 400; }
+.hybrid-memory-flow .hybrid-flow-matrix tr[data-selected] { outline: 2px solid #eee; outline-offset: -2px; }
+.hybrid-memory-flow .hybrid-flow-matrix td[data-sign='positive'] { background: #362a13; }
+.hybrid-memory-flow .hybrid-flow-matrix td[data-sign='negative'] { background: #152a3a; }
+.hybrid-memory-flow .hybrid-flow-matrix td[data-sign='zero'] { background: #151515; }
+.hybrid-memory-flow .hybrid-flow-value-key { color: #bbb; font-size: .9rem; line-height: 1.7; }
+.hybrid-memory-flow .hybrid-flow-records { display: flex; flex-wrap: wrap; gap: 1.2rem; }
+.hybrid-memory-flow .hybrid-flow-record { min-width: min(13rem,100%); max-width: 100%; }
+.hybrid-memory-flow .hybrid-flow-record > span { display: block; margin-block: .5rem; color: #bbb; }
+.hybrid-memory-flow .hybrid-flow-record-fields { display: flex; border: 1px solid #79c8e8; color: #79c8e8; }
+.hybrid-memory-flow .hybrid-flow-record-fields > span { display: grid; gap: .7rem; padding: .8rem 1rem; width: 50%; }
+.hybrid-memory-flow .hybrid-flow-record-fields > span + span { border-left: 1px solid #79c8e8; }
+.hybrid-memory-flow .hybrid-flow-record[data-selected] .hybrid-flow-record-fields { outline: 2px solid #fff; outline-offset: 3px; }
+.hybrid-memory-flow .flow-controls :is(button,select,input) { min-height: max(44px,2.75rem); }
+.hybrid-memory-flow .hybrid-flow-select { display: grid; gap: .5rem; flex: 1 1 13rem; max-width: 100%; }
+.hybrid-memory-flow .hybrid-flow-select select { font: inherit; color: #f0cd7c; background: #161616; border: 1px solid #666; padding: .5rem; max-width: 100%; min-width: 0; }
+.hybrid-memory-flow :is(button,select,input):focus-visible { outline: 2px solid #e6bb60; outline-offset: 3px; }
+.hybrid-memory-flow .hybrid-flow-error { color: #eee; min-height: 1.7rem; }
+.hybrid-memory-flow .hybrid-flow-storage-totals { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; }
+.hybrid-memory-flow .hybrid-flow-storage-totals p { margin-block: .25rem; overflow-wrap: anywhere; }
+.hybrid-memory-flow .hybrid-flow-checkbox { display: flex; align-items: center; gap: .7rem; min-height: max(44px,2.75rem); max-width: 100%; }
+.hybrid-memory-flow .hybrid-flow-checkbox input { width: 1.3rem; height: 1.3rem; min-height: 0; accent-color: #e6bb60; flex-shrink: 0; }
+.hybrid-memory-flow .hybrid-flow-error button { min-height: max(44px,2.75rem); padding: .55rem .9rem; font: inherit; color: #f0cd7c; background: #161616; border: 1px solid #666; }
+.hybrid-memory-flow .hybrid-flow-downloads { line-height: 1.9; }
+.hybrid-memory-flow .hybrid-flow-drawing { margin-block: 1.25rem; min-width: 0; }
+.hybrid-memory-flow .hybrid-flow-drawing figcaption { margin-block: .7rem; color: #bbb; font-size: .95rem; line-height: 1.7; }

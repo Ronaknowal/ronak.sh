@@ -1,0 +1,155 @@
+{
+  "programs": {
+    "multiplicativeStep": {
+      "file": "nmf_step.py",
+      "decodedCodeSha256": "b75511b9f0d8bacdf28a316351ac668ca7246cbe18de0c55d15f93002578c1a1",
+      "decodedExpectedSha256": "0a0e7b7ba934a3f72ed27701cdd825698bafac0b2d3269c4dcef99a37aef060a",
+      "oldDecodedCodeExact": true,
+      "oldDecodedOutputExact": true
+    },
+    "digitDictionary": {
+      "file": "nmf_digits.py",
+      "decodedCodeSha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989",
+      "decodedExpectedSha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981",
+      "oldDecodedCodeExact": true,
+      "oldDecodedOutputExact": true
+    },
+    "wordPatterns": {
+      "file": "nmf_words.py",
+      "decodedCodeSha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343",
+      "decodedExpectedSha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23",
+      "oldDecodedCodeExact": true,
+      "oldDecodedOutputExact": true
+    }
+  },
+  "savedExportKeys": {
+    "NMF_DIGITS": [
+      "datasetSha256",
+      "license",
+      "attribution",
+      "provenance",
+      "csv",
+      "scale",
+      "side",
+      "splitSizes",
+      "fit",
+      "dictionary",
+      "activations",
+      "test",
+      "runs",
+      "baselines",
+      "versions"
+    ],
+    "NMF_RECORDED": [
+      "lossComparison",
+      "supportPairs",
+      "recordedTraceLosses",
+      "alteredStep",
+      "removals"
+    ]
+  },
+  "digitArrayRoles": {
+    "datasetSha256": "str",
+    "license": "str",
+    "attribution": "str",
+    "provenance": "str",
+    "csv": "str",
+    "scale": "int",
+    "side": "int",
+    "splitSizes": "dict",
+    "fit": "dict",
+    "dictionary": [
+      8,
+      64
+    ],
+    "activations": [
+      60,
+      8
+    ],
+    "test": [
+      60
+    ],
+    "runs": [
+      8
+    ],
+    "baselines": "dict",
+    "versions": "dict"
+  },
+  "limits": "Pure saved-array inspection only; no scientific main, fit, transform or historical checker executed.",
+  "digitNestedRoles": {
+    "splitSizes": {
+      "train": "int",
+      "validation": "int",
+      "test": "int"
+    },
+    "fit": {
+      "k": "int",
+      "seed": "int",
+      "init": "str",
+      "solver": "str",
+      "maxIter": "int",
+      "tol": "float"
+    },
+    "baselines": {
+      "meanTestMse": "float",
+      "pcaTestMse": "float",
+      "nmfTestMse": "float"
+    },
+    "versions": {
+      "python": "str",
+      "numpy": "str",
+      "sklearn": "str"
+    }
+  },
+  "newSuppliedArithmetic": {
+    "clipUnconstrained": {
+      "H": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "x": [
+        0,
+        1
+      ],
+      "unconstrained": [
+        -1,
+        1
+      ],
+      "clipped": [
+        0,
+        1
+      ],
+      "clippedHalfLoss": 0.5,
+      "nnls": [
+        0,
+        0.5
+      ],
+      "nnlsHalfLoss": 0.25
+    },
+    "missingVersusZero": {
+      "H": [
+        1,
+        1
+      ],
+      "x": [
+        2,
+        0
+      ],
+      "measuredZeroAmount": 1,
+      "measuredZeroHalfLoss": 1,
+      "secondMissingAmount": 2,
+      "secondMissingMaskedHalfLoss": 0
+    },
+    "gain3": {
+      "frobeniusScale": 9,
+      "klScale": 3,
+      "isScale": 1
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.gmm-lesson{min-width:0;color:inherit}
+.gmm-lesson>*{min-width:0;max-width:100%}
+.gmm-lesson p,.gmm-lesson li,.gmm-lesson td,.gmm-lesson th{overflow-wrap:anywhere;word-break:normal}
+/* Figure walkthroughs need the same reading rhythm as shared Prose. Preserve
+   Prose's inline styles and the live readout/note treatments. */
+.gmm-lesson p:not([style]):not(.flow-readout):not(.flow-note){font-size:clamp(1rem,1.25vw,1.08rem);line-height:1.82;letter-spacing:-.005em;margin-block:0 20px}
+.gmm-lesson .neural-equation{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
+.gmm-lesson .lesson-exercise{margin-block:1.75rem 2.25rem}

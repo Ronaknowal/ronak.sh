@@ -1,0 +1,30 @@
+{
+  "schema": "manifold-reading-crowding-source-ssr/v1",
+  "status": "PASS_FOCUSED_STATIC_SVG_CSS_CONSERVATION_NATIVE_PENDING",
+  "at": "2026-10-09T15:01:27.792Z",
+  "sourceFreeze": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/author-ready-source.json",
+    "bytes": 52532,
+    "sha256": "2eb5b1edbf9caa2738a4021bde0636ae4b6fa017f6f0f011d7add0978c5f05e0"
+  },
+  "overlay": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/AffinityFigures.jsx",
+    "bytes": 19602,
+    "sha256": "7747310c4415076ba6ed590228b21ab71f5fb9e1179b1fc5ec58a99d9f279203"
+  },
+  "checker": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/check-source-ssr.mjs",
+    "bytes": 4946,
+    "sha256": "521a8aa28ae41b407a7bf99568b6bb8112670d96e5bd52343a40f18fc98fa607"
+  },
+  "passedGroups": [
+    "Three actual CrowdingGeometry SVGs render with complete unchanged point circles, edges and axes",
+    "Every original geometric path remains exact; only two explicit label leaders are added",
+    "All mathematical labels, point IDs and captions remain in the same sequence",
+    "CSS preserves exact original prefix and contains only ordinary paragraph/code wrapping after it"
+  ],
+  "groups": 4,
+  "originalSvgSha256": "1d46bb932a2d90e81418ff809e3daa42548130118428cead7233e9026c7b5f48",
+  "successorSvgSha256": "77f3ddc4aa1a5a7e6305726e82b9f61f996c2e56563a569014bfd4bfc70f9405",
+  "qualification": "Three affected static SVGs only. No browser, science main/fit, full-lab campaign or native overlap/accessibility acceptance."
+}

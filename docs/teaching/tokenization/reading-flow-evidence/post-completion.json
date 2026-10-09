@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "checkedAt": "2026-10-06T14:37:14.264Z",
+  "rows": [
+    {
+      "id": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+      "revision": 3,
+      "content": "complete",
+      "implementation": "complete",
+      "contentFiles": 11,
+      "reviewedFiles": 53,
+      "previousRevisions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "byte-level-tokenization-token-free-models",
+      "revision": 3,
+      "content": "complete",
+      "implementation": "complete",
+      "contentFiles": 11,
+      "reviewedFiles": 51,
+      "previousRevisions": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "vocabulary-design-multilingual-tokenization",
+      "revision": 3,
+      "content": "complete",
+      "implementation": "complete",
+      "contentFiles": 13,
+      "reviewedFiles": 55,
+      "previousRevisions": [
+        1,
+        2
+      ]
+    }
+  ],
+  "integrationSha256": "6c11264957d204b3faf8dad08755d24942f2eb5598d20aa1eb03d176abe9f7fa",
+  "sourceState": "Exact current content and implementation file hashes; registry matches scoped records.",
+  "curriculum": "29 modules,1461 stable topics,659 individual briefs,10 paths; graphs acyclic;1002 original IDs preserved.",
+  "publication": "253 published lessons,482 outlines; no stale generated metadata.",
+  "repository": "Ignore checks passed21066 files and9 future probes.",
+  "limits": "This checks selected current phases, not unrelated lesson completion or user acceptance."
+}

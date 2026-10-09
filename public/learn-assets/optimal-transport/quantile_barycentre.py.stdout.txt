@@ -1,0 +1,22 @@
+case equal
+packets [['0', '1/2', '0', '2'], ['1/2', '1', '2', '4']]
+lambda 0 law [['0', '1/2'], ['2', '1/2']]
+costs/objective/mixture ['0', '4', '0', '0']
+lambda 1/4 law [['1/2', '1/2'], ['5/2', '1/2']]
+costs/objective/mixture ['1/4', '9/4', '3/4', '3/2']
+lambda 1/2 law [['1', '1/2'], ['3', '1/2']]
+costs/objective/mixture ['1', '1', '1', '2']
+lambda 1 law [['2', '1/2'], ['4', '1/2']]
+costs/objective/mixture ['4', '0', '0', '0']
+case unequal
+packets [['0', '1/4', '0', '1'], ['1/4', '1/2', '2', '1'], ['1/2', '1', '2', '5']]
+lambda 0 law [['0', '1/4'], ['2', '3/4']]
+costs/objective/mixture ['0', '5', '0', '0']
+lambda 1/4 law [['1/4', '1/4'], ['7/4', '1/4'], ['11/4', '1/2']]
+costs/objective/mixture ['5/16', '45/16', '15/16', '15/8']
+lambda 1/2 law [['1/2', '1/4'], ['3/2', '1/4'], ['7/2', '1/2']]
+costs/objective/mixture ['5/4', '5/4', '5/4', '5/2']
+lambda 1 law [['1', '1/2'], ['5', '1/2']]
+costs/objective/mixture ['5', '0', '0', '0']
+gaussian midpoint mean/sd/variance [2, 2, 4]
+gaussian mixture variance 9

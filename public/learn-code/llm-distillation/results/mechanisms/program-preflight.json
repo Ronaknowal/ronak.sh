@@ -1,0 +1,80 @@
+{
+  "scope": "Constructed random models, two optimizer plumbing steps; no scientific fit, selected checkpoint, teacher corpus or held-out evaluation.",
+  "parameter_gradient_checks": [
+    {
+      "parameter": "token.weight",
+      "max_error": 2.6020852139652106e-18
+    },
+    {
+      "parameter": "position.weight",
+      "max_error": 2.3852447794681098e-18
+    },
+    {
+      "parameter": "blocks.0.ln1.weight",
+      "max_error": 1.6263032587282567e-18
+    },
+    {
+      "parameter": "blocks.0.ln1.bias",
+      "max_error": 7.589415207398531e-19
+    },
+    {
+      "parameter": "blocks.0.ln2.weight",
+      "max_error": 1.3010426069826053e-18
+    },
+    {
+      "parameter": "blocks.0.ln2.bias",
+      "max_error": 8.402566836762659e-19
+    },
+    {
+      "parameter": "blocks.0.attention.qkv.weight",
+      "max_error": 1.5178830414797062e-18
+    },
+    {
+      "parameter": "blocks.0.attention.out.weight",
+      "max_error": 1.260385025514399e-18
+    },
+    {
+      "parameter": "blocks.0.mlp.0.weight",
+      "max_error": 2.168404344971009e-18
+    },
+    {
+      "parameter": "blocks.0.mlp.0.bias",
+      "max_error": 8.673617379884035e-19
+    },
+    {
+      "parameter": "blocks.0.mlp.2.weight",
+      "max_error": 3.903127820947816e-18
+    },
+    {
+      "parameter": "blocks.0.mlp.2.bias",
+      "max_error": 2.3852447794681098e-18
+    },
+    {
+      "parameter": "norm.weight",
+      "max_error": 6.938893903907228e-18
+    },
+    {
+      "parameter": "norm.bias",
+      "max_error": 3.469446951953614e-18
+    },
+    {
+      "parameter": "head.weight",
+      "max_error": 3.469446951953614e-18
+    }
+  ],
+  "loss": 0.32754206545073583,
+  "teacher_gradients_absent": true,
+  "causal_padding": true,
+  "exact_resume": true,
+  "sampling_batch_invariance": true,
+  "matched_candidate_membership": true,
+  "sources": {
+    "distillation_evaluate.py": "35e550fe8dea7f7f4605e692ca13491457519b09bf593dd2624c8ac040c1ab78",
+    "distillation_loss.py": "34b338715dfdd5ac3100f0bd124aa0c3684f62b308c3ad5ac059ec777a8dae6d",
+    "distillation_student.py": "367669a6c4292e5fff5bca13bab40cc05e0772593b08182e3d8a683837ac15ac",
+    "distillation_study.py": "d17cab867419de60f0319140e97ed23c3bda8f3ae0da876db54a05399141b4a9",
+    "distillation_teacher.py": "fc7bc10a5738b4695898546edada08543b8ca05dc15348812f1f4c2a08ee67fb",
+    "distillation_traces.py": "dce5274ef664863899abd27a81d1b4d0bf657cf57fb5c9d690c030c13f9fd710",
+    "tiny_causal_lm.py": "9b0fe7cd93bf672f9904fc9240fc2857838c9a51015a53942d799d916518e103"
+  }
+}

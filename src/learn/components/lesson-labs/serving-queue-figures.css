@@ -1,0 +1,52 @@
+.sq-figure {
+  margin: 1.6rem 0;
+  min-width: 0;
+  max-width: 100%;
+}
+.sq-figure svg {
+  display: block;
+  overflow: visible;
+  flex: none;
+  color: #ddd;
+  font-family: inherit;
+  font-size: 16px;
+}
+.sq-figure svg text:not([fill]) { fill: currentColor; }
+.sq-axis { stroke: #a3a3a3; fill: none; }
+.sq-axis text { stroke: none; }
+.sq-guide { stroke: #777; stroke-width: 1; stroke-dasharray: 3 4; }
+.sq-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  padding: .2rem 0 .6rem;
+  scrollbar-width: auto;
+  overscroll-behavior-x: contain;
+}
+.sq-scroll:focus-visible { outline: 2px solid #ffc36b; outline-offset: 4px; }
+.sq-figure figcaption { margin: .8rem 0; font-size: 1rem; line-height: 1.65; }
+.sq-controls { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+.sq-controls label, .sq-slider { display: flex; flex-direction: column; gap: .5rem; flex: 1 1 12rem; }
+.sq-slider label { flex: none; }
+.sq-controls select { width: 100%; min-width: 0; }
+.sq-controls input[type="text"] { width: 100%; min-width: 0; padding: .5rem; }
+.sq-scroll-hint { font-size: .9rem; color: #bdbdbd; margin: .25rem 0 .8rem; }
+.sq-lesson .sq-inline-math > span { font-size: 1em !important; }
+.sq-lesson h2 { font-size: 1.375rem !important; }
+.sq-lesson h3 { font-size: 1.25rem !important; }
+.reader-article .sq-lesson .lesson-code pre { font-size: .75rem; }
+.reader-content:has(.sq-lesson) .lesson-compass .lesson-compass__sections { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22em), 1fr)); }
+.reader-content:has(.sq-lesson) .lesson-compass__sections a { overflow-wrap: normal; }
+.sq-controls button { align-self: flex-end; }
+.sq-slider input { width: 100%; }
+.sq-table table { border-collapse: collapse; min-width: 100%; font-size: 1rem; }
+.sq-table th, .sq-table td { padding: .6rem .8rem; border-bottom: 1px solid #383838; text-align: left; white-space: nowrap; }
+.sq-table caption { text-align: left; padding: .5rem 0; }
+.sq-lesson .sq-math { overflow-x: auto; max-width: 100%; padding-bottom: .4rem; }
+.sq-lesson .sq-math:focus-visible { outline: 2px solid #ffc36b; }
+.sq-lesson .sq-math .katex-display { width: max-content; min-width: 100%; }
+.sq-lesson .sq-math .katex-html { white-space: nowrap; }
+.sq-lesson .sq-math .katex-mathml { position: absolute; width: 1px; height: 1px; clip: rect(1px, 1px, 1px, 1px); overflow: hidden; }
+@media (max-width: 40rem) {
+  .sq-controls { align-items: stretch; }
+  .sq-controls button { align-self: flex-start; }
+}

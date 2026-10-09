@@ -95,6 +95,5 @@ export function RwkvTrajectoryLab() {
 export function RwkvProgram({ file, title }) {
   return <>
     <RemoteCodeBlock source={`/learn-code/rwkv-linear-attention-models/${file}`} language="python" filename={file} title={(title)} />
-    <p><a href={url} download>Download {file}</a></p>
   </>;
 }

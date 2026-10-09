@@ -1,0 +1,335 @@
+{
+  "status": "PASS_COMPLETE_CORRECTION_SOURCE_FREEZE_AWAITING_SAME_REVIEW",
+  "at": "2026-10-09T08:54:30.376949+00:00",
+  "author": "/root/tsne_consolidated_content_correction",
+  "python": "3.11.7 (main, Dec  7 2023, 09:09:57)  [GCC UCRT 13.2.0 64 bit (AMD64)]",
+  "script": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/freeze-source.py",
+    "bytes": 17612,
+    "sha256": "1ca91072574f1686f08f696b7f58c3ea90b1008c8f6ce2c67a58c19041d6041c"
+  },
+  "predecessorSubmission": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/author-ready.json",
+    "bytes": 6092,
+    "sha256": "1832c1bc6800da4ee0a8e1cf6008485c85bfd0d7ac59c0219cc17d69470b16a7"
+  },
+  "frozenWholeReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review-packet-source-bound.json",
+    "bytes": 7366,
+    "sha256": "bb5f13a8ab1478b38ed9f6155effd2a746ec064923ce4e6db01fc009b6d1858a"
+  },
+  "inheritedSourceReceipt": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/source-binding-check.json",
+    "bytes": 229904,
+    "sha256": "1215133e6867101ed6dee69ec8ab4f2cf275dbe8bdd31bdd3bebbdb47cf9b4c3"
+  },
+  "inherited623DescriptorsFreshlyConserved": true,
+  "originalInputs": 118,
+  "originalPairs": 40,
+  "author272GuardDescriptorsConserved": true,
+  "descriptorCount": 709,
+  "uniqueDescriptorPaths": 196,
+  "guardRoles": {
+    "frozen-whole-review": 1,
+    "frozen-whole-review-source-receipt": 1,
+    "preserved-exact-reviewed-submission": 3,
+    "preserved-author-ready-selected-input": 16,
+    "preserved-accepted-design-118-inputs": 118,
+    "preserved-accepted-effective-design": 5,
+    "preserved-protected-original": 40,
+    "preserved-protected-copy": 40,
+    "preserved-author-272-current-source-conservation": 272,
+    "preserved-whole-author-saved-source-inventory": 64,
+    "preserved-complete-displayed-program-source": 15,
+    "preserved-complete-displayed-stream-source": 10,
+    "preserved-complete-learner-payload": 35,
+    "preserved-setup": 1,
+    "preserved-complete-manuscript-inverse-current": 1,
+    "preserved-complete-manuscript-inverse-predecessor": 1,
+    "preserved-whole-map-manuscript": 1,
+    "preserved-whole-map-specifications": 1,
+    "current-neighbor-acceptance-reference": 1,
+    "exact-delta-predecessor": 5,
+    "exact-delta-current": 5,
+    "current-whole-displayed-source": 15,
+    "retained-whole-displayed-stream": 10,
+    "gaussian-stream-exact-executed-predecessor": 1,
+    "gaussian-stream-declared-current-source": 1,
+    "corrected-setup": 1,
+    "current-complete-learner-payload": 35,
+    "usable-physical-import-source": 1,
+    "usable-physical-import-target": 1,
+    "bounded-callable-check-current-source": 1,
+    "bounded-callable-check-predecessor-source": 1,
+    "bounded-callable-check-script": 1,
+    "current-map-manuscript": 1,
+    "current-map-specifications": 1,
+    "current-map-completeCodeAndStreamAuthority": 1,
+    "current-map-completeDownloadAuthority": 1,
+    "current-map-completeProgramBundle": 1
+  },
+  "exactDelta": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/exact-source-delta.json",
+    "bytes": 33939,
+    "sha256": "b60aec4a68a02cc29f18e29d8508a4c20d482dda3542d600baa1e204bc2fd5f3"
+  },
+  "exactInverseFiles": 5,
+  "changedFences": [
+    5
+  ],
+  "unchangedFenceCount": 30,
+  "completeDisplayedSourceStreamPairs": 15,
+  "completeLearnerPayloads": 35,
+  "usableSiblingImports": 1,
+  "structure": {
+    "sections": 13,
+    "drawings": 45,
+    "investigations": 12,
+    "solvedTasks": 19
+  },
+  "routeSourceInputs": [
+    {
+      "path": "src/app/SiteRoutes.jsx",
+      "bytes": 4396,
+      "sha256": "f266aba4798586bd8e45a61d4dcfcef748098f6e3b959595523c753f6d5983c5"
+    },
+    {
+      "path": "src/learn/data/generated/navigation.js",
+      "bytes": 942933,
+      "sha256": "ad0eb4e50666b0b09af2e1a28ed5f7783ad0bd4f7d2363dc32ac6d67725ffd7e"
+    },
+    {
+      "path": "src/learn/data/curriculum/learning-paths.js",
+      "bytes": 9661,
+      "sha256": "09e8aaf90aba674029c7fe9995810df682f3a0d3799b38bc7b056a8598e9d2ae"
+    },
+    {
+      "path": "src/learn/data/generated/lesson-imports.js",
+      "bytes": 27859,
+      "sha256": "c5d6d30b9ab8a878140378ef4e45d5380319ba634716edd23f78e87c4bfb905e"
+    },
+    {
+      "path": "src/learn/components/content/Headings.jsx",
+      "bytes": 1405,
+      "sha256": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f"
+    }
+  ],
+  "allLocalLearnerRoutes": [
+    {
+      "url": "/learn/path/full-curriculum/pca-dimensionality-reduction?module=classical-ml#4-fit-once-project-and-reconstruct-in-python",
+      "manuscriptLine": 9,
+      "topicId": "pca-dimensionality-reduction",
+      "module": "classical-ml",
+      "target": {
+        "path": "src/learn/data/topics/pca-dimensionality-reduction.jsx",
+        "bytes": 146487,
+        "sha256": "39890fd5a835d085fe3ea46728f3d1b3781d435eedf51d9723bf6f0515e35657"
+      },
+      "anchor": "4-fit-once-project-and-reconstruct-in-python",
+      "passed": true
+    },
+    {
+      "url": "/learn/path/full-curriculum/clustering-evaluation-validation-silhouette-ari-nmi?module=classical-ml#4-a-score-evaluates-a-geometry-as-well-as-a-partition",
+      "manuscriptLine": 9,
+      "topicId": "clustering-evaluation-validation-silhouette-ari-nmi",
+      "module": "classical-ml",
+      "target": {
+        "path": "src/learn/data/topics/clustering-evaluation-validation-silhouette-ari-nmi.jsx",
+        "bytes": 147912,
+        "sha256": "58daaa6d2c5543672d04be8c1aa2d4e1014e55e57ff6c373d39860352ce05be0"
+      },
+      "anchor": "4-a-score-evaluates-a-geometry-as-well-as-a-partition",
+      "passed": true
+    },
+    {
+      "url": "/learn/path/full-curriculum/pca-dimensionality-reduction?module=classical-ml#5-scaling-changes-which-differences-matter",
+      "manuscriptLine": 33,
+      "topicId": "pca-dimensionality-reduction",
+      "module": "classical-ml",
+      "target": {
+        "path": "src/learn/data/topics/pca-dimensionality-reduction.jsx",
+        "bytes": 146487,
+        "sha256": "39890fd5a835d085fe3ea46728f3d1b3781d435eedf51d9723bf6f0515e35657"
+      },
+      "anchor": "5-scaling-changes-which-differences-matter",
+      "passed": true
+    },
+    {
+      "url": "/learn/path/full-curriculum/k-means-hierarchical-clustering?module=classical-ml#2-make-the-geometry-explicit",
+      "manuscriptLine": 33,
+      "topicId": "k-means-hierarchical-clustering",
+      "module": "classical-ml",
+      "target": {
+        "path": "src/learn/data/topics/k-means-hierarchical-clustering.jsx",
+        "bytes": 258238,
+        "sha256": "d0bbf2de6cdfc108deb9d85396b9c07c90a1b098bfb216fc59b2dc74fae99581"
+      },
+      "anchor": "2-make-the-geometry-explicit",
+      "passed": true
+    },
+    {
+      "url": "/learn/path/full-curriculum/pca-dimensionality-reduction?module=classical-ml#10-deeper-branches",
+      "manuscriptLine": 33,
+      "topicId": "pca-dimensionality-reduction",
+      "module": "classical-ml",
+      "target": {
+        "path": "src/learn/data/topics/pca-dimensionality-reduction.jsx",
+        "bytes": 146487,
+        "sha256": "39890fd5a835d085fe3ea46728f3d1b3781d435eedf51d9723bf6f0515e35657"
+      },
+      "anchor": "10-deeper-branches",
+      "passed": true
+    },
+    {
+      "url": "/learn/path/full-curriculum/support-vector-machines-svm?module=classical-ml#5-change-similarity-with-a-valid-kernel",
+      "manuscriptLine": 311,
+      "topicId": "support-vector-machines-svm",
+      "module": "classical-ml",
+      "target": {
+        "path": "src/learn/data/topics/support-vector-machines-svm.jsx",
+        "bytes": 159089,
+        "sha256": "9f122666e7cdd47bc301520b592a3fa15dd1db4c22043ac13fb1607a46d0d2a5"
+      },
+      "anchor": "5-change-similarity-with-a-valid-kernel",
+      "passed": true
+    },
+    {
+      "url": "/learn/path/full-curriculum/clustering-evaluation-validation-silhouette-ari-nmi?module=classical-ml#4-a-score-evaluates-a-geometry-as-well-as-a-partition",
+      "manuscriptLine": 945,
+      "topicId": "clustering-evaluation-validation-silhouette-ari-nmi",
+      "module": "classical-ml",
+      "target": {
+        "path": "src/learn/data/topics/clustering-evaluation-validation-silhouette-ari-nmi.jsx",
+        "bytes": 147912,
+        "sha256": "58daaa6d2c5543672d04be8c1aa2d4e1014e55e57ff6c373d39860352ce05be0"
+      },
+      "anchor": "4-a-score-evaluates-a-geometry-as-well-as-a-partition",
+      "passed": true
+    },
+    {
+      "url": "/learn/track/deep-learning-fundamentals",
+      "manuscriptLine": 995,
+      "module": "deep-learning-fundamentals",
+      "moduleTitle": "Deep Learning Fundamentals & Architectures",
+      "passed": true
+    },
+    {
+      "url": "/learn/path/full-curriculum/independent-component-analysis-ica?module=classical-ml",
+      "manuscriptLine": 1825,
+      "topicId": "independent-component-analysis-ica",
+      "module": "classical-ml",
+      "target": {
+        "path": "src/learn/data/topics/independent-component-analysis-ica.jsx",
+        "bytes": 57439,
+        "sha256": "bbb5ff01036487f38ab219e138d60829e7b069311b09f074e50fd78740557d5f"
+      },
+      "passed": true
+    }
+  ],
+  "l7StateProtocol": {
+    "specificationLine": 218,
+    "sourceContractOnly": true,
+    "runtimeChecksDeferred": true
+  },
+  "boundedNewNumericalReceipt": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/gaussian-row-check.json",
+    "bytes": 4918,
+    "sha256": "9a47d19c829d71cf2f883ce27439686f4b30def8d6e6b1646b55c711bab20b72"
+  },
+  "originalScientificEvidence": {
+    "witnesses": 41,
+    "tenStreams": 10,
+    "fiveOriginalProgramsAndFits": true,
+    "replayed": false,
+    "sourceBinding": "Exact predecessor owners and frozen whole-review receipt, freshly guarded by identity; no new numerical attribution."
+  },
+  "currentSources": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/amend-content.py",
+      "bytes": 16659,
+      "sha256": "858c51147ea88d95b19d928936b360fa840e815217b7530c897ff5cd68efe615"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/assemble-code.py",
+      "bytes": 11037,
+      "sha256": "d792d69ae5f007b23ff9bed590257326de5c4f81350e454b1e9da60cb37b5dc8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-reading-and-handoff.md",
+      "bytes": 11764,
+      "sha256": "6f629d7040e6628751bb7a044f1db52ce4495438165e99f1cd6c2ce86e39cb1c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/check-gaussian-row.py",
+      "bytes": 4193,
+      "sha256": "b386ce324b837d0c471617bf96c85cb00aa01cf314767d88fc6723c32731f982"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/code-presentation-index.json",
+      "bytes": 17977,
+      "sha256": "fb046ca6835b60bce6a8625467ba93697fcf176fdd2cb7d105af0b6938e3fce4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/content-map.json",
+      "bytes": 25152,
+      "sha256": "7f1117a10e22a92037cd84515dc1ec6125254b4389312af2c9a6deb816549907"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/current-api-and-resource-notes.md",
+      "bytes": 5219,
+      "sha256": "f13c791133b5ca15397dc965308bed3482c5bcd5547872b7e93d94b8b8f88ed3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/exact-source-delta.json",
+      "bytes": 33939,
+      "sha256": "b60aec4a68a02cc29f18e29d8508a4c20d482dda3542d600baa1e204bc2fd5f3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/file-index.json",
+      "bytes": 15889,
+      "sha256": "34a93beaed07a6ff1a8ced9ef0314b1bfa3fbaea195f254b88d9e1ee04e77b4c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/freeze-source.py",
+      "bytes": 17612,
+      "sha256": "1ca91072574f1686f08f696b7f58c3ea90b1008c8f6ce2c67a58c19041d6041c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/gaussian-row-check.json",
+      "bytes": 4918,
+      "sha256": "9a47d19c829d71cf2f883ce27439686f4b30def8d6e6b1646b55c711bab20b72"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+      "bytes": 15655,
+      "sha256": "33a3f8b57d4f8bff7b833aca77ca95a263daa6adb008fa0ee91474460606217c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/programs/gaussian_rows.py",
+      "bytes": 3070,
+      "sha256": "22b027b6683bc6a106da83f0d478fb3c1ca700a1556242e44f423de2a9fdd63e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/reading-flow-manuscript.md",
+      "bytes": 138332,
+      "sha256": "8d1c32dc7cf8de49b99fd6198671927c52196d7ac5714dd0ec90c70eebfbbec5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/setup-and-files.md",
+      "bytes": 7557,
+      "sha256": "0b11d995f5822d5f5e0182db03248bbad23f8030acc0f2adcc2dd3515635d72c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/visual-and-investigation-specifications.md",
+      "bytes": 45697,
+      "sha256": "07aee732555d0a30e519fa7feb1687d58837d4b232640a337b0e500de5a217b3"
+    }
+  ],
+  "lessonModulesImportedByThisScript": 0,
+  "historicalCheckersRun": 0,
+  "historicalMainsRun": 0,
+  "fits": 0,
+  "builds": 0,
+  "browserChecks": 0,
+  "phasePromotion": false
+}

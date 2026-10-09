@@ -1,0 +1,350 @@
+{
+  "lenet": [
+    {
+      "id": "input",
+      "role": "input",
+      "shape": "1 × 32 × 32",
+      "label": "Input image",
+      "detail": "A 32 × 32 grid of pixel values; a centered digit sits inside it."
+    },
+    {
+      "id": "C1",
+      "kind": "conv",
+      "shape": "6 × 28 × 28",
+      "label": "C1 · 5 × 5 convolution, 6 filters, + tanh",
+      "params": 156,
+      "detail": "6 filters × (25 weights + 1 bias). Valid placements: 32 − 5 + 1 = 28 per axis."
+    },
+    {
+      "id": "S2",
+      "kind": "pool",
+      "shape": "6 × 14 × 14",
+      "label": "S2 · 2 × 2 subsampling, + tanh",
+      "params": 12,
+      "detail": "Add each non-overlapping 2 × 2 block, multiply by one learned coefficient, add one learned bias, then squash with tanh. 2 parameters per map."
+    },
+    {
+      "id": "C3",
+      "kind": "conv",
+      "shape": "16 × 10 × 10",
+      "label": "C3 · 5 × 5 convolution, 16 filters, + tanh",
+      "params": 1516,
+      "detail": "Partially connected: each of the 16 maps reads a chosen subset of the 6 S2 maps (paper Table 1), not all of them."
+    },
+    {
+      "id": "S4",
+      "kind": "pool",
+      "shape": "16 × 5 × 5",
+      "label": "S4 · 2 × 2 subsampling, + tanh",
+      "params": 32,
+      "detail": "Same rule as S2, on 16 maps."
+    },
+    {
+      "id": "C5",
+      "kind": "conv",
+      "shape": "120 × 1 × 1",
+      "label": "C5 · 5 × 5 convolution, 120 filters, + tanh",
+      "params": 48120,
+      "detail": "120 × (16 × 25 + 1). On a 5 × 5 input there is exactly one placement, so it acts like a dense layer here."
+    },
+    {
+      "id": "F6",
+      "kind": "dense",
+      "shape": "84",
+      "label": "F6 · dense layer, 120 → 84, + tanh",
+      "params": 10164,
+      "detail": "84 × (120 + 1). Every one of the 120 inputs reaches every one of the 84 units."
+    },
+    {
+      "id": "out",
+      "kind": "template",
+      "shape": "10",
+      "label": "Output · distance from F6 to 10 fixed class templates",
+      "params": 0,
+      "detail": "Each class unit measures the squared distance between F6’s 84 values and a fixed 84-value template for that class, chosen by hand and not trained (smaller = more likely). It has no learned parameters."
+    }
+  ],
+  "alexnet": {
+    "input": "3 × 227 × 227",
+    "layers": [
+      {
+        "kind": "conv",
+        "label": "conv1 · 11 × 11, stride 4, 96 filters, + ReLU, + LRN",
+        "shape": "96 × 55 × 55",
+        "params": 34944,
+        "split": "48 + 48"
+      },
+      {
+        "kind": "pool",
+        "label": "Max pool 3 × 3, stride 2 (overlapping)",
+        "shape": "96 × 27 × 27"
+      },
+      {
+        "kind": "conv",
+        "label": "conv2 · 5 × 5, padding 2, 256 filters, + ReLU, + LRN",
+        "shape": "256 × 27 × 27",
+        "params": 307456,
+        "split": "128 + 128, each reading its own 48 maps"
+      },
+      {
+        "kind": "pool",
+        "label": "Max pool 3 × 3, stride 2",
+        "shape": "256 × 13 × 13"
+      },
+      {
+        "kind": "conv",
+        "label": "conv3 · 3 × 3, padding 1, 384 filters, + ReLU",
+        "shape": "384 × 13 × 13",
+        "params": 885120,
+        "split": "reads all 256 maps: the cross-GPU layer"
+      },
+      {
+        "kind": "conv",
+        "label": "conv4 · 3 × 3, padding 1, 384 filters, + ReLU",
+        "shape": "384 × 13 × 13",
+        "params": 663936,
+        "split": "192 + 192"
+      },
+      {
+        "kind": "conv",
+        "label": "conv5 · 3 × 3, padding 1, 256 filters, + ReLU",
+        "shape": "256 × 13 × 13",
+        "params": 442624,
+        "split": "128 + 128"
+      },
+      {
+        "kind": "pool",
+        "label": "Max pool 3 × 3, stride 2",
+        "shape": "256 × 6 × 6"
+      },
+      {
+        "kind": "reshape",
+        "label": "flatten 256 × 6 × 6 → 9,216 numbers",
+        "shape": "9216"
+      },
+      {
+        "kind": "dense",
+        "label": "fc6 · 9,216 → 4,096, + ReLU, + dropout 0.5",
+        "shape": "4096",
+        "params": 37752832
+      },
+      {
+        "kind": "dense",
+        "label": "fc7 · 4,096 → 4,096, + ReLU, + dropout 0.5",
+        "shape": "4096",
+        "params": 16781312
+      },
+      {
+        "kind": "dense",
+        "label": "fc8 · 4,096 → 1,000 class scores",
+        "shape": "1000",
+        "params": 4097000
+      }
+    ],
+    "total": 60965224,
+    "torchvisionTotal": 61100840
+  },
+  "vgg16": {
+    "input": "3 × 224 × 224",
+    "stages": [
+      {
+        "convs": 2,
+        "channels": 64,
+        "size": 224,
+        "params": 38720
+      },
+      {
+        "convs": 2,
+        "channels": 128,
+        "size": 112,
+        "params": 221440
+      },
+      {
+        "convs": 3,
+        "channels": 256,
+        "size": 56,
+        "params": 1475328
+      },
+      {
+        "convs": 3,
+        "channels": 512,
+        "size": 28,
+        "params": 5899776
+      },
+      {
+        "convs": 3,
+        "channels": 512,
+        "size": 14,
+        "params": 7079424
+      }
+    ],
+    "trunk": 14714688,
+    "head": [
+      102764544,
+      16781312,
+      4097000
+    ],
+    "total": 138357544
+  },
+  "inception3a": {
+    "input": [
+      192,
+      28,
+      28
+    ],
+    "branches": [
+      {
+        "name": "1 × 1",
+        "reduced": [
+          {
+            "kind": "mix",
+            "label": "1 × 1 conv, 192 → 64, + ReLU",
+            "weights": 12288
+          }
+        ],
+        "naive": [
+          {
+            "kind": "mix",
+            "label": "1 × 1 conv, 192 → 64, + ReLU",
+            "weights": 12288
+          }
+        ],
+        "out": 64,
+        "naiveOut": 64
+      },
+      {
+        "name": "3 × 3",
+        "reduced": [
+          {
+            "kind": "mix",
+            "label": "1 × 1 reduce, 192 → 96, + ReLU",
+            "weights": 18432
+          },
+          {
+            "kind": "conv",
+            "label": "3 × 3 conv, 96 → 128, + ReLU",
+            "weights": 110592
+          }
+        ],
+        "naive": [
+          {
+            "kind": "conv",
+            "label": "3 × 3 conv, 192 → 128, + ReLU",
+            "weights": 221184
+          }
+        ],
+        "out": 128,
+        "naiveOut": 128
+      },
+      {
+        "name": "5 × 5",
+        "reduced": [
+          {
+            "kind": "mix",
+            "label": "1 × 1 reduce, 192 → 16, + ReLU",
+            "weights": 3072
+          },
+          {
+            "kind": "conv",
+            "label": "5 × 5 conv, 16 → 32, + ReLU",
+            "weights": 12800
+          }
+        ],
+        "naive": [
+          {
+            "kind": "conv",
+            "label": "5 × 5 conv, 192 → 32, + ReLU",
+            "weights": 153600
+          }
+        ],
+        "out": 32,
+        "naiveOut": 32
+      },
+      {
+        "name": "pool",
+        "reduced": [
+          {
+            "kind": "pool",
+            "label": "3 × 3 max pool, stride 1",
+            "weights": 0
+          },
+          {
+            "kind": "mix",
+            "label": "1 × 1 projection, 192 → 32, + ReLU",
+            "weights": 6144
+          }
+        ],
+        "naive": [
+          {
+            "kind": "pool",
+            "label": "3 × 3 max pool, stride 1",
+            "weights": 0
+          }
+        ],
+        "out": 32,
+        "naiveOut": 192
+      }
+    ],
+    "reducedWeights": 163328,
+    "naiveWeights": 387072,
+    "positions": 784,
+    "tableParams": "159K",
+    "tableOps": "128M"
+  },
+  "resnet": {
+    "basic": {
+      "shape": "64 × 56 × 56",
+      "params": 73984
+    },
+    "projection": {
+      "input": "64 × 56 × 56",
+      "output": "128 × 28 × 28",
+      "params": 230144,
+      "skipParams": 8448
+    },
+    "bottleneck": {
+      "shape": "256 × 56 × 56",
+      "widths": [
+        256,
+        64,
+        64,
+        256
+      ],
+      "params": 70400
+    }
+  },
+  "mbconv": {
+    "input": 24,
+    "expanded": 144,
+    "squeeze": 6,
+    "kernel": 3,
+    "size": 56,
+    "parts": {
+      "expand": 3744,
+      "depthwise": 1584,
+      "se": 1878,
+      "project": 3504
+    },
+    "total": 10710
+  },
+  "mbconvPractice": {
+    "input": 40,
+    "expanded": 240,
+    "squeeze": 10,
+    "kernel": 5,
+    "size": 28,
+    "parts": {
+      "expand": 10080,
+      "depthwise": 6480,
+      "se": 5050,
+      "project": 9680
+    },
+    "total": 31290
+  },
+  "scaling": {
+    "alpha": 1.2,
+    "beta": 1.1,
+    "gamma": 1.15,
+    "baseLayers": 5
+  }
+}

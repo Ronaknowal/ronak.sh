@@ -1,0 +1,707 @@
+{
+  "schemaVersion": 1,
+  "status": "COMPLETE_CORRECTED_DESIGN_INTAKEN_CONTENT_AUTHORING_STARTED",
+  "topicId": "t-sne-umap-manifold-learning",
+  "modulePosition": 17,
+  "contentAuthor": "/root/survival_content_independent_review",
+  "designAuthor": "/root/clustering_evaluation_author",
+  "authorization": "Root NEW_TASK: complete manuscript authoring only; new sources confined to content-authoring/",
+  "effectiveDesign": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/assessment-and-continuity.md",
+      "bytes": 15159,
+      "sha256": "73e18a04b31514450767de2916a3a81d215ab1732f37b7c6aaf1c8527af38faf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-programs-and-practice.md",
+      "bytes": 21435,
+      "sha256": "f8a5b6c6709814122e6bba449e211625bf141f0a0efd48798f24a108cef3770c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-research.md",
+      "bytes": 14732,
+      "sha256": "cab6c0afc486ba938add9faa3760050d8fcca94190afb1f80d776c50ab4c59a6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/mds-api-proposed-design.md",
+      "bytes": 33791,
+      "sha256": "6fc084e24333b60434bb95e5c7a79df805add6da80d7c233a3011bd46c7e7435"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/mds-contract-amendment.md",
+      "bytes": 5692,
+      "sha256": "535c4544bdbf0356b7e6a565ed9151f64f68984bd38571fc99057b3f3552f1bf"
+    }
+  ],
+  "designReady": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/author-ready-packet.json",
+    "bytes": 3979,
+    "sha256": "b3d7ef244e1d763c9a8030535ebdbab76f4f9534d7a8fe6a29c4e7a596061614",
+    "role": "b3d7ef24 corrected full proposal"
+  },
+  "originalWholeReview": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/review.md",
+      "bytes": 14475,
+      "sha256": "ad229d170842fa0335f5aff496f8666ef6c1ea1fa0542e1d173a204da3b6e4f8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/packet.json",
+      "bytes": 29469,
+      "sha256": "67d92f9af9e95a3c3c2149fe8deef235f1a0fc77a1c9eb9d2a28ab5d41e80080"
+    }
+  ],
+  "sameDesignClosure": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/same-api-closure/packet.json",
+    "bytes": 3449,
+    "sha256": "c012f1067b977df8188de99f22ed022652e51b0964f231e09e6bd900a9cb1ef1",
+    "role": "c012f106 SAME singleR1 design-only pass"
+  },
+  "sameReport": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-design-review/same-api-closure/report.md",
+    "bytes": 3923,
+    "sha256": "aaa88b1481180c4ef1e0a5c0ae67bb6da4617b818322e6add68686b7ee85cc2d"
+  },
+  "originalProposal": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/proposed-design-packet.json",
+    "bytes": 23274,
+    "sha256": "92aafa0d19b0a3f5fe2efd62d6b5f87f891a4e737a96c141c0dbb3dfac7c65c4"
+  },
+  "originalProposalBindings": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/assessment-and-continuity.md",
+      "bytes": 15159,
+      "sha256": "73e18a04b31514450767de2916a3a81d215ab1732f37b7c6aaf1c8527af38faf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/research.md",
+      "bytes": 14148,
+      "sha256": "b00251330e50b9955fac48d60072e03f5fd3072ac6fc8ef68bd648633dce5e71"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/proposed-design.md",
+      "bytes": 33262,
+      "sha256": "2320331840e4dbf62589c2b8bdeffce46925fed5b23f9a485e681e5e7814ddc1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/programs-and-practice.md",
+      "bytes": 20864,
+      "sha256": "bb2ded0770f39d0c940f645c36c779670c8878090460c85c66fff8f6b5fce7f1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/source-conservation.json",
+      "bytes": 15049,
+      "sha256": "ec475eac0683b58bc794b66aa2e520b7901a0bc45f9c7fec2c15a992a630162b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/catalogue-selected.json",
+      "bytes": 1246,
+      "sha256": "93def9c8fd86dcc0105f79bf048c68a85bd8ab33031e510785ca30bee0a49276"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/intake-inspection.json",
+      "bytes": 12918,
+      "sha256": "ce69b09b97d14cb44d1afe89e46936fc2c7ebe9970b0ce69784fc7edae980f0d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-arithmetic.json",
+      "bytes": 1622,
+      "sha256": "4f84e5ee8159fe47a9fb83d6d711d285ed3aa70eeeed2398c15f69e7db7dbe2c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/preserve-inputs.py",
+      "bytes": 4674,
+      "sha256": "191a755e6bce58940b4be708eec03df1362bbf32101f348a6bbaeb8f25a65f10"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/inspect-intake.mjs",
+      "bytes": 3583,
+      "sha256": "6bd3742ab7e25358217fe1214d368f837e69aad9df23092ae31faf2ba26d3f95"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-arithmetic.py",
+      "bytes": 2042,
+      "sha256": "aea01c50ebc856e1b1a64c1a3f3b9f411af7c87fc36d6506635d6a7f8bd1e8ca"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/freeze-design.py",
+      "bytes": 6020,
+      "sha256": "a5edf4d2cf507e79652884b0fc35e0f0c8d9c16eaa05fa6b50baf16eb779cb72"
+    }
+  ],
+  "protectedPairs": [
+    {
+      "active": {
+        "path": "docs/teaching/MANIFOLD-LEARNING-LESSON-DESIGN.md",
+        "bytes": 36658,
+        "sha256": "5fbe3672a46ef341ba21aa110151d50e20b133200c6ffdc80e70f4a4cff3eb20"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/MANIFOLD-LEARNING-LESSON-DESIGN.md",
+        "bytes": 36658,
+        "sha256": "5fbe3672a46ef341ba21aa110151d50e20b133200c6ffdc80e70f4a4cff3eb20"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/author-checks.json",
+        "bytes": 1577,
+        "sha256": "1ed7f23f4a44ce827fab278868c22caf869f9878c8781557d8dd1953f41d6fcb"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/author-checks.json",
+        "bytes": 1577,
+        "sha256": "1ed7f23f4a44ce827fab278868c22caf869f9878c8781557d8dd1953f41d6fcb"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/browser-checks.json",
+        "bytes": 2379,
+        "sha256": "18b281db5c95225785df756ad99d3567b2222167a58b62cd4388fd001c1bed7a"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/browser-checks.json",
+        "bytes": 2379,
+        "sha256": "18b281db5c95225785df756ad99d3567b2222167a58b62cd4388fd001c1bed7a"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/independent-checks.json",
+        "bytes": 1529,
+        "sha256": "3a169d639b46ca281d6ef6d6e560ee15a337e3e0cc4a7ab8864994cc9bc3f0d0"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/independent-checks.json",
+        "bytes": 1529,
+        "sha256": "3a169d639b46ca281d6ef6d6e560ee15a337e3e0cc4a7ab8864994cc9bc3f0d0"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/independent-review.md",
+        "bytes": 1325,
+        "sha256": "391ab158df5734ec7fe386cdf796f0e5b35ac161b3f4525305bdbea523ad5dd8"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/independent-review.md",
+        "bytes": 1325,
+        "sha256": "391ab158df5734ec7fe386cdf796f0e5b35ac161b3f4525305bdbea523ad5dd8"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/concept-intuition/t-sne-umap-manifold-learning/review.md",
+        "bytes": 5238,
+        "sha256": "0ae01aed93b89bb07fa62b48a6baf965083663987931ab80bbc398d7283f14be"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/concept-intuition/t-sne-umap-manifold-learning/review.md",
+        "bytes": 5238,
+        "sha256": "0ae01aed93b89bb07fa62b48a6baf965083663987931ab80bbc398d7283f14be"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/drafts/t-sne-umap-manifold-learning/calculated-inputs.json",
+        "bytes": 240136,
+        "sha256": "bf9c60a1ef7f57ebf0ae6becf641767edb61a97fb44b7c9d4ae49af8601c150b"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/calculated-inputs.json",
+        "bytes": 240136,
+        "sha256": "bf9c60a1ef7f57ebf0ae6becf641767edb61a97fb44b7c9d4ae49af8601c150b"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/drafts/t-sne-umap-manifold-learning/content-calculations.py",
+        "bytes": 8882,
+        "sha256": "41fa2a626178cce9c7c2070154aa4e0f558ee62e33a45a112e7a48ffbbadf54f"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/content-calculations.py",
+        "bytes": 8882,
+        "sha256": "41fa2a626178cce9c7c2070154aa4e0f558ee62e33a45a112e7a48ffbbadf54f"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/drafts/t-sne-umap-manifold-learning/data-provenance.md",
+        "bytes": 4347,
+        "sha256": "6a0845756ac27c20abac115b40dbc1e8e102b5451a726beefe3f7c8336f99d03"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/data-provenance.md",
+        "bytes": 4347,
+        "sha256": "6a0845756ac27c20abac115b40dbc1e8e102b5451a726beefe3f7c8336f99d03"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/drafts/t-sne-umap-manifold-learning/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/drafts/t-sne-umap-manifold-learning/lesson.md",
+        "bytes": 64063,
+        "sha256": "1afb3fe364006a27d62c7ac72f6a7185b065637e91742adccda45b60a6a1bdaf"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/lesson.md",
+        "bytes": 64063,
+        "sha256": "1afb3fe364006a27d62c7ac72f6a7185b065637e91742adccda45b60a6a1bdaf"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/drafts/t-sne-umap-manifold-learning/visual-specifications.md",
+        "bytes": 28351,
+        "sha256": "9660cd0c964e904c5f19d4204c0c4e0bb6e3de9c32cd9ae4ca44947c9283f3c8"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/drafts/t-sne-umap-manifold-learning/visual-specifications.md",
+        "bytes": 28351,
+        "sha256": "9660cd0c964e904c5f19d4204c0c4e0bb6e3de9c32cd9ae4ca44947c9283f3c8"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/evidence/manifold-data.json",
+        "bytes": 4182,
+        "sha256": "8155e7b43f86e6629a8fb5fca5c4d33c805c913f47decd634123558a74359d85"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-data.json",
+        "bytes": 4182,
+        "sha256": "8155e7b43f86e6629a8fb5fca5c4d33c805c913f47decd634123558a74359d85"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/evidence/manifold-independent-technical-review.md",
+        "bytes": 14014,
+        "sha256": "2d53e81bcbd6224ad0508c9853eb86e92694e7aca3a95503d786454f3ceeb55a"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-independent-technical-review.md",
+        "bytes": 14014,
+        "sha256": "2d53e81bcbd6224ad0508c9853eb86e92694e7aca3a95503d786454f3ceeb55a"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/evidence/manifold-integration.json",
+        "bytes": 9200,
+        "sha256": "f190f11d1009a04df33b79b5cf2554b3a631f0b614003c53f6a5a7326c470222"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-integration.json",
+        "bytes": 9200,
+        "sha256": "f190f11d1009a04df33b79b5cf2554b3a631f0b614003c53f6a5a7326c470222"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/evidence/manifold-models.json",
+        "bytes": 1181,
+        "sha256": "b2854db88cafa608d99e8b6b61e07d147f1cff1ae9e065d6146bc4466607d706"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-models.json",
+        "bytes": 1181,
+        "sha256": "b2854db88cafa608d99e8b6b61e07d147f1cff1ae9e065d6146bc4466607d706"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/evidence/manifold-native.json",
+        "bytes": 4268,
+        "sha256": "c12abe9f9560f2583b01d062e443cc32fe324025381db3604793297eb85d74f8"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/evidence/manifold-native.json",
+        "bytes": 4268,
+        "sha256": "c12abe9f9560f2583b01d062e443cc32fe324025381db3604793297eb85d74f8"
+      }
+    },
+    {
+      "active": {
+        "path": "docs/teaching/topic-notes/t-sne-umap-manifold-learning.md",
+        "bytes": 8148,
+        "sha256": "b84c5eeae58e8ffe059ade3b3af3dbb6cd02073eb9004815b4ac817a1b352fa5"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/docs/teaching/topic-notes/t-sne-umap-manifold-learning.md",
+        "bytes": 8148,
+        "sha256": "b84c5eeae58e8ffe059ade3b3af3dbb6cd02073eb9004815b4ac817a1b352fa5"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/calculated-inputs.json",
+        "bytes": 125183,
+        "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/calculated-inputs.json",
+        "bytes": 125183,
+        "sha256": "ef8ab5d5a20e14013ebffb5b067810ce29b808dfa9ff1d2bf3d4b116d6a98884"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/compare_transforms.py",
+        "bytes": 1095,
+        "sha256": "1e6b522a310b7d4de580754e071bd0f195ebde6f38b8ba4050a94c98076608b7"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/compare_transforms.py",
+        "bytes": 1095,
+        "sha256": "1e6b522a310b7d4de580754e071bd0f195ebde6f38b8ba4050a94c98076608b7"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/data-provenance.md",
+        "bytes": 6097,
+        "sha256": "b48bdb1363b8e9123b3405d231a0c40172be8cbd947ce2c21a300ea68d210f6e"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/data-provenance.md",
+        "bytes": 6097,
+        "sha256": "b48bdb1363b8e9123b3405d231a0c40172be8cbd947ce2c21a300ea68d210f6e"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/inspect_digits.py",
+        "bytes": 1243,
+        "sha256": "19973ec6d6ecf8bf74cfda89a3bedd5b223ecb33a8587a01d5173766b995d111"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/inspect_digits.py",
+        "bytes": 1243,
+        "sha256": "19973ec6d6ecf8bf74cfda89a3bedd5b223ecb33a8587a01d5173766b995d111"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/inspect_umap.py",
+        "bytes": 1043,
+        "sha256": "21541157bdf2626cc494ce772d68638431dc9daca576f10ba88f24832bd58595"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/inspect_umap.py",
+        "bytes": 1043,
+        "sha256": "21541157bdf2626cc494ce772d68638431dc9daca576f10ba88f24832bd58595"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/runtime-versions.json",
+        "bytes": 230,
+        "sha256": "6d50b51386a007ff43f7c2983cb1dab72b75958c46c6b3a299a942ab9d1b2f46"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/runtime-versions.json",
+        "bytes": 230,
+        "sha256": "6d50b51386a007ff43f7c2983cb1dab72b75958c46c6b3a299a942ab9d1b2f46"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/tiny_tsne.py",
+        "bytes": 1523,
+        "sha256": "b1f1660c9bb9da66aa7edb5a928a95b489da6e73c8d6d3edd4b47d9dcc3e7d53"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/tiny_tsne.py",
+        "bytes": 1523,
+        "sha256": "b1f1660c9bb9da66aa7edb5a928a95b489da6e73c8d6d3edd4b47d9dcc3e7d53"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/umap-digits.csv",
+        "bytes": 30448,
+        "sha256": "57a6ec04fca5c3739a49402bb5b06a9688664c38c5b2017065dd70918e380c01"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/umap-digits.csv",
+        "bytes": 30448,
+        "sha256": "57a6ec04fca5c3739a49402bb5b06a9688664c38c5b2017065dd70918e380c01"
+      }
+    },
+    {
+      "active": {
+        "path": "public/learn-assets/manifold-learning/umap-mechanism.py",
+        "bytes": 6947,
+        "sha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/public/learn-assets/manifold-learning/umap-mechanism.py",
+        "bytes": 6947,
+        "sha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/components/lesson-labs/ManifoldFigures.jsx",
+        "bytes": 38909,
+        "sha256": "f2ff89f63d895e9aae5f3ad471f79428c148df6665b6457857d8d0ba3427532e"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/ManifoldFigures.jsx",
+        "bytes": 38909,
+        "sha256": "f2ff89f63d895e9aae5f3ad471f79428c148df6665b6457857d8d0ba3427532e"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/components/lesson-labs/ManifoldLabs.jsx",
+        "bytes": 32723,
+        "sha256": "2c28d1aac162caee6e3023c85f49c2a16324cd7078a406cf85cb11e9fb9dbd7a"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/ManifoldLabs.jsx",
+        "bytes": 32723,
+        "sha256": "2c28d1aac162caee6e3023c85f49c2a16324cd7078a406cf85cb11e9fb9dbd7a"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/components/lesson-labs/ManifoldShared.jsx",
+        "bytes": 8372,
+        "sha256": "5bc8237e0c0f0657576dfcd7a5da6a06cbfedc9d67273725117ee9d74514b8e4"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/ManifoldShared.jsx",
+        "bytes": 8372,
+        "sha256": "5bc8237e0c0f0657576dfcd7a5da6a06cbfedc9d67273725117ee9d74514b8e4"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/components/lesson-labs/manifold-figures.css",
+        "bytes": 9524,
+        "sha256": "57e0fdaf50c5e560a553152924ffcec51320bade25dc74db811f12f9aed2caa3"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/manifold-figures.css",
+        "bytes": 9524,
+        "sha256": "57e0fdaf50c5e560a553152924ffcec51320bade25dc74db811f12f9aed2caa3"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/components/lesson-labs/manifold-labs.css",
+        "bytes": 10788,
+        "sha256": "48324502ea4c5261d8c477d48c5a414fadb8d8f0d85e4b4936e6850b44fc8e63"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/manifold-labs.css",
+        "bytes": 10788,
+        "sha256": "48324502ea4c5261d8c477d48c5a414fadb8d8f0d85e4b4936e6850b44fc8e63"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/components/lesson-labs/manifold-lesson.css",
+        "bytes": 640,
+        "sha256": "a4413b0e23b52269c1c82a519980d583fd4f5da8d959dc21d021b4eb4db0126f"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/components/lesson-labs/manifold-lesson.css",
+        "bytes": 640,
+        "sha256": "a4413b0e23b52269c1c82a519980d583fd4f5da8d959dc21d021b4eb4db0126f"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+        "bytes": 5583,
+        "sha256": "08b894b8f364b8347e3b2938ff5fa21e0caf5d8b60d01b9d9a75a9a743a34e53"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+        "bytes": 5583,
+        "sha256": "08b894b8f364b8347e3b2938ff5fa21e0caf5d8b60d01b9d9a75a9a743a34e53"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/data/manifold-data.js",
+        "bytes": 183920,
+        "sha256": "d76e917248b1d01180cef670f9489b369af430c84377593dbeac591d8cd966a0"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/manifold-data.js",
+        "bytes": 183920,
+        "sha256": "d76e917248b1d01180cef670f9489b369af430c84377593dbeac591d8cd966a0"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/data/manifold-examples.js",
+        "bytes": 6530,
+        "sha256": "5896f48a0c7c2d2741b6fac101cb61d3f9d7b1a1b5cd6920c20bf47addcdf9c2"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/manifold-examples.js",
+        "bytes": 6530,
+        "sha256": "5896f48a0c7c2d2741b6fac101cb61d3f9d7b1a1b5cd6920c20bf47addcdf9c2"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/data/manifold-mechanism-program.js",
+        "bytes": 427,
+        "sha256": "1076da294e71ecfaba1084a4cf5a60cb356337bdbb64a349680df1aca5d26afc"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/manifold-mechanism-program.js",
+        "bytes": 427,
+        "sha256": "1076da294e71ecfaba1084a4cf5a60cb356337bdbb64a349680df1aca5d26afc"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/data/manifold-models.js",
+        "bytes": 12467,
+        "sha256": "3b0eeb5e8c1577b42b144286ecb475d821206f272acc3de2ac449a6b0b378365"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/manifold-models.js",
+        "bytes": 12467,
+        "sha256": "3b0eeb5e8c1577b42b144286ecb475d821206f272acc3de2ac449a6b0b378365"
+      }
+    },
+    {
+      "active": {
+        "path": "src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+        "bytes": 77151,
+        "sha256": "3820fd932aa0314695c6ece949273c1e6260df510173155629645e5a3f4381de"
+      },
+      "preserved": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/original/src/learn/data/topics/t-sne-umap-manifold-learning.jsx",
+        "bytes": 77151,
+        "sha256": "3820fd932aa0314695c6ece949273c1e6260df510173155629645e5a3f4381de"
+      }
+    }
+  ],
+  "guidance": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 3751,
+      "sha256": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/SKILL.md",
+      "bytes": 20953,
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/references/workflow.md",
+      "bytes": 25767,
+      "sha256": "4096cdebcadf3c94d61be0e1e534592160c64ef6529aca9754a2cdaaec6d1c3b",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/references/teaching.md",
+      "bytes": 27407,
+      "sha256": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/references/topic-design.md",
+      "bytes": 32018,
+      "sha256": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/references/visuals-and-labs.md",
+      "bytes": 33359,
+      "sha256": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/references/examples-and-code.md",
+      "bytes": 15888,
+      "sha256": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/references/practice-and-resources.md",
+      "bytes": 11956,
+      "sha256": "b5f7a6e67c311a0ffd48dc6ee12e416aaf772b08baa9c58684c7ca0fcb817b22",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/references/review.md",
+      "bytes": 19019,
+      "sha256": "98695248dd9470843c5eced1c59d89c54167b1ca2bc22a5c016616e10b31fd0d",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    },
+    {
+      "path": "skills/lesson-authoring/references/domain-playbook.md",
+      "bytes": 30795,
+      "sha256": "43897a74d31c0c9b85748ef544a8be5b5bd220b8b2f79136f176e88190f16e04",
+      "role": "current-selected-checkout-guidance; prior complete readings reused where unchanged"
+    }
+  ],
+  "readingReceipts": [
+    "4379cd AGENTS/full current ML handoff paragraph; unrelated historical handoff tail truncated",
+    "d9ada6 current selected skill/router/workflow",
+    "346e8f complete ready/SAME packet and original whole review",
+    "d8249d complete SAME report/amendment and design tail; section4/5 midspan truncated, recovered bf3aee/9b52e5",
+    "bf3aee actual full D10\u2013D29/lab context; current teaching guidance",
+    "5959d5 complete research and programme/task context; programme overlap recovered26b387/9b52e5",
+    "26b387 complete assessment and programme/practice with task13/14 tail repeated/recovered from5959d5",
+    "9b52e5 complete D07\u2013D10 boundary and code-writing guidance",
+    "a04ca2 source/conservation/whole packet identities; protectedPairs complete lists consumed structurally, broad JSON print truncated; no whole textual certificate from that print"
+  ],
+  "scope": {
+    "sections": 13,
+    "drawings": 45,
+    "investigations": 12,
+    "retainedPrograms": 5,
+    "newProgramContracts": 10,
+    "solvedTasks": 19,
+    "protectedPairs": 40
+  },
+  "unresolvedMaterialDesignFindings": [],
+  "limits": [
+    "Design pass is not content acceptance; same agent is now manuscript author, so prior independent design review is not independent review of its future manuscript.",
+    "Retained original5program/stream pairs,300x64 rows,10 saved maps/90scores and original40 active/preserved pairs exact; no old fit/main/study/checker replay.",
+    "Original densMAP full-paper access failures/creator abstract-only scope; no new proof or biological conclusion.",
+    "Original paper figure requests did not deliver pixels; video metadata/transcript roles do not imply watching.",
+    "Current MDS1.9.1 source-only API/array-start/stress/zero-disparity check remains distinct from executed parity.",
+    "No private runtime, browser, build, normal integration, shared/public/central phase write in this content-only assignment.",
+    "Original reviewer failed tool-path/Windows import/source-type observations remain unchanged historical qualifications."
+  ],
+  "next": "Read retained source/data provenance and current primary contracts where needed, then write one complete effective manuscript with fully explained ten new scratch/library sources,45 actionable complete diagrams/labs,19 solved tasks and annotated resources. Keep one durable current file map/progress; no duplicate manuscripts or new evidence framework."
+}

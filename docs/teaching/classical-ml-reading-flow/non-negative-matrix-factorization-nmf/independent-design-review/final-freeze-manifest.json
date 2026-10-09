@@ -1,0 +1,52 @@
+{
+  "decision": "REQUEST_CHANGES_R1",
+  "role": "Additive final execution/identity freeze; no arithmetic or scientific replay",
+  "files": [
+    {
+      "file": "actual-execution-receipt.json",
+      "bytes": 1389,
+      "sha256": "137ea5de35f078a491ebc9ea79ee2a3c076a8f143bcf539a3f97a5bc7f38ef65"
+    },
+    {
+      "file": "execution-and-limitations.json",
+      "bytes": 1774,
+      "sha256": "544353d77b479a8f7bd019c85b1a985b3c08f2ee880c88c2a1cb2e93e8405123"
+    },
+    {
+      "file": "finalize-review.py",
+      "bytes": 13334,
+      "sha256": "9c486d47cb9a3e39611cb8103495f7b87277943bd177f15f570e44cc969d76da"
+    },
+    {
+      "file": "finite-checks.json",
+      "bytes": 144994,
+      "sha256": "de8c2d578c243152b592de2750e0279d878c9d63206368e0be1621bd679f132f"
+    },
+    {
+      "file": "finite-checks.py",
+      "bytes": 10130,
+      "sha256": "b9ad1f629c225604423a023d825bd3b3800e60a567953017a27723fdedf36021"
+    },
+    {
+      "file": "report.md",
+      "bytes": 12947,
+      "sha256": "57fc35f7e68835a5350cfb2e70a663dfbad72141aedde52bf48c017cecdf86da"
+    },
+    {
+      "file": "review-packet.json",
+      "bytes": 6346,
+      "sha256": "3f494b29fb11604dd1d950e28d1f552b5afc0f8dde5f094b1b0006caf841d86c"
+    },
+    {
+      "file": "source-consumption.json",
+      "bytes": 25433,
+      "sha256": "23dc8d70198693ee6f14ca43bf30dd41465cedc121c9398a6f25bd0064c3dc34"
+    },
+    {
+      "file": "source-only-checks.json",
+      "bytes": 20312,
+      "sha256": "6a79792cdd081d75902cb71f798704b30fec9d4392f271a1bf29ffca206e4f25"
+    }
+  ],
+  "rootReleaseRequired": true
+}

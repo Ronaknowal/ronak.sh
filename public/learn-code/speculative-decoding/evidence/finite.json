@@ -1,0 +1,697 @@
+{
+  "stage": "finite",
+  "protocol_sha256": "89db78881c60edc9c042a1b9a68c8f78d470a54e1634761cfbd74baafed09486",
+  "passed": true,
+  "result": {
+    "speculative_math": {
+      "conserved_completed_call": true,
+      "original_source_sha256": "d3857ad15f50123440a4dc312c85f3ff4cc86c2bd9119579111b35645cb617b5",
+      "raw_result_retained": false,
+      "evidence": "Original sequential dict-comprehension returned from this verifier before entering sequence_law.verify; the later exception prevented aggregate assignment. Independent original full review also passed complementary finite conditions."
+    },
+    "speculative_decode": {
+      "conserved_completed_call": true,
+      "original_source_sha256": "5eafb8a8fbbd5d803c7130cf647b2d9b3698bb443208f447aa67e58e46e1be50",
+      "raw_result_retained": false,
+      "evidence": "Original sequential dict-comprehension returned from this verifier before entering sequence_law.verify; the later exception prevented aggregate assignment. Independent original full review also passed complementary finite conditions."
+    },
+    "sequence_law": {
+      "passed": true,
+      "checks": [
+        {
+          "horizon": 0,
+          "lookahead": 0,
+          "paths": 1
+        },
+        {
+          "horizon": 0,
+          "lookahead": 1,
+          "paths": 1
+        },
+        {
+          "horizon": 0,
+          "lookahead": 2,
+          "paths": 1
+        },
+        {
+          "horizon": 0,
+          "lookahead": 3,
+          "paths": 1
+        },
+        {
+          "horizon": 1,
+          "lookahead": 0,
+          "paths": 3
+        },
+        {
+          "horizon": 1,
+          "lookahead": 1,
+          "paths": 3
+        },
+        {
+          "horizon": 1,
+          "lookahead": 2,
+          "paths": 3
+        },
+        {
+          "horizon": 1,
+          "lookahead": 3,
+          "paths": 3
+        },
+        {
+          "horizon": 2,
+          "lookahead": 0,
+          "paths": 7
+        },
+        {
+          "horizon": 2,
+          "lookahead": 1,
+          "paths": 7
+        },
+        {
+          "horizon": 2,
+          "lookahead": 2,
+          "paths": 7
+        },
+        {
+          "horizon": 2,
+          "lookahead": 3,
+          "paths": 7
+        },
+        {
+          "horizon": 3,
+          "lookahead": 0,
+          "paths": 15
+        },
+        {
+          "horizon": 3,
+          "lookahead": 1,
+          "paths": 15
+        },
+        {
+          "horizon": 3,
+          "lookahead": 2,
+          "paths": 15
+        },
+        {
+          "horizon": 3,
+          "lookahead": 3,
+          "paths": 15
+        },
+        {
+          "horizon": 4,
+          "lookahead": 0,
+          "paths": 31
+        },
+        {
+          "horizon": 4,
+          "lookahead": 1,
+          "paths": 31
+        },
+        {
+          "horizon": 4,
+          "lookahead": 2,
+          "paths": 31
+        },
+        {
+          "horizon": 4,
+          "lookahead": 3,
+          "paths": 31
+        }
+      ],
+      "horizon3": [
+        {
+          "ids": [
+            0,
+            0,
+            0
+          ],
+          "mass": "1/50",
+          "decimal": 0.02
+        },
+        {
+          "ids": [
+            0,
+            0,
+            1
+          ],
+          "mass": "1/20",
+          "decimal": 0.05
+        },
+        {
+          "ids": [
+            0,
+            0,
+            2
+          ],
+          "mass": "3/100",
+          "decimal": 0.03
+        },
+        {
+          "ids": [
+            0,
+            1,
+            0
+          ],
+          "mass": "1/10",
+          "decimal": 0.1
+        },
+        {
+          "ids": [
+            0,
+            1,
+            1
+          ],
+          "mass": "1/40",
+          "decimal": 0.025
+        },
+        {
+          "ids": [
+            0,
+            1,
+            2
+          ],
+          "mass": "1/8",
+          "decimal": 0.125
+        },
+        {
+          "ids": [
+            0,
+            2
+          ],
+          "mass": "3/20",
+          "decimal": 0.15
+        },
+        {
+          "ids": [
+            1,
+            0,
+            0
+          ],
+          "mass": "3/125",
+          "decimal": 0.024
+        },
+        {
+          "ids": [
+            1,
+            0,
+            1
+          ],
+          "mass": "3/50",
+          "decimal": 0.06
+        },
+        {
+          "ids": [
+            1,
+            0,
+            2
+          ],
+          "mass": "9/250",
+          "decimal": 0.036
+        },
+        {
+          "ids": [
+            1,
+            1,
+            0
+          ],
+          "mass": "3/250",
+          "decimal": 0.012
+        },
+        {
+          "ids": [
+            1,
+            1,
+            1
+          ],
+          "mass": "3/1000",
+          "decimal": 0.003
+        },
+        {
+          "ids": [
+            1,
+            1,
+            2
+          ],
+          "mass": "3/200",
+          "decimal": 0.015
+        },
+        {
+          "ids": [
+            1,
+            2
+          ],
+          "mass": "3/20",
+          "decimal": 0.15
+        },
+        {
+          "ids": [
+            2
+          ],
+          "mass": "1/5",
+          "decimal": 0.2
+        }
+      ],
+      "wrong_suffix_witness": [
+        {
+          "ids": [
+            0,
+            0
+          ],
+          "correct": "1/10",
+          "wrong": "4/25"
+        },
+        {
+          "ids": [
+            0,
+            1
+          ],
+          "correct": "1/4",
+          "wrong": "13/100"
+        },
+        {
+          "ids": [
+            0,
+            2
+          ],
+          "correct": "3/20",
+          "wrong": "21/100"
+        }
+      ]
+    },
+    "practice_answers": {
+      "passed": true,
+      "answers": {
+        "1": {
+          "mass": {
+            "target": [
+              0.4,
+              0.1,
+              0.5
+            ],
+            "proposal": [
+              0.2,
+              0.5,
+              0.3
+            ],
+            "accepted_mass": [
+              0.2,
+              0.1,
+              0.3
+            ],
+            "repaired_mass": [
+              0.2,
+              0.0,
+              0.2
+            ],
+            "final_mass": [
+              0.4,
+              0.1,
+              0.5
+            ],
+            "overlap": 0.6000000000000001,
+            "tv": 0.4,
+            "rejection_mass": 0.4
+          },
+          "repair": [
+            0.5,
+            0.0,
+            0.5
+          ],
+          "reason": "Common mass .2/.1/.3 plus unconditional deficit .2/0/.2 restores p."
+        },
+        "2": {
+          "mass": {
+            "target": [
+              0.3,
+              0.2,
+              0.5
+            ],
+            "proposal": [
+              0.0,
+              0.6,
+              0.4
+            ],
+            "accepted_mass": [
+              0.0,
+              0.2,
+              0.4
+            ],
+            "repaired_mass": [
+              0.3,
+              0.0,
+              0.09999999999999998
+            ],
+            "final_mass": [
+              0.3,
+              0.2,
+              0.5
+            ],
+            "overlap": 0.6000000000000001,
+            "tv": 0.39999999999999997,
+            "rejection_mass": 0.39999999999999997
+          },
+          "repair": [
+            0.75,
+            0.0,
+            0.24999999999999997
+          ],
+          "reason": "A is never proposed, but .3 unconditional repair mass reaches A."
+        },
+        "3": {
+          "uniforms": [
+            0.399,
+            0.4,
+            0.401
+          ],
+          "accepted": [
+            true,
+            false,
+            false
+          ],
+          "reason": "Strict half-open comparison rejects the boundary; ideal continuous endpoints have zero probability, finite RNG values need an explicit convention."
+        },
+        "4": {
+          "K": 2,
+          "first_accept_second_reject": [
+            "accepted-1",
+            "repair"
+          ],
+          "all_accept": [
+            "accepted-1",
+            "accepted-2",
+            "bonus"
+          ],
+          "repair_eos": [
+            "accepted-1",
+            "EOS"
+          ],
+          "reason": "Stop at EOS immediately, and never retain or emit the later proposed suffix."
+        },
+        "5": {
+          "first_p": [
+            "3/5",
+            "2/5"
+          ],
+          "first_q": [
+            "3/10",
+            "7/10"
+          ],
+          "target_after_A": [
+            "9/10",
+            "1/10"
+          ],
+          "target_after_B": [
+            "1/5",
+            "4/5"
+          ],
+          "stale_q_after_rejected_B": [
+            "1/10",
+            "9/10"
+          ],
+          "paths": [
+            "AA",
+            "AB",
+            "BA",
+            "BB"
+          ],
+          "correct": [
+            "27/50",
+            "3/50",
+            "2/25",
+            "8/25"
+          ],
+          "wrong": [
+            "3/10",
+            "3/10",
+            "2/25",
+            "8/25"
+          ],
+          "reason": "The repaired A needs A context. Reusing B-context q moves .24 mass from AA to AB."
+        },
+        "6": {
+          "p": [
+            0.5,
+            0.5
+          ],
+          "q": [
+            0.5,
+            0.5
+          ],
+          "baseline_uniform": 0.25,
+          "after_extra_rng_draw_uniform": 0.75,
+          "outputs": [
+            "A",
+            "B"
+          ],
+          "reason": "Both marginals can remain p while the particular shared-seed coupling changes."
+        },
+        "7": {
+          "p": [
+            0.6666666666666666,
+            0.3333333333333333,
+            0
+          ],
+          "q": [
+            0.2,
+            0.3,
+            0.5
+          ],
+          "mass": {
+            "target": [
+              0.6666666666666666,
+              0.3333333333333333,
+              0.0
+            ],
+            "proposal": [
+              0.2,
+              0.3,
+              0.5
+            ],
+            "accepted_mass": [
+              0.2,
+              0.3,
+              0.0
+            ],
+            "repaired_mass": [
+              0.4666666666666666,
+              0.033333333333333326,
+              0.0
+            ],
+            "final_mass": [
+              0.6666666666666666,
+              0.3333333333333333,
+              0.0
+            ],
+            "overlap": 0.5,
+            "tv": 0.5,
+            "rejection_mass": 0.5
+          },
+          "repair": [
+            0.9333333333333333,
+            0.06666666666666667,
+            0.0
+          ],
+          "reason": "Transform and normalize each law before the ratio. Target support excludes C; C proposals reject."
+        },
+        "8": {
+          "initial_computed": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "draft_positions": [
+            5,
+            6,
+            7,
+            8
+          ],
+          "accepted_positions": [
+            5,
+            6
+          ],
+          "discarded_candidate_positions": [
+            7,
+            8
+          ],
+          "retained_computed": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "pending_repair_position": 7,
+          "next_append_input": "Only the repair token at absolute position 7; afterwards computed length becomes 8."
+        },
+        "9": {
+          "physical_move": "Update page/table address while preserving logical position.",
+          "learned_positions": "Reinterpreting the same row at a new logical index changes its embedding computation.",
+          "rotary": "Do not rotate an already stored key for a different logical position merely because its physical slot changed."
+        },
+        "10": {
+          "accepted": 1.176,
+          "emitted": 2.176,
+          "scope": "Independent common-alpha model without EOS or output cap.",
+          "alpha_zero": {
+            "accepted": 0,
+            "emitted": 1,
+            "scope": "Independent common-alpha model without EOS or output cap."
+          },
+          "alpha_one": {
+            "accepted": 3,
+            "emitted": 4,
+            "scope": "Independent common-alpha model without EOS or output cap."
+          }
+        },
+        "11": {
+          "expected_target_cost": 21.76,
+          "base_denominator": 21,
+          "base_speedup": 1.0361904761904763,
+          "higher_overhead_denominator": 23,
+          "higher_overhead_speedup": 0.9460869565217392,
+          "reason": "Only the overhead changed; equal acceptance does not guarantee a win."
+        },
+        "12": {
+          "alpha": 0.7,
+          "K": 2,
+          "expected_emitted": 2.19,
+          "constructed_round_costs": [
+            10,
+            30
+          ],
+          "reason": "Two contexts may have the same overlap and emitted expectation but different draft/verify cost. Different visitation probabilities then change total expected latency; overlap alone is insufficient."
+        },
+        "13": {
+          "nodes": [
+            "root",
+            "left",
+            "right",
+            "left-child"
+          ],
+          "depth": [
+            0,
+            1,
+            1,
+            2
+          ],
+          "mask": [
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "reason": "A node sees ancestors and itself, never its sibling; add the common prompt columns separately."
+        },
+        "14": {
+          "p": [
+            0.7,
+            0.3
+          ],
+          "q": [
+            0.4,
+            0.6
+          ],
+          "first_accepted": [
+            0.4,
+            0.3
+          ],
+          "first_rejection": 0.3,
+          "conditional_second_accepted_A": 0.4,
+          "conditional_second_reject_then_A": 0.6,
+          "final": [
+            0.7,
+            0.3
+          ],
+          "reason": "Update the active target to the residual before the second test. Independently preferring an accepted ID changes mass allocation."
+        },
+        "15": {
+          "state_index": "t",
+          "target_index": "t+3",
+          "wrong_target": "t+2",
+          "frozen_gradients": "Only the new head parameters receive gradients.",
+          "joint_gradients": "Head, backbone and embeddings receive gradients through h_t; the target model may change."
+        },
+        "16": {
+          "EAGLE-1": "Advanced token plus target feature predict a next feature, with feature and token objectives.",
+          "EAGLE-3": "Low/middle/high features feed learned state with advanced token and self-generated-state training feedback; do not define it by feature regression."
+        },
+        "17": {
+          "num_assistant_tokens": 5,
+          "num_assistant_tokens_schedule": "constant",
+          "assistant_confidence_threshold": 0.0,
+          "assistant_ensemble_weight": null,
+          "reason": "Threshold .4 may stop drafting early. Ensemble .2 targets a mixture, not the original p. Length/EOS can still shorten a fixed-cap round."
+        },
+        "18": {
+          "records": [
+            {
+              "prompt": "X",
+              "arm": "baseline",
+              "ms": 100,
+              "tokens": 10
+            },
+            {
+              "prompt": "X",
+              "arm": "speculative",
+              "ms": 80,
+              "tokens": 10
+            },
+            {
+              "prompt": "Y",
+              "arm": "baseline",
+              "ms": 60,
+              "tokens": 6
+            },
+            {
+              "prompt": "Y",
+              "arm": "speculative",
+              "ms": 72,
+              "tokens": 6
+            }
+          ],
+          "paired_speedup": [
+            1.25,
+            0.8333333333333334
+          ],
+          "ms_per_token": [
+            10,
+            8,
+            10,
+            12
+          ],
+          "reason": "One pair wins and one loses. No variance estimate or general ranking follows. Freeze prompts, policies, seeds, arms, warmups, order, instrumentation and failure rules before repetitions."
+        }
+      }
+    }
+  },
+  "continuation": {
+    "predecessor": "scratch/speculative-research/study/finite.json",
+    "predecessor_sha256": "df45da07b901045ba3a4bae9e2538a25cf7198804d7c21dbbe540222448b7c7a",
+    "scope": "Only corrected sequence-law verifier and previously unstarted practice. Math/decode verifier mains are not replayed."
+  }
+}

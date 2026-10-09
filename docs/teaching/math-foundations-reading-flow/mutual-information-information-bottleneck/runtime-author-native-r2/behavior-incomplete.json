@@ -1,0 +1,742 @@
+{
+  "error": "Document contained 390/16",
+  "checks": [
+    {
+      "name": "L1 unequal entropy weighted total",
+      "pass": true
+    },
+    {
+      "name": "L1 product view shares preset",
+      "pass": true
+    },
+    {
+      "name": "L1 PMI view shares preset",
+      "pass": true
+    },
+    {
+      "name": "L1 row selection linked",
+      "pass": true
+    },
+    {
+      "name": "L1 zero row is unavailable",
+      "pass": true
+    },
+    {
+      "name": "L2 zero B context unavailable",
+      "pass": true
+    },
+    {
+      "name": "L2 all four paired outcomes visible",
+      "pass": true
+    },
+    {
+      "name": "L3 complete information loss",
+      "pass": true
+    },
+    {
+      "name": "L3 exact gap later view",
+      "pass": true
+    },
+    {
+      "name": "L4 beta edit preserves all information coordinates",
+      "pass": true
+    },
+    {
+      "name": "L4 beta zero vertical family",
+      "pass": true
+    },
+    {
+      "name": "L4 noise half computed",
+      "pass": true
+    },
+    {
+      "name": "L5 shared current step at timing mount",
+      "pass": true
+    },
+    {
+      "name": "L5 shared current step at history",
+      "pass": true
+    },
+    {
+      "name": "L5 symmetric step40 zero",
+      "pass": true
+    },
+    {
+      "name": "L5 reset clears linked row and step",
+      "pass": true
+    },
+    {
+      "name": "L6 lower relevance may be negative",
+      "pass": true
+    },
+    {
+      "name": "L6 exact relevance remains fixed",
+      "pass": true
+    },
+    {
+      "name": "L6 beta0 does not divide",
+      "pass": true
+    },
+    {
+      "name": "L6 reset restores later beta",
+      "pass": true
+    },
+    {
+      "name": "L7 small positive remains finite",
+      "pass": true
+    },
+    {
+      "name": "L7 exact zero infinite",
+      "pass": true
+    },
+    {
+      "name": "L7 unsupported draft retains last law",
+      "pass": true
+    },
+    {
+      "name": "L7 scaling keeps MI",
+      "pass": true
+    },
+    {
+      "name": "L7 shared noise draft",
+      "pass": true
+    },
+    {
+      "name": "L8 coherent sample prefix",
+      "pass": true
+    },
+    {
+      "name": "L8 selected donor view",
+      "pass": true
+    },
+    {
+      "name": "L8 invalid seed retains state",
+      "pass": true
+    },
+    {
+      "name": "L8 all reset linked",
+      "pass": true
+    },
+    {
+      "name": "L9 year-specific denominator",
+      "pass": true
+    },
+    {
+      "name": "L9 actual grouped MI",
+      "pass": true
+    },
+    {
+      "name": "L9 reset full344",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_original.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_original.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_original.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "536f5219a3703bb44e1f9e24c1fc3aa48d47752011a09fe6537146f203ac2e9e",
+      "clipboardSha256": "f083b4dcdced43fb50d52f1664bca26f73d04c910ecb6b46e3892258f9c3a59b"
+    },
+    {
+      "name": "Native download exact mi_original.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_original.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_original.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_original.stdout.txt",
+      "exactBytes": true,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "cfdd6d84c3bdc9c3b0abb42033b541afd822044304d919679d1c8c577aa2b930",
+      "clipboardSha256": "cfdd6d84c3bdc9c3b0abb42033b541afd822044304d919679d1c8c577aa2b930"
+    },
+    {
+      "name": "Native download exact mi_original.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_nonlinear.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_nonlinear.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_nonlinear.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "92424e9e56677e8349558c97f01806427cd15b62c280a52314fd1236c94bde12",
+      "clipboardSha256": "b63e9f70465482c25249f2feb693eb4de4017bc24d3b305dbb6e86df22400844"
+    },
+    {
+      "name": "Native download exact mi_nonlinear.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_nonlinear.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_nonlinear.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_nonlinear.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "f205b8b5f0e1724fdc780d968bd74181865536b171c182c29d4d157c93ff59e0",
+      "clipboardSha256": "feb28c3aeac0e5306da240d4c058e07374f2ffcffb14a79435d0dbe988f1807d"
+    },
+    {
+      "name": "Native download exact mi_nonlinear.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_conditional.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "377021b814855fe21429ea0a1cf65ccde6f92ed3a5c6a8c95246a29d09b255b3",
+      "clipboardSha256": "34284d1ade99f3319ebd69e4456f5cdce84ae0e0619017a31b4b968f78f3b924"
+    },
+    {
+      "name": "Native download exact mi_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_conditional.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_conditional.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_conditional.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "4e8038a397a323cf5973ac85eb9faedcff64dd2002c8064de64f2ffae759d8b0",
+      "clipboardSha256": "6099e3e70cb7892bc3fc35e920b239152b997cebd2ebe14b54e4b618a9f00e53"
+    },
+    {
+      "name": "Native download exact mi_conditional.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_processing.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_processing.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_processing.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "90cf6cd8e15da9d14b78989b779a2b1cbb3587c83ff1f23b096f98773c30f1c2",
+      "clipboardSha256": "25ab2c9f13380ea9a5bdfd57a7b4a14c42bd13afabbe26f6022c1651c67c7396"
+    },
+    {
+      "name": "Native download exact mi_processing.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_processing.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_processing.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_processing.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "18dbfa786618cb18df986ddd378424b2408a5b45ec6817625425913d190e7b9b",
+      "clipboardSha256": "db1029634b069694b93cf7c52e5f1ebc80f2cc72a7fa6b80267c71286b0cc30b"
+    },
+    {
+      "name": "Native download exact mi_processing.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact finite_fano.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content finite_fano.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification finite_fano.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "20d67c5a9a32f665face463c775156d2eacae974e952b43f84ea7c12edfdeb13",
+      "clipboardSha256": "b860eb29b7883e4b3bc6e425bf569a343ed9c0e9392978f818e863bd0332e87c"
+    },
+    {
+      "name": "Native download exact finite_fano.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact finite_fano.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content finite_fano.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification finite_fano.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "f6b7965c2e37e156c005fe3b06a94de41d6f45fa3765d0eaa3783d891f3b7436",
+      "clipboardSha256": "49b217fb05ea5a4c8eaeecb1391b3a972b427771130aef8032b5efd27bcde0e2"
+    },
+    {
+      "name": "Native download exact finite_fano.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_representations.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_representations.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_representations.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "b9e50dd34b96c5e6f2d54d76f2738c2d3fcce02f63f93bdde78d62ec61eb40dd",
+      "clipboardSha256": "caeac0c888a7f1f3812262ccef8b63eac7c8e625f026f164fdeb4ef4be188b5a"
+    },
+    {
+      "name": "Native download exact mi_representations.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_representations.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_representations.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_representations.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "d145dfbcbee555fc834d3705900cbae85fb3ec4ec063f1a0f8226e8c6adde2a9",
+      "clipboardSha256": "00f85285b331bafe4f0adf95a8ca507f661f1a25f287acdfd2b491d7fcb3ba80"
+    },
+    {
+      "name": "Native download exact mi_representations.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_iteration.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_iteration.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_iteration.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "f2131c0303bd0f76a2f8350e558b852d80adb31ce761e944793c743dbd37b11b",
+      "clipboardSha256": "50d51c79609c07fb5420642cc8f4a315971d38b2d8e8ccc7da112278186b97e8"
+    },
+    {
+      "name": "Native download exact mi_iteration.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_iteration.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_iteration.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_iteration.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "c86561adcafecde0ec2e649668559f6077daa0dc35dac5b7acd9da0d7f6521d9",
+      "clipboardSha256": "111d08e8b384bfdbd56aa6100a0ccdac17b84fe5cae8b68d22c05e6865c699d5"
+    },
+    {
+      "name": "Native download exact mi_iteration.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact finite_ib_reference.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content finite_ib_reference.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification finite_ib_reference.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "f6238f5ed37a2f1ec35efd84d905e8925bb01fd29f565da6187b7d4421788fb6",
+      "clipboardSha256": "43de0c9ea1b70794358c229e95cb4d7a0818eb05ef2c2b77fa3b2d499af245ec"
+    },
+    {
+      "name": "Native download exact finite_ib_reference.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact finite_ib_numpy.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content finite_ib_numpy.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification finite_ib_numpy.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "6e78c8d50f897b5886a7c6d81f74b9ba69672dfcd72c131bb6b89747df442bbc",
+      "clipboardSha256": "09aa1db11dbfb119bf6b8c986a52ee86a2b1cfb5f070dbbdb29f856c97470b77"
+    },
+    {
+      "name": "Native download exact finite_ib_numpy.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact finite_ib_numpy.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content finite_ib_numpy.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification finite_ib_numpy.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "c2ced0cc86928fdcb27dfb1e94a496c43a449d13ff4859c2477d6794240eaeef",
+      "clipboardSha256": "e1df5011501a8ebf4cb198fc1e3cfbe947c4fdbb40c65a7ab3e43beb5b3749e1"
+    },
+    {
+      "name": "Native download exact finite_ib_numpy.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_bounds.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_bounds.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_bounds.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "1a06c3ce2c329449324e07acc610392c2b50e484de886540a46035f17ec1be25",
+      "clipboardSha256": "0966f1dc7e8917802bf16d2e5d5ea9fd9aa2dd34323f722ccc23a0859127dd85"
+    },
+    {
+      "name": "Native download exact mi_bounds.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_bounds.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_bounds.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_bounds.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "094fbb132ddda5a6b756c2b97cec4fa62f6434a117aa08634722cbd88ae0033a",
+      "clipboardSha256": "c9ed747c00d7beaf8070c762e7dcc21e4ceb80a07db780fc770143c67ab57ce2"
+    },
+    {
+      "name": "Native download exact mi_bounds.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact gaussian_vib_step.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content gaussian_vib_step.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification gaussian_vib_step.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "13dcfb15989285dc6603fc664a73d9daf249928b8e9063e6c51ccb49a4899138",
+      "clipboardSha256": "82bfb402a300a68484ef7a3b75aca9e7352284eeb4c26bc2ef8457207284aad8"
+    },
+    {
+      "name": "Native download exact gaussian_vib_step.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact gaussian_vib_step.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content gaussian_vib_step.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification gaussian_vib_step.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "aa1de4ddef44e684b02996d87935ffbf7ce15ae6e3441961f06a03c734387da4",
+      "clipboardSha256": "fe174de988dbd340651bdb8a4c8cf23b4f80fd8c0275fcdcebe8d9b677c6f383"
+    },
+    {
+      "name": "Native download exact gaussian_vib_step.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_continuous.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "2f913522f3d57ff1deca413aa21daf84955bf005035438d891f0fb55c64aa219",
+      "clipboardSha256": "eb8abf08685cf587fcda0e45f9bf693f05930ed29e91c7183f33978c5e6168a4"
+    },
+    {
+      "name": "Native download exact mi_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_continuous.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_continuous.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_continuous.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "e3aaa07c5528c19e22df3df165e11fd7c1b6f5c83e88e93e237058ae01071f6c",
+      "clipboardSha256": "f5e19b35c16139ae034b60af259a3ffd7386131b6b22e9a7370237142cd0ae84"
+    },
+    {
+      "name": "Native download exact mi_continuous.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_estimation.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_estimation.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_estimation.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "fb9f823d7692707e65327971fdfc7e99a9ea8919b85539ea3893104ccbc29be3",
+      "clipboardSha256": "a79edd4449d6bec9aacbf10ccbdb15743dcc0a2b32791085b1a12953b7ec86b1"
+    },
+    {
+      "name": "Native download exact mi_estimation.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_estimation.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_estimation.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_estimation.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "fde850e8fedcc3d6dcc1eb8ea7380249ea34c8336a92a4c49622660347115823",
+      "clipboardSha256": "3724075d276565dfbdf49060216bb2251e9df9bdd319254ef226b4924dd0901c"
+    },
+    {
+      "name": "Native download exact mi_estimation.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mutual-information-library-bridge.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mutual-information-library-bridge.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mutual-information-library-bridge.py",
+      "exactBytes": true,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "f4ed35826eeafa7b6c0c4c27c0162ac57f8bd493875a71b3a80e139ac7afba21",
+      "clipboardSha256": "f4ed35826eeafa7b6c0c4c27c0162ac57f8bd493875a71b3a80e139ac7afba21"
+    },
+    {
+      "name": "Native download exact mutual-information-library-bridge.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mutual-information-library-bridge.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mutual-information-library-bridge.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mutual-information-library-bridge.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "c127cf73ee4bfba413ac1481476526d31949a48edb15b0dfbdc1930a367d8f89",
+      "clipboardSha256": "f307f4a268c2d42202be18f83d44860d64b19d414122ed26d54747e1053a7aff"
+    },
+    {
+      "name": "Native download exact mutual-information-library-bridge.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact penguins_information.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content penguins_information.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification penguins_information.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "ca2685f9c9dfd285305413e53c3bdd466659624fc560580dca72237c11745cb0",
+      "clipboardSha256": "a4b6edcf35d63e18192ef7a863889f013e9114b579b7e72f5459b6de9d1ece45"
+    },
+    {
+      "name": "Native download exact penguins_information.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact penguins_information.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content penguins_information.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification penguins_information.stdout.txt",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "889ace005388e1841e1ec541b7977368239e3ee3fac4affe89767750ec007937",
+      "clipboardSha256": "c6112b011f3f6ad215ef57a0bd4b168777638ca306a844bfd7e37bf9fca51227"
+    },
+    {
+      "name": "Native download exact penguins_information.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_changed_task.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_changed_task.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_changed_task.py",
+      "exactBytes": true,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "808a154ab8e30c00c15a2b469f7b19d793c854bde01e3f3843c7cb35159c40dc",
+      "clipboardSha256": "808a154ab8e30c00c15a2b469f7b19d793c854bde01e3f3843c7cb35159c40dc"
+    },
+    {
+      "name": "Native download exact mi_changed_task.py",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact mi_changed_task.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content mi_changed_task.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification mi_changed_task.stdout.txt",
+      "exactBytes": true,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "c6f492ad92fd3fd615955a2fd298cb5de2c5c471b2af50b4e638e7ee977d3c60",
+      "clipboardSha256": "c6f492ad92fd3fd615955a2fd298cb5de2c5c471b2af50b4e638e7ee977d3c60"
+    },
+    {
+      "name": "Native download exact mi_changed_task.stdout.txt",
+      "pass": true
+    },
+    {
+      "name": "DOM raw exact practice-solutions.py",
+      "pass": true
+    },
+    {
+      "name": "Native copied all content practice-solutions.py",
+      "pass": true
+    },
+    {
+      "name": "Clipboard byte qualification practice-solutions.py",
+      "exactBytes": false,
+      "lineEndingEquivalent": true,
+      "sourceSha256": "f3da4fcb55ea1162c73acdb7456ac1a506ca569409e4f62ccd7efb806554cf2e",
+      "clipboardSha256": "070bc925b35760575eae2e272a1a72def010786675992e3f652416471773e9d0"
+    },
+    {
+      "name": "Native download exact practice-solutions.py",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

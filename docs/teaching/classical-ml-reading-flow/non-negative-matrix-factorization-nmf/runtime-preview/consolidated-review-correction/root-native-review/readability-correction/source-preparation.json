@@ -1,0 +1,43 @@
+{
+  "schema": "nmf-d46-root-readability-source/v1",
+  "at": "2026-10-09T18:23:36.079Z",
+  "author": "/root",
+  "predecessor": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/SavedDataFigures.jsx",
+    "bytes": 18336,
+    "sha256": "456d7b64ff39d1476d8b737a67b86d6c91fada3617a02160eb6d9053b25f11c2"
+  },
+  "successor": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/SavedDataFigures.jsx",
+    "bytes": 18348,
+    "sha256": "5d98431d02940c855417673cf50aceaeb421d3c8f4123ed14b2c17fabe753744"
+  },
+  "exactInverseVerified": true,
+  "sourcePairs": [
+    [
+      "'./saved-data.js'",
+      "'../../saved-data.js'"
+    ],
+    [
+      "'./Drawing.jsx'",
+      "'../../Drawing.jsx'"
+    ],
+    [
+      "'./nmf-model.js'",
+      "'../../nmf-model.js'"
+    ],
+    [
+      "M460 65V120H230V155H310",
+      "M460 65V120H350V126"
+    ],
+    [
+      "M460 65V245H310",
+      "M460 65V205H350V216"
+    ]
+  ],
+  "finding": "Actual desktop/phone native reading showed opposed input arrowheads on the reserved transform. Fixed760px sizing also prevented root-text enlargement of its13-unit labels.",
+  "changedMeaning": "Both held-data arrays still enter their transforms from the left. The single stored H now enters each operation separately from above, so no opposite arrowheads share an endpoint. No data-to-fit or refit path is added.",
+  "presentation": "The later local stylesheet expresses the760-unit minimum as47.5rem: unchanged760px at16px root,1520px at32px root, with local horizontal scrolling. The preview-only text-size selector allows an actual enlarged-text test without mutating a frozen entry or a browser DOM.",
+  "scientificScope": "All models, saved arrays, payloads and operation bodies remain byte-conserved except the declared import paths and two SVG path strings. No old numerical main/SSR/campaign is run.",
+  "nextAction": "SAME independent bounded source review, one scoped changed-source build/HTTP binding, then Root actual desktop/390px/768px-root32 paint and keyboard verification. No phase promotion."
+}

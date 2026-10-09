@@ -1,0 +1,2216 @@
+{
+  "schema": "feature20-consolidated-author-source-state-ssr/v1",
+  "at": "2026-10-09T17:44:22.504Z",
+  "author": "/root/tsne_probability_arrow_recovery",
+  "conditions": [
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preparation-lesson.jsx",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preparation-models.mjs",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/Drawing.jsx",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/CoreFigures.jsx",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/DeeperFigures.jsx",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/PreparationFigures.jsx",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/PreparationInvestigations.jsx",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/saved-data.js",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/lesson.css",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview-entry.jsx",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview-loader.js",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview.css",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/index.html",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/vite.config.mjs",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/compose-reader.mjs",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/file-payloads.json",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/composition.json",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/check-runtime.mjs",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/check-state-scenarios.mjs",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/format-source.mjs",
+    "original source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/read-flow.py",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/index.html",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/private-module-map.json",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_AMS-Regular-DRggAlZN.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_AMS-Regular-DMm9YOAa.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Regular-CB_wures.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Bold-waoOVXN0.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Bold-Jm3AIy58.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Bold-Cx986IdX.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Italic-3WenGoN9.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Italic-BMLOBm91.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Regular-ypZvNtVU.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Regular-Dr94JaBh.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-Italic-flOr_0UB.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-Italic-DA0__PXp.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Script-Regular-C5JkGWo-.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Script-Regular-D5yQViql.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Script-Regular-D3wIWfF6.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size1-Regular-C195tn64.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size2-Regular-oD1tc_U0.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size3-Regular-CTq5MqoE.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size4-Regular-BF-4gkZK.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/index-C2--LHxw.js",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/index-DA9qLERT.css",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/preparation-lesson-BoLwuUKa.js",
+    "original artifact exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/preparation-lesson-CfVKi3_s.css",
+    "original build-source exact: node_modules/react/cjs/react-jsx-runtime.production.js",
+    "original build-source exact: node_modules/react/jsx-runtime.js",
+    "original build-source exact: node_modules/react/cjs/react.production.js",
+    "original build-source exact: node_modules/react/index.js",
+    "original build-source exact: node_modules/scheduler/cjs/scheduler.production.js",
+    "original build-source exact: node_modules/scheduler/index.js",
+    "original build-source exact: node_modules/react-dom/cjs/react-dom.production.js",
+    "original build-source exact: node_modules/react-dom/index.js",
+    "original build-source exact: node_modules/react-dom/cjs/react-dom-client.production.js",
+    "original build-source exact: node_modules/react-dom/client.js",
+    "original build-source exact: node_modules/react-router/dist/development/chunk-UVKPFVEO.mjs",
+    "original build-source exact: src/learn/data/generated/navigation.js",
+    "original build-source exact: src/learn/data/catalogue.js",
+    "original build-source exact: src/learn/components/PlaceholderContent.jsx",
+    "original build-source exact: src/learn/styles.js",
+    "original build-source exact: src/learn/components/LevelBadge.jsx",
+    "original build-source exact: src/learn/components/lesson-navigation.js",
+    "original build-source exact: src/learn/components/lesson-guide.css",
+    "original build-source exact: src/learn/components/LessonGuide.jsx",
+    "original build-source exact: src/learn/components/LessonOpening.jsx",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview-loader.js",
+    "original build-source exact: src/learn/hooks/useTopicResource.js",
+    "original build-source exact: src/learn/components/LessonBoundary.jsx",
+    "original build-source exact: src/learn/components/topic-content.css",
+    "original build-source exact: src/learn/components/lesson-endings.css",
+    "original build-source exact: src/learn/components/content/code-downloads.js",
+    "original build-source exact: src/learn/components/content/LessonCodeDownloads.jsx",
+    "original build-source exact: src/learn/components/content/lesson-code.css",
+    "original build-source exact: src/learn/data/projects/typed-decision-model/metadata.js",
+    "original build-source exact: src/learn/data/projects/catalogue.js",
+    "original build-source exact: src/learn/components/TopicContent.jsx",
+    "original build-source exact: src/learn/learning-base.css",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/lesson.css",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview.css",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview-entry.jsx",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/index.html",
+    "original build-source exact: src/learn/components/content/Headings.jsx",
+    "original build-source exact: src/learn/components/content/Prose.jsx",
+    "original build-source exact: src/learn/components/content/Code.jsx",
+    "original build-source exact: src/learn/components/content/RemoteCodeBlock.jsx",
+    "original build-source exact: node_modules/katex/dist/katex.min.css",
+    "original build-source exact: node_modules/katex/dist/katex.mjs",
+    "original build-source exact: src/learn/components/content/Math.jsx",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/Drawing.jsx",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preparation-models.mjs",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/saved-data.js",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/CoreFigures.jsx",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/DeeperFigures.jsx",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/PreparationFigures.jsx",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/PreparationInvestigations.jsx",
+    "original build-source exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preparation-lesson.jsx",
+    "Delivery manifest remains byte-identical",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+    "Common index accepts fitted_preparation.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+    "Common index accepts fitted_preparation.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.py",
+    "Common index accepts fitted_rulers.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.stdout.txt",
+    "Common index accepts fitted_rulers.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.py",
+    "Common index accepts category_policies.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.stdout.txt",
+    "Common index accepts category_policies.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.py",
+    "Common index accepts masked_simple_imputation.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.stdout.txt",
+    "Common index accepts masked_simple_imputation.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.py",
+    "Common index accepts nan_aware_donors.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.stdout.txt",
+    "Common index accepts nan_aware_donors.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+    "Common index accepts penguins_prepare.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+    "Common index accepts penguins_prepare.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.py",
+    "Common index accepts fitted_power_maps.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.stdout.txt",
+    "Common index accepts fitted_power_maps.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.py",
+    "Common index accepts fitted_quantile_maps.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.stdout.txt",
+    "Common index accepts fitted_quantile_maps.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.py",
+    "Common index accepts fitted_target_encoding.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.stdout.txt",
+    "Common index accepts fitted_target_encoding.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.py",
+    "Common index accepts bins_polynomials_cycles.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stdout.txt",
+    "Common index accepts bins_polynomials_cycles.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stderr.txt",
+    "Common index accepts bins_polynomials_cycles.stderr.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.py",
+    "Common index accepts local_spline_basis.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.stdout.txt",
+    "Common index accepts local_spline_basis.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+    "Common index accepts cross_fit.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+    "Common index accepts cross_fit.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.py",
+    "Common index accepts signed_feature_hashing.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.stdout.txt",
+    "Common index accepts signed_feature_hashing.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.py",
+    "Common index accepts conditional_iterative_completion.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.stdout.txt",
+    "Common index accepts conditional_iterative_completion.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.py",
+    "Common index accepts pool_scalar_analyses.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.stdout.txt",
+    "Common index accepts pool_scalar_analyses.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.py",
+    "Common index accepts normal_completion_and_sensitivity.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.stdout.txt",
+    "Common index accepts normal_completion_and_sensitivity.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/multiple_imputation_mice.R",
+    "Common index accepts multiple_imputation_mice.R",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.py",
+    "Common index accepts practice_solutions.py",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.stdout.txt",
+    "Common index accepts practice_solutions.stdout.txt",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins.csv",
+    "Common index accepts penguins.csv",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/calculated-inputs.json",
+    "Common index accepts calculated-inputs.json",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/scaling-native.json",
+    "Common index accepts scaling-native.json",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/source-roles.json",
+    "Common index accepts source-roles.json",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/README.md",
+    "Common index accepts README.md",
+    "learner payload exact: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/requirements.txt",
+    "Common index accepts requirements.txt",
+    "Unchanged preparation-models.mjs",
+    "Unchanged saved-data.js",
+    "Unchanged Drawing.jsx",
+    "Unique forward prose F5",
+    "Unique forward prose F1",
+    "Unique forward prose F1-group",
+    "Unique forward prose F2",
+    "Unique forward prose F4-pooling",
+    "Unique forward prose F4-sensitivity",
+    "Unique forward prose F3-table",
+    "Unique forward prose F3-setup",
+    "Unique forward prose F3-data",
+    "Unique inverse prose F3-data",
+    "Unique inverse prose F3-setup",
+    "Deletion inverse anchor F3-table",
+    "Unique inverse prose F4-sensitivity",
+    "Unique inverse prose F4-pooling",
+    "Unique inverse prose F2",
+    "Unique inverse prose F1-group",
+    "Unique inverse prose F1",
+    "Unique inverse prose F5",
+    "Complete exact manuscript inverse",
+    "Unique full spec D16",
+    "Spec extension preserves original D16",
+    "Unique full spec D34",
+    "Spec extension preserves original D34",
+    "Unique full spec D39",
+    "Spec extension preserves original D39",
+    "Unique full spec D41",
+    "Spec extension preserves original D41",
+    "Unique full spec L13",
+    "Spec extension preserves original L13",
+    "Unique full spec L14b",
+    "Spec extension preserves original L14b",
+    "Pooling figure precedes its first formal rule",
+    "Sensitivity assumption precedes split picture and live control",
+    "No duplicate custom index",
+    "Practice source and output retain practice context",
+    "Every complete program/stream placement exact and in same order",
+    "One setup snippet conserved",
+    "Current syntax CoreFigures.jsx",
+    "Current syntax DeeperFigures.jsx",
+    "Current syntax PreparationFigures.jsx",
+    "Current syntax PreparationInvestigations.jsx",
+    "Current syntax preparation-lesson.jsx",
+    "Current syntax preview-entry.jsx",
+    "Whole Reader retains D01",
+    "Whole Reader retains D02",
+    "Whole Reader retains D03",
+    "Whole Reader retains D04",
+    "Whole Reader retains D05",
+    "Whole Reader retains D06",
+    "Whole Reader retains D07",
+    "Whole Reader retains D08",
+    "Whole Reader retains D09",
+    "Whole Reader retains D10",
+    "Whole Reader retains D11",
+    "Whole Reader retains D12",
+    "Whole Reader retains D13",
+    "Whole Reader retains D14",
+    "Whole Reader retains D15",
+    "Whole Reader retains D16",
+    "Whole Reader retains D17",
+    "Whole Reader retains D18",
+    "Whole Reader retains D19",
+    "Whole Reader retains D20",
+    "Whole Reader retains D21",
+    "Whole Reader retains D22",
+    "Whole Reader retains D23",
+    "Whole Reader retains D24",
+    "Whole Reader retains D25",
+    "Whole Reader retains D26",
+    "Whole Reader retains D27",
+    "Whole Reader retains D28",
+    "Whole Reader retains D29",
+    "Whole Reader retains D30",
+    "Whole Reader retains D31",
+    "Whole Reader retains D32",
+    "Whole Reader retains D33",
+    "Whole Reader retains D34",
+    "Whole Reader retains D35",
+    "Whole Reader retains D36",
+    "Whole Reader retains D37",
+    "Whole Reader retains D38",
+    "Whole Reader retains D39",
+    "Whole Reader retains D40",
+    "Whole Reader retains D41",
+    "One split D41b placement",
+    "Whole Reader retains L1",
+    "Whole Reader retains L2",
+    "Whole Reader retains L3",
+    "Whole Reader retains L4",
+    "Whole Reader retains L5",
+    "Whole Reader retains L6",
+    "Whole Reader retains L7",
+    "Whole Reader retains L8",
+    "Whole Reader retains L9",
+    "Whole Reader retains L10",
+    "Whole Reader retains L11a",
+    "Whole Reader retains L11b",
+    "Whole Reader retains L12",
+    "Whole Reader retains L13",
+    "Whole Reader retains L14a",
+    "Whole Reader retains L14b",
+    "26 exercises retained",
+    "Initial whole render has no invalid draft/refusal",
+    "No duplicate HTML IDs",
+    "F1 actual SSR sum 2",
+    "F1 actual SSR count 2",
+    "F1 actual SSR new0",
+    "F1 actual SSR new1",
+    "F1 actual SSR s=2, n=2, μ=0.5, α=2",
+    "F1 actual SSR (2+2×0.5)/(2+2)",
+    "F1 actual SSR read saved prior",
+    "F1 actual SSR A absent; donor prior=0.25",
+    "F1 actual SSR uncovered warm-up",
+    "F1 actual SSR 0,1,2,3",
+    "F1 independent full reduction",
+    "F1 group donors and forbidden shared group",
+    "default turn1 coefficient/intercept independently solved",
+    "default turn1 cell0,0",
+    "default observed 0,0 fixed turn1",
+    "default turn1 cell0,1",
+    "default observed 0,1 fixed turn1",
+    "default turn1 cell1,0",
+    "default observed 1,0 fixed turn1",
+    "default turn1 cell1,1",
+    "default observed 1,1 fixed turn1",
+    "default turn1 cell2,0",
+    "default observed 2,0 fixed turn1",
+    "default turn1 cell2,1",
+    "default turn1 cell3,0",
+    "default turn1 cell3,1",
+    "default observed 3,1 fixed turn1",
+    "default turn1 cell4,0",
+    "default observed 4,0 fixed turn1",
+    "default turn1 cell4,1",
+    "default observed 4,1 fixed turn1",
+    "default turn2 coefficient/intercept independently solved",
+    "default turn2 cell0,0",
+    "default observed 0,0 fixed turn2",
+    "default turn2 cell0,1",
+    "default observed 0,1 fixed turn2",
+    "default turn2 cell1,0",
+    "default observed 1,0 fixed turn2",
+    "default turn2 cell1,1",
+    "default observed 1,1 fixed turn2",
+    "default turn2 cell2,0",
+    "default observed 2,0 fixed turn2",
+    "default turn2 cell2,1",
+    "default turn2 cell3,0",
+    "default turn2 cell3,1",
+    "default observed 3,1 fixed turn2",
+    "default turn2 cell4,0",
+    "default observed 4,0 fixed turn2",
+    "default turn2 cell4,1",
+    "default observed 4,1 fixed turn2",
+    "default turn3 coefficient/intercept independently solved",
+    "default turn3 cell0,0",
+    "default observed 0,0 fixed turn3",
+    "default turn3 cell0,1",
+    "default observed 0,1 fixed turn3",
+    "default turn3 cell1,0",
+    "default observed 1,0 fixed turn3",
+    "default turn3 cell1,1",
+    "default observed 1,1 fixed turn3",
+    "default turn3 cell2,0",
+    "default observed 2,0 fixed turn3",
+    "default turn3 cell2,1",
+    "default turn3 cell3,0",
+    "default turn3 cell3,1",
+    "default observed 3,1 fixed turn3",
+    "default turn3 cell4,0",
+    "default observed 4,0 fixed turn3",
+    "default turn3 cell4,1",
+    "default observed 4,1 fixed turn3",
+    "default turn4 coefficient/intercept independently solved",
+    "default turn4 cell0,0",
+    "default observed 0,0 fixed turn4",
+    "default turn4 cell0,1",
+    "default observed 0,1 fixed turn4",
+    "default turn4 cell1,0",
+    "default observed 1,0 fixed turn4",
+    "default turn4 cell1,1",
+    "default observed 1,1 fixed turn4",
+    "default turn4 cell2,0",
+    "default observed 2,0 fixed turn4",
+    "default turn4 cell2,1",
+    "default turn4 cell3,0",
+    "default turn4 cell3,1",
+    "default observed 3,1 fixed turn4",
+    "default turn4 cell4,0",
+    "default observed 4,0 fixed turn4",
+    "default turn4 cell4,1",
+    "default observed 4,1 fixed turn4",
+    "default turn5 coefficient/intercept independently solved",
+    "default turn5 cell0,0",
+    "default observed 0,0 fixed turn5",
+    "default turn5 cell0,1",
+    "default observed 0,1 fixed turn5",
+    "default turn5 cell1,0",
+    "default observed 1,0 fixed turn5",
+    "default turn5 cell1,1",
+    "default observed 1,1 fixed turn5",
+    "default turn5 cell2,0",
+    "default observed 2,0 fixed turn5",
+    "default turn5 cell2,1",
+    "default turn5 cell3,0",
+    "default turn5 cell3,1",
+    "default observed 3,1 fixed turn5",
+    "default turn5 cell4,0",
+    "default observed 4,0 fixed turn5",
+    "default turn5 cell4,1",
+    "default observed 4,1 fixed turn5",
+    "default turn6 coefficient/intercept independently solved",
+    "default turn6 cell0,0",
+    "default observed 0,0 fixed turn6",
+    "default turn6 cell0,1",
+    "default observed 0,1 fixed turn6",
+    "default turn6 cell1,0",
+    "default observed 1,0 fixed turn6",
+    "default turn6 cell1,1",
+    "default observed 1,1 fixed turn6",
+    "default turn6 cell2,0",
+    "default observed 2,0 fixed turn6",
+    "default turn6 cell2,1",
+    "default turn6 cell3,0",
+    "default turn6 cell3,1",
+    "default observed 3,1 fixed turn6",
+    "default turn6 cell4,0",
+    "default observed 4,0 fixed turn6",
+    "default turn6 cell4,1",
+    "default observed 4,1 fixed turn6",
+    "default query vector count",
+    "default query observed column0 fixed step0",
+    "default query observed column0 fixed step1",
+    "default query observed column0 fixed step2",
+    "default query observed column0 fixed step3",
+    "default query observed column0 fixed step4",
+    "default query observed column0 fixed step5",
+    "default query observed column0 fixed step6",
+    "default query vector count",
+    "default query observed column1 fixed step0",
+    "default query observed column1 fixed step1",
+    "default query observed column1 fixed step2",
+    "default query observed column1 fixed step3",
+    "default query observed column1 fixed step4",
+    "default query observed column1 fixed step5",
+    "default query observed column1 fixed step6",
+    "default query vector count",
+    "default inference cannot mutate saved trace",
+    "edited turn1 coefficient/intercept independently solved",
+    "edited turn1 cell0,0",
+    "edited observed 0,0 fixed turn1",
+    "edited turn1 cell0,1",
+    "edited observed 0,1 fixed turn1",
+    "edited turn1 cell1,0",
+    "edited observed 1,0 fixed turn1",
+    "edited turn1 cell1,1",
+    "edited observed 1,1 fixed turn1",
+    "edited turn1 cell2,0",
+    "edited observed 2,0 fixed turn1",
+    "edited turn1 cell2,1",
+    "edited turn1 cell3,0",
+    "edited turn1 cell3,1",
+    "edited observed 3,1 fixed turn1",
+    "edited turn1 cell4,0",
+    "edited observed 4,0 fixed turn1",
+    "edited turn1 cell4,1",
+    "edited observed 4,1 fixed turn1",
+    "edited turn2 coefficient/intercept independently solved",
+    "edited turn2 cell0,0",
+    "edited observed 0,0 fixed turn2",
+    "edited turn2 cell0,1",
+    "edited observed 0,1 fixed turn2",
+    "edited turn2 cell1,0",
+    "edited observed 1,0 fixed turn2",
+    "edited turn2 cell1,1",
+    "edited observed 1,1 fixed turn2",
+    "edited turn2 cell2,0",
+    "edited observed 2,0 fixed turn2",
+    "edited turn2 cell2,1",
+    "edited turn2 cell3,0",
+    "edited turn2 cell3,1",
+    "edited observed 3,1 fixed turn2",
+    "edited turn2 cell4,0",
+    "edited observed 4,0 fixed turn2",
+    "edited turn2 cell4,1",
+    "edited observed 4,1 fixed turn2",
+    "edited turn3 coefficient/intercept independently solved",
+    "edited turn3 cell0,0",
+    "edited observed 0,0 fixed turn3",
+    "edited turn3 cell0,1",
+    "edited observed 0,1 fixed turn3",
+    "edited turn3 cell1,0",
+    "edited observed 1,0 fixed turn3",
+    "edited turn3 cell1,1",
+    "edited observed 1,1 fixed turn3",
+    "edited turn3 cell2,0",
+    "edited observed 2,0 fixed turn3",
+    "edited turn3 cell2,1",
+    "edited turn3 cell3,0",
+    "edited turn3 cell3,1",
+    "edited observed 3,1 fixed turn3",
+    "edited turn3 cell4,0",
+    "edited observed 4,0 fixed turn3",
+    "edited turn3 cell4,1",
+    "edited observed 4,1 fixed turn3",
+    "edited turn4 coefficient/intercept independently solved",
+    "edited turn4 cell0,0",
+    "edited observed 0,0 fixed turn4",
+    "edited turn4 cell0,1",
+    "edited observed 0,1 fixed turn4",
+    "edited turn4 cell1,0",
+    "edited observed 1,0 fixed turn4",
+    "edited turn4 cell1,1",
+    "edited observed 1,1 fixed turn4",
+    "edited turn4 cell2,0",
+    "edited observed 2,0 fixed turn4",
+    "edited turn4 cell2,1",
+    "edited turn4 cell3,0",
+    "edited turn4 cell3,1",
+    "edited observed 3,1 fixed turn4",
+    "edited turn4 cell4,0",
+    "edited observed 4,0 fixed turn4",
+    "edited turn4 cell4,1",
+    "edited observed 4,1 fixed turn4",
+    "edited turn5 coefficient/intercept independently solved",
+    "edited turn5 cell0,0",
+    "edited observed 0,0 fixed turn5",
+    "edited turn5 cell0,1",
+    "edited observed 0,1 fixed turn5",
+    "edited turn5 cell1,0",
+    "edited observed 1,0 fixed turn5",
+    "edited turn5 cell1,1",
+    "edited observed 1,1 fixed turn5",
+    "edited turn5 cell2,0",
+    "edited observed 2,0 fixed turn5",
+    "edited turn5 cell2,1",
+    "edited turn5 cell3,0",
+    "edited turn5 cell3,1",
+    "edited observed 3,1 fixed turn5",
+    "edited turn5 cell4,0",
+    "edited observed 4,0 fixed turn5",
+    "edited turn5 cell4,1",
+    "edited observed 4,1 fixed turn5",
+    "edited turn6 coefficient/intercept independently solved",
+    "edited turn6 cell0,0",
+    "edited observed 0,0 fixed turn6",
+    "edited turn6 cell0,1",
+    "edited observed 0,1 fixed turn6",
+    "edited turn6 cell1,0",
+    "edited observed 1,0 fixed turn6",
+    "edited turn6 cell1,1",
+    "edited observed 1,1 fixed turn6",
+    "edited turn6 cell2,0",
+    "edited observed 2,0 fixed turn6",
+    "edited turn6 cell2,1",
+    "edited turn6 cell3,0",
+    "edited turn6 cell3,1",
+    "edited observed 3,1 fixed turn6",
+    "edited turn6 cell4,0",
+    "edited observed 4,0 fixed turn6",
+    "edited turn6 cell4,1",
+    "edited observed 4,1 fixed turn6",
+    "edited query vector count",
+    "edited query observed column0 fixed step0",
+    "edited query observed column0 fixed step1",
+    "edited query observed column0 fixed step2",
+    "edited query observed column0 fixed step3",
+    "edited query observed column0 fixed step4",
+    "edited query observed column0 fixed step5",
+    "edited query observed column0 fixed step6",
+    "edited query vector count",
+    "edited query observed column1 fixed step0",
+    "edited query observed column1 fixed step1",
+    "edited query observed column1 fixed step2",
+    "edited query observed column1 fixed step3",
+    "edited query observed column1 fixed step4",
+    "edited query observed column1 fixed step5",
+    "edited query observed column1 fixed step6",
+    "edited query vector count",
+    "edited inference cannot mutate saved trace",
+    "low turn1 coefficient/intercept independently solved",
+    "low turn1 cell0,0",
+    "low observed 0,0 fixed turn1",
+    "low turn1 cell0,1",
+    "low observed 0,1 fixed turn1",
+    "low turn1 cell1,0",
+    "low observed 1,0 fixed turn1",
+    "low turn1 cell1,1",
+    "low observed 1,1 fixed turn1",
+    "low turn1 cell2,0",
+    "low observed 2,0 fixed turn1",
+    "low turn1 cell2,1",
+    "low turn1 cell3,0",
+    "low turn1 cell3,1",
+    "low observed 3,1 fixed turn1",
+    "low turn1 cell4,0",
+    "low observed 4,0 fixed turn1",
+    "low turn1 cell4,1",
+    "low observed 4,1 fixed turn1",
+    "low turn2 coefficient/intercept independently solved",
+    "low turn2 cell0,0",
+    "low observed 0,0 fixed turn2",
+    "low turn2 cell0,1",
+    "low observed 0,1 fixed turn2",
+    "low turn2 cell1,0",
+    "low observed 1,0 fixed turn2",
+    "low turn2 cell1,1",
+    "low observed 1,1 fixed turn2",
+    "low turn2 cell2,0",
+    "low observed 2,0 fixed turn2",
+    "low turn2 cell2,1",
+    "low turn2 cell3,0",
+    "low turn2 cell3,1",
+    "low observed 3,1 fixed turn2",
+    "low turn2 cell4,0",
+    "low observed 4,0 fixed turn2",
+    "low turn2 cell4,1",
+    "low observed 4,1 fixed turn2",
+    "low turn3 coefficient/intercept independently solved",
+    "low turn3 cell0,0",
+    "low observed 0,0 fixed turn3",
+    "low turn3 cell0,1",
+    "low observed 0,1 fixed turn3",
+    "low turn3 cell1,0",
+    "low observed 1,0 fixed turn3",
+    "low turn3 cell1,1",
+    "low observed 1,1 fixed turn3",
+    "low turn3 cell2,0",
+    "low observed 2,0 fixed turn3",
+    "low turn3 cell2,1",
+    "low turn3 cell3,0",
+    "low turn3 cell3,1",
+    "low observed 3,1 fixed turn3",
+    "low turn3 cell4,0",
+    "low observed 4,0 fixed turn3",
+    "low turn3 cell4,1",
+    "low observed 4,1 fixed turn3",
+    "low turn4 coefficient/intercept independently solved",
+    "low turn4 cell0,0",
+    "low observed 0,0 fixed turn4",
+    "low turn4 cell0,1",
+    "low observed 0,1 fixed turn4",
+    "low turn4 cell1,0",
+    "low observed 1,0 fixed turn4",
+    "low turn4 cell1,1",
+    "low observed 1,1 fixed turn4",
+    "low turn4 cell2,0",
+    "low observed 2,0 fixed turn4",
+    "low turn4 cell2,1",
+    "low turn4 cell3,0",
+    "low turn4 cell3,1",
+    "low observed 3,1 fixed turn4",
+    "low turn4 cell4,0",
+    "low observed 4,0 fixed turn4",
+    "low turn4 cell4,1",
+    "low observed 4,1 fixed turn4",
+    "low turn5 coefficient/intercept independently solved",
+    "low turn5 cell0,0",
+    "low observed 0,0 fixed turn5",
+    "low turn5 cell0,1",
+    "low observed 0,1 fixed turn5",
+    "low turn5 cell1,0",
+    "low observed 1,0 fixed turn5",
+    "low turn5 cell1,1",
+    "low observed 1,1 fixed turn5",
+    "low turn5 cell2,0",
+    "low observed 2,0 fixed turn5",
+    "low turn5 cell2,1",
+    "low turn5 cell3,0",
+    "low turn5 cell3,1",
+    "low observed 3,1 fixed turn5",
+    "low turn5 cell4,0",
+    "low observed 4,0 fixed turn5",
+    "low turn5 cell4,1",
+    "low observed 4,1 fixed turn5",
+    "low turn6 coefficient/intercept independently solved",
+    "low turn6 cell0,0",
+    "low observed 0,0 fixed turn6",
+    "low turn6 cell0,1",
+    "low observed 0,1 fixed turn6",
+    "low turn6 cell1,0",
+    "low observed 1,0 fixed turn6",
+    "low turn6 cell1,1",
+    "low observed 1,1 fixed turn6",
+    "low turn6 cell2,0",
+    "low observed 2,0 fixed turn6",
+    "low turn6 cell2,1",
+    "low turn6 cell3,0",
+    "low turn6 cell3,1",
+    "low observed 3,1 fixed turn6",
+    "low turn6 cell4,0",
+    "low observed 4,0 fixed turn6",
+    "low turn6 cell4,1",
+    "low observed 4,1 fixed turn6",
+    "low query vector count",
+    "low query observed column0 fixed step0",
+    "low query observed column0 fixed step1",
+    "low query observed column0 fixed step2",
+    "low query observed column0 fixed step3",
+    "low query observed column0 fixed step4",
+    "low query observed column0 fixed step5",
+    "low query observed column0 fixed step6",
+    "low query vector count",
+    "low query observed column1 fixed step0",
+    "low query observed column1 fixed step1",
+    "low query observed column1 fixed step2",
+    "low query observed column1 fixed step3",
+    "low query observed column1 fixed step4",
+    "low query observed column1 fixed step5",
+    "low query observed column1 fixed step6",
+    "low query vector count",
+    "low inference cannot mutate saved trace",
+    "high turn1 coefficient/intercept independently solved",
+    "high turn1 cell0,0",
+    "high observed 0,0 fixed turn1",
+    "high turn1 cell0,1",
+    "high observed 0,1 fixed turn1",
+    "high turn1 cell1,0",
+    "high observed 1,0 fixed turn1",
+    "high turn1 cell1,1",
+    "high observed 1,1 fixed turn1",
+    "high turn1 cell2,0",
+    "high observed 2,0 fixed turn1",
+    "high turn1 cell2,1",
+    "high turn1 cell3,0",
+    "high turn1 cell3,1",
+    "high observed 3,1 fixed turn1",
+    "high turn1 cell4,0",
+    "high observed 4,0 fixed turn1",
+    "high turn1 cell4,1",
+    "high observed 4,1 fixed turn1",
+    "high turn2 coefficient/intercept independently solved",
+    "high turn2 cell0,0",
+    "high observed 0,0 fixed turn2",
+    "high turn2 cell0,1",
+    "high observed 0,1 fixed turn2",
+    "high turn2 cell1,0",
+    "high observed 1,0 fixed turn2",
+    "high turn2 cell1,1",
+    "high observed 1,1 fixed turn2",
+    "high turn2 cell2,0",
+    "high observed 2,0 fixed turn2",
+    "high turn2 cell2,1",
+    "high turn2 cell3,0",
+    "high turn2 cell3,1",
+    "high observed 3,1 fixed turn2",
+    "high turn2 cell4,0",
+    "high observed 4,0 fixed turn2",
+    "high turn2 cell4,1",
+    "high observed 4,1 fixed turn2",
+    "high turn3 coefficient/intercept independently solved",
+    "high turn3 cell0,0",
+    "high observed 0,0 fixed turn3",
+    "high turn3 cell0,1",
+    "high observed 0,1 fixed turn3",
+    "high turn3 cell1,0",
+    "high observed 1,0 fixed turn3",
+    "high turn3 cell1,1",
+    "high observed 1,1 fixed turn3",
+    "high turn3 cell2,0",
+    "high observed 2,0 fixed turn3",
+    "high turn3 cell2,1",
+    "high turn3 cell3,0",
+    "high turn3 cell3,1",
+    "high observed 3,1 fixed turn3",
+    "high turn3 cell4,0",
+    "high observed 4,0 fixed turn3",
+    "high turn3 cell4,1",
+    "high observed 4,1 fixed turn3",
+    "high turn4 coefficient/intercept independently solved",
+    "high turn4 cell0,0",
+    "high observed 0,0 fixed turn4",
+    "high turn4 cell0,1",
+    "high observed 0,1 fixed turn4",
+    "high turn4 cell1,0",
+    "high observed 1,0 fixed turn4",
+    "high turn4 cell1,1",
+    "high observed 1,1 fixed turn4",
+    "high turn4 cell2,0",
+    "high observed 2,0 fixed turn4",
+    "high turn4 cell2,1",
+    "high turn4 cell3,0",
+    "high turn4 cell3,1",
+    "high observed 3,1 fixed turn4",
+    "high turn4 cell4,0",
+    "high observed 4,0 fixed turn4",
+    "high turn4 cell4,1",
+    "high observed 4,1 fixed turn4",
+    "high turn5 coefficient/intercept independently solved",
+    "high turn5 cell0,0",
+    "high observed 0,0 fixed turn5",
+    "high turn5 cell0,1",
+    "high observed 0,1 fixed turn5",
+    "high turn5 cell1,0",
+    "high observed 1,0 fixed turn5",
+    "high turn5 cell1,1",
+    "high observed 1,1 fixed turn5",
+    "high turn5 cell2,0",
+    "high observed 2,0 fixed turn5",
+    "high turn5 cell2,1",
+    "high turn5 cell3,0",
+    "high turn5 cell3,1",
+    "high observed 3,1 fixed turn5",
+    "high turn5 cell4,0",
+    "high observed 4,0 fixed turn5",
+    "high turn5 cell4,1",
+    "high observed 4,1 fixed turn5",
+    "high turn6 coefficient/intercept independently solved",
+    "high turn6 cell0,0",
+    "high observed 0,0 fixed turn6",
+    "high turn6 cell0,1",
+    "high observed 0,1 fixed turn6",
+    "high turn6 cell1,0",
+    "high observed 1,0 fixed turn6",
+    "high turn6 cell1,1",
+    "high observed 1,1 fixed turn6",
+    "high turn6 cell2,0",
+    "high observed 2,0 fixed turn6",
+    "high turn6 cell2,1",
+    "high turn6 cell3,0",
+    "high turn6 cell3,1",
+    "high observed 3,1 fixed turn6",
+    "high turn6 cell4,0",
+    "high observed 4,0 fixed turn6",
+    "high turn6 cell4,1",
+    "high observed 4,1 fixed turn6",
+    "high query vector count",
+    "high query observed column0 fixed step0",
+    "high query observed column0 fixed step1",
+    "high query observed column0 fixed step2",
+    "high query observed column0 fixed step3",
+    "high query observed column0 fixed step4",
+    "high query observed column0 fixed step5",
+    "high query observed column0 fixed step6",
+    "high query vector count",
+    "high query observed column1 fixed step0",
+    "high query observed column1 fixed step1",
+    "high query observed column1 fixed step2",
+    "high query observed column1 fixed step3",
+    "high query observed column1 fixed step4",
+    "high query observed column1 fixed step5",
+    "high query observed column1 fixed step6",
+    "high query vector count",
+    "high inference cannot mutate saved trace",
+    "Default first two estimates conserved",
+    "Edited first model exact rational complement",
+    "Edited all-missing query changes final result",
+    "default live turn0 saved sequence visible",
+    "default live turn0 saved model1",
+    "default live turn0 saved model2",
+    "default live turn0 saved model3",
+    "default live turn0 saved model4",
+    "default live turn0 saved model5",
+    "default live turn0 saved model6",
+    "default live turn0 current all-missing query",
+    "default live turn0 current all-missing query",
+    "default live turn1 saved sequence visible",
+    "default live turn1 saved model1",
+    "default live turn1 saved model2",
+    "default live turn1 saved model3",
+    "default live turn1 saved model4",
+    "default live turn1 saved model5",
+    "default live turn1 saved model6",
+    "default live turn1 current all-missing query",
+    "default live turn1 current all-missing query",
+    "default live turn2 saved sequence visible",
+    "default live turn2 saved model1",
+    "default live turn2 saved model2",
+    "default live turn2 saved model3",
+    "default live turn2 saved model4",
+    "default live turn2 saved model5",
+    "default live turn2 saved model6",
+    "default live turn2 current all-missing query",
+    "default live turn2 current all-missing query",
+    "default live turn3 saved sequence visible",
+    "default live turn3 saved model1",
+    "default live turn3 saved model2",
+    "default live turn3 saved model3",
+    "default live turn3 saved model4",
+    "default live turn3 saved model5",
+    "default live turn3 saved model6",
+    "default live turn3 current all-missing query",
+    "default live turn3 current all-missing query",
+    "default live turn4 saved sequence visible",
+    "default live turn4 saved model1",
+    "default live turn4 saved model2",
+    "default live turn4 saved model3",
+    "default live turn4 saved model4",
+    "default live turn4 saved model5",
+    "default live turn4 saved model6",
+    "default live turn4 current all-missing query",
+    "default live turn4 current all-missing query",
+    "default live turn5 saved sequence visible",
+    "default live turn5 saved model1",
+    "default live turn5 saved model2",
+    "default live turn5 saved model3",
+    "default live turn5 saved model4",
+    "default live turn5 saved model5",
+    "default live turn5 saved model6",
+    "default live turn5 current all-missing query",
+    "default live turn5 current all-missing query",
+    "default live turn6 saved sequence visible",
+    "default live turn6 saved model1",
+    "default live turn6 saved model2",
+    "default live turn6 saved model3",
+    "default live turn6 saved model4",
+    "default live turn6 saved model5",
+    "default live turn6 saved model6",
+    "default live turn6 current all-missing query",
+    "default live turn6 current all-missing query",
+    "edited live turn0 saved sequence visible",
+    "edited live turn0 saved model1",
+    "edited live turn0 saved model2",
+    "edited live turn0 saved model3",
+    "edited live turn0 saved model4",
+    "edited live turn0 saved model5",
+    "edited live turn0 saved model6",
+    "edited live turn0 current all-missing query",
+    "edited live turn0 current all-missing query",
+    "edited live turn1 saved sequence visible",
+    "edited live turn1 saved model1",
+    "edited live turn1 saved model2",
+    "edited live turn1 saved model3",
+    "edited live turn1 saved model4",
+    "edited live turn1 saved model5",
+    "edited live turn1 saved model6",
+    "edited live turn1 current all-missing query",
+    "edited live turn1 current all-missing query",
+    "edited live turn2 saved sequence visible",
+    "edited live turn2 saved model1",
+    "edited live turn2 saved model2",
+    "edited live turn2 saved model3",
+    "edited live turn2 saved model4",
+    "edited live turn2 saved model5",
+    "edited live turn2 saved model6",
+    "edited live turn2 current all-missing query",
+    "edited live turn2 current all-missing query",
+    "edited live turn3 saved sequence visible",
+    "edited live turn3 saved model1",
+    "edited live turn3 saved model2",
+    "edited live turn3 saved model3",
+    "edited live turn3 saved model4",
+    "edited live turn3 saved model5",
+    "edited live turn3 saved model6",
+    "edited live turn3 current all-missing query",
+    "edited live turn3 current all-missing query",
+    "edited live turn4 saved sequence visible",
+    "edited live turn4 saved model1",
+    "edited live turn4 saved model2",
+    "edited live turn4 saved model3",
+    "edited live turn4 saved model4",
+    "edited live turn4 saved model5",
+    "edited live turn4 saved model6",
+    "edited live turn4 current all-missing query",
+    "edited live turn4 current all-missing query",
+    "edited live turn5 saved sequence visible",
+    "edited live turn5 saved model1",
+    "edited live turn5 saved model2",
+    "edited live turn5 saved model3",
+    "edited live turn5 saved model4",
+    "edited live turn5 saved model5",
+    "edited live turn5 saved model6",
+    "edited live turn5 current all-missing query",
+    "edited live turn5 current all-missing query",
+    "edited live turn6 saved sequence visible",
+    "edited live turn6 saved model1",
+    "edited live turn6 saved model2",
+    "edited live turn6 saved model3",
+    "edited live turn6 saved model4",
+    "edited live turn6 saved model5",
+    "edited live turn6 saved model6",
+    "edited live turn6 current all-missing query",
+    "edited live turn6 current all-missing query",
+    "L13 invalid clears both dependent views",
+    "L13 reconstructed reset exact after changed/invalid states",
+    "default stable D1 actual length",
+    "default stable D2 actual length",
+    "default stable D3 actual length",
+    "default distinct3 identity lanes",
+    "tie stable D1 actual length",
+    "tie stable D2 actual length",
+    "tie stable D3 actual length",
+    "tie distinct3 identity lanes",
+    "All tied distances distinct source selection",
+    "undefined stable D1 actual length",
+    "undefined stable D2 actual length",
+    "undefined stable D3 actual length",
+    "undefined distinct3 identity lanes",
+    "Undefined distance has no marker or invented zero",
+    "ineligible stable D1 actual length",
+    "ineligible stable D2 actual length",
+    "ineligible stable D3 actual length",
+    "ineligible distinct3 identity lanes",
+    "Eligibility separate from defined distance",
+    "zero stable D1 actual length",
+    "zero stable D2 actual length",
+    "zero stable D3 actual length",
+    "zero distinct3 identity lanes",
+    "F4 retained pooling arithmetic"
+  ],
+  "conditionCount": 1024,
+  "inputs": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/author-review/author-ready-built-source.json",
+      "bytes": 29143,
+      "sha256": "13080457ca5501761e589636a172763241c0a7f0c2fdacda47bf25351aabaa76"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preparation-lesson.jsx",
+      "bytes": 142760,
+      "sha256": "866cc4deb6d0e0df510d6bc0fd7b0d94aac772049062d0b6e54b03d84428751d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preparation-models.mjs",
+      "bytes": 12750,
+      "sha256": "26203e2b7eb08087f756fdd6d9eec4e27f9c26da5918325caf5e8ca527b1d472"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/Drawing.jsx",
+      "bytes": 7440,
+      "sha256": "34953be48b4cbd473904992ec38925b86de409326a693e7c3a0ddcf3d8186dcb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/CoreFigures.jsx",
+      "bytes": 26337,
+      "sha256": "65810476adfd30ebd55bb0d3ad22e03d34902390ed2ff5e6cba48a200a00201b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/DeeperFigures.jsx",
+      "bytes": 27720,
+      "sha256": "0ae510542fe6471862929ff7978eb394a2a1eec0cc84ff8d6f849257616fbf64"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/PreparationFigures.jsx",
+      "bytes": 263,
+      "sha256": "9455a6f8f353b0e460ec705dfaf78b4eee277e19de0dd752fd80f9a1ffbf37e8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/PreparationInvestigations.jsx",
+      "bytes": 22523,
+      "sha256": "52305f72cc5028248c763289eb60318cdd9d3670cb8e3ee4d5e777bc6c75d14a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/saved-data.js",
+      "bytes": 73696,
+      "sha256": "a67799995bd747fd7551f0698017b15d11558fe2af8f2c1e2ce78f85cc266f00"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/lesson.css",
+      "bytes": 4845,
+      "sha256": "af87b01c46393cd024b3efbd901b776fafbe379e21243b784e478ad3771a10f8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview-entry.jsx",
+      "bytes": 1149,
+      "sha256": "f0f4e4b7ec799374ffeee119554c5899a104ff56fdcecc3e72ec42bbbec65288"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview-loader.js",
+      "bytes": 201,
+      "sha256": "86c3dd91110be6d25b9744728dd31c780dded846a2334ad80f643affb3ba46c8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preview.css",
+      "bytes": 150,
+      "sha256": "73f50de9fdd1b6f193784fd2c7b3ab8a06b194ee04cf72da5c04b9ec2dd76543"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/index.html",
+      "bytes": 297,
+      "sha256": "5820ba2e84cf18c84e591f8bf1c0d754a5757578c309ffdb9d43d8990c371d67"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/vite.config.mjs",
+      "bytes": 3756,
+      "sha256": "5ddf462986e2efeeb8d4568cd34809e06c049cca05ffbe5cae9d2ed73d3acbce"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/compose-reader.mjs",
+      "bytes": 9599,
+      "sha256": "cfe62f500bb73065624f8e1c943739963ac7b9f36da4b4642a24270ec0e6b65c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/file-payloads.json",
+      "bytes": 22895,
+      "sha256": "63c256b530abb25b82be047c6751d6c407d1a4599546a69bf393a7fab9306a5d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/composition.json",
+      "bytes": 3338,
+      "sha256": "4eee0f84609c19edb967b9236cd33e3114488c328bdde832f9230a0ebc89bb90"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/check-runtime.mjs",
+      "bytes": 14287,
+      "sha256": "9b64aafd207db34c7b4f055436a4117f8291ce6fed3ff466b47b2cf1b5d7a16b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/check-state-scenarios.mjs",
+      "bytes": 5141,
+      "sha256": "b34407635809480eb2b323fcb735631d240ce7bc06adc2b94d655349c4de90ae"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/format-source.mjs",
+      "bytes": 829,
+      "sha256": "b59e2584a13831563a3e9bbe6da0e6bef03d7336249b9608b57484bc6b48f077"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/read-flow.py",
+      "bytes": 1838,
+      "sha256": "68735f48a8630456f9c9f1ff6ad420168653e802874890e92057128ccd2c49bb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/index.html",
+      "bytes": 391,
+      "sha256": "78ede1b6521053210aea9b46fe55f5018882f65a00f9de51eb10129bc348114b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/private-module-map.json",
+      "bytes": 9986,
+      "sha256": "aa6b0ba994236403f0b03e282364aee0b9d57e1187f1a60a8b9daba1843ff1fb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_AMS-Regular-DRggAlZN.ttf",
+      "bytes": 63632,
+      "sha256": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_AMS-Regular-DMm9YOAa.woff",
+      "bytes": 33516,
+      "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+      "bytes": 28076,
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf",
+      "bytes": 12368,
+      "sha256": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff",
+      "bytes": 7716,
+      "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2",
+      "bytes": 6912,
+      "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf",
+      "bytes": 12344,
+      "sha256": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff",
+      "bytes": 7656,
+      "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+      "bytes": 6908,
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf",
+      "bytes": 19584,
+      "sha256": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff",
+      "bytes": 13296,
+      "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2",
+      "bytes": 11348,
+      "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Regular-CB_wures.ttf",
+      "bytes": 19572,
+      "sha256": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff",
+      "bytes": 13208,
+      "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2",
+      "bytes": 11316,
+      "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Bold-waoOVXN0.ttf",
+      "bytes": 51336,
+      "sha256": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Bold-Jm3AIy58.woff",
+      "bytes": 29912,
+      "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Bold-Cx986IdX.woff2",
+      "bytes": 25324,
+      "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf",
+      "bytes": 32968,
+      "sha256": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff",
+      "bytes": 19412,
+      "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2",
+      "bytes": 16780,
+      "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Italic-3WenGoN9.ttf",
+      "bytes": 33580,
+      "sha256": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Italic-BMLOBm91.woff",
+      "bytes": 19676,
+      "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2",
+      "bytes": 16988,
+      "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Regular-ypZvNtVU.ttf",
+      "bytes": 53580,
+      "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Regular-Dr94JaBh.woff",
+      "bytes": 30772,
+      "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+      "bytes": 26272,
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf",
+      "bytes": 31196,
+      "sha256": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff",
+      "bytes": 18668,
+      "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2",
+      "bytes": 16400,
+      "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-Italic-flOr_0UB.ttf",
+      "bytes": 31308,
+      "sha256": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-Italic-DA0__PXp.woff",
+      "bytes": 18748,
+      "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+      "bytes": 16440,
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf",
+      "bytes": 24504,
+      "sha256": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff",
+      "bytes": 14408,
+      "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2",
+      "bytes": 12216,
+      "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf",
+      "bytes": 22364,
+      "sha256": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff",
+      "bytes": 14112,
+      "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2",
+      "bytes": 12028,
+      "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf",
+      "bytes": 19436,
+      "sha256": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff",
+      "bytes": 12316,
+      "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2",
+      "bytes": 10344,
+      "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Script-Regular-C5JkGWo-.ttf",
+      "bytes": 16648,
+      "sha256": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Script-Regular-D5yQViql.woff",
+      "bytes": 10588,
+      "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Script-Regular-D3wIWfF6.woff2",
+      "bytes": 9644,
+      "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf",
+      "bytes": 12228,
+      "sha256": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size1-Regular-C195tn64.woff",
+      "bytes": 6496,
+      "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+      "bytes": 5468,
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf",
+      "bytes": 11508,
+      "sha256": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size2-Regular-oD1tc_U0.woff",
+      "bytes": 6188,
+      "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+      "bytes": 5208,
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf",
+      "bytes": 7588,
+      "sha256": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size3-Regular-CTq5MqoE.woff",
+      "bytes": 4420,
+      "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+      "bytes": 10364,
+      "sha256": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size4-Regular-BF-4gkZK.woff",
+      "bytes": 5980,
+      "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
+      "bytes": 4928,
+      "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf",
+      "bytes": 27556,
+      "sha256": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
+      "bytes": 16028,
+      "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2",
+      "bytes": 13568,
+      "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/index-C2--LHxw.js",
+      "bytes": 1139617,
+      "sha256": "b4527a5d5bcfeb7fce99d5e1d1460c8ecc708654d8cab5465cc28f7eb559eb5a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/index-DA9qLERT.css",
+      "bytes": 33257,
+      "sha256": "25244d145351fb67ddedfd0ee85325aee9e00184d36a30b30b369e8ab2964acc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/preparation-lesson-BoLwuUKa.js",
+      "bytes": 537710,
+      "sha256": "cbeab66be96470a729c2d00c786a793f45c42e49c554eecf4b942cc03289b2a2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/build-private/assets/preparation-lesson-CfVKi3_s.css",
+      "bytes": 29265,
+      "sha256": "172910a725ddf7dc3e34e8c005de61f1afba5bd3a73352cedc18815d7638fb83"
+    },
+    {
+      "path": "node_modules/react/cjs/react-jsx-runtime.production.js",
+      "bytes": 976,
+      "sha256": "1e46f15002696985e80c61d47aaa30dabb03c954270a690f5f7dfbbacfa9002b"
+    },
+    {
+      "path": "node_modules/react/jsx-runtime.js",
+      "bytes": 210,
+      "sha256": "b392951a77d0a2e6a6bd017e49d768481ae5b63c4109c6c31f622cf7b2433edc"
+    },
+    {
+      "path": "node_modules/react/cjs/react.production.js",
+      "bytes": 17217,
+      "sha256": "6a3554a5287116df819640334924348287618dcdcd7124a05eb126dcbbecd5f9"
+    },
+    {
+      "path": "node_modules/react/index.js",
+      "bytes": 186,
+      "sha256": "60caffdecbdc5db3bc4ec4e83df9488345ccb271d07533b9210bf5750918d97e"
+    },
+    {
+      "path": "node_modules/scheduler/cjs/scheduler.production.js",
+      "bytes": 10181,
+      "sha256": "679adff761d31e9426604f80c0e99be44a3e6f4c6834b0218ecf0312a67c171f"
+    },
+    {
+      "path": "node_modules/scheduler/index.js",
+      "bytes": 194,
+      "sha256": "145965504d60007bc25486ab930b0367867dcd5d579ccd343c148d69349a7cfb"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom.production.js",
+      "bytes": 6655,
+      "sha256": "7a5e56724be242e34ddc14f9d0dc7fc6a32f1367ae994f02d3699b00c085eff4"
+    },
+    {
+      "path": "node_modules/react-dom/index.js",
+      "bytes": 1359,
+      "sha256": "ba1a3e33489f868371561777607e3ee5091df0f7ea3f1a10f789d6b86e4c1505"
+    },
+    {
+      "path": "node_modules/react-dom/cjs/react-dom-client.production.js",
+      "bytes": 536016,
+      "sha256": "764ffa6adc2c9b02b4dc00f4a58ef13d050e7825898bd9e5dc808d3a3f9d4bb9"
+    },
+    {
+      "path": "node_modules/react-dom/client.js",
+      "bytes": 1373,
+      "sha256": "00e348ab3d6bc2eef908345d0bc4e008c95bcfecec060dfda5c4967953761396"
+    },
+    {
+      "path": "node_modules/react-router/dist/development/chunk-UVKPFVEO.mjs",
+      "bytes": 360344,
+      "sha256": "621b9bfd0f8b6bcd5970b75f8a67d67c5c8fc65d72931f0e9169d2246893e5b0"
+    },
+    {
+      "path": "src/learn/data/generated/navigation.js",
+      "bytes": 942828,
+      "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+    },
+    {
+      "path": "src/learn/data/catalogue.js",
+      "bytes": 477,
+      "sha256": "639cde33208e3e71fcdb4669eafdcaa71abbff1646ae01cbf1f77e623c78d693"
+    },
+    {
+      "path": "src/learn/components/PlaceholderContent.jsx",
+      "bytes": 2665,
+      "sha256": "3e963ae06cb932213259acd5849841816be92f97a1e364b9c5912c509de624a0"
+    },
+    {
+      "path": "src/learn/styles.js",
+      "bytes": 1539,
+      "sha256": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+    },
+    {
+      "path": "src/learn/components/LevelBadge.jsx",
+      "bytes": 629,
+      "sha256": "325fd3eb0b155780333620b584b7a62315fb9647625afb18313ac9c6e16a9647"
+    },
+    {
+      "path": "src/learn/components/lesson-navigation.js",
+      "bytes": 1362,
+      "sha256": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b"
+    },
+    {
+      "path": "src/learn/components/lesson-guide.css",
+      "bytes": 2967,
+      "sha256": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2"
+    },
+    {
+      "path": "src/learn/components/LessonGuide.jsx",
+      "bytes": 2925,
+      "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+    },
+    {
+      "path": "src/learn/components/LessonOpening.jsx",
+      "bytes": 1112,
+      "sha256": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348"
+    },
+    {
+      "path": "src/learn/hooks/useTopicResource.js",
+      "bytes": 991,
+      "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+    },
+    {
+      "path": "src/learn/components/LessonBoundary.jsx",
+      "bytes": 992,
+      "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+    },
+    {
+      "path": "src/learn/components/topic-content.css",
+      "bytes": 2992,
+      "sha256": "8ef6856306e028433ad10d8d18cdaf37362ba9db1a17ab8fbe1e1b76d9ce4fb0"
+    },
+    {
+      "path": "src/learn/components/lesson-endings.css",
+      "bytes": 5203,
+      "sha256": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6"
+    },
+    {
+      "path": "src/learn/components/content/code-downloads.js",
+      "bytes": 1709,
+      "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+    },
+    {
+      "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+      "bytes": 4857,
+      "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+    },
+    {
+      "path": "src/learn/components/content/lesson-code.css",
+      "bytes": 4491,
+      "sha256": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283"
+    },
+    {
+      "path": "src/learn/data/projects/typed-decision-model/metadata.js",
+      "bytes": 3158,
+      "sha256": "9253c1486af2f5a083dd6ad4fafae6eb9d644caca89d22aad4d7ed39313ef1a4"
+    },
+    {
+      "path": "src/learn/data/projects/catalogue.js",
+      "bytes": 610,
+      "sha256": "7b35afa5ba219c9a535ab7c3dc81683cbaf218ae1bd73fd315e4a9bc3ca5562c"
+    },
+    {
+      "path": "src/learn/components/TopicContent.jsx",
+      "bytes": 7106,
+      "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+    },
+    {
+      "path": "src/learn/learning-base.css",
+      "bytes": 19925,
+      "sha256": "595f1446ed9d4e5f7d2710b796be26527b58e78796a34d0bcdf4ffffe0717d97"
+    },
+    {
+      "path": "src/learn/components/content/Headings.jsx",
+      "bytes": 1405,
+      "sha256": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f"
+    },
+    {
+      "path": "src/learn/components/content/Prose.jsx",
+      "bytes": 549,
+      "sha256": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff"
+    },
+    {
+      "path": "src/learn/components/content/Code.jsx",
+      "bytes": 3120,
+      "sha256": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e"
+    },
+    {
+      "path": "src/learn/components/content/RemoteCodeBlock.jsx",
+      "bytes": 2455,
+      "sha256": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.min.css",
+      "bytes": 23804,
+      "sha256": "23aefa0850248a16478b9f55d6b67028f74cc0b46b82b24dc22af068acaa4170"
+    },
+    {
+      "path": "node_modules/katex/dist/katex.mjs",
+      "bytes": 597917,
+      "sha256": "e1b9ee63435797f929ceb2faf1defa4e13785d0b93f6330fa263c0dce07f2158"
+    },
+    {
+      "path": "src/learn/components/content/Math.jsx",
+      "bytes": 931,
+      "sha256": "427a466aaa33b2733c7b87cf9c2c8e2ed338a2f234764590b69fafc1b5952459"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.py",
+      "bytes": 3634,
+      "sha256": "c2a37882bc45cf94533dba7d187d9957aec17b018a77ae135399647348d57f05"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_preparation.stdout.txt",
+      "bytes": 213,
+      "sha256": "84d92eefa8ad451c377ab583b9e0e6ec0f3fbd45dca14ef45977770c5fcc08eb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.py",
+      "bytes": 5853,
+      "sha256": "baf38f53144b2fd895b6cb51f8db7d756bb113bf2fb7b8ad47a3fc6720aabd77"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_rulers.stdout.txt",
+      "bytes": 664,
+      "sha256": "734d15306e1c4696b198fcb273ee7379b261b46188c85b8cbf02f710dc011546"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.py",
+      "bytes": 5466,
+      "sha256": "a887cc9897f70d51f075e4807e20701b3e4694931d2f6feacbbc1617649f56ea"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/category_policies.stdout.txt",
+      "bytes": 521,
+      "sha256": "a8067562ddc5c4c8cf93ba0462d52b3567b5db6142c9a616a6ff7df0c77159e3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.py",
+      "bytes": 5330,
+      "sha256": "a142d061c947e176272dbd320bdc1f855190a3b92393a8c6bdcfe4cbc3e6f1d7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/masked_simple_imputation.stdout.txt",
+      "bytes": 392,
+      "sha256": "26c598fd98345a6f749a57e5853f35d39c89fc7ba4a22bc20bf6ec05b4a0aec1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.py",
+      "bytes": 5144,
+      "sha256": "9405060b70a6e9cb398e25ece01f8a32221a12a8207f5259afb352de7e3a1e08"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/nan_aware_donors.stdout.txt",
+      "bytes": 514,
+      "sha256": "e17b036b3f66ef50d8ade7c67c5835f9d3e7abfb269c627099e94929fc6be052"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.py",
+      "bytes": 2296,
+      "sha256": "71e52b36515fbff999894994ad24605a83099c115539e8870562dbcd190a9e94"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins_prepare.stdout.txt",
+      "bytes": 343,
+      "sha256": "0fe9a8247079db8b6fb407e4300c1027a52428ead1a1d997a5cf4a58208d1e52"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.py",
+      "bytes": 6558,
+      "sha256": "f8af71f7f2b073e3b84ae21b1a25e912d023575a4c21cc57defeccdcf6241dbe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_power_maps.stdout.txt",
+      "bytes": 592,
+      "sha256": "dd9d8043f236730568d5c13fcbec5cc8305871676d56eb85d92216dec3deeef5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.py",
+      "bytes": 3612,
+      "sha256": "81eb4e6a0c8e1cd0a85fc7eac068aa93b16a6c398f73544ae96a6518058996da"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_quantile_maps.stdout.txt",
+      "bytes": 408,
+      "sha256": "d118dcf117e8d2fb13f9ba587a306840c1c12caece8bd41adce2dc2190daa635"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.py",
+      "bytes": 6049,
+      "sha256": "a54c1e2c4e6691cfd50552ff9f3eda96bb7594fa2f6f7fe3f9f009b8c4c511d2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/fitted_target_encoding.stdout.txt",
+      "bytes": 601,
+      "sha256": "4fb774b64a4fb35882f09be1f7238dd16aedc532a126620118b4513c4314e4a9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.py",
+      "bytes": 6190,
+      "sha256": "39ba61d6baab82d05ed5d2120446f4331c320d08bf8420458e2eb04e1b5adc3c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stdout.txt",
+      "bytes": 746,
+      "sha256": "13f56a2636b8547a295388cc2e29ea48b9c8940489e1cad6a516513a0d7e1e4f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/bins_polynomials_cycles.stderr.txt",
+      "bytes": 281,
+      "sha256": "555d49608910de8ee38ca229e354f22af65b6909a7be97fb6e92fb3252e73e48"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.py",
+      "bytes": 5699,
+      "sha256": "8371d9b75c524dd50bd7eee324881cd8261d4b61e92b3f6ce27ed2523a9d1556"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/local_spline_basis.stdout.txt",
+      "bytes": 1410,
+      "sha256": "a04611a45b6e39c299fe49f82d978c9abb22711bc0fa08d547bf73e12ff77102"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.py",
+      "bytes": 789,
+      "sha256": "1266b727cc7148c46d593b06c289012fb23148a4c7c0e1b709c55d079d5d5252"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/cross_fit.stdout.txt",
+      "bytes": 111,
+      "sha256": "5ce2749d273dab6f81c458a5cf9425c7f877aae8ff7fabd38cb414e84e2bd4a2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.py",
+      "bytes": 2938,
+      "sha256": "4b7b37b5025eb3c3d61368649d861ebdd31ab58896b98897939892302ef17db3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/signed_feature_hashing.stdout.txt",
+      "bytes": 545,
+      "sha256": "e789277195b71f275ee7e461b6ef8967eeb47d327afc2c129bb6a2b5f6d278e3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.py",
+      "bytes": 5111,
+      "sha256": "7a864300d94a8412fbea2c41d89c3f924ae4c5ca4ddda8a29df7a970101afcf2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/conditional_iterative_completion.stdout.txt",
+      "bytes": 2240,
+      "sha256": "23e1df2862c233b1462fccc4ebc93f168708cef124fc3ecb18495b0c48a72051"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.py",
+      "bytes": 1709,
+      "sha256": "41fd4831658ce37c516ef378e194abf931945b4e48281e38c9666ec4fb98368f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/pool_scalar_analyses.stdout.txt",
+      "bytes": 726,
+      "sha256": "60324655cbf39591779e95a933a189d850d80e1c99eb131893f32506600fd75f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.py",
+      "bytes": 4181,
+      "sha256": "4b00570bbd9977d88f01cd449a9aa047e1c1de24532db09f4a22eaab910cd18d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/normal_completion_and_sensitivity.stdout.txt",
+      "bytes": 1117,
+      "sha256": "e255495971337b764427d58559d791dee3eb2a2e5f4a58796b9303e5d739c9f6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/multiple_imputation_mice.R",
+      "bytes": 1442,
+      "sha256": "252371b28843d3410971daf87b3fba1271827e632bb6c3112ff735b6b6aa198e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.py",
+      "bytes": 6513,
+      "sha256": "8e872c40f4ebbfec5dc7df87d3197bd4019c58efded1c4b50f0b5e44958c3cfd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/practice_solutions.stdout.txt",
+      "bytes": 1552,
+      "sha256": "e287823a2eb484800b1f7f1506c4dfbb5562bf658ea04b544f56421f79da7a0e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/calculated-inputs.json",
+      "bytes": 43077,
+      "sha256": "f89cf22494ef0a47f0d3539cb29448baba9e7cffabc38e5fd34393a19f16e70f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/scaling-native.json",
+      "bytes": 2506,
+      "sha256": "d7fb3b2192777ed311ad271b259578d7b895d95ba466ae5205e6a0758c7f67ea"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/source-roles.json",
+      "bytes": 16412,
+      "sha256": "302cf9f974721663dd799e719633f7a1a3e6fc5b2a77d75e7c0869a71ceb7b68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/README.md",
+      "bytes": 4399,
+      "sha256": "7725fe1d35a3506a1856d9f49aa47aa6d24d4d3c6970a15b23d9e6a5a3926208"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/programs/requirements.txt",
+      "bytes": 61,
+      "sha256": "ed9a683cbf487f4979c1deb16c27eeec981cbc6611d5cb639a40a98e77d2a6b8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/CoreFigures.jsx",
+      "bytes": 28623,
+      "sha256": "87f2ac8b2600eef3efaa13c94084283117a0da5b21994f9901e3b7a6c59cd11d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/DeeperFigures.jsx",
+      "bytes": 33242,
+      "sha256": "dc76bfccf798d99a264c9fa3d120eca62f90150a55f47786f7257d840399e569"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/PreparationFigures.jsx",
+      "bytes": 306,
+      "sha256": "b60ef65f5800a47905ea1cf6d976b0d1b056bda14fa66dedd69b8bdf4dd49e67"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/PreparationInvestigations.jsx",
+      "bytes": 22696,
+      "sha256": "9b801d68c9486470f298e67299bb977fdb9a583812d60dfcd04643d5e4460d06"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preparation-lesson.jsx",
+      "bytes": 144022,
+      "sha256": "047cbb27237556b6dc0fca3ef69f728f4f42242fbd435127bcca55cf004d1bac"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preview-entry.jsx",
+      "bytes": 1158,
+      "sha256": "622af516a322597852f1b30613d4d5ce08a1a924cf58a7a2db0d6eb234b8df8f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/whole-reader.html",
+      "bytes": 635883,
+      "sha256": "58c35160798ffdfe2b8e61e2e92c9875a3fa6e98f93f5b9fdbd93a2229ea4fcc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/D34.html",
+      "bytes": 10032,
+      "sha256": "9cc52382059fb9b5583c6657a235aabfdafe6ffb325f779ceb47d7969ac16742"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn0.html",
+      "bytes": 11027,
+      "sha256": "ed737bc7e3668c283975f545ed4790009261d71e0961532bd99fd49f365d46d7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn1.html",
+      "bytes": 15726,
+      "sha256": "c973291647b0e315c94e964016cca4992bc21777f4fb0e4f8e981d7002c45d4e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn2.html",
+      "bytes": 15721,
+      "sha256": "498f7f2a06ea2a9f4f0edf4f29358f68d99dbad6fd14a06f91b6ec523d20ceb5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn3.html",
+      "bytes": 15851,
+      "sha256": "bbcfaee6818cc1b029808aaaf5c265104304ba65787e902f92d8105bb1864d97"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn4.html",
+      "bytes": 15752,
+      "sha256": "cfa5a9b46db5ab9fc15bf742ad5a4d9f8e21fbf8e2a383ada5fdab8ddd864945"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn5.html",
+      "bytes": 15805,
+      "sha256": "8c240aa52e0afdf617ccbe77615683bf3ca7fc948de6fa54d59023bc857740c9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn6.html",
+      "bytes": 15748,
+      "sha256": "983f8f23558f2c89ef398d3ea53e20981a5d1a165fddf1f30f6eacb0ea84490a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn0.html",
+      "bytes": 11231,
+      "sha256": "4a1d12b221b7dd27550739fd45aa12d50e3cdbd52cc7a199041346379bbd6ac8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn1.html",
+      "bytes": 15871,
+      "sha256": "bfe2ef5db86eaaab9ac651182227db80ae131049bc4565961bb6b6a46b00da01"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn2.html",
+      "bytes": 15893,
+      "sha256": "dd7d3cd60b0a51e1781acfadac203793fb683399942eb33779107c8835e4df97"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn3.html",
+      "bytes": 15921,
+      "sha256": "8ce6e193da8e2d671457d5f67d84ab8a100f22b49b0b7a9e5ff99c3130a32a40"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn4.html",
+      "bytes": 15880,
+      "sha256": "cade35a1cb57aac686498615d66327a0d3ebd6568e845ce02b035e128281545c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn5.html",
+      "bytes": 15972,
+      "sha256": "f1cca09d5eb35a457b08e3f0afbe2c7d8460771468fbd3ce48bfb212400f72bb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn6.html",
+      "bytes": 15873,
+      "sha256": "306754c2b49cb67013cace76e90b229eb86552d1858b5d87bf85b8b9f1635aaa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-invalid.html",
+      "bytes": 1430,
+      "sha256": "4c836b599229e9a2cc44ba1a90a1e926e58d2a54f092dc1e414625cf5771bb28"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-default.html",
+      "bytes": 5297,
+      "sha256": "c0a5223c1804f1f5720dfd7a2a7d9704bc00c1fd85518b9824af8cd4d055335f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-tie.html",
+      "bytes": 5275,
+      "sha256": "845faf8cdc08d37ecb9396b7dd853677d9d6607e458840d387cf3df7a8d4052a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-undefined.html",
+      "bytes": 4539,
+      "sha256": "76e34b98d8b1586128162e47fa8f128ddae618f5515c826cd7183660305cb8d4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-ineligible.html",
+      "bytes": 5314,
+      "sha256": "f660776b82c478c0816fb663726e2d8bf03e6344e36bdabaf36cfa90ece647a8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-zero.html",
+      "bytes": 5221,
+      "sha256": "85546164cddb9015eb28312581a09198cd97c63e05e8cda8fe846666f7ac4852"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/D41.html",
+      "bytes": 4905,
+      "sha256": "ba42ea381fdb4ce981ba3e83d4b10985a6fd78b688fbdf0908d6ae210adb0abe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/D41b.html",
+      "bytes": 2586,
+      "sha256": "c3338ec9ffe0ce4725b120408e48f4ed8bd85d3becfe6a1a9149332126cd2153"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preparation-models.mjs",
+      "bytes": 12750,
+      "sha256": "26203e2b7eb08087f756fdd6d9eec4e27f9c26da5918325caf5e8ca527b1d472"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/Drawing.jsx",
+      "bytes": 7440,
+      "sha256": "34953be48b4cbd473904992ec38925b86de409326a693e7c3a0ddcf3d8186dcb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/saved-data.js",
+      "bytes": 73696,
+      "sha256": "a67799995bd747fd7551f0698017b15d11558fe2af8f2c1e2ce78f85cc266f00"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/lesson.css",
+      "bytes": 5229,
+      "sha256": "5a4b8b35ed45ad16e8026af38e76db5d5622f77d4e560f1ab738480b39e5a6e9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/compose-reader.mjs",
+      "bytes": 10609,
+      "sha256": "14166471f031f93241cbf52821a4bdefb4c724a14330eb0b623f45f92ce9627d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/matched-reading-amendments.json",
+      "bytes": 42722,
+      "sha256": "67357f4f36d8ac5102d7c5686c644eea9d1395905fe87e19979d83f9dd5407a2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/root-correction-release.json",
+      "bytes": 3350,
+      "sha256": "91b3d15209a6550daa9da7dbdd2ffd4d558cc50ffe771546c87adb011fdfafcd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/file-payloads.json",
+      "bytes": 22895,
+      "sha256": "63c256b530abb25b82be047c6751d6c407d1a4599546a69bf393a7fab9306a5d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preview-loader.js",
+      "bytes": 201,
+      "sha256": "86c3dd91110be6d25b9744728dd31c780dded846a2334ad80f643affb3ba46c8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preview.css",
+      "bytes": 150,
+      "sha256": "73f50de9fdd1b6f193784fd2c7b3ab8a06b194ee04cf72da5c04b9ec2dd76543"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/index.html",
+      "bytes": 297,
+      "sha256": "5820ba2e84cf18c84e591f8bf1c0d754a5757578c309ffdb9d43d8990c371d67"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/vite.config.mjs",
+      "bytes": 3759,
+      "sha256": "aa9e47b68fb624a890c9f9f2e24e2540e6d48ed015c09fae82f4411d6be34e0f"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/whole-reader.html",
+      "bytes": 635883,
+      "sha256": "58c35160798ffdfe2b8e61e2e92c9875a3fa6e98f93f5b9fdbd93a2229ea4fcc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/D34.html",
+      "bytes": 10032,
+      "sha256": "9cc52382059fb9b5583c6657a235aabfdafe6ffb325f779ceb47d7969ac16742"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn0.html",
+      "bytes": 11027,
+      "sha256": "ed737bc7e3668c283975f545ed4790009261d71e0961532bd99fd49f365d46d7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn1.html",
+      "bytes": 15726,
+      "sha256": "c973291647b0e315c94e964016cca4992bc21777f4fb0e4f8e981d7002c45d4e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn2.html",
+      "bytes": 15721,
+      "sha256": "498f7f2a06ea2a9f4f0edf4f29358f68d99dbad6fd14a06f91b6ec523d20ceb5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn3.html",
+      "bytes": 15851,
+      "sha256": "bbcfaee6818cc1b029808aaaf5c265104304ba65787e902f92d8105bb1864d97"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn4.html",
+      "bytes": 15752,
+      "sha256": "cfa5a9b46db5ab9fc15bf742ad5a4d9f8e21fbf8e2a383ada5fdab8ddd864945"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn5.html",
+      "bytes": 15805,
+      "sha256": "8c240aa52e0afdf617ccbe77615683bf3ca7fc948de6fa54d59023bc857740c9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-default-turn6.html",
+      "bytes": 15748,
+      "sha256": "983f8f23558f2c89ef398d3ea53e20981a5d1a165fddf1f30f6eacb0ea84490a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn0.html",
+      "bytes": 11231,
+      "sha256": "4a1d12b221b7dd27550739fd45aa12d50e3cdbd52cc7a199041346379bbd6ac8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn1.html",
+      "bytes": 15871,
+      "sha256": "bfe2ef5db86eaaab9ac651182227db80ae131049bc4565961bb6b6a46b00da01"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn2.html",
+      "bytes": 15893,
+      "sha256": "dd7d3cd60b0a51e1781acfadac203793fb683399942eb33779107c8835e4df97"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn3.html",
+      "bytes": 15921,
+      "sha256": "8ce6e193da8e2d671457d5f67d84ab8a100f22b49b0b7a9e5ff99c3130a32a40"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn4.html",
+      "bytes": 15880,
+      "sha256": "cade35a1cb57aac686498615d66327a0d3ebd6568e845ce02b035e128281545c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn5.html",
+      "bytes": 15972,
+      "sha256": "f1cca09d5eb35a457b08e3f0afbe2c7d8460771468fbd3ce48bfb212400f72bb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-edited-turn6.html",
+      "bytes": 15873,
+      "sha256": "306754c2b49cb67013cace76e90b229eb86552d1858b5d87bf85b8b9f1635aaa"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/L13-invalid.html",
+      "bytes": 1430,
+      "sha256": "4c836b599229e9a2cc44ba1a90a1e926e58d2a54f092dc1e414625cf5771bb28"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-default.html",
+      "bytes": 5297,
+      "sha256": "c0a5223c1804f1f5720dfd7a2a7d9704bc00c1fd85518b9824af8cd4d055335f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-tie.html",
+      "bytes": 5275,
+      "sha256": "845faf8cdc08d37ecb9396b7dd853677d9d6607e458840d387cf3df7a8d4052a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-undefined.html",
+      "bytes": 4539,
+      "sha256": "76e34b98d8b1586128162e47fa8f128ddae618f5515c826cd7183660305cb8d4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-ineligible.html",
+      "bytes": 5314,
+      "sha256": "f660776b82c478c0816fb663726e2d8bf03e6344e36bdabaf36cfa90ece647a8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/donors-zero.html",
+      "bytes": 5221,
+      "sha256": "85546164cddb9015eb28312581a09198cd97c63e05e8cda8fe846666f7ac4852"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/D41.html",
+      "bytes": 4905,
+      "sha256": "ba42ea381fdb4ce981ba3e83d4b10985a6fd78b688fbdf0908d6ae210adb0abe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/author-review/D41b.html",
+      "bytes": 2586,
+      "sha256": "c3338ec9ffe0ce4725b120408e48f4ed8bd85d3becfe6a1a9149332126cd2153"
+    }
+  ],
+  "retainedEvidence": [
+    "original model-and-ssr-check.json5f1dd23d",
+    "original static-state-scenarios.json70774046",
+    "original whole DIFFERENT review020e04c7"
+  ],
+  "scienceExecutions": 0,
+  "viteBuilds": 0,
+  "httpRequests": 0,
+  "nativeActions": 0,
+  "limits": [
+    "SSR with controlled state initialization, not actual pointer/keyboard/reset or effects",
+    "Complete common index discovery checked separately from this HTML using shared source semantics; no actual browser effect claim",
+    "Bounds estimates/native Root checks remain separate",
+    "Original accepted manuscript/spec/programmes and original source/build frozen exact"
+  ]
+}

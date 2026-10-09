@@ -1,0 +1,30 @@
+{
+  "virtual_counts": [
+    0,
+    1,
+    3,
+    8
+  ],
+  "real_target_count": 6,
+  "response_nll": {
+    "nll_sum": 7.566625985399915,
+    "targets": 6,
+    "nll": 1.2611043308999859,
+    "records": 2,
+    "rows": [
+      {
+        "id": "short",
+        "nll_sum": 3.1888753284666382,
+        "targets": 2,
+        "nll": 1.5944376642333191
+      },
+      {
+        "id": "long",
+        "nll_sum": 4.3777506569332765,
+        "targets": 4,
+        "nll": 1.0944376642333191
+      }
+    ]
+  },
+  "alignment_and_batch_pooling_exact": true
+}

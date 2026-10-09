@@ -1,0 +1,260 @@
+{
+  "ids": [
+    1
+  ],
+  "log_p": -6.406879986069314,
+  "log_q": null,
+  "steps": [
+    {
+      "position": 0,
+      "prefix_ids": [
+        544,
+        512,
+        22,
+        0,
+        0,
+        2,
+        545,
+        393,
+        32,
+        10,
+        544,
+        228,
+        310,
+        58,
+        412,
+        493,
+        267
+      ],
+      "selected_id": 1,
+      "log_p": -6.406879986069314,
+      "log_q": null,
+      "entropy_q": null,
+      "model_entropy": 6.100635518509273,
+      "support": 546
+    }
+  ],
+  "stop_reason": "eos",
+  "beam": {
+    "selected": {
+      "ids": [
+        1
+      ],
+      "log_p": -6.406879986069314,
+      "ancestry": [
+        0
+      ]
+    },
+    "selected_status": "eos",
+    "search_stop_reason": "retained_frontier_bound",
+    "finished": [
+      {
+        "ids": [
+          1
+        ],
+        "log_p": -6.406879986069314,
+        "ancestry": [
+          0
+        ]
+      },
+      {
+        "ids": [
+          22,
+          1
+        ],
+        "log_p": -9.825135350636046,
+        "ancestry": [
+          0,
+          0
+        ]
+      }
+    ],
+    "capped": [],
+    "trace": [
+      {
+        "depth": 1,
+        "scored_cells": 546,
+        "candidate_count": 546,
+        "kept": [
+          {
+            "ids": [
+              22
+            ],
+            "log_p": -2.972892781584168,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              451
+            ],
+            "log_p": -4.0089847132709435,
+            "ancestry": [
+              0
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -6.406879986069314,
+            "ancestry": [
+              0
+            ]
+          }
+        ],
+        "pruned_count": 543,
+        "alive_upper_bound": -2.972892781584168
+      },
+      {
+        "depth": 2,
+        "scored_cells": 1092,
+        "candidate_count": 1092,
+        "kept": [
+          {
+            "ids": [
+              22,
+              272
+            ],
+            "log_p": -6.3911481461509,
+            "ancestry": [
+              0,
+              0
+            ]
+          },
+          {
+            "ids": [
+              22,
+              307
+            ],
+            "log_p": -6.3911481461509,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -6.406879986069314,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              22,
+              1
+            ],
+            "log_p": -9.825135350636046,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "pruned_count": 1088,
+        "alive_upper_bound": -6.3911481461509
+      },
+      {
+        "depth": 3,
+        "scored_cells": 1092,
+        "candidate_count": 1092,
+        "kept": [
+          {
+            "ids": [
+              22,
+              307,
+              474
+            ],
+            "log_p": -9.71994549800449,
+            "ancestry": [
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "ids": [
+              22,
+              272,
+              125
+            ],
+            "log_p": -9.801824271767599,
+            "ancestry": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -6.406879986069314,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              22,
+              1
+            ],
+            "log_p": -9.825135350636046,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "pruned_count": 1088,
+        "alive_upper_bound": -9.71994549800449
+      }
+    ],
+    "alpha": 0,
+    "width": 2
+  },
+  "run_id": "heldout-line-2-beam2-None",
+  "model": "smoothed_word_bigram",
+  "prompt": {
+    "id": "heldout-line-2",
+    "source": " \u201cWhat a curious feeling!\u201d said Alice; \u201cI must be shutting up like a telescope.\u201d",
+    "source_sha256": "e2e18217d3d2e21bd094b9a1db319ce64961ceb7afe06fa670431f32da2e6d25",
+    "prompt": "\u201cWhat a curious feeling!\u201d said Alice; \u201cI must be shutting up like"
+  },
+  "prompt_ids": [
+    544,
+    512,
+    22,
+    0,
+    0,
+    2,
+    545,
+    393,
+    32,
+    10,
+    544,
+    228,
+    310,
+    58,
+    412,
+    493,
+    267
+  ],
+  "method": {
+    "name": "beam2",
+    "beam": 2
+  },
+  "seed": null,
+  "text": "",
+  "wall_seconds": 0.004090600006747991
+}

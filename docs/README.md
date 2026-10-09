@@ -22,3 +22,12 @@ Prepared content and review evidence are not disposable merely because teaching
 instructions moved into a skill. Follow the [retention rules](engineering/WORKING-ARTIFACT-RETENTION.md)
 for cleanup. The [documentation relocation record](engineering/DOCUMENTATION-ORGANIZATION.md)
 maps old root names retained inside historical receipts to current locations.
+
+The user stopped authoring on 10 October 2026. The current handoff is the restart
+entry point; older rollout records are history. The [cleanup record](engineering/WORKSPACE-CLEANUP.md#lean-workspace-cleanup--10-october-2026)
+identifies explicitly retired experiment attachments and permission-protected leftovers.
+
+The [commit-scope policy](engineering/REPOSITORY-STRUCTURE.md#ignore-rules-checks-and-cleanup)
+keeps website files, durable guidance and unfinished prepared content versioned.
+Completed detailed authoring workspaces, frozen copies and one-off review runners
+remain local; historical evidence links may refer to those local-only records.

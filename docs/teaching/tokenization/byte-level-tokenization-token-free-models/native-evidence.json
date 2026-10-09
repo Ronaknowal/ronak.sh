@@ -1,0 +1,226 @@
+{
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "checks": {
+    "scalar_encoding_cases": 409,
+    "exhaustive_one_two_byte_cases": 65792,
+    "long_malformed_or_random_cases": 2009,
+    "stream_partitions": 56,
+    "RFC3629_example": "passed"
+  },
+  "programs": {
+    "utf8_stream.py": {
+      "text": "caf\u00e9 \ud83c\udf0d",
+      "bytes": "63 61 66 c3 a9 20 f0 9f 8c 8d",
+      "trace": [
+        {
+          "bytes": "63 61 66 c3",
+          "emitted": "caf",
+          "continuations_needed": 1
+        },
+        {
+          "bytes": "a9 20 f0 9f",
+          "emitted": "\u00e9 ",
+          "continuations_needed": 2
+        },
+        {
+          "bytes": "8c 8d",
+          "emitted": "\ud83c\udf0d",
+          "continuations_needed": 0
+        }
+      ],
+      "NFD_bytes": "63 61 66 65 cc 81 20 f0 9f 8c 8d"
+    },
+    "byte_bpe_bridge.py": {
+      "tokenizers": "0.23.2",
+      "vocab_size": 260,
+      "records": [
+        {
+          "text": "caf\u00e9 \ud83c\udf0d",
+          "ids": [
+            259,
+            32,
+            240,
+            159,
+            140,
+            141
+          ],
+          "token_hex": [
+            "63 61 66 c3 a9",
+            "20",
+            "f0",
+            "9f",
+            "8c",
+            "8d"
+          ]
+        },
+        {
+          "text": " cafe\u0301\n",
+          "ids": [
+            32,
+            257,
+            101,
+            204,
+            129,
+            10
+          ],
+          "token_hex": [
+            "20",
+            "63 61 66",
+            "65",
+            "cc",
+            "81",
+            "0a"
+          ]
+        },
+        {
+          "text": "\u4e2d",
+          "ids": [
+            228,
+            184,
+            173
+          ],
+          "token_hex": [
+            "e4",
+            "b8",
+            "ad"
+          ]
+        },
+        {
+          "text": "",
+          "ids": [],
+          "token_hex": []
+        },
+        {
+          "text": "<|endoftext|>",
+          "ids": [
+            60,
+            124,
+            101,
+            110,
+            100,
+            111,
+            102,
+            116,
+            101,
+            120,
+            116,
+            124,
+            62
+          ],
+          "token_hex": [
+            "3c",
+            "7c",
+            "65",
+            "6e",
+            "64",
+            "6f",
+            "66",
+            "74",
+            "65",
+            "78",
+            "74",
+            "7c",
+            "3e"
+          ]
+        }
+      ]
+    },
+    "byte_model_bridge.py": {
+      "torch": "2.14.0+cpu",
+      "shape": [
+        3,
+        11
+      ],
+      "first_input": [
+        2,
+        102,
+        100,
+        105,
+        198,
+        172,
+        35,
+        243,
+        162,
+        143,
+        144
+      ],
+      "nonpad_targets": 19,
+      "loss_parity_abs_error": 4.76837158203125e-07,
+      "gradient_parity_max_error": 4.0745362639427185e-10,
+      "future_change_prefix_max_error": 0.0,
+      "initial_training_nll": 5.662685871124268,
+      "final_training_nll": 0.1756330281496048,
+      "training_bits_per_byte_excluding_eos": 0.2036016583442688
+    },
+    "byte_patches.py": {
+      "entropy_bits": [
+        1.0,
+        0.08079313589591118,
+        0.08079313589591118,
+        1.0,
+        0.4689955935892812,
+        0.08079313589591118,
+        1.0,
+        0.08079313589591118
+      ],
+      "patch_ids": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2
+      ],
+      "patch_lengths": [
+        3,
+        3,
+        2
+      ],
+      "means": [
+        [
+          1.0,
+          4.666666666666667
+        ],
+        [
+          4.0,
+          25.666666666666668
+        ],
+        [
+          6.5,
+          56.5
+        ]
+      ],
+      "library_max_error": 0.0
+    }
+  },
+  "limits": "CPU mechanics and tokenizer contracts only; no pretrained weights, BLT training, hardware benchmark or held-out language-quality claim.",
+  "sourceBindings": [
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py",
+      "sha256": "086862e9a9fb0db1bb9a76f66e07ac2c5fb4344bd75708e46e940213932be8bf"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py",
+      "sha256": "0a25011f005042c45965cf93e4d7825d5e4d8449c9470f7519cfdd705487cd12"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/byte_patches.py",
+      "sha256": "ca5d1ecf947365bc8147d8e89e172649165ebcc8cc89d6c9349473b0e27a148e"
+    },
+    {
+      "path": "public/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py",
+      "sha256": "1fe7bbeb0376588e78ffc3dacfae1e34a845a3cef8864ab33a208b32de7e5206"
+    },
+    {
+      "path": "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py",
+      "sha256": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4"
+    },
+    {
+      "path": "scripts/verify-byte-tokenization.py",
+      "sha256": "70453327bf11619d427aae8b7885292d3de0ee6dd74a5d3bf46f6f4cd00cb40b"
+    }
+  ]
+}

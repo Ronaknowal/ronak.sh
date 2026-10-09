@@ -1,0 +1,383 @@
+{
+  "status": "PASS_NEW_N8_N9_INTERPRETATION_READER_AND_ONCE_ONLY_MAINS",
+  "inputs": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_factor_alignment.py",
+      "bytes": 6580,
+      "sha256": "6505488fa7183cb8fb656629707eb9585b4228162764dd355ce8a5f4e60d257c"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_digits.py",
+      "bytes": 6991,
+      "sha256": "ff1e4f2d5f395745e4f1b824bcb7c33d5dcb6d0bc025c7c68d717ec1c268ce14"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_state.json",
+      "bytes": 69820,
+      "sha256": "46f3dc0931e3ccddc30cc3e30bbb4d3f330bc35a4dccccef33f74a63472eddd0"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-data-provenance.md",
+      "bytes": 2939,
+      "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\check-interpretation.py",
+      "bytes": 10680,
+      "sha256": "7ecb62ec3701d383426c7e7db7d22e876fc77740e1ee3ccae7f6f7503cd6dab8"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\saved-payload.json",
+      "bytes": 2073,
+      "sha256": "ada16ae13b07e728f0b405499c8aa3ef799b748555b7275766b8aab1e89404f9"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\saved-contribution-arithmetic.json",
+      "bytes": 1720,
+      "sha256": "93a0b1a71446576f092d20d84cd2e37871e39c5a47765ce2d0176f1cf7432aad"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\design-arithmetic.json",
+      "bytes": 46860,
+      "sha256": "fa04c779c42514521ff50cd14f0c78a8c85f132c538ddf360d86bd1a4deec973"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\saved-scale-arithmetic.json",
+      "bytes": 986,
+      "sha256": "1375a79c245a15623d70b469667f2e26213abe54ae09307a2c9f6267734a57a9"
+    }
+  ],
+  "checks": [
+    {
+      "name": "unit row masses and unused zero convention",
+      "passed": true
+    },
+    {
+      "name": "compensated product exact constructed",
+      "passed": true
+    },
+    {
+      "name": "normalization input arrays conserved",
+      "passed": true
+    },
+    {
+      "name": "contribution totals scalar",
+      "passed": true
+    },
+    {
+      "name": "selected contribution scalar",
+      "passed": true
+    },
+    {
+      "name": "gain0 removes only one addend",
+      "passed": true
+    },
+    {
+      "name": "gain1 exact unchanged input",
+      "passed": true
+    },
+    {
+      "name": "gain2 adds selected contribution",
+      "passed": true
+    },
+    {
+      "name": "rescale/permutation matching retains original IDs",
+      "passed": true
+    },
+    {
+      "name": "unique matching audit qualified",
+      "passed": true
+    },
+    {
+      "name": "duplicate global assignment ambiguity",
+      "passed": true
+    },
+    {
+      "name": "global assignment tie without duplicate patterns",
+      "passed": true
+    },
+    {
+      "name": "rectangular tie and unmatched identities",
+      "passed": true
+    },
+    {
+      "name": "audit omitted does not assert uniqueness",
+      "passed": true
+    },
+    {
+      "name": "audit bounded does not assert uniqueness",
+      "passed": true
+    },
+    {
+      "name": "no usable pair explicit",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated matching objective 0",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated ambiguity 0",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated matching objective 1",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated ambiguity 1",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated matching objective 2",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated ambiguity 2",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated matching objective 3",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated ambiguity 3",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated matching objective 4",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated ambiguity 4",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated matching objective 5",
+      "passed": true
+    },
+    {
+      "name": "independent enumerated ambiguity 5",
+      "passed": true
+    },
+    {
+      "name": "negative pattern",
+      "passed": true
+    },
+    {
+      "name": "width mismatch",
+      "passed": true
+    },
+    {
+      "name": "negative gain",
+      "passed": true
+    },
+    {
+      "name": "boolean index",
+      "passed": true
+    },
+    {
+      "name": "invalid audit limit",
+      "passed": true
+    },
+    {
+      "name": "mass overflow refusal",
+      "passed": true
+    },
+    {
+      "name": "entire reader shapes",
+      "passed": true
+    },
+    {
+      "name": "derived numeric arrays read-only",
+      "passed": true
+    },
+    {
+      "name": "payload identity nmf-data.js",
+      "passed": true
+    },
+    {
+      "name": "payload identity digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "payload identity data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "payload identity nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "payload identity digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "payload identity digits-data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "complete decoded export preserved",
+      "passed": true
+    },
+    {
+      "name": "saved coefficient/ranking 242",
+      "passed": true
+    },
+    {
+      "name": "saved totals/ranking 242",
+      "passed": true
+    },
+    {
+      "name": "saved maximum 242",
+      "passed": true
+    },
+    {
+      "name": "independent all64 scalar products 242",
+      "passed": true
+    },
+    {
+      "name": "saved coefficient/ranking 256",
+      "passed": true
+    },
+    {
+      "name": "saved totals/ranking 256",
+      "passed": true
+    },
+    {
+      "name": "saved maximum 256",
+      "passed": true
+    },
+    {
+      "name": "independent all64 scalar products 256",
+      "passed": true
+    },
+    {
+      "name": "original saved removal actual loss 242",
+      "passed": true
+    },
+    {
+      "name": "original selected64 addend 242",
+      "passed": true
+    },
+    {
+      "name": "removal elementwise correspondence 242",
+      "passed": true
+    },
+    {
+      "name": "original saved removal actual loss 256",
+      "passed": true
+    },
+    {
+      "name": "original selected64 addend 256",
+      "passed": true
+    },
+    {
+      "name": "removal elementwise correspondence 256",
+      "passed": true
+    },
+    {
+      "name": "exact row242 C8 null",
+      "passed": true
+    },
+    {
+      "name": "all60 ranking disagreement count",
+      "passed": true
+    },
+    {
+      "name": "actual raw dictionary maximum",
+      "passed": true
+    },
+    {
+      "name": "all permitted gain2 endpoints under shared4 ruler",
+      "passed": true
+    },
+    {
+      "name": "selected pixel address/measurement ruler",
+      "passed": true
+    },
+    {
+      "name": "unknown source refused",
+      "passed": true
+    },
+    {
+      "name": "missing payload no fit fallback",
+      "passed": true
+    },
+    {
+      "name": "changed payload identity refused",
+      "passed": true
+    },
+    {
+      "name": "new main exit0 nmf_factor_alignment.py",
+      "passed": true
+    },
+    {
+      "name": "new main stderr empty nmf_factor_alignment.py",
+      "passed": true
+    },
+    {
+      "name": "new main exit0 nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "new main stderr empty nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "all source/payload/prior evidence conserved through checks",
+      "passed": true
+    }
+  ],
+  "mains": [
+    {
+      "file": "nmf_factor_alignment.py",
+      "returncode": 0,
+      "stdout": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+        "bytes": 702,
+        "sha256": "b5ab059aa2c342e16464e061e5fc8528c05c8fbe69eaca0daabf6827a0612e0a"
+      },
+      "stderr": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "modelFits": 0
+    },
+    {
+      "file": "nmf_saved_digits.py",
+      "returncode": 0,
+      "stdout": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+        "bytes": 9285,
+        "sha256": "472bd7083b1f348d37729b705c2b74163bebeecda1c109ea25adfd6ebdb8b5ac"
+      },
+      "stderr": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "modelFits": 0
+    }
+  ],
+  "newModelFits": 0,
+  "historicalProgramOrCampaignReplay": false,
+  "ambiguityAmendment": "Core O(k^2*d)+O(k^3) assignment retained; optional bounded forbidden-edge audit O(k^4) worst case explicitly reports omission/near ties.",
+  "limits": "Pure new source/reader/interpretation author evidence, exact recorded arrays reused without refitting. No independent/native/whole-topic acceptance."
+}

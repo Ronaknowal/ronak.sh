@@ -1,0 +1,23 @@
+/* Topic-specific estimation objects; explanations stay in ordinary reading flow. */
+.maximum-likelihood-lesson { --flow-accent:#edc267; --flow-value:#edc267; container-type:inline-size; overflow-wrap:anywhere; }
+.maximum-likelihood-lesson .mle-drawing { display:block; width:100%; height:auto; max-width:36rem; margin-inline:auto; overflow:visible; }
+.maximum-likelihood-lesson .mle-drawing text { fill:#ded5bf; font:14px ui-monospace,monospace; }
+.maximum-likelihood-lesson .mle-axis { fill:none; stroke:#89867e; stroke-width:1; }
+.maximum-likelihood-lesson .mle-primary { fill:none; stroke:#edc267; stroke-width:2; }
+.maximum-likelihood-lesson .mle-comparison { fill:none; stroke:#97bfca; stroke-width:2; stroke-dasharray:5 4; }
+.maximum-likelihood-lesson .mle-total { fill:none; stroke:#ded5bf; stroke-width:2; stroke-dasharray:2 4; }
+.maximum-likelihood-lesson .mle-node { fill:none; stroke:#ded5bf; stroke-width:1.5; }
+.maximum-likelihood-lesson .mle-inline { margin:1.5rem 0; padding:0; border:0; background:none; }
+.maximum-likelihood-lesson .mle-inline figcaption { font-size:.95rem; line-height:1.7; color:#b9b9b9; margin-top:.8rem; }
+.maximum-likelihood-lesson .mle-two,.maximum-likelihood-lesson .mle-residual-rows { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; align-items:start; }
+.maximum-likelihood-lesson .mle-two>* { min-width:0; }
+.maximum-likelihood-lesson .mle-draft { display:flex; flex-direction:column; gap:.4rem; min-width:0; }
+.maximum-likelihood-lesson textarea { max-width:100%; min-height:4.5rem; font:inherit; color:inherit; background:transparent; border:1px solid #89867e; padding:.5rem; }
+.maximum-likelihood-lesson .mle-table { min-width:0; margin:1.25rem 0; }
+.maximum-likelihood-lesson .mle-table>p { margin-bottom:.7rem; }
+.maximum-likelihood-lesson .mle-table-scroll { max-width:100%; overflow-x:auto; }
+.maximum-likelihood-lesson .mle-table-scroll table { width:max-content; min-width:100%; font-size:.95rem; border-collapse:collapse; }
+.maximum-likelihood-lesson .mle-table-scroll th,.maximum-likelihood-lesson .mle-table-scroll td { padding:.5rem .7rem; font-size:inherit; white-space:nowrap; text-align:left; font-variant-numeric:tabular-nums; border-bottom:1px solid #35332e; }
+.maximum-likelihood-lesson .mle-semantic-caption { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.maximum-likelihood-lesson .mle-table-scroll:focus-visible { outline:2px solid #edc267; outline-offset:3px; }
+@container(max-width:38rem) { .maximum-likelihood-lesson .mle-two,.maximum-likelihood-lesson .mle-residual-rows { grid-template-columns:minmax(0,1fr); } }

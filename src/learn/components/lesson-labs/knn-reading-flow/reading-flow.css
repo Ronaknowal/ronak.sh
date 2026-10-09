@@ -1,0 +1,55 @@
+.knn-reading-flow{overflow-wrap:anywhere;--knf-amber:#e5ad52;--knf-blue:#91b4d8;--knf-white:#e4e5e7;}
+.knn-reading-flow .knf-figure{margin:2rem 0 1.5rem;padding:0;border:0;background:none;}
+.knn-reading-flow .knf-figure figcaption{font-size:.95rem;color:#aaa;line-height:1.7;margin:.8rem 0;}
+.knn-reading-flow .knf-scroll{max-width:100%;overflow-x:auto;padding:6px 0 12px;scrollbar-color:#777 #161616;}
+.knn-reading-flow .knf-scroll:focus-visible{outline:2px solid var(--knf-amber);outline-offset:4px;}
+.knn-reading-flow .knf-scene svg{display:block;font-family:inherit;font-size:16px;color:#ddd;max-width:none;}
+.knn-reading-flow .knf-scene text{fill:#ddd;stroke:none;}
+.knn-reading-flow .knf-grid{stroke:#333;stroke-width:1;}
+.knn-reading-flow .knf-contour{stroke:var(--knf-amber);stroke-dasharray:5 4;stroke-width:2;fill:none;}
+.knn-reading-flow .knf-split{stroke:#aaa;stroke-dasharray:4 3;stroke-width:2;}
+.knn-reading-flow .knf-query{stroke:white;stroke-width:3;fill:none;}
+.knn-reading-flow .knf-class-A{fill:var(--knf-amber);stroke:#111;}
+.knn-reading-flow .knf-class-B{fill:var(--knf-blue);stroke:#111;}
+.knn-reading-flow .knf-class-C{fill:var(--knf-white);stroke:#111;}
+.knn-reading-flow .knf-class-A text{fill:var(--knf-amber);}.knn-reading-flow .knf-class-B text{fill:var(--knf-blue);}.knn-reading-flow .knf-class-C text{fill:var(--knf-white);}
+.knn-reading-flow .knf-panels{display:flex;gap:2rem;flex-wrap:wrap;align-items:start;}
+.knn-reading-flow .knf-panels>*{min-width:0;flex:1 1 20rem;}
+.knn-reading-flow .knf-controls{display:flex;flex-wrap:wrap;align-items:start;gap:1rem;margin:1rem 0;}
+.knn-reading-flow .knf-eligibility{display:flex;align-items:center;gap:.5rem;min-height:44px;cursor:pointer;}
+.knn-reading-flow .knf-number{display:flex;flex-direction:column;gap:.4rem;max-width:100%;}
+.knn-reading-flow .knf-number-row{display:flex;gap:.3rem;}
+.knn-reading-flow .knf-number input{width:8rem;min-width:0;background:#181818;border:1px solid #666;color:#eee;padding:.55rem;font:inherit;}
+.knn-reading-flow button{font:inherit;line-height:1.3;color:#eee;border:1px solid #666;background:#202020;padding:.55rem .7rem;min-height:44px;cursor:pointer;white-space:normal;}
+.knn-reading-flow button[aria-pressed=true]{border-color:var(--knf-amber);color:var(--knf-amber);}
+.knn-reading-flow button:disabled{opacity:.4;cursor:default;}
+.knn-reading-flow .knf-number [aria-invalid=true]{border-color:#df8a80;}
+.knn-reading-flow .knf-error{color:#df8a80;font-size:.9rem;}.knn-reading-flow .knf-valid{color:#aaa;font-size:.9rem;}
+.knn-reading-flow .knf-choice>span{display:block;margin-bottom:.45rem;}.knn-reading-flow .knf-choice>div{display:flex;flex-wrap:wrap;gap:.4rem;}
+.knn-reading-flow table{border-collapse:collapse;font-size:.95rem;line-height:1.5;min-width:100%;}
+.knn-reading-flow th,.knn-reading-flow td{padding:.5rem .7rem;text-align:left;border-bottom:1px solid #444;vertical-align:top;white-space:nowrap;}
+.knn-reading-flow caption{text-align:left;padding:.5rem 0;color:#aaa;white-space:normal;}
+.knn-reading-flow .knf-steps{list-style:none;margin:1rem 0;padding:0;}
+.knn-reading-flow .knf-steps li{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.5rem;align-items:start;margin-bottom:.4rem;}
+.knn-reading-flow .knf-steps li>div{min-width:0;overflow-wrap:anywhere;}
+.knn-reading-flow .knf-step-index{border-radius:50%;border:1px solid #666;text-align:center;line-height:1.7;}
+.knn-reading-flow .knf-operation-arrow{grid-column:2;color:var(--knf-amber);font-size:1.6rem;}
+.knn-reading-flow .knf-matrix-wrap>span{display:block;margin:.6rem 0;}
+.knn-reading-flow .knf-matrix{display:table;border-left:2px solid #bbb;border-right:2px solid #bbb;padding:.4rem .5rem;font-variant-numeric:tabular-nums;}
+.knn-reading-flow .knf-matrix>div{display:table-row;}.knn-reading-flow .knf-matrix>div>span{display:table-cell;min-width:5rem;padding:.25rem .5rem;text-align:right;white-space:nowrap;}
+.knn-reading-flow .knf-bars>div{display:grid;grid-template-columns:4rem minmax(4rem,1fr) 6rem;align-items:center;gap:.5rem;margin:.65rem 0;}
+.knn-reading-flow .knf-bar-track{height:1.3rem;border-bottom:1px solid #666;}.knn-reading-flow .knf-bar-track>span{display:block;height:100%;background:var(--knf-amber);}
+.knn-reading-flow .knf-bars output{text-align:right;font-variant-numeric:tabular-nums;}
+.knn-reading-flow .knf-legend{color:#ccc;font-size:.9rem;line-height:1.5;}
+.knn-reading-flow .katex-display{overflow-x:auto;overflow-y:hidden;text-align:left;padding:.5rem 0;}
+.knn-reading-flow .knf-outcome-mosaic{display:flex;width:26.25rem;height:11.25rem;min-width:26.25rem;}
+.knn-reading-flow .knf-outcome-mosaic>div{display:flex;flex-direction:column;}.knn-reading-flow .knf-outcome-mosaic span{display:flex;align-items:center;justify-content:center;border:1px solid #666;font-size:1rem;white-space:nowrap;}
+.knn-reading-flow .knf-outcome-mosaic .error{background:#59412a;}
+.knn-reading-flow .knf-candidate-ids{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0;}.knn-reading-flow .knf-candidate-ids label{display:flex;gap:.5rem;align-items:center;min-height:44px;padding:.3rem;}
+@media(max-width:600px){.knn-reading-flow .knf-panels{display:block;}.knn-reading-flow .knf-panels>*{margin-bottom:1.2rem;}.knn-reading-flow .knf-bars>div{grid-template-columns:minmax(0,1fr) max-content;gap:.25rem .5rem;}.knn-reading-flow .knf-bars .knf-bar-track{grid-column:1/-1;grid-row:2;}.knn-reading-flow .knf-bars output{grid-column:2;grid-row:1;}.knn-reading-flow .knf-bars>div>span{grid-column:1;grid-row:1;overflow-wrap:anywhere;}.knn-reading-flow .knf-controls{flex-direction:column;}}
+
+/* Reader sidebar and enlarged text change available width independently of viewport. */
+.knn-reading-flow .knf-bars{container-type:inline-size;}
+.knn-reading-flow .knf-bars>div{grid-template-columns:minmax(0,4rem) minmax(0,1fr) max-content;}
+.knn-reading-flow .knf-bars output{white-space:nowrap;}
+@container(max-width:25rem){.knn-reading-flow .knf-bars>div{grid-template-columns:minmax(0,1fr) max-content;gap:.25rem .5rem;}.knn-reading-flow .knf-bars .knf-bar-track{grid-column:1/-1;grid-row:2;}.knn-reading-flow .knf-bars output{grid-column:2;grid-row:1;}.knn-reading-flow .knf-bars>div>span{grid-column:1;grid-row:1;overflow-wrap:anywhere;}}

@@ -1,0 +1,16 @@
+six candidates [{'k': 3, 'scaler': 'standard'}, {'k': 3, 'scaler': 'robust'}, {'k': 5, 'scaler': 'standard'}, {'k': 5, 'scaler': 'robust'}, {'k': 11, 'scaler': 'standard'}, {'k': 11, 'scaler': 'robust'}]
+conditional candidates [{'C': 1, 'kernel': 'linear'}, {'C': 10, 'kernel': 'linear'}, {'C': 1, 'gamma': 0.1, 'kernel': 'rbf'}, {'C': 1, 'gamma': 1, 'kernel': 'rbf'}, {'C': 10, 'gamma': 0.1, 'kernel': 'rbf'}, {'C': 10, 'gamma': 1, 'kernel': 'rbf'}]
+replacement draws [5, 0, 4]
+without replacement draws [0, 4, 1]
+finite hit 4/5 independent exact 19/27
+independent60 0.9539302010130479 0.45284335760923855
+decade boundaries [0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0]
+branch per-setting mass ['1/4', '1/16']
+grid2d [(0.0, 0.0), (0.0, 0.5), (0.0, 1.0), (0.5, 0.0), (0.5, 0.5), (0.5, 1.0), (1.0, 0.0), (1.0, 0.5), (1.0, 1.0)]
+random2d [[0.39353466, 0.99681694], [0.28936495, 0.14825979], [0.26107857, 0.26043719], [0.32736701, 0.26791084], [0.10764394, 0.32549974], [0.31106507, 0.56924002], [0.20163093, 0.07078772], [0.20255203, 0.54244259], [0.38856181, 0.73347057]]
+distinct first coordinates 3 9
+ordinary grid agrees True
+ordinary conditional agrees True
+ordinary all-list sampler [{'scaler': 'robust', 'k': 3}, {'scaler': 'standard', 'k': 11}, {'scaler': 'robust', 'k': 5}]
+ordinary distribution sampler [{'n_neighbors': 3, 'p': np.float64(1.347670895273232)}, {'n_neighbors': 1, 'p': np.float64(1.1866857765179515)}, {'n_neighbors': 1, 'p': np.float64(1.195718400353012)}]
+search configured 2 {'n_neighbors': [1, 3, 5]} fit performed False

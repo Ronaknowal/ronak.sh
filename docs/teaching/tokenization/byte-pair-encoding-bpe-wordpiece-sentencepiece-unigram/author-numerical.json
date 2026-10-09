@@ -1,0 +1,2905 @@
+{
+  "checks": {
+    "incremental_training_vs_full_recount": 45,
+    "rank_heap_vs_list_oracle": 2790,
+    "overlap_and_unicode_ties": 3,
+    "wordpiece_native_inference": 201,
+    "unigram_exhaustive_mass_counts_viterbi_native": 744,
+    "exact_em_monotonicity": 12,
+    "log_space_underflow_case": 1,
+    "changed_practice_exact_fraction": 1,
+    "seeded_posterior_sampling": 1,
+    "pruning_budget_and_alphabet": 1
+  },
+  "sampling": {
+    "draws": 2000,
+    "whole_piece": 1854
+  },
+  "browser_parity_cases": [
+    {
+      "counts": {
+        "baaaa": 1.75,
+        "ba": 2.0,
+        "abbba": 0.5,
+        "aabaa": 1.75,
+        "bbabb": 1.25,
+        "babba": 1.25,
+        "aaa": 1.25,
+        "a": 0.5
+      },
+      "budget": 0,
+      "merges": [],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "ababa": 1.25,
+        "babb": 1.5,
+        "a": 2.0,
+        "bbbb": 1.75,
+        "babba": 1.25,
+        "bbaba": 0.5,
+        "bbaaa": 1.25,
+        "bbb": 1.25
+      },
+      "budget": 1,
+      "merges": [
+        [
+          "b",
+          "b"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abba": 1.0,
+        "bbbb": 1.0,
+        "aaba": 1.25,
+        "ab": 0.25,
+        "ba": 1.5,
+        "baaa": 1.5,
+        "baab": 0.75,
+        "aaa": 1.5
+      },
+      "budget": 2,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "a",
+          "b",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "ababa": 1.25,
+        "bbbab": 2.0,
+        "bbbaa": 2.0,
+        "aabb": 0.75,
+        "abbbb": 1.25,
+        "abaaa": 1.25,
+        "bb": 0.75,
+        "baaba": 0.75
+      },
+      "budget": 3,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "b",
+          "a"
+        ],
+        [
+          "ba",
+          "a"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abbaa": 1.25,
+        "abba": 2.0,
+        "babba": 0.5,
+        "bbaaa": 2.0,
+        "bbaa": 1.5,
+        "bbabb": 1.5,
+        "aaab": 1.25,
+        "bbba": 0.25
+      },
+      "budget": 4,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "bb"
+        ],
+        [
+          "a",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "b",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "baaab": 1.75,
+        "babaa": 0.75,
+        "ababa": 1.5,
+        "aaba": 2.0,
+        "baaaa": 2.0,
+        "bbba": 1.25,
+        "bbabb": 0.5,
+        "abb": 0.5
+      },
+      "budget": 5,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "a"
+        ],
+        [
+          "ba",
+          "</w>"
+        ],
+        [
+          "b",
+          "aa"
+        ],
+        [
+          "b",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b</w>"
+        ],
+        "bbaba": [
+          "b",
+          "ba",
+          "ba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abaaa": 0.5,
+        "aabb": 2.0,
+        "bbbab": 2.0,
+        "abab": 0.5,
+        "abbbb": 1.0,
+        "bbabb": 1.0,
+        "abbb": 1.0,
+        "baabb": 1.75
+      },
+      "budget": 6,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "bb"
+        ],
+        [
+          "abb",
+          "</w>"
+        ],
+        [
+          "b",
+          "a"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "ba",
+          "b</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "bab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abbba": 0.75,
+        "bab": 2.0,
+        "bbb": 2.0,
+        "bbbba": 2.0,
+        "aaa": 0.25,
+        "abaa": 1.5,
+        "bbaab": 0.25,
+        "aaba": 1.25
+      },
+      "budget": 7,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "bb",
+          "b"
+        ],
+        [
+          "ab",
+          "</w>"
+        ],
+        [
+          "b",
+          "ab</w>"
+        ],
+        [
+          "bb",
+          "a</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "ab",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bba": 0.75,
+        "bbbab": 0.75,
+        "ababb": 0.25,
+        "abaa": 1.75,
+        "aabb": 2.0,
+        "baaa": 1.25,
+        "aabaa": 1.25,
+        "abaaa": 0.5
+      },
+      "budget": 8,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "aa"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "baa",
+          "</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "aa",
+          "bb</w>"
+        ],
+        [
+          "a",
+          "baa</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "b",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aab": 0.5,
+        "bbbbb": 1.25,
+        "aabb": 0.5,
+        "baa": 0.75,
+        "bbaaa": 2.0,
+        "abbba": 1.25,
+        "bbaba": 1.0,
+        "bbaab": 0.75
+      },
+      "budget": 9,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "bb",
+          "aa"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "b",
+          "a</w>"
+        ],
+        [
+          "bbaa",
+          "a</w>"
+        ],
+        [
+          "a",
+          "bb"
+        ],
+        [
+          "abb",
+          "ba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aaaba": 1.5,
+        "aba": 1.75,
+        "aaaa": 0.75,
+        "abbba": 1.75,
+        "a": 1.25,
+        "b": 1.25,
+        "bbab": 0.75,
+        "abbaa": 1.75
+      },
+      "budget": 10,
+      "merges": [
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "ab",
+          "b"
+        ],
+        [
+          "ab",
+          "a</w>"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "a</w>"
+        ],
+        [
+          "abb",
+          "aa</w>"
+        ],
+        [
+          "abb",
+          "b"
+        ],
+        [
+          "abbb",
+          "a</w>"
+        ],
+        [
+          "aa",
+          "aba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "aba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "babba": 0.5,
+        "baba": 1.5,
+        "bbbba": 1.75,
+        "abaa": 1.75,
+        "ab": 1.25,
+        "aa": 2.0,
+        "abb": 0.5,
+        "bbbaa": 0.5
+      },
+      "budget": 11,
+      "merges": [
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "a",
+          "a</w>"
+        ],
+        [
+          "bb",
+          "a</w>"
+        ],
+        [
+          "ab",
+          "aa</w>"
+        ],
+        [
+          "bb",
+          "bba</w>"
+        ],
+        [
+          "ab",
+          "a</w>"
+        ],
+        [
+          "b",
+          "aba</w>"
+        ],
+        [
+          "ab",
+          "</w>"
+        ],
+        [
+          "a",
+          "bb"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "aa</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "aba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abbb": 1.25,
+        "abaab": 1.0,
+        "bbabb": 1.5,
+        "bbbba": 1.25,
+        "abbaa": 1.75,
+        "bbba": 1.25,
+        "aabba": 1.25,
+        "bba": 1.0
+      },
+      "budget": 12,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "bb",
+          "a"
+        ],
+        [
+          "bba",
+          "</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "bb",
+          "b"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "bba"
+        ],
+        [
+          "abba",
+          "a</w>"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "bba",
+          "bb</w>"
+        ],
+        [
+          "a",
+          "bbb"
+        ],
+        [
+          "aa",
+          "bba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bba",
+          "b",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abaaa": 0.25,
+        "baa": 2.0,
+        "aaba": 1.25,
+        "aabb": 1.25,
+        "babaa": 0.75,
+        "baaa": 0.25,
+        "babb": 1.25,
+        "baaba": 1.5
+      },
+      "budget": 13,
+      "merges": [
+        [
+          "b",
+          "a"
+        ],
+        [
+          "ba",
+          "a"
+        ],
+        [
+          "ba",
+          "</w>"
+        ],
+        [
+          "baa",
+          "</w>"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "b",
+          "b</w>"
+        ],
+        [
+          "baa",
+          "ba</w>"
+        ],
+        [
+          "aa",
+          "ba</w>"
+        ],
+        [
+          "aa",
+          "bb</w>"
+        ],
+        [
+          "ba",
+          "bb</w>"
+        ],
+        [
+          "ba",
+          "baa</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b</w>"
+        ],
+        "bbaba": [
+          "b",
+          "ba",
+          "ba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bbba": 0.25,
+        "bbbab": 1.0,
+        "aaaba": 1.5,
+        "baabb": 0.25,
+        "bbabb": 1.5,
+        "baaa": 1.25,
+        "aaaaa": 0.75,
+        "ba": 0.5
+      },
+      "budget": 14,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "aa",
+          "a</w>"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "a",
+          "bb</w>"
+        ],
+        [
+          "aa",
+          "ab"
+        ],
+        [
+          "aaab",
+          "a</w>"
+        ],
+        [
+          "bb",
+          "abb</w>"
+        ],
+        [
+          "b",
+          "aaa</w>"
+        ],
+        [
+          "bb",
+          "b"
+        ],
+        [
+          "ab",
+          "</w>"
+        ],
+        [
+          "bbb",
+          "ab</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aaa</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "ab",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "babb": 0.75,
+        "aaaaa": 1.75,
+        "abaab": 2.0,
+        "aaba": 1.75,
+        "ababb": 0.5,
+        "baab": 2.0,
+        "aabba": 1.0,
+        "abaaa": 2.0
+      },
+      "budget": 15,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "aa",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "aab",
+          "</w>"
+        ],
+        [
+          "aa",
+          "a</w>"
+        ],
+        [
+          "ab",
+          "aaa</w>"
+        ],
+        [
+          "ab",
+          "aab</w>"
+        ],
+        [
+          "b",
+          "aab</w>"
+        ],
+        [
+          "aa",
+          "aaa</w>"
+        ],
+        [
+          "aab",
+          "a</w>"
+        ],
+        [
+          "ab",
+          "b"
+        ],
+        [
+          "abb",
+          "</w>"
+        ],
+        [
+          "aab",
+          "b"
+        ],
+        [
+          "aabb",
+          "a</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aaa</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "ab",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aabaa": 1.75,
+        "abaaa": 0.25,
+        "aaaaa": 2.0,
+        "baa": 2.0,
+        "aaaab": 0.5,
+        "bbabb": 2.0,
+        "bbba": 0.5,
+        "abaa": 1.5
+      },
+      "budget": 16,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "aa"
+        ],
+        [
+          "baa",
+          "</w>"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "aa",
+          "aa"
+        ],
+        [
+          "a",
+          "bb"
+        ],
+        [
+          "aaaa",
+          "a</w>"
+        ],
+        [
+          "abb",
+          "</w>"
+        ],
+        [
+          "bb",
+          "abb</w>"
+        ],
+        [
+          "aa",
+          "baa</w>"
+        ],
+        [
+          "a",
+          "baa</w>"
+        ],
+        [
+          "aaaa",
+          "b"
+        ],
+        [
+          "aaaab",
+          "</w>"
+        ],
+        [
+          "b",
+          "a</w>"
+        ],
+        [
+          "bb",
+          "ba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aaabb": 1.5,
+        "bbbba": 1.0,
+        "bab": 1.0,
+        "aaaa": 0.5,
+        "bb": 1.5,
+        "abaab": 1.5,
+        "baab": 1.5,
+        "bbaab": 0.75
+      },
+      "budget": 0,
+      "merges": [],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aaaaa": 0.75,
+        "abaab": 0.5,
+        "a": 0.5,
+        "abab": 1.0,
+        "bbbab": 2.0,
+        "abbaa": 1.0,
+        "bba": 1.0,
+        "bbaaa": 1.75
+      },
+      "budget": 1,
+      "merges": [
+        [
+          "a",
+          "a"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bbba": 0.25,
+        "aaaa": 0.5,
+        "ba": 0.75,
+        "babb": 0.5,
+        "baab": 1.0,
+        "abb": 1.0,
+        "baaaa": 1.5,
+        "ab": 0.25
+      },
+      "budget": 2,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aaaab": 1.25,
+        "aaab": 0.5,
+        "bab": 0.5,
+        "aaabb": 1.75,
+        "aaaba": 0.5,
+        "baaba": 0.25,
+        "bbbb": 0.25,
+        "abaa": 0.25
+      },
+      "budget": 3,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "aa",
+          "a"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aaa",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "a": 2.0,
+        "baaab": 0.75,
+        "abb": 0.5,
+        "aaabb": 2.0,
+        "aaaaa": 1.75,
+        "bba": 1.5,
+        "abbab": 1.5,
+        "babab": 0.75
+      },
+      "budget": 4,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "ab",
+          "b"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "ab",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abbb": 1.75,
+        "babb": 1.0,
+        "aabbb": 0.25,
+        "abbab": 2.0,
+        "ababb": 0.75,
+        "baaab": 0.25,
+        "aaab": 0.5,
+        "aa": 1.0
+      },
+      "budget": 5,
+      "merges": [
+        [
+          "a",
+          "b"
+        ],
+        [
+          "ab",
+          "b"
+        ],
+        [
+          "ab",
+          "</w>"
+        ],
+        [
+          "abb",
+          "ab</w>"
+        ],
+        [
+          "abb",
+          "b"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "ab",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "babbb": 0.25,
+        "baab": 0.5,
+        "bbbbb": 0.25,
+        "aabaa": 0.75,
+        "aaba": 0.5,
+        "bba": 1.25,
+        "abbaa": 0.75,
+        "babba": 1.5
+      },
+      "budget": 6,
+      "merges": [
+        [
+          "b",
+          "a"
+        ],
+        [
+          "b",
+          "ba"
+        ],
+        [
+          "bba",
+          "</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "ba",
+          "bba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bba",
+          "ba",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "baabb": 0.5,
+        "bbbb": 1.75,
+        "bbaab": 1.5,
+        "babaa": 1.75,
+        "bbbbb": 1.0,
+        "abbba": 1.5,
+        "aabaa": 0.25,
+        "abb": 0.75
+      },
+      "budget": 7,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "b",
+          "a"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "ba",
+          "a"
+        ],
+        [
+          "baa",
+          "</w>"
+        ],
+        [
+          "a",
+          "a"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bbbb": 1.25,
+        "aab": 2.0,
+        "babaa": 0.5,
+        "aa": 0.5,
+        "bbbab": 0.25,
+        "ab": 0.25,
+        "baabb": 1.5,
+        "ababb": 0.25
+      },
+      "budget": 8,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "aa",
+          "b</w>"
+        ],
+        [
+          "b",
+          "aa"
+        ],
+        [
+          "baa",
+          "bb</w>"
+        ],
+        [
+          "bb",
+          "bb</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "ab": 0.5,
+        "aabaa": 1.25,
+        "aaaa": 0.75,
+        "babbb": 1.0,
+        "a": 1.25,
+        "bbaba": 0.5,
+        "baba": 0.5,
+        "bb": 1.25
+      },
+      "budget": 9,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "b",
+          "a"
+        ],
+        [
+          "aa",
+          "</w>"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "aa",
+          "b"
+        ],
+        [
+          "aab",
+          "aa</w>"
+        ],
+        [
+          "bb",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bbaaa": 1.0,
+        "bbbaa": 1.5,
+        "abbab": 0.5,
+        "aabb": 1.0,
+        "aabaa": 1.75,
+        "babb": 1.5,
+        "aaa": 1.5,
+        "bbabb": 0.75
+      },
+      "budget": 10,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "aa",
+          "</w>"
+        ],
+        [
+          "b",
+          "aa</w>"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "aa",
+          "a</w>"
+        ],
+        [
+          "a",
+          "bb</w>"
+        ],
+        [
+          "aa",
+          "baa</w>"
+        ],
+        [
+          "b",
+          "abb</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aaa</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "b",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abb": 0.25,
+        "ababb": 1.25,
+        "aabb": 1.25,
+        "abbbb": 0.25,
+        "baaba": 1.75,
+        "bbaba": 0.5,
+        "ba": 1.25,
+        "baabb": 1.25
+      },
+      "budget": 11,
+      "merges": [
+        [
+          "b",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "ba",
+          "</w>"
+        ],
+        [
+          "ba",
+          "a"
+        ],
+        [
+          "baa",
+          "ba</w>"
+        ],
+        [
+          "a",
+          "bb</w>"
+        ],
+        [
+          "a",
+          "abb</w>"
+        ],
+        [
+          "a",
+          "ba"
+        ],
+        [
+          "aba",
+          "bb</w>"
+        ],
+        [
+          "baa",
+          "bb</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "aba",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "ba",
+          "ba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bba": 1.5,
+        "abba": 1.25,
+        "bab": 1.5,
+        "bbaab": 1.75,
+        "bbbab": 0.75,
+        "bbbb": 0.25,
+        "aaabb": 1.25,
+        "aaaba": 0.25
+      },
+      "budget": 12,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "bb",
+          "a</w>"
+        ],
+        [
+          "a",
+          "b</w>"
+        ],
+        [
+          "b",
+          "ab</w>"
+        ],
+        [
+          "aa",
+          "b</w>"
+        ],
+        [
+          "bb",
+          "aab</w>"
+        ],
+        [
+          "aa",
+          "a"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "a",
+          "bba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "bab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "b",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "baba": 0.5,
+        "bab": 1.25,
+        "baaba": 0.75,
+        "abbb": 2.0,
+        "bba": 0.75,
+        "ba": 2.0,
+        "bbbba": 1.25,
+        "a": 0.75
+      },
+      "budget": 13,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "b",
+          "a</w>"
+        ],
+        [
+          "b",
+          "a"
+        ],
+        [
+          "a",
+          "bb"
+        ],
+        [
+          "abb",
+          "b</w>"
+        ],
+        [
+          "bb",
+          "a</w>"
+        ],
+        [
+          "ba",
+          "b</w>"
+        ],
+        [
+          "bb",
+          "bba</w>"
+        ],
+        [
+          "a",
+          "ba</w>"
+        ],
+        [
+          "ba",
+          "aba</w>"
+        ],
+        [
+          "ba",
+          "ba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "bab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "aba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bbaa": 1.75,
+        "aaaab": 0.75,
+        "aaa": 2.0,
+        "ba": 0.5,
+        "bbabb": 2.0,
+        "abbba": 1.75,
+        "baaba": 0.75,
+        "aabaa": 0.75
+      },
+      "budget": 14,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "a",
+          "bb"
+        ],
+        [
+          "b",
+          "a</w>"
+        ],
+        [
+          "aa",
+          "</w>"
+        ],
+        [
+          "aa",
+          "a</w>"
+        ],
+        [
+          "abb",
+          "</w>"
+        ],
+        [
+          "bb",
+          "abb</w>"
+        ],
+        [
+          "abb",
+          "ba</w>"
+        ],
+        [
+          "bb",
+          "aa</w>"
+        ],
+        [
+          "aa",
+          "b"
+        ],
+        [
+          "aa",
+          "aab"
+        ],
+        [
+          "aa",
+          "ba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aaa</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "baaba": 0.5,
+        "bbba": 1.25,
+        "abbbb": 0.25,
+        "abaaa": 1.5,
+        "aaaba": 0.25,
+        "aaab": 2.0,
+        "aaa": 1.5,
+        "aaaab": 1.75
+      },
+      "budget": 15,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "aa",
+          "a"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "aaa",
+          "</w>"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "aaa",
+          "b</w>"
+        ],
+        [
+          "b",
+          "a</w>"
+        ],
+        [
+          "aa",
+          "aa"
+        ],
+        [
+          "aaaa",
+          "b</w>"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "ab",
+          "aaa</w>"
+        ],
+        [
+          "bb",
+          "ba</w>"
+        ],
+        [
+          "aa",
+          "ba</w>"
+        ],
+        [
+          "b",
+          "aaba</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aaa</w>"
+        ],
+        "abab": [
+          "ab",
+          "a",
+          "b</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bba": 1.25,
+        "abbb": 0.25,
+        "abbab": 1.75,
+        "bbb": 0.75,
+        "abaab": 0.75,
+        "aab": 1.25,
+        "abbba": 0.25,
+        "aaaab": 1.75
+      },
+      "budget": 16,
+      "merges": [
+        [
+          "a",
+          "b"
+        ],
+        [
+          "ab",
+          "</w>"
+        ],
+        [
+          "a",
+          "ab</w>"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "aa",
+          "aab</w>"
+        ],
+        [
+          "ab",
+          "b"
+        ],
+        [
+          "abb",
+          "ab</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "bb",
+          "a</w>"
+        ],
+        [
+          "ab",
+          "aab</w>"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "bb",
+          "b</w>"
+        ],
+        [
+          "ab",
+          "bb"
+        ],
+        [
+          "ab",
+          "bba</w>"
+        ],
+        [
+          "abbb",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "ab",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aabab": 0.75,
+        "baab": 0.75,
+        "baba": 2.0,
+        "aba": 1.0,
+        "bbba": 1.25,
+        "bbbba": 2.0,
+        "bbab": 1.75,
+        "abaaa": 0.5
+      },
+      "budget": 0,
+      "merges": [],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "b",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "ababb": 0.75,
+        "aaa": 0.5,
+        "aaaa": 0.5,
+        "bbbbb": 1.0,
+        "bab": 1.75,
+        "ababa": 0.5,
+        "ba": 1.75,
+        "bbaa": 1.25
+      },
+      "budget": 1,
+      "merges": [
+        [
+          "b",
+          "a"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "b",
+          "ba",
+          "ba",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bbba": 2.0,
+        "bbbab": 1.5,
+        "bbbb": 0.5,
+        "abaab": 1.75,
+        "abbbb": 1.0,
+        "baaab": 0.5,
+        "ababb": 1.5,
+        "bbaab": 1.25
+      },
+      "budget": 2,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "ab",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abbba": 1.5,
+        "abba": 1.0,
+        "bbbb": 0.25,
+        "aabaa": 0.25,
+        "bbbba": 0.75,
+        "aba": 1.75,
+        "baaab": 0.75,
+        "ab": 1.5
+      },
+      "budget": 3,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "ab",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aaba": 2.0,
+        "bbaaa": 0.5,
+        "ababa": 1.25,
+        "ba": 0.25,
+        "aaaaa": 0.5,
+        "aab": 1.0,
+        "bbb": 1.5,
+        "bbab": 1.75
+      },
+      "budget": 4,
+      "merges": [
+        [
+          "a",
+          "b"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "ab",
+          "a</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "aba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bba": 1.5,
+        "bbb": 1.75,
+        "baba": 1.25,
+        "bbbb": 2.0,
+        "abaa": 1.5,
+        "aabab": 1.25,
+        "bbba": 0.5,
+        "bb": 1.0
+      },
+      "budget": 5,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "b",
+          "a"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "bb",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "ba",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "bbba": 0.5,
+        "bbbba": 2.0,
+        "baaab": 1.0,
+        "abaa": 0.5,
+        "aaba": 1.75,
+        "bbbab": 1.75,
+        "abaaa": 0.75,
+        "aaaaa": 0.5
+      },
+      "budget": 6,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "a"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "ab",
+          "</w>"
+        ],
+        [
+          "b",
+          "a</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "ab",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "baaa": 1.75,
+        "baabb": 0.75,
+        "abbba": 0.5,
+        "aabba": 0.5,
+        "ababb": 0.25,
+        "bbabb": 0.25,
+        "aa": 1.75,
+        "baa": 0.75
+      },
+      "budget": 7,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "aa"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "aa",
+          "</w>"
+        ],
+        [
+          "baa",
+          "a</w>"
+        ],
+        [
+          "bb",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aa",
+          "a</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b",
+          "</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "b",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "abbaa": 1.0,
+        "ababb": 1.0,
+        "bbbb": 1.5,
+        "abbab": 2.0,
+        "bbabb": 1.0,
+        "abbbb": 1.0,
+        "b": 1.0,
+        "bbbba": 0.5
+      },
+      "budget": 8,
+      "merges": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "a",
+          "bb"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "ab",
+          "</w>"
+        ],
+        [
+          "abb",
+          "</w>"
+        ],
+        [
+          "abb",
+          "ab</w>"
+        ],
+        [
+          "a",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a</w>"
+        ],
+        "abab": [
+          "ab",
+          "ab</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "ab",
+          "a</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "ababa": 0.75,
+        "aba": 1.75,
+        "baa": 1.75,
+        "baabb": 1.5,
+        "bbba": 2.0,
+        "bbaba": 1.25,
+        "bbaab": 1.5,
+        "abbab": 1.5
+      },
+      "budget": 9,
+      "merges": [
+        [
+          "b",
+          "a"
+        ],
+        [
+          "b",
+          "ba"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "ba",
+          "</w>"
+        ],
+        [
+          "ba",
+          "a"
+        ],
+        [
+          "b",
+          "bba"
+        ],
+        [
+          "bbba",
+          "</w>"
+        ],
+        [
+          "a",
+          "ba</w>"
+        ],
+        [
+          "baa",
+          "</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "a",
+          "a",
+          "a",
+          "</w>"
+        ],
+        "abab": [
+          "a",
+          "ba",
+          "b</w>"
+        ],
+        "bbaba": [
+          "bba",
+          "ba</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aaabb": 1.5,
+        "bbbb": 1.0,
+        "aba": 0.25,
+        "baaa": 2.0,
+        "aaa": 1.0,
+        "baab": 2.0,
+        "aabbb": 1.0,
+        "bbaa": 1.25
+      },
+      "budget": 10,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "aa",
+          "a"
+        ],
+        [
+          "aaa",
+          "</w>"
+        ],
+        [
+          "b",
+          "</w>"
+        ],
+        [
+          "bb",
+          "</w>"
+        ],
+        [
+          "aa",
+          "b</w>"
+        ],
+        [
+          "b",
+          "aaa</w>"
+        ],
+        [
+          "b",
+          "aab</w>"
+        ],
+        [
+          "aaa",
+          "bb</w>"
+        ]
+      ],
+      "queries": {
+        "aaa": [
+          "aaa</w>"
+        ],
+        "abab": [
+          "a",
+          "b",
+          "a",
+          "b</w>"
+        ],
+        "bbaba": [
+          "bb",
+          "a",
+          "b",
+          "a",
+          "</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "aaaa": 2
+      },
+      "budget": 8,
+      "merges": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "aa",
+          "</w>"
+        ],
+        [
+          "aa",
+          "aa</w>"
+        ]
+      ],
+      "queries": {
+        "aaaa": [
+          "aaaa</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "é🙂": 1,
+        "🙂é": 1,
+        "aé": 1
+      },
+      "budget": 8,
+      "merges": [
+        [
+          "é",
+          "</w>"
+        ],
+        [
+          "a",
+          "é</w>"
+        ],
+        [
+          "é",
+          "🙂"
+        ],
+        [
+          "é🙂",
+          "</w>"
+        ],
+        [
+          "🙂",
+          "é</w>"
+        ]
+      ],
+      "queries": {
+        "é🙂": [
+          "é🙂</w>"
+        ],
+        "🙂é": [
+          "🙂é</w>"
+        ],
+        "aé": [
+          "aé</w>"
+        ]
+      }
+    },
+    {
+      "counts": {
+        "a": 1,
+        "😀a": 1
+      },
+      "budget": 8,
+      "merges": [
+        [
+          "a",
+          "</w>"
+        ],
+        [
+          "",
+          "a</w>"
+        ],
+        [
+          "😀",
+          "a</w>"
+        ]
+      ],
+      "queries": {
+        "a": [
+          "a</w>"
+        ],
+        "😀a": [
+          "😀a</w>"
+        ]
+      }
+    }
+  ]
+}

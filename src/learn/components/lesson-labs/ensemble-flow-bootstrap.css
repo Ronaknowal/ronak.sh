@@ -1,0 +1,42 @@
+.ensemble-bootstrap-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.ensemble-bootstrap-table table {
+  border-collapse: collapse;
+  min-width: 44rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.ensemble-bootstrap-table th,
+.ensemble-bootstrap-table td {
+  padding: .7rem .85rem;
+  border: 1px solid #414148;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.ensemble-bootstrap-table th:first-child {
+  position: sticky;
+  left: 0;
+  background: #111115;
+  z-index: 1;
+}
+
+.ensemble-bootstrap-table caption {
+  position: sticky;
+  left: 0;
+  width: min(30rem, calc(100vw - 4rem));
+  text-align: left;
+  white-space: normal;
+  padding-bottom: .7rem;
+}
+
+.ensemble-bootstrap-table tr[aria-current="true"] th,
+.ensemble-bootstrap-table tr[aria-current="true"] td {
+  border-top-color: #e8bb60;
+  border-bottom-color: #e8bb60;
+}

@@ -1,0 +1,17 @@
+{
+  "scope": "dependency imports only; no model/tokenizer/config loaded",
+  "versions": {
+    "torch": "2.14.0+cpu",
+    "numpy": "2.3.5",
+    "transformers": "5.19.0",
+    "sentencepiece": "0.2.1",
+    "protobuf": "4.25.8",
+    "requests": "2.32.5",
+    "pyyaml": "6.0.3",
+    "tqdm": "4.70.1"
+  },
+  "class": "GPTNeoXModel",
+  "status": "passed",
+  "script_sha256": "91e069b6c47ffe685a76397471fc719f3bcd47c5da24e55dc18e30a161dc16e3",
+  "qualification": "Accepted protocol permits reusing compatible dependencies. This environment does not claim the converter requirements' exact Torch 2.11.0, NumPy 2.2.x or Transformers 4.57.6 pins. Successful imports do not establish conversion."
+}

@@ -1,0 +1,537 @@
+{
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "torch": "2.14.0+cpu",
+  "device": "cpu",
+  "steps": 240,
+  "seeds": [
+    17,
+    29
+  ],
+  "context": 4,
+  "width": 64,
+  "batch": 64,
+  "evaluation_batch": 256,
+  "vocabulary_size": 64,
+  "train_targets": 8527,
+  "heldout_targets": 1912,
+  "unknown_heldout_targets_excluded": 1,
+  "hashes": {
+    "alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+    "alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+    "fp8_linear.py": "7fb6fd06674a4d8fee48757b2e6c44ba3360b0368c39b94d2bc3954a56e28b02",
+    "fp8_language_study.py": "a58bfdd7c37a93ec494e86987ea0030dc54cd2ef0c5452eb7b9c8bc80ba77a51"
+  },
+  "records": [
+    {
+      "seed": 17,
+      "mode": "fp32",
+      "curve": [
+        {
+          "step": 0,
+          "train_nll": 4.1795797132167944,
+          "heldout_nll": 4.18152034232806,
+          "heldout_fp32_nll": 4.18152034232806
+        },
+        {
+          "step": 20,
+          "train_nll": 3.5039065112622496,
+          "heldout_nll": 3.4928068855317567,
+          "heldout_fp32_nll": 3.4928068855317567
+        },
+        {
+          "step": 40,
+          "train_nll": 2.9554507833887715,
+          "heldout_nll": 2.9247062874638385,
+          "heldout_fp32_nll": 2.9247062874638385
+        },
+        {
+          "step": 60,
+          "train_nll": 2.8385057633879653,
+          "heldout_nll": 2.8254263650423312,
+          "heldout_fp32_nll": 2.8254263650423312
+        },
+        {
+          "step": 80,
+          "train_nll": 2.7172161919634186,
+          "heldout_nll": 2.7245684348389694,
+          "heldout_fp32_nll": 2.7245684348389694
+        },
+        {
+          "step": 100,
+          "train_nll": 2.61182809684094,
+          "heldout_nll": 2.646397371172406,
+          "heldout_fp32_nll": 2.646397371172406
+        },
+        {
+          "step": 120,
+          "train_nll": 2.523931883334051,
+          "heldout_nll": 2.582910944727175,
+          "heldout_fp32_nll": 2.582910944727175
+        },
+        {
+          "step": 140,
+          "train_nll": 2.451261369846792,
+          "heldout_nll": 2.5241109616586854,
+          "heldout_fp32_nll": 2.5241109616586854
+        },
+        {
+          "step": 160,
+          "train_nll": 2.390446912198018,
+          "heldout_nll": 2.482061888882306,
+          "heldout_fp32_nll": 2.482061888882306
+        },
+        {
+          "step": 180,
+          "train_nll": 2.3446908518872953,
+          "heldout_nll": 2.435735806261645,
+          "heldout_fp32_nll": 2.435735806261645
+        },
+        {
+          "step": 200,
+          "train_nll": 2.304777238214367,
+          "heldout_nll": 2.4212751667868644,
+          "heldout_fp32_nll": 2.4212751667868644
+        },
+        {
+          "step": 220,
+          "train_nll": 2.268820101314208,
+          "heldout_nll": 2.370360609876561,
+          "heldout_fp32_nll": 2.370360609876561
+        },
+        {
+          "step": 240,
+          "train_nll": 2.23271277798876,
+          "heldout_nll": 2.3508322328703173,
+          "heldout_fp32_nll": 2.3508322328703173
+        }
+      ],
+      "initial_gradient_relative_l2": 0.0
+    },
+    {
+      "seed": 17,
+      "mode": "custom",
+      "curve": [
+        {
+          "step": 0,
+          "train_nll": 4.179468368972272,
+          "heldout_nll": 4.181331028000581,
+          "heldout_fp32_nll": 4.18152034232806
+        },
+        {
+          "step": 20,
+          "train_nll": 3.5067609802868827,
+          "heldout_nll": 3.4961695970351725,
+          "heldout_fp32_nll": 3.494633710534004
+        },
+        {
+          "step": 40,
+          "train_nll": 2.9557859327500378,
+          "heldout_nll": 2.925832516977478,
+          "heldout_fp32_nll": 2.9255590718161613
+        },
+        {
+          "step": 60,
+          "train_nll": 2.8402996830466596,
+          "heldout_nll": 2.827618124095965,
+          "heldout_fp32_nll": 2.8265899753969586
+        },
+        {
+          "step": 80,
+          "train_nll": 2.720159744257327,
+          "heldout_nll": 2.727031739685825,
+          "heldout_fp32_nll": 2.726280100674809
+        },
+        {
+          "step": 100,
+          "train_nll": 2.6145986022627117,
+          "heldout_nll": 2.647562130724536,
+          "heldout_fp32_nll": 2.64762595906916
+        },
+        {
+          "step": 120,
+          "train_nll": 2.5253862085942997,
+          "heldout_nll": 2.585382772788842,
+          "heldout_fp32_nll": 2.584619498153112
+        },
+        {
+          "step": 140,
+          "train_nll": 2.453390743076221,
+          "heldout_nll": 2.524139931012397,
+          "heldout_fp32_nll": 2.524760721118879
+        },
+        {
+          "step": 160,
+          "train_nll": 2.3914575246849163,
+          "heldout_nll": 2.481148612050332,
+          "heldout_fp32_nll": 2.4819977413161527
+        },
+        {
+          "step": 180,
+          "train_nll": 2.3451666354965295,
+          "heldout_nll": 2.435036679192068,
+          "heldout_fp32_nll": 2.4361280177926417
+        },
+        {
+          "step": 200,
+          "train_nll": 2.305699758796965,
+          "heldout_nll": 2.4213894480940685,
+          "heldout_fp32_nll": 2.4227963212144923
+        },
+        {
+          "step": 220,
+          "train_nll": 2.2703458943260197,
+          "heldout_nll": 2.3698123788235077,
+          "heldout_fp32_nll": 2.3701627404121175
+        },
+        {
+          "step": 240,
+          "train_nll": 2.233723934473767,
+          "heldout_nll": 2.3490769932958373,
+          "heldout_fp32_nll": 2.3511127487884904
+        }
+      ],
+      "initial_gradient_relative_l2": 0.02864125743508339
+    },
+    {
+      "seed": 17,
+      "mode": "torchao",
+      "curve": [
+        {
+          "step": 0,
+          "train_nll": 4.179468368972272,
+          "heldout_nll": 4.181331028000581,
+          "heldout_fp32_nll": 4.18152034232806
+        },
+        {
+          "step": 20,
+          "train_nll": 3.5067609802868827,
+          "heldout_nll": 3.4961695970351725,
+          "heldout_fp32_nll": 3.494633710534004
+        },
+        {
+          "step": 40,
+          "train_nll": 2.9557859327500378,
+          "heldout_nll": 2.925832516977478,
+          "heldout_fp32_nll": 2.9255590718161613
+        },
+        {
+          "step": 60,
+          "train_nll": 2.8402996830466596,
+          "heldout_nll": 2.827618124095965,
+          "heldout_fp32_nll": 2.8265899753969586
+        },
+        {
+          "step": 80,
+          "train_nll": 2.720159744257327,
+          "heldout_nll": 2.727031739685825,
+          "heldout_fp32_nll": 2.726280100674809
+        },
+        {
+          "step": 100,
+          "train_nll": 2.6145986022627117,
+          "heldout_nll": 2.647562130724536,
+          "heldout_fp32_nll": 2.64762595906916
+        },
+        {
+          "step": 120,
+          "train_nll": 2.5253862085942997,
+          "heldout_nll": 2.585382772788842,
+          "heldout_fp32_nll": 2.584619498153112
+        },
+        {
+          "step": 140,
+          "train_nll": 2.453390743076221,
+          "heldout_nll": 2.524139931012397,
+          "heldout_fp32_nll": 2.524760721118879
+        },
+        {
+          "step": 160,
+          "train_nll": 2.3914575246849163,
+          "heldout_nll": 2.481148612050332,
+          "heldout_fp32_nll": 2.4819977413161527
+        },
+        {
+          "step": 180,
+          "train_nll": 2.3451666354965295,
+          "heldout_nll": 2.435036679192068,
+          "heldout_fp32_nll": 2.4361280177926417
+        },
+        {
+          "step": 200,
+          "train_nll": 2.305699758796965,
+          "heldout_nll": 2.4213894480940685,
+          "heldout_fp32_nll": 2.4227963212144923
+        },
+        {
+          "step": 220,
+          "train_nll": 2.2703458943260197,
+          "heldout_nll": 2.3698123788235077,
+          "heldout_fp32_nll": 2.3701627404121175
+        },
+        {
+          "step": 240,
+          "train_nll": 2.233723934473767,
+          "heldout_nll": 2.3490769932958373,
+          "heldout_fp32_nll": 2.3511127487884904
+        }
+      ],
+      "initial_gradient_relative_l2": 0.02864125743508339
+    },
+    {
+      "seed": 29,
+      "mode": "fp32",
+      "curve": [
+        {
+          "step": 0,
+          "train_nll": 4.18260192692147,
+          "heldout_nll": 4.186007447821326,
+          "heldout_fp32_nll": 4.186007447821326
+        },
+        {
+          "step": 20,
+          "train_nll": 3.5259252498783735,
+          "heldout_nll": 3.514366756423248,
+          "heldout_fp32_nll": 3.514366756423248
+        },
+        {
+          "step": 40,
+          "train_nll": 2.9554015247179,
+          "heldout_nll": 2.931614799978344,
+          "heldout_fp32_nll": 2.931614799978344
+        },
+        {
+          "step": 60,
+          "train_nll": 2.8330808102462446,
+          "heldout_nll": 2.835254669189453,
+          "heldout_fp32_nll": 2.835254669189453
+        },
+        {
+          "step": 80,
+          "train_nll": 2.7171059357151135,
+          "heldout_nll": 2.71891109514436,
+          "heldout_fp32_nll": 2.71891109514436
+        },
+        {
+          "step": 100,
+          "train_nll": 2.6118630290352978,
+          "heldout_nll": 2.639267558333265,
+          "heldout_fp32_nll": 2.639267558333265
+        },
+        {
+          "step": 120,
+          "train_nll": 2.5224087387340854,
+          "heldout_nll": 2.5755384596820656,
+          "heldout_fp32_nll": 2.5755384596820656
+        },
+        {
+          "step": 140,
+          "train_nll": 2.4582527190170747,
+          "heldout_nll": 2.52954431956782,
+          "heldout_fp32_nll": 2.52954431956782
+        },
+        {
+          "step": 160,
+          "train_nll": 2.393140300519444,
+          "heldout_nll": 2.481469669102625,
+          "heldout_fp32_nll": 2.481469669102625
+        },
+        {
+          "step": 180,
+          "train_nll": 2.341811240844798,
+          "heldout_nll": 2.4447706374164406,
+          "heldout_fp32_nll": 2.4447706374164406
+        },
+        {
+          "step": 200,
+          "train_nll": 2.305208206400441,
+          "heldout_nll": 2.4211115657535056,
+          "heldout_fp32_nll": 2.4211115657535056
+        },
+        {
+          "step": 220,
+          "train_nll": 2.2685945675718946,
+          "heldout_nll": 2.39707641920784,
+          "heldout_fp32_nll": 2.39707641920784
+        },
+        {
+          "step": 240,
+          "train_nll": 2.2325575345284188,
+          "heldout_nll": 2.377852084746421,
+          "heldout_fp32_nll": 2.377852084746421
+        }
+      ],
+      "initial_gradient_relative_l2": 0.0
+    },
+    {
+      "seed": 29,
+      "mode": "custom",
+      "curve": [
+        {
+          "step": 0,
+          "train_nll": 4.182413259787843,
+          "heldout_nll": 4.185798453486614,
+          "heldout_fp32_nll": 4.186007447821326
+        },
+        {
+          "step": 20,
+          "train_nll": 3.5260802463922047,
+          "heldout_nll": 3.514552335858844,
+          "heldout_fp32_nll": 3.5143512741791154
+        },
+        {
+          "step": 40,
+          "train_nll": 2.9554606719859757,
+          "heldout_nll": 2.9319382352310246,
+          "heldout_fp32_nll": 2.9321136793830904
+        },
+        {
+          "step": 60,
+          "train_nll": 2.835402760595709,
+          "heldout_nll": 2.836832421594085,
+          "heldout_fp32_nll": 2.8365770762934344
+        },
+        {
+          "step": 80,
+          "train_nll": 2.72098173076835,
+          "heldout_nll": 2.72225101423064,
+          "heldout_fp32_nll": 2.7212356024706215
+        },
+        {
+          "step": 100,
+          "train_nll": 2.6159816387181434,
+          "heldout_nll": 2.6429902240322223,
+          "heldout_fp32_nll": 2.6423276637887354
+        },
+        {
+          "step": 120,
+          "train_nll": 2.5264636397962903,
+          "heldout_nll": 2.579340180592557,
+          "heldout_fp32_nll": 2.5783355265980483
+        },
+        {
+          "step": 140,
+          "train_nll": 2.4616198096281483,
+          "heldout_nll": 2.5332031090389235,
+          "heldout_fp32_nll": 2.5315189281766886
+        },
+        {
+          "step": 160,
+          "train_nll": 2.395813517963619,
+          "heldout_nll": 2.483147130351685,
+          "heldout_fp32_nll": 2.4832967654431712
+        },
+        {
+          "step": 180,
+          "train_nll": 2.3444743621135435,
+          "heldout_nll": 2.4475756529484833,
+          "heldout_fp32_nll": 2.4468402303911154
+        },
+        {
+          "step": 200,
+          "train_nll": 2.3078048561107822,
+          "heldout_nll": 2.423265401289553,
+          "heldout_fp32_nll": 2.422565428282925
+        },
+        {
+          "step": 220,
+          "train_nll": 2.270509569757049,
+          "heldout_nll": 2.3997559327959515,
+          "heldout_fp32_nll": 2.3976393663733573
+        },
+        {
+          "step": 240,
+          "train_nll": 2.2340812589158427,
+          "heldout_nll": 2.3766655383249704,
+          "heldout_fp32_nll": 2.3778147677497383
+        }
+      ],
+      "initial_gradient_relative_l2": 0.026830481365323067
+    },
+    {
+      "seed": 29,
+      "mode": "torchao",
+      "curve": [
+        {
+          "step": 0,
+          "train_nll": 4.182413259787843,
+          "heldout_nll": 4.185798453486614,
+          "heldout_fp32_nll": 4.186007447821326
+        },
+        {
+          "step": 20,
+          "train_nll": 3.5260802463922047,
+          "heldout_nll": 3.514552335858844,
+          "heldout_fp32_nll": 3.5143512741791154
+        },
+        {
+          "step": 40,
+          "train_nll": 2.9554606719859757,
+          "heldout_nll": 2.9319382352310246,
+          "heldout_fp32_nll": 2.9321136793830904
+        },
+        {
+          "step": 60,
+          "train_nll": 2.835402760595709,
+          "heldout_nll": 2.836832421594085,
+          "heldout_fp32_nll": 2.8365770762934344
+        },
+        {
+          "step": 80,
+          "train_nll": 2.72098173076835,
+          "heldout_nll": 2.72225101423064,
+          "heldout_fp32_nll": 2.7212356024706215
+        },
+        {
+          "step": 100,
+          "train_nll": 2.6159816387181434,
+          "heldout_nll": 2.6429902240322223,
+          "heldout_fp32_nll": 2.6423276637887354
+        },
+        {
+          "step": 120,
+          "train_nll": 2.5264636397962903,
+          "heldout_nll": 2.579340180592557,
+          "heldout_fp32_nll": 2.5783355265980483
+        },
+        {
+          "step": 140,
+          "train_nll": 2.4616198096281483,
+          "heldout_nll": 2.5332031090389235,
+          "heldout_fp32_nll": 2.5315189281766886
+        },
+        {
+          "step": 160,
+          "train_nll": 2.395813517963619,
+          "heldout_nll": 2.483147130351685,
+          "heldout_fp32_nll": 2.4832967654431712
+        },
+        {
+          "step": 180,
+          "train_nll": 2.3444743621135435,
+          "heldout_nll": 2.4475756529484833,
+          "heldout_fp32_nll": 2.4468402303911154
+        },
+        {
+          "step": 200,
+          "train_nll": 2.3078048561107822,
+          "heldout_nll": 2.423265401289553,
+          "heldout_fp32_nll": 2.422565428282925
+        },
+        {
+          "step": 220,
+          "train_nll": 2.270509569757049,
+          "heldout_nll": 2.3997559327959515,
+          "heldout_fp32_nll": 2.3976393663733573
+        },
+        {
+          "step": 240,
+          "train_nll": 2.2340812589158427,
+          "heldout_nll": 2.3766655383249704,
+          "heldout_fp32_nll": 2.3778147677497383
+        }
+      ],
+      "initial_gradient_relative_l2": 0.026830481365323067
+    }
+  ]
+}

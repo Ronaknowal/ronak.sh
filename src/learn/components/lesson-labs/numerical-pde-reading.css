@@ -1,0 +1,53 @@
+.npde-lesson{overflow-wrap:anywhere;min-width:0;container-type:inline-size}
+.npde-lesson :is(code,pre){font-size:.9rem}
+.npde-lesson .npde-reading-object,.npde-lesson .npde-investigation{margin:1.5rem 0;min-width:0}
+.npde-lesson .npde-scene{width:100%;min-width:0}
+.npde-lesson .npde-scene svg{display:block;width:100%;overflow:hidden}
+.npde-lesson .npde-scene text{fill:#e5e7ec;font:15px ui-monospace,monospace}
+.npde-lesson .npde-axis-keys{display:flex;flex-wrap:wrap;gap:.3rem 1.5rem}
+.npde-lesson .npde-axis-keys p{margin:.4rem 0;font-size:.9rem}
+.npde-lesson .npde-legend{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.5rem 1rem}
+.npde-lesson .npde-legend li{display:flex;align-items:center;gap:.5rem}
+.npde-lesson .npde-legend i{width:1.2rem;height:.2rem;flex:none}
+.npde-lesson .npde-reading-region{overflow:auto;max-width:100%;min-width:0;scrollbar-gutter:stable;max-height:32rem}
+.npde-lesson .npde-reading-region:focus-visible{outline:2px solid #e8b44a;outline-offset:3px}
+.npde-lesson .npde-scroll-hint{color:#e8b44a;font-size:.9rem;margin:.5rem 0}
+.npde-lesson .npde-equation-content{width:max-content;min-width:100%}
+.npde-lesson .npde-equation-content .katex-display{margin:.6rem 0}
+.npde-lesson table{border-collapse:collapse;width:max-content;min-width:100%;font-size:.9rem}
+.npde-lesson th,.npde-lesson td{padding:.5rem .7rem;text-align:left;border-bottom:1px solid #343a44;white-space:nowrap}
+.npde-lesson th{color:#dfc58c}
+.npde-lesson .npde-visible-controls{margin:1rem 0}
+.npde-lesson .npde-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));gap:.5rem 1rem}
+.npde-lesson .npde-control{display:flex;flex-direction:column;gap:.5rem;margin:1rem 0;min-width:0}
+.npde-lesson .npde-control :is(input,select){font:inherit;width:100%;max-width:100%;min-width:0;min-height:2.75rem;accent-color:#e8b44a}
+.npde-lesson select,.npde-lesson button{background:#111418;color:#e5e7ec;border:1px solid #555963;border-radius:.2rem;font:inherit;padding:.4rem .6rem}
+.npde-lesson button{min-height:2.75rem;cursor:pointer}
+.npde-lesson :is(input,select,button):focus-visible{outline:2px solid #e8b44a;outline-offset:3px}
+.npde-lesson .npde-term-rows p{border-left:3px solid;padding-left:.7rem}
+.npde-lesson .npde-budget p{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;padding:.5rem 0;border-bottom:1px solid #343a44}
+.npde-lesson .npde-budget output{color:#e8b44a}
+.npde-lesson .npde-pair{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem}
+.npde-lesson .npde-section{scroll-margin-top:6rem}
+.npde-lesson .npde-practice{margin:2rem 0;padding-top:1rem;border-top:1px solid #343a44}
+.npde-lesson summary{padding:.6rem 0;cursor:pointer;color:#dfc58c}
+.npde-lesson .npde-square-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8rem),1fr));gap:1rem}
+.npde-lesson .npde-square-grid svg{display:block;width:5rem;height:5rem;max-width:100%}
+.npde-lesson .npde-result{color:#e8b44a}
+.npde-lesson .npde-stencil{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8rem),1fr));gap:1rem}
+.npde-lesson .npde-stencil b{display:block}
+.npde-lesson .npde-matrix-row{display:grid;gap:.2rem}
+.npde-lesson .npde-matrix-row>div{min-width:0;text-align:center;border-bottom:1px solid #555963;padding:.35rem .1rem;background:#111820}
+.npde-lesson .npde-matrix-row strong,.npde-lesson .npde-matrix-row small{display:block;font-size:.9rem}
+@container(min-width:48rem){.npde-lesson .npde-pair{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.npde-lesson .npde-pair> *{min-width:0;max-width:100%}
+.npde-lesson :not(pre)>code{white-space:normal;overflow-wrap:anywhere}
+.npde-lesson .npde-control input{margin:0;display:block}
+
+.npde-legend svg{width:2rem;height:.5rem;flex:none;overflow:visible}
+.npde-reading-region td.npde-highlight{outline:2px solid #e8b44a;outline-offset:-3px;background:rgba(232,180,74,.12)}
+.npde-reading-region .npde-selected-row>*{font-weight:700;border-top:2px solid #dce0e5;border-bottom:2px solid #dce0e5}
+.npde-reading-region .npde-selected-row>th{border-left:2px solid #dce0e5}
+.npde-reading-region .npde-selected-row>td:last-child{border-right:2px solid #dce0e5}
+.npde-work-timeline>div{margin:1.2rem 0}

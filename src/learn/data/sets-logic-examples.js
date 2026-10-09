@@ -52,8 +52,8 @@ export const setsLogicExamples = {
     "title": "Count the border before using the formula",
     "question": "How many new tiles turn an n-by-n square into an (n+1)-by-(n+1) square?",
     "language": "python",
-    "code": "total_odds = 0\nfor n in range(5):\n    old = {(row, column) for row in range(n) for column in range(n)}\n    new = {(row, column) for row in range(n + 1) for column in range(n + 1)}\n    border = new - old\n    total_odds += len(border)\n    print('n =', n, 'old =', len(old), 'border =', len(border),\n          'new =', len(new), 'odd sum =', total_odds)\n    assert len(border) == 2 * n + 1\n    assert total_odds == (n + 1) ** 2\nprint('The general proof still needs an arbitrary n, not these five checks.')",
-    "expected": "n = 0 old = 0 border = 1 new = 1 odd sum = 1\nn = 1 old = 1 border = 3 new = 4 odd sum = 4\nn = 2 old = 4 border = 5 new = 9 odd sum = 9\nn = 3 old = 9 border = 7 new = 16 odd sum = 16\nn = 4 old = 16 border = 9 new = 25 odd sum = 25\nThe general proof still needs an arbitrary n, not these five checks."
+    "code": "total_odds = 0\nfor n in range(5):\n    old = {(row, column) for row in range(n) for column in range(n)}\n    new = {(row, column) for row in range(n + 1) for column in range(n + 1)}\n    border = new - old\n    total_odds += len(border)\n    print('n =', n, 'old =', len(old), 'border =', len(border),\n          'new =', len(new), 'odd sum =', total_odds)\n    assert len(border) == 2 * n + 1\n    assert total_odds == (n + 1) ** 2",
+    "expected": "n = 0 old = 0 border = 1 new = 1 odd sum = 1\nn = 1 old = 1 border = 3 new = 4 odd sum = 4\nn = 2 old = 4 border = 5 new = 9 odd sum = 9\nn = 3 old = 9 border = 7 new = 16 odd sum = 16\nn = 4 old = 16 border = 9 new = 25 odd sum = 25"
   },
   "diagonal": {
     "title": "Build a subset that is missing from every proposed row",

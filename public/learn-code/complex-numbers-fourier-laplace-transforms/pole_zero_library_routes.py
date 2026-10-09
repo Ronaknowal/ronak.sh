@@ -1,0 +1,17 @@
+import sympy as sp
+
+s = sp.symbols('s')
+t = sp.symbols('t', positive=True)
+omega = sp.symbols('omega', real=True)
+transfer = (s-1)/(s+1)
+print('pole:', sp.solve(s+1, s), '; zero:', sp.solve(s-1, s))
+gain_squared = sp.simplify(transfer.subs(s, sp.I*omega)*sp.conjugate(transfer.subs(s, sp.I*omega)))
+print('frequency gain squared:', gain_squared)
+step = sp.inverse_laplace_transform(transfer/s, s, t)
+print('causal step for t>0:', step)
+print('initial right limit:', sp.limit(step, t, 0, dir='+'))
+print('final value:', sp.limit(step, t, sp.oo))
+state = 1-sp.exp(-t)
+print('state ODE residual:', sp.simplify(sp.diff(state,t)+state-1))
+print('output agrees:', sp.simplify(1-2*state-step) == 0)
+print('zero crossing:', sp.log(2))

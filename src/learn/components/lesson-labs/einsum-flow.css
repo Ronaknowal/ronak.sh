@@ -1,0 +1,66 @@
+.einsum-lesson.lesson-flow { overflow-wrap: anywhere; }
+.einsum-lesson .ef-figure, .einsum-lesson .ef-lab { margin: 1.8rem 0; padding: 0; border: 0; background: none; min-width: 0; container-type: inline-size; }
+.einsum-lesson .ef-panels { display: flex; flex-wrap: wrap; align-items: start; gap: 1.5rem; }
+.einsum-lesson .ef-panels > * { flex: 1 1 26rem; min-width: 0; max-width: 100%; }
+.einsum-lesson .ef-panel-label { margin: .6rem 0; color: #d6d6d6; font-size: .9rem; line-height: 1.55; }
+.einsum-lesson .ef-scene-scroll { max-width: 100%; min-width: 0; overflow: auto; scrollbar-color: #b48b37 #191919; }
+.einsum-lesson .ef-scene-scroll:focus-visible, .einsum-lesson .ef-table-scroll:focus-visible { outline: 2px solid #e5b85c; outline-offset: 3px; }
+.einsum-lesson .ef-scene { display: block; width: calc(var(--ef-scene-width) / 16 * 1rem); max-width: none; height: auto; font: 14px system-ui, sans-serif; overflow: visible; }
+.einsum-lesson .ef-scene text { fill: #dedede; }
+.einsum-lesson .ef-cell rect { fill: #1b1b1b; stroke: #666; }
+.einsum-lesson .ef-cell.left rect { stroke: #d8af57; }
+.einsum-lesson .ef-cell.right rect { stroke: #67bccf; }
+.einsum-lesson .ef-cell.selected rect { fill: #2b2b2b; stroke: #fff; stroke-width: 2.5; }
+.einsum-lesson .ef-arrow line, .einsum-lesson .ef-arrow path { fill: none; stroke: #d9ae57; stroke-width: 2; }
+.einsum-lesson .ef-arrow.right line, .einsum-lesson .ef-arrow.right path { stroke: #68bdd0; }
+.einsum-lesson .ef-arrow.result line, .einsum-lesson .ef-arrow.result path { stroke: #eee; }
+.einsum-lesson .ef-arrow.dashed line { stroke-dasharray: 5 4; }
+.einsum-lesson .ef-node { fill: #171717; stroke: #d9ae57; stroke-width: 1.5; }
+.einsum-lesson .ef-node.right { stroke: #68bdd0; }
+.einsum-lesson .ef-node.result { stroke: #e9e9e9; }
+.einsum-lesson .ef-reference { fill: none; stroke: #858585; stroke-width: 1.2; }
+.einsum-lesson .ef-axis { fill: none; stroke: #999; stroke-width: 1.4; }
+.einsum-lesson .ef-grid line { stroke: #333; stroke-width: 1; }
+.einsum-lesson .ef-grid text { fill: #aaa; font-size: 12px; }
+.einsum-lesson .ef-point { fill: #d9ae57; fill-opacity: .65; }
+.einsum-lesson .right .ef-point { fill: #68bdd0; }
+.einsum-lesson .ef-point.selected { fill: #fff; fill-opacity: 1; stroke: #e5b85c; stroke-width: 2; }
+.einsum-lesson .ef-curve { fill: none; stroke: #d9ae57; stroke-width: 2; }
+.einsum-lesson .ef-curve.right { stroke: #68bdd0; stroke-dasharray: 5 3; }
+.einsum-lesson .ef-vector-legend { display: grid; gap: .3rem; margin: .6rem 0; font-size: .875rem; }
+.einsum-lesson .ef-vector-key { margin: 0; border-left: 3px solid #d9ae57; padding-left: .6rem; }
+.einsum-lesson .ef-vector-key.right { border-color: #68bdd0; }
+.einsum-lesson .ef-vector-key.result { border-color: #eee; }
+.einsum-lesson .ef-vector-key.dashed { border-left-style: dashed; }
+.einsum-lesson .ef-level path { stroke: #7c7c7c; stroke-dasharray: 4 4; fill: none; }
+.einsum-lesson .ef-level text { font-size: 12px; }
+.einsum-lesson .ef-area { fill: #d9ae57; fill-opacity: .22; stroke: #d9ae57; }
+.einsum-lesson .ef-area.negative { fill: #68bdd0; stroke: #68bdd0; }
+.einsum-lesson .ef-dimension-cell, .einsum-lesson .ef-tree-matrix { fill: #211d16; stroke: #d9ae57; }
+.einsum-lesson .ef-dimension-cell.right, .einsum-lesson .ef-tree-matrix.right { fill: #152127; stroke: #68bdd0; }
+.einsum-lesson .ef-tree-matrix.result { fill: #202020; stroke: #ddd; }
+.einsum-lesson .ef-table-owner { min-width: 0; margin: 1rem 0; }
+.einsum-lesson .ef-table-owner > p { font-size: .9rem; color: #bdbdbd; }
+.einsum-lesson .ef-table-scroll { overflow: auto; max-width: 100%; min-width: 0; }
+.einsum-lesson .ef-table-tall { max-height: 24rem; }
+.einsum-lesson .ef-table-scroll table { border-collapse: collapse; font-size: .875rem; min-width: 100%; width: max-content; }
+.einsum-lesson .ef-table-scroll :is(th,td) { padding: .45rem .65rem; text-align: left; border-bottom: 1px solid #444; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.einsum-lesson .ef-table-scroll th { color: #dbc28b; font-weight: 500; }
+.einsum-lesson .ef-controls { display: flex; flex-wrap: wrap; align-items: end; gap: .8rem 1rem; margin-top: 1rem; }
+.einsum-lesson .ef-controls label { display: grid; gap: .35rem; font-size: .9rem; min-width: 0; flex: 1 1 9rem; }
+.einsum-lesson .ef-controls .ef-checkbox { display: flex; align-items: center; gap: .5rem; }
+.einsum-lesson .ef-controls :is(input,select,textarea,button) { font: inherit; color: #eee; background: #171717; border: 1px solid #666; padding: .4rem .65rem; max-width: 100%; min-width: 0; min-height: 2.5rem; }
+.einsum-lesson .ef-controls :is(input,select,textarea) { width: 100%; }
+.einsum-lesson .ef-controls input[type=checkbox] { width: 1.2rem; min-height: 1.2rem; accent-color: #d9ae57; }
+.einsum-lesson .ef-controls :is(input,select,textarea,button):focus-visible { outline: 2px solid #e5b85c; outline-offset: 3px; }
+.einsum-lesson .ef-controls .ef-editor { flex-basis: 100%; }
+.einsum-lesson .ef-controls textarea { min-height: 5rem; font-family: ui-monospace, monospace; }
+.einsum-lesson .ef-equation-owner { min-width: 0; max-width: 100%; }
+.einsum-lesson .ef-equation-scroll { width: 100%; max-width: 100%; overflow: auto; }
+.einsum-lesson .ef-equation-scroll .katex-display { width: max-content; min-width: 100%; text-align: left; }
+.einsum-lesson .ef-equation-scroll:focus-visible { outline: 2px solid #e5b85c; outline-offset: 3px; }
+.einsum-lesson .ef-equation-caption { font-size: .875rem; color: #bbb; }
+.einsum-lesson .ef-readout { line-height: 1.7; color: #ddd; }
+.einsum-lesson .ef-error { color: #f2ce91; border-left: 2px solid #d9ae57; padding-left: .8rem; }
+@container (max-width: 53rem) { .einsum-lesson .ef-panels > * { flex: none; width: 100%; } }
+@media (max-width: 760px) { .einsum-lesson .ef-panels > * { flex: none; width: 100%; } }

@@ -1,0 +1,7 @@
+.rec-flow-request-route { display: grid; gap: 1.5rem; }
+.rec-flow-port-wire { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; }
+.rec-flow-boundary { border-left: 2px dashed #e8b44a; padding-left: 1rem; }
+.rec-flow-boundary > span { display: block; margin-bottom: 1rem; }
+.rec-flow-permission-lanes { display: grid; gap: 1.5rem; }
+.rec-flow-timeline { min-width: 48rem; width: 100%; display: block; overflow: visible; font-size: 1rem; fill: #eee; }
+.rec-flow-timeline text { font-family: inherit; }

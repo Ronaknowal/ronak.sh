@@ -1,0 +1,20 @@
+C:\Personal Projects and files\Portfolio\Portfolio\scratch\survival-tools\Lib\site-packages\sklearn\decomposition\_nmf.py:1723: ConvergenceWarning: Maximum number of iterations 2000 reached. Increase it to improve convergence.
+  warnings.warn(
+Traceback (most recent call last):
+  File "C:\Personal Projects and files\Portfolio\Portfolio\docs\teaching\classical-ml-reading-flow\non-negative-matrix-factorization-nmf\content-preparation\content-programs\nmf_multiplicative.py", line 186, in <module>
+    main()
+  File "C:\Personal Projects and files\Portfolio\Portfolio\docs\teaching\classical-ml-reading-flow\non-negative-matrix-factorization-nmf\content-preparation\content-programs\nmf_multiplicative.py", line 176, in main
+    fit = fit_multiplicative(x, w0, h0, loss=loss, max_iter=2000, tol=1e-7)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Personal Projects and files\Portfolio\Portfolio\docs\teaching\classical-ml-reading-flow\non-negative-matrix-factorization-nmf\content-preparation\content-programs\nmf_multiplicative.py", line 157, in fit_multiplicative
+    w, h = multiplicative_sweep(x, w, h, loss)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Personal Projects and files\Portfolio\Portfolio\docs\teaching\classical-ml-reading-flow\non-negative-matrix-factorization-nmf\content-preparation\content-programs\nmf_multiplicative.py", line 65, in multiplicative_sweep
+    new_w = update_amounts(x, w, new_h, loss)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Personal Projects and files\Portfolio\Portfolio\docs\teaching\classical-ml-reading-flow\non-negative-matrix-factorization-nmf\content-preparation\content-programs\nmf_multiplicative.py", line 58, in update_amounts
+    return multiply_ratio(w, numerator, denominator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Personal Projects and files\Portfolio\Portfolio\docs\teaching\classical-ml-reading-flow\non-negative-matrix-factorization-nmf\content-preparation\content-programs\nmf_multiplicative.py", line 31, in multiply_ratio
+    raise ValueError("Multiplicative arithmetic underflowed; rescale the data")
+ValueError: Multiplicative arithmetic underflowed; rescale the data

@@ -1,0 +1,104 @@
+{
+  "kind": "Constructed loss/gradient contracts; no fitting",
+  "margin_points": [
+    {
+      "h": -1.0,
+      "ipo_loss": 4.0,
+      "ipo_gradient": -4.0,
+      "published_tau_scaled_gradient": -2.0,
+      "dpo_loss": 0.9740769841801067,
+      "dpo_gradient": -0.3112296656009273
+    },
+    {
+      "h": 0.0,
+      "ipo_loss": 1.0,
+      "ipo_gradient": -2.0,
+      "published_tau_scaled_gradient": -1.0,
+      "dpo_loss": 0.6931471805599453,
+      "dpo_gradient": -0.25
+    },
+    {
+      "h": 1.0,
+      "ipo_loss": 0.0,
+      "ipo_gradient": 0.0,
+      "published_tau_scaled_gradient": 0.0,
+      "dpo_loss": 0.4740769841801067,
+      "dpo_gradient": -0.18877033439907273
+    },
+    {
+      "h": 2.0,
+      "ipo_loss": 1.0,
+      "ipo_gradient": 2.0,
+      "published_tau_scaled_gradient": 1.0,
+      "dpo_loss": 0.31326168751822286,
+      "dpo_gradient": -0.13447071068499755
+    }
+  ],
+  "ORPO": {
+    "chosen_mean": -0.4581453659370775,
+    "rejected_mean": -0.6931471805599453,
+    "chosen_geometric_score": 0.6324555320336759,
+    "rejected_geometric_score": 0.5,
+    "margin": 0.5427656004433221,
+    "contrast": 0.4581453659370775,
+    "total": 0.5039599025307853,
+    "chosen_contrast_gradient": -1.0000000000000002,
+    "rejected_contrast_gradient": 0.7350889359326483
+  },
+  "shared_weight": [
+    {
+      "xA": 1.0,
+      "xB": 3.0,
+      "lambda": 0.1,
+      "theta": 0.0,
+      "SFT_gradient": -0.5,
+      "contrast_gradient": 1.0,
+      "total_gradient": -0.4,
+      "finite_difference": -0.40000000001150227,
+      "theta_after_lr_point01": 0.004,
+      "margin": 0.0
+    },
+    {
+      "xA": 1.0,
+      "xB": 3.0,
+      "lambda": 0.5,
+      "theta": 0.0,
+      "SFT_gradient": -0.5,
+      "contrast_gradient": 1.0,
+      "total_gradient": 0.0,
+      "finite_difference": -1.1102230246251565e-10,
+      "theta_after_lr_point01": -0.0,
+      "margin": 0.0
+    },
+    {
+      "xA": 1.0,
+      "xB": 3.0,
+      "lambda": 1.0,
+      "theta": 0.0,
+      "SFT_gradient": -0.5,
+      "contrast_gradient": 1.0,
+      "total_gradient": 0.5,
+      "finite_difference": 0.4999999999588667,
+      "theta_after_lr_point01": -0.005,
+      "margin": 0.0
+    },
+    {
+      "xA": 1.0,
+      "xB": -1.0,
+      "lambda": 0.1,
+      "theta": 0.0,
+      "SFT_gradient": -0.5,
+      "contrast_gradient": -1.0,
+      "total_gradient": -0.6000000000000001,
+      "finite_difference": -0.6000000000172534,
+      "theta_after_lr_point01": 0.006000000000000001,
+      "margin": 0.0
+    }
+  ],
+  "stable_log_odds": [
+    -1000.0,
+    -9.99995459903963,
+    2.2521684610440906,
+    27.63102111592805
+  ]
+}

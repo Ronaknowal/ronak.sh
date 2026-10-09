@@ -1,0 +1,32 @@
+shared_operand_threshold 0 entrywise [[2. 1.]
+ [1. 2.]] singular [[2. 1.]
+ [1. 2.]]
+shared_operand_threshold 1 entrywise [[1. 0.]
+ [0. 1.]] singular [[1. 1.]
+ [1. 1.]]
+shared_operand_threshold 2 entrywise [[0. 0.]
+ [0. 0.]] singular [[0.5 0.5]
+ [0.5 0.5]]
+shared_operand_threshold 3 entrywise [[0. 0.]
+ [0. 0.]] singular [[0. 0.]
+ [0. 0.]]
+nonorthogonal_atom_scores 0.0 [[-0.        1.414214]]
+nonorthogonal_atom_scores 0.1 [[0.140845 1.19511 ]]
+dictionary_status_objective_iterations stationary 1.2502195841050028 107
+dictionary_atoms [[-2.960041 -1.201734 -0.      ]
+ [ 0.       -0.313033  1.21219 ]]
+dictionary_score_column_norms [1. 1.]
+ordinary_sparse_atoms [[ 0.926553  0.376164  0.      ]
+ [ 0.       -0.250112  0.968217]]
+ordinary_ridge_query_scores [ 1.277839 -0.128603]
+pcp_status_objective_iterations converged 4.732050737962252 38
+pcp_low [[0.999996 0.999998 0.999998]
+ [0.999998 1.000001 1.000001]
+ [0.999998 1.000001 1.000001]]
+pcp_sparse [[3.000004 0.       0.      ]
+ [0.       0.       0.      ]
+ [0.       0.       0.      ]]
+pcp_last_primal_dual_limits (38, 3.4487213449447624e-06, 3.048083341283814e-07, np.float64(5.198979485566356e-06), np.float64(1.3648827778794971e-06))
+E11_nuclear_l1 1.0 1.0
+zero_pcp_status zero_matrix
+optional_convex_status_objective optimal 4.732114031813975

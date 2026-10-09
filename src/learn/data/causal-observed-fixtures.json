@@ -1,0 +1,121 @@
+{
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/causal-inference-do-calculus/nhefs-standardization-result-r1.json",
+    "sha256": "6d935512b43f9c89fc6d59e84d872bb4f4801419a779f5c2c962e3233b2cad12",
+    "kind": "retained executed NHEFS result; no new fitting"
+  },
+  "data_sha256": "6726827bfcebf7324d786211a517d0515532c2405cc71c5a1fab68d7116ea16c",
+  "records": 1629,
+  "observed_outcomes": 1566,
+  "missing_outcomes": 63,
+  "by_treatment": [
+    {
+      "qsmk": 0,
+      "records": 1201,
+      "observed": 1163,
+      "missing": 38,
+      "observed_mean": 1.9844975347463456
+    },
+    {
+      "qsmk": 1,
+      "records": 428,
+      "observed": 403,
+      "missing": 25,
+      "observed_mean": 4.525078989702234
+    }
+  ],
+  "features": [
+    "intercept",
+    "qsmk",
+    "sex",
+    "race",
+    "age/10",
+    "(age/10)^2",
+    "wt71/10",
+    "(wt71/10)^2",
+    "smokeintensity/10",
+    "(smokeintensity/10)^2",
+    "smokeyrs/10",
+    "(smokeyrs/10)^2",
+    "education=2",
+    "education=3",
+    "education=4",
+    "education=5",
+    "exercise=1",
+    "exercise=2",
+    "active=1",
+    "active=2",
+    "qsmk * smokeintensity/10"
+  ],
+  "rank": 21,
+  "condition": 1508.9135832453017,
+  "standardized_means_all_rows": [
+    1.6602670194886837,
+    5.1788411859302785
+  ],
+  "standardized_difference": 3.518574166441595,
+  "standardized_means_complete_rows": [
+    1.7562131154674396,
+    5.273587316352927
+  ],
+  "linear_only_difference": 3.4341081169859944,
+  "library_max_prediction_error": 0,
+  "first_row": {
+    "qsmk": 0,
+    "sex": 0,
+    "race": 1,
+    "age": 42,
+    "wt71": 79.04,
+    "smokeintensity": 30,
+    "smokeyrs": 29,
+    "education": 1,
+    "exercise": 2,
+    "active": 0
+  },
+  "first_row_model_means": [
+    4.143746932883079,
+    8.10322621005285
+  ],
+  "bootstrap": {
+    "seed": 20261009,
+    "repetitions": 1000,
+    "standard_error": 0.4853702353725174,
+    "percentile_95": [
+      2.587608941467965,
+      4.441855290806046
+    ],
+    "edges": [
+      1.75,
+      2,
+      2.25,
+      2.5,
+      2.75,
+      3,
+      3.25,
+      3.5,
+      3.75,
+      4,
+      4.25,
+      4.5,
+      4.75,
+      5
+    ],
+    "counts": [
+      1,
+      4,
+      9,
+      39,
+      82,
+      148,
+      192,
+      201,
+      133,
+      115,
+      59,
+      16,
+      1
+    ],
+    "min": 1.9585650383161135,
+    "max": 4.95361058728118
+  }
+}

@@ -1,0 +1,66 @@
+.subword-lesson .subword-drawing { margin: 1.6em 0; padding: 0; border: 0; background: transparent; min-width: 0; }
+.subword-drawing figcaption { color: #b9b9b9; font-size: .875rem; line-height: 1.65; margin: 1em 0 0; font-weight: 400; }
+.subword-figure-label, .subword-rank-frame > span, .subword-native-output > span { display: block; color: #c9c9c9; font-size: .875rem; margin-bottom: .45em; }
+.subword-spans { display: flex; flex-wrap: wrap; gap: 3px; min-width: 0; margin: .55em 0; }
+.subword-spans > span { flex-basis: auto; min-width: 0; text-align: center; padding: .4em .25em; color: #eac27e; border-bottom: 2px solid #95713a; background: #211c14; font: .875rem/1.5 var(--font-mono, monospace); overflow-wrap: anywhere; }
+.subword-spans--input > span { color: #b0dce6; background: #132227; border-color: #53828d; }
+.subword-spans--computed > span { color: #d5c3ee; background: #211a2c; border-color: #80649c; }
+.subword-spans--missing > span { color: #c9c9c9; background: transparent; border: 1px dashed #a0a0a0; }
+.subword-spans .is-traced { outline: 2px solid #f4f4f4; outline-offset: 1px; }
+.subword-down-arrow { display: block; color: #bababa; text-align: center; font-size: .875rem; line-height: 1.65; margin: .5em 0; }
+.subword-correspondence { display: grid; grid-template-columns: 1fr 1fr; gap: 1em 2em; align-items: center; }
+.subword-correspondence > :last-child { grid-column: 1 / -1; max-width: 18em; justify-self: center; width: 100%; }
+.subword-dictionary { border-collapse: collapse; width: 100%; font-size: .875rem; }
+.subword-dictionary caption { text-align: left; margin-bottom: .5em; font-size: .875rem; }
+.subword-dictionary th, .subword-dictionary td { text-align: left; padding: .45em .6em; border-bottom: 1px solid #555; }
+.subword-dictionary tbody th { color: #eac27e; }.subword-dictionary td { color: #d5c3ee; }
+.subword-aligned-rows > div, .subword-merge-row, .subword-rank-frame { margin: .9em 0 1.3em; }
+.subword-aligned-rows small { color: #c0c0c0; }
+.subword-merge-row { max-width: 35em; }
+.subword-contribution-bars { margin: 1.4em 0; font-size: .875rem; max-width: 22em; }
+.subword-contribution-bars > div { background: #30263f; color: #d5c3ee; height: 1.7em; margin: .3em 0 .75em; text-align: right; padding-right: .4em; box-sizing: border-box; }
+.subword-graph { display: block; width: 100%; max-width: 370px; height: auto; margin: .7em auto; overflow: visible; }
+.subword-graph text { font: 16px ui-monospace, monospace; fill: #e0e0e0; }
+.subword-edge line { stroke: #a3a3a3; stroke-width: 1.8; }.subword-edge polygon { fill: #a3a3a3; }
+.subword-node circle { fill: #211c14; stroke: #b58b45; stroke-width: 1.5; }
+.subword-node--input circle { fill: #132227; stroke: #53828d; }.subword-node--input text { fill: #b0dce6; }
+.subword-node--operation circle { fill: #191919; stroke: #999; }
+.subword-node .subword-terminal { fill: none; stroke: #eac27e; stroke-width: 1; }
+.subword-parameter-cell { fill: #211c14; stroke: #b58b45; }.subword-parameter-edge { stroke: #b58b45; stroke-width: 2; }
+.subword-graph .subword-input-text { fill: #b0dce6; }.subword-graph .subword-computed-text { fill: #d5c3ee; }
+.subword-position { fill: #ddd; }.subword-trace-line { stroke: #fff; stroke-width: 2; }
+.subword-graph .is-missing { stroke-dasharray: 5 4; stroke: #a0a0a0; }
+.subword-linked-lanes { max-width: 25em; margin: auto; }
+.subword-linked-lanes .subword-spans { gap: 1.4em; }
+.subword-linked-lanes .subword-spans > span { position: relative; }
+.subword-linked-lanes .subword-spans > span:not(:last-child)::after { content: '↔'; position: absolute; left: calc(100% + .25em); top: .4em; color: #bcbcbc; }
+.subword-wordpiece-success { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5em; }
+.subword-credit-calculation { display: flex; flex-direction: column; gap: .7em; font: .875rem/1.8 var(--font-mono, monospace); }
+.subword-credit-calculation strong { color: #d5c3ee; }
+.subword-probability-update { display: flex; flex-wrap: wrap; gap: .9em; margin: 1em 0; color: #d5c3ee; font-family: var(--font-mono, monospace); }
+.subword-row-lookup { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .7em; margin: .7em 0; color: #d5c3ee; }
+.subword-matrix { border-collapse: collapse; font: .875rem/1.7 var(--font-mono, monospace); color: #eac27e; }
+.subword-matrix caption { font: .875rem/1.6 var(--font-body, sans-serif); color: #c4c4c4; margin-bottom: .5em; }
+.subword-matrix th, .subword-matrix td { border: 1px solid #66573b; text-align: center; padding: .35em .6em; }
+.subword-matrix th { color: #c5c5c5; }.subword-matrix .is-traced { outline: 2px solid #fff; outline-offset: 1px; }
+.subword-native-output .subword-spans { flex-wrap: wrap; }.subword-native-output .subword-spans > span { flex-basis: auto; }
+.subword-budget-matrix { margin: 0 auto 1.5em; }
+.subword-pair-comparison { display: flex; align-items: flex-start; flex-wrap: wrap; justify-content: center; gap: 1.5em; }
+.subword-pair-grid > span { display: block; font: .875rem/1.8 var(--font-mono, monospace); color: #d5c3ee; margin-bottom: .5em; }
+.subword-pair-grid > div { display: grid; gap: 2px; width: max-content; }.subword-pair-grid i { display: block; width: 1.55em; height: 1.55em; background: #30263f; border: 1px solid #80649c; }
+.subword-compatibility-rows { display: flex; gap: 1.5em; flex-wrap: wrap; justify-content: center; }.subword-compatibility-rows span { display: block; font-size: .875rem; }.subword-compatibility-rows code { display: block; margin: .6em 0; color: #eac27e; font-size: .875rem; }
+.subword-fragment-comparison { max-width: 25em; margin: 1.6em auto 0; }.subword-fragment-comparison > div { margin: 1em 0; }
+.subword-spans > .token-identity { color: var(--token-identity-color); background-color: var(--token-identity-background); border-color: var(--token-identity-border); }
+.subword-spans > .is-missing { color: #c9c9c9; background: transparent; border: 1px dashed #a0a0a0; }
+.subword-dictionary tr.token-identity :is(th, td) { color: var(--token-identity-color); }
+.subword-node.token-identity-node .subword-terminal { fill: none; stroke: var(--token-identity-color); }
+.subword-graph .subword-identity-label, .subword-graph .subword-identity-label text { fill: var(--token-identity-color); }
+.subword-graph .subword-identity-label .subword-computed-text { fill: #d5c3ee; }
+.subword-graph .subword-identity-path, .subword-identity-edge line { stroke: var(--token-identity-color); }
+.subword-identity-edge polygon { fill: var(--token-identity-color); }
+@media (max-width: 480px) {
+  .subword-correspondence, .subword-wordpiece-success { grid-template-columns: 1fr; }
+  .subword-correspondence > :last-child { grid-column: auto; }
+  .subword-spans > span { padding: .45em .1em; }
+  .subword-spans { gap: 3px; }.subword-pair-grid i { width: 1.25em; height: 1.25em; }
+}

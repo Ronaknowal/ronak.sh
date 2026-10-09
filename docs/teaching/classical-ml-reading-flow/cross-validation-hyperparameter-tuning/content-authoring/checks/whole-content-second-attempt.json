@@ -1,0 +1,6 @@
+{
+  "exitcode": 1,
+  "actual_execution": "b35e21",
+  "source_sha256": "91bfa1f710bbf48b8463bdaeece38003a4a79ea5a63c05c4fc6dd9971e1f3e96",
+  "finding": "Checker still assumed every exact original task had a hint. Complete literal rereading confirms original tasks1/7 have hints; other eight retain solved feedback without invented hints, as accepted design requires. Thirteen new tasks all have hints. Expected hint count is15; no lesson change."
+}

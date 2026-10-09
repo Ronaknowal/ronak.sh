@@ -1,17 +1,18 @@
-// Complete prepared revision-3 manuscript with live mechanism investigations.
 import { Prose, H2, H3, CodeBlock } from '../../components/content';
 import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
 import { LessonIntro } from '../../components/lesson-labs/LessonElements.jsx';
 import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
 import { RecurrentDirectionProductFigure } from '../../components/lesson-labs/RecurrentIntuitionFigures.jsx';
-import { PenRepresentationLab, RecurrentCreditLab, LstmMemoryLab, LstmRetentionLab, GruResetLab, RecurrentPenLab, RecurrentBoundaryLab, RecurrentPaddingLab, RecurrentMeasuredLab, RecurrentProgram } from '../../components/lesson-labs/RecurrentLabs.jsx';
+import { PenRepresentationLab, RecurrentProgram } from '../../components/lesson-labs/RecurrentLabs.jsx';
+import { RecurrentFlowProvider, RecurrentForwardLab, RecurrentParameterLab, RecurrentCreditLab, LstmRetainLab, LstmMemoryLab, LstmReadoutLab, LstmRetentionLab, LstmWriteRetentionLab, GruBlendLab, GruResetLab, GruMixingLab, RecurrentPenLab, RecurrentBoundaryLab, RecurrentPaddingLab, RecurrentMeasuredLab, RecurrentClippingLab } from '../../components/lesson-labs/RecurrentFlowLabs.jsx';
+import { RecurrentSharedStateFigure, RecurrentAffineFigure, RecurrentGateFigure, RecurrentClassifierFigure, RecurrentBoundaryFigure, RecurrentDirectionsFigure, RecurrentStackFigure, LstmJacobianFigure, LstmPeepholeFigure, LstmProjectionFigure, RecurrentTruncationFigure, RecurrentCostFigure, LstmCellDrawing, RecurrentCreditPicture, GruCandidateFigure } from '../../components/lesson-labs/RecurrentDrawings.jsx';
 export default {
   title: 'RNNs, LSTMs & GRUs',
   readTime: '~70 min read + experiments and practice',
   hasIntegratedGuide: true,
-  content: () => <div className="neural-lesson recurrent-lesson">
+  content: () => <RecurrentFlowProvider><div className="neural-lesson recurrent-lesson lesson-flow recurrent-flow-lesson">
     <LessonIntro prerequisites="Vectors, affine transforms, activations and the chain rule. Sequence axes, gates and state ownership are introduced here." sections={[["1-keep-a-running-description","1. Keep a running description"],["2-build-and-train-the-simplest-recurrence","2. Build and train the simplest recurrence"],["3-lstm-retain-write-then-expose","3. LSTM: retain, write, then expose"],["4-gru-blend-old-state-with-a-new-proposal","4. GRU: blend old state with a new proposal"],["5-recognize-real-pen-trajectories","5. Recognize real pen trajectories"],["6-state-belongs-to-a-stream","6. State belongs to a stream"],["7-different-lengths-stacks-and-directions","7. Different lengths, stacks and directions"],["translate-gate-equations-into-a-reusable-recurrent-implementation","Translate gate equations into a reusable recurrent implementation"],["8-deeper-questions-and-practical-model-choices","8. Deeper questions and practical model choices"],["9-practice-change-the-problem-before-checking-the-answer","9. Practice: change the problem before checking the answer"],["10-continue-and-learn-another-way","10. Continue and learn another way"]]}>Trace a sequence into state, follow how it learns, and control what crosses a boundary.</LessonIntro>
-<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Edit sequence entries, recurrent weights, LSTM gates, GRU reset placement and supported pen-trajectory coordinates. Update state trajectories, retained/injected terms, shared-weight credit and exact learned outputs. Step, rewind and reset state explicitly; padding and request boundaries remain visible. The labs show current results as you work; you do not enter or submit a guess. Use those comparisons to choose what must persist or reset, and diagnose saturation, reset-order differences and accidental cross-sequence leakage."}</Prose>
+<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Edit sequence entries, recurrent weights, LSTM gates, GRU reset placement and supported pen-trajectory coordinates. Update state trajectories, retained/injected terms, shared-weight credit and exact learned outputs. Follow all recomputed states and compare carry, detach and reset at chunk boundaries; padding and stream identity remain visible. The labs show current results as you work; you do not enter or submit a guess. Use those comparisons to choose what must persist or reset, and diagnose saturation, reset-order differences and accidental cross-sequence leakage."}</Prose>
 
 <Prose>{"A pen stroke is more than a collection of points. The order tells you how the pen travelled between them. A recurrent neural network processes that order by repeatedly updating a small collection of numbers: its current state. An LSTM or GRU changes the update rule so that the network can selectively retain, replace and expose information."}</Prose>
 
@@ -25,6 +26,10 @@ export default {
 
 <Prose>{"One approach is to concatenate all sixteen coordinates and use an ordinary classifier. That preserves their order: the first pair and last pair occupy different input columns. Another approach summarizes the points by their mean, spread and extremes; it loses the order. A recurrent model offers a third approach: apply the same update rule to each new point and a state summarizing the previous points."}</Prose>
 
+<Prose>What travels from one point to the next? A vector of computed state values. Question marks below stand for values we have not calculated yet; the ellipsis stands for more coordinates of that same vector.</Prose>
+<RecurrentSharedStateFigure />
+<Prose>The blue cells are one observation. The purple cells are state: one collection before this observation and another after it. Both enter one update operation. Its output is carried to the next point. The second drawing opens that repeated operation into three positions, each with its own state. The amber shared-weight line is one set of learned parameters. Training changes those parameters; receiving the next point creates a new state, not new weights.</Prose>
+
 <Prose>{"This distinction is useful beyond handwriting. A recurrent state can summarize successive machine measurements, maintain context during a conversation, or track what a controller has observed. The state is learned for the prediction objective. It is not a lossless recording of every past event, and it does not automatically represent a human-readable fact."}</Prose>
 
 <PenRepresentationLab />
@@ -34,6 +39,8 @@ export default {
 <div className="neural-equation"><MathBlock>{"h_t=F_\\theta(x_t,h_{t-1})."}</MathBlock></div>
 
 <Prose>{"The same parameters "}<InlineMath>{"\\theta"}</InlineMath>{" appear at every position. During one prediction, these weights stay fixed while the state changes. Training changes the weights between optimizer updates. Mixing up these two changes makes recurrent models seem more mysterious than they are."}</Prose>
+
+<Prose>A batch processes independent specimens together. We call the number of specimens B, also written N in tensor cost notation; both symbols mean the same batch size here. Different batch rows keep separate state histories.</Prose>
 
 <Prose>{"For our pen example, each "}<InlineMath>{"x_t"}</InlineMath>{" has two coordinates and "}<InlineMath>{"h_t"}</InlineMath>{" will have 32 learned features. A batch of 64 complete traces has shape "}<InlineMath>{"[64,8,2]"}</InlineMath>{": specimen, position, coordinate. At one position the state has shape "}<InlineMath>{"[64,32]"}</InlineMath>{". Rows belong to different specimens and must not exchange their histories."}</Prose>
 
@@ -49,7 +56,9 @@ export default {
 
 <H2>{"2. Build and train the simplest recurrence"}</H2>
 
-<Prose>{"A simple tanh RNN first mixes the new input with the old state, then applies a bounded nonlinear transformation:"}</Prose>
+<Prose>The shared update still needs a calculation. How can a new observation change the state while retaining a transformed contribution from the old one? First open a two-coordinate example so mixing is visible; then reduce it to one coordinate to calculate three positions by hand.</Prose>
+<RecurrentAffineFigure />
+<Prose>Follow the blue input (.4, −.2) into its amber matrix. Its row sums are .4 and −.04. The previous purple state (.1, .3) enters a different matrix, giving .09 and .12. Add matching row results and bias (.1, −.1): the preactivation is (.59, −.02). Tanh compresses those values into the next state, approximately (.529896, −.019997). Each row mixes source coordinates; it is not a gate that only scales the matching coordinate.</Prose>
 
 <div className="neural-equation"><MathBlock>{"a_t=W_xx_t+W_hh_{t-1}+b,\\qquad h_t=\\tanh(a_t)."}</MathBlock></div>
 
@@ -63,11 +72,15 @@ export default {
 
 <Prose>{"Use "}<InlineMath>{"x=[0.4,-0.2,0.7]"}</InlineMath>{", input weight "}<InlineMath>{"w_x=0.8"}</InlineMath>{", recurrent weight "}<InlineMath>{"w_h=0.6"}</InlineMath>{", bias "}<InlineMath>{"b=0.1"}</InlineMath>{", and "}<InlineMath>{"h_0=0"}</InlineMath>{". These are deliberately constructed numbers, not fitted handwriting features."}</Prose>
 
+<RecurrentForwardLab />
+<Prose>Each circuit row is one use of the same rule. The first adds .8 × .4 + .6 × 0 + .1 = .42, then gives tanh(.42) = .396930. That output becomes the next row's old state. Editing the middle observation changes that row and its descendants while the first row stays fixed. The table preserves the original hand calculation alongside your current edits.</Prose>
+
 <NeuralTable caption={"Three observations, one state number"} headers={[<>{"Position"}</>,<>{"New input"}</>,<>{"Input contribution "}<InlineMath>{"0.8x_t"}</InlineMath>{""}</>,<>{"Previous-state contribution "}<InlineMath>{"0.6h_{t-1}"}</InlineMath>{""}</>,<>{""}<InlineMath>{"h_t"}</InlineMath>{" after adding bias and tanh"}</>]} rows={[[<>{"1"}</>,<>{"0.4"}</>,<>{"0.32"}</>,<>{"0"}</>,<>{"0.396930"}</>],[<>{"2"}</>,<>{"−0.2"}</>,<>{"−0.16"}</>,<>{"0.238158"}</>,<>{"0.176297"}</>],[<>{"3"}</>,<>{"0.7"}</>,<>{"0.56"}</>,<>{"0.105778"}</>,<>{"0.644468"}</>]]} />
 
 <Prose>{"The second input is negative, yet the second state is positive. The state includes both the new observation and a transformed contribution from the past. It is not simply a copy of the current input."}</Prose>
 
-<RecurrentCreditLab />
+<Prose>What if the update rule itself changes? Keep the same observations and edit its three shared parameters below. These controls share your input edits with the preceding circuit; each weight is one number even when drawn at several positions.</Prose>
+<RecurrentParameterLab />
 
 <H3>{"Learning assigns credit to repeated uses of the same weight"}</H3>
 
@@ -79,6 +92,9 @@ export default {
 
 <Prose>{"Unroll the recurrence into three copies of the calculation. There are three state values, but still one shared input weight, one shared recurrent weight and one shared bias. "}<strong>{"Backpropagation through time (BPTT)"}</strong>{" is ordinary chain-rule backpropagation through this unrolled graph."}</Prose>
 
+<Prose>How do several uses train one weight? A gradient measures how the loss changes when a parameter changes. The original hand circuit below has one row of local contributions per position. Orange dashed arrows add contributions for the same parameter; they do not create independent weights. Read the columns as input weight, recurrent weight and bias, then follow each backwards contribution in the derivation.</Prose>
+<RecurrentCreditPicture />
+
 <Prose>{"Start with "}<InlineMath>{"\\partial L/\\partial h_3=h_3-y=0.344468"}</InlineMath>{". Since the derivative of tanh at "}<InlineMath>{"a_t"}</InlineMath>{" is "}<InlineMath>{"1-h_t^2"}</InlineMath>{", the credit arriving at the preactivation is"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\delta_t=\\frac{\\partial L}{\\partial h_t}(1-h_t^2)."}</MathBlock></div>
@@ -88,6 +104,9 @@ export default {
 <NeuralTable caption={"Learning assigns credit to repeated uses of the same weight"} headers={[<>{"Shared parameter"}</>,<>{"Contribution at step 3"}</>,<>{"At step 2"}</>,<>{"At step 1"}</>,<>{"Total"}</>]} rows={[[<>{""}<InlineMath>{"w_x"}</InlineMath>{""}</>,<>{"0.140978"}</>,<>{"−0.023416"}</>,<>{"0.023673"}</>,<>{"0.141234"}</>],[<>{""}<InlineMath>{"w_h"}</InlineMath>{""}</>,<>{"0.035506"}</>,<>{"0.046474"}</>,<>{"0"}</>,<>{"0.081979"}</>],[<>{""}<InlineMath>{"b"}</InlineMath>{""}</>,<>{"0.201397"}</>,<>{"0.117082"}</>,<>{"0.059181"}</>,<>{"0.377661"}</>]]} />
 
 <Prose>{"With learning rate "}<InlineMath>{"0.1"}</InlineMath>{", subtract "}<InlineMath>{"0.1"}</InlineMath>{" times each gradient. The updated parameters are approximately "}<InlineMath>{"(0.785877,0.591802,0.062234)"}</InlineMath>{"; recalculating the sequence gives loss "}<InlineMath>{"0.042839"}</InlineMath>{". The retained calculation agrees with automatic differentiation. This single successful step explains the mechanism; it does not establish that any learning rate will improve every step."}</Prose>
+
+<Prose>Now inspect backward contributions for this same current forward circuit. The three rows are three uses of the input weight, recurrent weight and bias; orange dashed arrows add them into one gradient. Changing only the target changes error and credit while leaving forward states fixed. A zero learning rate leaves the parameters unchanged.</Prose>
+<RecurrentCreditLab />
 
 <Prose>{"If there are losses at several positions, add each position's direct loss gradient to the gradient arriving from the future before propagating backward. The "}<a href={"/learn/path/full-curriculum/backpropagation-automatic-differentiation?module=deep-learning-fundamentals"}>{"Backpropagation & Automatic Differentiation lesson"}</a>{" supplies the general graph perspective."}</Prose>
 
@@ -109,21 +128,34 @@ export default {
 
 <Prose>{"Before looking at the learned gates, consider one coordinate:"}</Prose>
 
-<div className="neural-equation"><MathBlock>{"c_t=f_tc_{t-1}+i_tg_t,\\qquad h_t=o_t\\tanh(c_t)."}</MathBlock></div>
+
 
 <Prose>{"Here "}<InlineMath>{"f_t"}</InlineMath>{" controls retention, "}<InlineMath>{"i_t"}</InlineMath>{" controls writing, "}<InlineMath>{"g_t"}</InlineMath>{" proposes a signed value, and "}<InlineMath>{"o_t"}</InlineMath>{" controls how much of the transformed cell is exposed. Each symbol is one coordinate here; a real layer performs these operations component by component."}</Prose>
+
+<Prose>First isolate retention: multiply the old cell by a factor f between zero and one. The ⊗ node means multiplication. These ideal gate controls may reach zero and one exactly; a sigmoid from a finite learned preactivation only approaches those endpoints.</Prose>
+<LstmRetainLab />
+<Prose>Keeping .9 of the old cell .8 gives .72. A negative old cell stays negative: retention does not turn a stored sign into a probability. Next add a second branch: multiply a signed candidate g by write factor i, then join the terms at ⊕, the addition node.</Prose>
+<LstmMemoryLab />
 
 <Prose>{"If the old cell is "}<InlineMath>{"0.8"}</InlineMath>{", retention "}<InlineMath>{"f=0.9"}</InlineMath>{", input gate "}<InlineMath>{"i=0.2"}</InlineMath>{", candidate "}<InlineMath>{"g=-0.5"}</InlineMath>{", and output gate "}<InlineMath>{"o=0.6"}</InlineMath>{", then:"}</Prose>
 
 <ol start={1}><li>{"Keep "}<InlineMath>{"0.9\\times0.8=0.72"}</InlineMath>{" from the old cell."}</li><li>{"Write "}<InlineMath>{"0.2\\times(-0.5)=-0.10"}</InlineMath>{"."}</li><li>{"Add them to get "}<InlineMath>{"c=0.62"}</InlineMath>{"."}</li><li>{"Expose "}<InlineMath>{"h=0.6\\tanh(0.62)\\approx0.330677"}</InlineMath>{"."}</li></ol>
+<Prose>The last item is a separate read operation. Hold the stored cell at .62 to isolate it: pass it through tanh, then multiply by output factor o. The continuing cell rail and the hidden-output branch are different paths.</Prose>
+<LstmReadoutLab />
+<Prose>At o = .6 the hidden value is .330677. Changing this factor cannot change this step's stored cell, but it changes the hidden state that will help generate later gates. The two operations are written as:</Prose>
+<div className="neural-equation"><MathBlock>{"c_t=f_tc_{t-1}+i_tg_t,\\qquad h_t=o_t\\tanh(c_t)."}</MathBlock></div>
 
 <Prose>{"An output gate near zero can hide the cell from the current readout while leaving its stored value present. An input gate near zero can avoid writing a distracting candidate. The forget gate controls the old term; it does not itself decide what new value replaces it."}</Prose>
 
-<LstmMemoryLab />
+
 
 <H3>{"The gates are computed, not hand-selected during prediction"}</H3>
 
 <Prose>{"The standard non-peephole LSTM used here computes four affine transforms of the current input and previous hidden state:"}</Prose>
+
+<Prose>The gate generator reuses the RNN's affine mixing. Its row groups produce four vectors. Sigmoid, shown as σ, maps a number into (0,1) for the three factors i, f and o; tanh gives candidate g its possible negative sign.</Prose>
+<RecurrentGateFigure />
+<Prose>This two-hidden-coordinate cutaway has eight matrix rows: two per i, f, g and o group. Each wide matrix has two source-coordinate columns; the separate thin column is its bias vector. The input and previous hidden state enter their own amber matrices and biases. Matching rows add; the result splits into i, f, g and o groups. Apply σ to the factor groups and tanh to the candidate group. The equations give each group's full calculation. Those same rows are reused at the next position.</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\begin{aligned}\ni_t&=\\sigma(W_{xi}x_t+W_{hi}h_{t-1}+b_i),\\\\\nf_t&=\\sigma(W_{xf}x_t+W_{hf}h_{t-1}+b_f),\\\\\ng_t&=\\tanh(W_{xg}x_t+W_{hg}h_{t-1}+b_g),\\\\\no_t&=\\sigma(W_{xo}x_t+W_{ho}h_{t-1}+b_o).\n\\end{aligned}"}</MathBlock></div>
 
@@ -140,12 +172,18 @@ export default {
 <Prose>{"These are exact-formula illustrations, not measured gradients of trained networks. A positive forget bias can initially favor retention, but bias 1 does not by itself preserve a signal for hundreds of steps. To retain half over 100 fixed-factor steps requires "}<InlineMath>{"f=0.5^{1/100}\\approx0.993092"}</InlineMath>{", corresponding to sigmoid preactivation about 4.968. Real gates also depend on inputs and state."}</Prose>
 
 <LstmRetentionLab />
+<Prose>Retention affects a newly written value too. Switch deliberately to f = .99, a 100-position path and starting cell 1. A signed write at position k joins the cell once, then crosses 100 − k remaining retention multiplications. Its final contribution is write × .99<sup>100−k</sup>. A later write crosses fewer factors.</Prose>
+<LstmWriteRetentionLab />
 
 <Prose>{"This controllable additive route helps with learning long dependencies. It is not a promise that every LSTM gradient stays constant: gates can close, output tanh can saturate, and the complete state has additional derivative paths."}</Prose>
 
 <H2>{"4. GRU: blend old state with a new proposal"}</H2>
 
 <Prose>{"A GRU carries one state vector. Define its update gate "}<InlineMath>{"z_t"}</InlineMath>{" as the fraction of old state retained:"}</Prose>
+
+<Prose>How much of an old value should a proposal replace? Our constructed coordinate has old state .8 and candidate −.4. The branches use z for the old value and 1 − z for the proposal, so their fractions add to one.</Prose>
+<GruBlendLab />
+<Prose>At z = .75 the old branch contributes .6 and the proposal −.1, giving .5. At z = one the proposal branch is closed: candidate edits have no effect.</Prose>
 
 <div className="neural-equation"><MathBlock>{"h_t=z_t\\odot h_{t-1}+(1-z_t)\\odot n_t."}</MathBlock></div>
 
@@ -157,17 +195,25 @@ export default {
 
 <Prose>{"For the PyTorch variant used in the program:"}</Prose>
 
+<Prose>The reset and retain factors come from sigmoid applied to summed input and hidden affine rows, just as the LSTM's factors did. Its candidate takes a different route: first form the hidden affine contribution, including its hidden bias, then multiply matching coordinates by reset r. The input affine contribution joins only after that multiplication.</Prose>
+<GruCandidateFigure />
+<Prose>Blue x enters the input candidate rows Wₓₙ and bias bₓₙ. Purple old h enters hidden rows Wₕₙ and bias bₕₙ. The reset vector is itself computed by a sigmoid gate. The ⊙ node scales matching hidden-affine coordinates, then ⊕ adds the untouched input-affine result and tanh forms candidate n. Candidate n goes into the z-controlled blend already taught above. Neither closing r nor changing n directly removes the retained z h branch.</Prose>
+
 <div className="neural-equation"><MathBlock>{"\\begin{aligned}\nr_t&=\\sigma(W_{xr}x_t+b_{xr}+W_{hr}h_{t-1}+b_{hr}),\\\\\nz_t&=\\sigma(W_{xz}x_t+b_{xz}+W_{hz}h_{t-1}+b_{hz}),\\\\\nn_t&=\\tanh(W_{xn}x_t+b_{xn}+r_t\\odot(W_{hn}h_{t-1}+b_{hn})).\n\\end{aligned}"}</MathBlock></div>
 
 <Prose>{"The "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html"}>{"official GRU documentation"}</a>{" specifies this reset-after-recurrent-affine form. The "}<a href={"https://arxiv.org/abs/1406.1078"}>{"original encoder–decoder paper"}</a>{" uses a reset-before-matrix form. They are not interchangeable when copying weights between implementations."}</Prose>
 
 <Prose>{"To see the difference without an entire network, let "}<InlineMath>{"h=[1,2]^T"}</InlineMath>{", "}<InlineMath>{"r=[0.2,0.8]^T"}</InlineMath>{", "}<InlineMath>{"W=\\begin{bmatrix}1&2\\\\3&4\\end{bmatrix}"}</InlineMath>{", and recurrent bias "}<InlineMath>{"b=[0.5,-0.5]^T"}</InlineMath>{". Then"}</Prose>
 
+<GruResetLab />
+<Prose>Left: reset scales the sources to (.2, 1.6) before their outgoing wires. The first destination adds 1 × .2 + 2 × 1.6 + .5 = 3.9. Right: the unscaled sources first give 1 × 1 + 2 × 2 + .5 = 5.5, then reset gives .2 × 5.5 = 1.1. The second destination follows the other wires. These are recurrent contributions before the input-side term and final candidate tanh.</Prose>
+
 <div className="neural-equation"><MathBlock>{"W(r\\odot h)+b=[3.9,6.5]^T,\\qquad\nr\\odot(Wh+b)=[1.1,8.4]^T."}</MathBlock></div>
 
 <Prose>{"Multiplying individual coordinates before mixing them is a different operation from scaling the mixed outputs. The recurrent candidate bias is also inside the reset multiplication in the PyTorch form."}</Prose>
 
-<GruResetLab />
+<Prose>Which learned entry makes the operations differ? This editor changes one of the same matrix or hidden-bias entries and shares the reset factors above. Remove both off-diagonal weights and both biases to make the diagonal zero-bias comparison agree; then restore a bias or mixing entry to locate the changed path.</Prose>
+<GruMixingLab />
 
 <Prose>{"Matched at the same hidden width, a GRU has three affine groups and a standard LSTM has four. That gives a smaller recurrent parameter count under the same bias convention. It does not establish a universal runtime or accuracy ranking, and a GRU is not literally an LSTM with one gate deleted."}</Prose>
 
@@ -184,6 +230,9 @@ export default {
 <Prose>{"The "}<a href={"/learn-assets/rnns-lstms-grus/pen-trajectories.csv"}>{"offline CSV"}</a>{", "}<a href={"/learn-assets/rnns-lstms-grus/data-provenance.md"}>{"provenance"}</a>{" and "}<a href={"/learn-assets/rnns-lstms-grus/data-extraction.json"}>{"exact extraction record"}</a>{" preserve the source rows, attribution and hashes. No pretrained model or new data download is needed to run the lesson experiment."}</Prose>
 
 <H3>{"Fix the comparison before fitting"}</H3>
+<Prose>How does a recurrent component become a digit classifier? Separate the observations, final state, classification head and training label. The symbol ℓ followed by a digit names that digit's raw score:</Prose>
+<RecurrentClassifierFigure />
+<Prose>Eight blue two-coordinate columns enter repeated uses of one rule. The final purple vector has 32 coordinates; its ellipsis hides middle coordinates, not extra positions. A learned linear head makes ten raw scores, one per digit. Softmax makes reported probabilities. The true digit takes a separate route into cross-entropy alongside raw scores. It never enters the recurrent update.</Prose>
 
 <Prose>{"All three recurrent models use one unidirectional layer, input width 2, hidden width 32, and a linear ten-class head reading the final hidden output. They start at zero state for every specimen. Train each for 500 Adam updates at learning rate 0.005, batch size 64 sampled with replacement, and cross-entropy on the final digit. Clip the global gradient norm at 1 before each update. There is no dropout, augmentation, early stopping or best-seed selection."}</Prose>
 
@@ -193,7 +242,7 @@ export default {
 
 <H3>{"Complete program"}</H3>
 
-<Prose>{"Create a Python environment with NumPy, PyTorch and scikit-learn, then save the CSV beside the following file. The author run used Python 3.12.14, NumPy 2.3.5, PyTorch 2.14.0+cpu and scikit-learn 1.9.1. Run:"}</Prose>
+<Prose>{"Create a Python environment with NumPy, PyTorch and scikit-learn, then save the CSV beside the following file. The recorded run used Python 3.12.14, NumPy 2.3.5, PyTorch 2.14.0+cpu and scikit-learn 1.9.1. Run:"}</Prose>
 
 <CodeBlock language={"text"}>{"python pen-sequence-learning.py"}</CodeBlock>
 
@@ -230,14 +279,17 @@ export default {
 <Prose>{"The hidden-state readout after each intermediate point is a view into the same fitted classifier. It was trained for the final point and receives coordinates preprocessed from the complete trace. Treat those intermediate readouts as a mechanism illustration, not validated early-recognition probabilities."}</Prose>
 
 <H2>{"6. State belongs to a stream"}</H2>
+<Prose>The classifier started each specimen at zero. What if successive chunks belong to one stream? A boundary can keep the state value, cut its backward path, or replace it with zero. Numbered cells below are positions; the amber vertical line marks the boundary. Orange dashed arrows carry credit from a suffix loss backward toward earlier inputs.</Prose>
+<RecurrentBoundaryFigure />
+<Prose>Carry connects both paths. Detach carries the same value but stops backward credit at the boundary. Reset substitutes zero for the incoming state and cuts its credit too. These operations differ even when code for them appears near the same boundary.</Prose>
 
 <Prose>{"If five observations belong to one continuous sequence, processing the first two and carrying their final state into the next three should reproduce processing all five together, assuming the same weights and deterministic evaluation behavior. Splitting a file into chunks does not create a new phenomenon in the data."}</Prose>
 
-<Prose>{"Resetting at the boundary is different: it removes the preceding context. Detaching at the boundary is different again: it preserves the numerical state but prevents a later loss from sending gradients through the earlier chunk."}</Prose>
+
 
 <NeuralTable caption={"6. State belongs to a stream"} headers={[<>{"Boundary operation"}</>,<>{"Forward state value"}</>,<>{"Credit to the earlier computation"}</>]} rows={[[<>{"Carry state"}</>,<>{"Preserved"}</>,<>{"Preserved if graph retained"}</>],[<>{"Carry detached state"}</>,<>{"Preserved"}</>,<>{"Cut at the boundary"}</>],[<>{"Reset state to zero"}</>,<>{"Replaced"}</>,<>{"Earlier state no longer used"}</>]]} />
 
-<Prose>{"For a constructed five-observation GRU fixture, whole-sequence and carried-chunk outputs agree exactly in the author calculation. Resetting changes the last hidden output by up to 0.046305. Detaching preserves the forward outputs exactly, but the later loss's gradients with respect to the first two inputs become zero."}</Prose>
+<Prose>{"For a constructed five-observation GRU fixture, whole-sequence and carried-chunk outputs agree exactly in the retained calculation. Resetting changes the last hidden output by up to 0.046305. Detaching preserves the forward outputs exactly, but the later loss's gradients with respect to the first two inputs become zero."}</Prose>
 
 <Prose>{"This is "}<strong>{"truncated BPTT"}</strong>{" when applied during training across chunk boundaries. It bounds how far the current loss directly backpropagates. It does not reset memory or prove that the model cannot learn any dependency longer than a chunk. The carried states and shared parameters can still support indirect learning; the truncated gradient differs from the full-sequence objective's gradient."}</Prose>
 
@@ -248,12 +300,15 @@ export default {
 <Prose>{"After correcting an earlier observation, recompute the affected suffix from a valid prior state. A state cached after the old observation no longer represents the corrected prefix. A model-weight update can also invalidate a stored state if exact agreement with a fresh run under the new model is required. Practical training often carries states across parameter updates as an approximation; it should not be described as the exact full-sequence computation."}</Prose>
 
 <H3>{"Global gradient clipping"}</H3>
+<Prose>We changed where credit travels. Clipping instead changes a calculated gradient's magnitude. Two gradient coordinates (3,4) have Euclidean length 5. Scaling both by one fraction preserves direction; clipping them independently need not.</Prose>
+<RecurrentClippingLab />
+<Prose>The purple vector is (3,4), the orange dashed vector is globally scaled, and the amber vector is the fixed coordinate-clipped contrast (2,2). Threshold 2 gives scale 2/5 and coordinates (1.2,1.6). The formula expresses the shared scaling:</Prose>
 
 <Prose>{"Treat all parameter gradients as one long vector "}<InlineMath>{"g"}</InlineMath>{". For threshold "}<InlineMath>{"\\tau>0"}</InlineMath>{","}</Prose>
 
 <div className="neural-equation"><MathBlock>{"g_{\\text{clipped}}=g\\min\\left(1,\\frac{\\tau}{\\|g\\|_2}\\right)"}</MathBlock></div>
 
-<Prose>{"for a nonzero finite gradient; leave the zero vector unchanged. The vector "}<InlineMath>{"[3,4]"}</InlineMath>{" has norm 5. At threshold 2, global clipping gives "}<InlineMath>{"[1.2,1.6]"}</InlineMath>{", preserving its direction. Clipping coordinates individually to "}<InlineMath>{"[-2,2]"}</InlineMath>{" gives "}<InlineMath>{"[2,2]"}</InlineMath>{", a different direction."}</Prose>
+<Prose>Apply the formula to a nonzero finite gradient; leave the zero vector unchanged. Its single scale multiplies every supplied parameter gradient, rather than clipping each coordinate independently.</Prose>
 
 <Prose>{"Log the norm before clipping so that persistent oversized updates are visible. Clipping does not fix nonfinite gradients or recover missing long-range credit. In the handwriting runs, clipping was activated 136, 245 and 10 times for seed-1 RNN, LSTM and GRU; those counts describe this optimization setup, not an intrinsic ranking of gate quality."}</Prose>
 
@@ -265,6 +320,12 @@ export default {
 
 <Prose>{"For a right-padded unidirectional recurrence, valid outputs before the padding are unaffected by later padding. But reading the final padded position gives the state after extra updates. A backward recurrence encounters right padding before it reaches valid observations, so even its valid outputs can be contaminated."}</Prose>
 
+<Prose>{"Read the dependencies for a four-symbol sequence A B C D:"}</Prose>
+
+<RecurrentDirectionsFigure />
+<Prose>The upper arrow reads A through D, ending with its full forward history at D. The lower arrow reads D through A, ending with its full backward history at A. Both enter the concatenated endpoint vector. Reading both halves at D would instead combine the whole forward summary with a backward summary that has only read D.</Prose>
+
+
 <Prose>{"Packing tells the native recurrent module each sequence's actual length. Here is a complete independent API example. The short sequences are constructed to teach batching, not a new dataset experiment:"}</Prose>
 
 <RecurrentPaddingLab />
@@ -273,15 +334,17 @@ export default {
 
 <Prose>{"The summary concatenates the final forward and final backward states. It does not take both halves of the output at the last valid index: at that index, the backward component has only just started reading from the end."}</Prose>
 
-<Prose>{"Read the dependencies for a four-symbol sequence A B C D:"}</Prose>
-
 <NeuralTable caption={"7. Different lengths, stacks and directions"} headers={[<>{"Output position"}</>,<>{"Forward component has read"}</>,<>{"Backward component has read"}</>]} rows={[[<>{"A"}</>,<>{"A"}</>,<>{"D C B A"}</>],[<>{"B"}</>,<>{"A B"}</>,<>{"D C B"}</>],[<>{"C"}</>,<>{"A B C"}</>,<>{"D C"}</>],[<>{"D"}</>,<>{"A B C D"}</>,<>{"D"}</>]]} />
 
-<Prose>{"The last row pairs a complete forward history with a one-symbol backward history. To obtain both complete histories, use the forward final state from D and the backward final state from A. Native "}<code>{"h_n"}</code>{" gathers these directional endpoints for you. The table describes information dependencies; the hidden values are learned summaries, not literal stored strings."}</Prose>
+<Prose>Native h_n gathers these directional endpoints in its layer/direction axis. The table describes dependencies; hidden states are learned summaries, not literal strings containing A, B, C and D.</Prose>
 
 <Prose>{"The "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html"}>{"PyTorch LSTM API"}</a>{" documents the hidden/cell shapes, projections and bidirectional final-state distinction. With "}<code>{"batch_first=True"}</code>{", inputs and sequence outputs use batch first, but final hidden states still use "}<InlineMath>{"[\\text{layers}\\times\\text{directions},B,H]"}</InlineMath>{". An LSTM additionally returns a cell-state tensor. With a projection, hidden width and cell width can differ."}</Prose>
 
-<Prose>{"In a stack, layer 2 consumes layer 1's output at each position. This adds depth across layers as well as the recurrence across positions. In a bidirectional stack, that input has both directions' features. Do not simply multiply a one-layer parameter count by the number of layers without checking the next layer's input width."}</Prose>
+<Prose>Adding a layer creates a second direction of computation: depth, separate from sequence position.</Prose>
+<RecurrentStackFigure />
+<Prose>Each horizontal row is a recurrent layer sharing its own parameters across positions. A vertical edge sends layer 1's output into layer 2 at the same position. Native inter-layer dropout acts on vertical connections, excluding the last layer's outputs. A one-layer model has no intervening edge. A bidirectional lower layer sends two hidden vectors along each vertical connection, so the next input width is 2H.</Prose>
+
+<Prose>Layer depth and bidirectionality change input widths. Recount the next layer's matrices instead of multiplying one layer's count by the stack depth; its input may have both directions' features.</Prose>
 
 <Prose>{"Bidirectional models may use future observations within a completed input. That can be useful for offline labeling or an encoder that receives a whole source sequence. It is incompatible with claiming a causal output at position "}<InlineMath>{"t"}</InlineMath>{" before later observations exist. Separate the deployment question from a library flag."}</Prose>
 
@@ -289,7 +352,16 @@ export default {
 
 <H2>{"Translate gate equations into a reusable recurrent implementation"}</H2>
 
-<Prose>{"The complete "}<a href={"/learn-assets/rnns-lstms-grus/recurrent-mechanics.py"}>{"recurrent-mechanics.py"}</a>{" is the scratch cell owner: "}<code>{"manual_sequence"}</code>{" evaluates all RNN, LSTM and GRU gate equations in NumPy using the actual native parameter tensors. The complete "}<a href={"/learn-assets/rnns-lstms-grus/pen-sequence-learning.py"}>{"pen-sequence-learning.py"}</a>{" is the ordinary "}<code>{"nn.RNN"}</code>{", "}<code>{"nn.LSTM"}</code>{" and "}<code>{"nn.GRU"}</code>{" model route, with data preparation, loss, optimizer and evaluation. "}<code>{"scalar_credit"}</code>{" opens temporal parameter sharing and its accumulated derivative; the implemented "}<a href={"/learn/path/full-curriculum/backpropagation-automatic-differentiation"}>{"Backpropagation owner"}</a>{" owns general reverse-mode machinery."}</Prose>
+<Prose>The native layer in the pen experiment hides the gate operations inside a module. How can we open those operations while retaining batching, gradients and reusable state? The following complete implementation builds the three cells from tensor affine operations and activations. It uses tensor autograd from the earlier <a href="/learn/path/full-curriculum/backpropagation-automatic-differentiation?module=deep-learning-fundamentals">Backpropagation & Automatic Differentiation lesson</a>, rather than rebuilding reverse-mode differentiation.</Prose>
+<Prose>Inputs have shape [batch, positions, input features]. A state has shape [batch, hidden features], with a second cell array for LSTM. The gate row groups have size H, where H is hidden width: one group for RNN, four in i/f/g/o order for LSTM and three in r/z/n order for GRU. Each group keeps separate input and hidden biases. The recurrent parameter names match a one-layer unidirectional native module so that matched weights can be copied exactly.</Prose>
+<RecurrentProgram file="recurrent-cells.py" title="Explicit differentiable batched recurrent cells" />
+<Prose>Read the computation in dependency order. First project the entire input tensor: observations do not depend on previous hidden states, so their input-side matrix work can run together. Then unbind the position axis and loop over that unavoidable state dependence. Each iteration computes the hidden affine result. RNN adds and applies tanh. LSTM splits the four row groups, retains and writes its cell, then exposes its hidden state. GRU applies reset to the hidden candidate affine—including its hidden bias—before adding the input candidate term. The new state is reused in the next iteration.</Prose>
+<Prose>This route provides control over the equations and carries a differentiable state. It is an inspectable implementation, not a claim to beat native fused kernels. Preprojection allocates [batch, positions, groups × H] intermediate storage; for a genuinely incremental source, project only the arriving chunk. Setting return_sequence=False avoids collecting the hidden-output list, but it does not discard autograd history while gradients are enabled. Use no_grad() for inference that needs no reverse graph.</Prose>
+<Prose>The runnable example deliberately switches to a tiny two-coordinate, three-position input with hidden width 3. It starts the LSTM cell at .2, adds an ordinary two-class affine head and computes cross-entropy. With the stated seed and recorded PyTorch snapshot its final hidden vector is approximately (−.093299, −.142901, .234891), its final cell is (−.170366, −.273955, .549917), and the loss is .682833. The printed 12 × 2 input-weight gradient has one row per gate/hidden coordinate and one column per input coordinate.</Prose>
+<CodeBlock language="text" filename="run-recurrent-cells.txt">{"python recurrent-cells.py"}</CodeBlock>
+<Prose>To use the ordinary native route instead, create the corresponding nn.RNN, nn.LSTM or nn.GRU with batch_first=True, copy the same state dictionary, and add the native layer axis to the state. Native h has shape [1,batch,H] here, whereas the explicit cell accepts [batch,H]. With nonzero initial states and both biases, the explicit and native float64 calculations agree within numerical tolerance for every output, final state, input gradient, initial-state gradient and parameter gradient. Processing seven positions as chunks 3,3,1 gives the same forward results when the final state is carried.</Prose>
+
+<Prose>An independent NumPy route makes the forward arithmetic inspectable without autograd: <a href="/learn-assets/rnns-lstms-grus/recurrent-mechanics.py">recurrent-mechanics.py</a> evaluates all three gate equations using native parameter tensors and opens the scalar temporal derivative. The complete <a href="/learn-assets/rnns-lstms-grus/pen-sequence-learning.py">pen-sequence-learning.py</a> supplies ordinary native training, data preparation, loss, optimizer and evaluation. The routes implement the same stated conventions; their different roles let you check arithmetic, modify the cell or use the optimized library deliberately.</Prose>
 
 <RecurrentProgram start="def manual_sequence" end="def scalar_credit" title="Read the explicit NumPy RNN, LSTM and GRU cell equations" />
 
@@ -297,11 +369,11 @@ export default {
 
 <RecurrentProgram start="def scalar_credit" end="def state_and_padding" title="Read the scratch temporal gradient and matched autograd check" />
 
-<Prose>{"For T steps, batch B, input I and hidden H, dense recurrence costs O(TBH(I+H)) up to the gate count. A streaming forward pass retains O(BH) hidden state (twice that for LSTM), whereas full backpropagation retains a history proportional to T. "}<code>{"manual_sequence"}</code>{" deliberately records histories for explanation; "}<code>{"nn.*"}</code>{" provides the usual batched kernels and packed-sequence route. Returned states belong to specific sequences, so reordering a batch without reordering its states is a semantic error."}</Prose>
+<Prose>{"For T positions, batch B (also N), input width I and hidden width H, dense recurrence costs O(TBH(I+H)) up to the gate count. A streaming forward pass retains O(BH) hidden state (twice that for LSTM), whereas full backpropagation retains a history proportional to T. "}<code>{"manual_sequence"}</code>{" deliberately records histories for explanation; "}<code>{"nn.*"}</code>{" provides the usual batched kernels and packed-sequence route. Returned states belong to specific sequences, so reordering a batch without reordering its states is a semantic error."}</Prose>
 
 <RecurrentProgram title="Read all native parity, chunk, padding and derivative checks" />
 
-<Prose>{""}<strong>{"Changed-code task:"}</strong>{" process a saved trajectory in chunks of5 instead of one whole tensor. Carry the native hidden state between chunks, collect every output and concatenate along time. Compare that with one full pass using the same weights, evaluation mode and no stochastic inter-layer dropout. For LSTM carry the pair "}<code>{"(h,c)"}</code>{". Then insert "}<code>{"detach()"}</code>{" at chunk boundaries during training and explain which equality should remain and which derivative comparison should stop holding."}</Prose>
+<Prose>{""}<strong>{"Changed-code task:"}</strong>{" process a saved trajectory in chunks of 5 instead of one whole tensor. Carry the native hidden state between chunks, collect every output and concatenate along time. Compare that with one full pass using the same weights, evaluation mode and no stochastic inter-layer dropout. For LSTM carry the pair "}<code>{"(h,c)"}</code>{". Then insert "}<code>{"detach()"}</code>{" at chunk boundaries during training and explain which equality should remain and which derivative comparison should stop holding."}</Prose>
 
 <details>
 
@@ -323,6 +395,10 @@ export default {
 
 <H3>{"How much does the model cost?"}</H3>
 
+<Prose>The scratch loop separated one current state from a saved output history. What grows when the input gets longer? The upper grid below is one current batch's hidden state. The lower stack saves comparable intermediate arrays at successive positions for differentiation; it is a schematic of storage, not a measured memory benchmark.</Prose>
+<RecurrentCostFigure />
+<Prose>State width stays fixed during inference, regardless of prefix length. Full backpropagation needs intermediate operations from many positions, so training history grows with sequence length. An LSTM carries a second cell array as well. Parameter storage is a separate cost: matrices are shared across positions and are counted once.</Prose>
+
 <Prose>{"For one layer, one direction, input width "}<InlineMath>{"D"}</InlineMath>{", hidden width "}<InlineMath>{"H"}</InlineMath>{", and two native bias vectors per affine group:"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\begin{aligned}\n\\text{RNN parameters}&=H(D+H+2),\\\\\n\\text{GRU parameters}&=3H(D+H+2),\\\\\n\\text{LSTM parameters}&=4H(D+H+2).\n\\end{aligned}"}</MathBlock></div>
@@ -337,6 +413,10 @@ export default {
 
 <Prose>{"If gate values and "}<InlineMath>{"h_{t-1}"}</InlineMath>{" are held fixed in a non-peephole cell, the derivative of "}<InlineMath>{"c_t"}</InlineMath>{" with respect to "}<InlineMath>{"c_{t-1}"}</InlineMath>{" is "}<InlineMath>{"\\operatorname{diag}(f_t)"}</InlineMath>{". That is the useful direct cell path."}</Prose>
 
+<Prose>What route did a forget-factor plot leave out? A cell perturbation can also change the hidden readout, which changes the next gates.</Prose>
+<LstmJacobianFigure />
+<Prose>The upper grey route carries a cell perturbation through two direct retention steps. The diagonal route changes the intermediate hidden output, then the later cell through its gates. The labelled coefficients come from the constructed local derivative below. Only these two cell-to-final-cell routes are highlighted; h₀ and h₂ locate the other components of the complete state. Their routes remain in the full derivative matrix.</Prose>
+
 <Prose>{"For the complete recurrence, the state is "}<InlineMath>{"(h,c)"}</InlineMath>{". A change in earlier cell state can also affect earlier hidden output and hence subsequent gates. The full local derivative is a block matrix:"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\frac{\\partial(h_t,c_t)}{\\partial(h_{t-1},c_{t-1})}\n=\n\\begin{bmatrix}\n\\partial h_t/\\partial h_{t-1}&\\partial h_t/\\partial c_{t-1}\\\\\n\\partial c_t/\\partial h_{t-1}&\\partial c_t/\\partial c_{t-1}\n\\end{bmatrix}."}</MathBlock></div>
@@ -347,23 +427,35 @@ export default {
 
 <Prose>{"The forget value 0.746494 appears in the lower-right entry. It is not the whole matrix. Products of these complete Jacobians describe total state sensitivities. A plot of "}<InlineMath>{"f^T"}</InlineMath>{" must therefore be labeled a direct-path, fixed-gate illustration rather than a measured full LSTM gradient."}</Prose>
 
+<Prose>To derive rather than memorize those entries, let a prime mean differentiation with respect to the previous hidden coordinate h, holding the previous cell c fixed. The constructed cell uses i = σ(.2 + .3h), f = σ(1 + .4h), g = tanh(−.1 + .7h), and o = σ(.5 − .2h). Thus i′ = .3i(1−i), f′ = .4f(1−f), g′ = .7(1−g²), and o′ = −.2o(1−o). Differentiate the retain/write equation by the product rule: C<sub>h</sub> = f′c + i′g + ig′, while C<sub>c</sub> = f. Differentiate the readout next: H<sub>h</sub> = o′tanh(C) + o(1−tanh²(C))C<sub>h</sub>, and H<sub>c</sub> = o(1−tanh²(C))f. Here C and H name the newly computed cell and hidden output, and subscripts name which old coordinate is perturbed. Evaluate at h = .2 and c = .8 to obtain the displayed matrix. The mechanics program checks these derivatives with autograd.</Prose>
+
 <Prose>{"Track a tiny cell perturbation through two steps to see the extra route. There is a direct path c→c→c and a second path c→h→c. If, as a constructed local linear illustration, both steps had exactly the displayed rounded Jacobian, the final cell multiplier would be "}<InlineMath>{"0.746494^2+0.458119\\times0.318697\\approx.703254"}</InlineMath>{". Retaining only the direct route gives approximately .557253. The added term is hidden-state feedback into the next cell. Actual gates change with the trajectory, so the complete calculation multiplies the successive actual Jacobians; it does not simply square this one example everywhere."}</Prose>
 
 <H3>{"A matrix's eigenvalues are not the whole temporal story"}</H3>
 
-<Prose>{"For tanh, "}<InlineMath>{"\\|J_t\\|_2\\leq\\|W_h\\|_2"}</InlineMath>{". If every local Jacobian norm is bounded by a common "}<InlineMath>{"q<1"}</InlineMath>{", the product norm is at most "}<InlineMath>{"q^{T-k}"}</InlineMath>{". This is a sufficient contraction condition, not a necessary diagnosis for every trajectory."}</Prose>
+<Prose>{"A Jacobian is the matrix that maps a small state perturbation to its next-step perturbation. Its operator norm measures the largest possible stretching of a unit perturbation. For tanh, "}<InlineMath>{"\\|J_t\\|_2\\leq\\|W_h\\|_2"}</InlineMath>{". If every local Jacobian norm is bounded by a common "}<InlineMath>{"q<1"}</InlineMath>{", the product norm is at most "}<InlineMath>{"q^{T-k}"}</InlineMath>{". This is a sufficient contraction condition, not a necessary diagnosis for every trajectory."}</Prose>
 
+<Prose>An eigenvalue describes a direction that a matrix maps back onto that same direction, scaled. What if consecutive state transformations stretch different directions? In this constructed two-dimensional example, grey axes use an equal scale. A sends the upward unit vector rightward with length 2; B sends that rightward vector upward with length 4. These are example linear maps, not the fitted pen model's derivatives.</Prose>
+<RecurrentDirectionProductFigure />
 <Prose>{"Time-varying matrices can behave very differently from repeating one fixed matrix. Consider"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"A=\\begin{bmatrix}0&2\\\\0&0\\end{bmatrix},\\quad\nB=\\begin{bmatrix}0&0\\\\2&0\\end{bmatrix}."}</MathBlock></div>
 
 <Prose>{"Each has only zero eigenvalues, but "}<InlineMath>{"BA=\\operatorname{diag}(0,4)"}</InlineMath>{" amplifies one direction. This constructed counterexample explains why inspecting each step's spectral radius is insufficient for a temporal product. It is not a claim that these are the Jacobians of our fitted pen model."}</Prose>
 
-<Prose>{"Follow the direction as well as the magnitude. A maps the vertical unit vector into a horizontal vector of length 2; B maps that horizontal vector into a vertical vector of length 4. A would destroy its own output if repeated alone. Alternating with B avoids that destruction. This is why the sequence of compatible stretching directions matters beyond the eigenvalues of each isolated step."}</Prose>
+<Prose>Repeating A alone would destroy its horizontal output, but B turns it into an upward vector that A can stretch again. The sequence of compatible directions matters; each isolated matrix's eigenvalues omit that interaction.</Prose>
 
-<RecurrentDirectionProductFigure />
+
 
 <H3>{"Initialization, regularization and variants"}</H3>
+
+<Prose>Before changing the architecture, distinguish two ways to shorten the backward path. Ordinary truncated BPTT deterministically drops paths crossing a detach boundary, which changes the gradient estimate. Randomly choosing a boundary does not itself repair that bias. A path's survival probability also matters.</Prose>
+<RecurrentTruncationFigure />
+<Prose>Call one path's full derivative contribution g. If it survives with probability .5, doubling its surviving value gives 2g; a dropped path contributes zero. The mean is .5 × 2g + .5 × 0 = g. Without doubling, the mean would be .5g. This constructed one-path example teaches inverse-probability correction, not a complete training algorithm. <a href="https://arxiv.org/abs/1705.08209">Tallec and Ollivier's ARTBP</a> develops randomized truncation with correction. Random survival also increases variability, so unbiasedness alone is not a guarantee of efficient learning or convergence. The chunk task above implements ordinary detach-based truncation.</Prose>
+
+<Prose>A gate variant changes the forward rule instead. Standard LSTM can retain and write independently. What if its write factor is tied to 1 − f? The two circuits below hold old cell .8, candidate −.5 and retention .9 fixed; only the write rule changes.</Prose>
+<div className="flow-columns-2"><LstmCellDrawing read={false} /><LstmCellDrawing read={false} input={.1} /></div>
+<Prose>Left: independent i = .2 writes −.1 and gives cell .62. Right: coupled i = 1 − f = .1 writes −.05 and gives .67. Coupling makes the old/candidate weights sum to one, limiting independent retention and writing decisions. This contrasts one constructed update; it does not settle which variant will train best. <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Olah's variant discussion</a> connects the coupled rule to the basic cell diagram.</Prose>
 
 <Prose>{"Orthogonal recurrent initialization can preserve norms for a linear transformation at initialization, but tanh derivatives and training updates still matter. The "}<a href={"/learn/path/full-curriculum/weight-initialization-xavier-kaiming-p?module=deep-learning-fundamentals"}>{"initialization lesson"}</a>{" explains the broader variance and singular-value picture."}</Prose>
 
@@ -373,7 +465,15 @@ export default {
 
 <Prose>{"Peephole LSTMs let gates inspect cell state; projected LSTMs use a narrower hidden output than their cell width. These are concrete architectural choices, not synonyms for every LSTM. More specialized descendants appear later in the module."}</Prose>
 
+<Prose>What if a gate needs to inspect a stored value hidden from the readout? A peephole adds a direct cell-to-gate connection.</Prose>
+<LstmPeepholeFigure />
+<Prose>This peephole-edge cutaway highlights the added cell connections. Every gate, including the output gate, still receives the ordinary current-input and previous-hidden affine terms from the earlier gate generator; those unchanged paths are omitted here. Previous c enters input and forget gates before writing; updated c enters the output gate after writing. Using the old cell everywhere would implement a different rule. <a href="https://jmlr.org/papers/volume3/gers02a/gers02a.pdf">Gers, Schraudolph and Schmidhuber</a> describe this architecture and its historical training method.</Prose>
+
 <Prose>{"A peephole can let a gate react to a stored quantity even when the output gate has hidden it from h. For a constructed forget rule "}<InlineMath>{"f=\\sigma(c_{\\rm old})"}</InlineMath>{", cell values +2 and −2 produce factors about .881 and .119 despite an identical hidden output of zero. This is a direct cell-to-gate connection; the standard non-peephole equations above do not contain it. Changing that connection also changes the derivative paths."}</Prose>
+
+<Prose>A peephole changes what gates can inspect. A projection addresses a different question: can a wide stored cell communicate through a narrower hidden vector?</Prose>
+<LstmProjectionFigure />
+<Prose>The 32 cell coordinates remain stored. Tanh and the output gate first expose 32 values, then an amber learned projection mixes them into 12 hidden coordinates. Those 12 enter the next gate generator and classifier. The drawing uses the same cell pitch, so the narrower communicated width is visible.</Prose>
 
 <Prose>{"A projection instead controls the cost of communicating state. With cell width H=32 and projected hidden width P=12, the ordinary gated cell first produces a 32-vector, then a learned 12×32 matrix forms the hidden output used by the next step and readout. The cell still carries 32 values. For input width D=2 and the two-bias native convention, the single-layer recurrent parameter count is "}<InlineMath>{"4H(D+P+2)+PH=2,432"}</InlineMath>{", compared with 4,608 without projection; a ten-class head now adds 130 rather than 330. The 12-dimensional feedback is a bottleneck, so a smaller count does not imply equal accuracy. The linked native LSTM documentation gives the distinct hidden/cell shapes and projection parameter explicitly."}</Prose>
 
@@ -483,7 +583,7 @@ export default {
 
 <div className="lesson-exercise" data-lesson-exercise=""><H3>{"6. Padding changes the wrong result"}</H3>
 
-<Prose>{"You batch sequences of lengths 4 and 2 with right padding. You only change the second sequence's padded values. Predict the effect on its valid forward outputs, its padded final hidden state, and its valid backward outputs."}</Prose>
+<Prose>{"You batch sequences of lengths 4 and 2 with right padding. Change only the second sequence's padded values. Run and explain the effects on its valid forward outputs, its padded final hidden state, and its valid backward outputs."}</Prose>
 
 <details>
 
@@ -541,7 +641,8 @@ export default {
 
 </details>
 
-<Prose>{"You are ready for the next topic when you can distinguish weights from state, execute a gated update, explain a shared-weight gradient, and keep state ownership, sequence lengths and available inputs consistent with the task. The optional full-Jacobian analysis can be revisited as you study more specialized recurrent models."}</Prose></div></section>
+</div>
+<Prose>{"You are ready for the next topic when you can distinguish weights from state, execute a gated update, explain a shared-weight gradient, and keep state ownership, sequence lengths and available inputs consistent with the task. The optional full-Jacobian analysis can be revisited as you study more specialized recurrent models."}</Prose></section>
 
 <section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H2>{"10. Continue and learn another way"}</H2>
 
@@ -552,5 +653,5 @@ export default {
 <ul><li>{""}<a href={"https://colah.github.io/posts/2015-08-Understanding-LSTMs/"}>{"Christopher Olah: Understanding LSTM Networks"}</a>{" is an approachable diagram-led walkthrough of cell, gate and output paths. Use it after section 3; read its strong long-memory intuition together with our fixed-gate and full-derivative qualifications."}</li><li>{""}<a href={"https://www.youtube.com/watch?v=6niqTuYFZLQ"}>{"Stanford CS231n Lecture 10: Recurrent Neural Networks"}</a>{", with "}<a href={"https://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture10.pdf"}>{"official slides"}</a>{", offers a spoken route through recurrence, language modeling, image captioning and gated models. It is a 2017 conceptual lecture, not a current framework installation guide; its captioning/attention branches lead beyond this page."}</li><li>{""}<a href={"https://d2l.ai/chapter_recurrent-neural-networks/bptt.html"}>{"D2L: Backpropagation Through Time"}</a>{" develops the gradient chain and truncation more formally. Its surrounding chapters also provide text-model implementations; our real pen example offers a different applied route."}</li><li>{""}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.GRU.html"}>{"PyTorch GRU"}</a>{" and "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.LSTM.html"}>{"LSTM"}</a>{" document the exact native gate conventions and tensor shapes used here. Check them when transferring weights or changing directions, layers or projections."}</li><li>{""}<a href={"https://proceedings.mlr.press/v28/pascanu13.pdf"}>{"Pascanu et al., On the Difficulty of Training Recurrent Neural Networks"}</a>{" is the mathematical route to temporal gradient products and clipping. "}<a href={"https://www.bioinf.jku.at/publications/older/2604.pdf"}>{"Hochreiter & Schmidhuber's LSTM paper"}</a>{" and "}<a href={"https://arxiv.org/abs/1406.1078"}>{"Cho et al.'s encoder–decoder paper"}</a>{" provide historical mechanisms; their original algorithms and experimental claims should be read in their own settings."}</li></ul>
 
 <Prose>{"The "}<a href={"/learn-assets/rnns-lstms-grus/calculated-inputs.json"}>{"saved numerical results"}</a>{" and "}<a href={"/learn-assets/rnns-lstms-grus/mechanics-results.json"}>{"mechanics calculations"}</a>{" separate fitted-model evidence from exact constructed examples. They let you inspect the numbers behind the lesson rather than treating an attractive plot as evidence by itself."}</Prose></section>
-  </div>,
+  </div></RecurrentFlowProvider>,
 };

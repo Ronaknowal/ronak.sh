@@ -1,0 +1,224 @@
+{
+  "schema": "manifold-root-accepted-apply-scope/v1",
+  "at": "2026-10-09T18:35:39.409799+00:00",
+  "issuer": "/root",
+  "mode": "Trusted direct parent task release",
+  "acceptedPlan": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/normal-integration/plan.json",
+    "bytes": 65168,
+    "sha256": "e53ba3ce80a5eb204480f5119180d273e19ffaeca49769befc10e3409869f52c"
+  },
+  "scope": "Root accepts19 canonical products/35 structured payloads, reversible import/URL transformations,2 label spaces and canonical wiring CSS import. Release guarded canonical/public apply only; no shared/generator/central write or build.",
+  "metadataDisposition": "Root accepts preserved export readTime~100min+120minpractice and generated hasIntegratedGuidefalse. Actual generated metadata remains Root-owned.",
+  "selectedGuardsFresh": true,
+  "loadingGuardComparison": [
+    {
+      "planned": {
+        "path": "src/learn/data/lesson-manifest.json",
+        "bytes": 23965,
+        "sha256": "30e29cef3d8cc25ea5a10c61582997df2a9a5bac4559384089d2470a0fef3c71"
+      },
+      "current": {
+        "path": "src/learn/data/lesson-manifest.json",
+        "bytes": 23965,
+        "sha256": "30e29cef3d8cc25ea5a10c61582997df2a9a5bac4559384089d2470a0fef3c71"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/generated/lesson-imports.js",
+        "bytes": 27859,
+        "sha256": "c5d6d30b9ab8a878140378ef4e45d5380319ba634716edd23f78e87c4bfb905e"
+      },
+      "current": {
+        "path": "src/learn/data/generated/lesson-imports.js",
+        "bytes": 27859,
+        "sha256": "c5d6d30b9ab8a878140378ef4e45d5380319ba634716edd23f78e87c4bfb905e"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/lesson-loader.js",
+        "bytes": 1225,
+        "sha256": "1ae79c6cf23b2e1b3b3727782ca4af319bebe9b7ab619f06c7055e7da4dccf7e"
+      },
+      "current": {
+        "path": "src/learn/data/lesson-loader.js",
+        "bytes": 1225,
+        "sha256": "1ae79c6cf23b2e1b3b3727782ca4af319bebe9b7ab619f06c7055e7da4dccf7e"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/hooks/useTopicResource.js",
+        "bytes": 991,
+        "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+      },
+      "current": {
+        "path": "src/learn/hooks/useTopicResource.js",
+        "bytes": 991,
+        "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/TopicContent.jsx",
+        "bytes": 7106,
+        "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+      },
+      "current": {
+        "path": "src/learn/components/TopicContent.jsx",
+        "bytes": 7106,
+        "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/LessonBoundary.jsx",
+        "bytes": 992,
+        "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+      },
+      "current": {
+        "path": "src/learn/components/LessonBoundary.jsx",
+        "bytes": 992,
+        "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/LessonGuide.jsx",
+        "bytes": 2925,
+        "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+      },
+      "current": {
+        "path": "src/learn/components/LessonGuide.jsx",
+        "bytes": 2925,
+        "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+        "bytes": 4857,
+        "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+      },
+      "current": {
+        "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+        "bytes": 4857,
+        "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/components/content/code-downloads.js",
+        "bytes": 1709,
+        "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+      },
+      "current": {
+        "path": "src/learn/components/content/code-downloads.js",
+        "bytes": 1709,
+        "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942828,
+        "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+      },
+      "current": {
+        "path": "src/learn/data/generated/navigation.js",
+        "bytes": 942828,
+        "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+        "bytes": 5583,
+        "sha256": "08b894b8f364b8347e3b2938ff5fa21e0caf5d8b60d01b9d9a75a9a743a34e53"
+      },
+      "current": {
+        "path": "src/learn/data/curriculum/blueprints/t-sne-umap-manifold-learning.js",
+        "bytes": 5583,
+        "sha256": "08b894b8f364b8347e3b2938ff5fa21e0caf5d8b60d01b9d9a75a9a743a34e53"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "vite.config.js",
+        "bytes": 2618,
+        "sha256": "3428991f335b7e2ecbc9c3859891ab4bac571651011a52fcb7c90604d260c690"
+      },
+      "current": {
+        "path": "vite.config.js",
+        "bytes": 2618,
+        "sha256": "3428991f335b7e2ecbc9c3859891ab4bac571651011a52fcb7c90604d260c690"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/Reader.jsx",
+        "bytes": 4433,
+        "sha256": "0c3c64561cbe7d20255f919ca3fee4ce23f2ac97d20ba7087ec92157cf9ecc6a"
+      },
+      "current": {
+        "path": "src/learn/Reader.jsx",
+        "bytes": 4433,
+        "sha256": "0c3c64561cbe7d20255f919ca3fee4ce23f2ac97d20ba7087ec92157cf9ecc6a"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/app/SiteRoutes.jsx",
+        "bytes": 4396,
+        "sha256": "f266aba4798586bd8e45a61d4dcfcef748098f6e3b959595523c753f6d5983c5"
+      },
+      "current": {
+        "path": "src/app/SiteRoutes.jsx",
+        "bytes": 4396,
+        "sha256": "f266aba4798586bd8e45a61d4dcfcef748098f6e3b959595523c753f6d5983c5"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "scripts/generate-learning-artifacts.mjs",
+        "bytes": 5996,
+        "sha256": "5d9ad0701a399813aca84d7eb8d3c715f49e713531c65662c2eb9d7b09bdbc36"
+      },
+      "current": {
+        "path": "scripts/generate-learning-artifacts.mjs",
+        "bytes": 5996,
+        "sha256": "5d9ad0701a399813aca84d7eb8d3c715f49e713531c65662c2eb9d7b09bdbc36"
+      },
+      "exact": true
+    },
+    {
+      "planned": {
+        "path": "src/learn/data/curriculum/learning-paths.js",
+        "bytes": 9661,
+        "sha256": "09e8aaf90aba674029c7fe9995810df682f3a0d3799b38bc7b056a8598e9d2ae"
+      },
+      "current": {
+        "path": "src/learn/data/curriculum/learning-paths.js",
+        "bytes": 9661,
+        "sha256": "09e8aaf90aba674029c7fe9995810df682f3a0d3799b38bc7b056a8598e9d2ae"
+      },
+      "exact": true
+    }
+  ]
+}

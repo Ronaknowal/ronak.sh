@@ -1,0 +1,27 @@
+# NMF D46 SAME bounded presentation/source closure
+
+Reviewer: `/root/ml_successor_independent_review`, SAME reviewer of original whole-runtime report `309461dd13fd716f4255693f2d50d13417c823183c826889acddbca37d3d21f3` and combined F1–F6 source closure. I authored none of this learner correction. This addendum preserves combined freeze `03620c4d159f87479c884711931ccea69309a2b9cf4fc541fae8b6e424674c56` and the previous source closure, without replacing their evidence or widening their scientific/native scope.
+
+**Disposition: the two released D46 source concerns are closed by this bounded successor. No required source finding remains in this change. Actual paint, path-following, scrolling, enlarged reading and integration remain Root requirements.**
+
+I read both complete `Partitions` bodies, including all masks, SVG paths/labels, actual stored H and reserved arrays, and the following candidate-role explanation. I read the complete successor stylesheet, preview entry/configuration, preparation helper and receipt, the inherited relevant CSS and base build isolation, and the previous D46 assessment/remaining requirements. The target SavedDataFigures source is 18,348 bytes, SHA256 `5d98431d02940c855417673cf50aceaeb421d3c8f4123ed14b2c17fabe753744`; the authentic predecessor is 18,336 bytes, `456d7b64ff39d1476d8b737a67b86d6c91fada3617a02160eb6d9053b25f11c2`.
+
+## Input directions and semantics
+
+The held feature-array paths remain `M125 155H310` and `M125 245H310`, approaching their respective transform from the left. Stored-H paths now end at `(350,126)` and `(350,216)` after descending from above. Their final directions are downward, so the reserved feature arrow and state arrow no longer end together at `(310,245)` with opposite directions. Validation's old coincident horizontal arrival is also separated. Both endpoints lie above their transform labels rather than over the label baseline: the transform labels start at x320, baseline145/235 with font13. The H horizontal lanes at y120/205 precede those ports. These source coordinates provide reasonable space; actual glyph/marker clearance is a native judgment.
+
+The same stored-H trunk at x460 crosses the validation output route at y155, as it did in the predecessor. It has no marker at that crossing and the only endpoint markers identify its eventual transform inputs. This correction does not introduce or certify that inherited crossing's native readability; Root should verify that the two input paths remain easy to follow. I found no new source contradiction requiring another change before that check.
+
+All metadata, disjoint source IDs, fixed /16 feature units, 180/60/60 shapes, training-only fit, saved k8/seed19 inspection, separately selected k16/seed7 validation minimum, actual H/held activations and unavailable validation-row values remain unchanged. The complete source differs by exactly three import-depth corrections and the two declared SVG path strings. Their exact physical inverse restores the predecessor. No new fit, prediction, numeric output, parameter or held-to-fit edge is introduced. Original operation/model/data/scientific and historical-stream qualifications therefore remain intact.
+
+## Relative text sizing and private harness
+
+The additive stylesheet loads after the inherited lesson/preview styles and overrides the same `.nmf-partition-dependencies` minimum with `47.5rem`. At root16 it is760px, matching the old viewBox width; at root32 it is1520px. With the retained width100%, the minimum prevents a narrow region from shrinking the SVG and its13-unit labels; the intended label size is at least13px/26px at these two root sizes. Wider available regions may enlarge it further. This is source scaling arithmetic, not a claim of browser measurements.
+
+The existing named `role=region`, `tabIndex=0` and local `overflow-x:auto` remain. The private harness's wrapped label/select exposes100%/200% root text options, uses an effect to set the root font size, and restores the prior inline value on cleanup. It does not add a learner control to D46. The private resolver redirects only the relevant SavedDataFigures and preview-entry files, inherits foreign-body/publicDir isolation, uses its own cache/output and strict5205 port, and retains emptyOutDir:false. This source read does not claim a successful build or HTTP receipt.
+
+## Fresh bounded evidence and remaining requirements
+
+My saved `check-source.py` passed22 static conditions (command `9e9483`, exit0). It checks exact source identities, each unique forward/inverse clause, the entire physical five-splice delta, CSS load order/relative sizing, existing named focusable scroller, and private entry/configuration scope. It does not execute the author helper/checker, JSX/SSR, build, HTTP, browser, any instructional main, fit or scientific campaign. Inputs are bound in `source-check.json`.
+
+Root's desktop/phone screenshots and observed opposed arrowheads are attributed Root native evidence, not my observation. I did not inspect or reproduce their paint. Root must bind any changed build to these exact sources, then personally inspect desktop/narrow/enlarged D46 arrow/label clearance and path ownership, local horizontal scrolling without document spill, keyboard focus/scroll behavior and actual root-size scaling. Preserve combined scientific, optional-unexecuted and source-current qualifications through eventual normal integration. This addendum does not promote a phase or accept unrelated foreign navigation changes.

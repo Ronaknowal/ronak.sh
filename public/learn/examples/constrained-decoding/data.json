@@ -1,0 +1,254 @@
+{
+  "source": {
+    "url": "https://archive.ics.uci.edu/static/public/53/iris.zip",
+    "sha256": "d11fe30213d36434a0879aab7cb00ce3c812eb7ba2495874438abff7b7b762e9",
+    "license": "CC BY 4.0",
+    "doi": "10.24432/C56C76"
+  },
+  "rows": [
+    {
+      "index": 0,
+      "source_values": [
+        "5.1",
+        "3.5",
+        "1.4",
+        "0.2",
+        "Iris-setosa"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=setosa; sepal length=5.1 cm.\nJSON:",
+      "gold": {
+        "species": "setosa",
+        "sepal_cm": 5.1
+      }
+    },
+    {
+      "index": 1,
+      "source_values": [
+        "4.9",
+        "3.0",
+        "1.4",
+        "0.2",
+        "Iris-setosa"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=setosa; sepal length=4.9 cm.\nJSON:",
+      "gold": {
+        "species": "setosa",
+        "sepal_cm": 4.9
+      }
+    },
+    {
+      "index": 2,
+      "source_values": [
+        "4.7",
+        "3.2",
+        "1.3",
+        "0.2",
+        "Iris-setosa"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=setosa; sepal length=4.7 cm.\nJSON:",
+      "gold": {
+        "species": "setosa",
+        "sepal_cm": 4.7
+      }
+    },
+    {
+      "index": 3,
+      "source_values": [
+        "4.6",
+        "3.1",
+        "1.5",
+        "0.2",
+        "Iris-setosa"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=setosa; sepal length=4.6 cm.\nJSON:",
+      "gold": {
+        "species": "setosa",
+        "sepal_cm": 4.6
+      }
+    },
+    {
+      "index": 50,
+      "source_values": [
+        "7.0",
+        "3.2",
+        "4.7",
+        "1.4",
+        "Iris-versicolor"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=versicolor; sepal length=7.0 cm.\nJSON:",
+      "gold": {
+        "species": "versicolor",
+        "sepal_cm": 7.0
+      }
+    },
+    {
+      "index": 51,
+      "source_values": [
+        "6.4",
+        "3.2",
+        "4.5",
+        "1.5",
+        "Iris-versicolor"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=versicolor; sepal length=6.4 cm.\nJSON:",
+      "gold": {
+        "species": "versicolor",
+        "sepal_cm": 6.4
+      }
+    },
+    {
+      "index": 52,
+      "source_values": [
+        "6.9",
+        "3.1",
+        "4.9",
+        "1.5",
+        "Iris-versicolor"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=versicolor; sepal length=6.9 cm.\nJSON:",
+      "gold": {
+        "species": "versicolor",
+        "sepal_cm": 6.9
+      }
+    },
+    {
+      "index": 53,
+      "source_values": [
+        "5.5",
+        "2.3",
+        "4.0",
+        "1.3",
+        "Iris-versicolor"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=versicolor; sepal length=5.5 cm.\nJSON:",
+      "gold": {
+        "species": "versicolor",
+        "sepal_cm": 5.5
+      }
+    },
+    {
+      "index": 100,
+      "source_values": [
+        "6.3",
+        "3.3",
+        "6.0",
+        "2.5",
+        "Iris-virginica"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=virginica; sepal length=6.3 cm.\nJSON:",
+      "gold": {
+        "species": "virginica",
+        "sepal_cm": 6.3
+      }
+    },
+    {
+      "index": 101,
+      "source_values": [
+        "5.8",
+        "2.7",
+        "5.1",
+        "1.9",
+        "Iris-virginica"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=virginica; sepal length=5.8 cm.\nJSON:",
+      "gold": {
+        "species": "virginica",
+        "sepal_cm": 5.8
+      }
+    },
+    {
+      "index": 102,
+      "source_values": [
+        "7.1",
+        "3.0",
+        "5.9",
+        "2.1",
+        "Iris-virginica"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=virginica; sepal length=7.1 cm.\nJSON:",
+      "gold": {
+        "species": "virginica",
+        "sepal_cm": 7.1
+      }
+    },
+    {
+      "index": 103,
+      "source_values": [
+        "6.3",
+        "2.9",
+        "5.6",
+        "1.8",
+        "Iris-virginica"
+      ],
+      "prompt": "Extract the stated species and sepal length into a JSON object with exactly the fields species and sepal_cm. Copy the values from the input.\nInput: species=virginica; sepal length=6.3 cm.\nJSON:",
+      "gold": {
+        "species": "virginica",
+        "sepal_cm": 6.3
+      }
+    }
+  ],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "species": {
+        "type": "string",
+        "enum": [
+          "setosa",
+          "versicolor",
+          "virginica"
+        ]
+      },
+      "sepal_cm": {
+        "type": "number",
+        "enum": [
+          4.0,
+          4.1,
+          4.2,
+          4.3,
+          4.4,
+          4.5,
+          4.6,
+          4.7,
+          4.8,
+          4.9,
+          5.0,
+          5.1,
+          5.2,
+          5.3,
+          5.4,
+          5.5,
+          5.6,
+          5.7,
+          5.8,
+          5.9,
+          6.0,
+          6.1,
+          6.2,
+          6.3,
+          6.4,
+          6.5,
+          6.6,
+          6.7,
+          6.8,
+          6.9,
+          7.0,
+          7.1,
+          7.2,
+          7.3,
+          7.4,
+          7.5,
+          7.6,
+          7.7,
+          7.8,
+          7.9,
+          8.0
+        ]
+      }
+    },
+    "required": [
+      "species",
+      "sepal_cm"
+    ],
+    "additionalProperties": false
+  }
+}

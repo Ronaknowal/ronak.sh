@@ -1,0 +1,52 @@
+.pde-reading-figure { margin: 1.8rem 0; min-width: 0; }
+.pde-reading-figure figcaption { margin: .65rem 0; line-height: 1.65; font-size: 1rem; }
+.pde-reading-panels { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,25rem),1fr)); gap: 1.8rem; align-items: start; }
+.pde-reading-canvas { width: 100%; min-width: 0; }
+.pde-reading-canvas svg { width: 100%; display: block; overflow: visible; }
+.pde-reading-canvas text { font-family: inherit; font-size: 1rem; }
+.pde-reading-axis { font-size: 1rem; line-height: 1.55; margin: .5rem 0; }
+.pde-reading-grid { stroke: #383b40; stroke-width: 1; }
+.pde-reading-axis-line { stroke: #8c939e; stroke-width: 1; }
+.pde-reading-outline { fill: none; stroke: #92969c; stroke-width: 1.3; }
+.pde-reading-key { list-style: none; display: flex; flex-wrap: wrap; gap: .7rem 1.5rem; margin: .6rem 0; padding: 0; }
+.pde-reading-key li { display: flex; align-items: baseline; gap: .55rem; line-height: 1.5; }
+.pde-reading-key li > span { border-top: 2px solid; width: 1.5rem; flex: 0 0 1.5rem; }
+.pde-reading-table { margin: 1rem 0; min-width: 0; }
+.pde-reading-scroll { max-height: 24rem; max-width: 100%; overflow: auto; scrollbar-color: #8c939e #16171b; }
+.pde-reading-scroll:focus-visible { outline: 2px solid #e8b34b; outline-offset: 3px; }
+.pde-reading-scroll table { border-collapse: collapse; width: max-content; min-width: 100%; font-size: 1rem; font-variant-numeric: tabular-nums; }
+.pde-reading-scroll :is(th,td) { padding: .65rem .8rem; text-align: left; border-bottom: 1px solid #383b40; white-space: nowrap; }
+.pde-reading-scroll th { color: #edc678; font-weight: 500; }
+.pde-reading-scroll-note { font-size: 1rem; line-height: 1.55; color: #b5b9c1; }
+.pde-reading-bar { display: grid; grid-template-columns: minmax(0,1fr) minmax(5rem,2fr) auto; gap: .8rem; align-items: center; margin: .85rem 0; }
+.pde-reading-bar-track { position: relative; height: .85rem; background: #1c1e24; }
+.pde-reading-bar-track:after { content: ''; position: absolute; left: 50%; height: 100%; width: 1px; background: #a3a8b1; }
+.pde-reading-bar-track i { display: block; position: absolute; height: 100%; }
+.pde-reading-controls { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,18rem),1fr)); gap: 1rem; margin: 1.1rem 0; }
+.pde-reading-choice { display: grid; gap: .45rem; line-height: 1.5; min-width: 0; }
+.pde-reading-choice select { font: inherit; color: #dedfe2; background: #17191e; border: 1px solid #6a7180; padding: .55rem; min-height: 2.75rem; width: 100%; }
+.pde-reading-values { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,14rem),1fr)); gap: .9rem 1.5rem; margin: 1rem 0; }
+.pde-reading-values dt { color: #b9bcc4; line-height: 1.5; }
+.pde-reading-values dd { margin: .25rem 0; color: #edc678; font-size: 1rem; line-height: 1.5; overflow-wrap: anywhere; }
+.pde-reading-lab button { font: inherit; color: #edc678; background: #181a20; padding: .55rem .8rem; min-height: 2.75rem; border: 1px solid #707783; cursor: pointer; }
+.pde-reading-lab :is(button,select,input):focus-visible { outline: 2px solid #e8b34b; outline-offset: 3px; }
+.pde-reading-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin: .9rem 0; }
+.pde-reading-lab { min-width: 0; }
+.reader-article .lesson-flow.pde-lesson .lesson-code pre { font-size: .875rem; }
+.reader-article .lesson-flow.pde-lesson .lesson-code pre > code { font: inherit; }
+.reader-article .lesson-flow.pde-lesson code[style] { font-size: .875rem !important; }
+.pde-reading-bars { container-type: inline-size; container-name: pde-bars; min-width: 0; }
+@container pde-bars (max-width: 35rem) {
+  .pde-reading-bar { grid-template-columns: minmax(0,1fr) auto; }
+  .pde-reading-bar > span { grid-column: 1/-1; grid-row: 1; }
+  .pde-reading-bar-track { grid-column: 1; grid-row: 2; }
+  .pde-reading-bar > strong { grid-column: 2; grid-row: 2; }
+}
+
+/* Keep full equations keyboard-readable and permit long prose formulas to wrap. */
+.pde-lesson p { overflow-wrap: anywhere; }
+.pde-equation { min-width: 0; max-width: 100%; }
+.pde-equation-region { min-width: 0; max-width: 100%; overflow-x: auto; }
+.pde-equation-region:focus-visible { outline: 2px solid #e8b34b; outline-offset: 3px; }
+.pde-equation-inner { width: max-content; min-width: 100%; }
+.pde-reading-bar > span { min-width: 0; overflow-wrap: normal; word-break: normal; }

@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "scope": "Only final vocabulary number-width and singular/plural repair;206000/256000 values,default mixture,desktop320and200%rootfont,no page overflow or runtime errors. Actual image reading recorded separately.",
+  "snapshots": [
+    {
+      "file": "docs/teaching/tokenization/beginner-screenshots/interactions/vocabulary-mixture-control-fix-1366.png",
+      "sha256": "d88b3353a918b7865564a4ed5bd9f9489590b90b41a0866886b6d005f44b6ef6"
+    },
+    {
+      "file": "docs/teaching/tokenization/beginner-screenshots/interactions/vocabulary-budget-control-fix-206000-1366.png",
+      "sha256": "62f2e10c70d785f5304fbb13ee971b01d13a823010ad20351e4baf864be8f226"
+    },
+    {
+      "file": "docs/teaching/tokenization/beginner-screenshots/interactions/vocabulary-budget-control-fix-256000-1366.png",
+      "sha256": "573612b3e63ee7d026de6f30ab9d27ccb5579f0cf58fdd5cc887b0e225529383"
+    },
+    {
+      "file": "docs/teaching/tokenization/beginner-screenshots/interactions/vocabulary-mixture-control-fix-320.png",
+      "sha256": "aa461cc3684c67a7bf617e63dbbf391badad27f01bffb1d425e8645f551d1bcc"
+    },
+    {
+      "file": "docs/teaching/tokenization/beginner-screenshots/interactions/vocabulary-budget-control-fix-206000-320.png",
+      "sha256": "367bbb81f358fa4a98e3592264dfde6fce6084f215b93b82676ee36408e145e4"
+    },
+    {
+      "file": "docs/teaching/tokenization/beginner-screenshots/interactions/vocabulary-budget-control-fix-256000-320.png",
+      "sha256": "ff7c64a5872d6dc1b6a3936cc6e6590b5fab43bc82de8353ec912d8a5f074aa7"
+    },
+    {
+      "file": "docs/teaching/tokenization/beginner-screenshots/interactions/vocabulary-mixture-control-fix-text-zoom.png",
+      "sha256": "14aeee682e473cd5d432b38f2740bc2abf59a9ff6fa48c6100cb8b9fb3820be9"
+    },
+    {
+      "file": "docs/teaching/tokenization/beginner-screenshots/interactions/vocabulary-budget-control-fix-text-zoom.png",
+      "sha256": "e129166b82f71ff7c55418c058cef6005b637247e340a6125f697a49ef72db9e"
+    }
+  ],
+  "sourceSha256": {
+    "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "9e5baba0f2466ec9b55b3cb55fb01331945f1c9891c653b11a21e9956dd0e9ea",
+    "src/learn/components/lesson-labs/multilingual-vocabulary.css": "d3c43adda0ffaf2c5799fa532cf170a63ec2e81fbc98f374aa44845e57135385"
+  }
+}

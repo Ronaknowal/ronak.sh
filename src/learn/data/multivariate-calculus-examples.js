@@ -1,242 +1,68 @@
 export const multivariateCalculusExamples = {
-  localExpansion: {
-    title: 'Separate the exact change from its tangent-plane prediction',
-    code: `import numpy as np
-
-def f(point):
-    x, y = point
-    return x*x + 2*y*y
-
-point = np.array([1., 1.])
-gradient = np.array([2*point[0], 4*point[1]])
-for scale in (1., .5, .1):
-    change = scale * np.array([.1, -.05])
-    predicted = gradient @ change
-    actual = f(point + change) - f(point)
-    remainder = change[0]**2 + 2*change[1]**2
-    assert np.isclose(actual, predicted + remainder)
-    print("change:", np.round(change, 4).tolist())
-    print("prediction, actual, remainder:",
-          [round(float(value), 6) for value in (predicted, actual, remainder)])`,
-    expected: "change: [0.1, -0.05]\nprediction, actual, remainder: [0.0, 0.015, 0.015]\nchange: [0.05, -0.025]\nprediction, actual, remainder: [0.0, 0.00375, 0.00375]\nchange: [0.01, -0.005]\nprediction, actual, remainder: [0.0, 0.00015, 0.00015]",
+  "localExpansion": {
+    "title": "Separate the exact change from its tangent-plane prediction",
+    "code": "import numpy as np\n\ndef f(point):\n    x, y = point\n    return x*x + 2*y*y\n\npoint = np.array([1., 1.])\ngradient = np.array([2*point[0], 4*point[1]])\nfor scale in (1., .5, .1):\n    change = scale * np.array([.1, -.05])\n    predicted = gradient @ change\n    actual = f(point + change) - f(point)\n    remainder = change[0]**2 + 2*change[1]**2\n    assert np.isclose(actual, predicted + remainder)\n    print(\"change:\", np.round(change, 4).tolist())\n    print(\"prediction, actual, remainder:\",\n          [round(float(value), 6) for value in (predicted, actual, remainder)])",
+    "expected": "change: [0.1, -0.05]\nprediction, actual, remainder: [0.0, 0.015, 0.015]\nchange: [0.05, -0.025]\nprediction, actual, remainder: [0.0, 0.00375, 0.00375]\nchange: [0.01, -0.005]\nprediction, actual, remainder: [0.0, 0.00015, 0.00015]",
+    "file": "local_linear_expansion.py"
   },
-  directions: {
-    title: 'Distinguish rate per distance from rate per time',
-    code: `import numpy as np
-
-point = np.array([3., -2.])
-gradient = np.array([2*point[0], 4*point[1]])
-velocity = np.array([3., 4.])
-speed = np.linalg.norm(velocity)
-unit = velocity / speed
-per_distance = gradient @ unit
-per_time = gradient @ velocity
-print("unit direction:", unit.tolist())
-print("rate per distance:", round(float(per_distance), 6))
-print("rate per time:", round(float(per_time), 6))
-print("speed times distance rate:", round(float(speed*per_distance), 6))
-steepest_up = gradient / np.linalg.norm(gradient)
-print("steepest unit direction:", steepest_up.tolist())
-print("maximum unit-direction rate:", float(gradient @ steepest_up))`,
-    expected: "unit direction: [0.6, 0.8]\nrate per distance: -2.8\nrate per time: -14.0\nspeed times distance rate: -14.0\nsteepest unit direction: [0.6, -0.8]\nmaximum unit-direction rate: 10.0",
+  "directions": {
+    "title": "Distinguish rate per distance from rate per time",
+    "code": "import numpy as np\n\npoint = np.array([3., -2.])\ngradient = np.array([2*point[0], 4*point[1]])\nvelocity = np.array([3., 4.])\nspeed = np.linalg.norm(velocity)\nunit = velocity / speed\nper_distance = gradient @ unit\nper_time = gradient @ velocity\nprint(\"unit direction:\", unit.tolist())\nprint(\"rate per distance:\", round(float(per_distance), 6))\nprint(\"rate per time:\", round(float(per_time), 6))\nprint(\"speed times distance rate:\", round(float(speed*per_distance), 6))\nsteepest_up = gradient / np.linalg.norm(gradient)\nprint(\"steepest unit direction:\", steepest_up.tolist())\nprint(\"maximum unit-direction rate:\", float(gradient @ steepest_up))",
+    "expected": "unit direction: [0.6, 0.8]\nrate per distance: -2.8\nrate per time: -14.0\nspeed times distance rate: -14.0\nsteepest unit direction: [0.6, -0.8]\nmaximum unit-direction rate: 10.0",
+    "file": "direction_speed_and_distance.py"
   },
-  approachPaths: {
-    title: 'Evaluate a function along different approaches to the origin',
-    code: `def g(x, y):
-    if x == 0 and y == 0:
-        return 0.
-    return x*x*y / (x**4 + y*y)
-
-for t in (1., .1, .01, .001):
-    print("t:", t, "axis, line, parabola:",
-          [round(g(t, 0), 6), round(g(t, t), 6), round(g(t, t*t), 6)])
-print("value at origin:", g(0, 0))
-print("axis partials:", (g(.001, 0)-g(0, 0))/.001,
-      (g(0, .001)-g(0, 0))/.001)
-print("line directional quotient near origin:", round(g(.0001, .0001)/.0001, 6))`,
-    expected: "t: 1.0 axis, line, parabola: [0.0, 0.5, 0.5]\nt: 0.1 axis, line, parabola: [0.0, 0.09901, 0.5]\nt: 0.01 axis, line, parabola: [0.0, 0.009999, 0.5]\nt: 0.001 axis, line, parabola: [0.0, 0.001, 0.5]\nvalue at origin: 0.0\naxis partials: 0.0 0.0\nline directional quotient near origin: 1.0",
+  "approachPaths": {
+    "title": "Evaluate a function along different approaches to the origin",
+    "code": "def g(x, y):\n    if x == 0 and y == 0:\n        return 0.\n    return x*x*y / (x**4 + y*y)\n\nfor t in (1., .1, .01, .001):\n    print(\"t:\", t, \"axis, line, parabola:\",\n          [round(g(t, 0), 6), round(g(t, t), 6), round(g(t, t*t), 6)])\nprint(\"value at origin:\", g(0, 0))\nprint(\"axis partials:\", (g(.001, 0)-g(0, 0))/.001,\n      (g(0, .001)-g(0, 0))/.001)\nprint(\"line directional quotient near origin:\", round(g(.0001, .0001)/.0001, 6))",
+    "expected": "t: 1.0 axis, line, parabola: [0.0, 0.5, 0.5]\nt: 0.1 axis, line, parabola: [0.0, 0.09901, 0.5]\nt: 0.01 axis, line, parabola: [0.0, 0.009999, 0.5]\nt: 0.001 axis, line, parabola: [0.0, 0.001, 0.5]\nvalue at origin: 0.0\naxis partials: 0.0 0.0\nline directional quotient near origin: 1.0",
+    "file": "line_and_curved_approaches.py"
   },
-  chainMotion: {
-    title: 'Check the chain rule by differentiating the composed function',
-    code: `import numpy as np
-
-# All inputs are dimensionless here. r(t)=(t,t*t), f(x,y)=x*x+2*y.
-def f(point):
-    x, y = point
-    return x*x + 2*y
-
-def position(t):
-    return np.array([t, t*t])
-
-for t in (-1., 0., 2.):
-    gradient = np.array([2*t, 2.])
-    velocity = np.array([1., 2*t])
-    chain_rate = gradient @ velocity
-    composed_rate = 6*t  # f(r(t))=3*t*t
-    h = 1e-5
-    numerical = (f(position(t+h)) - f(position(t-h))) / (2*h)
-    assert np.isclose(chain_rate, composed_rate)
-    assert np.isclose(numerical, chain_rate, atol=1e-8)
-    print("t, chain, direct, numerical:",
-          [round(float(v), 6) for v in (t, chain_rate, composed_rate, numerical)])`,
-    expected: "t, chain, direct, numerical: [-1.0, -6.0, -6.0, -6.0]\nt, chain, direct, numerical: [0.0, 0.0, 0.0, 0.0]\nt, chain, direct, numerical: [2.0, 12.0, 12.0, 12.0]",
+  "chainMotion": {
+    "title": "Check the chain rule by differentiating the composed function",
+    "code": "import numpy as np\n\n# All inputs are dimensionless here. r(t)=(t,t*t), f(x,y)=x*x+2*y.\ndef f(point):\n    x, y = point\n    return x*x + 2*y\n\ndef position(t):\n    return np.array([t, t*t])\n\nfor t in (-1., 0., 2.):\n    gradient = np.array([2*t, 2.])\n    velocity = np.array([1., 2*t])\n    chain_rate = gradient @ velocity\n    composed_rate = 6*t  # f(r(t))=3*t*t\n    h = 1e-5\n    numerical = (f(position(t+h)) - f(position(t-h))) / (2*h)\n    assert np.isclose(chain_rate, composed_rate)\n    assert np.isclose(numerical, chain_rate, atol=1e-8)\n    print(\"t, chain, direct, numerical:\",\n          [round(float(v), 6) for v in (t, chain_rate, composed_rate, numerical)])",
+    "expected": "t, chain, direct, numerical: [-1.0, -6.0, -6.0, -6.0]\nt, chain, direct, numerical: [0.0, 0.0, 0.0, 0.0]\nt, chain, direct, numerical: [2.0, 12.0, 12.0, 12.0]",
+    "file": "chain_rule_along_a_curve.py"
   },
-  circleConstraint: {
-    title: 'Find both circle-constrained candidates and certify the extremes',
-    code: `import numpy as np
-
-gradient = np.array([2., 1.])
-maximum = gradient / np.linalg.norm(gradient)
-minimum = -maximum
-for name, point in (("maximum", maximum), ("minimum", minimum)):
-    tangent = np.array([-point[1], point[0]])
-    value = gradient @ point
-    multiplier = value / 2  # grad f = lambda * grad(x*x+y*y)
-    assert np.allclose(gradient, multiplier * 2 * point)
-    print(name, "point:", np.round(point, 6).tolist())
-    print("value, tangent rate, lambda:",
-          [round(float(v), 6) for v in (value, gradient @ tangent, multiplier)])
-print("global bounds by Cauchy-Schwarz:",
-      [-round(float(np.linalg.norm(gradient)), 6), round(float(np.linalg.norm(gradient)), 6)])`,
-    expected: "maximum point: [0.894427, 0.447214]\nvalue, tangent rate, lambda: [2.236068, 0.0, 1.118034]\nminimum point: [-0.894427, -0.447214]\nvalue, tangent rate, lambda: [-2.236068, 0.0, -1.118034]\nglobal bounds by Cauchy-Schwarz: [-2.236068, 2.236068]",
+  "circleConstraint": {
+    "title": "Find both circle-constrained candidates and certify the extremes",
+    "code": "import numpy as np\n\ngradient = np.array([2., 1.])\nmaximum = gradient / np.linalg.norm(gradient)\nminimum = -maximum\nfor name, point in ((\"maximum\", maximum), (\"minimum\", minimum)):\n    tangent = np.array([-point[1], point[0]])\n    value = gradient @ point\n    multiplier = value / 2  # grad f = lambda * grad(x*x+y*y)\n    assert np.allclose(gradient, multiplier * 2 * point)\n    print(name, \"point:\", np.round(point, 6).tolist())\n    print(\"value, tangent rate, lambda:\",\n          [round(float(v), 6) for v in (value, gradient @ tangent, multiplier)])\nprint(\"global bounds by Cauchy-Schwarz:\",\n      [-round(float(np.linalg.norm(gradient)), 6), round(float(np.linalg.norm(gradient)), 6)])",
+    "expected": "maximum point: [0.894427, 0.447214]\nvalue, tangent rate, lambda: [2.236068, 0.0, 1.118034]\nminimum point: [-0.894427, -0.447214]\nvalue, tangent rate, lambda: [-2.236068, 0.0, -1.118034]\nglobal bounds by Cauchy-Schwarz: [-2.236068, 2.236068]",
+    "file": "regular_circle_constraint.py"
   },
-  curvature: {
-    title: 'Compute a mixed-term Hessian and expose an inconclusive test',
-    code: `import numpy as np
-
-# f=x*x+2*x*y+2*y*y = 0.5 * point.T @ H @ point.
-H = np.array([[2., 2.], [2., 4.]])
-point = np.array([1., -1.])
-change = np.array([.2, .1])
-def f(p):
-    return p[0]**2 + 2*p[0]*p[1] + 2*p[1]**2
-
-linear = (H @ point) @ change
-quadratic = .5 * change @ H @ change
-print("H eigenvalues:", np.round(np.linalg.eigvalsh(H), 6).tolist())
-print("linear, quadratic, exact change:",
-      [round(float(v), 6) for v in (linear, quadratic, f(point+change)-f(point))])
-assert np.isclose(f(point+change)-f(point), linear+quadratic)
-for name, sign in (("quartic minimum", 1), ("quartic saddle", -1)):
-    probes = [x**4 + sign*y**4 for x, y in ((.1, 0), (0, .1))]
-    print(name, "origin Hessian: zero; axis values:", [round(v, 6) for v in probes])`,
-    expected: "H eigenvalues: [0.763932, 5.236068]\nlinear, quadratic, exact change: [-0.2, 0.1, -0.1]\nquartic minimum origin Hessian: zero; axis values: [0.0001, 0.0001]\nquartic saddle origin Hessian: zero; axis values: [0.0001, -0.0001]",
+  "curvature": {
+    "title": "Compute a mixed-term Hessian and expose an inconclusive test",
+    "code": "import numpy as np\n\n# f=x*x+2*x*y+2*y*y = 0.5 * point.T @ H @ point.\nH = np.array([[2., 2.], [2., 4.]])\npoint = np.array([1., -1.])\nchange = np.array([.2, .1])\ndef f(p):\n    return p[0]**2 + 2*p[0]*p[1] + 2*p[1]**2\n\nlinear = (H @ point) @ change\nquadratic = .5 * change @ H @ change\nprint(\"H eigenvalues:\", np.round(np.linalg.eigvalsh(H), 6).tolist())\nprint(\"linear, quadratic, exact change:\",\n      [round(float(v), 6) for v in (linear, quadratic, f(point+change)-f(point))])\nassert np.isclose(f(point+change)-f(point), linear+quadratic)\nfor name, sign in ((\"quartic minimum\", 1), (\"quartic saddle\", -1)):\n    probes = [x**4 + sign*y**4 for x, y in ((.1, 0), (0, .1))]\n    print(name, \"origin Hessian: zero; axis values:\", [round(v, 6) for v in probes])",
+    "expected": "H eigenvalues: [0.763932, 5.236068]\nlinear, quadratic, exact change: [-0.2, 0.1, -0.1]\nquartic minimum origin Hessian: zero; axis values: [0.0001, 0.0001]\nquartic saddle origin Hessian: zero; axis values: [0.0001, -0.0001]",
+    "file": "hessian_directional_curvature.py"
   },
-  descent: {
-    title: 'Run the original two-parameter update and its changed rates',
-    code: `import numpy as np
-
-def trajectory(rate, steps):
-    point = np.array([3., -2.])
-    for _ in range(steps):
-        gradient = np.array([2*point[0], 4*point[1]])
-        point = point - rate*gradient
-    return point
-
-print("initial gradient:", [6., -8.])
-print("first step at .1:", np.round(trajectory(.1, 1), 6).tolist())
-for rate in (.01, .1, .5, .6):
-    point = trajectory(rate, 12)
-    closed_form = np.array([3*(1-2*rate)**12, -2*(1-4*rate)**12])
-    assert np.allclose(point, closed_form)
-    loss = point[0]**2 + 2*point[1]**2
-    print("rate:", rate, "point:", np.round(point, 6).tolist(), "loss:", round(float(loss), 6))`,
-    expected: "initial gradient: [6.0, -8.0]\nfirst step at .1: [2.4, -1.2]\nrate: 0.01 point: [2.35415, -1.22542] loss: 8.545329\nrate: 0.1 point: [0.206158, -0.004354] loss: 0.042539\nrate: 0.5 point: [0.0, -2.0] loss: 8.0\nrate: 0.6 point: [0.0, -113.387825] loss: 25713.597603",
+  "descent": {
+    "title": "Run the original two-parameter update and its changed rates",
+    "code": "import numpy as np\n\ndef trajectory(rate, steps):\n    point = np.array([3., -2.])\n    for _ in range(steps):\n        gradient = np.array([2*point[0], 4*point[1]])\n        point = point - rate*gradient\n    return point\n\nprint(\"initial gradient:\", [6., -8.])\nprint(\"first step at .1:\", np.round(trajectory(.1, 1), 6).tolist())\nfor rate in (.01, .1, .5, .6):\n    point = trajectory(rate, 12)\n    closed_form = np.array([3*(1-2*rate)**12, -2*(1-4*rate)**12])\n    assert np.allclose(point, closed_form)\n    loss = point[0]**2 + 2*point[1]**2\n    print(\"rate:\", rate, \"point:\", np.round(point, 6).tolist(), \"loss:\", round(float(loss), 6))",
+    "expected": "initial gradient: [6.0, -8.0]\nfirst step at .1: [2.4, -1.2]\nrate: 0.01 point: [2.35415, -1.22542] loss: 8.545329\nrate: 0.1 point: [0.206158, -0.004354] loss: 0.042539\nrate: 0.5 point: [0.0, -2.0] loss: 8.0\nrate: 0.6 point: [0.0, -113.387825] loss: 25713.597603",
+    "file": "quadratic_gradient_iteration.py"
   },
-  unitsAndScaling: {
-    title: 'Convert sensitivity units and test first-order cancellation',
-    code: `import numpy as np
-
-# Ideal resistor: P=V*V/R. Inputs V in volts and R in ohms; P in watts.
-voltage, resistance = 10., 5.
-gradient = np.array([2*voltage/resistance, -voltage**2/resistance**2])
-change = np.array([.1, .1])
-initial = voltage**2 / resistance
-actual = (voltage+change[0])**2 / (resistance+change[1]) - initial
-print("P (W):", initial)
-print("dP/dV (W/V), dP/dR (W/ohm):", gradient.tolist())
-print("linear change (W):", float(gradient @ change))
-print("actual change (W):", round(float(actual), 9))
-print("dP/d millivolt (W/mV):", gradient[0] / 1000)
-
-# Coordinate scaling x=z1, y=z2/10 for f=x*x+100*y*y.
-point = np.array([1., 1.])
-z = point * np.array([1., 10.])
-gradient_original = np.array([2*point[0], 200*point[1]])
-gradient_z = 2*z
-raw_step = point - .1*gradient_original
-scaled_step = (z-.1*gradient_z) / np.array([1., 10.])
-print("raw versus rescaled-coordinate step:", raw_step.tolist(), scaled_step.tolist())`,
-    expected: "P (W): 20.0\ndP/dV (W/V), dP/dR (W/ohm): [4.0, -4.0]\nlinear change (W): 0.0\nactual change (W): 0.001960784\ndP/d millivolt (W/mV): 0.004\nraw versus rescaled-coordinate step: [0.8, -19.0] [0.8, 0.8]",
+  "unitsAndScaling": {
+    "title": "Convert sensitivity units and test first-order cancellation",
+    "code": "import numpy as np\n\n# Ideal resistor: P=V*V/R. Inputs V in volts and R in ohms; P in watts.\nvoltage, resistance = 10., 5.\ngradient = np.array([2*voltage/resistance, -voltage**2/resistance**2])\nchange = np.array([.1, .1])\ninitial = voltage**2 / resistance\nactual = (voltage+change[0])**2 / (resistance+change[1]) - initial\nprint(\"P (W):\", initial)\nprint(\"dP/dV (W/V), dP/dR (W/ohm):\", gradient.tolist())\nprint(\"linear change (W):\", float(gradient @ change))\nprint(\"actual change (W):\", round(float(actual), 9))\nprint(\"dP/d millivolt (W/mV):\", gradient[0] / 1000)\n\n# Coordinate scaling x=z1, y=z2/10 for f=x*x+100*y*y.\npoint = np.array([1., 1.])\nz = point * np.array([1., 10.])\ngradient_original = np.array([2*point[0], 200*point[1]])\ngradient_z = 2*z\nraw_step = point - .1*gradient_original\nscaled_step = (z-.1*gradient_z) / np.array([1., 10.])\nprint(\"raw versus rescaled-coordinate step:\", raw_step.tolist(), scaled_step.tolist())",
+    "expected": "P (W): 20.0\ndP/dV (W/V), dP/dR (W/ohm): [4.0, -4.0]\nlinear change (W): 0.0\nactual change (W): 0.001960784\ndP/d millivolt (W/mV): 0.004\nraw versus rescaled-coordinate step: [0.8, -19.0] [0.8, 0.8]",
+    "file": "physical_sensitivity_and_scaling.py"
   },
-  automaticDerivative: {
-    title: 'Execute a small complete forward automatic derivative',
-    code: `import math
-import numpy as np
-
-class Dual:
-    """Value and two input derivatives; only the operations used below."""
-    def __init__(self, value, derivative):
-        self.value = float(value)
-        self.derivative = np.asarray(derivative, dtype=float)
-
-    @staticmethod
-    def lift(other):
-        return other if isinstance(other, Dual) else Dual(other, [0., 0.])
-
-    def __add__(self, other):
-        other = self.lift(other)
-        return Dual(self.value+other.value, self.derivative+other.derivative)
-    __radd__ = __add__
-
-    def __mul__(self, other):
-        other = self.lift(other)
-        return Dual(self.value*other.value,
-                    self.derivative*other.value+self.value*other.derivative)
-    __rmul__ = __mul__
-
-    def sin(self):
-        return Dual(math.sin(self.value), math.cos(self.value)*self.derivative)
-
-x, y = Dual(1.2, [1., 0.]), Dual(-.7, [0., 1.])
-result = x*x*y + x.sin()
-manual = np.array([2*x.value*y.value+math.cos(x.value), x.value**2])
-def f(a, b):
-    return a*a*b+math.sin(a)
-h = 1e-5
-finite_difference = np.array([(f(1.2+h, -.7)-f(1.2-h, -.7))/(2*h),
-                              (f(1.2, -.7+h)-f(1.2, -.7-h))/(2*h)])
-assert np.allclose(result.derivative, manual)
-assert np.allclose(result.derivative, finite_difference, atol=1e-8)
-print("value:", round(result.value, 6))
-print("AD, manual, central difference:")
-for vector in (result.derivative, manual, finite_difference):
-    print(np.round(vector, 6).tolist())
-print("40 repeated local factors .5 or 2:", f"{.5**40:.3e}", f"{2.**40:.3e}")`,
-    expected: "value: -0.075961\nAD, manual, central difference:\n[-1.317642, 1.44]\n[-1.317642, 1.44]\n[-1.317642, 1.44]\n40 repeated local factors .5 or 2: 9.095e-13 1.100e+12",
+  "automaticDerivative": {
+    "title": "Execute a small complete forward automatic derivative",
+    "code": "import math\nimport numpy as np\n\nclass Dual:\n    \"\"\"Value and two input derivatives; only the operations used below.\"\"\"\n    def __init__(self, value, derivative):\n        self.value = float(value)\n        self.derivative = np.asarray(derivative, dtype=float)\n\n    @staticmethod\n    def lift(other):\n        return other if isinstance(other, Dual) else Dual(other, [0., 0.])\n\n    def __add__(self, other):\n        other = self.lift(other)\n        return Dual(self.value+other.value, self.derivative+other.derivative)\n    __radd__ = __add__\n\n    def __mul__(self, other):\n        other = self.lift(other)\n        return Dual(self.value*other.value,\n                    self.derivative*other.value+self.value*other.derivative)\n    __rmul__ = __mul__\n\n    def sin(self):\n        return Dual(math.sin(self.value), math.cos(self.value)*self.derivative)\n\nx, y = Dual(1.2, [1., 0.]), Dual(-.7, [0., 1.])\nresult = x*x*y + x.sin()\nmanual = np.array([2*x.value*y.value+math.cos(x.value), x.value**2])\ndef f(a, b):\n    return a*a*b+math.sin(a)\nh = 1e-5\nfinite_difference = np.array([(f(1.2+h, -.7)-f(1.2-h, -.7))/(2*h),\n                              (f(1.2, -.7+h)-f(1.2, -.7-h))/(2*h)])\nassert np.allclose(result.derivative, manual)\nassert np.allclose(result.derivative, finite_difference, atol=1e-8)\nprint(\"value:\", round(result.value, 6))\nprint(\"AD, manual, central difference:\")\nfor vector in (result.derivative, manual, finite_difference):\n    print(np.round(vector, 6).tolist())\nprint(\"40 repeated local factors .5 or 2:\", f\"{.5**40:.3e}\", f\"{2.**40:.3e}\")",
+    "expected": "value: -0.075961\nAD, manual, central difference:\n[-1.317642, 1.44]\n[-1.317642, 1.44]\n[-1.317642, 1.44]\n40 repeated local factors .5 or 2: 9.095e-13 1.100e+12",
+    "file": "forward_dual_scalar_derivatives.py"
   },
-  practice: {
-    title: 'Check the independent quadratic and directional tasks',
-    code: `import numpy as np
-
-# New function: f=x*y+y*y at (2,-1), change=(.03,.02).
-point = np.array([2., -1.])
-change = np.array([.03, .02])
-def f(p):
-    return p[0]*p[1]+p[1]**2
-gradient = np.array([point[1], point[0]+2*point[1]])
-print("gradient:", gradient.tolist())
-print("predicted and actual change:",
-      [round(float(v), 6) for v in (gradient @ change, f(point+change)-f(point))])
-direction = np.array([-3., 4.]) / 5
-print("unit-direction rate:", round(float(gradient @ direction), 6))
-
-# New loss q=2*x*x+3*y*y: eigenvalues of H are 4 and 6.
-for rate in (.2, 1/3, .4):
-    factors = np.array([1-4*rate, 1-6*rate])
-    point = np.array([1., 1.]) * factors**6
-    print("rate:", round(rate, 6), "factors:", np.round(factors, 6).tolist(),
-          "six-step point:", np.round(point, 6).tolist())`,
-    expected: "gradient: [-1.0, 0.0]\npredicted and actual change: [-0.03, -0.029]\nunit-direction rate: 0.6\nrate: 0.2 factors: [0.2, -0.2] six-step point: [6.4e-05, 6.4e-05]\nrate: 0.333333 factors: [-0.333333, -1.0] six-step point: [0.001372, 1.0]\nrate: 0.4 factors: [-0.6, -1.4] six-step point: [0.046656, 7.529536]",
+  "practice": {
+    "title": "Check the independent quadratic and directional tasks",
+    "code": "import numpy as np\n\n# New function: f=x*y+y*y at (2,-1), change=(.03,.02).\npoint = np.array([2., -1.])\nchange = np.array([.03, .02])\ndef f(p):\n    return p[0]*p[1]+p[1]**2\ngradient = np.array([point[1], point[0]+2*point[1]])\nprint(\"gradient:\", gradient.tolist())\nprint(\"predicted and actual change:\",\n      [round(float(v), 6) for v in (gradient @ change, f(point+change)-f(point))])\ndirection = np.array([-3., 4.]) / 5\nprint(\"unit-direction rate:\", round(float(gradient @ direction), 6))\n\n# New loss q=2*x*x+3*y*y: eigenvalues of H are 4 and 6.\nfor rate in (.2, 1/3, .4):\n    factors = np.array([1-4*rate, 1-6*rate])\n    point = np.array([1., 1.]) * factors**6\n    print(\"rate:\", round(rate, 6), \"factors:\", np.round(factors, 6).tolist(),\n          \"six-step point:\", np.round(point, 6).tolist())",
+    "expected": "gradient: [-1.0, 0.0]\npredicted and actual change: [-0.03, -0.029]\nunit-direction rate: 0.6\nrate: 0.2 factors: [0.2, -0.2] six-step point: [6.4e-05, 6.4e-05]\nrate: 0.333333 factors: [-0.333333, -1.0] six-step point: [0.001372, 1.0]\nrate: 0.4 factors: [-0.6, -1.4] six-step point: [0.046656, 7.529536]",
+    "file": "multivariate_transfer_practice.py"
   },
+  "numericalChange": {
+    "title": "Compare analytical, central and adaptive derivatives; accumulate the two gradient paths",
+    "file": "numerical_derivatives_and_accumulated_change.py",
+    "code": "\"\"\"Python 3.12, NumPy 2.3.5, SciPy 1.18.1; numerical estimates beside exact identities.\"\"\"\nimport numpy as np\nfrom scipy.differentiate import jacobian\nfrom scipy.integrate import quad\n\n\ndef scalar_field(x):\n    # First axis addresses input coordinates; trailing axes are SciPy's evaluation batch.\n    return np.asarray([x[0] ** 2 * x[1] + np.sin(x[0])])\n\n\ndef central_gradient(function, point, step):\n    point = np.asarray(point, dtype=float)\n    if step <= 0 or not np.isfinite(step):\n        raise ValueError(\"step must be finite and positive\")\n    gradient = np.empty(point.size)\n    for i in range(point.size):\n        displacement = np.zeros_like(point)\n        displacement[i] = step\n        gradient[i] = (function(point + displacement)[0]\n                       - function(point - displacement)[0]) / (2 * step)\n    return gradient\n\n\nif __name__ == \"__main__\":\n    point = np.array([1.2, -0.7])\n    exact = np.array([2 * point[0] * point[1] + np.cos(point[0]), point[0] ** 2])\n    velocity = np.array([2.0, -1.0])\n    result = jacobian(scalar_field, point, order=4, initial_step=0.1,\n                      tolerances={\"rtol\": 1e-10, \"atol\": 1e-11})\n    np.testing.assert_array_equal(result.success, True)\n    np.testing.assert_allclose(result.df[0], exact, rtol=1e-9, atol=1e-10)\n    np.set_printoptions(precision=6, suppress=True)\n    print(\"analytical gradient\", exact)\n    print(\"central gradient\", central_gradient(scalar_field, point, 1e-4))\n    print(\"adaptive gradient\", result.df[0])\n    print(\"adaptive status\", result.status.tolist())\n    print(\"adaptive error estimates\", result.error.tolist())\n    print(\"velocity rate\", round(float(result.df[0] @ velocity), 6))\n    print(\"unit-distance slope\", round(float(result.df[0] @ (velocity / np.linalg.norm(velocity))), 6))\n\n    # For f=x²+2y² from (0,0) to (1,1), two paths give the same endpoint change3.\n    diagonal, diagonal_error = quad(lambda t: 6 * t, 0, 1, epsabs=1e-10)\n    first, first_error = quad(lambda t: 2 * t, 0, 1, epsabs=1e-10)\n    second, second_error = quad(lambda t: 4 * t, 0, 1, epsabs=1e-10)\n    np.testing.assert_allclose([diagonal, first + second], [3, 3], atol=1e-10)\n    print(\"diagonal accumulated change\", round(diagonal, 6))\n    print(\"two-leg accumulated change\", round(first + second, 6))\n    print(\"quadrature error estimates\", [diagonal_error, first_error + second_error])\n",
+    "expected": "analytical gradient [-1.317642  1.44    ]\ncentral gradient [-1.317642  1.44    ]\nadaptive gradient [-1.317642  1.44    ]\nadaptive status [[0, 0]]\nadaptive error estimates [[1.7286616582623537e-11, 2.220446049250313e-16]]\nvelocity rate -4.075284\nunit-distance slope -1.822523\ndiagonal accumulated change 3.0\ntwo-leg accumulated change 3.0\nquadrature error estimates [3.3306690738754696e-14, 3.3306690738754696e-14]"
+  }
 };

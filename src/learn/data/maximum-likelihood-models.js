@@ -12,7 +12,7 @@ export function parseBinary(text) {
   return Object.freeze(tokens.map(Number));
 }
 export function parseMeasurements(text) {
-  const tokens = text.trim() ? text.trim().split(/[\s,]+/) : [];
+  const tokens = text.trim() ? text.trim().split(/[\s,]+/).filter(token => token.length > 0) : [];
   const values = tokens.map(Number);
   if (!tokens.length || tokens.length > 12 || values.some(value => !Number.isFinite(value) || Math.abs(value) > 50)) throw new Error('Use 1–12 finite measurements between −50 and 50, separated by spaces or commas.');
   return Object.freeze(values);

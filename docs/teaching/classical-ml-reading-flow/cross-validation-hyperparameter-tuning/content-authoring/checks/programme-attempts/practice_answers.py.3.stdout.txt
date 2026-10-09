@@ -1,0 +1,13 @@
+N1 {"median": [2.0], "mean": [2.0], "variance": [2.0], "held": [5.65685424949238, 0.0], "changed_held": [69.29646455628165, 0.0], "state_unchanged_by_transform": true}
+N2 {"fold_F1": ["2/3", "0"], "mean": "1/3", "pooled": "1/2"}
+N3 {"row_accuracy": "4/5", "person_accuracy": "1/2"}
+N4 {"3": [0, 1, 2], "4": [0, 1]}
+N5 {"source_IDs": [1, 5, 9, 13]}
+N6 {"without_replacement": "4/5", "independent_replacement": "19/27"}
+N7 {"small_branch_per_setting": "1/4", "large_branch_per_setting": "1/16"}
+N8 {"5": [1, [{"index": 0, "candidate": "A", "mean_accuracy": 0.8000000000000002, "mean_cost": 10.0, "eligible": false}, {"index": 1, "candidate": "B", "mean_accuracy": 0.85, "mean_cost": 3.0, "eligible": true}, {"index": 2, "candidate": "C", "mean_accuracy": null, "mean_cost": null, "eligible": false}]], "2": {"refusal": "No candidate has all finite fold scores and acceptable mean cost."}, "10": [1, [{"index": 0, "candidate": "A", "mean_accuracy": 0.8000000000000002, "mean_cost": 10.0, "eligible": true}, {"index": 1, "candidate": "B", "mean_accuracy": 0.85, "mean_cost": 3.0, "eligible": true}, {"index": 2, "candidate": "C", "mean_accuracy": null, "mean_cost": null, "eligible": false}]], "changed_A_cap10": [0, [{"index": 0, "candidate": "A", "mean_accuracy": 0.9, "mean_cost": 10.0, "eligible": true}, {"index": 1, "candidate": "B", "mean_accuracy": 0.85, "mean_cost": 3.0, "eligible": true}, {"index": 2, "candidate": "C", "mean_accuracy": null, "mean_cost": null, "eligible": false}]]}
+N9 {"mean_variance": "9/25", "independent": "1/5"}
+N10 {"discrepancy": "3/16", "held_variance": "1/8", "MSE": "1/16", "single_outcome_subtraction": "-1/16"}
+N11 {"default_grouped_accuracy": 0.0, "wrong_occurrence_accuracy": 1.0, "default_T": 1.0, "changed_T": 0.0, "changed_k1_correct": [1, 2], "undefined_mass": "1/64", "conditional_defined_denominator": 252}
+N12 {"smax": 2, "B": 27, "brackets": [{"s": 2, "n": 9, "r": "1", "rounds": [[9, "1"], [3, "3"], [1, "9"]], "fresh": "27", "continuation_if_real": "21"}, {"s": 1, "n": 5, "r": "3", "rounds": [[5, "3"], [1, "9"]], "fresh": "24", "continuation_if_real": "21"}, {"s": 0, "n": 3, "r": "9", "rounds": [[3, "9"]], "fresh": "27", "continuation_if_real": "27"}], "fresh_total": "78", "continuation_total_if_real": "69"}
+N13 {"preserved_row_protocol": "340/344 pooled; separate final selection/refit; new-island/next-season unestablished", "required_new_evidence": "Feasible representative island/time units, label availability and a predeclared protected assessment"}

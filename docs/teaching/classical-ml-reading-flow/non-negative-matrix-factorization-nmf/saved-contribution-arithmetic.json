@@ -1,0 +1,71 @@
+{
+  "scope": "Saved H/W multiplication and sums only, no fit or transform",
+  "rows": [
+    {
+      "index": 0,
+      "observedKeys": [
+        "sourceRow",
+        "digit",
+        "pixels"
+      ],
+      "sourceRow": 242,
+      "largestCoefficientOneBased": 2,
+      "largestTotalContributionOneBased": 2,
+      "coefficient": [
+        0.17645306257523935,
+        0.7401606838954491,
+        0.35507968290394915,
+        0.09898370289714804,
+        0.2751947642817364,
+        0.6129899958656101,
+        0.1857680492602524,
+        0.0
+      ],
+      "contributionSum": [
+        1.6348159280350867,
+        5.814577378704519,
+        4.012646730423673,
+        0.9372984974790182,
+        2.9415933319177405,
+        4.759388493317198,
+        1.7223346236431152,
+        0.0
+      ],
+      "reconstructedMaximum": 1.0176746162346788
+    },
+    {
+      "index": 1,
+      "observedKeys": [
+        "sourceRow",
+        "digit",
+        "pixels"
+      ],
+      "sourceRow": 256,
+      "largestCoefficientOneBased": 7,
+      "largestTotalContributionOneBased": 8,
+      "coefficient": [
+        0.2321911099210713,
+        0.011934602685408047,
+        0.3424206826975729,
+        0.0,
+        0.12081544616148039,
+        0.0,
+        0.6884925427238711,
+        0.628002130601251
+      ],
+      "contributionSum": [
+        2.1512220831262505,
+        0.09375622389611028,
+        3.8695912467273876,
+        0.0,
+        1.2914123266438298,
+        0.0,
+        6.383307297328288,
+        6.8945940980317655
+      ],
+      "reconstructedMaximum": 1.2277104609548262
+    }
+  ],
+  "coefficientVsContributionDisagreements": 16,
+  "ofRows": 60
+}

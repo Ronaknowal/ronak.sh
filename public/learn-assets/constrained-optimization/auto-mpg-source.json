@@ -1,0 +1,18 @@
+{
+  "title": "Auto MPG",
+  "citation": "Quinlan, R. (1993). Auto MPG [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5859H",
+  "landingPage": "https://archive.ics.uci.edu/dataset/9/auto+mpg",
+  "downloadUrl": "https://archive.ics.uci.edu/static/public/9/auto+mpg.zip",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "originalAcquisitionDate": "2026-10-09",
+  "file": "auto-mpg.data",
+  "bytes": 30286,
+  "sha256": "48b830e11feee5572525f8f1691ddb9d38d3d7b7063edcd8fca672c2a5e17d8d",
+  "sourceRows": 398,
+  "rawDataChanges": "None. The distributed raw file is byte-identical to the acquired UCI archive member.",
+  "lessonSelection": "One-based original row IDs are preserved. Model-year code 82 selects 31 records (IDs 368–398); row 375 has missing horsepower and is excluded from the two-objective comparison, leaving 30 records.",
+  "objectives": "Maximize recorded mpg and horsepower, equivalently minimize their negations.",
+  "scope": "Historical recorded catalogue; no causal, prospective or population performance claim.",
+  "derivedFiles": "auto_mpg_pareto.results.json stores the already computed 255 cylinder-limit/mpg-floor comparisons. The supplied programme reproduces them from the unchanged raw file."
+}

@@ -1,300 +1,50 @@
 import { useId, useState } from 'react';
-import { Investigation } from './LessonInvestigation.jsx';
-import { foundationEdges, formatGraphNumber, graphAveragingTrace, graphConnectivity, graphEnergy, graphFoundationLabels, graphHarmonicInterpolation, graphMatrices, graphMatrixVector, graphNormalizations, graphWalks } from '../../data/graph-fundamentals-models.js';
+import { FlowControls, FlowLab, FlowReadout, FlowSlider } from './LessonFlow.jsx';
+import { foundationEdges, graphAveragingTrace, graphConnectivity, graphEnergy, graphHarmonicInterpolation, graphMatrices, graphMatrixVector, graphNormalizations, graphWalks } from '../../data/graph-fundamentals-models.js';
+import { AnchorEnergyDrawing, EdgeSquares, GraphFigure, GraphMatrix, SignalTrajectories, StationNetwork, WalkLayers, graphNumber as f, stationLabels } from './GraphFundamentalsDrawings.jsx';
+import { LocalDisagreementDrawing } from './GraphFundamentalsFigures.jsx';
 import './graph-fundamentals-labs.css';
-const labels = graphFoundationLabels;
-const format = formatGraphNumber;
-const positions = [[42, 58], [159, 34], [278, 58], [91, 171], [235, 171]];
-function Range({
-  label,
-  value,
-  setValue,
-  min = 0,
-  max = 6,
-  step = 1
-}) {
-  return <label className="gf-range"><span>{label} <strong>{format(value)}</strong></span>
-    <input aria-label={label} type="range" min={min} max={max} step={step} value={value} onChange={event => setValue(Number(event.target.value))} />
-  </label>;
-}
-function Matrix({
-  values,
-  title,
-  rowLabels = labels.slice(0, values.length),
-  columnLabels = rowLabels,
-  selected = null
-}) {
-  return <div className="gf-matrix" role="region" aria-label={title} tabIndex={0}>
-    <table><caption>{title}</caption><thead><tr><th scope="col">row ↓ / col →</th>{columnLabels.map(label => <th scope="col" key={label}>{label}</th>)}</tr></thead>
-      <tbody>{values.map((row, i) => <tr key={i}><th scope="row">{rowLabels[i]}</th>{row.map((value, j) => <td key={j} className={`${value ? 'gf-nonzero' : ''} ${selected?.[0] === i && selected?.[1] === j ? 'gf-selected' : ''}`}>{typeof value === 'boolean' ? Number(value) : format(value, 3)}</td>)}</tr>)}</tbody>
-    </table>
-  </div>;
-}
-function Network({
-  edges,
-  nodeLabels = labels,
-  signal = null,
-  directed = false,
-  anchors = [],
-  selected = [],
-  title
-}) {
-  const arrowId = `gf-arrow-${useId().replaceAll(':', '')}`;
-  const hasReverse = (u, v) => directed && edges.some(([a, b, w]) => w > 0 && a === v && b === u);
-  const lineEdges = edges.filter(([,, weight]) => weight > 0);
-  const hasLoop = edges.some(([u, v, weight]) => u === v && weight > 0);
-  const viewBox = hasLoop ? '0 -32 320 256' : nodeLabels.length === 3 && !signal ? '0 0 320 100' : '0 0 320 224';
-  return <svg className="gf-network" viewBox={viewBox} role="img" aria-label={title}>
-    <title>{title}</title>
-    <defs><marker id={arrowId} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor" /></marker></defs>
-    {lineEdges.map(([u, v, weight], index) => {
-      const [x1, y1] = positions[u];
-      const [x2, y2] = positions[v];
-      if (u === v) return <g key={index}><path d={`M${x1 - 12},${y1 - 14} C${x1 - 38},${y1 - 60} ${x1 + 38},${y1 - 60} ${x1 + 12},${y1 - 14}`} fill="none" stroke="var(--gf-gold)" strokeWidth="2" /><text x={x1} y={y1 - 49} textAnchor="middle">loop {weight}</text></g>;
-      const length = Math.hypot(x2 - x1, y2 - y1);
-      const ux = (x2 - x1) / length;
-      const uy = (y2 - y1) / length;
-      const offset = hasReverse(u, v) ? 17 : 0;
-      const middle = [(x1 + x2) / 2 - uy * offset, (y1 + y2) / 2 + ux * offset];
-      const path = `M${x1 + ux * 19},${y1 + uy * 19} Q${middle[0]},${middle[1]} ${x2 - ux * 23},${y2 - uy * 23}`;
-      return <g key={index} className="gf-edge"><path d={path} markerEnd={directed ? `url(#${arrowId})` : undefined} fill="none" stroke="currentColor" strokeWidth={1.5 + Math.min(weight, 3)} />
-        <rect x={middle[0] - 11} y={middle[1] - 11} width="22" height="20" rx="3" /><text x={middle[0]} y={middle[1] + 4} textAnchor="middle">{weight}</text>
-      </g>;
-    })}
-    {nodeLabels.map((label, index) => {
-      const [x, y] = positions[index];
-      return <g key={label} className={`${selected.includes(index) ? 'gf-active-node' : ''} ${anchors.includes(index) ? 'gf-anchor-node' : ''}`}>
-        {anchors.includes(index) && <rect x={x - 22} y={y - 22} width="44" height="44" rx="3" />}
-        <circle cx={x} cy={y} r="18" /><text x={x} y={y + 6} textAnchor="middle">{label}</text>
-        {signal && <text className="gf-signal-label" x={x} y={y + 42} textAnchor="middle">{signal[index] === null ? '?' : format(signal[index], 2)}</text>}
-      </g>;
-    })}
-  </svg>;
-}
-function Groups({
-  components
-}) {
-  return <span>{components.map((component, index) => <span className="gf-group" key={index}>{component.map(vertex => labels[vertex]).join(' · ')}</span>)}</span>;
-}
-function NodeValues({
-  values,
-  nodeLabels = labels.slice(0, values.length)
-}) {
-  return <div className="gf-node-values">{nodeLabels.map((label, i) => <span key={label} data-node-value={label}><strong>{label}</strong>{format(values[i])}</span>)}</div>;
-}
-export function GraphMatrixWalkLab() {
-  const [directed, setDirected] = useState(false);
-  const [bridge, setBridge] = useState(false);
-  const [extra, setExtra] = useState(false);
-  const [start, setStart] = useState(0);
-  const [target, setTarget] = useState(2);
-  const [steps, setSteps] = useState(2);
-  const edges = foundationEdges(bridge ? 1 : 0, extra);
-  if (directed) edges.push([2, 1, 1]);
-  const graph = graphMatrices(5, edges, directed);
-  const connectivity = graphConnectivity(graph.adjacency);
-  const walks = graphWalks(graph.adjacency, start, target, steps);
-  const reset = () => {
-    setDirected(false);
-    setBridge(false);
-    setExtra(false);
-    setStart(0);
-    setTarget(2);
-    setSteps(2);
-  };
-  return <Investigation id="graph-matrix-walks" kicker="ONE RELATION · LINKED VIEWS" title="Which matrix cells describe this journey?">
-    <p>Inspect the A-to-C entry of A² before inspecting the walks. The drawn weights are coupling strengths; every view below uses the same active graph.</p>
-    <div className="gf-controls">
-      <label><input type="checkbox" checked={directed} onChange={event => setDirected(event.target.checked)} /> Directed arrows, including C→B</label>
-      <label><input type="checkbox" checked={bridge} onChange={event => setBridge(event.target.checked)} /> Add C–D bridge, weight 1</label>
-      <label><input type="checkbox" checked={extra} onChange={event => setExtra(event.target.checked)} /> Add A–C edge, weight 1</label>
-    </div>
-    <div className="gf-linked"><Network edges={edges} directed={directed} selected={[start, target]} title="Five-vertex weighted graph; line positions are layout, labels are weights" /><Matrix values={graph.adjacency} title="A: weighted adjacency" selected={[start, target]} /></div>
-    <p className="gf-caption">Row is source, column is destination. An undirected edge supplies two symmetric cells. Changing to arrows uses the shown directions; it also adds the explicitly named C→B edge.</p>
-    <div className="gf-controls gf-selects">
-      <label>From<select aria-label="Walk start" value={start} onChange={event => setStart(Number(event.target.value))}>{labels.map((label, i) => <option value={i} key={label}>{label}</option>)}</select></label>
-      <label>To<select aria-label="Walk destination" value={target} onChange={event => setTarget(Number(event.target.value))}>{labels.map((label, i) => <option value={i} key={label}>{label}</option>)}</select></label>
-      <label>Steps<select aria-label="Walk length" value={steps} onChange={event => setSteps(Number(event.target.value))}>{[0, 1, 2, 3].map(value => <option key={value}>{value}</option>)}</select></label>
-      <button type="button" onClick={reset}>Reset graph and walk</button>
-    </div>
-    <p className="gf-result" aria-live="polite">A<sup>{steps}</sup>[{labels[start]}, {labels[target]}] = <strong>{format(walks.weightSum)}</strong>. {walks.walks.length} vertex-sequence {walks.walks.length === 1 ? 'walk contributes' : 'walks contribute'}.</p>
-    <div className="gf-walks">{walks.walks.length ? walks.walks.map((walk, index) => <div key={index}><span>{walk.vertices.map(vertex => labels[vertex]).join(' → ')}</span><span>weight product {format(walk.weight)}</span></div>) : <p>No walk of this exact length. That alone does not rule out another length.</p>}</div>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect the full matrix power and connectivity</h4><Matrix values={walks.power} title={`A to power ${steps}`} selected={[start, target]} /><p>Weak / undirected components: <Groups components={connectivity.weakComponents} /></p><p>Strong components: <Groups components={connectivity.strongComponents} /></p><p>Each vertex reaches itself in zero steps. Matrix-power values count weighted walks of the selected length; the component calculation considers all reachable lengths.</p></section>
-  </Investigation>;
+const labels=stationLabels.slice(0,5), edges=foundationEdges(), values=[3,1,0,2,2];
+function Values({ values: entries, label, names=labels.slice(0,entries.length) }) {
+  return <GraphMatrix values={entries.map(value=>[value])} rows={names} columns={['value']} label={label} digits={6}/>;
 }
 export function FoundationGraphFigure() {
-  const edges = foundationEdges();
-  const graph = graphMatrices(5, edges);
-  return <figure className="gf-inline" data-graph-figure="foundation-matrix">
-    <div className="gf-linked"><Network edges={edges} title="The initial two-component weighted station network" /><Matrix values={graph.adjacency} title="Same graph: adjacency A" selected={[1, 0]} /></div>
-    <figcaption>B's row has weight 2 toward A and weight 1 toward C. D and E occupy their own matrix block. The empty C–D cells represent the absent bridge.</figcaption>
-  </figure>;
+  return <GraphFigure name="foundation-matrix" label="One undirected network and its two ordered cells" caption="A—B is one undirected connection. Its weight 2 occupies both A,B and B,A. Empty cross-component cells represent absent connections."><div className="gf-two"><StationNetwork edges={edges} selected={[0,1]} title="A—B weight 2, B—C weight 1, D—E weight 2. Positions are layout."/><GraphMatrix label="Adjacency: row source, column destination" values={graphMatrices(5,edges).adjacency} mark={(i,j)=>(i===0&&j===1)||(i===1&&j===0)}/></div></GraphFigure>;
+}
+export function GraphMatrixWalkLab() {
+  const [pair,setPair]=useState('0,2'), [steps,setSteps]=useState(2);
+  const [start,target]=pair.split(',').map(Number), result=graphWalks(graphMatrices(5,edges).adjacency,start,target,steps);
+  return <FlowLab id="graph-matrix-walks" label="Weighted walks of one exact length"><div className="gf-two"><WalkLayers edges={edges.filter(edge=>edge[2]>0)} size={5} start={start} target={target} steps={steps}/><GraphMatrix values={result.power} label={`A to power ${steps}: selected ${labels[start]},${labels[target]}`} mark={(i,j)=>i===start&&j===target}/></div><FlowControls><label>Endpoints<select aria-label="Walk endpoints" value={pair} onChange={event=>setPair(event.target.value)}>{labels.flatMap((from,i)=>labels.map((to,j)=><option key={`${i},${j}`} value={`${i},${j}`}>{from} → {to}</option>))}</select></label><label>Exact length<select aria-label="Walk length" value={steps} onChange={event=>setSteps(Number(event.target.value))}>{[0,1,2,3].map(step=><option key={step} value={step}>{step} {step===1?'step':'steps'}</option>)}</select></label><button type="button" onClick={()=>{setPair('0,2');setSteps(2);}}>Reset walk</button></FlowControls><FlowReadout>A<sup>{steps}</sup>[{labels[start]}, {labels[target]}] = <strong>{f(result.weightSum)}</strong>, the sum of {result.walks.length} weighted vertex-sequence {result.walks.length===1?'walk':'walks'}. {steps===0?'The zero-step matrix is the identity.':!result.walks.length?'This exact length has no walk; another length may still connect the endpoints.':'Each highlighted arrow is one permitted move between consecutive step lanes.'}</FlowReadout></FlowLab>;
 }
 export function DirectedComponentsFigure() {
-  const edges = [[0, 1, 1], [1, 2, 1], [2, 1, 1]];
-  const result = graphConnectivity(graphMatrices(3, edges, true).adjacency);
-  return <figure className="gf-inline" data-graph-figure="directed-components"><div className="gf-linked"><Network edges={edges} nodeLabels={labels.slice(0, 3)} directed title="A points to B, and B and C have reciprocal arrows" /><Matrix values={result.reachable} title="Can row reach column? 1=yes" /></div>
-    <figcaption>A can reach B and C, but neither can return to A. There is one weak component A·B·C and two strong components: A and B·C. The diagonal includes the zero-step walk.</figcaption>
-  </figure>;
+  const directedEdges=[[0,1,1],[1,2,1],[2,1,1]], result=graphConnectivity(graphMatrices(3,directedEdges,true).adjacency);
+  return <GraphFigure name="directed-components" label="Outgoing reachability and return paths" caption="A can reach B and C, but neither can return to A. The dashed outer enclosure is one weak component; solid enclosures separate strong components {A} and {B,C}. Diagonal entries include zero-step walks."><div className="gf-two"><StationNetwork edges={directedEdges} labels={labels.slice(0,3)} directed groups={[{x:158,y:60,rx:155,ry:53,kind:'weak'},{x:42,y:60,rx:30,ry:32},{x:216,y:60,rx:92,ry:36}]} title="A points to B; B and C have reciprocal arrows. Return-path enclosures distinguish two strong components."/><GraphMatrix values={result.reachable} label="Can row reach column? 1 = yes" rows={labels.slice(0,3)} columns={labels.slice(0,3)} block={(i,j)=>(i===0&&j===0)||(i>0&&j>0)}/></div></GraphFigure>;
 }
 export function LaplacianEnergyLab() {
-  const [signal, setSignal] = useState([3, 1, 0, 2, 2]);
-  const [bridge, setBridge] = useState(0);
-  const [selected, setSelected] = useState(1);
-  const result = graphEnergy(5, foundationEdges(bridge), signal);
-  const maxEnergy = Math.max(1, ...result.edgeTerms.map(edge => edge.energy));
-  return <Investigation id="graph-edge-energy" kicker="LOCAL DIFFERENCES · GLOBAL ENERGY" title="Where does the disagreement live?">
-    <p>Inspect the signed result at B. A larger neighbor pulls its contribution one way; a smaller neighbor pulls the other. The edge energies stay nonnegative even when the signed contributions cancel.</p>
-    <div className="gf-linked"><Network edges={result.activeEdges} signal={signal} selected={[selected]} title="Node signal values and weighted edges for the disagreement calculation" /><div className="gf-controls gf-signal-controls">{labels.map((label, i) => <Range key={label} label={`Signal at ${label}`} value={signal[i]} setValue={value => setSignal(previous => previous.map((entry, index) => index === i ? value : entry))} />)}</div></div>
-    <div className="gf-controls"><Range label="Bridge C–D weight" value={bridge} max={3} setValue={setBridge} /><label>Inspect row<select aria-label="Laplacian row" value={selected} onChange={event => setSelected(Number(event.target.value))}>{labels.map((label, i) => <option key={label} value={i}>{label}</option>)}</select></label>
-      <button type="button" onClick={() => {
-        setSignal([3, 3, 3, 1, 1]);
-        setBridge(0);
-      }}>Make each component constant</button>
-      <button type="button" onClick={() => {
-        setSignal([3, 1, 0, 2, 2]);
-        setBridge(0);
-        setSelected(1);
-      }}>Reset energy</button>
-    </div>
-    <div className="gf-row-equation">{result.adjacency[selected].map((weight, neighbor) => weight > 0 && <span key={neighbor}>{format(weight)} × ({format(signal[selected])} − {format(signal[neighbor])})<small>edge {labels[selected]}–{labels[neighbor]}: {format(weight * (signal[selected] - signal[neighbor]))}</small></span>)}<strong>Σ = {format(result.action[selected])}</strong></div>
-    <p>All coordinates of Lx, with signed values:</p><NodeValues values={result.action} />
-    <div className="gf-energy-bars" aria-label="Energy per undirected edge">{result.edgeTerms.map((edge, i) => <div key={i}><span>{labels[edge.source]}–{labels[edge.target]}</span><div><i style={{
-            width: `${100 * edge.energy / maxEnergy}%`
-          }} /></div><span>{format(edge.weight)} × {format(edge.drop)}² = <strong>{format(edge.energy)}</strong></span></div>)}</div>
-    <p className="gf-caption">Bar lengths share the current scale 0 to {format(maxEnergy)} energy units. Each undirected edge appears once.</p>
-    <p className="gf-result" aria-live="polite">Edge sum = <strong>{format(result.edgeEnergy)}</strong>; independently multiplying xᵀLx gives <strong>{format(result.quadraticEnergy)}</strong>.</p>
-    <p>Components: <Groups components={result.components} />. Try the constant-per-component preset, then add the bridge. Different component values become a disagreement only when a positive coupling connects them.</p>
-  </Investigation>;
+  const [b,setB]=useState(1), signal=[3,b,0,2,2], result=graphEnergy(5,edges,signal);
+  return <FlowLab id="graph-edge-energy" label="Signed disagreement and squared edge energy"><LocalDisagreementDrawing signal={signal}/><EdgeSquares values={signal}/><FlowControls><FlowSlider name="Signal at B" value={b} onChange={setB} min={0} max={6} step={1} format={f}/><button type="button" onClick={()=>setB(1)}>Reset B</button></FlowControls><FlowReadout>At B: 2({b} − 3) + ({b} − 0) = <strong>{f(result.action[1])}</strong>. Edge energy = <strong>{f(result.edgeEnergy)}</strong>; independently multiplying xᵀLx gives <strong>{f(result.quadraticEnergy)}</strong>. Signed terms can cancel while squared drops stay positive.</FlowReadout><Values label="Every signed coordinate of Lx" values={result.action}/><p className="gf-note">One coordinate unit has the same drawn length in every square. Repeating a square twice represents coupling weight 2. A zero drop has zero area; the small baseline dot marks its location.</p></FlowLab>;
 }
 export function IncidenceFlowFigure() {
-  const result = graphEnergy(5, foundationEdges(), [3, 1, 0, 2, 2]);
-  return <figure className="gf-inline" data-graph-figure="incidence-flow">
-    <div className="gf-incidence-flow"><div><strong>Node potentials x</strong><NodeValues values={[3, 1, 0, 2, 2]} /><p>C takes tail minus head</p></div><div><strong>Edge drops Cx</strong><NodeValues values={result.edgeTerms.map(edge => edge.drop)} nodeLabels={['A→B', 'B→C', 'D→E']} /><p>W multiplies by conductance</p></div><div><strong>Edge currents WCx</strong><NodeValues values={result.edgeTerms.map(edge => edge.flow)} nodeLabels={['A→B', 'B→C', 'D→E']} /><p>Cᵀ gathers signed outflow</p></div></div>
-    <div className="gf-flow-result"><strong>Back at nodes: Lx</strong><NodeValues values={result.action} /></div>
-    <figcaption>The A→B current is 4; B sends 1 toward C while receiving 4 from A, so its net outward current is −3. The sum of all five node outflows is zero: every internal current enters one endpoint and leaves the other. Arrows here choose a sign convention for undirected couplings.</figcaption>
-  </figure>;
+  const result=graphEnergy(5,edges,values);
+  return <GraphFigure name="incidence-flow" label="Node potentials, oriented currents, and signed outflows" caption="A→B carries 4, B→C carries 1, and D→E carries 0. Gathering at B gives −4+1=−3. Each current enters one endpoint and leaves the other; all node outflows sum to zero. These arrows select signs for undirected couplings."><div className="gf-three"><div><p className="gf-stage-label">Node potentials x</p><StationNetwork edges={edges} values={values} title="Node potentials3,1,0,2,2."/></div><div><p className="gf-stage-label">Currents WCx</p><StationNetwork edges={result.activeEdges} directed edgeLabels={result.edgeTerms.map(edge=>`current ${f(edge.flow)}`)} title="Oriented currents A→B4, B→C1, D→E0."/></div><div><p className="gf-stage-label">Net outward current CᵀWCx</p><StationNetwork edges={edges} values={result.action} selected={[1]} title="Node outflows4,−3,−1,0,0."/></div></div><GraphMatrix values={result.edgeTerms.map(edge=>[edge.drop,edge.weight,edge.flow])} rows={['A→B','B→C','D→E']} columns={['Cx','W diagonal','WCx']} label="Actual intermediate edge coordinates"/></GraphFigure>;
 }
 export function GraphNormalizationLab() {
-  const [loop, setLoop] = useState(false);
-  const [operator, setOperator] = useState('symmetric');
-  const [vector, setVector] = useState('ones');
-  const edges = [[0, 1, 2], [1, 2, 1], ...(loop ? [[1, 1, 1]] : [])];
-  const result = graphNormalizations(4, edges);
-  const names = {
-    laplacian: 'L = D − A',
-    symmetric: 'S = H L H',
-    randomWalk: 'R = D† L',
-    transition: 'P: hold at isolates',
-    naiveIdentity: 'Naive I − H A H'
-  };
-  const matrix = result[operator];
-  const values = vector === 'ones' ? [1, 1, 1, 1] : result.degrees.map(Math.sqrt);
-  const action = graphMatrixVector(matrix, values);
-  return <Investigation id="graph-normalization" kicker="SAME EDGES · DIFFERENT OPERATORS" title="What should happen to the isolated vertex?">
-    <p>Inspect the D diagonal when selecting the naive formula. Here Hii is 1/√di when di is positive and zero otherwise. The highlighted D diagonal makes the isolated-vertex convention visible.</p>
-    <div className="gf-controls"><label><input type="checkbox" checked={loop} onChange={event => setLoop(event.target.checked)} /> Add a unit self-loop at B</label>
-      <label>Operator<select aria-label="Graph normalization operator" value={operator} onChange={event => setOperator(event.target.value)}>{Object.entries(names).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
-      <label>Input signal<select aria-label="Normalization signal" value={vector} onChange={event => setVector(event.target.value)}><option value="ones">All ones</option><option value="root">Square-root degree</option></select></label>
-      <button type="button" onClick={() => {
-        setLoop(false);
-        setOperator('symmetric');
-        setVector('ones');
-      }}>Reset normalization</button>
-    </div>
-    <div className="gf-linked"><Network edges={edges} nodeLabels={labels.slice(0, 4)} title="Weighted path A-B-C, isolated D, optional self-loop at B" /><Matrix values={matrix} title={names[operator]} selected={[3, 3]} /></div>
-    <p>Row-sum degree:</p><NodeValues values={result.degrees} />
-    <p>Input signal:</p><NodeValues values={values} />
-    <p className="gf-result" aria-live="polite">Operator × signal:</p><NodeValues values={action} />
-    <p className="gf-caption">Rounded numerical readouts; tiny nonzero floating residuals remain visible. S annihilates √degree but generally not the all-ones signal. The isolate also supplies its own zero direction; √degree alone has a zero there.</p>
-    <p>{operator === 'naiveIdentity' ? 'The isolate now has diagonal 1. That formula differs from H L H at D, so it describes another operator.' : operator === 'transition' ? 'The D row holds its value with PDD=1. Every row sums to one, including the isolate.' : 'The isolate has an all-zero generator row. It neither contributes disagreement nor exchanges with another vertex.'} {loop ? 'The loop cancels from L, but it changes B’s degree and therefore the normalized operators.' : 'With no self-loops, positive-degree diagonal entries of S are one.'}</p>
-  </Investigation>;
-}
-function Trajectories({
-  states
-}) {
-  const all = states.flat();
-  const low = Math.min(0, ...all);
-  const high = Math.max(6, ...all);
-  const x = step => 74 + step / Math.max(1, states.length - 1) * 218;
-  const y = value => 178 - (value - low) / (high - low) * 142;
-  return <svg className="gf-trajectories" viewBox="0 0 320 240" role="img" aria-label="Calculated node signals against discrete update step">
-    <title>Calculated trajectories: horizontal axis is update step, vertical axis is signal value</title>
-    {[low, (low + high) / 2, high].map(value => <g key={value}><line x1="74" x2="292" y1={y(value)} y2={y(value)} /><text x="67" y={y(value) + 5} textAnchor="end">{format(value, 1)}</text></g>)}
-    <text x="74" y="202" textAnchor="middle">0</text><text x="292" y="202" textAnchor="middle">{Math.max(1, states.length - 1)}</text><text x="183" y="228" textAnchor="middle">update step</text><text x="74" y="19">signal value</text>
-    {states[0].map((_, vertex) => <g key={vertex} className={`gf-series gf-series-${vertex}`}><polyline points={states.map((values, step) => `${x(step)},${y(values[vertex])}`).join(' ')} />{states.map((values, step) => <circle key={step} cx={x(step)} cy={y(values[vertex])} r="2.8" />)}</g>)}
-  </svg>;
+  const [operator,setOperator]=useState('symmetric'), [vector,setVector]=useState('ones');
+  const result=graphNormalizations(4,[[0,1,2],[1,2,1]]), names={laplacian:'L = D − A',symmetric:'S = H L H',randomWalk:'R = D† L',transition:'P: isolate holds',naiveIdentity:'Naive I − H A H'};
+  const input=vector==='ones'?[1,1,1,1]:result.degrees.map(Math.sqrt), output=graphMatrixVector(result[operator],input);
+  return <FlowLab id="graph-normalization" label="Isolate convention and normalized zero signals"><div className="gf-two"><StationNetwork edges={[[0,1,2],[1,2,1]]} labels={labels.slice(0,4)} values={result.degrees} selected={[3]} title="Weighted path and isolated D; displayed row-sum degrees2,3,1,0."/><GraphMatrix label={names[operator]} values={result[operator]} rows={labels.slice(0,4)} columns={labels.slice(0,4)} mark={(i,j)=>i===3&&j===3} digits={6}/></div><div className="gf-two"><Values label={vector==='ones'?'Input: all ones':'Input: square-root degree'} values={input}/><Values label="Operator × input" values={output}/></div><FlowControls><label>Operator<select aria-label="Graph normalization operator" value={operator} onChange={event=>setOperator(event.target.value)}>{Object.entries(names).map(([key,name])=><option key={key} value={key}>{name}</option>)}</select></label><label>Input signal<select aria-label="Normalization signal" value={vector} onChange={event=>setVector(event.target.value)}><option value="ones">All ones</option><option value="root">Square-root degree</option></select></label><button type="button" onClick={()=>{setOperator('symmetric');setVector('ones');}}>Reset normalization</button></FlowControls><FlowReadout>D's diagonal is <strong>{f(result[operator][3][3])}</strong>; its output is <strong>{f(output[3])}</strong>. {operator==='naiveIdentity'?'Replacing the positive-degree projector by I assigns the isolate diagonal 1; it is a different operator.':operator==='transition'?'The isolate holds its input, so every row remains a probability distribution.':'The isolate has a zero generator row.'} S annihilates square-root degree, while the all-ones signal generally survives it.</FlowReadout><p className="gf-note">Rounded readouts retain tiny nonzero floating residuals. Square-root degree has zero at D; a separate isolate-supported signal supplies another zero direction.</p></FlowLab>;
 }
 export function GraphAveragingLab() {
-  const [method, setMethod] = useState('exchange');
-  const [steps, setSteps] = useState(0);
-  const [stepSize, setStepSize] = useState(0.25);
-  const result = graphAveragingTrace(method, steps, stepSize);
-  const current = result.states.at(-1);
-  const summary = result.summaries.at(-1);
-  return <Investigation id="graph-averaging" kicker="ACTUAL ITERATIONS · PRESERVED QUANTITIES" title="Which average survives the update?">
-    <p>This separate fixture is the unweighted path A—B—C, plus isolated D. Initial values are 6, 0, 0, 4. Inspect the first two steps and which mean stays fixed.</p>
-    <div className="gf-controls"><label>Update rule<select aria-label="Averaging rule" value={method} onChange={event => {
-          setMethod(event.target.value);
-          setSteps(0);
-        }}><option value="exchange">Conservative exchange</option><option value="neighbor">Neighbor averaging</option><option value="lazy">Lazy neighbor averaging</option></select></label>
-      {method === 'exchange' && <label>Step size τ<select aria-label="Exchange step size" value={stepSize} onChange={event => {
-          setStepSize(Number(event.target.value));
-          setSteps(0);
-        }}><option value={0.25}>0.25</option><option value={0.5}>0.5</option><option value={0.75}>0.75: test beyond bound</option></select></label>}
-      <button type="button" disabled={steps === 0} onClick={() => setSteps(steps - 1)}>Previous update</button>
-      <button type="button" disabled={steps === 24} onClick={() => setSteps(steps + 1)}>Apply one update</button>
-      <button type="button" onClick={() => setSteps(24)}>Inspect step 24</button>
-      <button type="button" onClick={() => {
-        setMethod('exchange');
-        setSteps(0);
-        setStepSize(0.25);
-      }}>Reset averaging</button>
-    </div>
-    <div className="gf-linked"><Network edges={[[0, 1, 1], [1, 2, 1]]} nodeLabels={labels.slice(0, 4)} signal={current} title={`Node values after ${steps} calculated updates`} /><Trajectories states={result.states} /></div>
-    <div className="gf-legend">{labels.slice(0, 4).map((label, i) => <span key={label} className={`gf-series-${i}`}>{label}{i === 3 ? ' (isolate)' : ''}</span>)}</div>
-    <p className="gf-result" aria-live="polite">Step {steps}: A–B–C ordinary mean <strong>{format(summary.ordinaryMean)}</strong>; degree-weighted mean <strong>{format(summary.weightedMean)}</strong>. D stays {format(current[3])}.</p>
-    <p>{method === 'exchange' ? 'Ordinary mean 2 is conserved on A–B–C. For this graph τ≤0.5 guarantees convex-combination rows; τ=0.75 loses that guarantee and this example eventually oscillates with growing amplitude.' : method === 'neighbor' ? 'The degree-weighted mean 1.5 is conserved. After the first update this example alternates between [0,3,0] and [3,0,3]; connectivity alone did not guarantee convergence.' : 'Keeping half of each previous value preserves the same degree-weighted mean 1.5 and damps the alternating mode.'}</p>
-    <p className="gf-caption">Computed linear model, not measured time. Changing the rule or τ restarts the trajectory. Colors identify nodes; the table supplies exact node labels and numeric steps.</p>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect update matrix and every calculated state</h4><Matrix values={result.update} title="Update matrix" /><Matrix values={result.states} title="Signal at each update" rowLabels={result.states.map((_, i) => String(i))} columnLabels={labels.slice(0, 4)} /></section>
-  </Investigation>;
+  const [method,setMethod]=useState('exchange'), [steps,setSteps]=useState(1), [tau,setTau]=useState(.25);
+  const result=graphAveragingTrace(method,steps,tau), full=graphAveragingTrace(method,24,tau), current=result.states.at(-1), summary=result.summaries.at(-1);
+  const all=full.states.flat(), low=Math.min(0,...all), high=Math.max(6,...all);
+  return <FlowLab id="graph-averaging" label="Which mean survives the updates?"><div className="gf-two"><StationNetwork edges={[[0,1,1],[1,2,1]]} labels={labels.slice(0,4)} values={current} title={`Node values after ${steps} updates; isolated D stays4.`}/><SignalTrajectories states={full.states} domain={[low,high]} selectedStep={steps}/></div><p className="gf-note">All 24 steps are calculated from [6,0,0,4]; the vertical cursor selects the displayed network. A is solid amber, B dashed neutral, C dotted cyan, and isolated D dash-dot neutral. Axes stay fixed while the cursor moves.</p><FlowControls><label>Update rule<select aria-label="Averaging rule" value={method} onChange={event=>{setMethod(event.target.value);setSteps(1);}}><option value="exchange">Conservative exchange</option><option value="neighbor">Neighbor averaging</option><option value="lazy">Lazy neighbor averaging</option></select></label>{method==='exchange'&&<label>Step size τ<select aria-label="Exchange step size" value={tau} onChange={event=>{setTau(Number(event.target.value));setSteps(1);}}>{[.25,.5,.75].map(value=><option key={value} value={value}>{value}{value===.75?': beyond bound':''}</option>)}</select></label>}<button type="button" disabled={steps===0} onClick={()=>setSteps(steps-1)}>Previous update</button><button type="button" disabled={steps===24} onClick={()=>setSteps(steps+1)}>Apply one update</button><button type="button" onClick={()=>setSteps(24)}>Inspect step 24</button><button type="button" onClick={()=>{setMethod('exchange');setSteps(1);setTau(.25);}}>Reset averaging</button></FlowControls><FlowReadout>Step {steps}: ordinary mean on A—B—C is <strong>{f(summary.ordinaryMean)}</strong>; degree-weighted mean is <strong>{f(summary.weightedMean)}</strong>. D stays {f(current[3])}. {method==='exchange'?'The ordinary mean 2 is conserved. τ≤0.5 gives convex rows on this fixture; τ=0.75 produces growing oscillations.':method==='neighbor'?'The degree-weighted mean 1.5 is conserved; after its first update this example alternates between [0,3,0] and [3,0,3].':'The degree-weighted mean 1.5 is conserved and the lazy rule damps the alternating mode.'}</FlowReadout><div className="gf-two"><GraphMatrix label="Update matrix" values={result.update} rows={labels.slice(0,4)} columns={labels.slice(0,4)}/><GraphMatrix label="All states through the selected step" values={result.states} rows={result.states.map((_,i)=>`step ${i}`)} columns={labels.slice(0,4)} digits={6}/></div></FlowLab>;
 }
 export function GraphHarmonicLab() {
-  const [left, setLeft] = useState(6);
-  const [right, setRight] = useState(0);
-  const [bridge, setBridge] = useState(false);
-  const [secondAnchor, setSecondAnchor] = useState(false);
-  const anchors = {
-    0: left,
-    2: right,
-    ...(secondAnchor ? {
-      3: 2
-    } : {})
-  };
-  const result = graphHarmonicInterpolation(5, foundationEdges(bridge ? 1 : 0), anchors);
-  return <Investigation id="graph-harmonic-anchors" kicker="BOUNDARY VALUES · A UNIQUE ANSWER?" title="What can the missing values actually be?">
-    <p>A and C are measured anchors. B is chosen to minimize weighted disagreement. Before changing anything, decide whether the disconnected D–E pair can have a unique value.</p>
-    <div className="gf-controls"><Range label="Anchor A" value={left} max={8} setValue={setLeft} /><Range label="Anchor C" value={right} max={8} setValue={setRight} />
-      <label><input type="checkbox" checked={bridge} onChange={event => setBridge(event.target.checked)} /> Connect C–D with weight 1</label>
-      <label><input type="checkbox" checked={secondAnchor} onChange={event => setSecondAnchor(event.target.checked)} /> Anchor D at 2</label>
-      <button type="button" onClick={() => {
-        setLeft(6);
-        setRight(0);
-        setBridge(false);
-        setSecondAnchor(false);
-      }}>Reset anchors</button>
-    </div>
-    <Network edges={result.activeEdges} signal={result.values} anchors={Object.keys(anchors).map(Number)} title="Anchored vertices have square outlines; question marks indicate an undetermined component" />
-    <NodeValues values={result.values} />
-    <p className="gf-result" aria-live="polite">{result.unique ? 'Every component has an anchor: the unknown values have a unique harmonic solution.' : <>Unanchored component: <Groups components={result.unanchored} />. Its level is undetermined; the other component can still be solved.</>}</p>
-    <p>At B, the equation is 2(B − {format(left)}) + (B − {format(right)}) = 0, giving B = {format(result.values[1])}. Its two incident couplings are unchanged when the bridge is added.</p>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect the reduced system and outflow residuals</h4><Matrix values={result.reduced} title="Reduced L for supported unknowns" rowLabels={result.unknown.map(vertex => labels[vertex])} /><p>Right side: [{result.rightSide.map(value => format(value)).join(', ')}].</p><p>All Lx coordinates:</p><NodeValues values={result.residuals} /><p>Unanchored unknowns remain unspecified. At solved unknowns the net outflow is zero; anchors may supply or absorb current, so their residuals need not be zero.</p></section>
-    <p className="gf-caption">Computed minimizer of a stated coupling-energy model. Square outlines indicate fixed values, not estimated confidence. A real sensor needs evidence that smoothness is an appropriate assumption.</p>
-  </Investigation>;
+  const [left,setLeft]=useState(6), [right,setRight]=useState(0), result=graphHarmonicInterpolation(5,edges,{0:left,2:right});
+  return <FlowLab id="graph-harmonic-anchors" label="An anchored energy minimizer"><div className="gf-two"><StationNetwork edges={edges} values={result.values} anchors={[0,2]} selected={[1]} title="Fixed A and C; solved B and undetermined D—E."/><AnchorEnergyDrawing left={left} right={right}/></div><FlowControls><FlowSlider name="Anchor A" value={left} onChange={setLeft} min={0} max={8} step={1} format={f}/><FlowSlider name="Anchor C" value={right} onChange={setRight} min={0} max={8} step={1} format={f}/><button type="button" onClick={()=>{setLeft(6);setRight(0);}}>Reset anchors</button></FlowControls><FlowReadout>At B, 2(B − {left}) + (B − {right}) = 0, giving <strong>B = {f(result.values[1])}</strong>. D and E remain undetermined because their component has no anchor. The parabola uses fixed axes B0–8 and energy0–192.</FlowReadout><div className="gf-two"><GraphMatrix label="Reduced equation for supported unknown B" values={[[result.reduced[0][0],result.rightSide[0]]]} rows={['B']} columns={['coefficient of B','right side']}/><Values label="Lx: zero at solved unknowns" values={result.residuals}/></div><p className="gf-note">Square outlines mark fixed values; question marks indicate undetermined values. Anchors can supply or absorb current, so their residuals need not vanish. These are stated model values, not sensor measurements or confidence estimates.</p></FlowLab>;
 }
 export function GraphAvailabilityFigure() {
-  return <figure className="gf-inline" data-graph-figure="availability"><div className="gf-cutoff-flow">
-    <div><strong>Available by time 5</strong><span className="gf-time-edge">A — B <small>time 2</small></span><span className="gf-time-edge">B — C <small>time 3</small></span><p>C may be a test vertex while its already-known relationships remain allowed in a declared transductive task.</p></div>
-    <div className="gf-future"><strong>Prediction cutoff: 5</strong><span className="gf-time-edge">A — C <small>time 6 · future target</small></span><p>This future relationship cannot be used to construct features for the time-5 prediction. Removing a label alone does not remove its edge evidence.</p></div>
-  </div><figcaption>The drawing is an original data-availability example. Whether an edge is permitted follows the task's information contract, not merely whether an endpoint is called “test.”</figcaption></figure>;
+  const id=`gf-cutoff-${useId().replaceAll(':','')}`;
+  return <GraphFigure name="availability" label="Dated records and the prediction graph" caption="The prediction cutoff is time 5. Known A—B, B—C and D—E records enter its graph; future A—C at time 6 does not. C can still be a test vertex when its relationships were already known under a declared transductive contract."><div className="gf-scene-scroll" tabIndex="0" role="region" aria-label="Scroll the dated records through the cutoff to their constructed graph"><svg className="gf-wide-scene" viewBox="0 0 640 184" role="img" aria-label="Four dated edge records; three pass cutoff 5 and future A—C time 6 is crossed out before graph construction."><defs><marker id={id} markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6z" fill="context-stroke"/></marker></defs>{[[0,1,2],[1,2,3],[3,4,4],[0,2,6]].map(([u,v,time],i)=><g key={i}><circle className="gf-vertex" cx="32" cy={28+40*i} r="13"/><circle className="gf-vertex" cx="118" cy={28+40*i} r="13"/><text className="gf-label" x="32" y={33+40*i} textAnchor="middle">{labels[u]}</text><text className="gf-label" x="118" y={33+40*i} textAnchor="middle">{labels[v]}</text><line className={time>5?'gf-construction':'gf-edge-line'} x1="45" x2="105" y1={28+40*i} y2={28+40*i}/><text className="gf-label" x="155" y={33+40*i}>time {time}</text><path className={time>5?'gf-construction':'gf-selected-line'} d={`M232 ${28+40*i}H${time>5?286:376}`} fill="none" markerEnd={time>5?undefined:`url(#${id})`}/>{time>5&&<path className="gf-selected-line" d="M262 136L283 160M283 136L262 160"/>}</g>)}<line className="gf-construction" x1="310" x2="310" y1="22" y2="170"/><text className="gf-label" x="310" y="15" textAnchor="middle">cutoff 5</text>{[[402,60,'A'],[490,60,'B'],[578,60,'C'],[432,144,'D'],[548,144,'E']].map(([x,y,label])=><g key={label}><circle className="gf-vertex" cx={x} cy={y} r="17"/><text className="gf-label" x={x} y={y+6} textAnchor="middle">{label}</text></g>)}<path className="gf-edge-line" d="M419 60H473M507 60H561M449 144H531"/></svg></div><p className="gf-note">Original synthetic availability example; edge timestamps govern inclusion. The constructed graph omits A—C even though both endpoints are present.</p></GraphFigure>;
 }

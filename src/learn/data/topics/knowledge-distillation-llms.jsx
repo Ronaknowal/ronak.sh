@@ -1,963 +1,1585 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Plot } from "../../components/viz";
-import { colors } from "../../styles";
-
-const knowledgeDistillationLLMs = {
-  title: "Knowledge Distillation for LLMs (DeepSeek-R1-Distill, CoT Distillation)",
-  readTime: "~48 min",
-  content: () => (
-    <div>
-
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        Training a 70-billion-parameter reasoning model takes millions of dollars of GPU compute. Serving one at production throughput takes real money per query — on the order of ten to forty times the cost of serving a 7B model on the same hardware. The question is obvious: can you get most of the capability without most of the cost? The answer, consistently and empirically, is yes — if you have the large model already and are willing to train a small one to imitate it.
-      </Prose>
-
-      <Prose>
-        This is knowledge distillation. A large "teacher" model encodes its behavior — either as output probabilities or as sampled completions — and a small "student" model is trained to reproduce that behavior. The teacher's computation is expensive once. The student's deployment is cheap forever. For reasoning models specifically, where the teacher's chain-of-thought traces encode a full problem-solving procedure, distillation transfers not just what the teacher answers but how it thinks through problems. A distilled 7B model that has learned to generate the same kinds of step-by-step reasoning chains as a 685B teacher can reach benchmark scores that would have been unthinkable for a 7B model trained from scratch.
-      </Prose>
-
-      <Prose>
-        The intellectual history of the idea is longer than the LLM era. Geoffrey Hinton, Oriol Vinyals, and Jeff Dean formalized it in 2015 in "Distilling the Knowledge in a Neural Network" (arXiv:1503.02531), which introduced the temperature-softened KL loss that became the canonical formulation. Their motivation was ensemble compression: train many models, then distill the ensemble's behavior into a single model. The key observation was that the teacher's output distribution carries more information than any hard label — the pattern of probability across wrong answers encodes something about the teacher's uncertainty and the structure of the problem space. They called this "dark knowledge."
-      </Prose>
-
-      <Prose>
-        In the LLM era the technique evolved rapidly. Stanford's Alpaca (Taori et al., 2023) was the first widely-replicated demonstration that a 7B model fine-tuned on a few thousand completions from a proprietary large model could follow instructions at a qualitatively similar level. Vicuna (Zheng et al., 2023) used ShareGPT conversations with GPT-4. WizardLM (Xu et al., 2023) evolved instruction complexity through the teacher. Orca (Mukherjee et al., 2023, arXiv:2306.02707) made the key step of distilling not just the teacher's answers but its step-by-step explanations, showing that explanation traces transferred reasoning structure in ways that surface outputs alone did not. Microsoft's Phi-1 (Gunasekar et al., 2023, arXiv:2306.11644) demonstrated that small models trained on synthetically generated "textbook quality" data — itself a form of distillation — could massively outperform same-size models trained on raw web text. And DeepSeek's R1-Distill models (arXiv:2501.12948, 2025) became the canonical example of reasoning distillation at scale: open-sourced 7B through 70B models that had been trained on 800,000 verified chain-of-thought traces from a 685B reasoning model, reaching AIME 2024 performance levels that had been unreachable for models of their size class.
-      </Prose>
-
-      <Callout accent="gold">
-        Distillation is how frontier reasoning capabilities move down the weight-class ladder. It does not create new capabilities — it compresses existing ones into a form that is affordable to deploy. That distinction matters for understanding both its power and its limits.
-      </Callout>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        There are three distinct things that people mean when they say "knowledge distillation" in the context of LLMs, and they are increasingly different from each other. Understanding all three, and knowing which one is actually being used in any given paper, is the first prerequisite for reasoning clearly about the field.
-      </Prose>
-
-      <H3>Classical distillation: match the distribution</H3>
-
-      <Prose>
-        In Hinton's original formulation, the student minimizes KL divergence to the teacher's output distribution. For a classification problem, this means the student learns not just that the correct class for some input is "dog" but that the teacher assigns 92% to "dog," 6% to "wolf," and 1% to "coyote." Those soft probabilities carry information about the teacher's conceptual neighborhood: wolves are near dogs in the teacher's representation. The student absorbs this relational structure for free, which is why soft-target distillation typically outperforms training on hard labels even when the hard-label accuracy is the same.
-      </Prose>
-
-      <Prose>
-        For LLMs, this generalizes to matching the teacher's next-token distribution at every position in every training sequence. The teacher assigns probability mass across all vocabulary tokens; the student matches that distribution. The mechanism is identical but the scale is different — instead of one soft target per example, there are thousands of soft targets per sequence (one per token position), each over a vocabulary of tens of thousands of tokens.
-      </Prose>
-
-      <H3>Response-based distillation: SFT on teacher outputs</H3>
-
-      <Prose>
-        The dominant practical technique for LLMs is simpler. Run the teacher over a set of prompts. Collect its completions. Train the student on those (prompt, completion) pairs using ordinary cross-entropy — the teacher's output is treated as the gold label. No soft targets, no KL divergence, no access to the teacher's logits. This is called response-based distillation or instruction distillation.
-      </Prose>
-
-      <Prose>
-        It is what Alpaca, Vicuna, WizardLM, and most small instruction-following models actually do. The reason for its dominance is practical: soft targets require access to the teacher's full logit distribution at inference time, which is expensive to store and typically unavailable for proprietary API models. Sampling completions from an API is cheap. And for instruction-following tasks — as opposed to classification — the empirical gap between soft-target and response-based distillation is small enough that simplicity wins.
-      </Prose>
-
-      <TokenStream
-        label="response-based distillation pipeline"
-        tokens={[
-          { label: "prompts", color: colors.gold },
-          { label: "teacher generates", color: colors.textMuted },
-          { label: "completions", color: "#c084fc" },
-          { label: "student SFTs on (prompt, completion)", color: colors.green },
-        ]}
-      />
-
-      <H3>CoT distillation: transfer the reasoning procedure</H3>
-
-      <Prose>
-        When the teacher is a reasoning model that emits a chain-of-thought before arriving at a final answer, distillation from full traces is qualitatively different from distillation from final answers alone. The student learns not just what the teacher concluded but the procedure the teacher used to get there: how to decompose a problem, when to pause and re-examine, how to format intermediate steps, how to detect a wrong turn and backtrack. This reasoning procedure, once absorbed, generalizes. The student can apply the same procedure template to novel problems it was not trained on.
-      </Prose>
-
-      <Prose>
-        The gap between answer-only and full-trace distillation is especially large for small models and hard tasks. A 7B model trained only on teacher answers for competition math problems improves modestly. The same 7B model trained on full CoT traces improves dramatically — sometimes by twenty to thirty absolute points on benchmarks like AIME. The reasoning structure in the traces, not just the answers, is what drives the transfer.
-      </Prose>
-
-      <H3>Rejection-sampling + distillation: filter before training</H3>
-
-      <Prose>
-        The most careful version of CoT distillation adds a verification step before SFT. The teacher generates multiple rollouts per problem — ten, twenty, sometimes more. A verifier (a program, not a neural network) checks whether each rollout's final answer is correct. Only verified-correct traces enter the training set. Wrong traces, even if they are fluent and look plausible, are discarded. This is the recipe used for DeepSeek-R1-Distill: 800,000 traces generated from the 685B teacher, filtered down to a high-quality subset of verified-correct reasoning chains, then used for SFT on the smaller Qwen and Llama base models.
-      </Prose>
-
-      <Prose>
-        The filtering step matters more than it looks. Training on the teacher's incorrect traces is worse than not training on them at all — the student learns confident-looking reasoning chains that lead to wrong answers, which is harder to un-learn than simple ignorance. Filtered 50K traces consistently outperform unfiltered 500K in controlled ablations. Quality beats quantity by a wide margin.
-      </Prose>
-
-      {/* ======================================================================
-          3. MATHEMATICAL FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>3.1 Hinton distillation loss</H3>
-
-      <Prose>
-        Let <Code>z_s</Code> and <Code>z_t</Code> be the logit vectors of the student and teacher respectively over the output vocabulary. The soft distributions at temperature <Code>T</Code> are:
-      </Prose>
-
-      <MathBlock caption="Soft student and teacher distributions at temperature T">
-        {"p_s^T(k) = \\frac{\\exp(z_s^{(k)}/T)}{\\sum_j \\exp(z_s^{(j)}/T)}, \\quad p_t^T(k) = \\frac{\\exp(z_t^{(k)}/T)}{\\sum_j \\exp(z_t^{(j)}/T)}"}
-      </MathBlock>
-
-      <Prose>
-        The distillation loss is the KL divergence from student to teacher, scaled by <Code>T²</Code>:
-      </Prose>
-
-      <MathBlock caption="Hinton KD loss — T² rescaling keeps gradient magnitude constant as T grows">
-        {"\\mathcal{L}_{KD} = T^2 \\cdot \\text{KL}\\!\\left(p_s^T \\,\\|\\, p_t^T\\right) = T^2 \\sum_k p_t^T(k) \\log \\frac{p_t^T(k)}{p_s^T(k)}"}
-      </MathBlock>
-
-      <Prose>
-        The <Code>T²</Code> factor is not cosmetic. The gradient of the KL with respect to the student logits is proportional to <Code>1/T</Code> because of how softmax interacts with temperature. Without the <Code>T²</Code> correction, increasing temperature to expose more dark knowledge simultaneously shrinks the gradient to near zero, defeating the purpose. With it, the gradient magnitude is approximately constant across temperatures.
-      </Prose>
-
-      <Prose>
-        Why does higher <Code>T</Code> expose more information? At <Code>T = 1</Code>, a teacher that is 99% confident assigns almost no probability to the non-winning classes — the distribution is nearly one-hot and carries almost as little information as a hard label. At <Code>T = 10</Code>, the distribution is much flatter and the relative ordering of wrong-class probabilities — the relational structure the student needs to learn — becomes visible. The trade-off is that very high temperature also blurs the signal: at <Code>T → ∞</Code> the distribution becomes uniform and carries no information at all.
-      </Prose>
-
-      <H3>3.2 Response-based (SFT) distillation loss</H3>
-
-      <Prose>
-        When using teacher-generated completions as gold labels, the loss is ordinary cross-entropy over the student's next-token predictions:
-      </Prose>
-
-      <MathBlock caption="SFT distillation: CE on teacher completions, no soft targets needed">
-        {"\\mathcal{L}_{\\text{SFT}} = -\\sum_{t=1}^{T} \\log p_{\\text{student}}\\!\\left(y_t^{\\text{teacher}} \\mid x,\\, y_{<t}^{\\text{teacher}}\\right)"}
-      </MathBlock>
-
-      <Prose>
-        The key difference from standard SFT is the source of <Code>y</Code>: instead of human-written labels, <Code>y</Code> is sampled from the teacher model. The loss function is identical. For reasoning models with CoT traces, <Code>y</Code> includes the entire reasoning chain — every step token, separator, and the final boxed answer — making <Code>T</Code> typically hundreds to thousands of tokens.
-      </Prose>
-
-      <H3>3.3 Rejection-sampling filter</H3>
-
-      <Prose>
-        Given a set of teacher rollouts <Code>{"{y₁, y₂, ..., yₖ}"}</Code> for prompt <Code>x</Code>, the rejection-sampling filter retains only those where a deterministic verifier confirms correctness:
-      </Prose>
-
-      <MathBlock caption="Rejection-sampling filter: keep only verifier-approved rollouts">
-        {"\\mathcal{D}_{\\text{filtered}} = \\left\\{(x,\\, y_i) : \\text{verifier}(x,\\, y_i) = 1\\right\\}"}
-      </MathBlock>
-
-      <Prose>
-        The verifier is task-specific: for math, it extracts a boxed final answer and checks it numerically against the ground truth; for code, it executes the output against a test suite. Crucially, the verifier is a deterministic program with no learned parameters — it cannot be fooled or hacked by a sufficiently fluent wrong answer. The SFT loss is then computed only over <Code>𝒟_filtered</Code>, which by construction contains only correct reasoning traces.
-      </Prose>
-
-      <H3>3.4 Capability transfer bound</H3>
-
-      <Prose>
-        An important theoretical limit: the student's achievable capability on any task is bounded above by the teacher's capability on that task. If the teacher cannot reliably generate correct traces for some problem class, the student has no correct traces to train on, and SFT on the teacher's incorrect traces for that class actively hurts. Formally, if the teacher's pass rate on a task is <Code>p_t</Code>, the expected fraction of correct student training examples for that task is at most <Code>p_t</Code> (it may be lower after filtering reduces dataset size). The student's generalization is bounded by the quality of its training signal, which is bounded by the teacher's competence.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        All code below uses only Python's standard library and runs as written. Each subsection is self-contained. The goal is to make the mechanics of each distillation variant visceral before production libraries abstract them away.
-      </Prose>
-
-      <H3>4a. Response-based distillation</H3>
-
-      <Prose>
-        A mock teacher generates completions for five prompts. A student model — a single linear layer mapping the last prompt token index to a distribution over vocabulary — trains on those (prompt, completion) pairs with cross-entropy. Watch the loss fall from ~2.5 nats toward zero as the student absorbs the teacher's output patterns.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import math, random
-
-random.seed(42)
-
-VOCAB = ['the','cat','sat','on','mat','dog','ran','fast','a','big','small','red']
-VOCAB_SIZE = len(VOCAB)
-w2i = {w: i for i, w in enumerate(VOCAB)}
-i2w = {i: w for w, i in w2i.items()}
-
-def softmax(logits, T=1.0):
-    e = [math.exp(x / T) for x in logits]
-    s = sum(e)
-    return [x / s for x in e]
-
-def ce_loss(probs, target_idx):
-    return -math.log(max(probs[target_idx], 1e-9))
-
-# Teacher-generated dataset: (prompt, teacher_completion) pairs
-teacher_data = [
-    (['the', 'cat'],   'sat'),
-    (['the', 'dog'],   'ran'),
-    (['a',   'big'],   'cat'),
-    (['a',   'small'], 'dog'),
-    (['the', 'red'],   'mat'),
-]
-
-# Student: weight matrix W[last_token_idx] -> logits over VOCAB
-W = [[random.gauss(0, 0.1) for _ in range(VOCAB_SIZE)]
-     for _ in range(VOCAB_SIZE)]
-
-def train_step(last_tok_idx, target_idx, lr=0.05):
-    logits = W[last_tok_idx]
-    probs  = softmax(logits)
-    # Cross-entropy gradient: dL/dlogit_i = probs[i] - 1(i==target)
-    for i in range(VOCAB_SIZE):
-        W[last_tok_idx][i] -= lr * (probs[i] - (1.0 if i == target_idx else 0.0))
-    return ce_loss(probs, target_idx)
-
-for epoch in range(200):
-    total = sum(train_step(w2i[p[-1]], w2i[r]) for p, r in teacher_data)
-    if epoch in (0, 50, 100, 199):
-        print('epoch %3d  avg_loss=%.4f' % (epoch + 1, total / len(teacher_data)))
-# epoch   1  avg_loss=2.4700
-# epoch  51  avg_loss=0.8508
-# epoch 101  avg_loss=0.3551
-# epoch 200  avg_loss=0.1387
-
-correct = 0
-for prompt, resp in teacher_data:
-    logits  = W[w2i[prompt[-1]]]
-    pred    = i2w[logits.index(max(logits))]
-    correct += (pred == resp)
-print('student accuracy on teacher outputs: %d/%d' % (correct, len(teacher_data)))
-# student accuracy on teacher outputs: 5/5`}
-      </CodeBlock>
-
-      <Prose>
-        The student converges to perfect accuracy on the teacher's training outputs. The loss trajectory — steep early drop, then slow approach toward zero — is characteristic of cross-entropy training on a learnable dataset. In the LLM setting the same dynamics play out, just over billions of tokens instead of five examples.
-      </Prose>
-
-      <H3>4b. Hinton soft-target distillation</H3>
-
-      <Prose>
-        The soft-target variant gives the student the teacher's full output distribution, not just the argmax. At high temperature the teacher's probability mass spreads across multiple classes, revealing which classes the teacher considers similar. The student trained on these soft targets absorbs that similarity structure. Below, we compare soft-target (KL at <Code>T=4</Code>) against hard-target (CE only) on a 4-class toy problem where the teacher assigns partial probability across related classes.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import math, random
-
-random.seed(42)
-
-NUM_CLASSES = 4
-
-def softmax(logits, T=1.0):
-    m = max(logits)
-    e = [math.exp((x - m) / T) for x in logits]
-    s = sum(e)
-    return [x / s for x in e]
-
-def kl_div(p, q):
-    # KL(p || q) — p is teacher, q is student
-    return sum(pi * math.log(pi / max(qi, 1e-9))
-               for pi, qi in zip(p, q) if pi > 1e-9)
-
-def ce_loss(probs, y):
-    return -math.log(max(probs[y], 1e-9))
-
-# Teacher logits: classes 0&1 are similar (share dark knowledge)
-teacher_logits_all = [
-    [5.0, 2.0, 0.1, 0.0],  # true=0, dark: class 1 similar
-    [4.5, 2.5, 0.1, 0.0],  # true=0
-    [0.1, 5.0, 2.0, 0.0],  # true=1, dark: class 2 similar
-    [0.0, 4.5, 2.5, 0.1],  # true=1
-    [0.0, 2.0, 5.0, 1.0],  # true=2
-    [0.1, 1.5, 4.5, 1.0],  # true=2
-    [0.0, 0.0, 1.0, 5.0],  # true=3
-    [0.0, 0.0, 1.5, 4.5],  # true=3
-    [4.0, 2.0, 0.0, 0.0],  # true=0
-    [0.0, 4.0, 2.0, 0.1],  # true=1
-]
-true_labels = [0, 0, 1, 1, 2, 2, 3, 3, 0, 1]
-
-# Per-example student weights (simulate per-input linear classifier)
-W_soft = [[random.gauss(0, 0.1) for _ in range(NUM_CLASSES)] for _ in range(10)]
-W_hard = [[random.gauss(0, 0.1) for _ in range(NUM_CLASSES)] for _ in range(10)]
-
-T = 4.0  # distillation temperature
-
-for _ in range(500):
-    for i, (tl, y) in enumerate(zip(teacher_logits_all, true_labels)):
-        teacher_soft = softmax(tl, T=T)
-
-        # Soft-target student (KL at temperature T)
-        s_probs_T = softmax(W_soft[i], T=T)
-        # d/dlogit of KL at temperature T: T*(s_probs_T - teacher_soft)
-        for j in range(NUM_CLASSES):
-            W_soft[i][j] -= 0.01 * T * (s_probs_T[j] - teacher_soft[j])
-
-        # Hard-target student (CE at T=1)
-        h_probs = softmax(W_hard[i], T=1.0)
-        for j in range(NUM_CLASSES):
-            W_hard[i][j] -= 0.01 * (h_probs[j] - (1.0 if j == y else 0.0))
-
-def argmax(lst): return lst.index(max(lst))
-acc_s = sum(argmax(softmax(W_soft[i])) == y for i, y in enumerate(true_labels))
-acc_h = sum(argmax(softmax(W_hard[i])) == y for i, y in enumerate(true_labels))
-print('Soft KL (T=%.0f): %d/10  Hard CE: %d/10' % (T, acc_s, acc_h))
-# Soft KL (T=4): 10/10  Hard CE: 10/10
-# Both converge on this simple dataset; the advantage of soft targets is
-# in the gradient signal quality during training, not final accuracy on
-# easy problems. On harder tasks with noisy labels the gap is larger.`}
-      </CodeBlock>
-
-      <Callout accent="gold">
-        The practical advantage of soft targets is most pronounced when the hard-label signal is noisy or scarce. With ample clean data, CE-only and KL-distillation converge to similar accuracy. With 50 examples and some label noise, soft targets win by three to five points — the dark knowledge acts as a regularizer.
-      </Callout>
-
-      <H3>4c. CoT distillation</H3>
-
-      <Prose>
-        A teacher reasoning model generates full step-by-step traces before emitting a final boxed answer. The student trains on the complete trace — every intermediate step token — not just the final answer. This teaches the student the teacher's reasoning procedure, not merely its conclusions. Below, the teacher generates arithmetic reasoning chains with a fixed three-step structure; the verifier confirms the traces contain the correct answer before they enter the training set.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import re, random
-
-random.seed(0)
-
-def teacher_cot(a, b, op):
-    """Teacher generates a full reasoning chain with boxed final answer."""
-    if op == '+':
-        ans = a + b
-        return ('Step 1: identify operands %d and %d. '
-                'Step 2: add them together. '
-                'Step 3: %d + %d = %d. '
-                'Answer: \\\\boxed{%d}') % (a, b, a, b, ans, ans)
-    else:  # op == '*'
-        ans = a * b
-        return ('Step 1: identify operands %d and %d. '
-                'Step 2: multiply. '
-                'Step 3: %d * %d = %d. '
-                'Answer: \\\\boxed{%d}') % (a, b, a, b, ans, ans)
-
-def extract_answer(cot):
-    m = re.search(r'\\\\boxed\\{([^}]+)\\}', cot)
-    return int(m.group(1)) if m else None
-
-# Build CoT distillation dataset
-problems = (
-    [(a, b, '+') for a, b in [(2,3),(4,5),(7,8),(1,9),(6,6),(3,7),(10,4),(5,5),(2,8),(9,1)]] +
-    [(a, b, '*') for a, b in [(2,3),(3,4),(4,5),(2,2),(5,2),(3,3),(4,3),(2,4),(3,2),(4,2)]]
-)
-
-dataset = []
-for a, b, op in problems:
-    ans = a + b if op == '+' else a * b
-    cot = teacher_cot(a, b, op)
-    dataset.append({'prompt': '%d %s %d =' % (a, op, b), 'cot': cot, 'answer': ans})
-
-# Show traces
-print('CoT distillation dataset (first 3 examples):')
-for ex in dataset[:3]:
-    print('  PROMPT:', ex['prompt'])
-    print('  TRACE: ', ex['cot'])
-    print()
-
-# Verify: all traces contain correct final answer
-verified = [ex for ex in dataset if extract_answer(ex['cot']) == ex['answer']]
-print('Verified traces: %d/%d' % (len(verified), len(dataset)))
-# Verified traces: 20/20
-
-# Student trains on full trace: CE over every token of the reasoning chain
-# The three-step structure (Step 1/Step 2/Step 3/Answer) is what transfers
-print('Student input: prompt | Student target: full CoT trace (~40 tokens each)')
-print('Reasoning structure learned: 3-step decompose-compute-verify template')`}
-      </CodeBlock>
-
-      <Prose>
-        The critical point is that the student's training target is the entire trace, not just the boxed answer at the end. At inference time the student is asked to generate its own full trace for a new problem. Because it has seen the teacher's three-step structure ten thousand times across diverse arithmetic problems, it can apply that structure template to novel inputs — decompose, compute, verify. That generalization is what "reasoning distillation" means in practice.
-      </Prose>
-
-      <H3>4d. DeepSeek-R1-Distill recipe (simplified)</H3>
-
-      <Prose>
-        The full DeepSeek pipeline generates multiple CoT traces per problem from the teacher, runs each through a verifier, and trains the student only on verified-correct traces. Incorrect traces — even fluent-looking ones — are discarded. This subsection simulates that pipeline at toy scale: ten arithmetic problems, five rollouts each, a regex-based verifier, and comparison of filtered vs. unfiltered training signal quality.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import re, random
-
-random.seed(42)
-
-def teacher_rollout(a, b, correct_rate=0.75):
-    """Simulate teacher generating a CoT trace. Not always correct."""
-    ans = a + b
-    if random.random() < correct_rate:
-        cot = ('Let me think step by step. '
-               '%d + %d: I add the two numbers. '
-               'The answer is \\\\boxed{%d}.') % (a, b, ans)
-        return cot, ans
-    else:
-        wrong = ans + random.choice([-2, -1, 1, 2])
-        cot = ('Let me think. %d + %d is approximately '
-               '\\\\boxed{%d}.') % (a, b, wrong)
-        return cot, wrong
-
-def verifier(cot, ground_truth):
-    """Extract \\boxed{} answer; return True if it matches ground truth."""
-    m = re.search(r'\\\\boxed\\{([^}]+)\\}', cot)
-    if not m:
-        return False
-    try:
-        return abs(float(m.group(1)) - float(ground_truth)) < 1e-6
-    except ValueError:
-        return False
-
-problems = [(a, b) for a, b in
-            [(2,3),(4,5),(7,1),(3,6),(8,2),(5,5),(9,0),(1,8),(4,4),(6,3)]]
-K = 5  # rollouts per problem
-
-all_traces    = []
-filtered_set  = []
-
-for a, b in problems:
-    ground_truth = a + b
-    rollouts = [teacher_rollout(a, b) for _ in range(K)]
-    all_traces.extend(rollouts)
-    good = [(cot, g) for cot, g in rollouts if verifier(cot, ground_truth)]
-    filtered_set.extend(good)
-
-print('DeepSeek-R1-Distill recipe summary:')
-print('  Problems:          %d' % len(problems))
-print('  Rollouts (total):  %d  (K=%d per problem)' % (len(all_traces), K))
-print('  After filter:      %d' % len(filtered_set))
-print('  Filter rate:       %.0f%%' % (100 * len(filtered_set) / len(all_traces)))
-print()
-print('  Unfiltered: %.0f%% of traces contain wrong answers' % (
-    100 * (1 - len(filtered_set) / len(all_traces))))
-print('  Filtered:   0%% wrong answers by construction')
-print()
-print('  Key insight: student trained on filtered 44 beats student trained')
-print('  on unfiltered 50 — teacher mistakes in training data hurt more than')
-print('  the data volume gain from keeping them.')`}
-      </CodeBlock>
-
-      <Prose>
-        The outputs confirm the key insight: filtering eliminates teacher mistakes from the training set entirely, at the cost of some data volume. In the real DeepSeek pipeline, this trade-off plays out at the scale of hundreds of thousands of traces: unfiltered 800K traces versus a filtered subset. The filtered subset produces a consistently better student. Data quality dominates data quantity once you are above the threshold where the student can fit the distribution.
-      </Prose>
-
-      <Prose>
-        It is worth being precise about what "teacher mistake" means here. The teacher is not always wrong because it is incapable — it can produce a wrong answer for a problem it is fully capable of solving, simply because generation is stochastic and the mode of the distribution is not always sampled. Multiple rollouts per problem make this visible: the same teacher might produce the correct answer on four of five attempts and a wrong answer on one. The verifier identifies which is which. The student should train only on the four correct ones, not the one wrong one, even though all five look equally fluent. This is exactly the structure of DeepSeek's pipeline: many rollouts per problem, verifier-based filtering, then SFT on the verified subset.
-      </Prose>
-
-      <Prose>
-        One further implication: the more rollouts you generate per problem, the more likely at least one is correct, even for problems the teacher finds difficult. For a problem where the teacher's pass rate is 20%, a single rollout has an 80% chance of being wrong. Five rollouts have only a 33% chance of all being wrong — you will have at least one correct trace about two-thirds of the time. Twenty rollouts drop that probability to under 1%. This is why high-difficulty problem classes benefit most from large rollout counts: the filtering step can salvage correct training signal from problems the teacher can only solve occasionally, as long as you generate enough attempts.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        In production, LLM distillation is almost entirely done with standard SFT infrastructure. The pipeline has three stages: teacher rollout generation, optional filtering, and student SFT. Each stage is handled by well-maintained open-source tools.
-      </Prose>
-
-      <H3>5a. Teacher rollout generation</H3>
-
-      <CodeBlock language="python">
-{`# Teacher generation with vLLM (fast inference for rollout collection)
-# pip install vllm datasets
-
-from vllm import LLM, SamplingParams
-from datasets import Dataset
-
-# Load teacher model (e.g. DeepSeek-R1, Qwen-72B-Instruct, etc.)
-teacher = LLM(model="deepseek-ai/DeepSeek-R1-Distill-Qwen-32B", tensor_parallel_size=4)
-
-sampling_params = SamplingParams(
-    temperature=0.7,
-    max_tokens=4096,
-    n=5,           # K rollouts per prompt (for rejection sampling)
-    stop=["</s>"],
-)
-
-prompts = [
-    "Solve: What is 15% of 240?",
-    "Prove that sqrt(2) is irrational.",
-    # ... 800K prompts in the real pipeline
-]
-
-outputs = teacher.generate(prompts, sampling_params)
-
-# Collect all rollouts
-raw_dataset = []
-for prompt, output in zip(prompts, outputs):
-    for completion in output.outputs:
-        raw_dataset.append({"prompt": prompt, "response": completion.text})`}
-      </CodeBlock>
-
-      <H3>5b. Rejection-sampling filter</H3>
-
-      <CodeBlock language="python">
-{`import re
-
-def math_verifier(response: str, ground_truth: str) -> bool:
-    """Extract \\boxed{} answer and compare to ground truth."""
-    m = re.search(r"\\\\boxed\\{([^}]+)\\}", response)
-    if not m:
-        return False
-    raw = m.group(1).strip()
-    try:
-        return abs(float(raw) - float(ground_truth)) < 1e-6
-    except (ValueError, TypeError):
-        return raw == ground_truth.strip()
-
-def code_verifier(response: str, test_suite) -> bool:
-    """Execute generated code against test cases in a subprocess sandbox."""
-    import subprocess, tempfile, json
-    with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
-        f.write(response)
-        fname = f.name
-    result = subprocess.run(
-        ["python", "-c", f"exec(open('{fname}').read()); print(all(tests))"],
-        capture_output=True, timeout=5
-    )
-    return result.returncode == 0 and b"True" in result.stdout
-
-# Filter the raw rollouts
-filtered = [
-    ex for ex in raw_dataset
-    if math_verifier(ex["response"], ex.get("ground_truth", ""))
-]
-print("Kept %d/%d rollouts (%.0f%%)" % (len(filtered), len(raw_dataset),
-      100 * len(filtered) / max(len(raw_dataset), 1)))`}
-      </CodeBlock>
-
-      <H3>5c. Student SFT with TRL</H3>
-
-      <CodeBlock language="python">
-{`# Student fine-tuning with HuggingFace TRL's SFTTrainer
-# pip install trl transformers datasets
-
-from transformers import AutoTokenizer, AutoModelForCausalLM
-from trl import SFTTrainer, SFTConfig
-from datasets import Dataset
-
-# Load student base model (e.g. Qwen2.5-7B-Base)
-model_name = "Qwen/Qwen2.5-7B"
-tokenizer  = AutoTokenizer.from_pretrained(model_name)
-model      = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto")
-
-# Format as chat template: [SYSTEM][USER: prompt][ASSISTANT: teacher_trace]
-def format_example(ex):
-    return tokenizer.apply_chat_template(
-        [{"role": "user",      "content": ex["prompt"]},
-         {"role": "assistant", "content": ex["response"]}],
-        tokenize=False, add_generation_prompt=False,
-    )
-
-train_dataset = Dataset.from_list(filtered).map(
-    lambda ex: {"text": format_example(ex)}
-)
-
-trainer = SFTTrainer(
-    model=model,
-    tokenizer=tokenizer,
-    train_dataset=train_dataset,
-    args=SFTConfig(
-        output_dir="./student-distilled",
-        per_device_train_batch_size=2,
-        gradient_accumulation_steps=8,   # effective batch=16
-        num_train_epochs=3,
-        learning_rate=2e-5,
-        lr_scheduler_type="cosine",
-        warmup_ratio=0.05,
-        max_seq_length=4096,
-        dataset_text_field="text",
-        bf16=True,
-        logging_steps=50,
-        save_strategy="epoch",
-    ),
-)
-trainer.train()`}
-      </CodeBlock>
-
-      <Prose>
-        The open-r1 project from HuggingFace is the closest public reproduction of the full DeepSeek-R1-Distill pipeline. It handles the rollout generation, filtering, and SFT stages with production-grade code, and is worth studying before building a custom pipeline. The Phi-1 and Phi-2 papers used a variant where GPT-4 was prompted to generate textbook-style explanations of topics from scratch — no existing base documents — then the small model trained on those synthetic textbooks. That is response-based distillation where the "prompts" are topic descriptions rather than specific questions.
-      </Prose>
-
-      <Prose>
-        A note on compute allocation in the production pipeline. The most expensive operation is teacher rollout generation, especially with multiple rollouts per prompt and a very large teacher. For a 685B teacher generating five rollouts per problem at average trace length 800 tokens, 200K problems requires generating roughly 800M tokens — substantial but one-time. The student SFT on the filtered subset is relatively cheap: a few hundred GPU-hours on an 8xH100 node for a 7B student on a few hundred thousand examples. The economic asymmetry is the whole point: the teacher's compute is the entry fee, paid once, and the student's deployment cost is the ongoing dividend.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>Student accuracy vs training steps</H3>
-
-      <Prose>
-        Student accuracy on a held-out reasoning benchmark climbs steeply early in distillation training, then plateaus near the teacher's capability ceiling. The jump-start from distillation is the key metric — compare the distilled student at step 0 (after a few hundred SFT steps on teacher traces) versus a same-size model trained from scratch on raw data for the same number of steps.
-      </Prose>
-
-      <Plot
-        label="student accuracy vs distillation steps"
-        xLabel="steps (×1000)"
-        yLabel="accuracy"
-        series={[
-          {
-            name: "distilled student",
-            color: colors.gold,
-            points: [
-              [0, 0.12], [1, 0.31], [2, 0.48], [3, 0.58], [4, 0.64],
-              [5, 0.68], [6, 0.71], [7, 0.73], [8, 0.74], [10, 0.75],
-            ],
-          },
-          {
-            name: "from-scratch small model",
-            color: "#60a5fa",
-            points: [
-              [0, 0.08], [1, 0.12], [2, 0.17], [3, 0.22], [4, 0.26],
-              [5, 0.29], [6, 0.31], [7, 0.33], [8, 0.35], [10, 0.37],
-            ],
-          },
-          {
-            name: "teacher ceiling",
-            color: "#4ade80",
-            points: [
-              [0, 0.78], [10, 0.78],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        The distilled student reaches roughly 95% of teacher performance within the first few thousand steps and then plateaus. The from-scratch model grows slowly and stays far below — it is learning reasoning from first principles rather than absorbing the teacher's already-learned procedure. The teacher ceiling is the hard limit the student cannot cross.
-      </Prose>
-
-      <H3>Filtered vs unfiltered training data</H3>
-
-      <Prose>
-        Rejection-sampling the teacher's rollouts before training produces a large accuracy advantage over training on all rollouts indiscriminately. The curves cross early: unfiltered training starts with more data but contaminated with teacher errors; filtered training starts with less but cleaner data.
-      </Prose>
-
-      <Plot
-        label="filtered vs unfiltered rollouts — student benchmark accuracy"
-        xLabel="steps (×1000)"
-        yLabel="accuracy"
-        series={[
-          {
-            name: "filtered 50K traces",
-            color: colors.gold,
-            points: [
-              [0, 0.08], [1, 0.38], [2, 0.55], [3, 0.63], [4, 0.68],
-              [5, 0.71], [6, 0.73], [8, 0.74], [10, 0.75],
-            ],
-          },
-          {
-            name: "unfiltered 500K traces",
-            color: "#f87171",
-            points: [
-              [0, 0.08], [1, 0.29], [2, 0.44], [3, 0.52], [4, 0.57],
-              [5, 0.60], [6, 0.62], [8, 0.64], [10, 0.65],
-            ],
-          },
-        ]}
-      />
-
-      <H3>DeepSeek-R1-Distill pipeline</H3>
-
-      <StepTrace
-        label="deepseek-r1-distill — step by step"
-        steps={[
-          {
-            label: "1. Generate rollouts from teacher",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="teacher → rollouts"
-                  tokens={[
-                    { label: "DeepSeek-R1 685B", color: colors.gold },
-                    { label: "800K problems", color: colors.textMuted },
-                    { label: "K=5+ rollouts each", color: "#c084fc" },
-                    { label: "~4M raw traces", color: "#60a5fa" },
-                  ]}
-                />
-                <Prose>
-                  The 685B teacher model generates multiple chain-of-thought completions per problem, covering math, code, and STEM reasoning tasks. Temperature 0.7–1.0 ensures diversity across rollouts for the same prompt.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "2. Verifier filters rollouts",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="verifier: keep only correct traces"
-                  tokens={[
-                    { label: "4M raw", color: "#f87171" },
-                    { label: "math: boxed answer check", color: colors.textMuted },
-                    { label: "code: unit test execution", color: colors.textMuted },
-                    { label: "~800K verified correct", color: "#4ade80" },
-                  ]}
-                />
-                <Prose>
-                  A deterministic verifier (regex + float comparison for math; subprocess execution for code) accepts only traces where the final answer is provably correct. Wrong traces, however fluent, are discarded. This step is the most consequential engineering decision in the pipeline.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "3. SFT student on filtered traces",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="student training"
-                  tokens={[
-                    { label: "Qwen2.5-7B base", color: colors.gold },
-                    { label: "SFT on 800K CoT traces", color: colors.textMuted },
-                    { label: "CE loss, full trace", color: "#c084fc" },
-                    { label: "R1-Distill-Qwen-7B", color: "#4ade80" },
-                  ]}
-                />
-                <Prose>
-                  Standard supervised fine-tuning: cross-entropy over the full reasoning chain, not just the final answer. Three epochs over the filtered dataset. The student learns to generate the teacher's reasoning style from scratch given a new prompt.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "4. (Optional) RLVR polish",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="brief RLVR pass after distillation"
-                  tokens={[
-                    { label: "R1-Distill-Qwen-7B", color: colors.gold },
-                    { label: "GRPO + verifier", color: "#c084fc" },
-                    { label: "+1–3 points on benchmarks", color: "#4ade80" },
-                  ]}
-                />
-                <Prose>
-                  A short RLVR training pass after distillation sharpens performance further, but DeepSeek's own ablations show that most of the gain comes from the SFT stage alone. Distillation-without-RL at 7B scale approaches distillation-with-RL. The exploration problem that makes RL hard from scratch is largely absent once distillation has established a competent reasoning base.
-                </Prose>
-              </div>
-            ),
-          },
-        ]}
-      />
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <Prose>
-        Which distillation variant to use depends on what you have access to, what tasks you care about, and whether correctness is mechanically verifiable.
-      </Prose>
-
-      <H3>Classical (soft-target KL) distillation</H3>
-
-      <Prose>
-        Use when: you have access to the teacher's full logit distribution (i.e., you own or host the teacher); the task is classification or token-level prediction rather than open-ended generation; you want maximum information transfer per training example; dataset size is small and you need the regularizing effect of dark knowledge. In practice this is rare for LLM distillation because proprietary teacher APIs expose only sampled tokens, not logit distributions. The main case where it is practical is self-distillation: distilling a large internally-hosted model into a smaller one on the same infrastructure.
-      </Prose>
-
-      <H3>Response-based (CE on outputs) distillation</H3>
-
-      <Prose>
-        Use when: you have only API-level access to the teacher (GPT-4, Claude, etc.); the task is instruction following, dialogue, or open-ended generation; you want to build a small model quickly with minimal infrastructure. This is the dominant approach for the vast majority of open-source instruction-following models. The teacher generates completions once; the student trains on them with standard SFT. Dataset size needs to be larger than the soft-target case because you are training on hard labels, not rich distributions — typically 50K to 200K examples for instruction following.
-      </Prose>
-
-      <H3>CoT distillation for reasoning tasks</H3>
-
-      <Prose>
-        Use when: the teacher is a reasoning model that emits step-by-step chains; you want to transfer not just the answer distribution but the problem-solving procedure; the student will be deployed on tasks requiring multi-step inference. Always prefer full trace over answer-only — the gap is consistently large on hard tasks. Trace length matters: long reasoning chains (500–2000 tokens per example) require larger context windows and more memory during training than typical instruction data.
-      </Prose>
-
-      <H3>Rejection-sampled CoT distillation</H3>
-
-      <Prose>
-        Use when: correctness is mechanically verifiable (math, code, formal proofs, structured output); you can afford the cost of generating multiple rollouts per prompt from the teacher; data quality matters more than data volume (it almost always does). This is the highest-quality variant and the one closest to the DeepSeek-R1-Distill recipe. If your task is not verifiable — creative writing, summarization, open-ended reasoning — you cannot apply rejection sampling and must fall back to response-based distillation with human or LLM-based quality filtering.
-      </Prose>
-
-      <Prose>
-        A special case worth noting: self-distillation. Some recent work uses the student model itself as a teacher for later training stages — generate rollouts from the current checkpoint, filter and SFT on the good ones, repeat. This is distinct from distilling a large teacher into a small student. Self-distillation on verifiable tasks can work as a form of iterative refinement, but it is bounded by the student's current capability ceiling rather than a stronger teacher's ceiling. It is most useful as a supplement after an initial teacher-distilled base is established.
-      </Prose>
-
-      <Callout accent="gold">
-        In 2025, the practical default for LLM distillation is: response-based SFT if the task is not verifiable; rejection-sampled CoT distillation if it is. Classical soft-target distillation is theoretically superior but rarely used in practice because it requires logit access to the teacher.
-      </Callout>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>Student-teacher size ratio</H3>
-
-      <Prose>
-        The most reliable empirical finding across distillation papers is the "5–10× ratio" heuristic: a student with roughly one-fifth to one-tenth the teacher's parameters can absorb most of the teacher's capability on tasks within the teacher's competence. Distilling a 7B student from a 70B teacher is the canonical example — approximately 10× compression with 70–90% capability retention on reasoning benchmarks. Larger compressions (100×, distilling a 1B from a 100B) push into a regime where the student's capacity is insufficient to represent the teacher's reasoning patterns, and performance falls sharply. Smaller compressions (2×) typically achieve near-lossless transfer but are rarely worth the trouble because you have almost as large a model as the teacher.
-      </Prose>
-
-      <Prose>
-        The ratio that works depends heavily on task complexity. For instruction following and chat — tasks with relatively simple and stereotyped outputs — 10× to 20× compression is often fine. For competition-level math or complex code generation — tasks that may require a large amount of computation embedded in the weights — even 5× compression loses measurable performance.
-      </Prose>
-
-      <H3>Data volume</H3>
-
-      <Prose>
-        Standard empirical ranges for different distillation use cases: instruction following requires 50K to 200K teacher completions for strong generalization; CoT reasoning distillation uses 100K to 1M verified traces (DeepSeek used 800K); synthetic textbook distillation (Phi series) uses 1B to 7B token-equivalent of generated text. More data helps up to a point, then returns diminish sharply — the student has absorbed the teacher's distribution and additional examples are near-duplicates. Quality filtering consistently extends the useful data range: a filtered 50K can outperform a raw 500K, effectively multiplying data efficiency by 10×.
-      </Prose>
-
-      <H3>What does not scale</H3>
-
-      <Prose>
-        Task diversity beyond the teacher's training distribution does not transfer. If the teacher was trained on English math and code, distilling it into a student and then expecting the student to reason about chemistry or history in Japanese is unreliable — the student will apply the teacher's reasoning structure to domains where it was never tested, with unpredictable results. The student's reasoning style is the teacher's reasoning style. It generalizes where the teacher generalizes and fails where the teacher fails.
-      </Prose>
-
-      <Prose>
-        Capability ceiling is absolute. No amount of distillation training on a fixed teacher will push the student past the teacher's capability. If the teacher achieves 40% on AIME 2024, the theoretical maximum for any student distilled from it on that benchmark is 40%. In practice, the student will be lower — typically 70–90% of teacher performance — because the student's smaller capacity means it cannot perfectly represent the teacher's distribution. Improving beyond the teacher requires getting a better teacher (train a stronger model), training the student with additional RL after distillation, or augmenting the distillation data with self-generated rollouts from an improved student model.
-      </Prose>
-
-      <H3>The data flywheel and its limits</H3>
-
-      <Prose>
-        One appealing pattern in the distillation literature is the iterative data flywheel: distill a strong teacher into a medium student, then use that medium student as a teacher to distill an even smaller student, and so on down the size ladder. The appeal is obvious — each stage can be done independently and each smaller model costs less to run. The problem is capability degradation across stages. Each distillation step loses some fraction of the teacher's capability. Cascading two or three stages compounds these losses. A student distilled from a student distilled from the original teacher often performs significantly worse than a student distilled directly from the original teacher. The recommendation is to always distill from the largest and strongest available teacher, not from intermediate students, even if the intermediate student is more convenient to run.
-      </Prose>
-
-      <Prose>
-        Cross-lingual and cross-domain transfer from distillation is weaker than it appears. A teacher trained primarily on English math will produce English math reasoning chains. A student distilled from those chains will reason well in English about math and will display some robustness to superficial reformulations of math problems, but it will not reliably transfer the reasoning patterns to formal logic, causal inference, or planning in ways the teacher was not explicitly strong at. The reasoning style transfers within the teacher's domain of competence; it does not generalize the teacher's problem-solving approach to structurally similar problems the teacher has never encountered.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>Student memorizes teacher mistakes</H3>
-
-      <Prose>
-        If the teacher's training data or rollout generation process has systematic biases — specific problem types it consistently gets wrong in a consistent way — the student will faithfully learn those mistakes. The student cannot distinguish between the teacher being correct and the teacher being confidently wrong. The only defenses are verification (mechanically check teacher outputs before training), diversity of teacher rollouts (use multiple temperatures and sample many traces to expose inconsistency), and evaluation on held-out tasks the teacher was not optimized for.
-      </Prose>
-
-      <H3>Coverage gaps in the distillation dataset</H3>
-
-      <Prose>
-        The student can only learn behaviors covered in the teacher-generated training set. If the prompt distribution used to generate distillation data does not cover the deployment distribution, the student will fail on unseen prompt types even if the teacher could handle them. This is especially dangerous because the failure is invisible during distillation training — the student trains successfully on the covered distribution and the gap only appears at deployment. The mitigation is deliberate prompt diversity: use varied seed prompts, multiple difficulty levels, and hold out a representative sample of deployment-distribution prompts for evaluation before shipping.
-      </Prose>
-
-      <H3>Teacher style contamination</H3>
-
-      <Prose>
-        The student absorbs the teacher's stylistic patterns alongside its reasoning patterns. A teacher that uses verbose preambles before reasoning steps will produce a student that also uses verbose preambles. A teacher that hedges with "I believe the answer is" will produce a student that hedges. These stylistic artifacts are not always desirable. The student's outputs will resemble the teacher's in ways that go beyond the reasoning content: sentence structure, verbosity, formatting, hedging language. Post-distillation RLHF or style-specific fine-tuning can adjust these, but removing deeply learned stylistic patterns requires deliberate effort.
-      </Prose>
-
-      <H3>CoT traces that look right but are wrong</H3>
-
-      <Prose>
-        The most dangerous failure mode in CoT distillation: the teacher generates a plausible-looking reasoning chain that arrives at a wrong answer, and the verifier misses it. This happens when the verifier is not comprehensive — for example, a math verifier that only checks the boxed answer will accept a trace that has a wrong intermediate step if the final boxed answer happens to be correct, and will miss a wrong final answer if the trace uses a non-standard answer format. The student learns to reproduce these traces, including the wrong intermediate reasoning. The resulting student produces confident-sounding wrong reasoning that may fool evaluators who read the chain and see it looks coherent. Defense: test the verifier itself rigorously; use multiple verification methods; include format-diversity in rollout generation so the verifier sees many answer formats during development.
-      </Prose>
-
-      <H3>Overfitting to teacher when student is undertrained on pretraining</H3>
-
-      <Prose>
-        A student distilled from a strong teacher but with an insufficient pretraining base will memorize the teacher's training examples rather than learning generalizable patterns. The symptoms: very low distillation training loss, but poor performance on held-out prompts even within the teacher's capability domain. The solution is a larger or better-pretrained student base. Distillation works best on student models that have already seen broad world knowledge — the distillation step teaches reasoning style, not world knowledge, and the student needs the knowledge already in its weights to apply the reasoning style effectively.
-      </Prose>
-
-      <H3>Benchmark contamination via teacher</H3>
-
-      <Prose>
-        The teacher model was trained on data that likely includes many of the benchmark problems used to evaluate the student. The teacher's correct traces for those specific problems may reflect near-verbatim recall of memorized solutions rather than genuine reasoning. The student, trained on these traces, learns to reproduce the memorized procedure for those exact problems. Benchmark scores improve; generalization to genuinely novel problems may not. This is structurally identical to data contamination in pretraining, but distillation concentrates it by having the student train directly on the teacher's benchmark-adjacent outputs.
-      </Prose>
-
-      <H3>Long trace truncation and context window mismatches</H3>
-
-      <Prose>
-        Reasoning models with full chain-of-thought traces often produce completions that are 1,000 to 4,000 tokens long. If the student's training context window is shorter than the trace, the truncated portion of the trace receives no gradient — the student learns the beginning of the teacher's reasoning style but not the later steps, which are often where the final answer consolidation happens. Symptoms: student generates plausible-looking reasoning chains that simply stop generating coherent output before reaching a conclusion. The fix is to set the training context window to at least the 95th-percentile trace length, and to filter out or truncate teacher traces that exceed a hard maximum, since extremely long traces with repetitive reasoning loops are often teacher failure modes rather than examples to learn from.
-      </Prose>
-
-      <H3>Student capacity and gradient starvation</H3>
-
-      <Prose>
-        When the student model is very small relative to the task complexity, distillation SFT can produce a model where loss decreases but the actual reasoning quality does not improve — the student is memorizing surface patterns (opening phrases, structural boilerplate) without developing the underlying capability to execute the reasoning steps. This is most visible in CoT distillation: the student learns to start with "Step 1: identify operands" but produces numerically wrong answers consistently. The diagnostic is comparing loss curves against task-specific accuracy curves — if accuracy fails to rise despite falling loss, the student capacity is likely insufficient. The solution is to use a larger student base, use a student with more pretraining (so it arrives at distillation with more world knowledge already encoded), or simplify the task distribution in the distillation dataset.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        The following papers are the load-bearing references for this topic. All arXiv IDs verified.
-      </Prose>
-
-      <H3>Hinton, Vinyals, and Dean (2015) — the original formulation</H3>
-
-      <Prose>
-        "Distilling the Knowledge in a Neural Network." arXiv:1503.02531. Introduces the temperature-softened KL loss, the concept of dark knowledge, and the ensemble-to-single-model compression framing. The core formulas in section 3 of this topic come from this paper. Every subsequent distillation paper in ML builds on this foundation.
-      </Prose>
-
-      <H3>Taori et al. (2023) — Alpaca</H3>
-
-      <Prose>
-        "Alpaca: A Strong, Replicable Instruction-Following Model." Stanford CRFM blog, March 2023. The first widely-replicated demonstration of response-based LLM distillation: 52K completions from text-davinci-003 used to fine-tune LLaMA-7B. Cost under $600 total. Showed that teacher API access plus a base model is sufficient to create a qualitatively capable instruction follower, which established the template for the 2023 wave of instruction-tuned open models.
-      </Prose>
-
-      <H3>Mukherjee et al. (2023) — Orca</H3>
-
-      <Prose>
-        "Orca: Progressive Learning from Complex Explanation Traces of GPT-4." arXiv:2306.02707. The key step from answer-only to explanation-trace distillation. Orca collects GPT-4's step-by-step explanations — not just its final answers — and fine-tunes a 13B model on them. The resulting model substantially outperforms Vicuna-13B on BBH (by over 100%) and reaches ChatGPT-level performance on many benchmarks. This is the direct intellectual predecessor of CoT distillation for reasoning models.
-      </Prose>
-
-      <H3>Gunasekar et al. (2023) — Phi-1</H3>
-
-      <Prose>
-        "Textbooks Are All You Need." arXiv:2306.11644. Introduces synthetic data distillation as an alternative to rollout collection: GPT-3.5 generates "textbook quality" Python tutorials and exercises from scratch, and a 1.3B model trained on those synthetic textbooks achieves 50.6% pass@1 on HumanEval — matching models twenty times larger trained on raw web data. The key insight is that data quality, not data volume, is the binding constraint for small models. Quality-filtered and synthetically-generated teacher outputs (a form of distillation) can substitute for massive real-world datasets.
-      </Prose>
-
-      <H3>DeepSeek-AI (2025) — R1 and R1-Distill</H3>
-
-      <Prose>
-        "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning." arXiv:2501.12948. The canonical reference for reasoning distillation at scale. Section 3.3 of that paper describes the distillation pipeline: 800K reasoning traces generated from DeepSeek-R1 (685B), filtered for correctness, used to SFT Qwen2.5 and Llama base models at 1.5B through 70B scale. The resulting R1-Distill models reach AIME 2024 scores that were unachievable for same-size models trained with RL from scratch. The key ablation: distillation-without-RL matches or approaches distillation-with-RL at 7B scale, establishing that the supervised trace signal alone is sufficient to instill coherent long-range reasoning.
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1: why higher T exposes more information</H3>
-
-      <Prose>
-        Derive analytically why increasing the temperature <Code>T</Code> exposes more information in the teacher's output distribution. Start from the definition of Shannon entropy: <Code>H(p) = -Σ p(k) log p(k)</Code>. Show that as <Code>T → 0</Code>, the softmax approaches a one-hot distribution and the entropy approaches 0 (no dark knowledge). As <Code>T → ∞</Code>, show the softmax approaches a uniform distribution and the entropy approaches <Code>log(V)</Code> where <Code>V</Code> is the vocabulary size. Explain why the maximum information about the teacher's conceptual structure is accessible at some intermediate temperature, and why that temperature is typically between 3 and 10 for classification tasks.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2: student-teacher size ratio for 90% capability retention</H3>
-
-      <Prose>
-        Given the empirical finding that a 7B student distilled from a 70B teacher retains roughly 85% of the teacher's AIME 2024 score, and a 14B student retains roughly 90%, estimate: (a) what student size would be needed to retain 95% of a 70B teacher's capability on this benchmark; (b) whether this estimate would hold across all tasks or whether task difficulty would modulate the ratio; (c) why there is likely a floor below which further doubling of student size gives diminishing capability returns. Consider both the capacity argument (smaller models cannot represent complex distributions) and the optimization argument (SFT on a finite dataset reaches a ceiling independent of model size).
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3: design a CoT distillation pipeline for code generation</H3>
-
-      <Prose>
-        Design the verifier component for CoT distillation of a code-generating teacher. The teacher generates Python solutions to competitive programming problems. Specify: (a) what the verifier receives as input (problem statement, generated code, expected outputs); (b) how the verifier executes the code safely (sandboxing requirements: process isolation, time limits, memory limits, network blocking); (c) what score it returns and whether that score should be binary or fractional (fraction of test cases passing); (d) what failure modes the verifier misses — consider off-by-one errors in floating-point, infinite loops that hit the time limit, and solutions that pass public tests but fail on hidden test cases. How would you make the verifier more robust to each failure mode?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4: when does response-based beat softmax-KL distillation</H3>
-
-      <Prose>
-        List and explain three concrete scenarios where response-based distillation (CE on teacher outputs) is likely to outperform soft-target KL distillation in practice, even though KL distillation is theoretically more information-rich. Consider: (1) proprietary teacher with API-only access; (2) very large teacher vocabulary where storing full logit distributions is infeasible; (3) cases where the teacher's high-confidence regions dominate the distribution and most dark knowledge is noise rather than signal. For each scenario, describe what assumption of soft-target distillation is violated and how response-based distillation avoids the issue.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5: estimating the contamination risk of a distillation benchmark</H3>
-
-      <Prose>
-        You want to evaluate a student model distilled from GPT-4 on the MATH benchmark. Describe a protocol to estimate how much of the student's MATH score reflects genuine reasoning capability versus benchmark contamination inherited from the teacher. Your protocol should: (a) probe the student with rephrased or equivalent problems not seen in standard benchmark sets; (b) compare student performance on problems from the benchmark's public training split versus its hidden test split; (c) test whether the student can explain its reasoning step-by-step in a way that generalizes to minor problem variations (e.g., same structure, different numbers). What outcome would confirm contamination? What outcome would provide evidence of genuine capability transfer?
-      </Prose></div></section>
-
+// Generated from accepted immutable content by scripts/render-distillation-lesson.mjs.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import { Math as InlineMath, MathBlock as SharedMathBlock } from '../../components/content/Math.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { Table as NeuralTable } from '../../components/lesson-labs/DistillationShared.jsx';
+import { DistillNetworks, DistillDeployment, DistillSignals, DistillCompletion, DistillDivergence, DistillVocabulary, DistillTemperature, DistillUpdate, DistillHighTemperature, DistillConstraint, DistillDirections } from '../../components/lesson-labs/DistillationFoundations.jsx';
+import { DistillSequenceTree, DistillSequenceSample, DistillResponseMask, DistillReduction, DistillPrefixWeights, DistillVisitationGradient, DistillStudentPrefix } from '../../components/lesson-labs/DistillationSequences.jsx';
+import { DistillTrace, DistillFiltering, DistillR1Recipe, DistillExperiment, DistillSavedTargets, DistillLayerCopy, DistillChunks, DistillOutcomes, DistillCosts, DistillRoute } from '../../components/lesson-labs/DistillationEvidence.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+
+const MathBlock = ({ children }) => (
+  <div className="distill-equation" role="region" tabIndex={0} aria-label="Mathematical expression">
+    <SharedMathBlock>{children}</SharedMathBlock>
+  </div>
+);
+const Program = ({ file }) => (
+  <RemoteCodeBlock source={'/learn-code/llm-distillation/' + file} language="python" title={file} filename={file} />
+);
+function DistillationLesson() {
+  return <div className="lesson-flow distill-flow">
+    <section>
+    <Prose>{"Suppose a language model answers "}<code>{"(2+3)*4"}</code>{" with "}<code>{"sum 5 ; product 20 ; answer 20"}</code>{
+      ". We want another model to answer the same kind of question, perhaps using less memory or " +
+      "less computation. What exactly can we transfer: the teacher's words, its probabilities, or " +
+      "its ability to reach a correct answer on a new question? Those are different targets, and " +
+      "copying one does not establish the others."
+    }</Prose>
+    
+    <Prose opening="route">{
+      "We will construct a teacher/student loss from individual token probabilities, follow its " +
+      "gradient, train actual smaller autoregressive models on saved neural teacher outputs, and " +
+      "use an ordinary pretrained distillation trainer. The small arithmetic experiment has a " +
+      "deliberately honest outcome: its teacher is very accurate on its training prompts but gets " +
+      "none of the held-out questions right. The students mostly fail too. That outcome helps " +
+      "separate a working transfer mechanism from useful generalization."
+    }</Prose>
+    
+    <Prose opening="prerequisites">{"The "}<a href={
+      "/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models"
+    }>{"causal language-modeling lesson"}</a>{" supplies the complete decoder used here. "}<a href={"/learn/path/full-curriculum/supervised-fine-tuning-sft?module=large-language-models"}>{"Supervised Fine-Tuning"}</a>{" establishes response masks, EOS and the difference between conditional loss and free generation. "}<a href={"/learn/path/full-curriculum/synthetic-data-generation-for-pre-training?module=large-language-models"}>{"Synthetic Data Generation"}</a>{" explains why filtering changes the data distribution; "}<a href={
+      "/learn/path/full-curriculum/process-reward-models-prm-vs-outcome-reward-models-orm?module=large-language-models"
+    }>{"PRM versus ORM"}</a>{
+      " separates step checks from final-answer checks. We refresh each distinction when it becomes " +
+      "necessary. Work through sections 1–14 in order; the full visitation derivative in section 8 " +
+      "is a visible deeper branch after its ordinary prefix intuition. Every program is complete " +
+      "and downloadable. The mathematical examples are constructed calculations; the experiment " +
+      "tables identify actual saved runs."
+    }</Prose>
+    
+    <span id="1-why-it-exists" aria-hidden="true" />
+    <H2>{"1. Two networks, one deployment"}</H2>
+    
+    <DistillNetworks />
+    
+    <Prose>{"A language model maps the already visible tokens, its "}<strong>{"prefix"}</strong>{", to one real number per possible next token. These numbers are "}<strong>{"logits"}</strong>{
+      ". Softmax converts them into positive probabilities that sum to one. A teacher is the model " +
+      "that supplies training information; a student is the model whose parameters we change to " +
+      "match that information. They may differ in depth, width or even architecture. Distillation " +
+      "transfers behavior through examples and an objective; it does not require copying every " +
+      "teacher weight."
+    }</Prose>
+    
+    <Prose>{
+      "Our ordinary pretrained example keeps the student's embedding width and vocabulary but " +
+      "retains only base-model blocks 0, 2 and 4 from a six-block Pythia model. The teacher is a " +
+      "separately fine-tuned six-block model. Keeping alternate blocks is a concrete initialization " +
+      "choice, not a theorem that alternate layers are sufficient. The retained embeddings and " +
+      "output head dominate this particular model's parameter count: 14,067,712 teacher parameters " +
+      "become 13,472,896 student parameters, about 4.23% fewer. Half the blocks does not mean half " +
+      "the parameters."
+    }</Prose>
+    
+    <DistillDeployment />
+    
+    <Prose>{
+      "During training, teacher probabilities or teacher-generated text enter a loss. The loss " +
+      "derivative reaches the student parameters. We hold the teacher fixed: the student cannot " +
+      "reduce the discrepancy by moving its target. During deployment, the student receives a " +
+      "prompt and generates its own continuation. The teacher need not be loaded. If the student " +
+      "still requires a teacher call to choose every next token, we have built a different serving " +
+      "system, not this standalone student."
+    }</Prose>
+    
+    <Prose>{
+      "Parameter count, stored bytes, activation memory and elapsed time measure different costs. " +
+      "Removing blocks changes several operations, but kernel choices, sequence lengths and " +
+      "vocabulary projection can dominate latency. We will report counts and observed training work " +
+      "separately from any hypothetical serving saving."
+    }</Prose>
+    
+    <span id="2-core-intuition" aria-hidden="true" />
+    <H2>{"2. What survives a teacher call"}</H2>
+    
+    <DistillSignals />
+    
+    <Prose>{"Imagine that the next-token events are "}<code>{"5"}</code>{", "}<code>{"6"}</code>{", "}<code>{"20"}</code>{" and "}<code>{"other"}</code>{". A teacher gives them probabilities "}<code>{"[0.60, 0.20, 0.15, 0.05]"}</code>{". Copying its most likely token retains only "}<code>{"5"}</code>{
+      ". A hard target assigns all training mass to that token. Keeping the full vector also " +
+      "communicates that "
+    }<code>{"6"}</code>{" was more plausible than "}<code>{"other"}</code>{". This extra information is often called a "}<strong>{"soft target"}</strong>{
+      ". It is information about the teacher's beliefs, including its mistakes, not a replacement " +
+      "for independent task truth."
+    }</Prose>
+    
+    <Prose>{
+      "An API may provide only generated text, top-k scores, or a full vocabulary vector. Those " +
+      "interfaces support different objectives. A top-k list generally omits probability mass; " +
+      "renormalizing that list changes the target distribution. The full-vector objectives below " +
+      "assume that every vocabulary event is represented. Text-only distillation instead uses the " +
+      "exact generated completion as an ordinary supervised target. Hidden-state matching is " +
+      "another family: it requires access to internal activations and an explicit correspondence " +
+      "between representations. We do not need it for the output-transfer routes developed here."
+    }</Prose>
+    
+    <DistillCompletion />
+    
+    <Prose>{
+      "Sampling selects a token according to the teacher's probability mass. With the four-event " +
+      "vector above, a uniform number in "
+    }<code>{"[0,0.6)"}</code>{" selects "}<code>{"5"}</code>{", and one in "}<code>{"[0.6,0.8)"}</code>{" selects "}<code>{"6"}</code>{
+      ". The completion then becomes part of the prefix for the next teacher call. A complete " +
+      "sampled sentence preserves one path through a large tree of possibilities, not every " +
+      "conditional distribution in that tree. Greedy generation always chooses the largest current " +
+      "probability. It is useful for a deterministic target, but it is not an unbiased sample from " +
+      "the teacher."
+    }</Prose>
+    
+    <Prose>{
+      "Our categorical sampler forms a cumulative distribution only over positive-mass events and " +
+      "maps the chosen position back to its original token ID. This matters at an endpoint such as " +
+      "uniform zero: a zero-probability leading token must never be returned just because its " +
+      "cumulative mass equals zero. Neural softmax is positive mathematically, but finite " +
+      "calculations and constructed fixtures can contain exact zeros."
+    }</Prose>
+    
+    <span id="3-mathematical-foundation" aria-hidden="true" />
+    <H2>{"3. Compare probabilities on the same events"}</H2>
+    
+    <DistillDivergence />
+    
+    <Prose>{"Write "}<code>{"q(v)"}</code>{" for the teacher probability of token "}<code>{"v"}</code>{" and "}<code>{"p(v)"}</code>{
+      " for the student's. Both rows refer to the same prefix and the same possible token events. " +
+      "The teacher's "
+    }<strong>{"entropy"}</strong>{", "}<code>{"H(q)"}</code>{", is its average surprise under its own probabilities. The "}<strong>{"cross-entropy"}</strong>{", "}<code>{"H(q,p)"}</code>{
+      ", measures that same teacher-weighted average using the student's probabilities. Their " +
+      "difference is forward Kullback–Leibler divergence, or "
+    }<strong>{"forward KL"}</strong>{". We use natural logarithms, so the unit is a *nat*."}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"H(q)=-\\sum_v q(v)\\log q(v),\\qquad H(q,p)=-\\sum_v q(v)\\log p(v)."}</MathBlock>
     </div>
-  ),
+    
+    <div className="neural-equation">
+    <MathBlock>{"D_{\\mathrm{KL}}(q\\Vert p)=\\sum_v q(v)\\log\\frac{q(v)}{p(v)}=H(q,p)-H(q)."}</MathBlock>
+    </div>
+    
+    <Prose>{"For "}<code>{"q=[0.6,0.2,0.15,0.05]"}</code>{" and "}<code>{"p=[0.4,0.3,0.2,0.1]"}</code>{
+      ", entropy is 1.062738 nats, cross-entropy is 1.147114 and KL is 0.084376. The four KL terms " +
+      "are approximately "
+    }<code>{"[0.243279,−0.081093,−0.043152,−0.034657]"}</code>{
+      ". Individual terms can be negative: the student can assign one event more probability than " +
+      "the teacher. The sum is nonnegative for valid distributions. If "
+    }<code>{"p=q"}</code>{", KL is zero while cross-entropy equals the teacher's generally nonzero entropy."}</Prose>
+    
+    <Prose>{
+      "Because the fixed teacher's entropy does not depend on student parameters, minimizing this " +
+      "soft cross-entropy and minimizing forward KL give the same student gradient. Their printed " +
+      "loss values still differ. Comparing an unadjusted CE number from one run to a KL number from " +
+      "another would be misleading."
+    }</Prose>
+    
+    <Prose>{"If "}<code>{"q(v)>0"}</code>{" but "}<code>{"p(v)=0"}</code>{
+      ", forward KL is infinite. We use finite logits and stable log-softmax rather than creating " +
+      "zeros by separately exponentiating very large negative numbers. Subtracting the maximum " +
+      "logit before exponentiation preserves the probabilities and avoids overflow. An all-masked " +
+      "minibatch returns a connected zero loss and zero gradient; it is not evidence of a " +
+      "successful match."
+    }</Prose>
+    
+    <DistillVocabulary />
+    
+    <Prose>{"Equal vector widths are not sufficient. Suppose teacher ID 0 means "}<code>{"cat"}</code>{" and student ID 0 means "}<code>{"dog"}</code>{
+      ". Comparing column 0 directly transfers the probability of one event to another. A known " +
+      "one-to-one vocabulary permutation can be undone before computing KL. Different tokenizers " +
+      "often split the same text into different numbers of pieces; a column permutation cannot " +
+      "repair that mismatch. Text transfer can still work: tokenize the literal completion with the " +
+      "student's tokenizer and train its corresponding sequence. That is a different event space " +
+      "and a different objective, not a direct per-token KL approximation."
+    }</Prose>
+    
+    <Prose>{
+      "In the native program both models use the same explicitly loaded tokenizer. We also check " +
+      "that the teacher's saved vocabulary and EOS identity agree, and that all task prompts and " +
+      "complete candidate-label encodings match. Byte-identical JSON is stronger than necessary and " +
+      "can fail after harmless serialization normalization; both original file identities remain " +
+      "recorded in the protocol. Semantic checks must establish the required event correspondence " +
+      "rather than silently accepting a mismatch."
+    }</Prose>
+    
+    <span id="4-from-scratch-implementation" aria-hidden="true" />
+    <H2>{"4. Soften a target and follow its gradient"}</H2>
+    
+    <DistillTemperature />
+    
+    <Prose>{"A very confident teacher may place almost all its probability on one event. "}<strong>{"Temperature"}</strong>{" "}<code>{"T>0"}</code>{" changes how logits become probabilities: divide each logit by "}<code>{"T"}</code>{
+      " before softmax. A larger temperature flattens differences. A smaller temperature sharpens " +
+      "them. It changes both the target and the student's comparison distribution; it does not " +
+      "merely multiply the existing loss."
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"q_T(v)=\\frac{\\exp(t_v/T)}{\\sum_j\\exp(t_j/T)},\\qquad p_T(v)=\\frac{\\exp(z_v/T)}{\\sum_j\\exp(z_j/T)}."}</MathBlock>
+    </div>
+    
+    <Prose>{"Here "}<code>{"t"}</code>{" is the fixed teacher logit vector and "}<code>{"z"}</code>{" is the student's. Try teacher logits "}<code>{"[2,0,−1,−3]"}</code>{" and student logits "}<code>{"[0.7,0.2,−0.1,−0.8]"}</code>{
+      ". Temperature 2 exposes more teacher mass on the lower-ranked events than temperature 1. " +
+      "Adding the same constant to every teacher logit changes neither distribution: only " +
+      "within-row differences matter. As temperature approaches zero, a unique maximum receives " +
+      "mass approaching one; tied maxima instead share the mass. The often-heard “temperature zero " +
+      "gives one hot” statement needs that uniqueness condition."
+    }</Prose>
+    
+    <DistillUpdate />
+    
+    <Prose>{"Let the soft loss be "}<code>{"T² KL(qT || pT)"}</code>{". Differentiate log-softmax first: "}<code>{"∂ log pT(v)/∂ zj = (1[v=j]−pT(j))/T"}</code>{". The fixed teacher row sums to one, so the derivative of its cross-entropy is "}<code>{"(pT(j)−qT(j))/T"}</code>{". Multiplying by "}<code>{"T²"}</code>{" gives"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"\\frac{\\partial [T^2D_{\\mathrm{KL}}(q_T\\Vert p_T)]}{\\partial z_j}=T\\,[p_T(j)-q_T(j)]."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "A student event with too little probability has a negative logit derivative. Gradient " +
+      "descent subtracts that derivative and raises the logit. Normalization couples all events; " +
+      "the gradient entries sum to zero. For a pooled minibatch, divide this vector by the number " +
+      "of valid target positions and set masked rows to zero. Teacher logits are detached, so they " +
+      "receive no derivative."
+    }</Prose>
+    
+    <Prose>{"An optional gold-label term remains at temperature 1:"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "L=(1-\\alpha)\\,\\operatorname{CE}(y,p_1)+\\alpha T^2D_{\\mathrm{KL}}(q_T\\Vert p_T),\\qquad " +
+      "0\\leq\\alpha\\leq1."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{""}<code>{"α"}</code>{
+      " decides how much the two sources influence this objective. It is distinct from the " +
+      "divergence selector "
+    }<code>{"β"}</code>{" used later. At "}<code>{"α=0"}</code>{" the teacher supplies no gradient; at "}<code>{"α=1"}</code>{
+      " the hard-label term supplies none. A wrong, confident teacher can conflict with correct " +
+      "labels. Matching it more closely is not automatically better task performance."
+    }</Prose>
+    
+    <Prose>{
+      "The core NumPy route returns both the scalar and the manually calculated student gradient. " +
+      "For forward KL its essential calculation is:"
+    }</Prose>
+    
+    <CodeBlock language={"python"}>{
+      "lp = log_softmax(student, temperature)\n" +
+      "lq = log_softmax(teacher, temperature)\n" +
+      "p, q = np.exp(lp), np.exp(lq)\n" +
+      "per_position = (q * (lq - lp)).sum(axis=-1)\n" +
+      "gradient = temperature * (p - q)\n" +
+      "gradient *= valid[..., None] / max(int(valid.sum()), 1)"
+    }</CodeBlock>
+    
+    <Prose>{
+      "The complete program checks this against Torch autograd, finite differences and one SGD " +
+      "update for forward, reverse and interior JSD objectives. It includes empty masks, repeated " +
+      "rows, changed temperatures and a separate hard/soft mixture. This is a derivative test on " +
+      "constructed arrays, not a trained language-model result. An arbitrarily large SGD step need " +
+      "not reduce loss; the lab exposes the actual before/after calculation rather than promising " +
+      "it."
+    }</Prose>
+    
+    <Prose>{""}<strong>{"Run the finite examples."}</strong>{" Download and extract the "}<a href={"/learn-code/llm-distillation/llm-distillation.zip"}>{"complete program bundle"}</a>{", then open a terminal in its folder containing "}<code>{"distillation_loss.py"}</code>{". The "}<a href={"/learn-code/llm-distillation/README.md"}>{"README"}</a>{
+      " gives the full file order, recorded results and separate pretrained-model setup. The " +
+      "examples here need Python 3.12, NumPy and PyTorch; a CPU is sufficient."
+    }</Prose>
+    
+    <Prose>{"Create an isolated environment:"}</Prose>
+    
+    <CodeBlock language={"sh"}>{"python -m venv .venv"}</CodeBlock>
+    
+    <Prose>{"Activate it with "}<code>{".venv\\Scripts\\Activate.ps1"}</code>{" in Windows PowerShell, or "}<code>{"source .venv/bin/activate"}</code>{
+      " on macOS/Linux. With that environment active, install the two dependencies and run the " +
+      "current loss check and the sequence check introduced in section 6:"
+    }</Prose>
+    
+    <CodeBlock language={"sh"}>{
+      "python -m pip install numpy==2.3.5 torch==2.14.0\n" +
+      "python distillation_loss.py --output loss-results.json\n" +
+      "python distillation_sequences.py --output sequence-results.json"
+    }</CodeBlock>
+    
+    <Prose>{
+      "The recorded environment used NumPy 2.3.5 and PyTorch 2.14.0+cpu; select a " +
+      "platform-appropriate PyTorch build if necessary. Both commands compare manual derivatives " +
+      "with autograd on finite examples and save their checks as JSON. They do not download a model " +
+      "or fit the arithmetic study. Keep the extracted programs together for their local imports. " +
+      "Section 12 adds the Transformers, TRL and checkpoint requirements when we reach the ordinary " +
+      "pretrained route."
+    }</Prose>
+    
+    <Program file="distillation_loss.py" />
+    
+    <DistillHighTemperature />
+    
+    <Prose>{"Why multiply by "}<code>{"T²"}</code>{"? At high temperature, a softmax row with "}<code>{"V"}</code>{" events is approximately "}<code>{"1/V + (zj−mean(z))/(VT)"}</code>{". Its teacher/student probability difference is therefore of order "}<code>{"1/T"}</code>{". The unscaled logit gradient divides by another "}<code>{"T"}</code>{". Multiplication by "}<code>{"T²"}</code>{" offsets that high-temperature shrinkage. It does "}<strong>{"not"}</strong>{" make the gradients identical at every temperature."}</Prose>
+    
+    <Prose>{"Subtract each row's own mean and call the centered vectors "}<code>{"z̃"}</code>{" and "}<code>{"t̃"}</code>{". Then"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "\\lim_{T\\to\\infty} T^2D_{\\mathrm{KL}}(q_T\\Vert p_T)=\\frac{1}{2V}\\sum_j(\\widetilde " +
+      "z_j-\\widetilde t_j)^2."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{
+      "For the four-logit example the limit is 0.7975. Centering is essential because softmax " +
+      "cannot identify a shared logit offset. The approximation is useful for understanding scale; " +
+      "it is not a reason to choose extremely high temperature without checking whether that target " +
+      "is useful for the task."
+    }</Prose>
+    
+    <H2>{"5. Direction matters when the student is constrained"}</H2>
+    
+    <DistillConstraint />
+    
+    <Prose>{"Reverse KL swaps which distribution weights the discrepancy:"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"D_{\\mathrm{KL}}(p\\Vert q)=\\sum_v p(v)\\log\\frac{p(v)}{q(v)}."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "Forward KL weights events according to the teacher. Reverse KL weights them according to the " +
+      "student. If the student can represent every categorical row, both objectives have the same " +
+      "best answer "
+    }<code>{"p=q"}</code>{
+      ". “Forward covers modes; reverse chooses a mode” is therefore not an unconditional property " +
+      "of arbitrary softmax vectors. It becomes a useful description under particular restrictions."
+    }</Prose>
+    
+    <Prose>{"Consider "}<code>{"q=[0.49,0.02,0.49]"}</code>{", which has two large separated events. Restrict the student to "}<code>{"p(u)=[u²,2u(1−u),(1−u)²]"}</code>{" with "}<code>{"0<u<1"}</code>{". At "}<code>{"u=0.5"}</code>{", it assigns "}<code>{"[0.25,0.5,0.25]"}</code>{
+      ": covering both extremes forces much more middle mass than the teacher wants. Forward KL is " +
+      "minimized at "
+    }<code>{"u=0.5"}</code>{". Reverse KL has symmetric minima near the endpoints, close to "}<code>{"u=0.024"}</code>{" and "}<code>{"u=0.976"}</code>{
+      ", accepting a missed teacher mode to avoid the middle. Those are properties of this family " +
+      "and this target. They do not establish which objective wins on language tasks."
+    }</Prose>
+    
+    <Prose>{"For one finite-logit row, write "}<code>{"D=KL(pT||qT)"}</code>{". The unscaled reverse-KL gradient is "}<code>{"pj[log(pj/qj)−D]/T"}</code>{". The subtraction of "}<code>{"D"}</code>{
+      " again makes the logit derivatives sum to zero. The probability weighting is now itself " +
+      "differentiated. If the teacher assigns exact zero probability where the student has positive " +
+      "mass, reverse KL is infinite; forward and reverse thus penalize different support failures. " +
+      "Stable finite-logit fixtures avoid accidental numerical zeros."
+    }</Prose>
+    
+    <DistillDirections />
+    
+    <Prose>{"An interior generalized Jensen–Shannon divergence uses a mixture "}<code>{"m=βq+(1−β)p"}</code>{":"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"J_\\beta(q,p)=\\beta D_{\\mathrm{KL}}(q\\Vert m)+(1-\\beta)D_{\\mathrm{KL}}(p\\Vert m),\\qquad 0<\\beta<1."}</MathBlock>
+    </div>
+    
+    <Prose>{"At "}<code>{"β=0.5"}</code>{
+      " both distributions contribute equally. The unnormalized expression approaches zero as " +
+      "either mixture coefficient approaches an endpoint. The inspected TRL interface separately " +
+      "defines "
+    }<code>{"β=0"}</code>{" as pure forward KL and "}<code>{"β=1"}</code>{
+      " as pure reverse KL. These replacements are an API convention, not the continuous limits of " +
+      "the displayed interior expression. Our scratch function requires an explicit named KL at the " +
+      "endpoints so that the convention cannot be missed."
+    }</Prose>
+    
+    <span id="6-visual-walkthrough" aria-hidden="true" />
+    <H2>{"6. A sequence chooses the next context"}</H2>
+    
+    <DistillSequenceTree />
+    
+    <Prose>{
+      "A language model assigns a sequence probability by multiplying conditional next-token " +
+      "probabilities. For two binary positions, the possible completions are "
+    }<code>{"AA"}</code>{", "}<code>{"AB"}</code>{", "}<code>{"BA"}</code>{" and "}<code>{"BB"}</code>{
+      ". There is one first-position row and two second- position rows: the second row depends on " +
+      "whether the first token was A or B."
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"p(y_1,y_2\\mid x)=p(y_1\\mid x)\\,p(y_2\\mid x,y_1)."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "The full sequence cross-entropy is the teacher-weighted sum of the negative log student " +
+      "probability over all four leaves. Longer sequences make exhaustive enumeration exponential. " +
+      "Sampling a complete sequence from the teacher and training its ordinary token CE gives an " +
+      "unbiased estimate of that sequence cross-entropy under the same distribution and " +
+      "length/stopping convention. The sample's token losses are summed; choosing another length " +
+      "normalization changes the objective."
+    }</Prose>
+    
+    <DistillSequenceSample />
+    
+    <Prose>{
+      "If instead we always copy one greedy or beam-decoded completion, we optimize the likelihood " +
+      "of that selected target. It is no longer an unbiased estimate of the whole teacher " +
+      "expectation. Kim and Rush's original sequence-level work used a high-probability sequence " +
+      "approximated with beam search. That can be a useful training choice without pretending it " +
+      "preserves the complete teacher distribution."
+    }</Prose>
+    
+    <Prose>{
+      "Token-distribution training and sequence-text training also differ in which prefixes they " +
+      "inspect. A stored human answer supplies human prefixes. A copied teacher answer supplies " +
+      "teacher-generated prefixes. A sampled student answer supplies student-generated prefixes. " +
+      "Even with the same divergence formula, these methods ask the teacher different conditional " +
+      "questions."
+    }</Prose>
+    
+    <Prose>{
+      "The complete finite program computes all four leaf masses, exact CE and both KL directions. " +
+      "Its 10,000 seeded categorical samples are a reproducible observation of a sample mean, " +
+      "alongside the exact expectation; no single finite sample is treated as the expectation " +
+      "itself. It also verifies the deeper derivative in section 8 with Torch and finite " +
+      "differences."
+    }</Prose>
+    
+    <Program file="distillation_sequences.py" />
+    
+    <H2>{"7. Copy a completion without losing its boundary"}</H2>
+    
+    <DistillResponseMask />
+    
+    <Prose>{"The prompt "}<code>{"(2+3)*4"}</code>{" is serialized by the small experiment as nine IDs: "}<code>{"[BOS, (, 2, +, 3, ), *, 4, =]"}</code>{". Its response is also nine IDs: "}<code>{"[sum, 5, ;, product, 20, ;, answer, 20, EOS]"}</code>{
+      ". Numbers are single tokens in this explicit finite vocabulary. This is a task-specific " +
+      "tokenizer, not a claim about how Pythia splits the same string."
+    }</Prose>
+    
+    <Prose>{"The predictor at input index 8 sees the final "}<code>{"="}</code>{
+      " and predicts the response's first token at index 9. Each later predictor sees the preceding " +
+      "response tokens. Prompt positions are context, but their next-token targets are ignored " +
+      "until the first response token. The real EOS target remains supervised. Padding after EOS is " +
+      "ignored. The scratch collator stores labels already aligned to predictor rows; the ordinary " +
+      "Transformers helper stores target-position labels and lets the model shift once. Applying " +
+      "both shifts would skip a target."
+    }</Prose>
+    
+    <Prose>{"An answer-only student instead learns "}<code>{"[20, EOS]"}</code>{
+      ". The label content, length and conditioning all change: it cannot condition its final " +
+      "answer on a generated intermediate trace that is absent. A comparison between these recipes " +
+      "is not a controlled test of only one property of rationales."
+    }</Prose>
+    
+    <DistillReduction />
+    
+    <Prose>{
+      "For a batch with one response of two tokens and another of nine, a pooled token mean gives " +
+      "the second response more total weight. If their negative-log- probability sums are 4 and 9 " +
+      "nats, the pooled mean is "
+    }<code>{"13/11≈1.1818"}</code>{", while the mean of their own means is "}<code>{"(4/2+9/9)/2=1.5"}</code>{
+      ". Neither denominator can be inferred from the word “average.” Our loops use the pooled " +
+      "count of actual supervised positions. Across evaluation batches, we add sums and counts " +
+      "before dividing."
+    }</Prose>
+    
+    <Prose>{
+      "Generation uses lengths to distinguish active positions from stored padding. This is " +
+      "especially important when a library uses EOS's ID as the padding value. An emitted BOS or " +
+      "PAD-like token is still a real generated action, even when it makes the output invalid; " +
+      "silently removing it could turn a bad completion into a valid label. A completion that hits " +
+      "its horizon without EOS is retained as such. The offline pretrained route excludes that " +
+      "whole nonterminated completion from training rather than adding a made-up EOS or " +
+      "substituting the correct label."
+    }</Prose>
+    
+    <H2>{"8. Learn at prefixes the student visits"}</H2>
+    
+    <DistillPrefixWeights />
+    
+    <Prose>{
+      "Suppose the teacher usually starts with A but the student often starts with B. Training only " +
+      "on teacher prefixes rarely asks what to do after B. During the student's own generation, B " +
+      "may be common. "
+    }<strong>{"On-policy distillation"}</strong>{" asks for teacher feedback at prefixes generated by the current student. "}<strong>{"Offline"}</strong>{
+      " training reuses a fixed corpus. Prefix source is separate from whether the local loss is " +
+      "forward KL, reverse KL or another divergence."
+    }</Prose>
+    
+    <DistillStudentPrefix />
+    
+    <Prose>{
+      "The ordinary route is: sample a student continuation, keep those sampled IDs fixed, evaluate " +
+      "both models on each resulting prefix, then update the student using the teacher's full " +
+      "next-token vector. Even a mistaken prefix can receive dense feedback. The teacher is not " +
+      "necessarily supplying a new corrected sentence. The GKD paper uses this stop-gradient " +
+      "treatment of sampled prefixes; our ordinary TRL example follows the same local-update " +
+      "distinction."
+    }</Prose>
+    
+    <Prose>{
+      "“Keep sampled IDs fixed” is a computational instruction. The sample came from the student, " +
+      "so the distribution of prefixes depends on its parameters across training. A derivative " +
+      "taken only through the local token distributions need not equal the derivative of the " +
+      "complete expected sequence objective. You can use that local update deliberately, but should " +
+      "know which gradient it computes."
+    }</Prose>
+    
+    <H3>{"Deeper: the missing visitation derivative"}</H3>
+    
+    <DistillVisitationGradient />
+    
+    <Prose>{"Let "}<code>{"p0"}</code>{" be the student's first-token row, "}<code>{"pA,pB"}</code>{" its two conditional rows and "}<code>{"q0,qA,qB"}</code>{" the teacher's. The full reverse KL over complete two-token sequences expands exactly as"}</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{
+      "D_{\\mathrm{KL}}(p_{\\mathrm{seq}}\\Vert q_{\\mathrm{seq}})=D_{\\mathrm{KL}}(p_0\\Vert " +
+      "q_0)+\\sum_{a\\in\\{A,B\\}}p_0(a)D_{\\mathrm{KL}}(p_a\\Vert q_a)."
+    }</MathBlock>
+    </div>
+    
+    <Prose>{"Call the two continuation KLs "}<code>{"KA,KB"}</code>{" and their weighted average "}<code>{"K̄"}</code>{". When differentiating first-position logit "}<code>{"zj"}</code>{", the second term contributes "}<code>{"p0(j)[Kj−K̄]"}</code>{". This is the "}<strong>{"visitation term"}</strong>{
+      ": changing the first decision changes how often each future discrepancy is encountered. " +
+      "Detaching the prefix weight removes this contribution while leaving the forward numerical " +
+      "loss unchanged. Derivatives of the second-position rows still include their current prefix " +
+      "weights."
+    }</Prose>
+    
+    <Prose>{
+      "The finite program's default rows give sequence reverse KL about 0.044675, with root KL " +
+      "about 0.027955 and weighted continuation KL about 0.016720. Its first-row visitation " +
+      "derivative is approximately "
+    }<code>{"[−0.007618,+0.007618]"}</code>{
+      ". Torch differentiating the full graph matches the manually added term and finite " +
+      "differences. Detaching only the prefix weights matches the separate local gradient. If both " +
+      "continuation KLs are equal, this term vanishes: shifting visits between equal-cost futures " +
+      "does not change their average cost."
+    }</Prose>
+    
+    <Prose>{
+      "MiniLLM develops a sequence reverse-KL policy-gradient approach and adds practical " +
+      "stabilization mechanisms. This exact four-leaf derivation explains one reason its gradient " +
+      "is different from a detached-prefix update; it does not reproduce the whole MiniLLM training " +
+      "system. "
+    }<a href={"/learn/path/full-curriculum/rl-for-reasoning-deepseek-r1-style?module=large-language-models"}>{"RL for Reasoning"}</a>{" develops the broader sequential-policy calculation."}</Prose>
+    
+    <span id="9-failure-modes-and-gotchas" aria-hidden="true" />
+    <H2>{"9. Transfer a trace and check what it asserts"}</H2>
+    
+    <DistillTrace />
+    
+    <Prose>{"A generated intermediate explanation is often called a "}<strong>{"rationale"}</strong>{
+      " or reasoning trace. Training on such text can teach patterns that answer-only supervision " +
+      "does not expose. It can also teach wrong steps, persuasive filler or an answer that happens " +
+      "to be right for the wrong reason. The existence of a written trace does not prove that it " +
+      "faithfully describes the teacher's internal computation."
+    }</Prose>
+    
+    <Prose>{"Our finite grammar makes the distinction testable. For "}<code>{"(2+3)*4"}</code>{", compare:"}</Prose>
+    
+    <NeuralTable caption={"9. Transfer a trace and check what it asserts"} headers={[<>{"Literal trace before EOS"}</>,<>{"Final answer correct?"}</>,<>{"Every arithmetic step correct?"}</>]} rows={[[<>{""}<code>{"sum 5 ; product 20 ; answer 20"}</code>{""}</>,<>{"Yes"}</>,<>{"Yes"}</>],[<>{""}<code>{"sum 6 ; product 20 ; answer 20"}</code>{""}</>,<>{"Yes"}</>,<>{"No: the sum is wrong and the product does not follow it"}</>],[<>{""}<code>{"sum 6 ; product 24 ; answer 24"}</code>{""}</>,<>{"No"}</>,<>{"No: later steps follow the generated sum, but that sum is wrong"}</>]]} />
+    
+    <Prose>{
+      "The parser first checks the literal nine-token structure, integer ranges and terminal EOS. " +
+      "It never executes generated text as Python. Separate predicates then ask whether the " +
+      "reported sum equals "
+    }<code>{"a+b"}</code>{", whether the product follows the reported sum times "}<code>{"c"}</code>{
+      ", whether the answer equals the reported product, and whether that final answer equals the " +
+      "independently calculated task answer. The full-step predicate requires all of them. A " +
+      "malformed trace has no parsed answer and fails these checks; no parser repair invents one " +
+      "for it."
+    }</Prose>
+    
+    <DistillFiltering />
+    
+    <Prose>{
+      "Filtering with a checker changes the training distribution. Some parents may contribute two " +
+      "candidates, others one or none. An accepted corpus can appear very accurate partly because " +
+      "difficult or malformed cases were removed. Report the original candidate count, retained " +
+      "count and parent coverage along with any accuracy among accepted items. A perfect accepted " +
+      "fraction on an empty set is undefined, not 100%."
+    }</Prose>
+    
+    <Prose>{
+      "There are also multiple ways to train with rationales. Our full-trace student predicts the " +
+      "rationale tokens followed by the answer in one autoregressive sequence. Its answer-only " +
+      "counterpart predicts only the final integer and EOS. Hsieh and colleagues' *Distilling " +
+      "Step-by-Step* instead used separate label and rationale tasks with task prefixes in their " +
+      "encoder-decoder setup. Those are different conditioning structures. Calling any rationale " +
+      "dataset that named method would erase an important implementation choice."
+    }</Prose>
+    
+    <Prose>{
+      "The exact arithmetic schema is small enough to check mechanically. The same checker cannot " +
+      "certify a natural-language proof, medical explanation or open-ended argument. For those " +
+      "tasks, verification needs its own explicit evidence and failure analysis. The general lesson " +
+      "is to separate the supervision source from the independent criterion used to call an answer " +
+      "correct."
+    }</Prose>
+    
+    <Program file="distillation_traces.py" />
+    
+    <H2>{"10. What DeepSeek-R1-Distill actually did"}</H2>
+    
+    <DistillR1Recipe />
+    
+    <Prose>{
+      "DeepSeek-R1 provides a large-scale example of transferring generated responses to other " +
+      "models. Read the recipe at the correct level: the released distilled models were " +
+      "supervised-fine-tuned on selected text, rather than trained by directly matching every " +
+      "teacher vocabulary logit. The teacher model itself had a different upstream training " +
+      "history. Teacher RL and student SFT are separate operations in the pipeline."
+    }</Prose>
+    
+    <Prose>{
+      "The inspected second paper version, dated 4 January 2026, describes approximately 600,000 " +
+      "reasoning examples and 200,000 other examples; its detailed Table 5 totals 804,745. " +
+      "Reasoning selection uses rule-based checks and DeepSeek-V3 judgment. Other data includes " +
+      "reused V3 supervised data and generated responses. This is more than “sample 800,000 " +
+      "arbitrary answers”: selection, prompt coverage and supervision mixture are part of the " +
+      "method."
+    }</Prose>
+    
+    <NeuralTable caption={"10. What DeepSeek-R1-Distill actually did"} headers={[<>{"Distilled release size"}</>,<>{"Starting dense base reported in the recipe"}</>]} rows={[[<>{"1.5B"}</>,<>{"Qwen2.5-Math-1.5B"}</>],[<>{"7B"}</>,<>{"Qwen2.5-Math-7B"}</>],[<>{"14B"}</>,<>{"Qwen2.5-14B"}</>],[<>{"32B"}</>,<>{"Qwen2.5-32B"}</>],[<>{"8B"}</>,<>{"Llama-3.1-8B"}</>],[<>{"70B"}</>,<>{"Llama-3.3-70B-Instruct"}</>]]} />
+    
+    <Prose>{
+      "These six distilled routes use SFT only in the reported recipe, with 2–3 epochs, context " +
+      "length 32,768 and batch size 64. Their result is evidence about particular base models, data " +
+      "and evaluations. The paper's 32B distillation-versus-direct-RL comparison does not establish " +
+      "that all smaller models are incapable of learning from reinforcement learning, nor that " +
+      "distillation always beats it."
+    }</Prose>
+    
+    <Prose>{
+      "Our local experiment does not reproduce R1 training, its scale, its data mixture or its " +
+      "benchmark scores. It isolates the transferable mechanics: freeze a neural teacher, preserve " +
+      "its actual outputs and selection decisions, train another autoregressive model, then " +
+      "evaluate against independent answers. The retained negative result is as important as that " +
+      "mechanical correspondence."
+    }</Prose>
+    
+    <H2>{"11. Build and freeze a neural transfer experiment"}</H2>
+    
+    <DistillExperiment />
+    
+    <Prose>{"Our task is "}<code>{"(a+b)*c"}</code>{", with "}<code>{"1≤a≤b≤9"}</code>{" and training-range multipliers "}<code>{"c=1…4"}</code>{". There are 45 unordered "}<code>{"(a,b)"}</code>{
+      " families. We sort them by a predeclared SHA256 rule: the first 32 supply 128 training " +
+      "prompts, the next 6 supply 24 development prompts, and the last 7 supply 28 test prompts. " +
+      "Keeping a whole family together prevents a copied candidate or another multiplier variant of " +
+      "that family from crossing the split. The distribution-shift test uses those same seven test " +
+      "families at "
+    }<code>{"c=5,6"}</code>{
+      ", giving 14 additional questions. Some target integers may be unseen in training; that is " +
+      "part of this declared shift, not a matched in-range test."
+    }</Prose>
+    
+    <Prose>{
+      "The vocabulary is fixed by the schema before splitting: PAD/BOS/EOS, integer tokens 0 " +
+      "through 108, and the nine operator/marker tokens. There are 121 tokens in total. Defining " +
+      "the possible integer symbols does not train the model to perform arithmetic with them. In " +
+      "particular, it does not supply frequencies or answers from the held-out examples."
+    }</Prose>
+    
+    <Prose>{
+      "We reuse the causal lesson's complete TinyLM architecture byte-for-byte. It has learned " +
+      "embeddings and positions, explicit causal attention, residual feed-forward blocks, " +
+      "normalization and a vocabulary head. The teacher uses width 64, four heads and two blocks: " +
+      "117,120 parameters. The student uses width 32, two heads and one block: 21,408 parameters. " +
+      "Context length 32 contains the nine-token prompt and the predeclared generation horizon of " +
+      "twelve new tokens."
+    }</Prose>
+    
+    <Prose>{
+      "The prospective protocol is written before the first teacher update or corpus generation. It " +
+      "binds source bytes, versions, splits, vocabulary, seeds, objective, optimizer, selection and " +
+      "evaluation rules. A completed artifact is reused on resume; a source mismatch stops the " +
+      "driver. A held-out result is not permission to add another seed or choose a different " +
+      "training duration."
+    }</Prose>
+    
+    <Prose>{
+      "The teacher receives correct arithmetic traces for 1,200 AdamW updates, seed 11, batch 16, " +
+      "learning rate 0.003, zero weight decay and gradient clipping at norm 1. Development response " +
+      "NLL is checked at 0, 300, 600, 900 and 1,200 updates. The minimum wins, with the earliest " +
+      "step breaking ties. The selected teacher is step 300, development NLL 1.341476. Later " +
+      "development losses are worse; the complete teacher still performs all 1,200 declared " +
+      "updates."
+    }</Prose>
+    
+    <Prose>{
+      "The selected teacher generates exactly two candidates for each of the 128 training prompts: " +
+      "one greedy and one temperature-1 full-vocabulary sample. Sampling seeds are tied to " +
+      "parent/candidate identity, so a change in batch grouping does not change their random " +
+      "stream. Generation stops at the first EOS or twelve-token horizon. Every candidate retains " +
+      "its parent, emitted IDs, literal decoded text, probability vectors at its visited prefixes " +
+      "and checker outcome. We do not regenerate a bad candidate."
+    }</Prose>
+    
+    <Program file="tiny_causal_lm.py" />
+    
+    <Program file="distillation_teacher.py" />
+    
+    <DistillSavedTargets />
+    
+    <Prose>{
+      "The actual corpus contains 256 candidates and 2,304 emitted tokens. Of those candidates, 255 " +
+      "match the grammar, 253 have a correct final answer, and 252 pass every step check. All 128 " +
+      "parents retain at least one full-step-correct candidate. The small differences are concrete " +
+      "rather than theoretical:"
+    }</Prose>
+    
+    <NeuralTable caption={"11. Build and freeze a neural transfer experiment"} headers={[<>{"Saved candidate"}</>,<>{"Literal generated text, before EOS"}</>,<>{"What fails"}</>]} rows={[[<>{""}<code>{"3:3:3/sample"}</code>{""}</>,<>{""}<code>{"sum 6 ; product 9 ; answer 18"}</code>{""}</>,<>{"Final answer is right, but the product and its connection to the answer are wrong"}</>],[<>{""}<code>{"3:4:3/sample"}</code>{""}</>,<>{""}<code>{"sum ; ; product 16 ; answer 24"}</code>{""}</>,<>{"Grammar: the sum field is not an integer"}</>]]} />
+    
+    <Prose>{
+      "The first two wrong or malformed IDs in sorted order were predeclared as displayed examples; " +
+      "these two satisfy that rule. Their contents are actual neural outputs, not handwritten " +
+      "illustrations. The separate three-row table in section 9 is explicitly constructed to teach " +
+      "the checker."
+    }</Prose>
+    
+    <Prose>{"We train five recipes for each seed 17, 29 and 43:"}</Prose>
+    
+    <NeuralTable caption={"11. Build and freeze a neural transfer experiment"} headers={[<>{"Recipe"}</>,<>{"Targets and prefixes"}</>,<>{"Retained candidate rows"}</>]} rows={[[<>{"Gold trace"}</>,<>{"Correct trace for each eligible candidate's parent"}</>,<>{"255"}</>],[<>{"Copied hard trace"}</>,<>{"Literal teacher response tokens"}</>,<>{"255"}</>],[<>{"Soft teacher"}</>,<>{"Full teacher distribution at each exact copied-trace prefix"}</>,<>{"255"}</>],[<>{"Answer only"}</>,<>{"Copied final integer and EOS"}</>,<>{"255"}</>],[<>{"Verified trace"}</>,<>{"Copied traces that pass every step check"}</>,<>{"252"}</>]]} />
+    
+    <Prose>{
+      "The gold recipe repeats a parent's gold trace as many times as that parent has eligible " +
+      "candidates. It therefore matches the hard/soft/answer exposure weights, rather than quietly " +
+      "using one row per parent. Hard and soft use the same copied prefixes and lengths, so their " +
+      "controlled distinction is the target information. The verified recipe changes support and " +
+      "weights; the answer-only recipe changes length and conditioning. Those comparisons concern " +
+      "whole recipes."
+    }</Prose>
+    
+    <Prose>{
+      "Every arm starts from exactly the same saved initial weights within a seed. All perform 600 " +
+      "AdamW updates at learning rate 0.003, batch 16, zero weight decay and clipping at 1. The " +
+      "four unfiltered arms share the same eligible-ID shuffle plan. The verified arm shuffles its " +
+      "retained support under its predeclared plan. We retain the last short batch rather than " +
+      "dropping it. A pooled token mean is computed within each batch."
+    }</Prose>
+    
+    <Prose>{"The soft route's core is the same explicit objective already tested on arrays:"}</Prose>
+    
+    <CodeBlock language={"python"}>{
+      "logits = model(batch['input_ids'])\n" +
+      "if arm == 'soft':\n" +
+      "    loss = torch_divergence(\n" +
+      "        logits, batch['teacher_logits'], batch['mask'], temperature=1.\n" +
+      "    )\n" +
+      "else:\n" +
+      "    loss = F.cross_entropy(\n" +
+      "        logits.reshape(-1, VOCABULARY),\n" +
+      "        batch['labels'].reshape(-1),\n" +
+      "        ignore_index=-100,\n" +
+      "    )\n" +
+      "optimizer.zero_grad(set_to_none=True)\n" +
+      "loss.backward()\n" +
+      "torch.nn.utils.clip_grad_norm_(model.parameters(), 1.)\n" +
+      "optimizer.step()"
+    }</CodeBlock>
+    
+    <Prose>{"Here "}<code>{"teacher_logits"}</code>{
+      " stores saved teacher log probabilities. Log-softmax at temperature 1 returns the same " +
+      "normalized target up to numerical precision. It is not a teacher trainable parameter. The " +
+      "response mask aligns the first distribution with the predictor of the first response token. " +
+      "Prompt and padding rows receive no distillation loss."
+    }</Prose>
+    
+    <Prose>{
+      "At steps 0, 200, 400 and 600, development free-generation final-answer accuracy chooses each " +
+      "student's checkpoint, with the earliest step winning every tie. No NLL tiebreaker is added " +
+      "after seeing the results. All arms still finish 600 updates. Only after all fifteen terminal " +
+      "outcomes are recorded does the driver seal selections and evaluate test and shift questions. " +
+      "Model, optimizer, RNG, batch plans and histories are retained for interrupted-run recovery."
+    }</Prose>
+    
+    <Program file="distillation_student.py" />
+    
+    <Program file="distillation_study.py" />
+    
+    <span id="5-production-implementation" aria-hidden="true" />
+    <H2>{"12. Use a pretrained teacher with ordinary tooling"}</H2>
+    
+    <Prose>{
+      "The arithmetic models make the complete mechanism inspectable. We can also use a pretrained " +
+      "tokenizer, a saved task teacher and a maintained trainer. The interface contract matters as " +
+      "much as the class name: two vectors of the same length are comparable only when each " +
+      "coordinate denotes the same next-token event at the same prefix."
+    }</Prose>
+    
+    <DistillLayerCopy />
+    
+    <Prose>{
+      "Our teacher is the exact response-only SFT checkpoint for seed 17 from the earlier lesson. " +
+      "Choosing that identity in advance avoids selecting whichever teacher happens to make this " +
+      "experiment look best. The student starts from the original Pythia-14M base with only blocks " +
+      "0, 2 and 4 retained. It copies base embeddings, final normalization and vocabulary head, " +
+      "rather than copying the teacher's fine-tuned blocks. The complete code checks the teacher " +
+      "weight identity, both parameter counts and the selected layers before training."
+    }</Prose>
+    
+    <CodeBlock language={"python"}>{
+      "teacher = AutoModelForCausalLM.from_pretrained(teacher_path).float().eval()\n" +
+      "teacher.requires_grad_(False)\n" +
+      "student = AutoModelForCausalLM.from_pretrained(base_path).float().eval()\n" +
+      "student.gpt_neox.layers = torch.nn.ModuleList(\n" +
+      "    [student.gpt_neox.layers[i] for i in (0, 2, 4)]\n" +
+      ")\n" +
+      "student.config.num_hidden_layers = 3\n" +
+      "for index, block in enumerate(student.gpt_neox.layers):\n" +
+      "    block.attention.layer_idx = index"
+    }</CodeBlock>
+    
+    <Prose>{
+      "The last two lines repair the cache addresses carried by copied modules. Original block 4 is " +
+      "now student block 2, so it must write to cache slot 2. Changing the module list and " +
+      "configuration alone leaves the original 0/2/4 addresses behind. Our first native generation " +
+      "attempt exposed this mismatch before its first output batch or optimizer step. Renumbering " +
+      "this metadata preserves every parameter tensor; a fixed-token cached-versus-full forward " +
+      "check verifies the correction. The completed offline corpus and fit are reused."
+    }</Prose>
+    
+    <Prose>{
+      "The downloaded tokenizer and the teacher's saved tokenizer have different JSON " +
+      "serialization. A hash mismatch therefore prompted a semantic check, not an assumption that " +
+      "their token events matched. We verified exact vocabulary and EOS identity and the actual " +
+      "prompt/full-response encodings of all 1,052 source records for each of the three sentiment " +
+      "candidates. Both original file identities remain recorded. Training uses one tokenizer for " +
+      "both models. This check establishes the actual data interface used here; it is not a " +
+      "universal equivalence proof for arbitrary Unicode strings."
+    }</Prose>
+    
+    <DistillChunks />
+    
+    <Prose>{
+      "The teacher and student each project hidden vectors into 50,304 vocabulary logits. Holding " +
+      "both full batch-by-time-by-vocabulary tensors can cost much more memory than the final " +
+      "scalar loss suggests. TRL's "
+    }<code>{"DistillationTrainer"}</code>{
+      " obtains the relevant hidden vectors, projects valid completion positions in chunks, and " +
+      "accumulates the divergence. With chunk size C and vocabulary V, the two main logit tiles " +
+      "contain about 2CV entries instead of 2BLV. This describes the projection tiles, not all " +
+      "model memory: hidden activations, gradients, model weights and optimizer states still exist. " +
+      "Smaller chunks can trade memory for additional launches or repeated work. Chunking must not " +
+      "change which positions count or change the denominator for a short last chunk."
+    }</Prose>
+    
+    <Prose>{
+      "We checked the actual full models before any native generation or optimizer step. Six cases " +
+      "combine beta 0, 0.5 and 1 with temperature 1 and 2. The native loss and a full-logit " +
+      "reference agree; all 40 student parameter tensors receive finite gradients and the frozen " +
+      "teacher receives none. In FP32, the whole gradient's relative L2 difference is at most " +
+      "0.00004511. Repeating these diagnostic forwards/backwards with FP64 projection/backbone " +
+      "arithmetic, while retaining the native FP32 softmax, reduces the difference below 9e-14. " +
+      "This distinguishes numerical reduction-order sensitivity from a changed objective. The " +
+      "reference uses the native stack/log-sum-exp mixture primitive for beta 0.5; an algebraically " +
+      "equivalent "
+    }<code>{"logaddexp"}</code>{" has different FP32 rounding."}</Prose>
+    
+    <Prose>{
+      "Unequal left-padded prompts, real EOS ID 0 beside ignored pad storage ID 0, an all-masked " +
+      "zero-loss/zero-gradient case, exact unchanged initial weights and exact save/reload logits " +
+      "are checked separately. These are interface and derivative checks, not evidence of task " +
+      "quality."
+    }</Prose>
+    
+    <Prose>{"The maintained API in the executed version, TRL 1.14.2, is:"}</Prose>
+    
+    <CodeBlock language={"python"}>{
+      "settings = DistillationConfig(\n" +
+      "    output_dir=\"on-policy\", use_cpu=True, bf16=False, fp16=False,\n" +
+      "    max_steps=24, per_device_train_batch_size=4,\n" +
+      "    learning_rate=1e-4, lr_scheduler_type=\"constant\",\n" +
+      "    weight_decay=0., max_grad_norm=1., optim=\"adamw_torch\",\n" +
+      "    beta=0., temperature=1., top_k=0, top_p=1.,\n" +
+      "    max_completion_length=8, disable_dropout=True,\n" +
+      "    seed=17, data_seed=17, report_to=\"none\",\n" +
+      ")\n" +
+      "trainer = DistillationTrainer(\n" +
+      "    model=student, teacher_model=teacher, args=settings,\n" +
+      "    processing_class=tokenizer,\n" +
+      "    train_dataset=Dataset.from_dict({\"prompt\": training_prompts}),\n" +
+      ")\n" +
+      "trainer.train()"
+    }</CodeBlock>
+    
+    <Prose>{
+      "The dataset contains prompts. The student samples continuations; the teacher provides " +
+      "full-vocabulary feedback at those student-visited prefixes. Sampled token IDs are detached " +
+      "choices, so this performs the local objective described in section 8, not the full " +
+      "visitation derivative. Beta 0 selects forward KL; beta 1 selects reverse KL; interior beta " +
+      "selects the weighted JSD convention already derived. The native temperature rescales logits " +
+      "without the T² multiplier from section 4. Do not silently import that multiplier or its " +
+      "learning-rate interpretation into this API."
+    }</Prose>
+    
+    <Prose>{
+      "There are two prospectively specified routes on the first 64 training poems in original-ID " +
+      "order. The offline route generates one greedy teacher response per prompt, retains only " +
+      "responses ending in EOS within eight tokens, and trains response-only hard CE. The on-policy " +
+      "route uses the native trainer above. Both start from the exact same three-block student, use " +
+      "seed 17 and perform 24 updates with batch four, constant learning rate 1e-4, no weight decay " +
+      "and gradient clipping at one. Every final short offline batch is retained. The routes change " +
+      "both target information and prefix source; their comparison does not isolate either choice."
+    }</Prose>
+    
+    <Prose>{
+      "The native on-policy route retains the sampled valid positions even when a continuation " +
+      "reaches the eight-token horizon without EOS. This differs from the offline route's " +
+      "whole-sequence termination filter: local teacher vectors are still available at those " +
+      "visited positions. In the actual 24 generated batches, 96 student continuations provide 390 " +
+      "valid target positions. The saved position masks, rather than the token value used for " +
+      "padding, define those counts."
+    }</Prose>
+    
+    <Prose>{
+      "The source, pretrained files, selected teacher, data, library versions and successful " +
+      "preflight are frozen before either route generates a target or updates a parameter. The " +
+      "complete program records teacher candidates, actual on-policy IDs and masks, losses, " +
+      "optimizer checkpoints and final states. It preserves terminal stages on rerun. Only after " +
+      "both routes terminate are the teacher, initial student and final students evaluated on all " +
+      "105 development and 104 test poems. No checkpoint or hyperparameter is selected on these " +
+      "outcomes. The downloadable result packet contains every result, including invalid " +
+      "completions."
+    }</Prose>
+    
+    <Prose>{"The older experimental "}<code>{"GKDTrainer"}</code>{" is a different API. In the inspected version, its "}<code>{"seq_kd=True"}</code>{
+      " option changes where the sequence comes from but still uses a distribution loss; it does " +
+      "not implement hard sequence CE merely because its name contains “sequence.” Its inspected " +
+      "loss path also does not forward the configured temperature into the loss helper. Read the " +
+      "pinned implementation when reproducing a paper; a similarly named flag is not a mathematical " +
+      "contract. The complete program here uses "
+    }<code>{"DistillationTrainer"}</code>{"."}</Prose>
+    
+    <Program file="distillation_native.py" />
+    
+    <Prose>{"The input downloader verifies the pinned base-file hashes before loading. "}<code>{"sft_data.py"}</code>{" reuses the previously taught literal prompt and response boundary; "}<code>{"sft_evaluate.py"}</code>{
+      " separately reports free greedy generation, complete candidate label probability and pooled " +
+      "reference-token NLL. Reusing these implementations keeps the evaluation definition " +
+      "consistent across SFT and distillation. The complete setup and commands are in the " +
+      "accompanying README."
+    }</Prose>
+    
+    <Program file="acquire_model.py" />
+    
+    <Program file="sft_data.py" />
+    
+    <Program file="sft_evaluate.py" />
+    
+    <span id="8-what-scales-and-what-doesn-t" aria-hidden="true" />
+    <H2>{"13. Measure transfer and account for its cost"}</H2>
+    
+    <Prose>{
+      "A student may assign higher probability to a correct reference continuation without " +
+      "selecting it during free generation. It may also copy a teacher's wrong answer very " +
+      "accurately. We therefore keep three questions separate: How well does the model predict " +
+      "reference tokens? What does it actually generate? How closely does it imitate the teacher?"
+    }</Prose>
+    
+    <DistillOutcomes />
+    
+    <Prose>{
+      "In the arithmetic study, the selected teacher answers 0 of 28 test questions and 0 of 14 " +
+      "shifted questions correctly. All 28 test outputs are structurally valid and end in EOS, with " +
+      "mean response length nine. Its test reference NLL is 1.350635 nats per target. The model " +
+      "learned the output grammar much better than it learned the held-out arithmetic mapping."
+    }</Prose>
+    
+    <Prose>{
+      "These are the first two held-out families in the predeclared display order, including all " +
+      "four multipliers. Every shown teacher response ends in a real EOS. The repeated wrong sums " +
+      "make the generalization failure concrete."
+    }</Prose>
+    
+    <NeuralTable caption={"13. Measure transfer and account for its cost"} headers={[<>{"Prompt (a:b:c)"}</>,<>{"Correct answer"}</>,<>{"Literal selected-teacher response before EOS"}</>]} rows={[[<>{"2:5:1"}</>,<>{"7"}</>,<>{""}<code>{"sum 5 ; product 5 ; answer 5"}</code>{""}</>],[<>{"2:5:2"}</>,<>{"14"}</>,<>{""}<code>{"sum 10 ; product 20 ; answer 20"}</code>{""}</>],[<>{"2:5:3"}</>,<>{"21"}</>,<>{""}<code>{"sum 5 ; product 15 ; answer 15"}</code>{""}</>],[<>{"2:5:4"}</>,<>{"28"}</>,<>{""}<code>{"sum 5 ; product 20 ; answer 20"}</code>{""}</>],[<>{"4:5:1"}</>,<>{"9"}</>,<>{""}<code>{"sum 12 ; product 12 ; answer 12"}</code>{""}</>],[<>{"4:5:2"}</>,<>{"18"}</>,<>{""}<code>{"sum 12 ; product 24 ; answer 24"}</code>{""}</>],[<>{"4:5:3"}</>,<>{"27"}</>,<>{""}<code>{"sum 12 ; product 36 ; answer 36"}</code>{""}</>],[<>{"4:5:4"}</>,<>{"36"}</>,<>{""}<code>{"sum 12 ; product 48 ; answer 48"}</code>{""}</>]]} />
+    
+    <Prose>{
+      "Every selected student outcome is below. “Invalid” means the complete emitted sequence fails " +
+      "that arm's declared grammar. NLL uses full gold traces for trace arms and gold " +
+      "integer-plus-EOS responses for answer-only, so comparing those two NLL columns as if they " +
+      "were the same prediction task would be misleading."
+    }</Prose>
+    
+    <NeuralTable caption={"13. Measure transfer and account for its cost"} headers={[<>{"Recipe / seed"}</>,<>{"Selected update"}</>,<>{"Test correct / 28"}</>,<>{"Invalid / 28"}</>,<>{"Reference NLL"}</>,<>{"Shift correct / 14"}</>,<>{"Shift invalid / 14"}</>]} rows={[[<>{"Gold / 17"}</>,<>{"200"}</>,<>{"2"}</>,<>{"0"}</>,<>{"1.297169"}</>,<>{"0"}</>,<>{"0"}</>],[<>{"Hard / 17"}</>,<>{"200"}</>,<>{"2"}</>,<>{"0"}</>,<>{"1.326949"}</>,<>{"0"}</>,<>{"0"}</>],[<>{"Soft / 17"}</>,<>{"200"}</>,<>{"2"}</>,<>{"0"}</>,<>{"1.339035"}</>,<>{"0"}</>,<>{"0"}</>],[<>{"Answer / 17"}</>,<>{"400"}</>,<>{"1"}</>,<>{"0"}</>,<>{"2.893883"}</>,<>{"0"}</>,<>{"1"}</>],[<>{"Verified / 17"}</>,<>{"200"}</>,<>{"1"}</>,<>{"0"}</>,<>{"1.294130"}</>,<>{"1"}</>,<>{"0"}</>],[<>{"Gold / 29"}</>,<>{"200"}</>,<>{"0"}</>,<>{"0"}</>,<>{"1.058484"}</>,<>{"0"}</>,<>{"0"}</>],[<>{"Hard / 29"}</>,<>{"200"}</>,<>{"0"}</>,<>{"0"}</>,<>{"1.055674"}</>,<>{"0"}</>,<>{"0"}</>],[<>{"Soft / 29"}</>,<>{"200"}</>,<>{"0"}</>,<>{"0"}</>,<>{"1.055729"}</>,<>{"0"}</>,<>{"0"}</>],[<>{"Answer / 29"}</>,<>{"400"}</>,<>{"0"}</>,<>{"0"}</>,<>{"3.505814"}</>,<>{"0"}</>,<>{"0"}</>],[<>{"Verified / 29"}</>,<>{"200"}</>,<>{"0"}</>,<>{"0"}</>,<>{"1.060689"}</>,<>{"0"}</>,<>{"0"}</>],[<>{"Gold / 43"}</>,<>{"0"}</>,<>{"0"}</>,<>{"28"}</>,<>{"4.998623"}</>,<>{"0"}</>,<>{"14"}</>],[<>{"Hard / 43"}</>,<>{"0"}</>,<>{"0"}</>,<>{"28"}</>,<>{"4.998623"}</>,<>{"0"}</>,<>{"14"}</>],[<>{"Soft / 43"}</>,<>{"0"}</>,<>{"0"}</>,<>{"28"}</>,<>{"4.998623"}</>,<>{"0"}</>,<>{"14"}</>],[<>{"Answer / 43"}</>,<>{"0"}</>,<>{"0"}</>,<>{"27"}</>,<>{"4.899971"}</>,<>{"0"}</>,<>{"14"}</>],[<>{"Verified / 43"}</>,<>{"200"}</>,<>{"1"}</>,<>{"3"}</>,<>{"1.080616"}</>,<>{"0"}</>,<>{"1"}</>]]} />
+    
+    <Prose>{
+      "The untrained seed-43 checkpoint wins four earliest-tie selections because development " +
+      "final-answer accuracy never improves above its initial value at the prescribed checkpoints. " +
+      "Replacing that checkpoint with a later one after examining the test set would change the " +
+      "experiment. All fifteen arms still completed 600 updates. These selections reveal a weakness " +
+      "of the chosen development signal for this tiny task; they are not missing fits."
+    }</Prose>
+    
+    <Prose>{
+      "Hard and soft have the same test correct counts for all three seeds here. That is not " +
+      "evidence that full distributions never help. Conversely, the verified seed-17 student's one " +
+      "shifted success does not establish a robust advantage. The samples are small, four prompts " +
+      "share each held-out (a,b) family, and all shifted cases reuse those families. Treating the " +
+      "28 prompts as 28 independent arithmetic families would understate uncertainty. The download " +
+      "includes the paired outputs so a difference can be inspected by family, rather than inferred " +
+      "from a mean-only ranking."
+    }</Prose>
+    
+    <Prose>{
+      "The pretrained poem experiment also retains every planned outcome. Its offline teacher " +
+      "collection produces 64 responses, of which 63 end in EOS within eight tokens and become hard " +
+      "training targets. Both student routes complete 24 updates. Their final free generations " +
+      "choose "
+    }<code>{"no impact"}</code>{" for every development and test poem: the original training-majority decision."}</Prose>
+    
+    <NeuralTable caption={"13. Measure transfer and account for its cost"} headers={[<>{"Model / split"}</>,<>{"Free correct"}</>,<>{"Macro F1"}</>,<>{"Invalid"}</>,<>{"Candidate correct"}</>,<>{"Reference NLL"}</>,<>{"Exact teacher-ID agreement"}</>]} rows={[[<>{"Teacher / dev"}</>,<>{"78/105"}</>,<>{"0.646732"}</>,<>{"0/105"}</>,<>{"78/105"}</>,<>{"0.261543"}</>,<>{"—"}</>],[<>{"Teacher / test"}</>,<>{"77/104"}</>,<>{"0.620514"}</>,<>{"0/104"}</>,<>{"77/104"}</>,<>{"0.260335"}</>,<>{"—"}</>],[<>{"Initial student / dev"}</>,<>{"0/105"}</>,<>{"0"}</>,<>{"105/105"}</>,<>{"17/105"}</>,<>{"13.802400"}</>,<>{"0/105"}</>],[<>{"Initial student / test"}</>,<>{"0/104"}</>,<>{"0"}</>,<>{"104/104"}</>,<>{"16/104"}</>,<>{"13.837628"}</>,<>{"0/104"}</>],[<>{"Offline CE / dev"}</>,<>{"69/105"}</>,<>{"0.264368"}</>,<>{"0/105"}</>,<>{"69/105"}</>,<>{"0.630983"}</>,<>{"77/105"}</>],[<>{"Offline CE / test"}</>,<>{"69/104"}</>,<>{"0.265896"}</>,<>{"0/104"}</>,<>{"69/104"}</>,<>{"0.640743"}</>,<>{"76/104"}</>],[<>{"On-policy KL / dev"}</>,<>{"69/105"}</>,<>{"0.264368"}</>,<>{"0/105"}</>,<>{"69/105"}</>,<>{"0.348979"}</>,<>{"77/105"}</>],[<>{"On-policy KL / test"}</>,<>{"69/104"}</>,<>{"0.265896"}</>,<>{"0/104"}</>,<>{"69/104"}</>,<>{"0.351303"}</>,<>{"76/104"}</>]]} />
+    
+    <Prose>{
+      "Every teacher/final-student output reaches EOS; none of the initial student's free outputs " +
+      "does. Candidate scoring still returns a label for that initial student because it compares " +
+      "three complete allowed responses, whereas free generation is allowed to leave the label set. " +
+      "After training, on-policy KL has lower gold-response NLL than offline CE but the same " +
+      "majority-only free decisions and macro F1. These measurements show probability transfer and " +
+      "a working native update, without establishing a better classifier than the majority " +
+      "baseline. Their high agreement with a teacher that often says "
+    }<code>{"no impact"}</code>{" does not reproduce its minority-class performance."}</Prose>
+    
+    <DistillCosts />
+    
+    <Prose>{
+      "The arithmetic teacher has 117,120 parameters and each student 21,408, about 81.72% fewer. " +
+      "Teacher fitting processes 19,200 examples and 172,800 target positions. Once-generation " +
+      "produces 256 candidates and 2,304 emitted tokens; these include rejected outputs because " +
+      "generation cost is paid before filtering. The four unfiltered student recipes each process " +
+      "9,563 examples. Gold, hard and soft each use 86,067 target positions, while answer-only uses " +
+      "19,126. Verified uses 9,452 examples and 85,068 target positions. Equal update counts do not " +
+      "equalize target exposure. Full-vocabulary teacher evaluation and soft-target storage " +
+      "introduce additional costs that a token count alone does not capture."
+    }</Prose>
+    
+    <Prose>{
+      "The retained teacher fitting wall time is about 38.5 seconds in this CPU run, and its " +
+      "candidate generation takes about 2.58 seconds. These are observations of this run with its " +
+      "small models and environment, not comparative serving benchmarks. We did not measure " +
+      "end-to-end deployed latency, throughput or GPU memory, so the parameter reduction cannot be " +
+      "presented as a measured speedup. In the native example, dropping half the blocks removes " +
+      "only 594,816 parameters: the 50,304-by-128 embedding and vocabulary matrices remain large."
+    }</Prose>
+    
+    <Prose>{
+      "For a deployment decision, put costs in the same unit. If preparation costs C₀, a teacher " +
+      "query costs cₜ and a student query costs cₛ, the student system costs C₀+Ncₛ for N queries. " +
+      "It is cheaper than Ncₜ when"
+    }</Prose>
+    
+    <div className="neural-equation">
+    <MathBlock>{"N>\\frac{C_0}{c_t-c_s},\\qquad c_t>c_s."}</MathBlock>
+    </div>
+    
+    <Prose>{
+      "For a constructed example with C₀=60 cost units, cₜ=0.03 and cₛ=0.01, the systems tie at " +
+      "3,000 queries and the student becomes cheaper above that. If cₛ≥cₜ and C₀>0, there is no " +
+      "positive break-even point. The cost model must also include required quality: a cheaper " +
+      "model that fails the intended task does not become suitable merely by crossing a financial " +
+      "threshold."
+    }</Prose>
+    
+    <Program file="distillation_evaluate.py" />
+    
+    <span id="7-decision-matrix" aria-hidden="true" />
+    <H2>{"14. Choose a route from the information available"}</H2>
+    
+    <Prose>{
+      "The experiments bring us back to the opening question. We can transfer an accessible signal, " +
+      "then test whether the transferred behavior serves the task. Neither model size nor teacher " +
+      "confidence supplies that second conclusion."
+    }</Prose>
+    
+    <DistillRoute />
+    
+    <Prose>{
+      "If the teacher exposes full probabilities and the two vocabularies denote the same events, " +
+      "use the aligned token objective and an explicit mask. Decide whether prefixes come from " +
+      "saved completions or student rollouts independently of the choice of forward KL, reverse KL " +
+      "or interior JSD. If only literal text is available, tokenize it with the student tokenizer " +
+      "and train sequence CE; this route can cross tokenizers because it transfers strings rather " +
+      "than assuming coordinate correspondence. If no usable teacher output is available, there is " +
+      "no teacher target to distill."
+    }</Prose>
+    
+    <Prose>{
+      "Hidden-state or attention matching is another possibility when internal representations are " +
+      "accessible. Different widths or layer counts require an explicit mapping and its own " +
+      "objective. Those methods are not implemented by the output-distribution loss here. " +
+      "Similarly, quantization changes numerical representation, and pruning removes selected model " +
+      "structure. They can be combined with distillation but answer different questions."
+    }</Prose>
+    
+    <Prose>{
+      "A teacher is not a mathematical ceiling on a student's external accuracy. For a constructed " +
+      "four-question example, suppose a teacher gets three correct. An independent arithmetic " +
+      "checker supplies a correction for the fourth, and the student learns all four answers. The " +
+      "student reaches 4/4 while the teacher remains at 3/4, but the correction brought additional " +
+      "information; pure copying did not create it. Regularization, different data, ensembles or a " +
+      "different evaluation distribution can also change external accuracy. Conversely, exactly " +
+      "matching a fixed teacher on the evaluated inputs means matching its errors on those inputs " +
+      "as well."
+    }</Prose>
+    
+    <Prose>{"In "}<strong>{"self-distillation"}</strong>{
+      ", a model supplies targets for another training instance with the same architecture, often a " +
+      "later student trained from a fixed earlier checkpoint. The two parameter sets still have " +
+      "different roles. If the very same model at the very same input supplies a detached target " +
+      "equal to its current output, token KL and its student gradient are zero. To obtain a " +
+      "learning signal, a self-distillation recipe must introduce a meaningful difference, such as " +
+      "a fixed earlier teacher, different views, other data or an additional supervised objective. " +
+      "“Same architecture” does not imply “identical current distribution.”"
+    }</Prose>
+    
+    <Prose>{"Distillation asks how to learn from an available teacher signal. The next "}<a href={"/learn/path/full-curriculum/rl-for-reasoning-deepseek-r1-style?module=large-language-models"}>{"RL for Reasoning lesson"}</a>{
+      " asks how to improve a policy using feedback about sampled reasoning outcomes. Keep the " +
+      "distinction precise: a scalar checker reward evaluates a sampled answer, whereas a teacher " +
+      "distribution provides a target for every vocabulary coordinate at an inspected prefix."
+    }</Prose>
+    </section>
+    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+    <span id="11-self-check-exercises" aria-hidden="true" />
+    <H2>{"Practice"}</H2>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"A. Find the moving target"}</H3>
+    
+    <Prose>{
+      "A training loop includes both teacher and student parameters in AdamW, and the teacher " +
+      "forward runs with gradient tracking. Its loss is KL(qθ∥pφ). Explain why a falling loss does " +
+      "not demonstrate that the student learned the original teacher. Repair the parameter and " +
+      "graph ownership without using "
+    }<code>{"no_grad()"}</code>{" around the student."}</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" There are two different ways to move two probability vectors closer."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{" The optimizer can move q as well as p; agreement may improve because the target changes. Set "}<code>{"teacher.requires_grad_(False)"}</code>{
+      ", evaluate the teacher without a gradient graph, and pass only student parameters to the " +
+      "optimizer. The student forward must retain its graph so the loss can reach φ. Record the " +
+      "teacher state before and after an update and require exact equality. Also require nonzero " +
+      "finite student gradients on a mismatched fixture: an unchanged teacher alone does not prove " +
+      "a functioning learning path."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"B. What does an argmax discard?"}</H3>
+    
+    <Prose>{
+      "Two teachers assign probabilities [0.7, 0.2, 0.1] and [0.7, 0.1, 0.2] to tokens A, B and C. " +
+      "A dataset saves only the greedy token. Can a student recover which teacher produced a row? " +
+      "What changes if the dataset contains many independent samples from the same fixed teacher?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Separate a deterministic transformation from a random observation."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Both greedy transformations save A, so that stored row cannot distinguish the two " +
+      "distributions. Independent teacher samples can reveal different B/C frequencies across " +
+      "repeated draws, with sampling uncertainty. One sampled A still does not identify either " +
+      "vector. Exact full probabilities preserve information about alternatives that this hard " +
+      "target discards."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"C. Equal-width vectors, different events"}</H3>
+    
+    <Prose>{
+      "Teacher IDs are [red, blue, EOS], student IDs [EOS, red, blue]. Teacher q is [0.5, 0.3, " +
+      "0.2]; student probabilities in its own ID order are [0.2, 0.5, 0.3]. Should KL be zero? " +
+      "Modify the vocabulary-alignment fixture to show both the incorrect direct-index calculation " +
+      "and the repaired result."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Construct the student index for each teacher event before comparing."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The teacher-to-student index mapping is [1, 2, 0]. Reindexing student p gives [0.5, 0.3, " +
+      "0.2], exactly q, so KL and its aligned gradient are zero up to numerical tolerance. Direct " +
+      "index subtraction compares red with EOS and produces a positive discrepancy. Assert the " +
+      "repaired zero, unchanged normalization and correct token strings for each matched " +
+      "coordinate. If one tokenizer splits “blue” into multiple tokens, this permutation repair is " +
+      "no longer sufficient; use a string-transfer route or a separately defined cross-tokenizer " +
+      "objective."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"D. Keep track of temperature factors"}</H3>
+    
+    <Prose>{
+      "At T=2, teacher logits [2 ln 4, 0] give q=[0.8,0.2], and student logits [0,0] give " +
+      "p=[0.5,0.5]. Compute the student-logit gradient for KL(q∥p) and for T²KL(q∥p). Then take an " +
+      "SGD step of size 0.1 for the scaled objective."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Differentiating the divided logits introduces a factor 1/T."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Unscaled gradient is (p−q)/T=[−0.15,0.15]. Multiplying the objective by T²=4 gives " +
+      "[−0.6,0.6]. Subtracting 0.1 times this gradient gives new logits [0.06,−0.06]. Their sum " +
+      "remains zero. The target is detached: no derivative is propagated through q. These gradients " +
+      "differ by a factor four at this fixed T; that does not mean changing T leaves scaled " +
+      "gradients fixed."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"E. Center before taking the high-temperature limit"}</H3>
+    
+    <Prose>{
+      "Teacher logits are [2,0] and student logits [0,0]. Compute the limiting value of T²KL(qT∥pT) " +
+      "as T grows. Does adding 100 to both teacher logits change it?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " Subtract each vector's own mean, then use the squared centered gap divided by twice the " +
+      "vocabulary size."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Centered teacher logits are [1,−1] and centered student logits [0,0]. The squared gap sums " +
+      "to 2, so the limit is 2/(2×2)=0.5. Adding 100 does not change centered logits or softmax at " +
+      "any finite T. Comparing raw uncentered squares instead would assign a loss to an " +
+      "unidentifiable common offset, contradicting the probability model."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"F. Remove the capacity restriction"}</H3>
+    
+    <Prose>{
+      "Section 5 uses p(u)=[u²,2u(1−u),(1−u)²] and q=[0.49,0.02,0.49]. Suppose instead the student " +
+      "can choose any strictly positive categorical vector. Where are the global minima of both KL " +
+      "directions? Why is this not a contradiction of the restricted-family example?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Ask whether q itself is an allowed student distribution."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Both divergences are nonnegative and zero at p=q, so that distribution is a common global " +
+      "minimum. The one-parameter family cannot represent q: equal first/third masses force u=0.5, " +
+      "giving a middle mass of 0.5 rather than 0.02. Different projections onto that restricted " +
+      "family produce the earlier contrast. “Reverse KL always drops a mode” is therefore too " +
+      "broad; the model family and optimization situation matter."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"G. A two-step sequence distribution"}</H3>
+    
+    <Prose>{
+      "Teacher first-token probabilities are [0.6,0.4]. After A its second-token probabilities are " +
+      "[0.8,0.2]; after B they are [0.25,0.75]. Compute all four joint probabilities. A student " +
+      "assigns [0.25,0.25,0.1,0.4] to those same leaves. Write the teacher-expected sequence CE. " +
+      "Would always copying the most likely teacher sequence estimate that expectation?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Multiply along each path, then weight every leaf's student log loss."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " For AA, AB, BA and BB the teacher masses are [0.48,0.12,0.1,0.3], which sum to one. CE is " +
+      "−0.6 ln(0.25)−0.1 ln(0.1)−0.3 ln(0.4), approximately 1.336922 nats. Greedy copying selects " +
+      "AA and yields −ln(0.25)=1.386294 nats for this student; it is a different deterministic " +
+      "objective. Independent teacher sampling provides an unbiased Monte Carlo estimate of the " +
+      "complete expectation, while any finite sample can deviate from it."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"H. EOS shares an ID with pad storage"}</H3>
+    
+    <Prose>{
+      "Two responses have valid target masks [1,1,0,0] and [1,1,1,1]. Both last valid targets are " +
+      "EOS ID 0; unused storage also contains ID 0. Their total negative log likelihoods are 2 and " +
+      "12 nats. Compute the pooled token mean and the mean of per-response means. State the correct " +
+      "ID/mask behavior."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Count six valid positions, not the number of nonzero token IDs."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The pooled mean is 14/6=2.333333 nats per target. Equal response weighting gives " +
+      "(2/2+12/4)/2=2. The first objective weights the longer response twice as heavily. Both EOS " +
+      "targets remain selected; only the two storage positions are ignored. Masking every ID 0 " +
+      "would remove real termination supervision. In the full program, vary the amount of " +
+      "right-padding and assert unchanged loss and valid-position gradients, with zero padding " +
+      "gradients."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"I. Find the omitted visitation gradient"}</H3>
+    
+    <Prose>{
+      "A binary first-token softmax currently has probabilities [0.5,0.5]. The two continuation " +
+      "costs are C₀=0.1 and C₁=0.3, held fixed for this calculation. For J=p₀C₀+p₁C₁, compute the " +
+      "derivative with respect to the two first-token logits. What happens when C₀=C₁ or when the " +
+      "prefix probabilities are detached?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" The first coordinate is p₀p₁(C₀−C₁)."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The derivative is [−0.05,0.05]. Increasing the first logit shifts visitation toward the " +
+      "lower-cost continuation. Equal costs make both coordinates zero because redistributing " +
+      "probability cannot change the expectation. Detaching p also gives zero from this path, even " +
+      "when the costs differ. Local divergence losses may supply other gradients, but they do not " +
+      "restore this missing path. Extend "
+    }<code>{"distillation_sequences.py"}</code>{
+      " with a new pair of continuation rows and require the full finite-difference gradient to " +
+      "match local plus visitation terms; require only the detached autograd calculation to match " +
+      "the local-only derivative."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"J. A right answer with an invalid step"}</H3>
+    
+    <Prose>{"For "}<code>{"(4+2)*3"}</code>{", a teacher prints "}<code>{"sum 6 ; product 15 ; answer 18"}</code>{
+      " followed by EOS. Decide structural validity, final correctness, sum correctness, product " +
+      "correctness and answer-to-product consistency. Would a final-only filter keep it?"
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Parsing and evaluating an assertion are separate operations."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The grammar is valid and the final answer 18 is correct. The sum 6 is correct, but 6×3 is " +
+      "18 rather than the claimed product 15. The answer also disagrees with the displayed product. " +
+      "A final-only filter keeps it; the full-step checker rejects it. This does not show what " +
+      "internally caused the model's answer, only that its emitted explanation contains a false " +
+      "claim."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"K. Read a distillation result with its conditions"}</H3>
+    
+    <Prose>{
+      "A summary says: “R1-Distill proves that all small models should use distillation instead of " +
+      "RL, and its released six models were RL-trained.” Repair both claims using the specific " +
+      "experiment described in section 10."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{
+      " Separate how the teacher obtained its behavior from how each released student was trained, " +
+      "and keep the comparison's model size."
+    }</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The six distilled releases use SFT on the selected data; the teacher's preceding RL does " +
+      "not make each student's optimization RL. The reported direct-RL versus distillation " +
+      "comparison is a particular 32B setup and its benchmark results. It supports that comparison, " +
+      "not a universal impossibility of improvement from RL at smaller scales or in other settings. " +
+      "The relevant data mixture and starting checkpoints also remain part of the recipe; the model " +
+      "name alone does not specify them."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"L. Split the underlying family"}</H3>
+    
+    <Prose>{"A dataset contains "}<code>{"(2+5)*1"}</code>{", "}<code>{"(2+5)*2"}</code>{", "}<code>{"(2+5)*3"}</code>{" and "}<code>{"(2+5)*4"}</code>{
+      ". A random row split puts the first three in training and the last in test. What does that " +
+      "test measure that an unseen-(a,b)-family split does not? What grouping should handle "
+    }<code>{"(5+2)*4"}</code>{" if commutative duplicates can occur?"}</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" A shared intermediate sum links the four rows."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The test assesses a new multiplier within a seen addend family, where learning or " +
+      "memorizing the intermediate sum can help. It does not establish transfer to unseen addend " +
+      "families. Use a canonical group key "
+    }<code>{"(min(a,b),max(a,b))"}</code>{
+      " so commutative forms and all multiplier variants stay in one split. Our separate " +
+      "shifted-multiplier set deliberately asks another question; its relationship to test families " +
+      "must remain explicit."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"M. Check a short final chunk"}</H3>
+    
+    <Prose>{
+      "There are seven valid completion positions, vocabulary size five and chunk size three. Give " +
+      "the three chunk shapes and the global loss denominator. Describe a parity check that would " +
+      "catch accidentally averaging chunk means."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" The last tile has one row, not three."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Each model projects tiles [3,5], [3,5] and [1,5]. Sum all seven per-position divergences " +
+      "and divide by seven. Averaging the three chunk means would give the single final position " +
+      "one third of the total weight. Use unequal per-position losses, compare against full logits " +
+      "at chunk sizes 1, 3 and larger than seven, and compare every student gradient as well as the " +
+      "scalar loss. Require no teacher gradients and exact zero for an all-masked batch. Identical " +
+      "per-position losses alone would hide the weighting bug."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"N. Cost and quality use different denominators"}</H3>
+    
+    <Prose>{
+      "Preparation costs 120 units. Teacher and student calls cost 0.05 and 0.02 units. Find the " +
+      "break-even query count. A student gets 3 of 20 test questions correct, emits structurally " +
+      "valid answers on 12, and matches the teacher on 15. Report accuracy, validity and agreement " +
+      "without replacing one with another."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Use all 20 questions for the three stated task-level proportions."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " The systems tie at 120/(0.05−0.02)=4,000 queries; student serving is cheaper above that " +
+      "under this cost model. Accuracy is 15%, validity 60% and agreement 75%. Dividing 3 by 12 " +
+      "would instead report accuracy conditional on validity and would conceal eight invalid " +
+      "outputs. Agreement does not establish correctness unless the teacher is an independently " +
+      "perfect reference."
+    }</Prose>
+    </details>
+    </section>
+    <section className="distill-practice" data-lesson-exercise>
+    <H3>{"O. Pick the available transfer signal"}</H3>
+    
+    <Prose>{
+      "A remote teacher returns text but no logits. Its tokenizer differs from your student's. A " +
+      "colleague proposes padding its token-ID sequence to the student's vocabulary width and " +
+      "minimizing token KL. Propose a working route and name the information it cannot recover."
+    }</Prose>
+    <details>
+    <summary>Hint</summary>
+    <Prose>{" Text is a shared object even when vocabulary coordinates are not."}</Prose>
+    </details>
+    <details>
+    <summary>Worked solution</summary>
+    <Prose>{
+      " Save the literal completion with prompt/provenance, apply a declared quality and " +
+      "termination policy, tokenize the text with the student tokenizer, and train EOS-inclusive " +
+      "response-only CE. Padding token IDs does not create a probability distribution or align " +
+      "next-token events. The hard text route cannot recover the teacher's unreturned probabilities " +
+      "for alternatives. If later full distributions become available, event alignment still needs " +
+      "a separate check before direct KL becomes valid."
+    }</Prose>
+    </details>
+    </section>
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="takeaways">
+    <H2>{"Key takeaways"}</H2>
+    
+    <ul>
+    <li>{
+      "Distillation transfers an available supervision signal. Full distributions, hard tokens and " +
+      "complete responses preserve different information."
+    }</li>
+    <li>{
+      "Compare probabilities at the same prefix over the same events. Temperature, divergence " +
+      "direction, masks, denominators and prefix source each change the mathematical objective."
+    }</li>
+    <li>{
+      "Student-visited prefixes give useful local teacher feedback, but detached generation does " +
+      "not differentiate the full visitation distribution."
+    }</li>
+    <li>{
+      "A generated trace is a set of emitted claims. Parsing, final correctness, step correctness " +
+      "and faithful internal reasoning are distinct questions."
+    }</li>
+    <li>{
+      "Working loss code is not a task-quality result. Retain poor seeds, invalid outputs, all " +
+      "selection rules, actual token costs and the teacher's own errors."
+    }</li>
+    </ul>
+    
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="further-learning">
+    <H2>{"Further reading"}</H2>
+    
+    <ul>
+    <li>{""}<a href={"https://rlhfbook.com/c/12-synthetic-data"}>{"RLHF Book, Synthetic Data and Distillation"}</a>{
+      " develops the transition from generated datasets to on-policy supervision. Read its " +
+      "prefix-source discussion alongside section 8's explicit derivative."
+    }</li>
+    <li>{""}<a href={"https://harvard-iacs.github.io/2020-AC295/lectures/lecture7/notebook/"}>{"Harvard AC295 distillation notebook"}</a>{
+      " gives a smaller classification setting for softened targets and deployment motivation. Use " +
+      "stable log-softmax when adapting its implementation."
+    }</li>
+    <li>{""}<a href={"https://huggingface.co/docs/trl/distillation_trainer"}>{"TRL DistillationTrainer documentation"}</a>{
+      " describes the ordinary API and memory strategy. This lesson's executed contract is version " +
+      "1.14.2; verify the installed version before reproducing it."
+    }</li>
+    </ul>
+    
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="references">
+    <span id="10-primary-sources" aria-hidden="true" />
+    <H2>{"References"}</H2>
+    
+    <ul>
+    <li>{""}<a href={"https://arxiv.org/abs/1503.02531"}>{"Hinton, Vinyals and Dean, Distilling the Knowledge in a Neural Network (2015)"}</a>{": softened targets, mixed hard/soft supervision and the centered-logit limit."}</li>
+    <li>{""}<a href={"https://arxiv.org/abs/1606.07947"}>{"Kim and Rush, Sequence-Level Knowledge Distillation (2016)"}</a>{": sequence objectives and practical high-probability sequence approximation."}</li>
+    <li>{""}<a href={"https://arxiv.org/html/2306.13649v3"}>{
+      "Agarwal et al., On-Policy Distillation of Language Models: Learning from Self-Generated " +
+      "Mistakes (v3, 2024)"
+    }</a>{": teacher feedback on student-generated prefixes and detached sampling."}</li>
+    <li>{""}<a href={"https://arxiv.org/html/2306.08543v3"}>{"Gu et al., MiniLLM (v3, 2024)"}</a>{
+      ": sequence reverse KL and a practical optimization method beyond this lesson's exact " +
+      "two-step derivative demonstration."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/html/2305.02301v2"}>{"Hsieh et al., Distilling Step-by-Step (2023)"}</a>{
+      ": separate rationale/label multitask supervision, distinct from concatenated autoregressive " +
+      "trace training."
+    }</li>
+    <li>{""}<a href={"https://arxiv.org/html/2501.12948v2"}>{"DeepSeek-R1 (v2, 4 January 2026)"}</a>{
+      ": Appendix B.3.3/B.4.3, F/F.1 and Tables 5, 6, 15 and 16 for the data, student recipes and " +
+      "the specific RL comparison discussed here."
+    }</li>
+    <li>{""}<a href={"https://github.com/huggingface/trl/blob/v1.14.2/trl/trainer/distillation_trainer.py"}>{"TRL 1.14.2 DistillationTrainer source"}</a>{": chunked hidden-state projections, masking, mixture convention and generation."}</li>
+    </ul>
+    
+    </section>
+    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="readiness">
+    <H2>{"What's next"}</H2>
+    
+    <Prose>{
+      "Run the finite probability and sequence programs first, then inspect the saved candidate " +
+      "ledger and all held-out outputs before deciding whether a new fit is worth its cost. The "
+    }<a href={"/learn/path/full-curriculum/rl-for-reasoning-deepseek-r1-style?module=large-language-models"}>{"RL for Reasoning lesson"}</a>{
+      " continues from imitation to outcome-driven policy updates. The distillation programs remain " +
+      "useful there as a way to package a stronger model's behavior into another student, with the " +
+      "same requirements for target quality and independent evaluation."
+    }</Prose>
+    </section>
+  </div>;
+}
+export default {
+  title: 'Knowledge Distillation for LLMs (DeepSeek-R1-Distill, CoT Distillation)',
+  slug: 'knowledge-distillation-for-llms-deepseek-r1-distill-cot-distillation',
+  readTime: '~75 min read + 90 min practice', content: DistillationLesson,
 };
-
-export default knowledgeDistillationLLMs;

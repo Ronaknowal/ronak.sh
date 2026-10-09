@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "status": "partial-native-reading-required-corrections-open",
+  "reviewer": "/root",
+  "at": "2026-10-09T15:58:59.020Z",
+  "sourceFreeze": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/author-ready-built-source.json",
+    "bytes": 58072,
+    "sha256": "196ee467401c0e003b89f8663fe1f87efba73fecce7a0f64bfdeb4b08b6bc1cd"
+  },
+  "sourceBindings": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/AffinityFigures.jsx",
+      "bytes": 18479,
+      "sha256": "f788b06f48ab1cf1830fc3bc7ee613ec0aa2da45cdbf08cfb4cf58da64201a8d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-geometry-refinement.mjs",
+      "bytes": 8037,
+      "sha256": "565c562a22443434bfd052b22b5120bd589e2ea0595970f19e8a15c8cb290905"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-harness-isolation.mjs",
+      "bytes": 4094,
+      "sha256": "4707dce16abb58c7119078caf200f2008a6ceac986325fa1ac555d9e2cdd3ce4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-private-http.mjs",
+      "bytes": 3545,
+      "sha256": "29b542bad6be28cf24cc42d1f43acdfa70ef2625887d7d64d26491a749962c73"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-refinement-final-source.mjs",
+      "bytes": 5409,
+      "sha256": "404d207275329a176c64099182e57a91803388ca90f12d7abe3ef38b7594f2a4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/check-runtime-source.mjs",
+      "bytes": 8918,
+      "sha256": "748bec0ec19f30ef448ff22be6dcc7d407510a9d4d3753f1dc00b71c00e80ee2"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/generate-reader.mjs",
+      "bytes": 7404,
+      "sha256": "b6e5e3b5033a899893bbfd772b3908c1682f050b451005b53c588533f9dd52e6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+      "bytes": 39319,
+      "sha256": "0653febab66a69abfa4ca3c20167636dfe2bf9d8707268474b4a3794f0d318d9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/index.html",
+      "bytes": 272,
+      "sha256": "6b7e4e39e44df32eb5ac4e18045441f1812c0e2ae8b9e6c59da0bd6844e125f4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+      "bytes": 1098,
+      "sha256": "ddb035ee95bcfb601f5eb168af517db8b13da7b753ab028f36c80bce468e24d4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-geometry.mjs",
+      "bytes": 3443,
+      "sha256": "5f05fdb29982dbb214ca05a67215b40f79e46f3ad26d0246c3bc84db2e6f2f22"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-lesson.jsx",
+      "bytes": 124308,
+      "sha256": "14437087228af766dc00f8f572cb4abce3e1c632a80ea6ab82f786a18911c117"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+      "bytes": 9250,
+      "sha256": "c5ba7766028d8bdde7b8009af07418f9799561b95513a48bcd5565b609d58afb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-reader.css",
+      "bytes": 4690,
+      "sha256": "cdbabe22dca81d07fe19d225de92b35c01c86e4fb0760bb24da2e5b0b8622cb0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+      "bytes": 8447,
+      "sha256": "91be13c046661ec8b6f597f849bdae7059645fdedb57ab7dcc317f22c11c5336"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldFigures.jsx",
+      "bytes": 464,
+      "sha256": "b17d994feab9ac0096c809e4fa8da16e20bbed708aa281f6b4728b9d105137df"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+      "bytes": 25482,
+      "sha256": "f2b4662de64d17dbaa07a4aab84b1e7d580f4acb08419d05dadebe7cf001d3e7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+      "bytes": 17524,
+      "sha256": "6abb3bfb866dc4f0443d9dbef5c8c6262c0cef5160c7972becdaf279b2f0debd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-entry.jsx",
+      "bytes": 1122,
+      "sha256": "5c4171eb90643062eb8ee4c365ace26e2e256eaa2f17ebae133247d101d7dfe4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/preview-loader.js",
+      "bytes": 198,
+      "sha256": "c8cb5c008cc405174011d5930691568ea57af3005cce2194908d25f55dd5c170"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/PrivateFiles.jsx",
+      "bytes": 740,
+      "sha256": "9663b5c8640759251d885bfe3a1e46b98b296262c2c57b69d4e195a6b62d639e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite.config.mjs",
+      "bytes": 3974,
+      "sha256": "03d2436f376e2ddb45faafa77569e60b9bebba9116e2a2190d358eab5debe89a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite-source-corrected.config.mjs",
+      "bytes": 584,
+      "sha256": "55938c27902295749bebb9e1bc01721ed3cd1f84ad06babbf5a5d8834b3380bc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/check-source-contracts.mjs",
+      "bytes": 14533,
+      "sha256": "a8f435797b4538fb9974c85da2b4b765a9c21b3c842268e23501c53e06c3348f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/check-corrected-http.mjs",
+      "bytes": 3714,
+      "sha256": "38fae1e33f1626c1927b9468e68bf6d71529449f679cea5466eb639e13fb1b86"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldOperationObjects.jsx",
+      "bytes": 18704,
+      "sha256": "e743808753dac6902af92f39dda57a4fac1a0c2aaa5b6880c1ae9cb8df34c7d9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/vite-review-correction.config.mjs",
+      "bytes": 606,
+      "sha256": "2703fc98cf8a7e26fb4865f0e89e93c01eb893a1fa8596019ef6bfe3a3c169f1"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/check-review-corrections.mjs",
+      "bytes": 15523,
+      "sha256": "0f5aec7ac9f15fbb163896f29b65571d19a84fd914099fbcf6013e2a968e6481"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/bind-correction.py",
+      "bytes": 7180,
+      "sha256": "d96a69c8e8ee5fd50a33cd198352175c990c4a52deaacb1d123c5f15a94edb02"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/check-corrected-http.mjs",
+      "bytes": 3718,
+      "sha256": "43f144aa3c6ff1716bb61a36f2bdd1322a4c22f0f645fa98ef824115a351d1bb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/freeze-built-handoff.py",
+      "bytes": 5382,
+      "sha256": "90e1822dc4296d8e500ead12127dc887a86313d5185a26220c9558c300cd6265"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/ManifoldOperationObjects.jsx",
+      "bytes": 20424,
+      "sha256": "b4be3e35c75e93ae6bb68e6b7b5796a8104929992db8b54ab4b9ae3a9bdc6c08"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/vite.config.mjs",
+      "bytes": 1034,
+      "sha256": "b61f55ff2cf47600116755ec3a12a53e0f67251930f8ad977e0088a98575b153"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/compose-arrow-overlay.py",
+      "bytes": 2926,
+      "sha256": "58c8f04e6344baa348f3365e603a9d81d77c06e2b915bcea2f3751a760eea805"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-probability-arrows.mjs",
+      "bytes": 11200,
+      "sha256": "933f238375a8ef1c52b1d7d0269d067ecae1d55e89fa735cd7ba6187cc99f9a9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/freeze-source.py",
+      "bytes": 7753,
+      "sha256": "7312110b939c1b88778981e526a9080f2eb16cc3725b4f28fdbfce0de416b78c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/probe-prebuild.mjs",
+      "bytes": 3029,
+      "sha256": "bb00cb26a29960a82bd02a9b1c84df3c028ea33a68b98096ba4100819b9280be"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/check-http.mjs",
+      "bytes": 4932,
+      "sha256": "29252e443f25f6113fe28057ed1c72f9a688e09b7d80be501e91b520b1bb9599"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/freeze-built.py",
+      "bytes": 4397,
+      "sha256": "e0ac601321c765b5e37bb8bb3a23cd99f8bc4dcb3700cffad2c7614279237391"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/manifold-reader.css",
+      "bytes": 5060,
+      "sha256": "25a7954c41747468debe80dd8a89750078859cd28c7ac7f66eb8dce6f3ad375b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/vite.config.mjs",
+      "bytes": 999,
+      "sha256": "f7ea19ef8b19bc4510947789f5cb9fb360615aa2381bf30c07e965f50cee2961"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/freeze-source.py",
+      "bytes": 4666,
+      "sha256": "5cd19668355999290a2b2777091a4826297900629666463b3cba03d29f60b7ee"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/probe-prebuild.mjs",
+      "bytes": 3071,
+      "sha256": "00144fc4e89278ef501a2f1c142163ce884ada62f2d583a36dbf70bd017223b4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/check-http.mjs",
+      "bytes": 5496,
+      "sha256": "3187879bf103cc14db504876e34b42ecdf7863b62915fcf0934f91d09884e254"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/responsive-reading/freeze-built.py",
+      "bytes": 4673,
+      "sha256": "f2a86c9f99dc83f19c814f388e7f7bcf956d641261977d93bd37deaccb538edc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/AffinityFigures.jsx",
+      "bytes": 19602,
+      "sha256": "7747310c4415076ba6ed590228b21ab71f5fb9e1179b1fc5ec58a99d9f279203"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/manifold-reader.css",
+      "bytes": 4893,
+      "sha256": "f1c1c17ca945b4d8c6d18673176b58ca4f67d62a86e765a8facd934a959d0c0c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/vite.config.mjs",
+      "bytes": 982,
+      "sha256": "f445ee9b0cf9a6f9f7333a94bf58e96dcbbf8f6f6bd08b331f4d1bed5ef8a6f8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/freeze-source.py",
+      "bytes": 7943,
+      "sha256": "687f2e9eece8f13bc279b42fbcc8d79f95496b3e3d8d8374a6dc6c43ab225574"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/probe-prebuild.mjs",
+      "bytes": 3069,
+      "sha256": "2c64d5b4efc8839d46d37a5c46c752e482e1b2e2613bfe68209fa3cf20f1d5bc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/check-http.mjs",
+      "bytes": 5732,
+      "sha256": "0c8b1f2daeed06bee977f945a348fd2691927aec5ee648101cdd52271f11f718"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/freeze-built.py",
+      "bytes": 4980,
+      "sha256": "f99f17d1585705f6787897237a720dd158daaac6c45d214a92c1614feea5d333"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/reading-and-crowding/check-source-ssr.mjs",
+      "bytes": 4946,
+      "sha256": "521a8aa28ae41b407a7bf99568b6bb8112670d96e5bd52343a40f18fc98fa607"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/manifold-reader.css",
+      "bytes": 5047,
+      "sha256": "d72d2fb98f747cbd2582a4710b138d57e2edf71e14adbf75032d65f5d03ac22f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/vite.config.mjs",
+      "bytes": 1055,
+      "sha256": "db6f2fe76f0a58b52db2543342d8046d1412d64d83b2bc9a653777f83f821d0a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/prepare-successor.py",
+      "bytes": 4181,
+      "sha256": "2a8e980d967b3ed5b1625fe58ee1dbee124f88c94cfdb24b91836bb1cbb7c74d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-source.py",
+      "bytes": 5977,
+      "sha256": "04289d9d97198ba050578a3e33f97c3ed7d8e931494c4cb1b158f1c27eb031f3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/probe-prebuild.mjs",
+      "bytes": 3032,
+      "sha256": "4c5f171d064a450d3cf491ea486e6975880a119cecb308a86b979acbc8c1705a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/check-http.mjs",
+      "bytes": 5860,
+      "sha256": "dc20e9e0db9d68c637aaed13ed9792e1939b26646d8b1b7f4238858bc16149c6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-built.py",
+      "bytes": 4934,
+      "sha256": "ea71c75e7aa79867ca1da11f6a6d367a1c897795de89477fcb9aae2dfb54027e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/probe-prebuild.mjs",
+      "bytes": 3032,
+      "sha256": "4c5f171d064a450d3cf491ea486e6975880a119cecb308a86b979acbc8c1705a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/check-http.mjs",
+      "bytes": 5860,
+      "sha256": "dc20e9e0db9d68c637aaed13ed9792e1939b26646d8b1b7f4238858bc16149c6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/relative-inline-math/freeze-built.py",
+      "bytes": 4934,
+      "sha256": "ea71c75e7aa79867ca1da11f6a6d367a1c897795de89477fcb9aae2dfb54027e"
+    }
+  ],
+  "sourceIdentityScope": "All63 currentSourceBindings checked; prior accepted build/HTTP remains version-attributed. Native reading does not replay science or recertify unrelated contexts.",
+  "preview": "http://127.0.0.1:5199/learn/path/full-curriculum/t-sne-umap-manifold-learning?module=classical-ml",
+  "surface": {
+    "browserId": "2",
+    "tabId": "2",
+    "viewport": [
+      1280,
+      720
+    ],
+    "recovery": "Previous tab1 was authoritatively missing, same browser had no tabs. Reopened retained live5199 without rebuilding; current private Reader displayed."
+  },
+  "priorRootObservationScope": {
+    "viewport": [
+      1151,
+      1275
+    ],
+    "read": [
+      "D01 source30 cell-to-vector/output diagram (only first23 feature table rows painted)",
+      "D02 actual PCA scatter and both10-neighbor strips",
+      "D03 projection/whitening diagram",
+      "D04 rolled sheet/local patch",
+      "D05 U graph and after-C relaxation",
+      "D06 four radius states and separate noise bridge",
+      "D07 projection/line/recipe/pair comparisons (not all eight drawings fully painted)",
+      "D08 directed neighbor diagrams and identity links"
+    ],
+    "evidence": "Personally read conversation screenshots in preceding continuation; no saved PNG or complete45-diagram claim."
+  },
+  "currentRootObservationScope": {
+    "read": [
+      "D09 rank ladders and query contribution table",
+      "D11 equal/tied event bars and complete width table (top title partly outside screenshot)",
+      "D15 pair ruler and Gaussian/Student curves",
+      "D16 first map ruler and complete region text; lower matrix and second ruler not fully painted",
+      "D17 signed force lanes and old/new step, full region text; lower ForceView not fully painted in this pass",
+      "D18 rate100 ruler/mass comparison and full region text",
+      "D19 six-point ruler/nearest array and separate collinear support picture",
+      "D20 original/excess distance rulers and membership bars (lower bars partly offscreen)",
+      "D21 boundary bars/search-floor table (top title partly offscreen)",
+      "D22 reciprocal arrow drawing, all bars and local text",
+      "D23 pair ruler and target/teaching curves",
+      "D24 first pair/cost and complete region text; second state only partly painted",
+      "D25 initial/positive/negative4/negative5 pictures, all region text and separate three-point expectation"
+    ],
+    "evidence": "Actual CUA screenshots personally read; semantic locator clicks followed by fresh AX. Region innerText and source snippets corroborate interpretation; these do not establish unpainted coverage."
+  },
+  "findings": [
+    {
+      "id": "V1",
+      "category": "visible-mechanism-and-correspondence",
+      "status": "open",
+      "parts": [
+        {
+          "locations": [
+            "D02",
+            "D28",
+            "L10 SavedMapView"
+          ],
+          "issue": "Current edges are underneath300 circles and visually buried; strips use plain IDs without common/missing/introduced cues. The promised local relation is much harder to see than to compute.",
+          "required": "Expose actual set membership by clearly drawn rings/links and explicit text badges in both rank strips, separate from class/selection fill; preserve actual coordinates, IDs and input/map ranks."
+        },
+        {
+          "locations": [
+            "D11",
+            "D20"
+          ],
+          "issue": "B/C/D are blue/pink/violet in adjacent rulers and Gaussian rows, but default Bars shifts them to amber/blue/pink.",
+          "required": "Pass explicit semantic candidate colours through connected bars/rulers; labels must remain an additional cue."
+        },
+        {
+          "locations": [
+            "D15"
+          ],
+          "issue": "Both r3 marker circles are amber even though their Gaussian/Student curves have different colours.",
+          "required": "Associate each marked kernel value with its curve via colour and/or a local direct label, with exact unchanged values."
+        },
+        {
+          "locations": [
+            "D19"
+          ],
+          "issue": "Three collinear source0 support edges collapse onto one horizontal segment.",
+          "required": "Separate support arcs/annotation lanes so all three source-target edges can be traced without changing measured x coordinates; label IDs and distinguish annotation displacement."
+        },
+        {
+          "locations": [
+            "D25"
+          ],
+          "issue": "Positive and negative displacement arrows are too short to inspect, while constant-size white heads cover endpoint marks. Caption relies on nine-decimal tables to expose motion.",
+          "required": "Retain true old/new coordinates but add a clearly labelled scaled displacement view/inset for moved and fixed endpoints. Show both positive endpoints and head-only negatives, with stated scales and numeric values."
+        }
+      ]
+    },
+    {
+      "id": "V2",
+      "category": "local-label-clearance",
+      "status": "open",
+      "parts": [
+        {
+          "locations": [
+            "D04"
+          ],
+          "issue": "Local patch label touches u label, appearing as patchu."
+        },
+        {
+          "locations": [
+            "D06"
+          ],
+          "issue": "B label lies directly on B-D diagonal at radius1.5/2."
+        },
+        {
+          "locations": [
+            "D07"
+          ],
+          "issue": "UMAP .5/.25 strengths are not attached to their opposing arrows, leaving direction ownership ambiguous."
+        },
+        {
+          "locations": [
+            "D08"
+          ],
+          "issue": "Map A0 and C1 labels touch at both top and identity-correspondence plots."
+        },
+        {
+          "locations": [
+            "D17"
+          ],
+          "issue": "AB arrow lane crosses the following AC numeric label, repeated down adjacent lanes. DOM corroborates arrow ys91/113/135/157 and label baselines79/101/123/145."
+        }
+      ],
+      "required": "Recompose annotation positions/lanes and locally label each value; do not shift quantitative coordinates to make labels fit. Inspect actual affected desktop/narrow/enlarged states."
+    },
+    {
+      "id": "V3",
+      "category": "picture-first-order",
+      "status": "open",
+      "parts": [
+        {
+          "locations": [
+            "D09"
+          ],
+          "issue": "Trustworthiness/continuity formal explanation and equations precede rank-ladder figure."
+        },
+        {
+          "locations": [
+            "D16"
+          ],
+          "issue": "Student normalization equation and interpretation precede the first concrete ruler/kernel/normalizer drawing."
+        },
+        {
+          "locations": [
+            "D20"
+          ],
+          "issue": "UMAP rho/sigma formal membership equation precedes concrete distance/excess/membership drawing."
+        }
+      ],
+      "required": "Assess and reorder local concrete figure/walkthrough/formal statement consistently in both content marker and runtime composition. Preserve definitions and advanced derivations; no isolated runtime shuffle that leaves accepted manuscript contradictory."
+    }
+  ],
+  "failedActions": [
+    {
+      "operation": "D22 unscoped exact image locator",
+      "result": "Two matching actual images (static D22 and union lab); no click. Recovered with exact Mechanism D22 region scope."
+    }
+  ],
+  "limits": [
+    "Not complete whole native review: D27-D45 remain in this pass, with earlier D10/D12/D14 source-bound native evidence retained separately.",
+    "No new scientific main, fit, numerical campaign, build, canonical/public or central phase promotion.",
+    "No actual learner-comprehension, optimal diagram, OS payload or clipboard acceptance.",
+    "No screenshot files were saved; screenshots remain conversation image evidence."
+  ],
+  "nextAction": "Continue actual remaining drawings in reading order fromD26/D27, then freeze one consolidated correction set with independent source counterpart analysis. Apply source-bound corrections and affected native closure before normal integration."
+}

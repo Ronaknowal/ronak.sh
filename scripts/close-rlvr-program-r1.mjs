@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const base='docs/teaching/llm-architecture-training/rlvr-reinforcement-learning-with-verifiable-rewards';
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const packet=`${base}/program-successor/inputs.json`;
+if(hash(packet)!=='18f550a5b303154e77fa5553fd6993bb8df6840639082cf7c6c0ad36bac2662e')throw Error('Successor changed');
+const source=JSON.parse(fs.readFileSync(packet));
+for(const row of source.inputs)if(hash(row.path)!==row.sha256)throw Error(row.path);
+const report=`${base}/program-r1-closure.md`;
+fs.writeFileSync(report,`# Same-reviewer R1 closure\n\nRoot read the complete current scratch study, native bridge, new journal, staged driver, README, file index, synthetic check, conservation receipt and author closure. This follows the prior complete eleven-source prospective review and its 591 complementary conditions; only R1 was outstanding.\n\nR1 is closed: raw batches and measured discrepancies are persisted before assertions, every completed update/evaluation is journalled, and atomic coherent state includes actual optimizer/reference/RNG and native scheduler/twin gradients. Fresh output guards precede scientific entry. The callback closes over the constructed trainer at execution time. The synthetic probe's 38 conditions and conservation's 19 conditions are read as retained author evidence, not represented as new root execution. All ${source.inputs.length} successor bindings were independently verified in this closure. No language model was constructed and no scientific work was replayed.\n\nThe bound protocol and original scientific settings are conserved. The rolling state preserves the most recent coherent boundary, not every historical checkpoint; the log preserves previous observations. Abrupt termination can leave a partially completed boundary and does not promise a caught-exception event. Resume remains a separately reviewed action. The original parser-metadata null receipt remains historical; its supplement documents repaired read access without changing package bytes.\n\nRelease the prescribed scientific stages once, retaining all failures and negative outcomes. This acceptance covers prospective programs, not scientific success, full manuscript completion or runtime acceptance.\n`);
+const out=`${base}/program-review-acceptance.json`;
+if(fs.existsSync(out))throw Error('Preserve existing acceptance');
+const files=Object.fromEntries(source.inputs.map(r=>[r.path,r.sha256]));
+files[packet]=hash(packet);files[report]=hash(report);files[`${base}/program-review.md`]=hash(`${base}/program-review.md`);
+fs.writeFileSync(out,JSON.stringify({status:'accepted for prescribed scientific execution',reviewer:'root, different from author; same R1 reviewer',finding:'R1 closed',files},null,2)+'\n');
+console.log(JSON.stringify({bindings:source.inputs.length,acceptance:out,sha256:hash(out)}));

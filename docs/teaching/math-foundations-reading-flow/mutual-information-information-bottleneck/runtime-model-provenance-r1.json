@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "base": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-model-checks-r1.json",
+    "sha256": "ededb4aa9ae1d767dd31d5afc4f55562713282929cd5b66efd6c54a04a7a6466",
+    "bytes": 6387
+  },
+  "currentModelInputs": {
+    "mutual-information-models.js": "f8f890c06a123e77fec65e5fcb2084a372c270554c225d0c53dff01becbc982c",
+    "information-reading-models.js": "5a3159911f11edc083a33656be476db6a90e2eec2a7b8054f198c8eb8ca5e9b6",
+    "information-penguin-records.json": "37e9a169f3297f93f1db1a396042617e60c8e7bc8fb828280801a1a2c3cb7da9"
+  },
+  "xorFunctionSha256": "43133387b3f1074ff19ba11f008a8bcf4300596fbe99ef19daf5b21a77400745",
+  "xorOwner": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private/src/learn/components/lesson-labs/InformationFiniteDrawings.jsx",
+    "sha256": "e0cea7ac8c1fcb73e8ac28bf15799b61a9be197e5ec2aa149c2cd0c7753bc145",
+    "bytes": 18047
+  },
+  "scope": "Function and original three model/data bindings; presentation-only successor, no new scientific execution"
+}

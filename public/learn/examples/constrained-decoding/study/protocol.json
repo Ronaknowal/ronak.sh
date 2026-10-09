@@ -1,0 +1,119 @@
+{
+  "identity": {
+    "revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+    "model_files": {
+      "config.json": "f97f966a66c444890ed461fff2a51eefb15d74303df05b948124719f199b0b17",
+      "model.safetensors": "116a02532db461f91386a5b20f942ff2c8d4de7341e21b55caafc3d7b25f49a1",
+      "README.md": "d1f2cf1d5181daedeaa70208ddd5cc5251867bde9acf6db7bb45a2265e25e163",
+      "special_tokens_map.json": "10b8c8852c1e1f70b54d9aff61728408c28971c0e97a6c5a7b2debbd1d3e9c0c",
+      "tokenizer.json": "870f4e2baa6b683221fa52004d5d6f40ab8c9d31961617304b78c910c2c3caf2",
+      "tokenizer_config.json": "eee017c5bd133137f45907bd0a6e781e2ccd1a533734b7ed2a2f2f4446659809"
+    },
+    "data_sha256": "ea2482460f943b7212ea6a5bd4452b02d902a5bce7b8ebfd722ebbfce9d291f3",
+    "generator_sha256": "d19129de49451716987738e65a3833a705dcd8fffa701d745d1d833393723f07",
+    "versions": {
+      "torch": "2.14.0+cpu",
+      "transformers": "5.19.0",
+      "xgrammar": "0.2.8",
+      "outlines": "1.3.3",
+      "outlines_core": "0.2.14",
+      "tokenizers": "0.23.2"
+    }
+  },
+  "arms": [
+    "unconstrained",
+    "json_hf",
+    "schema_manual",
+    "schema_outlines"
+  ],
+  "rows": [
+    0,
+    1,
+    2,
+    3,
+    50,
+    51,
+    52,
+    53,
+    100,
+    101,
+    102,
+    103
+  ],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "species": {
+        "type": "string",
+        "enum": [
+          "setosa",
+          "versicolor",
+          "virginica"
+        ]
+      },
+      "sepal_cm": {
+        "type": "number",
+        "enum": [
+          4.0,
+          4.1,
+          4.2,
+          4.3,
+          4.4,
+          4.5,
+          4.6,
+          4.7,
+          4.8,
+          4.9,
+          5.0,
+          5.1,
+          5.2,
+          5.3,
+          5.4,
+          5.5,
+          5.6,
+          5.7,
+          5.8,
+          5.9,
+          6.0,
+          6.1,
+          6.2,
+          6.3,
+          6.4,
+          6.5,
+          6.6,
+          6.7,
+          6.8,
+          6.9,
+          7.0,
+          7.1,
+          7.2,
+          7.3,
+          7.4,
+          7.5,
+          7.6,
+          7.7,
+          7.8,
+          7.9,
+          8.0
+        ]
+      }
+    },
+    "required": [
+      "species",
+      "sepal_cm"
+    ],
+    "additionalProperties": false
+  },
+  "max_new_tokens": 48,
+  "do_sample": false,
+  "num_beams": 1,
+  "dtype": "float32",
+  "device": "cpu",
+  "threads": 2,
+  "torch_compile": "disabled",
+  "schema_order": "declared",
+  "xgrammar_any_whitespace": false,
+  "outlines_whitespace_pattern": "",
+  "stop_policy": "tokenizer EOS or cap; incomplete outcomes retained",
+  "timing": "serial CPU generation observations, excluding shared compilation; no GPU or serving benchmark"
+}

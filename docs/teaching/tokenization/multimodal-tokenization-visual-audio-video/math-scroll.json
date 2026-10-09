@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-06T20:13:27.586Z",
+  "base": "http://127.0.0.1:4242",
+  "sourceFiles": {
+    "src/learn/data/topics/multimodal-tokenization.jsx": "ca9aae58cd88867ec2b60511115ea70db0af92847ecfecddf594e2585d4d00b8",
+    "src/learn/components/lesson-labs/MultimodalTokenizationFlow.jsx": "e9851716708e6246a1506ed6ec375730af7295db9191869f8571566f7b227411",
+    "src/learn/components/lesson-labs/multimodal-tokenization-flow.css": "88556836086f3526d75641d878ae690d4953edb9f17b320266db9cb1118bed36",
+    "scripts/verify-multimodal-math-scroll.cjs": "d54e3a6401cb3c57096ee0ed8e4cd88c549c83482b1516bb4f55a2322af08792"
+  },
+  "buildManifestHash": "4f7b15bdb48ec41ca50758946c3556f8ae7b98f9b3f3d6248a0e52cc36de6642",
+  "views": [],
+  "passed": false,
+  "failure": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4242/learn/path/full-curriculum/multimodal-tokenization-visual-audio-video?module=large-language-models\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4242/learn/path/full-curriculum/multimodal-tokenization-visual-audio-video?module=large-language-models\", waiting until \"domcontentloaded\"\u001b[22m\n"
+}

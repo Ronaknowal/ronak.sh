@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+const base='docs/teaching/llm-architecture-training/structured-output-constrained-decoding-outlines-xgrammar';
+const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const scope='docs/teaching/llm-architecture-training/inference-serving-scope.json';
+const row=JSON.parse(fs.readFileSync(scope)).topics.find(t=>t.position===32);
+assert.equal(sha(row.source),row.originalSha256);
+const names=[`${base}/design.md`,`${base}/research.md`,row.original,row.source,scope,`${base}/research/acquisition.json`,'public/learn-code/decoding-strategies/sampling.py','public/learn-code/decoding-strategies/filters.py','docs/teaching/llm-architecture-training/decoding-strategies-greedy-beam-top-k-top-p-temperature/content-acceptance.json'];
+const files=Object.fromEntries(names.map(p=>[p,sha(p)]));
+const packet={status:'proposed complete design ready for different review; manuscript and runtime not released',topicId:row.id,author:'/root',assignment:'Explicit no-edit handoff from alignment_author; original frozen membership unchanged.',files,studyStatus:'No new model generations. Freeze scientific protocol after technical preflight and before execution.',scope:'All 13 sections, 27 representations, 11 complete programs and 14 solved tasks proposed.'};
+fs.writeFileSync(`${base}/design-inputs.json`,JSON.stringify(packet,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({path:`${base}/design-inputs.json`,sha256:sha(`${base}/design-inputs.json`),bindings:names.length}));

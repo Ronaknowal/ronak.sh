@@ -1,0 +1,146 @@
+{
+  "schema": "different-entire-content-source-bound-review/v1",
+  "status": "WITHHELD_REQUIRED_FINDINGS",
+  "reviewer": "/root/tsne_content_review",
+  "date": "2026-10-09",
+  "independence": {
+    "authoredThisContent": false,
+    "originalAuthor": "/root/survival_content_independent_review",
+    "successorAuthor": "/root/ica_design_independent_review",
+    "authorSelfReviewUsedAsIndependence": false
+  },
+  "reviewReport": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review.md",
+    "bytes": 25541,
+    "sha256": "f00133e3d9ccc4aee4231d1d102c2f1739bb3278047a5a18580039970aa115a8",
+    "freshDescriptorStatus": "PASS"
+  },
+  "submittedSourceIdentities": {
+    "identityCategory": "FRESH_INDEPENDENT_SOURCE_GUARDS_PASSED",
+    "authorReady": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/author-ready.json",
+      "bytes": 6092,
+      "sha256": "1832c1bc6800da4ee0a8e1cf6008485c85bfd0d7ac59c0219cc17d69470b16a7"
+    },
+    "manuscript": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/reading-flow-manuscript.md",
+      "bytes": 136791,
+      "sha256": "d11d369ff19d23db2780356e15e172cb34dcbf5e69fcf3bf97133a283e530e56"
+    },
+    "specifications": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/visual-and-investigation-specifications.md",
+      "bytes": 42262,
+      "sha256": "b82da5c43df028a20263068707031ec13606d370a5f1ccec8d4729d47437b5e3"
+    },
+    "acceptedDesignSha256": "a718b0e8d1bb0de830ee9d4254c708211e3826dee91ec7a3f5e485de7fa3e83f"
+  },
+  "wholeHumanReading": {
+    "completeManuscript": true,
+    "sections": 13,
+    "completeProgramBodies": 15,
+    "completeOutputDisplays": 15,
+    "individualDrawingContracts": 45,
+    "investigationContracts": 12,
+    "solvedTasks": 19,
+    "projectAndCriteria": true,
+    "completeSetup": true,
+    "completeAPIResourceNotes": true,
+    "completeAuthorHandoff": true,
+    "completeCurrentSiteRoutes": true,
+    "mapIndexes": "COMPLETE_RECORDS_PARSED_AND_SOURCE_GUARDED_NOT_A_SECOND_HUMAN_CONTENT_READING",
+    "observedBeginnerStudy": false
+  },
+  "requiredFindings": [
+    {
+      "id": "R1",
+      "title": "Three learner links resolve to missing routes",
+      "locations": [
+        "manuscript section7 line942",
+        "manuscript section8 line992",
+        "manuscript section13 line1822"
+      ],
+      "evidence": "Whole actual SiteRoutes.jsx source read; listed path forms exclude the three manuscript URLs.",
+      "closure": "Use actual stable routes/current target headings and read/check every local learner route in corrected whole manuscript."
+    },
+    {
+      "id": "R2",
+      "title": "Gaussian solver iteration-limit returns mismatched row and beta",
+      "locations": [
+        "programs/gaussian_rows.py solve_row",
+        "manuscript section4 displayed complete source"
+      ],
+      "evidence": "iteration-limit-arithmetic.json; finite elementary JS rows and read target control flow, not Python execution",
+      "closure": "Return a consistent evaluated tuple, settle nonpositive max_iter, preserve exact predecessor and perform bounded callable successor checks."
+    },
+    {
+      "id": "R3",
+      "title": "Stepped t-SNE coordinates leave L7's fixed current-coordinate editor range",
+      "locations": [
+        "specifications L7",
+        "D17/D18",
+        "manuscript section5"
+      ],
+      "evidence": "Taught rate100 produces selected A6.278461 outside specified current-x range−4…4; specification reasoning, not observed runtime defect.",
+      "closure": "Specify synchronized stepped-state/editor bounds through oversized Step, ID change, valid edit and Reset; preserve actual computed coordinates."
+    }
+  ],
+  "advisories": [
+    {
+      "id": "A1",
+      "title": "Move implementer directives out of learner prose and consolidate repeated provenance without weakening distinctions"
+    },
+    {
+      "id": "A2",
+      "title": "Update current GMM note separately while retaining immutable historical qualification; no new learner prerequisite is necessary"
+    },
+    {
+      "id": "A3",
+      "title": "Keep further learning and technical reference roles distinct during Reader integration"
+    }
+  ],
+  "checksAndBoundaries": {
+    "freshDescriptorAndGuardValidation": "PASS_623_SOURCE_GUARDS_30_COMPLETE_DISPLAYS_FULL_INVERSE",
+    "author272GuardsReplayed": false,
+    "accepted118InputsFreshlyValidated": true,
+    "original40PairsFreshlyValidated": true,
+    "historical41WitnessesReplayed": false,
+    "historicalTenMainsReplayed": false,
+    "historicalFitsReplayed": false,
+    "targetedElementaryArithmeticExecuted": true,
+    "sourceChanged": false,
+    "phasePromoted": false,
+    "runtimeReleased": false,
+    "browserPaintAssessed": false,
+    "bestPossibleDiagramsClaim": false,
+    "author272GuardsFreshlyValidatedByIdentityOnly": true
+  },
+  "toolLimitations": [
+    "Initial combined instruction read truncated; complete review/examples/resources and selected relevant teaching/visual guidance separately consumed.",
+    "A guessed check-complete-content.cjs path was missing; no evidence was inferred from it.",
+    "A broad scoped rg included two absent source subdirectories; actual SiteRoutes.jsx was then read completely.",
+    "Disk-full os error112 blocked later shell creation, full index inspection, current descriptors/guard checks and Node REPL kernel startup.",
+    "apply_patch created only reviewer-owned report/evidence/checkpoint files; current read-back/hash validation remains pending. No deletion was attempted by this reviewer.",
+    "Root recovered storage. Fresh stdlib-only source checks now pass; original disk-full/pending packet remains exact. No old scientific or checker executions were replayed."
+  ],
+  "next": "Separate author corrects consolidated R1–R3 against this exact submission, preserving predecessor and numerical evidence; SAME reviewer checks affected correction and current source bindings. Root alone accepts content and releases private runtime.",
+  "predecessorPendingPacket": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review-packet.json",
+    "bytes": 5716,
+    "sha256": "429ad0e16e74b67f8048eb0da240f514f25741ac25d293ff3c7e20f1b917ff82"
+  },
+  "sourceBindingCheck": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/source-binding-check.json",
+    "bytes": 229904,
+    "sha256": "1215133e6867101ed6dee69ec8ab4f2cf275dbe8bdd31bdd3bebbdb47cf9b4c3"
+  },
+  "reviewerArithmetic": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/iteration-limit-arithmetic.json",
+    "bytes": 1991,
+    "sha256": "c119ea17b93a961ddbcb69bdadbbbf8c5858c64ca297832a9bdb6ecb5fb5199d"
+  },
+  "freezeScript": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/freeze-source-bound-review.py",
+    "bytes": 2518,
+    "sha256": "4340548b79495c42455c8d568b9f0a43b15554f6dbcf908a1186daf8b1cf71b8"
+  }
+}

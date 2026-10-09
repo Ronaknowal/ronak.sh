@@ -1,0 +1,13 @@
+{
+  "method": "encoder-mlp",
+  "seed": 29,
+  "trainable": 10432,
+  "adapter_norm": 32.31578142947029,
+  "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+  "dev": {
+    "nll_sum": 2126.5746326446533,
+    "targets": 279,
+    "nll": 7.622131299801625,
+    "records": 105
+  }
+}

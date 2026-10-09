@@ -147,3 +147,34 @@ export function ambiguousTriangleState() {
     })
   };
 }
+
+export function ssaState(a) {
+  grid(a, 4, 12, 1, 'Opposite side');
+  const cx = 5 * Math.sqrt(3), cy = 5;
+  const discriminant = a * a - cy * cy;
+  // At a=b=10 the near intersection is exactly the source, not a small positive root.
+  const roots = a === 10 ? [0, 2*cx] : discriminant < 0 ? [] : discriminant === 0 ? [cx] : [cx - Math.sqrt(discriminant), cx + Math.sqrt(discriminant)];
+  const candidates = roots.filter(c => c > 0).map(c => {
+    const B = Math.atan2(cy, c - cx);
+    return { c, B, Cangle: Math.PI - Math.PI / 6 - B, area: c * cy / 2 };
+  });
+  return { a, b: 10, A: Math.PI / 6, C: [cx, cy], roots, candidates, collapsed: roots.filter(c => c === 0) };
+}
+
+export function originDisplacementState(ox, oy) {
+  grid(ox, -2, 2, 1, 'Origin x');
+  grid(oy, -2, 2, 1, 'Origin y');
+  const c = Math.sqrt(3) / 2, s = 0.5;
+  const local = ([x,y]) => [c * (x-ox) + s * (y-oy), -s * (x-ox) + c * (y-oy)];
+  const p = local([1,2]), q = local([4,6]);
+  return { origin: [ox,oy], p, q, difference: [q[0]-p[0],q[1]-p[1]], worldDifference: [3,4], length: 5 };
+}
+
+export function twoLinkState(theta, phi) {
+  grid(theta, -180, 180, 15, 'Shoulder angle');
+  grid(phi, -180, 180, 15, 'Relative elbow angle');
+  const first = circleComponents(theta), second = circleComponents(theta + phi);
+  const elbow = [2 * first.cosine, 2 * first.sine];
+  const endpoint = [elbow[0] + second.cosine, elbow[1] + second.sine];
+  return { theta, phi, elbow, endpoint, radius: Math.hypot(...endpoint), radiusSquared: 5 + 4 * circleComponents(phi).cosine, minRadius: 1, maxRadius: 3 };
+}

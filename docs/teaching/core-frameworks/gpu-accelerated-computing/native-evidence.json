@@ -1,0 +1,111 @@
+{
+  "kind": "author-native-cpu-verification",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.3.5",
+  "program_outputs": {
+    "gpu_affine_relu.py": {
+      "numpy": "2.3.5",
+      "cpu": {
+        "index_and_numpy_cases": 36,
+        "cuda_executed": false,
+        "example_n19_blocks2_threads4": [
+          [
+            0,
+            8,
+            16
+          ],
+          [
+            1,
+            9,
+            17
+          ],
+          [
+            2,
+            10,
+            18
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            12
+          ],
+          [
+            5,
+            13
+          ],
+          [
+            6,
+            14
+          ],
+          [
+            7,
+            15
+          ]
+        ]
+      },
+      "cuda": {
+        "executed": false,
+        "reason": "Run --cuda on a configured CUDA device for native parity and timing"
+      }
+    },
+    "gpu_workload_accounting.py": {
+      "model": "Sequential additive costs; decimal GB/s; no measured timings",
+      "excluded": "Compute, caches, overlap, allocator, context, compilation, contention",
+      "cases": {
+        "resident=False,fused=False": {
+          "host_bytes": 40000000,
+          "device_bytes": 120000000,
+          "kernel_count": 15,
+          "host_transfer_us": 2500.0,
+          "device_traffic_us": 300.0,
+          "launch_us": 150.0,
+          "model_total_us": 2950.0
+        },
+        "resident=False,fused=True": {
+          "host_bytes": 40000000,
+          "device_bytes": 40000000,
+          "kernel_count": 5,
+          "host_transfer_us": 2500.0,
+          "device_traffic_us": 100.0,
+          "launch_us": 50.0,
+          "model_total_us": 2650.0
+        },
+        "resident=True,fused=False": {
+          "host_bytes": 8000000,
+          "device_bytes": 120000000,
+          "kernel_count": 15,
+          "host_transfer_us": 500.0,
+          "device_traffic_us": 300.0,
+          "launch_us": 150.0,
+          "model_total_us": 950.0
+        },
+        "resident=True,fused=True": {
+          "host_bytes": 8000000,
+          "device_bytes": 40000000,
+          "kernel_count": 5,
+          "host_transfer_us": 500.0,
+          "device_traffic_us": 100.0,
+          "launch_us": 50.0,
+          "model_total_us": 650.0
+        }
+      }
+    }
+  },
+  "additional_numpy_parity_cases": 96,
+  "sources": {
+    "public/learn-code/gpu-accelerated-computing/gpu_affine_relu.py": "6e7487559905b5c5b5c2153492902a5b3c472cb737beaa269630c804135e0e16",
+    "public/learn-code/gpu-accelerated-computing/gpu_workload_accounting.py": "7423bdbd3a09aa45c4fe74faaf3b90fc5b405375859508d76496a2924ddcdb0d"
+  },
+  "cuda": {
+    "executed": false,
+    "reason": "Available PyTorch runtime is CPU-only; no CUDA hardware. CUDA source reviewed, but compilation, native parity, timing and sanitizer execution are unverified."
+  },
+  "limits": [
+    "Index simulation does not execute GPU threads.",
+    "Cost model is algebraic accounting, never measured performance.",
+    "Rendered checks are owned by integration."
+  ]
+}

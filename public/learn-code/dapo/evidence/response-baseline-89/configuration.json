@@ -1,0 +1,109 @@
+{
+  "seed": 89,
+  "arm": "response-baseline",
+  "group_size": 4,
+  "target_groups": 2,
+  "max_candidate_batches": 1,
+  "generation_cap": 8,
+  "soft_buffer": 4,
+  "slots": 2,
+  "updates_per_filled_slot": 2,
+  "beta": 0.0,
+  "dual_clip": null,
+  "mask_truncated": false,
+  "epsilon": 1e-06,
+  "clip_low": 0.2,
+  "clip_high": 0.2,
+  "reduction": "response",
+  "optimizer": "SGD",
+  "learning_rate": 0.0001,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "top_k": 0,
+  "dropout": 0.0,
+  "threads": 2,
+  "dtype": "float32",
+  "initial_weights": "8ffe40fc676d22d608b58b35af11bf467c36981dbb3ccfe373a7d574bd8251cd",
+  "train_ids": [
+    0,
+    1,
+    2,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "test_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "prompt_plan": [
+    [
+      [
+        0,
+        17
+      ],
+      [
+        16,
+        11
+      ],
+      [
+        10,
+        6
+      ]
+    ],
+    [
+      [
+        9,
+        13
+      ],
+      [
+        1,
+        8
+      ],
+      [
+        18,
+        7
+      ]
+    ]
+  ]
+}

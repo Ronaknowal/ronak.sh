@@ -1,0 +1,145 @@
+{
+  "method": "prefix-direct",
+  "trainable_count": 12288,
+  "trainable_shapes": {
+    "prompt_encoder.default.embedding.weight": [
+      8,
+      1536
+    ]
+  },
+  "diagnostic_optimizer_steps": 1,
+  "before_loss": 9.4907808303833,
+  "logits_shape": [
+    2,
+    33,
+    50304
+  ],
+  "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+  "frozen_base_exact": true,
+  "cache": {
+    "emitted_ids": [
+      187,
+      187,
+      510
+    ],
+    "per_step_max_logit_errors": [
+      7.62939453125e-06,
+      0.0005779266357421875,
+      0.00018918514251708984
+    ],
+    "prompt_real_positions": 31,
+    "virtual_positions": 8,
+    "cache_final_length": 41,
+    "layer_key_shapes": [
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ]
+    ],
+    "expected_length": 41,
+    "eos_stopping": "disabled only for fixed-length cache parity"
+  },
+  "float64_cache": {
+    "emitted_ids": [
+      187,
+      187,
+      510
+    ],
+    "per_step_max_logit_errors": [
+      9.450469526939287e-07,
+      9.212661140622913e-07,
+      8.86463261906556e-07
+    ],
+    "prompt_real_positions": 31,
+    "virtual_positions": 8,
+    "cache_final_length": 41,
+    "layer_key_shapes": [
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ],
+      [
+        1,
+        4,
+        41,
+        32
+      ]
+    ],
+    "expected_length": 41,
+    "eos_stopping": "disabled only for fixed-length cache parity"
+  },
+  "reload_max_logit_error": 0.0,
+  "saved_files": {
+    "adapter_config.json": {
+      "bytes": 482,
+      "sha256": "e28319a229be31ff7266b1485beeeaa4e717ce5cc6ddf7499944f074ca0c5961"
+    },
+    "adapter_model.safetensors": {
+      "bytes": 49272,
+      "sha256": "fc2e54194be7db0a0ca8aad731f30c3dc0b8e7880a15c025eaf50fe18d0ad36b"
+    },
+    "README.md": {
+      "bytes": 5194,
+      "sha256": "0ba911a41b5369ce5247086d451c41f07d35a282604edf55ece1ceb8cb2e3e76"
+    }
+  },
+  "materialization_limit": "Inference artifact; original encoder and optimizer resume state are not saved here."
+}

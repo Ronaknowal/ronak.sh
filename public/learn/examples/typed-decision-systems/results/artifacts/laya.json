@@ -1,0 +1,123 @@
+{
+  "payload": {
+    "kind": "external native postprocessor, not Agent calibration",
+    "schema": {
+      "question": "What is the customer asking about?",
+      "options": [
+        {
+          "id": "card_arrival",
+          "description": "card has not arrived or is missing in the post"
+        },
+        {
+          "id": "card_delivery_estimate",
+          "description": "how long delivery of a new card takes"
+        },
+        {
+          "id": "card_linking",
+          "description": "link or add an existing card to this account"
+        },
+        {
+          "id": "card_not_working",
+          "description": "card does not work when trying to use it"
+        },
+        {
+          "id": "lost_or_stolen_card",
+          "description": "a received card was lost or stolen"
+        },
+        {
+          "id": "card_payment_not_recognised",
+          "description": "a card payment was not made or recognised by the customer"
+        }
+      ]
+    },
+    "schema_sha256": "8774d69efc932a2a0eb48455896fa7c6d04543c464a73872668d0cdc47088a43",
+    "shifts_sha256": "9bba4b6050cb5d464c7a9065318c741f9bc9e93e6cb1cb9a2d46c78548b69db0",
+    "temperature": 2.3707941251318143,
+    "policy": {
+      "wrong_cost": 10,
+      "fallback_call_cost": 0.5,
+      "fallback_error": 0.3416666666666667,
+      "tie": "fallback"
+    },
+    "checkpoint_revision": "7b928d828b7b0e022f929d9bd2e44165aa270148",
+    "dependencies": {
+      "calibration": {
+        "path": "..\\calibration.json",
+        "sha256": "2b4e08467e2c3d1ffd431315399ca380c36f9e125d634ca74ee1fb93011e209c"
+      },
+      "policy": {
+        "path": "..\\routing.json",
+        "sha256": "ab70ee8a159c11fd3e8b5b483c0c6941906afa4aca5c9c892be40456620010f1"
+      },
+      "schema-data": {
+        "path": "..\\scratch\\data.json",
+        "sha256": "a68624a4ccccfd4555dcb61a95ebb8bd3ef3461cd6c2d072ffdcaee939203a1c"
+      },
+      "scratch-raw": {
+        "path": "..\\scratch\\logits.json",
+        "sha256": "07160b6de59bcb2680c5a6549b2277745444f7d4cac095f452c4fe15756a28ab"
+      },
+      "native-raw": {
+        "path": "..\\laya\\logits.json",
+        "sha256": "ff7ffd52435910251284ec8102c368a929e70acaafcf8f8d73020115fc51753d"
+      },
+      "protocol": {
+        "path": "..\\scratch\\protocol.json",
+        "sha256": "1d0c82dc02e3d0308dec8838a686ca21a069119e5e97c1c0cc1c405e13631c30"
+      },
+      "selection-seal": {
+        "path": "..\\scratch\\selection-seal.json",
+        "sha256": "57bb765c54fd8ec285636cfc03906432582d7cdc695b8d82b0c67639e84aeed0"
+      },
+      "native-completed": {
+        "path": "..\\laya\\completed.json",
+        "sha256": "f2b3eb9a65e2367f63b20c624134f0af841d0589def8ba971fffa56086aa6eef"
+      },
+      "checkpoint-manifest": {
+        "path": "..\\..\\..\\..\\..\\..\\docs\\teaching\\llm-architecture-training\\typed-decision-models-calibrated-neural-decision-systems\\research\\laya-checkpoint-source.json",
+        "sha256": "cdf9d08d78d128d0e2d8093d8ca8a07d0734bee2c324487c1e14da737ac2812a"
+      },
+      "replay-source": {
+        "path": "..\\..\\replay_artifact.py",
+        "sha256": "36ff56209312f2a4e55a9195630b8cfc8003152fc18b95b9825e7ee64d866175"
+      },
+      "calibration-source": {
+        "path": "..\\..\\calibrate_decisions.py",
+        "sha256": "4d6e6bd61c98ab3d5f6bde23f0903c7a610ca0f551c82b7a99de33e99a5a52f8"
+      },
+      "routing-source": {
+        "path": "..\\..\\evaluate_routing.py",
+        "sha256": "d8563d224b79ab1d12e64d9177871ad7afa3dca5c157f6c702fb7739b59eb7c0"
+      },
+      "native-source": {
+        "path": "..\\..\\run_laya.py",
+        "sha256": "263b6a6014acb7b783a9dbe06167fd6b577f09cd474c3256c313fd8bf0dde736"
+      },
+      "checkpoint-rl_agent_config.json": {
+        "path": "..\\..\\..\\..\\..\\..\\scratch\\typed-decision-research\\laya-english\\rl_agent_config.json",
+        "sha256": "ae287b56bbcf5f8c4f4541ae9dfd00c914c4c48b940b8398c3058af37ba92bbd"
+      },
+      "checkpoint-encoder/config.json": {
+        "path": "..\\..\\..\\..\\..\\..\\scratch\\typed-decision-research\\laya-english\\encoder\\config.json",
+        "sha256": "bf3ab80598fdccf414855a2ce80f22859e4492d06ca8a62ddd1cfb63972f8979"
+      },
+      "checkpoint-tokenizer/tokenizer.json": {
+        "path": "..\\..\\..\\..\\..\\..\\scratch\\typed-decision-research\\laya-english\\tokenizer\\tokenizer.json",
+        "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+      },
+      "checkpoint-tokenizer/tokenizer_config.json": {
+        "path": "..\\..\\..\\..\\..\\..\\scratch\\typed-decision-research\\laya-english\\tokenizer\\tokenizer_config.json",
+        "sha256": "50044de60daaa73df97d262e15a40d4faf0160e7d742df64b377877a1320dd12"
+      },
+      "checkpoint-README.md": {
+        "path": "..\\..\\..\\..\\..\\..\\scratch\\typed-decision-research\\laya-english\\README.md",
+        "sha256": "00355613796b3f5860b0d5b20392381d26580ec242e04a1fd150c7f116858602"
+      },
+      "checkpoint-model.safetensors": {
+        "path": "..\\..\\..\\..\\..\\..\\scratch\\typed-decision-research\\laya-english\\model.safetensors",
+        "sha256": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c"
+      }
+    }
+  },
+  "payload_sha256": "d1825162f20bd4992e869baa224486dba83884148f4d923fa1a8086d0ab78632"
+}

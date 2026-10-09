@@ -1,0 +1,288 @@
+{
+  "status": "INSTALLED_PENDING_NORMAL_INTEGRATION",
+  "acceptance": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-root-private-acceptance-r1.json",
+    "sha256": "b82cf594b127071be02d7b894c6ec028a020dcc08ea4a4d8d21d77ed274a9a37",
+    "bytes": 1518
+  },
+  "owners": [
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_bernoulli.py",
+      "before": null,
+      "after": "d28fbfc365c00ff5ff8894ce49a9161b839cef6f61729320e9be3dbc31093e29",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_bernoulli.py.stdout.txt",
+      "before": null,
+      "after": "c9a9fd83ea6f1ee66c166c1a10ea972e9666e172c0ef769804cb516d4c01f952",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_blocks.py",
+      "before": null,
+      "after": "c350cc2860c8ceae9f2b0b878eb07430a804e76b37a6a64bacc9d600eb97088a",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_blocks.py.stdout.txt",
+      "before": null,
+      "after": "ffacd0fb3fc0c3d635406aacd9fb55f6a93276ddd72e130ceec9e2fecda8f159",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_coin.py",
+      "before": null,
+      "after": "3ed8990146ff30a1012b1ea8aa7082345c3370ad2109476154d6a50097c9a6e3",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_coin.py.stdout.txt",
+      "before": null,
+      "after": "410ae0fe1b4a2b341e350e1318c08cd592c9311f10eda7cf1d0f79f6ff968871",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_conditional.py",
+      "before": null,
+      "after": "eb612681a243677383ce07b1d06bf698ce0ad2fc4e1abc93d8d4fdcbc2efdc90",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_conditional.py.stdout.txt",
+      "before": null,
+      "after": "1b18379ecfe4cb97cb12a0ce4fa36dbf030178855a34ac999d5507405db495b5",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_continuous.py",
+      "before": null,
+      "after": "537338dcfed092b66685f6a5637460b85d4d5a7f05af081234893b695bf4d682",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_continuous.py.stdout.txt",
+      "before": null,
+      "after": "5c1d7e86daef95889cf4cccf83ecff93043592dc874514e270ffda4729109a25",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_evaluation.py",
+      "before": null,
+      "after": "313c422d72480eef439f33e329bac70ba152bb8e25f69a4a89f62466ece8150b",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_evaluation.py.stdout.txt",
+      "before": null,
+      "after": "707ff49fb5282a8094e7f0e35dc0d09b2f692fc74de97df9a0e4019cda7e3cd3",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_logits.py",
+      "before": null,
+      "after": "e3d73b3fadf53a6cfbbe380bee0d867d8c9d62085d313c6a79d012df1e09797e",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_logits.py.stdout.txt",
+      "before": null,
+      "after": "21e37cc698eb20d7de004557d64c73da21e6612afaacbd9b6e6fd023b6fa1ac9",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_maximum.py",
+      "before": null,
+      "after": "0d9c5f638c424613d13ad7bad1f7189303bf05d430c163fc4407bfc4daa2c014",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_maximum.py.stdout.txt",
+      "before": null,
+      "after": "8af9735bfaddd62575504bfb361ca98f26d34bad38ef903b8a9ed84bb6e84d68",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_prefix.py",
+      "before": null,
+      "after": "e4b4fb4dfc210f9918631bcbeec28425695dd950922acce1a3ad5b8470b459ec",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_prefix.py.stdout.txt",
+      "before": null,
+      "after": "7ed24ce91add735adcc4749c9ea0ebd95cb17a39770d4a5a0c2087984274a6e6",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_support.py",
+      "before": null,
+      "after": "92e20737d064ac3056aff6d1034ecf9bc614f06e953a64958aa3ec5b4339ae7b",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_support.py.stdout.txt",
+      "before": null,
+      "after": "af7e39604bce5380c3986b32402d49d818db40afc8a7458de4fd58e718d134cf",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_torch.py",
+      "before": null,
+      "after": "fdce63715bb9446d3c4607241e967d3472651001ef8fe9940cea3b350fd69f31",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/entropy_torch.py.stdout.txt",
+      "before": null,
+      "after": "56f4d49157eccb4e5e851930ad94aba07b0f2d6021351845109579eab66f2d86",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/information_library.py",
+      "before": null,
+      "after": "b990bebbf52d1d3e1e27119c5b8be436497b84d81e936dcd41b55a62de67e960",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/information_library.py.stdout.txt",
+      "before": null,
+      "after": "20e5c8edab827c404dac0059493708ed47e4a18f26b1127a3e4f1cf2e32e9741",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/penguins.csv",
+      "before": null,
+      "after": "f204db2c753b0937caac3cb35258562c14f073e4bbc76be24b4c51ce22767a93",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/penguins_log_loss.py",
+      "before": null,
+      "after": "a591e009d34a1f2d088a6f274c4afbf096c7d5191611b836ac05a4b2c7f47eb0",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "public/learn-assets/entropy-information/penguins_log_loss.py.stdout.txt",
+      "before": null,
+      "after": "7438bb5ddca0135a87e93f2863a070d358fb8e211b48e30a8c9cda3d74bcd063",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/entropy-reading.css",
+      "before": null,
+      "after": "82842320793315ee5a219792f5e72a4efa065623e77efc5498eed102242fb1d2",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyCodingDrawings.jsx",
+      "before": null,
+      "after": "659e7cc5573fc1f4f279fa9bacc2e75b4e74182080c92d9c4adb00ab26faafc5",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyContinuousDrawings.jsx",
+      "before": null,
+      "after": "636de24253e05c0e41093a23d25037ebedb357a08a9aaa724248e86e79139166",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyDivergenceDrawings.jsx",
+      "before": null,
+      "after": "ac374fa3d86c75e11792609facca3defb0cff9f94fd39ab0dab0cd8863221c0d",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyDrawingElements.jsx",
+      "before": null,
+      "after": "32f9b81a3f6f12918c94c2b99ab385287d83531d864ac252a3381a62205a695e",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyMaximumDrawings.jsx",
+      "before": null,
+      "after": "6c73c0de4b6bd470ff0a3f11b777a861f8ec4f338a29eb732ca2427033598228",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyPredictionDrawings.jsx",
+      "before": null,
+      "after": "d46b6c076fa58fe2951915098f5e081040575274494e6802c93739805fd61147",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyProbabilityDrawings.jsx",
+      "before": null,
+      "after": "36f9a9c523652ab643e264fab0659191f04272c3e8d01ad6138630b3bc5f73b4",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyReadingDrawings.jsx",
+      "before": null,
+      "after": "2e89776e716ecf555d57f5ff134acdf1f68a7f90162fc440fb85320e74e36a00",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/components/lesson-labs/EntropyReadingLesson.jsx",
+      "before": null,
+      "after": "641c556ffebc4d2dcda98ecedc14d518671370bce6ca323c74741ba31a42c3ce",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/data/entropy-reading-models.js",
+      "before": null,
+      "after": "02c80e3a6e779c77aa903545d5155bc963d694bce3be2d63402682200e3ebf01",
+      "changed": true,
+      "backup": null
+    },
+    {
+      "destination": "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+      "before": "57e92aed15c98bac85b3eabd17e46de7385aa1d1d4a0a27e1e095f8d82834a9d",
+      "after": "52f57cd0f7c47226e7a234a0f8aafc38435815c01d4a75f0ab28eee5ed42c84e",
+      "changed": true,
+      "backup": {
+        "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/runtime-canonical-before-r1/src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+        "sha256": "57e92aed15c98bac85b3eabd17e46de7385aa1d1d4a0a27e1e095f8d82834a9d",
+        "bytes": 52234
+      }
+    }
+  ],
+  "phasePromoted": false
+}

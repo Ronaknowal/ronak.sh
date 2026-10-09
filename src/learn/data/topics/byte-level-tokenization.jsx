@@ -1,744 +1,226 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, ByteGrid, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+import { Prose, H2, H3, CodeBlock } from "../../components/content";
+import { LessonIntro, LessonTable, Sources } from "../../components/lesson-labs/LessonElements.jsx";
+import RemoteCodeBlock from "../../components/content/RemoteCodeBlock.jsx";
+import {
+  UnicodeByteLab, StreamingByteLab, BytePatchLab, BytePipelineFigure,
+  TextStorageFigure, Utf8PackingFigure,
+  ByteMergeFigure, ByteTargetsFigure, ByteUncertaintyFigure, BytePoolingFigure,
+} from "../../components/lesson-labs/ByteTokenizationLabs.jsx";
+import { ByteNormalizationFigure, ByteStateFigure, ByteEmbeddingFigure, ByteMasksFigure, ByteLossFigure, ByteByT5Figure, ByteCanineFigure, ByteCharformerFigure, ByteMambaFigure, ByteBltFigure, ByteCostFigure, ByteMetricFigure, ByteGenerationFigure } from "../../components/lesson-labs/ByteTokenizationDrawings.jsx";
 
-const byteLevelTokenization = {
+export default {
   title: "Byte-Level Tokenization & Token-Free Models",
-  readTime: "32 min",
+  readTime: "~65 min read + implementation and practice",
   content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        Open any production subword tokenizer trained in 2019 or 2020 — the original GPT-2 tokenizer, the BERT tokenizer, the early SentencePiece models that shipped with T5 — and feed it three inputs: the English sentence <Code>"The quick brown fox."</Code>, the same sentence translated into Hindi, and a short Python function. The English sentence costs five or six tokens. The Hindi sentence, which is roughly the same length on the page, can cost thirty. The Python function, depending on whitespace and identifiers, often costs more than its character count because the tokenizer has never seen those identifiers and has no useful merges over them. Feed the same three things as a bare emoji — the globe, <Code>🌍</Code> — and a <em>pre-byte-level</em> character BPE tokenizer would emit an <Code>[UNK]</Code> and lose the input entirely. That failure mode is the pressure that forced the whole field toward bytes.
-      </Prose>
-
-      <Prose>
-        A subword vocabulary is, at bottom, a frozen belief about what text looks like. A sensible English-trained vocabulary has dedicated tokens for <Code>"ing"</Code>, <Code>" the"</Code>, <Code>"tion"</Code>, and for common proper nouns that happened to appear in the training corpus. It has, crucially, no dedicated tokens for anything that was not in the training corpus — a new emoji, a rare script, a binary blob accidentally fed through the API, the bytes of a JPEG header that someone pasted in. A vocabulary carries the assumption that "what comes in" will resemble "what we saw." When the assumption holds the tokenizer is near-optimal. When it doesn't — and for any sufficiently multilingual, multi-modal, or adversarial application it won't — the tokenizer either fragments the input pathologically or drops it on the floor.
-      </Prose>
-
-      <Prose>
-        Byte-level tokenization drops the assumption. Every input any computer has ever stored is, at some level, a sequence of bytes. UTF-8 is a lossless, variable-length encoding of Unicode, and every Unicode string resolves, without ambiguity, to a sequence of bytes drawn from a fixed alphabet of 256 values. There is no such thing as an "unseen byte" — all 256 of them are in the vocabulary by construction. There is no such thing as an <Code>[UNK]</Code> token, because there is no way for an input to fail to be encodable. The universality is free. The only question, and it is a real one, is what it costs.
-      </Prose>
-
-      <Prose>
-        The historical arc of byte-level methods is tighter than most of NLP's threads. In February 2019, Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever published the GPT-2 technical report, "Language Models are Unsupervised Multitask Learners." Buried in section 2.2 of that paper is the sentence that changed the ecosystem: "A byte-level version of BPE only requires a base vocabulary of size 256." They argued directly from the coverage-vs-vocab tradeoff — you want a vocabulary small enough to train efficiently and large enough to give common units their own tokens, and starting from bytes rather than from Unicode codepoints is how you square the circle. GPT-2's tokenizer was byte-level BPE with one engineering twist: a fixed reversible mapping from raw byte values to printable Unicode characters, so the merge strings in <Code>vocab.json</Code> stayed human-readable. Every major byte-level tokenizer since — <Code>tiktoken</Code>'s <Code>cl100k_base</Code> and <Code>o200k_base</Code>, Llama's SentencePiece-with-byte-fallback, Mistral and Qwen and Gemma — is a direct descendant of that decision.
-      </Prose>
-
-      <Prose>
-        A parallel line of work pushed the idea further. If byte-level BPE is "bytes first, merges on top," could a transformer learn useful segmentation from the loss signal alone, with no tokenizer at all? Jonathan H. Clark and colleagues at Google answered that question in March 2021 with CANINE (arXiv:2103.06874), a character-level encoder with learned downsampling. Two months later Linting Xue et al. published ByT5 (arXiv:2105.13626), a T5 variant trained directly on raw UTF-8 bytes. Yi Tay and collaborators followed with Charformer (arXiv:2106.12672), which made segmentation itself differentiable. The line is still live: MambaByte (Wang et al., arXiv:2401.13660) combines byte-level inputs with the linear-time Mamba state-space model, and for the first time makes the sequence-length cost of byte processing genuinely affordable. This topic is about all of it — the byte-level BPE hybrid that ate production, and the token-free research line that keeps asking whether the hybrid is still the right answer.
-      </Prose>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        UTF-8 is the quiet miracle that makes all of this possible. Ken Thompson and Rob Pike designed it in 1992 on a placemat at a New Jersey diner, and the properties they chose have aged better than almost anything in systems software. Every Unicode codepoint becomes between one and four bytes. ASCII — the first 128 codepoints — is a single byte with the top bit zero, which means ASCII text is byte-identical to its UTF-8 representation. Latin-extended characters like <Code>é</Code>, <Code>ñ</Code>, and <Code>ü</Code> take two bytes. Greek, Cyrillic, Hebrew, Arabic, and most Indic scripts live in the two-to-three byte range. CJK ideographs take three bytes. Most emoji and supplementary-plane characters take four. The encoding is self-synchronizing — given any byte, you can tell by its top bits whether it is an ASCII byte, a leading byte, or a continuation byte — and it is prefix-free, so decoding is unambiguous.
-      </Prose>
-
-      <Prose>
-        The shape of the alphabet a byte-level tokenizer sees is, therefore, fixed. The base vocabulary has exactly 256 items, one per byte value. For any Unicode string, any language, any emoji, any rare script, any binary blob pasted in by accident, the encoder runs UTF-8 and what comes out is a sequence of integers in <Code>[0, 256)</Code>. That's it. No training, no merges, no vocabulary file. If you stopped there you would have a working character-level tokenizer with universal coverage — it is what ByT5 uses — and you would pay for it in sequence length.
-      </Prose>
-
-      <ByteGrid text="Héllo 🌍 こんにちは" label="utf-8 bytes for a mixed-script string" />
-
-      <Prose>
-        Eighteen perceived units, twenty-seven bytes. The word <Code>Hello</Code> is green — ASCII, one byte per letter — until the <Code>é</Code>, which takes two bytes (<Code>c3 a9</Code>). The globe emoji takes four. Each hiragana character takes three. Gold cells are continuation bytes of multi-byte sequences. If your model reads bytes directly, every one of those cells is an attention position, and the model has to learn from the loss signal that <Code>c3 a9</Code> is a single grapheme and that certain four-byte sequences are pictograms.
-      </Prose>
-
-      <Prose>
-        Byte-level BPE is the trick that buys universality cheaply. Take the 256-byte base vocabulary and run BPE on top of it — the same greedy-merge algorithm covered in the Tokenization topic, but starting from bytes instead of from Unicode characters. Common English words and suffixes, whose UTF-8 byte sequences merge early and often, still end up as single tokens. Common multi-byte sequences — the three bytes of a frequent Chinese character, the two bytes of a frequent accented Latin letter — also merge, because "common" in the training corpus translates directly to "high pair frequency" regardless of what encoding wrote it. What changes is the floor. A byte-level tokenizer cannot fail to represent an input, because even if the input is a four-byte emoji the tokenizer has never seen, the worst it can do is emit four single-byte tokens. There is no <Code>[UNK]</Code>. There is no silent truncation. There is no corner case where a rare Unicode character crashes the decoder.
-      </Prose>
-
-      <Prose>
-        Token-free models take the same observation and push it further. If the tokenizer is a frozen prior about what chunks of text are worth grouping, why not let the model learn the prior from gradients? ByT5 answers "feed bytes straight in, no merges at all." CANINE answers "feed characters in, learn a downsampling conv stack that collapses them to coarser units inside the model." Charformer answers "make the segmentation itself a differentiable operation." MambaByte answers "skip the tokenizer and switch to an architecture where long sequences are cheap again." Each one is a different reading of the same underlying question: who decides where tokens begin and end — a frozen preprocessor trained before the model sees any gradients, or the model itself?
-      </Prose>
-
-      {/* ======================================================================
-          3. MATHEMATICAL FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <Prose>
-        The math behind byte-level tokenization is not heavy — most of it is discrete combinatorics over bytes — but three pieces are worth writing down explicitly.
-      </Prose>
-
-      <H3>3a. The byte-encoding function</H3>
-
-      <Prose>
-        Let <Code>U</Code> be the set of Unicode codepoints and <Code>B = {"{0, 1, ..., 255}"}</Code> be the set of byte values. UTF-8 defines a function:
-      </Prose>
-
-      <MathBlock>
-        {"\\text{utf8}: U^* \\to B^*, \\qquad \\text{utf8}(c_1, c_2, \\ldots, c_n) = \\text{utf8}(c_1) \\| \\text{utf8}(c_2) \\| \\cdots \\| \\text{utf8}(c_n)"}
-      </MathBlock>
-
-      <Prose>
-        where <Code>||</Code> is byte-string concatenation and each codepoint <Code>c</Code> maps to between one and four bytes depending on its value. The encoding has an inverse <Code>utf8⁻¹</Code> defined on the image of <Code>utf8</Code>, which is not all of <Code>B*</Code> — there are byte strings that do not correspond to valid UTF-8. Production byte-level tokenizers handle this gracefully by allowing invalid byte sequences at the tokenizer level (every byte is a valid token) and surfacing replacement characters at decode time if the model generates a byte sequence that cannot be UTF-8-decoded.
-      </Prose>
-
-      <H3>3b. The bytes-to-unicode remap</H3>
-
-      <Prose>
-        GPT-2's tokenizer does not store raw byte values in its merge file. It stores <em>printable Unicode characters</em>, with each of the 256 byte values mapped to a unique, visible character. The reason is mundane but important: the vocab file is JSON, merges are strings, and several byte values (0x00 through 0x1F, 0x7F, 0x80 through 0x9F) are control characters that either print as nothing, break JSON, or collide with whitespace handling inside the tokenizer's own splitter. The mapping is a fixed, reversible shuffle — call it <Code>β: B → Σ</Code>, where <Code>Σ</Code> is a set of 256 printable Unicode characters.
-      </Prose>
-
-      <Prose>
-        The mapping is constructed explicitly. The "already printable" bytes — ASCII characters <Code>!</Code> (0x21) through <Code>~</Code> (0x7E), plus the Latin-1 supplement ranges <Code>¡</Code> (0xA1) through <Code>¬</Code> (0xAC) and <Code>®</Code> (0xAE) through <Code>ÿ</Code> (0xFF) — map to themselves. That accounts for 188 of the 256 byte values. The remaining 68 bytes (the control characters and whitespace characters that needed remapping) are mapped, in order, to the Unicode codepoints starting at <Code>U+0100</Code>. So byte 0x00 maps to <Code>U+0100</Code> (<Code>Ā</Code>), byte 0x01 to <Code>U+0101</Code>, and so on. The space character (byte 0x20) is in the "needed remapping" bucket and gets mapped to <Code>U+0120</Code> — the now-familiar <Code>Ġ</Code> that appears as a prefix on every word-initial GPT-2 token.
-      </Prose>
-
-      <MathBlock>
-        {"\\beta(b) = \\begin{cases} \\text{chr}(b) & \\text{if } b \\in P \\\\ \\text{chr}(256 + i) & \\text{if } b \\text{ is the } i\\text{-th byte outside } P \\end{cases}"}
-      </MathBlock>
-
-      <Prose>
-        where <Code>P</Code> is the set of 188 already-printable byte values. When you see a GPT-2 token like <Code>ĠHello</Code>, the <Code>Ġ</Code> is not a strange letter — it is byte 0x20 (space) viewed through <Code>β</Code>. The algorithm underneath is still byte-level BPE; the surface representation is a presentation choice.
-      </Prose>
-
-      <H3>3c. Sequence-length multiplier</H3>
-
-      <Prose>
-        The cost of going byte-level is, almost entirely, the sequence-length multiplier. For a given piece of text with <Code>N_char</Code> perceived characters and <Code>N_byte</Code> UTF-8 bytes, the ratio <Code>r = N_byte / N_char</Code> depends on the script. For ASCII, <Code>r = 1</Code>. For French with its occasional accents, <Code>r ≈ 1.05</Code>. For Greek or Cyrillic, <Code>r ≈ 2</Code>. For Chinese, Japanese, Korean, <Code>r = 3</Code> per character. For most emoji, <Code>r = 4</Code>. Under a subword-BPE tokenizer with a reasonable multilingual vocabulary, the same text might compress to <Code>N_tok ≈ N_byte / 3</Code> or better on English. So the ratio of byte-level sequence length to subword-BPE sequence length is roughly <Code>3 ⋅ (N_byte / N_char) / 1</Code> — around 3x for English, 6x for CJK.
-      </Prose>
-
-      <Prose>
-        That would not matter much if transformer cost were linear in sequence length, but attention is quadratic. For self-attention, per-layer FLOPs scale as <Code>O(L^2 ⋅ d)</Code> where <Code>L</Code> is sequence length and <Code>d</Code> is hidden dimension. A 3x increase in <Code>L</Code> produces a 9x increase in attention compute. The KV cache grows by the same 3x factor. The feedforward cost grows linearly. Total cost scales somewhere between linear and quadratic depending on which component dominates at a given model size. At a minimum, byte-level training on an English corpus costs 3-4x the compute of a subword-BPE training run for the same perplexity target — and that is the argument that has kept byte-level models in research for most of the last five years. It is also why MambaByte matters: state-space models scale linearly in sequence length, so a 3x length increase costs 3x compute, not 9x, and the calculation flips.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        Every code block in this section was run against the embedded test inputs, and the comments in each block are the actual outputs, verbatim. Nothing is pseudo-code. By the end of the section you will have a complete byte-level BPE tokenizer — roughly eighty lines of pure Python, depending only on the <Code>regex</Code> module — and you will understand what each piece does and why.
-      </Prose>
-
-      <H3>4a. bytes_to_unicode — the printable-byte map</H3>
-
-      <Prose>
-        The most-copied function in byte-level tokenization is GPT-2's <Code>bytes_to_unicode</Code>. It constructs the <Code>β</Code> mapping from section 3b. Read it carefully — the structure is unusual.
-      </Prose>
-
-      <CodeBlock language="python">
-{`def bytes_to_unicode():
-    """Deterministic map from byte value (0-255) to a printable Unicode char.
-    Structure: the 188 bytes that are already printable map to themselves.
-    The remaining 68 bytes map, in order, to codepoints starting at U+0100."""
-    bs = (
-        list(range(ord("!"), ord("~") + 1))         # 0x21..0x7E
-        + list(range(ord("\\u00a1"), ord("\\u00ac") + 1))  # 0xA1..0xAC
-        + list(range(ord("\\u00ae"), ord("\\u00ff") + 1))  # 0xAE..0xFF
-    )
-    cs = bs[:]  # these bytes map to themselves
-    n = 0
-    for b in range(2 ** 8):
-        if b not in bs:
-            bs.append(b)
-            cs.append(2 ** 8 + n)  # remaining bytes map into U+0100..
-            n += 1
-    cs = [chr(c) for c in cs]
-    return dict(zip(bs, cs))
-
-BYTE_ENCODER = bytes_to_unicode()
-BYTE_DECODER = {v: k for k, v in BYTE_ENCODER.items()}
-
-# Actual map samples (verified by running this code):
-# byte 0x20 -> 'Ġ'  (codepoint U+0120)   ← space, now visible
-# byte 0x21 -> '!'  (codepoint U+0021)   ← already printable
-# byte 0x41 -> 'A'  (codepoint U+0041)   ← already printable
-# byte 0x7e -> '~'  (codepoint U+007E)   ← already printable
-# byte 0xe2 -> 'â'  (codepoint U+00E2)   ← already printable (Latin-1)
-# byte 0xff -> 'ÿ'  (codepoint U+00FF)`}
-      </CodeBlock>
-
-      <Prose>
-        Two things are worth noting. First, the mapping is deterministic — the same Python code produces the same table on every machine — and it is reversible. <Code>BYTE_DECODER</Code> is just the inverted dictionary. Second, the mapping is chosen, not derived. The specific choice of which bytes are "already printable" is a design decision — it avoids control characters, DEL (0x7F), and the Latin-1 soft hyphen (0xAD) because those either break printing or behave inconsistently across terminals. There's no mathematical reason for this particular split; it's a pragmatic choice that has been copied verbatim for six years because changing it would break tokenizer compatibility.
-      </Prose>
-
-      <H3>4b. encode_text_to_byte_tokens</H3>
-
-      <CodeBlock language="python">
-{`def encode_text_to_byte_tokens(text):
-    """UTF-8-encode, then remap each byte through bytes_to_unicode.
-    Output is a string of printable characters, one per input byte."""
-    return "".join(BYTE_ENCODER[b] for b in text.encode("utf-8"))
-
-def decode_byte_tokens_to_text(byte_str):
-    """Reverse: each printable char -> byte, then UTF-8-decode."""
-    return bytes(BYTE_DECODER[c] for c in byte_str).decode("utf-8", errors="replace")
-
-# Actual output on 'Héllo 🌍 こんにちは' (verified):
-# encoded (27 chars): HÃ©lloĠðŁĮįĠãģĵãĤĵãģ«ãģ¡ãģ¯
-# decoded: 'Héllo 🌍 こんにちは'   ← lossless round trip`}
-      </CodeBlock>
-
-      <Prose>
-        The round trip is lossless because <Code>β</Code> is a bijection. Notice what the encoded string looks like: every character in it is printable and visible in a JSON file or a terminal, but the semantic structure is preserved — each visible character corresponds to exactly one byte of the UTF-8 representation. The globe emoji <Code>🌍</Code>, whose UTF-8 bytes are <Code>[240, 159, 140, 141]</Code>, shows up as <Code>ðŁĮį</Code> — four visible characters because 240 is already printable (maps to <Code>ð</Code>), while 159, 140, and 141 are in the "needed remapping" bucket and land at <Code>U+0141</Code>, <Code>U+012E</Code>, <Code>U+012F</Code>. You can eyeball this and it looks like nonsense. That is the point: the BPE training algorithm doesn't care what the characters mean, only which pairs are adjacent and how often.
-      </Prose>
-
-      <H3>4c. train_byte_bpe</H3>
-
-      <Prose>
-        Training is the BPE loop from the Tokenization topic, adapted to run over the byte-mapped corpus instead of raw characters. The one thing you need that you didn't need before is a <em>pre-tokenizer</em> — a regex that chops the input stream into "words" before the byte mapping runs. Without it, the merge loop would be free to glue the last byte of one word to the first byte of the next, and you'd end up with vocabulary items like <Code>"d the"</Code> that cross semantic boundaries and generalize badly. GPT-2's pre-tokenizer regex is notorious for being load-bearing.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import regex as re
-from collections import Counter
-
-# GPT-2's pre-tokenizer regex.  It splits on contractions, then greedy
-# runs of letters, digits, or punctuation, preserving leading spaces.
-GPT2_SPLIT_RE = re.compile(
-    r"""'s|'t|'re|'ve|'m|'ll|'d| ?\\p{L}+| ?\\p{N}+| ?[^\\s\\p{L}\\p{N}]+|\\s+(?!\\S)|\\s+"""
-)
-
-def get_pair_stats(word_freqs):
-    pairs = Counter()
-    for symbols, freq in word_freqs.items():
-        for i in range(len(symbols) - 1):
-            pairs[(symbols[i], symbols[i + 1])] += freq
-    return pairs
-
-def merge_pair(pair, word_freqs):
-    a, b = pair
-    merged = a + b
-    out = {}
-    for symbols, freq in word_freqs.items():
-        new = []
-        i = 0
-        while i < len(symbols):
-            if i < len(symbols) - 1 and symbols[i] == a and symbols[i + 1] == b:
-                new.append(merged)
-                i += 2
-            else:
-                new.append(symbols[i])
-                i += 1
-        out[tuple(new)] = freq
-    return out
-
-def train_byte_bpe(corpus, num_merges):
-    """Pre-tokenize, map to bytes, then BPE-merge over byte-strings."""
-    pieces = GPT2_SPLIT_RE.findall(corpus)
-    word_freqs = Counter(encode_text_to_byte_tokens(p) for p in pieces if p)
-    word_freqs = {tuple(w): f for w, f in word_freqs.items()}
-    merges = []
-    for _ in range(num_merges):
-        pairs = get_pair_stats(word_freqs)
-        if not pairs: break
-        best = max(pairs, key=pairs.get)
-        count = pairs[best]
-        word_freqs = merge_pair(best, word_freqs)
-        merges.append((best, count))
-    return merges, word_freqs`}
-      </CodeBlock>
-
-      <Prose>
-        The pre-tokenizer regex does four things. The leading alternatives match English contractions — <Code>'s</Code>, <Code>'re</Code>, <Code>'d</Code> — so the apostrophe splits cleanly. The middle alternatives match a run of letters or digits, optionally with a leading space, so <Code>" hello"</Code> pre-tokenizes as one piece and the space is glued to the word. The final alternative handles whitespace-only runs, giving them their own tokens. Everything after pre-tokenization is byte-mapped and then fed into the vanilla BPE merge loop.
-      </Prose>
-
-      <Prose>
-        Run this on a small mixed corpus and watch what emerges.
-      </Prose>
-
-      <CodeBlock language="python">
-{`CORPUS = (
-    "the quick brown fox jumps over the lazy dog. "
-    "the cat sat on the mat. café café café. "
-    "def f(x): return x**2. def g(x): return x+1. "
-    "Héllo 🌍 こんにちは こんにちは 世界 世界"
-) * 20
-
-merges, _ = train_byte_bpe(CORPUS, num_merges=60)
-for i, (pair, count) in enumerate(merges[:10], 1):
-    print(f"  {i:2d}. {pair[0]!r:>10} + {pair[1]!r:<10} count={count}")
-
-# Actual output (verified by running this code):
-#   1.        'ã' + 'ģ'        count=160   ← leading byte of hiragana
-#   2.        't' + 'h'        count=80
-#   3.       'th' + 'e'        count=80
-#   4.        'Ġ' + 'c'        count=80    ← 'Ġ' is space, so this is " c"
-#   5.       'Ġc' + 'a'        count=80
-#   6.        'Ã' + '©'        count=80    ← bytes of 'é' in UTF-8
-#   7.        'Ġ' + 'the'      count=60
-#   8.        'Ġ' + 'd'        count=60
-#   9.      'Ġca' + 'f'        count=60
-#  10.     'Ġcaf' + 'Ã©'       count=60    ← the full token " café"`}
-      </CodeBlock>
-
-      <Prose>
-        Three things jump out. First, merge 1 is <Code>ã + ģ</Code> — a pair of remapped bytes, not ASCII characters. What this actually represents is the first two bytes of the UTF-8 encoding of hiragana: every <Code>こ</Code>, <Code>ん</Code>, <Code>に</Code>, <Code>ち</Code>, <Code>は</Code> starts with byte 0xE3, and its second byte is almost always in the 0x81–0x83 range. Those two bytes remap to <Code>ã</Code> and <Code>ģ</Code>, and the merge loop discovers their adjacency before it discovers <Code>"th"</Code>. Byte-level BPE handles non-ASCII scripts by treating their byte-level patterns as just another source of frequency — no special case required. Second, merge 6 is <Code>Ã + ©</Code>: the two bytes of the UTF-8 encoding of <Code>é</Code> (<Code>0xC3 0xA9</Code>), which remap to <Code>Ã</Code> and <Code>©</Code>. The tokenizer doesn't know <Code>é</Code> is a letter; it just notices those two remapped bytes adjacent to each other nine times and merges them. Third, merge 10 — <Code>Ġcaf + Ã©</Code> — is the moment the tokenizer discovers that <Code>" café"</Code> is a single word worth a dedicated token. The merge list is, recursively, learning the structure of the corpus from the bottom up.
-      </Prose>
-
-      <H3>4d. encode_with_byte_bpe and decode_byte_bpe</H3>
-
-      <CodeBlock language="python">
-{`def encode_with_byte_bpe(text, merges):
-    """Pre-tokenize, byte-map, apply merges by rank to each piece."""
-    rank = {pair: i for i, (pair, _) in enumerate(merges)}
-    out = []
-    for piece in GPT2_SPLIT_RE.findall(text):
-        if not piece: continue
-        symbols = list(encode_text_to_byte_tokens(piece))
-        while True:
-            best_i, best_r = -1, float("inf")
-            for i in range(len(symbols) - 1):
-                r = rank.get((symbols[i], symbols[i + 1]), float("inf"))
-                if r < best_r:
-                    best_r, best_i = r, i
-            if best_i == -1: break
-            a, b = symbols[best_i], symbols[best_i + 1]
-            symbols = symbols[:best_i] + [a + b] + symbols[best_i + 2:]
-        out.extend(symbols)
-    return out
-
-def decode_byte_bpe(tokens):
-    """Join, reverse the byte map, UTF-8-decode."""
-    return decode_byte_tokens_to_text("".join(tokens))`}
-      </CodeBlock>
-
-      <Prose>
-        Encoding applies the merge list to a pre-tokenized piece by repeatedly finding the adjacent pair with the lowest rank (earliest merge) and collapsing it, until no adjacent pair is in the merge table. Decoding is the reverse of the whole pipeline: concatenate the tokens to get back the remapped-byte string, reverse the byte map to get actual UTF-8 bytes, then UTF-8-decode. If the merges never cross UTF-8 character boundaries in a way that breaks decoding — which they usually don't, because merges operate on whole bytes and UTF-8 is self-synchronizing — the round trip is lossless.
-      </Prose>
-
-      <H3>4e. Round-trip tests on mixed input</H3>
-
-      <CodeBlock language="python">
-{`TEST = "Héllo 🌍 こんにちは"
-
-toks = encode_with_byte_bpe(TEST, merges)
-print(f"{len(toks)} tokens: {toks}")
-print(f"decoded: {decode_byte_bpe(toks)!r}")
-assert decode_byte_bpe(toks) == TEST
-
-# Actual output (verified by running this code):
-# 11 tokens: ['H', 'Ã©', 'l', 'l', 'o', 'Ġ',
-#             'ð', 'Ł', 'Į', 'į', 'ĠãģĵãĤĵãģ«ãģ¡ãģ¯']
-# decoded: 'Héllo 🌍 こんにちは'`}
-      </CodeBlock>
-
-      <Prose>
-        Eleven tokens for "Héllo 🌍 こんにちは" under a tokenizer with only sixty merges. Look at what landed where. <Code>H</Code> is a single ASCII token (merge never happened because the corpus didn't have enough <Code>"H"</Code>-starting words). <Code>Ã©</Code> is the two-byte <Code>é</Code>, merged because the corpus had <Code>café</Code> repeated. <Code>l</Code>, <Code>l</Code>, <Code>o</Code> come out as individual letters because the corpus didn't have enough <Code>"Héllo"</Code> to learn the word (the training set had <Code>"the"</Code>, <Code>"café"</Code>, etc., but not enough of "Héllo"). <Code>Ġ</Code> is the remapped space. Then <Code>ð</Code>, <Code>Ł</Code>, <Code>Į</Code>, <Code>į</Code> are the four remapped bytes of the globe emoji — no merge, because the emoji only appeared once in training and didn't have the frequency to merge. Finally <Code>ĠãģĵãĤĵãģ«ãģ¡ãģ¯</Code> — the entire <Code>" こんにちは"</Code> collapsed into one token, because the corpus had it repeated twenty times and the merge loop was happy to build it up step by step. The tokenizer has "learned" a single-token representation for a specific Japanese word from a tiny mixed corpus, purely by frequency.
-      </Prose>
-
-      <Prose>
-        Now check a few specific cases.
-      </Prose>
-
-      <CodeBlock language="python">
-{`for ex in ["hello", "café", "🌍", "中", "def f(x): return x**2"]:
-    toks = encode_with_byte_bpe(ex, merges)
-    back = decode_byte_bpe(toks)
-    print(f"{ex!r:>28} -> {len(toks):2d} tokens {toks}  round-trip={'OK' if back==ex else 'FAIL'}")
-
-# Actual output (verified):
-#                    'hello' ->  5 tokens ['h', 'e', 'l', 'l', 'o']  round-trip=OK
-#                     'café' ->  4 tokens ['c', 'a', 'f', 'Ã©']  round-trip=OK
-#                        '🌍' ->  4 tokens ['ð', 'Ł', 'Į', 'į']  round-trip=OK
-#                        '中' ->  3 tokens ['ä', '¸', 'Ń']  round-trip=OK
-#    'def f(x): return x**2' -> 12 tokens ['d', 'e', 'f', 'Ġf', '(', 'x', '):',
-#                                          'Ġreturn', 'Ġx', '*', '*', '2']  round-trip=OK`}
-      </CodeBlock>
-
-      <Prose>
-        The Chinese character <Code>中</Code>, which did not appear in the training corpus, still round-trips cleanly. Its UTF-8 bytes (<Code>0xE4 0xB8 0xAD</Code>) remap to <Code>ä ¸ Ń</Code>, and since no merge in the table touches any of those bytes, they come out as three separate tokens. The model would see three integers. The decoder joins them, reverses the remap, and UTF-8-decodes back to <Code>中</Code>. No special case. That is the coverage property, demonstrated on an input the tokenizer has never seen.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        In practice nobody trains a production byte-level tokenizer from the Python above. OpenAI's <Code>tiktoken</Code> ships pre-trained encodings by name and is the reference implementation of their byte-level BPE. HuggingFace's <Code>tokenizers</Code> library implements the same algorithm in Rust with configurable pre-tokenizers. SentencePiece's BPE-with-byte-fallback is what Llama and Gemma use — slightly different mechanics but the same coverage guarantee. The API for loading a pre-trained tokenizer and running it looks like this.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import tiktoken
-
-enc = tiktoken.get_encoding("cl100k_base")   # GPT-4, GPT-3.5-turbo
-ids = enc.encode("Héllo 🌍 こんにちは")
-pieces = [enc.decode([i]) for i in ids]
-
-# Actual output (verified with tiktoken 0.12.0):
-# ids:    [39, 19010, 385, 11410, 234, 235, 220, 90115]
-# pieces: ['H', 'él', 'lo', ' �', '�', '�', ' ', 'こんにちは']
-# 8 tokens total`}
-      </CodeBlock>
-
-      <Prose>
-        The <Code>�</Code> characters in the <Code>pieces</Code> list are not errors. Each one is a byte-level token that does not, on its own, constitute a valid UTF-8 sequence — the globe emoji takes four bytes and <Code>cl100k_base</Code> represents it as three tokens, each of which is a partial byte sequence. When you call <Code>enc.decode</Code> on the full list of IDs the bytes concatenate and the globe emoji rematerializes. When you call <Code>enc.decode</Code> on a single ID that happens to be a partial multi-byte character, you get the replacement character. This is a consequence of how byte-level BPE handles multi-byte characters: it doesn't guarantee that merges respect UTF-8 boundaries, and for characters rare in the training set it often doesn't.
-      </Prose>
-
-      <Prose>
-        Side-by-side on the same input, across four tokenizers, the differences in vocabulary maturity show up clearly.
-      </Prose>
-
-      <CodeBlock language="python">
-{`for name in ["cl100k_base", "o200k_base", "gpt2", "p50k_base"]:
-    enc = tiktoken.get_encoding(name)
-    n = len(enc.encode("Héllo 🌍 こんにちは"))
-    print(f"{name:>14}: {n} tokens")
-
-# Actual output (verified):
-#    cl100k_base:  8 tokens   ← GPT-4 / GPT-3.5-turbo
-#     o200k_base:  7 tokens   ← GPT-4o, larger vocab
-#           gpt2: 13 tokens   ← original GPT-2
-#      p50k_base: 13 tokens   ← GPT-3 (Codex generation)`}
-      </CodeBlock>
-
-      <Prose>
-        The trajectory is monotonic. GPT-2 and p50k_base (same era, ~50k vocab) both emit thirteen tokens for this mixed-script input. <Code>cl100k_base</Code> (100k vocab, trained on a larger and more multilingual corpus) gets it down to eight, mostly because it has a single token for <Code>こんにちは</Code>. <Code>o200k_base</Code> (200k vocab) gets it to seven by merging <Code>llo</Code> into one token. The improvements come from vocabulary headroom plus better training corpora, not from algorithm changes — the algorithm is the same byte-level BPE from 2019. More vocabulary budget and more multilingual training data buy better compression on non-English text without changing a line of code.
-      </Prose>
-
-      <Prose>
-        The cross-script cost picture is sharper in a table. Here is the ratio of UTF-8 bytes to <Code>cl100k_base</Code> tokens, measured on identical-meaning sentences in seven scripts.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Actual measurements from tiktoken 0.12.0, verified on these sentences:
-# english   "The quick brown fox jumps over the lazy dog."
-# french    "Le renard brun rapide saute par-dessus le chien paresseux."
-# greek     "Η γρήγορη καφέ αλεπού πηδάει πάνω από το τεμπέλικο σκυλί."
-# hindi     "तेज़ भूरी लोमड़ी आलसी कुत्ते पर कूदती है।"
-# chinese   "敏捷的棕色狐狸跳过了懒狗。"
-# japanese  "素早い茶色のキツネは怠け者の犬を飛び越えます。"
-# emoji     "🌍🌎🌏🦊🐶🐱🐭🐹🐰🦁"
-#
-#   lang     bytes  cl100k  o200k  bytes/cl   bytes/o2
-#   english    44      10     10     4.40       4.40
-#   french     58      18     14     3.22       4.14
-#   greek     104      50     26     2.08       4.00
-#   hindi     109      45     19     2.42       5.74
-#   chinese    39      25     14     1.56       2.79
-#   japanese   69      32     23     2.16       3.00
-#   emoji      40      30     22     1.33       1.82`}
-      </CodeBlock>
-
-      <Prose>
-        Two observations. First, even byte-level BPE fragments heavily on low-frequency scripts. <Code>cl100k_base</Code> uses fifty tokens for a Greek sentence that takes 104 bytes — a compression ratio of 2.08, barely better than character-level. Second, the gap between <Code>cl100k_base</Code> and <Code>o200k_base</Code> is small for English (four merges saved over ten) but enormous for Greek (halving the token count) and Hindi (2.4x reduction). Most of what makes <Code>o200k_base</Code> "better" is multilingual vocabulary growth. A byte-level tokenizer can be bad at a language without failing on it — the coverage guarantee holds even when the fertility is terrible.
-      </Prose>
-
-      <H3>5a. Llama 3 and SentencePiece byte-fallback</H3>
-
-      <Prose>
-        Llama 3's tokenizer is not byte-level BPE in exactly the GPT-2 sense. It uses SentencePiece with a BPE model and a feature called <em>byte fallback</em>. The base vocabulary contains human-chosen characters (all Unicode codepoints that appeared with sufficient frequency in the training corpus) rather than raw bytes, and there are 256 reserved tokens for "byte 0x00" through "byte 0xFF" that fire as a fallback only when the input contains a character not in the base vocabulary. The effect is similar — no <Code>[UNK]</Code>, every input encodes — but the mechanics differ. On pure ASCII or common Latin text the two approaches are nearly equivalent. On rare CJK characters, Llama 3's byte-fallback mode lets a single Unicode character be encoded as three bytes (three tokens), which is exactly what GPT-2's byte-level BPE does implicitly. The distinction matters for tokenizer-editing tools but not for model quality.
-      </Prose>
-
-      {/* ======================================================================
-          6. TOKEN-FREE MODELS
-          ====================================================================== */}
-      <H2>6. Token-free models</H2>
-
-      <Prose>
-        Byte-level BPE is still BPE — the merge list is still load-bearing, the segmentation is still frozen at training time, and the model inherits whatever biases the tokenizer training corpus had. A distinct line of research asks what happens if the tokenizer is removed entirely and the segmentation decision is pushed into the model's weights. Four papers define the design space.
-      </Prose>
-
-      <H3>6a. CANINE — characters in, learned downsampling</H3>
-
-      <Prose>
-        CANINE (Clark et al., 2021, arXiv:2103.06874) accepts Unicode codepoints directly rather than subword tokens. The input layer hashes each codepoint into a small embedding using multiple hash functions, which gives it a constant-size vocabulary — no embedding table to tune, no vocab file to ship. The sequence of character embeddings is then fed through a strided convolution that downsamples the sequence by a factor of four, producing a shorter sequence of "soft" subword-like representations that the rest of the transformer stack consumes normally. An upsampling head at the output restores the character-level resolution for token-classification tasks.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn as nn
-
-class CANINEInput(nn.Module):
-    """Hash-embed codepoints, then strided-conv downsample by 4x."""
-    def __init__(self, d=768, n_hashes=8, buckets=16384, stride=4):
-        super().__init__()
-        self.hashes = nn.ModuleList([nn.Embedding(buckets, d // n_hashes)
-                                     for _ in range(n_hashes)])
-        self.buckets, self.n_hashes = buckets, n_hashes
-        # Strided conv collapses every 4 character embeddings into 1.
-        self.downsample = nn.Conv1d(d, d, kernel_size=stride, stride=stride)
-
-    def forward(self, codepoints):
-        # codepoints: (batch, seq_char) of int codepoint values
-        parts = []
-        for i, emb in enumerate(self.hashes):
-            # Multi-hash the codepoint with a distinct salt per head.
-            h = (codepoints * (i + 1) * 2654435761) % self.buckets
-            parts.append(emb(h))
-        x = torch.cat(parts, dim=-1)              # (batch, seq_char, d)
-        x = x.transpose(1, 2)                     # (batch, d, seq_char)
-        x = self.downsample(x)                    # (batch, d, seq_char/4)
-        return x.transpose(1, 2)                  # (batch, seq_down, d)`}
-      </CodeBlock>
-
-      <Prose>
-        CANINE's paper reports matching or beating mBERT on TyDi QA with 28% fewer parameters. Its claim to fame is multilingual robustness: no tokenizer means no "English-biased vocab" tax on low-resource scripts. The architectural cost is the fixed downsampling factor — four is hardcoded because that's roughly the compression ratio a subword tokenizer would have given you, but it is a design choice rather than a learned parameter, and models that need finer-grained input (say, noisy OCR) pay for it.
-      </Prose>
-
-      <H3>6b. ByT5 — bytes in, standard transformer</H3>
-
-      <Prose>
-        ByT5 (Xue et al., 2021, arXiv:2105.13626) is the simplest possible token-free design. Take T5, replace its SentencePiece tokenizer with raw UTF-8 bytes, add a handful of special tokens, and train. The vocabulary is literally the 256 byte values plus a small set of sentinels — 384 embeddings, total. Sequence length per document is roughly four to five times what it would be under mT5's subword tokenizer. ByT5 compensates by redistributing parameters: its encoder is three times as deep as the decoder (rather than balanced), because the encoder pays the quadratic attention cost over long byte sequences and it's the component whose capacity matters most for downstream performance.
-      </Prose>
-
-      <Prose>
-        The ByT5 paper's most cited claim is noise robustness. If you take a subword-tokenized model and corrupt inputs — drop characters, swap adjacent letters, insert typos — a single character-level change can cascade into a completely different token sequence downstream of the corruption, because BPE segmentation is non-local. ByT5, which sees bytes all the way through, degrades gracefully: a corrupted byte affects one attention position and its immediate context, nothing more. On the XTREME multilingual benchmark, ByT5 outperforms mT5 at matched parameter counts for small models and remains competitive at larger scales. Its cost is the one everyone knew going in: wall-clock training time per token of downstream quality is significantly higher than for a subword-tokenized baseline.
-      </Prose>
-
-      <H3>6c. Charformer — learned segmentation via GBST</H3>
-
-      <Prose>
-        Charformer (Tay et al., 2021, arXiv:2106.12672) takes a third angle: keep character-level input, but make the <em>segmentation</em> itself a differentiable operation. The core mechanism is the Gradient-Based Subword Tokenization (GBST) block. Given a character sequence of length <Code>L</Code>, GBST enumerates candidate blockings at several stride lengths — 1, 2, 3, 4 — producing four parallel "downsampled" sequences where each element is a mean-pooled character span. A small learned scoring network assigns a soft weight to each blocking at each position, and the output is a position-wise weighted sum of the candidates. The whole thing is differentiable end-to-end, so the model learns, from loss gradients, which blocking is best for each position.
-      </Prose>
-
-      <Prose>
-        In practice Charformer runs 28-100% faster than a byte-level baseline at matched quality, because the downsampling reduces the sequence length the main transformer sees. The tradeoff is architectural complexity — GBST is a non-trivial module, not a preprocessor — and reduced interpretability: you cannot look at a "token list" and reason about what the model saw, because the model saw a soft superposition of blockings.
-      </Prose>
-
-      <H3>6d. MambaByte — bytes without quadratic attention</H3>
-
-      <Prose>
-        MambaByte (Wang et al., 2024, arXiv:2401.13660) is the newest entry and possibly the most important, because it changes the core tradeoff. The cost argument against byte-level processing has always assumed a transformer. Mamba — a selective state-space model — scales linearly in sequence length with a fixed-size recurrent state, so tripling the sequence length triples the compute rather than squaring it. MambaByte trains a Mamba model directly on raw UTF-8 bytes and, at matched FLOPs, performs competitively with subword-tokenized transformers on language modeling benchmarks. The paper also introduces a speculative-decoding variant with a tokenized draft model and byte-level verification, yielding 2.6x inference speedup.
-      </Prose>
-
-      <Prose>
-        The significance is less about MambaByte specifically and more about the fact that the "obvious" verdict — byte-level is too expensive, use subword — depends on attention being quadratic. As linear-time architectures mature, the calculation rebalances. Byte-level is not automatically the right answer even with Mamba, but it stops being automatically the wrong one.
-      </Prose>
-
-      {/* ======================================================================
-          7. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>7. Visual walkthrough</H2>
-
-      <Prose>
-        The byte grid at the top of section 2 already made the per-character cost visible. Here is the same input tokenized by four real production encoders, with each encoder's output shown as its token stream. Token counts are from <Code>tiktoken 0.12.0</Code>, run on the same Python expression.
-      </Prose>
-
-      <TokenStream
-        label="gpt-2 tokenizer (50k vocab) — 13 tokens"
-        tokens={["H", "é", "llo", " �", "�", "�", " �", "�", "ん", "に", "�", "�", "は"]}
-      />
-
-      <TokenStream
-        label="cl100k_base (100k vocab, gpt-4) — 8 tokens"
-        tokens={["H", "él", "lo", " �", "�", "�", " ", "こんにちは"]}
-      />
-
-      <TokenStream
-        label="o200k_base (200k vocab, gpt-4o) — 7 tokens"
-        tokens={["H", "é", "llo", " �", "�", " ", "こんにちは"]}
-      />
-
-      <TokenStream
-        label="raw utf-8 bytes (byt5 input) — 27 tokens"
-        tokens={["0x48", "0xc3", "0xa9", "0x6c", "0x6c", "0x6f", "0x20", "0xf0", "0x9f", "0x8c", "0x8d", "0x20", "0xe3", "0x81", "0x93", "0xe3", "0x82", "0x93", "0xe3", "0x81", "0xab", "0xe3", "0x81", "0xa1", "0xe3", "0x81", "0xaf"]}
-      />
-
-      <Prose>
-        The progression is the whole argument in one image. GPT-2 fragments the globe emoji into three pieces and the hiragana into six. <Code>cl100k_base</Code> has learned <Code>こんにちは</Code> as a single token but still splits the emoji. <Code>o200k_base</Code> squeezes out one more merge. ByT5, which has no merges at all, sees twenty-seven bytes — and the model has to learn from the loss signal that those twenty-seven bytes correspond to eight perceived characters.
-      </Prose>
-
-      <Plot
-        label="bytes-per-token ratio across scripts (cl100k_base vs o200k_base)"
-        series={[
-          {
-            name: "cl100k_base",
-            points: [[1, 4.40], [2, 3.22], [3, 2.08], [4, 2.42], [5, 1.56], [6, 2.16], [7, 1.33]],
-          },
-          {
-            name: "o200k_base",
-            points: [[1, 4.40], [2, 4.14], [3, 4.00], [4, 5.74], [5, 2.79], [6, 3.00], [7, 1.82]],
-          },
-        ]}
-        xLabel="script (1=en 2=fr 3=el 4=hi 5=zh 6=ja 7=emoji)"
-        yLabel="bytes per token"
-        width={520}
-        height={240}
-      />
-
-      <Prose>
-        Higher is better — it means more bytes of input per token of model cost. English, French, and emoji are roughly where you'd expect. The lines diverge sharply on Greek, Hindi, Chinese, and Japanese: <Code>o200k_base</Code>'s larger vocabulary absorbs multi-byte characters into single tokens much more often. This is the "multilingual tax" in plot form, and it is the main thing improving from <Code>cl100k_base</Code> to <Code>o200k_base</Code>.
-      </Prose>
-
-      {/* ======================================================================
-          8. DECISION MATRIX
-          ====================================================================== */}
-      <H2>8. Decision matrix — when to use what</H2>
-
-      <Prose>
-        The decision is not between "byte-level" and "subword." It is between three concrete options: byte-level BPE (the de facto default), SentencePiece with byte fallback (the multilingual-leaning variant), and token-free (ByT5 or MambaByte for specific applications). The choice is made by answering four questions in order.
-      </Prose>
-
-      <Prose>
-        <strong>Is your input primarily English or a few closely related scripts?</strong> If yes, byte-level BPE with a 100k-200k vocabulary is the answer. It gives you byte-level coverage for the long tail of emoji and rare content while compressing your main-line traffic to subword-efficient sequence lengths. Every frontier LLM in production in 2025-2026 fits this profile.
-      </Prose>
-
-      <Prose>
-        <strong>Is your input aggressively multilingual?</strong> If the training corpus spans dozens of scripts and no single vocabulary treats them all fairly, two paths work: a byte-level BPE with a large vocabulary (250k+) trained on a multilingual-balanced corpus, or SentencePiece-with-byte-fallback trained the same way. The second is what Llama 3 and Gemma ship. For research work where fairness across scripts matters more than compression, ByT5 becomes competitive.
-      </Prose>
-
-      <Prose>
-        <strong>Is your domain out-of-distribution for any subword tokenizer?</strong> Source code (heavy in tokenizer-weird characters — Unicode identifiers, unusual whitespace, long literals), DNA and protein sequences, chemistry SMILES strings, URLs, structured logs, binary-adjacent data — anywhere the "words" a text tokenizer would have chosen are wrong units to begin with. Pure byte-level, or a domain-specific byte-level BPE trained on the target domain, outperforms shoehorning through a text-trained subword vocabulary.
-      </Prose>
-
-      <Prose>
-        <strong>Is byte-level robustness a hard requirement?</strong> Safety-critical applications where a silent tokenizer failure mode is unacceptable, audit pipelines that must exactly round-trip input bytes, or systems exposed to adversarial input benefit from the byte-level floor even when the English-only cost calculation argues against it. For these, SentencePiece with byte fallback is usually the right choice — guaranteed coverage, subword efficiency on common text, no special cases.
-      </Prose>
-
-      <Callout accent="gold">
-        In 2026 the default for new frontier LLMs is byte-level BPE (or byte-fallback SentencePiece) with a 100k-300k vocabulary, trained on a multilingual-balanced corpus. Pure token-free (ByT5-style) is niche outside research and specific robust-to-noise applications. MambaByte is the first compelling case that this might change.
-      </Callout>
-
-      {/* ======================================================================
-          9. SCALING ANALYSIS
-          ====================================================================== */}
-      <H2>9. What scales and what doesn't</H2>
-
-      <Prose>
-        Byte-level tokenization has a clean scaling story along some axes and a brutal one along others. Pull them apart.
-      </Prose>
-
-      <H3>9a. Sequence length</H3>
-
-      <Prose>
-        This is the dominant cost axis and the one that gets talked about most. Moving from subword to byte-level multiplies sequence length by 3-5x on English, 5-8x on CJK. Under a quadratic-attention transformer the compute increase is roughly the square of that. At a fixed context-window budget (say 8k model tokens), byte-level halves or thirds the effective characters of input you can fit. For training this shows up as a 3-5x increase in wall-clock time per epoch. For inference it shows up as increased latency per output character and reduced throughput per GPU.
-      </Prose>
-
-      <H3>9b. Vocabulary size</H3>
-
-      <Prose>
-        Byte-level tokenizers tend to have smaller vocabularies — the GPT-2 tokenizer was 50k, <Code>cl100k_base</Code> is 100k, <Code>o200k_base</Code> is 200k. Subword tokenizers for multilingual models sometimes go larger (Llama 3 is 128k, some multilingual specialists reach 256k+). A smaller vocabulary shrinks the embedding table and output softmax, which saves parameters and reduces the output projection's compute. For an embedding dim of 4096, dropping from a 256k vocab to 100k saves ~640M parameters. This is not nothing, but it's small relative to the transformer body, and the savings are dwarfed by the sequence-length cost.
-      </Prose>
-
-      <H3>9c. Training compute</H3>
-
-      <Prose>
-        Per-token training compute is roughly independent of whether those tokens are bytes or subwords — a forward pass over a sequence of length L with vocabulary V costs about the same whether V is 256 or 100k, because the dominant cost is the transformer body, not the embedding or output projection. But byte-level training sees 3-5x more tokens per document, so total compute per document scales linearly with that factor, and under quadratic attention actually scales worse. Empirically, ByT5 needs around 4x the training FLOPs of mT5 to reach comparable quality on downstream tasks. This is the reason byte-level pure-transformer models have not replaced subword-BPE transformers in production.
-      </Prose>
-
-      <H3>9d. Quality per FLOP</H3>
-
-      <Prose>
-        At small-to-medium scale, subword-BPE transformers have a quality-per-FLOP edge over byte-level counterparts for most downstream tasks. The edge narrows as you scale up the model — the fixed per-token cost of the tokenizer shrinks in relative terms, and the robustness benefits of byte-level become more valuable as the data gets noisier. The ByT5 scaling curves cross over the mT5 curves at roughly 3B parameters for noisy-data tasks. At even larger scales, the sequence-length cost keeps byte-level transformers behind subword transformers for clean English text. MambaByte's claim is that switching away from attention changes this curve — at matched FLOPs, byte-level Mamba matches or beats subword transformers, because the FLOPs go further when compute scales linearly rather than quadratically with length.
-      </Prose>
-
-      {/* ======================================================================
-          10. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>10. Failure modes & gotchas</H2>
-
-      <Prose>
-        Byte-level tokenization inherits the coverage guarantee cleanly, but the engineering around it has ten years of accumulated sharp edges. Here are the ones that show up in practice.
-      </Prose>
-
-      <Prose>
-        <strong>1. The bytes_to_unicode direction confusion.</strong> The most common bug: someone reads the GPT-2 tokenizer code, implements <Code>bytes_to_unicode</Code>, and then uses it in the wrong direction. The function maps <em>byte values</em> to <em>unicode chars</em>, not the other way around. When encoding you apply it forward: UTF-8-encode to bytes, then map each byte through. When decoding you apply its inverse: map each unicode char back to a byte, then UTF-8-decode. Getting the direction wrong produces garbage that still sort of looks right for ASCII (because ASCII bytes map to themselves) but corrupts anything non-ASCII. Debug this by running a round-trip test on a string containing both ASCII and non-ASCII characters before doing anything else.
-      </Prose>
-
-      <Prose>
-        <strong>2. UTF-8 normalization mismatches.</strong> Unicode has multiple valid representations for "the same" string. The character <Code>é</Code> can be a single codepoint (U+00E9, two bytes in UTF-8) or a decomposition into <Code>e</Code> plus combining acute (U+0065 U+0301, three bytes). NFC (Normalization Form C) composes where possible, NFD decomposes. If your training pipeline normalizes to NFC and your inference pipeline normalizes to NFD (or doesn't normalize at all), the byte sequences the tokenizer sees differ, and the same logical string tokenizes differently at training and inference. UAX #15 defines the normalization forms; pick one, apply it consistently everywhere, document which one.
-      </Prose>
-
-      <Prose>
-        <strong>3. Merges crossing UTF-8 character boundaries.</strong> Byte-level BPE merges are greedy on byte adjacency, not on character structure. Nothing in the algorithm prevents a merge from joining the last byte of one UTF-8 character to the first byte of the next. Most of the time this is fine — the model learns to use the chimeric token, and the decoder rebuilds the byte sequence correctly. Occasionally it fails to round-trip, because the merged byte sequence is not a valid UTF-8 character prefix. Production tokenizers add replacement-character handling at decode time. If you are implementing this from scratch, UTF-8-decode with <Code>errors="replace"</Code>, not <Code>errors="strict"</Code>.
-      </Prose>
-
-      <Prose>
-        <strong>4. CJK fragmentation under low-vocab byte-BPE.</strong> Every CJK character takes three UTF-8 bytes. If your tokenizer vocabulary is small and your training corpus was mostly English, CJK characters that didn't appear often enough to earn their own multi-byte merge will fragment into three single-byte tokens each. The measurements earlier in this topic show <Code>cl100k_base</Code> using 25 tokens for a 13-character Chinese sentence — nearly two tokens per character. The fix is vocabulary headroom plus multilingual training data, not an algorithm change.
-      </Prose>
-
-      <Prose>
-        <strong>5. Emoji ZWJ sequences.</strong> Modern emoji are often not a single codepoint. The family emoji <Code>👨‍👩‍👧‍👦</Code> is seven codepoints joined by Zero Width Joiner (U+200D). The professions (👩‍🔬, 🧑‍🚀, etc.) are similar. UTF-8-encoded, these are 25+ bytes. Byte-level BPE will learn the common ones as merged tokens if they appear enough in training, but the long tail of ZWJ sequences routinely fragments into 10-20 tokens each. For apps that care about emoji (social media, messaging), measure this explicitly on your expected emoji distribution.
-      </Prose>
-
-      <Prose>
-        <strong>6. Special tokens leaking through byte-level encoding.</strong> Chat models use special tokens like <Code>&lt;|im_start|&gt;</Code>, <Code>&lt;|endoftext|&gt;</Code>, <Code>&lt;|begin_of_text|&gt;</Code>. Byte-level tokenizers handle these by matching them before byte encoding — if the pre-tokenizer doesn't split on special-token boundaries, a user input that happens to contain those literal byte sequences can be tokenized as the special token by accident. The <Code>tiktoken</Code> encode API has explicit <Code>allowed_special</Code> and <Code>disallowed_special</Code> parameters for exactly this reason. Never encode untrusted user input without setting <Code>disallowed_special=()</Code> or similar.
-      </Prose>
-
-      <Prose>
-        <strong>7. Pre-tokenizer regex mismatch between training and inference.</strong> The GPT-2 regex is specific: it splits on contractions, then greedy letter/digit/punctuation runs. If you train a tokenizer with one regex and encode with a subtly different one, the byte-mapped sequences entering the BPE merge loop differ at word boundaries, and your encodings won't match what training produced. When shipping a custom byte-level tokenizer, serialize the exact regex alongside the merges.
-      </Prose>
-
-      <Prose>
-        <strong>8. Digit tokenization surprises.</strong> Byte-level BPE treats digits like any other bytes — the number <Code>1234</Code> can tokenize as one token, two, three, or four depending on which digit sequences were frequent in training. Llama 3 and GPT-4o deliberately split digits into single-digit tokens to make arithmetic more learnable. If your tokenizer does not, you can end up with inputs where <Code>1234</Code> is one opaque token and <Code>1235</Code> is three tokens, which scrambles the place-value structure the model needs for arithmetic.
-      </Prose>
-
-      <Prose>
-        <strong>9. Trailing-whitespace round-trip edge cases.</strong> The Ġ prefix convention handles leading whitespace elegantly. Trailing whitespace (a message that ends with a space or newline) is handled inconsistently across implementations. Some strip it, some preserve it, some collapse multiple trailing whitespace into one token. For applications where trailing whitespace is semantically meaningful — code generation, structured output — test explicitly that <Code>decode(encode(x)) == x</Code> on strings ending with whitespace.
-      </Prose>
-
-      <Prose>
-        <strong>10. Multi-byte character splits in streaming decode.</strong> When a model generates tokens one at a time, each token is decoded independently and the result is concatenated to the output. If a single token does not correspond to complete UTF-8 characters — which is common for byte-level BPE on non-ASCII content — decoding that token in isolation produces a replacement character. The fix is to buffer bytes across tokens until a complete UTF-8 sequence is available. Every major inference library handles this; if you are writing your own decode loop, don't forget to buffer.
-      </Prose>
-
-      {/* ======================================================================
-          11. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>11. Primary sources</H2>
-
-      <Prose>
-        Every claim about a specific paper or spec in this topic traces to one of the following. All six were verified via web search; arXiv IDs and venues are current as of April 2026.
-      </Prose>
-
-      <Prose>
-        <strong>Radford, Wu, Child, Luan, Amodei, Sutskever (2019).</strong> "Language Models are Unsupervised Multitask Learners." OpenAI technical report, February 2019. Section 2.2 introduces byte-level BPE and the bytes-to-unicode remapping. PDF at <Code>cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf</Code>.
-      </Prose>
-
-      <Prose>
-        <strong>Clark, Garrette, Turc, Wieting (2021).</strong> "CANINE: Pre-training an Efficient Tokenization-Free Encoder for Language Representation." arXiv:2103.06874, published in TACL 2022. Character-level input with learned downsampling convolutions.
-      </Prose>
-
-      <Prose>
-        <strong>Xue, Barua, Constant, Al-Rfou, Narang, Kale, Roberts, Raffel (2021).</strong> "ByT5: Towards a Token-Free Future with Pre-trained Byte-to-Byte Models." arXiv:2105.13626, published in TACL 2022. T5 trained directly on UTF-8 bytes; the reference byte-level transformer.
-      </Prose>
-
-      <Prose>
-        <strong>Tay, Tran, Ruder, Gupta, Chung, Bahri, Qin, Baumgartner, Yu, Metzler (2021).</strong> "Charformer: Fast Character Transformers via Gradient-based Subword Tokenization." arXiv:2106.12672. Introduces the GBST (Gradient-Based Subword Tokenization) block for learned, differentiable segmentation.
-      </Prose>
-
-      <Prose>
-        <strong>Wang, Gangavarapu, Yan, Rush (2024).</strong> "MambaByte: Token-free Selective State Space Model." arXiv:2401.13660, CoLM 2024. Byte-level Mamba with speculative-decoding inference optimization.
-      </Prose>
-
-      <Prose>
-        <strong>Unicode Consortium.</strong> "Unicode Standard Annex #15: Unicode Normalization Forms." Available at <Code>unicode.org/reports/tr15/</Code>. Defines NFC, NFD, NFKC, NFKD and their precise semantics. The normative reference for any text-processing pipeline that cares about round-tripping across Unicode representations.
-      </Prose>
-
-      {/* ======================================================================
-          12. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>12. Self-check exercises</H2>
-
-      <Prose>
-        <strong>1. The bytes_to_unicode necessity.</strong> GPT-2's byte-level BPE maps each of the 256 byte values to a printable Unicode character before running merges. Construct a concrete input string for which writing the naïve byte-level BPE vocab file — one that stores raw bytes directly as strings in JSON — would break. Hint: what happens to byte 0x22 (double quote), byte 0x0A (newline), or byte 0x00 (null) when you put them in a JSON string literal?
-      </Prose>
-
-      <Prose>
-        <strong>2. Round-trip detector.</strong> Write a function <Code>is_roundtrip_safe(tokens, tokenizer)</Code> that takes a list of token IDs and a tokenizer and returns True if <Code>tokenizer.decode(tokens) == ''.join(tokenizer.decode([t]) for t in tokens)</Code> (i.e., decoding the whole sequence gives the same result as decoding each token individually and concatenating). On a byte-level BPE tokenizer, find a token sequence that round-trips when decoded together but produces replacement characters when decoded individually. What structural property of the tokens makes this happen?
-      </Prose>
-
-      <Prose>
-        <strong>3. Fertility estimation.</strong> Using only the fact that Greek characters take 2 bytes each in UTF-8 and English characters take 1 byte each, estimate the ratio of tokens-per-character for Greek text under a pure byte-level tokenizer (ByT5). Now suppose <Code>o200k_base</Code>'s fertility on Greek is 0.5 tokens per byte (as measured in section 5). What is its fertility in tokens per Greek character? If a model has an 8k-token context window, approximately how many characters of Greek text fit?
-      </Prose>
-
-      <Prose>
-        <strong>4. Merge-boundary pathology.</strong> Construct a two-character input where naïve byte-level BPE could, in principle, produce a merged token whose bytes straddle the boundary between the two characters in UTF-8. Does this happen in practice with <Code>cl100k_base</Code>? Why or why not? (Hint: think about what pre-tokenization does.)
-      </Prose>
-
-      <Prose>
-        <strong>5. When does MambaByte win?</strong> Consider three workloads: (a) English chatbot with 2k-token average conversation length; (b) multilingual document summarization with 50k-character documents; (c) code-completion with 8k-token contexts over a mixed-language codebase. For each, reason about whether byte-level BPE on a transformer, ByT5 on a transformer, or MambaByte on a state-space model is the most likely production choice. Which of your three answers is most sensitive to how much you believe the linear-scaling claims of Mamba at long context?
-      </Prose>
-
-      {/* ======================================================================
-          END
-          ====================================================================== */}
-      <Prose>
-        Byte-level tokenization solved universality cleanly and in 2019. The subword vocabulary question was never about whether we had the right primitive — we do, it's bytes — but about whether we had the right compression on top of them. The next topic, on dynamic tokenization, is about the layer above: once the floor is byte-level and the hybrid is mature, what does it take to let the tokenizer adapt to the actual distribution of inputs in production rather than a frozen snapshot from training?
-      </Prose></section>
+    <div className="neural-lesson neural-lesson-neutral byte-lesson lesson-flow">
+      <LessonIntro prerequisites="Start with text strings, lists and ordinary whole numbers. We explain bits, bytes and Unicode before using them. The previous subword lesson helps with BPE; section 4 recalls its needed rule. Running the deeper neural program uses PyTorch tensors, while its input/target reasoning is explained here." exampleKind="Python + live byte investigations">
+        First pass: follow café 🌍 through sections 1–5, change the text explorer and repair the streamed emoji. Section 6 turns that picture into code. On a second pass, sections 7–10 show how a model learns from bytes and why researchers group them inside a network. Read the pictures and worked steps before the complete programs. The shared section index lets you return to any deeper branch.
+      </LessonIntro>
+      <Prose>A chat response is arriving in small pieces. Your interface prints “café �” even though the final response should contain a globe. The model may have emitted all the right bytes. Your decoder may simply have tried to turn half an emoji into text. To fix this, we need to separate what a reader sees, what a file stores and what a model treats as one prediction step.</Prose>
+      <Prose>A tokenizer cuts text into the pieces a model receives, called <em>tokens</em>. A list of known pieces is its vocabulary. If that list was built from familiar letters, what happens when a new emoji arrives? One solution is to build every piece from a smaller set of ingredients that can already write every valid text string: bytes. A byte-based tokenizer can keep a new symbol intact through several small pieces even before it has learned a convenient whole-symbol piece.</Prose>
+      <Prose>There are then two useful choices. We can join common byte sequences into tokens before the model reads them, or let a model read the bytes and build useful groups inside its own computation. The first is byte-level BPE; the second leads to token-free models. We will make the ingredients concrete before comparing those choices.</Prose>
+      <H2>1. One visible character can contain several different units</H2>
+      <Prose>Start with the word <code>café</code>. You see letters. A computer needs agreed numbers for those letters, then a way to store the numbers. <strong>Unicode</strong> supplies character numbers, called <em>code points</em>: c has number 99, while é has number 233. <strong>UTF-8</strong> supplies a rule for turning those numbers into stored bytes. These are two separate jobs: identifying a character and writing its storage representation.</Prose>
+      <Prose>A <strong>bit</strong> is a binary digit, either 0 or 1. A <strong>byte</strong> contains eight bits, so it has 2⁸ = 256 possible patterns, numbered 0 through 255. There may be many thousands of different characters, but their UTF-8 spellings use only these 256 byte values. One character can use several bytes, just as a word can use several letters.</Prose>
+      <Prose>To keep byte displays short, we write them in <strong>hexadecimal</strong>, or hex: base 16, using 0–9 followed by A–F for ten through fifteen. Two hex digits fit one byte. Thus C3 means 12×16+3 = 195; A9 means 10×16+9 = 169. These labels are numbers, not the letters that will appear in the decoded text. A prefix <code>U+</code> marks a Unicode code-point number instead.</Prose>
+      <TextStorageFigure />
+      <Prose>Now add the space and globe: <code>café 🌍</code>. The four letters use five bytes, the space uses one, and 🌍 uses four: ten bytes altogether. UTF-8 needs no newly trained dictionary entry for that globe. Its four-byte spelling is already made from the same finite byte alphabet.</Prose>
+      <H3>Why “one character” is still ambiguous</H3>
+      <Prose>We can also write the accent separately: <code>{"cafe\u0301 🌍"}</code>. The screen looks similar, but e and its combining accent now have separate Unicode numbers. A <strong>grapheme cluster</strong> groups them into the unit a reader usually treats as one character. The explorer draws an outer box around that group. The scientist emoji 👩‍🔬 similarly combines woman, a joining instruction and microscope into one displayed symbol.</Prose>
+      <Prose>One precise term remains: a <strong>Unicode scalar value</strong> is a code-point number outside a reserved range used by UTF-16. Our examples all use valid scalars. UTF-16 is another storage encoding; JavaScript strings use its code units, which is why its length counter can disagree with the visible character count. The main distinction to follow now is <em>one visible group → one or more scalars → one or more bytes per scalar</em>.</Prose>
+      <Prose>Open the same text into those nested units. An outer outline is a grapheme cluster; inside it, a U+ label identifies each scalar and the hex cells are its bytes. <strong>Normalization</strong> rewrites equivalent spellings into an agreed form: NFC combines e and its accent where possible, NFD separates them, and NFKC also rewrites compatible forms such as the ligature ﬁ to fi. Choose None to inspect the original spelling; section 3 examines what a rewrite preserves.</Prose>
+      <UnicodeByteLab />
+      <Prose>Enter <code>{"cafe\u0301 🌍"}</code>: the accented letter's outer group contains two scalars. Then enter 👩‍🔬: one visible group contains three scalars and eleven bytes. Each glyph group carries its hue into its scalar and byte cells, so you can follow which bytes belong together. Literal labels and boundaries identify the units.</Prose>
+      <Prose>The nested rows keep these distinctions visible: a grapheme contains scalar values, and each scalar has its UTF-8 byte sequence. The count is computed from the actual edited text. JavaScript's <code>string.length</code> counts UTF-16 code units; it counts 🌍 as two. Iterating with <code>Array.from</code> counts scalar-sized items for well-formed text; <code>Intl.Segmenter</code> supplies the runtime's extended grapheme segmentation. Python's <code>len(str)</code> counts code points, not grapheme clusters. Name the unit whenever reporting “characters.”</Prose>
+      <H2>2. UTF-8 packs an integer into recognizable byte shapes</H2>
+      <Prose>How does a decoder know whether the next byte is a whole letter or only part of one? UTF-8 puts a recognizable pattern at the start of each byte. <strong>ASCII</strong> is an older 128-value character set containing English letters, digits, punctuation and controls. UTF-8 keeps those values as single bytes beginning with 0. A multi-byte sequence begins with a length marker; later bytes begin with 10, meaning “continue the number already started.”</Prose>
+      <Prose>Those markers are packaging. The remaining bits are the <em>payload</em>: the character number being transported. For é, we need two bytes. The first reserves three bits for 110 and has five payload places; the second reserves two for 10 and has six payload places. Five plus six gives enough room for the number 233.</Prose>
+      <Utf8PackingFigure />
+      <Prose>The table generalizes that construction. Each x is a place for one payload bit. You can follow the rest of the lesson using the byte labels without memorizing these masks; they become useful when building the decoder in section 6.</Prose>
+      <LessonTable caption="UTF-8 layouts; x positions carry the scalar's bits" headers={["Scalar range", "Byte pattern", "Example"]} rows={[
+        ["U+0000–U+007F", "0xxxxxxx", "A → 41"],
+        ["U+0080–U+07FF", "110xxxxx 10xxxxxx", "é → C3 A9"],
+        ["U+0800–U+FFFF, excluding surrogates", "1110xxxx 10xxxxxx 10xxxxxx", "中 → E4 B8 AD"],
+        ["U+10000–U+10FFFF", "11110xxx 10xxxxxx 10xxxxxx 10xxxxxx", "🌍 → F0 9F 8C 8D"],
+      ]} />
+      <Prose>For é, U+00E9 is decimal 233. Its eleven-bit payload is <code>00011 101001</code>. Place those groups in <code>110xxxxx 10xxxxxx</code>: the result is <code>11000011 10101001</code>, or hexadecimal C3 A9. Decoding strips the prefix bits, shifts the first payload left by six places and adds the second: 3 × 64 + 41 = 233.</Prose>
+      <H3>When a byte sequence is not valid text</H3>
+      <Prose>A continuation byte tells us that a scalar is unfinished; it does not by itself prove validity. A strict decoder also rejects stray continuation bytes, missing tails, overlong encodings such as C0 80, surrogate values U+D800–U+DFFF and values beyond U+10FFFF. Consequently, every well-formed Unicode string has UTF-8 bytes, but not every arbitrary byte string is valid UTF-8 text. A binary-file model may consume any byte; a text renderer still needs a declared decoding policy.</Prose>
+      <H2>3. What exact reconstruction actually promises</H2>
+      <Prose>We now have a byte spelling. Cutting that spelling into pieces is like cutting a strip of paper: if we keep every piece and its order, we can join it back together. <strong>Encoding</strong> creates the model's pieces; <strong>decoding</strong> reconstructs the text from them. “Lossless” means the round trip recovers the exact input under the chosen text policy.</Prose>
+      <Prose>Suppose an encoder emits groups of consecutive bytes and its decoder joins the groups in order. Grouping does not lose information. A token may end halfway through a scalar, and the complete byte sequence still reconstructs perfectly. The invariant is the concatenated bytes, not whether each group is a printable character.</Prose>
+      <BytePipelineFigure />
+      <Prose>Notice the middle group, A9 C3. It contains the end of the first é and the start of the second. There is nothing to print for that group alone. Joining all three groups first restores both letters. This distinction will explain the broken streamed emoji from our opening.</Prose>
+      <H3>Changing the spelling is a different operation</H3>
+      <Prose>Grouping left the spelling alone. Normalization can deliberately change it: follow the two spellings of é into the same NFC result.</Prose>
+      <ByteNormalizationFigure />
+      <Prose>Return to the explorer and enter decomposed café, then choose NFC. The e plus accent become the single composed é. The visible word stays familiar, but the stored bytes change from <code>65 CC 81</code> to <code>C3 A9</code>. This is useful when a search system wants the two spellings to match. It cannot also tell you which of those two spellings was originally typed.</Prose>
+      <Prose>Normalization is a separate transformation before that invariant. NFC composes canonically equivalent spellings where possible; NFD decomposes them. Both can make the two spellings of café consistent, but neither preserves which original spelling the author typed. NFKC and NFKD also apply compatibility mappings: for example, the ligature ﬁ becomes f followed by i. That can help a search index and be inappropriate for an exact-source archive. Choose normalization from the task, version it with the tokenizer and apply the same policy at training and use.</Prose>
+      <Prose>Lowercasing, whitespace stripping, special-token parsing and text truncation have similarly separate contracts. A complete 256-byte alphabet guarantees representability of the supplied bytes; it does not undo earlier preprocessing or enlarge a model's context. For exact source code, logs or signed text, retain the original bytes and test the entire encode→decode pipeline, including spaces and final newlines. Ill-formed UTF-16 strings need an explicit reject/repair policy before UTF-8 encoding; this page rejects them in its explorer.</Prose>
+      <H2>4. Byte BPE groups bytes; token-free models keep the fine-grained input</H2>
+      <Prose>Five byte positions for café are easy to represent, but a model may encounter that word millions of times. Could we give it a shorter repeated piece? Recall BPE's operation: join an adjacent pair. During tokenizer training, frequent pairs earn merge rules. During encoding, we follow the already learned rules in priority order. A rule's <strong>rank</strong> is simply its place in that order.</Prose>
+      <ByteMergeFigure />
+      <Prose>Read the piece brackets before the byte numbers. First c and a share a bracket; then f joins; then the two bytes of é join; finally café becomes one token. Repeated pieces keep their hue across the rows; the byte labels retain the same five columns and glyph-group colours. We changed five model input positions into one without discarding the five-byte spelling. A token ID is just the vocabulary's integer address for that entire piece.</Prose>
+      <Prose>The previous lesson's ranked merge engine does not require its initial symbols to be human letters. Give it one distinct symbol for every byte. It can learn a token for café while retaining individual bytes for a new emoji. Common substrings get shorter representations; the base alphabet covers the remaining text. The complete tokenizer also specifies its pre-tokenization boundaries, merge ranks, normalization and special IDs.</Prose>
+      <Prose>GPT-2's printable byte mapping is a bijection: each byte gets a unique Unicode symbol convenient for its text-based merge representation. For example, the space byte 20 becomes Ġ. Byte C3 becomes Ã and A9 becomes ©, so the two-symbol display Ã© represents the UTF-8 bytes of é; it is not the intended decoded text. This mapping is an implementation convention, not a second linguistic encoding. JSON can escape control characters; its syntax alone does not force this particular mapping.</Prose>
+      <Prose>Think of those printable symbols as labels on the byte boxes. We could keep integer labels in a byte-native implementation. The printable mapping lets our existing string-based BPE code operate without rewriting its merge machinery. A <em>bijection</em> means the labels are one-to-one: each byte has one label, and each label identifies one byte, so swapping labels back is unambiguous.</Prose>
+      <Prose>Byte fallback takes a different route: a tokenizer begins with its ordinary character/subword inventory and can represent otherwise unsupported characters through their UTF-8 bytes. The fallback belongs to that tokenizer's full configuration. “Byte-level BPE” and “character model with byte fallback” are useful mechanism names; a model-family name is not a substitute for inspecting the actual tokenizer artifact. In particular, Llama 3 uses a tiktoken-based tokenizer, unlike the SentencePiece tokenizer used by earlier Llama versions.</Prose>
+      <H3>The same merge rules through two implementations</H3>
+      <Prose>In the program, <code>mapped_bytes</code> makes those labels, <code>apply_bpe</code> joins them using the four pictured rules, and <code>unmap_tokens</code> recovers the underlying bytes. The library route receives exactly the same rules. This is a useful comparison: if the answers disagree, we investigate implementation details rather than guess whether different training data caused it.</Prose>
+      <Prose>The program below reuses <code>apply_bpe</code> from the <a href="/learn/topic/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram">previous subword lesson</a>. Put its <a href="/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py" download>subword_tokenizers.py</a> beside this program and <code>utf8_stream.py</code>, which section 6 explains and supplies. Read the merge trace now; section 6 gives the commands to run the complete set. We add the byte alphabet and the pictured four-merge café vocabulary, then compare identical ranks with Hugging Face Tokenizers.</Prose>
+      <RemoteCodeBlock source="/learn-code/byte-level-tokenization-token-free-models/byte_bpe_bridge.py" filename="byte_bpe_bridge.py" title="Reuse ranked BPE over bytes; match Hugging Face on the same vocabulary" />
+      <Prose>The two routes receive the same printable symbols, ranks and vocabulary IDs. <code>use_regex=False</code> makes the full input one piece and <code>add_prefix_space=False</code> preserves the supplied leading whitespace. These are fixture choices, not a claim to reproduce GPT-2's full tokenizer. Its production pre-tokenizer uses additional boundaries. The tests include an unseen Chinese scalar, decomposed accents, an empty string and a special-looking literal that this model treats as ordinary text.</Prose>
+      <H3>What if we keep the five byte positions?</H3>
+      <Prose>We can stop before merging and send all five bytes of café to the model. It can learn relationships between them from examples. This removes the need to learn a fixed subword vocabulary first, which is the usual meaning of <strong>token-free</strong>. The name does not mean “no input units”: there are still byte or character IDs. The question becomes where useful grouping happens—before the network, or inside its learned computation. Sections 7–9 build that second route.</Prose>
+      <H2>5. Streaming needs memory between chunks</H2>
+      <Prose>A <strong>chunk</strong> is just whatever part of the byte stream arrives in one delivery. A network packet or generated token need not end where a displayed character ends. Our paper-strip rule still works, but we want to show completed text now instead of waiting for the entire response. The decoder therefore needs a small waiting area for an unfinished character.</Prose>
+      <Prose>Move a delivery boundary through our ten-byte <code>café 🌍</code>. The pending-byte buffer holds the start of a scalar until its continuation bytes arrive; completed text can already be emitted.</Prose>
+      <StreamingByteLab />
+      <Prose>The globe is F0 9F 8C 8D. At split 8, the first chunk ends with F0 9F, so the buffer retains those two bytes and still needs two continuations. The next chunk supplies 8C 8D and emits 🌍 once. Decoding the chunks independently with replacement loses that shared state and prints corruption.</Prose>
+      <Prose>Move the split inside the globe. The first chunk emits the complete text before it and retains only the incomplete scalar. The second completes it. Move the split to a scalar boundary: both routes now agree, which is the useful null case. Real token boundaries can land in either location. A decoder cannot choose a different model tokenization just to make its display loop easier.</Prose>
+      <Prose>A final flush changes the meaning of an unfinished prefix: while data is still arriving it is pending; at end of stream it is truncated input. A strict decoder raises an error. A UI may deliberately use replacement for malformed generated bytes, but replacement is a lossy display policy. Never treat a string containing � as proof that original bytes were recovered. For tiktoken-style inspection, retrieve each token's byte payload, concatenate it and decode once, or feed those payloads to an incremental decoder.</Prose>
+      <H2>6. Build the encoding and decoding state machine</H2>
+      <Prose><strong>Implementation branch.</strong> The moving boundary has shown what the decoder must remember. A <em>state machine</em> is a procedure whose next action depends on a small remembered state. Ours asks: am I starting a new character, or waiting for more bytes of the current one?</Prose>
+      <ByteStateFigure />
+      <ol className="byte-explanation-steps"><li>On an ASCII byte, emit its character immediately.</li><li>On a multi-byte start, keep its payload and record how many continuation bytes are missing.</li><li>On each continuation, attach six more payload bits and decrease the missing count.</li><li>When the count reaches zero, validate the completed number and emit the character. At end of input, a nonzero count means truncation.</li></ol>
+      <Prose>For C3 A9, C3 begins with 110: keep payload 3 and wait for one byte. A9 contributes payload 41. Make room for six bits and append them: 3×64+41 = 233. Nothing was emitted after C3; é is emitted after A9. Those are exactly the intermediate states the streaming lab reveals.</Prose>
+      <Prose><code>encode_utf8</code> below writes the prefix masks and six-bit payload groups directly. <code>UTF8Stream</code> carries three integers: the accumulated scalar, how many continuation bytes remain, and the minimum legal scalar for the announced length. Each byte is visited once. Encoding and decoding take O(B) time for B bytes; the decoder's persistent state is O(1), apart from the output being returned.</Prose>
+      <RemoteCodeBlock source="/learn-code/byte-level-tokenization-token-free-models/utf8_stream.py" filename="utf8_stream.py" title="A strict UTF-8 encoder, incremental decoder and reversible byte alphabet" />
+      <Prose>The left shift by six in the decoder makes room for a continuation payload. The minimum catches an integer encoded with more bytes than necessary. Scalar validation excludes the reserved surrogate range and numbers beyond Unicode's maximum. The implementation accepts valid chunks of any size, including empty chunks; after an error, discard that decoder instance. It deliberately does not reproduce every library error-message or error-timing convention.</Prose>
+      <CodeBlock language="bash" filename="run_byte_text.sh">{`python utf8_stream.py
+python -m pip install tokenizers
+python byte_bpe_bridge.py`}</CodeBlock>
+      <Prose>The standard-library route is <code>text.encode("utf-8")</code> and <code>codecs.getincrementaldecoder("utf-8")("strict")</code>. The first program runs both decoders on chunks 63 61 66 C3 / A9 20 F0 9F / 8C 8D. Their successive text outputs are “caf”, “é ” and “🌍”. Keeping this state machine in mind is useful even when the library owns its implementation: it explains exactly why an empty emitted string can be correct during a stream.</Prose>
+      <H2>7. Turn bytes into an actual learning problem</H2>
+      <Prose><strong>Deeper branch: from representation to learning.</strong> So far our code has preserved text, not learned to continue it. A language model receives a prefix—the text available so far—and assigns probabilities to what could come next. For direct byte generation, the choices are byte values plus control symbols. Repeated examples teach the model that some next bytes fit a prefix much better than others.</Prose>
+      <Prose>We also need to say “start,” “finished” and “unused space in a batch.” We reserve three separate IDs for <strong>BOS</strong> (beginning of sequence), <strong>EOS</strong> (end of sequence) and <strong>PAD</strong> (padding). Adding three to every byte value keeps its ID away from those reserved addresses.</Prose>
+      <Prose>An ID selects a row of a learned <strong>embedding table</strong>. The row is a vector—a list of adjustable numbers—and its length is the embedding width, d. Follow byte C3, decimal 195, to ID 198 and then to its row. Contextual layers transform its features; the <strong>output head</strong> gives one score for each possible next ID.</Prose>
+      <ByteEmbeddingFigure />
+      <Prose>The table has 259 rows: 256 bytes and three control symbols. The drawing's small cells stand for feature entries; their values are learned during training. The numerical ID is an address, not a measure of similarity: byte 100 is not inherently more related to 101 than to 200. Contextual layers combine input vectors with allowed earlier positions; the output head gives one score for each of the 259 choices.</Prose>
+      <Prose>Training also needs targets: the next ID that actually occurred. Use PAD=0, EOS=1 and BOS=2, with byte b mapped to b+3. Each column below reads its available prefix and predicts the next item in é.</Prose>
+      <ByteTargetsFigure />
+      <Prose>C3 becomes 195+3=198, and A9 becomes 169+3=172. Thus input [2,198,172] pairs with targets [198,172,1]. At BOS, predict C3; after C3, predict A9; after both bytes, predict EOS. Without this one-position shift, a model can learn to copy the byte it already sees. The final EOS decision teaches when the sequence finishes.</Prose>
+      <H3>Let each decision see only the information it should have</H3>
+      <Prose>Training is faster when many positions are processed together. But position zero must not peek at the later C3 or A9 and copy its answer. <strong>Causal</strong> means only the available prefix can influence a decision. A <strong>mask</strong> is a rule that blocks forbidden connections or excludes a position from a calculation.</Prose>
+      <Prose>Different examples also have different lengths. To fit “A” and “é” in a rectangular batch, we append PAD to the shorter row. The model should learn from the real letters and the EOS decision, not from the artificial extra cell. This creates two separate questions: what may attention read, and which target positions should count in the score?</Prose>
+      <Prose>Compare the padded rows for A and é. A filled causal-grid cell permits that input connection; a crossed target cell is excluded from loss.</Prose>
+      <ByteMasksFigure />
+      <Prose>Three rules work together. The causal mask blocks attention to later positions, so changing future bytes cannot change an earlier output. The key-padding mask excludes padded positions from attention. The loss mask excludes padded targets from averaging. The A row contributes two targets and the é row three, so five decisions count. Padding is a batching artifact; EOS is a real target and remains in the training loss.</Prose>
+      <H3>Reward probability on the next byte that actually occurred</H3>
+      <Prose>Suppose the correct next byte is A9. Compare the probability mass on that same target at .9 and .1. A <strong>loss</strong> is a number that training tries to reduce.</Prose>
+      <ByteLossFigure />
+      <Prose>Use <code>−ln(probability of the correct target)</code>: .9 gives about .105, while .1 gives about 2.303. The logarithm makes very confident wrong answers costly. It also turns multiplication of sequence probabilities into addition of per-step losses: <code>−ln(p₁p₂) = −ln(p₁) − ln(p₂)</code>. That lets us sum the surprise of successive bytes into the surprise of the whole document.</Prose>
+      <Prose>The network initially outputs unnormalized scores called <strong>logits</strong>. Softmax converts them into probabilities by exponentiating each score and dividing by the sum. Substituting that probability into the loss gives <code>ln(sum(exp(scores))) − score_of_correct_target</code>. That is the code's <code>logsumexp − target_logit</code> expression. Average it over the real target positions and we obtain cross-entropy.</Prose>
+      <Prose>The program uses stable <code>logsumexp</code> so large scores do not overflow during exponentiation. It writes the reduction from tensor primitives, compares its value and gradient to <code>cross_entropy(ignore_index=PAD)</code>, then takes real optimizer steps through a small causal Transformer. Reading the resulting loss over successive steps tells us whether this training setup is learning its supplied examples.</Prose>
+      <RemoteCodeBlock source="/learn-code/byte-level-tokenization-token-free-models/byte_model_bridge.py" filename="byte_model_bridge.py" title="Byte inputs, shifted targets, causal masking, scratch loss and a library training loop" />
+      <Prose>The <a href="/learn/topic/self-attention-multi-head-attention">attention lesson</a> explains how positions gather information; <a href="/learn/topic/pytorch">PyTorch</a> shows the optimizer/autograd workflow. Here the new mechanism is the byte-level interface and its invariants. <code>nn.TransformerEncoder</code> is used with an explicit causal mask, despite its class name. Dropout is zero and the seed is fixed for the comparison. A learned positional table limits this small program to 128 input positions.</Prose>
+      <Prose>ByT5's ordinary byte IDs also use an offset of three. Its library tokenizer reserves ID 2 for unknown, whereas our small causal model uses ID 2 as BOS. The program compares ordinary text byte IDs with <code>ByT5Tokenizer(add_special_tokens=False)</code>, not the whole sequence protocol. A real ByT5 model is an encoder–decoder: its decoder starts from the configured decoder-start ID, shifts target labels internally, and commonly uses −100 to mask ignored labels. Never swap our BOS or loss convention into that model without adapting the contract.</Prose>
+      <CodeBlock language="bash" filename="run_byte_learning.sh">{`python -m pip install torch transformers numpy
+python byte_model_bridge.py
+python byte_patches.py`}</CodeBlock>
+      <Prose>The training fixture contains café 🌍, café! and the empty string. It deliberately checks multi-byte text, unequal lengths and EOS-only output. Decreasing loss on these same rows demonstrates that batching, gradients and updates work; this is a mechanics experiment, not a language-quality evaluation. For a research comparison, train on a declared corpus and measure held-out documents, corruption types, latency and memory separately.</Prose>
+      <H2>8. Token-free architectures move the work to different places</H2>
+      <Prose><strong>Research branch: where should the expensive work happen?</strong> Sending five café bytes instead of one café token gives the network more positions to process. One important operation is <strong>attention</strong>: a position gathers information from other allowed positions. Letting every position consult a long prefix creates many relationships to compute. The extra detail is useful, but its cost gives us a new design question.</Prose>
+      <Prose>There are three broad responses. Keep all the fine-grained positions and pay for them; combine nearby positions before the deepest layers; or carry a running state instead of comparing every pair of positions. <strong>Local</strong> processing sees a nearby region. <strong>Global</strong> processing connects information across the longer sequence. <strong>Downsampling</strong> means reducing the number of positions; <strong>upsampling</strong> restores finer positions when outputs require them.</Prose>
+      <Prose>Follow the changing number of sequence positions in each architecture below. A narrow feature column belongs to one byte or character; wider network blocks transform those features. The number of illustrated columns is schematic rather than a model configuration.</Prose>
+      <H3>ByT5: keep byte positions through an encoder–decoder</H3>
+      <Prose>In an <strong>encoder–decoder</strong>, the encoder reads the supplied text, and the decoder consults its features while writing the output. Gathering information from that other sequence is called <strong>cross-attention</strong>. Both sides retain byte positions in ByT5.</Prose>
+      <ByteByT5Figure />
+      <Prose>For a misspelled message, the encoder builds contextual features from the supplied byte sequence. The decoder's next-byte decisions consult those features and the output prefix written so far. A rare spelling reaches the model through its own bytes rather than an unknown-word symbol. The model still learns how to interpret and correct it.</Prose>
+      <Prose>ByT5 replaces a learned subword inventory with UTF-8 bytes in a T5-style sequence-to-sequence model. Its small input/output alphabet shifts parameters away from a large vocabulary table; the paper uses an encoder-heavy allocation and byte-span corruption. Fine spelling differences remain directly available. This is useful for spelling-sensitive tasks, but every extra byte still requires computation. The paper evaluates noise robustness under specified corruptions; a byte edit can influence later contextual representations, so “one changed byte affects only one model state” would be false.</Prose>
+      <H3>CANINE: shorten a character sequence inside the encoder</H3>
+      <Prose>CANINE changes the input unit to Unicode code points. It compresses local character features for the deep encoder, then expands them back and combines them with fine-resolution features.</Prose>
+      <Prose>Its input lookup uses a <strong>hash function</strong>, which maps a code-point number into a smaller table's bucket address. Several hash tables supply vectors that are concatenated—joined end to end—into one character representation.</Prose>
+      <ByteCanineFigure />
+      <Prose>Suppose a task needs to label spans in a long document. We want the deep layers to see fewer positions but eventually need a label at each original character. CANINE creates nearby character features, compresses their sequence for deeper processing, then expands back to character resolution. The expansion can combine the broad context with fine-grained information rather than guessing all characters from a bare average.</Prose>
+      <Prose>The bucket tables are learned parameters; hashing chooses the rows to retrieve. Different code points can collide at one bucket. Several lookups give each character a combination of vectors, so a collision in one lookup need not erase every distinction. This avoids a full-size row for every code point while retaining trainable character features.</Prose>
+      <Prose>The local encoder adds context to those character vectors; downsampling presents fewer positions to the deep Transformer. Upsampling restores character-resolution outputs and combines the broad features with the local encoder's fine-feature skip. CANINE's main setting is encoding text for downstream understanding, such as span labels, rather than the causal byte generator we just built.</Prose>
+      <H3>Charformer: combine local groupings differentiably</H3>
+      <Prose>Keep the byte input but consider more than one candidate block length. Each candidate gives a feature vector; learned weights mix those vectors before shortening the sequence.</Prose>
+      <ByteCharformerFigure />
+      <Prose>A fixed group size may be too short in one place and too long in another. Instead of immediately choosing one group, Charformer can form several nearby candidate representations and give them learned weights. A weight of .75 on one vector and .25 on another means multiply each vector by its weight, then add. For candidates [2,0] and [0,4], the mixture is [1.5,1]. The weights can change smoothly, which lets ordinary gradient training adjust the grouping preferences.</Prose>
+      <Prose>Charformer's GBST forms candidate local blocks at different lengths, scores their pooled representations and blends them with learned weights before downsampling. Picture one position receiving evidence from a short block and a longer block: the scores decide their contribution without choosing a fixed vocabulary ID for either span. Gradients train those scores together with the downstream model. Mean pooling bare byte identities would lose order, so contextual and positional processing matter. This is learned internal representation, not BPE retraining at every step.</Prose>
+      <H3>MambaByte: use a recurrent state-space path</H3>
+      <Prose>Instead of a growing set of attention relationships, trace a fixed-width state passed from one byte position to the next. Each step receives the new byte and the previous state.</Prose>
+      <ByteMambaFigure />
+      <Prose>There is another way to handle a long stream: keep an evolving summary while reading it, instead of consulting a growing table of every earlier position. At each byte, update that state using the new input and the previous state. The challenge is learning what to retain and what to forget. MambaByte uses learned selective state updates for this job; it changes the sequence-processing mechanism rather than learning BPE merges.</Prose>
+      <Prose>MambaByte processes raw bytes using a selective state-space architecture. The long-sequence operation propagates a bounded recurrent state instead of forming every attention pair. For fixed model dimensions, its sequence work scales linearly; the state and memory access pattern still determine practical speed. Its paper also investigates speculative decoding. Revisit the <a href="/learn/topic/state-space-models-s4-mamba-mamba-2">state-space lesson</a> for the recurrence, then compare measured quality and throughput on the same text workload before choosing an architecture.</Prose>
+      <H3>BLT: spend global computation on variable-size patches</H3>
+      <Prose>A <strong>patch</strong> is a consecutive run of byte positions represented by a computed feature vector. BLT has a local byte encoder, a global patch model, and a local byte decoder; local prefix features and completed earlier-patch context both reach the decoder.</Prose>
+      <ByteBltFigure />
+      <Prose>Nearby layers handle fine spelling detail; deeper global layers communicate through fewer patch vectors. Unlike a vocabulary entry for café, a patch vector is calculated from this occurrence and its context. The same spelling can be grouped differently in a different context. A completed summary can inform later predictions; current-prefix bytes still supply local information. A summary containing the byte being predicted would leak its answer and must be blocked or shifted.</Prose>
+      <Prose>The Byte Latent Transformer uses local byte processing, a global model over patch representations and a local byte decoder. A small causal byte predictor estimates uncertainty; an entropy rule places patch boundaries so predictable regions can use longer patches. The patch carries a computed representation rather than selecting one item from a fixed subword vocabulary. This suggests a practical control: change the boundary rule to trade global steps against the detail handled locally. The next investigation isolates that boundary/accounting mechanism; it does not run a trained BLT.</Prose>
+      <H2>9. Derive and inspect an entropy patch boundary</H2>
+      <Prose>Where should one patch end and the next begin? Consider a small predictor reading only the prefix available so far. If it strongly favours one next byte, continuing the current patch may be sufficient. If several next bytes are plausible, opening a new patch gives the global model another position near that uncertainty. This is a design rule to investigate, not a guarantee that confident predictions are correct.</Prose>
+      <Prose>A <strong>probability distribution</strong> lists the possible next bytes and the probability assigned to each; the probabilities sum to one. To make the idea visible, begin with only two possible outcomes. Compare a 50–50 split with a 99–1 split before any next byte is revealed.</Prose>
+      <ByteUncertaintyFigure />
+      <Prose><strong>Entropy</strong> summarizes how spread out that distribution is. To compute it in bits, take each probability p, calculate its surprise <code>−log₂(p)</code>, multiply by p, and add the contributions. The multiplication gives common outcomes more influence in the average. For .5/.5, both surprises are 1, so the average is .5×1 + .5×1 = 1 bit. For .99/.01, the surprises are about .0145 and 6.644; their weighted sum is about .0808 bits. A certain outcome has entropy zero.</Prose>
+      <Prose>Entropy describes uncertainty <em>before</em> seeing the next byte. Surprise, <code>−log₂ p(observed byte)</code>, describes the outcome that actually arrived. A 99%-confident predictor can still be surprised by its 1% outcome. A generator must choose its next boundary using information already available, so our rule uses predictive entropy rather than the unseen answer's surprise.</Prose>
+      <Prose>Use <code>cafe abc</code> without the accent so each printed character is one byte. Our rule starts a patch at byte zero and before each later byte whose predictive entropy is <em>strictly above</em> a threshold. The position control selects which probability distribution to edit; the probability control changes its two candidates; the threshold decides where to start a new patch.</Prose>
+      <Prose>The grids underneath count allowed attention relationships. Each row is a position asking for information, or <em>query</em>; each column is a possible source position, or <em>key</em>. A filled cell means that source is available to that query. Future positions are blocked, leaving a triangle. Reducing eight positions to three makes a smaller set of possible relationships; local byte work still remains.</Prose>
+      <BytePatchLab />
+      <Prose>At threshold .5, the first three bytes form <code>caf</code>; an uncertainty crossing starts <code>e a</code>; another starts <code>bc</code>. The computed lengths are [3,3,2]. Select position 4, the space, and change its first candidate probability from .9 to .5: entropy rises from about .469 to 1 bit, so the middle region splits and the lengths become [3,1,2,2]. A value exactly equal to the threshold stays in its current patch.</Prose>
+      <Prose>The lab's two-outcome distributions are constructed to reveal the rule, not recorded neural predictions. Selecting one byte and changing its probability acts on the underlying uncertainty, while the threshold decides which uncertainties justify a new patch. A production predictor has a distribution over 256 byte values; the same entropy calculation applies. The first patch always exists even when no later entropy crosses the threshold.</Prose>
+      <H3>A boundary is only the start: build the patch's feature vector</H3>
+      <Prose>The boundary rule says which positions belong together. It has not yet said what one patch should tell the global model. A simple starting operation is <strong>mean pooling</strong>: add the feature vectors belonging to a group, then divide by the number of positions. The result has the same number of feature entries but replaces several positions with one summary.</Prose>
+      <BytePoolingFigure />
+      <Prose>Patch IDs make the grouping executable. The default eight positions receive IDs [0,0,0,1,1,1,2,2]. Each position adds its vector to the total for its patch ID. Counting those IDs gives group sizes [3,3,2], which supply the divisors. That is why changing boundaries in the lab changes both the global sequence length and which positions contribute to each summary.</Prose>
+      <RemoteCodeBlock source="/learn-code/byte-level-tokenization-token-free-models/byte_patches.py" filename="byte_patches.py" title="Entropy boundaries and indexed pooling with an exact NumPy/PyTorch bridge" />
+      <Prose>The scratch boundary function cumulatively counts start flags. The pooling function sums feature vectors into their patch and divides by the number of positions. <code>np.add.at</code> accumulates repeated indices correctly; ordinary advanced-indexed <code>+=</code> can mishandle repeats. <code>torch.index_add_</code> implements the matched operation. Both avoid allocating a byte-by-patch assignment matrix: for B positions of width d, accumulation costs O(Bd), with O(Pd) output for P patches.</Prose>
+      <Prose>The program's simple numerical feature vectors make the pooling arithmetic inspectable. In a real network, contextual processing must retain the relevant content and order before pooling. Averaging bare token embeddings loses within-patch order; even adding independent positional embeddings before a plain mean leaves their sums unchanged under a content permutation. Position and content need an interaction, such as the local causal attention used by BLT.</Prose>
+      <Prose>This mean-pooling bridge teaches variable group construction, not the full BLT cross-attention network. A causal generator must also respect when a patch representation becomes available: a completed patch can inform later bytes; a summary that already includes a target byte must not reveal that target to its own prediction. Full BLT training, cross-attention masks, hash embeddings and learned boundary predictors belong to a paper reproduction with its actual code and configuration. The architecture overview here provides the questions needed to read that implementation.</Prose>
+      <H2>10. Count the right resource before claiming an improvement</H2>
+      <Prose>The patch lab's causal grids counted a specific part of the work. Keep the same-sized cell for each allowed query–key pair and compare eight byte positions with three global positions.</Prose>
+      <ByteCostFigure />
+      <Prose>With three causal positions, the first may consult one position, the second two, and the third three: 1+2+3 = 6 relationships. With eight, the sum is 1+2+…+8 = 36. The triangular formula is a compact way of doing those same counts.</Prose>
+      <Prose>For a fixed-width dense causal-attention layer, L positions have L(L+1)/2 allowed query–key pairs. Eight byte positions have 36 pairs; three global patches have six. That sixfold reduction describes one part of the network. The local byte encoder and decoder, patch construction, projections and feed-forward layers still run. The lab therefore displays pairs, not invented milliseconds or model rankings.</Prose>
+      <Prose>If the same text becomes B bytes or T subword tokens, measure r=B/T on that text. Dense attention's pair-count ratio approaches r² for long sequences; per-position work grows with r. For example, twice as many positions means roughly four times as many dense attention pairs, but only twice as many individual positions to transform. A conventional <strong>KV cache</strong> stores attention information from earlier positions so generation can reuse it; more represented positions require more such storage. A state-space model or a local/global architecture has different accounting. Measure the actual text lengths rather than assuming a fixed multiplier for an entire language.</Prose>
+      <Prose>The other side of the tradeoff is vocabulary. Let <strong>V</strong> be the number of possible IDs and <strong>d</strong> the length of each embedding vector. One V-by-d table has Vd adjustable entries, or parameters. At width 1024, a 50,000-entry table has 51,200,000 parameters; a 259-entry teaching table has 265,216. The <strong>output head</strong> turns a contextual vector into a score for each possible next ID. If it reuses the input table, the weights are <em>tied</em>; if not, it needs another matrix. Fewer IDs can save table storage and scoring work even while a longer byte sequence increases other work.</Prose>
+      <H3>Compare the same amount of text, not unlike token units</H3>
+      <Prose>The loss in section 7 measures how surprised a model is by the target. Adding its losses gives the total surprise for the document. <strong>Perplexity</strong> exponentiates the average loss per token; its denominator therefore changes when one model uses café as a single token and another uses five bytes. Dividing total surprise by a shared byte count gives a common unit instead.</Prose>
+      <Prose>That summed loss is the document's <strong>negative log likelihood</strong>, abbreviated NLL. Hold the original ten bytes of <code>café 🌍</code> fixed as the denominator in both representations.</Prose>
+      <ByteMetricFigure />
+      <Prose>For example, if either representation assigns total negative log likelihood 10 to the same ten-byte <code>café 🌍</code>, both give <code>10 / (10 × ln 2) ≈ 1.443 bits per byte</code>. The division by ln 2 converts natural-log units, called nats, into base-two bits. Different token counts do not change that denominator. This makes the likelihood comparison interpretable; task accuracy and runtime remain separate measured questions.</Prose>
+      <Prose>Per-token perplexity averages surprise over a tokenizer-dependent unit. For comparable held-out text, report total negative log likelihood divided by the original UTF-8 byte count and ln(2): bits per byte. Declare BOS/EOS treatment, context, normalization and document boundaries. Our program reports a byte-target metric excluding EOS and labels it as training data. A model with lower token perplexity can still assign worse total likelihood to the same text if its tokens represent different amounts of text.</Prose>
+      <H3>Current research: fewer decoder calls for the same output bytes</H3>
+      <Prose>Shortening the global sequence does not remove every serial step. An ordinary byte generator still writes one byte at a time: emitting our four-byte globe requires four next-byte decisions. On real hardware, repeatedly reading weights and cached states can be a bottleneck even when global patches are long.</Prose>
+      <ByteGenerationFigure />
+      <Prose>The 2026 <a href="https://arxiv.org/html/2605.08044v1">Fast Byte Latent Transformer paper</a> investigates grouping <em>generation</em> work as well. Its diffusion variant starts with a block of unknown byte positions and fills several per decoder call. Self-speculation instead lets the small decoder draft beyond a patch boundary, then checks the draft with the full model. A verification variant also checks diffusion drafts. These choices trade decoder calls against generation quality and verification work; a shorter block-call trace is not a measured latency result. The useful next experiment is to count calls and bytes, then measure task quality, latency and memory bandwidth under one declared setup.</Prose>
+      <H2>11. Choose an interface that fits the task</H2>
+      <LessonTable caption="A concrete question before changing the representation" headers={["Task or symptom", "Inspect first", "Useful decision"]} rows={[
+        ["Use an existing pretrained model", "Its exact tokenizer artifact, special IDs and chat/normalization protocol", "Preserve the trained interface; replacing it changes the meaning of embedding rows."],
+        ["Streaming text shows replacement glyphs", "Token bytes before decoding and final flush behavior", "Repair incremental decoding before changing the model."],
+        ["Source text must be reproduced exactly", "Byte identity through normalization, whitespace and special-string handling", "Keep raw bytes; make any search-normalized copy separate."],
+        ["Spelling/noisy text is central", "Held-out noise types, byte length, task quality and runtime", "Compare a byte model with a matched subword baseline."],
+        ["Long sequences exhaust global work", "Local/global work, patch sizes, quality and causal masks", "Investigate internal downsampling or state-space processing with a measured budget."],
+      ]} />
+      <Prose>A complete byte alphabet solves an input-coverage problem, not language understanding or equal service across languages. The next <a href="/learn/topic/vocabulary-design-multilingual-tokenization">vocabulary and multilingual tokenization lesson</a> measures those tradeoffs on declared units and data. Here you can already diagnose whether the problem is representation, reconstruction, model computation or evaluation; those require different fixes.</Prose>
+      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+        <H2>12. Practice: preserve text, repair a stream and account for work</H2>
+        <div className="lesson-exercise"><H3>1. The invisible extra scalar</H3><Prose>Compare <code>Å</code> with <code>{"A\u030A"}</code>. Write the scalars, UTF-8 bytes and byte lengths before and after NFC. Which equality can an NFC tokenizer promise for an exact-source archive?</Prose><details><summary>Hint</summary><Prose>The combining ring is U+030A; the composed letter is U+00C5.</Prose></details><details><summary>Solution</summary><Prose>Å is C3 85: one scalar, two bytes. A plus ring is 41 CC 8A: two scalars, three bytes. NFC maps both to C3 85. They have the same normalized output, but the original three-byte spelling cannot be recovered from that output alone. Store the raw bytes if that difference matters.</Prose></details></div>
+        <div className="lesson-exercise"><H3>2. A different streamed symbol</H3><Prose>Feed E2 / 82 / AC 21 to both decoders. Record every emitted string and remaining continuation count. Then end the stream after E2 82. Explain why replacing each chunk is the wrong repair.</Prose><details><summary>Hint</summary><Prose>E2 starts a three-byte sequence; 21 is ASCII exclamation.</Prose></details><details><summary>Solution</summary><Prose>The outputs are empty, empty, “€!”. Remaining counts are 2, 1, 0. A final flush after the first two bytes must reject truncation. Per-chunk replacement discards valid partial state and cannot reconstruct the euro symbol when its last byte arrives.</Prose></details></div>
+        <div className="lesson-exercise"><H3>3. Does crossing a scalar boundary break BPE?</H3><Prose>Take bytes C3 A9 C3 A9 for éé and group them as [C3], [A9 C3], [A9]. Must a lossless tokenizer forbid the middle group? Write a test using <code>unmap_tokens</code> or raw byte payloads.</Prose><details><summary>Solution</summary><Prose>No. Concatenation restores C3 A9 C3 A9 exactly, so whole-stream strict decoding returns éé. Independent decoding of those groups fails; that is the decoder's unit mistake. The merge boundary itself has not changed a byte.</Prose></details></div>
+        <div className="lesson-exercise"><H3>4. Repair a causal batch</H3><Prose>Use texts “A” and “é”. Write input and target rows with our IDs. Which entries enter the loss? Add an assertion that modifying the second byte of é cannot change the first-byte logits.</Prose><details><summary>Hint</summary><Prose>The shorter row predicts EOS and then has one padding position.</Prose></details><details><summary>Solution</summary><Prose>Inputs are [2,68,0] and [2,198,172]; targets are [68,1,0] and [198,172,1]. Five targets contribute; the final PAD on the first row does not. Compare position-zero logits with the model in deterministic mode after changing a later input. Including the target at the same position or omitting the causal mask can leak the answer.</Prose></details></div>
+        <div className="lesson-exercise"><H3>5. Change the entropy boundary and justify the metric</H3><Prose>For entropies [0.2,0.7,0.5,0.9,0.1] and strict threshold 0.5, compute patch lengths and allowed global attention pairs. Then compare model A assigning 20 nats to a 10-byte document in five tokens with model B assigning 18 nats in ten byte targets. Which has lower per-unit perplexity, and which has lower bits per byte?</Prose><details><summary>Solution</summary><Prose>Patches have lengths [1,2,2], so the global causal count is 3×4/2=6 rather than 5×6/2=15 at byte resolution. The equal-to-threshold position stays inside its patch. A's per-token perplexity is exp(4), B's exp(1.8); these units differ. Their bits per byte are 20/(10 ln2)≈2.885 and 18/(10 ln2)≈2.597, so B assigns higher likelihood to this same document under the stated boundary convention. Neither number supplies the unmeasured runtime of a whole architecture.</Prose></details></div>
+        <div className="lesson-exercise"><H3>6. Build a lossless streaming adapter</H3><Prose>Accept an iterable of arbitrary byte chunks, emit only complete UTF-8 text, and flush at EOF. Test every possible split of “Å € 👩‍🔬”, including empty chunks and a truncated final scalar. Compare against the standard incremental decoder. Add a separate display policy for invalid generated bytes without changing your exact-byte record.</Prose><details><summary>Solution and success criteria</summary><Prose>Maintain one decoder instance for the stream, pass every chunk with final=False, then call feed(b"", final=True). Join the emitted text and compare it with the original. Every valid partition must agree; truncation must fail under strict policy. A replacement display is a separate rendering derived from preserved raw bytes. This separation permits both readable output and accurate debugging.</Prose></details></div>
+      </section>
+      <Sources alternatives={<ul>
+        <li><a href="https://docs.python.org/3/howto/unicode.html">Python Unicode HOWTO</a> — a practical written route through strings, encodings and normalization; use after the first byte explorer.</li>
+        <li><a href="https://www.youtube.com/watch?v=MijmeoH9LT4">Computerphile: Characters, Symbols and the Unicode Miracle</a> — an optional introductory video listed by the Python HOWTO. The written HOWTO was reviewed; this video was not independently watched.</li>
+        <li><a href="https://huggingface.co/learn/llm-course/en/chapter6/5">Hugging Face's BPE walkthrough</a> — a second written route through the base alphabet and repeated merges, useful alongside the café merge brackets.</li>
+        <li><a href="https://huggingface.co/docs/transformers/model_doc/byt5">Hugging Face ByT5 guide</a> — ordinary tokenizer/model APIs and byte-offset examples after the training-interface section. The runnable local bridge uses randomly initialized teaching weights, not a pretrained model download.</li>
+        <li><a href="https://aclanthology.org/2022.tacl-1.17/">ByT5 paper and accompanying author presentation</a> — the paper's architecture and tradeoff sections offer a deeper research route. The paper was consulted; the linked presentation is an optional companion, not a separately reviewed video.</li>
+      </ul>}>
+        <li><a href="https://www.rfc-editor.org/rfc/rfc3629">RFC 3629, sections 3–4</a> — UTF-8 bit layout, allowed scalars and invalid sequences.</li>
+        <li><a href="https://unicode.org/reports/tr15/">Unicode normalization, UAX #15</a> and <a href="https://unicode.org/reports/tr29/">text segmentation, UAX #29</a> — canonical/compatibility transforms and extended grapheme boundaries.</li>
+        <li><a href="https://github.com/openai/gpt-2/blob/master/src/encoder.py">GPT-2 encoder source</a> and <a href="https://huggingface.co/docs/tokenizers/api/pre-tokenizers">Tokenizers pre-tokenizers</a> — byte bijection and ByteLevel configuration.</li>
+        <li><a href="https://github.com/meta-llama/llama3/blob/main/llama/tokenizer.py">Llama 3 tokenizer implementation</a> — the actual tiktoken-based interface, rather than a family-wide assumption.</li>
+        <li><a href="https://docs.python.org/3/library/codecs.html#incremental-encoding-and-decoding">Python incremental codecs</a> — state and finalization semantics.</li>
+        <li><a href="https://aclanthology.org/2022.tacl-1.5/">CANINE</a>, <a href="https://arxiv.org/abs/2106.12672">Charformer</a> and <a href="https://arxiv.org/abs/2401.13660">MambaByte</a> — distinct character/byte representations and mechanisms, not interchangeable benchmarks.</li>
+        <li><a href="https://arxiv.org/abs/2412.09871">Byte Latent Transformer</a> and <a href="https://github.com/facebookresearch/blt">author implementation</a> — entropy patching, causal architecture and complete experiment conditions.</li>
+        <li><a href="https://huggingface.co/docs/transformers/model_doc/blt">Hugging Face BLT guide</a> and <a href="https://arxiv.org/html/2605.08044v1">Fast Byte Latent Transformer (2026)</a> — ordinary model/patcher interfaces and current parallel-byte/draft-verification research. The complete models are research extensions to our boundary and pooling programs.</li>
+      </Sources>
+      <section className="lesson-ending lesson-ending--next" data-lesson-ending="next"><H2>13. Continue from coverage to vocabulary quality</H2><Prose>You are ready to continue when you can follow one scalar into bytes, join arbitrary byte groups without losing it, build shifted byte targets and explain where a patch model saves global work. Next, <a href="/learn/topic/vocabulary-design-multilingual-tokenization">Vocabulary Design &amp; Multilingual Tokenization</a> asks how to spend vocabulary capacity and compare coverage, fragmentation and service across real language inputs.</Prose></section>
     </div>
   ),
 };
-
-export default byteLevelTokenization;

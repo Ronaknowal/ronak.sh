@@ -1,0 +1,34 @@
+.lesson-flow.svm-reading-flow { --svm-negative:#ee9aa8; --svm-positive:#89baff; --svm-query:#e8b76c; }
+.svm-reading-flow p, .svm-reading-flow li { overflow-wrap:anywhere; }
+.svm-reading-flow .svm-flow-pan { overflow-x:auto; max-width:100%; margin:1.8em 0 1em; padding:.3em 0 .8em; scrollbar-color:#666 transparent; }
+.svm-reading-flow .svm-flow-scene { display:block; max-width:none; font-size:1em; }
+.svm-reading-flow .svm-flow-scene text { font-family:inherit; font-size:16px; font-weight:400; }
+.svm-reading-flow .svm-flow-pan:focus-visible, .svm-reading-flow .svm-flow-table:focus-visible { outline:2px solid #e8b76c; outline-offset:3px; }
+.svm-reading-flow .svm-flow-pan-hint { color:#b8bec8; margin:1em 0 .3em; }
+.svm-reading-flow .svm-flow-equation { max-width:100%; overflow-x:auto; }
+.svm-reading-flow .svm-flow-equation:focus-visible { outline:2px solid #e8b76c; outline-offset:3px; }
+.svm-reading-flow .svm-flow-equation > div { text-align:left !important; }
+.svm-reading-flow .svm-flow-equation .katex-display { display:inline-block; text-align:left; }
+.svm-reading-flow .svm-flow-inline-math > span { font-size:1em !important; }
+.svm-reading-flow .svm-flow-exact, .svm-reading-flow .svm-flow-select { display:flex; flex-direction:column; gap:.35em; max-width:100%; min-width:min(10em,100%); }
+.svm-reading-flow .svm-flow-entry { display:flex; flex-wrap:wrap; gap:.35em; align-items:center; }
+.svm-reading-flow .svm-flow-entry input { width:7.5em; min-width:0; }
+.svm-reading-flow .flow-controls :is(input,select,button) { min-height:44px; }
+.svm-reading-flow input:not([type=range]), .svm-reading-flow select, .svm-reading-flow textarea { font:inherit; color:inherit; background:#15171b; border:1px solid #59616f; border-radius:3px; padding:.45em; }
+.svm-reading-flow .svm-flow-exact [role=alert], .svm-reading-flow .svm-flow-error { color:#ee9aa8; max-width:20em; }
+.svm-reading-flow .svm-flow-table { max-width:100%; overflow-x:auto; margin:1.3em 0; }
+.svm-reading-flow .svm-flow-table table { border-collapse:collapse; min-width:max-content; font:inherit; }
+.svm-reading-flow .svm-flow-table th, .svm-reading-flow .svm-flow-table td { padding:.55em .75em; border-bottom:1px solid #3f4652; text-align:left; vertical-align:top; white-space:nowrap; }
+.svm-reading-flow .svm-flow-table caption { text-align:left; margin-bottom:.65em; white-space:normal; }
+.svm-reading-flow .svm-flow-table th { font-weight:500; }
+.svm-reading-flow .svm-flow-paired { display:flex; flex-wrap:wrap; gap:1.5em; align-items:flex-start; }
+.svm-reading-flow .svm-flow-paired > * { max-width:100%; }
+.svm-reading-flow .svm-flow-words { display:flex; flex-wrap:wrap; gap:.45em; margin:.8em 0; }
+.svm-reading-flow .svm-flow-word { border-bottom:3px solid var(--word-hue); color:var(--word-hue); padding:.15em .25em; font-family:monospace; }
+.svm-reading-flow .svm-flow-editor { margin:1.5em 0; }
+.svm-reading-flow .svm-flow-editor > p { margin-bottom:.6em; }
+.svm-reading-flow .svm-flow-editor textarea { display:block; width:min(100%,35em); min-height:7em; }
+.svm-reading-flow .svm-flow-desktop { display:block; }
+.svm-reading-flow .svm-flow-compact { display:none; }
+@media(max-width:900px) { .svm-reading-flow .svm-flow-desktop { display:none; } .svm-reading-flow .svm-flow-compact { display:block; } }
+@media(max-width:600px) { .svm-reading-flow .flow-controls { gap:.75em; } .svm-reading-flow .svm-flow-paired { display:block; } .svm-reading-flow .svm-flow-entry input { width:6em; } }

@@ -1,0 +1,24 @@
+.lesson-flow .mp-attention-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  align-items: start;
+  gap: 1.5rem;
+}
+.lesson-flow .mp-attention-grid > * { min-width: 0; }
+.lesson-flow .mp-attention-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.lesson-flow .mp-attention-table :is(th, td) {
+  border-bottom: 1px solid #343434;
+  padding: .65rem .3rem;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+.lesson-flow .mp-attention-table th { font-weight: 500; }
+.lesson-flow .mp-attention-table caption { text-align: start; margin-block: .6rem; }
+.lesson-flow .mp-attention-result { color: #c1a4f5; }
+.lesson-flow .mp-attention-check { display: flex; align-items: center; gap: .6rem; }
+.lesson-flow .mp-attention-check input { accent-color: #e4b752; width: 1.25rem; min-height: 1.25rem; }
+.lesson-flow .mp-attention-caption { margin-block: .75rem 1.2rem; color: #b9b9b9; }

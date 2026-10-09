@@ -1,0 +1,2388 @@
+{
+  "scope": "Exact rational / finite closed-form / saved-array descriptive design states only. No optimizer fit or historical main/checker executed.",
+  "sourceSha256": "581f6c072d0468af186d04704f548e494156155a07218ee40800afceaa234f09",
+  "D12": [
+    {
+      "x": 1.0,
+      "y": 1.0,
+      "FrobeniusHalfSquare": 0.0,
+      "KL": 0.0,
+      "IS": 0.0
+    },
+    {
+      "x": 1.0,
+      "y": 3.0,
+      "FrobeniusHalfSquare": 2.0,
+      "KL": 0.90138771133189,
+      "IS": 0.43194562200144304
+    },
+    {
+      "x": 2.0,
+      "y": 1.0,
+      "FrobeniusHalfSquare": 0.5,
+      "KL": 0.3862943611198906,
+      "IS": 0.3068528194400546
+    },
+    {
+      "x": 2.0,
+      "y": 3.0,
+      "FrobeniusHalfSquare": 0.5,
+      "KL": 0.18906978378367123,
+      "IS": 0.07213177477483113
+    }
+  ],
+  "D20": {
+    "X": [
+      [
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        }
+      ],
+      [
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        },
+        {
+          "fraction": "4",
+          "decimal": 4.0
+        }
+      ],
+      [
+        {
+          "fraction": "0",
+          "decimal": 0.0
+        },
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        },
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        }
+      ]
+    ],
+    "W0": [
+      [
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        }
+      ],
+      [
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        }
+      ],
+      [
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        }
+      ]
+    ],
+    "H0": [
+      [
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "0",
+          "decimal": 0.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        }
+      ],
+      [
+        {
+          "fraction": "0",
+          "decimal": 0.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        }
+      ]
+    ],
+    "W1": [
+      [
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        }
+      ],
+      [
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        },
+        {
+          "fraction": "5/2",
+          "decimal": 2.5
+        }
+      ],
+      [
+        {
+          "fraction": "1/2",
+          "decimal": 0.5
+        },
+        {
+          "fraction": "7/4",
+          "decimal": 1.75
+        }
+      ]
+    ],
+    "H1": [
+      [
+        {
+          "fraction": "8/11",
+          "decimal": 0.7272727272727273
+        },
+        {
+          "fraction": "3/22",
+          "decimal": 0.13636363636363635
+        },
+        {
+          "fraction": "19/22",
+          "decimal": 0.8636363636363636
+        }
+      ],
+      [
+        {
+          "fraction": "0",
+          "decimal": 0.0
+        },
+        {
+          "fraction": "641/605",
+          "decimal": 1.059504132231405
+        },
+        {
+          "fraction": "569/605",
+          "decimal": 0.9404958677685951
+        }
+      ]
+    ],
+    "afterWPrediction": [
+      [
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        },
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        }
+      ],
+      [
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        },
+        {
+          "fraction": "5/2",
+          "decimal": 2.5
+        },
+        {
+          "fraction": "9/2",
+          "decimal": 4.5
+        }
+      ],
+      [
+        {
+          "fraction": "1/2",
+          "decimal": 0.5
+        },
+        {
+          "fraction": "7/4",
+          "decimal": 1.75
+        },
+        {
+          "fraction": "9/4",
+          "decimal": 2.25
+        }
+      ]
+    ],
+    "afterHPrediction": [
+      [
+        {
+          "fraction": "16/11",
+          "decimal": 1.4545454545454546
+        },
+        {
+          "fraction": "806/605",
+          "decimal": 1.3322314049586776
+        },
+        {
+          "fraction": "1614/605",
+          "decimal": 2.667768595041322
+        }
+      ],
+      [
+        {
+          "fraction": "16/11",
+          "decimal": 1.4545454545454546
+        },
+        {
+          "fraction": "707/242",
+          "decimal": 2.9214876033057853
+        },
+        {
+          "fraction": "987/242",
+          "decimal": 4.078512396694215
+        }
+      ],
+      [
+        {
+          "fraction": "4/11",
+          "decimal": 0.36363636363636365
+        },
+        {
+          "fraction": "1163/605",
+          "decimal": 1.9223140495867768
+        },
+        {
+          "fraction": "1257/605",
+          "decimal": 2.077685950413223
+        }
+      ]
+    ],
+    "losses": [
+      {
+        "fraction": "6",
+        "decimal": 6.0
+      },
+      {
+        "fraction": "15/16",
+        "decimal": 0.9375
+      },
+      {
+        "fraction": "11733/26620",
+        "decimal": 0.4407588279489106
+      }
+    ]
+  },
+  "D24": {
+    "selected": [
+      0,
+      2
+    ],
+    "numerator": [
+      [
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        },
+        {
+          "fraction": "6",
+          "decimal": 6.0
+        },
+        {
+          "fraction": "9",
+          "decimal": 9.0
+        }
+      ],
+      [
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        },
+        {
+          "fraction": "6",
+          "decimal": 6.0
+        },
+        {
+          "fraction": "9",
+          "decimal": 9.0
+        }
+      ]
+    ],
+    "denominator": [
+      [
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        },
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        },
+        {
+          "fraction": "6",
+          "decimal": 6.0
+        }
+      ],
+      [
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        },
+        {
+          "fraction": "3",
+          "decimal": 3.0
+        },
+        {
+          "fraction": "6",
+          "decimal": 6.0
+        }
+      ]
+    ],
+    "newH": [
+      [
+        {
+          "fraction": "1",
+          "decimal": 1.0
+        },
+        {
+          "fraction": "0",
+          "decimal": 0.0
+        },
+        {
+          "fraction": "3/2",
+          "decimal": 1.5
+        }
+      ],
+      [
+        {
+          "fraction": "0",
+          "decimal": 0.0
+        },
+        {
+          "fraction": "2",
+          "decimal": 2.0
+        },
+        {
+          "fraction": "3/2",
+          "decimal": 1.5
+        }
+      ]
+    ]
+  },
+  "D25": {
+    "originalOperandsOnly": {
+      "X": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "3",
+            "decimal": 3.0
+          }
+        ],
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "3",
+            "decimal": 3.0
+          }
+        ],
+        [
+          {
+            "fraction": "3",
+            "decimal": 3.0
+          },
+          {
+            "fraction": "3",
+            "decimal": 3.0
+          },
+          {
+            "fraction": "6",
+            "decimal": 6.0
+          }
+        ]
+      ],
+      "W": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1/2",
+            "decimal": 0.5
+          }
+        ],
+        [
+          {
+            "fraction": "1/2",
+            "decimal": 0.5
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ],
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "H": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1/5",
+            "decimal": 0.2
+          },
+          {
+            "fraction": "4/5",
+            "decimal": 0.8
+          }
+        ],
+        [
+          {
+            "fraction": "1/5",
+            "decimal": 0.2
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "4/5",
+            "decimal": 0.8
+          }
+        ]
+      ]
+    },
+    "newH": [
+      [
+        {
+          "fraction": "110/53",
+          "decimal": 2.0754716981132075
+        },
+        {
+          "fraction": "20/49",
+          "decimal": 0.40816326530612246
+        },
+        {
+          "fraction": "42/17",
+          "decimal": 2.4705882352941178
+        }
+      ],
+      [
+        {
+          "fraction": "20/49",
+          "decimal": 0.40816326530612246
+        },
+        {
+          "fraction": "110/53",
+          "decimal": 2.0754716981132075
+        },
+        {
+          "fraction": "42/17",
+          "decimal": 2.4705882352941178
+        }
+      ]
+    ],
+    "newW": [
+      [
+        {
+          "fraction": "11666417399/14108828057",
+          "decimal": 0.8268877721003756
+        },
+        {
+          "fraction": "5020756727/12754220032",
+          "decimal": 0.39365454840853104
+        }
+      ],
+      [
+        {
+          "fraction": "5020756727/12754220032",
+          "decimal": 0.39365454840853104
+        },
+        {
+          "fraction": "11666417399/14108828057",
+          "decimal": 0.8268877721003756
+        }
+      ],
+      [
+        {
+          "fraction": "803997439/663285138",
+          "decimal": 1.212144510616187
+        },
+        {
+          "fraction": "803997439/663285138",
+          "decimal": 1.212144510616187
+        }
+      ]
+    ],
+    "initialHalfLoss": {
+      "fraction": "853/50",
+      "decimal": 17.06
+    },
+    "newHalfLoss": {
+      "fraction": "17650927234908859287126265289886949097034423969/447454335673191164730654697290395158561387053056",
+      "decimal": 0.03944743815780261
+    },
+    "role": "new direct one-step calculation; original forty-sweep stdout conserved separately"
+  },
+  "D27": [
+    {
+      "observedCount": 0,
+      "prediction": 2,
+      "allocatedCounts": [
+        0.0,
+        0.0
+      ],
+      "KL": 2.0
+    },
+    {
+      "observedCount": 2,
+      "prediction": 2,
+      "allocatedCounts": [
+        1.0,
+        1.0
+      ],
+      "KL": 0.0
+    },
+    {
+      "observedCount": 4,
+      "prediction": 2,
+      "allocatedCounts": [
+        2.0,
+        2.0
+      ],
+      "KL": 0.7725887222397811
+    },
+    {
+      "observedCount": 6,
+      "prediction": 2,
+      "allocatedCounts": [
+        3.0,
+        3.0
+      ],
+      "KL": 2.5916737320086582
+    }
+  ],
+  "D28": [
+    {
+      "current": {
+        "fraction": "1",
+        "decimal": 1.0
+      },
+      "boundDiagonal": {
+        "fraction": "3",
+        "decimal": 3.0
+      },
+      "minimum": {
+        "fraction": "5/3",
+        "decimal": 1.6666666666666667
+      },
+      "actualLossAtMinimum": {
+        "fraction": "1/9",
+        "decimal": 0.1111111111111111
+      },
+      "boundAtMinimum": {
+        "fraction": "1/3",
+        "decimal": 0.3333333333333333
+      }
+    },
+    {
+      "current": {
+        "fraction": "1/2",
+        "decimal": 0.5
+      },
+      "boundDiagonal": {
+        "fraction": "4",
+        "decimal": 4.0
+      },
+      "minimum": {
+        "fraction": "5/4",
+        "decimal": 1.25
+      },
+      "actualLossAtMinimum": {
+        "fraction": "9/16",
+        "decimal": 0.5625
+      },
+      "boundAtMinimum": {
+        "fraction": "9/8",
+        "decimal": 1.125
+      }
+    },
+    {
+      "current": {
+        "fraction": "2",
+        "decimal": 2.0
+      },
+      "boundDiagonal": {
+        "fraction": "5/2",
+        "decimal": 2.5
+      },
+      "minimum": {
+        "fraction": "2",
+        "decimal": 2.0
+      },
+      "actualLossAtMinimum": {
+        "fraction": "0",
+        "decimal": 0.0
+      },
+      "boundAtMinimum": {
+        "fraction": "0",
+        "decimal": 0.0
+      }
+    }
+  ],
+  "D34": [
+    {
+      "fill": 0.0,
+      "W": [
+        [
+          2.529822128134704,
+          0.0
+        ],
+        [
+          1.8973665961010275,
+          1.7888543819998317
+        ]
+      ],
+      "H": [
+        [
+          2.529822128134704,
+          1.8973665961010275
+        ],
+        [
+          0.0,
+          1.7888543819998317
+        ]
+      ],
+      "prediction": [
+        [
+          6.400000000000002,
+          4.800000000000001
+        ],
+        [
+          4.800000000000001,
+          6.799999999999999
+        ]
+      ],
+      "initialHalfLoss": 7.379999999999999,
+      "afterH": [
+        [
+          2.529822128134703,
+          1.4373989364401722
+        ],
+        [
+          0.0,
+          1.788854381999832
+        ]
+      ],
+      "afterW": [
+        [
+          2.8577803267058566,
+          0.0
+        ],
+        [
+          1.4550380888242125,
+          2.0522439842574762
+        ]
+      ],
+      "afterOneHThenWPrediction": [
+        [
+          7.229675907848497,
+          4.107770402186646
+        ],
+        [
+          3.6809875543863204,
+          5.762635845527644
+        ]
+      ],
+      "afterOneHThenWHalfLoss": 3.2875310469355843
+    },
+    {
+      "fill": 0.1,
+      "W": [
+        [
+          2.529822128134704,
+          0.1
+        ],
+        [
+          1.8973665961010275,
+          1.7888543819998317
+        ]
+      ],
+      "H": [
+        [
+          2.529822128134704,
+          1.8973665961010275
+        ],
+        [
+          0.1,
+          1.7888543819998317
+        ]
+      ],
+      "prediction": [
+        [
+          6.410000000000002,
+          4.978885438199984
+        ],
+        [
+          4.978885438199984,
+          6.799999999999999
+        ]
+      ],
+      "initialHalfLoss": 8.252700103359919,
+      "afterH": [
+        [
+          2.4938694884274573,
+          1.4118872129276951
+        ],
+        [
+          0.05355590430213355,
+          1.7524208431628348
+        ]
+      ],
+      "afterW": [
+        [
+          2.8665906977117555,
+          0.06727344301498647
+        ],
+        [
+          1.4605436350029761,
+          2.062563729958484
+        ]
+      ],
+      "afterOneHThenWPrediction": [
+        [
+          7.1525059669095095,
+          4.165194134527497
+        ],
+        [
+          3.752867673589559,
+          5.676602552914565
+        ]
+      ],
+      "afterOneHThenWHalfLoss": 3.6527134241460795
+    },
+    {
+      "fill": 2.0,
+      "W": [
+        [
+          2.529822128134704,
+          2.0
+        ],
+        [
+          1.8973665961010275,
+          1.7888543819998317
+        ]
+      ],
+      "H": [
+        [
+          2.529822128134704,
+          1.8973665961010275
+        ],
+        [
+          2.0,
+          1.7888543819998317
+        ]
+      ],
+      "prediction": [
+        [
+          10.400000000000002,
+          8.377708763999664
+        ],
+        [
+          8.377708763999664,
+          6.799999999999999
+        ]
+      ],
+      "initialHalfLoss": 38.15300206719839,
+      "afterH": [
+        [
+          1.5163816045813026,
+          1.0558359525298657
+        ],
+        [
+          1.1564835856610367,
+          1.0493392840763895
+        ]
+      ],
+      "afterW": [
+        [
+          2.6368967400875087,
+          1.9810348778083708
+        ],
+        [
+          1.770082224391536,
+          1.8106530890474233
+        ]
+      ],
+      "afterOneHThenWPrediction": [
+        [
+          6.2895760286565014,
+          4.8629081017029865
+        ],
+        [
+          4.778110700473475,
+          3.768905867618347
+        ]
+      ],
+      "afterOneHThenWHalfLoss": 12.279289105391499
+    }
+  ],
+  "D36": [
+    {
+      "initialAmount": {
+        "fraction": "1/2",
+        "decimal": 0.5
+      },
+      "initial": [
+        [
+          {
+            "fraction": "1/2",
+            "decimal": 0.5
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "CD": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5/2",
+            "decimal": 2.5
+          }
+        ]
+      ],
+      "MU": [
+        [
+          {
+            "fraction": "5/4",
+            "decimal": 1.25
+          },
+          {
+            "fraction": "14/5",
+            "decimal": 2.8
+          }
+        ]
+      ],
+      "CDPrediction": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5/2",
+            "decimal": 2.5
+          },
+          {
+            "fraction": "9/2",
+            "decimal": 4.5
+          }
+        ]
+      ],
+      "MUPrediction": [
+        [
+          {
+            "fraction": "5/4",
+            "decimal": 1.25
+          },
+          {
+            "fraction": "14/5",
+            "decimal": 2.8
+          },
+          {
+            "fraction": "81/20",
+            "decimal": 4.05
+          }
+        ]
+      ],
+      "CDHalfLoss": {
+        "fraction": "3/4",
+        "decimal": 0.75
+      },
+      "MUHalfLoss": {
+        "fraction": "21/400",
+        "decimal": 0.0525
+      },
+      "CDGradientAndPGSquared": [
+        [
+          {
+            "fraction": "3/2",
+            "decimal": 1.5
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ],
+        {
+          "fraction": "9/4",
+          "decimal": 2.25
+        }
+      ],
+      "MUGradientAndPGSquared": [
+        [
+          {
+            "fraction": "3/10",
+            "decimal": 0.3
+          },
+          {
+            "fraction": "-3/20",
+            "decimal": -0.15
+          }
+        ],
+        {
+          "fraction": "9/80",
+          "decimal": 0.1125
+        }
+      ]
+    },
+    {
+      "initialAmount": {
+        "fraction": "1",
+        "decimal": 1.0
+      },
+      "initial": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "CD": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5/2",
+            "decimal": 2.5
+          }
+        ]
+      ],
+      "MU": [
+        [
+          {
+            "fraction": "5/3",
+            "decimal": 1.6666666666666667
+          },
+          {
+            "fraction": "7/3",
+            "decimal": 2.3333333333333335
+          }
+        ]
+      ],
+      "CDPrediction": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5/2",
+            "decimal": 2.5
+          },
+          {
+            "fraction": "9/2",
+            "decimal": 4.5
+          }
+        ]
+      ],
+      "MUPrediction": [
+        [
+          {
+            "fraction": "5/3",
+            "decimal": 1.6666666666666667
+          },
+          {
+            "fraction": "7/3",
+            "decimal": 2.3333333333333335
+          },
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          }
+        ]
+      ],
+      "CDHalfLoss": {
+        "fraction": "3/4",
+        "decimal": 0.75
+      },
+      "MUHalfLoss": {
+        "fraction": "4/9",
+        "decimal": 0.4444444444444444
+      },
+      "CDGradientAndPGSquared": [
+        [
+          {
+            "fraction": "3/2",
+            "decimal": 1.5
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ],
+        {
+          "fraction": "9/4",
+          "decimal": 2.25
+        }
+      ],
+      "MUGradientAndPGSquared": [
+        [
+          {
+            "fraction": "2/3",
+            "decimal": 0.6666666666666666
+          },
+          {
+            "fraction": "-2/3",
+            "decimal": -0.6666666666666666
+          }
+        ],
+        {
+          "fraction": "8/9",
+          "decimal": 0.8888888888888888
+        }
+      ]
+    },
+    {
+      "initialAmount": {
+        "fraction": "2",
+        "decimal": 2.0
+      },
+      "initial": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "CD": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5/2",
+            "decimal": 2.5
+          }
+        ]
+      ],
+      "MU": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "7/4",
+            "decimal": 1.75
+          }
+        ]
+      ],
+      "CDPrediction": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5/2",
+            "decimal": 2.5
+          },
+          {
+            "fraction": "9/2",
+            "decimal": 4.5
+          }
+        ]
+      ],
+      "MUPrediction": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "7/4",
+            "decimal": 1.75
+          },
+          {
+            "fraction": "15/4",
+            "decimal": 3.75
+          }
+        ]
+      ],
+      "CDHalfLoss": {
+        "fraction": "3/4",
+        "decimal": 0.75
+      },
+      "MUHalfLoss": {
+        "fraction": "21/16",
+        "decimal": 1.3125
+      },
+      "CDGradientAndPGSquared": [
+        [
+          {
+            "fraction": "3/2",
+            "decimal": 1.5
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ],
+        {
+          "fraction": "9/4",
+          "decimal": 2.25
+        }
+      ],
+      "MUGradientAndPGSquared": [
+        [
+          {
+            "fraction": "3/4",
+            "decimal": 0.75
+          },
+          {
+            "fraction": "-3/2",
+            "decimal": -1.5
+          }
+        ],
+        {
+          "fraction": "45/16",
+          "decimal": 2.8125
+        }
+      ]
+    }
+  ],
+  "D39": [
+    {
+      "scale": {
+        "fraction": "1",
+        "decimal": 1.0
+      },
+      "Wmass": {
+        "fraction": "9",
+        "decimal": 9.0
+      },
+      "Hmass": {
+        "fraction": "4",
+        "decimal": 4.0
+      },
+      "Wpenalty": {
+        "fraction": "27/10",
+        "decimal": 2.7
+      },
+      "Hpenalty": {
+        "fraction": "12/5",
+        "decimal": 2.4
+      },
+      "total": {
+        "fraction": "51/10",
+        "decimal": 5.1
+      }
+    },
+    {
+      "scale": {
+        "fraction": "2",
+        "decimal": 2.0
+      },
+      "Wmass": {
+        "fraction": "15/2",
+        "decimal": 7.5
+      },
+      "Hmass": {
+        "fraction": "6",
+        "decimal": 6.0
+      },
+      "Wpenalty": {
+        "fraction": "9/4",
+        "decimal": 2.25
+      },
+      "Hpenalty": {
+        "fraction": "18/5",
+        "decimal": 3.6
+      },
+      "total": {
+        "fraction": "117/20",
+        "decimal": 5.85
+      }
+    },
+    {
+      "scale": {
+        "fraction": "1/2",
+        "decimal": 0.5
+      },
+      "Wmass": {
+        "fraction": "12",
+        "decimal": 12.0
+      },
+      "Hmass": {
+        "fraction": "3",
+        "decimal": 3.0
+      },
+      "Wpenalty": {
+        "fraction": "18/5",
+        "decimal": 3.6
+      },
+      "Hpenalty": {
+        "fraction": "9/5",
+        "decimal": 1.8
+      },
+      "total": {
+        "fraction": "27/5",
+        "decimal": 5.4
+      }
+    },
+    {
+      "scale": {
+        "fraction": "3",
+        "decimal": 3.0
+      },
+      "Wmass": {
+        "fraction": "7",
+        "decimal": 7.0
+      },
+      "Hmass": {
+        "fraction": "8",
+        "decimal": 8.0
+      },
+      "Wpenalty": {
+        "fraction": "21/10",
+        "decimal": 2.1
+      },
+      "Hpenalty": {
+        "fraction": "24/5",
+        "decimal": 4.8
+      },
+      "total": {
+        "fraction": "69/10",
+        "decimal": 6.9
+      }
+    }
+  ],
+  "D58": [
+    {
+      "orbitCount": 2,
+      "counts": [
+        2,
+        1,
+        0
+      ],
+      "idf": [
+        1.6931471805599454,
+        1.2876820724517808,
+        1.2876820724517808
+      ],
+      "unnormalized": [
+        3.386294361119891,
+        1.2876820724517808,
+        0.0
+      ],
+      "l2Normalized": [
+        0.9347019636214325,
+        0.3554324678504174,
+        0.0
+      ]
+    },
+    {
+      "orbitCount": 0,
+      "counts": [
+        0,
+        1,
+        0
+      ],
+      "idf": [
+        1.6931471805599454,
+        1.2876820724517808,
+        1.2876820724517808
+      ],
+      "unnormalized": [
+        0.0,
+        1.2876820724517808,
+        0.0
+      ],
+      "l2Normalized": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "orbitCount": 4,
+      "counts": [
+        4,
+        1,
+        0
+      ],
+      "idf": [
+        1.6931471805599454,
+        1.2876820724517808,
+        1.2876820724517808
+      ],
+      "unnormalized": [
+        6.772588722239782,
+        1.2876820724517808,
+        0.0
+      ],
+      "l2Normalized": [
+        0.9824007638376623,
+        0.18678527568086775,
+        0.0
+      ]
+    }
+  ],
+  "D59": [
+    {
+      "gain": {
+        "fraction": "1/2",
+        "decimal": 0.5
+      },
+      "query": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1/2",
+            "decimal": 0.5
+          },
+          {
+            "fraction": "3/2",
+            "decimal": 1.5
+          }
+        ]
+      ],
+      "coneAmounts": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1/2",
+            "decimal": 0.5
+          }
+        ]
+      ],
+      "simplexAmounts": [
+        [
+          {
+            "fraction": "3/4",
+            "decimal": 0.75
+          },
+          {
+            "fraction": "1/4",
+            "decimal": 0.25
+          }
+        ]
+      ],
+      "simplexPrediction": [
+        [
+          {
+            "fraction": "3/4",
+            "decimal": 0.75
+          },
+          {
+            "fraction": "1/4",
+            "decimal": 0.25
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "simplexHalfLoss": {
+        "fraction": "3/16",
+        "decimal": 0.1875
+      },
+      "normalizedNNLSAmounts": [
+        [
+          {
+            "fraction": "2/3",
+            "decimal": 0.6666666666666666
+          },
+          {
+            "fraction": "1/3",
+            "decimal": 0.3333333333333333
+          }
+        ]
+      ],
+      "normalizedNNLSHalfLoss": {
+        "fraction": "7/36",
+        "decimal": 0.19444444444444445
+      }
+    },
+    {
+      "gain": {
+        "fraction": "1",
+        "decimal": 1.0
+      },
+      "query": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "3",
+            "decimal": 3.0
+          }
+        ]
+      ],
+      "coneAmounts": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "simplexAmounts": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ]
+      ],
+      "simplexPrediction": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "simplexHalfLoss": {
+        "fraction": "3",
+        "decimal": 3.0
+      },
+      "normalizedNNLSAmounts": [
+        [
+          {
+            "fraction": "2/3",
+            "decimal": 0.6666666666666666
+          },
+          {
+            "fraction": "1/3",
+            "decimal": 0.3333333333333333
+          }
+        ]
+      ],
+      "normalizedNNLSHalfLoss": {
+        "fraction": "28/9",
+        "decimal": 3.111111111111111
+      }
+    },
+    {
+      "gain": {
+        "fraction": "2",
+        "decimal": 2.0
+      },
+      "query": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "6",
+            "decimal": 6.0
+          }
+        ]
+      ],
+      "coneAmounts": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ]
+      ],
+      "simplexAmounts": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          }
+        ]
+      ],
+      "simplexPrediction": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "simplexHalfLoss": {
+        "fraction": "19",
+        "decimal": 19.0
+      },
+      "normalizedNNLSAmounts": [
+        [
+          {
+            "fraction": "2/3",
+            "decimal": 0.6666666666666666
+          },
+          {
+            "fraction": "1/3",
+            "decimal": 0.3333333333333333
+          }
+        ]
+      ],
+      "normalizedNNLSHalfLoss": {
+        "fraction": "175/9",
+        "decimal": 19.444444444444443
+      }
+    }
+  ],
+  "D63": [
+    {
+      "cell": {
+        "fraction": "1",
+        "decimal": 1.0
+      },
+      "H": [
+        [
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "savedW": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ]
+      ],
+      "freshW": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ]
+      ],
+      "savedEncodingHalfLoss": {
+        "fraction": "0",
+        "decimal": 0.0
+      },
+      "freshEncodingHalfLoss": {
+        "fraction": "0",
+        "decimal": 0.0
+      },
+      "savedA": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ],
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5",
+            "decimal": 5.0
+          }
+        ]
+      ],
+      "savedB": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "6",
+            "decimal": 6.0
+          }
+        ],
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5",
+            "decimal": 5.0
+          },
+          {
+            "fraction": "7",
+            "decimal": 7.0
+          }
+        ]
+      ],
+      "freshA": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ],
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5",
+            "decimal": 5.0
+          }
+        ]
+      ],
+      "freshB": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "6",
+            "decimal": 6.0
+          }
+        ],
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5",
+            "decimal": 5.0
+          },
+          {
+            "fraction": "7",
+            "decimal": 7.0
+          }
+        ]
+      ]
+    },
+    {
+      "cell": {
+        "fraction": "3/2",
+        "decimal": 1.5
+      },
+      "H": [
+        [
+          {
+            "fraction": "3/2",
+            "decimal": 1.5
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "savedW": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ]
+      ],
+      "freshW": [
+        [
+          {
+            "fraction": "16/11",
+            "decimal": 1.4545454545454546
+          },
+          {
+            "fraction": "14/11",
+            "decimal": 1.2727272727272727
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ]
+      ],
+      "savedEncodingHalfLoss": {
+        "fraction": "1/2",
+        "decimal": 0.5
+      },
+      "freshEncodingHalfLoss": {
+        "fraction": "1/11",
+        "decimal": 0.09090909090909091
+      },
+      "savedA": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ],
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5",
+            "decimal": 5.0
+          }
+        ]
+      ],
+      "savedB": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "6",
+            "decimal": 6.0
+          }
+        ],
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5",
+            "decimal": 5.0
+          },
+          {
+            "fraction": "7",
+            "decimal": 7.0
+          }
+        ]
+      ],
+      "freshA": [
+        [
+          {
+            "fraction": "256/121",
+            "decimal": 2.115702479338843
+          },
+          {
+            "fraction": "224/121",
+            "decimal": 1.8512396694214877
+          }
+        ],
+        [
+          {
+            "fraction": "224/121",
+            "decimal": 1.8512396694214877
+          },
+          {
+            "fraction": "680/121",
+            "decimal": 5.619834710743802
+          }
+        ]
+      ],
+      "freshB": [
+        [
+          {
+            "fraction": "32/11",
+            "decimal": 2.909090909090909
+          },
+          {
+            "fraction": "16/11",
+            "decimal": 1.4545454545454546
+          },
+          {
+            "fraction": "48/11",
+            "decimal": 4.363636363636363
+          }
+        ],
+        [
+          {
+            "fraction": "28/11",
+            "decimal": 2.5454545454545454
+          },
+          {
+            "fraction": "58/11",
+            "decimal": 5.2727272727272725
+          },
+          {
+            "fraction": "86/11",
+            "decimal": 7.818181818181818
+          }
+        ]
+      ]
+    },
+    {
+      "cell": {
+        "fraction": "2",
+        "decimal": 2.0
+      },
+      "H": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ]
+      ],
+      "savedW": [
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "1",
+            "decimal": 1.0
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ]
+      ],
+      "freshW": [
+        [
+          {
+            "fraction": "10/9",
+            "decimal": 1.1111111111111112
+          },
+          {
+            "fraction": "13/9",
+            "decimal": 1.4444444444444444
+          }
+        ],
+        [
+          {
+            "fraction": "0",
+            "decimal": 0.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ]
+      ],
+      "savedEncodingHalfLoss": {
+        "fraction": "2",
+        "decimal": 2.0
+      },
+      "freshEncodingHalfLoss": {
+        "fraction": "2/9",
+        "decimal": 0.2222222222222222
+      },
+      "savedA": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          }
+        ],
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5",
+            "decimal": 5.0
+          }
+        ]
+      ],
+      "savedB": [
+        [
+          {
+            "fraction": "4",
+            "decimal": 4.0
+          },
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "6",
+            "decimal": 6.0
+          }
+        ],
+        [
+          {
+            "fraction": "2",
+            "decimal": 2.0
+          },
+          {
+            "fraction": "5",
+            "decimal": 5.0
+          },
+          {
+            "fraction": "7",
+            "decimal": 7.0
+          }
+        ]
+      ],
+      "freshA": [
+        [
+          {
+            "fraction": "100/81",
+            "decimal": 1.2345679012345678
+          },
+          {
+            "fraction": "130/81",
+            "decimal": 1.6049382716049383
+          }
+        ],
+        [
+          {
+            "fraction": "130/81",
+            "decimal": 1.6049382716049383
+          },
+          {
+            "fraction": "493/81",
+            "decimal": 6.08641975308642
+          }
+        ]
+      ],
+      "freshB": [
+        [
+          {
+            "fraction": "20/9",
+            "decimal": 2.2222222222222223
+          },
+          {
+            "fraction": "10/9",
+            "decimal": 1.1111111111111112
+          },
+          {
+            "fraction": "10/3",
+            "decimal": 3.3333333333333335
+          }
+        ],
+        [
+          {
+            "fraction": "26/9",
+            "decimal": 2.888888888888889
+          },
+          {
+            "fraction": "49/9",
+            "decimal": 5.444444444444445
+          },
+          {
+            "fraction": "25/3",
+            "decimal": 8.333333333333334
+          }
+        ]
+      ]
+    }
+  ],
+  "savedDescriptive": [
+    {
+      "sourceRow": 242,
+      "component": "C8",
+      "beforeMSE": 0.021503642602943917,
+      "afterMSE": 0.021503642602943917,
+      "contribution": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "originalMaximum": 1.0176746162346788,
+      "allComponentGain2Maximum": 1.7925282546159191
+    },
+    {
+      "sourceRow": 256,
+      "component": "C8",
+      "beforeMSE": 0.02758816154887481,
+      "afterMSE": 0.0732625383196997,
+      "contribution": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.17775091208868632,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.24283439942652255,
+        0.2671887916435115,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.00304608000056565,
+        0.40362019181962505,
+        0.3925071320283747,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.2002405750806147,
+        0.79390191738638,
+        0.1584499924684643,
+        0.0,
+        0.12077649652610849,
+        0.12574138175915292,
+        0.0,
+        0.0,
+        0.24565695389225928,
+        0.579758425140966,
+        0.0,
+        0.026354294684169246,
+        0.5211370489439799,
+        0.1599000851502584,
+        0.0,
+        0.0,
+        0.0711714169681649,
+        0.16819125294357995,
+        0.0,
+        0.11813093546845814,
+        0.6882943943213864,
+        0.19840236590656687,
+        0.0003959303850412116,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.4309463720118815,
+        0.3338516654609791,
+        0.012630854500665673,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.048881558051410805,
+        0.4048326739739922,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "originalMaximum": 1.2277104609548262,
+      "allComponentGain2Maximum": 2.021612378341206
+    }
+  ],
+  "savedInput": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\preserved\\src\\learn\\data\\nmf-data.js",
+    "sha256": "40cd6b9079da9601743be3599b4c9d3087f62b074823a4cd83f46267eff1cbbe"
+  },
+  "scientificFitsOrOriginalExecutions": 0
+}

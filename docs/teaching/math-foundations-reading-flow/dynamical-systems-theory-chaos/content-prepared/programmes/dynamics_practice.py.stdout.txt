@@ -1,0 +1,19 @@
+cooling 0.2 0.4 same-sign decay one-step multiplier error 0.148812
+cooling 0.5 -0.5 alternating decay one-step multiplier error 0.72313
+cooling 0.8 -1.4 growth one-step multiplier error 1.490718
+cooling 0.666667 -1.0 boundary: nondecaying one-step multiplier error 1.135335
+positive cubic at t=1 0.707107
+The requested time reaches or exceeds the pole.
+transient starts (0.5, 0.0) (1.5, 0.25)
+section crossings [(2.5, 1.0), (3.75, 0.8)]
+cycle residuals 1.11e-16 4.4952e-07
+fixed reference diagnostic (0.6931471805599453, None, True)
+critical reference diagnostic (-inf, 0, False)
+LR ['1/4', '1/2'] 2/5
+RL ['3/4', '1'] 4/5
+kick-drift h=.25 (0.9375, -0.25) energies (0.470703125, 0.5)
+BA ((0, 0), (0.0, 1.5)) AB ((1.5, 0), (0.0, 0))
+changed product cycle 0 (0, 1)
+changed product cycle 1 (0, 1.5)
+changed product cycle 2 (0.0, 2.25)
+changed product cycle 3 (0.0, 3.375)

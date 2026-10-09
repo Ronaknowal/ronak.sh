@@ -1,0 +1,182 @@
+{
+  "schema": "root-nmf-selected-navigation-role-composition/v1",
+  "at": "2026-10-09T18:07:51.885Z",
+  "owner": "/root",
+  "status": "SELECTED_NMF_PRIVATE_RUNTIME_CONTEXT_ACCEPTED_NO_PHASE_PROMOTION",
+  "selectedSourceFreeze": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/combined-author-review/author-ready-source.json",
+    "bytes": 151243,
+    "sha256": "03620c4d159f87479c884711931ccea69309a2b9cf4fc541fae8b6e424674c56"
+  },
+  "priorSevenRoleEvidence": {
+    "path": "docs/teaching/classical-ml-reading-flow/navigation-source-role-continuation/math-reading-time-root-acceptance.json",
+    "bytes": 400667,
+    "sha256": "1a8e35e672e2ab034781c765fea5b68812b3e72d70bf10c1970679809b462180"
+  },
+  "originalNavigation": {
+    "path": "src/learn/data/generated/navigation.js",
+    "bytes": 942834,
+    "sha256": "00ce42fb33dd3e0b67131fada04ee9b15ccd634122fe5d2d32a9573d5abf5182"
+  },
+  "currentNavigation": {
+    "path": "src/learn/data/generated/navigation.js",
+    "bytes": 942828,
+    "sha256": "1693b9cb40a3265a7e8fd81e899d015e4ed55111bc0858ce61f33a9678e295e1"
+  },
+  "originalNavigationReconstructedExactly": true,
+  "differences": [
+    {
+      "topicId": "non-convex-optimization-landscape",
+      "field": "readTime",
+      "before": "~75 min read + 3 hours practice",
+      "after": "~105 min read + 3 h practice",
+      "canonicalSource": "src/learn/data/topics/non-convex-optimization-landscape.jsx",
+      "sourceSha256": "479f40773f22a6840f17a35a28f6fb769c6e376e85598d399715e90b361fffb1"
+    },
+    {
+      "topicId": "constrained-multi-objective-optimization",
+      "field": "readTime",
+      "before": "~90 min read + 3 hours practice",
+      "after": "~100 min read + 3 h practice",
+      "canonicalSource": "src/learn/data/topics/constrained-multi-objective-optimization.jsx",
+      "sourceSha256": "022b72abe5fab0a46f3fd675613e508dd4c81ae4d4bc03c7e7e85ca64d851d68"
+    }
+  ],
+  "orderedTopicRows": 1461,
+  "unchangedSharedContext": [
+    {
+      "path": "src/learn/components/LessonBoundary.jsx",
+      "bytes": 992,
+      "sha256": "5d35b6df4c11b4b601fac3c76318f37f8b547b62f4e5ad1166e762b5646b8a5c"
+    },
+    {
+      "path": "src/learn/components/LessonGuide.jsx",
+      "bytes": 2925,
+      "sha256": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb"
+    },
+    {
+      "path": "src/learn/components/LessonOpening.jsx",
+      "bytes": 1112,
+      "sha256": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348"
+    },
+    {
+      "path": "src/learn/components/LevelBadge.jsx",
+      "bytes": 629,
+      "sha256": "325fd3eb0b155780333620b584b7a62315fb9647625afb18313ac9c6e16a9647"
+    },
+    {
+      "path": "src/learn/components/PlaceholderContent.jsx",
+      "bytes": 2665,
+      "sha256": "3e963ae06cb932213259acd5849841816be92f97a1e364b9c5912c509de624a0"
+    },
+    {
+      "path": "src/learn/components/TopicContent.jsx",
+      "bytes": 7106,
+      "sha256": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6"
+    },
+    {
+      "path": "src/learn/components/content/Code.jsx",
+      "bytes": 3120,
+      "sha256": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e"
+    },
+    {
+      "path": "src/learn/components/content/Headings.jsx",
+      "bytes": 1405,
+      "sha256": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f"
+    },
+    {
+      "path": "src/learn/components/content/LessonCodeDownloads.jsx",
+      "bytes": 4857,
+      "sha256": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720"
+    },
+    {
+      "path": "src/learn/components/content/Math.jsx",
+      "bytes": 931,
+      "sha256": "427a466aaa33b2733c7b87cf9c2c8e2ed338a2f234764590b69fafc1b5952459"
+    },
+    {
+      "path": "src/learn/components/content/Prose.jsx",
+      "bytes": 549,
+      "sha256": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff"
+    },
+    {
+      "path": "src/learn/components/content/RemoteCodeBlock.jsx",
+      "bytes": 2455,
+      "sha256": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290"
+    },
+    {
+      "path": "src/learn/components/content/code-downloads.js",
+      "bytes": 1709,
+      "sha256": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d"
+    },
+    {
+      "path": "src/learn/components/content/lesson-code.css",
+      "bytes": 4491,
+      "sha256": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283"
+    },
+    {
+      "path": "src/learn/components/lesson-endings.css",
+      "bytes": 5203,
+      "sha256": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6"
+    },
+    {
+      "path": "src/learn/components/lesson-guide.css",
+      "bytes": 2967,
+      "sha256": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2"
+    },
+    {
+      "path": "src/learn/components/lesson-navigation.js",
+      "bytes": 1362,
+      "sha256": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b"
+    },
+    {
+      "path": "src/learn/components/topic-content.css",
+      "bytes": 2992,
+      "sha256": "8ef6856306e028433ad10d8d18cdaf37362ba9db1a17ab8fbe1e1b76d9ce4fb0"
+    },
+    {
+      "path": "src/learn/data/catalogue.js",
+      "bytes": 477,
+      "sha256": "639cde33208e3e71fcdb4669eafdcaa71abbff1646ae01cbf1f77e623c78d693"
+    },
+    {
+      "path": "src/learn/data/projects/catalogue.js",
+      "bytes": 610,
+      "sha256": "7b35afa5ba219c9a535ab7c3dc81683cbaf218ae1bd73fd315e4a9bc3ca5562c"
+    },
+    {
+      "path": "src/learn/data/projects/typed-decision-model/metadata.js",
+      "bytes": 3158,
+      "sha256": "9253c1486af2f5a083dd6ad4fafae6eb9d644caca89d22aad4d7ed39313ef1a4"
+    },
+    {
+      "path": "src/learn/data/topic-id.js",
+      "bytes": 213,
+      "sha256": "f90dc348716b3284a7dae2e8b70b02d80d9a2feffb099fd2d64697084990c1af"
+    },
+    {
+      "path": "src/learn/data/tracks.js",
+      "bytes": 53,
+      "sha256": "31c8906d716172883945f05ad3b3b6d835b3d29e204ba48e8a7c3db4336b1071"
+    },
+    {
+      "path": "src/learn/hooks/useTopicResource.js",
+      "bytes": 991,
+      "sha256": "629cc97e61f6f1f52fa2bdc2d37dc52902e6abf51c6a89e79e354258e8008f90"
+    },
+    {
+      "path": "src/learn/learning-base.css",
+      "bytes": 19925,
+      "sha256": "595f1446ed9d4e5f7d2710b796be26527b58e78796a34d0bcdf4ffffe0717d97"
+    },
+    {
+      "path": "src/learn/styles.js",
+      "bytes": 1539,
+      "sha256": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5"
+    }
+  ],
+  "phaseChanges": 0,
+  "centralCanonicalPublicChanges": 0,
+  "scientificExecutions": 0,
+  "scope": "Fresh current navigation identity and exact whole-source inverse show only the two reviewed unrelated Mathematics readTime fields. All ML/DL topic metadata, identities, order, dependencies, routes and non-topic exports are conserved. This separately accepts NMF context; it does not extend the earlier seven-topic receipt or certify a changed bundle/native/normal Reader."
+}

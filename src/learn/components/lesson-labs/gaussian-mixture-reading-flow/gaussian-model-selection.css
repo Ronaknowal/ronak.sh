@@ -1,0 +1,23 @@
+.gmm-selection-drawing-region { position:relative; overflow-x:auto; max-width:100%; margin-block:1rem; overscroll-behavior-inline:contain; }
+.gmm-selection-drawing-region svg { display:block; max-width:none; }
+.gmm-selection-probe { position:absolute; width:1rem; height:1rem; visibility:hidden; pointer-events:none; }
+.gmm-selection-pan-hint { color:#aaa8ad; font-size:.9rem; margin-block:.25rem 1.25rem; }
+.gmm-selection-drawing-region:focus-visible,.gmm-selection-table-region:focus-visible { outline:2px solid #e9b94c; outline-offset:4px; }
+.gmm-selection-table-region { overflow-x:auto; max-width:100%; margin-block:1.5rem; }
+.gmm-selection-table-region table { border-collapse:collapse; font-size:.9rem; font-variant-numeric:tabular-nums; width:100%; }
+.gmm-selection-table-region caption { text-align:left; color:#aaa8ad; margin-bottom:.5rem; }
+.gmm-selection-table-region td,.gmm-selection-table-region th { text-align:left; padding:.55rem .75rem .55rem 0; vertical-align:top; border-bottom:1px solid #303033; overflow-wrap:anywhere; min-width:7rem; }
+.gmm-selection-table-region th { font-weight:500; }
+.gmm-selection-paired-planes { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr)); gap:1.25rem; }
+.gmm-selection-paired-planes > * { min-width:0; }
+.gmm-selection-unit-circuit,.gmm-selection-covariance-transfer { display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.5rem; margin-block:1.5rem; }
+.gmm-selection-unit-circuit p { flex:1 1 13rem; }
+.gmm-selection-matrix { display:grid; grid-template-columns:repeat(2,minmax(4rem,auto)); text-align:center; gap:.5rem 1rem; padding:.25rem .75rem; border-inline:1px solid #aaa8ad; font-variant-numeric:tabular-nums; }
+.gmm-selection-matrix span { overflow-wrap:anywhere; }
+.gmm-selection-family-key { display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; }
+.gmm-selection-error { color:#e9b94c; overflow-wrap:anywhere; }
+.gmm-selection-measured { display:flex; flex-wrap:wrap; gap:.4rem 1rem; }
+.gmm-lesson .flow-controls label { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; }
+.gmm-lesson .flow-controls input[type=text] { width:6rem; }
+.gmm-lesson p,.gmm-lesson small { overflow-wrap:anywhere; }
+.gmm-selection-unit-circuit small { color:#aaa8ad; }

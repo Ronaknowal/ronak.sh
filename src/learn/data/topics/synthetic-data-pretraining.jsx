@@ -1,1184 +1,1722 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
-
-const syntheticDataPretraining = {
-  title: "Synthetic Data Generation for Pre-Training",
-  slug: "synthetic-data-generation-for-pre-training",
-  readTime: "32 min",
+// Generated from the accepted complete manuscript by scripts/render-synthetic-data.mjs.
+import { Prose, H2, H3, CodeBlock } from '../../components/content';
+import { Math as InlineMath, MathBlock as SharedMath } from '../../components/content/Math.jsx';
+import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import SyntheticFigure from '../../components/lesson-labs/SyntheticDataFlow.jsx';
+import '../../components/lesson-labs/lesson-flow.css';
+const MathBlock = ({ children }) => (
+  <div
+    className="synthetic-equation"
+    role="region"
+    tabIndex={0}
+    aria-label="Synthetic data relationship"
+  >
+    <SharedMath>{children}</SharedMath>
+  </div>
+);
+const Program = ({ file }) => (
+  <RemoteCodeBlock source={`/learn-code/synthetic-data/${file}`} filename={file} />
+);
+export default {
+  slug: 'synthetic-data-generation-for-pre-training',
+  title: 'Synthetic Data Generation for Pre-Training',
+  readTime: '~75 min read + programs and practice',
+  hasIntegratedGuide: true,
   content: () => (
-    <div>
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
+    <div className="lesson-flow synthetic-lesson">
+      <Prose opening="summary">
+        {
+          'Follow a paragraph into generated text, a selected corpus and a student update. Build the sampling and verification mechanisms, generate a real small corpus, then measure what that corpus does to a language model on untouched text.'
+        }
+      </Prose>
+
+      <Prose opening="route">
+        {
+          'First pass: sections 1–9 follow one complete data experiment. Section 10 derives what repeated generation can do in a finite population; section 11 connects the mechanisms to research. Source families keep their identity colours through rewriting and filtering. Outlines and labels separately show whether a record was selected, rejected or generated.'
+        }
+      </Prose>
+
+      <Prose opening="prerequisites">
+        {'Prerequisites: '}
+        <a
+          href={
+            '/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models'
+          }
+        >
+          {'causal next-token prediction'}
+        </a>
+        {', '}
+        <a
+          href={
+            '/learn/path/full-curriculum/curriculum-learning-data-mixing-strategies?module=large-language-models'
+          }
+        >
+          {'data mixing'}
+        </a>
+        {' and '}
+        <a
+          href={
+            '/learn/path/full-curriculum/data-curation-pipelines-curator-models-quality-filtering?module=large-language-models'
+          }
+        >
+          {'curation pipelines'}
+        </a>
+        {
+          '. We reuse the actual causal decoder and refresh its input/target contract. Supervised fine-tuning and distillation follow later; neither is assumed here.'
+        }
+      </Prose>
+
+      <span id="1-why-it-exists" aria-hidden="true" />
+      <H2>{'1. Change the training text, then ask what improved'}</H2>
 
       <Prose>
-        Pre-training at frontier scale is a bet that more tokens of high-quality text reliably
-        produce more capable models. That bet has paid off for a decade. It is now running into
-        a wall that has a name: the data wall. Not because the internet has gone quiet — it
-        hasn't — but because the subset of the internet that actually makes models smarter is
-        bounded and increasingly well-picked. Common Crawl grows, but its signal-to-noise ratio
-        degrades as models get better at distinguishing a thoughtful paragraph from a spun SEO
-        article. Copyrighted books and scientific papers sit behind licenses that make large-scale
-        ingestion legally fraught. Non-English text is scarce relative to the fraction of the
-        world that doesn't read English. At the scale frontier-class models now operate — tens of
-        trillions of tokens — the curves that used to look like "more data always helps" are
-        starting to bend.
+        {
+          'A student language model learns from the sequences it is asked to predict. Suppose a source paragraph explains a pendulum. We can keep it, copy it, ask a generator to rewrite it, or generate a related question and answer. Each choice changes the collection of training examples. Whether it helps the student is a separate question from whether the output looks fluent.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S01" />
+
+      <Prose>
+        {'Read the two parameter owners in the drawing. The '}
+        <strong>{'generator'}</strong>
+        {
+          ', often called a teacher, already has parameters. It produces text while those parameters stay fixed. The '
+        }
+        <strong>{'student'}</strong>
+        {
+          ' has its own parameters. Its optimizer later changes those parameters using the selected text. A teacher forward pass and a student training update are different operations, even if both models happen to use Transformers.'
+        }
       </Prose>
 
       <Prose>
-        The obvious response is to generate the data you don't have. A sufficiently capable model
-        can produce text, and inference is cheap enough that generating trillions of tokens is no
-        longer a fantasy budget line. The less-obvious question is whether that text actually helps
-        a model train — or whether the model ends up consuming a degraded reflection of what it
-        already knows, shrinking rather than expanding its understanding of the world. Both things
-        can be true simultaneously, in different regimes, and the evidence is still settling.
+        {''}
+        <strong>{'Synthetic training data'}</strong>
+        {
+          ' is data constructed by an algorithm rather than used directly as an observed source record. It includes model-generated text and procedurally generated examples. A rewrite is partly source-derived: it can preserve existing facts while changing wording, ordering or explanation. It may also omit information or introduce an unsupported claim. An exact copy supplies another stored record but no new sequence.'
+        }
       </Prose>
 
       <Prose>
-        Three moments crystallized synthetic pre-training as a serious research direction rather
-        than a curiosity. The first was Microsoft's phi-1 paper (Gunasekar et al., 2023,
-        arXiv:2306.11644), which showed that a 1.3B-parameter model trained on "textbook-quality"
-        synthetic data could match coding models three to five times its size on HumanEval. The
-        second was MetaMath (Yu et al., 2023, arXiv:2309.12284), which demonstrated that
-        systematically bootstrapping math problem variants and filtering by verifiable correctness
-        produced training data that meaningfully lifted math reasoning benchmarks. The third was
-        DeepSeek-R1 (2025), which used 800,000 synthetic long-form chain-of-thought reasoning
-        traces generated by a strong teacher to distill reasoning capability into smaller student
-        models — a recipe that produced open-weight models competitive with GPT-4-class systems
-        on mathematical and coding benchmarks. Each represents a distinct synthetic data
-        paradigm: textbook generation, verifier-filtered augmentation, and reasoning-trace distillation.
+        {
+          'Look at the held-out source in the drawing. It reaches the evaluation loss; it does not supply prompts, selection decisions or training targets. If its paraphrase enters the training corpus, the student has received information about the supposedly untouched example. Tracking only exact strings would miss that relationship.'
+        }
+      </Prose>
+
+      <H3>{'Keep data format, objective and initialization separate'}</H3>
+
+      <Prose>
+        {
+          'A question followed by an answer is a text format. It does not uniquely specify how a model is trained. To see why, take the same sequence with four predicted positions and per-position negative log probabilities [1, 2, 3, 4] nats. The final two positions belong to the answer.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S02" />
+
+      <Prose>
+        {
+          'With all four targets selected, loss is (1+2+3+4)/4=2.5. With only the answer targets selected, loss is (3+4)/2=3.5. Both runs can start from random parameters or from an already trained checkpoint. Both can update all parameters or a selected subset. Those choices need to be stated separately.'
+        }
       </Prose>
 
       <Prose>
-        Against these wins, Shumailov et al. (Nature 631, 2024) issued a formal warning: training
-        recursively on synthetic data collapses the distribution. The tails of the learned
-        distribution — rare but valid outputs, minority languages, unusual phrasings — shrink with
-        each generation until the model converges on a narrow, overconfident approximation of
-        reality. The question is not whether to use synthetic data, but how, in what domain, at
-        what mixing ratio, and with what verifier. This topic builds the tools to answer those
-        questions.
-      </Prose>
-
-      <Callout accent="gold">
-        Honest framing: synthetic pre-training at the frontier scale (70B+ parameters, trillions
-        of tokens) is still less-settled than the phi and MetaMath results suggest. Those results
-        are real and reproducible. Whether they hold at scale — and whether the data wall is
-        actually solved by synthesis — is an open empirical question as of 2026.
-      </Callout>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        Three distinct paradigms are in play. They share the label "synthetic data" but have
-        different mechanics, different failure modes, and different evidence bases. Keeping them
-        separate matters.
-      </Prose>
-
-      <H3>Textbook-quality generation</H3>
-
-      <Prose>
-        A strong teacher LLM — GPT-4-class or close — is prompted to generate didactic content:
-        worked examples, concept-by-concept explanations, exercises with solutions, common pitfall
-        annotations. The resulting text is evaluated by a quality classifier, and only samples
-        above a threshold are kept. The smaller student model trains on this curated synthetic
-        corpus, mixed with filtered real data. The insight is that the distribution over "well-explained
-        concepts" is much sparser in the open web than the distribution over "mentions of concepts."
-        A student training on textbook-quality explanations learns faster per token than a student
-        training on web text that happens to contain the same facts buried in conversational noise.
+        {'In this lesson, '}
+        <strong>{'pre-training on generated text'}</strong>
+        {
+          " means ordinary all-token next-byte learning on a corpus that includes generated records. The small students start from random initialization. The actual teacher is already instruction-tuned. Using that teacher does not make the student's loss response-only. The following SFT lesson develops instruction-response masks in detail; here the mask comparison prevents a common category mistake."
+        }
       </Prose>
 
       <Prose>
-        This is the phi paradigm. It works clearly in domains where the teacher can generate
-        quality content reliably — code, mathematics, structured reasoning — and is less clear
-        in domains where "quality" is hard to measure, such as creative writing or long-tail
-        factual knowledge.
+        {
+          'More text is useful only through the learning opportunities it creates. Two paraphrases may expose the same relation in different contexts and help a learner fit it. Repeating an error may strengthen the wrong relation. We need to inspect how examples are made, what selection changes and what the resulting student actually learns.'
+        }
       </Prose>
 
-      <H3>Reasoning-trace distillation</H3>
+      <span id="2-core-intuition" aria-hidden="true" />
+      <H2>{'2. Condition the generator on something worth preserving'}</H2>
 
       <Prose>
-        A strong reasoner — o1, DeepSeek-R1, or a similar chain-of-thought model — generates
-        full reasoning traces for problems: step-by-step derivations, intermediate checks,
-        self-corrections. A smaller student model trains to reproduce those traces. The key
-        property is that the student is not just learning the final answer; it is learning the
-        process the teacher used to reach it. This is knowledge distillation at the data level.
-        DeepSeek-R1-Distill used 800,000 such traces to produce student models (Qwen-7B,
-        Llama-70B) that substantially outperformed models fine-tuned on human-authored data at
-        the same parameter count.
+        {
+          "The generator needs a request. Compare “write about a pendulum” with “rewrite this paragraph in plain English without adding facts.” The first leaves content largely to the model's learned distribution. The second supplies a particular record to transform. This distinction matters before changing temperature or generating millions of samples."
+        }
       </Prose>
 
-      <Prose>
-        The risk here is that the student inherits not just the teacher's reasoning process but
-        also the teacher's blind spots, stylistic biases, and error patterns. A student trained
-        entirely on one teacher's traces cannot exceed the teacher's capability on any problem
-        the teacher would consistently get wrong.
-      </Prose>
-
-      <H3>Model collapse — the anti-pattern</H3>
+      <SyntheticFigure id="S03" />
 
       <Prose>
-        Both paradigms above use an external teacher stronger than the student. The failure mode
-        emerges when the feedback loop closes: a model generates synthetic data, trains on it,
-        generates more, trains again. Each generation of sampling introduces a small amount of
-        information loss — the model cannot reproduce the exact tails of its distribution — and
-        that loss compounds. After enough iterations, the model has converged on a narrow,
-        low-diversity approximation of its original distribution, with rare but valid outputs
-        effectively absent. Shumailov et al. call this model collapse. The variance of generated
-        text decays toward a point mass. The math is in section 3; the simulation is in section 4c.
+        {
+          "Our illustrative source says: “A pendulum of length 1m makes one small-angle oscillation in about 2 seconds near Earth's surface.” A plain rewrite can preserve the length, motion, approximate period and conditions. “Every pendulum takes exactly 2 seconds” loses those conditions. “Heavier pendulums move faster” adds a claim absent from the source. These are authored examples for tracing support, not outputs from the real teacher experiment later."
+        }
       </Prose>
 
       <Prose>
-        The mitigation that has held across every published experiment: never train a generation
-        on purely synthetic data from the previous generation. Always mix in real data. The mixing
-        ratio determines how quickly collapse proceeds. At 50% real data, collapse is substantially
-        slowed or stopped entirely in most experimental setups.
-      </Prose>
-
-      {/* ======================================================================
-          3. MATHEMATICAL FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>Model collapse: divergence grows per generation</H3>
-
-      <Prose>
-        Let <Code>p</Code> be the true data distribution and <Code>p_k</Code> be the distribution
-        learned after <Code>k</Code> recursive training generations. Each generation fits a model
-        to samples drawn from the previous generation's model. Shumailov et al. show that under
-        mild assumptions, the KL divergence between the true distribution and the learned
-        distribution is bounded below by a term that grows with each generation:
-      </Prose>
-
-      <MathBlock>{"D_{KL}(p \\| p_k) \\geq k \\cdot D_{KL}(p \\| p_1)"}</MathBlock>
-
-      <Prose>
-        Loosely: each generation of self-training adds at least as much divergence from reality
-        as the first generation did. The direction is robust across experimental setups even
-        when the exact constant varies by model class. The problem is not merely that synthetic
-        data can be wrong. It is that synthetic data from generation <Code>k</Code> cannot contain
-        information that generation <Code>k-1</Code> did not have — and generation 1 already lost
-        some of what the true distribution contained. Lossy rearrangement, repeated, converges
-        toward something narrower than what you started with.
-      </Prose>
-
-      <H3>The verifier-filtered regime</H3>
-
-      <Prose>
-        The most successful synthetic data recipes introduce a verifier into the pipeline: a
-        function <Code>V: x → {"{0, 1}"}</Code> that accepts or rejects a generated sample. For
-        math and code, the verifier can be exact — check that the arithmetic is correct, or that
-        the generated function passes its unit tests. The downstream quality of a verifier-filtered
-        synthetic dataset is bounded by the quality of the teacher and the coverage of the verifier:
-      </Prose>
-
-      <MathBlock>{"\\mathbb{E}[\\text{quality}] \\leq \\min\\bigl(Q_{\\text{teacher}},\\, Q_{\\text{verifier}}\\bigr)"}</MathBlock>
-
-      <Prose>
-        A powerful teacher generating mathematically incorrect solutions that a weak verifier
-        accepts produces a contaminated dataset. A correct verifier applied to a weak teacher
-        produces a low-pass-rate dataset with high quality among kept samples. The optimal setup
-        is a strong teacher and a sound verifier — execution-based for code, symbolic checking
-        for math. Pass rates across domains and prompt styles vary widely (section 4b demonstrates
-        this empirically), which is why domain choice matters so much for the synthetic data bet.
-      </Prose>
-
-      <H3>Real + synthetic mixing</H3>
-
-      <Prose>
-        Across the most successful published recipes, the synthetic fraction lies between 30% and
-        80% of total training tokens, with the remaining fraction being filtered real data. The
-        rationale for keeping real data is not just to prevent collapse — it is to preserve tail
-        diversity. Real web data, even noisy, contains rare languages, unusual phrasings, long-tail
-        facts, and minority-domain knowledge that a synthetic pipeline rooted in a single teacher
-        will systematically underrepresent. The cost is that some of that real data is lower
-        quality on any individual sample. The benefit is that the resulting model's distribution
-        is wider. Both matter.
-      </Prose>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        Four implementations, each targeting one core mechanism. All code was run; outputs
-        embedded as comments are actual outputs. Nothing has been polished post-hoc.
-      </Prose>
-
-      <Callout accent="gold">
-        These are pedagogical simplifications. Real production pipelines use larger teacher
-        models, more sophisticated verifiers, and train over billions of tokens rather than
-        the toy sizes shown here. The mechanics are the same.
-      </Callout>
-
-      <H3>4a. Teacher-prompt-student pipeline skeleton</H3>
-
-      <Prose>
-        The core pipeline: a mock teacher generates textbook-quality content from a topic and
-        style specification, a heuristic quality scorer filters the outputs, and kept samples
-        are collected for student training. In production this mock teacher is a GPT-4-class
-        model and the quality scorer is a trained classifier.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import random
-random.seed(42)
-
-TOPICS = [
-    "binary search",
-    "gradient descent",
-    "backpropagation",
-    "attention mechanisms",
-    "regularization in neural networks",
-]
-STYLES = ["undergraduate", "graduate", "intuitive"]
-
-def mock_teacher_generate(topic, style):
-    """Simulates a teacher LLM generating textbook-quality content."""
-    templates = [
-        (
-            f"# {topic.title()}\\n\\n## Motivation\\n"
-            f"Understanding {topic} is crucial at the {style} level.\\n\\n"
-            f"## Core Idea\\nAt its heart, {topic} works by iteratively refining "
-            f"an estimate until a convergence criterion is met.\\n\\n"
-            f"## Worked Example\\nConsider the case where input x = [1, 2, 3]...\\n\\n"
-            f"## Common Pitfall\\nA frequent mistake is ignoring the learning rate schedule.\\n\\n"
-            f"## Exercise\\nDerive the update rule for {topic} with L2 regularization."
-        ),
-        (
-            f"## Introduction to {topic.title()}\\n\\n"
-            f"At the {style} level, {topic} represents one of the foundational ideas.\\n\\n"
-            f"The key insight is searching for a fixed point of a certain operator."
-        ),
-    ]
-    return random.choice(templates)
-
-def quality_score(text):
-    """Heuristic quality filter: score 0-1."""
-    score = 0.0
-    if len(text) > 300:                          score += 0.3
-    if "## " in text:                            score += 0.2
-    if "Example" in text or "example" in text:  score += 0.2
-    if "Exercise" in text or "exercise" in text: score += 0.2
-    if "Pitfall" in text or "mistake" in text:   score += 0.1
-    return min(score, 1.0)
-
-QUALITY_THRESHOLD = 0.6
-results = []
-for topic in TOPICS:
-    for style in STYLES:
-        raw = mock_teacher_generate(topic, style)
-        score = quality_score(raw)
-        results.append((topic, style, score, score >= QUALITY_THRESHOLD))
-
-kept = [(t, s, sc) for t, s, sc, k in results if k]
-print(f"Total generated: {len(results)}")
-print(f"Kept (score >= {QUALITY_THRESHOLD}): {len(kept)}")
-print(f"Pass rate: {len(kept)/len(results):.1%}")
-
-# Actual output:
-# Total generated: 15
-# Kept (score >= 0.6): 13
-# Pass rate: 86.7%`}
-      </CodeBlock>
-
-      <Prose>
-        The 86.7% pass rate reflects that a strong teacher rarely generates content below the
-        threshold — but that 13% rejection matters at scale. With 10 million generated samples,
-        a 13% reject rate means 1.3 million discarded samples; those compute cycles are real
-        cost. Production pipelines tune this threshold carefully, accepting lower pass rates
-        to raise the quality floor of kept samples.
-      </Prose>
-
-      <H3>4b. Verifier-filtered math — pass rates across prompt styles</H3>
-
-      <Prose>
-        Arithmetic problems have ground-truth answers. A verifier can check correctness exactly.
-        Here a simulated student model answers generated arithmetic problems, and the verifier
-        (the arithmetic checker) filters by correctness. Pass rates vary substantially across
-        problem types, which mirrors findings in MetaMath and MathInstruct: multiplication
-        problems have lower pass rates than addition because they are harder to generate correctly.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import random
-random.seed(7)
-
-TEMPLATES = [
-    ("add_two",  "What is {a} + {b}?",                lambda a, b: a + b,   0.15),
-    ("mul_two",  "What is {a} * {b}?",                lambda a, b: a * b,   0.30),
-    ("sub_two",  "What is {a} - {b}?",                lambda a, b: a - b,   0.14),
-    ("square",   "What is {a}^2?",                    lambda a, b: a * a,   0.22),
-    ("div_int",  "What is {a} / {b}? ({b} divides evenly)",
-                                                       lambda a, b: a // b,  0.20),
-]
-
-def run_template(name, fn, answer_fn, error_rate, trials=50):
-    """Simulate synthetic generation + verifier filter."""
-    correct = 0
-    for _ in range(trials):
-        if name == "div_int":
-            b = random.randint(1, 9)
-            a = b * random.randint(1, 12)
-        else:
-            a, b = random.randint(1, 99), random.randint(1, 99)
-        gt = answer_fn(a, b)
-        student = gt if random.random() > error_rate else gt + random.randint(-5, 5)
-        correct += (student == gt)
-    return correct / trials
-
-print(f"{'Template':<12} {'Pass Rate':>10}")
-print("-" * 24)
-total_pass = 0
-for name, tpl, fn, err in TEMPLATES:
-    rate = run_template(name, tpl, fn, err)
-    print(f"{name:<12} {rate:>10.1%}")
-    total_pass += rate
-
-print(f"\\nOverall pass rate: {total_pass/len(TEMPLATES):.1%}")
-
-# Actual output:
-# Template      Pass Rate
-# ------------------------
-# add_two           80.0%
-# mul_two           66.0%
-# sub_two           86.0%
-# square            78.0%
-# div_int           86.0%
-#
-# Overall pass rate: 79.2%`}
-      </CodeBlock>
-
-      <Prose>
-        The heatmap in section 6 visualizes pass rates across a domain-by-style grid. The key
-        takeaway here: verifier pass rates are domain-specific and problem-type-specific. A
-        pipeline that aggregates across problem types will have an average pass rate masking
-        large variance. In MetaMath, the team tracked pass rates per problem family and used
-        that signal to up-weight or down-weight generation from specific families — a simple
-        but effective way to push the training distribution toward problems the pipeline
-        handles well.
-      </Prose>
-
-      <H3>4c. Model collapse simulation — 1D Gaussian, recursive generation</H3>
-
-      <Prose>
-        The simplest possible collapse demonstration: a 1D Gaussian. The true distribution is
-        N(0, 1). Each generation samples from the fitted model and re-estimates parameters.
-        To make tail erosion visible, the model is assumed to "truncate" its effective support
-        — a simplified analog of real LLM collapse, where the model increasingly concentrates
-        probability on its modal outputs and suppresses the tails.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import random, math
-random.seed(99)
-
-def sample_gaussian(mu, sigma, n):
-    """Box-Muller transform — no numpy needed."""
-    out = []
-    while len(out) < n:
-        u1, u2 = random.random() + 1e-12, random.random()
-        z0 = math.sqrt(-2 * math.log(u1)) * math.cos(2 * math.pi * u2)
-        z1 = math.sqrt(-2 * math.log(u1)) * math.sin(2 * math.pi * u2)
-        out.extend([mu + sigma * z0, mu + sigma * z1])
-    return out[:n]
-
-def sample_truncated(mu, sigma, n, clip=1.5):
-    """Simulate tail truncation: model only 'sees' within clip*sigma of mean."""
-    out = []
-    while len(out) < n:
-        batch = sample_gaussian(mu, sigma, n * 4)
-        out.extend(c for c in batch if abs(c - mu) <= clip * sigma)
-    return out[:n]
-
-def mean(xs): return sum(xs) / len(xs)
-def std(xs):
-    m = mean(xs); return math.sqrt(sum((x-m)**2 for x in xs) / len(xs))
-
-N, N_GEN = 500, 10
-real = sample_gaussian(0.0, 1.0, N)
-mu_k, sigma_k = mean(real), std(real)
-
-pure_vars, mixed_vars = [round(sigma_k**2, 4)], [round(sigma_k**2, 4)]
-mu_m, sigma_m = mu_k, sigma_k   # track mixed separately
-
-for gen in range(1, N_GEN + 1):
-    # Pure synthetic: train only on previous generation's samples
-    syn_pure = sample_truncated(mu_k, sigma_k, N)
-    mu_k, sigma_k = mean(syn_pure), std(syn_pure)
-    pure_vars.append(round(sigma_k**2, 4))
-
-    # Mixed: 50% real data every generation
-    syn_mix = sample_truncated(mu_m, sigma_m, N // 2)
-    mixed = real[:N // 2] + syn_mix
-    mu_m, sigma_m = mean(mixed), std(mixed)
-    mixed_vars.append(round(sigma_m**2, 4))
-
-print("Gen    pure-var    mixed-var")
-for g, (pv, mv) in enumerate(zip(pure_vars, mixed_vars)):
-    print(f"{g:>3}    {pv:.4f}      {mv:.4f}")
-
-print(f"\\nCollapse ratio (pure): {pure_vars[-1]/pure_vars[0]:.4f}x")
-print(f"Collapse ratio (mixed): {mixed_vars[-1]/mixed_vars[0]:.4f}x")
-
-# Actual output:
-# Gen    pure-var    mixed-var
-#   0    1.0239      1.0239
-#   1    0.5809      0.7600
-#   2    0.3133      0.6760
-#   3    0.1784      0.6540
-#   4    0.1039      0.6463
-#   5    0.0571      0.6563
-#   6    0.0336      0.6468
-#   7    0.0182      0.6605
-#   8    0.0110      0.6601
-#   9    0.0066      0.6785
-#  10    0.0037      0.6611
-#
-# Collapse ratio (pure):  0.0036x  ← converges toward point mass
-# Collapse ratio (mixed): 0.6457x  ← stabilizes, does not collapse`}
-      </CodeBlock>
-
-      <Prose>
-        Pure synthetic training collapses variance by a factor of 277x over ten generations.
-        The distribution converges toward a point mass centered on the learned mean. The 50%
-        real data mixture stabilizes variance — it drops somewhat (the truncated synthetic
-        samples do have narrower support), but it does not continue collapsing. This is the
-        Shumailov result replicated in a toy setting: mixing real data prevents the recursive
-        information loss that causes collapse.
-      </Prose>
-
-      <H3>4d. Real + synthetic mixing — toy distribution demo</H3>
-
-      <Prose>
-        The final piece: show explicitly that pure-synthetic converges to a point mass while
-        a 50% mixture stays distributed, and measure both the variance and the range at each
-        generation.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# Continuing from 4c setup
-
-def pct_range(xs, lo=5, hi=95):
-    """5th-to-95th percentile range as proxy for distributional width."""
-    xs_sorted = sorted(xs)
-    n = len(xs_sorted)
-    return xs_sorted[int(n * hi / 100)] - xs_sorted[int(n * lo / 100)]
-
-random.seed(99)
-real = sample_gaussian(0.0, 1.0, N)
-
-# Track width as well as variance
-mu_k, sigma_k = mean(real), std(real)
-mu_m, sigma_m = mu_k, sigma_k
-
-print(f"{'Gen':<4} {'pure-std':>10} {'pure-range':>12} {'mix-std':>10} {'mix-range':>12}")
-print("-" * 52)
-
-current_pure = real[:]
-current_mix  = real[:]
-
-for gen in range(0, N_GEN + 1, 2):  # print every other gen
-    if gen > 0:
-        for _ in range(2):
-            syn_p = sample_truncated(mu_k, sigma_k, N)
-            mu_k, sigma_k = mean(syn_p), std(syn_p)
-            current_pure = syn_p
-
-            syn_m = sample_truncated(mu_m, sigma_m, N // 2)
-            current_mix = real[:N // 2] + syn_m
-            mu_m, sigma_m = mean(current_mix), std(current_mix)
-
-    p_std = std(current_pure)
-    p_rng = pct_range(current_pure)
-    m_std = std(current_mix)
-    m_rng = pct_range(current_mix)
-    print(f"{gen:<4} {p_std:>10.4f} {p_rng:>12.4f} {m_std:>10.4f} {m_rng:>12.4f}")
-
-print()
-print("Conclusion: pure-synthetic converges toward a point mass.")
-print("50% real mixing keeps distribution wide and stable.")
-
-# Actual output:
-# Gen   pure-std   pure-range    mix-std   mix-range
-# ----------------------------------------------------
-# 0       1.0119       2.6619     1.0119      2.6619
-# 2       0.5597       1.4666     0.8222      2.2048
-# 4       0.3224       0.8406     0.8037      2.1310
-# 6       0.1834       0.4778     0.8042      2.1386
-# 8       0.1050       0.2755     0.8121      2.1680
-# 10      0.0605       0.1596     0.8130      2.1413
-#
-# Conclusion: pure-synthetic converges toward a point mass.
-# 50% real mixing keeps distribution wide and stable.`}
-      </CodeBlock>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        The following are the highest-evidence published recipes for synthetic pre-training
-        data, as of 2026. They are not equivalent — they target different domains, use different
-        verifiers, and make different mixing choices. What they share is that all of them combine
-        a strong teacher, some form of quality gate, and a real-data anchor.
-      </Prose>
-
-      <H3>Phi series (Microsoft, 2023–2024)</H3>
-
-      <Prose>
-        phi-1 (arXiv:2306.11644) trained a 1.3B-parameter code model on a 7B-token dataset:
-        6B tokens of filtered web code plus 1B tokens of GPT-3.5-generated "textbook" exercises
-        and explanations. The synthetic data was generated with explicit prompts asking for
-        pedagogical structure — motivation, worked example, pitfalls, exercises with solutions.
-        A quality classifier filtered generated samples. The student matched or exceeded HumanEval
-        scores of models 3–5x its size.
+        {
+          'Change the source period in the figure. The old output does not update itself: it becomes inconsistent with its parent. That is why we retain source identity and version alongside the derived text. A sentence can be grammatical while referring to stale or different evidence.'
+        }
       </Prose>
 
       <Prose>
-        phi-3 (arXiv:2404.14219) extended this to general reasoning. Training used a two-phase
-        strategy: phase 1 on heavily filtered web data, phase 2 on a mixture dominated by
-        synthetic tokens — "LLM-created synthetic data" — plus ultra-filtered reasoning-heavy
-        web data. The resulting phi-3-mini (3.8B parameters, 3.3T tokens) matched Mixtral 8x7B
-        and GPT-3.5 on several benchmarks. Microsoft describes the mix as "heavily filtered
-        publicly available web data and synthetic data," with synthetic fraction highest in
-        phase 2, where reasoning-intensive content matters most.
+        {''}
+        <strong>{'Grounding'}</strong>
+        {
+          ' means giving generation a particular evidential context. It can reduce the need to invent content, but providing a paragraph does not prove the model used it faithfully. A retrieved passage is another grounding input; a retrieval system can return the wrong passage, and a generator can misread the right one. Check the resulting claims against what was actually supplied.'
+        }
       </Prose>
 
-      <CodeBlock language="python">
-{`# Phi-style generation prompt — the actual template matters
-SYSTEM_PROMPT = (
-    "You are an expert textbook author. Write clear, pedagogically structured "
-    "content that teaches concepts from first principles. Include: (1) motivation "
-    "and real-world relevance, (2) a worked example, (3) common pitfalls, "
-    "(4) one practice exercise with solution. Do not mention that this is a textbook."
-)
-
-def phi_style_prompt(topic, level="undergraduate"):
-    return {
-        "system": SYSTEM_PROMPT,
-        "user": f"Write a section on {topic} at the {level} level.",
-    }
-
-# Quality classification heuristics used in phi pipeline:
-# - Length: reject below 256 tokens
-# - Structure: require at least one code block or mathematical expression
-# - Pedagogy: check for worked example marker
-# - Deduplication: MinHash LSH against existing corpus
-
-def quality_gate(text, min_tokens=256):
-    token_approx = len(text.split())
-    has_structure = "Example" in text or "example" in text or "code" in text
-    has_length = token_approx >= min_tokens
-    has_exercise = "Exercise" in text or "Problem" in text or "exercise" in text
-    return has_length and has_structure and has_exercise`}
-      </CodeBlock>
-
-      <H3>MetaMath (Yu et al., 2023)</H3>
+      <SyntheticFigure id="S04" />
 
       <Prose>
-        MetaMath (arXiv:2309.12284) bootstraps mathematical questions by systematically
-        rewriting existing problems from multiple perspectives: rephrasing, reversing
-        (deriving a question from its answer), adding conditions, or changing representation.
-        Each rewritten problem is answered using a strong teacher (GPT-4 or similar).
-        The key property is that correctness of teacher-generated solutions can be verified
-        by comparing with the known ground-truth answer — a direct execution-like check
-        without needing a code interpreter.
+        {
+          'Select a source and style. The same parent can produce plain prose or a question and answer. The prompt specifies content commitments and presentation, while the parent ID records provenance. A useful record stores the model revision, prompt, sampling settings and seed as well as the text. A name such as “teacher-v2” does not identify an exact checkpoint.'
+        }
       </Prose>
-
-      <CodeBlock language="python">
-{`# MetaMath augmentation strategies — pseudocode of the published pipeline
-REWRITING_STRATEGIES = [
-    "rephrase",          # Reword the question, preserve semantics
-    "backward",          # Given answer A, what question would produce A?
-    "add_condition",     # Add an extra constraint; adjust answer accordingly
-    "change_numbers",    # Replace concrete values; verify new answer
-    "self_verification", # Ask teacher to verify its own solution
-]
-
-def metamath_augment(problem, ground_truth, teacher_fn, strategy):
-    if strategy == "rephrase":
-        prompt = f"Rephrase this math problem without changing its meaning:\\n{problem}"
-    elif strategy == "backward":
-        prompt = (f"The answer to a math problem is {ground_truth}. "
-                  f"Write a problem whose answer is exactly {ground_truth}.")
-    elif strategy == "add_condition":
-        prompt = (f"Add one extra constraint to this problem and give the new answer:\\n"
-                  f"{problem}")
-    elif strategy == "change_numbers":
-        prompt = (f"Replace the numbers in this problem with new ones and solve:\\n"
-                  f"{problem}")
-    else:
-        prompt = f"Verify step by step that the answer to this problem is {ground_truth}:\\n{problem}"
-
-    result = teacher_fn(prompt)
-    # Verify: extract numeric answer and compare with ground_truth
-    # If mismatch -> discard. If match -> keep.
-    return result`}
-      </CodeBlock>
-
-      <H3>DeepSeek-R1-Distill (DeepSeek, 2025)</H3>
 
       <Prose>
-        DeepSeek-R1 first trained a large reasoning model (DeepSeek-R1) using Group Relative
-        Policy Optimization (GRPO) to develop long-form chain-of-thought reasoning capability.
-        It then generated 800,000 high-quality reasoning traces — full step-by-step solutions
-        to math and coding problems — and used those as supervised fine-tuning data for smaller
-        student models (Qwen-7B, Qwen-32B, Llama-70B). The students were not trained with RL;
-        they were trained purely on the teacher's synthetic reasoning traces.
+        {'There are three useful construction routes. '}
+        <strong>{'Source-conditioned generation'}</strong>
+        {' rewrites or organizes supplied evidence. '}
+        <strong>{'Seeded generation'}</strong>
+        {
+          ' expands a set of topics, examples or specifications; the output may have less direct factual support. '
+        }
+        <strong>{'Procedural generation'}</strong>
+        {
+          ' executes a known construction, such as forming arithmetic expressions and calculating their answers. Choose the route that gives the kind of variation and checking the task needs. A procedural arithmetic checker cannot certify an open-ended historical explanation.'
+        }
       </Prose>
-
-      <CodeBlock language="python">
-{`# DeepSeek-R1 distillation — data generation pipeline (pseudocode)
-def generate_reasoning_trace(teacher_r1, problem):
-    """
-    Teacher generates a full chain-of-thought trace.
-    Output format: <think>...step by step...</think> followed by final answer.
-    """
-    prompt = (
-        f"Solve the following problem step by step, "
-        f"showing all reasoning:\\n\\n{problem}"
-    )
-    trace = teacher_r1.generate(prompt, max_tokens=8192, temperature=0.7)
-    return trace
-
-def filter_trace(trace, ground_truth):
-    """Keep only traces where the final answer matches ground truth."""
-    # Extract final answer from trace (after </think> tag)
-    final_answer = extract_answer(trace)
-    return final_answer == ground_truth
-
-# Pipeline:
-# 1. Sample 800K (problem, ground_truth) pairs from math/code benchmarks
-# 2. Generate reasoning trace with DeepSeek-R1 (the teacher)
-# 3. Filter by correctness: keep only traces with matching final answer
-# 4. SFT student model on (problem -> trace) pairs
-# 5. No RL needed: the student learns the reasoning format directly`}
-      </CodeBlock>
-
-      <H3>Magpie (Xu et al., 2024)</H3>
 
       <Prose>
-        Magpie (arXiv:2406.08464) takes a different angle: rather than constructing synthetic
-        prompts and having a teacher respond, it prompts an already-aligned LLM with only the
-        pre-query template — the system prompt and the empty user-turn marker. The aligned model,
-        trained to complete user messages, generates a realistic user query from the template
-        alone. This produces large volumes of instruction-response pairs without human seed
-        prompts. The method exploits the fact that aligned models have internalized the
-        distribution of realistic user queries. Using Llama-3-Instruct, Magpie generated
-        4 million instructions and selected 300K high-quality instances, producing SFT data
-        that matched Llama-3-8B-Instruct trained on 10 million data points.
+        {
+          'The real experiment uses two explicit prompts per training paragraph: plain rewriting and one source-grounded question with its answer. The second format tests a different organization of the same source. We retain both styles under the same parent family; changing format does not create an independent source.'
+        }
       </Prose>
 
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
+      <span id="3-mathematical-foundation" aria-hidden="true" />
+      <span id="4-from-scratch-implementation" aria-hidden="true" />
+      <H2>{'3. Sample a continuation and see what you discard'}</H2>
 
       <Prose>
-        Three visualizations: the synthetic data pipeline as a step trace, model collapse
-        as a variance-decay plot, and pass rates across domain-by-style combinations as a heatmap.
+        {
+          "The prompt conditions the teacher's next-token distribution. A model produces one logit per candidate token. Softmax turns those scores into probabilities; sampling selects an ID, appends it and asks for a new conditional distribution. Selection settings therefore affect both the next word and the contexts seen by later decisions."
+        }
       </Prose>
 
-      <StepTrace
-        label="synthetic data pipeline — prompt → generate → verify → keep"
-        steps={[
+      <SyntheticFigure id="S05" />
+
+      <Prose>
+        {
+          'Use the four illustrative next-token probabilities [.55, .25, .15, .05]. The corresponding logits can be their natural logarithms because exponentiation recovers those masses. '
+        }
+        <strong>{'Temperature'}</strong>
+        {
+          ' T divides every logit before softmax. For T>0, it preserves their ordering; a smaller T concentrates mass and a larger T flattens it. Equal logits remain equal. Greedy decoding instead takes a largest-score token directly; it is an explicit alternative, not a division by zero.'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {'p_T(i)=\\frac{\\exp((z_i-m)/T)}{\\sum_j\\exp((z_j-m)/T)},\\qquad m=\\max_j z_j.'}
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'Subtracting the same maximum from every score cancels between numerator and denominator. The largest exponential becomes 1, preventing a needlessly huge positive exponential. The program subtracts before dividing; extreme negative differences may underflow to zero, which is a representational limit rather than a new probability rule.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Top-p'}</strong>
+        {
+          ', also called nucleus sampling, sorts candidates by probability and keeps the smallest leading set whose accumulated probability reaches p. The token that crosses the threshold stays. Divide the retained probabilities by their total and set the others to zero.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'At p=.8, the first two example tokens supply .55+.25=.8. Their new probabilities are .55/.8=.6875 and .25/.8=.3125. Removing the other two tokens changes the distribution; it is not merely a faster way to sample the original distribution. At p=1 all candidates remain. If the largest probability already exceeds p, one token survives and sampling becomes deterministic for that step.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The scratch implementation breaks equal-probability ties by original token ID. A native library can use another tie order or the complementary ascending threshold calculation. Floating-point equality at a cumulative boundary can also change which boundary token remains. Match declared conventions when a specific token set matters; the library comparison below uses strict gaps from those boundaries.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S06" />
+
+      <Prose>
+        {
+          'Draw u uniformly from [0, 1). Token i owns the interval between the preceding cumulative mass and its own cumulative mass. With[.6875, .3125, 0, 0], u=.5 selects ID 0 and u=.8 selects ID 1. A zero-mass token owns no interval. Using '
+        }
+        <code>{'searchsorted(..., side="right")'}</code>
+        {' makes an exact boundary belong to the next nonempty interval.'}
+      </Prose>
+
+      <Prose>
+        {
+          "The two-step display uses an explicitly authored lookup table to expose the operation. It is not a neural language model. At top-p=.9 and draws [.8, .8], the first retained distribution is approximately [.579, .263, .158, 0]; ID 1 is selected. Its lookup row then selects ID 3, the end-of-sequence token. The first step's choice changes the second step's distribution."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For an actual autoregressive generator, the probability of a particular token sequence is the product of its successive conditional probabilities. The equivalent log probability is their sum. These are probabilities under the chosen transformed sampling distribution when temperature or truncation has been applied. A maximum token count can end generation before EOS; that ending is a length cap and should be recorded as such.'
+        }
+      </Prose>
+
+      <Prose>
+        {'The '}
+        <a href={'/learn-code/synthetic-data/synthetic-programs-data.zip'}>{'program archive'}</a>
+        {' and '}
+        <a href={'/learn-code/synthetic-data/README.md'}>{'setup instructions'}</a>
+        {
+          ' supply the dependencies and complete examples. The small sampling program needs only NumPy; the later neural examples use the pinned PyTorch and Transformers versions.'
+        }
+      </Prose>
+
+      <Prose>
+        {'Download '}
+        <a href={'/learn-code/synthetic-data/synthetic_sampling.py'}>{'synthetic_sampling.py'}</a>
+        {'.'}
+      </Prose>
+
+      <Program file="synthetic_sampling.py" />
+
+      <Prose>
+        {''}
+        <code>{'distribution'}</code>
+        {
+          ' returns original probabilities, sort order, retained IDs and renormalized masses so every operation can be inspected. '
+        }
+        <code>{'inverse_cdf'}</code>
+        {' implements selection without delegating it to a categorical sampler. '}
+        <code>{'trace_sequence'}</code>
+        {' supplies the small lookup generator. Run '}
+        <code>{'python synthetic_sampling.py'}</code>
+        {
+          ' with NumPy installed. Its first nucleus is [.6875, .3125, 0, 0] and the trace terminates at EOS after IDs[1, 3].'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Sorting costs O(V log V) time and O(V) working storage for V candidates. This reference favors a readable, exact sort. Production decoding may use specialized selection kernels and batching; a four-token illustration is not a throughput measurement. To extend the program, implement top-k selection before nucleus filtering and inspect which support disappears. The real teacher run explicitly sets top_k=0, disabling that extra restriction.'
+        }
+      </Prose>
+
+      <H2>{'4. Decide what a verifier actually establishes'}</H2>
+
+      <Prose>
+        {
+          'Sampling creates candidates. Selection needs a reason to keep or reject them. Start with a task whose answer can be computed exactly: evaluate (2+3)×4. Its expression tree first combines 2 and 3, then multiplies the result by 4.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S07" />
+
+      <Prose>
+        {
+          'The correct answer is 20. Consider a candidate that writes “2+3=6;6×4=20” and finishes with 20. An answer checker accepts the final value; both written equalities are false. A second candidate can contain true but irrelevant equalities. Checking each equality still would not show that they form a complete derivation of the requested answer. Be precise about which claim each check establishes.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The program accepts integer literals, unary signs and the operators+,-,*,/. It parses an expression into a syntax tree and recursively evaluates the permitted nodes using exact rational arithmetic. Thus 1/3+2/3 equals 1 exactly; no floating-point tolerance is needed. It rejects calls, names, powers, decimal literals and division by zero under this declared grammar. It never executes the input as Python code.'
+        }
+      </Prose>
+
+      <Prose>
+        {'Download '}
+        <a href={'/learn-code/synthetic-data/synthetic_verification.py'}>
+          {'synthetic_verification.py'}
+        </a>
+        {'.'}
+      </Prose>
+
+      <Program file="synthetic_verification.py" />
+
+      <Prose>
+        {''}
+        <code>{'arithmetic'}</code>
+        {' owns the recursive evaluation. '}
+        <code>{'check_candidate'}</code>
+        {' returns separate final-answer and per-equality results. '}
+        <code>{'procedural_tasks'}</code>
+        {' samples integer leaves and constructs expressions with known answers. Run '}
+        <code>{'python synthetic_verification.py'}</code>
+        {'. For the incorrect derivation with final 20, the output is '}
+        <code>{'final_correct: true'}</code>
+        {' and '}
+        <code>{'steps_valid: [false,false]'}</code>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {
+          'This construction gives us many exactly labeled expressions within a small grammar. It does not automatically give varied natural-language reasoning or hard problems. A generator might repeat an easy template; a student might learn format cues instead of a general procedure. Change the grammar or test structure deliberately when studying transfer. Parsing and evaluation take time proportional to the syntax-tree size, apart from the growing cost of large-integer arithmetic.'
+        }
+      </Prose>
+
+      <Prose>
+        {'Other tasks need other evidence. A '}
+        <strong>{'format check'}</strong>
+        {' can require a question and an answer without checking either fact. A '}
+        <strong>{'heuristic'}</strong>
+        {' such as repetition rate measures a defined surface property. A '}
+        <strong>{'learned judge'}</strong>
+        {
+          ' estimates a preference or correctness signal from its training and prompt; its confident score is not an oracle. '
+        }
+        <strong>{'Human inspection'}</strong>
+        {
+          ' can catch semantic errors but needs a specified sample and decision procedure before its rate can be interpreted statistically.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Use the strongest applicable check, then describe its boundary. The real text experiment later uses a minimal usable-format filter and retains a separate manual audit. It does not relabel that filter as factual verification. This separation lets us see whether apparently usable rewrites actually help.'
+        }
+      </Prose>
+
+      <span id="7-decision-matrix" aria-hidden="true" />
+      <H2>{'5. Filtering changes the distribution and the bill'}</H2>
+
+      <Prose>
+        {
+          'A verifier need not be perfect to improve the accepted subset. It also can remove useful material. We need the rates and denominators to distinguish these effects.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S08" />
+
+      <Prose>
+        {
+          'In the constructed population, 60 of 100 candidates are correct. The verifier accepts 54 of those 60 and 8 of the 40 incorrect candidates. It keeps 62 candidates. Its '
+        }
+        <strong>{'true-positive rate'}</strong>
+        {', or recall on correct candidates, is 54/60=.9. Its '}
+        <strong>{'false-positive rate'}</strong>
+        {
+          " is 8/40=.2. The precision of the accepted pool is 54/62≈.871. That exceeds the generator's unfiltered accuracy of .6."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'There is no universal rule that selected quality must be the smaller of teacher quality and verifier quality. Those phrases do not even identify matching denominators. Here precision is a conditional probability given acceptance, while generator accuracy is an unconditional probability over candidates.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Let c be the fraction correct, r the true-positive rate and f the false-positive rate. The accepted correct mass is cr, the accepted wrong mass is (1−c)f and their sum Z is the probability of keeping a candidate.'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {'Z=cr+(1-c)f,\\qquad\nP(\\mathrm{correct}\\mid\\mathrm{keep})=\\frac{cr}{Z}\\quad(Z>0).'}
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'Change prevalence c while keeping r and f fixed. A verifier can have the same class-conditional behavior yet very different accepted precision on a harder source population. If Z=0, there is no accepted pool and precision is undefined. Reporting zero or 100% would invent an observation.'
+        }
+      </Prose>
+
+      <H3>{'Derive what happens to every kind of example'}</H3>
+
+      <Prose>
+        {
+          "Correct/incorrect is one partition. Topic, language, difficulty and writing style are other partitions on which acceptance can vary. Let q(y) be the generator's probability of candidate y and a(y) its chance of acceptance."
+        }
+      </Prose>
+
+      <SyntheticFigure id="S09" />
+
+      <Prose>
+        {
+          'The joint probability of generating y and accepting it is q(y)a(y). Add that quantity over candidates to obtain Z, the total accepted mass. Dividing gives the distribution among accepted candidates:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {"q_{\\mathrm{keep}}(y)=\\frac{q(y)a(y)}{\\sum_{y'}q(y')a(y')},\\qquad Z>0."}
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'For categories with q=[.6, .3, .1] and a=[1, .5, 0], products are [.6, .15, 0], Z=.75 and the retained distribution is [.8, .2, 0]. The third category has disappeared. This may be desirable if it represents invalid records, or harmful if it represents a valid minority style the checker dislikes. High aggregate precision alone cannot distinguish those cases.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'A deterministic checker has acceptance 0 or 1 for each exact candidate. A probabilistic judge or an aggregate category rate can take intermediate values. The equation handles both. It explains why the selected corpus should be audited by meaningful subgroups, not just by its final size.'
+        }
+      </Prose>
+
+      <H3>{'Pay for rejected attempts too'}</H3>
+
+      <Prose>
+        {
+          'Suppose an independent candidate costs .04 units to generate and .01 units to check. With stationary acceptance Z=.62, the number of attempts until a keep has a geometric distribution with mean 1/Z. Expected cost per kept candidate is .05/.62≈.080645 units. These are constructed costs, not API prices.'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
           {
-            label: "1. Prompt construction",
-            render: () => (
-              <div>
-                <Prose>Select a topic and style from the curriculum. Construct the teacher prompt with explicit pedagogical instructions: motivation, worked example, pitfalls, exercise.</Prose>
-                <TokenStream tokens={["SYSTEM:", " textbook author", " | USER:", " gradient descent", " | undergrad"]} />
-              </div>
-            ),
-          },
+            '\\mathbb E[\\mathrm{cost\\ per\\ keep}]=\\frac{c_{\\mathrm{generate}}+c_{\\mathrm{check}}}{Z}.'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'This form assumes the same average attempt cost and acceptance process on each retry. If outputs have different lengths or the prompt changes after rejection, measure those costs and policies explicitly. A finite candidate budget can finish with no keeps. At Z=0 no number of identical retries yields a keep; there is no finite expected cost per success.'
+        }
+      </Prose>
+
+      <Prose>
+        {'The '}
+        <code>{'selection'}</code>
+        {' function in the verification program computes these quantities. Read '}
+        <code>{'None'}</code>
+        {
+          ' for an undefined result. Precision, coverage and expense describe different parts of the decision; optimizing only one can discard the data the student most needs.'
+        }
+      </Prose>
+
+      <span id="9-failure-modes-gotchas" aria-hidden="true" />
+      <H2>{'6. Preserve families before counting diversity'}</H2>
+
+      <Prose>
+        {
+          'Filtering counts rows, but rows have relationships. If three rewrites came from one paragraph and one from another, four unique strings still represent only two source families. A train/test split made after generation can put near-identical evidence on both sides.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S10" />
+
+      <Prose>
+        {
+          "Assign source families to splits before generating their descendants. Every descendant inherits its parent's split. Then examine additional relations, such as a duplicate joining two apparently different sources. Connected groups must stay together if those relations would leak the information being evaluated. The earlier "
+        }
+        <a
+          href={
+            '/learn/path/full-curriculum/data-curation-deduplication-minhash-bloom-filters?module=large-language-models'
+          }
+        >
+          {'deduplication lesson'}
+        </a>
+        {
+          ' develops candidate matching and connected-component grouping; source lineage adds another kind of edge to the same reasoning.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Exact text hashes detect exact equality under the chosen normalization. They do not prove different hashes mean different facts, nor prove two independently written records lack common ancestry. Conversely, aggressive normalization can erase distinctions that matter to a task. Our text filter uses Unicode NFKC and whitespace collapse, keeping case and punctuation. The rule is explicit so its copy decisions can be reproduced.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S11" />
+
+      <Prose>
+        {
+          "If records are equally weighted, family A's three rewrites receive weight .75 and family B's one rewrite receives .25. An "
+        }
+        <strong>{'effective family count'}</strong>
+        {
+          ' is 1/Σ_f w_f². It equals 1/(.75²+.25²)=1.6 here. With equal family weights it would be 2. It summarizes concentration over defined families, not semantic diversity or a number of independent scientific observations.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Adding another rewrite to A increases string count but leaves family support at two and changes the weights to .8/.2. The effective count becomes 1/.68≈1.471. The added text may still be pedagogically useful; the count simply prevents us from calling it a new source of evidence. If the sampler weights windows rather than documents, recompute family weights using the window probabilities.'
+        }
+      </Prose>
+
+      <Prose>
+        {'Download '}
+        <a href={'/learn-code/synthetic-data/synthetic_corpus.py'}>{'synthetic_corpus.py'}</a>
+        {'.'}
+      </Prose>
+
+      <Program file="synthetic_corpus.py" />
+
+      <Prose>
+        {''}
+        <code>{'read_sources'}</code>
+        {
+          ' preserves original row IDs and excludes only whitespace or decorative asterisms under the predeclared source rule. '
+        }
+        <code>{'select_candidates'}</code>
+        {
+          ' retains every acceptance decision, parent ID and rejection reason; exact output duplicates use the first normalized occurrence across the output pool. No output is silently replaced with a more attractive one.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <code>{'diagnostics'}</code>
+        {
+          ' reports counts, byte lengths, normalized uniqueness and document-weighted family concentration. These are descriptive measurements. They are not a learned factuality score. '
+        }
+        <code>{'WindowPool'}</code>
+        {
+          ', used next, represents sampling exposure separately so document counts cannot masquerade as token counts.'
+        }
+      </Prose>
+
+      <H2>{'7. Turn a corpus mixture into actual training targets'}</H2>
+
+      <Prose>
+        {
+          'Now we have original and generated records. Saying “half synthetic” is incomplete: half of documents, bytes, tokens, windows, batches or loss weight? These can produce different training distributions even with the same files.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S12" />
+
+      <Prose>
+        {
+          'For a simple contrast, suppose one original document has 100 target tokens and one generated document has 20. Sampling each document equally and using all its targets gives expected token mass 100:20, so generated tokens contribute 1/6, not 1/2. A sampler that always takes one equal-length window per draw has a different denominator. State the actual operation.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Our study uses UTF-8 bytes as token IDs 0–255. A window contains 33 bytes: the first 32 are inputs and the last 32 are their one-position-shifted targets. Windows stay inside one source record. A record of L bytes supplies max (0, L−32) eligible starts. A uniform draw over all starts weights each record in proportion to that count, rather than equally by document.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <code>{'WindowPool'}</code>
+        {
+          ' stores each record once plus cumulative window counts. Binary search maps an integer rank to a record and starting offset. It does not construct a large copied array of every overlapping window. With R records and B windows per batch, lookup costs O(B log R) plus the O(B×32) bytes copied into the batch; stored corpus size remains linear in the original bytes and record count.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "Before each example, draw a branch. With probability α=.5 choose the generated pool; otherwise choose the original pool. Draw uniformly among eligible windows inside the selected pool. Because every window has 32 targets, α is also the expected generated fraction of selected training targets. A finite run's actual fraction need not equal .5, so we record its count."
+        }
+      </Prose>
+
+      <SyntheticFigure id="S13" />
+
+      <Prose>
+        {
+          "The model predicts each next byte from the permitted input prefix. Changing a future byte cannot change an earlier prediction. A byte token may represent only part of a multi-byte character; the decoder is learning byte sequences, and byte perplexity is not directly comparable to a subword model's token perplexity."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For model parameters θ and selected target bytes b, the batch objective is ordinary mean negative log probability:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
           {
-            label: "2. Teacher generation",
-            render: () => (
-              <div>
-                <Prose>The teacher LLM (GPT-4-class) generates a full textbook section. Typical output: 400–800 tokens. Temperature 0.7–1.0 for diversity across samples.</Prose>
-                <TokenStream tokens={[
-                  { label: "# Gradient Descent", color: colors.gold },
-                  " ## Motivation ...",
-                  " ## Worked Example ...",
-                  " ## Pitfalls ...",
-                  " ## Exercise ...",
-                ]} />
-              </div>
-            ),
-          },
-          {
-            label: "3. Quality filter",
-            render: () => (
-              <div>
-                <Prose>A quality classifier scores the generated text. Heuristics: minimum length, presence of worked example, presence of exercise, structural markers. Samples below threshold are discarded (86.7% pass rate in our mock pipeline).</Prose>
-                <TokenStream tokens={[
-                  { label: "SCORE: 0.9", color: colors.gold },
-                  " → ",
-                  { label: "KEEP", color: "#4ade80" },
-                  "   |   ",
-                  { label: "SCORE: 0.4", color: colors.textMuted },
-                  " → ",
-                  { label: "DISCARD", color: "#f87171" },
-                ]} />
-              </div>
-            ),
-          },
-          {
-            label: "4. Verifier check (math/code)",
-            render: () => (
-              <div>
-                <Prose>For verifiable domains: execute generated code against tests, or check math answers against ground truth. This step is optional for prose but mandatory for math/code to avoid contaminating training data with wrong solutions.</Prose>
-                <TokenStream tokens={[
-                  { label: "execute()", color: colors.gold },
-                  " → tests pass →",
-                  { label: " KEEP", color: "#4ade80" },
-                  "   |   ",
-                  { label: "execute()", color: colors.textMuted },
-                  " → wrong answer →",
-                  { label: " DROP", color: "#f87171" },
-                ]} />
-              </div>
-            ),
-          },
-          {
-            label: "5. Real-data mixing",
-            render: () => (
-              <div>
-                <Prose>Kept synthetic samples are mixed with filtered real data at 30–70% synthetic. Never train the student on 100% synthetic data. The real-data anchor prevents collapse and preserves tail diversity.</Prose>
-                <TokenStream tokens={[
-                  { label: "real data 40%", color: "#60a5fa" },
-                  " + ",
-                  { label: "synthetic 60%", color: colors.gold },
-                  " → student training corpus",
-                ]} />
-              </div>
-            ),
-          },
-          {
-            label: "6. Student training",
-            render: () => (
-              <div>
-                <Prose>The smaller student model trains on the mixed corpus. Student is evaluated on held-out benchmarks; if capability exceeds a threshold, the pipeline can iterate — but never feed student outputs back as synthetic data without a real-data anchor.</Prose>
-                <TokenStream tokens={[
-                  "student (1.3B) ← ",
-                  { label: "mixed corpus", color: colors.gold },
-                  " → HumanEval: 50.6%",
-                ]} />
-              </div>
-            ),
-          },
+            'L(\\theta)=-\\frac{1}{BC}\\sum_{n=1}^{B}\\sum_{t=1}^{C}\n\\log p_\\theta(b_{n,t+1}\\mid b_{n,1:t}),\\qquad B=16,\\ C=32.'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'There are 512 selected targets per update. At 300 updates each condition receives 153,600 targets. This count includes repeated and overlapping contexts; it is not a claim of 153,600 independent observations or distinct source bytes.'
+        }
+      </Prose>
+
+      <Prose>
+        {'The network is the exact '}
+        <a href={'/learn-code/causal-language-modeling/tiny_causal_lm.py'}>
+          {'TinyLM implementation'}
+        </a>
+        {
+          ' from the causal-language-modeling lesson. It uses learned byte and position embeddings, two causal attention/feed-forward blocks and an output head. Here vocabulary 256, context 32, width 32 and two heads give 42,624 parameters. The downloadable bundle includes that unchanged helper; this lesson implements the new corpus sampler and experiment around it.'
+        }
+      </Prose>
+
+      <H3>{'Use the ordinary library while preserving the calculation'}</H3>
+
+      <Prose>
+        {"PyTorch's "}
+        <code>{'cross_entropy'}</code>
+        {
+          ' receives logits shaped (512,256) and target IDs shaped (512). The default mean reduction divides by 512, matching the equation. Equivalently, apply '
+        }
+        <code>{'log_softmax'}</code>
+        {
+          ", gather each target's entry, negate and average. Do not divide once by 512 and again by batch size."
+        }
+      </Prose>
+
+      <Prose>
+        {'Download '}
+        <a href={'/learn-code/synthetic-data/synthetic_library.py'}>{'synthetic_library.py'}</a>
+        {'.'}
+      </Prose>
+
+      <Program file="synthetic_library.py" />
+
+      <Prose>
+        {"It compares scratch temperature/top-p with Transformers' actual "}
+        <code>{'TemperatureLogitsWarper'}</code>
+        {' and '}
+        <code>{'TopPLogitsWarper'}</code>
+        {
+          ', then compares the explicit loss with PyTorch. The inputs and conventions are matched. Separate random number generators are not expected to produce identical token sequences merely because they sample the same distribution.'
+        }
+      </Prose>
+
+      <Prose>
+        {'The same program uses '}
+        <code>{'torch.multinomial'}</code>
+        {
+          ' for 100,000 categorical draws and reports observed frequencies around [.6, .3, .1]. They need not equal those values exactly. The statistical target is the distribution; the exact native loss and probability comparisons use deterministic inputs. Run '
+        }
+        <code>{'python synthetic_library.py'}</code>
+        {
+          ' with the pinned requirements supplied in the file index. Later experiments use this same ordinary library route for the actual student update.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For evaluation, reset at each untouched paragraph. Predict every byte after its first exactly once using at most 32 preceding bytes from that paragraph. Sum all negative log probabilities and divide by the total number of targets. Averaging paragraph means equally would give a short paragraph the same weight as a long one and answer a different question.'
+        }
+      </Prose>
+
+      <span id="5-production-implementation" aria-hidden="true" />
+      <H2>{'8. Generate a real small corpus'}</H2>
+
+      <Prose>
+        {"Our source is Lewis Carroll's public-domain "}
+        <strong>{"Alice's Adventures in Wonderland"}</strong>
+        {
+          '. We reuse the actual text files supplied in Causal Language Modeling, so the new operation is corpus generation rather than an unrelated dataset change. These are literary paragraphs with long sentences and narrative details; a small generator may struggle to preserve them.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The supplied training and held-out files contain 18 and 6 rows respectively. Three rows are decorative asterisms, including one exact cross-split duplicate. The rule fixed before generation excludes whitespace/asterisk-only rows and retains them in an exclusion ledger. This leaves 17 training prose records and 4 later held-out prose records. No held-out paragraph supplies a generation prompt. The paragraphs still share a book, author and characters, and the teacher could have encountered the book in its original training.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S14" />
+
+      <Prose>
+        {'The actual teacher is '}
+        <code>{'google/flan-t5-small'}</code>
+        {' at revision '}
+        <code>{'0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab'}</code>
+        {', with 76,961, 152 loaded parameters. It is an '}
+        <strong>{'encoder-decoder'}</strong>
+        {
+          ' model: the encoder reads the prompt, and the decoder predicts its output while attending to the encoded prompt and its own earlier output. This differs from simply appending a prompt to a decoder-only model. We use the existing pretrained checkpoint in evaluation/inference mode; no teacher weight is updated.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Each training paragraph receives two prompts. The plain prompt requests a concise rewrite preserving facts. The QA prompt requests one question '
+        }
+        <strong>{'and its answer'}</strong>
+        {
+          ' using only the paragraph. Temperature is .8, top-p .9, top-k is disabled, sampling is enabled, one beam is used and the maximum is 96 new decoder tokens. Seeds are 73 plus the stable record index. These are a fixed teaching protocol, not recommended optimal generation settings.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "The program records full prompt IDs and the actual retained encoder IDs. Inputs longer than 512 tokens would be clipped deterministically and flagged, so the retained context could be inspected. None of these 34 prompts required clipping. Every output ID sequence includes the decoder-start token; 96 new tokens can therefore yield 97 stored IDs. Two outputs ended at the length cap; the other 32 reached EOS. The corpus used 1,062 new decoder tokens in total. These teacher-token counts use its tokenizer, not the student's byte vocabulary."
+        }
+      </Prose>
+
+      <Prose>
+        {'Download '}
+        <a href={'/learn-code/synthetic-data/synthetic_generate.py'}>{'synthetic_generate.py'}</a>
+        {'.'}
+      </Prose>
+
+      <Program file="synthetic_generate.py" />
+
+      <Prose>
+        {''}
+        <code>{'prompt_for'}</code>
+        {' constructs the exact request. '}
+        <code>{'generate_record'}</code>
+        {
+          ' tokenizes without hiding truncation, sets the per-record seed, calls ordinary Transformers '
+        }
+        <code>{'generate'}</code>
+        {
+          " and stores text, IDs, termination and timing. The model loader pins both model and tokenizer revision. The tested Transformers 5.17 loader preserves the checkpoint's distinct shared-embedding and output-head weights; it reports that they cannot be tied despite the saved tie configuration. We keep the native loaded values."
+        }
+      </Prose>
+
+      <Prose>
+        {'The '}
+        <a href={'/learn-code/synthetic-data/synthetic-programs-data.zip'}>
+          {'complete program-and-data archive'}
+        </a>
+        {
+          ' contains all seven programs, their unchanged TinyLM helper, source files, provenance and the measured outputs. Extract it into one directory, create a Python environment and install '
+        }
+        <a href={'/learn-code/synthetic-data/requirements.txt'}>{'requirements.txt'}</a>
+        {
+          '. The tested snapshot uses NumPy 2.5.3, PyTorch 2.14, Transformers 5.17, Tokenizers .23.2 and SentencePiece .2.1. A suitable CPU PyTorch wheel is enough. Read '
+        }
+        <a href={'/learn-code/synthetic-data/README.md'}>{'README.md'}</a>
+        {' for the complete commands.'}
+      </Prose>
+
+      <Prose>
+        {'To inspect the retained run, use '}
+        <code>{'candidates.json'}</code>
+        {'; no generation is needed. To execute a separate run, choose a new filename:'}
+      </Prose>
+
+      <CodeBlock language={'shell'}>
+        {'python synthetic_generate.py --cache .model-cache --output my-candidates.json'}
+      </CodeBlock>
+
+      <Prose>
+        {'The first invocation may acquire the pinned model. '}
+        <code>{'--local-only'}</code>
+        {
+          ' reuses a populated cache and fails if required files are missing. The model has its own Apache-2.0 license; the source-text provenance travels with the text. Exclusive output creation prevents overwriting the supplied candidate file. A failed execution is a failed execution, not permission to silently regenerate a nicer candidate.'
+        }
+      </Prose>
+
+      <H3>{'Inspect what was actually generated'}</H3>
+
+      <SyntheticFigure id="S15" />
+
+      <Prose>
+        {'Read '}
+        <code>{'train-00-plain'}</code>
+        {
+          ' beside its parent. The teacher calls Alice “a schoolteacher and a writer,” which the supplied paragraph does not say. '
+        }
+        <code>{'train-11-plain'}</code>
+        {' says Alice went through the door even though its parent describes trying locked doors. '}
+        <code>{'train-15-plain'}</code>
+        {
+          ' turns a warning about a hot poker into a claim about being a poker player. These failures are visible in the unchanged outputs; they were not inserted by a simulator.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Some outputs preserve fragments of the source. The long Dinah rewrite retains cat, milk and bat details but repeats itself and stops mid-sentence at the cap. The QA outputs supply questions without the requested answers. A question mark and fluent wording do not establish that the requested example was constructed.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The predeclared usable-format filter normalizes text, requires at least 33 UTF-8 bytes, excludes an exact normalized parent copy and collapses exact candidate duplicates. It does '
+        }
+        <strong>{'not'}</strong>
+        {
+          ' check factual consistency or the requested QA structure. Of 34 candidates, it keeps 32; two short QA outputs have only 30 and 28 normalized bytes. No candidate is excluded by the copy/duplicate rules. All originals, including both rejections and the weak rewrites, remain available.'
+        }
+      </Prose>
+
+      <Prose>
+        {'The accompanying '}
+        <code>{'audit.json'}</code>
+        {
+          ' gives descriptive notes after reading the entire finite set against its parents. Those notes did not determine membership in the training pool. They are not calibrated quality scores or a general hallucination rate for FLAN. The example demonstrates the gap between a mechanical eligibility rule and a semantic claim. We now test the corpus the rule actually produced.'
+        }
+      </Prose>
+
+      <span id="6-visual-walkthrough" aria-hidden="true" />
+      <H2>{'9. Measure the resulting student'}</H2>
+
+      <Prose>
+        {
+          'The question is deliberately narrow: under the same update and target budget, does replacing half the selected training windows with these generated records improve prediction of the four untouched natural paragraphs? We compare three conditions, keeping the target vocabulary and model architecture fixed.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S16" />
+
+      <Prose>
+        {'The '}
+        <strong>{'raw'}</strong>
+        {' condition always samples original windows. The '}
+        <strong>{'copy'}</strong>
+        {
+          ' condition represents originals plus exact copies, mapping both sampling branches to the same original-window indices. The '
+        }
+        <strong>{'generated'}</strong>
+        {
+          ' condition uses the generated pool when the branch draw is below .5 and originals otherwise. There are 8,092 eligible original windows and 2,927 eligible generated windows. Their sizes affect which indices a shared uniform draw selects, not the 32-target length of each selected window.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For each seed, all three students begin with identical parameter values. They receive the same precomputed branch and window-selection draws. Raw and copy therefore receive byte-identical batches in the same order. They execute independently, providing a strict null: their weights and losses should remain identical. This does not claim ordinary duplication never matters. Duplicating only one source, changing a sampler or training for more updates can change exposure. Here exposure is deliberately held equal.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Every run makes 300 updates of 16 windows, with AdamW learning rate .003, weight decay .01 and gradient-norm cap 1. Dropout is zero. Seeds are 17, 29 and 43, paired across conditions. Evaluations at updates 0,100 and 200 are diagnostics; update 300 was selected as the comparison point before any results existed. Each evaluation sums 1,862 held-out next-byte targets.'
+        }
+      </Prose>
+
+      <Prose>
+        {'Download '}
+        <a href={'/learn-code/synthetic-data/synthetic_student.py'}>{'synthetic_student.py'}</a>
+        {'.'}
+      </Prose>
+
+      <Program file="synthetic_student.py" />
+
+      <Prose>
+        {''}
+        <code>{'fit'}</code>
+        {
+          ' composes the window pools with the unchanged TinyLM, all-token cross-entropy and optimizer. '
+        }
+        <code>{'grouped_score'}</code>
+        {
+          ' reuses the prerequisite scorer separately for each paragraph, then pools its sums and counts. '
+        }
+        <code>{'state_hash'}</code>
+        {' compares exact parameter bytes for the copy null. '}
+        <code>{'inspector'}</code>
+        {
+          ' records all 256 probabilities at predefined held-out positions from the saved seed-17 students.'
+        }
+      </Prose>
+
+      <Prose>
+        {'Run '}
+        <code>{'python synthetic_student.py --candidates candidates.json --output my-study'}</code>
+        {
+          ' to execute a new, separately named study. The output directory must not already exist. To inspect our results, open the supplied '
+        }
+        <code>{'study.json'}</code>
+        {
+          ' instead. The browser displays those recorded measurements; it does not retrain a student.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S17" />
+
+      <Prose>
+        {'Lower byte NLL is better for this prediction task. The final measured results are:'}
+      </Prose>
+
+      <NeuralTable
+        caption={'9. Measure the resulting student'}
+        headers={[
+          <>{'Seed'}</>,
+          <>{'Raw and exact-copy byte NLL'}</>,
+          <>{'Generated-mixture byte NLL'}</>,
+          <>{'Generated minus raw'}</>,
+        ]}
+        rows={[
+          [<>{'17'}</>, <>{'2.295572'}</>, <>{'2.305405'}</>, <>{'+.009832'}</>],
+          [<>{'29'}</>, <>{'2.252961'}</>, <>{'2.244042'}</>, <>{'−.008918'}</>],
+          [<>{'43'}</>, <>{'2.339097'}</>, <>{'2.324776'}</>, <>{'−.014321'}</>],
         ]}
       />
 
       <Prose>
-        The collapse plot below shows variance of generated samples across generations. Pure
-        synthetic training drives variance to near-zero — convergence to a point mass. A 50%
-        real-data mix stabilizes variance after an initial drop.
+        {
+          "All three copy conditions match their raw partner's complete history and final weights exactly. Generated text hurts slightly in seed 17 and helps slightly in seeds 29 and 43. The mean paired difference is about −.004469 nats per target byte. Three seeds on four neighboring paragraphs do not establish a general improvement or an optimal mixture. The seed-paired view keeps the disagreement visible instead of presenting only the favorable average."
+        }
       </Prose>
 
-      <Plot
-        label="model collapse — distribution variance across training generations"
-        xLabel="generation"
-        yLabel="variance"
-        series={[
+      <Prose>
+        {
+          'The generated target fractions are approximately 51.021%, 50.271% and 50.083%. These are the realized counts under a .5 branch probability. They are not the ratio of generated documents to originals. Every arm still receives exactly 153,600 targets. Repeated windows and correlated paragraphs limit the evidence; a large count of loss terms is not a large collection of independent books.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For seed 17, raw byte perplexity is about 9.930 and generated-mixture perplexity about 10.028, obtained by exponentiating each mean byte NLL. It is a probability-quality measure on the held-out bytes, not a count of factual errors. The semantic audit already found invented details in the generated corpus. A small loss reduction can coexist with bad factual rewrites; one measurement does not certify the other.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S18" />
+
+      <Prose>
+        {
+          "Choose a recorded paragraph and target position. The inspector shows the permitted byte context and the observed target, then the saved model's distribution. Switching arms changes fixed student weights. It does not select a better checkpoint or invent a new fitted result. If only the largest probabilities fit in the drawing, the remaining probability mass remains accounted for. A low-probability observed target contributes a larger negative log probability to evaluation."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Generation also cost work: the 34 recorded calls took about 48.4 seconds in total on this CPU, excluding model loading. Student timings in the retained results include diagnostic evaluation, and these small timings are sensitive to other work on the machine. They are provenance, not a claimed hardware speedup. Any efficiency study must account for source preparation, generation, selection, training and evaluation together.'
+        }
+      </Prose>
+
+      <span id="8-what-scales-and-what-doesn-t" aria-hidden="true" />
+      <H2>{'10. Follow one generation into the next'}</H2>
+
+      <Prose>
+        {
+          'So far, generated data entered one student run. A different question arises when each generation supplies the data for the next. To see one failure mechanism precisely, replace language with a finite population of three categories. This makes the assumptions and every lost count inspectable.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S19" />
+
+      <Prose>
+        {
+          'The initial distribution is q₀=[.6, .3, .1]. With sample size N=10, it can be represented by counts [6, 3, 1]. Draw ten independent categories according to q₀, then use their observed frequencies as q₁. Repeat from q₁. This is '
+        }
+        <strong>{'replacement'}</strong>
+        {
+          ': the previous population supplies probabilities, but its original counts are not kept in the next training population.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Even a category with positive probability may receive no sampled example. The rare category is missed in all ten draws with probability (1−.1)¹⁰≈.348678. If its new frequency is zero, later pure replacement draws never select it. Zero is absorbing for that category under this specified algorithm.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'This is a finite-sampling mechanism, not a theorem that every real language model recursively trained on generated text must collapse. Real models have parameterization, optimization error, conditioning and selection; text categories are not always known. The calculation isolates one reason that sampling from an estimated distribution can lose support.'
+        }
+      </Prose>
+
+      <H3>{'An unbiased mean does not preserve every population'}</H3>
+
+      <Prose>
+        {
+          'Let nᵢ count category i in the next N draws and qᵢ′=nᵢ/N. Each draw contributes a Bernoulli indicator with mean qᵢ and variance qᵢ(1−qᵢ). Independent sums give:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
           {
-            name: "pure synthetic (collapse)",
-            color: "#f87171",
-            points: [
-              [0, 1.0239], [1, 0.5809], [2, 0.3133], [3, 0.1784],
-              [4, 0.1039], [5, 0.0571], [6, 0.0336], [7, 0.0182],
-              [8, 0.0110], [9, 0.0066], [10, 0.0037],
-            ],
-          },
+            "\\mathbb E[q_i'\\mid q]=q_i,\\qquad\n\\operatorname{Var}(q_i'\\mid q)=\\frac{q_i(1-q_i)}{N}."
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'The estimate is conditionally unbiased. Across many possible populations its average remains at the current probability. Individual populations still fluctuate and can lose categories. “Unbiased” does not mean a particular run preserves diversity.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Define H(q)=1−Σᵢqᵢ². It is the probability that two independent draws from q belong to different categories. Initially H=.54. Use E[qᵢ′²|q]=Var(qᵢ′|q)+E[qᵢ′|q]², add over i, and subtract from 1:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
           {
-            name: "50% real mix (stable)",
-            color: colors.gold,
-            points: [
-              [0, 1.0239], [1, 0.7600], [2, 0.6760], [3, 0.6540],
-              [4, 0.6463], [5, 0.6563], [6, 0.6468], [7, 0.6605],
-              [8, 0.6601], [9, 0.6785], [10, 0.6611],
-            ],
-          },
+            "\\begin{aligned}\n\\mathbb E[H(q')\\mid q]\n&=1-\\sum_i\\left[q_i^2+\\frac{q_i(1-q_i)}N\\right]\\\\\n&=\\left(1-\\frac1N\\right)H(q).\n\\end{aligned}"
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'At N=10, expected H after one replacement is .9×.54=.486. Repeating the conditional expectation gives E[H(q_g)]=.54(1−1/N)^g. The expected probability vector can remain unchanged while the expected within-population diversity falls, because H is nonlinear. This is the useful distinction the live paths make visible.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S20" />
+
+      <Prose>
+        {''}
+        <strong>{'Retaining an original anchor'}</strong>
+        {' changes the transition. Mix the fixed original distribution with the new sample:'}
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {
+            "q'=(1-\\alpha)q_0+\\alpha\\widehat q,\\qquad\n\\widehat q\\sim\\operatorname{Multinomial}(N,q)/N."
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          "For α<1, qᵢ′ is at least (1−α)q₀ᵢ. The original rare category therefore keeps a floor. At α=0 the distribution never changes; at α=1 this becomes pure replacement. Retaining an original pool of N records plus a latest sampled pool of N records uses 2N stored records, with exposure weights chosen by α. The floor protects the anchor's support, not missing facts or biases absent from that anchor. Reusing the same original text is not receiving fresh independent evidence."
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Accumulation'}</strong>
+        {
+          ' instead keeps all prior populations. Initially there are N records. At generation g there are (g+1)N; adding N new draws gives new-sample weight w=1/(g+2). The new empirical mixture is q′=(1−w)q+wq̂. Its conditional mean is q and its conditional variance is w²qᵢ(1−qᵢ)/N. The same square calculation yields:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {"\\mathbb E[H(q')\\mid q]\n=\\left(1-\\frac{1}{N(g+2)^2}\\right)H(q)."}
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          "At g=0 and N=10, expected H is .54×.975=.5265. That decline is smaller than replacement's .486 because the new sample receives only half the mixture weight. The storage pool grows; it is not a fixed-budget comparison. In a training system, training one epoch over that growing pool also increases the number of updates unless another budget is held fixed."
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Fresh observations'}</strong>
+        {
+          ' draw again from an external source distribution. In our fixture that source is q₀. A category missing from the current population can reappear because the external distribution still gives it mass. That is a different transition from sampling only the current population or rereading a fixed stored anchor. Our three-category fixture cannot discover a category that the declared external distribution itself assigns zero probability.'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S21" />
+
+      <Prose>
+        {'Download '}
+        <a href={'/learn-code/synthetic-data/synthetic_recursive.py'}>{'synthetic_recursive.py'}</a>
+        {'.'}
+      </Prose>
+
+      <Program file="synthetic_recursive.py" />
+
+      <Prose>
+        {''}
+        <code>{'trajectory'}</code>
+        {
+          " implements the four transition rules using NumPy's multinomial sampler and records every sampled count. "
+        }
+        <code>{'expected_h'}</code>
+        {
+          ' computes the exact replacement and accumulation recurrences. The main program averages 2,000 seeded replacement paths alongside the expectation. The simulated average approaches but need not equal the analytical curve. A single trajectory can rise or fall in H at a step; the formula describes a conditional expectation.'
+        }
+      </Prose>
+
+      <Prose>
+        {'Run '}
+        <code>{'python synthetic_recursive.py'}</code>
+        {
+          '. Change N while keeping its meaning as the number of new samples explicit. Each multinomial draw and stored probability vector costs O(K) storage for K categories; retaining an actual growing text corpus would cost its growing number of bytes. The small probability simulator does not reproduce that physical storage expense or neural optimization.'
+        }
+      </Prose>
+
+      <H2>{'11. Read research without erasing the conditions'}</H2>
+
+      <Prose>
+        {
+          'The experiments and derivations now give us questions to ask of a large study. What supplied the content? Which generator and prompts created it? What was discarded? What quantity was mixed? What was held fixed? Which held-out task improved, and what did generation cost?'
+        }
+      </Prose>
+
+      <SyntheticFigure id="S22" />
+
+      <Prose>
+        {
+          'Use the live cost example to compare two proposed filters. A stricter filter can raise accepted precision yet require more attempts per retained record. If it also removes a whole topic, its apparent average gain may conceal lost coverage. Cost and conditional quality therefore belong beside the source and selection details, not in a final token-count footnote.'
+        }
+      </Prose>
+
+      <NeuralTable
+        caption={'11. Read research without erasing the conditions'}
+        headers={[
+          <>{'Primary study or release'}</>,
+          <>{'What it helps explain'}</>,
+          <>{'Conditions to carry forward'}</>,
+        ]}
+        rows={[
+          [
+            <>{'WRAP'}</>,
+            <>
+              {
+                'Rephrasing existing web text into different styles can alter what a student learns per token.'
+              }
+            </>,
+            <>
+              {
+                'Its measured training benefits depend on source, styles, student and evaluation; generation expense is a separate part of total cost.'
+              }
+            </>,
+          ],
+          [
+            <>{'Cosmopedia'}</>,
+            <>
+              {
+                'Topic/source organization, prompt diversity, generation and overlap screening form a practical corpus-building workflow.'
+              }
+            </>,
+            <>
+              {
+                'It is a release account with acknowledged hallucinations; its model comparisons are not our controlled experiment, and overlap screening is not a guarantee against contamination.'
+              }
+            </>,
+          ],
+          [
+            <>{'EMNLP 2025 systematic pre-training study'}</>,
+            <>
+              {'Controlled synthetic-data comparisons can depend on generator, mixture and scale.'}
+            </>,
+            <>
+              {
+                'Separate actual training runs from extrapolated much-larger-scale projections. A projected result was not measured at that scale.'
+              }
+            </>,
+          ],
+          [
+            <>{'FinePhrase, April 2026 preprint'}</>,
+            <>{'Source choice, generator choice and requested format interact in pre-training.'}</>,
+            <>
+              {
+                'The inspected study uses 1.2B students and 21B training tokens on English evaluations. Task tradeoffs and cross-hardware cost accounting constrain generalization.'
+              }
+            </>,
+          ],
+          [
+            <>{'Accumulation study'}</>,
+            <>
+              {
+                'Replacing all previous data and accumulating historical data are different recursive regimes.'
+              }
+            </>,
+            <>
+              {
+                'Its settings, update budgets and modeling assumptions matter; growing the pool does not automatically keep training compute fixed.'
+              }
+            </>,
+          ],
         ]}
       />
 
       <Prose>
-        The heatmap below shows simulated pass rates across a 5×3 grid of domains and prompt
-        styles, analogous to what a production synthetic data team would track to allocate
-        generation budget. Higher values (brighter cells) indicate domains where the verifier
-        passes more synthetic samples — those domains are cheaper to synthesize quality data for.
-      </Prose>
-
-      <Heatmap
-        label="verifier pass rate (%) by domain × prompt style"
-        colorScale="gold"
-        rowLabels={["addition", "multiplication", "subtraction", "squares", "division"]}
-        colLabels={["plain", "word-problem", "multi-step"]}
-        matrix={[
-          [80, 72, 61],
-          [66, 58, 44],
-          [86, 79, 68],
-          [78, 70, 55],
-          [86, 80, 67],
-        ]}
-      />
-
-      <Prose>
-        Multiplication and multi-step problems have the lowest pass rates — the teacher model
-        produces more errors, and the verifier catches them. Plain single-step problems have
-        the highest pass rates. This gradient is consistent with the MetaMath paper's finding
-        that backward-rewritten problems (a form of multi-step generation) require additional
-        filtering before inclusion.
-      </Prose>
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <Prose>
-        Synthetic data is not universally useful. The evidence base is strongest in domains
-        with verifiable correctness, weakest in domains requiring diverse human experience or
-        long-tail knowledge. Use this matrix to assess whether synthetic generation is worth
-        the cost for your domain.
-      </Prose>
-
-      <H3>Synthetic wins clearly</H3>
-
-      <Prose>
-        Mathematics and formal reasoning: verifier-filtered synthetic problems provably raise
-        benchmark performance. Execution-based correctness checking means the quality floor
-        of kept samples is high, and volume is cheap. MetaMath and its descendants
-        (MathInstruct, MathScale, DeepMath) all demonstrate this.
+        {
+          'These sources motivate hypotheses and experimental controls. They do not establish a universal synthetic-data ratio, a universal advantage for a smaller teacher or a guarantee that a retained fraction of original data prevents every failure. Our categorical recurrence is derived for its explicit transition; our Alice measurements concern one small, weak corpus and fixed students.'
+        }
       </Prose>
 
       <Prose>
-        Code: generated functions either pass their tests or they don't. Execution is the
-        gold-standard verifier. phi-1, phi-2, WizardCoder, CodeLlama data mixes all use
-        synthetic code at high fraction. The density of verifiable-correct synthetic code
-        available is higher than for any other domain.
+        {
+          'For a useful next study, change one declared cause. For example, keep teacher, sources, student seeds and target budgets fixed while comparing a semantic verification policy with the present usable-format policy. Freeze its rubric and threshold using separate development evidence. Retain rejected candidates and account for how selection changes families, styles and costs. Evaluate natural-language prediction and a relevant factual task separately rather than asking byte NLL to certify both.'
+        }
+      </Prose>
+
+      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+        <span id="11-self-check-exercises" aria-hidden="true" />
+        <H2>{'12. Practice with changed inputs'}</H2>
+
+        <Prose>
+          {
+            'Use the complete programs to inspect each calculation. Hints and worked solutions follow each task; comparisons should preserve the stated units.'
+          }
+        </Prose>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'A. Keep the crossing token'}</H3>
+
+          <Prose>
+            {
+              'Probabilities are [.4, .35, .2, .05]. Implement nucleus selection at p=.6, preserving the crossing token. What probabilities result, and what changes at p=1?'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>
+              {'Accumulated mass after one token is below .6; after two it exceeds .6.'}
+            </Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'Retain IDs 0 and 1 with total .75, yielding [8/15, 7/15, 0, 0]. At p=1 all four probabilities remain. An implementation that retains only candidates whose cumulative mass is at most .6 would keep only the first token and violate the rule. Test your function against '
+              }
+              <code>{'distribution(np.log([.4,.35,.2,.05]), top_p=.6)'}</code>
+              {' and the p=1 null. Also test an exact tie using a declared tie order.'}
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'B. Debug an inverse-CDF sampler'}</H3>
+
+          <Prose>
+            {'A sampler uses '}
+            <code>{'searchsorted(cumulative,u,side="left")'}</code>
+            {
+              ' on [0, .2, .8, 0]. Explain its outputs at u=0 and u=.2, then implement the interval convention used here.'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>{'A zero-mass entry must never receive a draw, including at zero.'}</Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'Cumulative masses are [0, .2, 1, 1]. The faulty sampler returns ID 0 at zero and ID 1 at .2. Half-open intervals assign zero to ID 1 and .2 to ID 2. Validate a normalized vector and u in [0, 1), then retain only positive-mass entries and their original token IDs. Accumulate those masses, divide by their final sum to absorb accepted rounding error, and set their final cumulative value to 1. Use '
+              }
+              <code>{'side="right"'}</code>
+              {
+                " and map the resulting support position back to the original token ID. Merely forcing the full vector's final cumulative value to 1 can give a trailing zero-mass token a tiny interval: test ten masses of .1 followed by zero at "
+              }
+              <code>{'np.nextafter(1., 0.)'}</code>
+              {
+                '. The corrected sampler returns ID 9, never ID 10. For the original vector, u=.1999, .2 and .9999 give IDs 1, 2, 2. Return the integer token ID, not its position in the shortened support array.'
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'C. Separate answer and derivation'}</H3>
+
+          <Prose>
+            {
+              'For(3+4)×2, a candidate writes “3+4=8;8×2=14” and concludes 14. Write separate checks for its final answer and its equalities. What remains unproved even if all written equalities are true?'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>
+              {'Reuse exact rational evaluation, never '}
+              <code>{'eval'}</code>
+              {' arbitrary text.'}
+            </Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {'The correct answer is 14, so the final-answer check passes. Both equalities fail. '}
+              <code>{"check_candidate('(3+4)*2','14',['3+4=8','8*2=14'])"}</code>
+              {
+                ' reports that distinction. Even true equalities could be irrelevant or disconnected; they do not by themselves establish a complete derivation of the asked problem. Extend a checker only after defining how one verified state must lead to the next. A grammar check or final match cannot supply that missing relation.'
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'D. Change prevalence before trusting precision'}</H3>
+
+          <Prose>
+            {
+              'A generator is correct with probability .2. A verifier accepts 90% of correct candidates and 10% of incorrect ones. Compute acceptance, accepted precision, and expected cost per keep when each attempt costs .06 units.'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>{'Keep conditional rates separate from population masses.'}</Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'Accepted correct mass is .18, wrong mass .08, total Z=.26. Precision is .18/.26=9/13≈.692308. Expected cost is .06/.26=3/13≈.230769 units under independent stationary attempts. The true-positive rate remains .9; it is not the accepted precision. With Z=0, report no accepted population and no finite expected cost per keep.'
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'E. Construct a support failure'}</H3>
+
+          <Prose>
+            {
+              'The generator emits categories with masses [.5, .3, .2]. A filter accepts them with rates [.8, 0, .5]. Derive the retained distribution and name a task for which the missing category could matter.'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>{'Multiply before normalizing.'}</Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'Products are [.4, 0, .1], total .5 and retained masses [.8, 0, .2]. If the middle category is valid low-resource-language material, the filter has eliminated that support even if it improves another quality metric. The task example is a constructed possibility, not an empirical claim about a particular released filter. Test selection by subgroup and preserve rejection provenance.'
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'F. Repair a family split'}</H3>
+
+          <Prose>
+            {
+              'Sources A and B initially belong to training and testing. Rewrite A2 is placed in testing, and a duplicate relation later connects B to another A descendant. Which grouping rule prevents evaluating on related training evidence?'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>
+              {'Combine parent edges and relevant duplicate edges before the final split.'}
+            </Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                "A2 inherits A's group, so it cannot be held out independently from A. The duplicate relation joins A's and B's connected groups under this leakage definition. Assign the resulting component wholly to one split, then rebuild the other split from independent components. Do not merely rename A2 or delete its parent ID. If the relation is a noisy similarity match, inspect and record the grouping decision rather than calling all similarity proven duplication."
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'G. Distinguish string count and family exposure'}</H3>
+
+          <Prose>
+            {
+              'Three families have target-exposure weights [.5, .25, .25]. Calculate the effective family count. What is it for equal weights over the same three families?'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>{'Square weights; do not count strings in place of families.'}</Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'Squared masses sum .25+.0625+.0625=.375, giving 8/3≈2.667. Equal weights give 3. Both populations have three represented families. The effective count describes concentration under the specified target sampler; it does not certify three independent facts or measure semantic diversity.'
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'H. Count targets and repair a mean'}</H3>
+
+          <Prose>
+            {
+              'A run has 200 updates, 8 windows per update and 24 targets per window. Evaluation paragraphs have NLL sums 80 and 30 over 40 and 10 targets. Compute the training target count and pooled evaluation NLL; explain the alternative equal-paragraph mean.'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>{'Add numerators and denominators before dividing.'}</Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'Training receives 200×8×24=38,400 targets. Pooled NLL is 110/50=2.2. The paragraph means are 2 and 3, whose unweighted average is 2.5. That gives each paragraph equal influence despite their lengths. Neither should be mislabeled as the other. Implement aggregation over '
+              }
+              <code>{'nll_sum'}</code>
+              {' and '}
+              <code>{'targets'}</code>
+              {
+                ' and check a zero-target paragraph does not create an undefined per-paragraph division.'
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'I. Prove and break the copy null'}</H3>
+
+          <Prose>
+            {
+              'Two runs start with equal weights and optimizer states. They receive identical batches and use deterministic operations with dropout disabled. Why should their updates match? Give one duplication policy that breaks the premise.'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>{'Argue one update at a time, including optimizer state.'}</Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'Equal inputs and parameters give equal logits, losses and gradients. Equal optimizer states and settings then give equal updated parameters and states. Induction repeats the argument for every step. Duplicating only family A under uniform document sampling changes its exposure probability, so batches need not match. Training for additional epochs also changes update count. Our control fixes both; its exact equality does not forbid those other effects.'
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'J. Audit a real weak rewrite'}</H3>
+
+          <Prose>
+            {'Inspect '}
+            <code>{'train-15-plain'}</code>
+            {
+              " with its source. Identify one unsupported interpretation and one omitted source commitment. Would the study's mechanical filter reject it? Design a separate audit field without changing the frozen corpus."
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>{'The same spelling can have different meanings in context.'}</Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                "The source warns that a red-hot poker burns when held; the output mentions becoming a poker player, changing the meaning. It also omits Alice's decision to check for a poison label before drinking. It is long enough and not an exact copy, so the declared filter keeps it. Add an audit record with source ID, output ID, the relevant source span, the unsupported interpretation and the omitted commitment. Keep that annotation separate from selection; adopting it as a new filtering rule requires a new experiment, not editing this result."
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'K. Derive one replacement and accumulation step'}</H3>
+
+          <Prose>
+            {
+              'For q=[.5, .3, .2] and N=20, compute H, expected H after replacement, and expected H after adding one equal-size sample to the original pool. What is the probability the .2 category is absent from the replacement sample?'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>{'The accumulation sample has weight 1/2 at its first step.'}</Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'H=1−(.25+.09+.04)=.62. Replacement gives (19/20)×.62=.589. First accumulation gives (1−1/80)×.62=.61225. The rare-category omission probability is .8²⁰≈.011529. The accumulated pool retains its original positive count, so absence from the new sample alone does not remove that category from the full accumulated pool. These are distinct events.'
+              }
+            </Prose>
+          </details>
+        </div>
+
+        <div className="lesson-exercise" data-lesson-exercise="">
+          <H3>{'L. Design a comparison that can fail honestly'}</H3>
+
+          <Prose>
+            {
+              'Propose a new source-conditioned-data experiment testing a semantic verifier. Specify what is fixed, what can change, what is held out and what results would count against your hypothesis.'
+            }
+          </Prose>
+
+          <details>
+            <summary>Hint</summary>
+
+            <Prose>
+              {'Keep direct corpus quality and downstream student performance separate.'}
+            </Prose>
+          </details>
+
+          <details>
+            <summary>Worked solution</summary>
+
+            <Prose>
+              {
+                'Freeze sources and their family splits, teacher revision, prompt set and complete generated candidates. Develop the verification rubric and threshold on separate development material. Compare usable-format selection with the semantic selection using matched student architecture, initialization seeds, selected-target/update budgets and evaluation. Record acceptance by family/style, rejected examples, teacher/verifier costs and realized exposure. Hold evaluation sources away from prompts, filtering choices and checkpoint selection. Report both prediction loss and a separately defined factual task, all paired seeds, and failures such as lower coverage or worse held-out scores. An empty accepted pool is a failed recipe to report, not a reason to silently change its threshold. This is a proposed study; no positive result is assumed.'
+              }
+            </Prose>
+          </details>
+        </div>
+      </section>
+
+      <H2>{'Key takeaways'}</H2>
+
+      <Prose>
+        {
+          "Generated data changes the student's training distribution through source conditioning, sampling, acceptance and exposure. Each operation has a concrete object and denominator. A true final answer need not validate its derivation; format eligibility need not validate its claims; unique strings need not be independent source families; a lower held-out byte loss need not mean greater factual reliability."
+        }
       </Prose>
 
       <Prose>
-        Instruction following and alignment: Magpie, Alpaca, WizardLM, Orca all demonstrate
-        that models trained on teacher-generated instruction-response pairs can match or exceed
-        models trained on human-authored data at the same parameter count. The domain is not
-        verifiable in the execution sense, but quality classifiers and preference models serve
-        as approximate verifiers.
+        {
+          'Our controlled copy null was exact. Our generated corpus had clear semantic weaknesses and mixed small downstream differences. The categorical model showed how unbiased resampling can lose support, while retaining originals, accumulating history and receiving fresh data change the transition and budget. Keep those conditions when transferring any conclusion to a larger system.'
+        }
       </Prose>
 
-      <Prose>
-        Reasoning traces: DeepSeek-R1-Distill shows that chain-of-thought traces from a strong
-        teacher, filtered by final-answer correctness, transfer reasoning capability to students
-        that cannot develop it via RL alone at their scale.
-      </Prose>
+      <section
+        className="lesson-ending lesson-ending--further-learning"
+        data-lesson-ending="further-learning"
+        data-lesson-resource-list=""
+      >
+        <H2>{'Further learning'}</H2>
 
-      <H3>Synthetic loses or is unclear</H3>
+        <ul>
+          <li>
+            {''}
+            <a href={'https://aclanthology.org/2024.findings-acl.658/'}>
+              {'The ACL survey of synthetic data generation'}
+            </a>
+            {
+              ': map generation, curation and evaluation onto the pipeline you built. Its examples include tasks beyond pre-training, so identify each objective before comparing outcomes.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://huggingface.co/blog/cosmopedia'}>
+              {"Cosmopedia's construction account"}
+            </a>
+            {
+              ': inspect how source/topic organization and prompt variation create a corpus. Redraw one parent-to-prompt branch and identify where semantic verification would enter.'
+            }
+          </li>
+          <li>
+            {''}
+            <a
+              href={'https://huggingface.co/docs/transformers/main/en/main_classes/text_generation'}
+            >
+              {'Transformers generation documentation'}
+            </a>
+            {
+              ': trace which settings change sampling support, termination and output IDs. Match the installed version and actual checkpoint configuration when reproducing a run.'
+            }
+          </li>
+        </ul>
+      </section>
 
-      <Prose>
-        Long-tail factual knowledge: a teacher model generates confident text about rare facts
-        it may have never seen accurately. Hallucinated facts in synthetic training data are
-        hard to detect without a secondary verifier, and secondary verifiers for rare facts
-        are by definition hard to build. Synthetic pre-training on factual domains risks
-        amplifying the teacher's hallucinations into the student.
-      </Prose>
+      <section className="lesson-ending lesson-ending--references" data-lesson-ending="references">
+        <span id="10-primary-sources" aria-hidden="true" />
+        <H2>{'Technical references'}</H2>
 
-      <Prose>
-        Diverse human writing styles: literary fiction, poetry, cultural commentary, and
-        informal registers are domains where "quality" is contested and no verifier exists.
-        A single teacher's style will dominate the synthetic corpus, narrowing rather than
-        expanding the student's stylistic range. This is style without substance, and it is
-        one of the six failure modes in section 9.
-      </Prose>
+        <ul>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/abs/2401.16380'}>{'WRAP: Rephrasing the Web'}</a>
+            {
+              ': source-conditioned rephrasing and pre-training experiments; distinguish model-training efficiency from total corpus-generation cost.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://aclanthology.org/2025.emnlp-main.544/'}>
+              {'Systematic synthetic pre-training study, EMNLP 2025'}
+            </a>
+            {
+              ': compare measured setups, mixtures and scaling extrapolations without treating a projection as an executed model.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/abs/2604.13977'}>{'FinePhrase, April 2026 preprint'}</a>
+            {
+              ': source, generator and prompt choices under a specified English pre-training setup; the research remains bounded by its tested sizes and tasks.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/abs/2404.01413'}>
+              {'Accumulating synthetic data and model collapse'}
+            </a>
+            {
+              ": investigate replacement versus retained history. Compare the paper's assumptions and growing-pool budgets with our explicitly derived finite model."
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://huggingface.co/google/flan-t5-small'}>{'FLAN-T5-small model card'}</a>
+            {
+              ': model provenance, instruction tuning, Apache-2.0 license and limitations. Our measured generations use the exact revision in the downloadable records.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://www.gutenberg.org/ebooks/11'}>{'Alice source and provenance'}</a>
+            {
+              ': the natural text used by the students. The provided provenance file records the precise source and extracted-file hashes.'
+            }
+          </li>
+        </ul>
+      </section>
 
-      <Prose>
-        Non-English long-tail: translation-based synthetic data for low-resource languages
-        preserves information but not cultural context. Synthetic text in Swahili generated
-        by translating English content will read differently from text authored by native
-        Swahili speakers. For basic capability coverage this may be acceptable; for language
-        models intended to serve native speakers of those languages, it is a meaningful limitation.
-      </Prose>
+      <section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+        <H2>{'Readiness and the next question'}</H2>
 
-      <H3>Hybrid is the norm</H3>
+        <Prose>
+          {
+            'You are ready to continue when you can implement a changed nucleus sampler, explain what a verifier does and does not prove, preserve source families, count the actual selected targets and interpret a held-out result that conflicts with a semantic audit. You should also be able to identify exactly which recursive transition a support-loss claim assumes.'
+          }
+        </Prose>
 
-      <Prose>
-        Every published recipe that demonstrates synthetic data benefits uses a mixture of
-        real and synthetic data, never pure synthetic. The mixing ratio varies (30–80% synthetic
-        depending on domain and phase), but the real-data anchor is universal. The practical
-        question is not "synthetic or real" — it is "what mixing ratio, for which domains,
-        with which verifier, at what cost."
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn&apos;t</H2>
-
-      <H3>Teacher cost: one inference per sample</H3>
-
-      <Prose>
-        Every synthetic sample requires one or more teacher inference calls. At GPT-4-class
-        costs, generating 1 billion tokens of synthetic data costs on the order of tens of
-        thousands of dollars. At open-weight teacher costs (Llama-3-70B, DeepSeek-V3 on
-        your own hardware), the cost is lower but the compute is real. Teacher cost scales
-        linearly with corpus size, which means the cost curve for synthetic data is fundamentally
-        different from real data (which has a one-time curation cost and then unlimited
-        reproduction). As teacher models get cheaper via quantization and distillation, this
-        cost will fall — but it does not disappear.
-      </Prose>
-
-      <H3>Filtering is cheap for verifiable domains</H3>
-
-      <Prose>
-        Execution-based verification of code or arithmetic is orders of magnitude cheaper
-        than teacher inference. Running unit tests is microseconds; generating the solution
-        is seconds. This asymmetry means that verifier-filtered pipelines can reject large
-        fractions of generated samples (30–50% rejection is common in math pipelines) without
-        material cost increase. The bottleneck is teacher generation, not verification.
-      </Prose>
-
-      <H3>Diversity does not scale from a single teacher</H3>
-
-      <Prose>
-        A single teacher model produces samples from its own distribution. Increasing the
-        number of samples does not increase the diversity of that distribution — it increases
-        the density of coverage within it. To get diversity, you need diverse teachers (different
-        model families, different sizes, different training data), diverse prompts (many topic
-        and style combinations), or structured augmentation (MetaMath-style rewriting from
-        multiple perspectives). The phi team addressed this with an explicit curriculum of
-        topics and styles. MetaMath addressed it with systematic rewriting strategies.
-        Magpie addressed it by using the aligned model's own prior over user queries. None
-        of these is free — each requires deliberate design effort.
-      </Prose>
-
-      <H3>Small models benefit more per synthetic token</H3>
-
-      <Prose>
-        The gains from textbook-quality synthetic data are most dramatic at small model scales
-        (1B–14B parameters). phi-1 at 1.3B parameters saw very large gains. Whether the same
-        quality gains persist at 70B or 400B is not publicly answered. Larger models have seen
-        enough of the real-data distribution that the marginal benefit of high-quality synthetic
-        explanations is smaller — they already understand the concepts. At small scales, every
-        high-quality token is pulling weight. This suggests synthetic data is particularly
-        valuable for deployment scenarios where model size is constrained: on-device, edge
-        inference, cost-sensitive API consumers.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes &amp; gotchas</H2>
-
-      <H3>1. Model collapse (recursive training)</H3>
-
-      <Prose>
-        The Shumailov failure mode. Described in full in sections 2 and 3, demonstrated in
-        section 4c. The fix is always to maintain a real-data anchor. Any pipeline that feeds
-        student outputs back into the next training run without a real-data component is running
-        toward collapse. The rate depends on how many generations are iterated, how different
-        the synthetic distribution is from the real one, and what fraction is synthetic — but
-        the direction is always toward narrower distribution.
-      </Prose>
-
-      <H3>2. Distribution narrowing (single-teacher homogeneity)</H3>
-
-      <Prose>
-        Even with real-data mixing, a large fraction of synthetic data from one teacher
-        narrows stylistic and epistemic diversity. The student learns to produce outputs
-        that look like the teacher — same sentence structure, same level of confidence, same
-        typical errors. This is not the same as collapse (the student doesn't lose capability)
-        but it does reduce diversity in outputs, which matters for creative tasks and for
-        robustness to distributional shift.
-      </Prose>
-
-      <H3>3. Evaluation contamination via teacher</H3>
-
-      <Prose>
-        A strong teacher model has likely memorized test-set problems from popular benchmarks
-        (HumanEval, MATH, AIME, MBPP). When the teacher generates synthetic training data,
-        some of that data may be near-identical to test-set problems — either because the
-        teacher is generating variants of memorized examples, or because benchmark problems
-        are so stereotyped that the teacher generates them independently. The student trained
-        on this data inherits the "contamination." Benchmark scores on the contaminated student
-        will be inflated, and the inflation is invisible unless explicitly checked via
-        n-gram overlap between the synthetic corpus and the evaluation sets.
-      </Prose>
-
-      <H3>4. Reward hacking the verifier</H3>
-
-      <Prose>
-        In pipelines where the teacher is explicitly optimized to pass the verifier (e.g.,
-        RLHF-style loops where the teacher is rewarded for generating verifiable solutions),
-        the teacher can learn to produce outputs that satisfy the verifier without genuinely
-        solving the problem. Arithmetic verifiers can be gamed by outputting answers in
-        unexpected formats; test-based code verifiers can be gamed by solutions that hardcode
-        test outputs. A verifier that can be gamed is not a quality gate.
-      </Prose>
-
-      <H3>5. Teacher bias inheritance</H3>
-
-      <Prose>
-        The student inherits not just the teacher's knowledge but also the teacher's biases.
-        If the teacher is more accurate on Western scientific conventions, the student will be
-        too. If the teacher has political or cultural leanings reflected in its outputs, those
-        leanings transfer into the synthetic corpus and from there into the student's weights.
-        This is different from the diversity issue: it is not about variation in outputs, but
-        about the systematic direction of errors and preferences.
-      </Prose>
-
-      <H3>6. Style without substance</H3>
-
-      <Prose>
-        A teacher prompted to write "textbook-quality" content will produce text that looks
-        like a textbook — structured headings, worked examples, a confident tone. If the
-        teacher's underlying knowledge in the domain is weak (say, an obscure subfield of
-        chemistry it saw few examples of during training), the resulting text will have the
-        form of a high-quality explanation with factually dubious content. Quality classifiers
-        that score on structural markers (has headings, has examples, right length) will
-        pass this content. The student will learn to generate convincing-sounding explanations
-        of things the teacher didn't fully understand.
-      </Prose>
-
-      <H3>7. Over-dependence on teacher availability</H3>
-
-      <Prose>
-        Pipelines built around a proprietary teacher (GPT-4, Claude Opus) are vulnerable to
-        API changes, pricing changes, and rate limits. If the teacher goes away or changes
-        behavior, the pipeline breaks. This is not a mathematical failure mode — it is an
-        operational one — but it has affected real teams. Using open-weight teachers is more
-        robust; using multiple teachers reduces single-point-of-failure risk.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        All sources below were verified via web search against current arXiv listings and
-        publisher pages as of April 2026.
-      </Prose>
-
-      <ul style={{ color: colors.textSecondary, lineHeight: 1.8, fontSize: 14, paddingLeft: 20 }}>
-        <li>
-          <strong>phi-1 — "Textbooks Are All You Need"</strong> — Gunasekar, Zhang, Aneja et al.
-          Microsoft Research, 2023. arXiv:2306.11644. The foundational demonstration that
-          1.3B-parameter models trained on textbook-quality synthetic code data match models
-          3–5x their size on HumanEval (50.6% pass@1). Introduced the "textbook prompt" paradigm.
-        </li>
-        <li>
-          <strong>phi-3 — "A Highly Capable Language Model Locally on Your Phone"</strong> —
-          Abdin et al. Microsoft Research, April 2024. arXiv:2404.14219. Extended phi approach to
-          general reasoning at 3.8B parameters, 3.3T tokens, two-phase training with synthetic-heavy
-          phase 2. phi-3-mini matches Mixtral 8x7B and GPT-3.5 on several benchmarks.
-        </li>
-        <li>
-          <strong>Model Collapse — "AI models collapse when trained on recursively generated data"</strong> —
-          Shumailov, Shumaylov, Zhao et al. Nature 631, 755–759 (2024). DOI: 10.1038/s41586-024-07566-y.
-          Published proof of distribution collapse in recursive synthetic training. The KL divergence
-          bound and experimental evidence across LLMs, VAEs, and GMMs. The canonical reference for
-          the collapse failure mode.
-        </li>
-        <li>
-          <strong>MetaMath — "Bootstrap Your Own Mathematical Questions"</strong> — Yu, Jiang, Shi
-          et al. arXiv:2309.12284, September 2023. Systematic bootstrapping via rephrase, backward,
-          add-condition, change-numbers rewriting. MetaMath-7B: 66.4% GSM8K, 19.4% MATH —
-          +11.5% and +8.7% over same-size SOTA at submission time.
-        </li>
-        <li>
-          <strong>Alpaca — "Self-Instruct"</strong> — Taori, Gulrajani, Zhang et al. Stanford
-          CRFM, March 2023. The first widely-replicated demonstration of instruction-following
-          distillation: Llama-7B trained on 52K GPT-3.5 instruction-response pairs matched
-          GPT-3.5 on human preference evaluation at far lower cost.
-        </li>
-        <li>
-          <strong>Magpie — "Alignment Data Synthesis from Scratch by Prompting Aligned LLMs with Nothing"</strong> —
-          Xu, Jiang, Niu et al. arXiv:2406.08464, June 2024. ICLR 2025. Generates instruction-response
-          pairs by prompting aligned LLMs with the pre-query template only. 4M instructions synthesized
-          from Llama-3-Instruct; 300K-sample subset matches performance of Llama-3-8B-Instruct trained
-          on 10M data points.
-        </li>
-        <li>
-          <strong>DeepSeek-R1 — "Incentivizing Reasoning Capability in LLMs via Reinforcement Learning"</strong> —
-          DeepSeek-AI, January 2025. arXiv:2501.12948. Used GRPO to train a frontier-class reasoning
-          model, then distilled reasoning traces into smaller students (Qwen-7B through Llama-70B) via
-          800K synthetic chain-of-thought samples. DeepSeek-R1-Distill-Qwen-32B achieves 72.6% on
-          AIME 2024, 94.3% on MATH-500.
-        </li>
-      </ul>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <Prose>
-        <strong>1. Derive the collapse conditions.</strong> Starting from the KL divergence
-        bound in section 3 — <Code>D_KL(p ‖ p_k) ≥ k · D_KL(p ‖ p_1)</Code> — under what
-        conditions does collapse <em>not</em> occur? Specifically: if <Code>D_KL(p ‖ p_1) = 0</Code>,
-        what does this imply about the model after generation 1, and is such a model achievable?
-        What is the weakest condition on the mixing fraction of real data that would keep the
-        cumulative divergence bounded?
-      </Prose>
-
-      <Prose>
-        <strong>2. Design a synthetic chemistry verifier.</strong> Suppose you want to generate
-        synthetic pre-training data for organic chemistry reaction prediction. Design a verifier
-        for generated reaction equations. What tool would you use (e.g., RDKit, a specialized
-        LLM)? What fraction of teacher-generated reactions do you expect to be valid? How would
-        you handle reactions that are chemically valid but not plausible at room temperature or
-        pressure?
-      </Prose>
-
-      <Prose>
-        <strong>3. Synthetic data and teacher bias.</strong> A synthetic corpus generated by a
-        single GPT-4-class teacher is used to pre-train a student. The student is then evaluated
-        on a benchmark designed to test diversity of viewpoints on contested political questions.
-        Under what conditions would the student expand beyond the teacher's viewpoints, and under
-        what conditions would it reinforce them? What mix ratio or pipeline modification would
-        give you the best chance of a more diverse student?
-      </Prose>
-
-      <Prose>
-        <strong>4. Mix ratio for a distilled student.</strong> You are building a 7B-parameter
-        reasoning model using DeepSeek-R1-style reasoning-trace distillation. You have a budget
-        of 10 billion training tokens. You can generate reasoning traces at 1M tokens per dollar
-        (teacher inference cost), and you have 5B tokens of filtered real math data available
-        at no additional cost. How would you allocate your budget? At what synthetic fraction
-        would you expect to see diminishing returns, and how would you detect this empirically
-        before committing the full budget?
-      </Prose>
-
-      <Prose>
-        <strong>5. Detect distribution narrowing.</strong> You have trained two 7B-parameter
-        models: one on 50% synthetic + 50% real data, one on 90% synthetic + 10% real data.
-        Both score similarly on GSM8K and HumanEval. Design a test to determine whether the
-        90%-synthetic model has narrower distributional coverage than the 50%-synthetic model.
-        What would you measure — entropy of outputs, diversity of phrasings, coverage of rare
-        topics — and what would a meaningful difference look like?
-      </Prose>
-
-      <Prose>
-        Synthetic pre-training data is the current bet for pushing past the data wall. The bet
-        is well-evidenced in verifiable domains — math, code, instruction following — and
-        thin or speculative in domains that resist verification. Whether synthesis scales to
-        match frontier-class real-data-heavy training remains publicly unanswered. Model collapse
-        is real and the mitigation (real-data anchoring) is reliable but imposes a floor on how
-        synthetic-heavy any pipeline can safely go. The practical regime that has worked so far:
-        strong external teacher, explicit verifier, 30–70% synthetic, real-data anchor always
-        present. Deviation from any of these without careful empirical tracking is a way to
-        get the failure modes in section 9 for free.
-      </Prose></section>
+        <Prose>
+          {'Next, '}
+          <a
+            href={
+              '/learn/path/full-curriculum/supervised-fine-tuning-sft?module=large-language-models'
+            }
+          >
+            {'Supervised Fine-Tuning'}
+          </a>
+          {
+            ' focuses on learning requested response behavior from demonstrations. Carry forward the separation between how text was created, which target positions receive loss and which model parameters are updated.'
+          }
+        </Prose>
+      </section>
     </div>
   ),
 };
-
-export default syntheticDataPretraining;

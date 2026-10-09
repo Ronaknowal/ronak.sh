@@ -1,0 +1,151 @@
+{
+  "kind": "complete code, data, attribution, protocol and actual observations",
+  "files": [
+    {
+      "path": "causal_backbone.py",
+      "sha256": "b19f3abda468d411e6312d3ddf6642591f0fa261f82665f53596ebeb5fb600f5",
+      "bytes": 2496
+    },
+    {
+      "path": "compare_training.py",
+      "sha256": "12df7e5a1a708c9c08f1d1fed20c58a0ad025940066e4970451ef1a456bde280",
+      "bytes": 13348
+    },
+    {
+      "path": "feedback_learning.py",
+      "sha256": "ab07010a3401ccdbdeaf747e9fa9f61ca872b4d52969f69e9bdf6e566d69cbbf",
+      "bytes": 3102
+    },
+    {
+      "path": "FILES.md",
+      "sha256": "a2778b88fe33bba3b8370c288e087a10070896b3c519cf73b71f88aa802743d5",
+      "bytes": 3621
+    },
+    {
+      "path": "finite_preferences.py",
+      "sha256": "1bb2bc1b4b2598758570184ad54148bc8be2609ecaf2251700bce3ef1f709c25",
+      "bytes": 4433
+    },
+    {
+      "path": "judge_labels.py",
+      "sha256": "e332de16de61a06aa25d1807f4585de9ba4238802c9ce4d5de8b06e2ba82ccae",
+      "bytes": 7502
+    },
+    {
+      "path": "observations/execution-binding.json",
+      "sha256": "04a6070a7465733ab0a1832ec089c76ae6f37a3512e4e88d6b48da4efc616e33",
+      "bytes": 2289
+    },
+    {
+      "path": "observations/feedback-results.json",
+      "sha256": "2230227e5b8edffa71fc70e89786822aaf67fb8c91630ea01a2b388e7f00c54a",
+      "bytes": 16109
+    },
+    {
+      "path": "observations/finite-results.json",
+      "sha256": "dece5d62114decae52316bda454a3c84b6e119d64b832717339b4a6da2fb5751",
+      "bytes": 1914
+    },
+    {
+      "path": "observations/judge-results.json",
+      "sha256": "8503e7ff9750297b8396cc7de3959c377e14bb82c18b7ac855948f616485edfb",
+      "bytes": 64370
+    },
+    {
+      "path": "observations/loop-results.json",
+      "sha256": "29f27dcde59dfa1d753c72fa26a0dc84a6f9d64b22a408bd3e9223d4ea3b474e",
+      "bytes": 81465
+    },
+    {
+      "path": "observations/losses-results.json",
+      "sha256": "9e8a3994d820edcb977f9fc3ea46b03c92d89633ecacc5901f40e76e3ca760d9",
+      "bytes": 2703
+    },
+    {
+      "path": "observations/native-results.json",
+      "sha256": "05916c65008341bbebeade0f320406898a1ab2db117d84d29e6f59d73c9d4f71",
+      "bytes": 75219
+    },
+    {
+      "path": "observations/records-results.json",
+      "sha256": "4d3924b4563004be1a5e89c4a92310c13f8a8a474d135491c7873da6af50b08e",
+      "bytes": 144436
+    },
+    {
+      "path": "observations/training-results.json",
+      "sha256": "0ffd5b7c810cc674f69b8d0ac17f72519966ea15574ac8dd193aef8208c6f933",
+      "bytes": 5485140
+    },
+    {
+      "path": "preference_losses.py",
+      "sha256": "446c0a1a0ee37986072071763abfd459bf7e89e59e7521b06474aad390813cbb",
+      "bytes": 5560
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "05664f5f6f752e69c7f91bab98f42043ea34403acfd1f805d11adb5736d48584",
+      "bytes": 2243
+    },
+    {
+      "path": "README.md",
+      "sha256": "687ac49e9b837794f90784546fe8ee7b166fee073eca444bc4ab70cb4670244e",
+      "bytes": 4085
+    },
+    {
+      "path": "records.json",
+      "sha256": "e0b29d9055b9308473826238ca5f01272d0add6563057af0377ead35f5a44877",
+      "bytes": 82037
+    },
+    {
+      "path": "records_and_masks.py",
+      "sha256": "0f2179d63f36e7ea5228fae7dca63854a5024269e2fd8916994e86bb2fe74719",
+      "bytes": 6862
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "7cd2b92663650b1ed7fafa70a1115f3a493806d2c9821a920b9073be8bec881a",
+      "bytes": 135
+    },
+    {
+      "path": "response_scores.py",
+      "sha256": "944e25233fee30f726d2f148d4d7f98b169f636ff8d856e6fd6494effce3126e",
+      "bytes": 7740
+    },
+    {
+      "path": "rlaif_loop.py",
+      "sha256": "0c1e98710d9d797b446062ae4f47d9b3af6c334f5ad22b4535899f61b441c25a",
+      "bytes": 4906
+    },
+    {
+      "path": "run_all.py",
+      "sha256": "200361928a476885a8d53b97fdd62096486b70df78cbbf9927e930dc0a1d3311",
+      "bytes": 9900
+    },
+    {
+      "path": "selection.json",
+      "sha256": "575f12de57686644c9a7d9ce427b8d7ef5a65dcc6afd8254a7017e710f856e26",
+      "bytes": 85589
+    },
+    {
+      "path": "study-protocol.md",
+      "sha256": "51d6ea4c5c681ab5da2b9ba4ae4ac28973c9f5b870cb3c28fa82936756b540f4",
+      "bytes": 9579
+    },
+    {
+      "path": "trl_methods.py",
+      "sha256": "b77d3fe670c5f65a1f233499c6c8c3432be76727a4bcb708a465f735448e8bf5",
+      "bytes": 10035
+    },
+    {
+      "path": "UltraFeedback-LICENSE.txt",
+      "sha256": "97455af89ae4ef9d0887bbd652579f3837913b646be4c8b61cb3ca4d7a8d4849",
+      "bytes": 1063
+    }
+  ],
+  "excluded": [
+    "model weights",
+    "environment",
+    "inference model cache",
+    "trainer output directories"
+  ]
+}

@@ -1,0 +1,11 @@
+000 -> 0 -> 000 errors 0
+001 -> 0 -> 000 errors 1
+010 -> 0 -> 000 errors 1
+011 -> 1 -> 111 errors 1
+100 -> 0 -> 000 errors 1
+101 -> 1 -> 111 errors 1
+110 -> 1 -> 111 errors 1
+111 -> 1 -> 111 errors 0
+bits per source bit: 0.333333
+expected error fraction: 0.25
+worst block error fraction: 0.333333

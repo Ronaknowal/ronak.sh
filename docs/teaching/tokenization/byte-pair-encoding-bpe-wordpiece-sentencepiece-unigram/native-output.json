@@ -1,0 +1,181 @@
+{
+  "versions": {
+    "tokenizers": "0.23.2",
+    "sentencepiece": "0.2.2"
+  },
+  "matched_inference": {
+    "bpe": {
+      "low": [
+        "low"
+      ],
+      "lower": [
+        "low",
+        "e",
+        "r"
+      ],
+      "lowest": [
+        "low",
+        "est"
+      ],
+      "slowest": [
+        "s",
+        "low",
+        "est"
+      ],
+      "newest": [
+        "newest"
+      ],
+      "widest": [
+        "widest"
+      ]
+    },
+    "wordpiece": {
+      "abc": [
+        "ab",
+        "##c"
+      ],
+      "abz": [
+        "[UNK]"
+      ],
+      "a": [
+        "a"
+      ],
+      "ab": [
+        "ab"
+      ],
+      "101 characters": [
+        "[UNK]"
+      ]
+    },
+    "unigram": {
+      "ab": [
+        "ab"
+      ],
+      "abab": [
+        "ab",
+        "ab"
+      ],
+      "aab": [
+        "a",
+        "ab"
+      ],
+      "ba": [
+        "b",
+        "a"
+      ]
+    }
+  },
+  "real_text": {
+    "training_paragraphs": 18,
+    "heldout_paragraphs": 6,
+    "heldout_characters": 1916,
+    "heldout_words": 358,
+    "results": [
+      {
+        "system": "HF BPE",
+        "vocabulary": 160,
+        "heldout_tokens": 867,
+        "unknown_tokens": 1,
+        "unknown_spans": [
+          "C"
+        ],
+        "example": [
+          "Alice",
+          "was",
+          "c",
+          "ur",
+          "i",
+          "ou",
+          "s",
+          "."
+        ]
+      },
+      {
+        "system": "HF WordPiece",
+        "vocabulary": 160,
+        "heldout_tokens": 1013,
+        "unknown_tokens": 3,
+        "unknown_spans": [
+          "“Come,",
+          "croquet",
+          "“But"
+        ],
+        "example": [
+          "Alice",
+          "was",
+          "c",
+          "##u",
+          "##r",
+          "##i",
+          "##ou",
+          "##s",
+          "##."
+        ]
+      },
+      {
+        "system": "HF Unigram",
+        "vocabulary": 160,
+        "heldout_tokens": 874,
+        "unknown_tokens": 1,
+        "unknown_spans": [
+          "C"
+        ],
+        "example": [
+          "Alice",
+          "was",
+          "c",
+          "u",
+          "r",
+          "i",
+          "o",
+          "u",
+          "s",
+          "."
+        ]
+      },
+      {
+        "system": "SentencePiece bpe",
+        "vocabulary": 160,
+        "heldout_tokens": 1044,
+        "unknown_tokens": 1,
+        "unknown_spans": [
+          "C"
+        ],
+        "example": [
+          "Alice",
+          "▁was",
+          "▁c",
+          "ur",
+          "i",
+          "ou",
+          "s",
+          "."
+        ],
+        "whitespace_round_trip": true
+      },
+      {
+        "system": "SentencePiece unigram",
+        "vocabulary": 160,
+        "heldout_tokens": 1151,
+        "unknown_tokens": 1,
+        "unknown_spans": [
+          "C"
+        ],
+        "example": [
+          "Alice",
+          "▁was",
+          "▁",
+          "c",
+          "u",
+          "r",
+          "i",
+          "o",
+          "u",
+          "s",
+          "."
+        ],
+        "whitespace_round_trip": true
+      }
+    ]
+  }
+}

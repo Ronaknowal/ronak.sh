@@ -1,0 +1,7 @@
+.rec-serving-array-scroll { max-height: 24rem; min-width: 0; }
+.rec-serving-array-scroll > .rec-flow-pan { max-height: 24rem; }
+.rec-serving-array-scroll thead th { position: sticky; top: 0; z-index: 2; background: #080808; }
+.rec-serving-array-scroll thead th:first-child { z-index: 3; }
+.rec-serving-graph { width: 50rem; max-width: none; font: 18px "Space Grotesk", sans-serif; }
+.rec-serving-graph text { fill: #eee; }
+.rec-serving-graph line { stroke-width: 3; }

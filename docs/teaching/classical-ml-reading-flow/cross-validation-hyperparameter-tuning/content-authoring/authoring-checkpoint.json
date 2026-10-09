@@ -1,0 +1,40 @@
+{
+  "schema": "classical21-content-authoring-checkpoint/v1",
+  "updated_at": "2026-10-09T18:35:31.753958+00:00",
+  "status": "whole author-ready content frozen; DIFFERENT whole-content review and Root acceptance pending; implementation not started",
+  "owner": "content-authoring/ only",
+  "predecessor": {
+    "path": "checks/partial-authoring-checkpoint.json",
+    "bytes": 3783,
+    "sha256": "57692d3b17e52d79e4fce89ff7a25cb056a5c69ead68008188804e33f66c8a11"
+  },
+  "lesson": {
+    "path": "lesson.md",
+    "bytes": 245939,
+    "sha256": "4b6ef39187c7e6656675b9466d7c04d56bdd89b2b8cf9f683c681c2574a5a408"
+  },
+  "composition": {
+    "path": "composition.json",
+    "bytes": 11720,
+    "sha256": "bea044877f60fbfc2fa341e84c2838b24dde9ac2118887961141f837c550c1e7"
+  },
+  "author_readback": {
+    "path": "author-review.md",
+    "bytes": 7804,
+    "sha256": "cc7cdb777427406f5bcfccd33aacd132fea46beaefb54bf27a4b68bbd8c40702"
+  },
+  "current_check": {
+    "path": "checks/whole-content-check.json",
+    "bytes": 66820,
+    "sha256": "11299642ba53efd73a320a7fbd309a1a946439a24483a783c0c0ad80ee43f6d2"
+  },
+  "packet": "author-ready-content.json",
+  "binding_manifest": "content-binding-manifest.json",
+  "scope": "Eleven continuous sections, 41 actual drawing jobs, 14 local investigation groups, fifteen whole teaching programmes (3 exact retained/12 new), separate answer source, ten exact retained plus thirteen new solved tasks, complete setup/catalogue/resources",
+  "next_action": "DIFFERENT reviewer reads entire actual content and returns one consolidated finding set. Root owns acceptance and any runtime release.",
+  "limits": [
+    "Not independent approval or content-complete promotion",
+    "No runtime/build/browser/new original scientific campaign",
+    "No central/canonical/public/shared/handoff edits"
+  ]
+}

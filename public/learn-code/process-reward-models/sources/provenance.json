@@ -1,0 +1,16 @@
+{
+  "dataset": "openai/prm800k",
+  "commit": "7ecc794703b2877f63226f2477a49b34f9b25163",
+  "scope": "Bounded HTTP206 convenience prefixes; complete records, not full upstream files",
+  "license": "MIT; actual retained notice in PRM800K-LICENSE.txt",
+  "files": {
+    "phase2_train.jsonl.prefix": {
+      "sha256": "08f6e0728ac42b417293613d033f92092f806b369e6398a7e1a0abc12435ec07",
+      "bytes": 2093513
+    },
+    "phase2_test.jsonl.prefix": {
+      "sha256": "143b6e1e495f1b6ec836099f264ff5b6e35e8bc7070b2b1474f9ed992ddd1244",
+      "bytes": 2096959
+    }
+  }
+}

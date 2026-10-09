@@ -1,0 +1,11 @@
+candidate k / validation silhouette / mean squared distance / median ARI / min train size / eligible: 2 0.571111 0.670333 1.0 74 True
+candidate k / validation silhouette / mean squared distance / median ARI / min train size / eligible: 3 0.661785 0.23876 1.0 73 True
+candidate k / validation silhouette / mean squared distance / median ARI / min train size / eligible: 4 0.560489 0.211009 0.935727 43 True
+selected k: 3
+test / training-centroid baseline mean squared standardized distance: 0.342295 2.167591
+profiles ordered by fitted center temperature: count / mean temperature / mean vibration
+20 30.442766 5.441827
+15 42.465744 3.322042
+25 52.716399 5.9017
+100000 rows: float64 condensed distance buffer alone (GiB): 37.253
+A 16 GiB machine cannot hold that dense hierarchy plan; the reasoning belongs before fitting.

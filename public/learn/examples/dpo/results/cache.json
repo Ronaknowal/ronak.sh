@@ -1,0 +1,63 @@
+{
+  "kind": "local exact reference cache; no fitting; no claim about an external cache implementation",
+  "cache": {
+    "key": {
+      "reference_weights": "a301b94228c9386277d07dadf8acae6a5f2bdd60b5d0181793d4761d26c3d519",
+      "pair_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "tokenizer_identity": "0ce206c52af7d66bfa4ad09a26c45f02ab885f0d38e4d9ec60f5771747255079",
+      "template_identity": "constructed explicit IDs; BOS instruction country",
+      "batch_sha256": "2a85e1ab05c60fd9f98731103f4211221d030bdb746fadf48b4df6dcaa48bbf9",
+      "scoring": "causal shift once; genuine response sum; chosen rows then rejected rows"
+    },
+    "scores": [
+      -7.586134910583496,
+      -7.586134910583496,
+      -5.121018409729004,
+      -5.121018409729004,
+      -18.637746810913086,
+      -18.637746810913086,
+      -17.575801849365234,
+      -17.575801849365234,
+      -18.77141571044922,
+      -5.198307037353516,
+      -17.449365615844727,
+      -6.922567367553711,
+      -7.561939239501953,
+      -18.21407127380371,
+      -5.287444114685059,
+      -17.494789123535156
+    ],
+    "scores_sha256": "8d44ea2869ec937c20853d9ba2bc04ac459a05508b9afc37ed234d12ab3eeecd"
+  },
+  "initial": {
+    "cached_loss": 0.6931471824645996,
+    "uncached_loss": 0.6931471824645996,
+    "max_gradient_difference": 0.0
+  },
+  "changed_policy": {
+    "cached_loss": 0.6929057240486145,
+    "uncached_loss": 0.6929057240486145,
+    "max_gradient_difference": 0.0
+  },
+  "checks": [
+    "same-state cached and direct loss/gradient agree",
+    "changed policy retains a valid frozen-reference cache",
+    "invalidated by reference weights",
+    "invalidated by tokenizer_identity",
+    "invalidated by template_identity",
+    "invalidated by pair order",
+    "invalidated by input_ids",
+    "invalidated by completion_mask",
+    "invalidated by attention_mask",
+    "invalidated by score bytes"
+  ]
+}

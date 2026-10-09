@@ -1,0 +1,75 @@
+{
+  "topic": "llm-application-frameworks-langchain-llamaindex-haystack",
+  "checked_at": "2026-09-28T05:37:35.265489+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "environment_target": "scratch\\llm-workflows-runtime",
+  "scope": "CPU/offline public programs and explicit boundary checks; no hosted generation or GPU engine",
+  "outputs": {
+    "retrieval_pipeline.py": {
+      "ranked": [
+        [
+          "with",
+          1.413958771873946
+        ],
+        [
+          "close",
+          0.9902102579427791
+        ],
+        [
+          "finally",
+          0.6931471805599453
+        ]
+      ],
+      "result": {
+        "status": "evidence",
+        "excerpts": [
+          {
+            "id": "with",
+            "text": "A with statement closes a file when its block finishes even if an exception occurs. Open text files with an explicit encoding.",
+            "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files"
+          }
+        ]
+      }
+    },
+    "framework_retrieval.py": {
+      "scores": [
+        [
+          "with",
+          1.4139587718739461
+        ],
+        [
+          "close",
+          0.990210257942779
+        ],
+        [
+          "finally",
+          0.6931471805599453
+        ]
+      ],
+      "library_result": {
+        "status": "evidence",
+        "excerpts": [
+          {
+            "id": "with",
+            "text": "A with statement closes a file when its block finishes even if an exception occurs. Open text files with an explicit encoding.",
+            "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files"
+          }
+        ]
+      }
+    },
+    "boundary_checks": {
+      "changed_queries": 5,
+      "budgets": [
+        0,
+        22,
+        68
+      ],
+      "authorization_filtered": true
+    }
+  },
+  "sources": {
+    "public/learn-code/llm-application-frameworks-langchain-llamaindex-haystack/framework_retrieval.py": "ec2d6c7fa2f8fe7f2b6cdc98585ae0d5a72cb49693c9753ef9d1c0b67dd5ffae",
+    "public/learn-code/llm-application-frameworks-langchain-llamaindex-haystack/retrieval_pipeline.py": "f6cfae5fa6224dec2d954c513ea99351a843978cc3d0b9e64f2af6ea44b520af",
+    "scripts/verify-llm-framework-native.py": "2d0ec60dda412dba9af069e7ce45a6cb0ecd459b1edac89a6cdf70c6490b87f3"
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "status": "Private implementation; author verification incomplete",
+  "figures": [
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05",
+    "E06",
+    "E07",
+    "E08",
+    "E09",
+    "E10",
+    "E11",
+    "E12",
+    "E13",
+    "E14",
+    "E15",
+    "E16",
+    "E17",
+    "E18",
+    "E19",
+    "E20",
+    "E21",
+    "E22",
+    "E23",
+    "E24",
+    "E25",
+    "E26",
+    "E27",
+    "E28",
+    "E29",
+    "E30",
+    "E31",
+    "E32",
+    "E33",
+    "E34",
+    "E35",
+    "E36",
+    "E37",
+    "E38",
+    "E39",
+    "E40",
+    "E41",
+    "E42",
+    "E43",
+    "E44",
+    "E45",
+    "E46"
+  ],
+  "programmes": [
+    {
+      "file": "entropy_bernoulli.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_blocks.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_coin.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_conditional.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_continuous.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_evaluation.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_logits.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_maximum.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_prefix.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_support.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "entropy_torch.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "information_library.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    },
+    {
+      "file": "penguins_log_loss.py",
+      "sourceEqual": true,
+      "outputEqual": true
+    }
+  ],
+  "practicePythonFences": 6,
+  "sections": [
+    [
+      "1-start-with-a-message-and-its-surprise",
+      "1. Start with a message and its surprise"
+    ],
+    [
+      "2-average-over-what-actually-happens",
+      "2. Average over what actually happens"
+    ],
+    [
+      "3-turn-information-into-actual-binary-words",
+      "3. Turn information into actual binary words"
+    ],
+    [
+      "4-let-one-distribution-supply-outcomes-and-another-supply-prices",
+      "4. Let one distribution supply outcomes and another supply prices"
+    ],
+    [
+      "5-prove-the-bound-and-respect-the-direction",
+      "5. Prove the bound and respect the direction"
+    ],
+    [
+      "6-predict-with-the-information-you-have",
+      "6. Predict with the information you have"
+    ],
+    [
+      "7-compute-and-interpret-log-loss",
+      "7. Compute and interpret log loss"
+    ],
+    [
+      "8-change-continuous-units-without-changing-the-experiment",
+      "8. Change continuous units without changing the experiment"
+    ],
+    [
+      "9-use-kl-to-certify-a-maximum-entropy-model",
+      "9. Use KL to certify a maximum-entropy model"
+    ],
+    [
+      "10-practise-with-new-distributions-and-decisions",
+      "10. Practise with new distributions and decisions"
+    ],
+    [
+      "what-you-should-now-be-able-to-do",
+      "What you should now be able to do"
+    ],
+    [
+      "further-learning",
+      "Further learning"
+    ],
+    [
+      "technical-references",
+      "Technical references"
+    ],
+    [
+      "next-what-does-an-observation-tell-us-about-another-variable",
+      "Next: what does an observation tell us about another variable?"
+    ]
+  ],
+  "sharedGuideReplacesManualTOC": [
+    [
+      "Surprise and units",
+      "1-start-with-a-message-and-its-surprise"
+    ],
+    [
+      "Entropy as a weighted average",
+      "2-average-over-what-actually-happens"
+    ],
+    [
+      "Actual coding and decoding",
+      "3-turn-information-into-actual-binary-words"
+    ],
+    [
+      "Cross-entropy and KL",
+      "4-let-one-distribution-supply-outcomes-and-another-supply-prices"
+    ],
+    [
+      "Proof, direction and support",
+      "5-prove-the-bound-and-respect-the-direction"
+    ],
+    [
+      "Conditional prediction",
+      "6-predict-with-the-information-you-have"
+    ],
+    [
+      "Stable computation and evaluation",
+      "7-compute-and-interpret-log-loss"
+    ],
+    [
+      "Densities and coordinates",
+      "8-change-continuous-units-without-changing-the-experiment"
+    ],
+    [
+      "Maximum entropy",
+      "9-use-kl-to-certify-a-maximum-entropy-model"
+    ],
+    [
+      "Independent practice",
+      "10-practise-with-new-distributions-and-decisions"
+    ]
+  ],
+  "runtimeAddition": "An explicit download anchor for the supplied CSV; accepted wording/programme payloads unchanged",
+  "noScientificReplay": true
+}

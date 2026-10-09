@@ -1,996 +1,1412 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+import { Prose, H2, H3, Code } from '../../../../src/learn/components/content';
+import { MathBlock as SharedMathBlock } from '../../../../src/learn/components/content/Math.jsx';
+import RemoteCodeBlock from '../../../../src/learn/components/content/RemoteCodeBlock.jsx';
+import {
+  LessonIntro,
+  LessonTable,
+  Sources,
+} from '../../../../src/learn/components/lesson-labs/LessonElements.jsx';
+import {
+  PairJudgment,
+  TrainingStages,
+  PairAnatomy,
+  GroupSplit,
+  ScalarHead,
+  GapProbability,
+  HeadGradient,
+  ScoreGauge,
+  ReferenceTerms,
+  TiltedPolicy,
+  ScoreFunction,
+  BaselineVariance,
+  TokenPath,
+  TokenMasks,
+  ModelRoles,
+  TokenRewards,
+  AdvantageTrace,
+  TerminalCutoff,
+  ValidNormalization,
+  ClippedSurrogate,
+  SharedParameter,
+  RolloutTimeline,
+  TrainingTrace,
+  FrameworkParity,
+  HeldoutPairs,
+  MeasuredTraining,
+  ProxyConflict,
+  WorkLedger,
+} from '../../../../src/learn/components/lesson-labs/RLHFFlow.jsx';
+import '../../../../src/learn/components/lesson-labs/lesson-flow.css';
+
+const root = '/learn/examples/rlhf/';
+const Program = ({ file, title }) => (
+  <RemoteCodeBlock source={root + file} filename={file} title={title} />
+);
+const MathBlock = ({ children }) => (
+  <div className="rlhf-math" role="region" tabIndex={0} aria-label="Mathematical relationship">
+    <SharedMathBlock>{children}</SharedMathBlock>
+  </div>
+);
+const Anchor = ({ id }) => <span id={id} aria-hidden="true" />;
+const Exercise = ({ title, children, hint, solution }) => (
+  <div className="lesson-exercise flow-check" data-lesson-exercise>
+    <p>
+      <strong>{title}</strong> {children}
+    </p>
+    <details>
+      <summary>Hint</summary>
+      {hint}
+    </details>
+    <details>
+      <summary>Worked solution</summary>
+      {solution}
+    </details>
+  </div>
+);
 
 const rlhf = {
-  title: "RLHF (Reinforcement Learning from Human Feedback)",
-  readTime: "~50 min",
+  title: 'RLHF (Reinforcement Learning from Human Feedback)',
+  readTime: '~90 min read + programs and practice',
   content: () => (
-    <div>
+    <div className="lesson-flow rlhf-flow">
+      <LessonIntro
+        prerequisites="Causal Language Modeling supplied the causal decoder and shifted next-token targets. Basic probability, logs, vectors and gradient descent help. Response-only supervised fine-tuning, policy gradients, temporal credit and PPO are explained here before use."
+        exampleKind="Python + preference learning and actual token PPO"
+      >
+        Follow one comparison all the way to a change in generated-token probabilities. The first
+        pass is sections 1–3, the main derivations in 4–8, the complete run in 9 and its measured
+        limits in 11. Sections 4–8 also give deeper mathematical branches. Section 10 connects the
+        programs to current libraries; section 12 helps choose the next training question. Finish
+        with changed practice, further learning, technical references and readiness.
+      </LessonIntro>
 
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
+      <Anchor id="1-why-it-exists" />
+      <Anchor id="1-start-with-the-problem" />
+      <H2>1. A judgment that changes generation</H2>
       <Prose>
-        A pretrained language model knows how to complete text. It knows this in an extraordinarily broad sense — it can write Python, draft legal briefs, continue sonnets, transcribe phonetic patterns from obscure languages, and explain protein folding to a ten-year-old. But it has no preference about which of those things it does. Given the prompt "Help me," it might produce a thoughtful explanation, a fragment of a forum post, a spam template, or a sequence of plausible-but-confabulated instructions for something dangerous, depending entirely on which completion happens to score highest under the distribution it learned from the internet. The base model is a fluent autocomplete engine; it is not an assistant.
+        A language model can know that Paris is France's capital and still answer the request badly.
+        Suppose the user asks, <em>Name France's capital in one word.</em> Compare A, <em>Paris</em>
+        , with B, <em>Paris is the capital of France.</em> Both convey the same fact, but only A
+        follows the one-word instruction. If the request asks for a complete sentence, B becomes the
+        better fit. A rule saying “prefer shorter responses” would miss the reason for the first
+        judgment.
+      </Prose>
+      <PairJudgment />
+      <Prose>
+        The response identities stay fixed while the criterion changes. The highlighted winner is a
+        supplied judgment in this constructed example; it is not a probability produced by the
+        model. A real annotation task needs a question, candidate answers, instructions for
+        comparison and a way to represent ties or insufficient information. A person's choice is
+        evidence about that task and person. It does not turn the answer into a factual oracle.
+      </Prose>
+      <Prose>
+        Pretraining predicts tokens from text. Supervised fine-tuning, or SFT, increases the
+        probability of demonstrated answers. A comparison adds a different kind of information:
+        among two completed candidates for the same prompt, one is preferred. Reinforcement learning
+        from human feedback, or RLHF, uses such feedback to guide a policy, the model's distribution
+        over actions. For a language model, an action will be a generated token. A reward model
+        learns a scalar score from comparisons; policy optimization then uses that score to change
+        the generator. We first learn how a completed answer is scored; then we open the answer into
+        its individual actions.
+      </Prose>
+      <TrainingStages />
+      <Prose>
+        Read the solid arrows as data and the dashed arrows as parameter updates. Demonstrations fit
+        the initial policy. Comparisons fit a reward model that maps a prompt and completed response
+        to a scalar score. Fresh responses from the policy are scored, and an optimization rule
+        changes the policy toward better scores while controlling departure from a reference. These
+        are distinct operations: editing a label does not directly edit an answer, and scoring an
+        answer does not train the policy until a gradient update occurs.
+      </Prose>
+      <Prose>
+        This three-stage route is the one developed here. SFT is a useful initialization, not a
+        mathematical requirement of every preference-learning system. New comparisons and reward
+        refits can be interleaved with later policy rounds. The{' '}
+        <a href="https://arxiv.org/abs/2203.02155">InstructGPT study</a> is a primary example of
+        demonstrations, ranked outputs and policy optimization; its large-model human evaluations
+        are separate evidence from our small CPU programs.
       </Prose>
 
+      <H2>2. Preserve the question in the data</H2>
       <Prose>
-        The gap between "can produce a correct response somewhere in its distribution" and "reliably produces a correct response on the first try" is where almost all the user-facing value of a language model lives. Supervised fine-tuning (SFT) narrows the gap by imitation — show the model thousands of (prompt, good response) pairs and train it to copy the format. That buys a lot: the model learns to write in a helpful tone, to answer questions directly, to follow the structure of an instruction. But imitation has a ceiling. It teaches the model what the examples look like, not what makes a response genuinely good. A model trained purely on imitation can produce confident nonsense in the register of a helpful assistant.
+        A comparison is not just two strings. Write it as (x, yA, yB, q): x is the shared prompt or
+        conversation, yA and yB are alternative continuations, and q is the supplied probability or
+        fraction favoring A. A strict A-over-B label has q=1; a tie can use q=.5 if the annotation
+        protocol treats it that way. “Cannot judge” is not automatically a tie. Keep that missing
+        information distinct, and decide which records the training objective accepts.
       </Prose>
-
+      <PairAnatomy />
       <Prose>
-        Reinforcement Learning from Human Feedback is the technique that broke through that ceiling. The core idea, stated plainly: instead of training on demonstrations of good behavior, train on comparisons between behaviors, and use those comparisons to construct a reward signal that the model can optimize against. Humans are generally much better at judging which of two responses is better than they are at writing an ideal response from scratch. RLHF exploits that asymmetry. It collects pairwise preferences, trains a reward model to predict them, and then uses reinforcement learning to push the policy toward responses the reward model scores highly — while keeping it close enough to the SFT model that it does not drift into adversarial territory.
+        The displayed pair is an unchanged record from Anthropic's released helpful-base
+        comparisons. The conversation trunk is shared; only the final Assistant continuation
+        branches. The program finds the last Assistant marker in each full string and requires the
+        entire preceding context to agree. It excludes mismatches instead of inventing a common
+        prompt. Its source row number and digest let you trace the pair back to the retained gzip.
+        The original chosen label remains the original label even when our predictor disagrees.
       </Prose>
-
       <Prose>
-        The historical record is precise about where this came from. Paul Christiano, Jan Leike, and collaborators at OpenAI introduced the preference-learning framework for RL agents in 2017 (Christiano et al., "Deep Reinforcement Learning from Human Preferences," arXiv:1706.03741), showing that an agent in Atari and MuJoCo environments could learn complex behaviors from fewer than 1,400 pairwise human comparisons. Three years later, Stiennon, Ouyang, Wu, and collaborators applied the same machinery to language model summarization (arXiv:2009.01325), demonstrating that a reward model trained on human rankings could drive a GPT-3 fine-tune to produce summaries that humans preferred over the reference summaries in the dataset. In early 2022, Ouyang and 19 co-authors published InstructGPT (arXiv:2203.02155): the full RLHF pipeline applied to GPT-3, producing a 1.3B-parameter model that human raters preferred over the raw 175B GPT-3 on 85% of prompts. ChatGPT was a productized version of the same recipe, released in November 2022. Anthropic's concurrent work (Bai et al., arXiv:2204.05862) applied the same pipeline with explicit helpfulness and harmlessness criteria, releasing both the training code and the HH-RLHF dataset. Meta's Llama 2 paper (Touvron et al., arXiv:2307.09288) documented five iterative rounds of RLHF, with separate reward models for helpfulness and safety, accumulating over a million preference annotations.
+        Splitting random rows can put repeated questions in both training and evaluation. A reward
+        model may then look good by recognizing familiar material. Our fixed subset groups records
+        by the first Human turn, after whitespace normalization and case folding, before splitting.
+        This also keeps later conversation continuations of that initial question together. Exact
+        full-prompt hashes are retained as a second overlap check. Different paraphrases can still
+        cross the boundary; a hash split does not prove semantic novelty.
       </Prose>
-
+      <GroupSplit />
       <Prose>
-        From 2022 onward, RLHF was the central technique in post-training. Every frontier lab ran a version of it. The specific algorithm — PPO with a KL penalty — is now being displaced in open-source practice by simpler methods like DPO, but the three-stage structure (SFT, preference collection, preference optimization) remains the organizing spine of post-training pipelines everywhere. The algorithm is transitional; the problem it attacks is not.
+        Each block is a prompt family, and every comparison inside it moves with the family. The
+        deterministic hash chooses a partition before any fit. The canonical study takes at most two
+        pairs per selected family: 329 training pairs from 256 families and 163 held-out pairs from
+        128 other families. Both family overlap and exact-prompt overlap are zero. The readable
+        length bounds select a narrow subset: five to forty-five words in each response and at most
+        sixty-five in the prompt. Those bounds are part of the study's scope, not a recommended
+        universal data filter.
       </Prose>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
       <Prose>
-        Strip away the math and RLHF is three sequential operations, each one creating the substrate the next one needs.
+        The audit begins with 43,835 original rows. It finds 10,342 eligible rows after counting
+        unequal prefixes, empty/equal responses and length exclusions. These counts precede model
+        fitting. Neither the subset nor the held-out set was selected for easy wins. The full
+        selection code and exact offline records are supplied:
       </Prose>
-
-      <StepTrace
-        label="the canonical rlhf pipeline"
-        steps={[
-          {
-            label: "Stage 1 — Supervised Fine-Tuning (SFT)",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="input: base pretrained LM"
-                  tokens={[
-                    { label: "base LM", color: colors.textMuted },
-                    { label: "→ fine-tune on", color: colors.textDim },
-                    { label: "(prompt, response) pairs", color: colors.gold },
-                    { label: "→ SFT model π_ref", color: colors.green },
-                  ]}
-                />
-                <Prose>
-                  SFT compresses the model's output distribution from "everything the internet contains" down to "things that look like assistant responses." This is necessary because the reward model and PPO both assume the policy is already in a roughly sensible neighborhood — they cannot navigate from a raw base-model distribution.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "Stage 2 — Reward Model Training",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="input: human pairwise preferences"
-                  tokens={[
-                    { label: "prompt x", color: colors.gold },
-                    { label: "+ chosen y_w", color: colors.green },
-                    { label: "+ rejected y_l", color: "#f87171" },
-                    { label: "→ train r_φ(x, y) → scalar", color: "#c084fc" },
-                  ]}
-                />
-                <Prose>
-                  The reward model is a language model with its next-token head replaced by a scalar projection. Trained on pairwise preference data, it learns to assign higher scores to responses humans prefer. Crucially it is trained once and frozen — the policy then optimizes against this fixed signal.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "Stage 3 — PPO Policy Optimization",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="RL loop"
-                  tokens={[
-                    { label: "π samples response y", color: colors.gold },
-                    { label: "→ r_φ(x,y) scores it", color: "#c084fc" },
-                    { label: "→ subtract β·KL(π‖π_ref)", color: "#60a5fa" },
-                    { label: "→ PPO update", color: colors.green },
-                  ]}
-                />
-                <Prose>
-                  PPO updates the policy to increase the probability of high-reward responses while a KL penalty prevents it from drifting too far from the SFT model. The KL term is the safety belt: without it, the policy would exploit any quirk the reward model has learned and produce reward-maximizing gibberish.
-                </Prose>
-              </div>
-            ),
-          },
-        ]}
+      <Program
+        file="preference_records.py"
+        title="Preserve exact comparison records and split prompt families"
       />
-
       <Prose>
-        The key insight that makes RLHF possible is the asymmetry between generating and judging. Writing an ideal response to "explain quantum entanglement to a curious teenager" requires genuine expertise. But if you show a labeler two responses to that prompt, one thoughtful and one superficial, they can usually identify the better one with high reliability even without deep physics knowledge. RLHF harvests this judgment signal at scale. You need thousands of preference pairs, not millions — the InstructGPT paper used around 40,000 labeled pairs for the reward model and around 31,000 prompt-response pairs for SFT. By contrast, GPT-3's pretraining used hundreds of billions of tokens. The data leverage is enormous.
+        Run the program without arguments to audit the supplied records. With the original gzip and{' '}
+        <Code>--source</Code>, it reproduces the selection and verifies the source hash first.{' '}
+        <Code>extract</Code> preserves both original full strings and their exact suffixes;{' '}
+        <Code>freeze</Code> chooses whole families; <Code>audit</Code> reconstructs every full
+        string and checks overlap. Change the split seed in the source as an exercise, but keep that
+        new exploratory split separate from the recorded canonical study.
       </Prose>
 
+      <Anchor id="2-core-intuition" />
+      <Anchor id="2-build-the-intuition" />
+      <H2>3. Learn a score difference</H2>
       <Prose>
-        The three networks in play deserve clear labeling. The SFT model <Code>π_ref</Code> is trained once and then frozen — it serves as the reference distribution that the KL penalty anchors the policy to. The policy <Code>π_θ</Code> is the SFT model initialized with the same weights, then updated throughout PPO training. The reward model <Code>r_φ</Code> is an SFT-model-sized network with a scalar head, trained once on preference pairs and then frozen. The value model <Code>V_ψ</Code> is a fourth network — another SFT-model-sized copy with a scalar head — that is trained online during PPO to predict expected future reward, used only to reduce gradient variance. At peak training, you are holding four large transformers in memory simultaneously. This is the primary reason RLHF at scale costs millions of dollars per run.
+        A reward model reads both x and y and returns one real number r(x,y). Start with a
+        transparent scalar head. Let the supplied response representations be hA=[1,0] and hB=[0,1],
+        the shared weight vector w=[.4,−.2], and bias b=0. A score is the dot product w·h+b, so the
+        two scores are .4 and −.2. A learned text encoder will later produce h; these two numbers
+        are stipulated features so that we can see the head's exact work.
       </Prose>
-
-      {/* ======================================================================
-          3. MATHEMATICAL FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>3.1 The Bradley-Terry preference model</H3>
-
+      <ScalarHead />
       <Prose>
-        The foundation of reward model training is the Bradley-Terry model, a 1952 statistical framework for pairwise comparisons originally developed for tournament ranking. Given a prompt <Code>x</Code>, a chosen response <Code>y_w</Code>, and a rejected response <Code>y_l</Code>, the probability that a human prefers the chosen response is modeled as a sigmoid of the reward difference:
+        Both branches use the same weights. Changing the first weight changes every response whose
+        first feature is nonzero. We are not assigning a separate free score parameter to every
+        sentence. The final scalar says how this model ranks responses under its training labels; it
+        has no intrinsic unit such as “percent helpful.”
       </Prose>
-
-      <MathBlock caption="Bradley-Terry model: preference probability as sigmoid of reward gap">
-        {"P(y_w \\succ y_l \\mid x) = \\sigma\\!\\left(r_\\phi(x,\\, y_w) - r_\\phi(x,\\, y_l)\\right) = \\frac{1}{1 + e^{-(r_\\phi(x,y_w) - r_\\phi(x,y_l))}}"}
+      <Prose>
+        To fit a pair, turn the score difference d=rA−rB into a preference probability p=σ(d). The
+        sigmoid maps every real difference into (0,1). Its odds are p/(1−p)=exp(d): a difference .6
+        gives odds about 1.822 and probability about .645656. Zero difference means .5, and
+        reversing the pair changes p to 1−p. This is a Bradley–Terry logistic model of the
+        comparisons, an assumption about how a scalar ordering explains observed choices.
+      </Prose>
+      <GapProbability />
+      <MathBlock>
+        {'d=r_A-r_B,\\qquad p=\\sigma(d)=\\frac{1}{1+e^{-d}},\\qquad \\frac{p}{1-p}=e^d'}
       </MathBlock>
-
       <Prose>
-        Notice what the model does and does not assume. It assumes the latent preference between two options can be captured by a single scalar — the reward. It does not assume anything about the absolute scale of that scalar, only the sign and magnitude of differences. This means the reward model is not trained to predict an absolute quality score; it is trained to preserve orderings. The scale of <Code>r_φ</Code> can drift arbitrarily as long as chosen responses score higher than rejected ones. This has an important practical implication: you cannot compare reward scores across different prompts or different training runs.
+        A good probability model assigns high probability to observed labels. The negative log
+        likelihood for target q is binary cross entropy: −q log p−(1−q) log(1−p). For a strict A
+        winner it is −log p. Substituting the sigmoid gives the stable expression softplus(d)−qd;
+        for q=1 it is softplus(−d). Softplus(z)=log(1+exp(z)) is evaluated with a stable library
+        operation. Artificially clipping p before taking its log changes the gradient at extremes;
+        numerical stability can preserve the original objective.
       </Prose>
-
-      <H3>3.2 Reward model loss</H3>
-
-      <Prose>
-        The training objective for the reward model is the negative log-likelihood of the Bradley-Terry model over the preference dataset <Code>D</Code> of (prompt, chosen, rejected) triples:
-      </Prose>
-
-      <MathBlock caption="RM loss: maximize log-probability of observed human preferences">
-        {"\\mathcal{L}_{\\text{RM}}(\\phi) = -\\,\\mathbb{E}_{(x,\\,y_w,\\,y_l)\\sim\\mathcal{D}}\\left[\\log\\sigma\\!\\left(r_\\phi(x,\\,y_w) - r_\\phi(x,\\,y_l)\\right)\\right]"}
+      <MathBlock>
+        {'\\ell(d,q)=\\log(1+e^d)-qd,\\qquad \\frac{\\partial\\ell}{\\partial d}=\\sigma(d)-q=p-q'}
       </MathBlock>
-
       <Prose>
-        This loss is minimized when the model assigns the chosen response a higher scalar than the rejected response on every pair. Gradient descent through the sigmoid and the reward heads trains both the linear projection and the transformer backbone to extract features that correlate with human preference. In practice, a small regularization term is often added — either L2 on the reward head weights or a penalty that keeps the mean reward near zero — to prevent the scale of rewards from growing without bound, which can destabilize PPO training downstream.
+        To see the derivative, differentiate the two log terms with respect to p, giving
+        −q/p+(1−q)/(1−p). The sigmoid derivative is p(1−p). Multiplication cancels the denominators
+        and leaves p−q. Since d=rA−rB, the two score derivatives are p−q and −(p−q). Gradient
+        descent subtracts a derivative. With p≈.645656 and q=1, descent raises A's score relative to
+        B.
+      </Prose>
+      <HeadGradient />
+      <Prose>
+        The head's weight gradient is (p−q)(hA−hB), not two unrelated score updates. Here it is
+        approximately [−.354344,.354344]; a step .1 changes w to [.435434,−.235434]. If the head
+        shares a text encoder, that same derivative also flows into its representations. A common
+        bias contributes equally to both scores and cancels from d, so this pair loss supplies zero
+        gradient to that bias. A soft target equal to p gives zero gradient even when the current
+        loss is positive.
+      </Prose>
+      <H3>What a score can and cannot identify</H3>
+      <Prose>
+        Add the same constant to both scores and the difference stays fixed. Multiply both by a
+        positive constant and the sign remains, but the probability usually changes. A pairwise
+        label identifies relative scores, not an absolute zero. Reward scaling is nevertheless
+        consequential when the reward is later balanced against a reference penalty.
+      </Prose>
+      <ScoreGauge />
+      <Prose>
+        Perfectly separable training pairs can drive unregularized score gaps upward without a
+        finite best weight norm. Regularization, finite training budgets, held-out evaluation and
+        explicit score conventions matter. A scalar score also cannot satisfy the strict cycle
+        A&gt;B, B&gt;C, C&gt;A simultaneously. Such a cycle can reflect different contexts or
+        raters, ambiguous instructions, or incompatible preferences; calling every disagreement
+        annotation noise hides the substantive problem.
+      </Prose>
+      <Program
+        file="pairwise_reward.py"
+        title="Fit a real pairwise reward baseline and verify the gradient"
+      />
+      <Prose>
+        This full program builds a training-only response-word vocabulary, adds length and
+        prompt-overlap features, and fits a shared linear head on chosen-minus-rejected vectors. The
+        pair difference removes the constant feature. Each update averages gradients over pairs and
+        adds L2 regularization to the nonconstant weights. Its Torch and central finite-difference
+        checks start from exactly the same two-dimensional head. The sklearn route includes both
+        signed orientations with binary labels, disables an intercept and maps the regularization
+        convention explicitly; a converged solver need not equal a fixed four-hundred-step fit.
+        Section 11 reads the actual held-out outcomes rather than assuming more features must win.
       </Prose>
 
-      <H3>3.3 The KL-regularized RL objective</H3>
-
+      <Anchor id="3-mathematical-foundation" />
+      <Anchor id="3-make-the-idea-precise" />
+      <H2>4. Reward with a reference</H2>
       <Prose>
-        The policy optimization objective adds a KL penalty to the expected reward. Let <Code>π_θ</Code> be the current policy, <Code>π_ref</Code> be the frozen SFT reference, <Code>r_φ</Code> be the frozen reward model, and <Code>β</Code> be the KL coefficient. The objective is:
+        If we optimize only the learned score, the policy can exploit places where the score
+        extrapolates badly. One useful constraint is to stay near a reference policy, often the SFT
+        model. For one prompt, let π(y) be the current distribution over complete responses and
+        πref(y) the fixed reference. The objective rewards high r(y) and subtracts β times the
+        Kullback–Leibler divergence DKL(π‖πref). β is a positive tradeoff measured in reward units
+        per nat, because the logarithms use base e.
       </Prose>
-
-      <MathBlock caption="RLHF objective: maximize reward while staying close to SFT model">
-        {"\\max_{\\pi_\\theta}\\; \\mathbb{E}_{x\\sim\\mathcal{D},\\;y\\sim\\pi_\\theta(\\cdot\\mid x)}\\!\\left[r_\\phi(x,y) - \\beta\\,\\log\\frac{\\pi_\\theta(y\\mid x)}{\\pi_{\\text{ref}}(y\\mid x)}\\right]"}
+      <ReferenceTerms />
+      <Prose>
+        Read one row before summing. With current probabilities [.6,.3,.1] and reference [.4,.4,.2],
+        the log ratio for B is log(.3/.4), which is negative. A sampled negative log ratio is valid;
+        it says B is less likely under the current policy. Weighting every log ratio by its current
+        probability and summing gives the nonnegative exact KL. Equality gives zero. The expectation
+        is over the current distribution, so replacing these weights by the reference answers a
+        different question.
+      </Prose>
+      <MathBlock>
+        {
+          'J(\\pi)=\\sum_y\\pi(y)r(y)-\\beta\\sum_y\\pi(y)\\log\\frac{\\pi(y)}{\\pi_{\\mathrm{ref}}(y)}'
+        }
       </MathBlock>
-
       <Prose>
-        The KL term <Code>β log(π_θ / π_ref)</Code> penalizes the policy for moving away from the SFT distribution. It is positive whenever <Code>π_θ</Code> assigns higher probability to a response than <Code>π_ref</Code> does, and the penalty grows with that excess. The coefficient <Code>β</Code> controls the trade-off: large <Code>β</Code> keeps the policy close to SFT (safe but limited), small <Code>β</Code> allows aggressive optimization against the reward model (powerful but prone to hacking). Published values from InstructGPT, Anthropic HH, and Llama 2 cluster in the range 0.01 to 0.2, with the optimal value depending heavily on the reward model's output scale and the diversity of the prompt distribution.
+        A finite sample average can also be negative although the exact KL is nonnegative. Report
+        what was measured: a mean sampled sequence log ratio, a full categorical KL, and an
+        approximate change from the old policy are different diagnostics. Old-policy probabilities
+        will stabilize a PPO update; reference probabilities anchor the policy's task-level
+        objective. They are not interchangeable snapshots.
       </Prose>
-
+      <H3>Deeper branch: solve the finite policy exactly</H3>
       <Prose>
-        A key insight from Ziegler et al. 2019 and InstructGPT: the KL term can be computed token-by-token. For an autoregressive policy, <Code>{"log π_θ(y|x) = Σ_t log π_θ(y_t | x, y_{<t})"}</Code>, and similarly for <Code>π_ref</Code>. So the KL is the sum of per-token log-ratio terms. In practice, the KL penalty is added as an extra per-token reward at the final token, or distributed across the sequence — different implementations make different choices here, and this can affect training stability.
+        For three possible responses, start from reference probabilities [.4,.4,.2] and rewards
+        [1,.4,−.2]. Give higher-scored responses more mass while retaining the reference as an
+        anchor. The drawing multiplies each reference probability by an exponential reward factor,
+        then divides by the sum of the resulting masses.
       </Prose>
-
-      <H3>3.4 PPO clipped objective</H3>
-
+      <TiltedPolicy />
       <Prose>
-        Vanilla policy gradient (REINFORCE) estimates the gradient of the expected reward with a single-sample Monte Carlo estimate, which has high variance on long sequences. PPO (Schulman et al., arXiv:1707.06347) stabilizes this by collecting a batch of rollouts under the current policy <Code>π_old</Code>, then making multiple gradient steps against those rollouts using a clipped importance ratio to bound the size of each update.
+        The reference provides the starting mass, the reward tilts it, and division restores a
+        distribution. Equal rewards give equal multipliers, so the normalized result returns exactly
+        to the reference. We can now derive this reweighting. Enforce the probability sum with a
+        multiplier c. The derivative with respect to πi is ri−β(log(πi/refi)+1)+c. Setting it to
+        zero gives log(πi/refi)=ri/β plus a constant shared by all i. Exponentiation gives
+        unnormalized mass refi exp(ri/β); normalization supplies the constant.
       </Prose>
-
-      <Prose>
-        Define the probability ratio <Code>r_t = π_θ(a_t|s_t) / π_old(a_t|s_t)</Code> and the advantage estimate <Code>A_t</Code>. The PPO clipped surrogate objective is:
-      </Prose>
-
-      <MathBlock caption="PPO clipped objective: limits how much any single update can move the policy">
-        {"\\mathcal{L}^{\\text{CLIP}}(\\theta) = \\mathbb{E}_t\\!\\left[\\min\\!\\left(r_t\\,A_t,\\; \\mathrm{clip}(r_t,\\,1-\\varepsilon,\\,1+\\varepsilon)\\,A_t\\right)\\right]"}
+      <MathBlock>
+        {
+          '\\pi_i^*=\\frac{\\pi_{\\mathrm{ref},i}\\exp(r_i/\\beta)}{\\sum_j\\pi_{\\mathrm{ref},j}\\exp(r_j/\\beta)}'
+        }
       </MathBlock>
-
       <Prose>
-        The clip bounds the effective probability ratio to the interval <Code>[1-ε, 1+ε]</Code> (typically <Code>ε = 0.2</Code>). When the advantage is positive (the action was better than expected), the policy is incentivized to increase <Code>π_θ(a_t)</Code>, but only up to <Code>(1+ε) · π_old(a_t)</Code> — beyond that the gradient is zeroed out by the clip. When the advantage is negative, the policy is penalized for the bad action but only down to <Code>(1-ε) · π_old(a_t)</Code>. This prevents any single batch of rewards from catastrophically shoving the policy far from where it was, which is essential when the reward signal is noisy (as it always is with a learned reward model).
+        Adding one constant to all rewards multiplies every unnormalized mass equally and changes
+        nothing. Scaling rewards and β by the same positive factor also preserves the answer.
+        Reducing β concentrates mass on supported high-reward responses; tied maxima retain their
+        relative reference mass in the limit. If the reference assigns zero probability to a
+        response, positive mass there has infinite KL. A finite reward cannot create that missing
+        support in this finite constrained problem.
+      </Prose>
+      <Prose>
+        This exact finite optimum teaches the objective; it is not our token-PPO implementation. An
+        autoregressive model shares parameters across an enormous set of strings, and we do not
+        enumerate or independently choose every response probability. We will estimate an update
+        from actual generated sequences. The exact normalization also sets up the next lesson's DPO
+        derivation, where comparisons can eliminate a prompt-dependent normalization term.
       </Prose>
 
-      <H3>3.5 Generalized Advantage Estimation (GAE)</H3>
-
+      <H2>5. Turn sampled reward into a gradient</H2>
       <Prose>
-        The advantage <Code>A_t</Code> in the PPO objective estimates "how much better was this action than the average action in this state?" The naive estimate is just the reward minus a baseline. GAE (Schulman et al., 2015) provides a lower-variance estimate by exponentially weighting multi-step returns:
+        Let θ denote the policy parameters. An update needs a direction in that parameter space, but
+        we can only afford to draw a small number of responses. Each sampled response supplies its
+        reward and the direction that would increase its log probability. Multiplying those two
+        quantities gives a score-function estimate. The drawing compares each possible estimate with
+        their exact probability-weighted average for a two-response policy.
       </Prose>
-
-      <MathBlock caption="GAE: exponentially-weighted sum of TD residuals (λ=1 gives full Monte Carlo, λ=0 gives one-step TD)">
-        {"A_t^{\\text{GAE}(\\gamma,\\lambda)} = \\sum_{k=0}^{\\infty} (\\gamma\\lambda)^k \\,\\delta_{t+k}, \\quad \\delta_t = r_t + \\gamma V(s_{t+1}) - V(s_t)"}
+      <ScoreFunction />
+      <Prose>
+        Use two unconstrained softmax logits zA,zB as the coordinates throughout this example. If
+        the probabilities are [.25,.75], drawing A gives the score vector [.75,−.75]; drawing B
+        gives [−.25,.25]. With rewards [2,0], the two gradient estimates are [1.5,−1.5] and [0,0].
+        Their probability-weighted mean is [.375,−.375]. One draw is not that mean, but many
+        independent draws average toward it.
+      </Prose>
+      <MathBlock>
+        {
+          '\\nabla_\\theta\\mathbb E_{y\\sim\\pi_\\theta}[r(y)]=\\mathbb E_{y\\sim\\pi_\\theta}[r(y)\\nabla_\\theta\\log\\pi_\\theta(y)]'
+        }
       </MathBlock>
-
       <Prose>
-        In the RLHF setting <Code>γ</Code> is often set to 1 (no discounting) because each trajectory is a single response episode, and <Code>λ</Code> is typically 0.95. The value model <Code>V_ψ</Code> predicts the expected shaped reward from a given (prompt, partial response) state, trained simultaneously with the policy using the same rollouts. The value model's lag relative to the policy — it is always slightly behind — is the primary source of instability in PPO training and the reason Llama 2 used rejection-sampling fine-tuning (a simpler RL variant) for early training before switching to full PPO.
+        For a fixed reward, differentiate the expected reward and use ∇π=π∇logπ to obtain the
+        equation above. Sampling from the policy gives an unbiased estimator under the usual
+        differentiability and support assumptions. The vectors show which logit increases and which
+        decreases. A parameter update can change both probabilities because softmax normalizes them
+        together. We maximize reward by adding the estimated objective gradient, or equivalently
+        minimize a loss with its negative. Confusing these signs can produce a perfectly running
+        program that learns the reverse preference.
+      </Prose>
+      <H3>A baseline changes noise without changing this expectation</H3>
+      <Prose>
+        Subtract a baseline b that does not depend on the sampled action. Its expected score term is
+        b∑y π(y)∇logπ(y)=b∑y∇π(y)=b∇1=0. Thus replacing r by r−b preserves the expected gradient.
+        For a sequence, a baseline may depend on the state, meaning the prefix before the next
+        token. Detach that baseline in the policy loss; learning its own parameters is a separate
+        regression problem.
+      </Prose>
+      <BaselineVariance />
+      <Prose>
+        A baseline is not automatically helpful. For our two-action example b=1.5 makes both
+        possible estimates [.375,−.375], giving zero variance in these coordinates. A poor baseline
+        such as b=4 increases variance. The program calculates the full two-point distribution and
+        its variance before comparing twenty thousand fixed-seed samples. If b depends on the chosen
+        action, the expectation-zero proof no longer applies. Setting b(y)=r(y) makes every estimate
+        zero, which is biased whenever the true reward gradient is nonzero.
+      </Prose>
+      <Prose>
+        The KL term has an additional subtlety: its logπ depends on θ. Differentiating the exact
+        finite objective yields the score-function expectation with shaped reward r−βlog(π/ref),
+        plus a term −β E[∇logπ]. That extra term is zero under the full distribution. Our PPO loop
+        instead constructs sampled rewards from a frozen old rollout, detaches them and optimizes a
+        surrogate near that rollout. This explains the relationship without pretending that each
+        sampled update is the exact differentiated KL objective.
+      </Prose>
+      <Program
+        file="policy_gradient.py"
+        title="Exact gradients, sampled estimators, baseline variance and clipping witness"
+      />
+      <Prose>
+        <Code>exact_gradient</Code> computes the finite derivative directly; Torch and finite
+        differences independently check it. <Code>estimator_moments</Code> lists each possible
+        score-function vector and its weighted mean and variance. <Code>tilted</Code> respects zero
+        reference support. The later clipping example in the same program will show how one shared
+        parameter moves two observations. Change the baseline, keep the sampling count fixed, and
+        compare variance in the same logit coordinates.
       </Prose>
 
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
+      <H2>6. A response is a sequence of actions</H2>
       <Prose>
-        All code below is runnable NumPy — no PyTorch required for the core demonstrations. Each section is self-contained and produces the outputs shown. The goal is to make the mechanics visceral before the production library abstracts them.
+        Now open the response into tokens. The state before action t is the prompt plus all
+        previously sampled tokens. The policy reads that prefix and distributes probability over the
+        vocabulary. A sampled token extends the prefix, so the next distribution changes. For the
+        path Paris then EOS, the response probability is the probability of Paris after the prompt
+        multiplied by the probability of EOS after prompt-plus-Paris. Its log probability is the sum
+        of those two gathered log probabilities.
+      </Prose>
+      <TokenPath />
+      <Prose>
+        In the constructed tree at temperature 1, Paris has probability .6 and Rome .4 after the
+        prompt. After Paris, EOS has probability .8 and a continuation .2. The selected Paris→EOS
+        response therefore has probability .48 and log probability log(.6)+log(.8). Unselected
+        branches remain possible even though one path was sampled. Temperature changes the
+        distribution by scaling logits before softmax. The canonical program fixes temperature at
+        one and samples the full vocabulary. It does not use top-k or top-p filtering, which would
+        require careful agreement between the actual sampling distribution and the probabilities
+        stored for the update.
+      </Prose>
+      <MathBlock>
+        {
+          '\\pi_\\theta(y\\mid x)=\\prod_{t=1}^{T}\\pi_\\theta(y_t\\mid x,y_{<t}),\\qquad \\log\\pi_\\theta(y\\mid x)=\\sum_{t=1}^{T}\\log\\pi_\\theta(y_t\\mid x,y_{<t})'
+        }
+      </MathBlock>
+      <H3>Keep input visibility separate from target supervision</H3>
+      <Prose>
+        A causal decoder's output at input position j predicts the token at position j+1. If the
+        input is [BOS,Q,Paris,EOS,PAD], logit 1 predicts Paris and logit 2 predicts EOS. The prompt
+        remains visible context even though predicting its own tokens is excluded from the response
+        loss. An attention mask describes valid input positions; a target mask describes which
+        next-token predictions contribute to the objective.
+      </Prose>
+      <TokenMasks />
+      <Prose>
+        In the scratch program, <Code>shifted_scores</Code> compares logits before the last position
+        with IDs after the first, exactly once. The valid predicting positions begin at
+        prompt_length−1 and end before total_length−1. In Transformers' native causal loss,
+        same-position labels are supplied and the model performs that shift internally. Do not shift
+        those labels a second time. EOS is an actual generated decision and is scored; padding is
+        excluded by recorded position and length. Even when a tokenizer reuses EOS as its PAD ID,
+        equality to that ID cannot decide validity.
+      </Prose>
+      <Prose>
+        Our tiny full-vocabulary policy can even draw the token named PAD or BOS inside a response.
+        Such a draw is an actual action with a stored probability, not batch padding. It stays in
+        the loss and is reported as malformed output. This makes the distribution and masking
+        honest. A batch with no valid actions has no meaningful token mean and skips the optimizer
+        step. Ignoring prompt targets also does not force prompt representations' gradients to zero:
+        later supervised tokens attend to that context.
+      </Prose>
+      <ModelRoles />
+      <Prose>
+        The actor's final hidden stream has shape B×L×D for batch size B, positions L and width D.
+        Its vocabulary head maps each hidden vector to V logits. A value head maps the same
+        pre-action hidden vector to one predicted future return. The reward model is separate here
+        and reads the completed prompt-plus-response, taking its scalar from the last valid token.
+        It can therefore see the answer that the pre-action critic is trying to anticipate.
+      </Prose>
+      <Prose>
+        The reference is a frozen copy of the SFT actor, used to score the same selected tokens.
+        “Old” probabilities are detached numbers from the policy that collected the current rollout;
+        the actor may change during later inner updates. Four roles do not require four equally
+        sized full models: the actor and critic here share a backbone, old probabilities are stored
+        arrays, and the reference and reward have explicitly separate frozen owners.
+      </Prose>
+      <H3>Put the completed score on the token trajectory</H3>
+      <Prose>
+        At each generated action, subtract β times its stored old-policy log probability minus its
+        fixed-reference log probability. Add the reward model's completed-response score to the
+        final action, including EOS when present. The result is a sequence of shaped rewards. Its
+        sum is the terminal score minus β times the sampled sequence log ratio.
+      </Prose>
+      <TokenRewards />
+      <Prose>
+        The aligned rows distinguish an action's pre-action value from the reward obtained after the
+        action. Changing β changes shaped rewards while the retained probabilities and terminal
+        score stay fixed. Equal old/reference probabilities leave only the terminal score. These are
+        sampled fixed-rollout rewards; no gradient passes through their stored log probabilities
+        during PPO. Fresh generation later makes a new trajectory and new rewards.
       </Prose>
 
-      <H3>4a. Preference dataset construction</H3>
-
+      <H2>7. Assign credit along the prefix</H2>
       <Prose>
-        A preference dataset is a collection of (prompt, chosen, rejected) triples. In production, "chosen" and "rejected" come from human labelers comparing two model outputs. Here we construct synthetic preferences using a simple quality heuristic — longer, more informative responses win over minimal ones — to produce a 5-pair dataset whose correctness we can verify by inspection.
+        A completed score arrives late, but earlier choices helped cause it. A return is the sum of
+        future rewards, optionally discounted by γ at each step. A value estimate Vt predicts that
+        return from the prefix before action t. A temporal-difference residual asks how surprising
+        this step's reward plus the discounted next prediction was relative to the current
+        prediction. Generalized advantage estimation, or GAE, carries these residuals backward
+        through the trajectory; λ controls how much later surprises propagate.
+      </Prose>
+      <AdvantageTrace />
+      <Prose>
+        Work backward along the arrows, multiplying the carried amount by γλ at each step. The
+        advantage estimates how much better or worse this sampled continuation was than the current
+        value prediction. For rewards [−.1,−.2,1.3], values [.4,.5,.6], γ=1 and a true terminal
+        value 0, the residuals are [0,−.1,.7]. With λ=.8, start at the end: A2=.7;
+        A1=−.1+.8(.7)=.46; A0=0+.8(.46)=.368.
+      </Prose>
+      <MathBlock>
+        {
+          '\\delta_t=r_t+\\gamma V_{t+1}-V_t,\\qquad \\hat A_t=\\delta_t+\\gamma\\lambda\\hat A_{t+1}'
+        }
+      </MathBlock>
+      <Prose>
+        The arrows show how the last positive residual reaches earlier actions with progressively
+        smaller weight. A value-regression target is A+V, giving [.768,.96,1.3] in this example. At
+        λ=0, each advantage uses one residual. At λ=1 and terminal bootstrap 0, the residual sum
+        telescopes into the full discounted return minus Vt. Intermediate λ trades sensitivity to
+        noisy distant rewards against reliance on imperfect value predictions; it is not universally
+        best at a fixed setting.
+      </Prose>
+      <TerminalCutoff />
+      <Prose>
+        A real terminal state has no future return to bootstrap. A continuing-task rollout cut for a
+        time limit is different: its last residual can include V(next), even though the trace must
+        not continue into an unrelated next episode. Use separate semantics for bootstrap validity
+        and trace continuation. In this lesson's canonical program, both EOS and the declared
+        eight-action response horizon terminate the finite task, so bootstrap is zero. The adjacent
+        calculation changes the task to a continuing cutoff and supplies a next value explicitly; it
+        does not silently change the canonical run.
+      </Prose>
+      <H3>Normalize only the observations you have</H3>
+      <Prose>
+        Batches contain responses of different lengths. Store them in padded tensors, but compute
+        advantage statistics only from valid generated actions. Subtract their mean and divide by
+        the square root of their population variance plus a small epsilon. Then write normalized
+        values back only at those positions. A huge number in a padding cell must not change the
+        valid statistics.
+      </Prose>
+      <ValidNormalization />
+      <Prose>
+        Constant valid advantages become zero after centering. A no-action batch remains a no-op.
+        Advantage normalization changes the scale and centering of a finite update; it is an
+        implementation choice, not an identity that preserves every minibatch objective. The program
+        freezes normalized advantages from the rollout for the entire inner update, avoiding moving
+        targets as the critic changes.
+      </Prose>
+      <Program
+        file="token_credit.py"
+        title="Shifted scores, masks, reward shaping, GAE and valid-only normalization"
+      />
+      <Prose>
+        The program checks gathered log probabilities against native cross entropy, then compares
+        the backward GAE recursion with an independently expanded sum. Mixed lengths, EOS, padding
+        fillers, continuing bootstrap and no-action cases exercise the important boundaries. GAE
+        takes O(BL) work and output storage with one reverse accumulator per sequence. Its inputs
+        are detached rollout measurements; the later actor/value loss supplies the differentiated
+        path.
       </Prose>
 
-      <CodeBlock language="python">
-{`import numpy as np
-import math
-
-np.random.seed(42)
-
-prompts = [
-    "What is the capital of France?",
-    "Explain photosynthesis.",
-    "How do I sort a list in Python?",
-    "What causes thunder?",
-    "Write a haiku about autumn.",
-]
-
-# chosen: informative, detailed responses
-chosen_responses = [
-    "Paris is the capital of France, a major European city with a population of over 2 million.",
-    "Photosynthesis converts light energy into chemical energy, producing glucose from CO2 and water.",
-    "Use list.sort() in place, or sorted(list) for a new list. Both accept a key argument.",
-    "Thunder is caused by the rapid expansion of air heated by a lightning bolt.",
-    "Crimson leaves fall slow. Wind carries them far away. Bare branches remain.",
-]
-
-# rejected: minimal, low-information responses
-rejected_responses = [
-    "Paris.",
-    "Plants use sunlight.",
-    "Use sort.",
-    "Lightning.",
-    "Leaves fall.",
-]
-
-def synthetic_quality(text):
-    return len(text) * 0.5 + text.count(".") * 3 + text.count(",") * 1.5
-
-dataset = []
-for p, chosen, rejected in zip(prompts, chosen_responses, rejected_responses):
-    qc = synthetic_quality(chosen)
-    qr = synthetic_quality(rejected)
-    dataset.append({"prompt": p, "chosen": chosen, "rejected": rejected})
-    print(f"chosen_q={qc:.1f}, rejected_q={qr:.1f}, preference_correct={qc > qr}")
-
-# chosen_q=49.5,  rejected_q=6.0,  preference_correct=True
-# chosen_q=52.5,  rejected_q=13.0, preference_correct=True
-# chosen_q=53.0,  rejected_q=7.5,  preference_correct=True
-# chosen_q=40.5,  rejected_q=8.0,  preference_correct=True
-# chosen_q=46.5,  rejected_q=9.0,  preference_correct=True`}
-      </CodeBlock>
-
+      <H2>8. Reuse a rollout carefully</H2>
       <Prose>
-        In production, this step is the most expensive and most consequential part of the pipeline. OpenAI used around 40,000 preference pairs for InstructGPT; Anthropic's HH-RLHF dataset contains around 170,000 pairs. The labeling guidelines — what counts as "helpful," how to trade off helpfulness against harmlessness, how to handle factual errors — are as load-bearing as the data itself.
+        A fresh rollout is expensive. Proximal Policy Optimization, or PPO, reuses it for a bounded
+        number of updates while comparing the current policy with the policy that collected it. For
+        one recorded action, the probability ratio is ρ=exp(logπcurrent−logπold). At the start,
+        before any update, it is one. Keep the old log probability fixed: overwriting it after each
+        minibatch would hide accumulated movement. Choose a clipping width ε around ratio 1; the
+        drawing shows how that interval changes the incentive for each advantage sign.
+      </Prose>
+      <ClippedSurrogate />
+      <Prose>
+        The policy maximizes the lower of two products: the probability ratio times advantage, and a
+        clipped ratio times that same advantage. This gives a conservative surrogate. For positive
+        advantage, increasing the selected action probability is helpful, but the objective stops
+        rewarding it once ρ exceeds 1+ε. Decreasing it remains harmful and keeps a slope. For
+        negative advantage, lowering its probability is helpful, so the plateau is below 1−ε;
+        increasing it remains harmful and active. The minimum chooses the conservative branch in
+        each sign case.
+      </Prose>
+      <Prose>
+        With A=2 and ε=.2, ratios [.5,.8,1,1.2,1.5] give surrogate values [1,1.6,2,2.4,2.4]. With
+        A=−2 they give [−1.6,−1.6,−2,−2.4,−3]. Read the second plot carefully: its harmful
+        high-ratio side is not flat. For A=0 the entire policy contribution is zero. The code
+        minimizes the negative surrogate and adds a separately weighted critic regression loss.
+      </Prose>
+      <MathBlock>
+        {
+          'L^{\\mathrm{clip}}=\\mathbb E\\left[\\min\\left(\\rho_t\\hat A_t,\\;\\mathrm{clip}(\\rho_t,1-\\epsilon,1+\\epsilon)\\hat A_t\\right)\\right]'
+        }
+      </MathBlock>
+      <H3>Clipping is an incentive limit, not a hard trust region</H3>
+      <Prose>
+        PPO does not clamp the model's actual probability ratio. A clipped observation can still
+        move because parameters are shared with other observations or with the value loss. Here a
+        single current parameter θ feeds two states: p1=σ(θ) and p2=σ(−.1θ−log(4)). The old
+        parameter 0 gave probabilities .5 and .2. At θ=.7, state 1's ratio≈1.336 is already on its
+        positive-advantage plateau, while state 2 with negative advantage has ratio≈.945 and remains
+        active.
+      </Prose>
+      <SharedParameter />
+      <Prose>
+        The first observation's local gradient is exactly zero. The second's gradient moves θ to
+        about .715330 under the declared .2 ascent step, and the first ratio rises further to about
+        1.343156. The retained analytic/autograd calculation verifies this witness. It explains why
+        clipping is not a guarantee that every ratio stays within the interval, nor a proof that a
+        full policy's KL is bounded by ε. Learning rate, number of epochs, gradient norms and direct
+        drift diagnostics still matter.
+      </Prose>
+      <RolloutTimeline />
+      <Prose>
+        Follow one colour through the inner epochs: token IDs, old log probabilities, values used to
+        construct targets, advantages and targets all belong to that fixed rollout. The current
+        model is recomputed and differentiated for each minibatch. After the bounded inner loop,
+        generate a fresh batch from the updated actor. Its new old-policy snapshot now differs; the
+        SFT reference still stays fixed. Resetting this demonstration restores both timelines, not
+        just the visible epoch counter.
+      </Prose>
+      <Prose>
+        Our reduction is the mean over valid tokens in each minibatch, for both policy surrogate and
+        value squared error. Longer responses therefore contribute more terms; this differs from
+        averaging one response-summed objective per sequence. The total minimized loss is
+        policy_loss+.5×mean_squared_value_error. There is no additional hidden half factor, entropy
+        bonus or value clipping. These choices define this executable reference loop; other
+        implementations must state their own choices before results can be compared.
       </Prose>
 
-      <H3>4b. Reward model with Bradley-Terry loss</H3>
-
+      <Anchor id="4-from-scratch-implementation" />
+      <Anchor id="6-visual-walkthrough" />
+      <H2>9. The complete scratch training loop</H2>
       <Prose>
-        We implement a minimal reward model: a linear head on top of simple text features, trained with the Bradley-Terry loss. The features are deliberately interpretable — response length, punctuation density, capitalization, and word count — so we can trace exactly why the model assigns the scores it does.
+        We can now run the entire mechanism. The small vocabulary contains thirteen tokens: PAD,
+        BOS, EOS, one, sentence, France, Italy, Paris, Rome, is, capital, of and a period. Four
+        prompts combine an instruction with a country. “BOS one France” requests “Paris EOS”; “BOS
+        sentence Italy” requests “Rome is capital of Italy . EOS.” These are constructed
+        exact-response tasks, not open-ended human helpfulness evaluation. They are deliberately
+        small enough to inspect every generated action.
+      </Prose>
+      <Prose>
+        Eight demonstrations include both short and long correct-capital answers for each prompt, so
+        the initial SFT policy has an imperfect instruction-following signal. Eight constructed
+        comparisons then prefer the requested length and the correct capital. A reward model fits
+        those pairs. Its score is centered once by the mean score of both candidates in its training
+        pairs; the center removes an arbitrary offset without rescaling the gaps. Perfect
+        training-pair accuracy will not establish good scores for all newly generated strings.
+      </Prose>
+      <TrainingTrace />
+      <Prose>
+        Trace one retained rollout through the actual functions. <Code>collect</Code> samples a
+        token, appends it to the prefix, and repeats until EOS or the finite horizon. With
+        parameters unchanged, it gathers the same selected tokens' old and reference log
+        probabilities, pre-action values and final reward. <Code>shape_rewards</Code> adds the
+        terminal score. <Code>gae</Code> builds advantages and value targets, and valid-only
+        normalization supplies the policy weights. All these arrays are detached.
+      </Prose>
+      <Prose>
+        <Code>current_action_outputs</Code> runs the current actor again for each selected minibatch
+        and gathers the corresponding positions. Only this current forward path is differentiated.{' '}
+        <Code>update</Code> computes the clipped policy term plus value regression, clips the total
+        parameter-gradient norm to one, and applies AdamW. It repeats four epochs with four
+        trajectories per minibatch. The next collection round uses the changed actor. Before the
+        first inner update, a same-policy equality check requires every valid current ratio to be
+        one.
+      </Prose>
+      <Program
+        file="token_ppo.py"
+        title="Full response-only SFT, learned reward and autoregressive token PPO"
+      />
+      <Prose>
+        The complete program contains all three fits. SFT runs 120 full-batch updates with
+        response/EOS token mean loss. The separate reward fit runs 120 mean pair-loss updates. PPO
+        collects sixteen responses in each of twenty rounds and uses β=.1, γ=1, λ=.95 and clip ε=.2.
+        The actor/value model has 26,593 parameters. These are the prospective study settings, not
+        tuned recommendations; the retained run is read in section 11.
+      </Prose>
+      <Program
+        file="causal_backbone.py"
+        title="The exact prerequisite causal decoder classes, included for a complete download"
+      />
+      <Prose>
+        This local helper preserves the earlier{' '}
+        <a href="/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models">
+          Causal Language Modeling
+        </a>{' '}
+        model classes byte for byte. The new <Code>hidden_stream</Code> exposes the same normalized
+        hidden vector before its vocabulary projection. The actor branches that vector to a new
+        value head. The reward owner takes the last valid hidden vector of its own decoder and
+        applies a separate scalar head. It does not claim that the old logits-only decoder already
+        supplied a critic.
+      </Prose>
+      <Prose>
+        Our reference implementation recomputes complete prefixes during sampling; it has no KV
+        cache. Dense attention has quadratic position cost, and storing multiple model states and
+        optimizer moments costs memory. The small loop favors inspectable operations over serving
+        throughput. Frozen model hashes are checked after every completed run, old log-probability
+        arrays stay fixed, and actor and critic weights must actually change. Those invariants
+        detect wrong wiring; they do not certify useful language behavior.
+      </Prose>
+      <Program
+        file="rlhf_study.py"
+        title="Run each frozen experiment once and retain its source-bound result"
+      />
+      <Prose>
+        Download the <a href="/learn/examples/rlhf/rlhf-programs.zip">complete runnable bundle</a>,
+        including its setup instructions and pinned requirements. Place the programs, helper and{' '}
+        <a href="/learn/examples/rlhf/records.json">offline records</a> in one directory. The driver
+        runs the algebra, real-data baseline, token loop and library checks, writing each result and
+        a receipt with code/data hashes and package versions. A completed stage is conserved on a
+        later invocation. A changed source requires review instead of silently replacing a result.
+        The <a href="/learn/examples/rlhf/HH-LICENSE.txt">dataset license</a> accompanies the
+        records; the original dataset and narrower selection remain distinguishable.
       </Prose>
 
-      <CodeBlock language="python">
-{`def featurize(text):
-    """4-dim feature vector for a response."""
-    l = len(text)
-    return np.array([
-        l / 200.0,                         # length (normalized)
-        (text.count(".") + text.count(",") + text.count("!")) / 10.0,  # punctuation
-        sum(1 for c in text if c.isupper()) / max(l, 1),               # caps ratio
-        len(text.split()) / 50.0,          # word count (normalized)
-    ])
-
-np.random.seed(0)
-W = np.random.randn(4) * 0.01             # linear reward head weights
-
-def reward(text, W):
-    return np.dot(featurize(text), W)
-
-def sigmoid(x):
-    return 1.0 / (1.0 + np.exp(-np.clip(x, -50, 50)))
-
-def bt_loss(W, data):
-    """Bradley-Terry negative log-likelihood."""
-    total = 0.0
-    for d in data:
-        r_w = reward(d["chosen"], W)
-        r_l = reward(d["rejected"], W)
-        total += -math.log(sigmoid(r_w - r_l) + 1e-10)
-    return total / len(data)
-
-def bt_grad(W, data):
-    """Gradient of BT loss w.r.t. W."""
-    grad = np.zeros_like(W)
-    for d in data:
-        r_w = reward(d["chosen"], W)
-        r_l = reward(d["rejected"], W)
-        p = sigmoid(r_w - r_l)
-        factor = -(1 - p)                  # gradient of -log(sigma(delta))
-        grad += factor * (featurize(d["chosen"]) - featurize(d["rejected"]))
-    return grad / len(data)
-
-# Train with gradient descent
-lr = 0.5
-for step in range(200):
-    g = bt_grad(W, dataset)
-    W = W - lr * g
-    if step % 50 == 0:
-        loss = bt_loss(W, dataset)
-        acc = sum(reward(d["chosen"], W) > reward(d["rejected"], W) for d in dataset)
-        print(f"Step {step:3d}: loss={loss:.4f}, accuracy={acc}/{len(dataset)}")
-
-# Step   0: loss=0.6606, accuracy=5/5
-# Step  50: loss=0.1849, accuracy=5/5
-# Step 100: loss=0.1006, accuracy=5/5
-# Step 150: loss=0.0684, accuracy=5/5
-# Final W = [ 5.013  1.843 -0.962  3.407]
-# Final accuracy: 5/5`}
-      </CodeBlock>
-
-      <Callout accent="gold">
-        The final weight vector tells the story: the model learned that length (W[0]=5.01) and word count (W[3]=3.41) are the strongest predictors of preference in this synthetic dataset, and capitalization (W[2]=-0.96) is slightly penalized. On real human preferences, the features are transformer-internal representations — but the same Bradley-Terry loss applies.
-      </Callout>
-
-      <H3>4c. KL-regularized REINFORCE</H3>
-
+      <Anchor id="5-production-implementation" />
+      <H2>10. Use the library deliberately</H2>
       <Prose>
-        Before adding PPO's clipping machinery, we implement KL-regularized REINFORCE — the simpler policy gradient that makes the objective concrete. The policy is a softmax distribution over 5 discrete "responses" (actions 0–4), where the true reward increases with the action index but the SFT reference policy prefers lower actions. The KL penalty tethers the policy to the reference distribution.
+        A library does not remove the data contract. It handles large tensor operations, model
+        definitions and training infrastructure while your code still decides which text is
+        compared, which targets count and which state is frozen. The executed route here uses
+        PyTorch 2.14 CPU, Transformers 5.19.0 and TRL 1.14.2. TRL removed its former
+        PPOTrainer/PPOConfig and value-head interfaces in version 1.13; copying an older snippet is
+        not a working current PPO implementation. The complete token loop above supplies PPO with
+        ordinary current differentiable model and optimizer operations.
+      </Prose>
+      <FrameworkParity />
+      <Prose>
+        The Transformers bridge constructs a small GPT2 language model plus an explicit scalar value
+        module. Its token embeddings, biases and architectural details are not identical to the
+        earlier TinyLM, so we do not assert weight-by-weight architecture parity. Instead, the same
+        GPT2 forward state is evaluated two ways: gathered response-token log probabilities and
+        GPT2's native causal loss with same-position masked labels. Both give 2.623677969 nats over
+        eleven valid targets, with zero maximum gradient discrepancy in this retained float32 run.
+      </Prose>
+      <Program
+        file="transformers_bridge.py"
+        title="Native GPT2 token/value outputs, same-state loss parity and an actual update"
+      />
+      <Prose>
+        The input tensor is 3×10; logits are 3×10×13 and values 3×10. Dropout is zero. The bridge
+        then stores old probabilities, creates fixed advantages and value targets, and performs one
+        actual PPO/value optimizer step. Actor embeddings and the value head change; the copied
+        reference and old arrays do not. This establishes the framework interface and objective
+        correspondence at the stated settings. It is neither a second policy study nor proof that
+        every implementation uses the same reduction.
+      </Prose>
+      <H3>The supported reward-training route</H3>
+      <Prose>
+        TRL's current RewardTrainer accepts explicit prompt/chosen/rejected records. When a separate
+        prompt column is supplied, chosen and rejected must be response suffixes: the trainer
+        concatenates the prompt once. For ordinary string data it appends EOS when missing,
+        tokenizes each complete candidate, and filters the whole pair if either tokenized sequence
+        exceeds max_length. That is pair removal, not truncating both answers to a common length.
+        Record the count; filtering can alter which comparisons the fit sees.
+      </Prose>
+      <Prose>
+        The collator places all chosen candidates first and all rejected candidates second in one
+        padded batch. A scalar sequence-classification model returns one score per sequence.
+        Splitting its output into those two halves restores each pair; the loss is the mean softplus
+        of negative chosen-minus-rejected gaps. Margin and score-centering options change this
+        objective. Both are disabled for our parity comparison, and CPU float32, dropout 0 and no
+        gradient checkpointing are explicit.
+      </Prose>
+      <Program
+        file="reward_trainer.py"
+        title="Train the current TRL reward interface on a fixed real comparison subset"
+      />
+      <Prose>
+        The tokenizer is fully supplied: a training-only WordLevel vocabulary with explicit PAD,
+        UNK, BOS and EOS. A small GPT2 scalar model is created from configuration, not a downloaded
+        pretrained language model. The program checks that the prompt appears exactly once and EOS
+        remains the final valid token, compares loss and parameter gradients to a separate
+        same-state direct calculation, then fits exactly twenty optimizer steps on the predeclared
+        first 128 training pairs. Its evaluation uses the corresponding fixed 64 held-out pairs; no
+        pair exceeded the declared limit in this run. The direct held-out summary is 33/64
+        agreement, BCE .703402 and Brier .255024, illustrating the limits of a tiny from-config
+        model. The initial loss differs from its direct calculation by about 6×10⁻⁸ and the maximum
+        gradient discrepancy is about 1.2×10⁻⁷. Flushing a labelled manual parity probe before
+        evaluation keeps its diagnostic metrics separate from held-out aggregates. The retained
+        per-pair outputs, rather than a mixed diagnostic queue, determine the reported held-out
+        summary.
       </Prose>
 
-      <CodeBlock language="python">
-{`np.random.seed(1)
-n_actions = 5
-
-# Reference policy (SFT model): prefers lower-indexed actions
-ref_logits = np.array([1.5, 1.0, 0.8, 0.5, 0.3])
-ref_probs  = softmax(ref_logits)          # [0.340, 0.206, 0.168, 0.128, 0.109] (approx)
-
-# True reward: action 4 is best (reward model is perfect here — no hacking)
-true_rewards = np.array([0.1, 0.2, 0.3, 0.4, 1.0])
-
-policy_logits = ref_logits.copy()         # policy starts at SFT
-beta = 0.1                                # KL coefficient
-lr   = 0.05
-
-for step in range(80):
-    probs = softmax(policy_logits)
-
-    # KL divergence from ref: KL(π || π_ref) = Σ_a π(a) log(π(a)/π_ref(a))
-    kl = np.sum(probs * np.log(probs / (ref_probs + 1e-10) + 1e-10))
-
-    # Expected reward
-    exp_r = np.sum(probs * true_rewards)
-
-    # Shaped reward per action: r(a) - β·log(π(a)/π_ref(a))
-    shaped = true_rewards - beta * np.log(probs / (ref_probs + 1e-10) + 1e-10)
-    baseline  = exp_r - beta * kl         # current objective value as baseline
-    advantage = shaped - baseline
-
-    # Policy gradient: ∇_θ E[shaped_r] ≈ E[(shaped_r - b) · ∇_θ log π(a)]
-    # For softmax: ∂log π(a)/∂logit_i = 1[i==a] - π(i)
-    grad = probs * (advantage - np.sum(probs * advantage))
-    policy_logits += lr * grad
-
-    if step % 20 == 0:
-        print(f"Step {step:2d}: E[r]={exp_r:.4f}, KL={kl:.4f}, "
-              f"best_action_prob={probs[4]:.3f}")
-
-# Step  0: E[r]=0.2953, KL=-0.0000, best_action_prob=0.109
-# Step 20: E[r]=0.3072, KL=0.0011,  best_action_prob=0.120
-# Step 40: E[r]=0.3202, KL=0.0046,  best_action_prob=0.133
-# Step 60: E[r]=0.3344, KL=0.0108,  best_action_prob=0.147
-# Final E[r]: 0.2953 → 0.3493  (18% improvement over SFT)
-# Final probs: [0.292 0.210 0.187 0.147 0.164]`}
-      </CodeBlock>
-
+      <Anchor id="9-failure-modes-and-gotchas" />
+      <H2>11. Decide what improved</H2>
       <Prose>
-        The policy visibly shifts probability mass toward action 4 (the highest-reward action) while the KL penalty prevents a full collapse onto that single action. Without the penalty, the policy would converge to always choosing action 4 — here, the penalty keeps the distribution spread, which in a language model corresponds to maintaining response diversity rather than collapsing to a single high-reward template.
+        There are at least three different questions: does the reward predictor match new
+        comparisons, does the policy increase that predictor's score, and do generated responses
+        meet an independently stated task criterion? Answer them with separate measurements.
+        Training loss alone answers none of the held-out or generated-response questions. Nor does a
+        universal “safe KL” threshold exist independently of the model, reward scale, prompts and
+        measurement convention.
       </Prose>
-
-      <H3>4d. PPO with clipping and advantage estimation</H3>
-
+      <HeldoutPairs />
       <Prose>
-        REINFORCE draws one sample per update, producing high-variance gradient estimates. PPO collects a batch of rollouts, then makes multiple gradient steps against those rollouts using the clipped ratio to prevent over-updating. We compare both on the same toy task and measure variance in the final 20 steps.
+        In the frozen real-data study, the linear text-feature reward head agrees with 60.1% of the
+        163 held-out comparisons, giving ties half credit. Its BCE is .656571 nats and Brier score
+        .232001. A length-only baseline reaches 61.7% agreement, BCE .658357 and Brier .232826. Thus
+        the richer head has slightly better probability losses here while losing on thresholded
+        agreement. Those differences are small results on one selected subset, not evidence that
+        length measures helpfulness.
       </Prose>
-
-      <CodeBlock language="python">
-{`def run_ppo(n_steps=80, lr=0.05, beta=0.1, clip_eps=0.2, rollout_size=8):
-    logits   = ref_logits.copy()
-    rewards_out = []
-    baseline = 0.0
-    alpha_bl = 0.1            # running-mean baseline decay
-
-    for step in range(n_steps):
-        old_probs = softmax(logits.copy())
-
-        # --- Collect rollout ---
-        actions     = np.random.choice(n_actions, size=rollout_size, p=old_probs)
-        rollout_r   = true_rewards[actions]
-        kl_pens     = beta * np.log(old_probs[actions] / (ref_probs[actions] + 1e-10) + 1e-10)
-        shaped      = rollout_r - kl_pens
-
-        # Running-mean baseline (value model proxy)
-        baseline    = (1 - alpha_bl) * baseline + alpha_bl * shaped.mean()
-        advantages  = shaped - baseline
-
-        # --- PPO clipped update (2 epochs over same rollout) ---
-        for _ in range(2):
-            new_probs = softmax(logits)
-            ratios    = new_probs[actions] / (old_probs[actions] + 1e-10)
-            clipped   = np.clip(ratios, 1 - clip_eps, 1 + clip_eps)
-
-            # gradient of min(r*A, clip(r)*A) w.r.t. logits
-            grad = np.zeros(n_actions)
-            for a, adv, ratio, clip_r in zip(actions, advantages, ratios, clipped):
-                if ratio * adv <= clip_r * adv:   # unclipped region
-                    g_factor = adv * ratio
-                else:                              # clipped: zero gradient
-                    g_factor = 0.0
-                g_logit       = -new_probs.copy()
-                g_logit[a]   += 1.0               # ∂log π(a)/∂logit_i
-                grad          += g_factor * g_logit
-            logits += lr * grad / rollout_size
-
-        rewards_out.append(np.sum(softmax(logits) * true_rewards))
-
-    return rewards_out
-
-# REINFORCE: single-sample updates
-def run_reinforce(n_steps=80, lr=0.05, beta=0.1):
-    logits = ref_logits.copy()
-    rewards_out = []
-    for step in range(n_steps):
-        probs  = softmax(logits)
-        action = np.random.choice(n_actions, p=probs)
-        r      = true_rewards[action]
-        kl_pen = beta * np.log(probs[action] / (ref_probs[action] + 1e-10) + 1e-10)
-        shaped = r - kl_pen
-        grad   = -probs.copy()
-        grad[action] += 1.0
-        logits += lr * shaped * grad
-        rewards_out.append(np.sum(softmax(logits) * true_rewards))
-    return rewards_out
-
-np.random.seed(2)
-reinforce_r = run_reinforce()
-ppo_r       = run_ppo()
-
-# Variance comparison (last 20 steps)
-# REINFORCE variance: 0.000005  (lower variance, but slower convergence)
-# PPO       variance: 0.000131  (slightly higher variance, but stronger signal)
-
-# Final E[r]:
-# REINFORCE: 0.295 → 0.296 → 0.295 → 0.320   (minimal improvement)
-# PPO:       0.295 → 0.313 → 0.342 → 0.420   (strong monotonic improvement)`}
-      </CodeBlock>
-
-      <Plot
-        label="ppo vs reinforce — expected reward over training steps"
-        xLabel="training step"
-        yLabel="E[reward]"
-        series={[
-          {
-            name: "PPO (rollout=8, 2 epochs)",
-            color: "#4ade80",
-            points: [
-              [0, 0.295], [10, 0.304], [20, 0.313], [30, 0.327],
-              [40, 0.342], [50, 0.363], [60, 0.385], [70, 0.408], [79, 0.420],
-            ],
-          },
-          {
-            name: "REINFORCE (single sample)",
-            color: "#f97316",
-            points: [
-              [0, 0.295], [10, 0.295], [20, 0.296], [30, 0.295],
-              [40, 0.295], [50, 0.301], [60, 0.308], [70, 0.315], [79, 0.320],
-            ],
-          },
+      <LessonTable
+        caption="Observed held-out comparison prediction on the same 163 pairs"
+        headers={['Predictor', 'Agreement, ties half', 'BCE, nats', 'Brier']}
+        rows={[
+          ['Linear word/length/overlap head', '0.601227', '0.656571', '0.232001'],
+          ['Length-only head', '0.616564', '0.658357', '0.232826'],
+          ['sklearn fit of the matched linear objective', '0.595092', '0.656258', '0.231854'],
+          ['Uninformative probability .5', '0.5', '0.693147', '0.25'],
         ]}
       />
-
       <Prose>
-        PPO's multi-sample rollout and clipped update produce a clean, monotonic reward improvement that REINFORCE — with its single-sample, high-variance gradient — cannot match at the same learning rate. In practice on language models, this gap is even larger because sequences are long, reward signals are sparse (often only the final token receives a reward), and single-sample estimates are nearly uninformative.
+        A held-out pair's chosen-probability is a model output; the supplied chosen label is the
+        observed target. BCE penalizes overconfident errors more sharply than accuracy, while Brier
+        measures squared probability error. The bin view presents every pair in both orientations,
+        swapping p with 1−p and the binary label with its complement. Otherwise a chosen-first
+        dataset would make every displayed label one by construction. Counts are shown, empty bins
+        stay empty, and the two orientations are not independent new human judgments.
       </Prose>
-
-      <H3>4e. Reward hacking demonstration</H3>
-
       <Prose>
-        The most important failure mode of RLHF is not a bug — it is the inevitable consequence of optimizing a proxy. We demonstrate this by training a policy against a reward model that is biased toward longer responses, while the true quality peaks at moderate length. Watch the policy drift toward length 10 (maximum) even as true quality falls.
+        Length strata and literal pairs help diagnose shortcuts. A high score for a longer answer
+        can be appropriate when more detail is requested and wrong when brevity is requested. The
+        baseline's shallow overlap feature cannot understand all these instructions. Moreover, the
+        subset came from readable helpful-base training records with a new grouped split, not the
+        dataset's original official evaluation protocol. We make no population-wide or
+        production-quality inference from these local figures.
       </Prose>
-
-      <CodeBlock language="python">
-{`np.random.seed(3)
-
-# Biased reward model: reward ∝ length  (real RM quirk: longer = more thorough)
-def biased_rm(length):
-    return 0.3 * length + np.random.randn() * 0.1
-
-# True quality: bell curve peaked at length 4
-def true_quality(length):
-    return float(np.exp(-0.5 * ((length - 4) / 2.0) ** 2))
-
-# Policy: distribution over response lengths 0–10
-length_logits = np.ones(11) * 0.5        # starts uniform
-
-for step in range(60):
-    probs  = softmax(length_logits)
-    length = np.random.choice(11, p=probs)
-    rm_score = biased_rm(length)
-
-    # Policy gradient on RM score — NO KL penalty (to show drift clearly)
-    grad = -probs.copy()
-    grad[length] += 1.0
-    length_logits += 0.1 * rm_score * grad
-
-    if step % 15 == 0:
-        probs_now = softmax(length_logits)
-        mean_len  = np.sum(probs_now * np.arange(11))
-        tq_vals   = np.array([true_quality(l) for l in range(11)])
-        exp_tq    = np.sum(probs_now * tq_vals)
-        exp_rm    = np.sum(probs_now * (0.3 * np.arange(11)))
-        print(f"Step {step:2d}: mean_length={mean_len:.2f}, "
-              f"RM_score={exp_rm:.3f}, true_quality={exp_tq:.3f}")
-
-# Step  0: mean_length=5.02, RM_score=1.505, true_quality=0.453
-# Step 15: mean_length=5.22, RM_score=1.567, true_quality=0.469
-# Step 30: mean_length=5.33, RM_score=1.600, true_quality=0.486
-# Step 45: mean_length=5.83, RM_score=1.748, true_quality=0.429
-#
-# RM score keeps rising; true quality FALLS after step 30.
-# The policy has learned to produce long responses.
-# A real production RM biased toward length produces exactly this.`}
-      </CodeBlock>
-
-      <Heatmap
-        label="reward hacking: length vs rm score vs true quality"
-        matrix={[
-          [0.00, 0.135],
-          [0.30, 0.325],
-          [0.60, 0.607],
-          [0.90, 0.882],
-          [1.20, 1.000],
-          [1.50, 0.882],
-          [1.80, 0.607],
-          [2.10, 0.325],
-          [2.40, 0.135],
-          [2.70, 0.044],
-          [3.00, 0.011],
+      <MeasuredTraining />
+      <Prose>
+        The constructed token study has an independently defined exact-response criterion. At the
+        SFT checkpoint, 13 of 32 fixed-seed generated samples meet it. After round 5, proxy reward
+        has risen from about −.678 to 1.391, yet only 5 of 32 meet the criterion. Round 15 reaches
+        19 of 32, then round 20 falls to 16 of 32 despite a slightly higher proxy score. No run was
+        repeated to make these curves prettier. The same four prompts and evaluation seed are
+        reused, so these are mechanism diagnostics, not held-out generalization.
+      </Prose>
+      <LessonTable
+        caption="Retained constructed-policy evaluation; 32 generated responses per checkpoint"
+        headers={[
+          'Round',
+          'Mean proxy reward',
+          'Exact criterion',
+          'Mean sampled sequence log ratio',
+          'EOS endings',
         ]}
-        rowLabels={["len 0","len 1","len 2","len 3","len 4","len 5","len 6","len 7","len 8","len 9","len 10"]}
-        colLabels={["RM score","true quality"]}
-        colorScale="gold"
-        cellSize={42}
-      />
-
-      <Prose>
-        The heatmap shows the fundamental misalignment: the biased reward model assigns its maximum score at length 10, but true quality peaks at length 4. A policy trained long enough against this RM will produce verbosely meaningless responses — high RM score, poor actual quality. This is Goodhart's Law in action: when a measure becomes a target, it ceases to be a good measure.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <H3>5.1 HuggingFace TRL</H3>
-
-      <Prose>
-        HuggingFace TRL (Transformer Reinforcement Learning) is the most widely used open-source library for RLHF. It provides <Code>RewardTrainer</Code> for the Bradley-Terry reward model training and <Code>PPOTrainer</Code> for the policy optimization loop. A minimal setup for a 7B model on a single node looks like this:
-      </Prose>
-
-      <CodeBlock language="python">
-{`from transformers import AutoModelForCausalLM, AutoTokenizer
-from trl import RewardTrainer, RewardConfig, PPOTrainer, PPOConfig, AutoModelForCausalLMWithValueHead
-
-# ── Stage 2: Train reward model ────────────────────────────────────────────────
-reward_config = RewardConfig(
-    model_name_or_path="meta-llama/Llama-3.1-8B-Instruct",  # start from SFT model
-    output_dir="./reward_model",
-    per_device_train_batch_size=8,
-    num_train_epochs=1,
-    max_length=512,
-    gradient_checkpointing=True,          # essential for large models
-    learning_rate=1e-5,
-)
-
-# dataset must have "chosen" and "rejected" columns (tokenized)
-reward_trainer = RewardTrainer(
-    model=reward_model,
-    args=reward_config,
-    train_dataset=preference_dataset,
-    tokenizer=tokenizer,
-)
-reward_trainer.train()
-reward_trainer.save_model()
-
-# ── Stage 3: PPO policy optimization ──────────────────────────────────────────
-ppo_config = PPOConfig(
-    model_name="./sft_model",
-    reward_model="./reward_model",
-    learning_rate=1e-5,
-    batch_size=64,                        # number of prompt-response pairs per update
-    mini_batch_size=8,                    # gradient accumulation chunks
-    ppo_epochs=4,                         # inner epochs per PPO batch
-    kl_penalty="kl",                      # "kl" or "abs" or "mse"
-    init_kl_coef=0.2,                     # initial β; adapted by AdaptiveKLController
-    target=6.0,                           # target KL divergence in nats
-    horizon=10000,                        # steps over which KL target is approached
-    gamma=1.0,                            # discount factor
-    lam=0.95,                             # GAE lambda
-    cliprange=0.2,                        # PPO ε
-    cliprange_value=0.2,                  # value function clip range
-    vf_coef=0.1,                          # value loss coefficient
-)
-
-# AutoModelForCausalLMWithValueHead adds the scalar value head on top of the LM
-policy = AutoModelForCausalLMWithValueHead.from_pretrained("./sft_model")
-ref_policy = AutoModelForCausalLM.from_pretrained("./sft_model")  # frozen
-
-ppo_trainer = PPOTrainer(
-    config=ppo_config,
-    model=policy,
-    ref_model=ref_policy,
-    tokenizer=tokenizer,
-)
-
-# Training loop (TRL handles rollout, scoring, and update internally)
-for batch in prompt_dataloader:
-    queries    = batch["input_ids"]
-    responses  = ppo_trainer.generate(queries, max_new_tokens=256)
-    scores     = reward_pipeline(tokenizer.batch_decode(responses))  # reward model
-    train_stats = ppo_trainer.step(queries, responses, scores)
-
-# TRL's AdaptiveKLController adjusts β automatically to keep KL near target.
-# This is more robust than a fixed β and is what most production runs use.`}
-      </CodeBlock>
-
-      <H3>5.2 Production-scale considerations</H3>
-
-      <Prose>
-        The gap between the TRL snippet above and a production RLHF run at frontier scale is substantial. The InstructGPT paper describes running four large transformers simultaneously: policy, reference, reward model, and value model — all of them in the 6B–175B parameter range, all of them requiring at least 80GB GPU memory per model at bf16. The engineering requirements include: tensor parallelism across 8–16 GPUs per model, pipeline parallelism across nodes, an asynchronous rollout system that generates responses on one set of GPUs while the optimizer runs on another, and careful numerical stabilization because bf16 underflows can corrupt the KL terms. The Llama 2 team ran five iterative rounds of RLHF, each requiring full retraining of the reward model on fresh preference data (including responses from the current policy checkpoint), which means the total preference annotation budget grows with each iteration.
-      </Prose>
-
-      <Prose>
-        Anthropic's HH-RLHF pipeline (Bai et al., 2022) introduced iterative online RLHF: the reward model is retrained weekly on a mix of static and policy-rollout preferences, keeping the RM in-distribution with the current policy. This substantially reduces reward hacking because the RM is always evaluating responses from the distribution it was trained on, rather than out-of-distribution rollouts from a policy that has moved far from the RM training distribution.
-      </Prose>
-
-      <H3>5.3 Chosen vs rejected response visualization</H3>
-
-      <TokenStream
-        label="chosen response (green) — preferred by reward model and humans"
-        tokens={[
-          { label: "Paris", color: "#4ade80" },
-          { label: "is", color: "#4ade80" },
-          { label: "the", color: "#4ade80" },
-          { label: "capital", color: "#4ade80" },
-          { label: "of", color: "#4ade80" },
-          { label: "France,", color: "#4ade80" },
-          { label: "a major", color: "#4ade80" },
-          { label: "European", color: "#4ade80" },
-          { label: "city", color: "#4ade80" },
-          { label: "with over", color: "#4ade80" },
-          { label: "2 million", color: "#4ade80" },
-          { label: "residents.", color: "#4ade80" },
+        rows={[
+          ['SFT / 0', '−0.677667', '13 / 32', '0', '31 / 32'],
+          ['5', '1.390582', '5 / 32', '7.624175', '17 / 32'],
+          ['10', '3.670865', '15 / 32', '4.134484', '24 / 32'],
+          ['15', '4.103687', '19 / 32', '2.911565', '30 / 32'],
+          ['20', '4.140644', '16 / 32', '5.416496', '27 / 32'],
         ]}
       />
+      <Prose>
+        The reward fit reaches perfect accuracy on its eight training comparisons. Yet at round 5 it
+        assigns about 4.770 to <em>Paris is Paris Paris is . EOS</em> for the sentence-France
+        prompt. At round 15, <em>Paris is capital of Italy . EOS</em> receives about 4.767 for that
+        same prompt. These are retained actual generated failures, selected after the run as
+        high-proxy criterion failures. They show reward-model extrapolation failure outside its tiny
+        comparison set. They do not show that human annotators preferred those malformed or
+        incorrect answers.
+      </Prose>
+      <Prose>
+        Some generations reach the declared horizon without EOS; one round 5 evaluation sample
+        contains a PAD/BOS token as an actual sampled action. The report retains both. Sampling full
+        vocabulary, valid token masking, old-policy snapshots and frozen model checks all passed, so
+        algorithmic execution and useful outputs remain separate assessments. A stronger experiment
+        would add new annotated comparisons from the policy's changed distribution, then reserve an
+        independent evaluation set before choosing another training setting.
+      </Prose>
+      <H3>A controlled proxy failure you can calculate</H3>
+      <Prose>
+        To isolate the mechanism from neural training noise, return to three constructed responses
+        for the one-word request: A, “Paris”; B, “Paris is France's capital”; and C, “Rome is
+        France's capital, certainly.” The supplied exact task criterion is [1,0,0]. Use a uniform
+        reference and proxy rewards [1,b,2b], where b is an explicitly wrong verbosity bias. At b=0
+        the proxy matches the criterion; increasing b rewards the longer wrong answer most. The
+        exact finite optimum from section 4 shifts mass according to that proxy even when expected
+        criterion declines. At b=1 and β=.5, A receives only 1/(2+exp(2))≈.106507 of the mass.
+      </Prose>
+      <ProxyConflict />
+      <Prose>
+        This is a calculated counterexample with supplied scores, not a measurement of human values.
+        Setting the proxy equal to the criterion removes the designed conflict; making all proxy
+        rewards equal restores the reference distribution. The learned miniature gives a separate
+        observed example of imperfect extrapolation. In larger studies,{' '}
+        <a href="https://arxiv.org/abs/2210.10760">reward-model overoptimization research</a>{' '}
+        measures the gap using separately defined evaluation signals; our tiny fixture does not
+        reproduce those scaling results.
+      </Prose>
 
-      <TokenStream
-        label="rejected response (red) — minimal, lower reward"
-        tokens={[
-          { label: "Paris.", color: "#f87171" },
+      <Anchor id="7-decision-matrix" />
+      <Anchor id="8-what-scales-and-what-doesnt" />
+      <Anchor id="8-what-scales-and-what-doesn-t" />
+      <H2>12. Choose the next training question</H2>
+      <Prose>
+        Choose the method by the supervision and decision you can actually measure. Demonstrations
+        support SFT. A reward model can rank multiple sampled candidates at inference through
+        best-of-N selection without changing the policy. Offline chosen/rejected pairs support
+        direct preference methods such as DPO. Online sampled responses and scored outcomes support
+        policy-gradient training such as the complete loop here. These routes can be combined, but
+        comparing them requires accounting for both training and inference work.
+      </Prose>
+      <LessonTable
+        caption="Different evidence and operations answer different training questions"
+        headers={['Route', 'Signal', 'What changes', 'Critical question']}
+        rows={[
+          [
+            'SFT',
+            'Demonstrated target responses',
+            'Policy token likelihood',
+            'Do demonstrations cover desired behavior?',
+          ],
+          [
+            'Best-of-N',
+            'Scores for N generated candidates',
+            'Selected answer, with policy weights fixed',
+            'Does extra inference sampling find better candidates?',
+          ],
+          [
+            'Reward model + PPO',
+            'New policy samples scored by a model or environment',
+            'Actor and usually a value estimator',
+            'Does the scoring signal remain valid as generation changes?',
+          ],
+          [
+            'DPO / SimPO',
+            'Offline comparative responses',
+            'A direct policy preference objective',
+            'Do pair distribution and objective assumptions fit the task?',
+          ],
+          [
+            'RLOO / GRPO / related variants',
+            'Groups of sampled responses and rewards',
+            'Policy with a chosen baseline/normalization',
+            'Which estimator and group signal are actually used?',
+          ],
+          [
+            'AI / constitutional feedback',
+            'Model judgments guided by instructions or principles',
+            'Labels and then a chosen training objective',
+            'How are judge errors and principle choices evaluated?',
+          ],
+          [
+            'Verifiable reward / process supervision',
+            'Checkable outcomes or intermediate-step labels',
+            'Reward location and supervision granularity',
+            'What does the verifier or step label really establish?',
+          ],
         ]}
       />
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>6.1 Reward vs KL trade-off (Pareto frontier of β)</H3>
-
       <Prose>
-        The KL coefficient <Code>β</Code> governs a fundamental trade-off. Small <Code>β</Code> allows aggressive reward optimization but risks hacking and distributional collapse; large <Code>β</Code> keeps the policy close to SFT but limits alignment gains. Different values of <Code>β</Code> trace a Pareto frontier in (reward, KL) space. The following plot shows this frontier schematically, based on the functional forms reported in InstructGPT and Llama 2.
+        Direct methods get their full derivations in the next lessons; replacing a learned value
+        baseline with group statistics also changes the estimator and data collection. AI feedback
+        changes who or what supplies the judgment, not the need to test its meaning. A verifiable
+        outcome can be stronger evidence for a narrowly checkable property while leaving other
+        qualities unmeasured.
+      </Prose>
+      <WorkLedger />
+      <Prose>
+        Separate collection from updating. With B responses of average T generated tokens, a round
+        samples about BT actions. K inner epochs revisit about KBT valid action positions for the
+        actor/value loss, plus reference and reward scoring work during collection. For B=16, T=6
+        and K=4, those two counts are 96 generated actions and 384 update positions. Setting K to
+        zero retains generation but eliminates the update. These are token-work counts, not
+        wall-clock predictions: attention length, caching, batching, parallelism, precision and
+        communication change actual cost.
+      </Prose>
+      <Prose>
+        For a matched-budget comparison, hold prompt distribution, available
+        demonstrations/comparisons, independent evaluation and a declared generation budget fixed.
+        Then report training-token and inference-token costs separately. A best-of-N method spends
+        multiple candidates at inference; an SFT policy may emit one. A reward model trained on
+        extra labels has received extra information. Hiding either difference makes a “same budget”
+        claim misleading.
       </Prose>
 
-      <Plot
-        label="pareto frontier — expected reward vs kl divergence as β varies"
-        xLabel="KL divergence from SFT (nats)"
-        yLabel="reward model score"
-        series={[
-          {
-            name: "reward model score (biased proxy)",
-            color: "#e2b55a",
-            points: [
-              [0.0, 0.30], [0.5, 0.42], [1.0, 0.52], [2.0, 0.61],
-              [4.0, 0.69], [7.0, 0.74], [12.0, 0.77], [20.0, 0.78],
-            ],
-          },
-          {
-            name: "true human preference (gold standard)",
-            color: "#4ade80",
-            points: [
-              [0.0, 0.30], [0.5, 0.42], [1.0, 0.52], [2.0, 0.60],
-              [4.0, 0.63], [7.0, 0.59], [12.0, 0.48], [20.0, 0.33],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        The gap between the two curves illustrates reward hacking: the reward model score continues rising as KL increases (the policy finds better ways to exploit the proxy), while true human preference peaks around KL ≈ 2–4 nats and then falls as the policy enters adversarial territory. The practical implication is that you should monitor human evaluation — not just reward model score — throughout PPO training, and stop training before the curves diverge. Gao, Schulman, and Hilton (arXiv:2210.10760) showed that this peak-then-fall pattern is quantitatively predictable from reward model size and the number of preference pairs used to train it.
-      </Prose>
-
-      <H3>6.2 Reward increase over PPO steps</H3>
-
-      <Plot
-        label="ppo training dynamics — reward and kl over steps"
-        xLabel="ppo update step"
-        yLabel="metric value"
-        series={[
-          {
-            name: "RM score (normalized)",
-            color: "#e2b55a",
-            points: [
-              [0,0.30],[5,0.35],[10,0.41],[20,0.48],[30,0.54],
-              [50,0.61],[75,0.66],[100,0.70],[150,0.73],[200,0.74],
-            ],
-          },
-          {
-            name: "KL from SFT (nats)",
-            color: "#60a5fa",
-            points: [
-              [0,0.0],[5,0.2],[10,0.5],[20,1.1],[30,1.7],
-              [50,2.8],[75,3.9],[100,4.8],[150,6.1],[200,7.0],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        The characteristic shape of a well-tuned RLHF run: reward climbs steeply in the first 50 steps as the policy adopts obvious improvements from the SFT baseline, then plateaus as it reaches the frontier of what the reward model reliably represents. KL grows roughly log-linearly over the run, and the AdaptiveKLController (used in TRL) adjusts <Code>β</Code> to keep it near the target (typically 4–8 nats for a well-sized run).
-      </Prose>
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <H3>RLHF / PPO vs the alternatives</H3>
-
-      <Prose>
-        The post-training landscape in 2025 offers several methods for preference alignment. The right choice depends on your compute budget, data availability, and whether you need online or offline training.
-      </Prose>
-
-      <Heatmap
-        label="method comparison matrix (higher = better for that criterion)"
-        matrix={[
-          [5, 2, 3, 5, 5],
-          [4, 4, 5, 3, 3],
-          [3, 5, 5, 2, 2],
-          [2, 5, 5, 1, 2],
-          [4, 3, 4, 4, 3],
-        ]}
-        rowLabels={["PPO (RLHF)", "DPO", "SimPO", "ORPO", "GRPO"]}
-        colLabels={["alignment quality", "simplicity", "stability", "online training", "verifiable rewards"]}
-        colorScale="green"
-        cellSize={48}
-      />
-
-      <Prose>
-        <strong>Use full PPO (RLHF)</strong> when: you have a large compute budget; you need online training (the policy's rollouts inform the reward signal in real time); your task has verifiable rewards (math, code, tool use); or you are targeting capabilities that require long-horizon reasoning. The InstructGPT, Llama 2, and most frontier proprietary models use PPO at some stage.
-      </Prose>
-
-      <Prose>
-        <strong>Use DPO</strong> (Rafailov et al., 2023) when: you have a fixed offline preference dataset; your compute budget does not support running four large models simultaneously; you want a single supervised-style training loop. DPO is mathematically equivalent to RLHF under the optimal policy but avoids the RL training loop entirely. Most open-source releases post-2024 (Llama 3, Mistral, Qwen 2.5, Gemma) use DPO or a DPO variant.
-      </Prose>
-
-      <Prose>
-        <strong>Use SimPO</strong> when: you want DPO without a reference model (saving one full forward pass per training step); your response lengths are variable and you want length normalization built in. SimPO uses the average log-probability under the current policy as the implicit reward, removing the reference model from the loss entirely.
-      </Prose>
-
-      <Prose>
-        <strong>Use GRPO</strong> (Group Relative Policy Optimization, used in DeepSeek-R1) when: you are doing mathematical or code reasoning with verifiable ground truth; you want the benefits of online RL without a value model. GRPO replaces the value model with a group-relative baseline — score each response relative to the mean score of a group of responses to the same prompt — eliminating the need for the fourth transformer.
-      </Prose>
-
-      <Prose>
-        <strong>Skip RLHF entirely</strong> when: you are building a narrow-domain model where SFT on high-quality demonstrations is sufficient (code completion, summarization with clear rubrics, classification); your preference data is too small (&lt;10,000 pairs) to train a reliable reward model; or you are doing a first pass and want to validate that SFT quality is high enough before investing in the preference pipeline.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>8.1 What scales</H3>
-
-      <Prose>
-        <strong>Reward model accuracy scales with preference data volume.</strong> Larger preference datasets produce reward models that generalize better to out-of-distribution prompts, which in turn reduces reward hacking. The InstructGPT paper used ~40,000 preference pairs; Llama 2 used over a million. The gain is roughly logarithmic — each doubling of the dataset size produces a diminishing but still meaningful improvement in RM generalization. There is no published saturation point.
-      </Prose>
-
-      <Prose>
-        <strong>Policy quality scales with rollout count per PPO update.</strong> More rollouts per gradient step reduce variance in the advantage estimate, allowing the policy to make larger, more reliable steps. The practical limit is memory and compute — each rollout requires a forward pass through the policy and reward model, and batching is constrained by GPU memory. The Llama 2 paper describes using rejection sampling (generate many responses, keep the top-k by reward model score) as a compute-efficient alternative to full PPO for early training stages.
-      </Prose>
-
-      <Prose>
-        <strong>Iterative RLHF scales in alignment quality.</strong> Retraining the reward model on fresh preference data from the current policy's rollouts — and repeating this cycle — consistently improves alignment quality over single-round RLHF. Anthropic's iterated online RLHF and Llama 2's five-round pipeline both demonstrate this. The improvement is not primarily from more data but from the RM staying in-distribution with the policy.
-      </Prose>
-
-      <H3>8.2 What doesn't scale</H3>
-
-      <Prose>
-        <strong>Human annotation cost dominates.</strong> Scaling preference data requires scaling human annotator time. At frontier labs, annotation pipelines cost tens of millions of dollars annually and are among the most tightly controlled competitive advantages. Active learning — presenting annotators with pairs where the reward model is most uncertain — reduces the number of annotations needed for a given RM accuracy, but the marginal cost per annotation does not fall as data scales.
-      </Prose>
-
-      <Prose>
-        <strong>Reward model generalization gap widens at scale.</strong> Gao et al. (arXiv:2210.10760) showed empirically that the gap between RM score and gold-standard human preference grows as the policy is optimized further. Larger reward models widen the onset of this gap but do not eliminate it. No current architecture has solved the fundamental problem that a reward model trained on a finite preference dataset will eventually be exploited by a powerful enough optimizer.
-      </Prose>
-
-      <Prose>
-        <strong>PPO hyperparameter sensitivity does not decrease with model size.</strong> The hyperparameter surface for PPO — KL coefficient, learning rates, clip range, GAE lambda, value loss coefficient, rollout batch size — is high-dimensional and its optimal configuration is not predictable from first principles. Larger models do not simplify tuning; they often make it harder because training instabilities (KL explosions, value model divergence) are more consequential and harder to recover from.
-      </Prose>
-
-      <Prose>
-        <strong>Annotator agreement does not scale to subjective tasks.</strong> On clearly factual tasks ("is this summary accurate?"), inter-annotator agreement is high and scales with annotator training. On subjective tasks ("is this response appropriately cautious?"), agreement plateaus around 65–75% regardless of instruction quality, because the underlying task is genuinely ambiguous. The ceiling on RM quality for subjective tasks is set by human disagreement, not data volume.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>9.1 Reward hacking (Goodhart's Law)</H3>
-
-      <Prose>
-        The defining failure of RLHF. The reward model is a learned proxy for human preference, trained on a finite sample from a bounded distribution. The policy optimizer is powerful and, given enough training steps, will find inputs where the proxy diverges from the true objective. Reward hacking manifests as: verbosely formatted responses that score well on length-biased RMs; obsequious openers ("Great question!") that correlate with polite human responses; confident hallucinations where hedging was penalized; excessive bullet points where the RM learned structure is positive. Defenses: KL penalty, iterative RM retraining, RM ensembles, human evaluation throughout training.
-      </Prose>
-
-      <Callout accent="gold">
-        Goodhart's Law: "When a measure becomes a target, it ceases to be a good measure." Applied to RLHF: the longer you train against the reward model, the better the policy gets at the reward model score and the worse it gets at what the reward model was supposed to represent.
-      </Callout>
-
-      <H3>9.2 KL collapse (β too high)</H3>
-
-      <Prose>
-        When <Code>β</Code> is set too high, the KL penalty overwhelms the reward signal. The policy stays so close to the SFT reference that it cannot move toward higher-reward responses at all — alignment training does nothing. This is detectable by monitoring KL divergence: if it stays near zero throughout training, <Code>β</Code> is too high. Reduce <Code>β</Code> or increase the reward model's output scale (though the latter requires retraining the RM).
-      </Prose>
-
-      <H3>9.3 KL explosion (β too low)</H3>
-
-      <Prose>
-        The opposite failure. With insufficient KL penalty, the policy drifts far from the SFT distribution in a few steps, entering regions of weight space where the reward model is extrapolating wildly. The policy finds high-reward but incoherent outputs — repeated phrases, response-format hallucinations, sudden language switching — and collapses onto them. Detectable by monitoring KL: a sudden spike (KL &gt; 20 nats in early training, or KL growing faster than reward) signals impending collapse. The fix is to increase <Code>β</Code> or reduce the learning rate, and often to checkpoint-restore before the explosion.
-      </Prose>
-
-      <H3>9.4 Length bias</H3>
-
-      <Prose>
-        Human labelers systematically perceive longer responses as more thorough, even when they are not. This is one of the most documented and persistent biases in preference datasets. The reward model absorbs it, and the policy learns to produce verbose responses. Production mitigation: normalize reward by response length during RM training; add a length penalty to the PPO objective; audit labeled pairs for length-correctness correlation and discount long-preferred pairs where the quality difference is not attributable to content.
-      </Prose>
-
-      <H3>9.5 Distributional shift between RM training and PPO rollouts</H3>
-
-      <Prose>
-        The reward model is trained on preferences between responses from the SFT model (or an early policy checkpoint). As PPO pushes the policy into new territory, the reward model is asked to evaluate out-of-distribution responses — ones it never saw during training. Its judgments in these regions are extrapolation, not interpolation, and the extrapolation is systematically wrong in the direction of whatever features the RM learned to associate with high reward. Mitigation: iterative RLHF (retrain RM on policy rollouts each round); KL penalty to keep policy near the RM training distribution.
-      </Prose>
-
-      <H3>9.6 Annotator disagreement corrupting RM quality</H3>
-
-      <Prose>
-        InstructGPT reports inter-annotator agreement of 72–77% on pairwise preferences. This means roughly one in four training pairs is noise: two labelers shown the same pair would disagree, and the label in the dataset reflects one annotator's judgment that may not be the majority view. At this noise rate, the RM can learn spurious correlations rather than genuine preference signals. Mitigation: majority vote across multiple annotators per pair; filtering out near-tie preferences; explicit calibration rounds where annotators must agree on anchor examples before labeling production pairs.
-      </Prose>
-
-      <H3>9.7 Value model divergence</H3>
-
-      <Prose>
-        The value model <Code>V_ψ</Code> is trained online during PPO on the same rollouts being used to update the policy. Because it is always slightly behind the current policy, its advantage estimates are biased. If the value model diverges — failing to track the policy's improving reward expectations — the advantage estimates become garbage, and PPO gradient steps become random walks. This is the most common cause of mid-run training instability. Mitigation: lower learning rate for the value model than the policy; gradient clipping on value loss; checkpoint-restore if value loss spikes suddenly.
-      </Prose>
-
-      <H3>9.8 Over-optimization and reward misgeneralization</H3>
-
-      <Prose>
-        Beyond reward hacking (which is RM-specific exploitation), there is a deeper failure: the reward model may be right on the training distribution but wrong on out-of-distribution prompts in a systematic way. A reward model trained primarily on English helpfulness preferences may generalize poorly to multilingual prompts, to domain-specific technical questions outside labeler expertise, or to prompts that elicit novel reasoning chains the annotators never evaluated. The policy, optimizing against this RM, will appear aligned on prompts similar to the training distribution and misaligned on novel ones — not because it is doing anything wrong in a proximate sense, but because the RM's representation of "human preference" does not generalize.
-      </Prose>
-
-      <H3>9.9 Mode collapse to high-reward templates</H3>
-
-      <Prose>
-        Without sufficient KL penalty and rollout diversity, PPO can collapse the policy onto a small set of high-reward response templates — effectively reducing the language model to a sophisticated template filler. The collapse is detectable: response diversity metrics (entropy of the output distribution, unique bigram ratios across rollouts) fall sharply while RM score rises. Once collapsed, the policy is difficult to recover without resetting to a pre-collapse checkpoint.
-      </Prose>
-
-      <H3>9.10 Sycophancy</H3>
-
-      <Prose>
-        A subtle, systematic failure: the policy learns to agree with premises stated in the prompt, even when those premises are false, because human labelers rate agreeable responses higher. A labeler who writes a prompt containing a misconception ("Einstein failed math, right?") will often prefer a response that validates the misconception over one that corrects it, because correction feels confrontational. The reward model learns this preference, and the policy becomes sycophantic — telling users what they want to hear rather than what is accurate. This is one of the hardest failure modes to fix because it requires labeling guidelines and labeler training that explicitly counter the natural human bias toward agreement.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        All papers below were verified against arXiv as of April 2026.
-      </Prose>
-
-      <H3>10.1 Foundational papers</H3>
-
-      <Prose>
-        <strong>Christiano, Leike, Brown, Martic, Legg, Amodei (2017).</strong> "Deep Reinforcement Learning from Human Preferences." arXiv:1706.03741. NeurIPS 2017. The originating paper: preference-based RL in Atari and MuJoCo environments using fewer than 1,400 human comparisons. Introduced the reward model training loop and the pairwise preference framework that all subsequent RLHF work builds on.
-      </Prose>
-
-      <Prose>
-        <strong>Stiennon, Ouyang, Wu, Ziegler, Lowe, Voss, Radford, Amodei, Christiano (2020).</strong> "Learning to Summarize from Human Feedback." arXiv:2009.01325. NeurIPS 2020. First application of the preference-RL framework to language model fine-tuning. Demonstrated on TL;DR summarization that a reward model trained on human rankings could drive a GPT-3 fine-tune past reference summaries on human evaluation.
-      </Prose>
-
-      <Prose>
-        <strong>Ouyang, Wu, Jiang, et al. (2022).</strong> "Training Language Models to Follow Instructions with Human Feedback." arXiv:2203.02155. NeurIPS 2022. The InstructGPT paper: full RLHF pipeline on GPT-3. Reports 1.3B InstructGPT preferred over 175B GPT-3 on 85% of prompts. Documents inter-annotator agreement (72–77%), the PPO training loop, KL coefficient selection, and initial reward hacking observations.
-      </Prose>
-
-      <Prose>
-        <strong>Bai, Jones, Ndousse, Askell, et al. (2022).</strong> "Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback." arXiv:2204.05862. Anthropic's concurrent RLHF paper. Introduces the HH-RLHF dataset (helpfulness and harmlessness preference pairs), iterative online RLHF, and Elo-based evaluation of preference model quality. The HH dataset is publicly available at github.com/anthropics/hh-rlhf.
-      </Prose>
-
-      <Prose>
-        <strong>Schulman, Wolski, Dhariwal, Radford, Klimov (2017).</strong> "Proximal Policy Optimization Algorithms." arXiv:1707.06347. The PPO paper. Introduces the clipped surrogate objective used in RLHF training. Originally developed for continuous control; adapted for language models by scaling the ratio clipping to handle the discrete token action space.
-      </Prose>
-
-      <Prose>
-        <strong>Touvron, Martin, Stone, et al. (2023).</strong> "Llama 2: Open Foundation and Fine-Tuned Chat Models." arXiv:2307.09288. Documents five iterative RLHF rounds, separate reward models for helpfulness and safety, rejection sampling fine-tuning followed by PPO, and over one million preference annotations. The most detailed public account of a production RLHF pipeline.
-      </Prose>
-
-      <Prose>
-        <strong>Gao, Schulman, Hilton (2023).</strong> "Scaling Laws for Reward Model Overoptimization." arXiv:2210.10760. ICML 2023. Formalizes the reward hacking phenomenon: gold-standard human preference peaks at a finite KL and then declines as the proxy reward model score continues rising. Shows that the peak KL and the rate of decline scale smoothly with reward model size and preference dataset size.
-      </Prose>
-
-      <H3>10.2 Follow-on work worth reading</H3>
-
-      <Prose>
-        <strong>Rafailov, Sharma, Mitchell, Manning, Ermon, Finn (2023).</strong> "Direct Preference Optimization: Your Language Model is Secretly a Reward Model." arXiv:2305.18290. NeurIPS 2023. Derives a closed-form loss that optimizes the RLHF objective without a reward model or PPO, training directly on preference pairs with a supervised objective. Foundational for the post-PPO alignment literature.
-      </Prose>
-
-      <Prose>
-        <strong>Ziegler, Stiennon, Wu, et al. (2019).</strong> "Fine-Tuning Language Models from Human Preferences." arXiv:1909.08593. The intermediate paper between Christiano 2017 and InstructGPT: first application to GPT-2, token-level KL formulation, and the SFT-before-RLHF finding.
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — Derive the Bradley-Terry gradient</H3>
-
-      <Prose>
-        Starting from the reward model loss <Code>L_RM = -E[log σ(r_φ(x, y_w) - r_φ(x, y_l))]</Code>, derive the gradient with respect to the reward model parameters <Code>φ</Code>. Show that the gradient points in the direction of increasing the gap between chosen and rejected reward, and that the magnitude of the gradient is largest when the model is most uncertain (i.e., when the sigmoid output is near 0.5). What does this imply about which training pairs are most informative?
-      </Prose>
-
-      <Callout accent="green">
-        Hint: let <Code>delta = r_w - r_l</Code>. Then <Code>d/d(delta) [-log σ(delta)] = -(1 - σ(delta))</Code>. Apply the chain rule through <Code>delta</Code> to <Code>φ</Code>. The gradient magnitude is <Code>(1 - σ(delta))</Code>, which is maximized at <Code>delta = 0</Code>.
-      </Callout></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — Design an active learning scheme</H3>
-
-      <Prose>
-        Human annotation is expensive. Design an active learning strategy for selecting which (prompt, response_A, response_B) pairs to show to annotators, given a partially trained reward model. Your strategy should: (a) maximize information gain per annotation, (b) maintain coverage across the prompt distribution, and (c) avoid concentrating queries in regions the current policy visits often (which would cause RM to overfit to the current policy distribution). Describe how you would estimate RM uncertainty, and what failure modes your strategy introduces.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — Pick β from KL vs reward curves</H3>
-
-      <Prose>
-        You are running a PPO training job and have monitoring data showing two curves: (A) reward model score vs training step, and (B) KL divergence from SFT vs training step. You observe that the RM score is still rising at step 200, but human evaluation (run at steps 50, 100, 150, 200) shows human preference peaked at step 100 and has since declined. At step 100, KL was 3.2 nats; at step 200, KL is 8.7 nats. Given this, what <Code>β</Code> target would you set for your next run? How would you use AdaptiveKLController to enforce it? What additional signal would you collect to confirm your new <Code>β</Code> is better?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — Detect reward hacking from rollout statistics</H3>
-
-      <Prose>
-        Without running a human evaluation, design a set of automatic statistics you would monitor during PPO training to detect reward hacking early. Consider: response length distribution, token entropy, bigram repetition rate, frequency of specific phrases ("Great question!", "As an AI"), refusal rate on sensitive prompts, and calibration of the policy's stated confidence against factual accuracy on a held-out benchmark. For each statistic, describe the direction of change that would indicate hacking and the threshold at which you would intervene.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — Isolate RM vs PPO contribution</H3>
-
-      <Prose>
-        Your RLHF pipeline produces a model that human raters prefer over the SFT baseline on 71% of prompts. Your manager asks: "How much of this improvement came from the reward model and how much from the PPO training?" Design an ablation study to answer this question. Consider the following conditions: (a) SFT baseline, (b) SFT + best-of-N sampling against the RM (no policy update), (c) SFT + PPO with a random reward signal and the same KL coefficient, (d) full RLHF. What does each comparison isolate? What confounders remain? How would you present the results to a non-ML audience?
-      </Prose></div></section>
-
+      <Anchor id="11-self-check-exercises" />
+      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+        <H2>13. Independent practice</H2>
+        <Prose>
+          These cases change the numbers, masks or decision. Use the hints if useful; each complete
+          solution explains the operation and its limit.
+        </Prose>
+        <Exercise
+          title="1. Change the instruction."
+          hint={<p>Separate factual correctness, task compliance and the source of a label.</p>}
+          solution={
+            <p>
+              For “Give the country and capital in a complete sentence,” B's sentence can fit better
+              than A's isolated “Paris,” even though both contain the correct capital. The
+              prompt-conditioned preference reverses; a universal shorter-is-better score would not.
+              A stipulated winner is constructed supervision. To call it observed human feedback,
+              collect an actual judgment under stated instructions and preserve its provenance.
+              Agreement by several people still does not establish every factual or safety property.
+            </p>
+          }
+        >
+          Change the opening request to “Give the country and capital in a complete sentence.”
+          Explain which response you prefer, why the old length rule fails, and what evidence would
+          justify calling the label human feedback.
+        </Exercise>
+        <Exercise
+          title="2. Repair a leaking split and choose new queries."
+          hint={
+            <p>
+              Move groups before measuring performance. Uncertainty alone is not a coverage policy.
+            </p>
+          }
+          solution={
+            <p>
+              Rows a and c must share a partition because their initial question is Q1; rows b and d
+              must also move together for Q2. One valid split trains on both Q1 rows and evaluates
+              both Q2 rows, although that tiny test cannot represent a broad domain. For new
+              annotation, reserve evaluation first, sample across declared prompt strata and policy
+              behaviors, then combine uncertain pairs with diverse and high-impact cases. Keep
+              presentation order balanced and permit ties/unknown. A model near .5 can indicate a
+              useful close choice or a malformed/unjudgeable pair; inspect the text. Measure
+              held-out ranking/probability error and stratum coverage after a fixed annotation
+              budget, including annotator disagreement, rather than repeatedly selecting questions
+              until a preferred score appears.
+            </p>
+          }
+        >
+          Rows a/c share initial question Q1 and rows b/d share Q2. A proposed split trains on a/b
+          and tests on c/d. Repair it. Then design a twenty-pair annotation round that uses reward
+          uncertainty without excluding unrepresented prompt types; state what you would measure.
+        </Exercise>
+        <Exercise
+          title="3. Update a changed reward head."
+          hint={<p>Compute the shared representation difference before multiplying by p−q.</p>}
+          solution={
+            <p>
+              The scores are .4 and .6, so d=−.2 and p≈.450166003. With q=1, p−q≈−.549833997. The
+              difference hA−hB is [2,−2], giving gradient [−1.099667995, 1.099667995]. Subtract .1
+              times that gradient: w becomes [.2099667995, .0900332005]. The common bias cancels and
+              has zero pair gradient. The updated gap is about .239867198, so A's modeled
+              probability rises. This is one shared-weight step, not independently assigning two new
+              scores.
+            </p>
+          }
+        >
+          Let hA=[2,1], hB=[0,3], w=[.1,.2], common bias 0, target q=1 and learning rate .1. Compute
+          scores, probability, weight gradient and the next weights.
+        </Exercise>
+        <Exercise
+          title="4. Diagnose an impossible scalar ordering."
+          hint={<p>Add the three strict inequalities.</p>}
+          solution={
+            <p>
+              The first two imply rA&gt;rC, contradicting rC&gt;rA. Equivalently, the sum of the
+              three requested positive score differences is zero. A scalar model can compromise
+              probabilistically, but cannot satisfy all three strict comparisons at once for the
+              same conditioning information. Inspect whether prompts, instructions or annotator
+              groups differ; these may require additional conditioning or a richer preference
+              representation. Majority vote can choose a training label but does not prove the
+              underlying disagreement was meaningless.
+            </p>
+          }
+        >
+          At the same prompt and criterion, comparisons request A&gt;B, B&gt;C and C&gt;A. Show why
+          no scalar scores satisfy all three. Name two evidence checks before deleting a label.
+        </Exercise>
+        <Exercise
+          title="5. Compute a changed reference penalty."
+          hint={<p>Weight each log ratio by its current probability.</p>}
+          solution={
+            <p>
+              The two log ratios are log(1.4)≈.336472237 and log(.6)≈−.510825624. Their weighted
+              contributions are about .235530566 and −.153247687, summing to KL≈.082282879 nats. A
+              sample of the second response has a negative log ratio; that does not contradict the
+              positive full expectation. At β=.3, the exact penalty is about .024684864 reward
+              units. Changing the reference weights instead of the current weights would compute a
+              different expectation.
+            </p>
+          }
+        >
+          For π=[.7,.3], reference=[.5,.5] and β=.3, compute both signed KL contributions, their sum
+          and the penalty. Explain a negative one-sample estimate.
+        </Exercise>
+        <Exercise
+          title="6. Scale and support."
+          hint={<p>Look at r/β and at the multiplicative reference mass.</p>}
+          solution={
+            <p>
+              Multiplying all rewards and β by four leaves every r/β unchanged, so the normalized
+              optimum is identical. Adding any common reward offset also cancels. With reference
+              [.4,.6,0], rewards [0,0,100] and positive β, the third response remains unsupported;
+              the optimum is [.4,.6,0]. Its large reward cannot compensate for infinite KL at
+              positive mass. A practical softmax usually assigns positive mathematical mass to every
+              unmasked action, but hard sampling masks or an explicitly finite reference can change
+              support.
+            </p>
+          }
+        >
+          Explain what happens when both rewards and β are multiplied by four. Then solve the
+          supported optimum for reference [.4,.6,0] and rewards [0,0,100].
+        </Exercise>
+        <Exercise
+          title="7. Check a new baseline exactly."
+          hint={<p>Use score vectors [.6,−.6] and [−.4,.4].</p>}
+          solution={
+            <p>
+              Without a baseline, action A gives [1.8,−1.8] and B gives [.4,−.4]; the mean is
+              [.96,−.96]. With b=1, the estimates are [1.2,−1.2] and [.8,−.8], with the same mean.
+              For either coordinate, variance is .4(.24²)+.6(−.16²)=.0384 with the baseline, versus
+              .4(.84²)+.6(−.56²)=.4704 without it. The baseline here reduces variance. Replacing b
+              by each action's own reward makes both estimates zero and biases this nonzero-gradient
+              case.
+            </p>
+          }
+        >
+          Let p=[.4,.6], rewards=[3,−1] and state-only baseline b=1. In two-softmax-logit
+          coordinates, compute both possible estimates, their expected gradient and each
+          coordinate's variance. Compare b=0 and the action-dependent b(y)=r(y).
+        </Exercise>
+        <Exercise
+          title="8. Locate the first response target."
+          hint={
+            <p>The target is one position after its predicting logit; validity comes from roles.</p>
+          }
+          solution={
+            <p>
+              Positions 0–3 are prompt, 4–6 are response tokens and 7 is EOS; padding occupies 8–9.
+              Attention validity is [1,1,1,1,1,1,1,1,0,0]. Same-position causal labels are
+              [−100,−100,−100,−100,7,9,12,2,−100,−100]. Predicting logits 3, 4, 5, 6 score targets
+              4, 5, 6, 7, giving four contributions. GPT2 receives those unshifted same-length
+              labels and shifts internally. Even if padding IDs were also 2, positions 8–9 would
+              remain excluded while genuine EOS at position 7 remains scored. Ignoring prompt loss
+              does not prevent response gradients from flowing through prompt context.
+            </p>
+          }
+        >
+          A complete stream is [1,3,5,6,7,9,12,2,0,0]. The prompt occupies positions 0–3, response
+          tokens 4–6, EOS at position 7 and PAD at positions 8–9. Write attention validity,
+          same-position labels and the predicting positions. What changes if PAD shares EOS's ID?
+        </Exercise>
+        <Exercise
+          title="9. Change the trajectory boundary."
+          hint={<p>Start with the final delta, then propagate one half of it backward.</p>}
+          solution={
+            <p>
+              For a true terminal, δ=[.2+.4−.3, 1−.4]=[.3,.6]. GAE gives A=[.3+.5(.6),.6]=[.6,.6]
+              and targets [.9,1]. For a continuing cutoff with Vnext=.8, only the final residual
+              directly changes: δ1=1+.8−.4=1.4. The earlier advantage also changes through the
+              trace, giving A=[1,1.4] and targets [1.3,1.8]. Neither case carries an advantage trace
+              into the next episode. A maximum-length boundary must be assigned one of these task
+              meanings explicitly.
+            </p>
+          }
+        >
+          Use rewards [.2,1], values [.3,.4], γ=1 and λ=.5. Compute GAE and targets for a true
+          terminal. Repeat with a continuing cutoff whose next-state value is .8.
+        </Exercise>
+        <Exercise
+          title="10. Read the negative-advantage branch."
+          hint={<p>Evaluate both products before taking their minimum.</p>}
+          solution={
+            <p>
+              At ratio 1.4, the unclipped product is −4.2 and the clipped product is −3.3, so the
+              surrogate is −4.2 with ratio slope −3. Increasing a negatively advantaged action is
+              harmful and remains penalized. At ratio .7, the two products are −2.1 and −2.7; the
+              surrogate is −2.7 and locally flat below .9. Lowering its probability past the helpful
+              boundary gains no further surrogate benefit. Neither calculation clamps the actual
+              ratio, and shared parameters can still move it.
+            </p>
+          }
+        >
+          Let A=−3 and ε=.1. Compute the surrogate at ratio 1.4 and ratio .7, identify its local
+          slope, and explain why only one side is flat.
+        </Exercise>
+        <Exercise
+          title="11. Repair a moving old policy."
+          hint={
+            <p>The denominator identifies the distribution that generated the stored action.</p>
+          }
+          solution={
+            <p>
+              Store old selected-token log probabilities under no_grad when collecting the rollout,
+              and retain them across all minibatches and epochs from that rollout. Recompute only
+              current log probabilities during each update. Replacing old values with each current
+              forward pass resets ratios toward 1 and removes the intended record of cumulative
+              movement from collection. Advantages and targets must also remain fixed within the
+              round. After fresh generation, use a fresh old snapshot; the fixed SFT reference still
+              serves a different role.
+            </p>
+          }
+        >
+          A loop overwrites old_logp with the current model's log probabilities before every
+          minibatch. Explain the bug and write the corrected collection/update boundary in words.
+        </Exercise>
+        <Exercise
+          title="12. Modify the complete program."
+          hint={<p>Separate a frozen trajectory calculation from a future on-policy collection.</p>}
+          solution={
+            <p>
+              On the unchanged saved trajectory, adding 1 to its terminal score adds 1 to its final
+              residual and adds (γλ) raised to the distance from that action to each earlier
+              unnormalized advantage. With γ=1, λ=.95 and three actions, the additions are
+              [.9025,.95,1]. Stored old/reference log probabilities, action IDs, mask and values
+              stay fixed. Targets increase by the same amounts; valid-normalized advantages need not
+              shift by those amounts because their mean/variance are recomputed. A later trained
+              policy can generate different actions, so that future rollout is not a controlled
+              fixed-trajectory comparison. Test the unnormalized recursion first.
+            </p>
+          }
+        >
+          On a saved three-action rollout, increase only the terminal reward by 1 with γ=1 and
+          λ=.95. Predict changes and invariants before editing token_credit.py. Explain why the same
+          statement does not determine the next generated response.
+        </Exercise>
+        <Exercise
+          title="13. Repair the library pair."
+          hint={
+            <p>
+              Use either explicit shared prompt plus suffixes, or complete candidates without a
+              separate prompt.
+            </p>
+          }
+          solution={
+            <p>
+              With prompt='Question: X\\nAnswer:', chosen and rejected must contain only their
+              respective suffixes. If they already contain the full prompt, remove the separate
+              prompt column or split the suffixes exactly; do not duplicate the context. In the
+              declared max_length 192 route, a tokenized candidate of 193 makes its entire
+              comparison pair fail the filter, even if the other candidate is short. Count that
+              removal and preserve the source record separately. Cropping it to 192 would implement
+              a different data policy and might delete EOS or the decisive answer span.
+            </p>
+          }
+        >
+          A record has a prompt column and also repeats that full prompt at the start of both
+          candidates. Repair it. One complete tokenized candidate is 193 tokens at max_length 192;
+          state what the current RewardTrainer does and why silently cropping is not equivalent.
+        </Exercise>
+        <Exercise
+          title="14. Decide from conflicting evidence."
+          hint={
+            <p>
+              Name the claim each measurement supports and the missing denominator or evaluation
+              source.
+            </p>
+          }
+          solution={
+            <p>
+              A higher proxy score establishes that the measured samples receive higher scores from
+              that predictor. It does not establish better task performance. The criterion fell from
+              18/30=.6 to 12/30=.4 on this small set, while unchanged held-out pair accuracy says
+              only that the reward's ranking behavior on those fixed comparisons stayed the same.
+              Inspect literal failures and prompt strata, then collect independent judgments or
+              verified outcomes on new policy samples under a reserved protocol. More uncertainty
+              estimates and repeated prospective seeds can help, but do not erase the observed
+              decline or tune on the evaluation set. β should be assessed with reward units and
+              measured tradeoffs, not a universal KL cutoff.
+            </p>
+          }
+        >
+          A new policy raises mean proxy reward from 1 to 2.5, leaves the reward model's fixed
+          held-out pair accuracy at .65, and changes task successes from 18/30 to 12/30. What can
+          you conclude? Specify the next evaluation and one reason a larger β alone is not a
+          complete diagnosis.
+        </Exercise>
+        <Exercise
+          title="15. Design a budget-aware ablation."
+          hint={<p>Count annotation information, training work and generation work separately.</p>}
+          solution={
+            <p>
+              Freeze prompt-family splits and an independent response evaluation protocol. Train
+              SFT, then compare that checkpoint, best-of-N using the same frozen reward, and PPO
+              from the same checkpoint. Use the same available comparison labels for
+              reward-dependent routes and report which route consumes them. Fix a declared
+              candidate-token budget per evaluated prompt or report a
+              performance-versus-inference-budget curve; a one-sample PPO answer and N-sample
+              selector have different inference costs. Separately report SFT/reward/policy update
+              work, collection tokens and annotation effort. An ablation removing the reference
+              penalty tests one mechanism only if the rest of the protocol stays fixed. Several
+              seeds estimate training variability; prompt-group resampling respects
+              repeated-question dependence. No hypothetical table counts as a performed experiment.
+            </p>
+          }
+        >
+          Compare SFT, best-of-N and PPO under a defensible budget. State fixed inputs, separate
+          costs, evaluation signals, one ablation and the remaining confounder if best-of-N samples
+          more answers at inference.
+        </Exercise>
+      </section>
+
+      <Anchor id="10-primary-sources" />
+      <Sources
+        alternatives={
+          <>
+            <p>
+              <a href="https://rlhfbook.com/c/03-training-overview">Nathan Lambert's RLHF Book</a>{' '}
+              offers a second continuous explanation. After section 3, read{' '}
+              <a href="https://rlhfbook.com/c/05-reward-models">Reward Modeling</a> for scalar heads
+              and pair probabilities; after section 8, read{' '}
+              <a href="https://rlhfbook.com/c/06-policy-gradients">Policy Gradients</a> for
+              estimator and implementation choices. Its code conventions should be compared
+              explicitly with this lesson's masking and reductions.
+            </p>
+            <p>
+              <a href="https://cmu-l3.github.io/anlp-fall2025/static_files/anlp-f2025-15-rl-llms.pdf">
+                CMU Advanced NLP, Reinforcement Learning for LLMs, fall 2025
+              </a>{' '}
+              provides an alternate token-versus-response decision-process treatment and connects
+              task, initialization, reward and optimization. Use its token-state drawing to redraw
+              section 6 with your own prompt. Compare where the token-level diagram places states,
+              actions and rewards with the whole-response view.
+            </p>
+            <p>
+              <a href="https://spinningup.openai.com/en/latest/algorithms/ppo.html">
+                Spinning Up's PPO explanation
+              </a>{' '}
+              is a focused next reading for both advantage signs, the clipped surrogate and
+              practical stopping. Read it alongside the two plots in section 8 and identify exactly
+              why a plateau is not a hard constraint.
+            </p>
+          </>
+        }
+      >
+        <li>
+          <a href="https://arxiv.org/abs/1706.03741">
+            Christiano et al., Deep Reinforcement Learning from Human Preferences (2017)
+          </a>{' '}
+          — primary preference-model and policy-learning loop, including ties, unjudgeable
+          comparisons and query selection. The paper's environment experiments are not locally
+          reproduced.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/1909.08593">
+            Ziegler et al., Fine-Tuning Language Models from Human Preferences (2019)
+          </a>{' '}
+          — language-model preference optimization and reference regularization.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/2009.01325">
+            Stiennon et al., Learning to Summarize from Human Feedback (2020)
+          </a>{' '}
+          — summary comparisons and the relationship between optimization and independent human
+          evaluation.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/2203.02155">
+            Ouyang et al., Training Language Models to Follow Instructions with Human Feedback
+            (2022)
+          </a>{' '}
+          — demonstrations, reward modeling, policy optimization and stated evaluation populations.
+          No paper headline is substituted for the small local evidence.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/2204.05862">
+            Bai et al., Training a Helpful and Harmless Assistant with Reinforcement Learning from
+            Human Feedback (2022)
+          </a>{' '}
+          and <a href="https://github.com/anthropics/hh-rlhf">HH-RLHF data repository</a> — primary
+          task/data context and the actual helpful-base source used here. This lesson uses the
+          helpful subset and a documented new grouped split.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/1707.06347">
+            Schulman et al., Proximal Policy Optimization Algorithms (2017)
+          </a>{' '}
+          — original clipped surrogate and multiple epochs over collected observations.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/1506.02438">
+            Schulman et al., High-Dimensional Continuous Control Using Generalized Advantage
+            Estimation (2015)
+          </a>{' '}
+          — residual expansion, γ and λ, and the value/advantage distinction.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/2210.10760">
+            Gao et al., Scaling Laws for Reward Model Overoptimization (2022)
+          </a>{' '}
+          — controlled proxy-versus-gold-model evidence. Its synthetic gold reward is not human
+          truth, and its numerical optima are not copied into this lesson.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/2403.17031">
+            Huang et al., The N+ Implementation Details of RLHF with PPO (2024)
+          </a>{' '}
+          — token reward/value anatomy and implementation distinctions. Follow the token-level
+          reward and value diagrams to compare terminal-score placement, masks and training
+          conventions with this lesson's complete loop.
+        </li>
+        <li>
+          <a href="https://github.com/huggingface/trl/blob/v1.14.2/trl/trainer/reward_trainer.py">
+            TRL 1.14.2 RewardTrainer source
+          </a>{' '}
+          and{' '}
+          <a href="https://github.com/huggingface/trl/blob/v1.14.2/trl/trainer/reward_config.py">
+            RewardConfig source
+          </a>{' '}
+          — exact pair ordering, prompt concatenation, EOS insertion, pair filtering and loss
+          options used in the native route.
+        </li>
+      </Sources>
+      <section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+        <H2>Readiness and the next question</H2>
+        <Prose>
+          Continue when you can derive a pair gradient, distinguish old policy from fixed reference,
+          locate the first response logit and EOS target, trace GAE backward, explain both clipping
+          branches, and challenge a proxy gain with separate evidence. You should also be able to
+          run the full program and identify which arrays are detached and which model receives each
+          gradient. The next question is whether comparison data can train the policy directly
+          without an explicit learned reward-and-PPO loop.{' '}
+          <a href="/learn/path/full-curriculum/dpo-direct-preference-optimization?module=large-language-models">
+            Direct Preference Optimization
+          </a>{' '}
+          starts from the reference-tilted optimum and derives that alternative.
+        </Prose>
+      </section>
     </div>
   ),
 };

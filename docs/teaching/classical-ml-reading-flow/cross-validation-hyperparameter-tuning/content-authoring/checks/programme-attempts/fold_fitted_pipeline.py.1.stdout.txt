@@ -1,0 +1,7 @@
+state {"medians": [2.0], "means": [2.0], "variances": [2.0], "scales": [1.4142135623730951], "vocabularies": [["__missing__", "a", "b"]]}
+held transform [[5.6568542495, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0]]
+ordinary transform [[5.6568542495, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0]]
+fold [3, 4, 5, 6] [0, 1, 2] [1, 1, 1] 0 3 mean (np.float64(4.5),) variance (np.float64(1.25),)
+fold [0, 1, 2, 5, 6] [3, 4] [0, 1] 1 2 mean (np.float64(2.8),) variance (np.float64(5.36),)
+fold [0, 1, 2, 3, 4] [5, 6] [1, 1] 2 2 mean (np.float64(2.0),) variance (np.float64(2.0),)
+fold mean 0.5 pooled 0.42857142857142855 ordinary fold scores [0.0, 0.5, 1.0]

@@ -1,0 +1,93 @@
+{
+  "topic": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+  "reviewer": "independent multilingual-vocabulary agent; not the subword author",
+  "checked_at": "2026-09-28T15:53:01.545747+00:00",
+  "status": "passed",
+  "checks": {
+    "ranked_neighbor_result": [
+      "a",
+      "bca"
+    ],
+    "overlap_pair_occurrences": 12,
+    "overlap_actual_replacements": 6,
+    "wordpiece_native_unicode_and_greedy_counterexamples": {
+      "café": [
+        "ca",
+        "##fé"
+      ],
+      "café": [
+        "[UNK]"
+      ],
+      "abc": [
+        "[UNK]"
+      ]
+    },
+    "three_path_mass": 0.140625,
+    "three_path_expected_counts": {
+      "a": 0.6666666666666666,
+      "aa": 0.4444444444444444,
+      "ab": 0.4444444444444444,
+      "b": 0.5555555555555556
+    },
+    "em_updated_probabilities": {
+      "a": 0.3157894736842105,
+      "aa": 0.21052631578947367,
+      "ab": 0.21052631578947367,
+      "b": 0.2631578947368421
+    },
+    "pruned_fixed_weight_mass": 0.078125
+  },
+  "limits": "Independent source/pedagogy review plus changed mathematical and native fixtures. Browser screenshots, copy/download behavior and full build are root integration evidence, not claimed here.",
+  "sources": {
+    "src/learn/data/topics/tokenization.jsx": "710dbe5ca2a3a07fc1712525d7242ff79cec005685d69b444ee057d67ee5a4f5",
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "ff86da2b70beb758e735908171151ea5bc5b9d7f187e412137b6fb22884cccec",
+    "src/learn/components/lesson-labs/subword-tokenization-lessons.css": "014ec7750380802226aeb974bdc3f5bd7933e2b2b0545fd4558cc1218dbed775",
+    "src/learn/data/curriculum/blueprints/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram.js": "5bc61ad38a12ecb602fd069ccbaa01f53d51508688e0e741e5c86312b91ccfb4",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/design.md": "ac5e6cfab157d4051dc14c1ce3071be77ac246b3e5c2d93c37284e68348276a7",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/native-output.json": "cf3d91aabd588d69198bba42f8484240e08b66133304ca8bac8a66926c8b220e",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/author-numerical.json": "985bc89a52ac672f1cf30dbc659fc08adf6ac8dbc89c80ad021d4e6d8b99f10f",
+    "scripts/review-subword-tokenization.py": "01ed2ccdb03543cdcc363f7e58602e856ee3c24247f439565a97ab2bc0d86932",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-provenance.json": "58047ab67319ff4ad1511508bf8f3cd96afa40ac129e070454e9203b76733741",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/tokenizer_libraries.py": "febb16e52cd5a0a5dec8039db1aab6cff85bcf6c3306b57bbb98300887cbdfc3",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/unigram_model.py": "5a3ea845833594ca5c7aaed1fb4d63ef92c0ed7d70d2af35436505e985b95d1d",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/author-evidence.json": "6d82457f21bca886f6407650e7903ceefd2c3a041569d4d95d92f63924d6f1fc"
+  },
+  "source_review_followup": {
+    "checked_at": "2026-09-28T15:54:59.295874+00:00",
+    "path": "src/learn/components/lesson-labs/subword-tokenization-lessons.css",
+    "previous_sha256": "23e39a128ac93cac072b4d1cb6178fa9bf483904b36efa01e2ddf8de1f1ed7d3",
+    "current_sha256": "014ec7750380802226aeb974bdc3f5bd7933e2b2b0545fd4558cc1218dbed775",
+    "scope": "Reviewed CSS-only increase of lattice text from 14 to 20 SVG units at widths <=480px. Fixed viewBox and labels remain separated; no scientific model or program change. Numerical checked_at above is preserved; no numerical rerun claimed. Root owns rendered production confirmation."
+  },
+  "packaging_review_followup": {
+    "checked_at": "2026-09-28T16:01:22.983262+00:00",
+    "checks": [
+      {
+        "path": "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-train.txt",
+        "previous_sha256": "724d3e82838a65c7a5a319f4b39bcf0ed9354679b65341f0f99be9b23da673a5",
+        "current_sha256": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+        "paragraphs": 18,
+        "exact_previous_bytes_reconstructed_by_CRLF": true
+      },
+      {
+        "path": "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-heldout.txt",
+        "previous_sha256": "cd962aa922f74e49e565e0b26c4ef3fd3ff798bd7b12eccfdc5875247d0a2e43",
+        "current_sha256": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+        "paragraphs": 6,
+        "exact_previous_bytes_reconstructed_by_CRLF": true
+      }
+    ],
+    "scope": "Only LF packaging and matching provenance changed. Reconstructed old CRLF file bytes and matched their previously reviewed hashes, then compared parsed paragraph lists exactly. Scientific programs/models and actual native output unchanged; original numerical checked_at preserved and no retraining rerun claimed."
+  },
+  "content_review_followup": {
+    "checked_at": "2026-09-28T16:04:53.743332+00:00",
+    "path": "src/learn/data/topics/tokenization.jsx",
+    "previous_sha256": "8a69e6bec963b0a13d3b597fba99dc6fdaef55c8bbfb30a7176e68740d515605",
+    "current_sha256": "710dbe5ca2a3a07fc1712525d7242ff79cec005685d69b444ee057d67ee5a4f5",
+    "scope": "Read revised complexity paragraph and apply_bpe implementation. The rank dictionary is constructed from M merges within each nontrivial call, so O(M) setup is now separated from O(n log n) heap work; caching is advice rather than a claimed existing mechanism. Executable sources unchanged, prior numerical timestamp preserved and no new execution claimed."
+  }
+}

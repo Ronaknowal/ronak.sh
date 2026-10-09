@@ -1,0 +1,1353 @@
+{
+  "status": "SECTION19_24_SOLVED_TASKS_FILES_RESOURCES_COMPLETE_SCOPED_NOT_WHOLE_TOPIC_READY",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T12:36:14.042Z",
+  "acceptedAnchor": "19-solve-changed-tasks-use-files-and-follow-useful-next-questions",
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\section-nineteen.md",
+      "bytes": 46196,
+      "sha256": "b6b2a6dd344d1a009f69c08f9de7089a973b197fcf3466117dfe2ea5bcdc925c"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\ending-specifications.md",
+      "bytes": 5111,
+      "sha256": "f6f63449d17cca630d3c67e788b32bd91cff28e97d088bdcf17db51c0692899e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\practice-resources-authoring\\check-ending.mjs",
+      "bytes": 9512,
+      "sha256": "7c80062aecd859bac9edfa83acf6e376a6004debe053a4cb6472f8c2fa5ce6cd"
+    }
+  ],
+  "sectionInputs": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\section-ten.md",
+      "bytes": 23736,
+      "sha256": "50171e1037c56cb3cf733a2c5135afb9eb5091cf27a85d4626f2441aff30149a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\section-eleven.md",
+      "bytes": 34763,
+      "sha256": "176127f2cef2adb19e89025e11e3f1c2db73c8bebb28a443447874c085084c38"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-twelve.md",
+      "bytes": 38665,
+      "sha256": "ee7a9ad333470c5e396f6422b1b0fa148f5b61bd25254504f8c39d4f9f7df2b6"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\section-thirteen.md",
+      "bytes": 59217,
+      "sha256": "822556372bebb79c36fc862b278abd419f146c64a83efb3304416a5fc9298eb6"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\identifiability-authoring\\section-fourteen.md",
+      "bytes": 7944,
+      "sha256": "ec3a6043ea9627f29cc9dfdf09e3485aa6b8ca302bc91298a0bf256728ff7854"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\section-fifteen.md",
+      "bytes": 18130,
+      "sha256": "9ec632f4e07841213af497cf8d2553f1f814d8ee9c17c89be8ce7f855db5d990"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-sixteen.md",
+      "bytes": 34463,
+      "sha256": "1bbcf017f7c2fe9f19864ae426fc5ba99519507a15821f01f4d9163089fd9517"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\section-seventeen.md",
+      "bytes": 25413,
+      "sha256": "f18fade18b4dca3d84bd3632db9df94502ec82f8edd94b2c13e97c53f2e48d50"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\section-eighteen.md",
+      "bytes": 16697,
+      "sha256": "d894dcb2cf95e314d86448d4a6657eb9650beec44dbee54ba3a244a72880006d"
+    }
+  ],
+  "fileManifest": [
+    {
+      "file": "centered_pca.py",
+      "role": "unchanged helper",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+        "bytes": 5089,
+        "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+      }
+    },
+    {
+      "file": "nmf_arrays.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+        "bytes": 7230,
+        "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+      }
+    },
+    {
+      "file": "nmf_coordinate.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_coordinate.py",
+        "bytes": 9109,
+        "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+      }
+    },
+    {
+      "file": "nmf_nnls.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_nnls.py",
+        "bytes": 2256,
+        "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+      }
+    },
+    {
+      "file": "nmf_multiplicative.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_multiplicative.py",
+        "bytes": 8988,
+        "sha256": "56d22f18907297f5c1239e31e98071e6bde0d33c5d2c5a1cbc9aa92546c210f9"
+      }
+    },
+    {
+      "file": "nmf_beta_mm.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_beta_mm.py",
+        "bytes": 10103,
+        "sha256": "92fa782d807217caa2edb033b22ad9ccfab207d6497a7ef0cc15cd600eb81815"
+      }
+    },
+    {
+      "file": "nmf_initialization.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_initialization.py",
+        "bytes": 6885,
+        "sha256": "1b6696a60871fcc092e7e5d2232f2d0d09ff19b6eb964d9b35ba3c12e87b7cde"
+      }
+    },
+    {
+      "file": "ordinary_nmf_lifecycle.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\ordinary_nmf_lifecycle.py",
+        "bytes": 6184,
+        "sha256": "bcb1705c424895be7629900ba26005629c7f0701faeb41c1f31c08980218122b"
+      }
+    },
+    {
+      "file": "nmf_penalties_masks.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_penalties_masks.py",
+        "bytes": 15667,
+        "sha256": "66011064d265a75292ce62978ce7aa81cdb018b3f5ed2a1717266a0de483a3dd"
+      }
+    },
+    {
+      "file": "nmf_factor_alignment.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_factor_alignment.py",
+        "bytes": 6580,
+        "sha256": "6505488fa7183cb8fb656629707eb9585b4228162764dd355ce8a5f4e60d257c"
+      }
+    },
+    {
+      "file": "nmf_saved_digits.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_digits.py",
+        "bytes": 6991,
+        "sha256": "ff1e4f2d5f395745e4f1b824bcb7c33d5dcb6d0bc025c7c68d717ec1c268ce14"
+      }
+    },
+    {
+      "file": "nmf_digit_comparison.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_digit_comparison.py",
+        "bytes": 4275,
+        "sha256": "36ac3ce284bfa74dd5ff25124327eca5c73b1e4d28603535df78961d448c1e0e"
+      }
+    },
+    {
+      "file": "nmf_anchors.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_anchors.py",
+        "bytes": 5319,
+        "sha256": "2dd67d6e1784525b356d39daf580f62499756319cd742dfba74b0bb418e74b30"
+      }
+    },
+    {
+      "file": "nmf_text_spectra.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+        "bytes": 9130,
+        "sha256": "2fbca92d514885bcf9b1d84dfd678437d09837a8fdad8ae7b9c02cfed3513c3b"
+      }
+    },
+    {
+      "file": "nmf_online.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_online.py",
+        "bytes": 7983,
+        "sha256": "44880c6ed798d3156d8f98dcc0d24df5794057f7d5f63889919d33838180db10"
+      }
+    },
+    {
+      "file": "nmf_axis_phase.py",
+      "role": "new computational source",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.py",
+        "bytes": 2229,
+        "sha256": "d3a454899bb6bc3946bf243f00264d571b488b21e7dadd174bad520cc10eb3b5"
+      }
+    },
+    {
+      "file": "nmf_step.py",
+      "role": "preserved decoded program",
+      "decodedFrom": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+        "bytes": 5471,
+        "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24"
+      },
+      "decodedCodeSha256": "b75511b9f0d8bacdf28a316351ac668ca7246cbe18de0c55d15f93002578c1a1",
+      "decodedOutputSha256": "0a0e7b7ba934a3f72ed27701cdd825698bafac0b2d3269c4dcef99a37aef060a",
+      "completeBody": "import numpy as np\n\nX = np.array([[2., 1., 3.], [1., 2., 3.], [3., 3., 6.]])\nW = np.array([[1., .5], [.5, 1.], [1., 1.]])\nH = np.array([[1., .2, .8], [.2, 1., .8]])\n\ndef objective(X, W, H):\n    return np.sum((X - W @ H) ** 2) / 2\n\nprint(0, round(objective(X, W, H), 8))\nfor iteration in range(1, 41):\n    H *= (W.T @ X) / ((W.T @ W) @ H)\n    W *= (X @ H.T) / (W @ (H @ H.T))\n    if iteration in (1, 2, 10, 40):\n        print(iteration, round(objective(X, W, H), 8))"
+    },
+    {
+      "file": "nmf_digits.py",
+      "role": "preserved decoded program",
+      "decodedFrom": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+        "bytes": 5471,
+        "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24"
+      },
+      "decodedCodeSha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989",
+      "decodedOutputSha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981",
+      "completeBody": "import numpy as np\nfrom sklearn.decomposition import NMF, PCA\nfrom sklearn.model_selection import train_test_split\n\ndata = np.loadtxt('digits-300.csv', delimiter=',', skiprows=1)\nsource_rows, labels = data[:, 0].astype(int), data[:, 1].astype(int)\nX = data[:, 2:] / 16\ntrain, rest = train_test_split(np.arange(len(X)), test_size=.4,\n                               random_state=19, stratify=labels)\nvalidation, test = train_test_split(rest, test_size=.5,\n                                    random_state=19, stratify=labels[rest])\n\nfor k in (1, 4, 8, 16):\n    for seed in (7, 19):\n        model = NMF(n_components=k, init='random', solver='cd',\n                    random_state=seed, max_iter=2000, tol=1e-5)\n        W_train = model.fit_transform(X[train])\n        W_validation = model.transform(X[validation])\n        H = model.components_\n        train_mse = np.mean((X[train] - W_train @ H) ** 2)\n        validation_mse = np.mean((X[validation] - W_validation @ H) ** 2)\n        print(k, seed, round(train_mse, 6), round(validation_mse, 6))\n\n# A fixed eight-component comparison chosen for inspectable image panels.\nnmf = NMF(n_components=8, init='random', solver='cd', random_state=19,\n          max_iter=2000, tol=1e-5).fit(X[train])\nW_test = nmf.transform(X[test])\nnmf_reconstruction = W_test @ nmf.components_\npca = PCA(n_components=8, svd_solver='full').fit(X[train])\npca_reconstruction = pca.inverse_transform(pca.transform(X[test]))\nmean_reconstruction = np.repeat(X[train].mean(axis=0)[None, :], len(test), axis=0)\nfor name, reconstruction in [('mean', mean_reconstruction),\n                             ('PCA8', pca_reconstruction),\n                             ('NMF8', nmf_reconstruction)]:\n    print(name, round(np.mean((X[test] - reconstruction) ** 2), 6))\nprint('first held-out source row', source_rows[test[0]])\nprint('first reconstructed image')\nprint(nmf_reconstruction[0].reshape(8, 8).round(2))"
+    },
+    {
+      "file": "nmf_words.py",
+      "role": "preserved decoded program",
+      "decodedFrom": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+        "bytes": 5471,
+        "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24"
+      },
+      "decodedCodeSha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343",
+      "decodedOutputSha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23",
+      "completeBody": "import numpy as np\nfrom sklearn.feature_extraction.text import CountVectorizer\nfrom sklearn.decomposition import NMF\n\ndocuments = ['orbit rocket orbit', 'rocket orbit rocket',\n             'goal team goal', 'team goal team',\n             'orbit rocket goal team']\nvectorizer = CountVectorizer()\nX = vectorizer.fit_transform(documents)\nmodel = NMF(n_components=2, init='nndsvda', solver='mu',\n            beta_loss='kullback-leibler', max_iter=1000,\n            tol=1e-5, random_state=19)\nW = model.fit_transform(X)\nH = model.components_\nmass = H.sum(axis=1)\nnormalized_patterns = H / mass[:, None]\namounts = W * mass\nprint(vectorizer.get_feature_names_out())\nprint(normalized_patterns.round(3))\nprint(amounts.round(3))\nnew = vectorizer.transform(['rocket team'])\nprint((model.transform(new) @ H).round(3))"
+    },
+    {
+      "file": "nmf_saved_state.json",
+      "role": "offline data/provenance",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_state.json",
+        "bytes": 69820,
+        "sha256": "46f3dc0931e3ccddc30cc3e30bbb4d3f330bc35a4dccccef33f74a63472eddd0"
+      }
+    },
+    {
+      "file": "digits-300.csv",
+      "role": "offline data/provenance",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-300.csv",
+        "bytes": 46235,
+        "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+      }
+    },
+    {
+      "file": "digits-data-provenance.md",
+      "role": "offline data/provenance",
+      "identity": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-data-provenance.md",
+        "bytes": 2939,
+        "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7"
+      }
+    }
+  ],
+  "streams": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_arrays.stdout.txt",
+      "bytes": 213,
+      "sha256": "a29980714874ff3c5e0f5b4b4238acf99a3e998cc36e9e49bccc8a7fec164009"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_coordinate.stdout.txt",
+      "bytes": 525,
+      "sha256": "c9f6c935d3dbeb5754943c046637556734f20c8eb00356118b7e83c929dc468e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_nnls.stdout.txt",
+      "bytes": 277,
+      "sha256": "d985954fd0fd74ca4ef4ed504c7403fc0f43c0ed1db8b28dfff89f5f2b3f4051"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_multiplicative.stdout.txt",
+      "bytes": 405,
+      "sha256": "2463a81a7757d551e9521c24e6eb58589a6b76df839efb1400a09c7262e2cf58"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\nmf_beta_mm.stdout.txt",
+      "bytes": 526,
+      "sha256": "87ab2d9faf5f1e8e1874ece88664b70ec1cedab2f84c19cc43fb27a850053a55"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\initialization-authoring\\initialization-main.stdout.txt",
+      "bytes": 875,
+      "sha256": "fc0ee263d36478e372b32b4f97d973468935691a1ced9e3595962006f9c60ef5"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\lifecycle-main.stdout.txt",
+      "bytes": 773,
+      "sha256": "c0623b08ca502f127cfe2488aa1db45eed3e0821b4a6f8c1c76e5a012b85b175"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\penalties-masks-main.stdout.txt",
+      "bytes": 784,
+      "sha256": "024907ee70452af2c13057d2e535ed3c02c2a78b195dd1578ed5711899ab1156"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+      "bytes": 702,
+      "sha256": "b5ab059aa2c342e16464e061e5fc8528c05c8fbe69eaca0daabf6827a0612e0a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+      "bytes": 9285,
+      "sha256": "472bd7083b1f348d37729b705c2b74163bebeecda1c109ea25adfd6ebdb8b5ac"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\representation-evaluation-authoring\\nmf_digit_comparison.stdout.txt",
+      "bytes": 38803,
+      "sha256": "b3ec28cea308fb5003d017f201fd47afbd7336db9bbda7c70a9c233dbcd44286"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\anchors-authoring\\nmf_anchors.stdout.txt",
+      "bytes": 496,
+      "sha256": "8bc8941bab29409882962876c722b685e1ef15dbb4783b9d12c3a99c5aa457bb"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "bytes": 6934,
+      "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\online-surrogate-authoring\\nmf_online.stdout.txt",
+      "bytes": 4228,
+      "sha256": "a7f59677f85590b65f4a76ec5a37d684c73f270cf0d156bb3471aeb2c5129316"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\axis-phase-authoring\\nmf_axis_phase.stdout.txt",
+      "bytes": 2292,
+      "sha256": "4ef80b4a363b2507bcb7f9fc5e331b44ce31645c164a2c412389622d9191cefc"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\multiplicative-kl-demo-correction\\positive-kl.stdout.txt",
+      "bytes": 222,
+      "sha256": "43fb77d25dc6c9bcdf8bc60de5b6eb89228990dcec35d59fa923b9c5d2360b47"
+    }
+  ],
+  "retainedReceipts": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\design-completion\\practice-arithmetic.json",
+      "bytes": 7514,
+      "sha256": "7c4a9266376ddd7e969854542f6d5fcbd2e8485887c36cddbe048d8c69286b53"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\foundation-program-checks.json",
+      "bytes": 9919,
+      "sha256": "4bdb745cb188196ab29e9ef8bd672edd52448bc9fc0479baf9a95af14e40e141"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\ordinary-state-authoring\\lifecycle-checks.json",
+      "bytes": 8014,
+      "sha256": "c073008510a905a9d338463e2a6f4fd7f6383bd49ccffbd5e5b985bb01b7dabd"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "A",
+      "heading": "### Practice A: preserve the observation when normalizing",
+      "bytes": 1310,
+      "sha256": "1ba1d9f93d5fee0f3738afd11b1a3901c4339ddaaa489229a8dd4f8c8e69a048"
+    },
+    {
+      "id": "B",
+      "heading": "### Practice B: one fixed-factor multiplicative update",
+      "bytes": 1165,
+      "sha256": "c897cf541dd9f21ef2af96643826041fef7eaf0aa9ca445082259c8fcf0d1d80"
+    },
+    {
+      "id": "C",
+      "heading": "### Practice C: distinguish a useful pattern from a biological source",
+      "bytes": 1645,
+      "sha256": "597c09a4abab09188ee6519b9121d6ff4d736e299e70e600fc9b3516f529cb9a"
+    },
+    {
+      "id": "D",
+      "heading": "### Practice D: remove an actual saved contribution",
+      "bytes": 1930,
+      "sha256": "ba504bee5a1c832d169ce47eec22da16b096188edf1471045fb1eb05a693ecfe"
+    },
+    {
+      "id": "E",
+      "heading": "### Practice E: repair representation leakage",
+      "bytes": 1460,
+      "sha256": "fe6904f8141836a6b908f47e4d4eddf1dcb50c71dfd37bb12cf70e177ae52899"
+    },
+    {
+      "id": "F",
+      "heading": "### Practice F: test joint convexity numerically",
+      "bytes": 891,
+      "sha256": "f1837c8145d3ffff4d8b11c21bd35fe07b2e115e771f191a080884abcb6d327a"
+    },
+    {
+      "id": "G",
+      "heading": "### Practice G: change the joint gain under three losses",
+      "bytes": 989,
+      "sha256": "1cad14b61a14e27ba3812f6633ca5a7024475ea14d4a93679f3dce5cae22fbf2"
+    },
+    {
+      "id": "H",
+      "heading": "### Practice H: an unchanged multiplicative coordinate can be wrong",
+      "bytes": 1156,
+      "sha256": "b26fe250c6c17313a46258ba2990b7b0f00e8d2896ab18dee76276ed2cf7fd97"
+    },
+    {
+      "id": "I",
+      "heading": "### Practice I: use the fresh coordinate",
+      "bytes": 769,
+      "sha256": "6778723e2e635a695764887b526ede3450d5371883a22b306174bce51417c7da"
+    },
+    {
+      "id": "J",
+      "heading": "### Practice J: clipping least squares is not NNLS",
+      "bytes": 985,
+      "sha256": "28523bfc0ae2946d077d557f0d8fbee679e5675fc73f28ffa90fa8e9e508560f"
+    },
+    {
+      "id": "K",
+      "heading": "### Practice K: missing is not measured zero",
+      "bytes": 867,
+      "sha256": "1d88b877a0afbfd474cc13ac687804142097f159a6f2ef9520dcf7c9da897ff0"
+    },
+    {
+      "id": "L",
+      "heading": "### Practice L: another joint midpoint",
+      "bytes": 740,
+      "sha256": "c40c1fdf684372a6207f65d878cb52e54483b6b13e334c617a26ba5261eeb867"
+    },
+    {
+      "id": "M",
+      "heading": "### Practice M: a feasible ambiguity beyond scale",
+      "bytes": 1022,
+      "sha256": "b78dc1a00846aa44b2e1f7381dd46fb154e408e33ed1abf5ee86ec6956b1d5bd"
+    },
+    {
+      "id": "N",
+      "heading": "### Practice N: ordinary rank can be too small",
+      "bytes": 1488,
+      "sha256": "63219652fea9f59e49d9ba1989230b0363d10c0426d1427341a6530c88c581a9"
+    },
+    {
+      "id": "O",
+      "heading": "### Practice O: reverse a raw ranking without changing anything observed",
+      "bytes": 909,
+      "sha256": "e64f2e766b78a573665ac89dc2e6b8af346658b4adff6d8e479805147595ac3f"
+    },
+    {
+      "id": "P",
+      "heading": "### Practice P: retain the stronger sign pair",
+      "bytes": 1457,
+      "sha256": "1bf3dd3189a0bac311874509c9e1a67b718f8016b568a92c06b92bbe972ab493"
+    },
+    {
+      "id": "Q",
+      "heading": "### Practice Q: verify the auxiliary upper bound",
+      "bytes": 950,
+      "sha256": "0e8f8c93efac6bf27afe90d07373187e827291b4fefaf5f42bab452ed9f8eb34"
+    },
+    {
+      "id": "R",
+      "heading": "### Practice R: a product-invariant rescaling can change the penalty",
+      "bytes": 1035,
+      "sha256": "282969830b3e899e6d4ed1676be138a5bd3746117346b0936949d8d4bc502bbc"
+    },
+    {
+      "id": "S",
+      "heading": "### Practice S: preserve global IDs when choosing anchors",
+      "bytes": 1396,
+      "sha256": "ac073607ce5fa4e4e684ff4227dbf7774c4dce7e167de6478d47ebb97796e08b"
+    },
+    {
+      "id": "T",
+      "heading": "### Practice T: query with fixed IDF",
+      "bytes": 1145,
+      "sha256": "528174d2522e5f9b4ed931f50984092f24ee114ef931bc17e8a7871e695d4316"
+    },
+    {
+      "id": "U",
+      "heading": "### Practice U: old statistics versus new encoding",
+      "bytes": 1225,
+      "sha256": "aacbe9d0d83a2750bc3a9ea0b33ce3c9aeb83a8930a4099f89f8b9af3ca8195f"
+    },
+    {
+      "id": "V",
+      "heading": "### Practice V: a rejected next fit must preserve the old query contract",
+      "bytes": 1756,
+      "sha256": "c3b840754e4a59020c5633511c29ca11fc363c31fa964cbd95fe3f80c5e93341"
+    },
+    {
+      "id": "W",
+      "heading": "### Practice W: refuse a changed objective masquerading as the original",
+      "bytes": 1381,
+      "sha256": "322c253f7e117bd4794dc7ff034880b5ff8e2eb57f2d366f64e1030329b82fac"
+    },
+    {
+      "id": "X",
+      "heading": "### Practice X: distinguish an address map from lost phase",
+      "bytes": 1114,
+      "sha256": "c743422d9ce32671ddea8cd9ea3dd63fff972980fdfa974cdcbae6ea553125a3"
+    }
+  ],
+  "checks": [
+    {
+      "name": "one complete section19",
+      "passed": true
+    },
+    {
+      "name": "24 unique tasks A through X",
+      "passed": true
+    },
+    {
+      "name": "taskA complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskA complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskA complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskA complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskA complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskB complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskB complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskB complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskB complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskB complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskC complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskC complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskC complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskC complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskC complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskD complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskD complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskD complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskD complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskD complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskE complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskE complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskE complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskE complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskE complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskF complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskF complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskF complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskF complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskF complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskG complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskG complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskG complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskG complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskG complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskH complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskH complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskH complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskH complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskH complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskI complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskI complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskI complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskI complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskI complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskJ complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskJ complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskJ complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskJ complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskJ complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskK complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskK complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskK complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskK complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskK complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskL complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskL complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskL complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskL complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskL complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskM complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskM complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskM complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskM complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskM complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskN complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskN complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskN complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskN complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskN complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskO complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskO complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskO complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskO complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskO complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskP complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskP complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskP complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskP complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskP complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskQ complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskQ complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskQ complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskQ complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskQ complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskR complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskR complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskR complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskR complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskR complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskS complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskS complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskS complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskS complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskS complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskT complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskT complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskT complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskT complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskT complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskU complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskU complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskU complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskU complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskU complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskV complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskV complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskV complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskV complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskV complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskW complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskW complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskW complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskW complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskW complete Success check",
+      "passed": true
+    },
+    {
+      "name": "taskX complete Task",
+      "passed": true
+    },
+    {
+      "name": "taskX complete Hint",
+      "passed": true
+    },
+    {
+      "name": "taskX complete Reasoned solution",
+      "passed": true
+    },
+    {
+      "name": "taskX complete Tempting wrong route",
+      "passed": true
+    },
+    {
+      "name": "taskX complete Success check",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 12-inspect-an-actual-digit-dictionary-and-contribution",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 3-measure-the-disagreement-before-choosing-a-loss",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 4-encode-a-new-row-with-the-dictionary-held-fixed",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 5-change-one-coordinate-then-reuse-the-arithmetic",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 6-fit-both-factors-and-decide-when-to-stop",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 4-encode-a-new-row-with-the-dictionary-held-fixed",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 7-explain-the-multiplicative-route",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 8-why-the-upper-bound-gives-a-safe-step",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 9-initialize-without-silently-importing-pca-centering",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 10-use-the-ordinary-tools-deliberately",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 11-control-penalties-and-incomplete-observations",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 12-inspect-an-actual-digit-dictionary-and-contribution",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 12-inspect-an-actual-digit-dictionary-and-contribution",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 13-separate-a-representation-decision-from-its-evaluation",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 15-when-anchors-help-recover-the-dictionary",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 16-change-application-assumptions-explicitly",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 17-update-as-rows-arrive",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 18-keep-extra-axes-and-recognize-what-is-missing",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 7-explain-the-multiplicative-route",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 13-separate-a-representation-decision-from-its-evaluation",
+      "passed": true
+    },
+    {
+      "name": "actual local jump 16-change-application-assumptions-explicitly",
+      "passed": true
+    },
+    {
+      "name": "required practice T heading anchor",
+      "passed": true
+    },
+    {
+      "name": "required practice U heading anchor",
+      "passed": true
+    },
+    {
+      "name": "separate ordered ending roles",
+      "passed": true
+    },
+    {
+      "name": "one 22-file complete index",
+      "passed": true
+    },
+    {
+      "name": "original examples literal JSON not executed",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_multiplicative.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_beta_mm.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_initialization.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file ordinary_nmf_lifecycle.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_penalties_masks.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_factor_alignment.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_digit_comparison.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_anchors.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_text_spectra.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_online.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_axis_phase.py",
+      "passed": true
+    },
+    {
+      "name": "complete decoded original nmf_step.py",
+      "passed": true
+    },
+    {
+      "name": "complete decoded original nmf_digits.py",
+      "passed": true
+    },
+    {
+      "name": "complete decoded original nmf_words.py",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "actual indexed file digits-data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_arrays.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_coordinate.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_nnls.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_multiplicative.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_beta_mm.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output initialization-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output lifecycle-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output penalties-masks-main.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_factor_alignment.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_saved_digits.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_digit_comparison.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_anchors.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_text_spectra.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_online.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output nmf_axis_phase.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "actual named output positive-kl.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "earlier accepted arithmetic retained",
+      "passed": true
+    },
+    {
+      "name": "new wrong-normalization arithmetic independent",
+      "passed": true
+    },
+    {
+      "name": "earlier checked foundation source unchanged centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "earlier checked foundation source unchanged nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "earlier checked foundation source unchanged nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "earlier checked foundation source unchanged nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "actual earlier state witness rejected next fit",
+      "passed": true
+    },
+    {
+      "name": "actual earlier state witness rejected fit preserves old factors",
+      "passed": true
+    },
+    {
+      "name": "actual earlier state witness query uses old fitted rank after changed config",
+      "passed": true
+    },
+    {
+      "name": "actual earlier state witness empty query uses old fitted rank",
+      "passed": true
+    },
+    {
+      "name": "actual earlier state witness feature order cannot silently change",
+      "passed": true
+    },
+    {
+      "name": "actual earlier state witness finite input may overflow and preserve old snapshot",
+      "passed": true
+    },
+    {
+      "name": "actual earlier state witness overflowing fit preserves old snapshot",
+      "passed": true
+    },
+    {
+      "name": "practice V is actual completed source explanation",
+      "passed": true
+    },
+    {
+      "name": "fixed saved intervention and no refit role",
+      "passed": true
+    },
+    {
+      "name": "next actual curriculum sequence",
+      "passed": true
+    },
+    {
+      "name": "resource reading scope not overclaimed",
+      "passed": true
+    },
+    {
+      "name": "no unresolved instructional slots",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "sourceAndEndingConditions": 204,
+    "newModelFits": 0,
+    "oldMainsReplayed": 0,
+    "oldArithmeticCampaignReplayed": false,
+    "newArithmetic": "three-cell wrong-normalization answer only, using independent explicit multiply/add",
+    "noRuntimeOrPhaseMutation": true
+  },
+  "reading": "Entire section19 read in consecutive bounded chunks, all24 prompts/hints/reasoned solutions/wrong routes/success checks plus all file/resource/readiness rows; accepted A–X contract and earlier numerical/state/source receipts reused. No new literature campaign; primary/official source reading dispositions remain in earlier handoffs.",
+  "limits": "No whole1–19 review, no painted illustrations/labs/download/disclosure/browser acceptance. Root and different reviewer own complete manuscript acceptance.",
+  "continuation": "Root assemble exact section19 with corrected12/16 and frozen10–18; verify all current full-source slots and complete continuous reading, then DIFFERENT whole-content review. Runtime/canonical/public/centralphase unchanged."
+}

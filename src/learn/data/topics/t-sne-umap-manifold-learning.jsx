@@ -1,585 +1,921 @@
-import { H2, H3, Prose, Code, CodeBlock } from '../../components/content';
-import { MathBlock } from '../../components/content/Math.jsx';
-import { LessonIntro, LessonTable } from '../../components/lesson-labs/LessonElements.jsx';
-import { RunnableExample } from '../../components/lesson-labs/RunnableExample.jsx';
-import { ManifoldRouteFigure, ManifoldNeighborFigure, ManifoldProbabilityFigure, ManifoldForceFigure, ManifoldFuzzyGraphFigure, ManifoldDigitsFigure, ManifoldMdsFigure, ManifoldLleFigure, ManifoldTopologyFigure } from '../../components/lesson-labs/ManifoldFigures.jsx';
-import { ManifoldGraphLab, ManifoldProbabilityLab, ManifoldFuzzyLab, ManifoldDigitLab } from '../../components/lesson-labs/ManifoldLabs.jsx';
-import { manifoldExamples } from '../manifold-examples.js';
-import MechanismProgram from '../../components/lesson-labs/MechanismProgram.jsx';
-import manifoldMechanismProgram from '../manifold-mechanism-program.js';
-import '../../components/lesson-labs/manifold-lesson.css';
+import React from 'react';
+import { H2, H3 } from '../../components/content/Headings.jsx';
+import { Prose } from '../../components/content/Prose.jsx';
+import { CodeBlock } from '../../components/content/Code.jsx';
+import RemoteCodeBlock from '../../components/content/RemoteCodeBlock.jsx';
+import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
+import { Table as NeuralTable } from '../../components/lesson-labs/manifold-reading-flow/ManifoldDrawing.jsx';
+import { ManifoldFigure } from '../../components/lesson-labs/manifold-reading-flow/ManifoldFigures.jsx';
+import { ManifoldInvestigation } from '../../components/lesson-labs/manifold-reading-flow/ManifoldInvestigations.jsx';
+import PrivateFiles from '../../components/lesson-labs/manifold-reading-flow/ManifoldFiles.jsx';
+import '../../components/lesson-labs/manifold-reading-flow/manifold-reader.css';
+import '../../components/lesson-labs/manifold-reading-flow/wiring.css';
+function ManifoldLesson() { return <div className="lesson-flow manifold-reader">
+<PrivateFiles />
+<Prose>{"You have 300 small pictures of handwritten digits. A person can compare two pictures; a computer can compare their 64 recorded cells. We want a two-coordinate map that helps us inspect this collection. A useful map keeps some relationships visible. Understanding which relationships it tries to keep is the difference between using it to explore and reading a story into an attractive scatterplot."}</Prose>
 
-const headings = [
-  "1. Can a picture help us inspect handwritten digits?",
-  "2. A short route can leave the surface",
-  "3. Decide what a map should preserve",
-  "4. t-SNE: turn a neighborhood into a probability row",
-  "5. t-SNE: move the map to match those preferences",
-  "6. UMAP: construct a graph, then optimize a layout",
-  "7. Inspect real digits and measure what survives",
-  "8. Use the representation for its intended task",
-  "9. Deeper branch: distances, reconstruction weights and graph eigenvectors",
-  "10. Deeper branch: derive and run a tiny exact t-SNE optimizer",
-  "11. Practice: make a changed choice and explain the result",
-  "12. References & another way to learn it",
-  "13. Ready to move on?"
-];
-const headingId = heading => heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+<Prose>{"The names describe two constructions: t-SNE is t-distributed stochastic neighbor embedding, and UMAP is uniform manifold approximation and projection. We will build their neighborhood objects before using the names to interpret a map."}</Prose>
 
-function Program({ example }) {
-  return <section>
-    <Prose><strong>Before running:</strong> {example.question}</Prose>
-    <RunnableExample example={example} />
-  </section>;
-}
+<Prose opening="summary">{"By the end, you can trace a neighbor graph, calculate t-SNE affinities and one force step, build UMAP's local memberships, explain its sampled updates, audit actual saved digit maps, and choose a route for future observations. The deeper sections implement distance, reconstruction, graph and tangent alternatives, then connect their objectives to research on sampling."}</Prose>
 
-const manifoldContent = {
-  title: 't-SNE, UMAP & Manifold Learning',
-  readTime: '~60 min first pass · deeper branches + 60–90 min investigations and practice',
-  hasIntegratedGuide: true,
-  content: () => <div className="lesson-pilot manifold-lesson">
-    <LessonIntro prerequisites="Vector distances, weighted averages, basic probabilities and the idea of following a gradient. PCA supplies the baseline; neighbor graphs and entropy are introduced here." sections={headings.map(heading => [headingId(heading), heading.replace(/^\d+\. /, '')])}>
-      Build a route, redistribute neighbor preferences, inspect a fuzzy connection and audit real handwritten images. Measure what survives when many measurements become a two-dimensional map, then return for the mathematical derivations.
-    </LessonIntro>
-    <H2>{headings[0]}</H2>
+<Prose opening="prerequisites">{"Read "}<a href={"/learn/path/full-curriculum/pca-dimensionality-reduction?module=classical-ml#4-fit-once-project-and-reconstruct-in-python"}>{"principal component analysis (PCA): rotate the ruler, then keep its readings"}</a>{" first for centering, coordinates and fitting a reusable projection. We refresh each new probability and graph operation here. "}<a href={"/learn/path/full-curriculum/clustering-evaluation-validation-silhouette-ari-nmi?module=classical-ml#4-a-score-evaluates-a-geometry-as-well-as-a-partition"}>{"Clustering evaluation"}</a>{" helps when the later question becomes whether a proposed grouping is stable or useful; a map by itself supplies no group assignments."}</Prose>
 
-    <Prose>{"Imagine opening a spreadsheet with 300 handwritten digits. Each row contains 64 measurements: the darkness in an 8 × 8 grid. You want to inspect which writing styles resemble one another, locate unusual examples, and notice where different digits share similar strokes. A table of 19,200 numbers makes that difficult. A two-dimensional map could make it manageable—if you can find out which relationships the map kept."}</Prose>
+<Prose opening="route">{"On a first pass, follow the pictures and worked operations in §§1–8, attempt a few tasks in §11, and finish with §13. The complete code is beside the mechanism it implements; you can inspect its inputs and output before reading every loop. Return to the visible deeper sections 9–10 for distance reconstruction, local recipes, spectral methods, tangent patches and the force derivation. These sections answer different preservation questions rather than introducing a single winning method. "}<a href={"#setup-and-complete-files"}>{"Setup and complete files"}</a>{" distinguish the deterministic examples from optional library fits; all measurements and saved maps are supplied for offline inspection."}</Prose>
 
-    <Prose>{"PCA gives a useful starting map by retaining two directions of large variation. This lesson explores methods that start from relationships between observations instead: distances along a surface, local reconstruction weights, or weighted neighbor connections. "}<strong>{"An embedding"}</strong>{" is the resulting collection of lower-dimensional coordinates. There are still 300 observations; each now has two coordinates for display."}</Prose>
+<H2>{"1. Follow one picture from recorded cells to a map"}</H2>
 
-    <Prose opening="route"><strong>{"First-pass route:"}</strong>{" read sections 1–8, trying the neighborhood, affinity and map-audit investigations as you reach them. Run the digits program in section 7 and attempt practice 1–4 in section 11. That route takes you from a geometric idea to a measured answer about a real map. Return to section 9 for Isomap, MDS and LLE calculations, and section 10 for the t-SNE derivation and exact optimizer. Those deeper branches preserve the broader manifold-learning scope. Allow roughly 50–65 minutes for the core reading and 60–90 minutes for investigations and practice; the deeper branches add another sitting."}</Prose>
+<ManifoldFigure id="D01" />
 
-    <Prose>{"You need distances between numeric vectors, a weighted average, basic probabilities, and the idea of following a loss gradient downhill. "}<a href={"/learn/path/full-curriculum/pca-dimensionality-reduction?module=classical-ml"}>{"PCA & Dimensionality Reduction"}</a>{" supplies the baseline and scaling discussion. We introduce neighbor graphs and entropy here; no topology course is required. Eigenvalues enter only in the deeper branch, with a short bridge there."}</Prose>
+<Prose>{"The picture at source row 30 is a zero. Its eight rows and eight columns contain block counts from 0 to 16. These are downsampled optical measurements, not 64 categorical symbols. Count across the top row: cell 0 is 0, cell 2 is 10 and cell 3 is 14. Flattening puts cell 2 in feature column 2; it does not move the original source identity. Dividing every count by 16 gives feature values0, .625 and .875 respectively. The record now has 64 comparable numbers, while its ID stays30."}</Prose>
 
-    <Prose>{"The preceding "}<a href={"/learn/path/full-curriculum/gaussian-mixture-models-gmm-em-algorithm?module=classical-ml"}>{"Gaussian Mixture Models (GMM) & EM Algorithm"}</a>{" fits a probability density to observations. A t-SNE picture answers a different question: which relationships can we expose in a small coordinate system? Its neighbor probabilities are weights used to construct a map, not mixture responsibilities or a probability density over future digit images."}</Prose>
+<Prose>{"Stacking 300 records makes "}<InlineMath>{"X\\in\\mathbb R^{300\\times64}"}</InlineMath>{". A two-dimensional embedding makes "}<InlineMath>{"Y\\in\\mathbb R^{300\\times2}"}</InlineMath>{". Row "}<InlineMath>{"i"}</InlineMath>{" means the same observation in both arrays. Feature index "}<InlineMath>{"a"}</InlineMath>{" and map coordinate index "}<InlineMath>{"b"}</InlineMath>{" mean different things: the two map axes are not two selected image cells. We use "}<InlineMath>{"n"}</InlineMath>{" for observations, "}<InlineMath>{"D"}</InlineMath>{" for input features and "}<InlineMath>{"q"}</InlineMath>{" for map coordinates. Here "}<InlineMath>{"n=300,D=64,q=2"}</InlineMath>{"."}</Prose>
 
-    <H2>{headings[1]}</H2>
+<Prose>{"The data come from the UCI optical digit recognition collection, distributed in scikit-learn's "}<code>{"load_digits"}</code>{". Our offline CSV takes the first 30 original rows of each digit class and retains their original IDs. Thus source306 can be in this 300-row subset; ID306 does not mean array position306. Class labels select this balanced inspection collection and can colour the finished plot. They are not fitted inputs to the unsupervised maps below. The "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html"}>{"dataset description"}</a>{" and supplied "}<code>{"data-provenance.md"}</code>{" describe the measurements and selection."}</Prose>
 
-    <Prose>{"A piece of paper is locally two-dimensional even after you curl it in three-dimensional space. Moving along the paper needs two coordinates; describing a point's position in the room needs three. The first count is its "}<strong>{"intrinsic dimension"}</strong>{", the second its "}<strong>{"ambient dimension"}</strong>{". A smooth manifold behaves like a flat space within sufficiently small neighborhoods. Real measurements may only approximately follow such a structure: noise, discrete classes and unobserved factors need not form one clean surface."}</Prose>
+<ManifoldFigure id="D02" />
 
-    <Prose>{"The "}<strong>{"manifold hypothesis"}</strong>{" is a modeling idea that many measured variables can vary through fewer underlying degrees of freedom. For a camera observing one rigid object turning on a fixed axis, angle is a possible latent coordinate. If lighting and camera position also change, they introduce more variation. Merely declaring images “a manifold” does not tell us its dimension or supply a good image distance."}</Prose>
+<Prose>{"The two strips follow source30. The first contains its ten nearest images under Euclidean distance in all 64 normalized features. The second contains the ten nearest images in the saved PCA map. The printed IDs, not resemblance of the colours, join these two strips. Their common records are 0,79,166,229,266 and276: six of ten. Four original neighbors disappear, and four replacements arrive. A scatterplot can look coherent while changing this local answer."}</Prose>
 
-    <Prose>{"Here is the distance problem in a form we can calculate. Put seven points on a U-shaped path:"}</Prose>
+<Prose>{"Input distance is "}<InlineMath>{"d_{ij}=\\sqrt{\\sum_{a=1}^D(X_{ia}-X_{ja})^2}"}</InlineMath>{"; map distance is "}<InlineMath>{"r_{ij}=\\sqrt{\\sum_{b=1}^q(Y_{ib}-Y_{jb})^2}"}</InlineMath>{". Dividing every feature by the same16 scales all "}<InlineMath>{"d_{ij}"}</InlineMath>{" equally and leaves their ordering unchanged. Per-feature standardization, or PCA whitening, can change the ordering: those choices change what “similar” means. We keep the stated pixel metric throughout this comparison."}</Prose>
 
-    <LessonTable caption={"Seven observations on a U-shaped path"} headers={["Point", "A", "B", "C", "D", "E", "F", "G"]} rows={[
-      [<>{"Coordinate"}</>, <>{"(0,0)"}</>, <>{"(0,1)"}</>, <>{"(0,2)"}</>, <>{"(1,2)"}</>, <>{"(2,2)"}</>, <>{"(2,1)"}</>, <>{"(2,0)"}</>]
-    ]} />
+<ManifoldFigure id="D03" />
 
-    <Prose>{"A and G are 2 units apart across the opening. Following the six unit segments of the U takes 6 units. The second quantity is the distance along this particular path. For a smooth surface, the shortest allowed route along it is called a "}<strong>{"geodesic"}</strong>{"."}</Prose>
+<Prose>{"PCA uses fixed perpendicular rulers through the centered cloud. A point's score is its projection on a ruler, and the projection foot shows what was discarded. Keeping two rulers is a linear operation: the same matrix acts on every row. A nonlinear neighbor map instead chooses coordinates jointly so that selected relationships remain easy to see. It need not have a single ruler, an interpretable axis, or an inverse that reconstructs an image. This is the reason to inspect the relationships directly."}</Prose>
 
-    <ManifoldRouteFigure />
+<Prose>{"The "}<a href={"/learn/path/full-curriculum/pca-dimensionality-reduction?module=classical-ml#5-scaling-changes-which-differences-matter"}>{"PCA scaling section"}</a>{" and "}<a href={"/learn/path/full-curriculum/k-means-hierarchical-clustering?module=classical-ml#2-make-the-geometry-explicit"}>{"KMeans geometry section"}</a>{" explain why a ruler belongs to the question. In "}<a href={"/learn/path/full-curriculum/pca-dimensionality-reduction?module=classical-ml#10-deeper-branches"}>{"PCA's whitening branch"}</a>{", retained score coordinate "}<InlineMath>{"z_a"}</InlineMath>{" is divided by "}<InlineMath>{"\\sqrt{\\lambda_a}"}</InlineMath>{", its positive standard-deviation scale. Consequently squared distance becomes "}<InlineMath>{"\\sum_a(\\Delta z_a)^2/\\lambda_a"}</InlineMath>{": low-variance directions receive more weight. With eigenvalues(9,1), differences(2,0) and(0,1) have ordinary lengths 2 and1, but whitened lengths 2/3 and1. The nearest choice switches. Discard a zero-eigenvalue direction or declare a regularization rule before dividing; do not silently divide by zero. Our saved maps keep the original stated pixel ruler."}</Prose>
 
-    <Prose>{"A finite dataset does not give us every point on the surface. We construct a "}<strong>{"neighbor graph"}</strong>{": observations are vertices, chosen neighbor pairs are edges, and each edge carries its input distance. Adding edge lengths along a shortest graph path approximates a geodesic when the sampling and chosen connections support that interpretation."}</Prose>
+<Prose>{"Download "}<code>{"digits-300.csv"}</code>{" and "}<code>{"calculated-inputs.json"}</code>{" together. The JSON holds ten full-precision maps, source IDs, software context and the CSV hash. "}<code>{"load_saved"}</code>{" below checks that hash and joins every coordinate by source ID. It refuses a mismatched collection rather than pairing unrelated rows. We will open its distance/rank work in §3; the same complete file also powers the later saved-map investigation."}</Prose>
 
-    <Prose>{"In the U example, connect distinct points whose distance is at most a radius ε. At ε = 1, only the six consecutive unit edges appear, so the A–G graph distance is 6. At ε = 2, the graph contains the direct A–G edge and the distance becomes 2. At ε = 0.75, no distinct points connect; no finite A–G graph distance exists. These are three different graphs built from exactly the same observations."}</Prose>
+<H2>{"2. A short route can be long on the surface"}</H2>
 
-    <Prose><strong>{"Investigation A — Build a route before flattening it."}</strong>{" Choose endpoints and edit the radius or one point's coordinates. Follow the resulting shortest path and its length immediately, then inspect which edge caused the change. Try an unfamiliar coordinate edit, not only the supplied U."}</Prose>
+<ManifoldFigure id="D04" />
 
-    <ManifoldGraphLab />
+<Prose>{"Imagine measurements on a rolled sheet. The surface has two directions locally, although it sits in three-dimensional space. A small tangent patch is nearly flat. Two points on separate turns may be close through empty air and far along the sheet. A manifold model assumes local neighborhoods are sampled densely enough to reveal those surface relationships. It does not establish that every high-dimensional dataset has a smooth low-dimensional surface. Noise, branches, boundaries and undersampling can defeat that assumption."}</Prose>
 
-    <Prose>{"This is the central choice behind Isomap: use estimated surface distances before finding coordinates. It also explains why “more neighbors” is not an automatic improvement. Additional edges can repair a disconnected graph or introduce shortcuts. A Swiss roll—the familiar sheet curled into a spiral—has the same problem across adjacent layers. PCA fits one linear projection; Isomap attempts to reconstruct distance along the sampled sheet. PCA still has a well-defined reconstruction objective on curved data, even when two components are a poor map of that surface."}</Prose>
+<ManifoldFigure id="D05" />
 
-    <H2>{headings[2]}</H2>
+<Prose>{"We can trace this problem without a three-dimensional optimizer. Put seven vertices on a U: A(0,0), B(0,1), C(0,2), D(1,2), E(2,2), F(2,1), G(2,0). At radius 1, join points whose input distance is at most1 and label each edge with that distance. A to G is 2 through the air, but the graph route A–B–C–D–E–F–G has six unit edges."}</Prose>
 
-    <Prose>{"Methods called dimensionality reduction can optimize quite different quantities."}</Prose>
+<Prose>{"The frontier begins at A with distance 0; all other tentative distances are infinity. Relaxing A–B replaces B's infinity by 1. Processing B similarly gives C2, then D3, E4, F5 and G6. Relaxation means replacing a known distance by a shorter candidate: "}<InlineMath>{"s_j\\leftarrow\\min(s_j,s_i+d_{ij})"}</InlineMath>{". With nonnegative edge lengths, Dijkstra can settle the smallest unsettled distance. The all-pairs implementation below uses the same principle with each vertex as a possible intermediate."}</Prose>
 
-    <LessonTable caption={"What each dimensionality-reduction method tries to preserve"} headers={["Method", "What the computation tries to retain", "What you can inspect"]} rows={[
-      [<>{"PCA"}</>, <>{"A low-rank linear reconstruction with small squared error"}</>, <>{"Variance retained, residuals, loadings"}</>],
-      [<>{"Classical MDS"}</>, <>{"Inner products obtained from a dissimilarity matrix"}</>, <>{"Distance reconstruction and negative eigenvalues"}</>],
-      [<>{"Isomap"}</>, <>{"Graph shortest-path distances, followed by classical MDS"}</>, <>{"Connectivity, shortcuts, geodesic distortion"}</>],
-      [<>{"LLE"}</>, <>{"Each point's weights for reconstruction from nearby points"}</>, <>{"Neighbor choice and reconstructed positions"}</>],
-      [<>{"t-SNE"}</>, <>{"A normalized distribution of pairwise neighbor affinities"}</>, <>{"Affinity mismatch and neighborhood preservation"}</>],
-      [<>{"UMAP"}</>, <>{"A weighted neighbor graph followed by a sampled attractive/repulsive layout procedure"}</>, <>{"Graph construction, layout changes and neighborhood preservation"}</>]
-    ]} />
+<ManifoldFigure id="D06" />
 
-    <Prose>{"You will learn the two common visualization methods first, then work the distance and reconstruction methods in section 9. This table is a comparison of objectives, not a numerical ranking."}</Prose>
+<Prose>{"Changing the radius changes the graph before any embedding happens. At .75, no unit edges exist, so A and G have no path. At1, their route is 6. At1.5, diagonal shortcuts A–B–D–F–G give "}<InlineMath>{"1+\\sqrt2+\\sqrt2+1=2+2\\sqrt2\\approx4.828427"}</InlineMath>{". At2, the direct A–G edge gives 2. The short route is mathematically correct for that graph and a poor description of traveling around the intended U. A separate noisy-bridge drawing shows why an accidental close pair can create the same problem in data."}</Prose>
 
-    <Prose><strong>{"The map-reading contract."}</strong>{" This paragraph is the lesson's home for interpreting a learned layout. A near pair on the map can be a false neighbor; an input neighbor can be torn apart. Axis directions, area, inter-island spacing and visual density have no general measurement-unit interpretation in t-SNE or ordinary UMAP. Their locally adaptive input affinities help explain why original densities are changed. Count selected observations to measure how many examples they contain; the member count is retained even when the group's area changes. To assess distance, variability, density or clusters in the original representation, return to that representation and a defined diagnostic. A colored island is a finding to inspect, not a class or density model supplied by the embedding."}</Prose>
+<Prose>{"Change the radius in the first investigation and watch the new edges and route together. The next investigation moves D while keeping radius 1 fixed; a disconnected vertex is shown as disconnected, not mapped to a convenient replacement coordinate. The endpoint investigation traces a route between two selected IDs. Reset restores the exact seven vertices, endpoints A/G and radius 1. These are graph edits, not animation of an unseen fit."}</Prose>
 
-    <Prose>{"Two checks will make that contract operational. Fix a neighbor count k, exclude each point itself, and choose a rule for equal distances. Let N_X(i) be point i's k nearest input neighbors and N_Y(i) its k nearest map neighbors. The "}<strong>{"neighbor retention"}</strong>{" is"}</Prose>
+<Prose>{"In code, radius graphs contain finite edge weights and infinity for absent edges. A k-neighbor graph instead selects "}<InlineMath>{"k"}</InlineMath>{" nearest nonself records per row. A union graph keeps an edge if either endpoint selected it; a mutual graph requires both. That difference can join or disconnect components. Duplicate observations can have a genuine zero-length nonself edge, so zero cannot mean “absent.”"}</Prose>
 
-    <MathBlock>{"R_k=\\frac{1}{nk}\\sum_{i=1}^n |N_X(i)\\cap N_Y(i)|."}</MathBlock>
+<Prose>{""}<code>{"graph"}</code>{" computes one row of distances at a time and uses distance/row-ID ordering for the constructed fixtures. "}<code>{"floyd_warshall"}</code>{" permits each vertex "}<code>{"via"}</code>{" in turn and compares the direct route with the two-leg route through it. For small graphs, its dense "}<InlineMath>{"O(n^3)"}</InlineMath>{" work is easy to inspect. A large sparse graph normally uses sparse adjacency and repeated Dijkstra; the resulting all-pairs distance matrix is still "}<InlineMath>{"O(n^2)"}</InlineMath>{". In §9 we will turn a finite route matrix into coordinates. The ordinary "}<code>{"Isomap"}</code>{" call uses a k-neighbor union graph; its handling of disconnected components may repair them, whereas "}<code>{"finite_embedding"}</code>{" refuses them. These calls therefore agree only after matching graph semantics and connectivity."}</Prose>
 
-    <Prose>{"It is the fraction of directed neighbor selections that survive. If 7 of a query's 10 original neighbors remain among its 10 plotted neighbors, its retention is 0.7. The three new neighbors are false neighbors; the three displaced ones are missing neighbors. Averaging can hide a particularly poor query, so inspect both local lists and the collection average."}</Prose>
+<ManifoldInvestigation id="L1" />
+<ManifoldInvestigation id="L2" />
+<ManifoldInvestigation id="L3" />
 
-    <ManifoldNeighborFigure />
+<p className="manifold-source-role">Recorded deterministic source; deterministic main executed; ordinary fits source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/isomap_routes.py"} filename={"isomap_routes.py"} language="python" />
 
-    <Prose>{"For an exact example use input positions "}<Code>{"[0,1,3,7]"}</Code>{" for A,B,C,D and proposed map positions "}<Code>{"[0,5,1,11]"}</Code>{". With k = 1, the input selections are A→B, B→A, C→B, D→C. The map selects A→C, B→C, C→A, D→B. None survives: R₁ = 0. The picture still consists of four perfectly ordinary points."}</Prose>
+<Prose>{"The new deterministic stream is:"}</Prose>
 
-    <Prose><strong>{"Trustworthiness"}</strong>{" gives a larger penalty when a false map neighbor was far down the input ranking. If r_X(i,j) is j's input rank from i, and U_k(i) = N_Y(i) \\ N_X(i), then the usual normalization is"}</Prose>
+<p className="manifold-source-role">Recorded deterministic scratch/saved-array stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/isomap_routes.txt"} filename={"isomap_routes.txt"} language="output" />
 
-    <MathBlock>{"T_k=1-\\frac{2}{nk(2n-3k-1)}\\sum_i\\sum_{j\\in U_k(i)}(r_X(i,j)-k)."}</MathBlock>
+<Prose>{"Read the first infinity as a missing path. The other three lengths expose the precise neighborhood tradeoff. The final map distances from A are 0 through6 because this radius 1 graph is a path. Its straight-line map is an unfolding of graph routes, not a claim that the original U's chord distances were preserved."}</Prose>
 
-    <Prose>{"Here use 1 ≤ k < n/2, as required by the scikit-learn function. In the four-point example every false neighbor has rank 2. The penalty sum is 4, the multiplier is 1/8, and T₁ = 0.5. "}<strong>{"Continuity"}</strong>{" reverses the roles of X and Y to penalize missing input neighbors. Both equal 1 on a distance-preserving, tie-free map. Rigidly rotating a plot does not change any pairwise distance, so it should not be interpreted as instability. Rankings with exact distance ties require a stated tie rule; our visible neighbor lists use source-row order, while the library score uses its own distance sorting. Small tie-boundary differences can therefore occur."}</Prose>
+<H2>{"3. Name the relationship before scoring the picture"}</H2>
 
-    <Prose>{"These diagnostics assess the chosen metric and k. The formulas, original-space records and query images turn an impression about a map into an inspectable claim. "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.manifold.trustworthiness.html"}>{"Trustworthiness API and reference"}</a>{"."}</Prose>
+<ManifoldFigure id="D07" />
 
-    <H2>{headings[3]}</H2>
+<Prose>{"Different methods carry different objects into the map. PCA carries projections and reconstruction error. Multidimensional scaling (MDS) carries a table of dissimilarities; isometric mapping (Isomap) first measures graph-route lengths. Locally linear embedding (LLE) carries local affine recipes: one point is reconstructed from its neighbors. Graph spectral methods carry weighted edges and smoothness. t-SNE carries normalized pair probabilities. UMAP carries local fuzzy memberships and an edge-sampling procedure. The diagrams follow the same observation IDs through these six objects; they are six questions, rather than six grades on one universal contest."}</Prose>
 
-    <Prose>{"For each input xᵢ, t-SNE asks: if i chooses another observation as its neighbor, how should its preference decline with distance? It uses a Gaussian-shaped weight, then normalizes all candidates in that row:"}</Prose>
+<Prose>{"For the digit map our first question is concrete: did the same nearby records stay nearby? Define "}<InlineMath>{"N_X^k(i)"}</InlineMath>{" and "}<InlineMath>{"N_Y^k(i)"}</InlineMath>{" as the "}<InlineMath>{"k"}</InlineMath>{" nearest nonself neighbors of observation "}<InlineMath>{"i"}</InlineMath>{" in input and map space. Its retained fraction is "}<InlineMath>{"|N_X^k(i)\\cap N_Y^k(i)|/k"}</InlineMath>{", and the collection average is"}</Prose>
 
-    <MathBlock>{"p_{j|i}=\\frac{\\exp(-\\|x_i-x_j\\|^2/(2\\sigma_i^2))}\n{\\sum_{l\\ne i}\\exp(-\\|x_i-x_l\\|^2/(2\\sigma_i^2))},\\quad p_{i|i}=0."}</MathBlock>
+<div className="neural-equation"><MathBlock>{"R_k=\\frac1n\\sum_i\\frac{|N_X^k(i)\\cap N_Y^k(i)|}{k}."}</MathBlock></div>
 
-    <Prose>{"The bandwidth σᵢ controls how quickly preference falls. Consider three other points at distances 1,2,3 from i, and σᵢ = 1. Their unnormalized weights are e⁻⁰·⁵, e⁻², e⁻⁴·⁵. Dividing by their sum gives approximately "}<Code>{"[0.805512, 0.179734, 0.014753]"}</Code>{". The closest candidate receives about 80.6% of this row's preference. The row is a distribution over neighbor choices, not the probability that the measurement was generated by a component."}</Prose>
+<ManifoldFigure id="D08" />
 
-    <ManifoldProbabilityFigure />
+<Prose>{"Take four input positions A0, B1, C3, D7 and proposed map positions A0, B5, C1, D11. Ask which nearest neighbor changed, then how far down the original ranking its replacement came. With "}<InlineMath>{"k=1"}</InlineMath>{", input arrows are A→B, B→A, C→B, D→C. Map arrows are A→C, B→C, C→A, D→B. None agrees, so "}<InlineMath>{"R_1=0"}</InlineMath>{"."}</Prose>
 
-    <Prose>{"Instead of using one σ for every point, t-SNE chooses bandwidths to reach a target "}<strong>{"perplexity"}</strong>{". For a probability row p, entropy measures its spread:"}</Prose>
+<ManifoldFigure id="D09" />
 
-    <MathBlock>{"H(p)=-\\sum_j p_j\\log_2 p_j,\\qquad \\operatorname{Perp}(p)=2^{H(p)}."}</MathBlock>
+<Prose>{"The ranking ladder removes the record itself, orders by distance and breaks exact ties by original ID. Rank1 is the closest remaining record. Duplicates retain different IDs and can occupy tied ranks. For the normalization used here, require "}<InlineMath>{"1\\le k<n/2"}</InlineMath>{", matching the ordinary trustworthiness API's domain. Our audit values "}<InlineMath>{"k=5,10,20"}</InlineMath>{" are questions asked of a map; they are separate from UMAP's graph neighbor count or t-SNE's perplexity."}</Prose>
 
-    <Prose>{"Equal preference over m candidates gives entropy log₂m and perplexity m. The uneven row above has perplexity about 1.7244. It has three positive probabilities but concentrates preference enough to behave, in this entropy sense, like fewer than two equally likely choices. Perplexity is an effective count, not a cutoff after an exact number of neighbors."}</Prose>
+<Prose>{"Replacing a nearest neighbor by the second-nearest is less severe than replacing it by the last. The picture marks map-only intruders and input-only omissions before we price them. Input ranks of the four intruders are 2,2,2,2. Each contributes rank minus "}<InlineMath>{"k=1"}</InlineMath>{", giving total penalty4. Trustworthiness applies a normalization:"}</Prose>
 
-    <Prose>{"For this row, σ = 0.5 gives perplexity 1.0175; σ = 2 gives 2.7864. A binary search can adjust σ until the desired entropy is reached. In a sparse region, the needed σ can be larger than in a dense region. This is one mechanism behind the map-reading contract's density issue."}</Prose>
-    <Prose>Why can a sparse and a dense group end up with similar visual sizes? Compare distances (1, 2, 3) at bandwidth 1 with distances (10, 20, 30) at bandwidth 10. Each distance divided by its bandwidth is identical, so every exponential and normalized preference is identical. The affinity row has deliberately discarded that tenfold local scale difference. Layout optimization receives those preferences, not an instruction to draw the second neighbourhood ten times wider. This calculation explains the effect before you inspect a finished plot.</Prose>
+<Prose>{"Here the coefficient is "}<InlineMath>{"2/(4\\cdot1\\cdot4)=1/8"}</InlineMath>{", so "}<InlineMath>{"T_1=1-4/8=.5"}</InlineMath>{". Trustworthiness penalizes neighbors introduced by the map. Continuity reverses the spaces and penalizes original neighbors omitted from it; the ranks then come from the map. Neither is the same as the retained fraction. Even a high average can coexist with a poor local query."}</Prose>
 
-    <Prose><strong>{"Investigation B — Change who receives the probability."}</strong>{" Edit the three candidate distances or the bandwidth and follow the closest candidate's probability and the perplexity together. The equal-distance fixture is a useful test: all three candidates get 1/3 for every positive bandwidth, so no bandwidth can make its perplexity 2. A tie among m equally closest candidates likewise places a lower limit m on achievable perplexity as bandwidth approaches zero. A search tolerance cannot create information that the distances do not contain."}</Prose>
+<div className="neural-equation"><MathBlock>{"T_k=1-\\frac{2}{nk(2n-3k-1)}\\sum_i\\sum_{j\\in N_Y^k(i)\\setminus N_X^k(i)}(r_X(i,j)-k)."}</MathBlock></div>
 
-    <ManifoldProbabilityLab />
+<Prose>{"For continuity, replace introduced IDs by omitted IDs and price them with their map ranks: "}<InlineMath>{"C_k=1-\\frac{2}{nk(2n-3k-1)}\\sum_i\\sum_{j\\in N_X^k(i)\\setminus N_Y^k(i)}(r_Y(i,j)-k)"}</InlineMath>{". In this four-point example the omitted neighbors also have map rank2, so "}<InlineMath>{"C_1=.5"}</InlineMath>{". That equality belongs to this fixture; the two penalties need not agree on another map."}</Prose>
 
-    <Prose>{"Conditional rows need not agree: i may strongly prefer j while j has several even closer candidates. Standard symmetric t-SNE combines them as"}</Prose>
+<Prose>{"The complete audit file reads one input-distance row and one map-distance row at a time. "}<code>{"input_rank"}</code>{" and "}<code>{"map_rank"}</code>{" invert the neighbor permutations so a set difference can be priced by rank. This avoids an "}<InlineMath>{"n\\times n\\times D"}</InlineMath>{" offset tensor. Exact full ranking still costs "}<InlineMath>{"O(n^2D+n^2\\log n)"}</InlineMath>{", plus map-distance work; working storage beyond the data and coordinates is "}<InlineMath>{"O(n)"}</InlineMath>{". Nearest-neighbor search suffices for "}<InlineMath>{"R_k"}</InlineMath>{", but the intrusion and omission penalties need the relevant full ranks."}</Prose>
 
-    <MathBlock>{"p_{ij}=\\frac{p_{j|i}+p_{i|j}}{2n}."}</MathBlock>
+<p className="manifold-source-role">Recorded deterministic source; deterministic main executed; ordinary fits source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/audit_saved_neighbors.py"} filename={"audit_saved_neighbors.py"} language="python" />
 
-    <Prose>{"P is symmetric, its diagonal is zero, and its entries sum to 1 over "}<strong>{"ordered"}</strong>{" distinct pairs. For example, with n = 4, p_{B|A}=0.8 and p_{A|B}=0.6 contribute p_AB = p_BA = 1.4/8 = 0.175. The division by 2n averages the two directions and all rows. These conventions explain the factor 4 in the gradient later. "}<a href={"https://jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf"}>{"Original t-SNE paper, sections 2–3"}</a>{"."}</Prose>
+<Prose>{"Run it with the supplied data directory:"}</Prose>
 
-    <H2>{headings[4]}</H2>
+<CodeBlock language={"sh"}>{"python audit_saved_neighbors.py --assets ./manifold-learning"}</CodeBlock>
 
-    <Prose>{"Each input observation i has a map position yᵢ. In a two-dimensional map, yᵢ has two coordinates. t-SNE gives each pair a heavy-tailed weight"}</Prose>
+<Prose>{"Its newly computed saved-array stream is:"}</Prose>
 
-    <MathBlock>{"t_{ij}=\\frac{1}{1+\\|y_i-y_j\\|^2},\\qquad\nq_{ij}=t_{ij}/Z,\\qquad Z=\\sum_{k\\ne l}t_{kl},\\quad t_{ii}=q_{ii}=0."}</MathBlock>
+<p className="manifold-source-role">Recorded deterministic scratch/saved-array stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/audit_saved_neighbors.txt"} filename={"audit_saved_neighbors.txt"} language="output" />
 
-    <Prose>{"The Student-t kernel with one degree of freedom falls much more slowly than a Gaussian. At distance 3 its weight is 1/10; the Gaussian weight with σ = 1 is about 0.0111. This heavier tail gives the layout more room to represent moderately related points at separated positions. It addresses the "}<strong>{"crowding problem"}</strong>{": many neighbors at moderate input distances cannot all occupy corresponding nearby locations in a low-dimensional space. It does not remove the need to compromise."}</Prose>
+<Prose>{"This audit uses row-wise SciPy squared distances and an explicit source-ID tie rule. The historical digit programs used scikit-learn distance/rank routines. Their rounded and full-precision "}<InlineMath>{"T_k/C_k"}</InlineMath>{" values remain separately identified later; tiny differences arise from tied distances and numerical ordering, while these "}<InlineMath>{"R_{10}"}</InlineMath>{" values and source30 lists agree. That is why a comparison should disclose its convention instead of silently changing a metric column. No new embedding was fitted to produce this stream."}</Prose>
 
-    <Prose>{"t-SNE minimizes"}</Prose>
+<Prose>{""}<code>{"ordinary_audit"}</code>{" exposes "}<code>{"NearestNeighbors"}</code>{" and "}<code>{"trustworthiness"}</code>{" on the same rows. It removes self explicitly, including when duplicate ties place self unexpectedly. It does not promise the library will choose our source-ID tie order. A rigid translation or rotation preserves exact Euclidean distances, whereas rounding coordinates or changing the input metric can change tied rankings. We now have a way to judge a map; next we build the objects it tries to preserve."}</Prose>
 
-    <MathBlock>{"C=\\mathrm{KL}(P\\|Q)=\\sum_{i\\ne j}p_{ij}\\log(p_{ij}/q_{ij})."}</MathBlock>
+<H2>{"4. t-SNE turns each distance row into an effective neighborhood"}</H2>
 
-    <Prose>{"P is fixed after input affinities are built; moving Y changes Q. A large p paired with a tiny q is expensive: the map gives too little preference to an important input pair. KL is asymmetric. That emphasis does not eliminate repulsion—every q shares the denominator Z. Moving a low-p pair close also takes probability mass away from other pairs."}</Prose>
-    <figure className="mnfig" data-intuition="tsne-shared-denominator" style={{ background: '#111111', '--mnfig-border': '#353535', '--mnfig-ink': '#dedbd5', '--mnfig-muted': '#b5b1aa' }}>
-      <figcaption><strong>Move C, and the preference for unchanged pair A–B changes too</strong></figcaption>
-      <p>Constructed one-dimensional map. A and B remain at 0 and 1. Points share the same coordinate scale in both rows. The amber bar beneath each row is q(A, B), drawn on one common 0–0.5 scale.</p>
-      <svg style={{ width: '100%', maxWidth: '380px' }} viewBox="0 0 320 230" role="img" aria-label="Initially C is at 3; the ordered-pair denominator is 1.6 and q A B is 0.3125. Moving C to 2 increases the denominator to 2.4 and lowers q A B to five twenty-fourths, approximately 0.208333, while A and B remain one unit apart.">
-        {[{c: 3, total: '1.6', share: 0.3125}, {c: 2, total: '2.4', share: 5 / 24}].map((row, index) => <g key={row.c} transform={'translate(0 ' + index * 115 + ')'}>
-          <text x="16" y="20" style={{ fontSize: 16 }}>C at {row.c} · Z = {row.total}</text>
-          <line x1="16" x2="286" y1="52" y2="52" stroke="currentColor" />
-          {[['A', 0], ['B', 1], ['C', row.c]].map(([name, value]) => <g key={name}>
-            <circle cx={26 + 80 * value} cy="52" r="5" fill={name === 'C' ? '#e7b94a' : 'currentColor'} />
-            <text x={26 + 80 * value} y="76" textAnchor="middle" style={{ fontSize: 16 }}>{name}</text>
-          </g>)}
-          <rect x="16" y="87" width={260 * row.share / .5} height="15" fill="#e7b94a" />
-        </g>)}
-      </svg>
-      <LessonTable caption="Count both directions in Z; these are normalized ordered-pair probabilities" headers={['map positions', 'tAB, tAC, tBC', 'Z = 2 × sum', 'qAB = 0.5/Z']} rows={[
-        ['0, 1, 3', '0.5, 0.1, 0.2', '1.6', '0.3125'],
-        ['0, 1, 2', '0.5, 0.2, 0.5', '2.4', '0.208333…']
-      ]} />
-      <p>New closeness involving C claims more of the shared probability budget. A–B’s own kernel weight stays 0.5, but its normalized share falls. The gradient must therefore account for the denominator, not just independently pull each high-preference pair together.</p>
-    </figure>
+<ManifoldFigure id="D10" />
 
-    <ManifoldForceFigure />
+<Prose>{"Stand at one selected input record and draw arrows to three candidates at distances 1,2,3. A Gaussian gives nearby candidates more weight. With width "}<InlineMath>{"\\sigma=1"}</InlineMath>{", the unnormalized weights are "}<InlineMath>{"e^{-1/2},e^{-2},e^{-9/2}"}</InlineMath>{". Dividing by their sum gives approximately .805512, .179734 and .014753. The widest arrow ends at the nearest candidate. These are probabilities of selecting a neighbor conditioned on standing at this record, not probabilities of a digit class."}</Prose>
 
-    <Prose>{"The gradient for standard symmetric t-SNE is"}</Prose>
+<div className="neural-equation"><MathBlock>{"p_{j\\mid i}=\\frac{e^{-d_{ij}^2/(2\\sigma_i^2)}}{\\sum_{l\\ne i}e^{-d_{il}^2/(2\\sigma_i^2)}},\\qquad p_{i\\mid i}=0."}</MathBlock></div>
 
-    <MathBlock>{"\\nabla_{y_i}C=4\\sum_{j\\ne i}(p_{ij}-q_{ij})t_{ij}(y_i-y_j)."}</MathBlock>
+<Prose>{"Each row totals 1; different rows can have different widths. This adapts the neighborhood to local distance scale instead of forcing one width on both sparse and crowded regions."}</Prose>
 
-    <Prose>{"Gradient descent subtracts a step-size times this vector. If pᵢⱼ > qᵢⱼ, that pair's contribution pulls i toward j. If pᵢⱼ < qᵢⱼ, it pushes i away from j. Many pair contributions add, so the total motion need not point at the pair you selected. Section 10 derives the expression and runs a complete tiny optimizer."}</Prose>
+<Prose>{"The "}<a href={"/learn/path/full-curriculum/support-vector-machines-svm?module=classical-ml#5-change-similarity-with-a-valid-kernel"}>{"SVM kernel section"}</a>{" introduced a Gaussian shape "}<InlineMath>{"e^{-\\gamma d^2}"}</InlineMath>{"; here "}<InlineMath>{"\\gamma=1/(2\\sigma^2)"}</InlineMath>{". We now remove self and normalize separately in each row. That changes the object: these conditional affinities need not be symmetric or be a positive-semidefinite kernel Gram. The later symmetric "}<InlineMath>{"P"}</InlineMath>{" is a joint probability table, not kernel PCA's inner-product matrix."}</Prose>
 
-    <Prose><strong>{"Early exaggeration"}</strong>{" temporarily multiplies the attractive p term by a factor α > 1. Repulsion still uses Q. This helps build local groups before the ordinary refinement phase. The exaggerated matrix has sum α, so it is not a probability distribution; do not treat an exaggerated training diagnostic and the final normalized KL as points on one unchanged objective curve. A large step size or exaggeration can also produce poor optimization. Plain gradient descent need not decrease the loss at every step."}</Prose>
+<ManifoldFigure id="D11" />
 
-    <Prose>{"The objective is nonconvex: starting positions and optimization settings can lead to different answers. PCA initialization is a useful starting choice; a seed and recorded environment support repeatable experiments. Reproducibility means repeating the same computation, while robustness means checking whether meaningful neighborhoods survive deliberate changes. Neither requires two plots to have the same orientation. These are separate questions."}</Prose>
+<Prose>{"At width .5 the nearest candidate almost monopolizes the row. At width 2 the three arrows are more even. To measure the row's effective number of candidates, first calculate entropy "}<InlineMath>{"H_i=-\\sum_jp_{j\\mid i}\\log_2p_{j\\mid i}"}</InlineMath>{", then perplexity "}<InlineMath>{"2^{H_i}"}</InlineMath>{". Equivalently, natural-log entropy "}<InlineMath>{"h_i"}</InlineMath>{" gives "}<InlineMath>{"e^{h_i}"}</InlineMath>{". Our three widths yield perplexities 1.017464,1.724422 and2.786447. A uniform row over "}<InlineMath>{"m"}</InlineMath>{" candidates has entropy "}<InlineMath>{"\\log_2m"}</InlineMath>{" and perplexity "}<InlineMath>{"m"}</InlineMath>{"; a concentrated row has smaller effective count."}</Prose>
 
-    <Prose>{"The following settings are operational choices, not rules for discovering the “correct” number of clusters:"}</Prose>
+<Prose>{"A chosen perplexity is a target for each row's width search, not exactly a selected number of neighbors. If two candidates tie for the nearest distance, shrinking the width cannot select one of them: the limiting distribution gives each1/2. That row's lower perplexity limit is 2. Its upper limit is the candidate count. Target1.5 is then infeasible, even if it satisfies the estimator's global "}<code>{"perplexity < n"}</code>{" check. Our local solver returns explicit uniform and nearest-tie limits, and refuses targets outside the feasible interval."}</Prose>
 
-    <LessonTable caption={"t-SNE parameter choices and practical checks"} headers={["Setting", "Role and practical check"]} rows={[
-      [<><Code>{"perplexity"}</Code></>, <>{"Input affinity scale. Must be positive and less than n in the API; exact row support/ties further affect what entropy is achievable. Compare several valid values."}</>],
-      [<><Code>{"init"}</Code></>, <>{"Starting map; "}<Code>{"'pca'"}</Code>{", "}<Code>{"'random'"}</Code>{", or supplied coordinates. Changing a seed may have no visible effect if the selected initialization uses no effective randomness."}</>],
-      [<><Code>{"learning_rate"}</Code>{", "}<Code>{"early_exaggeration"}</Code></>, <>{"Step scale and temporary attraction. Inspect optimization rather than choosing by visual separation."}</>],
-      [<><Code>{"max_iter"}</Code></>, <>{"Iteration budget, including the early phase; complete the refinement phase before interpreting a map."}</>],
-      [<><Code>{"method"}</Code>{", "}<Code>{"angle"}</Code></>, <>{"Exact pair sums versus a tree approximation; angle controls approximation, not a display rotation."}</>]
-    ]} />
+<Prose>{"The first investigation varies only width. The distance-edit investigation lets you select one candidate and alter its distance as well as width; the probabilities and entropy change immediately. The code's target search reports achieved entropy and boundary/convergence status. Do not infer that a finite search has found a mathematically exact root merely because it stopped."}</Prose>
 
-    <Prose>{"In scikit-learn 1.9.1, "}<Code>{"learning_rate='auto'"}</Code>{" is "}<Code>{"max(n / early_exaggeration / 4, 50)"}</Code>{". For n = 300 and α = 12, it is 50, not 25 or 6.25. Its learning-rate convention differs by a factor of four from several other t-SNE implementations; copy the convention with the value. "}<Code>{"max_iter"}</Code>{" replaced the old name "}<Code>{"n_iter"}</Code>{" in version 1.5. "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html"}>{"TSNE API"}</a>{"."}</Prose>
+<ManifoldInvestigation id="L4" />
+<ManifoldInvestigation id="L5" />
 
-    <H2>{headings[5]}</H2>
+<ManifoldFigure id="D12" />
 
-    <Prose>{"UMAP starts from a local neighbor graph. Around each observation, it rescales distance relative to local spacing; nearby connections become strong and more distant connections become weak. It then combines the directed connections into one weighted graph and finds map coordinates through attractive and sampled repulsive updates. The graph and the coordinates are different objects."}</Prose>
+<Prose>{"Conditioning is directional. An illustrative pair with "}<InlineMath>{"p_{B\\mid A}=.8"}</InlineMath>{" and "}<InlineMath>{"p_{A\\mid B}=.6"}</InlineMath>{", in a four-record collection, becomes "}<InlineMath>{"P_{AB}=(.8+.6)/(2\\cdot4)=.175"}</InlineMath>{". The arrows merge into one symmetric pair weight. This pair is a simple normalization example; it is not the next fixture's fitted pair."}</Prose>
 
-    <Prose>{"For the ordinary local-connectivity setting, let ρᵢ be the distance to i's nearest positive-distance neighbor. A directed membership strength has the form"}</Prose>
+<ManifoldFigure id="D13" />
 
-    <MathBlock>{"v_{ij}=\\exp\\{-\\max(0,d(x_i,x_j)-\\rho_i)/\\sigma_i\\}"}</MathBlock>
+<Prose>{"Now use all four actual input positions0,1,3,7 and perplexity 2. The full conditional matrix places zero on its diagonal. Add it to its transpose and divide by "}<InlineMath>{"2n=8"}</InlineMath>{":"}</Prose>
 
-    <Prose>{"for retained neighbors, and zero otherwise. Thus a retained neighbor at or inside ρᵢ gets strength 1. σᵢ is fitted to a local neighbor-mass target. For the implementation's usual training neighbor arrays, which include self at index zero, "}<Code>{"smooth_knn_dist"}</Code>{" sums the nonself memberships and targets log₂("}<Code>{"n_neighbors"}</Code>{"). Keep this self-count convention explicit when translating a diagram into code. Nondefault "}<Code>{"local_connectivity"}</Code>{", duplicate points, limited support and the library's numerical floors require the actual implementation rather than blindly applying “ρ is the smallest array entry.” "}<a href={"https://umap-learn.readthedocs.io/en/latest/_modules/umap/umap_.html"}>{"UMAP graph-construction source"}</a>{"."}</Prose>
+<div className="neural-equation"><MathBlock>{"P_{ij}=\\frac{p_{j\\mid i}+p_{i\\mid j}}{2n}."}</MathBlock></div>
 
-    <Prose>{"A small calibration example makes that target concrete. Take a sorted training neighbor-distance row "}<Code>{"[0, 1, 1+ln 2, 1+ln 2]"}</Code>{", including self. With "}<Code>{"n_neighbors=4"}</Code>{", the target is log₂4=2. Here ρ=1 and σ=1 give the three nonself strengths "}<Code>{"1, 1/2, 1/2"}</Code>{", whose sum is exactly 2. Self is not one of those three graph edges. This constructed row demonstrates local calibration; it is not a claim about the distances of the digits."}</Prose>
+<Prose>{"Every "}<InlineMath>{"P_{ij}=P_{ji}"}</InlineMath>{", and the total over ordered nonself pairs is 1. A→B's conditional value .655887 and B→A's .604118 produce "}<InlineMath>{"P_{AB}\\approx.157500626"}</InlineMath>{". Each unordered pair appears twice in that total; its combined mass is "}<InlineMath>{"2P_{AB}"}</InlineMath>{". Keeping this convention now prevents a factor-of-two mistake in the later gradient."}</Prose>
 
-    <Prose>{"UMAP's fuzzy union combines both directions:"}</Prose>
+<Prose>{"The code calls "}<InlineMath>{"\\beta=1/(2\\sigma^2)"}</InlineMath>{". Increasing beta narrows the row and lowers entropy. "}<code>{"row_at_beta"}</code>{" subtracts the smallest squared distance before exponentiating; this common shift cancels in normalization and stops all weights from underflowing together. "}<code>{"solve_row"}</code>{" brackets beta, bisects once an upper bound exists and reports a status after a positive integer iteration budget. At "}<code>{"iteration-limit"}</code>{", the returned probabilities and beta describe the last evaluated row, even though its entropy has not met the tolerance. For example, distances[1,2,3], target perplexity2 and one iteration return the row at beta1, not the proposed next beta.5. A nonpositive budget is rejected before any boundary return. Entropy evaluation ignores zero-probability terms when evaluating "}<InlineMath>{"p\\log p"}</InlineMath>{", whose limiting value is 0. Uniform input scaling by "}<InlineMath>{"c>0"}</InlineMath>{" divides beta by "}<InlineMath>{"c^2"}</InlineMath>{" at the same target and preserves the row."}</Prose>
 
-    <MathBlock>{"w_{ij}=v_{ij}+v_{ji}-v_{ij}v_{ji}."}</MathBlock>
+<p className="manifold-source-role">corrected complete source; bounded solver-callable checks only; main not rerun</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/gaussian_rows.py"} filename={"gaussian_rows.py"} language="python" />
 
-    <Prose>{"With vᵢⱼ = 1/2 and vⱼᵢ = 1/4, the combined strength is 1/2 + 1/4 − 1/8 = 5/8. Taking the arithmetic average would instead give 3/8. If only one directed edge exists with strength 1/2, the union remains 1/2. If either direction has strength 1, the union has strength 1. These are membership strengths defined by this graph construction; a value of 0.625 is not an empirically calibrated 62.5% chance of a “true” topological connection."}</Prose>
+<Prose>{"The recorded deterministic stream below belongs to the preceding solver version; all four searches returned "}<code>{"converged"}</code>{". The current source keeps that path and corrects the "}<code>{"iteration-limit"}</code>{" tuple. The stream includes all four rows and the entire joint matrix:"}</Prose>
 
-    <ManifoldFuzzyGraphFigure />
+<p className="manifold-source-role">unchanged historical main stream of exact predecessor; all searches converged; not current-main execution</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/gaussian_rows.txt"} filename={"gaussian_rows.txt"} language="output" />
 
-    <Prose><strong>{"Investigation C — Build and inspect one fuzzy connection."}</strong>{" Edit distances and local scales for two neighborhoods. Follow the merged edge strength as each input changes. Then inspect an idealized single-pair attraction/repulsion cost as you choose a candidate map separation. One control changes graph input; another changes the map. They must not silently overwrite each other."}</Prose>
+<Prose>{""}<code>{"conditional_and_joint"}</code>{" retains the "}<InlineMath>{"n\\times n"}</InlineMath>{" joint object because the exact small t-SNE objective needs it; row work avoids a larger feature-offset tensor. This route costs "}<InlineMath>{"O(n^2D+I n^2)"}</InlineMath>{" for at most "}<InlineMath>{"I"}</InlineMath>{" search steps per row and uses "}<InlineMath>{"O(n^2+nD)"}</InlineMath>{" storage. Large implementations restrict or approximate affinity work. The ordinary "}<code>{"TSNE"}</code>{" route in §7 accepts the complete feature matrix and the perplexity; it does not expose a stable public “fit this row's bandwidth” method. The inspected local function is our teaching implementation, not a private package API."}</Prose>
 
-    <ManifoldFuzzyLab />
+<Prose>{"The Gaussian construction and symmetric normalization follow the "}<a href={"https://jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf"}>{"original t-SNE paper"}</a>{". We have established what the input wants. Next we need a probability model in the map that can compete with it."}</Prose>
 
-    <Prose>{"In the map, UMAP uses a smooth similarity"}</Prose>
+<H2>{"5. Give distant points room, then follow one force"}</H2>
 
-    <MathBlock>{"\\nu_{ij}=(1+a\\|y_i-y_j\\|^{2b})^{-1}."}</MathBlock>
+<ManifoldFigure id="D14" />
 
-    <Prose>{"The positive parameters a,b are fitted from "}<Code>{"min_dist"}</Code>{" and "}<Code>{"spread"}</Code>{". "}<Code>{"min_dist"}</Code>{" changes the preferred small-distance shape; it is not a hard exclusion radius that guarantees all output distances exceed it. "}<Code>{"spread"}</Code>{" sets a companion scale. "}<Code>{"n_neighbors"}</Code>{" changes the graph's input neighborhood scale, whereas "}<Code>{"min_dist"}</Code>{" changes layout behavior after the graph is constructed. UMAP can target more than two or three coordinates. For the ordinary API, choose integer "}<Code>{"n_neighbors"}</Code>{" at least 2 and smaller than the available training collection, positive integer "}<Code>{"n_components"}</Code>{", positive "}<Code>{"spread"}</Code>{", and "}<Code>{"0 ≤ min_dist ≤ spread"}</Code>{". Too-large neighborhood requests may be truncated by the implementation; choose the intended size explicitly, and leave enough samples for spectral initialization in the requested output dimension. "}<a href={"https://umap-learn.readthedocs.io/en/latest/parameters.html"}>{"Parameter tutorial"}</a>{"."}</Prose>
+<Prose>{"A patch in a high-dimensional neighborhood can have many moderately distant neighbors surrounding a point. Putting them all in a plane asks that plane to provide enough room at similar radii. The shell drawing contrasts this geometric shortage with a two-dimensional ring. This is the crowding problem: preserving every moderate separation can force points toward the center or distort other separations. In the constructed picture, eight cube corners "}<InlineMath>{"(\\pm1,\\pm1,\\pm1)"}</InlineMath>{" are all "}<InlineMath>{"\\sqrt3"}</InlineMath>{" from the center, and their smallest mutual separation is 2. Put the same eight IDs evenly on a planar circle of radius "}<InlineMath>{"\\sqrt3"}</InlineMath>{": adjacent IDs are only "}<InlineMath>{"2\\sqrt3\\sin(\\pi/8)<2"}</InlineMath>{" apart. Keeping each center-to-neighbor radius has compressed some neighbor-to-neighbor separations. Several overlapping neighborhoods compete for the same coordinates. This concrete conflict motivates the higher-dimensional shell picture; it is not measured digit density or a proof that a heavy tail preserves every requested distance."}</Prose>
 
-    <Prose>{"The all-pairs formulation motivates a binary cross-entropy cost, omitting terms constant in Y:"}</Prose>
+<ManifoldFigure id="D15" />
 
-    <MathBlock>{"L_{\\rm full}=-\\sum_{i<j}[w_{ij}\\log\\nu_{ij}+(1-w_{ij})\\log(1-\\nu_{ij})]."}</MathBlock>
+<Prose>{"t-SNE uses a heavier-tailed map kernel. At distance 3, the Student kernel is "}<InlineMath>{"1/(1+3^2)=.1"}</InlineMath>{", while a Gaussian of width 1 gives "}<InlineMath>{"e^{-9/2}\\approx.011109"}</InlineMath>{". A distant pair can therefore carry meaningful map weight without being compressed as close as a Gaussian map would demand. The heavy tail changes the map's competition; it does not make every global distance correct."}</Prose>
 
-    <Prose>{"The sum includes absent graph edges, whose w is zero: omitting them also omits repulsion. This expression is cross-entropy; it is not a symmetric divergence. Subtracting each pair's fixed Bernoulli entropy term gives a sum of Bernoulli KL divergences, again directed from input weights to output similarities. That subtracted term depends only on the input graph, so it does not change the minimizing layout."}</Prose>
-    <Prose>Read the two terms as opposing requests. A full-strength edge, w = 1, pays only −log ν and prefers high map similarity. An absent edge, w = 0, pays only −log(1 − ν) and prefers low similarity. An intermediate edge asks for a compromise. If attraction were the whole calculation, putting every point at the same coordinate would satisfy all attractive requests at once; the second term prevents that trivial solution in the ideal cost.</Prose>
+<Prose>{"Put three points A0,B1,C3 on a line. Keep A and B fixed, then move only C to2. Track the unchanged AB weight through the complete pair total."}</Prose>
 
-    <Prose>{"For a transparent single-pair example, set a = b = 1 and w = 5/8. At separation r = 1, ν = 1/2 and the cost is log 2 ≈ 0.693147. At r = 2, ν = 1/5 and the cost is about 1.089578. The ideal single-pair minimum occurs at ν = w, hence r = √(1/w − 1) = √(3/5) ≈ 0.774597. This follows by differentiating "}<Code>{"−w log ν − (1−w) log(1−ν)"}</Code>{". It explains the opposing terms; an entire graph cannot generally give every pair its individual optimum."}</Prose>
+<ManifoldFigure id="D16" />
 
-    <Prose><strong>{"Actual optimization is sampled."}</strong>{" The ordinary implementation schedules positive edges according to their weights, applies attraction, and samples other vertex indices for repulsion. Sampled vertices are not guaranteed to be non-neighbors. Positive edge scheduling already incorporates the weight; multiplying it by w again in every scheduled attraction step would change the procedure. Negative sampling also changes effective attraction/repulsion weighting: it is not merely an unbiased, faster evaluation of the displayed full-pair cost. This distinction is analyzed by "}<a href={"https://proceedings.neurips.cc/paper/2021/file/2de5d16682c3c35007e4e92982f1a2ba-Paper.pdf"}>{"Damrich & Hamprecht, sections 4–6"}</a>{". Our ideal pair calculation is deliberately labeled as that calculation, not as the trajectory of the library's optimizer."}</Prose>
+<Prose>{"Three points illustrate the effect. Change Y=(0,1,3) to Y=(0,1,2). A and B stay fixed, so their unnormalized kernel remains1/2. Initially the three unordered kernels are1/2,1/10,1/5; counting both orientations gives total2(.5+.1+.2)=1.6. After moving C, the kernels are1/2,1/5,1/2 and their ordered total is2.4. AB's normalized share therefore changes from5/16 to5/24 even though distance AB is unchanged. Move C in the investigation and read the pair numerator alongside the complete denominator."}</Prose>
 
-    <Prose>{"Here is the algorithm's causal order, without pretending it is runnable Python:"}</Prose>
+<Prose>{"For map coordinates "}<InlineMath>{"y_i\\in\\mathbb R^q"}</InlineMath>{", define"}</Prose>
 
-    <CodeBlock language={"text"}>{"Choose an input metric and neighborhood size.\nFind neighbors; fit local rho and sigma; form directed memberships.\nMerge reciprocal memberships into the weighted graph.\nInitialize map coordinates, commonly from a spectral graph embedding.\nSchedule positive edges using their membership strengths.\nFor each scheduled edge: attract its endpoint coordinates.\nFor sampled other vertices: apply repulsive updates.\nDecrease the step size over the epoch schedule; return the coordinates."}</CodeBlock>
+<div className="neural-equation"><MathBlock>{"t_{ij}=(1+\\|y_i-y_j\\|^2)^{-1},\\quad\nZ=\\sum_{a\\ne b}t_{ab},\\quad Q_{ij}=t_{ij}/Z,\\quad Q_{ii}=0."}</MathBlock></div>
 
-    <Prose>{"UMAP's topological construction motivates this procedure. Moving a finite graph into two dimensions adds graph estimation and optimization choices, so the map-reading contract still applies. The original mathematical framework is a deeper reading, not a guarantee about every practical plot. "}<a href={"https://arxiv.org/html/1802.03426v3"}>{"UMAP paper, algorithm and theoretical framework"}</a>{"."}</Prose>
-    <H3>Build the graph and take an explicit layout step</H3>
-    <Prose>The complete program below opens the mechanism behind those steps. NumPy arithmetic and SciPy sparse storage are primitives; neither constructs the UMAP graph for us. For each row, retain itself plus three nearest neighbors, place self first, and break equal-distance ties by row ID. Find the first positive distance for <Code>rho</Code>, then bisect <Code>sigma</Code> until the nonself membership sum approaches <Code>log2(4)=2</Code>. The six-row fixture produces the first directed row <Code>[0, 1, 0.678, 0.322, 0, 0]</Code>. Fuzzy union then admits evidence from either direction. If coordinate subtraction, squared distances or conversion to the package's float32 distances underflows or overflows, the reference asks you to rescale instead of silently constructing an invalid graph.</Prose>
-    <Prose><Code>fuzzy_simplicial_set</Code> checks the same supplied neighbor arrays; <Code>UMAP(...).fit(x).graph_</Code> checks the ordinary estimator's graph. Both use local connectivity one, union mixing one and the same neighborhood size. The tolerance allows float32 package arithmetic. Duplicates contribute unit-strength edges. Too many duplicates or too few finite neighbors can make the target mass unattainable: a bounded search and a distance-scale floor replace an imaginary exact root. Removed neighbors use <Code>-1</Code> and infinity and contribute no directed edge. Package boundary behavior outside the matched fixture must be checked against its installed version.</Prose>
-    <Prose>Two updates follow. <Code>full_pair_loss_gradient</Code> differentiates the ideal unordered-pair cost with <Code>a=b=1</Code>; a small step lowers it from 7.991337 to 7.883388. <Code>sampled_edge_step</Code> instead exposes the package-style positive attraction, supplied negative samples, repulsion stabilizer and coordinate clipping. Both positive endpoints move, while only the head moves for a negative sample. The caller supplies the schedule. This single step is not the full scheduler, initialization or annealing, and its path need not decrease the ideal cost. Use the estimator in section 7 for ordinary training.</Prose>
-    <CodeBlock language="sh">{'python -m pip install numpy==2.3.5 scipy==1.18.1 umap-learn==0.5.12\npython umap-mechanism.py'}</CodeBlock>
-    <MechanismProgram {...manifoldMechanismProgram} title="Read the complete UMAP graph and update program" />
-    <Prose>Exact neighbor search handles one distance row at a time, partitions at the retention boundary and sorts only retained neighbors: O(n²d + nk log k) work and O(nd + nk) peak storage for n rows, d features and k entries. Membership search costs O(64nk), and graph storage stays sparse. Large data needs an appropriate exact or approximate neighbor index. The ideal pair update costs O(n²q) for q coordinates. Sampled edge arithmetic costs O((1+s)q) for s supplied negatives, but this nonmutating reference first copies the complete coordinates, adding O(nq) work and storage per call. A production loop updates an owned coordinate array in place instead of making that copy for every edge. This reference exposes the mechanisms without claiming production neighbor-search performance.</Prose>
-    <details className="lesson-solution"><summary>Implementation practice: change the graph without changing the layout rule</summary><Prose>Run with k=3. Then restore k=4 and multiply input distances by five. Compare graph values and the same update from the same coordinates. Add an assertion that the rescaled graph is unchanged within tolerance. Finally set the update rate to zero.</Prose><details><summary>Hint and reasoned solution</summary><Prose>Changing k changes retained edges and the mass target. Uniform scaling changes rho and sigma together, preserving their ratio in each exponential and thus the graph, up to search tolerance. The scale-relative floor preserves this relation. With the graph, initial coordinates and negative IDs fixed, the update stays unchanged. Zero rate must preserve every coordinate, not just total loss. This separates distance calibration, neighborhood selection and step size.</Prose></details></details>
+<Prose>{"Like "}<InlineMath>{"P"}</InlineMath>{", "}<InlineMath>{"Q"}</InlineMath>{" is a symmetric probability distribution over ordered nonself pairs. The normalization joins all pairs, including ones whose endpoints did not move."}</Prose>
 
-    <H2>{headings[6]}</H2>
+<Prose>{"To match the input distribution, t-SNE minimizes"}</Prose>
 
-    <Prose>{"The supplied "}<a href={"/learn-assets/manifold-learning/digits-300.csv"}>{"digits-300.csv"}</a>{" contains 64 block-darkness measurements and a digit label per observation. E. Alpaydin and C. Kaynak's "}<strong>{"Optical Recognition of Handwritten Digits"}</strong>{" collection was created to study handwritten digit recognition. The measurements are integers from 0 to 16. This is the UCI optical-digits dataset distributed through scikit-learn, not MNIST. "}<a href={"https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits"}>{"UCI dataset, provenance and CC BY 4.0 license"}</a>{"."}</Prose>
+<div className="neural-equation"><MathBlock>{"C(Y)=\\operatorname{KL}(P\\|Q)=\\sum_{i\\ne j}P_{ij}\\log\\frac{P_{ij}}{Q_{ij}}."}</MathBlock></div>
 
-    <Prose>{"We select the first 30 available rows of each label from "}<Code>{"load_digits"}</Code>{", merge them in original row order, and retain that source-row identifier. The labels therefore influence "}<strong>{"selection"}</strong>{". They are never passed to the embedding fit. The balanced subset is convenient for inspection; its proportions describe this selected collection rather than handwriting in a population. The full provenance and exact selection recipe are in "}<a href={"/learn-assets/manifold-learning/data-provenance.md"}>{"data-provenance.md"}</a>{"."}</Prose>
+<Prose>{"A large input probability with a tiny map probability makes a large contribution. This direction of KL emphasizes keeping highly weighted input neighbors represented; reversing KL would pose a different problem. The objective is nonconvex: different starts can reach different configurations, and an individual step need not decrease the cost if its learning rate is too large."}</Prose>
 
-    <Prose>{"Our question is specific: "}<strong>{"does a nonlinear map preserve more of these 300 images' ten nearest pixel-distance neighbors than a two-component PCA map?"}</strong>{" All pixel features share a 0–16 scale. Dividing every feature by 16 preserves Euclidean rankings and puts values in 0–1 units; it does not learn scales from the data. Separately standardizing every pixel would change the metric by giving a quiet corner pixel the same variance scale as an active center pixel. We keep the common pixel scale for this question."}</Prose>
+<ManifoldInvestigation id="L6" />
 
-    <Prose>{"This is an exploratory map of one fixed collection. All 300 observations can participate in its fit. Section 8 changes the protocol when the purpose is predicting future observations."}</Prose>
+<ManifoldFigure id="D17" />
 
-    <Prose>{"Save this complete program as "}<Code>{"inspect_digits.py"}</Code>{" beside the supplied CSV. Install NumPy and scikit-learn into your own Python environment if needed, then run "}<Code>{"python inspect_digits.py"}</Code>{". The content probes used Python 3.12.14, NumPy 2.3.5 and scikit-learn 1.9.1. Matplotlib is not required for the numeric result. To reproduce that numerical environment in your own environment:"}</Prose>
+<Prose>{"For the four-point input from §4, start the map at(−1.5,−.5,.5,1.5). Select A. Each pair supplies a negative-gradient arrow "}<InlineMath>{"-4(P_{Aj}-Q_{Aj})t_{Aj}(y_A-y_j)"}</InlineMath>{". When "}<InlineMath>{"P>Q"}</InlineMath>{", negative gradient points toward that neighbor; when "}<InlineMath>{"P<Q"}</InlineMath>{", it points away. The arrows sum before any endpoint is updated. The total negative gradient for A is approximately+.0777846, so a learning rate .5 moves it right by+.0388923 before centering."}</Prose>
 
-    <CodeBlock language={"sh"}>{"python -m pip install numpy==2.3.5 scikit-learn==1.9.1\npython inspect_digits.py"}</CodeBlock>
+<Prose>{"At this start the ordered denominator is "}<InlineMath>{"Z=4"}</InlineMath>{". For A→B, "}<InlineMath>{"(P,Q,t,\\Delta)=(.157500626,.125,.5,-1)"}</InlineMath>{" gives a rightward contribution .065001252. A→C gives .031117664; A→D gives −.018334306, a leftward repulsion. Adding the three signed contributions gives .077784611. Updating all four from that same old state at rate .5 gives approximately[−1.461108,−.538805,.443699,1.556214] after centering. The arrows share one signed coordinate ruler; a negative contribution is not a negative probability."}</Prose>
 
-    <Program example={manifoldExamples.digitsAudit} />
+<Prose>{"The gradient, under our ordered-pair convention, is"}</Prose>
 
-    <Prose>{"The complete program was executed with Python 3.12.14, NumPy 2.3.5 and scikit-learn 1.9.1, reproducing the saved coordinates. The recorded run used 12 BLAS/OpenMP threads: "}<Code>{"n_jobs=1"}</Code>{" in TSNE does not constrain every numerical thread pool. Library builds and thread settings can change a nonlinear fit, so keep the saved coordinates for an exact map comparison. Recorded rounded results:"}</Prose>
+<div className="neural-equation"><MathBlock>{"\\nabla_{y_i}C=4\\sum_{j\\ne i}(P_{ij}-Q_{ij})t_{ij}(y_i-y_j)."}</MathBlock></div>
 
-    <ManifoldDigitsFigure />
+<Prose>{"The four-point step investigation keeps the input "}<InlineMath>{"P"}</InlineMath>{" fixed. Select an ID, edit only its current coordinate and choose a learning rate. A positive-rate Step updates every row from the same old state and then subtracts the new centroid; it reports that common shift. The current-coordinate editor starts with bounds−4 to4. After a Step, its labelled bounds expand symmetrically to contain every computed coordinate, and remain fixed while you edit or select another ID. The editor, point and live value always use that ID's same current coordinate. Reset returns the original four coordinates, selected A, rate.5 and bounds−4 to4. Learning rate 0 leaves all current coordinates unchanged, including after an edit. Centroid removal chooses a plotting origin, since translating all coordinates leaves every distance and the cost unchanged. An exactly coincident symmetric start can have zero forces; that stationary state does not establish a good minimum."}</Prose>
 
-    <Prose>{"For this collection and metric, all three t-SNE settings retain more of the original ten-neighbor selections than PCA in two dimensions. Perplexity 30 retains about 77.0%, so roughly 23.0% of directed ten-neighbor selections change. T₁₀ ≈ 0.9901 is high despite that difference: many replacements were not extremely remote in input rank. This is why the rank-weighted score and the direct retention fraction answer complementary questions."}</Prose>
+<ManifoldInvestigation id="L7" />
 
-    <Prose><strong>{"Investigation D — Audit an image's neighbors."}</strong>{" Choose an image before choosing its map. Inspect how many of its k input neighbors each candidate map retains using the visible image tiles and identity-matched neighbor edges. Change k to 5 or 20 and explain whether your previous conclusion still applies. A good investigation can find an image for which a globally stronger map has lower local retention. That query is an opportunity to inspect the data rather than a reason to hide it."}</Prose>
+<ManifoldFigure id="D18" />
 
-    <ManifoldDigitLab />
+<Prose>{"Practical t-SNE uses a separate early phase: multiplying attractive input weights by an exaggeration factor "}<InlineMath>{"\\alpha"}</InlineMath>{". The drawing keeps "}<InlineMath>{"Q"}</InlineMath>{"'s total 1 beside "}<InlineMath>{"\\alpha P"}</InlineMath>{"'s total "}<InlineMath>{"\\alpha"}</InlineMath>{". Those attractive weights are not a newly normalized probability distribution. Renormalizing them would undo exaggeration. Momentum adds part of an earlier displacement; learning-rate schedules, initialization and stopping criteria also change the trajectory. Our full small optimizer in §10 has no momentum or exaggeration, so it cannot claim byte-for-byte agreement with a package's final digit map."}</Prose>
 
-    <Prose>{"The saved comparisons also include seeds 7 and 19. With the specified PCA initialization these two seeds produced identical coordinates in the recorded environment: a useful null result, not a promise that every seed always changes a plot. A separate random-initialization pair at perplexity 30 supplies an actual alternative-initialization comparison. The plots use the saved coordinates and their measured results. Relocating or jittering individual observations would change their distances; a common rigid rotation preserves distances and neighbor selections."}</Prose>
+<Prose>{"The ordinary scikit-learn route specifies "}<code>{"early_exaggeration=12"}</code>{" through the default used in the retained snapshot and "}<code>{"learning_rate='auto'"}</code>{". That auto rule depends on sample count and exaggeration; different packages can use differently scaled learning-rate conventions. Treat a numeric rate as belonging to a particular update equation. In the four-point lab, .5 is the scalar multiplying the gradient just displayed. A large failed step remains a visible result, followed by Reset or a smaller step, rather than a hidden correction."}</Prose>
 
-    <H3>{"Try UMAP on the same offline collection"}</H3>
+<Prose>{"An explicit oversized step makes the limitation concrete. From the same four-point start and fixed "}<InlineMath>{"P"}</InlineMath>{", a single rate 100 update gives approximately[6.278461,−8.261085,−10.760275,12.742899], and KL rises from .053522403 to 1.360383966. This is one constructed update, not another saved optimizer trajectory. The editor's bounds now read−13 to13, with A still selected at its actual coordinate6.278461…; selecting C loads−10.760275… on the same ruler and in the exact-entry field. Editing C to−10 changes that coordinate and its forces immediately while retaining these bounds. The next positive-rate Step starts from those edited coordinates and expands the bounds again if needed. Reset restores the original state. A smaller step or a line-search rule addresses step size; it does not make the nonconvex objective globally solved."}</Prose>
 
-    <Prose>{"Save the following complete program as "}<Code>{"inspect_umap.py"}</Code>{" beside the CSV. It uses the same X and the same diagnostic. Install the package named "}<strong><Code>{"umap-learn"}</Code></strong>{", which provides the import "}<Code>{"umap"}</Code>{":"}</Prose>
+<H2>{"6. UMAP builds local memberships and samples their edges"}</H2>
 
-    <CodeBlock language={"sh"}>{"python -m pip install umap-learn==0.5.12\npython inspect_umap.py"}</CodeBlock>
+<Prose>{"The t-SNE row is normalized as a probability distribution. UMAP begins with a different object: how strongly a local neighborhood connects to each candidate. Its graph construction and ordinary sampled optimizer are distinct stages. We will trace each before comparing their behavior."}</Prose>
 
-    <Prose>{"This complete program was executed with UMAP 0.5.12, Python 3.12.14, NumPy 2.3.5 and scikit-learn 1.9.1, using one numerical thread. It produced 300 two-dimensional coordinates, R₁₀ = 0.7143 and T₁₀ = 0.9890. These are measurements for this selection, metric and configuration, not a universal ranking of UMAP against t-SNE. Record your installed versions and thread settings when comparing a new fit."}</Prose>
+<ManifoldFigure id="D19" />
 
-    <Program example={manifoldExamples.umapFit} />
+<Prose>{"Use six scalar observations0,.7,1.9,4.2,8.6,11.3. Each exact neighbor row includes self first and then the nearest three others, so the array width is "}<InlineMath>{"k_{graph}=4"}</InlineMath>{". The self entry has distance 0 and is excluded from the membership sum. A selected row shows neighbor IDs and their distances separately: an absent neighbor is represented by ID−1 and infinite distance, not a phantom vertex at distance 0."}</Prose>
 
-    <Prose>{"The output shape is "}<Code>{"(300, 2)"}</Code>{"; compare your measured scores with the recorded run. After the first fit, change just one parameter: try "}<Code>{"n_neighbors"}</Code>{" 5 or 50 while keeping the rest fixed, or "}<Code>{"min_dist"}</Code>{" 0.0 or 0.5 while keeping "}<Code>{"n_neighbors=15"}</Code>{". Compare the same neighbor audit. The graph can change in the first experiment; it stays fixed in the second if the neighbor search and other inputs are unchanged. Recording a seed can reduce parallel execution in UMAP; its reproducibility documentation explains the tradeoff. "}<a href={"https://umap-learn.readthedocs.io/en/latest/reproducibility.html"}>{"UMAP reproducibility"}</a>{"."}</Prose>
+<Prose>{"For the next picture use a separate constructed calibration row, distances[0,1,1+ln2,1+ln2]. It is not the retained six-observation dataset's first row."}</Prose>
 
-    <H2>{headings[7]}</H2>
+<ManifoldFigure id="D20" />
 
-    <H3>{"A map of this collection or a transform for future images?"}</H3>
+<Prose>{"Exclude self0. Choose offset1 and scale1: subtracting the offset and clipping at0 leaves nonself excesses0,ln2,ln2. Exponentiating their negatives gives strengths1,1/2,1/2; their sum is2. Only now name the offset "}<InlineMath>{"\\rho"}</InlineMath>{" and scale "}<InlineMath>{"\\sigma"}</InlineMath>{" in the general rule."}</Prose>
 
-    <Prose>{"A fixed-collection map can be fitted to every displayed row. A supervised evaluation asks a different question: how well will a model handle observations unavailable during fitting? Split first, fit preprocessing and the reducer only on the training portion, apply those fitted operations to validation/test rows, and evaluate the whole pipeline. Fit a separate scaler on new rows and you change the meaning of their coordinates."}</Prose>
+<Prose>{"UMAP gives each row a nearest-positive-distance offset "}<InlineMath>{"\\rho_i"}</InlineMath>{" and a scale "}<InlineMath>{"\\sigma_i>0"}</InlineMath>{". For this taught "}<code>{"local_connectivity=1"}</code>{" route,"}</Prose>
 
-    <Prose>{"Ordinary "}<Code>{"umap-learn"}</Code>{" supports "}<Code>{"transform(X_new)"}</Code>{". It finds relationships from new points to the fitted training data, initializes their coordinates using that reference, and refines them with the fitted training map held fixed. It is an out-of-sample procedure, not a learned neural encoder. A far-out new image can be poorly represented if the fitted reference supplies no relevant neighbors. Parametric UMAP instead learns an encoder; it still requires evaluation on the intended future distribution. "}<a href={"https://umap-learn.readthedocs.io/en/latest/transform.html"}>{"UMAP transform tutorial"}</a>{", "}<a href={"https://arxiv.org/abs/2009.12981"}>{"Parametric UMAP paper"}</a>{"."}</Prose>
+<div className="neural-equation"><MathBlock>{"v_{i\\to j}=\\exp\\!\\left[-\\frac{\\max(0,d_{ij}-\\rho_i)}{\\sigma_i}\\right],\n\\quad \\sum_{j\\ne i\\text{ in row}}v_{i\\to j}\\approx\\log_2(k_{graph})."}</MathBlock></div>
 
-    <Prose>{"Scikit-learn's "}<Code>{"TSNE"}</Code>{" has no "}<Code>{"transform"}</Code>{" method. Other t-SNE implementations offer reference-map extensions, and parametric variants learn mappings, so keep that limitation tied to the implementation rather than the entire family. For example, "}<a href={"https://opentsne.readthedocs.io/en/stable/examples/01_simple_usage/01_simple_usage.html"}>{"openTSNE's new-point tutorial"}</a>{" explains its reference embedding. Independently fitting t-SNE on test rows does not put those rows into the training map's coordinates."}</Prose>
+<Prose>{"Distances up to the offset get membership1. Memberships in a row need not total 1, and they do not describe class probabilities. The logarithmic target calibrates local scales; it is not the perplexity entropy equation from t-SNE."}</Prose>
 
-    <Prose>{"Here is a complete UMAP train/validation example using the same CSV. The label is passed only to the classifier. Calling "}<Code>{"UMAP.fit_transform(X_train, y_train)"}</Code>{" would invoke label-informed behavior; this example deliberately does not do so. All three methods receive the same stratified 225/75 split; labels in this split and in the collection's original selection are disclosed. Save the program as "}<Code>{"compare_transforms.py"}</Code>{" beside the CSV and run "}<Code>{"python compare_transforms.py"}</Code>{" after the UMAP setup above."}</Prose>
+<Prose>{"In the distinct retained six-observation first row, "}<InlineMath>{"\\rho=.7"}</InlineMath>{", the scale is approximately3.0883 and its memberships to the next three records are1,.678,.322. That saved stream is not replaced by the transparent constructed calibration."}</Prose>
 
-    <Program example={manifoldExamples.heldoutTransform} />
+<ManifoldFigure id="D21" />
 
-    <Prose>{"In the recorded run, pixels and PCA-10 each classified 73 of 75 validation images correctly (0.9733), while UMAP-10 classified 71 (0.9467). The nonlinear representation did not improve this particular classifier and split. Two observations are a small difference on a small validation set; this is a baseline comparison, not evidence of a universal ordering."}</Prose>
+<Prose>{"Repeated zero distances, clamping by rho and missing neighbors alter the scale search. If enough memberships are pinned to 1, the target can be a boundary rather than an attainable finite root. The package also applies a small distance-scale floor to sigma. The complete teaching graph source retains that floor and its fixed64-step search. Read its result as an approximate package-style calibration, not a proof that every row reaches the target exactly. For explicit constructed nonself-distance examples, compare the self-first rows [0,1,2,3], [0,0,1,2] and [0,1,2,∞], all with array width 4. In the duplicate row, rho is 1 and both nonself distances 0 and 1 are pinned to membership 1, already reaching the target 2 before the third positive term. No positive finite scale makes that total exactly 2. In the removed-neighbor row, the absent slot has ID −1 and contributes no membership; target 2 is only its large-scale limit. The finite search still returns its bounded result. In this retained teaching source, the floor is .001 times the finite row mean when rho is positive, and .001 times the global finite-distance mean otherwise; the final scale is the larger of the search result and that floor. A floor does not establish root attainment."}</Prose>
 
-    <Prose>{"Ten output dimensions are a candidate for a prediction task, not a visually chosen optimum. Tune the dimension and reducer settings inside training-only resampling, then use untouched evaluation data for a final performance estimate. A coordinate system can differ between cross-validation folds without invalidating cross-validation: each fold trains its classifier and evaluates its validation rows in "}<strong>{"that fold's own fitted transform"}</strong>{". The broken workflow is mixing coordinates from unrelated fits within one model, or allowing evaluation data to influence its fitting."}</Prose>
+<ManifoldFigure id="D22" />
 
-    <H3>{"What should be clustered?"}</H3>
+<Prose>{"Local membership is directional because the two rows have different offsets and scales. At physical distance 2, two rows with rho1 and sigma 1/ln2 or1/ln4 give strengths.5 and.25. Their fuzzy union is"}</Prose>
 
-    <Prose>{"If your question concerns clusters in the pixel metric, cluster and assess that representation or a justified preprocessing of it. You may color a map with that result to inspect it. Clustering after UMAP is also a possible modeling choice, but it changes the geometry and density on which the clustering operates. Validate that complete choice against the intended task and a baseline. A density-based clusterer does not automatically repair the density changes in an embedding. "}<a href={"/learn/path/full-curriculum/clustering-evaluation-validation-silhouette-ari-nmi?module=classical-ml"}>{"Clustering Evaluation & Validation"}</a>{" supplies the evaluation framework; "}<a href={"/learn/path/full-curriculum/dbscan-density-based-clustering?module=classical-ml"}>{"DBSCAN & Density-Based Clustering"}</a>{" explains its particular density model."}</Prose>
+<div className="neural-equation"><MathBlock>{"w_{ij}=v_{i\\to j}+v_{j\\to i}-v_{i\\to j}v_{j\\to i}=.625."}</MathBlock></div>
 
-    <H3>{"What will become expensive?"}</H3>
+<Prose>{"It behaves like “at least one connection” under an algebraic independence analogy; it is not an empirical probability that two records belong to the same class. The arithmetic mean would be.375, a different graph. Directly edit the two strengths in the investigation and see both union and mean. Those controls describe the combination rule, while the preceding rows explain how memberships arise from distances."}</Prose>
 
-    <Prose>{"One dense n × n float64 matrix occupies 8n² bytes before overhead or copies: 10,000 rows require 800 MB; 100,000 require 80 GB; 500,000 require 2 TB, in decimal units. Isomap's all-pairs shortest-path distances can require such storage. LLE can use a sparse weight matrix, so “an n × n matrix” alone does not prove it needs dense n² storage; the solver and sparsity matter."}</Prose>
+<Prose>{"The retained graph program finds exact neighbors without a feature-broadcast tensor, solves scales, stores directed memberships in compressed sparse row (CSR) form and combines the sparse matrix with its transpose. CSR stores each row's nonzero column indices and values, with an offset array locating the start of each row; missing entries need no stored value. Its "}<code>{"main"}</code>{" also compares the graph with "}<code>{"fuzzy_simplicial_set"}</code>{", then fits a small ordinary UMAP model. The stream below belongs to that earlier full run; it has not been executed again here. The source deliberately uses package internals for a version-bound mechanism comparison, while ordinary application uses the public "}<code>{"UMAP"}</code>{" API in §7."}</Prose>
 
-    <Prose>{"Exact t-SNE uses dense pair relationships. Barnes–Hut uses sparse input affinities and a tree approximation for repulsion, commonly described as O(n log n) per gradient evaluation in low output dimension. In two dimensions the tree is a quadtree; in three it is an octree. An angle of zero does not recreate every aspect of the separately implemented exact method because affinity sparsification is a separate choice. Interpolation methods such as FIt-SNE use grid-based approximations to repulsive sums. "}<a href={"https://jmlr.org/papers/v15/vandermaaten14a.html"}>{"Barnes–Hut t-SNE paper"}</a>{", "}<a href={"https://www.nature.com/articles/s41592-018-0308-4"}>{"FIt-SNE paper"}</a>{"."}</Prose>
+<ManifoldInvestigation id="L8" />
 
-    <Prose>{"For UMAP, the sparse graph has roughly O(nk) stored neighbor relationships; positive/negative updates depend on retained edges, epoch count and negative-sample rate. Approximate neighbor search has its own data- and implementation-dependent cost. There is no universal n^1.14 runtime law or “faster at every scale” conclusion. Benchmark the actual data shape, metric, precision, implementation, initialization/JIT policy, hardware and thread count. First compare a representative subset; preserve sample-selection information when interpreting its geometry."}</Prose>
+<p className="manifold-source-role">unchanged original programme; retained stream, not executed</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/umap-mechanism.py"} filename={"umap-mechanism.py"} language="python" />
 
-    <H2>{headings[8]}</H2>
+<p className="manifold-source-role">unchanged retained historical stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/retained-umap-mechanism.txt"} filename={"retained-umap-mechanism.txt"} language="output" />
 
-    <Prose>{"This branch develops the classical manifold methods rather than treating them as names in a menu. A "}<strong>{"Gram matrix"}</strong>{" stores pairwise dot products. An eigenvector of a symmetric matrix is a direction scaled by the matrix; its eigenvalue is that scale. The algorithms below use these directions to assemble coordinates. "}<a href={"/learn/path/full-curriculum/eigenvalues-eigenvectors?module=math-foundations"}>{"Eigenvalues & Eigenvectors"}</a>{" supplies further background."}</Prose>
+<Prose>{"The maximum graph discrepancy3.34e−08 is for this six-row fixture under the recorded package version. It is evidence about the graph, not about every optimized coordinate. The ideal pair loss and sampled-head line refer to the separate layout calculations that we now open."}</Prose>
 
-    <H3>{"9.1 Classical MDS: recover coordinates from distances"}</H3>
+<ManifoldFigure id="D23" />
 
-    <Prose>{"Suppose we only know three pairwise distances: d_AB=2, d_BC=3, d_AC=5. A suitable one-dimensional configuration is "}<Code>{"[0,2,5]"}</Code>{". After subtracting its mean 7/3, the positions are "}<Code>{"[-7/3,-1/3,8/3]"}</Code>{"."}</Prose>
+<Prose>{"In the map, UMAP uses a curve "}<InlineMath>{"\\nu(r)=1/(1+a r^{2b})"}</InlineMath>{". The ordinary package fits "}<InlineMath>{"a,b"}</InlineMath>{" from "}<code>{"min_dist"}</code>{" and "}<code>{"spread"}</code>{"; it does not simply substitute "}<code>{"min_dist"}</code>{" into an edge-length constraint. Small map distances have high membership. The fit uses a target curve that stays at 1 up to "}<code>{"min_dist"}</code>{", then decays as "}<InlineMath>{"\\exp[-(r-\\mathrm{min\\_dist})/\\mathrm{spread}]"}</InlineMath>{". It approximates this target with the two-parameter map curve; it does not forbid a pair from falling below "}<code>{"min_dist"}</code>{". The transparent teaching curve fixes "}<InlineMath>{"a=b=1"}</InlineMath>{", so "}<InlineMath>{"\\nu=1/(1+r^2)"}</InlineMath>{". It is marked as that curve, rather than advertised as the ordinary default fit."}</Prose>
 
-    <Prose>{"Classical multidimensional scaling recovers this kind of coordinate information without already knowing the positions. Square the distance matrix D elementwise, center both its rows and columns with J = I − 11ᵀ/n, and form"}</Prose>
+<ManifoldFigure id="D24" />
 
-    <MathBlock>{"B=-\\tfrac12 J D^{\\circ2}J."}</MathBlock>
+<Prose>{"For one unordered pair with graph membership "}<InlineMath>{"w=.625"}</InlineMath>{", the ideal Bernoulli pair cost is"}</Prose>
 
-    <Prose>{"Why does this work? Squared distance is "}<Code>{"||x_i||² + ||x_j||² − 2 x_i·x_j"}</Code>{". Double centering removes the first two separate row/column terms, leaving the centered dot products. Here"}</Prose>
+<div className="neural-equation"><MathBlock>{"\\mathrm{CE}(w,\\nu)=-w\\log\\nu-(1-w)\\log(1-\\nu)."}</MathBlock></div>
 
-    <MathBlock>{"B=\\frac19\\begin{bmatrix}49&7&-56\\\\7&1&-8\\\\-56&-8&64\\end{bmatrix}."}</MathBlock>
+<Prose>{"At "}<InlineMath>{"r=1,\\nu=.5"}</InlineMath>{", the cost isln2. At "}<InlineMath>{"r=2,\\nu=.2"}</InlineMath>{", it is approximately1.0895775. Differentiate with respect to the membership: the minimum has "}<InlineMath>{"\\nu=w"}</InlineMath>{". With "}<InlineMath>{"a=b=1"}</InlineMath>{", that would require "}<InlineMath>{"r=\\sqrt{(1-w)/w}=\\sqrt{.6}"}</InlineMath>{". This is the isolated pair's optimum; other edges share its endpoints and prevent every pair from choosing its own radius. Subtracting the constant Bernoulli entropy "}<InlineMath>{"H(w)"}</InlineMath>{" turns this cross-entropy into KL between Bernoulli distributions, without changing its coordinate gradient."}</Prose>
 
-    <Prose>{"It equals yyᵀ for y = "}<Code>{"[-7/3,-1/3,8/3]"}</Code>{", so it has one positive eigenvalue 38/3 and two zero eigenvalues. If B = VΛVᵀ, use columns "}<Code>{"v_l sqrt(lambda_l)"}</Code>{" for the retained positive eigenvalues. The resulting sign can flip while all reconstructed distances stay the same."}</Prose>
+<Prose>{"The two contributions show the tradeoff: at radius 1 they are .433216988 attractive and .259930193 repulsive; at radius 2 they are 1.005898695 and .083678832. The sum at radius 2 is 1.089577527. For graph weight0, the absent-pair term prefers arbitrarily large separation; for weight1, the present-pair term prefers radius 0. For "}<InlineMath>{"0<w<1"}</InlineMath>{", exact radius 0 has infinite absent-pair cost. Interpret endpoints by their limits instead of evaluating "}<InlineMath>{"0\\log0"}</InlineMath>{" directly."}</Prose>
 
-    <ManifoldMdsFigure />
+<Prose>{"Vary only this pair's radius in the investigation. Keep the attraction and repulsion terms visible together. The complete "}<code>{"full_pair_loss_gradient"}</code>{" in the retained graph source sums each unordered pair once, including pairs with zero graph membership. It uses row-wise offsets and "}<InlineMath>{"O(n^2q)"}</InlineMath>{" work, without retaining a full coordinate-offset tensor. It refuses near-coincident pairs for this smooth reference calculation. Its7.991337→7.883388 stream is one exact full-pair gradient step on six declared coordinates, not an ordinary UMAP epoch."}</Prose>
 
-    <Prose>{"For general dissimilarities, B can have negative eigenvalues. That indicates these dissimilarities are not exactly the squared-distance geometry of a Euclidean point set; keeping positive components is then an approximation. "}<strong>{"Metric MDS"}</strong>{" is a different optimization: minimize distance stress "}<Code>{"Σ_{i<j}(δ_ij − ||y_i−y_j||)²"}</Code>{". "}<strong>{"Nonmetric MDS"}</strong>{" fits a monotone relation to the dissimilarities and prioritizes their ordering. Do not compare a reported strain, raw stress and normalized stress as the same quantity. Classical MDS applied to Euclidean distances recovers the PCA score geometry of the centered input when the same dimension is retained: both are extracting the same centered dot-product structure by different routes. "}<a href={"https://scikit-learn.org/stable/modules/manifold.html#multi-dimensional-scaling-mds"}>{"MDS guide"}</a>{"."}</Prose>
+<ManifoldInvestigation id="L9" />
 
-    <H3>{"9.2 Isomap: change the distances before MDS"}</H3>
+<ManifoldFigure id="D25" />
 
-    <Prose>{"Isomap builds a neighbor graph, computes shortest paths, and passes those graph distances to classical MDS. In our U with radius 1, graph distances are "}<Code>{"|i−j|"}</Code>{" for indices 0…6. They are exactly the distances of the straight coordinates "}<Code>{"[0,1,2,3,4,5,6]"}</Code>{"; after centering, classical MDS gives "}<Code>{"[-3,-2,-1,0,1,2,3]"}</Code>{", up to sign. The A–G distance remains 6. These are the same route lengths you counted in section 2, now used to recover all coordinates at once."}</Prose>
+<Prose>{"The ordinary optimizer does not evaluate all absent pairs each epoch. It schedules positive graph edges and samples negative vertices. In the retained sampled function, a positive edge moves both endpoints; a negative event moves only its head. An event with the head as its own negative is skipped, a coincident negative contributes no displacement in this taught branch, repulsion uses a .001 stabilizer and each coordinate update is clipped. Later negative events see the head after its preceding updates. These operations matter as much as a name for the loss."}</Prose>
 
-    <Prose>{"Increasing the radius to 1.5 creates diagonal corner shortcuts, giving A–G length "}<Code>{"2 + 2sqrt(2)"}</Code>{" ≈ 4.828427. At radius 2 it admits the direct two-unit crossing. Isomap cannot tell that an edge traverses empty space when the input metric calls it a neighbor. Conversely, disconnected components have infinite intercomponent graph distances; forcing them into one finite-distance calculation requires an explicit decision, not an unexplained layout."}</Prose>
+<Prose>{"Consider a constructed edge occurring once per four elementary schedule slots. If a positive event displaces endpoints by "}<InlineMath>{"\\delta"}</InlineMath>{", its expected displacement is "}<InlineMath>{"\\delta/4"}</InlineMath>{". Multiplying the event by its weight .25 again gives "}<InlineMath>{"\\delta/16"}</InlineMath>{": double weighting. The finite enumeration below supplies a noise distribution explicitly. In this experiment one independent negative event happens per elementary slot; the ordinary UMAP negative schedule is tied to positive events, so their frequencies must be matched before comparing an expected field."}</Prose>
 
-    <Prose>{"Recovering a sampled manifold's intrinsic geometry needs conditions: sufficient sampling, useful local distances, an appropriate connected graph, and geometry representable in the requested Euclidean coordinates. A curved sphere cannot be flattened into a plane preserving every geodesic distance. A hole in a sheet can make shortest routes bend around it, so a method based on global distance preservation can behave differently from one preserving local reconstruction. The canonical Swiss-roll and Swiss-hole comparison is valuable for precisely that reason. "}<a href={"https://scikit-learn.org/stable/auto_examples/manifold/plot_swissroll.html"}>{"Scikit-learn Swiss roll and Swiss hole example"}</a>{"."}</Prose>
+<p className="manifold-source-role">Recorded deterministic source; deterministic main executed; ordinary fits source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/sampled_pair_events.py"} filename={"sampled_pair_events.py"} language="python" />
 
-    <H3>{"9.3 LLE: keep the recipe for making each point from neighbors"}</H3>
+<p className="manifold-source-role">Recorded deterministic scratch/saved-array stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/sampled_pair_events.txt"} filename={"sampled_pair_events.txt"} language="output" />
 
-    <Prose>{"Locally Linear Embedding chooses nearby observations and expresses each point as a weighted combination of them. For point xᵢ with neighbor indices Nᵢ, solve"}</Prose>
+<Prose>{""}<code>{"positive_event"}</code>{" conserves the pair's total coordinate. "}<code>{"negative_event"}</code>{" does not move the sampled negative endpoint, so its field can move the centroid. The displayed expected vector averages events from one fixed starting state; a realized sequence updates that state between events. The "}<code>{"rate=0"}</code>{" case is exactly unchanged. A directed, asymmetric expected field need not be the gradient of one scalar objective. That is why the "}<a href={"https://arxiv.org/abs/2103.14608"}>{"True Loss analysis"}</a>{" studies the actual sampling procedure instead of treating the full-pair idealization as the complete implementation."}</Prose>
 
-    <MathBlock>{"\\min_{w_{ij}}\\left\\|x_i-\\sum_{j\\in N_i}w_{ij}x_j\\right\\|^2,\n\\qquad \\sum_{j\\in N_i}w_{ij}=1."}</MathBlock>
+<ManifoldFigure id="D26" />
 
-    <Prose>{"The weights may be negative. The sum-to-one constraint makes the recipe invariant under translation: adding c to every point adds c to both reconstructed and original positions. Rotating the whole neighborhood or multiplying all coordinates by one common nonzero scale also preserves the unregularized optimal weights. An arbitrary anisotropic feature rescaling generally does not."}</Prose>
+<Prose>{"Local scale also helps explain what an ordinary UMAP map may fail to show. Compute a graph-weighted squared radius using two neighbors at distances 1 and3 with weights1 and.5. The weighted products are 1 and4.5; dividing their sum by 1.5 gives 11/3. Doubling both distances with weights fixed gives 44/3 and changes the log squared radius byln4, apart from a declared epsilon. This local graph-weighted scale is not a calibrated global probability density."}</Prose>
 
-    <Prose>{"Take xᵢ = (1,0), with neighbors (0,0) and (3,0). Writing "}<Code>{"1 = 0*w_left + 3*w_right"}</Code>{" and "}<Code>{"w_left+w_right=1"}</Code>{" gives weights "}<Code>{"(2/3,1/3)"}</Code>{". If their output positions are 0 and 6, the recipe puts the target at 2. It preserves relative placement in that local patch even though the patch has doubled in size."}</Prose>
+<Prose>{"The densMAP extension attempts to retain local density information alongside neighborhood structure. The following scratch file exposes the radius calculation and supplies the complete ordinary densMAP call, including density weight, active fraction, variance shift and output radii. Its fitting function is source-only here; no new density map or stream is claimed."}</Prose>
 
-    <ManifoldLleFigure />
+<p className="manifold-source-role">Recorded deterministic source; deterministic main executed; ordinary fits source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/local_density_radius.py"} filename={"local_density_radius.py"} language="python" />
 
-    <Prose>{"Once every row of W is fitted, LLE chooses all output positions together by minimizing"}</Prose>
+<p className="manifold-source-role">Recorded deterministic scratch/saved-array stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/local_density_radius.txt"} filename={"local_density_radius.txt"} language="output" />
 
-    <MathBlock>{"\\sum_i\\left\\|y_i-\\sum_jw_{ij}y_j\\right\\|^2\n=\\operatorname{tr}(Y^T(I-W)^T(I-W)Y)."}</MathBlock>
+<Prose>{"The scratch stream calculates only two local radius cases. "}<code>{"densmap_route"}</code>{" would return a model, an "}<InlineMath>{"n\\times2"}</InlineMath>{" coordinate array and two length-"}<InlineMath>{"n"}</InlineMath>{" log-radius arrays. Package code also uses graph orientation, neighbor distances and epsilon, so the simple two-neighbor calculation teaches the quantity rather than claiming every stored package value is identical. "}<code>{"dens_lambda"}</code>{" changes the density term's weight, "}<code>{"dens_frac"}</code>{" its active optimization fraction and "}<code>{"dens_var_shift"}</code>{" its variance stabilizer. A larger "}<code>{"min_dist"}</code>{" changes the map curve and appearance; it does not alone guarantee faithful density."}</Prose>
 
-    <Prose>{"Without constraints, Y = 0 would give zero error. Requiring centered coordinates and a fixed coordinate covariance prevents that collapse. The solution uses the bottom nonconstant eigenvectors of "}<Code>{"(I−W)ᵀ(I−W)"}</Code>{". A very small reconstruction residual is therefore not directly comparable with Isomap distance error or a t-SNE KL score."}</Prose>
-    <Prose>The eigenvectors are solving an ordering problem, not discovering coordinates by magic. Each candidate coordinate column receives a penalty for breaking the fitted neighbour recipes. A constant column has no penalty because every recipe sums to one, but it locates all observations at the same place. Remove that constant direction and fix the column’s length. The smallest remaining eigenvalue identifies the direction with the least recipe-breaking cost under that fixed scale. Additional orthogonal directions supply the next least costly coordinates.</Prose>
+<Prose>{"The inspected "}<a href={"https://umap-learn.readthedocs.io/en/latest/_modules/umap/umap_.html"}>{"UMAP source"}</a>{" returns cached results when the input matches its training data before reaching the densMAP new-input refusal. Thus "}<code>{"transform(training_rows)"}</code>{" can succeed while "}<code>{"transform(new_rows)"}</code>{" is unsupported. This is an API boundary, not a contradiction. The density radius/API explanation is supported by implementation and creator descriptions; the full densMAP paper's inaccessible derivation and biomedical conclusions are outside this lesson's established proof scope."}</Prose>
 
-    <Prose>{"For one neighborhood set zⱼ = xⱼ − xᵢ and Cⱼₗ = zⱼ·zₗ. If C is invertible, the constrained least-squares solution is "}<Code>{"w=C⁻¹1 / (1ᵀC⁻¹1)"}</Code>{"; implement it with a linear solve. Singular or nearly singular neighborhoods need regularization or another formulation. Standard LLE usually adds a small multiple of the trace to the diagonal. Neighbor count, local rank and regularization affect the result. Modified LLE uses multiple reconstruction vectors to address this sensitivity; it is a different estimator, not a tolerance setting with guaranteed identical output."}</Prose>
+<H2>{"7. Compare real maps through the same records"}</H2>
 
-    <H3>{"9.4 What the neighboring spectral methods change"}</H3>
+<Prose>{"The constructed rows exposed each method's operations. Return now to the optical digits: do those operations keep useful relationships in a measured collection?"}</Prose>
 
-    <Prose><strong>{"Laplacian Eigenmaps"}</strong>{" starts with a weighted graph A and minimizes "}<Code>{"Σ_{i,j}A_ij ||y_i−y_j||²"}</Code>{", with centering/scale constraints. Let D contain vertex weighted degrees and L=D−A; the corresponding coordinate problem uses a Laplacian eigenproblem. This penalizes separated connected vertices directly, whereas LLE penalizes failure of a multi-neighbor reconstruction recipe. UMAP often uses a spectral graph embedding to initialize its later optimization. Initialization supplies starting coordinates; it is not the final UMAP objective."}</Prose>
+<ManifoldFigure id="D27" />
 
-    <Prose><strong>{"Hessian LLE"}</strong>{" uses local second-order structure, and "}<strong>{"Local Tangent Space Alignment"}</strong>{" estimates local tangent coordinates then aligns overlapping patches. The latter's “tangent” means the best local flat approximation, connecting back to the paper surface in section 2. Both need enough well-conditioned local observations to estimate the chosen structure. These are specialist alternatives when the geometry and sampling support their local assumptions; their derivations are further reading. This lesson owns their manifold-method comparison; "}<a href={"/learn/path/full-curriculum/spectral-graph-theory?module=math-foundations"}>{"Spectral Graph Theory"}</a>{" owns graph spectra and "}<a href={"/learn/path/full-curriculum/differential-geometry-riemannian-manifolds?module=math-foundations"}>{"Differential Geometry & Riemannian Manifolds"}</a>{" owns the continuous geometry."}</Prose>
+<Prose>{"The paired plots show all 300 source IDs in input-informed inspection and in saved PCA, t-SNE and UMAP maps. Coordinate axes keep equal aspect ratio within each map. Map scale and orientation can differ between methods; the plots do not use inter-map distances as a statistic. A label overlay identifies the recorded digits only after fitting. Local styles can mix or separate without proving a clustering, classification or density result."}</Prose>
 
-    <H3>{"9.5 A hole in the picture versus a hole in a distance construction"}</H3>
+<Prose>{"The first ordinary program loads all 64 features, divides by 16, excludes self in its neighbor lists and computes mean retention. PCA fits two components using a full singular value decomposition (SVD). Each t-SNE call uses PCA initialization, automatic learning rate,1000 iterations, Barnes–Hut forces, angle.5 and seed 7. The returned coordinate CSV keeps ID and label columns next to the map coordinates. "}<code>{"n_jobs=1"}</code>{" governs the neighbor operation; the retained execution also records its BLAS/OpenMP thread context. A seed alone does not standardize every floating-point implementation."}</Prose>
 
-    <Prose>{"Take a unit square A=(0,0), B=(1,0), C=(1,1), D=(0,1). In a Vietoris–Rips construction, connect pairs at distance at most ε and include a filled triangle whenever its three edges exist. For 1 ≤ ε < √2, only the four sides connect, leaving one loop. At ε = √2 the diagonals and their filled triangles enter, and that loop disappears."}</Prose>
+<p className="manifold-source-role">unchanged original programme; retained stream, not executed</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/inspect_digits.py"} filename={"inspect_digits.py"} language="python" />
 
-    <Prose>{"Now project to the first coordinate: A,D both map to 0 and B,C both map to 1. At ε = 0, each coincident pair connects; at ε = 1 all pairs connect and the filled simplices appear together. There is no corresponding interval containing the square's unfilled loop. The distance structure changed before the topology calculation began. This exact projection counterexample is not a simulated t-SNE/UMAP output; it isolates why computing a topological summary before and after reduction answers different questions. "}<a href={"/learn/path/full-curriculum/topology-topological-data-analysis-tda?module=math-foundations"}>{"Topology & Topological Data Analysis"}</a>{" develops filtrations and persistence."}</Prose>
+<p className="manifold-source-role">unchanged retained historical stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/retained-inspect_digits.txt"} filename={"retained-inspect_digits.txt"} language="output" />
 
-    <ManifoldTopologyFigure />
+<Prose>{"These are retained results for these exact data and settings: PCA "}<InlineMath>{"R_{10}=.376333"}</InlineMath>{", t-SNE perplexity 5 .710333,30 .770333 and80 .762333. They establish a comparison within this audit, rather than a universal preferred perplexity. The library trustworthiness values in the stream use its own ranking convention. The new source-ID audit in §3 preserves retention but reports tiny rank differences separately."}</Prose>
 
-    <H2>{headings[9]}</H2>
+<Prose>{"The ordinary UMAP program constructs a15-neighbor graph with "}<code>{"min_dist=.1"}</code>{", "}<code>{"spread=1"}</code>{", Euclidean metric, spectral initialization, seed 7 and transform seed 7. It returns300×2 coordinates. Its fit remains unsupervised: labels do not appear in the call."}</Prose>
 
-    <Prose>{"This branch exposes the update rather than trying to replace a numerical library. Recall tᵢⱼ = "}<Code>{"(1+||y_i−y_j||²)⁻¹"}</Code>{", qᵢⱼ=tᵢⱼ/Z, and Σpᵢⱼ=1 over ordered distinct pairs. Ignoring the fixed "}<Code>{"Σ p log p"}</Code>{" term gives"}</Prose>
+<p className="manifold-source-role">unchanged original programme; retained stream, not executed</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/inspect_umap.py"} filename={"inspect_umap.py"} language="python" />
 
-    <MathBlock>{"C=-\\sum_{i\\ne j}p_{ij}\\log t_{ij}+\\log Z+\\text{constant}."}</MathBlock>
+<p className="manifold-source-role">unchanged retained historical stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/retained-inspect_umap.txt"} filename={"retained-inspect_umap.txt"} language="output" />
 
-    <Prose>{"For a pair involving i, "}<Code>{"∂log t_ij/∂y_i = −2t_ij(y_i−y_j)"}</Code>{". Symmetry means both ordered pairs "}<Code>{"(i,j)"}</Code>{" and "}<Code>{"(j,i)"}</Code>{" contribute. The first term's derivative is therefore "}<Code>{"4Σ_j p_ij t_ij(y_i−y_j)"}</Code>{". Since "}<Code>{"∂t_ij/∂y_i = −2t_ij²(y_i−y_j)"}</Code>{", differentiating log Z gives "}<Code>{"−4Σ_j (t_ij/Z)t_ij(y_i−y_j)"}</Code>{". Recognize tᵢⱼ/Z as qᵢⱼ and combine the terms to recover the gradient in section 5. In particular, ignoring the derivative of Z loses the repulsion."}</Prose>
+<Prose>{"Its retained "}<InlineMath>{"R_{10}=.714333"}</InlineMath>{" falls between the PCA and t-SNE30 values, but the average is only the beginning of an inspection."}</Prose>
 
-    <Prose>{"The following NumPy-only program fits bandwidths and optimizes a one-dimensional layout for four scalar observations. It deliberately uses no momentum or early exaggeration; the purpose is to expose the normalized objective and its gradient. Unique relevant distances make perplexity 2 achievable for each row. Save this program as "}<Code>{"tiny_tsne.py"}</Code>{" and run "}<Code>{"python tiny_tsne.py"}</Code>{" with NumPy installed. This small program supports its stated fixture; the interactive controls have separate bounds and validation."}</Prose>
+<ManifoldFigure id="D28" />
 
-    <Program example={manifoldExamples.tinyTsne} />
+<Prose>{"Source30 demonstrates why. Its input list is[0,166,229,160,36,276,140,266,178,79]. PCA's map list is[78,229,79,306,276,0,130,266,132,166]; six records agree. The t-SNE30 map list is[0,276,266,286,256,130,48,166,229,10]; five agree. For this query, PCA's .6 exceeds t-SNE's .5 despite the reverse collection averages. Read the missing and newly introduced IDs beside their images, then inspect whether the pixel metric itself fits your question about handwriting."}</Prose>
 
-    <Prose>{"Calculated and probed results for this fixture:"}</Prose>
+<Prose>{"The saved-map investigation offers a map selector, an existing source ID and audit "}<InlineMath>{"k"}</InlineMath>{". It displays the current map, input/map image strips, common/missing/new edges, local fraction and collection scores simultaneously. It loads the saved full-precision arrays and recomputes the chosen audit; it does not fit a new map when a control changes. Reset returns source30, "}<InlineMath>{"k=10"}</InlineMath>{" and the stated initial pair. Invalid source IDs leave the last valid view visible with a precise message. No rounded scatter coordinates enter the ranking."}</Prose>
 
-    <CodeBlock language={"text"}>{"initial KL=0.053522\nfinal KL=0.018227\n[-1.775811 -0.759392  0.422370  2.112833]"}</CodeBlock>
+<ManifoldInvestigation id="L10" />
 
-    <Prose>{"The first gradient is approximately "}<Code>{"[-0.077785,0.077611,0.112603,-0.112429]"}</Code>{". Subtracting half of it moves A right, B left, C left and D right. Its components sum to zero: shifting all coordinates together cannot change a distance-based objective. Centering Y after an update chooses a convenient origin without changing the loss. A finite-difference derivative independently matched the analytic initial gradient within 1.3 × 10⁻¹⁰ in the authoring probe. The lower final KL is evidence about the fixed P, not a universal claim that this optimizer found the global minimum."}</Prose>
+<ManifoldFigure id="D29" />
 
-    <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>{headings[10]}</H2>
+<Prose>{"Sensitivity deserves an actual changed case. For this dataset, PCA-initialized t-SNE seed 7 and19 produced identical saved coordinates at each of perplexities 5,30,80. That is a null seed comparison, not a general invariance theorem. The retained random-initialized perplexity 30 maps differ: their "}<InlineMath>{"R_{10}"}</InlineMath>{" values are .772000 and.769667. Show the identical and changed pairs side by side. Translating, rotating or reflecting one map leaves its Euclidean neighbor relationships unchanged, even though its coordinate table changes. Changing initialization can alter those relationships."}</Prose>
 
-    <Prose>{"Try each task before opening its solution. Numerical exercises change the fixture; the final investigation changes the question."}</Prose>
+<Prose>{"Practical inspection therefore starts with a stated input metric and several scales, examines individual records, repeats justified settings and compares with a linear baseline. Cluster area, separation and placement on a t-SNE/UMAP plot are consequences of its construction and sampling as well as the input. Use original-space evidence and the "}<a href={"/learn/path/full-curriculum/clustering-evaluation-validation-silhouette-ari-nmi?module=classical-ml#4-a-score-evaluates-a-geometry-as-well-as-a-partition"}>{"clustering evaluation lesson"}</a>{" when the question is whether named groups are supported. The "}<a href={"https://distill.pub/2016/misread-tsne/"}>{"Distill guide"}</a>{" provides additional visual examples of parameter sensitivity and misleading area/gap interpretations."}</Prose>
 
-    <div className="lesson-exercise" data-lesson-exercise=""><H3>{"1. A sensor corridor"}</H3>
+<H2>{"8. Decide whether the next observation needs a fixed map"}</H2>
 
-    <Prose>{"Five sensors lie at (0,0), (0,2), (1,2), (2,2), (2,0). Edges connect pairs at Euclidean distance ≤ ε. Find the endpoint graph distance for ε = 1, 2 and √5. Explain why the middle setting already fails to recover the six-unit corridor route."}</Prose>
+<ManifoldFigure id="D30" />
 
-    <details>
+<Prose>{"A map of one collection answers an inspection question. Prediction on future rows adds a state question: which fitted transformation will those rows use? Split the300 digit records into225 training and75 validation observations before fitting a representation. Fit a reducer on training features, transform validation features using that reducer, train a classifier in the training coordinate system and evaluate it in the same system. The diagram keeps training and validation IDs distinct through the entire route."}</Prose>
 
-    <summary>{"Hint"}</summary>
+<Prose>{"Follow the arrows through dimensioned state:300×64 measurements split into225×64 training and75×64 validation arrays. Only training fits the PCA mean1×64 and operator64×10. Reuse both for training225×10 and validation75×10 coordinates. Training coordinates and their labels fit one five-neighbor classifier; already transformed validation rows use that same classifier. A symbolic1×64 held-out row therefore becomes1×10 before prediction. UMAP instead reuses its fixed225×64 training inputs and225×10 reference; raw64-feature prediction is a separate baseline. Indexed symbols show roles because fitted values and individual predictions were not retained."}</Prose>
 
-    <Prose>{"list the endpoint's incident edges before looking for a long route."}</Prose>
+<Prose>{"The retained programme compares raw normalized pixels, ten PCA coordinates and ten UMAP coordinates, each followed by five-neighbor classification. The reduction to ten coordinates is for this prediction experiment; it is separate from the two-dimensional inspection map."}</Prose>
 
-    </details>
+<p className="manifold-source-role">unchanged original programme; retained stream, not executed</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/compare_transforms.py"} filename={"compare_transforms.py"} language="python" />
 
-    <details>
+<p className="manifold-source-role">unchanged retained historical stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/retained-compare_transforms.txt"} filename={"retained-compare_transforms.txt"} language="output" />
 
-    <summary>{"Solution and reasoning"}</summary>
+<Prose>{"The denominators matter: .9733 represents 73 correct of 75 for pixels and PCA, while .9467 represents 71 of 75 for UMAP. This validation result does not support a claim that the nonlinear representation improves classification here. If validation chooses settings, keep an untouched final test for the final generalization claim. If scaling estimates per-feature means or variances, fit that scaler on training rows too; the common division by 16 is a fixed measurement conversion."}</Prose>
 
-    <Prose>{"At ε=1 the endpoint sensors are isolated, so no route joins them. At ε=2 there is already a direct endpoint-to-endpoint edge of length 2, hence the shortest distance is 2; at √5 that edge remains and the shortest distance is still 2. Euclidean distance is a lower bound on the length of any polygonal path between fixed endpoints. The corridor interpretation is external knowledge that this sampling/threshold graph fails to encode. Choosing the largest radius did not solve the modeling problem."}</Prose>
+<ManifoldFigure id="D31" />
 
-    </details></div>
+<Prose>{"PCA has a fitted mean and component matrix: new coordinates are "}<InlineMath>{"(x-\\mu)V_q"}</InlineMath>{". Ordinary UMAP instead searches the fixed reference's input neighbors, constructs query-to-reference memberships, initializes query coordinates near reference coordinates and optimizes their placement relative to that reference. It need not train a neural function. The scratch interpolation below makes the initialization idea visible: input query1 between references0 and3 gets inverse-distance weights2/3 and1/3, so reference map coordinates 0 and6 give initial coordinate2. This interpolation is not the complete UMAP transform algorithm."}</Prose>
 
-    <div className="lesson-exercise" data-lesson-exercise=""><H3>{"2. Perplexity without a Gaussian"}</H3>
+<Prose>{"scikit-learn's "}<code>{"TSNE"}</code>{" produces coordinates for the supplied collection and has no general "}<code>{".transform"}</code>{" method. The optional openTSNE route fits a reference embedding and places future observations against it; this extension has its own affinity and optimization choices and is not the same API as fitting all rows together. The shown optional call is source-only and needs openTSNE installed. A supervised UMAP call supplies training labels to alter the graph, making it a different construction. A parametric UMAP encoder learns a function from input rows to coordinates. The "}<a href={"/learn/track/deep-learning-fundamentals"}>{"Deep Learning Fundamentals module"}</a>{" develops neural functions, backpropagation and training objectives needed to train an encoder; ordinary graph-based transform does not imply that an encoder was trained."}</Prose>
 
-    <Prose>{"A four-candidate row has probabilities "}<Code>{"(1/2,1/4,1/8,1/8)"}</Code>{". Calculate its entropy in bits and perplexity. If two candidates are merged into one event, can you keep calling the original perplexity a neighbor count for the new event space?"}</Prose>
+<p className="manifold-source-role">Recorded deterministic source; deterministic main executed; ordinary fits source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/reference_map_routes.py"} filename={"reference_map_routes.py"} language="python" />
 
-    <details>
+<p className="manifold-source-role">Recorded deterministic scratch/saved-array stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/reference_map_routes.txt"} filename={"reference_map_routes.txt"} language="output" />
 
-    <summary>{"Hint"}</summary>
+<Prose>{""}<code>{"data_split"}</code>{" splits row indices so IDs, labels and features remain joined. "}<code>{"ordinary_pipeline"}</code>{" stores fitted reducers and predictions with an integer correct count and denominator. Its fitting functions are complete source-only routes; the stream here runs only scratch interpolation. Rebuilding an independent validation map does not preserve a shared coordinate system, even with the same seed. Save and reuse preprocessing and reducer state when that is the task."}</Prose>
 
-    <Prose>{"use "}<Code>{"−p log₂p"}</Code>{" for each event; first identify how many events the new distribution has."}</Prose>
+<Prose>{"In the optional "}<a href={"https://opentsne.readthedocs.io/en/stable/api/index.html"}>{"openTSNE1.0.0 API"}</a>{", "}<code>{"fit"}</code>{" returns a reference embedding and its "}<code>{"transform"}</code>{" supports the shown perplexity 5 and median initialization. Each new point is optimized against that reference, independently of the other new points. Initialization's neighbor count and optimization perplexity have different roles. This source-only route does not establish matched installed dependencies, returned coordinates or predictive quality."}</Prose>
 
-    </details>
+<ManifoldFigure id="D32" />
 
-    <details>
+<Prose>{"The scale diagram opens actual allocations. A dense float64 "}<InlineMath>{"n\\times n"}</InlineMath>{" matrix occupies "}<InlineMath>{"8n^2"}</InlineMath>{" bytes:800 MB at 10,000 observations,80 GB at 100,000 and2 TB at 500,000, all decimal units and before additional matrices. An "}<InlineMath>{"n\\times n\\times D"}</InlineMath>{" offset tensor multiplies that burden by feature count. A sparse graph with "}<InlineMath>{"k"}</InlineMath>{" edges per row can keep adjacency proportional to "}<InlineMath>{"nk"}</InlineMath>{"; later dense shortest-path or eigen matrices can still dominate. The row-wise audit in §3 trades time for "}<InlineMath>{"O(n)"}</InlineMath>{" distance workspace."}</Prose>
 
-    <summary>{"Solution and reasoning"}</summary>
+<ManifoldFigure id="D33" />
 
-    <Prose>{"H = 1/2 + 1/2 + 3/8 + 3/8 = 1.75 bits, giving perplexity 2^1.75 ≈ 3.363586. Merging the last two events makes "}<Code>{"(1/2,1/4,1/4)"}</Code>{", with H=1.5 and perplexity √8 ≈ 2.828427. Perplexity is defined for the actual probability distribution over events; it is neither the count of positive entries nor a property independent of representation."}</Prose>
+<Prose>{"Three approximations act on different objects. Approximate nearest-neighbor search proposes input neighbors for graph or affinity construction. Barnes–Hut groups distant map points in a tree to approximate repulsive forces. Fast Fourier transform (FFT) based t-SNE interpolates force-related quantities onto a grid and accelerates their convolution. Neither a tree nor a grid replaces the definition of the input metric. A schematic box is labelled as a spatial cell, with contained point IDs and its summary; it is not presented as a measured runtime benchmark. Choose approximation accuracy against the relationship you need to retain, and disclose settings. No universal timing or accuracy advantage follows from naming one method."}</Prose>
 
-    </details></div>
+<Prose>{"We now know the practical boundaries of the two nonlinear maps. The next section opens the alternative objects introduced in §3, so you can recognize when a different preservation question is a better fit."}</Prose>
 
-    <div className="lesson-exercise" data-lesson-exercise=""><H3>{"3. Audit a misleading score"}</H3>
+<H2>{"9. Deeper branch: distances, recipes, smoothness and tangent patches"}</H2>
 
-    <Prose>{"Your map preserves 6 of each query's 8 nearest neighbors on average. A report says “trustworthiness is 0.99, so 99% of neighbors are correct.” Repair the sentence and supply the directly relevant percentage. Explain what data would let you calculate trustworthiness itself."}</Prose>
+<H3>{"Recover coordinates from distances"}</H3>
 
-    <details>
+<ManifoldFigure id="D34" />
 
-    <summary>{"Hint"}</summary>
+<Prose>{"Put A0, B2 and C5 on a line. Their distance table is symmetric, has zero diagonal and contains AB2, BC3, AC5. We can recover centered coordinates without being given the original line: square the distances, subtract row and column means, add the grand mean and multiply by −1/2. The diagram follows one table entry through these operations into a centered inner-product table."}</Prose>
 
-    <Prose>{"the two metrics count different things."}</Prose>
+<Prose>{"Why does this work? Squared Euclidean distance satisfies "}<InlineMath>{"d_{ij}^2=\\|x_i\\|^2+\\|x_j\\|^2-2x_i^Tx_j"}</InlineMath>{". Multiplying on both sides by the centering matrix "}<InlineMath>{"J=I-\\mathbf1\\mathbf1^T/n"}</InlineMath>{" removes terms that are constant across a row or column. The remaining matrix is"}</Prose>
 
-    </details>
+<div className="neural-equation"><MathBlock>{"B=-\\tfrac12 J D^{\\circ2}J=X_cX_c^T\n=\\frac19\\begin{bmatrix}49&7&-56\\\\7&1&-8\\\\-56&-8&64\\end{bmatrix}."}</MathBlock></div>
 
-    <details>
+<Prose>{"Here "}<InlineMath>{"D^{\\circ2}"}</InlineMath>{" means entrywise squared dissimilarities, while feature count "}<InlineMath>{"D"}</InlineMath>{" earlier was a scalar; the table's superscript and surrounding context distinguish them. An eigenfactorization "}<InlineMath>{"B=U\\Lambda U^T"}</InlineMath>{" gives coordinates "}<InlineMath>{"Y=U_q\\Lambda_q^{1/2}"}</InlineMath>{" from the positive eigenvalues. The three centered line coordinates are[−7/3,−1/3,8/3] up to a common reflection, and the one positive eigenvalue is 38/3. Comparing signed coordinates would falsely reject a reflected but equivalent answer; compare pair distances or "}<InlineMath>{"YY^T"}</InlineMath>{"."}</Prose>
 
-    <summary>{"Solution and reasoning"}</summary>
+<Prose>{"For a concrete double-centering entry, the squared-distance row means are 29/3,13/3,34/3 and the grand mean is 76/9. Entry AB becomes "}<InlineMath>{"-\\frac12(4-29/3-13/3+76/9)=7/9"}</InlineMath>{". The centered coordinate product "}<InlineMath>{"(−7/3)(−1/3)=7/9"}</InlineMath>{" agrees. This links one measured length to one inner product before the eigensolver is called."}</Prose>
 
-    <Prose>{"Neighbor retention is 6/8=75%, so 25% of directed eight-neighbor selections change. Trustworthiness 0.99 means a small normalized rank penalty for false map neighbors, under its chosen k and metric. It does not mean a 99% retention rate. Calculate it from the input ranks of all map neighbors that were not input top-eight neighbors, together with n and k. Inspect poor individual queries even when the global score is high."}</Prose>
+<Prose>{"The connection to PCA is exact for Euclidean input distances. If centered features have singular value decomposition "}<InlineMath>{"X_c=U\\Sigma V^T"}</InlineMath>{", then "}<InlineMath>{"B=X_cX_c^T=U\\Sigma^2U^T"}</InlineMath>{". Classical MDS coordinates "}<InlineMath>{"U_q\\Sigma_q"}</InlineMath>{" are therefore the PCA scores "}<InlineMath>{"X_cV_q"}</InlineMath>{", up to choices of signs and bases within tied modes. A non-Euclidean dissimilarity table need not have that feature-matrix interpretation."}</Prose>
 
-    </details></div>
+<ManifoldFigure id="D35" />
 
-    <div className="lesson-exercise" data-lesson-exercise=""><H3>{"4. A fuzzy edge after one observation moves"}</H3>
+<Prose>{"Not every symmetric nonnegative table is Euclidean. Distances AB1, BC1, AC3 violate the triangle inequality. Their centered Gram has eigenvalues4.5,0,−5/6; no exact real Euclidean factor can keep the negative mode. Keeping only positive modes gives an approximation. Even a Euclidean table may need more than the requested "}<InlineMath>{"q"}</InlineMath>{" positive directions. Classical MDS minimizes a Gram-matrix approximation, commonly called strain; it is not the same criterion as raw distance stress."}</Prose>
 
-    <Prose>{"Before editing, the directed strengths are 0.2 and 0.6. Compute the fuzzy union. After an observation moves, only the second strength changes to 0.9. Compute the new union. For the ideal pair model a=b=1, find the separation giving ν equal to each union strength. Explain why these two optima do not predict a library UMAP trajectory."}</Prose>
+<Prose>{"The positive eigenvalue4.5 has unit direction(−1,0,1)/√2, so its real coordinates are(−1.5,0,1.5). They retain AC3 but change AB and BC from1 to1.5. The diagram compares requested and obtained lengths after clipping the negative eigenvalue; it does not imply exact recovery. This is algebra on the declared triangle, not another executed MDS fit."}</Prose>
 
-    <details>
+<Prose>{"Metric MDS instead adjusts coordinates to reduce raw stress "}<InlineMath>{"\\sigma(Y)=\\sum_{i<j}(\\|y_i-y_j\\|-d_{ij})^2"}</InlineMath>{". Each unordered pair appears once. The small SMACOF route computes current distances, forms off-diagonal coefficients "}<InlineMath>{"B_{ij}(Y)=-d_{ij}/\\|y_i-y_j\\|"}</InlineMath>{", balances each diagonal to make row sums zero, then updates "}<InlineMath>{"Y\\leftarrow B(Y)Y/n"}</InlineMath>{" for equal complete-pair weights. This majorization step bounds the objective by a simpler function whose minimum can be computed; descending that bound does not increase the original stress under the standard complete metric setting. Zero current distances get ratio0 in this reference, keeping it finite but potentially trapping a coincident start. Start with separated coordinates when positive targets need separation."}</Prose>
 
-    <summary>{"Hint"}</summary>
+<Prose>{"Stress squares a residual of "}<strong>{"lengths"}</strong>{": first compute "}<InlineMath>{"r_{ij}=\\|y_i-y_j\\|"}</InlineMath>{", subtract the supplied length "}<InlineMath>{"d_{ij}"}</InlineMath>{", then square "}<InlineMath>{"r_{ij}-d_{ij}"}</InlineMath>{". It is not "}<InlineMath>{"(r_{ij}^2-d_{ij}^2)^2"}</InlineMath>{". Classical strain instead compares the centered Gram entries through "}<InlineMath>{"\\|B-YY^T\\|_F^2"}</InlineMath>{". Stress-1 further divides the length-residual sum by a declared squared-map-length sum before taking a square root; these are three separately named quantities."}</Prose>
 
-    <Prose>{"solve "}<Code>{"1/(1+r²)=w"}</Code>{" after calculating w."}</Prose>
+<Prose>{"Nonmetric MDS has another unknown: monotone fitted disparities in place of the numeric dissimilarities. For ordered dissimilarities1,2,5, fitted disparities may preserve their order without preserving those exact gaps. For example1,3,4 preserves the ordering while changing relative spacings. An ordinary nonmetric optimizer alternates monotone regression with coordinate updates under its normalization. It is useful when only ordering is defensible; it does not make an arbitrary triangle table Euclidean or prove a good two-dimensional solution."}</Prose>
 
-    </details>
+<Prose>{"We provide full classical and metric scratch implementations. The ordinary branch uses current scikit-learn1.9.1: "}<code>{"ClassicalMDS(metric='precomputed')"}</code>{" does double-centering, while "}<code>{"MDS(metric_mds=True, metric='precomputed')"}</code>{" runs metric stress optimization. Pass exactly the same[[-1],[0],[1]] starting array to scratch and to "}<code>{"fit_transform(..., init=initial)"}</code>{" before comparing stress. The array overrides the constructor's random start and reduces the comparison to one trajectory. Library stopping tolerances differ from our relative raw-stress stopping rule, so compare attained distances/stress and status, not identical iteration counts."}</Prose>
 
-    <details>
+<p className="manifold-source-role">unchanged complete current source; numeric main stream belongs to exact checked predecessor; ordinary-only return completion remains source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/classical_geometry.py"} filename={"classical_geometry.py"} language="python" />
 
-    <summary>{"Solution and reasoning"}</summary>
+<p className="manifold-source-role">retained scratch main stream of exact checked predecessor; current ordinary-only completion source-only; not rerun</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/classical_geometry.txt"} filename={"classical_geometry.txt"} language="output" />
 
-    <Prose>{"Initially w=0.2+0.6−0.12=0.68, giving r=√(8/17)≈0.685994. Afterwards w=0.2+0.9−0.18=0.92, giving r=√(2/23)≈0.294884. The stronger ideal connection prefers a closer pair. A full graph has competing pairs, and the sampled UMAP procedure has the weighting described in section 6. These are exactly reproducible isolated-pair calculations, not output coordinates."}</Prose>
+<Prose>{"The newly executed scratch example attains raw stress0 for the0,2,5 line. The ordinary functions in this file are source-only, not an executed parity claim. In this complete-table convention, Stress-1 is "}<InlineMath>{"\\sqrt{\\sigma/\\sum_{i<j}\\|y_i-y_j\\|^2}"}</InlineMath>{" when its denominator is positive; the package reports raw stress with "}<code>{"normalized_stress=False"}</code>{" and normalized stress with "}<code>{"True"}</code>{". Nonmetric normalization is tied to fitted disparities and its implementation. Do not compare raw stress and Stress-1 as if they shared units."}</Prose>
 
-    </details></div>
+<Prose>{"Duplicate A0, B0, C2 are a revealing boundary: zero AB is an observed distance for classical or metric MDS. In the ordinary nonmetric route, zero dissimilarities are treated as missing. The same table therefore means something different. Current "}<code>{"metric_mds"}</code>{" chooses metric/nonmetric behavior; "}<code>{"metric"}</code>{" describes input distance handling. Older boolean "}<code>{"metric"}</code>{" and "}<code>{"dissimilarity"}</code>{" spellings remain deprecated compatibility paths in 1.9, with removal planned for 1.10. Their existence does not establish a historical failure. The optional "}<code>{"init='classical_mds'"}</code>{" deliberately chooses a different starting policy. See the "}<a href={"https://scikit-learn.org/stable/modules/generated/sklearn.manifold.MDS.html"}>{"current MDS documentation"}</a>{"."}</Prose>
 
-    <div className="lesson-exercise" data-lesson-exercise=""><H3>{"5. Recover a position by two routes"}</H3>
+<Prose>{"Double-centering stores "}<InlineMath>{"O(n^2)"}</InlineMath>{" entries, and a dense full eigendecomposition takes "}<InlineMath>{"O(n^3)"}</InlineMath>{" work. Our function returns all eigenvalues so approximation and unresolved rank are inspectable; it may return fewer than "}<InlineMath>{"q"}</InlineMath>{" columns when fewer positive modes exist. The full dense eigenroute belongs to these small fixtures. Large solvers select modes iteratively and still need a justified distance representation."}</Prose>
 
-    <Prose>{"Three collinear points have pairwise distances 3,4,7, with the seven-unit distance between the endpoints. Give centered one-dimensional MDS coordinates. Independently find the LLE weights of the middle point using the endpoints. If the mapped endpoints are −2 and 12, where does that recipe put the middle point?"}</Prose>
+<ManifoldFigure id="D36" />
 
-    <details>
+<Prose>{"Isomap feeds graph-route distances to that coordinate recovery. The radius 1 U graph's route table has "}<InlineMath>{"d_{ij}=|i-j|"}</InlineMath>{". Its one-dimensional centered coordinates are −3,−2,−1,0,1,2,3 up to reflection. This is why the U unfolds into a line. The complete "}<code>{"isomap_routes.py"}</code>{" in §2 performs this composition only when every route is finite. Infinity is neither an ordinary distance nor a zero edge. A repaired disconnected ordinary graph answers a modified question; inspect its components and repair before interpreting its output. Dense all-pairs routes and dense MDS remain costs even when the initial graph is sparse."}</Prose>
 
-    <summary>{"Hint"}</summary>
+<H3>{"Keep a local recipe instead of every distance"}</H3>
 
-    <Prose>{"place the original points at 0,3,7 first; the sum-to-one weights preserve their relative position."}</Prose>
+<ManifoldFigure id="D37" />
 
-    </details>
+<Prose>{"LLE starts with a recipe. Put a query at 1 between neighbors0 and3. If weights sum1 and reconstruct the query, "}<InlineMath>{"0w_L+3w_R=1"}</InlineMath>{", so "}<InlineMath>{"w_L=2/3,w_R=1/3"}</InlineMath>{". Move those neighbors to map positions0 and6; the same recipe places the query at 2. In the investigation, change only its map coordinate and see the squared reconstruction error;2 is its minimum. The adjacent static extrapolation case changes the input query to 4 and shows how the recipe itself changes; it is separate from the live map-coordinate control."}</Prose>
 
-    <details>
+<Prose>{"An affine recipe permits negative weights. Query4 with neighbors0 and3 has weights−1/3 and4/3. It lies beyond its neighbors; clipping those weights would replace the optimization with a different rule. Sum1 is essential: adding the same translation to every coordinate then preserves the recipe. Unlike fuzzy memberships or conditional probabilities, these weights are not constrained to[0,1]."}</Prose>
 
-    <summary>{"Solution and reasoning"}</summary>
+<ManifoldInvestigation id="L11" />
 
-    <Prose>{"The mean is 10/3, so centered MDS coordinates are "}<Code>{"[-10/3,-1/3,11/3]"}</Code>{", or their simultaneous negatives. The middle position is 3/7 of the way from 0 to 7, giving weights "}<Code>{"(4/7,3/7)"}</Code>{". The mapped middle is "}<Code>{"(4/7)(−2)+(3/7)(12)=4"}</Code>{". Both routes express the same relative position for this line, but in general MDS uses all dissimilarities while LLE uses local recipes."}</Prose>
+<ManifoldFigure id="D38" />
 
-    </details></div>
+<Prose>{"For one general query "}<InlineMath>{"x_i"}</InlineMath>{", make rows "}<InlineMath>{"z_j=x_j-x_i"}</InlineMath>{" for its "}<InlineMath>{"k"}</InlineMath>{" neighbors and form the small local Gram "}<InlineMath>{"C=ZZ^T\\in\\mathbb R^{k\\times k}"}</InlineMath>{". Minimizing reconstruction error under "}<InlineMath>{"\\sum_jw_j=1"}</InlineMath>{" gives "}<InlineMath>{"Cu=\\mathbf1"}</InlineMath>{", then "}<InlineMath>{"w=u/(\\mathbf1^Tu)"}</InlineMath>{". A trace-relative diagonal ridge stabilizes a singular or nearly singular Gram. Our explicit zero-trace policy gives equal weights to coincident neighbors; it is a stated fallback, not an inverse of a zero matrix."}</Prose>
 
-    <div className="lesson-exercise" data-lesson-exercise=""><H3>{"6. Diagnose the deployment plan"}</H3>
+<Prose>{"Store all rows of recipes in sparse "}<InlineMath>{"W\\in\\mathbb R^{n\\times n}"}</InlineMath>{". A proposed map has total reconstruction error"}</Prose>
 
-    <Prose>{"An engineer fits one StandardScaler on training images, another on test images, fits UMAP separately to both scaled sets, and sends the test coordinates to a classifier trained on the training map. They suggest switching to PCA initialization to fix the inconsistency. Give the actual repair and two baselines."}</Prose>
+<div className="neural-equation"><MathBlock>{"\\sum_i\\|y_i-\\sum_jW_{ij}y_j\\|^2\n=\\operatorname{tr}(Y^T M Y),\\qquad M=(I-W)^T(I-W)."}</MathBlock></div>
 
-    <details>
+<Prose>{"Without constraints every "}<InlineMath>{"y_i=0"}</InlineMath>{" wins. LLE excludes that collapse by requiring zero mean and "}<InlineMath>{"Y^TY/n=I_q"}</InlineMath>{". The implementation first projects out the constant direction, then chooses the lowest remaining eigenmodes in that centered subspace. If extra zero modes remain because the recipes separate components, they carry component ambiguity; do not label them a unique global reconstruction."}</Prose>
 
-    <summary>{"Hint"}</summary>
+<p className="manifold-source-role">Recorded deterministic source; deterministic main executed; ordinary fits source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/lle_recipes.py"} filename={"lle_recipes.py"} language="python" />
 
-    <Prose>{"keep a single fitted sequence of operations for both portions."}</Prose>
+<p className="manifold-source-role">Recorded deterministic scratch/saved-array stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/lle_recipes.txt"} filename={"lle_recipes.txt"} language="output" />
 
-    </details>
+<Prose>{"The printed row sums, centroid and covariance check three distinct constraints. The curved five-point fixture's local residuals are not all zero; the ridge and finite neighborhoods change exact reconstruction. The ordinary "}<code>{"LocallyLinearEmbedding(method='standard', reg=..., eigen_solver='dense')"}</code>{" uses the same general local-recipe/global-eigen strategy, but neighbor ties, ridge details and eigen normalizations must match before comparing numerical answers. Repeated eigenvalues permit different basis vectors for the same subspace; compare projection matrices or reconstruction objectives instead of signed columns. "}<code>{"affine_line"}</code>{" gives the exact unregularized two-neighbor line example separately from the ridge solver."}</Prose>
 
-    <details>
+<Prose>{"Local Gram formation costs "}<InlineMath>{"O(nDk^2)"}</InlineMath>{", local solves "}<InlineMath>{"O(nk^3)"}</InlineMath>{", plus neighbor search. Storing "}<InlineMath>{"W"}</InlineMath>{" costs "}<InlineMath>{"O(nk)"}</InlineMath>{", while this small dense global solve costs "}<InlineMath>{"O(n^2)"}</InlineMath>{" storage and "}<InlineMath>{"O(n^3)"}</InlineMath>{" work. Sparse low-mode solvers are the scaling continuation; the method's name does not remove the eigenproblem. The "}<a href={"https://cs.nyu.edu/~roweis/lle/papers/lleintro.pdf"}>{"creator's LLE introduction"}</a>{" explains the local reconstruction and constrained eigen formulation."}</Prose>
 
-    <summary>{"Solution and reasoning"}</summary>
+<H3>{"Make graph coordinates smooth"}</H3>
 
-    <Prose>{"Fit the scaler and UMAP on training data only. Apply "}<Code>{"scaler.transform"}</Code>{" followed by the fitted reducer's "}<Code>{"transform"}</Code>{" to test rows. Train and evaluate the classifier within that coordinate system. Initialization does not align independently fitted maps or repair different feature scales. Compare the complete pipeline with a classifier on appropriately scaled input features and with a training-fitted PCA pipeline. Choose hyperparameters using training-only validation; retain an untouched final test set."}</Prose>
+<ManifoldFigure id="D39" />
 
-    </details></div>
+<Prose>{"A different graph question asks connected records to have similar coordinates. For the unit chain A–B–C, set map coordinate "}<InlineMath>{"y=(0,1,3)"}</InlineMath>{". The two unordered edges contribute "}<InlineMath>{"(0-1)^2+(1-3)^2=5"}</InlineMath>{". Let "}<InlineMath>{"A"}</InlineMath>{" be the symmetric weighted adjacency, "}<InlineMath>{"D_g"}</InlineMath>{" its diagonal degree matrix and "}<InlineMath>{"L=D_g-A"}</InlineMath>{". Expanding the quadratic gives"}</Prose>
 
-    <div className="lesson-exercise" data-lesson-exercise=""><H3>{"7. Independent digits audit"}</H3>
+<div className="neural-equation"><MathBlock>{"y^TLy=\\tfrac12\\sum_{i,j}A_{ij}(y_i-y_j)^2\n=\\sum_{i<j}A_{ij}(y_i-y_j)^2."}</MathBlock></div>
 
-    <Prose>{"Use the supplied collection, choose k from {5,10,20}, and pick one image by its source-row identifier before inspecting its maps. Compare PCA with two t-SNE perplexities. Record the actual retained neighbor identities and test one visually tempting inference in pixel space. Then choose a second image with a different writing style and repeat without changing your metric."}</Prose>
+<Prose>{"The ordered sum is 10; the quadratic energy is 5. Change only the middle coordinate in the live chain and watch both edge contributions and their sum. A constant coordinate has zero energy. Disconnected components each admit their own constant, so the number of zero modes equals the number of connected components. Removing just one constant mode is insufficient when there are several components."}</Prose>
 
-    <details>
+<Prose>{"For the separate disconnected graph A–B and D–E, use A/B/D/E order. Signals "}<InlineMath>{"f_1=(1,1,0,0)"}</InlineMath>{" and "}<InlineMath>{"f_2=(0,0,1,1)"}</InlineMath>{" each have zero difference on every present edge, hence "}<InlineMath>{"Lf_1=Lf_2=0"}</InlineMath>{". They are linearly independent; their combinations leave relative component levels free. These are two explicit null directions, not a newly executed eigensolver or unique global coordinate system."}</Prose>
 
-    <summary>{"Hint"}</summary>
+<Prose>{"Normalization poses another question. The unnormalized eigenproblem is "}<InlineMath>{"Lf=\\lambda f"}</InlineMath>{". A degree-weighted formulation is "}<InlineMath>{"Lf=\\lambda D_gf"}</InlineMath>{". The symmetric-normalized matrix is "}<InlineMath>{"D_g^{-1/2}LD_g^{-1/2}"}</InlineMath>{"; its eigenvectors become generalized vectors after multiplying by "}<InlineMath>{"D_g^{-1/2}"}</InlineMath>{". Degree-zero vertices must be separated before that division. Our ordinary spectral call uses the package's normalized convention, rather than claiming equality to the unnormalized chain coordinates."}</Prose>
 
-    <Prose>{"start by sorting both distance rows and displaying the corresponding 8 × 8 pixel grids. Similar labels and similar pixel measurements need not be the same criterion."}</Prose>
+<ManifoldInvestigation id="L12" />
 
-    </details>
+<p className="manifold-source-role">Recorded deterministic source; deterministic main executed; ordinary fits source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/graph_spectrum.py"} filename={"graph_spectrum.py"} language="python" />
 
-    <details>
+<p className="manifold-source-role">Recorded deterministic scratch/saved-array stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/graph_spectrum.txt"} filename={"graph_spectrum.txt"} language="output" />
 
-    <summary>{"Success criteria and example response"}</summary>
+<Prose>{"The complete file exposes adjacency construction, degrees, each matrix, its eigenproblem and the random-walk transition below. SciPy's "}<code>{"eigh(L,D_g)"}</code>{" supplies a numerical primitive; it does not build the graph for us. "}<code>{"SpectralEmbedding(affinity='precomputed')"}</code>{" accepts that declared adjacency and uses its documented normalized route. These ordinary calls are source-only here. Choosing graph support, weights, components and normalization is part of the method, not incidental plotting configuration."}</Prose>
 
-    <Prose>{"your answer names the data selection, pixel metric, source rows, k, map settings and the preserved/missing/false neighbors; the retained fraction agrees with those lists; you use an actual image or original-space measurement to investigate your inference. Explain why one query need not follow the aggregate ranking. An acceptable conclusion is: “At k=10, this image loses three original neighbors in map A and four in map B. I prefer A for inspecting this particular local similarity, even though B scores better over all rows.” Populate the counts from your chosen input rather than copying that illustrative sentence. "}<a href={"/learn-assets/manifold-learning/calculated-inputs.json"}>{"calculated-inputs.json"}</a>{" supplies the saved coordinate variants for exact independent checking."}</Prose>
+<H3>{"Estimate a local plane and align its neighbors"}</H3>
 
-    </details></div></section>
+<ManifoldFigure id="D40" />
 
-    <section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H2>{headings[11]}</H2>
+<Prose>{"Return to the curved sheet's small patch. Subtract its mean from a neighborhood matrix "}<InlineMath>{"Z\\in\\mathbb R^{m\\times D}"}</InlineMath>{" and compute a thin SVD "}<InlineMath>{"Z=U\\Sigma V^T"}</InlineMath>{". Its first "}<InlineMath>{"q"}</InlineMath>{" right singular vectors are tangent directions in input feature space; "}<InlineMath>{"ZV_q\\in\\mathbb R^{m\\times q}"}</InlineMath>{" gives local tangent coordinates. A planar patch has near-zero residual after reconstruction; a curved patch has nonzero normal residual. This is a local approximation, not proof of a globally flat manifold."}</Prose>
 
-    <Prose>{"Alternate explanations and practice:"}</Prose>
+<Prose>{"Our five-point surface is "}<InlineMath>{"(u,v,.1(u^2+v^2))"}</InlineMath>{". Four corners have height.2 and the center has height0. The mean height is .16, so the two-axis tangent reconstruction leaves corner residual.04 and center residual.16. Its singular values are 2,2,.178885. Because the two leading values tie, any orthonormal basis of that tangent plane is equally valid. Compare the plane's projector, not one axis sign or rotation."}</Prose>
 
-    <ul>
-      <li><strong>{"Wattenberg, Viégas & Johnson — "}<a href={"https://distill.pub/2016/misread-tsne/"}>{"How to Use t-SNE Effectively"}</a></strong>{". Interactive article, useful after sections 3–5 for comparing varied density, cluster arrangements, stopping times and perplexities on controlled examples. It is a 2016 explanation, so use current library documentation for API defaults."}</li>
-      <li><strong>{"Leland McInnes — "}<a href={"https://speakerdeck.com/lmcinnes/a-guide-to-dimension-reduction"}>{"A Bluffer's Guide to Dimension Reduction"}</a></strong>{". Creator's slide deck from the "}<a href={"https://pydata.org/nyc2018/schedule/presentation/1/"}>{"PyData NYC 2018 talk"}</a>{", useful after this lesson to compare neighbor graphs with matrix factorizations. It is an intuition-oriented survey with compressed assumptions; use the papers for derivations and current documentation for API details."}</li>
-      <li><strong>{"Scikit-learn — "}<a href={"https://scikit-learn.org/stable/modules/manifold.html"}>{"Manifold learning chapter"}</a></strong>{". Freely accessible implementation-oriented chapter, especially useful on the return route through section 9. It covers Isomap, standard/modified/Hessian LLE, Laplacian Eigenmaps, tangent-space alignment, MDS and t-SNE. Library details cited here use the 1.9.1 snapshot."}</li>
-      <li><strong>{"UMAP authors — "}<a href={"https://umap-learn.readthedocs.io/en/latest/how_umap_works.html"}>{"How UMAP Works"}</a></strong>{". Illustrated prose from simplices and local distance to weighted graphs; read after section 6 if the topology motivation interests you. Keep the graph/theory/layout distinction and the sampled-optimization discussion from this lesson alongside its intuitive account."}</li>
-    </ul>
+<Prose>{""}<code>{"patch"}</code>{" requests "}<code>{"full_matrices=False"}</code>{", preserving only economy factors. If "}<InlineMath>{"m<D"}</InlineMath>{", a full-right-factor request would materialize a "}<InlineMath>{"D\\times D"}</InlineMath>{" completion even though only a few tangent columns are useful. Economy SVD work depends on shape, approximately "}<InlineMath>{"O(mD\\min(m,D))"}</InlineMath>{"; the full-right completion adds at least "}<InlineMath>{"\\Omega(D^2)"}</InlineMath>{" writes. Projection on "}<InlineMath>{"q"}</InlineMath>{" chosen axes costs "}<InlineMath>{"O(mDq)"}</InlineMath>{", not "}<InlineMath>{"O(mD^2)"}</InlineMath>{" unless projecting onto a full feature basis. This distinction matters for wide data."}</Prose>
 
-    <Prose>{"Technical sources and precise follow-up:"}</Prose>
+<p className="manifold-source-role">Recorded deterministic source; deterministic main executed; ordinary fits source-only</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/local_tangent_patch.py"} filename={"local_tangent_patch.py"} language="python" />
 
-    <ul>
-      <li><strong>{"van der Maaten & Hinton (2008), "}<a href={"https://jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf"}>{"Visualizing Data Using t-SNE"}</a></strong>{". Original open paper. Sections 2–4 and Appendix A are the return route for SNE, crowding, symmetrization, gradient and optimization; the paper's experimental datasets are not the source of this lesson's numerical results."}</li>
-      <li><strong>{"McInnes, Healy & Melville, "}<a href={"https://arxiv.org/html/1802.03426v3"}>{"UMAP"}</a></strong>{". Original paper with mathematical and algorithmic treatments. Return to its graph construction and algorithm after section 6; the categorical/topological proofs are specialist reading requiring additional mathematics."}</li>
-      <li><strong>{"Damrich & Hamprecht (2021), "}<a href={"https://proceedings.neurips.cc/paper/2021/file/2de5d16682c3c35007e4e92982f1a2ba-Paper.pdf"}>{"On UMAP's True Loss Function"}</a></strong>{". Research paper for the gap between full-pair formulas and sampling. Sections 3–6 develop the effective-loss argument and a controlled ring example; useful deeper reading after deriving the ideal pair cost."}</li>
-      <li><strong>{"UMAP authors — "}<a href={"https://umap-learn.readthedocs.io/en/latest/parameters.html"}>{"parameters"}</a>{", "}<a href={"https://umap-learn.readthedocs.io/en/latest/transform.html"}>{"new-data transform"}</a>{", "}<a href={"https://umap-learn.readthedocs.io/en/latest/reproducibility.html"}>{"reproducibility"}</a></strong>{". Worked official documentation for parameter roles, fitting boundaries and seed/thread behavior. The examples on this page were executed with UMAP 0.5.12; consult the matching installed version when reproducing results."}</li>
-      <li><strong>{"Alpaydin & Kaynak — "}<a href={"https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits"}>{"Optical Recognition of Handwritten Digits"}</a></strong>{". Dataset source, feature definitions and CC BY 4.0 license. Attribution and subset details travel with the supplied data."}</li>
-    </ul></section>
+<p className="manifold-source-role">Recorded deterministic scratch/saved-array stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/local_tangent_patch.txt"} filename={"local_tangent_patch.txt"} language="output" />
 
-    <section className="lesson-ending lesson-ending--next" data-lesson-ending="next"><H2>{headings[12]}</H2>
+<Prose>{""}<code>{"overlap"}</code>{" joins two patch coordinates by common source IDs, centers the shared records and finds an orthogonal alignment using the cross-product SVD. If overlap lacks independent directions, the alignment is underdetermined; singular values expose that boundary. Local tangent space alignment (LTSA) uses local tangent coordinates and globally aligns overlapping neighborhoods, rather than performing one isolated alignment. Hessian eigenmaps use second-order local structure; the stencil "}<InlineMath>{"(h(-1)-2h(0)+h(1))/1^2=.2"}</InlineMath>{" shows what curvature contributes for our quadratic height. Modified LLE uses multiple local weights to address particular local reconstruction degeneracies. These are related local alternatives with different global constructions, not aliases for standard LLE."}</Prose>
 
-    <Prose>{"Without looking back, explain why increasing a graph neighborhood can shorten an estimated geodesic; how t-SNE turns distances into a row and then moves its coordinates; how UMAP's graph differs from its layout; and why 0.99 trustworthiness does not mean 99% neighbor retention. Reproduce one changed numerical exercise and audit one actual image. Those tasks are a stronger readiness check than recognizing a visually separated map."}</Prose>
+<Prose>{"Read the separate constructed height graph at actual pairs(−1,.1),(0,0),(1,.1), on "}<InlineMath>{"h(x)=.1x^2"}</InlineMath>{". Horizontal spacing is1. The left secant slope is−.1 and the right slope is+.1, so their change per unit spacing is.2. The graph labels x and height separately; its slopes are not unit tangent vectors. This one-dimensional stencil is separate from the five-point uv neighborhood and agrees with its supplied second-difference arithmetic."}</Prose>
 
-    <Prose>{"Next is "}<a href={"/learn/path/full-curriculum/independent-component-analysis-ica?module=classical-ml"}>{"Independent Component Analysis (ICA)"}</a>{". It asks whether measured mixtures can be expressed using statistically independent sources. Return to the measured feature or signal matrix for that question: the next lesson does not require passing a distorted two-dimensional visualization into ICA. PCA finds variance directions, neighbor embeddings organize relationships, and ICA introduces a different criterion for a different representation problem."}</Prose></section>
-  </div>,
-};
+<Prose>{"For a runnable ordinary variant, supply the full300×64 feature matrix from the data loader and choose eight neighbors for requested dimension2. Hessian's necessary bound is "}<InlineMath>{"k>q(q+3)/2=5"}</InlineMath>{", while8 also exceeds2 for LTSA/modified routes. The five-point patch above is the scratch tangent example and is deliberately too small for that eight-neighbor ordinary call. No variant fit is executed to produce its patch stream."}</Prose>
 
-export default manifoldContent;
+<Prose>{"The ordinary "}<code>{"LocallyLinearEmbedding"}</code>{" variant call supplies method, neighborhood size, requested dimension and eigen solver. Hessian mode requires "}<InlineMath>{"k>q(q+3)/2"}</InlineMath>{" for its local polynomial basis; LTSA and modified routes also need enough neighbors and rank. These necessary conditions do not guarantee a well-conditioned sampled manifold. The full local patch mechanism is taught here; complete scratch clones of every variant's global optimizer are not claimed. Their original-paper proof coverage is distinguished in the references below."}</Prose>
+
+<H3>{"Follow a walk, or preserve a hole"}</H3>
+
+<ManifoldFigure id="D41" />
+
+<Prose>{"A graph route finds the shortest way to one destination. A random walk distributes probability across possible next steps. On the three-node unit chain, the transition matrix "}<InlineMath>{"P_{walk}=D_g^{-1}A"}</InlineMath>{" sends A to B with probability 1, B to A/C with probability 1/2 each and C to B with probability 1. Starting at A, one step gives(0,1,0), then(.5,0,.5). No shortest-path distance table alone is this distribution."}</Prose>
+
+<Prose>{"Diffusion coordinates weight walk eigenmodes by "}<InlineMath>{"\\lambda_l^t"}</InlineMath>{" at a chosen time "}<InlineMath>{"t"}</InlineMath>{". For an undirected positive-degree graph, the symmetric-normalized operator provides real modes that can be converted to right eigenvectors of the walk. The complete "}<code>{"diffusion_coordinates"}</code>{" function above removes stationary modes and ranks other modes by absolute eigenvalue. The chain has a−1 mode: without self loops the walk is periodic. A lazy transition "}<InlineMath>{"(I+P_{walk})/2"}</InlineMath>{" would remove that particular alternation, but it is a changed walk and must be named. The computational route here uses the exact tiny walk and a numerical eigensolver, rather than a scikit-learn diffusion-map estimator."}</Prose>
+
+<ManifoldFigure id="D42" />
+
+<Prose>{"Distances can also define a topological question. Put four distinct IDs at the corners of a unit square. A Vietoris–Rips complex at threshold "}<InlineMath>{"\\epsilon"}</InlineMath>{" includes edges for all pairs at distance at most "}<InlineMath>{"\\epsilon"}</InlineMath>{", and fills a simplex whenever all its pairwise edges are present. At1≤ε<√2 the four sides form an unfilled loop. At√2 the diagonals appear, the triangles and tetrahedron are filled, and that loop is gone. The drawing shows the faces, not just a cyclic wireframe."}</Prose>
+
+<Prose>{"Project onto the first coordinate. Two pairs of distinct IDs now coincide and the corresponding square loop is lost. This is a constructed linear projection counterexample, not a measured t-SNE or UMAP result. Neighborhood retention, graph connectivity, geodesic distances, density and topology are different preservation questions. A single attractive map or scalar neighbor score does not answer them all. Persistent-homology software and full proofs belong to a topology treatment; this finite complex establishes the limitation without implying that we ran one."}</Prose>
+
+<H2>{"10. Deeper branch: derive the force and distinguish sampled objectives"}</H2>
+
+<ManifoldFigure id="D43" />
+
+<Prose>{"Open the t-SNE objective's dependency graph. Input "}<InlineMath>{"P"}</InlineMath>{" stays fixed. Coordinates determine squared separations, Student kernels "}<InlineMath>{"t_{ij}"}</InlineMath>{", their ordered total "}<InlineMath>{"Z"}</InlineMath>{", then "}<InlineMath>{"Q_{ij}=t_{ij}/Z"}</InlineMath>{". Substituting into KL separates terms:"}</Prose>
+
+<div className="neural-equation"><MathBlock>{"C=\\underbrace{\\sum P_{ij}\\log P_{ij}}_{\\text{constant}}\n-\\sum P_{ij}\\log t_{ij}+\\log Z,"}</MathBlock></div>
+
+<Prose>{"because the ordered "}<InlineMath>{"P"}</InlineMath>{" total is 1. For one endpoint, differentiating both orientations of a pair doubles its contribution. Also "}<InlineMath>{"\\partial\\log t_{ij}/\\partial y_i=-2t_{ij}(y_i-y_j)"}</InlineMath>{". The attractive term becomes "}<InlineMath>{"4\\sum_jP_{ij}t_{ij}(y_i-y_j)"}</InlineMath>{". Differentiating "}<InlineMath>{"\\log Z"}</InlineMath>{" gives the repulsive "}<InlineMath>{"−4\\sum_jQ_{ij}t_{ij}(y_i-y_j)"}</InlineMath>{". Adding them yields the gradient in §5. The factor4 therefore comes from the squared-distance derivative and the two ordered orientations; it is not a tunable learning rate."}</Prose>
+
+<Prose>{"Every pair's force on its two endpoints sums to zero, so the complete gradient has zero total over rows. Translating coordinates gives a null direction. A finite-difference probe of a coordinate should evaluate both perturbed costs with the same fixed "}<InlineMath>{"P"}</InlineMath>{", and compare against this gradient at the original state. Testing only a lower final loss would not isolate the derivative's sign or normalization. The derivative tests one local operation; the final cost answers a separate question about a complete trajectory."}</Prose>
+
+<ManifoldFigure id="D44" />
+
+<Prose>{"The complete small optimizer follows the four-point example to 200 updates. It searches each input row's beta for perplexity 2, symmetrizes the conditional matrix, computes all Student probabilities and KL, takes a gradient step of .5 and recenters. Its exact small scope makes each matrix inspectable. It allocates an "}<InlineMath>{"n\\times n\\times q"}</InlineMath>{" map-offset tensor, so it is a tiny fixture implementation; the larger graph/audit routes above show how row-wise and sparse representations avoid analogous feature-sized allocations. Do not apply this full pair programme to a100,000-row collection."}</Prose>
+
+<p className="manifold-source-role">unchanged original programme; retained stream, not executed</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/programs/tiny_tsne.py"} filename={"tiny_tsne.py"} language="python" />
+
+<p className="manifold-source-role">unchanged retained historical stream</p><RemoteCodeBlock source={"/learn-assets/manifold-learning/outputs/retained-tiny_tsne.txt"} filename={"retained-tiny_tsne.txt"} language="output" />
+
+<Prose>{"The retained initial KL .053522 becomes.018227 after 200 steps, with coordinates[−1.775811,−.759392,.422370,2.112833]. Cost decreased for that run; it is not a certificate of the global minimum. Its row solver has a bounded80-step tolerance search, while the new row file in §4 reports tie and limit status more explicitly. Keep the original source and its output paired. A modified solver, momentum term or initialization is a new experiment with its own result, not a replacement provenance for the old stream."}</Prose>
+
+<ManifoldFigure id="D45" />
+
+<Prose>{"There is a useful connection to contrastive learning. An edge-sampling experiment can ask a classifier to distinguish selected neighbor pairs from pairs drawn from a noise distribution. With a declared positive/negative ratio, noise law and score normalization, its optimum and expected updates can be derived. Noise-contrastive and normalized contrastive formulations make different choices about which pairs share a denominator. The drawing keeps positive pairs, sampled negative pairs, a score and the normalization set as distinct objects."}</Prose>
+
+<Prose>{"One declared calculation separates these choices. Query A at 0 has candidates B1 and C3, with Student scores .5 and .1. Normalizing over these two candidates gives B probability "}<InlineMath>{"5/6"}</InlineMath>{" and negative log score "}<InlineMath>{"\\log(6/5)\\approx.182322"}</InlineMath>{"; adding a candidate changes that denominator. For a separate binary neighbor-versus-noise experiment, declare positive probabilities(A,B,C)=(0,5/6,1/6), noise probabilities(.25,.25,.5) and equal prior chances of a positive or noise event. Observing pair A/B then gives positive-class posterior "}<InlineMath>{"(5/6)/(5/6+.25)=10/13"}</InlineMath>{" and loss "}<InlineMath>{"\\log(13/10)\\approx.262364"}</InlineMath>{". Noise-contrastive estimation fits a model against an explicit noise law; normalized contrastive objectives such as InfoNCE compare a selected positive against a stated candidate set. The two computations need their own normalizer/noise law; neither number is asserted to be the ordinary UMAP trainer's loss."}</Prose>
+
+<Prose>{"The finite "}<code>{"sampled_pair_events.py"}</code>{" example from §6 exposes why the convention matters: the expected positive displacement is frequency-weighted, and head-only negatives are asymmetric. Research can derive a scalar surrogate under a specified symmetric convention; that does not make every asymmetric implementation field an exact gradient of that surrogate. The "}<a href={"https://arxiv.org/abs/2007.08902"}>{"attraction–repulsion analysis"}</a>{" compares regimes of neighbor embeddings, while "}<a href={"https://arxiv.org/abs/2206.01816"}>{"contrastive neighbor embeddings"}</a>{" studies objectives with explicit normalization choices. These links help explain implementation behavior. They do not establish an unconditional identity “UMAP equals t-SNE,” or transfer a performance claim to our digit collection without an experiment."}</Prose>
+
+<section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+<H2>{"11. Practice: calculate, diagnose and transfer"}</H2>
+
+<Prose>{"Try a changed case before reading its hint and solution. Every answer states the relationship being preserved; a visually pleasing layout is not the success criterion."}</Prose>
+
+<H3>{"1. A sparsely sampled sensor corridor"}</H3>
+
+<Prose>{"Points are(0,0),(0,2),(1,2),(2,2),(2,0). Build radius graphs at 1,2 and√5. What is the endpoint route, and does increasing radius recover the intended corridor?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"inspect the direct endpoint chord before tracing the top of the corridor."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"at 1 the two endpoints are isolated from the top, so no endpoint route exists. At2 the endpoints are connected directly with length 2; that edge remains at√5. No route can be shorter than the Euclidean endpoint distance 2, so2 is the shortest length at both larger radii. Sparse sampling failed to encode the intended corridor; increasing radius supplied a shortcut rather than proof of the physical route. Success means drawing the actual edges and distinguishing their graph from the intended surface."}</Prose>
+
+</details>
+
+<H3>{"2. Merge two events before measuring effective count"}</H3>
+
+<Prose>{"Compute perplexity for probabilities(1/2,1/4,1/8,1/8), then merge the last two events."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"add the probabilities before computing the merged event's logarithm."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"entropy is "}<InlineMath>{"1/2+1/2+3/8+3/8=1.75"}</InlineMath>{" bits and perplexity "}<InlineMath>{"2^{1.75}\\approx3.363586"}</InlineMath>{". Merging gives(1/2,1/4,1/4), entropy 1.5 bits and perplexity√8≈2.828427. An effective count belongs to an actual event space; it is not preserved by merging distinct events."}</Prose>
+
+</details>
+
+<H3>{"3. Repair a misleading map report"}</H3>
+
+<Prose>{"A report says “six of eight neighbors survived, so trustworthiness is 99%.” Correct the statement and say what is missing."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"retained fraction and intrusion rank penalty use different information."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"six of eight gives a local retained fraction.75. It does not calculate "}<InlineMath>{"T_k"}</InlineMath>{". To calculate trustworthiness you need "}<InlineMath>{"n,k"}</InlineMath>{", each introduced neighbor's input rank and the stated tie convention, then the normalization. A collection average also leaves the distribution of local failures open. Show a poor local query alongside the average before making a practical claim."}</Prose>
+
+</details>
+
+<H3>{"4. Change a fuzzy edge"}</H3>
+
+<Prose>{"Two directed memberships are .2 and.6. Compute their union and the isolated "}<InlineMath>{"a=b=1"}</InlineMath>{" pair optimum. Repeat after changing.6 to .9."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"first combine memberships, then solve "}<InlineMath>{"1/(1+r^2)=w"}</InlineMath>{"."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"unions are .2+.6−.12=.68 and.2+.9−.18=.92. Radii are√(8/17)≈.685994 and√(2/23)≈.294884. Stronger membership prefers a shorter isolated pair. These are ideal isolated optima, not coordinates from the ordinary sampled optimizer, where endpoints participate in many pairs."}</Prose>
+
+</details>
+
+<H3>{"5. Compare global distances with a local recipe"}</H3>
+
+<Prose>{"Input line positions are 0,3,7. Recover centered MDS coordinates. Find the middle point's affine weights and place it when the two neighbors move to −2 and12."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"the middle coordinate is determined by sum1 and the input reconstruction."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"the mean is 10/3, giving centered[−10/3,−1/3,11/3] up to reflection. Weights are 4/7 and3/7 because "}<InlineMath>{"7(3/7)=3"}</InlineMath>{". The mapped middle is "}<InlineMath>{"−2(4/7)+12(3/7)=4"}</InlineMath>{". On this exact line the descriptions agree; globally preserving all distances and preserving local recipes remain different objectives."}</Prose>
+
+</details>
+
+<H3>{"6. Repair future-data evaluation"}</H3>
+
+<Prose>{"A pipeline fits one scaler and UMAP on training rows, another scaler and UMAP on validation rows, then sends validation coordinates to the training classifier. Repair it."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"identify which fitted state defines the classifier's coordinate system."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"fit preprocessing and reducer on training rows only. Apply those fitted objects to validation rows, then evaluate the classifier fitted on the training representation. Two independent maps are not aligned merely by using the same seed. Compare raw-feature and PCA baselines. Choose settings on validation and reserve a final untouched test if a final generalization claim is needed."}</Prose>
+
+</details>
+
+<H3>{"7. Inspect an actual local reversal"}</H3>
+
+<Prose>{"For source30 and "}<InlineMath>{"k=10"}</InlineMath>{", compare the printed input list with PCA and t-SNE30 lists. Calculate common, missing and introduced IDs, then repeat on another style of digit as an independent project."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"use source-ID set differences, not class-label overlap."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"PCA common{0,79,166,229,266,276}; missing{36,140,160,178}; new{78,130,132,306}. t-SNE common{0,166,229,266,276}; missing{36,79,140,160,178}; new{10,48,130,256,286}. Fractions are .6 and.5, reversing the global .376333/.770333 ranking. For the independent continuation, choose another existing source ID, two saved settings and "}<InlineMath>{"k\\in\\{5,10,20\\}"}</InlineMath>{", print both sets and inspect actual images. Success means an ID-joined explanation of changed neighbors under the unchanged pixel metric, including a local case that agrees with or contradicts the global order. A label-coloured plot alone is insufficient."}</Prose>
+
+</details>
+
+<H3>{"8. Modify the UMAP graph reference"}</H3>
+
+<Prose>{"In the six-point graph source, change "}<InlineMath>{"k=4"}</InlineMath>{" to 3, then restore4. Predict which quantities must be recalculated. Separately multiply every input coordinate by 5. What stays unchanged, and what does learning rate 0 do?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"separate support/target changes from common distance-scale changes."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"changing "}<InlineMath>{"k"}</InlineMath>{" changes selected support and target "}<InlineMath>{"\\log_2k"}</InlineMath>{", so rerun neighbor selection and scale calibration; a previously printed k4 graph is not a numeric answer for k3. Common scaling by 5 multiplies distances, rho, sigma and the distance-scale floor by 5, preserving memberships/union within search and floating-point tolerance when the same neighbors/ties remain. Given the same graph, map coordinates and negative IDs, the sampled update is unchanged; rate 0 preserves every coordinate. Verify with a newly modified programme when practising, retaining its own output rather than replacing the k4 stream."}</Prose>
+
+</details>
+
+<H3>{"9. Whitening can switch a neighbor"}</H3>
+
+<Prose>{"Query is the origin; PCA score vectors B=(2,0), C=(0,1), with retained eigenvalues(9,1). Which is closer before and after whitening?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"squared whitened distance is "}<InlineMath>{"\\sum_a\\Delta z_a^2/\\lambda_a"}</InlineMath>{"."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"ordinary distances 2 and1 choose C. Whitened distances 2/3 and1 choose B. Whitening is feature-dependent scaling, unlike common division by 16. Positive retained eigenvalues are required; dividing by a zero mode is not meaningful."}</Prose>
+
+</details>
+
+<H3>{"10. Diagnose a bandwidth target"}</H3>
+
+<Prose>{"Distances are(1,1,3) and target perplexity 1.5. Is a positive finite width available?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"take the narrow-width limit while preserving the tie."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"the two nearest candidates share mass1/2 each, so the lower limiting perplexity is 2. The upper limit is 3. Target1.5 is infeasible. Return a domain message while preserving a last valid view; do not label an iteration limit a converged bandwidth."}</Prose>
+
+</details>
+
+<H3>{"11. An unmoved pair has a changed probability"}</H3>
+
+<Prose>{"Change map(0,1,3) to(0,1,2). Calculate the AB kernel, ordered total and probability in each state."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"include AC/CA and BC/CB in the denominator."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"AB kernel remains.5. Ordered totals are 1.6 and2.4, so probabilities are 5/16 and5/24. Normalization creates competition through all pairs, not just the selected pair."}</Prose>
+
+</details>
+
+<H3>{"12. Catch a double-weighted event"}</H3>
+
+<Prose>{"An edge of weight.25 occurs once per four elementary slots. Its per-event displacement is "}<InlineMath>{"\\delta"}</InlineMath>{". What expectation results from multiplying each event by .25 again?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"frequency already supplies one factor.25."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"correct positive expectation is "}<InlineMath>{"\\delta/4"}</InlineMath>{"; extra event weighting makes "}<InlineMath>{"\\delta/16"}</InlineMath>{". The finite schedule is declared, not a universal ordinary UMAP frequency. To transfer the fix, locate whether an edge weight controls event timing, event magnitude or both in the actual implementation before changing it."}</Prose>
+
+</details>
+
+<H3>{"13. Test whether a distance table is Euclidean"}</H3>
+
+<Prose>{"AB1, BC1, AC3 define a symmetric zero-diagonal table. Can classical MDS realize it exactly?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"inspect a triangle inequality before an eigensolver."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"3>1+1, so no Euclidean realization exists. The centered Gram spectrum4.5,0,−5/6 confirms a negative direction. Clipping it gives approximate coordinates with changed distances; it is not a repair that makes the original table exact."}</Prose>
+
+</details>
+
+<H3>{"14. Use a negative recipe deliberately"}</H3>
+
+<Prose>{"Query4 has neighbors0 and3. Move those neighbors to −2 and7. Find weights and the query's new coordinate."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"do not clip an affine coefficient just because it is negative."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"weights−1/3 and4/3 sum1 and reconstruct4. The map coordinate is "}<InlineMath>{"−2(−1/3)+7(4/3)=10"}</InlineMath>{". It extrapolates beyond7. Clipping and renormalizing would place it somewhere else and change the objective; common translation preserves the original recipe."}</Prose>
+
+</details>
+
+<H3>{"15. Count energy and null directions"}</H3>
+
+<Prose>{"For the unit chain and coordinates(0,1,3), compute unordered and ordered edge energy. Add a separate two-node component: how many constant null modes remain?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"the quadratic includes a half of the ordered sum."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"unordered energy1+4=5=yᵀLy; ordered sum10. Two components give two linearly independent component-constant null modes. Removing only one zero eigenvector leaves an arbitrary relative component direction."}</Prose>
+
+</details>
+
+<H3>{"16. Follow two diffusion steps"}</H3>
+
+<Prose>{"Start at A on the unit chain A–B–C with no self loops. Compute one-step and two-step probability distributions."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"B splits its outgoing probability equally."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"one step(0,1,0), two steps(.5,0,.5). The walk alternates parity and is periodic. Shortest paths do not directly give this distribution; adding a lazy self-loop changes the transition and should be stated."}</Prose>
+
+</details>
+
+<H3>{"17. Explain a density radius and an API boundary"}</H3>
+
+<Prose>{"Weights(1,.5) connect neighbors at distances(1,3). Calculate weighted squared radius, then double the distances. Does densMAP returning training coordinates establish new-row transform support?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"separate a log-scale calculation from cached fitted state."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"radius squared is(1+4.5)/1.5=11/3; doubled distances give44/3. The log change isln4 apart from the epsilon. It describes graph-weighted local scale, not a calibrated global density. Returning cached training coordinates is a different branch from placing a new row; the inspected implementation refuses the latter for densMAP."}</Prose>
+
+</details>
+
+<H3>{"18. Preserve faces, not just a wireframe"}</H3>
+
+<Prose>{"Draw the unit square's Rips complex below1, from 1 to√2 and at√2. Then project all vertices onto their first coordinate."}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"when all triangle edges appear, include the filled triangle."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{"below1 there are isolated corners; for 1≤ε<√2 the sides give one unfilled loop; at√2 filled triangles and the tetrahedron eliminate it. The projection creates duplicate coordinate pairs and loses that square loop. Preserve the distinct IDs in the drawing. This is a constructed projection example, not an empirical t-SNE result."}</Prose>
+
+</details>
+
+<H3>{"19. Price the next allocation"}</H3>
+
+<Prose>{"How much storage does one100,000×100,000 float64 matrix need? Does a sparse neighbor graph eliminate that cost from every later method?"}</Prose>
+
+<details><summary>Hint</summary>
+
+<Prose>{"count entries before looking at an algorithm's name."}</Prose>
+
+</details>
+
+<details><summary>Worked solution</summary>
+
+<Prose>{""}<InlineMath>{"10^{10}\\cdot8=80\\times10^9"}</InlineMath>{" bytes, or80 GB decimal, before additional arrays. Sparse adjacency costs roughly "}<InlineMath>{"O(nk)"}</InlineMath>{", but an all-pairs route matrix or dense global eigen matrix can still be "}<InlineMath>{"O(n^2)"}</InlineMath>{". A row-wise exact audit uses "}<InlineMath>{"O(n)"}</InlineMath>{" working distances while keeping the input/output records. Choose the representation at each operation."}</Prose>
+
+</details>
+
+
+</section>
+<H2>{"12. Further learning and technical references"}</H2>
+
+<Prose>{"Use these resources for specific next questions. The lesson's implemented finite mechanisms, retained runs and source-only API branches have different evidence roles; a link to a paper is not a claim that all of its proofs or figures were consumed."}</Prose>
+
+<section className="lesson-ending lesson-ending--resources" data-lesson-ending="further-learning"><Prose>{"For intuition, "}<a href={"https://distill.pub/2016/misread-tsne/"}>{"How to Use t-SNE Effectively"}</a>{" walks through changed perplexities and interpretations of area, gaps and cluster sizes. Recreate its questions with the saved digit maps before generalizing the pictures. The "}<a href={"https://scikit-learn.org/stable/modules/manifold.html"}>{"scikit-learn manifold guide"}</a>{" compares the global-distance, local-reconstruction and graph routes and explains estimator parameters. Its currently inspected1.9.1 API differs from older tutorials, especially for MDS."}</Prose></section>
+
+<section className="lesson-ending lesson-ending--resources" data-lesson-ending="references"><Prose>{"For the t-SNE derivation, "}<a href={"https://jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf"}>{"van der Maaten and Hinton,2008"}</a>{" supplies Gaussian affinities, crowding, symmetrization and the gradient; those selected parts and AppendixA support §§4–5/10. The "}<a href={"https://lvdmaaten.github.io/publications/papers/TR_Dimensionality_Reduction_Review_2009.pdf"}>{"van der Maaten, Postma and van den Herik comparison"}</a>{" provides a broad canonical treatment of PCA, MDS, Isomap, LLE and local variants; the selected algorithm sections support the object comparison and alternatives here. It is not a license to compare unreported benchmark results as if they were ours."}</Prose></section>
+
+<section className="lesson-ending lesson-ending--resources" data-lesson-ending="references"><Prose>{"For UMAP, "}<a href={"https://arxiv.org/abs/1802.03426"}>{"McInnes, Healy and Melville"}</a>{" introduces the finite neighborhood construction and layout procedure. The selected finite-graph and algorithm sections support the mechanism taught here; the full categorical and topological proofs are not reconstructed. The "}<a href={"https://umap-learn.readthedocs.io/en/latest/basic_usage.html"}>{"creator's basic-use guide"}</a>{" and "}<a href={"https://umap-learn.readthedocs.io/en/latest/transform.html"}>{"transform guide"}</a>{" explain ordinary workflows. Their documentation header is 0.5.8, while the retained teaching runs use0.5.12; match installed source when reproducing an internal comparison."}</Prose></section>
+
+<section className="lesson-ending lesson-ending--resources" data-lesson-ending="references"><Prose>{"For sampling, "}<a href={"https://arxiv.org/abs/2103.14608"}>{"Damrich and Hamprecht,2021"}</a>{" distinguishes UMAP's implemented expected updates from a literal all-pair reading of its advertised loss. "}<a href={"https://arxiv.org/abs/2007.08902"}>{"Böhm, Berens and Kobak"}</a>{" studies an attraction–repulsion spectrum; "}<a href={"https://arxiv.org/abs/2206.01816"}>{"Damrich and colleagues"}</a>{" develops contrastive neighbor objectives with explicit normalization. The selected sections motivate our finite event reasoning, not universal algorithm equivalence or new empirical claims."}</Prose></section>
+
+<section className="lesson-ending lesson-ending--resources" data-lesson-ending="references"><Prose>{"For local alternatives, "}<a href={"https://cs.nyu.edu/~roweis/lle/papers/lleintro.pdf"}>{"Saul and Roweis's LLE introduction"}</a>{" explains local recipes and the constrained eigenproblem. Some extracted mathematical glyphs in the retrieved document were garbled; equations here are verified through the finite construction and canonical treatment rather than copied from malformed text. Isomap's original Science article and several original Laplacian/Hessian/LTSA proofs were identified but not fully accessed in this source scope. Their mechanisms here rely on the actually read canonical comparison and official APIs, without claiming original-proof consumption."}</Prose></section>
+
+<section className="lesson-ending lesson-ending--resources" data-lesson-ending="references"><Prose>{"For extensions, the "}<a href={"https://github.com/hhcho/densmap"}>{"densMAP creator project"}</a>{" identifies the density-preserving aim. Complete original-paper access failed in the retained research scope; this lesson confines its supported teaching to local radii, implementation/API branches and labelled extension intent. It makes no biological validation claim. The "}<a href={"https://opentsne.readthedocs.io/en/stable/examples/02_advanced_usage/02_advanced_usage.html"}>{"openTSNE reference-placement guide"}</a>{" explains a fixed-reference extension distinct from scikit-learn's "}<code>{"TSNE"}</code>{"; the optional source route needs a matching package before an execution claim. "}<a href={"https://arxiv.org/abs/2009.12981"}>{"Parametric UMAP"}</a>{" motivates the encoder distinction, with neural training routed to the deep learning module."}</Prose></section>
+
+<section className="lesson-ending lesson-ending--resources" data-lesson-ending="further-learning"><Prose>{"For books, the official "}<a href={"https://hastie.su.domains/ElemStatLearn/"}>{"Elements of Statistical Learning page"}</a>{" offers a broader statistical context and the publisher's "}<a href={"https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/"}>{"Pattern Recognition and Machine Learning page"}</a>{" identifies Bishop's text. Book PDF access was not established here, so these are annotated further-learning recommendations rather than sources for unread page-specific claims. No video is required for this route. Previously discovered video metadata is retained in the research history; it is not promoted here as a technically checked explanation or a viewing claim."}</Prose></section>
+
+<section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+<H2>{"13. What you can now do, and what question comes next"}</H2>
+
+<Prose>{"You can follow one observation through an image vector and a coordinate map, explain why its neighbors changed, calculate effective Gaussian neighborhoods and symmetric "}<InlineMath>{"P"}</InlineMath>{", derive the Student force and trace a bounded update. You can also construct UMAP's local graph, distinguish memberships from probabilities and affine weights, and explain why scheduling and asymmetric negative events matter. Use the saved-array audit to replace a general impression with an ID-joined local and collection comparison."}</Prose>
+
+<Prose>{"For implementation practice, run a deterministic file, alter a declared small fixture and inspect the intermediate object before interpreting the final coordinates. The common file index lists every complete programme, data file and recorded stream. Use the setup guide to choose the dependencies and distinguish a recorded result from a new fitting experiment; retain the modified source and settings with your new results."}</Prose>
+
+<Prose>{"The next topic, "}<a href={"/learn/path/full-curriculum/independent-component-analysis-ica?module=classical-ml"}>{"Independent Component Analysis"}</a>{", asks another reduction question: can observed mixtures be separated into statistically independent sources? A map that preserves neighbors does not answer it. Bring centering, linear transformations and the habit of naming the target relationship; ICA will add its own assumptions and objective."}</Prose>
+</section>
+
+<section className="manifold-setup"><h3 id="setup-and-complete-files">{"Setup and complete files"}</h3>
+
+<Prose>{"Use the supplied files to inspect a fixed collection offline, then change a small constructed mechanism deliberately. The real data are300 selected UCI optical-digit observations, each with a source ID, recorded label and64 block-count features. Labels selected the first30 records per class; labels were not fitted inputs to the saved unsupervised maps. Keep the supplied provenance and CSV/JSON pair together."}</Prose>
+
+<Prose>{"Download all fifteen scripts and the five supporting data files listed in the file index. Put the scripts together in one working "}<code>{"programs"}</code>{" directory: "}<code>{"isomap_routes.py"}</code>{" imports "}<code>{"classical_geometry.py"}</code>{". The full source is also visible beside its teaching; use the file index to find each complete payload. An output file records an execution; copying it does not run its program."}</Prose>
+
+<CodeBlock language={"text"}>{"manifold-learning/\n  programs/             all fifteen .py files\n  data/\n    digits-300.csv\n    calculated-inputs.json\n    umap-digits.csv\n    data-provenance.md\n    runtime-versions.json\n  outputs/              ten deterministic and five retained streams"}</CodeBlock>
+
+<Prose>{"The recorded deterministic examples were executed under Python3.12.14,NumPy2.3.5,SciPy1.18.1. The Gaussian solver now returns its last evaluated beta when its iteration budget is exhausted and rejects nonpositive budgets. Its corrected callables have separate bounded checks; the displayed historical main stream remains attached to its preceding source. The retained environment also records scikit-learn1.9.1,umap-learn.5.12,numba.67.0 and related versions. These are attributed snapshots, not a promise of bitwise output on every platform. Use a separate virtual environment for reproduction; the minimum scratch routes need NumPy/SciPy. The MDS ordinary code specifically uses the inspected1.9.1 API. Optional openTSNE source was checked against its1.0.0 documentation; no matched installed openTSNE execution is claimed."}</Prose>
+
+<CodeBlock language={"sh"}>{"python -m venv .venv\n# Activate .venv using the command appropriate to your shell.\npython -m pip install numpy==2.3.5 scipy==1.18.1\npython programs/gaussian_rows.py\npython programs/classical_geometry.py\npython programs/isomap_routes.py\npython programs/lle_recipes.py\npython programs/graph_spectrum.py\npython programs/local_tangent_patch.py\npython programs/sampled_pair_events.py\npython programs/local_density_radius.py\npython programs/reference_map_routes.py\npython programs/audit_saved_neighbors.py --assets data"}</CodeBlock>
+
+<Prose>{"These ten main blocks run deterministic constructed/saved-array work. None fits a new t-SNE/UMAP digit map or calls the source-only ordinary fitting functions. "}<code>{"local_density_radius.py"}</code>{" prints two local radii; it does not call densMAP. "}<code>{"reference_map_routes.py"}</code>{" prints one interpolation; it does not fit its ordinary, supervised or openTSNE routes. "}<code>{"classical_geometry.py"}</code>{" executes scratch classical/metric calculations; its callable ordinary function is source-only here."}</Prose>
+
+<Prose>{"For an intentional ordinary experiment, install the appropriate declared packages in that environment:"}</Prose>
+
+<CodeBlock language={"sh"}>{"python -m pip install scikit-learn==1.9.1 umap-learn==0.5.12\n# Only for the optional reference-embedding branch:\npython -m pip install openTSNE==1.0.0"}</CodeBlock>
+
+<Prose>{"No installation or fit was performed by this content handoff. Read the corresponding function and call it explicitly on your chosen input. For example:"}</Prose>
+
+<CodeBlock language={"python"}>{"from programs.reference_map_routes import ordinary_pipeline\ntrain_ids, valid_ids, fitted_reducers, results = ordinary_pipeline(\"data/digits-300.csv\")\nfor name, result in results.items():\n    print(name, result[\"correct\"], result[\"denominator\"])"}</CodeBlock>
+
+<Prose>{"This is a new experiment if you run it; its counts may differ from retained streams. It uses the train-only split/state contract and returns actual predictions. The optional openTSNE function returns reference and placed coordinates, while the supervised UMAP function uses training labels explicitly. Neither inherits the retained unsupervised map's outputs. Pinning package names alone does not establish identical threads, numerical libraries or hardware."}</Prose>
+
+<Prose>{"The five preserved scripts are full original programs, with the original result streams beside them. "}<code>{"inspect_digits.py"}</code>{" and "}<code>{"inspect_umap.py"}</code>{" fit maps and write coordinate CSVs; "}<code>{"compare_transforms.py"}</code>{" fits the train-only comparison; "}<code>{"tiny_tsne.py"}</code>{" executes200 small updates; "}<code>{"umap-mechanism.py"}</code>{" compares internals and runs a small ordinary fit. If deliberately reproducing or modifying them, copy the measurement CSV into a separate experiment working directory and run there so generated outputs cannot be confused with saved reference data. Do not replace a retained coordinate/stream file with a fresh run that happens to share its filename."}</Prose>
+
+<NeuralTable caption={"Setup and complete files"} headers={[<>{"Complete file"}</>,<>{"What to inspect or change"}</>,<>{"Result role"}</>]} rows={[[<>{""}<code>{"audit_saved_neighbors.py"}</code>{""}</>,<>{"ID join, row-wise distances, self exclusion, rank penalties, changed source/k"}</>,<>{"Recorded saved-array audit; no fit"}</>],[<>{""}<code>{"gaussian_rows.py"}</code>{""}</>,<>{"Shifted weights, entropy targets, nearest ties and consistent last-evaluated iteration-limit status"}</>,<>{"Corrected callable checks; the recorded main stream belongs to the exact preceding source"}</>],[<>{""}<code>{"classical_geometry.py"}</code>{""}</>,<>{"Double centering, eigenmodes, metric majorization and shared start"}</>,<>{"Executed scratch predecessor, unchanged numeric body; completed ordinary nonmetric return is source-only"}</>],[<>{""}<code>{"isomap_routes.py"}</code>{""}</>,<>{"Radius/union graph, relaxation, infinity and finite embedding"}</>,<>{"Recorded U-chain routes; ordinary estimator source-only"}</>],[<>{""}<code>{"lle_recipes.py"}</code>{""}</>,<>{"Offset Gram, ridge, affine weights, centered eigenproblem"}</>,<>{"Recorded curved five-point recipe example"}</>],[<>{""}<code>{"graph_spectrum.py"}</code>{""}</>,<>{"Degrees, three Laplacians, random walk and diffusion modes"}</>,<>{"Recorded chain energy/walk; ordinary spectral call source-only"}</>],[<>{""}<code>{"local_tangent_patch.py"}</code>{""}</>,<>{"Thin SVD, shared-ID alignment, curvature stencil"}</>,<>{"Recorded five-point patch; global variants source-only"}</>],[<>{""}<code>{"sampled_pair_events.py"}</code>{""}</>,<>{"Positive/negative endpoints, explicit frequencies/noise law"}</>,<>{"Recorded finite expected-event enumeration"}</>],[<>{""}<code>{"local_density_radius.py"}</code>{""}</>,<>{"Weight×distance² products, log radius and densMAP call"}</>,<>{"Executed radius only; density optimizer source-only"}</>],[<>{""}<code>{"reference_map_routes.py"}</code>{""}</>,<>{"Fixed-state interpolation, ID split and future-data routes"}</>,<>{"Executed interpolation only; all fits/extensions source-only"}</>],[<>{""}<code>{"inspect_digits.py"}</code>{""}</>,<>{"Ordinary PCA/t-SNE fixed-collection settings and audits"}</>,<>{"Preserved full original program/stream; not rerun"}</>],[<>{""}<code>{"inspect_umap.py"}</code>{""}</>,<>{"Ordinary graph/layout settings and coordinate export"}</>,<>{"Preserved full original program/stream; not rerun"}</>],[<>{""}<code>{"compare_transforms.py"}</code>{""}</>,<>{"225/75 split, fixed transform and KNN baseline"}</>,<>{"Preserved73/75 versus71/75 result; not rerun"}</>],[<>{""}<code>{"tiny_tsne.py"}</code>{""}</>,<>{"Entire tiny exact optimizer and fixed-P gradient"}</>,<>{"Preserved200-step trajectory endpoints; not rerun"}</>],[<>{""}<code>{"umap-mechanism.py"}</code>{""}</>,<>{"Six-row graph, ideal pair gradient and supplied sampled step"}</>,<>{"Preserved version-bound internal comparison; not rerun"}</>]]} />
+
+<Prose>{""}<code>{"digits-300.csv"}</code>{" contains integer source IDs,labels and raw0–16 cells. "}<code>{"calculated-inputs.json"}</code>{" binds its hash, the same300 IDs, all ten full-precision coordinate arrays and all90 historical R/T/C values. "}<code>{"umap-digits.csv"}</code>{" is the retained coordinate export. "}<code>{"runtime-versions.json"}</code>{" and "}<code>{"data-provenance.md"}</code>{" retain execution/source context. "}<code>{"file-index.json"}</code>{" gives each exact path, byte count, hash and display role, including the fifteen full streams. Historical and new rank conventions remain separate. Never reconstruct distances from a rounded picture."}</Prose></section>
+</div>; }
+export default { title: 't-SNE, UMAP & Manifold Learning', readTime: '~100 min read + 120 min practice', content: ManifoldLesson };

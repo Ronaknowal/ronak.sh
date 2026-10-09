@@ -1,0 +1,54 @@
+{
+  "schema": "nmf-native-control-caption-source/v1",
+  "source": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/IdentifiabilityFigures.jsx",
+    "bytes": 11681,
+    "sha256": "925af706b8a0fcd07d1864581f329d29cc8350b5eea8cc787b1c700e989ba10a"
+  },
+  "successor": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/control-and-caption-correction/IdentifiabilityFigures.jsx",
+    "bytes": 11689,
+    "sha256": "512a57b83dc326c242510cbd4cb3d373fdb689dc55ae35f1d73caa53398814e1"
+  },
+  "edits": [
+    [
+      "from './Drawing.jsx'",
+      "from '../../Drawing.jsx'"
+    ],
+    [
+      "from './nmf-model.js'",
+      "from '../../nmf-model.js'"
+    ],
+    [
+      "label=\"New query first amount t\" value={t} onChange={setT} max={1} step={.02}",
+      "label=\"New query first amount t\" value={t} onChange={setT} max={1} step={.01}"
+    ]
+  ],
+  "inverseExact": true,
+  "unchangedModel": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/nmf-model.js",
+    "bytes": 6561,
+    "sha256": "057c37d97da0c0ec5e69404feefb05fc71e94323a16015275470f18ba161b680"
+  },
+  "readabilitySource": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/runtime-preview/consolidated-review-correction/root-native-review/readability-correction/SavedDataFigures.jsx",
+    "bytes": 18348,
+    "sha256": "5d98431d02940c855417673cf50aceaeb421d3c8f4123ed14b2c17fabe753744"
+  },
+  "findings": [
+    {
+      "id": "anchor-step",
+      "actual": "At initial/reset t=.25, browser input is .26 because step .02 excludes .25; ArrowRight jumps to .28.",
+      "correction": "Use .01, preserving .25, endpoints and all model calculations."
+    },
+    {
+      "id": "caption-overflow",
+      "actual": "768/root32: root client753, scroll763; unbroken operand caption scroll676 in580-wide caption.",
+      "correction": "Allow natural wrapping of long figcaption tokens; keep mathematical display regions and the D46 local scroller intact."
+    }
+  ],
+  "limits": [
+    "No numerical programme, fit, SSR or old campaign rerun.",
+    "Source preparation is not actual corrected browser acceptance."
+  ]
+}

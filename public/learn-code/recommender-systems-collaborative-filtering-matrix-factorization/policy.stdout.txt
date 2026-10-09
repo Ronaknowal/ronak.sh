@@ -1,0 +1,8 @@
+action 0 reward 0 mass 12/25 weighted reward 0
+action 0 reward 1 mass 8/25 weighted reward 5/8
+action 1 reward 0 mass 1/25 weighted reward 0
+action 1 reward 1 mass 4/25 weighted reward 5/2
+logged mean: 12/25 target mean: 3/5 IPS expectation: 3/5
+one-request IPS variance: 153/200
+one declared 20-request sample: raw 9/20 IPS 9/16
+If B has zero logging probability and positive target mass, its mean is not identified from those logs.

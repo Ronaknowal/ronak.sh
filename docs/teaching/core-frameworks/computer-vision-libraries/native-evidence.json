@@ -1,0 +1,46 @@
+{
+  "python": "3.12.14",
+  "versions": {
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1",
+    "spacy": "3.8.16",
+    "tokenizers": "0.23.2",
+    "cv2": "5.0.0",
+    "PIL": "12.3.0",
+    "torch": "2.14.0+cpu",
+    "torchvision": "0.29.0+cpu"
+  },
+  "checks": [
+    {
+      "case": "all 256 binary two-rater four-item assignments",
+      "result": "sklearn parity; degenerate denominator preserved"
+    },
+    {
+      "case": "all four complete learner programs",
+      "result": "executed and assertions passed"
+    },
+    {
+      "case": "Unicode source slices, partial spans and exact-boundary score",
+      "result": "pass"
+    },
+    {
+      "case": "asymmetric filter/OpenCV, removed box, changed-frame solution, discrete mask resize",
+      "result": "pass"
+    },
+    {
+      "case": "Annotation marginal counters changed to one pass/O(k) extra space; all256 rater assignments, empty/missing and complete annotation main rerun",
+      "result": "pass; same installed reference environment; unchanged NLP/CV native evidence retained"
+    }
+  ],
+  "files": {
+    "public/learn-code/data-annotation-labeling/annotation_audit.py": "dd508eeabc11ad5752e0d7dd690d8255a7d3540ca607541442da46d64c807938",
+    "public/learn-code/nlp-libraries/text_pipeline.py": "1179d2fdb7abc7e19f08ac96b926548c32fa1f26235224835d3ffc21973293e3",
+    "public/learn-code/nlp-libraries/subword_alignment.py": "335940390fae9e6af03c6e729fc6038291944d81f13be506f5ff7bce7f577cc7",
+    "public/learn-code/computer-vision-libraries/vision_pipeline.py": "e5f568dc84f88eb4fa03127e5825d6a1386d332e773a5f8643a5db376e4095d1"
+  },
+  "limits": [
+    "CPU interface fixtures, no pretrained recognition performance measured.",
+    "Label Studio server/multi-user UI not executed; XML/task/export schema and local adapter checked.",
+    "Browser/independent reviews are separate."
+  ]
+}

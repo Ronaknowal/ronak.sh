@@ -1,0 +1,17 @@
+{
+  "scope": "Literal fixed IDs only; no sampling/generation/optimizer",
+  "cache_indices": [
+    0,
+    1,
+    2
+  ],
+  "cached_full_logit_max_error_fp32": 0.00019979476928710938,
+  "cached_full_logit_relative_l2_fp32": 1.0785225640574936e-05,
+  "cached_full_logit_max_error_fp64": 4.5075054799781356e-13,
+  "student_parameters_exact": true,
+  "original_protocol_sha256": "8d66dc2c5ae882b94fea0afe0fb8e9db95adacadfb4e5282bbed347b1a28492d",
+  "offline_terminal_sha256": "f4732d05e86cdcef5555dbd3480bfaa0b0fea1a6a8a7273b344b58e5042b2b8a",
+  "teacher_corpus_sha256": "b03ede531292d2bf12cf9f39e65f8faadcd3690b1e8f3958f0bb69e5a254d445",
+  "current_source_sha256": "facaf93d059a753dc53147473cbafceb29bb256600f4b7de85a0dd46fc8fea5c",
+  "original_source_sha256": "3e40baab57ced79514b61d8860acccec510cffab1cc486e310087b0881367707"
+}

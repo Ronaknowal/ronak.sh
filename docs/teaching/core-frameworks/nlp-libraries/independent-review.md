@@ -1,0 +1,11 @@
+# Independent review — NLP Libraries
+
+Reviewer: `frameworks_functional_tracking`, independent of author `frameworks_annotation_modalities`. Reviewed 28 September 2026. Companion JSON records the reviewed source identities. No open source-level blocker found.
+
+Read the complete manuscript, visual specifications, interactive model/component, both complete programs and native evidence. Character coordinates precede token indices; the same New York span connects the diagram, strict BIO algorithm, spaCy API and exact-span score. The partial-boundary and changed tokenizer examples expose a real interface failure before discussing deeper word-piece supervision. The ownership strip correctly distinguishes attention visibility from direct token loss. Practice changes source coordinates, scoring and mask contracts instead of repeating API names.
+
+The Python scratch tokenizer preserves original code-point slices and the monotone BIO scan rejects partial and overlapping spans. Its stated sorting/scan cost is accurate. The ordinary spaCy route includes independent rule coverage limits, streaming, serialization/reload and a changed phrase. The local WordPiece fixture explains its deliberate first-piece objective and avoids a false claim of useful pretrained recognition. Exact-source and model-token coordinates stay separate.
+
+Complementary Node checks enumerated all576 start/end pairs over the 23-code-point anchor string and compared strict acceptance with independently enumerated token-start/token-end sets. All passed. Python/native author receipts for Unicode slices, saved/reloaded output and partial-span rejection were inspected rather than rerun wholesale. The official EntityRuler API independently confirms non-overlapping Doc.ents, longer-match/earlier-match precedence and overwrite behavior; this supports the lesson's pipeline-order explanation. Current source-label mapping and masks were traced by hand against the program.
+
+The lab's edits are immediately visible and bounded to200codepoints; rejected proposals are explicitly distinguished from certified outside labels. Current neutral textarea/36px code-point-cell styling was source-reviewed. Parent owns the rebuilt visual/mobile/keyboard check; no browser or learned-NER performance claim is made by this review.

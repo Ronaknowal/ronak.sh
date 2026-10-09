@@ -1,0 +1,11 @@
+train/test rows 224 120
+training species counts [100, 44, 80]
+training island counts Biscoe [28, 0, 80]
+training island counts Dream [36, 44, 0]
+training island counts Torgersen [36, 0, 0]
+test model / CE bits / accuracy / perplexity global 1.518341224 0.433333333 2.864614937
+test model / CE bits / accuracy / perplexity island 0.805893591 0.7 1.748228292
+test island / counts / H CE KL bits Biscoe [16, 0, 44] [0.836640742, 0.849730932, 0.01309019]
+test island / counts / H CE KL bits Dream [20, 24, 0] [0.994030211, 1.011549849, 0.017519637]
+test island / counts / H CE KL bits Torgersen [16, 0, 0] [0.0, 0.075948853, 0.075948853]
+test weighted H CE KL bits [0.782798115, 0.805893591, 0.023095476]

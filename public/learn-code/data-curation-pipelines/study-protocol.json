@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "features": "train only; NFC/casefold words; raw tf; smoothed IDF; L2 row norm",
+  "maximum_words": 1024,
+  "l2": 0.01,
+  "initialization": "zero weights and intercept",
+  "scratch_stopping": "training augmented gradient L2 norm <= 1e-8 or 6000 steps",
+  "step": "reciprocal of 0.25*(mean squared row norm + 1)+l2",
+  "library": "lbfgs, tol 1e-10, max_iter 6000, C=1/(n_train*l2)",
+  "threshold_grid": [
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9
+  ],
+  "selection": "largest tune F1; ties choose higher threshold; undefined F1 ranks below defined",
+  "baseline": "constant training positive fraction, same tune selection procedure",
+  "final_evaluation": "one fixed selection; entire grid descriptive only, no selection on final",
+  "scope": "agreement with released teacher labels; no downstream LM training or human gold set",
+  "python": "3.12.14",
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1"
+  },
+  "data": {
+    "protocol.json": "f7afada636016c68c49cb175852cf5134ad3e250c7f558bbd81369643095da1c",
+    "collection.json": "e7e9b8f94a4ec95dc57dbe61f57239807c139219a7fa02239f48ecbd617c79d3",
+    "records.jsonl": "93f989d05ba45854ef2bf7a1657b6994ce464347d64cab4912f5df1adf7c0179"
+  },
+  "programs": {
+    "run_curator_study.py": "d37feb8132aa1235ccb07c8501bee89a9c5a1b4b9f27a3dbceb9d3097df49231",
+    "prepare_annotations.py": "5167d66a5e2a379f97b45e34c227a9c686201361f5e589bf6b673e1bc7d0958e",
+    "linear_curator.py": "a7122ec9201c8637fa6cee1846d1c3936a71f0d486be244709f37b017387050f",
+    "curation_libraries.py": "f65f6f0512d44da980fa145f5a487790b441bae8f6d92fdb4c9214482ab2f905",
+    "curation_signals.py": "3e359d2299aff3e34fbfd52bf49f96fffe1f77212fc57f0d5bd1bf28ff9b0b0c"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-06T18:08:28.483Z",
+  "base": "http://127.0.0.1:4243",
+  "build": "dist-multimodal-tokenization",
+  "sourceFiles": {
+    "src/learn/data/topics/multimodal-tokenization.jsx": "ca9aae58cd88867ec2b60511115ea70db0af92847ecfecddf594e2585d4d00b8",
+    "src/learn/data/multimodal-tokenization-models.js": "d709d96540ad4c92d2838f0aa251de2ce2bad8a1e22fe0c5cf3b3d0a2d0eabd4",
+    "src/learn/components/lesson-labs/MultimodalTokenizationFlow.jsx": "3b554627c04143b098556cb4652ffd807a3c56576d953b7254e8caea9bf8d947",
+    "src/learn/components/lesson-labs/multimodal-tokenization-flow.css": "88556836086f3526d75641d878ae690d4953edb9f17b320266db9cb1118bed36",
+    "scripts/verify-multimodal-tokenization-browser.cjs": "fcac9f62c4e9729c4d47ae01f6d8bb8ef082b6edde643c7f37da27c24f8ae67e"
+  },
+  "buildManifestHash": "32aae3e9e8d97c19b96e927f3929529c40144b3f59d661bc64f9ae05594edcfd",
+  "interactions": [],
+  "views": [],
+  "programChecks": [],
+  "passed": false,
+  "checks": 0,
+  "failure": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4243/learn/path/full-curriculum/multimodal-tokenization-visual-audio-video?module=large-language-models\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at C:\\Personal Projects and files\\Portfolio\\Portfolio\\scripts\\verify-multimodal-tokenization-browser.cjs:44:16"
+}

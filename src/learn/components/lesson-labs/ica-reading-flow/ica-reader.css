@@ -1,0 +1,52 @@
+.ica-lesson { min-width: 0; overflow-wrap: anywhere; }
+.ica-lesson figure { margin-block: 1.75rem; }
+.ica-lesson .ica-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem),1fr)); gap: 1.25rem; align-items: start; }
+.ica-lesson .ica-panels > *, .ica-lesson .ica-aligned-traces > * { min-width: 0; }
+.ica-lesson figure svg { display: block; width: 100%; max-width: 400px; height: auto; margin-inline: auto; overflow: visible; }
+.ica-lesson figure svg text { font: 15px Arial, sans-serif; }
+.ica-lesson figure svg text:not([fill]) { fill: #d5d5d5; }
+.ica-lesson .ica-wide-drawing, .ica-lesson .ica-envelope { max-width: 720px; }
+.ica-lesson .ica-product { max-width: 328px; }
+.ica-lesson .ica-aligned-traces { display: grid; grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+.ica-lesson .ica-aligned-traces .ica-trace { display: grid; grid-template-columns: minmax(9rem, 1fr) minmax(0, 2.5fr); align-items: center; }
+.ica-lesson .ica-aligned-traces .ica-axis { grid-column: 2; }
+.ica-lesson .ica-aligned-traces svg { max-width: 620px; }
+.ica-lesson .ica-key { list-style: none; margin: .5rem 0; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem 1rem; font-size: .9rem; }
+.ica-lesson .ica-key li { display: flex; gap: .45rem; align-items: baseline; }
+.ica-lesson .ica-key li span { display: inline-block; width: 1rem; border-top: 3px solid; flex: 0 0 1rem; }
+.ica-lesson .ica-exact, .ica-lesson .ica-axis { color: #b9b9b9; font-size: .9rem; line-height: 1.65; margin: .5rem 0; }
+.ica-lesson .ica-table-scroll { overflow-x: auto; max-width: 100%; padding-bottom: .6rem; scrollbar-color: #9c8755 #202020; }
+.ica-lesson table { border-collapse: collapse; width: 100%; font-size: .92rem; font-variant-numeric: tabular-nums; line-height: 1.55; }
+.ica-lesson th, .ica-lesson td { padding: .5rem .65rem; border-bottom: 1px solid #373737; text-align: left; vertical-align: top; min-width: 4rem; }
+.ica-lesson thead th { color: #d8c393; font-weight: 500; }
+.ica-lesson .ica-selected td, .ica-lesson .ica-selected th { outline: 1px solid #b9b9b9; outline-offset: -1px; }
+.ica-lesson .ica-probability td { min-width: 4rem; text-align: center; }
+.ica-lesson .ica-probability td svg { width: 3.5rem; height: 3.5rem; margin-inline: auto; }
+.ica-lesson .ica-control-fields { display: flex; flex-wrap: wrap; align-items: end; gap: .7rem 1rem; flex: 1 1 auto; min-width: 0; }
+.ica-lesson .ica-control-fields > * { flex: 0 1 auto; max-width: 100%; }
+.ica-lesson .neural-number { min-width: 0; max-width: 100%; display: grid; gap: .35rem; }
+.ica-lesson .neural-number input { width: min(12rem,100%); box-sizing: border-box; }
+.ica-lesson .neural-number small { max-width: 26rem; }
+.ica-lesson .neural-select { display: grid; gap: .35rem; max-width: 100%; }
+.ica-lesson .neural-select select { min-width: 0; width: 100%; }
+.ica-lesson .ica-table-scroll:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+.ica-lesson .neural-equation { overflow-x: auto; max-width: 100%; padding: .5rem 0; }
+.ica-lesson .neural-table-scroll { max-width: 100%; }
+.ica-lesson .ica-record-slot:has([data-ica-pending]) { min-height: 12rem; }
+@media (max-width: 650px) {
+  .ica-lesson .ica-aligned-traces .ica-trace { grid-template-columns: minmax(0,1fr); }
+  .ica-lesson .ica-aligned-traces .ica-axis { grid-column: 1; }
+  .ica-lesson .ica-envelope, .ica-lesson .ica-wide-drawing { min-width: 540px; }
+
+
+}
+@media (prefers-reduced-motion: reduce) { .ica-lesson * { animation: none !important; transition: none !important; } }
+
+.ica-lesson .ica-diagram-scroll { overflow-x: auto; max-width: 100%; }
+.ica-lesson .ica-diagram-scroll:focus-visible { outline: 2px solid #e4b752; }
+
+.ica-lesson .ica-table-scroll td { white-space: nowrap; overflow-wrap: normal; }
+.ica-lesson .ica-table-scroll table { min-width: 100%; width: max-content; }
+
+/* Keep the complete program and output readers usable with an enlarged root font. */
+.ica-lesson .lesson-code pre, .ica-lesson .lesson-code pre code { font-size: .85rem; line-height: 1.6; }

@@ -1,0 +1,460 @@
+{
+  "passed": true,
+  "checkedAt": "2026-10-06T14:27:29.605Z",
+  "width": 768,
+  "manifestHash": "07a0114e26a7eaf4f3255902d5f229e524f3fa83012db16b5011d92ec61da74e",
+  "verifierHash": "18f60e08b653a592ba491b7f1ca41397f7c06f881b2a9d979c2812629a183d82",
+  "rows": [
+    {
+      "id": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+      "rootFont": "16px",
+      "overflow": 0,
+      "figures": [
+        {
+          "label": "text-vocabulary-id-correspondence",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 316.71875
+        },
+        {
+          "label": "same-spelling-three-units",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 340.125
+        },
+        {
+          "label": "weighted-corpus-first-merge",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 797.265625
+        },
+        {
+          "label": "bpe-suffix-merge-tree",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 354.65625
+        },
+        {
+          "label": "bpe-word-segments",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 345.25
+        },
+        {
+          "label": "bpe-query-pieces",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 70.109375
+        },
+        {
+          "label": "saved-rank-new-word-trace",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 539.265625
+        },
+        {
+          "label": "bpe-index-neighbor-links",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 428.421875
+        },
+        {
+          "label": "wordpiece-ordinary-success",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 209.9375
+        },
+        {
+          "label": "wordpiece-path",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 217.875
+        },
+        {
+          "label": "wordpiece-two-prefix-trees",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 331.53125
+        },
+        {
+          "label": "unigram-position-lattice",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 423.71875
+        },
+        {
+          "label": "unigram-shared-prefix-dp",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 373.65625
+        },
+        {
+          "label": "unigram-forward-backward-credit",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 390.421875
+        },
+        {
+          "label": "fixed-weight-path-removal",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 319.96875
+        },
+        {
+          "label": "unigram-posterior-sampling-tree",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 331.53125
+        },
+        {
+          "label": "sentencepiece-space-span",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 374.890625
+        },
+        {
+          "label": "text-transform-id-row-pipeline",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 696.953125
+        },
+        {
+          "label": "recorded-native-pieces-space-contrast",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 281.125
+        },
+        {
+          "label": "vocabulary-matrix-attention-pair-grids",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 520.921875
+        },
+        {
+          "label": "same-id-wrong-piece-and-fragment-boundary",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 374.078125
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "byte-level-tokenization-token-free-models",
+      "rootFont": "16px",
+      "overflow": 0,
+      "figures": [
+        {
+          "label": "text-storage",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 249.015625
+        },
+        {
+          "label": "unicode-live",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 524.90625
+        },
+        {
+          "label": "utf8-packing",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 549.046875
+        },
+        {
+          "label": "byte-pipeline",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 441.203125
+        },
+        {
+          "label": "byte-normalization",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 423.53125
+        },
+        {
+          "label": "byte-merges",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 691.984375
+        },
+        {
+          "label": "streaming-live",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 742.171875
+        },
+        {
+          "label": "byte-state-machine",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 579.265625
+        },
+        {
+          "label": "byte-embedding",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 841.3125
+        },
+        {
+          "label": "byte-targets",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 320.640625
+        },
+        {
+          "label": "byte-masks",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 794.5625
+        },
+        {
+          "label": "byte-loss",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 268.28125
+        },
+        {
+          "label": "architecture-byt5",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 1072.390625
+        },
+        {
+          "label": "architecture-canine",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 1312.8125
+        },
+        {
+          "label": "architecture-charformer",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 838.59375
+        },
+        {
+          "label": "architecture-mambabyte",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 918.265625
+        },
+        {
+          "label": "architecture-blt",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 1378.984375
+        },
+        {
+          "label": "byte-uncertainty",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 315.8125
+        },
+        {
+          "label": "entropy-live",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 629.484375
+        },
+        {
+          "label": "byte-pooling",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 504.15625
+        },
+        {
+          "label": "byte-cost",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 548.09375
+        },
+        {
+          "label": "byte-metric",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 326.65625
+        },
+        {
+          "label": "byte-generation",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 464.703125
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "vocabulary-design-multilingual-tokenization",
+      "rootFont": "16px",
+      "overflow": 0,
+      "figures": [
+        {
+          "label": "vocabulary-dictionary-choice",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 1147.796875
+        },
+        {
+          "label": "vocabulary-coverage",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 568.6875
+        },
+        {
+          "label": "vocabulary-fertility",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 169.109375
+        },
+        {
+          "label": "vocabulary-parallel-denominators",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 247.34375
+        },
+        {
+          "label": "vocabulary-sampling-steps",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 506.5
+        },
+        {
+          "label": "vocabulary-integer-allocation",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 288.703125
+        },
+        {
+          "label": "vocabulary-embedding-rows",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 565.28125
+        },
+        {
+          "label": "vocabulary-output-dot-products",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 631.734375
+        },
+        {
+          "label": "vocabulary-output-attention-work",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 756.734375
+        },
+        {
+          "label": "vocabulary-normalization-loss",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 331.8125
+        },
+        {
+          "label": "vocabulary-pretokenizer-boundaries",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 201.90625
+        },
+        {
+          "label": "vocabulary-shared-word-count",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 485.34375
+        },
+        {
+          "label": "vocabulary-train-holdout",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 903.359375
+        },
+        {
+          "label": "multilingual-heldout-counts",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 824.96875
+        },
+        {
+          "label": "vocabulary-row-identity",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 887.390625
+        },
+        {
+          "label": "vocabulary-softmax-expansion",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 282.703125
+        },
+        {
+          "label": "vocabulary-retrieval-budget",
+          "left": 318.390625,
+          "right": 729.609375,
+          "width": 411.21875,
+          "height": 373.59375
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

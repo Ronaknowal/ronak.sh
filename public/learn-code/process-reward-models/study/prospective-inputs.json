@@ -1,0 +1,55 @@
+{
+  "frozen_at": "2026-10-07T16:04:23.974161+00:00",
+  "fitted_models_at_freeze": 0,
+  "files": {
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/study-protocol.md": {
+      "sha256": "18681c02acb823d88778af4309a6d1e45309097faee159cd88a43fc584b46ecb",
+      "bytes": 4574
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/design.md": {
+      "sha256": "671ee0800d49d21c6732b6004620f8929c18c78cb3a7f2f80480b24a61f0ce49",
+      "bytes": 35148
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/design-review.md": {
+      "sha256": "3434a7c015056b4c4b01911105fe32213a08316887bcedc49c3507b39f361d23",
+      "bytes": 3550
+    },
+    "public/learn-code/process-reward-models/prm_records.py": {
+      "sha256": "3d85a9a271ce72974a039d1d35202de1ae7c2ed9bfda51480c9f44ba12812ba9",
+      "bytes": 6489
+    },
+    "public/learn-code/process-reward-models/prm_classifier.py": {
+      "sha256": "3b0ce39629f329b72059ab36c2334d9d8fdc513935dbc422cb0b94062e58c63d",
+      "bytes": 7505
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/study/data/extraction.json": {
+      "sha256": "467f0f391ec64b9b1857cf910269efd5603f24f59b14363eaf5a62381c680aa3",
+      "bytes": 16016
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/study/data/test.jsonl": {
+      "sha256": "8974620a869948cc380820b6bc05a6ed18ba49e7abfa1370a4edf542d594082a",
+      "bytes": 490207
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/study/data/train.jsonl": {
+      "sha256": "f29aced55f625e0bf178f36eab5c70813bdcad2baac0553907da77c1502843ee",
+      "bytes": 934983
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/study/data/validation.jsonl": {
+      "sha256": "8df7842fff13dfe0dde04d5aadb5ed36af285e556e5a8f77446fd9d6c829e82a",
+      "bytes": 278335
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/research/primary/prm800k-phase2_train.jsonl.prefix": {
+      "sha256": "08f6e0728ac42b417293613d033f92092f806b369e6398a7e1a0abc12435ec07",
+      "bytes": 2093513
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/research/primary/prm800k-phase2_test.jsonl.prefix": {
+      "sha256": "143b6e1e495f1b6ec836099f264ff5b6e35e8bc7070b2b1474f9ed992ddd1244",
+      "bytes": 2096959
+    },
+    "docs/teaching/llm-architecture-training/process-reward-models-prm-vs-outcome-reward-models-orm/research/primary/prm800k-LICENSE": {
+      "sha256": "22d61a2226e035da51c56149c3358c36d1f61716435866bc6e6fe0e54c7270db",
+      "bytes": 1062
+    }
+  },
+  "scope": "One fixed160-update lexical classifier fit, no outcome gate"
+}

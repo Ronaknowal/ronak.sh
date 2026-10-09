@@ -1,21 +1,10 @@
 import RemoteCodeBlock from '../content/RemoteCodeBlock.jsx';
 import { useEffect, useRef, useState } from 'react';
-import { NeuralNumber } from './NeuralNumberControl.jsx';
 import { NeuralTable, formatNeural as f } from './NeuralLessonElements.jsx';
+import { FlowControls } from './LessonFlow.jsx';
 export const rbmAssetBase = '/learn-code/boltzmann-machines-restricted-boltzmann-machines-rbm/';
 export const stateName = v => v.join('');
 export const vector = v => '[' + v.map(x => f(x, 5)).join(', ') + ']';
-export function RbmParameters({
-  model,
-  onChange,
-  compact = false
-}) {
-  const fields = [['w', 0, 'Interaction W₁'], ['w', 1, 'Interaction W₂'], ['a', 0, 'Visible bias a₁'], ['a', 1, 'Visible bias a₂'], ['b', 0, 'Hidden bias b']];
-  return <fieldset><legend>Current three-switch model</legend><div className="neural-controls">{fields.filter(([kind]) => !compact || kind !== 'a').map(([kind, i, label]) => <NeuralNumber key={label} label={label} value={kind === 'w' ? model.w[i][0] : model[kind][i]} min={-6} max={6} range={false} onChange={value => onChange({
-        ...model,
-        [kind]: model[kind].map((x, j) => i === j ? kind === 'w' ? [value] : value : x)
-      })} />)}</div></fieldset>;
-}
 export function RbmFigure({
   title,
   description,
@@ -23,11 +12,10 @@ export function RbmFigure({
   height,
   children
 }) {
-  return <figure className="rbm-figure"><figcaption>{title}</figcaption><div className="rbm-diagram-scroll" tabIndex={0} role="region" aria-label={title}><svg width={width} style={{
-        minWidth: width,
-        width: '100%',
-        height: 'auto'
-      }} viewBox={'0 0 ' + width + ' ' + height} role="img" aria-label={description || title}>{children}</svg></div>{description && <p>{description}</p>}</figure>;
+  return <figure className="rbm-figure" aria-label={title}><svg
+    style={{ width: '100%', height: 'auto', maxWidth: width }}
+    viewBox={'0 0 ' + width + ' ' + height} role="img" aria-label={description || title}>{children}</svg>
+    {description && <figcaption>{description}</figcaption>}</figure>;
 }
 export function ProbabilityBars({
   title,
@@ -42,7 +30,7 @@ export function ProbabilityBars({
           width: current * 100 + '%'
         }} />{baseline !== undefined && <b style={{
           left: baseline * 100 + '%'
-        }} />}</div><strong>{f(current, 6)}</strong></div>)}<p>Scale 0–1; amber length is probability. {rows.some(row => row.baseline !== undefined) && <>White marker: {baselineLabel}.</>}</p></figure>;
+        }} />}</div><strong>{f(current, 6)}</strong></div>)}<p>Scale 0–1; violet length is probability. {rows.some(row => row.baseline !== undefined) && <>White marker: {baselineLabel}.</>}</p></figure>;
 }
 export function PixelTile({
   title,
@@ -59,7 +47,7 @@ export function PixelTile({
         const label = 'Pixel ' + i + ', row ' + Math.floor(i / 8) + ', column ' + i % 8 + ': ' + f(value, 6) + (mask && !mask[i] ? ', missing' : '');
         const props = {
           style: {
-            background
+            background, '--rbm-pixel-paint': background
           },
           className: (mask && !mask[i] ? 'rbm-missing ' : '') + (i === selected ? 'rbm-selected' : ''),
           'aria-label': label,
@@ -128,7 +116,7 @@ export function RbmResource({
   resource,
   children
 }) {
-  return <div ref={resource.host}>{resource.error ? <p role="alert">{resource.error} <button onClick={resource.retry}>Retry model download</button></p> : resource.data ? children(resource.data) : <p role="status">Loading this saved RBM asset…</p>}</div>;
+  return <div ref={resource.host}>{resource.error ? <div role="alert"><p>{resource.error}</p><FlowControls><button type="button" onClick={resource.retry}>Retry model download</button></FlowControls></div> : resource.data ? children(resource.data) : <p role="status">Loading this saved RBM asset…</p>}</div>;
 }
 export function SwitchGraph({
   model,
@@ -136,13 +124,16 @@ export function SwitchGraph({
   hidden,
   general = false
 }) {
-  const positions = [[95, 180], [325, 180]],
-    active = visible;
-  return <RbmFigure title={general ? 'General BM: a direct visible interaction' : 'RBM: the hidden switch joins two visible switches'} width={420} height={245} description="Undirected edges are energy interactions. Selecting a switch changes the inspected state; editing an interaction changes the distribution.">
-    {general ? <line x1="125" y1="180" x2="295" y2="180" stroke="#e6b854" strokeWidth={active.every(Boolean) ? 4 : 1.5} /> : positions.map(([x, y], i) => <g key={i}><line x1="210" y1="65" x2={x} y2={y - 25} stroke={active[i] && hidden ? '#e6b854' : '#888'} strokeWidth={active[i] && hidden ? 4 : 1.5} /><text x={(x + 210) / 2 + (i ? 20 : -20)} y="118" textAnchor="middle" fill="#eee" fontSize="13">W{i + 1}={f(model.w[i][0], 3)}</text></g>)}
-    {!general && <g><circle cx="210" cy="45" r="25" fill={hidden ? '#e6b854' : '#222'} stroke="#ccc" /><text x="210" y="50" textAnchor="middle" fill={hidden ? '#111' : '#eee'} fontSize="16">h={hidden}</text></g>}
-    {positions.map(([x, y], i) => <g key={i}><circle cx={x} cy={y} r="30" fill={active[i] ? '#e6b854' : '#222'} stroke="#ddd" /><text x={x} y={y + 5} textAnchor="middle" fill={active[i] ? '#111' : '#eee'} fontSize="15">v{i + 1}={active[i]}</text></g>)}
-    <text x="210" y="235" textAnchor="middle" fill="#ccc" fontSize="13">{general ? 'direct edge: J = ln 3' : 'No within-visible or within-hidden edge'}</text>
+  const positions = [[65, 170], [215, 170]];
+  return <RbmFigure title={general ? 'General BM: direct visible interaction' : 'RBM: one hidden and two visible switches'} width={280} height={232}
+    description={general ? 'Cyan circles: two binary visible values. The undirected amber wire is an interaction, counted once; it is neither a forward computation nor a causal arrow.' : 'Cyan circles: observed binary variables. Violet circle: an unobserved binary random variable. Amber wires: learned interactions. No within-layer wire. A question mark means its value has not been sampled.'}>
+    {general ? <><line x1="90" y1="170" x2="190" y2="170" stroke="#e6b854" strokeWidth="2" /><text x="140" y="137" textAnchor="middle">J = {f(model.w[0][0], 3)}</text></> : positions.map(([x, y], i) => <g key={i}>
+      <line x1="140" y1="70" x2={x} y2={y - 25} stroke="#e6b854" strokeWidth="2" />
+      <text x={i ? 224 : 56} y="106" textAnchor="middle">W{i + 1}</text><text x={i ? 232 : 48} y="125" textAnchor="middle">{f(model.w[i][0], 3)}</text>
+    </g>)}
+    {!general && <g><circle cx="140" cy="45" r="25" fill="#bd9ee522" stroke="#bd9ee5" /><text x="140" y="50" textAnchor="middle">h = {hidden}</text></g>}
+    {positions.map(([x, y], i) => <g key={i}><circle cx={x} cy={y} r="25" fill="#7cc8db22" stroke="#7cc8db" /><text x={x} y={y + 5} textAnchor="middle">v{i + 1}={visible[i]}</text></g>)}
+    <text x="140" y="219" textAnchor="middle">{general ? 'four possible visible pairs' : 'eight possible joint configurations'}</text>
   </RbmFigure>;
 }
 export function RbmProgram({

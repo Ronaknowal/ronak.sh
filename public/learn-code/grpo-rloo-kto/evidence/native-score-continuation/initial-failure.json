@@ -1,0 +1,18 @@
+{
+  "status": "failed-native-preflight",
+  "session": 4204,
+  "exit_code": 1,
+  "stage": "native-grpo",
+  "location": "trl_group_training.py:102",
+  "error": "Tensor-likes are not close. Mismatched elements: 2 / 12 (16.7%). Greatest absolute difference: 4.449541091918945 at index (0, 2). Greatest relative difference: 1.0 at index (0, 2).",
+  "explanation": "Native padding-free score path zero-fills masked positions; scratch has finite unused scores. This receipt records the observed assertion, not a successful numerical equivalence.",
+  "native_training_updates": 0,
+  "native_generated_completions": 0,
+  "completed_stages": [
+    "finite",
+    "scratch-grpo",
+    "scratch-rloo"
+  ],
+  "predecessor_source_sha256": "82e9d098f5ec709f2689293d6763ba56d510affa88ccd72abe25772e59c84acf",
+  "frozen_protocol_sha256": "213b92c05ce8791d2867e19def786e5fb0b089b3e1584fd8cb7c8ff8dfca8375"
+}

@@ -1,0 +1,345 @@
+{
+  "scope": "literal data, source/display correspondence and prerequisite headings; no fit or old main/checker",
+  "rows": 300,
+  "features": 64,
+  "pixels": 19200,
+  "layouts": [
+    {
+      "key": "pca",
+      "rows": 300,
+      "coordinateSha256": "fd3a751ed30e70f7f309bbae70c91d1d65558ee3aa546d191afd3b4da2df0716",
+      "metrics": {
+        "5": {
+          "retention": 0.266,
+          "trustworthiness": 0.8651095890410959,
+          "continuity": 0.954066210045662
+        },
+        "10": {
+          "retention": 0.37633333333333335,
+          "trustworthiness": 0.8675946104276508,
+          "continuity": 0.9491657879320445
+        },
+        "20": {
+          "retention": 0.49600000000000005,
+          "trustworthiness": 0.8610977118119976,
+          "continuity": 0.9392479901051329
+        }
+      }
+    },
+    {
+      "key": "tsne-p5-s7",
+      "rows": 300,
+      "coordinateSha256": "17eaf2c8ed475968f11a6ed3b7c3aee99df56f83661e033ab9d484737f9c2ea9",
+      "metrics": {
+        "5": {
+          "retention": 0.692,
+          "trustworthiness": 0.992296803652968,
+          "continuity": 0.9894155251141552
+        },
+        "10": {
+          "retention": 0.7103333333333333,
+          "trustworthiness": 0.9874387814879906,
+          "continuity": 0.9778968951376684
+        },
+        "20": {
+          "retention": 0.7508333333333334,
+          "trustworthiness": 0.9730272108843537,
+          "continuity": 0.9514860853432282
+        }
+      }
+    },
+    {
+      "key": "tsne-p5-s19",
+      "rows": 300,
+      "coordinateSha256": "17eaf2c8ed475968f11a6ed3b7c3aee99df56f83661e033ab9d484737f9c2ea9",
+      "metrics": {
+        "5": {
+          "retention": 0.692,
+          "trustworthiness": 0.992296803652968,
+          "continuity": 0.9894155251141552
+        },
+        "10": {
+          "retention": 0.7103333333333333,
+          "trustworthiness": 0.9874387814879906,
+          "continuity": 0.9778968951376684
+        },
+        "20": {
+          "retention": 0.7508333333333334,
+          "trustworthiness": 0.9730272108843537,
+          "continuity": 0.9514860853432282
+        }
+      }
+    },
+    {
+      "key": "tsne-p30-s7",
+      "rows": 300,
+      "coordinateSha256": "4e6ae3b19bdba6d00b736a2fe19f00b2d18757ce743be1178aa0077e0bd93070",
+      "metrics": {
+        "5": {
+          "retention": 0.7106666666666667,
+          "trustworthiness": 0.9928036529680365,
+          "continuity": 0.9912557077625571
+        },
+        "10": {
+          "retention": 0.7703333333333334,
+          "trustworthiness": 0.9901347393087288,
+          "continuity": 0.9863526654950205
+        },
+        "20": {
+          "retention": 0.798,
+          "trustworthiness": 0.9833351886209029,
+          "continuity": 0.9755590599876314
+        }
+      }
+    },
+    {
+      "key": "tsne-p30-s19",
+      "rows": 300,
+      "coordinateSha256": "4e6ae3b19bdba6d00b736a2fe19f00b2d18757ce743be1178aa0077e0bd93070",
+      "metrics": {
+        "5": {
+          "retention": 0.7106666666666667,
+          "trustworthiness": 0.9928036529680365,
+          "continuity": 0.9912557077625571
+        },
+        "10": {
+          "retention": 0.7703333333333334,
+          "trustworthiness": 0.9901347393087288,
+          "continuity": 0.9863526654950205
+        },
+        "20": {
+          "retention": 0.798,
+          "trustworthiness": 0.9833351886209029,
+          "continuity": 0.9755590599876314
+        }
+      }
+    },
+    {
+      "key": "tsne-p80-s7",
+      "rows": 300,
+      "coordinateSha256": "8efa0abe1c9052c05b013ec0f671049b75911f9ea792aa0620c0ff8b0b571fd5",
+      "metrics": {
+        "5": {
+          "retention": 0.6686666666666665,
+          "trustworthiness": 0.9901232876712329,
+          "continuity": 0.9916027397260274
+        },
+        "10": {
+          "retention": 0.7623333333333333,
+          "trustworthiness": 0.9893602811950791,
+          "continuity": 0.9878910369068541
+        },
+        "20": {
+          "retention": 0.802,
+          "trustworthiness": 0.9829727891156462,
+          "continuity": 0.9758775510204082
+        }
+      }
+    },
+    {
+      "key": "tsne-p80-s19",
+      "rows": 300,
+      "coordinateSha256": "8efa0abe1c9052c05b013ec0f671049b75911f9ea792aa0620c0ff8b0b571fd5",
+      "metrics": {
+        "5": {
+          "retention": 0.6686666666666665,
+          "trustworthiness": 0.9901232876712329,
+          "continuity": 0.9916027397260274
+        },
+        "10": {
+          "retention": 0.7623333333333333,
+          "trustworthiness": 0.9893602811950791,
+          "continuity": 0.9878910369068541
+        },
+        "20": {
+          "retention": 0.802,
+          "trustworthiness": 0.9829727891156462,
+          "continuity": 0.9758775510204082
+        }
+      }
+    },
+    {
+      "key": "tsne-p30-random-s7",
+      "rows": 300,
+      "coordinateSha256": "bc7e0f6a5d53b37c2c5994b2a8cb04d3d57858f141671136c5f10afe4652adf1",
+      "metrics": {
+        "5": {
+          "retention": 0.7133333333333333,
+          "trustworthiness": 0.9941050228310502,
+          "continuity": 0.9912694063926941
+        },
+        "10": {
+          "retention": 0.7720000000000001,
+          "trustworthiness": 0.9912653778558875,
+          "continuity": 0.9863198594024605
+        },
+        "20": {
+          "retention": 0.7995,
+          "trustworthiness": 0.9841286332714905,
+          "continuity": 0.9742770562770563
+        }
+      }
+    },
+    {
+      "key": "tsne-p30-random-s19",
+      "rows": 300,
+      "coordinateSha256": "e6c96e922f95441670c6465acc35b1aacbdbb37b7972c552f9bff4bc4be7c81c",
+      "metrics": {
+        "5": {
+          "retention": 0.7099999999999999,
+          "trustworthiness": 0.9927922374429223,
+          "continuity": 0.9912123287671233
+        },
+        "10": {
+          "retention": 0.7696666666666667,
+          "trustworthiness": 0.9899906268306972,
+          "continuity": 0.9863116578793204
+        },
+        "20": {
+          "retention": 0.7988333333333334,
+          "trustworthiness": 0.9833401360544217,
+          "continuity": 0.975517625231911
+        }
+      }
+    },
+    {
+      "key": "umap-n15-d01-s7",
+      "rows": 300,
+      "coordinateSha256": "602f7fdd4968e4769db178a8692df7bb5356cca99fe0cf65e298e6f4cec8820c",
+      "metrics": {
+        "5": {
+          "retention": 0.6126666666666667,
+          "trustworthiness": 0.9910662100456621,
+          "continuity": 0.9897214611872146
+        },
+        "10": {
+          "retention": 0.7143333333333334,
+          "trustworthiness": 0.9889736379613356,
+          "continuity": 0.9832302284710017
+        },
+        "20": {
+          "retention": 0.7808333333333334,
+          "trustworthiness": 0.9823160173160174,
+          "continuity": 0.9648979591836735
+        }
+      }
+    }
+  ],
+  "programs": [
+    {
+      "key": "digitsAudit",
+      "file": "inspect_digits.py",
+      "publicSha256": "19973ec6d6ecf8bf74cfda89a3bedd5b223ecb33a8587a01d5173766b995d111",
+      "displaySha256": "35771adddf3f0da5b0f6130fb3136a15190d817f3de549d7c3103d12017f7b98",
+      "streamSha256": "10a132b3ca13c1d3fdf1c316c1a46d7e8d108551cc1887f938d8817b77bbcb1a",
+      "stream": "PCA R10=0.3763 T10=0.8676\nt-SNE p=5 R10=0.7103 T10=0.9874\nt-SNE p=30 R10=0.7703 T10=0.9901\nt-SNE p=80 R10=0.7623 T10=0.9894",
+      "role": "retained previously executed source/output; not executed by this intake",
+      "remoteSource": null,
+      "comparison": "LF-normalized trailing whitespace only; raw hashes retained separately"
+    },
+    {
+      "key": "umapFit",
+      "file": "inspect_umap.py",
+      "publicSha256": "21541157bdf2626cc494ce772d68638431dc9daca576f10ba88f24832bd58595",
+      "displaySha256": "7cc1f6fe042a85099cbeb165bfb74d54cc221a3986666975b3965470cc73a07a",
+      "streamSha256": "bef5bddd508a93f534a0bf389e06f764891e201e0f3ac59116f6206c4f06d312",
+      "stream": "0.5.12 (300, 2)\nR10=0.7143 T10=0.9890",
+      "role": "retained previously executed source/output; not executed by this intake",
+      "remoteSource": null,
+      "comparison": "LF-normalized trailing whitespace only; raw hashes retained separately"
+    },
+    {
+      "key": "heldoutTransform",
+      "file": "compare_transforms.py",
+      "publicSha256": "1e6b522a310b7d4de580754e071bd0f195ebde6f38b8ba4050a94c98076608b7",
+      "displaySha256": "4048b950a6411baab153fb1431242856e20c94b033b8a67b46ae484b47c00f96",
+      "streamSha256": "ad1d4ea8c56b3a311f8230abe8df607d15ca6d6fdbedb3471c81a6e5960aa1c5",
+      "stream": "pixels accuracy=0.9733\nPCA-10 accuracy=0.9733\nUMAP-10 accuracy=0.9467",
+      "role": "retained previously executed source/output; not executed by this intake",
+      "remoteSource": null,
+      "comparison": "LF-normalized trailing whitespace only; raw hashes retained separately"
+    },
+    {
+      "key": "tinyTsne",
+      "file": "tiny_tsne.py",
+      "publicSha256": "b1f1660c9bb9da66aa7edb5a928a95b489da6e73c8d6d3edd4b47d9dcc3e7d53",
+      "displaySha256": "1d97c7d7e18a2b594129dd7bcc6e005f190c41af4ad942cc68bfd0f8f36326cd",
+      "streamSha256": "dbb1e4b6a95c2ab7ff277fff5b6101ca6ef938a77f7f047b8244b296dad86879",
+      "stream": "initial KL=0.053522\nfinal KL=0.018227\n[-1.775811 -0.759392  0.42237   2.112833]",
+      "role": "retained previously executed source/output; not executed by this intake",
+      "remoteSource": null,
+      "comparison": "LF-normalized trailing whitespace only; raw hashes retained separately"
+    },
+    {
+      "key": "umapMechanism",
+      "file": "umap-mechanism.py",
+      "publicSha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc",
+      "displaySha256": "2f0b96f5e9ffef6c3818f5f36040d39c27950aff34e74484add3062bb04bd7fc",
+      "streamSha256": "f2ee51894dd5ec9067ed467628c04bfb3b55df2bafed7e7acc0e1848d3d103c7",
+      "stream": "rho [0.7, 0.7, 1.2, 2.3, 2.7, 2.7]\nsigma [3.0883, 1.9081, 1.2759, 2.1961, 3.8687, 7.8865]\ndirected_row_0 [0.0, 1.0, 0.678, 0.322, 0.0, 0.0]\nfuzzy_graph_max_error 3.34e-08\nideal_pair_loss_before_after 7.991337 7.883388\nsampled_head_after [-0.994246, 0.193755]",
+      "role": "retained previously executed source/output; not executed by this intake",
+      "remoteSource": "/learn-assets/manifold-learning/umap-mechanism.py",
+      "comparison": "LF-normalized trailing whitespace only; raw hashes retained separately"
+    }
+  ],
+  "headings": {
+    "pca-dimensionality-reduction": [
+      "1. Can we keep fewer numbers without losing the pattern?",
+      "2. Rotate the ruler, then keep its readings",
+      "3. Why maximum spread and minimum loss give the same answer",
+      "4. Fit once, project, and reconstruct in Python",
+      "5. Scaling changes which differences matter",
+      "6. Choose the number of components for a stated purpose",
+      "7. Read components, scores and plots without mixing them up",
+      "8. Connect PCA to clustering and prediction",
+      "9. Practice: calculate, diagnose and transfer",
+      "10. Deeper branches",
+      "11. What you should now be able to do",
+      "Further learning",
+      "Technical references"
+    ],
+    "clustering-evaluation-validation-silhouette-ari-nmi": [
+      "1. Two groups look cleaner. Three groups match the species better. Which result should we keep?",
+      "2. Keep the objects fixed before comparing their groups",
+      "3. Silhouette: inspect one point’s neighborhood before averaging",
+      "4. A score evaluates a geometry as well as a partition",
+      "5. ARI: count the pairs before correcting for chance",
+      "6. NMI: how much does one label tell us about the other?",
+      "7. Explain which groups split or merge",
+      "8. Real data: separate geometric selection from reference agreement",
+      "9. Unassigned observations: a cleaner score can describe fewer cases",
+      "10. Stability: would this grouping survive the change we care about?",
+      "11. Deeper branch: tendency, relative selection and computation",
+      "12. A report you can defend, then try on your own"
+    ],
+    "support-vector-machines-svm": [
+      "1. A score, a boundary and a real distance",
+      "2. Which observations hold the boundary?",
+      "3. Pay for margin shortfalls",
+      "4. Derive a checkable optimization certificate",
+      "5. Change similarity with a valid kernel",
+      "6. Move two coefficients without breaking the constraints",
+      "7. Select the model using held-out evidence",
+      "8. Scores, probabilities, classes and data contracts",
+      "9. Regression replaces the margin with a tolerance",
+      "10. Structured features and the cost of a kernel",
+      "11. Diagnose, transfer and continue"
+    ]
+  },
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "umap-learn": "0.5.12",
+    "numba": "0.67.0",
+    "llvmlite": "0.49.0",
+    "pynndescent": "0.6.0",
+    "threadpoolctl": "3.6.0",
+    "python": "3.12.14"
+  },
+  "originalLayoutVersions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "sklearn": "1.9.1"
+  }
+}

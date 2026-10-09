@@ -1,0 +1,56 @@
+{
+  "initialization": [
+    {
+      "seed": 17,
+      "initial_pair_exact": true,
+      "examples_over_200_steps": 1595,
+      "batch_plan_sha256": "2d10db5d8507fa1c7921a38eccbfb8a12dcf138f3f215976ce8f742d401abbfe"
+    },
+    {
+      "seed": 29,
+      "initial_pair_exact": true,
+      "examples_over_200_steps": 1595,
+      "batch_plan_sha256": "b8bc587e21e4284566480d7d8e1355ece95676989bc62d7d479ed21e87494909"
+    },
+    {
+      "seed": 43,
+      "initial_pair_exact": true,
+      "examples_over_200_steps": 1595,
+      "batch_plan_sha256": "653366da6d967130688acb1c9115dfac93428c3e1d51d2892e86a4e6c5c5e980"
+    }
+  ],
+  "native_alignment": [
+    {
+      "method": "input",
+      "native_response_loss": 6.956700325012207,
+      "manually_aligned_loss": 6.956700325012207,
+      "real_logits_shape": [
+        2,
+        33,
+        50304
+      ]
+    },
+    {
+      "method": "encoder-mlp",
+      "native_response_loss": 7.151930332183838,
+      "manually_aligned_loss": 7.151930332183838,
+      "real_logits_shape": [
+        2,
+        33,
+        50304
+      ]
+    },
+    {
+      "method": "prefix-direct",
+      "native_response_loss": 9.4907808303833,
+      "manually_aligned_loss": 9.4907808303833,
+      "real_logits_shape": [
+        2,
+        33,
+        50304
+      ]
+    }
+  ],
+  "optimizer_steps": 0,
+  "scientific_evaluation": false
+}

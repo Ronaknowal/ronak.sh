@@ -1,0 +1,130 @@
+[
+  {
+    "id": "A",
+    "title": "A weighted vote and its tie",
+    "question": "Three aligned class-1 probabilities are .8,.4,.3 with relative member weights 1,1,2. Calculate hard-vote share, mean probability and decisions. Then change A to .9.",
+    "hint": "Normalize by total 4. An exact final tie chooses class 0.",
+    "solution": "Only A votes 1, so the weighted hard share is 1/4 and the hard decision 0. The soft mean is (.8+.4+2\u00d7.3)/4=.45, also class 0. Changing A to .9 gives .475 without changing the hard ballot. A soft tie would require A=1: (1+.4+.6)/4=.5, still class 0 under the declared tie. The observed target has not been supplied, so none of these decisions establishes correctness.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "B",
+    "title": "Fit a changed cancellation weight",
+    "question": "A has residuals [\u22122,2] hours and B[1,1] on two permitted combination rows. Find the best convex A weight and combined MSE. Would adding B help an A with residuals [0,0]?",
+    "hint": "The combined residuals are 1\u22123w and 1+w.",
+    "solution": "Their mean square is [(1\u22123w)\u00b2+(1+w)\u00b2]/2=1\u22122w+5w\u00b2. Derivative\u22122+10w vanishes at w=.2, inside [0,1]. Residuals are [.4,1.2], MSE .8 hours\u00b2; member MSEs are 4 and 1. If A is exact, w=1 gives zero. Forcing an equal mean with B creates .25 hours\u00b2 loss. The identity bounds the weighted member average, not the best member; fitted weights still need untouched assessment.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "C",
+    "title": "Separate correlation and copying",
+    "question": "At a fixed query, four random fitted forecasts each have variance 9 and every pair correlation 1/3. Find average variance. Could their common correlation instead be\u2212.5?",
+    "hint": "Count 4 variance terms and 12 ordered covariance terms.",
+    "solution": "Average variance is 9[1/3+(2/3)/4]=4.5. Correlation\u2212.5 would give 9[\u2212.5+1.5/4]=\u22121.125, impossible. For B=4 the lower common-correlation bound is\u22121/3. This concerns a joint law over repeated fitting experiments, not a prediction correlation measured across unrelated test inputs.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "D",
+    "title": "A smaller bag and missing votes",
+    "question": "Five original rows are sampled with replacement using three draws per bag. Find one named row's absence probability, expected distinct count and probability neither of two independent bags can supply its OOB forecast.",
+    "hint": "First compute q=(4/5)\u00b3; a bag is ineligible when it contains the row.",
+    "solution": "q=64/125=.512. Expected distinct count is 5(1\u2212q)=61/25=2.44. No eligible bag has probability(1\u2212q)\u00b2=(61/125)\u00b2=3721/15625=.238144. In that state OOB prediction is unavailable. Replacing it with the all-model fitted prediction changes the evaluated quantity and permissions.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "E",
+    "title": "Update different weak errors",
+    "question": "Compute signed AdaBoost \u03b1 for \u03b5=.3 and .45. After each optimal normalized update, what mass lies on this stump's wrong rows? What happens at .5 and 0?",
+    "hint": "Wrong mass is \u03b5e\u1d45/Z, with Z=2\u221a(\u03b5(1\u2212\u03b5)).",
+    "solution": "Coefficients are \u00bdlog(7/3)\u2248.423649 and \u00bdlog(11/9)\u2248.100335. Substitution gives wrong mass .5 in either nondegenerate case. It is half the distribution's mass, not half the rows or the accumulated ensemble's error. At .5 the coefficient is zero, with no positive edge. At zero no finite minimizing \u03b1 exists; use the declared perfect-member stopping policy instead of disguising clipping as an exact optimum.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "F",
+    "title": "A bound with shrinking edges",
+    "question": "Accepted rounds have \u03b3_t=1/[4(t+1)] for t\u22651. Does the derived bound guarantee uniform exponential decrease to zero?",
+    "hint": "The exponent is\u22122\u03a3\u03b3_t\u00b2.",
+    "solution": "Every edge is positive but no positive constant lower-bounds them all. \u03a3\u03b3_t\u00b2=(1/16)\u03a3_{t\u22651}1/(t+1)\u00b2 is finite, so exp(\u22122\u03a3\u03b3_t\u00b2) tends to a positive value. This upper bound therefore does not establish convergence to zero. That absence of a guarantee is not proof that actual training error fails to improve.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "G",
+    "title": "Repair an OOF row",
+    "question": "Eight rows have held folds{A,C},{B,D},{E,G},{F,H}. A base predicts A after fitting A,B,D,E,F,G,H. What is wrong, which rows are legal, and what is the completed matrix shape for three scalar-output bases?",
+    "hint": "Exclude every destination of the held fold.",
+    "solution": "A's target entered its own prediction. The fold's legal fit rows are B,D,E,F,G,H, excluding both A and C. Predict both held rows with those freshly fitted bases. The completed matrix is 8\u00d73, not 6\u00d73. Fit the combiner on all completed rows and corresponding targets, then refit bases on all 8 training rows for serving. Subsequent full-refit `transform` values are not the saved OOF matrix.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "H",
+    "title": "Time and entity ownership",
+    "question": "A machine contributes hourly rows; the task is a previously unseen machine next month. A shuffled row split holds some hours from every machine, and a globally fitted scaler precedes stacking. Identify the problems and propose an assessment boundary.",
+    "hint": "Separate entity, time and preprocessing permissions.",
+    "solution": "Sibling machine information crosses fit/test, later times can influence earlier fits, and the scaler learns from evaluation features. Reserve later observations from machines absent from training as the outer test. Inside outer training, generate meta predictions respecting the corresponding entity/time/label-availability restrictions and fit preprocessing only within each permitted fit. Early rows without legal predictions remain masked out of meta fitting. The exact policy must match how new machines arrive; GroupKFold alone does not enforce chronology.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "I",
+    "title": "Calibration is not preserved by an average",
+    "question": "In the fair-signal law, condition on mean forecast .75 and .5. What are the event rates? Why can the mean nevertheless have lower Brier risk?",
+    "hint": "List signal pairs producing the same forecast.",
+    "solution": "Mean .75 occurs only when both high signals occur, with true rate 1. Mean .5 occurs in the two cross-signal states, each with true rate .5. The .75 group is uncalibrated. The pointwise squared-loss identity still reduces loss relative to average member loss, and averaging over the exact law gives mean risk 5/32 versus member 3/16. Calibration and this proper-risk comparison answer different questions.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "J",
+    "title": "Make context affect a slope",
+    "question": "For A=4,B=10,z=.3, calculate(1\u2212z)A+zB. Can \u03b2\u2080+\u03b2_A A+\u03b2_B B+\u03b3z express that target for every A,B,z?",
+    "hint": "Compare A's required coefficient at z=0 and 1.",
+    "solution": ".7\u00d74+.3\u00d710=5.8. No fixed \u03b2_A can equal 1 at z=0 and 0 at z=1 for every A. Product features or suitable nonlinear structure are needed. Approximate fit on a correlated sample does not establish the all-input relation; changed rows expose the difference.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "K",
+    "title": "Account for training and serving",
+    "question": "Four bases, five folds and 1000 rows: count base fits, rows per fold fit and row processing under linear fit cost. Member serving times are 3,8,2,5 ms, meta 1 ms. Give ideal sequential and parallel totals.",
+    "hint": "Include fold fits and final full-data refits.",
+    "solution": "20 fold fits plus 4 full-data fits; each fold fit receives 800 rows. Row work is 20\u00d7800+4\u00d71000=20000, plus meta fitting. Sequential serving totals 3+8+2+5+1=19 ms; ideal parallel branches plus meta max(3,8,2,5)+1=9 ms. The served collection has 4 bases and 1 meta learner, not 20 fold models. Actual overhead, batching, contention and tail latency require separate measurement.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "L",
+    "title": "Complete a changed experimental report",
+    "question": "Run the complete comparison with seed 83, noise .20 and tree omitted from both ensemble candidates. Keep declared split, validation selection and cost rules. Report baselines, selected rule, test losses and action cost; explain the limits.",
+    "hint": "Validation chooses first. A surprising test ranking does not create permission to choose another winner.",
+    "solution": "The complete `changed-protocol` source and its retained output are supplied. It selects neighbor by validation log loss .271679 versus stack .301336. Test losses are neighbor 1.243178, stack .329349, equal soft .462221 and prior .693147. Neighbor and stack both have test accuracy .888889, so different confidence errors explain why hard accuracy alone misses this reversal. Threshold .333333 gives confusion [[21,15],[1,35]], cost 15+4\u00d71=19. All line and ensemble candidate outputs remain in the complete reference run rather than only the highlighted comparison.\n\nA finite validation winner can lose on a finite test. That does not establish universal stack superiority, invalidate the test or prove calibration. Retain the result, inspect the confidently wrong cases and declare a new valid boundary for additional model choices. State changed costs or split policy before observing the new test outcomes.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "M",
+    "title": "Align named classes",
+    "question": "A member returns class order [silver,amber,blue] and probabilities [.1,.6,.3]. The combiner expects [amber,blue,silver]. What vector should enter it, and what goes wrong if positions are simply added?",
+    "hint": "Follow each event's name through the permutation.",
+    "solution": "The aligned vector is [.6,.3,.1]. Amber receives its .6 even though its new column is first. Adding [.1,.6,.3] by position would call silver mass amber, amber mass blue and blue mass silver. A valid row sum cannot detect that semantic error; named schema alignment is required before combining.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "N",
+    "title": "Project a changed coefficient vector",
+    "question": "Project [.8,.3,\u2212.1] onto the simplex. Compare with clip-and-normalize and explain why they differ.",
+    "hint": "Test the active first two sorted coordinates and their common threshold.",
+    "solution": "Their threshold is (.8+.3\u22121)/2=.05. Subtract it from the two active values and floor the third at zero, giving [.75,.25,0]. Clipping first gives [.8,.3,0], then dividing by 1.1 gives [8/11,3/11,0]. Both are permitted simplex points, but only the common-threshold point is the Euclidean closest vector. The distinct distances and derivative/KKT conditions identify the actual projection, not mere feasibility.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "O",
+    "title": "Find indirect selection leakage",
+    "question": "A base predicts held rows A/D after fitting its coefficients only on B,C,E,F. Its regularization setting was chosen using targets from all A\u2013F. Is its OOF cell honest? Repair the procedure.",
+    "hint": "Trace selection-label access as well as coefficient-fit access.",
+    "solution": "It is not honest: A and D influenced the selected setting used by their supposed held prediction. Perform setting selection within the permitted B,C,E,F subset, fit the selected rule there, then predict A/D. Repeat that complete choice-and-fit workflow for every OOF fold. If assessing the whole stack, surround all of it with an outer boundary whose labels teach none of those decisions. The nested program logs both kinds of access; a clean coefficient-fit list alone misses this fault.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  },
+  {
+    "id": "P",
+    "title": "Repair stale serving state",
+    "question": "A saved bundle's first two feature names are swapped, but scaler arrays, base parameters, meta weights and old metrics are retained. Can updating only its checksum make it a valid new measured rule?",
+    "hint": "A checksum binds bytes; ask whether those bytes still mean the fitted columns.",
+    "solution": "No. The arrays now read different inputs than their fitted schema specifies. Restore the correct feature order or transform every affected parameter/preprocessing mapping consistently as a declared equivalent state, with a forward correspondence check. If the transformation changes the rule rather than preserving it, fit/version/evaluate that changed workflow under a new boundary. A recomputed checksum does not establish semantic correspondence or allow borrowing old test metrics. The live saved-state view rejects the stale feature mapping and preserves explicit invalid-state feedback.",
+    "presentation": "separate native hint and explained-solution disclosures, never lab-result gating"
+  }
+]

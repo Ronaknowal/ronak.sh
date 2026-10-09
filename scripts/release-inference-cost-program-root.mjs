@@ -1,0 +1,9 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const b='docs/teaching/llm-architecture-training/inference-cost-economics-compute-scaling';
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const bindings=[['program-correction/inputs.json','9e95580fcb71f20955951fb79bbd1790e96d604a83d45399eb2f7fd237eff77c'],['independent-program-training/closure-inputs.json','d49b0de3b5d32e41363be4bc297ebc2c8eacdae3c12ae22e32d3453cd621ea41'],['program-protocol.json','99e5764537074140535d1dfc485def14227f16a3eb45a3f4266b363fe939444d']].map(([p,sha256])=>({path:`${b}/${p}`,sha256}));
+const packet=JSON.parse(fs.readFileSync(bindings[0].path)),closure=JSON.parse(fs.readFileSync(bindings[1].path));
+for(const r of [...bindings,...packet.files,...closure.files])if(sha(r.path)!==r.sha256)throw Error(`Changed ${r.path}`);
+const record={accepted:true,program_inputs_sha256:bindings[0].sha256,author:'root',files:bindings,scope:'Only the seven prescribed stages once using explicit successor --inputs. No content/runtime acceptance.',budget:'12 CPU forwards, eight emitted IDs, fixed existing Pythia14m and inputs, no fit/update/timing campaign/paid operation/new acquisition.',review:'Root read entire protocol, entire original DIFFERENT prospective review, complete author closure/current cache program/driver and complete SAME closure. Whole seven-program reading composes the independent reviewer. Original incorrect review prose SHA suffix is qualified by closure; machine guards were exact.',failure:'Preserve actual observations and any failed terminal; stop rather than replay completed science.'};
+const target=`${b}/program-execution-accepted-root.json`;fs.writeFileSync(target,JSON.stringify(record,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({target,sha256:sha(target),guarded:packet.files.length+closure.files.length}));

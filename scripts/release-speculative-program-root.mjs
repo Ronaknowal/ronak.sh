@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const b='docs/teaching/llm-architecture-training/speculative-decoding';
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const roots=[['program-correction/inputs-r3.json','ad83f349e92882718a5ba03dae2ec219dbddce776164c1473b3e28a344f64b00'],['program-protocol.json','623e9a763d554a458847d17d71593481551ac402d1c5ff0c16f7cf98380bda57'],['program-correction/independent-closure.md','89419f7e14d68aaf5e64c37732289b550e1521e2d4a4cba7d55f76019d114416'],['program-correction/independent-acceptance.json','73144701b5eec8db5f7d8afd6bf45d2f0694ed6c65fdc054fa724a0cf2a52ada']].map(([p,sha256])=>({path:`${b}/${p}`,sha256}));
+const packet=JSON.parse(fs.readFileSync(roots[0].path));
+for(const f of [...roots,...packet.files])if(hash(f.path)!==f.sha256)throw Error(`Changed: ${f.path}`);
+const record={accepted:true,author:'root',scope:'Release only the final prescribed six scientific stages once, in order; not content/runtime acceptance.',files:roots,guardedProgramBindings:packet.files.length,stages:['finite','cache','tree','heads','native','study'],conditions:'No added arm, seed, prompt, model acquisition, optimizer update or scientific replay. Save actual failures/slowdowns/mismatches and stop on failed scientific stage. Root personally read complete current protocol, original independent review, author correction and SAME closure; whole-code coverage composes the independent reviewer, not a claimed Root whole-code read.',nativeBudget:'32 warmups plus 96 measured calls, maximum 3072 emitted IDs; separate two diagnostic calls, maximum 16 IDs; fixed mechanical cache/tree/head protocol remains unchanged.'};
+fs.writeFileSync(`${b}/program-execution-accepted-root.json`,JSON.stringify(record,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({accepted:true,bindings:packet.files.length,sha256:hash(`${b}/program-execution-accepted-root.json`)}));

@@ -1,0 +1,30 @@
+.minibatch-flow.lesson-flow { --mb-input: #82cbd0; --mb-parameter: #e4b752; --mb-value: #c0a0e0; --mb-credit: #e29b72; --mb-neutral: #ddd; }
+.minibatch-flow .mb-drawing { margin: 1.4rem 0; max-width: 100%; }
+.minibatch-flow .neural-equation { overflow-x: auto; max-width: 100%; }
+.minibatch-flow .mb-drawing-scroll { overflow-x: auto; max-width: 100%; padding-bottom: .6rem; }
+.minibatch-flow .mb-drawing-scroll:focus-visible { outline: 2px solid var(--mb-parameter); outline-offset: 3px; }
+.minibatch-flow .mb-drawing-svg { display: block; max-width: none; height: auto; overflow: visible; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+.minibatch-flow .mb-drawing-svg text { fill: #ddd; font-size: 18px; }
+.minibatch-flow .mb-drawing-svg .mb-small { font-size: 16px; }
+.minibatch-flow .mb-pan-hint { color: #b9b9b9; margin: .3rem 0; font-size: .95rem; }
+.minibatch-flow .mb-scenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem,100%),1fr)); gap: 1.5rem; }
+.minibatch-flow .mb-scenes > * { min-width: 0; }
+.minibatch-flow.lesson-flow .flow-controls :is(input,select,button) { min-height: max(44px,2.75rem); }
+.minibatch-flow.lesson-flow button { min-height: max(44px,2.75rem); }
+.reader-article .minibatch-flow.lesson-flow .lesson-code .lesson-code__actions :is(a,button),
+.reader-article .minibatch-flow.lesson-flow .lesson-code-source__pending :is(a,button) { min-height: max(44px,2.75rem); }
+.minibatch-flow.lesson-flow .mb-number, .minibatch-flow.lesson-flow .mb-select { display: grid; gap: .35rem; flex: 1 1 10rem; min-width: min(10rem,100%); }
+.minibatch-flow.lesson-flow .mb-number input, .minibatch-flow.lesson-flow .mb-select select { width: 100%; min-width: 0; }
+.minibatch-flow.lesson-flow .mb-number input[aria-invalid='true'] { border-color: #e29b72; }
+.minibatch-flow.lesson-flow .mb-number input:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+.minibatch-flow .mb-error { color: #e29b72; overflow-wrap: anywhere; }
+.minibatch-flow .mb-check { display: flex; align-items: center; gap: .5rem; min-height: 2.75rem; }
+.minibatch-flow .mb-check input { min-width: 1.4rem; }
+.minibatch-flow .mb-table-scroll { max-width: 100%; overflow-x: auto; }
+.minibatch-flow .mb-table-scroll:focus-visible { outline: 2px solid #e4b752; outline-offset: 2px; }
+.minibatch-flow .mb-table { border-collapse: collapse; font: inherit; font-variant-numeric: tabular-nums; margin-block: .7rem 1.2rem; }
+.minibatch-flow .mb-table :is(th,td) { padding: .6rem .8rem; text-align: left; border-bottom: 1px solid #414141; white-space: nowrap; }
+.minibatch-flow .mb-table caption { text-align: left; color: #b9b9b9; margin-bottom: .5rem; }
+.minibatch-flow .mb-table th { color: #ddd; }
+.minibatch-flow .mb-files { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }
+.minibatch-flow .mb-files a { min-height: 2.75rem; display: inline-flex; align-items: center; }

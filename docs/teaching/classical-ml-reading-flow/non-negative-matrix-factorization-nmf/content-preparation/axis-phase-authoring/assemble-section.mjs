@@ -1,0 +1,24 @@
+import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import {fileURLToPath} from 'node:url';
+const directory=path.dirname(fileURLToPath(import.meta.url)),file=n=>path.resolve(directory,n),read=n=>fs.readFileSync(file(n),'utf8');
+const bind=n=>{const p=file(n),b=fs.readFileSync(p);return{path:p,bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')};};
+const checks=[];const check=(name,c)=>{checks.push({name,passed:Boolean(c)});if(!c)throw Error(name);};
+const numerical=JSON.parse(read('axis-checks.json'));
+check('all29 independent anatomy conditions',numerical.checks.length===29&&numerical.checks.every(x=>x.passed));
+check('executedsourceconserved',bind(numerical.source.path).sha256===numerical.source.sha256);
+for(const r of ['stdout','stderr'])check('streamconserved '+r,bind(numerical.main[r].path).sha256===numerical.main[r].sha256);
+let body=read('section-eighteen-template.md');
+check('one accepted section18',body.startsWith('## 18. Keep extra axes and recognize what is missing')&&(body.match(/^## /gm)||[]).length===1);
+for(const[id,lead]of[['D64',"The picture's axes"],['D65','The same eight cells'],['D66','We switch from the constructed tensor']])check(id+' beforewalkthrough',body.indexOf('<!-- figure:'+id+' -->')>0&&body.indexOf('<!-- figure:'+id+' -->')<body.indexOf(lead));
+check('flattening not mistaken as data deletion',body.includes('reorders cells without deleting them')&&body.includes('model constraint'));
+check('different core honestly differentexample',body.includes('not** another fitted explanation')&&body.includes('I2'));
+check('generaloptimizer external complete scope',body.includes('does **not** fit CP or Tucker')&&body.includes('dedicated initialization'));
+check('matrix/tensor rank not confused',body.includes('three indices, not matrix rank three'));
+check('imaginaryunit not observationindex',body.includes('imaginary unit, not our earlier observation index'));
+check('audio phase/stableversion boundary',body.includes('does not establish a unique original phase')&&body.includes('development 1.0.0'));
+check('sparse absence not missingzero',body.includes('storage and missingness are separate'));
+const slots=[{marker:'<!-- source:nmf_axis_phase.py -->',path:file('nmf_axis_phase.py'),language:'python'},{marker:'<!-- output:nmf_axis_phase.stdout.txt -->',path:file('nmf_axis_phase.stdout.txt'),language:'json'}];
+for(const slot of slots){const text=fs.readFileSync(slot.path,'utf8').trimEnd();check('one slot '+slot.marker,body.split(slot.marker).length===2);body=body.replace(slot.marker,'\n```'+slot.language+'\n'+text+'\n```\n');check('full literal '+slot.marker,body.includes(text));}
+check('slotsresolved',!body.includes('<!-- source:')&&!body.includes('<!-- output:'));
+fs.writeFileSync(file('section-eighteen.md'),body);
+const packet={status:'SECTION18_D64_D66_COMPLETE_FINITE_ANATOMY_NOT_WHOLE_TOPIC_READY',author:'/root/nmf_initialization_author',created:new Date().toISOString(),acceptedAnchor:'18-keep-extra-axes-and-recognize-what-is-missing',bindings:['section-eighteen-template.md','section-eighteen.md','visual-specifications.md','assemble-section.mjs','nmf_axis_phase.py','check-anatomy.py','axis-checks.json','nmf_axis_phase.stdout.txt','nmf_axis_phase.stderr.txt'].map(bind),sourceSlots:slots.map(x=>({...x,identity:bind(x.path)})),checks,evidence:{focusedConditions:29,newMain:1,newFits:0,fullStreamsRead:true,oldCampaignReplay:false},reading:'Entire current finite program/checker/prose/spec/full2292B stdout and empty stderr read. Kolda–Bader46-page survey only targeted §2.4/§3.1/§4 definition paragraphs and formulas read; no general optimizer/full survey claim. Full short TensorLy CP/Tucker API contracts read. Current librosa STFT/Griffin–Lim relevant magnitude/phase/version passages targeted; old mistaken /generated URL returned404, corrected /api/generated returned currentdocs.',limits:'No general CP/Tucker fit or original algorithm read/implementation, audio experiment/quality/phase uniqueness guarantee, independentwhole/native acceptance.',continuation:'Root read/compose exact section18; section19 full24practice,completefileindex,annotatedreferences/furtherlearning remain. No shared main/canonical/public/runtime/phase changes.'};
+fs.writeFileSync(file('section-eighteen-handoff.json'),JSON.stringify(packet,null,2)+'\n');console.log(JSON.stringify({conditions:checks.length,manuscript:bind('section-eighteen.md'),handoff:bind('section-eighteen-handoff.json')}));

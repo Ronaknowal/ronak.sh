@@ -1,0 +1,159 @@
+{
+  "revision": 3,
+  "deliveryMode": "full",
+  "record": "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/review.md",
+  "content": {
+    "status": "complete",
+    "completedAt": "2026-09-26T16:07:53.475Z",
+    "manuscript": "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx",
+    "visualSpecifications": "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/review.md",
+    "files": {
+      "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx": "31975f88139c8596ea2f7185aeba32c723ad98d7c05e681e6fd735f7f18d54a8",
+      "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/review.md": "751886ac511f79706304035268647ba43d264283b773793ce5c02c1d9e772889",
+      "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/author-checks.json": "69df028f3fa9c648aef156dbdebafd72924b5d7fe96956834b79ee12e0289184",
+      "src/learn/data/curriculum/blueprints/non-negative-matrix-factorization-nmf.js": "0970b9e8ea96ba502f77f72dfc77a6ca31285840258573004c390989f163c0e8",
+      "src/learn/data/nmf-examples.js": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24",
+      "scripts/verify-representation-concept-intuition.mjs": "665d4e670b6977ebc15815db6b352af7cf6f7d95ceb51ee7f98692ff3fd4d14d"
+    }
+  },
+  "implementation": {
+    "status": "complete",
+    "completedAt": "2026-09-26T16:12:07.696Z",
+    "reviewedFiles": {
+      "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx": "31975f88139c8596ea2f7185aeba32c723ad98d7c05e681e6fd735f7f18d54a8",
+      "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/review.md": "751886ac511f79706304035268647ba43d264283b773793ce5c02c1d9e772889",
+      "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/author-checks.json": "69df028f3fa9c648aef156dbdebafd72924b5d7fe96956834b79ee12e0289184",
+      "src/learn/data/curriculum/blueprints/non-negative-matrix-factorization-nmf.js": "0970b9e8ea96ba502f77f72dfc77a6ca31285840258573004c390989f163c0e8",
+      "src/learn/data/nmf-examples.js": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24",
+      "scripts/verify-representation-concept-intuition.mjs": "665d4e670b6977ebc15815db6b352af7cf6f7d95ceb51ee7f98692ff3fd4d14d",
+      "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/independent-checks.json": "501fe7c92d296684f696918e85c30ed494475d832ba15978c8e3f36a405d387e",
+      "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/independent-review.md": "75c37f7e8de41c136a5c4ba5c9972b264f2bcf88e644c297c8d55a5638ea1fa7",
+      "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/browser-checks.json": "b312243f7c23fbe1171649d535caaff0e0be608b594dcd3271f870eb8653dfb0",
+      "docs/teaching/concept-intuition/integration-checks.json": "2dc722589498e119ce8fc966b5e8866eca48353f8aa736e87f9271a7fc029f1e",
+      "src/learn/components/LessonOpening.jsx": "2fa02df542ec025b2e738578eb3efb8eec1556939d57d8b888937870b7ec0348",
+      "src/learn/components/LessonGuide.jsx": "7b7f9f95d61e5335cddc6f9626fb0a770f7b353bc50d332e7fb533bbdb6b6acb",
+      "src/learn/components/lesson-navigation.js": "43da1442fea7ff0558efa30063535b410ffdc8c41cca4eba1d7e1f88fff4394b",
+      "src/learn/components/lesson-guide.css": "6f8bd387c8573f001efcf36b78789ada244a7f2a808e935b1e444ab619b9cdd2",
+      "src/learn/components/TopicContent.jsx": "b37f0a392e215e344aaca0d1cffc2081b94c939d8f79b0126161c74aa597a0c6",
+      "src/learn/components/content/Prose.jsx": "e3cc90613a71a02dc1880fb5771685267b7dc17ed68cc3d184b45dd40e350aff",
+      "src/learn/components/content/Headings.jsx": "5db5b3f2bd423c33ee48dc43910219b6bff2785b8672a6c13442f945e670992f",
+      "src/learn/components/lesson-labs/LessonElements.jsx": "8bb65cf49315753531a00f639d497f493c75ac964f722462cfe606f38f3854d2",
+      "src/learn/learning-base.css": "434562e545573a931609a0695c71ac1f309401179b88bda5db086591fe09a919",
+      "src/learn/components/lesson-endings.css": "0b81870e56db0ef20ae81f51b9c1e5c7cfafaaebdbb9ac102479fdfc8f9d7ad6",
+      "src/learn/components/content/Code.jsx": "c264f6dbf0affb20309ff9b4576bfad076e4861994aee1a5d1aea06bc28ccd8e",
+      "src/learn/components/content/RemoteCodeBlock.jsx": "fb3c96ec5e562175286e82537acaed027ef33ff00ee1aa505d32a92bed772290",
+      "src/learn/components/content/LessonCodeDownloads.jsx": "bccf743ce3b54fc96a0d2c122a471dee2dac08f4c9e7bd0e68eef7a45b1c0720",
+      "src/learn/components/content/code-downloads.js": "304dc9623de8903efbe9b304d9affa5ae53bc42822286b1abcd68c72f060f82d",
+      "src/learn/components/content/lesson-code.css": "7144ad583572a6a6a2676d766102faf97f08e5150562de20bbfea40b90bfe283",
+      "src/learn/components/lesson-labs/useLessonViewport.js": "3bca9b88a8c2b10792c493b4410a0531f2e3a015e73a0838facebb692cd54838"
+    },
+    "evidence": {
+      "author": "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/author-checks.json",
+      "independent": "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/independent-checks.json",
+      "browser": "docs/teaching/concept-intuition/non-negative-matrix-factorization-nmf/browser-checks.json",
+      "integration": "docs/teaching/concept-intuition/integration-checks.json"
+    },
+    "presentationReviews": [
+      "docs/teaching/lesson-navigation/presentation-review.json",
+      "docs/teaching/lesson-endings/presentation-review.json",
+      "docs/teaching/lesson-code-access/presentation-review.json",
+      "docs/teaching/lesson-code-access/copy-feedback-review.json"
+    ]
+  },
+  "nextAction": "Current concept-by-concept revision is implemented and reviewed. User acceptance remains separate; preserve unchanged numerical evidence and follow the next scoped request.",
+  "previousRevisions": [
+    {
+      "revision": 1,
+      "deliveryMode": "content-first",
+      "record": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/design.md",
+      "content": {
+        "status": "complete",
+        "manuscript": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/lesson.md",
+        "visualSpecifications": "docs/teaching/drafts/non-negative-matrix-factorization-nmf/visual-specifications.md",
+        "files": {
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/author-calculations.py": "bee37c715c4638df2cb95e2053be9f767bb1347b06ce721941849951b8f1bd8a",
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/calculated-inputs.json": "11e162d838f606ac1e93e0bf2005310c0eb4204d10e7e92dbb03f7322e38d245",
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/data-provenance.md": "64fd32c6aa341f50a815120edb4bdaf1ec31875b06ddb5a988e78f451c7d375c",
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/design.md": "e25bec700273414263e99e514e1d8adc2c353e1c26d7750721cae193c2771cdd",
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/digits-300.csv": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e",
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/lesson.md": "586b8a135b129ab897284d6e38ae166feaf9acc8281934ec66fd23f1be924fad",
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/visual-specifications.md": "737953f3d42237037cd043112fc6f52e9d7d8cf876bd83b2dd594c7c4ed05a89"
+        },
+        "completedAt": "2026-09-12T11:33:16.877Z",
+        "correctedAt": "2026-09-14T16:54:03.384832+00:00",
+        "corrections": "Phase two appended its implementation section and the disposition of the independent review to the design record. The manuscript, visual specifications, recorded calculations, provenance and dataset are unchanged."
+      },
+      "implementation": {
+        "status": "complete",
+        "reviewedFiles": {
+          "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx": "734dcb902eb95db45f406f6565eb8e87427fc954646799a03bc6ffcef76da9b0",
+          "src/learn/data/nmf-models.js": "c4e5a55b6915f8028da3bf7bf2bbeea954f0faf7bed290e6b3e7338cf2e0bc42",
+          "src/learn/data/nmf-data.js": "28dacb781b62c7479b23f16f774b94cb58de3f239d10759d7a8052c01cb8ee85",
+          "src/learn/data/nmf-examples.js": "7d6f704030abd4524b46127ff83defca977148ba8602ba02d709e1bf8ae66c86",
+          "src/learn/components/lesson-labs/NmfShared.jsx": "45ccdc1ccdcd2ea9962fbe583f38cb3ed5a0271558085f027a3bbbba2606a762",
+          "src/learn/components/lesson-labs/NmfLabs.jsx": "bcbe95241025a553f7313d7ee74ae5b2b2e6590884719d6588aef2adab7b78b0",
+          "src/learn/components/lesson-labs/NmfFigures.jsx": "4e45c2507d61edf0afd7181ddc048b9754f2496b5064d8aca1f56e68dd4f899e",
+          "src/learn/components/lesson-labs/nmf-labs.css": "693210fb14e74fb55ac462597280e340eba3adc00a29206449fc905aef52e26e",
+          "src/learn/data/curriculum/blueprints/non-negative-matrix-factorization-nmf.js": "b596b9f4850d537ee1be421703f68ac854430f0f979ce1e9088aea2d4f96150d",
+          "public/learn-assets/nmf/digits-300.csv": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e",
+          "public/learn-assets/nmf/data-provenance.md": "c2622d4446a0dec6214981871c8eba7d9af282043875566f40f3874f49998e64"
+        },
+        "completedAt": "2026-09-14T16:54:03.384832+00:00",
+        "evidence": [
+          "docs/teaching/evidence/nmf-models.json",
+          "docs/teaching/evidence/nmf-native.json",
+          "docs/teaching/evidence/nmf-data.json",
+          "docs/teaching/evidence/nmf-browser.json",
+          "docs/teaching/NMF-INDEPENDENT-REVIEW.md"
+        ]
+      },
+      "nextAction": "Implementation complete; sequential audit on 16 September closed four feedback, paint and update-caption findings. Continue from the separate audit ledger."
+    },
+    {
+      "revision": 2,
+      "deliveryMode": "full",
+      "record": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+      "content": {
+        "status": "complete",
+        "completedAt": "2026-09-21T15:16:48.547Z",
+        "manuscript": "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx",
+        "visualSpecifications": "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md",
+        "files": {
+          "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx": "28347f106476c2afe621e04ede34beeb022c0c3b547e0eb3b0b8112a880eb5f3",
+          "docs/teaching/LIVE-EXPLORATION-CLASSICAL-EARLY.md": "b43c3153ef520427188f57429a56fcbfcf9e3490956db35d72d9fea06d55dc90",
+          "src/learn/data/curriculum/blueprints/non-negative-matrix-factorization-nmf.js": "b2f41f59d95dbe97c969006dfe2d968dd337e076dc8d9a64781bdd1af4546a51",
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/design.md": "17d30931d095bc832eeb242e9ee93aa056e09a639c1de70cd8032400c0361499",
+          "docs/teaching/drafts/non-negative-matrix-factorization-nmf/visual-specifications.md": "eb57cebf3dc5fd6df10dd7a2ebf19314a7bf41aea60a03dfc79d15e62d4ae641",
+          "src/learn/data/nmf-examples.js": "7d6f704030abd4524b46127ff83defca977148ba8602ba02d709e1bf8ae66c86"
+        }
+      },
+      "implementation": {
+        "status": "complete",
+        "completedAt": "2026-09-21T15:16:48.549Z",
+        "reviewedFiles": {
+          "src/learn/data/topics/non-negative-matrix-factorization-nmf.jsx": "28347f106476c2afe621e04ede34beeb022c0c3b547e0eb3b0b8112a880eb5f3",
+          "src/learn/components/content/index.js": "26c20d7f01cb68ca5d6ce605c0d2da7e22af24ae034a7fb797ca789c2e3442d7",
+          "src/learn/components/content/Prose.jsx": "695387da03034ea99e2e5d71bd6cd778cbf89f10f5904ed8f7be6cbc4a076792",
+          "src/learn/styles.js": "5e0c632f2b39cc90a86c644298d56ac4a57ac2446097729bce73f6745e732cc5",
+          "src/learn/components/content/Headings.jsx": "95606c94815626419f9a9d082c148eacf202dd20cdb492be84f88cbef77b9688",
+          "src/learn/components/content/Code.jsx": "c444c151c70e8cbef2b734a94070516f47bc77072f938646077a8bfc9e078310",
+          "src/learn/components/content/Callout.jsx": "bfebe0e2cc5dd0548391136bae67d66a73d500a750fc2d3ca6cc50739510e97e",
+          "src/learn/components/content/Figure.jsx": "c8c890a3b7238ae4ae9e33e782ed7742b9f7d2756d710a935b5b0968c92819d1",
+          "src/learn/components/content/Math.jsx": "c09a0bdcef88192335fb880ef74387b4eb63b4296e855e71e7995b27a2b7f258",
+          "src/learn/components/lesson-labs/LessonElements.jsx": "232ff18e81cf9b79acd51a40e9e1683fad6f509083aeb0ab5f1ad8b7199f01e9",
+          "src/learn/components/lesson-labs/lessons.css": "a7fbce9cc83e7088ae93545f758e818996bacffa1344d4b0d3b3a04318aa3508",
+          "src/learn/components/lesson-labs/RunnableExample.jsx": "f4e797db7871565d0e3cae1f9c960747b713b74fd3b9d4ea9047967d2e4e8463",
+          "src/learn/components/lesson-labs/NmfLabs.jsx": "79eb2129f86c313e409cf66bffe3ee6e0805c07fbef1c37203a0632cbdea51d8",
+          "src/learn/data/nmf-models.js": "c4e5a55b6915f8028da3bf7bf2bbeea954f0faf7bed290e6b3e7338cf2e0bc42",
+          "src/learn/data/nmf-data.js": "28dacb781b62c7479b23f16f774b94cb58de3f239d10759d7a8052c01cb8ee85",
+          "src/learn/components/lesson-labs/NmfShared.jsx": "c31dcb81b7f1a7522a7d4a050905d470cb02e0f369fc8a48261602634a4e60a7",
+          "src/learn/components/lesson-labs/nmf-labs.css": "693210fb14e74fb55ac462597280e340eba3adc00a29206449fc905aef52e26e",
+          "src/learn/components/lesson-labs/NmfFigures.jsx": "4e45c2507d61edf0afd7181ddc048b9754f2496b5064d8aca1f56e68dd4f899e",
+          "src/learn/data/nmf-examples.js": "7d6f704030abd4524b46127ff83defca977148ba8602ba02d709e1bf8ae66c86",
+          "src/learn/data/curriculum/blueprints/non-negative-matrix-factorization-nmf.js": "b2f41f59d95dbe97c969006dfe2d968dd337e076dc8d9a64781bdd1af4546a51"
+        }
+      },
+      "nextAction": "Live-exploration revision complete; no learner-prediction feature. Preserve this source-bound review and use the next explicit user request for further work. User acceptance is separate."
+    }
+  ]
+}

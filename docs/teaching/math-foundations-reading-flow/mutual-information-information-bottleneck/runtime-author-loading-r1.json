@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "Delayed topic retains named loading status",
+      "pass": true
+    },
+    {
+      "name": "Delayed topic resolves complete lesson",
+      "pass": true
+    },
+    {
+      "name": "Topic load error shows recovery controls",
+      "pass": true
+    },
+    {
+      "name": "Explicit page reload recovers browser import failure",
+      "pass": true
+    },
+    {
+      "name": "Code failure retains download",
+      "pass": true
+    },
+    {
+      "name": "Code Retry recovers exact current source",
+      "pass": true
+    }
+  ],
+  "scope": "Bounded actual shared resource/remote-code loading; dynamic import recovery explicitly uses Reload page"
+}

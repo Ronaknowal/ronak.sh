@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-28",
+  "review": "author native execution; independent review and browser checks recorded separately",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "torch": "2.14.0+cpu",
+  "result": {
+    "tasks": 500,
+    "judgments": 2428,
+    "workers": 1766,
+    "workers_with_one_judgment": 1360,
+    "iterations": 30,
+    "max_posterior_error_vs_crowdkit": 1e-10,
+    "majority_accuracy_against_held_aside_gold": 0.764,
+    "ds_accuracy_against_held_aside_gold": 0.676,
+    "ds_mean_max_posterior": 0.8459117249192669,
+    "stratified_audit_error": 0.16,
+    "pooled_audit_error": 0.25,
+    "scope": "Deterministic 500-task subset; not a population benchmark; gold excluded from fitting"
+  },
+  "complementary_author_checks": {
+    "invalid_input_checks": 6,
+    "missing_impossible_zero_weight_checks": 3,
+    "row_order_invariance": true
+  },
+  "files": {
+    "public/learn-code/data-annotation-labeling-extended/annotation_quality.py": "ce33283f4f35940e6020a784eea0221f786edd764d7559ee72d7a78b879ad1ab",
+    "public/learn-code/data-annotation-labeling-extended/data-provenance.md": "0ff06d2b9c05d3743a3b070969dce0c43d30a4801db99c4adcf4017ebeb1c18c",
+    "public/learn-code/data-annotation-labeling-extended/LICENSE.txt": "f226885428108de07564b7ec2f924b4c7bb714fdf24c3294a8cc568e6c213a7c",
+    "public/learn-code/data-annotation-labeling-extended/relevance_gold.csv": "d561340cd5e2d71f0f673f5222fe199b852e2ab3d98e8a0abdf069359f968fa8",
+    "public/learn-code/data-annotation-labeling-extended/relevance_labels.csv": "660ab4339e271a3b223f16f5bed3df316c032c46beb28660876a04ab89225a26"
+  }
+}

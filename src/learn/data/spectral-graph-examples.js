@@ -2,6 +2,7 @@
 export const spectralGraphExamples = [
   {
     "id": "original",
+    "file": "six_document_spectrum.py",
     "title": "Reproduce the six-document spectrum",
     "question": "Predict which nodes should share a sign before running this preserved pilot example.",
     "code": "import numpy as np\r\n\r\nA = np.zeros((6, 6))\r\nfor i, j in [(0, 1), (0, 2), (1, 2), (3, 4), (3, 5), (4, 5)]:\r\n    A[i, j] = A[j, i] = 1.0\r\nA[2, 3] = A[3, 2] = 0.2\r\n\r\nL = np.diag(A.sum(axis=1)) - A\r\nvalues, U = np.linalg.eigh(L)\r\nu = U[:, 1]\r\nif u[0] < 0:  # choose a reproducible sign; u and -u are equivalent\r\n    u = -u\r\n\r\nprint(\"eigenvalues:\", [round(float(v), 3) + 0.0 for v in values])\r\nprint(\"Fiedler:\", [round(float(v), 3) for v in u])\r\nprint(\"positive:\", [name for name, v in zip(\"ABCDEF\", u) if v > 0])\r\nprint(\"negative:\", [name for name, v in zip(\"ABCDEF\", u) if v < 0])\r\nprint(\"eigenpair verified:\", bool(np.allclose(L @ u, values[1] * u)))\r\nprint(\"unit length:\", bool(np.isclose(u @ u, 1)))",
@@ -9,6 +10,7 @@ export const spectralGraphExamples = [
   },
   {
     "id": "energy",
+    "file": "weighted_edge_energy.py",
     "title": "Verify edge energy on a changed weighted path",
     "question": "Which edges contribute zero even though they have positive weight?",
     "code": "import numpy as np\n\nedges = [(0, 1, 2.0), (1, 2, 0.5), (2, 3, 3.0)]\nx = np.array([2.0, 2.0, -1.0, 1.0])\nA = np.zeros((4, 4))\nfor i, j, w in edges:\n    A[i, j] = A[j, i] = w\nL = np.diag(A.sum(axis=1)) - A\nterms = [float(w * (x[i] - x[j]) ** 2) for i, j, w in edges]\nprint(\"edge contributions:\", terms)\nprint(\"matrix energy:\", float(x @ L @ x))\nprint(\"squared norm:\", float(x @ x))\nprint(\"Rayleigh quotient:\", round(float(x @ L @ x / (x @ x)), 6))\nprint(\"constant annihilated:\", bool(np.allclose(L @ np.ones(4), 0)))",
@@ -16,6 +18,7 @@ export const spectralGraphExamples = [
   },
   {
     "id": "sweep",
+    "file": "normalized_cut_sweep.py",
     "title": "Sweep normalized coordinates and check the tiny graph exhaustively",
     "question": "Does the smallest sweep conductance equal the global optimum on this fixture? Enumeration here is a check, not a scalable clustering algorithm.",
     "code": "import numpy as np\n\n\ndef bridge_graph(weight=0.2):\n    A = np.zeros((6, 6))\n    for i, j in [(0, 1), (0, 2), (1, 2), (3, 4), (3, 5), (4, 5)]:\n        A[i, j] = A[j, i] = 1.0\n    A[2, 3] = A[3, 2] = weight\n    return A\n\n\nA = bridge_graph()\nd = A.sum(axis=1)\nL = np.diag(d) - A\n\n\ndef measures(A, selected):\n    n = len(A)\n    S = sorted(set(selected))\n    if not S or len(S) == n:\n        raise ValueError(\"Use a nonempty proper subset\")\n    T = sorted(set(range(n)) - set(S))\n    degree = A.sum(axis=1)\n    cut = float(A[np.ix_(S, T)].sum())\n    a, b = float(degree[S].sum()), float(degree[T].sum())\n    if min(a, b) <= 0:\n        raise ValueError(\"Both volumes must be positive\")\n    return cut, cut / min(a, b), cut * (1 / a + 1 / b)\n\n\ninv = 1 / np.sqrt(d)\nN = inv[:, None] * L * inv[None, :]\nvalues, U = np.linalg.eigh(N)\nv = U[:, 1]\nif v[0] < 0:\n    v = -v\ny = v / np.sqrt(d)\norder = np.argsort(y, kind=\"stable\")\ncandidates = []\nfor count in range(1, len(A)):\n    if abs(y[order[count]] - y[order[count - 1]]) <= 1e-9:\n        continue\n    S = order[:count].tolist()\n    candidates.append((measures(A, S)[1], S))\nbest_phi, best = min(candidates, key=lambda item: item[0])\nall_phi = [\n    measures(A, [i for i in range(6) if mask & (1 << i)])[1]\n    for mask in range(1, 63)\n]\nprint(\"sweep side:\", \"\".join(\"ABCDEF\"[i] for i in sorted(best)))\nprint(\"sweep conductance:\", round(best_phi, 6))\nprint(\"global tiny-graph conductance:\", round(min(all_phi), 6))\nprint(\"normalized lambda2:\", round(float(values[1]), 6))\nprint(\n    \"Cheeger lower/upper:\",\n    round(float(values[1] / 2), 6),\n    round(float(np.sqrt(2 * values[1])), 6),\n)\nprint(\"triangle Ncut:\", round(measures(A, [0, 1, 2])[2], 6))",
@@ -23,6 +26,7 @@ export const spectralGraphExamples = [
   },
   {
     "id": "isolates",
+    "file": "normalized_laplacian_isolates.py",
     "title": "Keep an isolated vertex separate from the identity convention",
     "question": "Which diagonal entry does the blind identity formula get wrong?",
     "code": "import numpy as np\n\nA = np.array([[0.0, 2.0, 0.0], [2.0, 0.0, 0.0], [0.0, 0.0, 0.0]])\nd = A.sum(axis=1)\nL = np.diag(d) - A\ninv = np.zeros_like(d)\nnp.divide(1.0, np.sqrt(d), out=inv, where=d > 0)\nN = inv[:, None] * L * inv[None, :]\nblind = np.eye(3) - inv[:, None] * A * inv[None, :]\nprint(\"product diagonal:\", np.round(np.diag(N), 6).tolist())\nprint(\"blind identity diagonal:\", np.diag(blind).tolist())\nprint(\"product eigenvalues:\", np.round(np.linalg.eigvalsh(N), 6).tolist())\nprint(\"isolated basis is null:\", bool(np.allclose(N @ [0, 0, 1], 0)))",
@@ -30,6 +34,7 @@ export const spectralGraphExamples = [
   },
   {
     "id": "clusters",
+    "file": "spectral_clustering_restarts.py",
     "title": "Complete NumPy spectral clustering with explicit Lloyd restarts",
     "question": "Watch the distinction between eigenvector columns and node rows. Why does this program reject an empty cluster run?",
     "code": "import numpy as np\n\n\ndef spectral_rows(A, k):\n    A = np.asarray(A, dtype=float)\n    if (\n        A.ndim != 2\n        or A.shape[0] != A.shape[1]\n        or not np.isfinite(A).all()\n        or (A < 0).any()\n        or not np.allclose(A, A.T)\n        or np.any(np.diag(A) != 0)\n    ):\n        raise ValueError(\n            \"Use a finite symmetric nonnegative adjacency with zero diagonal\"\n        )\n    if type(k) is not int or not 1 <= k <= len(A):\n        raise ValueError(\"k must be an integer from 1 to n\")\n    d = A.sum(axis=1)\n    if np.any(d <= 0):\n        raise ValueError(\"Handle isolated vertices before this algorithm\")\n    inv = 1 / np.sqrt(d)\n    N = np.eye(len(A)) - inv[:, None] * A * inv[None, :]\n    values, U = np.linalg.eigh(N)\n    rows = U[:, :k]\n    lengths = np.linalg.norm(rows, axis=1)\n    if np.any(lengths < 1e-12):\n        raise ValueError(\n            \"Numerically zero embedding row: reconsider k/components\"\n        )\n    return values, rows / lengths[:, None]\n\n\ndef lloyd(points, k, seeds, max_steps=100):\n    centers = points[np.array(seeds)].copy()\n    previous = None\n    for step in range(max_steps):\n        distances = ((points[:, None, :] - centers[None, :, :]) ** 2).sum(\n            axis=2\n        )\n        labels = distances.argmin(axis=1)\n        if any(not np.any(labels == j) for j in range(k)):\n            return None\n        if previous is not None and np.array_equal(labels, previous):\n            loss = float(((points - centers[labels]) ** 2).sum())\n            return labels, centers, loss\n        centers = np.array(\n            [points[labels == j].mean(axis=0) for j in range(k)]\n        )\n        previous = labels.copy()\n    return None  # bounded runtime; unconverged restarts are not silently accepted\n\n\nA = np.zeros((9, 9))\nfor s in [0, 3, 6]:\n    for i, j in [(s, s + 1), (s, s + 2), (s + 1, s + 2)]:\n        A[i, j] = A[j, i] = 1.0\nfor i, j in [(2, 3), (5, 6)]:\n    A[i, j] = A[j, i] = 0.08\nvalues, points = spectral_rows(A, 3)\nrng = np.random.default_rng(12)\nseeds = [[0, 3, 6]] + [\n    rng.choice(9, 3, replace=False).tolist() for _ in range(19)\n]\nruns = [\n    result for seed in seeds if (result := lloyd(points, 3, seed)) is not None\n]\nif not runs:\n    raise RuntimeError(\n        \"No complete converged run; revise initialization or graph\"\n    )\nlabels, centers, loss = min(runs, key=lambda result: result[2])\ngroups = sorted(\n    [\n        \"\".join(\"ABCDEFGHI\"[i] for i in range(9) if labels[i] == j)\n        for j in range(3)\n    ]\n)\nprint(\"first four eigenvalues:\", np.round(values[:4], 6).tolist())\nprint(\"row lengths:\", np.round(np.linalg.norm(points, axis=1), 6).tolist())\nprint(\"groups:\", groups)\nprint(\"best occupied-run loss:\", round(loss, 6))",
@@ -37,6 +42,7 @@ export const spectralGraphExamples = [
   },
   {
     "id": "filters",
+    "file": "graph_signal_filters.py",
     "title": "Compute three filters and verify their different objectives",
     "question": "At the same numerical parameter, should heat and ridge produce exactly the same answer?",
     "code": "import numpy as np\n\n\ndef bridge_graph(weight=0.2):\n    A = np.zeros((6, 6))\n    for i, j in [(0, 1), (0, 2), (1, 2), (3, 4), (3, 5), (4, 5)]:\n        A[i, j] = A[j, i] = 1.0\n    A[2, 3] = A[3, 2] = weight\n    return A\n\n\nA = bridge_graph()\nd = A.sum(axis=1)\nL = np.diag(d) - A\n\nx = np.array([1.6, 0.4, 1.0, -1.6, -0.4, -1.0])\nvalues, U = np.linalg.eigh(L)\nc = U.T @ x\nheat = U @ (np.exp(-values) * c)\nridge = np.linalg.solve(np.eye(6) + L, x)\nprojected = U[:, :2] @ (U[:, :2].T @ x)\nprint(\"heat:\", np.round(heat, 4).tolist())\nprint(\"ridge:\", np.round(ridge, 4).tolist())\nprint(\"first-two projection:\", np.round(projected, 4).tolist())\nprint(\"input energy:\", round(float(x @ L @ x), 6))\nprint(\"heat energy:\", round(float(heat @ L @ heat), 6))\nprint(\"discarded projection energy:\", round(float(c[2:] @ c[2:]), 6))\nprint(\n    \"projection squared change:\",\n    round(float(np.sum((x - projected) ** 2)), 6),\n)\nprint(\"ridge normal equation:\", bool(np.allclose((np.eye(6) + L) @ ridge, x)))",
@@ -44,6 +50,7 @@ export const spectralGraphExamples = [
   },
   {
     "id": "walk",
+    "file": "ordinary_lazy_random_walk.py",
     "title": "Expose the periodic mode and remove it with laziness",
     "question": "The graph is connected in both cases. Which operator eigenvalue explains the different limit?",
     "code": "import numpy as np\n\nP = np.array([[0.0, 1.0], [1.0, 0.0]])\nlazy = (np.eye(2) + P) / 2\nfor name, transition in [(\"ordinary\", P), (\"lazy\", lazy)]:\n    mass = np.array([1.0, 0.0])  # row probability vector\n    path = [mass.tolist()]\n    for _ in range(4):\n        mass = mass @ transition\n        path.append(mass.tolist())\n    print(name, path)\n    print(\"transition eigenvalues:\", np.linalg.eigvalsh(transition).tolist())",
@@ -51,6 +58,7 @@ export const spectralGraphExamples = [
   },
   {
     "id": "resistance",
+    "file": "grounded_effective_resistance.py",
     "title": "Check spectral resistance against a grounded circuit solve",
     "question": "Why do the two endpoint choices below have very different resistance, even though both use edges in the same graph?",
     "code": "import numpy as np\n\n\ndef bridge_graph(weight=0.2):\n    A = np.zeros((6, 6))\n    for i, j in [(0, 1), (0, 2), (1, 2), (3, 4), (3, 5), (4, 5)]:\n        A[i, j] = A[j, i] = 1.0\n    A[2, 3] = A[3, 2] = weight\n    return A\n\n\nA = bridge_graph()\nd = A.sum(axis=1)\nL = np.diag(d) - A\n\n\ndef effective_resistance(L, a, b):\n    n = len(L)\n    if a == b:\n        return 0.0\n    values, U = np.linalg.eigh(L)\n    if np.count_nonzero(values < 1e-10) != 1:\n        raise ValueError(\n            \"This helper requires one connected component at its numerical tolerance\"\n        )\n    return float(np.sum((U[a, 1:] - U[b, 1:]) ** 2 / values[1:]))\n\n\ndef grounded_resistance(L, a, b):\n    keep = [i for i in range(len(L)) if i != b]\n    injection = np.zeros(len(L))\n    injection[a] = 1.0\n    injection[b] = -1.0\n    potentials = np.zeros(len(L))\n    potentials[keep] = np.linalg.solve(L[np.ix_(keep, keep)], injection[keep])\n    return float(potentials[a] - potentials[b])\n\n\nfor a, b in [(2, 3), (0, 1), (0, 5)]:\n    spectral = effective_resistance(L, a, b)\n    grounded = grounded_resistance(L, a, b)\n    print(\"ABCDEF\"[a] + \"ABCDEF\"[b], round(spectral, 6), round(grounded, 6))",
@@ -58,6 +66,7 @@ export const spectralGraphExamples = [
   },
   {
     "id": "rotation",
+    "file": "repeated_eigenspace_rotation.py",
     "title": "Rotate a repeated eigenspace without changing a scalar filter",
     "question": "Why can one retained direction change while the whole repeated block remains the same operator?",
     "code": "import numpy as np\n\n# Unit-weight triangle: eigenvalues 0,3,3.\nL = np.array([[2.0, -1.0, -1.0], [-1.0, 2.0, -1.0], [-1.0, -1.0, 2.0]])\nvalues, U = np.linalg.eigh(L)\nB = U[:, 1:]\ntheta = np.pi / 4\nR = np.array(\n    [[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]]\n)\nrotated = B @ R\nx = np.array([1.0, 0.0, 0.0])\none = B[:, 0] * float(B[:, 0] @ x)\nother = rotated[:, 0] * float(rotated[:, 0] @ x)\nprint(\n    \"same repeated-block projector:\",\n    bool(np.allclose(B @ B.T, rotated @ rotated.T)),\n)\nprint(\"one-direction outputs equal:\", bool(np.allclose(one, other)))\nheat = np.exp(-3) * B @ B.T\nheat_rotated = np.exp(-3) * rotated @ rotated.T\nprint(\n    \"same repeated-block heat operator:\",\n    bool(np.allclose(heat, heat_rotated)),\n)\nprint(\n    \"rotated eigenpair residual:\", bool(np.allclose(L @ rotated, 3 * rotated))\n)",

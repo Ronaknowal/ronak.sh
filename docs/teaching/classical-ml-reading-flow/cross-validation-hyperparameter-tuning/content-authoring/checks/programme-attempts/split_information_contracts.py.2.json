@@ -1,0 +1,40 @@
+{
+  "schema": "classical21-new-programme-execution/v1",
+  "at": "2026-10-09T18:33:52.592082+00:00",
+  "source": {
+    "file": "split_information_contracts.py",
+    "bytes": 5606,
+    "sha256": "a6843279c834626da46578d8b9dfa2ff3ea35ae682bb34ca9e2bf7f73fad8496"
+  },
+  "python": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+  "command": [
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\content-authoring\\programmes\\split_information_contracts.py"
+  ],
+  "dependencies": [
+    {
+      "file": "fold_fitted_pipeline.py",
+      "bytes": 11262,
+      "sha256": "e26e2d319ed6783319e394c49b0137d8eed6d14469ec1b5ad9b431797a95ebfa"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1"
+  },
+  "returncode": 0,
+  "stdout": {
+    "file": "split_information_contracts.py.2.stdout.txt",
+    "bytes": 1720,
+    "sha256": "497b341268bf6c875e5bd9589fc9cc18b3683590569ab4dabdb7fb58d9c51dc7"
+  },
+  "stderr": {
+    "file": "split_information_contracts.py.2.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "One new constructed educational programme; no retained science or checker execution"
+}

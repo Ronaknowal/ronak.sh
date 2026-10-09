@@ -1,0 +1,53 @@
+.visualization-pipeline {
+  margin: 24px 0;
+  padding: 18px;
+  border: 1px solid #444;
+  background: #111;
+}
+.visualization-pipeline figcaption {
+  font-weight: 600;
+}
+.visualization-lanes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+.visualization-lanes > div {
+  border-left: 2px solid #e4b752;
+  padding-left: 12px;
+  min-width: 0;
+}
+.visualization-chart,
+.visualization-ruler {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+}
+.visualization-chart text,
+.visualization-ruler text {
+  fill: #ddd;
+  font-size: 16px;
+}
+.visualization-wine-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 24px;
+}
+.visualization-wine-chart {
+  width: 100%;
+  max-width: 336px;
+  height: auto;
+  display: block;
+}
+.visualization-wine-chart text {
+  fill: #ddd;
+  font-size: 17px;
+}
+@media (max-width: 480px) {
+  .visualization-chart text,
+  .visualization-ruler text {
+    font-size: 22px;
+  }
+}

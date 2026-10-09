@@ -1,0 +1,332 @@
+{
+  "w": 390,
+  "root": {
+    "tag": "HTML",
+    "cls": "",
+    "x": 0,
+    "w": 390,
+    "sw": 399,
+    "cw": 390,
+    "ox": "visible",
+    "oy": "visible",
+    "text": "Mutual information private reader  \n  \nLearn→Mathematical & Statistical Foundations→Mutual"
+  },
+  "body": {
+    "tag": "BODY",
+    "cls": "",
+    "x": 0,
+    "w": 390,
+    "sw": 399,
+    "cw": 390,
+    "ox": "hidden",
+    "oy": "auto",
+    "text": "Learn→Mathematical & Statistical Foundations→Mutual Information & Information BottleneckMo"
+  },
+  "nodes": [
+    {
+      "tag": "DIV",
+      "cls": "",
+      "x": 0,
+      "w": 390,
+      "sw": 399,
+      "cw": 390,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Learn→Mathematical & Statistical Foundations→Mutual Information & Information BottleneckMo"
+    },
+    {
+      "tag": "DIV",
+      "cls": "learn-shell",
+      "x": 0,
+      "w": 390,
+      "sw": 399,
+      "cw": 390,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Learn→Mathematical & Statistical Foundations→Mutual Information & Information BottleneckMo"
+    },
+    {
+      "tag": "MAIN",
+      "cls": "reader-content",
+      "x": 0,
+      "w": 390,
+      "sw": 399,
+      "cw": 390,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "Learn→Mathematical & Statistical Foundations→Mutual Information & Information BottleneckMo"
+    },
+    {
+      "tag": "DIV",
+      "cls": "reader-article",
+      "x": 20,
+      "w": 350,
+      "sw": 379,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+    },
+    {
+      "tag": "DIV",
+      "cls": "lesson-pilot lesson-flow information-reading",
+      "x": 20,
+      "w": 350,
+      "sw": 379,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 29.59375,
+      "w": 330.8125,
+      "sw": 337,
+      "cw": 331,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 593,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I(X;Y)=H(Y)−H(Y∣X),H(Y∣X)=∑xp(x)H(Y∣X=x).I(X;Y)=H(Y)-H(Y\\mid X),\\qquad\nH(Y\\mid X)=\\sum_x p"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 29.59375,
+      "w": 330.8125,
+      "sw": 337,
+      "cw": 331,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 363,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "ı(x;y)=log⁡2p(x,y)−log⁡2p(x)−log⁡2p(y).\\imath(x;y)=\\log_2 p(x,y)-\\log_2 p(x)-\\log_2 p(y)."
+    },
+    {
+      "tag": "P",
+      "cls": "",
+      "x": 20,
+      "w": 350,
+      "sw": 379,
+      "cw": 350,
+      "ox": "visible",
+      "oy": "visible",
+      "text": "A negative value says this particular pair occurs less often than the independent referenc"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 29.59375,
+      "w": 330.8125,
+      "sw": 337,
+      "cw": 331,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 29.59375,
+      "w": 330.8125,
+      "sw": 337,
+      "cw": 331,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 366,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I(A;Y∣B)=∑bp(b)DKL(PAY∣b∥PA∣bPY∣b).I(A;Y\\mid B)=\\sum_b p(b)D_{\\rm KL}\\bigl(P_{AY\\mid b}\\Ve"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 406,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "p(x,y,z)=p(x,y)q(z∣x)=p(x)p(y∣x)q(z∣x).p(x,y,z)=p(x,y)q(z\\mid x)=p(x)p(y\\mid x)q(z\\mid x)."
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 468,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "I(Y;X,Z)=I(Y;X)+I(Y;Z∣X)=I(Y;X),I(Y;X,Z)=I(Y;Z)+I(Y;X∣Z),I(Y;X)−I(Y;Z)=I(Y;X∣Z)≥0.\\begin{a"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ir-ruler-track",
+      "x": 29.59375,
+      "w": 330.8125,
+      "sw": 337,
+      "cw": 331,
+      "ox": "visible",
+      "oy": "visible",
+      "text": ""
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 591,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "J(q)=I(X;Z)−βI(Y;Z),β≥0,p(x,y,z)=p(x,y)q(z∣x).J(q)=I(X;Z)-\\beta I(Y;Z),\\qquad \\beta\\geq0,\n"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 485,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "p(x∣z)=p(x)q(z∣x)p(z),p(y∣z)=∑xp(x∣z)p(y∣x).p(x\\mid z)=\\frac{p(x)q(z\\mid x)}{p(z)},\\qquad\n"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 473,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "az(x)=p(z)exp⁡[−βd(x,z)],qnew(z∣x)=az(x)∑jaj(x).a_z(x)=p(z)\\exp[-\\beta d(x,z)],\\qquad\nq_{\\"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 748,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "Dw(x,z)=DKL(p(y∣x)∥w(y∣z)),F(q,r,w)=Ep(x)q(z∣x)[log⁡q(z∣x)r(z)+βDw(x,z)].D_w(x,z)=D_{\\rm K"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 406,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "F(q,r,w)=J(q)+βI(X;Y)+DKL(p(z)∥r(z))+β∑zp(z)DKL(p(y∣z)∥w(y∣z)).\\begin{aligned}\nF(q,r,w)={}"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 357,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "U=I(X;Z)+DKL(p(z)∥r(z))≥I(X;Z).U=I(X;Z)+D_{\\rm KL}(p(z)\\Vert r(z))\\geq I(X;Z).U=I(X;Z)+DKL"
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 357,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "L=H(Y)−C=I(Y;Z)−Gs≤I(Y;Z).L=H(Y)-C=I(Y;Z)-G_s\\leq I(Y;Z).L=H(Y)−C=I(Y;Z)−Gs​≤I(Y;Z)."
+    },
+    {
+      "tag": "SPAN",
+      "cls": "katex-display",
+      "x": 20,
+      "w": 350,
+      "sw": 435,
+      "cw": 350,
+      "ox": "auto",
+      "oy": "hidden",
+      "text": "DKL(q(z∣x)∥N(0,I))=12∑j(μj2+vj−1−log⁡vj).D_{\\rm KL}(q(z\\mid x)\\Vert\\mathcal N(0,I))\n=\\tfra"
+    }
+  ],
+  "text": [
+    {
+      "text": "A negative value says this particular pair occurs less often than the independent reference predicts",
+      "right": 399.375,
+      "chain": [
+        {
+          "tag": "P",
+          "cls": "",
+          "x": 20,
+          "w": 350,
+          "sw": 379,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "A negative value says this particular pair occurs less often than the independent referenc"
+        },
+        {
+          "tag": "DIV",
+          "cls": "lesson-pilot lesson-flow information-reading",
+          "x": 20,
+          "w": 350,
+          "sw": 379,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        },
+        {
+          "tag": "DIV",
+          "cls": "reader-article",
+          "x": 20,
+          "w": 350,
+          "sw": 379,
+          "cw": 350,
+          "ox": "visible",
+          "oy": "visible",
+          "text": "1. Measure the value of an observationIn the preceding Entropy example, two bits agreed 90"
+        }
+      ]
+    }
+  ]
+}

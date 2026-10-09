@@ -1,381 +1,245 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { NeuralLab, NeuralSelect, NeuralTable, NeuralPlot as BaseNeuralPlot, formatNeural as f } from './NeuralLessonElements.jsx';
-import { NeuralNumber } from './NeuralNumberControl.jsx';
-import { BlockTaskDiagrams, BlockWriteStacks, BlockSystemsFigure, BlockPairedScores } from './TransformerBlockMechanisms.jsx';
-import { gatedFeedforwardTrace, blockCosts, blockDefault, feedforwardTrace, movementBlockForward, normalizationProbe, traceBlock } from '../../data/transformer-block-models.js';
+import { NeuralTable, NeuralPlot as BasePlot } from './NeuralLessonElements.jsx';
+import { FlowLab, FlowControls, FlowSlider, FlowChoice, FlowReadout, flowNumber as f } from './LessonFlow.jsx';
+import { BlockArray, BlockFeatureRow, BlockWorkspaceDrawing, BlockCommunicationDrawing, BlockStackDrawing, BlockPlacementDrawing, BlockNormalizerDrawing, BlockAxisDrawing, BlockFeedforwardDrawing, BlockGateDrawing, BlockMovementArchitectureDrawing, BlockProbeDrawing, BlockGradientDirectionsDrawing, BlockDerivativeRoutesDrawing, BlockVarianceDrawing, BlockTaskDrawing, BlockCopyDrawing, BlockVariantsDrawing, BlockParameterDrawing, BlockMemoryDrawing, BlockSystemsDrawing, blockVector as vector } from './TransformerBlockFlowFigures.jsx';
+import { gatedFeedforwardTrace, blockCosts, blockDefault, feedforwardTrace, movementBlockForward, movementBlockForwardWithMasks, normalizationProbe, traceBlock } from '../../data/transformer-block-models.js';
 import { layerNorm, mean, maxDifference } from '../../data/sequence-tensor-operations.js';
 import './transformer-block-labs.css';
-import './neural-lesson-neutral.css';
-import { BlockCommunicationDiagram, BlockWiringDiagram, BlockVariantDependencies } from './TransformerBlockDiagrams.jsx';
+
+export { BlockWorkspaceDrawing, BlockCommunicationDrawing, BlockStackDrawing, BlockAxisDrawing, BlockMovementArchitectureDrawing, BlockGradientDirectionsDrawing, BlockDerivativeRoutesDrawing, BlockVarianceDrawing, BlockCopyDrawing, BlockParameterDrawing, BlockMemoryDrawing };
+export const BlockCommunicationFigure = BlockCommunicationDrawing;
+export const BlockTaskFigure = BlockTaskDrawing;
+export const BlockVariantsFigure = BlockVariantsDrawing;
+export const BlockSystemsFigure = BlockSystemsDrawing;
 const base = '/learn-code/transformer-block-architecture/';
-const colors = ['#e6b854', '#eeeeee', '#b8a0d2', '#999999'];
-function NeuralPlot(props) {
-  return <div className="block-plot-scroll" role="region" aria-label={props.title} tabIndex={0}><div className="block-plot-size"><BaseNeuralPlot {...props} /></div></div>;
-}
-const vector = values => `[${values.map(value => f(value, 5)).join(', ')}]`;
-function VectorEditor({
-  label,
-  values,
-  onChange,
-  min = -10,
-  max = 10
-}) {
-  return <fieldset className="block-vector-editor"><legend>{label}</legend><div className="neural-controls">{values.map((value, i) => <NeuralNumber key={i} label={`${label} ${i + 1}`} value={value} min={min} max={max} range={false} onChange={next => onChange(values.map((item, j) => i === j ? next : item))} />)}</div></fieldset>;
-}
-function SignedBars({
-  title,
-  rows
-}) {
-  const extent = Math.max(.01, ...rows.flatMap(row => row.values).map(Math.abs));
-  return <figure className="block-bars"><figcaption>{title}</figcaption>{rows.map((row, index) => <div key={row.label}><h4>{row.label}</h4><div className="block-bar-grid">{row.values.map((value, i) => <div className="block-bar-cell" key={i}><span>{i + 1}</span><div className="block-bar-track"><i style={{
-              left: `${value < 0 ? 50 + 50 * value / extent : 50}%`,
-              width: `${50 * Math.abs(value) / extent}%`,
-              background: colors[index % colors.length]
-            }} /></div><strong>{f(value, 4)}</strong></div>)}</div></div>)}<p>Shared scale −{f(extent, 3)} to +{f(extent, 3)}; center line is zero. Bars and printed signs show direction.</p></figure>;
-}
+const colors = ['#be9cf5', '#e4b752', '#77cddb'];
+function Plot(props) { return <div className="block-plot-scroll" role="region" aria-label={props.title} tabIndex={0}><div className="block-plot-size"><BasePlot {...props} /></div></div>; }
 function useAsset(file) {
-  const [resource, setResource] = useState({
-    data: null,
-    error: null
-  });
-  const [attempt, setAttempt] = useState(0);
-  const [visible, setVisible] = useState(false);
+  const [resource, setResource] = useState({ data: null, error: null });
+  const [attempt, setAttempt] = useState(0), [visible, setVisible] = useState(false);
   const container = useRef(null);
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) {
-        setVisible(true);
-        observer.disconnect();
-      }
-    }, {
-      rootMargin: '240px'
-    });
+    const observer = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { setVisible(true); observer.disconnect(); } }, { rootMargin: '240px' });
     if (container.current) observer.observe(container.current);
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
     if (!visible) return undefined;
     const controller = new AbortController();
-    setResource({
-      data: null,
-      error: null
-    });
-    fetch(base + file, {
-      signal: controller.signal
-    }).then(response => {
+    setResource({ data: null, error: null });
+    fetch(base + file, { signal: controller.signal }).then(response => {
       if (!response.ok) throw new Error('The saved experiment could not be loaded.');
       return response.json();
-    }).then(data => {
-      if (!controller.signal.aborted) setResource({
-        data,
-        error: null
-      });
-    }).catch(error => {
-      if (!controller.signal.aborted) setResource({
-        data: null,
-        error: error.message
-      });
-    });
+    }).then(data => { if (!controller.signal.aborted) setResource({ data, error: null }); }).catch(error => { if (!controller.signal.aborted) setResource({ data: null, error: error.message }); });
     return () => controller.abort();
   }, [file, attempt, visible]);
-  return {
-    ...resource,
-    container,
-    retry: () => setAttempt(value => value + 1)
-  };
+  return { ...resource, container, retry: () => setAttempt(value => value + 1) };
 }
-function ResourceState({
-  resource,
-  children
-}) {
-  if (resource.error) return <p role="alert">{resource.error} <button onClick={resource.retry}>Retry experiment</button></p>;
-  if (!resource.data) return <p role="status">Loading measured experiment…</p>;
+function ResourceState({ resource, children }) {
+  if (resource.error) return <div role="alert"><p>{resource.error}</p><FlowControls><button type="button" onClick={resource.retry}>Retry experiment</button></FlowControls></div>;
+  if (!resource.data) return <p role="status">Loading the measured experiment when it reaches this part of the page…</p>;
   return children(resource.data);
 }
-export function BlockCommunicationFigure() {
-  return <figure className="block-circuit"><figcaption>One representation per position; a shared feature function</figcaption><BlockCommunicationDiagram /><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Read the operations in each lane</h4><div className="block-lanes">{['Position 1', 'Position 2', 'Position 3'].map((label, i) => <div key={label}><strong>{label}</strong><span>4 input features</span><span>↘ ↔ ↗<br />reads permitted positions</span><span>+ saved row</span><span>same FFN<br />4 → f → 4</span><span>+ saved row</span><strong>4 output features</strong></div>)}</div></section><p>Sequence axis: the three rows. Feature axis: columns within each row. Attention mixes positions; the FFN changes each contextual row separately with shared parameters. Entering and leaving shape: (B,L,d).</p></figure>;
+function PairTrace({ settings, position = 0 }) {
+  return <div className="block-flow-pair">{[true, false].map(pre => {
+    const trace = traceBlock({ ...settings, pre });
+    const selected = Object.fromEntries(Object.entries(trace).map(([key, values]) => [key, values[position]]));
+    return <BlockPlacementDrawing key={String(pre)} pre={pre} trace={selected} input={settings.inputs[position]} branch={settings.branch} />;
+  })}</div>;
 }
 export function BlockWiringFigure() {
-  const [zero, setZero] = useState(false);
-  const fixture = blockDefault();
-  return <figure className="block-circuit"><figcaption>Where the bypass meets normalization</figcaption><div className="block-two">{[true, false].map(pre => <section key={String(pre)}><h4>{pre ? 'Pre-norm' : 'Post-norm'}</h4><div className="block-diagram-scroll" role="region" aria-label={pre ? "Pre-norm wiring" : "Post-norm wiring"} tabIndex={0}><BlockWiringDiagram pre={pre} zero={zero} /></div><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Read the exact operation sequence</h4><ol className="block-flow"><li><strong>X</strong> saved on bypass</li><li>{pre ? 'Norm₁(X) → Attention' : 'Attention(X)'} → {zero ? '0 update' : 'U'}</li><li>X + U {pre ? '= Z' : '→ Norm₁ → Z'}</li><li>{pre ? 'Norm₂(Z) → FFN' : 'FFN(Z)'} → {zero ? '0 update' : 'V'}</li><li>Z + V {pre ? '= Y' : '→ Norm₂ → Y'}</li></ol></section><p>First output row: {vector(traceBlock({
-            ...fixture,
-            pre,
-            branch: zero ? 0 : 1
-          }).output[0])}</p></section>)}</div><button aria-pressed={zero} onClick={() => setZero(value => !value)}>{zero ? 'Restore branch updates' : 'Set both branch updates to zero'}</button><p>The bypass starts at X, then at the already updated Z. With zero updates, only pre-norm preserves X exactly.</p></figure>;
+  const [branch, setBranch] = useState(1);
+  const settings = { ...blockDefault(), branch };
+  const pre = traceBlock({ ...settings, pre: true }), post = traceBlock({ ...settings, pre: false });
+  return <FlowLab id="block-wiring" label="Compare bypass and normalization placement">
+    <PairTrace settings={settings} />
+    <FlowControls><FlowSlider name="Both learned update multipliers λ" value={branch} min={0} max={1} step={.05} onChange={setBranch} /></FlowControls>
+    <FlowReadout data-result="wiring">With λ={f(branch)}, pre-norm returns {vector(pre.output[0])}; post-norm returns {vector(post.output[0])}. The saved X and Z bypasses are never multiplied by λ.</FlowReadout>
+  </FlowLab>;
 }
 export function BlockNormalizationLab() {
-  const [input, setInput] = useState([1, 2, 5, 8]);
-  const [offset, setOffset] = useState(5),
-    [multiplier, setMultiplier] = useState(1),
-    [epsilon, setEpsilon] = useState(1e-5);
-  const changed = input.map(value => multiplier * value + offset);
-  const denominators = row => {
-    const variance = mean(row.map(x => (x - mean(row)) ** 2));
-    const squareMean = mean(row.map(x => x * x));
-    return { layer: Math.sqrt(variance + epsilon), rms: Math.sqrt(squareMean + epsilon) };
-  };
-  const originalDenominator = denominators(input), changedDenominator = denominators(changed);
-  const rms = row => row.map(value => value / Math.sqrt(mean(row.map(item => item * item)) + epsilon));
-  const lnOriginal = layerNorm(input, [], [], epsilon),
-    ln = layerNorm(changed, [], [], epsilon);
-  const rmsOriginal = rms(input),
-    rmsChanged = rms(changed);
-  return <NeuralLab id="block-normalization" title="Choose the normalizer’s reference frame">
-    <p>LayerNorm measures spread around the row’s mean. RMSNorm measures distance from zero. Edit one feature, then apply the common shift and scale.</p>
-    <VectorEditor label="Original feature" values={input} onChange={setInput} />
-    <div className="neural-controls"><NeuralNumber label="Common offset" value={offset} min={-10} max={10} onChange={setOffset} /><NeuralNumber label="Common scale" value={multiplier} min={0} max={4} onChange={setMultiplier} /><NeuralNumber label="Normalization epsilon" value={epsilon} min={1e-8} max={.1} range={false} onChange={setEpsilon} /></div>
-    <SignedBars title="Original and transformed results" rows={[{
-      label: 'Original input',
-      values: input
-    }, {
-      label: 'Transformed input',
-      values: changed
-    }, {label: 'Original deviations from mean', values: input.map(x => x - mean(input))}, {label: 'Transformed deviations from mean', values: changed.map(x => x - mean(changed))}]} />
-    <SignedBars title="Same gain 1; LayerNorm offset 0" rows={[{
-      label: 'Original LayerNorm',
-      values: lnOriginal
-    }, {
-      label: 'Transformed LayerNorm',
-      values: ln
-    }, {
-      label: 'Original RMSNorm',
-      values: rmsOriginal
-    }, {
-      label: 'Transformed RMSNorm',
-      values: rmsChanged
-    }]} />
-    <NeuralTable caption="The actual denominators and lengths" headers={['Quantity', 'Original', 'Transformed']} rows={[['Mean', f(mean(input)), f(mean(changed))], ['Mean squared deviation', f(mean(input.map(value => (value - mean(input)) ** 2))), f(mean(changed.map(value => (value - mean(changed)) ** 2)))], ['Mean square from zero', f(mean(input.map(value => value * value))), f(mean(changed.map(value => value * value)))], ['LayerNorm denominator: sqrt(variance + epsilon)', f(originalDenominator.layer), f(changedDenominator.layer)], ['RMSNorm denominator: sqrt(mean square + epsilon)', f(originalDenominator.rms), f(changedDenominator.rms)], ['LN L2 length', f(Math.hypot(...lnOriginal)), f(Math.hypot(...ln))], ['LN RMS', f(Math.hypot(...lnOriginal) / 2), f(Math.hypot(...ln) / 2)]]} />
-    <p data-result="normalization">Maximum LayerNorm change {f(maxDifference(lnOriginal, ln))}; RMSNorm change {f(maxDifference(rmsOriginal, rmsChanged))}. An offset is removed only by centering.</p>
-    <div className="neural-buttons"><button onClick={() => {
-        setInput([-1, -1, 1, 1]);
-        setOffset(0);
-        setMultiplier(1);
-      }}>Zero-mean comparison</button><button onClick={() => {
-        setInput([1, 2, 5, 8]);
-        setOffset(5);
-        setMultiplier(1);
-        setEpsilon(1e-5);
-      }}>Reset normalizers</button></div>
-  </NeuralLab>;
+  const [first, setFirst] = useState(1), [offset, setOffset] = useState(0), [scale, setScale] = useState(1);
+  const input = [first, 2, 5, 8], changed = input.map(x => scale * x + offset), epsilon = 1e-5;
+  const rms = row => row.map(x => x / Math.sqrt(mean(row.map(v => v * v)) + epsilon));
+  return <FlowLab id="block-normalization" label="Compare reference frames after a common shift and scale">
+    <BlockArray label="Before the common transformation" values={input} role="input" />
+    <BlockNormalizerDrawing input={changed} epsilon={epsilon} />
+    <FlowControls><FlowSlider name="Original first feature" value={first} min={-4} max={8} step={.25} onChange={setFirst} /><FlowSlider name="Common offset added after scaling" value={offset} min={-10} max={10} step={.25} onChange={setOffset} /><FlowSlider name="Common multiplier" value={scale} min={-2} max={4} step={.1} onChange={setScale} /></FlowControls>
+    <FlowReadout data-result="normalization">The transformed input is {vector(changed)}. Maximum change from original LN: {f(maxDifference(layerNorm(input, [], [], epsilon), layerNorm(changed, [], [], epsilon)))}; from original RMSNorm: {f(maxDifference(rms(input), rms(changed)))}. Centering removes a common offset; rescaling alone does not.</FlowReadout>
+  </FlowLab>;
+}
+export function BlockNormalizationCases() {
+  return <div>{[[[-1, -1, 1, 1], 'Zero-mean input: identical denominators and outputs'], [[2, 2, 2, 2], 'Constant nonzero input: centered distances vanish'], [[0, 0, 0, 0], 'Zero input: epsilon keeps both denominators positive']].map(([input, label]) => <div key={label}><p>{label}; gains one, offsets zero, ε=10⁻⁵.</p><BlockNormalizerDrawing input={input} /></div>)}</div>;
+}
+export function BlockEpsilonLab() {
+  const [spread, setSpread] = useState(.01), [exponent, setExponent] = useState(-5);
+  const epsilon = 10 ** exponent, input = [-3, -1, 1, 3].map(x => 2 + spread * x);
+  const normalized = layerNorm(input, [], [], epsilon);
+  return <FlowLab id="block-epsilon" label="What epsilon does near a constant row"><BlockNormalizerDrawing input={input} epsilon={epsilon} />
+    <FlowControls><FlowSlider name="Spread around the constant 2" value={spread} min={0} max={.1} step={.001} onChange={setSpread} /><FlowSlider name="Epsilon exponent: ε = 10 to this power" value={exponent} min={-8} max={-1} step={1} onChange={setExponent} /></FlowControls>
+    <FlowReadout data-result="epsilon">At spread {f(spread)} and ε={epsilon.toExponential(0)}, the centered output has L2 length {f(Math.hypot(...normalized))}. At zero spread it is zero; a positive spread is divided by √(5 × spread² + ε).</FlowReadout>
+  </FlowLab>;
 }
 export function BlockFeedforwardLab() {
-  const fixture = blockDefault();
-  const [input, setInput] = useState([1, 2, -1, -2]),
-    [up, setUp] = useState(fixture.up),
-    [down, setDown] = useState(fixture.down);
-  const [activation, setActivation] = useState('relu');
-  const [second, setSecond] = useState([-1, 0, 1, 0]);
-  const [gateMatrix, setGateMatrix] = useState([[1,0,0],[0,-1,0],[0,0,1],[0,0,0]]);
-  const [detector,setDetector] = useState(0);
-  const result = feedforwardTrace(input, up, down, activation);
-  const gated = gatedFeedforwardTrace(input,up,gateMatrix,down);
-  return <NeuralLab id="block-feature-write" title="A response reads a pattern, then writes a direction">
-    <VectorEditor label="Direct FFN input" values={input} onChange={setInput} />
-    <NeuralSelect label="Activation" value={activation} onChange={setActivation} options={['relu', 'gelu', 'silu'].map(name => [name, name.toUpperCase()])} />
-    <SignedBars title="The feature circuit" rows={[{
-      label: 'Dot-product responses',
-      values: result.responses
-    }, {
-      label: 'Activated responses',
-      values: result.hidden
-    }, {
-      label: 'Written update',
-      values: result.output
-    }]} />
-    <VectorEditor label="Second position direct input" values={second} onChange={setSecond} />
-    <p>Second position update under the same matrices: {vector(feedforwardTrace(second, up, down, activation).output)}. Editing this position alone leaves the first position’s direct update unchanged. Editing a shared matrix can affect both.</p>
-    <NeuralSelect label="Inspect hidden detector and write row" value={detector} onChange={v=>setDetector(Number(v))} options={result.hidden.map((_,i)=>[i,`Hidden coordinate ${i+1}`])} />
-    <p>Detector {detector+1}: input {vector(input)} dotted with up column {vector(up.map(row=>row[detector]))} gives {f(result.responses[detector])}; {activation.toUpperCase()} gives {f(result.hidden[detector])}. Multiply the entire down row {vector(down[detector])} by this scalar to obtain {vector(result.contributions[detector])}.</p>
-    <BlockWriteStacks contributions={result.contributions} output={result.output} selected={detector} />
-    <NeuralTable caption="Signed writes sum to the output" headers={['Hidden response', 'Activation', 'Write contribution']} rows={result.contributions.map((row, i) => [i + 1, f(result.hidden[i]), vector(row)])} />
-    <details><summary>Edit the detector and write matrices</summary>{[['Up matrix input row', up, setUp], ['Down matrix hidden row', down, setDown]].map(([label, matrix, setter]) => <div key={label}>{matrix.map((row, i) => <VectorEditor key={i} label={`${label} ${i + 1}`} values={row} onChange={next => setter(matrix.map((other, j) => i === j ? next : other))} min={-3} max={3} />)}</div>)}</details>
-    <h4>A gate reads the same current input through a second projection</h4>
-    <p>The up matrix supplies value responses u; the gate matrix supplies logits g. Each hidden coordinate becomes u × SiLU(g), then the same down rows write the result. No bias is used in this small circuit.</p>
-    <details><summary>Edit the gate projection</summary>{gateMatrix.map((row,i)=><VectorEditor key={i} label={`Gate matrix input row ${i+1}`} values={row} min={-3} max={3} onChange={next=>setGateMatrix(previous=>previous.map((r,j)=>i===j?next:r))} />)}</details>
-    <NeuralTable caption="Current input through all three SwiGLU maps" headers={['Hidden coordinate','u = x·up column','g = x·gate column','SiLU(g)','u × SiLU(g)']} rows={gated.hidden.map((value,i)=>[i+1,f(gated.value[i]),f(gated.gateLogits[i]),f(gated.gateResponse[i]),f(value)])} />
-    <BlockWriteStacks contributions={gated.contributions} output={gated.output} selected={detector} />
-    <p>Current gated output {vector(gated.output)}. A negative SiLU response can reverse a write; it is not a probability.</p>
-    <button onClick={() => {
-      setInput([1, 2, -1, -2]);
-      setSecond([-1, 0, 1, 0]);
-      setUp(fixture.up);
-      setDown(fixture.down);
-      setActivation('relu');
-      setGateMatrix([[1,0,0],[0,-1,0],[0,0,1],[0,0,0]]);
-      setDetector(0);
-    }}>Reset feature circuit</button>
-  </NeuralLab>;
+  const [first, setFirst] = useState(1), [detector, setDetector] = useState(1), [write, setWrite] = useState(.5);
+  const fixture = blockDefault(), input = [first, 2, -1, -2];
+  const up = fixture.up.map((row, i) => row.map((value, j) => i === 0 && j === 0 ? detector : value));
+  const down = fixture.down.map((row, i) => row.map((value, j) => i === 2 && j === 2 ? write : value));
+  const result = feedforwardTrace(input, up, down);
+  return <FlowLab id="block-feature-write" label="Read a detector and follow its weighted write"><BlockFeedforwardDrawing input={input} up={up} down={down} />
+    <FlowControls><FlowSlider name="Input feature 1" value={first} min={-3} max={3} step={.25} onChange={setFirst} /><FlowSlider name="Detector 1's coefficient on input 1" value={detector} min={-2} max={2} step={.25} onChange={setDetector} /><FlowSlider name="Write 3's coefficient on output 3" value={write} min={-2} max={2} step={.25} onChange={setWrite} /></FlowControls>
+    <FlowReadout data-result="ffn">Responses {vector(result.responses)} become {vector(result.hidden)} under ReLU; the three weighted writes sum to {vector(result.output)}.</FlowReadout>
+  </FlowLab>;
+}
+export function BlockLocalityLab() {
+  const [first, setFirst] = useState(-1), fixture = blockDefault();
+  const fixed = feedforwardTrace([1, 2, -1, -2], fixture.up, fixture.down), changed = feedforwardTrace([first, 0, 1, 0], fixture.up, fixture.down);
+  return <FlowLab id="block-locality" label="Shared parameters do not mix direct input rows">
+    <BlockArray label="Two direct FFN input rows" values={[[1, 2, -1, -2], [first, 0, 1, 0]]} role="input" /><BlockArray label="Shared FFN's two written updates" values={[fixed.output, changed.output]} />
+    <FlowControls><FlowSlider name="Second row's first feature" value={first} min={-3} max={3} step={.25} onChange={setFirst} /></FlowControls>
+    <FlowReadout data-result="locality">The second update is {vector(changed.output)}. The first remains {vector(fixed.output)} because no attention operation occurs between these direct inputs and the FFN.</FlowReadout>
+  </FlowLab>;
+}
+export function BlockActivationLab() {
+  const [response, setResponse] = useState(-1), fixture = blockDefault();
+  const names = ['relu', 'gelu', 'silu'];
+  const activated = names.map(name => feedforwardTrace([response, 0, 0, 0], fixture.up, fixture.down, name).hidden[0]);
+  return <FlowLab id="block-activation" label="Compare three activation rules for one detector response"><BlockArray label="The same response through each activation" values={[[response, ...activated]]} columns={['response', 'ReLU', 'GELU', 'SiLU']} />
+    <FlowControls><FlowSlider name="One detector's response before activation" value={response} min={-4} max={4} step={.1} onChange={setResponse} /></FlowControls>
+    <FlowReadout data-result="activation">At response {f(response)}, ReLU gives {f(activated[0])}, GELU {f(activated[1])}, and SiLU {f(activated[2])}; the last two can retain a small negative write.</FlowReadout>
+  </FlowLab>;
+}
+export function BlockGateLab() {
+  const [first, setFirst] = useState(1), [gateCoefficient, setGateCoefficient] = useState(1), [write, setWrite] = useState(.5);
+  const fixture = blockDefault(), input = [first, 2, -1, -2];
+  const gate = [[gateCoefficient, 0, 0], [0, -1, 0], [0, 0, 1], [0, 0, 0]];
+  const down = fixture.down.map((row, i) => row.map((v, j) => i === 2 && j === 2 ? write : v));
+  const trace = gatedFeedforwardTrace(input, fixture.up, gate, down);
+  return <FlowLab id="block-gate" label="Follow both learned routes in a gated FFN"><BlockGateDrawing trace={trace} input={input} up={fixture.up} gate={gate} down={down} />
+    <FlowControls><FlowSlider name="Input feature 1" value={first} min={-3} max={3} step={.25} onChange={setFirst} /><FlowSlider name="Gate 1's coefficient on input 1" value={gateCoefficient} min={-2} max={2} step={.25} onChange={setGateCoefficient} /><FlowSlider name="Write 3's coefficient on output 3" value={write} min={-2} max={2} step={.25} onChange={setWrite} /></FlowControls>
+    <FlowReadout data-result="gate">The gated hidden responses are {vector(trace.hidden)}, writing {vector(trace.output)}. A gate response may be negative and is not a probability.</FlowReadout>
+  </FlowLab>;
 }
 export function BlockTraceLab() {
-  const [settings, setSettings] = useState(blockDefault),
-    [position, setPosition] = useState(0);
-  const result = traceBlock(settings),
-    comparison = traceBlock({
-      ...settings,
-      pre: !settings.pre
-    });
-  return <NeuralLab id="block-trace" title="Follow every junction in a complete block">
-    <p>Exact two-position fixture, not a fitted model: Q=K=H, V=H/4, one head, ReLU FFN, no biases/dropout. Moving normalization changes which H attention reads.</p>
-    {settings.inputs.map((row, i) => <VectorEditor key={i} label={`Position ${i + 1} input`} values={row} onChange={next => setSettings(previous => ({
-      ...previous,
-      inputs: previous.inputs.map((other, j) => i === j ? next : other)
-    }))} />)}
-    <div className="neural-controls"><NeuralSelect label="Normalization placement" value={settings.pre ? 'pre' : 'post'} options={['pre', 'post'].map(name => [name, `${name}-norm`])} onChange={value => setSettings(previous => ({
-        ...previous,
-        pre: value === 'pre'
-      }))} /><NeuralNumber label="Both branch multipliers λ" value={settings.branch} min={0} max={2} onChange={branch => setSettings(previous => ({
-        ...previous,
-        branch
-      }))} /><NeuralNumber label="Inspect position" value={position + 1} min={1} max={2} integer step={1} onChange={value => setPosition(value - 1)} /></div>
-    <SignedBars title="Carried state versus branch update" rows={[{
-      label: 'Saved X',
-      values: settings.inputs[position]
-    }, {
-      label: 'Attention update',
-      values: result.update[position]
-    }, {
-      label: 'Context Z',
-      values: result.context[position]
-    }, {
-      label: 'FFN update',
-      values: result.ffnUpdate[position]
-    }, {
-      label: 'Output Y',
-      values: result.output[position]
-    }]} />
-    <NeuralTable caption={`Exact trace for position ${position + 1}`} headers={['Stage', 'Vector']} rows={Object.entries(result).filter(([, value]) => Array.isArray(value)).map(([name, values]) => [name, vector(values[position])])} />
-    <p data-result="block">Same input and weights with the other placement: {vector(comparison.output[position])}. λ=0 leaves both branch outputs zero, yet the post-norm path still normalizes.</p>
-    <details><summary>Edit the FFN weights used by this whole block</summary>{[['up', settings.up], ['down', settings.down]].map(([name, matrix]) => matrix.map((row, i) => <VectorEditor key={`${name}${i}`} label={`${name} row ${i + 1}`} values={row} min={-3} max={3} onChange={next => setSettings(previous => ({
-        ...previous,
-        [name]: matrix.map((other, j) => i === j ? next : other)
-      }))} />))}</details>
-    <button onClick={() => {
-      setSettings(blockDefault());
-      setPosition(0);
-    }}>Reset whole block</button>
-  </NeuralLab>;
+  const [other, setOther] = useState(3), [branch, setBranch] = useState(1), [position, setPosition] = useState(2);
+  const fixture = blockDefault(), settings = { ...fixture, branch, inputs: [fixture.inputs[0], [other, 0, 2, 1]] };
+  const traces = [true, false].map(pre => traceBlock({ ...settings, pre }));
+  const pre = traces[0], receiver = position - 1;
+  const products = pre.attentionInput.map(key => key.map((v, i) => v * pre.attentionInput[receiver][i]));
+  return <FlowLab id="block-trace" label="Follow the complete block at the same input and weights">
+    <BlockArray label="Pre-norm receiver query × each donor key, coordinate products" values={products} rows={['key position 1', 'key position 2']} /><BlockArray label="Sum products / √4 → softmax over both keys" values={[products.map(row => mean(row) * 2), pre.weights[receiver]]} rows={['scaled score', 'weight']} columns={['donor 1', 'donor 2']} />
+    <BlockArray label="Pre-norm donor values: each attention input divided by four" values={pre.attentionInput.map(row=>row.map(x=>x/4))} rows={['donor 1','donor 2']} />
+    <BlockArray label="Each donor value × its receiving weight × λ; sum rows to get the update" values={pre.attentionInput.map((row,i)=>row.map(x=>x/4*pre.weights[receiver][i]*branch))} rows={['donor 1 contribution','donor 2 contribution']} />
+    <PairTrace settings={settings} position={receiver} />
+    <FlowControls><FlowSlider name="Position 2's first input feature" value={other} min={-3} max={6} step={.25} onChange={setOther} /><FlowSlider name="Both learned update multipliers λ" value={branch} min={0} max={2} step={.1} onChange={setBranch} /><FlowSlider name="Receiver position to inspect" value={position} min={1} max={2} step={1} onChange={setPosition} /></FlowControls>
+    <FlowReadout data-result="block">For receiver {position}, pre-norm outputs {vector(traces[0].output[receiver])}; post-norm outputs {vector(traces[1].output[receiver])}. The input, learned maps and λ match; their normalizer placement differs.</FlowReadout>
+  </FlowLab>;
 }
 export function BlockProbeLab() {
-  const [input, setInput] = useState([1, 2, 5, 8]),
-    [probe, setProbe] = useState([1, 1, 1, 1]),
-    [step, setStep] = useState(1e-5);
-  const result = normalizationProbe(input, probe, 1e-5, step);
-  return <NeuralLab id="block-probe" title="Choose an output question that can change">
-    <p>The measured scalar is pᵀLayerNorm(x). The input gradient describes this particular weighted sum; it is not a generic score of a layer.</p>
-    <VectorEditor label="Probe input x" values={input} onChange={setInput} /><VectorEditor label="Output probe p" values={probe} onChange={setProbe} />
-    <NeuralNumber label="Finite-difference step" value={step} min={1e-8} max={.1} range={false} onChange={setStep} />
-    <SignedBars title="Analytic and numerical sensitivities" rows={[{
-      label: 'Analytic Jᵀp',
-      values: result.gradient
-    }, {
-      label: 'Central difference',
-      values: result.finite
-    }]} />
-    <p data-result="probe">Scalar {f(result.scalar)}; gradient L2 {f(Math.hypot(...result.gradient))}; maximum finite-difference discrepancy {maxDifference(result.gradient, result.finite).toExponential(3)}.</p>
-    <p>Equal probe weights sum centered features to zero. A contrast can change. Small input spread can amplify a contrast rather than contract it.</p>
-    <div className="neural-buttons"><button onClick={() => setProbe([1, -1, 0, 0])}>Contrast probe</button><button onClick={() => setInput([-.03, -.01, .01, .03])}>Small-spread input</button><button onClick={() => {
-        setInput([1, 2, 5, 8]);
-        setProbe([1, 1, 1, 1]);
-        setStep(1e-5);
-      }}>Reset probe</button></div>
-  </NeuralLab>;
+  const [contrast, setContrast] = useState(0), [spread, setSpread] = useState(1);
+  const input = [1, 2, 5, 8].map(x => 4 + spread * (x - 4)), probe = [1, 1 - 2 * contrast, 1 - contrast, 1 - contrast];
+  const result = normalizationProbe(input, probe);
+  return <FlowLab id="block-probe" label="Change the scalar question and the input spread"><BlockProbeDrawing input={input} probe={probe} gradient={result.gradient} scalar={result.scalar} />
+    <FlowControls><FlowSlider name="Contrast amount: 0 = sum, 1 = first minus second" value={contrast} min={0} max={1} step={.05} onChange={setContrast} /><FlowSlider name="Input spread about mean 4" value={spread} min={.01} max={2} step={.01} onChange={setSpread} /></FlowControls>
+    <FlowReadout data-result="probe">The scalar is {f(result.scalar)}; input-gradient L2 is {f(Math.hypot(...result.gradient))}. A central difference with step 10⁻⁵ agrees within {maxDifference(result.gradient, result.finite).toExponential(3)}.</FlowReadout>
+  </FlowLab>;
 }
-function MovementExplorer({
-  data
-}) {
-  const [placement, setPlacement] = useState('pre-norm'),
-    [points, setPoints] = useState(data['pre-norm'].points),
-    [times, setTimes] = useState(data['pre-norm'].times);
-  const [selected, setSelected] = useState(22),
-    [layer, setLayer] = useState(0),
-    [paddingMode, setPaddingMode] = useState('none');
-  const source = data[placement];
-  const result = useMemo(() => {
-    const padded = paddingMode !== 'none';
-    return movementBlockForward(source, padded ? [...points, ...Array.from({
-      length: 5
-    }, () => [.75, .75])] : points, padded ? [...times, 0, 0, 0, 0, 0] : times, paddingMode === 'masked' ? [...points.map(() => false), true, true, true, true, true] : []);
-  }, [source, points, times, paddingMode]);
-  const trace = result.traces[layer];
-  const predicted = result.probabilities.indexOf(Math.max(...result.probabilities)) + 1;
-  const path = values => values.map(([x, y]) => `${35 + x * 250},${285 - y * 250}`).join(' ');
+function MovementDrawing({ points, times, selected = 22, validity }) {
+  const original = points.slice(0, 45), path = original.map(([x, y]) => `${48 + 260 * x},${306 - 260 * y}`).join(' ');
+  return <figure className="block-movement-drawing"><svg viewBox="0 0 380 400" role="img" aria-label="Movement path with equal x and y scales; start circle, end square, selected point ring; the selected time tag is printed">
+    <line x1="48" y1="306" x2="308" y2="306" stroke="#99978f" /><line x1="48" y1="306" x2="48" y2="46" stroke="#99978f" />
+    {[0, .5, 1].map(v => <g key={v}><text x={48 + v * 260} y="330" textAnchor="middle">{v}</text><text x="39" y={311 - v * 260} textAnchor="end">{v}</text></g>)}
+    <polyline points={path} fill="none" stroke="#77cddb" strokeWidth="2" />
+    <circle cx={48 + original[0][0] * 260} cy={306 - original[0][1] * 260} r="5" fill="#77cddb" /><rect x={44 + original[44][0] * 260} y={302 - original[44][1] * 260} width="8" height="8" fill="#e4b752" />
+    <circle cx={48 + original[selected][0] * 260} cy={306 - original[selected][1] * 260} r="9" fill="none" stroke="#be9cf5" strokeWidth="2" />
+    {points.slice(45).map(([x,y],i)=><g key={i}><line x1={43+260*x} x2={53+260*x} y1={301-260*y} y2={311-260*y} stroke="#99978f"/><line x1={53+260*x} x2={43+260*x} y1={301-260*y} y2={311-260*y} stroke="#99978f"/></g>)}
+    <text x="178" y="356" textAnchor="middle">x → · y ↑ · circle start · square end</text><text x="178" y="382" textAnchor="middle">Ring: point {selected + 1}; time tag {f(times[selected], 4)}</text>
+  </svg>{validity && <BlockArray label="Record validity is data, independent of either exclusion choice" values={validity.map(v => v ? 'valid' : 'PAD')} role="input" columns={validity.map((_, i) => i + 1)} />}</figure>;
+}
+function PairedProbabilities({ results, data }) {
+  return <div className="block-flow-pair">{['pre-norm', 'post-norm'].map((name, i) => <div key={name}>
+    <BlockFeatureRow label={`${name}: all 15 class probabilities`} values={results[i].probabilities} coordinate="class" />
+    <FlowReadout data-result={`movement-${name}`}>{name} selects class {results[i].probabilities.indexOf(Math.max(...results[i].probabilities)) + 1}; class-4 probability {f(data[name].original.probabilities[3], 6)} → {f(results[i].probabilities[3], 6)}; maximum logit change {f(maxDifference(results[i].logits, data[name].original.logits))}.</FlowReadout>
+  </div>)}</div>;
+}
+function MovementExperiment({ kind, data, baseline }) {
+  const original = data['pre-norm'];
+  const [selected, setSelected] = useState(23), [points, setPoints] = useState(original.points), [times, setTimes] = useState(original.times);
+  const [reversed, setReversed] = useState(false), [count, setCount] = useState(0), [keys, setKeys] = useState(true), [pool, setPool] = useState(true);
+  const currentPoints = kind.startsWith('reverse') && reversed ? [...original.points].reverse() : kind === 'padding' ? [...original.points, ...Array.from({ length: count }, () => [.75, .75])] : points;
+  const currentTimes = kind === 'reverse-records' && reversed ? [...original.times].reverse() : kind === 'padding' ? [...original.times, ...Array(count).fill(0)] : times;
+  const validity = currentPoints.map((_, i) => i < 45);
+  const results = useMemo(() => {
+    if (currentPoints === original.points && currentTimes === original.times) return baseline;
+    return ['pre-norm', 'post-norm'].map(name => movementBlockForwardWithMasks(data[name], currentPoints, currentTimes, { validity, excludeInvalidKeys: keys, excludeInvalidPool: pool }));
+  }, [data, baseline, original, currentPoints, currentTimes, keys, pool]);
+  const index = selected - 1;
+  return <FlowLab id={`block-movement-${kind}`} label={`Movement ${kind} investigation`}>
+    <MovementDrawing points={currentPoints} times={currentTimes} selected={index} validity={kind === 'padding' ? validity : undefined} />
+    <FlowControls>
+      {(kind === 'point' || kind === 'time') && <FlowSlider name="Selected point" value={selected} min={1} max={45} step={1} onChange={setSelected} />}
+      {kind === 'point' && <><FlowSlider name="Selected point x" value={points[index][0]} min={0} max={1} step={.01} onChange={value => setPoints(previous => previous.map((row,i)=>i === index ? [value,row[1]] : row))} /><FlowSlider name="Selected point y" value={points[index][1]} min={0} max={1} step={.01} onChange={value => setPoints(previous => previous.map((row,i)=>i === index ? [row[0],value] : row))} /></>}
+      {kind === 'time' && <FlowSlider name="Selected point time tag" value={times[index]} min={-2} max={2} step={.05} onChange={value=>setTimes(previous=>previous.map((v,i)=>i===index?value:v))} />}
+      {kind.startsWith('reverse') && <FlowChoice label={kind === 'reverse-records' ? 'Reverse complete point/time records' : 'Reverse coordinates; retain each row’s time tag'} options={[[false, 'Original'],[true,'Reversed']]} value={reversed} onChange={setReversed} />}
+      {kind === 'padding' && <><FlowSlider name="Appended invalid padding records" value={count} min={0} max={15} step={1} onChange={setCount} /><FlowChoice label="Exclude invalid keys in both blocks" options={[[true,'Exclude'],[false,'Include']]} value={keys} onChange={setKeys} /><FlowChoice label="Exclude invalid rows from final mean" options={[[true,'Exclude'],[false,'Include']]} value={pool} onChange={setPool} /></>}
+    </FlowControls>
+    <PairedProbabilities results={results} data={data} />
+  </FlowLab>;
+}
+function MovementInspection({ data, baseline }) {
+  const [layer, setLayer] = useState(1), selected = 22;
+  return <FlowLab id="block-movement-inspect" label="Inspect both fitted blocks at the original point 23">
+    <div className="block-flow-pair">{baseline.map((result,i)=>{
+      const trace=result.traces[layer-1];
+      return <div key={i}>{['input','attentionInput','update','context','ffnInput','hidden','ffnUpdate','output'].map(name=><BlockFeatureRow key={name} label={`${i?'Post':'Pre'}-norm block ${layer}, point 23: ${name}`} values={trace[name][selected]} coordinate={name==='hidden'?'hidden':'feature'} role={name==='input'?'input':'computed'} />)}{trace.weights.map((head,j)=><BlockFeatureRow key={j} label={`Head ${j+1}: point 23's weights on all 45 valid keys; sum one`} values={head[selected]} coordinate="key" />)}</div>;
+    })}</div>
+    <FlowControls><FlowSlider name="Block to inspect at unchanged point 23" value={layer} min={1} max={2} step={1} onChange={setLayer} /></FlowControls>
+    <FlowReadout>Each head mixes 12-wide values; concatenation restores 24 features. The same point can carry different context after block 2. All feature and hidden coordinates above come from the retained model.</FlowReadout>
+  </FlowLab>;
+}
+function MovementSuite({ data }) {
+  const baseline = useMemo(()=>['pre-norm','post-norm'].map(name=>movementBlockForward(data[name],data[name].points,data[name].times)),[data]);
   return <>
-    <p>Saved seed-101 parameters; live inference. Source row 77 is class 4 (anticlockwise arc). Both original models misclassify it. Edited paths retain no newly measured label.</p>
-    <div className="neural-controls"><NeuralSelect label="Fitted placement" value={placement} onChange={setPlacement} options={['pre-norm', 'post-norm'].map(name => [name, name])} /><NeuralNumber label="Selected movement point" value={selected + 1} min={1} max={45} step={1} integer onChange={value => setSelected(value - 1)} /><NeuralNumber label="Point x" value={points[selected][0]} min={0} max={1} onChange={value => setPoints(previous => previous.map((row, i) => i === selected ? [value, row[1]] : row))} /><NeuralNumber label="Point y" value={points[selected][1]} min={0} max={1} onChange={value => setPoints(previous => previous.map((row, i) => i === selected ? [row[0], value] : row))} /><NeuralNumber label="Point time tag" value={times[selected]} min={-2} max={2} onChange={value => setTimes(previous => previous.map((item, i) => i === selected ? value : item))} /><NeuralSelect label="Five appended padding records" value={paddingMode} onChange={setPaddingMode} options={['none', 'masked', 'unmasked'].map(name => [name, name])} /></div>
-    <div className="block-two"><figure className="block-path" tabIndex={0}><figcaption>Observed movement and current edited path</figcaption><svg viewBox="0 0 320 320" role="img" aria-label="Equal-scale x and y coordinates, zero to one. Gray dashed source path; amber edited path."><rect x="35" y="35" width="250" height="250" fill="none" stroke="#777" />{[0, .5, 1].map(value => <g key={value}><text x={35 + value * 250} y="307" textAnchor="middle">{value}</text><text x="27" y={289 - value * 250} textAnchor="end">{value}</text></g>)}<polyline points={path(source.points)} fill="none" stroke="#888" strokeDasharray="4 3" strokeWidth="2" /><polyline points={path(points)} fill="none" stroke="#e6b854" strokeWidth="2" /><circle cx={35 + points[0][0] * 250} cy={285 - points[0][1] * 250} r="5" fill="#fff" /><rect x={31 + points[44][0] * 250} y={281 - points[44][1] * 250} width="8" height="8" fill="#e6b854" /><circle cx={35 + points[selected][0] * 250} cy={285 - points[selected][1] * 250} r="8" fill="none" stroke="#fff" strokeWidth="2" /></svg><p>x horizontal; y vertical. White start circle; amber end square. Ring: selected point.</p></figure><div><p data-result="movement">Current predicted class <strong>{predicted}</strong>; original class-4 probability {f(source.original.probabilities[3], 6)} → <strong>{f(result.probabilities[3], 6)}</strong>. Maximum logit change {f(maxDifference(result.logits, source.original.logits))}.</p><NeuralTable caption="All class probabilities" headers={['Class', 'Original', 'Current']} rows={result.probabilities.map((value, i) => [i + 1, f(source.original.probabilities[i], 4), f(value, 4)])} /></div></div>
-    <div className="neural-buttons"><button onClick={() => setPoints(previous => [...previous].reverse())}>Reverse coordinates only</button><button onClick={() => {
-        setPoints(previous => [...previous].reverse());
-        setTimes(previous => [...previous].reverse());
-      }}>Reverse complete point/time records</button><button onClick={() => {
-        setPoints(source.points);
-        setTimes(source.times);
-        setPaddingMode('none');
-        setSelected(22);
-      }}>Reset movement</button></div>
-    <NeuralSelect label="Inspect block" value={String(layer)} onChange={value => setLayer(Number(value))} options={[[0, 'Block 1'], [1, 'Block 2']]} />
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect all feature stages for this position</h4><SignedBars title={`Actual feature values, block ${layer + 1}, position ${selected + 1}`} rows={['input', 'attentionInput', 'update', 'context', 'ffnInput', 'ffnUpdate', 'output'].map(name => ({
-      label: name,
-      values: trace[name][selected]
-    }))} /></section>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect both attention heads and hidden FFN responses</h4><NeuralTable caption="One receiver, 45 valid keys" headers={['Key position', 'Head 1', 'Head 2']} rows={points.map((_, i) => [i + 1, f(trace.weights[0][selected][i], 5), f(trace.weights[1][selected][i], 5)])} /><p>Hidden responses: {vector(trace.hidden[selected])}</p></section>
+    <p>Start with source row 77, the observed class-4 anticlockwise arc. Both retained seed-101 models misclassify it. Cyan traces are the current observations; edited paths have no newly measured label.</p>
+    <p>What changes if one location moves, with its sampling time held fixed? The selected point and its x and y coordinates are the only controls.</p><MovementExperiment kind="point" data={data} baseline={baseline} />
+    <p>Keep the observed path and change when one point is tagged as occurring. This changes a feature supplied to the stem, rather than changing its storage index.</p><MovementExperiment kind="time" data={data} baseline={baseline} />
+    <p>Now reverse the coordinates while retaining the original increasing time tags. The location/time associations change, so these are different records.</p><MovementExperiment kind="reverse-coordinates" data={data} baseline={baseline} />
+    <p>In contrast, reverse each complete point/time record. This only permutes storage; shared row operations and valid-row mean pooling preserve the classifier in exact arithmetic.</p><MovementExperiment kind="reverse-records" data={data} baseline={baseline} />
+    <p>Finally append invalid records at (.75,.75) with tag zero. Their validity is explicitly labelled below. Blocking their keys stops valid queries reading them in both blocks; excluding their final rows prevents them changing the mean. Those are independent operations.</p><MovementExperiment kind="padding" data={data} baseline={baseline} />
+    <p>Return to the unchanged observed point 23 to inspect the actual 24-wide carried states, 48 hidden responses and both attention heads. The layer control switches which already-taught block is shown.</p><MovementInspection data={data} baseline={baseline} />
   </>;
 }
 export function BlockMovementLab() {
   const resource = useAsset('movement-runtime.json');
-  return <div ref={resource.container}><NeuralLab id="block-movement" title="What did two fitted blocks use?"><ResourceState resource={resource}>{data => <MovementExplorer data={data} />}</ResourceState></NeuralLab></div>;
+  return <div ref={resource.container}><ResourceState resource={resource}>{data=><MovementSuite data={data}/>}</ResourceState></div>;
 }
-export function BlockEvidenceFigure({
-  gradients = false
-}) {
-  const resource = useAsset('evidence-runtime.json');
-  const [selection, setSelection] = useState(0);
-  return <div ref={resource.container}><ResourceState resource={resource}>{data => {
-        if (gradients) {
-          const depth = [1, 4, 12][selection % 3],
-            rows = data.gradientDepth.filter(row => row.depth === depth);
-          return <figure className="block-circuit"><figcaption>Measured sensitivity to a unit random output probe</figcaption><NeuralSelect label="Measured stack depth" value={String(selection % 3)} onChange={value => setSelection(Number(value))} options={[[0, '1 block'], [1, '4 blocks'], [2, '12 blocks']]} />{[['state_gradient_l2', 'State gradient L2'], ['state_rms', 'Carried-state RMS']].map(([key, title]) => <NeuralPlot key={key} title={title} xLabel="carried state index" yLabel={title} xDomain={[0, depth]} yDomain={[0, 1.1 * Math.max(...rows.flatMap(row => row[key]))]} series={rows.map((row, i) => ({
-              label: row.pre_norm ? 'pre-norm' : 'post-norm',
-              color: colors[i],
-              values: row[key].map((value, index) => [index, value])
-            }))} />)}<NeuralTable caption="Every measured state" headers={['State', 'Pre gradient L2', 'Post gradient L2', 'Pre RMS', 'Post RMS']} rows={rows[0].state_rms.map((_, i) => [i, ...['state_gradient_l2', 'state_rms'].flatMap(key => rows.map(row => f(row[key][i])))])} /><p>CPU initialization, seeds 53/97; width 8, 2 heads, final affine-free LayerNorm, unit random probe. These are measured vector-Jacobian products, not singular-value bounds or trained quality.</p></figure>;
-        }
-        const fit = data.fits[selection % 6];
-        return <figure className="block-circuit"><figcaption>Six observed fits on one fixed 220/50/60 split</figcaption><NeuralSelect label="Inspect measured learning history" value={String(selection % 6)} onChange={value => setSelection(Number(value))} options={data.fits.map((row, i) => [i, `${row.placement}, seed ${row.seed}`])} /><NeuralPlot title={`Cross entropy; selected epoch ${fit.selected_epoch} by validation F1`} xLabel="epoch" yLabel="nats / example" xDomain={[1, 180]} yDomain={[0, 1.05 * Math.max(...fit.history.flatMap(row => [row.train.loss, row.validation.loss]))]} series={['train', 'validation'].map((key, i) => ({
-            label: key,
-            color: colors[i],
-            values: fit.history.map(row => [row.epoch, row[key].loss])
-          }))} points={[{
-            id: 'selected',
-            x: fit.selected_epoch,
-            y: fit.history[fit.selected_epoch - 1].validation.loss,
-            label: `Selected epoch ${fit.selected_epoch}`,
-            selected: true
-          }]} /><BlockPairedScores fits={data.fits} /><NeuralTable caption="Validation-selected checkpoint; all six outcomes" headers={['Placement', 'Seed', 'Epoch', 'Test correct / 60', 'Test macro F1']} rows={data.fits.map(row => [row.placement, row.seed, row.selected_epoch, row.test.correct, f(row.test.macro_f1, 6)])} /><p>The recorded training/validation traces support checkpoint inspection. No per-epoch test curve was collected. Seed 103 reverses the direction of the placement comparison seen in seeds 101 and 102.</p></figure>;
-      }}</ResourceState></div>;
-}
-export function BlockTaskFigure() {
- return <figure className="block-circuit"><figcaption>Which information can reach the prediction?</figcaption><BlockTaskDiagrams /><p>Rows in each mask are queries; columns are stored keys and values. A check marks an allowed read. Encoder reads can connect all valid source positions. Decoder input rows are shifted relative to their next-token targets. Cross-attention draws Q from the decoder and K/V from the encoder, with its own source padding mask.</p></figure>;
-}
-export { BlockSystemsFigure };
-export function BlockVariantsFigure() {
-  return <figure className="block-circuit"><figcaption>Branch inputs are dependencies, not interchangeable labels</figcaption><BlockVariantDependencies /><div className="block-two"><section><h4>Sequential</h4><ol className="block-flow"><li>x → N₁ → A → +x = z</li><li>z → N₂ → F → +z = y</li></ol><p>The FFN reads this block’s attention update through z.</p></section><section><h4>Parallel</h4><ol className="block-flow"><li>x → N → A</li><li>the same N(x) → F</li><li>x + A(N(x)) + F(N(x)) = y</li></ol><p>Both branches read the incoming state; the FFN cannot read this block’s attention output.</p></section></div><NeuralTable caption="Locate every additional normalizer" headers={['Wiring', 'Path from saved x to y']} rows={[['Branch-output normalization', 'x + [F(x) → N]'], ['Norms on both sides of branch', 'x + [x → N_in → F → N_out]'], ['Scaled post-norm', '[αx + F(x)] → N']]} /><p>These are real alternative dependency structures. Their published recipes include initialization and other choices; the equations expose the local difference without ranking their quality.</p></figure>;
+export function BlockEvidenceFigure({ gradients = false }) {
+  const resource=useAsset('evidence-runtime.json'), [selection,setSelection]=useState(0);
+  return <div ref={resource.container}><ResourceState resource={resource}>{data=>{
+    if(gradients){
+      const depth=[1,4,12][selection%3], rows=data.gradientDepth.filter(row=>row.depth===depth);
+      return <FlowLab id="block-gradient-depth" label="Inspect recorded initialization sensitivities">
+        {['state_gradient_l2','state_rms'].map((key,i)=><Plot key={key} title={i?'Carried-state RMS':'State gradient L2'} xLabel="carried state index" yLabel={i?'feature RMS':'gradient L2'} xDomain={[0,depth]} yDomain={[0,1.1*Math.max(...rows.flatMap(row=>row[key]))]} series={rows.map((row,j)=>({label:row.pre_norm?'pre-norm':'post-norm',color:colors[j],values:row[key].map((v,k)=>[k,v])}))}/>)}
+        <FlowControls><FlowChoice label="Recorded stack depth" options={[[0,'1 block'],[1,'4 blocks'],[2,'12 blocks']]} value={selection%3} onChange={setSelection}/></FlowControls>
+        <FlowReadout>At depth {depth}, input-gradient lengths are {f(rows[0].state_gradient_l2[0])} pre-norm and {f(rows[1].state_gradient_l2[0])} post-norm. This is one unit random probe, not a singular-value bound or training score.</FlowReadout>
+        <NeuralTable caption="Every recorded state" headers={['State','Pre gradient L2','Post gradient L2','Pre RMS','Post RMS']} rows={rows[0].state_rms.map((_,i)=>[i,...['state_gradient_l2','state_rms'].flatMap(key=>rows.map(row=>f(row[key][i])))])}/>
+      </FlowLab>;
+    }
+    const fit=data.fits[selection%6];
+    return <FlowLab id="block-fit-history" label="Inspect six recorded learning histories">
+      <Plot title={`Recorded cross entropy; selected epoch ${fit.selected_epoch}`} xLabel="epoch" yLabel="nats / example" xDomain={[1,180]} yDomain={[0,1.05*Math.max(...fit.history.flatMap(row=>[row.train.loss,row.validation.loss]))]} series={['train','validation'].map((key,i)=>({label:key,color:colors[i],values:fit.history.map(row=>[row.epoch,row[key].loss])}))} points={[{id:'selected',x:fit.selected_epoch,y:fit.history[fit.selected_epoch-1].validation.loss,label:`Selected epoch ${fit.selected_epoch}`,selected:true}]}/>
+      <FlowControls><label className="block-flow-select">Recorded fit<select value={selection%6} onChange={e=>setSelection(Number(e.target.value))}>{data.fits.map((row,i)=><option key={i} value={i}>{row.placement}, seed {row.seed}</option>)}</select></label></FlowControls>
+      <FlowReadout>The recorded {fit.placement}, seed {fit.seed} checkpoint at epoch {fit.selected_epoch} classifies {fit.test.correct} of 60 test observations correctly. Changing this control selects evidence; it does not retrain.</FlowReadout>
+      <NeuralTable caption="All six validation-selected checkpoints" headers={['Placement','Seed','Epoch','Test correct / 60','Test macro F1']} rows={data.fits.map(row=>[row.placement,row.seed,row.selected_epoch,row.test.correct,f(row.test.macro_f1,6)])}/>
+    </FlowLab>;
+  }}</ResourceState></div>;
 }
 export function BlockCostsLab() {
-  const [length, setLength] = useState(512),
-    [width, setWidth] = useState(512);
-  const result = blockCosts(length, width, 4 * width);
-  return <NeuralLab id="block-cost" title="Which cost grows when the sequence grows?"><p>Derived arithmetic: B=1, 8 heads, ordinary equal-total-width attention, f=4d, biased two-map FFN, two affine LayerNorms. No measured latency is implied.</p><div className="neural-controls"><NeuralNumber label="Sequence length L" value={length} min={64} max={8192} integer step={64} onChange={setLength} /><NeuralNumber label="Feature width d" value={width} min={64} max={1024} integer step={64} onChange={setWidth} /></div><NeuralPlot title="Linear maps and pairwise interactions" xLabel="sequence length" yLabel="billion MACs" xDomain={[64, 8192]} yDomain={[0, Math.max(blockCosts(8192, width, 4 * width).maps, blockCosts(8192, width, 4 * width).pairs) / 1e9 * 1.05]} series={['maps', 'pairs'].map((key, i) => ({
-      label: key === 'maps' ? 'Shared projections + FFN' : 'Attention score + mixture',
-      color: colors[i],
-      values: Array.from({
-        length: 33
-      }, (_, j) => {
-        const value = 64 + (8192 - 64) * j / 32;
-        return [value, blockCosts(value, width, 4 * width)[key] / 1e9];
-      })
-    }))} /><NeuralTable caption="Current derived quantities" headers={['Quantity', 'Value', 'Unit']} rows={Object.entries(result).map(([name, value]) => [name, value.toLocaleString(), name === 'parameters' ? 'scalars' : ['maps', 'pairs'].includes(name) ? 'MACs' : 'entries'])} /><p>Increasing L leaves parameter count fixed. Materialized attention grows as L²; the ordinary per-layer K/V cache grows as L. Float32 bytes equal four times the respective entry count, before runtime overhead.</p><button onClick={() => {
-      setLength(512);
-      setWidth(512);
-    }}>Reset cost model</button></NeuralLab>;
+  const [length,setLength]=useState(512),[width,setWidth]=useState(512),result=blockCosts(length,width,4*width);
+  return <FlowLab id="block-cost" label="Change sequence length and width in a derived work model">
+    <Plot title="Derived dense-map and pairwise work" xLabel="sequence length L" yLabel="billion MACs" xDomain={[64,8192]} yDomain={[0,1.05*Math.max(blockCosts(8192,width,4*width).maps,blockCosts(8192,width,4*width).pairs)/1e9]} series={['maps','pairs'].map((key,i)=>({label:key==='maps'?'Shared projections + FFN':'Scores + value mixtures',color:colors[i],values:Array.from({length:33},(_,j)=>{const l=64+(8192-64)*j/32;return[l,blockCosts(l,width,4*width)[key]/1e9];})}))}/>
+    <FlowControls><FlowSlider name="Sequence length L" value={length} min={64} max={8192} step={64} onChange={setLength}/><FlowSlider name="Feature width d" value={width} min={64} max={1024} step={64} onChange={setWidth}/></FlowControls>
+    <FlowReadout data-result="cost">At L={length}, d={width}, f={4*width} and N=1, parameters stay {result.parameters.toLocaleString()} when L changes. Maps require {f(result.maps/1e9)} billion MACs, pairwise attention {f(result.pairs/1e9)} billion; these are arithmetic counts, not measured seconds.</FlowReadout>
+    <NeuralTable caption="Different objects, different units; 8 ordinary equal-total-width heads" headers={['Quantity','Value','Unit']} rows={Object.entries(result).map(([name,value])=>[name,value.toLocaleString(),name==='parameters'?'scalars':['maps','pairs'].includes(name)?'MACs':'entries'])}/>
+  </FlowLab>;
 }

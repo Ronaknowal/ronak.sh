@@ -1,0 +1,52 @@
+.random-matrix-lesson{--rmt-sample:#88cbe2;--rmt-reference:#ecc574;--rmt-alternative:#bfaaea;--rmt-lost:#eea5ae;overflow-wrap:anywhere;container-type:inline-size}
+.random-matrix-lesson .rmt-figure{margin:1.5rem 0 2rem;padding:0;border:0;min-width:0}
+.random-matrix-lesson .rmt-figure figcaption{font-size:.95rem;line-height:1.75;color:#bcc2c8;margin:.8rem 0}
+.random-matrix-lesson .rmt-region{max-width:100%;min-width:0;overflow:auto;scrollbar-gutter:stable;outline-offset:3px}
+.random-matrix-lesson .rmt-region:focus-visible{outline:2px solid var(--rmt-reference)}
+.random-matrix-lesson .rmt-scene{display:block;max-width:none;flex:none;color:#dddfe4}
+.random-matrix-lesson .rmt-scene text{font:16px ui-monospace,SFMono-Regular,Consolas,monospace;fill:currentColor}
+.random-matrix-lesson .rmt-scene text.rmt-small-label{font-size:13px}
+.random-matrix-lesson .rmt-scroll-hint{font-size:.875rem;line-height:1.5;color:var(--rmt-reference);margin:.4rem 0 .8rem}
+.random-matrix-lesson .rmt-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;align-items:start}
+.random-matrix-lesson .rmt-pair>*{min-width:0}
+.random-matrix-lesson .rmt-table-title{font-weight:600;margin:1rem 0 .4rem}
+.random-matrix-lesson .rmt-region table{border-collapse:collapse;min-width:max-content;max-width:none;font-size:.875rem;line-height:1.5}
+.random-matrix-lesson .rmt-region th,.random-matrix-lesson .rmt-region td{padding:.45rem .7rem;text-align:right;border-bottom:1px solid #363d43;white-space:nowrap;font-variant-numeric:tabular-nums}
+.random-matrix-lesson .rmt-region th:first-child{text-align:left}
+.random-matrix-lesson .rmt-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.random-matrix-lesson .rmt-equation-inner{width:max-content;min-width:100%}
+.random-matrix-lesson .rmt-equation-inner .katex-display{margin:1rem .3rem}
+.random-matrix-lesson .rmt-controls{display:flex;flex-wrap:wrap;gap:1rem;margin:1rem 0}
+.random-matrix-lesson .rmt-controls label{display:flex;flex-direction:column;gap:.5rem;flex:1 1 12rem;min-width:0}
+.random-matrix-lesson .rmt-controls input,.random-matrix-lesson .rmt-controls select{width:100%;min-width:0;min-height:2.5rem}
+.random-matrix-lesson .rmt-controls input[type=checkbox]{width:1.25rem;min-height:1.25rem}
+.random-matrix-lesson .rmt-controls select,.random-matrix-lesson .rmt-controls input[type=text]{background:#101317;color:#dddfe4;border:1px solid #67727b;padding:.5rem;font:inherit}
+.random-matrix-lesson .rmt-controls button{background:#101317;color:var(--rmt-reference);border:1px solid #67727b;padding:.6rem 1rem;min-height:2.75rem;font:inherit;align-self:end}
+.random-matrix-lesson .rmt-controls :focus-visible{outline:2px solid var(--rmt-reference);outline-offset:3px}
+.random-matrix-lesson .rmt-readout{line-height:1.75;margin:.8rem 0}
+@container(max-width:85rem){.random-matrix-lesson .rmt-pair{grid-template-columns:1fr}}
+@media(max-width:760px){.random-matrix-lesson .rmt-pair{grid-template-columns:1fr}}
+
+.random-matrix-lesson .rmt-core-object{min-width:0;max-width:100%}
+.random-matrix-lesson .rmt-domain-labels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:.5rem 1rem}
+.random-matrix-lesson .rmt-domain-labels p{margin:.5rem 0;font-size:.875rem}
+.random-matrix-lesson .rmt-mark-legend{padding-left:1.25rem;font-size:.875rem}
+.random-matrix-lesson .rmt-bar-row p{margin:.75rem 0 .25rem}
+.random-matrix-lesson .rmt-coordinate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr));gap:.5rem}
+.random-matrix-lesson .rmt-coordinate-grid>div{border:1px solid;padding:.5rem;display:grid;font-size:.875rem}
+.random-matrix-lesson.lesson-flow .lesson-code pre{font-size:.75rem}
+.random-matrix-lesson p code{font-size:.75rem!important}
+.random-matrix-lesson .lesson-note{font-size:.875rem}
+
+.random-matrix-lesson .rmt-probability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:26rem}
+.random-matrix-lesson .rmt-probability-grid>div{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;padding:.3rem;border:1px solid var(--rmt-reference);background:#30291c;text-align:center;font-size:.875rem}
+.random-matrix-lesson .rmt-row-routes>div{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.5rem;margin:.7rem 0;font-size:.875rem;align-items:center}
+.random-matrix-lesson .rmt-capacity-slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8rem),1fr));gap:1rem}
+.random-matrix-lesson .rmt-capacity-slots>div{display:grid;text-align:center;font-size:.875rem}.random-matrix-lesson .rmt-capacity-slots>div>span:first-child{font-size:3rem}
+.random-matrix-lesson .rmt-outcome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));gap:1.5rem}
+.random-matrix-lesson .rmt-conversion-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
+.random-matrix-lesson .rmt-matrix-row>p{margin:.6rem 0 .3rem;font-size:.875rem}
+.random-matrix-lesson .rmt-matrix-cells{display:grid;max-width:100%;gap:0}
+.random-matrix-lesson .rmt-matrix-cells>div{border:solid;padding:.4rem .25rem;display:grid;justify-items:center;gap:.2rem;text-align:center;font-size:.875rem;min-width:0;font-variant-numeric:tabular-nums}
+.random-matrix-lesson .rmt-object-guide{font-size:.875rem}
+.random-matrix-lesson .rmt-address-cells>div{background:#171820;border-color:var(--rmt-sample)}

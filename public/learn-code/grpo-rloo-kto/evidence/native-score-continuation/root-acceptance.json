@@ -1,0 +1,14 @@
+{
+  "status": "accepted-bounded-continuation",
+  "reviewer": "root",
+  "inputs_sha256": "51d489e67d57974c7a2a16988d2b5bb3c0199dc9d228c703a95dc657bd5a3159",
+  "exact_guards": 52,
+  "only_change": "Compare selected log probability cells; full original objective/all-gradient/shadow SGD checks conserved",
+  "completed_stages_replayed": 0,
+  "native_runs_authorized": [
+    "grpo",
+    "rloo",
+    "kto"
+  ],
+  "review": "Read complete continuation driver, failure and README; exact source conservation apart from selected comparison and explanatory comments. Original protocol unchanged. First reviewer string substitution expected different whitespace and failed; actual diff inspected and exact replacement checked here."
+}

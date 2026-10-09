@@ -1,0 +1,164 @@
+{
+  "topic": "llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm",
+  "checked_at": "2026-09-28T05:37:32.984911+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "environment_target": "scratch\\training-frameworks-runtime",
+  "scope": "CPU/offline public programs and explicit boundary checks; no hosted generation or GPU engine",
+  "outputs": {
+    "serving_scheduler.py": {
+      "continuous": {
+        "events": [
+          {
+            "tick": 0,
+            "actions": {
+              "A": "P4"
+            },
+            "used": 4
+          },
+          {
+            "tick": 1,
+            "actions": {
+              "A": "P2",
+              "B": "P2"
+            },
+            "used": 4
+          },
+          {
+            "tick": 2,
+            "actions": {
+              "A": "D1",
+              "B": "D1"
+            },
+            "used": 2
+          },
+          {
+            "tick": 3,
+            "actions": {
+              "A": "D1",
+              "C": "P1"
+            },
+            "used": 2
+          },
+          {
+            "tick": 4,
+            "actions": {
+              "C": "D1"
+            },
+            "used": 1
+          }
+        ],
+        "completed": {
+          "B": {
+            "first": 2,
+            "finish": 3,
+            "ttft_units": 1
+          },
+          "A": {
+            "first": 2,
+            "finish": 4,
+            "ttft_units": 2
+          },
+          "C": {
+            "first": 4,
+            "finish": 5,
+            "ttft_units": 2
+          }
+        }
+      },
+      "fixed": {
+        "events": [
+          {
+            "tick": 0,
+            "actions": {
+              "A": "P4"
+            },
+            "used": 4
+          },
+          {
+            "tick": 1,
+            "actions": {
+              "A": "P2"
+            },
+            "used": 2
+          },
+          {
+            "tick": 2,
+            "actions": {
+              "A": "D1"
+            },
+            "used": 1
+          },
+          {
+            "tick": 3,
+            "actions": {
+              "A": "D1"
+            },
+            "used": 1
+          },
+          {
+            "tick": 4,
+            "actions": {
+              "B": "P2",
+              "C": "P1"
+            },
+            "used": 3
+          },
+          {
+            "tick": 5,
+            "actions": {
+              "B": "D1",
+              "C": "D1"
+            },
+            "used": 2
+          }
+        ],
+        "completed": {
+          "A": {
+            "first": 2,
+            "finish": 4,
+            "ttft_units": 2
+          },
+          "B": {
+            "first": 5,
+            "finish": 6,
+            "ttft_units": 4
+          },
+          "C": {
+            "first": 5,
+            "finish": 6,
+            "ttft_units": 3
+          }
+        }
+      },
+      "pages": {
+        "logical_pages": [
+          2,
+          1
+        ],
+        "shared_pages": 0,
+        "physical_pages": 3,
+        "capacity": 12,
+        "useful": 8,
+        "slack": 4
+      }
+    },
+    "kv_cache_bridge.py": {
+      "attention_error": 2.220446049250313e-16,
+      "model_logits_error": 1.4901161193847656e-08,
+      "cache_length": 7,
+      "preallocated_values": 56
+    },
+    "boundary_checks": {
+      "single_output_completion": 2,
+      "shared_all_prefix_pages": 2,
+      "protocol_fixture": true,
+      "native_generation": false
+    }
+  },
+  "sources": {
+    "public/learn-code/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm/kv_cache_bridge.py": "8b1c85f381721547faffe6bdccd22e0602e16bc76c4c9907f68fe85ff2381809",
+    "public/learn-code/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm/serving_client.py": "e6e0c97e659c9fa1fada0aaedb1eb06f0c1b8594a8e5ca495b960c18770722e9",
+    "public/learn-code/llm-serving-frameworks-vllm-tgi-sglang-tensorrt-llm/serving_scheduler.py": "7e097f1ae91d234aa156d4f81626f7aafeadc003305ce8f81f53260bf2f31935",
+    "scripts/verify-llm-framework-native.py": "2d0ec60dda412dba9af069e7ce45a6cb0ecd459b1edac89a6cdf70c6490b87f3"
+  }
+}

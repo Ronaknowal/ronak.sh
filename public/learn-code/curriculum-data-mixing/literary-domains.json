@@ -1,0 +1,1480 @@
+{
+  "schema": 1,
+  "license": "Original works are public domain in the USA.",
+  "license_url": "https://www.gutenberg.org/policy/license.html",
+  "selection": "Starting at the named opening sentence: unwrap whitespace, retain paragraphs >=80 Unicode characters, select first96; indices0:72 train,72:84 tune,84:96 test. No model-based selection.",
+  "tokenization": "UTF-8 bytes, fixed256 vocabulary; create adjacent byte pairs inside each paragraph only.",
+  "purpose": "Small real-literature allocation experiment. Book identity defines each domain; no inference to web/code/math mixtures.",
+  "domains": [
+    {
+      "id": "alice",
+      "title": "Alice's Adventures in Wonderland",
+      "author": "Lewis Carroll",
+      "catalogue_url": "https://www.gutenberg.org/ebooks/11",
+      "text_url": "https://www.gutenberg.org/cache/epub/11/pg11.txt",
+      "source_sha256": "01b38ea4c710a84bc18d0bd41271a5a1a92b94e97b2812f4dece97d4a694725e",
+      "paragraphs": [
+        {
+          "id": "alice-000",
+          "split": "train",
+          "text": "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, “and what is the use of a book,” thought Alice “without pictures or conversations?”"
+        },
+        {
+          "id": "alice-001",
+          "split": "train",
+          "text": "So she was considering in her own mind (as well as she could, for the hot day made her feel very sleepy and stupid), whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly a White Rabbit with pink eyes ran close by her."
+        },
+        {
+          "id": "alice-002",
+          "split": "train",
+          "text": "There was nothing so _very_ remarkable in that; nor did Alice think it so _very_ much out of the way to hear the Rabbit say to itself, “Oh dear! Oh dear! I shall be late!” (when she thought it over afterwards, it occurred to her that she ought to have wondered at this, but at the time it all seemed quite natural); but when the Rabbit actually _took a watch out of its waistcoat-pocket_, and looked at it, and then hurried on, Alice started to her feet, for it flashed across her mind that she had never before seen a rabbit with either a waistcoat-pocket, or a watch to take out of it, and burning with curiosity, she ran across the field after it, and fortunately was just in time to see it pop down a large rabbit-hole under the hedge."
+        },
+        {
+          "id": "alice-003",
+          "split": "train",
+          "text": "In another moment down went Alice after it, never once considering how in the world she was to get out again."
+        },
+        {
+          "id": "alice-004",
+          "split": "train",
+          "text": "The rabbit-hole went straight on like a tunnel for some way, and then dipped suddenly down, so suddenly that Alice had not a moment to think about stopping herself before she found herself falling down a very deep well."
+        },
+        {
+          "id": "alice-005",
+          "split": "train",
+          "text": "Either the well was very deep, or she fell very slowly, for she had plenty of time as she went down to look about her and to wonder what was going to happen next. First, she tried to look down and make out what she was coming to, but it was too dark to see anything; then she looked at the sides of the well, and noticed that they were filled with cupboards and book-shelves; here and there she saw maps and pictures hung upon pegs. She took down a jar from one of the shelves as she passed; it was labelled “ORANGE MARMALADE”, but to her great disappointment it was empty: she did not like to drop the jar for fear of killing somebody underneath, so managed to put it into one of the cupboards as she fell past it."
+        },
+        {
+          "id": "alice-006",
+          "split": "train",
+          "text": "“Well!” thought Alice to herself, “after such a fall as this, I shall think nothing of tumbling down stairs! How brave they’ll all think me at home! Why, I wouldn’t say anything about it, even if I fell off the top of the house!” (Which was very likely true.)"
+        },
+        {
+          "id": "alice-007",
+          "split": "train",
+          "text": "Down, down, down. Would the fall _never_ come to an end? “I wonder how many miles I’ve fallen by this time?” she said aloud. “I must be getting somewhere near the centre of the earth. Let me see: that would be four thousand miles down, I think—” (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a _very_ good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) “—yes, that’s about the right distance—but then I wonder what Latitude or Longitude I’ve got to?” (Alice had no idea what Latitude was, or Longitude either, but thought they were nice grand words to say.)"
+        },
+        {
+          "id": "alice-008",
+          "split": "train",
+          "text": "Presently she began again. “I wonder if I shall fall right _through_ the earth! How funny it’ll seem to come out among the people that walk with their heads downward! The Antipathies, I think—” (she was rather glad there _was_ no one listening, this time, as it didn’t sound at all the right word) “—but I shall have to ask them what the name of the country is, you know. Please, Ma’am, is this New Zealand or Australia?” (and she tried to curtsey as she spoke—fancy _curtseying_ as you’re falling through the air! Do you think you could manage it?) “And what an ignorant little girl she’ll think me for asking! No, it’ll never do to ask: perhaps I shall see it written up somewhere.”"
+        },
+        {
+          "id": "alice-009",
+          "split": "train",
+          "text": "Down, down, down. There was nothing else to do, so Alice soon began talking again. “Dinah’ll miss me very much to-night, I should think!” (Dinah was the cat.) “I hope they’ll remember her saucer of milk at tea-time. Dinah my dear! I wish you were down here with me! There are no mice in the air, I’m afraid, but you might catch a bat, and that’s very like a mouse, you know. But do cats eat bats, I wonder?” And here Alice began to get rather sleepy, and went on saying to herself, in a dreamy sort of way, “Do cats eat bats? Do cats eat bats?” and sometimes, “Do bats eat cats?” for, you see, as she couldn’t answer either question, it didn’t much matter which way she put it. She felt that she was dozing off, and had just begun to dream that she was walking hand in hand with Dinah, and saying to her very earnestly, “Now, Dinah, tell me the truth: did you ever eat a bat?” when suddenly, thump! thump! down she came upon a heap of sticks and dry leaves, and the fall was over."
+        },
+        {
+          "id": "alice-010",
+          "split": "train",
+          "text": "Alice was not a bit hurt, and she jumped up on to her feet in a moment: she looked up, but it was all dark overhead; before her was another long passage, and the White Rabbit was still in sight, hurrying down it. There was not a moment to be lost: away went Alice like the wind, and was just in time to hear it say, as it turned a corner, “Oh my ears and whiskers, how late it’s getting!” She was close behind it when she turned the corner, but the Rabbit was no longer to be seen: she found herself in a long, low hall, which was lit up by a row of lamps hanging from the roof."
+        },
+        {
+          "id": "alice-011",
+          "split": "train",
+          "text": "There were doors all round the hall, but they were all locked; and when Alice had been all the way down one side and up the other, trying every door, she walked sadly down the middle, wondering how she was ever to get out again."
+        },
+        {
+          "id": "alice-012",
+          "split": "train",
+          "text": "Suddenly she came upon a little three-legged table, all made of solid glass; there was nothing on it except a tiny golden key, and Alice’s first thought was that it might belong to one of the doors of the hall; but, alas! either the locks were too large, or the key was too small, but at any rate it would not open any of them. However, on the second time round, she came upon a low curtain she had not noticed before, and behind it was a little door about fifteen inches high: she tried the little golden key in the lock, and to her great delight it fitted!"
+        },
+        {
+          "id": "alice-013",
+          "split": "train",
+          "text": "Alice opened the door and found that it led into a small passage, not much larger than a rat-hole: she knelt down and looked along the passage into the loveliest garden you ever saw. How she longed to get out of that dark hall, and wander about among those beds of bright flowers and those cool fountains, but she could not even get her head through the doorway; “and even if my head would go through,” thought poor Alice, “it would be of very little use without my shoulders. Oh, how I wish I could shut up like a telescope! I think I could, if I only knew how to begin.” For, you see, so many out-of-the-way things had happened lately, that Alice had begun to think that very few things indeed were really impossible."
+        },
+        {
+          "id": "alice-014",
+          "split": "train",
+          "text": "There seemed to be no use in waiting by the little door, so she went back to the table, half hoping she might find another key on it, or at any rate a book of rules for shutting people up like telescopes: this time she found a little bottle on it, (“which certainly was not here before,” said Alice,) and round the neck of the bottle was a paper label, with the words “DRINK ME,” beautifully printed on it in large letters."
+        },
+        {
+          "id": "alice-015",
+          "split": "train",
+          "text": "It was all very well to say “Drink me,” but the wise little Alice was not going to do _that_ in a hurry. “No, I’ll look first,” she said, “and see whether it’s marked ‘_poison_’ or not”; for she had read several nice little histories about children who had got burnt, and eaten up by wild beasts and other unpleasant things, all because they _would_ not remember the simple rules their friends had taught them: such as, that a red-hot poker will burn you if you hold it too long; and that if you cut your finger _very_ deeply with a knife, it usually bleeds; and she had never forgotten that, if you drink much from a bottle marked “poison,” it is almost certain to disagree with you, sooner or later."
+        },
+        {
+          "id": "alice-016",
+          "split": "train",
+          "text": "However, this bottle was _not_ marked “poison,” so Alice ventured to taste it, and finding it very nice, (it had, in fact, a sort of mixed flavour of cherry-tart, custard, pine-apple, roast turkey, toffee, and hot buttered toast,) she very soon finished it off."
+        },
+        {
+          "id": "alice-017",
+          "split": "train",
+          "text": "And so it was indeed: she was now only ten inches high, and her face brightened up at the thought that she was now the right size for going through the little door into that lovely garden. First, however, she waited for a few minutes to see if she was going to shrink any further: she felt a little nervous about this; “for it might end, you know,” said Alice to herself, “in my going out altogether, like a candle. I wonder what I should be like then?” And she tried to fancy what the flame of a candle is like after the candle is blown out, for she could not remember ever having seen such a thing."
+        },
+        {
+          "id": "alice-018",
+          "split": "train",
+          "text": "After a while, finding that nothing more happened, she decided on going into the garden at once; but, alas for poor Alice! when she got to the door, she found she had forgotten the little golden key, and when she went back to the table for it, she found she could not possibly reach it: she could see it quite plainly through the glass, and she tried her best to climb up one of the legs of the table, but it was too slippery; and when she had tired herself out with trying, the poor little thing sat down and cried."
+        },
+        {
+          "id": "alice-019",
+          "split": "train",
+          "text": "“Come, there’s no use in crying like that!” said Alice to herself, rather sharply; “I advise you to leave off this minute!” She generally gave herself very good advice, (though she very seldom followed it), and sometimes she scolded herself so severely as to bring tears into her eyes; and once she remembered trying to box her own ears for having cheated herself in a game of croquet she was playing against herself, for this curious child was very fond of pretending to be two people. “But it’s no use now,” thought poor Alice, “to pretend to be two people! Why, there’s hardly enough of me left to make _one_ respectable person!”"
+        },
+        {
+          "id": "alice-020",
+          "split": "train",
+          "text": "Soon her eye fell on a little glass box that was lying under the table: she opened it, and found in it a very small cake, on which the words “EAT ME” were beautifully marked in currants. “Well, I’ll eat it,” said Alice, “and if it makes me grow larger, I can reach the key; and if it makes me grow smaller, I can creep under the door; so either way I’ll get into the garden, and I don’t care which happens!”"
+        },
+        {
+          "id": "alice-021",
+          "split": "train",
+          "text": "She ate a little bit, and said anxiously to herself, “Which way? Which way?”, holding her hand on the top of her head to feel which way it was growing, and she was quite surprised to find that she remained the same size: to be sure, this generally happens when one eats cake, but Alice had got so much into the way of expecting nothing but out-of-the-way things to happen, that it seemed quite dull and stupid for life to go on in the common way."
+        },
+        {
+          "id": "alice-022",
+          "split": "train",
+          "text": "“Curiouser and curiouser!” cried Alice (she was so much surprised, that for the moment she quite forgot how to speak good English); “now I’m opening out like the largest telescope that ever was! Good-bye, feet!” (for when she looked down at her feet, they seemed to be almost out of sight, they were getting so far off). “Oh, my poor little feet, I wonder who will put on your shoes and stockings for you now, dears? I’m sure _I_ shan’t be able! I shall be a great deal too far off to trouble myself about you: you must manage the best way you can;—but I must be kind to them,” thought Alice, “or perhaps they won’t walk the way I want to go! Let me see: I’ll give them a new pair of boots every Christmas.”"
+        },
+        {
+          "id": "alice-023",
+          "split": "train",
+          "text": "And she went on planning to herself how she would manage it. “They must go by the carrier,” she thought; “and how funny it’ll seem, sending presents to one’s own feet! And how odd the directions will look!"
+        },
+        {
+          "id": "alice-024",
+          "split": "train",
+          "text": "Just then her head struck against the roof of the hall: in fact she was now more than nine feet high, and she at once took up the little golden key and hurried off to the garden door."
+        },
+        {
+          "id": "alice-025",
+          "split": "train",
+          "text": "Poor Alice! It was as much as she could do, lying down on one side, to look through into the garden with one eye; but to get through was more hopeless than ever: she sat down and began to cry again."
+        },
+        {
+          "id": "alice-026",
+          "split": "train",
+          "text": "“You ought to be ashamed of yourself,” said Alice, “a great girl like you,” (she might well say this), “to go on crying in this way! Stop this moment, I tell you!” But she went on all the same, shedding gallons of tears, until there was a large pool all round her, about four inches deep and reaching half down the hall."
+        },
+        {
+          "id": "alice-027",
+          "split": "train",
+          "text": "After a time she heard a little pattering of feet in the distance, and she hastily dried her eyes to see what was coming. It was the White Rabbit returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other: he came trotting along in a great hurry, muttering to himself as he came, “Oh! the Duchess, the Duchess! Oh! won’t she be savage if I’ve kept her waiting!” Alice felt so desperate that she was ready to ask help of any one; so, when the Rabbit came near her, she began, in a low, timid voice, “If you please, sir—” The Rabbit started violently, dropped the white kid gloves and the fan, and skurried away into the darkness as hard as he could go."
+        },
+        {
+          "id": "alice-028",
+          "split": "train",
+          "text": "Alice took up the fan and gloves, and, as the hall was very hot, she kept fanning herself all the time she went on talking: “Dear, dear! How queer everything is to-day! And yesterday things went on just as usual. I wonder if I’ve been changed in the night? Let me think: was I the same when I got up this morning? I almost think I can remember feeling a little different. But if I’m not the same, the next question is, Who in the world am I? Ah, _that’s_ the great puzzle!” And she began thinking over all the children she knew that were of the same age as herself, to see if she could have been changed for any of them."
+        },
+        {
+          "id": "alice-029",
+          "split": "train",
+          "text": "“I’m sure I’m not Ada,” she said, “for her hair goes in such long ringlets, and mine doesn’t go in ringlets at all; and I’m sure I can’t be Mabel, for I know all sorts of things, and she, oh! she knows such a very little! Besides, _she’s_ she, and _I’m_ I, and—oh dear, how puzzling it all is! I’ll try if I know all the things I used to know. Let me see: four times five is twelve, and four times six is thirteen, and four times seven is—oh dear! I shall never get to twenty at that rate! However, the Multiplication Table doesn’t signify: let’s try Geography. London is the capital of Paris, and Paris is the capital of Rome, and Rome—no, _that’s_ all wrong, I’m certain! I must have been changed for Mabel! I’ll try and say ‘_How doth the little_—’” and she crossed her hands on her lap as if she were saying lessons, and began to repeat it, but her voice sounded hoarse and strange, and the words did not come the same as they used to do:—"
+        },
+        {
+          "id": "alice-030",
+          "split": "train",
+          "text": "“How doth the little crocodile Improve his shining tail, And pour the waters of the Nile On every golden scale!"
+        },
+        {
+          "id": "alice-031",
+          "split": "train",
+          "text": "“How cheerfully he seems to grin, How neatly spread his claws, And welcome little fishes in With gently smiling jaws!”"
+        },
+        {
+          "id": "alice-032",
+          "split": "train",
+          "text": "“I’m sure those are not the right words,” said poor Alice, and her eyes filled with tears again as she went on, “I must be Mabel after all, and I shall have to go and live in that poky little house, and have next to no toys to play with, and oh! ever so many lessons to learn! No, I’ve made up my mind about it; if I’m Mabel, I’ll stay down here! It’ll be no use their putting their heads down and saying ‘Come up again, dear!’ I shall only look up and say ‘Who am I then? Tell me that first, and then, if I like being that person, I’ll come up: if not, I’ll stay down here till I’m somebody else’—but, oh dear!” cried Alice, with a sudden burst of tears, “I do wish they _would_ put their heads down! I am so _very_ tired of being all alone here!”"
+        },
+        {
+          "id": "alice-033",
+          "split": "train",
+          "text": "As she said this she looked down at her hands, and was surprised to see that she had put on one of the Rabbit’s little white kid gloves while she was talking. “How _can_ I have done that?” she thought. “I must be growing small again.” She got up and went to the table to measure herself by it, and found that, as nearly as she could guess, she was now about two feet high, and was going on shrinking rapidly: she soon found out that the cause of this was the fan she was holding, and she dropped it hastily, just in time to avoid shrinking away altogether."
+        },
+        {
+          "id": "alice-034",
+          "split": "train",
+          "text": "“That _was_ a narrow escape!” said Alice, a good deal frightened at the sudden change, but very glad to find herself still in existence; “and now for the garden!” and she ran with all speed back to the little door: but, alas! the little door was shut again, and the little golden key was lying on the glass table as before, “and things are worse than ever,” thought the poor child, “for I never was so small as this before, never! And I declare it’s too bad, that it is!”"
+        },
+        {
+          "id": "alice-035",
+          "split": "train",
+          "text": "As she said these words her foot slipped, and in another moment, splash! she was up to her chin in salt water. Her first idea was that she had somehow fallen into the sea, “and in that case I can go back by railway,” she said to herself. (Alice had been to the seaside once in her life, and had come to the general conclusion, that wherever you go to on the English coast you find a number of bathing machines in the sea, some children digging in the sand with wooden spades, then a row of lodging houses, and behind them a railway station.) However, she soon made out that she was in the pool of tears which she had wept when she was nine feet high."
+        },
+        {
+          "id": "alice-036",
+          "split": "train",
+          "text": "“I wish I hadn’t cried so much!” said Alice, as she swam about, trying to find her way out. “I shall be punished for it now, I suppose, by being drowned in my own tears! That _will_ be a queer thing, to be sure! However, everything is queer to-day.”"
+        },
+        {
+          "id": "alice-037",
+          "split": "train",
+          "text": "Just then she heard something splashing about in the pool a little way off, and she swam nearer to make out what it was: at first she thought it must be a walrus or hippopotamus, but then she remembered how small she was now, and she soon made out that it was only a mouse that had slipped in like herself."
+        },
+        {
+          "id": "alice-038",
+          "split": "train",
+          "text": "“Would it be of any use, now,” thought Alice, “to speak to this mouse? Everything is so out-of-the-way down here, that I should think very likely it can talk: at any rate, there’s no harm in trying.” So she began: “O Mouse, do you know the way out of this pool? I am very tired of swimming about here, O Mouse!” (Alice thought this must be the right way of speaking to a mouse: she had never done such a thing before, but she remembered having seen in her brother’s Latin Grammar, “A mouse—of a mouse—to a mouse—a mouse—O mouse!”) The Mouse looked at her rather inquisitively, and seemed to her to wink with one of its little eyes, but it said nothing."
+        },
+        {
+          "id": "alice-039",
+          "split": "train",
+          "text": "“Perhaps it doesn’t understand English,” thought Alice; “I daresay it’s a French mouse, come over with William the Conqueror.” (For, with all her knowledge of history, Alice had no very clear notion how long ago anything had happened.) So she began again: “Où est ma chatte?” which was the first sentence in her French lesson-book. The Mouse gave a sudden leap out of the water, and seemed to quiver all over with fright. “Oh, I beg your pardon!” cried Alice hastily, afraid that she had hurt the poor animal’s feelings. “I quite forgot you didn’t like cats.”"
+        },
+        {
+          "id": "alice-040",
+          "split": "train",
+          "text": "“Not like cats!” cried the Mouse, in a shrill, passionate voice. “Would _you_ like cats if you were me?”"
+        },
+        {
+          "id": "alice-041",
+          "split": "train",
+          "text": "“Well, perhaps not,” said Alice in a soothing tone: “don’t be angry about it. And yet I wish I could show you our cat Dinah: I think you’d take a fancy to cats if you could only see her. She is such a dear quiet thing,” Alice went on, half to herself, as she swam lazily about in the pool, “and she sits purring so nicely by the fire, licking her paws and washing her face—and she is such a nice soft thing to nurse—and she’s such a capital one for catching mice—oh, I beg your pardon!” cried Alice again, for this time the Mouse was bristling all over, and she felt certain it must be really offended. “We won’t talk about her any more if you’d rather not.”"
+        },
+        {
+          "id": "alice-042",
+          "split": "train",
+          "text": "“We indeed!” cried the Mouse, who was trembling down to the end of his tail. “As if _I_ would talk on such a subject! Our family always _hated_ cats: nasty, low, vulgar things! Don’t let me hear the name again!”"
+        },
+        {
+          "id": "alice-043",
+          "split": "train",
+          "text": "“I won’t indeed!” said Alice, in a great hurry to change the subject of conversation. “Are you—are you fond—of—of dogs?” The Mouse did not answer, so Alice went on eagerly: “There is such a nice little dog near our house I should like to show you! A little bright-eyed terrier, you know, with oh, such long curly brown hair! And it’ll fetch things when you throw them, and it’ll sit up and beg for its dinner, and all sorts of things—I can’t remember half of them—and it belongs to a farmer, you know, and he says it’s so useful, it’s worth a hundred pounds! He says it kills all the rats and—oh dear!” cried Alice in a sorrowful tone, “I’m afraid I’ve offended it again!” For the Mouse was swimming away from her as hard as it could go, and making quite a commotion in the pool as it went."
+        },
+        {
+          "id": "alice-044",
+          "split": "train",
+          "text": "So she called softly after it, “Mouse dear! Do come back again, and we won’t talk about cats or dogs either, if you don’t like them!” When the Mouse heard this, it turned round and swam slowly back to her: its face was quite pale (with passion, Alice thought), and it said in a low trembling voice, “Let us get to the shore, and then I’ll tell you my history, and you’ll understand why it is I hate cats and dogs.”"
+        },
+        {
+          "id": "alice-045",
+          "split": "train",
+          "text": "It was high time to go, for the pool was getting quite crowded with the birds and animals that had fallen into it: there were a Duck and a Dodo, a Lory and an Eaglet, and several other curious creatures. Alice led the way, and the whole party swam to the shore."
+        },
+        {
+          "id": "alice-046",
+          "split": "train",
+          "text": "They were indeed a queer-looking party that assembled on the bank—the birds with draggled feathers, the animals with their fur clinging close to them, and all dripping wet, cross, and uncomfortable."
+        },
+        {
+          "id": "alice-047",
+          "split": "train",
+          "text": "The first question of course was, how to get dry again: they had a consultation about this, and after a few minutes it seemed quite natural to Alice to find herself talking familiarly with them, as if she had known them all her life. Indeed, she had quite a long argument with the Lory, who at last turned sulky, and would only say, “I am older than you, and must know better;” and this Alice would not allow without knowing how old it was, and, as the Lory positively refused to tell its age, there was no more to be said."
+        },
+        {
+          "id": "alice-048",
+          "split": "train",
+          "text": "At last the Mouse, who seemed to be a person of authority among them, called out, “Sit down, all of you, and listen to me! _I’ll_ soon make you dry enough!” They all sat down at once, in a large ring, with the Mouse in the middle. Alice kept her eyes anxiously fixed on it, for she felt sure she would catch a bad cold if she did not get dry very soon."
+        },
+        {
+          "id": "alice-049",
+          "split": "train",
+          "text": "“Ahem!” said the Mouse with an important air, “are you all ready? This is the driest thing I know. Silence all round, if you please! ‘William the Conqueror, whose cause was favoured by the pope, was soon submitted to by the English, who wanted leaders, and had been of late much accustomed to usurpation and conquest. Edwin and Morcar, the earls of Mercia and Northumbria—’”"
+        },
+        {
+          "id": "alice-050",
+          "split": "train",
+          "text": "“I beg your pardon!” said the Mouse, frowning, but very politely: “Did you speak?”"
+        },
+        {
+          "id": "alice-051",
+          "split": "train",
+          "text": "“I thought you did,” said the Mouse. “—I proceed. ‘Edwin and Morcar, the earls of Mercia and Northumbria, declared for him: and even Stigand, the patriotic archbishop of Canterbury, found it advisable—’”"
+        },
+        {
+          "id": "alice-052",
+          "split": "train",
+          "text": "“Found _it_,” the Mouse replied rather crossly: “of course you know what ‘it’ means.”"
+        },
+        {
+          "id": "alice-053",
+          "split": "train",
+          "text": "“I know what ‘it’ means well enough, when _I_ find a thing,” said the Duck: “it’s generally a frog or a worm. The question is, what did the archbishop find?”"
+        },
+        {
+          "id": "alice-054",
+          "split": "train",
+          "text": "The Mouse did not notice this question, but hurriedly went on, “‘—found it advisable to go with Edgar Atheling to meet William and offer him the crown. William’s conduct at first was moderate. But the insolence of his Normans—’ How are you getting on now, my dear?” it continued, turning to Alice as it spoke."
+        },
+        {
+          "id": "alice-055",
+          "split": "train",
+          "text": "“As wet as ever,” said Alice in a melancholy tone: “it doesn’t seem to dry me at all.”"
+        },
+        {
+          "id": "alice-056",
+          "split": "train",
+          "text": "“In that case,” said the Dodo solemnly, rising to its feet, “I move that the meeting adjourn, for the immediate adoption of more energetic remedies—”"
+        },
+        {
+          "id": "alice-057",
+          "split": "train",
+          "text": "“Speak English!” said the Eaglet. “I don’t know the meaning of half those long words, and, what’s more, I don’t believe you do either!” And the Eaglet bent down its head to hide a smile: some of the other birds tittered audibly."
+        },
+        {
+          "id": "alice-058",
+          "split": "train",
+          "text": "“What I was going to say,” said the Dodo in an offended tone, “was, that the best thing to get us dry would be a Caucus-race.”"
+        },
+        {
+          "id": "alice-059",
+          "split": "train",
+          "text": "“What _is_ a Caucus-race?” said Alice; not that she wanted much to know, but the Dodo had paused as if it thought that _somebody_ ought to speak, and no one else seemed inclined to say anything."
+        },
+        {
+          "id": "alice-060",
+          "split": "train",
+          "text": "“Why,” said the Dodo, “the best way to explain it is to do it.” (And, as you might like to try the thing yourself, some winter day, I will tell you how the Dodo managed it.)"
+        },
+        {
+          "id": "alice-061",
+          "split": "train",
+          "text": "First it marked out a race-course, in a sort of circle, (“the exact shape doesn’t matter,” it said,) and then all the party were placed along the course, here and there. There was no “One, two, three, and away,” but they began running when they liked, and left off when they liked, so that it was not easy to know when the race was over. However, when they had been running half an hour or so, and were quite dry again, the Dodo suddenly called out “The race is over!” and they all crowded round it, panting, and asking, “But who has won?”"
+        },
+        {
+          "id": "alice-062",
+          "split": "train",
+          "text": "This question the Dodo could not answer without a great deal of thought, and it sat for a long time with one finger pressed upon its forehead (the position in which you usually see Shakespeare, in the pictures of him), while the rest waited in silence. At last the Dodo said, “_Everybody_ has won, and all must have prizes.”"
+        },
+        {
+          "id": "alice-063",
+          "split": "train",
+          "text": "“Why, _she_, of course,” said the Dodo, pointing to Alice with one finger; and the whole party at once crowded round her, calling out in a confused way, “Prizes! Prizes!”"
+        },
+        {
+          "id": "alice-064",
+          "split": "train",
+          "text": "Alice had no idea what to do, and in despair she put her hand in her pocket, and pulled out a box of comfits, (luckily the salt water had not got into it), and handed them round as prizes. There was exactly one a-piece, all round."
+        },
+        {
+          "id": "alice-065",
+          "split": "train",
+          "text": "“Of course,” the Dodo replied very gravely. “What else have you got in your pocket?” he went on, turning to Alice."
+        },
+        {
+          "id": "alice-066",
+          "split": "train",
+          "text": "Then they all crowded round her once more, while the Dodo solemnly presented the thimble, saying “We beg your acceptance of this elegant thimble;” and, when it had finished this short speech, they all cheered."
+        },
+        {
+          "id": "alice-067",
+          "split": "train",
+          "text": "Alice thought the whole thing very absurd, but they all looked so grave that she did not dare to laugh; and, as she could not think of anything to say, she simply bowed, and took the thimble, looking as solemn as she could."
+        },
+        {
+          "id": "alice-068",
+          "split": "train",
+          "text": "The next thing was to eat the comfits: this caused some noise and confusion, as the large birds complained that they could not taste theirs, and the small ones choked and had to be patted on the back. However, it was over at last, and they sat down again in a ring, and begged the Mouse to tell them something more."
+        },
+        {
+          "id": "alice-069",
+          "split": "train",
+          "text": "“You promised to tell me your history, you know,” said Alice, “and why it is you hate—C and D,” she added in a whisper, half afraid that it would be offended again."
+        },
+        {
+          "id": "alice-070",
+          "split": "train",
+          "text": "“It _is_ a long tail, certainly,” said Alice, looking down with wonder at the Mouse’s tail; “but why do you call it sad?” And she kept on puzzling about it while the Mouse was speaking, so that her idea of the tale was something like this:—"
+        },
+        {
+          "id": "alice-071",
+          "split": "train",
+          "text": "“Fury said to a mouse, That he met in the house, ‘Let us both go to law: _I_ will prosecute _you_.—Come, I’ll take no denial; We must have a trial: For really this morning I’ve nothing to do.’ Said the mouse to the cur, ‘Such a trial, dear sir, With no jury or judge, would be wasting our breath.’ ‘I’ll be judge, I’ll be jury,’ Said cunning old Fury: ‘I’ll try the whole cause, and condemn you to death.’”"
+        },
+        {
+          "id": "alice-072",
+          "split": "tune",
+          "text": "“You are not attending!” said the Mouse to Alice severely. “What are you thinking of?”"
+        },
+        {
+          "id": "alice-073",
+          "split": "tune",
+          "text": "“I beg your pardon,” said Alice very humbly: “you had got to the fifth bend, I think?”"
+        },
+        {
+          "id": "alice-074",
+          "split": "tune",
+          "text": "“A knot!” said Alice, always ready to make herself useful, and looking anxiously about her. “Oh, do let me help to undo it!”"
+        },
+        {
+          "id": "alice-075",
+          "split": "tune",
+          "text": "“I shall do nothing of the sort,” said the Mouse, getting up and walking away. “You insult me by talking such nonsense!”"
+        },
+        {
+          "id": "alice-076",
+          "split": "tune",
+          "text": "“I didn’t mean it!” pleaded poor Alice. “But you’re so easily offended, you know!”"
+        },
+        {
+          "id": "alice-077",
+          "split": "tune",
+          "text": "“Please come back and finish your story!” Alice called after it; and the others all joined in chorus, “Yes, please do!” but the Mouse only shook its head impatiently, and walked a little quicker."
+        },
+        {
+          "id": "alice-078",
+          "split": "tune",
+          "text": "“What a pity it wouldn’t stay!” sighed the Lory, as soon as it was quite out of sight; and an old Crab took the opportunity of saying to her daughter “Ah, my dear! Let this be a lesson to you never to lose _your_ temper!” “Hold your tongue, Ma!” said the young Crab, a little snappishly. “You’re enough to try the patience of an oyster!”"
+        },
+        {
+          "id": "alice-079",
+          "split": "tune",
+          "text": "“I wish I had our Dinah here, I know I do!” said Alice aloud, addressing nobody in particular. “She’d soon fetch it back!”"
+        },
+        {
+          "id": "alice-080",
+          "split": "tune",
+          "text": "Alice replied eagerly, for she was always ready to talk about her pet: “Dinah’s our cat. And she’s such a capital one for catching mice you can’t think! And oh, I wish you could see her after the birds! Why, she’ll eat a little bird as soon as look at it!”"
+        },
+        {
+          "id": "alice-081",
+          "split": "tune",
+          "text": "This speech caused a remarkable sensation among the party. Some of the birds hurried off at once: one old Magpie began wrapping itself up very carefully, remarking, “I really must be getting home; the night-air doesn’t suit my throat!” and a Canary called out in a trembling voice to its children, “Come away, my dears! It’s high time you were all in bed!” On various pretexts they all moved off, and Alice was soon left alone."
+        },
+        {
+          "id": "alice-082",
+          "split": "tune",
+          "text": "“I wish I hadn’t mentioned Dinah!” she said to herself in a melancholy tone. “Nobody seems to like her, down here, and I’m sure she’s the best cat in the world! Oh, my dear Dinah! I wonder if I shall ever see you any more!” And here poor Alice began to cry again, for she felt very lonely and low-spirited. In a little while, however, she again heard a little pattering of footsteps in the distance, and she looked up eagerly, half hoping that the Mouse had changed his mind, and was coming back to finish his story."
+        },
+        {
+          "id": "alice-083",
+          "split": "tune",
+          "text": "It was the White Rabbit, trotting slowly back again, and looking anxiously about as it went, as if it had lost something; and she heard it muttering to itself “The Duchess! The Duchess! Oh my dear paws! Oh my fur and whiskers! She’ll get me executed, as sure as ferrets are ferrets! Where _can_ I have dropped them, I wonder?” Alice guessed in a moment that it was looking for the fan and the pair of white kid gloves, and she very good-naturedly began hunting about for them, but they were nowhere to be seen—everything seemed to have changed since her swim in the pool, and the great hall, with the glass table and the little door, had vanished completely."
+        },
+        {
+          "id": "alice-084",
+          "split": "test",
+          "text": "Very soon the Rabbit noticed Alice, as she went hunting about, and called out to her in an angry tone, “Why, Mary Ann, what _are_ you doing out here? Run home this moment, and fetch me a pair of gloves and a fan! Quick, now!” And Alice was so much frightened that she ran off at once in the direction it pointed to, without trying to explain the mistake it had made."
+        },
+        {
+          "id": "alice-085",
+          "split": "test",
+          "text": "“He took me for his housemaid,” she said to herself as she ran. “How surprised he’ll be when he finds out who I am! But I’d better take him his fan and gloves—that is, if I can find them.” As she said this, she came upon a neat little house, on the door of which was a bright brass plate with the name “W. RABBIT,” engraved upon it. She went in without knocking, and hurried upstairs, in great fear lest she should meet the real Mary Ann, and be turned out of the house before she had found the fan and gloves."
+        },
+        {
+          "id": "alice-086",
+          "split": "test",
+          "text": "“How queer it seems,” Alice said to herself, “to be going messages for a rabbit! I suppose Dinah’ll be sending me on messages next!” And she began fancying the sort of thing that would happen: “‘Miss Alice! Come here directly, and get ready for your walk!’ ‘Coming in a minute, nurse! But I’ve got to see that the mouse doesn’t get out.’ Only I don’t think,” Alice went on, “that they’d let Dinah stop in the house if it began ordering people about like that!”"
+        },
+        {
+          "id": "alice-087",
+          "split": "test",
+          "text": "By this time she had found her way into a tidy little room with a table in the window, and on it (as she had hoped) a fan and two or three pairs of tiny white kid gloves: she took up the fan and a pair of the gloves, and was just going to leave the room, when her eye fell upon a little bottle that stood near the looking-glass. There was no label this time with the words “DRINK ME,” but nevertheless she uncorked it and put it to her lips. “I know _something_ interesting is sure to happen,” she said to herself, “whenever I eat or drink anything; so I’ll just see what this bottle does. I do hope it’ll make me grow large again, for really I’m quite tired of being such a tiny little thing!”"
+        },
+        {
+          "id": "alice-088",
+          "split": "test",
+          "text": "It did so indeed, and much sooner than she had expected: before she had drunk half the bottle, she found her head pressing against the ceiling, and had to stoop to save her neck from being broken. She hastily put down the bottle, saying to herself “That’s quite enough—I hope I shan’t grow any more—As it is, I can’t get out at the door—I do wish I hadn’t drunk quite so much!”"
+        },
+        {
+          "id": "alice-089",
+          "split": "test",
+          "text": "Alas! it was too late to wish that! She went on growing, and growing, and very soon had to kneel down on the floor: in another minute there was not even room for this, and she tried the effect of lying down with one elbow against the door, and the other arm curled round her head. Still she went on growing, and, as a last resource, she put one arm out of the window, and one foot up the chimney, and said to herself “Now I can do no more, whatever happens. What _will_ become of me?”"
+        },
+        {
+          "id": "alice-090",
+          "split": "test",
+          "text": "Luckily for Alice, the little magic bottle had now had its full effect, and she grew no larger: still it was very uncomfortable, and, as there seemed to be no sort of chance of her ever getting out of the room again, no wonder she felt unhappy."
+        },
+        {
+          "id": "alice-091",
+          "split": "test",
+          "text": "“It was much pleasanter at home,” thought poor Alice, “when one wasn’t always growing larger and smaller, and being ordered about by mice and rabbits. I almost wish I hadn’t gone down that rabbit-hole—and yet—and yet—it’s rather curious, you know, this sort of life! I do wonder what _can_ have happened to me! When I used to read fairy-tales, I fancied that kind of thing never happened, and now here I am in the middle of one! There ought to be a book written about me, that there ought! And when I grow up, I’ll write one—but I’m grown up now,” she added in a sorrowful tone; “at least there’s no room to grow up any more _here_.”"
+        },
+        {
+          "id": "alice-092",
+          "split": "test",
+          "text": "“But then,” thought Alice, “shall I _never_ get any older than I am now? That’ll be a comfort, one way—never to be an old woman—but then—always to have lessons to learn! Oh, I shouldn’t like _that!_”"
+        },
+        {
+          "id": "alice-093",
+          "split": "test",
+          "text": "“Oh, you foolish Alice!” she answered herself. “How can you learn lessons in here? Why, there’s hardly room for _you_, and no room at all for any lesson-books!”"
+        },
+        {
+          "id": "alice-094",
+          "split": "test",
+          "text": "And so she went on, taking first one side and then the other, and making quite a conversation of it altogether; but after a few minutes she heard a voice outside, and stopped to listen."
+        },
+        {
+          "id": "alice-095",
+          "split": "test",
+          "text": "“Mary Ann! Mary Ann!” said the voice. “Fetch me my gloves this moment!” Then came a little pattering of feet on the stairs. Alice knew it was the Rabbit coming to look for her, and she trembled till she shook the house, quite forgetting that she was now about a thousand times as large as the Rabbit, and had no reason to be afraid of it."
+        }
+      ]
+    },
+    {
+      "id": "time-machine",
+      "title": "The Time Machine",
+      "author": "H. G. Wells",
+      "catalogue_url": "https://www.gutenberg.org/ebooks/35",
+      "text_url": "https://www.gutenberg.org/cache/epub/35/pg35.txt",
+      "source_sha256": "2892e919000e17c83e1dac51b30f4675db50536b644d7579fe8a89bb399a9bdc",
+      "paragraphs": [
+        {
+          "id": "time-machine-000",
+          "split": "train",
+          "text": "The Time Traveller (for so it will be convenient to speak of him) was expounding a recondite matter to us. His grey eyes shone and twinkled, and his usually pale face was flushed and animated. The fire burnt brightly, and the soft radiance of the incandescent lights in the lilies of silver caught the bubbles that flashed and passed in our glasses. Our chairs, being his patents, embraced and caressed us rather than submitted to be sat upon, and there was that luxurious after-dinner atmosphere, when thought runs gracefully free of the trammels of precision. And he put it to us in this way—marking the points with a lean forefinger—as we sat and lazily admired his earnestness over this new paradox (as we thought it) and his fecundity."
+        },
+        {
+          "id": "time-machine-001",
+          "split": "train",
+          "text": "“You must follow me carefully. I shall have to controvert one or two ideas that are almost universally accepted. The geometry, for instance, they taught you at school is founded on a misconception.”"
+        },
+        {
+          "id": "time-machine-002",
+          "split": "train",
+          "text": "“Is not that rather a large thing to expect us to begin upon?” said Filby, an argumentative person with red hair."
+        },
+        {
+          "id": "time-machine-003",
+          "split": "train",
+          "text": "“I do not mean to ask you to accept anything without reasonable ground for it. You will soon admit as much as I need from you. You know of course that a mathematical line, a line of thickness _nil_, has no real existence. They taught you that? Neither has a mathematical plane. These things are mere abstractions.”"
+        },
+        {
+          "id": "time-machine-004",
+          "split": "train",
+          "text": "“Nor, having only length, breadth, and thickness, can a cube have a real existence.”"
+        },
+        {
+          "id": "time-machine-005",
+          "split": "train",
+          "text": "“There I object,” said Filby. “Of course a solid body may exist. All real things—”"
+        },
+        {
+          "id": "time-machine-006",
+          "split": "train",
+          "text": "Filby became pensive. “Clearly,” the Time Traveller proceeded, “any real body must have extension in _four_ directions: it must have Length, Breadth, Thickness, and—Duration. But through a natural infirmity of the flesh, which I will explain to you in a moment, we incline to overlook this fact. There are really four dimensions, three which we call the three planes of Space, and a fourth, Time. There is, however, a tendency to draw an unreal distinction between the former three dimensions and the latter, because it happens that our consciousness moves intermittently in one direction along the latter from the beginning to the end of our lives.”"
+        },
+        {
+          "id": "time-machine-007",
+          "split": "train",
+          "text": "“That,” said a very young man, making spasmodic efforts to relight his cigar over the lamp; “that . . . very clear indeed.”"
+        },
+        {
+          "id": "time-machine-008",
+          "split": "train",
+          "text": "“Now, it is very remarkable that this is so extensively overlooked,” continued the Time Traveller, with a slight accession of cheerfulness. “Really this is what is meant by the Fourth Dimension, though some people who talk about the Fourth Dimension do not know they mean it. It is only another way of looking at Time. _There is no difference between Time and any of the three dimensions of Space except that our consciousness moves along it_. But some foolish people have got hold of the wrong side of that idea. You have all heard what they have to say about this Fourth Dimension?”"
+        },
+        {
+          "id": "time-machine-009",
+          "split": "train",
+          "text": "“It is simply this. That Space, as our mathematicians have it, is spoken of as having three dimensions, which one may call Length, Breadth, and Thickness, and is always definable by reference to three planes, each at right angles to the others. But some philosophical people have been asking why _three_ dimensions particularly—why not another direction at right angles to the other three?—and have even tried to construct a Four-Dimensional geometry. Professor Simon Newcomb was expounding this to the New York Mathematical Society only a month or so ago. You know how on a flat surface, which has only two dimensions, we can represent a figure of a three-dimensional solid, and similarly they think that by models of three dimensions they could represent one of four—if they could master the perspective of the thing. See?”"
+        },
+        {
+          "id": "time-machine-010",
+          "split": "train",
+          "text": "“I think so,” murmured the Provincial Mayor; and, knitting his brows, he lapsed into an introspective state, his lips moving as one who repeats mystic words. “Yes, I think I see it now,” he said after some time, brightening in a quite transitory manner."
+        },
+        {
+          "id": "time-machine-011",
+          "split": "train",
+          "text": "“Well, I do not mind telling you I have been at work upon this geometry of Four Dimensions for some time. Some of my results are curious. For instance, here is a portrait of a man at eight years old, another at fifteen, another at seventeen, another at twenty-three, and so on. All these are evidently sections, as it were, Three-Dimensional representations of his Four-Dimensioned being, which is a fixed and unalterable thing.”"
+        },
+        {
+          "id": "time-machine-012",
+          "split": "train",
+          "text": "“Scientific people,” proceeded the Time Traveller, after the pause required for the proper assimilation of this, “know very well that Time is only a kind of Space. Here is a popular scientific diagram, a weather record. This line I trace with my finger shows the movement of the barometer. Yesterday it was so high, yesterday night it fell, then this morning it rose again, and so gently upward to here. Surely the mercury did not trace this line in any of the dimensions of Space generally recognised? But certainly it traced such a line, and that line, therefore, we must conclude, was along the Time-Dimension.”"
+        },
+        {
+          "id": "time-machine-013",
+          "split": "train",
+          "text": "“But,” said the Medical Man, staring hard at a coal in the fire, “if Time is really only a fourth dimension of Space, why is it, and why has it always been, regarded as something different? And why cannot we move about in Time as we move about in the other dimensions of Space?”"
+        },
+        {
+          "id": "time-machine-014",
+          "split": "train",
+          "text": "The Time Traveller smiled. “Are you so sure we can move freely in Space? Right and left we can go, backward and forward freely enough, and men always have done so. I admit we move freely in two dimensions. But how about up and down? Gravitation limits us there.”"
+        },
+        {
+          "id": "time-machine-015",
+          "split": "train",
+          "text": "“But before the balloons, save for spasmodic jumping and the inequalities of the surface, man had no freedom of vertical movement.”"
+        },
+        {
+          "id": "time-machine-016",
+          "split": "train",
+          "text": "“And you cannot move at all in Time, you cannot get away from the present moment.”"
+        },
+        {
+          "id": "time-machine-017",
+          "split": "train",
+          "text": "“My dear sir, that is just where you are wrong. That is just where the whole world has gone wrong. We are always getting away from the present moment. Our mental existences, which are immaterial and have no dimensions, are passing along the Time-Dimension with a uniform velocity from the cradle to the grave. Just as we should travel _down_ if we began our existence fifty miles above the earth’s surface.”"
+        },
+        {
+          "id": "time-machine-018",
+          "split": "train",
+          "text": "“But the great difficulty is this,” interrupted the Psychologist. “You _can_ move about in all directions of Space, but you cannot move about in Time.”"
+        },
+        {
+          "id": "time-machine-019",
+          "split": "train",
+          "text": "“That is the germ of my great discovery. But you are wrong to say that we cannot move about in Time. For instance, if I am recalling an incident very vividly I go back to the instant of its occurrence: I become absent-minded, as you say. I jump back for a moment. Of course we have no means of staying back for any length of Time, any more than a savage or an animal has of staying six feet above the ground. But a civilised man is better off than the savage in this respect. He can go up against gravitation in a balloon, and why should he not hope that ultimately he may be able to stop or accelerate his drift along the Time-Dimension, or even turn about and travel the other way?”"
+        },
+        {
+          "id": "time-machine-020",
+          "split": "train",
+          "text": "“You can show black is white by argument,” said Filby, “but you will never convince me.”"
+        },
+        {
+          "id": "time-machine-021",
+          "split": "train",
+          "text": "“Possibly not,” said the Time Traveller. “But now you begin to see the object of my investigations into the geometry of Four Dimensions. Long ago I had a vague inkling of a machine—”"
+        },
+        {
+          "id": "time-machine-022",
+          "split": "train",
+          "text": "“That shall travel indifferently in any direction of Space and Time, as the driver determines.”"
+        },
+        {
+          "id": "time-machine-023",
+          "split": "train",
+          "text": "“It would be remarkably convenient for the historian,” the Psychologist suggested. “One might travel back and verify the accepted account of the Battle of Hastings, for instance!”"
+        },
+        {
+          "id": "time-machine-024",
+          "split": "train",
+          "text": "“Don’t you think you would attract attention?” said the Medical Man. “Our ancestors had no great tolerance for anachronisms.”"
+        },
+        {
+          "id": "time-machine-025",
+          "split": "train",
+          "text": "“One might get one’s Greek from the very lips of Homer and Plato,” the Very Young Man thought."
+        },
+        {
+          "id": "time-machine-026",
+          "split": "train",
+          "text": "“In which case they would certainly plough you for the Little-go. The German scholars have improved Greek so much.”"
+        },
+        {
+          "id": "time-machine-027",
+          "split": "train",
+          "text": "“Then there is the future,” said the Very Young Man. “Just think! One might invest all one’s money, leave it to accumulate at interest, and hurry on ahead!”"
+        },
+        {
+          "id": "time-machine-028",
+          "split": "train",
+          "text": "“Let’s see your experiment anyhow,” said the Psychologist, “though it’s all humbug, you know.”"
+        },
+        {
+          "id": "time-machine-029",
+          "split": "train",
+          "text": "The Time Traveller smiled round at us. Then, still smiling faintly, and with his hands deep in his trousers pockets, he walked slowly out of the room, and we heard his slippers shuffling down the long passage to his laboratory."
+        },
+        {
+          "id": "time-machine-030",
+          "split": "train",
+          "text": "“Some sleight-of-hand trick or other,” said the Medical Man, and Filby tried to tell us about a conjuror he had seen at Burslem, but before he had finished his preface the Time Traveller came back, and Filby’s anecdote collapsed."
+        },
+        {
+          "id": "time-machine-031",
+          "split": "train",
+          "text": "The thing the Time Traveller held in his hand was a glittering metallic framework, scarcely larger than a small clock, and very delicately made. There was ivory in it, and some transparent crystalline substance. And now I must be explicit, for this that follows—unless his explanation is to be accepted—is an absolutely unaccountable thing. He took one of the small octagonal tables that were scattered about the room, and set it in front of the fire, with two legs on the hearthrug. On this table he placed the mechanism. Then he drew up a chair, and sat down. The only other object on the table was a small shaded lamp, the bright light of which fell full upon the model. There were also perhaps a dozen candles about, two in brass candlesticks upon the mantel and several in sconces, so that the room was brilliantly illuminated. I sat in a low arm-chair nearest the fire, and I drew this forward so as to be almost between the Time Traveller and the fireplace. Filby sat behind him, looking over his shoulder. The Medical Man and the Provincial Mayor watched him in profile from the right, the Psychologist from the left. The Very Young Man stood behind the Psychologist. We were all on the alert. It appears incredible to me that any kind of trick, however subtly conceived and however adroitly done, could have been played upon us under these conditions."
+        },
+        {
+          "id": "time-machine-032",
+          "split": "train",
+          "text": "The Time Traveller looked at us, and then at the mechanism. “Well?” said the Psychologist."
+        },
+        {
+          "id": "time-machine-033",
+          "split": "train",
+          "text": "“This little affair,” said the Time Traveller, resting his elbows upon the table and pressing his hands together above the apparatus, “is only a model. It is my plan for a machine to travel through time. You will notice that it looks singularly askew, and that there is an odd twinkling appearance about this bar, as though it was in some way unreal.” He pointed to the part with his finger. “Also, here is one little white lever, and here is another.”"
+        },
+        {
+          "id": "time-machine-034",
+          "split": "train",
+          "text": "The Medical Man got up out of his chair and peered into the thing. “It’s beautifully made,” he said."
+        },
+        {
+          "id": "time-machine-035",
+          "split": "train",
+          "text": "“It took two years to make,” retorted the Time Traveller. Then, when we had all imitated the action of the Medical Man, he said: “Now I want you clearly to understand that this lever, being pressed over, sends the machine gliding into the future, and this other reverses the motion. This saddle represents the seat of a time traveller. Presently I am going to press the lever, and off the machine will go. It will vanish, pass into future Time, and disappear. Have a good look at the thing. Look at the table too, and satisfy yourselves there is no trickery. I don’t want to waste this model, and then be told I’m a quack.”"
+        },
+        {
+          "id": "time-machine-036",
+          "split": "train",
+          "text": "There was a minute’s pause perhaps. The Psychologist seemed about to speak to me, but changed his mind. Then the Time Traveller put forth his finger towards the lever. “No,” he said suddenly. “Lend me your hand.” And turning to the Psychologist, he took that individual’s hand in his own and told him to put out his forefinger. So that it was the Psychologist himself who sent forth the model Time Machine on its interminable voyage. We all saw the lever turn. I am absolutely certain there was no trickery. There was a breath of wind, and the lamp flame jumped. One of the candles on the mantel was blown out, and the little machine suddenly swung round, became indistinct, was seen as a ghost for a second perhaps, as an eddy of faintly glittering brass and ivory; and it was gone—vanished! Save for the lamp the table was bare."
+        },
+        {
+          "id": "time-machine-037",
+          "split": "train",
+          "text": "The Psychologist recovered from his stupor, and suddenly looked under the table. At that the Time Traveller laughed cheerfully. “Well?” he said, with a reminiscence of the Psychologist. Then, getting up, he went to the tobacco jar on the mantel, and with his back to us began to fill his pipe."
+        },
+        {
+          "id": "time-machine-038",
+          "split": "train",
+          "text": "We stared at each other. “Look here,” said the Medical Man, “are you in earnest about this? Do you seriously believe that that machine has travelled into time?”"
+        },
+        {
+          "id": "time-machine-039",
+          "split": "train",
+          "text": "“Certainly,” said the Time Traveller, stooping to light a spill at the fire. Then he turned, lighting his pipe, to look at the Psychologist’s face. (The Psychologist, to show that he was not unhinged, helped himself to a cigar and tried to light it uncut.) “What is more, I have a big machine nearly finished in there”—he indicated the laboratory—“and when that is put together I mean to have a journey on my own account.”"
+        },
+        {
+          "id": "time-machine-040",
+          "split": "train",
+          "text": "After an interval the Psychologist had an inspiration. “It must have gone into the past if it has gone anywhere,” he said."
+        },
+        {
+          "id": "time-machine-041",
+          "split": "train",
+          "text": "“Because I presume that it has not moved in space, and if it travelled into the future it would still be here all this time, since it must have travelled through this time.”"
+        },
+        {
+          "id": "time-machine-042",
+          "split": "train",
+          "text": "“But,” said I, “If it travelled into the past it would have been visible when we came first into this room; and last Thursday when we were here; and the Thursday before that; and so forth!”"
+        },
+        {
+          "id": "time-machine-043",
+          "split": "train",
+          "text": "“Serious objections,” remarked the Provincial Mayor, with an air of impartiality, turning towards the Time Traveller."
+        },
+        {
+          "id": "time-machine-044",
+          "split": "train",
+          "text": "“Not a bit,” said the Time Traveller, and, to the Psychologist: “You think. _You_ can explain that. It’s presentation below the threshold, you know, diluted presentation.”"
+        },
+        {
+          "id": "time-machine-045",
+          "split": "train",
+          "text": "“Of course,” said the Psychologist, and reassured us. “That’s a simple point in psychology. I should have thought of it. It’s plain enough, and helps the paradox delightfully. We cannot see it, nor can we appreciate this machine, any more than we can the spoke of a wheel spinning, or a bullet flying through the air. If it is travelling through time fifty times or a hundred times faster than we are, if it gets through a minute while we get through a second, the impression it creates will of course be only one-fiftieth or one-hundredth of what it would make if it were not travelling in time. That’s plain enough.” He passed his hand through the space in which the machine had been. “You see?” he said, laughing."
+        },
+        {
+          "id": "time-machine-046",
+          "split": "train",
+          "text": "We sat and stared at the vacant table for a minute or so. Then the Time Traveller asked us what we thought of it all."
+        },
+        {
+          "id": "time-machine-047",
+          "split": "train",
+          "text": "“It sounds plausible enough tonight,” said the Medical Man; “but wait until tomorrow. Wait for the common sense of the morning.”"
+        },
+        {
+          "id": "time-machine-048",
+          "split": "train",
+          "text": "“Would you like to see the Time Machine itself?” asked the Time Traveller. And therewith, taking the lamp in his hand, he led the way down the long, draughty corridor to his laboratory. I remember vividly the flickering light, his queer, broad head in silhouette, the dance of the shadows, how we all followed him, puzzled but incredulous, and how there in the laboratory we beheld a larger edition of the little mechanism which we had seen vanish from before our eyes. Parts were of nickel, parts of ivory, parts had certainly been filed or sawn out of rock crystal. The thing was generally complete, but the twisted crystalline bars lay unfinished upon the bench beside some sheets of drawings, and I took one up for a better look at it. Quartz it seemed to be."
+        },
+        {
+          "id": "time-machine-049",
+          "split": "train",
+          "text": "“Look here,” said the Medical Man, “are you perfectly serious? Or is this a trick—like that ghost you showed us last Christmas?”"
+        },
+        {
+          "id": "time-machine-050",
+          "split": "train",
+          "text": "“Upon that machine,” said the Time Traveller, holding the lamp aloft, “I intend to explore time. Is that plain? I was never more serious in my life.”"
+        },
+        {
+          "id": "time-machine-051",
+          "split": "train",
+          "text": "I caught Filby’s eye over the shoulder of the Medical Man, and he winked at me solemnly."
+        },
+        {
+          "id": "time-machine-052",
+          "split": "train",
+          "text": "I think that at that time none of us quite believed in the Time Machine. The fact is, the Time Traveller was one of those men who are too clever to be believed: you never felt that you saw all round him; you always suspected some subtle reserve, some ingenuity in ambush, behind his lucid frankness. Had Filby shown the model and explained the matter in the Time Traveller’s words, we should have shown _him_ far less scepticism. For we should have perceived his motives: a pork-butcher could understand Filby. But the Time Traveller had more than a touch of whim among his elements, and we distrusted him. Things that would have made the fame of a less clever man seemed tricks in his hands. It is a mistake to do things too easily. The serious people who took him seriously never felt quite sure of his deportment; they were somehow aware that trusting their reputations for judgment with him was like furnishing a nursery with eggshell china. So I don’t think any of us said very much about time travelling in the interval between that Thursday and the next, though its odd potentialities ran, no doubt, in most of our minds: its plausibility, that is, its practical incredibleness, the curious possibilities of anachronism and of utter confusion it suggested. For my own part, I was particularly preoccupied with the trick of the model. That I remember discussing with the Medical Man, whom I met on Friday at the Linnæan. He said he had seen a similar thing at Tübingen, and laid considerable stress on the blowing-out of the candle. But how the trick was done he could not explain."
+        },
+        {
+          "id": "time-machine-053",
+          "split": "train",
+          "text": "The next Thursday I went again to Richmond—I suppose I was one of the Time Traveller’s most constant guests—and, arriving late, found four or five men already assembled in his drawing-room. The Medical Man was standing before the fire with a sheet of paper in one hand and his watch in the other. I looked round for the Time Traveller, and—“It’s half-past seven now,” said the Medical Man. “I suppose we’d better have dinner?”"
+        },
+        {
+          "id": "time-machine-054",
+          "split": "train",
+          "text": "“You’ve just come? It’s rather odd. He’s unavoidably detained. He asks me in this note to lead off with dinner at seven if he’s not back. Says he’ll explain when he comes.”"
+        },
+        {
+          "id": "time-machine-055",
+          "split": "train",
+          "text": "“It seems a pity to let the dinner spoil,” said the Editor of a well-known daily paper; and thereupon the Doctor rang the bell."
+        },
+        {
+          "id": "time-machine-056",
+          "split": "train",
+          "text": "The Psychologist was the only person besides the Doctor and myself who had attended the previous dinner. The other men were Blank, the Editor aforementioned, a certain journalist, and another—a quiet, shy man with a beard—whom I didn’t know, and who, as far as my observation went, never opened his mouth all the evening. There was some speculation at the dinner-table about the Time Traveller’s absence, and I suggested time travelling, in a half-jocular spirit. The Editor wanted that explained to him, and the Psychologist volunteered a wooden account of the “ingenious paradox and trick” we had witnessed that day week. He was in the midst of his exposition when the door from the corridor opened slowly and without noise. I was facing the door, and saw it first. “Hallo!” I said. “At last!” And the door opened wider, and the Time Traveller stood before us. I gave a cry of surprise. “Good heavens! man, what’s the matter?” cried the Medical Man, who saw him next. And the whole tableful turned towards the door."
+        },
+        {
+          "id": "time-machine-057",
+          "split": "train",
+          "text": "He was in an amazing plight. His coat was dusty and dirty, and smeared with green down the sleeves; his hair disordered, and as it seemed to me greyer—either with dust and dirt or because its colour had actually faded. His face was ghastly pale; his chin had a brown cut on it—a cut half-healed; his expression was haggard and drawn, as by intense suffering. For a moment he hesitated in the doorway, as if he had been dazzled by the light. Then he came into the room. He walked with just such a limp as I have seen in footsore tramps. We stared at him in silence, expecting him to speak."
+        },
+        {
+          "id": "time-machine-058",
+          "split": "train",
+          "text": "He said not a word, but came painfully to the table, and made a motion towards the wine. The Editor filled a glass of champagne, and pushed it towards him. He drained it, and it seemed to do him good: for he looked round the table, and the ghost of his old smile flickered across his face. “What on earth have you been up to, man?” said the Doctor. The Time Traveller did not seem to hear. “Don’t let me disturb you,” he said, with a certain faltering articulation. “I’m all right.” He stopped, held out his glass for more, and took it off at a draught. “That’s good,” he said. His eyes grew brighter, and a faint colour came into his cheeks. His glance flickered over our faces with a certain dull approval, and then went round the warm and comfortable room. Then he spoke again, still as it were feeling his way among his words. “I’m going to wash and dress, and then I’ll come down and explain things.... Save me some of that mutton. I’m starving for a bit of meat.”"
+        },
+        {
+          "id": "time-machine-059",
+          "split": "train",
+          "text": "He looked across at the Editor, who was a rare visitor, and hoped he was all right. The Editor began a question. “Tell you presently,” said the Time Traveller. “I’m—funny! Be all right in a minute.”"
+        },
+        {
+          "id": "time-machine-060",
+          "split": "train",
+          "text": "He put down his glass, and walked towards the staircase door. Again I remarked his lameness and the soft padding sound of his footfall, and standing up in my place, I saw his feet as he went out. He had nothing on them but a pair of tattered, blood-stained socks. Then the door closed upon him. I had half a mind to follow, till I remembered how he detested any fuss about himself. For a minute, perhaps, my mind was wool-gathering. Then, “Remarkable Behaviour of an Eminent Scientist,” I heard the Editor say, thinking (after his wont) in headlines. And this brought my attention back to the bright dinner-table."
+        },
+        {
+          "id": "time-machine-061",
+          "split": "train",
+          "text": "“What’s the game?” said the Journalist. “Has he been doing the Amateur Cadger? I don’t follow.” I met the eye of the Psychologist, and read my own interpretation in his face. I thought of the Time Traveller limping painfully upstairs. I don’t think anyone else had noticed his lameness."
+        },
+        {
+          "id": "time-machine-062",
+          "split": "train",
+          "text": "The first to recover completely from this surprise was the Medical Man, who rang the bell—the Time Traveller hated to have servants waiting at dinner—for a hot plate. At that the Editor turned to his knife and fork with a grunt, and the Silent Man followed suit. The dinner was resumed. Conversation was exclamatory for a little while with gaps of wonderment; and then the Editor got fervent in his curiosity. “Does our friend eke out his modest income with a crossing? or has he his Nebuchadnezzar phases?” he inquired. “I feel assured it’s this business of the Time Machine,” I said, and took up the Psychologist’s account of our previous meeting. The new guests were frankly incredulous. The Editor raised objections. “What _was_ this time travelling? A man couldn’t cover himself with dust by rolling in a paradox, could he?” And then, as the idea came home to him, he resorted to caricature. Hadn’t they any clothes-brushes in the Future? The Journalist too, would not believe at any price, and joined the Editor in the easy work of heaping ridicule on the whole thing. They were both the new kind of journalist—very joyous, irreverent young men. “Our Special Correspondent in the Day after Tomorrow reports,” the Journalist was saying—or rather shouting—when the Time Traveller came back. He was dressed in ordinary evening clothes, and nothing save his haggard look remained of the change that had startled me."
+        },
+        {
+          "id": "time-machine-063",
+          "split": "train",
+          "text": "“I say,” said the Editor hilariously, “these chaps here say you have been travelling into the middle of next week! Tell us all about little Rosebery, will you? What will you take for the lot?”"
+        },
+        {
+          "id": "time-machine-064",
+          "split": "train",
+          "text": "The Time Traveller came to the place reserved for him without a word. He smiled quietly, in his old way. “Where’s my mutton?” he said. “What a treat it is to stick a fork into meat again!”"
+        },
+        {
+          "id": "time-machine-065",
+          "split": "train",
+          "text": "“Story be damned!” said the Time Traveller. “I want something to eat. I won’t say a word until I get some peptone into my arteries. Thanks. And the salt.”"
+        },
+        {
+          "id": "time-machine-066",
+          "split": "train",
+          "text": "“I’d give a shilling a line for a verbatim note,” said the Editor. The Time Traveller pushed his glass towards the Silent Man and rang it with his fingernail; at which the Silent Man, who had been staring at his face, started convulsively, and poured him wine. The rest of the dinner was uncomfortable. For my own part, sudden questions kept on rising to my lips, and I dare say it was the same with the others. The Journalist tried to relieve the tension by telling anecdotes of Hettie Potter. The Time Traveller devoted his attention to his dinner, and displayed the appetite of a tramp. The Medical Man smoked a cigarette, and watched the Time Traveller through his eyelashes. The Silent Man seemed even more clumsy than usual, and drank champagne with regularity and determination out of sheer nervousness. At last the Time Traveller pushed his plate away, and looked round us. “I suppose I must apologise,” he said. “I was simply starving. I’ve had a most amazing time.” He reached out his hand for a cigar, and cut the end. “But come into the smoking-room. It’s too long a story to tell over greasy plates.” And ringing the bell in passing, he led the way into the adjoining room."
+        },
+        {
+          "id": "time-machine-067",
+          "split": "train",
+          "text": "“You have told Blank, and Dash, and Chose about the machine?” he said to me, leaning back in his easy-chair and naming the three new guests."
+        },
+        {
+          "id": "time-machine-068",
+          "split": "train",
+          "text": "“I can’t argue tonight. I don’t mind telling you the story, but I can’t argue. I will,” he went on, “tell you the story of what has happened to me, if you like, but you must refrain from interruptions. I want to tell it. Badly. Most of it will sound like lying. So be it! It’s true—every word of it, all the same. I was in my laboratory at four o’clock, and since then … I’ve lived eight days … such days as no human being ever lived before! I’m nearly worn out, but I shan’t sleep till I’ve told this thing over to you. Then I shall go to bed. But no interruptions! Is it agreed?”"
+        },
+        {
+          "id": "time-machine-069",
+          "split": "train",
+          "text": "“Agreed,” said the Editor, and the rest of us echoed “Agreed.” And with that the Time Traveller began his story as I have set it forth. He sat back in his chair at first, and spoke like a weary man. Afterwards he got more animated. In writing it down I feel with only too much keenness the inadequacy of pen and ink—and, above all, my own inadequacy—to express its quality. You read, I will suppose, attentively enough; but you cannot see the speaker’s white, sincere face in the bright circle of the little lamp, nor hear the intonation of his voice. You cannot know how his expression followed the turns of his story! Most of us hearers were in shadow, for the candles in the smoking-room had not been lighted, and only the face of the Journalist and the legs of the Silent Man from the knees downward were illuminated. At first we glanced now and again at each other. After a time we ceased to do that, and looked only at the Time Traveller’s face."
+        },
+        {
+          "id": "time-machine-070",
+          "split": "train",
+          "text": "“I told some of you last Thursday of the principles of the Time Machine, and showed you the actual thing itself, incomplete in the workshop. There it is now, a little travel-worn, truly; and one of the ivory bars is cracked, and a brass rail bent; but the rest of it’s sound enough. I expected to finish it on Friday; but on Friday, when the putting together was nearly done, I found that one of the nickel bars was exactly one inch too short, and this I had to get remade; so that the thing was not complete until this morning. It was at ten o’clock today that the first of all Time Machines began its career. I gave it a last tap, tried all the screws again, put one more drop of oil on the quartz rod, and sat myself in the saddle. I suppose a suicide who holds a pistol to his skull feels much the same wonder at what will come next as I felt then. I took the starting lever in one hand and the stopping one in the other, pressed the first, and almost immediately the second. I seemed to reel; I felt a nightmare sensation of falling; and, looking round, I saw the laboratory exactly as before. Had anything happened? For a moment I suspected that my intellect had tricked me. Then I noted the clock. A moment before, as it seemed, it had stood at a minute or so past ten; now it was nearly half-past three!"
+        },
+        {
+          "id": "time-machine-071",
+          "split": "train",
+          "text": "“I drew a breath, set my teeth, gripped the starting lever with both hands, and went off with a thud. The laboratory got hazy and went dark. Mrs. Watchett came in and walked, apparently without seeing me, towards the garden door. I suppose it took her a minute or so to traverse the place, but to me she seemed to shoot across the room like a rocket. I pressed the lever over to its extreme position. The night came like the turning out of a lamp, and in another moment came tomorrow. The laboratory grew faint and hazy, then fainter and ever fainter. Tomorrow night came black, then day again, night again, day again, faster and faster still. An eddying murmur filled my ears, and a strange, dumb confusedness descended on my mind."
+        },
+        {
+          "id": "time-machine-072",
+          "split": "tune",
+          "text": "“I am afraid I cannot convey the peculiar sensations of time travelling. They are excessively unpleasant. There is a feeling exactly like that one has upon a switchback—of a helpless headlong motion! I felt the same horrible anticipation, too, of an imminent smash. As I put on pace, night followed day like the flapping of a black wing. The dim suggestion of the laboratory seemed presently to fall away from me, and I saw the sun hopping swiftly across the sky, leaping it every minute, and every minute marking a day. I supposed the laboratory had been destroyed and I had come into the open air. I had a dim impression of scaffolding, but I was already going too fast to be conscious of any moving things. The slowest snail that ever crawled dashed by too fast for me. The twinkling succession of darkness and light was excessively painful to the eye. Then, in the intermittent darknesses, I saw the moon spinning swiftly through her quarters from new to full, and had a faint glimpse of the circling stars. Presently, as I went on, still gaining velocity, the palpitation of night and day merged into one continuous greyness; the sky took on a wonderful deepness of blue, a splendid luminous colour like that of early twilight; the jerking sun became a streak of fire, a brilliant arch, in space; the moon a fainter fluctuating band; and I could see nothing of the stars, save now and then a brighter circle flickering in the blue."
+        },
+        {
+          "id": "time-machine-073",
+          "split": "tune",
+          "text": "“The landscape was misty and vague. I was still on the hillside upon which this house now stands, and the shoulder rose above me grey and dim. I saw trees growing and changing like puffs of vapour, now brown, now green; they grew, spread, shivered, and passed away. I saw huge buildings rise up faint and fair, and pass like dreams. The whole surface of the earth seemed changed—melting and flowing under my eyes. The little hands upon the dials that registered my speed raced round faster and faster. Presently I noted that the sun belt swayed up and down, from solstice to solstice, in a minute or less, and that consequently my pace was over a year a minute; and minute by minute the white snow flashed across the world, and vanished, and was followed by the bright, brief green of spring."
+        },
+        {
+          "id": "time-machine-074",
+          "split": "tune",
+          "text": "“The unpleasant sensations of the start were less poignant now. They merged at last into a kind of hysterical exhilaration. I remarked, indeed, a clumsy swaying of the machine, for which I was unable to account. But my mind was too confused to attend to it, so with a kind of madness growing upon me, I flung myself into futurity. At first I scarce thought of stopping, scarce thought of anything but these new sensations. But presently a fresh series of impressions grew up in my mind—a certain curiosity and therewith a certain dread—until at last they took complete possession of me. What strange developments of humanity, what wonderful advances upon our rudimentary civilisation, I thought, might not appear when I came to look nearly into the dim elusive world that raced and fluctuated before my eyes! I saw great and splendid architecture rising about me, more massive than any buildings of our own time, and yet, as it seemed, built of glimmer and mist. I saw a richer green flow up the hillside, and remain there, without any wintry intermission. Even through the veil of my confusion the earth seemed very fair. And so my mind came round to the business of stopping."
+        },
+        {
+          "id": "time-machine-075",
+          "split": "tune",
+          "text": "“The peculiar risk lay in the possibility of my finding some substance in the space which I, or the machine, occupied. So long as I travelled at a high velocity through time, this scarcely mattered: I was, so to speak, attenuated—was slipping like a vapour through the interstices of intervening substances! But to come to a stop involved the jamming of myself, molecule by molecule, into whatever lay in my way; meant bringing my atoms into such intimate contact with those of the obstacle that a profound chemical reaction—possibly a far-reaching explosion—would result, and blow myself and my apparatus out of all possible dimensions—into the Unknown. This possibility had occurred to me again and again while I was making the machine; but then I had cheerfully accepted it as an unavoidable risk—one of the risks a man has got to take! Now the risk was inevitable, I no longer saw it in the same cheerful light. The fact is that, insensibly, the absolute strangeness of everything, the sickly jarring and swaying of the machine, above all, the feeling of prolonged falling, had absolutely upset my nerves. I told myself that I could never stop, and with a gust of petulance I resolved to stop forthwith. Like an impatient fool, I lugged over the lever, and incontinently the thing went reeling over, and I was flung headlong through the air."
+        },
+        {
+          "id": "time-machine-076",
+          "split": "tune",
+          "text": "“There was the sound of a clap of thunder in my ears. I may have been stunned for a moment. A pitiless hail was hissing round me, and I was sitting on soft turf in front of the overset machine. Everything still seemed grey, but presently I remarked that the confusion in my ears was gone. I looked round me. I was on what seemed to be a little lawn in a garden, surrounded by rhododendron bushes, and I noticed that their mauve and purple blossoms were dropping in a shower under the beating of the hailstones. The rebounding, dancing hail hung in a little cloud over the machine, and drove along the ground like smoke. In a moment I was wet to the skin. ‘Fine hospitality,’ said I, ‘to a man who has travelled innumerable years to see you.’"
+        },
+        {
+          "id": "time-machine-077",
+          "split": "tune",
+          "text": "“Presently I thought what a fool I was to get wet. I stood up and looked round me. A colossal figure, carved apparently in some white stone, loomed indistinctly beyond the rhododendrons through the hazy downpour. But all else of the world was invisible."
+        },
+        {
+          "id": "time-machine-078",
+          "split": "tune",
+          "text": "“My sensations would be hard to describe. As the columns of hail grew thinner, I saw the white figure more distinctly. It was very large, for a silver birch-tree touched its shoulder. It was of white marble, in shape something like a winged sphinx, but the wings, instead of being carried vertically at the sides, were spread so that it seemed to hover. The pedestal, it appeared to me, was of bronze, and was thick with verdigris. It chanced that the face was towards me; the sightless eyes seemed to watch me; there was the faint shadow of a smile on the lips. It was greatly weather-worn, and that imparted an unpleasant suggestion of disease. I stood looking at it for a little space—half a minute, perhaps, or half an hour. It seemed to advance and to recede as the hail drove before it denser or thinner. At last I tore my eyes from it for a moment, and saw that the hail curtain had worn threadbare, and that the sky was lightening with the promise of the sun."
+        },
+        {
+          "id": "time-machine-079",
+          "split": "tune",
+          "text": "“I looked up again at the crouching white shape, and the full temerity of my voyage came suddenly upon me. What might appear when that hazy curtain was altogether withdrawn? What might not have happened to men? What if cruelty had grown into a common passion? What if in this interval the race had lost its manliness, and had developed into something inhuman, unsympathetic, and overwhelmingly powerful? I might seem some old-world savage animal, only the more dreadful and disgusting for our common likeness—a foul creature to be incontinently slain."
+        },
+        {
+          "id": "time-machine-080",
+          "split": "tune",
+          "text": "“Already I saw other vast shapes—huge buildings with intricate parapets and tall columns, with a wooded hillside dimly creeping in upon me through the lessening storm. I was seized with a panic fear. I turned frantically to the Time Machine, and strove hard to readjust it. As I did so the shafts of the sun smote through the thunderstorm. The grey downpour was swept aside and vanished like the trailing garments of a ghost. Above me, in the intense blue of the summer sky, some faint brown shreds of cloud whirled into nothingness. The great buildings about me stood out clear and distinct, shining with the wet of the thunderstorm, and picked out in white by the unmelted hailstones piled along their courses. I felt naked in a strange world. I felt as perhaps a bird may feel in the clear air, knowing the hawk wings above and will swoop. My fear grew to frenzy. I took a breathing space, set my teeth, and again grappled fiercely, wrist and knee, with the machine. It gave under my desperate onset and turned over. It struck my chin violently. One hand on the saddle, the other on the lever, I stood panting heavily in attitude to mount again."
+        },
+        {
+          "id": "time-machine-081",
+          "split": "tune",
+          "text": "“But with this recovery of a prompt retreat my courage recovered. I looked more curiously and less fearfully at this world of the remote future. In a circular opening, high up in the wall of the nearer house, I saw a group of figures clad in rich soft robes. They had seen me, and their faces were directed towards me."
+        },
+        {
+          "id": "time-machine-082",
+          "split": "tune",
+          "text": "“Then I heard voices approaching me. Coming through the bushes by the White Sphinx were the heads and shoulders of men running. One of these emerged in a pathway leading straight to the little lawn upon which I stood with my machine. He was a slight creature—perhaps four feet high—clad in a purple tunic, girdled at the waist with a leather belt. Sandals or buskins—I could not clearly distinguish which—were on his feet; his legs were bare to the knees, and his head was bare. Noticing that, I noticed for the first time how warm the air was."
+        },
+        {
+          "id": "time-machine-083",
+          "split": "tune",
+          "text": "“He struck me as being a very beautiful and graceful creature, but indescribably frail. His flushed face reminded me of the more beautiful kind of consumptive—that hectic beauty of which we used to hear so much. At the sight of him I suddenly regained confidence. I took my hands from the machine."
+        },
+        {
+          "id": "time-machine-084",
+          "split": "test",
+          "text": "“In another moment we were standing face to face, I and this fragile thing out of futurity. He came straight up to me and laughed into my eyes. The absence from his bearing of any sign of fear struck me at once. Then he turned to the two others who were following him and spoke to them in a strange and very sweet and liquid tongue."
+        },
+        {
+          "id": "time-machine-085",
+          "split": "test",
+          "text": "“There were others coming, and presently a little group of perhaps eight or ten of these exquisite creatures were about me. One of them addressed me. It came into my head, oddly enough, that my voice was too harsh and deep for them. So I shook my head, and, pointing to my ears, shook it again. He came a step forward, hesitated, and then touched my hand. Then I felt other soft little tentacles upon my back and shoulders. They wanted to make sure I was real. There was nothing in this at all alarming. Indeed, there was something in these pretty little people that inspired confidence—a graceful gentleness, a certain childlike ease. And besides, they looked so frail that I could fancy myself flinging the whole dozen of them about like ninepins. But I made a sudden motion to warn them when I saw their little pink hands feeling at the Time Machine. Happily then, when it was not too late, I thought of a danger I had hitherto forgotten, and reaching over the bars of the machine I unscrewed the little levers that would set it in motion, and put these in my pocket. Then I turned again to see what I could do in the way of communication."
+        },
+        {
+          "id": "time-machine-086",
+          "split": "test",
+          "text": "“And then, looking more nearly into their features, I saw some further peculiarities in their Dresden china type of prettiness. Their hair, which was uniformly curly, came to a sharp end at the neck and cheek; there was not the faintest suggestion of it on the face, and their ears were singularly minute. The mouths were small, with bright red, rather thin lips, and the little chins ran to a point. The eyes were large and mild; and—this may seem egotism on my part—I fancied even that there was a certain lack of the interest I might have expected in them."
+        },
+        {
+          "id": "time-machine-087",
+          "split": "test",
+          "text": "“As they made no effort to communicate with me, but simply stood round me smiling and speaking in soft cooing notes to each other, I began the conversation. I pointed to the Time Machine and to myself. Then, hesitating for a moment how to express Time, I pointed to the sun. At once a quaintly pretty little figure in chequered purple and white followed my gesture, and then astonished me by imitating the sound of thunder."
+        },
+        {
+          "id": "time-machine-088",
+          "split": "test",
+          "text": "“For a moment I was staggered, though the import of his gesture was plain enough. The question had come into my mind abruptly: were these creatures fools? You may hardly understand how it took me. You see, I had always anticipated that the people of the year Eight Hundred and Two Thousand odd would be incredibly in front of us in knowledge, art, everything. Then one of them suddenly asked me a question that showed him to be on the intellectual level of one of our five-year-old children—asked me, in fact, if I had come from the sun in a thunderstorm! It let loose the judgment I had suspended upon their clothes, their frail light limbs, and fragile features. A flow of disappointment rushed across my mind. For a moment I felt that I had built the Time Machine in vain."
+        },
+        {
+          "id": "time-machine-089",
+          "split": "test",
+          "text": "“I nodded, pointed to the sun, and gave them such a vivid rendering of a thunderclap as startled them. They all withdrew a pace or so and bowed. Then came one laughing towards me, carrying a chain of beautiful flowers altogether new to me, and put it about my neck. The idea was received with melodious applause; and presently they were all running to and fro for flowers, and laughingly flinging them upon me until I was almost smothered with blossom. You who have never seen the like can scarcely imagine what delicate and wonderful flowers countless years of culture had created. Then someone suggested that their plaything should be exhibited in the nearest building, and so I was led past the sphinx of white marble, which had seemed to watch me all the while with a smile at my astonishment, towards a vast grey edifice of fretted stone. As I went with them the memory of my confident anticipations of a profoundly grave and intellectual posterity came, with irresistible merriment, to my mind."
+        },
+        {
+          "id": "time-machine-090",
+          "split": "test",
+          "text": "“The building had a huge entry, and was altogether of colossal dimensions. I was naturally most occupied with the growing crowd of little people, and with the big open portals that yawned before me shadowy and mysterious. My general impression of the world I saw over their heads was a tangled waste of beautiful bushes and flowers, a long neglected and yet weedless garden. I saw a number of tall spikes of strange white flowers, measuring a foot perhaps across the spread of the waxen petals. They grew scattered, as if wild, among the variegated shrubs, but, as I say, I did not examine them closely at this time. The Time Machine was left deserted on the turf among the rhododendrons."
+        },
+        {
+          "id": "time-machine-091",
+          "split": "test",
+          "text": "“The arch of the doorway was richly carved, but naturally I did not observe the carving very narrowly, though I fancied I saw suggestions of old Phœnician decorations as I passed through, and it struck me that they were very badly broken and weather-worn. Several more brightly clad people met me in the doorway, and so we entered, I, dressed in dingy nineteenth-century garments, looking grotesque enough, garlanded with flowers, and surrounded by an eddying mass of bright, soft-coloured robes and shining white limbs, in a melodious whirl of laughter and laughing speech."
+        },
+        {
+          "id": "time-machine-092",
+          "split": "test",
+          "text": "“The big doorway opened into a proportionately great hall hung with brown. The roof was in shadow, and the windows, partially glazed with coloured glass and partially unglazed, admitted a tempered light. The floor was made up of huge blocks of some very hard white metal, not plates nor slabs—blocks, and it was so much worn, as I judged by the going to and fro of past generations, as to be deeply channelled along the more frequented ways. Transverse to the length were innumerable tables made of slabs of polished stone, raised, perhaps, a foot from the floor, and upon these were heaps of fruits. Some I recognised as a kind of hypertrophied raspberry and orange, but for the most part they were strange."
+        },
+        {
+          "id": "time-machine-093",
+          "split": "test",
+          "text": "“Between the tables was scattered a great number of cushions. Upon these my conductors seated themselves, signing for me to do likewise. With a pretty absence of ceremony they began to eat the fruit with their hands, flinging peel and stalks, and so forth, into the round openings in the sides of the tables. I was not loath to follow their example, for I felt thirsty and hungry. As I did so I surveyed the hall at my leisure."
+        },
+        {
+          "id": "time-machine-094",
+          "split": "test",
+          "text": "“And perhaps the thing that struck me most was its dilapidated look. The stained-glass windows, which displayed only a geometrical pattern, were broken in many places, and the curtains that hung across the lower end were thick with dust. And it caught my eye that the corner of the marble table near me was fractured. Nevertheless, the general effect was extremely rich and picturesque. There were, perhaps, a couple of hundred people dining in the hall, and most of them, seated as near to me as they could come, were watching me with interest, their little eyes shining over the fruit they were eating. All were clad in the same soft, and yet strong, silky material."
+        },
+        {
+          "id": "time-machine-095",
+          "split": "test",
+          "text": "“Fruit, by the bye, was all their diet. These people of the remote future were strict vegetarians, and while I was with them, in spite of some carnal cravings, I had to be frugivorous also. Indeed, I found afterwards that horses, cattle, sheep, dogs, had followed the Ichthyosaurus into extinction. But the fruits were very delightful; one, in particular, that seemed to be in season all the time I was there—a floury thing in a three-sided husk—was especially good, and I made it my staple. At first I was puzzled by all these strange fruits, and by the strange flowers I saw, but later I began to perceive their import."
+        }
+      ]
+    },
+    {
+      "id": "great-expectations",
+      "title": "Great Expectations",
+      "author": "Charles Dickens",
+      "catalogue_url": "https://www.gutenberg.org/ebooks/1400",
+      "text_url": "https://www.gutenberg.org/cache/epub/1400/pg1400.txt",
+      "source_sha256": "9a637118af8e953e9764ec603d9b0a032883384d465acac2e27966a80cf1c6f8",
+      "paragraphs": [
+        {
+          "id": "great-expectations-000",
+          "split": "train",
+          "text": "My father’s family name being Pirrip, and my Christian name Philip, my infant tongue could make of both names nothing longer or more explicit than Pip. So, I called myself Pip, and came to be called Pip."
+        },
+        {
+          "id": "great-expectations-001",
+          "split": "train",
+          "text": "I give Pirrip as my father’s family name, on the authority of his tombstone and my sister,—Mrs. Joe Gargery, who married the blacksmith. As I never saw my father or my mother, and never saw any likeness of either of them (for their days were long before the days of photographs), my first fancies regarding what they were like were unreasonably derived from their tombstones. The shape of the letters on my father’s, gave me an odd idea that he was a square, stout, dark man, with curly black hair. From the character and turn of the inscription, “_Also Georgiana Wife of the Above_,” I drew a childish conclusion that my mother was freckled and sickly. To five little stone lozenges, each about a foot and a half long, which were arranged in a neat row beside their grave, and were sacred to the memory of five little brothers of mine,—who gave up trying to get a living, exceedingly early in that universal struggle,—I am indebted for a belief I religiously entertained that they had all been born on their backs with their hands in their trousers-pockets, and had never taken them out in this state of existence."
+        },
+        {
+          "id": "great-expectations-002",
+          "split": "train",
+          "text": "Ours was the marsh country, down by the river, within, as the river wound, twenty miles of the sea. My first most vivid and broad impression of the identity of things seems to me to have been gained on a memorable raw afternoon towards evening. At such a time I found out for certain that this bleak place overgrown with nettles was the churchyard; and that Philip Pirrip, late of this parish, and also Georgiana wife of the above, were dead and buried; and that Alexander, Bartholomew, Abraham, Tobias, and Roger, infant children of the aforesaid, were also dead and buried; and that the dark flat wilderness beyond the churchyard, intersected with dikes and mounds and gates, with scattered cattle feeding on it, was the marshes; and that the low leaden line beyond was the river; and that the distant savage lair from which the wind was rushing was the sea; and that the small bundle of shivers growing afraid of it all and beginning to cry, was Pip."
+        },
+        {
+          "id": "great-expectations-003",
+          "split": "train",
+          "text": "“Hold your noise!” cried a terrible voice, as a man started up from among the graves at the side of the church porch. “Keep still, you little devil, or I’ll cut your throat!”"
+        },
+        {
+          "id": "great-expectations-004",
+          "split": "train",
+          "text": "A fearful man, all in coarse grey, with a great iron on his leg. A man with no hat, and with broken shoes, and with an old rag tied round his head. A man who had been soaked in water, and smothered in mud, and lamed by stones, and cut by flints, and stung by nettles, and torn by briars; who limped, and shivered, and glared, and growled; and whose teeth chattered in his head as he seized me by the chin."
+        },
+        {
+          "id": "great-expectations-005",
+          "split": "train",
+          "text": "I pointed to where our village lay, on the flat in-shore among the alder-trees and pollards, a mile or more from the church."
+        },
+        {
+          "id": "great-expectations-006",
+          "split": "train",
+          "text": "The man, after looking at me for a moment, turned me upside down, and emptied my pockets. There was nothing in them but a piece of bread. When the church came to itself,—for he was so sudden and strong that he made it go head over heels before me, and I saw the steeple under my feet,—when the church came to itself, I say, I was seated on a high tombstone, trembling while he ate the bread ravenously."
+        },
+        {
+          "id": "great-expectations-007",
+          "split": "train",
+          "text": "I believe they were fat, though I was at that time undersized for my years, and not strong."
+        },
+        {
+          "id": "great-expectations-008",
+          "split": "train",
+          "text": "“Darn me if I couldn’t eat ’em,” said the man, with a threatening shake of his head, “and if I han’t half a mind to’t!”"
+        },
+        {
+          "id": "great-expectations-009",
+          "split": "train",
+          "text": "I earnestly expressed my hope that he wouldn’t, and held tighter to the tombstone on which he had put me; partly, to keep myself upon it; partly, to keep myself from crying."
+        },
+        {
+          "id": "great-expectations-010",
+          "split": "train",
+          "text": "“Ha!” he muttered then, considering. “Who d’ye live with,—supposin’ you’re kindly let to live, which I han’t made up my mind about?”"
+        },
+        {
+          "id": "great-expectations-011",
+          "split": "train",
+          "text": "After darkly looking at his leg and me several times, he came closer to my tombstone, took me by both arms, and tilted me back as far as he could hold me; so that his eyes looked most powerfully down into mine, and mine looked most helplessly up into his."
+        },
+        {
+          "id": "great-expectations-012",
+          "split": "train",
+          "text": "“Now lookee here,” he said, “the question being whether you’re to be let to live. You know what a file is?”"
+        },
+        {
+          "id": "great-expectations-013",
+          "split": "train",
+          "text": "After each question he tilted me over a little more, so as to give me a greater sense of helplessness and danger."
+        },
+        {
+          "id": "great-expectations-014",
+          "split": "train",
+          "text": "“You get me a file.” He tilted me again. “And you get me wittles.” He tilted me again. “You bring ’em both to me.” He tilted me again. “Or I’ll have your heart and liver out.” He tilted me again."
+        },
+        {
+          "id": "great-expectations-015",
+          "split": "train",
+          "text": "I was dreadfully frightened, and so giddy that I clung to him with both hands, and said, “If you would kindly please to let me keep upright, sir, perhaps I shouldn’t be sick, and perhaps I could attend more.”"
+        },
+        {
+          "id": "great-expectations-016",
+          "split": "train",
+          "text": "He gave me a most tremendous dip and roll, so that the church jumped over its own weathercock. Then, he held me by the arms, in an upright position on the top of the stone, and went on in these fearful terms:—"
+        },
+        {
+          "id": "great-expectations-017",
+          "split": "train",
+          "text": "“You bring me, to-morrow morning early, that file and them wittles. You bring the lot to me, at that old Battery over yonder. You do it, and you never dare to say a word or dare to make a sign concerning your having seen such a person as me, or any person sumever, and you shall be let to live. You fail, or you go from my words in any partickler, no matter how small it is, and your heart and your liver shall be tore out, roasted, and ate. Now, I ain’t alone, as you may think I am. There’s a young man hid with me, in comparison with which young man I am a Angel. That young man hears the words I speak. That young man has a secret way pecooliar to himself, of getting at a boy, and at his heart, and at his liver. It is in wain for a boy to attempt to hide himself from that young man. A boy may lock his door, may be warm in bed, may tuck himself up, may draw the clothes over his head, may think himself comfortable and safe, but that young man will softly creep and creep his way to him and tear him open. I am a keeping that young man from harming of you at the present moment, with great difficulty. I find it wery hard to hold that young man off of your inside. Now, what do you say?”"
+        },
+        {
+          "id": "great-expectations-018",
+          "split": "train",
+          "text": "I said that I would get him the file, and I would get him what broken bits of food I could, and I would come to him at the Battery, early in the morning."
+        },
+        {
+          "id": "great-expectations-019",
+          "split": "train",
+          "text": "“Now,” he pursued, “you remember what you’ve undertook, and you remember that young man, and you get home!”"
+        },
+        {
+          "id": "great-expectations-020",
+          "split": "train",
+          "text": "“Much of that!” said he, glancing about him over the cold wet flat. “I wish I was a frog. Or a eel!”"
+        },
+        {
+          "id": "great-expectations-021",
+          "split": "train",
+          "text": "At the same time, he hugged his shuddering body in both his arms,—clasping himself, as if to hold himself together,—and limped towards the low church wall. As I saw him go, picking his way among the nettles, and among the brambles that bound the green mounds, he looked in my young eyes as if he were eluding the hands of the dead people, stretching up cautiously out of their graves, to get a twist upon his ankle and pull him in."
+        },
+        {
+          "id": "great-expectations-022",
+          "split": "train",
+          "text": "When he came to the low church wall, he got over it, like a man whose legs were numbed and stiff, and then turned round to look for me. When I saw him turning, I set my face towards home, and made the best use of my legs. But presently I looked over my shoulder, and saw him going on again towards the river, still hugging himself in both arms, and picking his way with his sore feet among the great stones dropped into the marshes here and there, for stepping-places when the rains were heavy or the tide was in."
+        },
+        {
+          "id": "great-expectations-023",
+          "split": "train",
+          "text": "The marshes were just a long black horizontal line then, as I stopped to look after him; and the river was just another horizontal line, not nearly so broad nor yet so black; and the sky was just a row of long angry red lines and dense black lines intermixed. On the edge of the river I could faintly make out the only two black things in all the prospect that seemed to be standing upright; one of these was the beacon by which the sailors steered,—like an unhooped cask upon a pole,—an ugly thing when you were near it; the other, a gibbet, with some chains hanging to it which had once held a pirate. The man was limping on towards this latter, as if he were the pirate come to life, and come down, and going back to hook himself up again. It gave me a terrible turn when I thought so; and as I saw the cattle lifting their heads to gaze after him, I wondered whether they thought so too. I looked all round for the horrible young man, and could see no signs of him. But now I was frightened again, and ran home without stopping."
+        },
+        {
+          "id": "great-expectations-024",
+          "split": "train",
+          "text": "My sister, Mrs. Joe Gargery, was more than twenty years older than I, and had established a great reputation with herself and the neighbours because she had brought me up “by hand.” Having at that time to find out for myself what the expression meant, and knowing her to have a hard and heavy hand, and to be much in the habit of laying it upon her husband as well as upon me, I supposed that Joe Gargery and I were both brought up by hand."
+        },
+        {
+          "id": "great-expectations-025",
+          "split": "train",
+          "text": "She was not a good-looking woman, my sister; and I had a general impression that she must have made Joe Gargery marry her by hand. Joe was a fair man, with curls of flaxen hair on each side of his smooth face, and with eyes of such a very undecided blue that they seemed to have somehow got mixed with their own whites. He was a mild, good-natured, sweet-tempered, easy-going, foolish, dear fellow,—a sort of Hercules in strength, and also in weakness."
+        },
+        {
+          "id": "great-expectations-026",
+          "split": "train",
+          "text": "My sister, Mrs. Joe, with black hair and eyes, had such a prevailing redness of skin that I sometimes used to wonder whether it was possible she washed herself with a nutmeg-grater instead of soap. She was tall and bony, and almost always wore a coarse apron, fastened over her figure behind with two loops, and having a square impregnable bib in front, that was stuck full of pins and needles. She made it a powerful merit in herself, and a strong reproach against Joe, that she wore this apron so much. Though I really see no reason why she should have worn it at all; or why, if she did wear it at all, she should not have taken it off, every day of her life."
+        },
+        {
+          "id": "great-expectations-027",
+          "split": "train",
+          "text": "Joe’s forge adjoined our house, which was a wooden house, as many of the dwellings in our country were,—most of them, at that time. When I ran home from the churchyard, the forge was shut up, and Joe was sitting alone in the kitchen. Joe and I being fellow-sufferers, and having confidences as such, Joe imparted a confidence to me, the moment I raised the latch of the door and peeped in at him opposite to it, sitting in the chimney corner."
+        },
+        {
+          "id": "great-expectations-028",
+          "split": "train",
+          "text": "“Mrs. Joe has been out a dozen times, looking for you, Pip. And she’s out now, making it a baker’s dozen.”"
+        },
+        {
+          "id": "great-expectations-029",
+          "split": "train",
+          "text": "At this dismal intelligence, I twisted the only button on my waistcoat round and round, and looked in great depression at the fire. Tickler was a wax-ended piece of cane, worn smooth by collision with my tickled frame."
+        },
+        {
+          "id": "great-expectations-030",
+          "split": "train",
+          "text": "“She sot down,” said Joe, “and she got up, and she made a grab at Tickler, and she Ram-paged out. That’s what she did,” said Joe, slowly clearing the fire between the lower bars with the poker, and looking at it; “she Ram-paged out, Pip.”"
+        },
+        {
+          "id": "great-expectations-031",
+          "split": "train",
+          "text": "“Has she been gone long, Joe?” I always treated him as a larger species of child, and as no more than my equal."
+        },
+        {
+          "id": "great-expectations-032",
+          "split": "train",
+          "text": "“Well,” said Joe, glancing up at the Dutch clock, “she’s been on the Ram-page, this last spell, about five minutes, Pip. She’s a-coming! Get behind the door, old chap, and have the jack-towel betwixt you.”"
+        },
+        {
+          "id": "great-expectations-033",
+          "split": "train",
+          "text": "I took the advice. My sister, Mrs. Joe, throwing the door wide open, and finding an obstruction behind it, immediately divined the cause, and applied Tickler to its further investigation. She concluded by throwing me—I often served as a connubial missile—at Joe, who, glad to get hold of me on any terms, passed me on into the chimney and quietly fenced me up there with his great leg."
+        },
+        {
+          "id": "great-expectations-034",
+          "split": "train",
+          "text": "“Where have you been, you young monkey?” said Mrs. Joe, stamping her foot. “Tell me directly what you’ve been doing to wear me away with fret and fright and worrit, or I’d have you out of that corner if you was fifty Pips, and he was five hundred Gargerys.”"
+        },
+        {
+          "id": "great-expectations-035",
+          "split": "train",
+          "text": "“I have only been to the churchyard,” said I, from my stool, crying and rubbing myself."
+        },
+        {
+          "id": "great-expectations-036",
+          "split": "train",
+          "text": "“Churchyard!” repeated my sister. “If it warn’t for me you’d have been to the churchyard long ago, and stayed there. Who brought you up by hand?”"
+        },
+        {
+          "id": "great-expectations-037",
+          "split": "train",
+          "text": "“_I_ don’t!” said my sister. “I’d never do it again! I know that. I may truly say I’ve never had this apron of mine off since born you were. It’s bad enough to be a blacksmith’s wife (and him a Gargery) without being your mother.”"
+        },
+        {
+          "id": "great-expectations-038",
+          "split": "train",
+          "text": "My thoughts strayed from that question as I looked disconsolately at the fire. For the fugitive out on the marshes with the ironed leg, the mysterious young man, the file, the food, and the dreadful pledge I was under to commit a larceny on those sheltering premises, rose before me in the avenging coals."
+        },
+        {
+          "id": "great-expectations-039",
+          "split": "train",
+          "text": "“Hah!” said Mrs. Joe, restoring Tickler to his station. “Churchyard, indeed! You may well say churchyard, you two.” One of us, by the by, had not said it at all. “You’ll drive _me_ to the churchyard betwixt you, one of these days, and O, a pr-r-recious pair you’d be without me!”"
+        },
+        {
+          "id": "great-expectations-040",
+          "split": "train",
+          "text": "As she applied herself to set the tea-things, Joe peeped down at me over his leg, as if he were mentally casting me and himself up, and calculating what kind of pair we practically should make, under the grievous circumstances foreshadowed. After that, he sat feeling his right-side flaxen curls and whisker, and following Mrs. Joe about with his blue eyes, as his manner always was at squally times."
+        },
+        {
+          "id": "great-expectations-041",
+          "split": "train",
+          "text": "My sister had a trenchant way of cutting our bread and butter for us, that never varied. First, with her left hand she jammed the loaf hard and fast against her bib,—where it sometimes got a pin into it, and sometimes a needle, which we afterwards got into our mouths. Then she took some butter (not too much) on a knife and spread it on the loaf, in an apothecary kind of way, as if she were making a plaster,—using both sides of the knife with a slapping dexterity, and trimming and moulding the butter off round the crust. Then, she gave the knife a final smart wipe on the edge of the plaster, and then sawed a very thick round off the loaf: which she finally, before separating from the loaf, hewed into two halves, of which Joe got one, and I the other."
+        },
+        {
+          "id": "great-expectations-042",
+          "split": "train",
+          "text": "On the present occasion, though I was hungry, I dared not eat my slice. I felt that I must have something in reserve for my dreadful acquaintance, and his ally the still more dreadful young man. I knew Mrs. Joe’s housekeeping to be of the strictest kind, and that my larcenous researches might find nothing available in the safe. Therefore I resolved to put my hunk of bread and butter down the leg of my trousers."
+        },
+        {
+          "id": "great-expectations-043",
+          "split": "train",
+          "text": "The effort of resolution necessary to the achievement of this purpose I found to be quite awful. It was as if I had to make up my mind to leap from the top of a high house, or plunge into a great depth of water. And it was made the more difficult by the unconscious Joe. In our already-mentioned freemasonry as fellow-sufferers, and in his good-natured companionship with me, it was our evening habit to compare the way we bit through our slices, by silently holding them up to each other’s admiration now and then,—which stimulated us to new exertions. To-night, Joe several times invited me, by the display of his fast diminishing slice, to enter upon our usual friendly competition; but he found me, each time, with my yellow mug of tea on one knee, and my untouched bread and butter on the other. At last, I desperately considered that the thing I contemplated must be done, and that it had best be done in the least improbable manner consistent with the circumstances. I took advantage of a moment when Joe had just looked at me, and got my bread and butter down my leg."
+        },
+        {
+          "id": "great-expectations-044",
+          "split": "train",
+          "text": "Joe was evidently made uncomfortable by what he supposed to be my loss of appetite, and took a thoughtful bite out of his slice, which he didn’t seem to enjoy. He turned it about in his mouth much longer than usual, pondering over it a good deal, and after all gulped it down like a pill. He was about to take another bite, and had just got his head on one side for a good purchase on it, when his eye fell on me, and he saw that my bread and butter was gone."
+        },
+        {
+          "id": "great-expectations-045",
+          "split": "train",
+          "text": "The wonder and consternation with which Joe stopped on the threshold of his bite and stared at me, were too evident to escape my sister’s observation."
+        },
+        {
+          "id": "great-expectations-046",
+          "split": "train",
+          "text": "“I say, you know!” muttered Joe, shaking his head at me in very serious remonstrance. “Pip, old chap! You’ll do yourself a mischief. It’ll stick somewhere. You can’t have chawed it, Pip.”"
+        },
+        {
+          "id": "great-expectations-047",
+          "split": "train",
+          "text": "“If you can cough any trifle on it up, Pip, I’d recommend you to do it,” said Joe, all aghast. “Manners is manners, but still your elth’s your elth.”"
+        },
+        {
+          "id": "great-expectations-048",
+          "split": "train",
+          "text": "By this time, my sister was quite desperate, so she pounced on Joe, and, taking him by the two whiskers, knocked his head for a little while against the wall behind him, while I sat in the corner, looking guiltily on."
+        },
+        {
+          "id": "great-expectations-049",
+          "split": "train",
+          "text": "“Now, perhaps you’ll mention what’s the matter,” said my sister, out of breath, “you staring great stuck pig.”"
+        },
+        {
+          "id": "great-expectations-050",
+          "split": "train",
+          "text": "Joe looked at her in a helpless way, then took a helpless bite, and looked at me again."
+        },
+        {
+          "id": "great-expectations-051",
+          "split": "train",
+          "text": "“You know, Pip,” said Joe, solemnly, with his last bite in his cheek, and speaking in a confidential voice, as if we two were quite alone, “you and me is always friends, and I’d be the last to tell upon you, any time. But such a—” he moved his chair and looked about the floor between us, and then again at me—“such a most oncommon Bolt as that!”"
+        },
+        {
+          "id": "great-expectations-052",
+          "split": "train",
+          "text": "“You know, old chap,” said Joe, looking at me, and not at Mrs. Joe, with his bite still in his cheek, “I Bolted, myself, when I was your age—frequent—and as a boy I’ve been among a many Bolters; but I never see your Bolting equal yet, Pip, and it’s a mercy you ain’t Bolted dead.”"
+        },
+        {
+          "id": "great-expectations-053",
+          "split": "train",
+          "text": "My sister made a dive at me, and fished me up by the hair, saying nothing more than the awful words, “You come along and be dosed.”"
+        },
+        {
+          "id": "great-expectations-054",
+          "split": "train",
+          "text": "Some medical beast had revived Tar-water in those days as a fine medicine, and Mrs. Joe always kept a supply of it in the cupboard; having a belief in its virtues correspondent to its nastiness. At the best of times, so much of this elixir was administered to me as a choice restorative, that I was conscious of going about, smelling like a new fence. On this particular evening the urgency of my case demanded a pint of this mixture, which was poured down my throat, for my greater comfort, while Mrs. Joe held my head under her arm, as a boot would be held in a bootjack. Joe got off with half a pint; but was made to swallow that (much to his disturbance, as he sat slowly munching and meditating before the fire), “because he had had a turn.” Judging from myself, I should say he certainly had a turn afterwards, if he had had none before."
+        },
+        {
+          "id": "great-expectations-055",
+          "split": "train",
+          "text": "Conscience is a dreadful thing when it accuses man or boy; but when, in the case of a boy, that secret burden co-operates with another secret burden down the leg of his trousers, it is (as I can testify) a great punishment. The guilty knowledge that I was going to rob Mrs. Joe—I never thought I was going to rob Joe, for I never thought of any of the housekeeping property as his—united to the necessity of always keeping one hand on my bread and butter as I sat, or when I was ordered about the kitchen on any small errand, almost drove me out of my mind. Then, as the marsh winds made the fire glow and flare, I thought I heard the voice outside, of the man with the iron on his leg who had sworn me to secrecy, declaring that he couldn’t and wouldn’t starve until to-morrow, but must be fed now. At other times, I thought, What if the young man who was with so much difficulty restrained from imbruing his hands in me should yield to a constitutional impatience, or should mistake the time, and should think himself accredited to my heart and liver to-night, instead of to-morrow! If ever anybody’s hair stood on end with terror, mine must have done so then. But, perhaps, nobody’s ever did?"
+        },
+        {
+          "id": "great-expectations-056",
+          "split": "train",
+          "text": "It was Christmas Eve, and I had to stir the pudding for next day, with a copper-stick, from seven to eight by the Dutch clock. I tried it with the load upon my leg (and that made me think afresh of the man with the load on _his_ leg), and found the tendency of exercise to bring the bread and butter out at my ankle, quite unmanageable. Happily I slipped away, and deposited that part of my conscience in my garret bedroom."
+        },
+        {
+          "id": "great-expectations-057",
+          "split": "train",
+          "text": "“Hark!” said I, when I had done my stirring, and was taking a final warm in the chimney corner before being sent up to bed; “was that great guns, Joe?”"
+        },
+        {
+          "id": "great-expectations-058",
+          "split": "train",
+          "text": "Mrs. Joe, who always took explanations upon herself, said, snappishly, “Escaped. Escaped.” Administering the definition like Tar-water."
+        },
+        {
+          "id": "great-expectations-059",
+          "split": "train",
+          "text": "While Mrs. Joe sat with her head bending over her needlework, I put my mouth into the forms of saying to Joe, “What’s a convict?” Joe put _his_ mouth into the forms of returning such a highly elaborate answer, that I could make out nothing of it but the single word “Pip.”"
+        },
+        {
+          "id": "great-expectations-060",
+          "split": "train",
+          "text": "“There was a conwict off last night,” said Joe, aloud, “after sunset-gun. And they fired warning of him. And now it appears they’re firing warning of another.”"
+        },
+        {
+          "id": "great-expectations-061",
+          "split": "train",
+          "text": "“Drat that boy,” interposed my sister, frowning at me over her work, “what a questioner he is. Ask no questions, and you’ll be told no lies.”"
+        },
+        {
+          "id": "great-expectations-062",
+          "split": "train",
+          "text": "It was not very polite to herself, I thought, to imply that I should be told lies by her even if I did ask questions. But she never was polite unless there was company."
+        },
+        {
+          "id": "great-expectations-063",
+          "split": "train",
+          "text": "At this point Joe greatly augmented my curiosity by taking the utmost pains to open his mouth very wide, and to put it into the form of a word that looked to me like “sulks.” Therefore, I naturally pointed to Mrs. Joe, and put my mouth into the form of saying, “her?” But Joe wouldn’t hear of that, at all, and again opened his mouth very wide, and shook the form of a most emphatic word out of it. But I could make nothing of the word."
+        },
+        {
+          "id": "great-expectations-064",
+          "split": "train",
+          "text": "“Mrs. Joe,” said I, as a last resort, “I should like to know—if you wouldn’t much mind—where the firing comes from?”"
+        },
+        {
+          "id": "great-expectations-065",
+          "split": "train",
+          "text": "“Lord bless the boy!” exclaimed my sister, as if she didn’t quite mean that but rather the contrary. “From the Hulks!”"
+        },
+        {
+          "id": "great-expectations-066",
+          "split": "train",
+          "text": "“That’s the way with this boy!” exclaimed my sister, pointing me out with her needle and thread, and shaking her head at me. “Answer him one question, and he’ll ask you a dozen directly. Hulks are prison-ships, right ’cross th’ meshes.” We always used that name for marshes, in our country."
+        },
+        {
+          "id": "great-expectations-067",
+          "split": "train",
+          "text": "“I wonder who’s put into prison-ships, and why they’re put there?” said I, in a general way, and with quiet desperation."
+        },
+        {
+          "id": "great-expectations-068",
+          "split": "train",
+          "text": "It was too much for Mrs. Joe, who immediately rose. “I tell you what, young fellow,” said she, “I didn’t bring you up by hand to badger people’s lives out. It would be blame to me and not praise, if I had. People are put in the Hulks because they murder, and because they rob, and forge, and do all sorts of bad; and they always begin by asking questions. Now, you get along to bed!”"
+        },
+        {
+          "id": "great-expectations-069",
+          "split": "train",
+          "text": "I was never allowed a candle to light me to bed, and, as I went upstairs in the dark, with my head tingling,—from Mrs. Joe’s thimble having played the tambourine upon it, to accompany her last words,—I felt fearfully sensible of the great convenience that the hulks were handy for me. I was clearly on my way there. I had begun by asking questions, and I was going to rob Mrs. Joe."
+        },
+        {
+          "id": "great-expectations-070",
+          "split": "train",
+          "text": "Since that time, which is far enough away now, I have often thought that few people know what secrecy there is in the young under terror. No matter how unreasonable the terror, so that it be terror. I was in mortal terror of the young man who wanted my heart and liver; I was in mortal terror of my interlocutor with the iron leg; I was in mortal terror of myself, from whom an awful promise had been extracted; I had no hope of deliverance through my all-powerful sister, who repulsed me at every turn; I am afraid to think of what I might have done on requirement, in the secrecy of my terror."
+        },
+        {
+          "id": "great-expectations-071",
+          "split": "train",
+          "text": "If I slept at all that night, it was only to imagine myself drifting down the river on a strong spring-tide, to the Hulks; a ghostly pirate calling out to me through a speaking-trumpet, as I passed the gibbet-station, that I had better come ashore and be hanged there at once, and not put it off. I was afraid to sleep, even if I had been inclined, for I knew that at the first faint dawn of morning I must rob the pantry. There was no doing it in the night, for there was no getting a light by easy friction then; to have got one I must have struck it out of flint and steel, and have made a noise like the very pirate himself rattling his chains."
+        },
+        {
+          "id": "great-expectations-072",
+          "split": "tune",
+          "text": "As soon as the great black velvet pall outside my little window was shot with grey, I got up and went downstairs; every board upon the way, and every crack in every board calling after me, “Stop thief!” and “Get up, Mrs. Joe!” In the pantry, which was far more abundantly supplied than usual, owing to the season, I was very much alarmed by a hare hanging up by the heels, whom I rather thought I caught, when my back was half turned, winking. I had no time for verification, no time for selection, no time for anything, for I had no time to spare. I stole some bread, some rind of cheese, about half a jar of mincemeat (which I tied up in my pocket-handkerchief with my last night’s slice), some brandy from a stone bottle (which I decanted into a glass bottle I had secretly used for making that intoxicating fluid, Spanish-liquorice-water, up in my room: diluting the stone bottle from a jug in the kitchen cupboard), a meat bone with very little on it, and a beautiful round compact pork pie. I was nearly going away without the pie, but I was tempted to mount upon a shelf, to look what it was that was put away so carefully in a covered earthenware dish in a corner, and I found it was the pie, and I took it in the hope that it was not intended for early use, and would not be missed for some time."
+        },
+        {
+          "id": "great-expectations-073",
+          "split": "tune",
+          "text": "There was a door in the kitchen, communicating with the forge; I unlocked and unbolted that door, and got a file from among Joe’s tools. Then I put the fastenings as I had found them, opened the door at which I had entered when I ran home last night, shut it, and ran for the misty marshes."
+        },
+        {
+          "id": "great-expectations-074",
+          "split": "tune",
+          "text": "It was a rimy morning, and very damp. I had seen the damp lying on the outside of my little window, as if some goblin had been crying there all night, and using the window for a pocket-handkerchief. Now, I saw the damp lying on the bare hedges and spare grass, like a coarser sort of spiders’ webs; hanging itself from twig to twig and blade to blade. On every rail and gate, wet lay clammy, and the marsh mist was so thick, that the wooden finger on the post directing people to our village—a direction which they never accepted, for they never came there—was invisible to me until I was quite close under it. Then, as I looked up at it, while it dripped, it seemed to my oppressed conscience like a phantom devoting me to the Hulks."
+        },
+        {
+          "id": "great-expectations-075",
+          "split": "tune",
+          "text": "The mist was heavier yet when I got out upon the marshes, so that instead of my running at everything, everything seemed to run at me. This was very disagreeable to a guilty mind. The gates and dikes and banks came bursting at me through the mist, as if they cried as plainly as could be, “A boy with somebody else’s pork pie! Stop him!” The cattle came upon me with like suddenness, staring out of their eyes, and steaming out of their nostrils, “Halloa, young thief!” One black ox, with a white cravat on,—who even had to my awakened conscience something of a clerical air,—fixed me so obstinately with his eyes, and moved his blunt head round in such an accusatory manner as I moved round, that I blubbered out to him, “I couldn’t help it, sir! It wasn’t for myself I took it!” Upon which he put down his head, blew a cloud of smoke out of his nose, and vanished with a kick-up of his hind-legs and a flourish of his tail."
+        },
+        {
+          "id": "great-expectations-076",
+          "split": "tune",
+          "text": "All this time, I was getting on towards the river; but however fast I went, I couldn’t warm my feet, to which the damp cold seemed riveted, as the iron was riveted to the leg of the man I was running to meet. I knew my way to the Battery, pretty straight, for I had been down there on a Sunday with Joe, and Joe, sitting on an old gun, had told me that when I was ’prentice to him, regularly bound, we would have such Larks there! However, in the confusion of the mist, I found myself at last too far to the right, and consequently had to try back along the river-side, on the bank of loose stones above the mud and the stakes that staked the tide out. Making my way along here with all despatch, I had just crossed a ditch which I knew to be very near the Battery, and had just scrambled up the mound beyond the ditch, when I saw the man sitting before me. His back was towards me, and he had his arms folded, and was nodding forward, heavy with sleep."
+        },
+        {
+          "id": "great-expectations-077",
+          "split": "tune",
+          "text": "I thought he would be more glad if I came upon him with his breakfast, in that unexpected manner, so I went forward softly and touched him on the shoulder. He instantly jumped up, and it was not the same man, but another man!"
+        },
+        {
+          "id": "great-expectations-078",
+          "split": "tune",
+          "text": "And yet this man was dressed in coarse grey, too, and had a great iron on his leg, and was lame, and hoarse, and cold, and was everything that the other man was; except that he had not the same face, and had a flat broad-brimmed low-crowned felt hat on. All this I saw in a moment, for I had only a moment to see it in: he swore an oath at me, made a hit at me,—it was a round weak blow that missed me and almost knocked himself down, for it made him stumble,—and then he ran into the mist, stumbling twice as he went, and I lost him."
+        },
+        {
+          "id": "great-expectations-079",
+          "split": "tune",
+          "text": "“It’s the young man!” I thought, feeling my heart shoot as I identified him. I dare say I should have felt a pain in my liver, too, if I had known where it was."
+        },
+        {
+          "id": "great-expectations-080",
+          "split": "tune",
+          "text": "I was soon at the Battery after that, and there was the right man,—hugging himself and limping to and fro, as if he had never all night left off hugging and limping,—waiting for me. He was awfully cold, to be sure. I half expected to see him drop down before my face and die of deadly cold. His eyes looked so awfully hungry too, that when I handed him the file and he laid it down on the grass, it occurred to me he would have tried to eat it, if he had not seen my bundle. He did not turn me upside down this time to get at what I had, but left me right side upwards while I opened the bundle and emptied my pockets."
+        },
+        {
+          "id": "great-expectations-081",
+          "split": "tune",
+          "text": "He was already handing mincemeat down his throat in the most curious manner,—more like a man who was putting it away somewhere in a violent hurry, than a man who was eating it,—but he left off to take some of the liquor. He shivered all the while so violently, that it was quite as much as he could do to keep the neck of the bottle between his teeth, without biting it off."
+        },
+        {
+          "id": "great-expectations-082",
+          "split": "tune",
+          "text": "“It’s bad about here,” I told him. “You’ve been lying out on the meshes, and they’re dreadful aguish. Rheumatic too.”"
+        },
+        {
+          "id": "great-expectations-083",
+          "split": "tune",
+          "text": "“I’ll eat my breakfast afore they’re the death of me,” said he. “I’d do that, if I was going to be strung up to that there gallows as there is over there, directly afterwards. I’ll beat the shivers so far, I’ll bet you.”"
+        },
+        {
+          "id": "great-expectations-084",
+          "split": "test",
+          "text": "He was gobbling mincemeat, meatbone, bread, cheese, and pork pie, all at once: staring distrustfully while he did so at the mist all round us, and often stopping—even stopping his jaws—to listen. Some real or fancied sound, some clink upon the river or breathing of beast upon the marsh, now gave him a start, and he said, suddenly,—"
+        },
+        {
+          "id": "great-expectations-085",
+          "split": "test",
+          "text": "“Well,” said he, “I believe you. You’d be but a fierce young hound indeed, if at your time of life you could help to hunt a wretched warmint hunted as near death and dunghill as this poor wretched warmint is!”"
+        },
+        {
+          "id": "great-expectations-086",
+          "split": "test",
+          "text": "Something clicked in his throat as if he had works in him like a clock, and was going to strike. And he smeared his ragged rough sleeve over his eyes."
+        },
+        {
+          "id": "great-expectations-087",
+          "split": "test",
+          "text": "Pitying his desolation, and watching him as he gradually settled down upon the pie, I made bold to say, “I am glad you enjoy it.”"
+        },
+        {
+          "id": "great-expectations-088",
+          "split": "test",
+          "text": "I had often watched a large dog of ours eating his food; and I now noticed a decided similarity between the dog’s way of eating, and the man’s. The man took strong sharp sudden bites, just like the dog. He swallowed, or rather snapped up, every mouthful, too soon and too fast; and he looked sideways here and there while he ate, as if he thought there was danger in every direction of somebody’s coming to take the pie away. He was altogether too unsettled in his mind over it, to appreciate it comfortably I thought, or to have anybody to dine with him, without making a chop with his jaws at the visitor. In all of which particulars he was very like the dog."
+        },
+        {
+          "id": "great-expectations-089",
+          "split": "test",
+          "text": "“I am afraid you won’t leave any of it for him,” said I, timidly; after a silence during which I had hesitated as to the politeness of making the remark. “There’s no more to be got where that came from.” It was the certainty of this fact that impelled me to offer the hint."
+        },
+        {
+          "id": "great-expectations-090",
+          "split": "test",
+          "text": "“Leave any for him? Who’s him?” said my friend, stopping in his crunching of pie-crust."
+        },
+        {
+          "id": "great-expectations-091",
+          "split": "test",
+          "text": "“Oh ah!” he returned, with something like a gruff laugh. “Him? Yes, yes! _He_ don’t want no wittles.”"
+        },
+        {
+          "id": "great-expectations-092",
+          "split": "test",
+          "text": "The man stopped eating, and regarded me with the keenest scrutiny and the greatest surprise."
+        },
+        {
+          "id": "great-expectations-093",
+          "split": "test",
+          "text": "“Yonder,” said I, pointing; “over there, where I found him nodding asleep, and thought it was you.”"
+        },
+        {
+          "id": "great-expectations-094",
+          "split": "test",
+          "text": "He held me by the collar and stared at me so, that I began to think his first idea about cutting my throat had revived."
+        },
+        {
+          "id": "great-expectations-095",
+          "split": "test",
+          "text": "“Dressed like you, you know, only with a hat,” I explained, trembling; “and—and”—I was very anxious to put this delicately—“and with—the same reason for wanting to borrow a file. Didn’t you hear the cannon last night?”"
+        }
+      ]
+    }
+  ]
+}

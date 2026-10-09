@@ -1,0 +1,120 @@
+{
+  "created_utc": "2026-10-06T17:30:41.552830+00:00",
+  "status": "passed",
+  "report_sha256": "3108b6e6ccd534719a77eaa3a96dca8a0f8e6e9ddfd781f2a22205b024ac37bf",
+  "source_bindings": [
+    {
+      "path": "public/learn-code/multimodal-tokenization/digits_reconstructions.json",
+      "sha256": "29547eac7fe7124fd00e0b5073840c83ff98c9c658d2fbdbd8db59a0d35e1ad4",
+      "match": true
+    },
+    {
+      "path": "public/learn-code/multimodal-tokenization/digits_subset.csv",
+      "sha256": "cfd78aa0f94269c48192b6ac03146422be9d14044fc47a856a85f5372183959c",
+      "match": true
+    },
+    {
+      "path": "public/learn-code/multimodal-tokenization/digits_subset_provenance.md",
+      "sha256": "6e18e67baf8321a8354b0b55652531a9a5a820463f5b60adfaf0d35a8e781120",
+      "match": true
+    },
+    {
+      "path": "public/learn-code/multimodal-tokenization/encodec_library.py",
+      "sha256": "9bf6bfdcb25c3575fc46ceacd5a4b39f211ad2f9e9f8c10e7bcf43a08e3e2c69",
+      "match": true
+    },
+    {
+      "path": "public/learn-code/multimodal-tokenization/patch_projection.py",
+      "sha256": "fb048044df86c03d709ecdd0832a4720e15a109d47e4c13afa284c438f851a01",
+      "match": true
+    },
+    {
+      "path": "public/learn-code/multimodal-tokenization/README.md",
+      "sha256": "8f4b8b5f4665b54bffb7dad4e4b3ff21b316a5b923905afccfd8f2d195091649",
+      "match": true
+    },
+    {
+      "path": "public/learn-code/multimodal-tokenization/residual_codec.py",
+      "sha256": "12685c003f0d714dcf619efbf2a8ac77678ab8d88642d407618bdaadafe28b0d",
+      "match": true
+    },
+    {
+      "path": "public/learn-code/multimodal-tokenization/sequence_geometry.py",
+      "sha256": "942d6f8f1ddd4be4ddb92c2e9e31074f1ef8931c42c96744a5b71f3f0856de98",
+      "match": true
+    },
+    {
+      "path": "public/learn-code/multimodal-tokenization/vector_quantization.py",
+      "sha256": "4667b63bbc66ca84240abb662c4e4b61d856c53b9cf1a37567118af32b0353cd",
+      "match": true
+    },
+    {
+      "path": "scripts/verify-multimodal-tokenization.py",
+      "sha256": "7db5d3387c965b57401be3a248298faee6963020eed29d9d7e7d11c05988fec3",
+      "match": true
+    }
+  ],
+  "stream_bindings": [
+    {
+      "execution": "patch_projection",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\patch_projection-stdout.txt",
+      "sha256": "a0578b23e505ac574f5b8f7f7a8604f6390edfdff2838d5cd237c32ddc955584",
+      "match": true
+    },
+    {
+      "execution": "patch_projection",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\patch_projection-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "execution": "residual_codec",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\residual_codec-stdout.txt",
+      "sha256": "2ecebf4d64dceca5fecfda1e2ffeb5ec22412388f3aff08d2be810ea1cbe7969",
+      "match": true
+    },
+    {
+      "execution": "residual_codec",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\residual_codec-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "execution": "vector_quantization",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\vector_quantization-stdout.txt",
+      "sha256": "8c881989040d89ded07ff396f7f3eedcd71adad97df7483c1cb4ee34000b7954",
+      "match": true
+    },
+    {
+      "execution": "vector_quantization",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\vector_quantization-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "execution": "encodec_library",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\encodec_library-offline-stdout.txt",
+      "sha256": "7a9262307f250a86dc43f859448ac554ab790f819f4484a279939284e369e748",
+      "match": true
+    },
+    {
+      "execution": "encodec_library",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\encodec_library-offline-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "execution": "encodec_pretrained",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\encodec_library-stdout.txt",
+      "sha256": "94f67e703975aba448e8f1b3e9d5c0390895e22be52644dd51408924be27b93c",
+      "match": true
+    },
+    {
+      "execution": "encodec_pretrained",
+      "path": "docs\\teaching\\tokenization\\multimodal-tokenization-visual-audio-video\\native-evidence\\encodec_library-stderr.txt",
+      "sha256": "be186fc5a30f3eab0ed6c525530323cdec16f191d1a7b0ac3ceed6b7edc5be43",
+      "match": true
+    }
+  ],
+  "sequence_geometry_execution_owner": "root; presence/hash only here, separate root execution receipt"
+}

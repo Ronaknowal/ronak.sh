@@ -1,0 +1,348 @@
+{
+  "authorizedOn": "2026-10-06",
+  "mode": "full",
+  "topics": [
+    {
+      "position": 1,
+      "id": "vectors-matrices-tensor-operations",
+      "title": "Vectors, Matrices & Tensor Operations",
+      "section": "Linear Algebra"
+    },
+    {
+      "position": 2,
+      "id": "matrix-decompositions-svd-qr-cholesky-lu",
+      "title": "Matrix Decompositions (SVD, QR, Cholesky, LU)",
+      "section": "Linear Algebra"
+    },
+    {
+      "position": 3,
+      "id": "eigenvalues-eigenvectors",
+      "title": "Eigenvalues & Eigenvectors",
+      "section": "Linear Algebra"
+    },
+    {
+      "position": 4,
+      "id": "matrix-calculus-jacobians",
+      "title": "Matrix Calculus & Jacobians",
+      "section": "Linear Algebra"
+    },
+    {
+      "position": 5,
+      "id": "tensor-algebra-einsum-notation",
+      "title": "Tensor Algebra & Einsum Notation",
+      "section": "Linear Algebra"
+    },
+    {
+      "position": 6,
+      "id": "randomized-linear-algebra",
+      "title": "Randomized Linear Algebra",
+      "section": "Linear Algebra"
+    },
+    {
+      "position": 7,
+      "id": "multivariate-calculus-gradients",
+      "title": "Multivariate Calculus & Gradients",
+      "section": "Calculus & Optimization"
+    },
+    {
+      "position": 8,
+      "id": "convex-optimization",
+      "title": "Convex Optimization",
+      "section": "Calculus & Optimization"
+    },
+    {
+      "position": 9,
+      "id": "gradient-descent-variants-sgd-adam-adagrad-rmsprop-lamb-lars",
+      "title": "Gradient Descent Variants (SGD, Adam, AdaGrad, RMSProp, LAMB, LARS)",
+      "section": "Calculus & Optimization"
+    },
+    {
+      "position": 10,
+      "id": "learning-rate-schedules-cosine-warmup-onecyclelr",
+      "title": "Learning Rate Schedules (Cosine, Warmup, OneCycleLR)",
+      "section": "Calculus & Optimization"
+    },
+    {
+      "position": 11,
+      "id": "convex-duality-lagrangian-methods-kkt-conditions",
+      "title": "Convex Duality & Lagrangian Methods (KKT Conditions)",
+      "section": "Calculus & Optimization"
+    },
+    {
+      "position": 12,
+      "id": "second-order-methods-l-bfgs-k-fac-shampoo-natural-gradient",
+      "title": "Second-Order Methods (L-BFGS, K-FAC, Shampoo, Natural Gradient)",
+      "section": "Calculus & Optimization"
+    },
+    {
+      "position": 13,
+      "id": "non-convex-optimization-landscape",
+      "title": "Non-Convex Optimization Landscape",
+      "section": "Calculus & Optimization"
+    },
+    {
+      "position": 14,
+      "id": "constrained-multi-objective-optimization",
+      "title": "Constrained & Multi-Objective Optimization",
+      "section": "Calculus & Optimization"
+    },
+    {
+      "position": 15,
+      "id": "probability-distributions-bayes-theorem",
+      "title": "Probability Distributions & Bayes' Theorem",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 16,
+      "id": "maximum-likelihood-map-estimation",
+      "title": "Maximum Likelihood & MAP Estimation",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 17,
+      "id": "hypothesis-testing-confidence-intervals",
+      "title": "Hypothesis Testing & Confidence Intervals",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 18,
+      "id": "bayesian-inference-conjugate-priors",
+      "title": "Bayesian Inference & Conjugate Priors",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 19,
+      "id": "concentration-inequalities-hoeffding-bernstein-chernoff",
+      "title": "Concentration Inequalities (Hoeffding, Bernstein, Chernoff)",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 20,
+      "id": "monte-carlo-methods-mcmc-metropolis-hastings-hmc-nuts",
+      "title": "Monte Carlo Methods & MCMC (Metropolis-Hastings, HMC, NUTS)",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 21,
+      "id": "variational-inference",
+      "title": "Variational Inference",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 22,
+      "id": "exponential-families-sufficient-statistics",
+      "title": "Exponential Families & Sufficient Statistics",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 23,
+      "id": "measure-theory-probability-spaces",
+      "title": "Measure Theory & Probability Spaces",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 24,
+      "id": "optimal-transport-wasserstein-distance-sinkhorn",
+      "title": "Optimal Transport (Wasserstein Distance, Sinkhorn)",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 25,
+      "id": "causal-inference-do-calculus",
+      "title": "Causal Inference & Do-Calculus",
+      "section": "Probability & Statistics"
+    },
+    {
+      "position": 26,
+      "id": "entropy-cross-entropy-kl-divergence",
+      "title": "Entropy, Cross-Entropy & KL Divergence",
+      "section": "Information Theory"
+    },
+    {
+      "position": 27,
+      "id": "mutual-information-information-bottleneck",
+      "title": "Mutual Information & Information Bottleneck",
+      "section": "Information Theory"
+    },
+    {
+      "position": 28,
+      "id": "rate-distortion-theory",
+      "title": "Rate-Distortion Theory",
+      "section": "Information Theory"
+    },
+    {
+      "position": 29,
+      "id": "f-divergences-integral-probability-metrics",
+      "title": "f-Divergences & Integral Probability Metrics",
+      "section": "Information Theory"
+    },
+    {
+      "position": 30,
+      "id": "graph-fundamentals-adjacency-laplacian-connectivity",
+      "title": "Graph Fundamentals (Adjacency, Laplacian, Connectivity)",
+      "section": "Graph Theory & Discrete Math"
+    },
+    {
+      "position": 31,
+      "id": "spectral-graph-theory",
+      "title": "Spectral Graph Theory",
+      "section": "Graph Theory & Discrete Math"
+    },
+    {
+      "position": 32,
+      "id": "combinatorial-optimization-approximation-algorithms",
+      "title": "Combinatorial Optimization & Approximation Algorithms",
+      "section": "Graph Theory & Discrete Math"
+    },
+    {
+      "position": 33,
+      "id": "stochastic-processes-markov-chains-brownian-motion-poisson",
+      "title": "Stochastic Processes (Markov Chains, Brownian Motion, Poisson)",
+      "section": "Stochastic Processes & Dynamical Systems"
+    },
+    {
+      "position": 34,
+      "id": "random-matrix-theory",
+      "title": "Random Matrix Theory",
+      "section": "Stochastic Processes & Dynamical Systems"
+    },
+    {
+      "position": 35,
+      "id": "queueing-theory-m-m-1-m-g-1-little-s-law",
+      "title": "Queueing Theory (M/M/1, M/G/1, Little's Law)",
+      "section": "Stochastic Processes & Dynamical Systems"
+    },
+    {
+      "position": 36,
+      "id": "dynamical-systems-theory-chaos",
+      "title": "Dynamical Systems Theory & Chaos",
+      "section": "Stochastic Processes & Dynamical Systems"
+    },
+    {
+      "position": 37,
+      "id": "it-calculus-stochastic-differential-equations",
+      "title": "Itô Calculus & Stochastic Differential Equations",
+      "section": "Stochastic Processes & Dynamical Systems"
+    },
+    {
+      "position": 38,
+      "id": "numerical-methods-finite-differences-quadrature-root-finding",
+      "title": "Numerical Methods (Finite Differences, Quadrature, Root Finding)",
+      "section": "Advanced Mathematical Structures"
+    },
+    {
+      "position": 39,
+      "id": "functional-analysis-rkhs",
+      "title": "Functional Analysis & RKHS",
+      "section": "Advanced Mathematical Structures"
+    },
+    {
+      "position": 40,
+      "id": "topology-topological-data-analysis-tda",
+      "title": "Topology & Topological Data Analysis (TDA)",
+      "section": "Advanced Mathematical Structures"
+    },
+    {
+      "position": 41,
+      "id": "category-theory-emerging-use-in-ml",
+      "title": "Category Theory (Emerging Use in ML)",
+      "section": "Advanced Mathematical Structures"
+    },
+    {
+      "position": 42,
+      "id": "differential-geometry-riemannian-manifolds",
+      "title": "Differential Geometry & Riemannian Manifolds",
+      "section": "Advanced Mathematical Structures"
+    },
+    {
+      "position": 43,
+      "id": "algebra-functions-exponentials-logarithms",
+      "title": "Algebra, Functions, Exponentials & Logarithms",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 44,
+      "id": "sets-logic-relations-proof-techniques",
+      "title": "Sets, Logic, Relations & Proof Techniques",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 45,
+      "id": "geometry-trigonometry-coordinate-reasoning",
+      "title": "Geometry, Trigonometry & Coordinate Reasoning",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 46,
+      "id": "counting-combinatorics-mathematical-induction",
+      "title": "Counting, Combinatorics & Mathematical Induction",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 47,
+      "id": "single-variable-calculus-limits-derivatives-integrals",
+      "title": "Single-Variable Calculus: Limits, Derivatives & Integrals",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 48,
+      "id": "random-variables-expectation-covariance",
+      "title": "Random Variables, Expectation & Covariance",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 49,
+      "id": "sampling-measurement-experimental-design",
+      "title": "Sampling, Measurement & Experimental Design",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 50,
+      "id": "ordinary-differential-equations-linear-systems",
+      "title": "Ordinary Differential Equations & Linear Systems",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 51,
+      "id": "complex-numbers-fourier-laplace-transforms",
+      "title": "Complex Numbers, Fourier & Laplace Transforms",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 52,
+      "id": "conditioning-stability-numerical-analysis",
+      "title": "Conditioning, Stability & Numerical Analysis",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 53,
+      "id": "decision-theory-risk-cost-sensitive-decisions",
+      "title": "Decision Theory, Risk & Cost-Sensitive Decisions",
+      "section": "Bridges: Mathematical Language, Proof & Measurement"
+    },
+    {
+      "position": 54,
+      "id": "real-analysis-sequences-modes-of-convergence",
+      "title": "Real Analysis, Sequences & Modes of Convergence",
+      "section": "Analysis, Symmetry & Spatial Differential Models"
+    },
+    {
+      "position": 55,
+      "id": "abstract-algebra-groups-symmetry-actions",
+      "title": "Abstract Algebra, Groups & Symmetry Actions",
+      "section": "Analysis, Symmetry & Spatial Differential Models"
+    },
+    {
+      "position": 56,
+      "id": "partial-differential-equations-conservation-boundary-conditions",
+      "title": "Partial Differential Equations, Conservation & Boundary Conditions",
+      "section": "Analysis, Symmetry & Spatial Differential Models"
+    },
+    {
+      "position": 57,
+      "id": "numerical-pdes-grids-finite-elements-stability",
+      "title": "Numerical PDEs: Grids, Finite Elements & Stability",
+      "section": "Analysis, Symmetry & Spatial Differential Models"
+    }
+  ]
+}

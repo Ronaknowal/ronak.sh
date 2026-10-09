@@ -1,0 +1,65 @@
+/* Beginner figures for Backpropagation, in the reading flow (no card frames).
+   Colour roles come from backprop-labs.css (--bpb-value cyan supplied, --bpb-param amber,
+   --bpb-computed violet, --bpb-sens orange backward, --bpb-off grey). */
+
+/* §1 nudge chain: a vertical trace of stages with the local rates between them. */
+.bpb-chain { list-style: none; padding: 0; margin: .8rem 0; display: grid; gap: .25rem; max-width: 34rem; }
+.bpb-stage { display: grid; grid-template-columns: minmax(7rem, 1.1fr) minmax(7rem, 1fr) minmax(5.5rem, .8fr); gap: .3rem 1rem; align-items: baseline; padding: .25rem 0; font-variant-numeric: tabular-nums; }
+.bpb-chain .bpb-stage .bpb-stage-name { font-family: var(--font-mono, monospace); font-size: 1rem; font-weight: 600; }
+.bpb-chain .bpb-stage.bpb-param .bpb-stage-name { color: var(--bpb-param); }
+.bpb-chain .bpb-stage.bpb-computed .bpb-stage-name { color: var(--bpb-computed); }
+.bpb-stage-change { color: var(--bp-muted); font-size: .9rem; }
+.bpb-rate { padding: .1rem 0 .1rem 1.4rem; color: var(--bpb-sens); font-size: .9rem; }
+.bpb-rate b, .bpb-sens-text { color: var(--bpb-sens); }
+.bpb-rate small { color: var(--bp-muted); }
+@container (max-width: 30rem) {
+  .bpb-stage { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .bpb-stage-change { grid-column: 1 / -1; }
+}
+
+/* §3 engine sweep: forward record and reverse order as chips; buffers as a table. */
+.bpb-row-label { display: inline-block; min-width: 11rem; color: var(--bp-muted); font-size: .9rem; }
+.bpb-chip { display: inline-block; margin: .2rem .3rem; padding: .1rem .45rem; border: 1px solid #5a5246; border-radius: .2rem; font-size: .85rem; white-space: nowrap; }
+.bpb-chip.is-active { border-color: var(--bpb-sens); color: #f6d2b4; }
+.bpb-buffers { min-width: 28rem; }
+.bpb-buffers td { font-variant-numeric: tabular-nums; color: var(--bpb-sens) !important; text-align: center; }
+.bpb-buffers td.is-changed { outline: 2px solid var(--bpb-sens); outline-offset: -3px; font-weight: 700; }
+
+/* Worked network wiring. */
+.backprop-svg.bpb-wiring-svg { max-width: 30rem; }
+.bpb-edge line { stroke: #9b958b; stroke-width: 1.8; }
+.bpb-wiring-svg .bpb-forward-head { fill: #9b958b; }
+.bpb-wiring-svg .bpb-back-head { fill: var(--bpb-sens); }
+.bpb-wiring-svg.is-backward .bpb-edge line { stroke: var(--bpb-sens); stroke-dasharray: 6 4; }
+.bpb-edge.is-off line { stroke: var(--bpb-off) !important; stroke-dasharray: 3 4; opacity: .7; }
+.backprop-svg .bpb-edge text { font-weight: 600; font-size: 14px; paint-order: stroke; stroke: #111; stroke-width: 5px; }
+.backprop-svg .bpb-edge .bpb-edge-weight { fill: var(--bpb-param); }
+.backprop-svg .bpb-edge .bpb-edge-sens { fill: var(--bpb-sens); }
+.bpb-wiring-node circle { fill: #151515; stroke-width: 2.2; }
+.bpb-wiring-node.bpc-supplied circle { stroke: var(--bpb-value); }
+.bpb-wiring-node.bpc-computed circle { stroke: var(--bpb-computed); }
+.bpb-wiring-node.is-off circle { stroke: var(--bpb-off); stroke-dasharray: 4 3; opacity: .75; }
+.bpb-wiring-node.is-true circle { stroke: #f4f1ea; stroke-width: 4; }
+.backprop-svg .bpb-wiring-node .bpb-node-label { font-size: 17px; }
+.backprop-svg .bpb-wiring-node.bpc-supplied .bpb-node-label { fill: var(--bpb-value); }
+.backprop-svg .bpb-wiring-node.bpc-computed .bpb-node-label { fill: var(--bpb-computed); }
+.backprop-svg .bpb-wiring-node .bpb-bias { font-size: 13px; fill: var(--bpb-param); }
+.backprop-svg .bpb-wiring-node .bpb-node-sens { font-size: 13px; fill: var(--bpb-sens); font-weight: 600; }
+.backprop-svg .bpb-wiring-node .bpb-off-label { font-size: 11px; fill: var(--bpb-off); }
+.backprop-svg .bpb-wiring-node .bpb-true-label { font-size: 13px; fill: #f4f1ea; font-weight: 600; }
+@media (max-width: 700px) {
+  .backprop-svg .bpb-edge text, .backprop-svg .bpb-wiring-node .bpb-node-label { font-size: 17px; }
+  .backprop-svg .bpb-wiring-node :is(.bpb-bias, .bpb-node-sens, .bpb-true-label) { font-size: 15px; }
+}
+
+/* Lab readout lines: each hidden unit collecting from both logits. */
+.bpb-collect { margin: .4rem 0; }
+.bpb-collect p { margin: .25rem 0; font-size: .92rem; line-height: 1.6; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.bpb-collect small { color: var(--bp-muted); }
+.bpb-collect-unit { color: var(--bpb-computed); font-weight: 600; }
+.bpb-off-text { color: var(--bpb-off); }
+@media (max-width: 600px) {
+  .backprop-table table.bpb-buffers { min-width: 0; table-layout: fixed; font-size: .76rem; }
+  .bpb-buffers :is(th, td) { padding: .45rem .2rem; overflow-wrap: anywhere; }
+  .bpb-buffers th { overflow-wrap: normal; word-break: keep-all; }
+}

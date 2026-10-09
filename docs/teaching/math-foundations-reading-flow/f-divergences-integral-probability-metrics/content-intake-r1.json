@@ -1,0 +1,262 @@
+{
+  "status": "CONTENT_AUTHORING_IN_PROGRESS",
+  "author": "/root/numerical_runtime_resume",
+  "createdAt": "2026-10-09T17:49:55.184648+00:00",
+  "release": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-accepted-root-r2.json",
+    "sha256": "e34c98865f2d39186ac9053e7fdf2abe0fb9300fbdef746cd48a9b52aefbc588",
+    "bytes": 1965
+  },
+  "acceptedSource": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-source-r2.json",
+    "sha256": "b89100c3f4fa0b5960e36feb3519f1e94e8fc917a189ce3778b2d3d16800248c",
+    "bytes": 9218
+  },
+  "guards": [
+    {
+      "path": "src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+      "sha256": "c9cd180cc2b1902a2226d6532978d0830e749286ebcf9d2ad54475d76e870909",
+      "bytes": 50546
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/topics/f-divergences-integral-probability-metrics.jsx",
+      "sha256": "c9cd180cc2b1902a2226d6532978d0830e749286ebcf9d2ad54475d76e870909",
+      "bytes": 50546
+    },
+    {
+      "path": "src/learn/data/divergence-ipm-models.js",
+      "sha256": "d5a21f0091dd3784b2d3df4d7b74a36c3b7b0db385cc3586b6f6a32aeba8e0f2",
+      "bytes": 13804
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/divergence-ipm-models.js",
+      "sha256": "d5a21f0091dd3784b2d3df4d7b74a36c3b7b0db385cc3586b6f6a32aeba8e0f2",
+      "bytes": 13804
+    },
+    {
+      "path": "src/learn/data/divergence-ipm-examples.js",
+      "sha256": "abf61006f9254f8590838c5fbdbd21e65e60e10cde7af9d40fd021f85416efbd",
+      "bytes": 22289
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/divergence-ipm-examples.js",
+      "sha256": "abf61006f9254f8590838c5fbdbd21e65e60e10cde7af9d40fd021f85416efbd",
+      "bytes": 22289
+    },
+    {
+      "path": "src/learn/data/divergences-mechanism-program.js",
+      "sha256": "7cfe381bd9046c506f566ba3299c05ffee8c5d5f539bc5e33b8e1ef84543e39e",
+      "bytes": 402
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/divergences-mechanism-program.js",
+      "sha256": "7cfe381bd9046c506f566ba3299c05ffee8c5d5f539bc5e33b8e1ef84543e39e",
+      "bytes": 402
+    },
+    {
+      "path": "src/learn/components/lesson-labs/DivergenceIpmLabs.jsx",
+      "sha256": "87aa58f85bd04fd006968aba51f8bfa2d8bbf541cc6695b824b225e05c0918d4",
+      "bytes": 31619
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/components/lesson-labs/DivergenceIpmLabs.jsx",
+      "sha256": "87aa58f85bd04fd006968aba51f8bfa2d8bbf541cc6695b824b225e05c0918d4",
+      "bytes": 31619
+    },
+    {
+      "path": "src/learn/components/lesson-labs/divergence-ipm-labs.css",
+      "sha256": "4ffadf4e02dc6149f4e7c3af58d830919af9682bf9ad711897e05cdd1a7e97bc",
+      "bytes": 7378
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/components/lesson-labs/divergence-ipm-labs.css",
+      "sha256": "4ffadf4e02dc6149f4e7c3af58d830919af9682bf9ad711897e05cdd1a7e97bc",
+      "bytes": 7378
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js",
+      "sha256": "2e002dad7e1bc4c88d6f893ca26eaea0b9132e07939ff5eb1683aad5f0a45163",
+      "bytes": 3901
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/src/learn/data/curriculum/blueprints/f-divergences-integral-probability-metrics.js",
+      "sha256": "2e002dad7e1bc4c88d6f893ca26eaea0b9132e07939ff5eb1683aad5f0a45163",
+      "bytes": 3901
+    },
+    {
+      "path": "public/learn-assets/divergences/mmd-library-bridge.py",
+      "sha256": "0c3d906cd2edb1a5b6962ebdf41865fe2b2a34c6932804aa0a9896a8a0bbccba",
+      "bytes": 3837
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/public/learn-assets/divergences/mmd-library-bridge.py",
+      "sha256": "0c3d906cd2edb1a5b6962ebdf41865fe2b2a34c6932804aa0a9896a8a0bbccba",
+      "bytes": 3837
+    },
+    {
+      "path": "public/learn-code/eigenvalues-eigenvectors/iris-corrected.csv",
+      "sha256": "5a8853b2e82f9d021e5843af7d647339e359b25e037ec6e87e23ca9e91507821",
+      "bytes": 4759
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/public/learn-code/eigenvalues-eigenvectors/iris-corrected.csv",
+      "sha256": "5a8853b2e82f9d021e5843af7d647339e359b25e037ec6e87e23ca9e91507821",
+      "bytes": 4759
+    },
+    {
+      "path": "public/learn-code/eigenvalues-eigenvectors/iris-provenance.json",
+      "sha256": "1b2b81bff256cdf4dfd36f26a9374856e7923930713622b8af84004f4869c88e",
+      "bytes": 588
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-frozen-r1/public/learn-code/eigenvalues-eigenvectors/iris-provenance.json",
+      "sha256": "1b2b81bff256cdf4dfd36f26a9374856e7923930713622b8af84004f4869c88e",
+      "bytes": 588
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/research-r1.md",
+      "sha256": "865954dd5f090a525b12e1df33f88a05c3e644bbf603d5de1526a1834d78c037",
+      "bytes": 17860
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-checkpoint-r1.md",
+      "sha256": "c4954c6a214a8309f4e47eeea80d0618c6d3a8c882593e7af2bcc002f059ede1",
+      "bytes": 14659
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/intake-topic-r1.json",
+      "sha256": "18fe973970361a191e710ede18afb5649ce0890cc75c97594bb3962b4c6d45a2",
+      "bytes": 18902
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-fixture-checks-r1.json",
+      "sha256": "426c7a18856d25952d1882d97b937b5a0f1630da95e6d88459c51fb0409ceebd",
+      "bytes": 3407
+    },
+    {
+      "path": "docs/teaching/F-DIVERGENCES-IPMS-LESSON-DESIGN.md",
+      "sha256": "32b6a8a86df2b52672bb64983fed3a25d844873d2aa0cb8c4a3d0d3c0a82ea55",
+      "bytes": 16092
+    },
+    {
+      "path": "docs/teaching/F-DIVERGENCES-IPMS-VERIFICATION.md",
+      "sha256": "bc3873c9936c3f89acc43fda04427356e82f1e1824bfb85014057ff25fcc05ef",
+      "bytes": 13069
+    },
+    {
+      "path": "docs/teaching/evidence/math-depth-remediation-author.json",
+      "sha256": "379b9f88afb5211dfce980ade2bedaf20367a4e908ba6d86f678fd4e971c08f0",
+      "bytes": 10328
+    },
+    {
+      "path": "docs/teaching/evidence/math-depth-remediation-independent.json",
+      "sha256": "b06e3d6888143325af61dbc893eae8700008b4661efb91acf34d7f535d1e231d",
+      "bytes": 2697
+    },
+    {
+      "path": "docs/teaching/topic-notes/functional-analysis-rkhs.md",
+      "sha256": "d430e187671ec8e5d78b76742de4a70efb04a2ff621764ea6a831e4a844947f3",
+      "bytes": 6258
+    },
+    {
+      "path": "docs/teaching/topic-notes/generative-adversarial-networks-gan-fundamentals.md",
+      "sha256": "c1857cb508f56e87b7f7eab9f19ff5cdd4349da5dc9f86174c3842fc59628ca5",
+      "bytes": 2704
+    },
+    {
+      "path": "scratch/divergence-intake-topic-r1.mjs",
+      "sha256": "5fb45968f4ecec47fa861bb05225b0fa6341e4040a679a9d84e70d71ce02d8e7",
+      "bytes": 1061
+    },
+    {
+      "path": "scratch/divergences-design-fixtures-r1.py",
+      "sha256": "cf5a658ec4b96509d1061bdb2cfb53b7d5c42cf4f193dc94551581e751e08bfc",
+      "bytes": 3491
+    },
+    {
+      "path": "scratch/divergences-reference-gretton-figure1.jpg",
+      "sha256": "127be2ee0185d3d835c332cf87fa0db980c92702f5fe264a48f6c75409203384",
+      "bytes": 113679
+    },
+    {
+      "path": "scratch/divergences-reference-embedding-figure3-1.jpg",
+      "sha256": "58b5f79a0344b60801233aba82664f832d9da30ab663c180c5f06264216750b4",
+      "bytes": 96932
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/checkpoint-r1.json",
+      "sha256": "635b814d6a673ead0520e467b5a995ac2215c37f556168ff5f036c80d342abab",
+      "bytes": 15211
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-proposal-r2.md",
+      "sha256": "b3a06c8015a77d42647d0cd429f539debc7a3d3a25b4db328ecee1e4c2fac932",
+      "bytes": 51585
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-fixture-checks-root-r2.json",
+      "sha256": "693ad314ec06cd626f84204f18ffae079ce5488b37735d329ef004dd9abe2984",
+      "bytes": 7000
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/design-author-reading-root-r2.json",
+      "sha256": "521da678de472ed030a63ea62e52a634540f41e82ccbab8825664744d4663392",
+      "bytes": 12104
+    }
+  ],
+  "retainedProgrammeCount": 11,
+  "mainExecutions": 0,
+  "printOnlyChanges": [
+    {
+      "key": "observers",
+      "removedLine": "print(\"Move delta0 to delta0.01: W1=0.01, TV=1, JS=ln(2), KL=infinity\")",
+      "originalCode": "import math\n\npositions = [-3, -1, 1, 3]\np, q = [0.4, 0.1, 0.1, 0.4], [0.1, 0.4, 0.4, 0.1]\ndifference = [a - b for a, b in zip(p, q)]\nprefix, running = [], 0\nscores = [0]\nfor i in range(len(positions) - 1):\n    running += difference[i]\n    prefix.append(running)\n    sign = (running > 0) - (running < 0)\n    scores.append(scores[-1] - sign * (positions[i + 1] - positions[i]))\nw1 = math.fsum(abs(amount) * (positions[i + 1] - positions[i]) for i, amount in enumerate(prefix))\ncritic_gap = math.fsum(score * mass for score, mass in zip(scores, difference))\nlinear = abs(math.fsum(position * mass for position, mass in zip(positions, difference)))\ntv = math.fsum(abs(mass) for mass in difference) / 2\nassert math.isclose(w1, critic_gap)\nassert all(abs(scores[j] - scores[i]) <= abs(positions[j] - positions[i]) + 1e-12\n           for i in range(4) for j in range(4))\nprint(\"Cumulative imbalances:\", [round(value, 6) for value in prefix])\nprint(\"Optimal critic scores:\", scores)\nprint(\"Linear / TV / W1:\", round(linear, 6), round(tv, 6), round(w1, 6))\nprint(\"Move delta0 to delta0.01: W1=0.01, TV=1, JS=ln(2), KL=infinity\")\n",
+      "originalOutput": "Cumulative imbalances: [0.3, 0.0, -0.3]\nOptimal critic scores: [0, -2, -2, 0]\nLinear / TV / W1: 0.0 0.6 1.2\nMove delta0 to delta0.01: W1=0.01, TV=1, JS=ln(2), KL=infinity",
+      "originalSourceOwner": {
+        "path": "src/learn/data/divergence-ipm-examples.js",
+        "sha256": "abf61006f9254f8590838c5fbdbd21e65e60e10cde7af9d40fd021f85416efbd",
+        "bytes": 22289
+      },
+      "sourcePath": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_observers.py"
+    },
+    {
+      "key": "kernel",
+      "removedLine": "print(\"Explicit phi=(x,x^2): mean phi for +/-1 is (0,1); for 0 it is (0,0). MMD=1.\")",
+      "originalCode": "import math\n\n\ndef mmd_squared(x, y, bandwidth=1):\n    if min(len(x), len(y)) < 2:\n        raise ValueError(\"Both groups need at least two observations.\")\n    if not math.isfinite(bandwidth) or bandwidth <= 0:\n        raise ValueError(\"Bandwidth must be positive and finite.\")\n    if any(not math.isfinite(value) for value in list(x) + list(y)):\n        raise ValueError(\"Observations must be finite.\")\n    def kernel(a, b):\n        return math.exp(-0.5 * ((a - b) / bandwidth) ** 2)\n    xx = math.fsum(kernel(a, b) for a in x for b in x)\n    yy = math.fsum(kernel(a, b) for a in y for b in y)\n    xy = math.fsum(kernel(a, b) for a in x for b in y)\n    n, m = len(x), len(y)\n    biased = xx / n**2 + yy / m**2 - 2 * xy / (n * m)\n    # Every diagonal RBF similarity is exactly one. All cross pairs stay.\n    unbiased = (xx - n) / (n * (n - 1)) + (yy - m) / (m * (m - 1)) - 2 * xy / (n * m)\n    return biased, unbiased\n\n\n\nx, y = [-2, -2, 2, 2], [-1, -1, 1, 1]\nprint(\"Raw means:\", sum(x) / len(x), sum(y) / len(y))\nfor bandwidth in [0.5, 1, 3]:\n    biased, unbiased = mmd_squared(x, y, bandwidth)\n    print(\"Bandwidth:\", bandwidth, \"biased / unbiased squared:\", round(biased, 6), round(unbiased, 6))\ndef witness(t):\n    return sum(math.exp(-0.5 * (a - t)**2) for a in x) / len(x) - sum(math.exp(-0.5 * (b - t)**2) for b in y) / len(y)\ngap = sum(witness(t) for t in x) / len(x) - sum(witness(t) for t in y) / len(y)\nprint(\"Witness expectation gap:\", round(gap, 6))\nprint(\"Identical empirical laws:\", [round(v, 6) for v in mmd_squared([-1, 1], [-1, 1])])\nprint(\"Explicit phi=(x,x^2): mean phi for +/-1 is (0,1); for 0 it is (0,0). MMD=1.\")\n",
+      "originalOutput": "Raw means: 0.0 0.0\nBandwidth: 0.5 biased / unbiased squared: 0.864832 0.531555\nBandwidth: 1 biased / unbiased squared: 0.450196 0.139474\nBandwidth: 3 biased / unbiased squared: 0.053435 -0.077924\nWitness expectation gap: 0.450196\nIdentical empirical laws: [0.0, -0.864665]\nExplicit phi=(x,x^2): mean phi for +/-1 is (0,1); for 0 it is (0,0). MMD=1.",
+      "originalSourceOwner": {
+        "path": "src/learn/data/divergence-ipm-examples.js",
+        "sha256": "abf61006f9254f8590838c5fbdbd21e65e60e10cde7af9d40fd021f85416efbd",
+        "bytes": 22289
+      },
+      "sourcePath": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_kernel.py"
+    },
+    {
+      "key": "stress",
+      "removedLine": "print(\"A small bounded discrepancy need not mean small application-specific harm.\")",
+      "originalCode": "import math\n\n\ndef validate(p, q):\n    if len(p) != len(q) or not p:\n        raise ValueError(\"Use matching nonempty alphabets.\")\n    for law in (p, q):\n        if any(not math.isfinite(x) or x < 0 for x in law):\n            raise ValueError(\"Masses must be finite and nonnegative.\")\n        if not math.isclose(math.fsum(law), 1, abs_tol=1e-12):\n            raise ValueError(\"Masses must sum to one.\")\n\n\ndef kl(p, q):\n    validate(p, q)\n    if any(a > 0 and b == 0 for a, b in zip(p, q)):\n        return math.inf\n    return math.fsum(a * (math.log(a) - math.log(b)) for a, b in zip(p, q) if a)\n\n\ndef comparisons(p, q):\n    validate(p, q)\n    middle = [(a + b) / 2 for a, b in zip(p, q)]\n    chi = math.inf if any(a > 0 and b == 0 for a, b in zip(p, q)) else math.fsum(\n        (a - b) ** 2 / b for a, b in zip(p, q) if b\n    )\n    return {\n        \"KL\": kl(p, q),\n        \"reverse KL\": kl(q, p),\n        \"JS\": (kl(p, middle) + kl(q, middle)) / 2,\n        \"H squared\": math.fsum((math.sqrt(a) - math.sqrt(b)) ** 2 for a, b in zip(p, q)) / 2,\n        \"chi squared\": chi,\n        \"TV\": math.fsum(abs(a - b) for a, b in zip(p, q)) / 2,\n    }\n\n\n\np, q = [0.99, 0.01], [1, 0]\nvalues = comparisons(p, q)\nprint(\"Missing rare event:\", {name: round(value, 6) for name, value in values.items()})\nprint(\"Chance 20 true-law observations contain no rare event:\", round(0.99**20, 6))\nloss = [0, 100]\nrisk_p = sum(mass * cost for mass, cost in zip(p, loss))\nrisk_q = sum(mass * cost for mass, cost in zip(q, loss))\nprint(\"Expected cost P / Q:\", risk_p, risk_q)\nprint(\"Bound from loss range times TV:\", round(100 * values[\"TV\"], 6))\nprint(\"A small bounded discrepancy need not mean small application-specific harm.\")\n",
+      "originalOutput": "Missing rare event: {'KL': inf, 'reverse KL': 0.01005, 'JS': 0.003478, 'H squared': 0.005013, 'chi squared': inf, 'TV': 0.01}\nChance 20 true-law observations contain no rare event: 0.817907\nExpected cost P / Q: 1.0 0\nBound from loss range times TV: 1.0\nA small bounded discrepancy need not mean small application-specific harm.",
+      "originalSourceOwner": {
+        "path": "src/learn/data/divergence-ipm-examples.js",
+        "sha256": "abf61006f9254f8590838c5fbdbd21e65e60e10cde7af9d40fd021f85416efbd",
+        "bytes": 22289
+      },
+      "sourcePath": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_stress.py"
+    }
+  ],
+  "helper": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-prepared/programmes/fdiv_blockwise.py",
+    "sha256": "acc88a2f65b62a018985bf3ad1a51a24881d4d60ff260d4f669bfaeff682b657",
+    "bytes": 1556
+  },
+  "helperSource": {
+    "path": "public/learn-assets/divergences/mmd-library-bridge.py",
+    "sha256": "0c3d906cd2edb1a5b6962ebdf41865fe2b2a34c6932804aa0a9896a8a0bbccba",
+    "bytes": 3837
+  },
+  "helperFunctions": [
+    "kernel_sum",
+    "mmd2"
+  ],
+  "nextAction": "Write complete manuscript and 53 visual/seven investigation contracts; implement exactly two new programmes and new practice; execute only those once."
+}

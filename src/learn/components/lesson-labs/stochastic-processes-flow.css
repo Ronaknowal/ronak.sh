@@ -1,0 +1,46 @@
+.stochastic-processes-lesson .sp-figure,
+.stochastic-processes-lesson .sp-lab {
+  margin-block: 2rem;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  container: sp-mechanism / inline-size;
+}
+.stochastic-processes-lesson .sp-figure figcaption { margin-top: 1rem; line-height: 1.7; }
+.stochastic-processes-lesson { overflow-wrap: anywhere; }
+.sp-reading-region, .sp-plot { min-width: 0; max-width: 100%; }
+.sp-scroll-hint { font-size: .83em; line-height: 1.6; margin-block: .5rem; }
+.sp-svg { display: block; max-width: none; height: auto; overflow: visible; color: #ded5bf; }
+.sp-label { fill: #ded5bf; font: 12px ui-monospace, monospace; }
+.sp-line { fill: none; stroke: #edc267; stroke-width: 2; }
+.sp-family-muted { opacity: .35; stroke-width: 1; }
+.sp-mean { stroke: #ded5bf; stroke-dasharray: 2 4; }
+.sp-secondary { stroke: #97bfca; stroke-dasharray: 5 4; }
+.sp-secondary .sp-line, .sp-secondary .sp-arrow { stroke: #97bfca; stroke-dasharray: 5 4; }
+.sp-grid { stroke: #5b574e; stroke-width: .6; }
+.sp-arrow { fill: none; stroke: #ded5bf; stroke-width: 1.6; marker-end: var(--sp-arrow); }
+.sp-dot, .sp-bit { fill: #171717; stroke: #ded5bf; stroke-width: 1.3; }
+.sp-area { fill: #edc267; fill-opacity: .24; stroke: #edc267; stroke-width: 1; }
+.sp-selected .sp-dot, .sp-selected .sp-bit, .sp-selected.sp-dot { stroke: #fff; stroke-width: 2.5; }
+.sp-selected .sp-arrow { stroke: #edc267; }
+.sp-selected .sp-area { stroke: #fff; stroke-width: 2; }
+.sp-zero { opacity: .4; stroke-dasharray: 2 4; }
+.sp-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.8rem; }
+.sp-panel { min-width: 0; }
+@container sp-mechanism (max-width: 42rem) { .sp-compare { grid-template-columns: minmax(0, 1fr); } }
+.sp-table, .sp-local-scroll, .sp-equation { max-width: 100%; overflow: auto; outline-offset: 4px; }
+.sp-table table { border-collapse: collapse; width: max-content; min-width: 100%; font-size: .86em; }
+.sp-table caption { text-align: left; padding-block: .65rem; white-space: normal; max-width: 36rem; }
+.sp-table th, .sp-table td { padding: .5rem .7rem; text-align: right; white-space: nowrap; border-bottom: 1px solid #39352d; }
+.sp-table th:first-child { text-align: left; }
+.sp-matrix :is(th, td) { border: 1px solid #5b574e; }
+.sp-units { font-size: .83em; color: #ded5bf; line-height: 1.6; }
+.sp-controls { display: flex; flex-wrap: wrap; gap: .8rem 1.4rem; align-items: end; margin-block: 1rem; }
+.sp-controls label { display: flex; flex-direction: column; gap: .35rem; min-width: 0; max-width: 100%; }
+.sp-controls input, .sp-controls select, .sp-controls button { font: inherit; background: #171717; color: #ded5bf; border: 1px solid #6c6151; border-radius: 3px; padding: .45rem .65rem; max-width: 100%; }
+.sp-controls input[type=number], .sp-controls input[type=text] { width: 7rem; }
+.sp-controls button { cursor: pointer; }
+.sp-controls :focus-visible, .sp-table:focus-visible, .sp-local-scroll:focus-visible, .sp-svg [role=button]:focus-visible { outline: 2px solid #edc267; }
+.sp-controls output { white-space: nowrap; flex: none; }
+.sp-error { color: #edc267; }
+.stochastic-processes-lesson strong { overflow-wrap: normal; }

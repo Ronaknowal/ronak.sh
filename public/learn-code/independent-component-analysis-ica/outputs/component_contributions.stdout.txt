@@ -1,0 +1,12 @@
+manual_contributions [[ 9. -4.]
+ [ 3. -4.]] sum [ 5. -1.] remove_first [-4. -4.]
+compensated_first [9. 3.]
+unwanted_removed [ 0.8 -0.4] clean_error [-0.8  0.4] mixed_component -2.6
+learned_shape_q_d_k (3, 2, 2) sum_plus_mean_equal_inverse True
+library_converged True warnings []
+ordinary_same_fit_inverse True
+remove_first [[ 4.51000622 -2.32367127]
+ [ 3.85777167 -2.1726866 ]
+ [ 2.32854246 -1.81868792]]
+retained_projection [[1. 2. 0.]] residual [[-4.4408921e-16  0.0000000e+00  3.0000000e+00]] restore_residual_policy [[1. 2. 3.]]
+refused Removal indices must be unique valid component integers

@@ -1,0 +1,9 @@
+# Content author checkpoint
+
+The complete corrected 13-section/45-drawing design is taken in against immutable intake `../intake.json` (c6a3facad008dd6f8208bed9796dec70a4671720663baa09524a28417e2922bb). There are ten complete new programme sources and ten newly executed deterministic streams under `../programs/` and `../outputs/`. Fitting functions in those files are source-only and were not called. All five original programme/stream pairs, ten saved maps and forty active/preserved pairs remain untouched.
+
+`../check-new-mechanisms.py` ran with the existing exact `scratch/manifold-learning-runtime/Scripts/python.exe` environment: actual tool d50f08/session53688 →47dbaa exit0, 41 focused checks. `../new-mechanisms-check.json` SHA2561074e1178a0031840638665a9749daa4220f2c22263b59c4b68273eb726f7d89 binds actual new sources/streams and arithmetic. The initial bundled Python attempt67e686 exited1 at import SciPy (`ModuleNotFoundError`), before any new or historical numerical operation; it is retained as a tool/environment limitation. No environment was changed. Source reading25af3d/d24f28 consumed the complete five original programs; data/provenance and prior read-only literal identities remain in intake.
+
+The new audit deliberately orders by computed distance then source ID, using row-wise SciPy cdist. Retained historical library trustworthiness has different tie/numerical sorting; its stream and saved metrics are not replaced. New R10 and source30 common/missing/new IDs agree exactly; new T/C are distinct qualified streams. They do not certify a new embedding fit.
+
+Next: write the single complete effective manuscript, complete adjacent 45 visual/lab contracts, all 19 solved tasks and annotated sources; read the whole manuscript as a beginner and a specialist, then freeze one author-ready handoff for DIFFERENT content review. Content incomplete; implementation not started. No runtime/build/browser/central/shared/publication write in this task.

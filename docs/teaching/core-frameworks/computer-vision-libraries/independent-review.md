@@ -1,0 +1,13 @@
+# Independent review — Computer Vision Libraries
+
+Reviewer: `frameworks_functional_tracking`, independent of author `frameworks_annotation_modalities`. Reviewed 28 September 2026. Current source hashes are in the companion JSON. No open source-level blocker found.
+
+Read the entire manuscript, image/lab contracts, models, JSX, complete NumPy/Pillow/OpenCV/torchvision program and native evidence. The lesson makes otherwise legal-but-wrong tensors concrete with one colored pixel and an asymmetric object. Neighborhood selection exposes every filter product; the signed kernel distinguishes correlation from convolution. Crop/clip/flip equations return to the same pixel-edge frame, and the discrete-mask counterexample explains why common geometry does not imply common interpolation. Later library and inference routes preserve these contracts and link prior architecture/training owners rather than pretending this introductory tooling lesson recreates every vision model.
+
+Checked all numerical prose examples, mean/difference kernels, changed crop exercise and normalization arithmetic. Shared random-transform semantics agree with the current official torchvision transforms documentation. The offline program is complete and its measured scope is clearly separated from the photograph/weights-dependent inference pattern. Native author evidence includes asymmetric OpenCV parity, removed geometry and discrete mask IDs; no duplicate package execution was needed.
+
+Complementary Node checks perturb each of16 input pixels by3 under each of2 kernels and compare all4 outputs with independent row/column membership and signed coefficients:128 assertions passed. This verifies both locality and each coefficient rather than merely comparing two calls to the same implementation. Previously executed42 crop/flip fixtures in the author checker were read against the separately mapped source-column oracle. Pixel geometry remains tied to data while text reflows; these controls are actual inputs, not slider-looking static marks.
+
+Final source-only presentation delta reviewed: the contribution list now uses14px text, line-height1.6 and explicit1.9rem inline-start padding so outside list markers have reserved space on narrow screens. This is a reasonable scoped readability correction; it changes no model or equation. The shared CSS hash in all three receipts is refreshed after this review. Rendered closure remains the parent's recaptured screenshot check.
+
+This source and heuristic teaching review does not certify the rendered browser or pretrained accuracy. Parent owns final narrow-width, typography, keyboard, theme and integration receipts. No natural-image benchmark or external model-weight download was performed by this reviewer.

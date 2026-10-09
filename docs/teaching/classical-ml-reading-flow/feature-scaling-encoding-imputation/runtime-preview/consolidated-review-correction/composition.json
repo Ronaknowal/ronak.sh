@@ -1,0 +1,102 @@
+{
+  "schema": "feature20-private-reader-composition/v2",
+  "acceptedManuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+    "bytes": 215186,
+    "sha256": "cabb07a552c707930c01b8a9aa91dc93227fb4c1c7fd81d45220441dad3b5db5",
+    "role": "whole manuscript; bounded F1/F2 successor to whole-reviewed predecessor"
+  },
+  "runtimeWording": [
+    {
+      "old": "Full runtime drawings, keyboard/pointer/narrow viewing, independent runtime review and publication belong to a later phase; the current content packet specifies their actual objects and behavior without claiming those surfaces were rendered.",
+      "new": "The diagrams use these retained values; current live edits apply the stated arithmetic and never rerun the historical experiment.",
+      "reason": "Root-authorized runtime-only successor removes obsolete content-phase staging language; accepted manuscript and numerical/execution roles stay exact."
+    }
+  ],
+  "matchedAmendments": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/matched-reading-amendments.json",
+    "bytes": 42722,
+    "sha256": "67357f4f36d8ac5102d7c5686c644eea9d1395905fe87e19979d83f9dd5407a2"
+  },
+  "rootCorrectionRelease": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/root-correction-release.json",
+    "bytes": 3350,
+    "sha256": "91b3d15209a6550daa9da7dbdd2ffd4d558cc50ffe771546c87adb011fdfafcd"
+  },
+  "predecessorComposition": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/composition.json",
+    "bytes": 3338,
+    "sha256": "4eee0f84609c19edb967b9236cd33e3114488c328bdde832f9230a0ebc89bb90"
+  },
+  "formatOnly": [
+    "Original single-line disclosures and dollar math rendered using shared components",
+    "Preserved HTML less-than entity in T21 decoded for visible mathematical comparison",
+    "Prepared-renderer current-heading table context kept as accessible region label instead of repeated visible heading"
+  ],
+  "output": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/preparation-lesson.jsx",
+    "bytes": 144022,
+    "sha256": "047cbb27237556b6dc0fca3ef69f728f4f42242fbd435127bcca55cf004d1bac"
+  },
+  "sections": [
+    [
+      "1-three-different-questions-hiding-inside-preprocessing",
+      "1. Three different questions hiding inside “preprocessing”"
+    ],
+    [
+      "2-scaling-changes-the-meaning-of-nearby",
+      "2. Scaling changes the meaning of “nearby”"
+    ],
+    [
+      "3-encoding-categories-means-choosing-relationships",
+      "3. Encoding categories means choosing relationships"
+    ],
+    [
+      "4-a-missing-value-is-a-question-not-a-zero",
+      "4. A missing value is a question, not a zero"
+    ],
+    [
+      "5-learn-the-preparation-rule-without-looking-ahead",
+      "5. Learn the preparation rule without looking ahead"
+    ],
+    [
+      "6-a-complete-experiment-on-real-penguin-measurements",
+      "6. A complete experiment on real penguin measurements"
+    ],
+    [
+      "7-deeper-branch-change-the-shape-not-only-the-ruler",
+      "7. Deeper branch: change the shape, not only the ruler"
+    ],
+    [
+      "8-deeper-branch-high-cardinality-categories-and-target-information",
+      "8. Deeper branch: high-cardinality categories and target information"
+    ],
+    [
+      "9-deeper-branch-completing-data-versus-representing-uncertainty",
+      "9. Deeper branch: completing data versus representing uncertainty"
+    ],
+    [
+      "10-practice-explain-the-representation-before-choosing-the-function",
+      "10. Practice: explain the representation before choosing the function"
+    ],
+    [
+      "11-readiness-and-the-next-connection",
+      "11. Readiness and the next connection"
+    ]
+  ],
+  "drawings": 42,
+  "originalMechanisms": 41,
+  "splitPlacement": "D41b sensitivity",
+  "investigations": 16,
+  "files": 42,
+  "contextualFileLinks": 42,
+  "commonIndexOnly": true,
+  "counts": {
+    "sources": 18,
+    "stdout": 17,
+    "stderr": 1,
+    "snippets": 1
+  },
+  "parserShipsToBrowser": false,
+  "scientificExecutions": 0
+}

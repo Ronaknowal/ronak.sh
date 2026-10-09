@@ -1,0 +1,20 @@
+{
+  "session": 81144,
+  "port": 5207,
+  "listeners": [
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 5207,
+      "OwningProcess": 37224
+    }
+  ],
+  "processes": [
+    {
+      "ProcessId": 37224,
+      "ParentProcessId": 38208,
+      "ExecutablePath": "C:\\Users\\ronak\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "CommandLine": "\"C:\\Users\\ronak\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe\" node_modules/vite/bin/vite.js preview --config docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/consolidated-review-correction/root-native-review/text-size-preview/vite.config.mjs --host 127.0.0.1 --port 5207 --strictPort"
+    }
+  ],
+  "prior_sandbox_lookup": "082954 exit1 CIM access unavailable; no process changes"
+}

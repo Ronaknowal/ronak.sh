@@ -1,0 +1,100 @@
+{
+  "programs": {
+    "analyze_outputs.py": "6b97efb3556b9fad2d8d115d5e22f4317be26124bd07bfd37437a75d085f5b5b",
+    "beam_search.py": "da2e78cec18673613d1c5d8cb6957d58fb752428c329ee8884c0366d816d20f7",
+    "corpus_model.py": "9c7be776fe760753247fa2d2542a2ebc84654e60aecd914f3acf4d3641ead642",
+    "filters.py": "50bc4069430f408c8ee8df301d587c2077d383ea76bfd1ecff93e957a331591c",
+    "history_and_stops.py": "8754cc521ffe1f5414ad8a32c158221ef0248d8efd38414353b557b7eb64dae7",
+    "native_generation.py": "7fd68efb0f6e4f567c579cfffcaa7a89f28d482c101c4ca1a045c937344309eb",
+    "practice_answers.py": "efd73713e2552d6beac73ba89304af6442e02c0863b15d130416e99d4b71d89b",
+    "sampling.py": "77d420efea08f8cdbf60b135d058c34127e2c56b5ec3848078be6e98478943f7",
+    "scratch_study.py": "49a4e9d549575ea7eabbade7d70af002f3dcda2b9820a83d259a6ec5e25c893f"
+  },
+  "data": {
+    "alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+    "alice-provenance.json": "58047ab67319ff4ad1511508bf8f3cd96afa40ac129e070454e9203b76733741",
+    "alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed"
+  },
+  "methods": [
+    {
+      "name": "greedy",
+      "greedy": true
+    },
+    {
+      "name": "beam2",
+      "beam": 2
+    },
+    {
+      "name": "beam4",
+      "beam": 4
+    },
+    {
+      "name": "temperature07",
+      "temperature": 0.7
+    },
+    {
+      "name": "temperature10",
+      "temperature": 1.0
+    },
+    {
+      "name": "temperature13",
+      "temperature": 1.3
+    },
+    {
+      "name": "top_k20",
+      "k": 20
+    },
+    {
+      "name": "top_p09",
+      "mass": 0.9
+    },
+    {
+      "name": "min_p005",
+      "relative": 0.05
+    }
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "limit": 32,
+  "model_revision": "cf967c0a9a04383db6f7b1108d86b2962634b4ac",
+  "model_files": {
+    "config.json": "f97f966a66c444890ed461fff2a51eefb15d74303df05b948124719f199b0b17",
+    "model.safetensors": "116a02532db461f91386a5b20f942ff2c8d4de7341e21b55caafc3d7b25f49a1",
+    "special_tokens_map.json": "10b8c8852c1e1f70b54d9aff61728408c28971c0e97a6c5a7b2debbd1d3e9c0c",
+    "tokenizer.json": "870f4e2baa6b683221fa52004d5d6f40ab8c9d31961617304b78c910c2c3caf2",
+    "tokenizer_config.json": "eee017c5bd133137f45907bd0a6e781e2ccd1a533734b7ed2a2f2f4446659809"
+  },
+  "transformers": "5.19.0",
+  "torch": "2.14.0+cpu",
+  "dtype": "float32",
+  "threads": 2,
+  "prompts": [
+    {
+      "id": "heldout-line-2",
+      "source": " \u201cWhat a curious feeling!\u201d said Alice; \u201cI must be shutting up like a telescope.\u201d",
+      "source_sha256": "e2e18217d3d2e21bd094b9a1db319ce64961ceb7afe06fa670431f32da2e6d25",
+      "prompt": "\u201cWhat a curious feeling!\u201d said Alice; \u201cI must be shutting up like"
+    },
+    {
+      "id": "heldout-line-3",
+      "source": "And so it was indeed: she was now only ten inches high, and her face brightened up at the thought that she was now the right size for going through the little door into that lovely garden. First, however, she waited for a few minutes to see if she was going to shrink any further: she felt a little nervous about this; \u201cfor it might end, you know,\u201d said Alice to herself, \u201cin my going out altogether, like a candle. I wonder what I should be like then?\u201d And she tried to fancy what the flame of a candle is like after the candle is blown out, for she could not remember ever having seen such a thing.",
+      "source_sha256": "cb30de2fbae7f272d1aa54d0c2b292ba4b2c6abc8474a68350394a06ff5d4cbb",
+      "prompt": "And so it was indeed: she was now only ten inches high,"
+    },
+    {
+      "id": "heldout-line-4",
+      "source": "After a while, finding that nothing more happened, she decided on going into the garden at once; but, alas for poor Alice! when she got to the door, she found she had forgotten the little golden key, and when she went back to the table for it, she found she could not possibly reach it: she could see it quite plainly through the glass, and she tried her best to climb up one of the legs of the table, but it was too slippery; and when she had tired herself out with trying, the poor little thing sat down and cried.",
+      "source_sha256": "179e653e8b36db2e311ff662a39aeb7316a3149a621fc3619515c859c829c305",
+      "prompt": "After a while, finding that nothing more happened, she decided on going"
+    },
+    {
+      "id": "heldout-line-5",
+      "source": "\u201cCome, there\u2019s no use in crying like that!\u201d said Alice to herself, rather sharply; \u201cI advise you to leave off this minute!\u201d She generally gave herself very good advice, (though she very seldom followed it), and sometimes she scolded herself so severely as to bring tears into her eyes; and once she remembered trying to box her own ears for having cheated herself in a game of croquet she was playing against herself, for this curious child was very fond of pretending to be two people. \u201cBut it\u2019s no use now,\u201d thought poor Alice, \u201cto pretend to be two people! Why, there\u2019s hardly enough of me left to make _one_ respectable person!\u201d",
+      "source_sha256": "1e90712bd7d42c73c3315d8473fb9a3018538330e408c53f0ea3e4a2459d9b3d",
+      "prompt": "\u201cCome, there\u2019s no use in crying like that!\u201d said Alice to herself,"
+    }
+  ]
+}

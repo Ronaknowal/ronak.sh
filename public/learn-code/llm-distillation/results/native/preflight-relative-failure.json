@@ -1,0 +1,7 @@
+{
+  "stage": "Before optimizer or generation",
+  "relative_l2": 3.0829874892268345e-05,
+  "initial_threshold": 1e-05,
+  "independent_fp64_diagnostic": "double-diagnostic.json",
+  "resolution": "Retain FP32 complete-gradient errors with1e-4 bound AND require same whole-model FP64-projection gradients within1e-8 relative L2"
+}

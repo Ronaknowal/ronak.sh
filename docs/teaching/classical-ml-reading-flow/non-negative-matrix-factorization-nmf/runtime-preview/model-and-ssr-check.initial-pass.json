@@ -1,0 +1,368 @@
+{
+  "schema": "nmf-private-runtime-pure-ssr-check/v1",
+  "conditions": [
+    {
+      "label": "Exact constructed product",
+      "passed": true
+    },
+    {
+      "label": "Initial half-loss6",
+      "passed": true
+    },
+    {
+      "label": "Complete W-first CD W1",
+      "passed": true
+    },
+    {
+      "label": "W block loss15/16",
+      "passed": true
+    },
+    {
+      "label": "H block uses new W 0/0",
+      "passed": true
+    },
+    {
+      "label": "H block uses new W 0/1",
+      "passed": true
+    },
+    {
+      "label": "H block uses new W 0/2",
+      "passed": true
+    },
+    {
+      "label": "H block uses new W 1/0",
+      "passed": true
+    },
+    {
+      "label": "H block uses new W 1/1",
+      "passed": true
+    },
+    {
+      "label": "H block uses new W 1/2",
+      "passed": true
+    },
+    {
+      "label": "Full CD loss11733/26620",
+      "passed": true
+    },
+    {
+      "label": "Cone 1/0.5",
+      "passed": true
+    },
+    {
+      "label": "Cone 0/1",
+      "passed": true
+    },
+    {
+      "label": "Cone 0/0",
+      "passed": true
+    },
+    {
+      "label": "Shear product 0",
+      "passed": true
+    },
+    {
+      "label": "Shear product 0.5",
+      "passed": true
+    },
+    {
+      "label": "Shear product 1",
+      "passed": true
+    },
+    {
+      "label": "Simultaneous fixed-W-block MU 0.5",
+      "passed": true
+    },
+    {
+      "label": "Simultaneous fixed-W-block MU 1",
+      "passed": true
+    },
+    {
+      "label": "Simultaneous fixed-W-block MU 2",
+      "passed": true
+    },
+    {
+      "label": "Boundary KL0/2",
+      "passed": true
+    },
+    {
+      "label": "KL infinite",
+      "passed": true
+    },
+    {
+      "label": "IS zero domain",
+      "passed": true
+    },
+    {
+      "label": "MM gamma 0",
+      "passed": true
+    },
+    {
+      "label": "MM gamma 1",
+      "passed": true
+    },
+    {
+      "label": "MM gamma 2",
+      "passed": true
+    },
+    {
+      "label": "MM gamma 3",
+      "passed": true
+    },
+    {
+      "label": "Sign-pair original negative choice",
+      "passed": true
+    },
+    {
+      "label": "Sign-pair tie positive",
+      "passed": true
+    },
+    {
+      "label": "Sign-pair zero norm endpoint0",
+      "passed": true
+    },
+    {
+      "label": "Sign-pair zero norm endpoint1",
+      "passed": true
+    },
+    {
+      "label": "Original anchor IDs",
+      "passed": true
+    },
+    {
+      "label": "Projection residuals",
+      "passed": true
+    },
+    {
+      "label": "Duplicate stable global IDs",
+      "passed": true
+    },
+    {
+      "label": "Fresh stale-code changed amounts",
+      "passed": true
+    },
+    {
+      "label": "Fresh stale-code changed loss",
+      "passed": true
+    },
+    {
+      "label": "Invalid table refusal true",
+      "passed": true
+    },
+    {
+      "label": "Invalid table refusal NaN",
+      "passed": true
+    },
+    {
+      "label": "Invalid table refusal Infinity",
+      "passed": true
+    },
+    {
+      "label": "Invalid table refusal -1",
+      "passed": true
+    },
+    {
+      "label": "Invalid table refusal 1,1,2",
+      "passed": true
+    },
+    {
+      "label": "Invalid table refusal ",
+      "passed": true
+    },
+    {
+      "label": "Syntax ArrayFigures.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax Drawing.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax file-index-data.js",
+      "passed": true
+    },
+    {
+      "label": "Syntax FileIndex.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax GeometryFigures.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax IdentifiabilityFigures.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax nmf-lesson.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax nmf-model.js",
+      "passed": true
+    },
+    {
+      "label": "Syntax NmfFigures.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax OptimizationFigures.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax preview-entry.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax preview-loader.js",
+      "passed": true
+    },
+    {
+      "label": "Syntax root-start.mjs",
+      "passed": true
+    },
+    {
+      "label": "Syntax saved-data.js",
+      "passed": true
+    },
+    {
+      "label": "Syntax SavedDataFigures.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax TransferFigures.jsx",
+      "passed": true
+    },
+    {
+      "label": "Syntax vite.config.mjs",
+      "passed": true
+    },
+    {
+      "label": "All66 actual SSR figure identities",
+      "passed": true
+    },
+    {
+      "label": "All19 H2 content sections",
+      "passed": true
+    },
+    {
+      "label": "All24 independent practice scopes",
+      "passed": true
+    },
+    {
+      "label": "All48 independent hint/solution disclosures",
+      "passed": true
+    },
+    {
+      "label": "Exactly22 file catalogue actions",
+      "passed": true
+    },
+    {
+      "label": "No placeholder marker prose",
+      "passed": true
+    },
+    {
+      "label": "Historical fragment aliases unique",
+      "passed": true
+    },
+    {
+      "label": "No nonfinite SVG attributes",
+      "passed": true
+    }
+  ],
+  "conditionCount": 67,
+  "sourceBindings": [
+    {
+      "path": "ArrayFigures.jsx",
+      "bytes": 7882,
+      "sha256": "15f9b119f87506363a4789f26ff5240b7edbd310242d2b0a380df987f3170433"
+    },
+    {
+      "path": "Drawing.jsx",
+      "bytes": 5074,
+      "sha256": "aeb15975449d1f80a45e5892a3f852ef2caa1aea9030eca12fb80ead2f69c887"
+    },
+    {
+      "path": "file-index-data.js",
+      "bytes": 7985,
+      "sha256": "2b59344616a5438cde3a0fdf82230edeeeef1db578c93aa61c3dfb448927990c"
+    },
+    {
+      "path": "FileIndex.jsx",
+      "bytes": 1267,
+      "sha256": "ca5c0338bce03a494488e3e10ce1d8b3c702400c0b761f1915482d2123cc4933"
+    },
+    {
+      "path": "GeometryFigures.jsx",
+      "bytes": 11740,
+      "sha256": "3aef2f657112db6f798911c31d9513057a741dff2e7284bb1f616fd5cff14f15"
+    },
+    {
+      "path": "IdentifiabilityFigures.jsx",
+      "bytes": 10606,
+      "sha256": "4b9a5c32d719044adde9b38aa5d7d4080c9365cb534a03099e4a98a47d4e08b6"
+    },
+    {
+      "path": "nmf-lesson.jsx",
+      "bytes": 316961,
+      "sha256": "83541d60120db40830c6de48ae9fcbe88f6aaca787debcdc395b865887ab3e0e"
+    },
+    {
+      "path": "nmf-model.js",
+      "bytes": 5316,
+      "sha256": "fbd839e0031e0fc54e45d4b6667fbbc7e4a0fbd57743c873235d18d86615ac12"
+    },
+    {
+      "path": "NmfFigures.jsx",
+      "bytes": 1427,
+      "sha256": "b63fd9bdf0497b79c1340cb37b759887bbb47e1c5fe6babc3fd4def0820f6b44"
+    },
+    {
+      "path": "OptimizationFigures.jsx",
+      "bytes": 20209,
+      "sha256": "4ece17a3c422f58cb556fb3c334984c5cda0951b5088d4dad44b0914b6d18126"
+    },
+    {
+      "path": "preview-entry.jsx",
+      "bytes": 1007,
+      "sha256": "bc3961e387eaa0c698f848e1ca277a934a378ea024fce079c2c9c49b928183eb"
+    },
+    {
+      "path": "preview-loader.js",
+      "bytes": 176,
+      "sha256": "932aeeb0631ad74e40f460b610ef5d2db12ef1ba1387ce9dae91efecd28d1c39"
+    },
+    {
+      "path": "root-start.mjs",
+      "bytes": 4852,
+      "sha256": "8091a39416e415b50ce55c3da40f4997a11bbb303582feca9bd14d5ad0d62193"
+    },
+    {
+      "path": "saved-data.js",
+      "bytes": 48181,
+      "sha256": "d8f5759102aee34ff0c2029d91956639baa2eb828884b5359782b933958bd425"
+    },
+    {
+      "path": "SavedDataFigures.jsx",
+      "bytes": 11115,
+      "sha256": "25c0f6197eaa5c809ab06d94de1ac653b10da12aabc4669f59d150bc67471ab5"
+    },
+    {
+      "path": "TransferFigures.jsx",
+      "bytes": 13509,
+      "sha256": "b17b8613ca82eeed6ed2359bb1b87750c2c82977a3bc3cf4959837f695d3f4e9"
+    },
+    {
+      "path": "vite.config.mjs",
+      "bytes": 3124,
+      "sha256": "89d31f9dae909117e104da8024a309f292f467552646048d0353c2c385485aa6"
+    }
+  ],
+  "ssr": {
+    "bytes": 1575484,
+    "sha256": "029b10c282d6a22b566343ae87bc4ce39da43c5d683b85448ef108b0254604e9"
+  },
+  "scope": "Fresh runtime source parsing, pure bounded teaching arithmetic and server-rendered default HTML; no browser/native/clipboard/download or scientific main/fit evidence.",
+  "scientificExecutions": 0,
+  "viteBuilds": 0
+}

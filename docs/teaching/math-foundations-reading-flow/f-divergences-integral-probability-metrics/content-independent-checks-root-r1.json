@@ -1,0 +1,168 @@
+{
+  "status": "PASS",
+  "reviewer": "/root",
+  "completedAt": "2026-10-09T18:25:10.144976+00:00",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/f-divergences-integral-probability-metrics/content-source-r1.json",
+    "sha256": "ab9b0b29b946f6c5561fc87f4d4906c3801c3aafab6a6a8d40e2348b84304ff9"
+  },
+  "script": {
+    "path": "C:/Personal Projects and files/Portfolio/Portfolio/scratch/review-fdiv-content-root-r1.py",
+    "sha256": "afd049d4d8c69e41d9f4269a0f5cb17e934fda530c52b6de6ea631e4f5c2ee99"
+  },
+  "checks": [
+    {
+      "name": "116 frozen source bindings",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "53 ordered manuscript placements and structured contracts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Entire unique contract payload corresponds to full specification",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Reading introductions and interpretations preserved in manuscript",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shared encoding and verification templates have no hidden variants",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All 15 complete Python sources projected exactly",
+      "passed": true,
+      "detail": [
+        "fdiv_events.py",
+        "fdiv_original.py",
+        "fdiv_support.py",
+        "fdiv_observers.py",
+        "kernel_means.py",
+        "fdiv_kernel.py",
+        "fdiv_permutation.py",
+        "mmd-library-bridge.py",
+        "fdiv_variational.py",
+        "fdiv_weights.py",
+        "fdiv_stress.py",
+        "fdiv_blockwise.py",
+        "iris_mmd.py",
+        "fdiv_project.py",
+        "fdiv_practice.py"
+      ]
+    },
+    {
+      "name": "Centered KL versus 70-digit independent log (0.501, 0.5)",
+      "passed": true,
+      "detail": {
+        "value": 9.99333999201067e-07,
+        "reference": 9.993339992010669e-07
+      }
+    },
+    {
+      "name": "Centered KL versus 70-digit independent log (0.496, 0.5)",
+      "passed": true,
+      "detail": {
+        "value": 1.6042838156927547e-05,
+        "reference": 1.6042838156927547e-05
+      }
+    },
+    {
+      "name": "Centered KL versus 70-digit independent log (0.5000000001, 0.5)",
+      "passed": true,
+      "detail": {
+        "value": 1.0000001654140822e-20,
+        "reference": 1.0000001654140822e-20
+      }
+    },
+    {
+      "name": "Support branches and affine contribution cancellation",
+      "passed": true,
+      "detail": "Support processed before logarithms; zero is not epsilon smoothing."
+    },
+    {
+      "name": "Unequal repeated observations preserve off-diagonal pairs",
+      "passed": true,
+      "detail": {
+        "B": 0.23500619483080887,
+        "U": 0.23500619483080887,
+        "closedForm": 0.2350061948308091
+      }
+    },
+    {
+      "name": "Changed T4 critic attains transport with every pair legal",
+      "passed": true,
+      "detail": {
+        "W1": 3.0,
+        "attained": 3.0
+      }
+    },
+    {
+      "name": "Changed joint-mixture weights contract JS",
+      "passed": true,
+      "detail": {
+        "mixedJS": 0.08228287850505178,
+        "weightedInputJS": 0.6931471805599453
+      }
+    },
+    {
+      "name": "Population and empirical critic targets t=1",
+      "passed": true,
+      "detail": {
+        "population": 0.0,
+        "empirical": 0,
+        "trueKL": 0
+      }
+    },
+    {
+      "name": "Population and empirical critic targets t=1.5",
+      "passed": true,
+      "detail": {
+        "population": -0.0743606353500641,
+        "empirical": 0.5,
+        "trueKL": 0
+      }
+    },
+    {
+      "name": "Population and empirical critic targets t=3.25",
+      "passed": true,
+      "detail": {
+        "population": -3.118867918179263,
+        "empirical": 2.25,
+        "trueKL": 0
+      }
+    },
+    {
+      "name": "Finite enumeration of feature-mean bias formula",
+      "passed": true,
+      "detail": {
+        "expectedB": 0.375,
+        "populationMMD2": 0.25,
+        "varianceOverN": 0.125
+      }
+    },
+    {
+      "name": "Small atom separation remains representable with expm1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Reused author checks all pass against unchanged manuscript",
+      "passed": true,
+      "detail": {
+        "authorChecks": 226
+      }
+    }
+  ],
+  "passed": 19,
+  "failed": 0,
+  "mainExecutions": 0,
+  "builds": 0,
+  "scope": "Bounded independent source correspondence and complementary formula risks; not a replay of historical science or a browser review."
+}

@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import { parse } from '@babel/parser';
+
+const id = 'boltzmann-machines-restricted-boltzmann-machines-rbm';
+const directory = `docs/teaching/deep-learning-beginner/${id}`;
+const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const sources = [`src/learn/data/topics/${id}.jsx`, ...['RbmFlowLabs.jsx','RbmLabs.jsx','RbmElements.jsx','RbmDigitLabs.jsx','RbmStructureFigures.jsx','rbm-labs.css'].map(file => `src/learn/components/lesson-labs/${file}`)];
+for (const file of sources.filter(file => file.endsWith('.jsx'))) parse(fs.readFileSync(file,'utf8'), { sourceType:'module',plugins:['jsx'] });
+const manuscript = fs.readFileSync(sources[0],'utf8');
+assert.equal((manuscript.match(/<H2>/g) || []).length,11);
+assert.equal((manuscript.match(/data-lesson-exercise=/g) || []).length,8);
+assert.match(manuscript,/lesson-flow/);
+assert.match(manuscript,/<RbmProgram file="rbm-study.py"/);
+assert.match(manuscript,/<RbmProgram file="bernoulli_rbm_bridge.py"/);
+assert.ok(!sources.some(file => fs.readFileSync(file,'utf8').includes('setShowSamples')));
+assert.ok(!sources.some(file => /import .*calculated-inputs/.test(fs.readFileSync(file,'utf8'))));
+assert.match(fs.readFileSync('scripts/generate-rbm-lesson.mjs','utf8'),/Reading-flow revision/);
+const entry=JSON.parse(fs.readFileSync('docs/teaching/lesson-delivery-progress.json')).topics[id];
+const previous=entry.previousRevisions.find(revision => revision.revision===3);
+const scientific=Object.entries(previous.implementation.reviewedFiles).filter(([file]) => file.startsWith(`public/learn-code/${id}/`) || ['src/learn/data/rbm-models.js','src/learn/data/rbm-study-summary.js','src/learn/data/rbm-library-model.js','scripts/check-rbm-models.mjs','scripts/check-rbm-native.py'].includes(file));
+for(const [file,identity] of scientific) assert.equal(hash(file),identity,`Scientific dependency changed: ${file}`);
+const reused=['native-checks.json','native-fixtures.json','model-checks.json','independent-model-checks.json'].map(file => `docs/teaching/deep-learning-completion/${id}/${file}`);
+const report={passed:true,checkedAt:new Date().toISOString(),scope:'Current reading-flow source conservation, exact scientific dependency identity, and explicit reuse of unchanged scientific checks. No new fit or native execution is claimed.',checks:['Six JSX parse','11 main sections and eight full practices retained','Both complete printed/downloadable program routes','No obsolete reset setter','No eager full calculated packet import','Historical generator refuses overwrite',`${scientific.length} exact scientific dependencies unchanged`],sourceHashes:Object.fromEntries(sources.map(file => [file,hash(file)])),scientificDependencies:Object.fromEntries(scientific),reusedReceipts:Object.fromEntries(reused.map(file=>[file,hash(file)])),independentNumerics:`${directory}/reading-flow-review-numerics.json`};
+fs.writeFileSync(`${directory}/reading-flow-source-checks.json`,JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({passed:true,scientificDependencies:scientific.length,receipt:`${directory}/reading-flow-source-checks.json`}));

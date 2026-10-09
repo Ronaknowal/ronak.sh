@@ -1,0 +1,339 @@
+{
+  "schema": "classical21-whole-manuscript-composition/v1",
+  "status": "assembled; author whole reads and DIFFERENT review still required",
+  "sources": [
+    {
+      "path": "opening.md",
+      "bytes": 2984,
+      "sha256": "6ebfd1c2dafd4fc4ccb5ff9da73610b5c43d78b05a95313000f158818d2bfd5c"
+    },
+    {
+      "path": "sections/01-questions.md",
+      "bytes": 6073,
+      "sha256": "a9cb5d334b05fd4f9c0da4d75fa7ba1da6363d3121f3b7ca77d97efa53669101"
+    },
+    {
+      "path": "sections/02-folds.md",
+      "bytes": 11274,
+      "sha256": "551cb12375a4088e287f55c93b5ba1d8403cb35c94701ddca70d09d4dbb1a874"
+    },
+    {
+      "path": "sections/03-information.md",
+      "bytes": 11609,
+      "sha256": "46cfc6d33cc432d82bbfc5e427b24eb7059747cb1a58dc0fa417d5d682a43921"
+    },
+    {
+      "path": "sections/04-selection.md",
+      "bytes": 9543,
+      "sha256": "a998c672f4f839efed617c0d1541262cc566808e0636e1d46d8ea4465281a28b"
+    },
+    {
+      "path": "sections/05-search-spaces.md",
+      "bytes": 8637,
+      "sha256": "d8ba1384be7061fa2b070305a94627ad76078fe10481466f1ae95a79cd5a7fc5"
+    },
+    {
+      "path": "sections/06-real-experiment.md",
+      "bytes": 9413,
+      "sha256": "2a967b6015d84013c2aa99996d16dc17fe19927c1a566e1b40896a31377ef855"
+    },
+    {
+      "path": "sections/07-risk-and-uncertainty.md",
+      "bytes": 15745,
+      "sha256": "1503288dd8b4332bf580ce55b7becc2f94ee46787021676a1aea776ee0227855"
+    },
+    {
+      "path": "sections/08-adaptive-search.md",
+      "bytes": 15731,
+      "sha256": "3204f6ff56dd43c23f216ae0b470a7018f911de487faba892aa20e0e4c4c143b"
+    },
+    {
+      "path": "sections/09-execution-and-reporting.md",
+      "bytes": 6917,
+      "sha256": "47b6a0c3d09e99890de7d32d4a76d94949141d66fb2d6b053c788377240dde90"
+    },
+    {
+      "path": "sections/10-practice.md",
+      "bytes": 17264,
+      "sha256": "0917811eb8bae20c367253167d84713006b3d2ba70db322bacb94813f850f6dd"
+    },
+    {
+      "path": "sections/11-readiness-and-resources.md",
+      "bytes": 8139,
+      "sha256": "cca9959b4e04ca6e191cabe6c7ceef64d96b10338a010f20956dede912c59fbb"
+    }
+  ],
+  "programme_bindings": [
+    {
+      "path": "programmes/bootstrap_the_whole_statistic.py",
+      "bytes": 6610,
+      "sha256": "a214cedd021304760fefd5e46c0ab5c06df83de86b274e63136a71f4302116d0"
+    },
+    {
+      "path": "programmes/bootstrap_the_whole_statistic.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/bootstrap_the_whole_statistic.py.stdout.txt",
+      "bytes": 12211,
+      "sha256": "785690dee466841d6332f93bedbb1ce9fce26997f92689b5f4db88e42fef60f9"
+    },
+    {
+      "path": "programmes/calculated-inputs.json",
+      "bytes": 82281,
+      "sha256": "dc0311a0c1ba7a72d45708ee2d76f847ad87004108ce99018a549e8b22f51f54"
+    },
+    {
+      "path": "programmes/cv_optuna.py",
+      "bytes": 984,
+      "sha256": "8d314771249f94c3900fb43f0a1a5c6906c2c35fede8ab3b644df15250747a08"
+    },
+    {
+      "path": "programmes/cv_optuna.py.stdout.txt",
+      "bytes": 112,
+      "sha256": "c6ca28777c32fd132b48db85a2a9d5462e3ee78d265d3a851d52aaee8d365637"
+    },
+    {
+      "path": "programmes/cv_penguins.py",
+      "bytes": 3279,
+      "sha256": "7308b4e7fc544209504371af354d481cf61e757cae3b72b324fb3d30d4b2a9b6"
+    },
+    {
+      "path": "programmes/cv_penguins.py.stdout.txt",
+      "bytes": 291,
+      "sha256": "8f1ec377554adbf25a7dc5ef3fe604189c3684f36ca5fe41e120e48939236145"
+    },
+    {
+      "path": "programmes/cv_tiny.py",
+      "bytes": 988,
+      "sha256": "e067a71d2ab22c35327183c4e135970b69a60fc8cc52b875412321b997e905b7"
+    },
+    {
+      "path": "programmes/cv_tiny.py.stdout.txt",
+      "bytes": 106,
+      "sha256": "565643189473ea32fe3e59404f440360221adf2fafe2f260911a896dbd8afb94"
+    },
+    {
+      "path": "programmes/data-provenance.md",
+      "bytes": 3770,
+      "sha256": "b7d8a56b683f797574834989dc9259ed932e53ceeb5c9bbb5a0393c7c5248692"
+    },
+    {
+      "path": "programmes/discrete_adaptive_search.py",
+      "bytes": 5169,
+      "sha256": "e123d1f47ee4a974984fcc254e2e0d81a19880e9cc3c0d3ae948c6227081b24d"
+    },
+    {
+      "path": "programmes/discrete_adaptive_search.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/discrete_adaptive_search.py.stdout.txt",
+      "bytes": 3410,
+      "sha256": "8058d0abd17f37fc0af5383b5d71a92cb3ddcaa16cd9b8b6939e63b74850a3aa"
+    },
+    {
+      "path": "programmes/finite_selection_optimism.py",
+      "bytes": 1823,
+      "sha256": "8ef741013cb8a4d19afff254753c0f2ed600273c80604e6e7dc88b363ed90b57"
+    },
+    {
+      "path": "programmes/finite_selection_optimism.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/finite_selection_optimism.py.stdout.txt",
+      "bytes": 1300,
+      "sha256": "235026f39c209e87a171a9fd9bf1b4c54a8ffe9b2402bd0db8e9f56942fedf5e"
+    },
+    {
+      "path": "programmes/fold_fitted_pipeline.py",
+      "bytes": 11262,
+      "sha256": "e26e2d319ed6783319e394c49b0137d8eed6d14469ec1b5ad9b431797a95ebfa"
+    },
+    {
+      "path": "programmes/fold_fitted_pipeline.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/fold_fitted_pipeline.py.stdout.txt",
+      "bytes": 571,
+      "sha256": "c1ea7c852b122bed7cf9e122522177e923835c0f87e760a45a6da2d9dfb9e036"
+    },
+    {
+      "path": "programmes/holdout_mse_identity.py",
+      "bytes": 2576,
+      "sha256": "093874803b6dcb5e0e49661ee0987d490b53977d64de712a6d99c85e2e6d68d5"
+    },
+    {
+      "path": "programmes/holdout_mse_identity.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/holdout_mse_identity.py.stdout.txt",
+      "bytes": 309,
+      "sha256": "c60dec485c8a816a26063cf6a9631d2b7f92c414349c85a04051af281218c5bf"
+    },
+    {
+      "path": "programmes/nested-experiment.json",
+      "bytes": 16989,
+      "sha256": "fd53f72e89cb511f68646a4a8fa81f0a5f6ef125c5141a4bd164c7b6a48d0499"
+    },
+    {
+      "path": "programmes/nested_procedure_from_indices.py",
+      "bytes": 4433,
+      "sha256": "e45f35b38254b1918cc1e025b3e1bd9569b86e20133897d4f01e881fdc0a5593"
+    },
+    {
+      "path": "programmes/nested_procedure_from_indices.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/nested_procedure_from_indices.py.stdout.txt",
+      "bytes": 12386,
+      "sha256": "10c40e913918243101db406891255c5500f11551735e9aaa476a76793f8f5a12"
+    },
+    {
+      "path": "programmes/ordinary_halving_audit.py",
+      "bytes": 2545,
+      "sha256": "7d436ae79f568cf6145c5a7b9c2cb4f9c1defa8887ac504acbce2c5c51eb1565"
+    },
+    {
+      "path": "programmes/ordinary_halving_audit.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/ordinary_halving_audit.py.stdout.txt",
+      "bytes": 2977,
+      "sha256": "67327189310b47454de5f8437c6225d4fd3b1ad72da447414962c37948f06623"
+    },
+    {
+      "path": "programmes/parameter_spaces_and_sampling.py",
+      "bytes": 3807,
+      "sha256": "180d256e0d3c123adf5be9f8cd28edd4622d8285d1b2d66ce10384c8dcf69f71"
+    },
+    {
+      "path": "programmes/parameter_spaces_and_sampling.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/parameter_spaces_and_sampling.py.stdout.txt",
+      "bytes": 1563,
+      "sha256": "2789cd58100df44fcbd7846c1bc357d45d87dda0ab7371e49dafa31b9bb4c462"
+    },
+    {
+      "path": "programmes/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+    },
+    {
+      "path": "programmes/practice_answers.py",
+      "bytes": 4932,
+      "sha256": "320e8dedf203dd64584a0cdecd92b1f3a8a7f0cd61048bd000b5515869d9f7d4"
+    },
+    {
+      "path": "programmes/practice_answers.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/practice_answers.py.stdout.txt",
+      "bytes": 2524,
+      "sha256": "b962ebac26ffe210136338c71012237cd5772fe379ff5897c37ccadcb6423286"
+    },
+    {
+      "path": "programmes/README.md",
+      "bytes": 3673,
+      "sha256": "7ba39d2e14bd41b5f9ba71672bded9cc2db0b1dd04bece3e85c34640e7591e32"
+    },
+    {
+      "path": "programmes/requirements-optuna.txt",
+      "bytes": 34,
+      "sha256": "4a5c4bb6fe00f4268ade4daf8ec209fba3dd1c12bc2468484944c7d8daba9c1c"
+    },
+    {
+      "path": "programmes/requirements.txt",
+      "bytes": 61,
+      "sha256": "ed9a683cbf487f4979c1deb16c27eeec981cbc6611d5cb639a40a98e77d2a6b8"
+    },
+    {
+      "path": "programmes/resource_tournaments.py",
+      "bytes": 4897,
+      "sha256": "abdd363cf5b7dbfb731b3155b678e47771bbe901d5ef13e793faf38c2017e1ef"
+    },
+    {
+      "path": "programmes/resource_tournaments.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/resource_tournaments.py.stdout.txt",
+      "bytes": 2546,
+      "sha256": "3162d3b768726af9fb7423e4e5eedbc309ab863f580f52e6476e7f0882e6acda"
+    },
+    {
+      "path": "programmes/risk_and_covariance_exact.py",
+      "bytes": 2353,
+      "sha256": "bc1a6635bd3eec5c35af578bc20a102d76e399f03bcc78f145e6e4e77b961a39"
+    },
+    {
+      "path": "programmes/risk_and_covariance_exact.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/risk_and_covariance_exact.py.stdout.txt",
+      "bytes": 551,
+      "sha256": "b11f116cd4a0c14769c67a6ea0747512a8d593b060fb13cda9193558ab5ec1e3"
+    },
+    {
+      "path": "programmes/search_results_and_refit.py",
+      "bytes": 4464,
+      "sha256": "4f1e653c0f7476af71a25e1d2c3985b3ca0a49e0767cb4ac79f90ed730eb4bc9"
+    },
+    {
+      "path": "programmes/search_results_and_refit.py.stderr.txt",
+      "bytes": 2283,
+      "sha256": "c655042fa9ab90f707fad23f194cbc4681c24be2d0829e2b64475a15a65e56d7"
+    },
+    {
+      "path": "programmes/search_results_and_refit.py.stdout.txt",
+      "bytes": 1729,
+      "sha256": "9825a0f76abb650e8d55db653950bf41972130b0bfdbfc7315d36d8bcec50ffd"
+    },
+    {
+      "path": "programmes/source-role-manifest.json",
+      "bytes": 21887,
+      "sha256": "63f141e7b6cad4e1886018225507683d3669e3c8345bf8be86cc3d7b6cdd3268"
+    },
+    {
+      "path": "programmes/split_information_contracts.py",
+      "bytes": 5606,
+      "sha256": "a6843279c834626da46578d8b9dfa2ff3ea35ae682bb34ca9e2bf7f73fad8496"
+    },
+    {
+      "path": "programmes/split_information_contracts.py.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "programmes/split_information_contracts.py.stdout.txt",
+      "bytes": 1720,
+      "sha256": "497b341268bf6c875e5bd9589fc9cc18b3683590569ab4dabdb7fb58d9c51dc7"
+    }
+  ],
+  "lesson": {
+    "path": "lesson.md",
+    "bytes": 245939,
+    "sha256": "4b6ef39187c7e6656675b9466d7c04d56bdd89b2b8cf9f683c681c2574a5a408"
+  },
+  "scope": "Literal full source/stream bodies, preserving raw CRLF streams and retained no-terminal-newline literals by one fence-boundary newline"
+}

@@ -3,6 +3,9 @@ import path from 'node:path';
 import { renderPreparedLesson } from './lib/prepared-lesson-renderer.mjs';
 
 const id = 'transformer-block-architecture';
+if (fs.readFileSync(`src/learn/data/topics/${id}.jsx`, 'utf8').includes('lesson-flow')) {
+  throw new Error('The directly authored reading-flow revision supersedes this historical generator. Preserve it; use the topic source.');
+}
 const directory = `docs/teaching/drafts/${id}`;
 const destination = `public/learn-code/${id}`;
 fs.mkdirSync(destination, { recursive: true });

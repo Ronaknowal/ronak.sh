@@ -1,0 +1,13 @@
+{
+  "command": "node docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/independent-whole-design-review/check-design.mjs",
+  "workdir": "C:/Personal Projects and files/Portfolio/Portfolio",
+  "actualToolResult": {
+    "chunk_id": "d5e6da",
+    "wall_time_seconds": 0.9586451,
+    "exit_code": 0,
+    "original_token_count": 319,
+    "output": "{\n  \"pass\": true,\n  \"checks\": 169,\n  \"failures\": [],\n  \"source30\": {\n    \"input\": [\n      0,\n      166,\n      229,\n      160,\n      36,\n      276,\n      140,\n      266,\n      178,\n      79\n    ],\n    \"pca\": {\n      \"neighbors\": [\n        78,\n        229,\n        79,\n        306,\n        276,\n        0,\n        130,\n        266,\n        132,\n        166\n      ],\n      \"retained\": [\n        229,\n        79,\n        276,\n        0,\n        266,\n        166\n      ],\n      \"count\": 6\n    },\n    \"tsne-p30-s7\": {\n      \"neighbors\": [\n        0,\n        276,\n        266,\n        286,\n        256,\n        130,\n        48,\n        166,\n        229,\n        10\n      ],\n      \"retained\": [\n        0,\n        276,\n        266,\n        166,\n        229\n      ],\n      \"count\": 5\n    }\n  },\n  \"initial\": {\n    \"path\": \"docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/proposed-design-packet.json\",\n    \"bytes\": 23274,\n    \"sha256\": \"92aafa0d19b0a3f5fe2efd62d6b5f87f891a4e737a96c141c0dbb3dfac7c65c4\"\n  },\n  \"corrected\": {\n    \"path\": \"docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-api-correction/author-ready-packet.json\",\n    \"bytes\": 3979,\n    \"sha256\": \"b3d7ef244e1d763c9a8030535ebdbab76f4f9534d7a8fe6a29c4e7a596061614\"\n  }\n}\n"
+  },
+  "stderr": "No stderr text emitted by exec_command; returned combined output preserved exactly.",
+  "scope": "One new standard-library-only identity/direct-expression run; no old fit/main/checker/study executed."
+}

@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-06T17:49:17.683Z",
+  "base": "http://127.0.0.1:4242",
+  "build": "dist-multimodal-tokenization",
+  "sourceFiles": {
+    "src/learn/data/topics/multimodal-tokenization.jsx": "0466887b4b9f8bd05c8db56ca448d84330882414110d3ef45d8d0f3560b57f12",
+    "src/learn/data/multimodal-tokenization-models.js": "d709d96540ad4c92d2838f0aa251de2ce2bad8a1e22fe0c5cf3b3d0a2d0eabd4",
+    "src/learn/components/lesson-labs/MultimodalTokenizationFlow.jsx": "536624954e69fa297bc1d9689dc44ecfa2ac27e537b25b0a803764bc6c5a33ca",
+    "src/learn/components/lesson-labs/multimodal-tokenization-flow.css": "92a3f7f1014429659f7844f3a15d9b273d2e7209e3224156041c1d9f3376a1f9",
+    "scripts/verify-multimodal-tokenization-browser.cjs": "964ca5becd096a00a2b67869786d7b912bc286b14fb06c2377b3752e04c21d82"
+  },
+  "buildManifestHash": "e280b55709e0591f93d5934f17282be48241a9ce7db2d9a3e1c4093a2f1b5500",
+  "interactions": [],
+  "views": [],
+  "programChecks": [],
+  "passed": false,
+  "checks": 0,
+  "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.multimodal-flow') to be visible\u001b[22m\n\n    at C:\\Personal Projects and files\\Portfolio\\Portfolio\\scripts\\verify-multimodal-tokenization-browser.cjs:45:44"
+}

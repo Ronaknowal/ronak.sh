@@ -1,0 +1,60 @@
+{
+  "schema": "classical21-new-programme-execution/v1",
+  "at": "2026-10-09T17:50:48.722691+00:00",
+  "source": {
+    "file": "practice_answers.py",
+    "bytes": 4941,
+    "sha256": "e159d690860864263f2dd7cfd182e6dbcca9d281ff2e978ae222bfe3c2d70f6c"
+  },
+  "python": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+  "command": [
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\scratch\\lesson-tools\\Scripts\\python.exe",
+    "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\content-authoring\\programmes\\practice_answers.py"
+  ],
+  "dependencies": [
+    {
+      "file": "fold_fitted_pipeline.py",
+      "bytes": 11262,
+      "sha256": "e26e2d319ed6783319e394c49b0137d8eed6d14469ec1b5ad9b431797a95ebfa"
+    },
+    {
+      "file": "split_information_contracts.py",
+      "bytes": 5606,
+      "sha256": "a6843279c834626da46578d8b9dfa2ff3ea35ae682bb34ca9e2bf7f73fad8496"
+    },
+    {
+      "file": "search_results_and_refit.py",
+      "bytes": 4464,
+      "sha256": "4f1e653c0f7476af71a25e1d2c3985b3ca0a49e0767cb4ac79f90ed730eb4bc9"
+    },
+    {
+      "file": "bootstrap_the_whole_statistic.py",
+      "bytes": 6331,
+      "sha256": "e0052258856ea52bf1ada82b014ca3a0f9a68fe0326e11c190d575afa7565da8"
+    },
+    {
+      "file": "resource_tournaments.py",
+      "bytes": 4845,
+      "sha256": "e5fb45d4966005adf9672977877ec0cf32c408a1e6c16235a3de5dfb765fa956"
+    }
+  ],
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.18.1",
+    "pandas": "3.0.1",
+    "scikit-learn": "1.9.1"
+  },
+  "returncode": 1,
+  "stdout": {
+    "file": "practice_answers.py.1.stdout.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "file": "practice_answers.py.1.stderr.txt",
+    "bytes": 1019,
+    "sha256": "076fbdefeb443ee0b6dbc87428399db473709a4e394e4f59c8a3470c07a0ac9e"
+  },
+  "scope": "One new constructed educational programme; no retained science or checker execution"
+}

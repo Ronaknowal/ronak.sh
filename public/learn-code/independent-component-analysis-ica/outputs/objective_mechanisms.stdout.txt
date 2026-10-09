@@ -1,0 +1,9 @@
+dependent_finite_MI_nats 0.6365141682948128
+Jacobian_density_demo A=diag(2,1): support area 2, density .5; B=diag(2,1): observed area .5, density 2
+chosen_logistic_likelihood {'log_absolute_determinant': 0.6931471805599453, 'row_log_density': array([-1.09052644, -5.47613409]), 'dataset_log_likelihood': -6.5666605341408495, 'negative_row_average': 3.2833302670704247}
+quadratic_gradient [ 1. -2.] raw_negative_gradient [-1.  2.] preconditioned [-1.  1.] F_start 1.5 F_half 0.375 F_full 0.0
+indefinite_shift (array([-10.,  10.]), np.float64(0.6), array([0.1, 2.1]))
+outlier_mean [20.  0.] sum_outer [[8020.   16.]
+ [  16.   20.]] population_covariance [[1604.     3.2]
+ [   3.2    4. ]]
+refused The Jacobian route needs a square unmixing operator

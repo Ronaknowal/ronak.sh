@@ -1,0 +1,207 @@
+{
+  "topicId": "regularization-l1-l2-elastic-net-dropout",
+  "author": "/root/ml_successor_independent_review",
+  "scope": "Assessment/research/design only; source identities are not correctness certificates",
+  "inputs": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 3751,
+      "sha256": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10"
+    },
+    {
+      "path": "skills/lesson-authoring/SKILL.md",
+      "bytes": 20953,
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03"
+    },
+    {
+      "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+      "bytes": 119265,
+      "sha256": "bfbb9f9eac1b81a7ded73974a7588f2ccd34f0670d2433cb124e8945882a2884"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/visual-vocabulary.md",
+      "bytes": 5546,
+      "sha256": "799ac277b81d78b659e3836b8af82bdad0bf2f4f91f12b2bef7e37b27365a1b2"
+    },
+    {
+      "path": "docs/teaching/deep-learning-beginner/visual-vocabulary.md",
+      "bytes": 6053,
+      "sha256": "175f9b38a2db3182381992b57c1fbdf2d78d9bfe1aede2ba0131b5049797b37d"
+    },
+    {
+      "path": "src/learn/data/topics/regularization-l1-l2-elastic-net-dropout.jsx",
+      "bytes": 76818,
+      "sha256": "ddaa376c258e40f96c4d8028cc45730c45a2d20d51ed2e2afc7ee74c1e59a950"
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/regularization-l1-l2-elastic-net-dropout.js",
+      "bytes": 8391,
+      "sha256": "fb6a3f975ac2c1122ccfb8b3218b1f620e7dc25b6aeb9a0ba51caa5fba6a8161"
+    },
+    {
+      "path": "src/learn/data/regularization-examples.js",
+      "bytes": 7895,
+      "sha256": "8b68d137d7c699dab0f4abf8fd5340c7ff869eca949b866b7867cf4ba5dc6a57"
+    },
+    {
+      "path": "src/learn/data/regularization-models.js",
+      "bytes": 31779,
+      "sha256": "28a8f85562e9484ce319457a90b4a35bfd81dc0639f11eda2da27a8db1d15428"
+    },
+    {
+      "path": "src/learn/data/regularization-data.js",
+      "bytes": 20799,
+      "sha256": "c27d5652c38b61e30cf238f59b3a7512754a65e663035a3fcb6844878785a500"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/RegularizationFigures.jsx",
+      "bytes": 53173,
+      "sha256": "bc473d255dafb5ad70efef5b5f1be98548a0e22e8bcca69cc5016d1f3779280f"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/RegularizationLabs.jsx",
+      "bytes": 39865,
+      "sha256": "1d888f1be699bde4b7cefd6006f47b3d4c9c4a63148eca7bc8c6a664e8e388e9"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/RegularizationShared.jsx",
+      "bytes": 9301,
+      "sha256": "3b3cf64d814233f8c4b2f0a9c5d1c18e56dcc569b69614099b93c1d0cba9ebbe"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/regularization-labs.css",
+      "bytes": 10622,
+      "sha256": "16fb2c93dd8bf8e7100afd00a1077c6cd8b27e5c8464a6ffab8f6f784e9feba5"
+    },
+    {
+      "path": "docs/teaching/topic-notes/regularization-l1-l2-elastic-net-dropout.md",
+      "bytes": 4920,
+      "sha256": "ad38420b412a710ff04f6c72a7153b6cff9793316bda28055948e3a7bba7541f"
+    },
+    {
+      "path": "docs/teaching/implementation-depth/CLASSICAL-ML.md",
+      "bytes": 27792,
+      "sha256": "6fd9af0ed439aa397685a54c56a9fa662addb7ffda5dd1e23cadc2fa4fd797be"
+    },
+    {
+      "path": "docs/teaching/evidence/sequential-regularization-review.md",
+      "bytes": 8979,
+      "sha256": "c7bbc5af9dab5b03f5a32148d4f445ddcf8d5d7c3ef5941510648e6545624082"
+    },
+    {
+      "path": "docs/teaching/evidence/regularization-native.json",
+      "bytes": 2827,
+      "sha256": "ee879ce99b58e8425935dd0403ad7eddc44ba3da7515269849519afb6686e4ee"
+    },
+    {
+      "path": "docs/teaching/evidence/regularization-data.json",
+      "bytes": 1560,
+      "sha256": "db50cbc1efdf5b99d2690b5e1df0b16cdb4d065b63e860029f28ff66f907dd41"
+    },
+    {
+      "path": "docs/teaching/deep-research-registry.json",
+      "bytes": 52517,
+      "sha256": "9c615fa569f4f6c9a3adfe22e168676a6d0f2dc6fbc97e5ea25ce0eb6c1d8673"
+    },
+    {
+      "path": "src/learn/data/topics/linear-logistic-regression.jsx",
+      "bytes": 94444,
+      "sha256": "28118059695886400ac4fdb8a07afdf06bd1bfeebb4ecfebf530a3f97ee862a6"
+    },
+    {
+      "path": "src/learn/data/topics/dropout-droppath-stochastic-depth.jsx",
+      "bytes": 64681,
+      "sha256": "bcb64ee13128a906916fac9f5617920df0470254df0cd75fe8948ebfdc4b6535"
+    },
+    {
+      "path": "src/learn/data/topics/gradient-descent-variants-sgd-adam-adagrad-rmsprop-lamb-lars.jsx",
+      "bytes": 98069,
+      "sha256": "5c6a3107fa20fa38c46b98463245f830251969db745eb64404cc0218eadde559"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+      "bytes": 215186,
+      "sha256": "cabb07a552c707930c01b8a9aa91dc93227fb4c1c7fd81d45220441dad3b5db5"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/reading-flow-design.md",
+      "bytes": 16511,
+      "sha256": "bc39e7cbc7344a13691ed32b7487dd35b581dc3d9f92c1592a3b01220c9e36d4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/programmes-practice-and-resources.md",
+      "bytes": 21341,
+      "sha256": "ce89b53ec6b7d79e58aa29b1430a634c553b03c6a83229af10a40fbd6fd77c9e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/consolidated-review-correction/design-policy-correction.md",
+      "bytes": 14564,
+      "sha256": "8fa0ea99010c807162677b833080b9777e6dde79dec7477d026499642970ed49"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/root-design-acceptance-and-writing-release.json",
+      "bytes": 33110,
+      "sha256": "cf76f6d3f142172fb72e50e14cef2df6515a0ac6fb7d0a55f35bfabaae967f93"
+    },
+    {
+      "path": "docs/teaching/drafts/regularization-l1-l2-elastic-net-dropout/airfoil-self-noise.dat",
+      "bytes": 59984,
+      "sha256": "74c75fd71783f1e6b71f8a622b993dc592897a97cd689c5090a07147a1b097b3"
+    },
+    {
+      "path": "docs/teaching/drafts/regularization-l1-l2-elastic-net-dropout/author-calculations.py",
+      "bytes": 8225,
+      "sha256": "7e3e38532f62ad25b1239c5cdc9e3b8d5009d4dfe63f12552cd83d467b786862"
+    },
+    {
+      "path": "docs/teaching/drafts/regularization-l1-l2-elastic-net-dropout/calculated-inputs.json",
+      "bytes": 891290,
+      "sha256": "efbfd554886fc36a8832b05e59510133babaa0be8106b8de9a82b983e363e465"
+    },
+    {
+      "path": "docs/teaching/drafts/regularization-l1-l2-elastic-net-dropout/data-provenance.md",
+      "bytes": 4650,
+      "sha256": "1ea3700982039f2e4b4e9be5e9854aff3542b89f986de4a08cecb73bab65cd8b"
+    },
+    {
+      "path": "docs/teaching/drafts/regularization-l1-l2-elastic-net-dropout/design.md",
+      "bytes": 43509,
+      "sha256": "eb532cc94ccb9507f33e0b4f18c557be14c47591cb578c53d9d3521454339452"
+    },
+    {
+      "path": "docs/teaching/drafts/regularization-l1-l2-elastic-net-dropout/lesson.md",
+      "bytes": 66443,
+      "sha256": "6ce2170ca67084f08f1a1aea668a8fc9fad695450eef8444af685d9b9994da4e"
+    },
+    {
+      "path": "docs/teaching/drafts/regularization-l1-l2-elastic-net-dropout/visual-specifications.md",
+      "bytes": 19221,
+      "sha256": "2b7b9857ae4e4ecdac17ccd6c22c5fdba9134d8d43794fbc53104e4a6013f929"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/regularization-l1-l2-elastic-net-dropout/author-checks.json",
+      "bytes": 1681,
+      "sha256": "f1e6007fee057d9743b35cbc696dc7875166e70d06a8b79cb09c6bfa25be2edf"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/regularization-l1-l2-elastic-net-dropout/browser-checks.json",
+      "bytes": 2068,
+      "sha256": "a021a03625f6198d91882a88a88d45025dbfd0cb8d92807e7d7718d4b1104c6a"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/regularization-l1-l2-elastic-net-dropout/independent-checks.json",
+      "bytes": 1580,
+      "sha256": "13cca9edb6907c277a0130eb085ff7c2f40a76f6e22e156ef971403b973a0867"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/regularization-l1-l2-elastic-net-dropout/independent-review.md",
+      "bytes": 1365,
+      "sha256": "6109ad8d0139ceac2ae186879a56ce7fce624a24ffe4fe52fa673efd232952d7"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/regularization-l1-l2-elastic-net-dropout/review.md",
+      "bytes": 4837,
+      "sha256": "d4852ea95955c873c51a6088f0fe8ab3fc23928c0f891ceaf5e92dbc98425940"
+    }
+  ]
+}

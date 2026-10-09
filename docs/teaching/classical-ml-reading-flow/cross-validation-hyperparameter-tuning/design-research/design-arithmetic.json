@@ -1,0 +1,850 @@
+{
+  "schema": "classical21-design-arithmetic/v1",
+  "at": "2026-10-09T16:33:01.706794+00:00",
+  "status": "NEW_EXACT_DESIGN_ARITHMETIC_AND_RETAINED_IDENTITIES_CHECKED",
+  "conditions": [
+    "never overwrite an earlier arithmetic receipt",
+    "workspace path: src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+    "original digest: src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+    "protected original bytes: src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+    "workspace path: src/learn/data/validation-examples.js",
+    "original digest: src/learn/data/validation-examples.js",
+    "protected original bytes: src/learn/data/validation-examples.js",
+    "workspace path: src/learn/data/validation-models.js",
+    "original digest: src/learn/data/validation-models.js",
+    "protected original bytes: src/learn/data/validation-models.js",
+    "workspace path: src/learn/data/validation-data.js",
+    "original digest: src/learn/data/validation-data.js",
+    "protected original bytes: src/learn/data/validation-data.js",
+    "workspace path: src/learn/components/lesson-labs/ValidationLabs.jsx",
+    "original digest: src/learn/components/lesson-labs/ValidationLabs.jsx",
+    "protected original bytes: src/learn/components/lesson-labs/ValidationLabs.jsx",
+    "workspace path: src/learn/components/lesson-labs/ValidationFigures.jsx",
+    "original digest: src/learn/components/lesson-labs/ValidationFigures.jsx",
+    "protected original bytes: src/learn/components/lesson-labs/ValidationFigures.jsx",
+    "workspace path: src/learn/components/lesson-labs/ValidationShared.jsx",
+    "original digest: src/learn/components/lesson-labs/ValidationShared.jsx",
+    "protected original bytes: src/learn/components/lesson-labs/ValidationShared.jsx",
+    "workspace path: src/learn/components/lesson-labs/validation-labs.css",
+    "original digest: src/learn/components/lesson-labs/validation-labs.css",
+    "protected original bytes: src/learn/components/lesson-labs/validation-labs.css",
+    "workspace path: docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+    "original digest: docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+    "protected original bytes: docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+    "workspace path: docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md",
+    "original digest: docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md",
+    "protected original bytes: docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md",
+    "workspace path: scripts/verify-validation-browser.cjs",
+    "original digest: scripts/verify-validation-browser.cjs",
+    "protected original bytes: scripts/verify-validation-browser.cjs",
+    "workspace path: scripts/verify-validation-data.py",
+    "original digest: scripts/verify-validation-data.py",
+    "protected original bytes: scripts/verify-validation-data.py",
+    "workspace path: scripts/verify-validation-examples.py",
+    "original digest: scripts/verify-validation-examples.py",
+    "protected original bytes: scripts/verify-validation-examples.py",
+    "workspace path: scripts/verify-validation-models.mjs",
+    "original digest: scripts/verify-validation-models.mjs",
+    "protected original bytes: scripts/verify-validation-models.mjs",
+    "workspace path: public/learn-assets/cross-validation/data-provenance.md",
+    "original digest: public/learn-assets/cross-validation/data-provenance.md",
+    "protected original bytes: public/learn-assets/cross-validation/data-provenance.md",
+    "workspace path: public/learn-assets/cross-validation/nested-experiment.json",
+    "original digest: public/learn-assets/cross-validation/nested-experiment.json",
+    "protected original bytes: public/learn-assets/cross-validation/nested-experiment.json",
+    "workspace path: public/learn-assets/cross-validation/penguins.csv",
+    "original digest: public/learn-assets/cross-validation/penguins.csv",
+    "protected original bytes: public/learn-assets/cross-validation/penguins.csv",
+    "workspace path: docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py",
+    "original digest: docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py",
+    "protected original bytes: docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py",
+    "workspace path: docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json",
+    "original digest: docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json",
+    "protected original bytes: docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json",
+    "workspace path: docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md",
+    "original digest: docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md",
+    "protected original bytes: docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md",
+    "workspace path: docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+    "original digest: docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+    "protected original bytes: docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+    "workspace path: docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+    "original digest: docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+    "protected original bytes: docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+    "workspace path: docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv",
+    "original digest: docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv",
+    "protected original bytes: docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv",
+    "workspace path: docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+    "original digest: docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+    "protected original bytes: docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+    "workspace path: docs/teaching/evidence/validation-browser.json",
+    "original digest: docs/teaching/evidence/validation-browser.json",
+    "protected original bytes: docs/teaching/evidence/validation-browser.json",
+    "workspace path: docs/teaching/evidence/validation-data.json",
+    "original digest: docs/teaching/evidence/validation-data.json",
+    "protected original bytes: docs/teaching/evidence/validation-data.json",
+    "workspace path: docs/teaching/evidence/validation-models.json",
+    "original digest: docs/teaching/evidence/validation-models.json",
+    "protected original bytes: docs/teaching/evidence/validation-models.json",
+    "workspace path: docs/teaching/evidence/validation-native.json",
+    "original digest: docs/teaching/evidence/validation-native.json",
+    "protected original bytes: docs/teaching/evidence/validation-native.json",
+    "workspace path: src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js",
+    "supplement digest: src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js",
+    "supplement copy: src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js",
+    "workspace path: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json",
+    "supplement digest: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json",
+    "supplement copy: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json",
+    "workspace path: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/browser-checks.json",
+    "supplement digest: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/browser-checks.json",
+    "supplement copy: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/browser-checks.json",
+    "workspace path: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-checks.json",
+    "supplement digest: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-checks.json",
+    "supplement copy: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-checks.json",
+    "workspace path: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-review.md",
+    "supplement digest: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-review.md",
+    "supplement copy: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-review.md",
+    "workspace path: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md",
+    "supplement digest: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md",
+    "supplement copy: docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md",
+    "exact prior design retained: reading-flow-design.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\checkpoints\\partial-design\\reading-flow-design.md",
+    "exact prior design retained: visual-and-investigation-contracts.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\checkpoints\\partial-design\\visual-and-investigation-contracts.md",
+    "exact prior design retained: programmes-practice-and-resources.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\checkpoints\\partial-design\\programmes-practice-and-resources.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\reading-flow-design.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\visual-and-investigation-contracts.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\programmes-practice-and-resources.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\research-and-claims.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\notes-and-resources.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\design-fixtures.md",
+    "workspace path: docs\\teaching\\classical-ml-reading-flow\\cross-validation-hyperparameter-tuning\\design-research\\check-design-arithmetic.py",
+    "workspace path: docs/teaching/classical-ml-reading-flow/visual-vocabulary.md",
+    "workspace path: docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+    "workspace path: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-accepted-root.json",
+    "workspace path: docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/root-start.json",
+    "N1 exact fitted training state",
+    "N1 held10 transformed as4sqrt2",
+    "N1 held100 transformed as49sqrt2",
+    "N1 training edit changes state",
+    "N2 equal fold sizes",
+    "N2 nonlinear aggregation",
+    "N3 reporting unit changes target",
+    "N4 strict event/inclusive label boundary",
+    "N5 inner positions map through outer source IDs",
+    "N6 independent finite subset enumeration",
+    "N6 independent ordered draw enumeration",
+    "N6 hypergeometric agreement",
+    "N6 independent-draw agreement",
+    "N7 conditional branch mass normalizes",
+    "N8 select complete feasible B",
+    "N8 all-ineligible explicit refusal",
+    "N8 relaxing cost alone does not force different winner",
+    "N8 edited complete A wins at declared cap",
+    "N8 stable original-order tie",
+    "N9 exact independent-sign averaging K4",
+    "N9 shared shock survives K4",
+    "N9 covariance-sum agreement K4",
+    "N9 exact independent-sign averaging K5",
+    "N9 shared shock survives K5",
+    "N9 covariance-sum agreement K5",
+    "N9 changed exercise .36",
+    "N10 conditional holdout identity by full finite enumeration",
+    "N10 cross-term vanishes",
+    "N10 individual subtraction can be negative",
+    "N12 nonempty rounds R9/s2",
+    "N12 nonempty rounds R9/s1",
+    "N12 nonempty rounds R9/s0",
+    "N12 R9 bracket allowance",
+    "N12 exact ceiling starts",
+    "N12 original floor survivors",
+    "N12 unequal paid bracket budgets",
+    "N12 genuine continuation cost",
+    "N12 nonempty rounds R27/s3",
+    "N12 nonempty rounds R27/s2",
+    "N12 nonempty rounds R27/s1",
+    "N12 nonempty rounds R27/s0",
+    "N12 changed R27 allowance",
+    "N12 changed exact starts",
+    "D39 slow starter reverses rank"
+  ],
+  "conditionCount": 164,
+  "inputs": [
+    {
+      "path": "src/learn/data/topics/cross-validation-hyperparameter-tuning.jsx",
+      "bytes": 75750,
+      "sha256": "67a5eef76b2276b46144b0ed7ba595353b3fbc50dff556ae28469fa5d839f0e3",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "src/learn/data/validation-examples.js",
+      "bytes": 7327,
+      "sha256": "3c194949f3344351ece8d33c5605146d7d36470119c3ee7d290130733511563c",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "src/learn/data/validation-models.js",
+      "bytes": 29914,
+      "sha256": "5bd7fb68ea0c8668953f41dabf2510d857e4d6b126ffc575992e5a51c2f85daf",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "src/learn/data/validation-data.js",
+      "bytes": 20810,
+      "sha256": "02ce57b5e6b2096fa2b7efa49dfc9fc06cd0c0db58c35c4abf329d983a074d73",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ValidationLabs.jsx",
+      "bytes": 44297,
+      "sha256": "62eebceaf2f95124dd3ba9db7c26b5b703cd57dbdf2630400f2e0e23e4532ddc",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ValidationFigures.jsx",
+      "bytes": 42078,
+      "sha256": "3089df565601724ccf47253af230e753ac83a24cb56e0ff7983021b46935a9a6",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ValidationShared.jsx",
+      "bytes": 9088,
+      "sha256": "db6a2f128695e33ec5ef3670bc296ce671ddc8551218acc964a83f2e84a9afa4",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/validation-labs.css",
+      "bytes": 11072,
+      "sha256": "4ff8ae7c4be39f670e9481a846bd3bed0bf9a753fa3706de3f16b9dc13a10a1b",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+      "bytes": 5445,
+      "sha256": "4657b6a76382ad3a9c5dd0b26f421ba7213ff04bb32c358808d26770e924c326",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/CROSS-VALIDATION-INDEPENDENT-REVIEW.md",
+      "bytes": 57673,
+      "sha256": "eb21e38ca3a6f6e5283810b94a2aa1a775fd49b282d27603f08ff956f979b312",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "scripts/verify-validation-browser.cjs",
+      "bytes": 43044,
+      "sha256": "316754cb6143d4688cbd24896619f7dcaa656118a20f10da12c2795e80dcf03a",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "scripts/verify-validation-data.py",
+      "bytes": 21082,
+      "sha256": "ca36cf866be8b17c583b8d48da429d06f8bd8d1a0f2b56e9d3bcd64d53fdad12",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "scripts/verify-validation-examples.py",
+      "bytes": 20788,
+      "sha256": "601dd03b825cab6630fcde30a59942b3d70f5633d5afd4998a05cbcbdb899e53",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "scripts/verify-validation-models.mjs",
+      "bytes": 42700,
+      "sha256": "28a41eeb389ef4626016c0f86242672ef4bdcb5cf1b5c96120badcec4215e90a",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "public/learn-assets/cross-validation/data-provenance.md",
+      "bytes": 3770,
+      "sha256": "b7d8a56b683f797574834989dc9259ed932e53ceeb5c9bbb5a0393c7c5248692",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "public/learn-assets/cross-validation/nested-experiment.json",
+      "bytes": 16989,
+      "sha256": "fd53f72e89cb511f68646a4a8fa81f0a5f6ef125c5141a4bd164c7b6a48d0499",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "public/learn-assets/cross-validation/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/author-calculations.py",
+      "bytes": 7965,
+      "sha256": "2df8292a2237ed6254e4a0880c35ef32336daad4838b3f06f119a4d4afbce741",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/calculated-inputs.json",
+      "bytes": 82281,
+      "sha256": "dc0311a0c1ba7a72d45708ee2d76f847ad87004108ce99018a549e8b22f51f54",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/data-provenance.md",
+      "bytes": 3770,
+      "sha256": "b7d8a56b683f797574834989dc9259ed932e53ceeb5c9bbb5a0393c7c5248692",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/design.md",
+      "bytes": 47188,
+      "sha256": "858530bf044c7bafb5e3b7ff2e5e94de0c91d7f1a1fd22620ca4ddb80bdc6030",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/lesson.md",
+      "bytes": 58666,
+      "sha256": "7142e5a39e7582339263a2656a59290b0e3dbbba07afbf502affc4f2c9be3432",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/drafts/cross-validation-hyperparameter-tuning/visual-specifications.md",
+      "bytes": 19247,
+      "sha256": "02376dcace6bb917c9f5798c086067ece526b3e2ad16c0bddd4af8a6cff3e3cd",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/evidence/validation-browser.json",
+      "bytes": 8132,
+      "sha256": "3a19f64ab0121816a0af7a30daa121b5b770de6db989d2d5a0e808e3153948ec",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/evidence/validation-data.json",
+      "bytes": 12469,
+      "sha256": "0fd2079e6ef30dd7f12b348e19a19f37d2bcb51a257db2d15b699b758bae6333",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/evidence/validation-models.json",
+      "bytes": 2771,
+      "sha256": "fc6375d54a2949fc4cab7d8829008dc4b9b25a6064e12191885dab5ede841a9a",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "docs/teaching/evidence/validation-native.json",
+      "bytes": 2647,
+      "sha256": "957e99cb266f748c5583cc69cd2260e13c0682d7ad43d07b4433dcf6d893044c",
+      "role": "retained original owner; identity only"
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/cross-validation-hyperparameter-tuning.js",
+      "bytes": 8832,
+      "sha256": "c4c363c9e60247a00267325bcfa5e4cc8b0bb4689dfeabbd0a985d9017f34766",
+      "role": "retained supplemental owner; identity only"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/author-checks.json",
+      "bytes": 1657,
+      "sha256": "7be59635376b34c7182311cf423e0309f309d216ac1d0d9f4112f1892445723f",
+      "role": "retained supplemental owner; identity only"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/browser-checks.json",
+      "bytes": 2064,
+      "sha256": "cadc2bf4306192bed6ad03df8781ec8ee4e14ecb9137e3d8b2b99e16c3617741",
+      "role": "retained supplemental owner; identity only"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-checks.json",
+      "bytes": 1555,
+      "sha256": "5e589c273dd3ca229679c767d7ad3005158510e0ee015c99d59c2f64c62148a3",
+      "role": "retained supplemental owner; identity only"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/independent-review.md",
+      "bytes": 1318,
+      "sha256": "c874a26653f4cfb15f45e0eb8e50b1902c25f581dd434bcc2b01a193113d258f",
+      "role": "retained supplemental owner; identity only"
+    },
+    {
+      "path": "docs/teaching/concept-intuition/cross-validation-hyperparameter-tuning/review.md",
+      "bytes": 5104,
+      "sha256": "e19b12a4001bf5f9c3cbf3257dd1a0fbc0c71aaa91ca2525d8424568e841d144",
+      "role": "retained supplemental owner; identity only"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/reading-flow-design.md",
+      "bytes": 16178,
+      "sha256": "3b9051ab7e636ea166340130f568dec274d2bbad4d84616693f4b7a033e5dd3b",
+      "role": "exact predecessor design, not current instruction"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/visual-and-investigation-contracts.md",
+      "bytes": 27388,
+      "sha256": "499a2074cd8727a54872f210c984bd27712580f58c0defc22e9655aff4feaf8d",
+      "role": "exact predecessor design, not current instruction"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/checkpoints/partial-design/programmes-practice-and-resources.md",
+      "bytes": 20739,
+      "sha256": "e94d955e6617adbc141bcfcf5533b5b5b228539154dfd9138f2593bb76922b38",
+      "role": "exact predecessor design, not current instruction"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/reading-flow-design.md",
+      "bytes": 16511,
+      "sha256": "bc39e7cbc7344a13691ed32b7487dd35b581dc3d9f92c1592a3b01220c9e36d4",
+      "role": "current design arithmetic input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/visual-and-investigation-contracts.md",
+      "bytes": 29179,
+      "sha256": "f371da77e87c7b20fa7df6f5c72a12ddeb9d8aae57baa6db854d780d9bdae519",
+      "role": "current design arithmetic input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/programmes-practice-and-resources.md",
+      "bytes": 21341,
+      "sha256": "ce89b53ec6b7d79e58aa29b1430a634c553b03c6a83229af10a40fbd6fd77c9e",
+      "role": "current design arithmetic input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/research-and-claims.md",
+      "bytes": 8603,
+      "sha256": "e0bf6d5eec57c66d1f616474cccc0ad80bc78708fce4a572c8121d5dc011acfc",
+      "role": "current design arithmetic input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/notes-and-resources.md",
+      "bytes": 10100,
+      "sha256": "fbf062491a6128a3b06e0e20cfcc6144954ba113d7b5a37beab171a08a8f431c",
+      "role": "current design arithmetic input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/design-fixtures.md",
+      "bytes": 10526,
+      "sha256": "3e6d66f03f2bf26d15fe0e0a300d7b7489c3e20e8694410f77dd9ddf25d45858",
+      "role": "current design arithmetic input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/check-design-arithmetic.py",
+      "bytes": 13203,
+      "sha256": "9e935fa84203f41d9058c1874c99df081b326b35ba383c6a22fd62a870663b83",
+      "role": "current design arithmetic input"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/visual-vocabulary.md",
+      "bytes": 5546,
+      "sha256": "799ac277b81d78b659e3836b8af82bdad0bf2f4f91f12b2bef7e37b27365a1b2",
+      "role": "design continuity reference; no new whole-runtime certification"
+    },
+    {
+      "path": "docs/teaching/topic-notes/cross-validation-hyperparameter-tuning.md",
+      "bytes": 5445,
+      "sha256": "4657b6a76382ad3a9c5dd0b26f421ba7213ff04bb32c358808d26770e924c326",
+      "role": "design continuity reference; no new whole-runtime certification"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-accepted-root.json",
+      "bytes": 3978,
+      "sha256": "06eaf404879062bc986ec810bc305669b7598b63f63f26e0b00561f03714453c",
+      "role": "accepted prerequisite phase scope"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/root-start.json",
+      "bytes": 2581,
+      "sha256": "81e24c5174f417bcadfd1ab19ffb3667afa8c1b3815f74e4de94bddcad01b912",
+      "role": "accepted prerequisite phase scope"
+    }
+  ],
+  "results": {
+    "fittedState": {
+      "median": {
+        "exact": "2",
+        "decimal": 2.0
+      },
+      "mean": {
+        "exact": "2",
+        "decimal": 2.0
+      },
+      "populationVariance": {
+        "exact": "2",
+        "decimal": 2.0
+      },
+      "changedTrainingMean": {
+        "exact": "5/2",
+        "decimal": 2.5
+      },
+      "changedTrainingVariance": {
+        "exact": "19/4",
+        "decimal": 4.75
+      }
+    },
+    "f1": {
+      "folds": [
+        {
+          "exact": "2/3",
+          "decimal": 0.6666666666666666
+        },
+        {
+          "exact": "0",
+          "decimal": 0.0
+        }
+      ],
+      "mean": {
+        "exact": "1/3",
+        "decimal": 0.3333333333333333
+      },
+      "pooled": {
+        "exact": "1/2",
+        "decimal": 0.5
+      }
+    },
+    "informationBoundary": {
+      "events": [
+        0,
+        1,
+        2,
+        5,
+        8,
+        9
+      ],
+      "permittedByDelay": {
+        "3": [
+          0,
+          1,
+          2
+        ],
+        "4": [
+          0,
+          1
+        ]
+      },
+      "outerIds": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "mappedInnerHeldIds": [
+        1,
+        5,
+        9,
+        13
+      ]
+    },
+    "sampling": {
+      "withoutReplacement": {
+        "exact": "4/5",
+        "decimal": 0.8
+      },
+      "withReplacement": {
+        "exact": "19/27",
+        "decimal": 0.7037037037037037
+      },
+      "counts": [
+        20,
+        216
+      ]
+    },
+    "refit": {
+      "defaultIndex": 1,
+      "cap2Index": null,
+      "cap10Index": 1,
+      "changedAIndex": 0,
+      "BMeanAccuracy": {
+        "exact": "17/20",
+        "decimal": 0.85
+      }
+    },
+    "covariance": [
+      {
+        "K": 4,
+        "meanVariance": {
+          "exact": "5/8",
+          "decimal": 0.625
+        },
+        "independentComparison": {
+          "exact": "1/4",
+          "decimal": 0.25
+        }
+      },
+      {
+        "K": 5,
+        "meanVariance": {
+          "exact": "9/25",
+          "decimal": 0.36
+        },
+        "independentComparison": {
+          "exact": "1/5",
+          "decimal": 0.2
+        }
+      }
+    ],
+    "holdoutIdentity": {
+      "supportMultiplicity": {
+        "0": 1,
+        "1/2": 2,
+        "1": 1
+      },
+      "discrepancy": {
+        "exact": "3/16",
+        "decimal": 0.1875
+      },
+      "variance": {
+        "exact": "1/8",
+        "decimal": 0.125
+      },
+      "mse": {
+        "exact": "1/16",
+        "decimal": 0.0625
+      }
+    },
+    "hyperband": {
+      "R9": [
+        {
+          "s": 2,
+          "initialCount": 9,
+          "initialResource": {
+            "exact": "1",
+            "decimal": 1.0
+          },
+          "counts": [
+            9,
+            3,
+            1
+          ],
+          "levels": [
+            {
+              "exact": "1",
+              "decimal": 1.0
+            },
+            {
+              "exact": "3",
+              "decimal": 3.0
+            },
+            {
+              "exact": "9",
+              "decimal": 9.0
+            }
+          ],
+          "fresh": {
+            "exact": "27",
+            "decimal": 27.0
+          },
+          "continued": {
+            "exact": "21",
+            "decimal": 21.0
+          }
+        },
+        {
+          "s": 1,
+          "initialCount": 5,
+          "initialResource": {
+            "exact": "3",
+            "decimal": 3.0
+          },
+          "counts": [
+            5,
+            1
+          ],
+          "levels": [
+            {
+              "exact": "3",
+              "decimal": 3.0
+            },
+            {
+              "exact": "9",
+              "decimal": 9.0
+            }
+          ],
+          "fresh": {
+            "exact": "24",
+            "decimal": 24.0
+          },
+          "continued": {
+            "exact": "21",
+            "decimal": 21.0
+          }
+        },
+        {
+          "s": 0,
+          "initialCount": 3,
+          "initialResource": {
+            "exact": "9",
+            "decimal": 9.0
+          },
+          "counts": [
+            3
+          ],
+          "levels": [
+            {
+              "exact": "9",
+              "decimal": 9.0
+            }
+          ],
+          "fresh": {
+            "exact": "27",
+            "decimal": 27.0
+          },
+          "continued": {
+            "exact": "27",
+            "decimal": 27.0
+          }
+        }
+      ],
+      "R27": [
+        {
+          "s": 3,
+          "initialCount": 27,
+          "initialResource": {
+            "exact": "1",
+            "decimal": 1.0
+          },
+          "counts": [
+            27,
+            9,
+            3,
+            1
+          ],
+          "levels": [
+            {
+              "exact": "1",
+              "decimal": 1.0
+            },
+            {
+              "exact": "3",
+              "decimal": 3.0
+            },
+            {
+              "exact": "9",
+              "decimal": 9.0
+            },
+            {
+              "exact": "27",
+              "decimal": 27.0
+            }
+          ],
+          "fresh": {
+            "exact": "108",
+            "decimal": 108.0
+          },
+          "continued": {
+            "exact": "81",
+            "decimal": 81.0
+          }
+        },
+        {
+          "s": 2,
+          "initialCount": 12,
+          "initialResource": {
+            "exact": "3",
+            "decimal": 3.0
+          },
+          "counts": [
+            12,
+            4,
+            1
+          ],
+          "levels": [
+            {
+              "exact": "3",
+              "decimal": 3.0
+            },
+            {
+              "exact": "9",
+              "decimal": 9.0
+            },
+            {
+              "exact": "27",
+              "decimal": 27.0
+            }
+          ],
+          "fresh": {
+            "exact": "99",
+            "decimal": 99.0
+          },
+          "continued": {
+            "exact": "78",
+            "decimal": 78.0
+          }
+        },
+        {
+          "s": 1,
+          "initialCount": 6,
+          "initialResource": {
+            "exact": "9",
+            "decimal": 9.0
+          },
+          "counts": [
+            6,
+            2
+          ],
+          "levels": [
+            {
+              "exact": "9",
+              "decimal": 9.0
+            },
+            {
+              "exact": "27",
+              "decimal": 27.0
+            }
+          ],
+          "fresh": {
+            "exact": "108",
+            "decimal": 108.0
+          },
+          "continued": {
+            "exact": "90",
+            "decimal": 90.0
+          }
+        },
+        {
+          "s": 0,
+          "initialCount": 4,
+          "initialResource": {
+            "exact": "27",
+            "decimal": 27.0
+          },
+          "counts": [
+            4
+          ],
+          "levels": [
+            {
+              "exact": "27",
+              "decimal": 27.0
+            }
+          ],
+          "fresh": {
+            "exact": "108",
+            "decimal": 108.0
+          },
+          "continued": {
+            "exact": "108",
+            "decimal": 108.0
+          }
+        }
+      ],
+      "R9FreshTotal": 78,
+      "R9ContinuedTotal": 69
+    }
+  },
+  "scope": [
+    "new constructed hand fixtures",
+    "retained owner identities only"
+  ],
+  "notEstablished": [
+    "whole-design acceptance",
+    "new learner programme execution",
+    "library API behavior",
+    "scientific replay",
+    "native paint/interaction",
+    "content or implementation completion"
+  ]
+}

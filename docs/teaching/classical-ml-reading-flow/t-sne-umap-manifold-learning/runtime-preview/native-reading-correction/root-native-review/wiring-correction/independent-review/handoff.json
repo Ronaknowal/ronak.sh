@@ -1,0 +1,54 @@
+{
+  "schema": "same-bounded-d30-wiring-source-review-handoff/v1",
+  "at": "2026-10-09T17:33:25.3986713Z",
+  "reviewer": "/root/ml_successor_independent_review",
+  "sourceAuthor": "/root",
+  "status": "NO_ADDITIONAL_REQUIRED_SOURCE_FINDING_NATIVE_PENDING",
+  "report": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/independent-review/source-closure.md",
+    "bytes": 8701,
+    "sha256": "44b49e5168e027f1da858d3cd56c3109b0a538753c387eca92be4997e941b302"
+  },
+  "check": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/independent-review/source-check.json",
+    "bytes": 12710,
+    "sha256": "c13c56c21c5f3830df1b687c17994198f80f313bd87a54ce6b5835377cc3075d"
+  },
+  "checker": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/native-reading-correction/root-native-review/wiring-correction/independent-review/check-source.mjs",
+    "bytes": 7734,
+    "sha256": "858df38a3be795c69d4f275fd06f9b009e1b739d4c8ab36bed035563d2e5ce76"
+  },
+  "sourceSha256": "1acda558d04f5f6568690dc55f0f2e0a14552b460891fa89e3b314766d652d06",
+  "rootSourceReceiptSha256": "61de6b0027599fddb7d8b10242713bf57186de84c3d31759f57fefe6a4b51778",
+  "predecessorPacketSha256": "ffba1af17a352530b5fb1756f2f9e7b3a8c1bed14d74dbba750e79169bc8801d",
+  "freshCheck": {
+    "conditions": 50,
+    "inputs": 21,
+    "actualChunk": "d8937d",
+    "exitCode": 0
+  },
+  "scope": [
+    "Actual D30 train-only PCA fit/fixed transform and classifier fit/predict/evaluate topology",
+    "Entire unchanged operation bodies/details conservation",
+    "Required local graph CSS and private text-size/override harness source"
+  ],
+  "executions": {
+    "science": 0,
+    "authorCheckers": 0,
+    "ssr": 0,
+    "builds": 0,
+    "http": 0,
+    "browser": 0
+  },
+  "preserved": [
+    "All12 frozen predecessor product files exact",
+    "Retained dimensions/totals/unsaved-value qualifications",
+    "Prior whole/source review evidence unchanged"
+  ],
+  "remaining": [
+    "Root scoped build with wiring.css accompanying successor",
+    "Actual labels/arrow clearance/keyboard scroll/focus/narrow and200percent native checks",
+    "Root integration/acceptance; no phase decision by reviewer"
+  ]
+}

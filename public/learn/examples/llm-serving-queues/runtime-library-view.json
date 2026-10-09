@@ -1,0 +1,470 @@
+{
+  "source": "Retained native-evidence mains; projection only, no rerun.",
+  "retryUniforms": [
+    1.0219839097124932,
+    1.306690777118679
+  ],
+  "simpy": {
+    "library": {
+      "library": "SimPy",
+      "version": "4.1.2",
+      "servers": 1,
+      "horizon": 7,
+      "records": [
+        {
+          "id": "A",
+          "arrival": 0,
+          "start": 0,
+          "service": 3,
+          "departure": 3,
+          "wait": 0,
+          "residence": 3
+        },
+        {
+          "id": "B",
+          "arrival": 1,
+          "start": 3,
+          "service": 1,
+          "departure": 4,
+          "wait": 2,
+          "residence": 3
+        },
+        {
+          "id": "C",
+          "arrival": 2,
+          "start": 4,
+          "service": 2,
+          "departure": 6,
+          "wait": 2,
+          "residence": 4
+        },
+        {
+          "id": "D",
+          "arrival": 6,
+          "start": 6,
+          "service": 1,
+          "departure": 7,
+          "wait": 0,
+          "residence": 1
+        }
+      ],
+      "events": [
+        {
+          "time": 0,
+          "event": "arrival",
+          "id": "A"
+        },
+        {
+          "time": 0,
+          "event": "start",
+          "id": "A",
+          "resource_users": 1,
+          "queued_events": 0
+        },
+        {
+          "time": 1,
+          "event": "arrival",
+          "id": "B"
+        },
+        {
+          "time": 2,
+          "event": "arrival",
+          "id": "C"
+        },
+        {
+          "time": 3,
+          "event": "complete",
+          "id": "A"
+        },
+        {
+          "time": 3,
+          "event": "start",
+          "id": "B",
+          "resource_users": 1,
+          "queued_events": 1
+        },
+        {
+          "time": 4,
+          "event": "complete",
+          "id": "B"
+        },
+        {
+          "time": 4,
+          "event": "start",
+          "id": "C",
+          "resource_users": 1,
+          "queued_events": 0
+        },
+        {
+          "time": 6,
+          "event": "arrival",
+          "id": "D"
+        },
+        {
+          "time": 6,
+          "event": "complete",
+          "id": "C"
+        },
+        {
+          "time": 6,
+          "event": "start",
+          "id": "D",
+          "resource_users": 1,
+          "queued_events": 0
+        },
+        {
+          "time": 7,
+          "event": "complete",
+          "id": "D"
+        }
+      ],
+      "system_monitor": {
+        "area": 11,
+        "segments": [
+          {
+            "start": 0,
+            "end": 1,
+            "count": 1
+          },
+          {
+            "start": 1,
+            "end": 2,
+            "count": 2
+          },
+          {
+            "start": 2,
+            "end": 3,
+            "count": 3
+          },
+          {
+            "start": 3,
+            "end": 4,
+            "count": 2
+          },
+          {
+            "start": 4,
+            "end": 6,
+            "count": 1
+          },
+          {
+            "start": 6,
+            "end": 7,
+            "count": 1
+          }
+        ],
+        "mean_population": 1.5714285714285714
+      },
+      "queue_monitor": {
+        "area": 4,
+        "segments": [
+          {
+            "start": 0,
+            "end": 1,
+            "count": 0
+          },
+          {
+            "start": 1,
+            "end": 2,
+            "count": 1
+          },
+          {
+            "start": 2,
+            "end": 3,
+            "count": 2
+          },
+          {
+            "start": 3,
+            "end": 4,
+            "count": 1
+          },
+          {
+            "start": 4,
+            "end": 6,
+            "count": 0
+          },
+          {
+            "start": 6,
+            "end": 7,
+            "count": 0
+          }
+        ],
+        "mean_population": 0.5714285714285714
+      },
+      "tie_note": "SimPy handles equal-time events in insertion order; this unbounded FCFS fixture agrees in starts/departures despite zero-duration scheduling microsteps."
+    },
+    "scratch": {
+      "servers": 1,
+      "capacity_total": null,
+      "horizon": 7,
+      "records": [
+        {
+          "id": "A",
+          "arrival": 0,
+          "service": 3,
+          "status": "completed",
+          "start": 0,
+          "departure": 3,
+          "planned_departure": 3,
+          "server": 0,
+          "wait": 0,
+          "residence": 3
+        },
+        {
+          "id": "B",
+          "arrival": 1,
+          "service": 1,
+          "status": "completed",
+          "start": 3,
+          "departure": 4,
+          "planned_departure": 4,
+          "server": 0,
+          "wait": 2,
+          "residence": 3
+        },
+        {
+          "id": "C",
+          "arrival": 2,
+          "service": 2,
+          "status": "completed",
+          "start": 4,
+          "departure": 6,
+          "planned_departure": 6,
+          "server": 0,
+          "wait": 2,
+          "residence": 4
+        },
+        {
+          "id": "D",
+          "arrival": 6,
+          "service": 1,
+          "status": "completed",
+          "start": 6,
+          "departure": 7,
+          "planned_departure": 7,
+          "server": 0,
+          "wait": 0,
+          "residence": 1
+        }
+      ],
+      "events": [
+        {
+          "time": 0,
+          "event": "admit",
+          "id": "A"
+        },
+        {
+          "time": 0,
+          "event": "start",
+          "id": "A",
+          "server": 0
+        },
+        {
+          "time": 1,
+          "event": "admit",
+          "id": "B"
+        },
+        {
+          "time": 2,
+          "event": "admit",
+          "id": "C"
+        },
+        {
+          "time": 3,
+          "event": "complete",
+          "id": "A",
+          "server": 0
+        },
+        {
+          "time": 3,
+          "event": "start",
+          "id": "B",
+          "server": 0
+        },
+        {
+          "time": 4,
+          "event": "complete",
+          "id": "B",
+          "server": 0
+        },
+        {
+          "time": 4,
+          "event": "start",
+          "id": "C",
+          "server": 0
+        },
+        {
+          "time": 6,
+          "event": "complete",
+          "id": "C",
+          "server": 0
+        },
+        {
+          "time": 6,
+          "event": "admit",
+          "id": "D"
+        },
+        {
+          "time": 6,
+          "event": "start",
+          "id": "D",
+          "server": 0
+        },
+        {
+          "time": 7,
+          "event": "complete",
+          "id": "D",
+          "server": 0
+        }
+      ],
+      "measurements": {
+        "system": {
+          "area": 11,
+          "mean_population": 1.5714285714285714,
+          "segments": [
+            {
+              "start": 0,
+              "end": 1,
+              "count": 1
+            },
+            {
+              "start": 1,
+              "end": 2,
+              "count": 2
+            },
+            {
+              "start": 2,
+              "end": 3,
+              "count": 3
+            },
+            {
+              "start": 3,
+              "end": 4,
+              "count": 2
+            },
+            {
+              "start": 4,
+              "end": 6,
+              "count": 1
+            },
+            {
+              "start": 6,
+              "end": 7,
+              "count": 1
+            }
+          ]
+        },
+        "queue": {
+          "area": 4,
+          "mean_population": 0.5714285714285714,
+          "segments": [
+            {
+              "start": 0,
+              "end": 1,
+              "count": 0
+            },
+            {
+              "start": 1,
+              "end": 2,
+              "count": 1
+            },
+            {
+              "start": 2,
+              "end": 3,
+              "count": 2
+            },
+            {
+              "start": 3,
+              "end": 4,
+              "count": 1
+            },
+            {
+              "start": 4,
+              "end": 7,
+              "count": 0
+            }
+          ]
+        },
+        "service": {
+          "area": 7,
+          "mean_population": 1,
+          "segments": [
+            {
+              "start": 0,
+              "end": 3,
+              "count": 1
+            },
+            {
+              "start": 3,
+              "end": 4,
+              "count": 1
+            },
+            {
+              "start": 4,
+              "end": 6,
+              "count": 1
+            },
+            {
+              "start": 6,
+              "end": 7,
+              "count": 1
+            }
+          ]
+        }
+      },
+      "counts": {
+        "offered": 4,
+        "accepted": 4,
+        "completed": 4,
+        "rejected": 0
+      },
+      "boundary_note": "Planned departures beyond cutoff are not observed completions."
+    },
+    "comparisons": [
+      {
+        "id": "A",
+        "differences": {
+          "start": 0,
+          "departure": 0,
+          "wait": 0,
+          "residence": 0
+        }
+      },
+      {
+        "id": "B",
+        "differences": {
+          "start": 0,
+          "departure": 0,
+          "wait": 0,
+          "residence": 0
+        }
+      },
+      {
+        "id": "C",
+        "differences": {
+          "start": 0,
+          "departure": 0,
+          "wait": 0,
+          "residence": 0
+        }
+      },
+      {
+        "id": "D",
+        "differences": {
+          "start": 0,
+          "departure": 0,
+          "wait": 0,
+          "residence": 0
+        }
+      },
+      {
+        "quantity": "system_area",
+        "difference": 0
+      },
+      {
+        "quantity": "queue_area",
+        "difference": 0
+      }
+    ],
+    "matched": true
+  }
+}

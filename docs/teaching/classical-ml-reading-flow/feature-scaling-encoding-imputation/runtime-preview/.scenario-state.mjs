@@ -1,0 +1,1 @@
+let overrides=[],index=0;export function select(values){overrides=values;index=0;}export function useState(initial){const i=index++;return[i<overrides.length?overrides[i]:typeof initial==='function'?initial():initial,()=>{}];}

@@ -1,0 +1,42 @@
+{
+  "schema": "nmf-runtime-composition-correction/v1",
+  "inputSha256": "3f9700be75fefe030054777b34f7c1fbcbb3c3925195a07ff85b3d9387812328",
+  "outputSha256": "48ce2545671c6226f9993651fc25d0d8f8c9574910e1c497b42d6ae118d796e2",
+  "changes": [
+    "Remove duplicate custom compass; shared guide remains unchanged",
+    "Merge 22 complete-source action groups into the existing unabridged pedagogical file table",
+    "Name C1 pattern/addend labels instead of incorrect positional first/second references",
+    "Adjust imports for the private successor directory"
+  ],
+  "textAmendment": {
+    "before": "The first image is the raw C1 pattern H[C1]. Multiplying each of its 64 cells by 0.176453 makes the second image, the ",
+    "after": "The image labelled C1 per-unit pattern is the raw pattern H[C1]. Multiplying each of its 64 cells by 0.176453 makes the image labelled C1 weighted addend, the "
+  },
+  "filenames": [
+    "centered_pca.py",
+    "nmf_arrays.py",
+    "nmf_coordinate.py",
+    "nmf_nnls.py",
+    "nmf_multiplicative.py",
+    "nmf_beta_mm.py",
+    "nmf_initialization.py",
+    "ordinary_nmf_lifecycle.py",
+    "nmf_penalties_masks.py",
+    "nmf_factor_alignment.py",
+    "nmf_saved_digits.py",
+    "nmf_digit_comparison.py",
+    "nmf_anchors.py",
+    "nmf_text_spectra.py",
+    "nmf_online.py",
+    "nmf_axis_phase.py",
+    "nmf_step.py",
+    "nmf_digits.py",
+    "nmf_words.py",
+    "nmf_saved_state.json",
+    "digits-300.csv",
+    "digits-data-provenance.md"
+  ],
+  "manuscriptChanged": false,
+  "scientificExecutions": 0,
+  "phaseChanges": 0
+}

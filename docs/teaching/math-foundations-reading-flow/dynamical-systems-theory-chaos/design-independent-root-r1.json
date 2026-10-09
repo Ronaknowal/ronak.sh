@@ -1,0 +1,382 @@
+{
+  "status": "REQUIRES one consolidated DY1–DY3 correction before writing release",
+  "reviewer": "/root",
+  "author": "/root/queue_nonconvex_resume",
+  "reviewedSource": {
+    "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-source-r1.json",
+    "sha256": "5ce6616d144d885b58ab92d2b440fa71093ca2693581bade9c8df77a15c96ff2",
+    "bytes": 12669
+  },
+  "wholeReading": [
+    "complete design-r1.md",
+    "complete research-r1.md",
+    "current entire lesson/labs/models and all eleven pairs previously personally read under root-current-reading-intake.json and identity conserved",
+    "historical complete design and narrative verification",
+    "affected current models and staged UI source revisited"
+  ],
+  "visualReferenceImagesPersonallyViewed": [
+    "research/menon-portrait-reference.png",
+    "research/menon-section-reference.png",
+    "research/hairer-area-reference.png"
+  ],
+  "guards": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "b2fc1c710470cfe97c62849472ff4dd8b44509af0c5502b15d71feb6c4c4dc10",
+      "bytes": 3751,
+      "matches": true
+    },
+    {
+      "path": "skills/lesson-authoring/SKILL.md",
+      "sha256": "320c09a98c445f98287817ea487aa6ace18e545acf9e304bdadd2d6b84c28d03",
+      "bytes": 20953,
+      "matches": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/topic-design.md",
+      "sha256": "c6cfb00c5b3ffd62fc0d84f2e5a3eedc798c7b7536b9c8467ec635d7916ee424",
+      "bytes": 32018,
+      "matches": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/teaching.md",
+      "sha256": "7517de46372152387dddf8ae77aaaa77722e50ab34dbb097aaca791447c20548",
+      "bytes": 27407,
+      "matches": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/visuals-and-labs.md",
+      "sha256": "9ca51fe88d2fe22f585c718cdbf0766ae22ed073f38d00985b4946b738a2b635",
+      "bytes": 33359,
+      "matches": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/examples-and-code.md",
+      "sha256": "94a9c879f54ef86d17af423904719d3cb668339174a94489cb994c66c1f2ec00",
+      "bytes": 15888,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/DYNAMICAL-SYSTEMS-LESSON-DESIGN.md",
+      "sha256": "5296e4c944c473aa7f2e8ae164b3416e8f8db029326d713aafbc330ab2fd6892",
+      "bytes": 29789,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/DYNAMICAL-SYSTEMS-VERIFICATION.md",
+      "sha256": "365190ebe932b429586942b44e54b0e579fb127643ead0a01fe456b1a0d3122e",
+      "bytes": 8338,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/topics/dynamical-systems-theory-chaos.jsx",
+      "sha256": "15da3dcb0195a4b0a62b27d660aa2f2fff268bb63745378992d5b01782270301",
+      "bytes": 60541,
+      "matches": true
+    },
+    {
+      "path": "src/learn/components/lesson-labs/DynamicalSystemsLabs.jsx",
+      "sha256": "3d485efefa619c5e0bc5fe9a14c9c65c28462fe39c9b223872533b82cfb1db59",
+      "bytes": 35501,
+      "matches": true
+    },
+    {
+      "path": "src/learn/components/lesson-labs/dynamical-systems-labs.css",
+      "sha256": "4f1f90b5300180574a44b8194a31141f8dbd29414e5bfb12625d005b77f8d8e9",
+      "bytes": 4641,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/dynamical-systems-models.js",
+      "sha256": "4cba9432e73f653d2c4090f348003473b703bd2723388340376d3b79c2d8e50d",
+      "bytes": 17064,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/dynamical-systems-examples.js",
+      "sha256": "3af5b2d3e6303ea9193712b9a6786be7361ffa9373b997efc67b28bae39bbbf1",
+      "bytes": 22966,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/dynamical-systems-theory-chaos.js",
+      "sha256": "3d66e87af66ed822bad24af3341d9438d4c10759f5f0aea7cac3c02d436763d9",
+      "bytes": 4354,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/topics/ordinary-differential-equations-linear-systems.jsx",
+      "sha256": "b78c6451e8e3f097475f1bab8dbf68d996e10c3dbced044d6d42efbac465cc63",
+      "bytes": 86623,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/ordinary-differential-equations-examples.js",
+      "sha256": "bbaa1fbbd84b68251e1e8bb726fcc3bdfb1c02d1ba4dc21486f6b56748c5f32e",
+      "bytes": 21231,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/topics/eigenvalues-eigenvectors.jsx",
+      "sha256": "821e7543441fcdded7690b593498741335c142900db5e2f25d8a93df25a9e81d",
+      "bytes": 64355,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/topics/numerical-methods-finite-differences-quadrature-root-finding.jsx",
+      "sha256": "589d4092534efc3b5c1c84318762366a7148822b4a87872f0e5a1a6519c8d9d3",
+      "bytes": 250,
+      "matches": true
+    },
+    {
+      "path": "src/learn/components/lesson-labs/NumericalReadingLesson.jsx",
+      "sha256": "79c640a54d99322a2c6887387956a3f3cc9b0efbd699348dea1887a336386df2",
+      "bytes": 100025,
+      "matches": true
+    },
+    {
+      "path": "src/learn/data/topics/ito-calculus-stochastic-differential-equations.jsx",
+      "sha256": "0894bde2e25b82088662818f8d53058a480e6b4ba8c2e1c048553c5029f54b66",
+      "bytes": 52021,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/topic-notes/ordinary-differential-equations-linear-systems.md",
+      "sha256": "d1fe0b5ae708dcb2220ee93f176c57f8becdce4018c146a3f41f68c7d18ec947",
+      "bytes": 7013,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/topic-notes/numerical-methods-finite-differences-quadrature-root-finding.md",
+      "sha256": "78a470cd6198c9b7ef01ba466306f139986df8473dcfa0222d81a4e6cc8ec3c7",
+      "bytes": 3156,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/topic-notes/nonlinear-control-lyapunov-stability-regions-of-attraction.md",
+      "sha256": "97b1b27733b2161fa18db575a2afc86fcb27e99b4a63f64f3f4db9ff4fbea517",
+      "bytes": 1886,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/topic-notes/hodgkin-huxley-leaky-integrate-and-fire-models.md",
+      "sha256": "752440fe7941e7acc728af4b7fd28ffcf9a73eea7623a7670b9dc3e017b7d2fe",
+      "bytes": 4827,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/topic-notes/it-calculus-stochastic-differential-equations.md",
+      "sha256": "7b1525e21ce8f725f7bf0f95f1f14930fb4b6e53efab6506936b3df0a248ab3e",
+      "bytes": 5782,
+      "matches": true
+    },
+    {
+      "path": "scratch/dynamical-systems-review/native-results.json",
+      "sha256": "3255696a8ede7f768c148455efc687a7342127bca5244073428120f808d31e32",
+      "bytes": 6233,
+      "matches": true
+    },
+    {
+      "path": "scratch/dynamical-systems-review/native-independent-results.json",
+      "sha256": "d4a5b6b647d19431d8029f72ab86dcdc44a3de95ee2bb28b3760c623704522c5",
+      "bytes": 726,
+      "matches": true
+    },
+    {
+      "path": "scratch/dynamical-systems-review/model-results.json",
+      "sha256": "80fcbced003953b67f40373d6c523e3ec5edf506db01f395bc14109fa1d56a82",
+      "bytes": 903,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/root-current-reading-intake.json",
+      "sha256": "a6f629ee9ff3d1fb7e2364df8349529c32d07e1c539650cca82a574515a4917e",
+      "bytes": 3003,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research-r1.md",
+      "sha256": "4c4a74d8417ab23b737420c36c00c9d766959181ed535e6f4314a1e33579a032",
+      "bytes": 19440,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/design-r1.md",
+      "sha256": "91b8ffa94e5d2c6cbc69308db2d16dd455940f1784d0f8bdfb19427102ed552a",
+      "bytes": 34851,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/retrieval-r1.json",
+      "sha256": "c760a7b71b0ca036f8c8a4e0e92afc8865842b9093b67c16b3c73442983f203c",
+      "bytes": 1801,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/feigenbaum-1978.pdf",
+      "sha256": "1c8b8b90207a232f5039b727b7f3fa6b5a3531876612db158d9a6778033a6844",
+      "bytes": 1200351,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/hairer-geometric-week2.pdf",
+      "sha256": "f4f15ff5124fb685870e13b36e54cbc4edc96744199b518ec12e1c5cf006f0fb",
+      "bytes": 378909,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/lorenz-1963.pdf",
+      "sha256": "35cbe8a9e3ac36f210031376989b3b838de85ca3ba0290ba44131dcfd204cc2f",
+      "bytes": 1066948,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/menon-2020.pdf",
+      "sha256": "a508f2f580cebf7d3a3bf4def89d61e5d396bc3cc61c3ed67b68502f7dcf0057",
+      "bytes": 6651570,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/romik-2012.pdf",
+      "sha256": "44cbb15102e581970bf638e4417b14a4c3cc6c0e69a363e3d412b40adebc1ea2",
+      "bytes": 2841896,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/hairer-area-reference.png",
+      "sha256": "7a8cf9038bc10d43abb215f0f664a51858dd71e57c68d16645fe422d17207209",
+      "bytes": 200250,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/menon-portrait-reference.png",
+      "sha256": "2b7e9dec97e60c28b03f4f612e25cf5e36f0c44546d06ee83213a79e2e024c6c",
+      "bytes": 72827,
+      "matches": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/dynamical-systems-theory-chaos/research/menon-section-reference.png",
+      "sha256": "26b465269b655f979f3b859207281458070136ed4499de5ea84bb0e3b8530a5a",
+      "bytes": 82708,
+      "matches": true
+    }
+  ],
+  "originalPairsGuarded": 11,
+  "newComplementaryArithmetic": [
+    {
+      "name": "D19 exact transient point",
+      "pass": true,
+      "value": {
+        "q": 1.5,
+        "p": 0.25,
+        "norm": 1.5206906325745548
+      }
+    },
+    {
+      "name": "D26 annulus inward signs",
+      "pass": true,
+      "value": [
+        0.046875,
+        -0.234375
+      ]
+    },
+    {
+      "name": "T13 changed annulus inward signs",
+      "pass": true,
+      "value": [
+        0.375,
+        -1.875
+      ]
+    },
+    {
+      "name": "T14 two tent preimage intervals total length",
+      "pass": true,
+      "value": [
+        [
+          0.1,
+          0.3
+        ],
+        [
+          0.7,
+          0.9
+        ]
+      ]
+    },
+    {
+      "name": "T14 pushed interval mass",
+      "pass": true,
+      "value": 0.5
+    },
+    {
+      "name": "T15 ordered changed gain",
+      "pass": true,
+      "value": {
+        "A_e2": [
+          3,
+          0
+        ],
+        "BA_e2": [
+          0,
+          1.5
+        ]
+      }
+    },
+    {
+      "name": "T11 h2 escaping states",
+      "pass": true,
+      "value": [
+        [
+          -3,
+          -2
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          -7,
+          -6
+        ]
+      ]
+    }
+  ],
+  "positiveAssessment": [
+    "Preserves all eleven anchors, original computational routes, twelve old task outcomes and future notes",
+    "Full two-canonical/original/API research has explicit read limits and source-typo corrections",
+    "56 jobs describe genuine geometry and transformations, appropriate colour and non-colour identity",
+    "New local vector RK4 route addresses a real scratch/library gap; later ODE is not silently assumed",
+    "Proposed finite checks preserve original evidence without repeating old mains"
+  ],
+  "findings": [
+    {
+      "id": "DY1",
+      "severity": "required design correction",
+      "kind": "learning experience / interaction",
+      "where": "L1–L5 and L7 staged contracts",
+      "finding": "Several investigation families still specify only named starts/cases or leave the actual entity editor unspecified. L3 offers two named initial states; L4 says radius controls/presets without a range; L7 lists named sensitivity presets without a delta editor. Shared later mode changes also have no explicit earlier-mount rule, risking an early pitchfork/center view showing a later untaught family when revisited.",
+      "required": "Specify bounded direct state/radius/disturbance edits where they reveal the mechanism, with defaults, invalid-state handling, immediate updates and null/contrast fixtures. Existing preset shortcuts may remain. In particular define L3 initial components, L4 radius/phase and L7 actual initial difference; source model already supports bounded input. Make each early mount retain its taught family/outputs even after a later family edit, with explicit state/reset ownership. This is a design clarification/new small interaction requirement, not a broad science replay."
+    },
+    {
+      "id": "DY2",
+      "severity": "required design correction",
+      "kind": "actionable representation contract",
+      "where": "D05–D08, D12, D21, D31, D35, D46, D56",
+      "finding": "The whole mechanism map is strong, but some new drawings remain a job description with an unnamed small start, Jacobian, sublevel, three reference states, error tolerance or schematic rollout. The next writer would still choose the mathematical teaching fixture.",
+      "required": "Add a compact concrete-fixture appendix for these new jobs: exact default entities, equation/ranges and source/derivation, a text interpretation and mobile composition. At minimum fix an epsilon/delta illustration; exact initial state and safe time window for the four scalar curves; one Jacobian action/remainder; the displayed spectral examples; a genuinely compact shifted-potential sublevel; a nonzero radial/tangential point; the exact short derivative chain; the forecast-budget parameters; one RK4 trial-state trace; and an explicitly constructed finite learned-rule rollout. Derive or label planned checks honestly; old exact evidence need not be rerun."
+    },
+    {
+      "id": "DY3",
+      "severity": "required design correction",
+      "kind": "cross-section convention continuity",
+      "where": "D16–18 versus D49–53; research Canonical coverage",
+      "finding": "The retained planar center is q′=−p,p′=q (counterclockwise), while the numerical oscillator is q′=p,p′=−q (clockwise). This legitimate change needs a local bridge so identical q,p notation does not silently reverse velocity arrows. Research also says nullclines come before the Jacobian, while the design introduces Jacobian action in D07 and nullclines in D17.",
+      "required": "Explicitly announce the oscillator convention change and what remains invariant, with arrows obeying the active equation. Reconcile the nullcline ordering statement: scalar disturbance/Jacobian teaching can remain early, with the planar nullcline refresher at its actual §4 location."
+    }
+  ],
+  "limits": [
+    "Design review only; not manuscript or runtime acceptance",
+    "No old scientific execution, build or browser campaign",
+    "No observed learner or perfection claim"
+  ],
+  "next": "Author writes exact bounded successor; Root SAME reads corrections and guards unchanged source before release."
+}

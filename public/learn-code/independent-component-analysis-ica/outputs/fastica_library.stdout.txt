@@ -1,0 +1,14 @@
+direct_converged True warnings [] iterations 2
+external_converged True warnings [] iterations 2
+direct_attributes mean [ 3.00192026 -1.97456701] components [[ 0.11057152  0.47755436]
+ [ 0.92323385 -0.232592  ]] mixing [[ 0.49846939  1.02344978]
+ [ 1.97858833 -0.23696653]]
+external_W [[ 0.99990895 -0.01349418]
+ [ 0.01349418  0.99990895]] composed_raw_B [[ 0.11057152  0.47755436]
+ [ 0.92323385 -0.232592  ]] has_mean False has_whitening False
+direct_roundtrip_max 8.881784197001252e-16
+external_roundtrip_max 8.881784197001252e-16
+raw_composition_equal True
+retained_projectors_equal True
+direct calibration_columns (1, 0) unique True test {'signed_correlation': [0.9999930832478476, 0.9999643146130363], 'mse_source_units_squared': [1.2073175820902235e-05, 6.569536854710803e-05]}
+external calibration_columns (1, 0) unique True test {'signed_correlation': [0.9999930832478476, 0.9999643146130361], 'mse_source_units_squared': [1.2073175820900752e-05, 6.569536854711285e-05]}

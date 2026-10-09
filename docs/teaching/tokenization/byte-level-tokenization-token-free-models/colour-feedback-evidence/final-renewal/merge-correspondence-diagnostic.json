@@ -1,0 +1,249 @@
+{
+  "date": "2026-10-06",
+  "reviewer": "author-only",
+  "baseURL": "http://127.0.0.1:4240",
+  "finding": "Both numeric C3/A9 cells are blue in every merge rank. Separate learned-piece 1B brackets are blue/rose before the C3+A9 merge. Caption explicitly distinguishes these two mappings. No source/build mismatch.",
+  "rows": [
+    {
+      "label": "base bytes · 5 tokens",
+      "bytes": [
+        {
+          "text": "63",
+          "color": "rgb(244, 114, 182)",
+          "identity": "#f472b6"
+        },
+        {
+          "text": "61",
+          "color": "rgb(226, 181, 90)",
+          "identity": "#e2b55a"
+        },
+        {
+          "text": "66",
+          "color": "rgb(192, 132, 252)",
+          "identity": "#c084fc"
+        },
+        {
+          "text": "C3",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        },
+        {
+          "text": "A9",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        }
+      ],
+      "brackets": [
+        {
+          "text": "1B",
+          "color": "rgb(244, 114, 182)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(226, 181, 90)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(192, 132, 252)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(244, 114, 182)"
+        }
+      ]
+    },
+    {
+      "label": "rank 1: c + a · 4 tokens",
+      "bytes": [
+        {
+          "text": "63",
+          "color": "rgb(244, 114, 182)",
+          "identity": "#f472b6"
+        },
+        {
+          "text": "61",
+          "color": "rgb(226, 181, 90)",
+          "identity": "#e2b55a"
+        },
+        {
+          "text": "66",
+          "color": "rgb(192, 132, 252)",
+          "identity": "#c084fc"
+        },
+        {
+          "text": "C3",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        },
+        {
+          "text": "A9",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        }
+      ],
+      "brackets": [
+        {
+          "text": "ca",
+          "color": "rgb(226, 181, 90)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(192, 132, 252)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(244, 114, 182)"
+        }
+      ]
+    },
+    {
+      "label": "rank 2: ca + f · 3 tokens",
+      "bytes": [
+        {
+          "text": "63",
+          "color": "rgb(244, 114, 182)",
+          "identity": "#f472b6"
+        },
+        {
+          "text": "61",
+          "color": "rgb(226, 181, 90)",
+          "identity": "#e2b55a"
+        },
+        {
+          "text": "66",
+          "color": "rgb(192, 132, 252)",
+          "identity": "#c084fc"
+        },
+        {
+          "text": "C3",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        },
+        {
+          "text": "A9",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        }
+      ],
+      "brackets": [
+        {
+          "text": "caf",
+          "color": "rgb(226, 181, 90)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(96, 165, 250)"
+        },
+        {
+          "text": "1B",
+          "color": "rgb(244, 114, 182)"
+        }
+      ]
+    },
+    {
+      "label": "rank 3: C3 + A9 · 2 tokens",
+      "bytes": [
+        {
+          "text": "63",
+          "color": "rgb(244, 114, 182)",
+          "identity": "#f472b6"
+        },
+        {
+          "text": "61",
+          "color": "rgb(226, 181, 90)",
+          "identity": "#e2b55a"
+        },
+        {
+          "text": "66",
+          "color": "rgb(192, 132, 252)",
+          "identity": "#c084fc"
+        },
+        {
+          "text": "C3",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        },
+        {
+          "text": "A9",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        }
+      ],
+      "brackets": [
+        {
+          "text": "caf",
+          "color": "rgb(226, 181, 90)"
+        },
+        {
+          "text": "2B",
+          "color": "rgb(96, 165, 250)"
+        }
+      ]
+    },
+    {
+      "label": "rank 4: caf + é · 1 token",
+      "bytes": [
+        {
+          "text": "63",
+          "color": "rgb(244, 114, 182)",
+          "identity": "#f472b6"
+        },
+        {
+          "text": "61",
+          "color": "rgb(226, 181, 90)",
+          "identity": "#e2b55a"
+        },
+        {
+          "text": "66",
+          "color": "rgb(192, 132, 252)",
+          "identity": "#c084fc"
+        },
+        {
+          "text": "C3",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        },
+        {
+          "text": "A9",
+          "color": "rgb(96, 165, 250)",
+          "identity": "#60a5fa"
+        }
+      ],
+      "brackets": [
+        {
+          "text": "café",
+          "color": "rgb(96, 165, 250)"
+        }
+      ]
+    }
+  ],
+  "compiledKeys": "identityKeys:[\"c\",\"a\",\"f\",\"é\",\"é\"]",
+  "sourceBindings": [
+    {
+      "path": "dist-tokenization-flow/.vite/manifest.json",
+      "sha256": "1bb22b09c620e44f0317a09d3231b15ae7c10021b60f6217d6010d0624700b7c"
+    },
+    {
+      "path": "dist-tokenization-flow/assets/byte-level-tokenization-BPKrn7G4.js",
+      "sha256": "a15ac1586033e3b207c2b16e0f8532ae2e583fed91c3728a1876acaad7b54d19"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationDrawings.jsx",
+      "sha256": "18b1307fafc2ba25f48681bc1609b8cd3fffac43a15dea72b0e241e8ebaad667"
+    }
+  ],
+  "paint": {
+    "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/final-renewal/byte-merges-phone-diagnostic.png",
+    "sha256": "5111f97e6281f74f7f1407cdc393cec077eae56af0464d40642193cacb6d4c8d",
+    "previous": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-merges-390-1x.png",
+    "imageByteIdentical": true
+  }
+}

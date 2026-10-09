@@ -1,0 +1,72 @@
+{
+  "revision": "beginner-first follow-up",
+  "checkedAt": "2026-09-28T16:51:19.326Z",
+  "status": "Source parsing, new worked examples, and unchanged numerical bindings checked; root browser acceptance pending",
+  "sources": {
+    "src/learn/data/topics/vocabulary-multilingual.jsx": "ef58a0363b09da309607dfe51389e95bfa0766d71663adb93da7a23badd81b59",
+    "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "9fd73d86d9d80004663991dfcc198d36f7a2654ddcdfa70999fb860cf34907a7",
+    "src/learn/components/lesson-labs/multilingual-vocabulary.css": "6176fbba2ddae5862114a1312c0ded4ea05e0e2ae408d543576d4d64be63bbd1"
+  },
+  "sourcesBeforeRevision": {
+    "src/learn/data/topics/vocabulary-multilingual.jsx": "66b445e9b3e4ac7e3cc1d2622bd5a3cf12034036ef4e209a3e375df1d07f5412",
+    "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "fd8120f99f25af6cdfe804692dcc872acc0ff252d8cefd631d7333eacd6408dd",
+    "src/learn/components/lesson-labs/multilingual-vocabulary.css": "9a8534a74bf35a47b451e76ba97a75b94a3df3329be7d75cc445423dc2891f97"
+  },
+  "reusedNumericalEvidence": [
+    {
+      "path": "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/native-evidence.json",
+      "sha256": "c5535d9ffe15c10ed2477f8672ee01a4dfc622c227615eae5ece16e8330a9f60",
+      "sourceCount": 7,
+      "originalCheckedAt": "2026-09-28T15:51:41.720146+00:00"
+    },
+    {
+      "path": "docs/teaching/tokenization/vocabulary-design-multilingual-tokenization/model-evidence.json",
+      "sha256": "88046f7873f9fadae49e32bfb8cada687c37e208fa7f94c012f6681bb80a90a7",
+      "sourceCount": 4,
+      "originalCheckedAt": "2026-09-28T15:45:35.880Z"
+    }
+  ],
+  "checks": {
+    "jsxParse": "passed",
+    "dictionaryCounts": [
+      7,
+      3,
+      4
+    ],
+    "catCatsFertility": 1.5,
+    "squareRootNineToOne": [
+      0.75,
+      0.25
+    ],
+    "sharedSolarWeight": 0.5833333333333334,
+    "catCatUtf8Bytes": 6,
+    "embeddingShape": [
+      5,
+      3,
+      15
+    ],
+    "outputScoreCounts": [
+      20,
+      20
+    ],
+    "fullAttentionPairCounts": [
+      16,
+      4
+    ],
+    "softmaxShares": [
+      0.25,
+      0.2
+    ],
+    "defaultLabNarrative": "cats gains one piece, first Hindi word loses a piece versus alpha=1; verified actual unchanged model",
+    "budgetControlExample": "V64000,N500 versus baselineV32000,N1000 gives head1 and fullAttention.25"
+  },
+  "reviewChanges": [
+    "30 passes total wording",
+    "N squared unrestricted versus causal triangle",
+    "logits defined before softmax",
+    "shared grid cell geometry"
+  ],
+  "staticFigures": 11,
+  "liveLabs": 2,
+  "limits": "No new native model training execution or browser acceptance claimed. Reuse binds exact unchanged program/model/data sources; no learner study."
+}

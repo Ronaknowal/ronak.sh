@@ -1,3 +1,7 @@
+# Historical content design — retained scientific coverage
+
+The active revision4 design is [reading-flow-design.md](../../deep-learning-beginner/hyena-long-convolution-models/reading-flow-design.md), with the current complete lesson.md and visual-specifications.md in this directory. The record below describes the earlier preparation; its phase, presentation and control instructions are superseded and are not an active queue. Its research and scientific conservation map remain useful historical evidence.
+
 # Hyena & Long Convolution Models — content design and continuation
 
 Stable ID: `hyena-long-convolution-models`. Module position 35 in Deep Learning Fundamentals & Architectures. Authorized phase: research and writing only. The content packet is complete and frozen for root checkpointing; implementation remains not started. Root owns central status/checkpoint updates.

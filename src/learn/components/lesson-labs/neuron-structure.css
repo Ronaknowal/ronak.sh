@@ -1,0 +1,56 @@
+/* Neuron anatomy, network wiring and training-loop structure, drawn in the reading flow.
+   Circles are values (cyan supplied inputs, violet computed values); rounded rectangles
+   are operations (white outline); amber marks learned weights and biases. */
+.neuron-structure { container-type: inline-size; color: #e7e4df; }
+.neuron-structure p { line-height: 1.7; }
+.neuron-circuit { display: block; width: 100%; height: auto; overflow: visible; }
+.neuron-circuit--wide { max-width: 46rem; margin: 0 auto; }
+.neuron-circuit--compact { display: none; max-width: 22rem; margin: 0 auto; }
+.neuron-circuit text { font: 16px system-ui, sans-serif; fill: #e7e4df; }
+.neuron-circuit .neuron-caption { fill: #b9b5af; font-size: 15px; paint-order: stroke; stroke: #111; stroke-width: 5px; stroke-linejoin: round; }
+.neuron-circuit .neuron-wire { stroke: #9a958c; stroke-width: 1.7; fill: none; }
+.neuron-circuit .neuron-edge-label { fill: #f1c76c; font-weight: 600; paint-order: stroke; stroke: #111; stroke-width: 9px; stroke-linejoin: round; }
+.neuron-circuit .neuron-edge-label.is-computed { fill: #c7a5ee; }
+.neuron-circuit .neuron-bias { fill: #f1c76c; font-size: 15px; paint-order: stroke; stroke: #111; stroke-width: 6px; stroke-linejoin: round; }
+.neuron-circuit .neuron-node circle, .neuron-circuit .neuron-node rect { fill: #121212; stroke-width: 2.2; }
+.neuron-circuit .neuron-node--input circle { stroke: #7dd5e9; }
+.neuron-circuit .neuron-node--computed circle { stroke: #c7a5ee; }
+.neuron-circuit .neuron-node--operation rect { stroke: #f3eee2; }
+.neuron-circuit .neuron-value { font-weight: 650; }
+.neuron-circuit .neuron-detail { fill: #b9b5af; font-size: 13px; }
+.neuron-circuit .neuron-boundary { fill: none; stroke: #5a5650; stroke-dasharray: 6 5; }
+.neuron-circuit .neuron-activation-text { fill: #f3eee2; font-size: 15px; paint-order: stroke; stroke: #111; stroke-width: 5px; stroke-linejoin: round; }
+
+.neuron-equation { margin: .75rem 0; }
+.neuron-input-label { color: #7dd5e9; }
+.neuron-weight-label { color: #f1c76c; }
+.neuron-activation-label { color: #c7a5ee; }
+.neuron-forward-trace p { margin: .3rem 0; }
+
+/* Training loop: nodes of a structure diagram, not cards. */
+.neuron-loop-frame { position: relative; padding-right: 34px; }
+.neuron-loop { list-style: none; margin: .75rem 0; padding: 0; display: grid; gap: .45rem; }
+.neuron-loop li { display: grid; grid-template-columns: minmax(8.5rem, 12rem) minmax(0, 1fr); gap: .2rem .9rem; align-items: baseline; padding: .45rem .7rem; border-left: 3px solid #5a5650; }
+.neuron-loop li strong { color: #e7e4df; }
+.neuron-loop li strong small { color: #b9b5af; font-weight: 400; }
+.neuron-loop li.is-data { border-left-color: #7dd5e9; }
+.neuron-loop li.is-computed { border-left-color: #c7a5ee; }
+.neuron-loop li.is-gradient { border-left-color: #f0a36b; border-left-style: dashed; }
+.neuron-loop li.is-update { border-left-color: #f1c76c; }
+.neuron-loop li span { color: #d8d3cc; line-height: 1.6; }
+.neuron-loop li code { white-space: nowrap; }
+.neuron-loop-params { display: flex; flex-wrap: wrap; gap: .25rem .8rem; align-items: baseline; padding: .5rem .7rem; border: 2px solid #f1c76c; border-radius: 6px; }
+.neuron-loop-params strong { color: #f1c76c; }
+.neuron-loop-tag { color: #b9b5af; font-size: .9em; }
+.neuron-loop-read, .neuron-loop-write { grid-column: 1 / -1; font-style: normal; font-size: .85em; color: #f1c76c; }
+.neuron-loop-rail { position: absolute; top: 1.2rem; right: 6px; bottom: 1.5rem; width: 20px; border: 2px solid #f1c76c; border-left: 0; border-radius: 0 10px 10px 0; }
+.neuron-loop-rail::before { content: ""; position: absolute; top: -7px; left: -6px; border: 6px solid transparent; border-right-color: #f1c76c; }
+.neuron-loop-rail span { position: absolute; top: 50%; right: -.35rem; transform: translate(50%, -50%) rotate(-90deg); white-space: nowrap; font-size: 12px; color: #f1c76c; background: #111; padding: 0 .3rem; }
+
+@container (max-width: 34em) {
+  .neuron-loop li { grid-template-columns: minmax(0, 1fr); }
+}
+@container (max-width: 600px) {
+  .neuron-circuit--wide { display: none; }
+  .neuron-circuit--compact { display: block; }
+}

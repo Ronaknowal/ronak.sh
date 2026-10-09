@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-06",
+  "reviewer": "author-only",
+  "baseURL": "http://127.0.0.1:4240",
+  "checks": [
+    "Exact prior helper hash recovered by reversing only the own-property guard; all worked byte/glyph/piece/patch styles are identical",
+    "Prototype-named valid pieces now receive valid palette hues",
+    "All prior owned runtime, geometry, model and browser-checker source hashes remain unchanged; final helper/manifest are separately bound",
+    "Final-built glyph, piece, streaming and patch drawings rendered and captured; prior-image equality is individually recorded",
+    "Final production native 48-ligature/NFKC operation still renders 96 grapheme groups without an alert",
+    "No browser errors or source mutation during final renewal"
+  ],
+  "paints": [
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/final-renewal/text-storage-desktop.png",
+      "sha256": "3c765fcaabd425f7c4c13f3c773cbfeb7e8490ac168ede16dbdf2f25c9ac08d4",
+      "previous": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/text-storage-1366-1x.png",
+      "imageByteIdentical": true
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/final-renewal/byte-merges-desktop.png",
+      "sha256": "658b106ecae184b70da3a3488d1af34add379623af2b5cc2540b4155980d9c91",
+      "previous": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-merges-1366-1x.png",
+      "imageByteIdentical": true
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/final-renewal/streaming-live-desktop.png",
+      "sha256": "216350c7f472823123a93de2b6f1169f0e27b60bef1f2aab453e9ca1b87ba702",
+      "previous": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/streaming-live-1366-1x.png",
+      "imageByteIdentical": true
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/final-renewal/architecture-blt-desktop.png",
+      "sha256": "5f6e1c3e077e2db041f6052eadcd91debf6c25038dbda9cc73e26f80002b451b",
+      "previous": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/architecture-blt-1366-1x.png",
+      "imageByteIdentical": true
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/final-renewal/unicode-nfkc-expanded-desktop.png",
+      "sha256": "bf167d184c69cedfd27b3d7f7a4e6961cedd9ada3f243f85e33d55d034cb5fe8",
+      "previous": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/unicode-nfkc-expanded-desktop.png",
+      "imageByteIdentical": true
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/final-renewal/text-storage-phone.png",
+      "sha256": "1ef7ae7e82f38ac719e0fb2041a03ed07dfd6573b52abf726c0169b1351408c6",
+      "previous": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/text-storage-390-1x.png",
+      "imageByteIdentical": true
+    },
+    {
+      "path": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/final-renewal/byte-merges-enlarged.png",
+      "sha256": "14555393d2291f7f605ef26b4f1b75c00db81a5ef455bff8c0319e48472f367a",
+      "previous": "docs/teaching/tokenization/byte-level-tokenization-token-free-models/colour-feedback-evidence/paints/byte-merges-768-2x.png",
+      "imageByteIdentical": true
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "src/learn/data/topics/byte-level-tokenization.jsx",
+      "sha256": "8b6d8b39d1aa0f2a08090747036d1527f2fc0c3db8b8baf26a33344979142e2f"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationLabs.jsx",
+      "sha256": "a7693693fb86061f50520b6c96da0f19fc8fd272d4383672dd9b719d1b0f3c6d"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/ByteTokenizationDrawings.jsx",
+      "sha256": "18b1307fafc2ba25f48681bc1609b8cd3fffac43a15dea72b0e241e8ebaad667"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/byte-tokenization-labs.css",
+      "sha256": "f9621bb29043a4c1aca88b1fc5c979631bffefd760bbcf2febeccf2a41f62ff8"
+    },
+    {
+      "path": "src/learn/data/byte-tokenization-model.js",
+      "sha256": "24be87af6ba464a9cdde5bd1166f4fcecff79adf6d74430b2f922ee8f437ee11"
+    },
+    {
+      "path": "scripts/verify-byte-colour-feedback-browser.cjs",
+      "sha256": "a89f038130bdeb157f62b3582f41f98c18efb59ae4c71224b0bb2ca19bc2c942"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/token-identity-colors.js",
+      "sha256": "09e6953f642e80e54b32f28b8f02cbceb3b30099d043e8b26bcbfd693f570a69"
+    },
+    {
+      "path": "src/learn/components/lesson-labs/token-identity-colors.css",
+      "sha256": "5e9b388e88cb88bf37caaef1ea75fce394c9b8c020155181005d219e1ede4c8d"
+    },
+    {
+      "path": "dist-tokenization-flow/.vite/manifest.json",
+      "sha256": "1bb22b09c620e44f0317a09d3231b15ae7c10021b60f6217d6010d0624700b7c"
+    },
+    {
+      "path": "scripts/verify-byte-colour-final-renewal.cjs",
+      "sha256": "eddff59be1cd6643736ddd63239ac5f6c43e0d68f19628d064037d70531f435a"
+    },
+    {
+      "path": "docs\\teaching\\tokenization\\byte-level-tokenization-token-free-models\\colour-feedback-evidence\\browser-check.json",
+      "sha256": "c094aea8e4ae9525df6c7375f20dec54353a1febd8c0c732f5a79c05edcf281a"
+    }
+  ],
+  "limits": "Bounded renewal after shared own-property palette fix. Previous 12-group/84-capture receipt is preserved as prior-build evidence. Image reuse is claimed only for individually proven byte-identical captures; author opens current captures separately. Root owns independent integration closure."
+}

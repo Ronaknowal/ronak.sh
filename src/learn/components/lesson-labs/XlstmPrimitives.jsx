@@ -2,6 +2,7 @@ import { NeuralNumber } from './NeuralNumberControl.jsx';
 import { NeuralPlot, NeuralTable, formatNeural } from './NeuralLessonElements.jsx';
 import './neural-lesson-neutral.css';
 import './xlstm-memory-labs.css';
+import './lesson-flow.css';
 export const f = formatNeural;
 export const vec = x => '[' + x.map(v => f(v, 6)).join(', ') + ']';
 export function XFigure({
@@ -11,17 +12,14 @@ export function XFigure({
   children,
   description
 }) {
-  return <figure className="xl-figure"><figcaption>{title}</figcaption><div className="xl-scroll" role="region" aria-label={title} tabIndex={0}><svg viewBox={`0 0 ${width} ${height}`} style={{
-        width: '100%',
-        minWidth: width
-      }} role="img" aria-label={description || title}>{children}</svg></div>{description && <p className="xl-legend">{description}</p>}</figure>;
+  return <figure className="xl-figure"><div className="xl-scroll" role="region" aria-label={title} tabIndex={0}><svg viewBox={`0 0 ${width} ${height}`} style={{width:'100%',maxWidth:width,minWidth:width>340?width:undefined}} role="img" aria-label={title}><title>{title}</title>{children}</svg></div>{description && <figcaption>{description}{width>340&&" The full indexed grid can be scrolled horizontally in this figure when needed."}</figcaption>}</figure>;
 }
 export function XArrow({
   x1,
   y1,
   x2,
   y2,
-  color = '#e6bb60',
+  color = '#888',
   dashed = false
 }) {
   const a = Math.atan2(y2 - y1, x2 - x1);
@@ -53,29 +51,13 @@ export function XValues({
   return <NeuralTable caption={caption} headers={['Quantity', 'Current value']} rows={rows} />;
 }
 export function XPlot(props) {
- const series=props.series.map(row=>({...row,values:row.values||row.points})),all=series.flatMap(row=>row.values),bounds=k=>{const low=Math.min(...all.map(p=>p[k])),high=Math.max(...all.map(p=>p[k])),pad=low===high?.1:(high-low)*.04;return[low-pad,high+pad];},[xmin,xmax]=props.xDomain||bounds(0),[ymin,ymax]=props.yDomain||bounds(1),height=props.height||270,x=value=>105+(value-xmin)/(xmax-xmin)*295,y=value=>height-55-(value-ymin)/(ymax-ymin)*(height-90),tick=value=>{const text=f(value,2);return text.length>12?Number(value).toExponential(3):text;},points=[...(props.points||[]),...series.filter(row=>row.values.length===1).map(row=>({x:row.values[0][0],y:row.values[0][1],label:row.label,color:row.color,selected:true}))];
- const exactRows=[...series.flatMap(row=>row.values.map(([a,b])=>[row.label,f(a,8),f(b,8)])),...(props.points||[]).map(point=>[point.label,f(point.x,8),f(point.y,8)])];
- return <><XFigure title={props.title} width={460} height={height} description={'Horizontal: '+props.xLabel+'. Vertical: '+props.yLabel+'. Exact coordinates are available below.'}>
- <line x1="105" x2="400" y1={height-55} y2={height-55} stroke="#888"/><line x1="105" x2="105" y1="35" y2={height-55} stroke="#888"/>
- {[0,.5,1].map(t=><g key={t}><text x={105+295*t} y={height-29} textAnchor="middle">{tick(xmin+(xmax-xmin)*t)}</text><text x="95" y={y(ymin+(ymax-ymin)*t)+5} textAnchor="end">{tick(ymin+(ymax-ymin)*t)}</text></g>)}
- {ymin<0&&ymax>0&&<line x1="105" x2="400" y1={y(0)} y2={y(0)} stroke="#555" strokeDasharray="4 3"/>}
- {series.map((row,i)=><polyline key={row.label} points={row.values.map(([a,b])=>x(a)+','+y(b)).join(' ')} fill="none" stroke={row.color||['#e6bb60','#87bdf1','#e9979f'][i%3]} strokeWidth="2" strokeDasharray={row.dashed?'5 4':undefined}/>)}
- {points.map((point,i)=><circle key={i} cx={x(point.x)} cy={y(point.y)} r={point.selected?6:4} fill={point.color||'#e6bb60'} stroke={point.selected?'white':undefined}><title>{point.label}</title></circle>)}
- </XFigure><ul className="xl-plot-legend">{series.map((row,i)=><li key={row.label}><span style={{borderColor:row.color||['#e6bb60','#87bdf1','#e9979f'][i%3],borderStyle:row.dashed?'dashed':'solid'}}/>{row.label}</li>)}</ul><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Exact plotted values</h4><NeuralTable caption={props.title} headers={['Series',props.xLabel,props.yLabel]} rows={exactRows}/></section></>;
+ const series=props.series.map(row=>({...row,values:row.values||row.points})),all=series.flatMap(row=>row.values),bounds=k=>{const lo=Math.min(...all.map(p=>p[k])),hi=Math.max(...all.map(p=>p[k])),pad=lo===hi?.1:(hi-lo)*.04;return[lo-pad,hi+pad];},[xmin,xmax]=props.xDomain||bounds(0),[ymin,ymax]=props.yDomain||bounds(1),x=v=>65+(v-xmin)/(xmax-xmin)*238,y=v=>220-(v-ymin)/(ymax-ymin)*173;
+ const colors=['#ba9fd1','#92c9e6','#e6b854'],wrap=text=>text.split(' ').reduce((lines,word)=>{const i=lines.length-1;if((lines[i]+' '+word).trim().length>32)lines.push(word);else lines[i]=(lines[i]+' '+word).trim();return lines;},['']);
+ return <><XFigure title={props.title} width={340} height={340+series.length*45} description={`${props.title}. Horizontal: ${props.xLabel}; vertical: ${props.yLabel}. Exact source coordinates appear below.`}><text x="20" y="20">{wrap(props.yLabel+' ↑').map((line,i)=><tspan key={i} x="20" dy={i?18:0}>{line}</tspan>)}</text><path d="M65 47V220H303" stroke="#777" fill="none"/>{[0,.5,1].map(t=><g key={t}><text x={65+238*t} y="245" textAnchor="middle">{f(xmin+(xmax-xmin)*t,3)}</text><text x="58" y={y(ymin+(ymax-ymin)*t)+5} textAnchor="end">{f(ymin+(ymax-ymin)*t,3)}</text></g>)}{series.map((row,i)=><polyline key={i} points={row.values.map(([a,b])=>x(a)+','+y(b)).join(' ')} fill="none" stroke={row.color||colors[i%3]} strokeWidth="2" strokeDasharray={row.dashed?'5 4':undefined}/>)}{(props.points||[]).map((p,i)=><circle key={i} cx={x(p.x)} cy={y(p.y)} r="5" fill={p.color||'#fff'}><title>{p.label}</title></circle>)}<text x="184" y="278" textAnchor="middle">{wrap(props.xLabel+' →').map((line,i)=><tspan key={i} x="184" dy={i?18:0}>{line}</tspan>)}</text>{series.map((row,i)=>{const point=row.values.at(-1),labelY=325+i*45;return <g key={i}><path d={`M${x(point[0])} ${y(point[1])}H${311+i*6}V${labelY-4}H304`} fill="none" stroke={row.color||colors[i%3]}/><text x="300" y={labelY} textAnchor="end" fill={row.color||colors[i%3]}>{wrap(row.label).map((line,j)=><tspan key={j} x="300" dy={j?18:0}>{line}</tspan>)}</text></g>;})}</XFigure><NeuralTable caption={'Exact coordinates: '+props.title} headers={['Series',props.xLabel,props.yLabel]} rows={series.flatMap(row=>row.values.map(([a,b])=>[row.label,f(a,9),f(b,9)]))}/></>;
 }
-export function XMatrix({
-  title,
-  values,
-  rowLabel = 'key',
-  columnLabel = 'value',
-  selected = null
-}) {
-  const maximum = Math.max(1e-12, ...values.flat().map(Math.abs)),
-    cellWidth = values[0].length > 4 ? 55 : 105,
-    cellHeight = 44,
-    width = Math.max(340, 95 + values[0].length * cellWidth),
-    height = 75 + values.length * cellHeight;
-  return <><XFigure title={title} width={width} height={height} description={`Rows are ${rowLabel} coordinates; columns are ${columnLabel} coordinates. Positive is gold, negative is rose; exact signed values are printed.`}>{values[0].map((_, j) => <text key={j} x={80 + j * cellWidth + cellWidth / 2} y="23" textAnchor="middle">{columnLabel}{j + 1}</text>)}{values.map((row, i) => <g key={i}><text x="5" y={61 + i * cellHeight}>{rowLabel}{i + 1}</text>{row.map((v, j) => <g key={j}><rect x={80 + j * cellWidth} y={33 + i * cellHeight} width={cellWidth - 2} height={cellHeight - 2} fill={v < 0 ? '#843b45' : '#8e6b23'} fillOpacity={.12 + .68 * Math.abs(v) / maximum} stroke={selected && selected[0] === i && selected[1] === j ? 'white' : '#555'} strokeWidth={selected && selected[0] === i && selected[1] === j ? 3 : 1} /><text className={cellWidth < 80 ? 'xl-small' : undefined} x={80 + j * cellWidth + cellWidth / 2} y={60 + i * cellHeight} textAnchor="middle">{f(v, cellWidth < 80 ? 3 : 5)}</text></g>)}</g>)}</XFigure><section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Complete matrix values</h4><NeuralTable caption={title} headers={[rowLabel, ...values[0].map((_, i) => columnLabel + (i + 1))]} rows={values.map((r, i) => [i + 1, ...r.map(x => f(x, 10))])} /></section></>;
+export function XMatrix({title,values,rowLabel='key',columnLabel='value',selected=null}) {
+ const columns=values[0].length,groups=Array.from({length:Math.ceil(columns/4)},(_,i)=>i*4);
+ return <><div className="flow-columns-2">{groups.map(start=><XFigure key={start} title={`${title}; columns${start+1}…${Math.min(columns,start+4)}`} width={320} height={93+values.length*50} description={`Rows are ${rowLabel}; columns are ${columnLabel}. Positive amber, negative blue, zero neutral. White outline marks the selected coordinate.`}><text x="20" y="20">{rowLabel} rows ↓ · {columnLabel} columns →</text>{values[0].slice(start,start+4).map((_,j)=><text key={j} x={106+j*50} y="46" textAnchor="middle">{start+j+1}</text>)}{values.map((row,i)=><g key={i}><text x="65" y={86+i*50} textAnchor="end">{i+1}</text>{row.slice(start,start+4).map((v,j)=><g key={j}><rect x={82+j*50} y={59+i*50} width="48" height="48" fill={v>0?'#e6b854':v<0?'#92c9e6':'#888'} fillOpacity=".18" stroke={selected?.[0]===i&&selected?.[1]===start+j?'white':'#555'} strokeWidth={selected?.[0]===i&&selected?.[1]===start+j?3:1}/><text x={106+j*50} y={86+i*50} textAnchor="middle">{f(v,2)}</text></g>)}</g>)}</XFigure>)}</div><NeuralTable caption={`Complete exact matrix: ${title}`} headers={[rowLabel,...values[0].map((_,i)=>columnLabel+(i+1))]} rows={values.map((row,i)=>[i+1,...row.map(v=>f(v,10))])}/></>;
 }
 export function XLedger({
   rows,
@@ -125,7 +107,7 @@ export function XImage({
   return <figure className="xl-image"><svg viewBox="0 0 80 80" role="img" aria-label={title}>{pixels.flat().map((v, i) => {
         const c = v / 16 * 255;
         return <rect key={i} x={i % 8 * 10} y={Math.floor(i / 8) * 10} width="10" height="10" fill={`rgb(${c},${c},${c})`} />;
-      })}{selectedRow >= 0 && <rect x=".5" y={selectedRow * 10 + .5} width="79" height="9" fill="none" stroke="#e6bb60" strokeWidth="1.5" />}</svg><figcaption>{title}</figcaption></figure>;
+      })}{selectedRow >= 0 && <rect x=".5" y={selectedRow * 10 + .5} width="79" height="9" fill="none" stroke="#fff" strokeWidth="1.5" />}</svg><figcaption>{title}</figcaption></figure>;
 }
 export function XSignedWrites({
   contributions,

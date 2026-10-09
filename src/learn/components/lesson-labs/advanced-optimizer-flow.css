@@ -1,0 +1,26 @@
+.lesson-flow.advanced-optimizer-flow .flow-controls :is(input, select, button) { min-height: max(44px, 2.75rem); }
+.advanced-optimizer-flow .optimizer-flow-drawing { margin: 1.35rem 0; padding: 0; border: 0; background: none; }
+.advanced-optimizer-flow .optimizer-flow-drawing svg { display: block; width: min(100%, 430px); height: auto; overflow: visible; }
+.advanced-optimizer-flow .optimizer-flow-drawing text { font-family: var(--font-mono, monospace); font-size: 12px; }
+.advanced-optimizer-flow .optimizer-flow-drawing line,
+.advanced-optimizer-flow .optimizer-flow-drawing polyline,
+.advanced-optimizer-flow .optimizer-flow-drawing rect,
+.advanced-optimizer-flow .optimizer-flow-drawing circle { vector-effect: non-scaling-stroke; }
+.lesson-flow.advanced-optimizer-flow .optimizer-flow-field { display: grid; gap: .4rem; min-width: 0; }
+.lesson-flow.advanced-optimizer-flow .optimizer-flow-field label { min-width: 0; overflow-wrap: anywhere; }
+.lesson-flow.advanced-optimizer-flow .optimizer-flow-field input,
+.lesson-flow.advanced-optimizer-flow .optimizer-flow-field select { color: var(--color-text, #dedede); background: #0a0a0a; border: 1px solid #454545; border-radius: 3px; min-height: max(44px, 2.75rem); padding: .4rem .5rem; max-width: 100%; width: 100%; min-width: 0; box-sizing: border-box; }
+.lesson-flow.advanced-optimizer-flow .optimizer-flow-field input:focus-visible,
+.lesson-flow.advanced-optimizer-flow .optimizer-flow-field select:focus-visible { outline: 2px solid #e6bb60; outline-offset: 2px; }
+.lesson-flow.advanced-optimizer-flow .optimizer-flow-field input[type="range"] { accent-color: #e6bb60; padding: 0; border: 0; }
+.lesson-flow.advanced-optimizer-flow .optimizer-flow-field [aria-invalid="true"] { border-color: #e6bb60; }
+.advanced-optimizer-flow .optimizer-flow-error { color: #e6bb60; margin: .35rem 0 0; }
+.advanced-optimizer-flow .optimizer-flow-actions { display: flex; gap: .6rem; flex-wrap: wrap; margin: 1rem 0; }
+.advanced-optimizer-flow .optimizer-flow-actions button { color: #e6bb60; background: transparent; border: 1px solid #454545; min-height: max(44px, 2.75rem); padding: .4rem .65rem; border-radius: 3px; cursor: pointer; }
+.advanced-optimizer-flow .optimizer-flow-actions button:focus-visible { outline: 2px solid #e6bb60; outline-offset: 2px; }
+.advanced-optimizer-flow .optimizer-flow-actions button:disabled { opacity: .5; cursor: default; }
+.advanced-optimizer-flow .optimizer-flow-retry { color: #e6bb60; background: transparent; border: 1px solid #454545; min-height: max(44px, 2.75rem); padding: .4rem .65rem; cursor: pointer; }
+.advanced-optimizer-flow .optimizer-flow-retry:focus-visible { outline: 2px solid #e6bb60; outline-offset: 2px; }
+@media (max-width: 420px) {
+  .advanced-optimizer-flow .optimizer-flow-drawing text { font-size: 12.5px; }
+}

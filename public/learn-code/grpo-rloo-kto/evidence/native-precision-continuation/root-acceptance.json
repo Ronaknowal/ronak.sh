@@ -1,0 +1,81 @@
+{
+  "status": "accepted-bounded-precision-continuation",
+  "reviewer": "root",
+  "inputs_sha256": "21bdb996d190fab71bf95af25bacfecde2b1d903174e60d261f2d645039fe407",
+  "source_guards": 74,
+  "diagnostic_cases": [
+    {
+      "case": 0,
+      "precision": "float32",
+      "relative_l2": 7.291271558914594e-06,
+      "max_coordinate": 8.7738037109375e-05
+    },
+    {
+      "case": 9,
+      "precision": "float64",
+      "relative_l2": 4.770311940615164e-14,
+      "max_coordinate": 7.958078640513122e-13
+    },
+    {
+      "case": 10,
+      "precision": "float64",
+      "relative_l2": 1.3696333638546413e-16,
+      "max_coordinate": 3.552713678800501e-15
+    },
+    {
+      "case": 11,
+      "precision": "float64",
+      "relative_l2": 9.32204662464672e-14,
+      "max_coordinate": 4.46753745109163e-13
+    },
+    {
+      "case": 1,
+      "precision": "float32",
+      "relative_l2": 6.891471110379156e-08,
+      "max_coordinate": 1.9073486328125e-06
+    },
+    {
+      "case": 2,
+      "precision": "float32",
+      "relative_l2": 4.5465654995487724e-05,
+      "max_coordinate": 0.00025463104248046875
+    },
+    {
+      "case": 3,
+      "precision": "float32",
+      "relative_l2": 3.5797002880675864e-05,
+      "max_coordinate": 0.0006198883056640625
+    },
+    {
+      "case": 4,
+      "precision": "float32",
+      "relative_l2": 3.470372115422775e-08,
+      "max_coordinate": 1.9073486328125e-06
+    },
+    {
+      "case": 5,
+      "precision": "float32",
+      "relative_l2": 4.8419465982293704e-05,
+      "max_coordinate": 0.0002753734588623047
+    },
+    {
+      "case": 6,
+      "precision": "float64",
+      "relative_l2": 5.076802106296051e-14,
+      "max_coordinate": 8.704148513061227e-13
+    },
+    {
+      "case": 7,
+      "precision": "float64",
+      "relative_l2": 1.1613449521305376e-16,
+      "max_coordinate": 3.552713678800501e-15
+    },
+    {
+      "case": 8,
+      "precision": "float64",
+      "relative_l2": 3.939691274479198e-14,
+      "max_coordinate": 1.7363888105137448e-13
+    }
+  ],
+  "review": "Read whole diagnosis, full continuation driver and exact source diff. Only constructed cases use FP64; every original parameter is restored exactly in finally. FP32 real-batch tolerances and training budgets remain unchanged. Precision comparison supports these constructed cases only. Preserved failures and completed scratch outputs are not repeated."
+}

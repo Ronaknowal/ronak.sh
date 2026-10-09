@@ -1,0 +1,47 @@
+.divergence-reading {
+  --fd-p: #e6ad55;
+  --fd-q: #79b8e8;
+  --fd-difference: #baa4e8;
+}
+.fd-figure { margin: 1.8rem 0 2.5rem; min-width: 0; }
+.fd-figure figcaption { color: #c7c0b7; line-height: 1.65; margin-top: .7rem; }
+.fd-key { display: flex; gap: 1.3rem; flex-wrap: wrap; list-style: none; padding: 0 !important; }
+.fd-key li { margin: 0 !important; }
+.fd-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.fd-svg text { fill: #dedad2; font-family: inherit; font-size: .82em; }
+.fd-axis-labels { display: flex; flex-wrap: wrap; gap: .4rem 1rem; font-size: .9rem; color: #c0b9af; }
+.fd-table { overflow: auto; max-width: 100%; margin-block: 1rem; }
+.fd-table table { width: 100%; border-collapse: collapse; font-size: .91rem; }
+.fd-table caption { text-align: left; line-height: 1.6; margin-bottom: .5rem; }
+.fd-table th, .fd-table td { padding: .55rem .65rem; border-bottom: 1px solid #ffffff20; text-align: left; vertical-align: top; }
+.fd-table th { font-weight: 550; }
+.fd-table:focus-visible, .fd-controls :focus-visible { outline: 2px solid var(--fd-p); outline-offset: 3px; }
+.fd-table::after { content: 'Exact data table: scroll horizontally when needed.'; display: block; color: #bbb; font-size: .8rem; margin-top: .45rem; }
+.fd-bars { margin-block: 1rem; }
+.fd-bar-row { margin-block: 1rem; }
+.fd-bar-row > div:first-child { display: flex; justify-content: space-between; gap: .6rem; flex-wrap: wrap; margin-bottom: .3rem; }
+.fd-bar-track { position: relative; min-height: 1.35rem; border-bottom: 1px solid #888; background: #ffffff05; }
+.fd-bar-track > i { position: absolute; border-left: 1px solid #ccc; top: -.15rem; bottom: -.15rem; z-index: 1; }
+.fd-bar-track > span { position: absolute; height: 1.3rem; }
+.fd-extended { display: block; padding: .3rem .5rem; font-weight: 500; border-top: 1px dashed #888; }
+.fd-controls { display: grid; gap: 1rem; border-top: 1px solid #ffffff25; padding-top: 1rem; margin-top: 1rem; }
+.fd-control { display: grid; gap: .4rem; min-width: 0; }
+.fd-control input, .fd-control select { min-width: 0; width: 100%; max-width: 100%; min-height: 2.75rem; font: inherit; background: #181818; border: 1px solid #777; border-radius: .3rem; color: #eee; padding: .5rem; }
+.fd-control input[type=range] { accent-color: var(--fd-p); padding: 0; }
+.fd-controls button, .fd-actions button, .fd-matrix button { font: inherit; background: #28231d; border: 1px solid #9c7b4a; color: #f0dfc3; padding: .6rem .9rem; border-radius: .3rem; min-height: 2.75rem; cursor: pointer; }
+.fd-controls button { justify-self: start; }
+.fd-controls button:disabled { opacity: .5; cursor: default; }
+.fd-error { color: #efbba5; }
+.fd-actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+.fd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1.5rem; }
+.fd-ops { list-style: none !important; margin: 1rem 0 !important; padding: 0 .4rem !important; }
+.fd-ops li { position: relative; border-left: 2px solid #aaa; margin: 0 !important; padding: 0 0 1.6rem 1.4rem !important; }
+.fd-ops li:last-child { border-left-color: transparent; padding-bottom: .2rem !important; }
+.fd-ops li:before { content: ''; position: absolute; top: .4rem; left: -.26rem; width: .45rem; height: .45rem; border-radius: 50%; background: #aaa; }
+.fd-ops li:not(:last-child):after { content: ''; position: absolute; left: -.25rem; bottom: .05rem; border-inline: .22rem solid transparent; border-top: .4rem solid #aaa; }
+.fd-ops li > span { display: block; font-size: .9rem; color: #c0b9af; }
+.fd-ops output { display: block; font-variant-numeric: tabular-nums; line-height: 1.7; }
+.fd-figure p, .fd-figure output, .fd-figure label, .fd-figure figcaption { overflow-wrap: anywhere; }
+.fd-programme { margin-block: 1.2rem; }
+.reader-content:has(.divergence-reading) .lesson-code-downloads li > :is(a, button),
+.divergence-reading .lesson-code-source__pending > a { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }

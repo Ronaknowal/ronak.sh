@@ -1,141 +1,187 @@
+// Landmark Architectures labs and small figures, in the reading flow (LessonFlow.jsx):
+// each lab states its question in the lesson sentence before it, shows a useful result
+// at once, keeps only the controls that question needs directly under the visual, and
+// reports the result as a live sentence. Value grids follow the module rule: positive
+// cells amber, negative cells blue (and dashed), every cell labelled with its number.
 import useLessonViewport from './useLessonViewport.js';
 import RemoteCodeBlock from '../content/RemoteCodeBlock.jsx';
 import { useEffect, useState } from 'react';
-import { NeuralLab, NeuralNumber, NeuralSelect, NeuralTable, formatNeural as number } from './NeuralLessonElements.jsx';
-import { architectureKinds, channelContext, eligibleArchitectures, headBudget, scalingBudget, signedScoreMap, solveBudgetWidth } from '../../data/landmark-architecture-models.js';
+import { NeuralTable, formatNeural as number } from './NeuralLessonElements.jsx';
+import { architectureKinds, headBudget, signedScoreMap } from '../../data/landmark-architecture-models.js';
 import measured from '../../data/landmark-architecture-measurements.json';
+import { FlowChoice, FlowControls, FlowLab, FlowReadout, FlowSlider, flowNumber } from './LessonFlow.jsx';
 import './landmark-architectures.css';
 
 export const landmarkAsset = '/learn-assets/landmark-architectures-lenet-alexnet-vgg-resnet-efficientnet/';
 const integer = value => Math.round(value).toLocaleString('en-US');
 const kinds = Object.fromEntries(architectureKinds);
-const defaultMaps = [[1, 2, 0, 3], [0, 1, 2, 1]];
+const signed = (value, digits = 5) => flowNumber(value, digits);
 
 function TileMap({ values, title }) {
-  return <div><h4>{title}</h4><div className="landmark-grid" aria-label={title}>{values.map((value, i) => <span key={i} data-positive={value > 0} data-negative={value < 0} title={`Row ${Math.floor(i / 2) + 1}, column ${i % 2 + 1}`}>{number(value, 5)}</span>)}</div></div>;
-}
-function MapEditor({ values, onChange, title, min = 0, max = 8 }) {
-  const [cell, setCell] = useState(0);
-  return <div><h4>{title}</h4><div className="landmark-grid">{values.map((value, i) => <button key={i} aria-label={`${title}, row ${Math.floor(i / 2) + 1}, column ${i % 2 + 1}: ${number(value)}`} aria-pressed={cell === i} onClick={() => setCell(i)}>{number(value)}</button>)}</div><NeuralNumber label={`${title} selected cell ${Math.floor(cell / 2) + 1},${cell % 2 + 1}`} value={values[cell]} onChange={value => onChange(values.map((entry, i) => i === cell ? value : entry))} min={min} max={max} step={.25} /><p className="landmark-note">Select a cell, then move its slider or type a value. The other cells stay fixed.</p></div>;
+  return <div className="landmark-map"><p className="landmark-map-title">{title}</p><div className="landmark-grid" role="img" aria-label={`${title}: ${values.map(v => signed(v)).join(', ')}`}>{values.map((value, i) => <span key={i} data-positive={value > 0} data-negative={value < 0}>{signed(value)}</span>)}</div></div>;
 }
 
 export function LandmarkProgram({ file = 'architecture-experiments.py', title = 'Read the complete small architecture experiment' }) {
   return <>
     <RemoteCodeBlock source={landmarkAsset + file} language="python" filename={file} title={(title)} />
-    <p><a href={landmarkAsset + file} download={file}>Download {file}</a></p>
+    <p className="landmark-download"><a href={landmarkAsset + file} download={file}>Download {file}</a></p>
   </>;
-}
-
-export function LandmarkFeatureRoute() {
-  const stages = [['Input', '1 × 8 × 8', 64, 8], ['Stem + ReLU', '12 × 8 × 8', 768, 8], ['Pool + body', '12 × 4 × 4', 192, 4], ['Tail + pool', '16 × 2 × 2', 64, 2], ['Average', '16 numbers', 16, 1], ['Head', '10 logits', 10, 0]];
-  return <figure><figcaption>Positions shrink; channel count follows a separate decision</figcaption><div className="landmark-route">{stages.map(([name, shape, elements, side]) => <div key={name}><strong>{name}</strong><p>{shape}</p>{side > 0 && <div className="landmark-small-grid" style={{ gridTemplateColumns: `repeat(${side},1fr)` }} aria-hidden="true">{Array.from({ length: side * side }, (_, i) => <span key={i} data-active />)}</div>}<p>{integer(elements)} values per image{side ? ' across all channels; grid shows one channel' : ''}</p></div>)}</div><p className="landmark-note">Each grid is a schematic spatial layout, not a measured activation. The selected body preserves the 12 × 4 × 4 shape.</p></figure>;
-}
-
-export function LandmarkHistoricalShapes() {
-  return <figure><figcaption>LeNet-5’s historical route, with the operation kept in view</figcaption><div className="landmark-route">{[['Input', '1 × 32 × 32'], ['C1 · valid convolution', '6 × 28 × 28'], ['S2 · learned subsampling', '6 × 14 × 14'], ['C3 · partial channel connectivity', '16 × 10 × 10'], ['S4 · learned subsampling', '16 × 5 × 5'], ['C5 · convolution', '120 × 1 × 1'], ['F6 · features', '84'], ['Template distances', '10 penalties']].map(([label, shape]) => <div key={label}><strong>{label}</strong><p>{shape}</p></div>)}</div><p>For C1, six copies of 25 kernel weights and one bias give 156 parameters. These are shared over the 28 × 28 positions. The runnable modern adaptation below changes the historical subsampling, connectivity and output contract explicitly.</p></figure>;
-}
-
-export function LandmarkKernelFigure() {
-  const [intermediate, setIntermediate] = useState(4);
-  const row = Math.floor(intermediate / 3), column = intermediate % 3;
-  return <figure><figcaption>Two grids, then two different composition questions</figcaption><div className="neural-two"><div><h4>Stride on the image grid</h4><p>227 image positions → kernel 11, stride 4 → 55 convolution positions. One output reads 11 image pixels along each axis; its neighbor starts four image pixels later.</p><WindowFigure length={16} kernel={11} stride={4} unit="image-pixel index" /><p>55 feature positions → pool 3, stride 2 → 27 pooled positions. The pool groups feature responses, and keeps all 96 channels in this teaching variant.</p><WindowFigure length={7} kernel={3} stride={2} unit="convolution-position index" /></div><div><h4>Composition at stride one</h4><p>Select an intermediate position. Its highlighted 3 × 3 input neighborhood moves inside the full 5 × 5 union.</p><div className="landmark-route"><div><strong>Input: 5 × 5 union</strong><div className="landmark-small-grid" style={{ gridTemplateColumns: 'repeat(5,1fr)' }} aria-label={`Selected intermediate row ${row + 1}, column ${column + 1} reads input rows ${row + 1} to ${row + 3}, columns ${column + 1} to ${column + 3}`}>{Array.from({ length: 25 }, (_, i) => <span key={i} data-active={i % 5 >= column && i % 5 <= column + 2 && Math.floor(i / 5) >= row && Math.floor(i / 5) <= row + 2} />)}</div></div><div><strong>First convolution → activation</strong><div className="landmark-small-grid landmark-intermediate" style={{ gridTemplateColumns: 'repeat(3,1fr)' }}>{Array.from({ length: 9 }, (_, i) => <button key={i} aria-label={`Intermediate row ${Math.floor(i / 3) + 1}, column ${i % 3 + 1}`} aria-pressed={intermediate === i} onClick={() => setIntermediate(i)}>{i + 1}</button>)}</div></div><div><strong>Second convolution</strong><p>All nine activated intermediate values combine into one output. Every input cell can reach it through one or more intermediate paths.</p></div></div><p>Union support is 5 × 5; the first highlighted patch is only one path. An activation makes the composition different from a single linear 5 × 5 filter.</p></div></div><NeuralTable caption="Equal support does not imply equal computation" headers={['Route', 'Bias-free weights', 'Interior support']} rows={[[ 'One 5 × 5, C → C', '25C²', '5 × 5'], ['Two 3 × 3, C → C → C', '18C²', '5 × 5'], ['Two 3 × 3, C → 2C → C', '36C²', '5 × 5']]} /></figure>;
 }
 
 function WindowFigure({ length, kernel, stride, unit }) {
   const cell = 280 / length, position = i => 30 + i * cell;
-  return <figure><svg className="landmark-chart" viewBox="0 0 340 115" role="img" aria-label={`Two adjacent windows on the ${unit} grid: indices 0 to ${kernel - 1}, then ${stride} to ${stride + kernel - 1}.`}>
-    {Array.from({ length }, (_, i) => <rect key={i} x={position(i)} y="56" width={cell} height="18" fill="none" stroke="#505050" />)}
-    <line x1={position(0)} x2={position(kernel)} y1="24" y2="24" stroke="#e2b55a" strokeWidth="5" /><line x1={position(stride)} x2={position(stride + kernel)} y1="41" y2="41" stroke="#dedede" strokeWidth="5" />
-    {[0, stride, stride + kernel - 1].map((value, i) => <text key={i} x={position(value) + cell / 2} y="95" textAnchor="middle">{value}</text>)}
-  </svg><p className="landmark-note">Amber: first window. Neutral: adjacent window, shifted {stride} {unit === 'image-pixel index' ? 'image pixels' : 'feature positions'}. Each row is a one-dimensional slice of a square support; only the local start of the full grid is drawn.</p></figure>;
+  return <svg className="landmark-chart" viewBox="0 0 340 125" role="img" aria-label={`Two adjacent windows on the ${unit} grid: indices 0 to ${kernel - 1}, then ${stride} to ${stride + kernel - 1}.`}>
+    {Array.from({ length }, (_, i) => <rect key={i} x={position(i)} y="70" width={cell} height="18" fill="none" stroke="#505050" />)}
+    <text x={position(0)} y="14" className="landmark-chart-label">first window: {kernel} cells</text>
+    <line x1={position(0)} x2={position(kernel)} y1="24" y2="24" stroke="#bdbdbd" strokeWidth="5" />
+    <text x={position(stride)} y="45" className="landmark-chart-label">next window starts {stride} later</text>
+    <line x1={position(stride)} x2={position(stride + kernel)} y1="55" y2="55" stroke="#8a8a8a" strokeWidth="5" strokeDasharray="6 4" />
+    {[0, stride, stride + kernel - 1].map((value, i) => <text key={i} x={position(value) + cell / 2} y="108" textAnchor="middle">{value}</text>)}
+  </svg>;
+}
+
+// AlexNet's first layer and pool on their own grids (one axis drawn).
+export function LandmarkStrideFigure() {
+  return <figure className="landmark-figure" data-figure="landmark-stride" aria-label="AlexNet's first convolution windows on the image grid, then the pool windows on the convolution grid">
+    <p className="landmark-map-title">Image grid: kernel 11, stride 4 (227 positions → 55)</p>
+    <WindowFigure length={16} kernel={11} stride={4} unit="image-pixel index" />
+    <p className="landmark-map-title">Convolution grid: pool 3, stride 2 (55 positions → 27)</p>
+    <WindowFigure length={7} kernel={3} stride={2} unit="convolution-position index" />
+    <figcaption>Each row is a one-dimensional slice of a square window; only the start of each grid is drawn. The top row counts image pixels, the bottom row counts convolution outputs.</figcaption>
+  </figure>;
+}
+
+// Two stacked 3 × 3 convolutions reach a 5 × 5 input region. Select an intermediate position
+// to see which 3 × 3 input patch feeds it.
+export function LandmarkCompositionFigure() {
+  const [intermediate, setIntermediate] = useState(4);
+  const row = Math.floor(intermediate / 3), column = intermediate % 3;
+  return <figure className="landmark-figure" data-figure="landmark-composition" aria-label="Two stacked 3 × 3 convolutions reach a 5 × 5 input region">
+    <div className="landmark-composition">
+      <div><p className="landmark-map-title">Input: 5 × 5 region</p><div className="landmark-small-grid" style={{ gridTemplateColumns: 'repeat(5,1fr)' }} role="img" aria-label={`Intermediate row ${row + 1}, column ${column + 1} reads input rows ${row + 1} to ${row + 3}, columns ${column + 1} to ${column + 3}`}>{Array.from({ length: 25 }, (_, i) => <span key={i} data-active={i % 5 >= column && i % 5 <= column + 2 && Math.floor(i / 5) >= row && Math.floor(i / 5) <= row + 2} />)}</div></div>
+      <span className="landmark-composition-arrow" aria-hidden="true">→ 3 × 3 conv + ReLU →</span>
+      <div><p className="landmark-map-title">Intermediate 3 × 3 (select one)</p><div className="landmark-small-grid landmark-intermediate" style={{ gridTemplateColumns: 'repeat(3,1fr)' }}>{Array.from({ length: 9 }, (_, i) => <button key={i} aria-label={`Intermediate row ${Math.floor(i / 3) + 1}, column ${i % 3 + 1}`} aria-pressed={intermediate === i} onClick={() => setIntermediate(i)}>{i + 1}</button>)}</div></div>
+      <span className="landmark-composition-arrow" aria-hidden="true">→ 3 × 3 conv →</span>
+      <div><p className="landmark-map-title">One output</p><div className="landmark-small-grid landmark-output" role="img" aria-label="One output value"><span data-active="true" /></div></div>
+    </div>
+    <FlowReadout>Intermediate position <strong>{intermediate + 1}</strong> reads input rows {row + 1}–{row + 3} and columns {column + 1}–{column + 3} (outlined). The single output reads all nine intermediate values, so together they cover all 25 input cells.</FlowReadout>
+  </figure>;
 }
 
 export function LandmarkBranchFigure() {
-  return <figure><figcaption>Append channels or add corresponding values?</figcaption><p>One shared input feeds four Inception-style paths. All must preserve the same spatial grid for channel concatenation.</p><div className="landmark-branches">{[['1 × 1', 64], ['1 × 1 reduction → activation → 3 × 3', 128], ['1 × 1 reduction → activation → 5 × 5', 32], ['3 × 3 pool → 1 × 1 projection', 32]].map(([route, channels]) => <div key={route}>{route} → <strong>{channels} channels</strong></div>)}</div><div className="landmark-channel-strip" aria-label="64 plus128 plus32 plus32 equals256 channels">{[64, 128, 32, 32].map((channels, i) => <span key={i} style={{ flex: channels }}>{channels}</span>)}</div><p>Concatenate → 256 separate channels. A mismatched height cannot be concatenated along channels without an explicit alignment operation.</p><div className="neural-two"><div><strong>Add aligned slots</strong><p>[1, 2] + [3, −1] = [4, 1]</p><p>Corresponding entries are combined; width stays two.</p></div><div><strong>Append distinct slots</strong><p>concat([1, 2], [3, −1]) = [1, 2, 3, −1]</p><p>Separate entries are retained; width becomes four.</p></div></div></figure>;
+  return <figure className="landmark-figure" data-figure="landmark-merges" aria-label="Adding versus concatenating the same two vectors">
+    <div className="landmark-merge-compare flow-columns-2">
+      <div><p className="landmark-map-title">⊕ add aligned slots (ResNet)</p><p className="landmark-merge-math">[1, 2] + [3, −1] = [4, 1]</p><p>Corresponding entries combine; the width stays two.</p></div>
+      <div><p className="landmark-map-title">‖ append distinct slots (Inception)</p><p className="landmark-merge-math">concat([1, 2], [3, −1]) = [1, 2, 3, −1]</p><p>Both inputs keep their own entries; the width becomes four.</p></div>
+    </div>
+  </figure>;
 }
 
-export function LandmarkInvertedRoute() {
-  return <figure><figcaption>A narrow skip around a wider transformation</figcaption><div className="landmark-route">{[['Narrow input C', 'Retain the input for the skip'], ['Expand C → tC', '1 × 1 learned channel mixing'], ['Depthwise spatial', 'One spatial filter per expanded channel'], ['Context gate', 'Global summary → input-dependent multipliers'], ['Project tC → C', 'Linear branch output, no following branch activation'], ['Add narrow input', 'Only when channel and spatial shapes match']].map(([label, explanation]) => <div key={label}><strong>{label}</strong><p>{explanation}</p></div>)}</div></figure>;
-}
-
+// Where did VGG's parameters go? Fixed 512 channels, 4,096 hidden width and 1,000 classes;
+// the learner changes the head operation and the final grid side.
 export function LandmarkHeadLab() {
-  const [state, setState] = useState({ channels: 512, height: 7, width: 7, dense: 4096, classes: 1000, mode: 'dense' });
-  const current = headBudget(state), baseline = headBudget({ channels: 512, height: 7, width: 7, dense: 4096, classes: 1000, mode: 'dense' });
-  const change = (key, value) => setState(previous => ({ ...previous, [key]: value }));
+  const [mode, setMode] = useState('flat'), [side, setSide] = useState(7);
+  const fixed = { channels: 512, dense: 4096, classes: 1000 };
+  const current = headBudget({ ...fixed, height: side, width: side, mode });
+  const baseline = headBudget({ ...fixed, height: 7, width: 7, mode: 'dense' });
   const maximum = Math.max(current.parameters, current.gapParameters, baseline.parameters);
-  return <NeuralLab title="Where did the classifier’s parameters go?" id="landmark-head"><p>Change the actual representation dimensions and head operation. Counts include biases; MACs count the linear layers only. Spatial averaging and other work are excluded.</p><div className="neural-controls">{[['channels', 'Final channels', 2048], ['height', 'Final height', 32], ['width', 'Final width', 32], ['dense', 'Dense hidden width', 4096], ['classes', 'Class count', 1000]].map(([key, label, max]) => <NeuralNumber key={key} label={label} value={state[key]} onChange={value => change(key, value)} min={1} max={max} step={1} integer />)}<NeuralSelect label="Head operation" value={state.mode} onChange={value => change('mode', value)} options={[['dense', 'Two hidden dense layers + classifier'], ['flat', 'Direct flattened linear head'], ['gap', 'Global average + linear head']]} /></div>
-    <NeuralTable caption="Current head and same-input global-average comparison" headers={['Quantity', 'Selected head', 'GAP + linear']} rows={[[ 'Parameters', integer(current.parameters), integer(current.gapParameters)], ['Linear MACs / image', integer(current.macs), integer(current.gapMacs)], ['Four float32 arrays / bytes', integer(current.fourArraysBytes), integer(current.gapParameters * 16)]]} />
-    <p className="neural-result" data-result="head">Selected head: {integer(current.parameters)} parameters. Components: {current.pieces.map(integer).join(' + ')}. Largest component: {integer(Math.max(...current.pieces))}{current.pieces.filter(value => value === Math.max(...current.pieces)).length > 1 ? ' (tied)' : ''}. Difference from the fixed original VGG head: {integer(current.parameters - baseline.parameters)}.</p>
-    {[['Fixed VGG head', baseline.parameters], ['Current head', current.parameters], ['Current GAP alternative', current.gapParameters]].map(([label, value]) => <div key={label}><p>{label}: {integer(value)}</p><div className="landmark-bar"><span style={{ width: `${100 * value / maximum}%` }} /></div></div>)}<p className="landmark-note">Linear bars share zero and a maximum of {integer(maximum)} parameters. A very small bar is not given an artificial minimum width. Four arrays means weights, gradients and two Adam moment arrays, not measured peak memory.</p>
-    <p>Global averaging discards within-channel spatial arrangement at the head input. A direct flattened head can weight different positions differently. The arithmetic alone cannot tell which will learn the better classifier.</p><div className="neural-buttons"><button onClick={() => setState({ channels: 128, height: 7, width: 7, dense: 4096, classes: 7, mode: 'flat' })}>Changed seven-class direct head</button><button onClick={() => setState(previous => ({ ...previous, height: 1, width: 1, mode: 'flat' }))}>One-position equality</button><button onClick={() => setState({ channels: 512, height: 7, width: 7, dense: 4096, classes: 1000, mode: 'dense' })}>Reset head budget</button></div>
-  </NeuralLab>;
-}
-
-export function LandmarkContextLab() {
-  const [maps, setMaps] = useState([[2, 2, 2, 2], [1, 1, 1, 1]]), [resetKey, setResetKey] = useState(0);
-  const current = channelContext(maps), baseline = channelContext([[2, 2, 2, 2], [1, 1, 1, 1]]);
-  const edit = (channel, values) => setMaps(previous => previous.map((map, i) => i === channel ? values : map));
-  return <NeuralLab title="A global change can alter another channel’s gate" id="landmark-context"><p>Constructed two-channel model with fixed coefficients. The maps are intermediate features, not images being sent through a trained backbone.</p><div className="neural-two">{maps.map((map, i) => <MapEditor key={`${resetKey}-${i}`} title={`Context channel ${'AB'[i]}`} values={map} onChange={values => edit(i, values)} />)}</div>
-    <div className="landmark-route"><div><strong>Average each map</strong><p>a = {number(current.means[0])}; b = {number(current.means[1])}</p></div><div><strong>One hidden ReLU</strong><p>h = max(a − b, 0) = {number(current.hidden)}</p></div><div><strong>Two sigmoid gates</strong><p>sigmoid(h) = {number(current.gates[0])}<br />sigmoid(−h) = {number(current.gates[1])}</p></div><div><strong>Broadcast</strong><p>Multiply all four cells in a channel by its one gate.</p></div></div><div className="neural-two">{current.output.map((map, i) => <TileMap key={i} values={map} title={`Gated channel ${'AB'[i]}`} />)}</div>
-    <p className="neural-result" data-result="context">Current gates: {current.gates.map(value => number(value)).join(', ')}. Fixed starting gates: {baseline.gates.map(value => number(value)).join(', ')}. A change in either mean can change both gates; rearranging cells within a map preserves both means and gates.</p><div className="neural-buttons"><button onClick={() => setMaps([[2, 2, 2, 2], [3, 3, 3, 3]])}>Raise B’s mean to 3</button><button onClick={() => setMaps([[0, 4, 2, 2], [1, 0, 2, 1]])}>Same means, varied cells</button><button onClick={() => setMaps(previous => previous.map(map => [...map].reverse()))}>Rotate both maps 180°</button><button onClick={() => { setMaps([[2, 2, 2, 2], [1, 1, 1, 1]]); setResetKey(value => value + 1); }}>Reset context gate</button></div>
-  </NeuralLab>;
-}
-
-export function LandmarkScalingLab() {
-  const [state, setState] = useState({ depth: 1, width: 1, resolution: 1 }), [budget, setBudget] = useState(2), [phi, setPhi] = useState(1), [message, setMessage] = useState('');
-  const current = scalingBudget(state.depth, state.width, state.resolution), solved = solveBudgetWidth(budget, state.depth, state.resolution), compound = scalingBudget(1.2 ** phi, 1.1 ** phi, 1.15 ** phi);
-  return <NeuralLab title="Spend compute on depth, width or resolution" id="landmark-scaling"><p>Idealized dense-convolution approximation: parameters ∝ dw² and MACs ∝ dw²r². This is not an exact EfficientNet count or an accuracy forecast.</p><div className="neural-controls">{[['depth', 'Depth multiplier'], ['width', 'Channel-width multiplier'], ['resolution', 'Resolution multiplier']].map(([key, label]) => <NeuralNumber key={key} label={label} value={state[key]} onChange={value => { setState(previous => ({ ...previous, [key]: value })); setMessage(''); }} min={1} max={3} step="any" />)}<NeuralNumber label="Target MAC budget multiplier" value={budget} onChange={value => { setBudget(value); setMessage(''); }} min={1} max={16} step={.1} /></div>
-    <p className="neural-result" data-result="scaling">Parameter factor {number(current.parameters, 7)}; MAC factor {number(current.macs, 7)}. Relative to budget {number(budget)}, this is {Math.abs(current.macs - budget) < 1e-10 ? 'equal within rounding tolerance' : current.macs > budget ? 'over budget' : 'under budget'}. Starting identity has parameter/MAC factors 1/1.</p>
-    <div aria-label="Aligned parameter and MAC multiplier bars">{[['Parameter factor', current.parameters], ['MAC factor', current.macs]].map(([label, value]) => <div key={label}><p>{label}: {number(value, 7)}</p><div className="landmark-bar landmark-scaling-bar"><span style={{ width: `${100 * value / Math.max(budget, current.parameters, current.macs)}%` }} />{label === 'MAC factor' && <i aria-hidden="true" style={{ left: `${100 * budget / Math.max(budget, current.parameters, current.macs)}%` }} />}</div></div>)}<p className="landmark-note">Both bars start at zero and share a maximum of {number(Math.max(budget, current.parameters, current.macs), 7)}. The dashed marker on the MAC bar is target {number(budget)}; it is a compute constraint, not a parameter limit or accuracy forecast.</p></div>
-    <NeuralTable caption="Same idealized twofold MAC budget, different parameter allocation" headers={['Allocation', 'd', 'w', 'r', 'Parameters', 'MACs']} rows={[[ 'Depth', 2, 1, 1, 2, 2], ['Width', 1, '√2', 1, 2, 2], ['Resolution', 1, 1, '√2', 1, 2]]} />
-    <p>Solving w = √(budget / dr²) with the current depth and resolution requires {number(solved.width)}. {solved.feasible ? 'That fits this workbench’s [1,3] width range.' : 'That is outside this workbench’s [1,3] width range; it is not clamped to a false solution.'}</p><button onClick={() => { if (solved.feasible) { setState(previous => ({ ...previous, width: solved.width })); setMessage('Applied the exact feasible width.'); } else setMessage(`Infeasible here: required width ${number(solved.width)} is outside [1,3]. Current recipe is unchanged.`); }}>Apply width that meets this budget</button>{message && <p role="status">{message}</p>}
-    <div className="neural-buttons"><button onClick={() => { setState({ depth: 2, width: 1, resolution: 1 }); setBudget(2); setMessage(''); }}>Double depth</button><button onClick={() => { setState({ depth: 1, width: Math.SQRT2, resolution: 1 }); setBudget(2); setMessage(''); }}>Width √2</button><button onClick={() => { setState({ depth: 1, width: 1, resolution: Math.SQRT2 }); setBudget(2); setMessage(''); }}>Resolution √2</button></div>
-    <h4>Historical coefficient illustration</h4><NeuralNumber label="Compound coefficient φ" value={phi} onChange={setPhi} min={0} max={4} step={1} integer /><p>For α=1.2, β=1.1, γ=1.15: d={number(1.2 ** phi)}, w={number(1.1 ** phi)}, r={number(1.15 ** phi)}. Parameters ×{number(compound.parameters, 7)}; MACs ×{number(compound.macs, 7)}. One step multiplies idealized work by 1.92027, not exactly two. Named B-indices involve rounding and are not identified with this φ slider.</p><button onClick={() => { setState({ depth: 1, width: 1, resolution: 1 }); setBudget(2); setPhi(1); setMessage(''); }}>Reset scaling investigation</button>
-  </NeuralLab>;
+  const bars = [['VGG-16’s original head (7 × 7, two dense layers)', baseline.parameters], ['Selected head', current.parameters], ['Global average + linear', current.gapParameters]];
+  return <FlowLab id="landmark-head" label="Where did the classifier’s parameters go?">
+    <div className="landmark-bars">{bars.map(([label, value]) => <div key={label} className="landmark-bar-row"><span>{label}</span><div className="landmark-bar"><span style={{ width: `${100 * value / maximum}%` }} /></div><strong>{integer(value)}</strong></div>)}</div>
+    <FlowControls>
+      <FlowChoice label="Head" value={mode} onChange={setMode} options={[['flat', 'One flattened linear layer'], ['dense', 'Two dense layers + classifier']]} />
+      <FlowSlider name="Final grid side (H = W)" value={side} onChange={setSide} min={1} max={14} step={1} format={value => `${value} × ${value}`} />
+    </FlowControls>
+    <FlowReadout>The selected head reads <strong>{integer(512 * side * side)}</strong> numbers and has <strong>{integer(current.parameters)}</strong> parameters{current.pieces.length > 1 ? ` (${current.pieces.map(integer).join(' + ')})` : ''}. The global-average head reads 512 numbers, whatever the grid size, and has {integer(current.gapParameters)}. Bars share one zero and one maximum; counts include biases.</FlowReadout>
+  </FlowLab>;
 }
 
 function LearningPlot({ rows, field }) {
   const maximum = field === 'correct' ? 120 : Math.max(...rows.flatMap(row => row.trace.map(point => point.development.cross_entropy))) * 1.05;
-  const x = value => 50 + value / 400 * 260, y = value => 210 - value / maximum * 180;
-  return <figure><figcaption>Matched {kinds[rows[0].kind]} / {kinds[rows[1].kind]} development checkpoints</figcaption><svg className="landmark-chart" viewBox="0 0 340 265" role="img" aria-label={`Recorded development ${field === 'correct' ? 'correct counts out of120' : 'cross-entropy'}, updates0to400. Exact table below.`}><line x1="50" x2="310" y1="210" y2="210" stroke="#505050" /><line x1="50" x2="50" y1="30" y2="210" stroke="#505050" />{[0, maximum / 2, maximum].map(value => <text key={value} x="43" y={y(value) + 4} textAnchor="end">{number(value, 2)}</text>)}{[0, 200, 400].map(value => <text key={value} x={x(value)} y="235" textAnchor="middle">{value}</text>)}{rows.map((row, i) => <g key={row.kind}><polyline points={row.trace.map(point => `${x(point.step)},${y(point.development[field])}`).join(' ')} fill="none" stroke={i ? '#dedede' : '#e2b55a'} strokeWidth="2" strokeDasharray={i ? '5 4' : undefined} />{row.trace.map(point => <circle key={point.step} cx={x(point.step)} cy={y(point.development[field])} r="3" fill={i ? '#dedede' : '#e2b55a'} />)}</g>)}</svg><p className="landmark-note">Amber solid: {kinds[rows[0].kind]}; neutral dashed: {kinds[rows[1].kind]}. Horizontal: full-batch updates. Vertical: {field === 'correct' ? 'correct /120' : 'cross-entropy'}. Markers are observations; line segments connect checkpoints, not a recorded dense trajectory.</p></figure>;
+  const x = value => 50 + value / 400 * 240, y = value => 210 - value / maximum * 180;
+  const colours = ['#ececec', '#c7a5ee'];
+  return <svg className="landmark-chart" viewBox="0 0 360 255" role="img" aria-label={`Recorded development ${field === 'correct' ? 'correct counts out of 120' : 'cross-entropy'} at updates 0 to 400 for ${kinds[rows[0].kind]} and ${kinds[rows[1].kind]}. Exact values in the table below.`}>
+    <line x1="50" x2="290" y1="210" y2="210" stroke="#505050" /><line x1="50" x2="50" y1="30" y2="210" stroke="#505050" />
+    {[0, maximum / 2, maximum].map(value => <text key={value} x="43" y={y(value) + 4} textAnchor="end">{number(value, 2)}</text>)}
+    {[0, 200, 400].map(value => <text key={value} x={x(value)} y="230" textAnchor="middle">{value}</text>)}
+    <text x="170" y="248" textAnchor="middle">full-batch update</text>
+    {rows.map((row, i) => { const last = row.trace.at(-1); return <g key={row.kind}>
+      <polyline points={row.trace.map(point => `${x(point.step)},${y(point.development[field])}`).join(' ')} fill="none" stroke={colours[i]} strokeWidth="2" strokeDasharray={i ? '5 4' : undefined} />
+      {row.trace.map(point => <circle key={point.step} cx={x(point.step)} cy={y(point.development[field])} r="3" fill={colours[i]} />)}
+      <text x={x(last.step) + 6} y={y(last.development[field]) + (i ? 12 : -4)} fill={colours[i]} className="landmark-chart-series">{kinds[row.kind]}</text>
+    </g>; })}
+  </svg>;
 }
 
+// Recorded training curves: plain against one other body, for one seed and one metric.
 export function LandmarkComparisonLab() {
-  const [seed, setSeed] = useState('1'), [parameters, setParameters] = useState(5000), [macs, setMacs] = useState(60000), [field, setField] = useState('correct'), [comparison, setComparison] = useState('residual');
-  const rows = measured.fits.filter(row => row.seed === Number(seed)), allowed = eligibleArchitectures(rows, parameters, macs), pair = [rows.find(row => row.kind === 'plain'), rows.find(row => row.kind === comparison)];
-  return <NeuralLab title="Inspect actual candidates under your resource contract" id="landmark-comparison"><p>Saved 12 CPU runs: same 280/120 split, 400 full-batch Adam updates, three seeds. These are small teaching bodies, not reproductions of the ImageNet landmarks.</p><div className="neural-controls"><NeuralNumber label="Parameter budget" value={parameters} onChange={setParameters} min={1} max={6000} step={1} integer /><NeuralNumber label="Conv and linear MAC budget" value={macs} onChange={setMacs} min={1} max={100000} step={1} integer /><NeuralSelect label="Architecture seed" value={seed} onChange={setSeed} options={['1', '2', '3'].map(value => [value, `Seed ${value}`])} /><NeuralSelect label="Compare with plain" value={comparison} onChange={setComparison} options={architectureKinds.filter(([key]) => key !== 'plain')} /><NeuralSelect label="Development plot metric" value={field} onChange={setField} options={[['correct', 'Correct count /120'], ['cross_entropy', 'Cross-entropy']]} /></div>
-    <p className="neural-result" data-result="eligibility">Eligible: {allowed.length ? allowed.map(kind => kinds[kind]).join(', ') : 'none of these measured candidates'}. Changing budgets changes this set; measured outputs remain fixed.</p><NeuralTable caption={`Actual seed ${seed} final development results`} headers={['Body', 'Parameters', 'MACs', 'Eligible', 'Correct /120', 'CE']} rows={rows.map(row => [kinds[row.kind], integer(row.cost.parameters), integer(row.cost.macs), allowed.includes(row.kind) ? 'Yes' : 'No', row.trace.at(-1).development.correct, number(row.trace.at(-1).development.cross_entropy, 6)])} />
-    <LearningPlot rows={pair} field={field} /><p data-result="architecture-pair">Seed {seed}: plain {pair[0].trace.at(-1).development.correct}/120; {kinds[comparison]} {pair[1].trace.at(-1).development.correct}/120. These outcomes can improve, tie or worsen across seeds.</p>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Exact training and development checkpoint table</h4><NeuralTable caption="Same recorded checkpoints, separate evidence partitions" headers={['Body', 'Update', 'Training correct/280', 'Training CE', 'Development correct/120', 'Development CE']} rows={pair.flatMap(row => row.trace.map(point => [kinds[row.kind], point.step, point.train.correct, number(point.train.cross_entropy, 6), point.development.correct, number(point.development.cross_entropy, 6)]))} /></section>
-    <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Count each convolution and linear layer</h4>{rows.map(row => <NeuralTable key={row.kind} caption={`${kinds[row.kind]} operation counts; omitted operations still cost work`} headers={['Layer', 'Output shape', 'Parameters', 'MACs']} rows={row.cost.layers.map(layer => [layer.layer, layer.output_shape.join(' × '), integer(layer.parameters), integer(layer.macs)])} />)}</section>
-    <div className="neural-buttons"><button onClick={() => { setParameters(2502); setMacs(41920); }}>Exact parallel boundary</button><button onClick={() => { setParameters(4650); setMacs(76192); }}>All four eligible</button><button onClick={() => { setSeed('1'); setParameters(5000); setMacs(60000); setField('correct'); setComparison('residual'); }}>Reset recorded comparison</button></div><p>All final training counts are 280/280. Development is used for inspection and choice; neither these three seeds nor these budgets supply final deployment reliability.</p>
-  </NeuralLab>;
+  const [seed, setSeed] = useState(1), [comparison, setComparison] = useState('residual'), [field, setField] = useState('correct');
+  const rows = measured.fits.filter(row => row.seed === seed);
+  const pair = [rows.find(row => row.kind === 'plain'), rows.find(row => row.kind === comparison)];
+  return <FlowLab id="landmark-comparison" label="Recorded development curves for plain against another body">
+    <LearningPlot rows={pair} field={field} />
+    <FlowControls>
+      <FlowChoice label="Seed" value={seed} onChange={setSeed} options={[[1, '1'], [2, '2'], [3, '3']]} />
+      <FlowChoice label="Plain against" value={comparison} onChange={setComparison} options={architectureKinds.filter(([key]) => key !== 'plain')} />
+      <FlowChoice label="Measure" value={field} onChange={setField} options={[['correct', 'Correct of 120'], ['cross_entropy', 'Cross-entropy']]} />
+    </FlowControls>
+    <FlowReadout>Seed {seed} after 400 updates: plain <strong>{pair[0].trace.at(-1).development.correct}/120</strong> (cross-entropy {number(pair[0].trace.at(-1).development.cross_entropy, 4)}), {kinds[comparison].toLowerCase()} <strong>{pair[1].trace.at(-1).development.correct}/120</strong> ({number(pair[1].trace.at(-1).development.cross_entropy, 4)}). Markers are recorded checkpoints; lines only connect them.</FlowReadout>
+    <NeuralTable caption="The same recorded checkpoints, training and development" headers={['Body', 'Update', 'Training correct/280', 'Training CE', 'Development correct/120', 'Development CE']} rows={pair.flatMap(row => row.trace.map(point => [kinds[row.kind], point.step, point.train.correct, number(point.train.cross_entropy, 6), point.development.correct, number(point.development.cross_entropy, 6)]))} />
+  </FlowLab>;
 }
 
+// Two routes to one class score: average each feature map then weight, or weight then
+// average the class map. Change one feature cell and the class weight of channel B.
+const scoreMaps = [[1, 2, 0, 3], [0, 1, 2, 1]];
 export function LandmarkScoreLab() {
-  const [maps, setMaps] = useState(defaultMaps), [weights, setWeights] = useState([2, -1]), [bias, setBias] = useState(.5), [resetKey, setResetKey] = useState(0);
+  const [cell, setCell] = useState(2), [weightB, setWeightB] = useState(-1);
+  const maps = [scoreMaps[0], scoreMaps[1].map((value, i) => i === 2 ? cell : value)];
+  const weights = [2, weightB], bias = .5;
   const result = signedScoreMap(maps, weights, bias);
-  return <NeuralLab title="Move a feature and reconcile two routes to the score" id="landmark-score"><p>Constructed two-channel head. Amber cells have positive contributions; dashed cells have negative contributions. Numbers, not color intensity, encode the exact quantity.</p><div className="neural-two">{maps.map((map, i) => <MapEditor key={`${resetKey}-${i}`} title={`Score feature ${'AB'[i]}`} min={-8} max={8} values={map} onChange={value => setMaps(previous => previous.map((entry, channel) => channel === i ? value : entry))} />)}</div><div className="neural-controls">{weights.map((weight, i) => <NeuralNumber key={i} label={`Class weight ${'AB'[i]}`} value={weight} onChange={value => setWeights(previous => previous.map((entry, channel) => channel === i ? value : entry))} min={-4} max={4} step={.25} />)}<NeuralNumber label="Class bias" value={bias} onChange={setBias} min={-4} max={4} step={.25} /></div>
-    <div className="landmark-three"><TileMap values={result.contributions[0]} title="Weight A × feature A" /><TileMap values={result.contributions[1]} title="Weight B × feature B" /><TileMap values={result.totalMap} title="Sum: class activation map" /></div><div className="neural-result" data-result="score"><p>Average then combine: [{result.means.map(value => number(value)).join(', ')}] · [{weights.map(value => number(value)).join(', ')}] + {number(bias)} = {number(result.viaFeatures)}.</p><p>Combine then average: mean([{result.totalMap.map(value => number(value)).join(', ')}]) + {number(bias)} = {number(result.viaMap)}.</p></div>
-    <p>A larger feature can lower this class’s score when its weight is negative. The map is not a probability or a causal map of the original image.</p><div className="neural-buttons"><button onClick={() => setMaps([[1, 2, 0, 3], [0, 1, 6, 1]])}>Increase negative-weight cell</button><button onClick={() => setMaps(previous => previous.map(map => [...map].reverse()))}>Rotate feature positions 180°</button><button onClick={() => setWeights([0, 0])}>Zero class weights</button><button onClick={() => { setMaps(defaultMaps); setWeights([2, -1]); setBias(.5); setResetKey(value => value + 1); }}>Reset score construction</button></div>
-  </NeuralLab>;
+  return <FlowLab id="landmark-score" label="A class score from feature maps, by two routes">
+    <div className="landmark-score-flow">
+      <div className="flow-columns-2"><TileMap values={maps[0]} title="Feature A (class weight 2)" /><TileMap values={maps[1]} title={`Feature B (class weight ${signed(weightB, 2)})`} /></div>
+      <p className="landmark-score-arrow" aria-hidden="true">↓ multiply each map by its class weight</p>
+      <div className="flow-columns-2"><TileMap values={result.contributions[0]} title="2 × feature A" /><TileMap values={result.contributions[1]} title={`${signed(weightB, 2)} × feature B`} /></div>
+      <p className="landmark-score-arrow" aria-hidden="true">↓ add the two maps cell by cell</p>
+      <TileMap values={result.totalMap} title="Class activation map" />
+    </div>
+    <FlowControls>
+      <FlowSlider name="Feature B, bottom-left cell" value={cell} onChange={setCell} min={0} max={8} step={1} format={value => String(value)} />
+      <FlowSlider name="Class weight for B" value={weightB} onChange={setWeightB} min={-3} max={3} step={.5} format={value => signed(value, 2)} />
+    </FlowControls>
+    <FlowReadout>Average then weight: [{result.means.map(v => signed(v, 4)).join(', ')}] · [2, {signed(weightB, 2)}] + 0.5 = <strong>{signed(result.viaFeatures, 4)}</strong>. Weight then average: mean of the class map + 0.5 = <strong>{signed(result.viaMap, 4)}</strong>. The two routes always agree.</FlowReadout>
+  </FlowLab>;
 }
 
+// Saved seed-1 features and head of the parallel model, loaded only near the viewport.
 export function LandmarkRecordedMaps() {
-  const [teachingSection, ready] = useLessonViewport(), [data, setData] = useState(null), [error, setError] = useState(false), [attempt, setAttempt] = useState(0), [kind, setKind] = useState('parallel'), [specimen, setSpecimen] = useState('1'), [classId, setClassId] = useState('5');
+  const [teachingSection, ready] = useLessonViewport(), [data, setData] = useState(null), [error, setError] = useState(false), [attempt, setAttempt] = useState(0), [specimen, setSpecimen] = useState(1);
   useEffect(() => {
     if (!ready || data) return;
     const controller = new AbortController(); setError(false);
     fetch(landmarkAsset + 'recorded-feature-maps.json', { signal: controller.signal }).then(response => { if (!response.ok) throw new Error('Record request failed'); return response.json(); }).then(setData).catch(reason => { if (reason.name !== 'AbortError') setError(true); });
     return () => controller.abort();
   }, [ready, data, attempt]);
-  const fit = data?.find(row => row.kind === kind), sample = fit?.observations[Number(specimen)];
-  const score = sample ? signedScoreMap(sample.feature_maps.map(map => map.flat()), fit.head_weight[Number(classId)], fit.head_bias[Number(classId)]) : null;
-  const predicted = sample ? sample.logits.indexOf(Math.max(...sample.logits)) : 0;
-  return <section className="neural-program lesson-teaching-section"  data-lesson-teaching="" ref={teachingSection}><h4 className="lesson-teaching-section__title">Inspect actual trained feature maps, including a mistake</h4>{ready && !data && (error ? <p role="alert">Saved maps could not load. <button onClick={() => setAttempt(value => value + 1)}>Retry saved maps</button></p> : <p role="status">Loading only the saved feature/head observations…</p>)}{sample && <section className="neural-lab" data-lab="landmark-recorded-maps"><h3>Recorded seed-1 image and head arithmetic</h3><div className="neural-controls"><NeuralSelect label="Saved architecture" value={kind} onChange={value => { setKind(value); }} options={architectureKinds} /><NeuralSelect label="Saved specimen" value={specimen} onChange={setSpecimen} options={[['0', 'Shared correctly classified specimen'], ['1', 'First saved mistake for this model']]} /><NeuralSelect label="Class map" value={classId} onChange={setClassId} options={Array.from({ length: 10 }, (_, i) => [String(i), `Class ${i}`])} /></div>
-      <p>Source {sample.source_id}; actual digit {sample.actual}; model chooses {predicted}. Current class map: {classId}. The class selector changes head weights; the image/features stay fixed.</p><div className="neural-two"><div><h4>Original 8 × 8 observation</h4><div className="landmark-pixels" role="img" aria-label={`Source ${sample.source_id}, digit ${sample.actual}`}>{sample.input.flat().map((value, i) => <span key={i} style={{ background: `rgb(${255 * value} ${255 * value} ${255 * value})` }} />)}</div><p className="landmark-note">Saved normalized intensities; raw2×2 maps below are not enlarged into a false pixel-precise explanation.</p></div><TileMap values={score.totalMap} title={`Class ${classId} raw 2 × 2 score map`} /></div>
-      <p className="neural-result" data-result="recorded-map">Mean map + bias = {number(score.viaMap, 7)}; recorded logit = {number(sample.logits[Number(classId)], 7)}; difference {number(score.viaMap - sample.logits[Number(classId)], 8)}. Recorded class probability {number(sample.probabilities[Number(classId)], 7)} comes from softmax across all ten logits, not from normalizing map cells.</p>
-      <NeuralTable caption="Compare competing classes on the same saved feature tensor" headers={['Class', 'Recorded logit', 'Bias', 'Probability']} rows={sample.logits.map((logit, i) => [`${i}${i === sample.actual ? ' · actual' : ''}${i === predicted ? ' · chosen' : ''}`, number(logit, 6), number(fit.head_bias[i], 6), number(sample.probabilities[i], 6)])} />
-      <section data-lesson-teaching="" className="lesson-teaching-section"><h4 className="lesson-teaching-section__title">Inspect all16 raw feature maps and current class weights</h4><div className="landmark-map-collection">{sample.feature_maps.map((map, i) => <div key={i}><TileMap values={map.flat()} title={`Channel ${i}`} /><p className="landmark-note">Class weight {number(fit.head_weight[Number(classId)][i], 6)}</p></div>)}</div></section><p>These are fixed saved features and head weights. No complete backbone or arbitrary image inference runs here. Recomputing the linear score is supported; changing an original image would require the downloadable program and its actual trained model.</p><button onClick={() => { setKind('parallel'); setSpecimen('1'); setClassId('5'); }}>Reset saved-map view</button>
-    </section>}</section>;
+  const fit = data?.find(row => row.kind === 'parallel'), sample = fit?.observations[specimen];
+  let chosen = 0, other = 0;
+  if (sample) {
+    const order = sample.logits.map((logit, i) => [logit, i]).sort((a, b) => b[0] - a[0]).map(([, i]) => i);
+    chosen = order[0];
+    other = sample.actual !== chosen ? sample.actual : order[1];
+  }
+  const mapFor = classId => signedScoreMap(sample.feature_maps.map(map => map.flat()), fit.head_weight[classId], fit.head_bias[classId]);
+  return <section className="flow-lab landmark-recorded" ref={teachingSection} aria-label="Saved trained feature maps and class maps, including a mistake">
+    {ready && !data && (error ? <p role="alert">Saved maps could not load. <button onClick={() => setAttempt(value => value + 1)}>Retry saved maps</button></p> : <p role="status">Loading only the saved feature and head observations…</p>)}
+    {sample && <>
+      <div className="landmark-recorded-row">
+        <div className="landmark-map"><p className="landmark-map-title">Source {sample.source_id}: actual {sample.actual}</p><div className="landmark-pixels" role="img" aria-label={`Source ${sample.source_id}, digit ${sample.actual}, saved 8 × 8 intensities`}>{sample.input.flat().map((value, i) => <span key={i} style={{ background: `rgb(${255 * value} ${255 * value} ${255 * value})` }} />)}</div></div>
+        <TileMap values={mapFor(chosen).totalMap} title={`Class ${chosen} map (chosen)`} />
+        <TileMap values={mapFor(other).totalMap} title={`Class ${other} map (${other === sample.actual ? 'actual' : 'runner-up'})`} />
+      </div>
+      <FlowControls><FlowChoice label="Saved specimen" value={specimen} onChange={setSpecimen} options={[[0, 'Correct: source 251'], [1, 'Mistake: source 379']]} /></FlowControls>
+      <FlowReadout>The parallel model chooses <strong>{chosen}</strong>. Both maps come from the same 16 saved feature maps with different head weights. Class {chosen}: mean map + bias = {signed(mapFor(chosen).viaMap, 6)}, recorded logit {signed(sample.logits[chosen], 6)}, probability {signed(sample.probabilities[chosen], 4)}. Class {other}: {signed(mapFor(other).viaMap, 6)} against {signed(sample.logits[other], 6)}, probability {signed(sample.probabilities[other], 4)}. Probabilities come from softmax across all ten logits, not from the map cells.</FlowReadout>
+      <NeuralTable caption="All ten recorded logits for this saved image" headers={['Class', 'Logit', 'Probability']} rows={sample.logits.map((logit, i) => [`${i}${i === sample.actual ? ' · actual' : ''}${i === chosen ? ' · chosen' : ''}`, signed(logit, 6), signed(sample.probabilities[i], 6)])} />
+    </>}
+  </section>;
 }

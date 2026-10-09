@@ -1,0 +1,68 @@
+{
+  "status": "PASS_MI1_MI2_MI3_CLOSED_PENDING_NORMAL_INTEGRATION",
+  "reviewer": "/root",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private-source-r2.json",
+    "sha256": "7e33960e89181ad82a2d46613b93c3f90eeb8d85fd7b659fdf9ac4d6ee70a9cd",
+    "bytes": 426347
+  },
+  "wholeReview": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-review-r1.json",
+    "sha256": "072feb26011d3a83879002f963503a06ecc7ee37f8a56c88872a8c9e6cba8287",
+    "bytes": 30648
+  },
+  "authorReady": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-correction-ready-r2.json",
+    "sha256": "3891f464cd7ff5022155e307fb50d7ab21220b95013d37d484326ce986a8ec01",
+    "bytes": 1742
+  },
+  "authorReport": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-correction-r2.md",
+    "sha256": "53d9696ed5b368d524469f51b07cc5d508e3faa41acb330b82ffb7354363ccaf",
+    "bytes": 6151
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-same-review-r2.md",
+    "sha256": "ac95152ba247d59514543e2041f2751e038f4ca69fd23328b237a5e03377e5ad",
+    "bytes": 4115
+  },
+  "freshChecks": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-same-r3/observations.json",
+    "sha256": "916c35e5f354eea78472a03996974bc1b53bb26dc8bfc9a716b197b431f67a25",
+    "bytes": 5441
+  },
+  "projection": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-projection-r1.json",
+    "sha256": "3ff4db70690e9d55634e35d193ecf946198d2bc65435a0087e760a23511146a2",
+    "bytes": 607
+  },
+  "captures": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-same-r3/nuisance-initial.jpg",
+      "sha256": "0ddffa68673c88b7bc2ba770c4e8aae6e7d71ffa985c2382131735812f0fc384"
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-same-r3/nuisance-successor.jpg",
+      "sha256": "1ef9996fe1315d71a1926063ef85a717e47d192e81967ebbb45a7aace49e03d9"
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-same-r3/tiny-scaled-enlarged.jpg",
+      "sha256": "4609efc327660593e237b3d52541111612e10454832e08dcbe27dd924cfee685"
+    }
+  ],
+  "additionalPartialCapture": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-same-r3/nuisance-successor-replacement.jpg",
+    "sha256": "1ef9996fe1315d71a1926063ef85a717e47d192e81967ebbb45a7aace49e03d9",
+    "bytes": 97701
+  },
+  "findings": {
+    "MI1": "closed",
+    "MI2": "closed",
+    "MI3": "closed"
+  },
+  "qualifications": [
+    "Two successor captures contain compositor omissions; only visible marker credited. Normal Reader will inspect complete plot.",
+    "Private constrained enlarged column is not normal sidebar acceptance.",
+    "No new OS clipboard/download claim or old science replay."
+  ]
+}

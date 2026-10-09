@@ -1,0 +1,578 @@
+{
+  "status": "DIFFERENT whole private runtime review complete; consolidated MI1-MI3 require correction",
+  "reviewer": "Root; different runtime author",
+  "source": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private-source-r1.json",
+    "sha256": "aaae304fb2fedd956077f3177cdcbbfa9e0b4431d084e56c069c1ee66a468db5",
+    "bytes": 421852
+  },
+  "report": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-review-r1.md",
+    "sha256": "85c6de2e77a6152459b1e2b8a8a3d0e084622f4fb44c10ea26a12e5f588a346e",
+    "bytes": 10105
+  },
+  "checks": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-source-check-r1.json",
+      "sha256": "fddb396dfea76366cb8e307a61ddf34bb43e4a25dcd1bd73e221cacd24224173",
+      "bytes": 477
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-projection-r1.json",
+      "sha256": "3ff4db70690e9d55634e35d193ecf946198d2bc65435a0087e760a23511146a2",
+      "bytes": 607
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/observations.json",
+      "sha256": "a76605638b2cc614237e5c46a385e241a2bcae837c6703e192a5955154ada0a2",
+      "bytes": 16245
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r1/observations.json",
+      "sha256": "27738925334a71fdacef2a8db4ec1e2417f5de0df6a536de75adef8dad7e3080",
+      "bytes": 2301
+    }
+  ],
+  "scripts": [
+    {
+      "path": "scratch/mi-root-complement-r1.cjs",
+      "sha256": "9b5972b31cf5a1a92413fed02c28b923e857f6317cb4a96492691d692ec9c576",
+      "bytes": 3530
+    },
+    {
+      "path": "scratch/mi-root-source-review-r1.mjs",
+      "sha256": "154d6f13adf2e8904d2401ab60b3bd156945cde1c9b07c149204486eab450b00",
+      "bytes": 2102
+    },
+    {
+      "path": "scratch/mi-root-projection-r1.mjs",
+      "sha256": "5e1cd0e18a9fd47fa738cb105fa5be1d3f935867172242d0edcb5d5c241942c1",
+      "bytes": 2802
+    }
+  ],
+  "personallyViewedImages": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M01-wide-1.jpg",
+      "sha256": "dbbcbb8c9affe47abc36b76aba2b17e3ba91f95339048886cbb312b09e2c72ec",
+      "bytes": 96099
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M02-wide-1.jpg",
+      "sha256": "2fef5c429758e8d8cd74d8103a70cf276525b543b8e892807f56639838a7f14c",
+      "bytes": 102914
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M03-wide-1.jpg",
+      "sha256": "5f00103fff658f28e08d2405cf58194b9c576bd5502a82a6c2a846d8d8a5b630",
+      "bytes": 76755
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M03-wide-2.jpg",
+      "sha256": "f0b4c0b594ce46a4bc7dba91d825f954ef0ff456a49e9b2a6439686d23d1eb3e",
+      "bytes": 125186
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M04-wide-1.jpg",
+      "sha256": "06ba302f16a6546a450286d94e8e5cffd392fbafbb2424787d2c70b2a6277281",
+      "bytes": 92730
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M05-wide-1.jpg",
+      "sha256": "3770262d9384b448c5abc81bb8fe45fac78e4d54f281e4e1ef6b39de576e8549",
+      "bytes": 102406
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M06-wide-1.jpg",
+      "sha256": "5f0a2b19ee0fa6c382430d6679a4c148835d24c206351cfbd2f881fa81083ca6",
+      "bytes": 62101
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M06-wide-2.jpg",
+      "sha256": "7b21da49688bcc99656d0bda117a107a10fa64a10bbdf15ab6013affb46aae83",
+      "bytes": 94946
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M07-wide-1.jpg",
+      "sha256": "cf4114dd3b09a3df89a9dd2d5d658da969d86274aabb257fb7d6339d867bcdeb",
+      "bytes": 73462
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M07-wide-2.jpg",
+      "sha256": "04a063a98a0f17851aa95ede0907791ab832a472ba1b3b9d23fba144471ce608",
+      "bytes": 122756
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M08-wide-1.jpg",
+      "sha256": "31b11d218cdf4ae8884ce259388daecb067794cc1bfd48d96bf9f61e4f947cf9",
+      "bytes": 113118
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M09-wide-1.jpg",
+      "sha256": "7d387e770682f0c585a0edd26dedf0741e376fde3d1c60a8d350f649f9cd3cad",
+      "bytes": 101080
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M10-wide-1.jpg",
+      "sha256": "f9b408bb33081b9d7f9f4fe830c0a0613a65f1a6e47289e356b371ec7c3a9680",
+      "bytes": 62512
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M11-wide-1.jpg",
+      "sha256": "af8e7d54cb30cfe898bb84cd4803a45a83b065a2ee589923984383d1b7ec9079",
+      "bytes": 115639
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M12-wide-1.jpg",
+      "sha256": "b3a8561de60b27d0b4cf4ea5f1d49e60952e58715a4f2550f707fdef32abb352",
+      "bytes": 88275
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M13-wide-1.jpg",
+      "sha256": "17b9fee5f4bc1eefcf926859d1ba2a10d9b41a6072929325f77c0c3715127bd8",
+      "bytes": 61889
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M13-wide-2.jpg",
+      "sha256": "b8a5aff807536b22b2cf0baf0f1bb2eb6a06848d09e978b11c95ef9cc065fdf5",
+      "bytes": 91601
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M14-wide-1.jpg",
+      "sha256": "b0c14e20ec750e168504663b97fb0303113eb1700146bf49b789bd2162028bcc",
+      "bytes": 91465
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M15-wide-1.jpg",
+      "sha256": "522f1bfb3d868c2b7f38a8ec97bf69f5e8d8828d565a3a13ecf831bda92f0deb",
+      "bytes": 121731
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M16-wide-1.jpg",
+      "sha256": "bfaa63a154cf6ec0b2b4e0d2c6d2a77dd2a5ce561977bba110e8dbba2c19e862",
+      "bytes": 65509
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M16-wide-2.jpg",
+      "sha256": "ccec8d4b6f5c9476288a6ce9ae764f73b471bf9204d821acecca5118e158a439",
+      "bytes": 121256
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M17-wide-1.jpg",
+      "sha256": "7eea980e9f9ea78e1ae1d4ee85cf8ee1d8218cbcfc8b89063e0576b4c606f5e7",
+      "bytes": 110375
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M18-wide-1.jpg",
+      "sha256": "c59e5bff6380d363be2b51dc289716391ef4c2be743602ca969b9b526de7eebc",
+      "bytes": 107922
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M19-wide-1.jpg",
+      "sha256": "0ece4356475388c3dde8c0992d727ee8ec7bad9b31eef942a1edfb648d8e71cd",
+      "bytes": 97763
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M20-wide-1.jpg",
+      "sha256": "52eb5284a223b6178b4b189d48e0c6ee62180489abac37ea1ec20289e47f899e",
+      "bytes": 112344
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M21-wide-1.jpg",
+      "sha256": "d068282ca7c2676e2b0467f84ee75fff2c9a19a1289d96a72211259c3800966c",
+      "bytes": 127084
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M22-wide-1.jpg",
+      "sha256": "cdbaf1ad7fca9e4b843ebbb1daefe34ab2b1c64e95f833ac9cbe3c4d3e8a1300",
+      "bytes": 108457
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M23-wide-1.jpg",
+      "sha256": "c934d4a6c8921fee78dd01f7b884e37e5f5f38abf77f3dbcdb61bf7499a390d1",
+      "bytes": 77423
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M23-wide-2.jpg",
+      "sha256": "858c4591a56a9aeb784ae4dee81171c359663bcf5200c053402dc86a4d231c67",
+      "bytes": 91029
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M23-wide-3.jpg",
+      "sha256": "9b06b1fe5f8818cfeb2260b1f8e23b98db8a07001daaccbd4dc00ce61d243c55",
+      "bytes": 103936
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M23-wide-4.jpg",
+      "sha256": "32e4096ed3e72d87c6f801c2aeb79cfd43b171fc8b6c0025d599bd64a8b4a700",
+      "bytes": 98879
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M24-wide-1.jpg",
+      "sha256": "e14f26261f40aea84403b00bc307e6d0eaffbb41570b50a00688fe0326ea0d81",
+      "bytes": 105133
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M25-wide-1.jpg",
+      "sha256": "a7b792aaca429e079d2d2d59641071aaec4d1951bc9adcebfb518ed4086b1429",
+      "bytes": 97241
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M26-wide-1.jpg",
+      "sha256": "c61d93353e502a0c995949128fc556ddc807ecaccdf4f7ef45cd72d7d9471619",
+      "bytes": 38728
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M27-wide-1.jpg",
+      "sha256": "7eafe633359c7595eb89fa2f4515e9edb8d4ce0b677b38cda8042b6ba7983fd9",
+      "bytes": 115881
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M28-wide-1.jpg",
+      "sha256": "8072aca6962b929ed83fdde3a4b4ca64ef6697045cd71b35dcbe31d9a0880eb7",
+      "bytes": 96572
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M28-wide-2.jpg",
+      "sha256": "fd180da1985691cae4949b9cbbbf17880c4aafa13a8bd3021d58602c76025e45",
+      "bytes": 95702
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M28-wide-3.jpg",
+      "sha256": "c4c650a91980af62a8c1d6e24ece599ffa96e1853aa33bcb858649b95e73f37a",
+      "bytes": 132879
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M29-wide-1.jpg",
+      "sha256": "53bb02654339a36ee976b8a003eb324dd578037375d817e455b64f1bae09394c",
+      "bytes": 99905
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M30-wide-1.jpg",
+      "sha256": "56b0b3b6d45384a3eccda3e922eb2349846b97973440c800578b3500e9841ea6",
+      "bytes": 93960
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M30-wide-2.jpg",
+      "sha256": "05b77e46b477589da83581d58c50fa5fa9b50ccb54aac9294a1ac583748540f7",
+      "bytes": 112988
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M31-wide-1.jpg",
+      "sha256": "e5ba131d99af774dc38e75e27ab5432fd67afaa7e967a5d8e744064e64fae236",
+      "bytes": 94685
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M31-wide-2.jpg",
+      "sha256": "add3b1b78be08d7cd5541a09a4da5a0c4f1914cd01161acf4ccc7d5dfb2edef6",
+      "bytes": 110926
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M32-wide-1.jpg",
+      "sha256": "494708518e04c6c4bf4dbada2e0149c10d80e3793c8f46571250c581e98d9ac9",
+      "bytes": 115535
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M33-wide-1.jpg",
+      "sha256": "9e6fb2022d2eda57e76024ccb58a8748d85ddcb68e56deaebe53e8ea8ed7a45b",
+      "bytes": 87471
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M33-wide-2.jpg",
+      "sha256": "7ee88304716ca4f2d8d1d11c0473e3d28fe0b9db883ddfdcb8a9ec34434612d9",
+      "bytes": 98316
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M34-wide-1.jpg",
+      "sha256": "75f2cee6c4bfe855902f6e2fba646f67d1d007df001937bda0fe656955919696",
+      "bytes": 104468
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M35-wide-1.jpg",
+      "sha256": "da1b6d6483b3ab9b6d7341b2d28407514ef084cf266d4f88d5b770229f1fdc40",
+      "bytes": 100425
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M36-wide-1.jpg",
+      "sha256": "726b3b32cfa3472b8cf8e1bb708106d5c254fce1a0c74344a65acd72b68b01dc",
+      "bytes": 103787
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M37-wide-1.jpg",
+      "sha256": "3f310dbaf7068ac1f911ab3eaec7c69370339798960f6cc095f1492eb8b514e0",
+      "bytes": 87988
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M38-wide-1.jpg",
+      "sha256": "765c4268d1f0cfef5b664af53413ca632998daa02f12a15a329fc882575c1768",
+      "bytes": 73070
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M38-wide-2.jpg",
+      "sha256": "b00d8d4ec92089472c75e43bee8acfe7652b45dac484eecde915655af45a3f30",
+      "bytes": 94768
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M39-wide-1.jpg",
+      "sha256": "94a58a25581f16c49075f4f159e4530cfb4ac7d5015416df0ae86ae896e11132",
+      "bytes": 103910
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M40-wide-1.jpg",
+      "sha256": "939e4139d0bce8a629fc448e06587b6ef166507674196b97c79763d0d48db7d1",
+      "bytes": 44570
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M40-wide-2.jpg",
+      "sha256": "d384e5ca15e2c636e14c4749a554a5673d13dc1704d9eac6230ec29cbffde77a",
+      "bytes": 119618
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M41-wide-1.jpg",
+      "sha256": "86219e988fa1b36a974aec8b61f12f8ab1f6e18af1f703f061191651e5b06f55",
+      "bytes": 56136
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M41-wide-2.jpg",
+      "sha256": "3490dde6447cd469e5e73df87cef270a4cc72191366d73e7b408cbf3e6f95bde",
+      "bytes": 76926
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M42-wide-1.jpg",
+      "sha256": "9716803ae618214dc5d5467c3f53b55f1356d79429ae4bce41b1313df682ddb6",
+      "bytes": 61030
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M42-wide-2.jpg",
+      "sha256": "e9def1f6dc410e49ee828a6adc6da4020ff19527d258feede4c6c55cc868687f",
+      "bytes": 114274
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M43-wide-1.jpg",
+      "sha256": "89a61c554d70cd3cb77174df8df4ea7b9fc241c70ee8c2ee34445acc3b23c722",
+      "bytes": 120412
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M44-wide-1.jpg",
+      "sha256": "27435c8b320f87cc5710498cada9c3b26b7753ddf642c7a24a886fb92739bebc",
+      "bytes": 70046
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M44-wide-2.jpg",
+      "sha256": "42d85e87d0b90b2aa60d7ec9a8333a79fd84a1037ebb9f7bf4fab7b3b24504c9",
+      "bytes": 126596
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M45-wide-1.jpg",
+      "sha256": "695b923d69f8f37b77ab2321c1d540acf2c048e5154ea9e270e4fe32153a0f88",
+      "bytes": 66060
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M45-wide-2.jpg",
+      "sha256": "06df9496249f77216458808dbed3f1858f9215521ffe5c3021d4a7853b022e12",
+      "bytes": 58013
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M45-wide-3.jpg",
+      "sha256": "0f6b01bede2e175327eb5d441d9549fc9136b4d413a08438f2e3b60880ef9132",
+      "bytes": 98403
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M46-wide-1.jpg",
+      "sha256": "0295465606d2456953ddb08d9ac57b6d32f7258e3f1891f402c45e4475718b6c",
+      "bytes": 140955
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M47-wide-1.jpg",
+      "sha256": "967fcadf8dba0c70ea453fce549f5d5c9eecfe34c4dd34ec9d06c156ad4a5fd1",
+      "bytes": 108776
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M48-wide-1.jpg",
+      "sha256": "517155d306fe086883c4c24dd5e2db057229627782a587141f5a9eccf6891938",
+      "bytes": 72897
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M48-wide-2.jpg",
+      "sha256": "723133506abd3d499f108c6d95ea9bb68b596a34920a44097f1e0776966e7905",
+      "bytes": 147924
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M49-wide-1.jpg",
+      "sha256": "126ed0f12dadc47cdcc95d9fff53a34747c0beadf616fce996c6d03e9ac94048",
+      "bytes": 132619
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M50-wide-1.jpg",
+      "sha256": "d54799e872c1a2eb29696622626d68edf69a3b1c92834013d67505eb7aef77aa",
+      "bytes": 129949
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M51-wide-1.jpg",
+      "sha256": "2d777aa093c3db40c86ac0b0485139f445bd7c4f768cd5ed1609512444359725",
+      "bytes": 143195
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-reading-r3/M52-wide-1.jpg",
+      "sha256": "e8993c7c8413582131c00786ec2c35eda4df6799551d92207ba3c78e3975afb0",
+      "bytes": 127570
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r5/M09-enlarged-0.jpg",
+      "sha256": "6256a15f240b3d741b35392875312f86f94ac5656b97834dfa3a68352b03c4b1",
+      "bytes": 51932
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r5/M34-wide-0.jpg",
+      "sha256": "baa10b60a53846a99fce50167f6501378980cd38b3458c55462e10b9a993d559",
+      "bytes": 87502
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r5/M37-wide-0.jpg",
+      "sha256": "a3b107b95b63f30212ffb20438e3b64777efc6e5e43bdfef215e6ed1f62dffca",
+      "bytes": 86973
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r5/M37-wide-950.jpg",
+      "sha256": "f5583fef790a5501674fb30c48c3b7262cbee6335a2c5563ac298987cce25198",
+      "bytes": 157897
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r5/M38-wide-1000.jpg",
+      "sha256": "4ef9acc281563d0af0e17e1d17af284159812640ee5ba0fdb0276ddfc2214440",
+      "bytes": 108305
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r5/M48-wide-0.jpg",
+      "sha256": "fcfa6aca850ab0f5ff443fa1a63c85df9d125799441b4ebd2cbfadca3402c4fa",
+      "bytes": 81658
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r6/bounds-poor-aux.jpg",
+      "sha256": "d0fff6d4cfae8f2efbcb44c4c75d36c64f57a65536ea31540639fcfcf84dbcb7",
+      "bytes": 70523
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r6/gaussian-scale10.jpg",
+      "sha256": "cea6176037beea6bb07ea736661bb40781db5f6a6f70575bb45aed99c8682a59",
+      "bytes": 29258
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r6/gaussian-scale10-density.jpg",
+      "sha256": "f97c1836c1c2c907214a660b11774c75375990fd6eb3bc68a5973370aa04e7cf",
+      "bytes": 40407
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r6/observed2009grouped.jpg",
+      "sha256": "dd66c4cdbd1c2b57d2e0b28138e67b0c3e4a87cf3b4f1828e574f08d0f8692ac",
+      "bytes": 52266
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r7/donors-enlarged.jpg",
+      "sha256": "78771ee7da61f307c27267e9fb1b961c91dc13955c0cd039b975a357c8d29981",
+      "bytes": 59621
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r7/donors-paths-enlarged.jpg",
+      "sha256": "2acf85dab780ac75ed0f7f3314c95f27305023999cc48644381dfbeff0266f27",
+      "bytes": 39373
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-author-final-r7/xor-enlarged.jpg",
+      "sha256": "6bd66287725ed5750e4970df82807e708533bfafb741f3a26c1e1354c75f86a4",
+      "bytes": 63430
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/nuisance-start.jpg",
+      "sha256": "6dff34fbd814e8421347edcd3ff68df2d7e72ad0a6a410e02e36346381375261",
+      "bytes": 92937
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/tiny-positive-mi.jpg",
+      "sha256": "0ff1f18ee3c7feefbc5dfd332060ee620b1739f9e9cec03265639271c53f70ad",
+      "bytes": 66731
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/tiny-positive-density.jpg",
+      "sha256": "97f703d42061daf2ce139cecba02bd3dfddcb4c11ec7b45ff77becdf6677d0a9",
+      "bytes": 63248
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/tiny-positive-density-phone.jpg",
+      "sha256": "85c57f47c79487de1920181ae22426a6ad88326ed29e492b51acdb3115210048",
+      "bytes": 20403
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/default-density-phone.jpg",
+      "sha256": "e8195502b52001a1335d195ef11faa92437bf52cd8d6a216ce3d44211481e440",
+      "bytes": 25099
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M01-phone.jpg",
+      "sha256": "0acef3abcf21204ebcf700220f91b80a5a5266941d345e16e479944e6ad2e960",
+      "bytes": 68498
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M12-phone.jpg",
+      "sha256": "5a3b1a53b35ca98d30a4d928407cc7ac8c673bb3a76ccb988e16d0cd841e6722",
+      "bytes": 52745
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M28-phone.jpg",
+      "sha256": "9c6badba72e0ebf46656a80236862c213647cad33d5c9a1128aa20b30c066e58",
+      "bytes": 70189
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M35-phone.jpg",
+      "sha256": "d61bbf524d1510b10ad80d9ee857ad359248a0a84091d1dfb26f9f657b90b7df",
+      "bytes": 46053
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M38-phone.jpg",
+      "sha256": "5201ab6473181cae144bd07880f3e9584c440c7fc91356227392389cb46926cb",
+      "bytes": 58397
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M45-phone.jpg",
+      "sha256": "72e109a1a49919502fcac36cb50f8b60861b15e9e6c7b9ae958ba00403b2f60a",
+      "bytes": 55727
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M48-phone.jpg",
+      "sha256": "0f5899eeb9f153f86888dc30f157015d212fa50430ab2d05c5a895fdf1fd47a4",
+      "bytes": 44723
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M25-enlarged-constrained.jpg",
+      "sha256": "e2c0fe7693c753e1d65492b51d7456ffa888ef3cb2fd1e7c82a43c3f20981803",
+      "bytes": 55449
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M28-enlarged-constrained.jpg",
+      "sha256": "15ce4a05041e52ae18b9ef619cc9c743b942a8be08f021a0220da92140effae0",
+      "bytes": 56532
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M33-enlarged-constrained.jpg",
+      "sha256": "d162281526049a4ed7c81cd2134093d7ec36403247fffca0843f78e1fd30aaff",
+      "bytes": 59491
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M42-enlarged-constrained.jpg",
+      "sha256": "17b9e8875007f18c848bb6543f2938c27f1cbb49cbcb95d5e9e06da0b7782255",
+      "bytes": 28716
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-independent-native-r2/M48-enlarged-constrained.jpg",
+      "sha256": "4857c748f12a24c2c6f7ed1a81d964102ec89c0d94be04fa58db9467de1890f7",
+      "bytes": 51430
+    }
+  ],
+  "findings": [
+    "MI1 M33 selected nuisance state outside plotted range and lacks identity",
+    "MI2 M41/M42 supported tiny-noise density endpoints collapse to identical labels",
+    "MI3 M42 mapped event endpoint/probability correspondence missing"
+  ],
+  "scientificMainsReplayed": 0,
+  "normalIntegrationAccepted": false,
+  "limits": "Whole source and composed actual paint review. Fresh private native complement; not exhaustive pixels or learner study. Enlarged private width is constrained and not normal sidebar integration."
+}

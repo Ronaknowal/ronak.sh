@@ -7,7 +7,7 @@ import { XFigure, XArrow, XNode, XValues, XPlot, XMatrix, XImage, f, vec } from 
 import { readerForward } from '../../data/xlstm-memory-models.js';
 const base = '/learn-code/xlstm-extended-lstm/';
 export const readerIds = ['lstm', 'slstm', 'mlstm'].flatMap(kind => [19, 43].map(seed => `${kind}_seed${seed}`));
-function useNear() {
+export function useNear() {
   const ref = useRef(null),
     [near, setNear] = useState(false);
   useEffect(() => {
@@ -29,10 +29,15 @@ function useNear() {
   }, []);
   return [ref, near];
 }
-function useAsset(name, enabled, retry) {
+const readerAssetCache = new Map();
+export function useAsset(name, enabled, retry) {
   const [state, setState] = useState({});
   useEffect(() => {
     if (!enabled) return;
+    if (readerAssetCache.has(name)) {
+      setState({name, data: readerAssetCache.get(name)});
+      return;
+    }
     const controller = new AbortController();
     setState({
       name
@@ -42,10 +47,10 @@ function useAsset(name, enabled, retry) {
     }).then(r => {
       if (!r.ok) throw Error('asset');
       return r.json();
-    }).then(data => setState({
-      name,
-      data
-    })).catch(error => {
+    }).then(data => {
+      readerAssetCache.set(name, data);
+      setState({name, data});
+    }).catch(error => {
       if (error.name !== 'AbortError') setState({
         name,
         error: true

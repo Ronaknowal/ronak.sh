@@ -1,0 +1,43 @@
+.lesson-flow .mp-flow-pan {
+  overflow-x: auto;
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  scrollbar-color: #8d7343 #151515;
+  scrollbar-width: auto;
+  margin-block: 1rem;
+}
+.lesson-flow .mp-flow-pan:focus-visible { outline: 2px solid #e4b752; outline-offset: 4px; }
+.lesson-flow .mp-flow-drawing {
+  display: block;
+  width: 44rem;
+  max-width: none;
+  height: auto;
+  overflow: visible;
+}
+.lesson-flow .mp-flow-drawing text { font-family: inherit; font-size: 16px; }
+.lesson-flow .mp-flow-drawing text:not([fill]) { fill: #eee; }
+.lesson-flow .mp-flow-pan[data-overflow="true"]::after {
+  content: 'Scroll within the drawing to follow all labelled parts.';
+  display: block;
+  color: #b9b9b9;
+  font-size: .95rem;
+  margin-block: .6rem;
+}
+.lesson-flow .mp-flow-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+.message-passing-flow-lesson .flow-controls :is(button, input, select) { min-height: 2.75rem; }
+.lesson-flow .mp-flow-sequence { width: min(100%, 21rem); margin-inline: auto; }
+.lesson-flow .mp-flow-values { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.lesson-flow .mp-flow-values :is(th, td) {
+  padding: .65rem .35rem;
+  border-bottom: 1px solid #343434;
+  text-align: start;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+.lesson-flow .mp-flow-values thead th { color: #e4b752; font-weight: 500; }
+.lesson-flow .mp-flow-values tbody th { font-weight: 400; }

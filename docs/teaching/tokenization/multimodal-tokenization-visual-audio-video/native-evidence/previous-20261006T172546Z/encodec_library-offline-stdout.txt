@@ -1,0 +1,35 @@
+{
+  "parameter_origin": "random-offline-shape",
+  "bandwidth_kbps": 6.0,
+  "source_sample_rate": 16000,
+  "model_sample_rate": 24000,
+  "source_channels": 2,
+  "model_channels": 1,
+  "valid_resampled_samples": 6002,
+  "processor_input_shape": [
+    1,
+    1,
+    6002
+  ],
+  "padding_mask_shape": [
+    1,
+    6002
+  ],
+  "audio_codes_shape": [
+    1,
+    1,
+    8,
+    19
+  ],
+  "audio_scales_shapes": [
+    null
+  ],
+  "last_frame_pad_length": 0,
+  "decoder_output_shape": [
+    1,
+    1,
+    6002
+  ],
+  "trimmed_output_samples": 6002,
+  "round_trip_mse_mean": 0.05565064400434494
+}

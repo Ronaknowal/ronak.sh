@@ -1,0 +1,552 @@
+{
+  "schema": "manifold-independent-review-correction-source-check/v1",
+  "status": "SOURCE_SEMANTIC_PASS_BUILD_NATIVE_AND_SAME_REVIEWER_CLOSURE_PENDING",
+  "groups": [
+    {
+      "name": "Exact six predecessors and all19 unchanged frozen owners; accepted content,35 payload sources and failed/build history untouched",
+      "pass": true
+    },
+    {
+      "name": "R1 Gaussian display exposes true tiny raw weights, numerical underflow, shifted normalization, complete branches and self exclusion without altering probabilities",
+      "pass": true
+    },
+    {
+      "name": "R2 stable B/C/D colours across ruler, raw/shifted/probability objects and interval keys; actual labelled AB/AC/AD force lanes and B/C products",
+      "pass": true
+    },
+    {
+      "name": "R3 both source30 output labels identify actual saved PCA coordinates",
+      "pass": true
+    },
+    {
+      "name": "R4 D12 separate complete row trees connect selected .8/.6 branches through /8 into AB and BA cells",
+      "pass": true
+    },
+    {
+      "name": "R4 D43 exact ordered chain, two equal A-endpoint derivatives, complete Z dependency and fixed-P attractive/repulsive sum",
+      "pass": true
+    },
+    {
+      "name": "Secondary D31 target labels and input graph feed altered training graph; optional openTSNE reference API is explicitly schematic source-only",
+      "pass": true
+    },
+    {
+      "name": "Secondary D33 actual translated finite convolution and bilinear interpolation return the field to a query; no FFT/fit evidence invented",
+      "pass": true
+    },
+    {
+      "name": "D07 first-pass plain-language operation and later-definition signposts preserve six picture/walkthrough pairs",
+      "pass": true
+    },
+    {
+      "name": "Every actual current drawing renders; entire 13-section reader and15 sources/15 outputs/19 tasks remain frozen; L7 and unchanged model functions are byte-AST conserved",
+      "pass": true
+    }
+  ],
+  "currentChangedSources": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+      "bytes": 8447,
+      "sha256": "91be13c046661ec8b6f597f849bdae7059645fdedb57ab7dcc317f22c11c5336"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-models.mjs",
+      "bytes": 9250,
+      "sha256": "c5ba7766028d8bdde7b8009af07418f9799561b95513a48bcd5565b609d58afb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+      "bytes": 25482,
+      "sha256": "f2b4662de64d17dbaa07a4aab84b1e7d580f4acb08419d05dadebe7cf001d3e7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/AffinityFigures.jsx",
+      "bytes": 18479,
+      "sha256": "f788b06f48ab1cf1830fc3bc7ee613ec0aa2da45cdbf08cfb4cf58da64201a8d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+      "bytes": 39319,
+      "sha256": "0653febab66a69abfa4ca3c20167636dfe2bf9d8707268474b4a3794f0d318d9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+      "bytes": 17524,
+      "sha256": "6abb3bfb866dc4f0443d9dbef5c8c6262c0cef5160c7972becdaf279b2f0debd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldOperationObjects.jsx",
+      "bytes": 18704,
+      "sha256": "e743808753dac6902af92f39dda57a4fac1a0c2aaa5b6880c1ae9cb8df34c7d9"
+    }
+  ],
+  "gaussianDisplayStates": [
+    {
+      "name": "default",
+      "distances": [
+        1,
+        2,
+        3
+      ],
+      "sigma": 1
+    },
+    {
+      "name": "narrow fixed row",
+      "distances": [
+        1,
+        2,
+        3
+      ],
+      "sigma": 0.1
+    },
+    {
+      "name": "edited narrow row",
+      "distances": [
+        4,
+        2,
+        3
+      ],
+      "sigma": 0.1
+    },
+    {
+      "name": "all raw exponentials underflow",
+      "distances": [
+        6,
+        5,
+        4
+      ],
+      "sigma": 0.1
+    },
+    {
+      "name": "distinct nearest tie",
+      "distances": [
+        1,
+        1,
+        3
+      ],
+      "sigma": 0.1
+    },
+    {
+      "name": "distinct zero distances",
+      "distances": [
+        0,
+        0,
+        3
+      ],
+      "sigma": 0.1
+    },
+    {
+      "name": "uniform coincidence",
+      "distances": [
+        0,
+        0,
+        0
+      ],
+      "sigma": 1
+    },
+    {
+      "name": "wide",
+      "distances": [
+        1,
+        2,
+        3
+      ],
+      "sigma": 3
+    }
+  ],
+  "constructedOrderedDerivative": {
+    "state": {
+      "kernel": [
+        [
+          0,
+          0.5,
+          0.2,
+          0.1
+        ],
+        [
+          0.5,
+          0,
+          0.5,
+          0.2
+        ],
+        [
+          0.2,
+          0.5,
+          0,
+          0.5
+        ],
+        [
+          0.1,
+          0.2,
+          0.5,
+          0
+        ]
+      ],
+      "z": 4,
+      "q": [
+        [
+          0,
+          0.125,
+          0.05,
+          0.025
+        ],
+        [
+          0.125,
+          0,
+          0.125,
+          0.05
+        ],
+        [
+          0.05,
+          0.125,
+          0,
+          0.125
+        ],
+        [
+          0.025,
+          0.05,
+          0.125,
+          0
+        ]
+      ],
+      "cost": 0.053522402879106805,
+      "contributions": [
+        [
+          0,
+          0.06500125249014937,
+          0.031117664459622385,
+          -0.018334306124923767
+        ],
+        [
+          -0.06500125249014937,
+          0,
+          0.03187456950352957,
+          -0.04448416605221293
+        ],
+        [
+          -0.031117664459622385,
+          -0.03187456950352957,
+          0,
+          -0.049610518128067854
+        ],
+        [
+          0.018334306124923767,
+          0.04448416605221293,
+          0.049610518128067854,
+          0
+        ]
+      ],
+      "displacement": [
+        0.077784610824848,
+        -0.07761084903883272,
+        -0.11260275209121981,
+        0.11242899030520455
+      ]
+    },
+    "ordered": [
+      {
+        "i": 0,
+        "j": 1,
+        "p": 0.1575006262450747,
+        "delta": -1,
+        "squared": 1,
+        "squaredDerivative": -2,
+        "t": 0.5,
+        "kernelDerivative": 0.5,
+        "attractive": -0.1575006262450747
+      },
+      {
+        "i": 0,
+        "j": 2,
+        "p": 0.069448540287264,
+        "delta": -2,
+        "squared": 4,
+        "squaredDerivative": -4,
+        "t": 0.2,
+        "kernelDerivative": 0.16000000000000003,
+        "attractive": -0.05555883222981121
+      },
+      {
+        "i": 0,
+        "j": 3,
+        "p": 0.00972141156256353,
+        "delta": -3,
+        "squared": 9,
+        "squaredDerivative": -6,
+        "t": 0.1,
+        "kernelDerivative": 0.06000000000000001,
+        "attractive": -0.005832846937538118
+      },
+      {
+        "i": 1,
+        "j": 0,
+        "p": 0.1575006262450747,
+        "delta": 1,
+        "squared": 1,
+        "squaredDerivative": -2,
+        "t": 0.5,
+        "kernelDerivative": 0.5,
+        "attractive": -0.1575006262450747
+      },
+      {
+        "i": 1,
+        "j": 2,
+        "p": 0.14093728475176479,
+        "delta": -1,
+        "squared": 1,
+        "squaredDerivative": 0,
+        "t": 0.5,
+        "kernelDerivative": 0,
+        "attractive": 0
+      },
+      {
+        "i": 1,
+        "j": 3,
+        "p": 0.022197396217366924,
+        "delta": -2,
+        "squared": 4,
+        "squaredDerivative": 0,
+        "t": 0.2,
+        "kernelDerivative": 0,
+        "attractive": 0
+      },
+      {
+        "i": 2,
+        "j": 0,
+        "p": 0.069448540287264,
+        "delta": 2,
+        "squared": 4,
+        "squaredDerivative": -4,
+        "t": 0.2,
+        "kernelDerivative": 0.16000000000000003,
+        "attractive": -0.05555883222981121
+      },
+      {
+        "i": 2,
+        "j": 1,
+        "p": 0.14093728475176479,
+        "delta": 1,
+        "squared": 1,
+        "squaredDerivative": 0,
+        "t": 0.5,
+        "kernelDerivative": 0,
+        "attractive": 0
+      },
+      {
+        "i": 2,
+        "j": 3,
+        "p": 0.10019474093596607,
+        "delta": -1,
+        "squared": 1,
+        "squaredDerivative": 0,
+        "t": 0.5,
+        "kernelDerivative": 0,
+        "attractive": 0
+      },
+      {
+        "i": 3,
+        "j": 0,
+        "p": 0.00972141156256353,
+        "delta": 3,
+        "squared": 9,
+        "squaredDerivative": -6,
+        "t": 0.1,
+        "kernelDerivative": 0.06000000000000001,
+        "attractive": -0.005832846937538118
+      },
+      {
+        "i": 3,
+        "j": 1,
+        "p": 0.022197396217366924,
+        "delta": 2,
+        "squared": 4,
+        "squaredDerivative": 0,
+        "t": 0.2,
+        "kernelDerivative": 0,
+        "attractive": 0
+      },
+      {
+        "i": 3,
+        "j": 2,
+        "p": 0.10019474093596607,
+        "delta": 1,
+        "squared": 1,
+        "squaredDerivative": 0,
+        "t": 0.5,
+        "kernelDerivative": 0,
+        "attractive": 0
+      }
+    ],
+    "zDerivative": 1.4400000000000004,
+    "repulsive": 0.3600000000000001,
+    "attractive": -0.437784610824848
+  },
+  "constructedGridConvolution": {
+    "source": [
+      [
+        4,
+        4
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        5
+      ]
+    ],
+    "charge": [
+      4.2,
+      4.6
+    ],
+    "weights": [
+      0.32000000000000023,
+      0.08000000000000014,
+      0.4799999999999996,
+      0.12000000000000004
+    ],
+    "query": [
+      1.2,
+      1.3
+    ],
+    "nodes": [
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "interpolation": [
+      0.5599999999999999,
+      0.13999999999999996,
+      0.24000000000000005,
+      0.06
+    ],
+    "kernels": [
+      [
+        [
+          -0.008310249307479225,
+          -0.008310249307479225
+        ],
+        [
+          -0.005917159763313609,
+          -0.004437869822485207
+        ],
+        [
+          -0.004437869822485207,
+          -0.005917159763313609
+        ],
+        [
+          -0.0036730945821854912,
+          -0.0036730945821854912
+        ]
+      ],
+      [
+        [
+          -0.01020408163265306,
+          -0.015306122448979591
+        ],
+        [
+          -0.008310249307479225,
+          -0.008310249307479225
+        ],
+        [
+          -0.0045351473922902496,
+          -0.009070294784580499
+        ],
+        [
+          -0.004437869822485207,
+          -0.005917159763313609
+        ]
+      ],
+      [
+        [
+          -0.015306122448979591,
+          -0.01020408163265306
+        ],
+        [
+          -0.009070294784580499,
+          -0.0045351473922902496
+        ],
+        [
+          -0.008310249307479225,
+          -0.008310249307479225
+        ],
+        [
+          -0.005917159763313609,
+          -0.004437869822485207
+        ]
+      ],
+      [
+        [
+          -0.024691358024691357,
+          -0.024691358024691357
+        ],
+        [
+          -0.015306122448979591,
+          -0.01020408163265306
+        ],
+        [
+          -0.01020408163265306,
+          -0.015306122448979591
+        ],
+        [
+          -0.008310249307479225,
+          -0.008310249307479225
+        ]
+      ]
+    ],
+    "fields": [
+      [
+        -0.0057036014241136,
+        -0.006295317400444961
+      ],
+      [
+        -0.006639541194044864,
+        -0.010626579796468081
+      ],
+      [
+        -0.010322561605627572,
+        -0.008149581960120451
+      ],
+      [
+        -0.015020913464390582,
+        -0.01706172979092119
+      ]
+    ],
+    "returned": [
+      -0.007502222157883949,
+      -0.00799270237363889
+    ]
+  },
+  "checker": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/check-review-corrections.mjs",
+    "bytes": 15523,
+    "sha256": "0f5aec7ac9f15fbb163896f29b65571d19a84fd914099fbcf6013e2a968e6481"
+  },
+  "viteBuildExecuted": false,
+  "oldScientificMainsFitsCampaignsReplayed": false,
+  "inMemoryJsxAndReactServerRenderingOnly": true,
+  "personallyViewedNativeWindows": [],
+  "limits": [
+    "Server rendering and arithmetic do not prove browser paint, events, keyboard, focus, enlarged-text or phone layout.",
+    "Unchanged5194 frozen build is not evidence of these corrected source files.",
+    "Same independent reviewer closure and Root native/normal integration remain pending."
+  ]
+}

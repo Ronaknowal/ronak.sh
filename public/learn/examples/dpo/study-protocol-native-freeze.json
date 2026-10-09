@@ -1,0 +1,31 @@
+{
+  "frozen_at": "2026-10-07T17:17:39.172061+00:00",
+  "inputs": {
+    "files": {
+      "pair_records.py": "b00a5c11ba6a2f0d2329d1e973ccb1afef3783962c833754f08751ba0982fe61",
+      "dpo_algebra.py": "0adc16011d6e9f99f0f0e54d8337f033a80bc07f2ebd275ba953119efafff220",
+      "response_scores.py": "944e25233fee30f726d2f148d4d7f98b169f636ff8d856e6fd6494effce3126e",
+      "scratch_dpo.py": "05b166223db38459d938cea53f92b6df82386d3aa2b93e083dc1d95c28084afb",
+      "reference_cache.py": "30c0fbb9d4f687b013ec2e57c820a8d1b2a18c7f1907f6bd4972bbbd40e5f49d",
+      "trl_dpo.py": "1b9e81e48552e517bb05a0ea0ad5e2fbbda05b775a13a0fedb05c30e597339e1",
+      "dpo_study.py": "cbeb3174f4a32a77ececf82e9efb53152626c03be8c6ce986e90d615cb4e5ef9",
+      "causal_backbone.py": "b19f3abda468d411e6312d3ddf6642591f0fa261f82665f53596ebeb5fb600f5",
+      "records.json": "2a22244d319774ff000ee2fa755a139a1d4a4a72d637e21c5ca6c232d1a748d8",
+      "selection.json": "7a117af9be2eefc1a78fa7150036c1682ec5e77a62da5212e31d2ea5b2a8a827",
+      "study-protocol.md": "46a151b50bef8342ee5f0627e8896ce47e15a2e51cdc785f04fafd6edd58dd02",
+      "requirements.txt": "b03f90a3cf78fb35c7be157beac008c98fecd7644535eaec5428b2398bf5df27",
+      "backbone-provenance.json": "9b86124c333fd9c1c1d8a08b7fcb191da5f50213c71ddc0fab4c7004159ebd63",
+      "HH-LICENSE.txt": "d4fb18db48757e273261a5597b8a09381de8073da060474ce33d0643e06c875e"
+    },
+    "packages": {
+      "torch": "2.14.0+cpu",
+      "transformers": "5.19.0",
+      "trl": "1.14.2",
+      "datasets": "5.1.0",
+      "tokenizers": "0.23.2",
+      "numpy": "2.3.5",
+      "accelerate": "1.15.0"
+    }
+  },
+  "meaning": "Prospective source/data/budget freeze; no completed result implied"
+}

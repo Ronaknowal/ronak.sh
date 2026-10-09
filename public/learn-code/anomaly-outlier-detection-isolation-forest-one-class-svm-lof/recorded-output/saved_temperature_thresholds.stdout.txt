@@ -1,0 +1,5 @@
+saved feature rows: 22671
+baseline q=.975 {'method': 'baseline', 'threshold': 4.566579723695049, 'alerts': 2170, 'inside': 1134, 'outside': 1036, 'windows': 4}
+isolation q=.975 {'method': 'isolation', 'threshold': 0.5555652392489324, 'alerts': 5632, 'inside': 1369, 'outside': 4263, 'windows': 4}
+one_class_svm q=.975 {'method': 'one_class_svm', 'threshold': -6.415545934270259, 'alerts': 9661, 'inside': 1343, 'outside': 8318, 'windows': 4}
+lof q=.975 {'method': 'lof', 'threshold': 1.4936764075602469, 'alerts': 8191, 'inside': 1189, 'outside': 7002, 'windows': 4}

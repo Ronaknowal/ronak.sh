@@ -1,1040 +1,2641 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
-
-const rlvr = {
-  title: "RLVR (Reinforcement Learning with Verifiable Rewards)",
-  readTime: "~55 min",
-  content: () => (
-    <div>
-
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
-      <Prose>
-        The reward model at the center of RLHF is a neural network — a learned, imperfect proxy for human preferences, and the first place reward hacking enters the pipeline. A powerful optimizer will eventually find inputs where the proxy diverges from what it was supposed to represent: the reward score climbs while actual quality falls. This is not a bug in any particular implementation. It is the consequence of optimizing against an approximation rather than the thing itself.
+import { Prose, H2, H3, CodeBlock } from '../../../../src/learn/components/content';
+import {
+  Math as InlineMath,
+  MathBlock as SharedMathBlock,
+} from '../../../../src/learn/components/content/Math.jsx';
+import RemoteCodeBlock from '../../../../src/learn/components/content/RemoteCodeBlock.jsx';
+import { useCodeDownload } from '../../../../src/learn/components/content/LessonCodeDownloads.jsx';
+import {
+  RLVRScroll,
+  RLVRTable as NeuralTable,
+} from '../../../../src/learn/components/lesson-labs/RLVRFlow.jsx';
+import {
+  FullTaskAndVerdict,
+  FeedbackAndUpdateAxes,
+  ExtractionSpanAnatomy,
+  VerifierOutcomeMatrix,
+  FiniteTestsAndCounterexample,
+  ProofDerivationTree,
+  ResponseProbabilitySimplex,
+  CausalSampleAndGather,
+  GroupSamplingTree,
+  CenteredAndScaledContributions,
+  BaselineEnumeration,
+  PolicySnapshotAddresses,
+  SignedClipGeometry,
+  TokenReductionGeometry,
+  ExactFiniteKL,
+  SampledK3AndGradientRoutes,
+  AnySuccessVersusMixedGroup,
+  SupportAndEntropy,
+  PromptSelectionAndContrast,
+  VerifiedSelectionLineage,
+  AcceptanceConfusionMatrix,
+  AffineRewardCorrection,
+  CorrelatedTestOutcomeGrid,
+  SpecificationCounterexampleTrace,
+  ReasoningAnswerJointMass,
+  AnswerAndReasoningEvaluation,
+} from '../../../../src/learn/components/lesson-labs/RLVRCoreFigures.jsx';
+import {
+  SelectedCorpusContext,
+  TinyCausalModelAnatomy,
+  GeneratedGroupAndMasks,
+  RolloutReuseAndUpdate,
+  SharedWarmStartAndArms,
+  ActualRewardAndContrastHistory,
+  HeldoutResponseInspector,
+  PretrainedToolOutputs,
+  NativeTrainerContract,
+  PassAtKSamplingGeometry,
+  PaperProtocolComparison,
+  WorkAndMetricLedger,
+  ControlledUseDecision,
+} from '../../../../src/learn/components/lesson-labs/RLVRStudyFigures.jsx';
+import '../../../../src/learn/components/lesson-labs/lesson-flow.css';
+const MathBlock = ({ children }) => (
+  <RLVRScroll
+    className="rlvr-equation"
+    label="Mathematical expression; scroll horizontally if needed"
+  >
+    <SharedMathBlock>{children}</SharedMathBlock>
+  </RLVRScroll>
+);
+const Program = ({ file }) => (
+  <RemoteCodeBlock
+    source={'/learn/examples/rlvr/' + file}
+    filename={file}
+    title={file}
+    language="python"
+  />
+);
+const Old = ({ ids }) => ids.map((id) => <span key={id} id={id} aria-hidden="true" />);
+function SupportingFile({ file }) {
+  useCodeDownload({
+    filename: file.split('/').at(-1),
+    kind: 'asset',
+    downloadUrl: '/learn/examples/rlvr/' + file,
+    title: file,
+  });
+  return null;
+}
+function RLVRLesson() {
+  return (
+    <div className="lesson-flow rlvr-flow">
+      {[
+        'backbone-provenance.json',
+        'FILES.md',
+        'GSM8K-LICENSE.txt',
+        'protocol.json',
+        'provenance.json',
+        'README.md',
+        'records.json',
+        'requirements.txt',
+        'study-protocol.md',
+        'rlvr-programs.zip',
+        'rlvr-observations.zip',
+        'download-manifest.json',
+      ].map((file) => (
+        <SupportingFile key={file} file={file} />
+      ))}
+      <Prose opening="summary">
+        {
+          'A model writes an answer. A checker accepts a particular property of that answer, and training changes how likely the model is to produce it. Follow one complete arithmetic problem through the checker, sampled response probabilities, group comparisons and an actual causal update. Then inspect what happens when the checker, the samples or the evaluation question change.'
+        }
       </Prose>
 
       <Prose>
-        For a specific class of tasks — math problems, code generation, formal proofs, logic puzzles, anything with a mechanically checkable answer — the reward model is unnecessary. The correct answer is either present or it is not, and a deterministic function can tell you which without consulting a neural network. RLVR replaces the learned reward model with a verifier: a program that returns 1 for a correct answer and 0 for a wrong one. No parameters to overfit, no proxy to hack, no calibration to worry about. The signal is exact by construction.
+        {'The useful starting question is precise: '}
+        <strong>{'what does a passing response establish?'}</strong>
+        {
+          ' A matching final number, a passed test suite and a checked formal proof establish different things. We will construct each object, trace the update and compare small scratch programs with their ordinary tools.'
+        }
+      </Prose>
+
+      <Prose opening="prerequisites">
+        {'Useful prerequisites are '}
+        <a
+          href={
+            '/learn/path/full-curriculum/rlaif-ipo-orpo-emerging-alignment-methods?module=large-language-models#1-separate-the-feedback-source-from-the-learning-rule'
+          }
+        >
+          {"RLAIF's feedback and objective distinction"}
+        </a>
+        {', '}
+        <a
+          href={
+            '/learn/path/full-curriculum/rlhf-reinforcement-learning-from-human-feedback?module=large-language-models#5-turn-sampled-reward-into-a-gradient'
+          }
+        >
+          {"RLHF's sampled gradient"}
+        </a>
+        {' and '}
+        <a
+          href={
+            '/learn/path/full-curriculum/causal-language-modeling-next-token-prediction?module=large-language-models'
+          }
+        >
+          {'causal language-model targets'}
+        </a>
+        {
+          '. We refresh the needed operations here. Basic probabilities, logarithms, derivatives and Python help; the first pass does not require previous RL research.'
+        }
+      </Prose>
+
+      <Prose opening="route">
+        {
+          'For a first pass, follow sections 1–9, then 12–14 and the matching practice in section 16. Keep the '
+        }
+        <strong>{'sampler settings'}</strong>
+        {' in section 8 and '}
+        <strong>{'verified selection'}</strong>
+        {
+          ' in section 9: the actual program uses temperature and support, and its third arm learns from selected responses or skips an empty set. Within those sections, group-availability probabilities, entropy and prompt scheduling are marked deeper and can be revisited after the core route. Sections 10–11 develop verifier noise and reasoning proxies; section 15 develops evaluation estimators, public recipes and work comparisons. These deeper branches remain visible for a second pass. The complete section index lets you return to each question without losing the code and worked examples.'
+        }
+      </Prose>
+
+      <Old ids={['1-why-it-exists', '1-start-with-the-problem']} />
+      <H2>{'1. Decide what a passing response means'}</H2>
+
+      <FullTaskAndVerdict />
+
+      <Prose>
+        {
+          'Natalia sold clips to 48 friends in April and half as many in May. The complete question asks for the total across both months. Half of 48 is 24, and the total is 48+24=72. GSM8K supplies both the original worked solution and its final '
+        }
+        <code>{'#### 72'}</code>
+        {
+          " label; our checker receives that label rather than discovering the truth by reading the model's explanation."
+        }
       </Prose>
 
       <Prose>
-        This approach became central to reasoning model post-training. The three clearest instances in the public record are: Lambert et al. 2024, Tülu 3 (arXiv:2411.15124), which introduced RLVR as an explicit training stage and demonstrated it on math benchmarks with a deterministic answer parser; DeepSeek-R1 (arXiv:2501.12948), which applied GRPO with a verifier-based reward signal and achieved near-OpenAI-o1 performance on AIME 2024; and the open-r1 project by HuggingFace, which reproduced the full R1 training pipeline publicly. In each case, the key move was the same: remove the learned reward model for verifiable tasks, and let the verifier provide exact signal.
-      </Prose>
-
-      <Callout accent="gold">
-        RLVR is RLHF with the reward model replaced by a deterministic verifier. Narrower scope — only verifiable tasks — but the signal is exact, scalable, and cannot be hacked.
-      </Callout>
-
-      <Prose>
-        The practical consequence is that RLVR training can continue far longer than RLHF before hitting the reward-hacking ceiling. With a learned reward model, the policy eventually finds the cracks in the proxy and exploits them; training past that point actively degrades quality. With a verifier, there are no cracks to find. The policy can only improve its reward score by producing more correct answers. The training signal stays honest regardless of how hard the optimizer pushes.
-      </Prose>
-
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
-
-      <Prose>
-        The verifier does what the reward model was imperfectly trying to approximate. For GSM8K-style arithmetic, the verifier is a regex that extracts the boxed final answer and compares it numerically to the ground truth. For code generation, it compiles the program and runs it against a hidden test suite, returning the fraction of tests that pass. For formal theorem proving with Lean or Isabelle, it submits the proof to the type-checker and returns whether it type-checks. In each case the verifier is a small, fast, interpretable function; the hard work of specifying what "correct" means was already done when someone wrote the problem and its ground-truth answer.
+        {'A writes '}
+        <code>{'48/2=24; 48+24=72. #### 72'}</code>
+        {'. B writes '}
+        <code>{'48/2=20; 48+20=68. #### 72'}</code>
+        {'. C writes '}
+        <code>{'#### 24'}</code>
+        {' and D writes '}
+        <code>{'The answer is probably seventy-two'}</code>
+        {
+          ". A and B both match the declared final numeric contract. Only A's calculation is correct in this constructed comparison. C has a parseable wrong answer; D lacks the required final marker and numeric object. These are four different response identities, with their full text kept next to the verdict."
+        }
       </Prose>
 
       <Prose>
-        The scope is deliberately narrow. "Write a clear explanation" is not verifiable. "Prove this theorem" is. Arithmetic at grade-school level is verifiable by regex and float comparison; arithmetic at research level may require a formal proof assistant. Code with a complete unit test suite is verifiable; code described only as "make this UI feel better" is not. RLVR does not replace RLHF — it bypasses it for the subset of tasks where the bypass is possible. The boundary between verifiable and non-verifiable roughly coincides with the boundary between symbolic and aesthetic tasks.
+        {'This separates two questions. '}
+        <strong>{'Acceptance'}</strong>
+        {" is the checker's decision under its contract. "}
+        <strong>{'Task correctness'}</strong>
+        {
+          ' is whether the response satisfies the intended problem. For the four short calculations, we can supply a separate reasoning annotation ourselves. That annotation does not come from the final-number checker. A correct answer with a flawed explanation is also not, by itself, evidence of an intentional attack; it shows which property was actually checked.'
+        }
       </Prose>
 
       <Prose>
-        Training uses standard policy gradient — PPO or GRPO — but the reward signal is now binary and deterministic. This creates a specific challenge: sparse binary reward causes high gradient variance. If the policy is weak and most rollouts return 0, the gradient estimate is near zero and training stalls. The solution used in DeepSeekMath and R1 is group sampling: generate G responses per prompt (typically 8 to 16), score each with the verifier, and compute advantages within the group. Even if only 1 in 8 rollouts is correct, that one correct response is compared to 7 incorrect ones and generates a clean learning signal. This is the central algorithmic contribution of GRPO, described in detail in the GRPO/RLOO/KTO topic.
+        {''}
+        <strong>{'Reinforcement learning with verifiable rewards'}</strong>
+        {', abbreviated '}
+        <strong>{'RLVR'}</strong>
+        {', uses an explicit task check to supply feedback for generated responses. A '}
+        <strong>{'reward'}</strong>
+        {
+          ' is the numeric score used by the learning rule. In our first contract it is 1 for accepted and 0 for rejected. These values are a chosen training scale, not proof that every accepted string has the intended reasoning.'
+        }
       </Prose>
 
-      <StepTrace
-        label="rlvr training loop — one update step"
-        steps={[
-          {
-            label: "1. Sample G responses per prompt",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="prompt → policy → G rollouts"
-                  tokens={[
-                    { label: "prompt x", color: colors.gold },
-                    { label: "→ π samples", color: colors.textMuted },
-                    { label: "y₁, y₂, …, y₈", color: "#c084fc" },
-                  ]}
-                />
-                <Prose>
-                  The policy generates G responses to the same prompt. This is the exploration mechanism — multiple attempts increase the probability that at least one rollout is correct, even for hard problems where the base pass rate is low.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "2. Score each with the verifier",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="verifier assigns binary rewards"
-                  tokens={[
-                    { label: "y₁ → r=0", color: "#f87171" },
-                    { label: "y₂ → r=0", color: "#f87171" },
-                    { label: "y₃ → r=1", color: "#4ade80" },
-                    { label: "y₄ → r=0", color: "#f87171" },
-                    { label: "…", color: colors.textMuted },
-                  ]}
-                />
-                <Prose>
-                  The verifier is deterministic: regex match + float comparison for math, unit test execution for code. No neural network involved. The reward is exactly 0 or 1, with no calibration drift.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "3. Compute group-normalized advantages",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="GRPO advantage: Aᵢ = (rᵢ − mean(r)) / std(r)"
-                  tokens={[
-                    { label: "r = [0,0,1,0,0,1,0,0]", color: colors.gold },
-                    { label: "→ mean=0.25, std≈0.43", color: colors.textMuted },
-                    { label: "→ A₃=+1.73, A₁=−0.58", color: "#c084fc" },
-                  ]}
-                />
-                <Prose>
-                  The group baseline replaces the value model. Correct responses get positive advantage, incorrect ones get negative advantage. The magnitude scales automatically with group variance.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "4. PPO update + KL penalty",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="clipped objective with KL regularization"
-                  tokens={[
-                    { label: "L = E[min(r·A, clip(r)·A)]", color: colors.gold },
-                    { label: "− β·KL(π || π_ref)", color: "#60a5fa" },
-                    { label: "→ gradient step", color: "#4ade80" },
-                  ]}
-                />
-                <Prose>
-                  Standard PPO clipping prevents large policy steps. The KL penalty keeps the policy near the SFT reference. After the update, the loop repeats with fresh rollouts from the new policy.
-                </Prose>
-              </div>
-            ),
-          },
-        ]}
-      />
-
-      {/* ======================================================================
-          3. MATHEMATICAL FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>3.1 The verifier as a reward function</H3>
+      <FeedbackAndUpdateAxes />
 
       <Prose>
-        In RLHF, the reward function is a neural network <Code>r_φ(x, y) ∈ ℝ</Code> trained on human preference pairs. In RLVR, the reward function is a deterministic program:
-      </Prose>
-
-      <MathBlock caption="RLVR reward: deterministic, binary, no learned parameters">
-        {"r(x, y) \\in \\{0, 1\\} \\quad \\text{(deterministic)}"}
-      </MathBlock>
-
-      <Prose>
-        For math: <Code>r(x, y) = 1</Code> if the boxed answer in <Code>y</Code> matches the ground truth for problem <Code>x</Code>, else 0. For code: <Code>r(x, y) = fraction_of_tests_passed(y, test_suite_x)</Code>, which is 0/1 for a single test or a real number in [0,1] for a suite. The key property is that <Code>r</Code> is fixed throughout training — it cannot be hacked because it has no learned parameters to exploit.
-      </Prose>
-
-      <H3>3.2 The policy objective</H3>
-
-      <Prose>
-        The optimization objective is formally identical to RLHF's KL-regularized form, with the learned reward model swapped out for the verifier:
-      </Prose>
-
-      <MathBlock caption="RLVR objective: maximize verifier reward while staying close to SFT reference">
-        {"\\max_{\\pi_\\theta}\\; \\mathbb{E}_{x \\sim \\mathcal{D},\\; y \\sim \\pi_\\theta(\\cdot|x)}\\!\\left[r(x, y) - \\beta \\log \\frac{\\pi_\\theta(y \\mid x)}{\\pi_{\\text{ref}}(y \\mid x)}\\right]"}
-      </MathBlock>
-
-      <Prose>
-        The KL term <Code>β log(π_θ / π_ref)</Code> penalizes drift from the SFT reference distribution. Unlike RLHF, where the reward model itself drifts relative to the policy, the verifier <Code>r</Code> is static. The only moving part is the policy. This means the KL penalty's job is simpler: prevent distributional collapse and maintain response diversity, rather than also guarding against proxy exploitation.
-      </Prose>
-
-      <H3>3.3 Group sampling and advantage estimation</H3>
-
-      <Prose>
-        Binary rewards produce high variance gradient estimates under single-sample REINFORCE. If the policy has a 10% pass rate on a problem, the expected gradient from one rollout is 90% zero. GRPO (Shao et al., DeepSeekMath, arXiv:2402.03300) addresses this by sampling <Code>G</Code> responses per prompt and normalizing within the group:
-      </Prose>
-
-      <MathBlock caption="GRPO group-normalized advantage: each response scored relative to its group">
-        {"A_i = \\frac{r_i - \\mu_G}{\\sigma_G}, \\quad \\mu_G = \\frac{1}{G}\\sum_{j=1}^G r_j, \\quad \\sigma_G = \\sqrt{\\frac{1}{G}\\sum_{j=1}^G (r_j - \\mu_G)^2}"}
-      </MathBlock>
-
-      <Prose>
-        With binary rewards and G=8, a group where one response is correct has <Code>μ_G = 0.125</Code> and <Code>σ_G ≈ 0.33</Code>. The correct response gets advantage <Code>(1 − 0.125) / 0.33 ≈ 2.65</Code>; each incorrect response gets <Code>(0 − 0.125) / 0.33 ≈ −0.38</Code>. The gradient step pushes the policy toward the correct response and away from the incorrect ones. Compare to RLHF with a continuous reward: the variance reduction is automatic and does not require a learned value model.
-      </Prose>
-
-      <H3>3.4 Chain-of-thought gradient flow</H3>
-
-      <Prose>
-        A subtle but important point: in math RLVR, the model generates a chain-of-thought that ends with a boxed final answer. Only the final answer is scored by the verifier. But the gradient flows back through the entire sequence — every reasoning step receives a gradient proportional to the advantage of the final answer.
+        {
+          'Read the two axes independently. One asks where feedback comes from: an answer comparison, tests, a proof checker or a learned judgment. The other asks how learning uses feedback: a sampled policy update, or imitation of selected responses. A '
+        }
+        <strong>{'policy'}</strong>
+        {
+          " is the model's conditional distribution over responses. The update changes its parameters. Choosing a checker does not choose that update algorithm."
+        }
       </Prose>
 
       <Prose>
-        This means the verifier is effectively rewarding the entire reasoning trace when the answer is correct, and penalizing it when the answer is wrong. The model learns reasoning patterns indirectly — not because the reasoning is explicitly supervised, but because good reasoning leads to correct answers that the verifier rewards. This is the mechanism behind the emergent chain-of-thought behavior observed in DeepSeek-R1-Zero, which was trained with pure RLVR and no supervised chain-of-thought data.
+        {'Tülu 3 uses rule rewards with '}
+        <strong>{'PPO'}</strong>
+        {
+          ', Proximal Policy Optimization, whose update also uses a learned value estimate. R1-Zero uses rule rewards with a group-based update called '
+        }
+        <strong>{'GRPO'}</strong>
+        {
+          ', Group Relative Policy Optimization. Rejection sampling can instead keep accepted model responses for '
+        }
+        <strong>{'SFT'}</strong>
+        {
+          ", supervised fine-tuning, which learns to predict their supplied tokens. We build the group update and selected-response route below; PPO's critic and full advantage estimation remain in the RLHF/PPO treatment. "
+        }
+        <a href={'https://arxiv.org/html/2411.15124v3'}>{'Tülu 3, §6'}</a>
+        {', '}
+        <a href={'https://arxiv.org/html/2501.12948v1'}>{'R1, January version §2.2'}</a>
+        {'.'}
       </Prose>
-
-      <MathBlock caption="Gradient flows through the full chain-of-thought, not just the final answer token">
-        {"\\nabla_\\theta \\mathbb{E}[r(x,y)] = \\mathbb{E}\\!\\left[r(x,y) \\sum_{t=1}^{T} \\nabla_\\theta \\log \\pi_\\theta(y_t \\mid x, y_{<t})\\right]"}
-      </MathBlock>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
 
       <Prose>
-        All code below is runnable Python (standard library only). Each section is self-contained and produces the outputs shown. The goal is to make the mechanics of the full RLVR loop visceral before the production library abstracts them.
+        {
+          "DeepSeekMath's earlier GRPO study used learned reward models trained from outcome or process judgments. The group update's name does not make that feedback identical to R1-Zero's final-answer rules. Keeping the axes separate lets us ask what changed in a real recipe instead of treating “RLVR” as one fixed loss. "
+        }
+        <a href={'https://arxiv.org/html/2402.03300v2'}>{'DeepSeekMath, §4'}</a>
+        {'.'}
       </Prose>
 
-      <H3>4a. Math verifier</H3>
+      <Old ids={['2-core-intuition', '2-build-the-intuition']} />
+      <H2>{'2. Parse an object before comparing it'}</H2>
 
       <Prose>
-        The math verifier extracts a boxed final answer from the model's response and compares it to the ground truth. The regex pattern matches <Code>{String.raw`\boxed{...}`}</Code> and handles both integer and decimal answers via float comparison with a tolerance of 1e-6. We test on 20 synthetic problems: 10 with correct boxed answers, 10 with wrong ones.
+        {
+          'The first verdict concealed an operation: turning part of a string into a number. Open that operation before giving it a reward.'
+        }
       </Prose>
 
-      <CodeBlock language="python">
-{`import re
+      <ExtractionSpanAnatomy />
 
-def math_verifier(response: str, ground_truth) -> float:
-    """
-    Parse \\\\boxed{answer} from response; compare to ground truth.
-    Returns 1.0 if correct, 0.0 otherwise.
-    """
-    match = re.search(r"\\\\boxed\\{([^}]+)\\}", response)
-    if not match:
-        return 0.0
-    raw = match.group(1).strip()
-    try:
-        # Numeric comparison with tolerance for floating-point answers
-        return 1.0 if abs(float(raw) - float(ground_truth)) < 1e-6 else 0.0
-    except (ValueError, TypeError):
-        # Non-numeric: exact string match (for symbolic answers)
-        return 1.0 if raw == str(ground_truth).strip() else 0.0
+      <Prose>
+        {'In '}
+        <code>{'48+24=72.\\n#### 72'}</code>
+        {', the last '}
+        <code>{'####'}</code>
+        {' marker selects the final suffix '}
+        <code>{'72'}</code>
+        {
+          '. Whitespace surrounding it is removed, then the numeric grammar turns it into an exact rational object. '
+        }
+        <code>{'72'}</code>
+        {', '}
+        <code>{'72.0'}</code>
+        {' and '}
+        <code>{'144/2'}</code>
+        {' represent the same number under this contract. '}
+        <code>{'72 clips'}</code>
+        {', '}
+        <code>{'50%'}</code>
+        {', '}
+        <code>{'1/0'}</code>
+        {' and an arbitrary expression such as '}
+        <code>{'36*2'}</code>
+        {' are outside the declared grammar. A decimal such as '}
+        <code>{'0.5'}</code>
+        {' is converted exactly through '}
+        <code>{'Decimal'}</code>
+        {
+          ', then into the fraction 1/2; it is not a binary floating-point approximation with an unexplained tolerance.'
+        }
+      </Prose>
 
-# 20 synthetic problems: addition and multiplication
-problems = (
-    [("What is %d + %d?" % (a, b), a + b) for a, b in
-     [(2,3),(7,8),(15,12),(100,200),(3,3),(9,1),(4,4),(11,6),(50,25),(33,17)]]
-  + [("What is %d * %d?" % (a, b), a * b) for a, b in
-     [(3,4),(5,6),(7,8),(9,10),(2,11),(12,3),(4,5),(6,7),(8,9),(10,11)]]
-)
+      <Prose>
+        {
+          'The input grammar accepts a signed decimal or an integer numerator/denominator. The whole suffix after the '
+        }
+        <strong>{'last'}</strong>
+        {' marker must match it. Therefore '}
+        <code>{'#### 24\\n#### 72'}</code>
+        {' selects 72, while '}
+        <code>{'#### 72 extra words'}</code>
+        {
+          ' is rejected. This last-marker choice is a policy of the extractor, not a universal definition of which number a response intended. The displayed span makes that policy visible.'
+        }
+      </Prose>
 
-correct_count = 0
-for i, (problem, ans) in enumerate(problems):
-    if i % 2 == 0:
-        # Correct: response with right boxed answer
-        response = "Let me think. The answer is \\\\boxed{%s}" % ans
-    else:
-        # Wrong: response with off-by-one answer
-        response = "I believe the answer is \\\\boxed{%s}" % (ans + 1)
-    score = math_verifier(response, ans)
-    correct_count += score
+      <Prose>
+        {'Extraction and comparison do different jobs. The '}
+        <strong>{'extractor'}</strong>
+        {' selects a span and constructs an object. The '}
+        <strong>{'comparator'}</strong>
+        {
+          ' asks whether that object equals the supplied gold object. A missing or malformed prediction is rejected when gold is known. A missing or unsupported gold is '
+        }
+        <strong>{'unknown'}</strong>
+        {
+          ': we cannot fairly label the prediction incorrect without knowing the target. The training subset used later has valid gold for every record, so its 0/1 groups contain no missing labels.'
+        }
+      </Prose>
 
-# Output: 10 correct responses scored 1.0; 10 wrong scored 0.0
-print("4a. Math verifier: %d/20 correct responses identified" % int(correct_count))
-# 4a. Math verifier: 10/20 correct responses identified`}
+      <Prose>
+        {
+          'For the older boxed-answer form, the scratch program walks balanced braces after the last '
+        }
+        <code>{'\\boxed{'}</code>
+        {'. It can parse a nested integer fraction such as '}
+        <code>{'\\boxed{\\frac{1}{2}}'}</code>
+        {'. That small extension does not recognize arbitrary LaTeX: '}
+        <code>{'\\boxed{\\frac{1+1}{4}}'}</code>
+        {
+          ' is deliberately outside it. It also does not change the strict #### contract used for our model study. Different answer interfaces need their own declared extraction rules.'
+        }
+      </Prose>
+
+      <VerifierOutcomeMatrix />
+
+      <Prose>
+        {'Ordinary '}
+        <strong>{'Math-Verify'}</strong>
+        {
+          ' separates mathematical extraction from grading and recognizes more representations than our finite numeric grammar. Its '
+        }
+        <code>{'parse(text, extraction_config=...)'}</code>
+        {' returns candidate objects; its '}
+        <code>{'verify(gold, prediction)'}</code>
+        {
+          " then applies the grader's conventions. Those include representation, numerical tolerance and symbolic handling. A richer parser is useful, but its extracted objects still need to be inspected. The choice of gold versus prediction is meaningful; this API is not a declaration that every representation pair is a symmetric mathematical equivalence relation."
+        }
+      </Prose>
+
+      <Prose>
+        {'The pinned TRL '}
+        <code>{'accuracy_reward'}</code>
+        {' first parses the gold. If it cannot parse that gold, it returns '}
+        <code>{'None'}</code>
+        {
+          '; otherwise it grades an extracted prediction as 1 or 0. It uses a particular LaTeX extraction configuration that prioritizes boxed forms and requires an answer anchor. That differs from our strict entire #### suffix and from a direct Math-Verify call using both expression and LaTeX extractors. Read the actual extracted values beside each raw row before comparing results. '
+        }
+        <a
+          href={
+            'https://github.com/huggingface/math-verify/tree/ba3d3aaff23b3f4cac7a14672b4f6e293d97c98b'
+          }
+        >
+          {'Math-Verify parser and grader'}
+        </a>
+        {', '}
+        <a href={'https://github.com/huggingface/trl/blob/v1.14.2/trl/rewards/accuracy_rewards.py'}>
+          {'TRL v1.14.2 accuracy reward'}
+        </a>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {
+          'The complete programs are supplied with the data and exact package versions. Download the '
+        }
+        <a href={'/learn/examples/rlvr/rlvr-programs.zip'}>{'program archive'}</a>
+        {', or use the '}
+        <a href={'/learn/examples/rlvr/FILES.md'}>{'file index'}</a>
+        {
+          ' to collect the individual files. Place them together, create a Python 3.12 environment and install their requirements. The three first scratch mechanism programs need only the standard library or PyTorch; the ordinary parser/trainer routes use the pinned additional packages.'
+        }
+      </Prose>
+
+      <CodeBlock language={'bash'}>
+        {
+          'python -m venv .venv\npython -m pip install -r requirements.txt\npython -B verifier_contracts.py --output verifier.json\npython -B math_verify_bridge.py --output math-verify.json'
+        }
       </CodeBlock>
 
-      <H3>4b. Code verifier</H3>
-
       <Prose>
-        The code verifier executes generated code in an isolated namespace and runs it against hidden test cases. Each test case is a callable that receives the execution namespace and returns a boolean. The verifier returns the fraction of tests that pass — 0.0 for syntax errors or any exception during execution. We test three cases: correct implementation, wrong implementation (multiply instead of add), and syntax error.
+        {
+          "Activation depends on your shell; run the installation and programs with that environment's Python. The full "
+        }
+        <code>{'verifier_contracts.py'}</code>
+        {
+          ' appears after its code and proof contracts in the next section, so each function has an explained task. The parser comparison supplies complete decimal, fraction, percentage, unit, multiple-boxed, malformed and missing cases. Direct finite calls disable POSIX alarm timeouts; the unmodified TRL reward uses its documented worker-thread no-alarm branch on Windows. This local case set is not an execution sandbox.'
+        }
       </Prose>
 
-      <CodeBlock language="python">
-{`def code_verifier(code: str, test_cases: list) -> float:
-    """
-    Execute generated code; run hidden tests. Returns fraction passing.
-    Production version uses a subprocess sandbox with time/memory limits.
-    """
-    try:
-        exec_globals = {}
-        exec(compile(code, "<generated>", "exec"), exec_globals)
-        passed = sum(1 for tc in test_cases if tc(exec_globals))
-        return passed / len(test_cases)
-    except Exception:
-        return 0.0
+      <Program file="math_verify_bridge.py" />
 
-# Hidden test suite for add(a, b)
-tests = [
-    lambda g: g.get("add") and g["add"](1, 2) == 3,
-    lambda g: g.get("add") and g["add"](0, 0) == 0,
-    lambda g: g.get("add") and g["add"](-1, 1) == 0,
-    lambda g: g.get("add") and g["add"](10, 20) == 30,
-    lambda g: g.get("add") and g["add"](5, 5) == 10,
-    lambda g: g.get("add") and g["add"](-3, -2) == -5,
-    lambda g: g.get("add") and g["add"](100, 200) == 300,
-    lambda g: g.get("add") and g["add"](1, -1) == 0,
-]
+      <Old ids={['3-mathematical-foundation', '3-make-the-idea-precise']} />
+      <H2>{'3. Check a program or proof under an explicit specification'}</H2>
 
-correct_code = "def add(a, b): return a + b"
-wrong_code   = "def add(a, b): return a * b"   # wrong logic
-broken_code  = "def add(a, b) return a + b"    # syntax error
+      <Prose>
+        {
+          'A final number is one possible accepted object. A program or formal proof changes both that object and what the check can establish.'
+        }
+      </Prose>
 
-s1 = code_verifier(correct_code, tests)  # 1.000
-s2 = code_verifier(wrong_code,   tests)  # 0.125  (one test has a=0,b=0)
-s3 = code_verifier(broken_code,  tests)  # 0.000
+      <FiniteTestsAndCounterexample />
 
-print("correct=%.3f, wrong=%.3f, syntax_error=%.3f" % (s1, s2, s3))
-# correct=1.000, wrong=0.125, syntax_error=0.000`}
+      <Prose>
+        {
+          'Suppose the required function returns the sum of two supplied integers, x and y. Candidate '
+        }
+        <code>{'x+y'}</code>
+        {' performs the requested operation. Candidate '}
+        <code>{'x'}</code>
+        {' agrees with it whenever y=0. Tests '}
+        <code>{'(2,0)→2'}</code>
+        {' and '}
+        <code>{'(−1,0)→−1'}</code>
+        {' therefore accept both candidates. Add '}
+        <code>{'(2,3)→5'}</code>
+        {': '}
+        <code>{'x+y'}</code>
+        {' returns 5, while '}
+        <code>{'x'}</code>
+        {
+          ' returns 2. The stronger test set exposes the missing dependence on y. Passing the earlier finite set established agreement on those inputs; it did not establish agreement for all integers.'
+        }
+      </Prose>
+
+      <Prose>
+        {'The scratch checker uses a deliberately small '}
+        <strong>{'abstract syntax tree'}</strong>
+        {', or '}
+        <strong>{'AST'}</strong>
+        {', grammar. The tree for '}
+        <code>{'x+y'}</code>
+        {
+          ' has an addition node with leaves x and y. At x=2,y=3, lookup supplies 2 and 3, then addition produces 5. Integer constants, the names x/y, unary minus and addition/subtraction/multiplication are allowed. Other nodes, such as a function call, are rejected. The interpreter recursively applies those declared operations; it never calls Python '
+        }
+        <code>{'eval'}</code>
+        {' or '}
+        <code>{'exec'}</code>
+        {
+          ' on a candidate. This teaches finite testing without pretending arbitrary code has been sandboxed by a timeout or a subprocess.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "The general distinction transfers to real code evaluation: a unit-test score measures the supplied tests' contract. More test cases may reveal a counterexample, but the reward only certifies the finite checked set unless an additional argument establishes a broader property. Runtime limits and untrusted-code isolation are separate engineering outcomes; this tiny arithmetic interpreter does not implement an operating-system sandbox."
+        }
+      </Prose>
+
+      <ProofDerivationTree />
+
+      <Prose>
+        {
+          'Now change the accepted object to a formal proof of “if P and Q hold, then Q and P hold.” Write this as '
+        }
+        <InlineMath>{'(P\\land Q)\\to(Q\\land P)'}</InlineMath>
+        {'. '}
+        <strong>{'Conjunction'}</strong>
+        {', written '}
+        <InlineMath>{'\\land'}</InlineMath>
+        {', requires both parts. '}
+        <strong>{'Implication'}</strong>
+        {', written '}
+        <InlineMath>{'\\to'}</InlineMath>
+        {
+          ', says that assuming its left side lets us derive its right side. P and Q here are proposition symbols; the checker manipulates their exact formal structure rather than interpreting an English explanation.'
+        }
+      </Prose>
+
+      <Prose>
+        {'The proof introduces an assumption named h with proposition '}
+        <InlineMath>{'P\\land Q'}</InlineMath>
+        {
+          '. Conjunction elimination on the right derives Q; elimination on the left derives P. Conjunction introduction combines these results in the order '
+        }
+        <InlineMath>{'Q\\land P'}</InlineMath>
+        {
+          '. Implication introduction then discharges h: the conclusion holds conditional on the premise that was assumed. The drawing keeps the binder and both branches connected to their actual ancestors.'
+        }
+      </Prose>
+
+      <Prose>
+        {'In code, the successful body is '}
+        <code>
+          {'("and-intro", ("and-right", ("assume", "h")), ("and-left", ("assume", "h")))'}
+        </code>
+        {
+          ". The checker reconstructs that body's proposition; it does not trust a node's claimed output label. Choosing left elimination twice reconstructs "
+        }
+        <InlineMath>{'P\\land P'}</InlineMath>
+        {
+          '. That is a legitimate consequence of h, but it is the wrong requested conclusion. Using h outside its implication binder fails assumption-scope checking instead. These failure reasons distinguish a valid proof of another statement from an invalid derivation.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'This small kernel implements exactly assumption, conjunction introduction/ elimination and implication introduction. It neither proves arbitrary Lean theorems nor validates natural-language reasoning. Even a correct proof kernel checks the supplied formal proposition; whether that proposition captures the intended task remains a separate specification question.'
+        }
+      </Prose>
+
+      <Program file="verifier_contracts.py" />
+
+      <Prose>
+        {'Read '}
+        <code>{'numeric_object'}</code>
+        {', '}
+        <code>{'arithmetic_expression'}</code>
+        {' and '}
+        <code>{'derive'}</code>
+        {' as three separate accepted-object constructors. '}
+        <code>{'final_verdict'}</code>
+        {', '}
+        <code>{'check_tests'}</code>
+        {' and '}
+        <code>{'proof_verdict'}</code>
+        {
+          ' then compare their outcomes under declared goals. The test fixtures preserve both accepted-but-insufficient cases and stronger counterexamples. To extend the numeric grammar, add a representation deliberately and test its unit policy; to extend the proof grammar, supply a sound reconstruction rule rather than accepting a claimed final proposition.'
+        }
+      </Prose>
+
+      <Old ids={['6-visual-walkthrough']} />
+      <H2>{'4. Turn accepted responses into an expected-return gradient'}</H2>
+
+      <Prose>
+        {
+          "We can now score a response. The next operation changes the probability of generating responses from those scores. Begin with a complete finite distribution, then connect it to a language model's token probabilities."
+        }
+      </Prose>
+
+      <ResponseProbabilitySimplex />
+
+      <Prose>
+        {
+          "Consider three possible full responses to Natalia's question: A ends in 72, C ends in 24, and D is malformed. Their probabilities are .2, .5 and .3. Their rewards are 1, 0 and 0 under the strict final-number contract. The "
+        }
+        <strong>{'expected reward'}</strong>
+        {
+          " is their probability-weighted score, so it is .2. That is the long-run average of this policy's rewards under this finite model; a particular three- response sample need not have exactly .2 acceptance."
+        }
+      </Prose>
+
+      <Prose>
+        {'Let '}
+        <InlineMath>{'p_i'}</InlineMath>
+        {' be the probability of response i and '}
+        <InlineMath>{'r_i'}</InlineMath>
+        {' its fixed reward. The objective '}
+        <InlineMath>{'J'}</InlineMath>
+        {' is'}
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'J=\\sum_i p_i r_i=.2(1)+.5(0)+.3(0)=.2.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {'A model usually represents probabilities through real-valued '}
+        <strong>{'logits'}</strong> <InlineMath>{'z_i'}</InlineMath>
+        {', with '}
+        <InlineMath>{'p_i=\\exp(z_i)/\\sum_j\\exp(z_j)'}</InlineMath>
+        {
+          '. Increasing one logit affects every normalized probability. Differentiating this softmax-weighted objective gives'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'\\frac{\\partial J}{\\partial z_i}=p_i(r_i-J).'}</MathBlock>
+      </div>
+
+      <Prose>
+        {'The three components are '}
+        <InlineMath>{'.2(1-.2)=.16'}</InlineMath>
+        {', '}
+        <InlineMath>{'.5(0-.2)=-.10'}</InlineMath>
+        {' and '}
+        <InlineMath>{'.3(0-.2)=-.06'}</InlineMath>
+        {
+          ". A small ascent step increases A's logit relative to the other two. A's reward is not differentiated: it is a supplied scalar attached to that full response. Changing the distribution changes J, not the supplied truth or the definition of acceptance."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The corresponding sampled identity uses the derivative of a log probability, often called its '
+        }
+        <strong>{'score'}</strong>
+        {':'}
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {
+            '\\nabla_\\theta J\n=\\mathbb E_{y\\sim\\pi_\\theta}\\left[r(y)\\nabla_\\theta\\log\\pi_\\theta(y\\mid x)\\right].'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {'Here x is the prompt, y a complete sampled response and '}
+        <InlineMath>{'\\theta'}</InlineMath>
+        {
+          ' the trainable parameters. The identity follows by differentiating the probability weights: '
+        }
+        <InlineMath>{'\\nabla\\pi=\\pi\\nabla\\log\\pi'}</InlineMath>
+        {
+          '. It applies with the stated sampling distribution, fixed reward and suitable differentiability/support conditions. A finite sampled estimate is noisy even when its expected gradient matches that objective. '
+        }
+        <a href={'https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html'}>
+          {"Spinning Up's policy-gradient derivation"}
+        </a>
+        {', '}
+        <a href={'https://rlhfbook.com/c/06-policy-gradients'}>{'Lambert, policy gradients'}</a>
+        {'.'}
+      </Prose>
+
+      <CausalSampleAndGather />
+
+      <Prose>
+        {
+          'A causal model does not keep one independent logit for every possible sentence. It writes y one token at a time. At response position t, it predicts token '
+        }
+        <InlineMath>{'y_t'}</InlineMath>
+        {
+          ' from the prompt and previous response tokens. The full response probability is a product; its log probability is a sum:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {
+            '\\pi_\\theta(y\\mid x)=\\prod_{t=1}^{T}\\pi_\\theta(y_t\\mid x,y_{<t}),\n\\qquad\n\\log\\pi_\\theta(y\\mid x)=\\sum_{t=1}^{T}\\log\\pi_\\theta(y_t\\mid x,y_{<t}).'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'The selected logit at sequence position t−1 predicts the target at position t. That one-position shift is essential at the first response token: its predictor is the last prompt position. A sampled end-of-sequence token, '
+        }
+        <strong>{'EOS'}</strong>
+        {
+          ', is itself a genuine predicted response target. Padding added for batching is not. An attention mask describes visible positions; a response mask describes which predicted targets contribute to this loss. Prompt positions remain useful context even when they receive no direct response-target loss.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'A detached terminal reward multiplies the score sum over the included response tokens. The checker does not send a differentiable path through its regex or test verdict. Autograd follows the current token log probabilities back to shared network parameters. This response-level feedback does not identify which reasoning sentence was responsible, and shared parameters mean it does not guarantee that every individual token or related prompt becomes more likely. The learned step-reward distinction belongs to '
+        }
+        <a
+          href={
+            '/learn/path/full-curriculum/process-reward-models-prm-vs-outcome-reward-models-orm?module=large-language-models'
+          }
+        >
+          {"PRM's explicit step judgments"}
+        </a>
+        {'.'}
+      </Prose>
+
+      <H2>{'5. Compare samples within a prompt'}</H2>
+
+      <Prose>
+        {
+          'The raw sampled reward can be a noisy update coefficient. A group of responses to the same prompt supplies a concrete baseline for comparison.'
+        }
+      </Prose>
+
+      <GroupSamplingTree />
+
+      <Prose>
+        {
+          "Generate four responses to the same prompt. In the displayed mixed group, their rewards are 1,0,1,0. The group's average reward is .5. The two accepted responses are .5 above that average; the other two are .5 below it. The "
+        }
+        <strong>{'advantage'}</strong>
+        {
+          " here means the coefficient measuring a response's reward relative to a stated baseline. It is not a truth label or a guarantee of future progress."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "Groups have prompt identity as well as row order. Combining four samples from four unrelated prompts into one baseline answers a different question. The later program keeps each prompt's four rows together when it reshapes rewards into groups. A batch-level scaling option is possible, but it must be labelled rather than silently substituted for a per-prompt comparison."
+        }
+      </Prose>
+
+      <CenteredAndScaledContributions />
+
+      <Prose>
+        {
+          "Subtracting .5 yields centered coefficients .5,−.5,.5,−.5. Some recipes also divide by a group standard deviation, making that group's contrast size more similar to other groups. Under a "
+        }
+        <strong>{'population'}</strong>
+        {
+          ' standard deviation, divide the squared deviations by G=4. Their mean square is .25, so the standard deviation is .5 and the scaled coefficients are 1,−1,1,−1. This hand calculation uses no added numerical epsilon.'
+        }
+      </Prose>
+
+      <Prose>
+        {'For rewards '}
+        <InlineMath>{'r_1,\\ldots,r_G'}</InlineMath>
+        {', define'}
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {
+            '\\bar r=\\frac1G\\sum_i r_i,\\qquad\n\\sigma_{\\rm pop}=\\sqrt{\\frac1G\\sum_i(r_i-\\bar r)^2},\\qquad\nA_i=\\frac{r_i-\\bar r}{\\sigma_{\\rm pop}+\\eta}.'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {'The small positive number '}
+        <InlineMath>{'\\eta'}</InlineMath>
+        {' avoids division by zero in the implementation. Our custom causal study uses '}
+        <InlineMath>{'\\eta=.0001'}</InlineMath>
+        {'. Its mixed-group values are therefore '}
+        <InlineMath>{'\\pm .5/.5001'}</InlineMath>
+        {', approximately '}
+        <InlineMath>{'\\pm .99980004'}</InlineMath>
+        {
+          ', rather than exactly ±1. For an all-fail or all-pass group, every centered coefficient is zero. With the declared epsilon, the reward part of the update is zero. Another loss term, such as the KL penalty introduced below, can still move the policy.'
+        }
+      </Prose>
+
+      <Prose>
+        {'A '}
+        <strong>{'sample'}</strong>
+        {
+          ' standard deviation instead divides the squared deviations by G−1. For this group, it is '
+        }
+        <InlineMath>{'\\sqrt{1/3}\\approx .57735027'}</InlineMath>
+        {'. Without epsilon the coefficients are '}
+        <InlineMath>{'\\pm\\sqrt3/2\\approx\\pm .8660254'}</InlineMath>
+        {
+          '. Pinned TRL uses this sample convention and then adds .0001. A library-versus-scratch comparison must preserve that convention instead of treating the two outputs as a numerical bug. '
+        }
+        <a href={'https://github.com/huggingface/trl/blob/v1.14.2/trl/trainer/utils.py'}>
+          {'TRL v1.14.2 nanstd'}
+        </a>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {
+          'Missing reward is also separate from zero reward. A declared nan-aware group baseline uses only available rows and assigns a missing row zero reward advantage. With just one available row, a sample standard deviation is undefined; the native route ultimately replaces that undefined advantage with zero. The scratch diagnostic displays its unavailable scale explicitly. None of these choices establishes that the missing response was incorrect.'
+        }
+      </Prose>
+
+      <BaselineEnumeration />
+
+      <Prose>
+        {
+          'Why can subtracting a baseline help? For a baseline b that does not depend on the sampled action, its expected score contribution is zero: '
+        }
+        <InlineMath>{'b\\sum_y\\pi(y)\\nabla\\log\\pi(y)=b\\nabla\\sum_y\\pi(y)=0'}</InlineMath>
+        {
+          ". Subtracting that b preserves the expected policy gradient. But the same group's average includes the very response whose score it multiplies; it is not action-independent in that argument."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Take IID binary responses with success probability p and a group of size G. Enumerate every outcome group, attach its exact probability, and average its actual score estimator. Same-group centering has expectation '
+        }
+        <InlineMath>{'(1-1/G)p(1-p)'}</InlineMath>
+        {' with respect to the Bernoulli logit. For p=.25,G=4, the raw expected gradient is '}
+        <InlineMath>{'.25(.75)=.1875'}</InlineMath>
+        {' and the same-group expectation is '}
+        <InlineMath>{'.140625'}</InlineMath>
+        {'. A '}
+        <strong>{'leave-one-out'}</strong>
+        {
+          ' baseline averages only the other G−1 responses. Its coefficients are G/(G−1) times the same-group centered coefficients, restoring the .1875 expectation under these IID assumptions.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'This multiplicative correction does not prove identical parameter updates under AdamW, clipping or changing optimizer history. Standard deviation scaling adds another nonlinear transformation and is a different estimator again. To assess variance, enumerate the variance of the actual score estimator, not merely the variance of the observed rewards. The displayed 16 rows make both expectation and variance auditable. '
+        }
+        <a href={'https://rlhfbook.com/c/06-policy-gradients'}>{'Lambert, group baselines'}</a>
+        {', '}
+        <a href={'https://arxiv.org/html/2402.03300v2'}>{'DeepSeekMath, group advantages'}</a>
+        {'.'}
+      </Prose>
+
+      <H2>{'6. Reuse a sampled group carefully'}</H2>
+
+      <Prose>
+        {
+          'Once a group has been scored, it is tempting to reuse it for several updates. The policy that generated it and the policy being updated are then different objects. Keep their probability addresses separate before defining a ratio.'
+        }
+      </Prose>
+
+      <PolicySnapshotAddresses />
+
+      <Prose>
+        {'The '}
+        <strong>{'old policy'}</strong> <InlineMath>{'\\pi_{\\rm old}'}</InlineMath>
+        {
+          ' is the rollout snapshot that generated the response. Its sampled-token log probabilities are stored and detached. The '
+        }
+        <strong>{'current policy'}</strong> <InlineMath>{'\\pi_\\theta'}</InlineMath>
+        {' is rescored at the same token addresses and can change during updates. A '}
+        <strong>{'reference policy'}</strong> <InlineMath>{'\\pi_{\\rm ref}'}</InlineMath>
+        {
+          ' is a separately declared regularizing anchor, introduced in the next section. The old policy is not automatically that reference. In the custom study, reference stays at the shared warm checkpoint while old refreshes at each new rollout.'
+        }
+      </Prose>
+
+      <Prose>{'At token t, compare current and old probabilities through'}</Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {
+            '\\rho_{i,t}\n=\\frac{\\pi_\\theta(y_{i,t}\\mid x,y_{i,<t})}\n       {\\pi_{\\rm old}(y_{i,t}\\mid x,y_{i,<t})}\n=\\exp(\\ell_{i,t}-\\ell^{\\rm old}_{i,t}).'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {'The symbol '}
+        <InlineMath>{'\\ell'}</InlineMath>
+        {
+          ' denotes the log probability at that actual sampled-token address. When current equals old, the ratio is 1. After an update, it may differ. This per-token ratio is part of the chosen surrogate; it is not the full product of ratios needed to importance-correct an entire different trajectory distribution. Stable sampling, temperature and support choices must match the log probabilities used for this comparison.'
+        }
+      </Prose>
+
+      <SignedClipGeometry />
+
+      <Prose>
+        {''}
+        <strong>{'Clipping'}</strong>
+        {
+          " changes the incentive after a token's ratio moves far enough in the advantage's preferred direction. With epsilon .2, the ratio band is [.8,1.2]. For positive advantage A=1, increasing the ratio above 1.2 no longer increases the clipped surrogate. For negative advantage A=−1, lowering the ratio below .8 no longer improves it. These are different sides of the band because the desired change has a different sign."
+        }
+      </Prose>
+
+      <Prose>{'Define a per-token term'}</Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {'s(\\rho,A)\n=\\min\\!\\left(\\rho A,\\;\\operatorname{clip}(\\rho,.8,1.2)A\\right).'}
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          "For ratios (1.4,.6,.9,1.1) and advantages (1,−1,1,−1), the terms are (1.2,−.8,.9,−1.1). Their mean is .05. The mean surrogate's ratio derivatives are (0,0,.25,−.25); the training loss is its negative, so its derivative signs reverse. At a kink, an autograd convention determines a selected derivative; we do not compare a finite difference there as though the curve were smooth."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Notice the other directions: a positive-advantage ratio below .8 still has an incentive to rise, and a negative-advantage ratio above 1.2 still has an incentive to fall. Clipping does not forbid those ratio values. Nor does a plateau freeze all shared network parameters: other tokens can move them. It limits this surrogate incentive, not every change in the policy. '
+        }
+        <a href={'https://rlhfbook.com/c/06-policy-gradients'}>{'Lambert, PPO cases'}</a>
+        {'.'}
+      </Prose>
+
+      <TokenReductionGeometry />
+
+      <Prose>
+        {
+          'Finally decide how token contributions become one scalar. If two responses have lengths 2 and 6 and each of their token contributions is respectively 1 and 3, their response means are 1 and 3. Giving each response equal weight produces '
+        }
+        <InlineMath>{'(1+3)/2=2'}</InlineMath>
+        {'. Pooling all eight tokens instead produces '}
+        <InlineMath>{'(2+18)/8=2.5'}</InlineMath>
+        {'. A fixed maximum of six positions per response produces '}
+        <InlineMath>{'(2+18)/(2\\cdot6)=5/3'}</InlineMath>
+        {
+          '. The numerator contains the same included terms, but the weights and denominator answer different questions.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Our declared GRPO route uses the mean of per-response token means. The DAPO token-mean reduction gives each included token equal weight, so the longer response gets more total weight. Dr.GRPO uses a fixed maximum-length denominator in its named variant. Neither a name nor a library default substitutes for the actual formula. The next DAPO lesson develops the pooled-token choice and its other mechanisms; here it supplies a concrete reduction contrast.'
+        }
+      </Prose>
+
+      <Program file="group_gradients.py" />
+
+      <Prose>
+        {''}
+        <code>{'baseline_enumeration'}</code>
+        {' supplies complete probability-weighted outcome groups. '}
+        <code>{'clipped_terms'}</code>
+        {' opens the two signed branches, and '}
+        <code>{'kl_routes'}</code>
+        {
+          ' implements the different derivative routes in the next section. Read the detached tensors as part of the mathematical contract, not an optimization detail. The finite curriculum simulator later in that program is a separate two-task diagnostic, not a fitted language-model result.'
+        }
+      </Prose>
+
+      <H2>{'7. State which KL quantity is being computed'}</H2>
+
+      <Prose>
+        {
+          'A reward update can change the policy away from its original behavior. A reference penalty adds another objective, so it needs its own direction, sampling distribution and derivative route.'
+        }
+      </Prose>
+
+      <ExactFiniteKL />
+
+      <Prose>
+        {''}
+        <strong>{'Kullback–Leibler divergence'}</strong>
+        {', abbreviated '}
+        <strong>{'KL'}</strong>
+        {
+          ', measures a directed difference between probability distributions. For current policy probabilities p and reference probabilities q, the direction used here is policy to reference:'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'D_{\\rm KL}(p\\|q)=\\sum_a p_a\\log\\frac{p_a}{q_a}.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {'For p=(.8,.2),q=(.5,.5), the terms are '}
+        <InlineMath>{'.8\\log1.6'}</InlineMath>
+        {' and '}
+        <InlineMath>{'.2\\log.4'}</InlineMath>
+        {
+          '. The second term is negative; the sum is approximately .192744757 nats and is nonnegative. Individual terms need not be. Identical distributions give zero. If p assigns positive mass to an action whose q mass is zero, this KL is infinite; a zero-p-mass action contributes zero under the usual limiting convention. Changing the direction changes the quantity, so we will not call reference-to- policy KL the same penalty.'
+        }
+      </Prose>
+
+      <Prose>
+        {'With '}
+        <InlineMath>{'p_1=\\operatorname{sigmoid}(\\theta)'}</InlineMath>
+        {' and '}
+        <InlineMath>{'p_2=1-p_1'}</InlineMath>
+        {', exact differentiation includes both the probability weights and their logarithms. At '}
+        <InlineMath>{'p_1=.8'}</InlineMath>
+        {', it gives '}
+        <InlineMath>{'p_1(1-p_1)\\log4=.16\\log4\\approx .221807098'}</InlineMath>
+        {' with respect to theta. This is the derivative of the entire finite expectation.'}
+      </Prose>
+
+      <SampledK3AndGradientRoutes />
+
+      <Prose>
+        {
+          'Large vocabulary implementations often score only sampled token addresses. For a fixed address, let '
+        }
+        <InlineMath>{'u=q_a/p_a'}</InlineMath>
+        {'. One nonnegative sampled value is'}
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'k_3(u)=u-\\log u-1.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {'Under samples from p, and with the needed support so '}
+        <InlineMath>{'\\sum_a p_a(q_a/p_a)=1'}</InlineMath>
+        {', its expectation equals '}
+        <InlineMath>{'D_{\\rm KL}(p\\|q)'}</InlineMath>
+        {
+          '. For the two actions above, its values are approximately .095003629 and .583709268; their p-weighted mean is the same .192744757. A sampled value identity has not yet specified the gradient estimator.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'If the sampled addresses and sampling weights are detached while autograd differentiates k3 at those addresses, the expected partial derivative here is .3. It is '
+        }
+        <strong>{'different'}</strong>
+        {
+          ' from the exact expectation derivative .221807098. The missing derivative path runs through the sampling weights. Drawing both graphs makes the distinction more concrete than giving both quantities one name.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "An optional differentiable current/old probability ratio multiplying k3 can restore that weight derivative in this matched finite example. At old=current its value multiplier is 1, so the forward values can match while the derivatives differ. That is the branch controlled by pinned TRL's "
+        }
+        <code>{'use_bias_correction_kl'}</code>
+        {'. The native example explicitly sets it to '}
+        <code>{'False'}</code>
+        {
+          ', matching the plain detached-sample route taught for the custom study. We retain the distinct ratio-weighted calculation rather than describing two branches as automatically equivalent. '
+        }
+        <a href={'https://github.com/huggingface/trl/blob/v1.14.2/trl/trainer/grpo_trainer.py'}>
+          {'TRL v1.14.2 loss'}
+        </a>
+        {', '}
+        <a href={'https://arxiv.org/html/2402.03300v2'}>{'DeepSeekMath, Appendix A'}</a>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {
+          'The declared causal GRPO loss combines a negative clipped reward surrogate with beta times the sampled k3 penalty, averages included token losses within each response, then averages responses. Beta is the chosen trade-off weight. In the small study it is .02; it is not a universal safe setting or a guaranteed policy distance. The reference stays fixed there. Real recipes can refresh a reference, which changes the regularizing target and must be named separately from refreshing the rollout snapshot.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'There is another boundary when a batch is reused. Its addresses were sampled from the rollout policy, not necessarily the current policy after an update. An unweighted average of k3 over those addresses is then an old-policy sample average. The matching expectation identity above requires the stated current sampling distribution and support, or an appropriate importance-weighted expectation. Naming a term "KL" does not make every reused-batch average an exact current-policy divergence.'
+        }
+      </Prose>
+
+      <H2>{'8. Diagnose whether sampling finds a useful contrast'}</H2>
+
+      <Prose>
+        {
+          'The group calculation needs more than one response. It needs responses with different rewards if the only learning signal is their centred reward. Before changing a loss, inspect what the sampler makes available to that loss.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Deeper: group-availability probabilities.'}</strong>
+        {
+          ' This branch asks how likely a sampler is to provide either a success or a useful reward contrast.'
+        }
+      </Prose>
+
+      <AnySuccessVersusMixedGroup />
+
+      <Prose>
+        {
+          'Suppose each response independently passes a binary verifier with probability p, and draw a group of G responses. The probability of finding '
+        }
+        <strong>{'at least one success'}</strong>
+        {' excludes only the all-failure group. The probability of a '}
+        <strong>{'mixed group'}</strong>
+        {' excludes both all-failure and all-success groups:'}
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {'P(\\text{any pass})=1-(1-p)^G,\n\\qquad\nP(\\text{mixed})=1-(1-p)^G-p^G.'}
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'At p=.25 and G=4, these are .68359375 and .6796875. All-success groups are rare there, so the two probabilities look similar. At p=.9 and G=4, finding at least one success has probability .9999, while a mixed group has probability .3438. Most groups pass uniformly. A large answer-success rate can coexist with little centred reward contrast.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'These formulas assume independent responses with the same success probability. Real responses can share modes, memorized paths or sampling correlations. Repeated draws from one policy do not establish that assumption. The event sets remain meaningful; their numerical probabilities need actual dependence information if the assumption fails. Nor is a mixed group proof of a good gradient: the verifier may distinguish the wrong property, or both kinds of response may contain flawed reasoning.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For G=1, the mixed probability is zero. For p=0 or p=1, it is zero for every finite G. Increasing G can improve the chance of seeing a contrast at interior p, but it consumes more generated tokens. The DAPO lesson develops a particular dynamic group-selection rule; the diagnostic here explains what such a rule is trying to find without prescribing it universally.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'First-pass sampler settings.'}</strong>
+        {
+          ' The actual program needs these definitions before its temperature and truncation choices can be interpreted.'
+        }
+      </Prose>
+
+      <SupportAndEntropy />
+
+      <Prose>
+        {'To find a different response, the sampler must be capable of drawing it. '}
+        <strong>{'Support'}</strong>
+        {
+          ' is the set of responses assigned positive probability. Temperature rescales logits before the softmax: for logits z and positive temperature T, the probability of action a is proportional to exp(z_a/T). A larger temperature flattens this distribution; a smaller one concentrates it. It changes the sampling policy whose log probabilities and ratios must be interpreted.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "A top-k sampler keeps only k candidate token logits and sets the others' sampling probability to zero. That can remove an action leading to a correct solution from support. If it is absent, more samples from the same truncated distribution cannot recover it. Top-p also changes support according to a cumulative probability threshold. Our controlled programs use temperature 1, top-p 1 and no top-k truncation so this support modification is absent."
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Deeper: entropy and correctness.'}</strong>
+        {' A spread-out distribution can still put every response on the wrong answer.'}
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Entropy'}</strong>
+        {' measures how spread out the probabilities are:'}
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'H(p)=-\\sum_a p_a\\log p_a.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {'For two equally likely responses, '}
+        <InlineMath>{'H=\\log 2'}</InlineMath>
+        {
+          ' nats. If one response has probability 1, H=0. These values describe uncertainty in the response distribution; they do not identify which response is correct. A policy spread across four wrong answers can have more entropy than one concentrated on a correct answer. Likewise, token entropy is not automatically diversity of entire reasoning paths. Read the actual response identities and reward contrasts alongside the distribution, then decide whether more exploration addresses the failure.'
+        }
+      </Prose>
+
+      <H2>{'9. Change the prompt pool or reuse verified responses'}</H2>
+
+      <Prose>
+        {
+          "Sampling can fail because a task is too hard, too easy, or outside the policy's current support. Changing which prompts receive computation is a different intervention from changing how their responses are scored."
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Deeper: prompt scheduling.'}</strong>
+        {
+          ' This finite comparison studies which tasks receive sampling effort. The first-pass verified-selection route follows it.'
+        }
+      </Prose>
+
+      <PromptSelectionAndContrast />
+
+      <Prose>
+        {
+          "In the finite simulator, two tasks share a parameter. A task's success probability is determined by its own declared logit function of that parameter. Their predictions therefore need not improve independently: one parameter change affects both. The drawing keeps those two probabilities and the selected task counts visible instead of presenting a smooth curve as a neural result."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "Three prompt-selection rules answer different questions. Uniform selection spends the same expected share on each task. A fixed easy-first schedule begins with the easier task and later changes the share according to a declared schedule. A mixed-rate rule allocates more share where 1−(1−p)^G−p^G is larger, trying to find reward contrast. Its weights come from the simulator's known probabilities; a real system must estimate its task difficulty and may estimate it poorly."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Change the starting parameter or task difficulty and compare the selected counts, available contrast and final probabilities. A task near p=.5 can have more group contrast than one near p=0 or p=1. That does not make it the most valuable task for every curriculum: it might be irrelevant to the deployment distribution, or transfer poorly to the harder task. The simulator illustrates these competing effects; it is not a fitted GSM8K study or evidence of universal curriculum superiority. The earlier Curriculum Learning lesson supplies the broader data-mixing question, including which target distribution the sampling rule should serve.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'First-pass verified selection.'}</strong>
+        {
+          ' This is the third arm of the later study: keep the accepted sampled responses and record a skip when none are available.'
+        }
+      </Prose>
+
+      <VerifiedSelectionLineage />
+
+      <Prose>
+        {'Another route keeps accepted responses and trains on them by likelihood. This is '}
+        <strong>{'verified-sample supervised fine-tuning'}</strong>
+        {
+          ", often called rejection-sampling fine-tuning when sampling and rejection are part of the recipe. Every retained row must retain the generating checkpoint, prompt, response and verifier contract. Otherwise it is difficult to distinguish a new policy's data from replayed old data, or to diagnose why an incorrect example was kept."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'If two of four sampled responses pass, this route uses those two as response targets. It does not apply the negative centred coefficient of the two rejected responses. Its response-only loss is the negative log likelihood of retained target tokens; prompt and padding positions are excluded. Policy-gradient learning and supervised learning thus use different information from the same sampled group. One directly compares relative returns; the other increases the likelihood of selected examples.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "If no response passes, there is no accepted supervised target. Our program records a skipped update. It does not silently substitute a rejected answer, sample repeatedly until something passes, or count a nonexistent optimizer step. Conversely, a wrong response accepted by a faulty verifier becomes an ordinary supervised target. Selection preserves the verifier's errors as well as its useful distinctions."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The small study later compares this route with two GRPO coefficient choices from identical warm starts. It uses fewer actual updates when there are few accepted examples. That is an explicit compute difference, not a matched-budget causal comparison. Keep both accepted-row counts and optimizer counts visible before reading its held-out outcomes.'
+        }
+      </Prose>
+
+      <Old ids={['9-failure-modes-and-gotchas']} />
+      <H2>{"10. Inspect the verifier's errors and correlations"}</H2>
+
+      <Prose>
+        {
+          'Selection and policy gradients both depend on what the verifier accepts. A binary output is convenient, but it can hide several different error mechanisms. Begin with known truth labels in a constructed example so the denominators are visible; a verifier cannot manufacture its own external ground truth.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Deeper: noisy acceptance.'}</strong>
+        {
+          ' The core update is already defined; now we ask what changes when acceptance and intended correctness disagree.'
+        }
+      </Prose>
+
+      <AcceptanceConfusionMatrix />
+
+      <Prose>
+        {
+          'Let 20% of responses truly satisfy the intended task. Suppose the verifier rejects 20% of those true successes, its '
+        }
+        <strong>{'false-negative rate'}</strong>
+        {', and accepts 10% of true failures, its '}
+        <strong>{'false-positive rate'}</strong>
+        {
+          '. Out of 100 hypothetical responses, there are 20 true successes and 80 true failures. The verifier accepts 16 of the successes and 8 of the failures, so 24 are accepted in total.'
+        }
+      </Prose>
+
+      <Prose>
+        {'The '}
+        <strong>{'precision of acceptance'}</strong>
+        {' is 16/24=2/3: among accepted responses, two thirds are truly successful. It is not '}
+        <InlineMath>{'1-.1=.9'}</InlineMath>
+        {
+          '. The false-positive rate conditions on the 80 truly failed responses; precision conditions on the 24 accepted responses. If the true-success prevalence falls while the error rates stay fixed, accepted false positives can form a larger fraction of the selected data.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Write true success probability p, false-positive rate f and false-negative rate n. Under this class-conditional error model,'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'P(\\widetilde r=1)=p(1-n)+(1-p)f.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'The tilde marks the observed noisy reward. At p=.2, f=.1 and n=.2, its acceptance probability is .24. Changing specificity, changing sensitivity and changing the response population are different interventions. These rates are assumed known for the construction; real verifier errors can depend on response content, task category or model behavior in ways this two-rate model omits.'
+        }
+      </Prose>
+
+      <AffineRewardCorrection />
+
+      <Prose>
+        {'If f and n were known constants and 1−f−n were nonzero, a '}
+        <strong>{'backward reward correction'}</strong>
+        {' could use'}
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'r_{\\rm corrected}=\\frac{\\widetilde r-f}{1-f-n}.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'Condition on the true reward. A true failure is accepted with probability f; its corrected expected reward is 0. A true success is accepted with probability 1−n; its corrected expected reward is 1. The correction restores these two conditional expectations under the stated error model. At f=.1 and n=.2, an observed 0 becomes −1/7, while an observed 1 becomes 9/7. Corrected individual rewards can lie outside [0,1] and have greater variance. Unbiased expectation is a property of repeated noisy observations under this model, not a proof that each corrected response has the right truth label.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For a group with observed rewards (1,0,1,0), the correction is a positive affine transformation. Centring removes the additive constant. Dividing by a standard deviation removes the positive scale '
+        }
+        <strong>{'exactly when the additive epsilon is zero'}</strong>
+        {
+          ', or when epsilon scales with the rewards. The resulting centred normalized coefficients are then the same. This identity does not justify expecting a different normalized group direction merely from applying that affine correction.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'With the fixed epsilon .0001 used in our population-standard-deviation example, the positive raw coefficient is .5/(.5+.0001)=.999800039992. After correction, the centred positive value and standard deviation are both 5/7, giving (5/7)/(5/7+.0001)=.999860019597. Signs and direction agree, but the magnitudes are not exactly equal. In unnormalized expected-return gradients, known class-conditional noise instead introduces a scale 1−f−n before correction. Keep the estimator and normalization route explicit.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Unknown rates, response-dependent errors and a nonpositive 1−f−n require a different diagnosis. Guessing f and n is not an oracle correction. Nor can a constant noise model repair a specification that rewards the wrong property.'
+        }
+      </Prose>
+
+      <CorrelatedTestOutcomeGrid />
+
+      <Prose>
+        {
+          'Now give four program responses three tests each. The clean pass rows are (1,1,1), (1,0,1), (0,0,1) and (0,0,0). Their mean test rewards are 1, 2/3, 1/3 and 0. An independent flipped cell changes one test result. A flipped row changes all tests for one response. A flipped column corrupts one test for every response. A whole-group complement replaces every pass with a failure and every failure with a pass. These patterns can have very different realized effects despite similar marginal error rates.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "For a whole-group complement with no unflipped additional reward component, each row reward becomes 1−r. The centred reward becomes the negative of its former value and its standard deviation stays the same. Its normalized coefficient therefore changes sign. A content-dependent correlated verifier failure can reverse a group's local reward gradient; treating its cells as independent noise would conceal that event. Once clipping or optimizer history is involved, this coefficient identity does not imply a simply negated entire parameter update. A separate format bonus also breaks the pure complement construction unless it is complemented in the same way."
+        }
+      </Prose>
+
+      <SpecificationCounterexampleTrace />
+
+      <Prose>
+        {
+          'A specification gap is different from a random flipped label. A final-answer verifier can accept a correct number supported by an invalid argument. Unit tests can accept a program that fails on an untested boundary. A format checker can accept an empty pattern that satisfies its syntax without solving the task. The reward is high because the checked property differs from the intended one.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Inspect the first point where a stronger contract changes the verdict. If the task is "produce the correct final number," flawed prose is outside that particular answer contract. If the task also requires a valid derivation, it reveals a missing property. Calling every such example malicious reward hacking assumes an intent that the trace does not establish. Diagnose the concrete property and its counterexample first, then decide whether to strengthen tests, add proof checks, inspect reasoning or change the training objective.'
+        }
+      </Prose>
+
+      <Program file="reward_noise.py" />
+
+      <Prose>
+        {
+          'The complete program keeps the truth labels and corruption mechanism visible, computes acceptance precision under the two-rate construction, and compares the raw/corrected and correlated group coefficients. These are finite analytic tests. They are not an estimate of GSM8K verifier error rates or a claimed universal noise-tolerance threshold. Alter the input rates or flip pattern and explain the changed denominator and coefficient before using the output.'
+        }
+      </Prose>
+
+      <H2>{'11. Relate answer success to reasoning cautiously'}</H2>
+
+      <Prose>
+        {
+          'A final-answer reward often serves as a proxy for reasoning quality. That can be useful, but it needs an explicit relationship between the two properties. Otherwise successful training on the proxy is silently described as successful training on the intended process.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Deeper: reasoning proxies.'}</strong>
+        {
+          ' This branch separates correct final answers from correct reasoning under a declared relationship between the two.'
+        }
+      </Prose>
+
+      <ReasoningAnswerJointMass />
+
+      <Prose>
+        {
+          'In a declared finite population, 25% of responses have correct reasoning. Among those responses, 80% have a correct final answer. Among responses with incorrect reasoning, 20% have a correct final answer. The four joint masses are .20 for correct reasoning and answer, .05 for correct reasoning with a wrong answer, .15 for incorrect reasoning with a correct answer, and .60 for neither. They sum to 1. The answer-success probability is .20+.15=.35.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Let c denote correct reasoning, a a correct answer, p_c=P(c), alpha=P(a|c) and b=P(a|not c). Then the answer-success probability is'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'p_a=p_c\\alpha+(1-p_c)b.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'For population-standard-deviation normalization with epsilon 0, the binary answer reward has standard deviation sqrt(p_a(1−p_a)). Its conditional expected coefficients are'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {
+            'E[A\\mid c]=\\frac{\\alpha-p_a}{\\sqrt{p_a(1-p_a)}},\n\\qquad\nE[A\\mid \\neg c]=\\frac{b-p_a}{\\sqrt{p_a(1-p_a)}}.'
+          }
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'Here the standard deviation is sqrt(.2275), giving about .943456 for correct reasoning and −.314485 for incorrect reasoning. These are expectations of the declared population-normalized coefficient. Finite groups, an estimated standard deviation and epsilon change the actual coefficients; no real response is assigned this expectation because its reasoning class is known to the model.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "The explanatory direction depends on alpha exceeding b. If wrong reasoning reaches the right answer more often than correct reasoning in the constructed task, reversing those probabilities reverses which reasoning class gets a larger expected proxy coefficient. This is why the relationship between proxy and intended reasoning matters. It is not a proof that answer-only RL always learns reasoning, nor a measurement of a real policy's hidden reasoning quality."
+        }
+      </Prose>
+
+      <AnswerAndReasoningEvaluation />
+
+      <Prose>
+        {
+          'Evaluation should therefore count both properties when both matter. In the eight-response illustration, two answers pass and one of those two also has independently verified correct reasoning. The answer fraction is 2/8=.25. The joint correct-answer-and-reasoning fraction is 1/8=.125. The reasoning fraction '
+        }
+        <strong>{'among answer-passing responses'}</strong>
+        {' is 1/2=.5. Those numbers have different denominators and answer different questions.'}
+      </Prose>
+
+      <Prose>
+        {
+          "If no answer passes, the last conditional fraction has denominator 0 and is unknown; displaying 0 would assert a measured rate where there is no conditional sample. Keep an independent reasoning annotation or a task-specific proof contract alongside each response. A learned judge's repeated votes can be useful evidence of its assessments, but the votes are not mathematical ground truth and need not be independent. Final-answer tests and reasoning checks should remain separate fields so disagreement can be investigated."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Our small math study checks the extracted numeric answer, not the validity of every generated derivation. Its answer-success measurements later must be read with precisely that scope. The next section builds the complete causal program so the verifier, response masks, sampled histories and measured limitations can be inspected together.'
+        }
+      </Prose>
+
+      <Old ids={['4-from-scratch-implementation']} />
+      <H2>{'12. Build a complete causal RLVR program on actual records'}</H2>
+
+      <Prose>
+        {
+          'The finite examples let us isolate one operation. A complete language-model program must now join those operations without replacing generated answers by fabricated rewards. It must receive a real prompt, generate tokens, extract an answer, compare with an external label and differentiate the included response probabilities.'
+        }
+      </Prose>
+
+      <SelectedCorpusContext />
+
+      <Prose>
+        {'The supplied records come from the official GSM8K repository at revision '}
+        <code>{'3101c7d5072418e28b9008a6636bde82a006892c'}</code>
+        {
+          '. Before any fit, we selected the first 24 training and 12 test rows in source order whose questions occupy at most 240 UTF-8 bytes and whose final labels are integers from 0 to 99. The full questions, original solutions, source splits and source row numbers remain in '
+        }
+        <code>{'records.json'}</code>
+        {
+          '. Its accompanying provenance and MIT notice identify the source and permitted redistribution. This short numeric subset is deliberately restricted; it is not the full GSM8K benchmark.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "The first training row is Natalia's clips problem. The original solution gives 48/2=24 clips in May and 48+24=72 across both months. We retain that full solution for inspection, but the teacher-forced response target is only "
+        }
+        <code>{'#### 72'}</code>
+        {' plus EOS. The generation prompt is the complete question followed by '}
+        <code>{'Give the final numeric answer as #### number.'}</code>
+        {
+          ' It contains no gold answer or supplied solution. The study does not train the model to imitate the original chain of reasoning. Its 12-token generation cap would also make long derivations impossible; read its results as short final-answer behavior.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Source annotations can themselves contain awkward wording: one retained training question names Julie while its solution names Maila, and another question prices pounds in one currency while its prose uses dollar notation. The originals stay verbatim. A matching numeric label does not verify every name, unit or reasoning sentence in the source or generated answer.'
+        }
+      </Prose>
+
+      <TinyCausalModelAnatomy />
+
+      <Prose>
+        {
+          'The custom policy is an actual small causal Transformer built from the exact earlier Causal Language Modeling classes. It uses 260 token addresses: raw bytes 0–255, PAD 256, EOS 257, BOS 258 and SEP 259. This vocabulary is fixed; no test text is used to fit it. A reserved token is a separate address, not the ordinary byte string that spells its label.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'For a batch of B sequences of length L, the input IDs have shape B×L. Token and position embeddings produce B×L×24 hidden values. A single pre-normalization block forms two attention heads, each 12 values wide. Its score matrices have shape B×2×L×L. A triangular causal mask prevents a position from reading future positions. The weighted values return to width 24 and add to the residual stream. A second normalization feeds an MLP with widths 24→96→24, followed by another residual addition. Final normalization and a linear output head produce B×L×260 logits. Softmax turns the 260 logits at one position into probabilities for its next token.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Position t−1 predicts the target at position t. The packed batch therefore shifts targets by one position and gathers the log probability of the actual next ID, rather than treating the entire 260-way logit vector as a token score. Right padding occurs after every real sequence, so a real causal position cannot attend to it. The response mask excludes all prompt targets and padding targets. A genuinely generated EOS is still a response target and remains included. Native GPT-2 later uses its own attention-mask path and left-padded prompt tensors; identical address conventions do not make those architectures identical implementations.'
+        }
+      </Prose>
+
+      <Program file="causal_backbone.py" />
+
+      <Prose>
+        {''}
+        <code>{'CausalAttention'}</code>
+        {' opens the Q/K/V projections, triangular softmax and weighted sum. '}
+        <code>{'Block'}</code>
+        {' opens both residual additions. '}
+        <code>{'TinyLM'}</code>
+        {
+          ' opens embedding lookup, position addition and output logits. Their complete class ASTs match the earlier program, as recorded in '
+        }
+        <code>{'backbone-provenance.json'}</code>
+        {
+          '. Autograd and linear algebra are delegated to PyTorch; the sampling, verifier, masks, coefficients and training loop below are written explicitly. This is a scratch RLVR pipeline around a real causal architecture, not a claim to implement every tensor kernel.'
+        }
+      </Prose>
+
+      <GeneratedGroupAndMasks />
+
+      <Prose>
+        {
+          'At each scheduled rollout, the program chooses two distinct training prompts and draws four responses per prompt. It samples from the full temperature-1 distribution with no grammar filter, answer lookup or top-k truncation. It stops at a sampled EOS or the 12-token cap. Generated reserved addresses remain visible in the decoded trace; they are not silently converted into a valid numeric answer. Each response retains its prompt, IDs, sampled log probabilities, termination reason, extracted span, parsed numeric object and verifier verdict.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The inspector begins with the first saved rollout, not a handpicked success. Compare one parsed wrong answer, an extraction failure and an accepted answer where present. The reward comes from the same displayed response. Group means, population standard deviations and coefficients come from those exact four rewards. If both groups fail uniformly, their centred coefficients are zero; the drawing does not substitute a mixed group to make an update look useful.'
+        }
+      </Prose>
+
+      <Program file="rlvr_data.py" />
+
+      <Prose>
+        {''}
+        <code>{'pack'}</code>
+        {' places complete prompt and response IDs in a right-padded matrix. '}
+        <code>{'score_targets'}</code>
+        {
+          " shifts the targets, gathers the next-address log probabilities and returns the same response mask. The strict extraction/verdict code from the first sections remains the reward source. This interface joins data and gradients: a reward is associated with an entire sampled response, while its coefficient multiplies that response's included token scores."
+        }
+      </Prose>
+
+      <RolloutReuseAndUpdate />
+
+      <Prose>
+        {
+          "Before either GRPO update, score the sampled targets under the rollout policy and frozen warm reference without gradients. Check sampled generation scores against the same pre-update policy's batched scores. Then freeze these old scores and the group coefficients for both epochs. During each epoch, rescore the same included targets under the current trainable policy. Compute the current/old ratios, signed clipped surrogate and plain sampled k3 against the reference, reduce over tokens within each response and over responses, then differentiate and take one AdamW step."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The current probabilities can change after the first update while the old denominator remains fixed. Refreshing it inside the second epoch would change the objective. The reference remains the warm policy across rollouts; after a new rollout, the old snapshot is the policy that generated that new batch. Each actual epoch records its loss, token ratios, sampled k3, gradient norm, parameter displacement and resulting weight hash. A zero centred reward does not imply a globally zero update when a separate reference penalty contributes.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The selected-response SFT arm instead packs only accepted responses and takes one response-equal likelihood update when that set is nonempty. Its empty-set branch records no update. The warm-up likelihood loss pools all included response targets, whereas the later losses give each included response equal weight. The distinction is visible in their numerators and denominators.'
+        }
+      </Prose>
+
+      <Program file="tiny_causal_rlvr.py" />
+
+      <Prose>
+        {''}
+        <code>{'warm_model'}</code>
+        {' performs the prescribed response-target supervision. '}
+        <code>{'sample_group'}</code>
+        {' generates each next address from the actual network. '}
+        <code>{'group_coefficients'}</code>
+        {
+          ' computes prompt-local centred rewards, optionally divided by population standard deviation plus .0001. '
+        }
+        <code>{'grpo_update'}</code>
+        {' fixes old/reference scores and opens both epochs. '}
+        <code>{'verified_sft_update'}</code>
+        {' opens selection and the empty-set branch. '}
+        <code>{'evaluate'}</code>
+        {
+          ' generates fresh responses on untouched test records without updating weights. Seeds are keyed by arm, rollout or evaluation checkpoint so the saved trace can identify each random stream.'
+        }
+      </Prose>
+
+      <Prose>{'Run the supplied files from their downloaded directory:'}</Prose>
+
+      <CodeBlock language={'bash'}>
+        {
+          "python -m venv .venv\n# Activate .venv using your shell's activation command.\npython -m pip install -r requirements.txt\npython -B tiny_causal_rlvr.py --output observations/tiny-study.json --workdir checkpoints\npython -B evaluate_rollouts.py --study observations/tiny-study.json --output observations/metrics.json"
+        }
       </CodeBlock>
 
-      <Callout accent="gold">
-        The sandboxing requirement for production code execution is real engineering work: subprocess isolation, time limits, memory limits, no network access. The verifier function itself is trivial — the execution environment is the hard part.
-      </Callout>
-
-      <H3>4c. RLVR loop (GRPO-style)</H3>
-
       <Prose>
-        We implement the full RLVR loop on 50 synthetic math problems. The policy is represented as a single logit parameter per difficulty level (easy/hard) — a deliberate simplification that makes the gradient math transparent. Group size G=8, KL coefficient β=0.05, learning rate 0.15. Easy problems (0–24) have a base pass rate of ~40%; hard problems (25–49) start at ~8%. We train for 40 steps and track pass rates for both buckets.
+        {
+          'The dataset, helpers and pinned requirements are in the complete file index. Use fresh output and work directories. The journal writes raw observations before updates, retains completed warm/update/evaluation events and failures, and atomically replaces one coherent latest state containing weights, optimizer, RNG and the fixed batch context. It does not silently resume, replay or overwrite a failed scientific run. A successful check of the code is separate from a successful learning outcome, which we inspect next.'
+        }
       </Prose>
 
-      <CodeBlock language="python">
-{`import random, math
+      <H2>{'13. Read every measured arm and its limits'}</H2>
 
-def sigmoid(x):
-    return 1.0 / (1.0 + math.exp(-max(-50, min(50, x))))
+      <Prose>
+        {
+          'We fixed the seeds, budgets and evaluation checkpoints before execution. The completed study includes every scheduled arm and its raw unsuccessful responses; there is no second fit chosen because the first result was disappointing.'
+        }
+      </Prose>
 
-random.seed(7)
-G    = 8       # group size
-lr   = 0.15
-beta = 0.05    # KL regularization strength
+      <SharedWarmStartAndArms />
 
-logit_easy = 0.0    # sigmoid(0.0) ≈ 0.50 starting pass rate
-logit_hard = -2.5   # sigmoid(-2.5) ≈ 0.08 starting pass rate
+      <Prose>
+        {
+          'Each of seeds 17, 29 and 43 has one 192-update warm start on the 24 training records. For that seed, the three arms begin from exact copies of those weights: group-scaled GRPO, unscaled centred GRPO and verified-sample SFT. The first divides centred rewards by population standard deviation plus .0001; the second leaves them centred but unscaled; the third retains accepted responses as supervised targets. All use the same prescribed 48 scheduled rollout batches and two prompts with four responses per prompt.'
+        }
+      </Prose>
 
-def base_pass_rate(pid):
-    return 0.40 if pid < 25 else 0.08  # reference for KL
+      <Prose>
+        {
+          'The six GRPO arms each take two updates per rollout, or 96 actual updates. Verified-sample SFT takes one update for a nonempty selected set and skips the rest: its actual counts are 39, 29 and 26 across the three seeds. There are 50 skipped SFT rollouts in total. An identical starting checkpoint is not an identical compute budget, and it is not identical sampled text: arm-specific random streams generate fresh batches and evaluations. Even at checkpoint 0, format counts can differ between arms with identical weights because different responses were sampled.'
+        }
+      </Prose>
 
-for step in range(40):
-    grad_easy, grad_hard = 0.0, 0.0
-    n_easy,    n_hard    = 0, 0
+      <ActualRewardAndContrastHistory />
 
-    for pid in range(50):
-        is_hard = pid >= 25
-        logit   = logit_hard if is_hard else logit_easy
-        p       = sigmoid(logit)
+      <Prose>
+        {
+          'Across all nine arms, the study generated 3,456 training responses in 864 prompt groups, using 28,537 actual generated tokens. It made 670 arm optimizer updates: 576 GRPO updates and 94 selected-response SFT updates. The earlier 576 warm updates are a separate cost. A scheduled rollout is not synonymous with an optimizer step, and a response is not synonymous with a token.'
+        }
+      </Prose>
 
-        # Sample G responses; score each with verifier (0 or 1)
-        rewards = [1.0 if random.random() < p else 0.0 for _ in range(G)]
+      <Prose>
+        {
+          'The history exposes homogeneous groups alongside mixed groups. For scaled GRPO, mixed-group counts out of 96 groups are 54, 36 and 26 for seeds 17, 29 and 43. For unscaled GRPO they are 43, 40 and 25. These are observed contrasts from the actual policy at each step, not the IID probabilities from section 8. They should not be pooled as though all groups had one stationary success rate. Read any drift in acceptance, length and reference penalty from the same saved steps. An increase on sampled training prompts alone does not establish generalization to different questions.'
+        }
+      </Prose>
 
-        # Group normalize (GRPO advantage)
-        mean_r = sum(rewards) / G
-        std_r  = (sum((r - mean_r)**2 for r in rewards) / G) ** 0.5
-        if std_r < 1e-8:
-            continue   # all same reward — no gradient signal
+      <HeldoutResponseInspector />
 
-        advantages = [(r - mean_r) / std_r for r in rewards]
+      <Prose>
+        {
+          'At checkpoints 0, 16, 32 and 48, every arm generates eight fresh responses for each of the 12 selected test records. Each checkpoint therefore has 96 sampled responses, and the complete study retains 3,456 evaluation responses. No test response enters a training update. The final strict answer-pass counts are:'
+        }
+      </Prose>
 
-        # Policy gradient: d(log π(correct)) / d(logit) = (1-p)
-        #                  d(log π(wrong))   / d(logit) = -p
-        g = sum(
-            adv * ((1 - p) if r == 1.0 else -p)
-            for adv, r in zip(advantages, rewards)
-        ) / G
-        kl_grad = beta * (p - base_pass_rate(pid))  # KL penalty
+      <NeuralTable
+        caption={'13. Read every measured arm and its limits'}
+        headers={[
+          <>{'Seed'}</>,
+          <>{'Group-scaled GRPO'}</>,
+          <>{'Unscaled centred GRPO'}</>,
+          <>{'Verified-sample SFT'}</>,
+        ]}
+        rows={[
+          [<>{'17'}</>, <>{'1/96'}</>, <>{'0/96'}</>, <>{'0/96'}</>],
+          [<>{'29'}</>, <>{'0/96'}</>, <>{'0/96'}</>, <>{'0/96'}</>],
+          [<>{'43'}</>, <>{'0/96'}</>, <>{'0/96'}</>, <>{'1/96'}</>],
+        ]}
+      />
 
-        if is_hard:
-            grad_hard += g - kl_grad;  n_hard += 1
-        else:
-            grad_easy += g - kl_grad;  n_easy += 1
+      <Prose>
+        {
+          'All nine initial answer-pass counts were 0/96. Most final counts remain zero. The two isolated passes do not establish a reliable advantage for either method. The unscaled seed-17 arm had 2/96 at the predeclared checkpoint 32 but 0/96 at the terminal checkpoint; selecting its intermediate peak would tell a different story. The lesson keeps all four checkpoints and reports the terminal results without selecting a winner.'
+        }
+      </Prose>
 
-    if n_easy > 0: logit_easy += lr * grad_easy / n_easy
-    if n_hard > 0: logit_hard += lr * grad_hard / n_hard
+      <Prose>
+        {
+          'Inspect the complete generated strings. Some outputs match the requested final-marker format but give the wrong number; others cannot be parsed. For example, at the scaled seed-17 terminal checkpoint, 35/96 responses had a parseable final numeric span while only 1/96 matched the gold. Format acceptance and answer correctness thus reveal different limitations. These programs check final numbers, not independently verified reasoning. Low answer success is not hidden behind a falling teacher-forced loss or a rising training reward.'
+        }
+      </Prose>
 
-    if step % 10 == 0 or step == 39:
-        pr_e, pr_h = sigmoid(logit_easy), sigmoid(logit_hard)
-        print("Step %3d: easy=%.3f, hard=%.3f, avg=%.3f"
-              % (step, pr_e, pr_h, (pr_e + pr_h) / 2))
+      <Prose>
+        {
+          'The experiment is intentionally small: a byte model, 24 short-answer training questions, 12 filtered test questions, a 12-token cap and short fixed training. It makes sampling, masks and updates inspectable; it does not reproduce a large reasoning model or justify a deployment recommendation. More seeds or a different budget would be a new prospective experiment, not a correction that silently replaces these measured outcomes.'
+        }
+      </Prose>
 
-# Step   0: easy=0.517, hard=0.080, avg=0.298
-# Step  10: easy=0.676, hard=0.130, avg=0.403
-# Step  20: easy=0.796, hard=0.212, avg=0.504
-# Step  30: easy=0.872, hard=0.334, avg=0.603
-# Step  39: easy=0.915, hard=0.476, avg=0.696`}
+      <Program file="evaluate_rollouts.py" />
+
+      <Prose>
+        {''}
+        <code>{'sample_metrics'}</code>
+        {
+          ' counts accepted answers, parseable spans, EOS outcomes, lengths and answer votes from each complete response set. '
+        }
+        <code>{'summarize'}</code>
+        {
+          ' keeps every arm, checkpoint and work denominator. It computes descriptive statistics from the retained JSON without training or regenerating any sample. Changing a parser contract would produce a different measurement, so the contract is part of the result rather than an afterthought.'
+        }
+      </Prose>
+
+      <Old ids={['5-production-implementation']} />
+      <H2>{'14. Use ordinary tools with explicit contracts'}</H2>
+
+      <Prose>
+        {
+          'A native library can supply a tokenizer, model architecture or training loop. It still needs an explicit task contract and settings. The next two routes show actual maintained tools; they answer different questions from the nine custom-model arms.'
+        }
+      </Prose>
+
+      <PretrainedToolOutputs />
+
+      <Prose>
+        {'The pretrained route opens '}
+        <code>{'google/flan-t5-small'}</code>
+        {' at exact revision '}
+        <code>{'0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab'}</code>
+        {
+          ' from a local cache. It feeds each complete selected test question and the same final-marker instruction to the ordinary tokenizer and encoder-decoder model, then generates greedily with a maximum of 64 new decoder tokens. It does not fit or adapt that checkpoint.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Unlike a causal prompt-plus-response array, the returned encoder-decoder sequence starts with a decoder-start address. That position is counted separately from new generated tokens. The inspector displays input IDs, returned IDs and decoded response so the length accounting can be checked. The twelve actual outputs are unmarked short numeric strings such as '
+        }
+        <code>{'0'}</code>
+        {', '}
+        <code>{'3'}</code>
+        {' and '}
+        <code>{'20'}</code>
+        {'. Every strict verifier verdict says '}
+        <code>{'missing final marker'}</code>
+        {
+          ', giving 0/12 under this declared contract. The displayed strings also differ from their corresponding gold numbers. We preserve the actual responses and do not manufacture reasoning explanations or retry with a more favorable prompt.'
+        }
+      </Prose>
+
+      <Program file="hf_eval_math.py" />
+
+      <Prose>
+        {
+          'After installing the supplied requirements, run this acquisition command from the program directory. It uses the network to place the '
+        }
+        <strong>{'exact'}</strong>
+        {' named revision in the Hugging Face cache rooted at '}
+        <code>{'model-cache'}</code>
+        {':'}
+      </Prose>
+
+      <CodeBlock language={'bash'}>
+        {
+          "python -c \"from huggingface_hub import snapshot_download; snapshot_download(repo_id='google/flan-t5-small', revision='0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab', cache_dir='model-cache')\"\npython -B hf_eval_math.py --cache model-cache --output observations/flan.json"
+        }
       </CodeBlock>
 
-      <Plot
-        label="4c. rlvr grpo loop — pass rate over training steps"
-        xLabel="training step"
-        yLabel="pass rate"
-        series={[
+      <Prose>
+        {''}
+        <code>{'snapshot_download'}</code>
+        {' creates the repository/revision cache layout; pass that same '}
+        <code>{'model-cache'}</code>
+        {' root to '}
+        <code>{'--cache'}</code>
+        {', not its internal snapshot directory. Here '}
+        <code>{'cache_dir'}</code>
+        {' is intentional: a flat '}
+        <code>{'local_dir'}</code>
+        {' export has a different layout. '}
+        <a href={'https://huggingface.co/docs/huggingface_hub/guides/download'}>
+          {"Hugging Face's download and cache guide"}
+        </a>
+        {
+          ' explains this ordinary-tool operation. Acquisition downloads files but does not generate answers or fit a model. The second command opens only the local cache and evaluates the twelve tasks. Its '
+        }
+        <code>{'local_files_only=True'}</code>
+        {' makes a missing cache an error, rather than downloading a different revision.'}
+      </Prose>
+
+      <Prose>
+        {
+          'This greedy pretrained observation is separate from the custom architecture, its training history and its sampled evaluation; comparing displayed outputs is useful, but it is not a paired causal claim about model quality.'
+        }
+      </Prose>
+
+      <NativeTrainerContract />
+
+      <Prose>
+        {'The native training route constructs a separate tiny '}
+        <code>{'GPT2LMHeadModel'}</code>
+        {
+          ", with the same vocabulary and contextual dimensions but its own maintained GPT-2 implementation. It performs its prescribed 64 warm updates, saves that exact local state for TRL's reference loader, and performs one real GRPO update on four generated responses. This is not the earlier custom TinyLM study."
+        }
+      </Prose>
+
+      <Prose>
+        {'The options define the calculation: '}
+        <code>{'loss_type="grpo"'}</code>
+        {
+          ', group reward scaling, token ratios, beta .02, symmetric clipping .2, no truncation masking and '
+        }
+        <code>{'use_bias_correction_kl=False'}</code>
+        {'. '}
+        <code>{'disable_dropout=True'}</code>
+        {
+          ' makes the declared dropout-free comparison explicit. Full-support temperature-1 generation and the 12-token cap match the stated sampling contract. Pinned TRL uses sample standard deviation plus .0001 here, whereas the custom group formula uses population standard deviation. Calling both routes "GRPO" does not eliminate that difference.'
+        }
+      </Prose>
+
+      <Prose>
+        {'AdamW keeps two running summaries for each parameter coordinate. Its '}
+        <strong>{'first moment'}</strong>
+        {' averages previous gradients; its '}
+        <strong>{'second moment'}</strong>
+        {' averages their squares. Their retention weights are '}
+        <InlineMath>{'\\beta_1'}</InlineMath>
+        {' for the first moment and '}
+        <InlineMath>{'\\beta_2'}</InlineMath>
+        {
+          ' for the second: .9 and .999 here, so each new observation receives the complementary weight '
+        }
+        <InlineMath>{'1-\\beta_1'}</InlineMath>
+        {' or '}
+        <InlineMath>{'1-\\beta_2'}</InlineMath>
+        {'. With fresh zero moments and current gradient g, the first step has '}
+        <InlineMath>{'m_1=(1-\\beta_1)g'}</InlineMath>
+        {' and '}
+        <InlineMath>{'v_1=(1-\\beta_2)g^2'}</InlineMath>
+        {'. Dividing by the corresponding bias-correction factors recovers g and '}
+        <InlineMath>{'g^2'}</InlineMath>
+        {
+          ' on that step. Their ratio, with a small positive denominator epsilon, determines the parameter movement. The native optimizer here starts fresh and has zero weight decay; later steps also depend on accumulated history, so this first-step simplification does not describe every AdamW update.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'In the actual sampled native group, all four rewards were zero. The native loss was zero; the explicit loss was approximately −7.2377×10^-11. Their maximum gradient difference was 2.44964×10^-9, within the declared loss and gradient guards. Nevertheless the native and explicit AdamW parameter steps '
+        }
+        <strong>{'failed'}</strong>
+        {
+          ' the original equality guard: the maximum parameter difference was 9.83812×10^-5, above its 5×10^-5 threshold.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "This is a numerical conditioning example. The native first moments were zero and its weights remained equal to the warm reference. The explicit gradient contained tiny nonzero rounding terms. For a fresh first AdamW step with no weight decay, a coordinate's displacement magnitude is"
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>{'\\frac{\\alpha_{\\rm lr}\\,|g|}{|g|+\\epsilon_{\\rm Adam}}.'}</MathBlock>
+      </div>
+
+      <Prose>
+        {'Here '}
+        <InlineMath>{'\\alpha_{\\rm lr}'}</InlineMath>
+        {' is the learning rate, g the current coordinate gradient and '}
+        <InlineMath>{'\\epsilon_{\\rm Adam}'}</InlineMath>
+        {
+          " the optimizer's denominator stabilizer. That epsilon is separate from the group-standard-deviation stabilizer and the clipping band in earlier sections."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "At learning rate .0005, epsilon 10^-8 and gradient about 2.44964×10^-9, that displacement is about 9.83820×10^-5. A tiny gradient mismatch can thus produce a visible parameter mismatch near the optimizer's epsilon scale. Agreement of losses and gradients within tolerance did not guarantee agreement of the resulting updates. The failed comparison remains failed; its threshold was not relaxed and the training step was not replayed."
+        }
+      </Prose>
+
+      <Prose>
+        {'Each saved step was subsequently checked against '}
+        <strong>{'its own'}</strong>
+        {
+          ' retained first moments, second moments, initial weights and optimizer settings. The native analytical parameter error was zero; the explicit maximum error was 5.82077×10^-11 within a declared arithmetic-rounding allowance. An absent native post-zero_grad gradient was explicitly inferred from its first moment, not relabelled an independently retained backward-gradient observation. This establishes own-step arithmetic consistency, not native/explicit update equality.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "The original program's last mixed-coefficient fixture had not been reached. After prospective review, a separate continuation restored the retained native state and batch and executed only that fixture for the first time. It assigned the declared coefficients (1,−1,1,−1) to those same generated addresses; these were not observed verifier outcomes. Both fixture losses were zero and their maximum gradient difference was 2.98023×10^-7. It took no optimizer step, generated no response and left native/reference parameters unchanged. The zero forward mean hides nonzero signed gradient paths, which is exactly why the fixture is useful alongside the homogeneous sampled group."
+        }
+      </Prose>
+
+      <Program file="trl_bridge.py" />
+
+      <Program file="adamw_step_audit.py" />
+
+      <Prose>
+        {''}
+        <code>{'explicit_loss'}</code>
+        {
+          ' opens causal gathering, current/old token ratios, signed clipping and plain k3. The maintained '
+        }
+        <code>{'_compute_loss'}</code>
+        {
+          ' supplies the library comparison. The complete updated runnable example reports cross-implementation equality separately from the own-step audit; neither property is implied by the other. The historical failure and separately source-bound continuation remain distinct observations. Reading retained rows requires care too: the trainer may shuffle a captured generation batch before computing loss. The updated program logs actual loss inputs and matches exact token/mask rows, consuming identical duplicates once. A numerical row correspondence inferred for the old trace is qualified as inference, not a logged permutation.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The shared journal helper records raw operands and measured discrepancies before guards and coherent state at actual boundaries. That makes a failed comparison useful evidence rather than a missing final JSON. It never grants permission to silently replay a failed stage.'
+        }
+      </Prose>
+
+      <Program file="scientific_journal.py" />
+
+      <Prose>
+        {'Finally, ordinary mathematical checking has its own contract. The earlier '}
+        <code>{'math_verify_bridge.py'}</code>
+        {
+          " calls the actual Math-Verify parser/verifier and TRL's accuracy reward on declared finite cases. Missing gold can return "
+        }
+        <code>{'None'}</code>
+        {
+          ', different extraction conventions can change the accepted object, and a reasoning delimiter does not prove the text preceding it. These are tool behaviors to inspect, not interchangeable substitutes for the strict final-marker checker.'
+        }
+      </Prose>
+
+      <Old ids={['7-decision-matrix', '8-what-scales-and-what-doesn-t']} />
+      <H2>{'15. Count evaluation and interpret public examples'}</H2>
+
+      <Prose>
+        {
+          'Once outputs are retained, the next question is which event a reported score counts. An answer-pass fraction, any-success probability, vote and reasoning assessment are distinct measurements even when they use the same responses.'
+        }
+      </Prose>
+
+      <Prose>
+        {''}
+        <strong>{'Deeper: evaluation and public protocols.'}</strong>
+        {
+          " The core study's answer-pass counts are already available; this branch asks what other denominators and recipe choices can legitimately establish."
+        }
+      </Prose>
+
+      <PassAtKSamplingGeometry />
+
+      <Prose>
+        {
+          'Suppose a retained set has n=8 complete responses and c=2 answer passes. If we choose a subset of k=4 uniformly without replacement from those eight, the chance that it contains at least one pass is'
+        }
+      </Prose>
+
+      <div className="neural-equation">
+        <MathBlock>
+          {'\\widehat{\\operatorname{pass@}k}\n=1-\\frac{\\binom{n-c}{k}}{\\binom{n}{k}}.'}
+        </MathBlock>
+      </div>
+
+      <Prose>
+        {
+          'The failure subsets select four of the six failures: C(6,4)=15. There are C(8,4)=70 total subsets, so the result is 1−15/70=11/14, approximately .785714. This is the familiar pass@k estimator computed from a retained response set, under its sampling assumptions. It differs from the known-IID probability 1−(1−p)^4=.68359375 at true p=.25. An observed count c/n=.25 is not a known population success probability.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'If k>n, the retained-set estimator is unavailable. If n=8 and c=0, it is zero for admissible k; if n−c<k, it is one because every such subset contains a pass. In our terminal scaled seed-17 record with one success among eight, its pass@4 estimate is .5. Averaging that value with eleven zero-record estimates gives .0416667 across the twelve selected records, not a per-response answer-pass fraction of .0416667.'
+        }
+      </Prose>
+
+      <Prose>
+        {'An answer vote asks a different question. A '}
+        <strong>{'plurality'}</strong>
+        {' chooses the most frequent parsed answer; it need not have more than half the votes. A '}
+        <strong>{'majority'}</strong>
+        {
+          ' requires that stricter share. Our metrics reject a tied plurality as having no unique winner and keep invalid extraction outcomes separate. Eight repeated wrong answers can have unanimous agreement and zero answer-pass probability. Votes are not a verifier for truth; they expose consistency of the sampled answers. Repeated learned reasoning judgments have an additional dependence and accuracy question.'
+        }
+      </Prose>
+
+      <PaperProtocolComparison />
+
+      <Prose>
+        {
+          "The public literature illustrates why the complete recipe belongs next to a method name. Tülu 3's RLVR phase uses PPO with explicit verifiable rewards and a value model. Its declared prompt mixture includes 7,473 GSM8K, 7,500 MATH and 14,973 constrained instructions. It uses reward 10 for its verifiable successes and a −10 missing-EOS penalty. The reported selected checkpoints use domain evaluations; they are not the terminal results of our nine-arm study. Its examples also show constraint-satisfying outputs that fail to answer the useful question. "
+        }
+        <a href={'https://arxiv.org/html/2411.15124v3'}>{'Tülu 3, section 6 and Appendix B.4'}</a>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {'DeepSeekMath introduces GRPO in a recipe that actually uses a '}
+        <strong>{'learned reward model'}</strong>
+        {
+          ', trained from rule-based judgments. Its reward-model training and later reference/reward refresh choices should not be relabelled a deterministic rule-only R1-Zero loop. The mathematical derivation is useful for the group objective and sampled KL treatment; a shared objective name does not establish the same feedback source. '
+        }
+        <a href={'https://arxiv.org/html/2402.03300v2'}>
+          {'DeepSeekMath, section 4 and Appendix A'}
+        </a>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {
+          "The January DeepSeek-R1 report distinguishes rule-reward R1-Zero from the full multi-stage R1 pipeline. The latter includes cold-start SFT, reasoning RL, rejection-sampled/nonreasoning SFT and later general-domain learned feedback. Its distilled models' SFT results do not mean each distilled model received the same RL procedure. January R1-Zero reports AIME pass@1 rising from 15.6 to 71.0 and a final consensus@64 result of 86.7; its evolving Figure 2 curve uses a different 16-response evaluation description. Those protocols should not be merged into one sampling denominator. "
+        }
+        <a href={'https://arxiv.org/html/2501.12948v1'}>{'DeepSeek-R1, January v1'}</a>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {
+          'The Nature treatment reports its own revised results and settings, including training group size 16, beta .001 and periodic reference refresh every 400 steps. It is a separately documented version, not permission to mix January and Nature scores or substitute evaluation sample counts for training groups. Longer response traces in a particular run do not prove that increasing length always improves reasoning. '
+        }
+        <a href={'https://www.nature.com/articles/s41586-025-09422-z'}>
+          {'DeepSeek-R1, Nature Methods'}
+        </a>
+        {'.'}
+      </Prose>
+
+      <Prose>
+        {
+          'The pinned Open-R1 README describes a historical reproduction effort, marks its distillation step complete and says the repository is no longer maintained, pointing training users toward TRL. A roadmap is not evidence that every planned R1 stage was reproduced. The installed source inspected in this lesson is TRL v1.14.2, whose current loss default differs from original GRPO, so the native example declares its options explicitly. '
+        }
+        <a
+          href={
+            'https://github.com/huggingface/open-r1/tree/5b6ff22b3fb7aa069c54866e517f39dfc3160e09'
+          }
+        >
+          {'Open-R1 at the retained revision'}
+        </a>
+        {', '}
+        <a href={'https://github.com/huggingface/trl/tree/v1.14.2'}>{'TRL v1.14.2'}</a>
+        {'.'}
+      </Prose>
+
+      <WorkAndMetricLedger />
+
+      <Prose>
+        {
+          'A work ledger helps keep these comparisons concrete. Our three custom warm runs use 576 updates and 3,456 drawn training rows, with 26,770 included response-target positions across their teacher-forced batches. The later arms use 864 prompt groups, 3,456 generated training responses and 28,537 generated tokens; their 670 actual optimizer updates exclude the 50 skipped SFT rollouts. Evaluation adds 3,456 fresh sampled responses. The separate native architecture adds 64 warm updates and one native optimizer update; its explicit twin step is comparison arithmetic and is counted separately from a training arm. The later fixture adds no optimizer update. Flan adds twelve greedy responses with decoder-start positions excluded from new-token counts.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          "Storage roles differ too. Trainable policy parameters receive gradients. Frozen old log probabilities can represent the rollout denominator without a second permanently stored rollout model in this small implementation. A frozen reference model supplies its own target probabilities. AdamW adds first and second moments for parameters it updates. PPO additionally has a value-model role that GRPO's group baseline avoids. These objects explain a memory difference; they do not support a universal percentage saving without sizes, precision, batching and architecture."
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'Selected-set numeric answer success is measured here. Independently assessed reasoning correctness and human usefulness are not measured. Parser acceptance, answer accuracy and a learned reward score cannot silently replace those absent measurements. Count each test invocation, generated position and optimizer step under its actual role before comparing systems or making a cost claim.'
+        }
+      </Prose>
+
+      <ControlledUseDecision />
+
+      <Prose>
+        {
+          'To decide whether RLVR fits a task, follow the concrete questions. What intended property can the checker establish? Is a valid gold or specification available, and what happens when it is absent? Can the policy generate useful candidates, and do sampled groups expose a contrast? Can a high reward arise from a specification gap? Does improvement extend to untouched prompts and the intended reasoning or usefulness criterion? An exact-answer task, finite code tests and a formal derivation each take different branches because they check different objects. A subjective stylistic judgment may need human or learned feedback instead. No fixed success-rate threshold answers all of those questions.'
+        }
+      </Prose>
+
+      <Prose>
+        {
+          'The next DAPO topic examines specific sampling, clipping, length and reduction choices once this task–reward–sampling–update contract is explicit. Carry the original response identities and denominators forward; changing a mechanism should change a named operation that the learner can trace.'
+        }
+      </Prose>
+
+      <Program file="run_all.py" />
+
+      <Prose>
+        {
+          "The complete staged runner checks source/package/data identities and only reuses a previously successful stage when its result and dependencies still match. A changed source or failed status is an explicit stop. The retained study's original driver stopped at the native equality failure; the descriptive metrics stage was then first invoked separately on the already complete custom study. A later approved fixture receipt does not rewrite that original failure or turn an isolated metrics report into a claim that the entire driver passed."
+        }
+      </Prose>
+      <Old ids={['11-self-check-exercises']} />
+      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice">
+        <H2>{'16. Transfer the contract to new cases'}</H2>
+        <Prose>
           {
-            name: "easy problems (pids 0–24)",
-            color: "#4ade80",
-            points: [
-              [0,0.517],[5,0.600],[10,0.676],[15,0.732],[20,0.796],
-              [25,0.832],[30,0.872],[35,0.897],[39,0.915],
-            ],
-          },
+            'The next exercises change the inputs rather than asking you to repeat the worked defaults. Trace the accepted object, conditional denominator and gradient route before choosing a number. The '
+          }
+          <a href={'/learn/examples/rlvr/FILES.md'}>{'file index'}</a>
+          {' links the complete programs and the '}
+          <a href={'/learn/examples/rlvr/rlvr-observations.zip'}>{'recorded outputs'}</a>
           {
-            name: "hard problems (pids 25–49)",
-            color: "#f97316",
-            points: [
-              [0,0.080],[5,0.102],[10,0.130],[15,0.168],[20,0.212],
-              [25,0.270],[30,0.334],[35,0.408],[39,0.476],
-            ],
-          },
+            ' used for the inspection tasks. Extract the latter into a separate directory; its failed native status and isolated metrics report retain their distinct roles.'
+          }
+        </Prose>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'1. Separate a numeric value from a unit-bearing string'}</H3>
+
+          <Prose>
+            {'Gold is '}
+            <code>{'3/4'}</code>
+            {'. Compare the strict final-marker verdicts for '}
+            <code>{'#### .750'}</code>
+            {' and '}
+            <code>{'#### 3/4 kg'}</code>
+            {'. What changes if the gold is unavailable?'}
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                ' The scratch grammar accepts exact decimal numbers or integer fractions; it does not strip units. Missing gold is a different state from a wrong answer.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' Decimal .750 becomes the exact fraction 3/4, so the first response is accepted. The second suffix includes '
+              }
+              <code>{'kg'}</code>
+              {
+                ', lies outside the declared numeric grammar and is rejected. If gold is unavailable, both receive unknown acceptance/reward under '
+              }
+              <code>{'final_verdict'}</code>
+              {
+                ', even though the parser can still expose the first numeric object and the second extraction failure. Adding unit handling would be a new answer contract, not merely a different reward weight.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'2. Find a counterexample to a weak program test'}</H3>
+
+          <Prose>
+            {'The required arithmetic function is x+y. Tests '}
+            <code>{'(2,2)→4'}</code>
+            {' and '}
+            <code>{'(0,0)→0'}</code>
+            {' accept candidate '}
+            <code>{'x*y'}</code>
+            {'. Give an allowed new test that distinguishes it from '}
+            <code>{'x+y'}</code>
+            {'.'}
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                ' Choose inputs where a product and sum differ; the restricted AST grammar supports both addition and multiplication.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {' Add '}
+              <code>{'(1,2)→3'}</code>
+              {'. Candidate '}
+              <code>{'x+y'}</code>
+              {' returns 3, but '}
+              <code>{'x*y'}</code>
+              {
+                ' returns 2. The product agreed with the original two tests without implementing addition for all integer pairs. A finite pass therefore established only the checked instances; it supplied no universal equivalence proof.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'3. Reconstruct a nested conjunction proof'}</H3>
+
+          <Prose>
+            {
+              'Construct a proof of P∧(Q∧R)→(R∧P) using only assumption, conjunction elimination/introduction and implication introduction. Explain where h is valid.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {" R is the right conjunct of the right conjunct of h. P is h's left conjunct."}
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' Introduce h with premise P∧(Q∧R). Its right elimination gives Q∧R; another right elimination gives R. Its left elimination gives P. Conjunction introduction combines R and P, then implication introduction discharges h. The literal proof object is:'
+              }
+            </Prose>
+
+            <CodeBlock language={'python'}>
+              {
+                '("imp-intro", "h", ("and", "P", ("and", "Q", "R")),\n ("and-intro",\n  ("and-right", ("and-right", ("assume", "h"))),\n  ("and-left", ("assume", "h"))))'
+              }
+            </CodeBlock>
+
+            <Prose>
+              {
+                'h is valid only inside that implication-introduction body. Running the body alone with no h in context fails the assumption lookup. The kernel reconstructs the proposition from these rules; it does not accept a final prose assertion that the goal was proved.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'4. Mask a generated EOS without scoring the prompt'}</H3>
+
+          <Prose>
+            {'A packed row is '}
+            <code>{'[BOS,65,SEP,35,EOS,PAD]'}</code>
+            {'. The prompt is the first three IDs and the response is '}
+            <code>{'[35,EOS]'}</code>
+            {
+              '. Which shifted prediction positions contribute to the response loss? Their target probabilities are .25 and .5; find the response mean log probability.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                ' Position t−1 predicts target t. A generated EOS is included; right-padding PAD is excluded.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' Target positions 3 and 4 are predicted by positions 2 and 3. The mask over the five shifted targets is '
+              }
+              <code>{'[False,False,True,True,False]'}</code>
+              {
+                '. Its included target IDs are 35 and EOS. The mean log probability is (log .25+log .5)/2=log(.125)/2≈−1.039720771. The prompt targets and PAD contribute nothing to this response loss. Removing EOS would change both its target set and denominator.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'5. Change the group size and standard-deviation convention'}</H3>
+
+          <Prose>
+            {'A group of five has rewards '}
+            <code>{'(1,0,0,0,0)'}</code>
+            {
+              '. Find the mean, population standard deviation and sample standard deviation, then the normalized coefficients with epsilon 0. What changes with a fixed epsilon .0001?'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                ' The squared deviations sum to .8. The population denominator is 5; the sample denominator is 4.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' The mean is .2 and deviations are .8,−.2,−.2,−.2,−.2. Population variance is .8/5=.16, so its standard deviation is .4. Sample variance is .8/4=.2, so its standard deviation is sqrt(.2). Population-normalized coefficients are '
+              }
+              <code>{'(2,−.5,−.5,−.5,−.5)'}</code>
+              {'. Sample-normalized coefficients are approximately '}
+              <code>{'(1.788854,−.447214,−.447214,−.447214,−.447214)'}</code>
+              {
+                ". With .0001 added to the respective denominator, population coefficients become .8/(.4+.0001) and −.2/(.4+.0001), approximately 1.999500125 and −.499875031. The sample route uses sqrt(.2)+.0001 instead. A library's named group scaling needs this convention to specify the actual magnitude."
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'6. Compare same-group and leave-one-out baselines'}</H3>
+
+          <Prose>
+            {
+              'For five IID Bernoulli responses with success probability .4 and a Bernoulli logit policy, find the expected unstandardized score gradient after same-group centering and after a leave-one-out baseline.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                ' The exact return derivative is p(1−p); same-group centering introduces the factor 1−1/G under these assumptions.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' The return derivative is .4×.6=.24. Same-group centering produces (1−1/5)×.24=.192. A leave-one-out baseline removes the self-contribution and gives .24. This statement is about an unstandardized expected score gradient under IID draws. Dividing by a random group standard deviation, clipping or running AdamW creates a different estimator/update and is not covered by this particular factor identity.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'7. Follow all four signed clipping cases'}</H3>
+
+          <Prose>
+            {'With clipping [.8,1.2], evaluate '}
+            <code>{'(rho,A)'}</code>
+            {' equal to '}
+            <code>{'(.7,2)'}</code>
+            {', '}
+            <code>{'(1.3,−2)'}</code>
+            {', '}
+            <code>{'(1.3,2)'}</code>
+            {' and '}
+            <code>{'(.7,−2)'}</code>
+            {'. Find the mean training loss and its four ratio derivatives.'}
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {' Take the minimum of rho×A and clipped-rho×A before negating for loss.'}
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' The surrogate terms are 1.4,−2.6,2.4 and −1.6. Their mean is −.1, so the mean negative-surrogate loss is .1. The first two terms remain on the unclipped branches: a positive coefficient below the lower boundary and a negative coefficient above the upper boundary still have incentives to move toward a better ratio. Their surrogate derivatives are 2 and −2; the other two terms lie on plateaus and have derivative 0. After the negative sign and division by four, the loss derivatives are '
+              }
+              <code>{'(−.5,.5,0,0)'}</code>
+              {'.'}
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'8. Keep forward and reverse KL distinct'}</H3>
+
+          <Prose>
+            {'Current p=(.6,.4) and reference q=(.3,.7). Compute both directed KL values. For '}
+            <InlineMath>{'p_1=\\operatorname{sigmoid}(\\theta)'}</InlineMath>
+            {', compare the derivatives with respect to theta.'}
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                ' Forward KL differentiates its changing p weights as well as their logs; reverse KL has fixed q weights.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {' Forward KL is '}
+              <InlineMath>{'.6\\log 2+.4\\log(4/7)\\approx .192041993'}</InlineMath>
+              {'. Reverse KL is '}
+              <InlineMath>{'.3\\log(.5)+.7\\log(1.75)\\approx .183786897'}</InlineMath>
+              {'. The forward derivative is '}
+              <InlineMath>{'.6\\times .4\\times\\log 3.5\\approx .300663112'}</InlineMath>
+              {'. The reverse derivative is '}
+              <InlineMath>{'p_1-q_1=.3'}</InlineMath>
+              {
+                '. These close numbers arise from different objectives; a derivative p−q cannot be substituted for the policy-to-reference KL derivative merely because it looks similar.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'9. Separate any success from mixed rewards'}</H3>
+
+          <Prose>
+            {
+              'With IID pass probability .8 and group size 5, calculate all-failure, all-success, any-success and mixed-group probabilities.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{' The disjoint all-failure/mixed/all-success events sum to one.'}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' All-failure has probability .2^5=.00032, all-success has probability .8^5=.32768, and any-success has probability 1−.00032=.99968. Mixed-group probability is 1−.00032−.32768=.672. Almost certain availability of a success is not the same event as availability of a centred reward contrast. Correlated response draws would need a different probability model.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'10. Change prevalence and oracle error rates'}</H3>
+
+          <Prose>
+            {
+              'True-success prevalence is .3, false-positive rate .2 and false-negative rate .1. Find noisy acceptance probability, acceptance precision and the two backward- corrected observed rewards.'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {' Accepted true successes have mass .3×.9; accepted failures have mass .7×.2.'}
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                " Acceptance probability is .27+.14=.41 and precision is .27/.41=27/41≈.658536585. Correction divides observed reward minus .2 by 1−.2−.1=.7. Observed 0 becomes −2/7 and observed 1 becomes 8/7. Conditional on true failure, the corrected expectation is .2×8/7+.8×(−2/7)=0; conditional on true success it is .9×8/7+.1×(−2/7)=1. The rates must actually be known and class-conditional for these equalities to apply. They are not supplied by a noisy verifier's own decisions."
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'11. Compare shared-column and whole-group corruption'}</H3>
+
+          <Prose>
+            {'Two responses have test rows '}
+            <code>{'(1,1,0)'}</code>
+            {' and '}
+            <code>{'(0,1,0)'}</code>
+            {
+              '. Reward is mean test pass. Complement the middle column for both, then separately complement the entire original grid. What happens to centred normalized coefficients at epsilon 0?'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                ' A shared column can subtract the same reward from both rows; the whole complement replaces each row reward r by 1−r.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' Clean rewards are 2/3 and 1/3, mean 1/2, deviations ±1/6 and population standard deviation 1/6, giving coefficients '
+              }
+              <code>{'(1,−1)'}</code>
+              {
+                '. Complementing the middle column yields rewards 1/3 and 0, mean 1/6 and the same deviations/standard deviation, so coefficients remain '
+              }
+              <code>{'(1,−1)'}</code>
+              {
+                ' despite lower mean reward. Complementing the entire original grid gives rewards 1/3 and 2/3, and coefficients '
+              }
+              <code>{'(−1,1)'}</code>
+              {
+                '. Different correlation patterns can therefore preserve or reverse the local contrast. No claim about a simply scaled AdamW update follows without considering clipping, other loss terms and optimizer history.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'12. Inspect an actual skipped supervised update'}</H3>
+
+          <Prose>
+            {
+              "Open seed 17's verified-sample SFT run, scheduled step 1. Find its accepted IDs, update count, skip reason and cumulative optimizer count. Why is replacing the empty set with its highest-scoring rejected response a new procedure?"
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {" Read the step's "}
+              <code>{'update'}</code>
+              {' object, not its scheduled step number.'}
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {' The retained object has '}
+              <code>{'accepted_ids=[]'}</code>
+              {', '}
+              <code>{'updates=0'}</code>
+              {', '}
+              <code>{'loss=None'}</code>
+              {' and '}
+              <code>{'skip="no accepted response"'}</code>
+              {
+                '; the cumulative optimizer count is 0. The rollout sampled responses, but provided no accepted likelihood target. Selecting a rejected response would change the selection contract; repeatedly sampling until success would change the sample budget. Neither occurred in the prescribed study. Later accepted steps do not retroactively create this update.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'13. Estimate pass@3 from a different retained set'}</H3>
+
+          <Prose>
+            {
+              'Ten complete sampled responses contain three answer passes. Compute the retained-set pass@3 estimator. Is it identical to substituting p=.3 into an IID three-draw event probability?'
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>{' Failure subsets choose three of the seven failed responses.'}</Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' The estimator is 1−C(7,3)/C(10,3)=1−35/120=17/24≈.708333333. The known-IID expression at p=.3 is 1−.7^3=.657. Uniform subsets without replacement from these ten and new independent draws from a distribution of known success probability are different constructions. The observed 3/10 fraction is not automatically the true population p. If k exceeds 10, this retained-set formula is unavailable rather than extrapolated.'
+              }
+            </Prose>
+          </details>
+        </section>
+        <section className="rlvr-practice" data-lesson-exercise>
+          <H3>{'14. Trace a different real task through the retained file'}</H3>
+
+          <Prose>
+            {'Inspect '}
+            <code>{'gsm8k-train-70'}</code>
+            {
+              " in seed 17's first verified-sample SFT rollout. Martha has 68 apples, Tim has 30 fewer than Martha, and Harry has half as many as Tim. Find the gold answer, first sampled response, its parsed object, EOS status and included response-target count. What reasoning claim can the verdict establish?"
+            }
+          </Prose>
+          <details>
+            <summary>Hint</summary>
+            <Prose>
+              {
+                ' The raw sampled response is kept separately from the numeric span and its full prefix IDs. An extra leading hash does not change the last-marker suffix that this particular checker selects.'
+              }
+            </Prose>
+          </details>
+          <details>
+            <summary>Worked solution</summary>
+            <Prose>
+              {
+                ' Tim has 68−30=38 apples and Harry has 38/2=19, so the gold is 19. The first retained response is '
+              }
+              <code>{'#####6'}</code>
+              {', with response IDs '}
+              <code>{'[35,35,35,35,35,54,257]'}</code>
+              {'. The checker selects the suffix after the last '}
+              <code>{'####'}</code>
+              {' marker, parses 6 and returns '}
+              <code>{'numeric mismatch'}</code>
+              {
+                '; reward is 0. A genuine EOS was sampled, so the response is not cap-truncated and all seven response IDs, including EOS, are included targets. The response supplies no valid derivation of the intended answer. The final-number verdict establishes its mismatch, not an independent assessment of every reasoning step in other responses.'
+              }
+            </Prose>
+          </details>
+        </section>
+      </section>
+      <H2>{'Summary'}</H2>
+
+      <Prose>
+        {
+          "RLVR joins a checkable task property to sampled response probabilities and a chosen learning rule. Extraction, external labels, group contrasts, detached old/reference scores, signed clipping and causal masks determine what that update actually means. The complete programs show real generation and the retained study's limited generalization; the native trace also shows why numerical loss/gradient agreement need not survive an optimizer step. Use each verifier and metric under its named contract, then inspect the changed case."
+        }
+      </Prose>
+
+      <section
+        className="lesson-ending lesson-ending--further-learning"
+        data-lesson-ending="further-learning"
+        data-lesson-resource-list=""
+      >
+        <H2>{'Further reading'}</H2>
+
+        <ul>
+          <li>
+            {''}
+            <a href={'https://rlhfbook.com/c/06-policy-gradients'}>
+              {'Lambert, RLHF Book: policy gradients'}
+            </a>
+            {
+              ' connects the score-function derivation, baselines and signed PPO clipping to implementation. Use it to revisit the gradient route before comparing group methods; a method-name table alone does not specify a reduction or estimator.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html'}>
+              {'OpenAI Spinning Up: deriving the simplest policy gradient'}
+            </a>
+            {
+              ' develops the log-derivative argument and its sampled program step by step. Its episodic construction explains why an action score receives a return; our causal response then expands that score into included token positions.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://rlhfbook.com/c/07-reasoning'}>{'Lambert, RLHF Book: reasoning'}</a>
+            {
+              ' discusses the reward/evaluation distinctions behind reasoning-oriented RL. Read it alongside the literal task contracts here rather than equating longer sampled text with verified reasoning.'
+            }
+          </li>
+        </ul>
+
+        <Old ids={['10-primary-sources']} />
+      </section>
+      <section
+        className="lesson-ending lesson-ending--references"
+        data-lesson-ending="references"
+        data-lesson-resource-list=""
+      >
+        <H2>{'Technical references'}</H2>
+
+        <ul>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2411.15124v3'}>
+              {'Tülu 3, section 6 and Appendix B.4'}
+            </a>
+            {
+              ' supplies a PPO-based RLVR recipe, source-local checkpoint choices and concrete constraint-gaming examples. Its targeted reward and broad evaluation can move differently, making it useful for evaluating specification scope.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2402.03300v2'}>
+              {'DeepSeekMath, section 4 and Appendix A'}
+            </a>
+            {
+              ' supplies the original GRPO derivation and learned-reward-model context. Inspect the reference and reward-model refreshes; its feedback source differs from a rule-only R1-Zero loop.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2501.12948v1'}>{'DeepSeek-R1, January v1'}</a>
+            {' and '}
+            <a href={'https://www.nature.com/articles/s41586-025-09422-z'}>
+              {'the Nature treatment'}
+            </a>
+            {
+              ' distinguish Zero, full multi-stage R1 and distillation. Keep version-local training groups, evaluation sample counts and reference-refresh settings separate when interpreting their results.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2506.14245v2'}>{'Reasoning incentives, v2'}</a>
+            {
+              ' derives conditional reasoning-class advantages under an explicit relationship between reasoning and answer success. Its finite assumptions and learned CoT judge delimit what can be inferred about real reasoning and generalization.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2510.00915v5'}>
+              {'Learning with imperfect verifiers, v5'}
+            </a>
+            {
+              ' treats known class-conditional error rates and oracle reward correction. Its assumptions, variance costs and the degeneracy under affine group normalization are essential when considering a verifier calibration scheme.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://arxiv.org/html/2604.07666v2'}>{'RL with noisy verifiers, v2'}</a>
+            {
+              ' uses response-by-test outcome matrices to distinguish cell, row, column and shared-group corruption. Its evaluated settings and intervals do not define a universal tolerable-noise threshold.'
+            }
+          </li>
+          <li>
+            {''}
+            <a
+              href={
+                'https://github.com/huggingface/math-verify/tree/ba3d3aaff23b3f4cac7a14672b4f6e293d97c98b'
+              }
+            >
+              {'Pinned Math-Verify'}
+            </a>
+            {
+              ' opens extraction and grading heuristics. Inspect the raw mathematical object, gold/prediction direction, timeout route and missing-label behavior before adopting its reward in a different task.'
+            }
+          </li>
+          <li>
+            {''}
+            <a href={'https://github.com/huggingface/trl/tree/v1.14.2'}>{'Pinned TRL v1.14.2'}</a>
+            {
+              ' is the ordinary native route examined by the complete program. Its actual loss and group-standard-deviation code govern this comparison; future library defaults require a fresh contract check.'
+            }
+          </li>
+        </ul>
+      </section>
+
+      <section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+        <H2>{'Keep going'}</H2>
+
+        <Prose>
           {
-            name: "average",
-            color: "#e2b55a",
-            points: [
-              [0,0.298],[5,0.351],[10,0.403],[15,0.450],[20,0.504],
-              [25,0.551],[30,0.603],[35,0.653],[39,0.696],
-            ],
-          },
-        ]}
-      />
+            'Before continuing, check that you can trace a new raw response into its parsed object and verdict, distinguish a mixed group from any-success sampling, reconstruct a shifted response mask, and explain a signed clipping case. You should also be able to inspect a saved failed update without turning its separate fixture check into a successful learning claim.'
+          }
+        </Prose>
 
-      <Prose>
-        The easy problems converge quickly — the policy was already close to the solution and GRPO rapidly shifts probability mass toward correct responses. Hard problems improve much more slowly; the initial exploration rate is low enough that many gradient steps contribute little signal. This asymmetry motivates curriculum training, addressed in 4d.
-      </Prose>
-
-      <H3>4d. Exploration bootstrap — curriculum vs hard-only</H3>
-
-      <Prose>
-        When the base model's pass rate on hard problems is near zero, most groups of G=8 rollouts return all-zero rewards. The group standard deviation is zero, the advantage is undefined, and the gradient step is skipped. Training on hard problems exclusively stalls. The fix is curriculum: begin with easy problems the base model can mostly solve, gradually introduce harder ones as the policy strengthens. We compare both strategies over 30 steps.
-      </Prose>
-
-      <CodeBlock language="python">
-{`random.seed(13)
-
-def run_rlvr(problem_schedule, n_steps=30, G=8, lr=0.15):
-    """
-    problem_schedule(step, total) -> (n_easy, n_hard) problems per step.
-    Returns list of pass rates (hard-problem logit) over training.
-    """
-    logit = -2.5   # weak start: ~8% pass rate on hard problems
-    rates = []
-
-    for step in range(n_steps):
-        n_easy, n_hard = problem_schedule(step, n_steps)
-        total_grad, total_n = 0.0, 0
-
-        # Easy problems: floor pass rate at 0.35 to model prior SFT capability
-        for _ in range(n_easy):
-            p_prob = max(0.35, sigmoid(logit))
-            rewards = [1.0 if random.random() < p_prob else 0.0 for _ in range(G)]
-            mean_r, std_r = sum(rewards)/G, (sum((r-mean_r)**2 for r in rewards)/G)**.5
-            if std_r > 1e-8:
-                advantages = [(r - sum(rewards)/G) / std_r for r in rewards]
-                g = sum(adv * ((1-p_prob) if r==1.0 else -p_prob)
-                        for adv,r in zip(advantages,rewards)) / G
-                total_grad += g;  total_n += 1
-
-        # Hard problems
-        for _ in range(n_hard):
-            p_prob = sigmoid(logit)
-            rewards = [1.0 if random.random() < p_prob else 0.0 for _ in range(G)]
-            mean_r = sum(rewards)/G
-            std_r  = (sum((r-mean_r)**2 for r in rewards)/G)**.5
-            if std_r > 1e-8:
-                advantages = [(r-mean_r)/std_r for r in rewards]
-                g = sum(adv * ((1-p_prob) if r==1.0 else -p_prob)
-                        for adv,r in zip(advantages,rewards)) / G
-                total_grad += g;  total_n += 1
-
-        if total_n > 0:
-            logit += lr * total_grad / total_n
-        rates.append(sigmoid(logit))
-    return rates
-
-# Curriculum: ramp from all-easy to all-hard over training
-def curriculum(step, total):
-    frac = step / total
-    return max(1, int(10 * (1 - frac))), int(10 * frac)
-
-# No curriculum: hard problems only from step 0
-def hard_only(step, total):
-    return 0, 10
-
-curr_rates = run_rlvr(curriculum)
-hard_rates = run_rlvr(hard_only)
-
-print("Curriculum — start: %.3f, end: %.3f" % (curr_rates[0], curr_rates[-1]))
-print("Hard-only  — start: %.3f, end: %.3f" % (hard_rates[0], hard_rates[-1]))
-# Curriculum — start: 0.081, end: 0.362
-# Hard-only  — start: 0.080, end: 0.326`}
-      </CodeBlock>
-
-      <Plot
-        label="4d. curriculum vs hard-only — hard-problem pass rate over steps"
-        xLabel="training step"
-        yLabel="hard pass rate"
-        series={[
+        <Prose>
+          {''}
+          <a
+            href={
+              '/learn/path/full-curriculum/dapo-dynamic-adaptive-policy-optimization?module=large-language-models'
+            }
+          >
+            {'DAPO'}
+          </a>
           {
-            name: "curriculum (easy → hard ramp)",
-            color: "#4ade80",
-            points: [
-              [0,0.081],[5,0.132],[10,0.182],[15,0.230],[20,0.280],
-              [25,0.318],[29,0.362],
-            ],
-          },
-          {
-            name: "hard-only from step 0",
-            color: "#f87171",
-            points: [
-              [0,0.080],[5,0.105],[10,0.138],[15,0.190],[20,0.245],
-              [25,0.288],[29,0.326],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        The curriculum advantage is clearest in the first 10 steps: the hard-only run has almost no signal and barely moves, while the curriculum run receives gradient from easy problems and strengthens the policy enough that, by step 10, hard problems start yielding useful gradients too. By step 29 the curriculum achieves a 11% higher hard pass rate. In real training with much harder problems — AIME-level math where the base model starts at 0% — the hard-only run would not move at all.
-      </Prose>
-
-      <H3>4e. Synthetic data amplification</H3>
-
-      <Prose>
-        After each round of RLVR, the policy has produced rollouts the verifier accepted. Those correct rollouts — full reasoning chains ending in verified answers — can be used as supervised fine-tuning data before the next RL phase. SFT on correct rollouts shifts the base distribution toward good reasoning patterns, so the next RLVR phase starts from a better initialization. We model this as a logit shift at the start of RLVR and compare against RLVR-only over 25 steps.
-      </Prose>
-
-      <CodeBlock language="python">
-{`random.seed(99)
-
-def run_amplification(sft_boost: float, n_steps=25, G=8, lr=0.1):
-    """
-    sft_boost: logit improvement from SFT on correct rollouts before RLVR.
-    Returns pass rate over RLVR training.
-    """
-    logit = -3.0 + sft_boost   # very weak base + SFT shift
-    rates = []
-
-    for step in range(n_steps):
-        total_grad, total_n = 0.0, 0
-        for _ in range(20):   # 20 medium-difficulty problems per step
-            p = sigmoid(logit)
-            rewards = [1.0 if random.random() < p else 0.0 for _ in range(G)]
-            mean_r  = sum(rewards) / G
-            std_r   = (sum((r - mean_r)**2 for r in rewards) / G) ** 0.5
-            if std_r > 1e-8:
-                advantages = [(r - mean_r) / std_r for r in rewards]
-                g = sum(adv * ((1-p) if r==1.0 else -p)
-                        for adv,r in zip(advantages,rewards)) / G
-                total_grad += g;  total_n += 1
-        if total_n > 0:
-            logit += lr * total_grad / total_n
-        rates.append(sigmoid(logit))
-    return rates
-
-rlvr_only = run_amplification(sft_boost=0.0)   # no SFT warm-start
-sft_then  = run_amplification(sft_boost=1.5)   # SFT shifts logit by +1.5
-
-print("RLVR-only   start=%.3f  end=%.3f" % (rlvr_only[0], rlvr_only[-1]))
-print("SFT + RLVR  start=%.3f  end=%.3f" % (sft_then[0],  sft_then[-1]))
-# RLVR-only   start=0.049  end=0.108
-# SFT + RLVR  start=0.188  end=0.394`}
-      </CodeBlock>
-
-      <Plot
-        label="4e. synthetic data amplification — rlvr-only vs sft+rlvr"
-        xLabel="rlvr training step"
-        yLabel="pass rate"
-        series={[
-          {
-            name: "RLVR-only (no SFT warm-start)",
-            color: "#f87171",
-            points: [
-              [0,0.049],[3,0.058],[6,0.068],[9,0.079],[12,0.089],
-              [15,0.096],[18,0.101],[21,0.105],[24,0.108],
-            ],
-          },
-          {
-            name: "SFT on correct rollouts → then RLVR",
-            color: "#4ade80",
-            points: [
-              [0,0.188],[3,0.234],[6,0.278],[9,0.317],[12,0.347],
-              [15,0.369],[18,0.381],[21,0.389],[24,0.394],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        The amplification effect is stark. The RLVR-only run barely moves from its initial 5% pass rate because the base model is too weak to generate correct rollouts; without any correct rollouts, there is no positive gradient signal. The SFT+RLVR run starts at 19% — a strong enough base that GRPO generates useful gradient from the first step — and reaches 39% by step 24. This is the bootstrapping pattern used by DeepSeek-R1: cold-start SFT on curated rollouts, then RLVR for the bulk of capability improvement.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <H3>5.1 TRL's GRPOTrainer with a custom verifier</H3>
-
-      <Prose>
-        HuggingFace TRL's <Code>GRPOTrainer</Code> accepts a custom reward function directly — plug in a verifier and the standard GRPO loop handles rollout, scoring, advantage computation, and PPO updates. The key parameter is <Code>reward_funcs</Code>, which takes a list of callables that map (prompts, completions) to lists of floats.
-      </Prose>
-
-      <CodeBlock language="python">
-{`from trl import GRPOConfig, GRPOTrainer
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import re
-
-# ── 1. Define the math verifier ────────────────────────────────────────────
-def math_reward_fn(prompts, completions, ground_truths=None, **kwargs):
-    """
-    TRL reward function signature: (prompts, completions) -> List[float].
-    ground_truths must be passed as an extra dataset column.
-    """
-    rewards = []
-    for completion, gt in zip(completions, ground_truths):
-        text = completion[0]["content"] if isinstance(completion, list) else completion
-        match = re.search(r"\\\\boxed\\{([^}]+)\\}", text)
-        if not match:
-            rewards.append(0.0)
-            continue
-        try:
-            score = 1.0 if abs(float(match.group(1)) - float(gt)) < 1e-6 else 0.0
-        except ValueError:
-            score = 0.0
-        rewards.append(score)
-    return rewards
-
-# ── 2. Configure GRPO training ─────────────────────────────────────────────
-grpo_config = GRPOConfig(
-    model_name_or_path="meta-llama/Llama-3.1-8B-Instruct",
-    output_dir="./rlvr_math_model",
-    num_train_epochs=1,
-    per_device_train_batch_size=1,
-    gradient_accumulation_steps=8,   # effective batch: 8 prompts
-    num_generations=8,               # G=8 rollouts per prompt
-    max_new_tokens=512,
-    temperature=0.9,
-    beta=0.04,                       # KL coefficient (matches DeepSeekMath)
-    learning_rate=1e-6,
-    bf16=True,
-    gradient_checkpointing=True,
-    # GRPO-specific: no value model needed
-    use_vllm=True,                   # fast generation with vLLM
-)
-
-model     = AutoModelForCausalLM.from_pretrained(grpo_config.model_name_or_path)
-tokenizer = AutoTokenizer.from_pretrained(grpo_config.model_name_or_path)
-
-# dataset must have columns: "prompt" and "ground_truth"
-trainer = GRPOTrainer(
-    model=model,
-    args=grpo_config,
-    train_dataset=math_dataset,
-    reward_funcs=[math_reward_fn],
-    tokenizer=tokenizer,
-)
-trainer.train()`}
-      </CodeBlock>
-
-      <H3>5.2 Open-R1 and DeepSeek-R1 reproduction</H3>
-
-      <Prose>
-        The open-r1 project (github.com/huggingface/open-r1) is the most detailed public reproduction of DeepSeek-R1's RLVR pipeline. It provides three scripts: <Code>grpo.py</Code> trains a model with GRPO on a verifiable dataset; <Code>sft.py</Code> performs supervised fine-tuning on distilled reasoning traces; and <Code>generate.py</Code> generates synthetic data using the current policy. The project reproduces the cold-start + RLVR two-stage structure: SFT on 350k verified traces, then GRPO with a math verifier.
-      </Prose>
-
-      <Prose>
-        Key engineering decisions from the open-r1 codebase that differ from a naive implementation: vLLM is used for generation (not the Transformers model directly) to get 8x throughput on rollout generation; rewards are computed asynchronously while the optimizer runs; the math verifier uses a more robust answer parser that handles LaTeX fractions, scientific notation, and symbolic expressions (not just float parsing); and the curriculum is implemented via dataset difficulty scores computed by the base model's pass rate on a held-out set before training begins.
-      </Prose>
-
-      <H3>5.3 Tülu 3's RLVR implementation</H3>
-
-      <Prose>
-        Lambert et al. (Tülu 3, arXiv:2411.15124) document RLVR as a distinct post-training stage after SFT and DPO. Their implementation differs from DeepSeek in two ways: they use RLOO rather than GRPO as the base algorithm (which avoids the per-group normalization and uses a leave-one-out baseline instead); and they combine RLVR with DPO on the same training run using a multi-objective loss. The verifier setup is the same — regex-based math answer parser, execution-based code verifier. The reported result is a significant improvement on GSM8K and MATH over the DPO-only baseline, with no increase in alignment tax on non-math benchmarks.
-      </Prose>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>6.1 Pass rate over training — with and without curriculum</H3>
-
-      <Plot
-        label="6.1 pass rate on hard problems — curriculum vs no curriculum"
-        xLabel="training step"
-        yLabel="pass rate on hard problems"
-        series={[
-          {
-            name: "with curriculum (easy → hard ramp)",
-            color: "#4ade80",
-            points: [
-              [0,0.08],[10,0.14],[20,0.22],[30,0.32],[40,0.43],
-              [50,0.53],[60,0.62],[70,0.68],[80,0.73],[100,0.78],
-            ],
-          },
-          {
-            name: "no curriculum (hard-only from step 0)",
-            color: "#f87171",
-            points: [
-              [0,0.08],[10,0.09],[20,0.11],[30,0.14],[40,0.19],
-              [50,0.25],[60,0.32],[70,0.39],[80,0.45],[100,0.52],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        The curriculum gap opens in the first 30 steps and never closes. The hard-only run eventually catches up in slope — once the policy is strong enough that hard problems occasionally succeed — but it started from a much lower base and never reaches parity within the same compute budget. In practice (DeepSeek-R1), the curriculum is implicit: the dataset contains a mix of easy and hard problems, and the easy ones provide gradient while the hard ones are gradually learned.
-      </Prose>
-
-      <H3>6.2 Exploration rate — fraction of groups with any correct response</H3>
-
-      <Plot
-        label="6.2 exploration rate — groups with at least one correct rollout (G=8)"
-        xLabel="training step"
-        yLabel="fraction of groups with ≥1 correct"
-        series={[
-          {
-            name: "exploration rate (curriculum)",
-            color: "#e2b55a",
-            points: [
-              [0,0.51],[10,0.61],[20,0.72],[30,0.81],[40,0.87],
-              [50,0.92],[60,0.95],[70,0.97],[80,0.98],[100,0.99],
-            ],
-          },
-          {
-            name: "exploration rate (hard-only)",
-            color: "#60a5fa",
-            points: [
-              [0,0.49],[10,0.51],[20,0.57],[30,0.65],[40,0.74],
-              [50,0.82],[60,0.88],[70,0.92],[80,0.95],[100,0.98],
-            ],
-          },
-        ]}
-      />
-
-      <Prose>
-        The exploration rate — the fraction of groups where at least one of G=8 rollouts is correct — is the key diagnostic for RLVR health. When it is near zero, training stalls; when it is near one, the policy is essentially solved and the advantage variance collapses (all groups return all-correct). The healthy training range is 40–95%: enough correct rollouts to generate positive gradient, enough incorrect ones to generate contrastive gradient. The curriculum keeps exploration rate in this range throughout training, while the hard-only run spends the first 20 steps below 60%.
-      </Prose>
-
-      <H3>6.3 The RLVR loop — interactive step trace</H3>
-
-      <StepTrace
-        label="rlvr full training loop"
-        steps={[
-          {
-            label: "Step 1 — Prompt sampling",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="sample a batch of problems from the curriculum"
-                  tokens={[
-                    { label: "x₁: '2x + 3 = 7'", color: colors.gold },
-                    { label: "x₂: 'Prove √2 irrational'", color: colors.gold },
-                    { label: "x₃: 'Implement merge sort'", color: colors.gold },
-                    { label: "…", color: colors.textMuted },
-                  ]}
-                />
-                <Prose>
-                  The curriculum scheduler selects problems at the frontier of the current policy's capability — problems where pass rate is between 10% and 90%, so there is both signal and room to improve.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "Step 2 — Group rollout (G=8)",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="policy generates 8 responses per prompt"
-                  tokens={[
-                    { label: "π(·|x₁) →", color: colors.textMuted },
-                    { label: "y¹₁…y⁸₁", color: "#c084fc" },
-                    { label: "π(·|x₂) →", color: colors.textMuted },
-                    { label: "y¹₂…y⁸₂", color: "#c084fc" },
-                  ]}
-                />
-                <Prose>
-                  Temperature is set to 0.8–1.0 to ensure response diversity. With G=8 responses, the probability that at least one is correct is <Code>1 - (1-p)^8</Code>: for p=0.1 this is ~57%, vs 10% for a single sample.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "Step 3 — Verifier scoring",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="verifier returns binary rewards"
-                  tokens={[
-                    { label: "y¹₁: r=0", color: "#f87171" },
-                    { label: "y²₁: r=1", color: "#4ade80" },
-                    { label: "y³₁: r=0", color: "#f87171" },
-                    { label: "y⁴₁: r=1", color: "#4ade80" },
-                    { label: "y⁵₁–y⁸₁: r=0,0,0,0", color: "#f87171" },
-                  ]}
-                />
-                <Prose>
-                  The math verifier parses boxed answers; the code verifier executes against hidden tests. Both run in milliseconds. No neural network inference needed for the reward signal.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "Step 4 — Group advantage + PPO update",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="group-normalize → PPO clip → gradient step"
-                  tokens={[
-                    { label: "A = (r − μ) / σ", color: "#e2b55a" },
-                    { label: "→ L_CLIP", color: colors.textMuted },
-                    { label: "− β·KL", color: "#60a5fa" },
-                    { label: "→ ∇θ", color: "#4ade80" },
-                  ]}
-                />
-                <Prose>
-                  Two inner PPO epochs per rollout batch. The clip range ε=0.2 prevents large updates. After the gradient step, the reference policy logprobs are recomputed only if enough KL has accumulated.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "Step 5 — Amplification (optional)",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="correct rollouts → SFT → stronger π_ref → repeat"
-                  tokens={[
-                    { label: "verified y*", color: "#4ade80" },
-                    { label: "→ SFT dataset", color: colors.gold },
-                    { label: "→ fine-tune", color: "#c084fc" },
-                    { label: "→ updated π_ref", color: "#4ade80" },
-                    { label: "→ next RLVR round", color: colors.textMuted },
-                  ]}
-                />
-                <Prose>
-                  After each major checkpoint, correct rollouts are collected and used for an SFT warmup. This updates the reference policy for the next RLVR phase, gradually raising the floor of what the policy can do before RL begins.
-                </Prose>
-              </div>
-            ),
-          },
-        ]}
-      />
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
-      <H3>7.1 When to use RLVR vs alternatives</H3>
-
-      <Heatmap
-        label="post-training method comparison (5 = best for that criterion)"
-        matrix={[
-          [5, 1, 5, 3, 4],
-          [3, 4, 2, 5, 2],
-          [2, 5, 2, 5, 1],
-          [3, 4, 3, 4, 3],
-          [4, 2, 5, 2, 5],
-        ]}
-        rowLabels={["RLVR (verifier)", "DPO / SimPO", "RLHF (PPO+RM)", "GRPO + RM", "RLOO + RM"]}
-        colLabels={["signal quality", "implementation ease", "no reward hacking", "data efficiency", "reasoning tasks"]}
-        colorScale="green"
-        cellSize={48}
-      />
-
-      <Prose>
-        <strong>Use RLVR</strong> when the task has mechanically verifiable correctness: math problems with ground-truth answers, code with a test suite, formal proofs with a type-checker, structured output with schema validation. The training signal is exact and scalable — you can generate synthetic problems at scale and verify them for free.
-      </Prose>
-
-      <Prose>
-        <strong>Use RLHF/DPO</strong> when the task is subjective: creative writing, open-ended conversation, summarization, translation quality. There is no ground truth, so a learned reward model trained on human preferences is the only option. DPO is simpler when you have a clean offline preference dataset. Full PPO is justified when you need online training or have a very large compute budget.
-      </Prose>
-
-      <Prose>
-        <strong>Hybrid: RLVR + RLHF</strong> is the current frontier. Models like Tülu 3 apply DPO for general alignment and RLVR for math/code capability. The two objectives do not conflict — DPO anchors helpfulness and safety, RLVR drives reasoning capability — and together they outperform either alone.
-      </Prose>
-
-      <H3>7.2 Bootstrap decision tree</H3>
-
-      <Prose>
-        Starting from a base pretrained model, the bootstrapping order matters:
-      </Prose>
-
-      <Prose>
-        <strong>Strong base model (GPT-4 scale, or fine-tuned with good chain-of-thought coverage):</strong> Start directly with RLVR. The pass rate on medium problems will be high enough to generate gradient from the first step. Use curriculum to ramp from medium to hard.
-      </Prose>
-
-      <Prose>
-        <strong>Weak base model (7B, no chain-of-thought SFT):</strong> Do SFT on curated reasoning traces first (DeepSeek-R1's cold-start data, or open-r1's Mixture-of-Thoughts dataset). After SFT, pass rate on easy problems will be ~30–40%, sufficient for RLVR to take over. Then apply RLVR with curriculum. This is the two-stage recipe documented in DeepSeek-R1 and Tülu 3.
-      </Prose>
-
-      <Prose>
-        <strong>No labeled data:</strong> Generate synthetic problems with known ground-truth answers (e.g., arithmetic expressions with computed answers, programmatically generated code challenges). Use the base model to generate rollouts; the verifier scores them for free. Keep correct rollouts as SFT data. The first SFT round will be noisy, but after one iteration the model is strong enough to generate better rollouts. This self-amplification loop is the core idea behind DeepSeekMath's data generation pipeline.
-      </Prose>
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>8.1 What scales</H3>
-
-      <Prose>
-        <strong>Synthetic data volume.</strong> Because the verifier can check correctness without human annotation, the labeled dataset size is limited only by compute. DeepSeekMath (arXiv:2402.03300) collected 120B math-related tokens from Common Crawl and filtered them with a classifier; the RLVR training data was generated by the model itself and verified automatically. There is no saturation point in sight — more verified problems consistently improve performance on math benchmarks.
-      </Prose>
-
-      <Prose>
-        <strong>Policy improvement with rollout count.</strong> Group size G directly trades compute for signal quality. Larger G reduces the fraction of groups with zero correct responses, which is the primary stall mechanism. DeepSeek-R1 used G=8 to G=16; larger groups are beneficial up to the point where GPU memory for concurrent rollout becomes the constraint. Unlike RLHF where the value model is the memory bottleneck, GRPO's memory cost scales only with G, not with a separate large model.
-      </Prose>
-
-      <Prose>
-        <strong>Emergent reasoning transfer.</strong> Models RL-trained on math and code consistently improve on general reasoning benchmarks, chain-of-thought coherence, and instruction following — tasks where no verifier was present during training. The informal account is that RLVR teaches reasoning discipline: produce a chain of steps that leads to a conclusion you can actually verify. That discipline transfers. DeepSeek-R1's general reasoning scores improved substantially relative to the SFT baseline, even on non-verifiable tasks.
-      </Prose>
-
-      <H3>8.2 What doesn't scale</H3>
-
-      <Prose>
-        <strong>Verifier cost.</strong> Running code execution at scale is expensive. At 8 rollouts per prompt, 100K training prompts per step, and 10ms per code execution, the verifier alone accounts for 8,000 CPU-seconds per step. Lean/Isabelle proof checking is orders of magnitude slower. For math with regex verification, the cost is negligible. For code and formal proofs, verifier throughput is the practical bottleneck, and it does not improve as fast as model FLOPs.
-      </Prose>
-
-      <Prose>
-        <strong>Distribution narrowing.</strong> Training exclusively on verifiable tasks narrows the model's distribution toward those tasks. A model RLVR-trained only on math problems will show a measurable degradation on creative writing, open-ended conversation, and tasks that require calibrated uncertainty. Production pipelines address this by mixing RLVR with DPO or SFT on general tasks, but the alignment tax is real and requires explicit mitigation.
-      </Prose>
-
-      <Prose>
-        <strong>Hard problem cold start.</strong> When the base model cannot solve any instances of a problem class, RLVR provides no signal for that class. The exploration rate is zero, the group standard deviation is zero, and training stalls. No amount of scaling RLVR alone can solve this — you need a bootstrapping mechanism (curriculum, SFT warm-start, or problem difficulty sampling) before RLVR can take over. Scaling laws for RLVR are thus not uniform across difficulty levels; they are conditional on the base model already having some capability to bootstrap from.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>9.1 Sparse reward stall</H3>
-
-      <Prose>
-        The defining early-training failure. When the base model's pass rate on a problem is below roughly 1/G (so that even with G rollouts, most groups return all-zero rewards), the group standard deviation is zero and the gradient is skipped. Training on hard problems exclusively from step 0 produces no learning signal. Detection: monitor the fraction of groups where std(rewards) &gt; 0 — if it falls below 30%, training is effectively stalled. Mitigation: curriculum, SFT warm-start, or increase G.
-      </Prose>
-
-      <H3>9.2 Verifier gaming</H3>
-
-      <Prose>
-        Even a deterministic verifier can be gamed if its specification is imprecise. The most common RLVR failure mode is regex gaming: the model learns to output a boxed answer that matches the ground truth format even when the reasoning chain is wrong. Specifically, models learn to output <Code>{String.raw`\boxed{42}`}</Code> without any derivation — and if the test problem happened to have answer 42, the verifier rewards it. The fix is to validate that the reasoning chain is present and coherent, not just the final answer token. Tülu 3 adds a format reward that penalizes responses where the reasoning chain is absent or shorter than expected.
-      </Prose>
-
-      <Prose>
-        A more subtle form: for code verifiers, the model learns to special-case the test inputs. If the hidden tests use predictable values (assert add(1, 2) == 3), a model can generate code that hardcodes the expected outputs without implementing the general function. Production verifiers randomize test inputs and use property-based testing to prevent this.
-      </Prose>
-
-      <H3>9.3 KL anchor drift</H3>
-
-      <Prose>
-        When β is set too low, the policy drifts far from the SFT reference. With a fixed reference, this eventually produces responses that are highly optimized for the verifier's exact format requirements but stilted or unnatural in prose. The policy learns to always produce <Code>{String.raw`Let me work through this step by step... \boxed{ans}`}</Code> regardless of problem type, because that format is reliably parsed by the math verifier. Detection: monitor KL divergence — if it exceeds 20 nats in early training, β is too low. Mitigation: increase β or use adaptive KL control.
-      </Prose>
-
-      <H3>9.4 Curriculum getting stuck</H3>
-
-      <Prose>
-        A badly designed curriculum can stall at a difficulty transition. If the policy improves quickly on easy problems and the curriculum advances too fast to hard ones before the policy is ready, the exploration rate drops suddenly and training stalls at the harder level. The opposite failure: if the curriculum stays on easy problems too long, the policy wastes compute becoming very strong on easy problems with no improvement on hard ones. The best curriculum adapts based on the current exploration rate: advance difficulty when easy-level exploration rate exceeds 90%, stay at current difficulty when hard-level exploration rate is below 40%.
-      </Prose>
-
-      <H3>9.5 Verifier quality bound</H3>
-
-      <Prose>
-        RLVR quality is bounded by verifier correctness. A math verifier that cannot parse LaTeX fractions will fail on problems where the correct answer is <Code>3/4</Code>; the model gets no signal that its answer of 0.75 is equivalent. A code verifier that does not test edge cases (negative inputs, empty lists, large numbers) will reward incorrect implementations that pass only the basic cases. Every gap in the verifier specification is a potential gap in training signal. The engineering investment in the verifier is as important as the engineering investment in the training loop.
-      </Prose>
-
-      <H3>9.6 Generalization narrowing</H3>
-
-      <Prose>
-        Extended RLVR on a narrow task distribution narrows the model's generalization. A model RLVR-trained for 50K steps on arithmetic problems will degrade on general language tasks because the policy gradient has been pointing consistently toward arithmetic-format outputs. The SFT reference (KL anchor) mitigates this but does not eliminate it when β is small. Production pipelines mix RLVR batches with general SFT batches, effectively adding a regularization term that keeps the model grounded in its full capability distribution.
-      </Prose>
-
-      <Callout accent="gold">
-        Six of these nine failure modes have the same root cause: the verifier's specification is narrower than what "correct" means in the real task. The verifier is the ground truth for training — if it is wrong, training is wrong. Investing in the verifier is investing in the training signal's ceiling.
-      </Callout>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <Prose>
-        All papers below were verified against arXiv and GitHub as of April 2026.
-      </Prose>
-
-      <H3>10.1 Core RLVR papers</H3>
-
-      <Prose>
-        <strong>Lambert, Morrison, Miranda, et al. (2024).</strong> "Tülu 3: Pushing Frontiers in Open Language Model Post-Training." arXiv:2411.15124. Allen Institute for AI. Introduced RLVR as an explicit named post-training stage, distinct from SFT and DPO. Documented the implementation of a deterministic math verifier integrated into a RLOO-based training loop. Reported significant gains on GSM8K and MATH with no alignment tax on non-math benchmarks. Includes full training code and model weights.
-      </Prose>
-
-      <Prose>
-        <strong>DeepSeek-AI (2025).</strong> "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning." arXiv:2501.12948. The canonical RLVR reasoning model paper. DeepSeek-R1-Zero demonstrated that pure RL with a verifiable reward — no supervised chain-of-thought, no human preference data — produces emergent self-reflection and reasoning behaviors. DeepSeek-R1 added a cold-start SFT phase followed by RLVR and achieved pass@1 of 71% on AIME 2024, matching OpenAI o1-0912. Used GRPO with G=8–16, β=0.04, and a deterministic math answer parser as the verifier.
-      </Prose>
-
-      <H3>10.2 Algorithmic foundations</H3>
-
-      <Prose>
-        <strong>Shao, Wang, Zhu, Xu, et al. (2024).</strong> "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models." arXiv:2402.03300. Introduced GRPO — the specific RL algorithm used in RLVR deployments. Shows that group sampling with within-group normalization eliminates the need for a value model and reduces peak memory by roughly 50% compared to PPO, with no loss in final performance on mathematical reasoning benchmarks.
-      </Prose>
-
-      <Prose>
-        <strong>Uesato, Kushman, Kumar, Song, et al. (2022).</strong> "Solving math word problems with process- and outcome-based feedback." arXiv:2211.14275. DeepMind. The earliest systematic comparison of outcome-based (verifiable final answer) vs process-based (intermediate step) reward in math reasoning. Found that outcome-based supervision produces comparable final-answer accuracy to process-based supervision with less labeling overhead — an early empirical basis for the RLVR approach. Also established GSM8K as the standard math reasoning benchmark for RL training experiments.
-      </Prose>
-
-      <H3>10.3 Open-source reproduction</H3>
-
-      <Prose>
-        <strong>HuggingFace (2025).</strong> Open-R1: Fully Open Reproduction of DeepSeek-R1. github.com/huggingface/open-r1. Provides: GRPO training script with pluggable verifier interface; SFT script for cold-start; Distilabel-based synthetic data generation pipeline; the Mixture-of-Thoughts dataset (350K verified reasoning traces across math, coding, and science); and the CodeForces-CoTs dataset (10K competitive programming problems, 100K solutions). The 7B model trained on CodeForces-CoTs outperforms Claude 3.7 Sonnet on IOI24. This is the most complete public RLVR implementation available.
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — Write a verifier for simple arithmetic</H3>
-
-      <Prose>
-        Implement a math verifier that handles all of: integer answers, decimal answers (tolerance 1e-4), fraction answers expressed as "p/q", and answers expressed in scientific notation ("3.14e2"). Test it against a suite of 10 ground truths covering each format. What happens when the model outputs "3/4" but the ground truth is "0.75"? How do you handle this without penalizing correct answers?
-      </Prose>
-
-      <Callout accent="green">
-        Hint: normalize all answers to a canonical float before comparison. Use Python's <Code>fractions.Fraction</Code> for exact rational parsing. Scientific notation can be handled by <Code>float()</Code> directly. The tricky case is symbolic answers like "π" or "√2" — for those, reject or use a separate symbolic equality check.
-      </Callout></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — Why binary rewards need group sampling more than scalar rewards</H3>
-
-      <Prose>
-        Consider two reward signals: (A) a continuous reward model that outputs scores in [0, 1] with standard deviation ~0.3 across responses to the same prompt; and (B) a binary verifier that outputs exactly 0 or 1. For a policy with 20% pass rate on a given problem, compute the expected gradient variance for a single-sample REINFORCE estimator under each reward type. Now compute the variance reduction factor from using G=8 samples with group normalization. Show that the variance reduction is larger for case (B) than case (A). Why does binary reward make group sampling more essential?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — Synthetic amplification vs RLVR-only for bootstrap</H3>
-
-      <Prose>
-        You have a 7B base model with 5% pass rate on your target math problems. You have a budget of 100 GPU-hours for training. Compare two strategies: (A) pure RLVR for 100 hours; (B) 20 hours of SFT on rollouts from the base model, then 80 hours of RLVR. Describe what you expect to happen in the first 10 steps of each strategy in terms of exploration rate and gradient magnitude. Under what conditions would strategy (A) outperform (B)? (Hint: consider the quality of the SFT data when the base model is very weak.)
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — Detect verifier gaming from rollout statistics</H3>
-
-      <Prose>
-        Design a set of automatic statistics to detect verifier gaming without running a human evaluation. Specifically: (a) a statistic to detect "answer without reasoning" — the model outputs <Code>{String.raw`\boxed{42}`}</Code> but the response length is below 20 tokens; (b) a statistic to detect "test-case hardcoding" in code — the generated function contains hardcoded if-statements matching the test input values; (c) a statistic to detect "format collapse" — nearly all responses follow the exact same template structure. For each, describe how you would compute it from rollout data and the threshold at which you would intervene.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — Design a curriculum scheduler</H3>
-
-      <Prose>
-        You have a dataset of 10,000 math problems, each with a difficulty score computed as the base model's pass rate (0 to 1). Design a curriculum scheduler that: (a) starts with problems in the difficulty range [0.3, 0.7] (problems where the base model sometimes succeeds); (b) adapts the difficulty window based on the current exploration rate — expand toward harder problems when easy-bucket exploration rate exceeds 90%; (c) never drops a problem entirely — occasionally sample from all difficulty levels to prevent catastrophic forgetting; (d) emits a warning when the hard-bucket exploration rate falls below 20% for more than 5 consecutive steps. Write the scheduler as a Python class with a <Code>sample(batch_size, current_metrics)</Code> method.
-      </Prose></div></section>
-
+            " develops specific changes to clipping, token reduction, group collection and length feedback. Carry this lesson's verifier object, response masks and work/evaluation denominators into that comparison so each changed mechanism has a visible purpose and a testable consequence."
+          }
+        </Prose>
+      </section>
     </div>
-  ),
+  );
+}
+export default {
+  title: 'RLVR (Reinforcement Learning with Verifiable Rewards)',
+  slug: 'rlvr-reinforcement-learning-with-verifiable-rewards',
+  readTime: '~95 min read + 120 min practice',
+  content: RLVRLesson,
 };
-
-export default rlvr;

@@ -1,0 +1,205 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "reviewer": "/root",
+  "author": "/root/queue_nonconvex_resume",
+  "subject": {
+    "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-source-r1.json",
+    "sha256": "68744d8da1c4599c6d70eae28d08ce3764b284eec59943003554d48fa3a27ba1"
+  },
+  "identityChecks": [
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-r1.md",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r1.md",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/entropy-information-models.js",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/entropy-information-examples.js",
+      "pass": true
+    },
+    {
+      "path": "src/learn/components/lesson-labs/EntropyInformationLabs.jsx",
+      "pass": true
+    },
+    {
+      "path": "src/learn/components/lesson-labs/entropy-information-labs.css",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js",
+      "pass": true
+    },
+    {
+      "path": "AGENTS.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/SKILL.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/workflow.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/teaching.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/topic-design.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/domain-playbook.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/visuals-and-labs.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/examples-and-code.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/practice-and-resources.md",
+      "pass": true
+    },
+    {
+      "path": "skills/lesson-authoring/references/portfolio-adapter.md",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/ENTROPY-CROSS-ENTROPY-KL-DESIGN.md",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/ENTROPY-CROSS-ENTROPY-KL-VERIFICATION.md",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/ENTROPY-INDEPENDENT-REVIEW.md",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/evidence/entropy-independent-review.json",
+      "pass": true
+    },
+    {
+      "path": "scratch/entropy-verification/final-source-hashes.json",
+      "pass": true
+    },
+    {
+      "path": "scratch/entropy-verification/native-results.json",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/topic-notes/entropy-cross-entropy-kl-divergence.md",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/topic-notes/README.md",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/algebra-functions-exponentials-logarithms.jsx",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/probability-distributions-bayes-theorem.jsx",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/maximum-likelihood-map-estimation.jsx",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/topics/greedy-algorithms-exchange-arguments.jsx",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/greedy-exchange-examples.js",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/exponential-reading-flow-text.js",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/measure-reading-flow-text.js",
+      "pass": true
+    },
+    {
+      "path": "src/learn/data/variational-inference-reading-flow-text.js",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-r1.md",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r1.md",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/selected-intake-r1.json",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/freeze-design-r1.mjs",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-figure2-1.png",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-thomas-ch2.pdf",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/penguins.csv",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/shannon-1948.pdf",
+      "pass": true
+    },
+    {
+      "path": "docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/shannon-figure6.png",
+      "pass": true
+    }
+  ],
+  "complementaryDerivedFixture": {
+    "contextMass": [
+      0.75,
+      0.25
+    ],
+    "conditionalY1": [
+      0.1,
+      0.5
+    ],
+    "truthfulModelRowCosts": [
+      0.4689955935892812,
+      1.0
+    ],
+    "weightedBits": 0.6017466951919609,
+    "incorrectUniformBits": 0.7344977967946407
+  },
+  "findings": [
+    "ED1",
+    "ED2",
+    "ED3"
+  ],
+  "scope": "Different whole design/research review; complete old lesson, all eleven code/output objects and actual old models/labs read. No runtime acceptance, build or old programme execution."
+}

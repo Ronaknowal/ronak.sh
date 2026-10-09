@@ -1,0 +1,21 @@
+{
+  "scope": "Current consolidated t-SNE author source work only; no scientific/main/fit or Vite build",
+  "failedAttempts": [
+    {"chunk":"5b547e","exit":1,"reason":"Function conservation compared CRLF predecessor against LF successor; normalize line endings for semantic function comparison while immutable raw backups remain exact."},
+    {"chunk":"67f8b3","exit":1,"reason":"No-font-shrink predicate found a new badge font-size. Removed that unnecessary product declaration; badges inherit text size."},
+    {"chunk":"0ceda3","exit":1,"reason":"SSR check treated intentional prose Infinity as nonfinite SVG. Restricted check to attributes."},
+    {"chunk":"758e48","exit":1,"reason":"Foreground assertion compared a later image caption. Replaced with actual count of300 dense circles before foreground group."},
+    {"chunk":"bca057","exit":1,"reason":"Checker requested nonexistent manifold-data.mjs; actual dependency is manifold-data.js."},
+    {"chunk":"8cf22d","exit":1,"reason":"Rounded nine-decimal force was compared at1e-10 tolerance. Check exact toFixed(9) correspondence instead."},
+    {"chunk":"0c4cb2","exit":1,"reason":"In-memory SSR loader did not resolve extensionless shared styles.js. Added normal extension resolution."},
+    {"chunk":"f09b36","exit":1,"reason":"Package KaTeX CSS was passed to CommonJS require. Bind CSS and omit layout execution in SSR loader."}
+  ],
+  "successfulSourceCheck": {"chunk":"59f204","exit":0,"conditions":276,"SSRRenderings":64,"boundInputs":94},
+  "otherQualifiedToolResults": [
+    {"chunk":"37b8a3","exit":1,"reason":"Freeze guard correctly detected concurrent foreign navigation1693b9cb beyond accepted00ce42fb role. Captured without acceptance; Root role decision remains explicit pending."},
+    {"chunk":"708434","reason":"Windows rg wildcard paths were rejected; later directory-scoped rg succeeded. No source consequence."},
+    {"chunk":"8fb218","reason":"styles directory probe failed; actual extensionless import resolves styles.js."}
+  ],
+  "nativeBrowserEvidenceClaimed": false,
+  "buildRun": false
+}

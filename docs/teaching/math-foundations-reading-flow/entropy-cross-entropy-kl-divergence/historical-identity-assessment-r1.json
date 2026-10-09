@@ -1,0 +1,57 @@
+{
+  "status": "HISTORICAL_SOURCE_IDENTITY_ASSESSMENT",
+  "at": "2026-10-09T15:18:58.597Z",
+  "designSourceSha256": "68744d8da1c4599c6d70eae28d08ce3764b284eec59943003554d48fa3a27ba1",
+  "rows": [
+    {
+      "path": "src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+      "historicalSha256": "20dc4ed0f32a6cf0811af9809f68e48a63d28aa0eaff0eb7fb688f70d93d5a1b",
+      "currentSha256": "57e92aed15c98bac85b3eabd17e46de7385aa1d1d4a0a27e1e095f8d82834a9d",
+      "currentNormalizedLfSha256": "4b635174903cc9e4e417db1dee230b68a4e74c10a65c1df6f9cc89acee5a5ada",
+      "byteIdentical": false,
+      "lineEndingsOnly": false
+    },
+    {
+      "path": "src/learn/data/entropy-information-models.js",
+      "historicalSha256": "519d1fff3ae48c1cd36e11a3bce3a0e31880b8286ca8188faddfe958c0ccf49f",
+      "currentSha256": "36ba480e9f35052fba5cec68e77fa69d7da3177f283e5cc3028ce2f35f1c2496",
+      "currentNormalizedLfSha256": "519d1fff3ae48c1cd36e11a3bce3a0e31880b8286ca8188faddfe958c0ccf49f",
+      "byteIdentical": false,
+      "lineEndingsOnly": true
+    },
+    {
+      "path": "src/learn/data/entropy-information-examples.js",
+      "historicalSha256": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163",
+      "currentSha256": "0797f36c9bc513c7367bfe2388a23103fba50725f3862430e1afe5e6d5502163",
+      "currentNormalizedLfSha256": "308f1eff73c58210344b8c97dde2dab08d9cc8844a51540dc1279179fdd169b2",
+      "byteIdentical": true,
+      "lineEndingsOnly": false
+    },
+    {
+      "path": "src/learn/components/lesson-labs/EntropyInformationLabs.jsx",
+      "historicalSha256": "8ec85643c632c838051cba9e8bf5299d5e2ccb6b74b7e90cd72e18f9c02358a3",
+      "currentSha256": "5f209536f7f36fdcc07909a4e66f21e9c5d2246d688dd87fb0750d678e4fa55e",
+      "currentNormalizedLfSha256": "64b8111043ba6715f34e231e2cbf612ef26d1a5ffa12f52c44698945a7bc8913",
+      "byteIdentical": false,
+      "lineEndingsOnly": false
+    },
+    {
+      "path": "src/learn/components/lesson-labs/entropy-information-labs.css",
+      "historicalSha256": "2b370e2ac65d7db1a3175bad05e1067716dbb870c0d34b8e9fff73d8c3d59f4d",
+      "currentSha256": "c1fd027f4d85ab220c9596bf5378db7e8d954e1338140f96158ccc152acf5132",
+      "currentNormalizedLfSha256": "2b370e2ac65d7db1a3175bad05e1067716dbb870c0d34b8e9fff73d8c3d59f4d",
+      "byteIdentical": false,
+      "lineEndingsOnly": true
+    },
+    {
+      "path": "src/learn/data/curriculum/blueprints/entropy-cross-entropy-kl-divergence.js",
+      "historicalSha256": "52644d709aa664c88f5760fa0d7095ea16b3a5b58605194fb48192c4aeb4cdee",
+      "currentSha256": "9fa911f147010545ae75a07015f83142ab85047e22c9e94be56a3170d94b2c7f",
+      "currentNormalizedLfSha256": "3aac9af0e3a81a2a229a9d04a6b4441d8aab10b1ec1b0db6dc1353a894ebfb96",
+      "byteIdentical": false,
+      "lineEndingsOnly": false
+    }
+  ],
+  "conclusion": "The pure model and CSS exactly match historical source after CRLF-to-LF normalization; all eleven complete example/output pairs are byte-identical. This permits attributed reuse of historical unchanged pure-model/program numerical evidence without scientific replay. Current lesson/labs/blueprint differ substantively or beyond line endings; no historical Reader/UI or whole-topic certification transfers automatically.",
+  "scientificRuns": 0
+}

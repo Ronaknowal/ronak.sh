@@ -1,0 +1,158 @@
+{
+  "status": "PASS_EXACT_STREAMED_LOSS_CORRECTION_NO_FIT_REPLAY",
+  "checks": [
+    {
+      "name": "exact source inverse restores entire executed predecessor",
+      "passed": true
+    },
+    {
+      "name": "executed predecessor bound to retained old source",
+      "passed": true
+    },
+    {
+      "name": "original119/main retained with original scope",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 0",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 0",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 1",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 1",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 2",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 2",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 3",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 3",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 4",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 4",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 5",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 5",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 6",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 6",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 7",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 7",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 8",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 8",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 9",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 9",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 10",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 10",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction matches old arithmetic 11",
+      "passed": true
+    },
+    {
+      "name": "new included-cell reduction independent scalar 11",
+      "passed": true
+    },
+    {
+      "name": "omitted large product never formed",
+      "passed": true
+    },
+    {
+      "name": "all-missing huge values empty cost",
+      "passed": true
+    },
+    {
+      "name": "weighted quality remains defined by sum weights",
+      "passed": true
+    },
+    {
+      "name": "all-missing quality remains undefined",
+      "passed": true
+    },
+    {
+      "name": "objective uses new included-cell path",
+      "passed": true
+    }
+  ],
+  "bindings": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\streamed-loss-correction\\nmf_penalties_masks.before.py",
+      "bytes": 15103,
+      "sha256": "d9528c95a1bee35f23ac7922d68a95256ed5be70b4e696fe7df0b777879bec36"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_penalties_masks.py",
+      "bytes": 15667,
+      "sha256": "66011064d265a75292ce62978ce7aa81cdb018b3f5ed2a1717266a0de483a3dd"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\streamed-loss-correction\\checks.before.json",
+      "bytes": 15659,
+      "sha256": "e04791d890b94c820eb1497d3f2bbe34903274a067bce963937d05356da3b9e6"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\penalties-masks-authoring\\streamed-loss-correction\\check-streamed-loss.py",
+      "bytes": 3764,
+      "sha256": "e0453b186ab6ff724f283b7d7f32df74917c92785a0cf8072c997e591f12ecea"
+    }
+  ],
+  "sourceAddition": "def masked_data_cost(x, w, h, weights):\n    \"\"\"Already validated arrays: accumulate only included cells, without mask copies.\"\"\"\n    total = 0.0\n    for i in range(x.shape[0]):\n        included = weights[i] > 0\n        if not np.any(included):\n            continue\n        residual = x[i, included] - reconstruction(w[i:i+1], h[:, included])[0]\n        with np.errstate(over=\"ignore\", invalid=\"ignore\"):\n            scaled = residual * np.sqrt(weights[i, included])\n            total += float(np.sum(scaled * scaled)) / 2\n        require_finite(total, \"Included weighted squared error\")\n    return total\n\n\n",
+  "reusedEvidence": "Original119 checks and once-only main remain on exact retained predecessor; exact inverse plus new pure-loss cases supports current source composition.",
+  "limits": "No new fit/main or historical campaign. No browser or independent teaching review."
+}

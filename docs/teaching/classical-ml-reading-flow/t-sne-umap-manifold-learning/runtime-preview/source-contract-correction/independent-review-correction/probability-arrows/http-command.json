@@ -1,0 +1,11 @@
+{
+  "command": "bundled node .../probability-arrows/check-http.mjs",
+  "actualToolResult": {
+    "chunk_id": "ebbe42",
+    "wall_time_seconds": 0.9322089,
+    "exit_code": 0,
+    "original_token_count": 131,
+    "output": "{\n  \"status\": \"PASS_ACTUAL_HTTP_BYTES_NATIVE_PENDING\",\n  \"payloads\": 35,\n  \"artifacts\": 65,\n  \"receipt\": {\n    \"path\": \"docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/independent-review-correction/probability-arrows/http-check.json\",\n    \"bytes\": 50182,\n    \"sha256\": \"38ba71bf9726a88307c14fe020e25602cafcd706689ccc89c34ffb4afffcecba\"\n  },\n  \"lessonUrl\": \"http://127.0.0.1:5196/learn/path/full-curriculum/t-sne-umap-manifold-learning?module=classical-ml\"\n}\n"
+  },
+  "retainedSandboxFailure": "http-sandbox-failure.json"
+}

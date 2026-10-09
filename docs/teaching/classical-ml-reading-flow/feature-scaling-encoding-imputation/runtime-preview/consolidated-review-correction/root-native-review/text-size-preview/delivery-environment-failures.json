@@ -1,0 +1,18 @@
+{
+  "schema": "feature20-text-size-delivery-environment-failures/v1",
+  "failures": [
+    {
+      "execution": "082954",
+      "exit": 1,
+      "stage": "PID read",
+      "cause": "sandbox CIM access unavailable",
+      "resolved_by": "77c287 read-only scoped escalation"
+    },
+    {
+      "execution": "b915b0",
+      "exit": 1,
+      "stage": "HTTP delivery first request",
+      "cause": "sandbox localhost socket WinError10013; no request accepted or receipt written"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+.lesson-flow .mp-aggregation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  align-items: start;
+  gap: 1.25rem;
+}
+.lesson-flow .mp-aggregation-grid > * { min-width: 0; }
+.lesson-flow .mp-aggregation-grid .mp-flow-pan { margin-block: .5rem; }
+.lesson-flow .mp-aggregation-quantity {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(5rem, 7rem);
+  gap: .35rem .75rem;
+  flex: 1 1 16rem;
+  min-width: min(100%, 16rem);
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.lesson-flow .mp-aggregation-quantity legend { padding: 0; width: 100%; color: #b9b9b9; font-size: .9rem; overflow-wrap: anywhere; }
+.lesson-flow .mp-aggregation-quantity output { color: #e4b752; margin-inline-start: .5rem; font-variant-numeric: tabular-nums; }
+.lesson-flow .mp-aggregation-quantity input[type="range"] { grid-column: 1 / -1; width: 100%; background: transparent; accent-color: #e4b752; padding: 0; border: 0; }
+.lesson-flow .mp-aggregation-quantity label { align-self: center; font-size: .9rem; color: #b9b9b9; }
+.lesson-flow .mp-aggregation-quantity input[type="text"] { width: 100%; min-width: 0; box-sizing: border-box; }
+.lesson-flow .mp-aggregation-error { grid-column: 1 / -1; color: #efb5ca; font-size: .9rem; line-height: 1.5; }
+.lesson-flow .mp-aggregation-select { display: grid; gap: .35rem; font-size: .9rem; color: #b9b9b9; }
+.lesson-flow .mp-aggregation-parameters, .lesson-flow .mp-aggregation-values { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.lesson-flow :is(.mp-aggregation-parameters, .mp-aggregation-values) :is(th, td) { text-align: start; padding: .55rem .35rem; border-bottom: 1px solid #343434; overflow-wrap: anywhere; }
+.lesson-flow .mp-aggregation-parameters td { color: #e4b752; }
+.lesson-flow .mp-aggregation-table-pan { max-width: 100%; overflow-x: auto; }
+.lesson-flow .mp-aggregation-table-pan:focus-visible { outline: 2px solid #e4b752; outline-offset: 3px; }
+.lesson-flow .mp-aggregation-parameters { min-width: 25rem; }

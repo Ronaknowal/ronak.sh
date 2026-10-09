@@ -1,0 +1,10 @@
+.lesson-flow .mp-sparse-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr)); align-items:start; gap:1.5rem; }
+.lesson-flow .mp-sparse-scroll { overflow:auto; max-height:24rem; margin:1.1rem 0; }
+.lesson-flow .mp-sparse-scroll:focus-visible { outline:2px solid #e4b752; outline-offset:3px; }
+.lesson-flow .mp-sparse-table { border-collapse:collapse; width:100%; }
+.lesson-flow .mp-sparse-table caption { text-align:left; color:#eee; padding-bottom:.65rem; }
+.lesson-flow .mp-sparse-table td,.lesson-flow .mp-sparse-table th { padding:.6rem; text-align:left; vertical-align:top; border-bottom:1px solid #333; white-space:nowrap; }
+.lesson-flow .mp-sparse-table th { color:#eee; }
+.lesson-flow .mp-sparse-toggle { display:flex; gap:.6rem; align-items:center; }
+.lesson-flow .mp-sparse-toggle input { accent-color:#e4b752; }
+.lesson-flow .mp-sparse-toggle input:focus-visible { outline:2px solid #e4b752; outline-offset:3px; }

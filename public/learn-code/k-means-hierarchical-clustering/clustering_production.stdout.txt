@@ -1,0 +1,18 @@
+scikit-learn: 1.9.1 Old Faithful rows: (272, 2)
+standardized k=2 centers (minutes): [[2.052, 54.592], [4.296, 80.08]] sizes: [98, 174]
+raw-unit k=2 centers (minutes): [[2.094, 54.75], [4.298, 80.285]] sizes: [100, 172]
+agreement of the two geometries (ARI): 0.941537
+k / inertia over five single starts / median silhouette, standardized
+1 544.000000..544.000000 silhouette undefined
+2 79.575959..79.575959 0.745177
+3 56.331983..64.129144 0.486277
+4 43.889324..49.624831 0.404820
+5 34.274379..39.154590 0.364631
+6 27.284262..31.281991 0.388939
+7 23.821930..24.895822 0.379598
+8 21.517550..23.437178 0.360078
+blobs: (150, 2)
+KMeans inertia: 181.504432 silhouette: 0.876025
+MiniBatchKMeans inertia: 181.64728 silhouette: 0.876025
+Ward silhouette: 0.876025
+KMeans versus Ward agreement (ARI): 1.0

@@ -1,0 +1,104 @@
+{
+  "schema": "classical21-content-retained-inputs/v1",
+  "release": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/design-research/root-design-acceptance-and-writing-release.json",
+    "bytes": 33110,
+    "sha256": "cf76f6d3f142172fb72e50e14cef2df6515a0ac6fb7d0a55f35bfabaae967f93"
+  },
+  "original_sources_guarded": 28,
+  "files": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_tiny.py",
+      "bytes": 988,
+      "sha256": "e067a71d2ab22c35327183c4e135970b69a60fc8cc52b875412321b997e905b7",
+      "role": "exact retained displayed source",
+      "execution": "historical only; no new execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_tiny.py.stdout.txt",
+      "bytes": 106,
+      "sha256": "565643189473ea32fe3e59404f440360221adf2fafe2f260911a896dbd8afb94",
+      "role": "exact retained displayed stdout literal",
+      "execution": "historical only; no new execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_penguins.py",
+      "bytes": 3279,
+      "sha256": "7308b4e7fc544209504371af354d481cf61e757cae3b72b324fb3d30d4b2a9b6",
+      "role": "exact retained displayed source",
+      "execution": "historical only; no new execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_penguins.py.stdout.txt",
+      "bytes": 291,
+      "sha256": "8f1ec377554adbf25a7dc5ef3fe604189c3684f36ca5fe41e120e48939236145",
+      "role": "exact retained displayed stdout literal",
+      "execution": "historical only; no new execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_optuna.py",
+      "bytes": 984,
+      "sha256": "8d314771249f94c3900fb43f0a1a5c6906c2c35fede8ab3b644df15250747a08",
+      "role": "exact retained displayed source",
+      "execution": "historical only; no new execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/cv_optuna.py.stdout.txt",
+      "bytes": 112,
+      "sha256": "c6ca28777c32fd132b48db85a2a9d5462e3ee78d265d3a851d52aaee8d365637",
+      "role": "exact retained displayed stdout literal",
+      "execution": "historical only; no new execution",
+      "terminal_newline": false
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/penguins.csv",
+      "bytes": 15586,
+      "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68",
+      "role": "exact retained offline input/provenance",
+      "source": {
+        "path": "public/learn-assets/cross-validation/penguins.csv",
+        "bytes": 15586,
+        "sha256": "79995be0ba7a6df1e9309e399a23438c0854f959d29950885dafb94ab881be68"
+      }
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/nested-experiment.json",
+      "bytes": 16989,
+      "sha256": "fd53f72e89cb511f68646a4a8fa81f0a5f6ef125c5141a4bd164c7b6a48d0499",
+      "role": "exact retained offline input/provenance",
+      "source": {
+        "path": "public/learn-assets/cross-validation/nested-experiment.json",
+        "bytes": 16989,
+        "sha256": "fd53f72e89cb511f68646a4a8fa81f0a5f6ef125c5141a4bd164c7b6a48d0499"
+      }
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/programmes/data-provenance.md",
+      "bytes": 3770,
+      "sha256": "b7d8a56b683f797574834989dc9259ed932e53ceeb5c9bbb5a0393c7c5248692",
+      "role": "exact retained offline input/provenance",
+      "source": {
+        "path": "public/learn-assets/cross-validation/data-provenance.md",
+        "bytes": 3770,
+        "sha256": "b7d8a56b683f797574834989dc9259ed932e53ceeb5c9bbb5a0393c7c5248692"
+      }
+    }
+  ],
+  "tasks": {
+    "path": "docs/teaching/classical-ml-reading-flow/cross-validation-hyperparameter-tuning/content-authoring/retained-practice-source.jsx",
+    "bytes": 7710,
+    "sha256": "bb5ebf64bb36303e0b27a41870fef87687631711a633d25d5bea70c524c6f7b2",
+    "count": 10,
+    "role": "exact extracted current JSX task blocks, not an executable module"
+  },
+  "limits": [
+    "Identity/extraction only",
+    "No retained programme import/main/fit/checker replay",
+    "No content readiness claim"
+  ]
+}

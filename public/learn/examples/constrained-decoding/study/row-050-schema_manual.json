@@ -1,0 +1,252 @@
+{
+  "index": 50,
+  "arm": "schema_manual",
+  "prompt_ids": [
+    7992,
+    974,
+    253,
+    4767,
+    3417,
+    285,
+    396,
+    17183,
+    2978,
+    715,
+    247,
+    13922,
+    1789,
+    342,
+    4555,
+    253,
+    4910,
+    3417,
+    285,
+    396,
+    17183,
+    64,
+    3591,
+    15,
+    27671,
+    253,
+    2193,
+    432,
+    253,
+    3280,
+    15,
+    187,
+    8982,
+    27,
+    3417,
+    30,
+    735,
+    49122,
+    28,
+    396,
+    17183,
+    2978,
+    30,
+    24,
+    15,
+    17,
+    7892,
+    15,
+    187,
+    17635,
+    27
+  ],
+  "protocol_sha256": "e149953add3d5e0f9a091123517790e7f11c42fc053624d17482586feeec870c",
+  "generated_ids": [
+    9819,
+    84,
+    1553,
+    447,
+    1381,
+    3,
+    84,
+    292,
+    375,
+    66,
+    995,
+    3,
+    84,
+    554,
+    66,
+    77,
+    64,
+    68,
+    78,
+    1381,
+    25,
+    94,
+    0
+  ],
+  "status": "eos",
+  "trace": [
+    {
+      "position": 0,
+      "id": 9819,
+      "support": 2,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 1,
+      "id": 84,
+      "support": 5,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 2,
+      "id": 1553,
+      "support": 3,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 3,
+      "id": 447,
+      "support": 3,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 4,
+      "id": 1381,
+      "support": 3,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 5,
+      "id": 3,
+      "support": 1,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 6,
+      "id": 84,
+      "support": 9,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 7,
+      "id": 292,
+      "support": 3,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 8,
+      "id": 375,
+      "support": 3,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 9,
+      "id": 66,
+      "support": 1,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 10,
+      "id": 995,
+      "support": 3,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 11,
+      "id": 3,
+      "support": 1,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 12,
+      "id": 84,
+      "support": 3,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 13,
+      "id": 554,
+      "support": 2,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 14,
+      "id": 66,
+      "support": 2,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 15,
+      "id": 77,
+      "support": 1,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 16,
+      "id": 64,
+      "support": 1,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 17,
+      "id": 68,
+      "support": 2,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 18,
+      "id": 78,
+      "support": 1,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 19,
+      "id": 1381,
+      "support": 2,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 20,
+      "id": 25,
+      "support": 5,
+      "completed": false,
+      "terminated": false
+    },
+    {
+      "position": 21,
+      "id": 94,
+      "support": 1,
+      "completed": true,
+      "terminated": false
+    },
+    {
+      "position": 22,
+      "id": 0,
+      "support": 1,
+      "completed": true,
+      "terminated": true
+    }
+  ],
+  "seconds": 0.8177475000265986,
+  "text": "{\"species\":\"setosa\",\"sepal_cm\":8}",
+  "schema_prefix": true,
+  "completed": true,
+  "terminated": true
+}

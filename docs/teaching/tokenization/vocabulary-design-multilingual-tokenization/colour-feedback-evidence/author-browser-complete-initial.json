@@ -1,0 +1,848 @@
+{
+  "checkedAt": "2026-10-06T16:06:49.251Z",
+  "kind": "author-only fresh production browser; paints require personal inspection",
+  "base": "http://127.0.0.1:4240",
+  "sources": {
+    "src/learn/data/topics/vocabulary-multilingual.jsx": "0b956d5a44e44304d2a08f002aa014d03f8f2572651b93f6dfe4faddcb4fa288",
+    "src/learn/components/lesson-labs/MultilingualVocabularyLabs.jsx": "11b062841ec5dd079d9715352ca67ebc197cc6a015cbd90b01ab4f1f8b994e04",
+    "src/learn/components/lesson-labs/multilingual-vocabulary.css": "08acb6669a27de76f5a63fc50d3017b1211d3eb326308daa5aedacf9a9d6a315",
+    "src/learn/data/multilingual-vocabulary-models.js": "8c6e40b0278ca60c2ae58926f497cce85c1e089f3c6ce097293f4dbd2f11ebe9",
+    "scratch/vocabulary-color-before/verify-color-browser.cjs": "5cc99476ed8536f6709724543e019e8064b11fc4b92b37d5765d6a0207703672",
+    "src/learn/components/lesson-labs/token-identity-colors.js": "6bdda73f6e8a02435d4b5dfbb0662a7ebab078e6af34e286e42d804ceed2b13c",
+    "src/learn/components/lesson-labs/token-identity-colors.css": "5e9b388e88cb88bf37caaef1ea75fce394c9b8c020155181005d219e1ede4c8d",
+    "dist-tokenization-flow/.vite/manifest.json": "f159af7a286ec59543ecab2b62ac626688a5b6d65feb759f758e472cf919530d"
+  },
+  "layouts": [
+    {
+      "width": 1366,
+      "enlarged": false,
+      "overflow": 0,
+      "figures": 17,
+      "labs": 5
+    },
+    {
+      "width": 390,
+      "enlarged": false,
+      "overflow": 0,
+      "figures": 17,
+      "labs": 5
+    },
+    {
+      "width": 320,
+      "enlarged": false,
+      "overflow": 0,
+      "figures": 17,
+      "labs": 5
+    },
+    {
+      "width": 768,
+      "enlarged": true,
+      "overflow": 0,
+      "figures": 17,
+      "labs": 5
+    }
+  ],
+  "states": [
+    {
+      "alpha": 0.17,
+      "result": "4 joins learned. English cat:1; Hindi घर:2. Counts include every end-marker tile."
+    },
+    {
+      "zeroMass": "undefined",
+      "hindiOnly": "missing other alphabets",
+      "resetMasses": [
+        80,
+        15,
+        5
+      ]
+    },
+    {
+      "maximumAllowedJoins": 16,
+      "result": "13 joins learned. English cat:1; Hindi घर:1. Counts include every end-marker tile."
+    },
+    {
+      "V": 64000,
+      "T": 500,
+      "headRatio": 1,
+      "pairsRatio": 0.25
+    }
+  ],
+  "paints": [
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-dictionary-choice-desktop.png",
+      "sha256": "cad0915bc50b1d1254cc2f7fc2bfe8b83261454e85e6db7b30b2038c3d3e8995"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-coverage-desktop.png",
+      "sha256": "29c1aa82b390f272577397144beeb7fca2dab9b975ed0495ca8a6a3a76491bc6"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-fertility-desktop.png",
+      "sha256": "80167f621070cff0a7ac659bbb670d2d93c57d42f2f2d69d26f401d5eabe80a3"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-parallel-denominators-desktop.png",
+      "sha256": "e361acfbf76ce5e8984108216ec47f499124da13fa6e18aa566a0b7464dfa9c1"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-sampling-steps-desktop.png",
+      "sha256": "cf27fd27595a4add17d256aa6c575f7a1607d83eea1b552fb2f401e1ba926c5a"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-integer-allocation-desktop.png",
+      "sha256": "c444984ee19ee423857ed7683229ade4383402a6e4d5338971948fd858c90959"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-embedding-rows-desktop.png",
+      "sha256": "8d77deb54b32e1390d50d91d5fc7a2629f21c7107fa795806d871398930008dd"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-output-dot-products-desktop.png",
+      "sha256": "e86d3dcfd97ad482e05e0f9d7f1124e2723892c4a410c1800a58ae2d2be2e857"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-output-attention-work-desktop.png",
+      "sha256": "1bc52b9829ad5cc7093dc8db7eee16d971901a21227934db0e0b82d01ae0cb11"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-normalization-loss-desktop.png",
+      "sha256": "f3e5e302ec0d66dcc12cb6c9a08ba5f79591170b98370bb1beb35d22176d3443"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-pretokenizer-boundaries-desktop.png",
+      "sha256": "8f0206eb71c0898757098a8befe6aa51ecee5ff9346ea6e74f104822d22bab13"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-shared-word-count-desktop.png",
+      "sha256": "b21eff72d877d81336e08339520f68d1665d7828d7b730766d2250e81f0b0cb3"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-train-holdout-desktop.png",
+      "sha256": "f404f7fdfb9c59cf6afebef23a990809eaae947c647294319aa7f71744a3b0b6"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\multilingual-heldout-counts-desktop.png",
+      "sha256": "dd67b354367da76dcef58027141ec019350adede03e0502e4bab807ebf90ee6f"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-row-identity-desktop.png",
+      "sha256": "b92a0712121adbc4c3c0289066729d2b7270520c057cc612d3bbd84dbe472fdc"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-softmax-expansion-desktop.png",
+      "sha256": "d2e637916b8baeb8a0094fb0ce97a85f2e8dc9d60a6218a32f83b75d634e47f9"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-retrieval-budget-desktop.png",
+      "sha256": "af5deefc72f709fa5ed4e52d456294a01773c8fddfea187f3dcfe368b95f148f"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-mixture-desktop.png",
+      "sha256": "204dfa9d88dcc938c41fa3abda884ff864343d32502e8dda0c424f745c96c1c2"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-masses-desktop.png",
+      "sha256": "f9870318656cc00970e4975f1aab859566168557b57e3fc4691f8b3ed8ae1e18"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-joins-desktop.png",
+      "sha256": "2449f19b78e090fdc896dd0c3460de5071dec63c1cdcc62af15cb662e3d1fe8f"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-storage-desktop.png",
+      "sha256": "7c9614d7894455569a49914f3e67c27a0eada44ffb2f0711e2c0fb9fcc0dadb6"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-budget-desktop.png",
+      "sha256": "a97b52bc81a1f407ee595a486ffb9ad247ae90c0fc6069ef52d0cbcef4c80c60"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-dictionary-choice-phone.png",
+      "sha256": "e18a573d0c595123e17c6503d8a702c4f590144e3169b9aa1414d88fc49ff238"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-coverage-phone.png",
+      "sha256": "3e39fa3886a8dc9da3e727108f95c4a0e9e43fcfbeccae194273cbdb3ed95630"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-fertility-phone.png",
+      "sha256": "fdefb29f9aa616a6ecdfc19796b6c73a12ce6b89af2c77c3f4db14efa9442faf"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-parallel-denominators-phone.png",
+      "sha256": "e28931c44011973b465a40c52cc7bca0f249119f0fd1f35c958bf95b15991ea9"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-sampling-steps-phone.png",
+      "sha256": "f7453e245f7de89ed7ae35cee04305d3a47faad24b58dec75d88734b283a76cf"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-integer-allocation-phone.png",
+      "sha256": "623fd50e2f259801cbf9428a1fc981c2e0ad358f0417b05401fa98ac7cb9bc98"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-embedding-rows-phone.png",
+      "sha256": "49f0281a8f73b31548515e9501db14a3c08926a18434a1e32bb8ebfc4606ce54"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-output-dot-products-phone.png",
+      "sha256": "db96fad339d752219ad87c392c5b7039d0a82c959a25e5cb34ae3a12ef49ae0a"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-output-attention-work-phone.png",
+      "sha256": "63ef607e375e9f19c280fe3e9ac2eb88b5bbb7181d6df62bf740bdfce2f7b60b"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-normalization-loss-phone.png",
+      "sha256": "2cfc4cfb5f55be5d9b79c97f5fab29be5d4737e1e8cb90d6e155e6c4eabe9369"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-pretokenizer-boundaries-phone.png",
+      "sha256": "62208948bc4e14412887083d1d545d1d9bb5311d434c708a0a9d378430400af6"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-shared-word-count-phone.png",
+      "sha256": "1f6e807cf72312fb033dacd0d4d0141888db10290122559958069909a8d866c4"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-train-holdout-phone.png",
+      "sha256": "169048c6db7a46f226320542eaa5ceb8fdc0c9c82bfcf210449109e223419f4a"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\multilingual-heldout-counts-phone.png",
+      "sha256": "118ca55b3111dc86026748995c13370ee930ff901fa74d03f59df4e46e2875d4"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-row-identity-phone.png",
+      "sha256": "f202620c02e46d963d9782ce9326d64241dc04c50bda917cc6648c98a055597b"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-softmax-expansion-phone.png",
+      "sha256": "0a5b5ba916215a9a9ba03887d9ecb6873854b5c0f4c905fd96031a58fcee300c"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-retrieval-budget-phone.png",
+      "sha256": "c27c9a218bca560835392b506f4e73fb78e0bfe0af199db593e7529eaa9d3218"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-mixture-phone.png",
+      "sha256": "b4da99566261ee2dcedcd28831799e5516d1471de0ff460cca5acfcbe7a73c24"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-masses-phone.png",
+      "sha256": "9c3da546d3d12789433d7d2179e1b2cbd100399560eae74573bcb28599c2e4af"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-joins-phone.png",
+      "sha256": "9116af0b7d83f13d866dbea3c2682d8c6b2e32e77320715ad862c14c2d487913"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-storage-phone.png",
+      "sha256": "df95080309afd7dc06aa00f4fdf825964262f5a48a0aae034fdc918fafb47e09"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-budget-phone.png",
+      "sha256": "cac6b3ed2ad734acd8485e4b5340a96eb19caf637c9fe89942bca9355ae765a2"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-dictionary-choice-small.png",
+      "sha256": "78ade905daf5c7dc75152b080e51e271b98ab5c94e036def64dbd25fd680bc80"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-coverage-small.png",
+      "sha256": "f38710468f15f63be73b28c8b35db1d9abea3bbf80cd4ea081f7bacfc12f2f36"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-fertility-small.png",
+      "sha256": "1863f4c6cc06e184bde8f7a927b35e6b974b96226449ae10cdb06b02e916aa73"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-parallel-denominators-small.png",
+      "sha256": "c2e157152f939f7cb10614b02c702e135c52d279c520bf6b26bb7d26eee2a203"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-sampling-steps-small.png",
+      "sha256": "30e89955c57e9a1eb3be4b5a1ea1258263521ca383694c7ee7902dda8a0edefb"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-integer-allocation-small.png",
+      "sha256": "bd3c55ae40bcd94f59291a310b8493de3762df8e2f7e04af490b80e6f8b4401f"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-embedding-rows-small.png",
+      "sha256": "a7dee3ad6cb5cd07ab0de7ea67b764a4475fffd3c8d7719f6eb0e3267e9c151b"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-output-dot-products-small.png",
+      "sha256": "8a475ebabdf8027b4ade19ec27e3fc8646c8329a2895e7acc1e00297c091553a"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-output-attention-work-small.png",
+      "sha256": "37fd596e48cbf376ecf2107e6474ee7707a93aba02e3ac9c6393dcc21f9cdc37"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-normalization-loss-small.png",
+      "sha256": "2e7deb50835ded37aac57fba84f8ede0a962e0b7c197092547a12abe60ca661d"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-pretokenizer-boundaries-small.png",
+      "sha256": "df19bb63548da3fe71d631fef54099d21f99f0c829f7b76bab24f0b1f0ddcb1a"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-shared-word-count-small.png",
+      "sha256": "09b5445011ca165affa4b80a4fca23a14b73955466ce7397dbe94fd30f77bdd6"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-train-holdout-small.png",
+      "sha256": "8498366f48a9d21678ebaac1f3e9eae57612b676d68eb7bfd5fec970203a267b"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\multilingual-heldout-counts-small.png",
+      "sha256": "f4a508b617a79190c6ebfc04179c5aeac4e381d4a98385d2f00fb49f4defd682"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-row-identity-small.png",
+      "sha256": "8fc693413a9df52d36cc354817857392d59db22cdf658621475c5e5f3a831fb8"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-softmax-expansion-small.png",
+      "sha256": "11162c3a51fcf9bd456ff657e481ca61e2aae1aa4f9c0edb9f429a797621c1e9"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-retrieval-budget-small.png",
+      "sha256": "fc98be26c57164d9364dbba28849874ee63ed3cc685d93691bcfa4eb5331cc7e"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-mixture-small.png",
+      "sha256": "0e23620770b44e640fe4158655674ad916c4c9db7dcdac66e13e0cabd7ec999b"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-masses-small.png",
+      "sha256": "8f325b6cfe28959c82662fe7c4ff9a331f1123b3cbf93677d6bd99a10287e7d1"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-joins-small.png",
+      "sha256": "8a7fb3f045c702b7a8be1922889b87b0d0fccb6beb3d17d61c4feb6252d85a18"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-storage-small.png",
+      "sha256": "91b20feb6fbb2003ccbc5e29c4937fc368601f45169096f4a8e3b7012372a842"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-budget-small.png",
+      "sha256": "ec471cacdde7ba715f0bb269e614e5da95a7ecf987a957fb933db0b4b4aa1be6"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-dictionary-choice-enlarged.png",
+      "sha256": "c0ae971382cf03f2567c3de8a913ec2d7bdcb83b4c7a9f54e80d54237d0b1221"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-coverage-enlarged.png",
+      "sha256": "f2d2ce34a468d3f3a86da9d838cff788f0c7f8d1f319b82f6ebf7883e2c745c1"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-fertility-enlarged.png",
+      "sha256": "c2130e12c326095d3e2a127f6187abff4d1569dc2d84ac0589f9e7d2dee3a867"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-parallel-denominators-enlarged.png",
+      "sha256": "9e8d7c3ae9df858f76f0883945bf594e817cffbf3606473cd445693e0e6f33ae"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-sampling-steps-enlarged.png",
+      "sha256": "bacde399252738689db70694685d383bf257feebc8dadd21ed88ef6602f3275b"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-integer-allocation-enlarged.png",
+      "sha256": "9173d2445788a5909927b2c442d90ce9a0b97c5cb2828f3d1ade2e060b12a1bd"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-embedding-rows-enlarged.png",
+      "sha256": "1be08e98982d5fefe4a658bc49c075d4cb4e42bdc1ef13e7501709739d6c0bc3"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-output-dot-products-enlarged.png",
+      "sha256": "55aea76139cfd9da0dabb4d39f6c1c4948f98739740ca8cdaa28488dc5bad932"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-output-attention-work-enlarged.png",
+      "sha256": "5171da71cf4678b8118a560b2a44af9b74583052d5e3ee5baf0aeee43824b05f"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-normalization-loss-enlarged.png",
+      "sha256": "2d431d589ec12673cdfd0faa190738ae0836fae506484bb410e84013a0a6fc57"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-pretokenizer-boundaries-enlarged.png",
+      "sha256": "626445fa07ea5c7da26311e68c45d27cf4ce1a371992f4f66502ea2fbb7a1b95"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-shared-word-count-enlarged.png",
+      "sha256": "c3684d5caf4d749467218e5b35424541fa7cda2462b010b3f9030b37b0678801"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-train-holdout-enlarged.png",
+      "sha256": "9f1eee9f5559b9254164f178ce86fc66e5e0d79bf09f8961fbb12434642a79bd"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\multilingual-heldout-counts-enlarged.png",
+      "sha256": "cb9f54299ed8590b246135b1ba7e85a671f911aa3ca7814e665c2c45f282c7c4"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-row-identity-enlarged.png",
+      "sha256": "f9e2523c9aa7da6e189bb5f275a225c74f2007642fb9248e72c01a2d9bea63e8"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-softmax-expansion-enlarged.png",
+      "sha256": "6730d80c188c0b6153086d4a2b8720824883bb0e3c5fbc322be7e46ec0ad2668"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-retrieval-budget-enlarged.png",
+      "sha256": "284b9553348393e7a79d529056592ef32d18625e21390cfbb3d35796aec7b133"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-mixture-enlarged.png",
+      "sha256": "e4c41fc002fc3bb6e74c8de453feb1ea4981ae195f7e2e18cd17bf1001990580"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-masses-enlarged.png",
+      "sha256": "f175dd52f45f18f3f722b791994ba65ac6a11d95dbfb7494eae83f7ef7197edf"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-joins-enlarged.png",
+      "sha256": "2ea59bb2f329406b619945aea8d357f682d9fca20489163c188f3b8dd724233d"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-storage-enlarged.png",
+      "sha256": "cd28e3ad34f6e4d6cf702390443a4fa27496bb52c4ed78b2f3089754e6e5c109"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\vocabulary-budget-enlarged.png",
+      "sha256": "1bb9e0beeb2ec9c38f1ebe69388f5fdd4bb277286fd8c91e0d786bbe4fa88724"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\alpha-null-one.png",
+      "sha256": "abb18e4734f502426f1a70f243cb61a74004879fb55705443afe7bc476b17576"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\alpha-interior-point17.png",
+      "sha256": "76646cb59bfd027b088185dd6636b43f56a4fdaf39bfb9a81c77800794bd74b6"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\masses-all-zero.png",
+      "sha256": "054171951f2fd536a2a07df174d5569163bb6b6c4e76dad7f78e67aa83431131"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\masses-hindi-only.png",
+      "sha256": "042e59b57c682b5429651208947472dc71b82bb2a7d5c5cfe4d1b87235254d5c"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\joins-zero.png",
+      "sha256": "f5ecf6a8e2605fa7d659962389cc4f24bc7a495330c44b33396cb5c479a2dbc6"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\joins-maximum.png",
+      "sha256": "ba6906c35d3f88c0f95742284570fa8bf95ebb540e0990bc53b60418c79dd5cc"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\storage-untied.png",
+      "sha256": "e90d8ed1b66c92597c8b12b4ef9bff62231e6ca44faa9a6361b4e5eca068beec"
+    },
+    {
+      "file": "scratch\\vocabulary-color-before\\final-paints\\equal-head-quarter-pairs.png",
+      "sha256": "1b6a8beaa55e4e9e8323e48a5080c1117b5f7fe153055dd8061a2a45f1a181d5"
+    }
+  ],
+  "errors": [],
+  "identityProof": {
+    "colors": {
+      "c": [
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)"
+      ],
+      "a": [
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)"
+      ],
+      "t": [
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)"
+      ],
+      "s": [
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)"
+      ],
+      "cat": [
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)"
+      ],
+      "cats": [
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)"
+      ],
+      "E7": [
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)"
+      ],
+      "8C": [
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)"
+      ],
+      "AB": [
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)"
+      ],
+      "猫": [
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)",
+        "rgb(96, 165, 250)"
+      ],
+      "猫猫": [
+        "rgb(192, 132, 252)"
+      ],
+      "cat</w>": [
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)"
+      ],
+      "</w>": [
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)"
+      ],
+      "घ": [
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)"
+      ],
+      "र": [
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)"
+      ],
+      "घर": [
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)"
+      ],
+      "ो": [
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)"
+      ],
+      "ं": [
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)"
+      ],
+      "咪": [
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)"
+      ],
+      "at": [
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)",
+        "rgb(244, 114, 182)"
+      ],
+      "solar": [
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)",
+        "rgb(226, 181, 90)"
+      ],
+      "panel": [
+        "rgb(96, 165, 250)"
+      ],
+      "cell": [
+        "rgb(192, 132, 252)",
+        "rgb(192, 132, 252)"
+      ]
+    },
+    "sampled": [
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "B",
+        "color": "rgb(96, 165, 250)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "A",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "B",
+        "color": "rgb(96, 165, 250)"
+      }
+    ],
+    "corpus": [
+      {
+        "name": "English strings:59.42%",
+        "bar": "rgb(226, 181, 90)",
+        "reference": "rgb(189, 189, 189)"
+      },
+      {
+        "name": "Hindi strings:25.73%",
+        "bar": "rgb(96, 165, 250)",
+        "reference": "rgb(189, 189, 189)"
+      },
+      {
+        "name": "Chinese strings:14.85%",
+        "bar": "rgb(192, 132, 252)",
+        "reference": "rgb(189, 189, 189)"
+      }
+    ],
+    "measured": [
+      {
+        "name": "English",
+        "bars": [
+          {
+            "reference": true,
+            "color": "rgb(170, 170, 170)"
+          },
+          {
+            "reference": false,
+            "color": "rgb(226, 181, 90)"
+          },
+          {
+            "reference": true,
+            "color": "rgb(170, 170, 170)"
+          },
+          {
+            "reference": false,
+            "color": "rgb(226, 181, 90)"
+          }
+        ]
+      },
+      {
+        "name": "Hindi",
+        "bars": [
+          {
+            "reference": true,
+            "color": "rgb(170, 170, 170)"
+          },
+          {
+            "reference": false,
+            "color": "rgb(96, 165, 250)"
+          },
+          {
+            "reference": true,
+            "color": "rgb(170, 170, 170)"
+          },
+          {
+            "reference": false,
+            "color": "rgb(96, 165, 250)"
+          }
+        ]
+      },
+      {
+        "name": "Simplified Chinese",
+        "bars": [
+          {
+            "reference": true,
+            "color": "rgb(170, 170, 170)"
+          },
+          {
+            "reference": false,
+            "color": "rgb(192, 132, 252)"
+          },
+          {
+            "reference": true,
+            "color": "rgb(170, 170, 170)"
+          },
+          {
+            "reference": false,
+            "color": "rgb(192, 132, 252)"
+          }
+        ]
+      }
+    ],
+    "traced": [
+      "rgb(255, 255, 255)",
+      "rgb(255, 255, 255)",
+      "rgb(255, 255, 255)",
+      "rgb(255, 255, 255)",
+      "rgb(255, 255, 255)"
+    ],
+    "lookup": [
+      {
+        "label": "cat",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "ID 4",
+        "color": "rgb(226, 181, 90)"
+      },
+      {
+        "label": "cat",
+        "color": "rgb(226, 181, 90)"
+      }
+    ]
+  }
+}

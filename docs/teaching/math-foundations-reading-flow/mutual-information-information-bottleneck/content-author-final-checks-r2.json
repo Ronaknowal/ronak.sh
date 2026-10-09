@@ -1,0 +1,636 @@
+{
+  "status": "AUTHOR_FINAL_CONTENT_GUARDS_PASS",
+  "completedAt": "2026-10-09T16:50:42.169Z",
+  "prior": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-author-checks-r1.json",
+    "sha256": "0b142b40dc92b5df7ef79ec3d0ff691f11efdec23ae78699548fcdac44d52696"
+  },
+  "manuscript": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/manuscript-complete-r2.md",
+    "sha256": "bcb2067bd683a22b9ec625f9df198d82744bd3ad45639ebfd73d5858574ae861"
+  },
+  "visualSpecifications": {
+    "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/content-prepared/visual-specifications-r2.md",
+    "sha256": "7ed450a9f2accab433624183886cbf07b40483a96846d75b741fcaa1cd1a4d80"
+  },
+  "checks": [
+    {
+      "name": "Prior333 scoped checks retained",
+      "pass": true
+    },
+    {
+      "name": "Prior manuscript current",
+      "pass": true
+    },
+    {
+      "name": "Prior specifications current",
+      "pass": true
+    },
+    {
+      "name": "Exact changed-task insertion inverse",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_original.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_original.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_original.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_nonlinear.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_nonlinear.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_nonlinear.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_processing.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_processing.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_processing.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity finite_fano.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion finite_fano.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion finite_fano.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_representations.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_representations.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_representations.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_iteration.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_iteration.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_iteration.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity finite_ib_reference.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion finite_ib_reference.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity finite_ib_numpy.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion finite_ib_numpy.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion finite_ib_numpy.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_bounds.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_bounds.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_bounds.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity gaussian_vib_step.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion gaussian_vib_step.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion gaussian_vib_step.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_estimation.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_estimation.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_estimation.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mutual-information-library-bridge.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mutual-information-library-bridge.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mutual-information-library-bridge.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity penguins_information.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion penguins_information.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion penguins_information.py",
+      "pass": true
+    },
+    {
+      "name": "Exact source identity mi_changed_task.py",
+      "pass": true
+    },
+    {
+      "name": "Whole source inclusion mi_changed_task.py",
+      "pass": true
+    },
+    {
+      "name": "Whole output inclusion mi_changed_task.py",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/topics/mutual-information-information-bottleneck.jsx",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/mutual-information-models.js",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/mutual-information-examples.js",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/mutual-information-mechanism-program.js",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current public/learn-assets/mutual-information/mutual-information-library-bridge.py",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/components/lesson-labs/MutualInformationLabs.jsx",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/components/lesson-labs/mutual-information-labs.css",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/curriculum/blueprints/mutual-information-information-bottleneck.js",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current AGENTS.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/SKILL.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/references/workflow.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/references/teaching.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/references/topic-design.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/references/domain-playbook.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/references/visuals-and-labs.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/references/examples-and-code.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/references/practice-and-resources.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current skills/lesson-authoring/references/portfolio-adapter.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/MUTUAL-INFORMATION-LESSON-DESIGN.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/MUTUAL-INFORMATION-VERIFICATION.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/MUTUAL-INFORMATION-INDEPENDENT-REVIEW.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/evidence/mutual-information-verification.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/evidence/mutual-information-independent-review.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current scratch/mutual-information-native-verification/final-source-hashes.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current scratch/mutual-information-native-verification/results.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/evidence/math-depth-remediation-author.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/evidence/math-depth-remediation-independent.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/IMPLEMENTATION-DEPTH-REVIEW.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/implementation-depth/FOUNDATIONS.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/topic-notes/contrastive-learning-simclr-moco-infonce-loss.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/topics/entropy-cross-entropy-kl-divergence.jsx",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/topics/probability-distributions-bayes-theorem.jsx",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/variational-inference-reading-flow-text.js",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/measure-reading-flow-text.js",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/topics/feature-selection-importance-shap-permutation-mutual-info.jsx",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current src/learn/data/topics/rate-distortion-theory.jsx",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/cover-thomas-ch2.pdf",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research/penguins.csv",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/research-r2.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-source-r2.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/entropy-cross-entropy-kl-divergence/design-accepted-root-r2.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r1.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research-r1.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/selected-intake-r1.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/historical-identity-r1.json",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/freeze-design-r1.mjs",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research/mit-chapter-2.pdf",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/research/mit-binary-channel.png",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/design-r2.md",
+      "pass": true
+    },
+    {
+      "name": "Accepted design input current docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/correct-design-r2.mjs",
+      "pass": true
+    },
+    {
+      "name": "Final placement M01",
+      "pass": true
+    },
+    {
+      "name": "Final placement M02",
+      "pass": true
+    },
+    {
+      "name": "Final placement M03",
+      "pass": true
+    },
+    {
+      "name": "Final placement M04",
+      "pass": true
+    },
+    {
+      "name": "Final placement M05",
+      "pass": true
+    },
+    {
+      "name": "Final placement M06",
+      "pass": true
+    },
+    {
+      "name": "Final placement M07",
+      "pass": true
+    },
+    {
+      "name": "Final placement M08",
+      "pass": true
+    },
+    {
+      "name": "Final placement M09",
+      "pass": true
+    },
+    {
+      "name": "Final placement M10",
+      "pass": true
+    },
+    {
+      "name": "Final placement M11",
+      "pass": true
+    },
+    {
+      "name": "Final placement M12",
+      "pass": true
+    },
+    {
+      "name": "Final placement M13",
+      "pass": true
+    },
+    {
+      "name": "Final placement M14",
+      "pass": true
+    },
+    {
+      "name": "Final placement M15",
+      "pass": true
+    },
+    {
+      "name": "Final placement M16",
+      "pass": true
+    },
+    {
+      "name": "Final placement M17",
+      "pass": true
+    },
+    {
+      "name": "Final placement M18",
+      "pass": true
+    },
+    {
+      "name": "Final placement M19",
+      "pass": true
+    },
+    {
+      "name": "Final placement M20",
+      "pass": true
+    },
+    {
+      "name": "Final placement M21",
+      "pass": true
+    },
+    {
+      "name": "Final placement M22",
+      "pass": true
+    },
+    {
+      "name": "Final placement M23",
+      "pass": true
+    },
+    {
+      "name": "Final placement M24",
+      "pass": true
+    },
+    {
+      "name": "Final placement M25",
+      "pass": true
+    },
+    {
+      "name": "Final placement M26",
+      "pass": true
+    },
+    {
+      "name": "Final placement M27",
+      "pass": true
+    },
+    {
+      "name": "Final placement M28",
+      "pass": true
+    },
+    {
+      "name": "Final placement M29",
+      "pass": true
+    },
+    {
+      "name": "Final placement M30",
+      "pass": true
+    },
+    {
+      "name": "Final placement M31",
+      "pass": true
+    },
+    {
+      "name": "Final placement M32",
+      "pass": true
+    },
+    {
+      "name": "Final placement M33",
+      "pass": true
+    },
+    {
+      "name": "Final placement M34",
+      "pass": true
+    },
+    {
+      "name": "Final placement M35",
+      "pass": true
+    },
+    {
+      "name": "Final placement M36",
+      "pass": true
+    },
+    {
+      "name": "Final placement M37",
+      "pass": true
+    },
+    {
+      "name": "Final placement M38",
+      "pass": true
+    },
+    {
+      "name": "Final placement M39",
+      "pass": true
+    },
+    {
+      "name": "Final placement M40",
+      "pass": true
+    },
+    {
+      "name": "Final placement M41",
+      "pass": true
+    },
+    {
+      "name": "Final placement M42",
+      "pass": true
+    },
+    {
+      "name": "Final placement M43",
+      "pass": true
+    },
+    {
+      "name": "Final placement M44",
+      "pass": true
+    },
+    {
+      "name": "Final placement M45",
+      "pass": true
+    },
+    {
+      "name": "Final placement M46",
+      "pass": true
+    },
+    {
+      "name": "Final placement M47",
+      "pass": true
+    },
+    {
+      "name": "Final placement M48",
+      "pass": true
+    },
+    {
+      "name": "Final placement M49",
+      "pass": true
+    },
+    {
+      "name": "Final placement M50",
+      "pass": true
+    },
+    {
+      "name": "Final placement M51",
+      "pass": true
+    },
+    {
+      "name": "Final placement M52",
+      "pass": true
+    },
+    {
+      "name": "All staged first-use mounts explicit",
+      "pass": true
+    }
+  ],
+  "scientificRuns": 0,
+  "scope": "Source/placement/conservation guards compose prior333 scoped author checks; no main or bounded numerical rerun"
+}

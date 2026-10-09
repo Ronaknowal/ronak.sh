@@ -1,0 +1,24 @@
+mean [3. 2.]
+directions [[0.707107 0.707107]]
+variances [6.       0.666667]
+variance_ratios [0.9 0.1]
+scores [[-2.12132]
+ [-2.12132]
+ [ 2.12132]
+ [ 2.12132]]
+reconstructed [[1.5 0.5]
+ [1.5 0.5]
+ [4.5 3.5]
+ [4.5 3.5]]
+entry_mse 0.25
+queries_reconstructed [[5.5 4.5]
+ [6.5 5.5]
+ [3.  2. ]]
+library_reconstruction_equal True
+k2_roundtrip True
+k0_scores_shape (4, 0)
+k0_reconstructed [[3. 2.]
+ [3. 2.]
+ [3. 2.]
+ [3. 2.]]
+constant_rank_and_ratios 0 None

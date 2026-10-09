@@ -1,0 +1,28 @@
+.randomized-linear-algebra-lesson{overflow-wrap:anywhere;container-type:inline-size}
+.rla-flow-figure{margin:2rem 0 2.4rem;padding:0;border:0;background:none;min-width:0}
+.rla-flow-title{font-size:1rem;color:var(--text-primary,#e1e4ea);margin:0 0 .8rem;font-weight:600}
+.rla-flow-figure figcaption{color:var(--text-secondary,#aeb7c6);font-size:.9rem;line-height:1.65;margin-top:.8rem}
+.rla-scene-scroll,.rla-table-scroll,.rla-equation-scroll{overflow:auto;max-width:100%;min-width:0;scrollbar-gutter:stable;outline-offset:3px}
+.rla-scene-scroll:focus-visible,.rla-table-scroll:focus-visible,.rla-equation-scroll:focus-visible{outline:2px solid #e5bb69}
+.rla-scene-scroll svg{display:block;max-width:none;height:auto;font-family:inherit;font-size:14px}
+.rla-array-name{display:block;margin:0 0 .3rem;color:#c5cbd6;font-size:.9rem}
+.rla-array-sequence{display:flex;flex-wrap:wrap;gap:1.1rem;align-items:flex-start}
+.rla-array{min-width:0;max-width:100%;flex:1 1 210px}
+.rla-table-scroll table{border-collapse:collapse;min-width:max-content;font-variant-numeric:tabular-nums;font-size:.86rem;width:100%}
+.rla-table-scroll caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.rla-table-scroll th,.rla-table-scroll td{padding:.55rem .8rem;text-align:right;white-space:nowrap;border-bottom:1px solid #30353e}
+.rla-table-scroll th:first-child,.rla-table-scroll td:first-child{text-align:left}
+.rla-table-scroll--tall{max-height:23rem}
+.rla-window-hint{font-size:.85rem;color:#a9b4c4;margin:.5rem 0}
+.rla-controls{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:flex-end;margin:1rem 0}
+.rla-controls label{display:flex;flex-direction:column;gap:.3rem;min-width:0;flex:1 1 150px;color:#cbd0da;font-size:.9rem}
+.rla-controls input,.rla-controls select{max-width:100%;min-width:0;width:100%;accent-color:#e5bb69;background:#171a20;color:#e1e5ec;border:1px solid #515969;border-radius:3px;padding:.35rem}
+.rla-controls input[type=range]{padding:0}
+.rla-controls button{background:transparent;color:#e5bb69;border:1px solid #6b5940;padding:.5rem .8rem;cursor:pointer}
+.rla-row-choices{display:flex;flex-wrap:wrap;gap:.8rem;margin:.8rem 0}
+.rla-row-choices label{display:flex;align-items:center;gap:.4rem;color:#cbd0da;font-size:.9rem}
+.rla-row-choices input{accent-color:#e5bb69}
+.rla-equation-scroll .katex-display{margin:1rem 0;min-width:max-content}
+.rla-equation-scroll .katex-display>.katex{white-space:nowrap}
+@container(max-width:38rem){.rla-array-sequence{display:block}.rla-array{margin-bottom:1.1rem;flex:none;width:100%}}
+@media(max-width:760px){.rla-array-sequence{display:block}.rla-array{margin-bottom:1.1rem;flex:none;width:100%}}

@@ -1,0 +1,14 @@
+{
+  "dataset": "UCI Bank Marketing: original published bank.csv 4,521-row subset",
+  "datasetUrl": "https://archive.ics.uci.edu/dataset/222/bank+marketing",
+  "doi": "10.24432/C5K306",
+  "licence": "CC BY 4.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "currentUciAttribution": "Moro, S., Rita, P., & Cortez, P. (2014). Bank Marketing. UCI Machine Learning Repository.",
+  "originalDescriptionAttribution": "Moro, S., Laureano, R., & Cortez, P. (2011). Using Data Mining for Bank Direct Marketing: An Application of the CRISP-DM Methodology. ESM 2011, pp. 117–121; retained original bank-names.txt.",
+  "originalSourceSha256": "dc8d576e9bda0f41ee891251bd84bab9a39ce576cba715aac08adc2374a01fde",
+  "derivedSha256": "a38edf496a152594c9ab95b4ae31354703f2a83ff33d73039001822986f9d198",
+  "transformation": "Retain each original last-contact duration in seconds and its one-based published source-row index; remove all other fields. No sampling, sorting, winsorization, rescaling or synthetic records.",
+  "records": 4521,
+  "limits": "Published subset order is not arrival order. No arrival/start/departure timestamps, waiting times, fitted arrival rate, IID service or stationary queue assumptions are identified. Queue calculations would be conditional hypothetical models."
+}

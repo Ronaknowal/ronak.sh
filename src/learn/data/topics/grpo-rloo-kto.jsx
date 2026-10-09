@@ -1,814 +1,1574 @@
-import { Prose, H2, H3, Code, CodeBlock, Callout } from "../../components/content";
-import { MathBlock } from "../../components/content/Math.jsx";
-import { TokenStream, StepTrace, Heatmap, Plot } from "../../components/viz";
-import { colors } from "../../styles";
+import { Prose, H2 } from '../../../../src/learn/components/content';
+import { MathBlock as SharedMathBlock } from '../../../../src/learn/components/content/Math.jsx';
+import RemoteCodeBlock from '../../../../src/learn/components/content/RemoteCodeBlock.jsx';
+import {
+  LessonIntro,
+  LessonTable,
+  Sources,
+} from '../../../../src/learn/components/lesson-labs/LessonElements.jsx';
+import {
+  BaselineAnatomy,
+  SamePromptGroups,
+  CausalResponseScore,
+  ScoreGeometry,
+  BaselineDependency,
+  SelfMeanFactor,
+  LeaveOneOutMatrix,
+  IndependenceTrees,
+  GradientDistribution,
+  RewardBudget,
+  StandardizationRows,
+  QuestionWeighting,
+  PolicySnapshots,
+  RatioBranches,
+  ClippingSurfaces,
+  ReductionGrid,
+  SampledKL,
+  RegularizationPaths,
+  OnlineLoop,
+  NativeConfigurations,
+  PairAndBinaryLabels,
+  KTOUtility,
+  ReferencePairing,
+  WeightedClasses,
+  DetachedReference,
+  KTOBatch,
+  MeasuredCandidates,
+  MeasuredEstimators,
+  RecordedUpdates,
+  MethodObjects,
+  ReportPolicy,
+} from '../../../../src/learn/components/lesson-labs/GroupedPreferenceFlow.jsx';
+import '../../../../src/learn/components/lesson-labs/lesson-flow.css';
 
-const grpoRlooKto = {
-  title: "GRPO, RLOO, KTO & Advanced Preference Methods",
-  slug: "grpo-rloo-kto-advanced-preference-methods",
-  readTime: "~55 min",
+const root = '/learn-code/grpo-rloo-kto/';
+const Program = ({ file, title }) => (
+  <RemoteCodeBlock source={root + file} filename={file} title={title} />
+);
+const MathBlock = ({ children }) => (
+  <div
+    className="grouped-preference-math"
+    role="region"
+    tabIndex={0}
+    aria-label="Mathematical relationship"
+  >
+    <SharedMathBlock>{children}</SharedMathBlock>
+  </div>
+);
+const Anchor = ({ id }) => <span id={id} aria-hidden="true" />;
+const Exercise = ({ title, children, hint, solution }) => (
+  <div
+    className="lesson-exercise flow-check"
+    data-lesson-exercise
+    id={`group-practice-${title.split('.')[0]}`}
+  >
+    <p>
+      <strong>{title}</strong> {children}
+    </p>
+    <details>
+      <summary>Hint</summary>
+      {hint}
+    </details>
+    <details>
+      <summary>Worked solution</summary>
+      {solution}
+    </details>
+  </div>
+);
+
+const lesson = {
+  title: 'GRPO, RLOO, KTO & Advanced Preference Methods',
+  readTime: '~90 min read + programs and practice',
   content: () => (
-    <div>
+    <div className="lesson-flow grouped-preference-flow">
+      <LessonIntro
+        prerequisites="RLHF supplies score-function gradients, old/current/reference policies and PPO clipping. SFT supplies response masks and real poem data. DPO and SimPO supply fixed preference records. We rebuild the local calculations before changing them."
+        exampleKind="Exact finite estimators, complete causal-model updates and ordinary pinned TRL trainers"
+      >
+        Follow a group of answers from reward to baseline to gradient. Then compare individual
+        desirable and undesirable records through KTO. The first pass follows every section; the
+        covariance expansion and the optional weighted-KL derivative are deeper branches. Actual
+        poem scores connect the finite calculations to a causal model. Two-update demonstrations
+        establish how the implementations behave, with every outcome retained.
+      </LessonIntro>
 
-      {/* ======================================================================
-          1. WHY IT EXISTS
-          ====================================================================== */}
-      <H2>1. Why it exists</H2>
-
+      <Anchor id="1-why-it-exists" />
+      <Anchor id="1-start-with-the-problem" />
+      <H2>1. Replace a critic only after identifying its job</H2>
       <Prose>
-        PPO solved the core problem of online preference optimization: sample responses, score them with a reward model, update the policy to increase the probability of high-scoring responses, and use a KL penalty to keep the policy from drifting into adversarial territory. That pipeline works. The RLHF topic covers it in full. But PPO carries substantial scaffolding, and the cost of that scaffolding becomes the dominant constraint when you try to scale it to the largest models or when your preference data does not fit the format PPO assumes.
+        Ask a model to label the sentiment of a poem verse. It can answer “negative”, “no impact” or
+        “positive”, and it can also produce text outside those labels. A reward function gives a
+        completed response a number. In our real-data example it returns 1 when the strict parsed
+        label matches the dataset annotation and 0 otherwise. The annotation is a human judgment
+        recorded by that dataset; correctness here is relative to that judgment.
+      </Prose>
+      <BaselineAnatomy />
+      <Prose>
+        Trace one response down the token tree. Its tokens receive probabilities from the policy;
+        the completed response receives a reward. A baseline supplies a comparison level. Their
+        difference, called its reward advantage here, tells the update whether that sampled response
+        did better or worse than the comparison. The baseline is neither the frozen reference policy
+        nor the old sampling policy. Those policies have separate jobs in controlling and measuring
+        a change.
+      </Prose>
+      <Prose>
+        In{' '}
+        <a href="/learn/path/full-curriculum/rlhf-reinforcement-learning-from-human-feedback?module=large-language-models">
+          RLHF
+        </a>
+        , a learned value function predicts a future return from a prefix. Training that critic
+        costs parameters, activations and optimization work. When a prompt can produce several
+        complete responses, their rewards offer another source of comparison. GRPO means Group
+        Relative Policy Optimization; RLOO means REINFORCE Leave-One-Out. Both use a group, but
+        their advantage calculations and common implementations differ. We will derive those
+        differences instead of treating “critic-free” as a complete algorithm.
+      </Prose>
+      <SamePromptGroups />
+      <Prose>
+        The first prompt's four responses have rewards 0, 1, 1 and 2, with mean 1. The second
+        prompt's responses all have reward 2, with mean 2. Subtracting each prompt's own mean gives
+        the first group differences −1, 0, 0 and 1, and the second group four zeros. The second
+        group has no within-group reward contrast even though every reward is high. Four equally bad
+        responses would also have no contrast. Edit a reward and watch only its own prompt's
+        comparison change. Responses are independent draws conditional on that prompt in the
+        derivations below; repeated answer text is allowed.
+      </Prose>
+      <Prose>
+        A group baseline removes the need to predict this comparison with a critic. It still
+        requires generation and rewards, and reference regularization may still require a reference
+        model. To understand exactly what the group changes, first locate the probability whose
+        derivative each response contributes.
       </Prose>
 
+      <H2>2. Follow one complete response through the gradient</H2>
+      <CausalResponseScore />
       <Prose>
-        The problem with the value model runs deeper than just memory. PPO needs a learned value function — a second neural network, typically initialized from the same SFT checkpoint as the policy — to estimate advantages: the difference between a response's actual reward and what the policy could expect to receive on average from its current state. Without this baseline, every response that gets a positive reward drives the policy toward that response regardless of whether the reward was unusually high or merely average; every response that gets a negative reward drives the policy away from it regardless of whether the response was unusually bad or merely typical. The variance in those raw reward signals is too high for direct policy gradient updates to be stable. The value model provides the baseline that turns raw rewards into informative advantages.
+        A causal decoder's row immediately before a response token predicts that token. For a
+        two-token answer followed by an end-of-sequence (EOS) token, select three rows and sum three
+        log probabilities. The prompt remains context, although its target positions do not
+        contribute to the response sum. Padding may store the same integer as EOS; a positional
+        target mask distinguishes the genuine stopping action from storage added to align rows. A
+        longer answer adds selected actions rather than silently averaging them away.
+      </Prose>
+      <MathBlock>{String.raw`\ell_\theta(y\mid x)=\sum_{t=1}^{L}\log\pi_\theta(y_t\mid x,y_{<t}),\qquad
+        s_\theta(y\mid x)=\nabla_\theta\ell_\theta(y\mid x).`}</MathBlock>
+      <Prose>
+        Here x is the prompt, y the response, L its selected length, θ the policy parameters, and s
+        the score vector. “Score” in this equation means a derivative of log probability; it is
+        different from a scalar reward or a reward model's output. The same parameter may affect
+        many token rows, so the parameter gradient adds their contributions.
+      </Prose>
+      <ScoreGeometry />
+      <Prose>
+        Temporarily restrict the policy to three complete answers, with probabilities p = (0.2, 0.3,
+        0.5) and rewards r = (0, 1, 2). Its expected reward is 0.2 × 0 + 0.3 × 1 + 0.5 × 2 = 1.3. If
+        answer C is drawn, its score with respect to the three softmax logits is (−0.2, −0.3, 0.5).
+        Increasing C's logit raises its probability while normalization reduces the others. Weight
+        all three possible score vectors by their probabilities and they sum to zero.
+      </Prose>
+      <MathBlock>{String.raw`p_j=\frac{e^{z_j}}{\sum_k e^{z_k}},\qquad
+        s_j(y)=\mathbf 1[y=j]-p_j,\qquad J=\sum_y p_y r_y,\qquad
+        \frac{\partial J}{\partial z_j}=p_j(r_j-J).`}</MathBlock>
+      <Prose>
+        The exact gradient is (−0.26, −0.09, 0.35). A small gradient-ascent step raises the expected
+        reward locally. It does not raise every positive-reward answer: B's reward 1 is below the
+        current average 1.3. A response's absolute reward and its contribution relative to other
+        possibilities are different comparisons. Equal rewards make the expected-reward gradient
+        zero because reallocating probability cannot improve reward.
+      </Prose>
+      <Prose>
+        The finite logits make every calculation visible. A language model uses shared neural
+        parameters instead; its score is the same log-probability derivative carried through that
+        larger computation. Reward is treated as an observed scalar with no direct derivative
+        through θ. For a fixed prompt and an on-policy draw, the score-function identity gives the
+        following estimator, averaging G independent draws for that prompt.
+      </Prose>
+      <MathBlock>{String.raw`\nabla_\theta J(x)=\mathbb E_{y\sim\pi_\theta(\cdot\mid x)}
+        [r(x,y)\nabla_\theta\log\pi_\theta(y\mid x)],\qquad
+        \widehat g=\frac1G\sum_{i=1}^{G}r_i s_i.`}</MathBlock>
+      <Prose>
+        Sampling makes this estimate vary across groups. Its expected value can be correct while an
+        individual update points in an unhelpful direction. Baselines aim to change that sampling
+        variation. Whether they also change the expectation depends on what information they use.
       </Prose>
 
+      <Exercise
+        title="1. Trace a different response mask."
+        hint={
+          <Prose>
+            Write original input positions first, then move each selected target one row left to
+            locate its predicting logit.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Prompt tokens occupy positions 0 and 1; answer tokens occupy 2, 3 and 4; genuine EOS
+            occupies 5. Select predicting logit rows 1, 2, 3 and 4. A padding cell at position 6 is
+            excluded even if it stores the EOS integer. Prompt target losses are ignored, but prompt
+            representations still participate in the attention computation that predicts later
+            selected tokens, so their upstream gradients can be nonzero.
+          </Prose>
+        }
+      >
+        A sequence has two prompt tokens, three answer tokens, a genuine EOS and one padding token
+        that stores EOS. Which predicting rows contribute? Can the prompt still receive gradient?
+      </Exercise>
+      <Exercise
+        title="2. Compute a new exact gradient."
+        hint={
+          <Prose>
+            First find the scalar expected reward. For each answer, subtract p from its one-hot
+            vector.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            The expectation is 0.5(−1) + 0.25(2) + 0.25(0) = 0. The three score vectors are (0.5,
+            −0.25, −0.25), (−0.5, 0.75, −0.25) and (−0.5, −0.25, 0.75). Their probability-weighted
+            sum is zero. Multiplying each probability by its reward minus zero gives the target
+            (−0.5, 0.5, 0). The zero third coordinate does not mean its sampled score is zero; other
+            outcomes cancel its expected contribution.
+          </Prose>
+        }
+      >
+        For p = (0.5, 0.25, 0.25) and rewards (−1, 2, 0), find J, all score vectors and the exact
+        three-logit gradient.
+      </Exercise>
+
+      <Anchor id="2-core-intuition" />
+      <Anchor id="2-build-the-intuition" />
+      <H2>3. A useful baseline must avoid the sampled answer's reward</H2>
+      <BaselineDependency />
       <Prose>
-        At language model scale, that value function is typically initialized from the policy checkpoint itself, meaning you maintain a second model of identical size throughout training. For a 70B parameter model, this doubles peak GPU memory before accounting for optimizer states, gradient buffers, and the rollout buffers needed to store the generated responses between the sampling step and the update step. The optimizer states alone — Adam's first and second moment accumulators — add another 2× memory on top of the parameters. A 70B PPO run at full scale can require more GPU memory than a 200B parameter model would at inference time. Worse, the value model must be trained simultaneously with the policy, introducing a second coupled loss that must be carefully balanced: if the value model lags the policy by too many update steps, its advantage estimates become stale and noisy; if the value loss coefficient is too high, the gradient is dominated by value accuracy rather than policy improvement. Getting PPO to run stably at large scale is a systems and hyperparameter engineering problem of significant difficulty, not an algorithmic one.
+        A constant baseline b = 1 subtracts the same number whichever answer was drawn. Its expected
+        extra term is −b times the expected score, which is zero. It can change the estimate's
+        spread while preserving its mean. Now draw a new edge from the response's own reward into
+        its baseline, and set that baseline to the same reward. Every advantage becomes zero, so
+        every estimate becomes zero, even for our nonzero true gradient. A baseline cannot be
+        justified merely by calling it “a comparison”.
+      </Prose>
+      <MathBlock>{String.raw`\mathbb E[s]=\sum_y\pi_\theta(y)\nabla_\theta\log\pi_\theta(y)
+        =\nabla_\theta\sum_y\pi_\theta(y)=0,\qquad
+        \mathbb E[(r-b)s]=\nabla_\theta J\quad\text{for a baseline independent of the draw}.`}</MathBlock>
+      <Prose>
+        The baseline may depend on the prompt. We condition on that prompt throughout this argument.
+        It must not acquire dependence on the particular sampled response in a way that invalidates
+        the zero cross-term. A learned baseline is normally detached from the policy loss; otherwise
+        differentiating the product introduces another term. Even an independent baseline can
+        increase variance if it is poorly chosen.
+      </Prose>
+      <SelfMeanFactor />
+      <Prose>
+        A group mean looks like a convenient baseline, but the influence matrix exposes an important
+        diagonal. Each response contributes 1/G of its own reward to its own mean. With four draws,
+        self-centering retains only three quarters of the original expected gradient. The other
+        group members contribute independent baselines; the diagonal subtracts one quarter of the
+        reward signal itself. Increasing G reduces this effect but does not remove it at a finite
+        group size.
+      </Prose>
+      <MathBlock>{String.raw`\bar r=\frac1G\sum_j r_j,\qquad
+        \mathbb E[(r_i-\bar r)s_i]
+        =\mathbb E[r_i s_i]-\frac1G\mathbb E[r_i s_i]
+        -\frac1G\sum_{j\ne i}\mathbb E[r_j]\mathbb E[s_i]
+        =\left(1-\frac1G\right)\nabla J.`}</MathBlock>
+      <Prose>
+        This is the expectation of raw mean subtraction under independent same-prompt draws.
+        Dividing by a random standard deviation, clipping a probability ratio or reusing correlated
+        samples adds further changes. A constant rescaling could compensate for this one factor in a
+        plain estimator; it does not prove that two full training recipes are equivalent.
+        Leave-one-out gives a direct way to avoid self-inclusion.
+      </Prose>
+      <Prose>
+        To run the finite calculations, download the{' '}
+        <a href={root + 'grpo-rloo-kto.zip'} download>
+          {' '}
+          complete program archive
+        </a>{' '}
+        and extract it. Its <a href={root + 'README.md'}>README</a> identifies the model/data
+        lineage and commands. Create a virtual environment with <code>python -m venv .venv</code>,
+        activate it, then install <code>python -m pip install -r requirements.txt</code>. NumPy
+        performs the exact enumeration; the neural routes additionally use PyTorch, Transformers and
+        TRL. Start with <code>python group_estimators.py --group-size 4 --output finite.json</code>.
+        This constructs the declared three-answer example and requires no model download.
+      </Prose>
+      <Program
+        file="group_estimators.py"
+        title="Exact distributions of grouped gradient estimators"
+      />
+      <Prose>
+        <code>advantages</code> computes one group's comparison values. The ordered product
+        enumeration visits every possible sequence of G answers and multiplies its draw
+        probabilities. The resulting weighted mean is an exact expectation for that finite
+        distribution, not a Monte Carlo estimate. The online central-moment calculation avoids
+        subtracting two nearly equal large second moments. We will interpret its covariance, bias
+        and mean squared error after deriving the leave-one-out estimator.
       </Prose>
 
+      <H2>4. Leave one answer out</H2>
+      <LeaveOneOutMatrix />
       <Prose>
-        DPO removed the reward model and the online sampling loop entirely, replacing PPO with a supervised loss over preference pairs. But it introduced a different constraint: it requires paired preference data. Every training example must have a chosen response and a rejected response for the same prompt, collected under controlled comparison conditions. That pairing requirement is expensive in two distinct senses. First, it means you need annotators to evaluate two candidate outputs side by side, which is slower and more cognitively demanding than rating individual responses — annotators must keep both responses in working memory simultaneously and make a relative judgment, which is not how most production feedback systems collect signal. Second, it means that the vast body of single-response feedback that production systems accumulate (thumbs up, thumbs down, individual star ratings, click-through on a suggested action) is unusable without expensive reformatting: you cannot construct a preference pair from a single thumbs-down without also having a response for the same prompt that received a thumbs-up, and matching those two responses across separate user sessions introduces confounders that paired comparison labeling explicitly avoids. DPO is also off-policy by construction: it trains on a fixed dataset rather than sampling fresh responses, so as the policy improves and its output distribution shifts, the training data becomes an increasingly poor representation of what the policy currently produces. This matters more for tasks requiring exploration — where the policy must try strategies it has not tried before to discover that they work — than for tasks where the SFT model already gets most things right and alignment is about preference among near-equivalent options.
+        Cross out the diagonal before averaging. For rewards (0, 1, 1, 2), the first response
+        compares its 0 with the other three rewards' mean, 4/3. The fourth compares its 2 with the
+        others' mean, 2/3. The middle responses each compare 1 with 1. Their advantages are (−4/3,
+        0, 0, 4/3). The raw centered values were (−1, 0, 0, 1), so every value is multiplied by 4/3.
+        This is an algebraic identity for any fixed reward group of size greater than one.
+      </Prose>
+      <MathBlock>{String.raw`b_{-i}=\frac{\sum_{j\ne i}r_j}{G-1},\qquad
+        A_i^{\mathrm{LOO}}=r_i-b_{-i}
+        =\frac{G}{G-1}(r_i-\bar r),\qquad
+        \widehat g_{\mathrm{LOO}}=\frac1G\sum_i A_i^{\mathrm{LOO}}s_i.`}</MathBlock>
+      <Prose>
+        Sum the rewards once, subtract each response's reward, and divide by G−1. Computing all G
+        baselines then takes O(G) work, rather than recomputing G separate sums. The matrix is an
+        explanation of dependencies; an implementation need not store a quadratic matrix. A group of
+        one has no other response and no leave-one-out mean. It must be rejected or explicitly
+        treated as missing comparison evidence.
+      </Prose>
+      <IndependenceTrees />
+      <Prose>
+        The two trees begin from the same fixed prompt but have separate random draws. When response
+        i supplies the score, the other draws supply its baseline. Their joint probability factors,
+        so the expected product of baseline and score factors too. The score expectation is zero.
+        This proves unbiasedness for the raw on-policy score-function estimator under those
+        assumptions; it is not a claim about every clipped, standardized or stale-data update called
+        RLOO.
+      </Prose>
+      <MathBlock>{String.raw`\mathbb E[b_{-i}s_i\mid x]
+        =\mathbb E[b_{-i}\mid x]\,\mathbb E[s_i\mid x]=0,\qquad
+        \mathbb E[\widehat g_{\mathrm{LOO}}\mid x]=\nabla J(x).`}</MathBlock>
+      <Prose>
+        Independence is about sampling, not different text. Two independent draws can produce the
+        same response. Conversely, copying one sampled response four times creates perfect
+        dependence even though it has the right one-response marginal distribution. Every copied
+        reward equals its leave-one-out baseline and the estimate is zero. Increasing the copied
+        group size does not repair that failure.
       </Prose>
 
+      <Exercise
+        title="3. Exclude one of three rewards."
+        hint={
+          <Prose>
+            The total is 6. For each record subtract its reward from that total and divide by two.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            The mean is 2. Raw deviations are (0, −3, 3). Excluded means are (2, 3.5, 0.5), giving
+            LOO advantages (0, −4.5, 4.5). They are 3/2 times the raw deviations. Under independent
+            same-prompt sampling, the raw-centered expected gradient has factor 2/3, while the raw
+            LOO expectation equals the target.
+          </Prose>
+        }
+      >
+        Compute raw centered and leave-one-out advantages for rewards (2, −1, 5). State the
+        finite-group expectation factor.
+      </Exercise>
+      <Exercise
+        title="4. Break the independence proof."
+        hint={
+          <Prose>
+            Preserve the marginal distribution of one draw while making the group members depend on
+            one another.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            For independent draws, cross terms E[r_j s_i] with j ≠ i factor into E[r_j]E[s_i] = 0.
+            The self term leaves factor (G−1)/G for raw centering. Instead sample one answer and
+            copy it to every group position. Each position retains the correct one-draw marginal,
+            but every reward equals its excluded mean, so LOO is identically zero. On the preceding
+            nonconstant-reward example the true gradient is nonzero. The missing ingredient is joint
+            independence, not group size or different strings.
+          </Prose>
+        }
+      >
+        Explain the cross-term argument, then construct correlated draws that make LOO fail despite
+        correct one-draw marginals.
+      </Exercise>
+      <Exercise
+        title="5. Handle missing feedback in linear time."
+        hint={
+          <Prose>
+            Count finite entries, sum them once, and exclude each finite reward from that sum.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            The valid rewards are 3, −1 and 7, with count 3 and total 9. Excluded means are 3, 5 and
+            1, giving advantages 0, −6 and 6. The missing position gets the declared zero-advantage
+            fallback, so the stored vector is (0, 0, −6, 6) with valid count 3. For fewer than two
+            observations return zero reward advantages with the count, without claiming a baseline
+            exists. This requires O(G) work. The first observed reward's numerical zero advantage
+            and the second entry's missing-feedback fallback have different meanings; retain the
+            mask.
+          </Prose>
+        }
+      >
+        Implement the masked LOO operation for (3, missing, −1, 7). Specify what happens with one
+        valid reward and explain why missing is not reward zero.
+      </Exercise>
+
+      <H2>5. Compare estimator distributions, not advantage magnitudes</H2>
+      <GradientDistribution />
       <Prose>
-        Three papers published in early 2024 each targeted one of these three axes — the memory cost of the value model, the statistical inefficiency of PPO's full apparatus, and the data format constraint of paired comparison — independently and simultaneously. Together they carve out a much more flexible design space than either PPO or DPO covers.
+        For three possible answers and two independent draws, there are nine ordered groups. Group
+        (A, C) has probability 0.2 × 0.5 = 0.1, and (C, A) is a separate event with the same
+        probability. Each group produces a three-coordinate gradient estimate. The plot shows its
+        first and third coordinates, with area representing probability mass; the second coordinate
+        follows because the coordinates sum to zero. The exact target and the distribution's mean
+        use different marks so systematic displacement remains visible when the cloud is small.
+      </Prose>
+      <Prose>
+        Bias is the mean estimate minus the target. Variance describes the spread around that mean.
+        Mean squared error (MSE) relative to the target combines both. A raw self-centered estimator
+        can have a smaller spread partly because it shrinks the signal; comparing only spread would
+        reward that shrinkage. Corrected self-centering and leave-one-out coincide group by group
+        before any other transformation, so their clouds coincide.
+      </Prose>
+      <MathBlock>{String.raw`\mu=\mathbb E[\widehat g],\quad b=\mu-g,\quad
+        \operatorname{Cov}(\widehat g)=\mathbb E[(\widehat g-\mu)(\widehat g-\mu)^\top],\qquad
+        \mathbb E\|\widehat g-g\|^2=\operatorname{tr}\operatorname{Cov}(\widehat g)+\|b\|^2.`}</MathBlock>
+      <Prose>
+        The covariance trace adds the variances of the displayed gradient coordinates and the
+        remaining coordinate. All quantities here refer to the three answer logits. A neural
+        parameterization applies a model-dependent Jacobian to these directions, so these numerical
+        variances are not automatically variances of every neural weight. Change reward C and
+        compare the whole distribution again. There is no universal rule that a named baseline has
+        the smallest variance on every policy and reward.
+      </Prose>
+      <Prose>
+        <strong>Deeper derivation.</strong> Write the error as (estimate − mean) + (mean − target).
+        Expanding its squared length produces a cross term whose expectation is zero, because
+        estimate − mean has mean zero. The remaining first term is the covariance trace; the second
+        is squared bias. This decomposition requires no independence between coordinates. It makes a
+        biased estimator's tradeoff explicit rather than treating unbiasedness as the only useful
+        property.
+      </Prose>
+      <RewardBudget />
+      <Prose>
+        A larger group spends more reward calls. At a budget of eight calls, group size two gives
+        four independent group estimates; group size four gives two. Averaging n independent group
+        estimates divides their covariance by n while leaving their bias unchanged. The budget plot
+        applies exactly that calculation at a fixed policy. It does not train between groups or
+        predict a model's eventual benchmark quality.
+      </Prose>
+      <MathBlock>{String.raw`n=\frac{B}{G},\qquad
+        \operatorname{MSE}_B=\frac{\operatorname{tr}\operatorname{Cov}(\widehat g_G)}{n}+\|b_G\|^2,
+        \quad B\text{ a positive multiple of }G.`}</MathBlock>
+      <Prose>
+        This comparison assumes equal-cost reward calls and independent groups. Real response
+        lengths, expensive verifiers, model memory and generation batching can change wall time.
+        Keep those costs separate from this derived variance calculation. Standardizing each group
+        introduces another issue: its denominator is random, so even the direction's expected
+        weighting can change.
       </Prose>
 
-      <Callout accent="gold">
-        Three problems, three solutions: GRPO removes the value model. RLOO simplifies PPO to its statistically essential core. KTO works with binary labels, no pairing required.
-      </Callout>
+      <Exercise
+        title="6. Find a variance counterexample."
+        hint={
+          <Prose>
+            For two draws the ordered groups have probabilities 0.49, 0.21, 0.21 and 0.09. Compute
+            one coordinate; the other has the opposite sign.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            The exact gradient is (−0.63, 0.63). Plain REINFORCE's first-coordinate estimates are
+            −0.6, −0.65, −0.65 and −0.7, giving total two-coordinate MSE 0.0021. LOO gives 0, −1.5,
+            −1.5 and 0, giving MSE 1.0962. A constant baseline 10 gives −3.6, 1.35, 1.35 and 6.3,
+            with MSE 20.5821. All three expectations equal the target. Here the rewards and scores
+            make uncentered estimates unusually stable; unbiasedness does not order the variances.
+          </Prose>
+        }
+      >
+        Enumerate G = 2 for probabilities (0.7, 0.3) and rewards (−2, 1). Compare plain REINFORCE,
+        LOO and an independent constant baseline of 10.
+      </Exercise>
 
-      <H3>GRPO — Group Relative Policy Optimization</H3>
-
+      <H2>6. What standardizing the group changes</H2>
+      <StandardizationRows />
       <Prose>
-        Shao et al. at DeepSeek AI introduced GRPO in the DeepSeekMath paper (arXiv:2402.03300, February 2024). The observation driving the method is that variance reduction and a value model are trying to accomplish the same thing: they both want to produce an advantage estimate that tells the policy, for this specific response to this specific prompt, whether the response was better or worse than what could typically be expected. A value model estimates the expected reward by learning a parameterized function; GRPO estimates the expected reward by sampling multiple responses and using their empirical mean and standard deviation. The within-group mean is a natural baseline; the within-group standard deviation provides a natural scale. Normalizing each response's reward against its group eliminates the value model entirely without changing the purpose the value model was serving. The PPO clipping and KL penalty remain unchanged; only the source of the advantage estimate changes.
+        For (0, 1, 1, 2), the mean is 1 and the deviations are (−1, 0, 0, 1). Their squared sum is
+        2. Dividing by G−1 = 3 gives sample variance 2/3 and sample standard deviation about
+        0.816497. Dividing each deviation by this standard deviation plus 0.0001 gives approximately
+        (−1.224595, 0, 0, 1.224595). The denominator is recomputed from each observed group, so it
+        can depend on the very response whose score it multiplies.
+      </Prose>
+      <MathBlock>{String.raw`\sigma_G=\sqrt{\frac1{G-1}\sum_i(r_i-\bar r)^2},\qquad
+        A_i^{\mathrm{std}}=\frac{r_i-\bar r}{\sigma_G+\epsilon}.`}</MathBlock>
+      <Prose>
+        Adding the same constant to every finite reward leaves both deviations and spread unchanged.
+        Multiplying rewards by a positive number scales the deviations and spread together, but a
+        fixed epsilon prevents exact scale invariance. Sample and population standard deviations
+        also differ by a group-size factor. These choices belong in the definition of the
+        implemented objective, not in an unrecorded library default.
+      </Prose>
+      <Prose>
+        Four equal rewards give zero deviations. A missing reward is a different observation: the
+        local helper represents it by NaN (“not a number”) and excludes it from the valid count.
+        Fewer than two observed rewards gives zero reward advantage with an explicit count; it does
+        not establish a leave-one-out comparison or a sample spread. A separate reference penalty
+        can still produce a gradient when the reward advantage is zero. Missingness correlated with
+        answer quality can also bias which rewards are observed.
+      </Prose>
+      <QuestionWeighting />
+      <Prose>
+        Consider two constructed yes/no policies. Their success probabilities are 0.1 and 0.7, and
+        success earns 1. With four independent responses, the probability of a mixed success/failure
+        group is 1 − q⁴ − (1−q)⁴: 0.3438 for the first question and 0.7518 for the second. An
+        all-success or all-failure group has no centered reward contrast. Standardized mixed groups
+        are rescaled according to how many successes they contain. Enumerating the binary groups
+        exposes how this changes their expected contributions.
+      </Prose>
+      <MathBlock>{String.raw`J=q,\qquad \frac{dJ}{dz}=q(1-q),\qquad
+        P(\text{mixed group})=1-q^G-(1-q)^G,\quad q=\operatorname{sigmoid}(z).`}</MathBlock>
+      <Prose>
+        The raw target gradients are 0.09 and 0.21 in these binary logit coordinates. Raw mean
+        subtraction multiplies each by (G−1)/G; raw leave-one-out retains each target. Division by a
+        random group spread generally has another expectation. It is therefore unsafe to describe
+        standardization as only a harmless fixed change of learning rate. This binary construction
+        illustrates prompt weighting; an arbitrary language model's shared-parameter gradient need
+        not follow these two scalar curves.
+      </Prose>
+      <Exercise
+        title="7. Change reward units."
+        hint={
+          <Prose>
+            Track the numerator and standard deviation separately, keeping epsilon fixed.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Adding 8 leaves raw centered and LOO advantages unchanged. Multiplying all rewards by 3
+            triples both of those advantages and the raw reward gradient. Standardization becomes
+            3(r−mean)/(3σ+ε) = (r−mean)/(σ+ε/3), so it is not exactly unchanged with fixed positive
+            ε. A plain REINFORCE estimate also acquires 8s per draw after translation; that term has
+            zero expectation but changes variance. A fixed constant baseline does not automatically
+            shift with the reward.
+          </Prose>
+        }
+      >
+        Predict the effect of replacing each reward r by 3r + 8. Distinguish raw centered, LOO,
+        standardized and plain estimators.
+      </Exercise>
+
+      <H2>7. Old policy, current policy and reference are different objects</H2>
+      <PolicySnapshots />
+      <Prose>
+        The old policy samples a rollout. Its log probabilities describe how those particular
+        responses were obtained. The current policy is the one being differentiated and updated. A
+        fixed reference supplies a separate comparison distribution. At initialization all three can
+        have equal weights, but equality at one instant does not merge their roles. After an
+        optimizer step the current weights change while cached old and reference scores remain
+        fixed. A later rollout refreshes the old policy; refreshing the reference is a separate
+        recipe choice that must be stated explicitly.
+      </Prose>
+      <Prose>
+        When data came from the old policy, a probability ratio measures how much the current policy
+        reweights it. An exact whole-response importance ratio is a product over all selected
+        tokens. A token ratio and a geometric mean of token ratios are different objects. Label the
+        operation before selecting a clipping threshold.
+      </Prose>
+      <RatioBranches />
+      <Prose>
+        Suppose the first token's current probability is 1.5 times its old probability and the
+        second token's is 0.8 times its old probability. The whole-response ratio is 1.5 × 0.8 =
+        1.2. Its geometric mean is √1.2, about 1.095445. The two token ratios remain 1.5 and 0.8.
+        The multiplication tree, summed log changes and averaged log changes produce these three
+        quantities from the same inputs.
+      </Prose>
+      <MathBlock>{String.raw`\rho_t=\exp(\ell_{\theta,t}-\ell_{\mathrm{old},t}),\quad
+        \rho_{\mathrm{seq}}=\exp\!\left(\sum_{t=1}^{L}(\ell_{\theta,t}-\ell_{\mathrm{old},t})\right),\quad
+        \rho_{\mathrm{geom}}=\exp\!\left(\frac1L\sum_{t=1}^{L}(\ell_{\theta,t}-\ell_{\mathrm{old},t})\right).`}</MathBlock>
+      <Prose>
+        Ordinary importance weighting of a complete response uses the sequence ratio when the
+        sampling distribution has support wherever the target distribution contributes. A geometric
+        mean changes that weight and reduces its dependence on length. Current GRPO's sequence-level
+        importance option uses this geometric mean; the RLOO route below uses the full sequence sum.
+        Those settings are not interchangeable even though each may be described informally as “a
+        sequence ratio”. Equal current and old scores make all three ratios one, which is a useful
+        null check but cannot reveal their difference.
       </Prose>
 
+      <Anchor id="3-mathematical-foundation" />
+      <H2>8. Clipping and reduction define the actual GRPO loss</H2>
+      <ClippingSurfaces />
       <Prose>
-        GRPO was validated first on mathematical reasoning, where it enabled DeepSeekMath-7B to reach 51.7% on the MATH benchmark — approaching GPT-4 level — from a 7B parameter model. It later became the training algorithm behind DeepSeek-R1, applied at full scale on reasoning tasks with verifiable rewards: correct final answer, passing unit tests, structured output validation. The DeepSeek-R1 training configuration used G=16 rollouts per prompt, a KL coefficient of 0.001 (much smaller than typical RLHF), and trained on hundreds of thousands of math and coding problems. The AIME 2024 benchmark pass@1 score rose from 15.6% to 77.9% during training — a gain of more than 60 percentage points achieved entirely through GRPO without any chain-of-thought supervision.
+        For positive advantage, increasing a ratio initially increases the reward surrogate. Once
+        the ratio exceeds 1 + ε, the clipped branch supplies the smaller value and the surrogate
+        stops rewarding further increase. For negative advantage, the plateau is on the other side:
+        ratios below 1 − ε stop receiving additional incentive to decrease. At ε = 0.2 and ratio
+        1.5, positive advantage 1 yields the clipped surrogate 1.2, while negative advantage −1
+        yields −1.5 and remains active.
+      </Prose>
+      <MathBlock>{String.raw`S(\rho,A)=\min\{\rho A,\operatorname{clip}(\rho,1-\epsilon,1+\epsilon)A\},\qquad
+        L_{\mathrm{policy}}=-S(\rho,A).`}</MathBlock>
+      <Prose>
+        The optimizer minimizes the negative surrogate. Clipping one sampled term does not constrain
+        all model probabilities to that interval: shared parameters also respond to other samples
+        and losses. This is a modified optimization objective, not a hard trust-region constraint.
+        At advantage zero the policy term and its gradient are zero; a separately added reference
+        penalty may still be active.
+      </Prose>
+      <ReductionGrid />
+      <Prose>
+        Now consider one response with two selected tokens and another with four. If every cell has
+        loss 2, response averaging and pooled-token averaging both return 2. That equality hides
+        their weighting. Change the short response's losses to (1, 1) and the long response's to (3,
+        3, 3, 3). Averaging each response first gives (1 + 3)/2 = 2. Pooling all six token terms
+        gives 14/6 = 7/3. Dividing their sum by two responses times a fixed cap of four gives 14/8 =
+        7/4.
+      </Prose>
+      <MathBlock>{String.raw`L_{\mathrm{response}}=\frac1G\sum_i\frac1{L_i}\sum_t m_{i,t}l_{i,t},\quad
+        L_{\mathrm{token}}=\frac{\sum_{i,t}m_{i,t}l_{i,t}}{\sum_i L_i},\quad
+        L_{\mathrm{fixed}}=\frac{\sum_{i,t}m_{i,t}l_{i,t}}{G L_{\max}}.`}</MathBlock>
+      <Prose>
+        The mask m selects actual response tokens and L is its row sum. In response averaging, each
+        short-response cell above has weight 1/4 and each long-response cell weight 1/8. Pooled
+        averaging gives every selected cell weight 1/6. Fixed-cap averaging gives every selected
+        cell weight 1/8. These coefficients multiply gradients as well as displayed losses.
+        Appending masked padding changes none of the selected sums or lengths.
+      </Prose>
+      <Prose>
+        Original-style GRPO combines group-standardized advantages, token clipping and per-response
+        averaging. A pooled reduction is one part of DAPO, whose full recipe also changes clipping
+        and sampling choices. A fixed-cap reduction is one part of Dr.GRPO, whose analysis also
+        removes group standard-deviation scaling. Selecting a similarly named loss reduction in TRL
+        does not reproduce a whole paper's procedure. Next we add the reference term, whose sampling
+        and differentiation require equal care.
       </Prose>
 
-      <H3>RLOO — REINFORCE Leave-One-Out</H3>
+      <Exercise
+        title="8. Follow all three ratios."
+        hint={
+          <Prose>
+            Multiply ratios for the sequence value, and take its cube root for the geometric mean.
+            Apply the minimum after multiplying by the advantage.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            The token ratios are (1.4, 0.7, 1.1); the full sequence ratio is 1.078 and the geometric
+            ratio is the cube root of 1.078. With ε = 0.2 and A = 1, token surrogates are (1.2, 0.7,
+            1.1): only the first is on its upper plateau. With A = −1 they are (−1.4, −0.8, −1.1):
+            only the second is on its lower plateau. The sequence ratio is inside the interval.
+            Replacing the token ratios by it changes the loss and gradient structure.
+          </Prose>
+        }
+      >
+        Use token ratios (1.4, 0.7, 1.1) and ε = 0.2. Compute token, sequence and geometric values
+        and both signed clipped surrogates.
+      </Exercise>
+      <Exercise
+        title="9. Change the reduction weights."
+        hint={
+          <Prose>There are two responses and four selected cells, but their lengths differ.</Prose>
+        }
+        solution={
+          <Prose>
+            For losses (4) and (1, 1, 1), the response mean is (4+1)/2 = 2.5, with cell derivatives
+            (1/2; 1/6, 1/6, 1/6). The pooled mean is 7/4 = 1.75 with derivative 1/4 for each
+            selected cell. With fixed cap 3, the reduction is 7/6 and each selected derivative is
+            1/6. Append two masked storage cells: each result and every original derivative stays
+            the same, while the added cells have zero derivatives.
+          </Prose>
+        }
+      >
+        Implement response, pooled-token and fixed-cap reductions for lengths 1 and 3 with losses
+        (4) and (1, 1, 1). Check gradients after appending padding.
+      </Exercise>
 
+      <H2>9. A reference penalty has a sampling distribution and a gradient path</H2>
+      <SampledKL />
       <Prose>
-        Ahmadian et al. at Cohere published "Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback in LLMs" (arXiv:2402.14740, February 2024). Their argument begins with a careful reading of why PPO was invented in the first place. PPO was designed for continuous control problems — robotic locomotion, Atari games, MuJoCo physics — where the action space is large and continuous, the reward signal is dense (many rewards per episode), the policy must make thousands of sequential decisions, and the dynamics change as the policy improves. In that setting, all of PPO's machinery earns its keep: the value model provides accurate advantage estimates for long-horizon credit assignment; the clipping prevents destructive updates when the action space allows large probability ratio swings; the multiple epochs per batch improve sample efficiency when rollouts are expensive.
+        Let the current three-answer policy be p = (0.2, 0.3, 0.5) and the reference be q = (0.4,
+        0.4, 0.2). For answer A, log(p/q) = log(1/2), a negative number. The probability-weighted
+        sum over all answers is nevertheless nonnegative: that sum is KL(p || q). A signed sampled
+        log ratio is not a nonnegative KL value on every draw. The alternative per-draw expression
+        in the next column is nonnegative.
+      </Prose>
+      <MathBlock>{String.raw`k_3(y)=\frac{q_y}{p_y}-\log\frac{q_y}{p_y}-1,\qquad
+        \mathbb E_{y\sim p}[k_3(y)]=\sum_y p_y\log\frac{p_y}{q_y}=\operatorname{KL}(p\Vert q).`}</MathBlock>
+      <Prose>
+        For positive v, the inequality v − log v − 1 ≥ 0 proves each k₃ term is nonnegative. Under
+        current-policy sampling, the expectation of q/p is the sum of q, which is 1, and cancels the
+        final −1. If the weighting distribution is an older policy, that cancellation generally
+        fails. For token scores, the statement applies conditionally at each fixed prefix; an old
+        policy can also change which prefixes are visited.
+      </Prose>
+      <RegularizationPaths />
+      <Prose>
+        Follow the two implementations separately. In our original-style GRPO route, current token
+        log probabilities feed a differentiable k₃ term added to the loss. Reference scores remain
+        fixed. In the current RLOO route, the sampled old/reference sequence log ratio first
+        subtracts a penalty from the reward; leave-one-out then centers those shaped rewards. These
+        detached scalar advantages multiply the current sequence-ratio surrogate. Moving a number
+        between reward and loss without tracing its derivative can change the update.
+      </Prose>
+      <MathBlock>{String.raw`L_{\mathrm{GRPO}}=\frac1G\sum_i\frac1{L_i}\sum_t m_{i,t}
+        [-S(\rho_{i,t},A_i)+\beta k_{3,i,t}],\qquad
+        \widetilde r_i=r_i-\beta\sum_t m_{i,t}(\ell_{\mathrm{old},i,t}-\ell_{\mathrm{ref},i,t}).`}</MathBlock>
+      <Prose>
+        These are the declared teaching configurations. Current TRL 1.14.2 also offers a
+        bias-correction switch that multiplies the GRPO k₃ term by the differentiable current/old
+        ratio. Its default is true. Our original-style demonstration explicitly sets{' '}
+        <code>use_bias_correction_kl=False</code>, and checks the optional true branch separately.
+        Coefficient value one does not mean that coefficient has derivative zero.
+      </Prose>
+      <Prose>
+        <strong>Deeper derivative.</strong> Let a current selected log probability be l, reference
+        log probability be h, and old log probability be o. With those latter quantities fixed, v =
+        exp(h−l), k₃ = v − (h−l) − 1 and dk₃/dl = 1−v. The optional weighted branch is exp(l−o)k₃.
+        Product differentiation adds a k₃ term:
+      </Prose>
+      <MathBlock>{String.raw`\frac{d}{dl}\,[e^{l-o}k_3]
+        =e^{l-o}[k_3+1-e^{h-l}].`}</MathBlock>
+      <Prose>
+        Even when l = o, that extra term remains if current and reference differ. A useful parity
+        fixture must therefore include old = current ≠ reference and old ≠ current, not only
+        equality of all three policies. Neither per-token weighting nor a k₃ value identity alone
+        corrects a different distribution of prefix states. Adding a wholly detached penalty to a
+        loss is another distinct operation: it changes the displayed loss value but supplies no
+        penalty gradient.
       </Prose>
 
+      <Exercise
+        title="10. Separate signed samples from expected KL."
+        hint={
+          <Prose>
+            Choose two unequal distributions and examine the event whose current probability is
+            lower than reference.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Let p = (0.25, 0.75) and q = (0.5, 0.5). The first signed log ratio is log(1/2),
+            negative. Exact KL is 0.25 log(1/2) + 0.75 log(3/2), positive (about 0.130812).
+            Weighting k₃ by current p gives that KL because the q/p expectation is 1. Weighting by
+            an unrelated old distribution does not supply that cancellation; value nonnegativity
+            remains but the expectation generally differs.
+          </Prose>
+        }
+      >
+        Construct a negative sampled log ratio with positive expected KL. Explain which weighting
+        makes the k₃ value identity hold.
+      </Exercise>
+      <Exercise
+        title="11. Repair a missing gradient path."
+        hint={
+          <Prose>Detach the reference and old scores, not the current score in the penalty.</Prose>
+        }
+        solution={
+          <Prose>
+            For current log score l and fixed reference h, compute v = exp(h−l) and penalty v −
+            (h−l) − 1 while retaining l's graph. Its derivative is 1−exp(h−l), nonzero when l ≠ h. A
+            test with h−l = log 2 gives derivative −1. If the entire penalty is detached, its
+            derivative contribution is zero. Reference gradients must remain absent. For the
+            optional weighted branch also differentiate exp(l−o); the extra product term is
+            required.
+          </Prose>
+        }
+      >
+        A loss adds a detached numerical KL penalty and claims to regularize the policy. Repair it
+        and give a nonzero-gradient test.
+      </Exercise>
+
+      <Anchor id="4-from-scratch-implementation" />
+      <H2>10. Implement the complete grouped update</H2>
+      <OnlineLoop />
       <Prose>
-        Language model preference fine-tuning satisfies none of these conditions. The "action" is a complete response — a single episode, not a long sequence of decisions requiring credit assignment across many steps. The reward signal is sparse, often a single scalar for the entire response. The policy only needs to move a moderate distance from a well-pretrained SFT checkpoint; it is not starting from random initialization and must not diverge far from a coherent text distribution. In this setting, the authors show, classical REINFORCE with a good baseline is sufficient. The leave-one-out baseline is that good baseline: unbiased, computed from real samples of the current policy, and requiring no additional learned parameters. Empirically it matches or exceeds PPO on Alpaca Eval, MT-Bench, and standard RLHF benchmarks while training up to 3x faster and using 70% less RAM.
+        Start with a prompt and draw four responses from the current rollout snapshot. Retain token
+        IDs, actual stopping positions and sampled log probabilities. The reward function reads the
+        complete response. Fixed old and reference scores are measured on those same tokens; current
+        scores retain a gradient. Group statistics supply detached advantages, and the selected loss
+        then flows backward through the causal model. Save the resulting weights and verify their
+        reload.
+      </Prose>
+      <Prose>
+        The scratch implementation delegates the decoder architecture and automatic differentiation
+        to Transformers and PyTorch. It explicitly implements sampling, masks, rewards, baselines,
+        ratios, reductions and updates. Sampling uses temperature 1 over the full model vocabulary
+        without top-k or nucleus filtering. A generated EOS stops that response; reaching the
+        eight-token cap does not manufacture a final EOS. IDs outside the tokenizer's mapped
+        vocabulary are retained and marked invalid.
+      </Prose>
+      <Program file="group_losses.py" title="Selected causal scores and explicit grouped losses" />
+      <Prose>
+        <code>response_logps</code> shifts logits and targets exactly once and returns an explicit
+        positional mask. <code>group_advantages</code> groups consecutive rewards from the same
+        prompt and returns valid counts. <code>reduce_token_loss</code> makes every denominator
+        visible. <code>grpo_loss</code> differentiates the declared KL branch;{' '}
+        <code>rloo_reward</code> shapes fixed rewards before the sequence surrogate. Run{' '}
+        <code>python group_losses.py --output losses.json</code> to inspect a constructed
+        unequal-length tensor example with nonzero derivatives. Those numbers are separate from the
+        observed poem generations.
+      </Prose>
+      <Program
+        file="online_preferences.py"
+        title="Full scratch sampling, grouped update and persistence"
+      />
+      <Prose>
+        The sampler appends tokens to each row's actual length and reads the preceding valid logit.
+        Stopped rows no longer acquire selected actions. The subsequent teacher-forced scoring check
+        compares the sampled log probabilities with the same selected tokens. This catches an
+        off-by-one or EOS/PAD masking error before optimization. The fixed reference is a
+        no-gradient copy. Both current updates and exact saved-model reload are visible in the
+        report; the reference itself is never optimized.
+      </Prose>
+      <Prose>
+        With a local SFT response-17 checkpoint, run{' '}
+        <code>
+          python online_preferences.py --model response-17/selected --data data --method grpo
+          --output my-grpo
+        </code>
+        . Replacing the method argument with <code>rloo</code> chooses its explicit raw
+        leave-one-out sequence objective. Each command starts a new two-update demonstration. The
+        guarded study driver later ties these operations to exact files and a fixed protocol.
+        Removing a critic does not remove the cost of G response generations, their reward
+        evaluations, reference scoring or the current model's activations.
+      </Prose>
+      <NativeConfigurations />
+      <Prose>
+        Our pinned ordinary route uses TRL 1.14.2, Transformers 5.19.0 and Torch 2.14 on CPU.
+        Explicitly selecting <code>loss_type='grpo'</code>, token importance, group scaling, β =
+        0.01 and an unweighted KL branch differs from current GRPO defaults, including their
+        DAPO-style reduction and β = 0. Both online configurations disable dropout, use actual batch
+        size 4, group size 4, one rollout iteration, two SGD updates at 10⁻⁵ and no gradient
+        clipping or decay. The RLOO configuration disables advantage normalization and uses its
+        whole-sequence ratio. These are small teaching settings, not a reproduction of a large
+        published training run.
+      </Prose>
+      <Anchor id="5-production-implementation" />
+      <Program
+        file="trl_group_training.py"
+        title="Ordinary GRPOTrainer and RLOOTrainer with exact batch inspection"
+      />
+      <Prose>
+        The subclasses observe the actual trainer computation. Native generation and its optimizer
+        remain native. For each loss, the comparison independently forwards the backbone and
+        constructs the scratch objective, then checks every trainable parameter's derivative. A
+        shadow SGD step checks the update without modifying the real trainer weights. Selected
+        response scores are compared using the mask: the native scorer zero-fills ignored padding
+        cells, while the raw backbone can leave finite values there. Those unused representations
+        need not agree; their contribution to loss and gradient must be zero. Constructed
+        unequal-length batches expose nonzero clipping and both KL branches even when actual sampled
+        reward groups tie.
       </Prose>
 
-      <H3>KTO — Kahneman-Tversky Optimization</H3>
+      <Exercise
+        title="16. Audit an original-GRPO claim."
+        hint={
+          <Prose>
+            Read the resolved reduction, reference coefficient, importance axis, group scaling and
+            KL correction fields.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            Current defaults can select DAPO-style token pooling and β = 0, removing the separate
+            reference penalty. Sequence importance can use a geometric mean rather than original
+            token ratios. The default bias-correction KL switch also adds a differentiable ratio
+            factor when β is nonzero. State the actual variant or explicitly select response-mean
+            grpo, token importance, the intended group spread, nonzero declared beta and the chosen
+            KL branch. Those fields alone still do not reproduce a paper's model, data, reward,
+            sampling or reference-refresh schedule.
+          </Prose>
+        }
+      >
+        A trainer uses defaults and claims to reproduce original GRPO. Identify the configuration
+        and experimental assumptions you must inspect.
+      </Exercise>
 
+      <H2>11. A binary label is a new kind of evidence</H2>
+      <PairAndBinaryLabels />
       <Prose>
-        Ethayarajh et al. (arXiv:2402.01306, February 2024) approached the problem from the data side, and their analysis begins with a broader theoretical framing. They define a class of losses called HALOs — Human-Aware Losses — characterized by the property that they implicitly incorporate the biased way humans perceive and evaluate outcomes. The key observation: existing losses like DPO already belong to this class, and their empirical success over cross-entropy supervised fine-tuning can partly be explained by this membership. Kahneman and Tversky's prospect theory is a well-validated model of how humans actually evaluate outcomes relative to a reference point: gains and losses are not symmetric, losses feel larger than equivalent gains, and the sensitivity to change diminishes as outcomes move further from the reference point in either direction.
+        A comparison says one response is preferred to another for a prompt. It does not say the
+        winner is good in an absolute sense. If two answers are both poor, their ordering can still
+        be clear. Raise or lower the quality threshold in the drawing: the pair's ordering stays the
+        same while the individual acceptable/unacceptable labels change. The illustrative quality
+        values explain this distinction; they are not measured human scores.
+      </Prose>
+      <Prose>
+        KTO, Kahneman–Tversky Optimization, consumes individual responses with desirable or
+        undesirable labels. A Boolean label does not require another response in the same record.
+        Converting a comparison into a desirable winner and undesirable loser is a modelling
+        assumption, not lossless format conversion. For our poem task we declare the exact
+        criterion: a candidate sentiment label is desirable when it equals the retained dataset
+        annotation. Each prompt therefore supplies one desirable and two undesirable candidates. A
+        different application needs its own meaningful criterion.
       </Prose>
 
+      <Exercise
+        title="12. Give a Boolean label an actual meaning."
+        hint={
+          <Prose>
+            Relative preference identifies an ordering. Supply a separate acceptance rule before
+            making individual labels.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            A winner can be the less harmful of two harmful answers, so declaring it desirable
+            changes the evidence. For a structured extraction task, one explicit desirable criterion
+            could require every requested field to match an adjudicated record and require no extra
+            fields. Then evaluate each response against that criterion, retaining ambiguous or
+            unscorable cases separately. This definition may reject both answers in a pair, and it
+            requires the relevant ground-truth fields rather than merely the pair ordering.
+          </Prose>
+        }
+      >
+        Two harmful answers form a clear preference pair. Why is naive unpairing insufficient, and
+        how would you define individual labels for another task?
+      </Exercise>
+
+      <H2>12. KTO measures utility around a reference point</H2>
+      <KTOUtility />
       <Prose>
-        KTO defines a loss that directly maximizes prospect-theoretic utility. Both PPO and DPO require paired comparisons: you need to tell the model not just "this response was good" but "this response was better than that one." KTO defines a loss over individual responses labeled desirable or undesirable — a binary signal, with no pairing. The loss is grounded in Kahneman and Tversky's value function: desirable responses (gains) are pushed above a reference level with a concave gradient shape, and undesirable responses (losses) are pushed below that reference level with a convex gradient shape — steeper, reflecting loss aversion. The result is a training method that can consume thumbs-up / thumbs-down logs directly, with no pairing constraint, potentially enabling datasets orders of magnitude larger than what paired-comparison labeling allows at the same cost. The KTO paper shows that at scales below 10K examples, DPO has an edge because it extracts more signal per example from the pairwise comparison; above 50K examples, KTO matches or exceeds DPO because dataset scale compensates for per-example signal noisiness.
+        First compare the policy's response likelihood with a frozen reference. Their
+        log-probability difference d measures relative change, not absolute answer quality. Subtract
+        a reference point k, then scale by positive β to get u. For a desirable record, increasing u
+        decreases its loss. For an undesirable record, increasing u increases its loss. Separate
+        positive weights determine each class's contribution. At d = k and equal weights, both
+        labels have loss one half.
+      </Prose>
+      <MathBlock>{String.raw`d=\log\pi_\theta(y\mid x)-\log\pi_{\mathrm{ref}}(y\mid x),\qquad
+        u=\beta(d-\operatorname{stopgrad}(k)),\qquad
+        L_D=\lambda_D\sigma(-u),\quad L_U=\lambda_U\sigma(u).`}</MathBlock>
+      <Prose>
+        The sigmoid σ(u) = 1/(1+exp(−u)) approaches 1 as u grows and 0 as u shrinks. Both losses
+        saturate. A desirable response with a very negative u has a high loss but a small
+        derivative, so being confidently wrong does not guarantee a strong correcting update. Equal
+        class weights give symmetric derivative magnitudes at opposite signed distances. The named
+        utility model motivates the loss; it does not establish a trained model's psychological
+        properties.
+      </Prose>
+      <ReferencePairing />
+      <Prose>
+        The theoretical reference point involves a current-policy KL expectation. The practical
+        batch procedure uses a different object. Rotate completion strings among prompts within a
+        microbatch, score these mismatched pairs under current and reference policies, average their
+        log ratios and clamp the average below at zero. Here each prompt receives the preceding
+        completion, wrapping the final completion into the first row: four records become (x₁, y₄),
+        (x₂, y₁), (x₃, y₂), (x₄, y₃). The resulting scalar is detached. It is a practical reference
+        estimate, not an unbiased observation of the theoretical current-policy KL.
+      </Prose>
+      <MathBlock>{String.raw`\widehat k=\operatorname{stopgrad}\!\left[
+        \max\!\left(0,\frac1B\sum_{i=1}^{B}
+        \log\frac{\pi_\theta(y_{i-1}\mid x_i)}{\pi_{\mathrm{ref}}(y_{i-1}\mid x_i)}\right)\right],`}</MathBlock>
+      <Prose>
+        Indices wrap around the microbatch. Changing its partition changes the pairings and can
+        change k even if the set of original records is unchanged. A negative pre-clamp average
+        produces k = 0; it is not evidence that the policy equals the reference. The actual
+        sequential candidate ordering can also place several records from one prompt in a
+        microbatch, so rotation does not guarantee a different prompt every time. Retain the actual
+        prepared pairs rather than describing an idealized shuffle.
       </Prose>
 
-      {/* ======================================================================
-          2. CORE INTUITION
-          ====================================================================== */}
-      <H2>2. Core intuition</H2>
+      <Exercise
+        title="13. Compute KTO terms at a changed distance."
+        hint={
+          <Prose>
+            Compute u once; the two derivatives share βσ(u)(1−σ(u)) before class weights and signs.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            u = 0.4(0.7−0.1) = 0.24. The desirable loss is 2σ(−0.24), about 0.880573; its derivative
+            is −0.8σ(0.24)(1−σ(0.24)). The undesirable loss is σ(0.24), about 0.559714; its
+            derivative is +0.4σ(0.24)(1−σ(0.24)). Setting both weights to one restores equal
+            derivative magnitude at matched signed distance. Sending a desirable record's u far
+            negative drives its loss toward its weight while its gradient approaches zero.
+          </Prose>
+        }
+      >
+        Use d = 0.7, k = 0.1, β = 0.4 and weights 2/1. Compute both losses and derivatives; then
+        diagnose confidently wrong saturation.
+      </Exercise>
 
-      <H3>GRPO: the group as its own baseline</H3>
-
+      <H2>13. Class balance and a detached reference change the gradient</H2>
+      <WeightedClasses />
       <Prose>
-        Imagine you send eight students to take the same exam and you want to grade each one on a curve. You do not need to know the absolute difficulty of the exam — you just normalize each student's score against the group's mean and standard deviation. The student who scored 80 when everyone else scored 75 looks different from the student who scored 80 when everyone else scored 85. The normalization converts an absolute score into a relative rank, and it is the relative rank that tells you whether the student's performance was informative.
+        Suppose one desirable and three undesirable records have equal unweighted loss. With weights
+        1 and 1, the undesirable class contributes three times as much to the batch sum. Doubling
+        the desirable weight changes that total ratio to 2:3. KTO's implemented reduction averages
+        weighted terms over the total number of examples; it does not divide by the sum of weights
+        or average the two class means separately.
+      </Prose>
+      <MathBlock>{String.raw`L=\frac1N\left(\sum_{i\in D}\lambda_D\sigma(-u_i)
+        +\sum_{i\in U}\lambda_U\sigma(u_i)\right),\qquad
+        \frac{\text{matched desirable contribution}}{\text{matched undesirable contribution}}
+        =\frac{n_D\lambda_D}{n_U\lambda_U}.`}</MathBlock>
+      <Prose>
+        The contribution ratio assumes matched per-record utility values; unequal distances also
+        change each term. If a desired weighted-frequency ratio lies between a and b, solve a ≤ n_D
+        λ_D/(n_U λ_U) ≤ b for the class weight rather than quoting a universal number. Class
+        frequency is one consideration, alongside label quality and the behavior to learn. A class
+        weight alone does not prove resistance to noisy labels.
+      </Prose>
+      <DetachedReference />
+      <Prose>
+        The labelled response path carries gradients through d. The mismatch branch computes k and
+        stops its derivative before subtraction. If that stop is removed, the gradient acquires a
+        term through the mismatch examples and changes the objective's update. A finite-difference
+        check of the intended convention must hold k fixed. Recomputing k at every perturbation
+        tests a different derivative.
+      </Prose>
+      <MathBlock>{String.raw`\frac{\partial L_D}{\partial d}=-\lambda_D\beta\sigma(u)[1-\sigma(u)],\qquad
+        \frac{\partial L_U}{\partial d}=\lambda_U\beta\sigma(u)[1-\sigma(u)].`}</MathBlock>
+      <Prose>
+        These signs push a desirable response's log ratio upward and an undesirable one's downward
+        under gradient descent. The shared model can change other responses at the same time. Large
+        absolute u shrinks σ(u)(1−σ(u)) in both directions. Inspect the high-loss, low-gradient end
+        of the desirable curve to diagnose saturation without mistaking a bounded loss for a
+        guarantee of easy optimization.
+      </Prose>
+      <Program
+        file="kto_loss.py"
+        title="Explicit KTO utility, detached reference and score-coordinate update"
+      />
+      <Prose>
+        This program uses <code>sigmoid(-sign * u)</code>, avoiding subtraction from one near
+        saturation. The reference scores and practical reference point are detached, while labelled
+        policy scores remain differentiable. Its four-score SGD example is a constructed coordinate
+        update, not a fitted language model. Run{' '}
+        <code>python kto_loss.py --output utility.json</code> to inspect every weighted term,
+        derivative and updated score before moving to the ordinary trainer.
       </Prose>
 
+      <Exercise
+        title="15. Derive a weight interval."
+        hint={
+          <Prose>
+            For matched per-example contributions, compare frequency times weight before applying
+            the common total-example denominator.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            With one desirable record for five undesirable records and λ_U = 1, the
+            weighted-frequency ratio is λ_D/5. Requiring it in [1, 1.5] gives λ_D in [5, 7.5]. The
+            loss still divides the weighted sum by six total examples, not by λ_D + 5. Unequal
+            utility distances change the actual class contributions, and neither interval nor
+            normalization proves any robustness to incorrect labels.
+          </Prose>
+        }
+      >
+        For a 1:5 class-count ratio, choose desirable weights that put matched weighted
+        contributions between 1 and 1.5, fixing the undesirable weight at one.
+      </Exercise>
+
+      <H2>14. Implement KTO and use its ordinary trainer</H2>
+      <KTOBatch />
       <Prose>
-        GRPO does exactly this for responses. For each prompt, sample G responses from the current policy. Compute a reward for each one. Subtract the group mean; divide by the group standard deviation. The resulting advantage tells the policy not "this response was good in absolute terms" but "this response was better or worse than what you typically produce for this type of prompt." A response that scored 0.8 reward when the group mean was 0.3 gets a large positive advantage and drives a strong update toward that response's tokens. A response that scored 0.8 when the group mean was 0.85 gets a slightly negative advantage — it was below-average for the group — and drives a slight update away from those tokens. The absolute reward level does not matter; only the relative position within the group does.
+        Each raw record contains a prompt, one completion and a Boolean label. The actual trainer
+        prepares both the labelled completion and its rotated KL completion, with causal target
+        masks and genuine EOS. Current and reference forward passes produce sequence log-probability
+        sums; the utility loss consumes their differences. The practical reference branch is
+        no-gradient, while the labelled current branch is differentiated. A batch must contain more
+        than one record for the intended mismatch operation. Accumulating several one-record
+        microbatches does not create other completions inside any one microbatch.
       </Prose>
-
+      <Program
+        file="trl_kto.py"
+        title="Ordinary KTOTrainer, actual prepared pairs and full-gradient parity"
+      />
       <Prose>
-        This is exactly what a well-trained value model would do — it estimates the expected reward at the current policy and subtracts it from the actual reward to produce an advantage. GRPO replaces the value model's estimate with an empirical estimate from the same rollout batch. The empirical estimate is noisier (it is based on G samples rather than a learned function over the entire training distribution) but it is unbiased (it uses actual rewards from the current policy rather than a function that may have drifted from the current policy). For tasks where G=8 or G=16 samples per prompt are feasible — which is the case whenever rewards are fast to compute — this trade-off favors GRPO. For tasks where each reward evaluation is expensive (human labeling, a slow simulation, a second large model), the cost of G evaluations per prompt makes GRPO impractical.
+        The selected native configuration has 48 records from 16 fixed training prompts, actual
+        microbatch size 4, sequential preparation, β = 0.1, desirable weight 2 and undesirable
+        weight 1. It retains actual prepared rows and checks their rotated token sequences before
+        training. Its nonzero reference fixtures include matched reference, positive reference,
+        all-desirable and all-undesirable batches. A missing class is allowed; an empty batch is a
+        different invalid input.
       </Prose>
-
-      <H3>RLOO: leave the evaluated response out of its own baseline</H3>
-
       <Prose>
-        RLOO's insight is a subtle statistical improvement over the simplest REINFORCE baseline. The most obvious baseline you could use is the mean reward across the batch — the average reward all responses in the group received. But that mean includes the response you are currently evaluating, which creates a correlation that biases the gradient estimate. If response i had an unusually high reward, that high reward pulls the group mean up, which reduces the advantage estimate for response i — partially canceling the very signal you are trying to use. This self-correlation is small for large groups but meaningful for the group sizes (k=4 to k=8) used in practice.
+        The scratch KTO loss and native loss are compared on the same actual prepared tokens and
+        through every trainable model parameter. A shadow SGD step isolates numerical update
+        agreement. Two real native updates then run from the same initial SFT model used for the
+        online routes. They consume different evidence, so these routes are not a controlled
+        performance ranking of three algorithms. We can still inspect their own masks, gradients,
+        saved weights and fixed evaluation outputs.
       </Prose>
+      <Exercise
+        title="14. Form the actual mismatch batch."
+        hint={
+          <Prose>
+            Wrap the final completion to the first prompt, then average all four observed log ratios
+            before clamping.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            For records (x₁,y₁) through (x₄,y₄), the previous-completion rotation pairs (x₁, y₄),
+            (x₂, y₁), (x₃, y₂), (x₄, y₃). Ratios in log units (−0.8, 0.2, 0.1, −0.3) have mean −0.2,
+            so the practical reference is detached zero. That does not show equal distributions. A
+            one-record microbatch rotates its completion back to itself; accumulating gradients from
+            several such batches does not retroactively create these four mismatches.
+          </Prose>
+        }
+      >
+        Construct a four-record cyclic mismatch and use log-ratio values (−0.8, 0.2, 0.1, −0.3).
+        What reference point results, and why is gradient accumulation not a substitute for the
+        actual batch?
+      </Exercise>
 
+      <Anchor id="6-visual-walkthrough" />
+      <H2>15. Measure the estimators on actual model probabilities</H2>
+      <MeasuredCandidates />
       <Prose>
-        Leave-one-out removes this self-correlation by computing the baseline for response i from all other responses in the group — the k-1 responses that do not include response i. This baseline is now statistically independent of response i's reward (assuming responses are sampled independently conditioned on the prompt), making the advantage estimate unbiased. The practical difference from GRPO is the normalization step: GRPO divides by the group standard deviation, which bounds the magnitude of advantages regardless of how spread out the rewards are, at the cost of adding noise from the estimated standard deviation. RLOO uses raw mean subtraction, which means the advantage scale varies with the actual reward variance — when rewards are spread widely, advantages are large; when rewards are clustered near the mean, advantages are small. Both are sound estimators; the experiments in section 4 show that RLOO achieves approximately 3x lower advantage variance on the toy task, entirely because it avoids the noisy standard-deviation denominator.
+        The first fixed evaluation verse is “my canoe to make more steady,” with the retained
+        dataset label “no impact”. The selected SFT model scores all three complete candidate
+        labels, including EOS. In order negative, no impact, positive, their sequence log
+        probabilities are approximately −6.201137, −2.871139 and −0.064857. Exponentiating and
+        renormalizing those three sequence probabilities gives approximately (0.002036, 0.056870,
+        0.941095).
       </Prose>
-
-      <H3>KTO: prospect theory meets policy optimization</H3>
-
       <Prose>
-        The economic insight behind KTO is that humans do not evaluate outcomes on an absolute scale. We evaluate them relative to a reference point — a status quo, an expectation, a natural comparison — and we are asymmetric in how we weight deviations from that reference. A loss of one hundred dollars feels worse than an equivalent gain of one hundred dollars feels good, by a factor of approximately two in Kahneman and Tversky's original studies. This is loss aversion, and it is not an irrational bias — it is a stable feature of human risk preference that holds across cultures, magnitudes, and domains.
+        This new three-action policy is conditional on the response being one of the three
+        enumerated candidates. Other possible response strings are outside that action space. Its
+        0.056870 probability on the annotated label is not the full model's probability of being
+        correct under every possible generation and parser outcome. Restriction makes exact
+        enumeration possible; the separate free-generation evaluation measures the unrestricted
+        decoder's behavior under its declared stopping rule.
       </Prose>
-
+      <MathBlock>{String.raw`p_j^{\mathrm{restricted}}=\frac{\exp\ell_j}{\sum_{k=1}^{3}\exp\ell_k},\qquad
+        r_j=\mathbf1[\text{candidate}_j=\text{retained label}],\qquad
+        g_j=p_j^{\mathrm{restricted}}(r_j-J).`}</MathBlock>
+      <MeasuredEstimators />
       <Prose>
-        KTO translates this into a language model objective by defining the reference point as the current KL divergence of the batch: the average log-ratio of the policy's log-probability to the reference model's log-probability, across all responses in the current training step. Responses where the policy's log-ratio is above this reference level are in the "gain" region; responses where it is below are in the "loss" region. Desirable responses (thumbs up) should be pushed into the gain region — the policy should increase its log-ratio relative to the reference for those responses. Undesirable responses (thumbs down) should be pushed into the loss region — the policy should decrease its log-ratio for those responses. The sigmoid function shapes the loss so that responses already well into the gain or loss region receive diminishing gradient signal, mirroring the diminishing sensitivity to outcomes far from the reference point in prospect theory's value function.
+        The exact restricted-policy target for that first verse is approximately (−0.000116,
+        0.053635, −0.053520). With G = 2, raw self-centering produces half that expected vector.
+        Corrected self-centering and leave-one-out reproduce the target. At G = 4, raw
+        self-centering produces three quarters. The standardized estimator's no-impact coordinate is
+        about 0.037921 at G = 2 and 0.079281 at G = 4; neither is the raw target 0.053635. Group
+        size changes its reward-dependent normalization.
       </Prose>
-
       <Prose>
-        The key property that enables binary labels to work without pairing is this: both desirable and undesirable losses are computed relative to the same reference level, which is estimated from the entire batch simultaneously. This shared reference plays the same role that the head-to-head comparison plays in DPO: it provides a common scale against which desirable and undesirable responses are evaluated. In DPO, that scale is provided by the explicit contrast between chosen and rejected responses to the same prompt. In KTO, it is provided by the batch-level KL estimate — a less precise but more scalable source of calibration.
+        Leave-one-out is not uniformly the minimum-variance choice. On this first verse, G = 2 gives
+        covariance trace about 0.047894 for LOO, compared with 0.011017 for the fixed baseline 0.5.
+        Both have the correct expectation. The recorded explorer retains all 32 fixed verses, both
+        group sizes, six methods and four reward budgets, so the example is inspectable alongside
+        every other outcome. Choosing a displayed row reads saved measurements; it does not rerun a
+        model or change those measurements.
       </Prose>
-
-      {/* ======================================================================
-          3. MATH FOUNDATION
-          ====================================================================== */}
-      <H2>3. Mathematical foundation</H2>
-
-      <H3>GRPO advantage</H3>
-
+      <Program
+        file="sft_data.py"
+        title="Exact SFT data serialization and positional response masks"
+      />
       <Prose>
-        For a prompt <Code>x</Code>, sample <Code>G</Code> responses <Code>{"{y_1, ..., y_G}"}</Code>. Compute reward <Code>r_i = r(x, y_i)</Code> for each. The group-normalized advantage for response <Code>i</Code> is:
+        This is the unchanged SFT data helper. It owns the literal sentiment prompt, retained-label
+        mapping, true EOS and response-target span. The same source TSVs and serialization make the
+        model lineage explicit. Reusing this helper avoids changing the tokenization while claiming
+        that only a preference method changed.
       </Prose>
-
-      <MathBlock>{"A_i = \\frac{r_i - \\mu_G}{\\sigma_G + \\varepsilon}, \\quad \\mu_G = \\frac{1}{G}\\sum_{j=1}^G r_j, \\quad \\sigma_G = \\sqrt{\\frac{1}{G}\\sum_{j=1}^G (r_j - \\mu_G)^2}"}</MathBlock>
-
+      <Program
+        file="sft_evaluate.py"
+        title="Exact SFT response likelihood, strict generation and candidate evaluation"
+      />
       <Prose>
-        The GRPO policy objective is a PPO-style clipped surrogate with a KL penalty anchored to the reference policy <Code>π_ref</Code>:
+        This unchanged helper keeps three measurements separate: pooled response-target negative
+        log-likelihood (NLL), strict free-generation label accuracy and the highest-scoring
+        enumerated candidate. A valid label and an EOS stop are separate observations. Unmapped
+        model vocabulary IDs are retained as invalid outputs. The official test verses have already
+        appeared in the SFT lesson; these are fixed evaluation examples rather than a newly secret
+        benchmark.
       </Prose>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{GRPO}}(\\theta) = -\\mathbb{E}\\!\\left[\\min\\!\\left(\\rho_i A_i,\\; \\text{clip}(\\rho_i, 1{-}\\varepsilon, 1{+}\\varepsilon) A_i\\right)\\right] + \\beta\\, \\mathbb{E}\\!\\left[\\mathrm{KL}(\\pi_\\theta \\| \\pi_{\\text{ref}})\\right]"}</MathBlock>
-
+      <Program
+        file="group_study.py"
+        title="Prospective source guard and once-only six-stage study"
+      />
       <Prose>
-        where <Code>ρ_i = π_θ(y_i|x) / π_θ_old(y_i|x)</Code> is the importance ratio. The KL penalty prevents the policy from drifting far from the SFT anchor even without a value model enforcing stability.
+        Preparation records the exact program, model, tokenizer, data and native-source hashes;
+        software versions; fixed source IDs; candidate token spans; and resolved trainer
+        configurations. Execution checks these identities before each stage. A completed stage is
+        reused only with its matching protocol and report; a partial stage stops. After a source
+        correction, successful earlier science remains bound to the source that actually ran, rather
+        than being relabelled as a new execution. The README separates reproduction of that exact
+        SFT checkpoint from a new experiment using a different local checkpoint.
       </Prose>
-
-      <H3>RLOO baseline</H3>
-
+      <RecordedUpdates />
       <Prose>
-        For a group of <Code>k</Code> responses, the leave-one-out baseline for response <Code>i</Code> is:
+        In the two scratch routes, the first sampled reward group was (1, 0, 0, 1) and the second
+        was (0, 0, 0, 0). Both methods started at pooled response NLL 0.351335 on 84 selected
+        targets from 32 verses. After two updates, the GRPO route reached 0.350412 and the RLOO
+        route 0.349362. Each still produced 20 correct greedy labels out of 32, with all 32 outputs
+        valid and EOS-stopped. A changed probability can change NLL without crossing an argmax
+        boundary.
       </Prose>
-
-      <MathBlock>{"b_i = \\frac{1}{k-1}\\sum_{j \\neq i} r_j = \\frac{\\sum_{j=1}^k r_j - r_i}{k - 1}"}</MathBlock>
-
       <Prose>
-        The RLOO advantage is then simply <Code>A_i = r_i - b_i</Code>. Because <Code>b_i</Code> is computed from independent samples (it excludes <Code>r_i</Code> itself), this is an unbiased estimate of the policy's baseline value. The RLOO gradient update uses a standard REINFORCE objective — one gradient step per batch, no clipping, no importance weighting:
+        Their parameter-change L2 norms were about 0.000329 and 0.000635 respectively; both
+        saved-model reloads matched exactly. These are observed interface demonstrations with
+        different loss constructions, two steps and one fixed seed. Their small NLL changes do not
+        establish convergence or a method ranking. The real-batch records, constructed derivative
+        checks and evaluation outputs answer different questions and remain separately inspectable.
       </Prose>
-
-      <MathBlock>{"\\nabla_\\theta \\mathcal{L}_{\\text{RLOO}} = -\\mathbb{E}_{i}\\!\\left[(r_i - b_i)\\, \\nabla_\\theta \\log \\pi_\\theta(y_i \\mid x)\\right]"}</MathBlock>
-
-      <H3>KTO loss</H3>
-
       <Prose>
-        Let <Code>π_θ</Code> be the policy and <Code>π_ref</Code> be the frozen reference. Define the log-ratio <Code>h_θ(x, y) = β · log(π_θ(y|x) / π_ref(y|x))</Code>. Let <Code>z_ref</Code> be an estimate of the expected KL across the batch:
+        The native GRPO and RLOO runs each observed rewards (1, 1, 1, 1), then (1, 1, 0, 1). The
+        first group produced zero reward advantages; the initial current and reference policies also
+        agreed, so that particular update had zero gradient. The second group supplied a contrast.
+        Its mean surrogate loss was nearly zero even though its gradient was nonzero: averaging
+        centered advantages can cancel loss values without cancelling their differently directed
+        derivatives.
       </Prose>
-
-      <MathBlock>{"z_{\\text{ref}} = \\mathbb{E}_{(x, y) \\sim \\mathcal{D}}\\!\\left[\\beta\\,\\log \\frac{\\pi_\\theta(y \\mid x)}{\\pi_{\\text{ref}}(y \\mid x)}\\right]"}</MathBlock>
-
-      <Prose>
-        The KTO loss for a desirable response <Code>y_D</Code> and undesirable response <Code>y_U</Code> is:
-      </Prose>
-
-      <MathBlock>{"\\mathcal{L}_{\\text{KTO}}(\\theta) = \\mathbb{E}_{(x, y_D)}\\!\\left[1 - \\sigma(h_\\theta(x, y_D) - z_{\\text{ref}})\\right] + \\mathbb{E}_{(x, y_U)}\\!\\left[1 - \\sigma(z_{\\text{ref}} - h_\\theta(x, y_U))\\right]"}</MathBlock>
-
-      <Prose>
-        The desirable term pushes the policy's log-ratio above the reference level <Code>z_ref</Code>; the undesirable term pushes it below. Lambda weights <Code>λ_D</Code> and <Code>λ_U</Code> can be applied to the two terms independently to control the asymmetry between reward and penalty pressure, consistent with the loss-aversion framing.
-      </Prose>
-
-      <H3>Structural comparison</H3>
-
-      <Prose>
-        All three methods share the same KL anchor to a frozen reference policy, and all three define their signal in terms of log-probability ratios between the policy and the reference. The key structural differences are in the source of gradient signal and the type of data required.
-      </Prose>
-
-      <Prose>
-        GRPO and RLOO are both fully on-policy: the policy generates fresh responses at each training step, those responses are scored by the reward function, and the gradient uses those live samples. This means the training data distribution tracks the policy's current output distribution exactly — there is no distributional shift between the data and the policy. The cost is that you must run the policy at every training step, which requires a complete forward and sampling pass for G responses per prompt. GRPO introduces PPO's clipping and multiple mini-epochs per rollout batch, which makes each batch of rollouts more sample-efficient at the cost of more compute per batch. RLOO takes one gradient step per batch with no clipping, which is less sample-efficient but simpler and faster.
-      </Prose>
-
-      <Prose>
-        KTO operates on a fixed pre-labeled dataset: you collect (prompt, response, label) triples offline, then train on them repeatedly like supervised fine-tuning. In this sense it is off-policy — the responses in the dataset were generated by some earlier policy (often the SFT model), not the current training policy. However, the KTO loss computes the log-ratio of the current policy to the reference for every response at every gradient step, so the implicit reward changes as the policy changes. This is the same structure as DPO, which is also off-policy in data but on-policy in its implicit reward computation. The consequence is that KTO's gradient signal can become stale in a subtler way than it might appear: if the policy drifts far from the SFT model, the log-ratios computed in the KTO loss may reflect a distribution that is far from what the pre-labeled responses represent, and the training signal becomes less informative about actual improvements.
-      </Prose>
-
-      <Callout accent="blue">
-        GRPO normalizes by group std (bounded advantages, higher-variance estimator). RLOO uses raw mean subtraction (unbounded advantages, lower-variance estimator). Both are statistically consistent; the right choice depends on reward scale and group size, and the empirical evidence from section 4 favors RLOO at small group sizes.
-      </Callout>
-
-      {/* ======================================================================
-          4. FROM-SCRATCH IMPLEMENTATION
-          ====================================================================== */}
-      <H2>4. From-scratch implementation</H2>
-
-      <Prose>
-        All three implementations use the same toy task: a linear policy maps a 4-dimensional state to a 2-token distribution. Token 0 earns reward 1; token 1 earns reward 0. The policy starts at chance (50% each token) and should converge to high probability of token 0.
-      </Prose>
-
-      <H3>4a. GRPO core loop</H3>
-
-      <Prose>
-        Sample G=8 responses per prompt, compute group-normalized advantages, apply PPO-style clipped update with KL anchor to the frozen reference policy.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn.functional as F
-
-torch.manual_seed(42)
-
-class ToyPolicy(torch.nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.w = torch.nn.Parameter(torch.randn(4, 2) * 0.1)
-
-    def logprobs(self, states):
-        return F.log_softmax(states @ self.w, dim=-1)
-
-    def sample(self, states):
-        logps = self.logprobs(states)
-        tokens = torch.distributions.Categorical(logits=logps).sample()
-        return tokens, logps.gather(1, tokens.unsqueeze(1)).squeeze(1)
-
-def reward_fn(tokens):
-    # Token 0 = correct answer; reward 1. Token 1 = wrong; reward 0.
-    return (tokens == 0).float()
-
-policy     = ToyPolicy()
-ref_policy = ToyPolicy()
-for p in ref_policy.parameters():
-    p.requires_grad_(False)
-
-optimizer  = torch.optim.Adam(policy.parameters(), lr=1e-2)
-
-GROUP_SIZE = 8
-N_PROMPTS  = 16
-eps        = 0.2
-beta       = 0.04
-states     = torch.randn(N_PROMPTS, 4)
-
-for epoch in range(50):
-    # Expand prompts G times — one row per (prompt, response) pair
-    expanded = states.repeat_interleave(GROUP_SIZE, dim=0)
-
-    with torch.no_grad():
-        tokens, logps_old = policy.sample(expanded)
-        rewards = reward_fn(tokens)
-
-    # ── Group-normalized advantage (replaces PPO value model) ─────────────
-    r   = rewards.view(N_PROMPTS, GROUP_SIZE)
-    adv = (r - r.mean(-1, keepdim=True)) / (r.std(-1, keepdim=True) + 1e-8)
-    adv = adv.flatten()
-
-    # KL anchor: keep policy close to reference
-    with torch.no_grad():
-        ref_logps = ref_policy.logprobs(expanded).gather(
-            1, tokens.unsqueeze(1)).squeeze(1)
-
-    # PPO clipped update (4 mini-epochs per rollout batch)
-    for _ in range(4):
-        new_logps = policy.logprobs(expanded).gather(
-            1, tokens.unsqueeze(1)).squeeze(1)
-        ratio      = (new_logps - logps_old).exp()
-        clip_loss  = -torch.min(
-            ratio * adv,
-            ratio.clamp(1 - eps, 1 + eps) * adv,
-        ).mean()
-        kl_penalty = beta * (logps_old - ref_logps).mean()
-        loss       = clip_loss + kl_penalty
-        optimizer.zero_grad(); loss.backward(); optimizer.step()
-
-# Verified output:
-# Epoch  1 mean reward: 0.492
-# Epoch 25 mean reward: 0.703
-# Epoch 50 mean reward: 0.734`}
-      </CodeBlock>
-
-      <H3>4b. RLOO variant and variance comparison</H3>
-
-      <Prose>
-        Same rollout structure as GRPO, but replace group normalization with leave-one-out mean subtraction and replace the PPO clipped update with a plain REINFORCE gradient step. The empirical advantage variance is lower for RLOO because it avoids dividing by the estimated group standard deviation — that division amplifies noise when rewards within the group are nearly constant.
-      </Prose>
-
-      <CodeBlock language="python">
-{`# -- Using the same ToyPolicy and setup as GRPO above --
-# RLOO advantage: subtract leave-one-out mean, no std normalization
-
-for epoch in range(50):
-    expanded  = states.repeat_interleave(GROUP_SIZE, dim=0)
-
-    with torch.no_grad():
-        tokens, logps_old = policy_rloo.sample(expanded)
-        rewards = reward_fn(tokens)
-
-    r     = rewards.view(N_PROMPTS, GROUP_SIZE)
-
-    # Leave-one-out baseline: (sum - r_i) / (k - 1)
-    total       = r.sum(-1, keepdim=True)            # (N, 1)
-    loo_baseline = (total - r) / (GROUP_SIZE - 1)    # (N, G)
-    adv          = (r - loo_baseline).flatten()       # (N*G,)
-
-    # Plain REINFORCE: one step, no clipping
-    new_logps = policy_rloo.logprobs(expanded).gather(
-        1, tokens.unsqueeze(1)).squeeze(1)
-    loss = -(new_logps * adv.detach()).mean()
-    optimizer_rloo.zero_grad(); loss.backward(); optimizer_rloo.step()
-
-# Verified output:
-# GRPO advantage variance (early/mid/late): 0.8819 / 0.7717 / 0.6614
-# RLOO advantage variance (early/mid/late): 0.3034 / 0.2404 / 0.1890
-# GRPO mean reward  (early/mid/late): 0.500 / 0.578 / 0.633
-# RLOO mean reward  (early/mid/late): 0.516 / 0.555 / 0.680`}
-      </CodeBlock>
-
-      <Callout accent="gold">
-        RLOO advantage variance is ~3x lower than GRPO's in this toy task. The difference comes from avoiding the group-std estimate: when all responses in a group have similar rewards, std is near zero and GRPO divides by a noisy small number, amplifying spurious differences. RLOO's raw subtraction avoids this.
-      </Callout>
-
-      <H3>4c. KTO loss</H3>
-
-      <Prose>
-        Generate a synthetic dataset of 64 examples — alternating desirable (token 0) and undesirable (token 1) responses with binary labels. Train with the KTO loss. The key metric is the margin between the policy's log-probability on good tokens and bad tokens: it should grow as training progresses.
-      </Prose>
-
-      <CodeBlock language="python">
-{`import torch
-import torch.nn.functional as F
-
-torch.manual_seed(42)
-
-# Synthetic binary-labeled dataset
-N        = 64
-states   = torch.randn(N, 4)
-# Even indices: desirable (token 0); odd: undesirable (token 1)
-all_tokens = torch.where(torch.arange(N) % 2 == 0,
-                         torch.zeros(N, dtype=torch.long),
-                         torch.ones(N,  dtype=torch.long))
-all_labels = (torch.arange(N) % 2 == 0)   # True = desirable
-
-policy     = ToyPolicy()
-ref_policy = ToyPolicy()
-for p in ref_policy.parameters():
-    p.requires_grad_(False)
-
-optimizer = torch.optim.Adam(policy.parameters(), lr=5e-3)
-beta = 0.1
-
-for epoch in range(80):
-    policy_logps = policy.logprobs(states).gather(
-        1, all_tokens.unsqueeze(1)).squeeze(1)
-    with torch.no_grad():
-        ref_logps = ref_policy.logprobs(states).gather(
-            1, all_tokens.unsqueeze(1)).squeeze(1)
-
-    logratio = policy_logps - ref_logps
-
-    # z_ref: running KL estimate — the "reference level" for prospect theory
-    kl_est = logratio.mean().detach()
-
-    d_mask = all_labels
-    u_mask = ~all_labels
-
-    # Desirable: push logratio above kl_est (gain region of prospect curve)
-    desirable_loss   = (1 - F.sigmoid(
-        beta * (logratio[d_mask] - kl_est))).mean()
-
-    # Undesirable: push logratio below kl_est (loss region; steeper gradient)
-    undesirable_loss = (1 - F.sigmoid(
-        beta * (kl_est - logratio[u_mask]))).mean()
-
-    loss = desirable_loss + undesirable_loss
-    optimizer.zero_grad(); loss.backward(); optimizer.step()
-
-# Verified output:
-# Epoch  1 — logp(good): -0.634  logp(bad): -0.760  margin: 0.126
-# Epoch 40 — logp(good): -0.585  logp(bad): -1.035  margin: 0.450
-# Epoch 80 — logp(good): -0.620  logp(bad): -1.414  margin: 0.793`}
-      </CodeBlock>
-
-      <Prose>
-        The margin between log-probabilities on desirable and undesirable tokens grows from 0.126 to 0.793 over 80 epochs. The policy learns to prefer desirable tokens without any paired comparison — only the binary labels drive the signal. Note that logp(good) stays relatively stable while logp(bad) drops sharply: this asymmetry is the prospect-theory loss-aversion effect, where the penalty gradient on undesirable samples is larger than the reward gradient on desirable samples at the same margin distance.
-      </Prose>
-
-      {/* ======================================================================
-          5. PRODUCTION IMPLEMENTATION
-          ====================================================================== */}
-      <H2>5. Production implementation</H2>
-
-      <Prose>
-        HuggingFace TRL ships <Code>GRPOTrainer</Code>, <Code>RLOOTrainer</Code>, and <Code>KTOTrainer</Code> as first-class trainers. All three follow the standard TRL interface: pass a model, a dataset, and a config. The key parameters differ by method.
-      </Prose>
-
-      <H3>GRPOTrainer</H3>
-
-      <CodeBlock language="python">
-{`from trl import GRPOConfig, GRPOTrainer
-
-config = GRPOConfig(
-    num_generations=8,          # G: responses sampled per prompt
-    max_new_tokens=512,
-    learning_rate=1e-6,
-    per_device_train_batch_size=4,
-    num_train_epochs=1,
-    kl_coef=0.04,               # β: KL anchor to reference policy
-    cliprange=0.2,              # ε: PPO clip ratio
-    temperature=1.0,
-    output_dir="./grpo-output",
-)
-
-trainer = GRPOTrainer(
-    model=model,                # policy (also serves as ref if ref_model=None)
-    ref_model=ref_model,        # frozen SFT checkpoint
-    reward_funcs=reward_fn,     # callable: (prompt, response) -> float
-    args=config,
-    train_dataset=dataset,
-)
-trainer.train()`}
-      </CodeBlock>
-
-      <H3>RLOOTrainer</H3>
-
-      <CodeBlock language="python">
-{`from trl import RLOOConfig, RLOOTrainer
-
-config = RLOOConfig(
-    rloo_k=4,                   # k: responses sampled per prompt
-    learning_rate=1e-6,
-    per_device_train_batch_size=8,
-    kl_coef=0.05,
-    output_dir="./rloo-output",
-)
-
-trainer = RLOOTrainer(
-    config=config,
-    tokenizer=tokenizer,
-    policy=policy_model,
-    ref_policy=ref_model,
-    reward_model=reward_model,  # or callable
-    train_dataset=dataset,
-    eval_dataset=eval_dataset,
-)
-trainer.train()`}
-      </CodeBlock>
-
-      <H3>KTOTrainer</H3>
-
-      <CodeBlock language="python">
-{`from trl import KTOConfig, KTOTrainer
-
-config = KTOConfig(
-    beta=0.1,                       # temperature controlling KL penalty strength
-    desirable_weight=1.0,           # λ_D
-    undesirable_weight=1.0,         # λ_U — increase for stronger negative pressure
-    max_length=1024,
-    per_device_train_batch_size=8,
-    learning_rate=5e-7,
-    output_dir="./kto-output",
-)
-
-# Dataset format: each row has 'prompt', 'completion', 'label' (bool)
-trainer = KTOTrainer(
-    model=model,
-    ref_model=ref_model,
-    args=config,
-    train_dataset=dataset,  # expects 'label': True/False column
-    tokenizer=tokenizer,
-)
-trainer.train()`}
-      </CodeBlock>
-
-      <Callout accent="blue">
-        KTO dataset format is the most permissive: one row per response with a boolean label. You do not need to pair chosen and rejected responses. Thumbs-up / thumbs-down logs from production systems can be loaded directly after filtering to a prompt column, a completion column, and a label column.
-      </Callout>
-
-      {/* ======================================================================
-          6. VISUAL WALKTHROUGH
-          ====================================================================== */}
-      <H2>6. Visual walkthrough</H2>
-
-      <H3>GRPO single update step</H3>
-
-      <StepTrace
-        label="grpo single update"
-        steps={[
-          {
-            label: "Step 1 — Sample G responses per prompt",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="prompt x → G rollouts"
-                  tokens={[
-                    { label: "prompt x", color: colors.gold },
-                    { label: "→ sample G=8", color: colors.textDim },
-                    { label: "y₁ r=0.9", color: colors.green },
-                    { label: "y₂ r=0.2", color: "#f87171" },
-                    { label: "y₃ r=0.7", color: colors.green },
-                    { label: "... y₈", color: colors.textMuted },
-                  ]}
-                />
-                <Prose>
-                  Each response is generated with the current policy. Rewards are computed immediately — no value model forward pass.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "Step 2 — Compute group-normalized advantages",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="group statistics → advantages"
-                  tokens={[
-                    { label: "μ_G = 0.55", color: colors.textDim },
-                    { label: "σ_G = 0.24", color: colors.textDim },
-                    { label: "A₁ = +1.46", color: colors.green },
-                    { label: "A₂ = -1.46", color: "#f87171" },
-                    { label: "A₃ = +0.63", color: colors.green },
-                  ]}
-                />
-                <Prose>
-                  Each response's reward is normalized by the group mean and std. High-reward responses get positive advantages; low-reward responses get negative advantages. The absolute scale of the rewards does not matter — only the relative ranking within the group.
-                </Prose>
-              </div>
-            ),
-          },
-          {
-            label: "Step 3 — PPO clipped update with KL anchor",
-            render: () => (
-              <div>
-                <TokenStream
-                  label="policy update"
-                  tokens={[
-                    { label: "ρ_i = π_new/π_old", color: colors.textDim },
-                    { label: "clip(ρ, 0.8, 1.2)", color: colors.gold },
-                    { label: "× A_i", color: colors.green },
-                    { label: "- β·KL(π‖π_ref)", color: "#60a5fa" },
-                    { label: "→ gradient step", color: colors.green },
-                  ]}
-                />
-                <Prose>
-                  The clipped surrogate prevents large updates from any single rollout. The KL penalty keeps the policy from drifting far from the SFT anchor, serving the same function the value model's implicit stability constraint served in PPO.
-                </Prose>
-              </div>
-            ),
-          },
+      <LessonTable
+        caption="Fixed 32-verse evaluation after exactly two updates"
+        headers={['Route', 'Response NLL', 'Correct greedy labels', 'Parameter-change L2']}
+        rows={[
+          ['Initial checkpoint', '0.351335', '20 / 32', '0'],
+          ['Scratch GRPO', '0.350412', '20 / 32', '0.000329'],
+          ['Scratch RLOO', '0.349362', '20 / 32', '0.000635'],
+          ['Native GRPO', '0.352804', '20 / 32', '0.000300'],
+          ['Native RLOO', '0.354186', '20 / 32', '0.000573'],
+          ['Native KTO', '0.351431', '20 / 32', '0.0000264'],
         ]}
       />
+      <Prose>
+        All five final models emitted valid, EOS-stopped labels for all 32 verses, and all five
+        selected the same candidate labels as before. Their unchanged confusion matrix, with gold
+        rows and prediction columns ordered negative, no impact, positive, is ((5, 2, 0), (1, 13,
+        6), (0, 3, 2)); the invalid column is zero. Each save/reload check matched exactly. These
+        overlapping demonstrations use different sampling seeds and, for KTO, a different data
+        object. The table cannot rank algorithms or establish generalization beyond these inspected
+        records.
+      </Prose>
+      <Prose>
+        Native KTO retained all 48 prepared records. Its first actual batch had labels (undesirable,
+        undesirable, desirable, undesirable), giving weighted terms (0.5, 0.5, 1, 0.5) at the
+        initial policy and mean loss 0.625. The second actual batch loss was about 0.750028. Both
+        practical reference points clamped to zero; neither fact implies that the second current
+        policy equalled the reference. The prepared record file exposes the exact
+        previous-completion rotation.
+      </Prose>
+      <Prose>
+        Numerical parity also has a declared domain. The native selected-score function stores zero
+        at ignored padding cells, while direct scoring can store a finite log probability there.
+        Compare selected cells, losses and gradients, rather than requiring those unused
+        representations to match. Constructed nonzero GRPO/RLOO checks use float64 to separate the
+        formulas from float32 cancellation; the code restores every initial parameter exactly to
+        float32 before training. Across those online constructed cases, the largest gradient
+        difference was below 3 × 10⁻¹². Actual training-batch parity stays in float32: maximum
+        differences were below 5 × 10⁻⁷ for the online routes and zero for KTO. Earlier failing
+        checks and their corrections remain in the downloadable provenance; they are not counted as
+        successful scientific updates.
+      </Prose>
+      <Program
+        file="group_checks.py"
+        title="Independent finite and tensor checks for the implemented mechanisms"
+      />
+      <Prose>
+        The checks compare exact enumeration with analytic gradients, finite differences with
+        autograd, masking with selected positions, and reduction weights with changed lengths. They
+        include missing rewards and class-empty KTO batches. Their constructed results establish
+        those mechanisms under the tested conventions; the saved scientific observations establish
+        what happened in the separate model runs.
+      </Prose>
 
-      <H3>Advantage variance: GRPO vs RLOO over training</H3>
+      <Anchor id="7-decision-matrix" />
+      <Anchor id="8-what-scales-and-what-doesn-t" />
+      <Anchor id="8-what-scales-and-what-doesnt" />
+      <Anchor id="9-failure-modes-and-gotchas" />
+      <H2>16. Choose by data, estimator and cost</H2>
+      <MethodObjects />
+      <Prose>
+        Begin with the evidence available. A callable reward and the ability to generate several
+        responses support an online group estimator. Individual labelled responses support KTO when
+        their desirable/undesirable meaning is defensible. Paired records support DPO or SimPO under
+        their own assumptions. These are possible routes, not mutually exclusive laws. Ask how
+        rewards are obtained, how often groups contain a useful contrast, which reference
+        computations are required and what the labels mean.
+      </Prose>
+      <Prose>
+        If every generated answer has the same measured reward, inspect the reward's resolution and
+        actual outputs before concluding the task is solved. If rewards are missing selectively, a
+        zero-advantage fallback does not repair the observation bias. If ratios drift during reuse,
+        revisit old-policy lifetime and support. If KTO has high loss and tiny gradients, inspect
+        saturation and the practical reference point. Each diagnosis refers to a concrete object
+        drawn earlier, rather than an invented numerical score for which method is “best”.
+      </Prose>
+      <ReportPolicy />
+      <Prose>
+        A policy need not sample language tokens. Suppose it samples one of two probability reports:
+        A reports (0.8, 0.2) and B reports (0.4, 0.6). The policy chooses them with probabilities
+        (0.25, 0.75). If the observed outcome is the first category, a log-score reward is log 0.8
+        for A and log 0.4 for B. The sampled objects are reports, not category labels. Their reward
+        difference is log 2, so the exact gradient with respect to the two policy logits is (3 log
+        2/16, −3 log 2/16), approximately (0.129965, −0.129965).
+      </Prose>
+      <Prose>
+        Leave-one-out can estimate that report-selection gradient under its sampling assumptions.
+        Directly differentiating a report's log score is another route: it changes the probabilities
+        inside a report rather than only the chance of selecting a fixed report. A proper scoring
+        reward alone does not make a standardized or clipped finite policy estimator a direct
+        proper-score optimizer, nor guarantee calibrated outputs.{' '}
+        <a href="/learn/path/full-curriculum/typed-decision-models-calibrated-neural-decision-systems?module=large-language-models">
+          Typed Decision Models
+        </a>{' '}
+        develops that application with a continuous policy over reports, proper scores, calibration
+        and a measured decision system.
+      </Prose>
+      <Exercise
+        title="17. Sample reports rather than classes."
+        hint={
+          <Prose>
+            The reward difference is log(0.7/0.2), and the two-action logit gradient has factor
+            p₁p₂.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            The two report rewards are log 0.7 and log 0.2 for the first observed category. With
+            policy probabilities (0.6, 0.4), the exact selection-logit gradient is (0.24 log 3.5,
+            −0.24 log 3.5). Direct differentiation of the expected reward with respect to those
+            policy logits agrees. Differentiating the report probabilities themselves instead
+            changes the reports, introducing a different parameter path. Applying a random group
+            normalization to a score-function estimate does not preserve the direct proper-score
+            target automatically.
+          </Prose>
+        }
+      >
+        A policy chooses reports (0.7, 0.3) and (0.2, 0.8) with probabilities (0.6, 0.4). The
+        observed category is first. Compute the exact policy gradient and identify the direct-report
+        alternative.
+      </Exercise>
 
-      <Plot
-        label="Advantage estimator variance during training (lower is more stable; RLOO ~3× lower than GRPO early on)"
-        xLabel="Training epoch"
-        yLabel="Advantage variance"
-        series={[
-          {
-            name: "GRPO advantage variance",
-            color: colors.gold,
-            points: [[1, 0.88], [10, 0.83], [20, 0.79], [30, 0.75], [40, 0.71], [50, 0.66]],
-          },
-          {
-            name: "RLOO advantage variance",
-            color: "#60a5fa",
-            points: [[1, 0.30], [10, 0.28], [20, 0.26], [30, 0.24], [40, 0.22], [50, 0.19]],
-          },
+      <Anchor id="11-self-check-exercises" />
+      <H2>17. Practice and a bounded capstone</H2>
+      <Prose>
+        The changed-example tasks beside each mechanism test the assumptions, intermediate
+        calculations and implementation boundaries. Revisit the response-mask task in section 2,
+        baseline tasks in sections 4–6, loss tasks in sections 8–10, KTO tasks in sections 11–14 and
+        report-policy task in section 16. The accompanying answer program checks the numerical and
+        tensor cases without fitting another model.
+      </Prose>
+      <Exercise
+        title="18. Prespecify a falsifiable extension."
+        hint={
+          <Prose>
+            Separate a reward's usefulness from format compliance. Fix selection and evaluation
+            before reading the new outcomes.
+          </Prose>
+        }
+        solution={
+          <Prose>
+            One bounded extension fixes the same initial checkpoint and first 16 training IDs, then
+            changes reward to 0.25 for any strictly valid sentiment label plus 0.75 for matching the
+            retained annotation. Keep the same sampling and two-step budget, a new predeclared seed
+            and separate fresh output directory. Freeze all files/configurations first; do not
+            select between seeds afterward. Record valid-label rate, correctness, reward
+            distributions, mixed-group fraction and fixed evaluation NLL/accuracy. A rise in
+            validity with no improvement in correctness would reject a claim that this small
+            experiment demonstrates better sentiment decisions. Low mixed-group frequency or
+            unchanged weights explains limited training signal without justifying extra unplanned
+            runs. Existing test exposure remains disclosed. This is a prospective extension, not an
+            executed result.
+          </Prose>
+        }
+      >
+        Design a bounded alternative reward experiment using retained training data. Specify roles,
+        budget, diagnostics and an outcome that would contradict your usefulness claim.
+      </Exercise>
+
+      <Program
+        file="practice_answers.py"
+        title="Complete changed-example answers and capstone diagnostics"
+      />
+      <Prose>
+        Run <code>python practice_answers.py --output practice-answers.json</code> from the
+        extracted archive. The program enumerates the changed variance counterexample, computes
+        reduction gradients before and after padding, checks the retained KL derivative and solves
+        the changed KTO and report-policy calculations. Its linear-time masked LOO function returns
+        both an observation mask and valid count. The capstone helper only summarizes supplied
+        records; its example is explicitly constructed and launches no training run. Pair the
+        computed answers with each nearby worked explanation.
+      </Prose>
+
+      <H2>18. Keep the implementation and its evidence together</H2>
+      <Prose>
+        Download the{' '}
+        <a href={root + 'grpo-rloo-kto.zip'} download>
+          complete runnable archive
+        </a>{' '}
+        and start with its <a href={root + 'README.md'}>README</a>. The{' '}
+        <a href={root + 'requirements.txt'}>pinned requirements</a> describe the observed stack;{' '}
+        <a href={root + 'provenance.json'}>provenance</a> connects source, original successful
+        stages and bounded native continuations. Saved data and output JSON make it possible to
+        inspect a claim without fitting another model. Adapted model weights are not bundled: the
+        README links the exact SFT lineage and a separate base-model route.
+      </Prose>
+      <LessonTable
+        caption="Program index: choose the object you want to inspect"
+        headers={['Full file', 'Use it for']}
+        rows={[
+          [
+            <a href={root + 'group_estimators.py'} download>
+              group_estimators.py
+            </a>,
+            'Exact finite distributions, covariance, bias and reward budgets',
+          ],
+          [
+            <a href={root + 'group_losses.py'} download>
+              group_losses.py
+            </a>,
+            'Causal scores, grouped advantages, clipping and reductions',
+          ],
+          [
+            <a href={root + 'kto_loss.py'} download>
+              kto_loss.py
+            </a>,
+            'Weighted binary utility and detached practical reference',
+          ],
+          [
+            <a href={root + 'online_preferences.py'} download>
+              online_preferences.py
+            </a>,
+            'Complete scratch sampling, updates, evaluation and persistence',
+          ],
+          [
+            <a href={root + 'trl_group_training.py'} download>
+              trl_group_training.py
+            </a>,
+            'Ordinary native GRPO/RLOO, exact batches and numerical comparisons',
+          ],
+          [
+            <a href={root + 'trl_kto.py'} download>
+              trl_kto.py
+            </a>,
+            'Ordinary native KTO and its actual prepared records',
+          ],
+          [
+            <a href={root + 'group_study.py'} download>
+              group_study.py
+            </a>,
+            'Prospective identities and guarded six-stage execution',
+          ],
+          [
+            <a href={root + 'group_checks.py'} download>
+              group_checks.py
+            </a>,
+            'Finite and tensor mechanism checks',
+          ],
+          [
+            <a href={root + 'practice_answers.py'} download>
+              practice_answers.py
+            </a>,
+            'Changed numerical answers and a no-fit capstone diagnostic',
+          ],
+          [
+            <a href={root + 'sft_data.py'} download>
+              sft_data.py
+            </a>,
+            'Exact reused data serialization and selected positions',
+          ],
+          [
+            <a href={root + 'sft_evaluate.py'} download>
+              sft_evaluate.py
+            </a>,
+            'Exact reused likelihood, strict generation and candidate decisions',
+          ],
         ]}
       />
-
-      <H3>Mean reward over training: GRPO, RLOO, KTO</H3>
-
-      <Plot
-        label="Mean reward over training steps (toy task) — RLOO/GRPO converge similarly; KTO uses implicit reward margin"
-        xLabel="Training step"
-        yLabel="Mean reward / margin"
-        series={[
-          {
-            name: "GRPO",
-            color: colors.gold,
-            points: [[1, 0.49], [10, 0.56], [25, 0.70], [40, 0.72], [50, 0.73]],
-          },
-          {
-            name: "RLOO",
-            color: "#60a5fa",
-            points: [[1, 0.52], [10, 0.55], [25, 0.56], [40, 0.63], [50, 0.68]],
-          },
-          {
-            name: "KTO (implicit reward margin)",
-            color: "#a78bfa",
-            points: [[1, 0.13], [20, 0.30], [40, 0.45], [60, 0.63], [80, 0.79]],
-          },
-        ]}
-      />
-
-      {/* ======================================================================
-          7. DECISION MATRIX
-          ====================================================================== */}
-      <H2>7. Decision matrix</H2>
-
       <Prose>
-        These methods are not interchangeable. Each sits at a different point in a space defined by your data format, your memory budget, the cost of reward evaluation, and what you need from training dynamics.
+        You are ready to extend these programs when you can identify the random object being
+        sampled, state which baseline is independent of which draw, and trace every selected token
+        through the actual loss reduction. For KTO, you should also be able to explain where each
+        Boolean label came from and why the practical reference is detached. When an output
+        surprises you, inspect that path before tuning a coefficient.
       </Prose>
-
-      <Callout accent="gold">
-        Start with the data you actually have. If it's binary labels → KTO. If it's paired comparisons and you need on-policy exploration → GRPO or RLOO. If it's paired comparisons and you want offline supervised training → DPO or SimPO.
-      </Callout>
-
-      <H3>Use GRPO when</H3>
-
-      <Prose>
-        Your task has verifiable rewards that are cheap to compute — math problems with checkable final answers, code that can be executed and tested, structured output validation against a schema. You need on-policy exploration: the policy's distribution should shift as it learns, and the training data should come from the current policy's rollouts, not a fixed offline dataset. You cannot afford the memory cost of a value model at the scale you are training. DeepSeek-R1's successful training on mathematical reasoning is the primary validation point for this setting.
-      </Prose>
-
-      <H3>Use RLOO when</H3>
-
-      <Prose>
-        You already have a reward model and want on-policy RL without PPO's full apparatus. RLOO matches PPO's empirical performance on standard RLHF benchmarks (helpfulness, harmlessness, MT-Bench, Alpaca Eval) at 3× higher throughput and 70% lower RAM. It is the right default when PPO's value network is the bottleneck and the reward function is not trivially cheap — RLOO is more sample-efficient per-rollout than GRPO because it does not require dividing by an estimated group standard deviation that can amplify noise.
-      </Prose>
-
-      <H3>Use KTO when</H3>
-
-      <Prose>
-        Your preference data is binary — individual thumbs-up and thumbs-down labels — and you cannot generate or afford paired comparisons. Production logs with user feedback are directly usable. You can operate at a data scale that paired comparison labeling cannot reach at the same cost. Accept that binary signals contain less information per example than head-to-head comparisons, and plan to compensate with larger datasets.
-      </Prose>
-
-      <H3>Use DPO or SimPO when</H3>
-
-      <Prose>
-        You already have clean preference pairs and want the simplest possible training loop with no RL dynamics. Offline supervised training, no rollout generation, no reward model at inference time. If your dataset is already in (prompt, chosen, rejected) format and you do not need on-policy exploration, the additional complexity of GRPO or RLOO is difficult to justify.
-      </Prose>
-
-      <Heatmap
-        label="Method selection by axis"
-        rowLabels={["GRPO", "RLOO", "KTO", "DPO/SimPO"]}
-        colLabels={["Verifiable reward", "On-policy", "Binary labels", "Low memory", "Simple impl"]}
-        matrix={[
-          [1.0, 1.0, 0.0, 0.9, 0.5],
-          [0.5, 1.0, 0.0, 0.9, 0.9],
-          [0.3, 0.5, 1.0, 1.0, 0.8],
-          [0.3, 0.0, 0.0, 1.0, 1.0],
-        ]}
-        colorScale="gold"
-      />
-
-      {/* ======================================================================
-          8. WHAT SCALES AND WHAT DOESN'T
-          ====================================================================== */}
-      <H2>8. What scales and what doesn't</H2>
-
-      <H3>GRPO compute cost grows with G</H3>
-
-      <Prose>
-        GRPO's memory advantage over PPO is real — you lose the value model and its optimizer states, recovering roughly 25-30% of the total training memory footprint at large model sizes — but you pay a forward-pass cost in exchange. Every training step requires G× more response generation than a single-sample method. At G=8, this means 8 full model forward passes per prompt, each producing sequences up to several hundred or several thousand tokens, plus the reward function evaluation on each of those sequences. The generation step — not the gradient computation — becomes the training throughput bottleneck in most GRPO runs.
-      </Prose>
-
-      <Prose>
-        For tasks where reward is a fast verifier — regex match against an expected answer format, unit test execution, checking whether a final boxed number equals a ground-truth answer — this generation bottleneck is dominated by model inference speed, which can be optimized with standard techniques like speculative decoding, tensor parallelism, and flash attention. For tasks where reward requires a human-in-the-loop or a second large model as a judge, G=8 is prohibitively expensive: you cannot run a judge model 8 times per training example and maintain any reasonable training throughput. In those settings, KTO or offline DPO is the right choice.
-      </Prose>
-
-      <Prose>
-        DeepSeek-R1's production configuration used G=16 (16 responses per prompt per step), with each step processing 32 unique questions for a training batch of 512 responses. This was viable because the reward was fast: check whether the final boxed answer matches the ground truth using a simple string equality check. The mathematical reasoning task also benefited directly from diversity in the rollouts: harder problems produce higher reward variance within the group, because some approaches get the right answer and some do not, which sharpens the group-normalized advantage signal. Easier problems produce more uniform rewards within the group — all responses get the right answer, or all get it wrong — which collapses the advantages toward zero and reduces the gradient signal. GRPO's training efficiency is therefore highest on tasks in the intermediate difficulty range: hard enough that not all responses succeed, easy enough that some do. This is why GRPO was applied to mathematical reasoning benchmarks rather than, say, open-ended creative writing, where no clear verifiable reward exists.
-      </Prose>
-
-      <H3>RLOO sample efficiency and throughput</H3>
-
-      <Prose>
-        RLOO and GRPO have similar rollout costs for the same group size k — both require k full model generations per prompt per training step. The throughput advantage of RLOO over GRPO comes from the update step: RLOO applies one gradient step per rollout batch with no importance ratio clipping and no multiple mini-epochs, while GRPO typically applies 4 mini-epochs per rollout batch with clipping. This means RLOO performs fewer gradient steps per rollout batch but each rollout batch is used only once, avoiding the staleness that accumulates when you reuse rollout data for multiple epochs. The net effect on sample efficiency depends on the task: for tasks where rollouts are expensive to generate (large models, long sequences), GRPO's multiple epochs per batch make better use of each rollout, favoring GRPO's approach. For tasks where rollouts are cheap and gradient steps are the bottleneck, RLOO's single-step update is faster.
-      </Prose>
-
-      <Prose>
-        The main scaling concern for RLOO at large group size is that without importance-ratio clipping, large gradient updates are possible when the leave-one-out advantage is large. In the worst case — one response in the group receives a much higher reward than all others, producing a large positive advantage — RLOO can take a gradient step that moves the policy significantly for that one response type. This is mitigated by RLOO's lower advantage variance compared to GRPO (as shown in section 4), but it cannot be entirely eliminated without adding clipping. The standard practice is to apply global gradient norm clipping at max norm 1.0 as a safety valve, which bounds the size of any single gradient step without changing the direction of the gradient for typical (non-extreme) advantages.
-      </Prose>
-
-      <H3>KTO scales to very large datasets</H3>
-
-      <Prose>
-        KTO's dominant advantage at scale is data economics, and the argument deserves to be stated precisely. A DPO dataset requires pairs: for every prompt, you need at least one example where a human compared two responses and labeled one as preferred. That comparison requires a labeler to read both responses, hold them in working memory, and make a relative judgment — a task that takes several minutes per prompt at production quality. At $30/hour for skilled annotators, a dataset of 100K preference pairs costs on the order of $100,000–$300,000 to collect, depending on response length and annotator speed. At 1M pairs, the annotation cost alone becomes prohibitive for most organizations.
-      </Prose>
-
-      <Prose>
-        A KTO dataset requires only binary labels on individual responses. Those labels can come from production systems: thumbs-up and thumbs-down buttons, explicit feedback ratings, implicit feedback signals like whether the user accepted a suggested code completion or immediately edited it, whether the user regenerated a response after reading it, or whether a conversation continued productively after a given response. These signals are collected passively at zero marginal cost per example, at the scale of the product's user traffic. A product with a million daily active users can accumulate millions of labeled examples per month without any active labeling effort. The KTO paper demonstrates that at this scale — 100K to 1M examples — KTO matches or exceeds DPO performance on standard benchmarks, with the performance gap in DPO's favor at small dataset sizes (below 10K examples) closing as the dataset grows.
-      </Prose>
-
-      <Prose>
-        The limitation is signal quality per example. A thumbs-down tells you the user disliked a response, but not why, not what it would have taken to make it good, and not how it compared to any specific alternative. The implicit feedback signals (regeneration, abandonment, editing) are noisier still — they reflect user behavior, which is influenced by many factors beyond response quality. At large dataset scale, this noisiness averages out: if 90% of users who regenerated a response did so because it was unhelpful, the 10% who regenerated for other reasons are swamped by the majority signal. But you need enough data for this averaging to work, and the required dataset size depends on the noisiness of your label source. For cleanly collected thumbs-up / thumbs-down feedback, 10K examples is enough to be competitive with small DPO datasets; for noisy implicit signals, you may need 100K or more before the quality becomes competitive.
-      </Prose>
-
-      {/* ======================================================================
-          9. FAILURE MODES & GOTCHAS
-          ====================================================================== */}
-      <H2>9. Failure modes and gotchas</H2>
-
-      <H3>1. GRPO group size too small</H3>
-
-      <Prose>
-        The group-normalized advantage is only well-defined when the group standard deviation is non-zero. With G=2 or G=3, it is common for all responses in a group to receive the same reward (especially early in training when the policy is not yet diverse), making the std near zero. The epsilon in the denominator prevents division by zero but produces near-zero advantages — no learning signal. A minimum of G=4 is generally needed; G=8 is the most common production choice. When rewards are particularly sparse (most responses get zero reward), increase G to 16 or higher.
-      </Prose>
-
-      <H3>2. RLOO variance control</H3>
-
-      <Prose>
-        RLOO has lower advantage variance than GRPO but no importance-ratio clipping. If the gradient signal for a particular prompt is large — because one response in the group got a much higher reward than its peers — RLOO will take a correspondingly large gradient step. Apply global gradient norm clipping (max norm 1.0 is standard) and monitor per-step gradient norms. A spike in gradient norm is usually a sign that one prompt produced an unusually high-variance group, not a sign that the learning rate is too high.
-      </Prose>
-
-      <H3>3. KTO β and λ tuning</H3>
-
-      <Prose>
-        The β parameter in KTO controls how sharply the sigmoid saturates — high β means the loss becomes nearly constant once the logratio is a few units above or below <Code>z_ref</Code>. If β is too high, the gradient signal is concentrated in a narrow band near <Code>z_ref</Code> and training stalls once the policy moves away from random initialization. If β is too low, the gradient is near-linear and there is no saturation — the policy can take unbounded steps. The empirical sweet spot is 0.05–0.2; start at 0.1 and adjust based on whether the reward margin grows steadily.
-      </Prose>
-
-      <Prose>
-        The λ weights allow asymmetric pressure. Setting <Code>λ_U {">"} λ_D</Code> (e.g., 1.5 vs 1.0) emphasizes penalizing bad responses over rewarding good ones, which matches the loss-aversion intuition and tends to improve results empirically in the original paper. But a λ_U that is too large causes the policy to focus almost entirely on avoiding bad outputs, suppressing exploration of the response space.
-      </Prose>
-
-      <H3>4. KL anchor drift</H3>
-
-      <Prose>
-        All three methods use a KL penalty to keep the policy close to the reference. If the KL coefficient β is too low, the policy drifts far from the SFT anchor and begins producing responses outside the distribution the reward model was trained to score reliably — the classic reward hacking failure mode. If β is too high, the policy barely moves from the SFT checkpoint regardless of the reward signal. Unlike DPO, where the reference is fixed by construction, GRPO and RLOO update the policy actively, so KL drift is an active monitoring concern. Track the KL divergence from the reference as a training metric and set an early stopping threshold.
-      </Prose>
-
-      <H3>5. Reward hacking common to all three methods</H3>
-
-      <Prose>
-        GRPO, RLOO, and KTO all optimize against a reward signal that is an imperfect proxy for what you actually want. The policy will eventually find any exploitable pattern in the reward function. Common reward hacking modes: verbosity exploitation (longer responses score higher because the reward model conflates length with quality), formatting exploitation (using markdown headers and bullet points regardless of whether they are appropriate), sycophancy (agreeing with user premises even when they are false because agreement scores higher than correction). The mitigation is to include explicit length penalties and diversity bonuses in the reward function, and to run human evaluations periodically rather than relying only on the reward model score.
-      </Prose>
-
-      <H3>6. Binary labels hide quality gradations</H3>
-
-      <Prose>
-        KTO's binary label format collapses a continuous quality spectrum into two buckets. A mediocre response and an excellent response both receive the same "desirable" label and contribute the same sign of gradient signal. This means KTO cannot distinguish between "slightly better than average" and "clearly best possible answer" — both are thumbs up. For tasks where quality gradations matter (e.g., factual accuracy vs stylistic preference), supplement binary KTO training with periodic paired comparison evaluation to verify that the policy is improving on the intended quality axis.
-      </Prose>
-
-      <H3>7. Mixing methods without comparison</H3>
-
-      <Prose>
-        It is tempting to switch between GRPO, RLOO, and KTO within a training run — for example, starting with KTO on a large offline dataset and then switching to GRPO for online fine-tuning. This works in principle but requires careful checkpointing: the reference model used for KL penalization should be updated to the checkpoint that starts the new phase, not the original SFT checkpoint. Failing to update the reference causes the new phase to fight against an increasingly stale KL penalty that pushes the policy back toward the original SFT model rather than the KTO-tuned intermediate.
-      </Prose>
-
-      {/* ======================================================================
-          10. PRIMARY SOURCES
-          ====================================================================== */}
-      <H2>10. Primary sources</H2>
-
-      <H3>Foundational papers</H3>
-
-      <Prose>
-        <strong>Shao et al. (2024) — DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.</strong> arXiv:2402.03300. Introduces GRPO as the training algorithm for DeepSeekMath-7B. Section 4 of the paper describes the group-relative advantage formulation and demonstrates that removing the value model does not harm performance on math benchmarks. The paper also describes the math-specific pretraining data pipeline; the GRPO section is self-contained and transferable.
-      </Prose>
-
-      <Prose>
-        <strong>Ahmadian et al. (2024) — Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback in LLMs.</strong> arXiv:2402.14740. Published by Arash Ahmadian and colleagues at Cohere. Demonstrates that RLOO matches or exceeds PPO on Alpaca Eval and MT-Bench across 1B–7B model sizes, while training up to 3× faster and using 70% less memory. Section 3 derives the leave-one-out estimator and its variance properties formally.
-      </Prose>
-
-      <Prose>
-        <strong>Ethayarajh et al. (2024) — KTO: Model Alignment as Prospect Theoretic Optimization.</strong> arXiv:2402.01306. Introduces the HALO framework (human-aware losses) and the KTO objective. Section 2 connects the KTO loss to Kahneman-Tversky utility theory. Section 4 shows that KTO matches or exceeds DPO performance at 1B–30B scale with only binary signal, and demonstrates that KTO scales better as dataset size increases beyond 50K examples.
-      </Prose>
-
-      <H3>Scale validation</H3>
-
-      <Prose>
-        <strong>DeepSeek-AI (2025) — DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning.</strong> arXiv:2501.12948. Applies GRPO at full scale (DeepSeek-R1-Zero and DeepSeek-R1) with G=16 rollouts per prompt, KL coefficient 0.001, clip ratio 10, and learning rate 3e-6 over mathematical reasoning benchmarks. Documents the "aha moment" phenomenon — the emergence of extended reasoning chains without explicit chain-of-thought supervision — as a product of GRPO's on-policy exploration enabling the policy to discover novel solution strategies.
-      </Prose>
-
-      <H3>Related reading</H3>
-
-      <Prose>
-        <strong>Rafailov et al. (2023) — Direct Preference Optimization.</strong> arXiv:2305.18290. The DPO paper that GRPO/RLOO/KTO all contextualize against. Understanding the DPO reparameterization (covered in the DPO topic) makes the KTO loss structure much clearer, as KTO extends the same log-ratio implicit reward formulation to binary labels.
-      </Prose>
-
-      <Prose>
-        <strong>Stiennon et al. (2020) — Learning to Summarize with Human Feedback.</strong> arXiv:2009.01325. The original RLHF paper for language models. Establishes the pipeline structure that GRPO and RLOO are streamlining and the critique of which KTO represents an alternative data model.
-      </Prose>
-
-      {/* ======================================================================
-          11. SELF-CHECK EXERCISES
-          ====================================================================== */}
-      <section className="lesson-ending lesson-ending--practice" data-lesson-ending="practice"><H2>11. Self-check exercises</H2>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 1 — Variance of the group-normalized estimator</H3>
-
-      <Prose>
-        Derive the variance of the GRPO advantage estimator <Code>{"A_i = (r_i - mu_G) / sigma_G"}</Code> for a group of G responses. Show that when rewards are drawn i.i.d. from a distribution with variance <Code>sigma^2</Code>, the variance of the normalized advantage is always 1 regardless of sigma. Now derive the variance of the RLOO advantage <Code>{"A_i = r_i - b_i"}</Code> where <Code>{"b_i = (sum_{j!=i} r_j) / (k-1)"}</Code>. Under the same i.i.d. assumption, what is the variance as a function of k and sigma^2? For large k, which estimator has lower variance, and why does GRPO's normalization trade variance reduction for scale invariance?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 2 — When RLOO beats PPO</H3>
-
-      <Prose>
-        The Ahmadian et al. paper claims that PPO's value network contributes little in the language model RLHF setting. Describe two structural properties of the RLHF task (compared to control tasks like MuJoCo) that reduce the benefit of a learned critic. Then identify a setting where a learned critic would provide a substantial advantage over RLOO's leave-one-out baseline — what property of the reward structure or action space would make the RLOO estimator high-variance even at large k?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 3 — Converting DPO data to KTO format</H3>
-
-      <Prose>
-        You have a DPO dataset of (prompt, chosen, rejected) triples. Describe how you would convert this to KTO binary-label format. After conversion, what information has been lost? Specifically: (a) the margin information (how much better was chosen over rejected), (b) the correlation structure between chosen and rejected responses for the same prompt, (c) any information about the absolute quality of responses. How would you design an experiment to measure whether the lost information matters empirically for a given task?
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 4 — KL anchor schedule for GRPO</H3>
-
-      <Prose>
-        In DeepSeek-R1, the KL coefficient was set to 0.001 — extremely small compared to the 0.04–0.1 range common in DPO and PPO. Design a KL-coefficient schedule that starts at 0.05 and decays toward 0.001 over training. What is the rationale for starting high and decaying? What risk does a small KL coefficient create early in training, and what risk does a large KL coefficient create late in training? Write the schedule as a function of training step and describe how you would detect that the coefficient has decayed too fast.
-      </Prose></div>
-
-      <div className="lesson-exercise" data-lesson-exercise=""><H3>Exercise 5 — Detecting reward hacking in a binary-label setting</H3>
-
-      <Prose>
-        You are training a model with KTO on production thumbs-up / thumbs-down data from a customer support chatbot. After 10K steps, the reward margin is increasing and KTO loss is decreasing, but user satisfaction scores from A/B tests are flat. Describe three specific reward-hacking hypotheses consistent with these observations. For each, describe a diagnostic: what would you measure or visualize to confirm or rule out the hypothesis? Design a reward function modification that would make each form of hacking harder to exploit.
-      </Prose>
-
-      <Callout accent="gold">
-        The convergence across all six post-training methods (RLHF, DPO, SimPO, GRPO, RLOO, KTO) is that every one optimizes the same KL-constrained objective, trading off closeness to the SFT anchor against movement toward a preference signal. The algorithm you choose determines the data format you need, the computational cost per step, and whether the policy can explore on-policy during training. What it does not determine, more than you might expect, is the final quality ceiling — that is set by the quality of your preference signal and the KL budget you give the policy to use.
-      </Callout></div></section>
-
+      <Anchor id="10-primary-sources" />
+      <Sources
+        alternatives={
+          <>
+            <Prose>
+              <a href="https://rlhfbook.com/c/06-policy-gradients">RLHF Book: Policy Gradients</a>{' '}
+              develops score-function estimation and the surrounding policy-gradient family. Use it
+              to revisit why a baseline can reduce variance without changing an expectation, then
+              return to the finite-group dependence calculation here.
+            </Prose>
+            <Prose>
+              <a href="https://raw.githubusercontent.com/stanford-cs336/spring2025-lectures/main/lecture_17.py">
+                Stanford CS336, lecture 17
+              </a>{' '}
+              offers an executable teaching treatment of RL updates and implementation choices. Its
+              deliberately simplified policy is useful for isolating the estimator; the
+              causal-response programs here supply the token and masking route.
+            </Prose>
+            <Prose>
+              <a href="https://huggingface.co/docs/trl/grpo_trainer">TRL GRPO guide</a>,{' '}
+              <a href="https://huggingface.co/docs/trl/rloo_trainer">RLOO guide</a> and{' '}
+              <a href="https://huggingface.co/docs/trl/kto_trainer">KTO guide</a> explain ordinary
+              dataset and trainer APIs. Compare their current defaults with the explicitly pinned
+              configuration here before interpreting a shared algorithm name.
+            </Prose>
+          </>
+        }
+      >
+        <li>
+          <a href="https://arxiv.org/html/2402.03300v3">DeepSeekMath, sections 4.1–4.2</a>{' '}
+          introduces GRPO's group statistics, token ratios and critic-free recipe. It is the source
+          for the original construction, not a claim that our two-step run reproduces it.
+        </li>
+        <li>
+          <a href="https://arxiv.org/html/2402.14740v2">
+            Back to Basics: Revisiting REINFORCE Style Optimization for Learning from Human Feedback
+          </a>{' '}
+          studies response-level RLOO and its computation tradeoffs. Its model/task experiments are
+          separate from the exact finite variance comparisons in this lesson.
+        </li>
+        <li>
+          <a href="https://arxiv.org/html/2402.01306v3">
+            KTO: Model Alignment as Prospect Theoretic Optimization
+          </a>{' '}
+          defines the binary-label utility formulation and practical reference procedure. Read the
+          assumptions behind labels and loss weighting together with the objective.
+        </li>
+        <li>
+          <a href="https://arxiv.org/html/2503.14476v2">DAPO</a> and{' '}
+          <a href="https://arxiv.org/html/2503.20783v2">
+            Understanding R1-Zero-Like Training: A Critical Perspective
+          </a>{' '}
+          investigate group scaling, token weighting and related training choices. A reduction
+          switch alone does not reproduce either paper's complete recipe.
+        </li>
+        <li>
+          <a href="https://github.com/huggingface/trl/tree/v1.14.2/trl/trainer">
+            TRL v1.14.2 trainer source
+          </a>{' '}
+          fixes the implementation studied here, including the optional KL correction,
+          selected-score representation and KTO batch preparation.
+        </li>
+        <li>
+          <a href="https://github.com/google-research-datasets/poem-sentiment">Poem Sentiment</a>{' '}
+          supplies the annotated verses;{' '}
+          <a href="https://arxiv.org/abs/2011.02686">Sheng and Uthus (2020)</a> describe its
+          research setting. The labels are task annotations rather than universal judgments about a
+          poem's effect on every reader.
+        </li>
+        <li>
+          <a href="https://huggingface.co/EleutherAI/pythia-14m/tree/cf967c0a9a04383db6f7b1108d86b2962634b4ac">
+            Pinned Pythia-14M checkpoint
+          </a>{' '}
+          supplies the pretrained causal decoder behind the reused response-only SFT lineage.
+        </li>
+      </Sources>
+      <section className="lesson-ending lesson-ending--next" data-lesson-ending="next">
+        <H2>Next: where the feedback comes from</H2>
+        <Prose>
+          We have traced how grouped numerical rewards and individual Boolean labels change a
+          policy. The next lesson,{' '}
+          <a href="/learn/path/full-curriculum/constitutional-ai-cai?module=large-language-models">
+            Constitutional AI
+          </a>
+          , asks how explicit principles can guide critiques, revisions and preference judgments
+          that supply that feedback. Later,{' '}
+          <a href="/learn/path/full-curriculum/rl-for-reasoning-deepseek-r1-style?module=large-language-models">
+            RL for Reasoning
+          </a>{' '}
+          studies verifier rewards and reasoning outcomes, including unsuccessful small-model
+          transfer. Keep reward construction, gradient estimation and evaluation as separate
+          questions when those applications become more elaborate.
+        </Prose>
+      </section>
     </div>
   ),
 };
 
-export default grpoRlooKto;
+export default lesson;

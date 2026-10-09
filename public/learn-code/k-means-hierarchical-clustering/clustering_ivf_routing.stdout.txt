@@ -1,0 +1,5 @@
+posting database IDs: [[0], [1]]
+query / nprobe / result: [5.1] 1 {'list_ids': [1], 'ids': [1], 'squared_distances': [0.8100000000000006], 'candidate_count': 1}
+query / nprobe / result: [5.1] 2 {'list_ids': [1, 0], 'ids': [0], 'squared_distances': [0.039999999999999716], 'candidate_count': 2}
+empty nearest list: {'list_ids': [1], 'ids': [], 'squared_distances': [], 'candidate_count': 0}
+full scan: [{'list_ids': [0], 'ids': [0], 'squared_distances': [0.039999999999999716], 'candidate_count': 2}]

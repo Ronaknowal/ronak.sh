@@ -1,0 +1,1021 @@
+{
+  "figures": [
+    {
+      "id": "M01",
+      "text": "Joint probabilities\n\nX ↓ / Y →\tY0\tY1\nX0\t0.4\t0.1\nX1\t0.1\t0.4\n\nOne unit of total probability; the four paired outcomes\n\nX0 Y0 = 0.4\nX0 Y1 = 0.1\nX1 Y0 = 0.1\nX1 Y1 = 0.4\nX0 / X1 row tot"
+    },
+    {
+      "id": "M02",
+      "text": "Joint probabilities\n\nX ↓ / Y →\tY0\tY1\nX0\t0.4\t0.1\nX1\t0.1\t0.4\n\nRetain X0: (.4, .1) → row total .5 → divide each mass by .5\n\nLabel law within X0\n\nY0 = 0.8\nY1 = 0.2\n\nX1 lies outside the"
+    },
+    {
+      "id": "M03",
+      "text": "Joint probabilities\n\nX ↓ / Y →\tY0\tY1\nX0\t0.4\t0.1\nX1\t0.1\t0.4\n\nGiven X0; source probability 0.5\n\nY0 = 0.8\nY1 = 0.2\n\nX0 conditional; encountered with probability 0.5\n\nY0 = 0.8\nY1 = 0.2"
+    },
+    {
+      "id": "M04",
+      "text": "Four equally likely inputs; label is OR\n\nU,V\tY\tMass\n0,0\t0\t0.25\n0,1\t1\t0.25\n1,0\t1\t0.25\n1,1\t1\t0.25\n\nU0 group, mass .5\n\nY0 = 0.5\nY1 = 0.5\n\n.5 × 1 bit = .5 bit\n\nU1 group, mass .5\n\nY0 = "
+    },
+    {
+      "id": "M05",
+      "text": "X0\n\nX1\n\nY0\n\nY1\n\nX0 → Y1: 1\nX1 → Y0: 1\n\nSame observation; two different decisions\n\nObservation\tTrue label\tCopy guess\tInversion guess\n0\t1\t0 — wrong\t1 — correct\n1\t0\t1 — wrong\t0 — corr"
+    },
+    {
+      "id": "M06",
+      "text": "Joint probabilities\n\nX ↓ / Y →\tY0\tY1\nX0\t0.4\t0.1\nX1\t0.1\t0.4\n\nEach reference cell = its row marginal × its column marginal\n\nIndependent reference: dashed boundary, same axes\n\nX ↓ / Y"
+    },
+    {
+      "id": "M07",
+      "text": "Joint probabilities\n\nX ↓ / Y →\tY0\tY1\nX0\t0.4\t0.1\nX1\t0.1\t0.4\n\nSelected X0, Y0: masses on the same probability scale\n\n0\n1\n● joint: 0.4\n□ product: 0.25\n\nlog₂(0.4 / 0.25) = 0.6780719 bi"
+    },
+    {
+      "id": "M08",
+      "text": "Each occupied cell: weighted joint, row and column logs (bits)\n\nCell\tp log₂p\tp log₂p(X)\tp log₂p(Y)\tp log₂p(Y|X)\nX0Y0\t-0.5287712\t-0.4\t-0.4\t-0.1287712\nX0Y1\t-0.3321928\t-0.1\t-0.1\t-0.23"
+    },
+    {
+      "id": "M09",
+      "text": "Original X/Y table\n\nX ↓ / Y →\tY0\tY1\nX0\t0.4\t0.1\nX1\t0.1\t0.4\n\nTranspose: rows Y, columns X\n\nX ↓ / Y →\tX0\tX1\nY0\t0.4\t0.1\nY1\t0.1\t0.4\n\nRow order reversed: the X label moves with its cells"
+    },
+    {
+      "id": "M10",
+      "text": "-1.5\n0\n1.5\n-0.5\n0\n1.5\nLabel Y = X²\nSensor X\n\nExact moment contributions; each outcome has probability 1/3\n\nX,Y\tpX\tpXY\n−1,1\t−1/3\t−1/3\n0,0\t0\t0\n1,1\t1/3\t1/3\nSum\t0\t0"
+    },
+    {
+      "id": "M11",
+      "text": "X=−1, Y1\n\nX=0, Y0\n\nX=1, Y1\n\n|X|=0: {0}\n\n|X|=1: {−1,1}\n\nX=−1, Y1 → |X|=1: {−1,1}: 1\nX=0, Y0 → |X|=0: {0}: 1\nX=1, Y1 → |X|=1: {−1,1}: 1\n\nMagnitude group 1, mass 2/3\n\nY0 = 0\nY1 = 1\n\nX"
+    },
+    {
+      "id": "M12",
+      "text": "Actual XOR population\n\nA,B\tY\tProbability\n0,0\t0\t0.25\n0,1\t1\t0.25\n1,0\t1\t0.25\n1,1\t0\t0.25\n\nFour input-pair masses in order 00,01,10,11\n\n00:Y0 = 0.25\n01:Y1 = 0.25\n10:Y1 = 0.25\n11:Y0 = 0."
+    },
+    {
+      "id": "M13",
+      "text": "B0 context mass = 0.5\n\nNormalized joint inside B0\n\nX ↓ / Y →\tY0\tY1\nA0\t0.5\t0\nA1\t0\t0.5\n\nProduct reference inside B0\n\nX ↓ / Y →\tY0\tY1\nA0\t0.25\t0.25\nA1\t0.25\t0.25\n\n0.5 × 1 bit\n\nB1 contex"
+    },
+    {
+      "id": "M14",
+      "text": "Unsliced common-bit law X=Y=C\n\nX ↓ / Y →\tY0\tY1\nX0\t0.5\t0\nX1\t0\t0.5\n\nGiven C0 (context probability .5)\n\nX ↓ / Y →\tY0\tY1\nX0\t1\t0\nX1\t0\t0\n\nGiven C1 (context probability .5)\n\nX ↓ / Y →\tY0\t"
+    },
+    {
+      "id": "M15",
+      "text": "X0, source probability .5\n\nX0\n\nY0\n\nY1\n\nX0 → Y0: 0.9\nX0 → Y1: 0.1\n\nX0 + independent encoder draw\n\nZ0 ○\n\nZ1 ◇\n\nX0 + independent encoder draw → Z0 ○: 0.8\nX0 + independent encoder draw"
+    },
+    {
+      "id": "M16",
+      "text": "Four independent flip combinations; both X values give the same relation\n\nLabel flip\tEncoder flip\tProbability\tY vs Z\n0\t0\t0.72\tagree\n1\t0\t0.08\tdisagree\n0\t1\t0.18\tdisagree\n1\t1\t0.02\tagr"
+    },
+    {
+      "id": "M17",
+      "text": "Reveal X then Z: 0.5310044 + 0\nReveal Z then X: 0.1732536 + 0.3577508\nBoth reach the same total information about Y.\n\nInformation before and after processing (bits)\n\n0\n1\n● I(Y;X): "
+    },
+    {
+      "id": "M18",
+      "text": "X=−1, Y1\n\nX=0, Y0\n\nX=1, Y1\n\n|X|=0: {0}\n\n|X|=1: {−1,1}\n\nX=−1, Y1 → |X|=1: {−1,1}: 1\nX=0, Y0 → |X|=0: {0}: 1\nX=1, Y1 → |X|=1: {−1,1}: 1\n\nMagnitude group 1, mass 2/3\n\nY0 = 0\nY1 = 1\n\nX"
+    },
+    {
+      "id": "M19",
+      "text": "X\n\nIndependent encoder noise\n\nValid Z=q(X,noise)\n\nX → Valid Z=q(X,noise)\nIndependent encoder noise → Valid Z=q(X,noise)\n\nX\n\nEncoder noise\n\nTrue Y\n\nChanged Z=(q(X,noise),Y)\n\nX → Cha"
+    },
+    {
+      "id": "M20",
+      "text": "Binary joint: select row maxima\n\nZ\tY0\tY1\nZ0\t0.4 ← guess\t0.1\nZ1\t0.1\t0.4 ← guess\n\nCorrect mass 0.8; the other cells sum to error 0.2.\n\nThree-label joint: select row maxima\n\nZ\tY0\tY1\tY"
+    },
+    {
+      "id": "M21",
+      "text": "Observed Z and chosen label\n\nE0: chosen label is Y\n\nE1: Y is one of K−1 others\n\nObserved Z and chosen label → E0: chosen label is Y: 0.55\nObserved Z and chosen label → E1: Y is one"
+    },
+    {
+      "id": "M22",
+      "text": "X=00, mass .25\nS=0 · N=0\n\nConditional Y\n\nY0 = 0.9\nY1 = 0.1\nX=01, mass .25\nS=0 · N=1\n\nConditional Y\n\nY0 = 0.9\nY1 = 0.1\nX=10, mass .25\nS=1 · N=0\n\nConditional Y\n\nY0 = 0.1\nY1 = 0.9\nX=1"
+    },
+    {
+      "id": "M23",
+      "text": "constant: actual source-to-codeword assignment\n\nX00\n\nX01\n\nX10\n\nX11\n\nZ0, mass 1\n\nX00 → Z0, mass 1: 1\nX01 → Z0, mass 1: 1\nX10 → Z0, mass 1: 1\nX11 → Z0, mass 1: 1\n\nZ0 target mixture\n\n"
+    },
+    {
+      "id": "M24",
+      "text": "constant: R and T in bits on a common 0–2 scale\n\n0\n2\n● R = I(X;Z): 0\n□ T = I(Y;Z): 0\n\nsignal: R and T in bits on a common 0–2 scale\n\n0\n2\n● R = I(X;Z): 1\n□ T = I(Y;Z): 0.5310044\n\nnu"
+    },
+    {
+      "id": "M25",
+      "text": "0\n2.2\n0\n1\nRelevance T (bits)\nRate R (bits)\n\nCandidate identities and coordinates; curve is only the noisy-signal family\n\nCandidate / marker\tR\tT\tJ=R−βT\nconstant / circle\t0\t0\t0\nsigna"
+    },
+    {
+      "id": "M26",
+      "text": "0\n2\n0\n2\nT (bits)\nR (bits)\n\nβ=.5: J ≥ .5R ≥ 0\nβ=1: J ≥ 0; points with T=R can tie.\nInput-independent code reaches (0,0), so zero is attainable."
+    },
+    {
+      "id": "M27",
+      "text": "Four source rows; two codeword destinations\n\nX\tp(X)\tq(Z0|X)\tq(Z1|X)\tAssigned Z0\tAssigned Z1\n00\t.25\t0.8\t0.2\t0.2\t0.05\n01\t.25\t0.6\t0.4\t0.15\t0.1\n10\t.25\t0.3\t0.7\t0.075\t0.175\n11\t.25\t0.2\t0."
+    },
+    {
+      "id": "M28",
+      "text": "Z0: unnormalized assigned fragments split by Y\n\nSource\tAssigned mass\tY0 joint fragment\tY1 joint fragment\n00\t0.2\t0.18\t0.02\n01\t0.15\t0.135\t0.015\n10\t0.075\t0.0075\t0.0675\n11\t0.05\t0.005\t0"
+    },
+    {
+      "id": "M29",
+      "text": "Input X00 label law\n\nY0 = 0.9\nY1 = 0.1\n\nCurrent decoder Z0\n\nY0 = 0.6894737\nY1 = 0.3105263\n\nCurrent decoder Z1\n\nY0 = 0.3285714\nY1 = 0.6714286\n\nTrace X00: signed per-label terms, sum"
+    },
+    {
+      "id": "M30",
+      "text": "First, the small fixed row example in nats\n\nCodeword\tReference r\tCost d\texp(−2d)\tr exp(−2d)\tNormalized\n0\t.25\t0\t1\t.25\t4/7\n1\t.75\tln 2\t1/4\t.1875\t3/7\n\n.25 + .1875 = .4375; divide both "
+    },
+    {
+      "id": "M31",
+      "text": "Current t=0; this decoder prices the proposal: current q(Z|X)\n\nX\tZ0\tZ1\n00\t0.8\t0.2\n01\t0.6\t0.4\n10\t0.3\t0.7\n11\t0.2\t0.8\n\nCurrent t=0; this decoder prices the proposal: decoder Z0, margi"
+    },
+    {
+      "id": "M32",
+      "text": "One log base throughout: bits; β=3, state q₀\n\nTerm\tValue\nJ\t-0.1134922\nβ I(X;Y), fixed source constant\t1.593013\nMarginal KL, r=(.2,.8)\t0.2737322\nβ weighted decoder KL, w error .4\t0."
+    },
+    {
+      "id": "M33",
+      "text": "0\n40\n-12\n2\nObjective J (bits)\nComplete update index\nSolid: informative start\nDashed: symmetric start\nRing: selected current state\n\ninformative, after 40 updates: current q(Z|X)\n\nX\t"
+    },
+    {
+      "id": "M34",
+      "text": "Assigned mass A×K, with A=4 input rows and K=2 codewords\n\nInput\tZ0\tZ1\n00\t0.2\t0.05\n01\t0.15\t0.1\n10\t0.075\t0.175\n11\t0.05\t0.2\n\nTranspose [4,2] → [2,4] × label conditional [4,2] → joint "
+    },
+    {
+      "id": "M35",
+      "text": "Auxiliary reference r(Z)\n\nZ0 ○ = 0.5\nZ1 ◇ = 0.5\n\nAuxiliary label decoder at Z0\n\nY0 = 0.74\nY1 = 0.26\n\nAuxiliary label decoder at Z1\n\nY0 = 0.26\nY1 = 0.74\n\nRate and its upper bound; f"
+    },
+    {
+      "id": "M36",
+      "text": "Objective J and upper objective; separately fixed scale (bits)\n\n-2\n42\n● True J=R−βT: -0.241689\n□ Upper U−βL: -0.241689\n\nThe exact pieces of the objective gap\n\nTerm\tValue\nReference "
+    },
+    {
+      "id": "M37",
+      "text": "Input S,N\n\nParameters a,b,c\n\nμ=aS+bN+c\n\nInput S,N → μ=aS+bN+c\nParameters a,b,c → μ=aS+bN+c\n\nMean μ\n\nd → exp(d)=σ\n\nIndependent ε\n\nz=μ+σ ε\n\nMean μ → z=μ+σ ε\nd → exp(d)=σ → z=μ+σ ε\nIn"
+    },
+    {
+      "id": "M38",
+      "text": "Actual fixed-noise comparison batch\n\nS,N\tY\tε\tμ\tz\n0,0\t0\t-1\t-0.4\t-1.1\n0,1\t0\t0.5\t-0.1\t0.25\n1,0\t1\t0.5\t0.4\t0.75\n1,1\t0\t-1\t0.7\t0\n\nRow 0: μ=−.4 → z=−1.1 → logit=−1.41\nCE=.218447167 nats; K"
+    },
+    {
+      "id": "M39",
+      "text": "A is sensitive; B is the extra context; Z=A XOR B\n\nA\tB\tZ\tMass\n0\t0\t0\t0.25\n0\t1\t1\t0.25\n1\t0\t1\t0.25\n1\t1\t0\t0.25\n\nZ given A0\n\nZ0 = 0.5\nZ1 = 0.5\n\nZ given A1\n\nZ0 = 0.5\nZ1 = 0.5\n\nSame distri"
+    },
+    {
+      "id": "M40",
+      "text": "-2\n0\n2\n-2\n0\n2\nZ\nX\nCovariance matrix\n[[1,1],[1,1.25]]\nDeterminant\n0.25\nAt X=1: conditional mean\n1\nAt X=1: conditional SD\n0.5\n\nThe contour has Mahalanobis radius 1. The vertical segm"
+    },
+    {
+      "id": "M41",
+      "text": "X ~ N(0,1)\n\nIndependent E ~ N(0,1) → σE\n\nZ=X+σE\n\nX ~ N(0,1) → Z=X+σE\nIndependent E ~ N(0,1) → σE → Z=X+σE\n-0.5\n0\n2.5\n0\n0.918\nConditional density\nZ, conditional on X=1\n0\n4\n0\n3.5\nInf"
+    },
+    {
+      "id": "M42",
+      "text": "-0.5\n0\n2.5\n0\n0.918\nConditional density\nZ, conditional on X=1\n-0.5\n0\n2.5\n0\n0.918\nConditional density\nZ, conditional on X=1\n\nSame event: [0,1] in Z → [0,1] in Z′\nWidth × 1; density h"
+    },
+    {
+      "id": "M43",
+      "text": "-2\n0\n2\n-2\n0\n2\nZ=X\nX\n-2\n0\n2\n-2\n0\n2\nIndependent Z\nIndependent X\n\nDiagonal event: joint probability 1; product probability 0 → KL = ∞\n\nX<0, mass .5\n\nX≥0, mass .5\n\nSign 0\n\nSign 1\n\nX<0,"
+    },
+    {
+      "id": "M44",
+      "text": "Declared independent population → xorshift32 seed 831 → 100 actual paired draws\n\nFirst eight sampled rows; the remaining rows contribute to the same count table\n\nRow ID\tX\tY\n0\t0\t3\n1"
+    },
+    {
+      "id": "M45",
+      "text": "Shuffle 1: first eight receiver rows, with their actual Y donors\n\nReceiver ID\tFixed X\tOld Y\tDonor ID → new Y\n0\t0\t3\t24 → 1\n1\t2\t2\t90 → 3\n2\t2\t3\t5 → 0\n3\t2\t3\t46 → 1\n4\t2\t2\t14 → 1\n5\t2\t0\t3"
+    },
+    {
+      "id": "M46",
+      "text": "ID 1\nOne training row, Y0\nID 2\nOne training row, Y1\nID 3\nOne training row, Y0\nID 4\nOne training row, Y1\nID 5\nOne training row, Y0\nID 6\nOne training row, Y1\nID 7\nOne training row, Y"
+    },
+    {
+      "id": "M47",
+      "text": "Actual integer counts; total 80\n\nX ↓ / Y →\tY0\tY1\nX0\t30\t10\nX1\t10\t30\n\nManual route: for each nonzero cell\n(n/80) log[n×80 / (row total × column total)]\n\nManual result (nats)\n0.130812"
+    },
+    {
+      "id": "M48",
+      "text": "Species × island counts; all years, N=344\n\nSpecies\tBiscoe\tDream\tTorgersen\nAdelie\t44\t56\t52\nChinstrap\t0\t68\t0\nGentoo\t124\t0\t0\n\nBiscoe\n\nDream\n\nTorgersen\n\nBiscoe\n\nOther\n\nBiscoe → Biscoe\n"
+    },
+    {
+      "id": "M49",
+      "text": "Context X → conditional p(Y|X)\n\nIndependent marginal draw p(Y)\n\nIndependent marginal draw p(Y)\n\nIndependent marginal draw p(Y)\n\nCandidate 0: Y⁺\n\nCandidate 1: Y₁\n\nCandidate 2: Y₂\n\nC"
+    },
+    {
+      "id": "M50",
+      "text": "Population loss L₄ ≥ 0\n← subtract L₄ from ceiling log₂4 = 2 bits\nLower bound B = 2 − L₄ ≤ 2\n\nThe bound's ceiling (bits), not a ceiling for true MI\n\n0\n3\n□ log₂4: 2\n\nTrue I is unknow"
+    },
+    {
+      "id": "M51",
+      "text": "Population product-law expectation of exp(T): symbolic contributions\n\nRegion\tProbability\tCritic\tWeighted exponential\nCommon\t1−ε\tT_common\t(1−ε) exp(T_common)\nRare\tε\tT_rare, large\tε "
+    },
+    {
+      "id": "M52",
+      "text": "X=−1, Y1\n\nX=0, Y0\n\nX=1, Y1\n\n|X|=0: {0}\n\n|X|=1: {−1,1}\n\nX=−1, Y1 → |X|=1: {−1,1}: 1\nX=0, Y0 → |X|=0: {0}: 1\nX=1, Y1 → |X|=1: {−1,1}: 1\n\nMagnitude group 1, mass 2/3\n\nY0 = 0\nY1 = 1\n\nO"
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1366,
+      "font": "16px",
+      "scroll": 1366,
+      "reader": 900,
+      "figures": [
+        {
+          "id": "M01",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M02",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M03",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M04",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M05",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M06",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M07",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M08",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M09",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M10",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M11",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M12",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M13",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M14",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M15",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M16",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M17",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M18",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M19",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M20",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M21",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M22",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M23",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M24",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M25",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M26",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M27",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M28",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M29",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M30",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M31",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M32",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M33",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M34",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M35",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M36",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M37",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M38",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M39",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M40",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M41",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M42",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M43",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M44",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M45",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M46",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M47",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M48",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M49",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M50",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M51",
+          "client": 760,
+          "scroll": 760
+        },
+        {
+          "id": "M52",
+          "client": 760,
+          "scroll": 760
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "font": "16px",
+      "scroll": 399,
+      "reader": 390,
+      "figures": [
+        {
+          "id": "M01",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M02",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M03",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M04",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M05",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M06",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M07",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M08",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M09",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M10",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M11",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M12",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M13",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M14",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M15",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M16",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M17",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M18",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M19",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M20",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M21",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M22",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M23",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M24",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M25",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M26",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M27",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M28",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M29",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M30",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M31",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M32",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M33",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M34",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M35",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M36",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M37",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M38",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M39",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M40",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M41",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M42",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M43",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M44",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M45",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M46",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M47",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M48",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M49",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M50",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M51",
+          "client": 350,
+          "scroll": 350
+        },
+        {
+          "id": "M52",
+          "client": 350,
+          "scroll": 350
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "font": "32px",
+      "scroll": 797,
+      "reader": 768,
+      "figures": [
+        {
+          "id": "M01",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M02",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M03",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M04",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M05",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M06",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M07",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M08",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M09",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M10",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M11",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M12",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M13",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M14",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M15",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M16",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M17",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M18",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M19",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M20",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M21",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M22",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M23",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M24",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M25",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M26",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M27",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M28",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M29",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M30",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M31",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M32",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M33",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M34",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M35",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M36",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M37",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M38",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M39",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M40",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M41",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M42",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M43",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M44",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M45",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M46",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M47",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M48",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M49",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M50",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M51",
+          "client": 691,
+          "scroll": 691
+        },
+        {
+          "id": "M52",
+          "client": 691,
+          "scroll": 691
+        }
+      ]
+    }
+  ],
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+}

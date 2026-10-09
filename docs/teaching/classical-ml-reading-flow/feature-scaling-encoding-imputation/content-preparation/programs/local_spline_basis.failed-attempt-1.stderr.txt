@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Personal Projects and files\Portfolio\Portfolio\docs\teaching\classical-ml-reading-flow\feature-scaling-encoding-imputation\content-preparation\programs\local_spline_basis.py", line 97, in <module>
+    np.testing.assert_allclose(got, ordinary.transform(query[:, None]), atol=1e-12)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\utils\_set_output.py", line 327, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Personal Projects and files\Portfolio\Portfolio\scratch\lesson-tools\Lib\site-packages\sklearn\preprocessing\_polynomial.py", line 1182, in transform
+    XBS[
+ValueError: shape mismatch: value array of shape (2,) could not be broadcast to indexing result of shape (1,0)

@@ -1,0 +1,63 @@
+.tree-lesson .decision-tree-drawing {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 1.25rem 0;
+}
+.tree-lesson .decision-tree-surface {
+  overflow-x: auto;
+  padding: .5rem .25rem;
+  scrollbar-color: var(--accent, #efbb53) #111;
+}
+.tree-lesson .decision-tree-surface svg {
+  display: block;
+  max-width: none;
+  height: auto;
+}
+.tree-lesson .decision-tree-surface svg text {
+  font-family: inherit;
+  font-size: 16px;
+}
+.tree-lesson .decision-tree-surface:focus-visible {
+  outline: 2px solid var(--accent, #efbb53);
+  outline-offset: 3px;
+}
+.tree-lesson .decision-tree-drawing figcaption,
+.tree-lesson .decision-tree-pan-cue {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary, #bbb);
+}
+.tree-lesson .decision-tree-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+.tree-lesson .decision-tree-pair > * { min-width: 0; }
+.tree-lesson .tree-math { max-width: 100%; min-width: 0; overflow-x: auto; }
+.tree-lesson .tree-math .katex-display { text-align: left; }
+.tree-lesson .tree-math:focus-visible { outline: 2px solid var(--accent, #efbb53); outline-offset: 3px; }
+.tree-lesson p { overflow-wrap: anywhere; }
+.tree-lesson .decision-tree-select { display: flex; flex-direction: column; gap: .5rem; min-width: 0; width: 100%; }
+.tree-lesson .decision-tree-select span { overflow-wrap: anywhere; }
+.tree-lesson .decision-tree-select select { width: 100%; min-width: 0; }
+.tree-lesson .decision-tree-select select,
+.tree-lesson .decision-tree-actions button {
+  min-height: max(44px, 2.75rem);
+  background: #111;
+  color: var(--text-primary, #eee);
+  border: 1px solid #777;
+  border-radius: 3px;
+  font: inherit;
+  padding: .5rem .75rem;
+  max-width: 100%;
+}
+.tree-lesson .flow-controls :is(input, select, button) { min-height: max(44px, 2.75rem); }
+.tree-lesson .decision-tree-actions { margin: .75rem 0; }
+.tree-lesson .decision-tree-study button { min-height: 44px; padding: .5rem .75rem; background: #111; color: var(--text-primary, #eee); border: 1px solid #777; font: inherit; }
+.tree-lesson .decision-tree-actions button:focus-visible,
+.tree-lesson .decision-tree-select select:focus-visible {
+  outline: 2px solid var(--accent, #efbb53);
+  outline-offset: 3px;
+}

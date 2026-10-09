@@ -1,0 +1,139 @@
+{
+  "decision": "REQUEST_CHANGES_R1",
+  "topic": "non-negative-matrix-factorization-nmf",
+  "reviewer": "DIFFERENT entire-design reviewer; not successor author",
+  "assignedAuthorReady": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/author-ready.json",
+    "bytes": 5151,
+    "sha256": "b37eb34b446c2b567f1c6a57d4ce121ecc6d3b7629ea206a4a77eb90601e87b6"
+  },
+  "effectiveContracts": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-design.md",
+      "bytes": 24261,
+      "sha256": "9730039e51e5c10083671ed45b6e8b704db4d11c697792ed588eb84d09e6ffb7",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/visual-and-investigation-contracts.md",
+      "bytes": 28778,
+      "sha256": "04955b4c5cfe88bf4d1fe2ddb3876368edb41a8198444d5011ee9422caceff15",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/programs-and-practice.md",
+      "bytes": 33329,
+      "sha256": "d501ca6df0eef4c58da45ce1da9347be58d67f753b265b584bb72331ef519e02",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/dependencies-and-anchors.md",
+      "bytes": 10861,
+      "sha256": "8d8eb4157c1eb2ccbd77a8075e3eaa33b196670779db54f6f0ba6beb6453c5a3",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/research-and-claim-disposition.md",
+      "bytes": 13336,
+      "sha256": "a00195bc864b291e4b4e62a8db52f275dbe443601377de4507f9ca2d585f4a3a",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/author-review.md",
+      "bytes": 11008,
+      "sha256": "2412a20ffb411a263640fb84489532711c90ff384286389aba50ad72c8db9629",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-revision.md",
+      "bytes": 2588,
+      "sha256": "cc04dea3f9da7598ffe82a1a74d6d2af8f346d18bcdb597eacacbb7537289044",
+      "role": "complete-current-design-contract"
+    }
+  ],
+  "sourceIdentity": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/source-identity.json",
+    "bytes": 33627,
+    "sha256": "5a66d4e7796b9a9eb856f209aa219a450de32f33c5b992a4240de48bc075ee5e"
+  },
+  "predecessors": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/partial-checkpoint.json",
+      "bytes": 2730,
+      "sha256": "6d404276fd9a19ca63f7f24313ec84061b326c7f5e97257d4eae43b46d004ffe"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/resumed-partial-checkpoint.json",
+      "bytes": 18156,
+      "sha256": "33e4eb0e165015912088bc722ea61bf8294359956f3aaa677c6a99cda2771c72"
+    }
+  ],
+  "immutableTopicBindingsExact": 117,
+  "mutableGuidanceObservations": [
+    {
+      "expected": {
+        "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+        "bytes": 95470,
+        "sha256": "b6a100b71e60ca41fcce82ef7acf44f5be94f958aa8af11df0f4de63cf676961",
+        "role": "current-mutable-global-guidance-not-historical-conservation-claim"
+      },
+      "actual": {
+        "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+        "bytes": 97324,
+        "sha256": "cfb76de036508a3b0ee2dfd8b8479fc5501ff0070925fa73fa6fdb7b0fced37a"
+      }
+    }
+  ],
+  "protectedPairs": 28,
+  "fullScope": {
+    "sections": 19,
+    "visualJobs": 66,
+    "prospectiveCompleteRoutes": 12,
+    "solvedTasks": 24,
+    "outcomes": 9
+  },
+  "outstandingFinding": {
+    "id": "R1",
+    "file": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/programs-and-practice.md",
+    "line": 38,
+    "reason": "Explicitly disambiguate residual norm from half-loss/MSE and supply sqrt(2L) mapping"
+  },
+  "files": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/execution-and-limitations.json",
+      "bytes": 1774,
+      "sha256": "544353d77b479a8f7bd019c85b1a985b3c08f2ee880c88c2a1cb2e93e8405123"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/finalize-review.py",
+      "bytes": 13334,
+      "sha256": "9c486d47cb9a3e39611cb8103495f7b87277943bd177f15f570e44cc969d76da"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/finite-checks.json",
+      "bytes": 144994,
+      "sha256": "de8c2d578c243152b592de2750e0279d878c9d63206368e0be1621bd679f132f"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/finite-checks.py",
+      "bytes": 10130,
+      "sha256": "b9ad1f629c225604423a023d825bd3b3800e60a567953017a27723fdedf36021"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/report.md",
+      "bytes": 12947,
+      "sha256": "57fc35f7e68835a5350cfb2e70a663dfbad72141aedde52bf48c017cecdf86da"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/source-consumption.json",
+      "bytes": 25433,
+      "sha256": "23dc8d70198693ee6f14ca43bf30dd41465cedc121c9398a6f25bd0064c3dc34"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/source-only-checks.json",
+      "bytes": 20312,
+      "sha256": "6a79792cdd081d75902cb71f798704b30fec9d4392f271a1bf29ffca206e4f25"
+    }
+  ],
+  "authority": "Root alone releases corrected whole design; no central phase/publication assertion"
+}

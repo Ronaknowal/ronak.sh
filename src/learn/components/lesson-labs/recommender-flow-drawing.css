@@ -1,0 +1,5 @@
+.rec-flow-drawing { width: 100%; min-width: 48rem; display: block; fill: #eee; overflow: visible; }
+.rec-flow-drawing text { font: 18px "Space Grotesk", sans-serif; }
+.rec-flow-array-operation { display: grid; gap: 1.4rem; min-width: 0; }
+.rec-flow-array-operation > * { min-width: 0; }
+.rec-flow-array-operation .rec-flow-wire { justify-self: start; }

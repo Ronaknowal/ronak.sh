@@ -1,0 +1,16 @@
+{
+  "kind": "author narrow colour-feedback source invariants",
+  "status": "passed",
+  "checks": [
+    "SubwordStructureFigures.jsx: all drawing coordinates, paths, sizes and literal piece arrays unchanged; JSX parses",
+    "SubwordTokenizationLabs.jsx: all drawing coordinates, paths, sizes and literal piece arrays unchanged; JSX parses",
+    "Mathematical models, canonical programs/data and runtime manuscript unchanged"
+  ],
+  "sourceSha256": {
+    "src/learn/components/lesson-labs/SubwordStructureFigures.jsx": "7b1bc4a589d321f308f6270fa01313c08a89b5e821e6781f765f7b33327083ad",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "c4064cfca3dbc2e412d08fd76377708d725e5f8d325d9fd91a15a7cfd5c974cb",
+    "src/learn/components/lesson-labs/subword-structure-figures.css": "869942b72c85b17b3afebcdc0f3f1d17e26df2ef4c42427db12cdeff41f2d759",
+    "src/learn/components/lesson-labs/subword-tokenization-lessons.css": "c808c4d1d79d278e0bcf338a8370fd726573364d194b9278ad0ea65bde017d16"
+  },
+  "pending": "Fresh production paint and shared identity colour invariants"
+}

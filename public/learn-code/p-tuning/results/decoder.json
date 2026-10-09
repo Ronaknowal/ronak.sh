@@ -1,0 +1,57 @@
+{
+  "kind": "random full two-block mechanism, not pretrained quality",
+  "cases": [
+    {
+      "route": "input",
+      "parameters": 16,
+      "initial_loss": 1.6085210053921624,
+      "after_one_step": 1.6085169762413156,
+      "gradient_norm": 0.020072700546060546,
+      "logits_shape": [
+        1,
+        4,
+        11
+      ],
+      "generated_ids": [
+        [
+          1,
+          2,
+          4,
+          1,
+          5
+        ]
+      ]
+    },
+    {
+      "route": "kv",
+      "parameters": 64,
+      "initial_loss": 2.0184533875433406,
+      "after_one_step": 2.018424666540595,
+      "gradient_norm": 0.05359317466078207,
+      "logits_shape": [
+        1,
+        4,
+        11
+      ],
+      "generated_ids": [
+        [
+          1,
+          2,
+          1,
+          10,
+          6
+        ]
+      ]
+    }
+  ],
+  "zero_virtual_matches_base_exactly": true,
+  "frozen_base_exact": true,
+  "causal_future_and_padding_checks": true,
+  "infix_after_target_gradient_zero": true,
+  "base": {
+    "vocabulary": 11,
+    "width": 8,
+    "heads": 2,
+    "layers": 2
+  }
+}

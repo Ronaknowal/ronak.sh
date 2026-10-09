@@ -1,0 +1,234 @@
+{
+  "schema": "same-composed-whole-content-correction-closure/v1",
+  "status": "PASS_COMPOSED_WHOLE_CONTENT_SAME_R1_R2_R3_CLOSURE",
+  "at": "2026-10-09T09:13:27.982429+00:00",
+  "reviewer": "/root/tsne_content_review",
+  "topicId": "t-sne-umap-manifold-learning",
+  "module": "classical-ml",
+  "position": 17,
+  "independence": {
+    "originalDifferentReviewer": true,
+    "authoredTeachingContent": false,
+    "originalAuthor": "/root/survival_content_independent_review",
+    "successorAuthor": "/root/ica_design_independent_review",
+    "correctionAuthor": "/root/tsne_consolidated_content_correction",
+    "authorSelfReviewUsedAsIndependence": false
+  },
+  "reviewReport": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/same-correction-closure/review.md",
+    "bytes": 16940,
+    "sha256": "344d9b18e42bc2dd31ab4e6fea41f1e32efa30624472138b85442c548022ff84"
+  },
+  "correctionSubmission": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-ready.json",
+    "bytes": 7336,
+    "sha256": "76a3db64bd01e30fc35517701108f37d4cb23b227e6db811ffea32020104c545"
+  },
+  "currentSelectedSources": {
+    "predecessor": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/author-ready.json",
+      "bytes": 6092,
+      "sha256": "1832c1bc6800da4ee0a8e1cf6008485c85bfd0d7ac59c0219cc17d69470b16a7"
+    },
+    "wholeDifferentReview": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review-packet-source-bound.json",
+      "bytes": 7366,
+      "sha256": "bb5f13a8ab1478b38ed9f6155effd2a746ec064923ce4e6db01fc009b6d1858a"
+    },
+    "acceptedDesign": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/design-accepted-root.json",
+      "bytes": 58519,
+      "sha256": "a718b0e8d1bb0de830ee9d4254c708211e3826dee91ec7a3f5e485de7fa3e83f"
+    },
+    "manuscript": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/reading-flow-manuscript.md",
+      "bytes": 138332,
+      "sha256": "8d1c32dc7cf8de49b99fd6198671927c52196d7ac5714dd0ec90c70eebfbbec5"
+    },
+    "specifications": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/visual-and-investigation-specifications.md",
+      "bytes": 45697,
+      "sha256": "07aee732555d0a30e519fa7feb1687d58837d4b232640a337b0e500de5a217b3"
+    },
+    "contentMap": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/content-map.json",
+      "bytes": 25152,
+      "sha256": "5fd95e3e7e82523a100d15558a813d728346916772c99fae288408ad92a3367c"
+    },
+    "sourceAndStreamIndex": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/code-presentation-index.json",
+      "bytes": 19011,
+      "sha256": "c145124371947e4e6db3b0dd980099a00db64012d1a44b2688d72c8aa84bfb13"
+    },
+    "fileIndex": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/file-index.json",
+      "bytes": 16604,
+      "sha256": "8db1deee1ea7228840793fe60153be8b7823e4504c04c66c04e4fc6518b12b7e"
+    },
+    "completeProgramBundle": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/program-bundle.json",
+      "bytes": 15754,
+      "sha256": "db45cd5aa540cb964fe03cac791d62405dda56471a7691f30d3465f6d3ebc95d"
+    },
+    "assembly": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/assemble-code.py",
+      "bytes": 12501,
+      "sha256": "f0a63b0689d5d063f17211a341e50c3d6c53096bbb5e50dd48bca4a651df95de"
+    },
+    "setup": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/setup-and-files.md",
+      "bytes": 7557,
+      "sha256": "0b11d995f5822d5f5e0182db03248bbad23f8030acc0f2adcc2dd3515635d72c"
+    },
+    "apiAndResources": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/current-api-and-resource-notes.md",
+      "bytes": 5219,
+      "sha256": "f13c791133b5ca15397dc965308bed3482c5bcd5547872b7e93d94b8b8f88ed3"
+    },
+    "authorHandoff": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/author-reading-and-handoff.md",
+      "bytes": 12500,
+      "sha256": "382bec71a8dfddce9a95b27ed8f950322963621f11f4e6693295d33085ec975a"
+    },
+    "exactDelta": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/exact-source-delta.json",
+      "bytes": 33939,
+      "sha256": "b60aec4a68a02cc29f18e29d8508a4c20d482dda3542d600baa1e204bc2fd5f3"
+    },
+    "scopedNumericalChecks": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/gaussian-row-check.json",
+      "bytes": 4918,
+      "sha256": "9a47d19c829d71cf2f883ce27439686f4b30def8d6e6b1646b55c711bab20b72"
+    },
+    "sourceCheck": {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/review-correction/source-binding-check.json",
+      "bytes": 16489,
+      "sha256": "7972fcf10a8c2e4609de7b7429feea0ca02bfc01ef08cc5fc03f44a246989982"
+    }
+  },
+  "originalWholeDifferentReport": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review.md",
+    "bytes": 25541,
+    "sha256": "f00133e3d9ccc4aee4231d1d102c2f1739bb3278047a5a18580039970aa115a8"
+  },
+  "originalWholeDifferentPacket": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/review-packet-source-bound.json",
+    "bytes": 7366,
+    "sha256": "bb5f13a8ab1478b38ed9f6155effd2a746ec064923ce4e6db01fc009b6d1858a"
+  },
+  "originalWholeSourceCheck": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/source-binding-check.json",
+    "bytes": 229904,
+    "sha256": "1215133e6867101ed6dee69ec8ab4f2cf275dbe8bdd31bdd3bebbdb47cf9b4c3"
+  },
+  "originalIndependentCounterexample": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/iteration-limit-arithmetic.json",
+    "bytes": 1991,
+    "sha256": "c119ea17b93a961ddbcb69bdadbbbf8c5858c64ca297832a9bdb6ecb5fb5199d"
+  },
+  "currentIndependentSourceAndProtocolCheck": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/same-correction-closure/source-and-protocol-check.json",
+    "bytes": 304145,
+    "sha256": "b9a41d0bfc90bd1ce0fe7bcea1f8dbfb07f6e99663b51ac32907889a7fe7c716"
+  },
+  "currentGMMEditorialReference": {
+    "path": "docs/teaching/classical-ml-reading-flow/gaussian-mixture-models-gmm-em-algorithm/publication/root-normal-integration-acceptance.json",
+    "bytes": 51312,
+    "sha256": "4ee308034f85990a6f28a0ec9f77466b4922b2ec44a84057945544936c8525e4"
+  },
+  "wholeReadingComposition": {
+    "priorCompleteHumanReadingRetained": true,
+    "sections": 13,
+    "drawingContracts": 45,
+    "investigationContracts": 12,
+    "completeSources": 15,
+    "completeOutputs": 15,
+    "solvedTasks": 19,
+    "projectSetupResourcesHandoff": true,
+    "freshAffectedReading": "Complete correction packet and five-file delta; entire current Gaussian source/check/receipt; continuous sections4-5 and7-8 with full sources/streams; affected section9 walk/topology; complete sections12-13; current specs L7 and all12 investigation rows; complete setup/API note/handoff/assembly/index/author receipt/retained freeze list.",
+    "compositionValidatedByFiveExactInverses": true,
+    "freshWholeSuccessorHumanReadingClaimed": false,
+    "hashesUsedAsHumanReading": false,
+    "observedLearnerStudy": false
+  },
+  "requiredFindings": [
+    {
+      "id": "R1",
+      "status": "CLOSED",
+      "basis": "Nine source-resolving current local learner routes, actual membership/imports and target heading anchors; correct KMeans anchor retained."
+    },
+    {
+      "id": "R2",
+      "status": "CLOSED",
+      "basis": "Full current source reading and exact three solver edits; evaluated-beta return/positive budget; conserved non-solver AST; read and source-bound13 author callable cases, not replayed; all displays/payloads synchronized; explicit executed predecessors."
+    },
+    {
+      "id": "R3",
+      "status": "CLOSED_AT_CONTENT_CONTRACT_BOUNDARY",
+      "basis": "Full current authored state contract plus one new independent scalar trace: expanding M13, selection, C=-10, zero-rate exact no-op, positive simultaneous update and centering, Reset. Native/runtime behavior remains prospective."
+    }
+  ],
+  "residualRequiredFindings": [],
+  "advisories": [
+    {
+      "id": "A1",
+      "status": "ADDRESSED",
+      "basis": "Local learner voice/directive/provenance cleanup preserves qualifications."
+    },
+    {
+      "id": "A2",
+      "status": "ADDRESSED",
+      "basis": "Current GMM normal acceptance source checked separately; historical private qualification retained without new prerequisite."
+    },
+    {
+      "id": "A3",
+      "status": "ADDRESSED_AT_CONTENT_CONTRACT_BOUNDARY",
+      "basis": "Distinct further-learning and technical-reference Reader roles specified; actual rendering deferred."
+    }
+  ],
+  "checks": {
+    "freshDescriptorChecks": 811,
+    "priorChecksConserved": 623,
+    "acceptedInputs": 118,
+    "protectedOriginalPairs": 40,
+    "savedAuthorGuards": 272,
+    "wholeDisplays": 30,
+    "completePayloads": 35,
+    "exactInverseFiles": 5,
+    "unchangedFences": 30,
+    "retainedFirstFreezeMetadataCopies": 7,
+    "authorBoundedSolverCasesReadNotReexecuted": 13,
+    "independentNewScalarL7Trace": true,
+    "historical41WitnessesReplayed": false,
+    "historicalTenMainsReplayed": false,
+    "historicalFitsReplayed": false,
+    "authorCheckerRunByReviewer": false,
+    "lessonImportsByReviewer": 0,
+    "nativeControlsVerified": false,
+    "browserPaintVerified": false,
+    "buildRun": false,
+    "bestPossibleDiagramClaim": false,
+    "identityChecksPending": false
+  },
+  "qualifications": [
+    "This receipt validates exact source identities and bounded conservation; semantic reading and SAME decisions are recorded separately.",
+    "Current Gaussian source was read in full; exact author callable source/13 results were inspected and reused rather than rerun.",
+    "Recorded Gaussian and classical main streams stay bound to their explicitly executed predecessors; no current-main execution attribution.",
+    "Whole prior human reading composes with affected current reading and five exact inverse files; hashes are not a fresh whole human reading.",
+    "Native control bounds, focus, pointer/keyboard behavior, reset history, nonfinite display and actual paint remain phase-two checks.",
+    "No paper/API/library access or missing-fit qualification was broadened by this local correction.",
+    "Review report preserves historical disk/tool limitations and successful UTF-8 retry; no teaching-source changes or cleanup by reviewer.",
+    "Current GMM status/header/public-source declaration checked, not a new full GMM acceptance review.",
+    "All ordinary source-only APIs, missing-fit evidence, access/version and metadata-only video qualifications persist."
+  ],
+  "phasePromoted": false,
+  "rootContentAcceptance": false,
+  "runtimeReleased": false,
+  "publicationApproved": false,
+  "next": "Root assesses exact composed content closure and alone accepts/releases private runtime. Implementer uses current correction and explicit source/stream roles, then verifies actual model/source/native state and paint, including full L7 trace.",
+  "freezeScript": {
+    "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/content-authoring/independent-whole-content-review/same-correction-closure/freeze-review.py",
+    "bytes": 7076,
+    "sha256": "c6c29292961e6283d474893c68ba4eabbee0b56d9a0ff0967db704557d091b29"
+  }
+}

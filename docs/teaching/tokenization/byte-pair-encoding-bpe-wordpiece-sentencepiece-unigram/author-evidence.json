@@ -1,0 +1,137 @@
+{
+  "topicId": "byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram",
+  "date": "2026-09-28",
+  "author": "subword-tokenization author",
+  "status": "author checks complete; independent and final browser integration are separate records",
+  "sourceSha256": {
+    "src/learn/data/topics/tokenization.jsx": "710dbe5ca2a3a07fc1712525d7242ff79cec005685d69b444ee057d67ee5a4f5",
+    "src/learn/data/subword-tokenization-models.js": "9c55a5761c845651a204c5b757bc4e40e0e87f97c80bb8e768225c34f4fbfc19",
+    "src/learn/components/lesson-labs/SubwordTokenizationLabs.jsx": "ff86da2b70beb758e735908171151ea5bc5b9d7f187e412137b6fb22884cccec",
+    "src/learn/components/lesson-labs/subword-tokenization-lessons.css": "014ec7750380802226aeb974bdc3f5bd7933e2b2b0545fd4558cc1218dbed775",
+    "src/learn/data/curriculum/blueprints/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram.js": "5bc61ad38a12ecb602fd069ccbaa01f53d51508688e0e741e5c86312b91ccfb4",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-heldout.txt": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-provenance.json": "58047ab67319ff4ad1511508bf8f3cd96afa40ac129e070454e9203b76733741",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-train.txt": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/subword_tokenizers.py": "b873a7edf720a2e4f6c3e69223c5aedba4b76591364789c6cbbf5e6d66c242f4",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/tokenizer_libraries.py": "febb16e52cd5a0a5dec8039db1aab6cff85bcf6c3306b57bbb98300887cbdfc3",
+    "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/unigram_model.py": "5a3ea845833594ca5c7aaed1fb4d63ef92c0ed7d70d2af35436505e985b95d1d",
+    "scripts/verify-subword-tokenization.py": "6f412678dcccc3603fc6813655a688b67f8487fc6566daba539804d635792489",
+    "scripts/verify-subword-tokenization-models.mjs": "30f07a6e3f845232c098fb90d93c4d53a668f07578dbf224be9c6019b1779698",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/design.md": "ac5e6cfab157d4051dc14c1ce3071be77ac246b3e5c2d93c37284e68348276a7"
+  },
+  "evidenceSha256": {
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/author-numerical.json": "985bc89a52ac672f1cf30dbc659fc08adf6ac8dbc89c80ad021d4e6d8b99f10f",
+    "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/native-output.json": "cf3d91aabd588d69198bba42f8484240e08b66133304ca8bac8a66926c8b220e"
+  },
+  "executed": [
+    {
+      "command": "python -B public/learn-code/<topic-id>/subword_tokenizers.py",
+      "result": "classic merges, query encoding, normalized decoding and WordPiece outputs passed"
+    },
+    {
+      "command": "python -B public/learn-code/<topic-id>/unigram_model.py",
+      "result": "exact small path mass/counts, sampling and pruned training completed"
+    },
+    {
+      "command": "python -B public/learn-code/<topic-id>/tokenizer_libraries.py",
+      "result": "matched BPE, WordPiece and Unigram inference; five actual corpus fits and persistence checks; final unknown-span output saved"
+    },
+    {
+      "command": "python -B scripts/verify-subword-tokenization.py",
+      "checks": {
+        "incremental_training_vs_full_recount": 45,
+        "rank_heap_vs_list_oracle": 2790,
+        "overlap_and_unicode_ties": 3,
+        "wordpiece_native_inference": 201,
+        "unigram_exhaustive_mass_counts_viterbi_native": 744,
+        "exact_em_monotonicity": 12,
+        "log_space_underflow_case": 1,
+        "changed_practice_exact_fraction": 1,
+        "seeded_posterior_sampling": 1,
+        "pruning_budget_and_alphabet": 1
+      },
+      "sampling": {
+        "draws": 2000,
+        "whole_piece": 1854
+      }
+    },
+    {
+      "command": "node scripts/verify-subword-tokenization-models.mjs",
+      "result": {
+        "pythonParityCases": 48,
+        "queryComparisons": 141,
+        "probabilityTicks": 99,
+        "edgeCases": [
+          "overlap",
+          "Unicode ties",
+          "empty corpus/query",
+          "missing continuation",
+          "no whole piece"
+        ]
+      }
+    }
+  ],
+  "environment": {
+    "pythonExecutable": "scratch/lesson-tools/Scripts/python.exe",
+    "pythonVersion": "3.12",
+    "pythonPath": [
+      "scratch/training-frameworks-runtime",
+      "scratch/tokenization-runtime/packages"
+    ],
+    "tokenizers": "0.23.2",
+    "sentencepiece": "0.2.2",
+    "hardware": "CPU"
+  },
+  "learningExperience": {
+    "type": "author heuristic assessment; no beginner participants",
+    "record": "docs/teaching/tokenization/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/design.md#author-learning-experience-assessment",
+    "desktopStatesViewed": [
+      "same-spelling token strips",
+      "pipeline",
+      "BPE default",
+      "WordPiece default",
+      "Unigram default",
+      "Unigram whole-piece absent"
+    ],
+    "renderingFixes": [
+      "split long math into separate steps with local containment",
+      "preserve token position indices beneath pipeline chips",
+      "increase mobile lattice label font to remain readable at 320px"
+    ],
+    "finalResponsiveClosure": "root integration record"
+  },
+  "limits": [
+    "Tiny exact algorithm fixtures and a public-domain held-out sample are not a downstream neural-quality study.",
+    "Unigram pruning is a bounded exact-loss teaching implementation, not a reproduction of SentencePiece trainer heuristics.",
+    "WordPiece training is explicitly a reconstructed count-ratio proxy; native inference uses the same vocabulary.",
+    "No industrial throughput ranking, GPU run or human learning study is claimed."
+  ],
+  "finalIntegrationOwner": "root",
+  "packagingFollowup": {
+    "date": "2026-09-28",
+    "change": "CRLF to LF only in the two distributed Alice text files; provenance hashes updated.",
+    "checks": [
+      {
+        "path": "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-train.txt",
+        "beforeSha256": "724d3e82838a65c7a5a319f4b39bcf0ed9354679b65341f0f99be9b23da673a5",
+        "afterSha256": "93a207cd30b9e898896ede017e83dd1dd61056a24edbdafc8a5a81d2113514ed",
+        "paragraphs": 18,
+        "parsedParagraphsUnchanged": true,
+        "bytesBefore": 8715,
+        "bytesAfter": 8697
+      },
+      {
+        "path": "public/learn-code/byte-pair-encoding-bpe-wordpiece-sentencepiece-unigram/alice-heldout.txt",
+        "beforeSha256": "cd962aa922f74e49e565e0b26c4ef3fd3ff798bd7b12eccfdc5875247d0a2e43",
+        "afterSha256": "80b2a646a8645f3913838ccca8289c824159ed5db2c5ab427ed0600d640878db",
+        "paragraphs": 6,
+        "parsedParagraphsUnchanged": true,
+        "bytesBefore": 1961,
+        "bytesAfter": 1955
+      }
+    ],
+    "executionReuseReason": "tokenizer_libraries.py reads both files with read_text(...).splitlines(); the exact input paragraph lists were compared before/after and are equal. No native retraining was repeated for this line-ending-only change. The recorded native-output.json remains the actual earlier execution.",
+    "nativeOutputUnchanged": true
+  },
+  "finalProseClarification": "Clarified that standalone apply_bpe builds its O(M) rank map on each call; O(n log n) refers to heap work. High-throughput callers should cache model ranks. Executable sources and evidence unchanged."
+}

@@ -1,0 +1,11 @@
+OOF: [0.555556, 0.777778, 0.222222, 0.444444, 0.222222, 0.777778]
+full-fit: [0.75, 0.75, 0.25, 0.25, 0.5, 0.5]
+own target edit: [0.555556, 0.222222, 0.222222, 0.222222, 0.222222, 0.555556]
+alpha0 unseen: [1.0, 1.0]
+group OOF: [0.25, 0.25, 0.75, 0.75, 0.5, 0.5]
+time retained rows/targets: [2, 3, 4, 5] [0.0, 0.0, 1.0, 0.0]
+time encodings: [1.0, 1.0, 0.5, 0.5] coverage: [0, 0, 1, 1, 1, 1]
+refused: full OOF contract requires each row exactly once
+refused: validation row occurs more than once
+refused: same group appears on both sides
+refused: nonempty labels and one finite target per row

@@ -1,0 +1,18 @@
+{
+  "title": "Public NHEFS teaching subset",
+  "collector": "US CDC National Center for Health Statistics",
+  "subsetSource": "Miguel Hernan and James Robins, Causal Inference: What If",
+  "csvURL": "https://miguelhernan.org/s/nhefs.csv",
+  "codebookURL": "https://miguelhernan.org/s/NHEFS_Codebook.xls",
+  "collectionURL": "https://wwwn.cdc.gov/nchs/nhanes/nhefs/",
+  "reuseStatementURL": "https://www.cdc.gov/nchs/products/citations.htm",
+  "reuseBasis": "NCHS states its material is public domain unless otherwise stated; the author identifies this file as a subset of these public-use data. Attribute collector and subset source. No textbook PDF or figure is redistributed.",
+  "sha256": "6726827bfcebf7324d786211a517d0515532c2405cc71c5a1fab68d7116ea16c",
+  "bytes": 374288,
+  "rows": 1629,
+  "columns": 64,
+  "transformation": "CSV retained byte-for-byte. Example selects qsmk, wt82_71 and nine baseline covariates, fits only finite outcomes, and standardizes over all rows. No linkage or enrichment.",
+  "targetQualification": "Selected available teaching cohort, not full original NHEFS or nationally representative target. Working iid record bootstrap is not survey-design inference.",
+  "analysis": "../programs/causal_nhefs_standardization.py",
+  "result": "../nhefs-standardization-result-r1.json"
+}

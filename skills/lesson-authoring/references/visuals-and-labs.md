@@ -4,7 +4,9 @@ Part of [$lesson-authoring](../SKILL.md). Repository paths below are relative to
 
 - [5. Visuals and labs: no fixed count](#5-visuals-and-labs-no-fixed-count)
 - [Let the concept determine the visual form](#let-the-concept-determine-the-visual-form)
+- [Colour carries conceptual meaning](#colour-carries-conceptual-meaning)
 - [Inline diagrams are part of the explanation](#inline-diagrams-are-part-of-the-explanation)
+- [Foundational visual coverage](#foundational-visual-coverage)
 - [Choose the representation for the hurdle](#choose-the-representation-for-the-hurdle)
 - [Graphs and simulations need traceable evidence](#graphs-and-simulations-need-traceable-evidence)
 - [Visual layout is a separate completion check](#visual-layout-is-a-separate-completion-check)
@@ -23,6 +25,30 @@ For an interactive lab, let the learner act on meaningful entities or parameters
 
 Keep connected views consistent with the same model state. Make it clear when edited input is applied; labels, counts, highlights and outputs must describe the active state. Use controls named for the action when helpful, such as merging a pair or advancing one instruction. Do not require unrestricted editing, animation or a full simulator when a smaller investigation teaches the question. Share useful controls and rendering primitives, but adapt or build a representation when the available generic panel obscures the concept. Record the learning reason for that choice in the brief; novelty alone is not a reason.
 
+### Colour carries conceptual meaning
+
+Use colour to reveal the relationships a learner needs to follow. Preserve useful colour correspondence when simplifying a diagram; cleaner composition does not mean monochrome marks or uniformly muted hues. Keep the project's surfaces and controls consistent, and use its permitted semantic colours on the actual data marks. Neutral surrounding structure helps those distinctions remain visible.
+
+Choose what colour means before choosing hues: **identity, group membership, role, state or magnitude**. When the question is correspondence, the same entity keeps its hue as it moves between input, intermediate and output views. A broad input/learned/computed palette is useful when those roles are the question; it obscures the mechanism when the learner must distinguish several pieces, channels, classes or branches within one role. Labels and grouping can explain roles while hue follows identity. A new merged entity may receive a new hue; show its labelled inputs so the change has an understandable cause.
+
+Adapt the encoding to the concept. These are useful patterns, not required layouts or one universal palette:
+
+| Topic or visual task | What colour helps the learner follow |
+| --- | --- |
+| Tokens, text and byte sequences | Repeated pieces through segmentation, dictionary lookup and ID rows; a glyph group through its scalars and bytes. Keep boundaries and literal labels visible. Explain when hues follow byte values instead of glyph groups. |
+| Data structures, graphs and references | The same item or object across array, list, tree and reference views; aliases point to the same coloured object. Use a separate outline or arrow style for the active operation or traversal state. |
+| Neural networks, tensors and attention | Corresponding channels, heads, branches or slices across grids and transformations. Preserve labelled contributions through concatenation or combination. If cell fill encodes attention weight or activation magnitude, show identity with labels, borders or aligned axes instead. |
+| Mathematics and linear algebra | A vector, operand or contribution across an expression, geometric picture and matching matrix row/column. Distinguish the contributions being compared; use a declared quantitative scale when colour instead represents sign or magnitude. |
+| Statistics and machine learning | Class or category identity across samples, decision regions and result labels; method or dataset identity across comparable plots. Probabilities, densities and uncertainty need their own labelled scales rather than arbitrary category hues. |
+| Systems, programming and concurrency | A process, resource, message or object across lanes, events and state transitions. Mark blocked/running/error state separately when the reader still needs to track its identity. |
+| Grouping, allocation and comparisons | A source group, corpus, language or series through membership, counts, shares and outcomes. Keep the reference clearly identified; a neutral baseline can reduce competition with the coloured comparison. |
+
+- **Make the important distinctions visible.** Use a small readable set of hues, with enough contrast between the entities the worked example actually contrasts. Choose those key mappings deliberately; a hash or palette index is not a substitute for inspecting them. Dense views may colour groups or a few traced items instead of assigning every cell a different hue. Repeated palette colours do not imply identical IDs, similarity, rank or quality; literal labels remain authoritative.
+- **Keep correspondence stable.** Bind hues to the represented identity or category rather than its current array position. Reordering, filtering, stepping and reset should preserve that mapping where the identity is unchanged. When a transformation changes identities or groups, show and explain the new correspondence. Follow the module's declared meanings across connected views; introduce a different encoding explicitly when the question changes.
+- **Separate identity from interaction and state.** An active pair, selected row or current edge can use an outline, underline, line weight or pattern without replacing its identity hue. Keep keyboard focus identifiable. Missing, disabled and error states need explicit labels and appropriate shapes or patterns; colour alone cannot communicate them.
+- **Treat quantities as quantities.** Use a labelled sequential scale for ordered magnitudes, or a diverging scale around a meaningful reference such as zero. Keep comparable views on the same declared scale and retain values where exact inspection matters. Category hues do not encode numeric distance, and an attractive colour ramp supplies no evidence for the values.
+- **Explain and inspect the encoding.** Label marks at first use; add a compact legend or nearby explanation when the mapping cannot be labelled directly. Check actual painted HTML/SVG marks and text, not just palette declarations: inherited styles can break correspondence. Inspect desktop, phone and relevant edited/selected/null states, including whether the diagram remains understandable without distinguishing hues. Repair demonstrated mapping or legibility failures rather than starting an unrelated redesign.
+
 ### Inline diagrams are part of the explanation
 
 Plan visual support throughout the reading flow, including compact, immediately visible diagrams between paragraphs. Do not treat completing the interactive labs as completing visual teaching. An inline diagram helps the learner see a structure, correspondence, contrast or transformation while reading; an interactive investigation helps them explore how it changes. Use either or both when their teaching jobs warrant it.
@@ -35,7 +61,109 @@ A static diagram's design contract is its learner question, concrete example/sta
 
 Review the lesson in ordinary reading order without operating every lab. Check that important structures and contrasts are visible where introduced, and that their meaning does not depend on reconstructing several code blocks or discovering a later lab state. A useful, already visible lab illustration can satisfy this need; do not duplicate it automatically. Record any substantive visual gap and its proposed placement. Counts of labs, code examples, tables or colored boxes are not evidence that this reading pass succeeds. Keep tables when they explain a comparison well, and omit diagrams that merely decorate or restate a clear sentence.
 
-Use consistent labels and restrained color to track identity or correspondence, with text/position/shape cues as well as color. Preserve readable labels, correct grouping and logical order on narrow screens. A row of boxes containing paragraph summaries is not a mechanism diagram unless its arrangement actually reveals the relationship being taught.
+Use consistent labels and purposeful colour to track identity or correspondence, with text/position/shape cues as well as colour. Restraint applies to competing emphasis and decoration, not to removing useful distinctions. Preserve readable labels, correct grouping and logical order on narrow screens. A row of boxes containing paragraph summaries is not a mechanism diagram unless its arrangement actually reveals the relationship being taught.
+
+### Foundational visual coverage
+
+Before selecting sophisticated plots or labs, identify the basic object the learner
+must be able to picture. Inspect the canonical teaching reference's actual figures,
+not only its section list. Which views establish its parts, connections, operation
+and composition? Compare those teaching jobs with the current lesson; adopt or
+improve the useful representation in original wording and graphics. Do not copy a
+source's errors or dated recommendations. A familiar view may be the clearest one.
+
+For a structural or computational object, make these correspondences visible at
+the relevant first use:
+
+- **Anatomy:** label the actual parts, inputs, parameters, intermediate values and
+  outputs. A plot of behavior does not show where those parts are.
+- **Operation:** trace a small complete case through the connections. Map the
+  labels and numbers to the equation and later to code; explain arrow direction,
+  grouping and what is computed versus learned or supplied.
+- **Composition:** show how the object connects to other objects when the lesson
+  first builds the larger system. Reuse labels and expose where an operation sits;
+  do not require the learner to infer the structure from a matrix or API call.
+- **Contrast:** when a component's purpose is unclear, hold the surrounding system
+  fixed and show what changes when it is removed, replaced or adjusted. Include a
+  case that actually reveals its effect, and explain cases with no change.
+
+These are learning questions, not four compulsory diagrams. One well-designed
+view may answer several; a topic without a composite object needs a different
+representation. Document each applicable job's actual figure/section or why an
+existing alternative is equally legible. In content-only mode, write the concrete
+labels, example values, layout, placement and interpretation into the visual spec.
+Do not defer discovery of the basic representation to phase two.
+
+For example, a neuron introduction needs the incoming inputs, weighted connections,
+bias, sum, activation and output explicitly mapped to `z = Σwᵢxᵢ + b`, `a = φ(z)`;
+then the same unit inside a network, showing hidden versus output roles. Activation
+curves, pixel templates and tables add valuable views but do not by themselves
+supply that anatomy or network wiring. A normalization lesson may instead need
+tensor groups and its insertion in a computation; a heap needs parent/child
+structure and its array correspondence. Choose the subject's form, not a generic
+series of prose cards.
+
+At review, ask the reader to point to each named part and trace one example using
+only what is already visible in reading order. Check the same at later structural
+transitions. Missing basic anatomy/composition is a material teaching gap even if
+the lesson has many working labs and passes every numerical test. Place the repair
+beside the concept, not in an appendix or behind a disclosure.
+
+### Figures and labs belong to the reading flow
+
+A figure or lab is a paragraph of the explanation drawn as a picture, not an insert
+the reader has to visit and come back from. The user found that boxed figures with
+their own titles, eyebrow banners and control panels made revised lessons feel like a
+sequence of separate cards. Present every teaching visual so the page reads as one
+continuous explanation:
+
+- **Picture first, then the walk-through.** Within a section the usual order is: the
+  question in one or two sentences → a one-line lead naming what to look at → the
+  figure → prose that walks through its labelled parts in the order the eye follows
+  them → the name, equation or rule → code → a changed case. Do not describe a
+  structure in several paragraphs and show it afterwards. A figure may come later
+  only when the reader must first meet a value it displays.
+- **No card chrome.** Draw figures on the page background at reading width, without
+  a border, filled panel, separate heading or "figure" banner. Replace a bold figure
+  title with the lead sentence before it; put interpretation in ordinary prose after
+  it. Keep visible framing only for code blocks, practice (exercises, hints,
+  solutions) and the shared opening/ending components. A short in-body check
+  question is a plain sentence plus its answer disclosure, not a styled card.
+- **A figure is a drawing, not formatted text.** Show the objects in space: tensors
+  as grids or stacked slabs whose sizes are drawn to scale, a kernel placed on the
+  cells it reads, widths that visibly grow and shrink, branches side by side,
+  connections as drawn lines, matrices as cell grids or heat maps, spectra as bars.
+  A column of sentences in bordered boxes joined by "↓" arrows is prose with
+  decoration; it does not count as the figure for a concept, however well it is
+  labelled. Use 1D strips to make arithmetic readable, but also draw the real
+  object (for images, channels × height × width) at least once so the reader sees
+  what the strips abbreviate. When the field has a canonical picture of the idea
+  (the figure every textbook or the original paper draws), draw your own version
+  of it unless there is a recorded reason not to.
+- **Self-explaining drawings.** Label every part, value, arrow and colour where it
+  appears, at its first use, so the reader never has to decode a symbol from a
+  legend or remember it from an earlier section. Use a legend only when labels
+  genuinely cannot fit. Show one idea per figure; build a complex structure in
+  successive figures that each add one part, reusing the same layout so the new
+  part is the only change. Keep shapes, colours, arrow styles and positions
+  consistent with the module's visual vocabulary.
+- **Labs are figures that respond.** Put the controls directly under the visual they
+  change, as one compact row, and state the lab's question in the prose just before
+  it. Offer only the controls that answer that question: usually one to three, each
+  acting on something the prose has just taught. Drop decorative presets, duplicate
+  numeric and slider inputs, mode selectors for ideas taught later, and tables that
+  repeat what the drawing already shows. Report the result as one live sentence or a
+  small labelled readout beside the visual, and say what to try next in the
+  following prose. Split a crowded lab into separate small figures placed where each
+  question arises. No banner, eyebrow or panel styling distinguishes a lab from the
+  surrounding text.
+- **Consistency across the module.** One drawing of the same object (a neuron, a
+  layer, a block) recurs everywhere it is used, with the same labels and colours, so
+  a returning reader recognises it. Each module keeps a short visual vocabulary
+  (colour meanings, node shapes, arrow styles for forward and backward, notation)
+  in its repository record; authors follow it and reviewers check against it.
+  That vocabulary records stable meanings and how local encodings are introduced;
+  it does not require all channels, classes or pieces to share one role hue.
 
 ### Choose the representation for the hurdle
 

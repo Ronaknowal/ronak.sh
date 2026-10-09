@@ -1,0 +1,254 @@
+{
+  "ids": [
+    1
+  ],
+  "log_p": -6.338594078203183,
+  "log_q": null,
+  "steps": [
+    {
+      "position": 0,
+      "prefix_ids": [
+        27,
+        22,
+        0,
+        6,
+        165,
+        454,
+        324,
+        0,
+        201,
+        6,
+        406,
+        0,
+        331,
+        189
+      ],
+      "selected_id": 1,
+      "log_p": -6.338594078203183,
+      "log_q": null,
+      "entropy_q": null,
+      "model_entropy": 6.225634765142773,
+      "support": 546
+    }
+  ],
+  "stop_reason": "eos",
+  "beam": {
+    "selected": {
+      "ids": [
+        1
+      ],
+      "log_p": -6.338594078203183,
+      "ancestry": [
+        0
+      ]
+    },
+    "selected_status": "eos",
+    "search_stop_reason": "retained_frontier_bound",
+    "finished": [
+      {
+        "ids": [
+          1
+        ],
+        "log_p": -6.338594078203183,
+        "ancestry": [
+          0
+        ]
+      },
+      {
+        "ids": [
+          474,
+          1
+        ],
+        "log_p": -10.27507738120149,
+        "ancestry": [
+          0,
+          0
+        ]
+      }
+    ],
+    "capped": [],
+    "trace": [
+      {
+        "depth": 1,
+        "scored_cells": 546,
+        "candidate_count": 546,
+        "kept": [
+          {
+            "ids": [
+              474
+            ],
+            "log_p": -3.29407164047976,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              0
+            ],
+            "log_p": -6.338594078203183,
+            "ancestry": [
+              0
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -6.338594078203183,
+            "ancestry": [
+              0
+            ]
+          }
+        ],
+        "pruned_count": 543,
+        "alive_upper_bound": -3.29407164047976
+      },
+      {
+        "depth": 2,
+        "scored_cells": 1092,
+        "candidate_count": 1092,
+        "kept": [
+          {
+            "ids": [
+              474,
+              209
+            ],
+            "log_p": -6.012397504160174,
+            "ancestry": [
+              0,
+              0
+            ]
+          },
+          {
+            "ids": [
+              474,
+              183
+            ],
+            "log_p": -6.343251748477163,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -6.338594078203183,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              474,
+              1
+            ],
+            "log_p": -10.27507738120149,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "pruned_count": 1088,
+        "alive_upper_bound": -6.012397504160174
+      },
+      {
+        "depth": 3,
+        "scored_cells": 1092,
+        "candidate_count": 1092,
+        "kept": [
+          {
+            "ids": [
+              474,
+              183,
+              342
+            ],
+            "log_p": -9.316144530061331,
+            "ancestry": [
+              0,
+              0,
+              1
+            ]
+          },
+          {
+            "ids": [
+              474,
+              209,
+              157
+            ],
+            "log_p": -9.569105185165627,
+            "ancestry": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -6.338594078203183,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              474,
+              1
+            ],
+            "log_p": -10.27507738120149,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "pruned_count": 1088,
+        "alive_upper_bound": -9.316144530061331
+      }
+    ],
+    "alpha": 0,
+    "width": 2
+  },
+  "run_id": "heldout-line-4-beam2-None",
+  "model": "smoothed_word_bigram",
+  "prompt": {
+    "id": "heldout-line-4",
+    "source": "After a while, finding that nothing more happened, she decided on going into the garden at once; but, alas for poor Alice! when she got to the door, she found she had forgotten the little golden key, and when she went back to the table for it, she found she could not possibly reach it: she could see it quite plainly through the glass, and she tried her best to climb up one of the legs of the table, but it was too slippery; and when she had tired herself out with trying, the poor little thing sat down and cried.",
+    "source_sha256": "179e653e8b36db2e311ff662a39aeb7316a3149a621fc3619515c859c829c305",
+    "prompt": "After a while, finding that nothing more happened, she decided on going"
+  },
+  "prompt_ids": [
+    27,
+    22,
+    0,
+    6,
+    165,
+    454,
+    324,
+    0,
+    201,
+    6,
+    406,
+    0,
+    331,
+    189
+  ],
+  "method": {
+    "name": "beam2",
+    "beam": 2
+  },
+  "seed": null,
+  "text": "",
+  "wall_seconds": 0.004436899995198473
+}

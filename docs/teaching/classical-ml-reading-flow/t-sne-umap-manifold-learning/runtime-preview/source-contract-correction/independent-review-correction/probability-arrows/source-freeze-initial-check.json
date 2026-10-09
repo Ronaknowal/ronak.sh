@@ -1,0 +1,10 @@
+{
+  "purpose": "Retain failed preparation assertion; no product source mutation or build occurred. Exact delta patches were already emitted before the assertion.",
+  "actualToolResult": {
+    "chunk_id": "be3de4",
+    "wall_time_seconds": 2.1822413,
+    "exit_code": 1,
+    "original_token_count": 94,
+    "output": "Traceback (most recent call last):\r\n  File \"C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\t-sne-umap-manifold-learning\\runtime-preview\\source-contract-correction\\independent-review-correction\\probability-arrows\\freeze-source.py\", line 53, in <module>\r\n    assert len(shared) == 29\r\n           ^^^^^^^^^^^^^^^^^\r\nAssertionError\r\n"
+  }
+}

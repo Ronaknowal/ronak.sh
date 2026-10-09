@@ -1,0 +1,254 @@
+{
+  "ids": [
+    1
+  ],
+  "log_p": -7.56320059235807,
+  "log_q": null,
+  "steps": [
+    {
+      "position": 0,
+      "prefix_ids": [
+        40,
+        422,
+        238,
+        506,
+        235,
+        9,
+        406,
+        506,
+        326,
+        334,
+        0,
+        234,
+        212,
+        6
+      ],
+      "selected_id": 1,
+      "log_p": -7.56320059235807,
+      "log_q": null,
+      "entropy_q": null,
+      "model_entropy": 4.695534192249843,
+      "support": 546
+    }
+  ],
+  "stop_reason": "eos",
+  "beam": {
+    "selected": {
+      "ids": [
+        1
+      ],
+      "log_p": -7.56320059235807,
+      "ancestry": [
+        0
+      ]
+    },
+    "selected_status": "eos",
+    "search_stop_reason": "retained_frontier_bound",
+    "finished": [
+      {
+        "ids": [
+          1
+        ],
+        "log_p": -7.56320059235807,
+        "ancestry": [
+          0
+        ]
+      },
+      {
+        "ids": [
+          40,
+          1
+        ],
+        "log_p": -9.054205907566992,
+        "ancestry": [
+          0,
+          0
+        ]
+      }
+    ],
+    "capped": [],
+    "trace": [
+      {
+        "depth": 1,
+        "scored_cells": 546,
+        "candidate_count": 546,
+        "kept": [
+          {
+            "ids": [
+              40
+            ],
+            "log_p": -2.1207828818362775,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              80
+            ],
+            "log_p": -2.853670391045737,
+            "ancestry": [
+              0
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -7.56320059235807,
+            "ancestry": [
+              0
+            ]
+          }
+        ],
+        "pruned_count": 543,
+        "alive_upper_bound": -2.1207828818362775
+      },
+      {
+        "depth": 2,
+        "scored_cells": 1092,
+        "candidate_count": 1092,
+        "kept": [
+          {
+            "ids": [
+              40,
+              406
+            ],
+            "log_p": -5.6202187030818465,
+            "ancestry": [
+              0,
+              0
+            ]
+          },
+          {
+            "ids": [
+              80,
+              238
+            ],
+            "log_p": -5.993363353521236,
+            "ancestry": [
+              0,
+              1
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -7.56320059235807,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              40,
+              1
+            ],
+            "log_p": -9.054205907566992,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "pruned_count": 1088,
+        "alive_upper_bound": -5.6202187030818465
+      },
+      {
+        "depth": 3,
+        "scored_cells": 1092,
+        "candidate_count": 1092,
+        "kept": [
+          {
+            "ids": [
+              40,
+              406,
+              506
+            ],
+            "log_p": -8.206775289131137,
+            "ancestry": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "ids": [
+              80,
+              238,
+              6
+            ],
+            "log_p": -8.454172451730177,
+            "ancestry": [
+              0,
+              1,
+              1
+            ]
+          }
+        ],
+        "finished": [
+          {
+            "ids": [
+              1
+            ],
+            "log_p": -7.56320059235807,
+            "ancestry": [
+              0
+            ]
+          },
+          {
+            "ids": [
+              40,
+              1
+            ],
+            "log_p": -9.054205907566992,
+            "ancestry": [
+              0,
+              0
+            ]
+          }
+        ],
+        "pruned_count": 1088,
+        "alive_upper_bound": -8.206775289131137
+      }
+    ],
+    "alpha": 0,
+    "width": 2
+  },
+  "run_id": "heldout-line-3-beam2-None",
+  "model": "smoothed_word_bigram",
+  "prompt": {
+    "id": "heldout-line-3",
+    "source": "And so it was indeed: she was now only ten inches high, and her face brightened up at the thought that she was now the right size for going through the little door into that lovely garden. First, however, she waited for a few minutes to see if she was going to shrink any further: she felt a little nervous about this; \u201cfor it might end, you know,\u201d said Alice to herself, \u201cin my going out altogether, like a candle. I wonder what I should be like then?\u201d And she tried to fancy what the flame of a candle is like after the candle is blown out, for she could not remember ever having seen such a thing.",
+    "source_sha256": "cb30de2fbae7f272d1aa54d0c2b292ba4b2c6abc8474a68350394a06ff5d4cbb",
+    "prompt": "And so it was indeed: she was now only ten inches high,"
+  },
+  "prompt_ids": [
+    40,
+    422,
+    238,
+    506,
+    235,
+    9,
+    406,
+    506,
+    326,
+    334,
+    0,
+    234,
+    212,
+    6
+  ],
+  "method": {
+    "name": "beam2",
+    "beam": 2
+  },
+  "seed": null,
+  "text": "",
+  "wall_seconds": 0.004338900005677715
+}

@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "changed": [
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private/src/learn/components/lesson-labs/InformationBottleneckDrawings.jsx",
+        "sha256": "701e4a471bb11e2b193869e07fb3d24a9dbe2bf0a0222a1f7991306ea0da7ff7",
+        "bytes": 13722,
+        "frozen": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-frozen-r1/private/src/learn/components/lesson-labs/InformationBottleneckDrawings.jsx"
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private/src/learn/components/lesson-labs/InformationBottleneckDrawings.jsx",
+        "sha256": "5e42a63e63097682762c84027e18f64ab01eaea4bea4cd015582f0b94f895799",
+        "bytes": 14111
+      }
+    },
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private/src/learn/components/lesson-labs/InformationGeometry.jsx",
+        "sha256": "a2ad577a566cad3a0f5914647678f6f0d4e97182ca1eb3cece65b7754366f3b5",
+        "bytes": 6341,
+        "frozen": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-frozen-r1/private/src/learn/components/lesson-labs/InformationGeometry.jsx"
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private/src/learn/components/lesson-labs/InformationGeometry.jsx",
+        "sha256": "255c47fb100a8a51eabaf780c74385025355d941911223d267d444280e5b2458",
+        "bytes": 6391
+      }
+    },
+    {
+      "before": {
+        "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private/src/learn/components/lesson-labs/InformationVariationalDrawings.jsx",
+        "sha256": "6c784eb9810d40f9abf11975cb7105cf676707f14690bb8417648b2fe918d8ec",
+        "bytes": 11551,
+        "frozen": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-frozen-r1/private/src/learn/components/lesson-labs/InformationVariationalDrawings.jsx"
+      },
+      "after": {
+        "path": "docs/teaching/math-foundations-reading-flow/mutual-information-information-bottleneck/runtime-private/src/learn/components/lesson-labs/InformationVariationalDrawings.jsx",
+        "sha256": "9c9900c1b0ec0e0f55c5eb232e498a12e593740ff428c5ea9d2728715e1ac605",
+        "bytes": 13753
+      }
+    }
+  ],
+  "unchangedPrivate": 45,
+  "unchangedShared": 516,
+  "contentBindings": 134,
+  "scope": "Presentation-only three-owner correction; all models, 34 assets, complete projection and shared consumer sources unchanged. Plot defaults still call number(value,3); only Density supplies custom tick formatters.",
+  "noScientificReplay": true
+}

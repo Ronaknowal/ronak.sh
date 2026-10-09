@@ -1,0 +1,56 @@
+{
+  "topic": "agent-workflow-frameworks-crewai-autogen-langgraph",
+  "checked_at": "2026-09-28T05:57:16.653814+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "environment_target": "scratch\\llm-workflows-runtime",
+  "scope": "CPU/offline public programs and explicit boundary checks; no hosted generation or GPU engine",
+  "outputs": {
+    "durable_workflow.py": {
+      "recovered": {
+        "stage": "complete",
+        "proposal": {
+          "tool": "increment_counter",
+          "amount": 1
+        },
+        "receipt": {
+          "key": "ticket-1:apply:v1",
+          "counter_after": 1
+        }
+      },
+      "counter": 1
+    },
+    "langgraph_workflow.py": {
+      "recovered": {
+        "run_id": "ticket-1",
+        "proposal": {
+          "tool": "increment_counter",
+          "amount": 1
+        },
+        "approved": true,
+        "receipt": {
+          "key": "ticket-1:apply:v1",
+          "counter_after": 1
+        }
+      },
+      "counter": 1,
+      "rejected": {
+        "run_id": "ticket-2",
+        "proposal": {
+          "tool": "increment_counter",
+          "amount": 1
+        },
+        "approved": false
+      }
+    },
+    "boundary_checks": {
+      "same_key_replayed": true,
+      "changed_payload_rejected": true,
+      "invalid_tool_and_boolean_rejected": true
+    }
+  },
+  "sources": {
+    "public/learn-code/agent-workflow-frameworks-crewai-autogen-langgraph/durable_workflow.py": "0b95b1f7d7a9ad53f1c60dfbea139980787e5857cdd087144a1963c334e3e679",
+    "public/learn-code/agent-workflow-frameworks-crewai-autogen-langgraph/langgraph_workflow.py": "cad85c136644f6668cd201aecb3aa627c094faf72b11a128d90d454e60a198a8",
+    "scripts/verify-llm-framework-native.py": "2d0ec60dda412dba9af069e7ce45a6cb0ecd459b1edac89a6cdf70c6490b87f3"
+  }
+}

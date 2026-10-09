@@ -1,0 +1,21 @@
+# Author design pass and continuation boundary
+
+9 October2026. Author `/root/tsne_consolidated_content_correction`, not the independent reviewer. This pass composes the complete authored proposal with the actual baseline reading recorded in `intake-and-source-checks.json`; it does not claim a fresh whole manuscript, an implemented diagram review or a native viewing pass.
+
+The entire proposed reading order was assessed against the existing eleven-section reader and specialist scope. The first object is the row/feature/target/mask/state matrix, then actual metric/category/donor operations, then fitted composition and the retained real experiment. New nonlinear/basis/encoding/conditional/uncertainty mechanisms have the same picture→operation→notation→complete-code ladder. The current nine tasks, three whole programme/stdout pairs and numerical qualifications remain explicit conservation inputs. All sixteen proposed programme owners have callable/state, ordinary-use, edge and cost contracts; filenames/counts alone are not considered completed content.
+
+The author pass found and resolved these design issues before freezing:
+
+- A crowded target-encoding investigation would have required four simultaneous controls. Smoothing and OOF dependency editing are separate L11a/L11b investigations; pooling and sensitivity are separate L14a/L14b investigations. The main document uses family labels, while the detailed contracts list the sixteen actual activities.
+- An ambiguous choice between reusing an uninspected KMeans helper and writing a bin routine was removed. P10 owns a complete bounded one-dimensional Lloyd routine, with declared tie/empty/cap rules and qualified ordinary comparison.
+- New mechanism contracts now state the actual power likelihood/Jacobian, duplicate quantile and constant-column conventions, spline knot/row fixture, and normal-model posterior updates. This prevents a later implementation from inventing those scientific conventions from a title.
+- Historical LF input and actual CRLF download roles are separate. The old CSV/science verifiers' LF assertions and obsolete gate/programme counts are preserved as historical support, not current acceptance commands.
+- Numerical state, query edits and view domains are kept distinct. D04 cannot cap circle radii; D18/P1 uses3+3 coordinates and the real experiment explicitly changes to4+3; missing estimates preserve their recording mask; source row309 remains a file position.
+
+The binding script performs source/JSON/CSV checks only: all30 current/original pairs unchanged; selected revision4 row and absent registry row unchanged; three literal programme/stream pairs equal the historical native receipt; current344 CSV rows match saved observation cells; the86 saved transformed rows equal the preserved numerical JSON; the CRLF→LF byte relation is exact; drawing/lab/programme/practice identities and table structure are consistent. These are not fresh fits, model accuracy checks, a whole diagram review or independent acceptance.
+
+Actual harness history is retained: the inventory CLI failed with EPERM on an unrelated scratch source before selected-topic output (session96847, exit1); the first new binding parser failed at a semicolon inside a quoted literal (tool1e12b6, exit1, before writing packets), then was corrected to use JSONDecoder.raw_decode. The corrected source-binding command exited0 (tool2eee09). No cache installation, scientific replay, build/public copying or native acquisition occurred. The current task's failed external paper/image fetches are recorded in the research document.
+
+Pending: DIFFERENT entire design review and consolidated findings; Root design release/latest revision; full manuscript/complete executable source-output-practice-file content and content review; whole runtime/native review and normal integration. This source-bound design does not advance those phases. Native reference pixels/author windows were unavailable/unviewed in this task; no video was watched. No observed beginner comprehension, best-possible-diagram or universal coverage claim.
+
+Next author task is the separate t-SNE runtime correction identified by Root; this Feature20 proposal remains at its design gate. The frozen t-SNE source/build/evidence is not mutated by this owner.

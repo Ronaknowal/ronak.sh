@@ -1,0 +1,34 @@
+{
+  "reviewer": "DIFFERENT entire NMF19 design reviewer",
+  "executions": [
+    {
+      "source": "finite-checks.py",
+      "command": "python docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/finite-checks.py",
+      "exitCode": 0,
+      "chunk": "152510",
+      "checks": 205,
+      "passed": 204,
+      "resultStatus": "FAIL_RETAINED",
+      "soleFailedObservation": "Byte equality of explicitly mutable global handoff;117 immutable topic/dependency inputs exact",
+      "resultSha256": "de8c2d578c243152b592de2750e0279d878c9d63206368e0be1621bd679f132f",
+      "executionCount": 1
+    },
+    {
+      "source": "finalize-review.py",
+      "command": "python docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/finalize-review.py",
+      "exitCode": 0,
+      "chunk": "270aea",
+      "checks": 9,
+      "passed": 9,
+      "resultStatus": "PASS_SOURCE_ONLY",
+      "scope": "Supplemental source/decoded-stream/data mapping and immutable review freeze; no arithmetic replay",
+      "executionCount": 1
+    }
+  ],
+  "scientificFits": 0,
+  "historicalScientificMainsOrCheckers": 0,
+  "nativePaint": false,
+  "writes": "Only this topic independent-design-review; frozen original report/results/packet remain unchanged",
+  "decision": "REQUEST_CHANGES_R1",
+  "releaseAuthority": "Root"
+}

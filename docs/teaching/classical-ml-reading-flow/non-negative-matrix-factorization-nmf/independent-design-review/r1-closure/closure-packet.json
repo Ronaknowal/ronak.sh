@@ -1,0 +1,130 @@
+{
+  "decision": "R1_CLOSED",
+  "originalWholeReview": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/review-packet.json",
+    "bytes": 6346,
+    "sha256": "3f494b29fb11604dd1d950e28d1f552b5afc0f8dde5f094b1b0006caf841d86c"
+  },
+  "originalWholeReport": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/report.md",
+    "bytes": 12947,
+    "sha256": "57fc35f7e68835a5350cfb2e70a663dfbad72141aedde52bf48c017cecdf86da"
+  },
+  "correctionPacket": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-correction-r1/author-ready.json",
+    "bytes": 5861,
+    "sha256": "2fda10a6148c0847903b62927a2ba05f6f7a8334e915233177b50205abd89733"
+  },
+  "correctionSource": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-correction-r1/prepare.cjs",
+    "bytes": 4894,
+    "sha256": "5ef4a27baf4b43523ca8e56fac47e70bf6a0698ae69b94e94e8913208b585de2"
+  },
+  "correctedContract": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-correction-r1/programs-and-practice.md",
+    "bytes": 33754,
+    "sha256": "62968b0407c7dc143cb7f30f4b78607e97a52056e5f52340ec154f4fbcfc8a8f"
+  },
+  "delta": {
+    "finding": "R1",
+    "source": {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/programs-and-practice.md",
+      "bytes": 33329,
+      "sha256": "d501ca6df0eef4c58da45ce1da9347be58d67f753b265b584bb72331ef519e02"
+    },
+    "successor": {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-correction-r1/programs-and-practice.md",
+      "bytes": 33754,
+      "sha256": "62968b0407c7dc143cb7f30f4b78607e97a52056e5f52340ec154f4fbcfc8a8f"
+    },
+    "before": "Half-square objective is `0.5*sum((X-WH)**2)`; MSE divides twice this by observed cell count, while a norm is its square root.",
+    "after": "For unweighted observed residuals R=X\u2212WH, the half-square objective is L=`0.5*sum(R**2)`. With N the number of observed cells, squared Frobenius norm is 2L, Frobenius norm is \u221a(2L), MSE is 2L/N, and RMSE is \u221a(2L/N). The public Frobenius reconstruction diagnostic maps to \u221a(2L), never L or \u221aL. Refuse an all-missing quality reduction (N=0); fractional masks require a separately stated weight/denominator convention, and non-Frobenius divergence diagnostics retain their independently checked mapping rather than inheriting these conversions.",
+    "inverseExact": true
+  },
+  "effectiveContracts": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-design.md",
+      "bytes": 24261,
+      "sha256": "9730039e51e5c10083671ed45b6e8b704db4d11c697792ed588eb84d09e6ffb7",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/visual-and-investigation-contracts.md",
+      "bytes": 28778,
+      "sha256": "04955b4c5cfe88bf4d1fe2ddb3876368edb41a8198444d5011ee9422caceff15",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-correction-r1/programs-and-practice.md",
+      "bytes": 33754,
+      "sha256": "62968b0407c7dc143cb7f30f4b78607e97a52056e5f52340ec154f4fbcfc8a8f",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/dependencies-and-anchors.md",
+      "bytes": 10861,
+      "sha256": "8d8eb4157c1eb2ccbd77a8075e3eaa33b196670779db54f6f0ba6beb6453c5a3",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/research-and-claim-disposition.md",
+      "bytes": 13336,
+      "sha256": "a00195bc864b291e4b4e62a8db52f275dbe443601377de4507f9ca2d585f4a3a",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/author-review.md",
+      "bytes": 11008,
+      "sha256": "2412a20ffb411a263640fb84489532711c90ff384286389aba50ad72c8db9629",
+      "role": "complete-current-design-contract"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/reading-flow-revision.md",
+      "bytes": 2588,
+      "sha256": "cc04dea3f9da7598ffe82a1a74d6d2af8f346d18bcdb597eacacbb7537289044",
+      "role": "complete-current-design-contract"
+    }
+  ],
+  "immutableInputs": 117,
+  "originalProtectedPairs": 28,
+  "preservedPriorReviewFiles": 9,
+  "mutableGuidanceObservations": [
+    {
+      "expected": {
+        "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+        "bytes": 95470,
+        "sha256": "b6a100b71e60ca41fcce82ef7acf44f5be94f958aa8af11df0f4de63cf676961",
+        "role": "current-mutable-global-guidance-not-historical-conservation-claim"
+      },
+      "actual": {
+        "path": "docs/teaching/LESSON-AUTHORING-HANDOFF.md",
+        "bytes": 97324,
+        "sha256": "cfb76de036508a3b0ee2dfd8b8479fc5501ff0070925fa73fa6fdb7b0fced37a"
+      },
+      "qualification": "Mutable guidance observation only, excluded from historical byte equality"
+    }
+  ],
+  "checks": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/r1-closure/checks.json",
+    "bytes": 87353,
+    "sha256": "1ffa0220260c7243a8319cf965a8d2e7baba18a35211411c518b5444cd169831"
+  },
+  "consumption": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/r1-closure/source-consumption.json",
+    "bytes": 1971,
+    "sha256": "2faf04cca4aa8e444e7fb28f94ca6b462b4b65ca2157bdaa1f0da1732d69dfc3"
+  },
+  "report": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/r1-closure/report.md",
+    "bytes": 3494,
+    "sha256": "59b89e890b34fa16d2c9593eaece34422826bf821f83a4154e8236e3a1740947"
+  },
+  "checkSource": {
+    "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/independent-design-review/r1-closure/check-closure.py",
+    "bytes": 7919,
+    "sha256": "f4b9769828ddfb87dfb714085ec43f0cb701cee1ac4d9af64aca23bad67391b8"
+  },
+  "outstandingFindings": [],
+  "rootAuthority": "Root alone performs whole corrected-design intake/release before manuscript/runtime",
+  "limits": "Closure of R1 only; original whole review and all execution/reading limitations remain retained"
+}

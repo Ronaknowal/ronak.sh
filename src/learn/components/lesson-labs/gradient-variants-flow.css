@@ -1,0 +1,35 @@
+.optimizer-lesson { overflow-wrap: anywhere; }
+.gv-figure { container-type: inline-size; margin: 2rem 0; padding: 0; border: 0; background: none; min-width: 0; }
+.gv-title { font-weight: 650; margin-bottom: .9rem; }
+.gv-caption,.gv-domain { line-height: 1.75; margin: .75rem 0; }
+.gv-region-owner,.gv-object { min-width: 0; max-width: 100%; }
+.gv-scroll { min-width: 0; max-width: 100%; overflow: auto; scrollbar-gutter: stable; }
+.gv-scroll:focus-visible { outline: 2px solid #dba849; outline-offset: 3px; }
+.gv-scroll-hint { font-size: .85em; line-height: 1.6; margin: .5rem 0; }
+.gv-svg { display: block; height: auto; max-width: none; overflow: visible; color: #dfd7c4; }
+.gv-label { font: 16px ui-monospace, Consolas, monospace; fill: currentColor; }
+.gv-axis { stroke: #716e62; stroke-width: 1; }
+.gv-table { width: max-content; min-width: 100%; border-collapse: collapse; font-size: .86em; }
+.gv-table th,.gv-table td { padding: .6rem .8rem; text-align: right; white-space: nowrap; border-bottom: 1px solid #413e35; }
+.gv-table th:first-child,.gv-table td:first-child { text-align: left; }
+.gv-table caption { text-align: left; padding-block: .5rem; }
+.gv-vertical { max-height: 26rem; }
+.gv-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.5rem; }
+.gv-lab { margin: 2rem 0; min-width: 0; container-type: inline-size; }
+.gv-controls { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .8rem 1.5rem; align-items: start; margin: 1rem 0 1.5rem; }
+.gv-controls label { display: grid; gap: .35rem; min-width: 0; line-height: 1.55; }
+.gv-controls input:not([type=checkbox]),.gv-controls select { min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; }
+.gv-controls button { width: fit-content; max-width: 100%; padding: .5rem .8rem; }
+.gv-controls :is(input,select,button) { font: inherit; color: #dfd7c4; accent-color: #dba849; }
+.gv-controls :is(select,button,input[type=number]) { min-height: 2.75rem; background: #171713; border: 1px solid #5a574c; border-radius: 3px; padding: .4rem .6rem; }
+.gv-controls :is(button,select) { cursor: pointer; }
+.gv-controls :disabled { opacity: .6; cursor: default; }
+.gv-controls input:focus-visible,.gv-controls select:focus-visible,.gv-controls button:focus-visible { outline: 2px solid #dba849; outline-offset: 3px; }
+.gv-checks { display: flex; flex-wrap: wrap; gap: .8rem; }
+.gv-checks label { display: flex; align-items: center; gap: .4rem; }
+.gv-error { color: #e6a698; }
+.gv-fixed { font-size: .9em; line-height: 1.7; }
+.gv-equation { margin-block: 1rem; }
+@container (max-width: 83rem) { .gv-pair { grid-template-columns: 1fr; } }
+@container (max-width: 30rem) { .gv-controls { grid-template-columns: 1fr; } }
+@media(max-width:760px) { .gv-pair,.gv-controls { grid-template-columns: 1fr; } }

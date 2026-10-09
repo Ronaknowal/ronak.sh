@@ -1,0 +1,383 @@
+{
+  "status": "LOCAL_PRECISION_SUCCESSOR_PENDING_SAME_REVIEWER_CLOSURE",
+  "author": "/root/nmf_initialization_author",
+  "created": "2026-10-09T12:32:23.854Z",
+  "report": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\independent-content-review\\sections-twelve-sixteen-review.md",
+    "bytes": 13599,
+    "sha256": "e3d1e2c850a036448b705275001d74f755547ebc5d4dd562d16cb397e053f035"
+  },
+  "corrected": [
+    {
+      "section": 12,
+      "original": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve-template.md",
+        "bytes": 14700,
+        "sha256": "f7f5b58c28498a1216ec5773d252041f4684f183d8fec40f40cbe48777f5912d"
+      },
+      "successor": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-twelve-template.md",
+        "bytes": 15217,
+        "sha256": "fcbfa79d616fb02f67854fc24adc20f931369600f02b447dfc0142de02eafaba"
+      },
+      "replacements": [
+        [
+          "Row contribution/reconstruction work is O(kd), selected contribution alone O(d); requested all-row reconstruction is O(nkd), and its n×d output is itself a storage cost.",
+          "For already validated factors, reconstructing one row takes O(kd), while multiplying one selected amount by its length-d pattern takes O(d) arithmetic and O(d) output. The delivered row_contribution wrapper first validates the whole k×d dictionary and the k-entry amount row through nonnegative_table and real_table: that copies/scans O(kd+k) input cells. Its end-to-end time is therefore O(kd+k), with O(kd+k+d) temporary/output storage, rather than O(d). This safety cost avoids trusting caller state; an internal validated kernel can reuse validated factors without those copies. Requested all-row reconstruction takes O(nkd) arithmetic, and its n×d output is itself a storage cost."
+        ]
+      ]
+    },
+    {
+      "section": 12,
+      "original": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve.md",
+        "bytes": 38148,
+        "sha256": "9dabc45eb456003155826f78e429e36dd223e8d7845688e25846561dba6820dc"
+      },
+      "successor": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-twelve.md",
+        "bytes": 38665,
+        "sha256": "ee7a9ad333470c5e396f6422b1b0fa148f5b61bd25254504f8c39d4f9f7df2b6"
+      },
+      "replacements": [
+        [
+          "Row contribution/reconstruction work is O(kd), selected contribution alone O(d); requested all-row reconstruction is O(nkd), and its n×d output is itself a storage cost.",
+          "For already validated factors, reconstructing one row takes O(kd), while multiplying one selected amount by its length-d pattern takes O(d) arithmetic and O(d) output. The delivered row_contribution wrapper first validates the whole k×d dictionary and the k-entry amount row through nonnegative_table and real_table: that copies/scans O(kd+k) input cells. Its end-to-end time is therefore O(kd+k), with O(kd+k+d) temporary/output storage, rather than O(d). This safety cost avoids trusting caller state; an internal validated kernel can reuse validated factors without those copies. Requested all-row reconstruction takes O(nkd) arithmetic, and its n×d output is itself a storage cost."
+        ]
+      ]
+    },
+    {
+      "section": 16,
+      "original": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen-template.md",
+        "bytes": 17494,
+        "sha256": "1856753d5e1b992ff4c4f26cbf7c5ad88bd9ec9afbf205850280f93048fa3b7b"
+      },
+      "successor": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-sixteen-template.md",
+        "bytes": 17552,
+        "sha256": "66261cc0b4d560e5fa4e9e88b88e0fc4509129e1c864a6a74d54ba209729ed0c"
+      },
+      "replacements": [
+        [
+          "The open cone contains every nonnegative combination of both patterns.",
+          "The nonnegative cone contains every nonnegative combination of both patterns, including its zero and boundary cases."
+        ],
+        [
+          "The open-cone answer",
+          "The cone-constrained NNLS answer"
+        ]
+      ]
+    },
+    {
+      "section": 16,
+      "original": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen.md",
+        "bytes": 34405,
+        "sha256": "2a8767cc3f2ce11de0c969e3ab549ee42d532dfb443d7dc579daf14f72bdb322"
+      },
+      "successor": {
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\precision-corrections\\section-sixteen.md",
+        "bytes": 34463,
+        "sha256": "1bbcf017f7c2fe9f19864ae426fc5ba99519507a15821f01f4d9163089fd9517"
+      },
+      "replacements": [
+        [
+          "The open cone contains every nonnegative combination of both patterns.",
+          "The nonnegative cone contains every nonnegative combination of both patterns, including its zero and boundary cases."
+        ],
+        [
+          "The open-cone answer",
+          "The cone-constrained NNLS answer"
+        ]
+      ]
+    }
+  ],
+  "sourceSlots": {
+    "12": [
+      {
+        "marker": "<!-- source:nmf_factor_alignment.py -->",
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_factor_alignment.py",
+        "language": "python",
+        "identity": {
+          "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_factor_alignment.py",
+          "bytes": 6580,
+          "sha256": "6505488fa7183cb8fb656629707eb9585b4228162764dd355ce8a5f4e60d257c"
+        }
+      },
+      {
+        "marker": "<!-- output:nmf_factor_alignment.stdout.txt -->",
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+        "language": "text",
+        "identity": {
+          "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+          "bytes": 702,
+          "sha256": "b5ab059aa2c342e16464e061e5fc8528c05c8fbe69eaca0daabf6827a0612e0a"
+        }
+      },
+      {
+        "marker": "<!-- source:nmf_saved_digits.py -->",
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_digits.py",
+        "language": "python",
+        "identity": {
+          "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_digits.py",
+          "bytes": 6991,
+          "sha256": "ff1e4f2d5f395745e4f1b824bcb7c33d5dcb6d0bc025c7c68d717ec1c268ce14"
+        }
+      },
+      {
+        "marker": "<!-- output:nmf_saved_digits.stdout.txt -->",
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+        "language": "text",
+        "identity": {
+          "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+          "bytes": 9285,
+          "sha256": "472bd7083b1f348d37729b705c2b74163bebeecda1c109ea25adfd6ebdb8b5ac"
+        }
+      }
+    ],
+    "16": [
+      {
+        "marker": "<!-- original-source:wordPatterns -->",
+        "language": "python",
+        "file": "nmf_words.py",
+        "decodedFrom": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+        "decodedBodySha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343",
+        "literalBody": "import numpy as np\nfrom sklearn.feature_extraction.text import CountVectorizer\nfrom sklearn.decomposition import NMF\n\ndocuments = ['orbit rocket orbit', 'rocket orbit rocket',\n             'goal team goal', 'team goal team',\n             'orbit rocket goal team']\nvectorizer = CountVectorizer()\nX = vectorizer.fit_transform(documents)\nmodel = NMF(n_components=2, init='nndsvda', solver='mu',\n            beta_loss='kullback-leibler', max_iter=1000,\n            tol=1e-5, random_state=19)\nW = model.fit_transform(X)\nH = model.components_\nmass = H.sum(axis=1)\nnormalized_patterns = H / mass[:, None]\namounts = W * mass\nprint(vectorizer.get_feature_names_out())\nprint(normalized_patterns.round(3))\nprint(amounts.round(3))\nnew = vectorizer.transform(['rocket team'])\nprint((model.transform(new) @ H).round(3))"
+      },
+      {
+        "marker": "<!-- original-output:wordPatterns -->",
+        "language": "text",
+        "decodedFrom": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-examples.js",
+        "decodedBodySha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23",
+        "literalBody": "['goal' 'orbit' 'rocket' 'team']\n[[0.5 0.  0.  0.5]\n [0.  0.5 0.5 0. ]]\n[[0. 3.]\n [0. 3.]\n [3. 0.]\n [3. 0.]\n [2. 2.]]\n[[0.5 0.5 0.5 0.5]]"
+      },
+      {
+        "marker": "<!-- source:nmf_text_spectra.py -->",
+        "language": "python",
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+        "decodedBodySha256": "d2611fe8d6a1f2d026901d3ab667eea32197645ec514a084491a0dd07977ed91",
+        "identity": {
+          "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+          "bytes": 9130,
+          "sha256": "2fbca92d514885bcf9b1d84dfd678437d09837a8fdad8ae7b9c02cfed3513c3b"
+        }
+      },
+      {
+        "marker": "<!-- output:nmf_text_spectra.stdout.txt -->",
+        "language": "json",
+        "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+        "decodedBodySha256": "bbc2718339a09accf69cbbef96ec99c3cf727245ec40ebf0a488ff5afcc570a5",
+        "identity": {
+          "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+          "bytes": 6934,
+          "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+        }
+      }
+    ]
+  },
+  "originals": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve-template.md",
+      "bytes": 14700,
+      "sha256": "f7f5b58c28498a1216ec5773d252041f4684f183d8fec40f40cbe48777f5912d"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve.md",
+      "bytes": 38148,
+      "sha256": "9dabc45eb456003155826f78e429e36dd223e8d7845688e25846561dba6820dc"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\visual-specifications.md",
+      "bytes": 4482,
+      "sha256": "8d1b8865f4a06851b77f90ff59744f7446814cc4a1c5e7ab52b6a5b8430d795d"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\README.md",
+      "bytes": 2021,
+      "sha256": "ffd7d3a239ac9c617c13e91e1a8d8ed858bc2ebf26baf890800fa3bcd40fc3b0"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\assemble-section.mjs",
+      "bytes": 5544,
+      "sha256": "2d3980b45f5b40c5aa2a38fdf6b8b4edbf48bb5dae3f03f8829f90338046a63a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\prepare-payload.mjs",
+      "bytes": 2483,
+      "sha256": "5a0ccffd756149134b49bd8eff9c194d8daaa45c66653c83f243a59b2a71d79a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\saved-payload.json",
+      "bytes": 2073,
+      "sha256": "ada16ae13b07e728f0b405499c8aa3ef799b748555b7275766b8aab1e89404f9"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\check-interpretation.py",
+      "bytes": 10680,
+      "sha256": "7ecb62ec3701d383426c7e7db7d22e876fc77740e1ee3ccae7f6f7503cd6dab8"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\interpretation-checks.json",
+      "bytes": 12425,
+      "sha256": "7578f2b012a787374890c7f7b43b19756e966701f210f73e58c6a3f56ca3eaec"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+      "bytes": 702,
+      "sha256": "b5ab059aa2c342e16464e061e5fc8528c05c8fbe69eaca0daabf6827a0612e0a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+      "bytes": 9285,
+      "sha256": "472bd7083b1f348d37729b705c2b74163bebeecda1c109ea25adfd6ebdb8b5ac"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_factor_alignment.py",
+      "bytes": 6580,
+      "sha256": "6505488fa7183cb8fb656629707eb9585b4228162764dd355ce8a5f4e60d257c"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_factor_alignment.stdout.txt",
+      "bytes": 702,
+      "sha256": "b5ab059aa2c342e16464e061e5fc8528c05c8fbe69eaca0daabf6827a0612e0a"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_digits.py",
+      "bytes": 6991,
+      "sha256": "ff1e4f2d5f395745e4f1b824bcb7c33d5dcb6d0bc025c7c68d717ec1c268ce14"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\nmf_saved_digits.stdout.txt",
+      "bytes": 9285,
+      "sha256": "472bd7083b1f348d37729b705c2b74163bebeecda1c109ea25adfd6ebdb8b5ac"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_state.json",
+      "bytes": 69820,
+      "sha256": "46f3dc0931e3ccddc30cc3e30bbb4d3f330bc35a4dccccef33f74a63472eddd0"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-data-provenance.md",
+      "bytes": 2939,
+      "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\saved-digits-authoring\\section-twelve-handoff.json",
+      "bytes": 14041,
+      "sha256": "f0e0d780c9edca7f4b6a5f5027e3cb8b60dd5ad7e20697067514356564b5e735"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen-template.md",
+      "bytes": 17494,
+      "sha256": "1856753d5e1b992ff4c4f26cbf7c5ad88bd9ec9afbf205850280f93048fa3b7b"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen.md",
+      "bytes": 34405,
+      "sha256": "2a8767cc3f2ce11de0c969e3ab549ee42d532dfb443d7dc579daf14f72bdb322"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\visual-specifications.md",
+      "bytes": 4274,
+      "sha256": "6d07b5a340a848f14489aa6696d071dba94b1d4815d646032669f901d3189aff"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\assemble-section.mjs",
+      "bytes": 6031,
+      "sha256": "0c4bbb969f854d14c2d9084f5b18736b1a22747998b65d1b2abe612135750f22"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\check-transfers.py",
+      "bytes": 6797,
+      "sha256": "4338320ff83527c4261a89a6fc2cc057e8ea990303184f278adbf235d07708e4"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\transfer-checks.json",
+      "bytes": 8196,
+      "sha256": "fe59ed117319a8f2966f8857b92c9387b518bce7fb1fd6fb8b83d5b71279611d"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "bytes": 6934,
+      "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_text_spectra.py",
+      "bytes": 9130,
+      "sha256": "2fbca92d514885bcf9b1d84dfd678437d09837a8fdad8ae7b9c02cfed3513c3b"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\nmf_text_spectra.stdout.txt",
+      "bytes": 6934,
+      "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\text-spectra-authoring\\section-sixteen-handoff.json",
+      "bytes": 9965,
+      "sha256": "4f64e089bd9722a4de2f0d10aef2f64780e3384cb9ebd52c5b627d417d3823fb"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_factor_alignment.py",
+      "bytes": 6580,
+      "sha256": "6505488fa7183cb8fb656629707eb9585b4228162764dd355ce8a5f4e60d257c"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_arrays.py",
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    }
+  ],
+  "conditions": [
+    {
+      "name": "section-twelve-template.md: unique replacements, exact inverse and complete readback",
+      "passed": true
+    },
+    {
+      "name": "section-twelve.md: unique replacements, exact inverse and complete readback",
+      "passed": true
+    },
+    {
+      "name": "section-sixteen-template.md: unique replacements, exact inverse and complete readback",
+      "passed": true
+    },
+    {
+      "name": "section-sixteen.md: unique replacements, exact inverse and complete readback",
+      "passed": true
+    }
+  ],
+  "evidence": {
+    "newScientificRuns": 0,
+    "sourceOnly": true,
+    "originalFrozenPacketsPreserved": true,
+    "codeAndNumericalOutputsUnchanged": true,
+    "exactInverse": true
+  },
+  "reviewQualification": "R1 row_contribution directly validates through nonnegative_table/real_table rather than calling matching_factors; reviewed complexity finding is unchanged.",
+  "continuation": "Root selects successor literal/template slots for sections12/16; reuse unchanged original source/output/spec slots. Same reviewer closes R1/R2, then whole1–19 review. No canonical/runtime/phase mutation."
+}

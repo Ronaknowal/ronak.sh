@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "scope": "AST-extracted installed cache method with supplied Python objects only; no Torch, model, generation or new diagnostic attempt.",
+  "source": "scratch/speculative-research/sources/installed-utils.py",
+  "source_sha256": "905a7e7e67c49a4df9a623f6ca7a962306003b42ea7f86ce2674cc1acaba7538",
+  "observations": [
+    {
+      "request": "dynamic",
+      "carried": false,
+      "failure": null,
+      "resolved_type": "DynamicCache supplied stand-in"
+    },
+    {
+      "request": "dynamic",
+      "carried": true,
+      "failure": "Passing both `cache_implementation` (used to initialize certain caches) and `past_key_values` (a Cache object) is unsupported. Please use only one of the two.",
+      "resolved_type": null
+    },
+    {
+      "request": null,
+      "carried": false,
+      "failure": null,
+      "resolved_type": "DynamicCache supplied stand-in"
+    },
+    {
+      "request": null,
+      "carried": true,
+      "failure": null,
+      "resolved_type": "DynamicCache supplied stand-in"
+    }
+  ],
+  "retained_failed_work": {
+    "target_calls": 1,
+    "draft_calls": 3,
+    "target_rows": 7,
+    "draft_rows": 6,
+    "rounds": [
+      {
+        "prefix_ids": [
+          510,
+          1355,
+          2502,
+          9735
+        ],
+        "candidate_ids": [
+          281,
+          48056,
+          25013
+        ],
+        "proposal_score_shape": [
+          1,
+          3,
+          50304
+        ],
+        "q_selected": [
+          0.3971322178840637,
+          0.6064690947532654,
+          0.0860118716955185
+        ],
+        "emitted_ids": [
+          13
+        ],
+        "processed_target_score_shape": [
+          1,
+          4,
+          50304
+        ],
+        "forward_logits_shape": [
+          1,
+          4,
+          50304
+        ],
+        "native_post_stop_n_matches": 0,
+        "warning": "After stop cropping n_matches equals emitted_count-1, not necessarily accepted proposals.",
+        "target_cache_after_crop": 4,
+        "p_selected_candidates": [
+          0.018617963418364525,
+          6.697849386227972e-08,
+          7.899542353584366e-09
+        ]
+      }
+    ],
+    "instrumentation": "Forward hooks count calls and input rows."
+  },
+  "only_config_scalar_and_comments_changed": true,
+  "protocol_sha256": "e32ae20a3971b9ae1ddad8c23ba574ca5a5b6d6de75e49ea0d440f8d506e0d39"
+}

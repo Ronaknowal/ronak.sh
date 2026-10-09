@@ -1,0 +1,84 @@
+{
+  "sections": [
+    {
+      "position": 10,
+      "manuscript": "ordinary-state-authoring/section-ten.md",
+      "packet": "ordinary-state-authoring/section-ten-handoff.json",
+      "wholeSources": [
+        "ordinary-state-authoring/ordinary_nmf_lifecycle.py"
+      ]
+    },
+    {
+      "position": 11,
+      "manuscript": "stdout-presentation-correction/section-eleven.md",
+      "packet": "penalties-masks-authoring/section-eleven-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_penalties_masks.py"
+      ],
+      "outputPresentationSuccessor": "stdout-presentation-correction/correction.json"
+    },
+    {
+      "position": 12,
+      "manuscript": "precision-corrections/section-twelve.md",
+      "packet": "saved-digits-authoring/section-twelve-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_factor_alignment.py",
+        "content-programs/nmf_saved_digits.py"
+      ],
+      "precisionSuccessor": "precision-corrections/correction-handoff.json"
+    },
+    {
+      "position": 13,
+      "manuscript": "representation-evaluation-authoring/section-thirteen.md",
+      "packet": "representation-evaluation-authoring/section-thirteen-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_digit_comparison.py"
+      ]
+    },
+    {
+      "position": 14,
+      "manuscript": "identifiability-authoring/section-fourteen.md",
+      "packet": "identifiability-authoring/section-fourteen-handoff.json",
+      "wholeSources": []
+    },
+    {
+      "position": 15,
+      "manuscript": "anchors-authoring/section-fifteen.md",
+      "packet": "anchors-authoring/section-fifteen-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_anchors.py"
+      ]
+    },
+    {
+      "position": 16,
+      "manuscript": "precision-corrections/section-sixteen.md",
+      "packet": "text-spectra-authoring/section-sixteen-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_text_spectra.py"
+      ],
+      "precisionSuccessor": "precision-corrections/correction-handoff.json"
+    },
+    {
+      "position": 17,
+      "manuscript": "online-surrogate-authoring/section-seventeen.md",
+      "packet": "online-surrogate-authoring/section-seventeen-handoff.json",
+      "wholeSources": [
+        "content-programs/nmf_online.py"
+      ]
+    },
+    {
+      "position": 18,
+      "manuscript": "axis-phase-authoring/section-eighteen.md",
+      "packet": "axis-phase-authoring/section-eighteen-handoff.json",
+      "wholeSources": [
+        "axis-phase-authoring/nmf_axis_phase.py"
+      ]
+    },
+    {
+      "position": 19,
+      "manuscript": "practice-resources-authoring/section-nineteen.md",
+      "packet": "practice-resources-authoring/section-nineteen-handoff.json",
+      "wholeSources": []
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+const id='knowledge-distillation-for-llms-deepseek-r1-distill-cot-distillation';
+const folder=`docs/teaching/llm-architecture-training/${id}`;
+const sha=f=>createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+const read=f=>JSON.parse(fs.readFileSync(f));
+const check=read(`${folder}/content-root-checks.json`);
+assert.equal(check.status,'passed');
+assert.equal(sha(`${folder}/setup-correction/inputs.json`),'d2f36ea357fd4baf675562fb9f61aaff254c7bb747fd92db019610f85adeea64');
+const files={...check.files};
+for(const f of [`${folder}/content-inputs.json`,`${folder}/content-review.md`,`${folder}/content-root-checks.json`,'scripts/review-distillation-content.mjs'])files[f]=sha(f);
+for(const [f,h] of Object.entries(files))assert.equal(sha(f),h,f);
+const manifest=`${folder}/content-root-inputs.json`;
+fs.writeFileSync(manifest,JSON.stringify({status:'accepted-different-whole-content-review',author:'training_author',reviewer:'root',acceptedAt:new Date().toISOString(),conditions:check.conditions,files},null,2)+'\n',{flag:'wx'});
+execFileSync(process.execPath,['scripts/checkpoint-llm-pretraining-content.mjs',id,'lesson.md','llm-distillation','9c11af08303aa8d8c4b485967195ad78f7585f4419326f6f9fd88b53a40b6db9',manifest,sha(manifest)],{stdio:'inherit'});

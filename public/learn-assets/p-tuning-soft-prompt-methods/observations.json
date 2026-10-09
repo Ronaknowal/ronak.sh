@@ -1,0 +1,2780 @@
+{
+  "provenance": "Exact projection of frozen observations; no fit, model generation or new quality measurement.",
+  "inputs": {
+    "public/learn-code/p-tuning/results/study-summary.json": "daec27da8795ece285fbe0359c143f741f6a037b67097c03b5a9a22b37b52aa8",
+    "public/learn-code/p-tuning/results/study-evaluation.json": "ac9204b69959e51a88c0ec5143d16b372b5523878f2821f0b800b36ad27352ab",
+    "public/learn-code/p-tuning/results/study-preflight.json": "14ac4d648ffe9d89f37c1a1894581a9477275a7932f426a827cc304384f93863",
+    "public/learn-code/p-tuning/data/test.tsv": "a406d87b62a6b7c9615468a8b66e69c027fa8f2f03a4f8f6c79df26c260de620",
+    "public/learn-code/p-tuning/results/input-17-complete.json": "f035a5c82e37788dbca19a6e80d03abc6b1adcbf668e1d596fda4eb17d032dbf",
+    "public/learn-code/p-tuning/results/input-17-initial.json": "2fe9adcf4c252280d2811d1c004f553fbc30927e9cdd52e794df88195e981e32",
+    "public/learn-code/p-tuning/results/input-29-complete.json": "b6d1139b67edd8de393a6756c7d2b1df1d2866dbd166f7c4fe75b9a903808517",
+    "public/learn-code/p-tuning/results/input-29-initial.json": "46de8a6f10ac63971e4e50109541646694c80de6cb662824cfc70d2b537f15a4",
+    "public/learn-code/p-tuning/results/input-43-complete.json": "1c37672b84d8f8e8526a64ca1163ea1e8316f081b26541c5288cf0d30d718631",
+    "public/learn-code/p-tuning/results/input-43-initial.json": "7b39b3c970270d7f2fd15e0b4c0d6ace751f19bad4c4b261328447e9223c7b4d",
+    "public/learn-code/p-tuning/results/encoder-mlp-17-complete.json": "a8e9911844cd2b149617afaebeeb4ef8ddbe2d5041452c6399b227dba47beda0",
+    "public/learn-code/p-tuning/results/encoder-mlp-17-initial.json": "992254dde9c628b76f95c1a2339e07fc5cd0c8cb3662e5be1130c611fd030505",
+    "public/learn-code/p-tuning/results/encoder-mlp-29-complete.json": "5cc5b2073625374d18ac3293d57089e009b61f9a088c887f6e35d4a0d47e2770",
+    "public/learn-code/p-tuning/results/encoder-mlp-29-initial.json": "1629e2f4ce4baf10b1e5681621ae0cd4dde1e00e777b8bec117c3fb3efb60a18",
+    "public/learn-code/p-tuning/results/encoder-mlp-43-complete.json": "8d6af7e73c9df69032f28c43f3d66a3507b5f20c2e4b87ffd3e40ca39bde815a",
+    "public/learn-code/p-tuning/results/encoder-mlp-43-initial.json": "a5901f2b451dcbf02ae8fdb9cc7807e5e985b9cc5d036955d4eebdc413922243",
+    "public/learn-code/p-tuning/results/prefix-direct-17-complete.json": "7e2b15b3b7de7f61c1b9a5058766dbad0a1712a904c81a2b8a7a671e982a0c53",
+    "public/learn-code/p-tuning/results/prefix-direct-17-initial.json": "395c2f98f906eda7cea38944c6e4a34d0b6558c6b4dfe2d23dc9d26d7796f01d",
+    "public/learn-code/p-tuning/results/prefix-direct-29-complete.json": "f3d79ed8596c085f91a33f3d216bee2aea708cddaaff4be78e606cf2aea82a54",
+    "public/learn-code/p-tuning/results/prefix-direct-29-initial.json": "cf9e1b075c89730e1e4b8ca61eb57fb0d986b2e0cf5d1fb7303c70aefae04d7d",
+    "public/learn-code/p-tuning/results/prefix-direct-43-complete.json": "098a4d1d94d8f969a600152e1bf3344a3274f7f3394f080dcbd873bdffa8eafb",
+    "public/learn-code/p-tuning/results/prefix-direct-43-initial.json": "d35854b3e966cc2128f6644ab16941819ab955bfc6ab599a4655d78d2af95b4b"
+  },
+  "runs": [
+    {
+      "method": "input",
+      "seed": 17,
+      "selected_step": 200,
+      "selected_dev_nll": 0.3616234761277651,
+      "test_nll": 0.35754787923103293,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 4216,
+      "key": "input-17",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 1948.5567053556442,
+            "targets": 279,
+            "nll": 6.984074212744244,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 119.34136002557352,
+            "targets": 279,
+            "nll": 0.42774681012750365,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 105.81519123155158,
+            "targets": 279,
+            "nll": 0.379265918392658,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 110.25967418996152,
+            "targets": 279,
+            "nll": 0.3951959648385717,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 100.89294983964646,
+            "targets": 279,
+            "nll": 0.3616234761277651,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "input",
+        "seed": 17,
+        "trainable": 1024,
+        "adapter_norm": 4.429271752494566,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 1948.5567053556442,
+          "targets": 279,
+          "nll": 6.984074212744244,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.539870113832876,
+              -0.5885550421080552,
+              -1.7448149111587554
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 1.539870113832876,
+            "targets": 2,
+            "nll": 0.769935056916438
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -2.1700266473926604,
+              -0.3376945264171809,
+              -2.1321726688183844
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 2.1700266473926604,
+            "targets": 2,
+            "nll": 1.0850133236963302
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -2.1883339176420122,
+              -0.3029521845164709,
+              -2.2838207612512633
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.3029521845164709,
+            "targets": 3,
+            "nll": 0.10098406150549029
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.6765069636749104,
+              -0.5706804821384139,
+              -1.642576816258952
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.5706800181651488,
+            "targets": 3,
+            "nll": 0.19022667272171626
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -2.1467904017772526,
+              -0.35036695224698633,
+              -2.1767885759472847
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 2.176791312173009,
+            "targets": 2,
+            "nll": 1.0883956560865045
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.6492716844659299,
+              -0.5315181716578081,
+              -1.7626741251442581
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 1.7626741251442581,
+            "targets": 2,
+            "nll": 0.8813370625721291
+          }
+        }
+      ]
+    },
+    {
+      "method": "input",
+      "seed": 29,
+      "selected_step": 100,
+      "selected_dev_nll": 0.36837359341917103,
+      "test_nll": 0.3712204573032974,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 4216,
+      "key": "input-29",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 2126.5746326446533,
+            "targets": 279,
+            "nll": 7.622131299801625,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 118.98824699735269,
+            "targets": 279,
+            "nll": 0.4264811720335222,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 102.77623256394872,
+            "targets": 279,
+            "nll": 0.36837359341917103,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 114.94529305922333,
+            "targets": 279,
+            "nll": 0.4119902977033094,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 141.32426900032442,
+            "targets": 279,
+            "nll": 0.5065385985674711,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "input",
+        "seed": 29,
+        "trainable": 1024,
+        "adapter_norm": 4.694774628613876,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 2126.5746326446533,
+          "targets": 279,
+          "nll": 7.622131299801625,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.5755746625363827,
+              -0.5121115680085495,
+              -2.034665184561163
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 1.5755746625363827,
+            "targets": 2,
+            "nll": 0.7877873312681913
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.7783665438182652,
+              -0.4095742320641875,
+              -2.258112652692944
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 1.7783665438182652,
+            "targets": 2,
+            "nll": 0.8891832719091326
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.4532308178022504,
+              -0.6040907507995144,
+              -1.8064128099940717
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.6040907507995144,
+            "targets": 3,
+            "nll": 0.2013635835998381
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.3672744054347277,
+              -0.6130989918019623,
+              -1.9291475554928184
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.6130982728209347,
+            "targets": 3,
+            "nll": 0.20436609094031155
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.7605949020944536,
+              -0.4236305309459567,
+              -2.2873194669373333
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 2.2873732475563884,
+            "targets": 2,
+            "nll": 1.1436866237781942
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.6226974772289395,
+              -0.4966705203987658,
+              -1.9698069500736892
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 1.9698069500736892,
+            "targets": 2,
+            "nll": 0.9849034750368446
+          }
+        }
+      ]
+    },
+    {
+      "method": "input",
+      "seed": 43,
+      "selected_step": 150,
+      "selected_dev_nll": 0.35076085513920396,
+      "test_nll": 0.3499521532694646,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 4216,
+      "key": "input-43",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 1955.7813066244125,
+            "targets": 279,
+            "nll": 7.009968840947715,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 103.50518243352417,
+            "targets": 279,
+            "nll": 0.37098631696603646,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 99.31441570888273,
+            "targets": 279,
+            "nll": 0.35596564770208866,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 97.8622785838379,
+            "targets": 279,
+            "nll": 0.35076085513920396,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 98.29157412203494,
+            "targets": 279,
+            "nll": 0.352299548824498,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "input",
+        "seed": 43,
+        "trainable": 1024,
+        "adapter_norm": 4.5997513994129475,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 1955.7813066244125,
+          "targets": 279,
+          "nll": 7.009968840947715,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.4090411523357034,
+              -0.5986238708719611,
+              -1.9271212848834693
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 1.4090411523357034,
+            "targets": 2,
+            "nll": 0.7045205761678517
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.5884318847674876,
+              -0.470489353640005,
+              -2.08747068955563
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 1.5884318847674876,
+            "targets": 2,
+            "nll": 0.7942159423837438
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.4253680645488203,
+              -0.5709195594536141,
+              -1.9013634698931128
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.5709195594536141,
+            "targets": 3,
+            "nll": 0.19030651981787136
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.4547697729431093,
+              -0.604264753696043,
+              -1.754230905789882
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.604264753696043,
+            "targets": 3,
+            "nll": 0.20142158456534767
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.5813733336981386,
+              -0.5292446971870959,
+              -1.8818137254565954
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 1.8817370752803981,
+            "targets": 2,
+            "nll": 0.9408685376401991
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.46002114971634,
+              -0.6108213646803051,
+              -1.711482948041521
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 1.711482948041521,
+            "targets": 2,
+            "nll": 0.8557414740207605
+          }
+        }
+      ]
+    },
+    {
+      "method": "encoder-mlp",
+      "seed": 17,
+      "selected_step": 200,
+      "selected_dev_nll": 0.3620400693264246,
+      "test_nll": 0.3584637376177209,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 4216,
+      "key": "encoder-mlp-17",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 1948.5567053556442,
+            "targets": 279,
+            "nll": 6.984074212744244,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 111.58463724912144,
+            "targets": 279,
+            "nll": 0.39994493637677936,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 105.2100871486764,
+            "targets": 279,
+            "nll": 0.37709708655439567,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 106.89581555937184,
+            "targets": 279,
+            "nll": 0.3831391238687163,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 101.00917934207246,
+            "targets": 279,
+            "nll": 0.3620400693264246,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "encoder-mlp",
+        "seed": 17,
+        "trainable": 10432,
+        "adapter_norm": 33.137550830905504,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 1948.5567053556442,
+          "targets": 279,
+          "nll": 6.984074212744244,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.6625553565099835,
+              -0.6576160257682204,
+              -1.4172154624247923
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 1.6625553565099835,
+            "targets": 2,
+            "nll": 0.8312776782549918
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -2.3279934087768197,
+              -0.3431520143058151,
+              -1.9239350222051144
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 2.3279934087768197,
+            "targets": 2,
+            "nll": 1.1639967043884099
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -2.2599373715929687,
+              -0.3396896440535784,
+              -1.9896829414647073
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.3396896440535784,
+            "targets": 3,
+            "nll": 0.11322988135119279
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.562376260291785,
+              -0.7231104914098978,
+              -1.3679955718107522
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.7231101335491985,
+            "targets": 3,
+            "nll": 0.24103671118306616
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -2.2372072907164693,
+              -0.37500012875534594,
+              -1.8658415684476495
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 1.8659201292321086,
+            "targets": 2,
+            "nll": 0.9329600646160543
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.620497125433758,
+              -0.6463392935693264,
+              -1.4935821793042123
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 1.4935821793042123,
+            "targets": 2,
+            "nll": 0.7467910896521062
+          }
+        }
+      ]
+    },
+    {
+      "method": "encoder-mlp",
+      "seed": 29,
+      "selected_step": 100,
+      "selected_dev_nll": 0.3725266496769376,
+      "test_nll": 0.3761511768255591,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 4216,
+      "key": "encoder-mlp-29",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 2126.5746326446533,
+            "targets": 279,
+            "nll": 7.622131299801625,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 113.84001150587574,
+            "targets": 279,
+            "nll": 0.4080287150748234,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 103.9349352598656,
+            "targets": 279,
+            "nll": 0.3725266496769376,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 113.7145968991681,
+            "targets": 279,
+            "nll": 0.4075792003554412,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 161.46607165399473,
+            "targets": 279,
+            "nll": 0.5787314396200528,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "encoder-mlp",
+        "seed": 29,
+        "trainable": 10432,
+        "adapter_norm": 32.31578142947029,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 2126.5746326446533,
+          "targets": 279,
+          "nll": 7.622131299801625,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.1203898303210735,
+              -0.8198347359430045,
+              -1.897980248555541
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 1.1203898303210735,
+            "targets": 2,
+            "nll": 0.5601949151605368
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.6727838306687772,
+              -0.48137851408682764,
+              -2.2525571337901056
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 1.6727838306687772,
+            "targets": 2,
+            "nll": 0.8363919153343886
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.5525952756870538,
+              -0.5284628815716133,
+              -2.1055301618762314
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.5284628815716133,
+            "targets": 3,
+            "nll": 0.1761542938572044
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.4029440148733556,
+              -0.6105558619601652,
+              -2.061905773822218
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.6105562293669209,
+            "targets": 3,
+            "nll": 0.20351874312230697
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.4246609536930919,
+              -0.6543174525722861,
+              -2.0507210507057607
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 2.0507531072944403,
+            "targets": 2,
+            "nll": 1.0253765536472201
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.469064756296575,
+              -0.5600759161170572,
+              -2.072963343001902
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 2.072963343001902,
+            "targets": 2,
+            "nll": 1.036481671500951
+          }
+        }
+      ]
+    },
+    {
+      "method": "encoder-mlp",
+      "seed": 43,
+      "selected_step": 200,
+      "selected_dev_nll": 0.3608988270701383,
+      "test_nll": 0.3509954047384706,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 4216,
+      "key": "encoder-mlp-43",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 1955.7813066244125,
+            "targets": 279,
+            "nll": 7.009968840947715,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 117.58728153968696,
+            "targets": 279,
+            "nll": 0.4214597904648278,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 102.44861836859491,
+            "targets": 279,
+            "nll": 0.36719934899137957,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 111.11827161192195,
+            "targets": 279,
+            "nll": 0.39827337495312526,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 100.69077275256859,
+            "targets": 279,
+            "nll": 0.3608988270701383,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "encoder-mlp",
+        "seed": 43,
+        "trainable": 10432,
+        "adapter_norm": 33.016814920607715,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 1955.7813066244125,
+          "targets": 279,
+          "nll": 7.009968840947715,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.643838880583644,
+              -0.6173583148047328,
+              -1.555146126076579
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 1.643838880583644,
+            "targets": 2,
+            "nll": 0.821919440291822
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.836951581761241,
+              -0.5090962138492614,
+              -1.705385759472847
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 1.836951581761241,
+            "targets": 2,
+            "nll": 0.9184757908806205
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.8902656845748425,
+              -0.49879814428277314,
+              -1.6641377657651901
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.49879814428277314,
+            "targets": 3,
+            "nll": 0.1662660480942577
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.7109343251213431,
+              -0.6085799491265789,
+              -1.4907515831291676
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.6085804218892008,
+            "targets": 3,
+            "nll": 0.2028601406297336
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.6962750563398004,
+              -0.6202062682714313,
+              -1.5104216085746884
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 1.5104028899222612,
+            "targets": 2,
+            "nll": 0.7552014449611306
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -2.154559563845396,
+              -0.39022917044349015,
+              -1.8312596157193184
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 1.8312596157193184,
+            "targets": 2,
+            "nll": 0.9156298078596592
+          }
+        }
+      ]
+    },
+    {
+      "method": "prefix-direct",
+      "seed": 17,
+      "selected_step": 100,
+      "selected_dev_nll": 0.34711009207526705,
+      "test_nll": 0.34999958696005623,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 49272,
+      "key": "prefix-direct-17",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 2087.0052502155304,
+            "targets": 279,
+            "nll": 7.480305556328066,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 104.52450037552626,
+            "targets": 279,
+            "nll": 0.3746397862922088,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 96.84371568899951,
+            "targets": 279,
+            "nll": 0.34711009207526705,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 102.89115350076463,
+            "targets": 279,
+            "nll": 0.3687854964185112,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 97.62586824663958,
+            "targets": 279,
+            "nll": 0.34991350626035694,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "prefix-direct",
+        "seed": 17,
+        "trainable": 12288,
+        "adapter_norm": 2.1913508715916623,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 2087.0052502155304,
+          "targets": 279,
+          "nll": 7.480305556328066,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.6928166155703366,
+              -0.4291080149705522,
+              -2.0290398504585028
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 1.6928166155703366,
+            "targets": 2,
+            "nll": 0.8464083077851683
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -2.041061205090955,
+              -0.3080272831139155,
+              -2.3171998662874103
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 2.041061205090955,
+            "targets": 2,
+            "nll": 1.0205306025454774
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.7766213174909353,
+              -0.4171085334382951,
+              -1.985723335761577
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.4171085334382951,
+            "targets": 3,
+            "nll": 0.13903617781276503
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.6084980610758066,
+              -0.48737559220171534,
+              -1.9055843161186203
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.48737523646559566,
+            "targets": 3,
+            "nll": 0.16245841215519854
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.7122314632870257,
+              -0.4400229942984879,
+              -1.9650723059894517
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 1.9650650344556198,
+            "targets": 2,
+            "nll": 0.9825325172278099
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.787677350686863,
+              -0.4010672761069145,
+              -2.0603141970932484
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 2.0603141970932484,
+            "targets": 2,
+            "nll": 1.0301570985466242
+          }
+        }
+      ]
+    },
+    {
+      "method": "prefix-direct",
+      "seed": 29,
+      "selected_step": 50,
+      "selected_dev_nll": 0.3466560129624625,
+      "test_nll": 0.35950441826188634,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 49272,
+      "key": "prefix-direct-29",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 2086.4259691238403,
+            "targets": 279,
+            "nll": 7.478229280013765,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 96.71702761652705,
+            "targets": 279,
+            "nll": 0.3466560129624625,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 99.46758793135086,
+            "targets": 279,
+            "nll": 0.35651465208369487,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 99.27721624233891,
+            "targets": 279,
+            "nll": 0.3558323162807846,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 161.4863608196465,
+            "targets": 279,
+            "nll": 0.5788041606438943,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "prefix-direct",
+        "seed": 29,
+        "trainable": 12288,
+        "adapter_norm": 2.233437294699143,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 2086.4259691238403,
+          "targets": 279,
+          "nll": 7.478229280013765,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -1.5561621878878213,
+              -0.6116708707704674,
+              -1.5837602175597567
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 1.5561621878878213,
+            "targets": 2,
+            "nll": 0.7780810939439107
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -2.136593388248002,
+              -0.345039543322855,
+              -2.049756470922148
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 2.136593388248002,
+            "targets": 2,
+            "nll": 1.068296694124001
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.8117662998847663,
+              -0.496904146799352,
+              -1.6717330642277375
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.496904146799352,
+            "targets": 3,
+            "nll": 0.16563471559978402
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.522616593312705,
+              -0.67595385347704,
+              -1.465000462369062
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.675953735199073,
+            "targets": 3,
+            "nll": 0.22531791173302432
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.6284581898362376,
+              -0.5926260122760141,
+              -1.5627396603231318
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 1.5627381106605753,
+            "targets": 2,
+            "nll": 0.7813690553302877
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -1.9093046599300578,
+              -0.43350804275360133,
+              -1.8178091627196409
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 1.8178091627196409,
+            "targets": 2,
+            "nll": 0.9089045813598204
+          }
+        }
+      ]
+    },
+    {
+      "method": "prefix-direct",
+      "seed": 43,
+      "selected_step": 200,
+      "selected_dev_nll": 0.34356493878499433,
+      "test_nll": 0.35720898143401614,
+      "free_accuracy": 0.6634615384615384,
+      "candidate_accuracy": 0.6634615384615384,
+      "macro_f1": 0.26589595375722547,
+      "adapter_tensor_file_bytes": 49272,
+      "key": "prefix-direct-43",
+      "history": [
+        {
+          "step": 0,
+          "dev": {
+            "nll_sum": 2086.5017499923706,
+            "targets": 279,
+            "nll": 7.478500896030003,
+            "records": 105
+          }
+        },
+        {
+          "step": 50,
+          "dev": {
+            "nll_sum": 104.84438054369821,
+            "targets": 279,
+            "nll": 0.37578631019246667,
+            "records": 105
+          }
+        },
+        {
+          "step": 100,
+          "dev": {
+            "nll_sum": 96.06056049375184,
+            "targets": 279,
+            "nll": 0.34430308420699585,
+            "records": 105
+          }
+        },
+        {
+          "step": 150,
+          "dev": {
+            "nll_sum": 96.36215478846134,
+            "targets": 279,
+            "nll": 0.3453840673421553,
+            "records": 105
+          }
+        },
+        {
+          "step": 200,
+          "dev": {
+            "nll_sum": 95.85461792101341,
+            "targets": 279,
+            "nll": 0.34356493878499433,
+            "records": 105
+          }
+        }
+      ],
+      "initial": {
+        "method": "prefix-direct",
+        "seed": 43,
+        "trainable": 12288,
+        "adapter_norm": 2.1914435670772647,
+        "frozen_base_digest": "a47fbe091aa3ff56693010dc9483a2f15ef46687f987e8e0ebab374f26d45aaa",
+        "dev": {
+          "nll_sum": 2086.5017499923706,
+          "targets": 279,
+          "nll": 7.478500896030003,
+          "records": 105
+        }
+      },
+      "confusion": [
+        [
+          0,
+          19,
+          0,
+          0
+        ],
+        [
+          0,
+          69,
+          0,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0
+        ]
+      ],
+      "examples": [
+        {
+          "id": 5,
+          "verse": "indignantly i hurled the cry:",
+          "label": -1,
+          "generation": {
+            "id": 5,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 5,
+            "gold": "negative",
+            "candidate_logp": [
+              -2.022219746140763,
+              -0.3671900882800401,
+              -1.9003684722993057
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 5,
+            "nll_sum": 2.022219746140763,
+            "targets": 2,
+            "nll": 1.0111098730703816
+          }
+        },
+        {
+          "id": 6,
+          "verse": "with which his house is haunted;",
+          "label": -1,
+          "generation": {
+            "id": 6,
+            "gold": "negative",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 6,
+            "gold": "negative",
+            "candidate_logp": [
+              -2.2316271029412746,
+              -0.305536927698995,
+              -2.046486032253597
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 6,
+            "nll_sum": 2.2316271029412746,
+            "targets": 2,
+            "nll": 1.1158135514706373
+          }
+        },
+        {
+          "id": 0,
+          "verse": "my canoe to make more steady,",
+          "label": 0,
+          "generation": {
+            "id": 0,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 0,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.9292355550569482,
+              -0.4236185824156564,
+              -1.7335280006518587
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 0,
+            "nll_sum": 0.4236185824156564,
+            "targets": 3,
+            "nll": 0.14120619413855215
+          }
+        },
+        {
+          "id": 2,
+          "verse": "and when they reached the strait symplegades",
+          "label": 0,
+          "generation": {
+            "id": 2,
+            "gold": "no impact",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 2,
+            "gold": "no impact",
+            "candidate_logp": [
+              -1.9050851768697612,
+              -0.42006354223485687,
+              -1.7819650871679187
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 2,
+            "nll_sum": 0.42006354223485687,
+            "targets": 3,
+            "nll": 0.1400211807449523
+          }
+        },
+        {
+          "id": 1,
+          "verse": "and be glad in the summer morning when the kindred ride on their way;",
+          "label": 1,
+          "generation": {
+            "id": 1,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 1,
+            "gold": "positive",
+            "candidate_logp": [
+              -2.011812077369541,
+              -0.3897681203234242,
+              -1.8039966635842575
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 1,
+            "nll_sum": 1.8040108495188178,
+            "targets": 2,
+            "nll": 0.9020054247594089
+          }
+        },
+        {
+          "id": 10,
+          "verse": "on thine own bird the sweet enthusiasm",
+          "label": 1,
+          "generation": {
+            "id": 10,
+            "gold": "positive",
+            "ids": [
+              642,
+              3486,
+              0
+            ],
+            "text": " no impact",
+            "unmapped_ids": [],
+            "prediction": "no impact",
+            "eos_stopped": true
+          },
+          "candidate": {
+            "id": 10,
+            "gold": "positive",
+            "candidate_logp": [
+              -2.011770690907724,
+              -0.38245831266249297,
+              -1.833631125628017
+            ],
+            "prediction": "no impact"
+          },
+          "response": {
+            "id": 10,
+            "nll_sum": 1.833631125628017,
+            "targets": 2,
+            "nll": 0.9168155628140084
+          }
+        }
+      ]
+    }
+  ],
+  "initialization": [
+    {
+      "seed": 17,
+      "initial_pair_exact": true,
+      "examples_over_200_steps": 1595,
+      "batch_plan_sha256": "2d10db5d8507fa1c7921a38eccbfb8a12dcf138f3f215976ce8f742d401abbfe"
+    },
+    {
+      "seed": 29,
+      "initial_pair_exact": true,
+      "examples_over_200_steps": 1595,
+      "batch_plan_sha256": "b8bc587e21e4284566480d7d8e1355ece95676989bc62d7d479ed21e87494909"
+    },
+    {
+      "seed": 43,
+      "initial_pair_exact": true,
+      "examples_over_200_steps": 1595,
+      "batch_plan_sha256": "653366da6d967130688acb1c9115dfac93428c3e1d51d2892e86a4e6c5c5e980"
+    }
+  ],
+  "baseline": {
+    "nll": 7.0527254304300575,
+    "accuracy": 0,
+    "candidateAccuracy": 0.36538461538461536,
+    "macroF1": 0,
+    "valid": 0,
+    "eos": 0
+  },
+  "majority": {
+    "gold_order": [
+      "negative",
+      "no impact",
+      "positive"
+    ],
+    "prediction_order": [
+      "negative",
+      "no impact",
+      "positive",
+      "invalid"
+    ],
+    "confusion": [
+      [
+        0,
+        19,
+        0,
+        0
+      ],
+      [
+        0,
+        69,
+        0,
+        0
+      ],
+      [
+        0,
+        16,
+        0,
+        0
+      ]
+    ],
+    "accuracy": 0.6634615384615384,
+    "class_f1": [
+      0,
+      0.7976878612716763,
+      0
+    ],
+    "macro_f1": 0.26589595375722547,
+    "valid_label_rate": 1
+  }
+}

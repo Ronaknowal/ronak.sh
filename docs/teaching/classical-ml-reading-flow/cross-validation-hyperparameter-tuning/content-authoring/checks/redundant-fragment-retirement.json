@@ -1,0 +1,32 @@
+{
+  "schema": "classical21-owned-fragment-retirement/v1",
+  "scope": "Two named nonrecursive owner-only files; no old build/source/evidence or foreign deletion",
+  "files": [
+    {
+      "retired": {
+        "path": "checks/advanced-contract-text.md",
+        "bytes": 14125,
+        "sha256": "22943aac2af3ba2e6abb695d2f984671395118e2dbf824341e40277837548f9d"
+      },
+      "exact_text_conserved_in": {
+        "path": "visual-specifications.md",
+        "bytes": 33539,
+        "sha256": "a1ece3093ba701dcdd0177447b1c85b3aab7bbde268ef9945c2c7b303aa67ece"
+      },
+      "reason": "Redundant authored assembly fragment, no unique research/evidence"
+    },
+    {
+      "retired": {
+        "path": "checks/advanced-investigation-text.md",
+        "bytes": 7728,
+        "sha256": "ecb603279d35ae752aad61902e3a9e2ad7c6b48329b4411333c4a71af82a0598"
+      },
+      "exact_text_conserved_in": {
+        "path": "investigation-specifications.md",
+        "bytes": 19653,
+        "sha256": "954235280cf77b6e8c8427c716f836369f198e7af046b71ca121c6517b2cbf69"
+      },
+      "reason": "Redundant authored assembly fragment, no unique research/evidence"
+    }
+  ]
+}

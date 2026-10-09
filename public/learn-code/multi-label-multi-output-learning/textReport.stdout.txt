@@ -1,0 +1,6 @@
+Rows train/validation/test: 16 8 8
+Selected: chain 012 threshold 0.6 validation micro-F1 0.909091
+Test positives [code,hardware,energy]: [4, 4, 4]
+baseline Hamming 0.5 subset 0.25 micro-F1 0.666667 label-F1 [0.666667, 0.666667, 0.666667]
+selected Hamming 0.083333 subset 0.875 micro-F1 0.909091 label-F1 [0.857143, 1.0, 0.857143]
+Predicted test rows: [[1, 0, 1], [1, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 0], [1, 1, 1], [0, 0, 0], [0, 0, 0]]

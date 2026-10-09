@@ -1,0 +1,39 @@
+{
+  "status": "EXACT_OFFLINE_SAVED_PAYLOAD_EXTRACTED_NOT_REFITTED",
+  "source": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\src\\learn\\data\\nmf-data.js",
+    "bytes": 28450,
+    "sha256": "40cd6b9079da9601743be3599b4c9d3087f62b074823a4cd83f46267eff1cbbe"
+  },
+  "sourceCSV": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-assets\\nmf\\digits-300.csv",
+    "bytes": 46235,
+    "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+  },
+  "sourceProvenance": {
+    "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\public\\learn-assets\\nmf\\data-provenance.md",
+    "bytes": 2939,
+    "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7"
+  },
+  "payloads": [
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\nmf_saved_state.json",
+      "bytes": 69820,
+      "sha256": "46f3dc0931e3ccddc30cc3e30bbb4d3f330bc35a4dccccef33f74a63472eddd0"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    },
+    {
+      "path": "C:\\Personal Projects and files\\Portfolio\\Portfolio\\docs\\teaching\\classical-ml-reading-flow\\non-negative-matrix-factorization-nmf\\content-preparation\\content-programs\\digits-data-provenance.md",
+      "bytes": 2939,
+      "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7"
+    }
+  ],
+  "completeParsedExportConserved": true,
+  "scientificFits": 0,
+  "historicalMainExecutions": 0,
+  "limits": "JSON is the complete parsed NMF_DIGITS export, not the historical physical JavaScript file. CSV/provenance siblings are exact offline teaching supplies; no public files changed."
+}

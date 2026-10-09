@@ -1,0 +1,107 @@
+/* Residual block diagrams in the reading flow (see lesson-flow.css and
+   docs/teaching/deep-learning-beginner/visual-vocabulary.md):
+   cyan = supplied input and the skip route that carries it unchanged,
+   amber = learned parameters (the branch's weights),
+   violet = computed values (the correction F(x), the block output),
+   white outline = an operation, orange dashed = backward derivatives.
+   Figures sit on the page: no frame, filled panel, heading or legend. */
+.residual-lesson {
+  --rb-input: #7dd5e9; --rb-learned: #e8c36f; --rb-computed: #c7a5ee; --rb-backward: #f0a878;
+  --rb-op: #e6e6e6; --rb-line: #3a3a3a; --rb-muted: #bdbdbd;
+}
+.residual-lesson .rb-figure { border: 0; background: transparent; padding: 0; margin: 1.75rem 0; min-width: 0; }
+.residual-lesson .rb-figure h5 { margin: 0 0 6px; color: #eee; font-size: 1rem; line-height: 1.4; }
+.residual-lesson .rb-figure p { line-height: 1.7; }
+.residual-lesson .rb-figure figcaption { color: var(--rb-muted); line-height: 1.7; margin-top: .75rem; font-size: .95rem; }
+
+/* One block drawn top to bottom: input, two routes, the join, optional direct-path operations, output. */
+.residual-lesson .rb-block { display: flex; flex-direction: column; align-items: stretch; gap: 4px; max-width: 40rem; margin: 0 auto; }
+.residual-lesson .rb-node { border: 1.5px solid var(--rb-op); border-radius: 999px; padding: 6px 16px; text-align: center; display: grid; gap: 2px; justify-self: center; align-self: center; min-width: min(100%, 14rem); }
+.residual-lesson .rb-node--input { border-color: var(--rb-input); }
+.residual-lesson .rb-node--input .rb-value { color: var(--rb-input); }
+.residual-lesson .rb-node--output { border-color: var(--rb-computed); }
+.residual-lesson .rb-node--output .rb-value { color: var(--rb-computed); }
+.residual-lesson .rb-node small { color: var(--rb-muted); font-size: .85rem; line-height: 1.5; }
+.residual-lesson .rb-tag { font-size: .9rem; color: #d8d8d8; }
+.residual-lesson .rb-value { font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; color: #f2f2f2; overflow-wrap: anywhere; }
+.residual-lesson .rb-arrow { text-align: center; color: #8f8f8f; line-height: 1; font-size: 1.1rem; }
+.residual-lesson .rb-lanes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 10px; }
+.residual-lesson .rb-lane { border: 1.5px solid; border-radius: 6px; padding: 8px 10px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.residual-lesson .rb-lane--skip { border-color: var(--rb-input); }
+.residual-lesson .rb-lane--skip .rb-value { color: var(--rb-input); }
+.residual-lesson .rb-lane--branch { border-color: var(--rb-learned); }
+.residual-lesson .rb-lane--branch .rb-value { color: var(--rb-computed); }
+.residual-lesson .rb-lane--removed { border-style: dashed; border-color: #666; color: #9a9a9a; }
+.residual-lesson .rb-lane-title { margin: 0; font-weight: 600; color: #eee; font-size: .92rem; line-height: 1.45; }
+.residual-lesson .rb-step { margin: 0; font-size: .88rem; line-height: 1.55; overflow-wrap: anywhere; }
+.residual-lesson .rb-step em { font-style: normal; font-size: .75rem; color: var(--rb-learned); border: 1px dashed var(--rb-learned); padding: 0 4px; margin-left: 4px; white-space: nowrap; }
+.residual-lesson .rb-step--stream { border: 1.5px solid var(--rb-op); border-radius: 6px; padding: 6px 10px; text-align: center; }
+.residual-lesson .rb-step--stream em { color: var(--rb-op); border-color: #8a8a8a; }
+.residual-lesson .rb-after { display: grid; gap: 4px; }
+.residual-lesson .rb-join { text-align: center; border: 1.5px solid var(--rb-op); border-radius: 6px; padding: 6px 10px; line-height: 1.5; font-size: .92rem; justify-self: center; }
+.residual-lesson .rb-join span { font-size: 1.2rem; }
+.residual-lesson .rb-block--compact .rb-lanes { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+.residual-lesson .rb-fork, .residual-lesson .rb-merge { text-align: center; color: #8f8f8f; font-size: .85rem; line-height: 1.3; }
+.residual-lesson .rb-fork span:first-child, .residual-lesson .rb-merge span:first-child { color: var(--rb-input); }
+.residual-lesson .rb-fork span:last-child, .residual-lesson .rb-merge span:last-child { color: var(--rb-learned); }
+/* Backward mode: the same parts, with derivatives travelling up in orange. */
+.residual-lesson .rb-block--backward .rb-arrow,
+.residual-lesson .rb-block--backward .rb-fork span,
+.residual-lesson .rb-block--backward .rb-merge span { color: var(--rb-backward); }
+.residual-lesson .rb-block--backward .rb-lane .rb-value,
+.residual-lesson .rb-block--backward .rb-node .rb-value { color: var(--rb-backward); }
+.residual-lesson .rb-block--backward .rb-lane { border-style: solid; }
+.residual-lesson .rb-block--backward .rb-join { border-style: dashed; border-color: var(--rb-backward); }
+
+.residual-lesson .rb-equation { text-align: center; font-family: ui-monospace, monospace; overflow-wrap: anywhere; margin: 12px 0 0; }
+.residual-lesson .rb-ink--skip { color: var(--rb-input); }
+.residual-lesson .rb-ink--branch { color: var(--rb-computed); }
+.residual-lesson .rb-ink--learned { color: var(--rb-learned); }
+.residual-lesson .rb-ink--backward { color: var(--rb-backward); }
+.residual-lesson .rb-mono { font-family: ui-monospace, monospace; font-size: .9rem; overflow-wrap: anywhere; }
+.residual-lesson .rb-compare section { border-top: 1px solid var(--rb-line); padding-top: 8px; min-width: 0; }
+.residual-lesson .rb-compare section.rb-ok h5::after { content: ' ✓ keeps x'; color: var(--rb-computed); font-weight: 400; font-size: .85rem; }
+.residual-lesson .rb-compare section p { margin: 4px 0; }
+.residual-lesson .rb-source { font-size: .82rem; color: var(--rb-muted); margin: 0 0 8px; }
+
+/* Stack of scalar blocks. */
+.residual-lesson .rb-chain { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 6px; }
+.residual-lesson .rb-chain li { margin: 0; }
+.residual-lesson .rb-chain-block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6px 10px; }
+.residual-lesson .rb-chain-lane { border-width: 1.5px; border-style: solid; border-radius: 6px; padding: 6px 10px; font-size: .88rem; line-height: 1.5; min-width: 0; overflow-wrap: anywhere; }
+.residual-lesson .rb-chain-state { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; border-bottom: 1px solid var(--rb-line); padding: 4px 2px; font-family: ui-monospace, monospace; font-size: .9rem; }
+.residual-lesson .rb-chain-state > span:first-child { color: var(--rb-computed); }
+.residual-lesson .rb-sens { color: var(--rb-backward); }
+
+/* Experiment network. */
+.residual-lesson .rb-network { display: flex; flex-direction: column; gap: 4px; max-width: 34rem; margin: 0 auto; }
+.residual-lesson .rb-network .rb-node { border-radius: 6px; }
+.residual-lesson .rb-repeat { border: 1px dashed #8a8a8a; border-radius: 6px; padding: 8px; }
+.residual-lesson .rb-repeat-label { margin: 0 0 6px; font-weight: 600; text-align: right; font-size: .9rem; }
+.residual-lesson .rb-note { font-size: .85rem; color: var(--rb-muted); margin: 8px 0 0; }
+
+/* Addition versus concatenation cells. */
+.residual-lesson .rb-cells { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+.residual-lesson .rb-cell { font-family: ui-monospace, monospace; min-width: 3rem; text-align: center; padding: 6px 8px; border: 2px solid; border-radius: 4px; }
+.residual-lesson .rb-cell--skip { border-color: var(--rb-input); color: var(--rb-input); }
+.residual-lesson .rb-cell--branch { border-color: var(--rb-computed); color: var(--rb-computed); }
+.residual-lesson .rb-cell--mixed { border-color: var(--rb-op); }
+
+/* Stack the two routes when the diagram itself is narrow in text units, so enlarged text also stacks. */
+.residual-lesson .rb-block, .residual-lesson .rb-chain { container-type: inline-size; }
+@container (max-width: 20em) {
+  .residual-lesson .rb-lanes, .residual-lesson .rb-chain-block { grid-template-columns: minmax(0, 1fr); }
+  .residual-lesson .rb-lanes.rb-fork, .residual-lesson .rb-lanes.rb-merge { grid-template-columns: 1fr 1fr; }
+}
+/* Break a word only when it cannot fit on its own line. */
+.residual-lesson .rb-figure :is(p, li, figcaption, h5, span, b, small) { overflow-wrap: break-word; }
+
+/* Exact-value tables. */
+.residual-lesson .rb-table { overflow-x: auto; max-width: 100%; }
+.residual-lesson .rb-table table { width: 100%; border-collapse: collapse; }
+.residual-lesson .rb-table :is(th, td) { padding: 8px 6px; border-bottom: 1px solid var(--rb-line); text-align: left; overflow-wrap: normal; word-break: normal; hyphens: manual; }
+.residual-lesson .rb-table caption { text-align: left; color: var(--rb-muted); padding: 0 0 8px; }
+.residual-lesson .rb-table td:last-child { white-space: nowrap; }
+.residual-lesson .rb-inline-tag { font-style: normal; font-size: .75rem; color: var(--rb-learned); border: 1px dashed var(--rb-learned); padding: 0 4px; white-space: nowrap; }
+/* Scroll cue: a shadow on the edge that has more table to see; it disappears at that end. */
+.residual-lesson .rb-table { background: linear-gradient(to right, #050505 30%, rgba(5,5,5,0)) left / 2.5rem 100% no-repeat local, linear-gradient(to left, #050505 30%, rgba(5,5,5,0)) right / 2.5rem 100% no-repeat local, radial-gradient(farthest-side at 0 50%, rgba(226,181,90,.45), transparent) left / .9rem 100% no-repeat scroll, radial-gradient(farthest-side at 100% 50%, rgba(226,181,90,.45), transparent) right / .9rem 100% no-repeat scroll; }

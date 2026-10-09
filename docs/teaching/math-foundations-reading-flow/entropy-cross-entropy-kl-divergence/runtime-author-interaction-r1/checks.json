@@ -1,0 +1,370 @@
+{
+  "checks": [
+    {
+      "name": "coin exact endpoint",
+      "pass": true
+    },
+    {
+      "name": "coin reflection endpoint",
+      "pass": true
+    },
+    {
+      "name": "coin fair maximum",
+      "pass": true
+    },
+    {
+      "name": "decoder path and emitted prefix",
+      "pass": true
+    },
+    {
+      "name": "reversed D one-bit decode",
+      "pass": true
+    },
+    {
+      "name": "empty stream legal",
+      "pass": true
+    },
+    {
+      "name": "invalid message retains empty output",
+      "pass": true
+    },
+    {
+      "name": "all-zero source rejected",
+      "pass": true
+    },
+    {
+      "name": "matching model KL zero",
+      "pass": true
+    },
+    {
+      "name": "unit conversion consistent",
+      "pass": true
+    },
+    {
+      "name": "reversal updates signed accounting",
+      "pass": true
+    },
+    {
+      "name": "support zero-weight exclusion finite",
+      "pass": true
+    },
+    {
+      "name": "smoothing changes only explicit model",
+      "pass": true
+    },
+    {
+      "name": "nonzero textual underflow rejected",
+      "pass": true
+    },
+    {
+      "name": "unequal real weights",
+      "pass": true
+    },
+    {
+      "name": "zero context unavailable",
+      "pass": true
+    },
+    {
+      "name": "logit common-shift invariance",
+      "pass": true
+    },
+    {
+      "name": "extreme finite direct loss",
+      "pass": true
+    },
+    {
+      "name": "strict soft target rejection",
+      "pass": true
+    },
+    {
+      "name": "soft extreme loss",
+      "pass": true
+    },
+    {
+      "name": "invalid logit retains active finite loss",
+      "pass": true
+    },
+    {
+      "name": "uniform physical width",
+      "pass": true
+    },
+    {
+      "name": "uniform identity units",
+      "pass": true
+    },
+    {
+      "name": "32 bins correct",
+      "pass": true
+    },
+    {
+      "name": "all32bins accessible",
+      "pass": true
+    },
+    {
+      "name": "bin table keyboard focus",
+      "pass": true
+    },
+    {
+      "name": "stage1 has no candidate controls",
+      "pass": true
+    },
+    {
+      "name": "shared fraction reaches all3mounts",
+      "pass": true
+    },
+    {
+      "name": "select optimum gap zero",
+      "pass": false
+    },
+    {
+      "name": "exact collapsed endpoint all sliders disabled",
+      "pass": true
+    },
+    {
+      "name": "unsupported near endpoint retains law",
+      "pass": true
+    },
+    {
+      "name": "mean change reopens slice",
+      "pass": true
+    },
+    {
+      "name": "reset from any stage restores shared defaults",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_bernoulli.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_bernoulli.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_bernoulli.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_bernoulli.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_blocks.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_blocks.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_blocks.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_blocks.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_coin.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_coin.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_coin.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_coin.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_conditional.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_conditional.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_continuous.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_continuous.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_evaluation.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_evaluation.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_evaluation.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_evaluation.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_logits.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_logits.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_logits.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_logits.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_maximum.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_maximum.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_maximum.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_maximum.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_prefix.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_prefix.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_prefix.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_prefix.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_support.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_support.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_support.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_support.py",
+      "pass": true
+    },
+    {
+      "name": "render full source entropy_torch.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard entropy_torch.py",
+      "pass": false
+    },
+    {
+      "name": "actual download entropy_torch.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout entropy_torch.py",
+      "pass": true
+    },
+    {
+      "name": "render full source information_library.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard information_library.py",
+      "pass": false
+    },
+    {
+      "name": "actual download information_library.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout information_library.py",
+      "pass": true
+    },
+    {
+      "name": "render full source penguins_log_loss.py",
+      "pass": true
+    },
+    {
+      "name": "actual clipboard penguins_log_loss.py",
+      "pass": false
+    },
+    {
+      "name": "actual download penguins_log_loss.py",
+      "pass": true
+    },
+    {
+      "name": "render retained stdout penguins_log_loss.py",
+      "pass": true
+    },
+    {
+      "name": "actual observed CSV download",
+      "pass": true
+    },
+    {
+      "name": "all source programme files unchanged",
+      "pass": true
+    },
+    {
+      "name": "phone root16 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "phone root32 no document overflow",
+      "pass": false
+    },
+    {
+      "name": "phone root16 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "no browser errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "errors": []
+}

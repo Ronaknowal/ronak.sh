@@ -1,0 +1,70 @@
+.real-analysis-lesson { min-width: 0; overflow-wrap: break-word; }
+.real-analysis-lesson :is(.ra-figure, .analysis-lab) { container: ra-object / inline-size; margin: 2rem 0; padding: 0; border: 0; border-radius: 0; background: transparent; min-width: 0; max-width: 100%; }
+.real-analysis-lesson :is(.ra-figure-title, .ra-panel-title) { color: #eee3bc; font-size: 1rem; line-height: 1.65; margin: 0 0 .8rem; }
+.real-analysis-lesson :is(.ra-figure figcaption, .ra-scroll-hint) { color: #b6c2ca; font-size: .94rem; line-height: 1.7; margin: .8rem 0; }
+.real-analysis-lesson .ra-canvas { min-width: 0; max-width: 100%; margin: 1rem 0; }
+.real-analysis-lesson :is(.ra-scroll, .ra-table-scroll, .analysis-equation-scroll) { overflow: auto; min-width: 0; max-width: 100%; padding-bottom: .5rem; scrollbar-width: thin; scrollbar-color: #8a969f transparent; }
+.real-analysis-lesson :is(.ra-scroll, .ra-table-scroll, .analysis-equation-scroll):focus-visible { outline: 2px solid #efc568; outline-offset: 3px; }
+.real-analysis-lesson .ra-svg { display: block; max-width: 100%; height: auto; overflow: hidden; }
+.real-analysis-lesson .ra-label { font: 14px 'JetBrains Mono', monospace; fill: #d8e1e8; }
+.real-analysis-lesson .ra-axis { fill: none; stroke: #8a969f; stroke-width: 1; }
+.real-analysis-lesson .ra-grid { fill: none; stroke: #354047; stroke-width: .8; }
+.real-analysis-lesson .ra-stroke { stroke: #e6bc55; stroke-width: 2; }
+.real-analysis-lesson .ra-stroke.blue { stroke: #85c9d1; }
+.real-analysis-lesson .ra-stroke.rose { stroke: #e1a7ba; }
+.real-analysis-lesson .ra-stroke.muted { stroke: #85919b; }
+.real-analysis-lesson .dashed { stroke-dasharray: 5 4; }
+.real-analysis-lesson .ra-dot { fill: #e6bc55; stroke: #e6bc55; stroke-width: 1.5; }
+.real-analysis-lesson .ra-dot.blue { fill: #85c9d1; stroke: #85c9d1; }
+.real-analysis-lesson .ra-dot.rose { fill: #e1a7ba; stroke: #e1a7ba; }
+.real-analysis-lesson .ra-dot.open { fill: #080b0d; }
+.real-analysis-lesson .ra-area { fill: #e6bc55; fill-opacity: .3; }
+.real-analysis-lesson .ra-area.blue { fill: #85c9d1; }
+.real-analysis-lesson .ra-area.rose { fill: #e1a7ba; }
+.real-analysis-lesson .ra-band { fill: #85c9d1; fill-opacity: .14; }
+.real-analysis-lesson .ra-svg .band { fill: #85c9d1; fill-opacity: .14; }
+.real-analysis-lesson .ra-svg :is(line,path,polyline).gold { stroke: #e6bc55; stroke-width: 2; }
+.real-analysis-lesson .ra-svg :is(line,path,polyline).blue { stroke: #85c9d1; stroke-width: 2; }
+.real-analysis-lesson .ra-svg :is(line,path,polyline).rose { stroke: #e1a7ba; stroke-width: 2; }
+.real-analysis-lesson .ra-svg .gold-fill { fill: #e6bc55; }
+.real-analysis-lesson .ra-svg .blue-fill { fill: #85c9d1; }
+.real-analysis-lesson .ra-svg .rose-fill { fill: #e1a7ba; }
+.real-analysis-lesson .ra-svg .muted-point { fill: #85919b; }
+.real-analysis-lesson .ra-svg .open-point { fill: #080b0d; stroke: #e6bc55; stroke-width: 1.8; }
+.real-analysis-lesson .ra-compare { display: grid; grid-template-columns: 1fr; gap: 1.4rem; min-width: 0; }
+.real-analysis-lesson .ra-panel { min-width: 0; }
+.real-analysis-lesson .ra-table-scroll table { border-collapse: collapse; min-width: max-content; font: .9rem/1.6 'JetBrains Mono', monospace; }
+.real-analysis-lesson .ra-table-scroll :is(th,td) { padding: .55rem .8rem; text-align: left; white-space: nowrap; border-bottom: 1px solid #354047; }
+.real-analysis-lesson .ra-table-scroll th { color: #eee3bc; }
+.real-analysis-lesson .ra-table-block { min-width: 0; margin: 1.2rem 0; }
+.real-analysis-lesson .analysis-result { border: 0; padding: 0; }
+.real-analysis-lesson .analysis-readout { border: 0; }
+.real-analysis-lesson .analysis-readout strong { display: inline-block; white-space: nowrap; overflow-wrap: normal; width: max-content; max-width: 100%; }
+.real-analysis-lesson .analysis-field strong { white-space: nowrap; }
+.real-analysis-lesson .analysis-controls { margin: 1.2rem 0; }
+.real-analysis-lesson .analysis-pair { grid-template-columns: 1fr; }
+.real-analysis-lesson .analysis-equation-scroll .katex-display { overflow: visible; margin: .7rem 0; }
+.real-analysis-lesson .analysis-equation-scroll .katex-display > .katex { width: max-content; min-width: 100%; text-align: left; }
+@container ra-object (min-width: 68rem) { .real-analysis-lesson .ra-compare { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } }
+
+.real-analysis-lesson .ra-reading-bounded { max-height: 24rem; }
+.real-analysis-lesson .ra-line-key { list-style: none; margin: .6rem 0 1.2rem; padding: 0; display: flex; flex-wrap: wrap; gap: .55rem 1.25rem; }
+.real-analysis-lesson .ra-line-key li { display: flex; align-items: center; gap: .65rem; min-width: 0; }
+.real-analysis-lesson .ra-key-swatch { width: 2.5rem; height: .625rem; flex: none; overflow: visible; }
+@container ra-object (max-width: 32rem) {
+  .real-analysis-lesson .analysis-controls { display: grid; grid-template-columns: minmax(0,1fr); }
+  .real-analysis-lesson .analysis-readouts { grid-template-columns: minmax(0,1fr); }
+}
+
+.real-analysis-lesson .ra-axis-title { margin: .6rem 0; overflow-wrap: anywhere; }
+.real-analysis-lesson :is(.ra-point-key,.ra-product-key,.ra-bar-key) { margin: .7rem 0 1.2rem; padding-left: 1.4rem; line-height: 1.7; }
+.real-analysis-lesson .ra-key-role.blue { color: #85c9d1; }
+.real-analysis-lesson .ra-key-role.rose { color: #e1a7ba; }
+.real-analysis-lesson .ra-key-role.gold { color: #e6bc55; }
+.real-analysis-lesson .ra-label.blue { fill: #85c9d1; }
+.real-analysis-lesson .ra-label.rose { fill: #e1a7ba; }
+.real-analysis-lesson .ra-wiring-row { margin: 1.2rem 0; }
+
+/* Programme text follows the reader text size within this topic. */
+.real-analysis-lesson .lesson-code pre { font-size: .875rem; }
+.real-analysis-lesson :not(pre) > code { font-size: .875rem !important; }

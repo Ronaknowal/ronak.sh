@@ -1,0 +1,657 @@
+{
+  "ratings": [
+    [
+      5.0,
+      1.0,
+      null
+    ],
+    [
+      4.0,
+      2.0,
+      3.0
+    ],
+    [
+      1.0,
+      5.0,
+      5.0
+    ]
+  ],
+  "rowMeans": [
+    3.0,
+    3.0,
+    3.6666666666666665
+  ],
+  "signedUserCF": {
+    "score": 2.350889359326483,
+    "baseline": 3.0,
+    "pairs": [
+      {
+        "first": 0,
+        "second": 1,
+        "orientation": "user",
+        "centering": "full-row",
+        "sharedPositions": [
+          0,
+          1
+        ],
+        "left": [
+          5.0,
+          1.0
+        ],
+        "right": [
+          4.0,
+          2.0
+        ],
+        "leftCenter": [
+          3.0,
+          3.0
+        ],
+        "rightCenter": [
+          3.0,
+          3.0
+        ],
+        "leftResidual": [
+          2.0,
+          -2.0
+        ],
+        "rightResidual": [
+          1.0,
+          -1.0
+        ],
+        "coordinateProducts": [
+          2.0,
+          2.0
+        ],
+        "numerator": 4.0,
+        "denominator": 4.000000000000001,
+        "support": 2,
+        "available": true,
+        "rawWeight": 0.9999999999999998,
+        "weight": 0.9999999999999998
+      },
+      {
+        "first": 0,
+        "second": 2,
+        "orientation": "user",
+        "centering": "full-row",
+        "sharedPositions": [
+          0,
+          1
+        ],
+        "left": [
+          5.0,
+          1.0
+        ],
+        "right": [
+          1.0,
+          5.0
+        ],
+        "leftCenter": [
+          3.0,
+          3.0
+        ],
+        "rightCenter": [
+          3.6666666666666665,
+          3.6666666666666665
+        ],
+        "leftResidual": [
+          2.0,
+          -2.0
+        ],
+        "rightResidual": [
+          -2.6666666666666665,
+          1.3333333333333335
+        ],
+        "coordinateProducts": [
+          -5.333333333333333,
+          -2.666666666666667
+        ],
+        "numerator": -8.0,
+        "denominator": 8.432740427115679,
+        "support": 2,
+        "available": true,
+        "rawWeight": -0.9486832980505138,
+        "weight": -0.9486832980505138
+      }
+    ],
+    "accepted": [
+      {
+        "id": 1,
+        "rating": 3.0,
+        "weight": 0.9999999999999998,
+        "signal": 0.0,
+        "product": 0.0
+      },
+      {
+        "id": 2,
+        "rating": 5.0,
+        "weight": -0.9486832980505138,
+        "signal": 1.3333333333333335,
+        "product": -1.2649110640673518
+      }
+    ],
+    "absoluteDenominator": 1.9486832980505135,
+    "correction": -0.6491106406735174,
+    "fallback": false,
+    "rule": "user/full-row/signed"
+  },
+  "positiveUserCF": {
+    "score": 3.0,
+    "baseline": 3.0,
+    "pairs": [
+      {
+        "first": 0,
+        "second": 1,
+        "orientation": "user",
+        "centering": "full-row",
+        "sharedPositions": [
+          0,
+          1
+        ],
+        "left": [
+          5.0,
+          1.0
+        ],
+        "right": [
+          4.0,
+          2.0
+        ],
+        "leftCenter": [
+          3.0,
+          3.0
+        ],
+        "rightCenter": [
+          3.0,
+          3.0
+        ],
+        "leftResidual": [
+          2.0,
+          -2.0
+        ],
+        "rightResidual": [
+          1.0,
+          -1.0
+        ],
+        "coordinateProducts": [
+          2.0,
+          2.0
+        ],
+        "numerator": 4.0,
+        "denominator": 4.000000000000001,
+        "support": 2,
+        "available": true,
+        "rawWeight": 0.9999999999999998,
+        "weight": 0.9999999999999998
+      },
+      {
+        "first": 0,
+        "second": 2,
+        "orientation": "user",
+        "centering": "full-row",
+        "sharedPositions": [
+          0,
+          1
+        ],
+        "left": [
+          5.0,
+          1.0
+        ],
+        "right": [
+          1.0,
+          5.0
+        ],
+        "leftCenter": [
+          3.0,
+          3.0
+        ],
+        "rightCenter": [
+          3.6666666666666665,
+          3.6666666666666665
+        ],
+        "leftResidual": [
+          2.0,
+          -2.0
+        ],
+        "rightResidual": [
+          -2.6666666666666665,
+          1.3333333333333335
+        ],
+        "coordinateProducts": [
+          -5.333333333333333,
+          -2.666666666666667
+        ],
+        "numerator": -8.0,
+        "denominator": 8.432740427115679,
+        "support": 2,
+        "available": true,
+        "rawWeight": -0.9486832980505138,
+        "weight": -0.9486832980505138
+      }
+    ],
+    "accepted": [
+      {
+        "id": 1,
+        "rating": 3.0,
+        "weight": 0.9999999999999998,
+        "signal": 0.0,
+        "product": 0.0
+      }
+    ],
+    "absoluteDenominator": 0.9999999999999998,
+    "correction": 0.0,
+    "fallback": false,
+    "rule": "user/full-row/positive"
+  },
+  "itemCF": {
+    "score": 1.0,
+    "baseline": 3.0,
+    "pairs": [
+      {
+        "first": 2,
+        "second": 0,
+        "orientation": "item",
+        "centering": "full-row",
+        "sharedPositions": [
+          1,
+          2
+        ],
+        "left": [
+          3.0,
+          5.0
+        ],
+        "right": [
+          4.0,
+          1.0
+        ],
+        "leftCenter": [
+          3.0,
+          3.6666666666666665
+        ],
+        "rightCenter": [
+          3.0,
+          3.6666666666666665
+        ],
+        "leftResidual": [
+          0.0,
+          1.3333333333333335
+        ],
+        "rightResidual": [
+          1.0,
+          -2.6666666666666665
+        ],
+        "coordinateProducts": [
+          0.0,
+          -3.555555555555556
+        ],
+        "numerator": -3.555555555555556,
+        "denominator": 3.797334997918903,
+        "support": 2,
+        "available": true,
+        "rawWeight": -0.9363291775690445,
+        "weight": -0.9363291775690445
+      },
+      {
+        "first": 2,
+        "second": 1,
+        "orientation": "item",
+        "centering": "full-row",
+        "sharedPositions": [
+          1,
+          2
+        ],
+        "left": [
+          3.0,
+          5.0
+        ],
+        "right": [
+          2.0,
+          5.0
+        ],
+        "leftCenter": [
+          3.0,
+          3.6666666666666665
+        ],
+        "rightCenter": [
+          3.0,
+          3.6666666666666665
+        ],
+        "leftResidual": [
+          0.0,
+          1.3333333333333335
+        ],
+        "rightResidual": [
+          -1.0,
+          1.3333333333333335
+        ],
+        "coordinateProducts": [
+          -0.0,
+          1.7777777777777781
+        ],
+        "numerator": 1.7777777777777781,
+        "denominator": 2.2222222222222228,
+        "support": 2,
+        "available": true,
+        "rawWeight": 0.7999999999999999,
+        "weight": 0.7999999999999999
+      }
+    ],
+    "accepted": [
+      {
+        "id": 0,
+        "rating": 5.0,
+        "weight": -0.9363291775690445,
+        "signal": 2.0,
+        "product": -1.872658355138089
+      },
+      {
+        "id": 1,
+        "rating": 1.0,
+        "weight": 0.7999999999999999,
+        "signal": -2.0,
+        "product": -1.5999999999999999
+      }
+    ],
+    "absoluteDenominator": 1.7363291775690444,
+    "correction": -2.0,
+    "fallback": false,
+    "rule": "item/full-row/signed"
+  },
+  "rawPair": {
+    "first": 0,
+    "second": 1,
+    "orientation": "user",
+    "centering": "raw",
+    "sharedPositions": [
+      0,
+      1
+    ],
+    "left": [
+      5.0,
+      1.0
+    ],
+    "right": [
+      4.0,
+      2.0
+    ],
+    "leftCenter": [
+      0.0,
+      0.0
+    ],
+    "rightCenter": [
+      0.0,
+      0.0
+    ],
+    "leftResidual": [
+      5.0,
+      1.0
+    ],
+    "rightResidual": [
+      4.0,
+      2.0
+    ],
+    "coordinateProducts": [
+      20.0,
+      2.0
+    ],
+    "numerator": 22.0,
+    "denominator": 22.80350850198276,
+    "support": 2,
+    "available": true,
+    "rawWeight": 0.9647638212377322,
+    "weight": 0.9647638212377322
+  },
+  "pairCentered": {
+    "first": 0,
+    "second": 2,
+    "orientation": "user",
+    "centering": "pair",
+    "sharedPositions": [
+      0,
+      1
+    ],
+    "left": [
+      5.0,
+      1.0
+    ],
+    "right": [
+      1.0,
+      5.0
+    ],
+    "leftCenter": [
+      3.0,
+      3.0
+    ],
+    "rightCenter": [
+      3.0,
+      3.0
+    ],
+    "leftResidual": [
+      2.0,
+      -2.0
+    ],
+    "rightResidual": [
+      -2.0,
+      2.0
+    ],
+    "coordinateProducts": [
+      -4.0,
+      -4.0
+    ],
+    "numerator": -8.0,
+    "denominator": 8.000000000000002,
+    "support": 2,
+    "available": true,
+    "rawWeight": -0.9999999999999998,
+    "weight": -0.9999999999999998
+  },
+  "cluster": {
+    "memberIDs": [
+      0,
+      1
+    ],
+    "sums": [
+      9.0,
+      3.0,
+      3.0
+    ],
+    "counts": [
+      2,
+      2,
+      1
+    ],
+    "means": [
+      4.5,
+      1.5,
+      3.0
+    ]
+  },
+  "emptyFallback": {
+    "score": 3.0,
+    "baseline": 3.0,
+    "pairs": [],
+    "accepted": [],
+    "absoluteDenominator": 0,
+    "correction": null,
+    "fallback": true,
+    "rule": "user/full-row/signed"
+  },
+  "zeroNormPair": {
+    "first": 0,
+    "second": 1,
+    "orientation": "user",
+    "centering": "raw",
+    "sharedPositions": [
+      0,
+      1
+    ],
+    "left": [
+      0.0,
+      0.0
+    ],
+    "right": [
+      1.0,
+      2.0
+    ],
+    "leftCenter": [
+      0.0,
+      0.0
+    ],
+    "rightCenter": [
+      0.0,
+      0.0
+    ],
+    "leftResidual": [
+      0.0,
+      0.0
+    ],
+    "rightResidual": [
+      1.0,
+      2.0
+    ],
+    "coordinateProducts": [
+      0.0,
+      0.0
+    ],
+    "numerator": 0.0,
+    "denominator": 0.0,
+    "support": 2,
+    "available": false,
+    "rawWeight": null,
+    "weight": null
+  },
+  "ordinary": {
+    "version": "1.1.5",
+    "globalMean": 3.25,
+    "userMapping": {
+      "U0": 0,
+      "U1": 1,
+      "U2": 2
+    },
+    "itemMapping": {
+      "I0": 0,
+      "I1": 1,
+      "I2": 2
+    },
+    "constructedKNNFits": 4,
+    "results": [
+      {
+        "algorithm": "KNNBasic",
+        "userBased": true,
+        "estimate": 3.0,
+        "details": {
+          "actual_k": 1,
+          "was_impossible": false
+        },
+        "similarity": [
+          [
+            1.0,
+            1.0,
+            -1.0
+          ],
+          [
+            1.0,
+            1.0,
+            -0.8660254037844387
+          ],
+          [
+            -1.0,
+            -0.8660254037844387,
+            1.0
+          ]
+        ],
+        "fullTrainingMeans": null
+      },
+      {
+        "algorithm": "KNNWithMeans",
+        "userBased": true,
+        "estimate": 3.0,
+        "details": {
+          "actual_k": 1,
+          "was_impossible": false
+        },
+        "similarity": [
+          [
+            1.0,
+            1.0,
+            -1.0
+          ],
+          [
+            1.0,
+            1.0,
+            -0.8660254037844387
+          ],
+          [
+            -1.0,
+            -0.8660254037844387,
+            1.0
+          ]
+        ],
+        "fullTrainingMeans": [
+          3.0,
+          3.0,
+          3.6666666666666665
+        ]
+      },
+      {
+        "algorithm": "KNNBasic",
+        "userBased": false,
+        "estimate": 1.0,
+        "details": {
+          "actual_k": 1,
+          "was_impossible": false
+        },
+        "similarity": [
+          [
+            1.0,
+            -1.0,
+            -1.0
+          ],
+          [
+            -1.0,
+            1.0,
+            1.0
+          ],
+          [
+            -1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "fullTrainingMeans": null
+      },
+      {
+        "algorithm": "KNNWithMeans",
+        "userBased": false,
+        "estimate": 2.3333333333333335,
+        "details": {
+          "actual_k": 1,
+          "was_impossible": false
+        },
+        "similarity": [
+          [
+            1.0,
+            -1.0,
+            -1.0
+          ],
+          [
+            -1.0,
+            1.0,
+            1.0
+          ],
+          [
+            -1.0,
+            1.0,
+            1.0
+          ]
+        ],
+        "fullTrainingMeans": [
+          3.3333333333333335,
+          2.6666666666666665,
+          4.0
+        ]
+      }
+    ],
+    "difference": "Native Pearson uses each pair-overlap mean and positive neighbors. WithMeans uses full-training row means of its selected entity orientation."
+  },
+  "cost": "Selected pair O(counterpart entities); all item pairs O(U*I^2); accepted neighbor storage O(k) plus the actual matrix."
+}

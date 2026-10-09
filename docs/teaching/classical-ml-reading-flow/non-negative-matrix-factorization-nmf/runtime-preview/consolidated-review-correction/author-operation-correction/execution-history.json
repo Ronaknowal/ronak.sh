@@ -1,0 +1,59 @@
+{
+  "scope": "Only scoped original-author correction/check history; original author/reviewer histories remain separately immutable",
+  "events": [
+    {
+      "receipt": "790171",
+      "action": "Applied initial 18-function author correction",
+      "status": "exit0",
+      "qualification": "apply-scoped-correction.py/scoped-delta.json record this initial pass, not the final source after reread amendments"
+    },
+    {
+      "receipt": "cf5ef2",
+      "action": "First bounded SSR/text estimate",
+      "status": "exit1",
+      "finding": "D31 before1 and after−1 text estimates intersected"
+    },
+    {
+      "receipt": "831b0a",
+      "action": "Added diagnostic persistence, same check",
+      "status": "Node exit1; terminal command final status0 because Get-Content succeeded",
+      "finding": "Same D31 text intersection retained in estimated-text-diagnostics.initial.json"
+    },
+    {
+      "receipt": "1a9246",
+      "action": "Separated D31 label lanes",
+      "status": "exit0",
+      "conditions": 3724,
+      "cases": 43
+    },
+    {
+      "receipt": "e8ea18",
+      "action": "Affected continuous prose reread",
+      "status": "exit1",
+      "finding": "Python cp1252 output stopped at D28 on Unicode minus; remaining ranges recovered explicitly using UTF-8 in3580fd"
+    },
+    {
+      "receipt": "015e41",
+      "action": "Prose correspondence added signed C1 bars, vertical signed D31 reference, separate F2 status hatching",
+      "status": "exit0",
+      "conditions": 3752,
+      "cases": 43
+    },
+    {
+      "receipt": "cd3e69",
+      "action": "Attempted explicit semantic matrix address metadata",
+      "status": "helper failed before any file write; subsequent unchanged checker passed",
+      "finding": "Current H label occurs outside assigned Geometry function; constrained metadata amendment to Alternation before reapplying"
+    },
+    {
+      "receipt": "1ae894",
+      "action": "Scoped semantic address metadata applied, foreign function preservation verified",
+      "status": "exit0",
+      "conditions": 3752,
+      "cases": 43
+    }
+  ],
+  "scientificExecutions": 0,
+  "viteBuilds": 0,
+  "native": false
+}

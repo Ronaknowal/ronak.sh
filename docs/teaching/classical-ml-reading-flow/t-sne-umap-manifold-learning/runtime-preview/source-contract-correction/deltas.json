@@ -1,0 +1,78 @@
+{
+  "status": "ONE_CONSOLIDATED_SOURCE_CONTRACT_CORRECTION",
+  "changedFiles": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/predecessors/GeometryFigures.jsx",
+        "bytes": 35451,
+        "sha256": "9dc79797f5fa23c9fcb6eae4bc50f0f02dda6c66cbbe0bc34177c635466bc02f"
+      },
+      "successor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/GeometryFigures.jsx",
+        "bytes": 39168,
+        "sha256": "1a7192e4d506f23d8568a3e0ff5f6d0bdf1e269563e46850b1bace7b7091750f"
+      },
+      "inverse": "Restore exactPredecessor bytes to current; no other file is part of this inverse."
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/predecessors/ManifoldObjects.jsx",
+        "bytes": 9995,
+        "sha256": "18d45c5095d4048622aed696a2d21260c231626fb8ab913b4122cbf1bb398806"
+      },
+      "successor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldObjects.jsx",
+        "bytes": 17523,
+        "sha256": "50a63d3f1e865b1c961313d16e24ffaa3fe823201e48f17cc18fa27ce0e6b301"
+      },
+      "inverse": "Restore exactPredecessor bytes to current; no other file is part of this inverse."
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/predecessors/ManifoldDrawing.jsx",
+        "bytes": 7465,
+        "sha256": "7b3a80854b817602faa2c0f56e3ee0de00ba843bf81df8daeaa4bf01663f4bb2"
+      },
+      "successor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldDrawing.jsx",
+        "bytes": 8013,
+        "sha256": "1cca35265483af5c78d3afbea08ded83d4b449fa45d6a2f64479c0f7460183fd"
+      },
+      "inverse": "Restore exactPredecessor bytes to current; no other file is part of this inverse."
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/predecessors/ManifoldInvestigations.jsx",
+        "bytes": 20232,
+        "sha256": "8ed3c9314a41f383483ea2fc54ae61121225283713a12baf3eb0b7a06779e06f"
+      },
+      "successor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/ManifoldInvestigations.jsx",
+        "bytes": 23539,
+        "sha256": "3dc91b6d722c453e25e4afee585747a2fae04a859e698cd19a833fcc5e8e7ad7"
+      },
+      "inverse": "Restore exactPredecessor bytes to current; no other file is part of this inverse."
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+      "predecessor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/source-contract-correction/predecessors/manifold-data.js",
+        "bytes": 402,
+        "sha256": "d08972295202fb57194d091a7b9649c37bd29b944777e8f72b85e7aa55a704ed"
+      },
+      "successor": {
+        "path": "docs/teaching/classical-ml-reading-flow/t-sne-umap-manifold-learning/runtime-preview/manifold-data.js",
+        "bytes": 1098,
+        "sha256": "ddb035ee95bcfb601f5eb168af517db8b13da7b753ab028f36c80bce468e24d4"
+      },
+      "inverse": "Restore exactPredecessor bytes to current; no other file is part of this inverse."
+    }
+  ],
+  "unchangedScience": "All35 program/stream/data payload sources remain exact; no original campaign replayed.",
+  "sourceFormatting": "Five changed modules were fully formatted; source-level formatting differences are included. Exact predecessor restore supplies the inverse, including original line endings.",
+  "liveOldBuild": "5193/session10184 serves unchanged build-private-r2; these source deltas are not attributed to that build."
+}

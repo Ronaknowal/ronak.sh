@@ -1,0 +1,35 @@
+.naive-bayes-reading-flow { --nb-muted:#b5b5bf; overflow-wrap:anywhere; }
+.naive-bayes-reading-flow .nb-figure { margin:2rem 0 2.8rem; padding:0; border:0; background:none; }
+.naive-bayes-reading-flow .nb-figure figcaption { display:grid; gap:.45rem; margin-bottom:1.1rem; line-height:1.65; }
+.naive-bayes-reading-flow .nb-figure figcaption strong { font-size:1.12rem; color:#f4f0e7; }
+.naive-bayes-reading-flow .nb-figure figcaption span { color:var(--nb-muted); }
+.naive-bayes-reading-flow .nb-pan,.naive-bayes-reading-flow .nb-table-pan { max-width:100%; overflow:auto; overscroll-behavior-inline:contain; padding:.35rem 0 .9rem; }
+.naive-bayes-reading-flow .nb-pan svg { display:block; max-width:none; width:auto; height:auto; flex:none; color:#e8e7ed; font-family:inherit; }
+.naive-bayes-reading-flow .nb-pan:focus-visible,.naive-bayes-reading-flow .nb-table-pan:focus-visible { outline:2px solid #e7c37d; outline-offset:3px; }
+.naive-bayes-reading-flow .nb-pan-hint { display:block; margin:.1rem 0 1rem; color:var(--nb-muted); line-height:1.6; }
+.naive-bayes-reading-flow .nb-controls { display:flex; flex-wrap:wrap; align-items:flex-end; gap:1rem; margin:1rem 0 .4rem; }
+.naive-bayes-reading-flow .nb-field { display:flex; flex-direction:column; gap:.45rem; min-width:9rem; max-width:100%; flex:1 1 11rem; }
+.naive-bayes-reading-flow .nb-field span { font-weight:600; }
+.naive-bayes-reading-flow .nb-field input,.naive-bayes-reading-flow .nb-field select { font:inherit; width:100%; min-height:44px; box-sizing:border-box; color:#f1f0f5; background:#141419; border:1px solid #65656d; border-radius:3px; padding:.65rem .7rem; }
+.naive-bayes-reading-flow .nb-field input:focus-visible,.naive-bayes-reading-flow .nb-field select:focus-visible,.naive-bayes-reading-flow button:focus-visible { outline:2px solid #e7c37d; outline-offset:3px; }
+.naive-bayes-reading-flow .nb-field small { line-height:1.5; color:var(--nb-muted); }
+.naive-bayes-reading-flow .nb-controls button,.naive-bayes-reading-flow .nb-step button { min-height:44px; padding:.65rem 1rem; font:inherit; color:#f2e6c8; border:1px solid #907d55; background:#19171c; border-radius:3px; cursor:pointer; }
+.naive-bayes-reading-flow .nb-controls button:disabled,.naive-bayes-reading-flow .nb-step button:disabled { opacity:.5; cursor:default; }
+.naive-bayes-reading-flow .nb-validation { min-height:1.6em; font-size:.9rem; line-height:1.6; color:var(--nb-muted); }
+.naive-bayes-reading-flow .nb-validation--error { color:#f49c91; }
+.naive-bayes-reading-flow .nb-table-pan table { border-collapse:collapse; min-width:26rem; width:100%; font-variant-numeric:tabular-nums; overflow-wrap:normal; }
+.naive-bayes-reading-flow .nb-table-pan caption { text-align:left; margin:0 0 .8rem; font-weight:600; }
+.naive-bayes-reading-flow .nb-table-pan th,.naive-bayes-reading-flow .nb-table-pan td { text-align:left; vertical-align:top; padding:.7rem .8rem; border-bottom:1px solid #404047; line-height:1.5; }
+.naive-bayes-reading-flow .nb-table-pan thead th { color:#eee4cd; }
+.naive-bayes-reading-flow .nb-table-pan tbody th { font-weight:500; }
+.naive-bayes-reading-flow .nb-key { display:flex; flex-wrap:wrap; gap:.4rem 1.4rem; line-height:1.6; font-size:.94rem; }
+.naive-bayes-reading-flow .nb-result { border-left:2px solid #8d8d99; padding:.1rem 0 .1rem 1rem; margin:1rem 0; line-height:1.8; overflow-wrap:anywhere; }
+.naive-bayes-reading-flow .nb-result p { margin:.45rem 0; }
+.naive-bayes-reading-flow .nb-probabilities { display:flex; flex-wrap:wrap; gap:1rem; margin:1rem 0; }
+.naive-bayes-reading-flow .nb-probabilities>div { flex:1 1 9rem; }
+.naive-bayes-reading-flow .nb-probability-track { height:12px; background:#35353c; margin-top:.45rem; }
+.naive-bayes-reading-flow .nb-probability-track span { height:100%; display:block; }
+.naive-bayes-reading-flow .nb-step { display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; margin:1rem 0; }
+.naive-bayes-reading-flow .nb-downloads { margin:2rem 0; line-height:1.8; }
+.naive-bayes-reading-flow .nb-downloads a { overflow-wrap:anywhere; }
+@media(max-width:480px){.naive-bayes-reading-flow .nb-controls{gap:.8rem}.naive-bayes-reading-flow .nb-field{flex-basis:100%}.naive-bayes-reading-flow .nb-result{padding-left:.8rem}.naive-bayes-reading-flow .nb-figure{margin:1.6rem 0 2rem}}

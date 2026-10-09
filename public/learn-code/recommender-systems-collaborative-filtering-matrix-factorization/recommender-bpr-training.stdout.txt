@@ -1,0 +1,1120 @@
+{
+  "binaryPairs": [
+    [
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      0
+    ]
+  ],
+  "scratchConstructedFits": 1,
+  "scratch": {
+    "available": true,
+    "P": [
+      [
+        -0.12135250075691417,
+        0.24731695884239577
+      ],
+      [
+        0.39008752332942365,
+        0.06199033430448997
+      ],
+      [
+        0.38505764831361106,
+        0.2026469426050024
+      ]
+    ],
+    "Q": [
+      [
+        0.09558581306683643,
+        0.1150694020204325
+      ],
+      [
+        0.3866384528595141,
+        -0.0826118592290755
+      ],
+      [
+        -0.2762468261816708,
+        -0.019597154589529965
+      ],
+      [
+        -0.31850991360847,
+        -0.372678482534359
+      ]
+    ],
+    "initialP": [
+      [
+        -0.03918698419272179,
+        0.004992040152334534
+      ],
+      [
+        -0.016519016568439276,
+        -0.016796939015046086
+      ],
+      [
+        0.006261587751175877,
+        -0.02257110813270981
+      ]
+    ],
+    "initialQ": [
+      [
+        0.02969227725915538,
+        -0.00488928601357681
+      ],
+      [
+        0.05680696849093915,
+        -0.06570321512472709
+      ],
+      [
+        -0.03606599891351596,
+        -0.08560830468147575
+      ],
+      [
+        -0.16699613153859189,
+        -0.22324993797182416
+      ]
+    ],
+    "seed": 29,
+    "normalSD": 0.1,
+    "updates": 200,
+    "rate": 0.05,
+    "penalty": 0.01,
+    "distribution": {
+      "available": true,
+      "convention": "uniform-triple",
+      "eligibleUsers": [
+        0,
+        1,
+        2
+      ],
+      "tripleIncidence": {
+        "0": 4,
+        "1": 3,
+        "2": 4
+      },
+      "tripleProbabilities": [
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091,
+        0.09090909090909091
+      ],
+      "userProbabilities": {
+        "0": 0.36363636363636365,
+        "1": 0.2727272727272727,
+        "2": 0.36363636363636365
+      }
+    },
+    "triples": [
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        3
+      ],
+      [
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        1,
+        3
+      ],
+      [
+        2,
+        0,
+        2
+      ],
+      [
+        2,
+        0,
+        3
+      ],
+      [
+        2,
+        1,
+        2
+      ],
+      [
+        2,
+        1,
+        3
+      ]
+    ],
+    "sampleIndices": [
+      6,
+      2,
+      9,
+      4,
+      0,
+      10,
+      10,
+      3,
+      5,
+      3,
+      8,
+      10,
+      6,
+      6,
+      2,
+      2,
+      4,
+      6,
+      8,
+      0,
+      6,
+      10,
+      2,
+      4,
+      0,
+      8,
+      1,
+      7,
+      2,
+      10,
+      9,
+      5,
+      7,
+      9,
+      1,
+      2,
+      0,
+      5,
+      5,
+      2,
+      9,
+      10,
+      10,
+      9,
+      4,
+      3,
+      5,
+      1,
+      0,
+      3,
+      5,
+      1,
+      10,
+      0,
+      3,
+      8,
+      1,
+      1,
+      2,
+      1,
+      6,
+      5,
+      7,
+      10,
+      6,
+      6,
+      8,
+      3,
+      3,
+      7,
+      3,
+      4,
+      4,
+      5,
+      3,
+      10,
+      5,
+      5,
+      1,
+      6,
+      5,
+      9,
+      2,
+      1,
+      0,
+      10,
+      9,
+      9,
+      2,
+      0,
+      10,
+      9,
+      8,
+      6,
+      7,
+      8,
+      5,
+      7,
+      2,
+      6,
+      7,
+      1,
+      3,
+      0,
+      9,
+      2,
+      5,
+      8,
+      0,
+      0,
+      7,
+      7,
+      6,
+      0,
+      5,
+      10,
+      6,
+      1,
+      5,
+      5,
+      7,
+      6,
+      6,
+      6,
+      2,
+      3,
+      3,
+      2,
+      6,
+      10,
+      6,
+      3,
+      7,
+      6,
+      0,
+      2,
+      1,
+      8,
+      3,
+      10,
+      2,
+      5,
+      5,
+      7,
+      2,
+      2,
+      8,
+      2,
+      8,
+      2,
+      0,
+      4,
+      2,
+      4,
+      2,
+      6,
+      5,
+      8,
+      7,
+      7,
+      6,
+      2,
+      10,
+      6,
+      3,
+      8,
+      6,
+      6,
+      5,
+      3,
+      8,
+      9,
+      10,
+      7,
+      2,
+      10,
+      5,
+      2,
+      6,
+      7,
+      9,
+      3,
+      4,
+      4,
+      6,
+      4,
+      3,
+      3,
+      4,
+      10,
+      5,
+      6,
+      7,
+      3,
+      7,
+      3,
+      2,
+      1,
+      2,
+      1
+    ],
+    "sampleCounts": [
+      14,
+      14,
+      27,
+      21,
+      12,
+      22,
+      27,
+      18,
+      14,
+      12,
+      19
+    ],
+    "populationObjectives": [
+      0.6943267592154573,
+      0.6942129984065115,
+      0.6942370544859957,
+      0.6941592532333527,
+      0.6941568400937418,
+      0.694128715310796,
+      0.6938924327370091,
+      0.6936582650959551,
+      0.6935567767218414,
+      0.6935158108776961,
+      0.6934159178469053,
+      0.6931746430507347,
+      0.6929447638502487,
+      0.6928359199181287,
+      0.692728257091219,
+      0.6927446756562413,
+      0.6927597508363357,
+      0.6927535452616704,
+      0.6926439485529585,
+      0.6924051545042507,
+      0.6923722884435213,
+      0.6922609364175807,
+      0.6920251964818546,
+      0.6920350373152432,
+      0.6920238969839468,
+      0.6919884928182549,
+      0.6917486588092805,
+      0.6916068539972253,
+      0.6915106847192732,
+      0.6915192239258595,
+      0.6912731658835859,
+      0.691166372186364,
+      0.6911072622439253,
+      0.6910013293754464,
+      0.6908851725270937,
+      0.6907492971307402,
+      0.6907565603495563,
+      0.6907190652982441,
+      0.6906528016737992,
+      0.6905840679113955,
+      0.6905857395061199,
+      0.6904587186565982,
+      0.6901858633095181,
+      0.6899046775836462,
+      0.6897561375059889,
+      0.6897302136919011,
+      0.6896383333878365,
+      0.6895526584028596,
+      0.6894238437020694,
+      0.6893827544195306,
+      0.6892910753831497,
+      0.6892013892627596,
+      0.6890688288265717,
+      0.6887696928603507,
+      0.6887249692807578,
+      0.6886303450817932,
+      0.6883438368292043,
+      0.6881990647886483,
+      0.6880489813142865,
+      0.6880491858340503,
+      0.6878922715182934,
+      0.6877316245169889,
+      0.6876302945281778,
+      0.6874826632046989,
+      0.6871506473877476,
+      0.6869726387878633,
+      0.686786706839105,
+      0.6864569947575537,
+      0.6863467774563647,
+      0.6862324148976171,
+      0.6860608984240406,
+      0.6859427924358363,
+      0.6859050854769411,
+      0.685864185621422,
+      0.6857311060319007,
+      0.68561051581806,
+      0.6852239940675666,
+      0.6850799852737023,
+      0.6849287540658111,
+      0.6847377883984078,
+      0.6845047946708638,
+      0.684338185352216,
+      0.6841001495409464,
+      0.6841009624971994,
+      0.6839040321308612,
+      0.6838252194296314,
+      0.6833834246231796,
+      0.6831220727162529,
+      0.6828454402930488,
+      0.6828372296131735,
+      0.6827498782026058,
+      0.6822641406378931,
+      0.6819544152453154,
+      0.6814966440489767,
+      0.6811898813906794,
+      0.6809141719288709,
+      0.6804155963198264,
+      0.6801698381095421,
+      0.6798576415704694,
+      0.6798541504371473,
+      0.6795134652101757,
+      0.6791844329904353,
+      0.6789532475108276,
+      0.6788017205547373,
+      0.6786949692429096,
+      0.6782798589141091,
+      0.6782653377204391,
+      0.6779691165569727,
+      0.6773890338887483,
+      0.6772676262180587,
+      0.6771375487327631,
+      0.6767476906778828,
+      0.6763360175804255,
+      0.6759464193163554,
+      0.6758064416269399,
+      0.6754581057089717,
+      0.6747124704960588,
+      0.6742660720384193,
+      0.6739749784839514,
+      0.6735783007642847,
+      0.6731607143508038,
+      0.672681337012507,
+      0.6721675716974357,
+      0.6716239531210357,
+      0.6710488308962348,
+      0.671023815389564,
+      0.6708345709602033,
+      0.670634512929898,
+      0.6705883856236317,
+      0.6699849014304106,
+      0.6690464894945656,
+      0.6683848260333553,
+      0.668164714169492,
+      0.6676324199258761,
+      0.6669302309381352,
+      0.6667531026919156,
+      0.6666890928971285,
+      0.6663258590220558,
+      0.6654743596326789,
+      0.6652087950412836,
+      0.6641137994174332,
+      0.6640475377706485,
+      0.663360501156452,
+      0.6626396606622003,
+      0.6620009991379823,
+      0.6618994347466576,
+      0.6617708926160827,
+      0.660831127806659,
+      0.660686474591151,
+      0.6597131411391022,
+      0.6595506005326248,
+      0.6592353656652793,
+      0.6588646199598961,
+      0.6586426200542044,
+      0.6582388358799817,
+      0.6579707277083144,
+      0.6570693156291832,
+      0.6561173298928018,
+      0.6551268071851639,
+      0.6543515212110718,
+      0.653536008698826,
+      0.6525280956507779,
+      0.6522294229073219,
+      0.6507257151990062,
+      0.649628323539164,
+      0.6492279954347696,
+      0.6480597597523281,
+      0.6468965195020245,
+      0.6456754871520838,
+      0.6443845683076096,
+      0.6439627292683205,
+      0.6426890139604406,
+      0.6411487948447455,
+      0.639280036987653,
+      0.6381798918768551,
+      0.6378376907164526,
+      0.6358650704385839,
+      0.6343831571221211,
+      0.633973347653604,
+      0.6324618711521773,
+      0.631241772269862,
+      0.6292861502755152,
+      0.628819836828263,
+      0.628007198225048,
+      0.6271585914872027,
+      0.625474265164788,
+      0.624535706871378,
+      0.6240646365837549,
+      0.6235706020016298,
+      0.6226009422441486,
+      0.6203021886958677,
+      0.6183713452443567,
+      0.6164507482877206,
+      0.6151016508733842,
+      0.6145940383805274,
+      0.6131845216685332,
+      0.6126516468023783,
+      0.6119821367570638,
+      0.6114235401287861,
+      0.6106983214181844,
+      0.6100870819939309
+    ],
+    "allScores": [
+      [
+        0.016859037110962875,
+        -0.06735085693213737,
+        0.028676534508259494,
+        -0.053517734394140044
+      ],
+      [
+        0.04442002378413585,
+        0.14570169972876212,
+        -0.10897527441724349,
+        -0.1473492070757917
+      ],
+      [
+        0.060124510898487,
+        0.13213705271001047,
+        -0.11034225670493887,
+        -0.1981668333589085
+      ]
+    ],
+    "finalGaps": [
+      0.08420989404310025,
+      0.07037677150510291,
+      0.09602739144039685,
+      0.08219426890239954,
+      0.10128167594462627,
+      0.2546769741460056,
+      0.29305090680455376,
+      0.17046676760342588,
+      0.2582913442573955,
+      0.2424793094149493,
+      0.330303886068919
+    ],
+    "objectiveUnit": "mean of the named local regularized loss over this triple population; not once-entity global regularization"
+  },
+  "uniformUserAlternativePopulation": {
+    "available": true,
+    "convention": "uniform-user",
+    "eligibleUsers": [
+      0,
+      1,
+      2
+    ],
+    "tripleIncidence": {
+      "0": 4,
+      "1": 3,
+      "2": 4
+    },
+    "tripleProbabilities": [
+      0.08333333333333333,
+      0.08333333333333333,
+      0.08333333333333333,
+      0.08333333333333333,
+      0.1111111111111111,
+      0.1111111111111111,
+      0.1111111111111111,
+      0.08333333333333333,
+      0.08333333333333333,
+      0.08333333333333333,
+      0.08333333333333333
+    ],
+    "userProbabilities": {
+      "0": 0.3333333333333333,
+      "1": 0.3333333333333333,
+      "2": 0.3333333333333333
+    }
+  },
+  "noAdmissibleTriple": {
+    "available": false,
+    "reason": "no user has both a positive and an admissible negative"
+  },
+  "ordinaryConstructedFits": 1,
+  "ordinary": {
+    "version": "0.7.3",
+    "PIncludingFixed1": [
+      [
+        0.3895466943704086,
+        0.30507410332781526,
+        1.0
+      ],
+      [
+        -0.2650414189201112,
+        0.061602684387832625,
+        1.0
+      ],
+      [
+        -0.3976012854801247,
+        0.21117133430649282,
+        1.0
+      ]
+    ],
+    "QIncludingItemBias": [
+      [
+        -0.12149647298106073,
+        0.09089941288013771,
+        0.2400004142892305
+      ],
+      [
+        -0.4910663277305992,
+        -0.22304295959703613,
+        -0.14720049461697057
+      ],
+      [
+        0.2281649605542397,
+        -0.1023689450809133,
+        -0.5474109966126485
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "allScores": [
+      [
+        0.2204029217392275,
+        -0.4065383902036892,
+        -0.4897602045867637,
+        0.0
+      ],
+      [
+        0.2778016597246142,
+        -0.030787623376348536,
+        -0.6141903633207302,
+        0.0
+      ],
+      [
+        0.30750291843337696,
+        0.0009478291589445909,
+        -0.6597470649548207,
+        0.0
+      ]
+    ],
+    "positiveItemFrequencies": [
+      2,
+      2,
+      1,
+      0
+    ],
+    "negativeItemProbabilities": [
+      0.4,
+      0.4,
+      0.2,
+      0.0
+    ],
+    "callbacks": [
+      {
+        "epoch": 0,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 0,
+        "sampledTrainingStatistic": 0.0
+      },
+      {
+        "epoch": 1,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 0.6666666666666666
+      },
+      {
+        "epoch": 2,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 3,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 4,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 5,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 4,
+        "skipped": 1,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 6,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 7,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 8,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.3333333333333333
+      },
+      {
+        "epoch": 9,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 10,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 11,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 0,
+        "skipped": 5,
+        "correctSampledComparisons": 0,
+        "sampledTrainingStatistic": null
+      },
+      {
+        "epoch": 12,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 13,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 0.6666666666666666
+      },
+      {
+        "epoch": 14,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 15,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 16,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 17,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 3,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 18,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 19,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 20,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 21,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 22,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 0.6666666666666666
+      },
+      {
+        "epoch": 23,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 24,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 25,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 0.6666666666666666
+      },
+      {
+        "epoch": 26,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 0.6666666666666666
+      },
+      {
+        "epoch": 27,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 3,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 28,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 29,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 30,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 31,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 32,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 33,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 34,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 3,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 35,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 36,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 37,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 1,
+        "skipped": 4,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 1.0
+      },
+      {
+        "epoch": 38,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 2,
+        "skipped": 3,
+        "correctSampledComparisons": 1,
+        "sampledTrainingStatistic": 0.5
+      },
+      {
+        "epoch": 39,
+        "elapsedSeconds": 0.0,
+        "attempts": 5,
+        "accepted": 3,
+        "skipped": 2,
+        "correctSampledComparisons": 2,
+        "sampledTrainingStatistic": 0.6666666666666666
+      }
+    ],
+    "totalAttempts": 200,
+    "totalAccepted": 77,
+    "totalSkipped": 123,
+    "limits": "Global positive-index negative sampler, seen-negative skips, ignored input magnitudes and additional item bias differ from scratch full-support triples; no fitted-score equality is asserted."
+  },
+  "stableExtremeLosses": [
+    1000.0,
+    0.6931471805599453,
+    0.0
+  ],
+  "cost": "small enumerator O(U*I^2); local update O(d); full diagnostic objective O(triples*d)",
+  "evaluationLimit": "These gaps/objectives are training diagnostics; no held-out NDCG or purchase probability is inferred."
+}

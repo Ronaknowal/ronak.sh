@@ -1,0 +1,83 @@
+{
+  "schema": "feature20-private-reader-composition/v1",
+  "acceptedManuscript": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/content-preparation/lesson.md",
+    "bytes": 215186,
+    "sha256": "cabb07a552c707930c01b8a9aa91dc93227fb4c1c7fd81d45220441dad3b5db5",
+    "role": "whole manuscript; bounded F1/F2 successor to whole-reviewed predecessor"
+  },
+  "runtimeWording": [
+    {
+      "old": "Full runtime drawings, keyboard/pointer/narrow viewing, independent runtime review and publication belong to a later phase; the current content packet specifies their actual objects and behavior without claiming those surfaces were rendered.",
+      "new": "The diagrams use these retained values; current live edits apply the stated arithmetic and never rerun the historical experiment.",
+      "reason": "Root-authorized runtime-only successor removes obsolete content-phase staging language; accepted manuscript and numerical/execution roles stay exact."
+    }
+  ],
+  "formatOnly": [
+    "Original single-line disclosures and dollar math rendered using shared components",
+    "Preserved HTML less-than entity in T21 decoded for visible mathematical comparison",
+    "Prepared-renderer current-heading table context kept as accessible region label instead of repeated visible heading"
+  ],
+  "output": {
+    "path": "docs/teaching/classical-ml-reading-flow/feature-scaling-encoding-imputation/runtime-preview/preparation-lesson.jsx",
+    "bytes": 142760,
+    "sha256": "866cc4deb6d0e0df510d6bc0fd7b0d94aac772049062d0b6e54b03d84428751d"
+  },
+  "sections": [
+    [
+      "1-three-different-questions-hiding-inside-preprocessing",
+      "1. Three different questions hiding inside “preprocessing”"
+    ],
+    [
+      "2-scaling-changes-the-meaning-of-nearby",
+      "2. Scaling changes the meaning of “nearby”"
+    ],
+    [
+      "3-encoding-categories-means-choosing-relationships",
+      "3. Encoding categories means choosing relationships"
+    ],
+    [
+      "4-a-missing-value-is-a-question-not-a-zero",
+      "4. A missing value is a question, not a zero"
+    ],
+    [
+      "5-learn-the-preparation-rule-without-looking-ahead",
+      "5. Learn the preparation rule without looking ahead"
+    ],
+    [
+      "6-a-complete-experiment-on-real-penguin-measurements",
+      "6. A complete experiment on real penguin measurements"
+    ],
+    [
+      "7-deeper-branch-change-the-shape-not-only-the-ruler",
+      "7. Deeper branch: change the shape, not only the ruler"
+    ],
+    [
+      "8-deeper-branch-high-cardinality-categories-and-target-information",
+      "8. Deeper branch: high-cardinality categories and target information"
+    ],
+    [
+      "9-deeper-branch-completing-data-versus-representing-uncertainty",
+      "9. Deeper branch: completing data versus representing uncertainty"
+    ],
+    [
+      "10-practice-explain-the-representation-before-choosing-the-function",
+      "10. Practice: explain the representation before choosing the function"
+    ],
+    [
+      "11-readiness-and-the-next-connection",
+      "11. Readiness and the next connection"
+    ]
+  ],
+  "drawings": 41,
+  "investigations": 16,
+  "files": 42,
+  "counts": {
+    "sources": 18,
+    "stdout": 17,
+    "stderr": 1,
+    "snippets": 1
+  },
+  "parserShipsToBrowser": false,
+  "scientificExecutions": 0
+}

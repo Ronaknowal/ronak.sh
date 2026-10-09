@@ -1,0 +1,1165 @@
+{
+  "schema": "independent-staged-content-source-conservation/v1",
+  "scope": "NMF sections 12–16 only; neither whole-topic nor native/runtime acceptance",
+  "reviewer": "/root/ica_normal_integration_review",
+  "at": "2026-10-09T12:16:29.399Z",
+  "sections": [
+    {
+      "section": 12,
+      "manuscript": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/section-twelve.md",
+        "bytes": 38148,
+        "sha256": "9dabc45eb456003155826f78e429e36dd223e8d7845688e25846561dba6820dc"
+      },
+      "handoff": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/section-twelve-handoff.json",
+        "bytes": 14041,
+        "sha256": "f0e0d780c9edca7f4b6a5f5027e3cb8b60dd5ad7e20697067514356564b5e735"
+      },
+      "specification": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/visual-specifications.md",
+        "bytes": 4482,
+        "sha256": "8d1b8865f4a06851b77f90ff59744f7446814cc4a1c5e7ab52b6a5b8430d795d"
+      },
+      "drawings": [
+        "D42",
+        "D43",
+        "D44",
+        "D45"
+      ],
+      "slots": [
+        {
+          "marker": "<!-- source:nmf_factor_alignment.py -->",
+          "language": "python",
+          "lfBodyBytes": 6579,
+          "lfBodySha256": "3906fdfd84c0aee4142ef6cff38b2a6b1ea3fdda5579e46a3c219f91da8d8aa8"
+        },
+        {
+          "marker": "<!-- output:nmf_factor_alignment.stdout.txt -->",
+          "language": "text",
+          "lfBodyBytes": 694,
+          "lfBodySha256": "3ae33d243dcc48b6dc5fe8f3e539b602d749b43aef9816a697e48075995ddd2a"
+        },
+        {
+          "marker": "<!-- source:nmf_saved_digits.py -->",
+          "language": "python",
+          "lfBodyBytes": 6990,
+          "lfBodySha256": "30c101227d7b502337611b23bd25496177efaac76632f16560a26edd05219a9a"
+        },
+        {
+          "marker": "<!-- output:nmf_saved_digits.stdout.txt -->",
+          "language": "text",
+          "lfBodyBytes": 9188,
+          "lfBodySha256": "b3976a382c2948e06738840f28a2ddde60cb0f401f209c773c2de8489499d029"
+        }
+      ]
+    },
+    {
+      "section": 13,
+      "manuscript": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/section-thirteen.md",
+        "bytes": 59217,
+        "sha256": "822556372bebb79c36fc862b278abd419f146c64a83efb3304416a5fc9298eb6"
+      },
+      "handoff": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/section-thirteen-handoff.json",
+        "bytes": 13632,
+        "sha256": "6cae0dbb7b5001c96716c2374dbd0cdfc6c05587a335df334317cc4c687c5c35"
+      },
+      "specification": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/visual-specifications.md",
+        "bytes": 3280,
+        "sha256": "b8481a0981c1fd7f8d06330817ec7ca35c0aab5573261605b9bf0cf9f810849a"
+      },
+      "drawings": [
+        "D46",
+        "D47",
+        "D48",
+        "D49"
+      ],
+      "slots": [
+        {
+          "marker": "<!-- original-source:digitDictionary -->",
+          "language": "python",
+          "lfBodyBytes": 1915,
+          "lfBodySha256": "f6b15d1b1ad710debcb19f102a089fd970fe8ca11e892b8ddd6bfbf689f29989"
+        },
+        {
+          "marker": "<!-- original-output:digitDictionary -->",
+          "language": "text",
+          "lfBodyBytes": 621,
+          "lfBodySha256": "a19d33ceed046572adeb1b8a96c377cde02c863b4c69b3334919aa74af076981"
+        },
+        {
+          "marker": "<!-- source:nmf_digit_comparison.py -->",
+          "language": "python",
+          "lfBodyBytes": 4274,
+          "lfBodySha256": "1a00c5c74dde38d1c3aaaa47ff83c4c2a832f76b4e711e311b362e6aab94c484"
+        },
+        {
+          "marker": "<!-- output:nmf_digit_comparison.stdout.txt -->",
+          "language": "json",
+          "lfBodyBytes": 36984,
+          "lfBodySha256": "354121bca4d406014e589746556759adc220c69207cfc08b841fa86b5b3ba3dd"
+        }
+      ]
+    },
+    {
+      "section": 14,
+      "manuscript": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/section-fourteen.md",
+        "bytes": 7944,
+        "sha256": "ec3a6043ea9627f29cc9dfdf09e3485aa6b8ca302bc91298a0bf256728ff7854"
+      },
+      "handoff": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/section-fourteen-handoff.json",
+        "bytes": 3670,
+        "sha256": "981e089d32e6b77ac823136269b1297adc7b815198b4f1b9335af25aaf3eaf10"
+      },
+      "specification": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/visual-specifications.md",
+        "bytes": 2217,
+        "sha256": "01e7ecd3b7de61c15a6940a914b5e4014553c43298cd8021c789818fe0290a3e"
+      },
+      "drawings": [
+        "D50",
+        "D51",
+        "D52"
+      ],
+      "slots": []
+    },
+    {
+      "section": 15,
+      "manuscript": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/section-fifteen.md",
+        "bytes": 18130,
+        "sha256": "9ec632f4e07841213af497cf8d2553f1f814d8ee9c17c89be8ce7f855db5d990"
+      },
+      "handoff": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/section-fifteen-handoff.json",
+        "bytes": 7410,
+        "sha256": "5b600f0629a570d9b59605c03fa2d5f62ecd700bbebe2bb87ad456184b8f79f3"
+      },
+      "specification": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/visual-specifications.md",
+        "bytes": 2553,
+        "sha256": "fbc6e7ca5d5778364d0666e7c7543bf5f3ea45bebf2ce1bbe99857b542bbd77a"
+      },
+      "drawings": [
+        "D53",
+        "D54",
+        "D55",
+        "D56"
+      ],
+      "slots": [
+        {
+          "marker": "<!-- source:nmf_anchors.py -->",
+          "language": "python",
+          "lfBodyBytes": 5318,
+          "lfBodySha256": "263ef600c45b7365b26e7dbc4ea5088927b1d35406aa14de53a1e2f653681a99"
+        },
+        {
+          "marker": "<!-- output:nmf_anchors.stdout.txt -->",
+          "language": "text",
+          "lfBodyBytes": 488,
+          "lfBodySha256": "603ff616b7173569b43d636efed02f2b56cd9e8c925e7eb24e2e66c82ef10a57"
+        }
+      ]
+    },
+    {
+      "section": 16,
+      "manuscript": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/section-sixteen.md",
+        "bytes": 34405,
+        "sha256": "2a8767cc3f2ce11de0c969e3ab549ee42d532dfb443d7dc579daf14f72bdb322"
+      },
+      "handoff": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/section-sixteen-handoff.json",
+        "bytes": 9965,
+        "sha256": "4f64e089bd9722a4de2f0d10aef2f64780e3384cb9ebd52c5b627d417d3823fb"
+      },
+      "specification": {
+        "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/visual-specifications.md",
+        "bytes": 4274,
+        "sha256": "6d07b5a340a848f14489aa6696d071dba94b1d4815d646032669f901d3189aff"
+      },
+      "drawings": [
+        "D57",
+        "D58",
+        "D59",
+        "D60"
+      ],
+      "slots": [
+        {
+          "marker": "<!-- original-source:wordPatterns -->",
+          "language": "python",
+          "lfBodyBytes": 805,
+          "lfBodySha256": "feff3cfa4fe595a9311fbfad30475a85e9ebdf4f45c6fce01852553542dce343"
+        },
+        {
+          "marker": "<!-- original-output:wordPatterns -->",
+          "language": "text",
+          "lfBodyBytes": 137,
+          "lfBodySha256": "f620f195e6bb4615b35719656c2aa4abdf438a860525571d1d9710bceffa0c23"
+        },
+        {
+          "marker": "<!-- source:nmf_text_spectra.py -->",
+          "language": "python",
+          "lfBodyBytes": 9129,
+          "lfBodySha256": "d2611fe8d6a1f2d026901d3ab667eea32197645ec514a084491a0dd07977ed91"
+        },
+        {
+          "marker": "<!-- output:nmf_text_spectra.stdout.txt -->",
+          "language": "json",
+          "lfBodyBytes": 6574,
+          "lfBodySha256": "88a34cf29c4e72b32cf22ba3daf44a1f24187dcba73cdc0dd31c60b9762463bf"
+        }
+      ]
+    }
+  ],
+  "bindings": [
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/section-twelve-template.md",
+      "bytes": 14700,
+      "sha256": "f7f5b58c28498a1216ec5773d252041f4684f183d8fec40f40cbe48777f5912d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/section-twelve.md",
+      "bytes": 38148,
+      "sha256": "9dabc45eb456003155826f78e429e36dd223e8d7845688e25846561dba6820dc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/visual-specifications.md",
+      "bytes": 4482,
+      "sha256": "8d1b8865f4a06851b77f90ff59744f7446814cc4a1c5e7ab52b6a5b8430d795d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/README.md",
+      "bytes": 2021,
+      "sha256": "ffd7d3a239ac9c617c13e91e1a8d8ed858bc2ebf26baf890800fa3bcd40fc3b0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/assemble-section.mjs",
+      "bytes": 5544,
+      "sha256": "2d3980b45f5b40c5aa2a38fdf6b8b4edbf48bb5dae3f03f8829f90338046a63a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/prepare-payload.mjs",
+      "bytes": 2483,
+      "sha256": "5a0ccffd756149134b49bd8eff9c194d8daaa45c66653c83f243a59b2a71d79a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/saved-payload.json",
+      "bytes": 2073,
+      "sha256": "ada16ae13b07e728f0b405499c8aa3ef799b748555b7275766b8aab1e89404f9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/check-interpretation.py",
+      "bytes": 10680,
+      "sha256": "7ecb62ec3701d383426c7e7db7d22e876fc77740e1ee3ccae7f6f7503cd6dab8"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/interpretation-checks.json",
+      "bytes": 12425,
+      "sha256": "7578f2b012a787374890c7f7b43b19756e966701f210f73e58c6a3f56ca3eaec"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_factor_alignment.stdout.txt",
+      "bytes": 702,
+      "sha256": "b5ab059aa2c342e16464e061e5fc8528c05c8fbe69eaca0daabf6827a0612e0a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_factor_alignment.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_saved_digits.stdout.txt",
+      "bytes": 9285,
+      "sha256": "472bd7083b1f348d37729b705c2b74163bebeecda1c109ea25adfd6ebdb8b5ac"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_saved_digits.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_factor_alignment.py",
+      "bytes": 6580,
+      "sha256": "6505488fa7183cb8fb656629707eb9585b4228162764dd355ce8a5f4e60d257c"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_saved_digits.py",
+      "bytes": 6991,
+      "sha256": "ff1e4f2d5f395745e4f1b824bcb7c33d5dcb6d0bc025c7c68d717ec1c268ce14"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_saved_state.json",
+      "bytes": 69820,
+      "sha256": "46f3dc0931e3ccddc30cc3e30bbb4d3f330bc35a4dccccef33f74a63472eddd0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/digits-300.csv",
+      "bytes": 46235,
+      "sha256": "d93f963c4b2610eb07122a312eec3ddceac18a031477370d71e33835eced728e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/digits-data-provenance.md",
+      "bytes": 2939,
+      "sha256": "b8657ad20d9ec461599bb12ecc8d7c306fb6d4b0ba1d37d4bc2da8c078cd73e7"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_arrays.py",
+      "bytes": 7230,
+      "sha256": "951f7c7a275a08a4e0ed404d0e144b5dcfb2748e5aa621e027aee1e41073d9bf"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/centered_pca.py",
+      "bytes": 5089,
+      "sha256": "9c2485fcfa03a74c22f58c1f98f9834a0d76194d925d8d4929bae0058ff45055"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/saved-contribution-arithmetic.json",
+      "bytes": 1720,
+      "sha256": "93a0b1a71446576f092d20d84cd2e37871e39c5a47765ce2d0176f1cf7432aad"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-arithmetic.json",
+      "bytes": 46860,
+      "sha256": "fa04c779c42514521ff50cd14f0c78a8c85f132c538ddf360d86bd1a4deec973"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/saved-scale-arithmetic.json",
+      "bytes": 986,
+      "sha256": "1375a79c245a15623d70b469667f2e26213abe54ae09307a2c9f6267734a57a9"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/section-thirteen-template.md",
+      "bytes": 13712,
+      "sha256": "3f9296614737a8a44f0bd13bcddef686760e29e5f95ed704263e5443fbde1879"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/section-thirteen.md",
+      "bytes": 59217,
+      "sha256": "822556372bebb79c36fc862b278abd419f146c64a83efb3304416a5fc9298eb6"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/visual-specifications.md",
+      "bytes": 3280,
+      "sha256": "b8481a0981c1fd7f8d06330817ec7ca35c0aab5573261605b9bf0cf9f810849a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/assemble-section.mjs",
+      "bytes": 6616,
+      "sha256": "fd911de5cb068aa82dc666d76464d101e3ff8ace9787be402a5ed02d2e0adddc"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/check-new-study.py",
+      "bytes": 6267,
+      "sha256": "bb0e9c0a9241579211fa1ee49788ae791f509f49ce054cc25ebf603a0ebf0781"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/new-study-checks.json",
+      "bytes": 5680,
+      "sha256": "ebc8d79c1f9dbf0cb743ab08ba9b14ea2ef010ea25b743362a17e25634606b68"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/nmf_digit_comparison.stdout.txt",
+      "bytes": 38803,
+      "sha256": "b3ec28cea308fb5003d017f201fd47afbd7336db9bbda7c70a9c233dbcd44286"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/nmf_digit_comparison.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_digit_comparison.py",
+      "bytes": 4275,
+      "sha256": "36ac3ce284bfa74dd5ff25124327eca5c73b1e4d28603535df78961d448c1e0e"
+    },
+    {
+      "path": "src/learn/data/nmf-examples.js",
+      "bytes": 5471,
+      "sha256": "d8535fb99c43ccf0fc50571184519c6f773b8b7ae768cdf756f0cd5a1315ad24"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/section-fourteen.md",
+      "bytes": 7944,
+      "sha256": "ec3a6043ea9627f29cc9dfdf09e3485aa6b8ca302bc91298a0bf256728ff7854"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/visual-specifications.md",
+      "bytes": 2217,
+      "sha256": "01e7ecd3b7de61c15a6940a914b5e4014553c43298cd8021c789818fe0290a3e"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/check-and-freeze.mjs",
+      "bytes": 3075,
+      "sha256": "50c455fadb480b5ac53fb4bb71ae06226e84b67c38fd1c7f04acc01da9c0dcb3"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/section-fifteen-template.md",
+      "bytes": 12356,
+      "sha256": "128f9e4ae612b1de227ed39a2b3a00074c631cf3a5c393396b5325e11de40789"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/section-fifteen.md",
+      "bytes": 18130,
+      "sha256": "9ec632f4e07841213af497cf8d2553f1f814d8ee9c17c89be8ce7f855db5d990"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/visual-specifications.md",
+      "bytes": 2553,
+      "sha256": "fbc6e7ca5d5778364d0666e7c7543bf5f3ea45bebf2ce1bbe99857b542bbd77a"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/assemble-section.mjs",
+      "bytes": 4455,
+      "sha256": "718659a205af5644edc31f8b40276edf6d8d80efe04eef5d14331715de446efd"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/check-anchors.py",
+      "bytes": 6446,
+      "sha256": "0f1ad7e267d26acf30b705df2aa23e5e5a5f95590b68031f2f55fb53f2a4d2b0"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/anchor-checks.json",
+      "bytes": 7036,
+      "sha256": "9be0bf67768d850d135b52261d24bbf94e4d5a9592c92037e798fb424629fb41"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/nmf_anchors.stdout.txt",
+      "bytes": 496,
+      "sha256": "8bc8941bab29409882962876c722b685e1ef15dbb4783b9d12c3a99c5aa457bb"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/nmf_anchors.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_anchors.py",
+      "bytes": 5319,
+      "sha256": "2dd67d6e1784525b356d39daf580f62499756319cd742dfba74b0bb418e74b30"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_nnls.py",
+      "bytes": 2256,
+      "sha256": "d476765a364dc35f5153a647630ccecec313ce25647a9e2f7ca0b5efde45f961"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_coordinate.py",
+      "bytes": 9109,
+      "sha256": "bdacf644a3b41910d027b480700ee0efeea320c73e3b18a449bf2f8d597596ec"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/section-sixteen-template.md",
+      "bytes": 17494,
+      "sha256": "1856753d5e1b992ff4c4f26cbf7c5ad88bd9ec9afbf205850280f93048fa3b7b"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/section-sixteen.md",
+      "bytes": 34405,
+      "sha256": "2a8767cc3f2ce11de0c969e3ab549ee42d532dfb443d7dc579daf14f72bdb322"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/visual-specifications.md",
+      "bytes": 4274,
+      "sha256": "6d07b5a340a848f14489aa6696d071dba94b1d4815d646032669f901d3189aff"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/assemble-section.mjs",
+      "bytes": 6031,
+      "sha256": "0c4bbb969f854d14c2d9084f5b18736b1a22747998b65d1b2abe612135750f22"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/check-transfers.py",
+      "bytes": 6797,
+      "sha256": "4338320ff83527c4261a89a6fc2cc057e8ea990303184f278adbf235d07708e4"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/transfer-checks.json",
+      "bytes": 8196,
+      "sha256": "fe59ed117319a8f2966f8857b92c9387b518bce7fb1fd6fb8b83d5b71279611d"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/nmf_text_spectra.stdout.txt",
+      "bytes": 6934,
+      "sha256": "e67d6d8742e36ea4cd8396897e9c8d08f2e3c3e09fb6ba0ca88f2dc7aebafa35"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/nmf_text_spectra.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_text_spectra.py",
+      "bytes": 9130,
+      "sha256": "2fbca92d514885bcf9b1d84dfd678437d09837a8fdad8ae7b9c02cfed3513c3b"
+    }
+  ],
+  "checks": [
+    {
+      "name": "historical example source is parsed JSON, never executed",
+      "passed": true
+    },
+    {
+      "name": "section 12: one expected top-level section",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/section-twelve-template.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/section-twelve.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/3: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/README.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/4: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/5: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/prepare-payload.mjs",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/6: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/saved-payload.json",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/7: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/check-interpretation.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/8: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/interpretation-checks.json",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/9: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_factor_alignment.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/10: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_factor_alignment.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/11: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_saved_digits.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/bindings/12: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_saved_digits.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/sourceSlots/0/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_factor_alignment.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/sourceSlots/1/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_factor_alignment.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/sourceSlots/2/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/sourceSlots/3/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_saved_digits.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/suppliedOfflinePayloads/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/suppliedOfflinePayloads/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "handoff 12/suppliedOfflinePayloads/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/digits-data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "section 12: author scoped receipt remains all-pass",
+      "passed": true
+    },
+    {
+      "name": "section 12: exact ordered drawing placements",
+      "passed": true
+    },
+    {
+      "name": "section 12: whole literal fence <!-- source:nmf_factor_alignment.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 12: exactly one template slot <!-- source:nmf_factor_alignment.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 12: whole literal fence <!-- output:nmf_factor_alignment.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 12: exactly one template slot <!-- output:nmf_factor_alignment.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 12: whole literal fence <!-- source:nmf_saved_digits.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 12: exactly one template slot <!-- source:nmf_saved_digits.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 12: whole literal fence <!-- output:nmf_saved_digits.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 12: exactly one template slot <!-- output:nmf_saved_digits.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 12: complete expanded manuscript matches current template",
+      "passed": true
+    },
+    {
+      "name": "section 12: no unresolved instructional source slot",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_factor_alignment.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/3: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/4: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/5: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/6: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/digits-data-provenance.md",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/7: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/check-interpretation.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/8: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/saved-payload.json",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/9: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/saved-contribution-arithmetic.json",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/10: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/design-arithmetic.json",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/inputs/11: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/design-completion/saved-scale-arithmetic.json",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/mains/0/stdout: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_factor_alignment.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/mains/0/stderr: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_factor_alignment.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/mains/1/stdout: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_saved_digits.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 12/mains/1/stderr: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/saved-digits-authoring/nmf_saved_digits.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "section 12: retained author numerical receipt all-pass, not replayed",
+      "passed": true
+    },
+    {
+      "name": "section 13: one expected top-level section",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/bindings/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/section-thirteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/bindings/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/section-thirteen.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/bindings/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/bindings/3: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/bindings/4: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/check-new-study.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/bindings/5: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/new-study-checks.json",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/bindings/6: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/nmf_digit_comparison.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/bindings/7: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/nmf_digit_comparison.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/sourceSlots/2/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_digit_comparison.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 13/sourceSlots/3/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/nmf_digit_comparison.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "section 13: author scoped receipt remains all-pass",
+      "passed": true
+    },
+    {
+      "name": "section 13: exact ordered drawing placements",
+      "passed": true
+    },
+    {
+      "name": "section 13: historical decoded digitDictionary/code exact",
+      "passed": true
+    },
+    {
+      "name": "section 13: exact decoded slot hash <!-- original-source:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: whole literal fence <!-- original-source:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: exactly one template slot <!-- original-source:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: historical decoded digitDictionary/expected exact",
+      "passed": true
+    },
+    {
+      "name": "section 13: exact decoded slot hash <!-- original-output:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: whole literal fence <!-- original-output:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: exactly one template slot <!-- original-output:digitDictionary -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: exact decoded slot hash <!-- source:nmf_digit_comparison.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: whole literal fence <!-- source:nmf_digit_comparison.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: exactly one template slot <!-- source:nmf_digit_comparison.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: exact decoded slot hash <!-- output:nmf_digit_comparison.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: whole literal fence <!-- output:nmf_digit_comparison.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: exactly one template slot <!-- output:nmf_digit_comparison.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 13: complete expanded manuscript matches current template",
+      "passed": true
+    },
+    {
+      "name": "section 13: no unresolved instructional source slot",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 13/inputs/0: exact current src/learn/data/nmf-examples.js",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 13/inputs/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_digit_comparison.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 13/inputs/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_saved_digits.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 13/inputs/3: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_saved_state.json",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 13/inputs/4: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/digits-300.csv",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 13/main/stdout: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/nmf_digit_comparison.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 13/main/stderr: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/representation-evaluation-authoring/nmf_digit_comparison.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "section 13: retained author numerical receipt all-pass, not replayed",
+      "passed": true
+    },
+    {
+      "name": "section 14: one expected top-level section",
+      "passed": true
+    },
+    {
+      "name": "handoff 14/bindings/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/section-fourteen.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 14/bindings/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 14/bindings/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/identifiability-authoring/check-and-freeze.mjs",
+      "passed": true
+    },
+    {
+      "name": "section 14: author scoped receipt remains all-pass",
+      "passed": true
+    },
+    {
+      "name": "section 14: exact ordered drawing placements",
+      "passed": true
+    },
+    {
+      "name": "section 14: no unresolved instructional source slot",
+      "passed": true
+    },
+    {
+      "name": "section 15: one expected top-level section",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/bindings/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/section-fifteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/bindings/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/section-fifteen.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/bindings/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/bindings/3: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/bindings/4: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/check-anchors.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/bindings/5: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/anchor-checks.json",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/bindings/6: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/nmf_anchors.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/bindings/7: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/nmf_anchors.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/sourceSlots/0/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_anchors.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 15/sourceSlots/1/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/nmf_anchors.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "section 15: author scoped receipt remains all-pass",
+      "passed": true
+    },
+    {
+      "name": "section 15: exact ordered drawing placements",
+      "passed": true
+    },
+    {
+      "name": "section 15: whole literal fence <!-- source:nmf_anchors.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 15: exactly one template slot <!-- source:nmf_anchors.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 15: whole literal fence <!-- output:nmf_anchors.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 15: exactly one template slot <!-- output:nmf_anchors.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 15: complete expanded manuscript matches current template",
+      "passed": true
+    },
+    {
+      "name": "section 15: no unresolved instructional source slot",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 15/inputs/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_anchors.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 15/inputs/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 15/inputs/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 15/inputs/3: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 15/inputs/4: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 15/main/stdout: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/nmf_anchors.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 15/main/stderr: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/anchors-authoring/nmf_anchors.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "section 15: retained author numerical receipt all-pass, not replayed",
+      "passed": true
+    },
+    {
+      "name": "section 16: one expected top-level section",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/bindings/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/section-sixteen-template.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/bindings/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/section-sixteen.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/bindings/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/visual-specifications.md",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/bindings/3: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/assemble-section.mjs",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/bindings/4: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/check-transfers.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/bindings/5: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/transfer-checks.json",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/bindings/6: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/nmf_text_spectra.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/bindings/7: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/nmf_text_spectra.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/sourceSlots/2/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_text_spectra.py",
+      "passed": true
+    },
+    {
+      "name": "handoff 16/sourceSlots/3/identity: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/nmf_text_spectra.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "section 16: author scoped receipt remains all-pass",
+      "passed": true
+    },
+    {
+      "name": "section 16: exact ordered drawing placements",
+      "passed": true
+    },
+    {
+      "name": "section 16: historical decoded wordPatterns/code exact",
+      "passed": true
+    },
+    {
+      "name": "section 16: exact decoded slot hash <!-- original-source:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: whole literal fence <!-- original-source:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: exactly one template slot <!-- original-source:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: historical decoded wordPatterns/expected exact",
+      "passed": true
+    },
+    {
+      "name": "section 16: exact decoded slot hash <!-- original-output:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: whole literal fence <!-- original-output:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: exactly one template slot <!-- original-output:wordPatterns -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: exact decoded slot hash <!-- source:nmf_text_spectra.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: whole literal fence <!-- source:nmf_text_spectra.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: exactly one template slot <!-- source:nmf_text_spectra.py -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: exact decoded slot hash <!-- output:nmf_text_spectra.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: whole literal fence <!-- output:nmf_text_spectra.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: exactly one template slot <!-- output:nmf_text_spectra.stdout.txt -->",
+      "passed": true
+    },
+    {
+      "name": "section 16: complete expanded manuscript matches current template",
+      "passed": true
+    },
+    {
+      "name": "section 16: no unresolved instructional source slot",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 16/inputs/0: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_text_spectra.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 16/inputs/1: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_arrays.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 16/inputs/2: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/centered_pca.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 16/inputs/3: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_coordinate.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 16/inputs/4: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/content-programs/nmf_nnls.py",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 16/main/stdout: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/nmf_text_spectra.stdout.txt",
+      "passed": true
+    },
+    {
+      "name": "scientific receipt 16/main/stderr: exact current docs/teaching/classical-ml-reading-flow/non-negative-matrix-factorization-nmf/content-preparation/text-spectra-authoring/nmf_text_spectra.stderr.txt",
+      "passed": true
+    },
+    {
+      "name": "section 16: retained author numerical receipt all-pass, not replayed",
+      "passed": true
+    },
+    {
+      "name": "D48 actual current output declares rank6/seed23 separate study",
+      "passed": true
+    },
+    {
+      "name": "D48 exact train/validation/test cardinalities retained",
+      "passed": true
+    },
+    {
+      "name": "D48 source242/256 remain first two reserved selected rows",
+      "passed": true
+    },
+    {
+      "name": "D48 actual cap/warning qualification retained",
+      "passed": true
+    }
+  ],
+  "execution": {
+    "scientificPrograms": 0,
+    "authorCheckers": 0,
+    "assemblyScripts": 0,
+    "modelFits": 0,
+    "builds": 0,
+    "nativeBrowserCalls": 0
+  },
+  "limits": "These checks establish literal correspondence and current identity only. Pedagogical and mathematical findings are in the accompanying bounded review. Historical author numerical evidence is retained, not independently replayed."
+}

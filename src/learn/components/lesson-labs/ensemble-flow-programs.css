@@ -1,0 +1,17 @@
+/* Keep complete teaching code legible when the reader enlarges its text.
+   Native horizontal/vertical code scrolling remains the shared behavior. */
+.reader-article .ensemble-lesson .lesson-code pre {
+  font-size: .75rem;
+}
+
+.reader-article .ensemble-lesson [data-ensemble-program] h3,
+.reader-article .ensemble-lesson [data-ensemble-dependency] h3,
+.reader-article .ensemble-lesson [data-ensemble-setup] h3,
+.reader-article .ensemble-lesson [data-ensemble-study-files] h3,
+.reader-article .ensemble-lesson [data-lesson-exercise] > h3 {
+  font-size: 1.25rem !important;
+}
+
+.reader-article .ensemble-lesson [data-lesson-ending] > h2 {
+  font-size: 1.375rem !important;
+}

@@ -1,30 +1,43 @@
-import { useId, useState } from 'react';
+import { useState } from 'react';
+import { FlowLab, FlowControls, FlowSlider, FlowReadout, flowNumber } from './LessonFlow.jsx';
 import './convolution-operator-intuition.css';
 
+// §5 Adaptive average pooling: bins come from boundaries, not equal partitions.
 export function AdaptivePoolingBinsLab() {
-  const [count, setCount] = useState(3), id = useId();
+  const [count, setCount] = useState(3);
   const values = [1, 2, 3, 4, 5];
   const bins = Array.from({ length: count }, (_, i) => {
     const start = Math.floor(i * values.length / count), end = Math.ceil((i + 1) * values.length / count);
     return { start, end, mean: values.slice(start, end).reduce((sum, value) => sum + value, 0) / (end - start) };
   });
-  return <figure className="conv-op-intuition">
-    <h4>Adaptive bins are defined by boundaries, not equal-sized partitions</h4>
-    <p>Fixed input [1, 2, 3, 4, 5]. Change the requested output count to see exactly which input indices each bin averages.</p>
-    <label htmlFor={id}>Output count: <strong>{count}</strong></label>
-    <input id={id} type="range" min="1" max="7" step="1" value={count} onChange={event => setCount(Number(event.target.value))} />
-    <div className="conv-bin-head" aria-hidden="true">{values.map((value, i) => <span key={i}>i={i}<br />{value}</span>)}</div>
-    {bins.map(({ start, end, mean }, i) => <section className="conv-bin-row" key={i}><p>Bin {i}: [{start}, {end}) → mean <strong>{Number(mean.toFixed(3))}</strong></p><div className="conv-bin-head" role="img" aria-label={`Bin ${i}, input indices ${Array.from({ length: end - start }, (_, j) => start + j).join(', ')}, each weighted by 1/${end - start}`}>{values.map((_, j) => <span key={j} className={j >= start && j < end ? 'conv-bin-active' : ''} aria-hidden="true">{j >= start && j < end ? `1/${end - start}` : '—'}</span>)}</div></section>)}
-    <button type="button" onClick={() => setCount(3)}>Reset to three bins</button>
-    <figcaption>Start = floor(i × 5 / output count); end = ceil((i + 1) × 5 / output count), excluding the end index. A column highlighted in several rows contributes to several outputs. Counts above five can repeat bins; this is averaging existing values, not interpolation of a new signal.</figcaption>
-  </figure>;
+  const shared = values.map((_, j) => bins.filter(b => j >= b.start && j < b.end).length);
+  return <FlowLab id="adaptive-pooling-bins" label="Adaptive average pooling bins">
+    <div className="conv-bin-scroll" role="region" tabIndex={0} aria-label="Adaptive pooling bins over input positions 0 to 4">
+      <div className="conv-bin-grid" style={{ '--bins': count }}>
+        <span className="conv-bin-corner">input</span>
+        {values.map((value, i) => <span key={i} className="conv-bin-input"><small>i = {i}</small>{value}</span>)}
+        <span className="conv-bin-corner">mean</span>
+        {bins.map(({ start, end, mean }, i) => <div key={i} className="conv-bin-row" role="img" aria-label={`Bin ${i} averages input indices ${start} to ${end - 1}: mean ${flowNumber(mean, 3)}`}>
+          <span className="conv-bin-name">bin {i}</span>
+          {values.map((_, j) => <span key={j} className={j >= start && j < end ? 'conv-bin-active' : 'conv-bin-off'} aria-hidden="true">{j >= start && j < end ? `1/${end - start}` : ''}</span>)}
+          <strong>{flowNumber(mean, 3)}</strong>
+        </div>)}
+      </div>
+    </div>
+    <FlowControls><FlowSlider name="Output count" value={count} onChange={setCount} min={1} max={7} step={1} format={v => String(v)} /></FlowControls>
+    <FlowReadout>Bin i averages indices from ⌊5i/{count}⌋ up to, not including, ⌈5(i + 1)/{count}⌉. Inputs shared by several bins: {shared.map((s, j) => s > 1 ? `index ${j} (${s} bins)` : null).filter(Boolean).join(', ') || 'none at this count'}.</FlowReadout>
+  </FlowLab>;
 }
 
+// §10 Absorbing an evaluation-mode BatchNorm into the convolution.
 export function BatchNormFoldingFigure() {
-  return <figure className="conv-op-intuition">
-    <h4>Absorb a fixed channel scale and offset into the filter</h4>
-    <p>One constructed output channel: kernel [2, −1], bias 1, patch [3, 4]. Frozen BN values: μ = 1, v = 3.99, ε = 0.01, γ = 4, β = −3.</p>
-    <div className="conv-op-panels"><section><h5>Convolution, then evaluation BN</h5><p>z = 2(3) − 4 + 1 = 3<br />√(v + ε) = 2<br />BN(z) = 4(3 − 1) / 2 − 3</p><strong>Output = 1</strong></section><section><h5>Fold constants, then convolve</h5><p>α = γ / √(v + ε) = 2<br />New kernel = [4, −2]<br />New bias = −3 + 2(1 − 1) = −3</p><strong>Output = 4(3) − 2(4) − 3 = 1</strong></section></div>
-    <figcaption>Substitute z = Wx + b into α(z − μ) + β: distribute α over both Wx and b − μ. It is this algebra, with fixed statistics, that removes the separate BN operation. The scale multiplies every tap for this output channel. A negative γ would also reverse their signs.</figcaption>
+  return <figure className="conv-fold" data-figure="batchnorm-folding" id="batchnorm-folding">
+    <div className="flow-columns-2">
+      <div><p className="conv-fold-label">Convolution, then evaluation BatchNorm</p>
+        <p>z = 2(3) − 4 + 1 = <strong>3</strong><br />√(v + ε) = √4 = 2<br />BN(z) = 4(3 − 1)/2 − 3 = <strong>1</strong></p></div>
+      <div><p className="conv-fold-label">Fold first, then one convolution</p>
+        <p>α = γ/√(v + ε) = 2<br />kernel 2·[2, −1] = <strong>[4, −2]</strong>; bias −3 + 2(1 − 1) = <strong>−3</strong><br />4(3) − 2(4) − 3 = <strong>1</strong></p></div>
+    </div>
+    <figcaption>One output channel with kernel [2, −1], bias 1 and patch [3, 4]; frozen BatchNorm values μ = 1, v = 3.99, ε = 0.01, γ = 4, β = −3. Both routes give 1, because α(Wx + b − μ) + β = (αW)x + α(b − μ) + β.</figcaption>
   </figure>;
 }

@@ -1,75 +1,73 @@
 import { useState } from 'react';
-import { NeuralNumber } from './NeuralNumberControl.jsx';
+import { FlowLab, FlowControls, FlowSlider, FlowReadout } from './LessonFlow.jsx';
 import { NeuralTable } from './NeuralLessonElements.jsx';
-import { SpectralFigure, SpectralPlot, f } from './SpectralPrimitives.jsx';
+import { SpectralFigure, SpectralPlot, CurvePlane, f, vector, spectralColors as C } from './SpectralPrimitives.jsx';
 import { probePenalty } from '../../data/spectral-regularization-models.js';
-const text = {
-  fill: '#ddd',
-  fontSize: 13
-};
-function Box({
-  x,
-  y,
-  width = 120,
-  label,
-  color = '#e6b854'
-}) {
-  return <g><rect x={x} y={y} width={width} height="42" fill="#222" stroke={color} /><text x={x + width / 2} y={y + 26} textAnchor="middle" {...text}>{label}</text></g>;
-}
+function Node({x,y,label,color=C.neutral}) {return <g>{['G','f','×½','−'].includes(label)?<rect x={x-20} y={y-20} width="40" height="40" rx="6" fill="#111" stroke={color}/>:<circle cx={x} cy={y} r="20" fill="#111" stroke={color}/>}<text x={x} y={y+5} textAnchor="middle">{label}</text></g>;}
 export function CriticDerivativeFigure() {
-  return <>
- <SpectralFigure title="Values flow forward in both phases; the derivative target changes" height={300} description="Amber arrows carry values. Purple arrows show the backward derivative. The critic phase stops its derivative at the generated input. The generator phase keeps the input derivative through a critic whose parameters are fixed.">
-  <text x="15" y="22" {...text}>Critic update: optimize φ</text><Box x={15} y={44} label="Gθ(z)" /><Box x={243} y={44} label="fφ(fake)" /><Box x={486} y={44} label="LD=fake−real+R" width={140} />
-  <path d="M135 65 H243 M363 65 H486" fill="none" stroke="#e6b854" /><polygon points="243,65 234,61 234,69" fill="#e6b854" /><polygon points="486,65 477,61 477,69" fill="#e6b854" />
-  <path d="M486 95 H193 M363 95 V83" stroke="#ba9fd1" fill="none" /><polygon points="193,95 202,91 202,99" fill="#ba9fd1" /><path d="M186 84 V106 M196 84 V106" stroke="#eee" strokeWidth="3" /><text x="144" y="124" {...text}>detach here</text><text x="373" y="118" {...text}>∂LD/∂φ retained</text>
-  <text x="15" y="163" {...text}>Generator update: optimize θ, hold φ fixed</text><Box x={15} y={185} label="z → Gθ(z)" /><Box x={243} y={185} label="fixed fφ" /><Box x={486} y={185} label="LG=−fφ(Gθ(z))" width={140} />
-  <path d="M135 206 H243 M363 206 H486" stroke="#e6b854" /><polygon points="243,206 234,202 234,210" fill="#e6b854" /><polygon points="486,206 477,202 477,210" fill="#e6b854" />
-  <path d="M556 237 H74 V227" stroke="#ba9fd1" fill="none" /><polygon points="74,227 70,236 78,236" fill="#ba9fd1" /><text x="310" y="268" textAnchor="middle" {...text}>−∂f/∂x · ∂G/∂θ reaches generator parameters</text>
- </SpectralFigure>
- <SpectralFigure title="A sign you can check on one number" height={125} description="Recorded point 0, generator θ=2, fixed f(x)=−x. LG=θ has derivative +1. Subtracting 0.1 times that derivative moves the output toward 0; the wrong loss sign moves it away."><line x1="70" y1="65" x2="580" y2="65" stroke="#777" />{[[0, 70, 'real 0'], [1.9, 465, 'correct 1.9'], [2, 486, 'start 2'], [2.1, 507, 'wrong 2.1']].map(([value, x, label], i) => <g key={value}><circle cx={x} cy="65" r="5" fill={i === 3 ? '#ba9fd1' : '#e6b854'} /><text x={x} y={i === 1 ? 101 : i === 3 ? 119 : 42} textAnchor="middle" {...text}>{label}</text></g>)}<path d="M486 73 L465 73 M486 56 L507 56" stroke="#ddd" /><text x="160" y="100" {...text}>score 0 → −2; loss 2 → 1.9</text></SpectralFigure>
- </>;
+ return <><SpectralFigure title="One sample passes through two functions" height={342} description="Cyan circles carry the input and sample. Amber circles are trainable parameters. Grey arrows carry values; the orange dashed path carries a derivative backwards. The critic computes one violet score, not a probability.">
+ <text x="20" y="23">random input</text><Node x={65} y={61} label="z" color={C.input}/><Node x={245} y={61} label="θ" color={C.parameter}/><text x="170" y="24">generator weights</text><path d="M65 82V119H133 M245 82V119H187" fill="none" stroke="#888"/><Node x={160} y={120} label="G"/><text x="20" y="124">generator</text><path d="M160 141V178" stroke="#888"/><Node x={160} y={200} label="x" color={C.input}/><text x="20" y="204">generated sample</text><path d="M160 221V252" stroke="#888"/><Node x={160} y={274} label="f"/><Node x={245} y={274} label="φ" color={C.parameter}/><path d="M223 274H181" stroke="#888"/><text x="208" y="311">critic weights</text><path d="M160 295V324H75" stroke="#888"/><text x="20" y="328" fill={C.computed}>score</text><path d="M180 320H195V160H180" fill="none" stroke={C.gradient} strokeDasharray="5 4"/><text x="201" y="203" fill={C.gradient}>backward</text>
+ </SpectralFigure><SpectralFigure title="A generator update has a direction" height={218} description="Recorded mass stays at zero. The generated point starts at 2. With critic score −x and a negative-score loss, one step moves left to 1.9. Reversing the sign moves right to 2.1.">
+ <path d="M35 120H285" stroke="#888"/><circle cx="45" cy="120" r="6" fill={C.input}/><text x="45" y="150" textAnchor="middle">real 0</text><circle cx="220" cy="120" r="4" fill={C.computed}/><text x="220" y="86" textAnchor="middle">start 2</text><circle cx="211.25" cy="120" r="3" fill={C.parameter}/><path d="M220 130H211.25 l6 -4m-6 4l6 4" fill="none" stroke={C.gradient}/><text x="192" y="173" textAnchor="middle">correct 1.9</text><circle cx="228.75" cy="120" r="3" fill="#ddd"/><path d="M220 110H228.75 l-6 -4m6 4l-6 4" fill="none" stroke="#ddd"/><text x="242" y="196" textAnchor="middle">wrong 2.1</text><text x="20" y="24">score: −2 → −1.9</text><text x="20" y="48">negative-score loss: 2 → 1.9</text>
+ </SpectralFigure></>;
+}
+export function SpectralTransportFigure() {
+ const [position,setPosition]=useState(2);
+ return <FlowLab id="spectral-transport" label="Move one unit of probability mass"><SpectralFigure title="Transport a single unit of mass" height={190} description="Both dots are point distributions containing one unit of mass. Cyan is recorded at zero; violet is generated at the editable location. The line length is the transport distance.">
+ <path d="M40 92H280" stroke="#888"/><circle cx="160" cy="92" r="8" fill={C.input}/><circle cx={160+position*36} cy="92" r="8" fill={C.computed}/><path d={'M160 110H'+(160+position*36)} stroke={C.parameter} strokeWidth="3"/>{[-3,0,3].map(v=><text key={v} x={160+v*36} y="143" textAnchor="middle">{v}</text>)}<text x="20" y="24">recorded mass: 1 at 0</text><text x="20" y="48">generated mass: 1 at {f(position)}</text><text x="20" y="180">cost = mass × distance</text>
+ </SpectralFigure><FlowControls><FlowSlider name="Generated location" value={position} min={-3} max={3} step={.05} onChange={setPosition}/></FlowControls><FlowReadout>Moving this one unit costs {f(Math.abs(position))}. The cost approaches zero continuously as the locations meet.</FlowReadout></FlowLab>;
+}
+export function SpectralSensitivityFigure() {
+ return <SpectralFigure title="An input move becomes an output move" height={246} description="The cyan horizontal arrow moves input from 0 to .02. The violet vertical arrow measures output from 0 to .06. The straight graph has slope three: each input unit becomes three output units.">
+ <path d="M48 205V38 M48 205H283" stroke="#777" fill="none"/><path d="M48 205L256 61" stroke={C.computed} strokeWidth="2"/><circle cx="48" cy="205" r="5" fill={C.input}/><circle cx="256" cy="61" r="5" fill={C.computed}/><path d="M48 219H256 l-7 -4m7 4l-7 4" fill="none" stroke={C.input}/><path d="M272 205V61 l-4 7m4 -7l4 7" fill="none" stroke={C.computed}/><text x="116" y="240">input move .02</text><text x="47" y="25">output move .06</text><text x="93" y="121">slope = 3</text><text x="256" y="199" textAnchor="middle">.02</text><text x="41" y="66" textAnchor="end">.06</text>
+ </SpectralFigure>;
+}
+export function SpectralGradientProbeFigure() {
+ const [epsilon,setEpsilon]=useState(.5),point=[3*(1-epsilon),0];
+ return <FlowLab id="spectral-gradient-probe" label="Place the point where an input derivative is measured"><SpectralFigure title="Choose an interpolated input, then differentiate the critic there" height={274} description="The cyan real input is [0,0]; the violet generated input [3,0]. The outlined dot is their weighted mixture. Below, the fixed linear critic 3x₁+4x₂ supplies derivative components three and four at that point; the right triangle measures their length five.">
+ <path d="M50 45H270" stroke="#888"/><circle cx="50" cy="45" r="7" fill={C.input}/><circle cx="270" cy="45" r="7" fill={C.computed}/><circle cx={50+220*(1-epsilon)} cy="45" r="10" fill="none" stroke="#fff"/><text x="50" y="74" textAnchor="middle">real</text><text x="270" y="74" textAnchor="middle">generated</text><text x="20" y="22">ε real + (1−ε) generated</text>
+ <path d="M55 225H145V105Z" fill="none" stroke={C.gradient} strokeDasharray="5 4"/><text x="103" y="248">∂/∂x₁: 3</text><text x="157" y="174">∂/∂x₂: 4</text><text x="44" y="144">length 5</text><text x="20" y="271">parameter weights stay fixed here</text>
+ </SpectralFigure><FlowControls><FlowSlider name="Real-input weight ε" value={epsilon} min={0} max={1} step={.01} onChange={setEpsilon}/></FlowControls><FlowReadout>Probe {vector(point)}; score {f(3*point[0])}; input derivative [3,4], length 5. Changing this probe does not change the derivative of this linear critic. Nonlinear critics can give a different derivative at each location.</FlowReadout></FlowLab>;
+}
+export function SpectralPhaseFigure() {
+ return <><SpectralFigure title="Update the shared critic on both kinds of sample" height={360} description="Cyan real and generated samples enter two evaluations of the same critic f with shared amber weights φ. Their violet scores enter fake minus real. Dashed orange derivatives update φ through both evaluations, while the stop bars block the generator route.">
+ <text x="20" y="22">1. Update critic weights φ</text>
+ <Node x={55} y={68} label="G"/><Node x={55} y={140} label="x" color={C.input}/><text x="84" y="143">generated</text><path d="M55 89V119" stroke="#888"/>
+ <Node x={250} y={140} label="x" color={C.input}/><text x="233" y="110">real</text>
+ <Node x={55} y={213} label="f"/><Node x={250} y={213} label="f"/><path d="M55 161V192 M250 161V192" stroke="#888"/>
+ <Node x={153} y={213} label="φ" color={C.parameter}/><path d="M132 213H76 M174 213H229" stroke={C.parameter}/><text x="114" y="245">shared weights</text>
+ <path d="M55 234V280H132 M250 234V280H174" fill="none" stroke="#888"/><Node x={153} y={280} label="−"/><text x="18" y="268" fill={C.computed}>fake score</text><text x="222" y="268" fill={C.computed}>real score</text><text x="112" y="316">fake − real</text>
+ <path d="M132 296H35V233 M174 296H272V233 M76 199H131 M229 199H175 M35 194V176" fill="none" stroke={C.gradient} strokeDasharray="5 4"/><path d="M25 169H45 M25 176H45" stroke="#fff" strokeWidth="2"/><text x="20" y="350">stop bars: no generator update</text>
+ </SpectralFigure><SpectralFigure title="Update the generator through a fixed critic" height={235} description="The critic weights φ are now fixed in grey. Its input derivative remains connected: the dashed orange route returns from negative critic score through f to the generator weights θ. Freezing φ does not detach the input.">
+ <text x="20" y="22">2. Update generator weights θ</text><Node x={55} y={80} label="G"/><Node x={160} y={80} label="f"/><Node x={268} y={80} label="−"/><path d="M76 80H139 M181 80H247" stroke="#888"/><text x="91" y="65">sample</text><text x="204" y="65">score</text><Node x={55} y={165} label="θ" color={C.parameter}/><Node x={160} y={165} label="φ" color="#888"/><path d="M55 144V102 M160 144V102" stroke="#888"/><path d="M247 101H83V165H77" fill="none" stroke={C.gradient} strokeDasharray="5 4"/><text x="187" y="170">fixed</text><text x="20" y="225">input derivative still reaches G</text>
+ </SpectralFigure></>;
 }
 export function SpectralCompositionFigure() {
-  return <>
- <SpectralFigure title="The direction of stretch matters when maps compose" height={220} description="Two independent input basis vectors follow separate lanes. The second matrix contracts exactly the coordinate the first stretched. Multiplying the individual worst-case factors ignores that directional mismatch.">
- {[['e₁', [1, 0], '[3, 0]', '[1, 0]'], ['e₂', [0, 1], '[0, 1/3]', '[0, 1]']].map(([label,, middle, last], i) => <g key={label}><Box x={18} y={42 + 83 * i} width={85} label={label} /><Box x={240} y={42 + 83 * i} width={130} label={middle} /><Box x={501} y={42 + 83 * i} width={120} label={last} /><path d={'M103 ' + (63 + 83 * i) + ' H240 M370 ' + (63 + 83 * i) + ' H501'} stroke="#ddd" /><text x="172" y={33 + 83 * i} textAnchor="middle" {...text}>A=diag(3,⅓)</text><text x="435" y={33 + 83 * i} textAnchor="middle" {...text}>B=diag(⅓,3)</text></g>)}<text x="320" y="215" textAnchor="middle" {...text}>Individual norms: 3 × 3 = 9 bound; composed BA = I has norm 1.</text>
- </SpectralFigure>
- <SpectralFigure title="A residual bypass contributes its own sensitivity" height={165} description="For g(x)=0.5x, the identity and branch derivatives add at the sum. The bound 1+0.5=1.5 is attained here."><Box x={15} y={58} width={80} label="x" /><Box x={260} y={100} label="g(x)=0.5x" /><path d="M95 79 H180 V25 H489 V62 M180 79 V121 H260 M380 121 H489 V96" stroke="#ddd" fill="none" /><text x="310" y="19" textAnchor="middle" {...text}>identity derivative 1</text><circle cx="489" cy="79" r="17" fill="#222" stroke="#e6b854" /><text x="489" y="85" textAnchor="middle" {...text}>+</text><path d="M506 79 H542" stroke="#ddd" /><text x="584" y="83" textAnchor="middle" {...text}>1.5x</text></SpectralFigure>
- </>;
+ const circle=Array.from({length:97},(_,i)=>[Math.cos(i*Math.PI/48),Math.sin(i*Math.PI/48)]);
+ return <><div className="spectral-three">{[['Input circle',circle],['After A: horizontal stretch',circle.map(([x,y])=>[3*x,y/3])],['After B: the circle returns',circle]].map(([title,values])=><CurvePlane key={title} title={title} extent={3.3} curves={[{label:'Current shape',values,color:C.computed},{label:'Unit input circle',values:circle,color:C.input,dashed:true}]} points={[]}/>)}</div>
+ <SpectralFigure title="An identity bypass contributes too" height={204} description="The same input forks into two routes. The upper route copies it unchanged. The lower route multiplies it by one-half. The plus circle adds both outputs, so its derivative is 1.5.">
+ <Node x={38} y={96} label="x" color={C.input}/><path d="M58 96H80V48H240V78 M80 96V150H128 M170 150H240V116" fill="none" stroke="#888"/><text x="102" y="32">identity: x</text><Node x={149} y={150} label="×½"/><Node x={240} y={96} label="+"/><path d="M261 96H292" stroke="#888"/><text x="273" y="67" fill={C.computed}>1.5x</text><text x="20" y="196">branch: ½x; total slope: 1 + ½</text>
+ </SpectralFigure></>;
 }
 export function PenaltyLocationsFigure() {
-  const [epsilon, setEpsilon] = useState(.5);
-  const location = 3 * (1 - epsilon),
-    probe = probePenalty(2, 4, [location], 'target-one', 2);
-  return <><NeuralNumber label="Interpolation coefficient ε" value={epsilon} min={0} max={1} onChange={setEpsilon} /><SpectralFigure title="The target and the sampling location are separate choices" height={245} description="Declared scalar example: real input 0, generated input 3. R1 evaluates zero-centered sensitivity at real inputs; R2 at generated inputs. WGAN-GP moves its probe between them.">
- {[['WGAN-GP: λ(r−1)²', true], ['R1: (γ/2)r² at real', false], ['R2: (γ/2)r² at fake', false]].map(([label], i) => <g key={label}><text x="12" y={35 + i * 73} {...text}>{label}</text><path d={'M270 ' + (31 + i * 73) + ' H588'} stroke="#777" /><circle cx="270" cy={31 + i * 73} r="7" fill={i !== 2 ? '#e6b854' : '#666'} /><rect x="580" y={23 + i * 73} width="16" height="16" fill={i !== 1 ? '#ba9fd1' : '#666'} />{i === 0 && <><circle cx={270 + 318 * (1 - epsilon)} cy="31" r="6" fill="#eee" /><text x="425" y="53" {...text}>ε real + (1−ε) fake</text></>}<text x="270" y={60 + i * 73} textAnchor="middle" {...text}>real</text><text x="588" y={60 + i * 73} textAnchor="middle" {...text}>fake</text></g>)}
- </SpectralFigure><p>Current interpolant ε×0+(1−ε)×3 = {f(location, 6)}. For the declared critic f(x)=x+4 ReLU(x−2), its derivative is {probe.rows[0].slope === null ? 'undefined at the corner' : f(probe.rows[0].slope)}, and target-one penalty with λ=2 is {probe.penalty === null ? 'undefined' : f(probe.penalty)}. At real input 0, R1 with γ=2 gives 1; at generated input 3, R2 with γ=2 gives 25. A change in target and a change in location are different operations.</p><button onClick={() => setEpsilon(.5)}>Reset interpolation</button></>;
+ const [epsilon,setEpsilon]=useState(.5),location=3*(1-epsilon),probe=probePenalty(2,4,[location],'target-one',2);
+ return <FlowLab id="spectral-locations" label="Move the interpolation probe"><SpectralFigure title="Probe locations for three regularizers" height={280} description="Cyan dot is the real input at zero; violet square is the generated input at three. The white outlined dot marks where the gradient is measured. Each row uses the same coordinate scale.">
+ {['WGAN-GP: between both','R1: at the real input','R2: at the generated input'].map((label,i)=><g key={label}><text x="20" y={25+i*84}>{label}</text><path d={'M50 '+(48+i*84)+'H270'} stroke="#888"/><circle cx="50" cy={48+i*84} r="6" fill={C.input}/><rect x="264" y={42+i*84} width="12" height="12" fill={C.computed}/><circle cx={i===0?50+220*(1-epsilon):i===1?50:270} cy={48+i*84} r="9" fill="none" stroke="#fff"/><text x="50" y={72+i*84} textAnchor="middle">real 0</text><text x="270" y={72+i*84} textAnchor="middle">fake 3</text></g>)}
+ </SpectralFigure><FlowControls><FlowSlider name="Real weight ε" value={epsilon} min={0} max={1} step={.01} onChange={setEpsilon}/></FlowControls><FlowReadout>Interpolant ε×0+(1−ε)×3 = {f(location)}. For f(x)=x+4 ReLU(x−2), its derivative is {probe.rows[0].slope===null?'undefined at the corner':f(probe.rows[0].slope)} and λ=2 target-one penalty is {probe.penalty===null?'undefined':f(probe.penalty)}. With γ=2, R1 at zero is 1 and R2 at three is 25.</FlowReadout></FlowLab>;
 }
 export function BatchGradientFigure() {
-  return <><SpectralFigure title="Summing batch scores can cancel the derivatives you intended to measure" height={225} description="Both input coordinates enter both scores. These crossed dependencies are the issue: the gradient of the total score is a column sum, not a table of the self-derivatives.">
- <Box x={25} y={35} width={95} label="x₁" /><Box x={25} y={145} width={95} label="x₂" /><Box x={310} y={35} width={150} label="f₁=(x₁−x₂)/2" /><Box x={310} y={145} width={150} label="f₂=(x₂−x₁)/2" />
- <path d="M120 56 H310 M120 166 H310" stroke="#e6b854" /><path d="M120 56 L310 166 M120 166 L310 56" stroke="#ba9fd1" /><text x="210" y="41" {...text}>+½</text><text x="210" y="190" {...text}>+½</text><text x="170" y="99" {...text}>−½</text><text x="249" y="129" {...text}>−½</text><path d="M460 56 L520 110 M460 166 L520 110" stroke="#ddd" /><text x="555" y="105" {...text}>sum 0</text><text x="490" y="135" {...text}>gradient [0,0]</text>
- </SpectralFigure><NeuralTable caption="The full batch Jacobian and its column sum" headers={['Output', '∂/∂x₁', '∂/∂x₂']} rows={[['f₁', .5, -.5], ['f₂', -.5, .5], ['sum', 0, 0]]} /></>;
+ return <><SpectralFigure title="Every input influences both centered batch scores" height={250} description="Cyan dots are the two input examples. Grey plus circles compute the centered scores. Amber routes contribute +½ and blue routes −½. Both scores enter the final sum, where these contributions cancel.">
+ <Node x={40} y={54} label="x₁" color={C.input}/><Node x={40} y={194} label="x₂" color={C.input}/><Node x={205} y={54} label="+"/><Node x={205} y={194} label="+"/><path d="M60 54H184 M60 194H184" stroke={C.parameter}/><path d="M60 54L184 194 M60 194L184 54" stroke="#92c9e6"/><text x="110" y="40">+½</text><text x="110" y="219">+½</text><text x="82" y="124">−½</text><text x="150" y="124">−½</text><text x="228" y="58">f₁</text><text x="228" y="198">f₂</text><path d="M227 54H281V194H227" fill="none" stroke="#888"/><text x="254" y="112">sum</text><text x="259" y="137">0</text>
+ </SpectralFigure><NeuralTable caption="Full batch Jacobian: sum its columns for the sum gradient" headers={['output','∂/∂x₁','∂/∂x₂']} rows={[['f₁',.5,-.5],['f₂',-.5,.5],['sum',0,0]]}/></>;
 }
 export function SpectralGroupSortFigure() {
-  const [a, setA] = useState(-.6),
-    [b, setB] = useState(.9);
-  const sorted = [a, b].sort((x, y) => x - y);
-  return <>
- <div className="neural-controls"><NeuralNumber label="GroupSort input a" value={a} min={-2} max={2} onChange={setA} /><NeuralNumber label="GroupSort input b" value={b} min={-2} max={2} onChange={setB} /></div>
- <SpectralFigure title="Sorting switches routes; ReLU discards a negative coordinate" height={160} description="This pairwise construction is a local Euclidean example. The approximation theorem in the text uses its own specified norms and architecture.">{[a, b].map((value, i) => <g key={i}><Box x={20} y={25 + i * 72} width={125} label={'input ' + i + ': ' + f(value)} /><Box x={445} y={25 + i * 72} width={175} label={'sorted ' + i + ': ' + f(sorted[i])} /><path d={'M145 ' + (46 + i * 72) + ' L445 ' + (46 + (a <= b ? i : 1 - i) * 72)} stroke={i ? '#ba9fd1' : '#e6b854'} /></g>)}</SpectralFigure><p>Input length {f(Math.hypot(a, b))}; sorted length {f(Math.hypot(...sorted))}; ReLU length {f(Math.hypot(Math.max(0, a), Math.max(0, b)))}. At a tie the routing derivative is not uniquely described by one fixed permutation.</p>
- </>;
+ const [a,setA]=useState(-.6),[b,setB]=useState(.9),sorted=[a,b].sort((x,y)=>x-y);
+ return <FlowLab id="spectral-groupsort" label="Trace a pair through sorting"><SpectralFigure title="Sorting keeps both components" height={206} description="Cyan input scalars route to violet outputs. Lines cross when the order swaps. A negative value stays negative: unlike ReLU, sorting does not replace it by zero.">
+ {[a,b].map((v,i)=><g key={i}><Node x={48} y={52+100*i} label={f(v,2)} color={C.input}/><path d={'M69 '+(52+100*i)+'L231 '+(52+100*(a<=b?i:1-i))} stroke="#888"/><Node x={252} y={52+100*i} label={f(sorted[i],2)} color={C.computed}/></g>)}<text x="20" y="196">input order → ascending order</text>
+ </SpectralFigure><FlowControls><FlowSlider name="First input a" value={a} min={-2} max={2} step={.05} onChange={setA}/><FlowSlider name="Second input b" value={b} min={-2} max={2} step={.05} onChange={setB}/></FlowControls><FlowReadout>Input length {f(Math.hypot(a,b))} equals sorted length {f(Math.hypot(...sorted))}; applying ReLU instead gives {f(Math.hypot(Math.max(0,a),Math.max(0,b)))}. At a tie, one fixed routing derivative is not unique.</FlowReadout></FlowLab>;
 }
 export function SpectralOdeFigure() {
-  const [rate, setRate] = useState(.5);
-  return <>
- <NeuralNumber label="Linear ODE rate a in h′=a h" value={rate} min={-1} max={1} onChange={setRate} /><SpectralPlot title="A Lipschitz growth bound need not be contraction" xLabel="time" yLabel="distance between trajectories" xDomain={[0, 3]} yDomain={[0, .1 * Math.exp(Math.abs(rate) * 3) * 1.06]} series={[[rate, 'Actual distance 0.1 exp(a t)', '#e6b854'], [Math.abs(rate), 'Bound 0.1 exp(|a| t)', '#ddd']].map(([value, label, color]) => ({
-      label,
-      color,
-      values: Array.from({
-        length: 61
-      }, (_, i) => [i / 20, .1 * Math.exp(value * i / 20)]),
-      dashed: label.startsWith('Bound')
-    }))} /><p>The field has Lipschitz constant |a|={f(Math.abs(rate))}. Negative a contracts; positive a separates trajectories. The bound is valid for both and does not choose a solver step size.</p>
- </>;
+ const [rate,setRate]=useState(.5),times=Array.from({length:61},(_,i)=>i/20);
+ return <FlowLab id="spectral-ode" label="Compare two continuous trajectories"><SpectralPlot title="Two trajectories start one-tenth apart" xLabel="time" yLabel="state h" xDomain={[0,3]} yDomain={[0,1.2*Math.exp(Math.max(0,rate)*3)]} series={[1,1.1].map((initial,i)=>({label:'Initial state '+initial,color:i?C.computed:C.input,values:times.map(t=>[t,initial*Math.exp(rate*t)])}))}/><SpectralPlot title="Actual separation and a growth bound" xLabel="time" yLabel="distance" xDomain={[0,3]} yDomain={[0,.1*Math.exp(Math.abs(rate)*3)*1.06]} series={[rate,Math.abs(rate)].map((a,i)=>({label:i?'Bound 0.1 exp(|a|t)':'Actual 0.1 exp(at)',color:i?'#ddd':C.computed,dashed:!!i,values:times.map(t=>[t,.1*Math.exp(a*t)])}))}/><FlowControls><FlowSlider name="Field rate a" value={rate} min={-1} max={1} step={.05} onChange={setRate}/></FlowControls><FlowReadout>The field h′=a h has Lipschitz constant |a|={f(Math.abs(rate))}. Negative a brings trajectories together; positive a separates them. The growth bound permits both and does not specify a solver step size.</FlowReadout></FlowLab>;
 }
+

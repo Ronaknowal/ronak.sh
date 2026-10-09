@@ -1,13 +1,14 @@
-// Generated from the complete prepared manuscript by scripts/generate-spectral-lesson.mjs.
+// Reading-flow revision: current manuscript; historical generator is guarded.
 import { Prose,H2,H3,CodeBlock } from '../../components/content';
 import { Math as InlineMath, MathBlock } from '../../components/content/Math.jsx';
 import { LessonIntro } from '../../components/lesson-labs/LessonElements.jsx';
 import { NeuralTable } from '../../components/lesson-labs/NeuralLessonElements.jsx';
-import { CriticDerivativeFigure, SpectralCompositionFigure, PenaltyLocationsFigure, BatchGradientFigure, SpectralGroupSortFigure, SpectralOdeFigure } from '../../components/lesson-labs/SpectralMechanismFigures.jsx';
-import { SpectralSlopeLab, SpectralCircleFigure, SpectralMatrixLab, SpectralDerivativeLab, SpectralConvolutionLab, SpectralPenaltyLab, SpectralLinearPenaltyLab, SpectralLibraryLab, SpectralMarginLab } from '../../components/lesson-labs/SpectralMechanismLabs.jsx';
+import { CriticDerivativeFigure, SpectralPhaseFigure, SpectralTransportFigure, SpectralSensitivityFigure, SpectralGradientProbeFigure, SpectralCompositionFigure, PenaltyLocationsFigure, BatchGradientFigure, SpectralGroupSortFigure, SpectralOdeFigure } from '../../components/lesson-labs/SpectralMechanismFigures.jsx';
+import { SpectralSlopeLab, SpectralCircleFigure, SpectralNormalizationLab, SpectralMatrixLab, SpectralDerivativeLab, SpectralConvolutionLab, SpectralPenaltyLab, SpectralLinearPenaltyLab, SpectralLibraryLab, SpectralMarginLab } from '../../components/lesson-labs/SpectralMechanismLabs.jsx';
+import { SpectralDataFigure, SpectralArchitectureFigure, SpectralMetricFigure } from '../../components/lesson-labs/SpectralStudyFigures.jsx';
 import { SpectralMeasuredLab,SpectralProgram } from '../../components/lesson-labs/SpectralMeasuredLab.jsx';
-export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 min read + investigations and practice",hasIntegratedGuide:true,content:()=> <div className="neural-lesson neural-lesson-neutral spectral-lesson"><LessonIntro prerequisites="Matrix multiplication, vector lengths and derivatives; the loss and derivative routes are developed here." sections={[["1-a-critic-that-gives-directions","1. A critic that gives directions"],["2-what-a-sensitivity-limit-says","2. What a sensitivity limit says"],["3-spectral-normalization-control-the-strongest-stretch","3. Spectral normalization: control the strongest stretch"],["4-a-convolution-is-larger-than-its-stored-kernel","4. A convolution is larger than its stored kernel"],["5-gradient-penalty-measure-the-function-where-it-is-sampled","5. Gradient penalty: measure the function where it is sampled"],["6-implement-the-mechanism-without-losing-its-derivatives","6. Implement the mechanism without losing its derivatives"],["7-a-complete-experiment-on-recorded-digit-measurements","7. A complete experiment on recorded digit measurements"],["8-useful-connections-beyond-this-gan","8. Useful connections beyond this GAN"],["9-practice-and-transfer","9. Practice and transfer"],["references-and-another-way-to-learn","References and another way to learn"]]}>Shape a learning signal by controlling what can stretch and by measuring where it changes.</LessonIntro>
-<Prose opening="exploration">{""}<strong>{"Explore as you read."}</strong>{" Edit matrix entries, normalization method, power-iteration steps, critic/input values, interpolation points and margin geometry. Update singular stretch, effective matrix, derivative paths, sampled gradient penalties and local decision distances live. The labs show current results as you work; you do not enter or submit a guess. Use those comparisons to choose or diagnose a constraint by what it actually bounds and where it was evaluated; a sampled penalty is not a global guarantee."}</Prose>
+export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 min read + investigations and practice",hasIntegratedGuide:true,content:()=> <div className="neural-lesson neural-lesson-neutral spectral-lesson lesson-flow"><LessonIntro prerequisites="Matrix multiplication, vector lengths and derivatives; the loss and derivative routes are developed here." sections={[["1-a-critic-that-gives-directions","1. A critic that gives directions"],["2-what-a-sensitivity-limit-says","2. What a sensitivity limit says"],["3-spectral-normalization-control-the-strongest-stretch","3. Spectral normalization: control the strongest stretch"],["4-a-convolution-is-larger-than-its-stored-kernel","4. A convolution is larger than its stored kernel"],["5-gradient-penalty-measure-the-function-where-it-is-sampled","5. Gradient penalty: measure the function where it is sampled"],["6-implement-the-mechanism-without-losing-its-derivatives","6. Implement the mechanism without losing its derivatives"],["7-a-complete-experiment-on-recorded-digit-measurements","7. A complete experiment on recorded digit measurements"],["8-useful-connections-beyond-this-gan","8. Useful connections beyond this GAN"],["9-practice-and-transfer","9. Practice and transfer"],["references-and-another-way-to-learn","References and another way to learn"]]}>Shape a learning signal by controlling what can stretch and by measuring where it changes.</LessonIntro>
+
 
 <Prose>{"A useful learning signal must respond to a meaningful change in the input. If it reacts enormously to an almost invisible change, optimization can become erratic. If it barely reacts to anything, it cannot tell another model how to improve. This lesson studies two ways to shape that sensitivity: rescale the transformations inside a network, or penalize its measured input gradients."}</Prose>
 
@@ -19,13 +20,21 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <H2>{"1. A critic that gives directions"}</H2>
 
-<Prose>{"Imagine a generator producing two measurements of a handwritten digit: average ink on its left half and on its right half. Its input is a short random vector "}<InlineMath>{"z"}</InlineMath>{"; its output "}<InlineMath>{"G_\\theta(z)"}</InlineMath>{" is a proposed measurement pair. The parameters "}<InlineMath>{"\\theta"}</InlineMath>{" determine which pairs it tends to produce. A "}<strong>{"critic"}</strong>{" "}<InlineMath>{"f_\\phi(x)"}</InlineMath>{" gives a scalar score to a pair "}<InlineMath>{"x"}</InlineMath>{". Its parameters "}<InlineMath>{"\\phi"}</InlineMath>{" are trained to give higher average scores to recorded pairs than to generated pairs."}</Prose>
-
-<Prose>{"The generator then changes its parameters to raise the critic's scores on its generated pairs. It does not need a target pair for each random input. It needs a direction through the differentiable chain"}</Prose>
-
-<div className="neural-equation"><MathBlock>{"\\theta\\longrightarrow G_\\theta(z)\\longrightarrow f_\\phi(G_\\theta(z))."}</MathBlock></div>
+<Prose>How can a model learn to make useful samples when there is no correct answer for each random input? Give it another model that scores its samples, then use the score's derivative to find a direction of improvement.</Prose>
 
 <CriticDerivativeFigure />
+
+<Prose>Start at the cyan input circle. A <strong>generator</strong> G turns a random input z into a proposed sample x. Its amber weights θ determine that transformation. A <strong>critic</strong> f turns the sample into one violet score. Its amber weights φ are separate from the generator's. A score is an unrestricted number: larger means more favorable under this critic; it is not a probability. Grey wires carry values forward. The orange dashed route carries the derivative of the score back through the generated sample.</Prose>
+
+<Prose>To work the sign by hand, begin with just one coordinate. Recorded samples sit at zero. The generator emits its parameter θ=2; the fixed critic subtracts the sample from zero, so f(x)=−x. The score is −2. Minimize the negative of that score: the generator loss is θ, with derivative +1. Subtracting .1 times that derivative moves the sample to 1.9, toward zero. Reversing the loss sign moves it to 2.1. Later we will return to two real ink measurements, so the score surface can be drawn in two dimensions.</Prose>
+
+<Prose>Which weights should change? Alternate the two jobs: teach the critic to favor recorded samples over generated samples; then hold that critic fixed while teaching the generator to raise its own samples' scores.</Prose>
+
+<SpectralPhaseFigure />
+
+<Prose>In the upper route, both real and generated samples use the critic; only its weights φ are updated. Stop bars prevent this critic update from also training the generator. In the lower route, only the generator weights θ change. The critic weights stay fixed, but the derivative through its input must remain connected. The minus circle means generated score minus recorded score in the first job, and negative generated score in the second. R below adds a regularizer to the critic job.</Prose>
+
+<Prose>Two models learning through opposing objectives form a <strong>generative adversarial network (GAN)</strong>. A binary discriminator models a real-versus-generated probability; this Wasserstein critic instead supplies an unrestricted score with a controlled scale.</Prose>
 
 <Prose>{"For the Wasserstein form used here, gradient-descent software minimizes"}</Prose>
 
@@ -33,20 +42,27 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{""}<InlineMath>{"R"}</InlineMath>{" is a critic regularizer when one is used. The minus sign in "}<InlineMath>{"L_G"}</InlineMath>{" matters: minimizing a negative score raises the score. During a critic update, generated inputs are detached from the generator's derivative graph. During a generator update, freeze the critic's parameters but retain derivatives with respect to its input. Detaching the critic's output would remove the generator's learning signal."}</Prose>
 
-<Prose>{"Take a one-dimensional example: recorded data are at zero, the generator emits "}<InlineMath>{"\\theta=2"}</InlineMath>{", and the fixed critic is "}<InlineMath>{"f(x)=-x"}</InlineMath>{". Recorded score is zero and generated score is −2. The generator loss is "}<InlineMath>{"\\theta"}</InlineMath>{", its derivative is one, and a step of size .1 moves the output to 1.9, toward the data. Reversing the loss sign moves it to 2.1."}</Prose>
+
+
+<Prose>The stop and fixed-weight routes use the distinction taught in <a href="/learn/path/full-curriculum/backpropagation-automatic-differentiation?module=deep-learning-fundamentals">Backpropagation &amp; Automatic Differentiation</a>: deciding which parameters can change is separate from deciding whether a derivative can pass through an operation.</Prose>
 
 <Prose>{"Why constrain the critic at all? If any score difference is useful, multiplying all scores by a million appears better to its maximization objective. A limit on sensitivity gives score differences a meaningful scale."}</Prose>
 
 <H3>{"Transport distance supplies that scale"}</H3>
 
+<Prose>Why does a distance between distributions help? Imagine moving one unit of probability mass from the generated dot to the recorded dot. The line has a measurable length even when the two dots do not overlap.</Prose>
+<SpectralTransportFigure />
 <Prose>{"The "}<strong>{"Wasserstein-1 distance"}</strong>{" asks for the least cost of moving probability mass from one distribution to another. Moving mass "}<InlineMath>{"a"}</InlineMath>{" through distance "}<InlineMath>{"d"}</InlineMath>{" costs "}<InlineMath>{"ad"}</InlineMath>{". For point masses at zero and "}<InlineMath>{"\\theta"}</InlineMath>{", the answer is "}<InlineMath>{"|\\theta|"}</InlineMath>{": the distance decreases continuously as the generated point approaches the recorded point."}</Prose>
 
-<Prose>{"Under the appropriate transport assumptions, the same quantity can be written as the largest recorded-minus-generated score difference over all 1-Lipschitz critics. On Euclidean space, finite first moments ensure the usual distance is finite. Continuity with respect to generator parameters needs corresponding regularity; it is not a statement about every arbitrary parameterized distribution. A finite trained network searches a restricted family for a limited number of updates, so its observed score difference is not automatically the exact transport distance. "}<a href={"https://proceedings.mlr.press/v70/arjovsky17a/arjovsky17a.pdf"}>{"WGAN, §2–3"}</a>{""}</Prose>
+<Prose>{"Under the appropriate transport assumptions, the same quantity can be written as the largest recorded-minus-generated score difference over all 1-Lipschitz critics: critics whose score changes by at most the distance the input moves. On Euclidean space, finite first moments ensure the usual distance is finite. Continuity with respect to generator parameters needs corresponding regularity; it is not a statement about every arbitrary parameterized distribution. A finite trained network searches a restricted family for a limited number of updates, so its observed score difference is not automatically the exact transport distance. "}<a href={"https://proceedings.mlr.press/v70/arjovsky17a/arjovsky17a.pdf"}>{"WGAN, §2–3"}</a>{""}</Prose>
 
 <Prose>{"For comparison, the ideal Jensen–Shannon divergence between two different point masses stays at "}<InlineMath>{"\\log 2"}</InlineMath>{", then becomes zero when they coincide. That explains one difficulty with a particular idealized objective. It does not prove that every practical GAN has zero generator gradient: finite critics and the widely used non-saturating generator loss change the argument. "}<a href={"https://proceedings.neurips.cc/paper_files/paper/2017/file/892c3b1c6dccd52936e27cbd0ff683d6-Paper.pdf"}>{"WGAN-GP, §2.1–2.2"}</a>{""}</Prose>
 
 <H2>{"2. What a sensitivity limit says"}</H2>
 
+<Prose>The transport critic needs a controlled rate of change. What does that mean for an ordinary graph? Compare one input movement with the output movement it causes.</Prose>
+<SpectralSensitivityFigure />
+<Prose>The horizontal cyan move is .02; the vertical violet move is .06. This straight graph multiplies every input difference by three. A bound of three allows at most .06 of output movement for this .02 input move. Other functions may change by less; a bound is a ceiling, not a required slope.</Prose>
 <Prose>{"A function is "}<strong>{""}<InlineMath>{"L"}</InlineMath>{"-Lipschitz"}</strong>{", for specified input and output norms on a specified domain, when"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\|f(x)-f(y)\\|\\le L\\|x-y\\|\\quad\\text{for every allowed }x,y."}</MathBlock></div>
@@ -57,11 +73,15 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{"Corners are allowed. "}<InlineMath>{"|x|"}</InlineMath>{" and ReLU are 1-Lipschitz even though their ordinary derivative does not exist at zero. The concern is bounded change, not whether a graph has a sharp-looking corner."}</Prose>
 
+<Prose>Can one pair disprove a claimed bound? Here a is the reference input, b is the comparison, and L is the proposed ceiling. The concrete graph f(x)=x+ReLU(x−1) has slope one before its corner at one and slope two after it. The white envelope permits at most L times the distance from a.</Prose>
 <SpectralSlopeLab />
 
 <H3>{"From layers to a whole network"}</H3>
 
-<Prose>{"For Euclidean norms, an affine layer "}<InlineMath>{"Wx+b"}</InlineMath>{" has Lipschitz constant "}<InlineMath>{"\\|W\\|_2"}</InlineMath>{", the matrix's largest singular value. The bias cancels in differences. For composition, multiply valid layer bounds. ReLU and tanh have bounds one; sigmoid has bound one-quarter; leaky ReLU with negative slope "}<InlineMath>{"\\alpha"}</InlineMath>{" has bound "}<InlineMath>{"\\max(1,|\\alpha|)"}</InlineMath>{". GELU does not have a global bound of one."}</Prose>
+<Prose>How does a limit for one operation become a limit for an entire network? Follow the same two coordinate directions through two matrices, then follow a genuine identity bypass into an addition.</Prose>
+<SpectralCompositionFigure />
+
+<Prose>{"For Euclidean norms, an affine layer "}<InlineMath>{"Wx+b"}</InlineMath>{" has Lipschitz constant "}<InlineMath>{"\\|W\\|_2"}</InlineMath>{", the matrix's maximum stretch of any unit-length direction, called its largest singular value. The bias cancels in differences. For composition, multiply valid layer bounds. ReLU and tanh have bounds one; sigmoid has bound one-quarter; leaky ReLU with negative slope "}<InlineMath>{"\\alpha"}</InlineMath>{" has bound "}<InlineMath>{"\\max(1,|\\alpha|)"}</InlineMath>{". GELU does not have a global bound of one."}</Prose>
 
 <Prose>{"This gives a useful ledger for a computation graph:"}</Prose>
 
@@ -71,9 +91,14 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{"Bounds can be loose. Compose "}<InlineMath>{"A=\\operatorname{diag}(3,1/3)"}</InlineMath>{" with "}<InlineMath>{"B=\\operatorname{diag}(1/3,3)"}</InlineMath>{". The product-of-norms bound is nine, while "}<InlineMath>{"BA=I"}</InlineMath>{" has norm one. The direction stretched by the first map is contracted by the second. A small sampled derivative and a large valid upper bound therefore need not contradict each other."}</Prose>
 
-<SpectralCompositionFigure />
+
+
+<Prose>The bypass is the identity route from <a href="/learn/path/full-curriculum/residual-connections-skip-connections?module=deep-learning-fundamentals">Residual Connections &amp; Skip Connections</a>. Adding it helps gradients flow, but also contributes its own forward sensitivity. That is why the whole block needs a bound, rather than only its learned branch.</Prose>
 
 <H2>{"3. Spectral normalization: control the strongest stretch"}</H2>
+
+<Prose>The composition picture showed that direction matters. Now switch to one two-coordinate map, diag(3,1), and feed it a circle of unit inputs. Cyan is the input circle; violet is its transformed shape, drawn with equal axes and the same physical scale in both panels.</Prose>
+<SpectralCircleFigure />
 
 <Prose>{"Feed every unit-length vector in two dimensions through "}<InlineMath>{"W=\\operatorname{diag}(3,1)"}</InlineMath>{". The unit circle becomes an ellipse with semi-axes three and one. A vector along the first axis is stretched threefold; one along the second is unchanged. The "}<strong>{"spectral norm"}</strong>{" is the largest stretch:"}</Prose>
 
@@ -85,13 +110,18 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{"Our ellipse now has semi-axes one and one-third. All singular values are divided by the same number. This does not make the map orthogonal, force every singular value to one, or change its rank. A target scale "}<InlineMath>{"c>0"}</InlineMath>{" instead uses "}<InlineMath>{"cW/\\sigma_1(W)"}</InlineMath>{"."}</Prose>
 
-<SpectralCircleFigure />
+
 
 <Prose>{"Normalizing to norm one can enlarge a matrix whose norm is already below one. If the intended operation is only to cap the norm, use "}<InlineMath>{"W/\\max(1,\\sigma_1(W))"}</InlineMath>{". Singular-value clipping is another operation: decompose "}<InlineMath>{"W=U\\Sigma V^T"}</InlineMath>{", cap individual singular values, then reconstruct. Entrywise weight clipping changes matrix coefficients directly and has yet another effect. Its threshold does not set a network's Lipschitz constant to that same threshold."}</Prose>
 
 <Prose>{"The original spectral-normalization method uses a cheaper estimate of the strongest stretch during training. Its paper also studies other GAN losses, so spectral normalization is not tied exclusively to the Wasserstein objective. "}<a href={"https://arxiv.org/pdf/1802.05957"}>{"Miyato et al., §2 and Appendix A"}</a>{""}</Prose>
 
+<Prose>What changes when we normalize, cap or clip? The next investigation compares the actual shapes from five different recipes. Unit rescaling divides every coefficient by the largest stretch and multiplies by the target. Cap-only does that only when the stretch exceeds the target. Frobenius rescaling divides by the square-root sum of squared coefficients. Entry clipping caps each coefficient's magnitude; singular clipping caps each singular stretch separately. These are different operations on the same matrix.</Prose>
+<SpectralNormalizationLab />
 <H3>{"Power iteration finds a direction as well as a number"}</H3>
+
+<Prose>How can we find the longest direction without computing a full decomposition? u lives in output coordinates; v lives in input coordinates. Multiply u by Wᵀ to enter input space, normalize that vector to v, multiply v by W, and normalize back to u. The planes draw those actual vectors. A round means this complete cycle.</Prose>
+<SpectralMatrixLab />
 
 <Prose>{"For a nonzero left-side vector "}<InlineMath>{"u"}</InlineMath>{", repeat"}</Prose>
 
@@ -103,9 +133,12 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{"Training commonly retains the previous vectors because weights often move incrementally. A cached vector can be useful; it is not a universal accuracy guarantee. Near-equal leading singular values slow convergence, and a changed matrix can invalidate a previously good direction. For a dense "}<InlineMath>{"m\\times n"}</InlineMath>{" matrix, one round costs "}<InlineMath>{"O(mn)"}</InlineMath>{" arithmetic with "}<InlineMath>{"O(m+n)"}</InlineMath>{" vector storage beyond the weights. Calling the arithmetic "}<InlineMath>{"O(m+n)"}</InlineMath>{" confuses storage with work."}</Prose>
 
-<SpectralMatrixLab />
+
 
 <H3>{"Deeper: why the normalization stays in the derivative graph"}</H3>
+
+<Prose>The normalized map has two routes from its weights: the numerator and the measured scale. How should a loss derivative follow both? H below is the derivative arriving from the loss with respect to each effective weight coefficient. The exact derivative requires a unique positive leading singular value; repeated or zero values are treated explicitly.</Prose>
+<SpectralDerivativeLab />
 
 <Prose>{"Let "}<InlineMath>{"H=\\partial L/\\partial\\overline W"}</InlineMath>{", and assume a unique positive leading singular value with unit singular vectors "}<InlineMath>{"u,v"}</InlineMath>{". Since "}<InlineMath>{"d\\sigma_1=\\langle uv^T,dW\\rangle"}</InlineMath>{", differentiating the quotient gives"}</Prose>
 
@@ -115,11 +148,16 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{"The companion calculation checks the derivative for "}<InlineMath>{"W=[[2,1],[0,1]]"}</InlineMath>{" against central differences, with maximum discrepancy below "}<InlineMath>{"7\\times10^{-12}"}</InlineMath>{". The derivation explains the term; numerical agreement is a useful check on this particular implementation, not a proof for all matrices."}</Prose>
 
-<SpectralDerivativeLab /><SpectralProgram filename="sensitivity-calculations.py" />
+<SpectralProgram filename="sensitivity-calculations.py" />
 
 <H2>{"4. A convolution is larger than its stored kernel"}</H2>
 
+<Prose>The sliding operation is the same one developed in <a href="/learn/path/full-curriculum/convolution-pooling-receptive-fields?module=deep-learning-fundamentals">Convolution, Pooling &amp; Receptive Fields</a>. Here we ask a new question: how strongly can that entire reused operation stretch an input difference?</Prose>
+
 <Prose>{"A kernel is reused at many spatial locations. Flattening its stored coefficients into a matrix does not generally produce the matrix that maps an entire image to its entire output."}</Prose>
+
+<Prose>Which cells does one reused kernel connect? Cyan cells are a three-value spatial input; the two taps initially equal one. Each output adds its two adjacent cells. The shared middle cell reaches both outputs, so the full map is already larger than the stored two-tap row.</Prose>
+<SpectralConvolutionLab />
 
 <Prose>{"For input "}<InlineMath>{"(x_1,x_2,x_3)"}</InlineMath>{" and valid stride-one kernel "}<InlineMath>{"[1,1]"}</InlineMath>{","}</Prose>
 
@@ -129,13 +167,16 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{"Now use four inputs and stride two: the two windows do not overlap. The full operator consists of two disjoint copies of that row kernel; dividing by "}<InlineMath>{"\\sqrt2"}</InlineMath>{" gives norm one. A four-position circular stride-one convolution has full norm two before normalization, leaving "}<InlineMath>{"\\sqrt2"}</InlineMath>{" after the same kernel rescaling. Padding, stride, spatial size and overlap are part of the operator definition."}</Prose>
 
-<SpectralConvolutionLab />
+
 
 <Prose>{"This does not make kernel spectral normalization useless. It changes how strongly weights can act and is widely studied as a regularizer. It does mean that a certificate about the whole convolution requires an appropriate operator bound or computation. Fourier-based exact results for circular convolutions have their own boundary assumptions; they cannot silently be applied to every zero-padded convolution. "}<a href={"https://arxiv.org/pdf/1805.10408"}>{"Sedghi et al., operator analysis"}</a>{""}</Prose>
 
 <H2>{"5. Gradient penalty: measure the function where it is sampled"}</H2>
 
-<Prose>{"The WGAN gradient penalty draws a recorded input "}<InlineMath>{"x"}</InlineMath>{", a generated input "}<InlineMath>{"\\widetilde x"}</InlineMath>{", and "}<InlineMath>{"\\epsilon\\sim U[0,1]"}</InlineMath>{", then forms"}</Prose>
+
+<Prose>Choose the place to measure before defining the penalty. ε is a randomly chosen real-input weight between zero and one; its complement weights the generated input. The triangle then displays the two coordinate derivatives of one simple fixed critic, 3x₁+4x₂.</Prose>
+<SpectralGradientProbeFigure />
+<Prose>The white ring is the interpolated input, called x̂. The triangle sides are the two input-gradient components; their Euclidean length is five. A target-one penalty squares the distance between that length and one, then multiplies by a chosen nonnegative strength λ. Average that result across newly sampled inputs.</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\widehat x=\\epsilon x+(1-\\epsilon)\\widetilde x,\\qquad\nR_{GP}=\\lambda\\mathbb E\\left[(\\|\\nabla_{\\widehat x}f(\\widehat x)\\|_2-1)^2\\right]."}</MathBlock></div>
 
@@ -145,13 +186,16 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <H3>{"Work through a penalty update"}</H3>
 
+<Prose>Follow a penalty through a linear critic. Its score is w₁x₁+w₂x₂, so the input-gradient vector is the parameter pair w. Begin with w=(3,4), penalty strength λ=2 and a preferred radius of one; the dashed circle shows that target. Then subtract a step-size multiple of the penalty's parameter derivative.</Prose>
+<SpectralLinearPenaltyLab />
+
 <Prose>{"For "}<InlineMath>{"f_w(x)=w^Tx"}</InlineMath>{", the input gradient is simply "}<InlineMath>{"w"}</InlineMath>{". Let "}<InlineMath>{"w=(3,4)"}</InlineMath>{", whose Euclidean norm is five, and let "}<InlineMath>{"\\lambda=2"}</InlineMath>{". The penalty is "}<InlineMath>{"2(5-1)^2=32"}</InlineMath>{". For nonzero "}<InlineMath>{"w"}</InlineMath>{", its parameter derivative is"}</Prose>
 
 <div className="neural-equation"><MathBlock>{"\\nabla_wR=2\\lambda(\\|w\\|_2-1)\\frac{w}{\\|w\\|_2}=(9.6,12.8)."}</MathBlock></div>
 
 <Prose>{"A penalty-only descent step of size .1 gives "}<InlineMath>{"w'=(2.04,2.72)"}</InlineMath>{", norm 3.4 and penalty 11.52. It moved toward norm one without jumping directly there. In GAN training, the adversarial-loss gradient is added to this gradient; the result need not decrease the penalty every step."}</Prose>
 
-<SpectralLinearPenaltyLab />
+
 
 <Prose>{"Two-sided target-one penalty, an upper-bound penalty and a zero-centered penalty prefer different functions:"}</Prose>
 
@@ -161,27 +205,41 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <H3>{"R1 and R2 change both the target and sampling location"}</H3>
 
+<Prose>What if we prefer zero sensitivity, and choose only one of the two data sources? R1 measures squared input-gradient norm at real inputs; R2 measures it at generated inputs. WGAN-GP instead targets norm one between them. The white ring below is the evaluation location; ε weights the real endpoint, so ε=1 reaches real and ε=0 reaches fake.</Prose>
+
+<Prose>For the location calculation, use the concrete critic f(x)=x+4 ReLU(x−2): its slope is one before two and five after two. At the corner itself its ordinary derivative is undefined. Use real input zero and generated input three; the same interpolant rule moves the probe between them.</Prose>
+<PenaltyLocationsFigure />
+
 <Prose>{"R1 uses "}<InlineMath>{"\\frac\\gamma2\\mathbb E_{x\\sim p_{data}}\\|\\nabla_x f(x)\\|^2"}</InlineMath>{"; R2 uses the corresponding expectation on generated inputs. They are zero-centered penalties at different distributions. Moving WGAN-GP's target-one penalty onto real inputs alone does not turn it into R1. Their convergence analysis establishes local results under explicit assumptions near an appropriate equilibrium, not unconditional convergence of every large GAN. "}<a href={"https://proceedings.mlr.press/v80/mescheder18a/mescheder18a.pdf"}>{"Mescheder et al., §4"}</a>{""}</Prose>
 
-<PenaltyLocationsFigure />
+
 
 <Prose>{"Lazy application every "}<InlineMath>{"k"}</InlineMath>{" updates can multiply the regularizer by "}<InlineMath>{"k"}</InlineMath>{" to preserve its expected contribution under that sampling schedule. This does not make the finite optimizer trajectory identical, and optimizer adjustments may be needed. Choose and document the procedure rather than treating a popular interval as a theorem."}</Prose>
 
 <H3>{"A penalty can miss a steep region completely"}</H3>
 
-<Prose>{"Consider "}<InlineMath>{"f(x)=x+4\\operatorname{ReLU}(x-1)"}</InlineMath>{". At sampled points −.5, 0 and .5, the derivative is one and the target-one penalty is zero. At "}<InlineMath>{"x=2"}</InlineMath>{", the derivative is five and the unweighted penalty is sixteen. The global Lipschitz constant is five."}</Prose>
-
+<Prose>Does a good score at a few probes tell us about every other input? Switch to a scalar graph with a corner: it adds an extra slope after the kink. The initial lab kink is at two and the extra slope is four. The cyan dots are the only locations being measured; a white outline selects one dot.</Prose>
 <SpectralPenaltyLab />
+
+<Prose>{"For a separate hand calculation, move that kink to one and use "}<InlineMath>{"f(x)=x+4\\operatorname{ReLU}(x-1)"}</InlineMath>{". At sampled points −.5, 0 and .5, the derivative is one and the target-one penalty is zero. At "}<InlineMath>{"x=2"}</InlineMath>{", the derivative is five and the unweighted penalty is sixteen. The global Lipschitz constant is five."}</Prose>
+
+
 
 <H3>{"Per-example gradients need per-example functions"}</H3>
 
 <Prose>{"The usual code obtains gradients of the sum of batch scores. If each score depends only on its own input, this yields each example's input gradient. Batch-dependent operations can break that interpretation."}</Prose>
 
-<Prose>{"For two scalar inputs, define "}<InlineMath>{"f_1=(x_1-x_2)/2"}</InlineMath>{", "}<InlineMath>{"f_2=(x_2-x_1)/2"}</InlineMath>{". Each score has self-derivative .5, but the gradient of "}<InlineMath>{"f_1+f_2"}</InlineMath>{" is zero. Batch centering has coupled the examples, and summing scores cancels their derivatives. This small Jacobian explains why ordinary training-mode BatchNorm is problematic in the standard WGAN-GP calculation. Per-example LayerNorm avoids that specific batch coupling, but its own sensitivity still depends on its formula, gain and epsilon."}</Prose>
-
+<Prose>What goes wrong when examples influence each other? The next two-output circuit centers a batch of two scalar inputs: each output takes half of its own input and subtracts half of the other. Both inputs therefore reach both outputs.</Prose>
 <BatchGradientFigure />
 
+<Prose>{"For two scalar inputs, define "}<InlineMath>{"f_1=(x_1-x_2)/2"}</InlineMath>{", "}<InlineMath>{"f_2=(x_2-x_1)/2"}</InlineMath>{". Each score has self-derivative .5, but the gradient of "}<InlineMath>{"f_1+f_2"}</InlineMath>{" is zero. Batch centering has coupled the examples, and summing scores cancels their derivatives. This small Jacobian explains why ordinary training-mode BatchNorm is problematic in the standard WGAN-GP calculation. Per-example LayerNorm avoids that specific batch coupling, but its own sensitivity still depends on its formula, gain and epsilon."}</Prose>
+
+
+
 <H2>{"6. Implement the mechanism without losing its derivatives"}</H2>
+
+<Prose>The derivative examples separate weights from the current function. The library must also separate the optimizer-owned original matrix, cached search vectors, and the effective forward matrix. A buffer is saved state that is not an optimizer parameter. A weight access means evaluating the parametrized weight, which can update those saved vectors during training.</Prose>
+<SpectralLibraryLab />
 
 <Prose>{"For dense layers, PyTorch's parametrization API attaches spectral normalization to the weight. Training-mode weight access updates estimated singular vectors; evaluation mode freezes those iterations. Thus the number of accesses is part of the procedure, not simply the number of optimizer steps. A shared forward for recorded and generated inputs is easy to reason about. "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.parametrizations.spectral_norm.html"}>{"PyTorch 2.14 spectral normalization"}</a>{""}</Prose>
 
@@ -193,22 +251,28 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{"At export, evaluation mode plus "}<code>{"remove_parametrizations(layer, \"weight\", leave_parametrized=True)"}</code>{" retains the current effective weight. Removing the parametrization need not restore the raw unnormalized weight. The companion example verifies identical outputs before and after this operation on a small dense layer. A frozen approximate norm remains approximate; exporting it does not upgrade it into a certificate. "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.parametrize.remove_parametrizations.html"}>{"PyTorch removal contract"}</a>{""}</Prose>
 
-<SpectralLibraryLab />
+
 
 <H2>{"7. A complete experiment on recorded digit measurements"}</H2>
 
 <Prose>{"The question is modest: "}<strong>{"how do three declared critic-regularization procedures behave while learning the distribution of two real ink measurements?"}</strong>{" This is small enough to plot every recorded point and inspect a learned score surface."}</Prose>
 
+<Prose>How do the measured coordinates relate to an actual image? Switch from the small matrix fixture to recorded digits. The two brackets keep the physical halves visible before either becomes a number.</Prose>
+<SpectralDataFigure />
 <Prose>{"The "}<a href={"/learn-code/spectral-normalization-gradient-penalty/digits-400.csv"}>{"offline CSV"}</a>{" contains 400 real 8×8 optical digit images, selected as the first 40 examples of each digit from the scikit-learn copy of the UCI dataset. Each integer pixel is between zero and sixteen. For each half-image, sum its 32 pixels and divide by "}<InlineMath>{"32\\times16=512"}</InlineMath>{". The two resulting coordinates are average normalized ink on the left and right. Class labels are not used for training or splitting. "}<a href={"https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits"}>{"Dataset source and attribution"}</a>{""}</Prose>
 
 <Prose>{"Different images sometimes give the same measurement pair. Keep these equal profiles in the same role, retaining their frequency. A seeded split of 394 unique profile groups produces "}<strong>{"241 fitting images, 79 development images and 80 assessment images"}</strong>{". No coordinate standardization is learned from assessment data. The "}<a href={"/learn-code/spectral-normalization-gradient-penalty/data-provenance.md"}>{"provenance record"}</a>{" retains every source ID, group, split rule, dependency version and data hash. Writer-level independence is not established by this extract."}</Prose>
 
+<Prose>What do the two learned functions contain? Each input pair passes through two dense 24-component layers. The generator finishes with two ink coordinates; the critic finishes with one unrestricted score.</Prose>
+<SpectralArchitectureFigure />
 <Prose>{"The generator has widths 2→24→24→2, ReLU hidden activations and sigmoid outputs, with 722 parameters. The critic has widths 2→24→24→1, leaky-ReLU slope .2 and an unrestricted scalar output, with 697 parameters. There is no BatchNorm. Compare entrywise clipping at .1, target-one gradient penalty with "}<InlineMath>{"\\lambda=10"}</InlineMath>{", and one-iteration spectral normalization on each dense critic weight. All three use the same Wasserstein-style losses."}</Prose>
 
 <Prose>{"For each method, seeds 11, 29 and 47 give paired raw initializations and data/latent draws. Train for 600 generator updates with three critic updates per generator update, batch size 64 and Adam rate .001, betas "}<InlineMath>{"(0,.9)"}</InlineMath>{". Gradient-penalty interpolation has a separate random stream so it does not alter the common data draws. These choices were fixed before the run. Development measurements are recorded at declared steps; they do not select a checkpoint. All nine final models are retained, including unfavorable outcomes."}</Prose>
 
 <H3>{"Measure a distributional discrepancy independently of critic loss"}</H3>
 
+<Prose>How can we compare distributions without calling critic loss sample quality? Project points onto one direction, compare the resulting one-dimensional mass distributions, and repeat for other directions. The miniature calculation below uses equal counts only to make the sorting step visible.</Prose>
+<SpectralMetricFigure />
 <Prose>{"Draw the same 256 latent vectors for every final generator. Project generated and recorded pairs onto 64 equally spaced unit directions with angles "}<InlineMath>{"j\\pi/64"}</InlineMath>{". In each one-dimensional projection, compute the empirical Wasserstein-1 distance, then average. Sorting and integrating the empirical cumulative-distribution difference gives each one-dimensional value, including when sample counts differ."}</Prose>
 
 <Prose>{"This is a "}<strong>{"finite directional average of empirical W1"}</strong>{", not exact two-dimensional W1, FID or a log likelihood. Its units are normalized ink coordinates. It can miss differences between the chosen projections and is subject to finite-sample variation. A simple baseline samples 256 fitting profiles with replacement using a fixed seed; it needs no neural training. Its assessment discrepancy is "}<strong>{".010039"}</strong>{"."}</Prose>
@@ -229,15 +293,15 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <H3>{"Run the declared experiment"}</H3>
 
-<Prose>{"Save the CSV beside the program. The author run used Python 3.12.14, NumPy 2.3.5, SciPy 1.18.1 and PyTorch 2.14.0+cpu with one CPU thread. Install compatible packages in an isolated environment, then run "}<code>{"python critic-regularization-study.py"}</code>{". The program reads the real extract, creates the roles, fits all nine models, measures them, and writes the weights and results. No dataset download or hidden training loop is required."}</Prose>
+<Prose>{"Save the CSV beside the program. The recorded run used Python 3.12.14, NumPy 2.3.5, SciPy 1.18.1 and PyTorch 2.14.0+cpu with one CPU thread. Install compatible packages in an isolated environment, then run "}<code>{"python critic-regularization-study.py"}</code>{". The program reads the real extract, creates the roles, fits all nine models, measures them, and writes the weights and results. No dataset download or hidden training loop is required."}</Prose>
 
 <Prose>{"The "}<a href={"/learn-code/spectral-normalization-gradient-penalty/critic-regularization-study.py"}>{"complete program"}</a>{" is printed below. It intentionally uses small explicit training steps and saves the evidence needed to understand the results. The "}<a href={"/learn-code/spectral-normalization-gradient-penalty/sensitivity-calculations.py"}>{"separate sensitivity calculations"}</a>{" reproduce the exact examples and check frozen-model inference without fitting again."}</Prose>
 
 <SpectralProgram />
 
-<H3>{"What you can now implement and deliberately change"}</H3>
+<H3>{"Implement and deliberately change the training"}</H3>
 
-<Prose>{"The two methods have different source owners. In "}<a href={"/learn-code/spectral-normalization-gradient-penalty/sensitivity-calculations.py"}>{"sensitivity-calculations.py"}</a>{", "}<code>{"power_trace"}</code>{" constructs repeated matrix/vector products and normalization, and the normalization-gradient calculation differentiates through the weight-dependent scale. In "}<a href={"/learn-code/spectral-normalization-gradient-penalty/critic-regularization-study.py"}>{"critic-regularization-study.py"}</a>{", "}<code>{"gradient_penalty"}</code>{" constructs interpolation points, input derivatives and the differentiable norm penalty; "}<code>{"main"}</code>{" composes that operation with a complete critic/generator training loop. Nothing in the penalty is delegated to an unexplained “WGAN loss” call."}</Prose>
+<Prose>{"The two programs expose different mechanisms. In "}<a href={"/learn-code/spectral-normalization-gradient-penalty/sensitivity-calculations.py"}>{"sensitivity-calculations.py"}</a>{", "}<code>{"power_trace"}</code>{" constructs repeated matrix/vector products and normalization, and the normalization-gradient calculation differentiates through the weight-dependent scale. In "}<a href={"/learn-code/spectral-normalization-gradient-penalty/critic-regularization-study.py"}>{"critic-regularization-study.py"}</a>{", "}<code>{"gradient_penalty"}</code>{" constructs interpolation points, input derivatives and the differentiable norm penalty; "}<code>{"main"}</code>{" composes that operation with a complete critic/generator training loop. Nothing in the penalty is delegated to an unexplained “WGAN loss” call."}</Prose>
 
 <Prose>{"The ordinary spectral-normalization route is the same program's "}<code>{"torch.nn.utils.parametrizations.spectral_norm(layer, n_power_iterations=1)"}</code>{". Its trainable original weight, computed normalized weight and power-vector buffers are distinct state. Calling a layer twice in training mode can perform two power-vector updates; the joined real/fake forward intentionally gives both groups one common effective weight. Critic evaluation mode freezes power-vector iteration during the generator step, while "}<code>{"requires_grad_(False)"}</code>{" freezes critic parameters: input derivatives still connect the generator to its objective. The export calculation in "}<code>{"sensitivity-calculations.py"}</code>{" checks that removing the parametrization with "}<code>{"leave_parametrized=True"}</code>{" preserves the current function. "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.parametrizations.spectral_norm.html"}>{"Maintained API and mode semantics"}</a>{"."}</Prose>
 
@@ -255,29 +319,38 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <H3>{"A robustness margin needs the right output difference"}</H3>
 
+<Prose>Can the same sensitivity geometry tell us how far an input can move before a decision changes? Switch from a GAN critic to a two-output linear classifier. Its initial weight matrix is the identity, so its two logits are simply the two input coordinates. Class 0 uses the first component (F₁ in the equation below); class 1 uses the second (F₂). A logit is an unnormalized score; the larger score wins. The white line is a tie; the dashed violet circle is the distance to it, certified only for strictly smaller moves while class zero is a strict winner.</Prose>
+<SpectralMarginLab />
+
 <Prose>{"A classifier chooses the largest logit. Suppose its two logits at "}<InlineMath>{"x=(2,0)"}</InlineMath>{" are produced by "}<InlineMath>{"F(x)=(x_1,x_2)"}</InlineMath>{". The winning gap is two. The vector-valued map has Euclidean Lipschitz constant one, but the "}<strong>{"difference"}</strong>{" "}<InlineMath>{"F_1-F_2"}</InlineMath>{" has constant "}<InlineMath>{"\\sqrt2"}</InlineMath>{". Any perturbation of norm strictly below "}<InlineMath>{"2/\\sqrt2=\\sqrt2"}</InlineMath>{" preserves the positive gap. Perturbation "}<InlineMath>{"(-1,1)"}</InlineMath>{", whose norm is exactly "}<InlineMath>{"\\sqrt2"}</InlineMath>{", reaches a tie."}</Prose>
 
 <Prose>{"More generally, if a joint logit vector has bound "}<InlineMath>{"L"}</InlineMath>{", a pairwise logit difference has bound at most "}<InlineMath>{"\\sqrt2L"}</InlineMath>{". A positive gap "}<InlineMath>{"m"}</InlineMath>{" therefore gives the sufficient radius "}<InlineMath>{"m/(\\sqrt2L)"}</InlineMath>{" for that competitor. If each logit separately has bound "}<InlineMath>{"L"}</InlineMath>{", the direct sum bound is "}<InlineMath>{"2L"}</InlineMath>{". For multiple competitors, take the smallest valid radius. Include input preprocessing and the domain in the bound. A power-iteration estimate or a sampled gradient maximum alone is insufficient evidence for this certificate."}</Prose>
 
 <Prose>{"This is a useful application of the same geometry: the matrix stretch becomes a bound on a decision change. It is not a claim that adding spectral normalization alone makes a classifier robust to every perturbation."}</Prose>
 
-<SpectralMarginLab />
+
 
 <H3>{"Bounded slope can still limit expressive power"}</H3>
+
+<Prose>A tight layer bound is useful only if later operations do not throw away the direction we need. Compare two component values through sorting: GroupSort orders them while keeping both, whereas ReLU replaces negative components by zero.</Prose>
+<SpectralGroupSortFigure />
 
 <Prose>{"ReLU can remove a component's derivative entirely on its inactive side. A network constrained at every layer may lose useful gradient magnitude through repeated such operations. "}<strong>{"GroupSort"}</strong>{" instead sorts small groups of activations; within a region where their order is fixed, it permutes components and preserves their Euclidean length. Sorting supplies nonlinearity without discarding that local derivative magnitude."}</Prose>
 
 <Prose>{"For two values "}<InlineMath>{"(a,b)"}</InlineMath>{", GroupSort returns "}<InlineMath>{"(\\min(a,b),\\max(a,b))"}</InlineMath>{". Their order can change as inputs change, producing a nonlinear piecewise-defined function. This helps explain why the activation and the norm constraint must be designed together. The original universal-approximation theorem uses specified mixed norms: a first-layer "}<InlineMath>{"p\\to\\infty"}</InlineMath>{" bound and subsequent infinity-norm bounds. It does not establish that any spectrally normalized ReLU network, or every Euclidean GroupSort construction, approximates every Lipschitz function. "}<a href={"https://proceedings.mlr.press/v97/anil19a/anil19a.pdf"}>{"Anil et al., architecture and Theorem 3"}</a>{""}</Prose>
 
-<SpectralGroupSortFigure />
+
 
 <H3>{"Continuous-time sensitivity is about trajectories too"}</H3>
+
+<Prose>What if depth is a continuous evolution rather than a stack of discrete layers? A trajectory is the state traced over time. Begin with the simple field h′=a h: the rate a multiplies the current state. Two initial states, one and 1.1, follow that same field. The second graph compares their separation with an upper bound.</Prose>
+<SpectralOdeFigure />
 
 <Prose>{"In an ODE "}<InlineMath>{"dh/dt=f(h,t)"}</InlineMath>{", a Lipschitz bound in "}<InlineMath>{"h"}</InlineMath>{", together with appropriate continuity conditions, helps establish uniqueness and bound how two trajectories separate. A typical bound is "}<InlineMath>{"\\|h(t)-\\widetilde h(t)\\|\\le e^{Lt}\\|h(0)-\\widetilde h(0)\\|"}</InlineMath>{". An upper bound on growth is not a promise of contraction. The simple field "}<InlineMath>{"f(h)=Lh"}</InlineMath>{" has bounded slope but unbounded values as "}<InlineMath>{"|h|"}</InlineMath>{" grows and exponentially separating trajectories when "}<InlineMath>{"L>0"}</InlineMath>{"."}</Prose>
 
 <Prose>{"The later "}<a href={"/learn/path/full-curriculum/neural-ode-continuous-depth-models?module=deep-learning-fundamentals"}>{"Neural ODE & Continuous-Depth Models"}</a>{" lesson develops that connection and the separate numerical-solver questions. A layer norm bound alone does not prescribe a safe solver step size."}</Prose>
 
-<SpectralOdeFigure />
+
 
 <H3>{"Diagnose the observed failure before changing methods"}</H3>
 
@@ -431,11 +504,11 @@ export default {title:"Spectral Normalization & Gradient Penalty",readTime:"~80 
 
 <Prose>{"Keep the existing split and select a bounded development-only comparison: first longer training at fixed architecture, then a changed generator width or latent dimension with an explicit compute budget. Use paired seeds where possible and retain all outcomes. Inspect actual point clouds and add a predeclared complementary discrepancy or coverage measure; do not rename critic loss as quality. Choose using development evidence, then evaluate the selected procedure on untouched assessment data. Existing assessment results have already been inspected, so a strong new confirmatory claim would need fresh assessment data rather than pretending this set is unseen again."}</Prose>
 
-</details>
+</details></div>
 
-<Prose>{""}<strong>{"Ready to continue:"}</strong>{" you can trace critic versus generator derivatives, distinguish exact norms from estimates and sampled measurements, calculate one normalization and one penalty update, and explain an unfavorable result without changing the question after seeing it. The next topic in the module is "}<a href={"/learn/path/full-curriculum/modern-hopfield-networks?module=deep-learning-fundamentals"}>{"Modern Hopfield Networks"}</a>{", which returns to energy-based retrieval and connects it to attention. It remains the next lesson even if publication timing differs."}</Prose></div></section>
+<Prose>{""}<strong>{"Ready to continue:"}</strong>{" you can trace critic versus generator derivatives, distinguish exact norms from estimates and sampled measurements, calculate one normalization and one penalty update, and explain an unfavorable result without changing the question after seeing it. The next topic in the module is "}<a href={"/learn/path/full-curriculum/modern-hopfield-networks?module=deep-learning-fundamentals"}>{"Modern Hopfield Networks"}</a>{", which returns to energy-based retrieval and connects it to attention. "}</Prose></section>
 
 <section className="lesson-ending lesson-ending--resources" data-lesson-ending="resources"><H2>{"References and another way to learn"}</H2>
 
-<ul><li>{""}<a href={"https://arxiv.org/pdf/1802.05957"}>{"Spectral Normalization for Generative Adversarial Networks"}</a>{", Miyato et al. Start with §2 and Appendix A for the method; Appendix F develops its derivative. Original 2018 experiments describe their own settings, not current hardware rankings."}</li><li>{""}<a href={"https://proceedings.neurips.cc/paper_files/paper/2017/file/892c3b1c6dccd52936e27cbd0ff683d6-Paper.pdf"}>{"Improved Training of Wasserstein GANs"}</a>{", Gulrajani et al. Read the sampling rule, Algorithm 1 and no-BatchNorm explanation in §4 after working the penalty example."}</li><li>{""}<a href={"https://proceedings.mlr.press/v70/arjovsky17a/arjovsky17a.pdf"}>{"Wasserstein GAN"}</a>{", Arjovsky et al. The point-mass example and §2–3 connect distance, continuity, critic constraints and the generator sign."}</li><li>{""}<a href={"https://proceedings.mlr.press/v80/mescheder18a/mescheder18a.pdf"}>{"Which Training Methods for GANs Do Actually Converge?"}</a>{", Mescheder et al. Advanced reading for zero-centered penalties and the assumptions behind local convergence results."}</li><li>{""}<a href={"https://arxiv.org/pdf/1805.10408"}>{"The Singular Values of Convolutional Layers"}</a>{", Sedghi et al. Follow the full-operator viewpoint and check circular-boundary assumptions before reusing a formula."}</li><li>{""}<a href={"https://proceedings.mlr.press/v97/anil19a/anil19a.pdf"}>{"Sorting Out Lipschitz Function Approximation"}</a>{", Anil et al. Explains gradient-norm preservation and a precisely stated approximation theorem; compare its norm choices with the Euclidean examples here."}</li><li>{""}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.parametrizations.spectral_norm.html"}>{"PyTorch spectral-normalization API"}</a>{" and "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.parametrize.remove_parametrizations.html"}>{"parametrization removal"}</a>{". Versioned implementation references for the executed code; inspect train/eval behavior when changing versions."}</li><li>{""}<a href={"https://deepgenerativemodels.github.io/notes/gan/"}>{"Stanford CS236 GAN notes"}</a>{". A shorter alternate introduction to the generator/discriminator game and sample-based evaluation. Its broad introductory simplifications should be read alongside the explicit assumptions in this lesson."}</li><li>{""}<a href={"https://www.coursera.org/learn/build-basic-generative-adversarial-networks-gans"}>{"Build Basic GANs, DeepLearning.AI"}</a>{". An alternate video-and-exercise route with introductory GANs and Wasserstein/gradient-penalty material; suitable after basic PyTorch. The course and its listed curriculum were checked, not all videos watched. Access to graded material may require enrollment; this lesson is self-contained. The course is also linked from "}<a href={"https://cs236g.stanford.edu/"}>{"Stanford CS236G's schedule"}</a>{"."}</li><li>{""}<a href={"/learn-code/spectral-normalization-gradient-penalty/data-provenance.md"}>{"Offline study and provenance"}</a>{". Download the real extract and complete programs to reproduce this lesson's own measurements; these are not published benchmark results."}</li></ul></section>
+<ul><li><a href="https://d2l.ai/chapter_generative-adversarial-networks/gan.html">Dive into Deep Learning: GANs</a>. Start with the two-network drawing and alternate parameter updates; compare its binary-discriminator objective with this lesson's unrestricted critic score.</li><li>{""}<a href={"https://arxiv.org/pdf/1802.05957"}>{"Spectral Normalization for Generative Adversarial Networks"}</a>{", Miyato et al. Start with §2 and Appendix A for the method; Appendix F develops its derivative. Original 2018 experiments describe their own settings, not current hardware rankings."}</li><li>{""}<a href={"https://proceedings.neurips.cc/paper_files/paper/2017/file/892c3b1c6dccd52936e27cbd0ff683d6-Paper.pdf"}>{"Improved Training of Wasserstein GANs"}</a>{", Gulrajani et al. Read the sampling rule, Algorithm 1 and no-BatchNorm explanation in §4 after working the penalty example."}</li><li>{""}<a href={"https://proceedings.mlr.press/v70/arjovsky17a/arjovsky17a.pdf"}>{"Wasserstein GAN"}</a>{", Arjovsky et al. The point-mass example and §2–3 connect distance, continuity, critic constraints and the generator sign."}</li><li>{""}<a href={"https://proceedings.mlr.press/v80/mescheder18a/mescheder18a.pdf"}>{"Which Training Methods for GANs Do Actually Converge?"}</a>{", Mescheder et al. Advanced reading for zero-centered penalties and the assumptions behind local convergence results."}</li><li>{""}<a href={"https://arxiv.org/pdf/1805.10408"}>{"The Singular Values of Convolutional Layers"}</a>{", Sedghi et al. Follow the full-operator viewpoint and check circular-boundary assumptions before reusing a formula."}</li><li>{""}<a href={"https://proceedings.mlr.press/v97/anil19a/anil19a.pdf"}>{"Sorting Out Lipschitz Function Approximation"}</a>{", Anil et al. Explains gradient-norm preservation and a precisely stated approximation theorem; compare its norm choices with the Euclidean examples here."}</li><li>{""}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.parametrizations.spectral_norm.html"}>{"PyTorch spectral-normalization API"}</a>{" and "}<a href={"https://docs.pytorch.org/docs/2.14/generated/torch.nn.utils.parametrize.remove_parametrizations.html"}>{"parametrization removal"}</a>{". Versioned implementation references for the executed code; inspect train/eval behavior when changing versions."}</li><li>{""}<a href={"https://deepgenerativemodels.github.io/notes/gan/"}>{"Stanford CS236 GAN notes"}</a>{". A shorter alternate introduction to the generator/discriminator game and sample-based evaluation. Its broad introductory simplifications should be read alongside the explicit assumptions in this lesson."}</li><li>{""}<a href={"https://www.coursera.org/learn/build-basic-generative-adversarial-networks-gans"}>{"Build Basic GANs, DeepLearning.AI"}</a>{". An alternate video-and-exercise route with introductory GANs and Wasserstein/gradient-penalty material; suitable after basic PyTorch. The course and its listed curriculum were checked, not all videos watched. Access to graded material may require enrollment; this lesson is self-contained. The course is also linked from "}<a href={"https://cs236g.stanford.edu/"}>{"Stanford CS236G's schedule"}</a>{"."}</li><li>{""}<a href={"/learn-code/spectral-normalization-gradient-penalty/data-provenance.md"}>{"Offline study and provenance"}</a>{". Download the real extract and complete programs to reproduce this lesson's own measurements; these are not published benchmark results."}</li></ul></section>
 </div>};
